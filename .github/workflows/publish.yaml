@@ -14,7 +14,7 @@ jobs:
       - run: npm i -g @angular/cli@v13-lts
       - run: npm ci
         working-directory: ngx-fudis
-      - run: ng test npx-fudis --watch false --browsers ChromeHeadless
+      - run: ng test ngx-fudis --watch false --browsers ChromeHeadless
         working-directory: ngx-fudis
 
   publish:
