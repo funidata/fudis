@@ -20,6 +20,8 @@ jobs:
   publish:
     name: Publish ngx-fudis
     runs-on: ubuntu-latest
+    needs:
+      - test
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -35,4 +37,3 @@ jobs:
           token: ${{ secrets.NPM_TOKEN }}
           package: ngx-fudis/dist/ngx-fudis/package.json
           tag: latest
-          dry-run: true

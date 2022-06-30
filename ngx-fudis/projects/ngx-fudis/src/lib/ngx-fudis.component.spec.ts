@@ -20,6 +20,6 @@ describe('NgxFudisComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).not.toBeTruthy();
+    expect(component).toBeTruthy();
   });
 });
