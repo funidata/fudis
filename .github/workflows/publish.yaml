@@ -36,4 +36,5 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
           package: ngx-fudis/dist/ngx-fudis/package.json
+          access: public
           tag: latest
