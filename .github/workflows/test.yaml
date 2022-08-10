@@ -1,0 +1,22 @@
+name: Run test suite
+
+on:
+  push:
+    branches-ignore:
+      - main
+  workflow_call:
+
+jobs:
+  test:
+    name: Run test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.14
+      - run: npm i -g @angular/cli@v13-lts
+      - run: npm ci
+        working-directory: ngx-fudis
+      - run: ng test ngx-fudis --watch false --browsers ChromeHeadless
+        working-directory: ngx-fudis
