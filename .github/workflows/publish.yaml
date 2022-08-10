@@ -7,11 +7,11 @@ on:
 
 jobs:
   test:
-    name: Run test
+    name: Tests
     uses: ./.github/workflows/test.yaml
 
   publish:
-    name: Publish ngx-fudis
+    name: Publish ngx-fudis to NPM
     runs-on: ubuntu-latest
     needs:
       - test
