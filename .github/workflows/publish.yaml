@@ -8,7 +8,7 @@ on:
 jobs:
   test:
     name: Run test
-    uses: ./.github/workflows/publish.yaml
+    uses: ./.github/workflows/test.yaml
 
   publish:
     name: Publish ngx-fudis
