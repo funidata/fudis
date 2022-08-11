@@ -11,12 +11,17 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 16.14
-      - run: npm i -g @angular/cli@v13-lts
-      - run: npm ci
+      - name: Install Angular CLI
+        run: npm i -g @angular/cli@v13-lts
+      - name: Install dependencies
+        run: npm ci
         working-directory: ngx-fudis
-      - run: ng test ngx-fudis --watch false --browsers ChromeHeadless
+      - name: Run tests
+        run: ng test ngx-fudis --watch false --browsers ChromeHeadless
         working-directory: ngx-fudis
