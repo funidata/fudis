@@ -1,18 +1,10 @@
 import { NgModule } from '@angular/core';
+import { MatDialogModule } from "@angular/material/dialog";
 import { NgxFudisComponent } from './ngx-fudis.component';
-import { FudisDialogComponent } from './fudis-dialog/fudis-dialog.component';
-
-
 
 @NgModule({
-  declarations: [
-    NgxFudisComponent,
-    FudisDialogComponent
-  ],
-  imports: [
-  ],
-  exports: [
-    NgxFudisComponent
-  ]
+  declarations: [NgxFudisComponent],
+  imports: [MatDialogModule],
+  exports: [NgxFudisComponent],
 })
-export class NgxFudisModule { }
+export class NgxFudisModule {}

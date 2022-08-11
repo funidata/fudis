@@ -1,12 +1,8 @@
 import { ComponentType } from '@angular/cdk/portal';
-import { Component } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
-@Component({
-  selector: 'fudis-dialog',
-  templateUrl: './fudis-dialog.component.html',
-  styleUrls: ['./fudis-dialog.component.css'],
-})
+@Injectable()
 export class FudisDialogComponent {
   constructor(public dialog: MatDialog) {}
 

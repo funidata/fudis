@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
         Welcome to {{title}}!
       </h1>
       <button mat-button>Nappi</button>
+      <app-dialog-test></app-dialog-test>
     </div>
   `,
   styles: []
