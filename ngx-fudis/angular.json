@@ -84,7 +84,7 @@
               "projects/dev/src/assets"
             ],
             "styles": [
-              "projects/dev/src/styles.css"
+              "projects/dev/src/styles.scss"
             ],
             "scripts": []
           },

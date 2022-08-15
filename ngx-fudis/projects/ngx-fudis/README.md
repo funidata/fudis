@@ -1,24 +1,21 @@
-# NgxFudis
+# `@funidata/ngx-fudis`
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
+Fudis is a design system created by [Funidata Ltd](https://funidata.fi/).
 
-## Code scaffolding
+## Usage
 
-Run `ng generate component component-name --project ngx-fudis` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-fudis`.
-> Note: Don't forget to add `--project ngx-fudis` or else it will be added to the default project in your `angular.json` file. 
+Fudis can be used with Angular 13.3 and newer.
 
-## Build
+### Installation
 
-Run `ng build ngx-fudis` to build the project. The build artifacts will be stored in the `dist/` directory.
+TBA.
 
-## Publishing
+### Import Core Styles
 
-After building your library with `ng build ngx-fudis`, go to the dist folder `cd dist/ngx-fudis` and run `npm publish`.
+The core styles from Angular Material must be imported in your application for the components to work properly. The easiest way to do this is to have a `styles.scss` file in project root with the following content:
 
-## Running unit tests
+```scss
+@use "@angular/material" as mat;
 
-Run `ng test ngx-fudis` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+@include mat.core();
+```
