@@ -31,7 +31,7 @@ jobs:
         run: ng build ngx-fudis
         working-directory: ngx-fudis
       - name: Build library schematics
-        run: npm run build
+        run: npm ci && npm run build
         working-directory: ngx-fudis/projects/ngx-fudis
       - name: Publish @funidata/ngx-fudis
         uses: JS-DevTools/npm-publish@v1
