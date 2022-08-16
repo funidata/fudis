@@ -8,7 +8,25 @@ Fudis can be used with Angular 13.3 and newer.
 
 ### Installation
 
-TBA.
+Install Angular Material peer dependency:
+
+```bash
+ng add @angular/material
+```
+
+Choose these options when prompted:
+
+```
+? Choose a prebuilt theme name, or "custom" for a custom theme: Custom
+? Set up global Angular Material typography styles? No
+? Set up browser animations for Angular Material? Yes
+```
+
+Then install Fudis:
+
+```bash
+ng add @funidata/ngx-fudis 
+```
 
 ### Import Core Styles
 
