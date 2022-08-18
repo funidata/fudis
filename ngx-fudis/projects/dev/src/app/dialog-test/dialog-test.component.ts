@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FudisDialogService } from '../../../../../projects/ngx-fudis/src/lib/fudis-dialog/fudis-dialog.service';
+import { FudisDialog } from '../../../../ngx-fudis/src/lib/fudis-dialog/fudis-dialog';
 import { DialogTestContentComponent } from './dialog-test-content/dialog-test-content.component';
 
 @Component({
@@ -8,7 +8,7 @@ import { DialogTestContentComponent } from './dialog-test-content/dialog-test-co
   styles: [],
 })
 export class DialogTestComponent implements OnInit {
-  constructor(public dialog: FudisDialogService) {}
+  constructor(public dialog: FudisDialog) {}
 
   ngOnInit(): void {}
 

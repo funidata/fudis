@@ -6,7 +6,7 @@ import {
   FudisDialogContent,
   FudisDialogTitle,
 } from './fudis-dialog/fudis-dialog-directives';
-import { FudisDialogService } from './fudis-dialog/fudis-dialog.service';
+import { FudisDialog } from './fudis-dialog/fudis-dialog';
 import { NgxFudisComponent } from './ngx-fudis.component';
 
 @NgModule({
@@ -25,6 +25,6 @@ import { NgxFudisComponent } from './ngx-fudis.component';
     FudisDialogContent,
     FudisDialogClose,
   ],
-  providers: [FudisDialogService],
+  providers: [FudisDialog],
 })
 export class NgxFudisModule {}

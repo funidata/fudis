@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Injectable()
-export class FudisDialogService {
+export class FudisDialog {
   constructor(public dialog: MatDialog) {}
 
   openDialog<T, R = any>(component: ComponentType<T>): MatDialogRef<T, R> {
