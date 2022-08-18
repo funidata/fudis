@@ -7,11 +7,9 @@ import {
   FudisDialogTitle,
 } from './fudis-dialog/fudis-dialog-directives';
 import { FudisDialog } from './fudis-dialog/fudis-dialog';
-import { NgxFudisComponent } from './ngx-fudis.component';
 
 @NgModule({
   declarations: [
-    NgxFudisComponent,
     FudisDialogTitle,
     FudisDialogActions,
     FudisDialogContent,
@@ -19,7 +17,6 @@ import { NgxFudisComponent } from './ngx-fudis.component';
   ],
   imports: [MatDialogModule],
   exports: [
-    NgxFudisComponent,
     FudisDialogTitle,
     FudisDialogActions,
     FudisDialogContent,
