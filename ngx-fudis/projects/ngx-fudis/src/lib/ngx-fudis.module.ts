@@ -5,8 +5,8 @@ import {
   FudisDialogClose,
   FudisDialogContent,
   FudisDialogTitle,
-} from './fudis-dialog/fudis-dialog-directives';
-import { FudisDialog } from './fudis-dialog/fudis-dialog';
+} from './components/dialog/dialog-directives';
+import { FudisDialog } from './components/dialog/dialog';
 
 @NgModule({
   declarations: [

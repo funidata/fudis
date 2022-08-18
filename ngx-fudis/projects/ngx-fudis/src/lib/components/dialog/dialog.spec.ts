@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 
-import { FudisDialog } from './fudis-dialog';
+import { FudisDialog } from './dialog';
 
 describe('FudisDialogService', () => {
   let service: FudisDialog;
