@@ -1,2 +1,1 @@
-export * from './fudis-dialog';
-export * from './fudis-dialog.module';
+export * from './public-api';
