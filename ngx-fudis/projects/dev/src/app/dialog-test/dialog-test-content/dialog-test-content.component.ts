@@ -4,15 +4,13 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-dialog-test-content',
   template: `
     <h2 fudis-dialog-title>Otsikko jee</h2>
-    <mat-dialog-content>
+    <fudis-dialog-content>
       <p>dialog-test-content works!</p>
-    </mat-dialog-content>
-    <mat-dialog-actions>
-      <button mat-button mat-dialog-close>Cancel</button>
-      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>
-        OK
-      </button>
-    </mat-dialog-actions>
+    </fudis-dialog-content>
+    <fudis-dialog-actions>
+      <button mat-button fudis-dialog-close>Cancel</button>
+      <button mat-button cdkFocusInitial>OK</button>
+    </fudis-dialog-actions>
   `,
   styles: [],
 })
