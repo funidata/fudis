@@ -4,4 +4,4 @@
 
 export * from './lib/ngx-fudis.component';
 export * from './lib/ngx-fudis.module';
-export * from './lib/fudis-dialog/fudis-dialog';
+export * from './lib/fudis-dialog/public-api';
