@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FudisDialogService } from '../../../../../dist/ngx-fudis';
+import { FudisDialogService } from '../../../../../projects/ngx-fudis/src/lib/fudis-dialog/fudis-dialog.service';
 import { DialogTestContentComponent } from './dialog-test-content/dialog-test-content.component';
 
 @Component({
