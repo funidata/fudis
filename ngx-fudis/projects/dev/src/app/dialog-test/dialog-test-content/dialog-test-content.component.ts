@@ -3,19 +3,21 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-dialog-test-content',
   template: `
-  <h2 mat-dialog-title>Otsikko jee</h2>
-    <p>
-      dialog-test-content works!
-    </p>
+    <h2 mat-dialog-title>Otsikko jee</h2>
+    <mat-dialog-content>
+      <p>dialog-test-content works!</p>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>
+        OK
+      </button>
+    </mat-dialog-actions>
   `,
-  styles: [
-  ]
+  styles: [],
 })
 export class DialogTestContentComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
