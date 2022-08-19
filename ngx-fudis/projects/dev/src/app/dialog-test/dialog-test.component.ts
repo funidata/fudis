@@ -13,7 +13,7 @@ export class DialogTestComponent implements OnInit {
   ngOnInit(): void {}
 
   openDialog() {
-    const ref = this.dialog.openDialog(DialogTestContentComponent);
+    const ref = this.dialog.open(DialogTestContentComponent);
     ref.afterClosed().subscribe((res) => {
       console.log(res);
     });
