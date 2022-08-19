@@ -1,0 +1,17 @@
+@use "@angular/material" as mat;
+@import "./palette.scss";
+
+$fudis-primary: mat.define-palette($fudis-palette, 500);
+$fudis-accent: mat.define-palette(mat.$indigo-palette, 500);
+
+$fudis-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $fudis-primary,
+      accent: $fudis-accent,
+    ),
+  )
+);
+
+// Emit theme-dependent styles for common features used across multiple Material components.
+@include mat.core-theme($fudis-theme);
