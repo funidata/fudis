@@ -1,6 +1,6 @@
 # `@funidata/ngx-fudis`
 
-Fudis is a design system created by [Funidata Ltd](https://funidata.fi/).
+Fudis is a design system implemented as an Angular component library. Created by [Funidata Ltd](https://funidata.fi/).
 
 ## Usage
 
@@ -37,3 +37,5 @@ The core styles from Angular Material must be imported in your application for t
 
 @include mat.core();
 ```
+
+Fudis does not include the Material core styles for you because [they should be included exactly once](https://material.angular.io/guide/theming#the-core-mixin) in your application.
