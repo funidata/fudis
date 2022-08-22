@@ -3,5 +3,8 @@
   "dest": "../../dist/ngx-fudis",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": [
+    "src/lib/theme/fudis-theme.scss"
+  ]
 }
