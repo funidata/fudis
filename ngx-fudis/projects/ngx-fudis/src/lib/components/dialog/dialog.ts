@@ -17,7 +17,12 @@ export class FudisDialog {
     return dialogRef;
   }
 
+  /**
+   * Merge consumer's config with ours.
+   */
   private createConfig(userConfig: MatDialogConfig<any> = {}): MatDialogConfig<any> {
-    return { hasBackdrop: true, ...userConfig };
+    const overridableOptions = { hasBackdrop: true };
+    const forcedOptions = { panelClass: 'fudis-dialog-panel' };
+    return { ...overridableOptions, ...userConfig, ...forcedOptions };
   }
 }

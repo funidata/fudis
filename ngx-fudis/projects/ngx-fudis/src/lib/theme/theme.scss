@@ -1,6 +1,9 @@
 @use "@angular/material" as mat;
 @import "./palette.scss";
 
+// Fudis styles from components that have to be applied globally.
+@import "../components/dialog/dialog.scss";
+
 $fudis-primary: mat.define-palette($fudis-palette, 500);
 $fudis-accent: mat.define-palette(mat.$indigo-palette, 500);
 
