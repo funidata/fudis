@@ -5,6 +5,6 @@
     "entryFile": "src/public-api.ts"
   },
   "assets": [
-    "./src/lib/theme/fudis-theme.scss"
+    "./**/*.scss"
   ]
 }
