@@ -11,4 +11,9 @@ export const parameters = {
     },
   },
   docs: { inlineStories: true },
-}
+  options: {
+    storySort: {
+      order: ["Documentation", ["Introduction", "Development"], "Foundations", "Components"],
+    },
+  },
+};
