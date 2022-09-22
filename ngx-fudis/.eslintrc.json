@@ -23,7 +23,10 @@
       "rules": {
         "import/no-extraneous-dependencies": [
           "error", {
-            "devDependencies": false,
+            "devDependencies": [
+              "**/*.stories.*",
+              "**/.storybook/**/*.*"
+            ],
             "optionalDependencies": false,
             "peerDependencies": false,
             "packageDir": "./"
