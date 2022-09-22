@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-dialog-test-content',
@@ -14,8 +14,4 @@ import { Component, OnInit } from '@angular/core';
   `,
   styles: [],
 })
-export class DialogTestContentComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class DialogTestContentComponent {}

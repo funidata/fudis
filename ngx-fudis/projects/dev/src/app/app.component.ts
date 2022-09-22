@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
       <app-dialog-test></app-dialog-test>
     </div>
   `,
-  styles: []
+  styles: [],
 })
 export class AppComponent {
   title = 'dev';

@@ -4,7 +4,7 @@
     "injectables": [
         {
             "name": "FudisDialog",
-            "id": "injectable-FudisDialog-1c7a2c16b50671557f22668deef1b223735ba963787ef64d42a23c887dc369328b020403de760590ed2d4bc21208a74310f0ca3fb470ad67a941fdef47c7c81f",
+            "id": "injectable-FudisDialog-6d46469357405c81b975703ab46791beef7af5110187d3e56de1ee4e8fc5790e6cb2b0bdf2e9e382a525c742c040bf575d45fec59e929adfe86372e83aa967cb",
             "file": "projects/ngx-fudis/src/lib/components/dialog/dialog.ts",
             "properties": [
                 {
@@ -35,13 +35,14 @@
                     "optional": false,
                     "returnType": "MatDialogConfig<any>",
                     "typeParameters": [],
-                    "line": 23,
+                    "line": 25,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nMerge consumer's config with ours.\n",
                     "description": "<p>Merge consumer&#39;s config with ours.</p>\n",
                     "modifierKind": [
-                        121
+                        121,
+                        124
                     ],
                     "jsdoctags": [
                         {
@@ -79,11 +80,11 @@
                         "T",
                         "R"
                     ],
-                    "line": 15,
+                    "line": 17,
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "rawdescription": "\n\nOpen new dialog.\n",
-                    "description": "<p>Open new dialog.</p>\n",
+                    "rawdescription": "\n\nOpen new dialog.\ninto `component`.\n",
+                    "description": "<p>Open new dialog.\ninto <code>component</code>.</p>\n",
                     "jsdoctags": [
                         {
                             "name": {
@@ -132,12 +133,12 @@
                                 "kind": 79,
                                 "escapedText": "param"
                             },
-                            "comment": "<p>Optional configuration object. Use the <code>data</code> field to inject data into <code>component</code>.</p>\n"
+                            "comment": "<p>Optional configuration object. Use the <code>data</code> field to inject data\ninto <code>component</code>.</p>\n"
                         },
                         {
                             "tagName": {
-                                "pos": 461,
-                                "end": 468,
+                                "pos": 466,
+                                "end": 473,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -153,7 +154,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { ComponentType } from '@angular/cdk/portal';\nimport { Injectable } from '@angular/core';\nimport { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';\n\n@Injectable()\nexport class FudisDialog {\n  constructor(public dialog: MatDialog) {}\n\n  /**\n   * Open new dialog.\n   * @param component Component to show in the dialog.\n   * @param config Optional configuration object. Use the `data` field to inject data into `component`.\n   * @returns Reference to the dialog that was opened.\n   */\n  open<T, R = any>(component: ComponentType<T>, config?: MatDialogConfig<any>): MatDialogRef<T, R> {\n    const dialogRef = this.dialog.open(component, this.createConfig());\n    return dialogRef;\n  }\n\n  /**\n   * Merge consumer's config with ours.\n   */\n  private createConfig(userConfig: MatDialogConfig<any> = {}): MatDialogConfig<any> {\n    const overridableOptions = { hasBackdrop: true };\n    const forcedOptions = { panelClass: 'fudis-dialog-panel' };\n    return { ...overridableOptions, ...userConfig, ...forcedOptions };\n  }\n}\n",
+            "sourceCode": "import { ComponentType } from '@angular/cdk/portal';\nimport { Injectable } from '@angular/core';\nimport { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';\n\n@Injectable()\nexport class FudisDialog {\n  constructor(public dialog: MatDialog) {}\n\n  /**\n   * Open new dialog.\n   * @param component Component to show in the dialog.\n   * @param config Optional configuration object. Use the `data` field to inject data\n   * into `component`.\n   * @returns Reference to the dialog that was opened.\n   */\n  // eslint-disable-next-line @typescript-eslint/no-unused-vars\n  open<T, R = any>(component: ComponentType<T>, config?: MatDialogConfig<any>): MatDialogRef<T, R> {\n    const dialogRef = this.dialog.open(component, FudisDialog.createConfig());\n    return dialogRef;\n  }\n\n  /**\n   * Merge consumer's config with ours.\n   */\n  private static createConfig(userConfig: MatDialogConfig<any> = {}): MatDialogConfig<any> {\n    const overridableOptions = { hasBackdrop: true };\n    const forcedOptions = { panelClass: 'fudis-dialog-panel' };\n    return { ...overridableOptions, ...userConfig, ...forcedOptions };\n  }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -188,13 +189,13 @@
     "classes": [],
     "directives": [
         {
-            "name": "FudisDialogActions",
-            "id": "directive-FudisDialogActions-455c3f3fbc807a8533448387a7824a5132b75649ebb7131bf1295b901ebf0da3b4cdf472c435a10165a8283ace5d95991f3baec1111a056ebc7341f3b83f5805",
+            "name": "FudisDialogActionsDirective",
+            "id": "directive-FudisDialogActionsDirective-cff6482db0889c061d7fcd7581ad621f8336e8ca7eec94ad48aaf584b82b061b2706e48b46dfbd88084cc1c6b3ee8d63e8bbfa0849d2beb7d64b6338cbd4f12f",
             "file": "projects/ngx-fudis/src/lib/components/dialog/dialog-directives.ts",
             "type": "directive",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Directive } from '@angular/core';\nimport {\n  MatDialogActions,\n  MatDialogClose,\n  MatDialogContent,\n  MatDialogTitle,\n} from '@angular/material/dialog';\n\n@Directive({\n  selector: '[fudis-dialog-title]',\n})\nexport class FudisDialogTitle extends MatDialogTitle {}\n\n@Directive({\n  selector: 'fudis-dialog-content',\n})\nexport class FudisDialogContent extends MatDialogContent {}\n\n@Directive({\n  selector: 'fudis-dialog-actions',\n})\nexport class FudisDialogActions extends MatDialogActions {}\n\n@Directive({\n  selector: '[fudis-dialog-close]',\n})\nexport class FudisDialogClose extends MatDialogClose {}\n",
+            "sourceCode": "import { Directive } from '@angular/core';\nimport {\n  MatDialogActions,\n  MatDialogClose,\n  MatDialogContent,\n  MatDialogTitle,\n} from '@angular/material/dialog';\n\n@Directive({\n  // eslint-disable-next-line @angular-eslint/directive-selector\n  selector: '[fudis-dialog-title]',\n})\nexport class FudisDialogTitleDirective extends MatDialogTitle {}\n\n@Directive({\n  // eslint-disable-next-line @angular-eslint/directive-selector\n  selector: 'fudis-dialog-content',\n})\nexport class FudisDialogContentDirective extends MatDialogContent {}\n\n@Directive({\n  // eslint-disable-next-line @angular-eslint/directive-selector\n  selector: 'fudis-dialog-actions',\n})\nexport class FudisDialogActionsDirective extends MatDialogActions {}\n\n@Directive({\n  // eslint-disable-next-line @angular-eslint/directive-selector\n  selector: '[fudis-dialog-close]',\n})\nexport class FudisDialogCloseDirective extends MatDialogClose {}\n",
             "selector": "fudis-dialog-actions",
             "providers": [],
             "inputsClass": [],
@@ -208,13 +209,13 @@
             "extends": "MatDialogActions"
         },
         {
-            "name": "FudisDialogClose",
-            "id": "directive-FudisDialogClose-455c3f3fbc807a8533448387a7824a5132b75649ebb7131bf1295b901ebf0da3b4cdf472c435a10165a8283ace5d95991f3baec1111a056ebc7341f3b83f5805",
+            "name": "FudisDialogCloseDirective",
+            "id": "directive-FudisDialogCloseDirective-cff6482db0889c061d7fcd7581ad621f8336e8ca7eec94ad48aaf584b82b061b2706e48b46dfbd88084cc1c6b3ee8d63e8bbfa0849d2beb7d64b6338cbd4f12f",
             "file": "projects/ngx-fudis/src/lib/components/dialog/dialog-directives.ts",
             "type": "directive",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Directive } from '@angular/core';\nimport {\n  MatDialogActions,\n  MatDialogClose,\n  MatDialogContent,\n  MatDialogTitle,\n} from '@angular/material/dialog';\n\n@Directive({\n  selector: '[fudis-dialog-title]',\n})\nexport class FudisDialogTitle extends MatDialogTitle {}\n\n@Directive({\n  selector: 'fudis-dialog-content',\n})\nexport class FudisDialogContent extends MatDialogContent {}\n\n@Directive({\n  selector: 'fudis-dialog-actions',\n})\nexport class FudisDialogActions extends MatDialogActions {}\n\n@Directive({\n  selector: '[fudis-dialog-close]',\n})\nexport class FudisDialogClose extends MatDialogClose {}\n",
+            "sourceCode": "import { Directive } from '@angular/core';\nimport {\n  MatDialogActions,\n  MatDialogClose,\n  MatDialogContent,\n  MatDialogTitle,\n} from '@angular/material/dialog';\n\n@Directive({\n  // eslint-disable-next-line @angular-eslint/directive-selector\n  selector: '[fudis-dialog-title]',\n})\nexport class FudisDialogTitleDirective extends MatDialogTitle {}\n\n@Directive({\n  // eslint-disable-next-line @angular-eslint/directive-selector\n  selector: 'fudis-dialog-content',\n})\nexport class FudisDialogContentDirective extends MatDialogContent {}\n\n@Directive({\n  // eslint-disable-next-line @angular-eslint/directive-selector\n  selector: 'fudis-dialog-actions',\n})\nexport class FudisDialogActionsDirective extends MatDialogActions {}\n\n@Directive({\n  // eslint-disable-next-line @angular-eslint/directive-selector\n  selector: '[fudis-dialog-close]',\n})\nexport class FudisDialogCloseDirective extends MatDialogClose {}\n",
             "selector": "[fudis-dialog-close]",
             "providers": [],
             "inputsClass": [],
@@ -228,13 +229,13 @@
             "extends": "MatDialogClose"
         },
         {
-            "name": "FudisDialogContent",
-            "id": "directive-FudisDialogContent-455c3f3fbc807a8533448387a7824a5132b75649ebb7131bf1295b901ebf0da3b4cdf472c435a10165a8283ace5d95991f3baec1111a056ebc7341f3b83f5805",
+            "name": "FudisDialogContentDirective",
+            "id": "directive-FudisDialogContentDirective-cff6482db0889c061d7fcd7581ad621f8336e8ca7eec94ad48aaf584b82b061b2706e48b46dfbd88084cc1c6b3ee8d63e8bbfa0849d2beb7d64b6338cbd4f12f",
             "file": "projects/ngx-fudis/src/lib/components/dialog/dialog-directives.ts",
             "type": "directive",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Directive } from '@angular/core';\nimport {\n  MatDialogActions,\n  MatDialogClose,\n  MatDialogContent,\n  MatDialogTitle,\n} from '@angular/material/dialog';\n\n@Directive({\n  selector: '[fudis-dialog-title]',\n})\nexport class FudisDialogTitle extends MatDialogTitle {}\n\n@Directive({\n  selector: 'fudis-dialog-content',\n})\nexport class FudisDialogContent extends MatDialogContent {}\n\n@Directive({\n  selector: 'fudis-dialog-actions',\n})\nexport class FudisDialogActions extends MatDialogActions {}\n\n@Directive({\n  selector: '[fudis-dialog-close]',\n})\nexport class FudisDialogClose extends MatDialogClose {}\n",
+            "sourceCode": "import { Directive } from '@angular/core';\nimport {\n  MatDialogActions,\n  MatDialogClose,\n  MatDialogContent,\n  MatDialogTitle,\n} from '@angular/material/dialog';\n\n@Directive({\n  // eslint-disable-next-line @angular-eslint/directive-selector\n  selector: '[fudis-dialog-title]',\n})\nexport class FudisDialogTitleDirective extends MatDialogTitle {}\n\n@Directive({\n  // eslint-disable-next-line @angular-eslint/directive-selector\n  selector: 'fudis-dialog-content',\n})\nexport class FudisDialogContentDirective extends MatDialogContent {}\n\n@Directive({\n  // eslint-disable-next-line @angular-eslint/directive-selector\n  selector: 'fudis-dialog-actions',\n})\nexport class FudisDialogActionsDirective extends MatDialogActions {}\n\n@Directive({\n  // eslint-disable-next-line @angular-eslint/directive-selector\n  selector: '[fudis-dialog-close]',\n})\nexport class FudisDialogCloseDirective extends MatDialogClose {}\n",
             "selector": "fudis-dialog-content",
             "providers": [],
             "inputsClass": [],
@@ -248,13 +249,13 @@
             "extends": "MatDialogContent"
         },
         {
-            "name": "FudisDialogTitle",
-            "id": "directive-FudisDialogTitle-455c3f3fbc807a8533448387a7824a5132b75649ebb7131bf1295b901ebf0da3b4cdf472c435a10165a8283ace5d95991f3baec1111a056ebc7341f3b83f5805",
+            "name": "FudisDialogTitleDirective",
+            "id": "directive-FudisDialogTitleDirective-cff6482db0889c061d7fcd7581ad621f8336e8ca7eec94ad48aaf584b82b061b2706e48b46dfbd88084cc1c6b3ee8d63e8bbfa0849d2beb7d64b6338cbd4f12f",
             "file": "projects/ngx-fudis/src/lib/components/dialog/dialog-directives.ts",
             "type": "directive",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Directive } from '@angular/core';\nimport {\n  MatDialogActions,\n  MatDialogClose,\n  MatDialogContent,\n  MatDialogTitle,\n} from '@angular/material/dialog';\n\n@Directive({\n  selector: '[fudis-dialog-title]',\n})\nexport class FudisDialogTitle extends MatDialogTitle {}\n\n@Directive({\n  selector: 'fudis-dialog-content',\n})\nexport class FudisDialogContent extends MatDialogContent {}\n\n@Directive({\n  selector: 'fudis-dialog-actions',\n})\nexport class FudisDialogActions extends MatDialogActions {}\n\n@Directive({\n  selector: '[fudis-dialog-close]',\n})\nexport class FudisDialogClose extends MatDialogClose {}\n",
+            "sourceCode": "import { Directive } from '@angular/core';\nimport {\n  MatDialogActions,\n  MatDialogClose,\n  MatDialogContent,\n  MatDialogTitle,\n} from '@angular/material/dialog';\n\n@Directive({\n  // eslint-disable-next-line @angular-eslint/directive-selector\n  selector: '[fudis-dialog-title]',\n})\nexport class FudisDialogTitleDirective extends MatDialogTitle {}\n\n@Directive({\n  // eslint-disable-next-line @angular-eslint/directive-selector\n  selector: 'fudis-dialog-content',\n})\nexport class FudisDialogContentDirective extends MatDialogContent {}\n\n@Directive({\n  // eslint-disable-next-line @angular-eslint/directive-selector\n  selector: 'fudis-dialog-actions',\n})\nexport class FudisDialogActionsDirective extends MatDialogActions {}\n\n@Directive({\n  // eslint-disable-next-line @angular-eslint/directive-selector\n  selector: '[fudis-dialog-close]',\n})\nexport class FudisDialogCloseDirective extends MatDialogClose {}\n",
             "selector": "[fudis-dialog-title]",
             "providers": [],
             "inputsClass": [],
@@ -271,7 +272,7 @@
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-0b67bc1bdd9635c52844b86e4977d50f7e9181cde93b8d8597593b8fdfe132089bc40d9fe79bc1bd4ae679eabab3bb06f6a866082c781b14832fd3f7e40fe0a2",
+            "id": "component-AppComponent-904c55f4cb9de76a43f5190245cfa4a2a96da81a52498bc7e0755d20457fe37c67a1ed7e618fa2149211b8bc097c26f5667048d3288bac9cd800cd7b287c21ac",
             "file": "projects/dev/src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -306,14 +307,14 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  template: `\n    <!--The content below is only a placeholder and can be replaced.-->\n    <div style=\"text-align:center\" class=\"content\">\n      <h1>\n        Welcome to {{title}}!\n      </h1>\n      <button mat-button>Nappi</button>\n      <app-dialog-test></app-dialog-test>\n    </div>\n  `,\n  styles: []\n})\nexport class AppComponent {\n  title = 'dev';\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  template: `\n    <!--The content below is only a placeholder and can be replaced.-->\n    <div style=\"text-align:center\" class=\"content\">\n      <h1>\n        Welcome to {{title}}!\n      </h1>\n      <button mat-button>Nappi</button>\n      <app-dialog-test></app-dialog-test>\n    </div>\n  `,\n  styles: [],\n})\nexport default class AppComponent {\n  title = 'dev';\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": ""
         },
         {
-            "name": "Button",
-            "id": "component-Button-7866a248a163f19c4f866d56b5f555aa1790de64aceb8f584babba0984f7648a4c14e5442e686e95731a4c8fe2ca85e96948574e72b24260ace191e2a10bbb32",
+            "name": "ButtonComponent",
+            "id": "component-ButtonComponent-657553f159566e38dfa61bbba788b7e82b7970dd419500315427ecd76a200d4b461e9e26a9276be7217f25e7451ddbf6ac1b3434feca9f7476be1503ad0fcce8",
             "file": "projects/ngx-fudis/src/lib/components/button/button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -336,7 +337,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nWhat background color to use\n",
                     "description": "<p>What background color to use</p>\n",
-                    "line": 19,
+                    "line": 22,
                     "type": "string",
                     "decorators": []
                 },
@@ -347,15 +348,15 @@
                     "deprecationMessage": "",
                     "jsdoctags": [
                         {
-                            "pos": 555,
-                            "end": 568,
+                            "pos": 630,
+                            "end": 643,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
                             "kind": 325,
                             "tagName": {
-                                "pos": 556,
-                                "end": 564,
+                                "pos": 631,
+                                "end": 639,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -367,7 +368,7 @@
                     ],
                     "rawdescription": "\n\nButton contents\n\n",
                     "description": "<p>Button contents</p>\n",
-                    "line": 33,
+                    "line": 36,
                     "type": "string",
                     "decorators": []
                 },
@@ -378,7 +379,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nIs this the principal call to action on the page?\n",
                     "description": "<p>Is this the principal call to action on the page?</p>\n",
-                    "line": 13,
+                    "line": 16,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -389,7 +390,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nHow large should the button be?\n",
                     "description": "<p>How large should the button be?</p>\n",
-                    "line": 25,
+                    "line": 28,
                     "type": "\"small\" | \"medium\" | \"large\"",
                     "decorators": []
                 }
@@ -402,7 +403,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOptional click handler\n",
                     "description": "<p>Optional click handler</p>\n",
-                    "line": 39,
+                    "line": 43,
                     "type": "EventEmitter"
                 }
             ],
@@ -415,7 +416,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-button',\n  templateUrl: './button.component.html',\n  styleUrls: ['./button.css'],\n})\nexport default class Button {\n  /**\n   * Is this the principal call to action on the page?\n   */\n  @Input()\n  primary = false;\n\n  /**\n   * What background color to use\n   */\n  @Input()\n  backgroundColor?: string;\n\n  /**\n   * How large should the button be?\n   */\n  @Input()\n  size: 'small' | 'medium' | 'large' = 'medium';\n\n  /**\n   * Button contents\n   *\n   * @required\n   */\n  @Input()\n  label = 'Button';\n\n  /**\n   * Optional click handler\n   */\n  @Output()\n  onClick = new EventEmitter<Event>();\n\n  public get classes(): string[] {\n    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';\n\n    return ['storybook-button', `storybook-button--${this.size}`, mode];\n  }\n}\n",
+            "sourceCode": "import {\n  Component, Input, Output, EventEmitter,\n} from '@angular/core';\n\n@Component({\n  // eslint-disable-next-line @angular-eslint/component-selector\n  selector: 'storybook-button',\n  templateUrl: './button.component.html',\n  styleUrls: ['./button.css'],\n})\nexport class ButtonComponent {\n  /**\n   * Is this the principal call to action on the page?\n   */\n  @Input()\n    primary = false;\n\n  /**\n   * What background color to use\n   */\n  @Input()\n    backgroundColor?: string;\n\n  /**\n   * How large should the button be?\n   */\n  @Input()\n    size: 'small' | 'medium' | 'large' = 'medium';\n\n  /**\n   * Button contents\n   *\n   * @required\n   */\n  @Input()\n    label = 'Button';\n\n  /**\n   * Optional click handler\n   */\n  @Output()\n  // eslint-disable-next-line @angular-eslint/no-output-on-prefix\n    onClick = new EventEmitter<Event>();\n\n  public get classes(): string[] {\n    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';\n\n    return ['storybook-button', `storybook-button--${this.size}`, mode];\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -431,7 +432,7 @@
                         "name": "classes",
                         "type": "[]",
                         "returnType": "string[]",
-                        "line": 41
+                        "line": 45
                     }
                 }
             },
@@ -439,7 +440,7 @@
         },
         {
             "name": "DialogTestComponent",
-            "id": "component-DialogTestComponent-654ca4f36e21c9aa48277df62e7d4de49b1a3f4f0468595707f618354c1b4f9737a1d14cd8a0fe84caacdd83a874ba27aec60ed833cb19ddaee6ce8af2b39bd6",
+            "id": "component-DialogTestComponent-0fc6c4d5bfea969eb322887671de1455c73cfd86591f958a1444bc056128e1845150fd7c33613ac218c40ece1a9bcc2176ea1fd86ced45bb0e7c01ceb8dc650e",
             "file": "projects/dev/src/app/dialog-test/dialog-test.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -470,22 +471,12 @@
             ],
             "methodsClass": [
                 {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 13,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
                     "name": "openDialog",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 15,
+                    "line": 13,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -497,7 +488,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FudisDialog } from '../../../../ngx-fudis/src/lib/components/dialog/dialog';\nimport { DialogTestContentComponent } from './dialog-test-content/dialog-test-content.component';\n\n@Component({\n  selector: 'app-dialog-test',\n  template: `<button mat-button (click)=\"openDialog()\">Open dialog</button>`,\n  styles: [],\n})\nexport class DialogTestComponent implements OnInit {\n  constructor(public dialog: FudisDialog) {}\n\n  ngOnInit(): void {}\n\n  openDialog() {\n    const ref = this.dialog.open(DialogTestContentComponent);\n    ref.afterClosed().subscribe((res) => {\n      console.log(res);\n    });\n  }\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport { FudisDialog } from 'ngx-fudis';\nimport { DialogTestContentComponent } from './dialog-test-content/dialog-test-content.component';\n\n@Component({\n  selector: 'app-dialog-test',\n  template: '<button mat-button (click)=\"openDialog()\">Open dialog</button>',\n  styles: [],\n})\nexport class DialogTestComponent {\n  constructor(public dialog: FudisDialog) {}\n\n  openDialog() {\n    const ref = this.dialog.open(DialogTestContentComponent);\n    ref.afterClosed().subscribe((res: any) => {\n      console.log(res);\n    });\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -526,14 +517,11 @@
                         }
                     }
                 ]
-            },
-            "implements": [
-                "OnInit"
-            ]
+            }
         },
         {
             "name": "DialogTestContentComponent",
-            "id": "component-DialogTestContentComponent-1e01c1e90edb05fc5ddab211a5d39e0305431b6910dbd5eae6c1983e4c4bd9fce1c651c8a1073cb72215d6eb610522344e6196454b407d566bc8cc76159596b9",
+            "id": "component-DialogTestContentComponent-1d2dc184c4c1fa33728c28d074d357fc42244cd248a08a1f1480f390ba42a3f95f7b9328400e0cd7d02b8dd4f1313cc9edc86c3513fb5651f15ee8389b3f73ca",
             "file": "projects/dev/src/app/dialog-test/dialog-test-content/dialog-test-content.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -549,18 +537,7 @@
             "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [],
-            "methodsClass": [
-                {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 20,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                }
-            ],
+            "methodsClass": [],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -568,33 +545,22 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-dialog-test-content',\n  template: `\n    <h2 fudis-dialog-title>Otsikko jee</h2>\n    <fudis-dialog-content>\n      <p>dialog-test-content works!</p>\n    </fudis-dialog-content>\n    <fudis-dialog-actions>\n      <button mat-button fudis-dialog-close>Cancel</button>\n      <button mat-button cdkFocusInitial>OK</button>\n    </fudis-dialog-actions>\n  `,\n  styles: [],\n})\nexport class DialogTestContentComponent implements OnInit {\n  constructor() {}\n\n  ngOnInit(): void {}\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-dialog-test-content',\n  template: `\n    <h2 fudis-dialog-title>Otsikko jee</h2>\n    <fudis-dialog-content>\n      <p>dialog-test-content works!</p>\n    </fudis-dialog-content>\n    <fudis-dialog-actions>\n      <button mat-button fudis-dialog-close>Cancel</button>\n      <button mat-button cdkFocusInitial>OK</button>\n    </fudis-dialog-actions>\n  `,\n  styles: [],\n})\nexport class DialogTestContentComponent {}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
-            "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [],
-                "line": 17
-            },
-            "implements": [
-                "OnInit"
-            ]
+            "stylesData": ""
         }
     ],
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-b4f2bfa4a6cdfebd18af2349566b9cb8fe74f2039ed8a45e4a141f4b5741f79301130847f872b3b87528976c11072c08f77d5863b0225fa47b81aaf2b279e4c5",
+            "id": "module-AppModule-1d83181c23abe9367b3548456739321a3509036d42253c87f67e3c6ac8944f54e37fa7ad6854a890159f4938d0cd2aad47b0ae9960c163e774e68a9a333fdde7",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "projects/dev/src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { MatButtonModule } from '@angular/material/button';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { NgxFudisModule } from '../../../../projects/ngx-fudis/src/lib/ngx-fudis.module';\nimport { AppComponent } from './app.component';\nimport { DialogTestComponent } from './dialog-test/dialog-test.component';\nimport { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';\nimport { MatDialogModule } from '@angular/material/dialog';\n\n@NgModule({\n  declarations: [AppComponent, DialogTestComponent, DialogTestContentComponent],\n  imports: [\n    BrowserModule,\n    BrowserAnimationsModule,\n    NgxFudisModule,\n    MatButtonModule,\n    MatDialogModule,\n  ],\n  bootstrap: [AppComponent],\n})\nexport class AppModule {}\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { MatButtonModule } from '@angular/material/button';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { MatDialogModule } from '@angular/material/dialog';\nimport { NgxFudisModule } from 'ngx-fudis';\nimport AppComponent from './app.component';\nimport { DialogTestComponent } from './dialog-test/dialog-test.component';\nimport { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';\n\n@NgModule({\n  declarations: [AppComponent, DialogTestComponent, DialogTestContentComponent],\n  imports: [\n    BrowserModule,\n    BrowserAnimationsModule,\n    NgxFudisModule,\n    MatButtonModule,\n    MatDialogModule,\n  ],\n  bootstrap: [AppComponent],\n})\nexport class AppModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -642,13 +608,13 @@
         },
         {
             "name": "NgxFudisModule",
-            "id": "module-NgxFudisModule-0bf2f4527932ebb2c25e8abd2ee4787de3e12cc8da8281aa81b5ca21fffff78afa79534a2e0aeb1362ab33bea31cb2cbff27d07d3c69a701b2996f1043bbb67d",
+            "id": "module-NgxFudisModule-73722da2129433547ae515eed3b6cbd07a8c605ff7095b7dbda3c4ea956ee1da1c7ada9b71c3a8cf47634abf8299ec12e0d88bfd110d9d04fa012bf88311a221",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "projects/ngx-fudis/src/lib/ngx-fudis.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatDialogModule } from '@angular/material/dialog';\nimport {\n  FudisDialogActions,\n  FudisDialogClose,\n  FudisDialogContent,\n  FudisDialogTitle,\n} from './components/dialog/dialog-directives';\nimport { FudisDialog } from './components/dialog/dialog';\nimport Button from './components/button/button.component';\n\n@NgModule({\n  declarations: [\n    FudisDialogTitle,\n    FudisDialogActions,\n    FudisDialogContent,\n    FudisDialogClose,\n    Button,\n  ],\n  imports: [MatDialogModule, CommonModule],\n  exports: [FudisDialogTitle, FudisDialogActions, FudisDialogContent, FudisDialogClose, Button],\n  providers: [FudisDialog],\n})\nexport class NgxFudisModule {}\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatDialogModule } from '@angular/material/dialog';\nimport {\n  FudisDialogActionsDirective,\n  FudisDialogCloseDirective,\n  FudisDialogContentDirective,\n  FudisDialogTitleDirective,\n} from './components/dialog/dialog-directives';\nimport { FudisDialog } from './components/dialog/dialog';\nimport { ButtonComponent } from './components/button/button.component';\n\n@NgModule({\n  declarations: [\n    FudisDialogTitleDirective,\n    FudisDialogActionsDirective,\n    FudisDialogContentDirective,\n    FudisDialogCloseDirective,\n    ButtonComponent,\n  ],\n  imports: [MatDialogModule, CommonModule],\n  exports: [\n    FudisDialogTitleDirective,\n    FudisDialogActionsDirective,\n    FudisDialogContentDirective,\n    FudisDialogCloseDirective,\n    ButtonComponent,\n  ],\n  providers: [FudisDialog],\n})\nexport class NgxFudisModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -662,19 +628,19 @@
                     "type": "declarations",
                     "elements": [
                         {
-                            "name": "Button"
+                            "name": "ButtonComponent"
                         },
                         {
-                            "name": "FudisDialogActions"
+                            "name": "FudisDialogActionsDirective"
                         },
                         {
-                            "name": "FudisDialogClose"
+                            "name": "FudisDialogCloseDirective"
                         },
                         {
-                            "name": "FudisDialogContent"
+                            "name": "FudisDialogContentDirective"
                         },
                         {
-                            "name": "FudisDialogTitle"
+                            "name": "FudisDialogTitleDirective"
                         }
                     ]
                 },
@@ -686,19 +652,19 @@
                     "type": "exports",
                     "elements": [
                         {
-                            "name": "Button"
+                            "name": "ButtonComponent"
                         },
                         {
-                            "name": "FudisDialogActions"
+                            "name": "FudisDialogActionsDirective"
                         },
                         {
-                            "name": "FudisDialogClose"
+                            "name": "FudisDialogCloseDirective"
                         },
                         {
-                            "name": "FudisDialogContent"
+                            "name": "FudisDialogContentDirective"
                         },
                         {
-                            "name": "FudisDialogTitle"
+                            "name": "FudisDialogTitleDirective"
                         }
                     ]
                 },
@@ -733,7 +699,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\n  production: true\n}"
+                "defaultValue": "{\n  production: true,\n}"
             },
             {
                 "name": "environment",
@@ -743,7 +709,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\n  production: false\n}"
+                "defaultValue": "{\n  production: false,\n}"
             },
             {
                 "name": "Large",
@@ -801,8 +767,8 @@
                 "file": "projects/ngx-fudis/src/lib/components/button/Button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<Button>",
-                "defaultValue": "(args: Button) => ({\n  props: args,\n})"
+                "type": "Story<ButtonComponent>",
+                "defaultValue": "(args: ButtonComponent) => ({\n  props: args,\n})"
             }
         ],
         "functions": [
@@ -851,7 +817,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\n  production: true\n}"
+                    "defaultValue": "{\n  production: true,\n}"
                 }
             ],
             "projects/dev/src/environments/environment.ts": [
@@ -863,7 +829,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\n  production: false\n}"
+                    "defaultValue": "{\n  production: false,\n}"
                 }
             ],
             "projects/ngx-fudis/src/lib/components/button/Button.stories.ts": [
@@ -914,8 +880,8 @@
                     "file": "projects/ngx-fudis/src/lib/components/button/Button.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Story<Button>",
-                    "defaultValue": "(args: Button) => ({\n  props: args,\n})"
+                    "type": "Story<ButtonComponent>",
+                    "defaultValue": "(args: ButtonComponent) => ({\n  props: args,\n})"
                 }
             ]
         },
@@ -957,7 +923,7 @@
                 "linktype": "component",
                 "name": "DialogTestContentComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -966,7 +932,7 @@
                 "linktype": "component",
                 "name": "DialogTestComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {
@@ -1053,7 +1019,7 @@
                 "filePath": "projects/ngx-fudis/src/lib/components/button/button.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "Button",
+                "name": "ButtonComponent",
                 "coveragePercent": 83,
                 "coverageCount": "5/6",
                 "status": "very-good"
@@ -1062,7 +1028,7 @@
                 "filePath": "projects/ngx-fudis/src/lib/components/dialog/dialog-directives.ts",
                 "type": "directive",
                 "linktype": "directive",
-                "name": "FudisDialogActions",
+                "name": "FudisDialogActionsDirective",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -1071,7 +1037,7 @@
                 "filePath": "projects/ngx-fudis/src/lib/components/dialog/dialog-directives.ts",
                 "type": "directive",
                 "linktype": "directive",
-                "name": "FudisDialogClose",
+                "name": "FudisDialogCloseDirective",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -1080,7 +1046,7 @@
                 "filePath": "projects/ngx-fudis/src/lib/components/dialog/dialog-directives.ts",
                 "type": "directive",
                 "linktype": "directive",
-                "name": "FudisDialogContent",
+                "name": "FudisDialogContentDirective",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -1089,7 +1055,7 @@
                 "filePath": "projects/ngx-fudis/src/lib/components/dialog/dialog-directives.ts",
                 "type": "directive",
                 "linktype": "directive",
-                "name": "FudisDialogTitle",
+                "name": "FudisDialogTitleDirective",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
