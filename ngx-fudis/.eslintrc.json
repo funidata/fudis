@@ -15,26 +15,21 @@
         "createDefaultProgram": true
       },
       "extends": [
+        "airbnb-base",
+        "airbnb-typescript/base",
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "prefix": "lib",
-            "style": "camelCase"
+        "import/no-extraneous-dependencies": [
+          "error", {
+            "devDependencies": false,
+            "optionalDependencies": false,
+            "peerDependencies": false,
+            "packageDir": "./"
           }
         ],
-        "@angular-eslint/component-selector": [
-          "error",
-          {
-            "type": "element",
-            "prefix": "lib",
-            "style": "kebab-case"
-          }
-        ]
+        "import/prefer-default-export": "off"
       }
     },
     {
