@@ -40,7 +40,8 @@
         "@schematics/angular:component": {
           "inlineTemplate": true,
           "inlineStyle": true,
-          "skipTests": true
+          "skipTests": true,
+          "style": "scss"
         },
         "@schematics/angular:class": {
           "skipTests": true
@@ -79,13 +80,8 @@
             "main": "projects/dev/src/main.ts",
             "polyfills": "projects/dev/src/polyfills.ts",
             "tsConfig": "projects/dev/tsconfig.app.json",
-            "assets": [
-              "projects/dev/src/favicon.ico",
-              "projects/dev/src/assets"
-            ],
-            "styles": [
-              "projects/dev/src/styles.scss"
-            ],
+            "assets": ["projects/dev/src/favicon.ico", "projects/dev/src/assets"],
+            "styles": ["projects/dev/src/styles.scss"],
             "scripts": []
           },
           "configurations": {

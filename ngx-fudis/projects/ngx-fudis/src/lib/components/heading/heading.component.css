@@ -1,0 +1,27 @@
+fudis-heading .xxs {
+  font-size: 0.5rem;
+}
+
+fudis-heading .xs {
+  font-size: 0.7rem;
+}
+
+fudis-heading .s {
+  font-size: 1rem;
+}
+
+fudis-heading .m {
+  font-size: 1.5rem;
+}
+
+fudis-heading .l {
+  font-size: 2rem;
+}
+
+fudis-heading .xl {
+  font-size: 3rem;
+}
+
+fudis-heading .xxl {
+  font-size: 4rem;
+}

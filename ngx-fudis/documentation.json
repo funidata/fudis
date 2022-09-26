@@ -419,7 +419,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".storybook-button {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-weight: 700;\n  border: 0;\n  border-radius: 3em;\n  cursor: pointer;\n  display: inline-block;\n  line-height: 1;\n}\n.storybook-button--primary {\n  color: white;\n  background-color: #1ea7fd;\n}\n.storybook-button--secondary {\n  color: #333;\n  background-color: transparent;\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;\n}\n.storybook-button--small {\n  font-size: 12px;\n  padding: 10px 16px;\n}\n.storybook-button--medium {\n  font-size: 14px;\n  padding: 11px 20px;\n}\n.storybook-button--large {\n  font-size: 16px;\n  padding: 12px 24px;\n}\n",
+                    "data": ".storybook-button {\n  font-family: \"Nunito Sans\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  font-weight: 700;\n  border: 0;\n  border-radius: 3em;\n  cursor: pointer;\n  display: inline-block;\n  line-height: 1;\n}\n.storybook-button--primary {\n  color: white;\n  background-color: #1ea7fd;\n}\n.storybook-button--secondary {\n  color: #333;\n  background-color: transparent;\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;\n}\n.storybook-button--small {\n  font-size: 12px;\n  padding: 10px 16px;\n}\n.storybook-button--medium {\n  font-size: 14px;\n  padding: 11px 20px;\n}\n.storybook-button--large {\n  font-size: 16px;\n  padding: 12px 24px;\n}\n",
                     "styleUrl": "./button.css"
                 }
             ],
@@ -583,6 +583,91 @@
             "implements": [
                 "OnInit"
             ]
+        },
+        {
+            "name": "Heading",
+            "id": "component-Heading-37c88857ac55bb877f883387740e012c8df896de8b5ecb16cd027ff0b3669e9ade148d435c79940c137a0d725ffc59a4e5306ff9bb348ad504d0a49c7001a3cd",
+            "file": "projects/ngx-fudis/src/lib/components/heading/heading.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "fudis-heading",
+            "styleUrls": [
+                "./heading.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./heading.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "tag",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "pos": 398,
+                            "end": 411,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 325,
+                            "tagName": {
+                                "pos": 399,
+                                "end": 407,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "required"
+                            },
+                            "comment": ""
+                        }
+                    ],
+                    "line": 19,
+                    "type": "HeadingLevel",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "Variant",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit, Input } from '@angular/core';\n\ntype HeadingLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';\ntype Variant = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';\n\n@Component({\n  selector: 'fudis-heading',\n  templateUrl: './heading.component.html',\n  styleUrls: ['./heading.component.scss'],\n})\nexport class Heading {\n  constructor() {}\n\n  @Input() variant: Variant;\n\n  /**\n   * @required\n   */\n  @Input() tag: HeadingLevel;\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "fudis-heading {\n  & .xxs {\n    font-size: 0.5rem;\n  }\n\n  & .xs {\n    font-size: 0.7rem;\n  }\n\n  & .s {\n    font-size: 1rem;\n  }\n\n  & .m {\n    font-size: 1.5rem;\n  }\n\n  & .l {\n    font-size: 2rem;\n  }\n\n  & .xl {\n    font-size: 3rem;\n  }\n\n  & .xxl {\n    font-size: 4rem;\n  }\n}\n",
+                    "styleUrl": "./heading.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 11
+            },
+            "templateData": "<ng-container\n  class=\"testi\"\n  *ngTemplateOutlet=\"\n    tag === 'h1'\n      ? h1\n      : tag === 'h2'\n      ? h2\n      : tag === 'h3'\n      ? h3\n      : tag === 'h4'\n      ? h4\n      : tag === 'h5'\n      ? h5\n      : h6\n  \"\n></ng-container>\n\n<ng-template #h1>\n  <h1 class=\"{{ variant }}\">Moikkamoi h1</h1>\n</ng-template>\n\n<ng-template #h2>\n  <h2 class=\"{{ variant }}\">Moikkamoi h2</h2>\n</ng-template>\n\n<ng-template #h3>\n  <h3 class=\"{{ variant }}\">Moikkamoi h3</h3>\n</ng-template>\n\n<ng-template #h4>\n  <h4 class=\"{{ variant }}\">Moikkamoi h4</h4>\n</ng-template>\n<ng-template #h5>\n  <h5 class=\"{{ variant }}\">Moikkamoi h5</h5>\n</ng-template>\n<ng-template #h6>\n  <h6 class=\"{{ variant }}\">Moikkamoi h6</h6>\n</ng-template>\n"
         }
     ],
     "modules": [
@@ -642,13 +727,13 @@
         },
         {
             "name": "NgxFudisModule",
-            "id": "module-NgxFudisModule-0bf2f4527932ebb2c25e8abd2ee4787de3e12cc8da8281aa81b5ca21fffff78afa79534a2e0aeb1362ab33bea31cb2cbff27d07d3c69a701b2996f1043bbb67d",
+            "id": "module-NgxFudisModule-d7e5ec086d0ee624743bed4b5726ecc2297bebff6f983d46482961d97d5bb3e27cbc668602a0328835e2496b3ea8c20f62c843673379288226a40e288de50950",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "projects/ngx-fudis/src/lib/ngx-fudis.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatDialogModule } from '@angular/material/dialog';\nimport {\n  FudisDialogActions,\n  FudisDialogClose,\n  FudisDialogContent,\n  FudisDialogTitle,\n} from './components/dialog/dialog-directives';\nimport { FudisDialog } from './components/dialog/dialog';\nimport Button from './components/button/button.component';\n\n@NgModule({\n  declarations: [\n    FudisDialogTitle,\n    FudisDialogActions,\n    FudisDialogContent,\n    FudisDialogClose,\n    Button,\n  ],\n  imports: [MatDialogModule, CommonModule],\n  exports: [FudisDialogTitle, FudisDialogActions, FudisDialogContent, FudisDialogClose, Button],\n  providers: [FudisDialog],\n})\nexport class NgxFudisModule {}\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MatDialogModule } from '@angular/material/dialog';\nimport {\n  FudisDialogActions,\n  FudisDialogClose,\n  FudisDialogContent,\n  FudisDialogTitle,\n} from './components/dialog/dialog-directives';\nimport { FudisDialog } from './components/dialog/dialog';\nimport Button from './components/button/button.component';\nimport { Heading } from './components/heading/heading.component';\n\n@NgModule({\n  declarations: [\n    FudisDialogTitle,\n    FudisDialogActions,\n    FudisDialogContent,\n    FudisDialogClose,\n    Button,\n    Heading,\n  ],\n  imports: [MatDialogModule, CommonModule],\n  exports: [\n    FudisDialogTitle,\n    FudisDialogActions,\n    FudisDialogContent,\n    FudisDialogClose,\n    Button,\n    Heading,\n  ],\n  providers: [FudisDialog],\n})\nexport class NgxFudisModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -675,6 +760,9 @@
                         },
                         {
                             "name": "FudisDialogTitle"
+                        },
+                        {
+                            "name": "Heading"
                         }
                     ]
                 },
@@ -699,6 +787,9 @@
                         },
                         {
                             "name": "FudisDialogTitle"
+                        },
+                        {
+                            "name": "Heading"
                         }
                     ]
                 },
@@ -744,6 +835,16 @@
                 "deprecationMessage": "",
                 "type": "object",
                 "defaultValue": "{\n  production: false\n}"
+            },
+            {
+                "name": "Example",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-fudis/src/lib/components/heading/heading.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "Large",
@@ -803,6 +904,16 @@
                 "deprecationMessage": "",
                 "type": "Story<Button>",
                 "defaultValue": "(args: Button) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ngx-fudis/src/lib/components/heading/heading.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<Heading>",
+                "defaultValue": "(args: Heading) => ({\n  props: args,\n})"
             }
         ],
         "functions": [
@@ -818,7 +929,30 @@
                 "returnType": "Rule"
             }
         ],
-        "typealiases": [],
+        "typealiases": [
+            {
+                "name": "HeadingLevel",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\" | \"h6\"",
+                "file": "projects/ngx-fudis/src/lib/components/heading/heading.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 186
+            },
+            {
+                "name": "Variant",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"xxs\" | \"xs\" | \"s\" | \"m\" | \"l\" | \"xl\" | \"xxl\"",
+                "file": "projects/ngx-fudis/src/lib/components/heading/heading.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 186
+            }
+        ],
         "enumerations": [],
         "groupedVariables": {
             "projects/ngx-fudis/src/test.ts": [
@@ -864,6 +998,28 @@
                     "deprecationMessage": "",
                     "type": "object",
                     "defaultValue": "{\n  production: false\n}"
+                }
+            ],
+            "projects/ngx-fudis/src/lib/components/heading/heading.stories.ts": [
+                {
+                    "name": "Example",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-fudis/src/lib/components/heading/heading.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ngx-fudis/src/lib/components/heading/heading.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<Heading>",
+                    "defaultValue": "(args: Heading) => ({\n  props: args,\n})"
                 }
             ],
             "projects/ngx-fudis/src/lib/components/button/Button.stories.ts": [
@@ -935,11 +1091,36 @@
             ]
         },
         "groupedEnumerations": {},
-        "groupedTypeAliases": {}
+        "groupedTypeAliases": {
+            "projects/ngx-fudis/src/lib/components/heading/heading.component.ts": [
+                {
+                    "name": "HeadingLevel",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\" | \"h6\"",
+                    "file": "projects/ngx-fudis/src/lib/components/heading/heading.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 186
+                },
+                {
+                    "name": "Variant",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"xxs\" | \"xs\" | \"s\" | \"m\" | \"l\" | \"xl\" | \"xxl\"",
+                    "file": "projects/ngx-fudis/src/lib/components/heading/heading.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 186
+                }
+            ]
+        }
     },
     "routes": [],
     "coverage": {
-        "count": 6,
+        "count": 5,
         "status": "low",
         "files": [
             {
@@ -1102,6 +1283,35 @@
                 "coveragePercent": 40,
                 "coverageCount": "2/5",
                 "status": "medium"
+            },
+            {
+                "filePath": "projects/ngx-fudis/src/lib/components/heading/heading.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "Heading",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-fudis/src/lib/components/heading/heading.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Example",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ngx-fudis/src/lib/components/heading/heading.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
             },
             {
                 "filePath": "projects/ngx-fudis/src/test.ts",
