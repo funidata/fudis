@@ -1,6 +1,4 @@
-import {
-  Component, Input, Output, EventEmitter,
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -13,19 +11,19 @@ export class ButtonComponent {
    * Is this the principal call to action on the page?
    */
   @Input()
-    primary = false;
+  primary = false;
 
   /**
    * What background color to use
    */
   @Input()
-    backgroundColor?: string;
+  backgroundColor?: string;
 
   /**
    * How large should the button be?
    */
   @Input()
-    size: 'small' | 'medium' | 'large' = 'medium';
+  size: 'small' | 'medium' | 'large' = 'medium';
 
   /**
    * Button contents
@@ -33,14 +31,14 @@ export class ButtonComponent {
    * @required
    */
   @Input()
-    label = 'Button';
+  label = 'Button';
 
   /**
    * Optional click handler
    */
   @Output()
   // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-    onClick = new EventEmitter<Event>();
+  onClick = new EventEmitter<Event>();
 
   public get classes(): string[] {
     const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';
