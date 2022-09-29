@@ -1,11 +1,6 @@
 // eslint-disable-next-line max-classes-per-file
 import { Directive } from '@angular/core';
-import {
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogTitle,
-} from '@angular/material/dialog';
+import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector

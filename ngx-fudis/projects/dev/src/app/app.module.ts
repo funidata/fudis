@@ -10,13 +10,7 @@ import { DialogTestContentComponent } from './dialog-test/dialog-test-content/di
 
 @NgModule({
   declarations: [AppComponent, DialogTestComponent, DialogTestContentComponent],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    NgxFudisModule,
-    MatButtonModule,
-    MatDialogModule,
-  ],
+  imports: [BrowserModule, BrowserAnimationsModule, NgxFudisModule, MatButtonModule, MatDialogModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
