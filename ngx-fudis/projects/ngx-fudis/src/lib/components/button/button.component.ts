@@ -1,11 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'storybook-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.css'],
 })
-export default class Button {
+export class ButtonComponent {
   /**
    * Is this the principal call to action on the page?
    */
@@ -36,6 +37,7 @@ export default class Button {
    * Optional click handler
    */
   @Output()
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   onClick = new EventEmitter<Event>();
 
   public get classes(): string[] {

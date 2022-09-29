@@ -1,20 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { FudisDialog } from '../../../../ngx-fudis/src/lib/components/dialog/dialog';
+import { Component } from '@angular/core';
+import { FudisDialog } from 'ngx-fudis';
 import { DialogTestContentComponent } from './dialog-test-content/dialog-test-content.component';
 
 @Component({
   selector: 'app-dialog-test',
-  template: `<button mat-button (click)="openDialog()">Open dialog</button>`,
+  template: '<button mat-button (click)="openDialog()">Open dialog</button>',
   styles: [],
 })
-export class DialogTestComponent implements OnInit {
+export class DialogTestComponent {
   constructor(public dialog: FudisDialog) {}
-
-  ngOnInit(): void {}
 
   openDialog() {
     const ref = this.dialog.open(DialogTestContentComponent);
-    ref.afterClosed().subscribe((res) => {
+    ref.afterClosed().subscribe((res: any) => {
       console.log(res);
     });
   }
