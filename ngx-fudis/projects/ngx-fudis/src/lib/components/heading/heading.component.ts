@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 type HeadingLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 type Variant = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
@@ -8,13 +8,8 @@ type Variant = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
   templateUrl: './heading.component.html',
   styleUrls: ['./heading.component.scss'],
 })
-export class Heading {
-  constructor() {}
-
+export class HeadingComponent {
   @Input() variant: Variant;
 
-  /**
-   * @required
-   */
   @Input() tag: HeadingLevel;
 }
