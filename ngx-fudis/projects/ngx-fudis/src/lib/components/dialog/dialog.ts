@@ -9,18 +9,20 @@ export class FudisDialog {
   /**
    * Open new dialog.
    * @param component Component to show in the dialog.
-   * @param config Optional configuration object. Use the `data` field to inject data into `component`.
+   * @param config Optional configuration object. Use the `data` field to inject data
+   * into `component`.
    * @returns Reference to the dialog that was opened.
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   open<T, R = any>(component: ComponentType<T>, config?: MatDialogConfig<any>): MatDialogRef<T, R> {
-    const dialogRef = this.dialog.open(component, this.createConfig());
+    const dialogRef = this.dialog.open(component, FudisDialog.createConfig());
     return dialogRef;
   }
 
   /**
    * Merge consumer's config with ours.
    */
-  private createConfig(userConfig: MatDialogConfig<any> = {}): MatDialogConfig<any> {
+  private static createConfig(userConfig: MatDialogConfig<any> = {}): MatDialogConfig<any> {
     const overridableOptions = { hasBackdrop: true };
     const forcedOptions = { panelClass: 'fudis-dialog-panel' };
     return { ...overridableOptions, ...userConfig, ...forcedOptions };

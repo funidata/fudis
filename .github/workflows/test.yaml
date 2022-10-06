@@ -25,3 +25,6 @@ jobs:
       - name: Run tests
         run: ng test ngx-fudis --watch false --browsers ChromeHeadless
         working-directory: ngx-fudis
+      - name: Run linter
+        run: ng lint
+        working-directory: ngx-fudis

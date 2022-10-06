@@ -31,6 +31,15 @@
             "tsConfig": "projects/ngx-fudis/tsconfig.spec.json",
             "karmaConfig": "projects/ngx-fudis/karma.conf.js"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-fudis/**/*.ts",
+              "projects/ngx-fudis/**/*.html"
+            ]
+          }
         }
       }
     },
@@ -133,6 +142,15 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "dev:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/dev/**/*.ts",
+              "projects/dev/**/*.html"
+            ]
           }
         }
       }
