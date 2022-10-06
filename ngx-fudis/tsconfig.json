@@ -12,10 +12,7 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
-      "ngx-fudis": [
-        "dist/ngx-fudis/ngx-fudis",
-        "dist/ngx-fudis"
-      ]
+      "ngx-fudis": ["dist/ngx-fudis/ngx-fudis", "dist/ngx-fudis"]
     },
     "declaration": false,
     "downlevelIteration": true,
@@ -24,10 +21,8 @@
     "importHelpers": true,
     "target": "es2017",
     "module": "es2020",
-    "lib": [
-      "es2020",
-      "dom"
-    ]
+    "lib": ["es2020", "dom"],
+    "strictPropertyInitialization": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

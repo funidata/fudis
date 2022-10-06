@@ -1,0 +1,29 @@
+.heading {
+  &__xxs {
+    font-size: 0.5rem;
+  }
+
+  &__xs {
+    font-size: 0.7rem;
+  }
+
+  &__s {
+    font-size: 1rem;
+  }
+
+  &__m {
+    font-size: 1.5rem;
+  }
+
+  &__l {
+    font-size: 2rem;
+  }
+
+  &__xl {
+    font-size: 3rem;
+  }
+
+  &__xxl {
+    font-size: 4rem;
+  }
+}

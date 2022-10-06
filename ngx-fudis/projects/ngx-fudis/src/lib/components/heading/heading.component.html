@@ -1,0 +1,26 @@
+<ng-container
+  *ngTemplateOutlet="
+    tag === 'h1' ? h1 : tag === 'h2' ? h2 : tag === 'h3' ? h3 : tag === 'h4' ? h4 : tag === 'h5' ? h5 : h6
+  "></ng-container>
+
+<ng-template #h1>
+  <h1 class="heading__{{ variant }}">Moikkamoi h1</h1>
+</ng-template>
+
+<ng-template #h2>
+  <h2 class="heading__{{ variant }}">Moikkamoi h2</h2>
+</ng-template>
+
+<ng-template #h3>
+  <h3 class="heading__{{ variant }}">Moikkamoi h3</h3>
+</ng-template>
+
+<ng-template #h4>
+  <h4 class="heading__{{ variant }}">Moikkamoi h4</h4>
+</ng-template>
+<ng-template #h5>
+  <h5 class="heading__{{ variant }}">Moikkamoi h5</h5>
+</ng-template>
+<ng-template #h6>
+  <h6 class="heading__{{ variant }}">Moikkamoi h6</h6>
+</ng-template>
