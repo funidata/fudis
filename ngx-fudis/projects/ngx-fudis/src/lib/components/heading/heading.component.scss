@@ -1,3 +1,5 @@
+@import "../../../../../foundations/typography/mixins.scss";
+
 .heading {
   &__xxs {
     font-size: 0.5rem;
@@ -25,5 +27,6 @@
 
   &__xxl {
     font-size: 4rem;
+    // @include fudis-heading-xxl;
   }
 }

@@ -1,0 +1,16 @@
+@use "sass:map";
+@use "angular/material" as mat;
+@import "../spacing/tokens.scss";
+
+@mixin fudis-body-l-regular {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: aqua;
+}
+
+@mixin fudis-heading-xxl {
+  font-size: 2rem;
+  line-height: 2.5rem;
+  color: pink;
+  margin-bottom: $fudis-spacing-s;
+}
