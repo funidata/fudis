@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-type Size = 'l-regular' | 'm-regular' | 's-regular' | 'l-light' | 'm-light' ;
-
+type BodyTextSize = 'l-regular' | 'm-regular' | 's-regular' | 'l-light' | 'm-light';
 
 @Component({
   selector: 'fudis-body-text',
@@ -9,7 +8,5 @@ type Size = 'l-regular' | 'm-regular' | 's-regular' | 'l-light' | 'm-light' ;
   styleUrls: ['./body-text.component.scss'],
 })
 export class BodyTextComponent {
-
-  @Input() size: Size;
-
+  @Input() size: BodyTextSize;
 }

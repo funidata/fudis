@@ -6,7 +6,7 @@ $fudis-font-family: 'Fira Sans';
 
 
 @mixin fudis-body-l-light {
-  font-family: $fudis-font-family;
+  font-family: $fudis-font-family, sans-serif;
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.25rem;
@@ -14,7 +14,7 @@ $fudis-font-family: 'Fira Sans';
 }
 
 @mixin fudis-body-l-regular {
-  font-family: $fudis-font-family;
+  font-family: $fudis-font-family, sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25rem;
@@ -22,7 +22,7 @@ $fudis-font-family: 'Fira Sans';
 }
 
 @mixin fudis-body-m-light {
-  font-family: $fudis-font-family;
+  font-family: $fudis-font-family, sans-serif;
   font-size: 0.875rem;
   font-weight: 300;
   line-height: 1.125rem;
@@ -30,7 +30,7 @@ $fudis-font-family: 'Fira Sans';
 }
 
 @mixin fudis-body-m-regular {
-  font-family: $fudis-font-family;
+  font-family: $fudis-font-family, sans-serif;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.125rem;
@@ -38,7 +38,7 @@ $fudis-font-family: 'Fira Sans';
 }
 
 @mixin fudis-body-s-regular {
-  font-family: $fudis-font-family;
+  font-family: $fudis-font-family, sans-serif;
   font-size: 0.75rem;
   font-weight: 400;
   line-height: 1rem;

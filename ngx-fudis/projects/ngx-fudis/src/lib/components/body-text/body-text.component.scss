@@ -1,6 +1,6 @@
-@import "../../../../../foundations/typography/mixins.scss";
+@import "../../foundations//typography/mixins.scss";
 
-.body {
+.body-text {
   &__s-regular {
     font-size: 0.75rem;
     @include fudis-body-s-regular;
