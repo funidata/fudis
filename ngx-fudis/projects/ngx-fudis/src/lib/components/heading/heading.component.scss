@@ -3,30 +3,36 @@
 .heading {
   &__xxs {
     font-size: 0.5rem;
+    @include fudis-heading-xxs;
   }
 
   &__xs {
     font-size: 0.7rem;
+    @include fudis-heading-xs;
   }
 
   &__s {
     font-size: 1rem;
+    @include fudis-heading-s;
   }
 
   &__m {
     font-size: 1.5rem;
+    @include fudis-heading-m;
   }
 
   &__l {
     font-size: 2rem;
+    @include fudis-heading-l;
   }
 
   &__xl {
     font-size: 3rem;
+    @include fudis-heading-xl;
   }
 
   &__xxl {
     font-size: 4rem;
-    // @include fudis-heading-xxl;
+    @include fudis-heading-xxl;
   }
 }

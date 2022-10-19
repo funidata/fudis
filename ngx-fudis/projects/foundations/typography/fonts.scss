@@ -6,13 +6,26 @@
   font-style: normal;
 }
 
-
-
-
 // Regular, 400 
 @font-face {
   font-family: 'Fira Sans';
   src: url('../../assets/fonts/fira/woff2/FiraMono-Regular.woff2');
   font-weight: 400;
+  font-style: normal;
+}
+
+// Light, 300 
+@font-face {
+  font-family: 'Fira Sans';
+  src: url('../../assets/fonts/fira/woff2/FiraSans-Light.woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+// Semibold, 600 
+@font-face {
+  font-family: 'Fira Sans';
+  src: url('../../assets/fonts/fira/woff2/FiraSans-SemiBold.woff2');
+  font-weight: 600;
   font-style: normal;
 }

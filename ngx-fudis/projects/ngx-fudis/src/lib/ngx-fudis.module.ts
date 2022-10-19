@@ -10,6 +10,7 @@ import {
 import { FudisDialog } from './components/dialog/dialog';
 import { ButtonComponent } from './components/button/button.component';
 import { HeadingComponent } from './components/heading/heading.component';
+import { BodyTextComponent } from './components/body-text/body-text.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { HeadingComponent } from './components/heading/heading.component';
     FudisDialogCloseDirective,
     ButtonComponent,
     HeadingComponent,
+    BodyTextComponent,
   ],
   imports: [MatDialogModule, CommonModule],
   exports: [
