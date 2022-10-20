@@ -77,7 +77,6 @@ $fudis-font-family: 'Fira Sans';
   font-weight: 500;
   line-height: 1.75rem;
   margin-bottom: $fudis-spacing-xs;
-  @include fudis-body-m-regular;
 }
 
 @mixin fudis-heading-s {

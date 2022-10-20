@@ -30,6 +30,7 @@ import { BodyTextComponent } from './components/body-text/body-text.component';
     FudisDialogCloseDirective,
     ButtonComponent,
     HeadingComponent,
+    BodyTextComponent,
   ],
   providers: [FudisDialog],
 })

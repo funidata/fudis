@@ -9,7 +9,7 @@ type HeadingSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
   styleUrls: ['./heading.component.scss'],
 })
 export class HeadingComponent {
-  @Input() variant: HeadingSize;
+  @Input() size: HeadingSize;
 
   @Input() tag: HeadingLevel;
 }

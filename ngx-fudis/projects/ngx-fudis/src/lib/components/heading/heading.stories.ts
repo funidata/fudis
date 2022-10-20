@@ -21,7 +21,7 @@ export const HeadingExample = Template.bind({});
 // More on args: https://storybook.js.org/docs/angular/writing-stories/args
 HeadingExample.args = {
   tag: 'h1',
-  variant: 'xl',
+  size: 'xl',
 };
 
 // export const Secondary = Template.bind({});
