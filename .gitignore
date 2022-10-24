@@ -1,10 +1,10 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+/ngx-fudis/dist
+/ngx-fudis/tmp
+/ngx-fudis/out-tsc
+/ngx-fudis/bazel-out
 
 # Node
 node_modules
@@ -29,13 +29,13 @@ yarn-error.log
 .history/*
 
 # Miscellaneous
-/.angular/cache
+/ngx-fudis/.angular/cache
 .sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
+/ngx-fudis/connect.lock
+/ngx-fudis/coverage
+/ngx-fudis/libpeerconnection.log
 testem.log
-/typings
+/ngx-fudis/typings
 documentation.json
 
 # System files
