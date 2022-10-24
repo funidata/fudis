@@ -1,0 +1,104 @@
+@import "../spacing/tokens.scss";
+@import "./fonts.scss";
+
+// Body text
+$fudis-font-family: 'Fira Sans';
+
+
+@mixin fudis-body-l-light {
+  font-family: $fudis-font-family, sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.25rem;
+  margin-bottom: $fudis-spacing-l;
+}
+
+@mixin fudis-body-l-regular {
+  font-family: $fudis-font-family, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  margin-bottom: $fudis-spacing-l;
+}
+
+@mixin fudis-body-m-light {
+  font-family: $fudis-font-family, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 300;
+  line-height: 1.125rem;
+  margin-bottom: $fudis-spacing-m;
+}
+
+@mixin fudis-body-m-regular {
+  font-family: $fudis-font-family, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.125rem;
+  margin-bottom: $fudis-spacing-m;
+}
+
+@mixin fudis-body-s-regular {
+  font-family: $fudis-font-family, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1rem;
+}
+
+
+// Headings
+
+@mixin fudis-heading-xxl {
+  font-family: $fudis-font-family;
+  font-size: 2.25rem;
+  font-weight: 500;
+  line-height: 2.5rem;
+  margin-bottom: $fudis-spacing-s;
+}
+
+@mixin fudis-heading-xl {
+  font-family: $fudis-font-family;
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 2.5rem;
+  margin-bottom: $fudis-spacing-s;
+}
+
+@mixin fudis-heading-l {
+  font-family: $fudis-font-family;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.75rem;
+  margin-bottom: $fudis-spacing-xs;
+}
+
+@mixin fudis-heading-m {
+  font-family: $fudis-font-family;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.75rem;
+  margin-bottom: $fudis-spacing-xs;
+}
+
+@mixin fudis-heading-s {
+  font-family: $fudis-font-family;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.125rem;
+  margin-bottom: $fudis-spacing-xs;
+}
+
+@mixin fudis-heading-xs {
+  font-family: $fudis-font-family;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.125rem;
+  margin-bottom: $fudis-spacing-xs;
+}
+
+@mixin fudis-heading-xxs {
+  font-family: $fudis-font-family;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.125rem;
+  margin-bottom: $fudis-spacing-xs;
+}

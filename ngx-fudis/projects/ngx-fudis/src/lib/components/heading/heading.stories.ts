@@ -17,11 +17,11 @@ const Template: Story<HeadingComponent> = (args: HeadingComponent) => ({
   props: args,
 });
 
-export const Example = Template.bind({});
+export const HeadingExample = Template.bind({});
 // More on args: https://storybook.js.org/docs/angular/writing-stories/args
-Example.args = {
+HeadingExample.args = {
   tag: 'h1',
-  variant: 'xl',
+  size: 'xl',
 };
 
 // export const Secondary = Template.bind({});

@@ -1,0 +1,28 @@
+@import "../../foundations/typography/mixins.scss";
+
+.body-text {
+  &__s-regular {
+    font-size: 0.75rem;
+    @include fudis-body-s-regular;
+  }
+
+  &__m-regular {
+    font-size: 0.875rem;
+    @include fudis-body-m-regular;
+  }
+
+  &__l-regular {
+    font-size: 1rem;
+    @include fudis-body-l-regular;
+  }
+
+  &__m-light {
+    font-size: 0.875rem;
+    @include fudis-body-m-light;
+  }
+
+  &__l-light {
+    font-size: 1rem;
+    @include fudis-body-l-light;
+  }
+}

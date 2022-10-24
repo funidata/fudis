@@ -1,7 +1,7 @@
 module.exports = {
   stories: [
     "../projects/ngx-fudis/src/lib/components/**/*.stories.ts",
-    "../projects/foundations/**/*.stories.mdx",
+    "../projects/ngx-fudis/src/lib/foundations/**/*.stories.mdx",
     "../projects/documentation/**/*.stories.mdx",
   ],
   addons: [
@@ -19,4 +19,5 @@ module.exports = {
   core: {
     builder: "@storybook/builder-webpack5",
   },
+  staticDirs: ['./../projects/ngx-fudis/src/lib/assets/fonts/fira/woff2'],
 };
