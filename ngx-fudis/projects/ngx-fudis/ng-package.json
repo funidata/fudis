@@ -6,6 +6,9 @@
   },
   "assets": [
     "./**/*.scss",
-    "./src/lib/assets/**/*"
+    "./src/lib/assets/fonts/fira/woff2/FiraSans-Light.woff2",
+    "./src/lib/assets/fonts/fira/woff2/FiraSans-Regular.woff2",
+    "./src/lib/assets/fonts/fira/woff2/FiraSans-Medium.woff2",
+    "./src/lib/assets/fonts/fira/woff2/FiraSans-SemiBold.woff2"
   ]
 }
