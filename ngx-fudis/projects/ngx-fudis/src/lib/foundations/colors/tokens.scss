@@ -1,0 +1,65 @@
+/*
+  --- Primary Colors ---
+*/
+
+// Sisu Primary Colors
+
+$sisu-primary-light: #DAEDFF;
+$sisu-primary: #1076DB;
+$sisu-primary-dark: #1D65B8;
+
+// Into Primary Colors
+
+$into-primary-light: #E0F4FD;
+$into-primary: #0A729E;
+$into-primary-dark: #0E5D81;
+$into-primary-extra-dark: #1B2E36;
+
+/*
+  --- Secondary & Accent Colors ---
+*/
+
+// Grays
+
+$fudis-white: #FFFFFF;
+$fudis-gray-extra-light: #F1F1F1;
+$fudis-gray-light: #D4D4D4;
+$fudis-gray-middle: #727272;
+$fudis-gray-dark: #484848;
+
+// Accent colors
+
+$fudis-red-light: #F5D9D6;
+$fudis-red: #B83C2E;
+$fudis-yellow-light: #FDEFB4;
+$fudis-yellow: #F1C40F;
+$fudis-green-light: #C6ECD6;
+$fudis-green: #1E874B;
+
+$colors: (
+  ) !default;
+
+$colors: map-merge(('sisu-primary-light': $sisu-primary-light,
+      'sisu-primary': $sisu-primary,
+      'sisu-primary-dark': $sisu-primary-dark,
+      'into-primary-light': $into-primary-light,
+      'into-primary': $into-primary,
+      'into-primary-dark': $into-primary-dark,
+      'into-primary-extra-dark': $into-primary-extra-dark,
+      'white': $fudis-white,
+      'gray-extra-light': $fudis-gray-light,
+      'gray-light': $fudis-gray-light,
+      'gray-middle': $fudis-gray-middle,
+      'gray-dark': $fudis-gray-dark,
+      'red-light': $fudis-red-light,
+      'red': $fudis-red,
+      'yellow-light': $fudis-yellow-light,
+      'yellow': $fudis-yellow,
+      'green-light': $fudis-green-light,
+      'green': $fudis-green,
+      'transparent': transparent,
+    ),
+    $colors
+);
+
+$extract: $colors;
