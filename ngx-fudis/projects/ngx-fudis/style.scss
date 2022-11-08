@@ -1,4 +1,5 @@
 @use "@angular/material" as mat;
-
+// Fudis theme import
+@use "./src//lib/theme/fudis-theme.scss";
 // Fudis styles from components that have to be applied globally.
 @use "src/lib/components/dialog/dialog.scss";

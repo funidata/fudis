@@ -3,6 +3,41 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "storybook": {
+      "projectType": "application",
+      "root": ".storybook",
+      "sourceRoot": ".storybook",
+      "architect": {
+          "build": {
+              "builder": "@storybook/angular:build-storybook",
+              "options": {
+                  "outputDir": ".storybook/target/storybook-static",
+                  "tsConfig": ".storybook/tsconfig.json",
+                  "styles": ["projects/ngx-fudis/style.scss"],
+                  "compodoc": false,
+                  "compodocArgs": [
+                      "-p", ".storybook/tsconfig.compodoc.json",
+                      "-e", "json",
+                      "-d", ".storybook/target/compodoc"
+                  ]
+              }
+          },
+          "start": {
+              "builder": "@storybook/angular:start-storybook",
+              "options": {
+                  "tsConfig": ".storybook/tsconfig.json",
+                  "styles": ["projects/ngx-fudis/style.scss"],
+                  "port": 6006,
+                  "compodoc": false,
+                  "compodocArgs": [
+                      "-p", ".storybook/tsconfig.compodoc.json",
+                      "-e", "json",
+                      "-d", ".storybook/target/compodoc"
+                  ]
+              }
+          }
+      }
+    },
     "ngx-fudis": {
       "projectType": "library",
       "root": "projects/ngx-fudis",
@@ -12,7 +47,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/ngx-fudis/ng-package.json"
+            "project": "projects/ngx-fudis/ng-package.json",
+            "styles": ["src/styles.css", "src/styles.scss"]
           },
           "configurations": {
             "production": {
@@ -153,8 +189,8 @@
             ]
           }
         }
-      }
     }
-  },
+  }
+},
   "defaultProject": "ngx-fudis"
 }
