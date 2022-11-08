@@ -1,7 +1,7 @@
 @use "@angular/material" as mat;
 @use "./palette.scss";
 
-$fudis-primary: mat.define-palette($fudis-palette, 500);
+$fudis-primary: mat.define-palette(mat.$pink-palette, 500);
 $fudis-accent: mat.define-palette(mat.$indigo-palette, 500);
 
 $fudis-theme: mat.define-light-theme(
