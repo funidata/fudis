@@ -1,0 +1,27 @@
+@use '@angular/material' as mat;
+
+$fudis-typography-config: mat.define-typography-config(
+  $font-family:   'Fira Sans',
+  // fudis-heading-xxl
+  $display-2: mat.define-typography-level(2.25rem, 2.5rem, 500),
+
+  // fudis-heading-xl
+  $display-1: mat.define-typography-level(1.75rem, 2rem, 500),
+
+  // fudis-heading-l
+  $headline: mat.define-typography-level(1.5rem, 1.75rem, 500),
+
+  // fudis-heading-m
+  $title: mat.define-typography-level(1.25rem, 1.75rem, 500),
+
+  // fudis-heading-s h3
+  $subheading-2: mat.define-typography-level(1.125rem, 1.125rem, 500),
+
+  // fudis-heading-xs h4
+  $subheading-1: mat.define-typography-level(1rem, 1.125rem, 600),
+
+  // fudis-heading-xxs h5
+  $body-1: mat.define-typography-level(0.875rem, 1.125rem, 400),
+);
+
+@include mat.core($fudis-typography-config);
