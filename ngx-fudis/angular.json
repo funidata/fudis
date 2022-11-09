@@ -14,11 +14,11 @@
                   "outputDir": ".storybook/target/storybook-static",
                   "tsConfig": ".storybook/tsconfig.json",
                   "styles": ["projects/ngx-fudis/style.scss"],
-                  "compodoc": false,
+                  "compodoc": true,
                   "compodocArgs": [
-                      "-p", ".storybook/tsconfig.compodoc.json",
+                      "-p", "./tsconfig.json",
                       "-e", "json",
-                      "-d", ".storybook/target/compodoc"
+                      "-d", "./"
                   ]
               }
           },
@@ -28,11 +28,11 @@
                   "tsConfig": ".storybook/tsconfig.json",
                   "styles": ["projects/ngx-fudis/style.scss"],
                   "port": 6006,
-                  "compodoc": false,
+                  "compodoc": true,
                   "compodocArgs": [
-                      "-p", ".storybook/tsconfig.compodoc.json",
+                      "-p", "./tsconfig.json",
                       "-e", "json",
-                      "-d", ".storybook/target/compodoc"
+                      "-d", "./"
                   ]
               }
           }
