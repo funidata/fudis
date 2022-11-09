@@ -6,22 +6,23 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent {
-
   /**
-  * Button variant options
-  */
+   * Button variant options
+   */
   @Input() variant: 'primary' | 'secondary' | 'tertiary' | 'text-only' = 'primary';
 
   /**
    * Button size and type options
    */
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
+
   @Input() type: 'button' | 'submit' = 'button';
 
   /**
    * Button contents
    */
   @Input() label: string = 'Meidän nappi';
+
   @Input() ariaLabel: string;
 
   /**
