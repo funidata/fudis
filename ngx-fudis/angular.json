@@ -47,8 +47,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/ngx-fudis/ng-package.json",
-            "styles": ["src/styles.css", "src/styles.scss"]
+            "project": "projects/ngx-fudis/ng-package.json"
           },
           "configurations": {
             "production": {
