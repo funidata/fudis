@@ -1,0 +1,52 @@
+.fudis-button {
+    font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    border: 2px solid transparent; // Room for the focus maybe?
+    border-radius: 0.125rem;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.063rem;
+ 
+    &--primary {
+        color: white;
+        background-color: #1076db;
+        box-shadow: rgb(16, 118, 219) 0px 0px 0px 1px;
+    }
+    &--secondary {
+        color: #1076db;
+        background-color: transparent;
+        box-shadow: rgb(16, 118, 219) 0px 0px 0px 1px;
+    }
+    &--tertiary {
+        color: #333;
+        background-color: transparent;
+        box-shadow: rgb(0, 0, 0) 0px 0px 0px 1px;
+    }
+    &--text-only {
+        color: #1076db;
+        background-color: transparent;
+        text-transform: none;
+        font-weight: 400;
+    }
+    &--small {
+        font-size: 12px;
+        padding: 0 0.5rem;
+        height: 1.5rem;
+    }
+    &--medium {
+        font-size: 14px;
+        padding: 0 1rem;
+        height: 2.2rem;
+    }
+    &--large {
+        font-size: 16px;
+        padding: 0.5rem 1.5rem;
+    }
+    &:disabled {
+        color: gray;
+        background-color: lightgray;
+        box-shadow: gray 0 0 0 1px;
+    }
+}

@@ -1,7 +1,9 @@
 <button
-  type="button"
+  mat-button
+  [type]="type"
+  [disabled]="disabled"
+  [attr.aria-label]="ariaLabel"
   (click)="onClick.emit($event)"
-  [ngClass]="classes"
-  [ngStyle]="{ 'background-color': backgroundColor }">
-  {{ label }} hello fren, I am just example button!
+  [ngClass]="classes">
+  {{ label }}
 </button>
