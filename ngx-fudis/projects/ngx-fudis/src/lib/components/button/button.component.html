@@ -3,7 +3,7 @@
   [type]="type"
   [disabled]="disabled"
   [attr.aria-label]="ariaLabel"
-  (click)="onClick.emit($event)"
+  (click)="handleClick.emit($event)"
   [ngClass]="classes">
   {{ label }}
 </button>
