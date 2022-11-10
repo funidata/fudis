@@ -1,4 +1,5 @@
 @use '../../foundations/colors/mixins.scss' as colorMixin;
+@use '../../foundations/shadows/mixins.scss' as shadow;
 
 .fudis-button {
 	font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -15,15 +16,15 @@
 	&__primary {
 		@include colorMixin.fudis-text-color('white');
 		@include colorMixin.fudis-bg-color('sisu-primary');
-		box-shadow: rgb(16, 118, 219) 0px 0px 0px 1px;
+		@include shadow.fudis-box-shadow('sisu-blue');
 	}
 	&__secondary {
 		@include colorMixin.fudis-text-color('sisu-primary');
-		box-shadow: rgb(16, 118, 219) 0px 0px 0px 1px;
+		@include shadow.fudis-box-shadow('sisu-blue');
 	}
 	&__tertiary {
 		color: #333;
-		box-shadow: rgb(0, 0, 0) 0px 0px 0px 1px;
+		@include shadow.fudis-box-shadow('fudis-dark');
 	}
 	&__text-only {
 		@include colorMixin.fudis-text-color('sisu-primary');
