@@ -3,102 +3,132 @@
 @import "./fonts.scss";
 
 $fudis-font-family: 'Fira Sans';
-$fudis-line-height: 1.25rem;
+
+// Body text font size
+$fudis-body-l-font-size: 1rem;
+$fudis-body-m-font-size: 0.875rem;
+$fudis-body-s-font-size: 0.75rem;
+
+// Heading font size
+$fudis-heading-xxl-font-size: 2.25rem;
+$fudis-heading-xl-font-size: 1.75rem;
+$fudis-heading-l-font-size: 1.5rem;
+$fudis-heading-m-font-size: 1.25rem;
+$fudis-heading-s-font-size: 1.125rem;
+$fudis-heading-sx-font-size: 1rem;
+$fudis-heading-sxx-font-size: 0.875rem;
+
+// Body text line height
+$fudis-body-l-line-height: 1.25rem;
+$fudis-body-m-line-height: 1.125rem;
+$fudis-body-s-line-height: 1rem;
+
+// Heading line heights
+$fudis-heading-l-line-height: 2.5rem;
+$fudis-heading-m-line-height: 1.75rem;
+$fudis-heading-s-line-height: 1.125rem;
+
+// Font weight 
+$fudis-light: 300;
+$fudis-regular: 400;
+$fudis-medium: 500;
+$fudis-bold: 600;
+
+// Body Text
 
 @mixin fudis-body-l-light {
-  font-family: $fudis-font-family, sans-serif;
-  font-size: 1rem;
-  font-weight: 300;
-  line-height: 1.25rem;
+  font-family: $fudis-font-family;
+  font-size: $fudis-body-l-font-size;
+  font-weight: $fudis-light;
+  line-height: $fudis-body-l-line-height;
   margin-bottom: $fudis-spacing-l;
 }
 
 @mixin fudis-body-l-regular {
-  font-family: $fudis-font-family, sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: $fudis-line-height;
+  font-family: $fudis-font-family;
+  font-size: $fudis-body-l-font-size;
+  font-weight: $fudis-regular;
+  line-height: $fudis-body-l-line-height;
   margin-bottom: $fudis-spacing-l;
 }
 
 @mixin fudis-body-m-light {
-  font-family: $fudis-font-family, sans-serif;
-  font-size: 0.875rem;
-  font-weight: 300;
-  line-height: 1.125rem;
+  font-family: $fudis-font-family;
+  font-size: $fudis-body-m-font-size;
+  font-weight: $fudis-light;
+  line-height: $fudis-body-m-line-height;
   margin-bottom: $fudis-spacing-m;
 }
 
 @mixin fudis-body-m-regular {
-  font-family: $fudis-font-family, sans-serif;
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 1.125rem;
+  font-family: $fudis-font-family;
+  font-size: $fudis-body-m-font-size;
+  font-weight: $fudis-regular;
+  line-height: $fudis-body-m-line-height;
   margin-bottom: $fudis-spacing-m;
 }
 
 @mixin fudis-body-s-regular {
-  font-family: $fudis-font-family, sans-serif;
-  font-size: 0.75rem;
-  font-weight: 400;
-  line-height: 1rem;
+  font-family: $fudis-font-family;
+  font-size: $fudis-body-s-font-size;
+  font-weight: $fudis-regular;
+  line-height: $fudis-body-s-line-height;
 }
-
 
 // Headings
 
 @mixin fudis-heading-xxl() {
   font-family: $fudis-font-family;
-  font-size: 2.25rem;
-  font-weight: 500;
-  line-height: 2.5rem;
+  font-size: $fudis-heading-xxl-font-size;
+  font-weight: $fudis-medium;
+  line-height: $fudis-heading-l-line-height;
   margin-bottom: $fudis-spacing-s;
 }
 
 @mixin fudis-heading-xl {
   font-family: $fudis-font-family;
-  font-size: 1.75rem;
-  font-weight: 500;
-  line-height: 2.5rem;
+  font-size: $fudis-heading-xl-font-size;
+  font-weight: $fudis-medium;
+  line-height: $fudis-heading-l-line-height;
   margin-bottom: $fudis-spacing-s;
 }
 
 @mixin fudis-heading-l {
   font-family: $fudis-font-family;
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 1.75rem;
+  font-size: $fudis-heading-l-font-size;
+  font-weight: $fudis-medium;
+  line-height: $fudis-heading-m-line-height;
   margin-bottom: $fudis-spacing-xs;
 }
 
 @mixin fudis-heading-m {
   font-family: $fudis-font-family;
-  font-size: 1.25rem;
-  font-weight: 500;
-  line-height: 1.75rem;
+  font-size: $fudis-heading-m-font-size;
+  font-weight: $fudis-medium;
+  line-height: $fudis-heading-m-line-height;
   margin-bottom: $fudis-spacing-xs;
 }
 
 @mixin fudis-heading-s {
   font-family: $fudis-font-family;
-  font-size: 1.125rem;
-  font-weight: 500;
-  line-height: 1.125rem;
+  font-size: $fudis-heading-s-font-size;
+  font-weight: $fudis-medium;
+  line-height: $fudis-heading-s-line-height;
   margin-bottom: $fudis-spacing-xs;
 }
 
 @mixin fudis-heading-xs {
   font-family: $fudis-font-family;
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.125rem;
+  font-size: $fudis-heading-sx-font-size;
+  font-weight: $fudis-bold;
+  line-height: $fudis-heading-s-line-height;
   margin-bottom: $fudis-spacing-xs;
 }
 
 @mixin fudis-heading-xxs {
   font-family: $fudis-font-family;
-  font-size: 0.875rem;
-  font-weight: 600;
-  line-height: 1.125rem;
+  font-size: $fudis-heading-sxx-font-size;
+  font-weight: $fudis-bold;
+  line-height: $fudis-heading-s-line-height;
   margin-bottom: $fudis-spacing-xs;
 }
