@@ -1,14 +1,39 @@
 @use "@angular/material" as mat;
 @use "./palette.scss";
-@import "../foundations/typography/config";
+@use "../foundations/typography/fonts.scss";
 
 $fudis-primary: mat.define-palette(mat.$pink-palette, 500);
 $fudis-accent: mat.define-palette(mat.$indigo-palette, 500);
 
+// Angular Material default typography styling
 $fudis-typography: mat.define-typography-config(
   $font-family: "Fira Sans",
-  $headline:
-    mat.define-typography-level(24px, 32px, 400, $font-family: "Fira Sans"),
+  // fudis-heading-xxl
+  $display-1: mat.define-typography-level(2.25rem, 2.5rem, 500),
+
+  // fudis-heading-xl
+  $headline: mat.define-typography-level(1.75rem, 2rem, 500),
+    
+  // fudis-heading-l
+  $title: mat.define-typography-level(1.5rem, 1.75rem, 500),
+    
+  // fudis-heading-m
+  $subheading-2: mat.define-typography-level(1.25rem, 1.75rem, 500),
+    
+  // fudis-heading-s 
+  $subheading-1: mat.define-typography-level(1.125rem, 1.125rem, 500),
+
+  // fudis-body-l-regular
+  $body-1: mat.define-typography-level(1rem, 1.25rem, 400),
+
+  // fudis-body-m-regular
+  $body-2: mat.define-typography-level(0.875rem, 1.125rem, 400),
+
+  // fudis-body-s-regular
+  $caption: mat.define-typography-level(0.75rem, 1rem, 400),
+
+  // fudis-text-button
+  $button: mat.define-typography-level(0.875rem, 1rem, 500),
 );
 
 @include mat.core($fudis-typography);
