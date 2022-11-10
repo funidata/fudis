@@ -11,5 +11,7 @@ type HeadingSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
 export class HeadingComponent {
   @Input() size: HeadingSize;
 
+  @Input() text: string;
+
   @Input() tag: HeadingLevel;
 }
