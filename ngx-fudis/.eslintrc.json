@@ -1,17 +1,11 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "projects/**/*"
-  ],
+  "ignorePatterns": ["projects/**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
-        "project": [
-          "tsconfig.json"
-        ],
+        "project": ["tsconfig.json"],
         "createDefaultProgram": true
       },
       "extends": [
@@ -23,36 +17,28 @@
       ],
       "rules": {
         "import/no-extraneous-dependencies": [
-          "error", {
-            "devDependencies": [
-              "**/*.stories.*",
-              "**/.storybook/**/*.*"
-            ],
+          "error",
+          {
+            "devDependencies": ["**/*.stories.*", "**/.storybook/**/*.*"],
             "optionalDependencies": false,
             "peerDependencies": false,
             "packageDir": "./"
           }
         ],
         "import/prefer-default-export": "off",
-				"no-tabs": "off"
+        "no-tabs": "off"
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
       "rules": {}
     },
     {
-      "files": [
-        "*.html"
-      ],
+      "files": ["*.html"],
       "extends": ["plugin:prettier/recommended"],
       "rules": {
-        "prettier/prettier": ["error", {"parser": "angular"}]
+        "prettier/prettier": ["error", { "parser": "angular" }]
       }
     }
   ]
