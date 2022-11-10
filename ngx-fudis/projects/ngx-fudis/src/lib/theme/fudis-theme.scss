@@ -1,8 +1,17 @@
 @use "@angular/material" as mat;
 @use "./palette.scss";
+@import "../foundations/typography/config";
 
 $fudis-primary: mat.define-palette(mat.$pink-palette, 500);
 $fudis-accent: mat.define-palette(mat.$indigo-palette, 500);
+
+$fudis-typography: mat.define-typography-config(
+  $font-family: "Fira Sans",
+  $headline:
+    mat.define-typography-level(24px, 32px, 400, $font-family: "Fira Sans"),
+);
+
+@include mat.core($fudis-typography);
 
 $fudis-theme: mat.define-light-theme(
   (
@@ -10,6 +19,7 @@ $fudis-theme: mat.define-light-theme(
       primary: $fudis-primary,
       accent: $fudis-accent,
     ),
+    typography: $fudis-typography,
   )
 );
 
