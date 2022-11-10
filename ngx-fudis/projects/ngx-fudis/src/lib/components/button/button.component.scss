@@ -1,52 +1,52 @@
+@use '../../foundations/colors/mixins.scss' as colorMixin;
+
 .fudis-button {
-    font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 600;
-    border: 2px solid transparent; // Room for the focus maybe?
-    border-radius: 0.125rem;
-    cursor: pointer;
-    display: inline-block;
-    line-height: 1;
-    text-transform: uppercase;
-    letter-spacing: 0.063rem;
- 
-    &--primary {
-        color: white;
-        background-color: #1076db;
-        box-shadow: rgb(16, 118, 219) 0px 0px 0px 1px;
-    }
-    &--secondary {
-        color: #1076db;
-        background-color: transparent;
-        box-shadow: rgb(16, 118, 219) 0px 0px 0px 1px;
-    }
-    &--tertiary {
-        color: #333;
-        background-color: transparent;
-        box-shadow: rgb(0, 0, 0) 0px 0px 0px 1px;
-    }
-    &--text-only {
-        color: #1076db;
-        background-color: transparent;
-        text-transform: none;
-        font-weight: 400;
-    }
-    &--small {
-        font-size: 12px;
-        padding: 0 0.5rem;
-        height: 1.5rem;
-    }
-    &--medium {
-        font-size: 14px;
-        padding: 0 1rem;
-        height: 2.2rem;
-    }
-    &--large {
-        font-size: 16px;
-        padding: 0.5rem 1.5rem;
-    }
-    &:disabled {
-        color: gray;
-        background-color: lightgray;
-        box-shadow: gray 0 0 0 1px;
-    }
+	font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-weight: 600;
+	margin: 4px solid transparent;
+	border-radius: 0.125rem;
+	cursor: pointer;
+	display: inline-block;
+	line-height: 1;
+	text-transform: uppercase;
+	letter-spacing: 0.063rem;
+	@include colorMixin.fudis-bg-color('transparent');
+
+	&__primary {
+		@include colorMixin.fudis-text-color('white');
+		@include colorMixin.fudis-bg-color('sisu-primary');
+		box-shadow: rgb(16, 118, 219) 0px 0px 0px 1px;
+	}
+	&__secondary {
+		@include colorMixin.fudis-text-color('sisu-primary');
+		box-shadow: rgb(16, 118, 219) 0px 0px 0px 1px;
+	}
+	&__tertiary {
+		color: #333;
+		box-shadow: rgb(0, 0, 0) 0px 0px 0px 1px;
+	}
+	&__text-only {
+		@include colorMixin.fudis-text-color('sisu-primary');
+		text-transform: none;
+		font-weight: 400;
+	}
+	&__small {
+		font-size: 12px;
+		padding: 0 0.5rem;
+		height: 1.5rem;
+	}
+	&__medium {
+		font-size: 14px;
+		padding: 0 1rem;
+		height: 2.2rem;
+	}
+	&__large {
+		font-size: 16px;
+		padding: 0.5rem 1.5rem;
+	}
+	&:disabled {
+		color: gray;
+		background-color: lightgray;
+		box-shadow: gray 0 0 0 1px;
+	}
 }
