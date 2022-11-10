@@ -3,8 +3,8 @@ import { Story, Meta } from '@storybook/angular/types-6-0';
 import { HeadingComponent } from './heading.component';
 
 export default {
-  title: 'Components/Heading',
-  component: HeadingComponent,
+	title: 'Components/Heading',
+	component: HeadingComponent,
 } as Meta;
 
 const Template: Story<HeadingComponent> = (args: HeadingComponent) => ({
@@ -13,7 +13,7 @@ const Template: Story<HeadingComponent> = (args: HeadingComponent) => ({
 
 export const HeadingExample = Template.bind({});
 HeadingExample.args = {
-  tag: 'h1',
-  size: 'xl',
-  text: 'I am a heading component!',
+	tag: 'h1',
+	size: 'xl',
+	text: 'I am a heading component!',
 };
