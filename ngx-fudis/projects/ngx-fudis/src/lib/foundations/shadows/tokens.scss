@@ -1,0 +1,16 @@
+@use '../colors/tokens.scss' as colors;
+
+$sisu-shadow-blue: colors.$sisu-primary 0px 0px 0px 1px;
+$fudis-shadow-dark: rgb(0, 0, 0) 0px 0px 0px 1px;
+
+$shadows: () !default;
+
+$shadows: map-merge(
+	(
+		'sisu-blue': $sisu-shadow-blue,
+		'fudis-dark': $fudis-shadow-dark,
+	),
+	$shadows
+);
+
+$extract: $shadows;

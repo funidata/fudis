@@ -1,48 +1,42 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'storybook-button',
+	selector: 'fudis-button',
 	templateUrl: './button.component.html',
-	styleUrls: ['./button.css'],
+	styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent {
 	/**
-	 * Is this the principal call to action on the page?
+	 * Button variant options
 	 */
-	@Input()
-	primary = false;
+	@Input() variant: 'primary' | 'secondary' | 'tertiary' | 'text-only' = 'primary';
 
 	/**
-	 * What background color to use
+	 * Button size and type options
 	 */
-	@Input()
-	backgroundColor?: string;
+	@Input() size: 'small' | 'medium' | 'large' = 'medium';
 
-	/**
-	 * How large should the button be?
-	 */
-	@Input()
-	size: 'small' | 'medium' | 'large' = 'medium';
+	@Input() type: 'button' | 'submit' = 'button';
 
 	/**
 	 * Button contents
-	 *
-	 * @required
 	 */
-	@Input()
-	label = 'Button';
+	@Input() label: string = 'Meidän nappi';
+
+	@Input() ariaLabel: string;
+
+	/**
+	 * Button modifiers
+	 */
+	@Input() disabled = false;
 
 	/**
 	 * Optional click handler
 	 */
 	@Output()
-	// eslint-disable-next-line @angular-eslint/no-output-on-prefix
-	onClick = new EventEmitter<Event>();
+	handleClick = new EventEmitter<Event>();
 
 	public get classes(): string[] {
-		const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';
-
-		return ['storybook-button', `storybook-button--${this.size}`, mode];
+		return ['fudis-button', `fudis-button__${this.size}`, `fudis-button__${this.variant}`];
 	}
 }
