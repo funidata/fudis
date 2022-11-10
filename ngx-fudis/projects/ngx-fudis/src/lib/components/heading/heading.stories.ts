@@ -8,7 +8,7 @@ export default {
 } as Meta;
 
 const Template: Story<HeadingComponent> = (args: HeadingComponent) => ({
-  props: args,
+	props: args,
 });
 
 export const HeadingExample = Template.bind({});

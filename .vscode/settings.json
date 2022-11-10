@@ -1,0 +1,31 @@
+{
+	"editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+	"editor.formatOnPaste": false,
+	"editor.formatOnType": false,
+	"editor.formatOnSaveMode": "file",
+
+	"files.autoSave": "afterDelay",
+	"editor.insertSpaces": false,
+	"editor.formatOnSave": true,
+	"editor.tabSize": 2,
+	"editor.detectIndentation": false,
+	"editor.autoClosingBrackets": "always",
+	"editor.autoClosingQuotes": "always",
+	"eslint.validate": [
+		"vue",
+		"html",
+		"javascript",
+		"typescript",
+		"javascriptreact",
+		"typescriptreact",
+		"typescriptangular"
+	],
+	"eslint.workingDirectories": [
+		"src",
+		"ngx-fudis"
+	],
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	},
+	"diffEditor.ignoreTrimWhitespace": false
+}

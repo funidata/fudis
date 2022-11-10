@@ -33,7 +33,8 @@
             "packageDir": "./"
           }
         ],
-        "import/prefer-default-export": "off"
+        "import/prefer-default-export": "off",
+				"no-tabs": "off"
       }
     },
     {
