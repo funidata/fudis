@@ -1,0 +1,153 @@
+import { Meta, Typeset } from '@storybook/addon-docs/blocks';
+
+
+<Meta title="Foundations/Typography"/>
+
+export const heading = {
+  type: {
+    primary: "Fira Sans",
+  },
+  weight: {
+		medium: '500',
+    bold: '600',
+  },
+  size: {
+    xxs: 14,
+    xs: 16,
+    s: 18,
+    m: 20,
+    l: 24,
+    xl: 28,
+    xxl: 36,
+  },
+};
+
+export const body = {
+  type: {
+    primary: "Fira Sans",
+  },
+  weight: {
+		light: '300',
+    regular: '400',
+  },
+  size: {
+		l: 16,
+		m: 14,
+		s: 12,
+  },
+};
+
+
+export const text_xxl = 'Fudis heading XXL (2.25rem) 500';
+export const text_xl = 'Fudis heading XL (1.75rem) 500';
+export const text_l = 'Fudis heading L (1.5rem) 500';
+export const text_m = 'Fudis heading M (1.25rem) 500';
+export const text_s = 'Fudis heading S (1.125rem) 500';
+export const text_xs = 'Fudis heading XS (1rem) 600';
+export const text_xxs = 'Fudis heading XXS (0.857rem) 600';
+
+export const sampleParagraph = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+
+# Typography
+
+**Font:** Fira Sans
+
+## Headings / Otsikot
+
+**Weights:** 500(medium), 600(bold)
+
+<Typeset
+  fontSizes={[
+    Number(heading.size.xxl),
+  ]}
+  fontWeight={heading.weight.medium}
+  sampleText={text_xxl}
+  fontFamily={heading.type.primary}
+/>
+
+<Typeset
+  fontSizes={[
+    Number(heading.size.xl),
+  ]}
+  fontWeight={heading.weight.medium}
+  sampleText={text_xl}
+	fontFamily={heading.type.primary}
+/>
+
+<Typeset
+  fontSizes={[
+    Number(heading.size.l),
+  ]}
+  fontWeight={heading.weight.medium}
+  sampleText={text_l}
+	fontFamily={heading.type.primary}
+/>
+
+<Typeset
+  fontSizes={[
+    Number(heading.size.m),
+  ]}
+  fontWeight={heading.weight.medium}
+  sampleText={text_m}
+	fontFamily={heading.type.primary}
+/>
+
+<Typeset
+  fontSizes={[
+    Number(heading.size.s),
+  ]}
+  fontWeight={heading.weight.medium}
+  sampleText={text_s}
+	fontFamily={heading.type.primary}
+/>
+
+<Typeset
+  fontSizes={[
+    Number(heading.size.xs),
+  ]}
+  fontWeight={heading.weight.bold}
+  sampleText={text_xs}
+	fontFamily={heading.type.primary}
+/>
+
+<Typeset
+  fontSizes={[
+    Number(heading.size.xxs),
+  ]}
+  fontWeight={heading.weight.bold}
+  sampleText={text_xxs}
+	fontFamily={heading.type.primary}
+/>
+
+
+## Body Text / Leipäteksti
+
+**Weights:** 300(light) 400(regular)
+
+**16px** = 1rem 	**14px** = 0.875rem 	**12px** = 0.75rem 
+
+### Fudis Regular 400
+
+
+<Typeset
+  fontSizes={[
+    Number(body.size.l),
+    Number(body.size.m),
+    Number(body.size.s),
+  ]}
+  fontWeight={body.weight.regular}
+  sampleText={sampleParagraph}
+  fontFamily={body.type.primary}
+/>
+
+### Fudis Light 300
+<Typeset
+  fontSizes={[
+    Number(body.size.l),
+    Number(body.size.m),
+    Number(body.size.s),
+  ]}
+  fontWeight={body.weight.light}
+  sampleText={sampleParagraph}
+  fontFamily={body.type.primary}
+/>
