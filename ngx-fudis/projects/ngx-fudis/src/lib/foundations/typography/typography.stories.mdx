@@ -46,7 +46,12 @@ export const text_s = 'Fudis heading S (1.125rem) 500';
 export const text_xs = 'Fudis heading XS (1rem) 600';
 export const text_xxs = 'Fudis heading XXS (0.857rem) 600';
 
-export const sampleParagraph = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+export const body_s = 'Fudis body s-regular (0.75rem) 400: "The quick brown fox jumps over the lazy dog."'
+export const body_s_light = 'Fudis body s-light (0.75rem) 300: "The quick brown fox jumps over the lazy dog."'
+export const body_m = 'Fudis body m-regular (0.875rem) 400: "The quick brown fox jumps over the lazy dog."'
+export const body_m_light = 'Fudis body m-light (0.875rem) 300: "The quick brown fox jumps over the lazy dog."'
+export const body_l = 'Fudis body l-regular (1rem) 400: "The quick brown fox jumps over the lazy dog."'
+export const body_l_light = 'Fudis body l-light (1rem) 300: "The quick brown fox jumps over the lazy dog."'
 
 # Typography
 
@@ -124,30 +129,57 @@ export const sampleParagraph = 'Lorem ipsum dolor sit amet, consectetur adipisci
 
 **Weights:** 300(light) 400(regular)
 
-**16px** = 1rem 	**14px** = 0.875rem 	**12px** = 0.75rem 
-
-### Fudis Regular 400
-
 
 <Typeset
   fontSizes={[
     Number(body.size.l),
-    Number(body.size.m),
-    Number(body.size.s),
   ]}
   fontWeight={body.weight.regular}
-  sampleText={sampleParagraph}
+  sampleText={body_l}
   fontFamily={body.type.primary}
 />
 
-### Fudis Light 300
 <Typeset
   fontSizes={[
     Number(body.size.l),
+  ]}
+  fontWeight={body.weight.light}
+  sampleText={body_l_light}
+  fontFamily={body.type.primary}
+/>
+
+<Typeset
+  fontSizes={[
     Number(body.size.m),
+  ]}
+  fontWeight={body.weight.regular}
+  sampleText={body_m}
+  fontFamily={body.type.primary}
+/>
+
+<Typeset
+  fontSizes={[
+    Number(body.size.m),
+  ]}
+  fontWeight={body.weight.light}
+  sampleText={body_m_light}
+  fontFamily={body.type.primary}
+/>
+
+<Typeset
+  fontSizes={[
+    Number(body.size.s),
+  ]}
+  fontWeight={body.weight.regular}
+  sampleText={body_s}
+  fontFamily={body.type.primary}
+/>
+
+<Typeset
+  fontSizes={[
     Number(body.size.s),
   ]}
   fontWeight={body.weight.light}
-  sampleText={sampleParagraph}
+  sampleText={body_s_light}
   fontFamily={body.type.primary}
 />
