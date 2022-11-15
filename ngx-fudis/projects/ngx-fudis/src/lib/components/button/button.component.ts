@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-	selector: 'fudis-button',
+	selector: 'fds-button',
 	templateUrl: './button.component.html',
 	styleUrls: ['./button.component.scss'],
 })
