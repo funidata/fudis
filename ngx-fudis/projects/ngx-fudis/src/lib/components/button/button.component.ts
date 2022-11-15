@@ -37,6 +37,6 @@ export class ButtonComponent {
 	handleClick = new EventEmitter<Event>();
 
 	public get classes(): string[] {
-		return ['fudis-button', `fudis-button__${this.size}`, `fudis-button__${this.variant}`];
+		return ['fds-button', `fds-button__${this.size}`, `fds-button__${this.variant}`];
 	}
 }

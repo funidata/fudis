@@ -3,7 +3,6 @@
 	"editor.formatOnPaste": false,
 	"editor.formatOnType": false,
 	"editor.formatOnSaveMode": "file",
-
 	"files.autoSave": "afterDelay",
 	"editor.insertSpaces": false,
 	"editor.formatOnSave": true,
@@ -11,6 +10,11 @@
 	"editor.detectIndentation": false,
 	"editor.autoClosingBrackets": "always",
 	"editor.autoClosingQuotes": "always",
+	"stylelint.validate": [
+		"css",
+		"less",
+		"scss"
+	],
 	"eslint.validate": [
 		"vue",
 		"html",
@@ -25,7 +29,11 @@
 		"ngx-fudis"
 	],
 	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": true
+		"source.fixAll.eslint": true,
+		"source.fixAll.stylelint": true
 	},
-	"diffEditor.ignoreTrimWhitespace": false
+	"diffEditor.ignoreTrimWhitespace": false,
+	"css.validate": false,
+	"less.validate": false,
+	"scss.validate": false
 }

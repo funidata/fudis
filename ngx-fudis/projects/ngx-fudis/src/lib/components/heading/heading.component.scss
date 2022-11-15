@@ -1,31 +1,31 @@
-@import "../../foundations/typography/mixins.scss";
+@import '../../foundations/typography/mixins';
 
-.heading {
-  &__xxs {
-    @include fudis-heading-xxs;
-  }
+.fds-heading {
+	&__xxs {
+		@include fudis-heading-xxs;
+	}
 
-  &__xs {
-    @include fudis-heading-xs;
-  }
+	&__xs {
+		@include fudis-heading-xs;
+	}
 
-  &__s {
-    @include fudis-heading-s;
-  }
+	&__s {
+		@include fudis-heading-s;
+	}
 
-  &__m {
-    @include fudis-heading-m;
-  }
+	&__m {
+		@include fudis-heading-m;
+	}
 
-  &__l {
-    @include fudis-heading-l;
-  }
+	&__l {
+		@include fudis-heading-l;
+	}
 
-  &__xl {
-    @include fudis-heading-xl;
-  }
+	&__xl {
+		@include fudis-heading-xl;
+	}
 
-  &__xxl {
-    @include fudis-heading-xxl;
-  }
+	&__xxl {
+		@include fudis-heading-xxl;
+	}
 }

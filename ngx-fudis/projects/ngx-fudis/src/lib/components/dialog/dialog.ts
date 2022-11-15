@@ -4,7 +4,7 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dial
 
 @Injectable()
 export class FudisDialog {
-	constructor(public dialog: MatDialog) {}
+	constructor(public dialog: MatDialog) { }
 
 	/**
 	 * Open new dialog.
@@ -24,7 +24,7 @@ export class FudisDialog {
 	 */
 	private static createConfig(userConfig: MatDialogConfig<any> = {}): MatDialogConfig<any> {
 		const overridableOptions = { hasBackdrop: true };
-		const forcedOptions = { panelClass: 'fudis-dialog-panel' };
+		const forcedOptions = { panelClass: 'fds-dialog-panel' };
 		return { ...overridableOptions, ...userConfig, ...forcedOptions };
 	}
 }

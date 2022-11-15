@@ -28,7 +28,7 @@ describe('ButtonComponent', () => {
 
 	describe('button CSS classes', () => {
 		it('should contain classes for medium sized primary button by default', () => {
-			assertButtonHasClasses('fudis-button', 'fudis-button__primary', 'fudis-button__medium');
+			assertButtonHasClasses('fds-button', 'fds-button__primary', 'fds-button__medium');
 		});
 
 		it('should map the given inputs to the corresponding CSS classes', () => {
@@ -36,7 +36,7 @@ describe('ButtonComponent', () => {
 			component.variant = 'secondary';
 			fixture.detectChanges();
 
-			assertButtonHasClasses('fudis-button', 'fudis-button__small', 'fudis-button__secondary');
+			assertButtonHasClasses('fds-button', 'fds-button__small', 'fds-button__secondary');
 		});
 	});
 

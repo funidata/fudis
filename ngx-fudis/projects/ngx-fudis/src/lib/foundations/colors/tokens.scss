@@ -1,19 +1,21 @@
+/* stylelint-disable color-no-hex */
+
 /*
   --- Primary Colors ---
 */
 
 // Sisu Primary Colors
 
-$sisu-primary-light: #DAEDFF;
-$sisu-primary: #1076DB;
-$sisu-primary-dark: #1D65B8;
+$sisu-primary-light: #daedff;
+$sisu-primary: #1076db;
+$sisu-primary-dark: #1d65b8;
 
 // Into Primary Colors
 
-$into-primary-light: #E0F4FD;
-$into-primary: #0A729E;
-$into-primary-dark: #0E5D81;
-$into-primary-extra-dark: #1B2E36;
+$into-primary-light: #e0f4fd;
+$into-primary: #0a729e;
+$into-primary-dark: #0e5d81;
+$into-primary-extra-dark: #1b2e36;
 
 /*
   --- Secondary & Accent Colors ---
@@ -21,45 +23,43 @@ $into-primary-extra-dark: #1B2E36;
 
 // Grays
 
-$fudis-white: #FFFFFF;
-$fudis-gray-extra-light: #F1F1F1;
-$fudis-gray-light: #D4D4D4;
+$fudis-white: #ffffff;
+$fudis-gray-extra-light: #f1f1f1;
+$fudis-gray-light: #d4d4d4;
 $fudis-gray-middle: #727272;
 $fudis-gray-dark: #484848;
 
 // Accent colors
 
-$fudis-red-light: #F5D9D6;
-$fudis-red: #B83C2E;
-$fudis-yellow-light: #FDEFB4;
-$fudis-yellow: #F1C40F;
-$fudis-green-light: #C6ECD6;
-$fudis-green: #1E874B;
-
-$colors: (
-  ) !default;
-
-$colors: map-merge(('sisu-primary-light': $sisu-primary-light,
-      'sisu-primary': $sisu-primary,
-      'sisu-primary-dark': $sisu-primary-dark,
-      'into-primary-light': $into-primary-light,
-      'into-primary': $into-primary,
-      'into-primary-dark': $into-primary-dark,
-      'into-primary-extra-dark': $into-primary-extra-dark,
-      'white': $fudis-white,
-      'gray-extra-light': $fudis-gray-extra-light,
-      'gray-light': $fudis-gray-light,
-      'gray-middle': $fudis-gray-middle,
-      'gray-dark': $fudis-gray-dark,
-      'red-light': $fudis-red-light,
-      'red': $fudis-red,
-      'yellow-light': $fudis-yellow-light,
-      'yellow': $fudis-yellow,
-      'green-light': $fudis-green-light,
-      'green': $fudis-green,
-      'transparent': transparent,
-    ),
-    $colors
+$fudis-red-light: #f5d9d6;
+$fudis-red: #b83c2e;
+$fudis-yellow-light: #fdefb4;
+$fudis-yellow: #f1c40f;
+$fudis-green-light: #c6ecd6;
+$fudis-green: #1e874b;
+$colors: () !default;
+$colors: map.merge(
+	(
+		'sisu-primary-light': $sisu-primary-light,
+		'sisu-primary': $sisu-primary,
+		'sisu-primary-dark': $sisu-primary-dark,
+		'into-primary-light': $into-primary-light,
+		'into-primary': $into-primary,
+		'into-primary-dark': $into-primary-dark,
+		'into-primary-extra-dark': $into-primary-extra-dark,
+		'white': $fudis-white,
+		'gray-extra-light': $fudis-gray-extra-light,
+		'gray-light': $fudis-gray-light,
+		'gray-middle': $fudis-gray-middle,
+		'gray-dark': $fudis-gray-dark,
+		'red-light': $fudis-red-light,
+		'red': $fudis-red,
+		'yellow-light': $fudis-yellow-light,
+		'yellow': $fudis-yellow,
+		'green-light': $fudis-green-light,
+		'green': $fudis-green,
+		'transparent': transparent,
+	),
+	$colors
 );
-
 $extract: $colors;
