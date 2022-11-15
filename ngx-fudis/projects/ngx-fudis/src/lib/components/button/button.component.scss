@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use '../../foundations/colors/mixins.scss' as colors;
 @use '../../foundations/shadows/mixins.scss' as shadows;
 
@@ -17,17 +18,17 @@
 	&__primary {
 		@include colors.fudis-text-color('white');
 		@include colors.fudis-bg-color('sisu-primary');
-		@include shadow.fudis-box-shadow('sisu-blue');
+		@include shadows.fudis-box-shadow('sisu-blue');
 	}
 
 	&__secondary {
 		@include colors.fudis-text-color('sisu-primary');
-		@include shadow.fudis-box-shadow('sisu-blue');
+		@include shadows.fudis-box-shadow('sisu-blue');
 	}
 
 	&__tertiary {
 		@include colors.fudis-text-color('gray-dark');
-		@include shadow.fudis-box-shadow('fudis-dark');
+		@include shadows.fudis-box-shadow('fudis-dark');
 	}
 
 	&__text-only {

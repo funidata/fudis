@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use '../colors/tokens.scss' as colors;
 
 $sisu-shadow-blue: colors.$sisu-primary 0 0 0 1px;

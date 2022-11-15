@@ -4,7 +4,7 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dial
 
 @Injectable()
 export class FudisDialog {
-	constructor(public dialog: MatDialog) { }
+	constructor(public dialog: MatDialog) {}
 
 	/**
 	 * Open new dialog.

@@ -35,5 +35,7 @@
 	"diffEditor.ignoreTrimWhitespace": false,
 	"css.validate": false,
 	"less.validate": false,
-	"scss.validate": false
+	"scss.validate": false,
+	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false
 }
