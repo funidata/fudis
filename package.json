@@ -1,0 +1,28 @@
+{
+	"name": "fudis",
+	"version": "0.0.13",
+	"description": "Funidata Design System",
+	"main": "index.js",
+	"directories": {
+		"doc": "docs"
+	},
+	"scripts": {
+		"test": "cd ngx-fudis && npm run test",
+		"prepare": "husky install",
+		"lint": "cd ngx-fudis && npm run lint",
+		"stylelint": "cd ngx-fudis && npm run stylelint"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/otm-hanke/fudis.git"
+	},
+	"author": "Funidata",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/otm-hanke/fudis/issues"
+	},
+	"homepage": "https://github.com/otm-hanke/fudis#readme",
+	"devDependencies": {
+		"husky": "^8.0.0"
+	}
+}
