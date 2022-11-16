@@ -1,4 +1,6 @@
 @use 'sass:map';
+
+
 @use '../../foundations/colors/mixins.scss' as colors;
 @use '../../foundations/shadows/mixins.scss' as shadows;
 
@@ -13,7 +15,7 @@
 	text-transform: uppercase;
 	letter-spacing: 1px;
 
-	@include colors.fudis-bg-color('transparent');
+	@include colors.fudis-bg-color('transparent');  
 
 	&__primary {
 		@include colors.fudis-text-color('white');
