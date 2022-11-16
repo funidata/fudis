@@ -1,21 +1,22 @@
-@import './tokens.scss';
+@use 'sass:map';
+@import './tokens';
 
 @mixin fudis-text-color($color) {
-  @if map_has_key($colors, $color) {
-    color: map-get($colors, $color);
-  }
+	@if map_has_key($colors, $color) {
+		color: map.get($colors, $color);
+	}
 
-  @else {
-    @error 'Unknown palette color of #{$color}. Check colors/tokens.scss file for accepted arguments.';
-  }
+ @else {
+		@error 'Unknown palette color of #{$color}. Check colors/tokens.scss file for accepted arguments.';
+	}
 }
 
 @mixin fudis-bg-color($color) {
-  @if map_has_key($colors, $color) {
-    background-color: map-get($colors, $color);
-  }
+	@if map_has_key($colors, $color) {
+		background-color: map.get($colors, $color);
+	}
 
-  @else {
-    @error 'Unknown palette background color of #{$color}. Check colors/tokens.scss file for accepted arguments.';
-  }
+ @else {
+		@error 'Unknown palette background color of #{$color}. Check colors/tokens.scss file for accepted arguments.';
+	}
 }

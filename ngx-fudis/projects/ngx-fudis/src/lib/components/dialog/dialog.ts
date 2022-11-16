@@ -24,7 +24,7 @@ export class FudisDialog {
 	 */
 	private static createConfig(userConfig: MatDialogConfig<any> = {}): MatDialogConfig<any> {
 		const overridableOptions = { hasBackdrop: true };
-		const forcedOptions = { panelClass: 'fudis-dialog-panel' };
+		const forcedOptions = { panelClass: 'fds-dialog-panel' };
 		return { ...overridableOptions, ...userConfig, ...forcedOptions };
 	}
 }

@@ -1,9 +1,12 @@
+@use 'sass:map';
 @use './tokens.scss';
 
 @mixin fudis-box-shadow($shadow) {
 	@if map_has_key(tokens.$shadows, $shadow) {
-		box-shadow: map-get(tokens.$shadows, $shadow);
-	} @else {
+		box-shadow: map.get(tokens.$shadows, $shadow);
+	}
+
+ @else {
 		@error 'Unknown shadow agrument: #{$color}. Check shadows/tokens.scss file for accepted arguments.';
 	}
 }
