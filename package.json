@@ -14,14 +14,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/otm-hanke/fudis.git"
+		"url": "git+https://github.com/funidata/fudis.git"
 	},
 	"author": "Funidata",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/otm-hanke/fudis/issues"
+		"url": "https://github.com/funidata/fudis/issues"
 	},
-	"homepage": "https://github.com/otm-hanke/fudis#readme",
+	"homepage": "https://github.com/funidata/fudis#readme",
 	"devDependencies": {
 		"husky": "^8.0.0"
 	}
