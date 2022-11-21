@@ -4,24 +4,24 @@ import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } fr
 
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
-	selector: '[fds-dialog-title]',
+	selector: '[fudis-s-dialog-title]',
 })
 export class FudisDialogTitleDirective extends MatDialogTitle {}
 
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
-	selector: 'fds-dialog-content',
+	selector: 'fudis-dialog-content',
 })
 export class FudisDialogContentDirective extends MatDialogContent {}
 
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
-	selector: 'fds-dialog-actions',
+	selector: 'fudis-dialog-actions',
 })
 export class FudisDialogActionsDirective extends MatDialogActions {}
 
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
-	selector: '[fds-dialog-close]',
+	selector: '[fudis-dialog-close]',
 })
 export class FudisDialogCloseDirective extends MatDialogClose {}

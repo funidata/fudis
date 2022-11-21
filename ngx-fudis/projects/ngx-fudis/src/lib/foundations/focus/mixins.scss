@@ -1,0 +1,16 @@
+@use './tokens.scss' as focus;
+@use '../colors/tokens.scss' as colors;
+
+
+@mixin fudis-focus-generic{
+	outline: colors.$fudis-focus-generic-outline;
+  outline-offset: 1px;
+  box-shadow: 0 0 0 4px $fudis-white;
+}
+
+@mixin fudis-focus-form-field{
+	border: 1px solid colors.$sisu-primary;
+  box-shadow: 0 0 0 1px $fudis-white;
+  outline: $fudis-focus-form-field-outline;
+  outline-offset: -2px;
+}

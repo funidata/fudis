@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-	selector: 'fds-button',
+	selector: 'fudis-form-text-input',
 	templateUrl: './button.component.html',
 	styleUrls: ['./button.component.scss'],
 })
@@ -37,6 +37,6 @@ export class ButtonComponent {
 	handleClick = new EventEmitter<Event>();
 
 	public get classes(): string[] {
-		return ['fds-button', `fds-button__${this.size}`, `fds-button__${this.variant}`];
+		return ['fudis-button', `fudis-button__${this.size}`, `fudis-button__${this.variant}`];
 	}
 }

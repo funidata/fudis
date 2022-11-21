@@ -1,0 +1,8 @@
+/* stylelint-disable color-no-hex */
+
+@use '../colors/tokens.scss' as colors;
+
+// Variables for Generic and Form field focus outlines
+$fudis-focus-generic-outline: 2px dashed #000000;
+$fudis-focus-form-field-outline: 2px solid colors.$sisu-primary;
+
