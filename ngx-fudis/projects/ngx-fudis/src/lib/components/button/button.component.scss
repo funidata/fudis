@@ -18,12 +18,12 @@
 	&__primary {
 		@include colors.fudis-text-color('white');
 		@include colors.fudis-bg-color('primary');
-		@include shadows.fudis-box-shadow('shadow-primary');
+		@include shadows.fudis-box-shadow('fudis-shadow');
 	}
 
 	&__secondary {
 		@include colors.fudis-text-color('primary');
-		@include shadows.fudis-box-shadow('shadow-primary');
+		@include shadows.fudis-box-shadow('fudis-shadow');
 	}
 
 	&__tertiary {
