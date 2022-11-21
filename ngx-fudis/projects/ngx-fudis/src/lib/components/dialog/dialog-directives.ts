@@ -4,7 +4,7 @@ import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } fr
 
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
-	selector: '[fudis-s-dialog-title]',
+	selector: '[fudis-dialog-title]',
 })
 export class FudisDialogTitleDirective extends MatDialogTitle {}
 

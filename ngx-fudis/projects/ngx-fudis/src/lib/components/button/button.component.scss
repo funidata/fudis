@@ -17,7 +17,7 @@
 	@include borders.fudis-border('2px', 'solid', 'sisu-primary');		
 
 	&:focus{
-		@include focus.fudis-focus-generic
+		@include focus.fudis-focus-generic;
 	}
 
 	&__primary {

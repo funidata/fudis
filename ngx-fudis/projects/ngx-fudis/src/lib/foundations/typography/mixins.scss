@@ -107,9 +107,9 @@
 	@include fudis-letter-spacing("1px");
 
 	font-family: tokens.$fudis-font-family, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: 0.875rem;
-	font-weight: 600;
-	line-height: 1rem;
+	font-size: tokens.$fudis-body-m-font-size;
+	font-weight: tokens.$fudis-bold;
+	line-height: tokens.$fudis-body-s-line-height;
 	text-transform: uppercase;
 }
 
