@@ -21,7 +21,7 @@
 @mixin fudis-outline($width, $style, $color) {
 	@if map_has_key(spacing.$fudis-pixel-tokens, $width) and map_has_key(borderTokens.$fudis-border-styles, $style) and map_has_key(colors.$fudis-colors, $color) {
 		outline: map.get(spacing.$fudis-pixel-tokens, $width) map.get(borderTokens.$fudis-border-styles, $style) map.get(colors.$fudis-colors, $color);
-		outline-offset: -1px;
+		outline-offset: -(map.get(spacing.$fudis-pixel-tokens, $width));
 	}
 
  @else {

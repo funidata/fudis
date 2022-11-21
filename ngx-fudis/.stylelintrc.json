@@ -1,9 +1,17 @@
 {
-	"extends": ["stylelint-config-standard-scss", "stylelint-config-prettier-scss"],
+	"extends": [
+		"stylelint-config-standard-scss",
+		"stylelint-config-prettier-scss"
+	],
+	"ignoreFiles": [
+		"dist/**/*.scss"
+	],
 	"rules": {
 		"color-no-hex": true,
 		"color-hex-length": "long",
-		"unit-disallowed-list": [],
+		"unit-disallowed-list": [
+			"px"
+		],
 		"function-parentheses-space-inside": "never-single-line",
 		"max-nesting-depth": 3,
 		"declaration-no-important": true,
@@ -13,9 +21,18 @@
 		"at-rule-empty-line-before": [
 			"always",
 			{
-				"except": ["first-nested", "blockless-after-blockless"],
-				"ignoreAtRules": ["font-face", "mixin", "error"],
-				"ignore": ["after-comment"]
+				"except": [
+					"first-nested",
+					"blockless-after-blockless"
+				],
+				"ignoreAtRules": [
+					"font-face",
+					"mixin",
+					"error"
+				],
+				"ignore": [
+					"after-comment"
+				]
 			}
 		]
 	}
