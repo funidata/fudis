@@ -6,18 +6,18 @@
   --- Primary Colors ---
 */
 
-// Sisu Primary Colors
+// // Sisu Primary Colors
 
-$sisu-primary-light: #daedff;
-$sisu-primary: #1076db;
-$sisu-primary-dark: #1d65b8;
+// $sisu-primary-light: #daedff;
+// $sisu-primary: #1076db;
+// $sisu-primary-dark: #1d65b8;
 
-// Into Primary Colors
+// // Into Primary Colors
 
-$into-primary-light: #e0f4fd;
-$into-primary: #0a729e;
-$into-primary-dark: #0e5d81;
-$into-primary-extra-dark: #1b2e36;
+// $into-primary-light: #e0f4fd;
+// $into-primary: #0a729e;
+// $into-primary-dark: #0e5d81;
+// $into-primary-extra-dark: #1b2e36;
 
 /*
   --- Secondary & Accent Colors ---
@@ -42,13 +42,10 @@ $fudis-green: #1e874b;
 $colors: () !default;
 $colors: map.merge(
 	(
-		'sisu-primary-light': $sisu-primary-light,
-		'sisu-primary': $sisu-primary,
-		'sisu-primary-dark': $sisu-primary-dark,
-		'into-primary-light': $into-primary-light,
-		'into-primary': $into-primary,
-		'into-primary-dark': $into-primary-dark,
-		'into-primary-extra-dark': $into-primary-extra-dark,
+		'primary-light': var(--color-primary-light),
+		'primary': var(--color-primary),
+		'primary-dark': var(--color-primary-dark),
+		'primary-extra-dark': var(--color-primary-extra-dark),
 		'white': $fudis-white,
 		'gray-extra-light': $fudis-gray-extra-light,
 		'gray-light': $fudis-gray-light,
