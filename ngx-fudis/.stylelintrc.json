@@ -10,7 +10,8 @@
 		"color-no-hex": true,
 		"color-hex-length": "long",
 		"unit-disallowed-list": [
-			"px"
+			"px",
+			"rem"
 		],
 		"function-parentheses-space-inside": "never-single-line",
 		"max-nesting-depth": 3,

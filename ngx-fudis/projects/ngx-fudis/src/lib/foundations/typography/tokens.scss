@@ -1,0 +1,34 @@
+/* stylelint-disable unit-disallowed-list */
+@import "./fonts";
+
+$fudis-font-family: 'Fira Sans';
+
+// Body text font size
+$fudis-body-l-font-size: 1rem;
+$fudis-body-m-font-size: 0.875rem;
+$fudis-body-s-font-size: 0.75rem;
+
+// Heading font size
+$fudis-heading-xxl-font-size: 2.25rem;
+$fudis-heading-xl-font-size: 1.75rem;
+$fudis-heading-l-font-size: 1.5rem;
+$fudis-heading-m-font-size: 1.25rem;
+$fudis-heading-s-font-size: 1.125rem;
+$fudis-heading-xs-font-size: 1rem;
+$fudis-heading-xxs-font-size: 0.875rem;
+
+// Body text line height
+$fudis-body-l-line-height: 1.25rem;
+$fudis-body-m-line-height: 1.125rem;
+$fudis-body-s-line-height: 1rem;
+
+// Heading line heights
+$fudis-heading-l-line-height: 2.5rem;
+$fudis-heading-m-line-height: 1.75rem;
+$fudis-heading-s-line-height: 1.125rem;
+
+// Font weight 
+$fudis-light: 300;
+$fudis-regular: 400;
+$fudis-medium: 500;
+$fudis-bold: 600;
