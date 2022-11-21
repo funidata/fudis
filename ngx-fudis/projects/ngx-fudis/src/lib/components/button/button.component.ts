@@ -9,12 +9,12 @@ export class ButtonComponent {
 	/**
 	 * Button variant options
 	 */
-	@Input() variant: 'primary' | 'secondary' | 'tertiary' | 'text-only' = 'primary';
+	@Input() variant: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
 	/**
 	 * Button size and type options
 	 */
-	@Input() size: 'small' | 'medium' | 'large' = 'medium';
+	@Input() size: 'small' | 'medium' = 'medium';
 
 	@Input() type: 'button' | 'submit' = 'button';
 

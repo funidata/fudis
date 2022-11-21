@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use '../../foundations/colors/mixins.scss' as colors;
+@use '../../foundations/focus/mixins.scss' as focus;
 @use '../../foundations/shadows/mixins.scss' as shadows;
 @use '../../foundations/borders/mixins.scss' as borders;
 @use '../../foundations/typography/mixins.scss' as typography;
@@ -9,51 +10,46 @@
 	@include colors.fudis-bg-color('transparent');  
 	@include typography.fudis-button-typography;
 
+	padding: 0 0.5rem;
+	box-sizing: border-box;
 	cursor: pointer;
 	display: inline-block;
+
+	@include borders.fudis-border('2px', 'solid', 'sisu-primary');		
+
+	&:focus{
+		@include focus.fudis-focus-generic
+	}
 
 	&__primary {
 		@include colors.fudis-text-color('white');
 		@include colors.fudis-bg-color('sisu-primary');
-		@include borders.fudis-border('2px', 'solid', 'sisu-primary');		
 	}
 
 	&__secondary {
 		@include colors.fudis-text-color('sisu-primary');
-		
+		@include colors.fudis-bg-color('white');
 	}
 
 	&__tertiary {
-		@include colors.fudis-text-color('gray-dark');
-		@include shadows.fudis-box-shadow('fudis-dark');
-	}
-
-	&__text-only {
 		@include colors.fudis-text-color('sisu-primary');
-
-		text-transform: none;
-		font-weight: 400;
+		@include borders.fudis-border('2px', 'solid', 'transparent');		
 	}
 
 	&__small {
 		font-size: 0.75rem;
-		padding: 0 0.5rem;
 		height: 1.5rem;
 	}
 
 	&__medium {
 		font-size: 0.875rem;
-		padding: 0 1rem;
 		height: 2rem;
-	}
-
-	&__large {
-		font-size: 1rem;
-		padding: 0.5rem 1.5rem;
 	}
 
 	&:disabled {
 		@include colors.fudis-text-color('gray-dark');
 		@include colors.fudis-bg-color('gray-light');
+		@include borders.fudis-border('2px', 'solid', 'transparent');
+		@include borders.fudis-outline('1px', 'dashed', 'gray-middle');
 	}
 }

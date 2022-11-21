@@ -37,12 +37,6 @@ Tertiary.args = {
 	label: 'Button',
 };
 
-export const TextOnly = Template.bind({});
-TextOnly.args = {
-	variant: 'text-only',
-	label: 'Button',
-};
-
 export const Disabled = Template.bind({});
 Disabled.args = {
 	label: 'Button',
