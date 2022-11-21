@@ -5,7 +5,7 @@
 .fds-button {
 	font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-weight: 600;
-	margin: 0.25rem solid transparent;
+	margin: 0.25rem;
 	border-radius: 2px;
 	cursor: pointer;
 	display: inline-block;
@@ -17,13 +17,13 @@
 
 	&__primary {
 		@include colors.fudis-text-color('white');
-		@include colors.fudis-bg-color('sisu-primary');
-		@include shadows.fudis-box-shadow('sisu-blue');
+		@include colors.fudis-bg-color('primary');
+		@include shadows.fudis-box-shadow('shadow-primary');
 	}
 
 	&__secondary {
-		@include colors.fudis-text-color('sisu-primary');
-		@include shadows.fudis-box-shadow('sisu-blue');
+		@include colors.fudis-text-color('primary');
+		@include shadows.fudis-box-shadow('shadow-primary');
 	}
 
 	&__tertiary {
@@ -32,7 +32,7 @@
 	}
 
 	&__text-only {
-		@include colors.fudis-text-color('sisu-primary');
+		@include colors.fudis-text-color('primary');
 
 		text-transform: none;
 		font-weight: 400;
