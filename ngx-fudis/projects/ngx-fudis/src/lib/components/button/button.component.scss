@@ -1,29 +1,26 @@
 @use 'sass:map';
 @use '../../foundations/colors/mixins.scss' as colors;
 @use '../../foundations/shadows/mixins.scss' as shadows;
+@use '../../foundations/borders/mixins.scss' as borders;
+@use '../../foundations/typography/mixins.scss' as typography;
 
 .fudis-button {
-	font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-weight: 600;
-	margin: 0.25rem solid transparent;
-	border-radius: 2px;
+	@include borders.fudis-border-radius('2px');
+	@include colors.fudis-bg-color('transparent');  
+	@include typography.fudis-button-typography;
+
 	cursor: pointer;
 	display: inline-block;
-	line-height: 1;
-	text-transform: uppercase;
-	letter-spacing: 1px;
-
-	@include colors.fudis-bg-color('transparent');  
 
 	&__primary {
 		@include colors.fudis-text-color('white');
 		@include colors.fudis-bg-color('sisu-primary');
-		@include shadows.fudis-box-shadow('sisu-blue');
+		@include borders.fudis-border('2px', 'solid', 'sisu-primary');		
 	}
 
 	&__secondary {
 		@include colors.fudis-text-color('sisu-primary');
-		@include shadows.fudis-box-shadow('sisu-blue');
+		
 	}
 
 	&__tertiary {
@@ -47,7 +44,7 @@
 	&__medium {
 		font-size: 0.875rem;
 		padding: 0 1rem;
-		height: 2.2rem;
+		height: 2rem;
 	}
 
 	&__large {
@@ -58,7 +55,5 @@
 	&:disabled {
 		@include colors.fudis-text-color('gray-dark');
 		@include colors.fudis-bg-color('gray-light');
-
-		box-shadow: gray 0 0 0 1px;
 	}
 }

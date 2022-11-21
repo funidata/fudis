@@ -7,6 +7,6 @@
 	}
 
  @else {
-		@error 'Unknown shadow agrument: #{$color}. Check shadows/tokens.scss file for accepted arguments.';
+		@error 'Unknown shadow agrument: #{$shadow}. Check shadows/tokens.scss file for accepted arguments.';
 	}
 }

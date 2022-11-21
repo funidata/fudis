@@ -1,5 +1,6 @@
+@use 'sass:map';
 @use '@angular/material' as mat;
-@import "../spacing/tokens";
+@use '../spacing/tokens.scss' as spacing;
 @import "./fonts";
 
 $fudis-font-family: 'Fira Sans';
@@ -41,7 +42,7 @@ $fudis-bold: 600;
   font-size: $fudis-body-l-font-size;
   font-weight: $fudis-light;
   line-height: $fudis-body-l-line-height;
-  margin-bottom: $fudis-spacing-l;
+  margin-bottom: spacing.$fudis-spacing-l;
 }
 
 @mixin fudis-body-l-regular {
@@ -49,7 +50,7 @@ $fudis-bold: 600;
   font-size: $fudis-body-l-font-size;
   font-weight: $fudis-regular;
   line-height: $fudis-body-l-line-height;
-  margin-bottom: $fudis-spacing-l;
+  margin-bottom: spacing.$fudis-spacing-l;
 }
 
 @mixin fudis-body-m-light {
@@ -57,7 +58,7 @@ $fudis-bold: 600;
   font-size: $fudis-body-m-font-size;
   font-weight: $fudis-light;
   line-height: $fudis-body-m-line-height;
-  margin-bottom: $fudis-spacing-m;
+  margin-bottom: spacing.$fudis-spacing-m;
 }
 
 @mixin fudis-body-m-regular {
@@ -65,7 +66,7 @@ $fudis-bold: 600;
   font-size: $fudis-body-m-font-size;
   font-weight: $fudis-regular;
   line-height: $fudis-body-m-line-height;
-  margin-bottom: $fudis-spacing-m;
+  margin-bottom: spacing.$fudis-spacing-m;
 }
 
 @mixin fudis-body-s-regular {
@@ -82,7 +83,7 @@ $fudis-bold: 600;
   font-size: $fudis-heading-xxl-font-size;
   font-weight: $fudis-medium;
   line-height: $fudis-heading-l-line-height;
-  margin-bottom: $fudis-spacing-s;
+  margin-bottom: spacing.$fudis-spacing-s;
 }
 
 @mixin fudis-heading-xl {
@@ -90,7 +91,7 @@ $fudis-bold: 600;
   font-size: $fudis-heading-xl-font-size;
   font-weight: $fudis-medium;
   line-height: $fudis-heading-l-line-height;
-  margin-bottom: $fudis-spacing-s;
+  margin-bottom: spacing.$fudis-spacing-s;
 }
 
 @mixin fudis-heading-l {
@@ -98,7 +99,7 @@ $fudis-bold: 600;
   font-size: $fudis-heading-l-font-size;
   font-weight: $fudis-medium;
   line-height: $fudis-heading-m-line-height;
-  margin-bottom: $fudis-spacing-xs;
+  margin-bottom: spacing.$fudis-spacing-xs;
 }
 
 @mixin fudis-heading-m {
@@ -106,7 +107,7 @@ $fudis-bold: 600;
   font-size: $fudis-heading-m-font-size;
   font-weight: $fudis-medium;
   line-height: $fudis-heading-m-line-height;
-  margin-bottom: $fudis-spacing-xs;
+  margin-bottom: spacing.$fudis-spacing-xs;
 }
 
 @mixin fudis-heading-s {
@@ -114,7 +115,7 @@ $fudis-bold: 600;
   font-size: $fudis-heading-s-font-size;
   font-weight: $fudis-medium;
   line-height: $fudis-heading-s-line-height;
-  margin-bottom: $fudis-spacing-xs;
+  margin-bottom: spacing.$fudis-spacing-xs;
 }
 
 @mixin fudis-heading-xs {
@@ -122,7 +123,7 @@ $fudis-bold: 600;
   font-size: $fudis-heading-xs-font-size;
   font-weight: $fudis-bold;
   line-height: $fudis-heading-s-line-height;
-  margin-bottom: $fudis-spacing-xs;
+  margin-bottom: spacing.$fudis-spacing-xs;
 }
 
 @mixin fudis-heading-xxs {
@@ -130,5 +131,25 @@ $fudis-bold: 600;
   font-size: $fudis-heading-xxs-font-size;
   font-weight: $fudis-bold;
   line-height: $fudis-heading-s-line-height;
-  margin-bottom: $fudis-spacing-xs;
+  margin-bottom: spacing.$fudis-spacing-xs;
+}
+
+@mixin fudis-button-typography {
+	@include fudis-letter-spacing("1px");
+
+	font-family: $fudis-font-family, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 0.875rem;
+	font-weight: 600;
+	line-height: 1rem;
+	text-transform: uppercase;
+}
+
+@mixin fudis-letter-spacing($width) {
+	@if map_has_key(spacing.$fudis-pixel-tokens, $width) {
+		letter-spacing: map.get(spacing.$fudis-pixel-tokens, $width);
+	}
+
+ @else {
+		@error 'Unknown letter-spacing parameter. It can only be "1px", "2px" or "3px"';
+	}
 }
