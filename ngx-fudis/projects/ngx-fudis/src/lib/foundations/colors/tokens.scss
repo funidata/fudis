@@ -39,29 +39,24 @@ $fudis-yellow-light: #fdefb4;
 $fudis-yellow: #f1c40f;
 $fudis-green-light: #c6ecd6;
 $fudis-green: #1e874b;
-$colors: () !default;
-$colors: map.merge(
-	(
-		'sisu-primary-light': $sisu-primary-light,
-		'sisu-primary': $sisu-primary,
-		'sisu-primary-dark': $sisu-primary-dark,
-		'into-primary-light': $into-primary-light,
-		'into-primary': $into-primary,
-		'into-primary-dark': $into-primary-dark,
-		'into-primary-extra-dark': $into-primary-extra-dark,
-		'white': $fudis-white,
-		'gray-extra-light': $fudis-gray-extra-light,
-		'gray-light': $fudis-gray-light,
-		'gray-middle': $fudis-gray-middle,
-		'gray-dark': $fudis-gray-dark,
-		'red-light': $fudis-red-light,
-		'red': $fudis-red,
-		'yellow-light': $fudis-yellow-light,
-		'yellow': $fudis-yellow,
-		'green-light': $fudis-green-light,
-		'green': $fudis-green,
-		'transparent': transparent,
-	),
-	$colors
+$fudis-colors: (
+	'sisu-primary-light': $sisu-primary-light,
+	'sisu-primary': $sisu-primary,
+	'sisu-primary-dark': $sisu-primary-dark,
+	'into-primary-light': $into-primary-light,
+	'into-primary': $into-primary,
+	'into-primary-dark': $into-primary-dark,
+	'into-primary-extra-dark': $into-primary-extra-dark,
+	'white': $fudis-white,
+	'gray-extra-light': $fudis-gray-extra-light,
+	'gray-light': $fudis-gray-light,
+	'gray-middle': $fudis-gray-middle,
+	'gray-dark': $fudis-gray-dark,
+	'red-light': $fudis-red-light,
+	'red': $fudis-red,
+	'yellow-light': $fudis-yellow-light,
+	'yellow': $fudis-yellow,
+	'green-light': $fudis-green-light,
+	'green': $fudis-green,
+	'transparent': transparent,
 );
-$extract: $colors;

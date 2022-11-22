@@ -1,64 +1,52 @@
 @use 'sass:map';
 @use '../../foundations/colors/mixins.scss' as colors;
-@use '../../foundations/shadows/mixins.scss' as shadows;
+@use '../../foundations/focus/mixins.scss' as focus;
+@use '../../foundations/borders/mixins.scss' as borders;
+@use '../../foundations/typography/mixins.scss' as typography;
+@use '../../foundations/spacing/tokens.scss' as spacing;
 
-.fds-button {
-	font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-weight: 600;
-	margin: 0.25rem solid transparent;
-	border-radius: 2px;
+.fudis-button {
+	@include borders.fudis-border-radius('2px');
+	@include colors.fudis-bg-color('transparent');  
+	@include typography.fudis-button-typography;
+
+	padding: 0 spacing.$fudis-spacing-xs;
 	cursor: pointer;
 	display: inline-block;
-	line-height: 1;
-	text-transform: uppercase;
-	letter-spacing: 1px;
 
-	@include colors.fudis-bg-color('transparent');  
+	@include borders.fudis-border('2px', 'solid', 'sisu-primary');		
+
+	&:focus{
+		@include focus.fudis-focus-generic;
+	}
 
 	&__primary {
 		@include colors.fudis-text-color('white');
 		@include colors.fudis-bg-color('sisu-primary');
-		@include shadows.fudis-box-shadow('sisu-blue');
 	}
 
 	&__secondary {
 		@include colors.fudis-text-color('sisu-primary');
-		@include shadows.fudis-box-shadow('sisu-blue');
+		@include colors.fudis-bg-color('white');
 	}
 
 	&__tertiary {
-		@include colors.fudis-text-color('gray-dark');
-		@include shadows.fudis-box-shadow('fudis-dark');
-	}
-
-	&__text-only {
 		@include colors.fudis-text-color('sisu-primary');
-
-		text-transform: none;
-		font-weight: 400;
+		@include borders.fudis-border('2px', 'solid', 'transparent');		
 	}
 
 	&__small {
-		font-size: 0.75rem;
-		padding: 0 0.5rem;
-		height: 1.5rem;
+		height: spacing.$fudis-spacing-m;
 	}
 
 	&__medium {
-		font-size: 0.875rem;
-		padding: 0 1rem;
-		height: 2.2rem;
-	}
-
-	&__large {
-		font-size: 1rem;
-		padding: 0.5rem 1.5rem;
+		height: spacing.$fudis-spacing-l;
 	}
 
 	&:disabled {
 		@include colors.fudis-text-color('gray-dark');
 		@include colors.fudis-bg-color('gray-light');
-
-		box-shadow: gray 0 0 0 1px;
+		@include borders.fudis-border('2px', 'solid', 'transparent');
+		@include borders.fudis-outline('1px', 'dashed', 'gray-middle');
 	}
 }
