@@ -1,3 +1,6 @@
-.fds-dialog-panel {
-	border: 4px solid black;
+@use '../../foundations/colors/tokens.scss' as colors;
+@use '../../foundations/spacing/tokens.scss' as spacings;
+
+.fudis-dialog-panel {
+	border: spacings.$fudis-spacing-xxs solid colors.$fudis-gray-dark;
 }

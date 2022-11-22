@@ -3,16 +3,22 @@
 		"stylelint-config-standard-scss",
 		"stylelint-config-prettier-scss"
 	],
+	"ignoreFiles": [
+		"dist/**/*.scss"
+	],
 	"rules": {
 		"color-no-hex": true,
 		"color-hex-length": "long",
-		"unit-disallowed-list": [],
+		"unit-disallowed-list": [
+			"px",
+			"rem"
+		],
 		"function-parentheses-space-inside": "never-single-line",
 		"max-nesting-depth": 3,
 		"declaration-no-important": true,
 		"selector-max-empty-lines": 0,
 		"selector-max-class": 2,
-		"selector-class-pattern": "fds-[a-z]+",
+		"selector-class-pattern": "fudis-[a-z]+",
 		"at-rule-empty-line-before": [
 			"always",
 			{

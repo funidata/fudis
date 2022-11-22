@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-	selector: 'fds-button',
+	selector: 'fudis-button',
 	templateUrl: './button.component.html',
 	styleUrls: ['./button.component.scss'],
 })
@@ -9,12 +9,12 @@ export class ButtonComponent {
 	/**
 	 * Button variant options
 	 */
-	@Input() variant: 'primary' | 'secondary' | 'tertiary' | 'text-only' = 'primary';
+	@Input() variant: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
 	/**
 	 * Button size and type options
 	 */
-	@Input() size: 'small' | 'medium' | 'large' = 'medium';
+	@Input() size: 'small' | 'medium' = 'medium';
 
 	@Input() type: 'button' | 'submit' = 'button';
 
@@ -37,6 +37,6 @@ export class ButtonComponent {
 	handleClick = new EventEmitter<Event>();
 
 	public get classes(): string[] {
-		return ['fds-button', `fds-button__${this.size}`, `fds-button__${this.variant}`];
+		return ['fudis-button', `fudis-button__${this.size}`, `fudis-button__${this.variant}`];
 	}
 }
