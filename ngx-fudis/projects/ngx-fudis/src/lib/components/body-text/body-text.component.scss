@@ -1,33 +1,23 @@
-@import '../../foundations/typography/mixins';
+@use '../../foundations/typography/mixins' as typography;
 
-.fds-body-text {
+.fudis-body-text {
 	&__s-regular {
-		font-size: 0.75rem;
-
-		@include fudis-body-s-regular;
+		@include typography.fudis-body-s-regular;
 	}
 
 	&__m-regular {
-		font-size: 0.875rem;
-
-		@include fudis-body-m-regular;
+		@include typography.fudis-body-m-regular;
 	}
 
 	&__l-regular {
-		font-size: 1rem;
-
-		@include fudis-body-l-regular;
+		@include typography.fudis-body-l-regular;
 	}
 
 	&__m-light {
-		font-size: 0.875rem;
-
-		@include fudis-body-m-light;
+		@include typography.fudis-body-m-light;
 	}
 
 	&__l-light {
-		font-size: 1rem;
-
-		@include fudis-body-l-light;
+		@include typography.fudis-body-l-light;
 	}
 }
