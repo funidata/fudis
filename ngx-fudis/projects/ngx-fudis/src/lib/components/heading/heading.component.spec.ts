@@ -31,7 +31,7 @@ describe('HeadingComponent', () => {
 		expect(Tag).toBeTruthy();
 	}
 
-	describe('heading has CSS classes', () => {
+	describe('heading has CSS classes and prefered heading tag', () => {
 		it('should add size s to header', () => {
 			component.size = 's';
 			fixture.detectChanges();
