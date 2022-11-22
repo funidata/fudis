@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HeadingComponent } from './heading.component';
 
 describe('HeadingComponent', () => {
@@ -16,9 +15,35 @@ describe('HeadingComponent', () => {
 		fixture = TestBed.createComponent(HeadingComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
-	});
+	}); 
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
-	});
+	function getHeading(): HTMLElement {
+		return fixture.nativeElement.querySelector('.fudis-heading__s') as HTMLElement;
+	}
+
+	function assertHeadingHasClasses(...classes: string[]): void {
+		const headingClasses = getHeading()?.className ?? '';
+		expect(headingClasses.split(' ').sort()).toEqual([...classes].sort());
+	}
+
+	function assertHeadingHasTag(tag: string): void {
+		const Tag = fixture.nativeElement.querySelector('h1');
+		expect(Tag).toBeTruthy();
+	}
+
+	describe('heading has CSS classes', () => {
+		it('should add size s to header', () => {
+			component.size = 's';
+			fixture.detectChanges();
+	
+			assertHeadingHasClasses('fudis-heading__s');
+		});
+
+		it('should add tags to header', () => {
+			component.tag = 'h1';
+			fixture.detectChanges();
+	
+			assertHeadingHasTag('h1');
+		});
+	})
 });

@@ -9,9 +9,15 @@ type HeadingSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
 	styleUrls: ['./heading.component.scss'],
 })
 export class HeadingComponent {
-	@Input() size: HeadingSize;
+	@Input() size: HeadingSize = 'l';
 
 	@Input() text: string;
 
-	@Input() tag: HeadingLevel;
+	@Input() tag: HeadingLevel = 'h2';
+
+	@Input() className: string;
+
+	public get classes(): string[] {
+		return [`fudis-heading__${this.size}`];
+	}
 }
