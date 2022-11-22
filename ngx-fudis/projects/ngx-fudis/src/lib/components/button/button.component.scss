@@ -14,7 +14,7 @@
 	cursor: pointer;
 	display: inline-block;
 
-	@include borders.fudis-border('2px', 'solid', 'sisu-primary');		
+	@include borders.fudis-border('2px', 'solid', 'primary');		
 
 	&:focus{
 		@include focus.fudis-focus-generic;
@@ -22,16 +22,16 @@
 
 	&__primary {
 		@include colors.fudis-text-color('white');
-		@include colors.fudis-bg-color('sisu-primary');
+		@include colors.fudis-bg-color('primary');
 	}
 
 	&__secondary {
-		@include colors.fudis-text-color('sisu-primary');
+		@include colors.fudis-text-color('primary');
 		@include colors.fudis-bg-color('white');
 	}
 
 	&__tertiary {
-		@include colors.fudis-text-color('sisu-primary');
+		@include colors.fudis-text-color('primary');
 		@include borders.fudis-border('2px', 'solid', 'transparent');		
 	}
 

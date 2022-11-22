@@ -1,4 +1,5 @@
 @use '../spacing/tokens.scss' as spacing;
+@use '../borders/mixins.scss' as borders;
 @import './tokens';
 @import '../colors/tokens';
 
@@ -10,7 +11,8 @@
 }
 
 @mixin fudis-focus-form-field{
-	border: spacing.$fudis-pixel-1 solid $sisu-primary;
+	@include borders.fudis-border('1px', 'solid', 'primary');
+
   box-shadow: 0 0 0 spacing.$fudis-pixel-1 $fudis-white;
   outline: $fudis-focus-form-field-outline;
   outline-offset: -(spacing.$fudis-pixel-2);
