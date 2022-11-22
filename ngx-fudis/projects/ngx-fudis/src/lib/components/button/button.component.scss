@@ -14,7 +14,7 @@
 	cursor: pointer;
 	display: inline-block;
 
-	@include borders.fudis-border('2px', 'solid', 'sisu-primary');		
+	@include borders.fudis-border('2px', 'solid', 'primary');		
 
 	&:focus{
 		@include focus.fudis-focus-generic;
