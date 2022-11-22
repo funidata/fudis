@@ -15,7 +15,7 @@ describe('HeadingComponent', () => {
 		fixture = TestBed.createComponent(HeadingComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
-	}); 
+	});
 
 	function getHeading(): HTMLElement {
 		return fixture.nativeElement.querySelector('.fudis-heading__s') as HTMLElement;
@@ -27,7 +27,7 @@ describe('HeadingComponent', () => {
 	}
 
 	function assertHeadingHasTag(tag: string): void {
-		const Tag = fixture.nativeElement.querySelector('h1');
+		const Tag = fixture.nativeElement.querySelector(tag);
 		expect(Tag).toBeTruthy();
 	}
 
@@ -35,15 +35,14 @@ describe('HeadingComponent', () => {
 		it('should add size s to header', () => {
 			component.size = 's';
 			fixture.detectChanges();
-	
 			assertHeadingHasClasses('fudis-heading__s');
 		});
 
 		it('should add tags to header', () => {
-			component.tag = 'h1';
+			const headingLevel = 'h3';
+			component.tag = headingLevel;
 			fixture.detectChanges();
-	
-			assertHeadingHasTag('h1');
+			assertHeadingHasTag(headingLevel);
 		});
-	})
+	});
 });
