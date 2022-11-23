@@ -1,0 +1,21 @@
+@use 'sass:map';
+@use '../../../foundations/borders/mixins.scss' as borders;
+@use '../../../foundations/spacing/tokens.scss' as spacings;
+@use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/colors/tokens.scss' as colors;
+
+.fudis-form-field {
+	& label {
+		@include typography.fudis-text-field-label;
+	}
+
+	& input {
+		@include borders.fudis-border('1px', 'solid', 'gray-middle');
+		@include typography.fudis-body-l-light;
+		@include borders.fudis-border-radius('2px');
+
+		line-height: 1.5;
+		padding: spacings.$fudis-spacing-xxs spacings.$fudis-spacing-s;
+		height: spacings.$fudis-spacing-l;
+	}
+}
