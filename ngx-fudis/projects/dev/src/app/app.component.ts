@@ -15,6 +15,8 @@ import { Component } from '@angular/core';
 			<fudis-body-text size="l-light">Haloo</fudis-body-text>
 			<fudis-body-text size="m-light">Haloo</fudis-body-text>
 		</div>
+
+		<fudis-text-input></fudis-text-input>
 	`,
 	styles: [],
 })
