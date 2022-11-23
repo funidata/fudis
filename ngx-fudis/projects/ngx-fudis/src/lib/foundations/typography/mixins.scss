@@ -103,6 +103,15 @@
   margin-bottom: spacing.$fudis-spacing-xs;
 }
 
+// Other UI styles 
+
+@mixin fudis-text-field-label {
+  font-family: tokens.$fudis-font-family;
+  font-size: tokens.$fudis-body-m-font-size;
+  font-weight: tokens.$fudis-regular;
+  text-transform: tokens.$fudis-all-caps;
+}
+
 @mixin fudis-button-typography {
 	@include fudis-letter-spacing("1px");
 
