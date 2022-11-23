@@ -1,7 +1,5 @@
 <mat-form-field class="fudis-form-field">
 	<label [for]="id">Inputin label</label>
-	<!-- <mat-label>Inputin labeli</mat-label> -->
-	<input matInput [id]="id" [type]="type" [formControl]="emailFormControl" class="fudis-text-input" required />
-	<mat-hint>Mat-hint näkyy koko ajan</mat-hint>
-	<mat-error *ngIf="emailFormControl.invalid">{{ getErrorMessage }}</mat-error>
+	<input matInput [id]="id" [type]="type" [formControl]="control" class="fudis-text-input" required />
+	<mat-error *ngIf="control.hasError('required')">Pakollinen kenttä</mat-error>
 </mat-form-field>
