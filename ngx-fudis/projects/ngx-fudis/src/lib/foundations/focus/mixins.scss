@@ -5,9 +5,9 @@
 
 
 @mixin fudis-focus-generic{
+  box-shadow: 0 0 0 spacing.$fudis-spacing-xxs $fudis-white;
 	outline: $fudis-focus-generic-outline;
   outline-offset: spacing.$fudis-pixel-1;
-  box-shadow: 0 0 0 spacing.$fudis-spacing-xxs $fudis-white;
 }
 
 @mixin fudis-focus-form-field{
