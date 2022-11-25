@@ -21,6 +21,7 @@
 		"selector-max-class": 2,
 		"selector-class-pattern": "fudis-([a-z][a-z0-9]*)(-[a-z0-9]+)*$",
 		"no-descending-specificity": true,
+		"block-opening-brace-space-before": "always",
 		"property-disallowed-list": [
 			"color",
 			"background-color",

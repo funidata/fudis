@@ -33,7 +33,7 @@
 
 
 @mixin fudis-border-radius($width) {
-	@if map_has_key(spacing.$fudis-pixel-tokens, $width){
+	@if map_has_key(spacing.$fudis-pixel-tokens, $width) {
 		border-radius: map.get(spacing.$fudis-pixel-tokens, $width);
 	}
 
