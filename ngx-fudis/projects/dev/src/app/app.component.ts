@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 			<h1>Welcome to {{ title }}!</h1>
 			<button mat-button>Nappi</button>
 			<!-- <app-dialog-test></app-dialog-test> -->
-			<fudis-checkbox>Tämä on fudis checkbox</fudis-checkbox>
+			<fudis-checkbox color="primary">Tämä on fudis checkbox</fudis-checkbox>
 			<!-- <fudis-heading size="xl" tag="h2"></fudis-heading>
 			<fudis-body-text size="l-regular">Haloo</fudis-body-text>
 			<fudis-body-text size="m-regular">Haloo</fudis-body-text>

@@ -1,4 +1,4 @@
-@use '../../theme/fudis-theme.scss';
+@use '@angular/material' as mat;
 @use 'sass:map';
 @use '../../foundations/colors/mixins.scss' as colors;
 @use '../../foundations/focus/mixins.scss' as focus;
@@ -6,19 +6,6 @@
 @use '../../foundations/typography/mixins.scss' as typography;
 @use '../../foundations/spacing/tokens.scss' as spacing;
 
+
 .fudis-checkbox {
-	& .mat-checkbox-background {
-		@include colors.fudis-bg-color('primary');
-	}
-	// &__primary {
-	// 	font-size: xx-large;
-	// 	&.mat-checkbox-checked {
-	// 		::ng-deep .mat-checkbox-background {
-	// 			background-color: red;
-	// 		}
-	// 	}
-		// &__checked {
-		// 		backgroung-color: blue;
-		// 	}
-		// }
 }

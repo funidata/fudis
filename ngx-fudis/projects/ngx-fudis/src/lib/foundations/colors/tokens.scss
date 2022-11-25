@@ -5,6 +5,10 @@
 /*
   --- Primary Colors are defined in style.scss ---
 */
+$fudis-primary-light: var(--color-primary-light);
+$fudis-primary: var(--color-primary);
+$fudis-primary-dark: var(--color-primary-dark);
+$fudis-primary-extra-dark: var(--color-primary-extra-dark);
 
 /*
   --- Secondary & Accent Colors ---
@@ -27,10 +31,10 @@ $fudis-yellow: #f1c40f;
 $fudis-green-light: #c6ecd6;
 $fudis-green: #1e874b;
 $fudis-colors: (
-	'primary-light': var(--color-primary-light),
-	'primary': var(--color-primary),
-	'primary-dark': var(--color-primary-dark),
-	'primary-extra-dark': var(--color-primary-extra-dark),
+	'primary-light': $fudis-primary-light,
+  'primary': $fudis-primary,
+  'primary-dark': $fudis-primary-dark,
+  'primary-extra-dark': $fudis-primary-extra-dark,
 	'white': $fudis-white,
 	'gray-extra-light': $fudis-gray-extra-light,
 	'gray-light': $fudis-gray-light,

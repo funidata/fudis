@@ -18,7 +18,15 @@ const Template: Story<CheckboxComponent> = (args: CheckboxComponent) => ({
 	props: args,
 });
 
-export const Primary = Template.bind({});
-Primary.args = {
-	name: 'öööö!',
+export const Checkbox = Template.bind({});
+Checkbox.args = {
+	name: 'checkbox 1',
+	color: 'primary',
+	disabled: false,
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+	name: 'checkbox 2',
+	disabled: true,
 };

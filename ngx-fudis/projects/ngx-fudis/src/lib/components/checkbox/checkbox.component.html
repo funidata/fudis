@@ -1,5 +1,8 @@
 <mat-checkbox class="example-margin"
 		(change)="checked"
-		(ngClass)="classes">
+		[disabled]="disabled"
+		[disableRipple]="disableRipple"
+		color="primary"
+		class="fudis-checkbox">
 		Check me!
 </mat-checkbox>
