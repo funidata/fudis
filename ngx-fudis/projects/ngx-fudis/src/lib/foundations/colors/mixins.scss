@@ -3,6 +3,7 @@
 
 @mixin fudis-text-color($color) {
 	@if map_has_key($fudis-colors, $color) {
+		/* stylelint-disable-next-line property-disallowed-list */
 		color: map.get($fudis-colors, $color);
 	}
 
@@ -13,6 +14,7 @@
 
 @mixin fudis-bg-color($color) {
 	@if map_has_key($fudis-colors, $color) {
+		/* stylelint-disable-next-line property-disallowed-list */
 		background-color: map.get($fudis-colors, $color);
 	}
 
