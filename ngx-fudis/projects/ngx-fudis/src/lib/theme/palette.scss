@@ -1,3 +1,15 @@
-@use "@angular/material" as mat;
+@use '@angular/material' as mat;
+@import '../foundations/colors/tokens';
 
-$fudis-palette: mat.$grey-palette;
+$fudis-palette: (
+		100: $fudis-primary-light,
+		500: $fudis-primary,
+		700: $fudis-primary-dark,
+		900: $fudis-primary-extra-dark,
+		contrast: (
+			100: $fudis-gray-dark,
+			500: $fudis-white,
+			700: $fudis-white,
+			900: $fudis-white,
+		),
+);
