@@ -15,8 +15,13 @@ import { Component } from '@angular/core';
 			<fudis-body-text size="l-light">Haloo</fudis-body-text>
 			<fudis-body-text size="m-light">Haloo</fudis-body-text>
 		</div>
-
-		<fudis-text-input></fudis-text-input>
+		<form>
+			<fudis-text-input data-theme="sisu" [helpText]="'Lisää infoa'" [label]="'Etunimi'"></fudis-text-input>
+			<fudis-text-input data-theme="sisu" [helpText]="'Aputeksti'" label="Etunimi" type="email"></fudis-text-input>
+			<p>Tässä jotain välihömppää</p>
+			<fudis-text-input data-theme="sisu" helpText="höpöhpö" label="...."></fudis-text-input>
+			<fudis-button data-theme="sisu" type="submit">Submittaaa</fudis-button>
+		</form>
 	`,
 	styles: [],
 })
