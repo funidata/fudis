@@ -22,8 +22,17 @@ import { Component } from '@angular/core';
 			<fudis-text-input data-theme="sisu" helpText="höpöhpö" label="...."></fudis-text-input>
 			<fudis-button data-theme="sisu" type="submit">Submittaaa</fudis-button>
 		</form>
+		<form
+			class="basic-flex-box"
+			action="
+		">
+			<fudis-text-input data-theme="sisu" label="eka en oo pakollinen"></fudis-text-input>
+			<fudis-text-input required data-theme="sisu" label="pakollinen email" type="email"></fudis-text-input>
+			<fudis-text-input data-theme="sisu" label="vapaa ehtoinen email!" type="email"></fudis-text-input>
+			<fudis-text-input data-theme="sisu" label="numeroa!!" type="number"></fudis-text-input>
+		</form>
 	`,
-	styles: [],
+	styleUrls: ['./app.scss'],
 })
 export class AppComponent {
 	title = 'dev';
