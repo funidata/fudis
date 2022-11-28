@@ -1,21 +1,40 @@
 @use 'sass:map';
 @use '../../../foundations/borders/mixins.scss' as borders;
-@use '../../../foundations/spacing/tokens.scss' as spacings;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
 @use '../../../foundations/typography/mixins.scss' as typography;
 @use '../../../foundations/colors/tokens.scss' as colors;
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../foundations/focus/mixins.scss' as focus;
 
-.fudis-form-field {
-	& label {
+.fudis-text-input {
+	&__label {
 		@include typography.fudis-text-field-label;
+		@include colorMixins.fudis-text-color('gray-dark');
 	}
 
-	& input {
+	&__input {
 		@include borders.fudis-border('1px', 'solid', 'gray-middle');
-		@include typography.fudis-body-l-light;
+		@include typography.fudis-text-field-input;
 		@include borders.fudis-border-radius('2px');
 
-		line-height: 1.5;
-		padding: spacings.$fudis-spacing-xxs spacings.$fudis-spacing-s;
-		height: spacings.$fudis-spacing-l;
+		padding: spacing.$fudis-spacing-xxs spacing.$fudis-spacing-s;
+		height: spacing.$fudis-spacing-l;
+
+		&:focus{
+			@include focus.fudis-focus-form-field;
+		}
+	}
+
+	&__help-text {
+		@include colorMixins.fudis-text-color('gray-dark');
+	}
+
+	&__error {
+		color: colors.$fudis-red;
+		margin-bottom: spacing.$fudis-spacing-s;
+	}
+
+	&--invalid {
+		border-color: colors.$fudis-red;
 	}
 }

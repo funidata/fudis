@@ -1,5 +1,17 @@
-<mat-form-field class="fudis-form-field">
-	<label [for]="id">Inputin label</label>
-	<input matInput [id]="id" [type]="type" [formControl]="control" class="fudis-text-input" required />
-	<mat-error *ngIf="control.hasError('required')">Pakollinen kenttä</mat-error>
+<mat-form-field class="fudis-text-input">
+	<label class="fudis-text-input__label" [for]="id">
+		{{ label }}
+	</label>
+	<input
+		matInput
+		[id]="id"
+		[type]="type"
+		[required]="required"
+		[formControl]="control"
+		[ngClass]="classes"
+		class="fudis-text-input__input" />
+	<mat-error [id]="id" class="fudis-text-input__error" *ngIf="isValidationErrorBlockVisible()">
+		Pakollinen kenttä
+	</mat-error>
+	<mat-hint [id]="id" class="fudis-text-input__help-text" *ngIf="helpText">{{ helpText }}</mat-hint>
 </mat-form-field>
