@@ -110,6 +110,14 @@
   font-size: tokens.$fudis-body-m-font-size;
   font-weight: tokens.$fudis-regular;
   text-transform: tokens.$fudis-all-caps;
+	line-height: tokens.$fudis-text-input-line-height;
+}
+
+@mixin fudis-text-field-input {
+	font-family: tokens.$fudis-font-family;
+  font-size: tokens.$fudis-body-l-font-size;
+  font-weight: tokens.$fudis-light;
+	line-height: tokens.$fudis-text-input-line-height;
 }
 
 @mixin fudis-button-typography {
