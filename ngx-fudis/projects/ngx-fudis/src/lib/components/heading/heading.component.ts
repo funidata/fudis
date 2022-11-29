@@ -14,4 +14,10 @@ export class HeadingComponent {
 	@Input() text: string;
 
 	@Input() tag: HeadingLevel;
+
+	@Input() className: string;
+
+	public get classes(): string[] {
+		return [`fudis-heading__${this.size}`];
+	}
 }
