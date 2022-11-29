@@ -3,6 +3,9 @@
 		{{ label }}
 	</label>
 	<input
+		(blur)="checkErrors()"
+		(change)="checkErrors()"
+		#fudisTextInput
 		matInput
 		[id]="id"
 		[type]="type"
@@ -10,10 +13,13 @@
 		[formControl]="fudisFormControl"
 		[ngClass]="classes"
 		class="fudis-text-input__input"
-		minlength="minLength"
-		maxlength="maxLength" />
-
-	<mat-error class="fudis-text-input__error" *ngIf="fudisFormControl.errors?.minlength && fudisFormControl.touched">
+		[attr.minlength]="minLength"
+		[attr.maxlength]="maxLength" />
+	<mat-error class="fudis-text-input__error" *ngIf="fudisFormControl.invalid && fudisFormControl.touched">
+		{{ this.defaultError }}
+	</mat-error>
+	<!-- 
+	<mat-error class="fudis-text-input__error" *ngIf="fudisFormControl.errors?.['minlength'] && fudisFormControl.touched">
 		Input must be at least {{ minLength }} long
 	</mat-error>
 
@@ -25,7 +31,7 @@
 	<mat-error class="fudis-text-input__error" *ngIf="fudisFormControl.hasError('required') && fudisFormControl.touched">
 		kolmas näkyy
 		{{ errorsToShow.message }}
-	</mat-error>
+	</mat-error> -->
 
 	<!-- <ng-container *ngFor="let error of errorsToShow | keyvalue">
 		<mat-error

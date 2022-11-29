@@ -1,4 +1,4 @@
-import { Attribute, Component, Input, OnInit } from '@angular/core';
+import { Attribute, Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 interface FudisErrorMessages {
@@ -18,6 +18,9 @@ export class TextInputComponent implements OnInit {
 			this.required = false;
 		}
 	}
+
+	// Bind input field
+	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;
 
 	/**
 	 *	Id is mandatory to bind label, error and hint to the input
@@ -63,6 +66,8 @@ export class TextInputComponent implements OnInit {
 		required: 'Required Default',
 	};
 
+	defaultError: string;
+
 	ngOnInit() {
 		if (this.required) {
 			this.validatorArray.push(Validators.required);
@@ -99,6 +104,13 @@ export class TextInputComponent implements OnInit {
 			default: {
 				return 'Default generic error message';
 			}
+		}
+	}
+
+	// Check and returns browsers native error message
+	checkErrors(): void {
+		if (this.input.nativeElement.validationMessage) {
+			this.defaultError = this.input.nativeElement.validationMessage;
 		}
 	}
 
