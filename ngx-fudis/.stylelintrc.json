@@ -1,6 +1,7 @@
 {
 	"extends": [
 		"stylelint-config-standard-scss",
+		"stylelint-config-sass-guidelines",
 		"stylelint-config-prettier-scss"
 	],
 	"ignoreFiles": [
@@ -18,7 +19,18 @@
 		"declaration-no-important": true,
 		"selector-max-empty-lines": 0,
 		"selector-max-class": 2,
-		"selector-class-pattern": "fudis-[a-z]+",
+		"selector-class-pattern": "fudis-([a-z][a-z0-9]*)(-[a-z0-9]+)*$",
+		"no-descending-specificity": true,
+		"block-opening-brace-space-before": "always",
+		"property-disallowed-list": [
+			"color",
+			"background-color",
+			"border",
+			"outline",
+			"font-size",
+			"line-height",
+			"font-family"
+		],
 		"at-rule-empty-line-before": [
 			"always",
 			{
