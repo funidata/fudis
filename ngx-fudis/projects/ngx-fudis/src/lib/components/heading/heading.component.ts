@@ -9,11 +9,11 @@ type HeadingSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
 	styleUrls: ['./heading.component.scss'],
 })
 export class HeadingComponent {
-	@Input() size: HeadingSize = 'l';
+	@Input() size: HeadingSize;
 
 	@Input() text: string;
 
-	@Input() tag: HeadingLevel = 'h2';
+	@Input() tag: HeadingLevel;
 
 	@Input() className: string;
 
