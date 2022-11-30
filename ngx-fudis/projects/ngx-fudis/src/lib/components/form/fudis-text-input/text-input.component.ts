@@ -36,6 +36,8 @@ export class TextInputComponent implements OnInit {
 
 	@Input() maxLength?: number;
 
+	@Input() characterLimitIndicatorValue?: string;
+
 	/**
 	 *	Helper or info text for the input, aligned underneath the input
 	 */

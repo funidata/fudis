@@ -51,4 +51,7 @@
 		>Pakollinen kenttä</mat-error
 	> -->
 	<mat-hint class="fudis-text-input__help-text" *ngIf="helpText">{{ helpText }}</mat-hint>
+	<mat-hint class="fudis-text-input__character-limit-indicator" *ngIf="characterLimitIndicatorValue" align="end"
+		>{{ fudisTextInput.value.length }} / {{ characterLimitIndicatorValue }}</mat-hint
+	>
 </mat-form-field>

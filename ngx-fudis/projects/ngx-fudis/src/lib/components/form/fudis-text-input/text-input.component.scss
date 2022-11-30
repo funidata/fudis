@@ -28,6 +28,10 @@
 	&__help-text {
 		@include colorMixins.fudis-text-color('gray-dark');
 	}
+	
+	&__character-limit-indicator {
+		@include colorMixins.fudis-text-color('gray-dark');
+	}
 
 	&__error {
 		color: colors.$fudis-red;
