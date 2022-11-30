@@ -1,10 +1,6 @@
 import { Attribute, Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
-interface FudisErrorMessages {
-	message?: string;
-	required?: string;
-}
 @Component({
 	selector: 'fudis-text-input',
 	templateUrl: './text-input.component.html',
@@ -36,11 +32,7 @@ export class TextInputComponent implements OnInit {
 
 	@Input() maxLength?: number;
 
-	/**
-	 *	Helper or info text for the input, aligned underneath the input
-	 */
-
-	@Input() errorMessages?: FudisErrorMessages = {};
+	@Input() language?: 'en' | 'fi' | 'se' = 'fi';
 
 	/**
 	 *	Type of the input
@@ -55,11 +47,6 @@ export class TextInputComponent implements OnInit {
 	validatorArray: Array<any> = [];
 
 	fudisFormControl = new FormControl('', this.validatorArray);
-
-	errorsToShow: FudisErrorMessages = {
-		message: this.defaultMessage(),
-		required: 'Required Default',
-	};
 
 	defaultError: string;
 
@@ -80,39 +67,35 @@ export class TextInputComponent implements OnInit {
 			this.validatorArray.push(Validators.pattern('^[0-9]*$'));
 		}
 		this.fudisFormControl = new FormControl('', this.validatorArray);
-
-		Object.keys(this.errorsToShow).forEach((error) => {
-			if (this.errorMessages && this.errorMessages[error as keyof FudisErrorMessages]) {
-				this.errorsToShow[error as keyof FudisErrorMessages] = this.errorMessages[error as keyof FudisErrorMessages];
-			}
-		});
-	}
-
-	defaultMessage(): string {
-		switch (this.type) {
-			case 'email': {
-				return 'Email default error';
-			}
-			case 'number': {
-				return 'should be a number';
-			}
-			default: {
-				return 'Default generic error message';
-			}
-		}
 	}
 
 	// Check and returns browsers native error message
 	checkErrors(): void {
-		if (this.input.nativeElement.validationMessage) {
-			this.defaultError = this.input.nativeElement.validationMessage;
+		const inputElement = this.input.nativeElement;
+
+		if (inputElement.validationMessage) {
+			const { validity } = inputElement;
+
+			if (validity.valueMissing && this.language === 'fi') {
+				inputElement.setCustomValidity('Pakollinen arvo puuttuu.');
+			}
+			if (validity.tooShort && this.language === 'fi') {
+				inputElement.setCustomValidity(
+					`Liian lyhyt syöte. Minimimerkkimäärä on ${this.minLength} merkkiä. Olet nyt syöttänyt ${inputElement.value.length} merkkiä.`
+				);
+			}
+			if (validity.typeMismatch && inputElement.type === 'email' && this.language === 'fi') {
+				inputElement.setCustomValidity('Syöte ei ole sähköpostimuotoinen. @-merkki puuttuu.');
+			}
+
+			if (validity.typeMismatch && inputElement.type === 'url' && this.language === 'fi') {
+				inputElement.setCustomValidity('ei oo urli');
+			}
+			this.defaultError = inputElement.validationMessage;
 		}
 	}
 
 	public get classes(): string[] {
-		if (this.fudisFormControl.touched && this.required && !this.fudisFormControl.value) {
-			return ['fudis-text-input--invalid'];
-		}
 		if (this.fudisFormControl.touched && this.fudisFormControl.invalid) {
 			return ['fudis-text-input--invalid'];
 		}

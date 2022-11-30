@@ -33,11 +33,12 @@ TextInput.args = {
 
 export const WithMultipleTextInput: Story = () => ({
 	template: `
-		<form id="form1" ngNativeValidate> 
-			<fudis-text-input required style="display:flex; flex-direction:column; width:80%" label="Password, min length 4, max 6" minLength=4 maxLength=6 type="password"></fudis-text-input>	
-			<fudis-text-input required style="display:flex; flex-direction:column; width:80%" label="Email, pakollinen" type="email"></fudis-text-input>	
-			<fudis-text-input style="display:flex; flex-direction:column; width:80%" label="Email, ei-pakollinen" type="email"></fudis-text-input>	
-			<fudis-text-input style="display:flex; flex-direction:column; width:80%" label="Tavallinen teksti, min length 4" type="text" minLength=5></fudis-text-input>	
+		<form lang="fi" id="form1" ngNativeValidate style="display:flex; width: 30rem; max-width: 90vw;flex-direction:column; border: 2px solid orangered; align-items: flex-start;"> 
+			<fudis-text-input required  label="Password, min length 4, max 6" minLength=4 maxLength=6 type="password" helpText="Help text Nipperkin yardarm list splice the main brace draft swing the lead Privateer tack pillage bounty. Shrouds quarter gangplank belaying pin skysail fathom rope's end boom pirate spike. Topgallant line barque sloop quarter cog Jack Tar gabion pillage fire ship."></fudis-text-input>	
+			<fudis-text-input required  label="Label Email, pakollinen, Nipperkin yardarm list splice the main brace draft swing the lead Privateer tack pillage bounty. Shrouds quarter gangplank belaying pin skysail fathom rope's end boom pirate spike. Topgallant line barque sloop quarter cog Jack Tar gabion pillage fire ship.
+			" type="email" helpText="Lorem ipsum"></fudis-text-input>	
+			<fudis-text-input  label="Email, ei-pakollinen, mutta olen pitkä kuin suomen talvi ja valoisaa aikaa on noin 13 sekuntia" type="email" helpText="Lorem ipsum"></fudis-text-input>	
+			<fudis-text-input  label="Tavallinen teksti, min length 4" type="text" minLength=5 helpText="Lorem ipsum"></fudis-text-input>	
 			
 			<button type="submit" form="form1" value="Submit">Submit</button>
 		</form>
