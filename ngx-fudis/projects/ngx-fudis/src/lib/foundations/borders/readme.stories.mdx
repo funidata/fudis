@@ -2,6 +2,52 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Foundations/Borders" />
 
-# HELLO FROM BORDERS FOUNDATIONS!
+# Border mixins
 
-Bacon ipsum dolor amet pancetta strip steak picanha doner, biltong tenderloin turducken turkey porchetta burgdoggen pastrami cow ribeye. Swine kielbasa hamburger, shoulder drumstick beef ribs strip steak flank t-bone andouille prosciutto turducken meatloaf fatback ball tip. Leberkas rump chicken, shoulder hamburger chuck salami pork chop porchetta biltong. Jerky pork chop leberkas tail drumstick, shoulder hamburger strip steak. Prosciutto jowl bacon biltong cupim pork. Turkey strip steak shankle leberkas chicken, filet mignon cow andouille meatloaf t-bone turducken burgdoggen.
+When using border mixins load them with `@use '../../../foundations/borders/mixins.scss' as borders;` to the component's .scss file.
+
+## Border
+Set the border of an element.
+
+````
+@include borders.fudis-border($width, $style, $color)
+````
+
+| $width | $style | $color|
+| ---- | ---- | ---- |
+| value from spacing tokens (_$fudis-pixel-tokens_) | value from border tokens (_$fudis-border-styles_) | value from colors tokens (_$fudis-colors_) |
+
+````
+@include borders.fudis-border('2px', 'solid', 'primary');	
+````
+
+
+## Outline
+Set the outline of an element.
+
+````
+@include borders.fudis-outline($width, $style, $color)
+````
+
+| $width | $style | $color|
+| ---- | ---- | ---- |
+| value from spacing tokens (_$fudis-pixel-tokens_) | value from border tokens (_$fudis-border-styles_) | value from colors tokens (_$fudis-colors_) |
+
+````
+@include borders.fudis-outline('1px', 'dashed', 'gray-middle');
+````
+
+## Border radius
+Set border radius of an element.
+
+````
+@include borders.fudis-border-radius($width)
+````
+
+| $width |
+| ---- | 
+| value from spacing tokens (_$fudis-pixel-tokens_) |
+
+````
+@include borders.fudis-border-radius('2px');
+````
