@@ -17,5 +17,41 @@
 	<mat-error class="fudis-text-input__error" *ngIf="fudisFormControl.invalid && fudisFormControl.touched">
 		{{ this.defaultError }}
 	</mat-error>
-	<mat-hint class="fudis-text-input__help-text">{{ helpText }}</mat-hint>
+	<!-- 
+	<mat-error class="fudis-text-input__error" *ngIf="fudisFormControl.errors?.['minlength'] && fudisFormControl.touched">
+		Input must be at least {{ minLength }} long
+	</mat-error>
+
+	<mat-error class="fudis-text-input__error" *ngIf="fudisFormControl.hasError(type) && fudisFormControl.touched">
+		toka näkyy
+		{{ errorsToShow.message }}
+	</mat-error>
+
+	<mat-error class="fudis-text-input__error" *ngIf="fudisFormControl.hasError('required') && fudisFormControl.touched">
+		kolmas näkyy
+		{{ errorsToShow.message }}
+	</mat-error> -->
+
+	<!-- <ng-container *ngFor="let error of errorsToShow | keyvalue">
+		<mat-error
+			class="fudis-text-input__error"
+			*ngIf="(fudisFormControl.hasError(error.key) || fudisFormControl.hasError(type)) && fudisFormControl.touched">
+			{{ error.value }}
+		</mat-error>
+	</ng-container> -->
+
+	<!-- <mat-error
+		class="fudis-text-input__error"
+		*ngIf="fudisFormControl.hasError('email') && !fudisFormControl.hasError('required')">
+		Please enter a valid email address
+	</mat-error>
+	<mat-error
+		class="fudis-text-input__error"
+		*ngIf="!fudisFormControl.hasError('email') && fudisFormControl.hasError('required')"
+		>Pakollinen kenttä</mat-error
+	> -->
+	<mat-hint class="fudis-text-input__help-text" *ngIf="helpText">{{ helpText }}</mat-hint>
+	<mat-hint class="fudis-text-input__character-limit-indicator" *ngIf="characterLimitIndicatorValue" align="end"
+		>{{ fudisTextInput.value.length }} / {{ characterLimitIndicatorValue }}</mat-hint
+	>
 </mat-form-field>

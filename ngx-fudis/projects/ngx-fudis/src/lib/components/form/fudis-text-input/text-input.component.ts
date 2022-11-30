@@ -34,6 +34,12 @@ export class TextInputComponent implements OnInit {
 
 	@Input() language?: 'en' | 'fi' | 'se' = 'fi';
 
+	@Input() characterLimitIndicatorValue?: string;
+
+	/**
+	 *	Helper or info text for the input, aligned underneath the input
+	 */
+
 	/**
 	 *	Type of the input
 	 */
