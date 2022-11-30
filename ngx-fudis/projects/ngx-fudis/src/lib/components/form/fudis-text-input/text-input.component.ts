@@ -23,11 +23,6 @@ export class TextInputComponent implements OnInit {
 	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;
 
 	/**
-	 *	Id is mandatory to bind label, error and hint to the input
-	 */
-	@Input() id: string = 'munInputti';
-
-	/**
 	 *	Label is mandatory for every input
 	 */
 	@Input() label: string;
