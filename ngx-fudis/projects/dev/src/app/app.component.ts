@@ -15,18 +15,14 @@ import { Component } from '@angular/core';
 			<fudis-body-text size="l-light">Haloo</fudis-body-text>
 			<fudis-body-text size="m-light">Haloo</fudis-body-text>
 		</div>
-		<form>
-			<fudis-text-input data-theme="sisu" [helpText]="'Lisää infoa'" [label]="'Etunimi'"></fudis-text-input>
-			<fudis-text-input data-theme="sisu" [helpText]="'Aputeksti'" label="Etunimi" type="email"></fudis-text-input>
-			<p>Tässä jotain välihömppää</p>
-			<fudis-text-input data-theme="sisu" helpText="höpöhpö" label="...."></fudis-text-input>
-			<fudis-button data-theme="sisu" type="submit">Submittaaa</fudis-button>
-		</form>
 		<form
 			class="basic-flex-box"
 			action="
 		">
-			<fudis-text-input data-theme="sisu" label="eka en oo pakollinen"></fudis-text-input>
+			<fudis-text-input
+				data-theme="sisu"
+				label="eka en oo pakollinen"
+				helpText="Tähän saa kirjoittaa, mutta ei oo pakko"></fudis-text-input>
 			<fudis-text-input required data-theme="sisu" label="pakollinen email" type="email"></fudis-text-input>
 			<fudis-text-input data-theme="sisu" label="vapaa ehtoinen email!" type="email"></fudis-text-input>
 			<fudis-text-input data-theme="sisu" label="numeroa!!" type="number"></fudis-text-input>
