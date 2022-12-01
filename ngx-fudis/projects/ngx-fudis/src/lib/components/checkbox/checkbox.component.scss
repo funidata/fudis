@@ -8,18 +8,18 @@
 @use '../../foundations/spacing/tokens.scss' as spacing;
 
 
-.fudis-checkbox {
-	.mat-checkbox {
-		border-radius: 0%;
-	}
+// .fudis-checkbox {
+// 	.mat-checkbox {
+// 		border-radius: 0%;
+// 	}
 
-	// &--invalid {
-	// }
-}
-:host {
-	::ng-deep .fudis-checkbox--invalid .mat-checkbox-frame {
-		border-color: colors.$fudis-red;
-	}
-}
+// 	// &--invalid {
+// 	// }
+// }
+// :host {
+// 	::ng-deep .fudis-checkbox--invalid .mat-checkbox-frame {
+// 		border-color: colors.$fudis-red;
+// 	}
+// }
 
 
