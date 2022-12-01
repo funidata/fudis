@@ -1,8 +1,33 @@
-<mat-checkbox class="example-margin"
-		(change)="checked"
+<form name="myForm" onsubmit="myFunction()">
+	<mat-checkbox
+		id="yksi"
+		type="checkbox"
+		class="example-margin"
+		[color]="color"
+		(change)="checkErrors()"
+		#fudisCheckbox
+		[formControl]="control"
+		[required]="required"
 		[disabled]="disabled"
 		[disableRipple]="disableRipple"
-		color="primary"
+		[ngClass]="classes"
 		class="fudis-checkbox">
 		Check me!
-</mat-checkbox>
+	</mat-checkbox>
+	<mat-checkbox
+		id="kaksi"
+		type="checkbox"
+		class="example-margin"
+		[color]="color"
+		(change)="checkErrors()"
+		#fudisCheckbox
+		[formControl]="control"
+		[required]="required"
+		[disabled]="disabled"
+		[disableRipple]="disableRipple"
+		[ngClass]="classes"
+		class="fudis-checkbox">
+		Check me!
+	</mat-checkbox>
+	<input type="submit" />
+</form>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ReactiveFormsModule } from '@angular/forms';
 import {
 	FudisDialogActionsDirective,
 	FudisDialogCloseDirective,
@@ -26,7 +27,7 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
 		ButtonComponent,
 		CheckboxComponent,
 	],
-	imports: [MatDialogModule, CommonModule, MatCheckboxModule],
+	imports: [MatDialogModule, CommonModule, MatCheckboxModule, ReactiveFormsModule],
 	exports: [
 		FudisDialogTitleDirective,
 		FudisDialogActionsDirective,

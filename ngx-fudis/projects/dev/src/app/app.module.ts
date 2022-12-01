@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -11,7 +12,15 @@ import { DialogTestContentComponent } from './dialog-test/dialog-test-content/di
 
 @NgModule({
 	declarations: [AppComponent, DialogTestComponent, DialogTestContentComponent],
-	imports: [BrowserModule, BrowserAnimationsModule, NgxFudisModule, MatButtonModule, MatDialogModule, MatCheckboxModule],
+	imports: [
+		BrowserModule,
+		BrowserAnimationsModule,
+		FormsModule,
+		NgxFudisModule,
+		MatButtonModule,
+		MatDialogModule,
+		MatCheckboxModule,
+	],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -13,3 +13,15 @@ $fudis-palette: (
       900: $fudis-white,
     ),
 );
+$accent-palette: (
+	100: $fudis-red,
+	200: $fudis-yellow,
+	700: $fudis-green,
+	900: transparent,
+	contrast: (
+		100: $fudis-red-light,
+		500: $fudis-yellow-light,
+		700: $fudis-green-light,
+		900: $fudis-gray-dark,
+	),
+);
