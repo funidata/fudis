@@ -25,7 +25,6 @@ describe('CheckboxComponent', () => {
 	describe('checkbox has states', () => {
 		it('checking the check state of componen', () => {
 			component.checked = true;
-			console.log(component);
 		});
 	});
 });

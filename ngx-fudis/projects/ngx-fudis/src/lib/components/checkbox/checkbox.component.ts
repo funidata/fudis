@@ -71,7 +71,7 @@ export class CheckboxComponent implements OnInit {
 	checkErrors(): string {
 		if (this.required) {
 			this.color = 'warn';
-			console.log('Olen pakollinen!!!!');
+			// console.log('Olen pakollinen!!!!');
 			return this.color;
 		}
 		// if (this.control.touched && this.control.invalid) {
@@ -79,7 +79,7 @@ export class CheckboxComponent implements OnInit {
 		// 	console.log('Olen reguired!!!!');
 		// 	return this.color;
 		// }
-		console.log('Olen ookooo!!!!');
+		// console.log('Olen ookooo!!!!');
 		this.color = 'primary';
 		return this.color;
 	}
