@@ -1,7 +1,8 @@
 @use "@angular/material" as mat;
 
 // Fudis theme import
-@import "./src/lib/theme/fudis-theme";
+@use "./src/lib/theme/fudis-theme.scss";
+@use "./src/lib/theme/ngMaterialCustomisation.scss";
 
 // Fudis styles from components that have to be applied globally.
 // @use "src/lib/components/dialog/dialog.scss";
@@ -9,8 +10,12 @@
 // Each project's primary colors import
 @import "./src/lib/foundations/colors/tokens";
 
-/* stylelint-disable color-no-hex */
+// Each project's primary colors import
+@import "./src/lib/foundations/borders/mixins";
 
+
+
+/* stylelint-disable color-no-hex */
 [data-theme='into'] {
 	--color-primary-light: #e0f4fd;
 	--color-primary: #0a729e;
@@ -23,3 +28,5 @@
 	--color-primary: #1076db;
 	--color-primary-dark: #1d65b8;
 }
+
+

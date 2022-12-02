@@ -2,40 +2,39 @@
 @use '../foundations/borders/mixins.scss' as borders;
 /* stylelint-disable selector-max-class */
 mat-form-field {
-  /* stylelint-disable-next-line selector-class-pattern */
-  &.mat-form-field-should-float.mat-form-field-can-float .mat-form-field{
-      &-wrapper{
-        padding-bottom: 0;
-      }
-    
-      &-subscript-wrapper {
-        margin-top: 0;
-        position: relative;
-      }
-    
-      &-infix{
-        display: flex;
-        flex-direction: column-reverse;
-        padding: 0;
-    
-      }
-    
-      &-label-wrapper{
-        padding-top: 0;
-        position: relative;
-      }
-    
-      &-label{
-        transform: none;
-        width: 100%;
-        top: 0;
-        white-space: inherit;
-        position: relative;
-      }
-    }
-  }
+	/* stylelint-disable-next-line selector-class-pattern */
+	&.mat-form-field-should-float.mat-form-field-can-float .mat-form-field{
+			&-wrapper{
+				padding-bottom: 0;
+			}
+		
+			&-subscript-wrapper {
+				margin-top: 0;
+				position: relative;
+			}
+		
+			&-infix{
+				display: flex;
+				flex-direction: column-reverse;
+				padding: 0;
+		
+			}
+		
+			&-label-wrapper{
+				padding-top: 0;
+				position: relative;
+			}
+		
+			&-label{
+				transform: none;
+				width: 100%;
+				top: 0;
+				white-space: inherit;
+				position: relative;
+			}
+		}
+	}
 	
-
 	mat-checkbox {
 		&.mat-checkbox.fudis-checkbox {
 			&.mat-primary .mat-checkbox-frame {
@@ -124,3 +123,4 @@ mat-form-field {
 		// 	}
 		// }
 	}
+

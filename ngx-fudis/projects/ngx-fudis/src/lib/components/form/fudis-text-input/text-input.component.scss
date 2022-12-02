@@ -1,0 +1,89 @@
+@use '../../../foundations/borders/mixins.scss' as borders;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/colors/tokens.scss' as colors;
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../foundations/focus/mixins.scss' as focus; 
+
+.fudis-text-input {
+	width: 100%;
+
+	&__label {
+		@include typography.fudis-text-field-label;
+		@include colorMixins.fudis-text-color('gray-dark');
+	}
+
+	&__input {
+		@include borders.fudis-border('1px', 'solid', 'gray-middle');
+		@include typography.fudis-text-field-input;
+		@include borders.fudis-border-radius('2px');
+
+		box-sizing: border-box;
+		padding: spacing.$fudis-spacing-xxs spacing.$fudis-spacing-s;
+		height: spacing.$fudis-spacing-l;
+		width: 100%;
+
+		&:focus{
+			@include focus.fudis-focus-form-field;
+		}
+	}
+
+	&__help-text {
+		@include colorMixins.fudis-text-color('gray-dark');
+		@include typography.fudis-body-s-regular;
+
+		margin-top: spacing.$fudis-spacing-xs;
+	}
+	
+	&__character-limit-indicator {
+		@include colorMixins.fudis-text-color('gray-dark');
+	}
+
+	&__error {
+		color: colors.$fudis-red;
+		margin-top: spacing.$fudis-spacing-xs;
+	}
+
+	&--invalid {
+		border-color: colors.$fudis-red;
+   	}	
+}
+
+:host{
+	display: block;
+	width: 100%;
+	position: relative;
+
+	// ::ng-deep mat-form-field.mat-form-field-should-float .mat-form-field {
+	/* stylelint-disable-next-line selector-class-pattern */
+	// & mat-form-field.mat-form-field-should-float .mat-form-field {
+	// 	&-wrapper{
+	// 		padding-bottom: 0;
+	// 	}
+	
+	// 	&-subscript-wrapper {
+	// 		margin-top: 0;
+	// 		position: static;
+	// 	}
+	
+	// 	&-infix{
+	// 		display: flex;
+	// 		flex-direction: column-reverse;
+	// 		padding: 0;
+	
+	// 	}
+	
+	// 	&-label-wrapper{
+	// 		padding-top: 0;
+	// 		position: relative;
+	// 	}
+	
+	// 	&-label{
+	// 		transform: none;
+	// 		width: 100%;
+	// 		white-space: inherit;
+	// 		position: static;
+	// 	}
+	// }
+	
+}
