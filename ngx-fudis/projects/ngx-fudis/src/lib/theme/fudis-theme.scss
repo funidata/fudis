@@ -1,10 +1,10 @@
 /* stylelint-disable unit-disallowed-list */
-@use "@angular/material" as mat;
-@use "./palette.scss";
-@use "../foundations/typography/fonts.scss";
+@use '@angular/material' as mat;
+@use '../foundations/typography/fonts.scss';
+@import './palette';
 
-$fudis-primary: mat.define-palette(mat.$pink-palette, 500);
-$fudis-accent: mat.define-palette(mat.$indigo-palette, 500);
+$fudis-primary: mat.define-palette($fudis-palette, 500);
+$fudis-accent: mat.define-palette($fudis-palette, 700);
 
 // Angular Material default typography styling
 $fudis-typography: mat.define-typography-config(

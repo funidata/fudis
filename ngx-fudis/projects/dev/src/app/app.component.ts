@@ -15,8 +15,27 @@ import { Component } from '@angular/core';
 			<fudis-body-text size="l-light">Haloo</fudis-body-text>
 			<fudis-body-text size="m-light">Haloo</fudis-body-text>
 		</div>
+		<form
+			class="basic-flex-box"
+			action="
+		">
+			<fudis-text-input
+				data-theme="sisu"
+				label="ei pakollinen tekstikenttä"
+				helpText="Tähän saa kirjoittaa, mutta ei oo pakko"
+				characterLimitIndicatorValue="50"
+				[maxLength]="50"></fudis-text-input>
+			<fudis-text-input
+				required
+				data-theme="sisu"
+				label="pakollinen email"
+				helpText="Tähän on pakko kirjoittaa sähköposti"
+				type="email"></fudis-text-input>
+			<fudis-text-input data-theme="sisu" label="vapaaehtoinen email" type="email"></fudis-text-input>
+			<fudis-text-input data-theme="sisu" label="numerot" type="number"></fudis-text-input>
+		</form>
 	`,
-	styles: [],
+	styleUrls: ['./app.scss'],
 })
 export class AppComponent {
 	title = 'dev';

@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 import {
 	FudisDialogActionsDirective,
 	FudisDialogCloseDirective,
@@ -11,6 +14,7 @@ import { FudisDialog } from './components/dialog/dialog';
 import { ButtonComponent } from './components/button/button.component';
 import { HeadingComponent } from './components/heading/heading.component';
 import { BodyTextComponent } from './components/body-text/body-text.component';
+import { TextInputComponent } from './components/form/fudis-text-input/text-input.component';
 
 @NgModule({
 	declarations: [
@@ -21,8 +25,9 @@ import { BodyTextComponent } from './components/body-text/body-text.component';
 		ButtonComponent,
 		HeadingComponent,
 		BodyTextComponent,
+		TextInputComponent,
 	],
-	imports: [MatDialogModule, CommonModule],
+	imports: [MatDialogModule, CommonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
 	exports: [
 		FudisDialogTitleDirective,
 		FudisDialogActionsDirective,
@@ -31,6 +36,7 @@ import { BodyTextComponent } from './components/body-text/body-text.component';
 		ButtonComponent,
 		HeadingComponent,
 		BodyTextComponent,
+		TextInputComponent,
 	],
 	providers: [FudisDialog],
 })
