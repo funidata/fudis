@@ -21,11 +21,18 @@ import { Component } from '@angular/core';
 		">
 			<fudis-text-input
 				data-theme="sisu"
-				label="eka en oo pakollinen"
-				helpText="Tähän saa kirjoittaa, mutta ei oo pakko"></fudis-text-input>
-			<fudis-text-input required data-theme="sisu" label="pakollinen email" type="email"></fudis-text-input>
-			<fudis-text-input data-theme="sisu" label="vapaa ehtoinen email!" type="email"></fudis-text-input>
-			<fudis-text-input data-theme="sisu" label="numeroa!!" type="number"></fudis-text-input>
+				label="ei pakollinen tekstikenttä"
+				helpText="Tähän saa kirjoittaa, mutta ei oo pakko"
+				characterLimitIndicatorValue="50"
+				[maxLength]="50"></fudis-text-input>
+			<fudis-text-input
+				required
+				data-theme="sisu"
+				label="pakollinen email"
+				helpText="Tähän on pakko kirjoittaa sähköposti"
+				type="email"></fudis-text-input>
+			<fudis-text-input data-theme="sisu" label="vapaaehtoinen email" type="email"></fudis-text-input>
+			<fudis-text-input data-theme="sisu" label="numerot" type="number"></fudis-text-input>
 		</form>
 	`,
 	styleUrls: ['./app.scss'],
