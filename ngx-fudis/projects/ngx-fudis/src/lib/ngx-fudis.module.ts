@@ -17,6 +17,7 @@ import { BodyTextComponent } from './components/body-text/body-text.component';
 import { TextInputComponent } from './components/form/fudis-text-input/text-input.component';
 import { VanillaTextInputComponent } from './components/form/vanilla-text-input/vanilla-text-input.component';
 import { FormLayoutComponent } from './components/form/form-layout/form-layout.component';
+import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 
 @NgModule({
 	declarations: [
@@ -30,6 +31,7 @@ import { FormLayoutComponent } from './components/form/form-layout/form-layout.c
 		TextInputComponent,
 		VanillaTextInputComponent,
 		FormLayoutComponent,
+  ErrorSummaryComponent,
 	],
 	imports: [MatDialogModule, CommonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
 	exports: [

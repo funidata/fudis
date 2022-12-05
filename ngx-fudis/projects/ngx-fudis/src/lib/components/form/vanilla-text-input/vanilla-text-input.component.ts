@@ -1,7 +1,11 @@
 // eslint-disable-next-line max-classes-per-file
-import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
+type Error = {
+	id: string;
+	message: string;
+};
 @Component({
 	selector: 'fudis-vanilla-text-input',
 	templateUrl: './vanilla-text-input.component.html',
@@ -10,6 +14,8 @@ import { FormControl, Validators } from '@angular/forms';
 export class VanillaTextInputComponent implements OnInit {
 	// Bind input field
 	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;
+
+	@Output() errorOutput: EventEmitter<Error> = new EventEmitter<Error>();
 
 	/**
 	 *	Label is mandatory for every input
@@ -119,6 +125,15 @@ export class VanillaTextInputComponent implements OnInit {
 			}
 			this.defaultError = inputElement.validationMessage;
 		}
+
+		// Emit error to parent
+		if (this.fudisFormControl.invalid) {
+			this.getErrorOutput(this.id, this.defaultError);
+		}
+	}
+
+	getErrorOutput(id: string, error: string) {
+		this.errorOutput.emit({ id, message: error });
 	}
 
 	public get classes(): string[] {

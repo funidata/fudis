@@ -8,6 +8,7 @@ import { FormLayoutComponent } from './form-layout.component';
 import { VanillaTextInputComponent } from '../vanilla-text-input/vanilla-text-input.component';
 import { HeadingComponent } from '../../heading/heading.component';
 import { ButtonComponent } from '../../button/button.component';
+import { ErrorSummaryComponent } from '../error-summary/error-summary.component';
 
 export default {
 	title: 'Components/Form/Form',
@@ -15,7 +16,7 @@ export default {
 	decorators: [
 		moduleMetadata({
 			imports: [BrowserAnimationsModule, MatInputModule, MatFormFieldModule, ReactiveFormsModule, FormsModule],
-			declarations: [VanillaTextInputComponent, HeadingComponent, ButtonComponent],
+			declarations: [VanillaTextInputComponent, HeadingComponent, ButtonComponent, ErrorSummaryComponent],
 		}),
 	],
 	argTypes: {},

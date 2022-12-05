@@ -1,0 +1,10 @@
+<h1>Error Summary</h1>
+<p *ngIf="!errorsToShow">No errors</p>
+<ul *ngIf="errorsToShow">
+	<li *ngFor="let item of errorsToShow">
+		<p>{{ item.id }}</p>
+		<ol>
+			<li *ngFor="let error of item.messages">{{ error }}</li>
+		</ol>
+	</li>
+</ul>
