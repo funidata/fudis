@@ -2,43 +2,44 @@
 @use '../foundations/borders/mixins.scss' as borders;
 /* stylelint-disable selector-max-class */
 mat-form-field {
-	/* stylelint-disable-next-line selector-class-pattern */
-	&.mat-form-field-should-float.mat-form-field-can-float .mat-form-field{
+ 	/* stylelint-disable-next-line selector-class-pattern */
+&.mat-form-field-should-float.mat-form-field-can-float .mat-form-field{
 			&-wrapper{
-				padding-bottom: 0;
-			}
+ 				padding-bottom: 0;
+ 			}
 		
-			&-subscript-wrapper {
+ 			&-subscript-wrapper {
 				margin-top: 0;
-				position: relative;
-			}
+ 				position: relative;
+ 			}
 		
-			&-infix{
-				display: flex;
+ 			&-infix{
+ 				display: flex;
 				flex-direction: column-reverse;
 				padding: 0;
 		
 			}
 		
-			&-label-wrapper{
-				padding-top: 0;
-				position: relative;
-			}
+ 			&-label-wrapper{
+ 				padding-top: 0;
+ 				position: relative;
+ 			}
 		
-			&-label{
-				transform: none;
-				width: 100%;
-				top: 0;
-				white-space: inherit;
-				position: relative;
+ 			&-label{
+ 				transform: none;
+ 				width: 100%;
+ 				top: 0;
+ 				white-space: inherit;
+ 				position: relative;
 			}
-		}
-	}
+ 		}
+ 	}
 	
 	mat-checkbox {
 		&.mat-checkbox.fudis-checkbox {
 			&.mat-primary .mat-checkbox-frame {
-				@include borders.fudis-border('1px', 'solid', 'gray-middle');	
+				@include borders.fudis-border('1px', 'solid', 'gray-middle');
+				z-index: 1;
 			}
 			&.mat-primary.mat-checkbox-unchecked .mat-checkbox-frame {
 				@include borders.fudis-border('1px', 'solid', 'gray-middle');	
@@ -47,9 +48,8 @@ mat-form-field {
 				// @include colors.fudis-bg-color('gray-dark');
 				stroke: #484848 !important;
 			}
-			&.mat-primary .mat-checkbox-background, .mat-checkbox-checked.mat-primary .mat-checkbox-background{
+			&.mat-checkbox-checked.mat-primary .mat-checkbox-background {
 				background-color: white;
-				z-index: -1;
 			}
 			&.mat-warn.fudis-checkbox--invalid .mat-checkbox-frame {
 				@include borders.fudis-border('1px', 'solid', 'red');		
@@ -58,7 +58,7 @@ mat-form-field {
 				// @include colors.fudis-bg-color('gray-dark');
 				stroke: #484848 !important;
 			}
-			&.mat-warn .mat-checkbox-background, .mat-checkbox-checked.mat-warn .mat-checkbox-background{
+			&.mat-warn .mat-checkbox-background, .mat-checkbox-checked.mat-warn .mat-checkbox-background {
 				background-color: white;
 				z-index: -1;
 			}
@@ -104,23 +104,8 @@ mat-form-field {
 				stroke: #484848 !important;
 			}
 		}
-		// &.mat-primary .mat-checkbox-inner-container {
-		// 		:active {
-		// 			@include borders.fudis-border('1px', 'solid', 'primary');	
-		// 			z-index: 1;
-		// 		}	
-		// 		:hover {
-		// 			@include borders.fudis-border('1px', 'solid', 'primary');	
-		// 			z-index: 1;
-		// 		}	
-		// }
 		&.mat-checkbox.fudis-checkbox .mat-checkbox-frame {
 				border-radius: 0%;
 		}
-		// &.mat-checkbox.fudis-checkbox.mat-warn.fudis-checkbox--invalid {
-		// 	.mat-checkbox-frame {
-		// 		border-color: red;
-		// 	}
-		// }
 	}
 
