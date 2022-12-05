@@ -1,0 +1,16 @@
+@use 'sass:map';
+@use './tokens';
+
+@mixin fudis-breakpoint($breakpoint) {
+	@if map_has_key(tokens.$fudis-breakpoints, $breakpoint) {
+		$breakpoint-value: map.get(tokens.$fudis-breakpoints, $breakpoint);
+
+    @media screen and (max-width: #{$breakpoint-value}) {
+      @content;
+    }
+	}
+
+ @else {
+		@error 'Unknown breakpoint of #{$brekpoint}. Accepted arguments are: "xl", "l", "m", "s", "xs" and "xxs".';
+	}
+}

@@ -1,10 +1,9 @@
-<div class="fudis-form-element fudis-text-input__{{ size }}">
+<div class="fudis-form-element fudis-text-input fudis-text-input__{{ size }}">
 	<label class="fudis-text-input__label" for="{{ id }}">
-		<span class="fudis-text-input__label__text fudis-text-input__label__text__{{ labelHeight }}">
-			<span class="fudis-text-input__label__text__content">
-				{{ label }} <span class="fudis-text-input__label__text__required" *ngIf="required">Pakollinen&nbsp;*</span>
-			</span>
-		</span>
+		<div class="fudis-text-input__label__content">
+			<span class="fudis-text-input__label__text fudis-text-input__label__text__{{ labelHeight }}">{{ label }}</span
+			><span class="fudis-text-input__label__required" *ngIf="required">Pakollinen&nbsp;*</span>
+		</div>
 		<input
 			[attr.aria-describedby]="'guidance_' + id"
 			id="{{ id }}"
@@ -22,11 +21,11 @@
 			<div
 				aria-live="polite"
 				role="alert"
-				class="fudis-text-input__error"
+				class="fudis-text-input__guidance__error"
 				*ngIf="fudisFormControl.invalid && fudisFormControl.touched">
 				{{ this.defaultError }}
 			</div>
-			<div class="fudis-text-input__help-text">{{ helpText }}</div>
+			<div class="fudis-text-input__guidance__help-text">{{ helpText }}</div>
 		</div>
 	</label>
 </div>

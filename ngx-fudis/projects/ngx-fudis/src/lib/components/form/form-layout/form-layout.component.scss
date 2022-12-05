@@ -1,23 +1,25 @@
 @use '../../../foundations/borders/mixins.scss' as borders;
 @use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/breakpoints/mixins.scss' as breakpoints;
+@use '../../../foundations/breakpoints/tokens.scss' as breakpointTokens;
 
 .fudis-form {
-	@include borders.fudis-border('3px', 'solid', 'gray-light');
-
 	&-layout {
-		@include borders.fudis-border('3px', 'solid', 'gray-light');
-
+		align-items: start;
 		column-gap: spacing.$fudis-spacing-xxl;
 		display: grid;
+		margin-bottom: spacing.$fudis-spacing-m;
+		margin-top: spacing.$fudis-spacing-m;
 		row-gap: spacing.$fudis-spacing-xxl;
 
 		&__regular {
 			max-width: 100%;
-			width: calc(49 * spacing.$fudis-spacing-s);
+			max-width: breakpointTokens.$fudis-breakpoint-s;
 
 		}
 
 		&__wide {
+			max-width: breakpointTokens.$fudis-breakpoint-m;
 			width: 100%;
 		}
 
@@ -30,10 +32,23 @@
 			&__2 {
 				grid-template-columns: 1fr 1fr;
 				
+
+				@include breakpoints.fudis-breakpoint('s') {
+					grid-template-columns: 1fr;
+				}
+				
 			}
 
 			&__4 {
 				grid-template-columns: 1fr 1fr 1fr 1fr;
+
+				@include breakpoints.fudis-breakpoint('m') {
+					grid-template-columns: 1fr 1fr;
+				}
+
+				@include breakpoints.fudis-breakpoint('s') {
+					grid-template-columns: 1fr;
+				}
 				
 			}
 		}

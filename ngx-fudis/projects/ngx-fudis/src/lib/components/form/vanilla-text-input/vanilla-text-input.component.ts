@@ -35,7 +35,7 @@ export class VanillaTextInputComponent implements OnInit {
 
 	@Input() characterLimitIndicatorValue?: string;
 
-	@Input() labelHeight?: 'single' | 'double' | 'triple' = 'single';
+	@Input() labelHeight?: 'single' | 'double' | 'triple' | 'unset' = 'unset';
 
 	/**
 	 *	Helper or info text for the input, aligned underneath the input
@@ -123,7 +123,7 @@ export class VanillaTextInputComponent implements OnInit {
 
 	public get classes(): string[] {
 		if (this.fudisFormControl.touched && this.fudisFormControl.invalid) {
-			return ['fudis-text-input--invalid'];
+			return ['fudis-text-input__input--invalid'];
 		}
 		return [];
 	}

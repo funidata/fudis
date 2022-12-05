@@ -15,7 +15,7 @@
 			"rem"
 		],
 		"function-parentheses-space-inside": "never-single-line",
-		"max-nesting-depth": 3,
+		"max-nesting-depth": 4,
 		"declaration-no-important": true,
 		"selector-max-empty-lines": 0,
 		"selector-max-class": 2,

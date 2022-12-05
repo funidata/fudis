@@ -6,8 +6,6 @@
 @use '../../../foundations/focus/mixins.scss' as focus; 
 
 .fudis-text-input {
-	width: 100%;
-
 	&__label {
 		@include typography.fudis-text-field-label;
 		@include colorMixins.fudis-text-color('gray-dark');
@@ -19,11 +17,11 @@
 		@include borders.fudis-border-radius('2px');
 
 		box-sizing: border-box;
-		padding: spacing.$fudis-spacing-xxs spacing.$fudis-spacing-s;
 		height: spacing.$fudis-spacing-l;
+		padding: spacing.$fudis-spacing-xxs spacing.$fudis-spacing-s;
 		width: 100%;
 
-		&:focus{
+		&:focus {
 			@include focus.fudis-focus-form-field;
 		}
 	}
@@ -40,7 +38,8 @@
 	}
 
 	&__error {
-		color: colors.$fudis-red;
+		@include colorMixins.fudis-text-color('red');
+
 		margin-top: spacing.$fudis-spacing-xs;
 	}
 
@@ -49,10 +48,10 @@
    	}	
 }
 
-:host{
+:host {
 	display: block;
-	width: 100%;
 	position: relative;
+	width: 100%;
 
 	// ::ng-deep mat-form-field.mat-form-field-should-float .mat-form-field {
 	/* stylelint-disable-next-line selector-class-pattern */
