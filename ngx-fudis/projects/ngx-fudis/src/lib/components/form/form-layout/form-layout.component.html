@@ -1,0 +1,9 @@
+<form id="formId" ngNativeValidate class="fudis-form">
+	<div
+		#fudisFormLayout
+		class="fudis-form-layout fudis-form-layout__{{ variant }} fudis-form-layout__cols__{{ columns }}">
+		<ng-content></ng-content>
+	</div>
+
+	<fudis-button type="submit" form="formId">Submit</fudis-button>
+</form>

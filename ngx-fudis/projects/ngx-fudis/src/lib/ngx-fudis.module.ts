@@ -15,6 +15,8 @@ import { ButtonComponent } from './components/button/button.component';
 import { HeadingComponent } from './components/heading/heading.component';
 import { BodyTextComponent } from './components/body-text/body-text.component';
 import { TextInputComponent } from './components/form/fudis-text-input/text-input.component';
+import { VanillaTextInputComponent } from './components/form/vanilla-text-input/vanilla-text-input.component';
+import { FormLayoutComponent } from './components/form/form-layout/form-layout.component';
 
 @NgModule({
 	declarations: [
@@ -26,6 +28,8 @@ import { TextInputComponent } from './components/form/fudis-text-input/text-inpu
 		HeadingComponent,
 		BodyTextComponent,
 		TextInputComponent,
+		VanillaTextInputComponent,
+		FormLayoutComponent,
 	],
 	imports: [MatDialogModule, CommonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
 	exports: [
