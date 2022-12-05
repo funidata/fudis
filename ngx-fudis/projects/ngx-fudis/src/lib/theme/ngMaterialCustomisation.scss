@@ -52,15 +52,23 @@ mat-form-field {
 				background-color: white;
 			}
 			&.mat-warn.fudis-checkbox--invalid .mat-checkbox-frame {
-				@include borders.fudis-border('1px', 'solid', 'red');		
+				@include borders.fudis-border('1px', 'solid', 'red');	
+				z-index: 1;	
 			}
-			&.mat-warn.fudis-checkbox--invalid .mat-checkbox-checkmark .mat-checkbox-checkmark-path {
+			&.mat-warn.fudis-checkbox--invalid .mat-checkbox-checked .mat-checkbox-checkmark-path {
 				// @include colors.fudis-bg-color('gray-dark');
 				stroke: #484848 !important;
 			}
-			&.mat-warn .mat-checkbox-background, .mat-checkbox-checked.mat-warn .mat-checkbox-background {
-				background-color: white;
-				z-index: -1;
+			&.mat-checkbox.fudis-checkbox.mat-warn.mat-checkbox-checked.fudis-checkbox--checked {
+				& .mat-checkbox-checkmark-path {
+					stroke: #484848 !important;
+				}
+			}
+			&.mat-checkbox-checked.mat-warn .mat-checkbox-background {
+				@include colors.fudis-bg-color('white');
+			}
+			&.mat-checkbox.fudis-checkbox.mat-warn.mat-checkbox-checked.fudis-checkbox--invalid .mat-checkbox-checkmark-path {
+				stroke: #484848 !important;
 			}
 			&.mat-primary.cdk-focused.cdk-program-focused {
 				& .mat-checkbox-frame  {
