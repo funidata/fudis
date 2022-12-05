@@ -31,7 +31,7 @@ import { ErrorSummaryComponent } from './components/form/error-summary/error-sum
 		TextInputComponent,
 		VanillaTextInputComponent,
 		FormLayoutComponent,
-  ErrorSummaryComponent,
+		ErrorSummaryComponent,
 	],
 	imports: [MatDialogModule, CommonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
 	exports: [

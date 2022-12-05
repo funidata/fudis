@@ -1,6 +1,6 @@
 <h1>Error Summary</h1>
-<p *ngIf="!errorsToShow">No errors</p>
-<ul *ngIf="errorsToShow">
+<p *ngIf="errorsToShow.length === 0">No errors</p>
+<ul *ngIf="errorsToShow.length > 0">
 	<li *ngFor="let item of errorsToShow">
 		<p>{{ item.id }}</p>
 		<ol>

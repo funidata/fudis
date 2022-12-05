@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 type Error = {
 	id: string;
-	message: string;
+	messages: Array<string>;
 };
 
 @Component({
