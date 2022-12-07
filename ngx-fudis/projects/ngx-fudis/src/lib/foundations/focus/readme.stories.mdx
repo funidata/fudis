@@ -1,0 +1,21 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs';
+
+<Meta title="Foundations/Focus" />
+
+# Focus mixins
+Figma file for focus style examples: [Figma file](https://www.figma.com/file/a6G6ZD6W3tlq0qmUkdvdp1/Fudis-DS-Foundations?node-id=133%3A130&t=Z8j4NL4q9I5h7OMD-0)
+
+When using focus mixins load them with `@use '../../foundations/focus/mixins.scss' as focus;` to the component's .scss file.
+
+
+## Generic focus rectangle
+Generic focus style for example buttons and tabs
+````
+@include focus.fudis-focus-generic;
+````
+
+## Form element focus
+Focus style for form element components such as text-input, radio-button, checkbox and dropdown
+````
+@include fudis-focus-form-field;
+````

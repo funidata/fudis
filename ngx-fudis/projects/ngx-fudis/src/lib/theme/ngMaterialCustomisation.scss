@@ -1,10 +1,10 @@
 @use '../foundations/colors/mixins.scss' as colors;
 @use '../foundations/borders/mixins.scss' as borders;
-/* stylelint-disable selector-max-class */
+/* stylelint-disable  */
 mat-form-field {
- 	/* stylelint-disable-next-line selector-class-pattern */
-&.mat-form-field-should-float.mat-form-field-can-float .mat-form-field{
-			&-wrapper{
+
+&.mat-form-field-should-float.mat-form-field-can-float .mat-form-field {
+			&-wrapper {
  				padding-bottom: 0;
  			}
 		
@@ -13,24 +13,24 @@ mat-form-field {
  				position: relative;
  			}
 		
- 			&-infix{
+ 			&-infix {
  				display: flex;
 				flex-direction: column-reverse;
 				padding: 0;
 		
 			}
 		
- 			&-label-wrapper{
+ 			&-label-wrapper {
  				padding-top: 0;
  				position: relative;
  			}
 		
- 			&-label{
- 				transform: none;
- 				width: 100%;
- 				top: 0;
- 				white-space: inherit;
+ 			&-label {
  				position: relative;
+ 				top: 0;
+ 				transform: none;
+ 				white-space: inherit;
+ 				width: 100%;
 			}
  		}
  	}
@@ -41,63 +41,80 @@ mat-form-field {
 			& .mat-checkbox-frame {
 				border-radius: 0%;
 			}
+
 			& .mat-checkbox-checkmark .mat-checkbox-checkmark-path {
 				stroke: #484848 !important;
 			}
+
 			& .mat-ripple-element {
 				background-color: transparent;
 			}
+
 			&.mat-checkbox-checked .mat-checkbox-background {
 				background-color: white;
 			}
+
 			// disabling mat-ripple hover 
 			&.mat-checkbox-checked:not(.mat-checkbox-disabled) .mat-ripple-element, .mat-checkbox:active:not(.mat-checkbox-disabled) .mat-ripple-element {
 				opacity: 0;
 			}
+
 			// Primary checkbox styling
 			&.mat-primary .mat-checkbox-frame {
 				@include borders.fudis-border('1px', 'solid', 'gray-middle');
+
 				z-index: 1;
 			}
+
 			&.mat-primary.mat-checkbox-unchecked .mat-checkbox-frame {
 				@include borders.fudis-border('1px', 'solid', 'gray-middle');	
 			}
+
 			// Overrides for primary checkbox keyboad and mouse focus styles
 			&.mat-primary.cdk-focused.cdk-program-focused {
-				& .mat-checkbox-frame  {
+				& .mat-checkbox-frame {
+					@include borders.fudis-border('2px', 'solid', 'primary');
+
 					box-sizing: border-box;
-					z-index: 1;
-					@include borders.fudis-border('2px', 'solid', 'primary');	
+					z-index: 1;	
 				}
 			}
+
 			&.mat-primary.cdk-focused.cdk-keyboard-focused {
-				& .mat-checkbox-frame  {
+				& .mat-checkbox-frame {
+					@include borders.fudis-border('2px', 'solid', 'primary');
+
 					box-sizing: border-box;
-					z-index: 1;
-					@include borders.fudis-border('2px', 'solid', 'primary');	
+					z-index: 1;	
 				}
 			}
+
 			// Invalid checkbox color warn
 			&.mat-warn .mat-checkbox-frame {
 				@include borders.fudis-border('1px', 'solid', 'red');	
+
 				z-index: 1;	
 			}
+
 			&.mat-warn.cdk-focused.cdk-program-focused {
-				& .mat-checkbox-frame  {
+				& .mat-checkbox-frame {
 					box-sizing: border-box;
 					outline: #f5d9d6 solid 2px;
 				}
 			}
+
 			&.mat-warn.cdk-focused.cdk-keyboard-focused {
-				& .mat-checkbox-frame  {
+				& .mat-checkbox-frame {
 					box-sizing: border-box;
 					outline: #f5d9d6 solid 2px;
 				}
 			}
+
 			// Disabled checkbox focus styles
 			&.mat-checkbox-disabled .mat-checkbox-frame {
 				@include borders.fudis-border('1px', 'dashed', 'gray-middle');	
 				@include colors.fudis-bg-color('gray-extra-light');
+
 				& .mat-checkbox-label {
 					color: #484848;
 				}

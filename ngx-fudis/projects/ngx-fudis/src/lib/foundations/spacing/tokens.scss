@@ -16,7 +16,7 @@ $fudis-pixel-1: 1px;
 $fudis-pixel-2: 2px;
 $fudis-pixel-3: 3px;
 
-// Used with borders, border-radius and letter-spacing mixins. Any value >=4px should be used from spacings values above.s
+// Used with borders, border-radius and letter-spacing mixins. Any value >=4px should be used from spacings values above.
 $fudis-pixel-tokens: (
 	'1px': $fudis-pixel-1,
   '2px': $fudis-pixel-2,
