@@ -1,8 +1,8 @@
 /* stylelint-disable selector-class-pattern */
 /* stylelint-disable unit-disallowed-list */
-.basic-flex-box{
+.basic-flex-box {
+	border: 2px solid orange;
 	display: flex;
 	flex-direction: column;
-	border: 2px solid orange;
 	max-width: 40rem;
 }

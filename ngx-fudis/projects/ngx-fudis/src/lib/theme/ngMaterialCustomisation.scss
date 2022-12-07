@@ -1,8 +1,8 @@
 /* stylelint-disable selector-max-class */
 mat-form-field {
 	/* stylelint-disable-next-line selector-class-pattern */
-	&.mat-form-field-should-float.mat-form-field-can-float .mat-form-field{
-			&-wrapper{
+	&.mat-form-field-should-float.mat-form-field-can-float .mat-form-field {
+			&-wrapper {
 				padding-bottom: 0;
 			}
 		
@@ -11,24 +11,24 @@ mat-form-field {
 				position: relative;
 			}
 		
-			&-infix{
+			&-infix {
 				display: flex;
 				flex-direction: column-reverse;
 				padding: 0;
 		
 			}
 		
-			&-label-wrapper{
+			&-label-wrapper {
 				padding-top: 0;
 				position: relative;
 			}
 		
-			&-label{
-				transform: none;
-				width: 100%;
-				top: 0;
-				white-space: inherit;
+			&-label {
 				position: relative;
+				top: 0;
+				transform: none;
+				white-space: inherit;
+				width: 100%;
 			}
 		}
 	}
