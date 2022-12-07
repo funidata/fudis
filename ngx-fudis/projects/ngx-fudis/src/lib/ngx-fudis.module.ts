@@ -4,7 +4,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
 	FudisDialogActionsDirective,
 	FudisDialogCloseDirective,
@@ -31,7 +31,15 @@ import { TextInputComponent } from './components/form/fudis-text-input/text-inpu
 		CheckboxComponent,
 		TextInputComponent,
 	],
-	imports: [MatDialogModule, CommonModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, ReactiveFormsModule],
+	imports: [
+		FormsModule,
+		MatDialogModule,
+		CommonModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatCheckboxModule,
+		ReactiveFormsModule,
+	],
 	exports: [
 		FudisDialogTitleDirective,
 		FudisDialogActionsDirective,

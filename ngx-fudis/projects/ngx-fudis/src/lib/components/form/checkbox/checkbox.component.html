@@ -1,0 +1,53 @@
+<form id="myForm">
+	<!-- <mat-checkbox
+		type="checkbox"
+		id="yksi"
+		type="checkbox"
+		class="example-margin"
+		[color]="color"
+		#fudisCheckbox
+		[formControl]="control"
+		[required]="required"
+		[checked]="checked"
+		[disabled]="disabled"
+		[disableRipple]="disableRipple"
+		[ngClass]="classes"
+		class="fudis-checkbox">
+		click me!
+	</mat-checkbox> -->
+	<mat-checkbox
+		type="checkbox"
+		id="yksi"
+		type="checkbox"
+		class="example-margin"
+		[color]="color"
+		#fudisCheckbox
+		[required]="required"
+		[disabled]="disabled"
+		[disableRipple]="disableRipple"
+		[formControl]="control"
+		[(ngModel)]="checked"
+		(ngModelChange)="onModelChange($event)"
+		[ngClass]="classes"
+		class="fudis-checkbox">
+		click me!
+	</mat-checkbox>
+	<mat-checkbox
+		type="checkbox"
+		id="kaksi"
+		type="checkbox"
+		class="example-margin"
+		[color]="color"
+		#fudisCheckbox
+		[formControl]="control"
+		[(ngModel)]="checked"
+		(ngModelChange)="onModelChange($event)"
+		[required]="required"
+		[disabled]="disabled"
+		[disableRipple]="disableRipple"
+		[ngClass]="classes"
+		class="fudis-checkbox">
+		Check me!
+	</mat-checkbox>
+	<input type="submit" value="submit" />
+</form>
