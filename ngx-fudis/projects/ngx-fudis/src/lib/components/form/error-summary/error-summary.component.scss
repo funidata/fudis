@@ -1,0 +1,5 @@
+@use '../../../foundations/typography/mixins.scss' as typography;
+
+.fudis-error-summary {
+	@include typography.fudis-body-m-regular;
+}

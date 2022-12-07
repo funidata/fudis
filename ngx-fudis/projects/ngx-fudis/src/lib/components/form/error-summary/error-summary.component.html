@@ -1,10 +1,11 @@
-<h1>Error Summary</h1>
-<p *ngIf="errorsToShow.length === 0">No errors</p>
-<ul *ngIf="errorsToShow.length > 0">
-	<li *ngFor="let item of errorsToShow">
-		<p>{{ item.id }}</p>
-		<ol>
-			<li *ngFor="let error of item.messages">{{ error }}</li>
-		</ol>
-	</li>
-</ul>
+<div class="fudis-error-summary">
+	<p *ngIf="errorsToShow.length === 0">No errors</p>
+	<ul *ngIf="errorsToShow.length > 0">
+		<li *ngFor="let item of errorsToShow">
+			<p>{{ item.id }}</p>
+			<ol>
+				<li *ngFor="let error of item.messages">{{ error }}</li>
+			</ol>
+		</li>
+	</ul>
+</div>
