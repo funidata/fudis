@@ -13,6 +13,7 @@ export class DialogTestComponent {
 	openDialog() {
 		const ref = this.dialog.open(DialogTestContentComponent);
 		ref.afterClosed().subscribe((res: any) => {
+			// eslint-disable-next-line no-console
 			console.log(res);
 		});
 	}

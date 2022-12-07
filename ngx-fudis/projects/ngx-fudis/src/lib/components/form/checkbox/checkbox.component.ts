@@ -1,4 +1,4 @@
-import { Attribute, Component, Input, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Attribute, Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 export interface Checkbox {
@@ -12,7 +12,7 @@ export interface Checkbox {
 	templateUrl: './checkbox.component.html',
 	styleUrls: ['./checkbox.component.scss'],
 })
-export class CheckboxComponent implements OnInit {
+export class CheckboxComponent {
 	constructor(@Attribute('required') required: boolean | '' | 'true') {
 		if (required === '' || required === 'true' || required) {
 			this.required = true;
@@ -44,7 +44,7 @@ export class CheckboxComponent implements OnInit {
 
 	required: boolean;
 
-	ngOnInit() {}
+	// ngOnInit() {}
 
 	onChange(checked: boolean) {
 		this.checked = checked;
