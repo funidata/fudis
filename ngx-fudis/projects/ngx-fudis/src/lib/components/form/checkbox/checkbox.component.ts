@@ -29,7 +29,7 @@ export class CheckboxComponent implements OnInit {
 
 	color: 'primary' | 'warn' = 'primary';
 
-	disableRipple = false;
+	disableRipple = true;
 
 	control = new FormControl('', Validators.required);
 
@@ -47,7 +47,6 @@ export class CheckboxComponent implements OnInit {
 	ngOnInit() {}
 
 	onChange(checked: boolean) {
-		console.log('do I trigger?');
 		this.checked = checked;
 		if (this.required && this.control.invalid) {
 			this.color = 'warn';
