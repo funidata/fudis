@@ -1,5 +1,6 @@
-import { Attribute, Component, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 export interface Checkbox {
 	name: string;
@@ -13,14 +14,6 @@ export interface Checkbox {
 	styleUrls: ['./checkbox.component.scss'],
 })
 export class CheckboxComponent {
-	constructor(@Attribute('required') required: boolean | '' | 'true') {
-		if (required === '' || required === 'true' || required) {
-			this.required = true;
-		} else {
-			this.required = false;
-		}
-	}
-
 	@ViewChild('fudisCheckbox') input: ElementRef<HTMLInputElement>;
 
 	@Input() name = 'check';
@@ -31,6 +24,10 @@ export class CheckboxComponent {
 
 	disableRipple = true;
 
+	checked: boolean = false;
+
+	showError: boolean = false;
+
 	control = new FormControl('', Validators.required);
 
 	/**
@@ -40,58 +37,25 @@ export class CheckboxComponent {
 
 	@Input() disabled: boolean;
 
-	checked: boolean = false;
+	@Input() required: boolean;
 
-	required: boolean;
-
-	// ngOnInit() {}
-
-	onChange(checked: boolean) {
-		this.checked = checked;
-		if (this.required && this.control.invalid) {
-			this.color = 'warn';
+	toggleChecked(event: MatCheckboxChange): void {
+		console.log('moro togglesta');
+		if (event.checked) {
+			this.checked = true;
+			this.color = 'primary';
+		} else {
+			this.checked = false;
 		}
 	}
 
-	onModelChange(e: boolean) {
-		this.checked = e;
-
-		this.onChange(e);
+	checkErrors(): void {
+		if (this.required && !this.checked) {
+			this.color = 'warn';
+			this.showError = true;
+		} else {
+			this.color = 'primary';
+			this.showError = false;
+		}
 	}
-	// public get classes(): string[] {
-	// 	if (this.required && !this.control.value) {
-	// 		return ['fudis-checkbox--invalid'];
-	// 	}
-	// 	if (this.control.touched && this.control.invalid) {
-	// 		return ['fudis-checkbox--invalid'];
-	// 	}
-	// 	if (!this.control.value) {
-	// 		return ['fudis-checkbox--checked'];
-	// 	}
-	// 	return [];
-	// }
-	// ngOnInit() {
-	// 	if (this.required && !this.control.value) {
-	// 		this.classes = 'fudis-checkbox--invalid';
-	// 	}
-	// 	if (this.control.touched && this.control.invalid) {
-	// 		this.classes = 'fudis-checkbox--invalid';
-	// 	}
-	// 	if (!this.control.value) {
-	// 		this.classes = 'fudis-checkbox--checked';
-	// 	}
-	// 	return [];
-	// }
-
-	// checkErrors(): string {
-	// 	if (this.required && !this.control.value) {
-	// 		return this.color;
-	// 	}
-	// 	if (this.control.touched && this.required && this.control.invalid) {
-	// 		this.color = 'warn';
-	// 		return this.color;
-	// 	}
-	// 	console.log('olen tsekattu');
-	// 	return this.color;
-	// }
 }
