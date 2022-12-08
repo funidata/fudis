@@ -20,6 +20,7 @@ import { FormLayoutComponent } from './components/form/form-layout/form-layout.c
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { GridComponent } from './components/grid/grid.component';
+import { LegendComponent } from './components/form/legend/legend.component';
 
 @NgModule({
 	declarations: [
@@ -36,6 +37,7 @@ import { GridComponent } from './components/grid/grid.component';
 		ErrorSummaryComponent,
 		TextSpacingComponent,
 		GridComponent,
+		LegendComponent,
 	],
 	imports: [MatDialogModule, CommonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
 	exports: [
