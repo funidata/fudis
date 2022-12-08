@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormLayoutComponent } from '../form-layout/form-layout.component';
 import { VanillaTextInputComponent } from '../vanilla-text-input/vanilla-text-input.component';
-import { HeadingComponent } from '../../heading/heading.component';
+import { HeadingComponent } from '../../typography/heading/heading.component';
 import { ButtonComponent } from '../../button/button.component';
 import { ErrorSummaryComponent } from './error-summary.component';
 
