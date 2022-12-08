@@ -18,8 +18,8 @@ import { TextInputComponent } from './components/form/text-input/text-input.comp
 import { VanillaTextInputComponent } from './components/form/vanilla-text-input/vanilla-text-input.component';
 import { FormLayoutComponent } from './components/form/form-layout/form-layout.component';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
-import { GridComponent } from './components/grid/grid.component';
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
+import { GridComponent } from './components/grid/grid.component';
 
 @NgModule({
 	declarations: [
@@ -34,8 +34,8 @@ import { TextSpacingComponent } from './components/typography/text-spacing/text-
 		VanillaTextInputComponent,
 		FormLayoutComponent,
 		ErrorSummaryComponent,
-  GridComponent,
-  TextSpacingComponent,
+		TextSpacingComponent,
+		GridComponent,
 	],
 	imports: [MatDialogModule, CommonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
 	exports: [

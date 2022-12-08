@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/angular/types-6-0';
 import { HeadingComponent } from './heading.component';
 
 export default {
-	title: 'Components/Heading',
+	title: 'Components/Typography/Heading',
 	component: HeadingComponent,
 } as Meta;
 

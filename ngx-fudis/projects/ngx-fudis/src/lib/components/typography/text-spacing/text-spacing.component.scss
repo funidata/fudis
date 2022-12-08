@@ -1,0 +1,20 @@
+/* stylelint-disable selector-max-compound-selectors */
+/* stylelint-disable selector-no-qualifying-type */
+/* stylelint-disable scss/selector-no-redundant-nesting-selector */
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/borders/mixins.scss' as borders;
+
+
+:host {
+		& .fudis-heading[size="xl"] {
+			& + .fudis-body-text p {
+				@include borders.fudis-border("2px", "solid", "red")
+			}
+		}
+
+		& .fudis-heading[size="l"] {
+			& + .fudis-body-text p {
+				@include borders.fudis-border("2px", "solid", "green")
+			}
+		}
+}

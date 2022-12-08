@@ -9,7 +9,7 @@
 
 .fudis-text-input {
 	display: grid;
-	max-width: calc(22 * spacing.$fudis-spacing-s);
+	max-width: calc(23 * spacing.$fudis-spacing-s);
 
 
 	&__l {
@@ -117,8 +117,3 @@
 	
 }
 
-:host {
-	display: block;
-	max-width: calc(22 * spacing.$fudis-spacing-s);
-	position: relative;
-}
