@@ -1,8 +1,4 @@
-<form id="formId" ngValidate class="fudis-form">
-	<fudis-error-summary [errorsToShow]="errors"></fudis-error-summary>
-	<div class="fudis-form-layout fudis-form-layout__{{ variant }} fudis-form-layout__cols__{{ columns }}">
-		<ng-content></ng-content>
-	</div>
-
-	<fudis-button type="submit" form="formId">Submit</fudis-button>
-</form>
+<div class="fudis-form-layout fudis-form-layout__{{ variant }} fudis-form-layout__cols__{{ columns }}">
+	<ng-content></ng-content>
+</div>
+<fudis-button type="submit" form="formId">Submit</fudis-button>

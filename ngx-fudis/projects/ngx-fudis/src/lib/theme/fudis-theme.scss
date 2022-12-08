@@ -1,6 +1,5 @@
 /* stylelint-disable unit-disallowed-list */
 @use '@angular/material' as mat;
-@use '../foundations/typography/fonts.scss';
 @import './palette';
 
 $fudis-primary: mat.define-palette($fudis-palette, 500);
