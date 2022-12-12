@@ -28,18 +28,18 @@
 		&__content {
 			@include colorMixins.fudis-text-color('gray-dark');
 
-			overflow: hidden;
-			padding-bottom: spacing.$fudis-spacing-xs;
 			position: relative;
+			padding-bottom: spacing.$fudis-spacing-xs;
+			overflow: hidden;
 		}
 
 		&__required {
 			@include typography.fudis-body-s-regular;
 
-			bottom: 0;
 			display: inline-block;
 			position: absolute;
 			right: 0;
+			bottom: 0;
 			text-transform: initial;
 			
 		}
@@ -47,8 +47,8 @@
 		&__text {
 			@include typography.fudis-text-field-label;
 
-			align-items: flex-end;
 			display: flex;
+			align-items: flex-end;
 			overflow: hidden;
 
 			&__unset {
@@ -80,9 +80,9 @@
 		@include borders.fudis-border-radius('2px');
 
 		box-sizing: border-box;
-		height: spacing.$fudis-spacing-xl;
 		padding: spacing.$fudis-spacing-xxs spacing.$fudis-spacing-s;
 		width: 100%;
+		height: spacing.$fudis-spacing-xl;
 
 		&:focus {
 			@include focus.fudis-focus-form-field;

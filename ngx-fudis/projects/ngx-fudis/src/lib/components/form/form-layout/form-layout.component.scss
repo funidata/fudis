@@ -5,12 +5,12 @@
 
 .fudis-form {
 	&-layout {
-		align-items: start;
-		column-gap: spacing.$fudis-spacing-xxl;
 		display: grid;
-		margin-bottom: spacing.$fudis-spacing-m;
-		margin-top: spacing.$fudis-spacing-m;
 		row-gap: spacing.$fudis-spacing-xxl;
+		column-gap: spacing.$fudis-spacing-xxl;
+		align-items: start;
+		margin-top: spacing.$fudis-spacing-m;
+		margin-bottom: spacing.$fudis-spacing-m;
 
 		&__regular {
 			max-width: 100%;
@@ -19,8 +19,8 @@
 		}
 
 		&__wide {
-			max-width: breakpointTokens.$fudis-breakpoint-m;
 			width: 100%;
+			max-width: breakpointTokens.$fudis-breakpoint-m;
 		}
 
 

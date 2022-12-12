@@ -7,16 +7,15 @@
 @use '../../foundations/breakpoints/tokens.scss' as breakpointTokens;
 
 .fudis-grid {
-		border: 1px solid green;
-		column-gap: spacing.$fudis-spacing-l;
 		display: grid;
-		margin-bottom: spacing.$fudis-spacing-m;
-		margin-top: spacing.$fudis-spacing-m;
 		row-gap: spacing.$fudis-spacing-l;
+		column-gap: spacing.$fudis-spacing-l;
+		margin-top: spacing.$fudis-spacing-m;
+		margin-bottom: spacing.$fudis-spacing-m;
+		border: 1px solid green;
 
 		/* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
 		& fudis-heading {
-			border: 1px solid red;
 			grid-column: 1/-1;
 		}
 
@@ -27,8 +26,8 @@
 		}
 
 		&__wide {
-			max-width: breakpointTokens.$fudis-breakpoint-m;
 			width: 100%;
+			max-width: breakpointTokens.$fudis-breakpoint-m;
 		}
 
 		&__align {
