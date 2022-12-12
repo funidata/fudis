@@ -1,0 +1,56 @@
+@use '../../../foundations/borders/mixins.scss' as borders;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/breakpoints/mixins.scss' as breakpoints;
+@use '../../../foundations/breakpoints/tokens.scss' as breakpointTokens;
+
+.fudis-form {
+	&-layout {
+		display: grid;
+		row-gap: spacing.$fudis-spacing-xxl;
+		column-gap: spacing.$fudis-spacing-xxl;
+		align-items: start;
+		margin-top: spacing.$fudis-spacing-m;
+		margin-bottom: spacing.$fudis-spacing-m;
+
+		&__regular {
+			max-width: 100%;
+			max-width: breakpointTokens.$fudis-breakpoint-s;
+
+		}
+
+		&__wide {
+			width: 100%;
+			max-width: breakpointTokens.$fudis-breakpoint-m;
+		}
+
+
+		&__cols {
+			&__1 {
+				grid-template-columns: 1fr;
+			}
+
+			&__2 {
+				grid-template-columns: 1fr 1fr;
+				
+
+				@include breakpoints.fudis-breakpoint('s') {
+					grid-template-columns: 1fr;
+				}
+				
+			}
+
+			&__4 {
+				grid-template-columns: 1fr 1fr 1fr 1fr;
+
+				@include breakpoints.fudis-breakpoint('m') {
+					grid-template-columns: 1fr 1fr;
+				}
+
+				@include breakpoints.fudis-breakpoint('s') {
+					grid-template-columns: 1fr;
+				}
+				
+			}
+		}
+	}
+}

@@ -1,0 +1,15 @@
+$fudis-breakpoint-xl: 100em; // 1600px;
+$fudis-breakpoint-l: 75em; // 1200px;
+$fudis-breakpoint-m: 62em; // 992px;
+$fudis-breakpoint-s: 48em; // 768px;
+$fudis-breakpoint-xs: 30em; // 480px;
+$fudis-breakpoint-xxs: 20em; // 320px;
+
+$fudis-breakpoints: (
+	'xl': $fudis-breakpoint-xl,
+	'l': $fudis-breakpoint-l,
+	'm': $fudis-breakpoint-m,
+	's': $fudis-breakpoint-s,
+	'xs': $fudis-breakpoint-xs,
+	'xxs': $fudis-breakpoint-xxs,
+);

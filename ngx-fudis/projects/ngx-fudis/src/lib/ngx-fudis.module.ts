@@ -12,9 +12,15 @@ import {
 } from './components/dialog/dialog-directives';
 import { FudisDialog } from './components/dialog/dialog';
 import { ButtonComponent } from './components/button/button.component';
-import { HeadingComponent } from './components/heading/heading.component';
-import { BodyTextComponent } from './components/body-text/body-text.component';
-import { TextInputComponent } from './components/form/fudis-text-input/text-input.component';
+import { HeadingComponent } from './components/typography/heading/heading.component';
+import { BodyTextComponent } from './components/typography/body-text/body-text.component';
+import { TextInputComponent } from './components/form/text-input/text-input.component';
+import { VanillaTextInputComponent } from './components/form/vanilla-text-input/vanilla-text-input.component';
+import { FormLayoutComponent } from './components/form/form-layout/form-layout.component';
+import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
+import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
+import { GridComponent } from './components/grid/grid.component';
+import { LegendComponent } from './components/form/legend/legend.component';
 
 @NgModule({
 	declarations: [
@@ -26,6 +32,12 @@ import { TextInputComponent } from './components/form/fudis-text-input/text-inpu
 		HeadingComponent,
 		BodyTextComponent,
 		TextInputComponent,
+		VanillaTextInputComponent,
+		FormLayoutComponent,
+		ErrorSummaryComponent,
+		TextSpacingComponent,
+		GridComponent,
+		LegendComponent,
 	],
 	imports: [MatDialogModule, CommonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
 	exports: [
@@ -37,6 +49,7 @@ import { TextInputComponent } from './components/form/fudis-text-input/text-inpu
 		HeadingComponent,
 		BodyTextComponent,
 		TextInputComponent,
+		LegendComponent,
 	],
 	providers: [FudisDialog],
 })
