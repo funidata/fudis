@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
 @Component({
 	selector: 'fudis-legend',
 	templateUrl: './legend.component.html',
-	styleUrls: ['./legend.component.css'],
+	styleUrls: ['./legend.component.scss'],
 })
-export class LegendComponent {}
+export class LegendComponent {
+	@HostBinding('class') classes = 'fudis-legend';
+}

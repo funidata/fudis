@@ -49,6 +49,7 @@ import { LegendComponent } from './components/form/legend/legend.component';
 		HeadingComponent,
 		BodyTextComponent,
 		TextInputComponent,
+		LegendComponent,
 	],
 	providers: [FudisDialog],
 })

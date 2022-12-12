@@ -27,8 +27,19 @@ export default {
 
 export const Example: Story = () => ({
 	template: `
-	<fudis-heading tag="h2" size="l" text="Regular layout with 2 columns"></fudis-heading>
-		
-		
+	<form>
+	<fieldset>
+	
+	<fudis-grid>
+	<fudis-legend>Olen legendaarinen lomake</fudis-legend>
+	<fudis-vanilla-text-input [required]="true"  label="Password, min length 4, max 6" minLength=4 maxLength=6 type="password" helpText="Help text Nipperkin"></fudis-vanilla-text-input>	
+	<fudis-vanilla-text-input [required]="true"  label="Password, min length 4, max 6" minLength=4 maxLength=6 type="password" helpText="Help text Nipperkin"></fudis-vanilla-text-input>	
+	<fudis-vanilla-text-input [required]="true"  label="Password, min length 4, max 6" minLength=4 maxLength=6 type="password" helpText="Help text Nipperkin"></fudis-vanilla-text-input>	
+	<fudis-vanilla-text-input [required]="true"  label="Password, min length 4, max 6" minLength=4 maxLength=6 type="password" helpText="Help text Nipperkin"></fudis-vanilla-text-input>	
+	</fudis-grid>
+	</fieldset>
+	
+	</form>
+
 	`,
 });

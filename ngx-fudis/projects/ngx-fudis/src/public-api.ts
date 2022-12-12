@@ -9,4 +9,5 @@ export { BodyTextComponent } from './lib/components/typography/body-text/body-te
 export { ButtonComponent } from './lib/components/button/button.component';
 export { TextInputComponent } from './lib/components/form/text-input/text-input.component';
 export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';
+export { LegendComponent } from './lib/components/form/legend/legend.component';
 export { VanillaTextInputComponent } from './lib/components/form/vanilla-text-input/vanilla-text-input.component';

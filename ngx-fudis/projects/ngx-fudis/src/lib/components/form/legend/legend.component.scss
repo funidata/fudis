@@ -1,0 +1,7 @@
+@use '../../../foundations/typography/mixins.scss' as typography;
+
+:host {
+	@include typography.fudis-body-l-regular;
+
+	grid-column: 1/-1;
+}
