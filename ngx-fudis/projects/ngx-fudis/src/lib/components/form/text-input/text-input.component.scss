@@ -17,9 +17,9 @@
 		@include borders.fudis-border-radius('2px');
 
 		box-sizing: border-box;
-		height: spacing.$fudis-spacing-l;
 		padding: spacing.$fudis-spacing-xxs spacing.$fudis-spacing-s;
 		width: 100%;
+		height: spacing.$fudis-spacing-l;
 
 		&:focus {
 			@include focus.fudis-focus-form-field;

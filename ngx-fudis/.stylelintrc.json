@@ -2,12 +2,14 @@
 	"extends": [
 		"stylelint-config-standard-scss",
 		"stylelint-config-sass-guidelines",
+		"stylelint-config-concentric-order",
 		"stylelint-config-prettier-scss"
 	],
 	"ignoreFiles": [
 		"dist/**/*.scss"
 	],
 	"rules": {
+		"order/properties-alphabetical-order": null,
 		"color-no-hex": true,
 		"color-hex-length": "long",
 		"unit-disallowed-list": [

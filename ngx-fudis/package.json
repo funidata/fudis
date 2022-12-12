@@ -67,6 +67,7 @@
 		"ng-packagr": "^13.0.0",
 		"prettier": "2.7.1",
 		"stylelint": "^14.15.0",
+		"stylelint-config-concentric-order": "^5.1.0",
 		"stylelint-config-prettier-scss": "^0.0.1",
 		"stylelint-config-sass-guidelines": "^9.0.1",
 		"stylelint-config-standard-scss": "^6.1.0",

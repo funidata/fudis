@@ -8,127 +8,127 @@
 // Body Text
 
 @mixin fudis-body-l-light {
+  margin-bottom: spacing.$fudis-spacing-l;
+  line-height: tokens.$fudis-body-l-line-height;
   font-family: tokens.$fudis-font-family;
   font-size: tokens.$fudis-body-l-font-size;
   font-weight: tokens.$fudis-light;
-  line-height: tokens.$fudis-body-l-line-height;
-  margin-bottom: spacing.$fudis-spacing-l;
 }
 
 @mixin fudis-body-l-regular {
+  margin-bottom: spacing.$fudis-spacing-l;
+  line-height: tokens.$fudis-body-l-line-height;
   font-family: tokens.$fudis-font-family;
   font-size: tokens.$fudis-body-l-font-size;
   font-weight: tokens.$fudis-regular;
-  line-height: tokens.$fudis-body-l-line-height;
-  margin-bottom: spacing.$fudis-spacing-l;
 }
 
 @mixin fudis-body-m-light {
+  margin-bottom: spacing.$fudis-spacing-m;
+  line-height: tokens.$fudis-body-m-line-height;
   font-family: tokens.$fudis-font-family;
   font-size: tokens.$fudis-body-m-font-size;
   font-weight: tokens.$fudis-light;
-  line-height: tokens.$fudis-body-m-line-height;
-  margin-bottom: spacing.$fudis-spacing-m;
 }
 
 @mixin fudis-body-m-regular {
+  margin-bottom: spacing.$fudis-spacing-m;
+  line-height: tokens.$fudis-body-m-line-height;
   font-family: tokens.$fudis-font-family;
   font-size: tokens.$fudis-body-m-font-size;
   font-weight: tokens.$fudis-regular;
-  line-height: tokens.$fudis-body-m-line-height;
-  margin-bottom: spacing.$fudis-spacing-m;
 }
 
 @mixin fudis-body-s-regular {
+  line-height: tokens.$fudis-body-s-line-height;
   font-family: tokens.$fudis-font-family;
   font-size: tokens.$fudis-body-s-font-size;
   font-weight: tokens.$fudis-regular;
-  line-height: tokens.$fudis-body-s-line-height;
 }
 
 // Headings
 
 @mixin fudis-heading-xxl {
+  margin-bottom: spacing.$fudis-spacing-s;
+  line-height: tokens.$fudis-heading-l-line-height;
   font-family: tokens.$fudis-font-family;
   font-size: tokens.$fudis-heading-xxl-font-size;
   font-weight: tokens.$fudis-medium;
-  line-height: tokens.$fudis-heading-l-line-height;
-  margin-bottom: spacing.$fudis-spacing-s;
 }
 
 @mixin fudis-heading-xl {
+  margin-bottom: spacing.$fudis-spacing-s;
+  line-height: tokens.$fudis-heading-l-line-height;
   font-family: tokens.$fudis-font-family;
   font-size: tokens.$fudis-heading-xl-font-size;
   font-weight: tokens.$fudis-medium;
-  line-height: tokens.$fudis-heading-l-line-height;
-  margin-bottom: spacing.$fudis-spacing-s;
 }
 
 @mixin fudis-heading-l {
+  margin-bottom: spacing.$fudis-spacing-xs;
+  line-height: tokens.$fudis-heading-m-line-height;
   font-family: tokens.$fudis-font-family;
   font-size: tokens.$fudis-heading-l-font-size;
   font-weight: tokens.$fudis-medium;
-  line-height: tokens.$fudis-heading-m-line-height;
-  margin-bottom: spacing.$fudis-spacing-xs;
 }
 
 @mixin fudis-heading-m {
+  margin-bottom: spacing.$fudis-spacing-xs;
+  line-height: tokens.$fudis-heading-m-line-height;
   font-family: tokens.$fudis-font-family;
   font-size: tokens.$fudis-heading-m-font-size;
   font-weight: tokens.$fudis-medium;
-  line-height: tokens.$fudis-heading-m-line-height;
-  margin-bottom: spacing.$fudis-spacing-xs;
 }
 
 @mixin fudis-heading-s {
+  margin-bottom: spacing.$fudis-spacing-xs;
+  line-height: tokens.$fudis-heading-s-line-height;
   font-family: tokens.$fudis-font-family;
   font-size: tokens.$fudis-heading-s-font-size;
   font-weight: tokens.$fudis-medium;
-  line-height: tokens.$fudis-heading-s-line-height;
-  margin-bottom: spacing.$fudis-spacing-xs;
 }
 
 @mixin fudis-heading-xs {
+  margin-bottom: spacing.$fudis-spacing-xs;
+  line-height: tokens.$fudis-heading-s-line-height;
   font-family: tokens.$fudis-font-family;
   font-size: tokens.$fudis-heading-xs-font-size;
   font-weight: tokens.$fudis-bold;
-  line-height: tokens.$fudis-heading-s-line-height;
-  margin-bottom: spacing.$fudis-spacing-xs;
 }
 
 @mixin fudis-heading-xxs {
+  margin-bottom: spacing.$fudis-spacing-xs;
+  line-height: tokens.$fudis-heading-s-line-height;
   font-family: tokens.$fudis-font-family;
   font-size: tokens.$fudis-heading-xxs-font-size;
   font-weight: tokens.$fudis-bold;
-  line-height: tokens.$fudis-heading-s-line-height;
-  margin-bottom: spacing.$fudis-spacing-xs;
 }
 
 // Other UI styles 
 
 @mixin fudis-text-field-label {
+  text-transform: tokens.$fudis-all-caps;
+	line-height: tokens.$fudis-text-input-line-height;
   font-family: tokens.$fudis-font-family;
   font-size: tokens.$fudis-body-m-font-size;
   font-weight: tokens.$fudis-regular;
-	line-height: tokens.$fudis-text-input-line-height;
-  text-transform: tokens.$fudis-all-caps;
 }
 
 @mixin fudis-text-field-input {
+	line-height: tokens.$fudis-text-input-line-height;
 	font-family: tokens.$fudis-font-family;
   font-size: tokens.$fudis-body-l-font-size;
   font-weight: tokens.$fudis-light;
-	line-height: tokens.$fudis-text-input-line-height;
 }
 
 @mixin fudis-button-typography {
 	@include fudis-letter-spacing("1px");
 
+	text-transform: uppercase;
+	line-height: tokens.$fudis-body-s-line-height;
 	font-family: tokens.$fudis-font-family, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: tokens.$fudis-body-m-font-size;
 	font-weight: tokens.$fudis-bold;
-	line-height: tokens.$fudis-body-s-line-height;
-	text-transform: uppercase;
 }
 
 @mixin fudis-letter-spacing($width) {
