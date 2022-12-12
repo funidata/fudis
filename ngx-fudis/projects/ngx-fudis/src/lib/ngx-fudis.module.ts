@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
 	FudisDialogActionsDirective,
@@ -21,6 +22,7 @@ import { ErrorSummaryComponent } from './components/form/error-summary/error-sum
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { GridComponent } from './components/grid/grid.component';
 import { LegendComponent } from './components/form/legend/legend.component';
+import { DropdownComponent } from './components/form/dropdown/dropdown.component';
 
 @NgModule({
 	declarations: [
@@ -38,8 +40,9 @@ import { LegendComponent } from './components/form/legend/legend.component';
 		TextSpacingComponent,
 		GridComponent,
 		LegendComponent,
+		DropdownComponent,
 	],
-	imports: [MatDialogModule, CommonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
+	imports: [MatDialogModule, CommonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatSelectModule],
 	exports: [
 		FudisDialogTitleDirective,
 		FudisDialogActionsDirective,
@@ -50,6 +53,7 @@ import { LegendComponent } from './components/form/legend/legend.component';
 		BodyTextComponent,
 		TextInputComponent,
 		LegendComponent,
+		DropdownComponent,
 	],
 	providers: [FudisDialog],
 })
