@@ -34,6 +34,14 @@ import { Component } from '@angular/core';
 			<fudis-text-input data-theme="sisu" label="vapaaehtoinen email" type="email"></fudis-text-input>
 			<fudis-text-input data-theme="sisu" label="numerot" type="number"></fudis-text-input>
 		</form>
+		<form class="basic-flex-box">
+			<fudis-dropdown data-theme="sisu" [multipleOption]="true" label="Valitse kurssit"></fudis-dropdown>
+			<fudis-dropdown
+				data-theme="sisu"
+				[required]="true"
+				label="Valitse yksi kurssi"
+				helpText="Tästä pitäisi valita kiinnostavin kurssi, ole hyvä"></fudis-dropdown>
+		</form>
 	`,
 	styleUrls: ['./app.scss'],
 })
