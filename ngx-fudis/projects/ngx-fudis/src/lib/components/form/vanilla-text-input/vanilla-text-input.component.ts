@@ -22,7 +22,7 @@ export class VanillaTextInputComponent implements OnInit {
 	 */
 	@Input() label: string;
 
-	@Input() inputId: string;
+	@Input() inputId?: string;
 
 	@Input() required?: boolean = false;
 
@@ -63,18 +63,6 @@ export class VanillaTextInputComponent implements OnInit {
 
 	id: string;
 
-	// Temporary randomiser for ids
-	randomId(): string {
-		const idFromLabel = this.label
-			.toLowerCase()
-			.replace(/[^a-z0-9]+/g, ' ')
-			.split(' ')
-			.slice(0, 3)
-			.join('-');
-		const randomId = `${idFromLabel}-${Math.random().toString(36).slice(2, 6)}`;
-		return randomId;
-	}
-
 	ngOnInit() {
 		if (this.required) {
 			this.validatorArray.push(Validators.required);
@@ -100,6 +88,18 @@ export class VanillaTextInputComponent implements OnInit {
 			this.id = this.randomId();
 		}
 	}
+
+	// Temporary randomiser for ids
+	randomId = () => {
+		const idFromLabel = this.label
+			.toLowerCase()
+			.replace(/[^a-z0-9]+/g, ' ')
+			.split(' ')
+			.slice(0, 3)
+			.join('-');
+		const randomId = `${idFromLabel}-${Math.random().toString(36).slice(2, 6)}`;
+		return randomId;
+	};
 
 	// Check and returns browsers native error message
 	checkErrors(): void {

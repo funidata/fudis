@@ -15,6 +15,7 @@ describe('VanillaTextInputComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(VanillaTextInputComponent);
 		component = fixture.componentInstance;
+		component.label = 'Label for testing purposes';
 		fixture.detectChanges();
 	});
 
