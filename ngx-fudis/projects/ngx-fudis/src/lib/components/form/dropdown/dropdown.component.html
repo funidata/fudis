@@ -1,0 +1,25 @@
+<mat-form-field class="fudis-dropdown" floatLabel="always" appearance="standard" hideRequiredMarker>
+	<mat-label class="fudis-dropdown__label">
+		{{ label }}
+		<span class="fudis-dropdown__label--required" *ngIf="this.required">Pakollinen *</span>
+	</mat-label>
+	<mat-select
+		#fudisDropdown
+		disableOptionCentering
+		panelClass="fudis-dropdown__option-list"
+		class="fudis-dropdown__select"
+		[placeholder]="placeholder || 'Valitse'"
+		floatPlaceholder="never"
+		[required]="required"
+		[multiple]="multipleOption"
+		[formControl]="selectFormControl"
+		[(ngModel)]="selectedOption">
+		<mat-option *ngFor="let option of options2" [value]="option.value">
+			{{ option.viewValue }}
+		</mat-option>
+	</mat-select>
+	<mat-error class="fudis-dropdown__error" *ngIf="selectFormControl.invalid && selectFormControl.touched">
+		Hei tää on pakollinen
+	</mat-error>
+	<mat-hint class="fudis-dropdown__help-text" *ngIf="helpText">{{ helpText }}</mat-hint>
+</mat-form-field>
