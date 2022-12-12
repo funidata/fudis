@@ -11,12 +11,19 @@
 	@include typography.fudis-button-typography;
 	@include borders.fudis-border('2px', 'solid', 'primary');
 
-	cursor: pointer;
 	display: inline-block;
+	cursor: pointer;
 	padding: 0 spacing.$fudis-spacing-xs;		
 
 	&:focus {
 		@include focus.fudis-focus-generic;
+	}
+
+	&:disabled {
+		@include colors.fudis-text-color('gray-dark');
+		@include colors.fudis-bg-color('gray-light');
+		@include borders.fudis-border('2px', 'solid', 'transparent');
+		@include borders.fudis-outline('1px', 'dashed', 'gray-middle');
 	}
 
 	&__primary {
@@ -40,12 +47,5 @@
 
 	&__medium {
 		height: spacing.$fudis-spacing-l;
-	}
-
-	&:disabled {
-		@include colors.fudis-text-color('gray-dark');
-		@include colors.fudis-bg-color('gray-light');
-		@include borders.fudis-border('2px', 'solid', 'transparent');
-		@include borders.fudis-outline('1px', 'dashed', 'gray-middle');
 	}
 }
