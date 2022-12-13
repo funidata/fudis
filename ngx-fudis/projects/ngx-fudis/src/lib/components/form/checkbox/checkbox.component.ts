@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 
@@ -12,6 +12,7 @@ export interface Checkbox {
 	selector: 'fudis-checkbox',
 	templateUrl: './checkbox.component.html',
 	styleUrls: ['./checkbox.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxComponent {
 	@ViewChild('fudisCheckbox') input: ElementRef<HTMLInputElement>;
