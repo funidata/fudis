@@ -24,13 +24,11 @@ export class DropdownComponent implements OnInit {
 	 */
 	options2: Option[] = [
 		{ value: 'Leivonta-101', viewValue: 'Leivontakurssi, joka kestää tosi kauan ja on tosi spesifi' },
-		{ value: 'Hiivat661', viewValue: 'Kaikki hiivasta' },
+		{ value: 'Hiivat661', viewValue: 'Kaikki hiivasta', disabled: true },
 		{ value: 'Sticky-bun', viewValue: 'Luonnon pullat' },
 	];
 
 	@Input() required = false;
-
-	@Input() disabled = false;
 
 	/**
 	 * If true, user can choose multiple checkbox options from dropdown
@@ -50,8 +48,6 @@ export class DropdownComponent implements OnInit {
 	@Input() helpText?: string;
 
 	selectedOption: Option;
-
-	defaultError: string;
 
 	validatorArray: any = [];
 

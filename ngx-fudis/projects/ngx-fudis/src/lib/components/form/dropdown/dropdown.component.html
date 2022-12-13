@@ -13,8 +13,8 @@
 		[required]="required"
 		[multiple]="multipleOption"
 		[formControl]="selectFormControl"
-		[(ngModel)]="selectedOption">
-		<mat-option *ngFor="let option of options2" [value]="option.value">
+		[(value)]="selectedOption">
+		<mat-option *ngFor="let option of options2" [value]="option.value" [disabled]="option.disabled">
 			{{ option.viewValue }}
 		</mat-option>
 	</mat-select>
