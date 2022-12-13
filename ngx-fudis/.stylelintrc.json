@@ -2,12 +2,14 @@
 	"extends": [
 		"stylelint-config-standard-scss",
 		"stylelint-config-sass-guidelines",
+		"stylelint-config-concentric-order",
 		"stylelint-config-prettier-scss"
 	],
 	"ignoreFiles": [
 		"dist/**/*.scss"
 	],
 	"rules": {
+		"order/properties-alphabetical-order": null,
 		"color-no-hex": true,
 		"color-hex-length": "long",
 		"unit-disallowed-list": [
@@ -15,7 +17,7 @@
 			"rem"
 		],
 		"function-parentheses-space-inside": "never-single-line",
-		"max-nesting-depth": 3,
+		"max-nesting-depth": 4,
 		"declaration-no-important": true,
 		"selector-max-empty-lines": 0,
 		"selector-max-class": 2,

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, HostBinding } from '@angular/core';
 
 type BodyTextSize = 'l-regular' | 'm-regular' | 's-regular' | 'l-light' | 'm-light';
 
@@ -8,5 +8,7 @@ type BodyTextSize = 'l-regular' | 'm-regular' | 's-regular' | 'l-light' | 'm-lig
 	styleUrls: ['./body-text.component.scss'],
 })
 export class BodyTextComponent {
-	@Input() size: BodyTextSize;
+	@HostBinding('class') classes = 'fudis-body-text';
+
+	@Input() size: BodyTextSize = 'm-regular';
 }

@@ -1,3 +1,4 @@
+/* stylelint-disable property-disallowed-list */
 @use '../spacing/tokens.scss' as spacing;
 @use '../borders/mixins.scss' as borders;
 @import './tokens';
@@ -5,17 +6,15 @@
 
 
 @mixin fudis-focus-generic {
-  box-shadow: 0 0 0 spacing.$fudis-spacing-xxs $fudis-white;
-	/* stylelint-disable-next-line property-disallowed-list */
 	outline: $fudis-focus-generic-outline;
   outline-offset: spacing.$fudis-pixel-1;
+  box-shadow: 0 0 0 spacing.$fudis-spacing-xxs $fudis-white;
 }
 
 @mixin fudis-focus-form-field {
 	@include borders.fudis-border('1px', 'solid', 'primary');
 
-  box-shadow: 0 0 0 spacing.$fudis-pixel-1 $fudis-white;
-  /* stylelint-disable-next-line property-disallowed-list */
   outline: $fudis-focus-form-field-outline;
   outline-offset: -(spacing.$fudis-pixel-2);
+  box-shadow: 0 0 0 spacing.$fudis-pixel-1 $fudis-white;
 }

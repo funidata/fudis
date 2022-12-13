@@ -13,6 +13,9 @@
 // Each project's primary colors import
 @import "./src/lib/foundations/borders/mixins";
 
+// Import font files globally
+@import './src/lib/foundations/typography/fonts';
+
 
 
 /* stylelint-disable color-no-hex */

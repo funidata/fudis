@@ -1,0 +1,16 @@
+<ng-container>
+	<div class="fudis-error-summary" *ngIf="errors.length > 0">
+		<fudis-heading tag="h2" size="l" text="Oh no we have some errors!"></fudis-heading>
+		<ul>
+			<li *ngFor="let item of errors">
+				<p>{{ item.id }}</p>
+				<ol>
+					<li *ngFor="let error of item.messages">
+						<fudis-button (click)="focusOnError(item.id)" variant="tertiary" label="{{ error }}"></fudis-button>
+					</li>
+				</ol>
+			</li>
+		</ul>
+	</div>
+	<ng-content></ng-content>
+</ng-container>

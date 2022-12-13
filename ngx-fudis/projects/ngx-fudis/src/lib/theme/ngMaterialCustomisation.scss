@@ -8,10 +8,10 @@ mat-form-field {
  				padding-bottom: 0;
  			}
 		
- 			&-subscript-wrapper {
+			&-subscript-wrapper {
+				position: relative;
 				margin-top: 0;
- 				position: relative;
- 			}
+			}
 		
  			&-infix {
  				display: flex;
@@ -20,17 +20,17 @@ mat-form-field {
 		
 			}
 		
- 			&-label-wrapper {
- 				padding-top: 0;
- 				position: relative;
- 			}
+			&-label-wrapper {
+				position: relative;
+				padding-top: 0;
+			}
 		
- 			&-label {
- 				position: relative;
- 				top: 0;
- 				transform: none;
- 				white-space: inherit;
- 				width: 100%;
+			&-label {
+				position: relative;
+				top: 0;
+				transform: none;
+				width: 100%;
+				white-space: inherit;
 			}
  		}
  	}
