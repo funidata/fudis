@@ -55,6 +55,10 @@
 
 		margin-top: spacing.$fudis-spacing-xs;
 	}
+
+	&--invalid {
+		border-color: colors.$fudis-red;
+  }
 }
 
 /* stylelint-disable selector-no-qualifying-type */

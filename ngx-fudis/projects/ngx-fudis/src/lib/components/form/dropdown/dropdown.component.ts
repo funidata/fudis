@@ -58,4 +58,11 @@ export class DropdownComponent implements OnInit {
 			this.validatorArray.push(Validators.required);
 		}
 	}
+
+	public get classes(): string[] {
+		if (this.selectFormControl.touched && this.selectFormControl.invalid) {
+			return ['fudis-dropdown--invalid'];
+		}
+		return [];
+	}
 }
