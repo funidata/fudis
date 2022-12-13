@@ -49,4 +49,4 @@ $fudis-theme: mat.define-light-theme(
 );
 
 // Emit theme-dependent styles for common features used across multiple Material components.
-@include mat.all-component-themes($fudis-theme);
+@include mat.core-theme($fudis-theme);
