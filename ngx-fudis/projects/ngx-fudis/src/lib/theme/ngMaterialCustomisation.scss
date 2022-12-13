@@ -1,29 +1,32 @@
-/* stylelint-disable selector-no-qualifying-type */
-/* stylelint-disable selector-max-class */
 mat-form-field {
-	/* stylelint-disable-next-line selector-class-pattern */
-	&.mat-form-field-should-float.mat-form-field-can-float .mat-form-field {
+/* stylelint-disable-next-line selector-class-pattern */ /* stylelint-disable-next-line selector-max-class */ /* stylelint-disable-next-line selector-no-qualifying-type */
+&.mat-form-field-should-float.mat-form-field-can-float .mat-form-field {
+			/* stylelint-disable-next-line selector-max-class */
 			&-wrapper {
-				padding-bottom: 0;
-			}
+ 				padding-bottom: 0;
+ 			}
 		
+			/* stylelint-disable-next-line selector-max-class */
 			&-subscript-wrapper {
 				position: relative;
 				margin-top: 0;
 			}
 		
-			&-infix {
-				display: flex;
+ 			/* stylelint-disable-next-line selector-max-class */
+ 			&-infix {
+ 				display: flex;
 				flex-direction: column-reverse;
 				padding: 0;
 		
 			}
 		
+			/* stylelint-disable-next-line selector-max-class */
 			&-label-wrapper {
 				position: relative;
 				padding-top: 0;
 			}
 		
+			/* stylelint-disable-next-line selector-max-class */
 			&-label {
 				position: relative;
 				top: 0;
@@ -31,10 +34,6 @@ mat-form-field {
 				width: 100%;
 				white-space: inherit;
 			}
-		}
-	}
-	
+ 		}
+ 	}
 
-
-
- 

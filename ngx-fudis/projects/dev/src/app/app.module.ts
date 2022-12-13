@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -16,11 +18,13 @@ import { DialogTestContentComponent } from './dialog-test/dialog-test-content/di
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
+		FormsModule,
 		NgxFudisModule,
 		MatButtonModule,
 		MatInputModule,
 		MatFormFieldModule,
 		MatDialogModule,
+		MatCheckboxModule,
 		MatSelectModule,
 	],
 	bootstrap: [AppComponent],

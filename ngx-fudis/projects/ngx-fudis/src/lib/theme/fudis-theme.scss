@@ -3,7 +3,7 @@
 @import './palette';
 
 $fudis-primary: mat.define-palette($fudis-palette, 500);
-$fudis-accent: mat.define-palette($fudis-palette, 700);
+$fudis-accent: mat.define-palette($accent-palette, 200);
 
 // Angular Material default typography styling
 $fudis-typography: mat.define-typography-config(
