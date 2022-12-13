@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
 	FudisDialogActionsDirective,
 	FudisDialogCloseDirective,
@@ -12,6 +13,7 @@ import {
 } from './components/dialog/dialog-directives';
 import { FudisDialog } from './components/dialog/dialog';
 import { ButtonComponent } from './components/button/button.component';
+import { CheckboxComponent } from './components/form/checkbox/checkbox.component';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { TextInputComponent } from './components/form/text-input/text-input.component';
@@ -31,6 +33,8 @@ import { LegendComponent } from './components/form/legend/legend.component';
 		ButtonComponent,
 		HeadingComponent,
 		BodyTextComponent,
+		ButtonComponent,
+		CheckboxComponent,
 		TextInputComponent,
 		VanillaTextInputComponent,
 		FormLayoutComponent,
@@ -39,7 +43,15 @@ import { LegendComponent } from './components/form/legend/legend.component';
 		GridComponent,
 		LegendComponent,
 	],
-	imports: [MatDialogModule, CommonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
+	imports: [
+		FormsModule,
+		MatDialogModule,
+		CommonModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatCheckboxModule,
+		ReactiveFormsModule,
+	],
 	exports: [
 		FudisDialogTitleDirective,
 		FudisDialogActionsDirective,
@@ -48,6 +60,8 @@ import { LegendComponent } from './components/form/legend/legend.component';
 		ButtonComponent,
 		HeadingComponent,
 		BodyTextComponent,
+		ButtonComponent,
+		CheckboxComponent,
 		TextInputComponent,
 		LegendComponent,
 	],

@@ -1,0 +1,90 @@
+@use '../../../foundations/colors/mixins.scss' as colors;
+@use '../../../foundations/colors/tokens.scss' as colorsToken;
+@use '../../../foundations/borders/mixins.scss' as borders;
+
+/* stylelint-disable  */
+mat-checkbox.fudis-checkbox {
+		// Overide for mat-checkbox rounded corners
+		& .mat-checkbox-frame {
+			border-radius: 0;
+		}
+
+		& .mat-checkbox-checkmark .mat-checkbox-checkmark-path {
+			stroke: colorsToken.$fudis-gray-dark;
+		}
+
+		& .mat-ripple-element {
+			background-color: transparent;
+		}
+
+		&.mat-checkbox-checked .mat-checkbox-background {
+			@include colors.fudis-bg-color('white');
+		}
+
+		// disabling mat-ripple hover 
+		&.mat-checkbox-checked:not(.mat-checkbox-disabled) .mat-ripple-element, .mat-checkbox:active:not(.mat-checkbox-disabled) .mat-ripple-element {
+			opacity: 0;
+		}
+
+		// Primary checkbox styling
+		&.mat-primary .mat-checkbox-frame {
+			@include borders.fudis-border('1px', 'solid', 'gray-middle');
+
+			z-index: 1;
+		}
+
+		&.mat-primary.mat-checkbox-unchecked .mat-checkbox-frame {
+			@include borders.fudis-border('1px', 'solid', 'gray-middle');	
+		}
+
+		// Overrides for primary checkbox keyboad and mouse focus styles
+		&.mat-primary.cdk-focused.cdk-program-focused {
+			& .mat-checkbox-frame {
+				@include borders.fudis-border('2px', 'solid', 'primary');
+
+				box-sizing: border-box;
+				z-index: 1;	
+			}
+		}
+
+		&.mat-primary.cdk-focused.cdk-keyboard-focused {
+			& .mat-checkbox-frame {
+				@include borders.fudis-border('2px', 'solid', 'primary');
+
+				box-sizing: border-box;
+				z-index: 1;	
+			}
+		}
+
+		// Invalid checkbox color warn
+		&.mat-warn .mat-checkbox-frame {
+			@include borders.fudis-border('1px', 'solid', 'red');	
+
+			z-index: 1;	
+		}
+
+		&.mat-warn.cdk-focused.cdk-program-focused {
+			& .mat-checkbox-frame {
+				@include borders.fudis-outline('2px', 'solid', 'red-light');
+			}
+		}
+
+		&.mat-warn.cdk-focused.cdk-keyboard-focused {
+			& .mat-checkbox-frame {
+				@include borders.fudis-outline('2px', 'solid', 'red-light');
+			}
+		}
+
+		// Disabled checkbox focus styles
+		&.mat-checkbox-disabled {
+			& .mat-checkbox-frame {
+				@include borders.fudis-border('1px', 'dashed', 'gray-middle');	
+				@include colors.fudis-bg-color('gray-extra-light');
+			}
+			& .mat-checkbox-label {
+				@include colors.fudis-text-color('gray-middle');
+			}
+		}
+}
+
+

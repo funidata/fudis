@@ -1,3 +1,4 @@
 @use "@angular/material" as mat;
 @use '../../ngx-fudis/style.scss';
+@use '../../ngx-fudis/src/lib/theme/fudis-theme.scss';
 @include mat.core;

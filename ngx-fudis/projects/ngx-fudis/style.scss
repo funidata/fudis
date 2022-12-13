@@ -5,7 +5,7 @@
 @use "./src/lib/theme/ngMaterialCustomisation.scss";
 
 // Fudis styles from components that have to be applied globally.
-@use "src/lib/components/dialog/dialog.scss";
+// @use "src/lib/components/dialog/dialog.scss";
 
 // Each project's primary colors import
 @import "./src/lib/foundations/colors/tokens";
