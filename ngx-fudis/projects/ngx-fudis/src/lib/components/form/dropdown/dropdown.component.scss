@@ -14,10 +14,10 @@
 		&--required {
 			@include typography.fudis-body-s-regular;
 
-			text-transform: none;
 			position: absolute;
-			bottom: 0;
 			right: 0;
+			bottom: 0;
+			text-transform: none;
 		}
 	}
 
@@ -27,8 +27,8 @@
 		@include borders.fudis-border-radius('2px');
 
 		box-sizing: border-box;
-		height: spacing.$fudis-spacing-xl;
 		padding: spacing.$fudis-spacing-xxs spacing.$fudis-spacing-s;
+		height: spacing.$fudis-spacing-xl;
 
 		&:focus {
 			@include focus.fudis-focus-form-field;
@@ -67,8 +67,8 @@ mat-form-field.fudis-dropdown {
 			}
 		
 			&-subscript-wrapper {
-				margin-top: 0;
 				position: relative;
+				margin-top: 0;
 			}
 		
 			&-infix {
@@ -79,16 +79,16 @@ mat-form-field.fudis-dropdown {
 			}
 		
 			&-label-wrapper {
-				padding-top: 0;
 				position: relative;
+				padding-top: 0;
 			}
 		
 			&-label {
 				position: relative;
 				top: 0;
 				transform: none;
-				white-space: inherit;
 				width: 100%;
+				white-space: inherit;
 			}
 		}
 
