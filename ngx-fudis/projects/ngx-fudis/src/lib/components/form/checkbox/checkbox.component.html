@@ -1,41 +1,5 @@
-<form id="myForm">
-	<!-- <mat-checkbox
-		type="checkbox"
-		id="yksi"
-		type="checkbox"
-		class="example-margin"
-		[color]="color"
-		#fudisCheckbox
-		[formControl]="control"
-		[required]="required"
-		[checked]="checked"
-		[disabled]="disabled"
-		[disableRipple]="disableRipple"
-		[ngClass]="classes"
-		class="fudis-checkbox">
-		click me!
-	</mat-checkbox> -->
-	<!-- <mat-checkbox
-		type="checkbox"
-		id="yksi"
-		type="checkbox"
-		class="example-margin"
-		[color]="color"
-		#fudisCheckbox
-		[required]="required"
-		[disabled]="disabled"
-		[disableRipple]="disableRipple"
-		[formControl]="control"
-		[(ngModel)]="checked"
-		(ngModelChange)="onModelChange($event)"
-		[ngClass]="classes"
-		class="fudis-checkbox">
-		<span *ngIf="required">Olen pakollinen!</span>
-		click me!
-	</mat-checkbox> -->
+<!-- <form id="myForm">
 	<mat-checkbox
-		type="checkbox"
-		id="kaksi"
 		type="checkbox"
 		class="example-margin"
 		[color]="color"
@@ -48,8 +12,22 @@
 		[ngClass]="classes"
 		class="fudis-checkbox">
 		Check me!
-	</mat-checkbox>
-
+	</mat-checkbox> -->
+<mat-checkbox
+	type="checkbox"
+	class="example-margin"
+	[color]="color"
+	#fudisCheckbox
+	formControlName="control"
+	(change)="toggleChecked($event)"
+	[required]="required"
+	[disabled]="disabled"
+	[disableRipple]="disableRipple"
+	[ngClass]="classes"
+	class="fudis-checkbox">
+	Check me!
+</mat-checkbox>
+<!-- 
 	<button form="form1" type="submit" (click)="checkErrors()">Lähetä</button>
 	<div *ngIf="showError">Kääk virhe!</div>
-</form>
+</form> -->

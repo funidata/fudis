@@ -35,12 +35,11 @@ export class CheckboxComponent {
 	 */
 	@Input() classes: string;
 
-	@Input() disabled: boolean;
+	@Input() disabled = false;
 
 	@Input() required: boolean;
 
 	toggleChecked(event: MatCheckboxChange): void {
-		console.log('moro togglesta');
 		if (event.checked) {
 			this.checked = true;
 			this.color = 'primary';

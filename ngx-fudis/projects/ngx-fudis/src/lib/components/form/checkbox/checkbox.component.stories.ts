@@ -22,7 +22,6 @@ export const Checkbox = Template.bind({});
 Checkbox.args = {
 	name: 'checkbox 1',
 	disabled: false,
-	checked: false,
 	required: true,
 };
 
@@ -30,11 +29,5 @@ export const Disabled = Template.bind({});
 Disabled.args = {
 	name: 'checkbox 2',
 	disabled: true,
+	required: true,
 };
-
-export const MultipleCheckboxes = () => ({
-	template: `\
-			<fudis-checkbox name="eka" [required]>Tämä on checkki 1 checked</fudis-checkbox>
-			<fudis-checkbox name="toka">Tämä on checkki 2</fudis-checkbox>
-`,
-});

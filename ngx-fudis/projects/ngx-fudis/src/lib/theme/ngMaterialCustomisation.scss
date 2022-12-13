@@ -51,7 +51,7 @@ mat-form-field {
 			}
 
 			&.mat-checkbox-checked .mat-checkbox-background {
-				background-color: white;
+				@include colors.fudis-bg-color('white');
 			}
 
 			// disabling mat-ripple hover 
@@ -98,27 +98,26 @@ mat-form-field {
 
 			&.mat-warn.cdk-focused.cdk-program-focused {
 				& .mat-checkbox-frame {
-					box-sizing: border-box;
-					outline: #f5d9d6 solid 2px;
+					@include borders.fudis-outline('2px', 'solid', 'red-light');
 				}
 			}
 
 			&.mat-warn.cdk-focused.cdk-keyboard-focused {
 				& .mat-checkbox-frame {
-					box-sizing: border-box;
-					outline: #f5d9d6 solid 2px;
+					@include borders.fudis-outline('2px', 'solid', 'red-light');
 				}
 			}
 
 			// Disabled checkbox focus styles
-			&.mat-checkbox-disabled .mat-checkbox-frame {
-				@include borders.fudis-border('1px', 'dashed', 'gray-middle');	
-				@include colors.fudis-bg-color('gray-extra-light');
-
-				& .mat-checkbox-label {
-					color: #484848;
-				}
+			&.mat-checkbox-disabled {
+				& .mat-checkbox-frame {
+					@include borders.fudis-border('1px', 'dashed', 'gray-middle');	
+					@include colors.fudis-bg-color('gray-extra-light');
 			}
+				& .mat-checkbox-label {
+					@include colors.fudis-text-color('gray-middle');
+			}
+		}
 		}
 	}
 
