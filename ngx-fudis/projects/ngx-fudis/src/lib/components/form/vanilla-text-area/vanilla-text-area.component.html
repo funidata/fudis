@@ -1,0 +1,39 @@
+<div class="fudis-form-element fudis-text-area fudis-text-area__{{ size }}">
+	<label class="fudis-text-area__label">
+		<div class="fudis-text-area__label__content">
+			<span class="fudis-text-area__label__text">
+				{{ label }}
+			</span>
+			<span class="fudis-text-area__label__required" *ngIf="required">Pakollinen&nbsp;*</span>
+		</div>
+		<textarea
+			#fudisTextArea
+			class="fudis-text-area__textarea"
+			[ngClass]="classes"
+			(blur)="checkErrors()"
+			(change)="checkErrors()"
+			[formControl]="textAreaControl"
+			[(ngModel)]="textAreaLength"
+			(ngModelChange)="usedLength()"
+			[maxLength]="maxLength"
+			[required]="required">
+		</textarea>
+		<div class="fudis-text-area__guidance">
+			<div class="fudis-text-area__guidance__character-limit-indicator" *ngIf="maxLength">
+				{{ usedCharacters || 0 }}/{{ maxLength }}
+			</div>
+			<div
+				class="fudis-text-area__guidance__error"
+				aria-live="polite"
+				role="alert"
+				*ngIf="textAreaControl.invalid && textAreaControl.touched">
+				{{ this.defaultError }}
+			</div>
+			<div
+				class="fudis-text-area__guidance__help-text"
+				*ngIf="(textAreaControl.invalid && textAreaControl.untouched) || textAreaControl.valid">
+				{{ helpText }}
+			</div>
+		</div>
+	</label>
+</div>
