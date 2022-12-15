@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormControl, Validators } from '@angular/forms';
 	templateUrl: './vanilla-text-area.component.html',
 	styleUrls: ['./vanilla-text-area.component.scss'],
 })
-export class VanillaTextAreaComponent implements OnInit, AfterViewInit {
+export class VanillaTextAreaComponent implements OnInit {
 	@ViewChild('fudisTextArea') textarea: ElementRef<HTMLTextAreaElement>;
 
 	/**
@@ -34,9 +34,7 @@ export class VanillaTextAreaComponent implements OnInit, AfterViewInit {
 
 	defaultError: string;
 
-	usedCharacters: number;
-
-	textAreaLength: string;
+	usedCharacters: number = 0;
 
 	ngOnInit(): void {
 		if (this.required) {
@@ -44,23 +42,13 @@ export class VanillaTextAreaComponent implements OnInit, AfterViewInit {
 		}
 	}
 
-	ngAfterViewInit(): void {
-		this.usedLength();
+	checkLength(): void {
+		this.usedCharacters = this.textarea?.nativeElement.value.length;
 	}
 
-	usedLength = () => {
-		if (this.maxLength! > 0) {
-			this.usedCharacters = this.textarea.nativeElement.value.length;
-		} else {
-			this.textarea.nativeElement.removeAttribute('maxLength');
-		}
-	};
-
 	checkErrors(): void {
-		const textAreaElement = this.textarea.nativeElement;
-
-		if (textAreaElement.validationMessage) {
-			this.defaultError = textAreaElement.validationMessage;
+		if (this.textarea.nativeElement.validationMessage) {
+			this.defaultError = this.textarea.nativeElement.validationMessage;
 		}
 	}
 

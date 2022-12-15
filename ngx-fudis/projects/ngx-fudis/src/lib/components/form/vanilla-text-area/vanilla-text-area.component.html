@@ -11,11 +11,9 @@
 			class="fudis-text-area__textarea"
 			[ngClass]="classes"
 			(blur)="checkErrors()"
-			(change)="checkErrors()"
 			[formControl]="textAreaControl"
-			[(ngModel)]="textAreaLength"
-			(ngModelChange)="usedLength()"
-			[maxLength]="maxLength"
+			(ngModelChange)="checkLength()"
+			[attr.maxLength]="maxLength"
 			[required]="required">
 		</textarea>
 		<div class="fudis-text-area__guidance">
