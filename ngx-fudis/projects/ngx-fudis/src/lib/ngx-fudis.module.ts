@@ -23,6 +23,7 @@ import { ErrorSummaryComponent } from './components/form/error-summary/error-sum
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { GridComponent } from './components/grid/grid.component';
 import { LegendComponent } from './components/form/legend/legend.component';
+import { FudisCheckboxComponent } from './components/fudis-checkbox/fudis-checkbox.component';
 
 @NgModule({
 	declarations: [
@@ -33,7 +34,6 @@ import { LegendComponent } from './components/form/legend/legend.component';
 		ButtonComponent,
 		HeadingComponent,
 		BodyTextComponent,
-		ButtonComponent,
 		CheckboxComponent,
 		TextInputComponent,
 		VanillaTextInputComponent,
@@ -42,6 +42,7 @@ import { LegendComponent } from './components/form/legend/legend.component';
 		TextSpacingComponent,
 		GridComponent,
 		LegendComponent,
+		FudisCheckboxComponent,
 	],
 	imports: [
 		FormsModule,
@@ -53,6 +54,7 @@ import { LegendComponent } from './components/form/legend/legend.component';
 		ReactiveFormsModule,
 	],
 	exports: [
+		FudisCheckboxComponent,
 		FudisDialogTitleDirective,
 		FudisDialogActionsDirective,
 		FudisDialogContentDirective,
@@ -60,7 +62,6 @@ import { LegendComponent } from './components/form/legend/legend.component';
 		ButtonComponent,
 		HeadingComponent,
 		BodyTextComponent,
-		ButtonComponent,
 		CheckboxComponent,
 		TextInputComponent,
 		LegendComponent,

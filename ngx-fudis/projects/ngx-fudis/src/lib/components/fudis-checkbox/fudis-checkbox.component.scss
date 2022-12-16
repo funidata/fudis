@@ -1,0 +1,44 @@
+@use '../../foundations/borders/mixins.scss' as borders;
+@use '../../foundations/spacing/tokens.scss' as spacing;
+@use '../../foundations/colors/tokens.scss' as colors;
+@use '../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../foundations/focus/mixins.scss' as focus; 
+@use '../../foundations/typography/mixins.scss' as typography;
+
+.container {
+	width: 1.15em;
+  height: 1.15em;
+	display: block;
+  position: relative;
+  cursor: pointer;
+	border-radius: 0;
+	@include colorMixins.fudis-text-color('gray-dark');
+	@include borders.fudis-border('1px', 'solid', 'gray-middle');
+	&.disabled {
+		@include borders.fudis-border('1px', 'dashed', 'gray-middle');	
+		@include colorMixins.fudis-bg-color('gray-extra-light');
+	}
+}
+.label {
+	@include typography.fudis-body-m-regular;
+}
+.fudis-checkbox {
+	-webkit-appearance: none;
+  appearance: none;
+	display: grid;
+  place-content: center;
+	margin: 0;
+
+	&--invalid {
+		@include borders.fudis-border('1px', 'solid', 'red');	
+	}
+
+}
+.icon-checkbox {
+	#check-small {
+		top: 2px;
+		left: 1px;
+		position: absolute;
+		fill: colors.$fudis-gray-middle;
+	}
+}
