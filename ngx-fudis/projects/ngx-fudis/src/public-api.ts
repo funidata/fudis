@@ -13,3 +13,4 @@ export { TextInputComponent } from './lib/components/form/text-input/text-input.
 export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';
 export { LegendComponent } from './lib/components/form/legend/legend.component';
 export { VanillaTextInputComponent } from './lib/components/form/vanilla-text-input/vanilla-text-input.component';
+export { BadgeComponent } from './lib/components/badge/badge.component';
