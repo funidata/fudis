@@ -18,9 +18,20 @@
 		cursor: pointer;
 		border-radius: 0;
 		@include borders.fudis-border('1px', 'solid', 'gray-middle');
+		:focus {
+			@include focus.fudis-focus-checkbox;
+		}
+
 		&.disabled {
 			@include borders.fudis-border('1px', 'dashed', 'gray-middle');	
 			@include colorMixins.fudis-bg-color('gray-extra-light');
+		}
+
+		&.invalid {
+			@include borders.fudis-border('1px', 'solid', 'red');	
+			:focus {
+				@include focus.fudis-focus-checkbox-error;
+			}
 		}
 
 		.checkbox-input {
@@ -29,12 +40,8 @@
 			display: grid;
 			place-content: center;
 			margin: 0;
-		
-			&--invalid {
-				@include borders.fudis-border('1px', 'solid', 'red');	
-			}
-		
 		}
+
 		.icon-checkbox {
 			#check-small {
 				top: 1px;

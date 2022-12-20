@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
 
 @Component({
 	selector: 'fudis-native-checkbox',
@@ -10,13 +9,19 @@ import { FormControl, Validators } from '@angular/forms';
 export class FudisCheckboxComponent {
 	@Input() disabled?: boolean = false;
 
+	@Input() invalid: boolean;
+
 	@Input() label: string;
+
+	@Input() name: string;
 
 	@Input() required: boolean;
 
 	@Input() checked?: boolean = false;
 
-	control = new FormControl('', Validators.required);
+	@Input() classes: string;
+
+	showError: boolean = false;
 
 	@Output() checkedChange = new EventEmitter<boolean>();
 
@@ -28,10 +33,13 @@ export class FudisCheckboxComponent {
 		this.checkedChange.emit(this.checked);
 	}
 
-	public get classes(): string[] {
-		if (this.control.touched && this.control.invalid) {
-			return ['fudis-checkbox--invalid'];
+	checkErrors(): void {
+		if (this.required && !this.checked) {
+			this.invalid = true;
+			this.showError = true;
+		} else {
+			this.invalid = false;
+			this.showError = false;
 		}
-		return [];
 	}
 }
