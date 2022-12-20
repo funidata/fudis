@@ -21,13 +21,15 @@
 
 @mixin fudis-focus-checkbox {
 	@include borders.fudis-outline('1px', 'solid', 'primary');
-	width: 1rem;
-	height: 1rem;
+
+	width: spacing.$fudis-spacing-s;
+	height: spacing.$fudis-spacing-s;
 }
 
 @mixin fudis-focus-checkbox-error {
 	@include borders.fudis-outline('1px', 'solid', 'red');
+	
   box-shadow: 0 0 0 spacing.$fudis-pixel-3 $fudis-red-light;
-	width: 1rem;
-	height: 1rem;
+	width: spacing.$fudis-spacing-s;
+	height: spacing.$fudis-spacing-s;
 }

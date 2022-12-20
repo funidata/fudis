@@ -5,19 +5,20 @@
 @use '../../foundations/focus/mixins.scss' as focus; 
 @use '../../foundations/typography/mixins.scss' as typography;
 
-.fudis-checkbox  {
+.fudis-checkbox {
 	display: inline-flex;
-	height: 2rem;
+	height: spacing.$fudis-spacing-s;
 	align-items: center;
-	.container {
-		width: 1rem;
-		height: 1rem;
-		margin: 0.5rem;
-		display: block;
-		position: relative;
-		cursor: pointer;
-		border-radius: 0;
+	.fudis-checkbox-container {
 		@include borders.fudis-border('1px', 'solid', 'gray-middle');
+		width: spacing.$fudis-spacing-s;
+		height: spacing.$fudis-spacing-s;
+		display: block;
+		margin: spacing.$fudis-spacing-xs;
+		position: relative;
+		border-radius: 0;
+		cursor: pointer;
+
 		:focus {
 			@include focus.fudis-focus-checkbox;
 		}
@@ -28,7 +29,8 @@
 		}
 
 		&.invalid {
-			@include borders.fudis-border('1px', 'solid', 'red');	
+			@include borders.fudis-border('1px', 'solid', 'red');
+			
 			:focus {
 				@include focus.fudis-focus-checkbox-error;
 			}
@@ -44,12 +46,14 @@
 
 		.icon-checkbox {
 			#check-small {
-				top: 1px;
 				position: absolute;
+				top: spacing.$fudis-pixel-1;
 				fill: colors.$fudis-gray-middle;
 			}
 		}
+		
 	}
+
 	label {
 		@include typography.fudis-body-m-regular;
 		@include colorMixins.fudis-text-color('gray-dark');
