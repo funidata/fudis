@@ -58,9 +58,9 @@
 		@include colorMixins.fudis-text-color('gray-dark');
 
 		display: flex;
+		align-items: center;
 		margin-bottom: 0;
 		padding-bottom: spacing.$fudis-spacing-xs;
-		align-items: center;
 
 		&__text {
 			position: relative;
