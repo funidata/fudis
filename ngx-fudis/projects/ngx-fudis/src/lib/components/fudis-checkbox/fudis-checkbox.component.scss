@@ -6,31 +6,36 @@
 @use '../../foundations/typography/mixins.scss' as typography;
 
 .fudis-checkbox {
-	@include borders.fudis-border('1px', 'solid', 'gray-middle');
+	padding-top: spacing.$fudis-spacing-xs;
+	max-width: calc(23 * spacing.$fudis-spacing-s);
+	&__box {
+		@include borders.fudis-border('1px', 'solid', 'gray-middle');
 
-	display: block;
-	position: relative;
-	margin: spacing.$fudis-spacing-xs;
-	border-radius: 0;
-	cursor: pointer;
-	width: spacing.$fudis-spacing-s;
-	height: spacing.$fudis-spacing-s;
+		display: block;
+		position: absolute;
+		margin: spacing.$fudis-spacing-xs;
+		border-radius: 0;
+		cursor: pointer;
+		width: spacing.$fudis-spacing-s;
+		height: spacing.$fudis-spacing-s;
 
-	:focus {
-		@include focus.fudis-focus-checkbox;
-	}
-
-	&__disabled {
-		@include borders.fudis-border('1px', 'dashed', 'gray-middle');	
-		@include colorMixins.fudis-bg-color('gray-extra-light');
-	}
-
-	&__invalid {
-		@include borders.fudis-border('1px', 'solid', 'red');
-		
 		:focus {
-			@include focus.fudis-focus-checkbox-error;
+			@include focus.fudis-focus-checkbox;
 		}
+
+		&__disabled {
+			@include borders.fudis-border('1px', 'dashed', 'gray-middle');	
+			@include colorMixins.fudis-bg-color('gray-extra-light');
+		}
+
+		&__invalid {
+			@include borders.fudis-border('1px', 'solid', 'red');
+			
+			:focus {
+				@include focus.fudis-focus-checkbox-error;
+			}
+		}
+
 	}
 
 	&__input {
@@ -51,12 +56,14 @@
 		@include typography.fudis-body-m-regular;
 		@include colorMixins.fudis-text-color('gray-dark');
 
-		display: inline-block;
-		text-transform: initial;
+		margin-bottom: 0;
+		padding-bottom: spacing.$fudis-spacing-xs;
+		display: flex;
+		align-items: center;
 
 		&__text {
-			position: absolute;
-			left: spacing.$fudis-spacing-m;
+			position: relative;
+			margin-left: spacing.$fudis-spacing-l;
 		}
 	}
 
@@ -65,14 +72,8 @@
 			@include typography.fudis-body-s-regular;
 			@include colorMixins.fudis-text-color('red');
 
-			margin-left:  spacing.$fudis-spacing-xs;
+			margin-top: spacing.$fudis-spacing-xs;
+			margin-left: spacing.$fudis-spacing-xs;
 		}
 	}
-}
-
-.fudis-checkbox-host {
-	// display: inline-flex;
-	// align-items: center;
-	// height: spacing.$fudis-spacing-s;
-	width: 100%
 }

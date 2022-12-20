@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation, ViewChild, ElementRef, HostBinding } from '@angular/core';
+import { Component, Input, ViewEncapsulation, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -7,12 +7,10 @@ import { FormControl, Validators } from '@angular/forms';
 	styleUrls: ['./fudis-checkbox.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class FudisCheckboxComponent {
-	@HostBinding('class') classes = 'fudis-checkbox-host';
-
+export class FudisCheckboxComponent implements OnInit {
 	@ViewChild('fudisCheckboxInput') input: ElementRef<HTMLInputElement>;
 
-	@Input() disabled?: boolean = false;
+	@Input() disabled: boolean = false;
 
 	@Input() disabledInput: string;
 
@@ -32,9 +30,14 @@ export class FudisCheckboxComponent {
 
 	id: string;
 
-	toggle() {
+	ngOnInit(): void {
 		if (this.disabled) {
 			this.disabledInput = 'disabled';
+		}
+	}
+
+	toggle() {
+		if (this.disabled) {
 			return;
 		}
 		this.checked = !this.checked;
