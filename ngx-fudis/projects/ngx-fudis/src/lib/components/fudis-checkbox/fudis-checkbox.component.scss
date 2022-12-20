@@ -10,11 +10,11 @@
 
 	display: block;
 	position: relative;
-	width: spacing.$fudis-spacing-s;
-	height: spacing.$fudis-spacing-s;
 	margin: spacing.$fudis-spacing-xs;
 	border-radius: 0;
 	cursor: pointer;
+	width: spacing.$fudis-spacing-s;
+	height: spacing.$fudis-spacing-s;
 
 	:focus {
 		@include focus.fudis-focus-checkbox;
@@ -61,7 +61,6 @@
 	}
 
 	&__guidance {
-
 		&__error {
 			@include typography.fudis-body-s-regular;
 			@include colorMixins.fudis-text-color('red');
