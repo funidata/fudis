@@ -7,15 +7,17 @@
 
 .fudis-checkbox {
 	display: inline-flex;
-	height: spacing.$fudis-spacing-s;
 	align-items: center;
+	height: spacing.$fudis-spacing-s;
+
 	.fudis-checkbox-container {
 		@include borders.fudis-border('1px', 'solid', 'gray-middle');
+
+		display: block;
+		position: relative;
 		width: spacing.$fudis-spacing-s;
 		height: spacing.$fudis-spacing-s;
-		display: block;
 		margin: spacing.$fudis-spacing-xs;
-		position: relative;
 		border-radius: 0;
 		cursor: pointer;
 
@@ -23,12 +25,12 @@
 			@include focus.fudis-focus-checkbox;
 		}
 
-		&.disabled {
+		&.fudis-checkbox-disabled {
 			@include borders.fudis-border('1px', 'dashed', 'gray-middle');	
 			@include colorMixins.fudis-bg-color('gray-extra-light');
 		}
 
-		&.invalid {
+		&.fudis-checkbox-invalid {
 			@include borders.fudis-border('1px', 'solid', 'red');
 			
 			:focus {
@@ -36,22 +38,21 @@
 			}
 		}
 
-		.checkbox-input {
-			-webkit-appearance: none;
+		.fudis-checkbox-input {
 			appearance: none;
 			display: grid;
 			place-content: center;
 			margin: 0;
 		}
 
-		.icon-checkbox {
-			#check-small {
+		.fudis-icon-checkbox {
+			.fudis-icon {
 				position: absolute;
 				top: spacing.$fudis-pixel-1;
 				fill: colors.$fudis-gray-middle;
 			}
 		}
-		
+
 	}
 
 	label {

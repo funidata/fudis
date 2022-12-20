@@ -1,8 +1,12 @@
 <form id="myForm">
 	<div class="fudis-checkbox" (click)="toggle()">
-		<div class="fudis-checkbox-container" [class.disabled]="disabled" [class.invalid]="invalid" [ngClass]="classes">
-			<input type="checkbox" name="checkbox" class="checkbox-input" [class.disabled]="disabled" />
-			<span class="icon-checkbox">
+		<div
+			class="fudis-checkbox-container"
+			[class.fudis-checkbox-disabled]="disabled"
+			[class.fudis-checkbox-invalid]="invalid"
+			[ngClass]="classes">
+			<input type="checkbox" name="checkbox" class="fudis-checkbox-input" [class.disabled]="disabled" />
+			<span class="fudis-icon-checkbox">
 				<svg
 					width="16"
 					height="16"
@@ -11,6 +15,7 @@
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 22 22"
 					id="check-small"
+					class="fudis-icon"
 					*ngIf="checked">
 					<path
 						class="a"
