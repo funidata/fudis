@@ -65,6 +65,7 @@ import { FudisCheckboxComponent } from './components/fudis-checkbox/fudis-checkb
 		CheckboxComponent,
 		TextInputComponent,
 		LegendComponent,
+		VanillaTextInputComponent,
 	],
 	providers: [FudisDialog],
 })

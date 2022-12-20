@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation, ViewChild, ElementRef, HostBinding } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
 	selector: 'fudis-native-checkbox',
@@ -7,9 +8,15 @@ import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angu
 	encapsulation: ViewEncapsulation.None,
 })
 export class FudisCheckboxComponent {
+	@HostBinding('class') classes = 'fudis-checkbox-host';
+
+	@ViewChild('fudisCheckboxInput') input: ElementRef<HTMLInputElement>;
+
 	@Input() disabled?: boolean = false;
 
-	@Input() invalid: boolean;
+	@Input() disabledInput: string;
+
+	@Input() invalid: string;
 
 	@Input() label: string;
 
@@ -19,26 +26,27 @@ export class FudisCheckboxComponent {
 
 	@Input() checked?: boolean = false;
 
-	@Input() classes: string;
-
 	showError: boolean = false;
 
-	@Output() checkedChange = new EventEmitter<boolean>();
+	control = new FormControl('', Validators.required);
+
+	id: string;
 
 	toggle() {
 		if (this.disabled) {
+			this.disabledInput = 'disabled';
 			return;
 		}
 		this.checked = !this.checked;
-		this.checkedChange.emit(this.checked);
+		this.checkErrors();
 	}
 
 	checkErrors(): void {
 		if (this.required && !this.checked) {
-			this.invalid = true;
+			this.invalid = 'invalid';
 			this.showError = true;
 		} else {
-			this.invalid = false;
+			this.invalid = '';
 			this.showError = false;
 		}
 	}

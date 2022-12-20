@@ -33,8 +33,13 @@ import { Component } from '@angular/core';
 				type="email"></fudis-text-input>
 			<fudis-text-input data-theme="sisu" label="vapaaehtoinen email" type="email"></fudis-text-input>
 			<fudis-text-input data-theme="sisu" label="numerot" type="number"></fudis-text-input>
+			<fudis-vanilla-text-input data-theme="sisu" [required]="true"></fudis-vanilla-text-input>
+			<fudis-native-checkbox
+				data-theme="sisu"
+				label="Tosi pitkä testi lalallalallaa keafhe djqw dqwh edw2	e u2i	 ewq3 r3qr qu3r"
+				[required]="true"></fudis-native-checkbox>
+			<fudis-vanilla-text-input data-theme="sisu" [required]="true"></fudis-vanilla-text-input>
 		</form>
-		<fudis-native-checkbox data-theme="sisu" label="hellou" [required]="true"></fudis-native-checkbox>
 	`,
 	styleUrls: ['./app.scss'],
 })
