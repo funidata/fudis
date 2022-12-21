@@ -1,0 +1,8 @@
+<svg width="32" height="32" class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="numbering">
+    <path class="a" d="M7.6006,8v.79h.75v3h.79V8Z"/>
+    <path class="a" d="M7.29,13v.751h-.751v.789H7.33v-.75H9.54v.71H8.04v.75H7.29v.751h-.751v.789H10.33v-.789H8.08V15.29h1.5v-.75h.75v-.789H9.58V13Z"/>
+    <path class="a" d="M6.5,18v.79h3v.71H7.25v.79H9.5V21h-3v.79H9.54v-.75h.75V18.75H9.54V18Z"/>
+    <rect class="b" x="12.5" y="10.0002" width="11" height="1"/>
+    <rect class="b" x="12.5" y="14.0002" width="11" height="1"/>
+    <rect class="b" x="12.5" y="18.0002" width="11" height="1"/>
+</svg>
