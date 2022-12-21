@@ -20,5 +20,5 @@ module.exports = {
 	core: {
 		builder: '@storybook/builder-webpack5',
 	},
-	staticDirs: ['./../projects/ngx-fudis/src/lib/assets/fonts/fira/woff2'],
+	staticDirs: ['./../projects/ngx-fudis/src/lib/assets/fonts/fira/woff2', './../projects/ngx-fudis/src/lib/assets/icons'],
 };
