@@ -6,8 +6,9 @@
 .fudis-badge {
 	@include border.fudis-border-radius('2px');
 	@include typography.fudis-badge-typography;
-	
-	padding: spacing.$fudis-pixel-2 spacing.$fudis-pixel-3; 
+	@include colorMixin.fudis-text-color('gray-dark');
+
+	padding: spacing.$fudis-pixel-1 spacing.$fudis-pixel-3;
 
 	&__accent {
 		@include colorMixin.fudis-bg-color('yellow-light');
