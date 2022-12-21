@@ -34,6 +34,8 @@ import { Component } from '@angular/core';
 			<fudis-text-input data-theme="sisu" label="vapaaehtoinen email" type="email"></fudis-text-input>
 			<fudis-text-input data-theme="sisu" label="numerot" type="number"></fudis-text-input>
 		</form>
+		<fudis-icon icon="chevron" rotate="cw-90"></fudis-icon>
+		<fudis-icon icon="achievement" color="success"></fudis-icon>
 	`,
 	styleUrls: ['./app.scss'],
 })
