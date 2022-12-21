@@ -51,6 +51,12 @@ import { Component } from '@angular/core';
 			<fudis-vanilla-text-area label="Vanilla textarea, basic"> </fudis-vanilla-text-area>
 			<fudis-button data-theme="sisu" type="submit" label="Lähetä"></fudis-button>
 		</form>
+		<fudis-badge variant="accent" content="accent"></fudis-badge>
+		<fudis-badge variant="danger">danger</fudis-badge>
+		<fudis-badge data-theme="sisu" variant="primary" content="sisu primary"></fudis-badge>
+		<fudis-badge data-theme="into" variant="primary" content="into primary"></fudis-badge>
+		<fudis-badge variant="secondary" content="secondary"></fudis-badge>
+		<fudis-badge variant="success" content="success"></fudis-badge>
 	`,
 	styleUrls: ['./app.scss'],
 })

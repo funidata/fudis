@@ -24,6 +24,7 @@ import { TextSpacingComponent } from './components/typography/text-spacing/text-
 import { GridComponent } from './components/grid/grid.component';
 import { LegendComponent } from './components/form/legend/legend.component';
 import { VanillaTextAreaComponent } from './components/form/vanilla-text-area/vanilla-text-area.component';
+import { BadgeComponent } from './components/badge/badge.component';
 
 @NgModule({
 	declarations: [
@@ -44,6 +45,7 @@ import { VanillaTextAreaComponent } from './components/form/vanilla-text-area/va
 		GridComponent,
 		LegendComponent,
 		VanillaTextAreaComponent,
+		BadgeComponent,
 	],
 	imports: [
 		FormsModule,
@@ -68,6 +70,7 @@ import { VanillaTextAreaComponent } from './components/form/vanilla-text-area/va
 		LegendComponent,
 		VanillaTextInputComponent,
 		VanillaTextAreaComponent,
+		BadgeComponent,
 	],
 	providers: [FudisDialog],
 })

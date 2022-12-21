@@ -14,3 +14,4 @@ export { ErrorSummaryComponent } from './lib/components/form/error-summary/error
 export { LegendComponent } from './lib/components/form/legend/legend.component';
 export { VanillaTextInputComponent } from './lib/components/form/vanilla-text-input/vanilla-text-input.component';
 export { VanillaTextAreaComponent } from './lib/components/form/vanilla-text-area/vanilla-text-area.component';
+export { BadgeComponent } from './lib/components/badge/badge.component';
