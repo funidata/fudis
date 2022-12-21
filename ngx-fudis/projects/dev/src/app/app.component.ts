@@ -34,6 +34,23 @@ import { Component } from '@angular/core';
 			<fudis-text-input data-theme="sisu" label="vapaaehtoinen email" type="email"></fudis-text-input>
 			<fudis-text-input data-theme="sisu" label="numerot" type="number"></fudis-text-input>
 		</form>
+
+		<form class="basic-flex-box">
+			<fudis-vanilla-text-input
+				data-theme="sisu"
+				label="Vanilla text input"
+				[required]="true"
+				helpText="Voit kirjoittaa tähän yhden kivan jutun"></fudis-vanilla-text-input>
+			<fudis-vanilla-text-area
+				label="Pakollinen vanilla textarea, tällä on myös aika pitkä label"
+				[maxLength]="20"
+				size="m"
+				helpText="Voit kirjoittaa tähän monia kivoja juttuja"
+				[required]="true">
+			</fudis-vanilla-text-area>
+			<fudis-vanilla-text-area label="Vanilla textarea, basic"> </fudis-vanilla-text-area>
+			<fudis-button data-theme="sisu" type="submit" label="Lähetä"></fudis-button>
+		</form>
 	`,
 	styleUrls: ['./app.scss'],
 })
