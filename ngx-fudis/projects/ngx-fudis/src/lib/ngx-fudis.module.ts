@@ -24,6 +24,8 @@ import { ErrorSummaryComponent } from './components/form/error-summary/error-sum
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { GridComponent } from './components/grid/grid.component';
 import { LegendComponent } from './components/form/legend/legend.component';
+import { VanillaTextAreaComponent } from './components/form/vanilla-text-area/vanilla-text-area.component';
+import { BadgeComponent } from './components/badge/badge.component';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
 
 @NgModule({
@@ -44,6 +46,8 @@ import { DropdownComponent } from './components/form/dropdown/dropdown.component
 		TextSpacingComponent,
 		GridComponent,
 		LegendComponent,
+		VanillaTextAreaComponent,
+		BadgeComponent,
 		DropdownComponent,
 	],
 	imports: [
@@ -68,6 +72,9 @@ import { DropdownComponent } from './components/form/dropdown/dropdown.component
 		CheckboxComponent,
 		TextInputComponent,
 		LegendComponent,
+		VanillaTextInputComponent,
+		VanillaTextAreaComponent,
+		BadgeComponent,
 		DropdownComponent,
 	],
 	providers: [FudisDialog],

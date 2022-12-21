@@ -121,10 +121,18 @@
   font-weight: tokens.$fudis-light;
 }
 
+@mixin fudis-badge-typography {
+	text-transform: tokens.$fudis-all-caps;
+	line-height: tokens.$fudis-badge-line-height;
+	font-family: tokens.$fudis-font-family;
+	font-size: tokens.$fudis-body-s-font-size;
+	font-weight: tokens.$fudis-regular;
+}
+
 @mixin fudis-button-typography {
 	@include fudis-letter-spacing("1px");
 
-	text-transform: uppercase;
+	text-transform: tokens.$fudis-all-caps;
 	line-height: tokens.$fudis-body-s-line-height;
 	font-family: tokens.$fudis-font-family, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: tokens.$fudis-body-m-font-size;
