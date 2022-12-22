@@ -1,7 +1,7 @@
 <div class="fudis-checkbox" (click)="toggle()">
 	<label class="fudis-checkbox__label" for="{{ id }}">
 		<div class="fudis-checkbox__label__text">{{ label }}</div>
-		<div class="fudis-checkbox__box fudis-checkbox__box__{{ invalid }} fudis-checkbox__box__{{ disabledInput }}">
+		<div class="fudis-checkbox__box fudis-checkbox__box--{{ invalid }} fudis-checkbox__box--{{ disabledInput }}">
 			<input
 				type="checkbox"
 				name="checkbox"
@@ -9,8 +9,8 @@
 				class="fudis-checkbox__input"
 				(blur)="checkErrors()"
 				(change)="checkErrors()"
-				#fudisCheckboxInput
-				[formControl]="control" />
+				[disabled]="disabled"
+				[required]="required" />
 			<svg
 				width="16"
 				height="16"

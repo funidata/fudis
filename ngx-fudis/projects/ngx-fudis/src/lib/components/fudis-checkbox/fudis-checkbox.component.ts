@@ -1,5 +1,4 @@
-import { Component, Input, ViewEncapsulation, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
 
 @Component({
 	selector: 'fudis-native-checkbox',
@@ -8,13 +7,7 @@ import { FormControl, Validators } from '@angular/forms';
 	encapsulation: ViewEncapsulation.None,
 })
 export class FudisCheckboxComponent implements OnInit {
-	@ViewChild('fudisCheckboxInput') input: ElementRef<HTMLInputElement>;
-
-	@Input() disabled: boolean = false;
-
-	@Input() disabledInput: string;
-
-	@Input() invalid: string;
+	@Input() disabled?: boolean = false;
 
 	@Input() label: string;
 
@@ -26,9 +19,11 @@ export class FudisCheckboxComponent implements OnInit {
 
 	showError: boolean = false;
 
-	control = new FormControl('', Validators.required);
-
 	id: string;
+
+	disabledInput: string;
+
+	invalid: string;
 
 	ngOnInit(): void {
 		if (this.disabled) {

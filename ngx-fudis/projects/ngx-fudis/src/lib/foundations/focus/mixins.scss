@@ -20,8 +20,9 @@
 }
 
 @mixin fudis-focus-checkbox {
-	@include borders.fudis-outline('1px', 'solid', 'primary');
-
+	@include borders.fudis-outline('2px', 'solid', 'primary');
+	
+  outline-offset: -(spacing.$fudis-pixel-1);
 	width: spacing.$fudis-spacing-s;
 	height: spacing.$fudis-spacing-s;
 }

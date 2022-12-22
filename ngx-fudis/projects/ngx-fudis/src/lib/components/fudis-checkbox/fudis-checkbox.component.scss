@@ -24,12 +24,12 @@
 			@include focus.fudis-focus-checkbox;
 		}
 
-		&__disabled {
+		&--disabled {
 			@include borders.fudis-border('1px', 'dashed', 'gray-middle');	
 			@include colorMixins.fudis-bg-color('gray-extra-light');
 		}
 
-		&__invalid {
+		&--invalid {
 			@include borders.fudis-border('1px', 'solid', 'red');
 			
 			:focus {
