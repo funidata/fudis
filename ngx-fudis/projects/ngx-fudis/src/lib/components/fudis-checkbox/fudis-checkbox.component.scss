@@ -27,6 +27,8 @@
 		&--disabled {
 			@include borders.fudis-border('1px', 'dashed', 'gray-middle');	
 			@include colorMixins.fudis-bg-color('gray-extra-light');
+
+			cursor: default;
 		}
 
 		&--invalid {

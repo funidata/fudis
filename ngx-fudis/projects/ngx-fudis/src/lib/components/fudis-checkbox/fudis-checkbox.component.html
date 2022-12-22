@@ -3,6 +3,7 @@
 		<div class="fudis-checkbox__label__text">{{ label }}</div>
 		<div class="fudis-checkbox__box fudis-checkbox__box--{{ invalid }} fudis-checkbox__box--{{ disabledInput }}">
 			<input
+				[attr.aria-label]="label"
 				type="checkbox"
 				name="checkbox"
 				id="{{ id }}"
