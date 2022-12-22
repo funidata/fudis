@@ -21,7 +21,7 @@ export class ButtonComponent {
 	/**
 	 * Button contents
 	 */
-	@Input() label: string = 'Meidän nappi';
+	@Input() label: string;
 
 	@Input() ariaLabel: string;
 
