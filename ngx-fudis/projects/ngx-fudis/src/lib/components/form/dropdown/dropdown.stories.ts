@@ -26,12 +26,3 @@ export const SingleSelect = Template.bind({});
 SingleSelect.args = {
 	label: 'Opintojakso',
 };
-
-export const WithMultipleDropdown: Story = () => ({
-	template: `
-		<form lang="fi" id="form1" style="display:flex; max-width: 90vw;flex-direction:column; align-items: flex-start;">
-			<fudis-dropdown></fudis-dropdown>
-			<fudis-dropdown [multipleOption]="true"></fudis-dropdown>
-		</form>
-	`,
-});
