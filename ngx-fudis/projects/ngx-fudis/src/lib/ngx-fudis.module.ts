@@ -23,6 +23,7 @@ import { ErrorSummaryComponent } from './components/form/error-summary/error-sum
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { GridComponent } from './components/grid/grid.component';
 import { LegendComponent } from './components/form/legend/legend.component';
+import { FudisCheckboxComponent } from './components/form/fudis-checkbox/fudis-checkbox.component';
 import { VanillaTextAreaComponent } from './components/form/vanilla-text-area/vanilla-text-area.component';
 import { BadgeComponent } from './components/badge/badge.component';
 import { IconComponent } from './components/icon/icon.component';
@@ -36,7 +37,6 @@ import { IconComponent } from './components/icon/icon.component';
 		ButtonComponent,
 		HeadingComponent,
 		BodyTextComponent,
-		ButtonComponent,
 		CheckboxComponent,
 		TextInputComponent,
 		VanillaTextInputComponent,
@@ -45,6 +45,7 @@ import { IconComponent } from './components/icon/icon.component';
 		TextSpacingComponent,
 		GridComponent,
 		LegendComponent,
+		FudisCheckboxComponent,
 		VanillaTextAreaComponent,
 		BadgeComponent,
 		IconComponent,
@@ -59,6 +60,7 @@ import { IconComponent } from './components/icon/icon.component';
 		ReactiveFormsModule,
 	],
 	exports: [
+		FudisCheckboxComponent,
 		FudisDialogTitleDirective,
 		FudisDialogActionsDirective,
 		FudisDialogContentDirective,
@@ -66,7 +68,6 @@ import { IconComponent } from './components/icon/icon.component';
 		ButtonComponent,
 		HeadingComponent,
 		BodyTextComponent,
-		ButtonComponent,
 		CheckboxComponent,
 		TextInputComponent,
 		LegendComponent,

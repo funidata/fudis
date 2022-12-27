@@ -33,6 +33,9 @@ import { Component } from '@angular/core';
 				type="email"></fudis-text-input>
 			<fudis-text-input data-theme="sisu" label="vapaaehtoinen email" type="email"></fudis-text-input>
 			<fudis-text-input data-theme="sisu" label="numerot" type="number"></fudis-text-input>
+			<fudis-vanilla-text-input data-theme="sisu" [required]="true"></fudis-vanilla-text-input>
+			<fudis-native-checkbox data-theme="sisu" label="Uusi label" [required]="true"></fudis-native-checkbox>
+			<fudis-vanilla-text-input data-theme="sisu" [required]="true"></fudis-vanilla-text-input>
 		</form>
 		<fudis-icon icon="chevron" rotate="cw-90"></fudis-icon>
 		<fudis-icon icon="achievement" color="success"></fudis-icon>

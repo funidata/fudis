@@ -18,3 +18,19 @@
   outline-offset: -(spacing.$fudis-pixel-2);
   box-shadow: 0 0 0 spacing.$fudis-pixel-1 $fudis-white;
 }
+
+@mixin fudis-focus-checkbox {
+	@include borders.fudis-outline('2px', 'solid', 'primary');
+	
+  outline-offset: -(spacing.$fudis-pixel-1);
+	width: spacing.$fudis-spacing-s;
+	height: spacing.$fudis-spacing-s;
+}
+
+@mixin fudis-focus-checkbox-error {
+	@include borders.fudis-outline('1px', 'solid', 'red');
+	
+  box-shadow: 0 0 0 spacing.$fudis-pixel-3 $fudis-red-light;
+	width: spacing.$fudis-spacing-s;
+	height: spacing.$fudis-spacing-s;
+}
