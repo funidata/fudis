@@ -25,6 +25,7 @@ import { GridComponent } from './components/grid/grid.component';
 import { LegendComponent } from './components/form/legend/legend.component';
 import { VanillaTextAreaComponent } from './components/form/vanilla-text-area/vanilla-text-area.component';
 import { BadgeComponent } from './components/badge/badge.component';
+import { IconComponent } from './components/icon/icon.component';
 
 @NgModule({
 	declarations: [
@@ -46,6 +47,7 @@ import { BadgeComponent } from './components/badge/badge.component';
 		LegendComponent,
 		VanillaTextAreaComponent,
 		BadgeComponent,
+		IconComponent,
 	],
 	imports: [
 		FormsModule,
@@ -71,6 +73,7 @@ import { BadgeComponent } from './components/badge/badge.component';
 		VanillaTextInputComponent,
 		VanillaTextAreaComponent,
 		BadgeComponent,
+		IconComponent,
 	],
 	providers: [FudisDialog],
 })

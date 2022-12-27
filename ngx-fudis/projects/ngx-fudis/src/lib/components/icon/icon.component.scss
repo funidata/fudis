@@ -1,0 +1,60 @@
+@use '../../foundations/typography/tokens.scss' as typography;
+@use '../../foundations/colors/tokens.scss' as colors;
+
+.fudis-icon {
+	transition: all .6s ease;
+
+	&-rotate {
+		&__flip-180 {
+			transform: rotate(180deg);
+		}
+	
+		&__cw-90 {
+			transform: rotate(90deg);
+		}
+	
+		&__ccw-90 {
+			transform: rotate(-90deg);
+		}
+	}
+
+	&__lg {
+		width: typography.$fudis-icon-lg;
+		height: typography.$fudis-icon-lg;
+	}
+
+	&__sm {
+		width: typography.$fudis-icon-sm;
+		height: typography.$fudis-icon-sm;
+	}
+
+	&-color {
+		&__attention {
+			fill: colors.$fudis-yellow;
+		}
+	
+		&__danger {
+			fill: colors.$fudis-red;
+		}
+	
+		&__default {
+			fill: colors.$fudis-gray-dark;
+		}
+	
+		&__light {
+			fill: colors.$fudis-gray-light;
+		}
+	
+		&__primary {
+			fill: colors.$fudis-primary;
+		}
+	
+		&__success {
+			fill: colors.$fudis-green;
+		}
+	
+		&__white {
+			fill: colors.$fudis-white;
+		}
+	}
+}

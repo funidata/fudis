@@ -1,0 +1,5 @@
+<svg width="32" height="32" class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="info-circle-fill">
+    <circle cx="15" cy="15" r="9.5" fill="white" stroke="#1076DB"/>
+    <circle cx="15" cy="10.5" r="1.5" fill="#1076DB"/>
+    <path d="M16 19.5V13.5H13V14.5H14V19.5H13V20.5H17V19.5H16Z" fill="#1076DB"/>
+</svg>
