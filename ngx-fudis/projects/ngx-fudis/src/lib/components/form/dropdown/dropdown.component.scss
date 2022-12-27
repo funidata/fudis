@@ -5,6 +5,7 @@
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
 @use '../../../foundations/focus/mixins.scss' as focus; 
 
+/* stylelint-disable color-no-hex */ 
 
 .fudis-dropdown {
 	&__label {
@@ -41,10 +42,12 @@
 
 		position: absolute;
 		top: spacing.$fudis-spacing-l;
-			/* Application specific root colors do not apply on Angular Material component on sandbox. Next line will set defaut primary color for dropdown checkboxes.  */
-			/* stylelint-disable-next-line selector-class-pattern */
-		& .mat-pseudo-checkbox-checked {
-			background-color: #1076db;
+
+		/* Application specific root colors do not apply on Angular Material component on sandbox. Next line will set defaut primary color for dropdown checkboxes.  */
+		/* stylelint-disable-next-line selector-class-pattern */
+		.mat-pseudo-checkbox-checked {
+		/* stylelint-disable-next-line property-disallowed-list */
+		background-color: #1076db;
 		}
 	}
 
