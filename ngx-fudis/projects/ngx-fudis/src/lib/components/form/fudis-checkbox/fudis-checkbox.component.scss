@@ -1,9 +1,9 @@
-@use '../../foundations/borders/mixins.scss' as borders;
-@use '../../foundations/spacing/tokens.scss' as spacing;
-@use '../../foundations/colors/tokens.scss' as colors;
-@use '../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../foundations/focus/mixins.scss' as focus; 
-@use '../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/borders/mixins.scss' as borders;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/colors/tokens.scss' as colors;
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../foundations/focus/mixins.scss' as focus; 
+@use '../../../foundations/typography/mixins.scss' as typography;
 
 .fudis-checkbox {
 	padding-top: spacing.$fudis-spacing-xs;

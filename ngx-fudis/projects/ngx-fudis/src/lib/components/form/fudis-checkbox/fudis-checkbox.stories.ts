@@ -2,7 +2,7 @@ import { Story, Meta } from '@storybook/angular/types-6-0';
 import { FudisCheckboxComponent } from './fudis-checkbox.component';
 
 export default {
-	title: 'Components/FudisCheckbox',
+	title: 'Components/Form/FudisCheckbox',
 	component: FudisCheckboxComponent,
 } as Meta;
 

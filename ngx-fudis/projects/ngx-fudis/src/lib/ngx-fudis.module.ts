@@ -23,7 +23,7 @@ import { ErrorSummaryComponent } from './components/form/error-summary/error-sum
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { GridComponent } from './components/grid/grid.component';
 import { LegendComponent } from './components/form/legend/legend.component';
-import { FudisCheckboxComponent } from './components/fudis-checkbox/fudis-checkbox.component';
+import { FudisCheckboxComponent } from './components/form/fudis-checkbox/fudis-checkbox.component';
 import { VanillaTextAreaComponent } from './components/form/vanilla-text-area/vanilla-text-area.component';
 import { BadgeComponent } from './components/badge/badge.component';
 
