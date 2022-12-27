@@ -23,6 +23,8 @@ import { ErrorSummaryComponent } from './components/form/error-summary/error-sum
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { GridComponent } from './components/grid/grid.component';
 import { LegendComponent } from './components/form/legend/legend.component';
+import { VanillaTextAreaComponent } from './components/form/vanilla-text-area/vanilla-text-area.component';
+import { BadgeComponent } from './components/badge/badge.component';
 import { IconComponent } from './components/icon/icon.component';
 
 @NgModule({
@@ -43,6 +45,8 @@ import { IconComponent } from './components/icon/icon.component';
 		TextSpacingComponent,
 		GridComponent,
 		LegendComponent,
+		VanillaTextAreaComponent,
+		BadgeComponent,
 		IconComponent,
 	],
 	imports: [
@@ -66,6 +70,9 @@ import { IconComponent } from './components/icon/icon.component';
 		CheckboxComponent,
 		TextInputComponent,
 		LegendComponent,
+		VanillaTextInputComponent,
+		VanillaTextAreaComponent,
+		BadgeComponent,
 		IconComponent,
 	],
 	providers: [FudisDialog],
