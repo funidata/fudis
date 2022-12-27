@@ -17,16 +17,16 @@ export interface Option {
 	encapsulation: ViewEncapsulation.None,
 })
 export class DropdownComponent implements OnInit {
-	@Input() options: Option[];
-
 	/**
 	 * Options for testing purposes
 	 */
-	options2: Option[] = [
-		{ value: 'Leivonta-101', viewValue: 'Leivontakurssi, joka kestää tosi kauan ja on tosi spesifi' },
-		{ value: 'Hiivat661', viewValue: 'Kaikki hiivasta', disabled: true },
-		{ value: 'Sticky-bun', viewValue: 'Luonnon pullat' },
-	];
+	// options: Option[] = [
+	// 	{ value: 'Leivonta-101', viewValue: 'Leivontakurssi, joka kestää tosi kauan ja on tosi spesifi' },
+	// 	{ value: 'Hiivat661', viewValue: 'Kaikki hiivasta', disabled: true },
+	// 	{ value: 'Sticky-bun', viewValue: 'Luonnon pullat' },
+	// ];
+
+	@Input() options: Option[];
 
 	@Input() required = false;
 
