@@ -6,9 +6,9 @@
 @use '../../../foundations/typography/mixins.scss' as typography;
 
 .fudis-checkbox {
+	display: inline-block;
 	padding-top: spacing.$fudis-spacing-xs;
 	width: auto;
-	display: inline-block;
 
 	&__box {
 		@include borders.fudis-border('1px', 'solid', 'gray-middle');
