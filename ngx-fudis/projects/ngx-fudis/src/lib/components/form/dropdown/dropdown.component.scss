@@ -41,6 +41,11 @@
 
 		position: absolute;
 		top: spacing.$fudis-spacing-l;
+			/* Application specific root colors do not apply on Angular Material component on sandbox. Next line will set defaut primary color for dropdown checkboxes.  */
+			/* stylelint-disable-next-line selector-class-pattern */
+		& .mat-pseudo-checkbox-checked {
+			background-color: #1076db;
+		}
 	}
 
 	&__help-text {
