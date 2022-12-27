@@ -4,6 +4,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
 	FudisDialogActionsDirective,
@@ -27,6 +28,7 @@ import { FudisCheckboxComponent } from './components/form/fudis-checkbox/fudis-c
 import { VanillaTextAreaComponent } from './components/form/vanilla-text-area/vanilla-text-area.component';
 import { BadgeComponent } from './components/badge/badge.component';
 import { IconComponent } from './components/icon/icon.component';
+import { DropdownComponent } from './components/form/dropdown/dropdown.component';
 
 @NgModule({
 	declarations: [
@@ -49,6 +51,7 @@ import { IconComponent } from './components/icon/icon.component';
 		VanillaTextAreaComponent,
 		BadgeComponent,
 		IconComponent,
+		DropdownComponent,
 	],
 	imports: [
 		FormsModule,
@@ -58,6 +61,7 @@ import { IconComponent } from './components/icon/icon.component';
 		MatInputModule,
 		MatCheckboxModule,
 		ReactiveFormsModule,
+		MatSelectModule,
 	],
 	exports: [
 		FudisCheckboxComponent,
@@ -75,6 +79,7 @@ import { IconComponent } from './components/icon/icon.component';
 		VanillaTextAreaComponent,
 		BadgeComponent,
 		IconComponent,
+		DropdownComponent,
 	],
 	providers: [FudisDialog],
 })

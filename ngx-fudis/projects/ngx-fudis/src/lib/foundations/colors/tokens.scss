@@ -30,6 +30,7 @@ $fudis-yellow-light: #fdefb4;
 $fudis-yellow: #f1c40f;
 $fudis-green-light: #c6ecd6;
 $fudis-green: #1e874b;
+$fudis-focus-primary: #1076db;
 $fudis-colors: (
 	'primary-light': $fudis-primary-light,
 	'primary': $fudis-primary,
@@ -46,5 +47,6 @@ $fudis-colors: (
 	'yellow': $fudis-yellow,
 	'green-light': $fudis-green-light,
 	'green': $fudis-green,
+	'focus-primary': $fudis-focus-primary,
 	'transparent': transparent,
 );

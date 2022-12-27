@@ -17,3 +17,4 @@ export { VanillaTextInputComponent } from './lib/components/form/vanilla-text-in
 export { VanillaTextAreaComponent } from './lib/components/form/vanilla-text-area/vanilla-text-area.component';
 export { BadgeComponent } from './lib/components/badge/badge.component';
 export { IconComponent } from './lib/components/icon/icon.component';
+export { DropdownComponent } from './lib/components/form/dropdown/dropdown.component';

@@ -44,16 +44,9 @@ export class VanillaTextInputComponent implements OnInit {
 	@Input() labelHeight?: 'single' | 'double' | 'triple' | 'unset' = 'unset';
 
 	/**
-	 *	Helper or info text for the input, aligned underneath the input
-	 */
-
-	/**
 	 *	Type of the input
 	 */
-
 	@Input() type: 'email' | 'number' | 'password' | 'tel' | 'text' | 'url' = 'text';
-
-	// FormControl;
 
 	validatorArray: Array<any> = [];
 

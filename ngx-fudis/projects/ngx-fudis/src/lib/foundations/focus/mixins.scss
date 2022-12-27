@@ -12,7 +12,7 @@
 }
 
 @mixin fudis-focus-form-field {
-	@include borders.fudis-border('1px', 'solid', 'primary');
+	@include borders.fudis-border('1px', 'solid', 'focus-primary');
 
   outline: $fudis-focus-form-field-outline;
   outline-offset: -(spacing.$fudis-pixel-2);
