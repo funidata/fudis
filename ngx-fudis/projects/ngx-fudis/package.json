@@ -1,26 +1,26 @@
 {
-  "name": "@funidata/ngx-fudis",
-  "version": "0.0.13",
-  "schematics": "./schematics/collection.json",
-  "ng-add": {
-    "save": "dependencies"
-  },
-  "scripts": {
-    "build": "tsc -p tsconfig.schematics.json",
-    "postbuild": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/ngx-fudis/"
-  },
-  "exports": {
-    "./theme": {
-      "sass": "./src/lib/theme/fudis-theme.scss"
-    }
-  },
-  "peerDependencies": {
-    "@angular/common": "^13.3.0",
-    "@angular/core": "^13.3.0"
-  },
-  "devDependencies": {
-    "copyfiles": "^2.4.1",
-    "tslib": "^2.3.0",
-    "typescript": "^4.7.4"
-  }
+	"name": "@funidata/ngx-fudis",
+	"version": "0.0.14",
+	"schematics": "./schematics/collection.json",
+	"ng-add": {
+		"save": "dependencies"
+	},
+	"scripts": {
+		"build": "tsc -p tsconfig.schematics.json",
+		"postbuild": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/ngx-fudis/"
+	},
+	"exports": {
+		"./theme": {
+			"sass": "./src/lib/theme/fudis-theme.scss"
+		}
+	},
+	"peerDependencies": {
+		"@angular/common": "^13.3.0",
+		"@angular/core": "^13.3.0"
+	},
+	"devDependencies": {
+		"copyfiles": "^2.4.1",
+		"tslib": "^2.3.0",
+		"typescript": "^4.7.4"
+	}
 }
