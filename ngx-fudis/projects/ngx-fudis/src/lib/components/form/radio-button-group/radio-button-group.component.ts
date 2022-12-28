@@ -21,13 +21,21 @@ export class RadioButtonGroupComponent implements OnInit {
 
 	options: Option[] = [
 		{ value: 'Hedelmä1', viewValue: 'Omena' },
-		{ value: 'Hedelmä2', viewValue: 'Banaaani' },
-		{ value: 'Hedelmä3', viewValue: 'Vesimeloni', disabled: true },
+		// { value: 'Hedelmä2', viewValue: 'Banaaani' },
+		// { value: 'Hedelmä3', viewValue: 'Vesimeloni', disabled: true },
 	];
 
 	// @Input() options: Option[];
 
-	@Input() required = false;
+	@Input() name?: string;
+
+	@Input() disabled?: boolean;
+
+	@Input() required?: boolean;
+
+	@Input() checked?: boolean = false;
+
+	@Input() value: any;
 
 	@Input() label: string;
 
@@ -38,9 +46,19 @@ export class RadioButtonGroupComponent implements OnInit {
 	control = new FormControl('', this.validatorArray);
 
 	ngOnInit(): void {
+		console.log('hellou');
 		if (this.required) {
 			this.validatorArray.push(Validators.required);
 		}
+	}
+
+	toggle() {
+		console.log('minua kutsuttiiin');
+		if (this.disabled) {
+			return;
+		}
+		this.checked = !this.checked;
+		console.log(this.checked);
 	}
 
 	public get classes(): string[] {

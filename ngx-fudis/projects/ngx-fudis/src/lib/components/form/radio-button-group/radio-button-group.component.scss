@@ -18,32 +18,36 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-	:hover input ~ .fudis-radio-button-group__dot {
-		background-color: #ccc;
-	}
-	input:checked ~ .fudis-radio-button-group__dot {
-		background-color: #2196F3;
+	&__label {
+		@include colorMixins.fudis-text-color('gray-dark');
+		@include typography.fudis-text-field-label;
 	}
 	&__input {
 		position: absolute;
 		opacity: 0;
 		cursor: pointer;
 	}
-	&__dot {
+	&__value {
+		@include typography.fudis-text-field-input;
+	}
+	&__control {
+		@include borders.fudis-border('1px', 'solid', 'gray-middle');	
+
 		position: absolute;
 		top: 0;
 		left: 0;
-		height: 25px;
-		width: 25px;
-		background-color: #eee;
+		width: spacing.$fudis-spacing-m;
+		height: spacing.$fudis-spacing-m;
 		border-radius: 50%;
-	}
-	&__dot::after {
-		content: "";
-		position: absolute;
-		display: none;
-	}
-	&__input:checked ~ .fudis-radio-button-group__dot:after {
-  	display: block;
+		align-items: center;
+    display: flex;
+    justify-content: center;
+		&__indicator {
+			position: absolute;
+			@include colorMixins.fudis-bg-color('gray-dark');
+			width: spacing.$fudis-spacing-s;
+			height: spacing.$fudis-spacing-s;
+    	border-radius: 50%;
+		}
 	}
 }
