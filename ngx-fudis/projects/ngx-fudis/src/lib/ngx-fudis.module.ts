@@ -4,6 +4,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
 	FudisDialogActionsDirective,
@@ -28,6 +29,7 @@ import { VanillaTextAreaComponent } from './components/form/vanilla-text-area/va
 import { BadgeComponent } from './components/badge/badge.component';
 import { IconComponent } from './components/icon/icon.component';
 import { RadioButtonGroupComponent } from './components/form/radio-button-group/radio-button-group.component';
+import { DropdownComponent } from './components/form/dropdown/dropdown.component';
 
 @NgModule({
 	declarations: [
@@ -51,6 +53,7 @@ import { RadioButtonGroupComponent } from './components/form/radio-button-group/
 		BadgeComponent,
 		IconComponent,
 		RadioButtonGroupComponent,
+		DropdownComponent,
 	],
 	imports: [
 		FormsModule,
@@ -60,6 +63,7 @@ import { RadioButtonGroupComponent } from './components/form/radio-button-group/
 		MatInputModule,
 		MatCheckboxModule,
 		ReactiveFormsModule,
+		MatSelectModule,
 	],
 	exports: [
 		FudisCheckboxComponent,
@@ -78,6 +82,7 @@ import { RadioButtonGroupComponent } from './components/form/radio-button-group/
 		BadgeComponent,
 		IconComponent,
 		RadioButtonGroupComponent,
+		DropdownComponent,
 	],
 	providers: [FudisDialog],
 })

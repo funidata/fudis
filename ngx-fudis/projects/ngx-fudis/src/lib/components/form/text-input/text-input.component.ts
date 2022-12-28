@@ -37,16 +37,9 @@ export class TextInputComponent implements OnInit {
 	@Input() characterLimitIndicatorValue?: string;
 
 	/**
-	 *	Helper or info text for the input, aligned underneath the input
-	 */
-
-	/**
 	 *	Type of the input
 	 */
-
 	@Input() type: 'email' | 'number' | 'password' | 'tel' | 'text' | 'url' = 'text';
-
-	// FormControl;
 
 	required: boolean;
 
