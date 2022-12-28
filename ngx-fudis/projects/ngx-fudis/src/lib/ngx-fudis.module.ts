@@ -27,6 +27,7 @@ import { FudisCheckboxComponent } from './components/form/fudis-checkbox/fudis-c
 import { VanillaTextAreaComponent } from './components/form/vanilla-text-area/vanilla-text-area.component';
 import { BadgeComponent } from './components/badge/badge.component';
 import { IconComponent } from './components/icon/icon.component';
+import { RadioButtonGroupComponent } from './components/form/radio-button-group/radio-button-group.component';
 
 @NgModule({
 	declarations: [
@@ -49,6 +50,7 @@ import { IconComponent } from './components/icon/icon.component';
 		VanillaTextAreaComponent,
 		BadgeComponent,
 		IconComponent,
+		RadioButtonGroupComponent,
 	],
 	imports: [
 		FormsModule,
@@ -75,6 +77,7 @@ import { IconComponent } from './components/icon/icon.component';
 		VanillaTextAreaComponent,
 		BadgeComponent,
 		IconComponent,
+		RadioButtonGroupComponent,
 	],
 	providers: [FudisDialog],
 })

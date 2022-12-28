@@ -1,0 +1,11 @@
+<label class="fudis-radio-button-group__label">{{ label }} </label>
+<div class="fudis-radio-button-group" *ngFor="let option of options">
+	<input
+		class="fudis-radio-button-group__input"
+		type="radio"
+		name="radio"
+		[required]="required"
+		[formControl]="control" />
+	{{ option.viewValue }}
+	<span class="fudis-radio-button-group__dot"></span>
+</div>
