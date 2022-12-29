@@ -30,6 +30,7 @@ import { BadgeComponent } from './components/badge/badge.component';
 import { IconComponent } from './components/icon/icon.component';
 import { RadioButtonGroupComponent } from './components/form/radio-button-group/radio-button-group.component';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
+import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
 
 @NgModule({
 	declarations: [
@@ -53,6 +54,7 @@ import { DropdownComponent } from './components/form/dropdown/dropdown.component
 		BadgeComponent,
 		IconComponent,
 		RadioButtonGroupComponent,
+		RadioButtonComponent,
 		DropdownComponent,
 	],
 	imports: [
@@ -82,6 +84,7 @@ import { DropdownComponent } from './components/form/dropdown/dropdown.component
 		BadgeComponent,
 		IconComponent,
 		RadioButtonGroupComponent,
+		RadioButtonComponent,
 		DropdownComponent,
 	],
 	providers: [FudisDialog],

@@ -8,53 +8,53 @@
 @use '../../../foundations/focus/mixins.scss' as focus; 
 
 .fudis-radio-button-group {
-	display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-	&__label {
-		@include colorMixins.fudis-text-color('gray-dark');
-		@include typography.fudis-text-field-label;
-	}
-	&__input {
-		position: absolute;
-		opacity: 0;
-		cursor: pointer;
-	}
-	&__value {
-		@include typography.fudis-text-field-input;
-	}
-	&__control {
-		@include borders.fudis-border('1px', 'solid', 'gray-middle');	
+	// display: block;
+  // position: relative;
+  // padding-left: 35px;
+  // margin-bottom: 12px;
+  // cursor: pointer;
+  // font-size: 22px;
+  // -webkit-user-select: none;
+  // -moz-user-select: none;
+  // -ms-user-select: none;
+  // user-select: none;
+	// &__label {
+	// 	@include colorMixins.fudis-text-color('gray-dark');
+	// 	@include typography.fudis-text-field-label;
+	// }
+	// &__input {
+	// 	position: absolute;
+	// 	opacity: 0;
+	// 	cursor: pointer;
+	// }
+	// &__value {
+	// 	@include typography.fudis-text-field-input;
+	// }
+	// &__control {
+	// 	@include borders.fudis-border('1px', 'solid', 'gray-middle');	
 
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: spacing.$fudis-spacing-m;
-		height: spacing.$fudis-spacing-m;
-		border-radius: 50%;
-		align-items: center;
-    display: flex;
-    justify-content: center;
-		&__indicator {
-			position: absolute;
-			@include colorMixins.fudis-bg-color('gray-dark');
-			width: spacing.$fudis-spacing-s;
-			height: spacing.$fudis-spacing-s;
-    	border-radius: 50%;
-		}
-	}
-	&--disabled {
-		@include colorMixins.fudis-bg-color('gray-extra-light');
-	}
-	&--invalid {
-		@include borders.fudis-border('1px', 'solid', 'red');
-		box-shadow: 0 0 0 spacing.$fudis-pixel-3 colors.$fudis-red-light;
-	}
+	// 	position: absolute;
+	// 	top: 0;
+	// 	left: 0;
+	// 	width: spacing.$fudis-spacing-m;
+	// 	height: spacing.$fudis-spacing-m;
+	// 	border-radius: 50%;
+	// 	align-items: center;
+  //   display: flex;
+  //   justify-content: center;
+	// 	&__indicator {
+	// 		position: absolute;
+	// 		@include colorMixins.fudis-bg-color('gray-dark');
+	// 		width: spacing.$fudis-spacing-s;
+	// 		height: spacing.$fudis-spacing-s;
+  //   	border-radius: 50%;
+	// 	}
+	// }
+	// &--disabled {
+	// 	@include colorMixins.fudis-bg-color('gray-extra-light');
+	// }
+	// &--invalid {
+	// 	@include borders.fudis-border('1px', 'solid', 'red');
+	// 	box-shadow: 0 0 0 spacing.$fudis-pixel-3 colors.$fudis-red-light;
+	// }
 }

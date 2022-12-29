@@ -1,12 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 export interface Option {
-	/** Underlying value of the option */
-	value: any;
-	/** Value that is shown in the UI */
-	viewValue: string;
-	/** Is option disabled in the dropdown */
+	label: string;
+	name: string;
+	value: string;
 	disabled?: boolean;
 }
 
@@ -16,55 +14,34 @@ export interface Option {
 	styleUrls: ['./radio-button-group.component.scss'],
 })
 export class RadioButtonGroupComponent implements OnInit {
-	/**
-	  Options for testing purposes */
+	@Input() options: Option[];
 
-	options: Option[] = [
-		{ value: 'Hedelmä1', viewValue: 'Omena' },
-		// { value: 'Hedelmä2', viewValue: 'Banaaani' },
-		// { value: 'Hedelmä3', viewValue: 'Vesimeloni', disabled: true },
-	];
+	frm: FormGroup;
 
-	// @Input() options: Option[];
+	constructor(private fb: FormBuilder) {}
 
-	@Input() name?: string;
+	@Input() control: FormControl;
 
-	@Input() disabled?: boolean;
-
-	@Input() required?: boolean;
-
-	@Input() checked?: boolean = false;
-
-	@Input() value: any;
-
-	@Input() label: string;
-
-	validatorArray: any = [];
-
-	selectedOption: Option;
-
-	control = new FormControl('', this.validatorArray);
-
-	ngOnInit(): void {
-		console.log('hellou');
-		if (this.required) {
-			this.validatorArray.push(Validators.required);
-		}
+	ngOnInit() {
+		// console.log('hellou');
+		// if (this.required && this.control.invalid) {
+		// 	this.validatorArray.push(Validators.required);
+		// }
+		this.frm = this.fb.group({
+			inputOption: ['Inputs', Validators.required],
+		});
 	}
 
-	toggle() {
-		console.log('minua kutsuttiiin');
-		if (this.disabled) {
-			return;
-		}
-		this.checked = !this.checked;
-		console.log(this.checked);
+	getRadioOptions() {
+		console.log('I was checked');
+		return this.frm.get('inputOption') as FormControl;
 	}
-
-	public get classes(): string[] {
-		if (this.control.touched && this.control.invalid) {
-			return ['fudis-radio-button-group--invalid'];
-		}
-		return [];
-	}
+	// toggle() {
+	// 	console.log('minua kutsuttiiin');
+	// 	if (this.control.disabled) {
+	// 		return;
+	// 	}
+	// 	this.checked = !this.checked;
+	// 	console.log(this.checked);
+	// }
 }
