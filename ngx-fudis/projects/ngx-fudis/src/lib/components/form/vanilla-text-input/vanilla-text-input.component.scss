@@ -67,7 +67,6 @@
 				height: calc(3 * typographyTokens.$fudis-text-input-line-height);
 			}
 
-			/* stylelint-disable-next-line order/order */
 			@include breakpoints.fudis-breakpoint('s') {
 				height: initial;
 			}
