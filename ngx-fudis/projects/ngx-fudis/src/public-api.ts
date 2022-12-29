@@ -18,3 +18,4 @@ export { VanillaTextAreaComponent } from './lib/components/form/vanilla-text-are
 export { BadgeComponent } from './lib/components/badge/badge.component';
 export { IconComponent } from './lib/components/icon/icon.component';
 export { DropdownComponent } from './lib/components/form/dropdown/dropdown.component';
+export { GridComponent } from './lib/components/grid/grid.component';

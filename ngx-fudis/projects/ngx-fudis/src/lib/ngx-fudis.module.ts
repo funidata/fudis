@@ -74,6 +74,7 @@ import { DropdownComponent } from './components/form/dropdown/dropdown.component
 		BodyTextComponent,
 		CheckboxComponent,
 		TextInputComponent,
+		GridComponent,
 		LegendComponent,
 		VanillaTextInputComponent,
 		VanillaTextAreaComponent,
