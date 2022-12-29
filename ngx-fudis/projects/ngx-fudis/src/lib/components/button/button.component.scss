@@ -11,7 +11,8 @@
 	@include typography.fudis-button-typography;
 	@include borders.fudis-border('2px', 'solid', 'primary');
 
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
 	cursor: pointer;
 	padding: 0 spacing.$fudis-spacing-xs;		
 
@@ -38,7 +39,7 @@
 
 	&__tertiary {
 		@include colors.fudis-text-color('primary');
-		@include borders.fudis-border('2px', 'solid', 'transparent');		
+		@include borders.fudis-border('2px', 'solid', 'transparent');
 	}
 
 	&__small {

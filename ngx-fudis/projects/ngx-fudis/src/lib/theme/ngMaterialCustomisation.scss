@@ -1,3 +1,6 @@
+@use '../foundations/spacing/tokens.scss' as spacing;
+@use '../foundations/colors/tokens.scss' as colorTokens;
+
 mat-form-field {
 /* stylelint-disable-next-line selector-class-pattern */ /* stylelint-disable-next-line selector-max-class */ /* stylelint-disable-next-line selector-no-qualifying-type */
 &.mat-form-field-should-float.mat-form-field-can-float .mat-form-field {
@@ -36,4 +39,37 @@ mat-form-field {
 			}
  		}
  	}
+
+	/* Styles for fudis button and its icon */
+	fudis-button {
+		fudis-icon {
+			svg {
+				position: relative;
+				top: spacing.$fudis-pixel-2;
+				margin-left: -(spacing.$fudis-spacing-xxs);
+			}
+		}
+
+		.fudis-button {
+			&__primary {
+				fudis-icon {
+					/* stylelint-disable-next-line selector-max-compound-selectors */
+					svg {
+						/* stylelint-disable-next-line declaration-no-important */
+						fill: colorTokens.$fudis-white !important;
+					}
+				}
+			}
+
+			&__tertiary, &__secondary {
+				fudis-icon {
+					/* stylelint-disable-next-line selector-max-compound-selectors */
+					svg {
+						/* stylelint-disable-next-line declaration-no-important */
+						fill: colorTokens.$fudis-primary !important;
+					}
+				}
+			}
+		}
+	}
 
