@@ -24,7 +24,7 @@
 		@include typography.fudis-body-m-regular;
 		@include colorMixins.fudis-text-color('gray-dark');
 
-		.fudis-radio-button__control__indicator:after {
+		.fudis-radio-button__control__indicator {
 		 width: 16px;
 		 height: 16px;
 		 border-radius: 50%;
@@ -39,18 +39,15 @@
 		left: 0;
 		cursor: pointer;
 		z-index: 1;
-		:focus {
-			background-color: red;
-		}
-		&:checked ~ .fudis-radio-button__control__indicator {
-			&:after {
-				display: block;
-			}
-		}
+		// &:checked ~ .fudis-radio-button__control__indicator {
+		// 	&:after {
+		// 		display: block;
+		// 	}
+		// }
 	}
 	
 	/* Create a custom radio button */
-	.fudis-radio-button__control__indicator {
+	.fudis-radio-button__control {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -64,9 +61,8 @@
 	}
 	
 	/* Create the indicator (the dot/circle - hidden when not checked) */
-	.fudis-radio-button__control__indicator:after {
+	.fudis-radio-button__control__indicator {
 		content: "";
 		position: absolute;
-		display: none;
 	}
 }
