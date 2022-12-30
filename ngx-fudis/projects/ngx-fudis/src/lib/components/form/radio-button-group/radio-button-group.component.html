@@ -1,5 +1,6 @@
-<div #radioList class="fudis-form-element fudis-radio-button-group">
-	<li *ngFor="let option of options">
+<fieldset class="fudis-form-element fudis-radio-button-group">
+	<legend>{{ label }}</legend>
+	<li *ngFor="let option of options; let index = index">
 		<fudis-radio-button [id]="option.id" [name]="option.name" [label]="option.label"></fudis-radio-button>
 	</li>
-</div>
+</fieldset>

@@ -25,7 +25,7 @@
 		@include colorMixins.fudis-text-color('gray-dark');
 
 		.fudis-radio-button__control__indicator:after {
-		 width: 17px;
+		 width: 16px;
 		 height: 16px;
 		 border-radius: 50%;
 		 @include colorMixins.fudis-bg-color('gray-dark');

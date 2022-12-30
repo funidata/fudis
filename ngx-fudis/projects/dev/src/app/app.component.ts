@@ -36,7 +36,7 @@ import { Component } from '@angular/core';
 			<fudis-icon icon="chevron" rotate="cw-90"></fudis-icon>
 			<fudis-icon icon="achievement" color="success"></fudis-icon>
 		</div>
-		<fudis-radio-button-group></fudis-radio-button-group>
+		<fudis-radio-button-group label="Otsikko"></fudis-radio-button-group>
 		<!-- <form (FormGroup)="(frm)">
 			<fudis-radio-button id="muu" name="hedelmä" [value]="value" [control]="getRadioOptions()"></fudis-radio-button>
 			<fudis-radio-button id="maa" name="hedelmä" [value]="value" [control]="getRadioOptions()"></fudis-radio-button>

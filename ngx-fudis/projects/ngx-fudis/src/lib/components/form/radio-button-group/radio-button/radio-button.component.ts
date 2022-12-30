@@ -25,10 +25,6 @@ export class RadioButtonComponent {
 
 	@ViewChild('radioList') ul: ElementRef;
 
-	toggle() {
-		this.checked = !this.checked;
-	}
-
 	public get classes(): string[] {
 		if (this.control.touched && this.control.invalid) {
 			return ['fudis-radio-button-group--invalid'];

@@ -7,6 +7,7 @@ export interface Option {
 	name: string;
 	value: string;
 	disabled?: boolean;
+	checked?: boolean;
 }
 
 @Component({
@@ -15,7 +16,7 @@ export interface Option {
 	styleUrls: ['./radio-button-group.component.scss'],
 })
 export class RadioButtonGroupComponent implements OnInit {
-	@Input() nimi: string;
+	@Input() label: string;
 
 	/**
 	 * Options for testing purposes
@@ -23,7 +24,7 @@ export class RadioButtonGroupComponent implements OnInit {
 	options: Option[] = [
 		{ value: 'omena', label: 'omena', id: '1', name: 'hedelma' },
 		{ value: 'banaani', label: 'banaani', id: '2', name: 'hedelma' },
-		{ value: 'kirsikka', label: 'kirsikka', id: '3', name: 'hedelma' },
+		{ value: 'kirsikka', label: 'kirsikka', id: '3', name: 'hedelma', checked: true },
 	];
 
 	// @Input() options: Option[];
