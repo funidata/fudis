@@ -8,53 +8,65 @@
 @use '../../../../foundations/focus/mixins.scss' as focus; 
 
 .fudis-radio-button {
-	display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+	display: inline-block;
+	width: auto;
+
 	&__label {
+		display: block;
+		position: relative;
+		padding-left: 35px;
+		margin-bottom: 12px;
+		cursor: pointer;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		@include typography.fudis-body-m-regular;
 		@include colorMixins.fudis-text-color('gray-dark');
-		@include typography.fudis-text-field-label;
+
+		.fudis-radio-button__control__indicator:after {
+		 width: 17px;
+		 height: 16px;
+		 border-radius: 50%;
+		 @include colorMixins.fudis-bg-color('gray-dark');
+	 }
 	}
 	&__input {
-		// position: absolute;
-		// opacity: 0;
-		// cursor: pointer;
+		position: absolute;
+		opacity: 0;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		cursor: pointer;
+		z-index: 1;
+		:focus {
+			background-color: red;
+		}
+		&:checked ~ .fudis-radio-button__control__indicator {
+			&:after {
+				display: block;
+			}
+		}
 	}
-	&__value {
-		@include typography.fudis-text-field-input;
-	}
-	&__control {
-		@include borders.fudis-border('1px', 'solid', 'gray-middle');	
-
+	
+	/* Create a custom radio button */
+	.fudis-radio-button__control__indicator {
 		position: absolute;
 		top: 0;
 		left: 0;
-		width: spacing.$fudis-spacing-m;
-		height: spacing.$fudis-spacing-m;
+		height: 24px;
+		width: 24px;
+		@include borders.fudis-border('1px', 'solid', 'gray-middle');	
 		border-radius: 50%;
+		display: flex;
 		align-items: center;
-    display: flex;
-    justify-content: center;
-		&__indicator {
-			position: absolute;
-			@include colorMixins.fudis-bg-color('gray-dark');
-			width: spacing.$fudis-spacing-s;
-			height: spacing.$fudis-spacing-s;
-    	border-radius: 50%;
-		}
+		justify-content: center;
 	}
-	&--disabled {
-		@include colorMixins.fudis-bg-color('gray-extra-light');
-	}
-	&--invalid {
-		@include borders.fudis-border('1px', 'solid', 'red');
-		box-shadow: 0 0 0 spacing.$fudis-pixel-3 colors.$fudis-red-light;
+	
+	/* Create the indicator (the dot/circle - hidden when not checked) */
+	.fudis-radio-button__control__indicator:after {
+		content: "";
+		position: absolute;
+		display: none;
 	}
 }
