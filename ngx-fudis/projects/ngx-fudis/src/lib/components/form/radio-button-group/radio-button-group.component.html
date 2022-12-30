@@ -1,7 +1,5 @@
 <div #radioList class="fudis-form-element fudis-radio-button-group">
-	<li *ngFor="let option of options; let index = index">
-		<fudis-radio-button [attr.name]="option.name" [control]="getRadioOptions()">
-			{{ option.label }}
-		</fudis-radio-button>
+	<li *ngFor="let option of options">
+		<fudis-radio-button [id]="option.id" [name]="option.name" [label]="option.label"></fudis-radio-button>
 	</li>
 </div>

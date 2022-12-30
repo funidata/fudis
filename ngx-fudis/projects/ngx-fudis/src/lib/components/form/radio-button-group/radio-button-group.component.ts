@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 
 export interface Option {
 	label: string;
+	id: string;
 	name: string;
 	value: string;
 	disabled?: boolean;
@@ -14,7 +15,20 @@ export interface Option {
 	styleUrls: ['./radio-button-group.component.scss'],
 })
 export class RadioButtonGroupComponent implements OnInit {
-	@Input() options: Option[];
+	@Input() nimi: string;
+
+	/**
+	 * Options for testing purposes
+	 */
+	options: Option[] = [
+		{ value: 'omena', label: 'omena', id: '1', name: 'hedelma' },
+		{ value: 'banaani', label: 'banaani', id: '2', name: 'hedelma' },
+		{ value: 'kirsikka', label: 'kirsikka', id: '3', name: 'hedelma' },
+	];
+
+	// @Input() options: Option[];
+
+	@Input() id: string;
 
 	frm: FormGroup;
 
@@ -23,6 +37,7 @@ export class RadioButtonGroupComponent implements OnInit {
 	@Input() control: FormControl;
 
 	ngOnInit() {
+		// this.MyFunction();
 		// console.log('hellou');
 		// if (this.required && this.control.invalid) {
 		// 	this.validatorArray.push(Validators.required);
@@ -32,16 +47,15 @@ export class RadioButtonGroupComponent implements OnInit {
 		});
 	}
 
+	// MyFunction() {
+	// 	this.options.forEach((option) => {
+	// 		option.name = 'hedelmä';
+	// 	});
+	// 	console.log(this.options);
+	// }
+
 	getRadioOptions() {
 		console.log('I was checked');
 		return this.frm.get('inputOption') as FormControl;
 	}
-	// toggle() {
-	// 	console.log('minua kutsuttiiin');
-	// 	if (this.control.disabled) {
-	// 		return;
-	// 	}
-	// 	this.checked = !this.checked;
-	// 	console.log(this.checked);
-	// }
 }

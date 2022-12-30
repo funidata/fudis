@@ -8,6 +8,9 @@
 @use '../../../foundations/focus/mixins.scss' as focus; 
 
 .fudis-radio-button-group {
+	li {
+		list-style: none;
+	}
 	// display: block;
   // position: relative;
   // padding-left: 35px;

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Option } from 'dist/ngx-fudis/lib/components/form/radio-button-group/radio-button-group.component';
 
 @Component({
 	selector: 'app-root',
@@ -37,7 +36,11 @@ import { Option } from 'dist/ngx-fudis/lib/components/form/radio-button-group/ra
 			<fudis-icon icon="chevron" rotate="cw-90"></fudis-icon>
 			<fudis-icon icon="achievement" color="success"></fudis-icon>
 		</div>
-		<fudis-radio-button-group [options]="options"></fudis-radio-button-group>
+		<fudis-radio-button-group></fudis-radio-button-group>
+		<!-- <form (FormGroup)="(frm)">
+			<fudis-radio-button id="muu" name="hedelmä" [value]="value" [control]="getRadioOptions()"></fudis-radio-button>
+			<fudis-radio-button id="maa" name="hedelmä" [value]="value" [control]="getRadioOptions()"></fudis-radio-button>
+		</form> -->
 		<!-- <div class="basic-flex-box2">
 			<fudis-badge variant="accent" content="accent"></fudis-badge>
 			<fudis-badge variant="danger">danger</fudis-badge>
@@ -51,16 +54,4 @@ import { Option } from 'dist/ngx-fudis/lib/components/form/radio-button-group/ra
 })
 export class AppComponent {
 	title = 'dev';
-
-	options: Option[];
-
-	ngOnInit() {
-		this.options = [
-			{
-				name: 'omena',
-				value: 'omena',
-				label: 'omena',
-			},
-		];
-	}
 }
