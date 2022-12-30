@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
 	templateUrl: './radio-button.component.html',
 	styleUrls: ['./radio-button.component.scss'],
 })
-export class RadioButtonComponent {
+export class RadioButtonComponent implements OnInit {
 	@Input() id: string;
 
 	@Input() name: string;
@@ -21,19 +21,21 @@ export class RadioButtonComponent {
 
 	@Input() label: string;
 
-	@Input() control: FormControl;
+	@Input() ctrl: FormControl;
 
-	@ViewChild('radioList') ul: ElementRef;
+	ngOnInit() {
+		console.log('HELLOOOOO ctrl', this.ctrl);
+	}
 
 	onChange() {
-		if (this.disabled) {
+		if (this.ctrl.disabled) {
 			return;
 		}
 		this.checked = !this.checked;
 	}
 
 	public get classes(): string[] {
-		if (this.control.touched && this.control.invalid) {
+		if (this.ctrl.touched && this.ctrl.invalid) {
 			return ['fudis-radio-button-group--invalid'];
 		}
 		return [];

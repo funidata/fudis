@@ -24,7 +24,7 @@ export class RadioButtonGroupComponent implements OnInit {
 	options: Option[] = [
 		{ value: 'omena', label: 'omena', id: '1', name: 'hedelma' },
 		{ value: 'banaani', label: 'banaani', id: '2', name: 'hedelma' },
-		{ value: 'kirsikka', label: 'kirsikka', id: '3', name: 'hedelma', checked: true },
+		{ value: 'kirsikka', label: 'kirsikka', id: '3', name: 'hedelma' },
 	];
 
 	// @Input() options: Option[];
@@ -38,22 +38,14 @@ export class RadioButtonGroupComponent implements OnInit {
 	@Input() control: FormControl;
 
 	ngOnInit() {
-		// this.MyFunction();
-		// console.log('hellou');
-		// if (this.required && this.control.invalid) {
-		// 	this.validatorArray.push(Validators.required);
-		// }
 		this.frm = this.fb.group({
 			inputOption: ['Inputs', Validators.required],
 		});
-	}
 
-	// MyFunction() {
-	// 	this.options.forEach((option) => {
-	// 		option.name = 'hedelmä';
-	// 	});
-	// 	console.log(this.options);
-	// }
+		if (this.options.length < 2) {
+			throw new Error('Radio button needs value more than 2');
+		}
+	}
 
 	getRadioOptions() {
 		console.log('I was checked');

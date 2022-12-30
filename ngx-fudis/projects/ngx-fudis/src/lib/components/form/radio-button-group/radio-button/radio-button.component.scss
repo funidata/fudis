@@ -12,6 +12,9 @@
 	width: auto;
 
 	&__label {
+		@include typography.fudis-body-m-regular;
+		@include colorMixins.fudis-text-color('gray-dark');
+
 		display: block;
 		position: relative;
 		padding-left: 35px;
@@ -21,15 +24,6 @@
 		-moz-user-select: none;
 		-ms-user-select: none;
 		user-select: none;
-		@include typography.fudis-body-m-regular;
-		@include colorMixins.fudis-text-color('gray-dark');
-
-		.fudis-radio-button__control__indicator {
-		 width: 16px;
-		 height: 16px;
-		 border-radius: 50%;
-		 @include colorMixins.fudis-bg-color('gray-dark');
-	 }
 	}
 	&__input {
 		position: absolute;
@@ -39,30 +33,28 @@
 		left: 0;
 		cursor: pointer;
 		z-index: 1;
-		// &:checked ~ .fudis-radio-button__control__indicator {
-		// 	&:after {
-		// 		display: block;
-		// 	}
-		// }
 	}
 	
-	/* Create a custom radio button */
-	.fudis-radio-button__control {
+	/* Radio button circle */
+	&__control {
+		@include borders.fudis-border('1px', 'solid', 'gray-middle');	
+
 		position: absolute;
 		top: 0;
 		left: 0;
 		height: 24px;
 		width: 24px;
-		@include borders.fudis-border('1px', 'solid', 'gray-middle');	
 		border-radius: 50%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-	}
-	
-	/* Create the indicator (the dot/circle - hidden when not checked) */
-	.fudis-radio-button__control__indicator {
-		content: "";
-		position: absolute;
+		
+		&__indicator {
+			@include colorMixins.fudis-bg-color('gray-dark');
+
+			width: 16px;
+			height: 16px;
+			border-radius: 50%;
+		}
 	}
 }
