@@ -17,22 +17,18 @@
 
 		display: block;
 		position: relative;
-		padding-left: 35px;
-		margin-bottom: 12px;
+		padding-left: spacing.$fudis-spacing-l;
+		margin-bottom: spacing.$fudis-spacing-s;
 		cursor: pointer;
-		-webkit-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
 	}
 	&__input {
 		position: absolute;
+		left: 0;
 		opacity: 0;
 		width: 100%;
 		height: 100%;
-		left: 0;
-		cursor: pointer;
 		z-index: 1;
+		cursor: pointer;
 	}
 	
 	/* Radio button circle */
@@ -40,20 +36,20 @@
 		@include borders.fudis-border('1px', 'solid', 'gray-middle');	
 
 		position: absolute;
+		display: flex;
 		top: 0;
 		left: 0;
-		height: 24px;
-		width: 24px;
 		border-radius: 50%;
-		display: flex;
+		height: spacing.$fudis-spacing-m;
+		width: spacing.$fudis-spacing-m;
 		align-items: center;
 		justify-content: center;
 		
 		&__indicator {
 			@include colorMixins.fudis-bg-color('gray-dark');
 
-			width: 16px;
-			height: 16px;
+			width: spacing.$fudis-spacing-s;
+			height: spacing.$fudis-spacing-s;
 			border-radius: 50%;
 		}
 	}
