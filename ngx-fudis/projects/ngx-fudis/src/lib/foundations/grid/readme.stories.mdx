@@ -2,6 +2,34 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Foundations/Grid" />
 
-# HELLO FROM GRID FOUNDATIONS!
+# Grid
 
-Bacon ipsum dolor amet pancetta strip steak picanha doner, biltong tenderloin turducken turkey porchetta burgdoggen pastrami cow ribeye. Swine kielbasa hamburger, shoulder drumstick beef ribs strip steak flank t-bone andouille prosciutto turducken meatloaf fatback ball tip. Leberkas rump chicken, shoulder hamburger chuck salami pork chop porchetta biltong. Jerky pork chop leberkas tail drumstick, shoulder hamburger strip steak. Prosciutto jowl bacon biltong cupim pork. Turkey strip steak shankle leberkas chicken, filet mignon cow andouille meatloaf t-bone turducken burgdoggen.
+Fudis comes with a basic CSS grid system.
+
+Possible inputs at the moment are variant (default regular), alignVertical (default start) and columns (default 2).
+
+| Variant | 								|
+| ------- | ----						|
+| regular | max-width: 48em |
+| wide 		| max-width: 68em |
+
+| AlignVertical | 									 |
+| ------- 			| ----							 |
+| start 				| align-items: start |
+| center 				| align-items: center|
+| end 					| align-items: end 	 |
+
+| Columns	| 									 										 | Breaks at |
+| ------- | ----							 										 | ----			 |
+| 1 			| grid-template-columns: 1fr						 | none			 |
+| 2 			| grid-template-columns: 1fr 1fr				 | fudis-breakpoint('s') to 1fr |
+| 3 			| grid-template-columns: 1fr 1fr 1fr 		 | fudis-breakpoint('s') to 1fr |
+| 4 			| grid-template-columns: 1fr 1fr 1fr 1fr | fudis-breakpoint('m') to 1fr 1fr, fudis-breakpoint('s') to 1fr |
+
+<hr />
+
+### How different elements align inside grid
+
+`<fudis-heading>` spans always for the whole grid width.
+
+_...(to be continued)_

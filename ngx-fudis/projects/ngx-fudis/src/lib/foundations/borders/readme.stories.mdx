@@ -15,7 +15,7 @@ Set the border of an element.
 
 | $width | $style | $color|
 | ---- | ---- | ---- |
-| value from spacing tokens (_$fudis-pixel-tokens_) | value from border tokens (_$fudis-border-styles_) | value from colors tokens (_$fudis-colors_) |
+| string value from spacing tokens map (_$fudis-pixel-tokens_) | string value from border tokens map (_$fudis-border-styles_) | string value from colors tokens map (_$fudis-colors_) |
 
 ````
 @include borders.fudis-border('2px', 'solid', 'primary');	
@@ -31,7 +31,7 @@ Set the outline of an element.
 
 | $width | $style | $color|
 | ---- | ---- | ---- |
-| value from spacing tokens (_$fudis-pixel-tokens_) | value from border tokens (_$fudis-border-styles_) | value from colors tokens (_$fudis-colors_) |
+| string value from spacing tokens map (_$fudis-pixel-tokens_) | string value from border tokens map (_$fudis-border-styles_) | string value from colors tokens map (_$fudis-colors_) |
 
 ````
 @include borders.fudis-outline('1px', 'dashed', 'gray-middle');
@@ -46,8 +46,15 @@ Set border radius of an element.
 
 | $width |
 | ---- | 
-| value from spacing tokens (_$fudis-pixel-tokens_) |
+| string value from spacing tokens map (_$fudis-pixel-tokens_) |
 
 ````
 @include borders.fudis-border-radius('2px');
 ````
+
+# Border tokens
+
+| $fudis-border-style |
+| ---- |
+| solid |
+| dashed |

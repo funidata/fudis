@@ -2,6 +2,33 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Foundations/Breakpoints" />
 
-# HELLO FROM BREAKPOINTS FOUNDATIONS!
+# Breakpoint mixins
 
-Bacon ipsum dolor amet pancetta strip steak picanha doner, biltong tenderloin turducken turkey porchetta burgdoggen pastrami cow ribeye. Swine kielbasa hamburger, shoulder drumstick beef ribs strip steak flank t-bone andouille prosciutto turducken meatloaf fatback ball tip. Leberkas rump chicken, shoulder hamburger chuck salami pork chop porchetta biltong. Jerky pork chop leberkas tail drumstick, shoulder hamburger strip steak. Prosciutto jowl bacon biltong cupim pork. Turkey strip steak shankle leberkas chicken, filet mignon cow andouille meatloaf t-bone turducken burgdoggen.
+When using breakpoint mixins load them with `@use '../../../foundations/breakpoints/mixins.scss' as breakpoints;` to the component's .scss file.
+
+The mixins are using only max-width, so when you are using the mixin **fudis-breakpoint('m')**, your styles will be applied from the medium breakpoint and down.
+
+````
+@include breakpoints.fudis-breakpoint($breakpoint)
+````
+
+| $breakpoint |
+| ---- |
+| string value from breakpoint tokens map (_$fudis-breakpoints_) |
+
+````
+@include breakpoints.fudis-breakpoint('s');	
+````
+
+<hr /> 
+
+# Breakpoint tokens
+
+| Name                 | String value | Value   | Default px value |
+| -------------------  | ------------ | ------- | ---------------- |
+| $fudis-breakpoint-xl | 		xl				| 100em   | 1600px           |
+| $fudis-breakpoint-l  | 		l					| 75em    | 1200px           |
+| $fudis-breakpoint-m  | 		m					| 62em    | 992px            |
+| $fudis-breakpoint-s  | 		s					| 48em    | 768px            |
+| $fudis-breakpoint-xs | 		xs				| 30em    | 480px            |
+| $fudis-breakpoint-xxs| 		xxs 			| 20em    | 320px            |
