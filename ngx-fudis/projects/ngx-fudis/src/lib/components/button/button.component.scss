@@ -13,8 +13,10 @@
 
 	display: inline-flex;
 	align-items: center;
+	justify-content: center;
 	cursor: pointer;
-	padding: 0 spacing.$fudis-spacing-xs;		
+	padding: 0 spacing.$fudis-spacing-xs;
+	min-width: spacing.$fudis-spacing-xxl;		
 
 	&:focus {
 		@include focus.fudis-focus-generic;
