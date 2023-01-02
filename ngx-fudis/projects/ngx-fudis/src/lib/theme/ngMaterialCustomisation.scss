@@ -40,7 +40,7 @@ mat-form-field {
  		}
  	}
 
-	/* Styles for fudis button and its icon */
+	/* Styles for icon used in fudis-button */
 	fudis-button {
 		fudis-icon {
 			svg {
@@ -67,6 +67,17 @@ mat-form-field {
 					svg {
 						/* stylelint-disable-next-line declaration-no-important */
 						fill: colorTokens.$fudis-primary !important;
+					}
+				}
+			}
+			
+			/* stylelint-disable-next-line order/order */
+			&:disabled {
+				fudis-icon {
+					/* stylelint-disable-next-line selector-max-compound-selectors */
+					svg {
+						/* stylelint-disable-next-line declaration-no-important */
+						fill: colorTokens.$fudis-gray-dark !important;
 					}
 				}
 			}

@@ -28,6 +28,9 @@ import { Component } from '@angular/core';
 				<fudis-button data-theme="sisu" label="Poista" variant="tertiary">
 					<fudis-icon icon="delete"></fudis-icon>
 				</fudis-button>
+				<fudis-button data-theme="sisu" label="Poista" [disabled]="true">
+					<fudis-icon icon="delete"></fudis-icon>
+				</fudis-button>
 			</fudis-grid>
 		</form>
 		<form class="basic-flex-box">
