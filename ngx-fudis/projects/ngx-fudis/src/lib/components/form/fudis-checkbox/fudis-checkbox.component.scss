@@ -33,6 +33,7 @@
 
 		&--invalid {
 			@include borders.fudis-border('1px', 'solid', 'red');
+			
 			box-shadow: 0 0 0 spacing.$fudis-pixel-3 colors.$fudis-red-light;
 		}
 
