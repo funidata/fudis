@@ -3,15 +3,13 @@
 		<input
 			class="fudis-radio-button__input"
 			type="radio"
-			(change)="onChange()"
-			(blur)="onChange()"
 			[id]="id"
 			[attr.name]="name"
 			[name]="name"
-			[required]="required"
-			[disabled]="disabled"
+			[attr.required]="required"
+			[attr.disabled]="disabled"
 			[formControl]="ctrl"
-			[checked]="checked"
+			[attr.checked]="checked"
 			[value]="value" />
 		<div class="fudis-radio-button__control">
 			<span *ngIf="checked" class="fudis-radio-button__control__indicator"></span>

@@ -15,7 +15,7 @@ export class RadioButtonComponent implements OnInit {
 
 	@Input() required: boolean;
 
-	@Input() checked: boolean = false;
+	checked: boolean;
 
 	@Input() value: string;
 
@@ -27,17 +27,17 @@ export class RadioButtonComponent implements OnInit {
 		console.log('HELLOOOOO ctrl', this.ctrl);
 	}
 
-	onChange() {
-		if (this.ctrl.disabled) {
-			return;
-		}
-		this.checked = !this.checked;
-	}
+	// onChange() {
+	// 	if (this.ctrl.disabled) {
+	// 		return;
+	// 	}
+	// 	this.checked = !this.checked;
+	// }
 
-	public get classes(): string[] {
-		if (this.ctrl.touched && this.ctrl.invalid) {
-			return ['fudis-radio-button-group--invalid'];
-		}
-		return [];
-	}
+	// public get classes(): string[] {
+	// 	if (this.ctrl.touched && this.ctrl.invalid) {
+	// 		return ['fudis-radio-button-group--invalid'];
+	// 	}
+	// 	return [];
+	// }
 }

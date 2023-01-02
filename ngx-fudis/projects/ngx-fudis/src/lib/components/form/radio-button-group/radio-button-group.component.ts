@@ -7,7 +7,7 @@ export interface Option {
 	name: string;
 	value: string;
 	disabled?: boolean;
-	checked?: boolean;
+	checked: boolean;
 }
 
 @Component({
@@ -22,20 +22,18 @@ export class RadioButtonGroupComponent implements OnInit {
 	 * Options for testing purposes
 	 */
 	options: Option[] = [
-		{ value: 'omena', label: 'omena', id: '1', name: 'hedelma' },
-		{ value: 'banaani', label: 'banaani', id: '2', name: 'hedelma' },
-		{ value: 'kirsikka', label: 'kirsikka', id: '3', name: 'hedelma' },
+		{ value: 'omena', label: 'omena', id: '1', name: 'hedelma', checked: false },
+		{ value: 'banaani', label: 'banaani', id: '2', name: 'hedelma', checked: true },
+		{ value: 'kirsikka', label: 'kirsikka', id: '3', name: 'hedelma', checked: false },
 	];
 
 	// @Input() options: Option[];
-
-	@Input() id: string;
 
 	frm: FormGroup;
 
 	constructor(private fb: FormBuilder) {}
 
-	@Input() control: FormControl;
+	@Input() ctrl: FormControl;
 
 	ngOnInit() {
 		this.frm = this.fb.group({
@@ -49,6 +47,8 @@ export class RadioButtonGroupComponent implements OnInit {
 
 	getRadioOptions() {
 		console.log('I was checked');
+
+		console.log(this.frm);
 		return this.frm.get('inputOption') as FormControl;
 	}
 }
