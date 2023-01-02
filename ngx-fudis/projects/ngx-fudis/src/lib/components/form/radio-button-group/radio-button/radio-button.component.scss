@@ -17,19 +17,19 @@
 
 		display: block;
 		position: relative;
+		cursor: pointer;
 		margin-bottom: spacing.$fudis-spacing-s;
 		padding-left: spacing.$fudis-spacing-l;
-		cursor: pointer;
 	}
 
 	&__input {
 		position: absolute;
+		z-index: 1;
+		cursor: pointer;
 		left: 0;
 		opacity: 0;
 		width: 100%;
-		z-index: 1;
 		height: 100%;
-		cursor: pointer;
 	}
 	
 	/* Radio button circle */
@@ -38,19 +38,19 @@
 
 		display: flex;
 		position: absolute;
+		align-items: center;
+		justify-content: center;
 		top: 0;
 		left: 0;
 		border-radius: 50%;
-		align-items: center;
 		width: spacing.$fudis-spacing-m;
 		height: spacing.$fudis-spacing-m;
-		justify-content: center;
 		
 		&__indicator {
 			@include colorMixins.fudis-bg-color('gray-dark');
 
-			width: spacing.$fudis-spacing-s;
 			border-radius: 50%;
+			width: spacing.$fudis-spacing-s;
 			height: spacing.$fudis-spacing-s;
 		}
 	}
