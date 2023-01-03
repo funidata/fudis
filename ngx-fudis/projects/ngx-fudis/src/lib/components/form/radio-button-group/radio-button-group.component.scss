@@ -8,12 +8,12 @@
 @use '../../../foundations/focus/mixins.scss' as focus; 
 
 .fudis-radio-button-group {
-	border: none;
+	@include borders.fudis-border('1px', 'solid', 'transparent');
 
 	li {
 		list-style: none;
 	}
-	
+
 	&__label {
 		@include typography.fudis-text-field-label;
 		@include colorMixins.fudis-text-color('gray-dark');
