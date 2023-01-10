@@ -32,6 +32,8 @@ import { RadioButtonGroupComponent } from './components/form/radio-button-group/
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
 import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
 
+import { RadioButtonGroupComponentExample } from '../examples/form/radio-button-group-example/radio-button-group-example.component';
+
 @NgModule({
 	declarations: [
 		FudisDialogTitleDirective,
@@ -56,6 +58,7 @@ import { RadioButtonComponent } from './components/form/radio-button-group/radio
 		RadioButtonGroupComponent,
 		RadioButtonComponent,
 		DropdownComponent,
+		RadioButtonGroupComponentExample,
 	],
 	imports: [
 		FormsModule,
@@ -84,7 +87,6 @@ import { RadioButtonComponent } from './components/form/radio-button-group/radio
 		BadgeComponent,
 		IconComponent,
 		RadioButtonGroupComponent,
-		RadioButtonComponent,
 		DropdownComponent,
 	],
 	providers: [FudisDialog],

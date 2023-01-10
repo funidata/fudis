@@ -1,0 +1,9 @@
+<form [formGroup]="controlFormGroup">
+	<fudis-radio-button-group
+		label="Choose your preferred fruit"
+		*ngIf="controlFormGroup"
+		[parentFormGroup]="controlFormGroup"
+		[options]="options"></fudis-radio-button-group>
+	<fudis-body-text *ngIf="radioButtonGroup.value">Option chosen: {{ radioButtonGroup.value }}</fudis-body-text>
+	<fudis-body-text *ngIf="!radioButtonGroup.value">No value chosen :(</fudis-body-text>
+</form>
