@@ -1,9 +1,19 @@
-<form [formGroup]="controlFormGroup">
+<form [formGroup]="mainFormGroup">
 	<fudis-radio-button-group
 		label="Choose your preferred fruit"
-		*ngIf="controlFormGroup"
-		[parentFormGroup]="controlFormGroup"
+		*ngIf="mainFormGroup"
+		[parentFormGroup]="mainFormGroup"
+		[radioButtonFormControl]="radioButtonGroupOne"
 		[options]="options"></fudis-radio-button-group>
-	<fudis-body-text *ngIf="radioButtonGroup.value">Option chosen: {{ radioButtonGroup.value }}</fudis-body-text>
-	<fudis-body-text *ngIf="!radioButtonGroup.value">No value chosen :(</fudis-body-text>
+	<fudis-body-text *ngIf="radioButtonGroupOne.value">Option chosen: {{ radioButtonGroupOne.value }}</fudis-body-text>
+	<fudis-body-text *ngIf="!radioButtonGroupOne.value">No value chosen for the first :(</fudis-body-text>
+	<fudis-radio-button-group
+		label="Choose a pet"
+		*ngIf="mainFormGroup"
+		[parentFormGroup]="mainFormGroup"
+		[radioButtonFormControl]="radioButtonGroupTwo"
+		[options]="optionsTwo"></fudis-radio-button-group>
+
+	<fudis-body-text *ngIf="radioButtonGroupTwo.value">Option chosen: {{ radioButtonGroupTwo.value }}</fudis-body-text>
+	<fudis-body-text *ngIf="!radioButtonGroupTwo.value">No value chosen for the second :(</fudis-body-text>
 </form>

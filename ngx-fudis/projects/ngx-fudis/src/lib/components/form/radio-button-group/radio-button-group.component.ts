@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { RadioButtonOption } from '../../../types/forms';
 
 @Component({
@@ -12,6 +12,8 @@ export class RadioButtonGroupComponent implements OnInit {
 	@Input() parentFormGroup: FormGroup;
 
 	selectedId: string | number | undefined = undefined;
+
+	@Input() radioButtonFormControl: FormControl;
 
 	@Input() options: RadioButtonOption[];
 

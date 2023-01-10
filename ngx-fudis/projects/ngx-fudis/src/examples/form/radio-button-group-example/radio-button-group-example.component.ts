@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
@@ -13,9 +13,11 @@ import { RadioButtonOption } from 'projects/ngx-fudis/src/lib/types/forms';
 
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class RadioButtonGroupComponentExample implements OnInit {
-	controlFormGroup: FormGroup;
+	mainFormGroup: FormGroup;
 
-	radioButtonGroup: FormControl = new FormControl();
+	radioButtonGroupOne: FormControl = new FormControl();
+
+	radioButtonGroupTwo: FormControl = new FormControl();
 
 	selectedId: string | number | undefined = undefined;
 
@@ -24,9 +26,15 @@ export class RadioButtonGroupComponentExample implements OnInit {
 	 */
 
 	options: RadioButtonOption[] = [
-		{ value: 'omena', label: 'omena', id: '1', name: 'hedelma', checked: false },
-		{ value: 'banaani', label: 'banaani', id: '2', name: 'hedelma', checked: true },
-		{ value: 'kirsikka', label: 'kirsikka', id: '3', name: 'hedelma', checked: false },
+		{ value: 'apple', label: 'Apple', id: '1', name: 'fruit', checked: false },
+		{ value: 'fair-trade-banana', label: 'Fair Trade Banana', id: '2', name: 'fruit', checked: false },
+		{ value: 'cherry', label: 'Cherry', id: '3', name: 'fruit', checked: true },
+	];
+
+	optionsTwo: RadioButtonOption[] = [
+		{ value: 'dog', label: 'Dog', id: '1', name: 'animal', checked: false },
+		{ value: 'cat', label: 'Cat', id: '2', name: 'animal', checked: false },
+		{ value: 'cabybara', label: 'Cabybara', id: '3', name: 'animal', checked: false },
 	];
 
 	constructor(private formBuilder: FormBuilder) {
@@ -35,15 +43,10 @@ export class RadioButtonGroupComponentExample implements OnInit {
 		}
 	}
 
-	@Input() label: string;
-
 	ngOnInit() {
-		this.controlFormGroup = this.formBuilder.group({
-			radioButtonGroup: this.radioButtonGroup,
+		this.mainFormGroup = this.formBuilder.group({
+			radioButtonGroupOne: this.radioButtonGroupOne,
+			radioButtonGroupTwo: this.radioButtonGroupTwo,
 		});
-	}
-
-	setSelected(event: any) {
-		this.selectedId = event.target.id;
 	}
 }
