@@ -13,9 +13,4 @@
 	li {
 		list-style: none;
 	}
-
-	&__label {
-		@include typography.fudis-text-field-label;
-		@include colorMixins.fudis-text-color('gray-dark');
-	}
 }

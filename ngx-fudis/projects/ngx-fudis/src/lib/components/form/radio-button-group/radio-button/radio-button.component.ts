@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Component({
 	selector: 'fudis-radio-button',
@@ -9,9 +9,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class RadioButtonComponent {
 	// Id of single Radio button
 	@Input() id: string;
-
-	// FormGroup for Radio Button
-	@Input() parentFormGroup: FormGroup;
 
 	// FormControl for Radio Button group
 	@Input() radioButtonFormControl: FormControl;
@@ -45,5 +42,12 @@ export class RadioButtonComponent {
 			return true;
 		}
 		return false;
+	}
+
+	checkErrors() {
+		console.log(this.radioButtonFormControl);
+		if (this.radioButtonFormControl.touched && !this.radioButtonFormControl.value) {
+			console.log('jeee');
+		}
 	}
 }

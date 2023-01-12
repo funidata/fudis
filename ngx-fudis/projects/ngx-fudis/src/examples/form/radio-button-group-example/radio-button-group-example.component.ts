@@ -37,11 +37,7 @@ export class RadioButtonGroupComponentExample implements OnInit {
 		{ value: 'cabybara', label: 'Cabybara', id: '3', name: 'animal', checked: false },
 	];
 
-	constructor(private formBuilder: FormBuilder) {
-		if (this.options.length < 2) {
-			throw new Error('Radio button needs value more than 2');
-		}
-	}
+	constructor(private formBuilder: FormBuilder) {}
 
 	ngOnInit() {
 		this.mainFormGroup = this.formBuilder.group({

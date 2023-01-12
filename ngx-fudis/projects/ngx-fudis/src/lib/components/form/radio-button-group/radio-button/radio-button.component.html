@@ -1,4 +1,4 @@
-<div [formGroup]="parentFormGroup" class="fudis-radio-button">
+<div class="fudis-radio-button">
 	<label for="id" class="fudis-radio-button__label">
 		<input
 			class="fudis-radio-button__input"
@@ -9,6 +9,7 @@
 			[attr.required]="required"
 			[attr.disabled]="disabled"
 			[attr.checked]="isSelected()"
+			(blur)="checkErrors()"
 			[value]="value" />
 		<div class="fudis-radio-button__control">
 			<span *ngIf="isSelected()" class="fudis-radio-button__control__indicator"></span>

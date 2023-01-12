@@ -5,11 +5,12 @@ import { RadioButtonGroupComponentExample } from 'projects/ngx-fudis/src/example
 import { RadioButtonGroupComponent } from './radio-button-group.component';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
+import { LegendComponent } from '../legend/legend.component';
 
 export default {
 	title: 'Components/Form/RadioButtonGroup',
 	component: RadioButtonGroupComponentExample,
-	subcomponents: { RadioButtonGroupComponent, RadioButtonComponent, BodyTextComponent },
+	subcomponents: { RadioButtonGroupComponent, RadioButtonComponent, BodyTextComponent, LegendComponent },
 	decorators: [
 		moduleMetadata({
 			declarations: [
@@ -17,6 +18,7 @@ export default {
 				RadioButtonComponent,
 				RadioButtonGroupComponentExample,
 				BodyTextComponent,
+				LegendComponent,
 			],
 			imports: [ReactiveFormsModule, BrowserModule, FormsModule],
 		}),

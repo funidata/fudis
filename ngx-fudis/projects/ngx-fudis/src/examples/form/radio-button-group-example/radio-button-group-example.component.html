@@ -2,7 +2,6 @@
 	<fudis-radio-button-group
 		label="Choose your preferred fruit"
 		*ngIf="mainFormGroup"
-		[parentFormGroup]="mainFormGroup"
 		[radioButtonFormControl]="radioButtonGroupOne"
 		[options]="options"></fudis-radio-button-group>
 	<fudis-body-text *ngIf="radioButtonGroupOne.value">Option chosen: {{ radioButtonGroupOne.value }}</fudis-body-text>
@@ -10,7 +9,6 @@
 	<fudis-radio-button-group
 		label="Choose a pet"
 		*ngIf="mainFormGroup"
-		[parentFormGroup]="mainFormGroup"
 		[radioButtonFormControl]="radioButtonGroupTwo"
 		[options]="optionsTwo"></fudis-radio-button-group>
 

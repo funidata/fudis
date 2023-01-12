@@ -1,5 +1,6 @@
 <fieldset class="fudis-form-element fudis-radio-button-group">
-	<legend class="fudis-radio-button-group__label">{{ label }}</legend>
+	<!-- <legend class="fudis-radio-button-group__label"></legend> -->
+	<fudis-legend>{{ label }}</fudis-legend>
 	<li *ngFor="let option of options; let index = index">
 		<fudis-radio-button
 			(click)="setSelected($event)"
@@ -9,7 +10,6 @@
 			[label]="option.label"
 			[checked]="option.checked"
 			[selectedOptionId]="selectedId"
-			[radioButtonFormControl]="radioButtonFormControl"
-			[parentFormGroup]="parentFormGroup"></fudis-radio-button>
+			[radioButtonFormControl]="radioButtonFormControl"></fudis-radio-button>
 	</li>
 </fieldset>
