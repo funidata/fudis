@@ -1,10 +1,12 @@
 /* stylelint-disable color-named */
 /* stylelint-disable unit-disallowed-list */
 /* stylelint-disable property-disallowed-list */
+
 @use '../../foundations/borders/mixins.scss' as borders;
 @use '../../foundations/spacing/tokens.scss' as spacing;
 @use '../../foundations/breakpoints/mixins.scss' as breakpoints;
 @use '../../foundations/breakpoints/tokens.scss' as breakpointTokens;
+@use '../../foundations/grid/mixins.scss' as grid;
 
 .fudis-grid {
 	display: grid;
@@ -13,15 +15,36 @@
 	margin-top: spacing.$fudis-spacing-m;
 	margin-bottom: spacing.$fudis-spacing-m;
 	border: 3px solid blue;
+	width: 100%;
+	min-width: 18rem;
 
 	/* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
 	& > fudis-heading {
 		grid-column: 1/-1;
 	}
 
-	&__regular {
-		width: 100%;
-		max-width: breakpointTokens.$fudis-breakpoint-s;
+	&__xs {
+		@include grid.fudis-grid-max-width('xs')
+	}
+
+	&__s {
+		@include grid.fudis-grid-max-width('s')
+	}
+
+	&__m {
+		@include grid.fudis-grid-max-width('m')
+	}
+
+	&__l {
+		@include grid.fudis-grid-max-width('l')
+	}
+		
+	&__xl {
+		@include grid.fudis-grid-max-width('xl')
+	}
+
+	&__xxl {
+		@include grid.fudis-grid-max-width('xxl')
 	}
 
 	&__wide {
@@ -47,37 +70,24 @@
 		}
 	}
 
-	&__cols {
-		&__1 {
-			grid-template-columns: 1fr;
-		}
-
-		&__2 {
-			grid-template-columns: 1fr 1fr;
-			
-			@include breakpoints.fudis-breakpoint('s') {
-				grid-template-columns: 1fr;
-			}
-		}
-
-		&__3 {
-			grid-template-columns: 1fr 1fr 1fr;
-			
-			@include breakpoints.fudis-breakpoint('s') {
-				grid-template-columns: 1fr;
-			}
-		}
-
-		&__4 {
-			grid-template-columns: 1fr 1fr 1fr 1fr;
-
-			@include breakpoints.fudis-breakpoint('m') {
-				grid-template-columns: 1fr 1fr;
-			}
-
-			@include breakpoints.fudis-breakpoint('s') {
-				grid-template-columns: 1fr;
-			}
-		}
+	@include breakpoints.fudis-breakpoint('s') {
+		@include grid.fudis-grid-max-width('s')
 	}
+	
+	@include breakpoints.fudis-breakpoint('m') {
+		@include grid.fudis-grid-max-width('m')
+	}
+
+	@include breakpoints.fudis-breakpoint('l') {
+		@include grid.fudis-grid-max-width('l')
+	}
+
+	@include breakpoints.fudis-breakpoint('xl') {
+		@include grid.fudis-grid-max-width('xl')
+	}
+	
+	@include breakpoints.fudis-breakpoint('xxl') {
+		@include grid.fudis-grid-max-width('xxl')
+	}
+
 }

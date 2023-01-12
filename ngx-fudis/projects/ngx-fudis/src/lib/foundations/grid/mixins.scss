@@ -1,0 +1,14 @@
+@use 'sass:map';
+@use './tokens';
+
+@mixin fudis-grid-max-width($width) {
+	@if map_has_key(tokens.$fudis-grid-widths, $width) {
+		$grid-width-value: map.get(tokens.$fudis-grid-widths, $width);
+
+    max-width: $grid-width-value;
+	}
+
+ @else {
+		@error 'Unknown grid width of #{$width}. Accepted arguments are: "xxl", "xl", "l", "m", "s", "xs".';
+	}
+}

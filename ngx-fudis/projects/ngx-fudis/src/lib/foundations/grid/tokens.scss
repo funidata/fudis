@@ -1,0 +1,16 @@
+/* stylelint-disable unit-disallowed-list */
+$fudis-grid-width-xs: 35.94rem; // 575px
+$fudis-grid-width-s: 33.75rem; // 540px
+$fudis-grid-width-m: 45rem; // 720px
+$fudis-grid-width-l: 60rem; // 960px
+$fudis-grid-width-xl: 65rem; // 1040px
+$fudis-grid-width-xxl: 96.25rem; // 1540px
+
+$fudis-grid-widths: (
+	'xxl': $fudis-grid-width-xxl,
+	'xl': $fudis-grid-width-xl,
+	'l': $fudis-grid-width-l,
+	'm': $fudis-grid-width-m,
+	's': $fudis-grid-width-s,
+	'xs': $fudis-grid-width-xs,
+);

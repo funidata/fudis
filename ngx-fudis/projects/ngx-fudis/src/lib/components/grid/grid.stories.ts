@@ -16,11 +16,7 @@ export default {
 
 export const Default = () => ({
 	template: `
-	<fudis-grid>
-		</fudis-grid>
-		<fudis-grid columnsXxs="4fr" columnsXs="1fr 3fr" columnsS="4fr 2fr" columnsM="3fr 2fr 3fr" columnsL="2fr 3fr 5fr" columnsXl="3fr 2fr 2fr 1fr 3fr">
-		</fudis-grid>
-		<fudis-grid columnsXxs="4fr" columnsM="3fr 2fr 3fr">
+		<fudis-grid columnsS="1fr" columns="1fr 1fr">
 		</fudis-grid>
 	`,
 	props: {},

@@ -2,7 +2,7 @@
 	[style.grid-template-columns]="columnsToApply"
 	[style.align-items]="alignItemsY"
 	[style.justify-items]="alignItemsX"
-	class="fudis-grid fudis-grid__{{ variant }} fudis-grid__align__{{ align }}">
+	class="fudis-grid fudis-grid__{{ width }} fudis-grid__align__{{ align }}">
 	<div class="fudis-grid__test-item" *ngFor="let n of fakeGridArray; let i = index">
 		<fudis-heading tag="h3" size="m" text="Item nro {{ i }}"></fudis-heading>
 		<p>
