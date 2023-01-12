@@ -56,20 +56,25 @@
 			}
 
 			&__single {
-				height: calc(typographyTokens.$fudis-text-input-line-height)
+				@include breakpoints.fudis-breakpoint('m') {
+					height: calc(typographyTokens.$fudis-text-input-line-height)
+				}
 			}
 
 			&__double {
-				height: calc(2 * typographyTokens.$fudis-text-input-line-height);
+				@include breakpoints.fudis-breakpoint('m') {
+					height: calc(2 * typographyTokens.$fudis-text-input-line-height);
+				}
+
 			}
 
 			&__triple {
-				height: calc(3 * typographyTokens.$fudis-text-input-line-height);
+				@include breakpoints.fudis-breakpoint('m') {
+					height: calc(3 * typographyTokens.$fudis-text-input-line-height);
+				}
 			}
 
-			@include breakpoints.fudis-breakpoint('s') {
-				height: initial;
-			}
+			
 		}
 	}
 

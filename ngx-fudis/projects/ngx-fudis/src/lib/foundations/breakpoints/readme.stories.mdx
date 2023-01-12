@@ -6,29 +6,31 @@ import { Meta } from '@storybook/addon-docs';
 
 When using breakpoint mixins load them with `@use '../../../foundations/breakpoints/mixins.scss' as breakpoints;` to the component's .scss file.
 
-The mixins are using only max-width, so when you are using the mixin **fudis-breakpoint('m')**, your styles will be applied from the medium breakpoint and down.
+The mixins are using only min-width, so when you are using the mixin **fudis-breakpoint('m')**, your styles will be applied from the medium breakpoint and up.
 
-````
+```
 @include breakpoints.fudis-breakpoint($breakpoint)
-````
+```
 
-| $breakpoint |
-| ---- |
+| $breakpoint                                                    |
+| -------------------------------------------------------------- |
 | string value from breakpoint tokens map (_$fudis-breakpoints_) |
 
-````
-@include breakpoints.fudis-breakpoint('s');	
-````
+```
+@include breakpoints.fudis-breakpoint('s');
+```
 
-<hr /> 
+<hr />
 
-# Breakpoint tokens
+# Breakpoint tokens and values they apply
 
-| Name                 | String value | Value   | Default px value |
-| -------------------  | ------------ | ------- | ---------------- |
-| $fudis-breakpoint-xl | 		xl				| 100em   | 1600px           |
-| $fudis-breakpoint-l  | 		l					| 75em    | 1200px           |
-| $fudis-breakpoint-m  | 		m					| 62em    | 992px            |
-| $fudis-breakpoint-s  | 		s					| 48em    | 768px            |
-| $fudis-breakpoint-xs | 		xs				| 30em    | 480px            |
-| $fudis-breakpoint-xxs| 		xxs 			| 20em    | 320px            |
+Breakpoints are based on Bootstrap's breakpoint system, which Sisu application uses widely.
+
+| Name                  | String value | Value | Default px value | Range it affects |
+| --------------------- | ------------ | ----- | ---------------- | ---------------- |
+| $fudis-breakpoint-xxl | xl           | 100em | 1600px           | +1600px          |
+| $fudis-breakpoint-xl  | l            | 75em  | 1200px           | 1200px-1599px    |
+| $fudis-breakpoint-l   | m            | 62em  | 992px            | 992px-1199px     |
+| $fudis-breakpoint-m   | s            | 48em  | 768px            | 768px-991px      |
+| $fudis-breakpoint-s   | xs           | 36em  | 576px            | 576px-767px      |
+| $fudis-breakpoint-xs  | xxs          | 0     | 0                | 0-575px          |

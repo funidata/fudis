@@ -5,12 +5,12 @@
 	@if map_has_key(tokens.$fudis-breakpoints, $breakpoint) {
 		$breakpoint-value: map.get(tokens.$fudis-breakpoints, $breakpoint);
 
-    @media screen and (max-width: #{$breakpoint-value}) {
+    @media screen and (min-width: #{$breakpoint-value}) {
       @content;
     }
 	}
 
  @else {
-		@error 'Unknown breakpoint of #{$breakpoint}. Accepted arguments are: "xl", "l", "m", "s", "xs" and "xxs".';
+		@error 'Unknown breakpoint of #{$breakpoint}. Accepted arguments are: "xxl", "xl", "l", "m", "s", "xs".';
 	}
 }
