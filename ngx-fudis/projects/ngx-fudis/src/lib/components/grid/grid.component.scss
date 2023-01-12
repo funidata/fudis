@@ -12,9 +12,10 @@
 	column-gap: spacing.$fudis-spacing-l;
 	margin-top: spacing.$fudis-spacing-m;
 	margin-bottom: spacing.$fudis-spacing-m;
+	border: 3px solid blue;
 
 	/* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
-	& fudis-heading {
+	& > fudis-heading {
 		grid-column: 1/-1;
 	}
 
@@ -28,17 +29,21 @@
 		max-width: breakpointTokens.$fudis-breakpoint-m;
 	}
 
+	&__test-item {
+		border: 3px solid red;
+	}
+
 	&__align {
-		&__start {
-			align-items: start;
+		&__left {
+			margin-left: 0;
 		}
 
 		&__center {
-			align-items: center;
+			margin: 0 auto;
 		}
 
-		&__end {
-			align-items: end;
+		&__right {
+			margin-right: 0;
 		}
 	}
 

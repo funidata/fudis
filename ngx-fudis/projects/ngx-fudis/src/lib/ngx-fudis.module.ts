@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LayoutModule } from '@angular/cdk/layout';
+
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -62,6 +64,7 @@ import { DropdownComponent } from './components/form/dropdown/dropdown.component
 		MatCheckboxModule,
 		ReactiveFormsModule,
 		MatSelectModule,
+		LayoutModule,
 	],
 	exports: [
 		FudisDialogTitleDirective,
