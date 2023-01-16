@@ -6,6 +6,8 @@ $fudis-grid-width-l: 60rem; // 960px
 $fudis-grid-width-xl: 65rem; // 1040px
 $fudis-grid-width-xxl: 96.25rem; // 1540px
 
+$fudis-grid-min-width: 18rem; // 320px
+
 $fudis-grid-widths: (
 	'xxl': $fudis-grid-width-xxl,
 	'xl': $fudis-grid-width-xl,

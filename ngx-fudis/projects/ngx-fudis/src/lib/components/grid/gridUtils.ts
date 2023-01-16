@@ -4,7 +4,7 @@ export interface InputColumnObject {
 	breakpoint: string;
 }
 
-export const validateColumnInput = (inputs: Array<InputColumnObject>) => {
+export const validateColumnInputArray = (inputs: Array<InputColumnObject>) => {
 	inputs.forEach((item) => {
 		if (item.value.trim() === '') {
 			throw new Error(

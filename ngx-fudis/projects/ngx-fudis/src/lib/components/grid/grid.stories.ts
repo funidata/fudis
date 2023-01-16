@@ -1,53 +1,98 @@
-import { moduleMetadata } from '@storybook/angular';
+import { moduleMetadata, Story, Meta, componentWrapperDecorator } from '@storybook/angular';
 import { GridComponent } from './grid.component';
 import { HeadingComponent } from '../typography/heading/heading.component';
-import { VanillaTextInputComponent } from '../form/vanilla-text-input/vanilla-text-input.component';
-
-const metadata = moduleMetadata({
-	imports: [],
-	declarations: [HeadingComponent, VanillaTextInputComponent],
-});
+import { BodyTextComponent } from '../typography/body-text/body-text.component';
 
 export default {
-	component: GridComponent,
 	title: 'Components/Grid',
-	decorators: [metadata],
-};
+	component: GridComponent,
+	decorators: [
+		moduleMetadata({
+			imports: [],
+			declarations: [HeadingComponent, BodyTextComponent],
+		}),
+		componentWrapperDecorator(
+			(story) => `
+			<style>
+			.grid-test-item{
+				border: 3px solid cornflowerblue;
+			}
+			</style>
+			<div style="border: 3px solid orangered">	
+		${story}
+		</div>`
+		),
+	],
+	argTypes: {
+		columns: {
+			options: ['1fr 3fr', '1fr 1fr', '5fr 1fr'],
+			control: { type: 'select' }, // automatically inferred when 'options' is defined
+		},
+		align: {
+			control: { type: 'radio' }, // automatically inferred when 'options' is defined
+		},
+	},
+	parameters: {
+		controls: {
+			exclude: [
+				'columnsToApply',
+				'fakeGridArray',
+				'ngOnInit',
+				'breakpointObserver',
+				'columnsFromInput',
+				'gridWidths',
+				'gridWidthsArray',
+				'isPhonePortrait',
+			],
+		},
+	},
+} as Meta;
 
-export const Default = () => ({
-	template: `
-		<fudis-grid columnsS="1fr" columns="1fr 1fr">
-		</fudis-grid>
-	`,
-	props: {},
+const html = String.raw;
+
+const Template: Story<GridComponent> = (args: GridComponent) => ({
+	template: html`<fudis-grid
+		[columns]="columns"
+		[columnsXs]="columnsXs"
+		[columnsS]="columnsS"
+		[columnsM]="columnsM"
+		[columnsL]="columnsL"
+		[columnsXl]="columnsXl"
+		[columnsXxl]="columnsXxl"
+		[align]="align"
+		[alignItemsX]="alignItemsX"
+		[alignItemsY]="alignItemsY"
+		[width]="width">
+		<fudis-heading
+			class="grid-test-item"
+			tag="h1"
+			size="l"
+			text="Headings will always take 100% width if they are direct child of Fudis grid component"></fudis-heading>
+		<fudis-heading
+			class="grid-test-item"
+			tag="h2"
+			size="s"
+			text="If you change any of the column size values from the controls, please refresh the page  for ngMaterial's Breakpoint Observer to register the new values!"></fudis-heading>
+
+		<div class="grid-test-item">
+			<fudis-heading tag="h3" size="m" text="This heading is inside a div"></fudis-heading>
+			<fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
+		</div>
+		<div class="grid-test-item">
+			<fudis-heading tag="h3" size="m" text="This heading is inside a div"></fudis-heading>
+			<fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
+		</div>
+		<div class="grid-test-item">
+			<fudis-heading tag="h3" size="m" text="This heading is inside a div"></fudis-heading>
+			<fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
+		</div>
+		<div class="grid-test-item">
+			<fudis-heading tag="h3" size="m" text="This heading is inside a div"></fudis-heading>
+			<fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
+		</div>
+	</fudis-grid>`,
+	props: args,
 });
 
-// export const Default = () => ({
-// 	template: `
-// 		<fudis-grid columns="4fr 4fr">
-// 			<fudis-heading tag="h1" size="xl" text="I am main heading taking full witdht!"></fudis-heading>
-
-// 			<fudis-vanilla-text-input [required]="true" label="Password, min length 4, max 6" minLength=4 maxLength=6 type="password" helpText="Help text Nipperkin"></fudis-vanilla-text-input>
-// 			<fudis-vanilla-text-input [required]="true" label="Label Email, pakollinen" type="email" helpText="Lorem ipsum"></fudis-vanilla-text-input>
-// 			<fudis-vanilla-text-input  label="Email, ei-pakollinen, mutta olen pitkä kuin suomen talvi ja valoisaa aikaa on noin 13 sekuntia" type="email" helpText="Lorem ipsum"></fudis-vanilla-text-input>
-// 			<fudis-vanilla-text-input  label="Tavallinen teksti, min length 4" type="text" minLength=5 helpText="Lorem ipsum"></fudis-vanilla-text-input>
-
-// 			<button type="submit" form="form1" value="Submit">Submit</button>
-
-// 		</fudis-grid>
-// 		<fudis-grid variant="wide" columns="3fr 3fr 6fr" alignItemsY="end">
-// 			<fudis-heading tag="h1" size="xl" text="I am main heading taking full witdht!"></fudis-heading>
-// 			<fudis-vanilla-text-input [required]="true" label="Password, min length 4, max 6" minLength=4 maxLength=6 type="password" helpText="Help text Nipperkin"></fudis-vanilla-text-input>
-// 			<fudis-vanilla-text-input [required]="true" label="Label Email, pakollinen" type="email" helpText="Lorem ipsum"></fudis-vanilla-text-input>
-// 			<fudis-vanilla-text-input label="Email, ei-pakollinen, mutta olen pitkä kuin suomen talvi ja valoisaa aikaa on noin 13 sekuntia" type="email" helpText="Lorem ipsum"></fudis-vanilla-text-input>
-// 			<fudis-vanilla-text-input label="Tavallinen teksti, min length 4" type="text" minLength=5 helpText="Lorem ipsum"></fudis-vanilla-text-input>
-
-// 			<button type="submit" form="form1" value="Submit">Submit</button>
-// 		</fudis-grid>
-// 	`,
-// 	props: {},
-// });
-
-Default.story = {
-	name: 'component',
-};
+export const GridFirst = Template.bind({});
+GridFirst.args = {};

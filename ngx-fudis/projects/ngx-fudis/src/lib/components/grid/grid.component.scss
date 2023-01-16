@@ -1,93 +1,137 @@
-/* stylelint-disable color-named */
-/* stylelint-disable unit-disallowed-list */
-/* stylelint-disable property-disallowed-list */
+/* stylelint-disable order/order */
 
-@use '../../foundations/borders/mixins.scss' as borders;
-@use '../../foundations/spacing/tokens.scss' as spacing;
 @use '../../foundations/breakpoints/mixins.scss' as breakpoints;
 @use '../../foundations/breakpoints/tokens.scss' as breakpointTokens;
 @use '../../foundations/grid/mixins.scss' as grid;
+@use '../../foundations/grid/tokens.scss' as gridTokens;
+
 
 .fudis-grid {
 	display: grid;
-	row-gap: spacing.$fudis-spacing-l;
-	column-gap: spacing.$fudis-spacing-l;
-	margin-top: spacing.$fudis-spacing-m;
-	margin-bottom: spacing.$fudis-spacing-m;
-	border: 3px solid blue;
+	grid-template-columns: 1fr;
 	width: 100%;
-	min-width: 18rem;
+	min-width: gridTokens.$fudis-grid-min-width;
 
 	/* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
 	& > fudis-heading {
 		grid-column: 1/-1;
 	}
 
-	&__xs {
-		@include grid.fudis-grid-max-width('xs')
-	}
-
-	&__s {
-		@include grid.fudis-grid-max-width('s')
-	}
-
-	&__m {
-		@include grid.fudis-grid-max-width('m')
-	}
-
-	&__l {
-		@include grid.fudis-grid-max-width('l')
-	}
-		
-	&__xl {
-		@include grid.fudis-grid-max-width('xl')
-	}
-
-	&__xxl {
-		@include grid.fudis-grid-max-width('xxl')
-	}
-
-	&__wide {
-		width: 100%;
-		max-width: breakpointTokens.$fudis-breakpoint-m;
-	}
-
-	&__test-item {
-		border: 3px solid red;
-	}
-
 	&__align {
 		&__left {
+			margin-right: auto;
 			margin-left: 0;
 		}
 
 		&__center {
-			margin: 0 auto;
+			margin-right: auto;
+			margin-left: auto;
 		}
 
 		&__right {
 			margin-right: 0;
+			margin-left: auto;
 		}
 	}
 
-	@include breakpoints.fudis-breakpoint('s') {
-		@include grid.fudis-grid-max-width('s')
-	}
+	/*
+	By default Grid's @Input width is XXL. When viewport gets narrower, it will get corresponding max-widths of each smaller breakpoint from XXL to smallest XS.
+
+	On the other end, if @Input width is the smallest of XS, it gets only one max-width of XS and doesn't need any other breakpoint width logic.
+
+	*/
+
+	&__xxl {
+		@include breakpoints.fudis-breakpoint('xs') {
+			@include grid.fudis-grid-max-width('xs')
+		}
+
+		@include breakpoints.fudis-breakpoint('s') {
+			@include grid.fudis-grid-max-width('s')
+		}
+
+		@include breakpoints.fudis-breakpoint('m') {
+			@include grid.fudis-grid-max-width('m')
+		}	
 	
-	@include breakpoints.fudis-breakpoint('m') {
-		@include grid.fudis-grid-max-width('m')
-	}
+		@include breakpoints.fudis-breakpoint('l') {
+			@include grid.fudis-grid-max-width('l')
+		}
 
-	@include breakpoints.fudis-breakpoint('l') {
-		@include grid.fudis-grid-max-width('l')
-	}
-
-	@include breakpoints.fudis-breakpoint('xl') {
+		@include breakpoints.fudis-breakpoint('xl') {
 		@include grid.fudis-grid-max-width('xl')
+		}
+
+		@include breakpoints.fudis-breakpoint('xxl') {
+			@include grid.fudis-grid-max-width('xxl')
+		}
 	}
 	
-	@include breakpoints.fudis-breakpoint('xxl') {
-		@include grid.fudis-grid-max-width('xxl')
+	&__xl {
+		@include breakpoints.fudis-breakpoint('xs') {
+			@include grid.fudis-grid-max-width('xs')
+		}
+
+		@include breakpoints.fudis-breakpoint('s') {
+			@include grid.fudis-grid-max-width('s')
+		}
+
+		@include breakpoints.fudis-breakpoint('m') {
+			@include grid.fudis-grid-max-width('m')
+		}	
+	
+		@include breakpoints.fudis-breakpoint('l') {
+			@include grid.fudis-grid-max-width('l')
+		}
+
+		@include breakpoints.fudis-breakpoint('xl') {
+		@include grid.fudis-grid-max-width('xl')
+		}
 	}
 
+	&__l {
+		@include breakpoints.fudis-breakpoint('xs') {
+			@include grid.fudis-grid-max-width('xs')
+		}
+
+		@include breakpoints.fudis-breakpoint('s') {
+			@include grid.fudis-grid-max-width('s')
+		}
+
+		@include breakpoints.fudis-breakpoint('m') {
+			@include grid.fudis-grid-max-width('m')
+		}	
+	
+		@include breakpoints.fudis-breakpoint('l') {
+			@include grid.fudis-grid-max-width('l')
+		}
+	}
+
+	&__m {
+		@include breakpoints.fudis-breakpoint('xs') {
+			@include grid.fudis-grid-max-width('xs')
+		}
+
+		@include breakpoints.fudis-breakpoint('s') {
+			@include grid.fudis-grid-max-width('s')
+		}
+
+		@include breakpoints.fudis-breakpoint('m') {
+			@include grid.fudis-grid-max-width('m')
+		}	
+	}
+
+	&__s {
+		@include breakpoints.fudis-breakpoint('xs') {
+			@include grid.fudis-grid-max-width('xs')
+		}
+
+		@include breakpoints.fudis-breakpoint('s') {
+			@include grid.fudis-grid-max-width('s')
+		}
+	}
+
+	&__xs {
+		@include grid.fudis-grid-max-width('xs')
+	}
 }

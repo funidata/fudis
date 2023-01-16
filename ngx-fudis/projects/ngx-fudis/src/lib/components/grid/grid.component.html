@@ -3,11 +3,5 @@
 	[style.align-items]="alignItemsY"
 	[style.justify-items]="alignItemsX"
 	class="fudis-grid fudis-grid__{{ width }} fudis-grid__align__{{ align }}">
-	<div class="fudis-grid__test-item" *ngFor="let n of fakeGridArray; let i = index">
-		<fudis-heading tag="h3" size="m" text="Item nro {{ i }}"></fudis-heading>
-		<p>
-			{{ i }} I am grid item with columns of: <strong>{{ columnsToApply }}</strong>
-		</p>
-	</div>
-	<!-- <ng-content></ng-content> -->
+	<ng-content></ng-content>
 </div>
