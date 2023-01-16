@@ -35,6 +35,12 @@
 		border-radius: 50%;
 		width: spacing.$fudis-spacing-m;
 		height: spacing.$fudis-spacing-m;
+
+		&--invalid {
+			@include borders.fudis-border('1px', 'solid', 'red');
+			
+			box-shadow: 0 0 0 spacing.$fudis-pixel-3 colors.$fudis-red-light;
+		}
 		
 		&__indicator {
 			@include colorMixins.fudis-bg-color('gray-dark');
