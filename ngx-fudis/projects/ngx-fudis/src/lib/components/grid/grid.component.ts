@@ -1,6 +1,6 @@
 import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { validateColumnInputArray, InputColumnObject } from './gridUtils';
+import { breakpointsToObserve, InputColumnObject, createColumnInputForBreakpoints } from './gridUtils';
 
 @Component({
 	selector: 'fudis-grid',
@@ -42,7 +42,7 @@ export class GridComponent implements OnInit {
 	/**
 	 * Default grid-template-columns value applied to all widths. Suggested values are fr units, but REM values and repeat are also acceptable.
 	 */
-	@Input() columns: string;
+	@Input() columns: string = '1fr';
 
 	/**
 	 * Grid-template-columns when grid is +1600px wide
@@ -74,28 +74,6 @@ export class GridComponent implements OnInit {
 	 */
 	@Input() columnsXs: string;
 
-	gridWidths = {
-		xxl: '(min-width: 100em)',
-		xl: '(min-width: 75em) and (max-width: 99.99em)',
-		l: '(min-width: 62em) and (max-width: 74.99em)',
-		m: '(min-width: 48em) and (max-width: 61.99em)',
-		s: '(min-width: 36em) and (max-width: 47.99em)',
-		xs: '(min-width: 0) and (max-width: 35.99em)',
-	};
-
-	/*
-	 * Array of brekpoint rules given to ngMaterial breakpoint observer
-	 */
-
-	gridWidthsArray = [
-		this.gridWidths.xxl,
-		this.gridWidths.xl,
-		this.gridWidths.l,
-		this.gridWidths.m,
-		this.gridWidths.s,
-		this.gridWidths.xs,
-	];
-
 	/*
 	 * Default grid-template-columns value if there is none from @Inputs
 	 */
@@ -105,46 +83,28 @@ export class GridComponent implements OnInit {
 	/*
 	 * Array used for applying breakpoint rules for given columns values
 	 */
-	columnsFromInput: Array<InputColumnObject> = [];
-
-	validateColumnInput() {
-		if (this.columns) {
-			this.columnsFromInput.push({ name: 'columns', value: this.columns, breakpoint: this.gridWidths.xs });
-		}
-		if (this.columnsXs) {
-			this.columnsFromInput.push({ name: 'columnsXs', value: this.columnsXs, breakpoint: this.gridWidths.xs });
-		}
-		if (this.columnsS) {
-			this.columnsFromInput.push({ name: 'columnsS', value: this.columnsS, breakpoint: this.gridWidths.s });
-		}
-		if (this.columnsM) {
-			this.columnsFromInput.push({ name: 'columnsM', value: this.columnsM, breakpoint: this.gridWidths.m });
-		}
-		if (this.columnsL) {
-			this.columnsFromInput.push({ name: 'columnsL', value: this.columnsL, breakpoint: this.gridWidths.l });
-		}
-		if (this.columnsXl) {
-			this.columnsFromInput.push({ name: 'columnsXl', value: this.columnsXl, breakpoint: this.gridWidths.xl });
-		}
-		if (this.columnsXxl) {
-			this.columnsFromInput.push({ name: 'columnsXxl', value: this.columnsXxl, breakpoint: this.gridWidths.xxl });
-		}
-
-		validateColumnInputArray(this.columnsFromInput);
-	}
+	columnsFromInput: InputColumnObject[] = [];
 
 	ngOnInit() {
-		this.validateColumnInput();
+		this.columnsFromInput = createColumnInputForBreakpoints(
+			this.columns,
+			this.columnsXs,
+			this.columnsS,
+			this.columnsM,
+			this.columnsL,
+			this.columnsXl,
+			this.columnsXxl
+		);
 
-		this.breakpointObserver.observe(this.gridWidthsArray).subscribe((state: BreakpointState) => {
+		this.breakpointObserver.observe(breakpointsToObserve).subscribe((state: BreakpointState) => {
 			/*
-			 * Loop through given column values for each breakpoint and if there are no given value e.g. for @Input columnsXs, apply general @Input columns value
+			 * When hitting a breakpoint, Loop through given column values for each breakpoint and if there are no given value e.g. for @Input columnsXs, apply general @Input columns value
 			 */
 			(this.columnsFromInput as Array<InputColumnObject>).forEach((item) => {
-				if (state.breakpoints[item.breakpoint]) {
+				if (state.breakpoints[item.breakpoint] && item.name !== 'columns') {
 					this.columnsToApply = item.value;
-				} else {
-					this.columnsToApply = this.columns ? this.columns : '1fr';
+				} else if (state.breakpoints[item.breakpoint] && item.name === 'columns') {
+					this.columnsToApply = this.columns;
 				}
 			});
 		});
