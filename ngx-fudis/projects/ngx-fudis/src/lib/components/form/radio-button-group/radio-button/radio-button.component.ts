@@ -28,26 +28,20 @@ export class RadioButtonComponent {
 	// If Radio Button group of same name selection is required
 	@Input() required: boolean;
 
-	// If Radio Button is pre-selected
-	@Input() checked?: boolean;
-
-	// Used to style Radio Button selection indicator, if this option is selected or not
-	@Input() selectedOptionId: string | number | undefined = undefined;
-
 	isSelected() {
-		if (!this.selectedOptionId && this.checked) {
-			return true;
-		}
-		if (this.selectedOptionId === this.id) {
+		if (this.radioButtonFormControl.value === this.value) {
 			return true;
 		}
 		return false;
 	}
 
+	showError: boolean = false;
+
 	checkErrors() {
-		console.log(this.radioButtonFormControl);
 		if (this.radioButtonFormControl.touched && !this.radioButtonFormControl.value) {
-			console.log('jeee');
+			this.showError = true;
+		} else {
+			this.showError = false;
 		}
 	}
 }

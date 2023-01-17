@@ -4,5 +4,5 @@ export interface RadioButtonOption {
 	name: string;
 	value: string;
 	disabled?: boolean;
-	checked: boolean;
+	checked?: boolean;
 }
