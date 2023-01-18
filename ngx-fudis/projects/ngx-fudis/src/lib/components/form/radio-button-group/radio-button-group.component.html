@@ -10,3 +10,6 @@
 			[radioButtonFormControl]="radioButtonFormControl"></fudis-radio-button>
 	</li>
 </fieldset>
+<fudis-error-message
+	*ngIf="this.radioButtonFormControl.touched && this.required && !this.radioButtonFormControl.value"
+	errorMessage="Arvo on pakollinen"></fudis-error-message>

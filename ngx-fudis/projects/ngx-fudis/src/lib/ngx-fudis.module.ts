@@ -33,6 +33,7 @@ import { DropdownComponent } from './components/form/dropdown/dropdown.component
 import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
 
 import { RadioButtonGroupComponentExample } from '../examples/form/radio-button-group-example/radio-button-group-example.component';
+import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
 
 @NgModule({
 	declarations: [
@@ -59,6 +60,7 @@ import { RadioButtonGroupComponentExample } from '../examples/form/radio-button-
 		RadioButtonComponent,
 		DropdownComponent,
 		RadioButtonGroupComponentExample,
+		ErrorMessageComponent,
 	],
 	imports: [
 		FormsModule,

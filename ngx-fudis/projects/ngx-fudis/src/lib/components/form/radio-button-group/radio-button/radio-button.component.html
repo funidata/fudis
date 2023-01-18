@@ -11,14 +11,16 @@
 			[attr.checked]="isSelected()"
 			(blur)="checkErrors()"
 			[value]="value" />
-		<div
-			class="fudis-radio-button__control"
-			[ngClass]="{
-				'fudis-radio-button__control--invalid':
-					this.radioButtonFormControl.touched && !this.radioButtonFormControl.value
-			}">
-			<span *ngIf="isSelected()" class="fudis-radio-button__control__indicator"></span>
+		<div class="fudis-radio-button__label fudis-radio-button__label__wrap">
+			<div
+				class="fudis-radio-button__control"
+				[ngClass]="{
+					'fudis-radio-button__control--invalid':
+						this.radioButtonFormControl.touched && !this.radioButtonFormControl.value
+				}">
+				<span *ngIf="isSelected()" class="fudis-radio-button__control__indicator"></span>
+			</div>
+			<span class="fudis-radio-button__label fudis-radio-button__label__text">{{ label }}</span>
 		</div>
-		{{ label }}
 	</label>
 </div>

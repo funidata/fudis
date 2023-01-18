@@ -7,6 +7,10 @@
 @use '../../../foundations/breakpoints/mixins.scss' as breakpoints;
 @use '../../../foundations/focus/mixins.scss' as focus; 
 
+fieldset {
+	padding: 0;
+}
+
 .fudis-radio-button-group {
 	@include borders.fudis-border('1px', 'solid', 'transparent');
 

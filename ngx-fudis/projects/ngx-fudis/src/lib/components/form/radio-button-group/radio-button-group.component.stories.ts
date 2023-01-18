@@ -6,11 +6,18 @@ import { RadioButtonGroupComponent } from './radio-button-group.component';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { LegendComponent } from '../legend/legend.component';
+import { ErrorMessageComponent } from '../error-message/error-message.component';
 
 export default {
 	title: 'Components/Form/RadioButtonGroup',
 	component: RadioButtonGroupComponentExample,
-	subcomponents: { RadioButtonGroupComponent, RadioButtonComponent, BodyTextComponent, LegendComponent },
+	subcomponents: {
+		RadioButtonGroupComponent,
+		RadioButtonComponent,
+		BodyTextComponent,
+		LegendComponent,
+		ErrorMessageComponent,
+	},
 	decorators: [
 		moduleMetadata({
 			declarations: [
@@ -19,6 +26,7 @@ export default {
 				RadioButtonGroupComponentExample,
 				BodyTextComponent,
 				LegendComponent,
+				ErrorMessageComponent,
 			],
 			imports: [ReactiveFormsModule, BrowserModule, FormsModule],
 		}),
