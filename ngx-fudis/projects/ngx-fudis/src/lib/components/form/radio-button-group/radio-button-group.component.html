@@ -1,15 +1,17 @@
 <fieldset class="fudis-form-element fudis-radio-button-group">
-	<fudis-legend>{{ label }}</fudis-legend>
-	<li *ngFor="let option of options; let index = index">
+	<fudis-legend [attr.id]="legendId">{{ label }}</fudis-legend>
+	<li class="fudis-radio-button-group__option" *ngFor="let option of options; let index = index">
 		<fudis-radio-button
+			[describedBy]="legendId"
 			[id]="option.id"
 			[name]="option.name"
 			[value]="option.value"
 			[label]="option.label"
 			[required]="required"
+			[checked]="radioButtonFormControl.value === option.value ? true : false"
 			[radioButtonFormControl]="radioButtonFormControl"></fudis-radio-button>
 	</li>
+	<fudis-error-message
+		*ngIf="this.errorMessage && this.radioButtonFormControl.touched && this.radioButtonFormControl.invalid"
+		[message]="errorMessage"></fudis-error-message>
 </fieldset>
-<fudis-error-message
-	*ngIf="this.radioButtonFormControl.touched && this.required && !this.radioButtonFormControl.value"
-	errorMessage="Arvo on pakollinen"></fudis-error-message>

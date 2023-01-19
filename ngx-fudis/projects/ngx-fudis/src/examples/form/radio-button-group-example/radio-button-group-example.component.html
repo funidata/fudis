@@ -1,17 +1,20 @@
 <form [formGroup]="mainFormGroup">
 	<fudis-radio-button-group
+		id="fruit-selection"
 		label="Choose your preferred fruit"
+		errorMessage="You must choose a fruit! :("
 		*ngIf="mainFormGroup"
 		[radioButtonFormControl]="radioButtonGroupOne"
 		[options]="fruitOptions"></fudis-radio-button-group>
 	<fudis-body-text *ngIf="radioButtonGroupOne.value">Option chosen: {{ radioButtonGroupOne.value }}</fudis-body-text>
 	<fudis-body-text *ngIf="!radioButtonGroupOne.value">No value chosen for the first :(</fudis-body-text>
 	<fudis-radio-button-group
+		id="pet-selection"
 		label="Choose a pet"
+		errorMessage="You must choose a pet! :("
 		*ngIf="mainFormGroup"
 		[radioButtonFormControl]="radioButtonGroupTwo"
 		[options]="petOptions"></fudis-radio-button-group>
-
 	<fudis-body-text *ngIf="radioButtonGroupTwo.value">Option chosen: {{ radioButtonGroupTwo.value }}</fudis-body-text>
 	<fudis-body-text *ngIf="!radioButtonGroupTwo.value">No value chosen for the second :(</fudis-body-text>
 </form>

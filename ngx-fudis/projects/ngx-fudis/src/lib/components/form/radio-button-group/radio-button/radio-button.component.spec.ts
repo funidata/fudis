@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { FormControl } from '@angular/forms';
 import { RadioButtonComponent } from './radio-button.component';
+
+const lonelyFormControl = new FormControl();
 
 describe('RadioButtonComponent', () => {
 	let component: RadioButtonComponent;
@@ -15,6 +18,9 @@ describe('RadioButtonComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(RadioButtonComponent);
 		component = fixture.componentInstance;
+		component.label = 'Lonely radio button';
+		component.value = 'lonely';
+		component.radioButtonFormControl = lonelyFormControl;
 		fixture.detectChanges();
 	});
 

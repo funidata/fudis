@@ -6,5 +6,6 @@
 	@include typography.fudis-body-m-regular;
 	@include colorMixins.fudis-text-color('red');
 
-	margin-top: spacing.$fudis-spacing-xs;
+	margin-top: spacing.$fudis-spacing-s;
+	margin-bottom: 0;
 }
