@@ -1,0 +1,36 @@
+@use 'sass:map';
+@use './tokens';
+@use '../spacing/tokens.scss' as spacing;
+@use '../breakpoints/mixins.scss' as breakpoints;
+
+@mixin fudis-grid-max-width($width) {
+	@if map_has_key(tokens.$fudis-grid-widths, $width) {
+		$grid-width-value: map.get(tokens.$fudis-grid-widths, $width);
+
+    max-width: $grid-width-value;
+
+		@if $width == xl or $width == xxl {
+			row-gap: spacing.$fudis-spacing-l;
+			column-gap: spacing.$fudis-spacing-l;
+		}
+
+		@if $width == m or $width == l {
+			row-gap: spacing.$fudis-spacing-m;
+			column-gap: spacing.$fudis-spacing-m;
+		}
+
+		@if $width == s or $width == xs {
+			row-gap: spacing.$fudis-spacing-s;
+			column-gap: spacing.$fudis-spacing-s;
+		}
+	}
+
+ @else {
+		@error 'Unknown grid width of #{$width}. Accepted arguments are: "xxl", "xl", "l", "m", "s", "xs".';
+	}
+}
+
+@mixin fudis-grid-xs-margins() {
+	margin-right: spacing.$fudis-spacing-s;
+	margin-left: spacing.$fudis-spacing-s;
+}

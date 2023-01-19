@@ -1,78 +1,222 @@
-/* stylelint-disable color-named */
-/* stylelint-disable unit-disallowed-list */
-/* stylelint-disable property-disallowed-list */
-@use '../../foundations/borders/mixins.scss' as borders;
-@use '../../foundations/spacing/tokens.scss' as spacing;
+/* stylelint-disable order/order */
+
 @use '../../foundations/breakpoints/mixins.scss' as breakpoints;
 @use '../../foundations/breakpoints/tokens.scss' as breakpointTokens;
+@use '../../foundations/grid/mixins.scss' as grid;
+@use '../../foundations/grid/tokens.scss' as gridTokens;
+@use '../../foundations/spacing/tokens.scss' as spacingTokens;
+
 
 .fudis-grid {
 	display: grid;
-	row-gap: spacing.$fudis-spacing-l;
-	column-gap: spacing.$fudis-spacing-l;
-	margin-top: spacing.$fudis-spacing-m;
-	margin-bottom: spacing.$fudis-spacing-m;
+	grid-template-columns: 1fr;
+	min-width: gridTokens.$fudis-grid-min-width;
 
 	/* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
-	& fudis-heading {
+	& > fudis-heading {
 		grid-column: 1/-1;
 	}
 
-	&__regular {
-		width: 100%;
-		max-width: breakpointTokens.$fudis-breakpoint-s;
-	}
-
-	&__wide {
-		width: 100%;
-		max-width: breakpointTokens.$fudis-breakpoint-m;
-	}
 
 	&__align {
-		&__start {
-			align-items: start;
+		&__left {
+			margin-right: auto;
+			margin-left: 0;
+
+			@include breakpoints.fudis-breakpoint-max('s') {
+				@include grid.fudis-grid-xs-margins;
+			}
 		}
 
 		&__center {
-			align-items: center;
+			margin-right: auto;
+			margin-left: auto;
+
+			@include breakpoints.fudis-breakpoint-max('s') {
+				@include grid.fudis-grid-xs-margins;
+			}
 		}
 
-		&__end {
-			align-items: end;
+		&__right {
+			margin-right: 0;
+			margin-left: auto;
+
+			@include breakpoints.fudis-breakpoint-max('s') {
+				@include grid.fudis-grid-xs-margins;
+			}
 		}
 	}
 
-	&__cols {
-		&__1 {
-			grid-template-columns: 1fr;
-		}
+	&__margin {
+		&__top {
+			&__zero {
+				margin-top: spacingTokens.$fudis-spacing-zero;
+			}
 
-		&__2 {
-			grid-template-columns: 1fr 1fr;
-			
-			@include breakpoints.fudis-breakpoint('s') {
-				grid-template-columns: 1fr;
+			&__xxs {
+				margin-top: spacingTokens.$fudis-spacing-xxs;
+			}
+
+			&__xs {
+				margin-top: spacingTokens.$fudis-spacing-xs;
+			}
+
+			&__s {
+				margin-top: spacingTokens.$fudis-spacing-s;
+			}
+
+			&__m {
+				margin-top: spacingTokens.$fudis-spacing-m;
+			}
+
+			&__l {
+				margin-top: spacingTokens.$fudis-spacing-l;
+			}
+
+			&__xl {
+				margin-top: spacingTokens.$fudis-spacing-xl;
+			}
+
+			&__xxl {
+				margin-top: spacingTokens.$fudis-spacing-xxl;
 			}
 		}
 
-		&__3 {
-			grid-template-columns: 1fr 1fr 1fr;
-			
-			@include breakpoints.fudis-breakpoint('s') {
-				grid-template-columns: 1fr;
+		&__bottom {
+			&__zero {
+				margin-bottom: spacingTokens.$fudis-spacing-zero;
+			}
+
+			&__xxs {
+				margin-bottom: spacingTokens.$fudis-spacing-xxs;
+			}
+
+			&__xs {
+				margin-bottom: spacingTokens.$fudis-spacing-xs;
+			}
+
+			&__s {
+				margin-bottom: spacingTokens.$fudis-spacing-s;
+			}
+
+			&__m {
+				margin-bottom: spacingTokens.$fudis-spacing-m;
+			}
+
+			&__l {
+				margin-bottom: spacingTokens.$fudis-spacing-l;
+			}
+
+			&__xl {
+				margin-bottom: spacingTokens.$fudis-spacing-xl;
+			}
+
+			&__xxl {
+				margin-bottom: spacingTokens.$fudis-spacing-xxl;
 			}
 		}
+	}
 
-		&__4 {
-			grid-template-columns: 1fr 1fr 1fr 1fr;
 
-			@include breakpoints.fudis-breakpoint('m') {
-				grid-template-columns: 1fr 1fr;
-			}
+	/*
+	By default Grid's @Input width is XXL. When viewport gets narrower, it will get corresponding max-widths of each smaller breakpoint from XXL to smallest XS.
 
-			@include breakpoints.fudis-breakpoint('s') {
-				grid-template-columns: 1fr;
-			}
+	On the other end, if @Input width is the smallest of XS, it gets only one max-width of XS and doesn't need any other breakpoint width logic.
+
+	*/
+
+	&__xxl {
+		@include breakpoints.fudis-breakpoint('xs') {
+			@include grid.fudis-grid-max-width('xs')
 		}
+
+		@include breakpoints.fudis-breakpoint('s') {
+			@include grid.fudis-grid-max-width('s')
+		}
+
+		@include breakpoints.fudis-breakpoint('m') {
+			@include grid.fudis-grid-max-width('m')
+		}	
+	
+		@include breakpoints.fudis-breakpoint('l') {
+			@include grid.fudis-grid-max-width('l')
+		}
+
+		@include breakpoints.fudis-breakpoint('xl') {
+		@include grid.fudis-grid-max-width('xl')
+		}
+
+		@include breakpoints.fudis-breakpoint('xxl') {
+			@include grid.fudis-grid-max-width('xxl')
+		}
+
+	}
+	
+	&__xl {
+		@include breakpoints.fudis-breakpoint('xs') {
+			@include grid.fudis-grid-max-width('xs')
+		}
+
+		@include breakpoints.fudis-breakpoint('s') {
+			@include grid.fudis-grid-max-width('s')
+		}
+
+		@include breakpoints.fudis-breakpoint('m') {
+			@include grid.fudis-grid-max-width('m')
+		}	
+	
+		@include breakpoints.fudis-breakpoint('l') {
+			@include grid.fudis-grid-max-width('l')
+		}
+
+		@include breakpoints.fudis-breakpoint('xl') {
+		@include grid.fudis-grid-max-width('xl')
+		}
+	}
+
+	&__l {
+		@include breakpoints.fudis-breakpoint('xs') {
+			@include grid.fudis-grid-max-width('xs')
+		}
+
+		@include breakpoints.fudis-breakpoint('s') {
+			@include grid.fudis-grid-max-width('s')
+		}
+
+		@include breakpoints.fudis-breakpoint('m') {
+			@include grid.fudis-grid-max-width('m')
+		}	
+	
+		@include breakpoints.fudis-breakpoint('l') {
+			@include grid.fudis-grid-max-width('l')
+		}
+	}
+
+	&__m {
+		@include breakpoints.fudis-breakpoint('xs') {
+			@include grid.fudis-grid-max-width('xs')
+		}
+
+		@include breakpoints.fudis-breakpoint('s') {
+			@include grid.fudis-grid-max-width('s')
+		}
+
+		@include breakpoints.fudis-breakpoint('m') {
+			@include grid.fudis-grid-max-width('m')
+		}	
+	}
+
+	&__s {
+		@include breakpoints.fudis-breakpoint('xs') {
+			@include grid.fudis-grid-max-width('xs')
+		}
+
+		@include breakpoints.fudis-breakpoint('s') {
+			@include grid.fudis-grid-max-width('s')
+		}
+	}
+
+	&__xs {
+		@include grid.fudis-grid-max-width('xs')
 	}
 }

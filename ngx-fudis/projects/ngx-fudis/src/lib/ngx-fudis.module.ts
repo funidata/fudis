@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LayoutModule } from '@angular/cdk/layout';
+
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,7 +21,6 @@ import { HeadingComponent } from './components/typography/heading/heading.compon
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { TextInputComponent } from './components/form/text-input/text-input.component';
 import { VanillaTextInputComponent } from './components/form/vanilla-text-input/vanilla-text-input.component';
-import { FormLayoutComponent } from './components/form/form-layout/form-layout.component';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { GridComponent } from './components/grid/grid.component';
@@ -41,7 +42,6 @@ import { DropdownComponent } from './components/form/dropdown/dropdown.component
 		BodyTextComponent,
 		CheckboxComponent,
 		TextInputComponent,
-		FormLayoutComponent,
 		ErrorSummaryComponent,
 		TextSpacingComponent,
 		GridComponent,
@@ -62,6 +62,7 @@ import { DropdownComponent } from './components/form/dropdown/dropdown.component
 		MatCheckboxModule,
 		ReactiveFormsModule,
 		MatSelectModule,
+		LayoutModule,
 	],
 	exports: [
 		FudisDialogTitleDirective,
@@ -73,7 +74,6 @@ import { DropdownComponent } from './components/form/dropdown/dropdown.component
 		BodyTextComponent,
 		CheckboxComponent,
 		TextInputComponent,
-		FormLayoutComponent,
 		ErrorSummaryComponent,
 		TextSpacingComponent,
 		GridComponent,

@@ -1,0 +1,18 @@
+/* stylelint-disable unit-disallowed-list */
+$fudis-grid-width-xs: 34rem; // 320px-544px. For viewport smaller than 576px.
+$fudis-grid-width-s: 34rem; // 544px
+$fudis-grid-width-m: 45rem; // 720px
+$fudis-grid-width-l: 60rem; // 960px
+$fudis-grid-width-xl: 65rem; // 1040px
+$fudis-grid-width-xxl: 96.25rem; // 1540px
+
+$fudis-grid-min-width: 18rem; // 320px
+
+$fudis-grid-widths: (
+	'xxl': $fudis-grid-width-xxl,
+	'xl': $fudis-grid-width-xl,
+	'l': $fudis-grid-width-l,
+	'm': $fudis-grid-width-m,
+	's': $fudis-grid-width-s,
+	'xs': $fudis-grid-width-xs,
+);

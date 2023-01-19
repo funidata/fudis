@@ -11,7 +11,6 @@ export { ButtonComponent } from './lib/components/button/button.component';
 export { FudisCheckboxComponent } from './lib/components/form/fudis-checkbox/fudis-checkbox.component';
 export { CheckboxComponent } from './lib/components/form/checkbox/checkbox.component';
 export { TextInputComponent } from './lib/components/form/text-input/text-input.component';
-export { FormLayoutComponent } from './lib/components/form/form-layout/form-layout.component';
 export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';
 export { TextSpacingComponent } from './lib/components/typography/text-spacing/text-spacing.component';
 export { LegendComponent } from './lib/components/form/legend/legend.component';
