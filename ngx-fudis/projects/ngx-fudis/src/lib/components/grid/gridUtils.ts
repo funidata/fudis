@@ -15,7 +15,7 @@ const gridBreakpoints = {
 };
 
 /*
- * Array of from brekpoint rules given to ngMaterial breakpoint observer
+ * Array of brekpoint rules to observe, which is given to ngMaterial BreakpointObserver
  */
 
 export const breakpointsToObserve = [
@@ -27,6 +27,10 @@ export const breakpointsToObserve = [
 	gridBreakpoints.xs,
 	gridBreakpoints.default,
 ];
+
+/*
+ * Some validation, so that given column @Inputs are usable and valid grid-column-template values..
+ */
 
 const validateColumnInputArray = (inputs: Array<InputColumnObject>) => {
 	inputs.forEach((item) => {
@@ -46,13 +50,18 @@ const validateColumnInputArray = (inputs: Array<InputColumnObject>) => {
 			);
 		}
 
-		const inputToArray = item.value.split(' ');
+		/*
+		 * Check if sum of fr values is larger than 12.
+		 */
+
+		const inputStringToArray = item.value.split(' ');
 
 		let sumOfFrValues = 0;
 
+		// RegEx for finding fr values from strings.
 		const valueWithFr = /^[\d+]*(fr)$/;
 
-		inputToArray.forEach((el) => {
+		inputStringToArray.forEach((el) => {
 			if (el.match(valueWithFr)) {
 				const numberValue = Number(el.slice(0, -2));
 				sumOfFrValues += numberValue;

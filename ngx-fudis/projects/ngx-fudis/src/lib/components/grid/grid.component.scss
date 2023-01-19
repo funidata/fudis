@@ -4,12 +4,12 @@
 @use '../../foundations/breakpoints/tokens.scss' as breakpointTokens;
 @use '../../foundations/grid/mixins.scss' as grid;
 @use '../../foundations/grid/tokens.scss' as gridTokens;
+@use '../../foundations/spacing/tokens.scss' as spacingTokens;
 
 
 .fudis-grid {
 	display: grid;
 	grid-template-columns: 1fr;
-	width: 100%;
 	min-width: gridTokens.$fudis-grid-min-width;
 
 	/* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
@@ -17,22 +17,106 @@
 		grid-column: 1/-1;
 	}
 
+
 	&__align {
 		&__left {
 			margin-right: auto;
 			margin-left: 0;
+
+			@include breakpoints.fudis-breakpoint-max('s') {
+				@include grid.fudis-grid-xs-margins;
+			}
 		}
 
 		&__center {
 			margin-right: auto;
 			margin-left: auto;
+
+			@include breakpoints.fudis-breakpoint-max('s') {
+				@include grid.fudis-grid-xs-margins;
+			}
 		}
 
 		&__right {
 			margin-right: 0;
 			margin-left: auto;
+
+			@include breakpoints.fudis-breakpoint-max('s') {
+				@include grid.fudis-grid-xs-margins;
+			}
 		}
 	}
+
+	&__margin {
+		&__top {
+			&__zero {
+				margin-top: spacingTokens.$fudis-spacing-zero;
+			}
+
+			&__xxs {
+				margin-top: spacingTokens.$fudis-spacing-xxs;
+			}
+
+			&__xs {
+				margin-top: spacingTokens.$fudis-spacing-xs;
+			}
+
+			&__s {
+				margin-top: spacingTokens.$fudis-spacing-s;
+			}
+
+			&__m {
+				margin-top: spacingTokens.$fudis-spacing-m;
+			}
+
+			&__l {
+				margin-top: spacingTokens.$fudis-spacing-l;
+			}
+
+			&__xl {
+				margin-top: spacingTokens.$fudis-spacing-xl;
+			}
+
+			&__xxl {
+				margin-top: spacingTokens.$fudis-spacing-xxl;
+			}
+		}
+
+		&__bottom {
+			&__zero {
+				margin-bottom: spacingTokens.$fudis-spacing-zero;
+			}
+
+			&__xxs {
+				margin-bottom: spacingTokens.$fudis-spacing-xxs;
+			}
+
+			&__xs {
+				margin-bottom: spacingTokens.$fudis-spacing-xs;
+			}
+
+			&__s {
+				margin-bottom: spacingTokens.$fudis-spacing-s;
+			}
+
+			&__m {
+				margin-bottom: spacingTokens.$fudis-spacing-m;
+			}
+
+			&__l {
+				margin-bottom: spacingTokens.$fudis-spacing-l;
+			}
+
+			&__xl {
+				margin-bottom: spacingTokens.$fudis-spacing-xl;
+			}
+
+			&__xxl {
+				margin-bottom: spacingTokens.$fudis-spacing-xxl;
+			}
+		}
+	}
+
 
 	/*
 	By default Grid's @Input width is XXL. When viewport gets narrower, it will get corresponding max-widths of each smaller breakpoint from XXL to smallest XS.
@@ -65,6 +149,7 @@
 		@include breakpoints.fudis-breakpoint('xxl') {
 			@include grid.fudis-grid-max-width('xxl')
 		}
+
 	}
 	
 	&__xl {

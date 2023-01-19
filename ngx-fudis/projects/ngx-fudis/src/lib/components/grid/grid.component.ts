@@ -9,9 +9,7 @@ import { breakpointsToObserve, InputColumnObject, createColumnInputForBreakpoint
 	encapsulation: ViewEncapsulation.None,
 })
 export class GridComponent implements OnInit {
-	isPhonePortrait = false;
-
-	constructor(public breakpointObserver: BreakpointObserver) {}
+	constructor(private gridBreakpointObserver: BreakpointObserver) {}
 
 	/**
 	 * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
@@ -39,38 +37,53 @@ export class GridComponent implements OnInit {
 	 */
 	@Input() alignItemsX: 'start' | 'center' | 'end' | 'stretch' = 'stretch';
 
+	@Input() marginTop: 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'zero' = 'zero';
+
+	@Input() marginBottom: 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'zero' = 'zero';
+
 	/**
-	 * Default grid-template-columns value applied to all widths. Suggested values are fr units, but REM values and repeat are also acceptable.
+	 * Default grid-template-columns value applied to all widths. Suggested values for native CSS grid are fr units.
 	 */
 	@Input() columns: string = '1fr';
 
 	/**
-	 * Grid-template-columns when grid is +1600px wide
+	 * Grid-template-columns when
+	 * grid width is 1540px
+	 * and viewport width is larger than 1599px
 	 */
 	@Input() columnsXxl: string;
 
 	/**
-	 * Grid-template-columns when grid is +1600px wide
+	 * Grid-template-columns when
+	 * grid width is 1040px
+	 * and viewport width is 1200px-1599px
 	 */
 	@Input() columnsXl: string;
 
 	/**
-	 * Grid-template-columns when grid is +1600px wide
+	 * Grid-template-columns when
+	 * grid width is 960px
+	 * and viewport width is 992px-1199px
 	 */
 	@Input() columnsL: string;
 
 	/**
-	 * Grid-template-columns when grid is +1600px wide
+	 * Grid-template-columns when
+	 * grid width is 720px
+	 * and viewport width is 768px-991px
 	 */
 	@Input() columnsM: string;
 
 	/**
-	 * Grid-template-columns when grid is +1600px wide
+	 * Grid-template-columns when
+	 * grid width is 540px
+	 * and viewport width is 576px-767px
 	 */
 	@Input() columnsS: string;
 
 	/**
-	 * Grid-template-columns when grid is +1600px wide
+	 * Grid-template-columns when
+	 * viewport width is smaller than 576px
 	 */
 	@Input() columnsXs: string;
 
@@ -86,6 +99,7 @@ export class GridComponent implements OnInit {
 	columnsFromInput: InputColumnObject[] = [];
 
 	ngOnInit() {
+		// Collect and validate grid column @Input values, which are used in ngMaterial BreakpointObserver
 		this.columnsFromInput = createColumnInputForBreakpoints(
 			this.columns,
 			this.columnsXs,
@@ -96,7 +110,7 @@ export class GridComponent implements OnInit {
 			this.columnsXxl
 		);
 
-		this.breakpointObserver.observe(breakpointsToObserve).subscribe((state: BreakpointState) => {
+		this.gridBreakpointObserver.observe(breakpointsToObserve).subscribe((state: BreakpointState) => {
 			/*
 			 * When hitting a breakpoint, Loop through given column values for each breakpoint and if there are no given value e.g. for @Input columnsXs, apply general @Input columns value
 			 */

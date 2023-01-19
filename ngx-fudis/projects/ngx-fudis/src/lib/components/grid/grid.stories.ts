@@ -26,10 +26,16 @@ export default {
 	argTypes: {
 		columns: {
 			options: ['1fr 3fr', '1fr 1fr', '5fr 1fr'],
-			control: { type: 'select' }, // automatically inferred when 'options' is defined
+			control: { type: 'select' },
 		},
 		align: {
-			control: { type: 'radio' }, // automatically inferred when 'options' is defined
+			control: { type: 'select' },
+		},
+		marginTop: {
+			control: { type: 'select' },
+		},
+		marginBottom: {
+			control: { type: 'select' },
 		},
 	},
 	parameters: {
@@ -42,7 +48,6 @@ export default {
 				'columnsFromInput',
 				'gridWidths',
 				'gridWidthsArray',
-				'isPhonePortrait',
 			],
 		},
 	},
@@ -62,6 +67,8 @@ const Template: Story<GridComponent> = (args: GridComponent) => ({
 		[align]="align"
 		[alignItemsX]="alignItemsX"
 		[alignItemsY]="alignItemsY"
+		[marginTop]="marginTop"
+		[marginBottom]="marginBottom"
 		[width]="width">
 		<fudis-heading
 			class="grid-test-item"
@@ -94,5 +101,5 @@ const Template: Story<GridComponent> = (args: GridComponent) => ({
 	props: args,
 });
 
-export const GridFirst = Template.bind({});
-GridFirst.args = {};
+export const Example = Template.bind({});
+Example.args = {};

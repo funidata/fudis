@@ -11,6 +11,23 @@
 	}
 
  @else {
-		@error 'Unknown breakpoint of #{$breakpoint}. Accepted arguments are: "xxl", "xl", "l", "m", "s", "xs".';
+		@error 'Unknown minimum breakpoint of #{$breakpoint}. Accepted arguments are: "xxl", "xl", "l", "m", "s", "xs".';
+	}
+}
+
+
+@mixin fudis-breakpoint-max($breakpoint) {
+	@if map_has_key(tokens.$fudis-breakpoints, $breakpoint) and $breakpoint != 'xs' {
+		
+		$breakpoint-value: map.get(tokens.$fudis-breakpoints, $breakpoint);
+		$calc-max-width: calc($breakpoint-value - 0.01em);
+
+    @media screen and (max-width: #{$calc-max-width}) {
+      @content;
+    }
+	}
+
+ @else {
+		@error 'Unknown maximum breakpoint of #{$breakpoint}. Accepted arguments are: "xxl", "xl", "l", "m", and "s"';
 	}
 }
