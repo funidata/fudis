@@ -20,12 +20,6 @@
 		margin-bottom: spacing.$fudis-spacing-s;
 		cursor: pointer;
 
-		&__wrap {
-			display: flex;
-			align-items: center;
-			padding-left: 0;
-		}
-
 		&__text {
 			margin-bottom: 0;
 			padding-left: spacing.$fudis-spacing-s;
@@ -33,31 +27,37 @@
 	}
 
 	/* Radio button circle */
-	&__control {
-		@include borders.fudis-border('1px', 'solid', 'gray-middle');	
-
+	&__content {
 		display: flex;
-		top: 0;
-		left: 0;
 		align-items: center;
-		justify-content: center;
-		border-radius: 50%;
-		width: spacing.$fudis-spacing-m;
-		min-width: spacing.$fudis-spacing-m;
-		height: spacing.$fudis-spacing-m;
+		padding-left: 0;
 
-		&--invalid {
-			@include borders.fudis-border('1px', 'solid', 'red');
-			
-			box-shadow: 0 0 0 spacing.$fudis-pixel-3 colors.$fudis-red-light;
-		}
-		
-		&__indicator {
-			@include colorMixins.fudis-bg-color('gray-dark');
-
+		&__control {
+			@include borders.fudis-border('1px', 'solid', 'gray-middle');	
+	
+			display: flex;
+			top: 0;
+			left: 0;
+			align-items: center;
+			justify-content: center;
 			border-radius: 50%;
-			width: spacing.$fudis-spacing-s;
-			height: spacing.$fudis-spacing-s;
+			width: spacing.$fudis-spacing-m;
+			min-width: spacing.$fudis-spacing-m;
+			height: spacing.$fudis-spacing-m;
+	
+			&--invalid {
+				@include borders.fudis-border('1px', 'solid', 'red');
+				
+				box-shadow: 0 0 0 spacing.$fudis-pixel-3 colors.$fudis-red-light;
+			}
+			
+			&__indicator {
+				@include colorMixins.fudis-bg-color('gray-dark');
+	
+				border-radius: 50%;
+				width: spacing.$fudis-spacing-s;
+				height: spacing.$fudis-spacing-s;
+			}
 		}
 	}
 
@@ -70,8 +70,8 @@
 		width: 100%;
 		height: 100%;
 
-		/* stylelint-disable-next-line selector-class-pattern */
-		&:focus + .fudis-radio-button__label__wrap .fudis-radio-button__control { 
+		/* stylelint-disable selector-max-class */ /* stylelint-disable selector-class-pattern */
+		&:focus + .fudis-radio-button__content .fudis-radio-button__content__control { 
 			@include focus.fudis-focus-form-field;
 		}
 	}
