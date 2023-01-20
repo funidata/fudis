@@ -1,0 +1,75 @@
+@use '../../../../foundations/borders/mixins.scss' as borders;
+@use '../../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../../foundations/typography/mixins.scss' as typography;
+@use '../../../../foundations/colors/tokens.scss' as colors;
+@use '../../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../../foundations/focus/mixins.scss' as focus; 
+
+.fudis-radio-button {
+	@include typography.fudis-body-m-regular;
+	@include colorMixins.fudis-text-color('gray-dark');
+
+	display: inline-block;
+	display: block;
+	position: relative;
+	margin-bottom: 0;
+	cursor: pointer;
+	width: auto;
+
+	&__label {
+		margin-bottom: 0;
+		padding-left: spacing.$fudis-spacing-s;
+	}
+	
+
+	/* Radio button circle */
+	&__content {
+		display: flex;
+		align-items: center;
+		padding-left: 0;
+
+		&__control {
+			@include borders.fudis-border('1px', 'solid', 'gray-middle');	
+	
+			display: flex;
+			top: 0;
+			left: 0;
+			align-items: center;
+			justify-content: center;
+			border-radius: 50%;
+			width: spacing.$fudis-spacing-m;
+			min-width: spacing.$fudis-spacing-m;
+			height: spacing.$fudis-spacing-m;
+	
+			&--invalid {
+				@include borders.fudis-border('1px', 'solid', 'red');
+				
+				box-shadow: 0 0 0 spacing.$fudis-pixel-3 colors.$fudis-red-light;
+			}
+			
+			&__indicator {
+				@include colorMixins.fudis-bg-color('gray-dark');
+
+				border-radius: 50%;
+				width: spacing.$fudis-spacing-s;
+				height: spacing.$fudis-spacing-s;
+			}
+		}
+	}
+
+	&__input {
+		position: absolute;
+		left: 0;
+		opacity: 0;
+		z-index: 1;
+		margin: 0;
+		cursor: pointer;
+		width: 100%;
+		height: 100%;
+
+		/* stylelint-disable-next-line selector-class-pattern, selector-max-class */
+		&:focus + .fudis-radio-button__content .fudis-radio-button__content__control {
+				@include focus.fudis-focus-form-field;
+		}
+	}
+}

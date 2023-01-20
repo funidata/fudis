@@ -21,7 +21,7 @@
 					"error",
 					{
 						"type": "element",
-						"prefix": "fudis",
+						"prefix": ["fudis", "example"],
 						"style": "kebab-case"
 					}
 				]

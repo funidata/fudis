@@ -45,14 +45,19 @@ import { Component } from '@angular/core';
 			<fudis-icon icon="chevron" rotate="cw-90"></fudis-icon>
 			<fudis-icon icon="achievement" color="success"></fudis-icon>
 		</div>
-		<div class="basic-flex-box2">
+		<fudis-radio-button-group label="Otsikko"></fudis-radio-button-group>
+		<!-- <form (FormGroup)="(frm)">
+			<fudis-radio-button id="muu" name="hedelmä" [value]="value" [control]="getRadioOptions()"></fudis-radio-button>
+			<fudis-radio-button id="maa" name="hedelmä" [value]="value" [control]="getRadioOptions()"></fudis-radio-button>
+		</form> -->
+		<!-- <div class="basic-flex-box2">
 			<fudis-badge variant="accent" content="accent"></fudis-badge>
 			<fudis-badge variant="danger">danger</fudis-badge>
 			<fudis-badge data-theme="sisu" variant="primary" content="sisu primary"></fudis-badge>
 			<fudis-badge data-theme="into" variant="primary" content="into primary"></fudis-badge>
 			<fudis-badge variant="secondary" content="secondary"></fudis-badge>
 			<fudis-badge variant="success" content="success"></fudis-badge>
-		</div>
+		</div> -->
 	`,
 	styleUrls: ['./app.scss'],
 })

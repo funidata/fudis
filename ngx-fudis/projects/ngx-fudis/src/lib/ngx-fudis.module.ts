@@ -29,7 +29,12 @@ import { FudisCheckboxComponent } from './components/form/fudis-checkbox/fudis-c
 import { VanillaTextAreaComponent } from './components/form/vanilla-text-area/vanilla-text-area.component';
 import { BadgeComponent } from './components/badge/badge.component';
 import { IconComponent } from './components/icon/icon.component';
+import { RadioButtonGroupComponent } from './components/form/radio-button-group/radio-button-group.component';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
+import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
+
+import { RadioButtonGroupComponentExample } from '../examples/form/radio-button-group-example/radio-button-group-example.component';
+import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
 
 @NgModule({
 	declarations: [
@@ -51,7 +56,11 @@ import { DropdownComponent } from './components/form/dropdown/dropdown.component
 		VanillaTextAreaComponent,
 		BadgeComponent,
 		IconComponent,
+		RadioButtonGroupComponent,
+		RadioButtonComponent,
 		DropdownComponent,
+		RadioButtonGroupComponentExample,
+		ErrorMessageComponent,
 	],
 	imports: [
 		FormsModule,
@@ -83,6 +92,7 @@ import { DropdownComponent } from './components/form/dropdown/dropdown.component
 		VanillaTextAreaComponent,
 		BadgeComponent,
 		IconComponent,
+		RadioButtonGroupComponent,
 		DropdownComponent,
 	],
 	providers: [FudisDialog],

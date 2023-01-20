@@ -1,6 +1,9 @@
 @use '../../../foundations/typography/mixins' as typography;
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
 
 .fudis-body-text {
+	@include colorMixins.fudis-text-color('gray-dark');
+
 	&__s-regular {
 		@include typography.fudis-body-s-regular;
 	}

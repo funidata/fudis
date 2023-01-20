@@ -1,0 +1,16 @@
+@use '../../../foundations/borders/mixins.scss' as borders;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+
+.fudis-radio-button-group {
+	@include borders.fudis-border('1px', 'solid', 'transparent');
+
+	padding: 0;
+
+	&__option {
+		list-style: none;
+
+		&:not(:last-of-type) {
+			margin-bottom: spacing.$fudis-spacing-s;
+		}
+	}
+}

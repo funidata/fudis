@@ -1,0 +1,24 @@
+<label [attr.for]="id" class="fudis-radio-button">
+	<input
+		class="fudis-radio-button__input"
+		type="radio"
+		[attr.aria-describedby]="describedByLegend"
+		[id]="id"
+		[attr.name]="name"
+		[formControl]="radioButtonFormControl"
+		[attr.required]="required"
+		[attr.disabled]="disabled"
+		[attr.checked]="checked ? true : null"
+		[value]="value" />
+	<div class="fudis-radio-button__content">
+		<div
+			class="fudis-radio-button__content__control"
+			[ngClass]="{
+				'fudis-radio-button__content__control--invalid':
+					this.radioButtonFormControl.touched && !this.radioButtonFormControl.value
+			}">
+			<span *ngIf="this.checked" class="fudis-radio-button__content__control__indicator"></span>
+		</div>
+		<span class="fudis-radio-button__label">{{ label }}</span>
+	</div>
+</label>
