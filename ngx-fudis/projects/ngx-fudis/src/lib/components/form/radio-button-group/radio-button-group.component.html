@@ -1,8 +1,8 @@
 <fieldset class="fudis-form-element fudis-radio-button-group">
-	<fudis-legend [attr.id]="legendId">{{ label }}</fudis-legend>
+	<fudis-legend [attr.id]="legendId">{{ legend }}</fudis-legend>
 	<li class="fudis-radio-button-group__option" *ngFor="let option of options; let index = index">
 		<fudis-radio-button
-			[describedBy]="legendId"
+			[describedByLegend]="legendId"
 			[id]="option.id"
 			[name]="option.name"
 			[value]="option.value"

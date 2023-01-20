@@ -1,7 +1,7 @@
 <form [formGroup]="mainFormGroup">
 	<fudis-radio-button-group
 		id="fruit-selection"
-		label="Choose your preferred fruit"
+		legend="Choose your preferred fruit"
 		errorMessage="You must choose a fruit! :("
 		*ngIf="mainFormGroup"
 		[radioButtonFormControl]="radioButtonGroupOne"
@@ -10,7 +10,7 @@
 	<fudis-body-text *ngIf="!radioButtonGroupOne.value">No value chosen for the first :(</fudis-body-text>
 	<fudis-radio-button-group
 		id="pet-selection"
-		label="Choose a pet"
+		legend="Choose a pet"
 		errorMessage="You must choose a pet! :("
 		*ngIf="mainFormGroup"
 		[radioButtonFormControl]="radioButtonGroupTwo"

@@ -50,5 +50,5 @@ export class RadioButtonComponent {
 	/*
 	 * Using legend of group fieldset to provide additional info for the user
 	 */
-	@Input() describedBy: string;
+	@Input() describedByLegend: string;
 }

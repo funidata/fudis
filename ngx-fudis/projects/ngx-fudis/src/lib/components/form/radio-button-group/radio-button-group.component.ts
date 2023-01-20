@@ -1,28 +1,37 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { RadioButtonOption } from '../../../types/forms';
 
 @Component({
-	selector: 'fudis-radio-button-group[options][id]',
+	selector: 'fudis-radio-button-group[options][id][legend]',
 	templateUrl: './radio-button-group.component.html',
 	styleUrls: ['./radio-button-group.component.scss'],
 })
 export class RadioButtonGroupComponent implements OnInit {
-	@Input() parentFormGroup: FormGroup;
-
-	selectedId: string | number | undefined = undefined;
-
+	/*
+	 * FormControl for Radio Button group
+	 */
 	@Input() radioButtonFormControl: FormControl;
 
+	/*
+	 * Array of options for group of radio buttons
+	 */
 	@Input() options: RadioButtonOption[];
 
-	@Input() label: string;
+	/*
+	 * Legend label for the group
+	 */
+	@Input() legend: string;
 
+	/*
+	 * Unique id of the form group, used for improved accessibility
+	 */
 	@Input() id: string;
 
+	/*
+	 * Message to show when FormControl is invalid, e. g. group is required and touched, but user has not made a selection
+	 */
 	@Input() errorMessage: string | undefined;
-
-	groupName: string;
 
 	required: boolean = false;
 
@@ -47,8 +56,6 @@ export class RadioButtonGroupComponent implements OnInit {
 			throw new Error(
 				`For radio button options for fudis-radio-button-group 'name' should be identical for all options.`
 			);
-		} else {
-			this.groupName = this.options[0].name;
 		}
 
 		this.legendId = `${this.id}-legend`;
