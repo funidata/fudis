@@ -23,10 +23,5 @@ export const DescriptionList: Story = () => ({
 				{ key: 'Vastuuorganisaatio', value: 'Fysiikanlaitois 100%' }
 			]">
 		</fudis-description-list>
-		<fudis-description-list
-			[data]="[
-				{ key: 'Yhteystiedot', value: 'kallekäyttäjä@gmail.com', subHeading: 'Kalle Käyttäjä' }
-			]">
-		</fudis-description-list>
 	`,
 });
