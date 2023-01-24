@@ -1,9 +1,5 @@
 import { Component, Input } from '@angular/core';
-
-export interface Item {
-	key: string;
-	value: string;
-}
+import { DescriptionListCompactItem } from '../../../types/lists';
 
 @Component({
 	selector: 'fudis-description-list-compact',
@@ -11,5 +7,5 @@ export interface Item {
 	styleUrls: ['./description-list-compact.component.scss'],
 })
 export class DescriptionListCompactComponent {
-	@Input() data: Item[] = [];
+	@Input() data: DescriptionListCompactItem[] = [];
 }
