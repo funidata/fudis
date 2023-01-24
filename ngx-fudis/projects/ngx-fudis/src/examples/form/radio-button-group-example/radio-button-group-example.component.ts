@@ -32,9 +32,15 @@ export class RadioButtonGroupComponentExample {
 		{ value: 'capybara', label: 'Capybara', id: 'pet-3', name: 'animal' },
 	];
 
-	radioButtonGroupOne: UntypedFormControl = new UntypedFormControl(getDefaultValue(this.fruitOptions), Validators.required);
+	radioButtonGroupOne: UntypedFormControl = new UntypedFormControl(
+		getDefaultValue(this.fruitOptions),
+		Validators.required
+	);
 
-	radioButtonGroupTwo: UntypedFormControl = new UntypedFormControl(getDefaultValue(this.petOptions), Validators.required);
+	radioButtonGroupTwo: UntypedFormControl = new UntypedFormControl(
+		getDefaultValue(this.petOptions),
+		Validators.required
+	);
 
 	mainFormGroup: UntypedFormGroup = this.formBuilder.group({
 		radioButtonGroupOne: this.radioButtonGroupOne,
