@@ -35,6 +35,8 @@ import { RadioButtonComponent } from './components/form/radio-button-group/radio
 
 import { RadioButtonGroupComponentExample } from '../examples/form/radio-button-group-example/radio-button-group-example.component';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
+import { DescriptionListComponent } from './components/description-list/description-list.component';
+import { DescriptionListCompactComponent } from './components/description-list/description-list-compact/description-list-compact.component';
 
 @NgModule({
 	declarations: [
@@ -61,6 +63,8 @@ import { ErrorMessageComponent } from './components/form/error-message/error-mes
 		DropdownComponent,
 		RadioButtonGroupComponentExample,
 		ErrorMessageComponent,
+		DescriptionListComponent,
+		DescriptionListCompactComponent,
 	],
 	imports: [
 		FormsModule,
@@ -94,6 +98,8 @@ import { ErrorMessageComponent } from './components/form/error-message/error-mes
 		IconComponent,
 		RadioButtonGroupComponent,
 		DropdownComponent,
+		DescriptionListComponent,
+		DescriptionListCompactComponent,
 	],
 	providers: [FudisDialog],
 })

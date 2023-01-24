@@ -21,3 +21,5 @@ export { IconComponent } from './lib/components/icon/icon.component';
 export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
 export { DropdownComponent } from './lib/components/form/dropdown/dropdown.component';
 export { GridComponent } from './lib/components/grid/grid.component';
+export { DescriptionListComponent } from './lib/components/description-list/description-list.component';
+export { DescriptionListCompactComponent } from './lib/components/description-list/description-list-compact/description-list-compact.component';
