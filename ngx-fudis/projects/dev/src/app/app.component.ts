@@ -22,16 +22,6 @@ import { Component } from '@angular/core';
 				[required]="true">
 			</fudis-vanilla-text-area>
 			<fudis-vanilla-text-area label="Vanilla textarea, basic" size="m"> </fudis-vanilla-text-area>
-			<fudis-grid [columns]="4">
-				<fudis-button data-theme="sisu" type="submit" label="Lähetä"></fudis-button>
-				<fudis-button data-theme="sisu" label="Eiku" variant="secondary"></fudis-button>
-				<fudis-button data-theme="sisu" label="Poista" variant="tertiary">
-					<fudis-icon icon="delete"></fudis-icon>
-				</fudis-button>
-				<fudis-button data-theme="sisu" label="Poista" [disabled]="true">
-					<fudis-icon icon="delete"></fudis-icon>
-				</fudis-button>
-			</fudis-grid>
 		</form>
 		<form class="basic-flex-box">
 			<h2>Dropdown</h2>
