@@ -101,5 +101,5 @@ const Template: Story<GridComponent> = (args: GridComponent) => ({
 	props: args,
 });
 
-export const Example = Template.bind({});
-Example.args = {};
+export const Grid = Template.bind({});
+Grid.args = {};

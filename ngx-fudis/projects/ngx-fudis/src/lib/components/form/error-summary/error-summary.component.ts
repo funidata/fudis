@@ -1,5 +1,5 @@
 import { Component, QueryList, ContentChildren, AfterContentInit } from '@angular/core';
-import { VanillaTextInputComponent } from '../vanilla-text-input/vanilla-text-input.component';
+import { TextInputComponent } from '../text-input/text-input.component';
 
 type ErrorSummary = {
 	id: string;
@@ -13,7 +13,7 @@ type ErrorSummary = {
 })
 export class ErrorSummaryComponent implements AfterContentInit {
 	// Access text-input and its @Output for getting errors emitted
-	@ContentChildren(VanillaTextInputComponent, { descendants: true }) templates: QueryList<VanillaTextInputComponent>;
+	@ContentChildren(TextInputComponent, { descendants: true }) templates: QueryList<TextInputComponent>;
 
 	errors: Array<ErrorSummary> = [];
 

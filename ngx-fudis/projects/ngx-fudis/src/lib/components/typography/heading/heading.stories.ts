@@ -11,8 +11,8 @@ const Template: Story<HeadingComponent> = (args: HeadingComponent) => ({
 	props: args,
 });
 
-export const HeadingExample = Template.bind({});
-HeadingExample.args = {
+export const Heading = Template.bind({});
+Heading.args = {
 	tag: 'h1',
 	size: 'xl',
 	text: 'I am a heading component!',

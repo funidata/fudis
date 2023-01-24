@@ -42,5 +42,5 @@ export const Default = () => ({
 });
 
 Default.story = {
-	name: 'Example',
+	name: 'Text Spacing',
 };

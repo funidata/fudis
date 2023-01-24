@@ -1,23 +1,22 @@
 /*
  * Public API Surface of ngx-fudis
+ * Include component to the list below, when you want to expose it outside.
  */
 
-// eslint-disable-next-line import/export
 export * from './lib/ngx-fudis.module';
 export * from './lib/components/dialog/public-api';
-export { HeadingComponent } from './lib/components/typography/heading/heading.component';
+
+export { BadgeComponent } from './lib/components/badge/badge.component';
 export { BodyTextComponent } from './lib/components/typography/body-text/body-text.component';
 export { ButtonComponent } from './lib/components/button/button.component';
-export { FudisCheckboxComponent } from './lib/components/form/fudis-checkbox/fudis-checkbox.component';
 export { CheckboxComponent } from './lib/components/form/checkbox/checkbox.component';
-export { TextInputComponent } from './lib/components/form/text-input/text-input.component';
-export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';
-export { TextSpacingComponent } from './lib/components/typography/text-spacing/text-spacing.component';
-export { LegendComponent } from './lib/components/form/legend/legend.component';
-export { VanillaTextInputComponent } from './lib/components/form/vanilla-text-input/vanilla-text-input.component';
-export { VanillaTextAreaComponent } from './lib/components/form/vanilla-text-area/vanilla-text-area.component';
-export { BadgeComponent } from './lib/components/badge/badge.component';
-export { IconComponent } from './lib/components/icon/icon.component';
-export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
 export { DropdownComponent } from './lib/components/form/dropdown/dropdown.component';
+// export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';
 export { GridComponent } from './lib/components/grid/grid.component';
+export { HeadingComponent } from './lib/components/typography/heading/heading.component';
+export { IconComponent } from './lib/components/icon/icon.component';
+export { LegendComponent } from './lib/components/form/legend/legend.component';
+export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
+export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';
+export { TextInputComponent } from './lib/components/form/text-input/text-input.component';
+// export { TextSpacingComponent } from './lib/components/typography/text-spacing/text-spacing.component';

@@ -1,90 +1,80 @@
-@use '../../../foundations/colors/mixins.scss' as colors;
-@use '../../../foundations/colors/tokens.scss' as colorsToken;
 @use '../../../foundations/borders/mixins.scss' as borders;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/colors/tokens.scss' as colors;
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../foundations/focus/mixins.scss' as focus; 
+@use '../../../foundations/typography/mixins.scss' as typography;
 
-/* stylelint-disable  */
-mat-checkbox.fudis-checkbox {
-		// Overide for mat-checkbox rounded corners
-		& .mat-checkbox-frame {
-			border-radius: 0;
+.fudis-checkbox {
+	display: inline-block;
+	padding-top: spacing.$fudis-spacing-xs;
+	width: auto;
+
+	&__box {
+		@include borders.fudis-border('1px', 'solid', 'gray-middle');
+
+		position: absolute;
+		margin: spacing.$fudis-spacing-xs;
+		border-radius: 0;
+		cursor: pointer;
+		width: spacing.$fudis-spacing-s;
+		height: spacing.$fudis-spacing-s;
+
+		:focus {
+			@include focus.fudis-focus-checkbox;
 		}
 
-		& .mat-checkbox-checkmark .mat-checkbox-checkmark-path {
-			stroke: colorsToken.$fudis-gray-dark;
+		&--disabled {
+			@include borders.fudis-border('1px', 'dashed', 'gray-middle');	
+			@include colorMixins.fudis-bg-color('gray-extra-light');
+
+			cursor: default;
 		}
 
-		& .mat-ripple-element {
-			background-color: transparent;
+		&--invalid {
+			@include borders.fudis-border('1px', 'solid', 'red');
+			
+			box-shadow: 0 0 0 spacing.$fudis-pixel-3 colors.$fudis-red-light;
 		}
 
-		&.mat-checkbox-checked .mat-checkbox-background {
-			@include colors.fudis-bg-color('white');
+	}
+
+	&__input {
+		appearance: none;
+		display: grid;
+		place-content: center;
+		margin: 0;
+	}
+
+	&__icon {
+		position: absolute;
+		top: spacing.$fudis-pixel-1;
+		fill: colors.$fudis-gray-middle;
+	}
+
+
+	&__label {
+		@include typography.fudis-body-m-regular;
+		@include colorMixins.fudis-text-color('gray-dark');
+
+		display: flex;
+		align-items: center;
+		margin-bottom: 0;
+		padding-bottom: spacing.$fudis-spacing-xs;
+
+		&__text {
+			position: relative;
+			margin-left: spacing.$fudis-spacing-l;
 		}
+	}
 
-		// disabling mat-ripple hover 
-		&.mat-checkbox-checked:not(.mat-checkbox-disabled) .mat-ripple-element, .mat-checkbox:active:not(.mat-checkbox-disabled) .mat-ripple-element {
-			opacity: 0;
+	&__guidance {
+		&__error {
+			@include typography.fudis-body-s-regular;
+			@include colorMixins.fudis-text-color('red');
+
+			margin-top: spacing.$fudis-spacing-xs;
+			margin-left: spacing.$fudis-spacing-xs;
 		}
-
-		// Primary checkbox styling
-		&.mat-primary .mat-checkbox-frame {
-			@include borders.fudis-border('1px', 'solid', 'gray-middle');
-
-			z-index: 1;
-		}
-
-		&.mat-primary.mat-checkbox-unchecked .mat-checkbox-frame {
-			@include borders.fudis-border('1px', 'solid', 'gray-middle');	
-		}
-
-		// Overrides for primary checkbox keyboad and mouse focus styles
-		&.mat-primary.cdk-focused.cdk-program-focused {
-			& .mat-checkbox-frame {
-				@include borders.fudis-border('2px', 'solid', 'primary');
-
-				box-sizing: border-box;
-				z-index: 1;	
-			}
-		}
-
-		&.mat-primary.cdk-focused.cdk-keyboard-focused {
-			& .mat-checkbox-frame {
-				@include borders.fudis-border('2px', 'solid', 'primary');
-
-				box-sizing: border-box;
-				z-index: 1;	
-			}
-		}
-
-		// Invalid checkbox color warn
-		&.mat-warn .mat-checkbox-frame {
-			@include borders.fudis-border('1px', 'solid', 'red');	
-
-			z-index: 1;	
-		}
-
-		&.mat-warn.cdk-focused.cdk-program-focused {
-			& .mat-checkbox-frame {
-				@include borders.fudis-outline('2px', 'solid', 'red-light');
-			}
-		}
-
-		&.mat-warn.cdk-focused.cdk-keyboard-focused {
-			& .mat-checkbox-frame {
-				@include borders.fudis-outline('2px', 'solid', 'red-light');
-			}
-		}
-
-		// Disabled checkbox focus styles
-		&.mat-checkbox-disabled {
-			& .mat-checkbox-frame {
-				@include borders.fudis-border('1px', 'dashed', 'gray-middle');	
-				@include colors.fudis-bg-color('gray-extra-light');
-			}
-			& .mat-checkbox-label {
-				@include colors.fudis-text-color('gray-middle');
-			}
-		}
+	}
 }
-
-
