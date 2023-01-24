@@ -1,6 +1,6 @@
 <dl class="fudis-description-list-compact">
-	<div *ngFor="let item of data">
-		<dt class="fudis-description-list-compact__key">{{ item.key }}:</dt>
-		<dd class="fudis-description-list-compact__value">{{ item.value }}</dd>
+	<div class="fudis-description-list-compact__item" *ngFor="let item of data">
+		<dt class="fudis-description-list-compact__item__key">{{ item.key }}:</dt>
+		<dd class="fudis-description-list-compact__item__value">{{ item.value }}</dd>
 	</div>
 </dl>

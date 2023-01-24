@@ -12,18 +12,18 @@ export default {
 	],
 	argTypes: {},
 } as Meta;
+
+const testData = [
+	{ key: 'Opetusieli', value: 'Tagalog' },
+	{ key: 'Opetuspaikka', value: 'Norsunluurannikko' },
+	{ key: 'Opetusaika', value: '25.8.2022-24.1.2023' },
+	{ key: 'Arvosana', value: 'Hylätty' },
+	{ key: 'Arvioija', value: 'Kalle Käyttäjä' },
+];
+
 const html = String.raw;
 
 export const DescriptionListCompact: Story = () => ({
-	template: html`
-		<fudis-description-list-compact
-			[data]="[
-		{ key: 'Opetusieli', value: 'Tagalog' },
-		{ key: 'Opetuspaikka', value: 'Norsunluurannikko' },
-		{ key: 'Opetusaika', value: '25.8.2022-24.1.2023' },
-		{ key: 'Arvosana', value: 'Hylätty' },
-		{ key: 'Arvioija', value: 'Kalle Käyttäjä' }
-	]">
-		</fudis-description-list-compact>
-	`,
+	props: { testData },
+	template: html` <fudis-description-list-compact [data]="testData"></fudis-description-list-compact> `,
 });

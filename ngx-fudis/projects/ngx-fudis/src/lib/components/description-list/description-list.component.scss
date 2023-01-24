@@ -6,30 +6,35 @@
 .fudis-description-list {
 	columns: 2 (spacing.$fudis-spacing-xxl * 6);
 
-	&__wrapper {
-		margin-bottom: spacing.$fudis-spacing-m;
+	&__item {
 		break-inside: avoid-column;
+
+		&:not(:last-of-type) {
+			margin-bottom: spacing.$fudis-spacing-m;
+		}
+
+		&__key {
+			@include typography.fudis-description-list-key-typography;
+			@include colorMixins.fudis-text-color('gray-dark');
+	
+			margin-bottom: spacing.$fudis-spacing-xs;
+		}
+	
+		&__value {
+			@include typography.fudis-description-list-value-typography;
+			@include colorMixins.fudis-text-color('gray-dark');
+	
+			margin-left: 0;
+		}
+	
+		&__sub-heading {
+			@include colorMixins.fudis-text-color('gray-dark');
+	
+			margin-top: 0;
+			margin-bottom: spacing.$fudis-spacing-xxs;
+			font-weight: typographyTokens.$fudis-regular;
+		}
 	}
 
-	&__key {
-		@include typography.fudis-description-list-key-typography;
-		@include colorMixins.fudis-text-color('gray-dark');
-
-		margin-bottom: spacing.$fudis-spacing-xs;
-	}
-
-	&__value {
-		@include typography.fudis-description-list-value-typography;
-		@include colorMixins.fudis-text-color('gray-dark');
-
-		margin-left: 0;
-	}
-
-	&__sub-heading {
-		@include colorMixins.fudis-text-color('gray-dark');
-
-		margin-top: 0;
-		margin-bottom: spacing.$fudis-spacing-xxs;
-		font-weight: typographyTokens.$fudis-regular;
-	}
+	
 }

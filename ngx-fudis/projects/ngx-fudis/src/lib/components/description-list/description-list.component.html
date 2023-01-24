@@ -1,10 +1,10 @@
 <dl class="fudis-description-list">
-	<div *ngFor="let item of data" class="fudis-description-list__wrapper">
-		<dt class="fudis-description-list__key">
+	<div *ngFor="let item of data" class="fudis-description-list__item">
+		<dt class="fudis-description-list__item__key">
 			{{ item.key }}
 		</dt>
-		<dd class="fudis-description-list__value">
-			<p *ngIf="item.subHeading" class="fudis-description-list__sub-heading">{{ item.subHeading }}</p>
+		<dd class="fudis-description-list__item__value">
+			<p *ngIf="item.subHeading" class="fudis-description-list__item__sub-heading">{{ item.subHeading }}</p>
 			{{ item.value }}
 		</dd>
 	</div>
