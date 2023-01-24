@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
 	selector: 'fudis-radio-button',
@@ -15,7 +15,7 @@ export class RadioButtonComponent {
 	/*
 	 * FormControl for Radio Button group
 	 */
-	@Input() radioButtonFormControl: FormControl;
+	@Input() radioButtonFormControl: UntypedFormControl;
 
 	/*
 	 * Selectable form value of a single Radio Button, e.g. "fair-trade-banana"

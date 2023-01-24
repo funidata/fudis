@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { RadioButtonOption } from '../../../types/forms';
 
 @Component({
@@ -11,7 +11,7 @@ export class RadioButtonGroupComponent implements OnInit {
 	/*
 	 * FormControl for Radio Button group
 	 */
-	@Input() radioButtonFormControl: FormControl;
+	@Input() radioButtonFormControl: UntypedFormControl;
 
 	/*
 	 * Array of options for group of radio buttons

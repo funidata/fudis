@@ -1,6 +1,6 @@
 // eslint-disable-next-line max-classes-per-file
 import { Component, Input, Output, OnInit, EventEmitter, ViewChild, ElementRef } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 
 type Error = {
 	id: string;
@@ -50,7 +50,7 @@ export class TextInputComponent implements OnInit {
 
 	validatorArray: Array<any> = [];
 
-	fudisFormControl = new FormControl('', this.validatorArray);
+	fudisFormControl = new UntypedFormControl('', this.validatorArray);
 
 	defaultError: string;
 
@@ -72,7 +72,7 @@ export class TextInputComponent implements OnInit {
 		if (this.type === 'number') {
 			this.validatorArray.push(Validators.pattern('^[0-9]*$'));
 		}
-		this.fudisFormControl = new FormControl('', this.validatorArray);
+		this.fudisFormControl = new UntypedFormControl('', this.validatorArray);
 
 		// Setting id's and names
 		if (this.inputId) {

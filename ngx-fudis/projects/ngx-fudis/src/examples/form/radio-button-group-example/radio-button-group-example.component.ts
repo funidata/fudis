@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { RadioButtonOption } from 'projects/ngx-fudis/src/lib/types/forms';
 
@@ -32,14 +32,14 @@ export class RadioButtonGroupComponentExample {
 		{ value: 'capybara', label: 'Capybara', id: 'pet-3', name: 'animal' },
 	];
 
-	radioButtonGroupOne: FormControl = new FormControl(getDefaultValue(this.fruitOptions), Validators.required);
+	radioButtonGroupOne: UntypedFormControl = new UntypedFormControl(getDefaultValue(this.fruitOptions), Validators.required);
 
-	radioButtonGroupTwo: FormControl = new FormControl(getDefaultValue(this.petOptions), Validators.required);
+	radioButtonGroupTwo: UntypedFormControl = new UntypedFormControl(getDefaultValue(this.petOptions), Validators.required);
 
-	mainFormGroup: FormGroup = this.formBuilder.group({
+	mainFormGroup: UntypedFormGroup = this.formBuilder.group({
 		radioButtonGroupOne: this.radioButtonGroupOne,
 		radioButtonGroupTwo: this.radioButtonGroupTwo,
 	});
 
-	constructor(private formBuilder: FormBuilder) {}
+	constructor(private formBuilder: UntypedFormBuilder) {}
 }
