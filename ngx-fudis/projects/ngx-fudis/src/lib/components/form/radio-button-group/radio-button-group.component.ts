@@ -54,7 +54,7 @@ export class RadioButtonGroupComponent implements OnInit {
 
 		if (!namesAreIdentical) {
 			throw new Error(
-				`For radio button options for fudis-radio-button-group 'name' should be identical for all options.`
+				`From @Input array of options to fudis-radio-button-group value 'name' should be identical for all options.`
 			);
 		}
 
