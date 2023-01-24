@@ -1,14 +1,81 @@
 @use '../../../foundations/borders/mixins.scss' as borders;
 @use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/typography/tokens.scss' as typographyTokens;
 @use '../../../foundations/colors/tokens.scss' as colors;
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../foundations/breakpoints/mixins.scss' as breakpoints;
 @use '../../../foundations/focus/mixins.scss' as focus; 
-@use '../../../foundations/typography/mixins.scss' as typography;
 
 .fudis-text-input {
+	display: grid;
+	max-width: calc(23 * spacing.$fudis-spacing-s);
+
+
+	&__l {
+		width: 100%;
+	}
+
+	&__m {
+		width: calc(14 * spacing.$fudis-spacing-s);
+	}
+
+	&__s {
+		max-width: calc(10 * spacing.$fudis-spacing-s);
+	}
+
 	&__label {
-		@include typography.fudis-text-field-label;
-		@include colorMixins.fudis-text-color('gray-dark');
+		&__content {
+			@include colorMixins.fudis-text-color('gray-dark');
+
+			position: relative;
+			padding-bottom: spacing.$fudis-spacing-xs;
+			overflow: hidden;
+		}
+
+		&__required {
+			@include typography.fudis-body-s-regular;
+
+			display: inline-block;
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			text-transform: initial;
+			
+		}
+
+		&__text {
+			@include typography.fudis-text-field-label;
+
+			display: flex;
+			align-items: flex-end;
+			overflow: hidden;
+
+			&__unset {
+				height: initial;
+			}
+
+			&__single {
+				@include breakpoints.fudis-breakpoint('m') {
+					height: calc(typographyTokens.$fudis-text-input-line-height)
+				}
+			}
+
+			&__double {
+				@include breakpoints.fudis-breakpoint('m') {
+					height: calc(2 * typographyTokens.$fudis-text-input-line-height);
+				}
+
+			}
+
+			&__triple {
+				@include breakpoints.fudis-breakpoint('m') {
+					height: calc(3 * typographyTokens.$fudis-text-input-line-height);
+				}
+			}
+
+			
+		}
 	}
 
 	&__input {
@@ -19,70 +86,38 @@
 		box-sizing: border-box;
 		padding: spacing.$fudis-spacing-xxs spacing.$fudis-spacing-s;
 		width: 100%;
-		height: spacing.$fudis-spacing-l;
+		height: spacing.$fudis-spacing-xl;
 
 		&:focus {
 			@include focus.fudis-focus-form-field;
 		}
+
+		&--invalid {
+			border-color: colors.$fudis-red;
+			 }	
 	}
 
-	&__help-text {
-		@include colorMixins.fudis-text-color('gray-dark');
-		@include typography.fudis-body-s-regular;
-
-		margin-top: spacing.$fudis-spacing-xs;
-	}
+	&__guidance {
+		&__help-text {
+			@include colorMixins.fudis-text-color('gray-dark');
+			@include typography.fudis-body-s-regular;
 	
-	&__character-limit-indicator {
-		@include colorMixins.fudis-text-color('gray-dark');
+			margin-top: spacing.$fudis-spacing-xs;
+		}
+		
+		&__character-limit-indicator {
+			@include colorMixins.fudis-text-color('gray-dark');
+		}
+	
+		&__error {
+			@include typography.fudis-body-s-regular;
+			@include colorMixins.fudis-text-color('red');
+	
+			margin-top: spacing.$fudis-spacing-xs;
+		}
+
 	}
 
-	&__error {
-		@include colorMixins.fudis-text-color('red');
-
-		margin-top: spacing.$fudis-spacing-xs;
-	}
-
-	&--invalid {
-		border-color: colors.$fudis-red;
-   	}	
+	
 }
 
-:host {
-	display: block;
-	position: relative;
-	width: 100%;
-
-	// ::ng-deep mat-form-field.mat-form-field-should-float .mat-form-field {
-	/* stylelint-disable-next-line selector-class-pattern */
-	// & mat-form-field.mat-form-field-should-float .mat-form-field {
-	// 	&-wrapper{
-	// 		padding-bottom: 0;
-	// 	}
-	
-	// 	&-subscript-wrapper {
-	// 		margin-top: 0;
-	// 		position: static;
-	// 	}
-	
-	// 	&-infix{
-	// 		display: flex;
-	// 		flex-direction: column-reverse;
-	// 		padding: 0;
-	
-	// 	}
-	
-	// 	&-label-wrapper{
-	// 		padding-top: 0;
-	// 		position: relative;
-	// 	}
-	
-	// 	&-label{
-	// 		transform: none;
-	// 		width: 100%;
-	// 		white-space: inherit;
-	// 		position: static;
-	// 	}
-	// }
-	
-}

@@ -14,7 +14,7 @@ const Template: Story<BodyTextComponent> = () => ({
 `,
 });
 
-export const BodyTextExample = Template.bind({});
-BodyTextExample.args = {
+export const BodyText = Template.bind({});
+BodyText.args = {
 	size: 'l-regular',
 };

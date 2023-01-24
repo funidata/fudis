@@ -22,8 +22,8 @@ const Template: Story<IconComponent> = (args: IconComponent) => ({
 	props: args,
 });
 
-export const InteractiveAllIcons = Template.bind({});
-InteractiveAllIcons.args = {
+export const Icon = Template.bind({});
+Icon.args = {
 	icon: 'achievement',
 	color: 'default',
 };

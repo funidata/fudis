@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Icon } from '../../types/icons';
 
 @Component({
 	selector: 'fudis-button',
@@ -25,10 +26,15 @@ export class ButtonComponent {
 
 	@Input() ariaLabel: string;
 
-	/**
+	/*
 	 * Button modifiers
 	 */
 	@Input() disabled = false;
+
+	/*
+	 * Icon for button if needed
+	 */
+	@Input() icon: Icon | undefined = undefined;
 
 	/**
 	 * Optional click handler

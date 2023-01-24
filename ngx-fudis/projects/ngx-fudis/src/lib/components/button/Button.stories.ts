@@ -14,57 +14,47 @@ export default {
 			declarations: [ButtonComponent, IconComponent],
 		}),
 	],
-	argTypes: {},
+	argTypes: {
+		icon: {
+			control: { type: 'text' },
+		},
+	},
 } as Meta;
 
 const Template: Story<ButtonComponent> = (args: ButtonComponent) => ({
 	props: args,
 });
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Button = Template.bind({});
+Button.args = {
 	variant: 'primary',
 	label: 'Button',
-};
-
-export const Secondary = Template.bind({});
-Secondary.args = {
-	variant: 'secondary',
-	label: 'Button',
-};
-
-export const Tertiary = Template.bind({});
-Tertiary.args = {
-	variant: 'tertiary',
-	label: 'Button',
-};
-
-export const Disabled = Template.bind({});
-Disabled.args = {
-	label: 'Button',
-	disabled: true,
+	icon: 'search',
 };
 
 export const ExamplesWithIcon: Story = () => ({
 	template: `
 		<div style="display:flex; flex-direction:column;">
 			<div style="margin-bottom:1rem">
-				<fudis-button label="Poista"><fudis-icon icon="delete"></fudis-icon></fudis-button>
+				<fudis-button icon="delete" label="Poista"></fudis-button>
 			</div>
 			<div style="margin-bottom:1rem">
-				<fudis-button label="Poista" variant="secondary"><fudis-icon icon="delete"></fudis-icon></fudis-button>
+				<fudis-button icon="delete" label="Poista" variant="secondary"></fudis-button>
 			</div>
 			<div style="margin-bottom:1rem">
-				<fudis-button label="Poista" variant="tertiary"><fudis-icon icon="delete"></fudis-icon></fudis-button>
+				<fudis-button icon="delete" label="Poista" variant="tertiary"></fudis-button>
 			</div>
 			<div style="margin-bottom:1rem">
-				<fudis-button label="Palaa takaisin" size="small"><fudis-icon icon="back"></fudis-icon></fudis-button>
+				<fudis-button icon="delete" label="Palaa takaisin" size="small"></fudis-button>
 			</div>
 			<div style="margin-bottom:1rem">
-				<fudis-button label="Palaa takaisin" size="small" variant="secondary"><fudis-icon icon="back"></fudis-icon></fudis-button>
+				<fudis-button icon="delete" label="Palaa takaisin" size="small" variant="secondary"></fudis-button>
 			</div>
 			<div style="margin-bottom:1rem">
-				<fudis-button label="Palaa takaisin" size="small" variant="tertiary"><fudis-icon icon="back"></fudis-icon></fudis-button>
+				<fudis-button icon="delete" label="Palaa takaisin" size="small" variant="tertiary"></fudis-button>
+			</div>
+			<div style="margin-bottom:1rem">
+				<fudis-button icon="delete" disabled="true" label="Palaa takaisin" variant="tertiary"></fudis-button>
 			</div>
 		</div>
 	`,
