@@ -17,8 +17,8 @@ const Template: Story<BadgeComponent> = (args: BadgeComponent) => ({
 	props: args,
 });
 
-export const InteractiveBadge = Template.bind({});
-InteractiveBadge.args = {
+export const Badge = Template.bind({});
+Badge.args = {
 	variant: 'primary',
 	content: 'Badge',
 };

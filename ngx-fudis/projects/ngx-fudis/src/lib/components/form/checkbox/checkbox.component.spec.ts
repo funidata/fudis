@@ -21,10 +21,4 @@ describe('CheckboxComponent', () => {
 	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
-
-	describe('checkbox has states', () => {
-		it('checking the check state of componen', () => {
-			component.checked = true;
-		});
-	});
 });

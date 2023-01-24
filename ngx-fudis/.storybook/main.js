@@ -8,7 +8,6 @@ module.exports = {
 		'@storybook/addon-links',
 		'@storybook/addon-essentials',
 		'@storybook/addon-interactions',
-		'@storybook/addon-toolbar',
 		{
 			name: '@storybook/addon-docs',
 			options: {
@@ -20,5 +19,8 @@ module.exports = {
 	core: {
 		builder: '@storybook/builder-webpack5',
 	},
-	staticDirs: ['./../projects/ngx-fudis/src/lib/assets/fonts/fira/woff2', './../projects/ngx-fudis/src/lib/assets/icons'],
+	staticDirs: [
+		'./../projects/ngx-fudis/src/lib/assets/fonts/fira/woff2',
+		'./../projects/ngx-fudis/src/lib/assets/icons',
+	],
 };

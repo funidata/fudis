@@ -2,11 +2,11 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
-	selector: 'fudis-vanilla-text-area',
-	templateUrl: './vanilla-text-area.component.html',
-	styleUrls: ['./vanilla-text-area.component.scss'],
+	selector: 'fudis-text-area',
+	templateUrl: './text-area.component.html',
+	styleUrls: ['./text-area.component.scss'],
 })
-export class VanillaTextAreaComponent implements OnInit {
+export class TextAreaComponent implements OnInit {
 	@ViewChild('fudisTextArea') textarea: ElementRef<HTMLTextAreaElement>;
 
 	/**

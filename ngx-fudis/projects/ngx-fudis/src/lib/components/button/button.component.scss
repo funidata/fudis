@@ -22,11 +22,15 @@
 		@include focus.fudis-focus-generic;
 	}
 
-	&:disabled {
+	&[aria-disabled="true"] {
 		@include colors.fudis-text-color('gray-dark');
 		@include colors.fudis-bg-color('gray-light');
 		@include borders.fudis-border('2px', 'solid', 'transparent');
 		@include borders.fudis-outline('1px', 'dashed', 'gray-middle');
+
+		&:focus {
+			@include focus.fudis-focus-generic;
+		}
 	}
 
 	&__primary {

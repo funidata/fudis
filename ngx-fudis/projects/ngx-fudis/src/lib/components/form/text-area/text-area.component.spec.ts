@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FudisCheckboxComponent } from './fudis-checkbox.component';
+import { TextAreaComponent } from './text-area.component';
 
-describe('FudisCheckboxComponent', () => {
-	let component: FudisCheckboxComponent;
-	let fixture: ComponentFixture<FudisCheckboxComponent>;
+describe('TextAreaComponent', () => {
+	let component: TextAreaComponent;
+	let fixture: ComponentFixture<TextAreaComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [FudisCheckboxComponent],
+			declarations: [TextAreaComponent],
 		}).compileComponents();
 	});
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(FudisCheckboxComponent);
+		fixture = TestBed.createComponent(TextAreaComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});

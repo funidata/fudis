@@ -9,19 +9,29 @@ import { Component } from '@angular/core';
 		</div>
 		<form class="basic-flex-box">
 			<h2>Text input ja checbox</h2>
-			<fudis-vanilla-text-input [required]="true" label="Vanilla text input"></fudis-vanilla-text-input>
-			<fudis-native-checkbox data-theme="sisu" label="Checkboxin label" [required]="true"></fudis-native-checkbox>
-			<fudis-vanilla-text-input label="Vanilla text input 2"></fudis-vanilla-text-input>
+			<fudis-text-input [required]="true" label="Fudis text input"></fudis-text-input>
+			<fudis-checkbox data-theme="sisu" label="Checkboxin label" [required]="true"></fudis-checkbox>
+			<fudis-text-input label="Fudis text input 2"></fudis-text-input>
 		</form>
 		<form class="basic-flex-box">
 			<h2>Textarea ja button</h2>
-			<fudis-vanilla-text-area
-				label="Pakollinen vanilla textarea, tällä on myös aika pitkä label"
+			<fudis-text-area
+				label="Pakollinen textarea, tällä on myös aika pitkä label"
 				[maxLength]="20"
 				helpText="Voit kirjoittaa tähän monia kivoja juttuja, mutta max 20 kirjainta"
 				[required]="true">
-			</fudis-vanilla-text-area>
-			<fudis-vanilla-text-area label="Vanilla textarea, basic" size="m"> </fudis-vanilla-text-area>
+			</fudis-text-area>
+			<fudis-text-area label="Fudis textarea, basic" size="m"> </fudis-text-area>
+			<fudis-grid columns="1fr 1fr">
+				<fudis-button data-theme="sisu" type="submit" label="Lähetä"></fudis-button>
+				<fudis-button data-theme="sisu" label="Eiku" variant="secondary"></fudis-button>
+				<fudis-button data-theme="sisu" label="Poista" variant="tertiary">
+					<fudis-icon icon="delete"></fudis-icon>
+				</fudis-button>
+				<fudis-button data-theme="sisu" label="Poista" [disabled]="true">
+					<fudis-icon icon="delete"></fudis-icon>
+				</fudis-button>
+			</fudis-grid>
 		</form>
 		<form class="basic-flex-box">
 			<h2>Dropdown</h2>
@@ -35,11 +45,7 @@ import { Component } from '@angular/core';
 			<fudis-icon icon="chevron" rotate="cw-90"></fudis-icon>
 			<fudis-icon icon="achievement" color="success"></fudis-icon>
 		</div>
-		<fudis-radio-button-group label="Otsikko"></fudis-radio-button-group>
-		<!-- <form (FormGroup)="(frm)">
-			<fudis-radio-button id="muu" name="hedelmä" [value]="value" [control]="getRadioOptions()"></fudis-radio-button>
-			<fudis-radio-button id="maa" name="hedelmä" [value]="value" [control]="getRadioOptions()"></fudis-radio-button>
-		</form> -->
+
 		<!-- <div class="basic-flex-box2">
 			<fudis-badge variant="accent" content="accent"></fudis-badge>
 			<fudis-badge variant="danger">danger</fudis-badge>

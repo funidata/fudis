@@ -1,60 +1,50 @@
-import { Component, Input, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { MatCheckboxChange } from '@angular/material/checkbox';
+import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
 
-export interface Checkbox {
-	name: string;
-	id: string;
-	checked: boolean;
-	value: string;
-}
 @Component({
 	selector: 'fudis-checkbox',
 	templateUrl: './checkbox.component.html',
 	styleUrls: ['./checkbox.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class CheckboxComponent {
-	@ViewChild('fudisCheckbox') input: ElementRef<HTMLInputElement>;
+export class CheckboxComponent implements OnInit {
+	@Input() disabled?: boolean = false;
 
-	@Input() name = 'check';
+	@Input() label: string;
 
-	@Input() id: string;
-
-	color: 'primary' | 'warn' = 'primary';
-
-	disableRipple = true;
-
-	checked: boolean = false;
-
-	showError: boolean = false;
-
-	control = new FormControl('', Validators.required);
-
-	/**
-	 * Checbok modifiers
-	 */
-	@Input() classes: string;
-
-	@Input() disabled = false;
+	@Input() name: string;
 
 	@Input() required: boolean;
 
-	toggleChecked(event: MatCheckboxChange): void {
-		if (event.checked) {
-			this.checked = true;
-			this.color = 'primary';
-		} else {
-			this.checked = false;
+	@Input() checked?: boolean = false;
+
+	showError: boolean = false;
+
+	id: string;
+
+	disabledInput: string;
+
+	invalid: string;
+
+	ngOnInit(): void {
+		if (this.disabled) {
+			this.disabledInput = 'disabled';
 		}
+	}
+
+	toggle() {
+		if (this.disabled) {
+			return;
+		}
+		this.checked = !this.checked;
+		this.checkErrors();
 	}
 
 	checkErrors(): void {
 		if (this.required && !this.checked) {
-			this.color = 'warn';
+			this.invalid = 'invalid';
 			this.showError = true;
 		} else {
-			this.color = 'primary';
+			this.invalid = '';
 			this.showError = false;
 		}
 	}
