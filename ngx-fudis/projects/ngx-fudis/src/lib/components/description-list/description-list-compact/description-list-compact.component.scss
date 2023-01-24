@@ -1,0 +1,37 @@
+@use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/colors/tokens.scss' as color;
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+
+.fudis-description-list-compact {
+	columns: 2 (spacing.$fudis-spacing-xxl * 6);
+
+	&__key {
+		@include typography.fudis-description-list-compact-key-typography;
+		@include colorMixins.fudis-text-color('gray-dark');
+
+		display: inline-block;
+		position: relative;
+		padding-left: spacing.$fudis-spacing-xs;
+
+		&::before {
+			display: inline-block;
+			position: absolute;
+			top: spacing.$fudis-pixel-2;
+			left: 0;
+			background: color.$fudis-gray-light;
+			width: spacing.$fudis-pixel-1;
+			height: 80%;
+			content: "";
+		}
+	}
+
+	&__value {
+		@include typography.fudis-description-list-compact-value-typography;
+		@include colorMixins.fudis-text-color('gray-dark');
+
+		display: inline;
+		margin-left: 0;
+		padding-left: spacing.$fudis-spacing-xxs;
+	}
+}
