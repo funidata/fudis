@@ -196,5 +196,8 @@
 			}
 		}
 	},
-	"defaultProject": "ngx-fudis"
+  "defaultProject": "ngx-fudis",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -53,8 +53,14 @@ describe('DescriptionListComponent', () => {
 	}
 
 	describe('Parent CSS class', () => {
-		it('should always have fudis-description-list class', () => {
+		it('should have fudis-description-list class if regular list', () => {
 			assertDescriptionListHasClasses('fudis-description-list');
+		});
+
+		it('should have fudis-description-list-compact class if compact list', () => {
+			component.variant = 'compact';
+			fixture.detectChanges();
+			assertDescriptionListHasClasses('fudis-description-list-compact');
 		});
 	});
 
@@ -67,9 +73,16 @@ describe('DescriptionListComponent', () => {
 			expect(childDd).toBeTruthy();
 		});
 
-		it('should have respecitve CSS classes', () => {
+		it('should have respective CSS classes in regular list', () => {
 			assertDtHasClasses('fudis-description-list__item__key');
 			assertDdHasClasses('fudis-description-list__item__value');
+		});
+
+		it('should have respective CSS classes in compact list', () => {
+			component.variant = 'compact';
+			fixture.detectChanges();
+			assertDtHasClasses('fudis-description-list-compact__item__key');
+			assertDdHasClasses('fudis-description-list-compact__item__value');
 		});
 	});
 });

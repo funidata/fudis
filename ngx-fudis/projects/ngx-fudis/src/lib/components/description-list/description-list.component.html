@@ -1,11 +1,25 @@
-<dl class="fudis-description-list">
-	<div *ngFor="let item of data" class="fudis-description-list__item">
-		<dt class="fudis-description-list__item__key">
-			{{ item.key }}
-		</dt>
-		<dd class="fudis-description-list__item__value">
-			<p *ngIf="item.subHeading" class="fudis-description-list__item__sub-heading">{{ item.subHeading }}</p>
-			{{ item.value }}
-		</dd>
-	</div>
-</dl>
+<ng-container *ngIf="variant === 'regular'">
+	<dl class="fudis-description-list">
+		<div *ngFor="let item of data" class="fudis-description-list__item">
+			<dt class="fudis-description-list__item__key">
+				{{ item.key }}
+			</dt>
+			<dd class="fudis-description-list__item__value">
+				<p *ngIf="item.subHeading" class="fudis-description-list__item__sub-heading">{{ item.subHeading }}</p>
+				{{ item.value }}
+			</dd>
+		</div>
+	</dl>
+</ng-container>
+
+<ng-container *ngIf="variant === 'compact'">
+	<dl class="fudis-description-list-compact">
+		<div *ngFor="let item of data" class="fudis-description-list-compact__item">
+			<dt class="fudis-description-list-compact__item__key">{{ item.key }}:</dt>
+			<dd *ngIf="item.subHeading" class="fudis-description-list-compact__item__value">
+				{{ item.subHeading }} ({{ item.value }})
+			</dd>
+			<dd *ngIf="!item.subHeading" class="fudis-description-list-compact__item__value">{{ item.value }}</dd>
+		</div>
+	</dl>
+</ng-container>
