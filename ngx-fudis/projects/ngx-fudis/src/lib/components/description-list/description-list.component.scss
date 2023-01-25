@@ -44,7 +44,7 @@
 }
 
 .fudis-description-list-compact {
-	columns: 2 (spacing.$fudis-spacing-xxl * 6);
+	columns: 1;
 
 	&__item {
 		&__key {
@@ -75,5 +75,9 @@
 			margin-left: 0;
 			padding-left: spacing.$fudis-spacing-xxs;
 		}
+	}
+
+	@include breakpoint.fudis-breakpoint('s') {
+		columns: 2;
 	}
 }

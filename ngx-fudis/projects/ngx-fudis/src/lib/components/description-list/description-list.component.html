@@ -1,6 +1,6 @@
 <ng-container *ngIf="variant === 'regular'">
-	<dl class="fudis-description-list">
-		<div *ngFor="let item of data" class="fudis-description-list__item">
+	<dl class="fudis-description-list" role="list">
+		<div *ngFor="let item of data" class="fudis-description-list__item" role="listitem">
 			<dt class="fudis-description-list__item__key">
 				{{ item.key }}
 			</dt>
