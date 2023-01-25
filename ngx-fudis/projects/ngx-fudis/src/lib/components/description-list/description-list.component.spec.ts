@@ -68,8 +68,8 @@ describe('DescriptionListComponent', () => {
 		});
 
 		it('should have respecitve CSS classes', () => {
-			assertDtHasClasses('fudis-description-list__key');
-			assertDdHasClasses('fudis-description-list__value');
+			assertDtHasClasses('fudis-description-list__item__key');
+			assertDdHasClasses('fudis-description-list__item__value');
 		});
 	});
 });

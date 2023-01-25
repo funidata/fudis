@@ -68,8 +68,8 @@ describe('DescriptionListCompactComponent', () => {
 		});
 
 		it('should have respecitve CSS classes', () => {
-			assertDtHasClasses('fudis-description-list-compact__key');
-			assertDdHasClasses('fudis-description-list-compact__value');
+			assertDtHasClasses('fudis-description-list-compact__item__key');
+			assertDdHasClasses('fudis-description-list-compact__item__value');
 		});
 	});
 });
