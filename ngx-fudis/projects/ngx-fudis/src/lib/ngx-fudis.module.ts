@@ -17,7 +17,6 @@ import { BodyTextComponent } from './components/typography/body-text/body-text.c
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/form/checkbox/checkbox.component';
 import { DescriptionListComponent } from './components/description-list/description-list.component';
-import { DescriptionListCompactComponent } from './components/description-list/description-list-compact/description-list-compact.component';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
@@ -49,7 +48,6 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		CheckboxComponent,
 		GridComponent,
 		DescriptionListComponent,
-		DescriptionListCompactComponent,
 		DropdownComponent,
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
@@ -93,7 +91,6 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		BodyTextComponent,
 		CheckboxComponent,
 		DescriptionListComponent,
-		DescriptionListCompactComponent,
 		DropdownComponent,
 		// ErrorSummaryComponent,
 		GridComponent,

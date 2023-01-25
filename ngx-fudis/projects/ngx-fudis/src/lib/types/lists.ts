@@ -3,8 +3,3 @@ export interface DescriptionListItem {
 	subHeading?: string;
 	value: string;
 }
-
-export interface DescriptionListCompactItem {
-	key: string;
-	value: string;
-}

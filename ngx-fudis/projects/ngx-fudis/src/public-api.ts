@@ -11,7 +11,6 @@ export { BodyTextComponent } from './lib/components/typography/body-text/body-te
 export { ButtonComponent } from './lib/components/button/button.component';
 export { CheckboxComponent } from './lib/components/form/checkbox/checkbox.component';
 export { DescriptionListComponent } from './lib/components/description-list/description-list.component';
-export { DescriptionListCompactComponent } from './lib/components/description-list/description-list-compact/description-list-compact.component';
 export { DropdownComponent } from './lib/components/form/dropdown/dropdown.component';
 // export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';
 export { GridComponent } from './lib/components/grid/grid.component';
