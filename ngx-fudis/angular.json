@@ -1,200 +1,228 @@
 {
-	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-	"version": 1,
-	"newProjectRoot": "projects",
-	"projects": {
-		"storybook": {
-			"projectType": "application",
-			"root": ".storybook",
-			"sourceRoot": ".storybook",
-			"architect": {
-				"build": {
-					"builder": "@storybook/angular:build-storybook",
-					"options": {
-						"outputDir": ".storybook/target/storybook-static",
-						"tsConfig": ".storybook/tsconfig.json",
-						"styles": ["projects/ngx-fudis/style.scss"],
-						"compodoc": true,
-						"compodocArgs": ["-p", "./tsconfig.json", "-e", "json", "-d", "./"]
-					}
-				},
-				"start": {
-					"builder": "@storybook/angular:start-storybook",
-					"options": {
-						"tsConfig": ".storybook/tsconfig.json",
-						"styles": ["projects/ngx-fudis/style.scss"],
-						"port": 6006,
-						"compodoc": true,
-						"compodocArgs": ["-p", "./tsconfig.json", "-e", "json", "-d", "./"]
-					}
-				}
-			}
-		},
-		"ngx-fudis": {
-			"projectType": "library",
-			"root": "projects/ngx-fudis",
-			"sourceRoot": "projects/ngx-fudis/src",
-			"prefix": "lib",
-			"architect": {
-				"build": {
-					"builder": "@angular-devkit/build-angular:ng-packagr",
-					"options": {
-						"project": "projects/ngx-fudis/ng-package.json"
-					},
-					"configurations": {
-						"production": {
-							"tsConfig": "projects/ngx-fudis/tsconfig.lib.prod.json"
-						},
-						"development": {
-							"tsConfig": "projects/ngx-fudis/tsconfig.lib.json"
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
-					"options": {
-						"main": "projects/ngx-fudis/src/test.ts",
-						"tsConfig": "projects/ngx-fudis/tsconfig.spec.json",
-						"karmaConfig": "projects/ngx-fudis/karma.conf.js"
-					}
-				},
-				"lint": {
-					"builder": "@angular-eslint/builder:lint",
-					"options": {
-						"lintFilePatterns": ["projects/ngx-fudis/**/*.ts", "projects/ngx-fudis/**/*.html"]
-					}
-				}
-			}
-		},
-		"dev": {
-			"projectType": "application",
-			"schematics": {
-				"@schematics/angular:component": {
-					"inlineTemplate": true,
-					"inlineStyle": true,
-					"skipTests": true,
-					"style": "scss"
-				},
-				"@schematics/angular:class": {
-					"skipTests": true
-				},
-				"@schematics/angular:directive": {
-					"skipTests": true
-				},
-				"@schematics/angular:guard": {
-					"skipTests": true
-				},
-				"@schematics/angular:interceptor": {
-					"skipTests": true
-				},
-				"@schematics/angular:pipe": {
-					"skipTests": true
-				},
-				"@schematics/angular:resolver": {
-					"skipTests": true
-				},
-				"@schematics/angular:service": {
-					"skipTests": true
-				},
-				"@schematics/angular:application": {
-					"strict": true
-				}
-			},
-			"root": "projects/dev",
-			"sourceRoot": "projects/dev/src",
-			"prefix": "app",
-			"architect": {
-				"build": {
-					"builder": "@angular-devkit/build-angular:browser",
-					"options": {
-						"outputPath": "dist/dev",
-						"index": "projects/dev/src/index.html",
-						"main": "projects/dev/src/main.ts",
-						"polyfills": "projects/dev/src/polyfills.ts",
-						"tsConfig": "projects/dev/tsconfig.app.json",
-						"assets": [
-							"projects/dev/src/favicon.ico",
-							{
-								"glob": "*.svg",
-								"input": "../ngx-fudis/projects/ngx-fudis/src/lib/assets/icons",
-								"output": "./"
-							},
-							{
-								"glob": "*.woff2",
-								"input": "../ngx-fudis/projects/ngx-fudis/src/lib/assets/fonts",
-								"output": "./"
-							}
-						],
-						"styles": ["projects/dev/src/styles.scss"],
-						"scripts": []
-					},
-					"configurations": {
-						"production": {
-							"assets": [
-								{
-										"glob": "*.svg",
-										"input": "../ngx-fudis/projects/ngx-fudis/src/lib/assets/icons",
-										"output": "./"
-								}
-							],
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kb",
-									"maximumError": "1mb"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "2kb",
-									"maximumError": "4kb"
-								}
-							],
-							"fileReplacements": [
-								{
-									"replace": "projects/dev/src/environments/environment.ts",
-									"with": "projects/dev/src/environments/environment.prod.ts"
-								}
-							],
-							"outputHashing": "all"
-						},
-						"development": {
-							"buildOptimizer": false,
-							"optimization": false,
-							"vendorChunk": true,
-							"extractLicenses": false,
-							"sourceMap": true,
-							"namedChunks": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve": {
-					"builder": "@angular-devkit/build-angular:dev-server",
-					"configurations": {
-						"production": {
-							"browserTarget": "dev:build:production"
-						},
-						"development": {
-							"browserTarget": "dev:build:development"
-						}
-					},
-					"defaultConfiguration": "development"
-				},
-				"extract-i18n": {
-					"builder": "@angular-devkit/build-angular:extract-i18n",
-					"options": {
-						"browserTarget": "dev:build"
-					}
-				},
-				"lint": {
-					"builder": "@angular-eslint/builder:lint",
-					"options": {
-						"lintFilePatterns": ["projects/dev/**/*.ts", "projects/dev/**/*.html"]
-					}
-				}
-			}
-		}
-	},
-	"defaultProject": "ngx-fudis"
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "storybook": {
+      "projectType": "application",
+      "root": ".storybook",
+      "sourceRoot": ".storybook",
+      "architect": {
+        "build": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "outputDir": ".storybook/target/storybook-static",
+            "tsConfig": ".storybook/tsconfig.json",
+            "styles": [
+              "projects/ngx-fudis/style.scss"
+            ],
+            "compodoc": true,
+            "compodocArgs": [
+              "-p",
+              "./tsconfig.json",
+              "-e",
+              "json",
+              "-d",
+              "./"
+            ]
+          }
+        },
+        "start": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "tsConfig": ".storybook/tsconfig.json",
+            "styles": [
+              "projects/ngx-fudis/style.scss"
+            ],
+            "port": 6006,
+            "compodoc": true,
+            "compodocArgs": [
+              "-p",
+              "./tsconfig.json",
+              "-e",
+              "json",
+              "-d",
+              "./"
+            ]
+          }
+        }
+      }
+    },
+    "ngx-fudis": {
+      "projectType": "library",
+      "root": "projects/ngx-fudis",
+      "sourceRoot": "projects/ngx-fudis/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-fudis/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-fudis/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-fudis/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-fudis/src/test.ts",
+            "tsConfig": "projects/ngx-fudis/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-fudis/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-fudis/**/*.ts",
+              "projects/ngx-fudis/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "dev": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineTemplate": true,
+          "inlineStyle": true,
+          "skipTests": true,
+          "style": "scss"
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/dev",
+      "sourceRoot": "projects/dev/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/dev",
+            "index": "projects/dev/src/index.html",
+            "main": "projects/dev/src/main.ts",
+            "polyfills": "projects/dev/src/polyfills.ts",
+            "tsConfig": "projects/dev/tsconfig.app.json",
+            "assets": [
+              "projects/dev/src/favicon.ico",
+              {
+                "glob": "*.svg",
+                "input": "../ngx-fudis/projects/ngx-fudis/src/lib/assets/icons",
+                "output": "./"
+              },
+              {
+                "glob": "*.woff2",
+                "input": "../ngx-fudis/projects/ngx-fudis/src/lib/assets/fonts",
+                "output": "./"
+              }
+            ],
+            "styles": [
+              "projects/dev/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "assets": [
+                {
+                  "glob": "*.svg",
+                  "input": "../ngx-fudis/projects/ngx-fudis/src/lib/assets/icons",
+                  "output": "./"
+                }
+              ],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/dev/src/environments/environment.ts",
+                  "with": "projects/dev/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "dev:build:production"
+            },
+            "development": {
+              "browserTarget": "dev:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "dev:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/dev/**/*.ts",
+              "projects/dev/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
 }

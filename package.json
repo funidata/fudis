@@ -7,6 +7,9 @@
 		"doc": "docs"
 	},
 	"scripts": {
+		"dev": "cd ngx-fudis && ng build ngx-fudis --watch",
+		"storybook": "cd ngx-fudis && npm run storybook",
+		"sandbox": "cd ngx-fudis && ng serve",
 		"test": "cd ngx-fudis && npm run test",
 		"prepare": "husky install",
 		"lint": "cd ngx-fudis && npm run lint",

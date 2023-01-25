@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 
 export interface Option {
 	/** Underlying value of the option */
@@ -51,7 +51,7 @@ export class DropdownComponent implements OnInit {
 
 	validatorArray: any = [];
 
-	selectFormControl = new FormControl('', this.validatorArray);
+	selectFormControl = new UntypedFormControl('', this.validatorArray);
 
 	ngOnInit(): void {
 		if (this.required) {
