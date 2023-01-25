@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 
 @Component({
 	selector: 'fudis-text-area',
@@ -30,7 +30,7 @@ export class TextAreaComponent implements OnInit {
 
 	validatorArray: Array<any> = [];
 
-	textAreaControl = new FormControl('', this.validatorArray);
+	textAreaControl = new UntypedFormControl('', this.validatorArray);
 
 	defaultError: string;
 
