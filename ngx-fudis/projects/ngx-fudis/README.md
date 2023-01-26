@@ -4,11 +4,11 @@ Fudis is a design system implemented as an Angular component library. Created by
 
 ## Usage
 
-Fudis can be used with Angular 13.3 and newer.
+Fudis can be used with Angular 14 and newer.
 
 ### Installation
 
-Install Angular Material peer dependency:
+First install Angular Material peer dependency:
 
 ```bash
 ng add @angular/material
