@@ -19,7 +19,7 @@ Choose these options when prompted:
 ```
 ? Choose a prebuilt theme name, or "custom" for a custom theme: Custom
 ? Set up global Angular Material typography styles? No
-? Set up browser animations for Angular Material? Yes
+? Include the Angular animations module? Include and enable animations
 ```
 
 Then install Fudis:
@@ -29,6 +29,8 @@ ng add @funidata/ngx-fudis
 ```
 
 ### Import Core Styles
+
+> NOTE: If you used `ng add` to install `@angular/material`, this step should already be done for you by the library installation scripts.
 
 The core styles from Angular Material must be imported in your application for the components to work properly. The easiest way to do this is to have a `styles.scss` file in project root with the following content:
 
