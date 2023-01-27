@@ -1,6 +1,6 @@
 {
 	"name": "@funidata/ngx-fudis",
-	"version": "0.0.16",
+	"version": "0.0.17",
 	"schematics": "./schematics/collection.json",
 	"ng-add": {
 		"save": "dependencies"
@@ -15,8 +15,8 @@
 		}
 	},
 	"peerDependencies": {
-		"@angular/common": "^13.3.0",
-		"@angular/core": "^13.3.0"
+		"@angular/common": "^14.2.12",
+		"@angular/core": "^14.2.12"
 	},
 	"devDependencies": {
 		"copyfiles": "^2.4.1",
