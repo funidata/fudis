@@ -1,4 +1,5 @@
-import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, Input, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
+import { UntypedFormControl, Validators } from '@angular/forms';
 
 @Component({
 	selector: 'fudis-checkbox',
@@ -6,46 +7,53 @@ import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
 	styleUrls: ['./checkbox.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class CheckboxComponent implements OnInit {
-	@Input() disabled?: boolean = false;
+export class CheckboxComponent {
+	@ViewChild('checkboxRef') input: ElementRef;
 
+	/*
+	 * FormControl for checkbox
+	 */
+	@Input() checkboxControl: UntypedFormControl;
+
+	/*
+	 * Id for checkbox
+	 */
+	@Input() id: string;
+
+	/*
+	 * FormControl for checkbox
+	 */
 	@Input() label: string;
 
+	/*
+	 * Name for checkbox
+	 */
 	@Input() name: string;
 
-	@Input() required: boolean;
+	/*
+	 * If checkbox is disabled
+	 */
+	@Input() disabled: boolean;
 
-	@Input() checked?: boolean = false;
+	/*
+	 * FormControl for checkbox
+	 */
+	@Input() errorMessage: string;
 
-	showError: boolean = false;
+	required: string | boolean = false;
 
-	id: string;
+	requiredValidator = Validators.requiredTrue;
 
-	disabledInput: string;
+	formControlIsInvalid: boolean;
 
-	invalid: string;
-
-	ngOnInit(): void {
-		if (this.disabled) {
-			this.disabledInput = 'disabled';
+	handleCheckboxClick(): void {
+		this.input.nativeElement.focus();
+		if (!this.checkboxControl.disabled) {
+			this.checkboxControl.patchValue(!this.checkboxControl.value);
 		}
 	}
 
-	toggle() {
-		if (this.disabled) {
-			return;
-		}
-		this.checked = !this.checked;
-		this.checkErrors();
-	}
-
-	checkErrors(): void {
-		if (this.required && !this.checked) {
-			this.invalid = 'invalid';
-			this.showError = true;
-		} else {
-			this.invalid = '';
-			this.showError = false;
-		}
+	setInputTouched(): void {
+		this.checkboxControl.markAsTouched();
 	}
 }

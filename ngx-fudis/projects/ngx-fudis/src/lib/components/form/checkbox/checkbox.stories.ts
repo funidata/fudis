@@ -1,18 +1,27 @@
-import { Story, Meta } from '@storybook/angular/types-6-0';
+import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { CheckboxComponentExample } from 'projects/ngx-fudis/src/examples/form/checkbox-example/checkbox-example.component';
 import { CheckboxComponent } from './checkbox.component';
+import { ErrorMessageComponent } from '../error-message/error-message.component';
+import { ButtonComponent } from '../../button/button.component';
 
 export default {
 	title: 'Components/Form/Checkbox',
 	component: CheckboxComponent,
+	subcomponents: {
+		ErrorMessageComponent,
+	},
+	decorators: [
+		moduleMetadata({
+			declarations: [CheckboxComponent, CheckboxComponentExample, ErrorMessageComponent, ButtonComponent],
+			imports: [ReactiveFormsModule, BrowserModule, FormsModule],
+		}),
+	],
 } as Meta;
 
-const Template: Story<CheckboxComponent> = (args: CheckboxComponent) => ({
-	props: args,
+export const Checkbox: Story = () => ({
+	template: `
+			<example-checkbox></example-checkbox>
+	`,
 });
-
-export const Checkbox = Template.bind({});
-Checkbox.args = {
-	disabled: false,
-	required: true,
-	label: 'Jeejee olen natiivi checkbox',
-};

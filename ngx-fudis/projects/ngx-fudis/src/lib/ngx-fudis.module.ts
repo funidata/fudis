@@ -16,6 +16,7 @@ import { BadgeComponent } from './components/badge/badge.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/form/checkbox/checkbox.component';
+import { CheckboxComponentExample } from '../examples/form/checkbox-example/checkbox-example.component';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
@@ -45,6 +46,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		ButtonComponent,
 		BodyTextComponent,
 		CheckboxComponent,
+		CheckboxComponentExample,
 		GridComponent,
 		DropdownComponent,
 		ErrorMessageComponent,
