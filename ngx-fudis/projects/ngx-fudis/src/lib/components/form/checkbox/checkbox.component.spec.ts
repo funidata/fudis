@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { UntypedFormControl } from '@angular/forms';
 import { CheckboxComponent } from './checkbox.component';
+
+const uncheckedCheckbox: UntypedFormControl = new UntypedFormControl('false');
 
 describe('CheckboxComponent', () => {
 	let component: CheckboxComponent;
@@ -15,6 +17,10 @@ describe('CheckboxComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(CheckboxComponent);
 		component = fixture.componentInstance;
+		component.checkboxControl = uncheckedCheckbox;
+		component.errorMessage = 'Error message to appear!';
+		component.label = 'Please check me.';
+
 		fixture.detectChanges();
 	});
 
