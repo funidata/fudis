@@ -11,7 +11,6 @@ const getDefaultValue = (options: RadioButtonOption[]): string | undefined => {
 @Component({
 	selector: 'example-radio-button-group',
 	templateUrl: './radio-button-group-example.component.html',
-	styleUrls: ['./radio-button-group-example.component.scss'],
 })
 
 // eslint-disable-next-line @angular-eslint/component-class-suffix
