@@ -1,5 +1,5 @@
 <div class="fudis-checkbox">
-	<label class="fudis-checkbox__label" [attr.for]="id" (click)="handleCheckboxClick()">
+	<label class="fudis-checkbox__label" [attr.for]="id" (click)="handleCheckboxClick($event)">
 		<div
 			class="fudis-checkbox__box"
 			[ngClass]="{
@@ -7,10 +7,8 @@
 				'fudis-checkbox__box--disabled': disabled
 			}">
 			<input
-				[formControl]="checkboxControl"
-				(click)="$event.preventDefault()"
-				(blur)="setInputTouched()"
 				#checkboxRef
+				[formControl]="checkboxControl"
 				[attr.aria-describedby]="'guidance_' + id"
 				[attr.aria-label]="label"
 				type="checkbox"
@@ -18,10 +16,7 @@
 				[attr.name]="name"
 				[id]="id"
 				class="fudis-checkbox__input"
-				[disabled]="false"
-				[attr.aria-disabled]="checkboxControl.disabled"
-				[attr.checked]="checkboxControl.value"
-				[required]="checkboxControl.hasValidator(requiredValidator)" />
+				[attr.aria-disabled]="checkboxControl.disabled" />
 			<svg
 				*ngIf="checkboxControl.value"
 				width="16"

@@ -46,11 +46,21 @@ export class CheckboxComponent {
 
 	formControlIsInvalid: boolean;
 
-	handleCheckboxClick(): void {
+	// ngAfterViewChecked(): void {
+	// 	(this.input.nativeElement as HTMLInputElement).removeAttribute('disabled');
+	// }
+
+	handleCheckboxClick(event: any): void {
+		// if ((this.input.nativeElement as HTMLInputElement).getAttribute('aria-disabled') === 'true') {
+		// 	event.preventDefault();
+		// }
+
+		console.log(event);
+
 		this.input.nativeElement.focus();
-		if (!this.checkboxControl.disabled) {
-			this.checkboxControl.patchValue(!this.checkboxControl.value);
-		}
+		// if (!this.checkboxControl.disabled) {
+		// 	this.checkboxControl.patchValue(!this.checkboxControl.value);
+		// }
 	}
 
 	setInputTouched(): void {

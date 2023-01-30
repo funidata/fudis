@@ -5,7 +5,7 @@ import { CheckboxComponentExample } from 'projects/ngx-fudis/src/examples/form/c
 import { CheckboxComponent } from './checkbox.component';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { ButtonComponent } from '../../button/button.component';
-import { BodyText } from '../../typography/body-text/body-text.stories';
+import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 
 export default {
 	title: 'Components/Form/Checkbox',
@@ -15,7 +15,13 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			declarations: [CheckboxComponent, CheckboxComponentExample, ErrorMessageComponent, ButtonComponent, BodyText],
+			declarations: [
+				CheckboxComponent,
+				CheckboxComponentExample,
+				ErrorMessageComponent,
+				ButtonComponent,
+				BodyTextComponent,
+			],
 			imports: [ReactiveFormsModule, BrowserModule, FormsModule],
 		}),
 	],
