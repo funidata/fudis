@@ -1,7 +1,7 @@
 import { Story, Meta, moduleMetadata } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { RadioButtonGroupComponentExample } from 'projects/ngx-fudis/src/examples/form/radio-button-group-example/radio-button-group-example.component';
+import { RadioButtonGroupComponentExample } from '../../../../../examples/form/radio-button-group-example/radio-button-group-example.component';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
