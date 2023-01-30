@@ -1,7 +1,7 @@
 import { Story, Meta, moduleMetadata } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { CheckboxComponentExample } from 'projects/ngx-fudis/src/examples/form/checkbox-example/checkbox-example.component';
+import { CheckboxComponentExample } from '../../../../../examples/form/checkbox-example/checkbox-example.component';
 import { CheckboxComponent } from './checkbox.component';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { ButtonComponent } from '../../button/button.component';

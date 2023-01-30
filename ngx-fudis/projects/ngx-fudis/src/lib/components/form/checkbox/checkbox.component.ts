@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ViewEncapsulation, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { UntypedFormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -7,7 +7,7 @@ import { UntypedFormControl, Validators } from '@angular/forms';
 	styleUrls: ['./checkbox.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class CheckboxComponent {
+export class CheckboxComponent implements AfterViewChecked {
 	@ViewChild('checkboxRef') input: ElementRef;
 
 	/*
@@ -46,9 +46,11 @@ export class CheckboxComponent {
 
 	formControlIsInvalid: boolean;
 
-	// ngAfterViewChecked(): void {
-	// 	(this.input.nativeElement as HTMLInputElement).removeAttribute('disabled');
-	// }
+	ngAfterViewChecked(): void {
+		if (this.checkboxControl.disabled) {
+			(this.input.nativeElement as HTMLInputElement).removeAttribute('disabled');
+		}
+	}
 
 	handleCheckboxClick(event: any): void {
 		// if ((this.input.nativeElement as HTMLInputElement).getAttribute('aria-disabled') === 'true') {
