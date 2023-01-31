@@ -3,7 +3,6 @@
 @use '../spacing/tokens.scss' as spacing;
 @use './tokens.scss' as borderTokens;
 
-
 // Generates border, i. e.:
 // border: 2px solid $primary-dark;
 @mixin fudis-border($width, $style, $color) {
@@ -30,7 +29,6 @@
 		@error 'Unknown fudis-border parameter. Please check foundations/borders/mixins.scss for accepted arguments.';
 	}
 }
-
 
 @mixin fudis-border-radius($width) {
 	@if map_has_key(spacing.$fudis-pixel-tokens, $width) {

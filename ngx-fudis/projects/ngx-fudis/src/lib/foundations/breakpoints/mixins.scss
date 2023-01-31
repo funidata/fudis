@@ -15,7 +15,6 @@
 	}
 }
 
-
 @mixin fudis-breakpoint-max($breakpoint) {
 	@if map_has_key(tokens.$fudis-breakpoints, $breakpoint) and $breakpoint != 'xs' {
 		

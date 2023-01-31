@@ -6,8 +6,7 @@
 @use '../../../foundations/typography/mixins.scss' as typography;
 
 .fudis-checkbox {
-	display: inline-block;
-	padding-top: spacing.$fudis-spacing-xs;
+	display: block;
 	width: auto;
 
 	&__box {
@@ -22,7 +21,7 @@
 
 		:focus {
 			@include focus.fudis-focus-checkbox;
-		}
+		} 
 
 		&--disabled {
 			@include borders.fudis-border('1px', 'dashed', 'gray-middle');	
@@ -36,7 +35,6 @@
 			
 			box-shadow: 0 0 0 spacing.$fudis-pixel-3 colors.$fudis-red-light;
 		}
-
 	}
 
 	&__input {
@@ -52,7 +50,6 @@
 		fill: colors.$fudis-gray-middle;
 	}
 
-
 	&__label {
 		@include typography.fudis-body-m-regular;
 		@include colorMixins.fudis-text-color('gray-dark');
@@ -60,7 +57,6 @@
 		display: flex;
 		align-items: center;
 		margin-bottom: 0;
-		padding-bottom: spacing.$fudis-spacing-xs;
 
 		&__text {
 			position: relative;

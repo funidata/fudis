@@ -20,7 +20,7 @@ describe('RadioButtonComponent', () => {
 		component = fixture.componentInstance;
 		component.label = 'Lonely radio button';
 		component.value = 'lonely';
-		component.radioButtonFormControl = lonelyFormControl;
+		component.control = lonelyFormControl;
 		fixture.detectChanges();
 	});
 

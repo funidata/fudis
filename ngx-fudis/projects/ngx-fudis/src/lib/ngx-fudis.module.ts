@@ -16,6 +16,7 @@ import { BadgeComponent } from './components/badge/badge.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/form/checkbox/checkbox.component';
+import { DescriptionListComponent } from './components/description-list/description-list.component';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
@@ -28,15 +29,13 @@ import { IconComponent } from './components/icon/icon.component';
 import { LegendComponent } from './components/form/legend/legend.component';
 import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
 import { RadioButtonGroupComponent } from './components/form/radio-button-group/radio-button-group.component';
-import { RadioButtonGroupComponentExample } from '../examples/form/radio-button-group-example/radio-button-group-example.component';
 import { TextInputComponent } from './components/form/text-input/text-input.component';
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 
 @NgModule({
 	/*
-	 * Include internal Fudis components in 'declarations' array below.
-	 * These are not exposed outside and can be used in Stories or as an sub-component
+	 * Include both internal and external Fudis components in 'declarations' array below.
 	 */
 	declarations: [
 		ExpandableComponent,
@@ -50,6 +49,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		BodyTextComponent,
 		CheckboxComponent,
 		GridComponent,
+		DescriptionListComponent,
 		DropdownComponent,
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
@@ -58,7 +58,6 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		LegendComponent,
 		RadioButtonComponent,
 		RadioButtonGroupComponent,
-		RadioButtonGroupComponentExample,
 		TextInputComponent,
 		TextSpacingComponent,
 		TextAreaComponent,
@@ -94,6 +93,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		ButtonComponent,
 		BodyTextComponent,
 		CheckboxComponent,
+		DescriptionListComponent,
 		DropdownComponent,
 		// ErrorSummaryComponent,
 		GridComponent,

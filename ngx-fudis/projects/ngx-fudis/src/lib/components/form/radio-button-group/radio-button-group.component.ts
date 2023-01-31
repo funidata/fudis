@@ -11,7 +11,7 @@ export class RadioButtonGroupComponent implements OnInit {
 	/*
 	 * FormControl for Radio Button group
 	 */
-	@Input() radioButtonFormControl: UntypedFormControl;
+	@Input() control: UntypedFormControl;
 
 	/*
 	 * Array of options for group of radio buttons
@@ -60,6 +60,6 @@ export class RadioButtonGroupComponent implements OnInit {
 
 		this.legendId = `${this.id}-legend`;
 
-		this.required = this.radioButtonFormControl.hasValidator(Validators.required);
+		this.required = this.control.hasValidator(Validators.required);
 	}
 }
