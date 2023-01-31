@@ -66,6 +66,7 @@
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "ng-mocks": "^14.6.0",
     "ng-packagr": "^14.2.2",
     "prettier": "2.7.1",
     "stylelint": "^14.16.1",
