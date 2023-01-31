@@ -1,1 +1,3 @@
-<p class="fudis-error-message" aria-live="polite" role="alert">{{ message }}</p>
+<p *ngIf="isVisible" class="fudis-error-message" aria-live="polite" [attr.id]="id ? id : null" role="alert">
+	{{ message }}
+</p>

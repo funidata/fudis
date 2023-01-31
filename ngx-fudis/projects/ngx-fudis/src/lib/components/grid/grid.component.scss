@@ -6,7 +6,6 @@
 @use '../../foundations/grid/tokens.scss' as gridTokens;
 @use '../../foundations/spacing/tokens.scss' as spacingTokens;
 
-
 .fudis-grid {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -16,7 +15,6 @@
 	& > fudis-heading {
 		grid-column: 1/-1;
 	}
-
 
 	&__align {
 		&__left {
@@ -117,7 +115,6 @@
 		}
 	}
 
-
 	/*
 	By default Grid's @Input width is XXL. When viewport gets narrower, it will get corresponding max-widths of each smaller breakpoint from XXL to smallest XS.
 
@@ -149,7 +146,6 @@
 		@include breakpoints.fudis-breakpoint('xxl') {
 			@include grid.fudis-grid-max-width('xxl')
 		}
-
 	}
 	
 	&__xl {

@@ -4,7 +4,6 @@
 @use '../../../foundations/spacing/tokens.scss' as spacing;
 @use '../../../foundations/borders/mixins.scss' as borders;
 
-
 :host {
 		& .fudis-heading[size="xl"] {
 			& + .fudis-body-text p {

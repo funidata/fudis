@@ -24,7 +24,7 @@ describe('RadioButtonGroupComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(RadioButtonGroupComponent);
 		component = fixture.componentInstance;
-		component.radioButtonFormControl = testFormControl;
+		component.control = testFormControl;
 		component.options = petOptions;
 		component.legend = 'Choose a pet';
 		fixture.detectChanges();
