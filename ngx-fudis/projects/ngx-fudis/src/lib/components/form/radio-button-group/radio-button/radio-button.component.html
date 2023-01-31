@@ -6,7 +6,7 @@
 		[id]="id"
 		[attr.name]="name"
 		[name]="name"
-		[formControl]="radioButtonFormControl"
+		[formControl]="control"
 		[attr.required]="required"
 		[attr.disabled]="disabled"
 		[attr.checked]="checked ? true : null"
@@ -15,8 +15,7 @@
 		<div
 			class="fudis-radio-button__content__control"
 			[ngClass]="{
-				'fudis-radio-button__content__control--invalid':
-					this.radioButtonFormControl.touched && !this.radioButtonFormControl.value
+				'fudis-radio-button__content__control--invalid': this.control.touched && !this.control.value
 			}">
 			<span *ngIf="this.checked" class="fudis-radio-button__content__control__indicator"></span>
 		</div>

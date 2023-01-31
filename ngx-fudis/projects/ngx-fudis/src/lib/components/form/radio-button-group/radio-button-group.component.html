@@ -9,7 +9,7 @@
 			[label]="option.label"
 			[required]="required"
 			[checked]="control.value === option.value ? true : false"
-			[radioButtonFormControl]="control"></fudis-radio-button>
+			[control]="control"></fudis-radio-button>
 	</li>
 	<fudis-error-message
 		*ngIf="this.errorMessage && this.control.touched && this.control.invalid"

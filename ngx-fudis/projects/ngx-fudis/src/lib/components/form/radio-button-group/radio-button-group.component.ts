@@ -60,6 +60,6 @@ export class RadioButtonGroupComponent implements OnInit {
 
 		this.legendId = `${this.id}-legend`;
 
-		this.required = this.radioButtonFormControl.hasValidator(Validators.required);
+		this.required = this.control.hasValidator(Validators.required);
 	}
 }
