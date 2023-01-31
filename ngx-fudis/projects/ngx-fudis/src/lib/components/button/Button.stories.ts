@@ -4,6 +4,7 @@ import { moduleMetadata } from '@storybook/angular';
 import { MatButtonModule } from '@angular/material/button';
 import { ButtonComponent } from './button.component';
 import { IconComponent } from '../icon/icon.component';
+import CustomMDXDocumentation from './Custom-MDX-Documentation.mdx';
 
 export default {
 	title: 'Components/Button',
@@ -14,6 +15,11 @@ export default {
 			declarations: [ButtonComponent, IconComponent],
 		}),
 	],
+	parameters: {
+		docs: {
+			page: CustomMDXDocumentation,
+		},
+	},
 	argTypes: {
 		icon: {
 			control: { type: 'text' },
@@ -30,6 +36,13 @@ Button.args = {
 	variant: 'primary',
 	label: 'Button',
 	icon: 'search',
+};
+Button.parameters = {
+	docs: {
+		description: {
+			story: 'Some story **markdown**',
+		},
+	},
 };
 
 export const ExamplesWithIcon: Story = () => ({
