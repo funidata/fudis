@@ -1,7 +1,7 @@
 <div class="fudis-form-element fudis-text-input fudis-text-input__{{ size }}">
 	<label class="fudis-text-input__label" for="{{ id }}">
 		<div #fudisTextInputLabel class="fudis-text-input__label__content">
-			<span class="fudis-text-input__label__text fudis-text-input__label__text__{{ labelHeight }}">{{ label }}</span
+			<span class="fudis-text-input__label__text">{{ label }}</span
 			><span class="fudis-text-input__label__required" *ngIf="required">Pakollinen&nbsp;*</span>
 		</div>
 		<input
@@ -12,21 +12,17 @@
 			#fudisTextInput
 			[type]="type"
 			[attr.required]="required"
-			[formControl]="fudisFormControl"
-			[ngClass]="classes"
+			[formControl]="control"
+			[ngClass]="{ 'fudis-text-input__input--invalid': isTouchedAndInvalid() }"
 			class="fudis-text-input__input"
 			[attr.minlength]="minLength"
 			[attr.maxlength]="maxLength" />
 
 		<div id="guidance_{{ id }}" class="fudis-text-input__guidance">
-			<div
-				aria-live="polite"
-				role="alert"
-				class="fudis-text-input__guidance__error"
-				*ngIf="fudisFormControl.invalid && fudisFormControl.touched">
-				{{ this.defaultError }}
-			</div>
-			<div class="fudis-text-input__guidance__help-text">{{ helpText }}</div>
+			<fudis-error-message
+				*ngIf="control.invalid && control.touched"
+				message="Something is wrong :("></fudis-error-message>
+			<p class="fudis-text-input__guidance__help-text">{{ helpText }}</p>
 		</div>
 	</label>
 </div>

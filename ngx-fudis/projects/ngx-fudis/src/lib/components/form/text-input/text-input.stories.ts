@@ -1,8 +1,50 @@
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+	FormsModule,
+	ReactiveFormsModule,
+	UntypedFormBuilder,
+	UntypedFormControl,
+	UntypedFormGroup,
+	Validators,
+} from '@angular/forms';
+import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TextInputComponent } from './text-input.component';
+import { ErrorMessageComponent } from '../error-message/error-message.component';
+
+@Component({
+	selector: 'example-text-input-with-form-control',
+	template: `
+		<form [formGroup]="mainFormGroup">
+			<fudis-text-input
+				[control]="firstTextInputControl"
+				id="unique-text-input-id-1"
+				label="Minä olen label, se on selvää!"
+				helpText="Mikä minun nimi on? Guidance? Help text?"></fudis-text-input>
+			<fudis-text-input
+				[control]="secondTextInputControl"
+				id="unique-text-input-id-2"
+				label="Second input"></fudis-text-input>
+		</form>
+	`,
+})
+class TextInputWithFormControlExampleComponent {
+	/**
+	 * Options for testing purposes
+	 */
+
+	firstTextInputControl: UntypedFormControl = new UntypedFormControl('', [Validators.required]);
+
+	secondTextInputControl: UntypedFormControl = new UntypedFormControl('');
+
+	mainFormGroup: UntypedFormGroup = this.formBuilder.group({
+		firstTextInputControl: this.firstTextInputControl,
+		secondTextInputControl: this.secondTextInputControl,
+	});
+
+	constructor(private formBuilder: UntypedFormBuilder) {}
+}
 
 export default {
 	title: 'Components/Form/Text Input',
@@ -10,6 +52,7 @@ export default {
 	decorators: [
 		moduleMetadata({
 			imports: [BrowserAnimationsModule, ReactiveFormsModule, FormsModule],
+			declarations: [ErrorMessageComponent, TextInputWithFormControlExampleComponent],
 		}),
 	],
 	argTypes: {},
@@ -29,20 +72,8 @@ TextInput.args = {
 	label: 'This is the label',
 };
 
-export const WithMultipleTextInput: Story = () => ({
+export const TextInputWithFormControl: Story = () => ({
 	template: `
-		<form lang="fi" id="form1" ngNativeValidate style="display:flex; width: 30rem; max-width: 90vw;flex-direction:column; border: 2px solid orangered; align-items: flex-start;"> 
-			<fudis-text-input required label="Password, min length 4, max 6" minLength=4 maxLength=6 type="password" helpText="Help text Nipperkin"></fudis-text-input>	
-			<fudis-text-input required  label="Label Email, pakollinen" type="email" helpText="Lorem ipsum"></fudis-text-input>	
-			<fudis-text-input  label="Email, ei-pakollinen, mutta olen pitkä kuin suomen talvi ja valoisaa aikaa on noin 13 sekuntia" type="email" helpText="Lorem ipsum"></fudis-text-input>	
-			<fudis-text-input  label="Tavallinen teksti, min length 4" type="text" minLength=5 helpText="Lorem ipsum"></fudis-text-input>	
-			
-			<button type="submit" form="form1" value="Submit">Submit</button>
-		</form>
+		<example-text-input-with-form-control></example-text-input-with-form-control>
 	`,
 });
-
-// <fudis-text-input [errorMessages]="{ required: 'pakollinen hei' }" required style="display:flex; flex-direction:column; width:80%" label="oon pakollinen"></fudis-text-input>
-// 			<fudis-text-input [errorMessages]="{required:'mäkin oon pakollinen', message:'vähän parempi maili hei nyt'}" required style="display:flex; flex-direction:column; width:80%" required label="pakollinen email" type="email"></fudis-text-input>
-// 			<fudis-text-input style="display:flex; flex-direction:column; width:80%" label="vapaa ehtoinen email!" type="email"></fudis-text-input>
-// 			<fudis-text-input [errorMessages]="{required:'pakollinen!!!!', message:'numero hei kiitos'}" required style="display:flex; flex-direction:column; width:80%" label="numeroa!!" type="number"></fudis-text-input>

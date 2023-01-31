@@ -1,5 +1,14 @@
 // eslint-disable-next-line max-classes-per-file
-import { Component, Input, Output, OnInit, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import {
+	Component,
+	Input,
+	Output,
+	OnInit,
+	EventEmitter,
+	ViewChild,
+	ElementRef,
+	ChangeDetectionStrategy,
+} from '@angular/core';
 import { UntypedFormControl, Validators } from '@angular/forms';
 
 type Error = {
@@ -7,9 +16,10 @@ type Error = {
 	message: string;
 };
 @Component({
-	selector: 'fudis-text-input',
+	selector: 'fudis-text-input[id][label]',
 	templateUrl: './text-input.component.html',
 	styleUrls: ['./text-input.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextInputComponent implements OnInit {
 	// Bind input field
@@ -22,9 +32,7 @@ export class TextInputComponent implements OnInit {
 	 */
 	@Input() label: string;
 
-	@Input() inputId?: string;
-
-	@Input() required?: boolean = false;
+	@Input() id: string;
 
 	@Input() size?: 's' | 'm' | 'l' = 'l';
 
@@ -37,11 +45,9 @@ export class TextInputComponent implements OnInit {
 
 	@Input() maxLength?: number;
 
-	@Input() language?: 'en' | 'fi' | 'se' = 'fi';
+	@Input() characterLimitIndicatorValue?: number;
 
-	@Input() characterLimitIndicatorValue?: string;
-
-	@Input() labelHeight?: 'single' | 'double' | 'triple' | 'unset' = 'unset';
+	@Input() control: UntypedFormControl;
 
 	/**
 	 *	Type of the input
@@ -50,78 +56,18 @@ export class TextInputComponent implements OnInit {
 
 	validatorArray: Array<any> = [];
 
-	fudisFormControl = new UntypedFormControl('', this.validatorArray);
-
-	defaultError: string;
-
-	id: string;
+	required: boolean = false;
 
 	ngOnInit() {
-		if (this.required) {
-			this.validatorArray.push(Validators.required);
-		}
-		if (this.minLength) {
-			this.validatorArray.push(Validators.minLength(this.minLength));
-		}
-		if (this.maxLength) {
-			this.validatorArray.push(Validators.maxLength(this.maxLength));
-		}
-		if (this.type === 'email') {
-			this.validatorArray.push(Validators.email);
-		}
-		if (this.type === 'number') {
-			this.validatorArray.push(Validators.pattern('^[0-9]*$'));
-		}
-		this.fudisFormControl = new UntypedFormControl('', this.validatorArray);
-
-		// Setting id's and names
-		if (this.inputId) {
-			this.id = this.inputId;
-		} else {
-			this.id = this.randomId();
+		if (this.control.hasValidator(Validators.required)) {
+			this.required = true;
 		}
 	}
 
-	// Temporary randomiser for ids
-	randomId = () => {
-		const idFromLabel = this.label
-			.toLowerCase()
-			.replace(/[^a-z0-9]+/g, ' ')
-			.split(' ')
-			.slice(0, 3)
-			.join('-');
-		const randomId = `${idFromLabel}-${Math.random().toString(36).slice(2, 6)}`;
-		return randomId;
-	};
-
-	// Check and returns browsers native error message
 	checkErrors(): void {
-		const inputElement = this.input.nativeElement;
-
-		if (inputElement.validationMessage) {
-			const { validity } = inputElement;
-
-			if (validity.valueMissing && this.language === 'fi') {
-				inputElement.setCustomValidity('Pakollinen arvo puuttuu.');
-			}
-			if (validity.tooShort && this.language === 'fi') {
-				inputElement.setCustomValidity(
-					`Liian lyhyt syöte. Minimimerkkimäärä on ${this.minLength} merkkiä. Olet nyt syöttänyt ${inputElement.value.length} merkkiä.`
-				);
-			}
-			if (validity.typeMismatch && inputElement.type === 'email' && this.language === 'fi') {
-				inputElement.setCustomValidity('Syöte ei ole sähköpostimuotoinen. @-merkki puuttuu.');
-			}
-
-			if (validity.typeMismatch && inputElement.type === 'url' && this.language === 'fi') {
-				inputElement.setCustomValidity('ei oo urli');
-			}
-			this.defaultError = inputElement.validationMessage;
-		}
-
 		// Emit error to parent
-		if (this.fudisFormControl.invalid) {
-			this.getErrorOutput(this.id, this.defaultError);
+		if (this.control.invalid) {
+			this.getErrorOutput(this.id, 'An error happened in this input!');
 		}
 	}
 
@@ -129,10 +75,11 @@ export class TextInputComponent implements OnInit {
 		this.errorOutput.emit({ id, message: error });
 	}
 
-	public get classes(): string[] {
-		if (this.fudisFormControl.touched && this.fudisFormControl.invalid) {
-			return ['fudis-text-input__input--invalid'];
+	isTouchedAndInvalid(): boolean {
+		console.log('ajoa!');
+		if (this.control.touched && this.control.invalid) {
+			return true;
 		}
-		return [];
+		return false;
 	}
 }
