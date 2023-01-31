@@ -4,7 +4,6 @@
 @import './tokens';
 @import '../colors/tokens';
 
-
 @mixin fudis-focus-generic {
 	outline: $fudis-focus-generic-outline;
   outline-offset: spacing.$fudis-pixel-1;
