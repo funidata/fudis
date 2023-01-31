@@ -17,7 +17,7 @@ describe('CheckboxComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(CheckboxComponent);
 		component = fixture.componentInstance;
-		component.checkboxControl = uncheckedCheckbox;
+		component.control = uncheckedCheckbox;
 		component.errorMessage = 'Error message to appear!';
 		component.label = 'Please check me.';
 

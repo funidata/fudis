@@ -33,7 +33,7 @@ const getDefaultValue = (options: RadioButtonOption[]): string | undefined => {
 				legend="Choose your preferred fruit"
 				errorMessage="You must choose a fruit! :("
 				*ngIf="mainFormGroup"
-				[radioButtonFormControl]="radioButtonGroupOne"
+				[control]="radioButtonGroupOne"
 				[options]="fruitOptions"></fudis-radio-button-group>
 			<fudis-body-text *ngIf="radioButtonGroupOne.value"
 				>Option chosen: {{ radioButtonGroupOne.value }}</fudis-body-text
@@ -44,7 +44,7 @@ const getDefaultValue = (options: RadioButtonOption[]): string | undefined => {
 				legend="Choose a pet"
 				errorMessage="You must choose a pet! :("
 				*ngIf="mainFormGroup"
-				[radioButtonFormControl]="radioButtonGroupTwo"
+				[control]="radioButtonGroupTwo"
 				[options]="petOptions"></fudis-radio-button-group>
 			<fudis-body-text *ngIf="radioButtonGroupTwo.value"
 				>Option chosen: {{ radioButtonGroupTwo.value }}</fudis-body-text
