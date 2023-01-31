@@ -19,6 +19,8 @@ import { CheckboxComponent } from './components/form/checkbox/checkbox.component
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
+import { ExpandableComponent } from './components/expandable/expandable.component';
+import { ExpandableContentDirective } from './components/expandable/expandable-content.directive';
 import { FudisDialog } from './components/dialog/dialog';
 import { GridComponent } from './components/grid/grid.component';
 import { HeadingComponent } from './components/typography/heading/heading.component';
@@ -37,6 +39,8 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 	 * These are not exposed outside and can be used in Stories or as an sub-component
 	 */
 	declarations: [
+		ExpandableComponent,
+		ExpandableContentDirective,
 		FudisDialogTitleDirective,
 		FudisDialogActionsDirective,
 		FudisDialogContentDirective,
@@ -80,6 +84,8 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 	 * when you want to expose it outside
 	 */
 	exports: [
+		ExpandableComponent,
+		ExpandableContentDirective,
 		FudisDialogTitleDirective,
 		FudisDialogActionsDirective,
 		FudisDialogContentDirective,
