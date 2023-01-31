@@ -1,12 +1,11 @@
 <form [formGroup]="mainFormGroup">
 	<fudis-checkbox
-		[checkboxControl]="checkboxFirst"
+		[control]="checkboxFirst"
 		id="example_checkbox_1_id"
-		[disabled]="true"
 		name="example_checkbox_1_name"
 		label="I am an example!"></fudis-checkbox>
 	<fudis-checkbox
-		[checkboxControl]="checkboxSecond"
+		[control]="checkboxSecond"
 		id="example_checkbox_2_id"
 		name="example_checkbox_2_name"
 		errorMessage="There is something wrong with me. Probably I am set as required in my FormControl."

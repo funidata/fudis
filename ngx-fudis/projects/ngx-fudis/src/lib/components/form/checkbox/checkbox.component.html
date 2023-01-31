@@ -1,14 +1,14 @@
 <div class="fudis-checkbox">
-	<label class="fudis-checkbox__label" [attr.for]="id" (click)="handleCheckboxClick($event)">
+	<label class="fudis-checkbox__label" [attr.for]="id" (click)="handleCheckboxClick()">
 		<div
 			class="fudis-checkbox__box"
 			[ngClass]="{
-				'fudis-checkbox__box--invalid': this.checkboxControl.invalid && this.checkboxControl.touched,
-				'fudis-checkbox__box--disabled': disabled
+				'fudis-checkbox__box--invalid': this.control.invalid && this.control.touched,
+				'fudis-checkbox__box--disabled': this.control.disabled
 			}">
 			<input
+				(blur)="handleBlur()"
 				#checkboxRef
-				[formControl]="checkboxControl"
 				[attr.aria-describedby]="'guidance_' + id"
 				[attr.aria-label]="label"
 				type="checkbox"
@@ -16,9 +16,9 @@
 				[attr.name]="name"
 				[id]="id"
 				class="fudis-checkbox__input"
-				[attr.aria-disabled]="checkboxControl.disabled" />
+				[attr.aria-disabled]="control.disabled" />
 			<svg
-				*ngIf="checkboxControl.value"
+				*ngIf="control.value"
 				width="16"
 				height="16"
 				preserveAspectRatio="xMidYMin"
@@ -36,6 +36,6 @@
 	</label>
 	<fudis-error-message
 		id="'guidance_' + id"
-		*ngIf="errorMessage && this.checkboxControl.touched && this.checkboxControl.invalid"
+		*ngIf="errorMessage && this.control.touched && this.control.invalid"
 		[message]="errorMessage"></fudis-error-message>
 </div>

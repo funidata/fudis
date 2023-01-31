@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
+import { Component, Input, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { UntypedFormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -7,13 +7,13 @@ import { UntypedFormControl, Validators } from '@angular/forms';
 	styleUrls: ['./checkbox.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class CheckboxComponent implements AfterViewChecked {
+export class CheckboxComponent {
 	@ViewChild('checkboxRef') input: ElementRef;
 
 	/*
 	 * FormControl for checkbox
 	 */
-	@Input() checkboxControl: UntypedFormControl;
+	@Input() control: UntypedFormControl;
 
 	/*
 	 * Id for checkbox
@@ -31,41 +31,20 @@ export class CheckboxComponent implements AfterViewChecked {
 	@Input() name: string;
 
 	/*
-	 * If checkbox is disabled
-	 */
-	@Input() disabled: boolean;
-
-	/*
 	 * FormControl for checkbox
 	 */
 	@Input() errorMessage: string;
 
-	required: string | boolean = false;
-
 	requiredValidator = Validators.requiredTrue;
 
-	formControlIsInvalid: boolean;
-
-	ngAfterViewChecked(): void {
-		if (this.checkboxControl.disabled) {
-			(this.input.nativeElement as HTMLInputElement).removeAttribute('disabled');
+	handleCheckboxClick(): void {
+		this.input.nativeElement.focus();
+		if (!this.control.disabled) {
+			this.control.patchValue(!this.control.value);
 		}
 	}
 
-	handleCheckboxClick(event: any): void {
-		// if ((this.input.nativeElement as HTMLInputElement).getAttribute('aria-disabled') === 'true') {
-		// 	event.preventDefault();
-		// }
-
-		console.log(event);
-
-		this.input.nativeElement.focus();
-		// if (!this.checkboxControl.disabled) {
-		// 	this.checkboxControl.patchValue(!this.checkboxControl.value);
-		// }
-	}
-
-	setInputTouched(): void {
-		this.checkboxControl.markAsTouched();
+	handleBlur(): void {
+		this.control.markAsTouched();
 	}
 }
