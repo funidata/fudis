@@ -2,19 +2,20 @@
 @use '../../foundations/colors/tokens.scss' as colors;
 
 .fudis-icon {
-	transition: all .6s ease;
-
 	&-rotate {
 		&__flip-180 {
 			transform: rotate(180deg);
+			transition: all .6s ease;
 		}
 	
 		&__cw-90 {
 			transform: rotate(90deg);
+			transition: all .6s ease;
 		}
 	
 		&__ccw-90 {
 			transform: rotate(-90deg);
+			transition: all .6s ease;
 		}
 	}
 
