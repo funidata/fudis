@@ -8,9 +8,6 @@ import { ExpandableContentDirective } from './expandable-content.directive';
  *
  * ```
  * <fudis-expandable>
- * 	<ng-container expandable="customTitle">
- * 		<your-title-template />
- * 	</ng-container>
  * 	<ng-template fudisExpandableContent>
  * 		<your-body-template />
  * 	</ng-template>
@@ -38,7 +35,6 @@ export class ExpandableComponent {
 
 	/**
 	 * Title for the expandable
-	 * Title can also be given as expandable="customTitle" block, where other elements like badge or button can be added
 	 */
 	@Input() title: string;
 

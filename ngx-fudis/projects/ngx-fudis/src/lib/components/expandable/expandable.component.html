@@ -48,7 +48,6 @@
 			[rotate]="collapsed ? null : 'cw-90'"
 			class="fudis-expandable__header__title__icon"></fudis-icon>
 		{{ title }}
-		<ng-content select="[expandable=customTitle]"></ng-content>
 		<span *ngIf="subTitle" class="fudis-expandable__header__title__sub-title">{{ subTitle }}</span>
 	</button>
 </ng-template>
