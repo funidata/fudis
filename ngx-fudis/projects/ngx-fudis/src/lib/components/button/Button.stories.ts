@@ -4,7 +4,10 @@ import { moduleMetadata } from '@storybook/angular';
 import { MatButtonModule } from '@angular/material/button';
 import { ButtonComponent } from './button.component';
 import { IconComponent } from '../icon/icon.component';
-import CustomMDXDocumentation from './Custom-MDX-Documentation.mdx';
+import { GridComponent } from '../grid/grid.component';
+import { HeadingComponent } from '../typography/heading/heading.component';
+
+import readme from './readme.mdx';
 
 export default {
 	title: 'Components/Button',
@@ -12,12 +15,12 @@ export default {
 	decorators: [
 		moduleMetadata({
 			imports: [MatButtonModule],
-			declarations: [ButtonComponent, IconComponent],
+			declarations: [ButtonComponent, IconComponent, GridComponent, HeadingComponent],
 		}),
 	],
 	parameters: {
 		docs: {
-			page: CustomMDXDocumentation,
+			page: readme,
 		},
 	},
 	argTypes: {
@@ -27,7 +30,7 @@ export default {
 	},
 } as Meta;
 
-const Template: Story<ButtonComponent> = (args: ButtonComponent) => ({
+const Template: Story = (args) => ({
 	props: args,
 });
 
@@ -37,13 +40,56 @@ Button.args = {
 	label: 'Button',
 	icon: 'search',
 };
-Button.parameters = {
-	docs: {
-		description: {
-			story: 'Some story **markdown**',
-		},
-	},
+
+export const Secondary = Template.bind({});
+Secondary.args = {
+	variant: 'secondary',
+	label: 'toinen nappi!',
+	icon: 'search',
 };
+
+export const WithIcon = Template.bind({});
+WithIcon.args = {
+	variant: 'secondary',
+	label: 'with icon',
+	icon: 'search',
+};
+
+export const AllVariants: Story = () => ({
+	template: `
+	<fudis-grid columns="1fr 1fr 1fr" align="left">
+		<fudis-button variant="primary" label="Primary"></fudis-button>
+		<fudis-button variant="secondary" label="Secondary"></fudis-button>
+		<fudis-button variant="tertiary" label="Tertiary"></fudis-button>
+	</fudis-grid>
+	`,
+});
+
+// export const PrimaryVariations: Story = () => ({
+// 	template: `
+// 	<fudis-grid columns="1fr 1fr 1fr" align="left">
+// 			<fudis-button size="small" label="Primary"></fudis-button>
+// 			<fudis-button variant="secondary" size="small" label="Secondary"></fudis-button>
+// 			<fudis-button variant="tertiary" size="small" label="Tertiary"></fudis-button>
+// 			<fudis-button label="Primary"></fudis-button>
+// 			<fudis-button variant="secondary" label="Secondary"></fudis-button>
+// 			<fudis-button variant="tertiary" label="Tertiary"></fudis-button>
+// 			<fudis-button disabled="true" label="Primary"></fudis-button>
+// 			<fudis-button variant="secondary" disabled="true" label="Secondary"></fudis-button>
+// 		<fudis-button variant="tertiary" disabled="true" label="Tertiary"></fudis-button>
+// 	</fudis-grid>
+// 	`,
+// });
+
+// export const SecondaryVariations: Story = () => ({
+// 	template: `
+// 	<fudis-grid columns="1fr 1fr 1fr" align="left">
+// 		<fudis-button variant="secondary" size="small" label="Secondary"></fudis-button>
+// 		<fudis-button variant="secondary" label="Secondary"></fudis-button>
+// 		<fudis-button variant="secondary" disabled="true" label="Secondary"></fudis-button>
+// 	</fudis-grid>
+// 	`,
+// });
 
 export const ExamplesWithIcon: Story = () => ({
 	template: `

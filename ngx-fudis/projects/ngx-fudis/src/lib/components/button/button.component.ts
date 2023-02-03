@@ -13,25 +13,31 @@ export class ButtonComponent {
 	@Input() variant: 'primary' | 'secondary' | 'tertiary' = 'primary';
 
 	/**
-	 * Button size and type options
+	 * Button size options
 	 */
 	@Input() size: 'small' | 'medium' = 'medium';
 
+	/**
+	 * Button type options
+	 */
 	@Input() type: 'button' | 'submit' = 'button';
 
 	/**
-	 * Button contents
+	 * Text displayed inside the button
 	 */
 	@Input() label: string;
 
+	/**
+	 * Additional aria-label for describing context
+	 */
 	@Input() ariaLabel: string;
 
-	/*
+	/**
 	 * Button modifiers
 	 */
 	@Input() disabled = false;
 
-	/*
+	/**
 	 * Icon for button if needed
 	 */
 	@Input() icon: Icon | undefined = undefined;
