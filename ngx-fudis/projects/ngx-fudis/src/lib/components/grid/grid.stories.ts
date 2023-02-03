@@ -1,16 +1,10 @@
-import { moduleMetadata, Story, Meta, componentWrapperDecorator } from '@storybook/angular';
+import { Story, Meta, componentWrapperDecorator } from '@storybook/angular';
 import { GridComponent } from './grid.component';
-import { HeadingComponent } from '../typography/heading/heading.component';
-import { BodyTextComponent } from '../typography/body-text/body-text.component';
 
 export default {
 	title: 'Components/Grid',
 	component: GridComponent,
 	decorators: [
-		moduleMetadata({
-			imports: [],
-			declarations: [HeadingComponent, BodyTextComponent],
-		}),
 		componentWrapperDecorator(
 			(story) => `
 			<style>
