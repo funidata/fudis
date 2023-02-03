@@ -3,9 +3,7 @@ import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
 import { MatButtonModule } from '@angular/material/button';
 import { ButtonComponent } from './button.component';
-import { IconComponent } from '../icon/icon.component';
-import { GridComponent } from '../grid/grid.component';
-import { HeadingComponent } from '../typography/heading/heading.component';
+import { NgxFudisModule } from '../../ngx-fudis.module';
 
 import readme from './readme.mdx';
 
@@ -14,8 +12,7 @@ export default {
 	component: ButtonComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [MatButtonModule],
-			declarations: [ButtonComponent, IconComponent, GridComponent, HeadingComponent],
+			imports: [MatButtonModule, NgxFudisModule],
 		}),
 	],
 	parameters: {
