@@ -1,31 +1,26 @@
 // eslint-disable-next-line max-classes-per-file
-import {
-	Component,
-	Input,
-	Output,
-	OnInit,
-	EventEmitter,
-	ViewChild,
-	ElementRef,
-	ChangeDetectionStrategy,
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormControl, Validators } from '@angular/forms';
+import { IFudisErrorMessages } from '../../../types/forms';
 
 type Error = {
 	id: string;
 	message: string;
 };
+
 @Component({
 	selector: 'fudis-text-input[id][label]',
 	templateUrl: './text-input.component.html',
 	styleUrls: ['./text-input.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TextInputComponent implements OnInit {
+export class TextInputComponent {
 	// Bind input field
 	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;
 
 	@Output() errorOutput: EventEmitter<Error> = new EventEmitter<Error>();
+
+	@Input() errorMsg: IFudisErrorMessages;
 
 	/**
 	 *	Label is mandatory for every input
@@ -41,9 +36,7 @@ export class TextInputComponent implements OnInit {
 	 */
 	@Input() helpText?: string;
 
-	@Input() minLength?: number;
-
-	@Input() maxLength?: number;
+	@Input() requiredText: string;
 
 	@Input() characterLimitIndicatorValue?: number;
 
@@ -54,32 +47,34 @@ export class TextInputComponent implements OnInit {
 	 */
 	@Input() type: 'email' | 'number' | 'password' | 'tel' | 'text' | 'url' = 'text';
 
-	validatorArray: Array<any> = [];
+	@Input() minLength: number;
 
-	required: boolean = false;
+	@Input() maxLength: number;
 
-	ngOnInit() {
-		if (this.control.hasValidator(Validators.required)) {
-			this.required = true;
-		}
-	}
+	showError: boolean = false;
+
+	requiredValidator = Validators.required;
+
+	errorMsgToShow: string[] = [];
 
 	checkErrors(): void {
-		// Emit error to parent
-		if (this.control.invalid) {
-			this.getErrorOutput(this.id, 'An error happened in this input!');
+		this.errorMsgToShow = [];
+		if (this.control.touched && this.control.errors) {
+			this.showError = true;
+
+			Object.keys(this.control.errors).forEach((item) => {
+				const message = this.errorMsg[item as keyof IFudisErrorMessages];
+				if (message) {
+					this.errorMsgToShow.push(message);
+					this.getErrorOutput(this.id, message);
+				}
+			});
+		} else {
+			this.showError = false;
 		}
 	}
 
 	getErrorOutput(id: string, error: string) {
 		this.errorOutput.emit({ id, message: error });
-	}
-
-	isTouchedAndInvalid(): boolean {
-		console.log('ajoa!');
-		if (this.control.touched && this.control.invalid) {
-			return true;
-		}
-		return false;
 	}
 }

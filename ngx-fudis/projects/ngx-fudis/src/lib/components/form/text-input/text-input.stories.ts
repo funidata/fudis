@@ -12,6 +12,7 @@ import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TextInputComponent } from './text-input.component';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
+import { IFudisErrorMessages } from '../../../types/forms';
 
 @Component({
 	selector: 'example-text-input-with-form-control',
@@ -20,23 +21,48 @@ import { ErrorMessageComponent } from '../error-message/error-message.component'
 			<fudis-text-input
 				[control]="firstTextInputControl"
 				id="unique-text-input-id-1"
-				label="Minä olen label, se on selvää!"
-				helpText="Mikä minun nimi on? Guidance? Help text?"></fudis-text-input>
+				requiredText="Required"
+				[errorMsg]="{ required: 'Missing a value.' }"
+				label="I am a required text input"
+				helpText="Please add some values here above!"></fudis-text-input>
 			<fudis-text-input
 				[control]="secondTextInputControl"
+				requiredText="Required"
+				[minLength]="minLength"
+				[maxLength]="maxLength"
 				id="unique-text-input-id-2"
-				label="Second input"></fudis-text-input>
+				label="Email"
+				[errorMsg]="validatorMessages"
+				type="email"
+				helpText="This is an example email input with multiple validations."></fudis-text-input>
 		</form>
 	`,
 })
 class TextInputWithFormControlExampleComponent {
+	minLength = 5;
+
+	maxLength = 20;
+
+	validatorsForSecondTextInput = [
+		Validators.minLength(this.minLength),
+		Validators.maxLength(this.maxLength),
+		Validators.required,
+		Validators.email,
+	];
 	/**
 	 * Options for testing purposes
 	 */
 
+	validatorMessages: IFudisErrorMessages = {
+		required: 'This is required field.',
+		email: 'Your input is not in email format.',
+		minlength: `Too short email. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,
+		maxlength: `Too long email. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,
+	};
+
 	firstTextInputControl: UntypedFormControl = new UntypedFormControl('', [Validators.required]);
 
-	secondTextInputControl: UntypedFormControl = new UntypedFormControl('');
+	secondTextInputControl: UntypedFormControl = new UntypedFormControl('', this.validatorsForSecondTextInput);
 
 	mainFormGroup: UntypedFormGroup = this.formBuilder.group({
 		firstTextInputControl: this.firstTextInputControl,
@@ -63,16 +89,7 @@ export default {
 	},
 } as Meta;
 
-const Template: Story<TextInputComponent> = (args: TextInputComponent) => ({
-	props: args,
-});
-
-export const TextInput = Template.bind({});
-TextInput.args = {
-	label: 'This is the label',
-};
-
-export const TextInputWithFormControl: Story = () => ({
+export const TextInput: Story = () => ({
 	template: `
 		<example-text-input-with-form-control></example-text-input-with-form-control>
 	`,

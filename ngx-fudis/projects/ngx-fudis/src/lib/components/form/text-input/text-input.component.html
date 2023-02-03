@@ -2,27 +2,29 @@
 	<label class="fudis-text-input__label" for="{{ id }}">
 		<div #fudisTextInputLabel class="fudis-text-input__label__content">
 			<span class="fudis-text-input__label__text">{{ label }}</span
-			><span class="fudis-text-input__label__required" *ngIf="required">Pakollinen&nbsp;*</span>
+			><span class="fudis-text-input__label__required" *ngIf="control.hasValidator(requiredValidator)"
+				>{{ requiredText }}&nbsp;*</span
+			>
 		</div>
 		<input
-			[attr.aria-describedby]="'guidance_' + id"
+			#fudisTextInput
+			[formControl]="control"
+			[minlength]="minLength"
+			[maxlength]="maxLength"
 			id="{{ id }}"
 			(blur)="checkErrors()"
-			(change)="checkErrors()"
-			#fudisTextInput
 			[type]="type"
-			[attr.required]="required"
-			[formControl]="control"
-			[ngClass]="{ 'fudis-text-input__input--invalid': isTouchedAndInvalid() }"
+			[ngClass]="{ 'fudis-text-input__input--invalid': showError }"
 			class="fudis-text-input__input"
-			[attr.minlength]="minLength"
-			[attr.maxlength]="maxLength" />
-
+			[attr.aria-describedby]="'guidance_' + id"
+			[attr.required]="control.hasValidator(requiredValidator)" />
 		<div id="guidance_{{ id }}" class="fudis-text-input__guidance">
-			<fudis-error-message
-				*ngIf="control.invalid && control.touched"
-				message="Something is wrong :("></fudis-error-message>
-			<p class="fudis-text-input__guidance__help-text">{{ helpText }}</p>
+			<ng-container *ngIf="showError">
+				<ng-container *ngFor="let error of errorMsgToShow">
+					<fudis-error-message [message]="error"></fudis-error-message>
+				</ng-container>
+			</ng-container>
+			<p *ngIf="!showError" class="fudis-text-input__guidance__help-text">{{ helpText }}</p>
 		</div>
 	</label>
 </div>
