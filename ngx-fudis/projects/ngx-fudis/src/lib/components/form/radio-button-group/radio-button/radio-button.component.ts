@@ -15,7 +15,7 @@ export class RadioButtonComponent {
 	/*
 	 * FormControl for Radio Button group
 	 */
-	@Input() radioButtonFormControl: UntypedFormControl;
+	@Input() control: UntypedFormControl;
 
 	/*
 	 * Selectable form value of a single Radio Button, e.g. "fair-trade-banana"

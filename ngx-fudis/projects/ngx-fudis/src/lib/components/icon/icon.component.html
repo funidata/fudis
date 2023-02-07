@@ -1,6 +1,7 @@
 <svg
-	class="fudis-icon-color__{{ color }} {{ icon.includes('-small') ? 'fudis-icon__sm' : 'fudis-icon__lg' }}"
-	[ngClass]="classes"
+	class="fudis-icon-color__{{ color }} fudis-icon-rotate__{{ rotate }} {{
+		icon.includes('-small') ? 'fudis-icon__sm' : 'fudis-icon__lg'
+	}}"
 	aria-hidden="true">
 	<use [attr.href]="icon + '.svg#' + icon"></use>
 </svg>

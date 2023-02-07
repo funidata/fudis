@@ -6,5 +6,13 @@ import { Component, Input } from '@angular/core';
 	styleUrls: ['./error-message.component.scss'],
 })
 export class ErrorMessageComponent {
+	/*
+	 * Error message to display
+	 */
 	@Input() message: string;
+
+	/*
+	 * Used to link form element's attribute of 'aria-describedby' with error message
+	 */
+	@Input() id: string;
 }

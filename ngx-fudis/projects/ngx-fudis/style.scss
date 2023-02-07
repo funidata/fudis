@@ -16,8 +16,6 @@
 // Import font files globally
 @import './src/lib/foundations/typography/fonts';
 
-
-
 /* stylelint-disable color-no-hex */
 [data-theme='into'] {
 	--color-primary-light: #e0f4fd;
@@ -31,5 +29,3 @@
 	--color-primary: #1076db;
 	--color-primary-dark: #1d65b8;
 }
-
-

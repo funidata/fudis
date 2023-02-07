@@ -173,3 +173,16 @@
 		@error 'Unknown letter-spacing parameter. It can only be "1px", "2px" or "3px"';
 	}
 }
+
+@mixin fudis-expandable-regular-typography {
+  line-height: tokens.$fudis-body-l-line-height;
+  font-family: tokens.$fudis-font-family;
+  font-size: tokens.$fudis-body-l-font-size;
+  font-weight: tokens.$fudis-regular;
+}
+
+@mixin fudis-expandable-sub-title-typography {
+  font-family: tokens.$fudis-font-family;
+  font-size: tokens.$fudis-body-s-font-size;
+  font-weight: tokens.$fudis-light;
+}

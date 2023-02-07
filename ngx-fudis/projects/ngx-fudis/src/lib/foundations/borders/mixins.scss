@@ -3,7 +3,6 @@
 @use '../spacing/tokens.scss' as spacing;
 @use './tokens.scss' as borderTokens;
 
-
 // Generates border, i. e.:
 // border: 2px solid $primary-dark;
 @mixin fudis-border($width, $style, $color) {
@@ -31,7 +30,6 @@
 	}
 }
 
-
 @mixin fudis-border-radius($width) {
 	@if map_has_key(spacing.$fudis-pixel-tokens, $width) {
 		border-radius: map.get(spacing.$fudis-pixel-tokens, $width);
@@ -42,3 +40,13 @@
 	}
 }
 
+@mixin fudis-border-none($style) {
+	@if map_has_key(borderTokens.$fudis-border-styles, $style) {
+		/* stylelint-disable-next-line property-disallowed-list */
+		border: map.get(borderTokens.$fudis-border-styles, $style);
+	}
+
+	@else {
+		@error 'Unknown border of #{$style}. It can only be "none" for fudis-border-none mixin';
+	}
+}

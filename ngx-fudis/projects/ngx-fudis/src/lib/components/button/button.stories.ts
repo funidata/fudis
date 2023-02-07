@@ -3,8 +3,6 @@ import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
 import { MatButtonModule } from '@angular/material/button';
 import { ButtonComponent } from './button.component';
-import { NgxFudisModule } from '../../ngx-fudis.module';
-
 import readme from './readme.mdx';
 
 export default {
@@ -12,7 +10,7 @@ export default {
 	component: ButtonComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [MatButtonModule, NgxFudisModule],
+			imports: [MatButtonModule],
 		}),
 	],
 	parameters: {

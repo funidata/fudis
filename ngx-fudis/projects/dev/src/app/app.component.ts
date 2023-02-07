@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
 		<form class="basic-flex-box">
 			<h2>Text input ja checbox</h2>
 			<fudis-text-input [required]="true" label="Fudis text input"></fudis-text-input>
-			<fudis-checkbox data-theme="sisu" label="Checkboxin label" [required]="true"></fudis-checkbox>
+			<!-- <fudis-checkbox data-theme="sisu" label="Checkboxin label" [required]="true"></fudis-checkbox> -->
 			<fudis-text-input label="Fudis text input 2"></fudis-text-input>
 		</form>
 		<form class="basic-flex-box">
