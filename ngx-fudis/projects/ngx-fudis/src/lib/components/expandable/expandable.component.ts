@@ -51,15 +51,15 @@ export class ExpandableComponent {
 
 	constructor(public ref: ElementRef) {}
 
-	/**
-	 * Expandable is initially collapsed by default but can be controlled by [collapsed] input property
-	 */
 	private _collapsed = true;
 
 	get collapsed(): boolean {
 		return this._collapsed;
 	}
 
+	/**
+	 * Expandable is initially collapsed by default but can be controlled by [collapsed] input property
+	 */
 	@Input() set collapsed(value: boolean) {
 		this.setCollapsedStatus(value);
 	}
