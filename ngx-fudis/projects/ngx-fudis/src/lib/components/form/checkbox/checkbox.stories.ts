@@ -11,8 +11,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Component } from '@angular/core';
 import { CheckboxComponent } from './checkbox.component';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
-import { ButtonComponent } from '../../button/button.component';
-import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 
 @Component({
 	selector: 'example-checkbox',
@@ -69,13 +67,7 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			declarations: [
-				CheckboxComponent,
-				CheckboxExampleComponent,
-				ErrorMessageComponent,
-				ButtonComponent,
-				BodyTextComponent,
-			],
+			declarations: [CheckboxExampleComponent],
 			imports: [ReactiveFormsModule, BrowserModule, FormsModule],
 		}),
 	],

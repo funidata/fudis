@@ -1,17 +1,8 @@
-import { moduleMetadata } from '@storybook/angular';
 import { TextSpacingComponent } from './text-spacing.component';
-import { HeadingComponent } from '../heading/heading.component';
-import { BodyTextComponent } from '../body-text/body-text.component';
-
-const metadata = moduleMetadata({
-	imports: [],
-	declarations: [HeadingComponent, BodyTextComponent],
-});
 
 export default {
 	title: 'Components/Typography/TextSpacing',
 	component: TextSpacingComponent,
-	decorators: [metadata],
 };
 
 const html = String.raw;

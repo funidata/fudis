@@ -3,8 +3,8 @@
 		<div
 			class="fudis-checkbox__box"
 			[ngClass]="{
-				'fudis-checkbox__box--invalid': this.control.invalid && this.control.touched,
-				'fudis-checkbox__box--disabled': this.control.disabled
+				'fudis-checkbox__box--invalid': control.invalid && control.touched,
+				'fudis-checkbox__box--disabled': control.disabled
 			}">
 			<input
 				(blur)="handleBlur()"
@@ -16,6 +16,7 @@
 				[attr.name]="name"
 				[id]="id"
 				class="fudis-checkbox__input"
+				[required]="control.hasValidator(requiredValidator)"
 				[attr.aria-disabled]="control.disabled" />
 			<svg
 				*ngIf="control.value"

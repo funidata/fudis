@@ -1,17 +1,10 @@
 import { Story, Meta } from '@storybook/angular/types-6-0';
-import { moduleMetadata } from '@storybook/angular';
+
 import { DescriptionListComponent } from './description-list.component';
-import { HeadingComponent } from '../typography/heading/heading.component';
 
 export default {
 	title: 'Components/Description List',
 	component: DescriptionListComponent,
-	decorators: [
-		moduleMetadata({
-			imports: [],
-			declarations: [HeadingComponent],
-		}),
-	],
 	argTypes: {},
 } as Meta;
 

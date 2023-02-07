@@ -3,7 +3,6 @@ import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
 import { MatButtonModule } from '@angular/material/button';
 import { ButtonComponent } from './button.component';
-import { IconComponent } from '../icon/icon.component';
 
 export default {
 	title: 'Components/Button',
@@ -11,7 +10,6 @@ export default {
 	decorators: [
 		moduleMetadata({
 			imports: [MatButtonModule],
-			declarations: [ButtonComponent, IconComponent],
 		}),
 	],
 	argTypes: {
