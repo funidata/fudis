@@ -39,3 +39,14 @@
 		@error 'Unknown border-radius of #{$width}. It can only be "1px", "2px" or "3px"';
 	}
 }
+
+@mixin fudis-border-none($style) {
+	@if map_has_key(borderTokens.$fudis-border-styles, $style) {
+		/* stylelint-disable-next-line property-disallowed-list */
+		border: map.get(borderTokens.$fudis-border-styles, $style);
+	}
+
+	@else {
+		@error 'Unknown border of #{$style}. It can only be "none" for fudis-border-none mixin';
+	}
+}

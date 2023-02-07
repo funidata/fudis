@@ -9,7 +9,7 @@ import { Icon, IconColor } from '../../types/icons';
  *
  * Icons with suffix _-fill_ (e.g. "alert-fill", "info-circle-fill") have their default style with white background. These icons cannot be colored with css fill.
  *
- * Icons can be rotated 180degrees, 90 degrees clockwise and counterclockwise with rotate class
+ * Icons can be rotated 180degrees, 90 degrees clockwise and counterclockwise with rotate class.
  */
 
 @Component({
@@ -18,16 +18,18 @@ import { Icon, IconColor } from '../../types/icons';
 	styleUrls: ['./icon.component.scss'],
 })
 export class IconComponent {
+	/**
+	 * Choose icon
+	 */
 	@Input() icon: Icon;
 
+	/**
+	 * Set color for icon
+	 */
 	@Input() color: IconColor = 'default';
 
-	@Input() rotate: 'flip-180' | 'cw-90' | 'ccw-90';
-
-	public get classes(): string[] {
-		if (this.rotate) {
-			return [`fudis-icon-rotate__${this.rotate}`];
-		}
-		return [];
-	}
+	/**
+	 * Use rotate to flip and rotate icon
+	 */
+	@Input() rotate?: 'flip-180' | 'cw-90' | 'ccw-90' | null;
 }

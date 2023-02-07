@@ -1,4 +1,6 @@
+import { NgxFudisModule } from '../projects/ngx-fudis/src/lib/ngx-fudis.module';
 import { useTheme } from './useTheme';
+import { moduleMetadata } from '@storybook/angular';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 import docJson from '../documentation.json';
 setCompodocJson(docJson);
@@ -36,4 +38,9 @@ export const globalTypes = {
 	},
 };
 
-export const decorators = [useTheme];
+export const decorators = [
+	useTheme,
+	moduleMetadata({
+		imports: [NgxFudisModule],
+	}),
+];

@@ -20,6 +20,8 @@ import { DescriptionListComponent } from './components/description-list/descript
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
+import { ExpandableComponent } from './components/expandable/expandable.component';
+import { ExpandableContentDirective } from './components/expandable/expandable-content.directive';
 import { FudisDialog } from './components/dialog/dialog';
 import { GridComponent } from './components/grid/grid.component';
 import { HeadingComponent } from './components/typography/heading/heading.component';
@@ -36,6 +38,8 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 	 * Include both internal and external Fudis components in 'declarations' array below.
 	 */
 	declarations: [
+		ExpandableComponent,
+		ExpandableContentDirective,
 		FudisDialogTitleDirective,
 		FudisDialogActionsDirective,
 		FudisDialogContentDirective,
@@ -79,6 +83,8 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 	 * when you want to expose it outside
 	 */
 	exports: [
+		ExpandableComponent,
+		ExpandableContentDirective,
 		FudisDialogTitleDirective,
 		FudisDialogActionsDirective,
 		FudisDialogContentDirective,
