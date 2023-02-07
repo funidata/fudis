@@ -13,6 +13,8 @@ export { CheckboxComponent } from './lib/components/form/checkbox/checkbox.compo
 export { DescriptionListComponent } from './lib/components/description-list/description-list.component';
 export { DropdownComponent } from './lib/components/form/dropdown/dropdown.component';
 // export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';
+export { ExpandableComponent } from './lib/components/expandable/expandable.component';
+export { ExpandableContentDirective } from './lib/components/expandable/expandable-content.directive';
 export { GridComponent } from './lib/components/grid/grid.component';
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
 export { IconComponent } from './lib/components/icon/icon.component';

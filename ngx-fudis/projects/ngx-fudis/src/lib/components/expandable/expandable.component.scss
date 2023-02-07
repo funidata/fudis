@@ -1,0 +1,63 @@
+@use '../../foundations/colors/mixins.scss' as color;
+@use '../../foundations/borders/mixins.scss' as border;
+@use '../../foundations/spacing/tokens.scss' as spacing;
+@use '../../foundations/typography/mixins.scss' as typography;
+@use '../../foundations/focus/mixins.scss' as focus;
+@use '../../foundations/breakpoints/mixins.scss' as breakpoint;
+
+.fudis-expandable {
+	margin-bottom: spacing.$fudis-spacing-s;
+	border-top: 0;
+
+	/* stylelint-disable-next-line selector-class-pattern */
+	&.collapsed {
+		border-bottom: 0;
+	}
+	
+	&__regular {
+		@include border.fudis-border('2px', 'solid', 'gray-extra-light');
+	}
+
+	&__header {
+		margin: 0;
+		
+		&__title {
+			@include color.fudis-bg-color('gray-extra-light');
+			@include typography.fudis-expandable-regular-typography;
+			@include border.fudis-border-none('none');
+
+			cursor: pointer;
+			padding: spacing.$fudis-spacing-xs;
+			width: 100%;
+			text-align: left;
+
+			&:focus {
+				@include focus.fudis-focus-generic;
+			}
+
+			&__icon {
+				margin-right: spacing.$fudis-spacing-xxs;
+				vertical-align: middle;
+			}
+
+			&__sub-title {
+				@include typography.fudis-expandable-sub-title-typography;
+
+				display: block;
+				margin-left: spacing.$fudis-spacing-xl;
+			}
+		}
+	}
+
+	&__content {
+		@include breakpoint.fudis-breakpoint('m') {
+			padding: spacing.$fudis-spacing-m;
+			padding-left: spacing.$fudis-spacing-xl;
+		}
+
+		@include breakpoint.fudis-breakpoint-max('m') {
+			padding: spacing.$fudis-spacing-s;
+			padding-left: spacing.$fudis-spacing-m;
+		}
+	}
+}
