@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { MockComponent } from 'ng-mocks';
-import { LegendComponent } from 'ngx-fudis';
+import { LegendComponent } from '../legend/legend.component';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
 import { RadioButtonOption } from '../../../types/forms';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
