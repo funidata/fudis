@@ -11,7 +11,6 @@ import {
 import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TextInputComponent } from './text-input.component';
-import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { IFudisErrorMessages } from '../../../types/forms';
 
 @Component({
@@ -78,7 +77,7 @@ export default {
 	decorators: [
 		moduleMetadata({
 			imports: [BrowserAnimationsModule, ReactiveFormsModule, FormsModule],
-			declarations: [ErrorMessageComponent, TextInputWithFormControlExampleComponent],
+			declarations: [TextInputWithFormControlExampleComponent],
 		}),
 	],
 	argTypes: {},

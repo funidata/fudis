@@ -2,9 +2,7 @@ import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TextInputComponent } from '../text-input/text-input.component';
 import { LegendComponent } from './legend.component';
-import { GridComponent } from '../../grid/grid.component';
 
 export default {
 	title: 'Components/Form/Legend',
@@ -12,7 +10,6 @@ export default {
 	decorators: [
 		moduleMetadata({
 			imports: [BrowserAnimationsModule, ReactiveFormsModule, FormsModule],
-			declarations: [TextInputComponent, GridComponent],
 		}),
 	],
 	argTypes: {},

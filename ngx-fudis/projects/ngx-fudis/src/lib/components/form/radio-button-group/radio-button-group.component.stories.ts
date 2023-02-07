@@ -24,7 +24,6 @@ const getDefaultValue = (options: RadioButtonOption[]): string | undefined => {
 	return checkedValue?.value;
 };
 @Component({
-	standalone: true,
 	selector: 'example-radio-button-group',
 	template: `
 		<form [formGroup]="mainFormGroup">
@@ -100,14 +99,7 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			declarations: [
-				RadioButtonGroupComponent,
-				RadioButtonComponent,
-				RadioButtonGroupExampleComponent,
-				BodyTextComponent,
-				LegendComponent,
-				ErrorMessageComponent,
-			],
+			declarations: [RadioButtonGroupExampleComponent],
 			imports: [ReactiveFormsModule, BrowserModule, FormsModule],
 		}),
 	],

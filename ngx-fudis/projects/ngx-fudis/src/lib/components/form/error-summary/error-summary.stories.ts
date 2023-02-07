@@ -1,9 +1,6 @@
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TextInputComponent } from '../text-input/text-input.component';
-import { HeadingComponent } from '../../typography/heading/heading.component';
-import { ButtonComponent } from '../../button/button.component';
 import { ErrorSummaryComponent } from './error-summary.component';
 
 export default {
@@ -12,7 +9,6 @@ export default {
 	decorators: [
 		moduleMetadata({
 			imports: [ReactiveFormsModule, FormsModule],
-			declarations: [TextInputComponent, HeadingComponent, ButtonComponent],
 		}),
 	],
 	argTypes: {},
