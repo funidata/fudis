@@ -12,7 +12,12 @@ export default {
 			declarations: [IconComponent],
 		}),
 	],
-	argTypes: {},
+	argTypes: {
+		tag: {
+			options: ['h2', 'h3', 'h4', 'h5', 'h6'],
+			control: { type: 'radio' },
+		},
+	},
 	parameters: {
 		controls: {
 			exclude: ['_collapsed', 'openedOnce', 'ref', 'collapsedChange', 'setCollapsedStatus', 'content'],
@@ -30,4 +35,5 @@ Expandable.args = {
 	title: 'Regular expandable',
 	subTitle: 'This is my sub title for extra info',
 	contentText: 'Hey you! I am the content of the expandable.',
+	collapsed: true,
 };
