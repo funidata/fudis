@@ -1,17 +1,10 @@
 import { Story, Meta } from '@storybook/angular/types-6-0';
-import { moduleMetadata } from '@storybook/angular';
 import { ExpandableComponent } from './expandable.component';
 import { ExpandableType } from '../../types/expandables';
-import { IconComponent } from '../icon/icon.component';
 
 export default {
 	title: 'Components/Expandable',
 	component: ExpandableComponent,
-	decorators: [
-		moduleMetadata({
-			declarations: [IconComponent],
-		}),
-	],
 	argTypes: {
 		tag: {
 			options: ['h2', 'h3', 'h4', 'h5', 'h6'],
