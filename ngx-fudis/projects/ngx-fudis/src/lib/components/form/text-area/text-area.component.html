@@ -9,12 +9,10 @@
 			>
 		</div>
 		<textarea
-			#fudisTextArea
 			id="{{ id }}"
 			[formControl]="control"
 			class="fudis-text-area__textarea"
-			[ngClass]="classes"
-			(change)="checkErrors()"
+			[ngClass]="{ 'fudis-text-area--invalid': showError }"
 			(blur)="checkErrors()"
 			[attr.aria-describedby]="'guidance_' + id"
 			[attr.minLength]="minLength"

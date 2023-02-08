@@ -1,4 +1,4 @@
-import { AfterContentChecked, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterContentChecked, Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormControl, Validators } from '@angular/forms';
 import { IFudisErrorMessages } from '../../../types/forms';
 
@@ -6,10 +6,9 @@ import { IFudisErrorMessages } from '../../../types/forms';
 	selector: 'fudis-text-area[id][label]',
 	templateUrl: './text-area.component.html',
 	styleUrls: ['./text-area.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextAreaComponent implements AfterContentChecked {
-	@ViewChild('fudisTextArea') textarea: ElementRef<HTMLTextAreaElement>;
-
 	/*
 	 * Unique id for text-area
 	 */
@@ -82,12 +81,5 @@ export class TextAreaComponent implements AfterContentChecked {
 		} else {
 			this.showError = false;
 		}
-	}
-
-	public get classes(): string[] {
-		if (this.control.touched && this.control.invalid) {
-			return ['fudis-text-area--invalid'];
-		}
-		return [];
 	}
 }
