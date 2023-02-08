@@ -5,11 +5,8 @@
 @use '../../../foundations/borders/mixins.scss' as border;
 
 .fudis-text-area {
-	display: grid;
-	max-width: calc(23 * spacing.$fudis-spacing-s);
-
 	&__l {
-		width: 100%;
+		max-width: calc(23 * spacing.$fudis-spacing-s);
 	}
 
 	&__m {
@@ -45,15 +42,20 @@
 		@include typography.fudis-text-field-input;
 
 		display: block;
-		width: 100%;
+		padding: spacing.$fudis-spacing-xxs;
+		width: calc(100% - 2 * spacing.$fudis-spacing-xxs);
 		resize: vertical; // Enable resizing the textarea only vertically. Can be also 'none' if we want to disable resizing all together
 	}
 
 	&__guidance {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+
 		&__help-text {
 			@include colorMixins.fudis-text-color('gray-dark');
 			@include typography.fudis-body-s-regular;
-	
+
 			margin-top: spacing.$fudis-spacing-xs;
 			text-transform: none;
 		}
@@ -61,8 +63,8 @@
 		&__error {
 			@include typography.fudis-body-s-regular;
 			@include colorMixins.fudis-text-color('red');
-	
-			margin-top: spacing.$fudis-spacing-xs;
+
+			
 			text-transform: none;
 		}
 		
@@ -70,7 +72,8 @@
 			@include colorMixins.fudis-text-color('gray-dark');
 			@include typography.fudis-body-s-regular;
 
-			float: right;
+			margin-top: spacing.$fudis-spacing-xs;
+			margin-left: spacing.$fudis-spacing-xs;
 		}
 	}
 

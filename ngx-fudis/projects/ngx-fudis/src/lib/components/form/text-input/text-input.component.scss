@@ -100,9 +100,6 @@
 			margin-top: spacing.$fudis-spacing-xs;
 		}
 		
-		&__character-limit-indicator {
-			@include colorMixins.fudis-text-color('gray-dark');
-		}
 	
 		&__error {
 			@include typography.fudis-body-s-regular;

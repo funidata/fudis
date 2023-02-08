@@ -1,59 +1,91 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterContentChecked, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { UntypedFormControl, Validators } from '@angular/forms';
+import { IFudisErrorMessages } from '../../../types/forms';
 
 @Component({
-	selector: 'fudis-text-area',
+	selector: 'fudis-text-area[id][label]',
 	templateUrl: './text-area.component.html',
 	styleUrls: ['./text-area.component.scss'],
 })
-export class TextAreaComponent implements OnInit {
+export class TextAreaComponent implements AfterContentChecked {
 	@ViewChild('fudisTextArea') textarea: ElementRef<HTMLTextAreaElement>;
 
+	/*
+	 * Unique id for text-area
+	 */
+	@Input() id: string;
+
 	/**
-	 *	Label is mandatory for every input
+	 *	Label text shown above the text area
 	 */
 	@Input() label: string;
 
+	/**
+	 *	Helper or info text, aligned underneath the text area
+	 */
+
+	@Input() helpText?: string;
+
+	/**
+	 *	Minimum length for text area, unset by default
+	 */
+	@Input() minLength?: number;
+
+	/**
+	 *	Maximum length for text area, unset by default. When set displays also a character count indicator.
+	 */
 	@Input() maxLength?: number;
 
 	/**
-	 * Fixed size options for texarea - same what text-input has
+	 *	FormControl for the text area
+	 */
+	@Input() control: UntypedFormControl;
+
+	/**
+	 * Fixed size options for text area - same what text input has
 	 */
 	@Input() size?: 's' | 'm' | 'l' = 'l';
 
 	/**
-	 *	Helper or info text, aligned underneath the textarea
+	 *	Error messages shown when form control validators are invalid
 	 */
-	@Input() helpText?: string;
+	@Input() errorMsg: IFudisErrorMessages;
 
-	@Input() required: boolean = false;
-
-	validatorArray: Array<any> = [];
-
-	textAreaControl = new UntypedFormControl('', this.validatorArray);
-
-	defaultError: string;
+	/**
+	 *	Text visible, if form control has a required validator
+	 */
+	@Input() requiredText: string;
 
 	usedCharacters: number = 0;
 
-	ngOnInit(): void {
-		if (this.required) {
-			this.validatorArray.push(Validators.required);
-		}
-	}
+	showError: boolean = false;
 
-	checkLength(): void {
-		this.usedCharacters = this.textarea?.nativeElement.value.length;
+	requiredValidator = Validators.required;
+
+	errorMsgToShow: string[] = [];
+
+	ngAfterContentChecked(): void {
+		this.usedCharacters = this.control.value.length;
 	}
 
 	checkErrors(): void {
-		if (this.textarea.nativeElement.validationMessage) {
-			this.defaultError = this.textarea.nativeElement.validationMessage;
+		this.errorMsgToShow = [];
+		if (this.control.touched && this.control.errors) {
+			this.showError = true;
+
+			Object.keys(this.control.errors).forEach((item) => {
+				const message = this.errorMsg[item as keyof IFudisErrorMessages];
+				if (message) {
+					this.errorMsgToShow.push(message);
+				}
+			});
+		} else {
+			this.showError = false;
 		}
 	}
 
 	public get classes(): string[] {
-		if (this.textAreaControl.touched && this.textAreaControl.invalid) {
+		if (this.control.touched && this.control.invalid) {
 			return ['fudis-text-area--invalid'];
 		}
 		return [];
