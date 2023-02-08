@@ -1,4 +1,4 @@
-export interface RadioButtonOption {
+export interface IFudisRadioButtonOption {
 	label: string;
 	id: string;
 	name: string;

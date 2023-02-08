@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
 	selector: 'app-root',
@@ -10,21 +11,17 @@ import { Component } from '@angular/core';
 		<form class="basic-flex-box">
 			<h2>Textarea ja button</h2>
 			<fudis-text-area
+				[control]="textAreaControl"
+				id="unique-text-area-id-1"
 				label="Pakollinen textarea, tällä on myös aika pitkä label"
 				[maxLength]="20"
-				helpText="Voit kirjoittaa tähän monia kivoja juttuja, mutta max 20 kirjainta"
-				[required]="true">
+				helpText="Voit kirjoittaa tähän monia kivoja juttuja, mutta max 20 kirjainta">
 			</fudis-text-area>
-			<fudis-text-area label="Fudis textarea, basic" size="m"> </fudis-text-area>
 			<fudis-grid columns="1fr 1fr">
 				<fudis-button data-theme="sisu" type="submit" label="Lähetä"></fudis-button>
 				<fudis-button data-theme="sisu" label="Eiku" variant="secondary"></fudis-button>
-				<fudis-button data-theme="sisu" label="Poista" variant="tertiary">
-					<fudis-icon icon="delete"></fudis-icon>
-				</fudis-button>
-				<fudis-button data-theme="sisu" label="Poista" [disabled]="true">
-					<fudis-icon icon="delete"></fudis-icon>
-				</fudis-button>
+				<fudis-button icon="delete" data-theme="sisu" label="Poista" variant="tertiary"> </fudis-button>
+				<fudis-button icon="delete" data-theme="sisu" label="Poista" [disabled]="true"> </fudis-button>
 			</fudis-grid>
 		</form>
 		<form class="basic-flex-box">
@@ -40,4 +37,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 	title = 'dev';
+
+	textAreaControl: UntypedFormControl = new UntypedFormControl('');
 }

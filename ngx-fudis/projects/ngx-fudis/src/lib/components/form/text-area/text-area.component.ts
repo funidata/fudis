@@ -1,4 +1,4 @@
-import { AfterContentChecked, Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormControl, Validators } from '@angular/forms';
 import { IFudisErrorMessages } from '../../../types/forms';
 
@@ -8,7 +8,7 @@ import { IFudisErrorMessages } from '../../../types/forms';
 	styleUrls: ['./text-area.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TextAreaComponent implements AfterContentChecked {
+export class TextAreaComponent {
 	/*
 	 * Unique id for text-area
 	 */
@@ -62,10 +62,6 @@ export class TextAreaComponent implements AfterContentChecked {
 	requiredValidator = Validators.required;
 
 	errorMsgToShow: string[] = [];
-
-	ngAfterContentChecked(): void {
-		this.usedCharacters = this.control.value.length;
-	}
 
 	checkErrors(): void {
 		this.errorMsgToShow = [];

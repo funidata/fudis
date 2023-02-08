@@ -23,7 +23,7 @@
 			@include typography.fudis-text-field-label;
 
 			position: relative;
-			padding-bottom: spacing.$fudis-spacing-xs;
+			padding-bottom: spacing.$fudis-spacing-s;
 			overflow: hidden;
 		}
 
@@ -41,9 +41,10 @@
 	&__textarea {
 		@include typography.fudis-text-field-input;
 
+		box-sizing: border-box;
 		display: block;
 		padding: spacing.$fudis-spacing-xxs;
-		width: calc(100% - 2 * spacing.$fudis-spacing-xxs);
+		width: 100%;
 		resize: vertical; // Enable resizing the textarea only vertically. Can be also 'none' if we want to disable resizing all together
 	}
 

@@ -29,7 +29,7 @@
 				{{ helpText }}
 			</p>
 			<small class="fudis-text-area__guidance__character-limit-indicator" *ngIf="maxLength">
-				{{ usedCharacters || 0 }}/{{ maxLength }}
+				{{ control.value.length || 0 }}/{{ maxLength }}
 			</small>
 		</div>
 	</label>
