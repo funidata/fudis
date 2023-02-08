@@ -4,11 +4,10 @@ import { Component } from '@angular/core';
 	selector: 'app-root',
 	template: `
 		<!--The content below is only a placeholder and can be replaced.-->
-		<div style="text-align:center" class="content">
-			<h1>Welcome to {{ title }}!</h1>
-		</div>
+		<fudis-heading tag="h1" size="xl">Welcome to Fudis sandbox </fudis-heading>
+
 		<form class="basic-flex-box">
-			<h2>Textarea ja button</h2>
+			<fudis-heading tag="h2" size="l">Text area and button</fudis-heading>
 			<fudis-text-area
 				label="Pakollinen textarea, tällä on myös aika pitkä label"
 				[maxLength]="20"
@@ -35,6 +34,12 @@ import { Component } from '@angular/core';
 				label="Single select"
 				helpText="Tästä pitäisi valita kiinnostavin kurssi, ole hyvä"></fudis-dropdown>
 		</form>
+		<fudis-expandable title="Title for expandable">
+			<ng-template fudisExpandableContent>
+				<fudis-heading tag="h3" size="m">This is heading inside an expandable</fudis-heading>
+				<fudis-body-text>This is body text inside an expandable</fudis-body-text>
+			</ng-template>
+		</fudis-expandable>
 	`,
 	styleUrls: ['./app.scss'],
 })

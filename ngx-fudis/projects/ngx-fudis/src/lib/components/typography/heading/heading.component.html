@@ -1,27 +1,36 @@
 <ng-container
 	*ngTemplateOutlet="
 		tag === 'h1' ? h1 : tag === 'h2' ? h2 : tag === 'h3' ? h3 : tag === 'h4' ? h4 : tag === 'h5' ? h5 : h6
-	"
-	[ngClass]="classes"></ng-container>
+	"></ng-container>
+
+<!-- From @Input choose which h-tag to render -->
 
 <ng-template #h1>
-	<h1 class="fudis-heading__{{ size }}">{{ text }}</h1>
+	<h1 class="fudis-heading__{{ size }}"><ng-container *ngTemplateOutlet="headingContent"></ng-container></h1>
 </ng-template>
 
 <ng-template #h2>
-	<h2 class="fudis-heading__{{ size }}">{{ text }}</h2>
+	<h2 class="fudis-heading__{{ size }}"><ng-container *ngTemplateOutlet="headingContent"></ng-container></h2>
 </ng-template>
 
 <ng-template #h3>
-	<h3 class="fudis-heading__{{ size }}">{{ text }}</h3>
+	<h3 class="fudis-heading__{{ size }}"><ng-container *ngTemplateOutlet="headingContent"></ng-container></h3>
 </ng-template>
 
 <ng-template #h4>
-	<h4 class="fudis-heading__{{ size }}">{{ text }}</h4>
+	<h4 class="fudis-heading__{{ size }}"><ng-container *ngTemplateOutlet="headingContent"></ng-container></h4>
 </ng-template>
+
 <ng-template #h5>
-	<h5 class="fudis-heading__{{ size }}">{{ text }}</h5>
+	<h5 class="fudis-heading__{{ size }}"><ng-container *ngTemplateOutlet="headingContent"></ng-container></h5>
 </ng-template>
+
 <ng-template #h6>
-	<h6 class="fudis-heading__{{ size }}">{{ text }}</h6>
+	<h6 class="fudis-heading__{{ size }}"><ng-container *ngTemplateOutlet="headingContent"></ng-container></h6>
+</ng-template>
+
+<!-- Render content inside fudis-heading tags -->
+
+<ng-template #headingContent>
+	<ng-content></ng-content>
 </ng-template>

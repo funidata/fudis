@@ -9,6 +9,9 @@ export default {
 
 const Template: Story<HeadingComponent> = (args: HeadingComponent) => ({
 	props: args,
+	template: `
+  <fudis-heading [tag]="tag" [size]="size">{{text}}</fudis-heading>
+`,
 });
 
 export const Heading = Template.bind({});
