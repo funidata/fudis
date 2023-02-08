@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UntypedFormControl, Validators } from '@angular/forms';
-import { RadioButtonOption } from '../../../types/forms';
+import { IFudisRadioButtonOption } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-radio-button-group[options][id][legend]',
@@ -16,7 +16,7 @@ export class RadioButtonGroupComponent implements OnInit {
 	/*
 	 * Array of options for group of radio buttons
 	 */
-	@Input() options: RadioButtonOption[];
+	@Input() options: IFudisRadioButtonOption[];
 
 	/*
 	 * Legend label for the group

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DescriptionListItem } from '../../types/lists';
+import { IFudisDescriptionListItem } from '../../types/lists';
 
 @Component({
 	selector: 'fudis-description-list',
@@ -11,7 +11,7 @@ export class DescriptionListComponent {
 	 * Item array to form description list data.
 	 * Contains mandatory key and value, and optional subHeading.
 	 */
-	@Input() data: DescriptionListItem[] = [];
+	@Input() data: IFudisDescriptionListItem[] = [];
 
 	/**
 	 * Variant for description list structure and layout

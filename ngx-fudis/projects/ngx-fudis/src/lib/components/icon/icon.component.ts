@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Icon, IconColor } from '../../types/icons';
+import { FudisIcon, FudisIconColor } from '../../types/icons';
 
 /**
  * Example: `<fudis-icon icon="info" color="primary"></fudis-icon>`
@@ -21,12 +21,12 @@ export class IconComponent {
 	/**
 	 * Choose icon
 	 */
-	@Input() icon: Icon;
+	@Input() icon: FudisIcon;
 
 	/**
 	 * Set color for icon
 	 */
-	@Input() color: IconColor = 'default';
+	@Input() color: FudisIconColor = 'default';
 
 	/**
 	 * Use rotate to flip and rotate icon

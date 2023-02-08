@@ -9,7 +9,7 @@ import {
 	ReactiveFormsModule,
 } from '@angular/forms';
 
-import { RadioButtonOption } from 'projects/ngx-fudis/src/lib/types/forms';
+import { IFudisRadioButtonOption } from 'projects/ngx-fudis/src/lib/types/forms';
 
 import { Story, Meta, moduleMetadata } from '@storybook/angular';
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,7 +19,7 @@ import { BodyTextComponent } from '../../typography/body-text/body-text.componen
 import { LegendComponent } from '../legend/legend.component';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 
-const getDefaultValue = (options: RadioButtonOption[]): string | undefined => {
+const getDefaultValue = (options: IFudisRadioButtonOption[]): string | undefined => {
 	const checkedValue = options.find((item) => item.checked);
 	return checkedValue?.value;
 };
@@ -57,13 +57,13 @@ class RadioButtonGroupExampleComponent {
 	 * Options for testing purposes
 	 */
 
-	fruitOptions: RadioButtonOption[] = [
+	fruitOptions: IFudisRadioButtonOption[] = [
 		{ value: 'apple', label: 'Apple', id: 'fruit-1', name: 'fruit' },
 		{ value: 'fair-trade-banana', label: 'Fair Trade Banana', id: 'fruit-2', name: 'fruit', checked: true },
 		{ value: 'cherry', label: 'Cherry', id: 'fruit-3', name: 'fruit' },
 	];
 
-	petOptions: RadioButtonOption[] = [
+	petOptions: IFudisRadioButtonOption[] = [
 		{ value: 'platypus', label: 'Platypus', id: 'pet-1', name: 'animal' },
 		{ value: 'otter', label: 'Otter', id: 'pet-2', name: 'animal' },
 		{ value: 'capybara', label: 'Capybara', id: 'pet-3', name: 'animal' },

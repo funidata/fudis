@@ -1,4 +1,4 @@
-export type Icon =
+export type FudisIcon =
 	| 'achievement'
 	| 'achievement-small'
 	| 'alert'
@@ -91,4 +91,4 @@ export type Icon =
 	| 'zoom-in'
 	| 'zoom-out';
 
-export type IconColor = 'attention' | 'danger' | 'default' | 'light' | 'primary' | 'success' | 'white';
+export type FudisIconColor = 'attention' | 'danger' | 'default' | 'light' | 'primary' | 'success' | 'white';
