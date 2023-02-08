@@ -34,6 +34,16 @@ import { IFudisErrorMessages } from '../../../types/forms';
 				[errorMsg]="validatorMessages"
 				type="email"
 				helpText="This is an example email input with multiple validations."></fudis-text-input>
+			<fudis-text-input
+				[control]="thirdTextInputControl"
+				id="unique-text-input-id-3"
+				label="Number input"
+				requiredText="Required"
+				[min]="minNumber"
+				[max]="maxNumber"
+				type="number"
+				size="s"
+				[errorMsg]="validatorMessages"></fudis-text-input>
 		</form>
 	`,
 })
@@ -42,12 +52,19 @@ class TextInputWithFormControlExampleComponent {
 
 	maxLength = 20;
 
+	minNumber = 1;
+
+	maxNumber = 99;
+
 	validatorsForSecondTextInput = [
 		Validators.minLength(this.minLength),
 		Validators.maxLength(this.maxLength),
 		Validators.required,
 		Validators.email,
 	];
+
+	validatorsForThirdTextInput = [Validators.min(this.minNumber), Validators.max(this.maxNumber), Validators.required];
+
 	/**
 	 * Options for testing purposes
 	 */
@@ -57,11 +74,15 @@ class TextInputWithFormControlExampleComponent {
 		email: 'Your input is not in email format.',
 		minlength: `Too short email. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,
 		maxlength: `Too long email. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,
+		min: `Given number is not inside the allowed range ${this.minNumber} - ${this.maxNumber}.`,
+		max: `Given number is not inside the allowed range ${this.minNumber} - ${this.maxNumber}.`,
 	};
 
 	firstTextInputControl: UntypedFormControl = new UntypedFormControl('', [Validators.required]);
 
 	secondTextInputControl: UntypedFormControl = new UntypedFormControl('', this.validatorsForSecondTextInput);
+
+	thirdTextInputControl: UntypedFormControl = new UntypedFormControl('', this.validatorsForThirdTextInput);
 
 	mainFormGroup: UntypedFormGroup = this.formBuilder.group({
 		firstTextInputControl: this.firstTextInputControl,

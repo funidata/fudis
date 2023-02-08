@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { UntypedFormControl } from '@angular/forms';
+import { UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
 import { RadioButtonComponent } from './radio-button.component';
 
 const lonelyFormControl = new UntypedFormControl();
@@ -12,6 +11,7 @@ describe('RadioButtonComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [RadioButtonComponent],
+			imports: [ReactiveFormsModule],
 		}).compileComponents();
 	});
 
