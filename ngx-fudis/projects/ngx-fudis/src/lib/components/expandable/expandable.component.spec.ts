@@ -2,9 +2,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { MockComponent } from 'ng-mocks';
-
 import { IconComponent } from '../icon/icon.component';
 import { ExpandableContentDirective } from './expandable-content.directive';
 import { ExpandableComponent } from './expandable.component';

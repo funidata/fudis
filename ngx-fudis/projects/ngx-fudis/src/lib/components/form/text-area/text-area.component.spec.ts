@@ -1,6 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
+import { MockComponent } from 'ng-mocks';
+import { ChangeDetectionStrategy } from '@angular/core';
 import { TextAreaComponent } from './text-area.component';
+import { ErrorMessageComponent } from '../error-message/error-message.component';
+
+const textAreaControl: UntypedFormControl = new UntypedFormControl('');
 
 describe('TextAreaComponent', () => {
 	let component: TextAreaComponent;
@@ -8,14 +13,22 @@ describe('TextAreaComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [TextAreaComponent],
+			declarations: [TextAreaComponent, MockComponent(ErrorMessageComponent)],
 			imports: [ReactiveFormsModule],
-		}).compileComponents();
+		})
+			.overrideComponent(TextAreaComponent, {
+				set: { changeDetection: ChangeDetectionStrategy.Default },
+			})
+			.compileComponents();
 	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(TextAreaComponent);
 		component = fixture.componentInstance;
+		component.label = 'Label for testing purposes';
+		component.control = textAreaControl;
+		component.id = 'id-for-testing';
+
 		fixture.detectChanges();
 	});
 
