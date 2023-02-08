@@ -15,41 +15,66 @@ type Error = {
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextInputComponent {
-	// Bind input field
 	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;
-
-	@Output() errorOutput: EventEmitter<Error> = new EventEmitter<Error>();
-
-	@Input() errorMsg: IFudisErrorMessages;
-
-	/**
-	 *	Label is mandatory for every input
-	 */
-	@Input() label: string;
-
-	@Input() id: string;
-
-	@Input() size?: 's' | 'm' | 'l' = 'l';
-
-	/**
-	 *	Helper or info text for the input, aligned underneath the input
-	 */
-	@Input() helpText?: string;
-
-	@Input() requiredText: string;
-
-	@Input() characterLimitIndicatorValue?: number;
 
 	@Input() control: UntypedFormControl;
 
 	/**
-	 *	Type of the input
+	 * Error message shown below the input
+	 */
+	@Input() errorMsg: IFudisErrorMessages;
+
+	/**
+	 * Input label
+	 */
+	@Input() label: string;
+
+	/**
+	 * Input id
+	 */
+	@Input() id: string;
+
+	/**
+	 * Available sizes for the input - defaults to large. Recommended size for number input is small.
+	 */
+	@Input() size?: 's' | 'm' | 'l' = 'l';
+
+	/**
+	 * Helper/info text shown below the input
+	 */
+	@Input() helpText?: string;
+
+	/**
+	 * Text to indicate that input is required, shown above the input with asterisk
+	 */
+	@Input() requiredText: string;
+
+	/**
+	 * Type of the input - defaults to 'text'
 	 */
 	@Input() type: 'email' | 'number' | 'password' | 'tel' | 'text' | 'url' = 'text';
 
+	/**
+	 * Minimium number of characters allowed by minLength
+	 */
 	@Input() minLength: number;
 
+	/**
+	 * Maximum number of characters allowed by maxLength
+	 */
 	@Input() maxLength: number;
+
+	/**
+	 * Minimum number allowed by number input's minNumber
+	 */
+	@Input() minNumber: number;
+
+	/**
+	 * Maximum number allowed by number input's maxNumber
+	 */
+	@Input() maxNumber: number;
+
+	@Output() errorOutput: EventEmitter<Error> = new EventEmitter<Error>();
 
 	showError: boolean = false;
 

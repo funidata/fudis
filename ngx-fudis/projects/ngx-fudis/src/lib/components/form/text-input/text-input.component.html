@@ -9,8 +9,10 @@
 		<input
 			#fudisTextInput
 			[formControl]="control"
-			[minlength]="minLength"
-			[maxlength]="maxLength"
+			[attr.minlength]="minLength"
+			[attr.maxlength]="maxLength"
+			[min]="minNumber"
+			[max]="maxNumber"
 			id="{{ id }}"
 			(blur)="checkErrors()"
 			[type]="type"

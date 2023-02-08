@@ -28,7 +28,7 @@
 			@include colorMixins.fudis-text-color('gray-dark');
 
 			position: relative;
-			padding-bottom: spacing.$fudis-spacing-xs;
+			padding-bottom: spacing.$fudis-spacing-s;
 			overflow: hidden;
 		}
 
@@ -48,28 +48,6 @@
 			display: flex;
 			align-items: flex-end;
 			overflow: hidden;
-
-			&__unset {
-				height: initial;
-			}
-
-			&__single {
-				@include breakpoints.fudis-breakpoint('m') {
-					height: calc(typographyTokens.$fudis-text-input-line-height)
-				}
-			}
-
-			&__double {
-				@include breakpoints.fudis-breakpoint('m') {
-					height: calc(2 * typographyTokens.$fudis-text-input-line-height);
-				}
-			}
-
-			&__triple {
-				@include breakpoints.fudis-breakpoint('m') {
-					height: calc(3 * typographyTokens.$fudis-text-input-line-height);
-				}
-			}
 		}
 	}
 
@@ -89,7 +67,7 @@
 
 		&--invalid {
 			border-color: colors.$fudis-red;
-			 }	
+		}	
 	}
 
 	&__guidance {
@@ -99,13 +77,11 @@
 	
 			margin-top: spacing.$fudis-spacing-xs;
 		}
-		
-	
-		&__error {
-			@include typography.fudis-body-s-regular;
-			@include colorMixins.fudis-text-color('red');
-	
-			margin-top: spacing.$fudis-spacing-xs;
-		}
 	}
+
+	// Keep number input arrows visible all the time
+  /* stylelint-disable-next-line selector-no-qualifying-type */
+  input[type=number]::-webkit-inner-spin-button {  
+		opacity: 1;
+ 	}
 }
