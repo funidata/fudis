@@ -21,7 +21,7 @@ import { IFudisErrorMessages } from '../../../types/forms';
 				[control]="firstTextInputControl"
 				id="unique-text-input-id-1"
 				requiredText="Required"
-				[errorMsg]="{ required: 'Missing a value.' }"
+				[errorMsg]="{ required: 'Missing a value. Tää on pakollinen.' }"
 				label="I am a required text input"
 				helpText="Please add some values here above!"></fudis-text-input>
 			<fudis-text-input

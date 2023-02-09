@@ -1,0 +1,7 @@
+<label class="fudis-label" [attr.for]="for">
+	<div class="fudis-label__content">
+		<span class="fudis-label__text">{{ text }}</span
+		><span class="fudis-label__required" *ngIf="requiredText">{{ requiredText }}&nbsp;*</span>
+	</div>
+	<ng-content></ng-content>
+</label>

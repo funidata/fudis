@@ -17,27 +17,6 @@
 		max-width: calc(10 * spacing.$fudis-spacing-s);
 	}
 
-	&__label {
-		&__content {
-			@include colorMixins.fudis-text-color('gray-dark');
-			@include typography.fudis-text-field-label;
-
-			position: relative;
-			padding-bottom: spacing.$fudis-spacing-s;
-			overflow: hidden;
-		}
-
-		&__required {
-			@include typography.fudis-body-s-regular;
-
-			display: inline-block;
-			position: absolute;
-			right: 0;
-			bottom: 0;
-			text-transform: initial;
-		}
-	}
-
 	&__textarea {
 		@include typography.fudis-text-field-input;
 

@@ -23,34 +23,6 @@
 		max-width: calc(10 * spacing.$fudis-spacing-s);
 	}
 
-	&__label {
-		&__content {
-			@include colorMixins.fudis-text-color('gray-dark');
-
-			position: relative;
-			padding-bottom: spacing.$fudis-spacing-s;
-			overflow: hidden;
-		}
-
-		&__required {
-			@include typography.fudis-body-s-regular;
-
-			display: inline-block;
-			position: absolute;
-			right: 0;
-			bottom: 0;
-			text-transform: initial;
-		}
-
-		&__text {
-			@include typography.fudis-text-field-label;
-
-			display: flex;
-			align-items: flex-end;
-			overflow: hidden;
-		}
-	}
-
 	&__input {
 		@include borders.fudis-border('1px', 'solid', 'gray-middle');
 		@include typography.fudis-text-field-input;

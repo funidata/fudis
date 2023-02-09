@@ -1,13 +1,8 @@
 <div class="fudis-form-element fudis-text-area fudis-text-area__{{ size }}">
-	<label class="fudis-text-area__label">
-		<div class="fudis-text-area__label__content">
-			<span class="fudis-text-area__label__text">
-				{{ label }}
-			</span>
-			<span class="fudis-text-area__label__required" *ngIf="control.hasValidator(requiredValidator)"
-				>{{ requiredText }}&nbsp;*</span
-			>
-		</div>
+	<fudis-label
+		[for]="id"
+		[text]="label"
+		[requiredText]="control.hasValidator(requiredValidator) && requiredText ? requiredText : null">
 		<textarea
 			id="{{ id }}"
 			[formControl]="control"
@@ -32,5 +27,5 @@
 				{{ control.value.length || 0 }}/{{ maxLength }}
 			</small>
 		</div>
-	</label>
+	</fudis-label>
 </div>
