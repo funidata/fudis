@@ -27,7 +27,6 @@ import { UntypedFormControl } from '@angular/forms';
 			<h2>Dropdown</h2>
 			<fudis-dropdown [multipleOption]="true" label="Multi select"></fudis-dropdown>
 			<fudis-dropdown
-				[required]="true"
 				label="Single select"
 				helpText="Tästä pitäisi valita kiinnostavin kurssi, ole hyvä"></fudis-dropdown>
 		</form>

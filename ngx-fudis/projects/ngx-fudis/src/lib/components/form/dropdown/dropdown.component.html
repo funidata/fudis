@@ -17,7 +17,6 @@
 		[multiple]="multipleOption"
 		[formControl]="control"
 		[attr.required]="isRequired()"
-		[(value)]="control.value"
 		[aria-label]="requiredText ? label + ', ' + requiredText : label"
 		[attr.aria-describedby]="'guidance_' + id">
 		<mat-option *ngFor="let option of options" [value]="option" [disabled]="option.disabled">
