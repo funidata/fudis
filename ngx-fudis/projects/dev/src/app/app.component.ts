@@ -37,6 +37,17 @@ import { UntypedFormControl } from '@angular/forms';
 				<fudis-body-text>This is body text inside an expandable</fudis-body-text>
 			</ng-template>
 		</fudis-expandable>
+		<fudis-heading tag="h3">
+			<fudis-link data-theme="sisu" href="#" linkTitle="Link inside a heading"></fudis-link>
+		</fudis-heading>
+		<fudis-link
+			data-theme="sisu"
+			href="https://www.example.com"
+			linkTitle="External link with icon and aria-label"
+			[isExternalLink]="true"
+			externalLinkAriaLabel="Opens in a new window">
+		</fudis-link>
+		<fudis-link data-theme="sisu" size="m" href="https://www.example.com"></fudis-link>
 	`,
 	styleUrls: ['./app.scss'],
 })
