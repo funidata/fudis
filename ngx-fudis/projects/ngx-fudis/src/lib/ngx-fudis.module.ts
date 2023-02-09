@@ -27,6 +27,7 @@ import { GridComponent } from './components/grid/grid.component';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { IconComponent } from './components/icon/icon.component';
 import { LegendComponent } from './components/form/legend/legend.component';
+import { LinkComponent } from './components/link/link.component';
 import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
 import { RadioButtonGroupComponent } from './components/form/radio-button-group/radio-button-group.component';
 import { TextInputComponent } from './components/form/text-input/text-input.component';
@@ -56,6 +57,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		HeadingComponent,
 		IconComponent,
 		LegendComponent,
+		LinkComponent,
 		RadioButtonComponent,
 		RadioButtonGroupComponent,
 		TextInputComponent,
@@ -100,6 +102,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		HeadingComponent,
 		IconComponent,
 		LegendComponent,
+		LinkComponent,
 		RadioButtonGroupComponent,
 		TextAreaComponent,
 		TextInputComponent,

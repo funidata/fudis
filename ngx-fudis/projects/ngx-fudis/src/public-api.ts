@@ -19,6 +19,7 @@ export { GridComponent } from './lib/components/grid/grid.component';
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
 export { IconComponent } from './lib/components/icon/icon.component';
 export { LegendComponent } from './lib/components/form/legend/legend.component';
+export { LinkComponent } from './lib/components/link/link.component';
 export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';
 export { TextInputComponent } from './lib/components/form/text-input/text-input.component';
