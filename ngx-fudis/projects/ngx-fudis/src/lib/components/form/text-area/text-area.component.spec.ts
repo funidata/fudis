@@ -4,6 +4,7 @@ import { MockComponent } from 'ng-mocks';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { TextAreaComponent } from './text-area.component';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
+import { LabelComponent } from '../label/label.component';
 
 const textAreaControl: UntypedFormControl = new UntypedFormControl('');
 
@@ -13,7 +14,7 @@ describe('TextAreaComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [TextAreaComponent, MockComponent(ErrorMessageComponent)],
+			declarations: [TextAreaComponent, MockComponent(ErrorMessageComponent), MockComponent(LabelComponent)],
 			imports: [ReactiveFormsModule],
 		})
 			.overrideComponent(TextAreaComponent, {

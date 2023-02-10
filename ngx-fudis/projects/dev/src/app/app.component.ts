@@ -23,14 +23,6 @@ import { UntypedFormControl } from '@angular/forms';
 				<fudis-button icon="delete" data-theme="sisu" label="Poista" [disabled]="true"> </fudis-button>
 			</fudis-grid>
 		</form>
-		<form class="basic-flex-box">
-			<h2>Dropdown</h2>
-			<fudis-dropdown [multipleOption]="true" label="Multi select"></fudis-dropdown>
-			<fudis-dropdown
-				[required]="true"
-				label="Single select"
-				helpText="Tästä pitäisi valita kiinnostavin kurssi, ole hyvä"></fudis-dropdown>
-		</form>
 		<fudis-expandable title="Title for expandable">
 			<ng-template fudisExpandableContent>
 				<fudis-heading tag="h3" size="m">This is heading inside an expandable</fudis-heading>

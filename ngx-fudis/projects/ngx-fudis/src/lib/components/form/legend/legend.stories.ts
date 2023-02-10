@@ -24,14 +24,9 @@ export const Legend: Story = () => ({
 	template: `
 	<form>
 	<fieldset>
-	
-	<fudis-legend>Olen legendaarinen lomake</fudis-legend>
-	<fudis-text-input [required]="true"  label="Password, min length 4, max 6" minLength=4 maxLength=6 type="password" helpText="Help text Nipperkin"></fudis-text-input>	
-	<fudis-text-input [required]="true"  label="Password, min length 4, max 6" minLength=4 maxLength=6 type="password" helpText="Help text Nipperkin"></fudis-text-input>	
-	<fudis-text-input [required]="true"  label="Password, min length 4, max 6" minLength=4 maxLength=6 type="password" helpText="Help text Nipperkin"></fudis-text-input>	
-	<fudis-text-input [required]="true"  label="Password, min length 4, max 6" minLength=4 maxLength=6 type="password" helpText="Help text Nipperkin"></fudis-text-input>	
+	<fudis-legend>This is a Fudis legend</fudis-legend>
+	<h1>TBD</h1>
 	</fieldset>
-	
 	</form>
 
 	`,

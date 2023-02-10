@@ -1,14 +1,11 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { UntypedFormControl, Validators } from '@angular/forms';
+import { IFudisErrorMessages, IFudisDropdownOption } from '../../../types/forms';
 
-export interface Option {
-	/** Underlying value of the option */
-	value: any;
-	/** Value that is shown in the UI */
-	viewValue: string;
-	/** Is option disabled in the dropdown */
-	disabled?: boolean;
-}
+type Error = {
+	id: string;
+	message: string;
+};
 
 @Component({
 	selector: 'fudis-dropdown',
@@ -16,53 +13,89 @@ export interface Option {
 	styleUrls: ['./dropdown.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class DropdownComponent implements OnInit {
+export class DropdownComponent {
 	/**
-	 * Options for testing purposes
+	 * Dropdown options
 	 */
-	// options: Option[] = [
-	// 	{ value: 'Leivonta-101', viewValue: 'Leivontakurssi, joka kestää tosi kauan ja on tosi spesifi' },
-	// 	{ value: 'Hiivat661', viewValue: 'Kaikki hiivasta', disabled: true },
-	// 	{ value: 'Sticky-bun', viewValue: 'Luonnon pullat' },
-	// ];
+	@Input() options: IFudisDropdownOption[];
 
-	@Input() options: Option[];
+	/**
+	 * FormControl for the dropdown
+	 */
+	@Input() control: UntypedFormControl;
 
-	@Input() required = false;
+	/*
+	 * Error message shown below the input
+	 */
+	@Input() errorMsg: IFudisErrorMessages;
 
 	/**
 	 * If true, user can choose multiple checkbox options from dropdown
 	 */
 	@Input() multipleOption = false;
 
-	@Input() label?: string;
+	/**
+	 * Label for the dropdown
+	 */
+	@Input() label: string;
 
 	/**
-	 * Custom placeholder text to show when no selection has been made. Defaults to 'Valitse'
+	 * Unique dropdown id
+	 */
+	@Input() id: string;
+
+	/**
+	 * Custom placeholder text to show when no selection has been made
 	 */
 	@Input() placeholder: string;
 
 	/**
-	 *	Helper or info text for the input, aligned underneath the input
+	 * Help text, aligned underneath the dropdown
 	 */
 	@Input() helpText?: string;
 
-	selectedOption: Option;
+	/**
+	 * Text to indicate that input is required, shown above the input with asterisk
+	 */
+	@Input() requiredText: string;
 
-	validatorArray: any = [];
+	/**
+	 * Available sizes for the dropdown - defaults to large.
+	 */
+	@Input() size?: 's' | 'm' | 'l' = 'l';
 
-	selectFormControl = new UntypedFormControl('', this.validatorArray);
+	@Output() errorOutput: EventEmitter<Error> = new EventEmitter<Error>();
 
-	ngOnInit(): void {
-		if (this.required) {
-			this.validatorArray.push(Validators.required);
+	showError: boolean = false;
+
+	errorMsgToShow: string[] = [];
+
+	checkErrors(): void {
+		this.errorMsgToShow = [];
+		if (this.control.touched && this.control.errors) {
+			this.showError = true;
+
+			Object.keys(this.control.errors).forEach((item) => {
+				const message = this.errorMsg[item as keyof IFudisErrorMessages];
+
+				if (message) {
+					this.errorMsgToShow.push(message);
+					this.getErrorOutput(this.id, message);
+				}
+			});
+		} else {
+			this.showError = false;
 		}
 	}
 
-	public get classes(): string[] {
-		if (this.selectFormControl.touched && this.selectFormControl.invalid) {
-			return ['fudis-dropdown--invalid'];
+	getErrorOutput(id: string, error: string) {
+		this.errorOutput.emit({ id, message: error });
+	}
+
+	isRequired(): boolean {
+		if (this.control.hasValidator(Validators.required)) {
+			return true;
 		}
-		return [];
+		return false;
 	}
 }

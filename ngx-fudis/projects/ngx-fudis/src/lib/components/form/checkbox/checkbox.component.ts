@@ -41,6 +41,7 @@ export class CheckboxComponent {
 		this.input.nativeElement.focus();
 		if (!this.control.disabled) {
 			this.control.patchValue(!this.control.value);
+			this.control.markAsDirty();
 		}
 	}
 

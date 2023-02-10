@@ -5,6 +5,7 @@ import { By } from '@angular/platform-browser';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { TextInputComponent } from './text-input.component';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
+import { LabelComponent } from '../label/label.component';
 
 const textInputControl: UntypedFormControl = new UntypedFormControl('');
 
@@ -14,7 +15,7 @@ describe('TextInputComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [TextInputComponent, MockComponent(ErrorMessageComponent)],
+			declarations: [TextInputComponent, MockComponent(ErrorMessageComponent), MockComponent(LabelComponent)],
 			imports: [ReactiveFormsModule],
 		})
 			.overrideComponent(TextInputComponent, {

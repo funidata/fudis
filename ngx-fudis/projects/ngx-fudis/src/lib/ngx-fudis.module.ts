@@ -26,6 +26,7 @@ import { FudisDialog } from './components/dialog/dialog';
 import { GridComponent } from './components/grid/grid.component';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { IconComponent } from './components/icon/icon.component';
+import { LabelComponent } from './components/form/label/label.component';
 import { LegendComponent } from './components/form/legend/legend.component';
 import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
 import { RadioButtonGroupComponent } from './components/form/radio-button-group/radio-button-group.component';
@@ -55,6 +56,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		ErrorSummaryComponent,
 		HeadingComponent,
 		IconComponent,
+		LabelComponent,
 		LegendComponent,
 		RadioButtonComponent,
 		RadioButtonGroupComponent,
