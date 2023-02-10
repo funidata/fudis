@@ -72,7 +72,7 @@ mat-form-field {
 			}
 			
 			/* stylelint-disable-next-line order/order */
-			&:disabled {
+			&[aria-disabled="true"] {
 				fudis-icon {
 					/* stylelint-disable-next-line selector-max-compound-selectors */
 					svg {

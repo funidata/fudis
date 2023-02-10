@@ -5,6 +5,18 @@ import { setCompodocJson } from '@storybook/addon-docs/angular';
 import docJson from '../documentation.json';
 setCompodocJson(docJson);
 
+const storyOrder = [
+	'Documentation',
+	[
+		'Introduction',
+		['Getting Started'],
+		'Development',
+		['Overview', 'Ways of working', 'Creating component', 'Project structure'],
+	],
+	'Foundations',
+	'Components',
+];
+
 export const parameters = {
 	actions: { argTypesRegex: '^on[A-Z].*' },
 	controls: {
@@ -16,7 +28,7 @@ export const parameters = {
 	docs: { inlineStories: true },
 	options: {
 		storySort: {
-			order: ['Documentation', ['Introduction', 'Development'], 'Foundations', 'Components'],
+			order: storyOrder,
 		},
 	},
 };

@@ -1,0 +1,42 @@
+import { ArgsTable, Meta, Story, Canvas, Source } from '@storybook/addon-docs';
+
+<Meta title="Documentation/Development/Ways of working" />
+
+# Ways of working
+
+## Naming convensions
+
+The Fudis Design System uses the following naming conventions described here. These conventions aim to reduce the load of creating new names for components while maintaining a consistent project folder structure.
+
+### Prefix
+
+Fudis uses selector prefix <code>fudis-</code>. Prefix prevents collision with consumers existing design tokens.
+
+### CSS/SASS class names
+
+Fudis follow BEM methodology of block, element and modifier.
+
+### Fudis components
+
+- <code>fudis</code> -prefix
+- All lower case
+- Segments are joined with <code>-</code>.
+
+#### Example
+
+<code>fudis-text-input</code>
+
+- <code>fudis</code> -prefix
+- **Block level:** refers to a category. Ex. text.
+- **Element:** Item type, ex. input.
+
+### Fudis foundations - design tokens
+
+#### Example
+
+<code>$fudis-spacing-xs</code>
+
+- <code>fudis</code> -prefix
+- **Block level:** refers to a type: focus, border, grid, breakpoint.
+- **Element:** Refers to a specific item. Ex. heading, body, form-field.
+- **Modifier:** Describes the quality of the identifier, like width, state or a variant.

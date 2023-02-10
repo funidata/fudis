@@ -1,4 +1,8 @@
-# Development Guidelines
+import { ArgsTable, Meta, Story, Canvas, Source } from '@storybook/addon-docs';
+
+<Meta title="Documentation/Development/Overview" />
+
+# Development Overview
 
 ## Styles
 
@@ -9,3 +13,14 @@
   - Prefer building on existing Fudis components, if possible.
   - Use globally defined colors, spacing, etc. rather than introducing hard-to-maintain local values.
   - _**Do not override or modify Angular Material's CSS or DOM!**_ This will make upstream minor and patch changes potentially breaking changes for Fudis.
+
+```
+├── components
+├── button                        	# Component folder
+│   	├── button.component.html     # Component template
+│   	├── button.component.scss    	# Style file
+│   	├── button.component.spec.ts  # Unit-tests
+│   	├── button.component.ts       # Component file
+│   	└── button.stories.ts        	# Component story
+└── ...
+```

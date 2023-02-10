@@ -33,20 +33,12 @@ export const Button = Template.bind({});
 Button.args = {
 	variant: 'primary',
 	label: 'Button',
-	icon: 'search',
 };
 
-export const Secondary = Template.bind({});
-Secondary.args = {
+export const IconButton = Template.bind({});
+IconButton.args = {
 	variant: 'secondary',
-	label: 'toinen nappi!',
-	icon: 'search',
-};
-
-export const WithIcon = Template.bind({});
-WithIcon.args = {
-	variant: 'secondary',
-	label: 'with icon',
+	label: 'Icon Button',
 	icon: 'search',
 };
 
@@ -57,59 +49,5 @@ export const AllVariants: Story = () => ({
 		<fudis-button variant="secondary" label="Secondary"></fudis-button>
 		<fudis-button variant="tertiary" label="Tertiary"></fudis-button>
 	</fudis-grid>
-	`,
-});
-
-// export const PrimaryVariations: Story = () => ({
-// 	template: `
-// 	<fudis-grid columns="1fr 1fr 1fr" align="left">
-// 			<fudis-button size="small" label="Primary"></fudis-button>
-// 			<fudis-button variant="secondary" size="small" label="Secondary"></fudis-button>
-// 			<fudis-button variant="tertiary" size="small" label="Tertiary"></fudis-button>
-// 			<fudis-button label="Primary"></fudis-button>
-// 			<fudis-button variant="secondary" label="Secondary"></fudis-button>
-// 			<fudis-button variant="tertiary" label="Tertiary"></fudis-button>
-// 			<fudis-button disabled="true" label="Primary"></fudis-button>
-// 			<fudis-button variant="secondary" disabled="true" label="Secondary"></fudis-button>
-// 		<fudis-button variant="tertiary" disabled="true" label="Tertiary"></fudis-button>
-// 	</fudis-grid>
-// 	`,
-// });
-
-// export const SecondaryVariations: Story = () => ({
-// 	template: `
-// 	<fudis-grid columns="1fr 1fr 1fr" align="left">
-// 		<fudis-button variant="secondary" size="small" label="Secondary"></fudis-button>
-// 		<fudis-button variant="secondary" label="Secondary"></fudis-button>
-// 		<fudis-button variant="secondary" disabled="true" label="Secondary"></fudis-button>
-// 	</fudis-grid>
-// 	`,
-// });
-
-export const ExamplesWithIcon: Story = () => ({
-	template: `
-		<div style="display:flex; flex-direction:column;">
-			<div style="margin-bottom:1rem">
-				<fudis-button icon="delete" label="Poista"></fudis-button>
-			</div>
-			<div style="margin-bottom:1rem">
-				<fudis-button icon="delete" label="Poista" variant="secondary"></fudis-button>
-			</div>
-			<div style="margin-bottom:1rem">
-				<fudis-button icon="delete" label="Poista" variant="tertiary"></fudis-button>
-			</div>
-			<div style="margin-bottom:1rem">
-				<fudis-button icon="delete" label="Palaa takaisin" size="small"></fudis-button>
-			</div>
-			<div style="margin-bottom:1rem">
-				<fudis-button icon="delete" label="Palaa takaisin" size="small" variant="secondary"></fudis-button>
-			</div>
-			<div style="margin-bottom:1rem">
-				<fudis-button icon="delete" label="Palaa takaisin" size="small" variant="tertiary"></fudis-button>
-			</div>
-			<div style="margin-bottom:1rem">
-				<fudis-button icon="delete" disabled="true" label="Palaa takaisin" variant="tertiary"></fudis-button>
-			</div>
-		</div>
 	`,
 });

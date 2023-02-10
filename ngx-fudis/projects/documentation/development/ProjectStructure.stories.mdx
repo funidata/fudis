@@ -1,0 +1,59 @@
+<Meta title="Documentation/Development/Project structure" />
+
+# General directory structure
+
+Example how components are structured.
+
+```
+design-system
+│
+└───dev
+│
+└───documentation
+│
+└───ngx-fudis
+│ │
+│ └───examples
+│ │
+│ └───lib
+│ │
+│ └───assets
+│ │
+│ └───components
+│ │ │
+│ │ └─── button
+│ │ │ │
+│ │ │ button.component.html
+│ │ │ button.component.scss
+│ │ │ button.component.spec.ts
+│ │ │ button.component.ts
+│ │ │ button.stories.ts
+│ │ │
+│ │ ...
+│ │
+│ └───foundations
+│ │ │
+│ │ ├──borders
+│ │ ├──breakppoints
+│ │ ├──colors
+│ │ ├──focus
+│ │ ├──grid
+│ │ ├──spacing
+│ │ └───typography
+│ │
+│ └───theme
+│ │ │
+│ │ └───ngMaterialCustomisation.scss
+│ │
+│ └───types
+│
+...
+```
+
+## Foundation
+
+Foundations directory contains all project foundation design tokens and mixins. Including tokens and mixins for e. g. borders, breakpoints, colors, spacing and typography.
+
+## Themes
+
+Themes folder includes theme definitions that are needed for Angular Material component styling. If Angular Material component requires overriding style customization, these styles are recorded in component specific scss file.

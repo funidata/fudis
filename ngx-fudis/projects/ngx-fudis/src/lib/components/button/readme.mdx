@@ -1,4 +1,5 @@
 import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
 import { ButtonComponent } from './button.component';
 
 <Meta title="Button" component={ButtonComponent} />
@@ -14,35 +15,28 @@ It's important to use the correct type of button for the intended action and to 
 	<Story id="components-button--all-variants"></Story>
 </Canvas>
 
-<Canvas>
-	<Story id="components-button--button"></Story>
-</Canvas>
-
 ### With Icon
 
-Button component has a input for icon component. Frequently used components: <code>search</code>, <code>three-dots</code> and <code>delete</code>.
+Button component has a input for icon component. Frequently used icons: <code>search</code>, <code>three-dots</code> and <code>delete</code>.
+
+<Canvas>
+	<Story id="components-button--icon-button"></Story>
+</Canvas>
 
 ### Accessability
 
-<ul>
-	<li>Button color contrast ratio meets AA and AAA levels</li>
-	<li>Button has a visible focus state</li>
-	<li>Disabled button can be focused. State is communicated for screen reader</li>
-	<li>
-		Button click can be triggered with keyboard <code>ente</code> and <code>space</code> key
-	</li>
-</ul>
+- Button color contrast ratio meets AA and AAA levels
+- Button has a visible focus state
+- Disabled button can be focused. State is communicated for screen reader
+- Button click can be triggered with keyboard <code>enter</code> and <code>space</code> key
 
 ### Related components
 
-<ul>
-	<li>
-		<a href="http://localhost:6006/?path=/story/components-icon--icon">IconComponent</a>
-	</li>
-	<li>
-		<a href="https://material.angular.io/components/button/overview">Angular Material Button</a>
-	</li>
-</ul>
+[IconComponent](/docs/components-icon--icon)
+
+<a href="https://material.angular.io/components/button/overview" target="_blank">
+	Angular Material Button
+</a>
 
 ## Properties
 
