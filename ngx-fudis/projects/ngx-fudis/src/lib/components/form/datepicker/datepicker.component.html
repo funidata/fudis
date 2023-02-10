@@ -1,0 +1,17 @@
+<div class="fudis-datepicker fudis-datepicker__{{ size }}">
+	<fudis-label
+		[attr.for]="id"
+		[text]="label"
+		[requiredText]="isRequired() && requiredText ? requiredText : null"></fudis-label>
+	<input matInput [matDatepicker]="picker" />
+	<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+	<mat-datepicker #picker></mat-datepicker>
+	<div id="guidance_{{ id }}" class="fudis-datepicker__guidance">
+		<ng-container *ngIf="showError">
+			<ng-container *ngFor="let error of errorMsgToShow">
+				<fudis-error-message [message]="error"></fudis-error-message>
+			</ng-container>
+		</ng-container>
+		<p *ngIf="!showError" class="fudis-datepicker__guidance__help-text">{{ helpText }}</p>
+	</div>
+</div>

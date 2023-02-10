@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -18,6 +19,7 @@ import { DialogTestContentComponent } from './dialog-test/dialog-test-content/di
 		BrowserAnimationsModule,
 		FormsModule,
 		NgxFudisModule,
+		MatDatepickerModule,
 		MatButtonModule,
 		MatInputModule,
 		MatFormFieldModule,

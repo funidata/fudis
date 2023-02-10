@@ -10,6 +10,7 @@ export { BadgeComponent } from './lib/components/badge/badge.component';
 export { BodyTextComponent } from './lib/components/typography/body-text/body-text.component';
 export { ButtonComponent } from './lib/components/button/button.component';
 export { CheckboxComponent } from './lib/components/form/checkbox/checkbox.component';
+export { DatepickerComponent } from './lib/components/form/datepicker/datepicker.component';
 export { DescriptionListComponent } from './lib/components/description-list/description-list.component';
 export { DropdownComponent } from './lib/components/form/dropdown/dropdown.component';
 // export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';

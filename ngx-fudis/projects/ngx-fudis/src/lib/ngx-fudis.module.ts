@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
 import {
 	FudisDialogActionsDirective,
 	FudisDialogCloseDirective,
@@ -16,6 +18,7 @@ import { BadgeComponent } from './components/badge/badge.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/form/checkbox/checkbox.component';
+import { DatepickerComponent } from './components/form/datepicker/datepicker.component';
 import { DescriptionListComponent } from './components/description-list/description-list.component';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
@@ -40,21 +43,22 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 	 * Include both internal and external Fudis components in 'declarations' array below.
 	 */
 	declarations: [
+		BadgeComponent,
+		BodyTextComponent,
+		ButtonComponent,
+		CheckboxComponent,
+		DatepickerComponent,
+		DescriptionListComponent,
+		DropdownComponent,
+		ErrorMessageComponent,
+		ErrorSummaryComponent,
 		ExpandableComponent,
 		ExpandableContentDirective,
 		FudisDialogTitleDirective,
 		FudisDialogActionsDirective,
 		FudisDialogContentDirective,
 		FudisDialogCloseDirective,
-		BadgeComponent,
-		ButtonComponent,
-		BodyTextComponent,
-		CheckboxComponent,
 		GridComponent,
-		DescriptionListComponent,
-		DropdownComponent,
-		ErrorMessageComponent,
-		ErrorSummaryComponent,
 		HeadingComponent,
 		IconComponent,
 		LabelComponent,
@@ -74,9 +78,11 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		CommonModule,
 		FormsModule,
 		LayoutModule,
+		MatDatepickerModule,
 		MatDialogModule,
 		MatFormFieldModule,
 		MatInputModule,
+		MatNativeDateModule,
 		MatSelectModule,
 		ReactiveFormsModule,
 	],
@@ -87,19 +93,20 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 	 * when you want to expose it outside
 	 */
 	exports: [
+		BadgeComponent,
+		BodyTextComponent,
+		ButtonComponent,
+		CheckboxComponent,
+		DatepickerComponent,
+		DescriptionListComponent,
+		DropdownComponent,
+		// ErrorSummaryComponent,
 		ExpandableComponent,
 		ExpandableContentDirective,
 		FudisDialogTitleDirective,
 		FudisDialogActionsDirective,
 		FudisDialogContentDirective,
 		FudisDialogCloseDirective,
-		BadgeComponent,
-		ButtonComponent,
-		BodyTextComponent,
-		CheckboxComponent,
-		DescriptionListComponent,
-		DropdownComponent,
-		// ErrorSummaryComponent,
 		GridComponent,
 		HeadingComponent,
 		IconComponent,
