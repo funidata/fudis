@@ -1,6 +1,6 @@
 {
 	"name": "fudis",
-	"version": "0.0.19",
+	"version": "0.0.20",
 	"description": "Funidata Design System",
 	"main": "index.js",
 	"directories": {
