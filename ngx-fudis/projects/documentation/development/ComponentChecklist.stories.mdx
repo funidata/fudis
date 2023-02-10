@@ -1,0 +1,78 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+
+<Meta title="Documentation/Development/Component checklist" />
+
+# Component checklist
+
+<br />
+
+## 1. Component is imported and exported correctly
+
+- #### Ngx-fudis.module.ts
+
+  `fudis/ngx-fudis/projects/ngx-fudis/src/lib/ngx-fudis.module.ts`
+  **→ Import, Declaration, Export**
+
+- #### Public-api.ts
+
+  `fudis/ngx-fudis/projects/ngx-fudis/src/public-api.ts`
+  **→ Export**
+
+- #### App.module.ts
+  For Angular Material component module Dev import.
+  `fudis/ngx-fudis/projects/dev/src/app/app.module.ts`
+  **→ Import**
+- #### .stories.ts
+
+  Import each component in their own .stories file.
+  If component uses Angular Material component as a base, import Angular component module in the beginning of story and declare it in moduleMetadata decorators.
+  **→ Import**
+
+```
+
+Decorators: [
+	moduleMetadata({
+		imports: [´name of Angular module`],
+	}),
+],
+
+```
+
+## 2. Component reuses existing components as sub components.
+
+## 3. Components has relevant unit tests
+
+- Component is created
+- Component has working inputs and outputs
+- Error handling
+- Component has a status disabled
+
+## 4 Component has written stories
+
+- Story should include the basic form of a component.
+- Component variants such as primary, secondary etc. should be documented on basic component. These variants should be accessed trhought ArsTable controls.
+- Different component type requires own story. ex. Button → IconButton
+- Component all variants, can be documented as story by using Storybook template prop.
+  > _Note! This prevents component control throught ArgsTable. Template prop should be used mainly for a story spesific readme.mdx documentation._
+- Component has ArgsTable.
+- Component has all listed inputs and outputs with description. Also the ones that are itself explanatory.
+- Components with event handlers have working actions.
+- Disabled and Invalid should be able to be switched on from ArgsTable.
+- Form components have functioning formControls for Storybook testing purposes.
+
+## 5 Component has readme file
+
+- All component types are documented
+- All component variants are documented
+- Related accessibility requirements are listed
+- Related and subcomponents are listed.
+- All Angular Material based components have link to Angular documentation.
+- ArsTable is made visible.
+
+## 6 Component accessibility is tested
+
+- Screen Reader test is done.
+- Contrast is checked with storybook accessibility addon or with some other relevant checking tool.
+- Component receives focus style
+  > _Note! Disabled form elements receive focus_
+- Component supports keyboard controls.

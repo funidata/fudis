@@ -10,7 +10,7 @@ The Fudis Design System uses the following naming conventions described here. Th
 
 ### Prefix
 
-Fudis uses selector prefix <code>fudis-</code>. Prefix prevents collision with consumers existing design tokens.
+Fudis uses selector prefix **fudis**. Prefix prevents collision with consumers existing design tokens.
 
 ### CSS/SASS class names
 
@@ -18,7 +18,7 @@ Fudis follow BEM methodology of block, element and modifier.
 
 ### Fudis components
 
-- <code>fudis</code> -prefix
+- **fudis** -prefix
 - All lower case
 - Segments are joined with <code>-</code>.
 
@@ -26,7 +26,7 @@ Fudis follow BEM methodology of block, element and modifier.
 
 <code>fudis-text-input</code>
 
-- <code>fudis</code> -prefix
+- **fudis** -prefix
 - **Block level:** refers to a category. Ex. text.
 - **Element:** Item type, ex. input.
 
@@ -36,7 +36,28 @@ Fudis follow BEM methodology of block, element and modifier.
 
 <code>$fudis-spacing-xs</code>
 
-- <code>fudis</code> -prefix
+- **fudis** -prefix
 - **Block level:** refers to a type: focus, border, grid, breakpoint.
 - **Element:** Refers to a specific item. Ex. heading, body, form-field.
 - **Modifier:** Describes the quality of the identifier, like width, state or a variant.
+
+## Styles
+
+Component inline styles should be avoided.
+This allows full control over component styles through variables.
+
+> Exceptions exist, e. g. [GridComponent](?path=/story/components-grid--grid) which dynamically applies @Input values to CSS grid without need to write tens of helper CSS classes.
+
+Components styles should be recorded in their own .scss file directly in their own folder.
+
+### Styling conventions should follow BEM structure.
+
+- **Block:** fudis-radio-button
+- **Element:** fudis-radio-button\_\_indicator
+- **Modifier:** fudis-radio-button\_\_indicator–invalid
+
+In order to keep styling consistent in and between components, it’s important to use tokens through mixins. Stylelint will warn you, if styles do not follow this pattern. By this it’s possible to maintain an 8 px base system etc.
+
+Avoid using style override `!important`.
+
+### It’s a good practice to reuse components, while preventing rewriting their existing .scss styles
