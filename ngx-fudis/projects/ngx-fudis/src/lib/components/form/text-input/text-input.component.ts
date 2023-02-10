@@ -1,12 +1,7 @@
 // eslint-disable-next-line max-classes-per-file
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormControl, Validators } from '@angular/forms';
-import { IFudisErrorMessages } from '../../../types/forms';
-
-type Error = {
-	id: string;
-	message: string;
-};
+import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-text-input[id][label]',
@@ -77,7 +72,7 @@ export class TextInputComponent {
 	 */
 	@Input() maxNumber: number;
 
-	@Output() errorOutput: EventEmitter<Error> = new EventEmitter<Error>();
+	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();
 
 	showError: boolean = false;
 

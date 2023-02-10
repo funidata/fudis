@@ -23,7 +23,7 @@
 					<fudis-error-message [message]="error"></fudis-error-message>
 				</ng-container>
 			</ng-container>
-			<p *ngIf="!showError" class="fudis-text-input__guidance__help-text">{{ helpText }}</p>
+			<p *ngIf="!showError && helpText" class="fudis-text-input__guidance__help-text">{{ helpText }}</p>
 		</div>
 	</fudis-label>
 </div>

@@ -18,7 +18,7 @@ describe('RadioButtonComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(RadioButtonComponent);
 		component = fixture.componentInstance;
-		component.label = 'Lonely radio button';
+		component.viewValue = 'Lonely radio button';
 		component.value = 'lonely';
 		component.control = lonelyFormControl;
 		fixture.detectChanges();

@@ -65,12 +65,11 @@
 	}
 
 	&__guidance {
-		&__error {
+		&__help-text {
+			@include colorMixins.fudis-text-color('gray-dark');
 			@include typography.fudis-body-s-regular;
-			@include colorMixins.fudis-text-color('red');
-
+	
 			margin-top: spacing.$fudis-spacing-xs;
-			margin-left: spacing.$fudis-spacing-xs;
 		}
 	}
 }
