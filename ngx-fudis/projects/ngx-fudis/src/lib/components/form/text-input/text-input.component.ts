@@ -17,6 +17,9 @@ type Error = {
 export class TextInputComponent {
 	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;
 
+	/**
+	 * FormControl for the input
+	 */
 	@Input() control: UntypedFormControl;
 
 	/**
@@ -30,7 +33,7 @@ export class TextInputComponent {
 	@Input() label: string;
 
 	/**
-	 * Input id
+	 * Unique input id
 	 */
 	@Input() id: string;
 
@@ -40,7 +43,7 @@ export class TextInputComponent {
 	@Input() size?: 's' | 'm' | 'l' = 'l';
 
 	/**
-	 * Helper/info text shown below the input
+	 * Help text shown below the input
 	 */
 	@Input() helpText?: string;
 

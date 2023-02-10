@@ -26,13 +26,13 @@ import { FudisDialog } from './components/dialog/dialog';
 import { GridComponent } from './components/grid/grid.component';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { IconComponent } from './components/icon/icon.component';
+import { LabelComponent } from './components/form/label/label.component';
 import { LegendComponent } from './components/form/legend/legend.component';
 import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
 import { RadioButtonGroupComponent } from './components/form/radio-button-group/radio-button-group.component';
 import { TextInputComponent } from './components/form/text-input/text-input.component';
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
-import { LabelComponent } from './components/form/label/label.component';
 
 @NgModule({
 	/*
@@ -56,13 +56,13 @@ import { LabelComponent } from './components/form/label/label.component';
 		ErrorSummaryComponent,
 		HeadingComponent,
 		IconComponent,
+		LabelComponent,
 		LegendComponent,
 		RadioButtonComponent,
 		RadioButtonGroupComponent,
 		TextInputComponent,
 		TextSpacingComponent,
 		TextAreaComponent,
-		LabelComponent,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.

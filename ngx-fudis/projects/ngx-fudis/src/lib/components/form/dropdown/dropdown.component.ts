@@ -15,11 +15,13 @@ type Error = {
 })
 export class DropdownComponent {
 	/**
-	 * Options for testing purposes
+	 * Dropdown options
 	 */
-
 	@Input() options: IFudisDropdownOption[];
 
+	/**
+	 * FormControl for the dropdown
+	 */
 	@Input() control: UntypedFormControl;
 
 	/*
@@ -32,20 +34,23 @@ export class DropdownComponent {
 	 */
 	@Input() multipleOption = false;
 
+	/**
+	 * Label for the dropdown
+	 */
 	@Input() label: string;
 
 	/**
-	 * Input id
+	 * Unique dropdown id
 	 */
 	@Input() id: string;
 
 	/**
-	 * Custom placeholder text to show when no selection has been made. Defaults to 'Valitse'
+	 * Custom placeholder text to show when no selection has been made
 	 */
 	@Input() placeholder: string;
 
 	/**
-	 *	Helper or info text for the input, aligned underneath the input
+	 *	Help text, aligned underneath the dropdown
 	 */
 	@Input() helpText?: string;
 
@@ -55,7 +60,7 @@ export class DropdownComponent {
 	@Input() requiredText: string;
 
 	/**
-	 * Available sizes for the input - defaults to large.
+	 * Available sizes for the dropdown - defaults to large.
 	 */
 	@Input() size?: 's' | 'm' | 'l' = 'l';
 

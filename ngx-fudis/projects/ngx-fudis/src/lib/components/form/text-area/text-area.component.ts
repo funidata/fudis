@@ -9,49 +9,48 @@ import { IFudisErrorMessages } from '../../../types/forms';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextAreaComponent {
-	/*
-	 * Unique id for text-area
+	/**
+	 * Unique id for text area
 	 */
 	@Input() id: string;
 
 	/**
-	 *	Label text shown above the text area
+	 * Label shown above the text area
 	 */
 	@Input() label: string;
 
 	/**
-	 *	Helper or info text, aligned underneath the text area
+	 * Help text, aligned underneath the text area
 	 */
-
 	@Input() helpText?: string;
 
 	/**
-	 *	Minimum length for text area, unset by default
+	 * Minimum length for text area, unset by default
 	 */
 	@Input() minLength?: number;
 
 	/**
-	 *	Maximum length for text area, unset by default. When set displays also a character count indicator.
+	 * Maximum length for text area, unset by default. When set displays also a character count indicator.
 	 */
 	@Input() maxLength?: number;
 
 	/**
-	 *	FormControl for the text area
+	 * FormControl for the text area
 	 */
 	@Input() control: UntypedFormControl;
 
 	/**
-	 * Fixed size options for text area - same what text input has
+	 * Fixed size options for text area
 	 */
 	@Input() size?: 's' | 'm' | 'l' = 'l';
 
 	/**
-	 *	Error messages shown when form control validators are invalid
+	 * Error messages shown when form control validators are invalid
 	 */
 	@Input() errorMsg: IFudisErrorMessages;
 
 	/**
-	 *	Text visible, if form control has a required validator
+	 * Text visible, if form control has a required validator
 	 */
 	@Input() requiredText: string;
 

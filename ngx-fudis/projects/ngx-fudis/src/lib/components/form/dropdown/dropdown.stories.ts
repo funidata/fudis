@@ -45,7 +45,6 @@ const Template: Story<DropdownComponent> = (args: DropdownComponent) => ({
 	`,
 });
 
-// Options given in the component's typescript (test options) are not working in this example
 export const SingleSelect = Template.bind({});
 SingleSelect.args = {
 	errorMsg: { required: "It is necessary to choose a pet. It's good for your health!" },
