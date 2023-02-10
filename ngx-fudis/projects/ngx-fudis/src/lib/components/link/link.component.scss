@@ -1,0 +1,36 @@
+@use '../../foundations/colors/mixins.scss' as colors;
+@use '../../foundations/typography/mixins.scss' as typography;
+@use '../../foundations/focus/mixins.scss' as focus;
+
+.fudis-link {
+	&__anchor {
+		@include colors.fudis-text-color('primary');
+
+		text-decoration: underline dotted;
+
+		&:hover {
+			text-decoration: underline solid;
+		}
+
+		&:focus {
+			@include focus.fudis-focus-generic;
+		}
+
+		&__external {
+			display: inline-flex;
+			align-items: center;
+		}
+
+		&__inherit {
+			@include typography.fudis-text-link-inherit-typography;
+		}
+	
+		&__m {
+			@include typography.fudis-text-link-m-typography;
+		}
+
+		&__l {
+			@include typography.fudis-text-link-l-typography;
+		}
+	}
+}
