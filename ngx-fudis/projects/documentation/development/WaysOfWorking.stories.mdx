@@ -4,6 +4,8 @@ import { ArgsTable, Meta, Story, Canvas, Source } from '@storybook/addon-docs';
 
 # Ways of working
 
+<br />
+
 ## Naming convensions
 
 The Fudis Design System uses the following naming conventions described here. These conventions aim to reduce the load of creating new names for components while maintaining a consistent project folder structure.
@@ -16,39 +18,47 @@ Fudis uses selector prefix **fudis**. Prefix prevents collision with consumers e
 
 Fudis follow BEM methodology of block, element and modifier.
 
+<br />
+
 ### Fudis components
+
+---
 
 - **fudis** -prefix
 - All lower case
 - Segments are joined with <code>-</code>.
 
-#### Example
-
-<code>fudis-text-input</code>
+#### Example `fudis-text-input`
 
 - **fudis** -prefix
 - **Block level:** refers to a category. Ex. text.
 - **Element:** Item type, ex. input.
 
+<br />
+
 ### Fudis foundations - design tokens
 
-#### Example
+---
 
-<code>$fudis-spacing-xs</code>
+#### Example `$fudis-spacing-xs`
 
 - **fudis** -prefix
 - **Block level:** refers to a type: focus, border, grid, breakpoint.
 - **Element:** Refers to a specific item. Ex. heading, body, form-field.
 - **Modifier:** Describes the quality of the identifier, like width, state or a variant.
 
+<br />
+
 ## Styles
 
-Component inline styles should be avoided.
-This allows full control over component styles through variables.
+It’s a good practice to reuse components, while preventing rewriting their existing .scss styles
 
-> Exceptions exist, e. g. [GridComponent](?path=/story/components-grid--grid) which dynamically applies @Input values to CSS grid without need to write tens of helper CSS classes.
+- Component inline styles should be avoided. This allows full control over component styles through variables.
 
-Components styles should be recorded in their own .scss file directly in their own folder.
+  > Exceptions exist, e. g. [GridComponent](?path=/story/components-grid--grid) which dynamically applies @Input values to CSS grid without need to write tens of helper CSS classes.
+
+- Components styles should be recorded in their own .scss file directly in their own folder.
+- Use globally defined colors, spacing, etc. rather than introducing hard-to-maintain local values.
 
 ### Styling conventions should follow BEM structure.
 
@@ -60,4 +70,15 @@ In order to keep styling consistent in and between components, it’s important 
 
 Avoid using style override `!important`.
 
-### It’s a good practice to reuse components, while preventing rewriting their existing .scss styles
+### Angular Material styles
+
+#### Theming
+
+- Start applying themes to a Fudis component by using Material's theming API to make sure our custom theme is complete with regards to the component you are working on.
+  - This provides style safety for your component and the whole library by having a more complete theme to fallback on whenever component-specific styling comes short.
+  - **Do not** try to achieve too specific effects – _theme is a global high-level definition of styles!_
+- After exhausting your options to style a component via theming, apply component-level styles.
+
+- - _**It's recommended Not to override or modify Angular Material's CSS or DOM!**_ This will make upstream minor and patch changes potentially breaking changes for Fudis.
+
+- All ngMaterial style changes are documented in themes folder `ngMaterialCustomisation.scss `.
