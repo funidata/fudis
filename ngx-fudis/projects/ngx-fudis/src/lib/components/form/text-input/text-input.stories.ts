@@ -39,8 +39,8 @@ import { IFudisErrorMessages } from '../../../types/forms';
 				id="unique-text-input-id-3"
 				label="Number input"
 				requiredText="Required"
-				[min]="minNumber"
-				[max]="maxNumber"
+				[minNumber]="minNumber"
+				[maxNumber]="maxNumber"
 				type="number"
 				size="s"
 				[errorMsg]="validatorMessages"></fudis-text-input>

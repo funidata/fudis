@@ -40,15 +40,6 @@
 		}	
 	}
 
-	&__guidance {
-		&__help-text {
-			@include colorMixins.fudis-text-color('gray-dark');
-			@include typography.fudis-body-s-regular;
-	
-			margin-top: spacing.$fudis-spacing-xs;
-		}
-	}
-
 	// Keep number input arrows visible all the time
   /* stylelint-disable-next-line selector-no-qualifying-type */
   input[type=number]::-webkit-inner-spin-button {  

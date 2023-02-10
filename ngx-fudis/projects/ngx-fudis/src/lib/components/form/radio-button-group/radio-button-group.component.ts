@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UntypedFormControl, Validators } from '@angular/forms';
-import { IFudisRadioButtonOption, IFudisErrorSummaryItem, IFudisErrorMessages } from '../../../types/forms';
+import { IFudisRadioButtonOption, IFudisErrorMessages } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-radio-button-group[options][id][legend]',
@@ -43,17 +43,11 @@ export class RadioButtonGroupComponent implements OnInit {
 	 */
 	@Input() errorMessage: string | undefined;
 
-	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();
-
 	required: boolean = false;
 
 	legendId: string;
 
-	showError: boolean = false;
-
 	requiredValidator = Validators.required;
-
-	errorMsgToShow: string[] = [];
 
 	ngOnInit() {
 		if (this.options.length < 2) {
@@ -79,27 +73,5 @@ export class RadioButtonGroupComponent implements OnInit {
 		this.legendId = `${this.id}-legend`;
 
 		this.required = this.control.hasValidator(Validators.required);
-	}
-
-	checkErrors(): boolean {
-		this.errorMsgToShow = [];
-		if (this.control.touched && this.control.errors) {
-			this.showError = true;
-
-			Object.keys(this.control.errors).forEach((item) => {
-				const message = this.errorMsg[item as keyof IFudisErrorMessages];
-				if (message) {
-					this.errorMsgToShow.push(message);
-					this.getErrorOutput(this.id, message);
-				}
-			});
-			return true;
-		}
-		this.showError = false;
-		return false;
-	}
-
-	getErrorOutput(id: string, error: string) {
-		this.errorOutput.emit({ id, message: error });
 	}
 }

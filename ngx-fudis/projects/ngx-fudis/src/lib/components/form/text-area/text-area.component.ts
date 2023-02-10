@@ -27,12 +27,12 @@ export class TextAreaComponent {
 	/**
 	 * Minimum length for text area, unset by default
 	 */
-	@Input() minLength?: number;
+	@Input() minLength?: number | null;
 
 	/**
 	 * Maximum length for text area, unset by default. When set displays also a character count indicator.
 	 */
-	@Input() maxLength?: number;
+	@Input() maxLength?: number | null;
 
 	/**
 	 * FormControl for the text area
@@ -54,27 +54,5 @@ export class TextAreaComponent {
 	 */
 	@Input() requiredText: string;
 
-	usedCharacters: number = 0;
-
-	showError: boolean = false;
-
 	requiredValidator = Validators.required;
-
-	errorMsgToShow: string[] = [];
-
-	checkErrors(): void {
-		this.errorMsgToShow = [];
-		if (this.control.touched && this.control.errors) {
-			this.showError = true;
-
-			Object.keys(this.control.errors).forEach((item) => {
-				const message = this.errorMsg[item as keyof IFudisErrorMessages];
-				if (message) {
-					this.errorMsgToShow.push(message);
-				}
-			});
-		} else {
-			this.showError = false;
-		}
-	}
 }

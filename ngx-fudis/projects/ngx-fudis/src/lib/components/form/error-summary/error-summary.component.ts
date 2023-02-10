@@ -1,5 +1,6 @@
 import { Component, QueryList, ContentChildren, AfterContentInit } from '@angular/core';
 import { TextInputComponent } from '../text-input/text-input.component';
+import { GuidanceComponent } from '../guidance/guidance.component';
 
 type ErrorSummary = {
 	id: string;
@@ -15,6 +16,8 @@ export class ErrorSummaryComponent implements AfterContentInit {
 	// Access text-input and its @Output for getting errors emitted
 	@ContentChildren(TextInputComponent, { descendants: true }) templates: QueryList<TextInputComponent>;
 
+	@ContentChildren(GuidanceComponent, { descendants: true }) guidances: QueryList<GuidanceComponent>;
+
 	errors: Array<ErrorSummary> = [];
 
 	onErrorAdded(eventData: { id: string; message: string }) {
@@ -29,8 +32,8 @@ export class ErrorSummaryComponent implements AfterContentInit {
 	}
 
 	ngAfterContentInit() {
-		this.templates.forEach((template) => {
-			template.errorOutput.subscribe((error: any) => this.onErrorAdded(error));
+		this.guidances.forEach((guidance) => {
+			guidance.errorOutput.subscribe((error: any) => this.onErrorAdded(error));
 		});
 	}
 

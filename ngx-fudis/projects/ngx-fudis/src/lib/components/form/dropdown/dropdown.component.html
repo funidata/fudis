@@ -5,8 +5,6 @@
 		[requiredText]="isRequired() && requiredText ? requiredText : null"></fudis-label>
 	<mat-select
 		[id]="id"
-		(change)="checkErrors()"
-		(blur)="checkErrors()"
 		#fudisDropdown
 		disableOptionCentering
 		panelClass="fudis-dropdown__option-list"
@@ -23,12 +21,9 @@
 			{{ option.viewValue }}
 		</mat-option>
 	</mat-select>
-	<div id="guidance_{{ id }}" class="fudis-dropdown__guidance">
-		<ng-container *ngIf="showError">
-			<ng-container *ngFor="let error of errorMsgToShow">
-				<fudis-error-message [message]="error"></fudis-error-message>
-			</ng-container>
-		</ng-container>
-		<p *ngIf="!showError && helpText" class="fudis-dropdown__guidance__help-text">{{ helpText }}</p>
-	</div>
+	<fudis-guidance
+		[helpText]="helpText"
+		[id]="'guidance_' + id"
+		[errorMsg]="errorMsg"
+		[control]="control"></fudis-guidance>
 </div>

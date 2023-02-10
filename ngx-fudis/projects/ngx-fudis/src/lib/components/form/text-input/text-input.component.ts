@@ -1,7 +1,7 @@
 // eslint-disable-next-line max-classes-per-file
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormControl, Validators } from '@angular/forms';
-import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/forms';
+import { IFudisErrorMessages } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-text-input[id][label]',
@@ -72,32 +72,5 @@ export class TextInputComponent {
 	 */
 	@Input() maxNumber: number;
 
-	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();
-
-	showError: boolean = false;
-
 	requiredValidator = Validators.required;
-
-	errorMsgToShow: string[] = [];
-
-	checkErrors(): void {
-		this.errorMsgToShow = [];
-		if (this.control.touched && this.control.errors) {
-			this.showError = true;
-
-			Object.keys(this.control.errors).forEach((item) => {
-				const message = this.errorMsg[item as keyof IFudisErrorMessages];
-				if (message) {
-					this.errorMsgToShow.push(message);
-					this.getErrorOutput(this.id, message);
-				}
-			});
-		} else {
-			this.showError = false;
-		}
-	}
-
-	getErrorOutput(id: string, error: string) {
-		this.errorOutput.emit({ id, message: error });
-	}
 }

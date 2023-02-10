@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { UntypedFormControl, Validators } from '@angular/forms';
-import { IFudisErrorMessages, IFudisDropdownOption, IFudisErrorSummaryItem } from '../../../types/forms';
+import { IFudisErrorMessages, IFudisDropdownOption } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-dropdown[id][label]',
@@ -58,34 +58,6 @@ export class DropdownComponent {
 	 * Available sizes for the dropdown - defaults to large.
 	 */
 	@Input() size?: 's' | 'm' | 'l' = 'l';
-
-	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();
-
-	showError: boolean = false;
-
-	errorMsgToShow: string[] = [];
-
-	checkErrors(): void {
-		this.errorMsgToShow = [];
-		if (this.control.touched && this.control.errors) {
-			this.showError = true;
-
-			Object.keys(this.control.errors).forEach((item) => {
-				const message = this.errorMsg[item as keyof IFudisErrorMessages];
-
-				if (message) {
-					this.errorMsgToShow.push(message);
-					this.getErrorOutput(this.id, message);
-				}
-			});
-		} else {
-			this.showError = false;
-		}
-	}
-
-	getErrorOutput(id: string, error: string) {
-		this.errorOutput.emit({ id, message: error });
-	}
 
 	isRequired(): boolean {
 		if (this.control.hasValidator(Validators.required)) {

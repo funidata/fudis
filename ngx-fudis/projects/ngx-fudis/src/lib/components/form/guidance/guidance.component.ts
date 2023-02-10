@@ -1,0 +1,52 @@
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/forms';
+
+@Component({
+	selector: 'fudis-guidance',
+	templateUrl: './guidance.component.html',
+	styleUrls: ['./guidance.component.scss'],
+})
+export class GuidanceComponent implements OnInit {
+	@Input() id: string;
+
+	@Input() control: FormControl;
+
+	@Input() helpText: string | undefined;
+
+	@Input() maxLength: number | undefined;
+
+	@Input() errorMsg: IFudisErrorMessages;
+
+	ngOnInit(): void {
+		console.log(this.control);
+	}
+
+	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();
+
+	showError: boolean = false;
+
+	errorMsgToShow: string[] = [];
+
+	checkErrors(): boolean {
+		this.errorMsgToShow = [];
+		if (this.control.touched && this.control.errors) {
+			this.showError = true;
+
+			Object.keys(this.control.errors).forEach((item) => {
+				const message = this.errorMsg[item as keyof IFudisErrorMessages];
+				if (message) {
+					this.errorMsgToShow.push(message);
+					this.getErrorOutput(this.id, message);
+				}
+			});
+			return true;
+		}
+		this.showError = false;
+		return false;
+	}
+
+	getErrorOutput(id: string, error: string) {
+		this.errorOutput.emit({ id, message: error });
+	}
+}
