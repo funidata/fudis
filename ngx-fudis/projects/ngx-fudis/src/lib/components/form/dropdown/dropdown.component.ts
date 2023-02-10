@@ -50,7 +50,7 @@ export class DropdownComponent {
 	@Input() placeholder: string;
 
 	/**
-	 *	Help text, aligned underneath the dropdown
+	 * Help text, aligned underneath the dropdown
 	 */
 	@Input() helpText?: string;
 
