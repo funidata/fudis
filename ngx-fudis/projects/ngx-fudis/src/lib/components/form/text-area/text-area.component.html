@@ -20,10 +20,13 @@
 					<fudis-error-message [message]="error"></fudis-error-message>
 				</ng-container>
 			</ng-container>
-			<p class="fudis-text-area__guidance__help-text" *ngIf="!showError">
+			<p class="fudis-text-area__guidance__help-text" *ngIf="!showError && helpText">
 				{{ helpText }}
 			</p>
-			<small class="fudis-text-area__guidance__character-limit-indicator" *ngIf="maxLength">
+			<small
+				class="fudis-text-area__guidance__character-limit-indicator"
+				[ngClass]="{ 'fudis-text-area__guidance__character-limit-indicator__float-right': !helpText }"
+				*ngIf="maxLength">
 				{{ control.value.length || 0 }}/{{ maxLength }}
 			</small>
 		</div>

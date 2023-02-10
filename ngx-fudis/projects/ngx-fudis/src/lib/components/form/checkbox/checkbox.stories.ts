@@ -20,20 +20,18 @@ import { ErrorMessageComponent } from '../error-message/error-message.component'
 				[control]="checkboxFirst"
 				id="example_checkbox_1_id"
 				name="example_checkbox_1_name"
+				helpText="This checkbox is disabled and cannot be toggled."
 				label="I am an example!"></fudis-checkbox>
 			<fudis-checkbox
 				[control]="checkboxSecond"
 				id="example_checkbox_2_id"
 				name="example_checkbox_2_name"
-				errorMessage="There is something wrong with me. Probably I am set as required in my FormControl."
+				helpText="This checkbox is required and must be checked."
+				[errorMsg]="{ required: 'Please check the checkbox.' }"
 				label="I am an another example!"></fudis-checkbox>
 			<div [style.display]="'flex'" [style.flex-direction]="'column'">
 				<fudis-body-text>Value of first box: {{ checkboxFirst.value }}</fudis-body-text>
 				<fudis-body-text>Value of second box: {{ checkboxSecond.value }}</fudis-body-text>
-				<fudis-body-text size="s-regular"
-					>For testing purposes this button below triggers checkbox value update outside of checkbox components
-				</fudis-body-text>
-				<fudis-button (click)="changeValueFromOutside()" label="Click here to toggle second checkbox!"></fudis-button>
 			</div>
 		</form>
 	`,
@@ -53,10 +51,6 @@ class CheckboxExampleComponent {
 	});
 
 	constructor(private formBuilder: UntypedFormBuilder) {}
-
-	changeValueFromOutside(): void {
-		this.checkboxSecond.patchValue(!this.checkboxSecond.value);
-	}
 }
 
 export default {

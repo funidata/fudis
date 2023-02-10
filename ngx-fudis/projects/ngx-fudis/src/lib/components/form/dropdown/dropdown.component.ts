@@ -1,14 +1,9 @@
 import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { UntypedFormControl, Validators } from '@angular/forms';
-import { IFudisErrorMessages, IFudisDropdownOption } from '../../../types/forms';
-
-type Error = {
-	id: string;
-	message: string;
-};
+import { IFudisErrorMessages, IFudisDropdownOption, IFudisErrorSummaryItem } from '../../../types/forms';
 
 @Component({
-	selector: 'fudis-dropdown',
+	selector: 'fudis-dropdown[id][label]',
 	templateUrl: './dropdown.component.html',
 	styleUrls: ['./dropdown.component.scss'],
 	encapsulation: ViewEncapsulation.None,
@@ -64,7 +59,7 @@ export class DropdownComponent {
 	 */
 	@Input() size?: 's' | 'm' | 'l' = 'l';
 
-	@Output() errorOutput: EventEmitter<Error> = new EventEmitter<Error>();
+	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();
 
 	showError: boolean = false;
 

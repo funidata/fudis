@@ -9,9 +9,9 @@ import { RadioButtonComponent } from './radio-button/radio-button.component';
 const testFormControl: UntypedFormControl = new UntypedFormControl('capybara');
 
 const petOptions: IFudisRadioButtonOption[] = [
-	{ value: 'platypus', label: 'Platypus', id: '1', name: 'animal' },
-	{ value: 'otter', label: 'Otter', id: '2', name: 'animal' },
-	{ value: 'capybara', label: 'Capybara', id: '3', name: 'animal' },
+	{ value: 'platypus', viewValue: 'Platypus', id: 'test-1', name: 'animal' },
+	{ value: 'otter', viewValue: 'Otter', id: 'test-2', name: 'animal' },
+	{ value: 'capybara', viewValue: 'Capybara', id: 'test-3', name: 'animal' },
 ];
 
 describe('RadioButtonGroupComponent', () => {

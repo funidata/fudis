@@ -30,7 +30,7 @@ const getDefaultValue = (options: IFudisRadioButtonOption[]): string | undefined
 			<fudis-radio-button-group
 				id="fruit-selection"
 				legend="Choose your preferred fruit"
-				errorMessage="You must choose a fruit! :("
+				[errorMsg]="{ required: 'You must choose a fruit!' }"
 				*ngIf="mainFormGroup"
 				[control]="radioButtonGroupOne"
 				[options]="fruitOptions"></fudis-radio-button-group>
@@ -41,7 +41,7 @@ const getDefaultValue = (options: IFudisRadioButtonOption[]): string | undefined
 			<fudis-radio-button-group
 				id="pet-selection"
 				legend="Choose a pet"
-				errorMessage="You must choose a pet! :("
+				[errorMsg]="{ required: 'You must choose a pet!' }"
 				*ngIf="mainFormGroup"
 				[control]="radioButtonGroupTwo"
 				[options]="petOptions"></fudis-radio-button-group>
@@ -58,15 +58,15 @@ class RadioButtonGroupExampleComponent {
 	 */
 
 	fruitOptions: IFudisRadioButtonOption[] = [
-		{ value: 'apple', label: 'Apple', id: 'fruit-1', name: 'fruit' },
-		{ value: 'fair-trade-banana', label: 'Fair Trade Banana', id: 'fruit-2', name: 'fruit', checked: true },
-		{ value: 'cherry', label: 'Cherry', id: 'fruit-3', name: 'fruit' },
+		{ value: 'apple', viewValue: 'Apple', id: 'fruit-1', name: 'fruit' },
+		{ value: 'fair-trade-banana', viewValue: 'Fair Trade Banana', id: 'fruit-2', name: 'fruit', checked: true },
+		{ value: 'cherry', viewValue: 'Cherry', id: 'fruit-3', name: 'fruit' },
 	];
 
 	petOptions: IFudisRadioButtonOption[] = [
-		{ value: 'platypus', label: 'Platypus', id: 'pet-1', name: 'animal' },
-		{ value: 'otter', label: 'Otter', id: 'pet-2', name: 'animal' },
-		{ value: 'capybara', label: 'Capybara', id: 'pet-3', name: 'animal' },
+		{ value: 'platypus', viewValue: 'Platypus', id: 'pet-1', name: 'animal' },
+		{ value: 'otter', viewValue: 'Otter', id: 'pet-2', name: 'animal' },
+		{ value: 'capybara', viewValue: 'Capybara', id: 'pet-3', name: 'animal' },
 	];
 
 	radioButtonGroupOne: UntypedFormControl = new UntypedFormControl(

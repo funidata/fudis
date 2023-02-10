@@ -25,7 +25,7 @@ export class RadioButtonComponent {
 	/*
 	 * Visible label for a single Radio Button, e. g. "Fair trade banana"
 	 */
-	@Input() label: string;
+	@Input() viewValue: string;
 
 	/*
 	 * Name for group of Radio Buttons, e.g. "fruit"

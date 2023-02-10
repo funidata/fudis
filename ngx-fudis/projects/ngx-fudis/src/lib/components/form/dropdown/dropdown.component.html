@@ -1,7 +1,7 @@
 <div class="fudis-dropdown fudis-dropdown__{{ size }}">
 	<fudis-label
-		[attr.for]="id"
 		[text]="label"
+		[id]="'label_' + id"
 		[requiredText]="isRequired() && requiredText ? requiredText : null"></fudis-label>
 	<mat-select
 		[id]="id"
@@ -17,7 +17,7 @@
 		[multiple]="multipleOption"
 		[formControl]="control"
 		[attr.required]="isRequired()"
-		[aria-label]="requiredText ? label + ', ' + requiredText : label"
+		[aria-labelledby]="'label_' + id"
 		[attr.aria-describedby]="'guidance_' + id">
 		<mat-option *ngFor="let option of options" [value]="option" [disabled]="option.disabled">
 			{{ option.viewValue }}
@@ -29,6 +29,6 @@
 				<fudis-error-message [message]="error"></fudis-error-message>
 			</ng-container>
 		</ng-container>
-		<p *ngIf="!showError" class="fudis-dropdown__guidance__help-text">{{ helpText }}</p>
+		<p *ngIf="!showError && helpText" class="fudis-dropdown__guidance__help-text">{{ helpText }}</p>
 	</div>
 </div>

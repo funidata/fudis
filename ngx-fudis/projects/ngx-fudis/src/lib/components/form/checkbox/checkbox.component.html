@@ -35,8 +35,12 @@
 		</div>
 		<div class="fudis-checkbox__label__text">{{ label }}</div>
 	</label>
-	<fudis-error-message
-		id="'guidance_' + id"
-		*ngIf="errorMessage && this.control.touched && this.control.invalid"
-		[message]="errorMessage"></fudis-error-message>
+	<div id="guidance_{{ id }}" class="fudis-checkbox__guidance">
+		<ng-container *ngIf="showError">
+			<ng-container *ngFor="let error of errorMsgToShow">
+				<fudis-error-message [message]="error"></fudis-error-message>
+			</ng-container>
+		</ng-container>
+		<p *ngIf="!showError && helpText" class="fudis-checkbox__guidance__help-text">{{ helpText }}</p>
+	</div>
 </div>

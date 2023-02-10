@@ -1,9 +1,15 @@
 export interface IFudisRadioButtonOption {
+	/** Unique id for single radio button option */
 	id: string;
+	/** Name for the group of radio buttons */
 	name: string;
+	/** Underlying value of the option */
 	value: string;
-	label: string;
+	/** Value that is shown in the UI */
+	viewValue: string;
+	/** Is option disabled in the dropdown */
 	disabled?: boolean;
+	/** If option is selected or not */
 	checked?: boolean;
 }
 
@@ -24,4 +30,9 @@ export interface IFudisDropdownOption {
 	viewValue: string;
 	/** Is option disabled in the dropdown */
 	disabled?: boolean;
+}
+
+export interface IFudisErrorSummaryItem {
+	id: string;
+	message: string;
 }
