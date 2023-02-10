@@ -6,6 +6,8 @@ import { RadioButtonGroupComponent } from './radio-button-group.component';
 import { IFudisRadioButtonOption } from '../../../types/forms';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
 
+import { GuidanceComponent } from '../guidance/guidance.component';
+
 const testFormControl: UntypedFormControl = new UntypedFormControl('capybara');
 
 const petOptions: IFudisRadioButtonOption[] = [
@@ -20,7 +22,12 @@ describe('RadioButtonGroupComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [RadioButtonGroupComponent, MockComponent(LegendComponent), MockComponent(RadioButtonComponent)],
+			declarations: [
+				RadioButtonGroupComponent,
+				MockComponent(LegendComponent),
+				MockComponent(RadioButtonComponent),
+				MockComponent(GuidanceComponent),
+			],
 			imports: [ReactiveFormsModule],
 		}).compileComponents();
 	});

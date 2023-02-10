@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/forms';
 
@@ -7,7 +7,7 @@ import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/form
 	templateUrl: './guidance.component.html',
 	styleUrls: ['./guidance.component.scss'],
 })
-export class GuidanceComponent implements OnInit {
+export class GuidanceComponent {
 	@Input() id: string;
 
 	@Input() control: FormControl;
@@ -17,10 +17,6 @@ export class GuidanceComponent implements OnInit {
 	@Input() maxLength: number | undefined;
 
 	@Input() errorMsg: IFudisErrorMessages;
-
-	ngOnInit(): void {
-		console.log(this.control);
-	}
 
 	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();
 

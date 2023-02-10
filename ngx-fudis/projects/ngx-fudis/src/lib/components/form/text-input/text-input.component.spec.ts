@@ -4,8 +4,8 @@ import { MockComponent } from 'ng-mocks';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { TextInputComponent } from './text-input.component';
-import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { LabelComponent } from '../label/label.component';
+import { GuidanceComponent } from '../guidance/guidance.component';
 
 const textInputControl: UntypedFormControl = new UntypedFormControl('');
 
@@ -15,7 +15,7 @@ describe('TextInputComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [TextInputComponent, MockComponent(ErrorMessageComponent), MockComponent(LabelComponent)],
+			declarations: [TextInputComponent, MockComponent(GuidanceComponent), MockComponent(LabelComponent)],
 			imports: [ReactiveFormsModule],
 		})
 			.overrideComponent(TextInputComponent, {

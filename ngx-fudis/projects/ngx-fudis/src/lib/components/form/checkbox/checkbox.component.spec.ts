@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UntypedFormControl } from '@angular/forms';
+import { MockComponent } from 'ng-mocks';
 import { CheckboxComponent } from './checkbox.component';
+import { GuidanceComponent } from '../guidance/guidance.component';
 
 const uncheckedCheckbox: UntypedFormControl = new UntypedFormControl('false');
 
@@ -10,7 +12,7 @@ describe('CheckboxComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [CheckboxComponent],
+			declarations: [CheckboxComponent, MockComponent(GuidanceComponent)],
 		}).compileComponents();
 	});
 

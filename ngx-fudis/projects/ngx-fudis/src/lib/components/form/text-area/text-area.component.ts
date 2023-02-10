@@ -27,12 +27,12 @@ export class TextAreaComponent {
 	/**
 	 * Minimum length for text area, unset by default
 	 */
-	@Input() minLength?: number | null;
+	@Input() minLength?: number | undefined;
 
 	/**
 	 * Maximum length for text area, unset by default. When set displays also a character count indicator.
 	 */
-	@Input() maxLength?: number | null;
+	@Input() maxLength?: number | undefined;
 
 	/**
 	 * FormControl for the text area

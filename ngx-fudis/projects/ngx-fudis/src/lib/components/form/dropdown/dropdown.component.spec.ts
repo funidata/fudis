@@ -6,7 +6,7 @@ import { MockComponent } from 'ng-mocks';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DropdownComponent } from './dropdown.component';
 import { LabelComponent } from '../label/label.component';
-import { ErrorMessageComponent } from '../error-message/error-message.component';
+import { GuidanceComponent } from '../guidance/guidance.component';
 
 const dropdownControl: UntypedFormControl = new UntypedFormControl('');
 
@@ -16,7 +16,7 @@ describe('DropdownComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [DropdownComponent, MockComponent(ErrorMessageComponent), MockComponent(LabelComponent)],
+			declarations: [DropdownComponent, MockComponent(GuidanceComponent), MockComponent(LabelComponent)],
 			imports: [ReactiveFormsModule, MatFormFieldModule, MatSelectModule, BrowserAnimationsModule],
 		}).compileComponents();
 	});
