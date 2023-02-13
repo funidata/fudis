@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UntypedFormControl, Validators } from '@angular/forms';
 import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/forms';
 
@@ -6,7 +6,6 @@ import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/form
 	selector: 'fudis-datepicker',
 	templateUrl: './datepicker.component.html',
 	styleUrls: ['./datepicker.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatepickerComponent {
 	/**
