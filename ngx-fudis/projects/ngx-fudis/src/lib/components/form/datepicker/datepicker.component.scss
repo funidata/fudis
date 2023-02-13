@@ -1,6 +1,8 @@
 @use '../../../foundations/spacing/tokens.scss' as spacing;
 @use '../../../foundations/typography/mixins.scss' as typography;
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../foundations/borders/mixins.scss' as borders;
+@use '../../../foundations/focus/mixins.scss' as focus;
 
 .fudis-datepicker {
 	display: grid;
@@ -16,6 +18,24 @@
 
 	&__s {
 		max-width: calc(10 * spacing.$fudis-spacing-s);
+	}
+
+	&__input {
+		@include borders.fudis-border('1px', 'solid', 'gray-dark');
+		@include borders.fudis-border-radius('2px');
+
+		padding: 0 0 0 spacing.$fudis-spacing-xxs; 
+		height: spacing.$fudis-spacing-l;
+
+		&:focus {
+			@include focus.fudis-focus-form-field;
+		}
+	}
+
+	&__toggle {
+		position: relative;
+		top: (spacing.$fudis-spacing-xl + spacing.$fudis-spacing-xxs); 
+		right: spacing.$fudis-spacing-m;
 	}
 
 	&__guidance {
