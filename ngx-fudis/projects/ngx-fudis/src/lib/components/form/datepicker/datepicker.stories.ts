@@ -5,7 +5,6 @@ import { UntypedFormControl, FormsModule, ReactiveFormsModule, Validators } from
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
 import { DatepickerComponent } from './datepicker.component';
 
 export default {
@@ -16,7 +15,6 @@ export default {
 			imports: [
 				BrowserAnimationsModule,
 				MatFormFieldModule,
-				MatSelectModule,
 				MatDatepickerModule,
 				MatInputModule,
 				ReactiveFormsModule,
