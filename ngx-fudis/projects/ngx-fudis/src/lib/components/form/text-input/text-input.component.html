@@ -1,30 +1,30 @@
 <div class="fudis-form-element fudis-text-input fudis-text-input__{{ size }}">
-	<label class="fudis-text-input__label" for="{{ id }}">
-		<div #fudisTextInputLabel class="fudis-text-input__label__content">
-			<span class="fudis-text-input__label__text">{{ label }}</span
-			><span class="fudis-text-input__label__required" *ngIf="control.hasValidator(requiredValidator)"
-				>{{ requiredText }}&nbsp;*</span
-			>
-		</div>
+	<fudis-label
+		[id]="id + '_label'"
+		[for]="id"
+		[text]="label"
+		[requiredText]="control.hasValidator(requiredValidator) && requiredText ? requiredText : null">
 		<input
 			#fudisTextInput
 			[formControl]="control"
-			[minlength]="minLength"
-			[maxlength]="maxLength"
+			[attr.minlength]="minLength"
+			[attr.maxlength]="maxLength"
+			[attr.min]="minNumber"
+			[attr.max]="maxNumber"
+			[attr.aria-labelledby]="id + '_label'"
+			(blur)="handleBlur()"
 			id="{{ id }}"
-			(blur)="checkErrors()"
 			[type]="type"
-			[ngClass]="{ 'fudis-text-input__input--invalid': showError }"
+			[ngClass]="{ 'fudis-text-input__input--invalid': control.invalid && control.touched }"
 			class="fudis-text-input__input"
-			[attr.aria-describedby]="'guidance_' + id"
+			[attr.aria-describedby]="id + '_guidance'"
 			[attr.required]="control.hasValidator(requiredValidator)" />
-		<div id="guidance_{{ id }}" class="fudis-text-input__guidance">
-			<ng-container *ngIf="showError">
-				<ng-container *ngFor="let error of errorMsgToShow">
-					<fudis-error-message [message]="error"></fudis-error-message>
-				</ng-container>
-			</ng-container>
-			<p *ngIf="!showError" class="fudis-text-input__guidance__help-text">{{ helpText }}</p>
-		</div>
-	</label>
+		<fudis-guidance
+			[maxLength]="maxLength"
+			[helpText]="helpText"
+			[id]="id + '_guidance'"
+			[errorMsg]="errorMsg"
+			[control]="control">
+		</fudis-guidance>
+	</fudis-label>
 </div>

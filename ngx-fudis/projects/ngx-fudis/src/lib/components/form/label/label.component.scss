@@ -1,0 +1,31 @@
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
+
+.fudis-label {
+	&__content {
+		@include colorMixins.fudis-text-color('gray-dark');
+
+		position: relative;
+		padding-bottom: spacing.$fudis-spacing-s;
+		overflow: hidden;
+	}
+
+	&__required {
+		@include typography.fudis-body-s-regular;
+
+		display: inline-block;
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		text-transform: initial;
+	}
+
+	&__text {
+		@include typography.fudis-text-field-label;
+
+		display: flex;
+		align-items: flex-end;
+		overflow: hidden;
+	}
+}

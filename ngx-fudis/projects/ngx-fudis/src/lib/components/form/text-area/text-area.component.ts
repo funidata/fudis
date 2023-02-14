@@ -1,61 +1,64 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormControl, Validators } from '@angular/forms';
+import { Component, Input, ViewChild } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { IFudisErrorMessages } from '../../../types/forms';
+import { GuidanceComponent } from '../guidance/guidance.component';
 
 @Component({
-	selector: 'fudis-text-area',
+	selector: 'fudis-text-area[id][label]',
 	templateUrl: './text-area.component.html',
 	styleUrls: ['./text-area.component.scss'],
 })
-export class TextAreaComponent implements OnInit {
-	@ViewChild('fudisTextArea') textarea: ElementRef<HTMLTextAreaElement>;
+export class TextAreaComponent {
+	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
 
 	/**
-	 *	Label is mandatory for every input
+	 * Unique id for text area
+	 */
+	@Input() id: string;
+
+	/**
+	 * Label shown above the text area
 	 */
 	@Input() label: string;
 
+	/**
+	 * Help text, aligned underneath the text area
+	 */
+	@Input() helpText?: string;
+
+	/**
+	 * Minimum length for text area, unset by default
+	 */
+	@Input() minLength?: number;
+
+	/**
+	 * Maximum length for text area, unset by default. When set displays also a character count indicator.
+	 */
 	@Input() maxLength?: number;
 
 	/**
-	 * Fixed size options for texarea - same what text-input has
+	 * FormControl for the text area
+	 */
+	@Input() control: FormControl;
+
+	/**
+	 * Fixed size options for text area
 	 */
 	@Input() size?: 's' | 'm' | 'l' = 'l';
 
 	/**
-	 *	Helper or info text, aligned underneath the textarea
+	 * Error messages shown when form control validators are invalid
 	 */
-	@Input() helpText?: string;
+	@Input() errorMsg: IFudisErrorMessages;
 
-	@Input() required: boolean = false;
+	/**
+	 * Text visible, if form control has a required validator
+	 */
+	@Input() requiredText: string;
 
-	validatorArray: Array<any> = [];
+	requiredValidator = Validators.required;
 
-	textAreaControl = new UntypedFormControl('', this.validatorArray);
-
-	defaultError: string;
-
-	usedCharacters: number = 0;
-
-	ngOnInit(): void {
-		if (this.required) {
-			this.validatorArray.push(Validators.required);
-		}
-	}
-
-	checkLength(): void {
-		this.usedCharacters = this.textarea?.nativeElement.value.length;
-	}
-
-	checkErrors(): void {
-		if (this.textarea.nativeElement.validationMessage) {
-			this.defaultError = this.textarea.nativeElement.validationMessage;
-		}
-	}
-
-	public get classes(): string[] {
-		if (this.textAreaControl.touched && this.textAreaControl.invalid) {
-			return ['fudis-text-area--invalid'];
-		}
-		return [];
+	handleBlur(): void {
+		this.guidanceToUpdate.checkErrors();
 	}
 }

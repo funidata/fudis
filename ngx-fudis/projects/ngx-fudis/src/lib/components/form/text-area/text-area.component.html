@@ -1,37 +1,25 @@
 <div class="fudis-form-element fudis-text-area fudis-text-area__{{ size }}">
-	<label class="fudis-text-area__label">
-		<div class="fudis-text-area__label__content">
-			<span class="fudis-text-area__label__text">
-				{{ label }}
-			</span>
-			<span class="fudis-text-area__label__required" *ngIf="required">Pakollinen&nbsp;*</span>
-		</div>
+	<fudis-label
+		[for]="id"
+		[text]="label"
+		[requiredText]="control.hasValidator(requiredValidator) && requiredText ? requiredText : null">
 		<textarea
-			#fudisTextArea
+			id="{{ id }}"
+			[formControl]="control"
+			(blur)="handleBlur()"
 			class="fudis-text-area__textarea"
-			[ngClass]="classes"
-			(blur)="checkErrors()"
-			[formControl]="textAreaControl"
-			(ngModelChange)="checkLength()"
+			[ngClass]="{ 'fudis-text-area--invalid': control.touched && control.invalid }"
+			[attr.aria-describedby]="id + '_guidance'"
+			[attr.minLength]="minLength"
 			[attr.maxLength]="maxLength"
-			[required]="required">
+			[attr.required]="control.hasValidator(requiredValidator)">
 		</textarea>
-		<div class="fudis-text-area__guidance">
-			<div class="fudis-text-area__guidance__character-limit-indicator" *ngIf="maxLength">
-				{{ usedCharacters || 0 }}/{{ maxLength }}
-			</div>
-			<div
-				class="fudis-text-area__guidance__error"
-				aria-live="polite"
-				role="alert"
-				*ngIf="textAreaControl.invalid && textAreaControl.touched">
-				{{ this.defaultError }}
-			</div>
-			<div
-				class="fudis-text-area__guidance__help-text"
-				*ngIf="(textAreaControl.invalid && textAreaControl.untouched) || textAreaControl.valid">
-				{{ helpText }}
-			</div>
-		</div>
-	</label>
+		<fudis-guidance
+			[maxLength]="maxLength"
+			[helpText]="helpText"
+			[id]="id + '_guidance'"
+			[errorMsg]="errorMsg"
+			[control]="control">
+		</fudis-guidance>
+	</fudis-label>
 </div>

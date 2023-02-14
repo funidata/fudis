@@ -1,0 +1,28 @@
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
+
+.fudis-guidance {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+
+	&__help-text {
+		@include colorMixins.fudis-text-color('gray-dark');
+		@include typography.fudis-body-s-regular;
+
+		margin-top: spacing.$fudis-spacing-xs;
+	}
+
+	&__character-limit-indicator {
+		@include colorMixins.fudis-text-color('gray-dark');
+		@include typography.fudis-body-s-regular;
+
+		margin-top: spacing.$fudis-spacing-xs;
+		margin-left: spacing.$fudis-spacing-xs;
+
+		&__float-right {
+			margin-left: auto;
+		}
+	}
+}

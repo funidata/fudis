@@ -1,14 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UntypedFormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MockComponent } from 'ng-mocks';
+import { LegendComponent } from '../legend/legend.component';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
-import { RadioButtonOption } from '../../../types/forms';
+import { IFudisRadioButtonOption } from '../../../types/forms';
+import { RadioButtonComponent } from './radio-button/radio-button.component';
+import { GuidanceComponent } from '../guidance/guidance.component';
 
-const testFormControl: UntypedFormControl = new UntypedFormControl('capybara');
+const testFormControl: FormControl = new FormControl('capybara');
 
-const petOptions: RadioButtonOption[] = [
-	{ value: 'platypus', label: 'Platypus', id: '1', name: 'animal' },
-	{ value: 'otter', label: 'Otter', id: '2', name: 'animal' },
-	{ value: 'capybara', label: 'Capybara', id: '3', name: 'animal' },
+const petOptions: IFudisRadioButtonOption[] = [
+	{ value: 'platypus', viewValue: 'Platypus', id: 'test-1', name: 'animal' },
+	{ value: 'otter', viewValue: 'Otter', id: 'test-2', name: 'animal' },
+	{ value: 'capybara', viewValue: 'Capybara', id: 'test-3', name: 'animal' },
 ];
 
 describe('RadioButtonGroupComponent', () => {
@@ -17,7 +21,13 @@ describe('RadioButtonGroupComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [RadioButtonGroupComponent],
+			declarations: [
+				RadioButtonGroupComponent,
+				MockComponent(LegendComponent),
+				MockComponent(RadioButtonComponent),
+				MockComponent(GuidanceComponent),
+			],
+			imports: [ReactiveFormsModule],
 		}).compileComponents();
 	});
 

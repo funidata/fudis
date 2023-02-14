@@ -1,0 +1,25 @@
+<div *ngIf="!isExternalLink" class="fudis-link">
+	<ng-container *ngTemplateOutlet="anchorLink"></ng-container>
+</div>
+
+<div *ngIf="isExternalLink" class="fudis-link">
+	<ng-container *ngTemplateOutlet="externalLink"></ng-container>
+</div>
+
+<ng-template #anchorLink>
+	<a [href]="href" class="fudis-link__anchor fudis-link__anchor__{{ size }}">
+		{{ linkTitle ? linkTitle : href }}
+	</a>
+</ng-template>
+
+<ng-template #externalLink>
+	<a
+		attr.aria-label="{{ linkTitle ? linkTitle : href }}, {{ externalLinkAriaLabel }}"
+		[href]="href"
+		target="_blank"
+		rel="noopener noreferrer"
+		class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__external">
+		{{ linkTitle ? linkTitle : href }}
+		<fudis-icon icon="external" color="primary"></fudis-icon>
+	</a>
+</ng-template>

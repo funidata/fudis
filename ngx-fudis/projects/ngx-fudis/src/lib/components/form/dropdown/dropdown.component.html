@@ -1,26 +1,28 @@
-<mat-form-field class="fudis-dropdown" floatLabel="always" appearance="standard" hideRequiredMarker>
-	<mat-label class="fudis-dropdown__label">
-		{{ label }}
-		<span class="fudis-dropdown__label--required" *ngIf="required">Pakollinen *</span>
-	</mat-label>
+<div class="fudis-dropdown fudis-dropdown__{{ size }}">
+	<fudis-label
+		[text]="label"
+		[id]="'label_' + id"
+		[requiredText]="control.hasValidator(requiredValidator) && requiredText ? requiredText : null"></fudis-label>
 	<mat-select
+		(blur)="handleBlur()"
+		(selectionChange)="handleSelectionChange()"
+		[id]="id"
 		#fudisDropdown
 		disableOptionCentering
 		panelClass="fudis-dropdown__option-list"
 		class="fudis-dropdown__select"
-		[ngClass]="classes"
-		[placeholder]="placeholder || 'Valitse'"
+		[ngClass]="{ 'fudis-dropdown--invalid': control.touched && control.invalid }"
+		[placeholder]="placeholder"
 		floatPlaceholder="never"
-		[required]="required"
 		[multiple]="multipleOption"
-		[formControl]="selectFormControl"
-		[(value)]="selectedOption">
-		<mat-option *ngFor="let option of options" [value]="option.value" [disabled]="option.disabled">
+		[formControl]="control"
+		[attr.required]="control.hasValidator(requiredValidator)"
+		[aria-labelledby]="'label_' + id"
+		[attr.aria-describedby]="id + '_guidance'">
+		<mat-option *ngFor="let option of options" [value]="option" [disabled]="option.disabled">
 			{{ option.viewValue }}
 		</mat-option>
 	</mat-select>
-	<mat-error class="fudis-dropdown__error" *ngIf="selectFormControl.invalid && selectFormControl.touched">
-		Pakollinen valinta
-	</mat-error>
-	<mat-hint class="fudis-dropdown__help-text" *ngIf="helpText">{{ helpText }}</mat-hint>
-</mat-form-field>
+	<fudis-guidance [helpText]="helpText" [id]="id + '_guidance'" [errorMsg]="errorMsg" [control]="control">
+	</fudis-guidance>
+</div>

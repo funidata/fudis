@@ -19,7 +19,7 @@
 				"import/no-extraneous-dependencies": [
 					"error",
 					{
-						"devDependencies": ["**/*.stories.*", "**/.storybook/**/*.*"],
+						"devDependencies": ["**/*.stories.*", "**/.storybook/**/*.*", "**/*.spec.ts"],
 						"optionalDependencies": false,
 						"peerDependencies": false,
 						"packageDir": "./"

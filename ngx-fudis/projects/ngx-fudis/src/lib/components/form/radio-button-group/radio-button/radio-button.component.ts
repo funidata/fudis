@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
 	selector: 'fudis-radio-button',
@@ -15,7 +15,7 @@ export class RadioButtonComponent {
 	/*
 	 * FormControl for Radio Button group
 	 */
-	@Input() control: UntypedFormControl;
+	@Input() control: FormControl;
 
 	/*
 	 * Selectable form value of a single Radio Button, e.g. "fair-trade-banana"
@@ -25,7 +25,7 @@ export class RadioButtonComponent {
 	/*
 	 * Visible label for a single Radio Button, e. g. "Fair trade banana"
 	 */
-	@Input() label: string;
+	@Input() viewValue: string;
 
 	/*
 	 * Name for group of Radio Buttons, e.g. "fruit"
@@ -48,7 +48,19 @@ export class RadioButtonComponent {
 	@Input() checked: boolean;
 
 	/*
-	 * Using legend of group fieldset to provide additional info for the user
+	 * Using fudis-guidance to provide additional info for the user
 	 */
-	@Input() describedByLegend: string;
+	@Input() guidanceId: string;
+
+	@Output() radioButtonBlur = new EventEmitter<string>();
+
+	@Output() radioButtonChange = new EventEmitter<string>();
+
+	handleBlur(): void {
+		this.radioButtonBlur.emit();
+	}
+
+	handleChange(): void {
+		this.radioButtonChange.emit();
+	}
 }
