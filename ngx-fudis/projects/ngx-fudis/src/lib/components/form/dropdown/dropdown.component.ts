@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { UntypedFormControl, Validators } from '@angular/forms';
-import { IFudisErrorMessages, IFudisDropdownOption, IFudisErrorSummaryItem } from '../../../types/forms';
+import { Component, Input, ViewEncapsulation, ViewChild } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { IFudisErrorMessages, IFudisDropdownOption } from '../../../types/forms';
+import { GuidanceComponent } from '../guidance/guidance.component';
 
 @Component({
 	selector: 'fudis-dropdown[id][label]',
@@ -9,6 +10,8 @@ import { IFudisErrorMessages, IFudisDropdownOption, IFudisErrorSummaryItem } fro
 	encapsulation: ViewEncapsulation.None,
 })
 export class DropdownComponent {
+	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
+
 	/**
 	 * Dropdown options
 	 */
@@ -17,7 +20,7 @@ export class DropdownComponent {
 	/**
 	 * FormControl for the dropdown
 	 */
-	@Input() control: UntypedFormControl;
+	@Input() control: FormControl;
 
 	/*
 	 * Error message shown below the input
@@ -59,38 +62,9 @@ export class DropdownComponent {
 	 */
 	@Input() size?: 's' | 'm' | 'l' = 'l';
 
-	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();
+	requiredValidator = Validators.required;
 
-	showError: boolean = false;
-
-	errorMsgToShow: string[] = [];
-
-	checkErrors(): void {
-		this.errorMsgToShow = [];
-		if (this.control.touched && this.control.errors) {
-			this.showError = true;
-
-			Object.keys(this.control.errors).forEach((item) => {
-				const message = this.errorMsg[item as keyof IFudisErrorMessages];
-
-				if (message) {
-					this.errorMsgToShow.push(message);
-					this.getErrorOutput(this.id, message);
-				}
-			});
-		} else {
-			this.showError = false;
-		}
-	}
-
-	getErrorOutput(id: string, error: string) {
-		this.errorOutput.emit({ id, message: error });
-	}
-
-	isRequired(): boolean {
-		if (this.control.hasValidator(Validators.required)) {
-			return true;
-		}
-		return false;
+	handleBlur(): void {
+		this.guidanceToUpdate.checkErrors();
 	}
 }

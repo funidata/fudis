@@ -1,7 +1,7 @@
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { UntypedFormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
@@ -52,7 +52,7 @@ SingleSelect.args = {
 	label: 'Select a pet',
 	placeholder: 'Choose a pet',
 	multipleOption: false,
-	control: new UntypedFormControl('', Validators.required),
+	control: new FormControl('', Validators.required),
 	id: 'example-id-for-dropdown-select',
 	helpText: 'All pets are equally important, but for sake of this example please pick one.',
 	options: [
@@ -76,7 +76,7 @@ MultiSelect.args = {
 	requiredText: 'Required',
 	label: 'Select from two to three pets',
 	placeholder: 'Choose a pet',
-	control: new UntypedFormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(3)]),
+	control: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(3)]),
 	id: 'example-id-for-dropdown-multi-select',
 	helpText: 'All pets are equally important, but for sake of this example please pick two to three pets.',
 	options: [

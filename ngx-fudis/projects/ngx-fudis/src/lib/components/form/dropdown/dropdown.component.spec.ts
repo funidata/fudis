@@ -1,14 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
+import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MockComponent } from 'ng-mocks';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DropdownComponent } from './dropdown.component';
 import { LabelComponent } from '../label/label.component';
-import { ErrorMessageComponent } from '../error-message/error-message.component';
 
-const dropdownControl: UntypedFormControl = new UntypedFormControl('');
+import { GuidanceComponent } from '../guidance/guidance.component';
+
+const dropdownControl: FormControl = new FormControl('');
 
 describe('DropdownComponent', () => {
 	let component: DropdownComponent;
@@ -16,7 +17,7 @@ describe('DropdownComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [DropdownComponent, MockComponent(ErrorMessageComponent), MockComponent(LabelComponent)],
+			declarations: [DropdownComponent, MockComponent(LabelComponent), MockComponent(GuidanceComponent)],
 			imports: [ReactiveFormsModule, MatFormFieldModule, MatSelectModule, BrowserAnimationsModule],
 		}).compileComponents();
 	});

@@ -3,7 +3,7 @@ import {
 	FormsModule,
 	ReactiveFormsModule,
 	UntypedFormBuilder,
-	UntypedFormControl,
+	FormControl,
 	UntypedFormGroup,
 	Validators,
 } from '@angular/forms';
@@ -41,9 +41,9 @@ class CheckboxExampleComponent {
 	 * Options for testing purposes
 	 */
 
-	checkboxFirst: UntypedFormControl = new UntypedFormControl({ value: true, disabled: true });
+	checkboxFirst: FormControl = new FormControl({ value: true, disabled: true });
 
-	checkboxSecond: UntypedFormControl = new UntypedFormControl(false, Validators.requiredTrue);
+	checkboxSecond: FormControl = new FormControl(false, Validators.requiredTrue);
 
 	mainFormGroup: UntypedFormGroup = this.formBuilder.group({
 		checkboxFirst: this.checkboxFirst,
