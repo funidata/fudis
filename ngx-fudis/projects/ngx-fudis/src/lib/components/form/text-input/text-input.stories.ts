@@ -1,13 +1,6 @@
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
-import {
-	FormsModule,
-	ReactiveFormsModule,
-	UntypedFormBuilder,
-	UntypedFormControl,
-	UntypedFormGroup,
-	Validators,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TextInputComponent } from './text-input.component';
@@ -18,14 +11,14 @@ import { IFudisErrorMessages } from '../../../types/forms';
 	template: `
 		<form [formGroup]="mainFormGroup">
 			<fudis-text-input
-				[control]="firstTextInputControl"
+				[control]="mainFormGroup.controls['first']"
 				id="unique-text-input-id-1"
 				requiredText="Required"
 				[errorMsg]="{ required: 'Missing a value.' }"
 				label="I am a required text input"
 				helpText="Please add some values here above!"></fudis-text-input>
 			<fudis-text-input
-				[control]="secondTextInputControl"
+				[control]="mainFormGroup.controls['second']"
 				requiredText="Required"
 				[minLength]="minLength"
 				[maxLength]="maxLength"
@@ -35,12 +28,12 @@ import { IFudisErrorMessages } from '../../../types/forms';
 				type="email"
 				helpText="This is an example email input with multiple validations."></fudis-text-input>
 			<fudis-text-input
-				[control]="thirdTextInputControl"
+				[control]="mainFormGroup.controls['third']"
 				id="unique-text-input-id-3"
 				label="Number input"
 				requiredText="Required"
-				[min]="minNumber"
-				[max]="maxNumber"
+				[minNumber]="minNumber"
+				[maxNumber]="maxNumber"
 				type="number"
 				size="s"
 				[errorMsg]="validatorMessages"></fudis-text-input>
@@ -78,18 +71,13 @@ class TextInputWithFormControlExampleComponent {
 		max: `Given number is not inside the allowed range ${this.minNumber} - ${this.maxNumber}.`,
 	};
 
-	firstTextInputControl: UntypedFormControl = new UntypedFormControl('', [Validators.required]);
-
-	secondTextInputControl: UntypedFormControl = new UntypedFormControl('', this.validatorsForSecondTextInput);
-
-	thirdTextInputControl: UntypedFormControl = new UntypedFormControl('', this.validatorsForThirdTextInput);
-
-	mainFormGroup: UntypedFormGroup = this.formBuilder.group({
-		firstTextInputControl: this.firstTextInputControl,
-		secondTextInputControl: this.secondTextInputControl,
+	mainFormGroup: FormGroup = this.formBuilder.group({
+		first: new FormControl('', Validators.required),
+		second: new FormControl('', this.validatorsForSecondTextInput),
+		third: new FormControl('', this.validatorsForThirdTextInput),
 	});
 
-	constructor(private formBuilder: UntypedFormBuilder) {}
+	constructor(private formBuilder: FormBuilder) {}
 }
 
 export default {

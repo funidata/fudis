@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
 	selector: 'fudis-legend',
@@ -7,4 +7,6 @@ import { Component, HostBinding } from '@angular/core';
 })
 export class LegendComponent {
 	@HostBinding('class') classes = 'fudis-legend';
+
+	@Input() id: string;
 }

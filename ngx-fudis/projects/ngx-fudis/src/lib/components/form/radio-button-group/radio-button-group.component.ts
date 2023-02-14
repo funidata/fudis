@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { UntypedFormControl, Validators } from '@angular/forms';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { IFudisRadioButtonOption, IFudisErrorSummaryItem, IFudisErrorMessages } from '../../../types/forms';
+import { GuidanceComponent } from '../guidance/guidance.component';
 
 @Component({
 	selector: 'fudis-radio-button-group[options][id][legend]',
@@ -8,10 +9,12 @@ import { IFudisRadioButtonOption, IFudisErrorSummaryItem, IFudisErrorMessages } 
 	styleUrls: ['./radio-button-group.component.scss'],
 })
 export class RadioButtonGroupComponent implements OnInit {
+	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
+
 	/*
 	 * FormControl for Radio Button group
 	 */
-	@Input() control: UntypedFormControl;
+	@Input() control: FormControl;
 
 	/*
 	 * Array of options for group of radio buttons
@@ -45,15 +48,7 @@ export class RadioButtonGroupComponent implements OnInit {
 
 	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();
 
-	required: boolean = false;
-
-	legendId: string;
-
-	showError: boolean = false;
-
 	requiredValidator = Validators.required;
-
-	errorMsgToShow: string[] = [];
 
 	ngOnInit() {
 		if (this.options.length < 2) {
@@ -75,31 +70,13 @@ export class RadioButtonGroupComponent implements OnInit {
 				`From @Input array of options to fudis-radio-button-group value 'name' should be identical for all options.`
 			);
 		}
-
-		this.legendId = `${this.id}-legend`;
-
-		this.required = this.control.hasValidator(Validators.required);
 	}
 
-	checkErrors(): boolean {
-		this.errorMsgToShow = [];
-		if (this.control.touched && this.control.errors) {
-			this.showError = true;
-
-			Object.keys(this.control.errors).forEach((item) => {
-				const message = this.errorMsg[item as keyof IFudisErrorMessages];
-				if (message) {
-					this.errorMsgToShow.push(message);
-					this.getErrorOutput(this.id, message);
-				}
-			});
-			return true;
-		}
-		this.showError = false;
-		return false;
+	handleBlur(): void {
+		this.guidanceToUpdate.checkErrors();
 	}
 
-	getErrorOutput(id: string, error: string) {
-		this.errorOutput.emit({ id, message: error });
+	handleChange(): void {
+		this.guidanceToUpdate.checkErrors();
 	}
 }

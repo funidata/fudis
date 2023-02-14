@@ -9,7 +9,7 @@
 			<input
 				(blur)="handleBlur()"
 				#checkboxRef
-				[attr.aria-describedby]="'guidance_' + id"
+				[attr.aria-describedby]="id + '_guidance'"
 				[attr.aria-label]="label"
 				type="checkbox"
 				[name]="name"
@@ -35,12 +35,6 @@
 		</div>
 		<div class="fudis-checkbox__label__text">{{ label }}</div>
 	</label>
-	<div id="guidance_{{ id }}" class="fudis-checkbox__guidance">
-		<ng-container *ngIf="showError">
-			<ng-container *ngFor="let error of errorMsgToShow">
-				<fudis-error-message [message]="error"></fudis-error-message>
-			</ng-container>
-		</ng-container>
-		<p *ngIf="!showError && helpText" class="fudis-checkbox__guidance__help-text">{{ helpText }}</p>
-	</div>
+	<fudis-guidance [helpText]="helpText" [id]="id + '_guidance'" [errorMsg]="errorMsg" [control]="control">
+	</fudis-guidance>
 </div>

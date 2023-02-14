@@ -1,22 +1,18 @@
-<fieldset [attr.aria-labelledby]="legendId" [id]="id" class="fudis-form-element fudis-radio-button-group">
-	<fudis-legend [attr.id]="legendId">{{ legend }}</fudis-legend>
+<fieldset [attr.aria-labelledby]="id + '_legend'" [id]="id" class="fudis-form-element fudis-radio-button-group">
+	<fudis-legend [id]="id + '_legend'">{{ legend }}</fudis-legend>
 	<li class="fudis-radio-button-group__option" *ngFor="let option of options; let index = index">
 		<fudis-radio-button
-			[describedByLegend]="legendId"
+			(radioButtonBlur)="handleBlur()"
+			(radioButtonChange)="handleChange()"
+			[guidanceId]="id + '_guidance'"
 			[id]="option.id"
 			[name]="option.name"
 			[value]="option.value"
 			[viewValue]="option.viewValue"
-			[required]="required"
+			[required]="control.hasValidator(requiredValidator)"
 			[checked]="control.value === option.value ? true : false"
 			[control]="control"></fudis-radio-button>
 	</li>
-	<div id="guidance_{{ id }}" class="fudis-text-input__guidance">
-		<ng-container *ngIf="checkErrors()">
-			<ng-container *ngFor="let error of errorMsgToShow">
-				<fudis-error-message [message]="error"></fudis-error-message>
-			</ng-container>
-		</ng-container>
-		<p *ngIf="!showError && helpText" class="fudis-text-input__guidance__help-text">{{ helpText }}</p>
-	</div>
+	<fudis-guidance [helpText]="helpText" [id]="id + '_guidance'" [errorMsg]="errorMsg" [control]="control">
+	</fudis-guidance>
 </fieldset>

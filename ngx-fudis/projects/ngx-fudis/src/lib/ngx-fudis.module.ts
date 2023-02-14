@@ -34,6 +34,7 @@ import { RadioButtonGroupComponent } from './components/form/radio-button-group/
 import { TextInputComponent } from './components/form/text-input/text-input.component';
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
+import { GuidanceComponent } from './components/form/guidance/guidance.component';
 
 @NgModule({
 	/*
@@ -65,6 +66,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		TextInputComponent,
 		TextSpacingComponent,
 		TextAreaComponent,
+		GuidanceComponent,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
