@@ -64,19 +64,16 @@ const Template: Story<GridComponent> = (args: GridComponent) => ({
 		[marginTop]="marginTop"
 		[marginBottom]="marginBottom"
 		[width]="width">
-		<fudis-heading
-			class="grid-test-item"
-			tag="h1"
-			size="l"
-			text="Headings will always take 100% width if they are direct child of Fudis grid component"></fudis-heading>
-		<fudis-heading
-			class="grid-test-item"
-			tag="h2"
-			size="s"
-			text="If you change any of the column size values from the controls, please refresh the page  for ngMaterial's Breakpoint Observer to register the new values!"></fudis-heading>
+		<fudis-heading class="grid-test-item" tag="h1" size="l"
+			>Fudis-headings will always take 100% width if they are direct child of Fudis grid component</fudis-heading
+		>
+		<fudis-heading class="grid-test-item" tag="h2" size="s"
+			>If you change any of the column size values from the controls, please refresh the page for ngMaterial's
+			Breakpoint Observer to register the new values!</fudis-heading
+		>
 
 		<div class="grid-test-item">
-			<fudis-heading tag="h3" size="m" text="This heading is inside a div"></fudis-heading>
+			<fudis-heading tag="h3" size="m" text>This is fudis-heading inside a div</fudis-heading>
 			<fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
 		</div>
 		<div class="grid-test-item">
@@ -84,7 +81,7 @@ const Template: Story<GridComponent> = (args: GridComponent) => ({
 			<fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
 		</div>
 		<div class="grid-test-item">
-			<fudis-heading tag="h3" size="m" text="This heading is inside a div"></fudis-heading>
+			<fudis-heading tag="h3" size="m">This is fudis-heading inside a div</fudis-heading>
 			<fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
 		</div>
 		<div class="grid-test-item">

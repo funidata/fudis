@@ -3,23 +3,23 @@
 		[for]="id"
 		[text]="label"
 		[requiredText]="control.hasValidator(requiredValidator) && requiredText ? requiredText : null">
-		<textarea
-			id="{{ id }}"
-			[formControl]="control"
-			(blur)="handleBlur()"
-			class="fudis-text-area__textarea"
-			[ngClass]="{ 'fudis-text-area--invalid': control.touched && control.invalid }"
-			[attr.aria-describedby]="id + '_guidance'"
-			[attr.minLength]="minLength"
-			[attr.maxLength]="maxLength"
-			[attr.required]="control.hasValidator(requiredValidator)">
-		</textarea>
-		<fudis-guidance
-			[maxLength]="maxLength"
-			[helpText]="helpText"
-			[id]="id + '_guidance'"
-			[errorMsg]="errorMsg"
-			[control]="control">
-		</fudis-guidance>
 	</fudis-label>
+	<textarea
+		[id]="id"
+		[formControl]="control"
+		(blur)="handleBlur()"
+		class="fudis-text-area__textarea"
+		[ngClass]="{ 'fudis-text-area--invalid': control.touched && control.invalid }"
+		[attr.aria-describedby]="id + '_guidance'"
+		[attr.minLength]="minLength"
+		[attr.maxLength]="maxLength"
+		[attr.required]="control.hasValidator(requiredValidator)">
+	</textarea>
+	<fudis-guidance
+		[maxLength]="maxLength"
+		[helpText]="helpText"
+		[id]="id + '_guidance'"
+		[errorMsg]="errorMsg"
+		[control]="control">
+	</fudis-guidance>
 </div>
