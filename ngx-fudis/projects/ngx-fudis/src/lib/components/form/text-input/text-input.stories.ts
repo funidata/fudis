@@ -1,13 +1,6 @@
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
-import {
-	FormsModule,
-	ReactiveFormsModule,
-	UntypedFormBuilder,
-	FormControl,
-	UntypedFormGroup,
-	Validators,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TextInputComponent } from './text-input.component';
@@ -78,13 +71,13 @@ class TextInputWithFormControlExampleComponent {
 		max: `Given number is not inside the allowed range ${this.minNumber} - ${this.maxNumber}.`,
 	};
 
-	mainFormGroup: UntypedFormGroup = this.formBuilder.group({
+	mainFormGroup: FormGroup = this.formBuilder.group({
 		first: new FormControl('', Validators.required),
 		second: new FormControl('', this.validatorsForSecondTextInput),
 		third: new FormControl('', this.validatorsForThirdTextInput),
 	});
 
-	constructor(private formBuilder: UntypedFormBuilder) {}
+	constructor(private formBuilder: FormBuilder) {}
 }
 
 export default {

@@ -1,12 +1,5 @@
 import { Story, Meta, moduleMetadata } from '@storybook/angular';
-import {
-	FormsModule,
-	ReactiveFormsModule,
-	UntypedFormBuilder,
-	FormControl,
-	UntypedFormGroup,
-	Validators,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { Component } from '@angular/core';
 import { CheckboxComponent } from './checkbox.component';
@@ -45,12 +38,12 @@ class CheckboxExampleComponent {
 
 	checkboxSecond: FormControl = new FormControl(false, Validators.requiredTrue);
 
-	mainFormGroup: UntypedFormGroup = this.formBuilder.group({
+	mainFormGroup: FormGroup = this.formBuilder.group({
 		checkboxFirst: this.checkboxFirst,
 		checkboxSecond: this.checkboxSecond,
 	});
 
-	constructor(private formBuilder: UntypedFormBuilder) {}
+	constructor(private formBuilder: FormBuilder) {}
 }
 
 export default {

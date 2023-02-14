@@ -24,7 +24,7 @@ export class GuidanceComponent {
 
 	errorMsgToShow: string[] = [];
 
-	checkErrors(): boolean {
+	checkErrors(): void {
 		this.errorMsgToShow = [];
 		if (this.control.touched && this.control.errors) {
 			this.showError = true;
@@ -36,10 +36,9 @@ export class GuidanceComponent {
 					this.getErrorOutput(this.id, message);
 				}
 			});
-			return true;
+		} else {
+			this.showError = false;
 		}
-		this.showError = false;
-		return false;
 	}
 
 	getErrorOutput(id: string, error: string) {

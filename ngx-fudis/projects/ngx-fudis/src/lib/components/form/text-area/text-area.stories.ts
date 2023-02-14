@@ -1,13 +1,6 @@
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
-import {
-	UntypedFormBuilder,
-	FormControl,
-	UntypedFormGroup,
-	Validators,
-	FormsModule,
-	ReactiveFormsModule,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TextAreaComponent } from './text-area.component';
@@ -60,12 +53,12 @@ class TextAreaWithFormControlExampleComponent {
 
 	secondTextAreaControl: FormControl = new FormControl('', this.validatorsForSecondTextInput);
 
-	mainFormGroup: UntypedFormGroup = this.formBuilder.group({
+	mainFormGroup: FormGroup = this.formBuilder.group({
 		firstTextAreaControl: this.firstTextAreaControl,
 		secondTextareaControl: this.secondTextAreaControl,
 	});
 
-	constructor(private formBuilder: UntypedFormBuilder) {}
+	constructor(private formBuilder: FormBuilder) {}
 }
 
 export default {

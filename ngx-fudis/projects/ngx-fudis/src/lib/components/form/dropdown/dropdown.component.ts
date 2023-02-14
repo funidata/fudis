@@ -67,4 +67,8 @@ export class DropdownComponent {
 	handleBlur(): void {
 		this.guidanceToUpdate.checkErrors();
 	}
+
+	handleSelectionChange(): void {
+		this.guidanceToUpdate.checkErrors();
+	}
 }

@@ -5,6 +5,7 @@
 		[requiredText]="control.hasValidator(requiredValidator) && requiredText ? requiredText : null"></fudis-label>
 	<mat-select
 		(blur)="handleBlur()"
+		(selectionChange)="handleSelectionChange()"
 		[id]="id"
 		#fudisDropdown
 		disableOptionCentering

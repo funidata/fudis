@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
 
-import {
-	UntypedFormBuilder,
-	FormControl,
-	UntypedFormGroup,
-	Validators,
-	FormsModule,
-	ReactiveFormsModule,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IFudisRadioButtonOption } from 'projects/ngx-fudis/src/lib/types/forms';
 
@@ -75,12 +68,12 @@ class RadioButtonGroupExampleComponent {
 		{ value: 'capybara', viewValue: 'Capybara', id: 'pet-3', name: 'animal' },
 	];
 
-	mainFormGroup: UntypedFormGroup = this.formBuilder.group({
+	mainFormGroup: FormGroup = this.formBuilder.group({
 		first: new FormControl(getDefaultValue(this.fruitOptions), Validators.required),
 		second: new FormControl(getDefaultValue(this.petOptions), Validators.required),
 	});
 
-	constructor(private formBuilder: UntypedFormBuilder) {}
+	constructor(private formBuilder: FormBuilder) {}
 }
 
 export default {
