@@ -66,7 +66,7 @@ import { GuidanceComponent } from './components/form/guidance/guidance.component
 		TextInputComponent,
 		TextSpacingComponent,
 		TextAreaComponent,
-  GuidanceComponent,
+		GuidanceComponent,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.

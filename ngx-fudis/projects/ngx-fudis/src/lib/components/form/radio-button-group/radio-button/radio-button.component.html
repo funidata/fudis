@@ -1,8 +1,10 @@
 <label [attr.for]="id" class="fudis-radio-button">
 	<input
+		(blur)="handleBlur()"
+		(change)="handleChange()"
 		class="fudis-radio-button__input"
 		type="radio"
-		[attr.aria-describedby]="describedByLegend"
+		[attr.aria-describedby]="guidanceId"
 		[id]="id"
 		[attr.name]="name"
 		[name]="name"

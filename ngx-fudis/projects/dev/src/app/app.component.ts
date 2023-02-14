@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Component({
 	selector: 'app-root',
@@ -46,5 +46,5 @@ import { UntypedFormControl } from '@angular/forms';
 export class AppComponent {
 	title = 'dev';
 
-	textAreaControl: UntypedFormControl = new UntypedFormControl('');
+	textAreaControl: FormControl = new FormControl('');
 }
