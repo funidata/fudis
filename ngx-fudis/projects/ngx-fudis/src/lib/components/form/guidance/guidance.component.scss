@@ -12,6 +12,7 @@
 		@include typography.fudis-body-s-regular;
 
 		margin-top: spacing.$fudis-spacing-xs;
+		margin-bottom: spacing.$fudis-spacing-xs
 	}
 
 	&__character-limit-indicator {

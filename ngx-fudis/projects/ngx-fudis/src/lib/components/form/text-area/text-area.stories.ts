@@ -12,7 +12,7 @@ import { IFudisErrorMessages } from '../../../types/forms';
 		<form [formGroup]="mainFormGroup">
 			<fudis-text-area
 				[control]="firstTextAreaControl"
-				id="unique-text-area-id-1"
+				[id]="'unique-text-area-id-1'"
 				requiredText="Required"
 				[errorMsg]="{ required: 'Missing a value.' }"
 				label="I am a required text input"
@@ -22,8 +22,8 @@ import { IFudisErrorMessages } from '../../../types/forms';
 				requiredText="Required"
 				[minLength]="minLength"
 				[maxLength]="maxLength"
-				id="unique-text-area-id-2"
-				label="This is pretty long label to demonstrate how it aligns with other content surrounded around it."
+				[id]="'unique-text-area-id-2'"
+				[label]="'This is pretty long label to demonstrate how it aligns with other content surrounded around it.'"
 				[errorMsg]="validatorMessages"
 				helpText="This is an example text area with multiple validations. Actually this help text is also pretty long to demonstrate how for example character count is visible."></fudis-text-area>
 		</form>

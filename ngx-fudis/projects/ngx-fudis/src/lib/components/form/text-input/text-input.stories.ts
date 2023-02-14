@@ -12,7 +12,7 @@ import { IFudisErrorMessages } from '../../../types/forms';
 		<form [formGroup]="mainFormGroup">
 			<fudis-text-input
 				[control]="mainFormGroup.controls['first']"
-				id="unique-text-input-id-1"
+				[id]="'unique-text-input-id-1'"
 				requiredText="Required"
 				[errorMsg]="{ required: 'Missing a value.' }"
 				label="I am a required text input"
@@ -22,14 +22,14 @@ import { IFudisErrorMessages } from '../../../types/forms';
 				requiredText="Required"
 				[minLength]="minLength"
 				[maxLength]="maxLength"
-				id="unique-text-input-id-2"
+				[id]="'unique-text-input-id-2'"
 				label="Email"
 				[errorMsg]="validatorMessages"
 				type="email"
 				helpText="This is an example email input with multiple validations."></fudis-text-input>
 			<fudis-text-input
 				[control]="mainFormGroup.controls['third']"
-				id="unique-text-input-id-3"
+				[id]="'unique-text-input-id-3'"
 				label="Number input"
 				requiredText="Required"
 				[minNumber]="minNumber"
@@ -72,9 +72,12 @@ class TextInputWithFormControlExampleComponent {
 	};
 
 	mainFormGroup: FormGroup = this.formBuilder.group({
-		first: new FormControl('', Validators.required),
-		second: new FormControl('', this.validatorsForSecondTextInput),
-		third: new FormControl('', this.validatorsForThirdTextInput),
+		// first: new FormControl('', Validators.required),
+		// second: new FormControl('', this.validatorsForSecondTextInput),
+		// third: new FormControl('', this.validatorsForThirdTextInput),
+		first: new FormControl(''),
+		second: new FormControl(''),
+		third: new FormControl(''),
 	});
 
 	constructor(private formBuilder: FormBuilder) {}
