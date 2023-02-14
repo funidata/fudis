@@ -2,7 +2,7 @@ import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
 import {
 	UntypedFormBuilder,
-	UntypedFormControl,
+	FormControl,
 	UntypedFormGroup,
 	Validators,
 	FormsModule,
@@ -56,9 +56,9 @@ class TextAreaWithFormControlExampleComponent {
 		maxlength: `Too long input. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,
 	};
 
-	firstTextAreaControl: UntypedFormControl = new UntypedFormControl('', [Validators.required]);
+	firstTextAreaControl: FormControl = new FormControl('', [Validators.required]);
 
-	secondTextAreaControl: UntypedFormControl = new UntypedFormControl('', this.validatorsForSecondTextInput);
+	secondTextAreaControl: FormControl = new FormControl('', this.validatorsForSecondTextInput);
 
 	mainFormGroup: UntypedFormGroup = this.formBuilder.group({
 		firstTextAreaControl: this.firstTextAreaControl,
@@ -87,7 +87,7 @@ const Template: Story<TextAreaComponent> = (args: TextAreaComponent) => ({
 export const TextArea = Template.bind({});
 TextArea.args = {
 	label: 'This is the label',
-	control: new UntypedFormControl(''),
+	control: new FormControl(''),
 	id: 'example-id-for-text-input',
 	helpText: 'Example help text',
 };
