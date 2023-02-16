@@ -11,14 +11,7 @@
 			</mat-icon>
 		</mat-datepicker-toggle>
 		<mat-datepicker #picker></mat-datepicker>
-		<!-- Replace with guidance component when in main -->
-		<div id="guidance_{{ id }}" class="fudis-datepicker__guidance">
-			<ng-container *ngIf="showError">
-				<ng-container *ngFor="let error of errorMsgToShow">
-					<fudis-error-message [message]="error"></fudis-error-message>
-				</ng-container>
-			</ng-container>
-			<p *ngIf="!showError" class="fudis-datepicker__guidance__help-text">{{ helpText }}</p>
-		</div>
+		<fudis-guidance [helpText]="helpText" [id]="id + '_guidance'" [errorMsg]="errorMsg" [control]="control">
+		</fudis-guidance>
 	</mat-form-field>
 </div>
