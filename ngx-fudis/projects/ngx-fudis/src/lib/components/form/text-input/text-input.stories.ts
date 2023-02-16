@@ -13,23 +13,28 @@ import { IFudisErrorMessages } from '../../../types/forms';
 			<fudis-text-input
 				[control]="mainFormGroup.controls['first']"
 				[id]="'unique-text-input-id-1'"
+				label="I am a basic text input."
+				helpText="I don't have any validators."></fudis-text-input>
+			<fudis-text-input
+				[control]="mainFormGroup.controls['second']"
+				[id]="'unique-text-input-id-2'"
 				requiredText="Required"
 				[errorMsg]="{ required: 'Missing a value.' }"
 				label="I am a required text input"
 				helpText="Please add some values here above!"></fudis-text-input>
 			<fudis-text-input
-				[control]="mainFormGroup.controls['second']"
+				[control]="mainFormGroup.controls['third']"
 				requiredText="Required"
 				[minLength]="minLength"
 				[maxLength]="maxLength"
-				[id]="'unique-text-input-id-2'"
+				[id]="'unique-text-input-id-3'"
 				label="Email"
 				[errorMsg]="validatorMessages"
 				type="email"
 				helpText="This is an example email input with multiple validations."></fudis-text-input>
 			<fudis-text-input
-				[control]="mainFormGroup.controls['third']"
-				[id]="'unique-text-input-id-3'"
+				[control]="mainFormGroup.controls['fourth']"
+				[id]="'unique-text-input-id-4'"
 				label="Number input"
 				requiredText="Required"
 				[minNumber]="minNumber"
@@ -49,14 +54,14 @@ class TextInputWithFormControlExampleComponent {
 
 	maxNumber = 99;
 
-	validatorsForSecondTextInput = [
+	validatorsForThird = [
 		Validators.minLength(this.minLength),
 		Validators.maxLength(this.maxLength),
 		Validators.required,
 		Validators.email,
 	];
 
-	validatorsForThirdTextInput = [Validators.min(this.minNumber), Validators.max(this.maxNumber), Validators.required];
+	validatorsForFourth = [Validators.min(this.minNumber), Validators.max(this.maxNumber), Validators.required];
 
 	/**
 	 * Options for testing purposes
@@ -72,12 +77,10 @@ class TextInputWithFormControlExampleComponent {
 	};
 
 	mainFormGroup: FormGroup = this.formBuilder.group({
-		// first: new FormControl('', Validators.required),
-		// second: new FormControl('', this.validatorsForSecondTextInput),
-		// third: new FormControl('', this.validatorsForThirdTextInput),
 		first: new FormControl(''),
-		second: new FormControl(''),
-		third: new FormControl(''),
+		second: new FormControl('', Validators.required),
+		third: new FormControl('', this.validatorsForThird),
+		fourth: new FormControl('', this.validatorsForFourth),
 	});
 
 	constructor(private formBuilder: FormBuilder) {}

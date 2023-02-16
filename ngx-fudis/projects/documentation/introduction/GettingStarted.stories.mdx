@@ -1,16 +1,16 @@
-import { ArgsTable, Meta, Story, Canvas, Source } from '@storybook/addon-docs';
+import { Meta } from '@storybook/addon-docs';
 
-<Meta title="Documentation/Introduction/Getting started" />
+<Meta title="Documentation/Introduction/How to start using Fudis" />
 
-# Getting Started
+# How to Start Using Fudis in Your Application
 
-Fudis Design System provides guidelines, design assets and components that work as the foundation for all of Funidata's products. The purpose of this Angular-based system is to support a sustainable and consistent development and accessible customer experience for our services.
+<br />
 
-## Intallation
+## Installation
 
 You can find package information at NPM https://www.npmjs.com/package/@funidata/ngx-fudis
 
-#### 1. Install Angular Material peer dependency:
+#### 1. Install Angular Material Peer Dependency:
 
 ```
 ng add @angular/material
@@ -45,7 +45,24 @@ The core styles from Angular Material must be imported in your application for t
 
 > Fudis does not include the Material core styles for you because **they should be included exactly once** in your application.
 
-#### 4. Define application’s primary colors as CSS variables in project root style
+#### 4. Check Fudis Import in `app.module.ts`
+
+Check your application's `app.module.ts` file that Fudis is imported correctly.
+
+```
+import { NgxFudisModule } from 'ngx-fudis';
+
+@NgModule({
+	...
+	imports: [
+		...
+		NgxFudisModule
+	],
+	...
+})
+```
+
+#### 5. Define application's primary colors as CSS variables in project root style
 
 ```
 :root {
@@ -56,17 +73,16 @@ The core styles from Angular Material must be imported in your application for t
 }
 ```
 
-#### Include Fudis foundation scss-file to your Angular settings
+#### 6. Include Fudis foundation scss-file to your Angular settings
 
 - TODO
 
-#### 5. Use Fudis components in your project
+#### 7. Use Fudis components in your project
 
 ```
 import { ButtonComponent } from './button.component';
 
 <fudis-button label="Eiku"></fudis-button>
-
 ```
 
 or
@@ -82,6 +98,4 @@ import { Component } from '@angular/core';
 export class AppComponent {
  title = 'dev';
 }
-
-
 ```

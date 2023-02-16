@@ -9,11 +9,13 @@ const storyOrder = [
 	'Documentation',
 	[
 		'Introduction',
-		['Getting Started'],
+		['Introduction', 'How to start using Fudis'],
 		'Development',
 		[
-			'Overview',
-			'Ways of working',
+			'Getting Started',
+			'Setup VSCode',
+			'Ways of Working',
+			'Naming Conventions',
 			'Creating component',
 			'Project structure',
 			'Component checklist',

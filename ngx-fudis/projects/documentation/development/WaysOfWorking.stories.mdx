@@ -1,74 +1,59 @@
-import { ArgsTable, Meta, Story, Canvas, Source } from '@storybook/addon-docs';
+import { Meta } from '@storybook/addon-docs';
 
-<Meta title="Documentation/Development/Ways of working" />
+<Meta title="Documentation/Development/Ways of Working" />
 
-# Ways of working
-
-<br />
-
-## Naming convensions
-
-The Fudis Design System uses the following naming conventions described here. These conventions aim to reduce the load of creating new names for components while maintaining a consistent project folder structure.
-
-### Prefix
-
-Fudis uses selector prefix **fudis**. Prefix prevents collision with consumers existing design tokens.
-
-### CSS/SASS class names
-
-Fudis follow BEM methodology of block, element and modifier.
+# Ways of Working
 
 <br />
 
-### Fudis components
+## Modularity
 
----
+Reusing components, styles and other bits and pieces of code is encouraged. If it starts to look like that part are repeated multiple times, it might be a good idea to separate that part to its own e. g. sub-component or utility function.
 
-- **fudis** -prefix
-- All lower case
-- Segments are joined with <code>-</code>.
+## Naming conventions
 
-#### Example `fudis-text-input`
-
-- **fudis** -prefix
-- **Block level:** refers to a category. Ex. text.
-- **Element:** Item type, ex. input.
-
-<br />
-
-### Fudis foundations - design tokens
-
----
-
-#### Example `$fudis-spacing-xs`
-
-- **fudis** -prefix
-- **Block level:** refers to a type: focus, border, grid, breakpoint.
-- **Element:** Refers to a specific item. Ex. heading, body, form-field.
-- **Modifier:** Describes the quality of the identifier, like width, state or a variant.
-
-<br />
+Currently documented conventions for naming components, CSS classes etc. can be found in [Naming Conventions page](/docs/documentation-development-naming-conventions--page)
 
 ## Styles
 
-It’s a good practice to reuse components, while preventing rewriting their existing .scss styles
+Fudis uses SCSS as its tool for defining styles. In addition various linting rules are forced through Stylelint. Stylelint quite aggressively will throw errors if there are unallowed values or attributes such as `px` values or if there are unnecessary white space or similar syntax inconsistecy.
 
+Quite many of the formatting errors can be automatically fixed on save if you have setupped your VSCode or other IDE correctly.
+
+### Some principles for writing styles
+
+- Reuse components, while preventing rewriting their existing .scss styles
 - Component inline styles should be avoided. This allows full control over component styles through variables.
 
-  > Exceptions exist, e. g. [GridComponent](?path=/story/components-grid--grid) which dynamically applies @Input values to CSS grid without need to write tens of helper CSS classes.
+  > Exceptions exist, e. g. [GridComponent](?path=/story/components-grid--grid) which dynamically applies @Input of `[columns]` values as native CSS grid values without need to write tens of helper CSS classes.
 
 - Components styles should be recorded in their own .scss file directly in their own folder.
-- Use globally defined colors, spacing, etc. rather than introducing hard-to-maintain local values.
+- Use globally defined tokens and mixins to enable colors, spacing, etc. rather than introducing hard-to-maintain local values.
 
-### Styling conventions should follow BEM structure.
+  > If Stylelint throws an error, that you are using an unallowed attribute or value in your scss-file, there is always a mixin for that. For example `color`, `background-color` and `font-size` are not allowed. When using mixins for these we minimise the risk that workarounds and exceptions start to appear to our code base.
 
-- **Block:** fudis-radio-button
-- **Element:** fudis-radio-button\_\_indicator
-- **Modifier:** fudis-radio-button\_\_indicator–invalid
+- Avoid using style override with `!important`
 
-In order to keep styling consistent in and between components, it’s important to use tokens through mixins. Stylelint will warn you, if styles do not follow this pattern. By this it’s possible to maintain an 8 px base system etc.
+- Occasionally it is unconvenient to follow the rules of Stylelint. E. g. if you need to do CSS sibling selection, but SCSS syntax with Stylelint thinks you are not following the good practises. In these occasions it is acceptable to add an ignore rule for that line of styling.
 
-Avoid using style override `!important`.
+### Using foundation tokens and mixins in component's scss-file
+
+To use foundations in component's scss file, import it with SCSS's `@use` feature and use it in similar fashion like in example below.
+
+```
+@use '../path/to/foundations/colors/tokens.scss' as colorTokens;
+@use '../path/to/foundations/colors/mixins.scss' as colorMixins;
+
+.fudis-my-new-component{
+	@include colorMixins.fudis-color('white')
+	@include colorMixins.fudis-bg-color('primary')
+
+	&__inner-svg-icon{
+		fill: colorTokens.$fudis-color-primary-light;
+	}
+}
+
+```
 
 ### Angular Material styles
 

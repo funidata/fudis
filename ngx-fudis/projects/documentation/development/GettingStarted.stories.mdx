@@ -1,0 +1,80 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Documentation/Development/Getting Started" />
+
+# Getting started with Fudis development
+
+This document contains information for installing and running tools needed for Fudis development. For additional documentation, practises and ways of working please check Storybook documentation under **Development** folder.
+
+<br />
+
+## Source code
+
+Clone the repository [Fudis Design System](https://github.com/funidata/fudis.git) from GitHub.
+
+```
+git clone https://github.com/funidata/fudis.git
+
+```
+
+## Install dependencies
+
+In the root of project, install repository dependencies and Fudis dependencies.
+
+```
+npm install && cd ngx-fudis && npm install
+
+```
+
+## Build application and watch for changes
+
+All following command should be run from **the root** of the fudis repository.
+
+> Build and watch for changes in Fudis package
+
+```
+npm run dev
+
+```
+
+## Start Storybook
+
+> Start Storybook and open it in browser http://localhost:6600
+
+```
+npm run storybook
+
+```
+
+## Sandbox application
+
+> Open sandbox in browser http://localhost:4200
+
+```
+npm run sandbox
+
+```
+
+## Run tests
+
+This command will run unit tests
+
+```
+npm run test
+
+```
+
+## Formatting and linting
+
+Fudis uses Husky Git hooks to prevent unformatted code being pushed to GitHub.
+To execute linting check separately, run following commands in the root of the repository:
+
+```
+npm run lint
+```
+
+and
+
+```
+npm run style-lint
+```
