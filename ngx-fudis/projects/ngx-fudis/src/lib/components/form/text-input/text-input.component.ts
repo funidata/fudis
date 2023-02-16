@@ -1,21 +1,25 @@
 // eslint-disable-next-line max-classes-per-file
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
-import { UntypedFormControl, Validators } from '@angular/forms';
-import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/forms';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+
+import { IFudisErrorMessages } from '../../../types/forms';
+import { GuidanceComponent } from '../guidance/guidance.component';
 
 @Component({
 	selector: 'fudis-text-input[id][label]',
 	templateUrl: './text-input.component.html',
 	styleUrls: ['./text-input.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextInputComponent {
 	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;
 
+	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
+
 	/**
 	 * FormControl for the input
 	 */
-	@Input() control: UntypedFormControl;
+	@Input()
+	control: FormControl;
 
 	/**
 	 * Error message shown below the input
@@ -72,32 +76,9 @@ export class TextInputComponent {
 	 */
 	@Input() maxNumber: number;
 
-	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();
-
-	showError: boolean = false;
-
 	requiredValidator = Validators.required;
 
-	errorMsgToShow: string[] = [];
-
-	checkErrors(): void {
-		this.errorMsgToShow = [];
-		if (this.control.touched && this.control.errors) {
-			this.showError = true;
-
-			Object.keys(this.control.errors).forEach((item) => {
-				const message = this.errorMsg[item as keyof IFudisErrorMessages];
-				if (message) {
-					this.errorMsgToShow.push(message);
-					this.getErrorOutput(this.id, message);
-				}
-			});
-		} else {
-			this.showError = false;
-		}
-	}
-
-	getErrorOutput(id: string, error: string) {
-		this.errorOutput.emit({ id, message: error });
+	handleBlur(): void {
+		this.guidanceToUpdate.checkErrors();
 	}
 }

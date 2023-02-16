@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter, Input, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
-import { UntypedFormControl, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/forms';
+import { GuidanceComponent } from '../guidance/guidance.component';
 
 @Component({
 	selector: 'fudis-checkbox[id][label]',
@@ -11,10 +12,12 @@ import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/form
 export class CheckboxComponent {
 	@ViewChild('checkboxRef') input: ElementRef;
 
+	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
+
 	/*
 	 * FormControl for checkbox
 	 */
-	@Input() control: UntypedFormControl;
+	@Input() control: FormControl;
 
 	/*
 	 * Id for checkbox
@@ -56,41 +59,18 @@ export class CheckboxComponent {
 
 	requiredValidator = Validators.requiredTrue;
 
-	errorMsgToShow: string[] = [];
-
 	handleCheckboxClick(): void {
 		this.input.nativeElement.focus();
 		if (!this.control.disabled) {
 			this.control.patchValue(!this.control.value);
 			this.control.markAsTouched();
 			this.control.markAsDirty();
-			this.checkErrors();
+			this.guidanceToUpdate.checkErrors();
 		}
 	}
 
 	handleBlur(): void {
 		this.control.markAsTouched();
-		this.checkErrors();
-	}
-
-	checkErrors(): void {
-		this.errorMsgToShow = [];
-		if (this.control.touched && this.control.errors) {
-			this.showError = true;
-
-			Object.keys(this.control.errors).forEach((item) => {
-				const message = this.errorMsg[item as keyof IFudisErrorMessages];
-				if (message) {
-					this.errorMsgToShow.push(message);
-					this.getErrorOutput(this.id, message);
-				}
-			});
-		} else {
-			this.showError = false;
-		}
-	}
-
-	getErrorOutput(id: string, error: string) {
-		this.errorOutput.emit({ id, message: error });
+		this.guidanceToUpdate.checkErrors();
 	}
 }

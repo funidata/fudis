@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
 
-import {
-	UntypedFormBuilder,
-	UntypedFormControl,
-	UntypedFormGroup,
-	Validators,
-	FormsModule,
-	ReactiveFormsModule,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IFudisRadioButtonOption } from 'projects/ngx-fudis/src/lib/types/forms';
 
@@ -30,25 +23,31 @@ const getDefaultValue = (options: IFudisRadioButtonOption[]): string | undefined
 			<fudis-radio-button-group
 				id="fruit-selection"
 				legend="Choose your preferred fruit"
+				helpText="Fruits are important for your health."
 				[errorMsg]="{ required: 'You must choose a fruit!' }"
 				*ngIf="mainFormGroup"
-				[control]="radioButtonGroupOne"
+				[control]="mainFormGroup.controls['first']"
 				[options]="fruitOptions"></fudis-radio-button-group>
-			<fudis-body-text *ngIf="radioButtonGroupOne.value"
-				>Option chosen: {{ radioButtonGroupOne.value }}</fudis-body-text
+			<fudis-body-text *ngIf="mainFormGroup.controls['first'].value"
+				>Option chosen: {{ mainFormGroup.controls['first'].value }}</fudis-body-text
 			>
-			<fudis-body-text *ngIf="!radioButtonGroupOne.value">No value chosen for the first :(</fudis-body-text>
+			<fudis-body-text *ngIf="!mainFormGroup.controls['first'].value"
+				>No value chosen for the second :(</fudis-body-text
+			>
 			<fudis-radio-button-group
 				id="pet-selection"
 				legend="Choose a pet"
+				helpText="We all should have a pet."
 				[errorMsg]="{ required: 'You must choose a pet!' }"
 				*ngIf="mainFormGroup"
-				[control]="radioButtonGroupTwo"
+				[control]="mainFormGroup.controls['second']"
 				[options]="petOptions"></fudis-radio-button-group>
-			<fudis-body-text *ngIf="radioButtonGroupTwo.value"
-				>Option chosen: {{ radioButtonGroupTwo.value }}</fudis-body-text
+			<fudis-body-text *ngIf="mainFormGroup.controls['second'].value"
+				>Option chosen: {{ mainFormGroup.controls['second'].value }}</fudis-body-text
 			>
-			<fudis-body-text *ngIf="!radioButtonGroupTwo.value">No value chosen for the second :(</fudis-body-text>
+			<fudis-body-text *ngIf="!mainFormGroup.controls['second'].value"
+				>No value chosen for the second :(</fudis-body-text
+			>
 		</form>
 	`,
 })
@@ -69,22 +68,12 @@ class RadioButtonGroupExampleComponent {
 		{ value: 'capybara', viewValue: 'Capybara', id: 'pet-3', name: 'animal' },
 	];
 
-	radioButtonGroupOne: UntypedFormControl = new UntypedFormControl(
-		getDefaultValue(this.fruitOptions),
-		Validators.required
-	);
-
-	radioButtonGroupTwo: UntypedFormControl = new UntypedFormControl(
-		getDefaultValue(this.petOptions),
-		Validators.required
-	);
-
-	mainFormGroup: UntypedFormGroup = this.formBuilder.group({
-		radioButtonGroupOne: this.radioButtonGroupOne,
-		radioButtonGroupTwo: this.radioButtonGroupTwo,
+	mainFormGroup: FormGroup = this.formBuilder.group({
+		first: new FormControl(getDefaultValue(this.fruitOptions), Validators.required),
+		second: new FormControl(getDefaultValue(this.petOptions), Validators.required),
 	});
 
-	constructor(private formBuilder: UntypedFormBuilder) {}
+	constructor(private formBuilder: FormBuilder) {}
 }
 
 export default {

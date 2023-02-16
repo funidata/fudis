@@ -1,4 +1,5 @@
 import { Component, QueryList, ContentChildren, AfterContentInit } from '@angular/core';
+import { GuidanceComponent } from '../guidance/guidance.component';
 import { TextInputComponent } from '../text-input/text-input.component';
 
 type ErrorSummary = {
@@ -13,7 +14,9 @@ type ErrorSummary = {
 })
 export class ErrorSummaryComponent implements AfterContentInit {
 	// Access text-input and its @Output for getting errors emitted
-	@ContentChildren(TextInputComponent, { descendants: true }) templates: QueryList<TextInputComponent>;
+	@ContentChildren(TextInputComponent, { descendants: true }) inputsToFocus: QueryList<TextInputComponent>;
+
+	@ContentChildren(GuidanceComponent, { descendants: true }) templates: QueryList<GuidanceComponent>;
 
 	errors: Array<ErrorSummary> = [];
 
@@ -35,9 +38,9 @@ export class ErrorSummaryComponent implements AfterContentInit {
 	}
 
 	focusOnError(target: string) {
-		this.templates.forEach((template) => {
-			if (template.id === target) {
-				template.input.nativeElement.focus();
+		this.inputsToFocus.forEach((inputItem) => {
+			if (inputItem.id === target) {
+				inputItem.input.nativeElement.focus();
 			}
 		});
 	}

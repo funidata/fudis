@@ -3,32 +3,23 @@
 		[for]="id"
 		[text]="label"
 		[requiredText]="control.hasValidator(requiredValidator) && requiredText ? requiredText : null">
-		<textarea
-			id="{{ id }}"
-			[formControl]="control"
-			class="fudis-text-area__textarea"
-			[ngClass]="{ 'fudis-text-area--invalid': showError }"
-			(blur)="checkErrors()"
-			[attr.aria-describedby]="'guidance_' + id"
-			[attr.minLength]="minLength"
-			[attr.maxLength]="maxLength"
-			[attr.required]="control.hasValidator(requiredValidator)">
-		</textarea>
-		<div class="fudis-text-area__guidance" id="guidance_{{ id }}">
-			<ng-container *ngIf="showError">
-				<ng-container *ngFor="let error of errorMsgToShow">
-					<fudis-error-message [message]="error"></fudis-error-message>
-				</ng-container>
-			</ng-container>
-			<p class="fudis-text-area__guidance__help-text" *ngIf="!showError && helpText">
-				{{ helpText }}
-			</p>
-			<small
-				class="fudis-text-area__guidance__character-limit-indicator"
-				[ngClass]="{ 'fudis-text-area__guidance__character-limit-indicator__float-right': !helpText }"
-				*ngIf="maxLength">
-				{{ control.value.length || 0 }}/{{ maxLength }}
-			</small>
-		</div>
 	</fudis-label>
+	<textarea
+		[id]="id"
+		[formControl]="control"
+		(blur)="handleBlur()"
+		class="fudis-text-area__textarea"
+		[ngClass]="{ 'fudis-text-area--invalid': control.touched && control.invalid }"
+		[attr.aria-describedby]="id + '_guidance'"
+		[attr.minLength]="minLength"
+		[attr.maxLength]="maxLength"
+		[attr.required]="control.hasValidator(requiredValidator)">
+	</textarea>
+	<fudis-guidance
+		[maxLength]="maxLength"
+		[helpText]="helpText"
+		[id]="id + '_guidance'"
+		[errorMsg]="errorMsg"
+		[control]="control">
+	</fudis-guidance>
 </div>

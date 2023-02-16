@@ -1,14 +1,16 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { UntypedFormControl, Validators } from '@angular/forms';
+import { Component, Input, ViewChild } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { IFudisErrorMessages } from '../../../types/forms';
+import { GuidanceComponent } from '../guidance/guidance.component';
 
 @Component({
 	selector: 'fudis-text-area[id][label]',
 	templateUrl: './text-area.component.html',
 	styleUrls: ['./text-area.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextAreaComponent {
+	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
+
 	/**
 	 * Unique id for text area
 	 */
@@ -37,7 +39,7 @@ export class TextAreaComponent {
 	/**
 	 * FormControl for the text area
 	 */
-	@Input() control: UntypedFormControl;
+	@Input() control: FormControl;
 
 	/**
 	 * Fixed size options for text area
@@ -54,27 +56,9 @@ export class TextAreaComponent {
 	 */
 	@Input() requiredText: string;
 
-	usedCharacters: number = 0;
-
-	showError: boolean = false;
-
 	requiredValidator = Validators.required;
 
-	errorMsgToShow: string[] = [];
-
-	checkErrors(): void {
-		this.errorMsgToShow = [];
-		if (this.control.touched && this.control.errors) {
-			this.showError = true;
-
-			Object.keys(this.control.errors).forEach((item) => {
-				const message = this.errorMsg[item as keyof IFudisErrorMessages];
-				if (message) {
-					this.errorMsgToShow.push(message);
-				}
-			});
-		} else {
-			this.showError = false;
-		}
+	handleBlur(): void {
+		this.guidanceToUpdate.checkErrors();
 	}
 }
