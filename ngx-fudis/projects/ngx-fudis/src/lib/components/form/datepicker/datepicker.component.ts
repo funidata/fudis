@@ -49,6 +49,10 @@ export class DatepickerComponent {
 	 */
 	@Input() requiredText: string;
 
+	@Input() minDate: Date;
+
+	@Input() maxDate: Date;
+
 	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();
 
 	requiredValidator = Validators.required;
