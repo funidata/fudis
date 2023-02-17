@@ -7,7 +7,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatNativeDateModule } from '@angular/material/core';
+import { DateAdapter, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import {
 	FudisDialogActionsDirective,
 	FudisDialogCloseDirective,
@@ -19,6 +19,8 @@ import { BodyTextComponent } from './components/typography/body-text/body-text.c
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/form/checkbox/checkbox.component';
 import { DatepickerComponent } from './components/form/datepicker/datepicker.component';
+import { DatepickerCustomDateAdapter } from './components/form/datepicker/datepicker-custom-date-adapter/datepicker-custom-date-adapter';
+import { DatepickerCustomHeaderComponent } from './components/form/datepicker/datepicker-custom-header/datepicker-custom-header.component';
 import { DescriptionListComponent } from './components/description-list/description-list.component';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
@@ -49,6 +51,7 @@ import { GuidanceComponent } from './components/form/guidance/guidance.component
 		ButtonComponent,
 		CheckboxComponent,
 		DatepickerComponent,
+		DatepickerCustomHeaderComponent,
 		DescriptionListComponent,
 		DropdownComponent,
 		ErrorMessageComponent,
@@ -119,6 +122,10 @@ import { GuidanceComponent } from './components/form/guidance/guidance.component
 		TextInputComponent,
 		// TextSpacingComponent,
 	],
-	providers: [FudisDialog],
+	providers: [
+		FudisDialog,
+		{ provide: DateAdapter, useClass: DatepickerCustomDateAdapter },
+		{ provide: MAT_DATE_LOCALE, useValue: 'fi-FI' },
+	],
 })
 export class NgxFudisModule {}
