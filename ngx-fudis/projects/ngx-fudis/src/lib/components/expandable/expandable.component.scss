@@ -9,8 +9,7 @@
 	margin-bottom: spacing.$fudis-spacing-s;
 	border-top: 0;
 
-	/* stylelint-disable-next-line selector-class-pattern */
-	&.collapsed {
+	&--collapsed {
 		border-bottom: 0;
 	}
 	
