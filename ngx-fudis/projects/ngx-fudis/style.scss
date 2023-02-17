@@ -3,6 +3,7 @@
 // Fudis theme import
 @use "./src/lib/theme/fudis-theme.scss";
 @use "./src/lib/theme/ngMaterialCustomisation.scss";
+@use "./src/lib/components/form/datepicker/datepicker.component.scss";
 
 // Fudis styles from components that have to be applied globally.
 // @use "src/lib/components/dialog/dialog.scss";

@@ -19,7 +19,10 @@
 				<fudis-icon icon="calendar"></fudis-icon>
 			</mat-icon>
 		</mat-datepicker-toggle>
-		<mat-datepicker #picker [calendarHeaderComponent]="customHeader"></mat-datepicker>
+		<mat-datepicker
+			#picker
+			[calendarHeaderComponent]="customHeader"
+			panelClass="fudis-datepicker__datepicker"></mat-datepicker>
 		<fudis-guidance [helpText]="helpText" [id]="id + '_guidance'" [errorMsg]="errorMsg" [control]="control">
 		</fudis-guidance>
 	</mat-form-field>

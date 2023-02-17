@@ -43,6 +43,16 @@
 		right: spacing.$fudis-spacing-m;
 	}
 
+	&__datepicker {
+		@include colorMixins.fudis-bg-color('white');
+		@include borders.fudis-border('1px', 'solid', 'gray-dark');
+
+		/* stylelint-disable-next-line selector-class-pattern */
+		.mat-calendar-body-label {
+			display: none;
+		}
+	}
+
 	&__guidance {
 		&__help-text {
 			@include colorMixins.fudis-text-color('gray-dark');
