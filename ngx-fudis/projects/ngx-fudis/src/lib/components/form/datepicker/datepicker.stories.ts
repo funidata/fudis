@@ -1,11 +1,41 @@
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { UntypedFormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
+import { Component } from '@angular/core';
 import { DatepickerComponent } from './datepicker.component';
+import { IFudisErrorMessages } from '../../../types/forms';
+
+@Component({
+	selector: 'example-datepicker-with-form-control',
+	template: `
+		<form [formGroup]="mainFormGroup">
+			<fudis-datepicker
+				[control]="mainFormGroup.controls['datepicker']"
+				[id]="'unique-datepicker-id-1'"
+				requiredText="Required"
+				[errorMsg]="{ required: 'Selected date is missing.' }"
+				label="Select a date"
+				helpText="Please select your favourite date."></fudis-datepicker>
+		</form>
+	`,
+})
+class DatepickerWithFormControlExampleComponent {
+	validatorsForDatepicker = [Validators.required];
+
+	validatorMessages: IFudisErrorMessages = {
+		required: 'This is required field.',
+	};
+
+	mainFormGroup: FormGroup = this.formBuilder.group({
+		datepicker: new FormControl('', this.validatorsForDatepicker),
+	});
+
+	constructor(private formBuilder: FormBuilder) {}
+}
 
 export default {
 	title: 'Components/Form/Datepicker',
@@ -20,25 +50,19 @@ export default {
 				ReactiveFormsModule,
 				FormsModule,
 			],
+			declarations: [DatepickerWithFormControlExampleComponent],
 		}),
 	],
 	argTypes: {},
+	parameters: {
+		controls: {
+			exclude: ['control'],
+		},
+	},
 } as Meta;
 
-const Template: Story<DatepickerComponent> = (args: DatepickerComponent) => ({
-	props: args,
+export const Datepicker: Story = () => ({
 	template: `
-	<fudis-datepicker [errorMsg]="errorMsg" [control]="control" [requiredText]="requiredText" [label]="label" [id]="id" [helpText]="helpText"></fudis-datepicker>
-
+	<example-datepicker-with-form-control></example-datepicker-with-form-control>
 	`,
 });
-
-export const Datepicker = Template.bind({});
-Datepicker.args = {
-	errorMsg: { required: 'It is required to choose a date' },
-	requiredText: 'Required',
-	label: 'Select a date',
-	control: new UntypedFormControl('', Validators.required),
-	id: 'example-id-for-datepicker',
-	helpText: 'We recommend to choose your favourite date.',
-};
