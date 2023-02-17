@@ -67,8 +67,19 @@
 		@include borders.fudis-border('1px', 'solid', 'gray-dark');
 
 		/* stylelint-disable-next-line selector-class-pattern */
-		.mat-calendar-body-label {
-			display: none;
+		.mat-calendar-body-today {
+			border-color: colors.$fudis-primary;
+		}
+
+		/* stylelint-disable-next-line selector-class-pattern */
+		.mat-calendar-body-selected {
+			@include colorMixins.fudis-bg-color('primary');
+			@include colorMixins.fudis-text-color('white');
+		}
+
+		/* stylelint-disable-next-line selector-class-pattern */
+		.mat-calendar-body-cell-content:not(.mat-calendar-body-today) {
+			@include borders.fudis-border-none('none');
 		}
 	}
 
