@@ -7,7 +7,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DateAdapter, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
 import {
 	FudisDialogActionsDirective,
 	FudisDialogCloseDirective,
@@ -122,10 +122,6 @@ import { GuidanceComponent } from './components/form/guidance/guidance.component
 		TextInputComponent,
 		// TextSpacingComponent,
 	],
-	providers: [
-		FudisDialog,
-		{ provide: DateAdapter, useClass: DatepickerCustomDateAdapter },
-		{ provide: MAT_DATE_LOCALE, useValue: 'fi-FI' },
-	],
+	providers: [FudisDialog, { provide: DateAdapter, useClass: DatepickerCustomDateAdapter }],
 })
 export class NgxFudisModule {}

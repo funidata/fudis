@@ -21,11 +21,16 @@
 		max-width: calc(10 * spacing.$fudis-spacing-s);
 	}
 
+	&__input-wrapper {
+		position: relative;
+	}
+
 	&__input {
 		@include borders.fudis-border('1px', 'solid', 'gray-dark');
 		@include borders.fudis-border-radius('2px');
 
-		padding: 0 0 0 spacing.$fudis-spacing-xxs; 
+		padding: 0 0 0 spacing.$fudis-spacing-xxs;
+		width: 100%; 
 		height: spacing.$fudis-spacing-l;
 
 		&:focus {
@@ -34,13 +39,27 @@
 
 		&--invalid {
 			border-color: colors.$fudis-red;
-		}	
+		}
 	}
 
 	&__toggle {
-		position: relative;
-		top: (spacing.$fudis-spacing-xl + spacing.$fudis-spacing-xxs); 
-		right: spacing.$fudis-spacing-m;
+		position: absolute;
+		top: 50%;
+		right: -(spacing.$fudis-spacing-xxs);
+		transform: translateY(-50%);
+
+		/* Target mat-icon-button */
+		button {
+			@include colorMixins.fudis-bg-color('transparent');
+
+			border-radius: 0;
+			width: spacing.$fudis-spacing-l;
+			height: spacing.$fudis-spacing-l;
+
+			&:focus {
+				@include focus.fudis-focus-generic;
+			}
+		}
 	}
 
 	&__datepicker {

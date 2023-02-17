@@ -21,6 +21,7 @@ import { IFudisErrorMessages } from '../../../types/forms';
 				label="Select a date"
 				helpText="Please select your favourite date."></fudis-datepicker>
 		</form>
+		<p>{{ mainFormGroup.controls['datepicker'].value }}</p>
 	`,
 })
 class DatepickerWithFormControlExampleComponent {
