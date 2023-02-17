@@ -1,16 +1,25 @@
 <div class="fudis-datepicker fudis-datepicker__{{ size }}">
 	<mat-form-field>
 		<fudis-label
-			[attr.for]="id"
+			[id]="'label_' + id"
 			[text]="label"
-			[requiredText]="isRequired() && requiredText ? requiredText : null"></fudis-label>
-		<input matInput [formControl]="control" [matDatepicker]="picker" class="fudis-datepicker__input" />
+			[requiredText]="control.hasValidator(requiredValidator) && requiredText ? requiredText : null"></fudis-label>
+		<input
+			matInput
+			(blur)="handleBlur()"
+			[id]="id"
+			[formControl]="control"
+			[matDatepicker]="picker"
+			class="fudis-datepicker__input"
+			[ngClass]="{ 'fudis-datepicker__input--invalid': control.invalid && control.touched }"
+			[attr.required]="control.hasValidator(requiredValidator)"
+			[attr.aria-describedby]="id + '_guidance'" />
 		<mat-datepicker-toggle matSuffix [for]="picker" class="fudis-datepicker__toggle">
 			<mat-icon matDatepickerToggleIcon>
 				<fudis-icon icon="calendar"></fudis-icon>
 			</mat-icon>
 		</mat-datepicker-toggle>
-		<mat-datepicker #picker></mat-datepicker>
+		<mat-datepicker #picker [calendarHeaderComponent]="customHeader"></mat-datepicker>
 		<fudis-guidance [helpText]="helpText" [id]="id + '_guidance'" [errorMsg]="errorMsg" [control]="control">
 		</fudis-guidance>
 	</mat-form-field>

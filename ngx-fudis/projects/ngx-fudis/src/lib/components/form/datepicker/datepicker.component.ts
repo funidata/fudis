@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { UntypedFormControl, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/forms';
+import { GuidanceComponent } from '../guidance/guidance.component';
+import { DatepickerCustomHeaderComponent } from './datepicker-custom-header/datepicker-custom-header.component';
 
 @Component({
 	selector: 'fudis-datepicker',
@@ -8,10 +10,14 @@ import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/form
 	styleUrls: ['./datepicker.component.scss'],
 })
 export class DatepickerComponent {
+	customHeader = DatepickerCustomHeaderComponent;
+
+	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
+
 	/**
 	 * FormControl for the datepicker
 	 */
-	@Input() control: UntypedFormControl;
+	@Input() control: FormControl;
 
 	/*
 	 * Error message shown below the datepicker
@@ -45,36 +51,13 @@ export class DatepickerComponent {
 
 	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();
 
-	showError: boolean = false;
+	requiredValidator = Validators.required;
 
-	errorMsgToShow: string[] = [];
-
-	checkErrors(): void {
-		this.errorMsgToShow = [];
-		if (this.control.touched && this.control.errors) {
-			this.showError = true;
-
-			Object.keys(this.control.errors).forEach((item) => {
-				const message = this.errorMsg[item as keyof IFudisErrorMessages];
-
-				if (message) {
-					this.errorMsgToShow.push(message);
-					this.getErrorOutput(this.id, message);
-				}
-			});
-		} else {
-			this.showError = false;
-		}
+	handleBlur(): void {
+		this.guidanceToUpdate.checkErrors();
 	}
 
-	getErrorOutput(id: string, error: string) {
-		this.errorOutput.emit({ id, message: error });
-	}
-
-	isRequired(): boolean {
-		if (this.control.hasValidator(Validators.required)) {
-			return true;
-		}
-		return false;
+	handleSelectionChange(): void {
+		this.guidanceToUpdate.checkErrors();
 	}
 }
