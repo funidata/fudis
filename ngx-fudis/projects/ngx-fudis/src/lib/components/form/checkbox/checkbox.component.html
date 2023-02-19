@@ -2,10 +2,8 @@
 	<label class="fudis-checkbox__label" [attr.for]="id" (click)="handleCheckboxClick()">
 		<div
 			class="fudis-checkbox__box"
-			[ngClass]="{
-				'fudis-checkbox__box--invalid': control.invalid && control.touched,
-				'fudis-checkbox__box--disabled': control.disabled
-			}">
+			[class.fudis-checkbox__box--invalid]="control.invalid && control.touched"
+			[class.fudis-checkbox__box--disabled]="control.disabled">
 			<input
 				(blur)="handleBlur()"
 				#checkboxRef

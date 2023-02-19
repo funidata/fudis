@@ -16,9 +16,7 @@
 	<div class="fudis-radio-button__content">
 		<div
 			class="fudis-radio-button__content__control"
-			[ngClass]="{
-				'fudis-radio-button__content__control--invalid': this.control.touched && !this.control.value
-			}">
+			[class.fudis-radio-button__content__control--invalid]="control.touched && !control.value">
 			<span *ngIf="this.checked" class="fudis-radio-button__content__control__indicator"></span>
 		</div>
 		<span class="fudis-radio-button__label">{{ viewValue }}</span>

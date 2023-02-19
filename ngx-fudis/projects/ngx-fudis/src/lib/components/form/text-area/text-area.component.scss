@@ -16,7 +16,7 @@
 		max-width: calc(10 * spacing.$fudis-spacing-s);
 	}
 
-	&__textarea {
+	&__input {
 		@include typography.fudis-text-field-input;
 
 		box-sizing: border-box;
@@ -24,6 +24,10 @@
 		padding: spacing.$fudis-spacing-xxs;
 		width: 100%;
 		resize: vertical; // Enable resizing the textarea only vertically. Can be also 'none' if we want to disable resizing all together
+
+		&--invalid {
+			@include border.fudis-border('1px', 'solid', 'red');
+		}
 	}
 
 	&__guidance {
@@ -58,9 +62,5 @@
 				margin-left: auto;
 			}
 		}
-	}
-
-	&--invalid {
-		@include border.fudis-border('1px', 'solid', 'red');
 	}
 }

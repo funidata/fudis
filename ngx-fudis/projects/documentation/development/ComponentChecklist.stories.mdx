@@ -1,6 +1,6 @@
 import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
 
-<Meta title="Documentation/Development/Component checklist" />
+<Meta title="Documentation/Development/Component Checklist" />
 
 # Component Checklist
 
@@ -45,7 +45,11 @@ export default {
 
 If similar features repeat in multiple components, consider creating a sub component for easier maintanance.
 
-## 3. Components Has Relevant Unit Tests
+## 3. Component Follows Naming Conventions
+
+Check the [Naming Conventions](/docs/documentation-development-naming-conventions--page), if you are not sure about these!
+
+## 4. Components Has Relevant Unit Tests
 
 - Component is created
 - Component has working @Inputs and @Outputs
@@ -53,7 +57,7 @@ If similar features repeat in multiple components, consider creating a sub compo
 - Error handling and good practises. E. g. Radio Button group should not be used with less than 2 options so unit tests should check that these principles work and throws an error, if group of 1 or 0 is tried to create.
 - Utilities should be tested. If component uses utility functions, those utility functions should have unit tests as well.
 
-## 4 Component Has Written Stories
+## 5. Component Has Written Stories
 
 - Story should include the basic version of the component.
 - Component variants such as primary, secondary etc. should be documented on basic component. These variants should be accessed and controllable through Storybook controls.
@@ -66,7 +70,7 @@ If similar features repeat in multiple components, consider creating a sub compo
 - Disabled and Invalid should be able to be switched on from ArgsTable.
 - Form components have functioning formControls for Storybook testing and demo purposes.
 
-## 5 Component Has A Readme File
+## 6. Component Has A Readme File
 
 - All component types are documented
 - All component variants are documented
@@ -75,7 +79,7 @@ If similar features repeat in multiple components, consider creating a sub compo
 - All Angular Material based components have link to Angular documentation.
 - ArsTable is made visible.
 
-## 6 Component Accessibility Is Tested
+## 7. Component Accessibility Is Tested
 
 - Component is usable and understandable with screen reader.
 - Contrast is checked with Storybook accessibility addon or with some other relevant checking tool.
