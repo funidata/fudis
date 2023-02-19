@@ -1,16 +1,42 @@
 <Meta title="Documentation/Development/Project structure" />
 
-# General directory structure
+# General Directory Structure
 
-## Foundation
+## Dev
 
-Foundations directory contains all project foundation design tokens and mixins. Including tokens and mixins for e. g. borders, breakpoints, colors, spacing and typography.
+Sandbox application, which uses locally built ngx-fudis package as its dependancy. Note that testing new components and features in sandbox application is not same as testing it in totally separate Angular application.
 
-## Themes TARVIII TARKENNUSTA!!
+## Documentation
 
-Themes folder includes theme definitions that are needed for Angular Material component styling. If Angular Material component requires overriding style customization, these styles are recorded in component specific scss file.
+Self-explaining main location of documentation for product developers and Fudis developers.
 
-Example how components are structured.
+## Under Projects / Ngx-fudis Folder
+
+### Assets
+
+Static asset files, like fonts, SVG icons and similar are located here.
+
+### Foundations
+
+**Foundation** section contains the atoms of Fudis DS. Foundations directory contains all project foundation design tokens and mixins. Including tokens and mixins for e. g. borders, breakpoints, colors, spacing and typography. If there is need for a style variable or mixin, which is used in multiple components, usually it should be defined under Foundations.
+
+### Components
+
+The molecules of Fudis, the components. Each component folder should contain files related to that spesific component like its Storybook stories file and file containing unit tests.
+
+### Theme
+
+Some of Fudis components use components from Angular Material. Theme folder contains theme definitions, which aim to preset default Angular Material theme as near to Fudis as possible.
+
+If you are using ngMaterial component and the default theme doesn't apply colors as you want, proceed with caution if you consider to customise the default theme. Consider instead, if creating a component spesific theme would fix your issue.
+
+### Types
+
+Folder containing types and interfaces used in various Fudis components.
+
+## Folder Structure Visualised
+
+Most relevant folders and files for Fudis development
 
 ```
 design-system
@@ -45,11 +71,9 @@ design-system
 │ │ ├──focus
 │ │ ├──grid
 │ │ ├──spacing
-│ │ └───typography
+│ │ └──typography
 │ │
 │ └───theme
-│ │ │
-│ │ └───ngMaterialCustomisation.scss
 │ │
 │ └───types
 │

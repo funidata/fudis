@@ -1,12 +1,12 @@
 import { ArgsTable, Meta, Story, Canvas, Source } from '@storybook/addon-docs';
 
-<Meta title="Documentation/Development/Creating component" />
+<Meta title="Documentation/Development/Creating A Component" />
 
-# Creating component
+# Creating A Component
 
 <br />
 
-## Generate component
+## Generate Component
 
 Generate new component to 'components' folder by running following command in `fudis/ngx-fudis` folder:
 
@@ -21,7 +21,7 @@ Or to a spesific directory:
 ng generate -–project=ngx-fudis component components/form/new-form-component
 ```
 
-## Component folder structure
+## Component Folder Structure
 
 General directory structure is documented in [Project structure](?path=/story/documentation-development-project-structure--page) page.
 
@@ -29,14 +29,14 @@ General directory structure is documented in [Project structure](?path=/story/do
 ├── components
 ├── button                        		# Component folder
 │   	├── button.component.html     	# Component template
-│   	├── button.component.scss    	# Style file
+│   	├── button.component.scss    		# Style file
 │   	├── button.component.spec.ts  	# Unit-tests
 │   	├── button.component.ts       	# Component file
-│   	└── button.stories.ts        	# Component story
+│   	└── button.stories.ts        		# Component story
 └── ...
 ```
 
-### Component folder contains
+### Component Folder Contains
 
 - Stories are located in their corresponding component folders
 - Components of same category are grouped in their own subfolder. e.g Form -components

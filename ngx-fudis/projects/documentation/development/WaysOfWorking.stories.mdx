@@ -10,7 +10,7 @@ import { Meta } from '@storybook/addon-docs';
 
 Reusing components, styles and other bits and pieces of code is encouraged. If it starts to look like that part are repeated multiple times, it might be a good idea to separate that part to its own e. g. sub-component or utility function.
 
-## Naming conventions
+## Naming Conventions
 
 Currently documented conventions for naming components, CSS classes etc. can be found in [Naming Conventions page](/docs/documentation-development-naming-conventions--page)
 
@@ -20,7 +20,7 @@ Fudis uses SCSS as its tool for defining styles. In addition various linting rul
 
 Quite many of the formatting errors can be automatically fixed on save if you have setupped your VSCode or other IDE correctly.
 
-### Some principles for writing styles
+### Some Principles for Writing Styles
 
 - Reuse components, while preventing rewriting their existing .scss styles
 - Component inline styles should be avoided. This allows full control over component styles through variables.
@@ -36,7 +36,7 @@ Quite many of the formatting errors can be automatically fixed on save if you ha
 
 - Occasionally it is unconvenient to follow the rules of Stylelint. E. g. if you need to do CSS sibling selection, but SCSS syntax with Stylelint thinks you are not following the good practises. In these occasions it is acceptable to add an ignore rule for that line of styling.
 
-### Using foundation tokens and mixins in component's scss-file
+### Using Foundation Tokens and Mixins in Component's SCSS-file
 
 To use foundations in component's scss file, import it with SCSS's `@use` feature and use it in similar fashion like in example below.
 
@@ -55,7 +55,7 @@ To use foundations in component's scss file, import it with SCSS's `@use` featur
 
 ```
 
-### Angular Material styles
+### Angular Material Styles
 
 #### Theming
 
