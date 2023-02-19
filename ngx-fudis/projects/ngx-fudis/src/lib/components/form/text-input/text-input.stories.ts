@@ -1,8 +1,7 @@
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TextInputComponent } from './text-input.component';
 import { IFudisErrorMessages } from '../../../types/forms';
 
@@ -91,8 +90,8 @@ export default {
 	component: TextInputComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [BrowserAnimationsModule, ReactiveFormsModule, FormsModule],
 			declarations: [TextInputWithFormControlExampleComponent],
+			imports: [ReactiveFormsModule, FormsModule],
 		}),
 	],
 	argTypes: {},

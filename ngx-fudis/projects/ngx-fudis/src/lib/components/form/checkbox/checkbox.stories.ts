@@ -3,7 +3,6 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl, FormGroup, 
 import { BrowserModule } from '@angular/platform-browser';
 import { Component } from '@angular/core';
 import { CheckboxComponent } from './checkbox.component';
-import { ErrorMessageComponent } from '../error-message/error-message.component';
 
 @Component({
 	selector: 'example-checkbox',
@@ -49,9 +48,6 @@ class CheckboxExampleComponent {
 export default {
 	title: 'Components/Form/Checkbox',
 	component: CheckboxComponent,
-	subcomponents: {
-		ErrorMessageComponent,
-	},
 	decorators: [
 		moduleMetadata({
 			declarations: [CheckboxExampleComponent],

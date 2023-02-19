@@ -1,18 +1,11 @@
 // also exported from '@storybook/angular' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/angular/types-6-0';
-import { moduleMetadata } from '@storybook/angular';
-import { MatButtonModule } from '@angular/material/button';
 import { ButtonComponent } from './button.component';
 import readme from './readme.mdx';
 
 export default {
 	title: 'Components/Button',
 	component: ButtonComponent,
-	decorators: [
-		moduleMetadata({
-			imports: [MatButtonModule],
-		}),
-	],
 	parameters: {
 		docs: {
 			page: readme,

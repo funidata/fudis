@@ -1,10 +1,6 @@
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSelectModule } from '@angular/material/select';
-import { MatInputModule } from '@angular/material/input';
+import { FormControl, Validators } from '@angular/forms';
 import { DropdownComponent } from './dropdown.component';
 
 export default {
@@ -12,14 +8,7 @@ export default {
 	component: DropdownComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [
-				BrowserAnimationsModule,
-				MatFormFieldModule,
-				MatSelectModule,
-				MatInputModule,
-				ReactiveFormsModule,
-				FormsModule,
-			],
+			imports: [],
 		}),
 	],
 	argTypes: {},
