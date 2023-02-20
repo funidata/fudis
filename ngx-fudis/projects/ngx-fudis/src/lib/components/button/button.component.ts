@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FudisIcon } from '../../types/icons';
+import { FudisIcon, FudisIconColor } from '../../types/icons';
 
 @Component({
 	selector: 'fudis-button',
@@ -48,7 +48,17 @@ export class ButtonComponent {
 	@Output()
 	handleClick = new EventEmitter<Event>();
 
+	iconColor: FudisIconColor = 'white';
+
 	public get classes(): string[] {
+		if (this.disabled) {
+			this.iconColor = 'default';
+		} else if (this.variant === 'primary') {
+			this.iconColor = 'white';
+		} else if (this.variant === 'secondary' || this.variant === 'tertiary') {
+			this.iconColor = 'primary';
+		}
+
 		return ['fudis-button', `fudis-button__${this.size}`, `fudis-button__${this.variant}`];
 	}
 }

@@ -55,4 +55,10 @@
 	&__medium {
 		height: spacing.$fudis-spacing-l;
 	}
+
+	&__icon {
+		position: relative;
+		top: spacing.$fudis-pixel-2;
+		margin-left: -(spacing.$fudis-spacing-xxs);
+	}
 }
