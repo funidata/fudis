@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
 	FudisDialogActionsDirective,
 	FudisDialogCloseDirective,
@@ -23,6 +24,7 @@ import { ErrorSummaryComponent } from './components/form/error-summary/error-sum
 import { ExpandableComponent } from './components/expandable/expandable.component';
 import { ExpandableContentDirective } from './components/expandable/expandable-content.directive';
 import { FudisDialog } from './components/dialog/dialog';
+import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { GridComponent } from './components/grid/grid.component';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { IconComponent } from './components/icon/icon.component';
@@ -34,7 +36,6 @@ import { RadioButtonGroupComponent } from './components/form/radio-button-group/
 import { TextInputComponent } from './components/form/text-input/text-input.component';
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
-import { GuidanceComponent } from './components/form/guidance/guidance.component';
 
 @NgModule({
 	/*
@@ -52,6 +53,7 @@ import { GuidanceComponent } from './components/form/guidance/guidance.component
 		BodyTextComponent,
 		CheckboxComponent,
 		GridComponent,
+		GuidanceComponent,
 		DescriptionListComponent,
 		DropdownComponent,
 		ErrorMessageComponent,
@@ -66,13 +68,13 @@ import { GuidanceComponent } from './components/form/guidance/guidance.component
 		TextInputComponent,
 		TextSpacingComponent,
 		TextAreaComponent,
-		GuidanceComponent,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
 	 * E.g. components from Angular Material or other Angular tools
 	 */
 	imports: [
+		BrowserAnimationsModule,
 		CommonModule,
 		FormsModule,
 		LayoutModule,

@@ -31,31 +31,31 @@
 
 	&-color {
 		&__attention {
-			fill: colors.$fudis-yellow;
+			fill: colors.$fudis-color-yellow;
 		}
 	
 		&__danger {
-			fill: colors.$fudis-red;
+			fill: colors.$fudis-color-red;
 		}
 	
 		&__default {
-			fill: colors.$fudis-gray-dark;
+			fill: colors.$fudis-color-gray-dark;
 		}
 	
 		&__light {
-			fill: colors.$fudis-gray-light;
+			fill: colors.$fudis-color-gray-light;
 		}
 	
 		&__primary {
-			fill: colors.$fudis-primary;
+			fill: colors.$fudis-color-primary;
 		}
 	
 		&__success {
-			fill: colors.$fudis-green;
+			fill: colors.$fudis-color-green;
 		}
 	
 		&__white {
-			fill: colors.$fudis-white;
+			fill: colors.$fudis-color-white;
 		}
 	}
 }

@@ -2,5 +2,5 @@
 @use '../spacing/tokens.scss' as spacing;
 
 // Variables for Generic and Form field focus outlines
-$fudis-focus-generic-outline: spacing.$fudis-pixel-2 dashed colors.$fudis-gray-dark;
-$fudis-focus-form-field-outline: spacing.$fudis-pixel-2 solid colors.$fudis-focus-primary;
+$fudis-focus-generic-outline: spacing.$fudis-pixel-2 dashed colors.$fudis-color-gray-dark;
+$fudis-focus-form-field-outline: spacing.$fudis-pixel-2 solid colors.$fudis-color-focus-primary;

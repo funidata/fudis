@@ -1,17 +1,9 @@
 import { Story, Meta } from '@storybook/angular/types-6-0';
-import { moduleMetadata } from '@storybook/angular';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorSummaryComponent } from './error-summary.component';
 
 export default {
 	title: 'Components/Form/ErrorSummary',
 	component: ErrorSummaryComponent,
-	decorators: [
-		moduleMetadata({
-			imports: [ReactiveFormsModule, FormsModule],
-		}),
-	],
-	argTypes: {},
 	parameters: {
 		controls: {
 			exclude: ['control'],

@@ -5,7 +5,6 @@ import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveF
 import { IFudisRadioButtonOption } from 'projects/ngx-fudis/src/lib/types/forms';
 
 import { Story, Meta, moduleMetadata } from '@storybook/angular';
-import { BrowserModule } from '@angular/platform-browser';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
@@ -89,7 +88,7 @@ export default {
 	decorators: [
 		moduleMetadata({
 			declarations: [RadioButtonGroupExampleComponent],
-			imports: [ReactiveFormsModule, BrowserModule, FormsModule],
+			imports: [ReactiveFormsModule, FormsModule],
 		}),
 	],
 } as Meta;

@@ -34,9 +34,9 @@
 		@include colorMixin.fudis-bg-color('green-light');
 		@include border.fudis-border('1px', 'solid', 'green');
 	}
-}
 
-// Add styles for the outer component shell <fudis-badge> itself (this margin-left is just an example)
-.fudis-badge-host {
-	margin-left: spacing.$fudis-spacing-xxs;
+	// Add styles for the outer component shell <fudis-badge> itself (this margin-left is just an example)
+	&-host {
+		margin-left: spacing.$fudis-spacing-xxs;
+	}
 }

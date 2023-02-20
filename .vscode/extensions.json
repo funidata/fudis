@@ -4,10 +4,10 @@
 		"rvest.vs-code-prettier-eslint",
 		"formulahendry.auto-rename-tag",
 		"naumovs.color-highlight",
-		"equinusocio.vsc-community-material-theme",
 		"unifiedjs.vscode-mdx",
 		"xyc.vscode-mdx-preview",
 		"dbaeumer.vscode-eslint",
-		"nhoizey.gremlins"
+		"nhoizey.gremlins",
+		"deque-systems.vscode-axe-linter"
 	]
 }

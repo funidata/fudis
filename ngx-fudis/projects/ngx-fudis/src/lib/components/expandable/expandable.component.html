@@ -1,4 +1,4 @@
-<div class="fudis-expandable fudis-expandable__{{ variant }}" [class.collapsed]="collapsed">
+<div class="fudis-expandable fudis-expandable__{{ variant }}" [class.fudis-expandable--collapsed]="collapsed">
 	<ng-container *ngTemplateOutlet="tag === 'h2' ? h2 : tag === 'h3' ? h3 : tag === 'h4' ? h4 : tag === 'h5' ? h5 : h6">
 	</ng-container>
 	<div class="fudis-expandable__content" *ngIf="openedOnce" [attr.aria-hidden]="collapsed" [hidden]="collapsed">
@@ -41,7 +41,6 @@
 	<button
 		type="button"
 		class="fudis-expandable__header__title"
-		[class.collapsed]="collapsed"
 		[attr.aria-expanded]="!collapsed"
 		(click)="setCollapsedStatus(!collapsed)">
 		<fudis-icon

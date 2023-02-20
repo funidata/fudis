@@ -14,7 +14,7 @@
 		(blur)="handleBlur()"
 		[id]="id"
 		[type]="type"
-		[ngClass]="{ 'fudis-text-input__input--invalid': control.invalid && control.touched }"
+		[class.fudis-text-input__input--invalid]="control.invalid && control.touched"
 		class="fudis-text-input__input"
 		[attr.aria-describedby]="id + '_guidance'"
 		[attr.required]="control.hasValidator(requiredValidator)" />

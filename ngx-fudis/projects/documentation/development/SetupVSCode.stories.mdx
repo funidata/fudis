@@ -1,0 +1,29 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Documentation/Development/Setup VSCode" />
+
+# Setup Visual Studio Code for Fudis
+
+Each developer has their own right to choose tools they want to use for developing Fudis, but the core team maintaining Fudis has agreed mutually to develop Fudis using VSCode, as it is free and has been validated to be suitable for these kind of projects.
+
+Following documentation defines how Fudis core team has setupped their VSCode for easier development experience.
+
+## Download and install VSCode
+
+[Download and install VSCode from its website.](https://code.visualstudio.com/)
+
+## VSCode Extensions
+
+When you open up VSCode and select the Extensions tab from the left of UI, you should see highlighted recommended extensions for the project.
+
+These extensions include tools for syncing project's linting tools with VSCode and accessibility and other quality improvement tools.
+
+All recommended extensions are listed in project's file found in `.vscode/extensions.json`.
+
+After you have installed extensions, you should restart VSCode to have it synced with project's settings.
+
+## VSCode settings
+
+In project's file of `.vscode/settings.json` are defined Fudis project spesific VSCode setting rules which are synced with installed extensions as well.
+
+You can override these project settings in your own personal VSCode settings, but keep in mind that if your own e.g. autoformatting rules are different from the project, you might get linting errors.

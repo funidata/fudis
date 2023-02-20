@@ -1,0 +1,69 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Documentation/Development/Ways of Working" />
+
+# Ways of Working
+
+<br />
+
+## Modularity
+
+Reusing components, styles and other bits and pieces of code is encouraged. If it starts to look like that part are repeated multiple times, it might be a good idea to separate that part to its own e. g. sub-component or utility function.
+
+## Naming Conventions
+
+Currently documented conventions for naming components, CSS classes etc. can be found in [Naming Conventions page](/docs/documentation-development-naming-conventions--page)
+
+## Styles
+
+Fudis uses SCSS as its tool for defining styles. In addition various linting rules are forced through Stylelint. Stylelint quite aggressively will throw errors if there are unallowed values or attributes such as `px` values or if there are unnecessary white space or similar syntax inconsistecy.
+
+Quite many of the formatting errors can be automatically fixed on save if you have setupped your VSCode or other IDE correctly.
+
+### Some Principles for Writing Styles
+
+- Reuse components, while preventing rewriting their existing .scss styles
+- Component inline styles should be avoided. This allows full control over component styles through variables.
+
+  > Exceptions exist, e. g. [GridComponent](?path=/story/components-grid--grid) which dynamically applies @Input of `[columns]` values as native CSS grid values without need to write tens of helper CSS classes.
+
+- Components styles should be recorded in their own .scss file directly in their own folder.
+- Use globally defined tokens and mixins to enable colors, spacing, etc. rather than introducing hard-to-maintain local values.
+
+  > If Stylelint throws an error, that you are using an unallowed attribute or value in your scss-file, there is always a mixin for that. For example `color`, `background-color` and `font-size` are not allowed. When using mixins for these we minimise the risk that workarounds and exceptions start to appear to our code base.
+
+- Avoid using style override with `!important`
+
+- Occasionally it is unconvenient to follow the rules of Stylelint. E. g. if you need to do CSS sibling selection, but SCSS syntax with Stylelint thinks you are not following the good practises. In these occasions it is acceptable to add an ignore rule for that line of styling.
+
+### Using Foundation Tokens and Mixins in Component's SCSS-file
+
+To use foundations in component's scss file, import it with SCSS's `@use` feature and use it in similar fashion like in example below.
+
+```
+@use '../path/to/foundations/colors/tokens.scss' as colorTokens;
+@use '../path/to/foundations/colors/mixins.scss' as colorMixins;
+
+.fudis-my-new-component{
+	@include colorMixins.fudis-color('white')
+	@include colorMixins.fudis-bg-color('primary')
+
+	&__inner-svg-icon{
+		fill: colorTokens.$fudis-color-primary-light;
+	}
+}
+
+```
+
+### Angular Material Styles
+
+#### Theming
+
+- Start applying themes to a Fudis component by using Material's theming API to make sure our custom theme is complete with regards to the component you are working on.
+  - This provides style safety for your component and the whole library by having a more complete theme to fallback on whenever component-specific styling comes short.
+  - **Do not** try to achieve too specific effects – _theme is a global high-level definition of styles!_
+- After exhausting your options to style a component via theming, apply component-level styles.
+
+- - _**It's recommended Not to override or modify Angular Material's CSS or DOM!**_ This will make upstream minor and patch changes potentially breaking changes for Fudis.
+
+- All ngMaterial style changes are documented in themes folder `ngMaterialCustomisation.scss `.

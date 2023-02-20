@@ -33,7 +33,7 @@
 		&--invalid {
 			@include borders.fudis-border('1px', 'solid', 'red');
 			
-			box-shadow: 0 0 0 spacing.$fudis-pixel-3 colors.$fudis-red-light;
+			box-shadow: 0 0 0 spacing.$fudis-pixel-3 colors.$fudis-color-red-light;
 		}
 	}
 
@@ -47,7 +47,7 @@
 	&__icon {
 		position: absolute;
 		top: spacing.$fudis-pixel-1;
-		fill: colors.$fudis-gray-middle;
+		fill: colors.$fudis-color-gray-middle;
 	}
 
 	&__label {

@@ -17,7 +17,7 @@
 					/* stylelint-disable-next-line selector-max-compound-selectors */
 					svg {
 						/* stylelint-disable-next-line declaration-no-important */
-						fill: colorTokens.$fudis-white !important;
+						fill: colorTokens.$fudis-color-white !important;
 					}
 				}
 			}
@@ -27,18 +27,18 @@
 					/* stylelint-disable-next-line selector-max-compound-selectors */
 					svg {
 						/* stylelint-disable-next-line declaration-no-important */
-						fill: colorTokens.$fudis-primary !important;
+						fill: colorTokens.$fudis-color-primary !important;
 					}
 				}
 			}
 			
 			/* stylelint-disable-next-line order/order */
-			&:disabled {
+			&[aria-disabled="true"] {
 				fudis-icon {
 					/* stylelint-disable-next-line selector-max-compound-selectors */
 					svg {
 						/* stylelint-disable-next-line declaration-no-important */
-						fill: colorTokens.$fudis-gray-dark !important;
+						fill: colorTokens.$fudis-color-gray-dark !important;
 					}
 				}
 			}
