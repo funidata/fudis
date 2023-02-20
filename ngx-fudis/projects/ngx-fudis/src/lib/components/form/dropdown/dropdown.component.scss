@@ -1,3 +1,4 @@
+@use '@angular/material' as mat;
 @use '../../../foundations/borders/mixins.scss' as borders;
 @use '../../../foundations/spacing/tokens.scss' as spacing;
 @use '../../../foundations/typography/mixins.scss' as typography;
@@ -52,7 +53,7 @@
 		/* stylelint-disable-next-line selector-class-pattern */
 		.mat-pseudo-checkbox-checked {
 		/* stylelint-disable-next-line property-disallowed-list */ /* stylelint-disable color-no-hex */ 
-		background-color: #1076db;
+		// background-color: #1076db;
 		}
 	}
 
@@ -67,5 +68,5 @@
 	
 	&--invalid {
 		border-color: colors.$fudis-color-red;
-  }
-}
+  }}
+	
