@@ -1,0 +1,101 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Documentation/Introduction/How to start using Fudis" />
+
+# How to Start Using Fudis in Your Application
+
+<br />
+
+## Installation
+
+You can find package information at NPM https://www.npmjs.com/package/@funidata/ngx-fudis
+
+#### 1. Install Angular Material Peer Dependency:
+
+```
+ng add @angular/material
+
+```
+
+Choose these options when prompted:
+
+<code>
+	{' '}
+	? Choose a prebuilt theme name, or "custom" for a custom theme: Custom <br /> ? Set up global Angular Material typography
+	styles? No <br /> ? Set up browser animations for Angular Material? Yes
+</code>
+
+<br />
+
+#### 2. Then Install Fudis:
+
+```
+ng add @funidata/ngx-fudis
+
+```
+
+#### 3. Import Core Styles
+
+The core styles from Angular Material must be imported in your application for the components to work properly. The easiest way to do this is to have a styles.scss file in project root with the following content:
+
+```
+@use "@angular/material" as mat; @include mat.core();
+
+```
+
+> Fudis does not include the Material core styles for you because **they should be included exactly once** in your application.
+
+#### 4. Check Fudis Import in `app.module.ts`
+
+Check your application's `app.module.ts` file that Fudis is imported correctly.
+
+```
+import { NgxFudisModule } from 'ngx-fudis';
+
+@NgModule({
+	...
+	imports: [
+		...
+		NgxFudisModule
+	],
+	...
+})
+```
+
+#### 5. Define Application's Primary Colors as CSS Variables in Project Root Style
+
+```
+:root {
+	--fudis-color-primary-light: #hex;
+	--fudis-color-primary: #hex;
+	--fudis-color-primary-dark: #hex;
+	--fudis-color-primary-extra-dark: #hex;
+}
+```
+
+#### 6. Include Fudis Foundation SCSS-file to Your Angular Settings
+
+- TODO
+
+#### 7. Use Fudis Components in Your Project
+
+```
+import { ButtonComponent } from './button.component';
+
+<fudis-button label="Eiku"></fudis-button>
+```
+
+or
+
+```
+import { Component } from '@angular/core';
+
+@Component({
+ selector: 'app-root',
+ template: ` <fudis-button label="Eiku"></fudis-button> `,
+ styleUrls: ['./app.scss'],
+})
+export class AppComponent {
+ title = 'dev';
+}
+```

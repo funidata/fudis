@@ -16,6 +16,7 @@ module.exports = {
 		},
 	],
 	framework: '@storybook/angular',
+	features: { modernInlineRender: true },
 	core: {
 		builder: '@storybook/builder-webpack5',
 	},

@@ -1,17 +1,16 @@
 // also exported from '@storybook/angular' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/angular/types-6-0';
-import { moduleMetadata } from '@storybook/angular';
-import { MatButtonModule } from '@angular/material/button';
 import { ButtonComponent } from './button.component';
+import readme from './readme.mdx';
 
 export default {
 	title: 'Components/Button',
 	component: ButtonComponent,
-	decorators: [
-		moduleMetadata({
-			imports: [MatButtonModule],
-		}),
-	],
+	parameters: {
+		docs: {
+			page: readme,
+		},
+	},
 	argTypes: {
 		icon: {
 			control: { type: 'text' },
@@ -19,7 +18,7 @@ export default {
 	},
 } as Meta;
 
-const Template: Story<ButtonComponent> = (args: ButtonComponent) => ({
+const Template: Story = (args) => ({
 	props: args,
 });
 
@@ -27,33 +26,21 @@ export const Button = Template.bind({});
 Button.args = {
 	variant: 'primary',
 	label: 'Button',
+};
+
+export const IconButton = Template.bind({});
+IconButton.args = {
+	variant: 'secondary',
+	label: 'Icon Button',
 	icon: 'search',
 };
 
-export const ExamplesWithIcon: Story = () => ({
+export const AllVariants: Story = () => ({
 	template: `
-		<div style="display:flex; flex-direction:column;">
-			<div style="margin-bottom:1rem">
-				<fudis-button icon="delete" label="Poista"></fudis-button>
-			</div>
-			<div style="margin-bottom:1rem">
-				<fudis-button icon="delete" label="Poista" variant="secondary"></fudis-button>
-			</div>
-			<div style="margin-bottom:1rem">
-				<fudis-button icon="delete" label="Poista" variant="tertiary"></fudis-button>
-			</div>
-			<div style="margin-bottom:1rem">
-				<fudis-button icon="delete" label="Palaa takaisin" size="small"></fudis-button>
-			</div>
-			<div style="margin-bottom:1rem">
-				<fudis-button icon="delete" label="Palaa takaisin" size="small" variant="secondary"></fudis-button>
-			</div>
-			<div style="margin-bottom:1rem">
-				<fudis-button icon="delete" label="Palaa takaisin" size="small" variant="tertiary"></fudis-button>
-			</div>
-			<div style="margin-bottom:1rem">
-				<fudis-button icon="delete" disabled="true" label="Palaa takaisin" variant="tertiary"></fudis-button>
-			</div>
-		</div>
+	<fudis-grid columns="1fr 1fr 1fr" align="left">
+		<fudis-button variant="primary" label="Primary"></fudis-button>
+		<fudis-button variant="secondary" label="Secondary"></fudis-button>
+		<fudis-button variant="tertiary" label="Tertiary"></fudis-button>
+	</fudis-grid>
 	`,
 });

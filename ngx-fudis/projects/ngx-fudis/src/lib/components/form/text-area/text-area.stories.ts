@@ -1,8 +1,7 @@
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
-import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TextAreaComponent } from './text-area.component';
 import { IFudisErrorMessages } from '../../../types/forms';
 
@@ -66,8 +65,8 @@ export default {
 	component: TextAreaComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [BrowserAnimationsModule, ReactiveFormsModule, FormsModule],
 			declarations: [TextAreaWithFormControlExampleComponent],
+			imports: [ReactiveFormsModule, FormsModule],
 		}),
 	],
 	argTypes: {},

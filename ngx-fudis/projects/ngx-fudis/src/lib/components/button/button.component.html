@@ -1,10 +1,9 @@
 <button
-	mat-button
 	[type]="type"
 	[attr.aria-disabled]="disabled"
 	[attr.aria-label]="ariaLabel"
 	(click)="!disabled ? handleClick.emit($event) : null"
 	[ngClass]="classes">
-	<fudis-icon *ngIf="icon" [icon]="icon"></fudis-icon>
+	<fudis-icon class="fudis-button__icon" *ngIf="icon" [color]="iconColor" [icon]="icon"></fudis-icon>
 	{{ label }}
 </button>

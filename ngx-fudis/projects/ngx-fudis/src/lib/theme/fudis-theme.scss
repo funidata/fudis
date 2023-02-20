@@ -2,8 +2,8 @@
 @use '@angular/material' as mat;
 @import './palette';
 
-$fudis-primary: mat.define-palette($fudis-palette, 500);
-$fudis-accent: mat.define-palette($accent-palette, 200);
+$fudis-color-primary: mat.define-palette($fudis-palette, 500);
+$fudis-accent: mat.define-palette($accent-palette, 500);
 
 // Angular Material default typography styling
 $fudis-typography: mat.define-typography-config(
@@ -41,7 +41,7 @@ $fudis-typography: mat.define-typography-config(
 $fudis-theme: mat.define-light-theme(
   (
     color: (
-      primary: $fudis-primary,
+      primary: $fudis-color-primary,
       accent: $fudis-accent,
     ),
     typography: $fudis-typography,

@@ -6,7 +6,7 @@
 	<p *ngIf="!showError && helpText" class="fudis-guidance__help-text">{{ helpText }}</p>
 	<small
 		class="fudis-guidance__character-limit-indicator"
-		[ngClass]="{ 'fudis-guidance__character-limit-indicator__float-right': !helpText }"
+		[class.fudis-guidance__character-limit-indicator__float-right]="!helpText"
 		*ngIf="maxLength">
 		{{ control.value.length || 0 }}/{{ maxLength }}
 	</small>

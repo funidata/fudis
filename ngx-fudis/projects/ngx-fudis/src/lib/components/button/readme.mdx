@@ -1,0 +1,43 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+import { ButtonComponent } from './button.component';
+
+<Meta title="Button" component={ButtonComponent} />
+
+# Button
+
+Buttons are categorized based on their importance and functionality, such as primary, secondary, or tertiary buttons.
+It's important to use the correct type of button for the intended action and to not overuse them to avoid overwhelming the user.
+
+## Examples
+
+<Canvas>
+	<Story id="components-button--all-variants"></Story>
+</Canvas>
+
+### With Icon
+
+Button component has a input for icon component. Frequently used icons: <code>search</code>, <code>three-dots</code> and <code>delete</code>.
+
+<Canvas>
+	<Story id="components-button--icon-button"></Story>
+</Canvas>
+
+### Accessibility
+
+- Button color contrast ratio meets AA and AAA levels
+- Button has a visible focus state
+- Disabled button can be focused. State is communicated for screen reader
+- Button click can be triggered with keyboard <code>enter</code> and <code>space</code> key
+
+### Related components
+
+[IconComponent](/docs/components-icon--icon)
+
+<a href="https://material.angular.io/components/button/overview" target="_blank">
+	Angular Material Button
+</a>
+
+## Properties
+
+<ArgsTable of={ButtonComponent} />

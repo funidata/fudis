@@ -5,6 +5,26 @@ import { setCompodocJson } from '@storybook/addon-docs/angular';
 import docJson from '../documentation.json';
 setCompodocJson(docJson);
 
+const storyOrder = [
+	'Documentation',
+	[
+		'Introduction',
+		['Introduction', 'How to start using Fudis'],
+		'Development',
+		[
+			'Getting Started',
+			'Setup VSCode',
+			'Project Structure',
+			'Ways of Working',
+			'Naming Conventions',
+			'Creating A Component',
+			'Component Checklist',
+		],
+	],
+	'Foundations',
+	'Components',
+];
+
 export const parameters = {
 	actions: { argTypesRegex: '^on[A-Z].*' },
 	controls: {
@@ -16,7 +36,7 @@ export const parameters = {
 	docs: { inlineStories: true },
 	options: {
 		storySort: {
-			order: ['Documentation', ['Introduction', 'Development'], 'Foundations', 'Components'],
+			order: storyOrder,
 		},
 	},
 };

@@ -2,26 +2,27 @@
 @import "../foundations/colors/tokens";
 
 $fudis-palette: (
-    100: $fudis-primary-light,
-    500: $fudis-primary,
-    700: $fudis-primary-dark,
-    900: $fudis-primary-extra-dark,
+    100: $fudis-color-primary-light,
+    500: $fudis-color-primary,
+    700: $fudis-color-primary-dark,
+    900: $fudis-color-primary-extra-dark,
     contrast: (
-      100: $fudis-gray-dark,
-      500: $fudis-white,
-      700: $fudis-white,
-      900: $fudis-white,
+      100: $fudis-color-gray-dark,
+      500: $fudis-color-white,
+      700: $fudis-color-white,
+      900: $fudis-color-white,
     ),
 );
 $accent-palette: (
-	100: $fudis-red,
-	200: $fudis-yellow,
-	700: $fudis-green,
+	100: $fudis-color-red,
+	200: $fudis-color-yellow,
+	500: $fudis-color-primary,
+	700: $fudis-color-green,
 	900: transparent,
 	contrast: (
-		100: $fudis-red-light,
-		500: $fudis-yellow-light,
-		700: $fudis-green-light,
-		900: $fudis-gray-dark,
+		100: $fudis-color-red-light,
+		500: $fudis-color-yellow-light,
+		700: $fudis-color-green-light,
+		900: $fudis-color-gray-dark,
 	),
 );
