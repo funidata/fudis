@@ -2,8 +2,10 @@
 @use '@angular/material' as mat;
 @import './palette';
 
-$fudis-color-primary: mat.define-palette($fudis-palette, 500);
-$fudis-accent: mat.define-palette($accent-palette, 500);
+$fudis-color-palette-primary: mat.define-palette($fudis-palette-map-primary, 500);
+$fudis-color-palette-accent: mat.define-palette($fudis-palette-map-accent, 500);
+$fudis-color-palette-datepicker-primary: mat.define-palette($fudis-palette-map-datepicker-primary, 500);
+$fudis-color-palette-datepicker-accent: mat.define-palette($fudis-palette-map-datepicker-accent, 500);
 
 // Angular Material default typography styling
 $fudis-typography: mat.define-typography-config(
@@ -41,8 +43,17 @@ $fudis-typography: mat.define-typography-config(
 $fudis-theme: mat.define-light-theme(
   (
     color: (
-      primary: $fudis-color-primary,
-      accent: $fudis-accent,
+      primary: $fudis-color-palette-primary,
+      accent: $fudis-color-palette-accent,
+    ),
+    typography: $fudis-typography,
+  )
+);
+$fudis-datepicker-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $fudis-color-palette-datepicker-primary,
+      accent: $fudis-color-palette-datepicker-accent,
     ),
     typography: $fudis-typography,
   )
@@ -50,3 +61,4 @@ $fudis-theme: mat.define-light-theme(
 
 // Emit theme-dependent styles for common features used across multiple Material components.
 @include mat.core-theme($fudis-theme);
+@include mat.datepicker-theme($fudis-datepicker-theme);
