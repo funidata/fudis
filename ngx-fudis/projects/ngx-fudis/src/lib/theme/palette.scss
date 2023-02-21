@@ -21,33 +21,9 @@ $fudis-palette-map-accent: (
 	900: transparent,
 	contrast: (
 		100: $fudis-color-red-light,
-		500: $fudis-color-yellow-light,
+		200: $fudis-color-yellow-light,
+		500: $fudis-color-white,
 		700: $fudis-color-green-light,
 		900: $fudis-color-gray-dark,
 	),
-);
-$fudis-palette-map-datepicker-primary: (
-	100: $fudis-color-primary-light,
-	500: $fudis-color-primary,
-	700: $fudis-color-primary-dark,
-	900: $fudis-color-primary-extra-dark,
-	contrast: (
-		100: $fudis-color-gray-dark,
-		500: $fudis-color-white,
-		700: $fudis-color-white,
-		900: $fudis-color-white,
-	),
-);
-$fudis-palette-map-datepicker-accent: (
-100: $fudis-color-red,
-200: $fudis-color-yellow,
-500: $fudis-color-primary,
-700: $fudis-color-green,
-900: transparent,
-contrast: (
-	100: $fudis-color-red-light,
-	500: $fudis-color-yellow-light,
-	700: $fudis-color-green-light,
-	900: $fudis-color-gray-dark,
-),
 );

@@ -47,40 +47,11 @@
 		top: 50%;
 		right: -(spacing.$fudis-spacing-xxs);
 		transform: translateY(-50%);
-
-		/* Target mat-icon-button */
-		button {
-			@include colorMixins.fudis-bg-color('transparent');
-
-			border-radius: 0;
-			width: spacing.$fudis-spacing-l;
-			height: spacing.$fudis-spacing-l;
-
-			&:focus {
-				@include focus.fudis-focus-generic;
-			}
-		}
 	}
 
 	&__datepicker {
 		@include colorMixins.fudis-bg-color('white');
 		@include borders.fudis-border('1px', 'solid', 'gray-dark');
-
-		/* stylelint-disable-next-line selector-class-pattern */
-		.mat-calendar-body-today {
-			border-color: colors.$fudis-color-primary;
-		}
-
-		/* stylelint-disable-next-line selector-class-pattern */
-		.mat-calendar-body-selected {
-			@include colorMixins.fudis-bg-color('primary');
-			@include colorMixins.fudis-text-color('white');
-		}
-
-		/* stylelint-disable-next-line selector-class-pattern */
-		.mat-calendar-body-cell-content:not(.mat-calendar-body-today) {
-			@include borders.fudis-border-none('none');
-		}
 	}
 
 	&__guidance {

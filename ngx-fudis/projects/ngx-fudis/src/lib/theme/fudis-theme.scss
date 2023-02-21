@@ -2,11 +2,6 @@
 @use '@angular/material' as mat;
 @import './palette';
 
-$fudis-color-palette-primary: mat.define-palette($fudis-palette-map-primary, 500);
-$fudis-color-palette-accent: mat.define-palette($fudis-palette-map-accent, 500);
-$fudis-color-palette-datepicker-primary: mat.define-palette($fudis-palette-map-datepicker-primary, 500);
-$fudis-color-palette-datepicker-accent: mat.define-palette($fudis-palette-map-datepicker-accent, 500);
-
 // Angular Material default typography styling
 $fudis-typography: mat.define-typography-config(
   $font-family: "Fira Sans",
@@ -43,8 +38,8 @@ $fudis-typography: mat.define-typography-config(
 $fudis-theme: mat.define-light-theme(
   (
     color: (
-      primary: $fudis-color-palette-primary,
-      accent: $fudis-color-palette-accent,
+      primary: mat.define-palette($fudis-palette-map-primary, 500),
+      accent: mat.define-palette($fudis-palette-map-accent, 500),
     ),
     typography: $fudis-typography,
   )
@@ -52,8 +47,8 @@ $fudis-theme: mat.define-light-theme(
 $fudis-datepicker-theme: mat.define-light-theme(
   (
     color: (
-      primary: $fudis-color-palette-datepicker-primary,
-      accent: $fudis-color-palette-datepicker-accent,
+      primary: mat.define-palette($fudis-palette-map-primary, 100),
+      accent: mat.define-palette($fudis-palette-map-accent, 500),
     ),
     typography: $fudis-typography,
   )

@@ -1,4 +1,5 @@
 @use "@angular/material" as mat;
+@use "./src/lib/components/form/datepicker/ngMaterial-theme.scss";
 
 // Fudis theme import
 @import "./src/lib/theme/fudis-theme";
