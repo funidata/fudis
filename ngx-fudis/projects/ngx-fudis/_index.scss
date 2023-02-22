@@ -1,0 +1,24 @@
+/*
+	Used for exporting Foundation assets in Fudis npm package.
+
+	To access Foundation tokens and mixins and to enable correct font in Fudis components,
+	add following your root style.scss
+
+	@use "@funidata/ngx-fudis" as fudis;
+	
+ */
+
+@forward './src/lib/assets/fonts/fonts.scss';
+@forward './src/lib/foundations/borders/tokens.scss';
+@forward './src/lib/foundations/borders/mixins.scss';
+@forward './src/lib/foundations/breakpoints/tokens.scss';
+@forward './src/lib/foundations/breakpoints/mixins.scss';
+@forward './src/lib/foundations/colors/tokens.scss';
+@forward './src/lib/foundations/colors/mixins.scss';
+@forward './src/lib/foundations/focus/tokens.scss';
+@forward './src/lib/foundations/focus/mixins.scss';
+@forward './src/lib/foundations/grid/tokens.scss';
+@forward './src/lib/foundations/grid/mixins.scss';
+@forward './src/lib/foundations/spacing/tokens.scss';
+@forward './src/lib/foundations/typography/tokens.scss';
+@forward './src/lib/foundations/typography/mixins.scss';
