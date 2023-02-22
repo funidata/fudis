@@ -17,7 +17,9 @@ import { IFudisErrorMessages } from '../../../types/forms';
 				[control]="mainFormGroup.controls['datepicker']"
 				[id]="'unique-datepicker-id-1'"
 				requiredText="Required"
-				[errorMsg]="{ required: 'Selected date is missing.' }"
+				[minDate]="myMinDate"
+				[maxDate]="myMaxDate"
+				[errorMsg]="errorMessages"
 				label="Select a date"
 				helpText="Please select your favourite date."></fudis-datepicker>
 		</form>
@@ -31,9 +33,19 @@ class DatepickerWithFormControlExampleComponent {
 		required: 'This is required field.',
 	};
 
+	errorMessages = {
+		required: 'Selected date is missing!',
+		matDatepickerMin: 'Too low date!',
+		matDatepickerMax: 'Too high date',
+	};
+
 	mainFormGroup: FormGroup = this.formBuilder.group({
 		datepicker: new FormControl('', this.validatorsForDatepicker),
 	});
+
+	myMinDate = new Date(2023, 2, 10);
+
+	myMaxDate = new Date(2023, 2, 25);
 
 	constructor(private formBuilder: FormBuilder) {}
 }
