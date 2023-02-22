@@ -1,8 +1,14 @@
 /* eslint-disable no-underscore-dangle */
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { DateAdapter, MatDateFormats, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatCalendar } from '@angular/material/datepicker';
 import { Subject, takeUntil } from 'rxjs';
+
+/**
+ * Custom header for datepicker calendar dialog.
+ * This creates double-chevron buttons to change the year - instead of default year picker which opens inside the calendar.
+ * https://material.angular.io/components/datepicker/overview#datepicker-custom-header
+ */
 
 @Component({
 	selector: 'fudis-datepicker-custom-header',
@@ -10,7 +16,7 @@ import { Subject, takeUntil } from 'rxjs';
 	styleUrls: ['./datepicker-custom-header.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DatepickerCustomHeaderComponent<D> implements OnDestroy {
+export class DatepickerCustomHeaderComponent<D> implements OnDestroy, OnInit {
 	private _destroyed = new Subject<void>();
 
 	constructor(
@@ -20,6 +26,15 @@ export class DatepickerCustomHeaderComponent<D> implements OnDestroy {
 		cdr: ChangeDetectorRef
 	) {
 		_calendar.stateChanges.pipe(takeUntil(this._destroyed)).subscribe(() => cdr.markForCheck());
+	}
+
+	ngOnInit() {
+		/**
+		 * Change the calendar starting day of the week from default Sunday to Monday
+		 */
+		this._dateAdapter.getFirstDayOfWeek = () => {
+			return 1;
+		};
 	}
 
 	ngOnDestroy() {
