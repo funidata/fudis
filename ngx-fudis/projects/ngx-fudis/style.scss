@@ -13,7 +13,7 @@
 @import "./src/lib/foundations/borders/mixins";
 
 // Import font files globally
-@import './src/lib/foundations/typography/fonts';
+@import './src/lib/assets/fonts/fonts';
 
 /* stylelint-disable color-no-hex */
 [data-theme='into'] {
