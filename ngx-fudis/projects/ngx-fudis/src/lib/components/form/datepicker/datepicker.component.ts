@@ -4,8 +4,23 @@ import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/form
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { DatepickerCustomHeaderComponent } from './datepicker-custom-header/datepicker-custom-header.component';
 
+/**
+ * See more display and parse format options from moment.js
+ * https://momentjs.com/docs/#/displaying/format/
+ * https://momentjs.com/docs/#/parsing/string-format/
+ */
+export const FUDIS_DATE_FORMATS = {
+	parse: {
+		dateInput: 'DD.MM.YYYY',
+	},
+	display: {
+		dateInput: 'DD.MM.YYYY',
+		monthYearLabel: 'MMM YYYY',
+	},
+};
+
 @Component({
-	selector: 'fudis-datepicker',
+	selector: 'fudis-datepicker[id][label]',
 	templateUrl: './datepicker.component.html',
 	styleUrls: ['./datepicker.component.scss'],
 })
