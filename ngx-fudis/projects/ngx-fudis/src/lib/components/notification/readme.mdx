@@ -1,0 +1,30 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+import { NotificationComponent } from './notification.component';
+
+<Meta title="Notification" component={NotificationComponent} />
+
+# Notification
+
+Notifications are often informative contextual notifications that cannot be clicked away. The colors currently used are yellow `variant: "warning"`, red `variant: "danger"`, green `variant: "success"` and blue `variant: "light"`. The most common color is yellow, which is used in notes. Blue and green contextual notifications are rare. Red notification describes an error situation and green the possibility/success of some function. Blue, on the other hand, is a neutral guideline.
+
+## Examples
+
+<Canvas>
+	<Story id="components-noticationcomponent--all-variants"></Story>
+</Canvas>
+
+### Accessibility
+
+- Notification background- and text color contrast ratio meets AA and AAA levels.
+- Notification content is accessible by screen readers.
+
+### Related components
+
+[IconComponent](/docs/components-icon--icon)
+
+[Link](/docs/components-link--link)
+
+## Properties
+
+<ArgsTable of={NotificationComponent} />
