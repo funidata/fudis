@@ -13,11 +13,20 @@
 			[matDatepicker]="picker"
 			[min]="minDate"
 			[max]="maxDate"
+			[readonly]="disabled"
 			class="fudis-datepicker__input"
-			[ngClass]="{ 'fudis-datepicker__input--invalid': control.invalid && control.touched }"
+			[ngClass]="{
+				'fudis-datepicker__input--invalid': control.invalid && control.touched,
+				'fudis-datepicker__input--disabled': disabled
+			}"
 			[attr.required]="control.hasValidator(requiredValidator)"
 			[attr.aria-describedby]="id + '_guidance'" />
-		<mat-datepicker-toggle matSuffix [for]="picker" [disableRipple]="true" class="fudis-datepicker__toggle">
+		<mat-datepicker-toggle
+			[disabled]="disabled"
+			matSuffix
+			[for]="picker"
+			[disableRipple]="true"
+			class="fudis-datepicker__toggle">
 			<mat-icon matDatepickerToggleIcon>
 				<fudis-icon icon="calendar"></fudis-icon>
 			</mat-icon>

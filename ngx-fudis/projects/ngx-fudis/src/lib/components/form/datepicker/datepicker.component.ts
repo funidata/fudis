@@ -25,12 +25,15 @@ export const FUDIS_DATE_FORMATS = {
 	styleUrls: ['./datepicker.component.scss'],
 })
 export class DatepickerComponent {
-	customHeader = DatepickerCustomHeaderComponent;
-
 	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
 
 	/**
-	 * FormControl for the datepicker
+	 * Datepicker custom header
+	 */
+	customHeader = DatepickerCustomHeaderComponent;
+
+	/**
+	 * Datepicker FormControl
 	 */
 	@Input() control: FormControl;
 
@@ -40,7 +43,7 @@ export class DatepickerComponent {
 	@Input() errorMsg: IFudisErrorMessages;
 
 	/**
-	 * Label for the datepicker
+	 * Datepicker label
 	 */
 	@Input() label: string;
 
@@ -60,12 +63,23 @@ export class DatepickerComponent {
 	@Input() helpText?: string;
 
 	/**
-	 * Text to indicate that date is required, shown above the datepicker with asterisk
+	 * Option for disabling the datepicker input and calendar dialog
+	 */
+	@Input() disabled: boolean = false;
+
+	/**
+	 * Text to indicate that date is required, shown above the datepicker input
 	 */
 	@Input() requiredText: string;
 
+	/**
+	 * Allowed range for minimun date
+	 */
 	@Input() minDate: Date;
 
+	/**
+	 * Allowed range for maximum date
+	 */
 	@Input() maxDate: Date;
 
 	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();

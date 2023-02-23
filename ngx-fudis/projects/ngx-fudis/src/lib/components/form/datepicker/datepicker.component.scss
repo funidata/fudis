@@ -40,6 +40,13 @@
 		&--invalid {
 			border-color: colors.$fudis-color-red;
 		}
+
+		&--disabled {
+			@include borders.fudis-border('1px', 'dashed', 'gray-middle');	
+			@include colorMixins.fudis-bg-color('gray-extra-light');
+
+			cursor: default;
+		}
 	}
 
 	&__toggle {
