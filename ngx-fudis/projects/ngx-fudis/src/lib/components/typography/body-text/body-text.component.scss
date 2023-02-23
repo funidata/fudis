@@ -28,13 +28,14 @@
 	&__paragraph {
 		margin: 0;
 	}
+
 	&__margin-bottom {
 		&__m {
 			margin-bottom: spacing.$fudis-spacing-m;
 		}
+
 		&__l {
 			margin-bottom: spacing.$fudis-spacing-l;
 		}
 	}
 }
-
