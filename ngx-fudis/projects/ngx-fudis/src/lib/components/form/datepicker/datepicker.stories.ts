@@ -8,22 +8,34 @@ import { MatInputModule } from '@angular/material/input';
 import { Component } from '@angular/core';
 import { DatepickerComponent } from './datepicker.component';
 import { IFudisErrorMessages } from '../../../types/forms';
+import readme from './readme.mdx';
 
 @Component({
 	selector: 'example-datepicker-with-form-control',
 	template: `
 		<form [formGroup]="mainFormGroup">
 			<fudis-datepicker
-				[control]="mainFormGroup.controls['datepicker']"
+				[control]="mainFormGroup.controls['datepickerBasic']"
 				[id]="'unique-datepicker-id-1'"
+				requiredText="Required"
+				[errorMsg]="validatorMessages"
+				label="Select a date"
+				helpText="Please select your favourite date."></fudis-datepicker>
+			<fudis-datepicker
+				[control]="mainFormGroup.controls['datepickerWithMinMax']"
+				[id]="'unique-datepicker-id-2'"
 				requiredText="Required"
 				[minDate]="myMinDate"
 				[maxDate]="myMaxDate"
-				[errorMsg]="errorMessages"
-				label="Select a date"
-				helpText="Please select your favourite date."></fudis-datepicker>
+				[errorMsg]="validatorMessages"
+				label="Datepicker with min and max dates"
+				helpText="Please select a date inside the allowed range."></fudis-datepicker>
+			<fudis-datepicker
+				[control]="mainFormGroup.controls['datepickerDisabled']"
+				[id]="'unique-datepicker-id-3'"
+				[disabled]="true"
+				label="This is disabled datepicker"></fudis-datepicker>
 		</form>
-		<p>{{ mainFormGroup.controls['datepicker'].value }}</p>
 	`,
 })
 class DatepickerWithFormControlExampleComponent {
@@ -31,16 +43,14 @@ class DatepickerWithFormControlExampleComponent {
 
 	validatorMessages: IFudisErrorMessages = {
 		required: 'This is required field.',
-	};
-
-	errorMessages = {
-		required: 'Selected date is missing!',
 		matDatepickerMin: 'Too low date!',
 		matDatepickerMax: 'Too high date',
 	};
 
 	mainFormGroup: FormGroup = this.formBuilder.group({
-		datepicker: new FormControl('', this.validatorsForDatepicker),
+		datepickerBasic: new FormControl('', this.validatorsForDatepicker),
+		datepickerDisabled: new FormControl(''),
+		datepickerWithMinMax: new FormControl('', this.validatorsForDatepicker),
 	});
 
 	myMinDate = new Date(2023, 2, 10);
@@ -68,8 +78,8 @@ export default {
 	],
 	argTypes: {},
 	parameters: {
-		controls: {
-			exclude: ['control'],
+		docs: {
+			page: readme,
 		},
 	},
 } as Meta;

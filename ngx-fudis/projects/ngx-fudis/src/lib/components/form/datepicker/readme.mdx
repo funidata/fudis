@@ -1,0 +1,51 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+import { DatepickerComponent } from './datepicker.component';
+
+<Meta title="Datepicker" component={DatepickerComponent} />
+
+# Datepicker
+
+Fudis-datepicker is build using Angular Material Datepicker as a base.
+Datepicker allows user to select a date from valid options.
+
+## Examples
+
+<Canvas>
+	<Story id="components-form-datepicker--datepicker"></Story>
+</Canvas>
+
+
+### Error handling
+
+- Required error is shown
+	- if control is touched and value is empty
+	- if date format is not valid
+- matDatepickerMin/matDatepickerMax error is shown 
+	- if written date is outside the range of min and max
+
+### Localization
+
+Currently datepicker parses the display date to <code>DD.MM.YYYY</code> format and calendar's first day of the week is Monday by default.
+
+### Accessibility
+
+- Datepicker has label and id connected to the input
+- Guidance and error messages are connected to the input via id
+- Datepicker has a visible focus state both on input and calendar icon
+- Calendar dialog can be triggered from the calendar icon with keyboard <code>enter</code> and <code>space</code> key
+- User can navigate inside the calendar dialog with keyboard <code>arrow</code> keys
+- User can type the date directly to the input without opening the calendar dialog
+- Input can be focused even if it is disabled
+
+### Related components
+
+[IconComponent](/docs/components-icon--icon)
+
+<a href="https://material.angular.io/components/datepicker/overview" target="_blank">
+	Angular Material Datepicker
+</a>
+
+## Properties
+
+<ArgsTable of={DatepickerComponent} />
