@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { MockComponent } from 'ng-mocks';
+import { GridComponent } from '../grid/grid.component';
+import { GridDirective } from '../grid/grid.directive';
 
 import { DescriptionListComponent } from './description-list.component';
 
@@ -9,7 +12,7 @@ describe('DescriptionListComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [DescriptionListComponent],
+			declarations: [DescriptionListComponent, GridDirective, MockComponent(GridComponent)],
 		}).compileComponents();
 	});
 
