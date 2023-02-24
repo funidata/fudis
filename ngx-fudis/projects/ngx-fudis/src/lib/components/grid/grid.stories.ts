@@ -1,4 +1,5 @@
 import { Story, Meta, componentWrapperDecorator } from '@storybook/angular';
+
 import { GridComponent } from './grid.component';
 
 export default {
@@ -29,6 +30,14 @@ export default {
 			control: { type: 'select' },
 		},
 		marginBottom: {
+			control: { type: 'select' },
+		},
+		rowGap: {
+			options: ['zero', 'xxs', 'xs', 's', 'm', 'l', 'xl', 'xxl', 'responsive'],
+			control: { type: 'select' },
+		},
+		columnGap: {
+			options: ['zero', 'xxs', 'xs', 's', 'm', 'l', 'xl', 'xxl', 'responsive'],
 			control: { type: 'select' },
 		},
 	},
@@ -63,7 +72,9 @@ const Template: Story<GridComponent> = (args: GridComponent) => ({
 		[alignItemsY]="alignItemsY"
 		[marginTop]="marginTop"
 		[marginBottom]="marginBottom"
-		[width]="width">
+		[width]="width"
+		[columnGap]="columnGap"
+		[rowGap]="rowGap">
 		<fudis-heading class="grid-test-item" tag="h1" size="l"
 			>Fudis-headings will always take 100% width if they are direct child of Fudis grid component</fudis-heading
 		>

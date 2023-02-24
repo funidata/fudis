@@ -4,7 +4,7 @@
 @use '../../foundations/breakpoints/tokens.scss' as breakpointTokens;
 @use '../../foundations/grid/mixins.scss' as grid;
 @use '../../foundations/grid/tokens.scss' as gridTokens;
-@use '../../foundations/spacing/tokens.scss' as spacingTokens;
+@use '../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-grid {
 	display: grid;
@@ -48,69 +48,69 @@
 	&__margin {
 		&__top {
 			&__zero {
-				margin-top: spacingTokens.$fudis-spacing-zero;
+				margin-top: spacing.$fudis-spacing-zero;
 			}
 
 			&__xxs {
-				margin-top: spacingTokens.$fudis-spacing-xxs;
+				margin-top: spacing.$fudis-spacing-xxs;
 			}
 
 			&__xs {
-				margin-top: spacingTokens.$fudis-spacing-xs;
+				margin-top: spacing.$fudis-spacing-xs;
 			}
 
 			&__s {
-				margin-top: spacingTokens.$fudis-spacing-s;
+				margin-top: spacing.$fudis-spacing-s;
 			}
 
 			&__m {
-				margin-top: spacingTokens.$fudis-spacing-m;
+				margin-top: spacing.$fudis-spacing-m;
 			}
 
 			&__l {
-				margin-top: spacingTokens.$fudis-spacing-l;
+				margin-top: spacing.$fudis-spacing-l;
 			}
 
 			&__xl {
-				margin-top: spacingTokens.$fudis-spacing-xl;
+				margin-top: spacing.$fudis-spacing-xl;
 			}
 
 			&__xxl {
-				margin-top: spacingTokens.$fudis-spacing-xxl;
+				margin-top: spacing.$fudis-spacing-xxl;
 			}
 		}
 
 		&__bottom {
 			&__zero {
-				margin-bottom: spacingTokens.$fudis-spacing-zero;
+				margin-bottom: spacing.$fudis-spacing-zero;
 			}
 
 			&__xxs {
-				margin-bottom: spacingTokens.$fudis-spacing-xxs;
+				margin-bottom: spacing.$fudis-spacing-xxs;
 			}
 
 			&__xs {
-				margin-bottom: spacingTokens.$fudis-spacing-xs;
+				margin-bottom: spacing.$fudis-spacing-xs;
 			}
 
 			&__s {
-				margin-bottom: spacingTokens.$fudis-spacing-s;
+				margin-bottom: spacing.$fudis-spacing-s;
 			}
 
 			&__m {
-				margin-bottom: spacingTokens.$fudis-spacing-m;
+				margin-bottom: spacing.$fudis-spacing-m;
 			}
 
 			&__l {
-				margin-bottom: spacingTokens.$fudis-spacing-l;
+				margin-bottom: spacing.$fudis-spacing-l;
 			}
 
 			&__xl {
-				margin-bottom: spacingTokens.$fudis-spacing-xl;
+				margin-bottom: spacing.$fudis-spacing-xl;
 			}
 
 			&__xxl {
-				margin-bottom: spacingTokens.$fudis-spacing-xxl;
+				margin-bottom: spacing.$fudis-spacing-xxl;
 			}
 		}
 	}
@@ -214,5 +214,73 @@
 
 	&__xs {
 		@include grid.fudis-grid-max-width('xs')
+	}
+
+	&__row-gap {
+		&__zero {
+			row-gap: spacing.$fudis-spacing-zero;
+		}
+
+		&__xxs {
+			row-gap: spacing.$fudis-spacing-xxs;
+		}
+
+		&__xs {
+			row-gap: spacing.$fudis-spacing-xs;
+		}
+
+		&__s {
+			row-gap: spacing.$fudis-spacing-s;
+		}
+
+		&__m {
+			row-gap: spacing.$fudis-spacing-m;
+		}
+
+		&__l {
+			row-gap: spacing.$fudis-spacing-l;
+		}
+
+		&__xl {
+			row-gap: spacing.$fudis-spacing-xl;
+		}
+
+		&__xxl {
+			row-gap: spacing.$fudis-spacing-xxl;
+		}
+	}
+
+	&__column-gap {
+		&__zero {
+			column-gap: spacing.$fudis-spacing-zero;
+		}
+
+		&__xxs {
+			column-gap: spacing.$fudis-spacing-xxs;
+		}
+
+		&__xs {
+			column-gap: spacing.$fudis-spacing-xs;
+		}
+
+		&__s {
+			column-gap: spacing.$fudis-spacing-s;
+		}
+
+		&__m {
+			column-gap: spacing.$fudis-spacing-m;
+		}
+
+		&__l {
+			column-gap: spacing.$fudis-spacing-l;
+		}
+
+		&__xl {
+			column-gap: spacing.$fudis-spacing-xl;
+		}
+
+		&__xxl {
+			column-gap: spacing.$fudis-spacing-xxl;
+		}
 	}
 }
