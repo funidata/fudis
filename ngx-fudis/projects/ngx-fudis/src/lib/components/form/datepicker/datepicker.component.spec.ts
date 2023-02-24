@@ -20,7 +20,7 @@ describe('DatepickerComponent', () => {
 		await TestBed.configureTestingModule({
 			declarations: [
 				DatepickerComponent,
-				MockComponent(LabelComponent),
+				LabelComponent,
 				MockComponent(IconComponent),
 				MockComponent(GuidanceComponent),
 			],
@@ -94,6 +94,16 @@ describe('DatepickerComponent', () => {
 			expect(datepickerInput.focus).toBeTruthy();
 		});
 
+		it('should show requiredText in label if input is required and requiredText is given', () => {
+			component.required = true;
+			component.requiredText = 'Required';
+			fixture.detectChanges();
+
+			const labelComponent = fixture.nativeElement.querySelector('fudis-label');
+			const requiredLabel = labelComponent.querySelector('.fudis-label__required');
+			expect(requiredLabel.innerHTML).toContain(component.requiredText);
+		});
+
 		it('should have invalid class if datepicker is required, input is touched and no date has been chosen', () => {
 			const datepickerInput = fixture.nativeElement.querySelector('input');
 			const requiredControl = new FormControl('', Validators.required);
@@ -112,6 +122,14 @@ describe('DatepickerComponent', () => {
 		it('should have calendar icon from fudis-icon component', () => {
 			const datepickerIcon = fixture.nativeElement.querySelector('fudis-icon');
 			expect(datepickerIcon.attributes.icon.value).toEqual('calendar');
+		});
+
+		it('should have fudis-datepicker__input--disabled class if input has been disabled', () => {
+			const datepickerInput = fixture.nativeElement.querySelector('input');
+			component.disabled = true;
+			fixture.detectChanges();
+
+			expect(datepickerInput.className).toContain('fudis-datepicker__input--disabled');
 		});
 	});
 });
