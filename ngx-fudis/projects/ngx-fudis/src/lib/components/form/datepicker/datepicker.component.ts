@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/forms';
 import { GuidanceComponent } from '../guidance/guidance.component';
@@ -24,7 +24,7 @@ export const FUDIS_DATE_FORMATS = {
 	templateUrl: './datepicker.component.html',
 	styleUrls: ['./datepicker.component.scss'],
 })
-export class DatepickerComponent {
+export class DatepickerComponent implements OnInit {
 	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
 
 	/**
@@ -85,6 +85,14 @@ export class DatepickerComponent {
 	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();
 
 	requiredValidator = Validators.required;
+
+	required: boolean = false;
+
+	ngOnInit(): void {
+		if (this.control.hasValidator(Validators.required)) {
+			this.required = true;
+		}
+	}
 
 	handleBlur(): void {
 		this.guidanceToUpdate.checkErrors();
