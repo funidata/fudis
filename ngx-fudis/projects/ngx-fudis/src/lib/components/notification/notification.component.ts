@@ -15,6 +15,22 @@ export class NotificationComponent implements OnChanges, OnInit {
 	@Input() variant?: NotificationType;
 
 	/**
+	 * Add link href address
+	 */
+	@Input() link: string;
+
+	/**
+	 * Option to create an external link to point a target page on another domain.
+	 * External link contains external icon and assistive aria-label
+	 */
+	@Input() externalLink: boolean = false;
+
+	/**
+	 * Aria-label for the external link
+	 */
+	@Input() externalLinkAriaLabel?: string;
+
+	/**
 	 * Icon for notification
 	 */
 	icon: FudisIcon;

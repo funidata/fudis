@@ -14,10 +14,19 @@ Notifications are often informative contextual notifications that cannot be clic
 	<Story id="components-noticationcomponent--all-variants"></Story>
 </Canvas>
 
+### Link notification
+
+Notification component property `link` accepts href address as a string. When link referes to external site `externalLink` property should be set on true. This will add an external link icon to a link. It is recommended to use `externalLinkAriaLabel` in order describe link action to screen reader users. 
+
+<Canvas>
+	<Story id="components-noticationcomponent--link-notification"></Story>
+</Canvas>
+
 ### Accessibility
 
 - Notification background- and text color contrast ratio meets AA and AAA levels.
 - Notification content is accessible by screen readers.
+- Notifications with a link to external source have descriptive aria-label
 
 ### Related components
 

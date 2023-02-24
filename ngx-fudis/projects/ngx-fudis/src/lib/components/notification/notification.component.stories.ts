@@ -19,7 +19,7 @@ export default {
 
 const Template: Story = (args) => ({
 	props: args,
-	template: `<fudis-notification [variant]="variant">{{content}}</fudis-notification>`,
+	template: `<fudis-notification [variant]="variant" [link]="link" [externalLink]="externalLink" [externalLinkAriaLabel]="externalLinkAriaLabel">{{content}}</fudis-notification>`,
 });
 
 export const Notification = Template.bind({});
@@ -28,13 +28,14 @@ Notification.args = {
 	content: 'Jeejee',
 };
 
-export const LinkNotification: Story = () => ({
-	template: `
-	<fudis-grid align="left" width="m">
-		<fudis-notification variant="warning"><fudis-link [href]="'https://www.example.com'"></fudis-link>! Please don't do this, okey?</fudis-notification>
-	</fudis-grid>
-	`,
-});
+export const LinkNotification = Template.bind({});
+LinkNotification.args = {
+	variant: 'warning',
+	content: 'This link leads to another site.',
+	link: 'https://www.example.com',
+	externalLink: true,
+	externalLinkAriaLabel: 'Link to another page',
+};
 
 export const AllVariants: Story = () => ({
 	template: `

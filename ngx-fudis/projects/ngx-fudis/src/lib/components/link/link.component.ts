@@ -56,4 +56,9 @@ export class LinkComponent {
 	 * Aria-label for the external link
 	 */
 	@Input() externalLinkAriaLabel?: string;
+
+	/**
+	 * Link uses primary blue link color. "Default"" class name is a dark gray color used by icon component. Icon component inherits this color attribute when external link is used.
+	 */
+	@Input() color: 'primary' | 'default' = 'primary';
 }

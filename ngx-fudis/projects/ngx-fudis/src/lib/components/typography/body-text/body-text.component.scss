@@ -27,6 +27,10 @@
 
 	&__paragraph {
 		margin: 0;
+
+		fudis-link {
+			display: inline-block;
+		}
 	}
 
 	&__margin-bottom {
