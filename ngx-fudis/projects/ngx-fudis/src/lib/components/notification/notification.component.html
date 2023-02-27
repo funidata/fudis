@@ -6,6 +6,7 @@
 		<ng-content></ng-content>
 		<fudis-link
 			*ngIf="link"
+			[linkTitle]="linkTitle"
 			href="{{ link }}"
 			[isExternalLink]="externalLink"
 			[externalLinkAriaLabel]="externalLinkAriaLabel"

@@ -31,20 +31,34 @@ export class NotificationComponent implements OnChanges, OnInit {
 	@Input() externalLinkAriaLabel?: string;
 
 	/**
+	 * Title for the link, if not defined title will be the same as link URL
+	 */
+	@Input() linkTitle?: string;
+
+	/**
 	 * Icon for notification
 	 */
 	icon: FudisIcon;
 
+	/**
+	 * Initialization
+	 */
 	ngOnInit(): void {
 		this.getClasses();
 	}
 
+	/**
+	 * Detecting icon changes
+	 */
 	ngOnChanges(changes: SimpleChanges): void {
 		if (!changes['icon']) {
 			this.getClasses();
 		}
 	}
 
+	/**
+	 * Used to initialize notifications variant icons
+	 */
 	private getClasses(): void {
 		switch (this.variant) {
 			case 'warning':

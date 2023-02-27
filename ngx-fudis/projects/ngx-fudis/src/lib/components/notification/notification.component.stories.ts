@@ -19,7 +19,7 @@ export default {
 
 const Template: Story = (args) => ({
 	props: args,
-	template: `<fudis-notification [variant]="variant" [link]="link" [externalLink]="externalLink" [externalLinkAriaLabel]="externalLinkAriaLabel">{{content}}</fudis-notification>`,
+	template: `<fudis-notification [variant]="variant" [link]="link" [linkTitle]="linkTitle" [externalLink]="externalLink" [externalLinkAriaLabel]="externalLinkAriaLabel">{{content}}</fudis-notification>`,
 });
 
 export const Notification = Template.bind({});
@@ -32,6 +32,7 @@ export const LinkNotification = Template.bind({});
 LinkNotification.args = {
 	variant: 'warning',
 	content: 'This link leads to another site.',
+	linkTitle: 'example',
 	link: 'https://www.example.com',
 	externalLink: true,
 	externalLinkAriaLabel: 'Link to another page',
