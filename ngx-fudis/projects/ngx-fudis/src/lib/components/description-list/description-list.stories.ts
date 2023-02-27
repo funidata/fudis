@@ -70,7 +70,6 @@ const TemplateWithDl: Story<DescriptionListComponent> = () => ({
 		testData,
 		lonelyDataItem,
 		columns: '1fr 1fr',
-		munNimiMessageille: { required: 'Virhe tapahtui!' },
 	},
 });
 
