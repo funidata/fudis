@@ -19,7 +19,7 @@ jobs:
       - name: "Upload"
         uses: actions/upload-pages-artifact@v1.0.7
         with:
-          path: "ngx-fudis/.storybook/target"
+          path: "ngx-fudis/.storybook/target/storybook-static"
 
   deploy:
     permissions:
