@@ -6,10 +6,7 @@ on:
       - main
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-    #      url: ${{ steps.build-publish.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout"
@@ -23,5 +20,14 @@ jobs:
         uses: actions/upload-pages-artifact@v1.0.7
         with:
           path: "ngx-fudis/.storybook/target"
+
+  deploy:
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v1.2.4
