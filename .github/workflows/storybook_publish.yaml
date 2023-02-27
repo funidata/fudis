@@ -1,0 +1,19 @@
+name: Publish Storybook
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+    #      url: ${{ steps.build-publish.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - id: build-publish
+        uses: bitovi/github-actions-react-to-ghp@v1.2.0
+        with:
+          path: ngx-fudis
+          build_command: npx ng run storybook:build
