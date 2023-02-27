@@ -48,3 +48,4 @@ jobs:
         with:
           tag_name: ${{ steps.npm-publish.outputs.version }}
           release_name: ${{ steps.npm-publish.outputs.version }}
+          token: ${{ github.token }}
