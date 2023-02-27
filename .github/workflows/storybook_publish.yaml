@@ -12,8 +12,16 @@ jobs:
     #      url: ${{ steps.build-publish.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - id: build-publish
-        uses: bitovi/github-actions-react-to-ghp@v1.2.0
+      - name: "Checkout"
+        uses: actions/checkout@v3
+      - name: "Build"
+        run: |
+          cd ngx-fudis
+          npm ci
+          npx ng run storybook:build
+      - name: "Upload"
+        uses: actions/upload-pages-artifact@v1.0.7
         with:
-          path: ngx-fudis
-          build_command: npx ng run storybook:build
+          path: "ngx-fudis/.storybook/target"
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1.2.4
