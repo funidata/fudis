@@ -19,7 +19,7 @@
 				'fudis-datepicker__input--invalid': control.invalid && control.touched,
 				'fudis-datepicker__input--disabled': disabled
 			}"
-			[attr.required]="control.hasValidator(requiredValidator)"
+			[attr.required]="required"
 			[attr.aria-describedby]="id + '_guidance'" />
 		<mat-datepicker-toggle
 			[disabled]="disabled"

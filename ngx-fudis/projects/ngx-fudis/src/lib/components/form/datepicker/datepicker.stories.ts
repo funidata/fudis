@@ -2,7 +2,6 @@ import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
 import { FormControl, Validators } from '@angular/forms';
 import { DatepickerComponent } from './datepicker.component';
-// import { DatepickerCustomHeaderComponent } from './datepicker-custom-header/datepicker-custom-header.component';
 import readme from './readme.mdx';
 
 export default {

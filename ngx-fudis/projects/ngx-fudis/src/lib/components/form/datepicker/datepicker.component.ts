@@ -84,8 +84,6 @@ export class DatepickerComponent implements OnInit {
 
 	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();
 
-	requiredValidator = Validators.required;
-
 	required: boolean = false;
 
 	ngOnInit(): void {
