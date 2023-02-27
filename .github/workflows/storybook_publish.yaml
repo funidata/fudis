@@ -22,6 +22,7 @@ jobs:
           path: "ngx-fudis/.storybook/target/storybook-static"
 
   deploy:
+    needs: build
     permissions:
       contents: read
       pages: write
