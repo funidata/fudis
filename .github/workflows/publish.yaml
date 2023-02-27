@@ -34,9 +34,16 @@ jobs:
         run: npm ci && npm run build
         working-directory: ngx-fudis/projects/ngx-fudis
       - name: Publish @funidata/ngx-fudis
+        id: npm-publish
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
           package: ngx-fudis/dist/ngx-fudis/package.json
+          greater-version-only: true
           access: public
           tag: latest
+      - name: Create GitHub release
+        uses: actions/create-release@v1.1.4
+        with:
+          tag_name: ${{ steps.publish.outputs.version }}
+          release_name: ${{ steps.publish.outputs.version }}
