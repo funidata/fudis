@@ -2,6 +2,10 @@
 @use '../../foundations/colors/tokens.scss' as colors;
 
 .fudis-icon {
+	box-sizing: border-box;
+	display: inline-flex;
+	align-items: center;
+	
 	&-rotate {
 		&__flip-180 {
 			transform: rotate(180deg);

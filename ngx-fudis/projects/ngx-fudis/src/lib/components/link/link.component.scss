@@ -4,8 +4,6 @@
 
 .fudis-link {
 	&__anchor {
-		@include colors.fudis-text-color('primary');
-
 		text-decoration: underline dotted;
 
 		&:hover {
@@ -14,6 +12,14 @@
 
 		&:focus {
 			@include focus.fudis-focus-generic;
+		}
+
+		&__primary {
+			@include colors.fudis-text-color('primary');
+		}
+
+		&__default {
+			@include colors.fudis-text-color('gray-dark');
 		}
 
 		&__external {

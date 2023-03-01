@@ -16,7 +16,7 @@
 	justify-content: center;
 	cursor: pointer;
 	padding: 0 spacing.$fudis-spacing-xs;
-	min-width: spacing.$fudis-spacing-xxl;		
+	min-width: spacing.$fudis-spacing-xxl;
 
 	&:focus {
 		@include focus.fudis-focus-generic;
@@ -31,6 +31,10 @@
 		&:focus {
 			@include focus.fudis-focus-generic;
 		}
+	}
+
+	fudis-icon {
+		display: inline-block;
 	}
 
 	&__primary {

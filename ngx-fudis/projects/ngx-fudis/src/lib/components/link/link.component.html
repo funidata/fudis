@@ -7,7 +7,7 @@
 </div>
 
 <ng-template #anchorLink>
-	<a [href]="href" class="fudis-link__anchor fudis-link__anchor__{{ size }}">
+	<a [href]="href" class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__{{ color }}">
 		{{ linkTitle ? linkTitle : href }}
 	</a>
 </ng-template>
@@ -18,8 +18,10 @@
 		[href]="href"
 		target="_blank"
 		rel="noopener noreferrer"
-		class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__external">
+		class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__{{
+			color
+		}} fudis-link__anchor__external">
 		{{ linkTitle ? linkTitle : href }}
-		<fudis-icon icon="external" color="primary"></fudis-icon>
+		<fudis-icon icon="external" [color]="color"></fudis-icon>
 	</a>
 </ng-template>

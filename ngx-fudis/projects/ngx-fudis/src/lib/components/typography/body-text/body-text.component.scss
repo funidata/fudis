@@ -1,5 +1,6 @@
 @use '../../../foundations/typography/mixins' as typography;
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-body-text {
 	@include colorMixins.fudis-text-color('gray-dark');
@@ -22,5 +23,23 @@
 
 	&__l-light {
 		@include typography.fudis-body-l-light;
+	}
+
+	&__paragraph {
+		margin: 0;
+
+		fudis-link {
+			display: inline-block;
+		}
+	}
+
+	&__margin-bottom {
+		&__m {
+			margin-bottom: spacing.$fudis-spacing-m;
+		}
+
+		&__l {
+			margin-bottom: spacing.$fudis-spacing-l;
+		}
 	}
 }
