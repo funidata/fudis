@@ -3,7 +3,7 @@ import { NotificationComponent } from './notification.component';
 import readme from './readme.mdx';
 
 export default {
-	title: 'Components/NoticationComponent',
+	title: 'Components/Notication',
 	component: NotificationComponent,
 	parameters: {
 		docs: {
@@ -25,7 +25,7 @@ const Template: Story = (args) => ({
 export const Notification = Template.bind({});
 Notification.args = {
 	variant: 'warning',
-	content: 'Jeejee',
+	content: 'This is notification',
 };
 
 export const LinkNotification = Template.bind({});
@@ -41,8 +41,8 @@ LinkNotification.args = {
 export const AllVariants: Story = () => ({
 	template: `
 	<fudis-grid align="left" width="m">
-		<fudis-notification variant="warning">Note! Please don't do this, okey? </fudis-notification>
-		<fudis-notification variant="danger">Whoops! Some error happened. </fudis-notification>
+		<fudis-notification variant="warning">Note! Please don't do this, okey?</fudis-notification>
+		<fudis-notification variant="danger">Whoops! Some error happened.</fudis-notification>
 		<fudis-notification variant="success">You succeeded!</fudis-notification>
 		<fudis-notification variant="light">This is a totally neutral message</fudis-notification>
 	</fudis-grid>

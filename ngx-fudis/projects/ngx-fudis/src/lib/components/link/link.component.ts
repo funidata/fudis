@@ -18,7 +18,8 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
  * <fudis-link
  *     href="https://www.example.com"
  *     [isExternalLink]="true"
- *     externalLinkAriaLabel="Opens in a new window">
+ *     externalLinkAriaLabel="Opens in a new window"
+ * 	[color]="default">
  * </fudis-link>
  * ```
  */
@@ -58,7 +59,8 @@ export class LinkComponent {
 	@Input() externalLinkAriaLabel?: string;
 
 	/**
-	 * Link uses primary blue link color. "Default"" class name is a dark gray color used by icon component. Icon component inherits this color attribute when external link is used.
+	 * Link uses primary blue color.
+	 * Option to set color to 'default' which is a dark gray color. It is mainly used in links inside notification component but can be added to any link component if necessary.
 	 */
 	@Input() color: 'primary' | 'default' = 'primary';
 }

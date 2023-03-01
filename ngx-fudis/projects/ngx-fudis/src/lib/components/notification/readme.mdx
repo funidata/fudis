@@ -6,12 +6,12 @@ import { NotificationComponent } from './notification.component';
 
 # Notification
 
-Notifications are often informative contextual notifications that cannot be clicked away. The colors currently used are yellow `variant: "warning"`, red `variant: "danger"`, green `variant: "success"` and blue `variant: "light"`. The most common color is yellow, which is used in notes. Blue and green contextual notifications are rare. Red notification describes an error situation and green the possibility/success of some function. Blue, on the other hand, is a neutral guideline.
+Yellow notification is used in notes. Red notification describes an error situation. Green indicates the possibility or success of some function. Blue, on the other hand, is a neutral guideline.
 
 ## Examples
 
 <Canvas>
-	<Story id="components-noticationcomponent--all-variants"></Story>
+	<Story id="components-notication--all-variants"></Story>
 </Canvas>
 
 ### Link notification
@@ -19,7 +19,7 @@ Notifications are often informative contextual notifications that cannot be clic
 Notification component property `link` accepts href address as a string. This link address is shown as default link title, but it can be changed with optinal `titleLink` property. When link referes to external site `externalLink` property should be set on true. This will add an external link icon to a link. It is recommended to use `externalLinkAriaLabel` in order describe link action to screen reader users.
 
 <Canvas>
-	<Story id="components-noticationcomponent--link-notification"></Story>
+	<Story id="components-notication--link-notification"></Story>
 </Canvas>
 
 ### Accessibility
@@ -30,7 +30,7 @@ Notification component property `link` accepts href address as a string. This li
 
 ### Related components
 
-[IconComponent](/docs/components-icon--icon)
+[Icon](/docs/components-icon--icon)
 
 [Link](/docs/components-link--link)
 

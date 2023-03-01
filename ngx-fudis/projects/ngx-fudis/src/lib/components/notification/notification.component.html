@@ -1,8 +1,6 @@
 <div class="fudis-notification fudis-notification__{{ variant }}">
 	<fudis-icon [icon]="icon"></fudis-icon>
-	<fudis-body-text
-		[size]="'l-regular'"
-		[class]="externalLink && link ? 'fudis-notification__link' : 'fudis-notification__content'">
+	<fudis-body-text [size]="'l-regular'">
 		<ng-content></ng-content>
 		<fudis-link
 			*ngIf="link"
