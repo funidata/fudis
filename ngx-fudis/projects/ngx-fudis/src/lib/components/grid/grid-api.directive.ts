@@ -35,6 +35,8 @@ export class GridApiDirective {
 
 	@Input() marginBottom: TFudisGridMargin = 'none';
 
+	@Input() classes: string[];
+
 	/**
 	 * Default grid-template-columns value applied to all widths. Suggested values for native CSS grid are fr units.
 	 */

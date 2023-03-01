@@ -26,4 +26,21 @@ export class DescriptionListComponent extends GridApiDirective {
 	@Input() disableGrid: boolean = false;
 
 	override columns = '1fr 1fr';
+
+	getClasses(): string[] {
+		const cssClasses = [];
+
+		if (this.variant === 'regular') {
+			cssClasses.push('fudis-description-list');
+			if (this.disableGrid) {
+				cssClasses.push('description-list__disabled-grid');
+			}
+		} else {
+			cssClasses.push('fudis-description-list-compact');
+			if (this.disableGrid) {
+				cssClasses.push('fudis-description-list-compact__disabled-grid');
+			}
+		}
+		return cssClasses;
+	}
 }

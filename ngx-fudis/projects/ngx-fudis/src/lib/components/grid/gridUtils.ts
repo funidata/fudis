@@ -21,10 +21,11 @@ export interface IFudisGridAttributes {
 	marginBottom: TFudisGridMargin;
 	rowGap: TFudisGridGapValues;
 	columnGap: TFudisGridGapValues;
+	classes: string[];
 }
 
 export const getGridClasses = (gridElement: IFudisGridAttributes) => {
-	const classList = [
+	let classList = [
 		'fudis-grid',
 		`fudis-grid__${gridElement.width}`,
 		`fudis-grid__align__${gridElement.align}`,
@@ -33,6 +34,10 @@ export const getGridClasses = (gridElement: IFudisGridAttributes) => {
 		gridElement.rowGap === 'responsive' ? '' : `fudis-grid__row-gap__${gridElement.rowGap}`,
 		gridElement.columnGap === 'responsive' ? '' : `fudis-grid__column-gap__${gridElement.columnGap}`,
 	];
+
+	if (gridElement.classes) {
+		classList = classList.concat(gridElement.classes);
+	}
 
 	const arrayToString = classList
 		.filter((item) => {
