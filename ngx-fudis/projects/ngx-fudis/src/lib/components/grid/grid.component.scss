@@ -47,7 +47,7 @@
 
 	&__margin {
 		&__top {
-			&__zero {
+			&__none {
 				margin-top: spacing.$fudis-spacing-zero;
 			}
 
@@ -81,7 +81,7 @@
 		}
 
 		&__bottom {
-			&__zero {
+			&__none {
 				margin-bottom: spacing.$fudis-spacing-zero;
 			}
 
@@ -217,7 +217,7 @@
 	}
 
 	&__row-gap {
-		&__zero {
+		&__none {
 			row-gap: spacing.$fudis-spacing-zero;
 		}
 
@@ -251,7 +251,7 @@
 	}
 
 	&__column-gap {
-		&__zero {
+		&__none {
 			column-gap: spacing.$fudis-spacing-zero;
 		}
 

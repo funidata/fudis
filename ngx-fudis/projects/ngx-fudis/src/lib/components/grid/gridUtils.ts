@@ -1,8 +1,47 @@
-export interface InputColumnObject {
+export interface IFudisInputColumnObject {
 	name: string; // e. g. XL or other size
 	value: string; // value to be applied to CSS grid-template-columns attribute
 	breakpoint: string; // breakpoint boundaries for this rule to happen
 }
+
+export type TFudisGridWidth = 'xxl' | 'xl' | 'l' | 'm' | 's' | 'xs';
+
+export type TFudisAlign = 'left' | 'right' | 'center';
+
+export type TFudisAlignItems = 'start' | 'center' | 'end' | 'stretch';
+
+export type TFudisGridMargin = 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'none';
+
+export type TFudisGridGapValues = 'none' | 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'responsive';
+
+export interface IFudisGridAttributes {
+	width: TFudisGridWidth;
+	align: TFudisAlign;
+	marginTop: TFudisGridMargin;
+	marginBottom: TFudisGridMargin;
+	rowGap: TFudisGridGapValues;
+	columnGap: TFudisGridGapValues;
+}
+
+export const getGridClasses = (gridElement: IFudisGridAttributes) => {
+	const classList = [
+		'fudis-grid',
+		`fudis-grid__${gridElement.width}`,
+		`fudis-grid__align__${gridElement.align}`,
+		`fudis-grid__margin__top__${gridElement.marginTop}`,
+		`fudis-grid__margin__bottom__${gridElement.marginBottom}`,
+		gridElement.rowGap === 'responsive' ? '' : `fudis-grid__row-gap__${gridElement.rowGap}`,
+		gridElement.columnGap === 'responsive' ? '' : `fudis-grid__column-gap__${gridElement.columnGap}`,
+	];
+
+	const arrayToString = classList
+		.filter((item) => {
+			return !!item;
+		})
+		.join(' ');
+
+	return arrayToString;
+};
 
 const gridBreakpoints = {
 	xxl: '(min-width: 100em)',
@@ -32,7 +71,7 @@ export const breakpointsToObserve = [
  * Some validation, so that given column @Inputs are usable and valid grid-column-template values..
  */
 
-const validateColumnInputArray = (inputs: Array<InputColumnObject>) => {
+const validateColumnInputArray = (inputs: Array<IFudisInputColumnObject>) => {
 	inputs.forEach((item) => {
 		if (item.value.trim() === '') {
 			throw new Error(
@@ -85,7 +124,7 @@ export const createColumnInputForBreakpoints = (
 	xlarge: string,
 	xxlarge: string
 ) => {
-	const columnDataForBreakpoints: InputColumnObject[] = [];
+	const columnDataForBreakpoints: IFudisInputColumnObject[] = [];
 
 	if (defaultValue) {
 		columnDataForBreakpoints.push({ name: 'columns', value: defaultValue, breakpoint: gridBreakpoints.default });

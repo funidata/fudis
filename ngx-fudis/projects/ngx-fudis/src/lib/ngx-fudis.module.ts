@@ -26,6 +26,7 @@ import { ExpandableContentDirective } from './components/expandable/expandable-c
 import { FudisDialog } from './components/dialog/dialog';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { GridComponent } from './components/grid/grid.component';
+import { GridApiDirective } from './components/grid/grid-api.directive';
 import { GridDirective } from './components/grid/grid.directive';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { IconComponent } from './components/icon/icon.component';
@@ -54,6 +55,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		BodyTextComponent,
 		CheckboxComponent,
 		GridComponent,
+		GridApiDirective,
 		GridDirective,
 		GuidanceComponent,
 		DescriptionListComponent,

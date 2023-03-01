@@ -46,15 +46,10 @@ export const DescriptionList: Story = () => ({
 });
 
 const TemplateWithDl: Story<DescriptionListComponent> = () => ({
-	template: html` <fudis-grid>
+	template: html`<fudis-grid>
 			<fudis-heading tag="h2" size="m">Here below is a regular Fudis Description List component</fudis-heading>
 		</fudis-grid>
-		<fudis-description-list
-			[marginBottom]="'xl'"
-			[data]="testData"
-			columns="1fr 1fr 1fr"
-			columnsS="1fr 1fr"
-			columnsXs="1fr 1fr"></fudis-description-list>
+		<fudis-description-list [data]="testData" [marginBottom]="'xl'"></fudis-description-list>
 
 		<fudis-grid [columns]="columns" [columnsXs]="'1fr'">
 			<fudis-heading tag="h2" size="m"

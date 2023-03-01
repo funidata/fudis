@@ -33,11 +33,11 @@ export default {
 			control: { type: 'select' },
 		},
 		rowGap: {
-			options: ['zero', 'xxs', 'xs', 's', 'm', 'l', 'xl', 'xxl', 'responsive'],
+			options: ['none', 'xxs', 'xs', 's', 'm', 'l', 'xl', 'xxl', 'responsive'],
 			control: { type: 'select' },
 		},
 		columnGap: {
-			options: ['zero', 'xxs', 'xs', 's', 'm', 'l', 'xl', 'xxl', 'responsive'],
+			options: ['none', 'xxs', 'xs', 's', 'm', 'l', 'xl', 'xxl', 'responsive'],
 			control: { type: 'select' },
 		},
 	},
@@ -60,7 +60,7 @@ const html = String.raw;
 
 const Template: Story<GridComponent> = (args: GridComponent) => ({
 	template: html`<fudis-grid
-		[columns]="columns"
+		[columns]="'1fr 1fr 1fr'"
 		[columnsXs]="columnsXs"
 		[columnsS]="columnsS"
 		[columnsM]="columnsM"
@@ -93,6 +93,10 @@ const Template: Story<GridComponent> = (args: GridComponent) => ({
 		</div>
 		<div class="grid-test-item">
 			<fudis-heading tag="h3" size="m">This is fudis-heading inside a div</fudis-heading>
+			<fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
+		</div>
+		<div class="grid-test-item">
+			<fudis-heading tag="h3" size="m" text="This heading is inside a div"></fudis-heading>
 			<fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
 		</div>
 		<div class="grid-test-item">
