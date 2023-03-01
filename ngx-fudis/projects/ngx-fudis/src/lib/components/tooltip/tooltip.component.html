@@ -1,7 +1,5 @@
 <button
-	mat-raised-button
-	#tooltip="matTooltip"
-	matTooltip="{{ tooltipText }}"
+	[matTooltip]="tooltipText"
 	matTooltipPosition="below"
 	aria-label="Button that displays a tooltip when focused or hovered over">
 	{{ content }}

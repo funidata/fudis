@@ -50,3 +50,4 @@ $fudis-theme: mat.define-light-theme(
 
 // Emit theme-dependent styles for common features used across multiple Material components.
 @include mat.core-theme($fudis-theme);
+@include mat.tooltip-theme($fudis-theme);
