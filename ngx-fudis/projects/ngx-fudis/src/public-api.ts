@@ -23,4 +23,5 @@ export { LinkComponent } from './lib/components/link/link.component';
 export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';
 export { TextInputComponent } from './lib/components/form/text-input/text-input.component';
+export { TooltipComponent } from './lib/components/tooltip/tooltip.component';
 // export { TextSpacingComponent } from './lib/components/typography/text-spacing/text-spacing.component';

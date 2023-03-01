@@ -40,6 +40,15 @@ import { FormControl } from '@angular/forms';
 			externalLinkAriaLabel="Opens in a new window">
 		</fudis-link>
 		<fudis-link data-theme="sisu" size="m" href="https://www.example.com"></fudis-link>
+		<!-- <fudis-tooltip data-theme="sisu" tooltipText="Moro" content="Moiiiii"></fudis-tooltip> -->
+		<button
+			data-theme="sisu"
+			mat-raised-button
+			#tooltip="matTooltip"
+			matTooltip="Hei tää toimii"
+			aria-label="Button that displays a tooltip when focused or hovered over">
+			Olen ekstra nappi
+		</button>
 	`,
 	styleUrls: ['./app.scss'],
 })

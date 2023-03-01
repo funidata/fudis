@@ -4,9 +4,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import {
 	FudisDialogActionsDirective,
 	FudisDialogCloseDirective,
@@ -36,6 +38,7 @@ import { RadioButtonGroupComponent } from './components/form/radio-button-group/
 import { TextInputComponent } from './components/form/text-input/text-input.component';
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
+import { TooltipComponent } from './components/tooltip/tooltip.component';
 
 @NgModule({
 	/*
@@ -68,6 +71,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		TextInputComponent,
 		TextSpacingComponent,
 		TextAreaComponent,
+		TooltipComponent,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
@@ -82,6 +86,8 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		MatFormFieldModule,
 		MatInputModule,
 		MatSelectModule,
+		MatButtonModule,
+		MatTooltipModule,
 		ReactiveFormsModule,
 	],
 
@@ -113,6 +119,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		TextAreaComponent,
 		TextInputComponent,
 		// TextSpacingComponent,
+		TooltipComponent,
 	],
 	providers: [FudisDialog],
 })
