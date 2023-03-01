@@ -3,7 +3,7 @@ import { NotificationComponent } from './notification.component';
 import readme from './readme.mdx';
 
 export default {
-	title: 'Components/Notication',
+	title: 'Components/Notification',
 	component: NotificationComponent,
 	parameters: {
 		docs: {

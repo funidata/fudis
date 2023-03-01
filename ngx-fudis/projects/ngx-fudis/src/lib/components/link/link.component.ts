@@ -19,7 +19,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
  *     href="https://www.example.com"
  *     [isExternalLink]="true"
  *     externalLinkAriaLabel="Opens in a new window"
- * 	[color]="default">
+ * 	color="default">
  * </fudis-link>
  * ```
  */

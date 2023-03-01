@@ -19,6 +19,9 @@ import { FudisIcon, FudisIconColor } from '../../types/icons';
 	encapsulation: ViewEncapsulation.None,
 })
 export class IconComponent {
+	/**
+	 * Binding fudis-icon class to component wrapper
+	 */
 	@HostBinding('class') classes = 'fudis-icon';
 
 	/**
