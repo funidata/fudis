@@ -6,7 +6,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { MatNativeDateModule, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -21,6 +21,7 @@ import { BodyTextComponent } from './components/typography/body-text/body-text.c
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/form/checkbox/checkbox.component';
 import { DatepickerComponent, FUDIS_DATE_FORMATS } from './components/form/datepicker/datepicker.component';
+import { DatepickerCustomDateAdapter } from './components/form/datepicker/datepicker-custom-date-adapter';
 import { DatepickerCustomHeaderComponent } from './components/form/datepicker/datepicker-custom-header/datepicker-custom-header.component';
 import { DescriptionListComponent } from './components/description-list/description-list.component';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
@@ -130,7 +131,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 	],
 	providers: [
 		FudisDialog,
-		{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+		{ provide: DateAdapter, useClass: DatepickerCustomDateAdapter, deps: [MAT_DATE_LOCALE] },
 		{ provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
 		{ provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { strict: true } },
 	],
