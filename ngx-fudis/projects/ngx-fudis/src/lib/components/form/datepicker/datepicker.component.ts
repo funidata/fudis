@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { DateAdapter } from '@angular/material/core';
 import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/forms';
 import { GuidanceComponent } from '../guidance/guidance.component';
 
@@ -25,9 +24,7 @@ export const FUDIS_DATE_FORMATS = {
 	templateUrl: './datepicker.component.html',
 	styleUrls: ['./datepicker.component.scss'],
 })
-export class DatepickerComponent<D> implements OnInit {
-	constructor(private _dateAdapter: DateAdapter<D>) {}
-
+export class DatepickerComponent implements OnInit {
 	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
 
 	/**
@@ -85,13 +82,6 @@ export class DatepickerComponent<D> implements OnInit {
 	required: boolean = false;
 
 	ngOnInit(): void {
-		/**
-		 * Change the calendar starting day of the week from default 0 (Sunday) to 1 (Monday)
-		 */
-		this._dateAdapter.getFirstDayOfWeek = () => {
-			return 1;
-		};
-
 		if (this.control.hasValidator(Validators.required)) {
 			this.required = true;
 		}
