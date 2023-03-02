@@ -42,6 +42,7 @@ jobs:
           check-version: true
           access: public
           tag: latest
+      - run: echo ${{ steps.npm-publish.outputs.type }}
       - name: Create GitHub release
         if: ${{ steps.npm-publish.outputs.type }} != "none"
         uses: softprops/action-gh-release@v0.1.15
