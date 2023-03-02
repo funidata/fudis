@@ -5,6 +5,8 @@ import { MatCalendar } from '@angular/material/datepicker';
 import { Subject, takeUntil } from 'rxjs';
 
 /**
+ * NOTE: At the moment this custom header is not in use but left the code here for possible future reference
+ *
  * Custom header for datepicker calendar dialog.
  * This creates double-chevron buttons to change the year - instead of default year picker which opens inside the calendar.
  * https://material.angular.io/components/datepicker/overview#datepicker-custom-header

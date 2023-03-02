@@ -45,6 +45,16 @@
 		}
 	}
 
+	& .mat-calendar-controls {
+			& .mat-button {
+				@include colorMixins.fudis-bg-color('transparent');
+			}
+
+			& .mat-icon-button {
+				@include colorMixins.fudis-bg-color('transparent');
+			}
+	}
+
 	& .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover > .mat-calendar-body-cell-content:not(.mat-calendar-body-comparison-identical) {
 		@include colorMixins.fudis-bg-color('primary-light');
 	}
