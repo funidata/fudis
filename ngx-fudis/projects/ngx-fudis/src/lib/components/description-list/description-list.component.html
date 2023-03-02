@@ -17,17 +17,11 @@
 	[columnsXxl]="columnsXxl"
 	[marginBottom]="marginBottom"
 	[marginTop]="marginTop"
-	[class.fudis-description-list__disabled-grid]="disableGrid"
 	role="list">
 	<ng-container *ngTemplateOutlet="variant === 'regular' ? regular : compact"> </ng-container>
 </dl>
 
-<dl
-	*ngIf="disableGrid"
-	[class.fudis-description-list]="variant === 'regular'"
-	[class.fudis-description-list-compact]="variant === 'compact'"
-	[class.fudis-description-list__disabled-grid]="disableGrid"
-	role="list">
+<dl *ngIf="disableGrid" [class]="getClasses()" role="list">
 	<ng-container *ngTemplateOutlet="variant === 'regular' ? regular : compact"> </ng-container>
 </dl>
 

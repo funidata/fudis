@@ -40,9 +40,9 @@ describe('DescriptionListComponent', () => {
 		return fixture.nativeElement.querySelector('dd') as HTMLElement;
 	}
 
-	function assertDescriptionListHasClasses(...classes: string[]): void {
+	function assertDescriptionListHasClasses(classes: string[]): void {
 		const dlClasses = getDescriptionList()?.className ?? '';
-		expect(dlClasses.split(' ').sort()).toEqual([...classes].sort());
+		expect(dlClasses.split(' ').sort()).toEqual(classes.sort());
 	}
 
 	function assertDtHasClasses(...classes: string[]): void {
@@ -56,14 +56,47 @@ describe('DescriptionListComponent', () => {
 	}
 
 	describe('Parent CSS class', () => {
-		it('should have fudis-description-list class if regular list', () => {
-			assertDescriptionListHasClasses('fudis-description-list');
+		it('should have fudis-description-list and fudis-grid classes if regular list', () => {
+			const classList = [
+				'fudis-description-list',
+				'fudis-grid',
+				'fudis-grid__align__center',
+				'fudis-grid__margin__bottom__none',
+				'fudis-grid__margin__top__none',
+				'fudis-grid__xxl',
+			];
+
+			assertDescriptionListHasClasses(classList);
 		});
 
-		it('should have fudis-description-list-compact class if compact list', () => {
+		it('should have fudis-description-list-compact and fudis-grid classes if compact list', () => {
 			component.variant = 'compact';
 			fixture.detectChanges();
-			assertDescriptionListHasClasses('fudis-description-list-compact');
+			const classList = [
+				'fudis-description-list-compact',
+				'fudis-grid',
+				'fudis-grid__align__center',
+				'fudis-grid__margin__bottom__none',
+				'fudis-grid__margin__top__none',
+				'fudis-grid__row-gap__none',
+				'fudis-grid__xxl',
+			];
+			assertDescriptionListHasClasses(classList);
+		});
+		it('should not have fudis-grid classes if grid directive is disabled if regular list', () => {
+			component.disableGrid = true;
+			fixture.detectChanges();
+			const classList = ['fudis-description-list', 'fudis-description-list__disabled-grid'];
+
+			assertDescriptionListHasClasses(classList);
+		});
+
+		it('should not have fudis-grid classes if grid directive is disabled if compact list', () => {
+			component.variant = 'compact';
+			component.disableGrid = true;
+			fixture.detectChanges();
+			const classList = ['fudis-description-list-compact', 'fudis-description-list-compact__disabled-grid'];
+			assertDescriptionListHasClasses(classList);
 		});
 	});
 

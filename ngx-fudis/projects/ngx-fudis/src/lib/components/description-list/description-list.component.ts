@@ -33,14 +33,17 @@ export class DescriptionListComponent extends GridApiDirective {
 		if (this.variant === 'regular') {
 			cssClasses.push('fudis-description-list');
 			if (this.disableGrid) {
-				cssClasses.push('description-list__disabled-grid');
+				cssClasses.push('fudis-description-list__disabled-grid');
 			}
-		} else {
+		}
+
+		if (this.variant === 'compact') {
 			cssClasses.push('fudis-description-list-compact');
 			if (this.disableGrid) {
 				cssClasses.push('fudis-description-list-compact__disabled-grid');
 			}
 		}
+
 		return cssClasses;
 	}
 }
