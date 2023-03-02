@@ -44,8 +44,6 @@ jobs:
           tag: latest
       - name: Create GitHub release
         if: ${{ steps.npm-publish.outputs.type }} != "none"
-        uses: actions/create-release@v1.1.4
+        uses: softprops/action-gh-release@v0.1.15
         with:
           tag_name: ${{ steps.npm-publish.outputs.version }}
-          release_name: ${{ steps.npm-publish.outputs.version }}
-          token: ${{ github.token }}

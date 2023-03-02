@@ -1,11 +1,11 @@
 # WIP
 # Should be merged with other Storybook workflows once ready.
-name: Publish Storybook
+name: Publish Storybook by Version
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types:
+      - published
 
 jobs:
   build:
@@ -18,10 +18,14 @@ jobs:
           cd ngx-fudis
           npm ci
           npx ng run storybook:build
+      - name: Rename build directory by version
+        run: |
+          cd .storybook/target
+          mv storybook-static ${GITHUB_REF#refs/*/}
       - name: "Upload"
         uses: actions/upload-pages-artifact@v1.0.7
         with:
-          path: "ngx-fudis/.storybook/target/storybook-static"
+          path: "ngx-fudis/.storybook/target"
 
   deploy:
     needs: build
