@@ -7,170 +7,170 @@
 
 // Body Text
 
-@mixin fudis-body-l-light {
-  line-height: tokens.$fudis-body-l-line-height;
-  font-family: tokens.$fudis-font-family;
-  font-size: tokens.$fudis-body-l-font-size;
-  font-weight: tokens.$fudis-light;
+@mixin body-text-l-light {
+  line-height: tokens.$body-text-l-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-l-font-size;
+  font-weight: tokens.$font-weight-light;
 }
 
-@mixin fudis-body-l-regular {
-  line-height: tokens.$fudis-body-l-line-height;
-  font-family: tokens.$fudis-font-family;
-  font-size: tokens.$fudis-body-l-font-size;
-  font-weight: tokens.$fudis-regular;
+@mixin body-text-l-regular {
+  line-height: tokens.$body-text-l-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-l-font-size;
+  font-weight: tokens.$font-weight-regular;
 }
 
-@mixin fudis-body-m-light {
-  line-height: tokens.$fudis-body-m-line-height;
-  font-family: tokens.$fudis-font-family;
-  font-size: tokens.$fudis-body-m-font-size;
-  font-weight: tokens.$fudis-light;
+@mixin body-text-m-light {
+  line-height: tokens.$body-text-m-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-m-font-size;
+  font-weight: tokens.$font-weight-light;
 }
 
-@mixin fudis-body-m-regular {
-  line-height: tokens.$fudis-body-m-line-height;
-  font-family: tokens.$fudis-font-family;
-  font-size: tokens.$fudis-body-m-font-size;
-  font-weight: tokens.$fudis-regular;
+@mixin body-text-m-regular {
+  line-height: tokens.$body-text-m-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-m-font-size;
+  font-weight: tokens.$font-weight-regular;
 }
 
-@mixin fudis-body-s-regular {
-  line-height: tokens.$fudis-body-s-line-height;
-  font-family: tokens.$fudis-font-family;
-  font-size: tokens.$fudis-body-s-font-size;
-  font-weight: tokens.$fudis-regular;
+@mixin body-text-s-regular {
+  line-height: tokens.$body-text-s-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-s-font-size;
+  font-weight: tokens.$font-weight-regular;
 }
 
 // Headings
 
-@mixin fudis-heading-xxl {
-  margin-bottom: spacing.$fudis-spacing-s;
-  line-height: tokens.$fudis-heading-l-line-height;
-  font-family: tokens.$fudis-font-family;
-  font-size: tokens.$fudis-heading-xxl-font-size;
-  font-weight: tokens.$fudis-medium;
+@mixin heading-xxl {
+  margin-bottom: spacing.$spacing-s;
+  line-height: tokens.$heading-l-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$heading-xxl-font-size;
+  font-weight: tokens.$font-weight-medium;
 }
 
-@mixin fudis-heading-xl {
-  margin-bottom: spacing.$fudis-spacing-s;
-  line-height: tokens.$fudis-heading-l-line-height;
-  font-family: tokens.$fudis-font-family;
-  font-size: tokens.$fudis-heading-xl-font-size;
-  font-weight: tokens.$fudis-medium;
+@mixin heading-xl {
+  margin-bottom: spacing.$spacing-s;
+  line-height: tokens.$heading-l-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$heading-xl-font-size;
+  font-weight: tokens.$font-weight-medium;
 }
 
-@mixin fudis-heading-l {
-  margin-bottom: spacing.$fudis-spacing-xs;
-  line-height: tokens.$fudis-heading-m-line-height;
-  font-family: tokens.$fudis-font-family;
-  font-size: tokens.$fudis-heading-l-font-size;
-  font-weight: tokens.$fudis-medium;
+@mixin heading-l {
+  margin-bottom: spacing.$spacing-xs;
+  line-height: tokens.$heading-m-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$heading-l-font-size;
+  font-weight: tokens.$font-weight-medium;
 }
 
-@mixin fudis-heading-m {
-  margin-bottom: spacing.$fudis-spacing-xs;
-  line-height: tokens.$fudis-heading-m-line-height;
-  font-family: tokens.$fudis-font-family;
-  font-size: tokens.$fudis-heading-m-font-size;
-  font-weight: tokens.$fudis-medium;
+@mixin heading-m {
+  margin-bottom: spacing.$spacing-xs;
+  line-height: tokens.$heading-m-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$heading-m-font-size;
+  font-weight: tokens.$font-weight-medium;
 }
 
-@mixin fudis-heading-s {
-  margin-bottom: spacing.$fudis-spacing-xs;
-  line-height: tokens.$fudis-heading-s-line-height;
-  font-family: tokens.$fudis-font-family;
-  font-size: tokens.$fudis-heading-s-font-size;
-  font-weight: tokens.$fudis-medium;
+@mixin heading-s {
+  margin-bottom: spacing.$spacing-xs;
+  line-height: tokens.$heading-s-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$heading-s-font-size;
+  font-weight: tokens.$font-weight-medium;
 }
 
-@mixin fudis-heading-xs {
-  margin-bottom: spacing.$fudis-spacing-xs;
-  line-height: tokens.$fudis-heading-s-line-height;
-  font-family: tokens.$fudis-font-family;
-  font-size: tokens.$fudis-heading-xs-font-size;
-  font-weight: tokens.$fudis-bold;
+@mixin heading-xs {
+  margin-bottom: spacing.$spacing-xs;
+  line-height: tokens.$heading-s-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$heading-xs-font-size;
+  font-weight: tokens.$font-weight-bold;
 }
 
-@mixin fudis-heading-xxs {
-  margin-bottom: spacing.$fudis-spacing-xs;
-  line-height: tokens.$fudis-heading-s-line-height;
-  font-family: tokens.$fudis-font-family;
-  font-size: tokens.$fudis-heading-xxs-font-size;
-  font-weight: tokens.$fudis-bold;
+@mixin heading-xxs {
+  margin-bottom: spacing.$spacing-xs;
+  line-height: tokens.$heading-s-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$heading-xxs-font-size;
+  font-weight: tokens.$font-weight-bold;
 }
 
 // Other UI styles 
 
 // Text-input, text-area, dropdown, legend components
 
-@mixin fudis-text-field-label {
-  text-transform: tokens.$fudis-all-caps;
-	line-height: tokens.$fudis-text-input-line-height;
-  font-family: tokens.$fudis-font-family;
-  font-size: tokens.$fudis-body-m-font-size;
-  font-weight: tokens.$fudis-regular;
+@mixin text-field-label {
+  text-transform: tokens.$all-caps;
+	line-height: tokens.$text-input-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-m-font-size;
+  font-weight: tokens.$font-weight-regular;
 }
 
-@mixin fudis-text-field-input {
-	line-height: tokens.$fudis-text-input-line-height;
-	font-family: tokens.$fudis-font-family;
-  font-size: tokens.$fudis-body-l-font-size;
-  font-weight: tokens.$fudis-light;
+@mixin text-field-input {
+	line-height: tokens.$text-input-line-height;
+	font-family: tokens.$font-family;
+  font-size: tokens.$body-text-l-font-size;
+  font-weight: tokens.$font-weight-light;
 }
 
 // Badge component
 
-@mixin fudis-badge-typography {
-	text-transform: tokens.$fudis-all-caps;
-	line-height: tokens.$fudis-badge-line-height;
-	font-family: tokens.$fudis-font-family;
-	font-size: tokens.$fudis-body-s-font-size;
-	font-weight: tokens.$fudis-regular;
+@mixin badge-typography {
+	text-transform: tokens.$all-caps;
+	line-height: tokens.$badge-line-height;
+	font-family: tokens.$font-family;
+	font-size: tokens.$body-text-s-font-size;
+	font-weight: tokens.$font-weight-regular;
 }
 
 // Description-list component
 
-@mixin fudis-description-list-key-typography {
-	@include fudis-text-field-label;
+@mixin description-list-key-typography {
+	@include text-field-label;
 }
 
-@mixin fudis-description-list-value-typography {
-	line-height: tokens.$fudis-body-l-line-height;
-  font-family: tokens.$fudis-font-family;
-  font-size: tokens.$fudis-body-l-font-size;
-  font-weight: tokens.$fudis-light;
+@mixin description-list-value-typography {
+	line-height: tokens.$body-text-l-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-l-font-size;
+  font-weight: tokens.$font-weight-light;
 }
 
-@mixin fudis-description-list-compact-key-typography {
-	line-height: tokens.$fudis-body-l-line-height;
-  font-family: tokens.$fudis-font-family;
-	font-size: tokens.$fudis-body-m-font-size;
-  font-weight: tokens.$fudis-light;
+@mixin description-list-compact-key-typography {
+	line-height: tokens.$body-text-l-line-height;
+  font-family: tokens.$font-family;
+	font-size: tokens.$body-text-m-font-size;
+  font-weight: tokens.$font-weight-light;
 }
 
-@mixin fudis-description-list-compact-value-typography {
-	line-height: tokens.$fudis-body-l-line-height;
-  font-family: tokens.$fudis-font-family;
-	font-size: tokens.$fudis-body-m-font-size;
-	font-weight: tokens.$fudis-regular;
+@mixin description-list-compact-value-typography {
+	line-height: tokens.$body-text-l-line-height;
+  font-family: tokens.$font-family;
+	font-size: tokens.$body-text-m-font-size;
+	font-weight: tokens.$font-weight-regular;
 }
 
 // Button component
 
-@mixin fudis-button-typography {
-	@include fudis-letter-spacing("1px");
+@mixin button-typography {
+	@include letter-spacing("1px");
 
-	text-transform: tokens.$fudis-all-caps;
-	line-height: tokens.$fudis-body-s-line-height;
-	font-family: tokens.$fudis-font-family, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: tokens.$fudis-body-m-font-size;
-	font-weight: tokens.$fudis-bold;
+	text-transform: tokens.$all-caps;
+	line-height: tokens.$body-text-s-line-height;
+	font-family: tokens.$font-family, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: tokens.$body-text-m-font-size;
+	font-weight: tokens.$font-weight-bold;
 }
 
-@mixin fudis-letter-spacing($width) {
-	@if map_has_key(spacing.$fudis-pixel-tokens, $width) {
-		letter-spacing: map.get(spacing.$fudis-pixel-tokens, $width);
+@mixin letter-spacing($width) {
+	@if map_has_key(spacing.$pixel-tokens, $width) {
+		letter-spacing: map.get(spacing.$pixel-tokens, $width);
 	}
 
  @else {
@@ -180,34 +180,34 @@
 
 // Expandable component
 
-@mixin fudis-expandable-regular-typography {
-  line-height: tokens.$fudis-body-l-line-height;
-  font-family: tokens.$fudis-font-family;
-  font-size: tokens.$fudis-body-l-font-size;
-  font-weight: tokens.$fudis-regular;
+@mixin expandable-regular-typography {
+  line-height: tokens.$body-text-l-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-l-font-size;
+  font-weight: tokens.$font-weight-regular;
 }
 
-@mixin fudis-expandable-sub-title-typography {
-  font-family: tokens.$fudis-font-family;
-  font-size: tokens.$fudis-body-s-font-size;
-  font-weight: tokens.$fudis-light;
+@mixin expandable-sub-title-typography {
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-s-font-size;
+  font-weight: tokens.$font-weight-light;
 }
 
 // Link component
 
-@mixin fudis-text-link-m-typography {
-	font-family: tokens.$fudis-font-family;
-	font-size: tokens.$fudis-body-m-font-size;
-  font-weight: tokens.$fudis-regular;
+@mixin text-link-m-typography {
+	font-family: tokens.$font-family;
+	font-size: tokens.$body-text-m-font-size;
+  font-weight: tokens.$font-weight-regular;
 }
 
-@mixin fudis-text-link-l-typography {
-	font-family: tokens.$fudis-font-family;
-	font-size: tokens.$fudis-body-l-font-size;
-  font-weight: tokens.$fudis-regular;
+@mixin text-link-l-typography {
+	font-family: tokens.$font-family;
+	font-size: tokens.$body-text-l-font-size;
+  font-weight: tokens.$font-weight-regular;
 }
 
-@mixin fudis-text-link-inherit-typography {
-	font-family: tokens.$fudis-font-family;
-	font-size: tokens.$fudis-inherit;
+@mixin text-link-inherit-typography {
+	font-family: tokens.$font-family;
+	font-size: tokens.$inherit;
 }

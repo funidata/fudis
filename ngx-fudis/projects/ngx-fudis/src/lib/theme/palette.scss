@@ -1,29 +1,29 @@
 @use "@angular/material" as mat;
 @import "../foundations/colors/tokens";
 
-$fudis-palette-map-primary: (
-    100: $fudis-color-primary-light,
-    500: $fudis-color-primary,
-    700: $fudis-color-primary-dark,
-    900: $fudis-color-primary-extra-dark,
+$palette-map-primary: (
+    100: $color-primary-light,
+    500: $color-primary,
+    700: $color-primary-dark,
+    900: $color-primary-extra-dark,
     contrast: (
-      100: $fudis-color-gray-dark,
-      500: $fudis-color-white,
-      700: $fudis-color-white,
-      900: $fudis-color-white,
+      100: $color-gray-dark,
+      500: $color-white,
+      700: $color-white,
+      900: $color-white,
     ),
 );
-$fudis-palette-map-accent: (
-	100: $fudis-color-red,
-	200: $fudis-color-yellow,
-	500: $fudis-color-primary,
-	700: $fudis-color-green,
+$palette-map-accent: (
+	100: $color-red,
+	200: $color-yellow,
+	500: $color-primary,
+	700: $color-green,
 	900: transparent,
 	contrast: (
-		100: $fudis-color-red-light,
-		200: $fudis-color-yellow-light,
-		500: $fudis-color-white,
-		700: $fudis-color-green-light,
-		900: $fudis-color-gray-dark,
+		100: $color-red-light,
+		200: $color-yellow-light,
+		500: $color-white,
+		700: $color-green-light,
+		900: $color-gray-dark,
 	),
 );

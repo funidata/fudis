@@ -3,7 +3,7 @@
 @import './palette';
 
 // Angular Material default typography styling
-$fudis-typography: mat.define-typography-config(
+$typography: mat.define-typography-config(
   $font-family: "Fira Sans",
   // fudis-heading-xxl
   $display-1: mat.define-typography-level(2.25rem, 2.5rem, 500),
@@ -33,27 +33,27 @@ $fudis-typography: mat.define-typography-config(
   $button: mat.define-typography-level(0.875rem, 1rem, 500),
 );
 
-@include mat.core($fudis-typography);
+@include mat.core($typography);
 
-$fudis-theme: mat.define-light-theme(
+$theme: mat.define-light-theme(
   (
     color: (
-      primary: mat.define-palette($fudis-palette-map-primary, 500),
-      accent: mat.define-palette($fudis-palette-map-accent, 500),
+      primary: mat.define-palette($palette-map-primary, 500),
+      accent: mat.define-palette($palette-map-accent, 500),
     ),
-    typography: $fudis-typography,
+    typography: $typography,
   )
 );
-$fudis-datepicker-theme: mat.define-light-theme(
+$datepicker-theme: mat.define-light-theme(
   (
     color: (
-      primary: mat.define-palette($fudis-palette-map-primary, 100),
-      accent: mat.define-palette($fudis-palette-map-accent, 500),
+      primary: mat.define-palette($palette-map-primary, 100),
+      accent: mat.define-palette($palette-map-accent, 500),
     ),
-    typography: $fudis-typography,
+    typography: $typography,
   )
 );
 
 // Emit theme-dependent styles for common features used across multiple Material components.
-@include mat.core-theme($fudis-theme);
-@include mat.datepicker-theme($fudis-datepicker-theme);
+@include mat.core-theme($theme);
+@include mat.datepicker-theme($datepicker-theme);

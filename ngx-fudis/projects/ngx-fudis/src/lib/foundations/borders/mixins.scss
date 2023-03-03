@@ -7,32 +7,32 @@
 
 // Generates border, i. e.:
 // border: 2px solid $primary-dark;
-@mixin fudis-border($width, $style, $color) {
-	@if map_has_key(spacing.$fudis-pixel-tokens, $width) and map_has_key(borderTokens.$fudis-border-styles, $style) and map_has_key(colors.$fudis-colors, $color) {
-		border: map.get(spacing.$fudis-pixel-tokens, $width) map.get(borderTokens.$fudis-border-styles, $style) map.get(colors.$fudis-colors, $color);
+@mixin border($width, $style, $color) {
+	@if map_has_key(spacing.$pixel-tokens, $width) and map_has_key(borderTokens.$border-styles, $style) and map_has_key(colors.$colors, $color) {
+		border: map.get(spacing.$pixel-tokens, $width) map.get(borderTokens.$border-styles, $style) map.get(colors.$colors, $color);
 	}
 
  @else {
-		@error 'Unknown fudis-border parameter. Please check foundations/borders/mixins.scss for accepted arguments.';
+		@error 'Unknown border parameter. Please check foundations/borders/mixins.scss for accepted arguments.';
 	}
 }
 
 // Generates outline, i. e.:
 // outline: 2px solid $primary-dark;
-@mixin fudis-outline($width, $style, $color) {
-	@if map_has_key(spacing.$fudis-pixel-tokens, $width) and map_has_key(borderTokens.$fudis-border-styles, $style) and map_has_key(colors.$fudis-colors, $color) {
-		outline: map.get(spacing.$fudis-pixel-tokens, $width) map.get(borderTokens.$fudis-border-styles, $style) map.get(colors.$fudis-colors, $color);
-		outline-offset: -(map.get(spacing.$fudis-pixel-tokens, $width));
+@mixin outline($width, $style, $color) {
+	@if map_has_key(spacing.$pixel-tokens, $width) and map_has_key(borderTokens.$border-styles, $style) and map_has_key(colors.$colors, $color) {
+		outline: map.get(spacing.$pixel-tokens, $width) map.get(borderTokens.$border-styles, $style) map.get(colors.$colors, $color);
+		outline-offset: -(map.get(spacing.$pixel-tokens, $width));
 	}
 
  @else {
-		@error 'Unknown fudis-border parameter. Please check foundations/borders/mixins.scss for accepted arguments.';
+		@error 'Unknown border parameter. Please check foundations/borders/mixins.scss for accepted arguments.';
 	}
 }
 
-@mixin fudis-border-radius($width) {
-	@if map_has_key(spacing.$fudis-pixel-tokens, $width) {
-		border-radius: map.get(spacing.$fudis-pixel-tokens, $width);
+@mixin border-radius($width) {
+	@if map_has_key(spacing.$pixel-tokens, $width) {
+		border-radius: map.get(spacing.$pixel-tokens, $width);
 	}
 
  @else {
@@ -40,6 +40,6 @@
 	}
 }
 
-@mixin fudis-border-none() {
+@mixin border-none() {
 	border: none;
 }

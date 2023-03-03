@@ -14,7 +14,7 @@
 	}
 
 	&__button {
-		@include borders.fudis-border-none;
-		@include colorMixins.fudis-bg-color('transparent');
+		@include borders.border-none;
+		@include colorMixins.bg-color('transparent');
 	}
 }

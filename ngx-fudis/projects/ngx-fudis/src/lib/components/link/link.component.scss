@@ -11,15 +11,15 @@
 		}
 
 		&:focus {
-			@include focus.fudis-focus-generic;
+			@include focus.focus-generic;
 		}
 
 		&__primary {
-			@include colors.fudis-text-color('primary');
+			@include colors.text-color('primary');
 		}
 
 		&__default {
-			@include colors.fudis-text-color('gray-dark');
+			@include colors.text-color('gray-dark');
 		}
 
 		&__external {
@@ -28,15 +28,15 @@
 		}
 
 		&__inherit {
-			@include typography.fudis-text-link-inherit-typography;
+			@include typography.text-link-inherit-typography;
 		}
 	
 		&__m {
-			@include typography.fudis-text-link-m-typography;
+			@include typography.text-link-m-typography;
 		}
 
 		&__l {
-			@include typography.fudis-text-link-l-typography;
+			@include typography.text-link-l-typography;
 		}
 	}
 }

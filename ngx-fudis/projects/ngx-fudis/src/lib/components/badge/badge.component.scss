@@ -4,39 +4,39 @@
 @use '../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-badge {
-	@include border.fudis-border-radius('2px');
-	@include typography.fudis-badge-typography;
-	@include colorMixin.fudis-text-color('gray-dark');
+	@include border.border-radius('2px');
+	@include typography.badge-typography;
+	@include colorMixin.text-color('gray-dark');
 
-	padding: spacing.$fudis-pixel-1 spacing.$fudis-pixel-3;
+	padding: spacing.$pixel-1 spacing.$pixel-3;
 
 	&__accent {
-		@include colorMixin.fudis-bg-color('yellow-light');
-		@include border.fudis-border('1px', 'solid', 'yellow');
+		@include colorMixin.bg-color('yellow-light');
+		@include border.border('1px', 'solid', 'yellow');
 	}
 
 	&__danger {
-		@include colorMixin.fudis-bg-color('red-light');
-		@include border.fudis-border('1px', 'solid', 'red');
+		@include colorMixin.bg-color('red-light');
+		@include border.border('1px', 'solid', 'red');
 	}
 
 	&__primary {
-		@include colorMixin.fudis-bg-color('primary-light');
-		@include border.fudis-border('1px', 'solid', 'primary');
+		@include colorMixin.bg-color('primary-light');
+		@include border.border('1px', 'solid', 'primary');
 	}
 
 	&__secondary {
-		@include colorMixin.fudis-bg-color('gray-extra-light');
-		@include border.fudis-border('1px', 'solid', 'gray-middle');
+		@include colorMixin.bg-color('gray-extra-light');
+		@include border.border('1px', 'solid', 'gray-middle');
 	}
 
 	&__success {
-		@include colorMixin.fudis-bg-color('green-light');
-		@include border.fudis-border('1px', 'solid', 'green');
+		@include colorMixin.bg-color('green-light');
+		@include border.border('1px', 'solid', 'green');
 	}
 
 	// Add styles for the outer component shell <fudis-badge> itself (this margin-left is just an example)
 	&-host {
-		margin-left: spacing.$fudis-spacing-xxs;
+		margin-left: spacing.$spacing-xxs;
 	}
 }
