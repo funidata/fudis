@@ -56,7 +56,7 @@
 			padding-left: spacing.$spacing-xs;
 	
 			&::before {
-				@include colorMixins.fudis-bg-color('gray-light');
+				@include colorMixins.bg-color('gray-light');
 
 				display: inline-block;
 				position: absolute;
