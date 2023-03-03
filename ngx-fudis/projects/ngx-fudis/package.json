@@ -1,6 +1,6 @@
 {
 	"name": "@funidata/ngx-fudis",
-	"version": "0.0.21",
+	"version": "0.0.22",
 	"schematics": "./schematics/collection.json",
 	"ng-add": {
 		"save": "dependencies"
