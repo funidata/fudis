@@ -4,7 +4,7 @@
 @use '../../foundations/breakpoints/tokens.scss' as breakpointTokens;
 @use '../../foundations/grid/mixins.scss' as grid;
 @use '../../foundations/grid/tokens.scss' as gridTokens;
-@use '../../foundations/spacing/tokens.scss' as spacingTokens;
+@use '../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-grid {
 	display: grid;
@@ -47,70 +47,70 @@
 
 	&__margin {
 		&__top {
-			&__zero {
-				margin-top: spacingTokens.$spacing-zero;
+			&__none {
+				margin-top: spacing.$spacing-zero;
 			}
 
 			&__xxs {
-				margin-top: spacingTokens.$spacing-xxs;
+				margin-top: spacing.$spacing-xxs;
 			}
 
 			&__xs {
-				margin-top: spacingTokens.$spacing-xs;
+				margin-top: spacing.$spacing-xs;
 			}
 
 			&__s {
-				margin-top: spacingTokens.$spacing-s;
+				margin-top: spacing.$spacing-s;
 			}
 
 			&__m {
-				margin-top: spacingTokens.$spacing-m;
+				margin-top: spacing.$spacing-m;
 			}
 
 			&__l {
-				margin-top: spacingTokens.$spacing-l;
+				margin-top: spacing.$spacing-l;
 			}
 
 			&__xl {
-				margin-top: spacingTokens.$spacing-xl;
+				margin-top: spacing.$spacing-xl;
 			}
 
 			&__xxl {
-				margin-top: spacingTokens.$spacing-xxl;
+				margin-top: spacing.$spacing-xxl;
 			}
 		}
 
 		&__bottom {
-			&__zero {
-				margin-bottom: spacingTokens.$spacing-zero;
+			&__none {
+				margin-bottom: spacing.$spacing-zero;
 			}
 
 			&__xxs {
-				margin-bottom: spacingTokens.$spacing-xxs;
+				margin-bottom: spacing.$spacing-xxs;
 			}
 
 			&__xs {
-				margin-bottom: spacingTokens.$spacing-xs;
+				margin-bottom: spacing.$spacing-xs;
 			}
 
 			&__s {
-				margin-bottom: spacingTokens.$spacing-s;
+				margin-bottom: spacing.$spacing-s;
 			}
 
 			&__m {
-				margin-bottom: spacingTokens.$spacing-m;
+				margin-bottom: spacing.$spacing-m;
 			}
 
 			&__l {
-				margin-bottom: spacingTokens.$spacing-l;
+				margin-bottom: spacing.$spacing-l;
 			}
 
 			&__xl {
-				margin-bottom: spacingTokens.$spacing-xl;
+				margin-bottom: spacing.$spacing-xl;
 			}
 
 			&__xxl {
-				margin-bottom: spacingTokens.$spacing-xxl;
+				margin-bottom: spacing.$spacing-xxl;
 			}
 		}
 	}
@@ -119,7 +119,6 @@
 	By default Grid's @Input width is XXL. When viewport gets narrower, it will get corresponding max-widths of each smaller breakpoint from XXL to smallest XS.
 
 	On the other end, if @Input width is the smallest of XS, it gets only one max-width of XS and doesn't need any other breakpoint width logic.
-
 	*/
 
 	&__xxl {
@@ -199,7 +198,7 @@
 
 		@include breakpoints.breakpoint('m') {
 			@include grid.grid-max-width('m')
-		}	
+		}
 	}
 
 	&__s {
@@ -214,5 +213,73 @@
 
 	&__xs {
 		@include grid.grid-max-width('xs')
+	}
+
+	&__row-gap {
+		&__none {
+			row-gap: spacing.$spacing-zero;
+		}
+
+		&__xxs {
+			row-gap: spacing.$spacing-xxs;
+		}
+
+		&__xs {
+			row-gap: spacing.$spacing-xs;
+		}
+
+		&__s {
+			row-gap: spacing.$spacing-s;
+		}
+
+		&__m {
+			row-gap: spacing.$spacing-m;
+		}
+
+		&__l {
+			row-gap: spacing.$spacing-l;
+		}
+
+		&__xl {
+			row-gap: spacing.$spacing-xl;
+		}
+
+		&__xxl {
+			row-gap: spacing.$spacing-xxl;
+		}
+	}
+
+	&__column-gap {
+		&__none {
+			column-gap: spacing.$spacing-zero;
+		}
+
+		&__xxs {
+			column-gap: spacing.$spacing-xxs;
+		}
+
+		&__xs {
+			column-gap: spacing.$spacing-xs;
+		}
+
+		&__s {
+			column-gap: spacing.$spacing-s;
+		}
+
+		&__m {
+			column-gap: spacing.$spacing-m;
+		}
+
+		&__l {
+			column-gap: spacing.$spacing-l;
+		}
+
+		&__xl {
+			column-gap: spacing.$spacing-xl;
+		}
+
+		&__xxl {
+			column-gap: spacing.$spacing-xxl;
+		}
 	}
 }

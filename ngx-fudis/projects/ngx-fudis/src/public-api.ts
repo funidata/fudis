@@ -17,6 +17,7 @@ export { DropdownComponent } from './lib/components/form/dropdown/dropdown.compo
 export { ExpandableComponent } from './lib/components/expandable/expandable.component';
 export { ExpandableContentDirective } from './lib/components/expandable/expandable-content.directive';
 export { GridComponent } from './lib/components/grid/grid.component';
+export { GridDirective } from './lib/components/grid/grid.directive';
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
 export { IconComponent } from './lib/components/icon/icon.component';
 export { LegendComponent } from './lib/components/form/legend/legend.component';

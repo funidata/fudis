@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { IFudisErrorMessages, IFudisDropdownOption } from '../../../types/forms';
 import { GuidanceComponent } from '../guidance/guidance.component';
@@ -9,7 +9,7 @@ import { GuidanceComponent } from '../guidance/guidance.component';
 	styleUrls: ['./dropdown.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class DropdownComponent {
+export class DropdownComponent implements OnInit {
 	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
 
 	/**
@@ -62,7 +62,13 @@ export class DropdownComponent {
 	 */
 	@Input() size?: 's' | 'm' | 'l' = 'l';
 
-	requiredValidator = Validators.required;
+	required: boolean = false;
+
+	ngOnInit(): void {
+		if (this.control.hasValidator(Validators.required)) {
+			this.required = true;
+		}
+	}
 
 	handleBlur(): void {
 		this.guidanceToUpdate.checkErrors();

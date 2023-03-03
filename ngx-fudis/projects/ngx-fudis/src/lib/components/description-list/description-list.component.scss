@@ -4,17 +4,28 @@
 @use '../../foundations/colors/tokens.scss' as color;
 @use '../../foundations/spacing/tokens.scss' as spacing;
 @use '../../foundations/breakpoints/mixins.scss' as breakpoint;
+@forward '../grid/grid.component.scss';
 
 .fudis-description-list {
-	columns: 1;
+	margin: 0;
 
-	&__item {
-		break-inside: avoid-column;
+	&__disabled-grid {
+		columns: 1;
 
-		&:not(:last-of-type) {
-			margin-bottom: spacing.$spacing-m;
+		&__item {
+			break-inside: avoid-column;
+
+			&:not(:last-of-type) {
+				margin-bottom: spacing.$spacing-m;
+			}
 		}
 
+		@include breakpoint.breakpoint('m') {
+			columns: 2;
+		}
+	}
+
+	&__item {
 		&__key {
 			@include typography.description-list-key-typography;
 			@include colorMixins.text-color('gray-dark');
@@ -37,14 +48,16 @@
 			font-weight: typographyTokens.$font-weight-regular;
 		}
 	}
-
-	@include breakpoint.breakpoint('s') {
-		columns: 2;
-	}
 }
 
 .fudis-description-list-compact {
-	columns: 1;
+	&__disabled-grid {
+		columns: 1;
+
+		@include breakpoint.breakpoint('m') {
+			columns: 2;
+		}
+	}
 
 	&__item {
 		&__key {
@@ -76,9 +89,5 @@
 			margin-left: 0;
 			padding-left: spacing.$spacing-xxs;
 		}
-	}
-
-	@include breakpoint.breakpoint('s') {
-		columns: 2;
 	}
 }

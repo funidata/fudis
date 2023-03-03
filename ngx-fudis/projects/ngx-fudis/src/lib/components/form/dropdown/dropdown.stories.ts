@@ -14,23 +14,34 @@ export default {
 	argTypes: {},
 } as Meta;
 
+const html = String.raw;
+
 const Template: Story<DropdownComponent> = (args: DropdownComponent) => ({
 	props: args,
-	template: `
-	<fudis-dropdown size="l" [multipleOption]="multipleOption" [placeholder]="placeholder" [errorMsg]="errorMsg" [control]="control" [options]="options" [requiredText]="requiredText" [label]="label" [id]="id" [helpText]="helpText"></fudis-dropdown>
-	
-	<ng-container *ngIf="control.value.length > 0">
-	<ng-container *ngFor="let value of control.value">
-	<fudis-body-text>Looks picked a pet with  'viewValue' of: {{value.viewValue}}</fudis-body-text>
-	<fudis-body-text>And it's technical beep boop 'value' is: {{value.value}}</fudis-body-text>
-	</ng-container>
-	</ng-container>
+	template: html`
+		<fudis-dropdown
+			size="l"
+			[multipleOption]="multipleOption"
+			[placeholder]="placeholder"
+			[errorMsg]="errorMsg"
+			[control]="control"
+			[options]="options"
+			[requiredText]="requiredText"
+			[label]="label"
+			[id]="id"
+			[helpText]="helpText"></fudis-dropdown>
 
-	<ng-container *ngIf="control.value.value">
-	<fudis-body-text>Looks picked a pet with 'viewValue' of: {{control.value.viewValue}}</fudis-body-text>
-	<fudis-body-text>And it's technical beep boop 'value' is: {{control.value.value}}</fudis-body-text>
-	</ng-container>
-	
+		<ng-container *ngIf="control.value.length > 0">
+			<ng-container *ngFor="let value of control.value">
+				<fudis-body-text>Looks picked a pet with 'viewValue' of: {{value.viewValue}}</fudis-body-text>
+				<fudis-body-text>And it's technical beep boop 'value' is: {{value.value}}</fudis-body-text>
+			</ng-container>
+		</ng-container>
+
+		<ng-container *ngIf="control.value.value">
+			<fudis-body-text>Looks picked a pet with 'viewValue' of: {{control.value.viewValue}}</fudis-body-text>
+			<fudis-body-text>And it's technical beep boop 'value' is: {{control.value.value}}</fudis-body-text>
+		</ng-container>
 	`,
 });
 
@@ -38,6 +49,7 @@ export const SingleSelect = Template.bind({});
 SingleSelect.args = {
 	errorMsg: { required: "It is necessary to choose a pet. It's good for your health!" },
 	requiredText: 'Required',
+	required: true,
 	label: 'Select a pet',
 	placeholder: 'Choose a pet',
 	multipleOption: false,
@@ -63,6 +75,7 @@ MultiSelect.args = {
 	},
 	multipleOption: true,
 	requiredText: 'Required',
+	required: true,
 	label: 'Select from two to three pets',
 	placeholder: 'Choose a pet',
 	control: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(3)]),
