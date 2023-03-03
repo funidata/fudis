@@ -2,5 +2,5 @@
 @use '../../foundations/borders/mixins.scss' as borders;
 
 .fudis-dialog-panel {
-	@include bordersborder('2px', 'solid', 'gray-dark');
+	@include borders.border('2px', 'solid', 'gray-dark');
 }
