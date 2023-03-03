@@ -45,8 +45,8 @@ To use foundations in component's scss file, import it with SCSS's `@use` featur
 @use '../path/to/foundations/colors/mixins.scss' as colorMixins;
 
 .fudis-my-new-component{
-	@include colorMixins.fudis-color('white')
-	@include colorMixins.fudis-bg-color('primary')
+	@include colorMixinscolor('white')
+	@include colorMixinsbg-color('primary')
 
 	&__inner-svg-icon{
 		fill: colorTokens.$fudis-color-primary-light;

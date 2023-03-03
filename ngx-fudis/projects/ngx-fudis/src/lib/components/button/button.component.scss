@@ -6,30 +6,30 @@
 @use '../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-button {
-	@include borders.fudis-border-radius('2px');
-	@include colors.fudis-bg-color('transparent');  
-	@include typography.fudis-button-typography;
-	@include borders.fudis-border('2px', 'solid', 'primary');
+	@include borders.border-radius('2px');
+	@include colors.bg-color('transparent');  
+	@include typography.button-typography;
+	@include borders.border('2px', 'solid', 'primary');
 
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
-	padding: 0 spacing.$fudis-spacing-xs;
-	min-width: spacing.$fudis-spacing-xxl;
+	padding: 0 spacing.$spacing-xs;
+	min-width: spacing.$spacing-xxl;
 
 	&:focus {
-		@include focus.fudis-focus-generic;
+		@include focus.focus-generic;
 	}
 
 	&[aria-disabled="true"] {
-		@include colors.fudis-text-color('gray-dark');
-		@include colors.fudis-bg-color('gray-light');
-		@include borders.fudis-border('2px', 'solid', 'transparent');
-		@include borders.fudis-outline('1px', 'dashed', 'gray-middle');
+		@include colors.text-color('gray-dark');
+		@include colors.bg-color('gray-light');
+		@include borders.border('2px', 'solid', 'transparent');
+		@include borders.outline('1px', 'dashed', 'gray-middle');
 
 		&:focus {
-			@include focus.fudis-focus-generic;
+			@include focus.focus-generic;
 		}
 	}
 
@@ -38,31 +38,31 @@
 	}
 
 	&__primary {
-		@include colors.fudis-text-color('white');
-		@include colors.fudis-bg-color('primary');
+		@include colors.text-color('white');
+		@include colors.bg-color('primary');
 	}
 
 	&__secondary {
-		@include colors.fudis-text-color('primary');
-		@include colors.fudis-bg-color('white');
+		@include colors.text-color('primary');
+		@include colors.bg-color('white');
 	}
 
 	&__tertiary {
-		@include colors.fudis-text-color('primary');
-		@include borders.fudis-border('2px', 'solid', 'transparent');
+		@include colors.text-color('primary');
+		@include borders.border('2px', 'solid', 'transparent');
 	}
 
 	&__small {
-		height: spacing.$fudis-spacing-m;
+		height: spacing.$spacing-m;
 	}
 
 	&__medium {
-		height: spacing.$fudis-spacing-l;
+		height: spacing.$spacing-l;
 	}
 
 	&__icon {
 		position: relative;
-		top: spacing.$fudis-pixel-2;
-		margin-left: -(spacing.$fudis-spacing-xxs);
+		top: spacing.$pixel-2;
+		margin-left: -(spacing.$spacing-xxs);
 	}
 }

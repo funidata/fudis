@@ -2,11 +2,11 @@
 @use '@angular/material' as mat;
 @import './palette';
 
-$fudis-color-primary: mat.define-palette($fudis-palette, 500);
-$fudis-accent: mat.define-palette($accent-palette, 500);
+$color-primary: mat.define-palette($palette, 500);
+$accent: mat.define-palette($accent-palette, 500);
 
 // Angular Material default typography styling
-$fudis-typography: mat.define-typography-config(
+$typography: mat.define-typography-config(
   $font-family: "Fira Sans",
   // fudis-heading-xxl
   $display-1: mat.define-typography-level(2.25rem, 2.5rem, 500),
@@ -36,17 +36,17 @@ $fudis-typography: mat.define-typography-config(
   $button: mat.define-typography-level(0.875rem, 1rem, 500),
 );
 
-@include mat.core($fudis-typography);
+@include mat.core($typography);
 
-$fudis-theme: mat.define-light-theme(
+$theme: mat.define-light-theme(
   (
     color: (
-      primary: $fudis-color-primary,
-      accent: $fudis-accent,
+      primary: $color-primary,
+      accent: $accent,
     ),
-    typography: $fudis-typography,
+    typography: $typography,
   )
 );
 
 // Emit theme-dependent styles for common features used across multiple Material components.
-@include mat.core-theme($fudis-theme);
+@include mat.core-theme($theme);

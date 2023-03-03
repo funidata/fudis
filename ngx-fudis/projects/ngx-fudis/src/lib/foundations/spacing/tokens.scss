@@ -3,22 +3,22 @@
 
 // Based on default 16px base value
 
-$fudis-spacing-zero: 0; // 0px
-$fudis-spacing-xxs: 0.25rem; // 4px
-$fudis-spacing-xs: 0.5rem; // 8px
-$fudis-spacing-s: 1rem; // 16px
-$fudis-spacing-m: 1.5rem; // 24px
-$fudis-spacing-l: 2rem; // 32px
-$fudis-spacing-xl: 2.5rem; // 40px
-$fudis-spacing-xxl: 4rem; // 64px
+$spacing-zero: 0; // 0px
+$spacing-xxs: 0.25rem; // 4px
+$spacing-xs: 0.5rem; // 8px
+$spacing-s: 1rem; // 16px
+$spacing-m: 1.5rem; // 24px
+$spacing-l: 2rem; // 32px
+$spacing-xl: 2.5rem; // 40px
+$spacing-xxl: 4rem; // 64px
 
-$fudis-pixel-1: 1px;
-$fudis-pixel-2: 2px;
-$fudis-pixel-3: 3px;
+$pixel-1: 1px;
+$pixel-2: 2px;
+$pixel-3: 3px;
 
 // Used with borders, border-radius and letter-spacing mixins. Any value >=4px should be used from spacings values above.
-$fudis-pixel-tokens: (
-	'1px': $fudis-pixel-1,
-  '2px': $fudis-pixel-2,
-	'3px': $fudis-pixel-3
+$pixel-tokens: (
+	'1px': $pixel-1,
+  '2px': $pixel-2,
+	'3px': $pixel-3
 );

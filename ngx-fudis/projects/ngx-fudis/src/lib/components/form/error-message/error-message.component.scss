@@ -3,9 +3,9 @@
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
 
 .fudis-error-message {
-	@include colorMixins.fudis-text-color('red');
-	@include typography.fudis-body-s-regular;
+	@include colorMixins.text-color('red');
+	@include typography.body-text-s-regular;
 
-	margin-top: spacing.$fudis-spacing-xs;
-	margin-bottom: spacing.$fudis-spacing-xs
+	margin-top: spacing.$spacing-xs;
+	margin-bottom: spacing.$spacing-xs
 }

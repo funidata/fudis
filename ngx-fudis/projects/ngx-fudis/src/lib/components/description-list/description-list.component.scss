@@ -12,33 +12,33 @@
 		break-inside: avoid-column;
 
 		&:not(:last-of-type) {
-			margin-bottom: spacing.$fudis-spacing-m;
+			margin-bottom: spacing.$spacing-m;
 		}
 
 		&__key {
-			@include typography.fudis-description-list-key-typography;
-			@include colorMixins.fudis-text-color('gray-dark');
+			@include typography.description-list-key-typography;
+			@include colorMixins.text-color('gray-dark');
 	
-			margin-bottom: spacing.$fudis-spacing-xs;
+			margin-bottom: spacing.$spacing-xs;
 		}
 	
 		&__value {
-			@include typography.fudis-description-list-value-typography;
-			@include colorMixins.fudis-text-color('gray-dark');
+			@include typography.description-list-value-typography;
+			@include colorMixins.text-color('gray-dark');
 	
 			margin-left: 0;
 		}
 	
 		&__sub-heading {
-			@include colorMixins.fudis-text-color('gray-dark');
+			@include colorMixins.text-color('gray-dark');
 	
 			margin-top: 0;
-			margin-bottom: spacing.$fudis-spacing-xxs;
-			font-weight: typographyTokens.$fudis-regular;
+			margin-bottom: spacing.$spacing-xxs;
+			font-weight: typographyTokens.$font-weight-regular;
 		}
 	}
 
-	@include breakpoint.fudis-breakpoint('s') {
+	@include breakpoint.breakpoint('s') {
 		columns: 2;
 	}
 }
@@ -48,36 +48,36 @@
 
 	&__item {
 		&__key {
-			@include typography.fudis-description-list-compact-key-typography;
-			@include colorMixins.fudis-text-color('gray-dark');
+			@include typography.description-list-compact-key-typography;
+			@include colorMixins.text-color('gray-dark');
 	
 			display: inline-block;
 			position: relative;
-			padding-left: spacing.$fudis-spacing-xs;
+			padding-left: spacing.$spacing-xs;
 	
 			&::before {
 				display: inline-block;
 				position: absolute;
-				top: spacing.$fudis-pixel-2;
+				top: spacing.$pixel-2;
 				left: 0;
-				background: color.$fudis-color-gray-light;
-				width: spacing.$fudis-pixel-1;
+				background: color.$color-gray-light;
+				width: spacing.$pixel-1;
 				height: 80%;
 				content: "";
 			}
 		}
 	
 		&__value {
-			@include typography.fudis-description-list-compact-value-typography;
-			@include colorMixins.fudis-text-color('gray-dark');
+			@include typography.description-list-compact-value-typography;
+			@include colorMixins.text-color('gray-dark');
 	
 			display: inline;
 			margin-left: 0;
-			padding-left: spacing.$fudis-spacing-xxs;
+			padding-left: spacing.$spacing-xxs;
 		}
 	}
 
-	@include breakpoint.fudis-breakpoint('s') {
+	@include breakpoint.breakpoint('s') {
 		columns: 2;
 	}
 }

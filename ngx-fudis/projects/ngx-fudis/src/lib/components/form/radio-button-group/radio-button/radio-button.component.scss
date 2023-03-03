@@ -6,8 +6,8 @@
 @use '../../../../foundations/focus/mixins.scss' as focus; 
 
 .fudis-radio-button {
-	@include typography.fudis-body-m-regular;
-	@include colorMixins.fudis-text-color('gray-dark');
+	@include typography.body-text-m-regular;
+	@include colorMixins.text-color('gray-dark');
 
 	display: inline-block;
 	display: block;
@@ -18,7 +18,7 @@
 
 	&__label {
 		margin-bottom: 0;
-		padding-left: spacing.$fudis-spacing-s;
+		padding-left: spacing.$spacing-s;
 	}
 	
 	/* Radio button circle */
@@ -28,7 +28,7 @@
 		padding-left: 0;
 
 		&__control {
-			@include borders.fudis-border('1px', 'solid', 'gray-middle');	
+			@include borders.border('1px', 'solid', 'gray-middle');	
 	
 			display: flex;
 			top: 0;
@@ -36,22 +36,22 @@
 			align-items: center;
 			justify-content: center;
 			border-radius: 50%;
-			width: spacing.$fudis-spacing-m;
-			min-width: spacing.$fudis-spacing-m;
-			height: spacing.$fudis-spacing-m;
+			width: spacing.$spacing-m;
+			min-width: spacing.$spacing-m;
+			height: spacing.$spacing-m;
 	
 			&--invalid {
-				@include borders.fudis-border('1px', 'solid', 'red');
+				@include borders.border('1px', 'solid', 'red');
 				
-				box-shadow: 0 0 0 spacing.$fudis-pixel-3 colors.$fudis-color-red-light;
+				box-shadow: 0 0 0 spacing.$pixel-3 colors.$color-red-light;
 			}
 			
 			&__indicator {
-				@include colorMixins.fudis-bg-color('gray-dark');
+				@include colorMixins.bg-color('gray-dark');
 
 				border-radius: 50%;
-				width: spacing.$fudis-spacing-s;
-				height: spacing.$fudis-spacing-s;
+				width: spacing.$spacing-s;
+				height: spacing.$spacing-s;
 			}
 		}
 	}
@@ -68,7 +68,7 @@
 
 		/* stylelint-disable-next-line selector-class-pattern, selector-max-class */
 		&:focus + .fudis-radio-button__content .fudis-radio-button__content__control {
-				@include focus.fudis-focus-form-field;
+				@include focus.focus-form-field;
 		}
 	}
 }

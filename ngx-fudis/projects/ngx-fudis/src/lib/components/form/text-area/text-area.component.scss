@@ -5,28 +5,28 @@
 
 .fudis-text-area {
 	&__l {
-		max-width: calc(23 * spacing.$fudis-spacing-s);
+		max-width: calc(23 * spacing.$spacing-s);
 	}
 
 	&__m {
-		width: calc(14 * spacing.$fudis-spacing-s);
+		width: calc(14 * spacing.$spacing-s);
 	}
 
 	&__s {
-		max-width: calc(10 * spacing.$fudis-spacing-s);
+		max-width: calc(10 * spacing.$spacing-s);
 	}
 
 	&__input {
-		@include typography.fudis-text-field-input;
+		@include typography.text-field-input;
 
 		box-sizing: border-box;
 		display: block;
-		padding: spacing.$fudis-spacing-xxs;
+		padding: spacing.$spacing-xxs;
 		width: 100%;
 		resize: vertical; // Enable resizing the textarea only vertically. Can be also 'none' if we want to disable resizing all together
 
 		&--invalid {
-			@include border.fudis-border('1px', 'solid', 'red');
+			@include border.border('1px', 'solid', 'red');
 		}
 	}
 
@@ -36,27 +36,27 @@
 		width: 100%;
 
 		&__help-text {
-			@include colorMixins.fudis-text-color('gray-dark');
-			@include typography.fudis-body-s-regular;
+			@include colorMixins.text-color('gray-dark');
+			@include typography.body-text-s-regular;
 
-			margin-top: spacing.$fudis-spacing-xs;
+			margin-top: spacing.$spacing-xs;
 			text-transform: none;
 		}
 
 		&__error {
-			@include typography.fudis-body-s-regular;
-			@include colorMixins.fudis-text-color('red');
+			@include typography.body-text-s-regular;
+			@include colorMixins.text-color('red');
 
 			
 			text-transform: none;
 		}
 		
 		&__character-limit-indicator {
-			@include colorMixins.fudis-text-color('gray-dark');
-			@include typography.fudis-body-s-regular;
+			@include colorMixins.text-color('gray-dark');
+			@include typography.body-text-s-regular;
 
-			margin-top: spacing.$fudis-spacing-xs;
-			margin-left: spacing.$fudis-spacing-xs;
+			margin-top: spacing.$spacing-xs;
+			margin-left: spacing.$spacing-xs;
 
 			&__float-right {
 				margin-left: auto;
