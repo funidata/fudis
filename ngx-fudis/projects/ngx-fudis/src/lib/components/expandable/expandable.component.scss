@@ -23,7 +23,7 @@
 		&__title {
 			@include color.fudis-bg-color('gray-extra-light');
 			@include typography.fudis-expandable-regular-typography;
-			@include border.fudis-border-none('none');
+			@include border.fudis-border-none;
 
 			cursor: pointer;
 			padding: spacing.$fudis-spacing-xs;

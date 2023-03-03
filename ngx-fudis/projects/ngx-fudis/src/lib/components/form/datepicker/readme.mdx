@@ -1,0 +1,64 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+import { DatepickerComponent } from './datepicker.component';
+
+<Meta title="Datepicker" component={DatepickerComponent} />
+
+# Datepicker
+
+Fudis-datepicker is build using Angular Material Datepicker as a base.
+Datepicker allows user to select a date from valid options.
+
+## Examples
+
+<Canvas>
+	<Story id="components-form-datepicker--datepicker"></Story>
+</Canvas>
+
+## Usage Guidelines
+
+<br />
+
+### Mandatory properties
+
+Datepicker requires at least `label` and `id` properties for accessibility.
+
+### As a required form field
+
+If Datepicker is a **required** form field, provide `requiredText` string property, include `Validators.required` in the form control validators and include a `required` error message in the `errorMsg` property.
+
+### With minimum and maximum dates
+
+If you need minimum / maximum date selection range, add `min` and/or `max` properties to the component. Also provide `matDatepickerMin` and `matDatepickerMax` error messages for `errorMsg` property.
+
+## Error Handling
+
+- **Required** error is shown if input is required and
+  - if control is touched and value is empty or
+  - if date format is not valid
+- **matDatepickerMin** and/or **matDatepickerMax** error is shown
+  - if written date is outside the range of min and max
+
+## Localization
+
+Currently datepicker parses the display date to <code>DD.MM.YYYY</code> format and calendar's first day of the week is Monday by default.
+
+## Accessibility
+
+- Datepicker has label and id connected to the input
+- Guidance and error messages are connected to the input via id
+- Datepicker has a visible focus state both on input and calendar icon
+- Calendar dialog can be triggered from the calendar icon with keyboard <code>enter</code> and <code>space</code> key
+- User can navigate inside the calendar dialog with keyboard <code>arrow</code> keys
+- User can type the date directly to the input without opening the calendar dialog
+- Input can be focused even if it is disabled
+
+## Related components
+
+[Icon](/docs/components-icon--icon)
+
+[Angular Material Datepicker](https://material.angular.io/components/datepicker/overview)
+
+## Properties
+
+<ArgsTable of={DatepickerComponent} />

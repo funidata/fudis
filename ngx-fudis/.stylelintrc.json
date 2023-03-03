@@ -28,6 +28,7 @@
 		"block-closing-brace-empty-line-before": "never",
 		"property-disallowed-list": [
 			"color",
+			"background",
 			"background-color",
 			"border",
 			"outline",

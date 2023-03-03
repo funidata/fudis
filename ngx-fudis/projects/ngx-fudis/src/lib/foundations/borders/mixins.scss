@@ -1,3 +1,5 @@
+/* stylelint-disable declaration-property-value-disallowed-list */
+/* stylelint-disable property-disallowed-list */
 @use 'sass:map';
 @use '../colors/tokens.scss' as colors;
 @use '../spacing/tokens.scss' as spacing;
@@ -7,7 +9,6 @@
 // border: 2px solid $primary-dark;
 @mixin fudis-border($width, $style, $color) {
 	@if map_has_key(spacing.$fudis-pixel-tokens, $width) and map_has_key(borderTokens.$fudis-border-styles, $style) and map_has_key(colors.$fudis-colors, $color) {
-		/* stylelint-disable-next-line property-disallowed-list */
 		border: map.get(spacing.$fudis-pixel-tokens, $width) map.get(borderTokens.$fudis-border-styles, $style) map.get(colors.$fudis-colors, $color);
 	}
 
@@ -20,7 +21,6 @@
 // outline: 2px solid $primary-dark;
 @mixin fudis-outline($width, $style, $color) {
 	@if map_has_key(spacing.$fudis-pixel-tokens, $width) and map_has_key(borderTokens.$fudis-border-styles, $style) and map_has_key(colors.$fudis-colors, $color) {
-		/* stylelint-disable-next-line property-disallowed-list */
 		outline: map.get(spacing.$fudis-pixel-tokens, $width) map.get(borderTokens.$fudis-border-styles, $style) map.get(colors.$fudis-colors, $color);
 		outline-offset: -(map.get(spacing.$fudis-pixel-tokens, $width));
 	}
@@ -40,13 +40,6 @@
 	}
 }
 
-@mixin fudis-border-none($style) {
-	@if map_has_key(borderTokens.$fudis-border-styles, $style) {
-		/* stylelint-disable-next-line property-disallowed-list */
-		border: map.get(borderTokens.$fudis-border-styles, $style);
-	}
-
-	@else {
-		@error 'Unknown border of #{$style}. It can only be "none" for fudis-border-none mixin';
-	}
+@mixin fudis-border-none() {
+	border: none;
 }

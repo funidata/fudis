@@ -56,11 +56,12 @@
 			padding-left: spacing.$fudis-spacing-xs;
 	
 			&::before {
+				@include colorMixins.fudis-bg-color('gray-light');
+
 				display: inline-block;
 				position: absolute;
 				top: spacing.$fudis-pixel-2;
 				left: 0;
-				background: color.$fudis-color-gray-light;
 				width: spacing.$fudis-pixel-1;
 				height: 80%;
 				content: "";
