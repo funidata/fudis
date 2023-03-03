@@ -1,0 +1,41 @@
+# WIP
+# Should be merged with other Storybook workflows once ready.
+name: Publish Storybook by Version
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v3
+      - name: "Build"
+        run: |
+          cd ngx-fudis
+          npm ci
+          npx ng run storybook:build
+      - name: Rename build directory by version
+        run: |
+          cd .storybook/target
+          mv storybook-static ${GITHUB_REF#refs/*/}
+      - name: "Upload"
+        uses: actions/upload-pages-artifact@v1.0.7
+        with:
+          path: "ngx-fudis/.storybook/target"
+
+  deploy:
+    needs: build
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1.2.4

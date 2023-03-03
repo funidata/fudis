@@ -37,6 +37,7 @@ import { IconComponent } from './components/icon/icon.component';
 import { LabelComponent } from './components/form/label/label.component';
 import { LegendComponent } from './components/form/legend/legend.component';
 import { LinkComponent } from './components/link/link.component';
+import { NotificationComponent } from './components/notification/notification.component';
 import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
 import { RadioButtonGroupComponent } from './components/form/radio-button-group/radio-button-group.component';
 import { TextInputComponent } from './components/form/text-input/text-input.component';
@@ -75,6 +76,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		LabelComponent,
 		LegendComponent,
 		LinkComponent,
+		NotificationComponent,
 		RadioButtonComponent,
 		RadioButtonGroupComponent,
 		TextInputComponent,
@@ -124,6 +126,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		IconComponent,
 		LegendComponent,
 		LinkComponent,
+		NotificationComponent,
 		RadioButtonGroupComponent,
 		TextAreaComponent,
 		TextInputComponent,

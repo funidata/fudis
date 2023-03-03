@@ -1,21 +1,21 @@
 /* stylelint-disable property-disallowed-list */
 @use '../spacing/tokens.scss' as spacing;
 @use '../borders/mixins.scss' as borders;
-@import './tokens';
-@import '../colors/tokens';
+@use './tokens' as tokens;
+@use '../colors/tokens' as colors;
 
 @mixin fudis-focus-generic {
-	outline: $fudis-focus-generic-outline;
+	outline: tokens.$fudis-focus-generic-outline;
   outline-offset: spacing.$fudis-pixel-1;
-  box-shadow: 0 0 0 spacing.$fudis-spacing-xxs $fudis-color-white;
+  box-shadow: 0 0 0 spacing.$fudis-spacing-xxs colors.$fudis-color-white;
 }
 
 @mixin fudis-focus-form-field {
 	@include borders.fudis-border('1px', 'solid', 'focus-primary');
 
-  outline: $fudis-focus-form-field-outline;
+  outline: tokens.$fudis-focus-form-field-outline;
   outline-offset: -(spacing.$fudis-pixel-2);
-  box-shadow: 0 0 0 spacing.$fudis-pixel-1 $fudis-color-white;
+  box-shadow: 0 0 0 spacing.$fudis-pixel-1 colors.$fudis-color-white;
 }
 
 @mixin fudis-focus-checkbox {

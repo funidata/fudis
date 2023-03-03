@@ -1,6 +1,6 @@
 {
 	"name": "@funidata/ngx-fudis",
-	"version": "0.0.20",
+	"version": "0.0.22",
 	"schematics": "./schematics/collection.json",
 	"ng-add": {
 		"save": "dependencies"
@@ -10,6 +10,9 @@
 		"postbuild": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/ngx-fudis/"
 	},
 	"exports": {
+		".": {
+			"sass": "./_index.scss"
+		},
 		"./theme": {
 			"sass": "./src/lib/theme/fudis-theme.scss"
 		}
