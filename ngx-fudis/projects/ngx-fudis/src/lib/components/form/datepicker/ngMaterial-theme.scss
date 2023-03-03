@@ -23,42 +23,47 @@
 		}
 	}
 
-&__datepicker {
-	& .mat-calendar-body-selected {
-		@include colorMixins.fudis-bg-color('primary');
-		@include colorMixins.fudis-text-color('white');
-		@include borders.fudis-border('2px', 'solid', 'primary');
-
-		&:hover {
-			@include colorMixins.fudis-text-color('gray-dark');
-			@include colorMixins.fudis-bg-color('primary-light');
+	&__datepicker {
+		& .mat-calendar-body-selected {
+			@include colorMixins.fudis-bg-color('primary');
+			@include colorMixins.fudis-text-color('white');
 			@include borders.fudis-border('2px', 'solid', 'primary');
+
+			&:hover {
+				@include colorMixins.fudis-text-color('gray-dark');
+				@include colorMixins.fudis-bg-color('primary-light');
+				@include borders.fudis-border('2px', 'solid', 'primary');
+			}
+
+			&.mat-calendar-body-today {
+				box-shadow: none;
+			}
+
+			// &.mat-focus-indicator {
+			// 	@include colorMixins.fudis-text-color('gray-dark');
+			// 	@include colorMixins.fudis-bg-color('primary-light');
+			// }
 		}
 
-		&.mat-calendar-body-today {
-			box-shadow: none;
+		& .mat-calendar-controls {
+				& .mat-button {
+					@include colorMixins.fudis-bg-color('transparent');
+				}
+
+				& .mat-icon-button {
+					@include colorMixins.fudis-bg-color('transparent');
+				}
 		}
 
-		&.mat-focus-indicator {
+		& .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover > .mat-calendar-body-cell-content:not(.mat-calendar-body-comparison-identical) {
+			@include colorMixins.fudis-bg-color('primary-light');
+		}
+
+		& .mat-calendar-body-cell.mat-calendar-body-active .mat-calendar-body-selected {
 			@include colorMixins.fudis-text-color('gray-dark');
 			@include colorMixins.fudis-bg-color('primary-light');
 		}
 	}
-
-	& .mat-calendar-controls {
-			& .mat-button {
-				@include colorMixins.fudis-bg-color('transparent');
-			}
-
-			& .mat-icon-button {
-				@include colorMixins.fudis-bg-color('transparent');
-			}
-	}
-
-	& .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover > .mat-calendar-body-cell-content:not(.mat-calendar-body-comparison-identical) {
-		@include colorMixins.fudis-bg-color('primary-light');
-	}
-}
 }
 
 .mat-datepicker-close-button:focus {

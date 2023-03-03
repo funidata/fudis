@@ -35,8 +35,8 @@ const Template: Story<DatepickerComponent> = (args: DatepickerComponent) => ({
 		[minDate]="minDate" 
 		[maxDate]="maxDate">
 	</fudis-datepicker>
-	<p *ngIf=control.value>The date output is: {{ control.value }}</p>
-	<p *ngIf=control.value>The date output with Angular date pipe is: {{ control.value | date:'dd.MM.yyyy' }}</p>
+	<fudis-body-text *ngIf=control.value>The date output is: {{ control.value }}</fudis-body-text>
+	<fudis-body-text *ngIf=control.value>The date output with Angular date pipe is: {{ control.value | date:'dd.MM.yyyy' }}</fudis-body-text>
 	`,
 });
 

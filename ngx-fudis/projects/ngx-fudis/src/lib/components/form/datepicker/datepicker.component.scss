@@ -6,7 +6,6 @@
 @use '../../../foundations/focus/mixins.scss' as focus;
 
 .fudis-datepicker {
-	display: grid;
 	max-width: calc(23 * spacing.$fudis-spacing-s);
 
 	&__l {
@@ -29,7 +28,7 @@
 		@include borders.fudis-border('1px', 'solid', 'gray-dark');
 		@include borders.fudis-border-radius('2px');
 
-		padding: 0 0 0 spacing.$fudis-spacing-xxs;
+		padding: 0 0 0 spacing.$fudis-spacing-xs;
 		width: 100%; 
 		height: spacing.$fudis-spacing-l;
 
