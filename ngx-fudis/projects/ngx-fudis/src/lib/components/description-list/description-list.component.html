@@ -1,25 +1,52 @@
-<ng-container *ngIf="variant === 'regular'">
-	<dl class="fudis-description-list" role="list">
-		<div *ngFor="let item of data" class="fudis-description-list__item" role="listitem">
-			<dt class="fudis-description-list__item__key">
-				{{ item.key }}
-			</dt>
-			<dd class="fudis-description-list__item__value">
-				<p *ngIf="item.subHeading" class="fudis-description-list__item__sub-heading">{{ item.subHeading }}</p>
-				{{ item.value }}
-			</dd>
-		</div>
-	</dl>
-</ng-container>
+<dl
+	*ngIf="!disableGrid"
+	fudisGrid
+	[width]="width"
+	[align]="align"
+	[alignItemsX]="alignItemsX"
+	[alignItemsY]="alignItemsY"
+	[classes]="getClasses()"
+	[columnGap]="columnGap"
+	[rowGap]="variant === 'compact' ? 'none' : rowGap"
+	[columns]="columns"
+	[columnsXs]="columnsXs"
+	[columnsS]="columnsS"
+	[columnsM]="columnsM"
+	[columnsL]="columnsL"
+	[columnsXl]="columnsXl"
+	[columnsXxl]="columnsXxl"
+	[marginBottom]="marginBottom"
+	[marginTop]="marginTop"
+	role="list">
+	<ng-container *ngTemplateOutlet="variant === 'regular' ? regular : compact"> </ng-container>
+</dl>
 
-<ng-container *ngIf="variant === 'compact'">
-	<dl class="fudis-description-list-compact">
-		<div *ngFor="let item of data" class="fudis-description-list-compact__item">
-			<dt class="fudis-description-list-compact__item__key">{{ item.key }}:</dt>
-			<dd *ngIf="item.subHeading" class="fudis-description-list-compact__item__value">
-				{{ item.subHeading }} ({{ item.value }})
-			</dd>
-			<dd *ngIf="!item.subHeading" class="fudis-description-list-compact__item__value">{{ item.value }}</dd>
-		</div>
-	</dl>
-</ng-container>
+<dl *ngIf="disableGrid" [class]="getClasses()" role="list">
+	<ng-container *ngTemplateOutlet="variant === 'regular' ? regular : compact"> </ng-container>
+</dl>
+
+<ng-template #regular>
+	<div
+		*ngFor="let item of data"
+		class="fudis-description-list__item"
+		[class.fudis-description-list__disabled-grid__item]="disableGrid"
+		role="listitem">
+		<dt class="fudis-description-list__item__key">
+			{{ item.key }}
+		</dt>
+		<dd class="fudis-description-list__item__value">
+			<p *ngIf="item.subHeading" class="fudis-description-list__item__sub-heading">{{ item.subHeading }}</p>
+			{{ item.value }}
+		</dd>
+	</div>
+</ng-template>
+
+<ng-template #compact>
+	<div *ngFor="let item of data" class="fudis-description-list-compact__item">
+		<dt class="fudis-description-list-compact__item__key">{{ item.key }}:</dt>
+		<dd *ngIf="item.subHeading" class="fudis-description-list-compact__item__value">
+			{{ item.subHeading }} ({{ item.value }})
+		</dd>
+		<dd *ngIf="!item.subHeading" class="fudis-description-list-compact__item__value">{{ item.value }}</dd>
+	</div>
+</ng-template>

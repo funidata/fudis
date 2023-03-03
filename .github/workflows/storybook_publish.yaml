@@ -1,3 +1,5 @@
+# WIP
+# Should be merged with other Storybook workflows once ready.
 name: Publish Storybook
 
 on:
@@ -19,14 +21,17 @@ jobs:
       - name: "Upload"
         uses: actions/upload-pages-artifact@v1.0.7
         with:
-          path: "ngx-fudis/.storybook/target"
+          path: "ngx-fudis/.storybook/target/storybook-static"
 
   deploy:
+    needs: build
     permissions:
+      contents: read
       pages: write
       id-token: write
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages

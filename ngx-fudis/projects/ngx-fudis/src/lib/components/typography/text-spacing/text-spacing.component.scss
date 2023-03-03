@@ -7,13 +7,13 @@
 :host {
 		& .fudis-heading[size="xl"] {
 			& + .fudis-body-text p {
-				@include borders.fudis-border("2px", "solid", "red")
+				@include borders.border("2px", "solid", "red")
 			}
 		}
 
 		& .fudis-heading[size="l"] {
 			& + .fudis-body-text p {
-				@include borders.fudis-border("2px", "solid", "green")
+				@include borders.border("2px", "solid", "green")
 			}
 		}
 }

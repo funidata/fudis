@@ -3,25 +3,25 @@
 @use '../spacing/tokens.scss' as spacing;
 @use '../breakpoints/mixins.scss' as breakpoints;
 
-@mixin fudis-grid-max-width($width) {
-	@if map_has_key(tokens.$fudis-grid-widths, $width) {
-		$grid-width-value: map.get(tokens.$fudis-grid-widths, $width);
+@mixin grid-max-width($width) {
+	@if map_has_key(tokens.$grid-widths, $width) {
+		$grid-width-value: map.get(tokens.$grid-widths, $width);
 
     max-width: $grid-width-value;
 
 		@if $width == xl or $width == xxl {
-			row-gap: spacing.$fudis-spacing-l;
-			column-gap: spacing.$fudis-spacing-l;
+			row-gap: spacing.$spacing-l;
+			column-gap: spacing.$spacing-l;
 		}
 
 		@if $width == m or $width == l {
-			row-gap: spacing.$fudis-spacing-m;
-			column-gap: spacing.$fudis-spacing-m;
+			row-gap: spacing.$spacing-m;
+			column-gap: spacing.$spacing-m;
 		}
 
 		@if $width == s or $width == xs {
-			row-gap: spacing.$fudis-spacing-s;
-			column-gap: spacing.$fudis-spacing-s;
+			row-gap: spacing.$spacing-s;
+			column-gap: spacing.$spacing-s;
 		}
 	}
 
@@ -30,7 +30,7 @@
 	}
 }
 
-@mixin fudis-grid-xs-margins() {
-	margin-right: spacing.$fudis-spacing-s;
-	margin-left: spacing.$fudis-spacing-s;
+@mixin grid-xs-margins() {
+	margin-right: spacing.$spacing-s;
+	margin-left: spacing.$spacing-s;
 }

@@ -1,0 +1,38 @@
+<div class="fudis-datepicker fudis-datepicker__{{ size }}">
+	<fudis-label
+		[id]="'label_' + id"
+		[for]="id"
+		[text]="label"
+		[requiredText]="required && requiredText ? requiredText : null"></fudis-label>
+	<div class="fudis-datepicker__input-wrapper">
+		<input
+			(blur)="handleBlur()"
+			(dateChange)="handleSelectionChange()"
+			[id]="id"
+			[formControl]="control"
+			[matDatepicker]="picker"
+			[min]="minDate"
+			[max]="maxDate"
+			[readonly]="disabled"
+			class="fudis-datepicker__input"
+			[ngClass]="{
+				'fudis-datepicker__input--invalid': control.invalid && control.touched,
+				'fudis-datepicker__input--disabled': disabled
+			}"
+			[attr.required]="required"
+			[attr.aria-describedby]="id + '_guidance'" />
+		<mat-datepicker-toggle
+			[disabled]="disabled"
+			matSuffix
+			[for]="picker"
+			[disableRipple]="true"
+			class="fudis-datepicker__toggle">
+			<mat-icon matDatepickerToggleIcon>
+				<fudis-icon icon="calendar"></fudis-icon>
+			</mat-icon>
+		</mat-datepicker-toggle>
+		<mat-datepicker #picker panelClass="fudis-datepicker__datepicker"></mat-datepicker>
+	</div>
+	<fudis-guidance [helpText]="helpText" [id]="id + '_guidance'" [errorMsg]="errorMsg" [control]="control">
+	</fudis-guidance>
+</div>

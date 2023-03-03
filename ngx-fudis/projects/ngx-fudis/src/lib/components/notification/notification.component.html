@@ -1,0 +1,13 @@
+<div class="fudis-notification fudis-notification__{{ variant }}">
+	<fudis-icon [icon]="icon"></fudis-icon>
+	<fudis-body-text [size]="'l-regular'">
+		<ng-content></ng-content>
+		<fudis-link
+			*ngIf="link"
+			[linkTitle]="linkTitle"
+			href="{{ link }}"
+			[isExternalLink]="externalLink"
+			[externalLinkAriaLabel]="externalLinkAriaLabel"
+			color="default"></fudis-link>
+	</fudis-body-text>
+</div>

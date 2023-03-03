@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
 	selector: 'app-root',
@@ -8,6 +8,13 @@ import { FormControl } from '@angular/forms';
 		<fudis-heading tag="h1" size="xl">Welcome to Fudis sandbox </fudis-heading>
 
 		<form class="basic-flex-box">
+			<fudis-datepicker
+				[control]="datePickerControl"
+				[id]="'unique-datepicker-id-1'"
+				requiredText="Required"
+				[errorMsg]="{ required: 'Selected date is missing.' }"
+				label="Select a date"
+				helpText="Please select your favourite date."></fudis-datepicker>
 			<fudis-heading tag="h2" size="l">Text area and button</fudis-heading>
 			<fudis-text-area
 				[control]="textAreaControl"
@@ -55,5 +62,11 @@ import { FormControl } from '@angular/forms';
 export class AppComponent {
 	title = 'dev';
 
+	validatorsForDatepicker = [Validators.required];
+
 	textAreaControl: FormControl = new FormControl('');
+
+	datePickerControl: FormControl = new FormControl('', this.validatorsForDatepicker);
+
+	constructor(private formBuilder: FormBuilder) {}
 }

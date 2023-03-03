@@ -1,0 +1,71 @@
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../foundations/colors/tokens.scss' as colors;
+@use '../../../foundations/borders/mixins.scss' as borders;
+@use '../../../foundations/focus/mixins.scss' as focus;
+
+.fudis-datepicker {
+	max-width: calc(23 * spacing.$spacing-s);
+
+	&__l {
+		width: 100%;
+	}
+
+	&__m {
+		width: calc(14 * spacing.$spacing-s);
+	}
+
+	&__s {
+		max-width: calc(10 * spacing.$spacing-s);
+	}
+
+	&__input-wrapper {
+		position: relative;
+	}
+
+	&__input {
+		@include borders.border('1px', 'solid', 'gray-dark');
+		@include borders.border-radius('2px');
+
+		padding: 0 0 0 spacing.$spacing-xs;
+		width: 100%; 
+		height: spacing.$spacing-l;
+
+		&:focus {
+			@include focus.focus-form-field;
+		}
+
+		&--invalid {
+			border-color: colors.$color-red;
+		}
+
+		&--disabled {
+			@include borders.border('1px', 'dashed', 'gray-middle');	
+			@include colorMixins.bg-color('gray-extra-light');
+
+			cursor: default;
+		}
+	}
+
+	&__toggle {
+		position: absolute;
+		top: 50%;
+		right: -(spacing.$spacing-xxs);
+		transform: translateY(-50%);
+	}
+
+	&__datepicker {
+		@include colorMixins.bg-color('white');
+		@include borders.border('1px', 'solid', 'gray-dark');
+	}
+
+	&__guidance {
+		&__help-text {
+			@include colorMixins.text-color('gray-dark');
+			@include typography.body-text-s-regular;
+	
+			margin-top: spacing.$spacing-xs;
+		}
+	}
+}

@@ -45,8 +45,8 @@ To use foundations in component's scss file, import it with SCSS's `@use` featur
 @use '../path/to/foundations/colors/mixins.scss' as colorMixins;
 
 .fudis-my-new-component{
-	@include colorMixins.fudis-color('white')
-	@include colorMixins.fudis-bg-color('primary')
+	@include colorMixins.color('white')
+	@include colorMixins.bg-color('primary')
 
 	&__inner-svg-icon{
 		fill: colorTokens.$fudis-color-primary-light;
@@ -57,11 +57,12 @@ To use foundations in component's scss file, import it with SCSS's `@use` featur
 
 ### Angular Material Styles
 
-#### Theming
+Under `theme` folder resides `fudis-theme.scss` and `palette.scss` files which include main style configurations for Fudis components using Angular Material as their base.
 
-- Start applying themes to a Fudis component by using Material's theming API to make sure our custom theme is complete with regards to the component you are working on.
-  - This provides style safety for your component and the whole library by having a more complete theme to fallback on whenever component-specific styling comes short.
-  - **Do not** try to achieve too specific effects – _theme is a global high-level definition of styles!_
-- After exhausting your options to style a component via theming, apply component-level styles.
+If needed, you can create additional themes for the component and include that theme for a spesific component. E. g. `@include mat.datepicker-theme($fudis-datepicker-theme);` adds a spesific Datepicker theme just for the spesific datepicker component.
 
-- - _**It's recommended Not to override or modify Angular Material's CSS or DOM!**_ This will make upstream minor and patch changes potentially breaking changes for Fudis.
+#### Custom styling outside ngMaterial theming API
+
+**It's recommended Not to override or modify Angular Material's CSS or DOM!** This will make upstream minor and patch changes potentially breaking changes for Fudis.
+
+But if ngMaterial based Fudis component requires additional tweaking in styles, create a file with rest of the component files. E. g. to `components/form/datepicker` a file `ngMaterial-theme.scss`. Also import this file with `@use` to root `style.scss` file to make it available to application and ngMaterial.

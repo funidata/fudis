@@ -1,0 +1,49 @@
+@use 'sass:map';
+@use '../../foundations/colors/mixins.scss' as colors;
+@use '../../foundations/focus/mixins.scss' as focus;
+@use '../../foundations/borders/mixins.scss' as borders;
+@use '../../foundations/typography/mixins.scss' as typography;
+@use '../../foundations/spacing/tokens.scss' as spacing;
+
+.fudis-notification {
+	@include borders.border-radius('2px');
+
+	display: flex;
+	align-items: center;
+	margin: 0 spacing.$spacing-xxs;
+	padding: 0 spacing.$spacing-s 0 spacing.$spacing-xxs;
+	width: 100%;
+	min-height: spacing.$spacing-m;
+
+	fudis-link {
+		margin-left: spacing.$spacing-xxs;
+	}
+
+	&__warning {
+		@include colors.bg-color('yellow-light');
+		@include borders.border('2px', 'solid', 'yellow');
+
+		border-left-width: spacing.$spacing-xs;
+	}
+
+	&__danger {
+		@include colors.bg-color('red-light');
+		@include borders.border('2px', 'solid', 'red');
+
+		border-left-width: spacing.$spacing-xs;
+	}
+
+	&__success {
+		@include colors.bg-color('green-light');
+		@include borders.border('2px', 'solid', 'green');
+
+		border-left-width: spacing.$spacing-xs;
+	}
+
+	&__light {
+		@include colors.bg-color('primary-light');
+		@include borders.border('2px', 'solid', 'primary-dark');
+
+		border-left-width: spacing.$spacing-xs;
+	}
+}
