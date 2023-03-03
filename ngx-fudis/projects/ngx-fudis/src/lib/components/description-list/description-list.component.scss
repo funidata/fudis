@@ -54,7 +54,7 @@
 	&__disabled-grid {
 		columns: 1;
 
-		@include breakpoint.fudis-breakpoint('m') {
+		@include breakpoint.breakpoint('m') {
 			columns: 2;
 		}
 	}
