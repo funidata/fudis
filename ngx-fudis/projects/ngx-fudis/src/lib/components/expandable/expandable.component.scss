@@ -23,7 +23,7 @@
 		&__title {
 			@include color.bg-color('gray-extra-light');
 			@include typography.expandable-regular-typography;
-			@include border.border-none('none');
+			@include border.border-none;
 
 			cursor: pointer;
 			padding: spacing.$spacing-xs;

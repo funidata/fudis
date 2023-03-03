@@ -2,9 +2,6 @@
 @use '@angular/material' as mat;
 @import './palette';
 
-$color-primary: mat.define-palette($palette, 500);
-$accent: mat.define-palette($accent-palette, 500);
-
 // Angular Material default typography styling
 $typography: mat.define-typography-config(
   $font-family: "Fira Sans",
@@ -41,8 +38,17 @@ $typography: mat.define-typography-config(
 $theme: mat.define-light-theme(
   (
     color: (
-      primary: $color-primary,
-      accent: $accent,
+      primary: mat.define-palette($palette-map-primary, 500),
+      accent: mat.define-palette($palette-map-accent, 500),
+    ),
+    typography: $typography,
+  )
+);
+$datepicker-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: mat.define-palette($palette-map-primary, 100),
+      accent: mat.define-palette($palette-map-accent, 500),
     ),
     typography: $typography,
   )
@@ -50,3 +56,4 @@ $theme: mat.define-light-theme(
 
 // Emit theme-dependent styles for common features used across multiple Material components.
 @include mat.core-theme($theme);
+@include mat.datepicker-theme($datepicker-theme);

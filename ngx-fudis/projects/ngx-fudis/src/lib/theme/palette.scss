@@ -1,7 +1,7 @@
 @use "@angular/material" as mat;
 @import "../foundations/colors/tokens";
 
-$palette: (
+$palette-map-primary: (
     100: $color-primary-light,
     500: $color-primary,
     700: $color-primary-dark,
@@ -13,7 +13,7 @@ $palette: (
       900: $color-white,
     ),
 );
-$accent-palette: (
+$palette-map-accent: (
 	100: $color-red,
 	200: $color-yellow,
 	500: $color-primary,
@@ -21,7 +21,8 @@ $accent-palette: (
 	900: transparent,
 	contrast: (
 		100: $color-red-light,
-		500: $color-yellow-light,
+		200: $color-yellow-light,
+		500: $color-white,
 		700: $color-green-light,
 		900: $color-gray-dark,
 	),
