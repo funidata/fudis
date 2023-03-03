@@ -34,9 +34,17 @@ jobs:
         run: npm ci && npm run build
         working-directory: ngx-fudis/projects/ngx-fudis
       - name: Publish @funidata/ngx-fudis
+        id: npm-publish
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
           package: ngx-fudis/dist/ngx-fudis/package.json
+          check-version: true
           access: public
           tag: latest
+      - name: Create GitHub release
+        if: ${{ steps.npm-publish.outputs.type != 'none' }}
+        uses: softprops/action-gh-release@v0.1.15
+        with:
+          tag_name: format('v{0}', steps.npm-publish.outputs.version)
+          body: Changelog and link to Storybook to be included here once we reach v1 or earlier...

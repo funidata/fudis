@@ -3,12 +3,12 @@
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
 
 :host {
-	@include typography.fudis-text-field-label;
-	@include colorMixins.fudis-text-color('gray-dark');
+	@include typography.text-field-label;
+	@include colorMixins.text-color('gray-dark');
 
 	grid-column: 1/-1;
 
 	.fudis-legend {
-		margin-bottom: spacing.$fudis-spacing-xs;
+		margin-bottom: spacing.$spacing-xs;
 	}
 }

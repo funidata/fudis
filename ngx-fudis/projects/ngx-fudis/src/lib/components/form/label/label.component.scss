@@ -5,14 +5,14 @@
 
 .fudis-label {
 	&__content {
-		@include colorMixins.fudis-text-color('gray-dark');
-		@include typography.fudis-text-field-label;
+		@include colorMixins.text-color('gray-dark');
+		@include typography.text-field-label;
 	}
 
 	&__required {
 		float: right;
 		text-transform: initial;
 		/* stylelint-disable-next-line property-disallowed-list */
-		font-size: typographyTokens.$fudis-body-s-font-size;
+		font-size: typographyTokens.$body-text-s-font-size;
 	}
 }

@@ -6,7 +6,7 @@
 @use '../../foundations/breakpoints/mixins.scss' as breakpoint;
 
 .fudis-expandable {
-	margin-bottom: spacing.$fudis-spacing-s;
+	margin-bottom: spacing.$spacing-s;
 	border-top: 0;
 
 	&--collapsed {
@@ -14,49 +14,49 @@
 	}
 	
 	&__regular {
-		@include border.fudis-border('2px', 'solid', 'gray-extra-light');
+		@include border.border('2px', 'solid', 'gray-extra-light');
 	}
 
 	&__header {
 		margin: 0;
 		
 		&__title {
-			@include color.fudis-bg-color('gray-extra-light');
-			@include typography.fudis-expandable-regular-typography;
-			@include border.fudis-border-none('none');
+			@include color.bg-color('gray-extra-light');
+			@include typography.expandable-regular-typography;
+			@include border.border-none;
 
 			cursor: pointer;
-			padding: spacing.$fudis-spacing-xs;
+			padding: spacing.$spacing-xs;
 			width: 100%;
 			text-align: left;
 
 			&:focus {
-				@include focus.fudis-focus-generic;
+				@include focus.focus-generic;
 			}
 
 			&__icon {
-				margin-right: spacing.$fudis-spacing-xxs;
+				margin-right: spacing.$spacing-xxs;
 				vertical-align: middle;
 			}
 
 			&__sub-title {
-				@include typography.fudis-expandable-sub-title-typography;
+				@include typography.expandable-sub-title-typography;
 
 				display: block;
-				margin-left: spacing.$fudis-spacing-xl;
+				margin-left: spacing.$spacing-xl;
 			}
 		}
 	}
 
 	&__content {
-		@include breakpoint.fudis-breakpoint('m') {
-			padding: spacing.$fudis-spacing-m;
-			padding-left: spacing.$fudis-spacing-xl;
+		@include breakpoint.breakpoint('m') {
+			padding: spacing.$spacing-m;
+			padding-left: spacing.$spacing-xl;
 		}
 
-		@include breakpoint.fudis-breakpoint-max('m') {
-			padding: spacing.$fudis-spacing-s;
-			padding-left: spacing.$fudis-spacing-m;
+		@include breakpoint.breakpoint-max('m') {
+			padding: spacing.$spacing-s;
+			padding-left: spacing.$spacing-m;
 		}
 	}
 }

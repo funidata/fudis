@@ -7,45 +7,45 @@
 
 .fudis-text-input {
 	display: grid;
-	max-width: calc(23 * spacing.$fudis-spacing-s);
+	max-width: calc(23 * spacing.$spacing-s);
 
 	&__l {
 		width: 100%;
 	}
 
 	&__m {
-		width: calc(14 * spacing.$fudis-spacing-s);
+		width: calc(14 * spacing.$spacing-s);
 	}
 
 	&__s {
-		max-width: calc(10 * spacing.$fudis-spacing-s);
+		max-width: calc(10 * spacing.$spacing-s);
 	}
 
 	&__input {
-		@include borders.fudis-border('1px', 'solid', 'gray-middle');
-		@include typography.fudis-text-field-input;
-		@include borders.fudis-border-radius('2px');
+		@include borders.border('1px', 'solid', 'gray-middle');
+		@include typography.text-field-input;
+		@include borders.border-radius('2px');
 
 		box-sizing: border-box;
-		padding: spacing.$fudis-spacing-xxs spacing.$fudis-spacing-s;
+		padding: spacing.$spacing-xxs spacing.$spacing-s;
 		width: 100%;
-		height: spacing.$fudis-spacing-xl;
+		height: spacing.$spacing-xl;
 
 		&:focus {
-			@include focus.fudis-focus-form-field;
+			@include focus.focus-form-field;
 		}
 
 		&--invalid {
-			border-color: colors.$fudis-color-red;
+			border-color: colors.$color-red;
 		}	
 	}
 
 	&__guidance {
 		&__help-text {
-			@include colorMixins.fudis-text-color('gray-dark');
-			@include typography.fudis-body-s-regular;
+			@include colorMixins.text-color('gray-dark');
+			@include typography.body-text-s-regular;
 	
-			margin-top: spacing.$fudis-spacing-xs;
+			margin-top: spacing.$spacing-xs;
 		}
 	}
 

@@ -1,10 +1,10 @@
 @use 'sass:map';
 @use './tokens' as colors;
 
-@mixin fudis-text-color($color) {
-	@if map_has_key(colors.$fudis-colors, $color) {
+@mixin text-color($color) {
+	@if map_has_key(colors.$colors, $color) {
 		/* stylelint-disable-next-line property-disallowed-list */
-		color: map.get(colors.$fudis-colors, $color);
+		color: map.get(colors.$colors, $color);
 	}
 
  @else {
@@ -12,10 +12,10 @@
 	}
 }
 
-@mixin fudis-bg-color($color) {
-	@if map_has_key(colors.$fudis-colors, $color) {
+@mixin bg-color($color) {
+	@if map_has_key(colors.$colors, $color) {
 		/* stylelint-disable-next-line property-disallowed-list */
-		background-color: map.get(colors.$fudis-colors, $color);
+		background-color: map.get(colors.$colors, $color);
 	}
 
  @else {

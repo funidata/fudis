@@ -2,6 +2,10 @@
 @use '../../foundations/colors/tokens.scss' as colors;
 
 .fudis-icon {
+	box-sizing: border-box;
+	display: inline-flex;
+	align-items: center;
+	
 	&-rotate {
 		&__flip-180 {
 			transform: rotate(180deg);
@@ -20,42 +24,42 @@
 	}
 
 	&__lg {
-		width: typography.$fudis-icon-lg;
-		height: typography.$fudis-icon-lg;
+		width: typography.$icon-lg;
+		height: typography.$icon-lg;
 	}
 
 	&__sm {
-		width: typography.$fudis-icon-sm;
-		height: typography.$fudis-icon-sm;
+		width: typography.$icon-sm;
+		height: typography.$icon-sm;
 	}
 
 	&-color {
 		&__attention {
-			fill: colors.$fudis-color-yellow;
+			fill: colors.$color-yellow;
 		}
 	
 		&__danger {
-			fill: colors.$fudis-color-red;
+			fill: colors.$color-red;
 		}
 	
 		&__default {
-			fill: colors.$fudis-color-gray-dark;
+			fill: colors.$color-gray-dark;
 		}
 	
 		&__light {
-			fill: colors.$fudis-color-gray-light;
+			fill: colors.$color-gray-light;
 		}
 	
 		&__primary {
-			fill: colors.$fudis-color-primary;
+			fill: colors.$color-primary;
 		}
 	
 		&__success {
-			fill: colors.$fudis-color-green;
+			fill: colors.$color-green;
 		}
 	
 		&__white {
-			fill: colors.$fudis-color-white;
+			fill: colors.$color-white;
 		}
 	}
 }

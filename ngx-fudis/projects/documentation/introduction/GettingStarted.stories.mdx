@@ -73,9 +73,26 @@ import { NgxFudisModule } from 'ngx-fudis';
 }
 ```
 
-#### 6. Include Fudis Foundation SCSS-file to Your Angular Settings
+#### 6. Include Fudis Foundation SCSS-field
 
-- TODO
+In your project's root style file import Fudis foundation package. After that Fudis fonts should be loaded in Fudis components. If you want to use Foundation tokens and mixins in your own component styles, use them like in example below and check out documentation pages for Foundations.
+
+```
+@use '@funidata/ngx-fudis' as fudis;
+
+.my-amazing-component{
+	@include fudis.text-color('white');
+	@include fudis.bg-color('primary');
+	@include fudis.body-text-l-regular;
+	margin: fudis.spacing-m fudis.spacing-xs;
+
+	&:focus{
+		@include fudis.focus-generic;
+	}
+
+}
+
+```
 
 #### 7. Use Fudis Components in Your Project
 

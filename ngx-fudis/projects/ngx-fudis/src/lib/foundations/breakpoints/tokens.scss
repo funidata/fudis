@@ -1,16 +1,16 @@
 // Meant to be used as "min-width" for breakpoints
-$fudis-breakpoint-xxl: 100em; // 1600px-;
-$fudis-breakpoint-xl: 75em; // 1200px-1599px;
-$fudis-breakpoint-l: 62em; // 992px-1199px;
-$fudis-breakpoint-m: 48em; // 768px-991px;
-$fudis-breakpoint-s: 36em; // 576px-767px;
-$fudis-breakpoint-xs: 0; // 0-575px;
+$breakpoint-xxl: 100em; // 1600px-;
+$breakpoint-xl: 75em; // 1200px-1599px;
+$breakpoint-l: 62em; // 992px-1199px;
+$breakpoint-m: 48em; // 768px-991px;
+$breakpoint-s: 36em; // 576px-767px;
+$breakpoint-xs: 0; // 0-575px;
 
-$fudis-breakpoints: (
-	'xxl': $fudis-breakpoint-xxl,
-	'xl': $fudis-breakpoint-xl,
-	'l': $fudis-breakpoint-l,
-	'm': $fudis-breakpoint-m,
-	's': $fudis-breakpoint-s,
-	'xs': $fudis-breakpoint-xs,
+$breakpoints: (
+	'xxl': $breakpoint-xxl,
+	'xl': $breakpoint-xl,
+	'l': $breakpoint-l,
+	'm': $breakpoint-m,
+	's': $breakpoint-s,
+	'xs': $breakpoint-xs,
 );

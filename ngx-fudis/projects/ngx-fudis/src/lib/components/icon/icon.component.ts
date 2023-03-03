@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 import { FudisIcon, FudisIconColor } from '../../types/icons';
 
@@ -16,8 +16,14 @@ import { FudisIcon, FudisIconColor } from '../../types/icons';
 	selector: 'fudis-icon',
 	templateUrl: './icon.component.html',
 	styleUrls: ['./icon.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class IconComponent {
+	/**
+	 * Binding fudis-icon class to component wrapper
+	 */
+	@HostBinding('class') classes = 'fudis-icon';
+
 	/**
 	 * Choose icon
 	 */

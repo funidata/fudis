@@ -1,9 +1,9 @@
 @use 'sass:map';
 @use './tokens';
 
-@mixin fudis-breakpoint($breakpoint) {
-	@if map_has_key(tokens.$fudis-breakpoints, $breakpoint) {
-		$breakpoint-value: map.get(tokens.$fudis-breakpoints, $breakpoint);
+@mixin breakpoint($breakpoint) {
+	@if map_has_key(tokens.$breakpoints, $breakpoint) {
+		$breakpoint-value: map.get(tokens.$breakpoints, $breakpoint);
 
     @media screen and (min-width: #{$breakpoint-value}) {
       @content;
@@ -15,10 +15,10 @@
 	}
 }
 
-@mixin fudis-breakpoint-max($breakpoint) {
-	@if map_has_key(tokens.$fudis-breakpoints, $breakpoint) and $breakpoint != 'xs' {
+@mixin breakpoint-max($breakpoint) {
+	@if map_has_key(tokens.$breakpoints, $breakpoint) and $breakpoint != 'xs' {
 		
-		$breakpoint-value: map.get(tokens.$fudis-breakpoints, $breakpoint);
+		$breakpoint-value: map.get(tokens.$breakpoints, $breakpoint);
 		$calc-max-width: calc($breakpoint-value - 0.01em);
 
     @media screen and (max-width: #{$calc-max-width}) {

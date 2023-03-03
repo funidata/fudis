@@ -9,7 +9,7 @@
 .fudis-grid {
 	display: grid;
 	grid-template-columns: 1fr;
-	min-width: gridTokens.$fudis-grid-min-width;
+	min-width: gridTokens.$grid-min-width;
 
 	/* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
 	& > fudis-heading {
@@ -21,8 +21,8 @@
 			margin-right: auto;
 			margin-left: 0;
 
-			@include breakpoints.fudis-breakpoint-max('s') {
-				@include grid.fudis-grid-xs-margins;
+			@include breakpoints.breakpoint-max('s') {
+				@include grid.grid-xs-margins;
 			}
 		}
 
@@ -30,8 +30,8 @@
 			margin-right: auto;
 			margin-left: auto;
 
-			@include breakpoints.fudis-breakpoint-max('s') {
-				@include grid.fudis-grid-xs-margins;
+			@include breakpoints.breakpoint-max('s') {
+				@include grid.grid-xs-margins;
 			}
 		}
 
@@ -39,8 +39,8 @@
 			margin-right: 0;
 			margin-left: auto;
 
-			@include breakpoints.fudis-breakpoint-max('s') {
-				@include grid.fudis-grid-xs-margins;
+			@include breakpoints.breakpoint-max('s') {
+				@include grid.grid-xs-margins;
 			}
 		}
 	}
@@ -48,69 +48,69 @@
 	&__margin {
 		&__top {
 			&__none {
-				margin-top: spacing.$fudis-spacing-zero;
+				margin-top: spacing.$spacing-zero;
 			}
 
 			&__xxs {
-				margin-top: spacing.$fudis-spacing-xxs;
+				margin-top: spacing.$spacing-xxs;
 			}
 
 			&__xs {
-				margin-top: spacing.$fudis-spacing-xs;
+				margin-top: spacing.$spacing-xs;
 			}
 
 			&__s {
-				margin-top: spacing.$fudis-spacing-s;
+				margin-top: spacing.$spacing-s;
 			}
 
 			&__m {
-				margin-top: spacing.$fudis-spacing-m;
+				margin-top: spacing.$spacing-m;
 			}
 
 			&__l {
-				margin-top: spacing.$fudis-spacing-l;
+				margin-top: spacing.$spacing-l;
 			}
 
 			&__xl {
-				margin-top: spacing.$fudis-spacing-xl;
+				margin-top: spacing.$spacing-xl;
 			}
 
 			&__xxl {
-				margin-top: spacing.$fudis-spacing-xxl;
+				margin-top: spacing.$spacing-xxl;
 			}
 		}
 
 		&__bottom {
 			&__none {
-				margin-bottom: spacing.$fudis-spacing-zero;
+				margin-bottom: spacing.$spacing-zero;
 			}
 
 			&__xxs {
-				margin-bottom: spacing.$fudis-spacing-xxs;
+				margin-bottom: spacing.$spacing-xxs;
 			}
 
 			&__xs {
-				margin-bottom: spacing.$fudis-spacing-xs;
+				margin-bottom: spacing.$spacing-xs;
 			}
 
 			&__s {
-				margin-bottom: spacing.$fudis-spacing-s;
+				margin-bottom: spacing.$spacing-s;
 			}
 
 			&__m {
-				margin-bottom: spacing.$fudis-spacing-m;
+				margin-bottom: spacing.$spacing-m;
 			}
 
 			&__l {
-				margin-bottom: spacing.$fudis-spacing-l;
+				margin-bottom: spacing.$spacing-l;
 			}
 
 			&__xl {
-				margin-bottom: spacing.$fudis-spacing-xl;
+				margin-bottom: spacing.$spacing-xl;
 			}
 
 			&__xxl {
-				margin-bottom: spacing.$fudis-spacing-xxl;
+				margin-bottom: spacing.$spacing-xxl;
 			}
 		}
 	}
@@ -119,168 +119,167 @@
 	By default Grid's @Input width is XXL. When viewport gets narrower, it will get corresponding max-widths of each smaller breakpoint from XXL to smallest XS.
 
 	On the other end, if @Input width is the smallest of XS, it gets only one max-width of XS and doesn't need any other breakpoint width logic.
-
 	*/
 
 	&__xxl {
-		@include breakpoints.fudis-breakpoint('xs') {
-			@include grid.fudis-grid-max-width('xs')
+		@include breakpoints.breakpoint('xs') {
+			@include grid.grid-max-width('xs')
 		}
 
-		@include breakpoints.fudis-breakpoint('s') {
-			@include grid.fudis-grid-max-width('s')
+		@include breakpoints.breakpoint('s') {
+			@include grid.grid-max-width('s')
 		}
 
-		@include breakpoints.fudis-breakpoint('m') {
-			@include grid.fudis-grid-max-width('m')
+		@include breakpoints.breakpoint('m') {
+			@include grid.grid-max-width('m')
 		}	
 	
-		@include breakpoints.fudis-breakpoint('l') {
-			@include grid.fudis-grid-max-width('l')
+		@include breakpoints.breakpoint('l') {
+			@include grid.grid-max-width('l')
 		}
 
-		@include breakpoints.fudis-breakpoint('xl') {
-		@include grid.fudis-grid-max-width('xl')
+		@include breakpoints.breakpoint('xl') {
+		@include grid.grid-max-width('xl')
 		}
 
-		@include breakpoints.fudis-breakpoint('xxl') {
-			@include grid.fudis-grid-max-width('xxl')
+		@include breakpoints.breakpoint('xxl') {
+			@include grid.grid-max-width('xxl')
 		}
 	}
 	
 	&__xl {
-		@include breakpoints.fudis-breakpoint('xs') {
-			@include grid.fudis-grid-max-width('xs')
+		@include breakpoints.breakpoint('xs') {
+			@include grid.grid-max-width('xs')
 		}
 
-		@include breakpoints.fudis-breakpoint('s') {
-			@include grid.fudis-grid-max-width('s')
+		@include breakpoints.breakpoint('s') {
+			@include grid.grid-max-width('s')
 		}
 
-		@include breakpoints.fudis-breakpoint('m') {
-			@include grid.fudis-grid-max-width('m')
+		@include breakpoints.breakpoint('m') {
+			@include grid.grid-max-width('m')
 		}	
 	
-		@include breakpoints.fudis-breakpoint('l') {
-			@include grid.fudis-grid-max-width('l')
+		@include breakpoints.breakpoint('l') {
+			@include grid.grid-max-width('l')
 		}
 
-		@include breakpoints.fudis-breakpoint('xl') {
-		@include grid.fudis-grid-max-width('xl')
+		@include breakpoints.breakpoint('xl') {
+		@include grid.grid-max-width('xl')
 		}
 	}
 
 	&__l {
-		@include breakpoints.fudis-breakpoint('xs') {
-			@include grid.fudis-grid-max-width('xs')
+		@include breakpoints.breakpoint('xs') {
+			@include grid.grid-max-width('xs')
 		}
 
-		@include breakpoints.fudis-breakpoint('s') {
-			@include grid.fudis-grid-max-width('s')
+		@include breakpoints.breakpoint('s') {
+			@include grid.grid-max-width('s')
 		}
 
-		@include breakpoints.fudis-breakpoint('m') {
-			@include grid.fudis-grid-max-width('m')
+		@include breakpoints.breakpoint('m') {
+			@include grid.grid-max-width('m')
 		}	
 	
-		@include breakpoints.fudis-breakpoint('l') {
-			@include grid.fudis-grid-max-width('l')
+		@include breakpoints.breakpoint('l') {
+			@include grid.grid-max-width('l')
 		}
 	}
 
 	&__m {
-		@include breakpoints.fudis-breakpoint('xs') {
-			@include grid.fudis-grid-max-width('xs')
+		@include breakpoints.breakpoint('xs') {
+			@include grid.grid-max-width('xs')
 		}
 
-		@include breakpoints.fudis-breakpoint('s') {
-			@include grid.fudis-grid-max-width('s')
+		@include breakpoints.breakpoint('s') {
+			@include grid.grid-max-width('s')
 		}
 
-		@include breakpoints.fudis-breakpoint('m') {
-			@include grid.fudis-grid-max-width('m')
-		}	
+		@include breakpoints.breakpoint('m') {
+			@include grid.grid-max-width('m')
+		}
 	}
 
 	&__s {
-		@include breakpoints.fudis-breakpoint('xs') {
-			@include grid.fudis-grid-max-width('xs')
+		@include breakpoints.breakpoint('xs') {
+			@include grid.grid-max-width('xs')
 		}
 
-		@include breakpoints.fudis-breakpoint('s') {
-			@include grid.fudis-grid-max-width('s')
+		@include breakpoints.breakpoint('s') {
+			@include grid.grid-max-width('s')
 		}
 	}
 
 	&__xs {
-		@include grid.fudis-grid-max-width('xs')
+		@include grid.grid-max-width('xs')
 	}
 
 	&__row-gap {
 		&__none {
-			row-gap: spacing.$fudis-spacing-zero;
+			row-gap: spacing.$spacing-zero;
 		}
 
 		&__xxs {
-			row-gap: spacing.$fudis-spacing-xxs;
+			row-gap: spacing.$spacing-xxs;
 		}
 
 		&__xs {
-			row-gap: spacing.$fudis-spacing-xs;
+			row-gap: spacing.$spacing-xs;
 		}
 
 		&__s {
-			row-gap: spacing.$fudis-spacing-s;
+			row-gap: spacing.$spacing-s;
 		}
 
 		&__m {
-			row-gap: spacing.$fudis-spacing-m;
+			row-gap: spacing.$spacing-m;
 		}
 
 		&__l {
-			row-gap: spacing.$fudis-spacing-l;
+			row-gap: spacing.$spacing-l;
 		}
 
 		&__xl {
-			row-gap: spacing.$fudis-spacing-xl;
+			row-gap: spacing.$spacing-xl;
 		}
 
 		&__xxl {
-			row-gap: spacing.$fudis-spacing-xxl;
+			row-gap: spacing.$spacing-xxl;
 		}
 	}
 
 	&__column-gap {
 		&__none {
-			column-gap: spacing.$fudis-spacing-zero;
+			column-gap: spacing.$spacing-zero;
 		}
 
 		&__xxs {
-			column-gap: spacing.$fudis-spacing-xxs;
+			column-gap: spacing.$spacing-xxs;
 		}
 
 		&__xs {
-			column-gap: spacing.$fudis-spacing-xs;
+			column-gap: spacing.$spacing-xs;
 		}
 
 		&__s {
-			column-gap: spacing.$fudis-spacing-s;
+			column-gap: spacing.$spacing-s;
 		}
 
 		&__m {
-			column-gap: spacing.$fudis-spacing-m;
+			column-gap: spacing.$spacing-m;
 		}
 
 		&__l {
-			column-gap: spacing.$fudis-spacing-l;
+			column-gap: spacing.$spacing-l;
 		}
 
 		&__xl {
-			column-gap: spacing.$fudis-spacing-xl;
+			column-gap: spacing.$spacing-xl;
 		}
 
 		&__xxl {
-			column-gap: spacing.$fudis-spacing-xxl;
+			column-gap: spacing.$spacing-xxl;
 		}
 	}
 }
