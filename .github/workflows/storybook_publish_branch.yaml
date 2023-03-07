@@ -23,7 +23,7 @@ jobs:
         run: npx ng run storybook:build
         working-directory: ngx-fudis
       - name: Rename build directory by version
-        run: mv storybook-static ${{ github.event.workflow_run.head_branch }}
+        run: mv storybook-static ${GITHUB_REF##*/}
         working-directory: ngx-fudis/.storybook/target
       - name: Upload
         uses: actions/upload-pages-artifact@v1.0.7
