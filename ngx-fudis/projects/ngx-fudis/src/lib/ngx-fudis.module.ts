@@ -4,14 +4,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { MatNativeDateModule, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTooltipModule, MatTooltip } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import {
 	FudisDialogActionsDirective,
@@ -48,7 +47,8 @@ import { RadioButtonGroupComponent } from './components/form/radio-button-group/
 import { TextInputComponent } from './components/form/text-input/text-input.component';
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
-import { TooltipComponent } from './components/tooltip/tooltip.component';
+import { TooltipApiDirective } from './components/tooltip/tooltip-api.directive';
+// import { TooltipDirective } from './components/tooltip/tooltip.directive';
 
 @NgModule({
 	/*
@@ -90,7 +90,8 @@ import { TooltipComponent } from './components/tooltip/tooltip.component';
 		TextInputComponent,
 		TextSpacingComponent,
 		TextAreaComponent,
-		TooltipComponent,
+		TooltipApiDirective,
+		// TooltipDirective,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
@@ -143,7 +144,8 @@ import { TooltipComponent } from './components/tooltip/tooltip.component';
 		TextAreaComponent,
 		TextInputComponent,
 		// TextSpacingComponent,
-		TooltipComponent,
+		TooltipApiDirective,
+		MatTooltip,
 	],
 	providers: [
 		FudisDialog,

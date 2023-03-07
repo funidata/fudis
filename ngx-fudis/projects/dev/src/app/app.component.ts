@@ -39,7 +39,9 @@ import { FormControl, Validators, FormBuilder } from '@angular/forms';
 		<fudis-heading tag="h3">
 			<fudis-link data-theme="sisu" href="#" linkTitle="Link inside a heading"></fudis-link>
 		</fudis-heading>
-		<fudis-link
+		<fudis-button data-theme="sisu" label="Testinappi" tooltipText="Tämän pitää toimia!"></fudis-button>
+		<fudis-button data-theme="sisu" label="Angular button" #tooltip="matTooltip" matTooltip="iha sama"></fudis-button>
+		<!-- <fudis-link
 			data-theme="sisu"
 			href="https://www.example.com"
 			linkTitle="External link with icon and aria-label"
@@ -47,7 +49,6 @@ import { FormControl, Validators, FormBuilder } from '@angular/forms';
 			externalLinkAriaLabel="Opens in a new window">
 		</fudis-link>
 		<fudis-link data-theme="sisu" size="m" href="https://www.example.com"></fudis-link>
-		<!-- <fudis-tooltip data-theme="sisu" tooltipText="Moro" content="Moiiiii"></fudis-tooltip> -->
 		<button
 			data-theme="sisu"
 			mat-raised-button
@@ -55,7 +56,7 @@ import { FormControl, Validators, FormBuilder } from '@angular/forms';
 			matTooltip="Hei tää toimii"
 			aria-label="Button that displays a tooltip when focused or hovered over">
 			Olen ekstra nappi
-		</button>
+		</button> -->
 	`,
 	styleUrls: ['./app.scss'],
 })
