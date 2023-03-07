@@ -62,10 +62,6 @@ class TextInputWithFormControlExampleComponent {
 
 	validatorsForFourth = [Validators.min(this.minNumber), Validators.max(this.maxNumber), Validators.required];
 
-	/**
-	 * Options for testing purposes
-	 */
-
 	validatorMessages: IFudisErrorMessages = {
 		required: 'This is required field.',
 		email: 'Your input is not in email format.',
