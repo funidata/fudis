@@ -1,9 +1,15 @@
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { BodyTextComponent } from './body-text.component';
+import readme from './readme.mdx';
 
 export default {
 	title: 'Components/Typography/BodyText',
 	component: BodyTextComponent,
+	parameters: {
+		docs: {
+			page: readme,
+		},
+	},
 	argTypes: {
 		marginBottom: {
 			options: [0, 'm', 'l'],
