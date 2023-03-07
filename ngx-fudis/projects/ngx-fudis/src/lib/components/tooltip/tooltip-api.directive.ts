@@ -1,4 +1,4 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, HostListener, Input } from '@angular/core';
 import { MatTooltip } from '@angular/material/tooltip';
 
 @Directive({
@@ -21,5 +21,10 @@ export class TooltipApiDirective {
 
 	constructor(tooltip: MatTooltip) {
 		this.tooltip = tooltip;
+	}
+
+	@HostListener('mouseover') mouseover() {
+		this.tooltip.message = this.fudisTooltip;
+		this.tooltip.show();
 	}
 }
