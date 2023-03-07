@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: "Checkout"
         uses: actions/checkout@v3
@@ -25,6 +25,7 @@ jobs:
 
   deploy:
     needs: build
+    runs-on: ubuntu-22.04
     permissions:
       contents: read
       pages: write
@@ -32,7 +33,6 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v1.2.4
