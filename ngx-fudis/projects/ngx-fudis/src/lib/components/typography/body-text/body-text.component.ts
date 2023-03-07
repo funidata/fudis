@@ -1,8 +1,8 @@
 import { Component, Input, HostBinding, ViewEncapsulation } from '@angular/core';
 
-type BodyTextSize = 'l-regular' | 'm-regular' | 's-regular' | 'l-light' | 'm-light';
+export type BodyTextSize = 'l-regular' | 'm-regular' | 's-regular' | 'l-light' | 'm-light';
 
-type MarginBottomSize = 'm' | 'l' | 0 | '0';
+export type MarginBottomSize = 'm' | 'l' | 0 | '0';
 
 @Component({
 	selector: 'fudis-body-text',
@@ -11,9 +11,18 @@ type MarginBottomSize = 'm' | 'l' | 0 | '0';
 	encapsulation: ViewEncapsulation.None,
 })
 export class BodyTextComponent {
+	/**
+	 * Class for the parent wrapper element
+	 */
 	@HostBinding('class') classes = 'fudis-body-text';
 
+	/**
+	 * Font size for the paragraph
+	 */
 	@Input() size: BodyTextSize = 'm-regular';
 
+	/**
+	 * Optional margin bottom
+	 */
 	@Input() marginBottom: MarginBottomSize = 0;
 }
