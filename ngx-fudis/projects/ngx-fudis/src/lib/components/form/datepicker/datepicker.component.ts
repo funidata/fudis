@@ -77,6 +77,8 @@ export class DatepickerComponent implements OnInit {
 	 */
 	@Input() maxDate: Date;
 
+	@Input() tooltipText: string;
+
 	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();
 
 	required: boolean = false;

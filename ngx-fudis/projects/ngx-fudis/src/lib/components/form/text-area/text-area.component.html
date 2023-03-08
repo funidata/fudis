@@ -13,7 +13,9 @@
 		[attr.aria-describedby]="id + '_guidance'"
 		[attr.minLength]="minLength"
 		[attr.maxLength]="maxLength"
-		[attr.required]="control.hasValidator(requiredValidator)">
+		[attr.required]="control.hasValidator(requiredValidator)"
+		#tooltip="tooltip"
+		[fudisTooltip]="tooltipText">
 	</textarea>
 	<fudis-guidance
 		[maxLength]="maxLength"

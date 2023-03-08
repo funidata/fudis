@@ -20,7 +20,9 @@
 				'fudis-datepicker__input--disabled': disabled
 			}"
 			[attr.required]="required"
-			[attr.aria-describedby]="id + '_guidance'" />
+			[attr.aria-describedby]="id + '_guidance'"
+			#tooltip="tooltip"
+			[fudisTooltip]="tooltipText" />
 		<mat-datepicker-toggle
 			[disabled]="disabled"
 			matSuffix
