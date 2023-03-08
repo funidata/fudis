@@ -27,4 +27,13 @@ export class TooltipApiDirective {
 		this.tooltip.message = this.fudisTooltip;
 		this.tooltip.show();
 	}
+
+	@HostListener('focus') onFocus() {
+		this.tooltip.message = this.fudisTooltip;
+		this.tooltip.show();
+	}
+
+	@HostListener('blur') onBlur() {
+		this.tooltip.hide();
+	}
 }
