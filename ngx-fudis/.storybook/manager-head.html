@@ -1,0 +1,13 @@
+<!-- See https://github.com/storybookjs/storybook/issues/1291#issuecomment-891379856 -->
+<link id="favicon" rel="shortcut icon" type="image/x-icon" href="/my-prefix/favicon.ico" />
+<script>
+  if ('%NODE_ENV%' === 'production') {
+		// FIXME: Use parameterized path.
+    window['PREVIEW_URL'] = '/basse-testaa/iframe.html';
+  } else {
+		// FIXME: Remove
+    window['PREVIEW_URL'] = '/basse-testaa/iframe.html';
+		// FIXME: Uncomment
+    // document.getElementById('favicon').setAttribute('href', '/favicon.ico');
+  }
+</script>
