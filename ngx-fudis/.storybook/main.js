@@ -26,7 +26,7 @@ module.exports = {
 	],
 	// See https://github.com/storybookjs/storybook/issues/1291#issuecomment-795251283
 	webpackFinal: async (config, { configType }) => {
-		if (NODE_ENV === 'PRODUCTION') {
+		if (configType === 'PRODUCTION') {
 			// FIXME: Use parameterized path.
 			config.output.publicPath = '/basse-testaa/';
 		}
@@ -35,7 +35,7 @@ module.exports = {
 		return config;
 	},
 	managerWebpack: async (config, { configType }) => {
-		if (NODE_ENV === 'PRODUCTION') {
+		if (configType === 'PRODUCTION') {
 			// FIXME: Use parameterized path.
 			config.output.publicPath = '/basse-testaa/';
 		}
