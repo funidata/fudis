@@ -1,6 +1,7 @@
 import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 import { FudisIcon, FudisIconColor } from '../../types/icons';
+import { TooltipApiDirective } from '../tooltip/tooltip-api.directive';
 
 /**
  * Example: `<fudis-icon icon="info" color="primary"></fudis-icon>`
@@ -18,7 +19,9 @@ import { FudisIcon, FudisIconColor } from '../../types/icons';
 	styleUrls: ['./icon.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class IconComponent {
+export class IconComponent extends TooltipApiDirective {
+	@Input() tooltipText: string;
+
 	/**
 	 * Binding fudis-icon class to component wrapper
 	 */
@@ -38,4 +41,6 @@ export class IconComponent {
 	 * Use rotate to flip and rotate icon
 	 */
 	@Input() rotate?: 'flip-180' | 'cw-90' | 'ccw-90' | null;
+
+	@Input() public tabIndex: number = 0;
 }

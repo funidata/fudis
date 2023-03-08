@@ -2,6 +2,9 @@
 	class="fudis-icon fudis-icon-color__{{ color }} fudis-icon-rotate__{{ rotate }} {{
 		icon.includes('-small') ? 'fudis-icon__sm' : 'fudis-icon__lg'
 	}}"
-	aria-hidden="true">
+	aria-hidden="true"
+	#tooltip="tooltip"
+	[fudisTooltip]="tooltipText"
+	tabindex="0">
 	<use [attr.href]="icon + '.svg#' + icon"></use>
 </svg>

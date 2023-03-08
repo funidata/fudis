@@ -23,7 +23,12 @@ export class TooltipApiDirective {
 		this.tooltip = tooltip;
 	}
 
-	@HostListener('mouseover') mouseover() {
+	@HostListener('mouseenter') mouseenter() {
+		this.tooltip.message = this.fudisTooltip;
+		this.tooltip.show();
+	}
+
+	@HostListener('mouseleave') mouseleave() {
 		this.tooltip.message = this.fudisTooltip;
 		this.tooltip.show();
 	}
