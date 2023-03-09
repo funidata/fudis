@@ -25,4 +25,9 @@ export class LabelComponent {
 	 * Id for label, e. g. used in Dropdown to link ngMaterial mat-select with 'aria-labelledby' to fudis-label
 	 */
 	@Input() id: string;
+
+	/**
+	 * LabelTooltip adds an icon with descriptive tooltip to a label.
+	 */
+	@Input() labelTooltip: string;
 }

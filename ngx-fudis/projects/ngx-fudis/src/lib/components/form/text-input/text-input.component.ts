@@ -76,6 +76,11 @@ export class TextInputComponent {
 	 */
 	@Input() maxNumber: number;
 
+	/**
+	 * labelTooltip adds an icon and descriptive tooltip to a input label
+	 */
+	@Input() labelTooltip: string;
+
 	requiredValidator = Validators.required;
 
 	handleBlur(): void {

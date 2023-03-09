@@ -33,7 +33,6 @@ export const Button = Template.bind({});
 Button.args = {
 	variant: 'primary',
 	label: 'Button',
-	tooltipText: 'whatUp?',
 };
 
 export const IconButton = Template.bind({});

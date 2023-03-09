@@ -21,7 +21,8 @@ import { IFudisErrorMessages } from '../../../types/forms';
 				requiredText="Required"
 				[errorMsg]="{ required: 'Missing a value.' }"
 				label="I am a required text input"
-				helpText="Please add some values here above!"></fudis-text-input>
+				helpText="Please add some values here above!"
+				labelTooltip="I have some addtional information"></fudis-text-input>
 			<fudis-text-input
 				[control]="mainFormGroup.controls['third']"
 				requiredText="Required"

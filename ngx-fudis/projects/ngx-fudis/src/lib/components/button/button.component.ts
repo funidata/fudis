@@ -7,8 +7,6 @@ import { FudisIcon, FudisIconColor } from '../../types/icons';
 	styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent {
-	@Input() tooltipText: string;
-
 	/**
 	 * Button variant options
 	 */
