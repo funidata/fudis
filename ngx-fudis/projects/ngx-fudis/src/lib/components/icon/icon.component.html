@@ -5,6 +5,6 @@
 	aria-hidden="true"
 	#tooltip="tooltip"
 	[fudisTooltip]="tooltipText"
-	tabindex="0">
+	[tabindex]="tooltipText ? 0 : -1">
 	<use [attr.href]="icon + '.svg#' + icon"></use>
 </svg>

@@ -19,8 +19,6 @@ import { FudisIcon, FudisIconColor } from '../../types/icons';
 	encapsulation: ViewEncapsulation.None,
 })
 export class IconComponent {
-	@Input() tooltipText: string;
-
 	/**
 	 * Binding fudis-icon class to component wrapper
 	 */
@@ -41,5 +39,8 @@ export class IconComponent {
 	 */
 	@Input() rotate?: 'flip-180' | 'cw-90' | 'ccw-90' | null;
 
-	@Input() public tabIndex: number = 0;
+	/**
+	 * Additional tooltiptext for icon
+	 */
+	@Input() tooltipText: string;
 }
