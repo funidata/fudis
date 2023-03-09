@@ -1,3 +1,5 @@
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { moduleMetadata } from '@storybook/angular';
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { IconComponent } from './icon.component';
 
@@ -10,6 +12,11 @@ export default {
 			control: { type: 'text' },
 		},
 	},
+	decorators: [
+		moduleMetadata({
+			imports: [MatTooltipModule],
+		}),
+	],
 } as Meta;
 
 const Template: Story<IconComponent> = (args: IconComponent) => ({

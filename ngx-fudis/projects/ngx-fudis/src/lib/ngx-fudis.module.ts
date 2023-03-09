@@ -10,7 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { MatNativeDateModule, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
-import { MatTooltipModule, MatTooltip } from '@angular/material/tooltip';
+import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import {
 	FudisDialogActionsDirective,
@@ -145,10 +145,10 @@ import { TooltipApiDirective } from './components/tooltip/tooltip-api.directive'
 		TextInputComponent,
 		// TextSpacingComponent,
 		TooltipApiDirective,
-		MatTooltip,
 	],
 	providers: [
 		FudisDialog,
+		MatTooltip,
 		{ provide: DateAdapter, useClass: DatepickerCustomDateAdapter, deps: [MAT_DATE_LOCALE] },
 		{ provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
 		{ provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { strict: true } },

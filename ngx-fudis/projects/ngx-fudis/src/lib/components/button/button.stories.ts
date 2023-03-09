@@ -1,4 +1,6 @@
 // also exported from '@storybook/angular' if you can deal with breaking changes in 6.1
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { moduleMetadata } from '@storybook/angular';
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { ButtonComponent } from './button.component';
 import readme from './readme.mdx';
@@ -11,6 +13,11 @@ export default {
 			page: readme,
 		},
 	},
+	decorators: [
+		moduleMetadata({
+			imports: [MatTooltipModule],
+		}),
+	],
 	argTypes: {
 		icon: {
 			control: { type: 'text' },
@@ -26,6 +33,7 @@ export const Button = Template.bind({});
 Button.args = {
 	variant: 'primary',
 	label: 'Button',
+	tooltipText: 'whatUp?',
 };
 
 export const IconButton = Template.bind({});

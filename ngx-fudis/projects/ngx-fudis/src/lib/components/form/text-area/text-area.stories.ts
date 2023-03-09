@@ -2,6 +2,7 @@ import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { TextAreaComponent } from './text-area.component';
 import { IFudisErrorMessages } from '../../../types/forms';
 
@@ -66,7 +67,7 @@ export default {
 	decorators: [
 		moduleMetadata({
 			declarations: [TextAreaWithFormControlExampleComponent],
-			imports: [ReactiveFormsModule, FormsModule],
+			imports: [ReactiveFormsModule, FormsModule, MatTooltipModule],
 		}),
 	],
 	argTypes: {},
@@ -82,6 +83,7 @@ TextArea.args = {
 	control: new FormControl(''),
 	id: 'example-id-for-text-input',
 	helpText: 'Example help text',
+	tooltipText: 'Additional tooltip',
 };
 
 export const WithMultipleTextArea: Story = () => ({
