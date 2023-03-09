@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockComponent } from 'ng-mocks';
-import { IconComponent } from 'ngx-fudis';
+import { IconComponent } from '../icon/icon.component';
 import { ButtonComponent } from './button.component';
 
 describe('ButtonComponent', () => {
