@@ -4,6 +4,10 @@
 	[attr.aria-label]="ariaLabel"
 	(click)="!disabled ? handleClick.emit($event) : null"
 	[ngClass]="classes">
-	<fudis-icon class="fudis-button__icon" *ngIf="icon" [color]="iconColor" [icon]="icon"></fudis-icon>
+	<fudis-icon
+		[class]="label ? 'fudis-button__icon' : 'fudis-button__icon--only'"
+		*ngIf="icon"
+		[color]="iconColor"
+		[icon]="icon"></fudis-icon>
 	{{ label }}
 </button>
