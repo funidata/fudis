@@ -17,9 +17,7 @@
 		[class.fudis-text-input__input--invalid]="control.invalid && control.touched"
 		class="fudis-text-input__input"
 		[attr.aria-describedby]="id + '_guidance'"
-		[attr.required]="control.hasValidator(requiredValidator)"
-		#tooltip="tooltip"
-		[fudisTooltip]="tooltipText" />
+		[attr.required]="control.hasValidator(requiredValidator)" />
 	<fudis-guidance
 		[maxLength]="maxLength"
 		[helpText]="helpText"

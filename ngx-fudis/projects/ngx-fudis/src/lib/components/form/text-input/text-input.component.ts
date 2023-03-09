@@ -76,8 +76,6 @@ export class TextInputComponent {
 	 */
 	@Input() maxNumber: number;
 
-	@Input() tooltipText: string;
-
 	requiredValidator = Validators.required;
 
 	handleBlur(): void {

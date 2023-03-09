@@ -56,8 +56,6 @@ export class TextAreaComponent {
 	 */
 	@Input() requiredText: string;
 
-	@Input() tooltipText: string;
-
 	requiredValidator = Validators.required;
 
 	handleBlur(): void {
