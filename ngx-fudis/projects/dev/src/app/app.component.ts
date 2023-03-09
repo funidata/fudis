@@ -39,8 +39,12 @@ import { FormControl, Validators, FormBuilder } from '@angular/forms';
 		<fudis-heading tag="h3">
 			<fudis-link data-theme="sisu" href="#" linkTitle="Link inside a heading"></fudis-link>
 		</fudis-heading>
+		<fudis-icon icon="info" tooltipText="Olaaa"></fudis-icon>
 		<fudis-button data-theme="sisu" label="Testinappi" tooltipText="Tämän pitää toimia!"></fudis-button>
-		<fudis-button data-theme="sisu" label="Angular button" #tooltip="matTooltip" matTooltip="iha sama"></fudis-button>
+		<fudis-button data-theme="sisu" label="Testi1" tooltipText="Ykis"></fudis-button>
+		<fudis-button data-theme="sisu" label="Testi2" tooltipText="Kaksi"></fudis-button>
+		<fudis-button data-theme="sisu" label="Testi3" tooltipText="Kolme"></fudis-button>
+
 		<!-- <fudis-link
 			data-theme="sisu"
 			href="https://www.example.com"

@@ -27,4 +27,4 @@ export { RadioButtonGroupComponent } from './lib/components/form/radio-button-gr
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';
 export { TextInputComponent } from './lib/components/form/text-input/text-input.component';
 // export { TextSpacingComponent } from './lib/components/typography/text-spacing/text-spacing.component';
-export { TooltipApiDirective } from './lib/components/tooltip/tooltip-api.directive';
+export { TooltipDirective } from './lib/components/tooltip/tooltip.directive';

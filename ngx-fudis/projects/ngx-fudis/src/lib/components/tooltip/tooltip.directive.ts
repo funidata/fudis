@@ -6,7 +6,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 	exportAs: 'tooltip',
 	providers: [MatTooltip],
 })
-export class TooltipApiDirective {
+export class TooltipDirective {
 	tooltip: MatTooltip;
 
 	/**
