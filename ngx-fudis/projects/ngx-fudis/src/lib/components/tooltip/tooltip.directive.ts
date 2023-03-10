@@ -1,4 +1,4 @@
-import { Directive, HostListener, Input } from '@angular/core';
+import { Directive, HostListener, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { MatTooltip } from '@angular/material/tooltip';
 
 @Directive({
@@ -6,7 +6,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 	exportAs: 'tooltip',
 	providers: [MatTooltip],
 })
-export class TooltipDirective {
+export class TooltipDirective implements OnInit, OnChanges, OnDestroy {
 	tooltip: MatTooltip;
 
 	/**
@@ -17,28 +17,67 @@ export class TooltipDirective {
 	/**
 	 * tooltipToggle set on true makes tooltip appear when toggled. Default behavior is triggered on focus. TooltipToggle feature is prefered to be used with icons.
 	 */
-	@Input() tooltipToggle: boolean = false;
+	@Input() tooltipToggle = false;
 
 	constructor(tooltip: MatTooltip) {
 		this.tooltip = tooltip;
 	}
 
-	@HostListener('mouseenter') mouseenter() {
-		this.tooltip.message = this.fudisTooltip;
-		this.tooltip.show();
+	ngOnInit() {
+		console.log('Status: ', this.tooltipToggle);
+		if (this.fudisTooltip) {
+			this.tooltip.message = this.fudisTooltip;
+		}
+		this.ngOnDestroy();
 	}
 
-	@HostListener('mouseleave') mouseleave() {
-		this.tooltip.message = this.fudisTooltip;
-		this.tooltip.show();
+	ngOnChanges() {
+		if (this.tooltipToggle === true) {
+			console.log('tooltip toggle is true!');
+			this.ngOnDestroy();
+		}
+	}
+
+	toggleTooltip() {
+		console.log('I was pressed!');
+		return this.tooltip.toggle();
+	}
+
+	showTooltip() {
+		console.log('Do you see me?');
+		return this.tooltip.show();
+	}
+
+	hideTooltip() {
+		return this.tooltip.hide();
+	}
+
+	@HostListener('mouseenter') mouseenter() {
+		this.showTooltip();
+	}
+
+	@HostListener('mouseleave') onmouseleave() {
+		this.hideTooltip();
 	}
 
 	@HostListener('focus') onFocus() {
-		this.tooltip.message = this.fudisTooltip;
-		this.tooltip.show();
+		this.showTooltip();
 	}
 
 	@HostListener('blur') onBlur() {
-		this.tooltip.hide();
+		this.hideTooltip();
+	}
+
+	// private removeListeners() {
+	// 	window.removeEventListener('mouseenter', this.mouseenter);
+	// 	window.removeEventListener('mouseleave', this.onmouseleave);
+	// }
+
+	ngOnDestroy() {
+		console.log('destroy me!!');
+
+		// this.removeListeners();
+		// window.removeEventListener('mouseenter', this.mouseenter, true);
+		// window.removeEventListener('mouseleave', this.onmouseleave, true);
 	}
 }

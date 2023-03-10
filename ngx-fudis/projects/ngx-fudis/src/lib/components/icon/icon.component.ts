@@ -1,6 +1,7 @@
-import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { Component, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { FudisIcon, FudisIconColor } from '../../types/icons';
+import { TooltipDirective } from '../tooltip/tooltip.directive';
 
 /**
  * Example: `<fudis-icon icon="info" color="primary"></fudis-icon>`
@@ -18,7 +19,7 @@ import { FudisIcon, FudisIconColor } from '../../types/icons';
 	styleUrls: ['./icon.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class IconComponent {
+export class IconComponent extends TooltipDirective implements OnInit {
 	/**
 	 * Binding fudis-icon class to component wrapper
 	 */
@@ -43,4 +44,9 @@ export class IconComponent {
 	 * Additional tooltiptext for icon
 	 */
 	@Input() tooltipText: string;
+
+	/**
+	 * Additional tooltiptext for icon
+	 */
+	@Input() override tooltipToggle: boolean;
 }
