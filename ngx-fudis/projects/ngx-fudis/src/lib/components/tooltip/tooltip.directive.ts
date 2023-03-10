@@ -1,4 +1,4 @@
-import { Directive, HostListener, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Directive, HostListener, Input, OnInit } from '@angular/core';
 import { MatTooltip } from '@angular/material/tooltip';
 
 @Directive({
@@ -6,7 +6,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 	exportAs: 'tooltip',
 	providers: [MatTooltip],
 })
-export class TooltipDirective implements OnInit, OnChanges, OnDestroy {
+export class TooltipDirective implements OnInit {
 	tooltip: MatTooltip;
 
 	/**
@@ -24,27 +24,27 @@ export class TooltipDirective implements OnInit, OnChanges, OnDestroy {
 	}
 
 	ngOnInit() {
-		console.log('Status: ', this.tooltipToggle);
+		// console.log('Status: ', this.tooltipToggle);
 		if (this.fudisTooltip) {
 			this.tooltip.message = this.fudisTooltip;
 		}
-		this.ngOnDestroy();
+		// this.ngOnDestroy();
 	}
 
-	ngOnChanges() {
-		if (this.tooltipToggle === true) {
-			console.log('tooltip toggle is true!');
-			this.ngOnDestroy();
-		}
-	}
+	// ngOnChanges() {
+	// 	if (this.tooltipToggle === true) {
+	// 		console.log('tooltip toggle is true!');
+	// 		this.ngOnDestroy();
+	// 	}
+	// }
 
 	toggleTooltip() {
-		console.log('I was pressed!');
+		// console.log('I was pressed!');
 		return this.tooltip.toggle();
 	}
 
 	showTooltip() {
-		console.log('Do you see me?');
+		// console.log('Do you see me?');
 		return this.tooltip.show();
 	}
 
@@ -73,11 +73,11 @@ export class TooltipDirective implements OnInit, OnChanges, OnDestroy {
 	// 	window.removeEventListener('mouseleave', this.onmouseleave);
 	// }
 
-	ngOnDestroy() {
-		console.log('destroy me!!');
+	// ngOnDestroy() {
+	// 	console.log('destroy me!!');
 
-		// this.removeListeners();
-		// window.removeEventListener('mouseenter', this.mouseenter, true);
-		// window.removeEventListener('mouseleave', this.onmouseleave, true);
-	}
+	// 	this.removeListeners();
+	// 	window.removeEventListener('mouseenter', this.mouseenter, true);
+	// 	window.removeEventListener('mouseleave', this.onmouseleave, true);
+	// }
 }
