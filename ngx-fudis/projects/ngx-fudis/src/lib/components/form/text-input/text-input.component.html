@@ -2,6 +2,7 @@
 	<fudis-label
 		[for]="id"
 		[text]="label"
+		[id]="'label_' + id"
 		[requiredText]="control.hasValidator(requiredValidator) && requiredText ? requiredText : null">
 	</fudis-label>
 	<input

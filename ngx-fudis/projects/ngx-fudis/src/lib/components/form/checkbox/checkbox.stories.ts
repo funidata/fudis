@@ -29,10 +29,6 @@ import { CheckboxComponent } from './checkbox.component';
 	`,
 })
 class CheckboxExampleComponent {
-	/**
-	 * Options for testing purposes
-	 */
-
 	checkboxFirst: FormControl = new FormControl({ value: true, disabled: true });
 
 	checkboxSecond: FormControl = new FormControl(false, Validators.requiredTrue);
