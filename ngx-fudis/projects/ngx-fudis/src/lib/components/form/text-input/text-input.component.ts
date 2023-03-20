@@ -1,8 +1,8 @@
 // eslint-disable-next-line max-classes-per-file
-import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-
 import { IFudisErrorMessages } from '../../../types/forms';
+import { TooltipDirective } from '../../../directives/tooltip/tooltip.directive';
 import { GuidanceComponent } from '../guidance/guidance.component';
 
 @Component({
@@ -10,7 +10,7 @@ import { GuidanceComponent } from '../guidance/guidance.component';
 	templateUrl: './text-input.component.html',
 	styleUrls: ['./text-input.component.scss'],
 })
-export class TextInputComponent {
+export class TextInputComponent extends TooltipDirective implements OnInit {
 	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;
 
 	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
@@ -18,8 +18,7 @@ export class TextInputComponent {
 	/**
 	 * FormControl for the input
 	 */
-	@Input()
-	control: FormControl;
+	@Input() control: FormControl;
 
 	/**
 	 * Error message shown below the input
@@ -75,11 +74,6 @@ export class TextInputComponent {
 	 * Maximum number allowed by number input's maxNumber
 	 */
 	@Input() maxNumber: number;
-
-	/**
-	 * labelTooltip adds an icon and descriptive tooltip to a input label
-	 */
-	@Input() labelTooltip: string;
 
 	requiredValidator = Validators.required;
 

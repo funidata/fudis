@@ -1,7 +1,7 @@
 import { Component, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { FudisIcon, FudisIconColor } from '../../types/icons';
-import { TooltipDirective } from '../tooltip/tooltip.directive';
+import { TooltipDirective } from '../../directives/tooltip/tooltip.directive';
 
 /**
  * Example: `<fudis-icon icon="info" color="primary"></fudis-icon>`
@@ -23,7 +23,7 @@ export class IconComponent extends TooltipDirective implements OnInit {
 	/**
 	 * Binding fudis-icon class to component wrapper
 	 */
-	@HostBinding('class') classes = 'fudis-icon';
+	@HostBinding('class') classes = 'fudis-icon-host';
 
 	/**
 	 * Choose icon
@@ -38,15 +38,16 @@ export class IconComponent extends TooltipDirective implements OnInit {
 	/**
 	 * Use rotate to flip and rotate icon
 	 */
-	@Input() rotate?: 'flip-180' | 'cw-90' | 'ccw-90' | null;
+	@Input() rotate?: 'flip-180' | 'cw-90' | 'ccw-90' | 'none' = 'none';
 
-	/**
-	 * Additional tooltiptext for icon
-	 */
-	@Input() tooltipText: string;
+	getClasses(): string[] {
+		const cssClasses = [
+			'fudis-icon',
+			`fudis-icon-color__${this.color}`,
+			`fudis-icon-rotate__${this.rotate}`,
+			this.icon.includes('-small') ? 'fudis-icon__sm' : 'fudis-icon__lg',
+		];
 
-	/**
-	 * Additional tooltiptext for icon
-	 */
-	@Input() override tooltipToggle: boolean;
+		return cssClasses;
+	}
 }

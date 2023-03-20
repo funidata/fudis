@@ -1,11 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { TooltipDirective } from '../../../directives/tooltip/tooltip.directive';
 
 @Component({
 	selector: 'fudis-label',
 	templateUrl: './label.component.html',
 	styleUrls: ['./label.component.scss'],
 })
-export class LabelComponent {
+export class LabelComponent extends TooltipDirective implements OnInit {
 	/**
 	 * Text indicating if form element associated with label required or not
 	 */
@@ -25,9 +26,4 @@ export class LabelComponent {
 	 * Id for label, e. g. used in Dropdown to link ngMaterial mat-select with 'aria-labelledby' to fudis-label
 	 */
 	@Input() id: string;
-
-	/**
-	 * LabelTooltip adds an icon with descriptive tooltip to a label.
-	 */
-	@Input() labelTooltip: string;
 }

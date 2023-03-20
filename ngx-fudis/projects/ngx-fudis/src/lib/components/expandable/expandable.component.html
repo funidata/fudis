@@ -45,7 +45,7 @@
 		(click)="setCollapsedStatus(!collapsed)">
 		<fudis-icon
 			icon="chevron-ring-fill"
-			[rotate]="collapsed ? null : 'cw-90'"
+			[rotate]="collapsed ? 'none' : 'cw-90'"
 			class="fudis-expandable__header__title__icon"></fudis-icon>
 		{{ title }}
 		<span *ngIf="subTitle" class="fudis-expandable__header__title__sub-title">{{ subTitle }}</span>

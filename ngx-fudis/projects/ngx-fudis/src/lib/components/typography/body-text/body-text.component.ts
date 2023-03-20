@@ -11,7 +11,7 @@ type MarginBottomSize = 'm' | 'l' | 0 | '0';
 	encapsulation: ViewEncapsulation.None,
 })
 export class BodyTextComponent {
-	@HostBinding('class') classes = 'fudis-body-text';
+	@HostBinding('class') classes = 'fudis-body-text-host';
 
 	@Input() size: BodyTextSize = 'm-regular';
 
