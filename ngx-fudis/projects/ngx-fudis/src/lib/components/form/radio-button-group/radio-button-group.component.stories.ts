@@ -54,7 +54,6 @@ class RadioButtonGroupExampleComponent {
 	/**
 	 * Options for testing purposes
 	 */
-
 	fruitOptions: IFudisRadioButtonOption[] = [
 		{ value: 'apple', viewValue: 'Apple', id: 'fruit-1', name: 'fruit' },
 		{ value: 'fair-trade-banana', viewValue: 'Fair Trade Banana', id: 'fruit-2', name: 'fruit', checked: true },

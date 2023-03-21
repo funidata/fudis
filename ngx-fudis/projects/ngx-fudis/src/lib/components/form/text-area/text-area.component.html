@@ -1,6 +1,7 @@
 <div class="fudis-form-element fudis-text-area fudis-text-area__{{ size }}">
 	<fudis-label
 		[for]="id"
+		[id]="'label_' + id"
 		[text]="label"
 		[requiredText]="control.hasValidator(requiredValidator) && requiredText ? requiredText : null">
 	</fudis-label>
