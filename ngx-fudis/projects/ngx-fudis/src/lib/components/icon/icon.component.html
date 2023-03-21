@@ -1,5 +1,11 @@
 <ng-container *ngIf="tooltip">
-	<svg [class]="getClasses()" aria-hidden="true" fudisTooltip [tooltip]="tooltip" [tooltipToggle]="tooltipToggle">
+	<svg
+		[class]="getClasses()"
+		aria-hidden="true"
+		fudisTooltip
+		[tooltip]="tooltip"
+		[tooltipToggle]="tooltipToggle"
+		[tooltipPosition]="tooltipPosition">
 		<use [attr.href]="icon + '.svg#' + icon"></use>
 	</svg>
 </ng-container>
