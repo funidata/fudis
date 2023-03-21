@@ -1,9 +1,14 @@
 import { ComponentType } from '@angular/cdk/portal';
-import { Injectable } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 
-@Injectable()
-export class FudisDialog {
+// @Injectable()
+@Component({
+	selector: 'fudis-dialog',
+	styleUrls: ['./dialog.component.scss'],
+	templateUrl: './dialog.component.html',
+})
+export class DialogComponent {
 	constructor(public dialog: MatDialog) {}
 
 	/**
@@ -15,7 +20,7 @@ export class FudisDialog {
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	open<T, R = any>(component: ComponentType<T>, config?: MatDialogConfig<any>): MatDialogRef<T, R> {
-		const dialogRef = this.dialog.open(component, FudisDialog.createConfig());
+		const dialogRef = this.dialog.open(component, DialogComponent.createConfig());
 		return dialogRef;
 	}
 

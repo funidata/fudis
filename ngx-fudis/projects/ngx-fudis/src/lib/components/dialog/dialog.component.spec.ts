@@ -1,17 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
-
-import { FudisDialog } from './dialog';
+import { DialogComponent } from './dialog.component';
 
 describe('FudisDialogService', () => {
-	let service: FudisDialog;
+	let service: DialogComponent;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			imports: [MatDialogModule],
-			providers: [FudisDialog],
+			providers: [DialogComponent],
 		});
-		service = TestBed.inject(FudisDialog);
+		service = TestBed.inject(DialogComponent);
 	});
 
 	it('should be created', () => {

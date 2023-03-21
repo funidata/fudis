@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { MatNativeDateModule, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
@@ -29,7 +29,7 @@ import { ErrorMessageComponent } from './components/form/error-message/error-mes
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
 import { ExpandableContentDirective } from './components/expandable/expandable-content.directive';
-import { FudisDialog } from './components/dialog/dialog';
+import { DialogComponent } from './components/dialog/dialog.component';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { GridComponent } from './components/grid/grid.component';
 import { GridApiDirective } from './components/grid/grid-api.directive';
@@ -58,6 +58,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		DatepickerComponent,
 		DatepickerCustomHeaderComponent,
 		DescriptionListComponent,
+		DialogComponent,
 		DropdownComponent,
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
@@ -71,10 +72,6 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		GridApiDirective,
 		GridDirective,
 		GuidanceComponent,
-		DescriptionListComponent,
-		DropdownComponent,
-		ErrorMessageComponent,
-		ErrorSummaryComponent,
 		HeadingComponent,
 		IconComponent,
 		LabelComponent,
@@ -117,14 +114,15 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		CheckboxComponent,
 		DatepickerComponent,
 		DescriptionListComponent,
+		DialogComponent,
 		DropdownComponent,
 		// ErrorSummaryComponent,
 		ExpandableComponent,
 		ExpandableContentDirective,
-		FudisDialogTitleDirective,
-		FudisDialogActionsDirective,
-		FudisDialogContentDirective,
-		FudisDialogCloseDirective,
+		// FudisDialogTitleDirective,
+		// FudisDialogActionsDirective,
+		// FudisDialogContentDirective,
+		// FudisDialogCloseDirective,
 		GridComponent,
 		GridDirective,
 		HeadingComponent,
@@ -138,10 +136,13 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		// TextSpacingComponent,
 	],
 	providers: [
-		FudisDialog,
 		{ provide: DateAdapter, useClass: DatepickerCustomDateAdapter, deps: [MAT_DATE_LOCALE] },
 		{ provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
 		{ provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { strict: true } },
+		{
+			provide: MatDialogRef,
+			useValue: {},
+		},
 	],
 })
 export class NgxFudisModule {}

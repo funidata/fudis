@@ -4,7 +4,6 @@
  */
 
 export * from './lib/ngx-fudis.module';
-export * from './lib/components/dialog/public-api';
 
 export { BadgeComponent } from './lib/components/badge/badge.component';
 export { BodyTextComponent } from './lib/components/typography/body-text/body-text.component';
@@ -12,10 +11,17 @@ export { ButtonComponent } from './lib/components/button/button.component';
 export { CheckboxComponent } from './lib/components/form/checkbox/checkbox.component';
 export { DatepickerComponent } from './lib/components/form/datepicker/datepicker.component';
 export { DescriptionListComponent } from './lib/components/description-list/description-list.component';
+export { DialogComponent } from './lib/components/dialog/dialog.component';
 export { DropdownComponent } from './lib/components/form/dropdown/dropdown.component';
 // export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';
 export { ExpandableComponent } from './lib/components/expandable/expandable.component';
 export { ExpandableContentDirective } from './lib/components/expandable/expandable-content.directive';
+// export {
+// 	FudisDialogTitleDirective,
+// 	FudisDialogContentDirective,
+// 	FudisDialogActionsDirective,
+// 	FudisDialogCloseDirective,
+// } from './lib/components/dialog/dialog-directives';
 export { GridComponent } from './lib/components/grid/grid.component';
 export { GridDirective } from './lib/components/grid/grid.directive';
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
