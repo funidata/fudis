@@ -14,7 +14,6 @@ export class TooltipDirective extends TooltipApiDirective implements OnInit {
 
 	ngOnInit() {
 		this.ngMaterialTooltip.message = this.tooltip;
-		this.tooltipElement.nativeElement.classList.add('fudis-tooltip');
 		if (this.tooltipPosition) {
 			this.ngMaterialTooltip.position = this.tooltipPosition;
 		}

@@ -22,6 +22,7 @@ import { IFudisErrorMessages } from '../../../types/forms';
 				[errorMsg]="{ required: 'Missing a value.' }"
 				label="I am a required text input"
 				tooltip="This is a tooltip text"
+				[tooltipPosition]="'above'"
 				helpText="Please add some values here above!"></fudis-text-input>
 			<fudis-text-input
 				[control]="mainFormGroup.controls['third']"
@@ -41,6 +42,7 @@ import { IFudisErrorMessages } from '../../../types/forms';
 				[minNumber]="minNumber"
 				[maxNumber]="maxNumber"
 				tooltip="This is a tooltip text as well"
+				[tooltipPosition]="'left'"
 				type="number"
 				size="s"
 				[errorMsg]="validatorMessages"></fudis-text-input>

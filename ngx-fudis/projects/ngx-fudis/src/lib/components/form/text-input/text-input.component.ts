@@ -1,16 +1,16 @@
 // eslint-disable-next-line max-classes-per-file
-import { Component, Input, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { IFudisErrorMessages } from '../../../types/forms';
-import { TooltipDirective } from '../../../directives/tooltip/tooltip.directive';
 import { GuidanceComponent } from '../guidance/guidance.component';
+import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 
 @Component({
 	selector: 'fudis-text-input[id][label]',
 	templateUrl: './text-input.component.html',
 	styleUrls: ['./text-input.component.scss'],
 })
-export class TextInputComponent extends TooltipDirective implements OnInit {
+export class TextInputComponent extends TooltipApiDirective {
 	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;
 
 	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
