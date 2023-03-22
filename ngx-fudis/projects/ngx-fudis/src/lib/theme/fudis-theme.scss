@@ -57,3 +57,4 @@ $datepicker-theme: mat.define-light-theme(
 // Emit theme-dependent styles for common features used across multiple Material components.
 @include mat.core-theme($theme);
 @include mat.datepicker-theme($datepicker-theme);
+@include mat.autocomplete-theme($theme);
