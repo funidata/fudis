@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,6 +17,7 @@ import {
 	FudisDialogContentDirective,
 	FudisDialogTitleDirective,
 } from './components/dialog/dialog-directives';
+import { AutocompleteComponent } from './components/form/autocomplete/autocomplete.component';
 import { BadgeComponent } from './components/badge/badge.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { ButtonComponent } from './components/button/button.component';
@@ -51,6 +53,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 	 * Include both internal and external Fudis components in 'declarations' array below.
 	 */
 	declarations: [
+		AutocompleteComponent,
 		BadgeComponent,
 		BodyTextComponent,
 		ButtonComponent,
@@ -92,6 +95,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		CommonModule,
 		FormsModule,
 		LayoutModule,
+		MatAutocompleteModule,
 		MatDatepickerModule,
 		MatDialogModule,
 		MatFormFieldModule,
@@ -107,6 +111,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 	 * when you want to expose it outside
 	 */
 	exports: [
+		AutocompleteComponent,
 		BadgeComponent,
 		BodyTextComponent,
 		ButtonComponent,

@@ -38,3 +38,10 @@ export interface IFudisErrorSummaryItem {
 	id: string;
 	message: string;
 }
+
+export interface IFudisAutocompleteOption {
+	/** Underlying value of the option */
+	value: any;
+	/** Value that is shown in the UI */
+	viewValue: string;
+}
