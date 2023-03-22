@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,6 +17,7 @@ import {
 	DialogTitleDirective,
 	DialogActionsDirective,
 } from './components/dialog/dialog-directives';
+import { AutocompleteComponent } from './components/form/autocomplete/autocomplete.component';
 import { BadgeComponent } from './components/badge/badge.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { ButtonComponent } from './components/button/button.component';
@@ -54,6 +56,7 @@ import { SpacingDirective } from './directives/spacing/spacing.directive';
 	 * Include both internal and external Fudis components in 'declarations' array below.
 	 */
 	declarations: [
+		AutocompleteComponent,
 		BadgeComponent,
 		BodyTextComponent,
 		ButtonComponent,
@@ -97,6 +100,7 @@ import { SpacingDirective } from './directives/spacing/spacing.directive';
 		CommonModule,
 		FormsModule,
 		LayoutModule,
+		MatAutocompleteModule,
 		MatDatepickerModule,
 		MatDialogModule,
 		MatFormFieldModule,
@@ -112,6 +116,7 @@ import { SpacingDirective } from './directives/spacing/spacing.directive';
 	 * when you want to expose it outside
 	 */
 	exports: [
+		AutocompleteComponent,
 		BadgeComponent,
 		BodyTextComponent,
 		ButtonComponent,

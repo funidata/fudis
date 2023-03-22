@@ -5,6 +5,7 @@
 
 export * from './lib/ngx-fudis.module';
 
+export { AutocompleteComponent } from './lib/components/form/autocomplete/autocomplete.component';
 export { BadgeComponent } from './lib/components/badge/badge.component';
 export { BodyTextComponent } from './lib/components/typography/body-text/body-text.component';
 export { ButtonComponent } from './lib/components/button/button.component';
