@@ -35,7 +35,7 @@ export class AutocompleteComponent implements OnInit {
 	@Input() label: string;
 
 	/**
-	 * Id for autocomplete
+	 * Unique id for autocomplete
 	 */
 	@Input() id: string;
 
@@ -43,6 +43,11 @@ export class AutocompleteComponent implements OnInit {
 	 * Available sizes for the autocomplete - defaults to large.
 	 */
 	@Input() size?: 's' | 'm' | 'l' = 'l';
+
+	/**
+	 * Option for disabling the input
+	 */
+	@Input() disabled: boolean = false;
 
 	/**
 	 * Text to indicate compulsory
@@ -59,6 +64,9 @@ export class AutocompleteComponent implements OnInit {
 	 */
 	@Input() errorMsg: IFudisErrorMessages;
 
+	/**
+	 * If control has required validator, this is set to true
+	 */
 	required: boolean = false;
 
 	ngOnInit(): void {
@@ -66,9 +74,6 @@ export class AutocompleteComponent implements OnInit {
 			this.required = true;
 		}
 
-		/**
-		 * Filter options when user inputs text
-		 */
 		this.filteredOptions = this.control.valueChanges.pipe(
 			map((value) => {
 				// Start filtering after three characters
@@ -81,6 +86,9 @@ export class AutocompleteComponent implements OnInit {
 		);
 	}
 
+	/**
+	 * Filter options when user inputs text
+	 */
 	private _filter(viewValue: string): IFudisAutocompleteOption[] {
 		const filterValue = viewValue.toLowerCase();
 

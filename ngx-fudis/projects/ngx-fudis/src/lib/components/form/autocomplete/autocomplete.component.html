@@ -2,20 +2,31 @@
 	<fudis-label
 		[text]="label"
 		[id]="'label_' + id"
+		[for]="id"
 		[requiredText]="required && requiredText ? requiredText : null"></fudis-label>
 	<input
+		[id]="id"
 		class="fudis-autocomplete__input"
 		[class.fudis-autocomplete__input--invalid]="control.invalid && control.touched"
+		[class.fudis-autocomplete__input--disabled]="disabled"
 		type="text"
 		(blur)="handleBlur()"
 		#fudisAutocompleteInput
 		[formControl]="control"
-		[matAutocomplete]="autocomplete" />
+		[matAutocomplete]="autocomplete"
+		[attr.aria-describedby]="id + '_guidance'"
+		[readonly]="disabled"
+		[attr.aria-disabled]="disabled"
+		[attr.required]="required" />
 	<fudis-guidance [helpText]="helpText" [id]="id + '_guidance'" [errorMsg]="errorMsg" [control]="control">
 	</fudis-guidance>
 
 	<mat-autocomplete #autocomplete="matAutocomplete" autoActiveFirstOption [displayWith]="displayFn">
-		<mat-option class="fudis-autocomplete__option" *ngFor="let option of filteredOptions | async" [value]="option">
+		<mat-option
+			class="fudis-autocomplete__option"
+			*ngFor="let option of filteredOptions | async"
+			[value]="option"
+			[disabled]="option.disabled">
 			{{ option.viewValue }}
 		</mat-option>
 	</mat-autocomplete>

@@ -3,6 +3,7 @@
 @use '../../../foundations/typography/mixins.scss' as typography;
 @use '../../../foundations/focus/mixins.scss' as focus;
 @use '../../../foundations/colors/tokens.scss' as colors;
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
 
 .fudis-autocomplete {
 	max-width: calc(23 * spacing.$spacing-s);
@@ -35,6 +36,13 @@
 
 		&--invalid {
 			border-color: colors.$color-red;
-		}	
+		}
+
+		&--disabled {
+			@include borders.border('1px', 'dashed', 'gray-middle');	
+			@include colorMixins.bg-color('gray-extra-light');
+
+			cursor: default;
+		}
 	}
 }
