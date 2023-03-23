@@ -2,10 +2,16 @@ import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
 import { FormControl, Validators } from '@angular/forms';
 import { AutocompleteComponent } from './autocomplete.component';
+import readme from './readme.mdx';
 
 export default {
 	title: 'Components/Form/Autocomplete',
 	component: AutocompleteComponent,
+	parameters: {
+		docs: {
+			page: readme,
+		},
+	},
 	decorators: [
 		moduleMetadata({
 			imports: [],
@@ -31,7 +37,7 @@ Autocomplete.args = {
 	options: [
 		{ value: 123, viewValue: 'Mary Rhubarb' },
 		{ value: '456-xx', viewValue: 'Kingsley Kale' },
-		{ value: 789, viewValue: 'Martha Zuccini' },
+		{ value: 789, viewValue: 'Martha Zuccini', disabled: true },
 		{ value: 'very-long-value', viewValue: 'Brian Eggplant with Marinated Pomegranate Seeds' },
 		{ value: 1234, viewValue: 'Martin Seeding' },
 	],
