@@ -28,7 +28,7 @@ import { DropdownComponent } from './components/form/dropdown/dropdown.component
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
-import { ExpandableContentDirective } from './components/expandable/expandable-content.directive';
+import { ExpandableContentDirective } from './components/expandable/expandable-directives/expandable-content.directive';
 import { FudisDialog } from './components/dialog/dialog';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { GridComponent } from './components/grid/grid.component';

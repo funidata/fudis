@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { Component, ContentChild, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 import { ExpandableType } from '../../types/expandables';
-import { ExpandableContentDirective } from './expandable-content.directive';
+import { ExpandableContentDirective } from './expandable-directives/expandable-content.directive';
 
 /**
  * Example usage:

@@ -15,7 +15,7 @@ export { DescriptionListComponent } from './lib/components/description-list/desc
 export { DropdownComponent } from './lib/components/form/dropdown/dropdown.component';
 // export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';
 export { ExpandableComponent } from './lib/components/expandable/expandable.component';
-export { ExpandableContentDirective } from './lib/components/expandable/expandable-content.directive';
+export { ExpandableContentDirective } from './lib/components/expandable/expandable-directives/expandable-content.directive';
 export { GridComponent } from './lib/components/grid/grid.component';
 export { GridDirective } from './lib/components/grid/grid.directive';
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';

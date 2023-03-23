@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { MockComponent } from 'ng-mocks';
 import { IconComponent } from '../icon/icon.component';
-import { ExpandableContentDirective } from './expandable-content.directive';
+import { ExpandableContentDirective } from './expandable-directives/expandable-content.directive';
 import { ExpandableComponent } from './expandable.component';
 
 @Component({
