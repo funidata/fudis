@@ -44,4 +44,6 @@ export interface IFudisAutocompleteOption {
 	value: any;
 	/** Value that is shown in the UI */
 	viewValue: string;
+	/** Is option disabled in the options list dropdown */
+	disabled?: boolean;
 }
