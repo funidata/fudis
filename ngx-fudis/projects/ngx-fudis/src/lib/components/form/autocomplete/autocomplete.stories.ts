@@ -42,3 +42,20 @@ Autocomplete.args = {
 		{ value: 1234, viewValue: 'Martin Seeding' },
 	],
 };
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+	id: 'example-id-for-disabled-autocomplete',
+	label: 'Choose one option',
+	disabled: true,
+	helpText:
+		'This is autocomplete input, start writing (e.g mar) and after three letters the input will suggest matching options.',
+	control: new FormControl(''),
+	options: [
+		{ value: 123, viewValue: 'Mary Rhubarb' },
+		{ value: '456-xx', viewValue: 'Kingsley Kale' },
+		{ value: 789, viewValue: 'Martha Zuccini' },
+		{ value: 'very-long-value', viewValue: 'Brian Eggplant with Marinated Pomegranate Seeds' },
+		{ value: 1234, viewValue: 'Martin Seeding' },
+	],
+};
