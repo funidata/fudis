@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 @Component({
 	selector: 'app-dialog-test-content',
 	template: `
-		<fudis-heading fudis-dialog-title tag="h2">Welcome to a Dialog!</fudis-heading>
+		<fudis-heading fudisDialogTitle tag="h2">Welcome to a Dialog!</fudis-heading>
 		<form>
 			<fudis-dialog-content>
 				<fudis-legend>This is an important form</fudis-legend>
@@ -17,7 +17,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 					[errorMsg]="{ required: 'This is required field.' }"></fudis-text-input>
 			</fudis-dialog-content>
 			<fudis-dialog-actions>
-				<fudis-button fudis-dialog-close label="Cancel"></fudis-button>
+				<fudis-button fudisDialogClose label="Cancel"></fudis-button>
 				<fudis-button cdkFocusInitial label="Ok"></fudis-button>
 			</fudis-dialog-actions>
 		</form>

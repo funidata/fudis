@@ -15,7 +15,7 @@ import { DialogService } from './dialog.service';
 		</ng-container>
 		<ng-template #dialogWithForm>
 			<fudis-dialog [closeText]="'Close'" [size]="'l'">
-				<fudis-heading fudis-dialog-title tag="h2">Welcome to a Dialog!</fudis-heading>
+				<fudis-heading fudisDialogTitle tag="h2">Welcome to a Dialog!</fudis-heading>
 				<fudis-dialog-content>
 					<ng-container *ngIf="exampleADialogFormGroup">
 						<form>
@@ -31,14 +31,14 @@ import { DialogService } from './dialog.service';
 					</ng-container>
 				</fudis-dialog-content>
 				<fudis-dialog-actions align="end">
-					<fudis-button fudis-dialog-close label="Cancel"></fudis-button>
+					<fudis-button fudisDialogClose label="Cancel"></fudis-button>
 					<fudis-button (click)="closeDialog()" [disabled]="!exampleADialogFormGroup.valid" label="Ok"></fudis-button>
 				</fudis-dialog-actions>
 			</fudis-dialog>
 		</ng-template>
 		<ng-template #dialogWithGrid>
 			<fudis-dialog [closeText]="'Close'" [size]="'l'">
-				<fudis-heading fudis-dialog-title tag="h2">Welcome to a Dialog with Fudis Grid!</fudis-heading>
+				<fudis-heading fudisDialogTitle tag="h2">Welcome to a Dialog with Fudis Grid!</fudis-heading>
 				<fudis-dialog-content>
 					<fudis-grid
 						[columns]="'1fr 1fr 1fr'"

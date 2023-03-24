@@ -38,7 +38,7 @@ export const getGridClasses = (gridElement: IFudisGridAttributes) => {
 		`fudis-grid__margin__bottom__${gridElement.marginBottom}`,
 		gridElement.rowGap === 'responsive' ? '' : `fudis-grid__row-gap__${gridElement.rowGap}`,
 		gridElement.columnGap === 'responsive' ? '' : `fudis-grid__column-gap__${gridElement.columnGap}`,
-		gridElement.marginSides === 'none' ? 'fudis-grid__margin__side__none' : '',
+		gridElement.marginSides === 'responsive' ? '' : `fudis-grid__margin__sides__${gridElement.marginSides}`,
 	];
 
 	if (gridElement.classes) {
