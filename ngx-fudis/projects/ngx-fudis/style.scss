@@ -1,9 +1,7 @@
-// Import custom ngMaterial styling
-@use "./src/lib/components/form/autocomplete/ngMaterial-theme.scss" as autocomplete;
-@use "./src/lib/components/form/datepicker/ngMaterial-theme.scss" as datepicker;
+@use "@angular/material" as mat;
 
 // Fudis theme import
-@import "./src/lib/theme/fudis-theme";
+@import "./src/lib/theme/component-themes-to-apply";
 
 // Import font files globally
 @import './src/lib/assets/fonts/fonts';

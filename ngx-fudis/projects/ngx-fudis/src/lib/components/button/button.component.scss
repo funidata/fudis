@@ -55,6 +55,13 @@
 		height: spacing.$spacing-l;
 	}
 
+	&__icon-only {
+		padding: 0;
+		width: spacing.$spacing-m;
+		min-width: initial;
+		height: spacing.$spacing-m;
+	}
+
 	&__icon {
 		margin-left: -(spacing.$spacing-xxs);
 

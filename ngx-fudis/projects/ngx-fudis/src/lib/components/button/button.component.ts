@@ -15,7 +15,7 @@ export class ButtonComponent {
 	/**
 	 * Button size options
 	 */
-	@Input() size: 'small' | 'medium' = 'medium';
+	@Input() size: 'icon-only' | 'small' | 'medium' = 'medium';
 
 	/**
 	 * Button type options
@@ -60,7 +60,6 @@ export class ButtonComponent {
 		} else if (this.variant === 'secondary' || this.variant === 'tertiary') {
 			this.iconColor = 'primary';
 		}
-
 		return ['fudis-button', `fudis-button__${this.size}`, `fudis-button__${this.variant}`];
 	}
 }
