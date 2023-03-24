@@ -12,15 +12,20 @@ export type TFudisAlignItems = 'start' | 'center' | 'end' | 'stretch';
 
 export type TFudisGridMargin = 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'none';
 
-export type TFudisGridGapValues = 'none' | 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'responsive';
+export type TFudisGridMarginSide = 'responsive' | 'none';
+
+export type TFudisSpacing = 'none' | 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
+
+export type TFudisGridGap = TFudisSpacing | 'responsive';
 
 export interface IFudisGridAttributes {
 	width: TFudisGridWidth;
 	align: TFudisAlign;
 	marginTop: TFudisGridMargin;
 	marginBottom: TFudisGridMargin;
-	rowGap: TFudisGridGapValues;
-	columnGap: TFudisGridGapValues;
+	rowGap: TFudisGridGap;
+	columnGap: TFudisGridGap;
+	marginSides: TFudisGridMarginSide;
 	classes: string[];
 }
 
@@ -33,6 +38,7 @@ export const getGridClasses = (gridElement: IFudisGridAttributes) => {
 		`fudis-grid__margin__bottom__${gridElement.marginBottom}`,
 		gridElement.rowGap === 'responsive' ? '' : `fudis-grid__row-gap__${gridElement.rowGap}`,
 		gridElement.columnGap === 'responsive' ? '' : `fudis-grid__column-gap__${gridElement.columnGap}`,
+		gridElement.marginSides === 'none' ? 'fudis-grid__margin__side__none' : '',
 	];
 
 	if (gridElement.classes) {

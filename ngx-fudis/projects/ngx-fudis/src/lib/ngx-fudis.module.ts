@@ -11,10 +11,10 @@ import { MatNativeDateModule, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } f
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import {
-	FudisDialogActionsDirective,
-	FudisDialogCloseDirective,
-	FudisDialogContentDirective,
-	FudisDialogTitleDirective,
+	DialogCloseDirective,
+	DialogContentDirective,
+	DialogTitleDirective,
+	DialogActionsDirective,
 } from './components/dialog/dialog-directives';
 import { BadgeComponent } from './components/badge/badge.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
@@ -29,7 +29,7 @@ import { ErrorMessageComponent } from './components/form/error-message/error-mes
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
 import { ExpandableContentDirective } from './components/expandable/expandable-content.directive';
-import { FudisDialog } from './components/dialog/dialog';
+import { DialogService } from './components/dialog/dialog.service';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { GridComponent } from './components/grid/grid.component';
 import { GridApiDirective } from './components/grid/grid-api.directive';
@@ -45,6 +45,9 @@ import { RadioButtonGroupComponent } from './components/form/radio-button-group/
 import { TextInputComponent } from './components/form/text-input/text-input.component';
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
+
+import { DialogComponent } from './components/dialog/dialog.component';
+import { SpacingDirective } from './directives/spacing/spacing.directive';
 
 @NgModule({
 	/*
@@ -63,10 +66,11 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		ErrorSummaryComponent,
 		ExpandableComponent,
 		ExpandableContentDirective,
-		FudisDialogTitleDirective,
-		FudisDialogActionsDirective,
-		FudisDialogContentDirective,
-		FudisDialogCloseDirective,
+		DialogTitleDirective,
+		DialogComponent,
+		DialogActionsDirective,
+		DialogContentDirective,
+		DialogCloseDirective,
 		GridComponent,
 		GridApiDirective,
 		GridDirective,
@@ -79,6 +83,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		NotificationComponent,
 		RadioButtonComponent,
 		RadioButtonGroupComponent,
+		SpacingDirective,
 		TextInputComponent,
 		TextSpacingComponent,
 		TextAreaComponent,
@@ -113,14 +118,15 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		CheckboxComponent,
 		DatepickerComponent,
 		DescriptionListComponent,
+		DialogComponent,
 		DropdownComponent,
 		// ErrorSummaryComponent,
 		ExpandableComponent,
 		ExpandableContentDirective,
-		FudisDialogTitleDirective,
-		FudisDialogActionsDirective,
-		FudisDialogContentDirective,
-		FudisDialogCloseDirective,
+		DialogTitleDirective,
+		DialogContentDirective,
+		DialogCloseDirective,
+		DialogActionsDirective,
 		GridComponent,
 		GridDirective,
 		HeadingComponent,
@@ -129,12 +135,13 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		LinkComponent,
 		NotificationComponent,
 		RadioButtonGroupComponent,
+		SpacingDirective,
 		TextAreaComponent,
 		TextInputComponent,
 		// TextSpacingComponent,
 	],
 	providers: [
-		FudisDialog,
+		DialogService,
 		{ provide: DateAdapter, useClass: DatepickerCustomDateAdapter, deps: [MAT_DATE_LOCALE] },
 		{ provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
 		{ provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { strict: true } },

@@ -1,6 +1,0 @@
-@use '../../foundations/colors/tokens.scss' as colors;
-@use '../../foundations/borders/mixins.scss' as borders;
-
-.fudis-dialog-panel {
-	@include borders.border('2px', 'solid', 'gray-dark');
-}

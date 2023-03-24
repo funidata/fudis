@@ -113,6 +113,13 @@
 				margin-bottom: spacing.$spacing-xxl;
 			}
 		}
+
+		&__side {
+			&__none {
+				margin-right: 0;
+				margin-left: 0;
+			}
+		}
 	}
 
 	/*

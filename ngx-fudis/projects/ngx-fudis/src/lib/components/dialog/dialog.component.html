@@ -1,0 +1,11 @@
+<section class="fudis-dialog fudis-dialog__size__{{ size }}">
+	<fudis-button
+		class="fudis-dialog__close"
+		[ariaLabel]="closeText"
+		fudis-dialog-close
+		[size]="'icon-only'"
+		[icon]="'ring-plus'"
+		[variant]="'tertiary'">
+	</fudis-button>
+	<ng-content></ng-content>
+</section>
