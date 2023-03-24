@@ -14,7 +14,7 @@ import { DialogService } from './dialog.service';
 			<fudis-body-text>Great choise, your power animal is {{ this.chosenPowerAnimal }}</fudis-body-text>
 		</ng-container>
 		<ng-template #dialogWithForm>
-			<fudis-dialog [closeText]="'Close'" [size]="'l'">
+			<fudis-dialog [closeButtonAriaLabel]="'Close'" [size]="'l'">
 				<fudis-heading fudisDialogTitle tag="h2">Welcome to a Dialog!</fudis-heading>
 				<fudis-dialog-content>
 					<ng-container *ngIf="exampleADialogFormGroup">
@@ -37,7 +37,7 @@ import { DialogService } from './dialog.service';
 			</fudis-dialog>
 		</ng-template>
 		<ng-template #dialogWithGrid>
-			<fudis-dialog [closeText]="'Close'" [size]="'l'">
+			<fudis-dialog [closeButtonAriaLabel]="'Close'" [size]="'l'">
 				<fudis-heading fudisDialogTitle tag="h2">Welcome to a Dialog with Fudis Grid!</fudis-heading>
 				<fudis-dialog-content>
 					<fudis-grid

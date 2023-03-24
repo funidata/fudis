@@ -11,12 +11,7 @@ import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapte
 import { MatNativeDateModule, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import {
-	DialogCloseDirective,
-	DialogContentDirective,
-	DialogTitleDirective,
-	DialogActionsDirective,
-} from './components/dialog/dialog-directives';
+
 import { AutocompleteComponent } from './components/form/autocomplete/autocomplete.component';
 import { BadgeComponent } from './components/badge/badge.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
@@ -26,12 +21,19 @@ import { DatepickerComponent, FUDIS_DATE_FORMATS } from './components/form/datep
 import { DatepickerCustomDateAdapter } from './components/form/datepicker/datepicker-custom-date-adapter';
 import { DatepickerCustomHeaderComponent } from './components/form/datepicker/datepicker-custom-header/datepicker-custom-header.component';
 import { DescriptionListComponent } from './components/description-list/description-list.component';
+import {
+	DialogCloseDirective,
+	DialogContentDirective,
+	DialogTitleDirective,
+	DialogActionsDirective,
+} from './components/dialog/dialog-directives';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { DialogService } from './components/dialog/dialog.service';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
 import { ExpandableContentDirective } from './components/expandable/expandable-content.directive';
-import { DialogService } from './components/dialog/dialog.service';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { GridComponent } from './components/grid/grid.component';
 import { GridApiDirective } from './components/grid/grid-api.directive';
@@ -44,12 +46,10 @@ import { LinkComponent } from './components/link/link.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
 import { RadioButtonGroupComponent } from './components/form/radio-button-group/radio-button-group.component';
+import { SpacingDirective } from './directives/spacing/spacing.directive';
 import { TextInputComponent } from './components/form/text-input/text-input.component';
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
-
-import { DialogComponent } from './components/dialog/dialog.component';
-import { SpacingDirective } from './directives/spacing/spacing.directive';
 
 @NgModule({
 	/*
