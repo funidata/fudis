@@ -1,0 +1,5 @@
+<svg width="32" height="32" class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="shopping-cart">
+    <path class="a" d="M20.8828,19l1.1094-8.876a1,1,0,0,0-1.9844-.248l-.078.624H9.9984A2.274,2.274,0,0,0,7.85,9H5a1,1,0,0,0,0,2H7.85a.3.3,0,0,1,.2978.2641L9.1177,19ZM13.5,14V11.5h3V14Zm3,1v2h-3V15Zm-4-1H10.5063l-.3134-2.5H12.5Zm-1.8683,1H12.5v2H10.8823ZM17.5,17V15h1.8672l-.25,2Zm1.9922-3H17.5V11.5h2.3048Z"/>
+    <circle class="a" cx="11" cy="22" r="2"/>
+    <circle class="a" cx="19" cy="22" r="2"/>
+</svg>
