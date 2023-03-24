@@ -5,7 +5,7 @@ name: Publish Storybook by branch
 on:
   push:
     branches:
-      - basse-testaa2
+      - basse-testaa-2
   # FIXME: Use the trigger spec below once this action is verified to work.
   #  branches-ignore:
   #    - main
@@ -20,7 +20,7 @@ jobs:
         run: npm ci
         working-directory: ngx-fudis
       - name: Build Storybook
-        run: npm run build-storybook -- -o target/basse-testaa2
+        run: npm run build-storybook -- -o target/basse-testaa-2
         working-directory: ngx-fudis
       - name: Upload
         uses: actions/upload-pages-artifact@v1.0.7
