@@ -21,6 +21,8 @@ jobs:
     runs-on: ubuntu-22.04
     permissions:
       contents: write
+      deployments: write
+      pull-requests: write
     steps:
       - name: Create deployment
         uses: octokit/request-action@v2.1.7
