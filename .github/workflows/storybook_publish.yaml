@@ -22,6 +22,17 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Create deployment
+        uses: octokit/request-action@v2.1.7
+        id: create-deployment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          route: POST /repos/{owner}/{repo}/deployments
+          owner: ${{ github.repository.owner }}
+          repo: ${{ github.repository.name }}
+          ref: ${{ inputs.path }}
+          environment: docs-${{ inputs.path }}
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Install dependencies
@@ -44,3 +55,16 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ngx-fudis/static
           destination_dir: latest
+      - name: Complete deployment
+        uses: octokit/request-action@v2.1.7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          route: POST /repos/{owner}/{repo}/deployments/{deployment_id}/statuses
+          owner: ${{ github.repository.owner }}
+          repo: ${{ github.repository.name }}
+          deployment_id: ${{ fromJson(steps.create-deployment.outputs.data).id }}
+          ref: ${{ inputs.path }}
+          environment: docs-${{ inputs.path }}
+          state: success
+          environment_url: https://${{ github.repository.owner }}.github.io/${{ github.repository.name }}/${{ inputs.path }}
