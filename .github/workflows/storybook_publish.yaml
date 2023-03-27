@@ -33,6 +33,7 @@ jobs:
           route: POST /repos/${{ github.repository }}/deployments
           ref: ${{ inputs.path }}
           environment: docs-${{ inputs.path }}
+          required_contexts: "[]"
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Install dependencies
