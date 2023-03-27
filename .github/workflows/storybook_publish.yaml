@@ -42,20 +42,25 @@ jobs:
       - name: Build
         run: npm run build-storybook -- -o static
         working-directory: ngx-fudis
-      - name: Deploy to gh-pages branch
+      - name: Deploy to Pages under branch name
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ngx-fudis/static
           destination_dir: ${{ inputs.path }}
       # Optional deploy to 'latest'.
-      - name: Deploy to gh-pages branch
+      - name: Deploy to Pages under "latest" (optional)
         if: inputs.latest
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ngx-fudis/static
           destination_dir: latest
+      - name: Format deployment URL
+        id: url
+        env:
+          REPO: ${{ github.repository }}
+        run: echo "url=https://${{ github.repository_owner }}.github.io/${REPO##*/}/${{ inputs.path }}" >> $GITHUB_OUTPUT
       # FIXME: This fails too often because create-deployment returns 202 and no deployment ID.
       - name: Complete deployment
         uses: octokit/request-action@v2.1.7
@@ -67,4 +72,5 @@ jobs:
           ref: ${{ inputs.path }}
           environment: docs-${{ inputs.path }}
           state: success
-          environment_url: https://${{ github.repository.owner }}.github.io/${{ github.repository.name }}/${{ inputs.path }}
+          # environment_url: https://${{ github.repository_owner }}.github.io/${{ github.repository##*/ }}/${{ inputs.path }}
+          environment_url: ${{ steps.url.outputs.url }}
