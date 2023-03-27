@@ -29,8 +29,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           route: POST /repos/{owner}/{repo}/deployments
-          owner: ${{ github.repository.owner }}
-          repo: ${{ github.repository.name }}
+          owner: ${{ github.event.repository.owner }}
+          repo: ${{ github.event.repository.name }}
           ref: ${{ inputs.path }}
           environment: docs-${{ inputs.path }}
       - name: Checkout code
@@ -61,8 +61,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           route: POST /repos/{owner}/{repo}/deployments/{deployment_id}/statuses
-          owner: ${{ github.repository.owner }}
-          repo: ${{ github.repository.name }}
+          owner: ${{ github.event.repository.owner }}
+          repo: ${{ github.event.repository.name }}
           deployment_id: ${{ fromJson(steps.create-deployment.outputs.data).id }}
           ref: ${{ inputs.path }}
           environment: docs-${{ inputs.path }}
