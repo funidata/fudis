@@ -12,6 +12,7 @@ jobs:
 
   publish:
     name: Publish ngx-fudis to NPM
+    concurrency: npm-publish
     runs-on: ubuntu-22.04
     needs:
       - test
