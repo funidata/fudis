@@ -28,9 +28,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          route: POST /repos/{owner}/{repo}/deployments
-          owner: ${{ github.event.repository.owner }}
-          repo: ${{ github.event.repository.name }}
+          route: POST /repos/${{ github.repository }}/deployments
           ref: ${{ inputs.path }}
           environment: docs-${{ inputs.path }}
       - name: Checkout code
@@ -55,14 +53,13 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ngx-fudis/static
           destination_dir: latest
+      # FIXME: This fails too often because create-deployment returns 202 and no deployment ID.
       - name: Complete deployment
         uses: octokit/request-action@v2.1.7
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          route: POST /repos/{owner}/{repo}/deployments/{deployment_id}/statuses
-          owner: ${{ github.event.repository.owner }}
-          repo: ${{ github.event.repository.name }}
+          route: POST /repos/${{ github.repository }}/deployments/{deployment_id}/statuses
           deployment_id: ${{ fromJson(steps.create-deployment.outputs.data).id }}
           ref: ${{ inputs.path }}
           environment: docs-${{ inputs.path }}
