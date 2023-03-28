@@ -7,35 +7,23 @@ on:
     types: [published]
 
 jobs:
-  build:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@v3
-      - name: "Build"
-        run: |
-          cd ngx-fudis
-          npm ci
-          npx ng run storybook:build
-      - name: Rename build directory by version
-        run: |
-          cd .storybook/target
-          mv storybook-static ${GITHUB_REF#refs/*/}
-      - name: "Upload"
-        uses: actions/upload-pages-artifact@v1.0.7
-        with:
-          path: "ngx-fudis/.storybook/target"
-
-  deploy:
-    needs: build
+  publish:
+    name: Build and deploy Storybook
     runs-on: ubuntu-22.04
     permissions:
-      contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      contents: write
     steps:
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1.2.4
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ngx-fudis
+      - name: Build Storybook
+        run: npm run build-storybook -- -o static
+        working-directory: ngx-fudis
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ngx-fudis/static
+          destination_dir: ${{ github.ref_name }}

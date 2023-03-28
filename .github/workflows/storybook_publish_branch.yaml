@@ -1,45 +1,16 @@
-# WIP
-# Should be merged with other Storybook workflows once ready.
+# Publish Storybook into GH Pages using branch name or version as the path.
+# Run on push for all branches.
 name: Publish Storybook by branch
 
 on:
   push:
+    # Note that this is required to avoid triggering on automatic release tags.
     branches:
-      - basse-testaa
-  # FIXME: Use the trigger spec below once this action is verified to work.
-  #  branches-ignore:
-  #    - main
+      - "*"
 
 jobs:
-  build:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Install dependencies
-        run: npm ci
-        working-directory: ngx-fudis
-      - name: Build Storybook
-        run: npx ng run storybook:build
-        working-directory: ngx-fudis
-      - name: Rename build directory by version
-        run: mv storybook-static ${GITHUB_REF##*/}
-        working-directory: ngx-fudis/.storybook/target
-      - name: Upload
-        uses: actions/upload-pages-artifact@v1.0.7
-        with:
-          path: ngx-fudis/.storybook/target
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-22.04
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1.2.4
+  publish_storybook:
+    name: Publish Storybook
+    uses: ./.github/workflows/storybook_publish.yaml
+    with:
+      path: ${{ github.ref_name }}
