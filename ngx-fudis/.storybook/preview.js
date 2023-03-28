@@ -3,6 +3,8 @@ import { useTheme } from './useTheme';
 import { moduleMetadata } from '@storybook/angular';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 import docJson from '../documentation.json';
+import getVersion from './getVersion';
+
 setCompodocJson(docJson);
 
 const storyOrder = [
@@ -37,6 +39,16 @@ export const parameters = {
 	options: {
 		storySort: {
 			order: storyOrder,
+		},
+	},
+	version: {
+		...getVersion(),
+		style: {
+			color: '#1ea7fd',
+			border: '1px solid #f2f9ff',
+			'background-color': '#f2f9ff',
+			'font-size': '12px',
+			'text-transform': 'none',
 		},
 	},
 };

@@ -9,6 +9,7 @@ module.exports = {
 		'@storybook/addon-essentials',
 		'@storybook/addon-interactions',
 		'@storybook/addon-a11y',
+		'storybook-version',
 		{
 			name: '@storybook/addon-docs',
 			options: {
@@ -25,4 +26,8 @@ module.exports = {
 		'./../projects/ngx-fudis/src/lib/assets/fonts/fira/woff2',
 		'./../projects/ngx-fudis/src/lib/assets/icons',
 	],
+	env: (config) => ({
+		...config,
+		VERSION: process.env.VERSION,
+	}),
 };
