@@ -1,24 +1,38 @@
 <div class="fudis-autocomplete fudis-autocomplete__{{ size }}">
 	<fudis-label
 		[text]="label"
-		[id]="'label_' + id"
+		[id]="id + '__label'"
 		[for]="id"
 		[requiredText]="required && requiredText ? requiredText : null"></fudis-label>
-	<input
-		[id]="id"
-		class="fudis-autocomplete__input"
-		[class.fudis-autocomplete__input--invalid]="control.invalid && control.touched"
-		[class.fudis-autocomplete__input--disabled]="disabled"
-		type="text"
-		(blur)="handleBlur()"
-		#fudisAutocompleteInput
-		[formControl]="control"
-		[matAutocomplete]="autocomplete"
-		[attr.aria-describedby]="id + '_guidance'"
-		[readonly]="disabled"
-		[attr.aria-disabled]="disabled"
-		[attr.required]="required" />
-	<fudis-guidance [helpText]="helpText" [id]="id + '_guidance'" [errorMsg]="errorMsg" [control]="control">
+	<div class="fudis-autocomplete__input-wrapper">
+		<input
+			[id]="id"
+			class="fudis-autocomplete__input"
+			[class.fudis-autocomplete__input--invalid]="control.invalid && control.touched"
+			[class.fudis-autocomplete__input--disabled]="disabled"
+			type="text"
+			(blur)="handleBlur()"
+			#fudisAutocompleteInput
+			[formControl]="control"
+			[matAutocomplete]="autocomplete"
+			[attr.aria-describedby]="id + '__guidance'"
+			[readonly]="disabled"
+			[attr.aria-disabled]="disabled"
+			[attr.required]="required" />
+		<ng-container *ngIf="control.value">
+			<fudis-button
+				[size]="'icon-only'"
+				[variant]="'tertiary'"
+				[icon]="'close'"
+				(handleClick)="clearFilter()"
+				[ariaLabel]="clearFilterText"
+				class="fudis-autocomplete__input__icon fudis-autocomplete__input__icon--button"></fudis-button>
+		</ng-container>
+		<ng-container *ngIf="!control.value || control.value === ''">
+			<fudis-icon [icon]="'search'" class="fudis-autocomplete__input__icon"></fudis-icon>
+		</ng-container>
+	</div>
+	<fudis-guidance [helpText]="helpText" [id]="id + '__guidance'" [errorMsg]="errorMsg" [control]="control">
 	</fudis-guidance>
 
 	<mat-autocomplete #autocomplete="matAutocomplete" autoActiveFirstOption [displayWith]="displayFn">

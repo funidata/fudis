@@ -56,6 +56,8 @@
 	}
 
 	&__icon-only {
+		@include colors.bg-color('white');
+
 		padding: 0;
 		width: spacing.$spacing-m;
 		min-width: initial;
