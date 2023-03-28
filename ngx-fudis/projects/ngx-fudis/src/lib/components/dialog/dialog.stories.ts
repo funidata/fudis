@@ -10,26 +10,14 @@ import { DialogService } from './dialog.service';
 	template: `<fudis-button (click)="openDialog(dialogWithForm)" label="Open dialog with form"></fudis-button>
 		<fudis-button
 			(click)="openDialog(dialogWithGrid)"
-			size="m"
+			size="medium"
 			icon="rosette"
-			label="Open dialog with grid"></fudis-button>
-		<fudis-button
-			(click)="openDialog(dialogWithGrid)"
-			icon="ring-close"
-			ariaLabel="joo"
-			variant="tertiary"
-			size="icon-only"></fudis-button>
-		<fudis-button (click)="openDialog(dialogWithGrid)" variant="tertiary" icon="search" ariaLabel="joo"></fudis-button>
-		<fudis-button (click)="openDialog(dialogWithGrid)" variant="secondary" icon="search" ariaLabel="joo"></fudis-button>
-		<fudis-button (click)="openDialog(dialogWithGrid)" icon="search" ariaLabel="joo"></fudis-button>
-		<fudis-button (click)="openDialog(dialogWithGrid)" icon="people" label="Grid"></fudis-button>
-		<fudis-button (click)="openDialog(dialogWithGrid)" label="Open dialog with grid"></fudis-button>
-
+			[label]="'Open dialog with grid'"></fudis-button>
 		<ng-container *ngIf="this.chosenPowerAnimal">
 			<fudis-body-text>Great choise, your power animal is {{ this.chosenPowerAnimal }}</fudis-body-text>
 		</ng-container>
 		<ng-template #dialogWithForm>
-			<fudis-dialog [closeButtonAriaLabel]="'Close'" [size]="'l'">
+			<fudis-dialog [closeButtonLabel]="'Close'" [size]="'l'">
 				<fudis-heading fudisDialogTitle tag="h2">Welcome to a Dialog!</fudis-heading>
 				<fudis-dialog-content>
 					<ng-container *ngIf="exampleADialogFormGroup">
@@ -58,7 +46,7 @@ import { DialogService } from './dialog.service';
 			</fudis-dialog>
 		</ng-template>
 		<ng-template #dialogWithGrid>
-			<fudis-dialog [closeButtonAriaLabel]="'Close'" [size]="'l'">
+			<fudis-dialog [closeButtonLabel]="'Close'" [size]="'l'">
 				<fudis-heading fudisDialogTitle tag="h2">Welcome to a Dialog with Fudis Grid!</fudis-heading>
 				<fudis-dialog-content>
 					<fudis-grid
