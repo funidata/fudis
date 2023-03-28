@@ -34,6 +34,7 @@ jobs:
           ref: ${{ inputs.path }}
           environment: docs-${{ inputs.path }}
           required_contexts: "[]"
+          auto_merge: false
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Install dependencies
