@@ -1,0 +1,7 @@
+<svg width="32" height="32" class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" ViewBox="0 0 32 32" id="alert">
+    <g>
+        <circle cx="15.004" cy="19.25" r=".75"></circle>
+        <path d="M14.134 8a1 1 0 0 1 1.73 0l7.5 13a1 1 0 0 1-.86 1.5h-15a1 1 0 0 1-.87-1.5zm8.37 13.5-7.5-13-7.5 13z"></path>
+        <path d="M15.004 17.25a.75.75 0 0 1-.75-.75v-3a.75.75 0 0 1 1.5 0v3a.76.76 0 0 1-.75.75z"></path>
+    </g>
+</svg>
