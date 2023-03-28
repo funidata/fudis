@@ -1,5 +1,12 @@
 import { Directive, Input } from '@angular/core';
-import { TFudisAlign, TFudisAlignItems, TFudisGridGapValues, TFudisGridMargin, TFudisGridWidth } from './gridUtils';
+import {
+	TFudisAlign,
+	TFudisAlignItems,
+	TFudisGridGap,
+	TFudisGridMargin,
+	TFudisGridWidth,
+	TFudisGridMarginSide,
+} from './gridUtils';
 
 @Directive({
 	selector: '[fudisGridApi]',
@@ -34,6 +41,8 @@ export class GridApiDirective {
 	@Input() marginTop: TFudisGridMargin = 'none';
 
 	@Input() marginBottom: TFudisGridMargin = 'none';
+
+	@Input() marginSides: TFudisGridMarginSide = 'responsive';
 
 	@Input() classes: string[];
 
@@ -87,11 +96,11 @@ export class GridApiDirective {
 	 * Grid column gap. Using Fudis spacing token values of xxs to xxl and 0.
 	 */
 
-	@Input() columnGap: TFudisGridGapValues = 'responsive';
+	@Input() columnGap: TFudisGridGap = 'responsive';
 
 	/**
 	 * Grid row gap. Using Fudis spacing token values of xxs to xxl and 0.
 	 */
 
-	@Input() rowGap: TFudisGridGapValues = 'responsive';
+	@Input() rowGap: TFudisGridGap = 'responsive';
 }

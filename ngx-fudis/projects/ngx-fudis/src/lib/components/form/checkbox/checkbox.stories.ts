@@ -10,17 +10,17 @@ import { CheckboxComponent } from './checkbox.component';
 		<form [formGroup]="mainFormGroup">
 			<fudis-checkbox
 				[control]="checkboxFirst"
-				id="example_checkbox_1_id"
-				name="example_checkbox_1_name"
-				helpText="This checkbox is disabled and cannot be toggled."
-				label="I am an example!"></fudis-checkbox>
+				[id]="'example_checkbox_1_id'"
+				[name]="'example_checkbox_1_name'"
+				[helpText]="'This checkbox is disabled and cannot be toggled.'"
+				[label]="'I am an example!'"></fudis-checkbox>
 			<fudis-checkbox
 				[control]="checkboxSecond"
-				id="example_checkbox_2_id"
-				name="example_checkbox_2_name"
-				helpText="This checkbox is required and must be checked."
+				[id]="'example_checkbox_2_id'"
+				[name]="'example_checkbox_2_name'"
+				[helpText]="'This checkbox is required and must be checked.'"
 				[errorMsg]="{ required: 'Please check the checkbox.' }"
-				label="I am an another example!"></fudis-checkbox>
+				[label]="'I am an another example!'"></fudis-checkbox>
 			<div [style.display]="'flex'" [style.flex-direction]="'column'">
 				<fudis-body-text>Value of first box: {{ checkboxFirst.value }}</fudis-body-text>
 				<fudis-body-text>Value of second box: {{ checkboxSecond.value }}</fudis-body-text>
@@ -29,10 +29,6 @@ import { CheckboxComponent } from './checkbox.component';
 	`,
 })
 class CheckboxExampleComponent {
-	/**
-	 * Options for testing purposes
-	 */
-
 	checkboxFirst: FormControl = new FormControl({ value: true, disabled: true });
 
 	checkboxSecond: FormControl = new FormControl(false, Validators.requiredTrue);

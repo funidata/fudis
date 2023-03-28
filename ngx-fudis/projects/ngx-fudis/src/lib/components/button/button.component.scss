@@ -1,4 +1,3 @@
-@use 'sass:map';
 @use '../../foundations/colors/mixins.scss' as colors;
 @use '../../foundations/focus/mixins.scss' as focus;
 @use '../../foundations/borders/mixins.scss' as borders;
@@ -33,10 +32,6 @@
 		}
 	}
 
-	fudis-icon {
-		display: inline-block;
-	}
-
 	&__primary {
 		@include colors.text-color('white');
 		@include colors.bg-color('primary');
@@ -60,9 +55,19 @@
 		height: spacing.$spacing-l;
 	}
 
+	&__icon-only {
+		padding: 0;
+		width: spacing.$spacing-m;
+		min-width: initial;
+		height: spacing.$spacing-m;
+	}
+
 	&__icon {
-		position: relative;
-		top: spacing.$pixel-2;
 		margin-left: -(spacing.$spacing-xxs);
+
+		/* If button only has an icon (and no label), remove the left-margin */
+		&--only {
+			margin-left: 0;
+		}
 	}
 }

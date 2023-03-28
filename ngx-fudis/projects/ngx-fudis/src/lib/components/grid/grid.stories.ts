@@ -84,11 +84,7 @@ const Template: Story<GridComponent> = (args: GridComponent) => ({
 		>
 
 		<div class="grid-test-item">
-			<fudis-heading tag="h3" size="m" text>This is fudis-heading inside a div</fudis-heading>
-			<fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
-		</div>
-		<div class="grid-test-item">
-			<fudis-heading tag="h3" size="m" text="This heading is inside a div"></fudis-heading>
+			<fudis-heading tag="h3" size="m">This is fudis-heading inside a div</fudis-heading>
 			<fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
 		</div>
 		<div class="grid-test-item">
@@ -96,11 +92,15 @@ const Template: Story<GridComponent> = (args: GridComponent) => ({
 			<fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
 		</div>
 		<div class="grid-test-item">
-			<fudis-heading tag="h3" size="m" text="This heading is inside a div"></fudis-heading>
+			<fudis-heading tag="h3" size="m">This is fudis-heading inside a div</fudis-heading>
 			<fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
 		</div>
 		<div class="grid-test-item">
-			<fudis-heading tag="h3" size="m" text="This heading is inside a div"></fudis-heading>
+			<fudis-heading tag="h3" size="m">This is fudis-heading inside a div</fudis-heading>
+			<fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
+		</div>
+		<div class="grid-test-item">
+			<fudis-heading tag="h3" size="m">This is fudis-heading inside a div</fudis-heading>
 			<fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
 		</div>
 	</fudis-grid>`,

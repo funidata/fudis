@@ -1,6 +1,6 @@
 /* stylelint-disable unit-disallowed-list */
 @use '@angular/material' as mat;
-@import './palette';
+@use './palette' as palette;
 
 // Angular Material default typography styling
 $typography: mat.define-typography-config(
@@ -32,14 +32,11 @@ $typography: mat.define-typography-config(
   // fudis-text-button
   $button: mat.define-typography-level(0.875rem, 1rem, 500),
 );
-
-@include mat.core($typography);
-
-$theme: mat.define-light-theme(
+$primary-theme: mat.define-light-theme(
   (
     color: (
-      primary: mat.define-palette($palette-map-primary, 500),
-      accent: mat.define-palette($palette-map-accent, 500),
+      primary: mat.define-palette(palette.$palette-map-primary, 500),
+      accent: mat.define-palette(palette.$palette-map-accent, 500),
     ),
     typography: $typography,
   )
@@ -47,14 +44,9 @@ $theme: mat.define-light-theme(
 $datepicker-theme: mat.define-light-theme(
   (
     color: (
-      primary: mat.define-palette($palette-map-primary, 100),
-      accent: mat.define-palette($palette-map-accent, 500),
+      primary: mat.define-palette(palette.$palette-map-primary, 100),
+      accent: mat.define-palette(palette.$palette-map-accent, 500),
     ),
     typography: $typography,
   )
 );
-
-// Emit theme-dependent styles for common features used across multiple Material components.
-@include mat.core-theme($theme);
-@include mat.datepicker-theme($datepicker-theme);
-@include mat.tooltip-theme($theme);

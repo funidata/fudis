@@ -3,25 +3,23 @@ import { Directive } from '@angular/core';
 import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
 
 @Directive({
-	// eslint-disable-next-line @angular-eslint/directive-selector
-	selector: '[fudis-dialog-title]',
+	selector: '[fudisDialogTitle]',
 })
-export class FudisDialogTitleDirective extends MatDialogTitle {}
+export class DialogTitleDirective extends MatDialogTitle {}
 
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'fudis-dialog-content',
 })
-export class FudisDialogContentDirective extends MatDialogContent {}
+export class DialogContentDirective extends MatDialogContent {}
 
 @Directive({
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'fudis-dialog-actions',
 })
-export class FudisDialogActionsDirective extends MatDialogActions {}
+export class DialogActionsDirective extends MatDialogActions {}
 
 @Directive({
-	// eslint-disable-next-line @angular-eslint/directive-selector
-	selector: '[fudis-dialog-close]',
+	selector: '[fudisDialogClose]',
 })
-export class FudisDialogCloseDirective extends MatDialogClose {}
+export class DialogCloseDirective extends MatDialogClose {}

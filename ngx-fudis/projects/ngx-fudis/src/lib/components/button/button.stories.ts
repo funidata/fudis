@@ -42,12 +42,29 @@ IconButton.args = {
 	icon: 'search',
 };
 
+export const OnlyIconButton = Template.bind({});
+OnlyIconButton.args = {
+	variant: 'secondary',
+	icon: 'three-dots',
+	ariaLabel: 'Open additional menu',
+};
+
 export const AllVariants: Story = () => ({
 	template: `
-	<fudis-grid columns="1fr 1fr 1fr" align="left">
+	<fudis-grid columns="1fr 1fr 1fr 1fr" align="left" rowGap="xs" marginBottom="m">
+		<fudis-heading tag="h4" size="s">Medium size buttons</fudis-heading>
 		<fudis-button variant="primary" label="Primary"></fudis-button>
 		<fudis-button variant="secondary" label="Secondary"></fudis-button>
 		<fudis-button variant="tertiary" label="Tertiary"></fudis-button>
+		<fudis-button label="Disabled" [disabled]="true"></fudis-button>
+	</fudis-grid>
+
+	<fudis-grid columns="1fr 1fr 1fr 1fr" align="left" rowGap="xs">
+		<fudis-heading tag="h4" size="s">Small size buttons</fudis-heading>
+		<fudis-button variant="primary" label="Primary" size="small"></fudis-button>
+		<fudis-button variant="secondary" label="Secondary" size="small"></fudis-button>
+		<fudis-button variant="tertiary" label="Tertiary" size="small"></fudis-button>
+		<fudis-button label="Disabled" [disabled]="true" size="small"></fudis-button>
 	</fudis-grid>
 	`,
 });

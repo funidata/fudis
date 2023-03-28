@@ -25,7 +25,7 @@ const testDataCompact = [
 	{ key: 'Last Name', value: 'Dangerwest' },
 	{ key: 'Alias', value: 'Radical Emmet Xtreme' },
 	{ key: 'Voice actor', value: 'Chris Pratt' },
-	{ key: 'Favorite animal', value: 'Velociraptor' },
+	{ key: 'Favorite animal', value: 'Velociraptor', subHeading: 'Dinosaurus' },
 	{ key: 'Real name', value: 'Emmet Joseph Brickowski' },
 	{ key: 'Species', value: 'Lego' },
 	{ key: 'Enemy', value: 'Emmet Brickowski' },

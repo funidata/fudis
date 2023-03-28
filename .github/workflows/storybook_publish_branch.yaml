@@ -1,0 +1,16 @@
+# Publish Storybook into GH Pages using branch name or version as the path.
+# Run on push for all branches.
+name: Publish Storybook by branch
+
+on:
+  push:
+    # Note that this is required to avoid triggering on automatic release tags.
+    branches:
+      - "*"
+
+jobs:
+  publish_storybook:
+    name: Publish Storybook
+    uses: ./.github/workflows/storybook_publish.yaml
+    with:
+      path: ${{ github.ref_name }}

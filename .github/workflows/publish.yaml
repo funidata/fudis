@@ -12,7 +12,8 @@ jobs:
 
   publish:
     name: Publish ngx-fudis to NPM
-    runs-on: ubuntu-latest
+    concurrency: npm-publish
+    runs-on: ubuntu-22.04
     needs:
       - test
     steps:
@@ -21,7 +22,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16.14
+          node-version: 18.14
       - name: Install Angular CLI
         run: npm i -g @angular/cli@v13-lts
       - name: Install dependencies
@@ -43,6 +44,7 @@ jobs:
           access: public
           tag: latest
       - name: Create GitHub release
+        # Run only if there was a version change (i.e., `type` is 'major', 'minor' or 'patch').
         if: ${{ steps.npm-publish.outputs.type != 'none' }}
         uses: softprops/action-gh-release@v0.1.15
         with:

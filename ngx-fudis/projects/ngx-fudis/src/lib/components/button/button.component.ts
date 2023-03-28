@@ -15,7 +15,7 @@ export class ButtonComponent {
 	/**
 	 * Button size options
 	 */
-	@Input() size: 'small' | 'medium' = 'medium';
+	@Input() size: 'icon-only' | 'small' | 'medium' = 'medium';
 
 	/**
 	 * Button type options
@@ -23,7 +23,7 @@ export class ButtonComponent {
 	@Input() type: 'button' | 'submit' = 'button';
 
 	/**
-	 * Text displayed inside the button
+	 * Text content of the button
 	 */
 	@Input() label: string;
 
@@ -33,7 +33,7 @@ export class ButtonComponent {
 	@Input() ariaLabel: string;
 
 	/**
-	 * Button modifiers
+	 * Disables the button, keeping it focusable
 	 */
 	@Input() disabled = false;
 
@@ -45,9 +45,11 @@ export class ButtonComponent {
 	/**
 	 * Optional click handler
 	 */
-	@Output()
-	handleClick = new EventEmitter<Event>();
+	@Output() handleClick = new EventEmitter<Event>();
 
+	/**
+	 * Automatically sets icon color based on button variant
+	 */
 	iconColor: FudisIconColor = 'white';
 
 	public get classes(): string[] {
@@ -58,7 +60,6 @@ export class ButtonComponent {
 		} else if (this.variant === 'secondary' || this.variant === 'tertiary') {
 			this.iconColor = 'primary';
 		}
-
 		return ['fudis-button', `fudis-button__${this.size}`, `fudis-button__${this.variant}`];
 	}
 }

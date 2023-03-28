@@ -9,7 +9,7 @@
     "test": "ng test",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "ng run storybook:start",
-    "build-storybook": "ng run storybook:build",
+    "build-storybook": "npm run docs:json && build-storybook",
     "lint": "ng lint",
     "stylelint": "stylelint '**/*.{css,scss}'"
   },
@@ -42,6 +42,7 @@
     "@angular/compiler-cli": "^14.2.12",
     "@babel/core": "^7.20.12",
     "@compodoc/compodoc": "^1.1.19",
+    "@storybook/addon-a11y": "^6.5.16",
     "@storybook/addon-actions": "^6.5.15",
     "@storybook/addon-docs": "^6.5.15",
     "@storybook/addon-essentials": "^6.5.15",

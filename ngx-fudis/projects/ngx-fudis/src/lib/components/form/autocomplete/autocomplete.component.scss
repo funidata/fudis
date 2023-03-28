@@ -1,0 +1,48 @@
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/borders/mixins.scss' as borders;
+@use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/focus/mixins.scss' as focus;
+@use '../../../foundations/colors/tokens.scss' as colors;
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
+
+.fudis-autocomplete {
+	max-width: calc(23 * spacing.$spacing-s);
+
+	&__l {
+		width: 100%;
+	}
+
+	&__m {
+		width: calc(14 * spacing.$spacing-s);
+	}
+
+	&__s {
+		max-width: calc(10 * spacing.$spacing-s);
+	}
+
+	&__input {
+		@include borders.border('1px', 'solid', 'gray-middle');
+		@include typography.text-field-input;
+		@include borders.border-radius('2px');
+
+		box-sizing: border-box;
+		padding: spacing.$spacing-xxs spacing.$spacing-s;
+		width: 100%;
+		height: spacing.$spacing-xl;
+
+		&:focus {
+			@include focus.focus-form-field;
+		}
+
+		&--invalid {
+			border-color: colors.$color-red;
+		}
+
+		&--disabled {
+			@include borders.border('1px', 'dashed', 'gray-middle');	
+			@include colorMixins.bg-color('gray-extra-light');
+
+			cursor: default;
+		}
+	}
+}

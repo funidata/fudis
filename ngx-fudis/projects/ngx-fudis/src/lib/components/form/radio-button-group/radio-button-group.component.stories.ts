@@ -20,9 +20,9 @@ const getDefaultValue = (options: IFudisRadioButtonOption[]): string | undefined
 	template: `
 		<form [formGroup]="mainFormGroup">
 			<fudis-radio-button-group
-				id="fruit-selection"
-				legend="Choose your preferred fruit"
-				helpText="Fruits are important for your health."
+				[id]="'fruit-selection'"
+				[legend]="'Choose your preferred fruit'"
+				[helpText]="'Fruits are important for your health.'"
 				[errorMsg]="{ required: 'You must choose a fruit!' }"
 				*ngIf="mainFormGroup"
 				[control]="mainFormGroup.controls['first']"
@@ -34,9 +34,9 @@ const getDefaultValue = (options: IFudisRadioButtonOption[]): string | undefined
 				>No value chosen for the second :(</fudis-body-text
 			>
 			<fudis-radio-button-group
-				id="pet-selection"
-				legend="Choose a pet"
-				helpText="We all should have a pet."
+				[id]="'pet-selection'"
+				[legend]="'Choose a pet'"
+				[helpText]="'We all should have a pet.'"
 				[errorMsg]="{ required: 'You must choose a pet!' }"
 				*ngIf="mainFormGroup"
 				[control]="mainFormGroup.controls['second']"
@@ -54,7 +54,6 @@ class RadioButtonGroupExampleComponent {
 	/**
 	 * Options for testing purposes
 	 */
-
 	fruitOptions: IFudisRadioButtonOption[] = [
 		{ value: 'apple', viewValue: 'Apple', id: 'fruit-1', name: 'fruit' },
 		{ value: 'fair-trade-banana', viewValue: 'Fair Trade Banana', id: 'fruit-2', name: 'fruit', checked: true },

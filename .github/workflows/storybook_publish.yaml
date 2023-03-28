@@ -1,38 +1,76 @@
-# WIP
-# Should be merged with other Storybook workflows once ready.
+# Publish versioned Storybook builds by deploying to subfolders in gh-pages branch.
 name: Publish Storybook
 
 on:
-  push:
-    branches:
-      - main
+  workflow_call:
+    inputs:
+      path:
+        description: Path to be deployed to. Defaults to empty, i.e., root.
+        type: string
+        required: false
+        default: ""
+      latest:
+        description: Set this deployment as the current "latest" version.
+        type: boolean
+        required: false
+        default: false
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@v3
-      - name: "Build"
-        run: |
-          cd ngx-fudis
-          npm ci
-          npx ng run storybook:build
-      - name: "Upload"
-        uses: actions/upload-pages-artifact@v1.0.7
-        with:
-          path: "ngx-fudis/.storybook/target/storybook-static"
-
-  deploy:
-    needs: build
+  publish_storybook:
+    name: Build and deploy Storybook
+    runs-on: ubuntu-22.04
     permissions:
-      contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+      contents: write
+      deployments: write
+      pull-requests: write
     steps:
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1.2.4
+      - name: Create deployment
+        uses: octokit/request-action@v2.1.7
+        id: create-deployment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          route: POST /repos/${{ github.repository }}/deployments
+          ref: ${{ inputs.path }}
+          environment: docs-${{ inputs.path }}
+          required_contexts: "[]"
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ngx-fudis
+      - name: Build
+        run: npm run build-storybook -- -o static
+        working-directory: ngx-fudis
+      - name: Deploy to Pages under branch name
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ngx-fudis/static
+          destination_dir: ${{ inputs.path }}
+      # Optional deploy to 'latest'.
+      - name: Deploy to Pages under "latest" (optional)
+        if: inputs.latest
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ngx-fudis/static
+          destination_dir: latest
+      - name: Format deployment URL
+        id: url
+        env:
+          REPO: ${{ github.repository }}
+        run: echo "url=https://${{ github.repository_owner }}.github.io/${REPO##*/}/${{ inputs.path }}" >> $GITHUB_OUTPUT
+      # FIXME: This fails too often because create-deployment returns 202 and no deployment ID.
+      - name: Complete deployment
+        uses: octokit/request-action@v2.1.7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          route: POST /repos/${{ github.repository }}/deployments/{deployment_id}/statuses
+          deployment_id: ${{ fromJson(steps.create-deployment.outputs.data).id }}
+          ref: ${{ inputs.path }}
+          environment: docs-${{ inputs.path }}
+          state: success
+          # environment_url: https://${{ github.repository_owner }}.github.io/${{ github.repository##*/ }}/${{ inputs.path }}
+          environment_url: ${{ steps.url.outputs.url }}

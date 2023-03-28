@@ -1,0 +1,49 @@
+@use '../../foundations/spacing/tokens.scss' as spacing;
+@use '../../foundations/breakpoints/mixins.scss' as breakpoints;
+@use '../../foundations/grid/tokens.scss' as gridTokens;
+
+.fudis-dialog {
+	position: relative;
+	padding: spacing.$spacing-m;
+	max-width: calc(100% - (2 * spacing.$spacing-m));
+	
+
+	&__close {
+		float: right;
+	}
+
+	&__size {
+		&__initial {
+			width: initial;
+		}
+
+		&__s {
+			width: calc(gridTokens.$grid-width-s + 2 * spacing.$spacing-m);
+
+			@include breakpoints.breakpoint('m') {
+				width: calc(gridTokens.$grid-width-s + 2 * spacing.$spacing-xl);
+			}
+		}
+
+		&__m {
+			width: calc(gridTokens.$grid-width-m + 2 * spacing.$spacing-m);
+
+			@include breakpoints.breakpoint('m') {
+				width: calc(gridTokens.$grid-width-m + 2 * spacing.$spacing-xl);
+			}
+		}
+
+		&__l {
+			width: calc(gridTokens.$grid-width-l + 2 * spacing.$spacing-m);
+
+			@include breakpoints.breakpoint('m') {
+				width: calc(gridTokens.$grid-width-l + 2 * spacing.$spacing-xl);
+			}
+		}
+	}
+
+	@include breakpoints.breakpoint('m') {
+		padding: spacing.$spacing-m spacing.$spacing-xl;
+		max-width: calc(100% - (2 * spacing.$spacing-xl));
+	}
+}

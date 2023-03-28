@@ -13,7 +13,8 @@
 		"test": "cd ngx-fudis && npm run test",
 		"prepare": "husky install",
 		"lint": "cd ngx-fudis && npm run lint",
-		"stylelint": "cd ngx-fudis && npm run stylelint"
+		"stylelint": "cd ngx-fudis && npm run stylelint",
+		"build-local-package": "cd ngx-fudis && ng build ngx-fudis && cd dist/ngx-fudis && npm pack --pack-destination ~"
 	},
 	"repository": {
 		"type": "git",

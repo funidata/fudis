@@ -6,8 +6,10 @@ import { ButtonComponent } from './button.component';
 
 # Button
 
-Buttons are categorized based on their importance and functionality, such as primary, secondary, or tertiary buttons.
-It's important to use the correct type of button for the intended action and to not overuse them to avoid overwhelming the user.
+Buttons are categorized based on their importance and functionality, i.e `primary`, `secondary` and `tertiary`.
+It is important to use the correct variant of the button for the intended action and not to overuse them to avoid overwhelming the user.
+
+There are two button sizes available: `medium` and `small`.
 
 ## Examples
 
@@ -15,18 +17,29 @@ It's important to use the correct type of button for the intended action and to 
 	<Story id="components-button--all-variants"></Story>
 </Canvas>
 
-### With Icon
+### Button with icon
 
-Button component has a input for icon component. Frequently used icons: <code>search</code>, <code>three-dots</code> and <code>delete</code>.
+Button has option for icon. Frequently used icons: <code>search</code>, <code>three-dots</code> and <code>delete</code>. Icon color is automatically set according to which button variant is in use.
+
+Icon is only a visual indicator and is always hidden from screen readers.
 
 <Canvas>
 	<Story id="components-button--icon-button"></Story>
 </Canvas>
 
+### Button with icon only
+
+Button can be without label but use this variation sparingly. If the button does not have a label, always remember to add descriptive aria-label in order to communicate screen reader users about the button functionality.
+
+<Canvas>
+	<Story id="components-button--only-icon-button"></Story>
+</Canvas>
+
 ### Accessibility
 
-- Button color contrast ratio meets AA and AAA levels
-- Button has a visible focus state
+- Button uses primary-color variable (`--fudis-color-primary`) which is set in the root of the application. Make sure the application's primary-color contrast ratio meets WCAG AA and AAA levels.
+	- Disabled button has static colors `#484848` and `#D4D4D4` with contrast ratio 6.2:1
+- Button has visible focus state
 - Disabled button can be focused. State is communicated for screen reader
 - Button click can be triggered with keyboard <code>enter</code> and <code>space</code> key
 
@@ -34,9 +47,7 @@ Button component has a input for icon component. Frequently used icons: <code>se
 
 [Icon](/docs/components-icon--icon)
 
-<a href="https://material.angular.io/components/button/overview" target="_blank">
-	Angular Material Button
-</a>
+[Angular Material Button](https://material.angular.io/components/button/overview)
 
 ## Properties
 
