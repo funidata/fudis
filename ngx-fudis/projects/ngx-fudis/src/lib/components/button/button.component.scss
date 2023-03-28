@@ -62,8 +62,25 @@
 		height: spacing.$spacing-m;
 	}
 
+	// &__icon {
+	// 	margin-left: -(spacing.$spacing-xxs);
+
+	// 	/* If button only has an icon (and no label), remove the left-margin */
+	// 	&--only {
+	// 		margin-left: 0;
+	// 	}
+	// }
 	&__icon {
-		margin-left: -(spacing.$spacing-xxs);
+		position: relative;
+		width: 2rem;
+		height: 9px;
+
+		&__component {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
 
 		/* If button only has an icon (and no label), remove the left-margin */
 		&--only {
@@ -71,3 +88,20 @@
 		}
 	}
 }
+
+// .fudis-button__container {
+// 	display: inline-block;
+// 	position: relative;
+// 	cursor: pointer;
+	
+// 	& button {
+// 		padding-left: 2rem;
+// 	}
+
+// 	&__icon {
+// 		position: absolute;
+// 			top: 50%;
+// 			left: 0;
+// 			transform: translate(0, -50%);
+// 	}
+// }

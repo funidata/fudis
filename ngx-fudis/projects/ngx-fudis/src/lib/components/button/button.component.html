@@ -4,10 +4,36 @@
 	[attr.aria-label]="ariaLabel"
 	(click)="!disabled ? handleClick.emit($event) : null"
 	[ngClass]="classes">
-	<fudis-icon
-		[class]="label ? 'fudis-button__icon' : 'fudis-button__icon--only'"
-		*ngIf="icon"
-		[color]="iconColor"
-		[icon]="icon"></fudis-icon>
+	<ng-container *ngIf="icon">
+		<div [class]="label ? 'fudis-button__icon' : 'fudis-button__icon fudis-button__icon--only'">
+			<fudis-icon class="fudis-button__icon__component" [color]="iconColor" [icon]="icon"></fudis-icon>
+		</div>
+	</ng-container>
 	{{ label }}
 </button>
+<!-- 
+<button
+	*ngIf="!icon"
+	[type]="type"
+	[attr.aria-disabled]="disabled"
+	[attr.aria-label]="ariaLabel"
+	(click)="!disabled ? handleClick.emit($event) : null"
+	[ngClass]="classes">
+	<ng-container *ngIf="icon">
+		<div [class]="label ? 'fudis-button__icon' : 'fudis-button__icon fudis-button__icon--only'">
+			<fudis-icon class="fudis-button__icon__component" [color]="iconColor" [icon]="icon"></fudis-icon>
+		</div>
+	</ng-container>
+	{{ label }}
+</button>
+<div class="fudis-button__container" *ngIf="icon">
+	<button
+		[type]="type"
+		[attr.aria-disabled]="disabled"
+		[attr.aria-label]="ariaLabel"
+		(click)="!disabled ? handleClick.emit($event) : null"
+		[ngClass]="classes">
+		{{ label }}
+	</button>
+	<fudis-icon class="fudis-button__container__icon" [color]="iconColor" [icon]="icon"></fudis-icon>
+</div> -->

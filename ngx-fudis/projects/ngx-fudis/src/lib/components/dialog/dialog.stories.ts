@@ -8,6 +8,21 @@ import { DialogService } from './dialog.service';
 @Component({
 	selector: 'fudis-dialog-example-laucher',
 	template: `<fudis-button (click)="openDialog(dialogWithForm)" label="Open dialog with form"></fudis-button>
+		<fudis-button
+			(click)="openDialog(dialogWithGrid)"
+			size="m"
+			icon="rosette"
+			label="Open dialog with grid"></fudis-button>
+		<fudis-button
+			(click)="openDialog(dialogWithGrid)"
+			icon="ring-close"
+			ariaLabel="joo"
+			variant="tertiary"
+			size="icon-only"></fudis-button>
+		<fudis-button (click)="openDialog(dialogWithGrid)" variant="tertiary" icon="search" ariaLabel="joo"></fudis-button>
+		<fudis-button (click)="openDialog(dialogWithGrid)" variant="secondary" icon="search" ariaLabel="joo"></fudis-button>
+		<fudis-button (click)="openDialog(dialogWithGrid)" icon="search" ariaLabel="joo"></fudis-button>
+		<fudis-button (click)="openDialog(dialogWithGrid)" icon="people" label="Grid"></fudis-button>
 		<fudis-button (click)="openDialog(dialogWithGrid)" label="Open dialog with grid"></fudis-button>
 
 		<ng-container *ngIf="this.chosenPowerAnimal">
@@ -32,7 +47,13 @@ import { DialogService } from './dialog.service';
 				</fudis-dialog-content>
 				<fudis-dialog-actions align="end">
 					<fudis-button fudisDialogClose label="Cancel"></fudis-button>
-					<fudis-button (click)="closeDialog()" [disabled]="!exampleADialogFormGroup.valid" label="Ok"></fudis-button>
+					<fudis-button
+						fudisSpacing
+						[marginRight]="'xs'"
+						class="inton-custom-button-härveli"
+						(click)="closeDialogWithForm()"
+						[disabled]="!exampleADialogFormGroup.valid"
+						label="Ok"></fudis-button>
 				</fudis-dialog-actions>
 			</fudis-dialog>
 		</ng-template>
@@ -57,7 +78,7 @@ import { DialogService } from './dialog.service';
 					</fudis-grid>
 				</fudis-dialog-content>
 				<fudis-dialog-actions align="end">
-					<fudis-button (click)="closeDialog()" label="Ok"></fudis-button>
+					<fudis-button fudisDialogClose label="Ok"></fudis-button>
 				</fudis-dialog-actions>
 			</fudis-dialog>
 		</ng-template>`,
@@ -78,7 +99,7 @@ class DialogExampleLauncherComponent implements OnInit {
 		});
 	}
 
-	closeDialog() {
+	closeDialogWithForm() {
 		if (this.exampleADialogFormGroup.valid) {
 			this.chosenPowerAnimal = this.exampleADialogFormGroup.controls['powerAnimal'].value;
 			this.dialog.close();
