@@ -36,10 +36,13 @@ import { FormControl, Validators, FormBuilder } from '@angular/forms';
 				<fudis-body-text>This is body text inside an expandable</fudis-body-text>
 			</ng-template>
 		</fudis-expandable>
-		<fudis-heading tag="h3">
+		<fudis-heading tag="h3" fudisTooltip tooltip="Hei tää on tooltip" [tooltipPosition]="'below'">
 			<fudis-link data-theme="sisu" href="#" linkTitle="Link inside a heading"></fudis-link>
 		</fudis-heading>
-		<fudis-icon icon="info" tooltip="Olaaa"></fudis-icon>
+		<fudis-body-text>
+			Fudis icon with a tooltip
+			<fudis-icon icon="info" tooltip="Olaaa" [tooltipToggle]="true" [tooltipPosition]="'right'"></fudis-icon>
+		</fudis-body-text>
 
 		<!-- <fudis-link
 			data-theme="sisu"
