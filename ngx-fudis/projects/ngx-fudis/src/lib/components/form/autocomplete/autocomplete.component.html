@@ -25,8 +25,9 @@
 				[variant]="'tertiary'"
 				[icon]="'close'"
 				(handleClick)="clearFilter()"
-				[ariaLabel]="clearFilterText"
-				class="fudis-autocomplete__input__icon fudis-autocomplete__input__icon--button"></fudis-button>
+				[label]="clearFilterText"
+				[labelHidden]="true"
+				class="fudis-autocomplete__input__icon"></fudis-button>
 		</ng-container>
 		<ng-container *ngIf="!control.value || control.value === ''">
 			<fudis-icon [icon]="'search'" class="fudis-autocomplete__input__icon"></fudis-icon>

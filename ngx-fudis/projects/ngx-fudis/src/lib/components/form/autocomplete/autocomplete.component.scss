@@ -39,14 +39,12 @@
 		}
 
 		&__icon {
+			@include colorMixins.bg-color('white');
+			
 			position: absolute;
 			top: 50%;
 			right: spacing.$spacing-xxs;
 			transform: translateY(-50%);
-
-			&--button {
-				top: 60%;  
-			}
 		}
 
 		&--invalid {
