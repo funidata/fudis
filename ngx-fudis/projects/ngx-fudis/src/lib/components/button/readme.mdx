@@ -21,7 +21,7 @@ There are three button sizes available: `medium`, `small` and `icon-only`.
 
 Button has option for icon. Frequently used icons: <code>search</code>, <code>three-dots</code> and <code>delete</code>. Icon color is automatically set according to which button variant is in use.
 
-Icon is only a visual indicator and it is always hidden from screen readers.
+Icon is only a visual indicator and is always hidden from screen readers.
 
 <Canvas>
 	<Story id="components-button--icon-button"></Story>
@@ -29,7 +29,9 @@ Icon is only a visual indicator and it is always hidden from screen readers.
 
 ### Button with icon only
 
-Button can be without a visible label but use this variation sparingly. To hide visible label, include `labelHidden` property to the button component. When label is hidden, the label will be reflected to HTML `aria-label` attribute in order to communicate screen reader users about the button functionality.
+Button can be without a visible label but use this variation sparingly. To hide visible label, provide `labelHidden` property for the button component. When label is hidden, `label` property will be reflected to HTML `aria-label` attribute. This will communicate screen reader users about the button functionality.
+
+If button has no visibile label and both `label` and `ariaLabel` are provided, those values are combined and reflected to `aria-label` HTML attribute.
 
 <Canvas>
 	<Story id="components-button--only-icon-button"></Story>
@@ -42,13 +44,11 @@ Button can be without a visible label but use this variation sparingly. To hide 
 - Button has visible focus state
 - Disabled button can be focused. State is communicated for screen reader
 - Button click can be triggered with keyboard <code>enter</code> and <code>space</code> key
-- Label is a mandatory property to provide for a button. If needed button can be given additional `ariaLabel` property. If button has no visibile label and both `label` and `ariaLabel` are provided, then those values are both combined and reflected to `aria-label` HTML attribute.
+- Label is a required property. If needed, button can be given additional `ariaLabel` property as well.
 
 ### Related components
 
 [Icon](/docs/components-icon--icon)
-
-[Angular Material Button](https://material.angular.io/components/button/overview)
 
 ## Properties
 
