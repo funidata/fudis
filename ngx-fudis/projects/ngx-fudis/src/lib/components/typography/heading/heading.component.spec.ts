@@ -21,7 +21,6 @@ describe('HeadingComponent', () => {
 	function assertHeadingHasClasses(classes: string): void {
 		const childSpan = fixture.nativeElement.childNodes;
 		const componentClasses = childSpan[0].className.split(' ').sort();
-		console.log(componentClasses);
 		expect(componentClasses).toEqual(classes.split(' ').sort());
 	}
 
