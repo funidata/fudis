@@ -12,7 +12,7 @@ export class NotificationComponent implements OnChanges, OnInit {
 	/**
 	 * Notification variant options
 	 */
-	@Input() variant?: NotificationType;
+	@Input() variant: NotificationType;
 
 	/**
 	 * Add link href address
@@ -28,12 +28,12 @@ export class NotificationComponent implements OnChanges, OnInit {
 	/**
 	 * Aria-label for the external link
 	 */
-	@Input() externalLinkAriaLabel?: string;
+	@Input() externalLinkAriaLabel: string;
 
 	/**
 	 * Title for the link, if not defined title will be the same as link URL
 	 */
-	@Input() linkTitle?: string;
+	@Input() linkTitle: string;
 
 	/**
 	 * Icon for notification

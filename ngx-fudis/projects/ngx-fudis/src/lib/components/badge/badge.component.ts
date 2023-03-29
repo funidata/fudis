@@ -13,5 +13,5 @@ export class BadgeComponent {
 
 	@Input() variant: BadgeVariant;
 
-	@Input() content?: string;
+	@Input() content: string;
 }

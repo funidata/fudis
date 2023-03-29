@@ -37,5 +37,5 @@ export class IconComponent {
 	/**
 	 * Use rotate to flip and rotate icon
 	 */
-	@Input() rotate?: 'flip-180' | 'cw-90' | 'ccw-90' | null;
+	@Input() rotate: 'flip-180' | 'cw-90' | 'ccw-90' | null;
 }
