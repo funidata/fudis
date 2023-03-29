@@ -39,6 +39,8 @@ jobs:
   publish-storybook:
     name: Build and deploy Storybook
     runs-on: ubuntu-22.04
+    needs:
+      - create-deployment
     permissions:
       contents: write
     steps:
@@ -56,7 +58,8 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ngx-fudis/static
           destination_dir: ${{ inputs.path }}
-      # Optional deploy to 'latest'.
+          full_commit_message: ${{ needs.create-deployment.outputs.deployment_id }}/${{ inputs.path }}
+          # Optional deploy to 'latest'.
       - name: Deploy to Pages under "latest" (optional)
         if: inputs.latest
         uses: peaceiris/actions-gh-pages@v3
@@ -64,13 +67,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ngx-fudis/static
           destination_dir: latest
-      - name: Format deployment URL
-        id: url
-        env:
-          REPO: ${{ github.repository }}
-        run: echo "url=https://${{ github.repository_owner }}.github.io/${REPO##*/}/${{ inputs.path }}" >> $GITHUB_OUTPUT
-    outputs:
-      url: ${{ steps.url.outputs.url }}
 
   complete-deployment:
     name: Update GH deployment status
@@ -83,18 +79,18 @@ jobs:
       deployments: write
     steps:
       # TODO: Refactor repetition away.
-      - name: Complete deployment (success)
-        if: needs.publish-storybook.result == 'success'
-        uses: octokit/request-action@v2.1.7
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          route: POST /repos/${{ github.repository }}/deployments/{deployment_id}/statuses
-          deployment_id: ${{ needs.create-deployment.outputs.deployment_id }}
-          ref: ${{ inputs.path }}
-          environment: docs-${{ inputs.path }}
-          state: success
-          environment_url: ${{ needs.publish-storybook.outputs.url }}
+      # - name: Complete deployment (success)
+      #   if: needs.publish-storybook.result == 'success'
+      #   uses: octokit/request-action@v2.1.7
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     route: POST /repos/${{ github.repository }}/deployments/{deployment_id}/statuses
+      #     deployment_id: ${{ needs.create-deployment.outputs.deployment_id }}
+      #     ref: ${{ inputs.path }}
+      #     environment: docs-${{ inputs.path }}
+      #     state: success
+      #     environment_url: ${{ needs.publish-storybook.outputs.url }}
       - name: Complete deployment (failure)
         if: needs.publish-storybook.result == 'failure'
         uses: octokit/request-action@v2.1.7
