@@ -29,6 +29,7 @@ import { ErrorMessageComponent } from './components/form/error-message/error-mes
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
 import { ExpandableContentDirective } from './components/expandable/expandable-directives/expandable-content.directive';
+import { ExpandableHeaderButtonsDirective } from './components/expandable/expandable-directives/expandable-header-buttons.directive';
 import { FudisDialog } from './components/dialog/dialog';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { GridComponent } from './components/grid/grid.component';
@@ -63,6 +64,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		ErrorSummaryComponent,
 		ExpandableComponent,
 		ExpandableContentDirective,
+		ExpandableHeaderButtonsDirective,
 		FudisDialogTitleDirective,
 		FudisDialogActionsDirective,
 		FudisDialogContentDirective,
@@ -117,6 +119,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		// ErrorSummaryComponent,
 		ExpandableComponent,
 		ExpandableContentDirective,
+		ExpandableHeaderButtonsDirective,
 		FudisDialogTitleDirective,
 		FudisDialogActionsDirective,
 		FudisDialogContentDirective,
