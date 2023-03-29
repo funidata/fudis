@@ -20,7 +20,6 @@ describe('CheckboxComponent', () => {
 		fixture = TestBed.createComponent(CheckboxComponent);
 		component = fixture.componentInstance;
 		component.control = uncheckedCheckbox;
-		component.errorMessage = 'Error message to appear!';
 		component.label = 'Please check me.';
 
 		fixture.detectChanges();
