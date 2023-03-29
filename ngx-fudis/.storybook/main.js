@@ -24,9 +24,14 @@ module.exports = {
 	previewHead: (head) => `
     ${head}
     <style>
-			.flex {
+			.storybook-flex {
 				display: flex;
 				align-items: center;
+			}
+			.storybook-flex-column{
+				display: flex;
+				align-items: center;
+				flex-direction: column;
 			}
     </style>
   `,

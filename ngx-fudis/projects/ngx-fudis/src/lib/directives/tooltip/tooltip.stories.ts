@@ -29,8 +29,13 @@ const html = String.raw;
 
 const Template: Story<TooltipDirective> = (args: TooltipDirective) => ({
 	template: html`
-		<div class="flex">
-			<fudis-body-text>This icon has a tooltip. Set tooltip text in Controls panel</fudis-body-text>
+		<div class="storybook-flex" style="align-items: flex-start">
+			<div>
+				<fudis-body-text>This icon here has a tooltip.</fudis-body-text>
+				<fudis-body-text>Set tooltip text and position in Controls panel.</fudis-body-text>
+				<fudis-body-text>Please refresh the page the changes to get updated.</fudis-body-text>
+			</div>
+
 			<fudis-icon
 				[tooltip]="tooltip"
 				[tooltipPosition]="tooltipPosition"
@@ -43,4 +48,6 @@ const Template: Story<TooltipDirective> = (args: TooltipDirective) => ({
 });
 
 export const Tooltip = Template.bind({});
-Tooltip.args = {};
+Tooltip.args = {
+	tooltip: 'I hope you can see me!',
+};
