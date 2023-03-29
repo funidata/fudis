@@ -43,6 +43,7 @@ OnlyIconButton.args = {
 	variant: 'secondary',
 	icon: 'three-dots',
 	label: 'Open additional menu',
+	labelHidden: true,
 };
 
 export const AllVariants: Story = () => ({
