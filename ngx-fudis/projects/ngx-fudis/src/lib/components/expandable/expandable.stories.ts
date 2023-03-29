@@ -13,7 +13,7 @@ export default {
 	},
 	parameters: {
 		controls: {
-			exclude: ['_collapsed', 'openedOnce', 'ref', 'collapsedChange', 'setCollapsedStatus', 'content'],
+			exclude: ['_collapsed', 'openedOnce', 'ref', 'collapsedChange', 'setCollapsedStatus', 'content', 'headerButtons'],
 		},
 	},
 } as Meta;
