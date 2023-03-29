@@ -16,6 +16,7 @@
 	cursor: pointer;
 	padding: 0 spacing.$spacing-xs;
 	min-width: spacing.$spacing-xxl;
+	vertical-align: middle;
 
 	&:focus {
 		@include focus.focus-generic;
@@ -47,29 +48,35 @@
 		@include borders.border('2px', 'solid', 'transparent');
 	}
 
-	&__small {
-		height: spacing.$spacing-m;
+	&__size {
+		&-small {
+			height: spacing.$spacing-m;
+		}
+	
+		&-medium {
+			height: spacing.$spacing-l;
+		}
+	
+		&-icon-only {
+			padding: 0;
+			width: spacing.$spacing-l;
+			min-width: initial;
+			height: spacing.$spacing-l;
+		}
 	}
-
-	&__medium {
-		height: spacing.$spacing-l;
-	}
-
-	&__icon-only {
-		@include colors.bg-color('white');
-
-		padding: 0;
-		width: spacing.$spacing-m;
-		min-width: initial;
-		height: spacing.$spacing-m;
-	}
-
+	
 	&__icon {
-		margin-left: -(spacing.$spacing-xxs);
+		position: relative;
+		width: spacing.$spacing-l;
+		height: spacing.$spacing-l;
+		
+	
 
-		/* If button only has an icon (and no label), remove the left-margin */
-		&--only {
-			margin-left: 0;
+		&__component {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
 		}
 	}
 }

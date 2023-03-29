@@ -12,6 +12,7 @@ jobs:
 
   publish:
     name: Publish ngx-fudis to NPM
+    concurrency: npm-publish
     runs-on: ubuntu-22.04
     needs:
       - test
@@ -43,6 +44,7 @@ jobs:
           access: public
           tag: latest
       - name: Create GitHub release
+        # Run only if there was a version change (i.e., `type` is 'major', 'minor' or 'patch').
         if: ${{ steps.npm-publish.outputs.type != 'none' }}
         uses: softprops/action-gh-release@v0.1.15
         with:
