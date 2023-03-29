@@ -1,13 +1,13 @@
 <button
 	[type]="type"
 	[attr.aria-disabled]="disabled"
-	[attr.aria-label]="ariaLabel"
+	[attr.aria-label]="getAriaLabel"
 	(click)="!disabled ? handleClick.emit($event) : null"
-	[ngClass]="classes">
-	<fudis-icon
-		[class]="label ? 'fudis-button__icon' : 'fudis-button__icon--only'"
-		*ngIf="icon"
-		[color]="iconColor"
-		[icon]="icon"></fudis-icon>
-	{{ label }}
+	[ngClass]="getClasses">
+	<ng-container *ngIf="icon">
+		<div class="fudis-button__icon">
+			<fudis-icon class="fudis-button__icon__component" [color]="iconColor" [icon]="icon"></fudis-icon>
+		</div>
+	</ng-container>
+	{{ labelHidden || size === 'icon-only' ? '' : label }}
 </button>

@@ -22,7 +22,7 @@ export class IconComponent {
 	/**
 	 * Binding fudis-icon class to component wrapper
 	 */
-	@HostBinding('class') classes = 'fudis-icon';
+	@HostBinding('class') classes = 'fudis-icon-host';
 
 	/**
 	 * Choose icon

@@ -8,13 +8,16 @@ import { DialogService } from './dialog.service';
 @Component({
 	selector: 'fudis-dialog-example-laucher',
 	template: `<fudis-button (click)="openDialog(dialogWithForm)" label="Open dialog with form"></fudis-button>
-		<fudis-button (click)="openDialog(dialogWithGrid)" label="Open dialog with grid"></fudis-button>
-
+		<fudis-button
+			(click)="openDialog(dialogWithGrid)"
+			size="medium"
+			icon="rosette"
+			[label]="'Open dialog with grid'"></fudis-button>
 		<ng-container *ngIf="this.chosenPowerAnimal">
 			<fudis-body-text>Great choise, your power animal is {{ this.chosenPowerAnimal }}</fudis-body-text>
 		</ng-container>
 		<ng-template #dialogWithForm>
-			<fudis-dialog [closeButtonAriaLabel]="'Close'" [size]="'l'">
+			<fudis-dialog [closeButtonLabel]="'Close'" [size]="'l'">
 				<fudis-heading fudisDialogTitle tag="h2">Welcome to a Dialog!</fudis-heading>
 				<fudis-dialog-content>
 					<ng-container *ngIf="exampleADialogFormGroup">
@@ -32,12 +35,18 @@ import { DialogService } from './dialog.service';
 				</fudis-dialog-content>
 				<fudis-dialog-actions align="end">
 					<fudis-button fudisDialogClose label="Cancel"></fudis-button>
-					<fudis-button (click)="closeDialog()" [disabled]="!exampleADialogFormGroup.valid" label="Ok"></fudis-button>
+					<fudis-button
+						fudisSpacing
+						[marginRight]="'xs'"
+						class="inton-custom-button-härveli"
+						(click)="closeDialogWithForm()"
+						[disabled]="!exampleADialogFormGroup.valid"
+						label="Ok"></fudis-button>
 				</fudis-dialog-actions>
 			</fudis-dialog>
 		</ng-template>
 		<ng-template #dialogWithGrid>
-			<fudis-dialog [closeButtonAriaLabel]="'Close'" [size]="'l'">
+			<fudis-dialog [closeButtonLabel]="'Close'" [size]="'l'">
 				<fudis-heading fudisDialogTitle tag="h2">Welcome to a Dialog with Fudis Grid!</fudis-heading>
 				<fudis-dialog-content>
 					<fudis-grid
@@ -57,7 +66,7 @@ import { DialogService } from './dialog.service';
 					</fudis-grid>
 				</fudis-dialog-content>
 				<fudis-dialog-actions align="end">
-					<fudis-button (click)="closeDialog()" label="Ok"></fudis-button>
+					<fudis-button fudisDialogClose label="Ok"></fudis-button>
 				</fudis-dialog-actions>
 			</fudis-dialog>
 		</ng-template>`,
@@ -78,7 +87,7 @@ class DialogExampleLauncherComponent implements OnInit {
 		});
 	}
 
-	closeDialog() {
+	closeDialogWithForm() {
 		if (this.exampleADialogFormGroup.valid) {
 			this.chosenPowerAnimal = this.exampleADialogFormGroup.controls['powerAnimal'].value;
 			this.dialog.close();

@@ -1,6 +1,10 @@
 @use '../../foundations/typography/tokens.scss' as typography;
 @use '../../foundations/colors/tokens.scss' as colors;
 
+.fudis-icon-host {
+	display: inline-flex;
+}
+
 .fudis-icon {
 	box-sizing: border-box;
 	display: inline-flex;
