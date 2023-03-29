@@ -4,6 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IFudisAutocompleteOption, IFudisErrorMessages } from '../../../types/forms';
+import isRequired from '../../../utilities/errors/errors.utility';
 import { GuidanceComponent } from '../guidance/guidance.component';
 
 @Component({
@@ -17,7 +18,9 @@ export class AutocompleteComponent implements OnInit {
 	/**
 	 * Option list
 	 */
-	@Input() options: IFudisAutocompleteOption[];
+	@isRequired
+	@Input()
+	options: IFudisAutocompleteOption[];
 
 	/**
 	 * Filtered options derived from options Input
@@ -32,17 +35,21 @@ export class AutocompleteComponent implements OnInit {
 	/**
 	 * Label for autocomplete
 	 */
-	@Input() label: string;
+	@isRequired
+	@Input()
+	label: string;
 
 	/**
 	 * Unique id for autocomplete
 	 */
-	@Input() id: string;
+	@isRequired
+	@Input()
+	id: string;
 
 	/**
 	 * Available sizes for the autocomplete - defaults to large.
 	 */
-	@Input() size?: 's' | 'm' | 'l' = 'l';
+	@Input() size: 's' | 'm' | 'l' = 'l';
 
 	/**
 	 * Option for disabling the input

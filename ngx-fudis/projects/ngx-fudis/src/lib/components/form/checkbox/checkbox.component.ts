@@ -1,10 +1,11 @@
 import { Component, Output, EventEmitter, Input, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/forms';
+import isRequired from '../../../utilities/errors/errors.utility';
 import { GuidanceComponent } from '../guidance/guidance.component';
 
 @Component({
-	selector: 'fudis-checkbox[id][label]',
+	selector: 'fudis-checkbox',
 	templateUrl: './checkbox.component.html',
 	styleUrls: ['./checkbox.component.scss'],
 	encapsulation: ViewEncapsulation.None,
@@ -22,22 +23,21 @@ export class CheckboxComponent {
 	/*
 	 * Id for checkbox
 	 */
-	@Input() id: string;
+	@isRequired
+	@Input()
+	id: string;
 
 	/*
 	 * FormControl for checkbox
 	 */
-	@Input() label: string;
+	@isRequired
+	@Input()
+	label: string;
 
 	/*
 	 * Name for checkbox
 	 */
 	@Input() name: string;
-
-	/*
-	 * FormControl for checkbox
-	 */
-	@Input() errorMessage: string;
 
 	/**
 	 * Error message shown below the input
@@ -47,7 +47,7 @@ export class CheckboxComponent {
 	/**
 	 * Help text shown below the checkbox
 	 */
-	@Input() helpText?: string;
+	@Input() helpText: string;
 
 	/**
 	 * TBD. Possibly used later for FudisErrorSummary

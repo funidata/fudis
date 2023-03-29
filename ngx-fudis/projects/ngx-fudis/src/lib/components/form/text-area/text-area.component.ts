@@ -1,10 +1,11 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { IFudisErrorMessages } from '../../../types/forms';
+import isRequired from '../../../utilities/errors/errors.utility';
 import { GuidanceComponent } from '../guidance/guidance.component';
 
 @Component({
-	selector: 'fudis-text-area[id][label]',
+	selector: 'fudis-text-area',
 	templateUrl: './text-area.component.html',
 	styleUrls: ['./text-area.component.scss'],
 })
@@ -14,27 +15,31 @@ export class TextAreaComponent {
 	/**
 	 * Unique id for text area
 	 */
-	@Input() id: string;
+	@isRequired
+	@Input()
+	id: string;
 
 	/**
 	 * Label shown above the text area
 	 */
-	@Input() label: string;
+	@isRequired
+	@Input()
+	label: string;
 
 	/**
 	 * Help text, aligned underneath the text area
 	 */
-	@Input() helpText?: string;
+	@Input() helpText: string;
 
 	/**
 	 * Minimum length for text area, unset by default
 	 */
-	@Input() minLength?: number;
+	@Input() minLength: number;
 
 	/**
 	 * Maximum length for text area, unset by default. When set displays also a character count indicator.
 	 */
-	@Input() maxLength?: number;
+	@Input() maxLength: number;
 
 	/**
 	 * FormControl for the text area
@@ -44,7 +49,7 @@ export class TextAreaComponent {
 	/**
 	 * Fixed size options for text area
 	 */
-	@Input() size?: 's' | 'm' | 'l' = 'l';
+	@Input() size: 's' | 'm' | 'l' = 'l';
 
 	/**
 	 * Error messages shown when form control validators are invalid

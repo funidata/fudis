@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import isRequired from '../../utilities/errors/errors.utility';
 
 /**
  * Example usages:
@@ -25,7 +26,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
  */
 
 @Component({
-	selector: 'fudis-link[href]',
+	selector: 'fudis-link',
 	templateUrl: './link.component.html',
 	styleUrls: ['./link.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -35,12 +36,14 @@ export class LinkComponent {
 	/**
 	 * Link URL
 	 */
-	@Input() href: string;
+	@isRequired
+	@Input()
+	href: string;
 
 	/**
 	 * Title for the link, if not defined title will be the same as link URL
 	 */
-	@Input() linkTitle?: string;
+	@Input() linkTitle: string;
 
 	/**
 	 * Link size - by default link will inherit its parent's font-size. If link is not inside e.g. <fudis-heading> or <fudis-body-text> its size can be defined either 'm' (14px) or 'l' (16px).
@@ -56,7 +59,7 @@ export class LinkComponent {
 	/**
 	 * Aria-label for the external link
 	 */
-	@Input() externalLinkAriaLabel?: string;
+	@Input() externalLinkAriaLabel: string;
 
 	/**
 	 * Link uses primary blue color.

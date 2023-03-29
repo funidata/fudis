@@ -2,6 +2,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/forms';
+import isRequired from '../../../utilities/errors/errors.utility';
 import { GuidanceComponent } from '../guidance/guidance.component';
 
 /**
@@ -20,7 +21,7 @@ export const FUDIS_DATE_FORMATS = {
 };
 
 @Component({
-	selector: 'fudis-datepicker[id][label]',
+	selector: 'fudis-datepicker',
 	templateUrl: './datepicker.component.html',
 	styleUrls: ['./datepicker.component.scss'],
 })
@@ -40,22 +41,26 @@ export class DatepickerComponent implements OnInit {
 	/**
 	 * Datepicker label
 	 */
-	@Input() label: string;
+	@isRequired
+	@Input()
+	label: string;
 
 	/**
 	 * Unique datepicker id
 	 */
-	@Input() id: string;
+	@isRequired
+	@Input()
+	id: string;
 
 	/**
 	 * Available sizes for the datepicker - defaults to medium.
 	 */
-	@Input() size?: 's' | 'm' | 'l' = 'm';
+	@Input() size: 's' | 'm' | 'l' = 'm';
 
 	/**
 	 * Help text, aligned underneath the datepicker
 	 */
-	@Input() helpText?: string;
+	@Input() helpText: string;
 
 	/**
 	 * Option for disabling the datepicker input and calendar dialog

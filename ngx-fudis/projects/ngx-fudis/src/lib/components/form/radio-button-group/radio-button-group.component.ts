@@ -1,10 +1,11 @@
 import { Component, Input, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { IFudisRadioButtonOption, IFudisErrorSummaryItem, IFudisErrorMessages } from '../../../types/forms';
+import isRequired from '../../../utilities/errors/errors.utility';
 import { GuidanceComponent } from '../guidance/guidance.component';
 
 @Component({
-	selector: 'fudis-radio-button-group[options][id][legend]',
+	selector: 'fudis-radio-button-group',
 	templateUrl: './radio-button-group.component.html',
 	styleUrls: ['./radio-button-group.component.scss'],
 })
@@ -19,7 +20,9 @@ export class RadioButtonGroupComponent implements OnInit {
 	/*
 	 * Array of options for group of radio buttons
 	 */
-	@Input() options: IFudisRadioButtonOption[];
+	@isRequired
+	@Input()
+	options: IFudisRadioButtonOption[];
 
 	/**
 	 * Error message shown below the input
@@ -29,12 +32,16 @@ export class RadioButtonGroupComponent implements OnInit {
 	/*
 	 * Legend label for the group
 	 */
-	@Input() legend: string;
+	@isRequired
+	@Input()
+	legend: string;
 
 	/*
 	 * Unique id of the form group, used for improved accessibility
 	 */
-	@Input() id: string;
+	@isRequired
+	@Input()
+	id: string;
 
 	/**
 	 * Help text shown below the radio button group

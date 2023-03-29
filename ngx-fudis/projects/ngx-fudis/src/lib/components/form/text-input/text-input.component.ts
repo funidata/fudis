@@ -3,10 +3,11 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 import { IFudisErrorMessages } from '../../../types/forms';
+import isRequired from '../../../utilities/errors/errors.utility';
 import { GuidanceComponent } from '../guidance/guidance.component';
 
 @Component({
-	selector: 'fudis-text-input[id][label]',
+	selector: 'fudis-text-input',
 	templateUrl: './text-input.component.html',
 	styleUrls: ['./text-input.component.scss'],
 })
@@ -29,22 +30,26 @@ export class TextInputComponent {
 	/**
 	 * Input label
 	 */
-	@Input() label: string;
+	@isRequired
+	@Input()
+	label: string;
 
 	/**
 	 * Unique input id
 	 */
-	@Input() id: string;
+	@isRequired
+	@Input()
+	id: string;
 
 	/**
 	 * Available sizes for the input - defaults to large. Recommended size for number input is small.
 	 */
-	@Input() size?: 's' | 'm' | 'l' = 'l';
+	@Input() size: 's' | 'm' | 'l' = 'l';
 
 	/**
 	 * Help text shown below the input
 	 */
-	@Input() helpText?: string;
+	@Input() helpText: string;
 
 	/**
 	 * Text to indicate that input is required, shown above the input with asterisk

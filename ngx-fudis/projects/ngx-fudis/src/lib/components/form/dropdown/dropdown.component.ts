@@ -1,10 +1,11 @@
 import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { IFudisErrorMessages, IFudisDropdownOption } from '../../../types/forms';
+import isRequired from '../../../utilities/errors/errors.utility';
 import { GuidanceComponent } from '../guidance/guidance.component';
 
 @Component({
-	selector: 'fudis-dropdown[id][label]',
+	selector: 'fudis-dropdown',
 	templateUrl: './dropdown.component.html',
 	styleUrls: ['./dropdown.component.scss'],
 	encapsulation: ViewEncapsulation.None,
@@ -15,7 +16,9 @@ export class DropdownComponent implements OnInit {
 	/**
 	 * Dropdown options
 	 */
-	@Input() options: IFudisDropdownOption[];
+	@isRequired
+	@Input()
+	options: IFudisDropdownOption[];
 
 	/**
 	 * FormControl for the dropdown
@@ -35,12 +38,16 @@ export class DropdownComponent implements OnInit {
 	/**
 	 * Label for the dropdown
 	 */
-	@Input() label: string;
+	@isRequired
+	@Input()
+	label: string;
 
 	/**
 	 * Unique dropdown id
 	 */
-	@Input() id: string;
+	@isRequired
+	@Input()
+	id: string;
 
 	/**
 	 * Custom placeholder text to show when no selection has been made
@@ -50,7 +57,7 @@ export class DropdownComponent implements OnInit {
 	/**
 	 * Help text, aligned underneath the dropdown
 	 */
-	@Input() helpText?: string;
+	@Input() helpText: string;
 
 	/**
 	 * Text to indicate that input is required, shown above the input with asterisk
@@ -60,7 +67,7 @@ export class DropdownComponent implements OnInit {
 	/**
 	 * Available sizes for the dropdown - defaults to large.
 	 */
-	@Input() size?: 's' | 'm' | 'l' = 'l';
+	@Input() size: 's' | 'm' | 'l' = 'l';
 
 	required: boolean = false;
 
