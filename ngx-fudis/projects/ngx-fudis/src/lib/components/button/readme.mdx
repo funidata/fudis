@@ -9,7 +9,7 @@ import { ButtonComponent } from './button.component';
 Buttons are categorized based on their importance and functionality, i.e `primary`, `secondary` and `tertiary`.
 It is important to use the correct variant of the button for the intended action and not to overuse them to avoid overwhelming the user.
 
-There are two button sizes available: `medium` and `small`.
+There are three button sizes available: `medium`, `small` and `icon-only`.
 
 ## Examples
 
@@ -21,7 +21,7 @@ There are two button sizes available: `medium` and `small`.
 
 Button has option for icon. Frequently used icons: <code>search</code>, <code>three-dots</code> and <code>delete</code>. Icon color is automatically set according to which button variant is in use.
 
-Icon is only a visual indicator and is always hidden from screen readers.
+Icon is only a visual indicator and it is always hidden from screen readers.
 
 <Canvas>
 	<Story id="components-button--icon-button"></Story>
@@ -29,7 +29,7 @@ Icon is only a visual indicator and is always hidden from screen readers.
 
 ### Button with icon only
 
-Button can be without label but use this variation sparingly. If the button does not have a label, always remember to add descriptive aria-label in order to communicate screen reader users about the button functionality.
+Button can be without a visible label but use this variation sparingly. To hide visible label, include `labelHidden` property to the button component. When label is hidden, the label will be reflected to HTML `aria-label` attribute in order to communicate screen reader users about the button functionality.
 
 <Canvas>
 	<Story id="components-button--only-icon-button"></Story>
@@ -38,10 +38,11 @@ Button can be without label but use this variation sparingly. If the button does
 ### Accessibility
 
 - Button uses primary-color variable (`--fudis-color-primary`) which is set in the root of the application. Make sure the application's primary-color contrast ratio meets WCAG AA and AAA levels.
-	- Disabled button has static colors `#484848` and `#D4D4D4` with contrast ratio 6.2:1
+  - Disabled button has static colors `#484848` and `#D4D4D4` with contrast ratio 6.2:1
 - Button has visible focus state
 - Disabled button can be focused. State is communicated for screen reader
 - Button click can be triggered with keyboard <code>enter</code> and <code>space</code> key
+- Label is a mandatory property to provide for a button. If needed button can be given additional `ariaLabel` property. If button has no visibile label and both `label` and `ariaLabel` are provided, then those values are both combined and reflected to `aria-label` HTML attribute.
 
 ### Related components
 

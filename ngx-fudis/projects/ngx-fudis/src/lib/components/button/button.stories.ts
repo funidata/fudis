@@ -42,7 +42,7 @@ export const OnlyIconButton = Template.bind({});
 OnlyIconButton.args = {
 	variant: 'secondary',
 	icon: 'three-dots',
-	ariaLabel: 'Open additional menu',
+	label: 'Open additional menu',
 };
 
 export const AllVariants: Story = () => ({
@@ -79,7 +79,7 @@ export const AllVariants: Story = () => ({
 	</fudis-grid>
 
 	<fudis-grid columns="1fr 1fr 1fr 1fr" align="left" rowGap="xs" marginBottom="m">
-	<fudis-heading tag="h4" size="s">Medium sized buttons with hidden label</fudis-heading>
+	<fudis-heading tag="h4" size="s">Medium sized buttons with label hidden</fudis-heading>
 	<fudis-button variant="primary" [labelHidden]="true" icon="search" label="Primary"></fudis-button>
 	<fudis-button variant="secondary" [labelHidden]="true" icon="search" label="Secondary"></fudis-button>
 	<fudis-button variant="tertiary"[labelHidden]="true"  icon="search" label="Tertiary"></fudis-button>
@@ -87,7 +87,7 @@ export const AllVariants: Story = () => ({
 </fudis-grid>
 
 	<fudis-grid columns="1fr 1fr 1fr 1fr" align="left" rowGap="xs" marginBottom="m">
-		<fudis-heading tag="h4" size="s">Small sized buttons with hidden label</fudis-heading>
+		<fudis-heading tag="h4" size="s">Small sized buttons with label hidden</fudis-heading>
 		<fudis-button variant="primary" [labelHidden]="true" icon="search" label="Primary" size="small"></fudis-button>
 		<fudis-button variant="secondary" [labelHidden]="true" icon="search" label="Secondary" size="small"></fudis-button>
 		<fudis-button variant="tertiary"[labelHidden]="true"  icon="search" label="Tertiary" size="small"></fudis-button>
@@ -95,7 +95,7 @@ export const AllVariants: Story = () => ({
 	</fudis-grid>
 
 	<fudis-grid columns="1fr 1fr 1fr 1fr" align="left" rowGap="xs" marginBottom="m">
-		<fudis-heading tag="h4" size="s">Icon only sized buttons with hidden label</fudis-heading>
+		<fudis-heading tag="h4" size="s">Icon only sized buttons with label hidden</fudis-heading>
 		<fudis-button variant="primary" [labelHidden]="true" icon="search" label="Primary" size="icon-only"></fudis-button>
 		<fudis-button variant="secondary" [labelHidden]="true" icon="search" label="Secondary" size="icon-only"></fudis-button>
 		<fudis-button variant="tertiary"[labelHidden]="true"  icon="search" label="Tertiary" size="icon-only"></fudis-button>

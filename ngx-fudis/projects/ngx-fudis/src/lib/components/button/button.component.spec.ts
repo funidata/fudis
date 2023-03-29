@@ -36,16 +36,19 @@ describe('ButtonComponent', () => {
 		it('should map the given inputs to the corresponding CSS classes', () => {
 			component.size = 'small';
 			component.variant = 'secondary';
+			component.label = 'Testing css classes';
 			fixture.detectChanges();
 			assertButtonHasClasses('fudis-button fudis-button__size-small fudis-button__secondary');
 
 			component.size = 'medium';
 			component.variant = 'tertiary';
+			component.label = 'Testing css classes';
 			fixture.detectChanges();
 			assertButtonHasClasses('fudis-button fudis-button__size-medium fudis-button__tertiary');
 
 			component.size = 'icon-only';
 			component.variant = 'secondary';
+			component.label = 'Testing css classes';
 			fixture.detectChanges();
 			assertButtonHasClasses('fudis-button fudis-button__size-icon-only fudis-button__secondary');
 		});
@@ -54,6 +57,7 @@ describe('ButtonComponent', () => {
 	describe('button clicked', () => {
 		it('should emit events when the button is enabled', () => {
 			let clicked = false;
+			component.label = 'Testing clicking';
 			component.handleClick.subscribe(() => {
 				clicked = true;
 			});
@@ -69,6 +73,7 @@ describe('ButtonComponent', () => {
 			});
 
 			component.disabled = true;
+			component.label = 'Testing disabled state';
 			fixture.detectChanges();
 
 			getButton()?.click();
@@ -93,13 +98,13 @@ describe('ButtonComponent', () => {
 		});
 	});
 
-	describe('button label with submit', () => {
+	describe('button with label and type submit', () => {
 		it('should show uppercase context', () => {
-			component.label = 'Click me!';
+			component.label = 'Submit me!';
 			component.type = 'submit';
 			fixture.detectChanges();
 			expect(getButton().getAttribute('type')).toEqual('submit');
-			expect(getButton().innerText).toEqual('CLICK ME!');
+			expect(getButton().innerText).toEqual('SUBMIT ME!');
 		});
 	});
 });
