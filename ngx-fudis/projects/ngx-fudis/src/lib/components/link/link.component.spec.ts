@@ -20,6 +20,7 @@ describe('LinkComponent', () => {
 
 		fixture = TestBed.createComponent(LinkComponent);
 		component = fixture.componentInstance;
+		component.href = 'www.example.com';
 		fixture.detectChanges();
 	});
 

@@ -28,6 +28,7 @@ describe('TextInputComponent', () => {
 		fixture = TestBed.createComponent(TextInputComponent);
 		component = fixture.componentInstance;
 		component.label = 'Label for testing purposes';
+		component.id = 'test-id-text-input';
 		component.control = textInputControl;
 
 		fixture.detectChanges();

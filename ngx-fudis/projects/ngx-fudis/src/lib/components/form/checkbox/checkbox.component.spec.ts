@@ -20,6 +20,7 @@ describe('CheckboxComponent', () => {
 		fixture = TestBed.createComponent(CheckboxComponent);
 		component = fixture.componentInstance;
 		component.control = uncheckedCheckbox;
+		component.id = 'test-id-checkbox';
 		component.label = 'Please check me.';
 
 		fixture.detectChanges();

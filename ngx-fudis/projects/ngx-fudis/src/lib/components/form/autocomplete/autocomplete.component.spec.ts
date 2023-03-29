@@ -22,6 +22,12 @@ describe('AutocompleteComponent', () => {
 		fixture = TestBed.createComponent(AutocompleteComponent);
 		component = fixture.componentInstance;
 		component.control = autocompleteControl;
+		component.id = 'test-id-autocomplete';
+		component.label = 'Pick one';
+		component.options = [
+			{ value: '1', viewValue: 'First option' },
+			{ value: '2', viewValue: 'Second option' },
+		];
 		fixture.detectChanges();
 	});
 

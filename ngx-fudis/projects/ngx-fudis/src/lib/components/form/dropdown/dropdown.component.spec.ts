@@ -27,6 +27,11 @@ describe('DropdownComponent', () => {
 		component = fixture.componentInstance;
 		component.label = 'Label for testing purposes';
 		component.control = dropdownControl;
+		component.id = 'test-id-dropdown';
+		component.options = [
+			{ value: '1', viewValue: 'First option' },
+			{ value: '2', viewValue: 'Second option' },
+		];
 		fixture.detectChanges();
 	});
 
