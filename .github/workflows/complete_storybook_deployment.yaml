@@ -1,0 +1,39 @@
+# Update Storybook deployment's environment status and metadata after GH Pages deployment completes.
+name: Complete Storybook deployment
+
+on:
+  workflow_run:
+    workflows:
+      - pages-build-deployment
+    types:
+      - completed
+
+jobs:
+  update-environment:
+    name: Update GH deployment status
+    runs-on: ubuntu-22.04
+    permissions:
+      deployments: write
+    steps:
+      - name: Parse target deployment ID and path from commit message
+        id: parse-deployment-data
+        env:
+          MSG: ${{ github.event.workflow_run.head_commit.message }}
+        run: |
+          echo "id=${MSG%%/*}" >> $GITHUB_OUTPUT
+          echo "path=${MSG##*/}" >> $GITHUB_OUTPUT
+      - name: Format deployment URL
+        id: url
+        env:
+          REPO: ${{ github.repository }}
+        run: echo "url=https://${{ github.repository_owner }}.github.io/${REPO##*/}/${{ steps.parse-deployment-data.outputs.path }}" >> $GITHUB_OUTPUT
+      - name: Complete deployment (success)
+        if: github.event.workflow_run.conclusion == 'success'
+        uses: octokit/request-action@v2.1.7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          route: POST /repos/${{ github.repository }}/deployments/{deployment_id}/statuses
+          deployment_id: ${{ steps.parse-deployment-data.outputs.id }}
+          state: success
+          environment_url: ${{ steps.url.outputs.url }}
