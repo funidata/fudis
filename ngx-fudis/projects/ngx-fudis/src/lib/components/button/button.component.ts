@@ -28,7 +28,7 @@ export class ButtonComponent {
 	@Input() label: string;
 
 	/**
-	 * Hide visible label text. Used in icon-only buttons
+	 * Hide visible label text for icon-only buttons.
 	 */
 	@Input() labelHidden: boolean = false;
 

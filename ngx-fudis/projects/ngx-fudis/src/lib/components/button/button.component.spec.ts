@@ -89,7 +89,6 @@ describe('ButtonComponent', () => {
 			component.ariaLabel = 'It has nice things to click';
 			component.type = 'button';
 			fixture.detectChanges();
-			// console.log(getButton());
 			expect(IconComponent).toBeTruthy();
 			expect(getButton().getAttribute('aria-label')).toBeTruthy();
 			expect(getButton().getAttribute('aria-label')).toEqual('Open additional menu It has nice things to click');
