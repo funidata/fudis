@@ -1,6 +1,4 @@
 // also exported from '@storybook/angular' if you can deal with breaking changes in 6.1
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { moduleMetadata } from '@storybook/angular';
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { ButtonComponent } from './button.component';
 import readme from './readme.mdx';
@@ -16,11 +14,6 @@ export default {
 			exclude: ['iconColor', 'getClasses', 'getAriaLabel'],
 		},
 	},
-	decorators: [
-		moduleMetadata({
-			imports: [MatTooltipModule],
-		}),
-	],
 	argTypes: {
 		icon: {
 			control: { type: 'text' },
@@ -69,7 +62,6 @@ export const AllVariants: Story = () => ({
 		<fudis-button variant="tertiary" icon="search" label="Tertiary"></fudis-button>
 		<fudis-button label="Disabled" icon="search" [disabled]="true"></fudis-button>
 	</fudis-grid>
-
 	<fudis-grid columns="1fr 1fr 1fr 1fr" align="left" rowGap="xs" marginBottom="m">
 		<fudis-heading tag="h4" size="s">Small size buttons</fudis-heading>
 		<fudis-button variant="primary" label="Primary" size="small"></fudis-button>

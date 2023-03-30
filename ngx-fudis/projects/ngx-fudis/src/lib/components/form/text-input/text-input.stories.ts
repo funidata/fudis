@@ -2,7 +2,6 @@ import { Story, Meta } from '@storybook/angular/types-6-0';
 import { moduleMetadata } from '@storybook/angular';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { TextInputComponent } from './text-input.component';
 import { IFudisErrorMessages } from '../../../types/forms';
 
@@ -92,7 +91,7 @@ export default {
 	decorators: [
 		moduleMetadata({
 			declarations: [TextInputWithFormControlExampleComponent],
-			imports: [ReactiveFormsModule, FormsModule, MatTooltipModule],
+			imports: [ReactiveFormsModule, FormsModule],
 		}),
 	],
 	argTypes: {},
