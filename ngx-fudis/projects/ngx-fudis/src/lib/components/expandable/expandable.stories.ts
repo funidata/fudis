@@ -22,9 +22,8 @@ const Template: Story<ExpandableComponent> = (args: ExpandableComponent) => ({
 	props: args,
 	template: `
     <fudis-expandable [title]="title" [subTitle]="subTitle">
-      <ng-template fudisExpandableHeaderButtons></ng-template>
       <ng-template fudisExpandableContent>
-        <p>Hey you! I am the content of the expandable.</p>
+        <fudis-body-text>Hey you! I am the content of the expandable.</fudis-body-text>
       </ng-template>
     </fudis-expandable>
   `,
@@ -41,9 +40,8 @@ const SubTitleTemplate: Story<ExpandableComponent> = (args: ExpandableComponent)
 	props: args,
 	template: `
     <fudis-expandable [title]="title" [subTitle]="subTitle">
-      <ng-template fudisExpandableHeaderButtons></ng-template>
       <ng-template fudisExpandableContent>
-        <p>Hey you! I am the content of the expandable.</p>
+        <fudis-body-text>Hey you! I am the content of the expandable.</fudis-body-text>
       </ng-template>
     </fudis-expandable>
   `,
@@ -61,11 +59,11 @@ const ActionTemplate: Story<ExpandableComponent> = (args: ExpandableComponent) =
 	props: args,
 	template: `
     <fudis-expandable [title]="title" [subTitle]="subTitle">
-      <ng-template fudisExpandableHeaderButtons>
+      <ng-template fudisExpandableActions>
         <fudis-button label="Button"></fudis-button>
       </ng-template>
       <ng-template fudisExpandableContent>
-        <p>Hey you! I am the content of the expandable.</p>
+        <fudis-body-text>Hey you! I am the content of the expandable.</fudis-body-text>
       </ng-template>
     </fudis-expandable>
   `,

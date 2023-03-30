@@ -31,10 +31,10 @@ import { FormControl, Validators, FormBuilder } from '@angular/forms';
 			</fudis-grid>
 		</form>
 		<fudis-expandable title="Title for expandable">
-      <ng-template fudisExpandableHeaderButtons>
-        <fudis-button data-theme="sisu" type="submit" label="Lähetä"></fudis-button>
-        <fudis-button data-theme="sisu" label="Eiku" variant="secondary"></fudis-button>
-      </ng-template>
+			<ng-template fudisExpandableHeaderButtons>
+				<fudis-button data-theme="sisu" type="submit" label="Lähetä"></fudis-button>
+				<fudis-button data-theme="sisu" label="Eiku" variant="secondary"></fudis-button>
+			</ng-template>
 			<ng-template fudisExpandableContent>
 				<fudis-heading tag="h3" size="m">This is heading inside an expandable</fudis-heading>
 				<fudis-body-text>This is body text inside an expandable</fudis-body-text>

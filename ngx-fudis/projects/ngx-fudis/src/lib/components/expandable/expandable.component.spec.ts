@@ -5,14 +5,14 @@ import { By } from '@angular/platform-browser';
 import { MockComponent } from 'ng-mocks';
 import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';
-import { ExpandableContentDirective } from './expandable-directives/expandable-content.directive';
-import { ExpandableHeaderButtonsDirective } from './expandable-directives/expandable-header-buttons.directive';
+import { ExpandableContentDirective, ExpandableActionsDirective } from './expandable-directives';
+
 import { ExpandableComponent } from './expandable.component';
 
 @Component({
 	selector: 'fudis-mock-container',
 	template: ` <fudis-expandable [collapsed]="collapsed">
-		<ng-template fudisExpandableHeaderButtons>
+		<ng-template fudisExpandableActions>
 			<fudis-button></fudis-button>
 		</ng-template>
 		<ng-template fudisExpandableContent>
@@ -47,7 +47,7 @@ describe('ExpandableComponent', () => {
 		await TestBed.configureTestingModule({
 			declarations: [
 				ExpandableContentDirective,
-				ExpandableHeaderButtonsDirective,
+				ExpandableActionsDirective,
 				ExpandableComponent,
 				MockContainerComponent,
 				MockContentComponent,
