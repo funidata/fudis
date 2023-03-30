@@ -4,7 +4,7 @@
 
 Funidata Design System.
 
-TBA.
+For latest documentation, look at [Fudis Storybook](https://funidata.github.io/fudis/main/). 
 
 ## Contributions
 

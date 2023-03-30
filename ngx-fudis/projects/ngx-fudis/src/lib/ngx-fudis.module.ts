@@ -35,7 +35,8 @@ import { DropdownComponent } from './components/form/dropdown/dropdown.component
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
-import { ExpandableContentDirective } from './components/expandable/expandable-content.directive';
+import { ExpandableContentDirective, ExpandableActionsDirective } from './components/expandable/expandable-directives';
+
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { GridComponent } from './components/grid/grid.component';
 import { GridApiDirective } from './directives/grid/grid-api.directive';
@@ -71,6 +72,7 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,
+		ExpandableActionsDirective,
 		ExpandableContentDirective,
 		DialogTitleDirective,
 		DialogComponent,
@@ -133,6 +135,7 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		DropdownComponent,
 		// ErrorSummaryComponent,
 		ExpandableComponent,
+		ExpandableActionsDirective,
 		ExpandableContentDirective,
 		DialogTitleDirective,
 		DialogContentDirective,

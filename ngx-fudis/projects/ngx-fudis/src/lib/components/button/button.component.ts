@@ -28,6 +28,11 @@ export class ButtonComponent {
 	@Input() label: string;
 
 	/**
+	 * Hide visible label text for icon-only buttons.
+	 */
+	@Input() labelHidden: boolean = false;
+
+	/**
 	 * Additional aria-label for describing context
 	 */
 	@Input() ariaLabel: string;
@@ -52,7 +57,7 @@ export class ButtonComponent {
 	 */
 	iconColor: FudisIconColor = 'white';
 
-	public get classes(): string[] {
+	public get getClasses(): string[] {
 		if (this.disabled) {
 			this.iconColor = 'default';
 		} else if (this.variant === 'primary') {
@@ -60,6 +65,13 @@ export class ButtonComponent {
 		} else if (this.variant === 'secondary' || this.variant === 'tertiary') {
 			this.iconColor = 'primary';
 		}
-		return ['fudis-button', `fudis-button__${this.size}`, `fudis-button__${this.variant}`];
+		return ['fudis-button', `fudis-button__size-${this.size}`, `fudis-button__${this.variant}`];
+	}
+
+	public get getAriaLabel(): string {
+		if (this.labelHidden || this.size === 'icon-only') {
+			return this.ariaLabel ? `${this.label} ${this.ariaLabel}` : this.label;
+		}
+		return this.ariaLabel;
 	}
 }

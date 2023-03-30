@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators, FormBuilder } from '@angular/forms';
-import { DialogService } from 'ngx-fudis';
-import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 
 @Component({
 	selector: 'app-root',
 	template: `
 		<!--The content below is only a placeholder and can be replaced.-->
 		<fudis-heading tag="h1" size="xl">Welcome to Fudis sandbox </fudis-heading>
-		<fudis-button (handleClick)="openDialog()" label="Avaa Dialogi"></fudis-button>
 
 		<form class="basic-flex-box">
 			<fudis-datepicker
@@ -34,6 +31,10 @@ import { DialogTestContentComponent } from './dialog-test/dialog-test-content/di
 			</fudis-grid>
 		</form>
 		<fudis-expandable title="Title for expandable">
+			<ng-template fudisExpandableHeaderButtons>
+				<fudis-button data-theme="sisu" type="submit" label="Lähetä"></fudis-button>
+				<fudis-button data-theme="sisu" label="Eiku" variant="secondary"></fudis-button>
+			</ng-template>
 			<ng-template fudisExpandableContent>
 				<fudis-heading tag="h3" size="m">This is heading inside an expandable</fudis-heading>
 				<fudis-body-text>This is body text inside an expandable</fudis-body-text>
@@ -75,13 +76,5 @@ export class AppComponent {
 
 	datePickerControl: FormControl = new FormControl('', this.validatorsForDatepicker);
 
-	constructor(private formBuilder: FormBuilder, public dialog: DialogService) {}
-
-	openDialog() {
-		const ref = this.dialog.open(DialogTestContentComponent);
-		ref.afterClosed().subscribe((res: any) => {
-			// eslint-disable-next-line no-console
-			console.log(res);
-		});
-	}
+	constructor(private formBuilder: FormBuilder) {}
 }
