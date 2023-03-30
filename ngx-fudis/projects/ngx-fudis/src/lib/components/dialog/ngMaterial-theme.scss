@@ -1,0 +1,36 @@
+/* stylelint-disable selector-max-class */
+/* stylelint-disable selector-class-pattern */
+/* stylelint-disable selector-no-qualifying-type */
+/* stylelint-disable scss/selector-no-redundant-nesting-selector */
+
+@use '../../foundations/colors/tokens.scss' as colors;
+@use '../../foundations/borders/mixins.scss' as borders;
+@use '../../foundations/breakpoints/mixins.scss' as breakpoints;
+
+.fudis-dialog-panel {
+	@include borders.border('2px', 'solid', 'gray-dark');
+
+	& mat-dialog-container.mat-dialog-container {
+		padding: 0;
+
+		& .mat-dialog-title {
+			margin: 0;
+		}
+
+		& .mat-dialog-content {
+			margin: 0;
+			padding: 0;
+		}
+
+		& .mat-dialog-actions {
+			margin-bottom: 0;
+			padding: 0;
+			min-height: initial;
+		}
+	}
+
+	@include breakpoints.breakpoint-max('s') {
+		/* stylelint-disable-next-line declaration-no-important */
+		max-width: 90vw !important;
+	}
+}

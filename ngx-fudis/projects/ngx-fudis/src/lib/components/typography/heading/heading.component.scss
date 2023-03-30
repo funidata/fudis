@@ -1,6 +1,8 @@
 @use '../../../foundations/typography/mixins.scss' as mixins;
 
 .fudis-heading {
+	margin: 0;
+
 	&__xxs {
 		@include mixins.heading-xxs;
 	}

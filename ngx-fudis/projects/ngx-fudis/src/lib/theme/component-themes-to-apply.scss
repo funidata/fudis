@@ -1,0 +1,12 @@
+@use '@angular/material' as mat;
+@use './fudis-theme.scss' as theme;
+@use "../components/form/autocomplete/ngMaterial-theme.scss" as autoComplete;
+@use "../components/form/datepicker/ngMaterial-theme.scss" as datePicker;
+@use "../components/dialog/ngMaterial-theme.scss" as dialog;
+
+// Emit theme-dependent styles for common features used across multiple Material components.
+@include mat.core-theme(theme.$primary-theme);
+@include mat.autocomplete-theme(theme.$primary-theme);
+@include mat.datepicker-theme(theme.$datepicker-theme);
+@include mat.dialog-theme(theme.$primary-theme);
+@include mat.core(theme.$typography);

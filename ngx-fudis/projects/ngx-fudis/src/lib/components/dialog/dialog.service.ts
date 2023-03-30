@@ -1,10 +1,10 @@
 import { ComponentType } from '@angular/cdk/portal';
-import { Injectable } from '@angular/core';
+import { Injectable, TemplateRef } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 
 @Injectable()
-export class FudisDialog {
-	constructor(public dialog: MatDialog) {}
+export class DialogService {
+	constructor(public ngMaterialDialog: MatDialog) {}
 
 	/**
 	 * Open new dialog.
@@ -13,17 +13,21 @@ export class FudisDialog {
 	 * into `component`.
 	 * @returns Reference to the dialog that was opened.
 	 */
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	open<T, R = any>(component: ComponentType<T>, config?: MatDialogConfig<any>): MatDialogRef<T, R> {
-		const dialogRef = this.dialog.open(component, FudisDialog.createConfig());
+
+	open<T, R = any>(component: ComponentType<T> | TemplateRef<T>, config?: MatDialogConfig<any>): MatDialogRef<T, R> {
+		const dialogRef = this.ngMaterialDialog.open(component, DialogService.createConfig(config));
 		return dialogRef;
+	}
+
+	close(): void {
+		this.ngMaterialDialog.closeAll();
 	}
 
 	/**
 	 * Merge consumer's config with ours.
 	 */
 	private static createConfig(userConfig: MatDialogConfig<any> = {}): MatDialogConfig<any> {
-		const overridableOptions = { hasBackdrop: true };
+		const overridableOptions = { hasBackdrop: true, disableClose: true };
 		const forcedOptions = { panelClass: 'fudis-dialog-panel' };
 		return { ...overridableOptions, ...userConfig, ...forcedOptions };
 	}

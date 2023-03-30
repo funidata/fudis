@@ -30,25 +30,34 @@ describe('ButtonComponent', () => {
 
 	describe('CSS classes', () => {
 		it('should contain classes for medium sized primary button by default', () => {
-			assertButtonHasClasses('fudis-button fudis-button__primary fudis-button__medium');
+			assertButtonHasClasses('fudis-button fudis-button__primary fudis-button__size-medium');
 		});
 
 		it('should map the given inputs to the corresponding CSS classes', () => {
 			component.size = 'small';
 			component.variant = 'secondary';
+			component.label = 'Testing css classes';
 			fixture.detectChanges();
-			assertButtonHasClasses('fudis-button fudis-button__small fudis-button__secondary');
+			assertButtonHasClasses('fudis-button fudis-button__size-small fudis-button__secondary');
 
 			component.size = 'medium';
 			component.variant = 'tertiary';
+			component.label = 'Testing css classes';
 			fixture.detectChanges();
-			assertButtonHasClasses('fudis-button fudis-button__medium fudis-button__tertiary');
+			assertButtonHasClasses('fudis-button fudis-button__size-medium fudis-button__tertiary');
+
+			component.size = 'icon-only';
+			component.variant = 'secondary';
+			component.label = 'Testing css classes';
+			fixture.detectChanges();
+			assertButtonHasClasses('fudis-button fudis-button__size-icon-only fudis-button__secondary');
 		});
 	});
 
 	describe('button clicked', () => {
 		it('should emit events when the button is enabled', () => {
 			let clicked = false;
+			component.label = 'Testing clicking';
 			component.handleClick.subscribe(() => {
 				clicked = true;
 			});
@@ -64,6 +73,7 @@ describe('ButtonComponent', () => {
 			});
 
 			component.disabled = true;
+			component.label = 'Testing disabled state';
 			fixture.detectChanges();
 
 			getButton()?.click();
@@ -71,24 +81,29 @@ describe('ButtonComponent', () => {
 		});
 	});
 
-	describe('button with icon and aria-label', () => {
-		it('should have icon component present if icon and aria-label has been given as an Input', () => {
+	describe('button with icon, aria-label and label hidden', () => {
+		it('should have icon component present if icon and label and aria-label has been given as an Input', () => {
 			component.icon = 'three-dots';
-			component.ariaLabel = 'Open additional menu';
+			component.label = 'Open additional menu';
+			component.labelHidden = true;
+			component.ariaLabel = 'It has nice things to click';
 			component.type = 'button';
 			fixture.detectChanges();
 			expect(IconComponent).toBeTruthy();
 			expect(getButton().getAttribute('aria-label')).toBeTruthy();
-			expect(getButton().getAttribute('aria-label')).toEqual('Open additional menu');
+			expect(getButton().getAttribute('aria-label')).toEqual('Open additional menu It has nice things to click');
 			expect(getButton().getAttribute('type')).toEqual('button');
+			expect(getButton().innerText).toEqual('');
 		});
 	});
 
-	describe('button label', () => {
+	describe('button with label and type submit', () => {
 		it('should show uppercase context', () => {
-			component.label = 'Click me!';
+			component.label = 'Submit me!';
+			component.type = 'submit';
 			fixture.detectChanges();
-			expect(getButton().innerText).toEqual('CLICK ME!');
+			expect(getButton().getAttribute('type')).toEqual('submit');
+			expect(getButton().innerText).toEqual('SUBMIT ME!');
 		});
 	});
 });

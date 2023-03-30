@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators, FormBuilder } from '@angular/forms';
+import { DialogService } from 'ngx-fudis';
+import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 
 @Component({
 	selector: 'app-root',
 	template: `
 		<!--The content below is only a placeholder and can be replaced.-->
 		<fudis-heading tag="h1" size="xl">Welcome to Fudis sandbox </fudis-heading>
+		<fudis-button (handleClick)="openDialog()" label="Avaa Dialogi"></fudis-button>
 
 		<form class="basic-flex-box">
 			<fudis-datepicker
@@ -59,5 +62,13 @@ export class AppComponent {
 
 	datePickerControl: FormControl = new FormControl('', this.validatorsForDatepicker);
 
-	constructor(private formBuilder: FormBuilder) {}
+	constructor(private formBuilder: FormBuilder, public dialog: DialogService) {}
+
+	openDialog() {
+		const ref = this.dialog.open(DialogTestContentComponent);
+		ref.afterClosed().subscribe((res: any) => {
+			// eslint-disable-next-line no-console
+			console.log(res);
+		});
+	}
 }
