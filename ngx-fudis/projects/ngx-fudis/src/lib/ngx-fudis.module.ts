@@ -33,8 +33,8 @@ import { DropdownComponent } from './components/form/dropdown/dropdown.component
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
-import { ExpandableContentDirective } from './components/expandable/expandable-directives/expandable-content.directive';
-import { ExpandableHeaderButtonsDirective } from './components/expandable/expandable-directives/expandable-header-buttons.directive';
+import { ExpandableContentDirective, ExpandableActionsDirective } from './components/expandable/expandable-directives';
+
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { GridComponent } from './components/grid/grid.component';
 import { GridApiDirective } from './components/grid/grid-api.directive';
@@ -69,8 +69,8 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,
+		ExpandableActionsDirective,
 		ExpandableContentDirective,
-    ExpandableHeaderButtonsDirective,
 		DialogTitleDirective,
 		DialogComponent,
 		DialogActionsDirective,
@@ -129,8 +129,8 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		DropdownComponent,
 		// ErrorSummaryComponent,
 		ExpandableComponent,
+		ExpandableActionsDirective,
 		ExpandableContentDirective,
-    ExpandableHeaderButtonsDirective,
 		DialogTitleDirective,
 		DialogContentDirective,
 		DialogCloseDirective,

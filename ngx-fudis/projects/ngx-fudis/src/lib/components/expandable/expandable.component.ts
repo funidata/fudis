@@ -1,15 +1,14 @@
 /* eslint-disable no-underscore-dangle */
 import { Component, ContentChild, Input, Output, EventEmitter, ElementRef, ViewEncapsulation } from '@angular/core';
 import { ExpandableType } from '../../types/expandables';
-import { ExpandableContentDirective } from './expandable-directives/expandable-content.directive';
-import { ExpandableHeaderButtonsDirective } from './expandable-directives/expandable-header-buttons.directive';
+import { ExpandableContentDirective, ExpandableActionsDirective } from './expandable-directives';
 
 /**
  * Example usage:
  *
  * ```
  * <fudis-expandable>
- *  <ng-template fudisExpandableHeaderButtons>
+ *  <ng-template fudisExpandableActions>
  *    <fudis-button />
  *  </ng-template>
  * 	<ng-template fudisExpandableContent>
@@ -28,7 +27,7 @@ import { ExpandableHeaderButtonsDirective } from './expandable-directives/expand
 export class ExpandableComponent {
 	@ContentChild(ExpandableContentDirective) content: ExpandableContentDirective;
 
-	@ContentChild(ExpandableHeaderButtonsDirective) headerButtons: ExpandableHeaderButtonsDirective;
+	@ContentChild(ExpandableActionsDirective) headerButtons: ExpandableActionsDirective;
 
 	/**
 	 * Tag is for semantic support for screen readers, this does not change the appearance of the expandable
