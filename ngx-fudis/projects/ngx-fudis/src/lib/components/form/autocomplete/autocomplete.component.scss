@@ -20,6 +20,10 @@
 		max-width: calc(10 * spacing.$spacing-s);
 	}
 
+	&__input-wrapper {
+		position: relative;
+	}
+
 	&__input {
 		@include borders.border('1px', 'solid', 'gray-middle');
 		@include typography.text-field-input;
@@ -32,6 +36,19 @@
 
 		&:focus {
 			@include focus.focus-form-field;
+		}
+
+		&__icon {
+			@include colorMixins.bg-color('white');
+			
+			position: absolute;
+			top: 50%;
+			right: spacing.$spacing-xxs;
+			transform: translateY(-50%);
+
+			&--disabled {
+				@include colorMixins.bg-color('transparent');
+			}
 		}
 
 		&--invalid {
