@@ -20,11 +20,14 @@ export {
 export { DialogComponent } from './lib/components/dialog/dialog.component';
 
 export { DescriptionListComponent } from './lib/components/description-list/description-list.component';
+export { DialogService } from './lib/components/dialog/dialog.service';
 export { DropdownComponent } from './lib/components/form/dropdown/dropdown.component';
 // export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';
 export { ExpandableComponent } from './lib/components/expandable/expandable.component';
-export { ExpandableContentDirective } from './lib/components/expandable/expandable-content.directive';
-export { DialogService } from './lib/components/dialog/dialog.service';
+export {
+	ExpandableContentDirective,
+	ExpandableActionsDirective,
+} from './lib/components/expandable/expandable-directives';
 export { GridComponent } from './lib/components/grid/grid.component';
 export { GridDirective } from './lib/components/grid/grid.directive';
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
