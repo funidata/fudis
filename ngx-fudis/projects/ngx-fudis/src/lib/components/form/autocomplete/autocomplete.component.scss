@@ -45,6 +45,10 @@
 			top: 50%;
 			right: spacing.$spacing-xxs;
 			transform: translateY(-50%);
+
+			&--disabled {
+				@include colorMixins.bg-color('transparent');
+			}
 		}
 
 		&--invalid {

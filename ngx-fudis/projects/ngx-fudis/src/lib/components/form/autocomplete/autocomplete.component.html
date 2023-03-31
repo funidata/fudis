@@ -30,7 +30,10 @@
 				class="fudis-autocomplete__input__icon"></fudis-button>
 		</ng-container>
 		<ng-container *ngIf="!control.value || control.value === ''">
-			<fudis-icon [icon]="'search'" class="fudis-autocomplete__input__icon"></fudis-icon>
+			<fudis-icon
+				[icon]="'search'"
+				class="fudis-autocomplete__input__icon"
+				[class.fudis-autocomplete__input__icon--disabled]="disabled"></fudis-icon>
 		</ng-container>
 	</div>
 	<fudis-guidance [helpText]="helpText" [id]="id + '__guidance'" [errorMsg]="errorMsg" [control]="control">

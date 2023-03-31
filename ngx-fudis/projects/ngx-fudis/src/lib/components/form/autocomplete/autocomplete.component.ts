@@ -121,7 +121,7 @@ export class AutocompleteComponent implements OnInit {
 	}
 
 	/**
-	 * Clear any written or seleected value in the autocomplete field
+	 * Clear any written or selected value in the autocomplete field
 	 */
 	clearFilter(): void {
 		// Clear input field and control value
