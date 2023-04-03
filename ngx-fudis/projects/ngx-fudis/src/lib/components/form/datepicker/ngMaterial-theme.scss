@@ -10,7 +10,7 @@
 .fudis-datepicker {
 	&__toggle {
 		/* Target mat-icon-button */
-		& .mat-icon-button {
+		& .mat-mdc-icon-button {
 			@include colorMixins.bg-color('transparent');
 
 			border-radius: 0;
@@ -46,11 +46,11 @@
 		}
 
 		& .mat-calendar-controls {
-				& .mat-button {
+				& .mat-mdc-button {
 					@include colorMixins.bg-color('transparent');
 				}
 
-				& .mat-icon-button {
+				& .mat-mdc-icon-button {
 					@include colorMixins.bg-color('transparent');
 				}
 		}

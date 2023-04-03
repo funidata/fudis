@@ -10,19 +10,19 @@
 .fudis-dialog-panel {
 	@include borders.border('2px', 'solid', 'gray-dark');
 
-	& mat-dialog-container.mat-dialog-container {
+	& mat-dialog-container.mat-mdc-dialog-container {
 		padding: 0;
 
-		& .mat-dialog-title {
+		& .mat-mdc-dialog-title {
 			margin: 0;
 		}
 
-		& .mat-dialog-content {
+		& .mat-mdc-dialog-content {
 			margin: 0;
 			padding: 0;
 		}
 
-		& .mat-dialog-actions {
+		& .mat-mdc-dialog-actions {
 			margin-bottom: 0;
 			padding: 0;
 			min-height: initial;
