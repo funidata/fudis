@@ -1,6 +1,5 @@
 import { Story, Meta, moduleMetadata } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { Component } from '@angular/core';
 import { CheckboxComponent } from './checkbox.component';
 
@@ -47,7 +46,7 @@ export default {
 	decorators: [
 		moduleMetadata({
 			declarations: [CheckboxExampleComponent],
-			imports: [ReactiveFormsModule, BrowserModule, FormsModule],
+			imports: [ReactiveFormsModule, FormsModule],
 		}),
 	],
 } as Meta;

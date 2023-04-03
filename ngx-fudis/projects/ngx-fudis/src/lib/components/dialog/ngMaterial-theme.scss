@@ -6,6 +6,7 @@
 @use '../../foundations/colors/tokens.scss' as colors;
 @use '../../foundations/borders/mixins.scss' as borders;
 @use '../../foundations/breakpoints/mixins.scss' as breakpoints;
+@use '../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-dialog-panel {
 	@include borders.border('2px', 'solid', 'gray-dark');
@@ -14,7 +15,13 @@
 		padding: 0;
 
 		& .mat-mdc-dialog-title {
-			margin: 0;
+			margin: spacing.$spacing-xxs 0 spacing.$spacing-s 0;
+			padding: 0;
+			pointer-events: none;
+
+			&::before {
+				display: none;
+			}
 		}
 
 		& .mat-mdc-dialog-content {

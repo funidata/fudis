@@ -1,6 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { Story, Meta } from '@storybook/angular/types-6-0';
-import { moduleMetadata } from '@storybook/angular';
+import { Story, Meta, moduleMetadata } from '@storybook/angular';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ComponentType } from '@angular/cdk/portal';
 import { DialogService } from './dialog.service';
@@ -36,8 +35,6 @@ import { DialogService } from './dialog.service';
 				<fudis-dialog-actions align="end">
 					<fudis-button fudisDialogClose label="Cancel"></fudis-button>
 					<fudis-button
-						fudisSpacing
-						[marginRight]="'xs'"
 						class="inton-custom-button-härveli"
 						(click)="closeDialogWithForm()"
 						[disabled]="!exampleADialogFormGroup.valid"

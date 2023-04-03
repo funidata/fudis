@@ -9,6 +9,7 @@
 @include mat.autocomplete-theme(theme.$primary-theme);
 @include mat.datepicker-theme(theme.$datepicker-theme);
 @include mat.dialog-theme(theme.$primary-theme);
+
 // TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
 //  The following line adds:
 //    1. Default typography styles for all components
@@ -18,4 +19,4 @@
 //  you can delete this line and instead use:
 //    `@include mat.legacy-typography-hierarchy(theme.$typography);`
 @include mat.all-component-typographies(theme.$typography);
-@include mat.core();
+@include mat.core;

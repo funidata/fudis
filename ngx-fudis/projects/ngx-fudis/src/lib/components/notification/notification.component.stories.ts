@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/angular/types-6-0';
+import { Story, Meta } from '@storybook/angular';
 import { NotificationComponent } from './notification.component';
 import readme from './readme.mdx';
 

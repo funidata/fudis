@@ -17,7 +17,10 @@ module.exports = {
 			},
 		},
 	],
-	framework: '@storybook/angular',
+	framework: {
+		name: '@storybook/angular',
+		options: { enableIvy: true },
+	},
 	features: { modernInlineRender: true },
 	core: {
 		builder: '@storybook/builder-webpack5',
@@ -28,6 +31,6 @@ module.exports = {
 	],
 	env: (config) => ({
 		...config,
-		VERSION: process.env.VERSION,
+		VERSION: process.env.VERSION | '0.0.0',
 	}),
 };

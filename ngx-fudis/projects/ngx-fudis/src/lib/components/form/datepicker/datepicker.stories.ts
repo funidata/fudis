@@ -1,5 +1,4 @@
-import { Story, Meta } from '@storybook/angular/types-6-0';
-import { moduleMetadata } from '@storybook/angular';
+import { Story, Meta, moduleMetadata } from '@storybook/angular';
 import { FormControl, Validators } from '@angular/forms';
 import { DatepickerComponent } from './datepicker.component';
 import readme from './readme.mdx';
