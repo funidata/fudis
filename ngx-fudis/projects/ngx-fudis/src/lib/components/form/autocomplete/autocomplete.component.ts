@@ -83,10 +83,6 @@ export class AutocompleteComponent extends TooltipApiDirective implements OnInit
 		if (this.control.hasValidator(Validators.required)) {
 			this.required = true;
 		}
-		if (this.tooltip) {
-			console.log('minulla on tooltip!');
-		}
-		console.log('minulla ei ole tooltipiää!');
 		this.filteredOptions = this.control.valueChanges.pipe(
 			map((value) => {
 				// Start filtering after three characters
