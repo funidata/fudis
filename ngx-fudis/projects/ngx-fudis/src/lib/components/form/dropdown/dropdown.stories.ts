@@ -29,7 +29,10 @@ const Template: Story<DropdownComponent> = (args: DropdownComponent) => ({
 			[requiredText]="requiredText"
 			[label]="label"
 			[id]="id"
-			[helpText]="helpText"></fudis-dropdown>
+			[helpText]="helpText"
+			[tooltip]="tooltip"
+			[tooltipPosition]="tooltipPosition"
+			tooltipToggle="tooltipToggle"></fudis-dropdown>
 
 		<ng-container *ngIf="control.value.length > 0">
 			<ng-container *ngFor="let value of control.value">
@@ -81,6 +84,9 @@ MultiSelect.args = {
 	control: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(3)]),
 	id: 'example-id-for-dropdown-multi-select',
 	helpText: 'All pets are equally important, but for sake of this example please pick two to three pets.',
+	tooltip: 'Platypus is the right choise',
+	tooltipPosition: 'below',
+	tooltipToggle: false,
 	options: [
 		{ value: 'value-1-dog', viewValue: 'Dog' },
 		{ value: 'value-2-capybara', viewValue: 'Capybara' },

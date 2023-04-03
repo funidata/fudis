@@ -3,8 +3,10 @@
 		{{ text }}
 		<ng-container *ngIf="tooltip">
 			<fudis-icon
+				fudisTooltip
 				[tooltip]="tooltip"
 				[tooltipPosition]="tooltipPosition"
+				[tooltipToggle]="tooltipToggle"
 				icon="info-circle"
 				color="primary"></fudis-icon>
 		</ng-container>
