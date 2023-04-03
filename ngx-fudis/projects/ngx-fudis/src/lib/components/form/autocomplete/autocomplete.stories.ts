@@ -30,6 +30,7 @@ Autocomplete.args = {
 	label: 'Choose one option',
 	required: true,
 	requiredText: 'Required',
+	clearFilterText: 'Clear filter',
 	helpText:
 		'This is autocomplete input, start writing (e.g mar) and after three letters the input will suggest matching options.',
 	control: new FormControl('', Validators.required),

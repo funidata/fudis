@@ -22,7 +22,19 @@ User can select one option from the dropdown and it will be displayed in the inp
 Autocomplete is designed to use when basic [dropdown](/story/components-form-dropdown--single-select) is not enough - that is, cases where option list has too many objects to scroll through and user has an idea what they are searching for.
 
 #### Mandatory Properties
-Autocomplete requires at least ``label``and ``id`` properties for accessibility and ``options`` object array with possible option values.
+Autocomplete requires at least ``label``, ``id`` and ``options`` object array with possible option values. For accessibility it is also mandatory to give ``clearFilterText`` which is passed to clear-button's aria-label. 
+
+Options array takes in objects with the following signature:
+````
+{
+	// Underlying value of the option
+	value: any;
+	// Value that is shown in the UI
+	viewValue: string;
+	// Is option disabled in the options list dropdown
+	disabled?: boolean;
+}
+````
 
 #### As a required form field
 If Autocomplete is a required form field, provide ``requiredText`` string property, include ``Validators.required`` in the form control validators and include a ``required`` error message in the ``errorMsg`` property.
@@ -40,10 +52,12 @@ If Autocomplete is a required form field, provide ``requiredText`` string proper
 - Options can be disabled
 	- Disabled option is focusable with screen reader
 	- Disabled state is communicated for screen reader
-- NOTE: Option list selection can be made with ``enter`` but not with ``space`` since it is considered as a search character
+- **NOTE:** Option list selection can be made with ``enter`` but not with ``space`` since it is considered as a search character
 
 
 ### Related components
+
+[Icon](/docs/components-icon--icon)
 
 [Angular Material Autocomplete](https://material.angular.io/components/autocomplete/overview)
 
