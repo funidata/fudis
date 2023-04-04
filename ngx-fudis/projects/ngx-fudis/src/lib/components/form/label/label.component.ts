@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
+import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 
 @Component({
 	selector: 'fudis-label',
 	templateUrl: './label.component.html',
 	styleUrls: ['./label.component.scss'],
 })
-export class LabelComponent {
+export class LabelComponent extends TooltipApiDirective {
 	/**
 	 * Text indicating if form element associated with label required or not
 	 */

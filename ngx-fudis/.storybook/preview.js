@@ -25,6 +25,7 @@ const storyOrder = [
 	],
 	'Foundations',
 	'Components',
+	'Directives',
 ];
 
 export const parameters = {

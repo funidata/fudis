@@ -29,7 +29,7 @@ export {
 	ExpandableActionsDirective,
 } from './lib/components/expandable/expandable-directives';
 export { GridComponent } from './lib/components/grid/grid.component';
-export { GridDirective } from './lib/components/grid/grid.directive';
+export { GridDirective } from './lib/directives/grid/grid.directive';
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
 export { IconComponent } from './lib/components/icon/icon.component';
 export { LegendComponent } from './lib/components/form/legend/legend.component';
@@ -40,3 +40,4 @@ export { SpacingDirective } from './lib/directives/spacing/spacing.directive';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';
 export { TextInputComponent } from './lib/components/form/text-input/text-input.component';
 // export { TextSpacingComponent } from './lib/components/typography/text-spacing/text-spacing.component';
+export { TooltipDirective } from './lib/directives/tooltip/tooltip.directive';

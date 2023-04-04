@@ -12,7 +12,7 @@ import readme from './readme.mdx';
 	template: `<fudis-dialog [closeButtonLabel]="'Close'" [size]="'l'">
 		<fudis-heading fudisDialogTitle tag="h2">Dialog with fudis-grid and scrollable content</fudis-heading>
 		<fudis-dialog-content>
-			<fudis-grid [marginTop]="'m'" [marginBottom]="'m'">
+			<fudis-grid [marginTop]="'m'" [marginBottom]="'m'" [marginSides]="'none'">
 				<fudis-heading [tag]="'h3'" [size]="'s'">
 					I am fudis-heading inside the grid taking the whole width
 				</fudis-heading>
@@ -37,6 +37,7 @@ import readme from './readme.mdx';
 			<fudis-description-list
 				[columns]="'1fr 1fr 1fr'"
 				[columnsS]="'1fr 1fr'"
+				[marginSides]="'none'"
 				[columnsXs]="'1fr'"
 				[data]="[
 					{ key: 'Name', value: 'Mary Rhubarb', subHeading: 'The lady boss' },

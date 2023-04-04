@@ -41,17 +41,17 @@ import { FormControl, Validators, FormBuilder } from '@angular/forms';
 				<fudis-body-text>This is body text inside an expandable</fudis-body-text>
 			</ng-template>
 		</fudis-expandable>
-		<fudis-heading tag="h3">
+		<fudis-heading tag="h3" fudisTooltip tooltip="This is a tooltip on a heading!" [tooltipPosition]="'below'">
 			<fudis-link data-theme="sisu" href="#" linkTitle="Link inside a heading"></fudis-link>
 		</fudis-heading>
-		<fudis-link
-			data-theme="sisu"
-			href="https://www.example.com"
-			linkTitle="External link with icon and aria-label"
-			[isExternalLink]="true"
-			externalLinkAriaLabel="Opens in a new window">
-		</fudis-link>
-		<fudis-link data-theme="sisu" size="m" href="https://www.example.com"></fudis-link>
+		<fudis-body-text>
+			Fudis icon with a toggling tooltip
+			<fudis-icon
+				icon="info-circle-fill"
+				tooltip="Tooltip on a icon!"
+				[tooltipToggle]="true"
+				[tooltipPosition]="'right'"></fudis-icon>
+		</fudis-body-text>
 	`,
 	styleUrls: ['./app.scss'],
 })

@@ -7,5 +7,5 @@ import { Component, ViewEncapsulation, HostBinding } from '@angular/core';
 	encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class TextSpacingComponent {
-	@HostBinding('class') mainClass = 'fudis-text-spacing';
+	@HostBinding('class') mainClass = 'fudis-text-spacing-host';
 }
