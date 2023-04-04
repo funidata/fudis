@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IFudisAutocompleteOption, IFudisErrorMessages } from '../../../types/forms';
 import { GuidanceComponent } from '../guidance/guidance.component';
+import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 
 export type AutocompleteInputSize = 's' | 'm' | 'l';
 
@@ -13,7 +14,7 @@ export type AutocompleteInputSize = 's' | 'm' | 'l';
 	templateUrl: './autocomplete.component.html',
 	styleUrls: ['./autocomplete.component.scss'],
 })
-export class AutocompleteComponent implements OnInit {
+export class AutocompleteComponent extends TooltipApiDirective implements OnInit {
 	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
 
 	@ViewChild('fudisAutocompleteInput') autocompleteInput: ElementRef;
@@ -82,7 +83,6 @@ export class AutocompleteComponent implements OnInit {
 		if (this.control.hasValidator(Validators.required)) {
 			this.required = true;
 		}
-
 		this.filteredOptions = this.control.valueChanges.pipe(
 			map((value) => {
 				// Start filtering after three characters

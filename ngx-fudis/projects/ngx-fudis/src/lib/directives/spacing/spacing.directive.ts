@@ -1,5 +1,5 @@
 import { Directive, Input } from '@angular/core';
-import { TFudisSpacing } from '../../components/grid/gridUtils';
+import { TFudisSpacing } from '../grid/gridUtils';
 
 @Directive({
 	selector: '[fudisSpacing]',

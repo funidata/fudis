@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular
 import { FormControl, Validators } from '@angular/forms';
 import { IFudisErrorMessages, IFudisDropdownOption } from '../../../types/forms';
 import { GuidanceComponent } from '../guidance/guidance.component';
+import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 
 @Component({
 	selector: 'fudis-dropdown[id][label]',
@@ -9,7 +10,7 @@ import { GuidanceComponent } from '../guidance/guidance.component';
 	styleUrls: ['./dropdown.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class DropdownComponent implements OnInit {
+export class DropdownComponent extends TooltipApiDirective implements OnInit {
 	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
 
 	/**

@@ -1,0 +1,6 @@
+@use '../../foundations/spacing/tokens.scss' as spacing;
+
+/* stylelint-disable-next-line selector-class-pattern */
+mat-tooltip-component .mat-tooltip-handset {
+	margin: spacing.$spacing-xs;
+}
