@@ -129,6 +129,10 @@
     max-width: 90vw !important;
   }
 }
+/* stylelint-disable-next-line selector-class-pattern */
+mat-tooltip-component .mat-tooltip-handset {
+  margin: 0.5rem;
+}
 .mat-ripple-element {
   background-color: rgba(0, 0, 0, 0.1);
 }
@@ -497,6 +501,20 @@
 .mat-dialog-title {
   font: 500 1.5rem / 1.75rem Fira Sans;
   letter-spacing: normal;
+}
+.mat-tooltip {
+  background: rgba(97, 97, 97, 0.9);
+}
+.mat-tooltip {
+  font-family: Fira Sans;
+  font-size: 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.mat-tooltip-handset {
+  font-size: 14px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 .mat-badge-content {
   font-weight: 600;
