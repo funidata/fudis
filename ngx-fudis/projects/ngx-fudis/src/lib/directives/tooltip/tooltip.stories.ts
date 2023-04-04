@@ -1,5 +1,4 @@
-import { Story, Meta } from '@storybook/angular/types-6-0';
-import { componentWrapperDecorator } from '@storybook/angular';
+import { Story, Meta, componentWrapperDecorator } from '@storybook/angular';
 import { IconComponent } from '../../components/icon/icon.component';
 import { TooltipDirective } from './tooltip.directive';
 import readme from './readme.mdx';

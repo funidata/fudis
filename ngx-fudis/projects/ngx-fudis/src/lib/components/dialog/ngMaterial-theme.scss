@@ -9,7 +9,6 @@
 
 @use '../../foundations/colors/tokens.scss' as colors;
 @use '../../foundations/borders/mixins.scss' as borders;
-@use '../../foundations/spacing/tokens.scss' as spacing;
 @use '../../foundations/breakpoints/mixins.scss' as breakpoints;
 @use '../../foundations/spacing/tokens.scss' as spacing;
 
@@ -42,7 +41,7 @@
 			margin: 0;
 			padding: 0;
 		}
-		
+
 		& .mat-mdc-dialog-actions {
 			align-items: flex-end;
 			margin-top: spacing.$spacing-xs;
