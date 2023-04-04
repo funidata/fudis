@@ -30,6 +30,7 @@ import { FormControl, Validators, FormBuilder } from '@angular/forms';
 				<fudis-button icon="delete" data-theme="sisu" label="Poista" [disabled]="true"> </fudis-button>
 			</fudis-grid>
 		</form>
+    <fudis-notification variant="danger" ariaVariantText="Varoitus!">Whoops! Some error happened.</fudis-notification>
 		<fudis-expandable title="Title for expandable">
 			<ng-template fudisExpandableHeaderButtons>
 				<fudis-button data-theme="sisu" type="submit" label="Lähetä"></fudis-button>
