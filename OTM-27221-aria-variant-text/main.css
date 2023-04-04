@@ -1204,6 +1204,20 @@ textarea.cdk-textarea-autosize-measuring-firefox {
   font-weight: 600;
   font-style: normal;
 }
+.fudis-visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+  outline: 0;
+  opacity: 0;
+  left: 0;
+}
 /* stylelint-disable color-no-hex */
 [data-theme=into] {
   --fudis-color-primary-light: #e0f4fd;
