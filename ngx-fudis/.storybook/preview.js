@@ -65,7 +65,7 @@ export const globalTypes = {
 				{ value: 'sisu', title: 'Sisu' },
 				{ value: 'into', title: 'Into' },
 			],
-			showName: true,
+			title: true,
 			dynamicTitle: true,
 		},
 	},
