@@ -1,18 +1,22 @@
 /* eslint-disable no-underscore-dangle */
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IFudisAutocompleteOption, IFudisErrorMessages } from '../../../types/forms';
 import { GuidanceComponent } from '../guidance/guidance.component';
 
+export type AutocompleteInputSize = 's' | 'm' | 'l';
+
 @Component({
-	selector: 'fudis-autocomplete',
+	selector: 'fudis-autocomplete[label][id][options][clearFilterText]',
 	templateUrl: './autocomplete.component.html',
 	styleUrls: ['./autocomplete.component.scss'],
 })
 export class AutocompleteComponent implements OnInit {
 	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
+
+	@ViewChild('fudisAutocompleteInput') autocompleteInput: ElementRef;
 
 	/**
 	 * Option list
@@ -42,7 +46,7 @@ export class AutocompleteComponent implements OnInit {
 	/**
 	 * Available sizes for the autocomplete - defaults to large.
 	 */
-	@Input() size?: 's' | 'm' | 'l' = 'l';
+	@Input() size: AutocompleteInputSize = 'l';
 
 	/**
 	 * Option for disabling the input
@@ -53,6 +57,11 @@ export class AutocompleteComponent implements OnInit {
 	 * Text to indicate compulsory
 	 */
 	@Input() requiredText: string;
+
+	/**
+	 * Aria-label for close icon which clears the input
+	 */
+	@Input() clearFilterText: string;
 
 	/**
 	 * Help text, aligned underneath the autocomplete input
@@ -109,5 +118,17 @@ export class AutocompleteComponent implements OnInit {
 	 */
 	handleBlur(): void {
 		this.guidanceToUpdate.checkErrors();
+	}
+
+	/**
+	 * Clear any written or selected value in the autocomplete field
+	 */
+	clearFilter(): void {
+		// Clear input field and control value
+		this.autocompleteInput.nativeElement.value = '';
+		this.control.setValue('');
+
+		// After clearing set focus back to input field
+		this.autocompleteInput.nativeElement.focus();
 	}
 }
