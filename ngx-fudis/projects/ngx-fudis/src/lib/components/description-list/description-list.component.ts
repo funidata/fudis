@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { IFudisDescriptionListItem } from '../../types/lists';
-import { GridApiDirective } from '../grid/grid-api.directive';
+import { GridApiDirective } from '../../directives/grid/grid-api.directive';
 
 @Component({
 	selector: 'fudis-description-list',

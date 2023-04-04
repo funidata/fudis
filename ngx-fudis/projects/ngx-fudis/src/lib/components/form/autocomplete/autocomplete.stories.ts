@@ -42,6 +42,9 @@ Autocomplete.args = {
 		{ value: 'very-long-value', viewValue: 'Brian Eggplant with Marinated Pomegranate Seeds' },
 		{ value: 1234, viewValue: 'Martin Seeding' },
 	],
+	tooltip: 'well hello to you',
+	tooltipPosition: 'below',
+	tooltipToggle: true,
 };
 
 export const Disabled = Template.bind({});

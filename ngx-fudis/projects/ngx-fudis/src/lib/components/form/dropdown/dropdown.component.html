@@ -2,7 +2,10 @@
 	<fudis-label
 		[text]="label"
 		[id]="'label_' + id"
-		[requiredText]="required && requiredText ? requiredText : null"></fudis-label>
+		[requiredText]="required && requiredText ? requiredText : null"
+		[tooltip]="tooltip"
+		[tooltipPosition]="tooltipPosition"
+		[tooltipToggle]="tooltipToggle"></fudis-label>
 	<mat-select
 		(blur)="handleBlur()"
 		(selectionChange)="handleSelectionChange()"

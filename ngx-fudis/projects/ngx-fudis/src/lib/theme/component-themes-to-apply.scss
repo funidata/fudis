@@ -3,12 +3,14 @@
 @use "../components/form/autocomplete/ngMaterial-theme.scss" as autoComplete;
 @use "../components/form/datepicker/ngMaterial-theme.scss" as datePicker;
 @use "../components/dialog/ngMaterial-theme.scss" as dialog;
+@use "../directives/tooltip/ngMaterial-theme.scss" as tooltip;
 
 // Emit theme-dependent styles for common features used across multiple Material components.
 @include mat.core-theme(theme.$primary-theme);
 @include mat.autocomplete-theme(theme.$primary-theme);
 @include mat.datepicker-theme(theme.$datepicker-theme);
 @include mat.dialog-theme(theme.$primary-theme);
+@include mat.tooltip-theme(theme.$primary-theme);
 
 // TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
 //  The following line adds:

@@ -20,7 +20,7 @@ import { CheckboxComponent } from './checkbox.component';
 				[helpText]="'This checkbox is required and must be checked.'"
 				[errorMsg]="{ required: 'Please check the checkbox.' }"
 				[label]="'I am an another example!'"></fudis-checkbox>
-			<div [style.display]="'flex'" [style.flex-direction]="'column'">
+			<div class="storybook-flex-column">
 				<fudis-body-text>Value of first box: {{ checkboxFirst.value }}</fudis-body-text>
 				<fudis-body-text>Value of second box: {{ checkboxSecond.value }}</fudis-body-text>
 			</div>

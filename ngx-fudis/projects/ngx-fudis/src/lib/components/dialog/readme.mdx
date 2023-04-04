@@ -1,0 +1,142 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import { linkTo } from '@storybook/addon-links';
+import { DialogComponent } from './dialog.component.ts';
+
+<Meta title="Dialog" component={DialogComponent} />
+
+# Dialog
+
+Fudis Dialog is based on Angular Material Dialog. Dialog opens on top of any content with a backdrop.
+
+Skip to see the [full code example](#full-code-example).
+
+## Examples
+
+<Canvas>
+	<Story id="components-dialog--dialog"></Story>
+</Canvas>
+
+## Usage Guidelines
+
+Fudis Dialog consists of three parts: service, component and directives.
+
+Skip to see the [full code example](#full-code-example).
+
+### Service
+
+Fudis Dialog Service provides tools for opening and closing a dialog. Service accepts both Angular components and templates to be passed as an argument.
+
+Most important function is `dialogService.open()` which takes either an Angular component or reference to a template as an argument.
+
+### Component
+
+Dialog component is a wrapper component taking two parameters: `size` and `closeButtonLabel`.
+
+Size determines the horizontal size of the dialog. Available options are `s`, `m`, `l` and `initial` (defaults to `m`).
+CloseButtonLabel is passed to the close icon button on the top right corner for screen readers.
+
+```
+<fudis-dialog [closeButtonLabel]="'Close dialog'" [size]="'s'">
+	...
+</fudis-dialog>
+```
+
+### Directives
+
+Directives written with `camelCase` are meant to be used as inline attribute directives.
+
+Directives written with `kebab-case` are meant to be used as HTML element.
+
+**fudisDialogTitle**: Set title for the dialog, title will stay fixed to the top of the dialog if content is long and when scrolling it down.
+This directive extends _MatDialogTitle_.
+
+```
+<fudis-dialog>
+	<fudis-heading [tag]="'h2'" fudisDialogTitle>
+		Heading for a dialog
+	</fudis-heading>
+</fudis-dialog>
+```
+
+**fudis-dialog-content**: Container for your scrollable dialog content. This directive extends _MatDialogContent_.
+
+```
+<fudis-dialog>
+	<fudis-dialog-content>
+		...
+	</fudis-dialog-content>
+</fudis-dialog>
+```
+
+**fudis-dialog-actions**: Container for your dialog action buttons which stays fixed to the bottom of the dialog when scrolling. This directive extends _MatDialogActions_.
+
+```
+<fudis-dialog>
+	<fudis-dialog-actions>
+		<fudis-button></fudis-button>
+		<fudis-button></fudis-button>
+	</fudis-dialog-actions>
+</fudis-dialog>
+```
+
+**fudisDialogClose**: Set your possible close button with no form submitting. This directive extends _MatDialogClose_.
+
+```
+<fudis-dialog>
+	<fudis-dialog-actions>
+		<fudis-button fudisDialogClose [label]="'Cancel'"></fudis-button>
+		<fudis-button [label]="'Save'" [type]="'submit'"></fudis-button>
+	</fudis-dialog-actions>
+</fudis-dialog>
+```
+
+### Full code example
+
+```
+@Component({
+	selector: 'example-dialog-component',
+	template: `
+		<fudis-button (handleClick)="openDialog(dialogFromTemplate)" [label]="'Open dialog'">
+		</fudis-button>
+		<ng-template #dialogFromTemplate>
+			<fudis-dialog [closeButtonLabel]="'Close dialog'">
+				<fudis-heading [tag]="'h2'" fudisDialogTitle> This is Dialog Heading </fudis-heading>
+				<fudis-dialog-content>
+					<fudis-body-text>Some content for Dialog</fudis-body-text>
+				</fudis-dialog-content>
+				<fudis-dialog-actions>
+					<fudis-button fudisDialogClose [label]="'Close'"></fudis-button>
+				</fudis-dialog-actions>
+			</fudis-dialog>
+		</ng-template>
+	`,
+})
+class DialogExample {
+	constructor(public dialog: DialogService) {}
+
+	openDialog(dialogToOpen: TemplateRef<any>) {
+		this.dialog.open(dialogToOpen);
+	}
+}
+```
+
+### Accessibility
+
+- Focus is trapped inside the dialog
+- Initial focus is set to close button on top right corner which is the first focusable element
+- Dialog can't be closed with outside click
+- Dialog heading (with fudisDialogTitle directive) and dialog buttons (with fudis-dialog-actions directive) are always visible even if content is scrollable
+
+### Related components
+
+[Angular Material Dialog](https://material.angular.io/components/dialog/overview)
+
+[Icon](/docs/components-icon--icon)
+
+[Button](/docs/components-button--button)
+
+[Heading](components-typography-heading--heading)
+
+## Properties
+
+<ArgsTable of={DialogComponent} />

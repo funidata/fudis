@@ -1,9 +1,5 @@
 module.exports = {
-	stories: [
-		'../projects/ngx-fudis/src/lib/components/**/*.stories.ts',
-		'../projects/ngx-fudis/src/lib/foundations/**/*.stories.mdx',
-		'../projects/documentation/**/*.stories.mdx',
-	],
+	stories: ['../projects/ngx-fudis/src/lib/**/*.stories.ts', '../projects/documentation/**/*.stories.mdx'],
 	addons: [
 		'@storybook/addon-links',
 		'@storybook/addon-essentials',
@@ -29,6 +25,20 @@ module.exports = {
 		'./../projects/ngx-fudis/src/lib/assets/fonts/fira/woff2',
 		'./../projects/ngx-fudis/src/lib/assets/icons',
 	],
+	previewHead: (head) => `
+    ${head}
+    <style>
+			.storybook-flex {
+				display: flex;
+				align-items: center;
+			}
+			.storybook-flex-column{
+				display: flex;
+				align-items: center;
+				flex-direction: column;
+			}
+    </style>
+  `,
 	env: (config) => ({
 		...config,
 		VERSION: process.env.VERSION | '0.0.0',

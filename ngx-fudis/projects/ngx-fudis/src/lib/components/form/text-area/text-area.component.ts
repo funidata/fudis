@@ -2,13 +2,14 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { IFudisErrorMessages } from '../../../types/forms';
 import { GuidanceComponent } from '../guidance/guidance.component';
+import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 
 @Component({
 	selector: 'fudis-text-area[id][label]',
 	templateUrl: './text-area.component.html',
 	styleUrls: ['./text-area.component.scss'],
 })
-export class TextAreaComponent {
+export class TextAreaComponent extends TooltipApiDirective {
 	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
 
 	/**

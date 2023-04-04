@@ -14,7 +14,10 @@ import { IFudisErrorMessages } from '../../../types/forms';
 				requiredText="Required"
 				[errorMsg]="{ required: 'Missing a value.' }"
 				label="I am a required text input"
-				helpText="Please add some values here above!"></fudis-text-area>
+				helpText="Please add some values here above!"
+				[tooltip]="'I am here to give you guidance'"
+				[tooltipPosition]="'right'"
+				[tooltipToggle]="false"></fudis-text-area>
 			<fudis-text-area
 				[control]="secondTextAreaControl"
 				requiredText="Required"
