@@ -6,6 +6,8 @@
 // Import font files globally
 @import './src/lib/assets/fonts/fonts';
 
+@import './src/lib/foundations/utilities/classes.scss';
+
 /* stylelint-disable color-no-hex */
 [data-theme='into'] {
 	--fudis-color-primary-light: #e0f4fd;
