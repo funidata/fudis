@@ -25,7 +25,7 @@ const Template: Story = (args) => ({
 export const Notification = Template.bind({});
 Notification.args = {
 	variant: 'warning',
-  ariaVariantText: 'Warning!',
+	ariaVariantText: 'Warning!',
 	content: 'This is notification',
 };
 
