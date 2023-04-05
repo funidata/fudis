@@ -11,7 +11,7 @@
 				"build": {
 					"builder": "@storybook/angular:build-storybook",
 					"options": {
-						"outputDir": "/static",
+						"outputDir": "./static",
 						"tsConfig": ".storybook/tsconfig.json",
 						"styles": ["projects/ngx-fudis/style.scss"],
 						"compodoc": true,
