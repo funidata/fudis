@@ -31,7 +31,7 @@ module.exports = {
 	],
 	docs: {
 		autodocs: true, // see below for alternatives
-		defaultName: 'Docs', // set to change the name of generated docs entries
+		defaultName: 'Documentation', // set to change the name of generated docs entries
 	},
 	previewHead: (head) => `
     ${head}
