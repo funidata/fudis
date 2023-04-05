@@ -3,7 +3,10 @@
 		[text]="label"
 		[id]="id + '__label'"
 		[for]="id"
-		[requiredText]="required && requiredText ? requiredText : null"></fudis-label>
+		[requiredText]="required && requiredText ? requiredText : null"
+		[tooltip]="tooltip"
+		[tooltipPosition]="tooltipPosition"
+		[tooltipToggle]="tooltipToggle"></fudis-label>
 	<div class="fudis-autocomplete__input-wrapper">
 		<input
 			[id]="id"

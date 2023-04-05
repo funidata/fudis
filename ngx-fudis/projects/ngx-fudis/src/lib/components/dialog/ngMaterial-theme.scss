@@ -1,3 +1,7 @@
+/* stylelint-disable selector-max-compound-selectors */
+/* stylelint-disable declaration-no-important */
+/* stylelint-disable declaration-property-value-disallowed-list */
+/* stylelint-disable unit-disallowed-list */
 /* stylelint-disable selector-max-class */
 /* stylelint-disable selector-class-pattern */
 /* stylelint-disable selector-no-qualifying-type */
@@ -5,10 +9,20 @@
 
 @use '../../foundations/colors/tokens.scss' as colors;
 @use '../../foundations/borders/mixins.scss' as borders;
+@use '../../foundations/spacing/tokens.scss' as spacing;
 @use '../../foundations/breakpoints/mixins.scss' as breakpoints;
 
+.cdk-global-overlay-wrapper {
+	overflow: scroll;
+}
+
 .fudis-dialog-panel {
-	@include borders.border('2px', 'solid', 'gray-dark');
+	border-top: 2px solid colors.$color-gray-dark;
+	border-right: none;
+	border-bottom: 2px solid colors.$color-gray-dark;
+	border-left: none;
+	max-width: 100vw !important;
+	;
 
 	& mat-dialog-container.mat-dialog-container {
 		padding: 0;
@@ -23,14 +37,28 @@
 		}
 
 		& .mat-dialog-actions {
+			align-items: flex-end;
+			margin-top: spacing.$spacing-xs;
 			margin-bottom: 0;
 			padding: 0;
 			min-height: initial;
+
+			& fudis-button {
+				&:not(:first-of-type) {
+					margin-top: spacing.$spacing-xs;
+					margin-left: spacing.$spacing-xs;
+				}
+			}
 		}
 	}
 
-	@include breakpoints.breakpoint-max('s') {
-		/* stylelint-disable-next-line declaration-no-important */
+	@include breakpoints.breakpoint('s') {
+		@include borders.border('2px', 'solid', 'gray-dark');
+
 		max-width: 90vw !important;
+	}
+
+	@include breakpoints.breakpoint('m') {
+		max-width: 80vw !important;
 	}
 }

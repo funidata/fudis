@@ -5,11 +5,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { MatNativeDateModule, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 
 import { AutocompleteComponent } from './components/form/autocomplete/autocomplete.component';
@@ -37,8 +39,8 @@ import { ExpandableContentDirective, ExpandableActionsDirective } from './compon
 
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { GridComponent } from './components/grid/grid.component';
-import { GridApiDirective } from './components/grid/grid-api.directive';
-import { GridDirective } from './components/grid/grid.directive';
+import { GridApiDirective } from './directives/grid/grid-api.directive';
+import { GridDirective } from './directives/grid/grid.directive';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { IconComponent } from './components/icon/icon.component';
 import { LabelComponent } from './components/form/label/label.component';
@@ -51,6 +53,7 @@ import { SpacingDirective } from './directives/spacing/spacing.directive';
 import { TextInputComponent } from './components/form/text-input/text-input.component';
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
+import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 
 @NgModule({
 	/*
@@ -92,6 +95,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		TextInputComponent,
 		TextSpacingComponent,
 		TextAreaComponent,
+		TooltipDirective,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
@@ -109,6 +113,8 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		MatInputModule,
 		MatNativeDateModule,
 		MatSelectModule,
+		MatButtonModule,
+		MatTooltipModule,
 		ReactiveFormsModule,
 	],
 
@@ -147,6 +153,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 		TextAreaComponent,
 		TextInputComponent,
 		// TextSpacingComponent,
+		TooltipDirective,
 	],
 	providers: [
 		DialogService,
