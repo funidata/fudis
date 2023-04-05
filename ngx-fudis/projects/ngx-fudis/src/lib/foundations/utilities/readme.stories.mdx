@@ -3,3 +3,19 @@ import { Meta } from '@storybook/addon-docs';
 <Meta title="Foundations/Utilities" />
 
 # Utilities
+
+When using as mixings load them with `@use '../path/to/foundations/utilities/mixins.scss' as utilities;` to the component's .scss file.
+
+## Visually-hidden
+
+Use this helper to visually hide element but keep it accessible to assistive technologies.
+
+Use as a mixin:
+```
+@include utilities.visually-hidden;
+```
+
+Use as a fudis class name:
+```
+<div class="fudis-visually-hidden">You cannot see me!</div>
+```
