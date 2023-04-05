@@ -43,18 +43,11 @@
 	}
 
 	&__option-list {
-		@include borders.border('1px', 'solid', 'gray-middle');
-		@include colorMixins.bg-color('white');
-
-		position: absolute;
-		top: spacing.$spacing-l;
-
-		/* Application specific root colors do not apply on Angular Material component on sandbox. Next line will set default primary color for dropdown checkboxes.  */
-		/* stylelint-disable-next-line selector-class-pattern */
-		.mat-pseudo-checkbox-checked {
-		/* stylelint-disable-next-line property-disallowed-list */ /* stylelint-disable color-no-hex */ 
-		// background-color: #1076db;
-		}
+		/* stylelint-disable-next-line declaration-no-important */
+		position: absolute !important;
+		top: spacing.$spacing-xs;
+		/* stylelint-disable-next-line unit-disallowed-list */
+		left: calc(-1px - spacing.$spacing-s);
 	}
 
 	&__guidance {

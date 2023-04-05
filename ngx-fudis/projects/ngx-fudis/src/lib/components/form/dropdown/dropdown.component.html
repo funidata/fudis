@@ -22,7 +22,11 @@
 		[attr.required]="required"
 		[aria-labelledby]="'label_' + id"
 		[attr.aria-describedby]="id + '_guidance'">
-		<mat-option *ngFor="let option of options" [value]="option" [disabled]="option.disabled">
+		<mat-option
+			class="fudis-dropdown__option"
+			*ngFor="let option of options"
+			[value]="option"
+			[disabled]="option.disabled">
 			{{ option.viewValue }}
 		</mat-option>
 	</mat-select>

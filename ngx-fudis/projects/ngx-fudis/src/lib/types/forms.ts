@@ -23,6 +23,7 @@ export interface IFudisErrorMessages {
 	pattern?: string;
 	matDatepickerMin?: string;
 	matDatepickerMax?: string;
+	matDatepickerParse?: string;
 }
 
 export interface IFudisDropdownOption {

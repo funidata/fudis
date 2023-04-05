@@ -42,7 +42,11 @@
 	<fudis-guidance [helpText]="helpText" [id]="id + '__guidance'" [errorMsg]="errorMsg" [control]="control">
 	</fudis-guidance>
 
-	<mat-autocomplete #autocomplete="matAutocomplete" autoActiveFirstOption [displayWith]="displayFn">
+	<mat-autocomplete
+		class="fudis-autocomplete__option-list"
+		#autocomplete="matAutocomplete"
+		autoActiveFirstOption
+		[displayWith]="displayFn">
 		<mat-option
 			class="fudis-autocomplete__option"
 			*ngFor="let option of filteredOptions | async"
