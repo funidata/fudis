@@ -29,6 +29,10 @@ module.exports = {
 		'./../projects/ngx-fudis/src/lib/assets/fonts/fira/woff2',
 		'./../projects/ngx-fudis/src/lib/assets/icons',
 	],
+	docs: {
+		autodocs: true, // see below for alternatives
+		defaultName: 'Docs', // set to change the name of generated docs entries
+	},
 	previewHead: (head) => `
     ${head}
     <style>
