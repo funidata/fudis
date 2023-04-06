@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -102,7 +101,6 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 	 * E.g. components from Angular Material or other Angular tools
 	 */
 	imports: [
-		BrowserAnimationsModule,
 		CommonModule,
 		FormsModule,
 		LayoutModule,

@@ -1,55 +1,55 @@
 import { NgxFudisModule } from '../projects/ngx-fudis/src/lib/ngx-fudis.module';
 import { useTheme } from './useTheme';
-import { moduleMetadata } from '@storybook/angular';
+import { importProvidersFrom } from '@angular/core';
+import { moduleMetadata, applicationConfig } from '@storybook/angular';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 import docJson from '../documentation.json';
 import getVersion from './getVersion';
 
 setCompodocJson(docJson);
 
-const storyOrder = [
-	'Documentation',
-	[
-		'Introduction',
-		['Introduction', 'How to start using Fudis'],
-		'Development',
-		[
-			'Getting Started',
-			'Setup VSCode',
-			'Project Structure',
-			'Ways of Working',
-			'Naming Conventions',
-			'Creating A Component',
-			'Component Checklist',
-		],
-	],
-	'Foundations',
-	'Components',
-	'Directives',
-];
-
-export const parameters = {
-	actions: { argTypesRegex: '^on[A-Z].*' },
-	controls: {
-		matchers: {
-			color: /(background|color)$/i,
-			date: /Date$/,
+const preview = {
+	parameters: {
+		actions: { argTypesRegex: '^on[A-Z].*' },
+		controls: {
+			matchers: {
+				color: /(background|color)$/i,
+				date: /Date$/,
+			},
 		},
-	},
-	docs: { inlineStories: true },
-	options: {
-		storySort: {
-			order: storyOrder,
+		docs: { inlineStories: true },
+		options: {
+			storySort: {
+				order: [
+					'Documentation',
+					[
+						'Introduction',
+						['Introduction', 'How to start using Fudis'],
+						'Development',
+						[
+							'Getting Started',
+							'Setup VSCode',
+							'Project Structure',
+							'Ways of Working',
+							'Naming Conventions',
+							'Creating A Component',
+							'Component Checklist',
+						],
+					],
+					'Foundations',
+					'Components',
+				],
+			},
 		},
-	},
-	version: {
-		...getVersion(),
-		style: {
-			color: '#1ea7fd',
-			border: '1px solid #f2f9ff',
-			'background-color': '#f2f9ff',
-			'font-size': '12px',
-			'text-transform': 'none',
+		version: {
+			...getVersion(),
+			style: {
+				color: '#1ea7fd',
+				border: '1px solid #f2f9ff',
+				'background-color': '#f2f9ff',
+				'font-size': '12px',
+				'text-transform': 'none',
+			},
 		},
 	},
 };
@@ -77,3 +77,5 @@ export const decorators = [
 		imports: [NgxFudisModule],
 	}),
 ];
+
+export default preview;

@@ -9,8 +9,8 @@
 
 @use '../../foundations/colors/tokens.scss' as colors;
 @use '../../foundations/borders/mixins.scss' as borders;
-@use '../../foundations/spacing/tokens.scss' as spacing;
 @use '../../foundations/breakpoints/mixins.scss' as breakpoints;
+@use '../../foundations/spacing/tokens.scss' as spacing;
 
 .cdk-global-overlay-wrapper {
 	overflow: scroll;
@@ -22,21 +22,26 @@
 	border-bottom: 2px solid colors.$color-gray-dark;
 	border-left: none;
 	max-width: 100vw !important;
-	;
 
-	& mat-dialog-container.mat-dialog-container {
+	& mat-dialog-container.mat-mdc-dialog-container {
 		padding: 0;
 
-		& .mat-dialog-title {
-			margin: 0;
+		& .mat-mdc-dialog-title {
+			margin: spacing.$spacing-xxs 0 spacing.$spacing-s 0;
+			padding: 0;
+			pointer-events: none;
+
+			&::before {
+				display: none;
+			}
 		}
 
-		& .mat-dialog-content {
+		& .mat-mdc-dialog-content {
 			margin: 0;
 			padding: 0;
 		}
 
-		& .mat-dialog-actions {
+		& .mat-mdc-dialog-actions {
 			align-items: flex-end;
 			margin-top: spacing.$spacing-xs;
 			margin-bottom: 0;

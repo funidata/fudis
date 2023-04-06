@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/angular/types-6-0';
+import { Story, Meta } from '@storybook/angular';
 import { ExpandableComponent } from './expandable.component';
 import { ExpandableType } from '../../types/expandables';
 

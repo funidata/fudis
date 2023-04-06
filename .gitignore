@@ -6,6 +6,7 @@
 /ngx-fudis/out-tsc
 /ngx-fudis/bazel-out
 **/.storybook/target
+/ngx-fudis/static
 
 # Node
 node_modules

@@ -1,7 +1,6 @@
 // eslint-disable-next-line max-classes-per-file
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { Story, Meta } from '@storybook/angular/types-6-0';
-import { moduleMetadata } from '@storybook/angular';
+import { Story, Meta, moduleMetadata } from '@storybook/angular';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ComponentType } from '@angular/cdk/portal';
 import { DialogService } from './dialog.service';
