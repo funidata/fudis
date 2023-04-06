@@ -1,3 +1,5 @@
+import remarkGfm from 'remark-gfm';
+
 module.exports = {
 	stories: [
 		'../projects/ngx-fudis/src/lib/**/*.stories.ts',
@@ -14,6 +16,11 @@ module.exports = {
 			name: '@storybook/addon-docs',
 			options: {
 				transcludeMarkdown: true,
+				mdxPluginOptions: {
+					mdxCompileOptions: {
+						remarkPlugins: [remarkGfm],
+					},
+				},
 			},
 		},
 	],
@@ -21,7 +28,10 @@ module.exports = {
 		name: '@storybook/angular',
 		options: { enableIvy: true },
 	},
-	features: { modernInlineRender: true },
+	features: {
+		modernInlineRender: true,
+		previewMdx2: true,
+	},
 	core: {
 		builder: '@storybook/builder-webpack5',
 	},
