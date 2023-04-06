@@ -129,6 +129,11 @@
 								"glob": "*.woff2",
 								"input": "../ngx-fudis/projects/ngx-fudis/src/lib/assets/fonts/fira/woff2",
 								"output": "./"
+							},
+							{
+								"glob": "*.json",
+								"input": "../ngx-fudis/projects/dev/src/assets/i18n/",
+								"output": "./assets/i18n/"
 							}
 						],
 						"styles": ["projects/dev/src/styles.scss"],
