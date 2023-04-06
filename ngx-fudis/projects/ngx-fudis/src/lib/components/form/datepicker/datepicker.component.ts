@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/forms';
+import { IFudisFormErrorMessages, IFudisFormErrorSummaryItem } from '../../../types/forms';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 
@@ -36,7 +36,7 @@ export class DatepickerComponent extends TooltipApiDirective implements OnInit {
 	/*
 	 * Error message shown below the datepicker
 	 */
-	@Input() errorMsg: IFudisErrorMessages;
+	@Input() errorMsg: IFudisFormErrorMessages;
 
 	/**
 	 * Datepicker label
@@ -78,7 +78,7 @@ export class DatepickerComponent extends TooltipApiDirective implements OnInit {
 	 */
 	@Input() maxDate: Date;
 
-	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();
+	@Output() errorOutput: EventEmitter<IFudisFormErrorSummaryItem> = new EventEmitter<IFudisFormErrorSummaryItem>();
 
 	required: boolean = false;
 

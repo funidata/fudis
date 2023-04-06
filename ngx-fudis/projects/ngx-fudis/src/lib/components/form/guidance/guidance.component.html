@@ -1,8 +1,11 @@
 <div [id]="id" class="fudis-guidance" aria-live="assertive">
-	<ng-container *ngIf="showError">
-		<fudis-error-message *ngFor="let error of errorMsgToShow" [message]="error"></fudis-error-message>
-	</ng-container>
-
+	<div *ngIf="showError">
+		<ng-container *ngFor="let error of errorMsg | keyvalue">
+			<fudis-error-message
+				[message]="error.value"
+				*ngIf="errorsToShow.includes(error.key) && error.value"></fudis-error-message>
+		</ng-container>
+	</div>
 	<p *ngIf="!showError && helpText" class="fudis-guidance__help-text">{{ helpText }}</p>
 	<small
 		[ariaLive]="checkCharacterCount()"
