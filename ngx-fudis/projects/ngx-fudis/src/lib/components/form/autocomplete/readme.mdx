@@ -8,7 +8,7 @@ import { AutocompleteComponent } from './autocomplete.component';
 
 Fudis-autocomplete is based on Angular Material Autocomplete.
 
-Autocomplete is a search input providing user with a list of suggestions based on what they type on the input. Filtering triggers after three characters. 
+Autocomplete is a search input providing user with a list of suggestions based on what they type on the input. Filtering triggers after three characters.
 User can select one option from the dropdown and it will be displayed in the input field. Autocomplete can only have one option selected at a time.
 
 ## Example
@@ -22,10 +22,12 @@ User can select one option from the dropdown and it will be displayed in the inp
 Autocomplete is designed to use when basic [dropdown](/story/components-form-dropdown--single-select) is not enough - that is, cases where option list has too many objects to scroll through and user has an idea what they are searching for.
 
 #### Mandatory Properties
-Autocomplete requires at least ``label``, ``id`` and ``options`` object array with possible option values. For accessibility it is also mandatory to give ``clearFilterText`` which is passed to clear-button's aria-label. 
+
+Autocomplete requires at least `label`, `id` and `options` object array with possible option values. For accessibility it is also mandatory to give `clearFilterText` which is passed to clear-button's aria-label.
 
 Options array takes in objects with the following signature:
-````
+
+```
 {
 	// Underlying value of the option
 	value: any;
@@ -34,26 +36,27 @@ Options array takes in objects with the following signature:
 	// Is option disabled in the options list dropdown
 	disabled?: boolean;
 }
-````
+```
 
 #### As a required form field
-If Autocomplete is a required form field, provide ``requiredText`` string property, include ``Validators.required`` in the form control validators and include a ``required`` error message in the ``errorMsg`` property.
+
+If Autocomplete is a required form field, provide `requiredText` string property, include `Validators.required` in the form control validators and include a `required` error message in the `errorMsg` property.
 
 ### Error Handling
-- **Required** error is shown if input is required and
-	- if control is touched and value is empty
 
+- **Required** error is shown if input is required and
+  - if control is touched and value is empty
 
 ### Accessibility
+
 - Label and guidance are linked to the input via id
 - Input can be disabled
-	- Input remains focusable with keyboard and screen reader
-	- Disabled state is communicated for screen reader
+  - Input remains focusable with keyboard and screen reader
+  - Disabled state is communicated for screen reader
 - Options can be disabled
-	- Disabled option is focusable with screen reader
-	- Disabled state is communicated for screen reader
-- **NOTE:** Option list selection can be made with ``enter`` but not with ``space`` since it is considered as a search character
-
+  - Disabled option is focusable with screen reader
+  - Disabled state is communicated for screen reader
+- **NOTE:** Option list selection can be made with `enter` but not with `space` since it is considered as a search character
 
 ### Related components
 
