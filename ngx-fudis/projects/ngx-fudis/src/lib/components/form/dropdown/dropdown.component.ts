@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { IFudisFormErrorMessages, IFudisDropdownOption } from '../../../types/forms';
+import { TFudisFormErrorMessages, IFudisDropdownOption } from '../../../types/forms';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 
@@ -26,7 +26,7 @@ export class DropdownComponent extends TooltipApiDirective implements OnInit {
 	/*
 	 * Error message shown below the input
 	 */
-	@Input() errorMsg: IFudisFormErrorMessages;
+	@Input() errorMsg: TFudisFormErrorMessages;
 
 	/**
 	 * If true, user can choose multiple checkbox options from dropdown

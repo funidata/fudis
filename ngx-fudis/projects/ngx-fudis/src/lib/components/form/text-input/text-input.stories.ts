@@ -2,7 +2,7 @@ import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { TextInputComponent } from './text-input.component';
-import { IFudisFormErrorMessages } from '../../../types/forms';
+import { TFudisFormErrorMessages } from '../../../types/forms';
 
 @Component({
 	selector: 'example-text-input-with-form-control',
@@ -67,7 +67,7 @@ class TextInputWithFormControlExampleComponent {
 
 	validatorsForFourth = [Validators.min(this.minNumber), Validators.max(this.maxNumber), Validators.required];
 
-	validatorMessages: IFudisFormErrorMessages = {
+	validatorMessages: TFudisFormErrorMessages = {
 		required: 'This is required field.',
 		email: 'Your input is not in email format.',
 		minlength: `Too short email. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,

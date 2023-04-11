@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { IFudisRadioButtonOption, IFudisFormErrorSummaryItem, IFudisFormErrorMessages } from '../../../types/forms';
+import { IFudisRadioButtonOption, IFudisFormErrorSummaryItem, TFudisFormErrorMessages } from '../../../types/forms';
 import { GuidanceComponent } from '../guidance/guidance.component';
 
 @Component({
@@ -24,7 +24,7 @@ export class RadioButtonGroupComponent implements OnInit {
 	/**
 	 * Error message shown below the input
 	 */
-	@Input() errorMsg: IFudisFormErrorMessages;
+	@Input() errorMsg: TFudisFormErrorMessages;
 
 	/*
 	 * Legend label for the group
