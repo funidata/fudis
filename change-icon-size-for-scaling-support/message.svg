@@ -1,3 +1,3 @@
-<svg width="100%" height="100%" class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="message">
+<svg  class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="message">
     <path d="M21 10v7c0 .55-.45 1-1 1h-6l-3 3v-3H9c-.55 0-1-.45-1-1v-7c0-.55.45-1 1-1h11c.55 0 1 .45 1 1Zm-11 2h8v-1h-8v1Zm0 3h5v-1h-5v1Z"></path>
 </svg>

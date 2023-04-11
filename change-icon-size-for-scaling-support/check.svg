@@ -1,3 +1,3 @@
-<svg width="100%" height="100%" class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="check">
+<svg  class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="check">
     <path class="a" d="M13.5176,21.5a1.5,1.5,0,0,1-1.1167-.499l-4.0176-4.48a1.5,1.5,0,0,1,2.2334-2.003L13.3711,17.59l5.8994-8.4487a1.5,1.5,0,1,1,2.459,1.7178l-6.9819,10a1.4978,1.4978,0,0,1-1.1392.6387C13.5781,21.4992,13.5479,21.5,13.5176,21.5Z"/>
 </svg>
