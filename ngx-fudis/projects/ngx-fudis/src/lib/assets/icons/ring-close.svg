@@ -1,4 +1,4 @@
-<svg width="32" height="32" class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 32 32" id="ring-close">
+<svg width="100%" height="100%" class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 32 32" id="ring-close">
     <path class="a" d="M15,28A13,13,0,1,1,28,15,13.0147,13.0147,0,0,1,15,28ZM15,3A12,12,0,1,0,27,15,12.0137,12.0137,0,0,0,15,3Z"/>
     <path class="a" d="M19.64,19.06,16.08,15.5l3.56-3.56a.63.63,0,0,0-.89-.88l-3.5549,3.5549L11.64,11.06a.63.63,0,1,0-.89.88l3.56,3.56-3.56,3.56a.63.63,0,0,0,.44,1.07.67.67,0,0,0,.45-.19l3.5552-3.5552L18.75,19.94a.63.63,0,0,0,.44.19.67.67,0,0,0,.45-.19A.63.63,0,0,0,19.64,19.06Z"/>
 </svg>

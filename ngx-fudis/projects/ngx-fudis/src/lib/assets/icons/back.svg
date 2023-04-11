@@ -1,3 +1,3 @@
-<svg width="32" height="32" class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="back">
+<svg width="100%" height="100%" class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="back">
     <path d="M17.517 13.503c-.006 0-.011-.003-.017-.003h-6.91l3.269-3.198a.461.461 0 0 0 0-.664.485.485 0 0 0-.678 0l-3.985 3.9a.643.643 0 0 0 0 .924l3.985 3.9a.485.485 0 0 0 .678 0 .461.461 0 0 0 0-.664L10.59 14.5H17.5v.004C18.896 14.469 20 15.62 20 17s-1.104 2.53-2.5 2.496v.004H16a.5.5 0 0 0 0 1h1.5c1.93 0 3.5-1.57 3.5-3.5 0-1.929-1.551-3.522-3.483-3.497Z"></path>
 </svg>
