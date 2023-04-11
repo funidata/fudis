@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { IFudisFormErrorMessages } from '../../../types/forms';
+import { TFudisFormErrorMessages } from '../../../types/forms';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 
@@ -50,7 +50,7 @@ export class TextAreaComponent extends TooltipApiDirective {
 	/**
 	 * Error messages shown when form control validators are invalid
 	 */
-	@Input() errorMsg: IFudisFormErrorMessages;
+	@Input() errorMsg: TFudisFormErrorMessages;
 
 	/**
 	 * Text visible, if form control has a required validator

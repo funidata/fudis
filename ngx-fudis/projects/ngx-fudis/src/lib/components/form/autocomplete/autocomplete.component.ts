@@ -3,7 +3,7 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IFudisAutocompleteOption, IFudisFormErrorMessages } from '../../../types/forms';
+import { IFudisAutocompleteOption, TFudisFormErrorMessages } from '../../../types/forms';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 
@@ -72,7 +72,7 @@ export class AutocompleteComponent extends TooltipApiDirective implements OnInit
 	/**
 	 * Error messages shown when form control validators are invalid
 	 */
-	@Input() errorMsg: IFudisFormErrorMessages;
+	@Input() errorMsg: TFudisFormErrorMessages;
 
 	/**
 	 * If control has required validator, this is set to true

@@ -13,7 +13,7 @@ export interface IFudisRadioButtonOption {
 	checked?: boolean;
 }
 
-export type IFudisFormErrorMessages = {
+export type TFudisFormErrorMessages = {
 	required?: string;
 	minlength?: string;
 	maxlength?: string;
