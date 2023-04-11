@@ -1,5 +1,5 @@
 <div class="fudis-checkbox">
-	<label class="fudis-checkbox__label" [attr.for]="id" (click)="handleCheckboxClick()">
+	<label class="fudis-checkbox__label" [attr.for]="id" (click)="handleCheckboxClick($event)">
 		<div
 			class="fudis-checkbox__box"
 			[class.fudis-checkbox__box--invalid]="control.invalid && control.touched"
@@ -18,8 +18,8 @@
 				[attr.aria-disabled]="control.disabled" />
 			<svg
 				*ngIf="control.value"
-				width="16"
-				height="16"
+				width="100%"
+				height="100%"
 				preserveAspectRatio="xMidYMin"
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 22 22"

@@ -59,7 +59,9 @@ export class CheckboxComponent {
 
 	requiredValidator = Validators.requiredTrue;
 
-	handleCheckboxClick(): void {
+	handleCheckboxClick(event: Event): void {
+		event.preventDefault();
+
 		this.input.nativeElement.focus();
 		if (!this.control.disabled) {
 			this.control.patchValue(!this.control.value);
