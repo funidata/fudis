@@ -1,7 +1,6 @@
 import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 import { FudisIcon, FudisIconColor } from '../../types/icons';
-import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 
 /**
  * Example: `<fudis-icon icon="info" color="primary"></fudis-icon>`
@@ -19,7 +18,7 @@ import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.direct
 	styleUrls: ['./icon.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class IconComponent extends TooltipApiDirective {
+export class IconComponent {
 	/**
 	 * Binding fudis-icon class to component wrapper
 	 */

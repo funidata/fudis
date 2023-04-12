@@ -1,12 +1,13 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FudisIcon, FudisIconColor } from '../../types/icons';
+import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 
 @Component({
 	selector: 'fudis-button',
 	templateUrl: './button.component.html',
 	styleUrls: ['./button.component.scss'],
 })
-export class ButtonComponent {
+export class ButtonComponent extends TooltipApiDirective {
 	/**
 	 * Button variant options
 	 */
