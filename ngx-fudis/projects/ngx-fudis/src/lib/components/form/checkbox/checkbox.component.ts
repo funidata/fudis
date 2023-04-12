@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, Input, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/forms';
+import { TFudisFormErrorMessages, IFudisFormErrorSummaryItem } from '../../../types/forms';
 import { GuidanceComponent } from '../guidance/guidance.component';
 
 @Component({
@@ -42,7 +42,7 @@ export class CheckboxComponent {
 	/**
 	 * Error message shown below the input
 	 */
-	@Input() errorMsg: IFudisErrorMessages;
+	@Input() errorMsg: TFudisFormErrorMessages;
 
 	/**
 	 * Help text shown below the checkbox
@@ -53,7 +53,7 @@ export class CheckboxComponent {
 	 * TBD. Possibly used later for FudisErrorSummary
 	 */
 
-	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();
+	@Output() errorOutput: EventEmitter<IFudisFormErrorSummaryItem> = new EventEmitter<IFudisFormErrorSummaryItem>();
 
 	showError: boolean = false;
 

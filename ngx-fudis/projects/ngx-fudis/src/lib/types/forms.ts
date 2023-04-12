@@ -13,7 +13,7 @@ export interface IFudisRadioButtonOption {
 	checked?: boolean;
 }
 
-export interface IFudisErrorMessages {
+export type TFudisFormErrorMessages = {
 	required?: string;
 	minlength?: string;
 	maxlength?: string;
@@ -24,7 +24,7 @@ export interface IFudisErrorMessages {
 	matDatepickerMin?: string;
 	matDatepickerMax?: string;
 	matDatepickerParse?: string;
-}
+};
 
 export interface IFudisDropdownOption {
 	/** Underlying value of the option */
@@ -35,7 +35,7 @@ export interface IFudisDropdownOption {
 	disabled?: boolean;
 }
 
-export interface IFudisErrorSummaryItem {
+export interface IFudisFormErrorSummaryItem {
 	id: string;
 	message: string;
 }

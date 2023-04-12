@@ -1,4 +1,4 @@
-import { Directive, ElementRef, OnChanges, OnInit } from '@angular/core';
+import { Directive, ElementRef, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import {
 	breakpointsToObserve,
@@ -12,7 +12,7 @@ import { GridApiDirective } from './grid-api.directive';
 @Directive({
 	selector: '[fudisGrid]',
 })
-export class GridDirective extends GridApiDirective implements OnInit, OnChanges {
+export class GridDirective extends GridApiDirective implements OnInit, OnChanges, OnDestroy {
 	constructor(private gridBreakpointObserver: BreakpointObserver, private gridElement: ElementRef) {
 		super();
 	}
@@ -84,5 +84,9 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 
 		(this.gridElement.nativeElement as HTMLElement).style.alignItems = this.alignItemsY;
 		(this.gridElement.nativeElement as HTMLElement).style.justifyItems = this.alignItemsX;
+	}
+
+	ngOnDestroy(): void {
+		this.gridBreakpointObserver.ngOnDestroy();
 	}
 }

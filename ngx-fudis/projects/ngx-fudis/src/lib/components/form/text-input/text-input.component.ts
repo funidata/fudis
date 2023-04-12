@@ -1,7 +1,7 @@
 // eslint-disable-next-line max-classes-per-file
 import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { IFudisErrorMessages } from '../../../types/forms';
+import { TFudisFormErrorMessages } from '../../../types/forms';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 
@@ -23,7 +23,7 @@ export class TextInputComponent extends TooltipApiDirective {
 	/**
 	 * Error message shown below the input
 	 */
-	@Input() errorMsg: IFudisErrorMessages;
+	@Input() errorMsg: TFudisFormErrorMessages;
 
 	/**
 	 * Input label
