@@ -6,6 +6,7 @@
 /ngx-fudis/out-tsc
 /ngx-fudis/bazel-out
 **/.storybook/target
+/ngx-fudis/static
 
 # Node
 node_modules
@@ -23,11 +24,8 @@ yarn-error.log
 .vscode
 
 # Visual Studio Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+.vscode
+!settings/.vscode
 .history/*
 
 # Miscellaneous

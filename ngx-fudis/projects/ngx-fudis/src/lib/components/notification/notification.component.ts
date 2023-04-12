@@ -15,6 +15,11 @@ export class NotificationComponent implements OnChanges, OnInit {
 	@Input() variant: NotificationType;
 
 	/**
+	 * Aria text of the notification variant
+	 */
+	@Input() ariaVariantText: string;
+
+	/**
 	 * Add link href address
 	 */
 	@Input() link: string;

@@ -8,7 +8,7 @@ type DialogSize = 's' | 'm' | 'l' | 'initial';
 	styleUrls: ['./dialog.component.scss'],
 })
 export class DialogComponent {
-	@Input() closeButtonAriaLabel: string;
+	@Input() closeButtonLabel: string;
 
 	@Input() size: DialogSize = 'm';
 }

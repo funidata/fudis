@@ -1,59 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormBuilder } from '@angular/forms';
-import { DialogService } from 'ngx-fudis';
-import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
 	selector: 'app-root',
-	template: `
-		<!--The content below is only a placeholder and can be replaced.-->
-		<fudis-heading tag="h1" size="xl">Welcome to Fudis sandbox </fudis-heading>
-		<fudis-button (handleClick)="openDialog()" label="Avaa Dialogi"></fudis-button>
-
-		<form class="basic-flex-box">
-			<fudis-datepicker
-				[control]="datePickerControl"
-				[id]="'unique-datepicker-id-1'"
-				requiredText="Required"
-				[errorMsg]="{ required: 'Selected date is missing.' }"
-				label="Select a date"
-				helpText="Please select your favourite date."></fudis-datepicker>
-			<fudis-heading tag="h2" size="l">Text area and button</fudis-heading>
-			<fudis-text-area
-				[control]="textAreaControl"
-				id="unique-text-area-id-1"
-				label="Pakollinen textarea, tällä on myös aika pitkä label"
-				[maxLength]="20"
-				helpText="Voit kirjoittaa tähän monia kivoja juttuja, mutta max 20 kirjainta">
-			</fudis-text-area>
-			<fudis-grid columns="1fr 1fr">
-				<fudis-button data-theme="sisu" type="submit" label="Lähetä"></fudis-button>
-				<fudis-button data-theme="sisu" label="Eiku" variant="secondary"></fudis-button>
-				<fudis-button icon="delete" data-theme="sisu" label="Poista" variant="tertiary"> </fudis-button>
-				<fudis-button icon="delete" data-theme="sisu" label="Poista" [disabled]="true"> </fudis-button>
-			</fudis-grid>
-		</form>
-		<fudis-expandable title="Title for expandable">
-			<ng-template fudisExpandableContent>
-				<fudis-heading tag="h3" size="m">This is heading inside an expandable</fudis-heading>
-				<fudis-body-text>This is body text inside an expandable</fudis-body-text>
-			</ng-template>
-		</fudis-expandable>
-		<fudis-heading tag="h3">
-			<fudis-link data-theme="sisu" href="#" linkTitle="Link inside a heading"></fudis-link>
-		</fudis-heading>
-		<fudis-link
-			data-theme="sisu"
-			href="https://www.example.com"
-			linkTitle="External link with icon and aria-label"
-			[isExternalLink]="true"
-			externalLinkAriaLabel="Opens in a new window">
-		</fudis-link>
-		<fudis-link data-theme="sisu" size="m" href="https://www.example.com"></fudis-link>
-	`,
+	templateUrl: 'app.component.html',
 	styleUrls: ['./app.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 	title = 'dev';
 
 	validatorsForDatepicker = [Validators.required];
@@ -62,13 +16,23 @@ export class AppComponent {
 
 	datePickerControl: FormControl = new FormControl('', this.validatorsForDatepicker);
 
-	constructor(private formBuilder: FormBuilder, public dialog: DialogService) {}
+	textInputControl: any;
 
-	openDialog() {
-		const ref = this.dialog.open(DialogTestContentComponent);
-		ref.afterClosed().subscribe((res: any) => {
-			// eslint-disable-next-line no-console
-			console.log(res);
-		});
+	constructor(private formBuilder: FormBuilder, private translocoService: TranslocoService) {}
+
+	ngOnInit(): void {
+		this.translocoService.getTranslation('en');
+		this.translocoService.getTranslation('fi');
+		this.translocoService.setActiveLang('fi');
+
+		this.textInputControl = new FormControl('', Validators.required);
+	}
+
+	changeLanguage(): void {
+		if (this.translocoService.getActiveLang() === 'en') {
+			this.translocoService.setActiveLang('fi');
+		} else {
+			this.translocoService.setActiveLang('en');
+		}
 	}
 }

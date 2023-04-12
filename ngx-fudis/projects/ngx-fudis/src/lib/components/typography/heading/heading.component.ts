@@ -10,7 +10,7 @@ type HeadingSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
 	styleUrls: ['./heading.component.scss'],
 })
 export class HeadingComponent {
-	@HostBinding('class') mainClass = 'fudis-heading';
+	@HostBinding('class') mainClass = 'fudis-heading-host';
 
 	@Input() size: HeadingSize = 'l';
 

@@ -1,9 +1,8 @@
-import { Story, Meta } from '@storybook/angular/types-6-0';
-import { moduleMetadata } from '@storybook/angular';
+import { Story, Meta, moduleMetadata } from '@storybook/angular';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { TextInputComponent } from './text-input.component';
-import { IFudisErrorMessages } from '../../../types/forms';
+import { TFudisFormErrorMessages } from '../../../types/forms';
 
 @Component({
 	selector: 'example-text-input-with-form-control',
@@ -20,6 +19,9 @@ import { IFudisErrorMessages } from '../../../types/forms';
 				requiredText="Required"
 				[errorMsg]="{ required: 'Missing a value.' }"
 				label="I am a required text input"
+				tooltip="This is a tooltip text"
+				[tooltipPosition]="'right'"
+				[tooltipToggle]="false"
 				helpText="Please add some values here above!"></fudis-text-input>
 			<fudis-text-input
 				[control]="mainFormGroup.controls['third']"
@@ -38,6 +40,9 @@ import { IFudisErrorMessages } from '../../../types/forms';
 				requiredText="Required"
 				[minNumber]="minNumber"
 				[maxNumber]="maxNumber"
+				tooltip="This is a tooltip text as well"
+				[tooltipPosition]="'left'"
+				[tooltipToggle]="false"
 				type="number"
 				size="s"
 				[errorMsg]="validatorMessages"></fudis-text-input>
@@ -62,7 +67,7 @@ class TextInputWithFormControlExampleComponent {
 
 	validatorsForFourth = [Validators.min(this.minNumber), Validators.max(this.maxNumber), Validators.required];
 
-	validatorMessages: IFudisErrorMessages = {
+	validatorMessages: TFudisFormErrorMessages = {
 		required: 'This is required field.',
 		email: 'Your input is not in email format.',
 		minlength: `Too short email. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,

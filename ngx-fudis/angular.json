@@ -11,39 +11,21 @@
 				"build": {
 					"builder": "@storybook/angular:build-storybook",
 					"options": {
-						"outputDir": ".storybook/target/storybook-static",
+						"outputDir": "./static",
 						"tsConfig": ".storybook/tsconfig.json",
-						"styles": [
-							"projects/ngx-fudis/style.scss"
-						],
+						"styles": ["projects/ngx-fudis/style.scss"],
 						"compodoc": true,
-						"compodocArgs": [
-							"-p",
-							"./tsconfig.json",
-							"-e",
-							"json",
-							"-d",
-							"./"
-						]
+						"compodocArgs": ["-p", "./tsconfig.json", "-e", "json", "-d", "./"]
 					}
 				},
 				"start": {
 					"builder": "@storybook/angular:start-storybook",
 					"options": {
 						"tsConfig": ".storybook/tsconfig.json",
-						"styles": [
-							"projects/ngx-fudis/style.scss"
-						],
+						"styles": ["projects/ngx-fudis/style.scss"],
 						"port": 6006,
 						"compodoc": true,
-						"compodocArgs": [
-							"-p",
-							"./tsconfig.json",
-							"-e",
-							"json",
-							"-d",
-							"./"
-						]
+						"compodocArgs": ["-p", "./tsconfig.json", "-e", "json", "-d", "./"]
 					}
 				}
 			}
@@ -85,10 +67,7 @@
 				"lint": {
 					"builder": "@angular-eslint/builder:lint",
 					"options": {
-						"lintFilePatterns": [
-							"projects/ngx-fudis/**/*.ts",
-							"projects/ngx-fudis/**/*.html"
-						]
+						"lintFilePatterns": ["projects/ngx-fudis/**/*.ts", "projects/ngx-fudis/**/*.html"]
 					}
 				}
 			}
@@ -150,11 +129,14 @@
 								"glob": "*.woff2",
 								"input": "../ngx-fudis/projects/ngx-fudis/src/lib/assets/fonts/fira/woff2",
 								"output": "./"
+							},
+							{
+								"glob": "*.json",
+								"input": "../ngx-fudis/projects/dev/src/assets/i18n/",
+								"output": "./assets/i18n/"
 							}
 						],
-						"styles": [
-							"projects/dev/src/styles.scss"
-						],
+						"styles": ["projects/dev/src/styles.scss"],
 						"scripts": []
 					},
 					"configurations": {
@@ -218,10 +200,7 @@
 				"lint": {
 					"builder": "@angular-eslint/builder:lint",
 					"options": {
-						"lintFilePatterns": [
-							"projects/dev/**/*.ts",
-							"projects/dev/**/*.html"
-						]
+						"lintFilePatterns": ["projects/dev/**/*.ts", "projects/dev/**/*.html"]
 					}
 				}
 			}
@@ -229,5 +208,13 @@
 	},
 	"cli": {
 		"analytics": false
+	},
+	"schematics": {
+		"@angular-eslint/schematics:application": {
+			"setParserOptionsProject": true
+		},
+		"@angular-eslint/schematics:library": {
+			"setParserOptionsProject": true
+		}
 	}
 }

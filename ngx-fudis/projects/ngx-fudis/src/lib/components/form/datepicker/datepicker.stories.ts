@@ -1,6 +1,6 @@
-import { Story, Meta } from '@storybook/angular/types-6-0';
-import { moduleMetadata } from '@storybook/angular';
+import { Story, Meta, moduleMetadata } from '@storybook/angular';
 import { FormControl, Validators } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DatepickerComponent } from './datepicker.component';
 import readme from './readme.mdx';
 
@@ -14,7 +14,7 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [],
+			imports: [BrowserAnimationsModule],
 			declarations: [],
 		}),
 	],
@@ -33,7 +33,10 @@ const Template: Story<DatepickerComponent> = (args: DatepickerComponent) => ({
 		[control]="control" 
 		[disabled]="disabled" 
 		[minDate]="minDate" 
-		[maxDate]="maxDate">
+		[maxDate]="maxDate"
+		[tooltip]="tooltip"
+		[tooltipPosition]="tooltipPosition"
+		[tooltipToggle]="tooltipToggle">
 	</fudis-datepicker>
 	<fudis-body-text *ngIf=control.value>The date output is: {{ control.value }}</fudis-body-text>
 	<fudis-body-text *ngIf=control.value>The date output with Angular date pipe is: {{ control.value | date:'dd.MM.yyyy' }}</fudis-body-text>
@@ -48,6 +51,9 @@ Datepicker.args = {
 	requiredText: 'Required',
 	helpText: 'Choose your favourite date.',
 	errorMsg: { required: 'Date is required.' },
+	tooltip: 'Is it your birthday?',
+	tooltipPosition: 'left',
+	tooltipToggle: true,
 	control: new FormControl('', Validators.required),
 };
 

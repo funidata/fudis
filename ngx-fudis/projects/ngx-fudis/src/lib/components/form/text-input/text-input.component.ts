@@ -1,17 +1,17 @@
 // eslint-disable-next-line max-classes-per-file
 import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-
-import { IFudisErrorMessages } from '../../../types/forms';
+import { TFudisFormErrorMessages } from '../../../types/forms';
 import isRequired from '../../../utilities/errors/errors.utility';
 import { GuidanceComponent } from '../guidance/guidance.component';
+import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 
 @Component({
 	selector: 'fudis-text-input',
 	templateUrl: './text-input.component.html',
 	styleUrls: ['./text-input.component.scss'],
 })
-export class TextInputComponent {
+export class TextInputComponent extends TooltipApiDirective {
 	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;
 
 	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
@@ -19,13 +19,12 @@ export class TextInputComponent {
 	/**
 	 * FormControl for the input
 	 */
-	@Input()
-	control: FormControl;
+	@Input() control: FormControl;
 
 	/**
 	 * Error message shown below the input
 	 */
-	@Input() errorMsg: IFudisErrorMessages;
+	@Input() errorMsg: TFudisFormErrorMessages;
 
 	/**
 	 * Input label

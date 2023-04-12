@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-import { GridDirective } from './grid.directive';
+import { GridDirective } from '../../directives/grid/grid.directive';
 
 @Component({
 	selector: 'fudis-grid',

@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { IFudisRadioButtonOption, IFudisErrorSummaryItem, IFudisErrorMessages } from '../../../types/forms';
+import { IFudisRadioButtonOption, IFudisFormErrorSummaryItem, TFudisFormErrorMessages } from '../../../types/forms';
 import isRequired from '../../../utilities/errors/errors.utility';
 import { GuidanceComponent } from '../guidance/guidance.component';
 
@@ -27,7 +27,7 @@ export class RadioButtonGroupComponent implements OnInit {
 	/**
 	 * Error message shown below the input
 	 */
-	@Input() errorMsg: IFudisErrorMessages;
+	@Input() errorMsg: TFudisFormErrorMessages;
 
 	/*
 	 * Legend label for the group
@@ -48,7 +48,7 @@ export class RadioButtonGroupComponent implements OnInit {
 	 */
 	@Input() helpText?: string;
 
-	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();
+	@Output() errorOutput: EventEmitter<IFudisFormErrorSummaryItem> = new EventEmitter<IFudisFormErrorSummaryItem>();
 
 	requiredValidator = Validators.required;
 

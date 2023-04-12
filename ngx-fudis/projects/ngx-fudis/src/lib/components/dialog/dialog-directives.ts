@@ -17,7 +17,9 @@ export class DialogContentDirective extends MatDialogContent {}
 	// eslint-disable-next-line @angular-eslint/directive-selector
 	selector: 'fudis-dialog-actions',
 })
-export class DialogActionsDirective extends MatDialogActions {}
+export class DialogActionsDirective extends MatDialogActions {
+	override align?: 'start' | 'center' | 'end' | undefined = 'end';
+}
 
 @Directive({
 	selector: '[fudisDialogClose]',
