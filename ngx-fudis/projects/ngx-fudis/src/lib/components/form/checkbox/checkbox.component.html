@@ -1,11 +1,12 @@
 <div class="fudis-checkbox">
-	<label class="fudis-checkbox__label" [attr.for]="id" (click)="handleCheckboxClick($event)">
+	<label class="fudis-checkbox__label" [attr.for]="id" (click)="handleCheckboxClick()">
 		<div
 			class="fudis-checkbox__box"
 			[class.fudis-checkbox__box--invalid]="control.invalid && control.touched"
 			[class.fudis-checkbox__box--disabled]="control.disabled">
 			<input
 				(blur)="handleBlur()"
+				[formControl]="control"
 				#checkboxRef
 				[attr.aria-describedby]="id + '_guidance'"
 				[attr.aria-label]="label"
