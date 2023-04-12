@@ -40,12 +40,16 @@ export class IconComponent extends TooltipApiDirective {
 	 */
 	@Input() rotate?: 'flip-180' | 'cw-90' | 'ccw-90' | 'none' = 'none';
 
+	iconSize: 'small' | 'large' = 'large';
+
 	getClasses(): string[] {
+		this.iconSize = this.icon.includes('-small') ? 'small' : 'large';
+
 		const cssClasses = [
 			'fudis-icon',
 			`fudis-icon-color__${this.color}`,
 			`fudis-icon-rotate__${this.rotate}`,
-			this.icon.includes('-small') ? 'fudis-icon__sm' : 'fudis-icon__lg',
+			`fudis-icon__${this.iconSize}`,
 		];
 
 		return cssClasses;

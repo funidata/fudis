@@ -1,14 +1,37 @@
 @use '../../foundations/typography/tokens.scss' as typography;
 @use '../../foundations/colors/tokens.scss' as colors;
+@use '../../foundations/spacing/tokens.scss' as spacing;
+@use '../../foundations/focus/mixins.scss' as focus;
 
 .fudis-icon-host {
 	display: inline-flex;
+	position: relative;
 }
 
 .fudis-icon {
 	box-sizing: border-box;
 	display: inline-flex;
 	align-items: center;
+
+	&__tooltip {
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		&:focus {
+			@include focus.focus-generic;
+		}
+
+		&__small {
+			width: spacing.$spacing-s;
+			height: spacing.$spacing-s;
+		}
+
+		&__large {
+			width: spacing.$spacing-l;
+			height: spacing.$spacing-l;
+		}
+	}
 	
 	&-rotate {
 		&__flip-180 {
@@ -27,14 +50,14 @@
 		}
 	}
 
-	&__lg {
-		width: typography.$icon-lg;
-		height: typography.$icon-lg;
+	&__large {
+		width: spacing.$spacing-l;
+		height: spacing.$spacing-l;
 	}
 
-	&__sm {
-		width: typography.$icon-sm;
-		height: typography.$icon-sm;
+	&__small {
+		width: spacing.$spacing-s;
+		height: spacing.$spacing-s;
 	}
 
 	&-color {
