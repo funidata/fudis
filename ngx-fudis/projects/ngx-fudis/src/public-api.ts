@@ -36,7 +36,7 @@ export { LegendComponent } from './lib/components/form/legend/legend.component';
 export { LinkComponent } from './lib/components/link/link.component';
 export { NotificationComponent } from './lib/components/notification/notification.component';
 export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
-export { SpacingDirective } from './lib/directives/spacing/spacing.directive';
+// export { SpacingDirective } from './lib/directives/spacing/spacing.directive';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';
 export { TextInputComponent } from './lib/components/form/text-input/text-input.component';
 // export { TextSpacingComponent } from './lib/components/typography/text-spacing/text-spacing.component';

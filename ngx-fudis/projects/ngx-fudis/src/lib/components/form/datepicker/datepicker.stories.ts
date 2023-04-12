@@ -1,6 +1,7 @@
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Story, Meta, applicationConfig } from '@storybook/angular';
 import { FormControl, Validators } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { importProvidersFrom } from '@angular/core';
 import { DatepickerComponent } from './datepicker.component';
 import readme from './readme.mdx';
 
@@ -13,9 +14,8 @@ export default {
 		},
 	},
 	decorators: [
-		moduleMetadata({
-			imports: [BrowserAnimationsModule],
-			declarations: [],
+		applicationConfig({
+			providers: [importProvidersFrom(BrowserAnimationsModule)],
 		}),
 	],
 	argTypes: {},
