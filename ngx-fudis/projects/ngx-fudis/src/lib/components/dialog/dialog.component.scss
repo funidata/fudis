@@ -1,6 +1,7 @@
 @use '../../foundations/spacing/tokens.scss' as spacing;
 @use '../../foundations/breakpoints/mixins.scss' as breakpoints;
 @use '../../foundations/grid/tokens.scss' as gridTokens;
+@use '../../foundations/focus/mixins.scss' as focus;
 
 .fudis-dialog {
 	position: relative;

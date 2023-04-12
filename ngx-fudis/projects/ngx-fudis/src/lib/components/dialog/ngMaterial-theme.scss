@@ -9,6 +9,7 @@
 
 @use '../../foundations/colors/tokens.scss' as colors;
 @use '../../foundations/borders/mixins.scss' as borders;
+@use '../../foundations/focus/mixins.scss' as focus;
 @use '../../foundations/breakpoints/mixins.scss' as breakpoints;
 @use '../../foundations/spacing/tokens.scss' as spacing;
 
@@ -30,15 +31,24 @@
 			margin: spacing.$spacing-xxs 0 spacing.$spacing-s 0;
 			padding: 0;
 			pointer-events: none;
+			
 
 			&::before {
 				display: none;
+			}
+
+			&:focus-visible {
+				@include focus.focus-generic;
 			}
 		}
 
 		& .mat-mdc-dialog-content {
 			margin: 0;
 			padding: 0;
+
+			&:focus-visible, &:focus {
+				@include focus.focus-generic;
+			}
 		}
 
 		& .mat-mdc-dialog-actions {
