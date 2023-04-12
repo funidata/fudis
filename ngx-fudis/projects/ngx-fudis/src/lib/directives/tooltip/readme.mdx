@@ -6,8 +6,8 @@ import { TooltipDirective } from './tooltip.directive.ts';
 
 # Tooltip
 
-Tooltip directive uses Angular Material Tooltip as its base. Tooltip is included in IconComponent, where tooltip text is added with `tooltip` property. Optional properties include `tooltipPosition` and `tooltipToggle`.
 Regular tooltip is triggered with mousehover and on keyboard focus. This content is forced for keyboard and screenreader users, when element receives focus. Consider using `tooltipToggle` property with long and alternative text contents.
+Tooltip directive uses Angular Material Tooltip as its base. Tooltip is included in Button component, where tooltip text is added with `tooltip` property. Optional properties include `tooltipPosition` and `tooltipToggle`.
 TooltipToggle makes tooltip function as clickable pop-over and it will not distract keyboard and screen reader users.
 
 ## Examples
@@ -28,6 +28,7 @@ Code examples with icon component. Tooltip content can be edited with canvas con
 
 ### Accessibility
 
+- Element where tooltip is binded should always be an interactive element
 - Keyboard and screen reader users can select element that triggeres tooltip
 - Tooltip content is read to screen readers when tooltip element receives focus
 - Extensive and alternative content tooltips use tooltipToggle. Screen reader users are informed about the toggled hidden content when the element receives focus.
