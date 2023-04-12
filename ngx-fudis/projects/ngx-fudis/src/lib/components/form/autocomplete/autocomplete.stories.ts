@@ -1,4 +1,4 @@
-import { Story, Meta, applicationConfig } from '@storybook/angular';
+import { StoryFn, Meta, applicationConfig } from '@storybook/angular';
 import { FormControl, Validators } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
@@ -21,7 +21,7 @@ export default {
 	argTypes: {},
 } as Meta;
 
-const Template: Story<AutocompleteComponent> = (args: AutocompleteComponent) => ({
+const Template: StoryFn<AutocompleteComponent> = (args: AutocompleteComponent) => ({
 	props: args,
 });
 

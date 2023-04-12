@@ -1,4 +1,4 @@
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { TextAreaComponent } from './text-area.component';
@@ -74,7 +74,7 @@ export default {
 	argTypes: {},
 } as Meta;
 
-const Template: Story<TextAreaComponent> = (args: TextAreaComponent) => ({
+const Template: StoryFn<TextAreaComponent> = (args: TextAreaComponent) => ({
 	props: args,
 });
 
@@ -86,7 +86,7 @@ TextArea.args = {
 	helpText: 'Example help text',
 };
 
-export const WithMultipleTextArea: Story = () => ({
+export const WithMultipleTextArea: StoryFn = () => ({
 	template: `
 		<example-text-area-with-form-control></example-text-area-with-form-control>
 	`,

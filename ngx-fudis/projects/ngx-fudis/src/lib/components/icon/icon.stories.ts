@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular';
 import { IconComponent } from './icon.component';
 
 export default {
@@ -12,7 +12,7 @@ export default {
 	},
 } as Meta;
 
-const Template: Story<IconComponent> = (args: IconComponent) => ({
+const Template: StoryFn<IconComponent> = (args: IconComponent) => ({
 	props: args,
 });
 

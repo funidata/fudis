@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular';
 
 import { LegendComponent } from './legend.component';
 
@@ -14,7 +14,7 @@ export default {
 	},
 } as Meta;
 
-export const Legend: Story = () => ({
+export const Legend: StoryFn = () => ({
 	template: `
 	<form>
 	<fieldset>

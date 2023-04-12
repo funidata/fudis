@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular';
 import { ErrorSummaryComponent } from './error-summary.component';
 
 export default {
@@ -12,12 +12,6 @@ export default {
 } as Meta;
 const html = String.raw;
 
-export const ErrorSummary: Story = () => ({
-	template: html`
-		<form id="testform">
-			<fudis-error-summary>
-				<h1>TBD</h1>
-			</fudis-error-summary>
-		</form>
-	`,
+export const ErrorSummary: StoryFn = () => ({
+	template: html` <h1>TBD</h1> `,
 });

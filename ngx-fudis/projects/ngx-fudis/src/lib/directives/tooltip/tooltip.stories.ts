@@ -1,4 +1,4 @@
-import { Story, Meta, componentWrapperDecorator } from '@storybook/angular';
+import { StoryFn, Meta, componentWrapperDecorator } from '@storybook/angular';
 import { IconComponent } from '../../components/icon/icon.component';
 import { TooltipDirective } from './tooltip.directive';
 import readme from './readme.mdx';
@@ -26,7 +26,7 @@ export default {
 
 const html = String.raw;
 
-const Template: Story<TooltipDirective> = (args: TooltipDirective) => ({
+const Template: StoryFn<TooltipDirective> = (args: TooltipDirective) => ({
 	template: html`
 		<div class="storybook-flex" style="align-items: flex-start">
 			<div>

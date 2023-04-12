@@ -1,4 +1,4 @@
-import { Story, Meta, componentWrapperDecorator } from '@storybook/angular';
+import { StoryFn, Meta, componentWrapperDecorator } from '@storybook/angular';
 
 import { GridComponent } from './grid.component';
 
@@ -57,7 +57,7 @@ export default {
 
 const html = String.raw;
 
-const Template: Story<GridComponent> = (args: GridComponent) => ({
+const Template: StoryFn<GridComponent> = (args: GridComponent) => ({
 	props: args,
 	template: html`<fudis-grid
 		[columns]="columns"

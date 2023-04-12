@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveF
 
 import { IFudisRadioButtonOption } from 'projects/ngx-fudis/src/lib/types/forms';
 
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
@@ -92,7 +92,7 @@ export default {
 	],
 } as Meta;
 
-export const RadioButtonGroup: Story = () => ({
+export const RadioButtonGroup: StoryFn = () => ({
 	template: `
 			<example-radio-button-group></example-radio-button-group>
 	`,

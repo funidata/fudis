@@ -1,5 +1,5 @@
 // also exported from '@storybook/angular' if you can deal with breaking changes in 6.1
-import { Story, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular';
 import { ButtonComponent } from './button.component';
 import readme from './readme.mdx';
 
@@ -21,7 +21,7 @@ export default {
 	},
 } as Meta;
 
-const Template: Story = (args) => ({
+const Template: StoryFn = (args) => ({
 	props: args,
 });
 
@@ -46,7 +46,7 @@ OnlyIconButton.args = {
 	labelHidden: true,
 };
 
-export const AllVariants: Story = () => ({
+export const AllVariants: StoryFn = () => ({
 	template: `
 	<fudis-grid columns="1fr 1fr 1fr 1fr" align="left" rowGap="xs" marginBottom="m">
 		<fudis-heading tag="h4" size="s">Medium size buttons</fudis-heading>

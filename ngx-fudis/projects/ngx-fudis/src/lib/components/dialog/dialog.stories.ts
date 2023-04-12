@@ -1,6 +1,6 @@
 // eslint-disable-next-line max-classes-per-file
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ComponentType } from '@angular/cdk/portal';
 import { DialogService } from './dialog.service';
@@ -163,7 +163,7 @@ export default {
 	},
 } as Meta;
 
-const Template: Story<DialogExampleLauncherComponent> = (args: DialogExampleLauncherComponent) => ({
+const Template: StoryFn<DialogExampleLauncherComponent> = (args: DialogExampleLauncherComponent) => ({
 	props: args,
 });
 

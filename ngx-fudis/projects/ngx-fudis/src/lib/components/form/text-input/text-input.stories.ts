@@ -1,4 +1,4 @@
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { TextInputComponent } from './text-input.component';
@@ -103,7 +103,7 @@ export default {
 	},
 } as Meta;
 
-export const TextInput: Story = () => ({
+export const TextInput: StoryFn = () => ({
 	template: `
 		<example-text-input-with-form-control></example-text-input-with-form-control>
 	`,
