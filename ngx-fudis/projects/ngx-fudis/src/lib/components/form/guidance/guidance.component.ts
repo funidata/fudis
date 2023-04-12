@@ -41,6 +41,18 @@ export class GuidanceComponent {
 		}
 	}
 
+	checkCharacterCount(): string {
+		if (this.maxLength && this.control.value.length) {
+			const charactersRemaining = this.maxLength - this.control.value.length;
+
+			if (charactersRemaining < 3) {
+				return 'polite';
+			}
+			return 'off';
+		}
+		return 'off';
+	}
+
 	getErrorOutput(id: string, error: string) {
 		this.errorOutput.emit({ id, message: error });
 	}
