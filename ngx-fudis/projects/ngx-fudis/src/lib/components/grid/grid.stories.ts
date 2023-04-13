@@ -78,10 +78,6 @@ const Template: StoryFn<GridComponent> = (args: GridComponent) => ({
 		<fudis-heading class="grid-test-item" tag="h1" size="l"
 			>Fudis-headings will always take 100% width if they are direct child of Fudis grid component</fudis-heading
 		>
-		<fudis-heading class="grid-test-item" tag="h2" size="s"
-			>If you change any of the column size values from the controls, please refresh the page for ngMaterial's
-			Breakpoint Observer to register the new values!</fudis-heading
-		>
 
 		<div class="grid-test-item">
 			<fudis-heading tag="h3" size="m">This is fudis-heading inside a div</fudis-heading>
