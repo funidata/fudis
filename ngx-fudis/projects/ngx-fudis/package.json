@@ -18,10 +18,10 @@
 		}
 	},
 	"peerDependencies": {
-		"@angular/material-moment-adapter": "15.2.5",
-		"@angular/material": "15.2.5",
-		"@angular/common": "15.2.5",
-		"@angular/core": "15.2.5"
+		"@angular/material-moment-adapter": "^15.2.5",
+		"@angular/material": "^15.2.5",
+		"@angular/common": "^15.2.5",
+		"@angular/core": "^15.2.5"
 	},
 	"devDependencies": {
 		"copyfiles": "^2.4.1",
