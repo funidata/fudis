@@ -1,7 +1,1 @@
-<svg width="150" height="150" class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" ViewBox="0 0 150 150" id="alert">
-    <g transform="scale(2)">
-        <circle cx="15.004" cy="19.25" r=".75"></circle>
-        <path d="M14.134 8a1 1 0 0 1 1.73 0l7.5 13a1 1 0 0 1-.86 1.5h-15a1 1 0 0 1-.87-1.5zm8.37 13.5-7.5-13-7.5 13z"></path>
-        <path d="M15.004 17.25a.75.75 0 0 1-.75-.75v-3a.75.75 0 0 1 1.5 0v3a.76.76 0 0 1-.75.75z"></path>
-    </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 32 32"><circle cx="16.504" cy="19.75" r=".75" fill="#484848"/><path fill="#484848" fill-rule="evenodd" d="M15.634 8.5a1 1 0 0 1 1.73 0l7.5 13a1 1 0 0 1-.86 1.5h-15a1 1 0 0 1-.87-1.5l7.5-13Zm8.37 13.5-7.5-13-7.5 13h15Z" clip-rule="evenodd"/><path fill="#484848" d="M16.504 17.75a.75.75 0 0 1-.75-.75v-3a.75.75 0 0 1 1.5 0v3a.76.76 0 0 1-.75.75Z"/></svg>
