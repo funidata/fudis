@@ -1,4 +1,4 @@
-<svg width="32" height="32" class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="list-minus">
+<svg class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="list-minus">
     <path d="M13.03 16H9v-1h4.03c.06-.72.27-1.39.58-2H9v-1h5v.34c.51-.73 1.2-1.33 2-1.74V10h-1V8h-1v2h-2V8h-1v2H9V8H8v2H7v12h9v-1.61A5.464 5.464 0 0 1 13.03 16ZM12 19H9v-1h3v1Z"></path>
     <path d="M22.06 15h-7.12c-.22 0-.39.22-.39.5 0 .14.04.26.12.35.06.09.16.15.27.15h7.12c.22 0 .39-.22.39-.5s-.17-.5-.39-.5Z"></path>
 </svg>

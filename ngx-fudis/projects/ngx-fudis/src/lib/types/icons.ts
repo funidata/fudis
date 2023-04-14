@@ -3,7 +3,6 @@ export type FudisIcon =
 	| 'achievement-small'
 	| 'alert'
 	| 'alert-fill'
-	| 'alert-fill-attention'
 	| 'alert-small'
 	| 'archive'
 	| 'arrow-big'
