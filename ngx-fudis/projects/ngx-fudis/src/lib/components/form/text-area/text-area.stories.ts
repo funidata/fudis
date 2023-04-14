@@ -23,7 +23,7 @@ import { TFudisFormErrorMessages } from '../../../types/forms';
 				requiredText="Required"
 				[minLength]="minLength"
 				[maxLength]="maxLength"
-				[maxLengthText]="'characters remaining'"
+				[maxLengthText]="'characters used'"
 				[id]="'unique-text-area-id-2'"
 				[label]="'This is pretty long label to demonstrate how it aligns with other content surrounded around it.'"
 				[errorMsg]="validatorMessages"
