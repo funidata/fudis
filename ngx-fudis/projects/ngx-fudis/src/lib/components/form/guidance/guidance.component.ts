@@ -45,12 +45,12 @@ export class GuidanceComponent {
 		if (this.maxLength && this.control.value.length) {
 			const charactersRemaining = this.maxLength - this.control.value.length;
 
-			if (charactersRemaining < 3) {
-				return 'polite';
+			if ((charactersRemaining === 5 && this.maxLength >= 5) || charactersRemaining === 0) {
+				return 'alert';
 			}
-			return 'off';
+			return 'none';
 		}
-		return 'off';
+		return 'none';
 	}
 
 	getErrorOutput(id: string, error: string) {

@@ -8,7 +8,8 @@
 	</div>
 	<p *ngIf="!showError && helpText" class="fudis-guidance__help-text">{{ helpText }}</p>
 	<small
-		[ariaLive]="checkCharacterCount()"
+		aria-live="off"
+		[attr.role]="checkCharacterCount()"
 		class="fudis-guidance__character-limit-indicator"
 		[class.fudis-guidance__character-limit-indicator__float-right]="!helpText"
 		*ngIf="maxLength">
