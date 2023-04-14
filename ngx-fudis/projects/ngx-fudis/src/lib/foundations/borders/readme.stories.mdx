@@ -4,57 +4,70 @@ import { Meta } from '@storybook/addon-docs';
 
 # Border mixins
 
-When using border mixins load them with `@use '../path/to/foundations/borders/mixins.scss' as borders;` to the component's .scss file.
+Load Fudis mixins and tokens to your file in your SCSS file with:
+
+```
+@use "@funidata/ngx-fudis" as fudis;
+```
 
 ## Border
+
 Set the border of an element.
 
-````
-@include borders.border($width, $style, $color)
-````
+```
+@include fudis.border($width, $style, $color)
 
-| $width | $style | $color|
-| ---- | ---- | ---- |
+```
+
+| $width                                                 | $style                                                 | $color                                          |
+| ------------------------------------------------------ | ------------------------------------------------------ | ----------------------------------------------- |
 | string value from spacing tokens map (_$pixel-tokens_) | string value from border tokens map (_$border-styles_) | string value from colors tokens map (_$colors_) |
 
-````
-@include borders.border('2px', 'solid', 'primary');	
-````
-
+```
+.my-element {
+  @include fudis.border('2px', 'solid', 'primary');
+}
+```
 
 ## Outline
+
 Set the outline of an element.
 
-````
-@include borders.outline($width, $style, $color)
-````
+```
+@include fudis.outline($width, $style, $color)
+```
 
-| $width | $style | $color|
-| ---- | ---- | ---- |
+| $width                                                 | $style                                                 | $color                                          |
+| ------------------------------------------------------ | ------------------------------------------------------ | ----------------------------------------------- |
 | string value from spacing tokens map (_$pixel-tokens_) | string value from border tokens map (_$border-styles_) | string value from colors tokens map (_$colors_) |
 
-````
-@include borders.outline('1px', 'dashed', 'gray-middle');
-````
+```
+.my-element {
+  @include fudis.outline('1px', 'dashed', 'gray-middle');
+}
+```
 
 ## Border radius
+
 Set border radius of an element.
 
-````
-@include borders.border-radius($width)
-````
+```
+@include fudis.border-radius($width)
+```
 
-| $width |
-| ---- | 
+| $width                                                 |
+| ------------------------------------------------------ |
 | string value from spacing tokens map (_$pixel-tokens_) |
 
-````
-@include borders.border-radius('2px');
-````
+```
+.my-element {
+  @include fudis.border-radius('2px');
+}
+```
 
 # Border tokens
 
 | $border-style |
-| ---- |
-| solid |
-| dashed |
+| ------------- |
+| solid         |
+| dashed        |

@@ -10,15 +10,28 @@
 .fudis-datepicker {
 	&__toggle {
 		/* Target mat-icon-button */
-		& .mat-icon-button {
+		& .mat-mdc-icon-button {
 			@include colorMixins.bg-color('transparent');
 
+			display: flex;
+			align-items: center;
+			justify-content: center;
 			border-radius: 0;
 			width: spacing.$spacing-l;
 			height: spacing.$spacing-l;
 
 			&:focus {
 				@include focus.focus-generic;
+			}
+
+			& svg {
+				width: spacing.$spacing-l;
+				height: spacing.$spacing-l;
+			}
+
+			& mat-icon {
+				width: spacing.$spacing-l;
+				height: spacing.$spacing-l;
 			}
 		}
 	}
@@ -38,19 +51,14 @@
 			&.mat-calendar-body-today {
 				box-shadow: none;
 			}
-
-			// &.mat-focus-indicator {
-			// 	@include colorMixins.text-color('gray-dark');
-			// 	@include colorMixins.bg-color('primary-light');
-			// }
 		}
 
 		& .mat-calendar-controls {
-				& .mat-button {
+				& .mat-mdc-button {
 					@include colorMixins.bg-color('transparent');
 				}
 
-				& .mat-icon-button {
+				& .mat-mdc-icon-button {
 					@include colorMixins.bg-color('transparent');
 				}
 		}

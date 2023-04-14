@@ -25,7 +25,7 @@ Choose these options when prompted:
 Then install Fudis:
 
 ```bash
-ng add @funidata/ngx-fudis 
+ng add @funidata/ngx-fudis
 ```
 
 ### Import Core Styles
@@ -35,7 +35,7 @@ ng add @funidata/ngx-fudis
 The core styles from Angular Material must be imported in your application for the components to work properly. The easiest way to do this is to have a `styles.scss` file in project root with the following content:
 
 ```scss
-@use "@angular/material" as mat;
+@use '@angular/material' as mat;
 
 @include mat.core();
 ```

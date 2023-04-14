@@ -1,8 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/forms';
+import { TFudisFormErrorMessages, IFudisFormErrorSummaryItem } from '../../../types/forms';
 import { GuidanceComponent } from '../guidance/guidance.component';
+import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 
 /**
  * See more display and parse format options from moment.js
@@ -24,7 +25,7 @@ export const FUDIS_DATE_FORMATS = {
 	templateUrl: './datepicker.component.html',
 	styleUrls: ['./datepicker.component.scss'],
 })
-export class DatepickerComponent implements OnInit {
+export class DatepickerComponent extends TooltipApiDirective implements OnInit {
 	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
 
 	/**
@@ -35,7 +36,7 @@ export class DatepickerComponent implements OnInit {
 	/*
 	 * Error message shown below the datepicker
 	 */
-	@Input() errorMsg: IFudisErrorMessages;
+	@Input() errorMsg: TFudisFormErrorMessages;
 
 	/**
 	 * Datepicker label
@@ -77,7 +78,7 @@ export class DatepickerComponent implements OnInit {
 	 */
 	@Input() maxDate: Date;
 
-	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();
+	@Output() errorOutput: EventEmitter<IFudisFormErrorSummaryItem> = new EventEmitter<IFudisFormErrorSummaryItem>();
 
 	required: boolean = false;
 

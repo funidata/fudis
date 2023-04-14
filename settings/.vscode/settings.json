@@ -39,9 +39,17 @@
 	"javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
 	"typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
 	"[html]": {
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-  },
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+	},
+	"[mdx]": {
+		"editor.defaultFormatter": "vscode.markdown-language-features",
+		"editor.wordWrap": "wordWrapColumn",
+		"editor.wordWrapColumn": 500
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
 }

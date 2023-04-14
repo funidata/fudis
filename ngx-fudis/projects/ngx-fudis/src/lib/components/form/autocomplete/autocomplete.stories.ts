@@ -1,6 +1,6 @@
-import { Story, Meta } from '@storybook/angular/types-6-0';
-import { moduleMetadata } from '@storybook/angular';
+import { Story, Meta, moduleMetadata } from '@storybook/angular';
 import { FormControl, Validators } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AutocompleteComponent } from './autocomplete.component';
 import readme from './readme.mdx';
 
@@ -14,7 +14,7 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			imports: [],
+			imports: [BrowserAnimationsModule],
 		}),
 	],
 	argTypes: {},
@@ -30,6 +30,7 @@ Autocomplete.args = {
 	label: 'Choose one option',
 	required: true,
 	requiredText: 'Required',
+	clearFilterText: 'Clear filter',
 	helpText:
 		'This is autocomplete input, start writing (e.g mar) and after three letters the input will suggest matching options.',
 	control: new FormControl('', Validators.required),
@@ -41,6 +42,9 @@ Autocomplete.args = {
 		{ value: 'very-long-value', viewValue: 'Brian Eggplant with Marinated Pomegranate Seeds' },
 		{ value: 1234, viewValue: 'Martin Seeding' },
 	],
+	tooltip: 'well hello to you',
+	tooltipPosition: 'below',
+	tooltipToggle: true,
 };
 
 export const Disabled = Template.bind({});

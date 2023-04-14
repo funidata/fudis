@@ -1,0 +1,8 @@
+{
+  "label": "This is text input",
+  "change_language": "Change language",
+  "helpText": "This is English.",
+  "required": "Required",
+  "error_required": "This is required text input",
+  "dynamic": "transloco {{value}}"
+}

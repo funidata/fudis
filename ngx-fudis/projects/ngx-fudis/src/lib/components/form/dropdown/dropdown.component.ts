@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { IFudisErrorMessages, IFudisDropdownOption } from '../../../types/forms';
+import { TFudisFormErrorMessages, IFudisDropdownOption } from '../../../types/forms';
 import { GuidanceComponent } from '../guidance/guidance.component';
+import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 
 @Component({
 	selector: 'fudis-dropdown[id][label]',
@@ -9,7 +10,7 @@ import { GuidanceComponent } from '../guidance/guidance.component';
 	styleUrls: ['./dropdown.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class DropdownComponent implements OnInit {
+export class DropdownComponent extends TooltipApiDirective implements OnInit {
 	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
 
 	/**
@@ -25,7 +26,7 @@ export class DropdownComponent implements OnInit {
 	/*
 	 * Error message shown below the input
 	 */
-	@Input() errorMsg: IFudisErrorMessages;
+	@Input() errorMsg: TFudisFormErrorMessages;
 
 	/**
 	 * If true, user can choose multiple checkbox options from dropdown

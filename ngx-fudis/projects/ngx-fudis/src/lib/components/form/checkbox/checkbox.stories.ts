@@ -1,6 +1,5 @@
 import { Story, Meta, moduleMetadata } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { Component } from '@angular/core';
 import { CheckboxComponent } from './checkbox.component';
 
@@ -21,7 +20,7 @@ import { CheckboxComponent } from './checkbox.component';
 				[helpText]="'This checkbox is required and must be checked.'"
 				[errorMsg]="{ required: 'Please check the checkbox.' }"
 				[label]="'I am an another example!'"></fudis-checkbox>
-			<div [style.display]="'flex'" [style.flex-direction]="'column'">
+			<div class="storybook-flex-column">
 				<fudis-body-text>Value of first box: {{ checkboxFirst.value }}</fudis-body-text>
 				<fudis-body-text>Value of second box: {{ checkboxSecond.value }}</fudis-body-text>
 			</div>
@@ -47,7 +46,7 @@ export default {
 	decorators: [
 		moduleMetadata({
 			declarations: [CheckboxExampleComponent],
-			imports: [ReactiveFormsModule, BrowserModule, FormsModule],
+			imports: [ReactiveFormsModule, FormsModule],
 		}),
 	],
 } as Meta;

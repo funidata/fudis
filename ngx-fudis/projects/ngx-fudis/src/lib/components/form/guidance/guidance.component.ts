@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { IFudisErrorMessages, IFudisErrorSummaryItem } from '../../../types/forms';
+import { TFudisFormErrorMessages, IFudisFormErrorSummaryItem } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-guidance',
@@ -16,23 +16,23 @@ export class GuidanceComponent {
 
 	@Input() maxLength: number | undefined;
 
-	@Input() errorMsg: IFudisErrorMessages;
+	@Input() errorMsg: TFudisFormErrorMessages;
 
-	@Output() errorOutput: EventEmitter<IFudisErrorSummaryItem> = new EventEmitter<IFudisErrorSummaryItem>();
+	@Output() errorOutput: EventEmitter<IFudisFormErrorSummaryItem> = new EventEmitter<IFudisFormErrorSummaryItem>();
 
 	showError: boolean = false;
 
-	errorMsgToShow: string[] = [];
+	errorsToShow: string[] = [];
 
 	checkErrors(): void {
-		this.errorMsgToShow = [];
+		this.errorsToShow = [];
 		if (this.control.touched && this.control.errors) {
 			this.showError = true;
 
 			Object.keys(this.control.errors).forEach((item) => {
-				const message = this.errorMsg[item as keyof IFudisErrorMessages];
+				const message = this.errorMsg[item as keyof TFudisFormErrorMessages];
 				if (message) {
-					this.errorMsgToShow.push(message);
+					this.errorsToShow.push(item);
 					this.getErrorOutput(this.id, message);
 				}
 			});

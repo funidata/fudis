@@ -4,10 +4,9 @@
 
 .fudis-dialog {
 	position: relative;
-	padding: spacing.$spacing-m;
-	max-width: calc(100% - (2 * spacing.$spacing-m));
+	padding: spacing.$spacing-m spacing.$spacing-s;
+	max-width: calc(100vw - (2 * spacing.$spacing-s));
 	
-
 	&__close {
 		float: right;
 	}
@@ -40,6 +39,11 @@
 				width: calc(gridTokens.$grid-width-l + 2 * spacing.$spacing-xl);
 			}
 		}
+	}
+
+	@include breakpoints.breakpoint('s') {
+		padding: spacing.$spacing-m;
+		max-width: calc(100% - (2 * spacing.$spacing-m));
 	}
 
 	@include breakpoints.breakpoint('m') {

@@ -12,39 +12,63 @@
 	&--collapsed {
 		border-bottom: 0;
 	}
-	
+
 	&__regular {
 		@include border.border('2px', 'solid', 'gray-extra-light');
 	}
 
 	&__header {
-		margin: 0;
-		
-		&__title {
-			@include color.bg-color('gray-extra-light');
-			@include typography.expandable-regular-typography;
-			@include border.border-none;
+    @include color.bg-color('gray-extra-light');
 
-			cursor: pointer;
-			padding: spacing.$spacing-xs;
-			width: 100%;
-			text-align: left;
+    display: block;
+    padding: spacing.$spacing-xs;
 
-			&:focus {
-				@include focus.focus-generic;
-			}
+    &__heading {
+      margin: 0;
+      width: 100%;
 
-			&__icon {
-				margin-right: spacing.$spacing-xxs;
-				vertical-align: middle;
-			}
+      &__button {
+        @include typography.expandable-regular-typography;
+        @include border.border-none;
 
-			&__sub-title {
-				@include typography.expandable-sub-title-typography;
+        cursor: pointer;
+        width: 100%;
+        text-align: left;
 
-				display: block;
-				margin-left: spacing.$spacing-xl;
-			}
+        &:focus {
+          @include focus.focus-generic;
+        }
+
+        > fudis-icon {
+          margin-right: spacing.$spacing-xs;
+          vertical-align: middle;
+        }
+
+        &__sub-heading {
+          @include typography.expandable-sub-title-typography;
+
+          display: block;
+          margin-left: spacing.$spacing-xl;
+        }
+      }
+    }
+
+    &__buttons {
+      display: flex;
+      margin-top: spacing.$spacing-xs;
+
+      fudis-button {
+        margin-left: spacing.$spacing-xs;
+      }
+
+      @include breakpoint.breakpoint('s') {
+        margin-top: 0;
+        margin-left: 0;
+      }
+    }
+
+    @include breakpoint.breakpoint('s') {
+			display: flex;
 		}
 	}
 

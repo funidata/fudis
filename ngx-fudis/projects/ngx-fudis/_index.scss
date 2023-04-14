@@ -5,7 +5,7 @@
 	add following your root style.scss
 
 	@use "@funidata/ngx-fudis" as fudis;
-	
+
  */
 
 @forward './src/lib/assets/fonts/fonts.scss';
@@ -22,4 +22,6 @@
 @forward './src/lib/foundations/spacing/tokens.scss';
 @forward './src/lib/foundations/typography/tokens.scss';
 @forward './src/lib/foundations/typography/mixins.scss';
+@forward './src/lib/foundations/utilities/classes.scss';
+@forward './src/lib/foundations/utilities/mixins.scss';
 @forward './src/lib/theme/component-themes-to-apply.scss';

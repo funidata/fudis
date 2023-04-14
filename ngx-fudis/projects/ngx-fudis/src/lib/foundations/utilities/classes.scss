@@ -1,0 +1,5 @@
+@use "./mixins.scss" as mixins;
+
+.fudis-visually-hidden {
+  @include mixins.visually-hidden;
+}

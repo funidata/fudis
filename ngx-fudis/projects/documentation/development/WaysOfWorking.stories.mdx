@@ -12,7 +12,7 @@ Reusing components, styles and other bits and pieces of code is encouraged. If i
 
 ## Naming Conventions
 
-Currently documented conventions for naming components, CSS classes etc. can be found in [Naming Conventions page](/docs/documentation-development-naming-conventions--page)
+Currently documented conventions for naming components, CSS classes etc. can be found in [Naming Conventions page](/docs/documentation-development-naming-conventions--documentation)
 
 ## Styles
 
@@ -65,9 +65,9 @@ If needed, you can create additional themes for the component and include that t
 
 **It's recommended Not to override or modify Angular Material's CSS or DOM!** This will make upstream minor and patch changes potentially breaking changes for Fudis.
 
-But if ngMaterial based Fudis component requires additional tweaking in styles, create a file with rest of the component files. E. g. to `components/form/datepicker` a file `ngMaterial-theme.scss`. Also import this file with `@use` to root `style.scss` file to make it available to application and ngMaterial. 
+But if ngMaterial based Fudis component requires additional tweaking in styles, create a file with rest of the component files. E. g. to `components/form/datepicker` a file `ngMaterial-theme.scss`. Also import this file with `@use` to root `style.scss` file to make it available to application and ngMaterial.
 
 ```
 @use "./src/lib/components/form/autocomplete/ngMaterial-theme.scss" as autocomplete;
-@use "./src/lib/components/form/datepicker/ngMaterial-theme.scss" as datepicker; 
+@use "./src/lib/components/form/datepicker/ngMaterial-theme.scss" as datepicker;
 ```

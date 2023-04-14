@@ -6,7 +6,7 @@ import { Component, HostBinding, Input } from '@angular/core';
 	styleUrls: ['./legend.component.scss'],
 })
 export class LegendComponent {
-	@HostBinding('class') classes = 'fudis-legend';
+	@HostBinding('class') classes = 'fudis-legend-host';
 
 	@Input() id: string;
 }

@@ -1,17 +1,11 @@
-import { Story, Meta } from '@storybook/angular/types-6-0';
-import { moduleMetadata } from '@storybook/angular';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Story, Meta } from '@storybook/angular';
+
 import { LegendComponent } from './legend.component';
 
 export default {
 	title: 'Components/Form/Legend',
 	component: LegendComponent,
-	decorators: [
-		moduleMetadata({
-			imports: [BrowserAnimationsModule, ReactiveFormsModule, FormsModule],
-		}),
-	],
+
 	argTypes: {},
 	parameters: {
 		controls: {

@@ -1,0 +1,29 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Foundations/Utilities" />
+
+# Utilities
+
+Load Fudis mixins and tokens to your file in your SCSS file with:
+
+```
+@use "@funidata/ngx-fudis" as fudis;
+```
+
+## Visually-hidden
+
+Use this helper to visually hide element but keep it accessible to assistive technologies.
+
+Use as a mixin:
+
+```
+.my-element {
+  @include fudis.visually-hidden;
+}
+```
+
+Use as a Fudis class name:
+
+```
+<div class="fudis-visually-hidden">You cannot see me!</div>
+```

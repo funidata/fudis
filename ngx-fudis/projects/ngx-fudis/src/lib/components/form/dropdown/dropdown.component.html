@@ -2,7 +2,10 @@
 	<fudis-label
 		[text]="label"
 		[id]="'label_' + id"
-		[requiredText]="required && requiredText ? requiredText : null"></fudis-label>
+		[requiredText]="required && requiredText ? requiredText : null"
+		[tooltip]="tooltip"
+		[tooltipPosition]="tooltipPosition"
+		[tooltipToggle]="tooltipToggle"></fudis-label>
 	<mat-select
 		(blur)="handleBlur()"
 		(selectionChange)="handleSelectionChange()"
@@ -19,7 +22,11 @@
 		[attr.required]="required"
 		[aria-labelledby]="'label_' + id"
 		[attr.aria-describedby]="id + '_guidance'">
-		<mat-option *ngFor="let option of options" [value]="option" [disabled]="option.disabled">
+		<mat-option
+			class="fudis-dropdown__option"
+			*ngFor="let option of options"
+			[value]="option"
+			[disabled]="option.disabled">
 			{{ option.viewValue }}
 		</mat-option>
 	</mat-select>

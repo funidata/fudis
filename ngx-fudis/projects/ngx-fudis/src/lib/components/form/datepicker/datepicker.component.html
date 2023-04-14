@@ -3,7 +3,10 @@
 		[id]="'label_' + id"
 		[for]="id"
 		[text]="label"
-		[requiredText]="required && requiredText ? requiredText : null"></fudis-label>
+		[requiredText]="required && requiredText ? requiredText : null"
+		[tooltip]="tooltip"
+		[tooltipPosition]="tooltipPosition"
+		[tooltipToggle]="tooltipToggle"></fudis-label>
 	<div class="fudis-datepicker__input-wrapper">
 		<input
 			(blur)="handleBlur()"

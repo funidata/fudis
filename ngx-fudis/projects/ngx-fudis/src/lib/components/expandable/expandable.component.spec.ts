@@ -3,13 +3,18 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { MockComponent } from 'ng-mocks';
+import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';
-import { ExpandableContentDirective } from './expandable-content.directive';
+import { ExpandableContentDirective, ExpandableActionsDirective } from './expandable-directives';
+
 import { ExpandableComponent } from './expandable.component';
 
 @Component({
 	selector: 'fudis-mock-container',
 	template: ` <fudis-expandable [collapsed]="collapsed">
+		<ng-template fudisExpandableActions>
+			<fudis-button></fudis-button>
+		</ng-template>
 		<ng-template fudisExpandableContent>
 			<fudis-mock-component
 				(initialized)="contentInitializationCount = contentInitializationCount + 1"></fudis-mock-component>
@@ -42,9 +47,11 @@ describe('ExpandableComponent', () => {
 		await TestBed.configureTestingModule({
 			declarations: [
 				ExpandableContentDirective,
+				ExpandableActionsDirective,
 				ExpandableComponent,
 				MockContainerComponent,
 				MockContentComponent,
+				MockComponent(ButtonComponent),
 				MockComponent(IconComponent),
 			],
 		}).compileComponents();
@@ -56,11 +63,15 @@ describe('ExpandableComponent', () => {
 	});
 
 	function toggleExpandableState(): void {
-		fixture.nativeElement.querySelector('fudis-expandable button.fudis-expandable__header__title').click();
+		fixture.nativeElement.querySelector('fudis-expandable button.fudis-expandable__header__heading__button').click();
 	}
 
 	function getExpandable(): ExpandableComponent {
 		return fixture.debugElement.query(By.directive(ExpandableComponent)).componentInstance;
+	}
+
+	function headerHasButtons(): boolean {
+		return !!fixture.nativeElement.querySelector('fudis-expandable div.fudis-expandable__header__buttons fudis-button');
 	}
 
 	function isContentVisible(): boolean {
@@ -76,6 +87,13 @@ describe('ExpandableComponent', () => {
 		expect(getExpandable().collapsed).withContext('Expected the expandable to be collapsed').toEqual(true);
 		expect(isContentVisible()).withContext('Expected the content component not to be visible').toEqual(false);
 	}
+
+	describe('header buttons', () => {
+		it('should render fudis-button when one is given through a fudisExpandableHeaderButtons template', () => {
+			fixture.detectChanges();
+			expect(headerHasButtons()).toBeTruthy();
+		});
+	});
 
 	describe('lazy loading', () => {
 		it('should not initialize content when rendering expandable with default settings', () => {

@@ -4,12 +4,18 @@ import { Meta } from '@storybook/addon-docs';
 
 # Breakpoint mixins
 
-When using breakpoint mixins load them with `@use '../path/to/foundations/breakpoints/mixins.scss' as breakpoints;` to the component's .scss file.
-
-The mixins are using only min-width, so when you are using the mixin **breakpoint('m')**, your styles will be applied from the medium breakpoint and up.
+Load Fudis mixins and tokens to your file in your SCSS file with:
 
 ```
-@include breakpoints.breakpoint($breakpoint)
+@use "@funidata/ngx-fudis" as fudis;
+```
+
+## Min-width mixin
+
+The mixins are using min-width, so when you are using the mixin **breakpoint('m')**, your styles will be applied from the medium breakpoint and up.
+
+```
+@include fudis.breakpoint($breakpoint){}
 ```
 
 | $breakpoint                                              |
@@ -17,7 +23,20 @@ The mixins are using only min-width, so when you are using the mixin **breakpoin
 | string value from breakpoint tokens map (_$breakpoints_) |
 
 ```
-@include breakpoints.breakpoint('s');
+.my-element {
+  @include fudis.breakpoint('m'){
+    // Rules defined here apply from breakpoint 'm' and up
+  };
+}
+
+```
+
+## Max-width mixin
+
+The mixins are using max-width, so when you are using the mixin **breakpoint-max('m')**, your styles will be applied if viewport is small than M size.
+
+```
+@include fudis.breakpoint-max($breakpoint){}
 ```
 
 <hr />

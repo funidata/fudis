@@ -1,0 +1,8 @@
+{
+  "label": "Tämä on tekstikenttä",
+  "change_language": "Vaihda kieli",
+  "helpText": "Kivaa jos näet minut suomeksi!",
+  "required": "Pakollinen",
+  "error_required": "Tämä on pakollinen kenttä!",
+  "dynamic": "transloco {{value}}"
+}

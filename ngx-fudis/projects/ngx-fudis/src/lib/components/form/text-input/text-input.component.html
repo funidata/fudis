@@ -3,7 +3,10 @@
 		[for]="id"
 		[text]="label"
 		[id]="'label_' + id"
-		[requiredText]="control.hasValidator(requiredValidator) && requiredText ? requiredText : null">
+		[requiredText]="control.hasValidator(requiredValidator) && requiredText ? requiredText : null"
+		[tooltip]="tooltip"
+		[tooltipPosition]="tooltipPosition"
+		[tooltipToggle]="tooltipToggle">
 	</fudis-label>
 	<input
 		#fudisTextInput

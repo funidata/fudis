@@ -45,7 +45,6 @@ export default {
 		controls: {
 			exclude: [
 				'columnsToApply',
-				'fakeGridArray',
 				'ngOnInit',
 				'breakpointObserver',
 				'columnsFromInput',
@@ -59,8 +58,9 @@ export default {
 const html = String.raw;
 
 const Template: Story<GridComponent> = (args: GridComponent) => ({
+	props: args,
 	template: html`<fudis-grid
-		[columns]="'1fr 1fr 1fr'"
+		[columns]="columns"
 		[columnsXs]="columnsXs"
 		[columnsS]="columnsS"
 		[columnsM]="columnsM"
@@ -104,8 +104,24 @@ const Template: Story<GridComponent> = (args: GridComponent) => ({
 			<fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
 		</div>
 	</fudis-grid>`,
-	props: args,
 });
 
 export const Grid = Template.bind({});
-Grid.args = {};
+Grid.args = {
+	columns: '1fr 1fr 1fr',
+	columnsXs: '1fr',
+	columnsS: '1fr 1fr',
+	columnsM: undefined,
+	columnsL: undefined,
+	columnsXl: undefined,
+	columnsXxl: '1fr 1fr 1fr 1fr',
+	align: 'center',
+	alignItemsX: 'stretch',
+	alignItemsY: 'stretch',
+	marginTop: 'none',
+	marginBottom: 'none',
+	marginSides: 'none',
+	width: 'xxl',
+	rowGap: 'responsive',
+	columnGap: 'responsive',
+};
