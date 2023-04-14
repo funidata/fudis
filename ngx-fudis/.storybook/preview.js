@@ -17,7 +17,7 @@ const preview = {
 				date: /Date$/,
 			},
 		},
-		docs: { inlineStories: true },
+		docs: { story: { inline: true } },
 		options: {
 			storySort: {
 				order: [
