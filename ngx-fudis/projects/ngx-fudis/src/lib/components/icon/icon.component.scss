@@ -12,26 +12,6 @@
 	box-sizing: border-box;
 	display: inline-flex;
 	align-items: center;
-
-	&__tooltip {
-		position: absolute;
-		top: 0;
-		left: 0;
-
-		&:focus {
-			@include focus.focus-generic;
-		}
-
-		&__small {
-			width: spacing.$spacing-s;
-			height: spacing.$spacing-s;
-		}
-
-		&__large {
-			width: spacing.$spacing-l;
-			height: spacing.$spacing-l;
-		}
-	}
 	
 	&-rotate {
 		&__flip-180 {
