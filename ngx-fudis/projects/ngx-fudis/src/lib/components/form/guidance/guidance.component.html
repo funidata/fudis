@@ -1,19 +1,28 @@
 <div [id]="id" class="fudis-guidance">
-	<div aria-live="assertive">
-		<div *ngIf="showError">
-			<ng-container *ngFor="let error of errorMsg | keyvalue">
-				<fudis-error-message
-					[message]="error.value"
-					*ngIf="errorsToShow.includes(error.key) && error.value"></fudis-error-message>
-			</ng-container>
-		</div>
-		<p *ngIf="!showError && helpText" class="fudis-guidance__help-text">{{ helpText }}</p>
+	<div *ngIf="showError">
+		<ng-container *ngFor="let error of errorMsg | keyvalue">
+			<fudis-error-message
+				[message]="error.value"
+				*ngIf="errorsToShow.includes(error.key) && error.value"></fudis-error-message>
+		</ng-container>
 	</div>
-	<small
-		[attr.role]="checkCharacterCount()"
-		class="fudis-guidance__character-limit-indicator"
-		[class.fudis-guidance__character-limit-indicator__float-right]="!helpText"
-		*ngIf="maxLength">
-		{{ control.value.length || 0 }}/{{ maxLength }}
-	</small>
+	<p *ngIf="!showError && helpText" class="fudis-guidance__help-text">{{ helpText }}</p>
+
+	<ng-container *ngIf="alertMaxLength()">
+		<small
+			role="alert"
+			class="fudis-guidance__character-limit-indicator"
+			[class.fudis-guidance__character-limit-indicator__float-right]="!helpText"
+			*ngIf="maxLength">
+			{{ control.value.length || 0 }}/{{ maxLength }} <span class="fudis-visually-hidden">{{ maxLengthText }}</span>
+		</small>
+	</ng-container>
+	<ng-container *ngIf="!alertMaxLength()">
+		<small
+			class="fudis-guidance__character-limit-indicator"
+			[class.fudis-guidance__character-limit-indicator__float-right]="!helpText"
+			*ngIf="maxLength">
+			{{ control.value.length || 0 }}/{{ maxLength }} <span class="fudis-visually-hidden">{{ maxLengthText }}</span>
+		</small>
+	</ng-container>
 </div>

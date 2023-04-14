@@ -28,6 +28,7 @@ import { TFudisFormErrorMessages } from '../../../types/forms';
 				requiredText="Required"
 				[minLength]="minLength"
 				[maxLength]="maxLength"
+				[maxLengthText]="'characters remaining'"
 				[id]="'unique-text-input-id-3'"
 				label="Email"
 				[errorMsg]="validatorMessages"
