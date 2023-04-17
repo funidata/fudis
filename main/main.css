@@ -179,9 +179,21 @@
   display: none;
 }
 
+.fudis-dialog-panel mat-dialog-container.mat-mdc-dialog-container .mat-mdc-dialog-title:focus-visible {
+  outline: 2px dashed #484848;
+  outline-offset: 1px;
+  box-shadow: 0 0 0 0.25rem #ffffff;
+}
+
 .fudis-dialog-panel mat-dialog-container.mat-mdc-dialog-container .mat-mdc-dialog-content {
   margin: 0;
   padding: 0;
+}
+
+.fudis-dialog-panel mat-dialog-container.mat-mdc-dialog-container .mat-mdc-dialog-content:focus-visible, .fudis-dialog-panel mat-dialog-container.mat-mdc-dialog-container .mat-mdc-dialog-content:focus {
+  outline: 2px dashed #484848;
+  outline-offset: 1px;
+  box-shadow: 0 0 0 0.25rem #ffffff;
 }
 
 .fudis-dialog-panel mat-dialog-container.mat-mdc-dialog-container .mat-mdc-dialog-actions {
