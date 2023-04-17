@@ -16,7 +16,6 @@
 		{{ control.value.length || 0 }}/{{ maxLength }}
 	</small>
 </div>
-<div class="fudis-visually-hidden" aria-atomic="true"></div>
 <ng-container *ngIf="alertMaxLength()">
 	<p class="fudis-visually-hidden" role="alert">{{ control.value.length || 0 }}/{{ maxLength }} {{ maxLengthText }}</p>
 </ng-container>
