@@ -48,7 +48,7 @@ Directives written with `camelCase` are meant to be used as inline attribute dir
 Directives written with `kebab-case` are meant to be used as HTML element.
 
 **fudisDialogTitle**: Set title for the dialog, title will stay fixed to the top of the dialog if content is long and when scrolling it down.
-This directive extends _MatDialogTitle_.
+This directive extends _MatDialogTitle_. Initial focus is set to this heading when opening the dialog.
 
 ```
 <fudis-dialog>
@@ -123,8 +123,10 @@ class DialogExample {
 ### Accessibility
 
 - Focus is trapped inside the dialog
-- Initial focus is set to close button on top right corner which is the first focusable element
+- Initial focus is set to heading defined with `fudisDialogTitle` directive
 - Dialog can't be closed with outside click
+- Dialog can be closed with keyboard Escape
+- Dialog content is scrollable with keyboard and mouse
 - Dialog heading (with fudisDialogTitle directive) and dialog buttons (with fudis-dialog-actions directive) are always visible even if content is scrollable
 
 ### Related components

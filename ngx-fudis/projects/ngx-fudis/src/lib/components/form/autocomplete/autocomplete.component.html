@@ -6,16 +6,17 @@
 		[requiredText]="required && requiredText ? requiredText : null"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
-		[tooltipToggle]="tooltipToggle"></fudis-label>
+		[tooltipToggle]="tooltipToggle">
+	</fudis-label>
 	<div class="fudis-autocomplete__input-wrapper">
 		<input
-			[id]="id"
+			#fudisAutocompleteInput
 			class="fudis-autocomplete__input"
+			[id]="id"
 			[class.fudis-autocomplete__input--invalid]="control.invalid && control.touched"
 			[class.fudis-autocomplete__input--disabled]="disabled"
 			type="text"
 			(blur)="handleBlur()"
-			#fudisAutocompleteInput
 			[formControl]="control"
 			[matAutocomplete]="autocomplete"
 			[attr.aria-describedby]="id + '__guidance'"
@@ -24,19 +25,21 @@
 			[attr.required]="required" />
 		<ng-container *ngIf="control.value">
 			<fudis-button
+				class="fudis-autocomplete__input__icon"
 				[size]="'icon-only'"
 				[variant]="'tertiary'"
 				[icon]="'close'"
 				(handleClick)="clearFilter()"
 				[label]="clearFilterText"
-				[labelHidden]="true"
-				class="fudis-autocomplete__input__icon"></fudis-button>
+				[labelHidden]="true">
+			</fudis-button>
 		</ng-container>
 		<ng-container *ngIf="!control.value || control.value === ''">
 			<fudis-icon
-				[icon]="'search'"
 				class="fudis-autocomplete__input__icon"
-				[class.fudis-autocomplete__input__icon--disabled]="disabled"></fudis-icon>
+				[icon]="'search'"
+				[class.fudis-autocomplete__input__icon--disabled]="disabled">
+			</fudis-icon>
 		</ng-container>
 	</div>
 	<fudis-guidance [helpText]="helpText" [id]="id + '__guidance'" [errorMsg]="errorMsg" [control]="control">

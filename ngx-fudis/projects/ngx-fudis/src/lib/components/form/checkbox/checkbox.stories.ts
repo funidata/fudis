@@ -1,4 +1,4 @@
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { CheckboxComponent } from './checkbox.component';
@@ -51,7 +51,7 @@ export default {
 	],
 } as Meta;
 
-export const Checkbox: Story = () => ({
+export const Checkbox: StoryFn = () => ({
 	template: `
 			<example-checkbox></example-checkbox>
 	`,

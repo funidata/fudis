@@ -147,7 +147,7 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		LinkComponent,
 		NotificationComponent,
 		RadioButtonGroupComponent,
-		SpacingDirective,
+		// SpacingDirective,
 		TextAreaComponent,
 		TextInputComponent,
 		// TextSpacingComponent,

@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular';
 import { IconComponent } from './icon.component';
 
 export default {

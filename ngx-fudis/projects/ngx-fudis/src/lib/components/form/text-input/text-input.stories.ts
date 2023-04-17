@@ -1,4 +1,4 @@
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { TextInputComponent } from './text-input.component';
@@ -28,6 +28,7 @@ import { TFudisFormErrorMessages } from '../../../types/forms';
 				requiredText="Required"
 				[minLength]="minLength"
 				[maxLength]="maxLength"
+				[maxLengthText]="'characters used'"
 				[id]="'unique-text-input-id-3'"
 				label="Email"
 				[errorMsg]="validatorMessages"
@@ -103,7 +104,7 @@ export default {
 	},
 } as Meta;
 
-export const TextInput: Story = () => ({
+export const TextInput: StoryFn = () => ({
 	template: `
 		<example-text-input-with-form-control></example-text-input-with-form-control>
 	`,

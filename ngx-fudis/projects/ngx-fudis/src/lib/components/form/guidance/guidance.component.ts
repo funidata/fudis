@@ -16,6 +16,11 @@ export class GuidanceComponent {
 
 	@Input() maxLength: number | undefined;
 
+	/**
+	 * Assistive text of max character count for screen readers
+	 */
+	@Input() maxLengthText: string;
+
 	@Input() errorMsg: TFudisFormErrorMessages;
 
 	@Output() errorOutput: EventEmitter<IFudisFormErrorSummaryItem> = new EventEmitter<IFudisFormErrorSummaryItem>();
@@ -39,6 +44,18 @@ export class GuidanceComponent {
 		} else {
 			this.showError = false;
 		}
+	}
+
+	alertMaxLength(): boolean {
+		if (this.maxLength && this.control.value.length) {
+			const charactersRemaining = this.maxLength - this.control.value.length;
+
+			if ((charactersRemaining === 5 && this.maxLength >= 5) || charactersRemaining === 0) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	getErrorOutput(id: string, error: string) {

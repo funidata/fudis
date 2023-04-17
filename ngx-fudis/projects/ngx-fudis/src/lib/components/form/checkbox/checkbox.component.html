@@ -6,6 +6,7 @@
 			[class.fudis-checkbox__box--disabled]="control.disabled">
 			<input
 				(blur)="handleBlur()"
+				[formControl]="control"
 				#checkboxRef
 				[attr.aria-describedby]="id + '_guidance'"
 				[attr.aria-label]="label"
@@ -18,8 +19,8 @@
 				[attr.aria-disabled]="control.disabled" />
 			<svg
 				*ngIf="control.value"
-				width="16"
-				height="16"
+				width="100%"
+				height="100%"
 				preserveAspectRatio="xMidYMin"
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 22 22"

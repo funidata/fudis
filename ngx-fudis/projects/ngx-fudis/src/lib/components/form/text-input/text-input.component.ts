@@ -66,6 +66,11 @@ export class TextInputComponent extends TooltipApiDirective {
 	@Input() maxLength: number;
 
 	/**
+	 * Assistive text of max character count for screen readers
+	 */
+	@Input() maxLengthText: string;
+
+	/**
 	 * Minimum number allowed by number input's minNumber
 	 */
 	@Input() minNumber: number;

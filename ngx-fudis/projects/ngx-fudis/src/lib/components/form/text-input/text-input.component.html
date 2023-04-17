@@ -23,6 +23,7 @@
 		[attr.aria-describedby]="id + '_guidance'"
 		[attr.required]="control.hasValidator(requiredValidator)" />
 	<fudis-guidance
+		[maxLengthText]="maxLengthText"
 		[maxLength]="maxLength"
 		[helpText]="helpText"
 		[id]="id + '_guidance'"

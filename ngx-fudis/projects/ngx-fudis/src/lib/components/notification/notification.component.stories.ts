@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular';
 import { NotificationComponent } from './notification.component';
 import readme from './readme.mdx';
 
@@ -17,7 +17,7 @@ export default {
 	},
 } as Meta;
 
-const Template: Story = (args) => ({
+const Template: StoryFn = (args) => ({
 	props: args,
 	template: `<fudis-notification [variant]="variant" [ariaVariantText]="ariaVariantText" [link]="link" [linkTitle]="linkTitle" [externalLink]="externalLink" [externalLinkAriaLabel]="externalLinkAriaLabel">{{content}}</fudis-notification>`,
 });
@@ -39,7 +39,7 @@ LinkNotification.args = {
 	externalLinkAriaLabel: 'Link to another page',
 };
 
-export const AllVariants: Story = () => ({
+export const AllVariants: StoryFn = () => ({
 	template: `
 	<fudis-grid align="left" width="m">
 		<fudis-notification variant="warning" ariaVariantText="Warning!">Note! Please don't do this, okey?</fudis-notification>

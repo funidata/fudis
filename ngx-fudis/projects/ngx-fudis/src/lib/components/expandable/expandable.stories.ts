@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular';
 import { ExpandableComponent } from './expandable.component';
 import { ExpandableType } from '../../types/expandables';
 
@@ -18,7 +18,7 @@ export default {
 	},
 } as Meta;
 
-const Template: Story<ExpandableComponent> = (args: ExpandableComponent) => ({
+const Template: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
 	props: args,
 	template: `
     <fudis-expandable [title]="title" [subTitle]="subTitle">
@@ -36,7 +36,7 @@ Expandable.args = {
 	collapsed: true,
 };
 
-const SubTitleTemplate: Story<ExpandableComponent> = (args: ExpandableComponent) => ({
+const SubTitleTemplate: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
 	props: args,
 	template: `
     <fudis-expandable [title]="title" [subTitle]="subTitle">
@@ -55,7 +55,7 @@ ExpandableWithSubTitle.args = {
 	collapsed: true,
 };
 
-const ActionTemplate: Story<ExpandableComponent> = (args: ExpandableComponent) => ({
+const ActionTemplate: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
 	props: args,
 	template: `
     <fudis-expandable [title]="title" [subTitle]="subTitle">

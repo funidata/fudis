@@ -1,5 +1,5 @@
 // also exported from '@storybook/angular' if you can deal with breaking changes in 6.1
-import { Story, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular';
 import { HeadingComponent } from './heading.component';
 
 export default {
@@ -7,7 +7,7 @@ export default {
 	component: HeadingComponent,
 } as Meta;
 
-const Template: Story<HeadingComponent> = (args: HeadingComponent) => ({
+const Template: StoryFn<HeadingComponent> = (args: HeadingComponent) => ({
 	props: args,
 	template: `
   <fudis-heading [tag]="tag" [size]="size">{{text}}</fudis-heading>

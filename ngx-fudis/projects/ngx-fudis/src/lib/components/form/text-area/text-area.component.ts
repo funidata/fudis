@@ -38,6 +38,11 @@ export class TextAreaComponent extends TooltipApiDirective {
 	@Input() maxLength?: number;
 
 	/**
+	 * Assistive text of max character count for screen readers
+	 */
+	@Input() maxLengthText: string;
+
+	/**
 	 * FormControl for the text area
 	 */
 	@Input() control: FormControl;

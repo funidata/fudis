@@ -57,20 +57,15 @@ export class CheckboxComponent {
 
 	showError: boolean = false;
 
+	isChecked: boolean;
+
 	requiredValidator = Validators.requiredTrue;
 
 	handleCheckboxClick(): void {
 		this.input.nativeElement.focus();
-		if (!this.control.disabled) {
-			this.control.patchValue(!this.control.value);
-			this.control.markAsTouched();
-			this.control.markAsDirty();
-			this.guidanceToUpdate.checkErrors();
-		}
 	}
 
 	handleBlur(): void {
-		this.control.markAsTouched();
 		this.guidanceToUpdate.checkErrors();
 	}
 }

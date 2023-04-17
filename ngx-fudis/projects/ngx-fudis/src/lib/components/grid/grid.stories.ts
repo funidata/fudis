@@ -1,4 +1,4 @@
-import { Story, Meta, componentWrapperDecorator } from '@storybook/angular';
+import { StoryFn, Meta, componentWrapperDecorator } from '@storybook/angular';
 
 import { GridComponent } from './grid.component';
 
@@ -57,7 +57,7 @@ export default {
 
 const html = String.raw;
 
-const Template: Story<GridComponent> = (args: GridComponent) => ({
+const Template: StoryFn<GridComponent> = (args: GridComponent) => ({
 	props: args,
 	template: html`<fudis-grid
 		[columns]="columns"
@@ -77,10 +77,6 @@ const Template: Story<GridComponent> = (args: GridComponent) => ({
 		[rowGap]="rowGap">
 		<fudis-heading class="grid-test-item" tag="h1" size="l"
 			>Fudis-headings will always take 100% width if they are direct child of Fudis grid component</fudis-heading
-		>
-		<fudis-heading class="grid-test-item" tag="h2" size="s"
-			>If you change any of the column size values from the controls, please refresh the page for ngMaterial's
-			Breakpoint Observer to register the new values!</fudis-heading
 		>
 
 		<div class="grid-test-item">

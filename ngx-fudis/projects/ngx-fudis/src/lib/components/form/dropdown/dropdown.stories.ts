@@ -1,14 +1,15 @@
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, applicationConfig, StoryFn } from '@storybook/angular';
 import { FormControl, Validators } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { importProvidersFrom } from '@angular/core';
 import { DropdownComponent } from './dropdown.component';
 
 export default {
 	title: 'Components/Form/Dropdown',
 	component: DropdownComponent,
 	decorators: [
-		moduleMetadata({
-			imports: [BrowserAnimationsModule],
+		applicationConfig({
+			providers: [importProvidersFrom(BrowserAnimationsModule)],
 		}),
 	],
 	argTypes: {},
@@ -16,7 +17,7 @@ export default {
 
 const html = String.raw;
 
-const Template: Story<DropdownComponent> = (args: DropdownComponent) => ({
+const Template: StoryFn<DropdownComponent> = (args: DropdownComponent) => ({
 	props: args,
 	template: html`
 		<fudis-dropdown

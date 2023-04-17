@@ -1,14 +1,20 @@
 <label class="fudis-label" [attr.for]="for" [id]="id">
 	<div class="fudis-label__content">
-		{{ text }}
+		<span class="fudis-label__content__text">
+			{{ text }}
+		</span>
+
 		<ng-container *ngIf="tooltip">
-			<fudis-icon
-				fudisTooltip
+			<fudis-button
+				class="fudis-label__content__button"
+				[size]="'icon-only'"
+				[variant]="'tertiary'"
+				[icon]="'info-circle'"
+				[labelHidden]="true"
+				[label]="tooltip"
 				[tooltip]="tooltip"
 				[tooltipPosition]="tooltipPosition"
-				[tooltipToggle]="tooltipToggle"
-				icon="info-circle"
-				color="primary"></fudis-icon>
+				[tooltipToggle]="tooltipToggle"></fudis-button>
 		</ng-container>
 	</div>
 	<span class="fudis-label__required" *ngIf="requiredText">{{ requiredText }}</span>

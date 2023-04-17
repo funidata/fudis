@@ -1,4 +1,4 @@
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { BadgeComponent } from './badge.component';
 
 export default {
@@ -12,7 +12,7 @@ export default {
 	argTypes: {},
 } as Meta;
 
-const Template: Story<BadgeComponent> = (args: BadgeComponent) => ({
+const Template: StoryFn<BadgeComponent> = (args: BadgeComponent) => ({
 	props: args,
 });
 

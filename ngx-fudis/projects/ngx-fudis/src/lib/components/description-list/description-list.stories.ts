@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular';
 
 import { DescriptionListComponent } from './description-list.component';
 
@@ -36,7 +36,7 @@ const lonelyDataItem = [{ key: 'Vastuuopettajan sähköposti', value: 'olli@ope.
 
 const html = String.raw;
 
-export const DescriptionList: Story = () => ({
+export const DescriptionList: StoryFn = () => ({
 	props: { testData, testDataCompact },
 	template: html`<fudis-heading tag="h2" size="m"> Description List Regular Example</fudis-heading>
 		<fudis-description-list [data]="testData" [marginBottom]="'m'"></fudis-description-list>
@@ -45,7 +45,7 @@ export const DescriptionList: Story = () => ({
 		<fudis-description-list [variant]="'compact'" [data]="testDataCompact"></fudis-description-list> `,
 });
 
-const TemplateWithDl: Story<DescriptionListComponent> = () => ({
+const TemplateWithDl: StoryFn<DescriptionListComponent> = () => ({
 	template: html`<fudis-grid>
 			<fudis-heading tag="h2" size="m">Here below is a regular Fudis Description List component</fudis-heading>
 		</fudis-grid>

@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/angular';
+import { StoryFn, Meta } from '@storybook/angular';
 import { LinkComponent } from './link.component';
 
 export default {
@@ -6,7 +6,7 @@ export default {
 	component: LinkComponent,
 } as Meta;
 
-const Template: Story<LinkComponent> = (args: LinkComponent) => ({
+const Template: StoryFn<LinkComponent> = (args: LinkComponent) => ({
 	props: args,
 });
 

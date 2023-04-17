@@ -14,17 +14,27 @@
 
 		display: flex;
 		align-items: center;
+
+		&__button {
+			align-self: flex-end;
+			margin-left: spacing.$spacing-xxs;
+		}
+
+		&__text {
+			display: flex;
+			align-items: center;
+			min-height: spacing.$spacing-l;
+		}
 	}
 
 	&__required {
 		@include typography.text-field-label;
+		@include colorMixins.text-color('gray-dark');
 
+		align-self: flex-end;
+		margin-bottom: spacing.$spacing-xxs;
 		text-transform: initial;
 		/* stylelint-disable-next-line property-disallowed-list */
 		font-size: typographyTokens.$body-text-s-font-size;
-	}
-
-	fudis-icon {
-		margin-left: spacing.$spacing-xxs;
 	}
 }

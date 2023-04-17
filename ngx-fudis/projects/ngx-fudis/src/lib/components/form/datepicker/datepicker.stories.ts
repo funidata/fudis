@@ -1,6 +1,7 @@
-import { Story, Meta, moduleMetadata } from '@storybook/angular';
+import { StoryFn, Meta, applicationConfig } from '@storybook/angular';
 import { FormControl, Validators } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { importProvidersFrom } from '@angular/core';
 import { DatepickerComponent } from './datepicker.component';
 import readme from './readme.mdx';
 
@@ -13,15 +14,14 @@ export default {
 		},
 	},
 	decorators: [
-		moduleMetadata({
-			imports: [BrowserAnimationsModule],
-			declarations: [],
+		applicationConfig({
+			providers: [importProvidersFrom(BrowserAnimationsModule)],
 		}),
 	],
 	argTypes: {},
 } as Meta;
 
-const Template: Story<DatepickerComponent> = (args: DatepickerComponent) => ({
+const Template: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
 	props: args,
 	template: `
 	<fudis-datepicker 
