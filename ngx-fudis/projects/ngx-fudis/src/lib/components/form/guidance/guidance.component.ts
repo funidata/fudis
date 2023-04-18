@@ -25,14 +25,14 @@ export class GuidanceComponent {
 
 	@Output() errorOutput: EventEmitter<IFudisFormErrorSummaryItem> = new EventEmitter<IFudisFormErrorSummaryItem>();
 
-	showError: boolean = false;
+	errorsVisible: boolean = false;
 
 	errorsToShow: string[] = [];
 
 	checkErrors(): void {
 		this.errorsToShow = [];
 		if (this.control.touched && this.control.errors) {
-			this.showError = true;
+			this.errorsVisible = true;
 
 			Object.keys(this.control.errors).forEach((item) => {
 				const message = this.errorMsg[item as keyof TFudisFormErrorMessages];
@@ -42,7 +42,7 @@ export class GuidanceComponent {
 				}
 			});
 		} else {
-			this.showError = false;
+			this.errorsVisible = false;
 		}
 	}
 
