@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, ValidationErrors } from '@angular/forms';
 import { TFudisFormErrorMessages, IFudisFormErrorSummaryItem } from '../../../types/forms';
 
 @Component({
@@ -29,12 +29,14 @@ export class GuidanceComponent {
 
 	errorsToShow: string[] = [];
 
-	checkErrors(): void {
+	checkErrors(existingErrors?: ValidationErrors | null): void {
+		const errorsToLoop = existingErrors || this.control.errors || null;
+
 		this.errorsToShow = [];
-		if (this.control.touched && this.control.errors) {
+		if (this.control.touched && errorsToLoop) {
 			this.errorsVisible = true;
 
-			Object.keys(this.control.errors).forEach((item) => {
+			Object.keys(errorsToLoop).forEach((item) => {
 				const message = this.errorMsg[item as keyof TFudisFormErrorMessages];
 				if (message) {
 					this.errorsToShow.push(item);

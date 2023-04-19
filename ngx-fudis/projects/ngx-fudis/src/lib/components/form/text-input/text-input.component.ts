@@ -1,6 +1,6 @@
 // eslint-disable-next-line max-classes-per-file
 import { Component, Input, ViewChild, ElementRef } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, ValidationErrors, Validators } from '@angular/forms';
 import { TFudisFormErrorMessages } from '../../../types/forms';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
@@ -81,6 +81,26 @@ export class TextInputComponent extends TooltipApiDirective {
 	@Input() maxNumber: number;
 
 	requiredValidator = Validators.required;
+
+	errorsOnFocus: ValidationErrors | null;
+
+	handleKeypress(): void {
+		const existingErrors = this.errorsOnFocus;
+
+		if (this.errorsOnFocus && existingErrors) {
+			Object.keys(this.errorsOnFocus).forEach((item) => {
+				if (!this.control.errors?.[item as keyof ValidationErrors]) {
+					delete existingErrors[item];
+				}
+			});
+		}
+
+		this.guidanceToUpdate.checkErrors(existingErrors);
+	}
+
+	handleFocus(): void {
+		this.errorsOnFocus = this.control.errors;
+	}
 
 	handleBlur(): void {
 		this.guidanceToUpdate.checkErrors();
