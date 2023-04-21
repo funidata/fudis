@@ -11,7 +11,7 @@ import { BodyTextComponent } from '../../typography/body-text/body-text.componen
 import { LegendComponent } from '../legend/legend.component';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 
-const getDefaultValue = (options: IFudisRadioButtonOption[]): string | undefined => {
+const getDefaultValue = (options: IFudisRadioButtonOption[]): string | boolean | undefined => {
 	const checkedValue = options.find((item) => item.checked);
 	return checkedValue?.value;
 };

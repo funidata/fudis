@@ -4,7 +4,7 @@ export interface IFudisRadioButtonOption {
 	/** Name for the group of radio buttons */
 	name: string;
 	/** Underlying value of the option */
-	value: string;
+	value: string | boolean;
 	/** Value that is shown in the UI */
 	viewValue: string;
 	/** Is option disabled in the dropdown */
