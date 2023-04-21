@@ -6,16 +6,16 @@ on:
       - main
 
 jobs:
-  # test:
-  #   name: Tests
-  #   uses: ./.github/workflows/test.yaml
+  test:
+    name: Tests
+    uses: ./.github/workflows/test.yaml
 
   publish:
     name: Publish ngx-fudis to NPM
     concurrency: npm-publish
     runs-on: ubuntu-22.04
-    # needs:
-    #   - test
+    needs:
+      - test
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
