@@ -1,22 +1,31 @@
 /* eslint-disable no-underscore-dangle */
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import {
+	MatDateFormats,
+	MAT_NATIVE_DATE_FORMATS,
+	MAT_DATE_FORMATS,
+	DateAdapter,
+	MAT_DATE_LOCALE,
+} from '@angular/material/core';
+
+import { DOCUMENT } from '@angular/common';
 import { TFudisFormErrorMessages, IFudisFormErrorSummaryItem } from '../../../types/forms';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
+import { DatepickerCustomDateAdapter } from './datepicker-custom-date-adapter';
 
-/**
- * See more display and parse format options from moment.js
- * https://momentjs.com/docs/#/displaying/format/
- * https://momentjs.com/docs/#/parsing/string-format/
- */
-export const FUDIS_DATE_FORMATS = {
+export const FUDIS_DATE_FORMATS: MatDateFormats = {
+	...MAT_NATIVE_DATE_FORMATS,
 	parse: {
 		dateInput: 'DD.MM.YYYY',
 	},
 	display: {
-		dateInput: 'DD.MM.YYYY',
-		monthYearLabel: 'MMM YYYY',
+		...MAT_NATIVE_DATE_FORMATS.display,
+		dateInput: {
+			dateInput: 'DD.MM.YYYY',
+			monthYearLabel: 'MMM YYYY',
+		} as Intl.DateTimeFormatOptions,
 	},
 };
 
@@ -24,8 +33,20 @@ export const FUDIS_DATE_FORMATS = {
 	selector: 'fudis-datepicker[id][label]',
 	templateUrl: './datepicker.component.html',
 	styleUrls: ['./datepicker.component.scss'],
+	providers: [
+		{
+			provide: DateAdapter,
+			useClass: DatepickerCustomDateAdapter,
+			deps: [MAT_DATE_LOCALE],
+		},
+		{ provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
+	],
 })
-export class DatepickerComponent extends TooltipApiDirective implements OnInit {
+export class DatepickerComponent extends TooltipApiDirective implements OnInit, DoCheck {
+	constructor(private readonly adapter: DateAdapter<Date>, @Inject(DOCUMENT) private document: Document) {
+		super();
+	}
+
 	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
 
 	/**
@@ -78,13 +99,28 @@ export class DatepickerComponent extends TooltipApiDirective implements OnInit {
 	 */
 	@Input() maxDate: Date;
 
+	@Input() locale: string = 'en-GB';
+
 	@Output() errorOutput: EventEmitter<IFudisFormErrorSummaryItem> = new EventEmitter<IFudisFormErrorSummaryItem>();
 
 	required: boolean = false;
 
+	currentHtmlLang: string;
+
 	ngOnInit(): void {
 		if (this.control.hasValidator(Validators.required)) {
 			this.required = true;
+		}
+
+		this.currentHtmlLang = this.document.documentElement.lang;
+		this.adapter.setLocale(this.updateLocale());
+		// this.adapter.setLocale('en-Gb');
+	}
+
+	ngDoCheck(): void {
+		if (this.document.documentElement.lang !== this.currentHtmlLang) {
+			this.adapter.setLocale(this.updateLocale());
+			this.currentHtmlLang = this.document.documentElement.lang;
 		}
 	}
 
@@ -94,5 +130,18 @@ export class DatepickerComponent extends TooltipApiDirective implements OnInit {
 
 	handleSelectionChange(): void {
 		this.guidanceToUpdate.checkErrors();
+	}
+
+	updateLocale(): string {
+		switch (this.document.documentElement.lang) {
+			case 'en':
+				return 'en-GB';
+			case 'fi':
+				return 'fi-FI';
+			case 'sv':
+				return 'sv-SE';
+			default:
+				return 'en-GB';
+		}
 	}
 }

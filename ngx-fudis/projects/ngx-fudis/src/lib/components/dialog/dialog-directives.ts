@@ -11,6 +11,12 @@ import {
 
 @Directive({
 	selector: '[fudisDialogTitle]',
+	providers: [
+		{
+			provide: MatDialogRef,
+			useValue: {},
+		},
+	],
 })
 export class DialogTitleDirective extends MatDialogTitle implements OnInit {
 	constructor(

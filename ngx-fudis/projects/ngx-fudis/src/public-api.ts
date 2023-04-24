@@ -22,6 +22,7 @@ export { DialogComponent } from './lib/components/dialog/dialog.component';
 export { DescriptionListComponent } from './lib/components/description-list/description-list.component';
 export { DialogService } from './lib/components/dialog/dialog.service';
 export { DropdownComponent } from './lib/components/form/dropdown/dropdown.component';
+export { ErrorMessageComponent } from './lib/components/form/error-message/error-message.component';
 // export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';
 export { ExpandableComponent } from './lib/components/expandable/expandable.component';
 export {
@@ -30,6 +31,7 @@ export {
 } from './lib/components/expandable/expandable-directives';
 export { GridComponent } from './lib/components/grid/grid.component';
 export { GridDirective } from './lib/directives/grid/grid.directive';
+export { GuidanceComponent } from './lib/components/form/guidance/guidance.component';
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
 export { IconComponent } from './lib/components/icon/icon.component';
 export { LegendComponent } from './lib/components/form/legend/legend.component';

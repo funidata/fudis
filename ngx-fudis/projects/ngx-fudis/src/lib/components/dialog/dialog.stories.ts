@@ -150,6 +150,7 @@ export default {
 	decorators: [
 		moduleMetadata({
 			imports: [ReactiveFormsModule, FormsModule],
+			providers: [DialogService],
 			declarations: [DialogExampleContentComponent],
 		}),
 	],
