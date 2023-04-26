@@ -7,7 +7,7 @@ import readme from './readme.mdx';
 import { TFudisFormErrorMessages } from '../../../types/forms';
 
 @Component({
-	selector: 'example-date-picker',
+	selector: 'example-date-range',
 	template: `
 		<form [formGroup]="mainFormGroup">
 			<fieldset
@@ -69,7 +69,7 @@ import { TFudisFormErrorMessages } from '../../../types/forms';
 		</form>
 	`,
 })
-class TwoDatePickersComponent implements AfterViewChecked {
+class DateRangeExampleComponent implements AfterViewChecked {
 	id = 'date-range-example';
 
 	minDate = new Date();
@@ -113,7 +113,7 @@ export default {
 	},
 	decorators: [
 		moduleMetadata({
-			declarations: [TwoDatePickersComponent],
+			declarations: [DateRangeExampleComponent],
 			imports: [ReactiveFormsModule, FormsModule],
 		}),
 		applicationConfig({
@@ -126,7 +126,9 @@ export default {
 // Not best way to change the HTML language. Cleaner Angular way implemented in Sandbox.
 
 const changeLanguage = () => {
-	if (document.documentElement.getAttribute('lang') === 'en') {
+	const currentLang = document.documentElement.getAttribute('lang');
+
+	if (currentLang === 'en') {
 		document.documentElement.setAttribute('lang', 'fi');
 	} else {
 		document.documentElement.setAttribute('lang', 'en');
@@ -156,7 +158,7 @@ const Template: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
 	</fudis-datepicker>
 	<fudis-body-text *ngIf=control.value>The date output is: {{ control.value }}</fudis-body-text>
 	<fudis-body-text *ngIf=control.value>The date output with Angular date pipe is: {{ control.value | date:'dd.MM.yyyy' }}</fudis-body-text>
-	<fudis-button [label]="'Change language of the date picker'" (handleClick)="changeLanguage()"></fudis-button>
+	<fudis-button style="margin-top: 1rem;" [variant]="'secondary'" *ngIf="!disabled" [label]="'Change calendar language'" (handleClick)="changeLanguage()"></fudis-button>
 	`,
 });
 
@@ -196,8 +198,8 @@ WithMinMaxValidator.args = {
 	maxDate: new Date(2023, 2, 26),
 };
 
-export const TwoDatePickers: StoryFn = () => ({
+export const DateRange: StoryFn = () => ({
 	template: `
-		<example-date-picker></example-date-picker>
+		<example-date-range></example-date-range>
 	`,
 });

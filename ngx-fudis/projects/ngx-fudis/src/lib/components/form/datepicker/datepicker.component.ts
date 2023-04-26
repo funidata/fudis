@@ -13,7 +13,7 @@ import { DOCUMENT } from '@angular/common';
 import { TFudisFormErrorMessages, IFudisFormErrorSummaryItem } from '../../../types/forms';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
-import { DatepickerCustomDateAdapter } from './datepicker-custom-date-adapter';
+import { DatepickerCustomDateAdapter, FudisDateInputFormat } from './datepicker-custom-date-adapter';
 
 export const FUDIS_DATE_FORMATS: MatDateFormats = {
 	...MAT_NATIVE_DATE_FORMATS,
@@ -22,10 +22,7 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
 	},
 	display: {
 		...MAT_NATIVE_DATE_FORMATS.display,
-		dateInput: {
-			dateInput: 'DD.MM.YYYY',
-			monthYearLabel: 'MMM YYYY',
-		} as Intl.DateTimeFormatOptions,
+		dateInput: FudisDateInputFormat as Intl.DateTimeFormatOptions,
 	},
 };
 
@@ -54,7 +51,7 @@ export class DatepickerComponent extends TooltipApiDirective implements OnInit, 
 	 */
 	@Input() control: FormControl;
 
-	/*
+	/**
 	 * Error message shown below the datepicker
 	 */
 	@Input() errorMsg: TFudisFormErrorMessages;
@@ -114,7 +111,6 @@ export class DatepickerComponent extends TooltipApiDirective implements OnInit, 
 
 		this.currentHtmlLang = this.document.documentElement.lang;
 		this.adapter.setLocale(this.updateLocale());
-		// this.adapter.setLocale('en-Gb');
 	}
 
 	ngDoCheck(): void {
