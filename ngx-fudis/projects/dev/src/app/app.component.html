@@ -47,6 +47,17 @@
 		<fudis-link data-theme="sisu" href="#" linkTitle="Link inside a heading"></fudis-link>
 	</fudis-heading>
 	<fudis-button [label]="'Open dialog'" (handleClick)="openDialog()"></fudis-button>
+
+	<fudis-grid [columns]="'1fr'">
+		<fudis-expandable>
+			<ng-template fudisExpandableActions>
+				<fudis-button />
+			</ng-template>
+			<ng-template fudisExpandableContent>
+				<fudis-notification [variant]="'warning'">Moimoimo</fudis-notification>
+			</ng-template>
+		</fudis-expandable>
+	</fudis-grid>
 </ng-container>
 
 <ng-template #exampleDialogTemplate>
