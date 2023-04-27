@@ -96,8 +96,6 @@ export class DatepickerComponent extends TooltipApiDirective implements OnInit, 
 	 */
 	@Input() maxDate: Date;
 
-	@Input() locale: string = 'en-GB';
-
 	@Output() errorOutput: EventEmitter<IFudisFormErrorSummaryItem> = new EventEmitter<IFudisFormErrorSummaryItem>();
 
 	required: boolean = false;

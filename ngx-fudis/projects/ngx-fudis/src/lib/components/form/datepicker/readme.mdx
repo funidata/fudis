@@ -27,9 +27,25 @@ Datepicker requires at least `label` and `id` properties for accessibility.
 
 If Datepicker is a **required** form field, provide `requiredText` string property, include `Validators.required` in the form control validators and include a `required` error message in the `errorMsg` property.
 
-### With minimum and maximum dates
+### Other validation options
 
-If you need minimum / maximum date selection range, add `min` and/or `max` properties to the component. Also provide `matDatepickerMin` and `matDatepickerMax` error messages for `errorMsg` property.
+If you need minimum / maximum date selection range, add `min` and/or `max` properties to the component.
+
+Also provide `matDatepickerMin` and `matDatepickerMax` error messages for `errorMsg` property.
+
+For unknown input format provide `matDatepickerParse` value for `errorMsg` property.
+
+```
+<fudis-datepicker
+	[min]="minDate"
+	[max]="maxDate"
+	[errorMsg]="{
+		matDatepickerMin: 'Date cannot be earlier than X.X.XXXX',
+		matDatepickerMax: 'Date cannot be later than X.X.XXX'}
+		matDatepickerParse: 'Your input is not a proper date. Please provide it in DD.MM.YYYY format.'"
+>
+</fudis-datepicker>
+```
 
 ## Error Handling
 
