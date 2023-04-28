@@ -8,9 +8,9 @@
 .fudis-notification {
 	@include borders.border-radius('2px');
 
+	box-sizing: border-box;
 	display: flex;
 	align-items: center;
-	margin: 0 spacing.$spacing-xxs;
 	padding: 0 spacing.$spacing-s 0 spacing.$spacing-xxs;
 	width: 100%;
 	min-height: spacing.$spacing-m;

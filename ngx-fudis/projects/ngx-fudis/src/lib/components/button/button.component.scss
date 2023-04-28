@@ -4,6 +4,10 @@
 @use '../../foundations/typography/mixins.scss' as typography;
 @use '../../foundations/spacing/tokens.scss' as spacing;
 
+.fudis-button-host {
+	display: block;
+}
+
 .fudis-button {
 	@include borders.border-radius('2px');
 	@include colors.bg-color('transparent');  
@@ -21,6 +25,8 @@
 	&:focus {
 		@include focus.focus-generic;
 	}
+
+	
 
 	&[aria-disabled="true"] {
 		@include colors.text-color('gray-dark');

@@ -7,8 +7,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
-import { MatNativeDateModule, DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
@@ -18,8 +17,8 @@ import { BadgeComponent } from './components/badge/badge.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/form/checkbox/checkbox.component';
-import { DatepickerComponent, FUDIS_DATE_FORMATS } from './components/form/datepicker/datepicker.component';
-import { DatepickerCustomDateAdapter } from './components/form/datepicker/datepicker-custom-date-adapter';
+import { DatepickerComponent } from './components/form/datepicker/datepicker.component';
+
 import { DatepickerCustomHeaderComponent } from './components/form/datepicker/datepicker-custom-header/datepicker-custom-header.component';
 import { DescriptionListComponent } from './components/description-list/description-list.component';
 import {
@@ -131,6 +130,7 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		DescriptionListComponent,
 		DialogComponent,
 		DropdownComponent,
+		ErrorMessageComponent,
 		// ErrorSummaryComponent,
 		ExpandableComponent,
 		ExpandableActionsDirective,
@@ -141,6 +141,7 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		DialogActionsDirective,
 		GridComponent,
 		GridDirective,
+		GuidanceComponent,
 		HeadingComponent,
 		IconComponent,
 		LegendComponent,
@@ -153,11 +154,6 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		// TextSpacingComponent,
 		TooltipDirective,
 	],
-	providers: [
-		DialogService,
-		{ provide: DateAdapter, useClass: DatepickerCustomDateAdapter, deps: [MAT_DATE_LOCALE] },
-		{ provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
-		{ provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { strict: true } },
-	],
+	providers: [DialogService],
 })
 export class NgxFudisModule {}

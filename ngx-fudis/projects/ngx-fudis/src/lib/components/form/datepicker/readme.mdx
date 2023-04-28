@@ -27,9 +27,25 @@ Datepicker requires at least `label` and `id` properties for accessibility.
 
 If Datepicker is a **required** form field, provide `requiredText` string property, include `Validators.required` in the form control validators and include a `required` error message in the `errorMsg` property.
 
-### With minimum and maximum dates
+### Other validation options
 
-If you need minimum / maximum date selection range, add `min` and/or `max` properties to the component. Also provide `matDatepickerMin` and `matDatepickerMax` error messages for `errorMsg` property.
+If you need minimum / maximum date selection range, add `min` and/or `max` properties to the component.
+
+Also provide `matDatepickerMin` and `matDatepickerMax` error messages for `errorMsg` property.
+
+For unknown input format provide `matDatepickerParse` value for `errorMsg` property.
+
+```
+<fudis-datepicker
+	[min]="minDate"
+	[max]="maxDate"
+	[errorMsg]="{
+		matDatepickerMin: 'Date cannot be earlier than X.X.XXXX',
+		matDatepickerMax: 'Date cannot be later than X.X.XXX'}
+		matDatepickerParse: 'Your input is not a proper date. Please provide it in DD.MM.YYYY format.'"
+>
+</fudis-datepicker>
+```
 
 ## Error Handling
 
@@ -41,7 +57,15 @@ If you need minimum / maximum date selection range, add `min` and/or `max` prope
 
 ## Localization
 
-Currently datepicker parses the display date to <code>DD.MM.YYYY</code> format and calendar's first day of the week is Monday by default.
+Currently datepicker parses the display date to Finnish format of <code>DD.MM.YYYY</code> and calendar's first day of the week is Monday by default.
+
+The language of the calendar listens to <code>lang</code> attribute value of <code>html</code> element. E. g. `<html lang="fi">`. This localizes date picker calendar to
+
+Current list of languages supported are:
+
+- English, `lang="en"` which translates to ISO language value of 'en-GB'
+- Finnish, `lang="fi"` which translates to ISO language value of 'fi-FI'
+- Swedish, `lang="sv"` which translates to ISO language value of 'sv-SE'
 
 ## Accessibility
 

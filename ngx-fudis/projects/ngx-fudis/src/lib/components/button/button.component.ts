@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostBinding, ViewEncapsulation } from '@angular/core';
 import { FudisIcon, FudisIconColor } from '../../types/icons';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 
@@ -6,8 +6,11 @@ import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.direct
 	selector: 'fudis-button',
 	templateUrl: './button.component.html',
 	styleUrls: ['./button.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class ButtonComponent extends TooltipApiDirective {
+	@HostBinding('class') classes = 'fudis-button-host';
+
 	/**
 	 * Button variant options
 	 */

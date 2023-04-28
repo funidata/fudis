@@ -1,9 +1,107 @@
-import { StoryFn, Meta, applicationConfig } from '@storybook/angular';
-import { FormControl, Validators } from '@angular/forms';
+import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { importProvidersFrom } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, importProvidersFrom } from '@angular/core';
 import { DatepickerComponent } from './datepicker.component';
 import readme from './readme.mdx';
+import { TFudisFormErrorMessages } from '../../../types/forms';
+
+@Component({
+	selector: 'example-date-range',
+	template: `
+		<form [formGroup]="mainFormGroup">
+			<fieldset
+				class="storybook-flex"
+				style="align-items: flex-start;"
+				[attr.id]="id"
+				[attr.aria-describedby]="id + '_guidance'">
+				<legend>Select a date range</legend>
+				<fudis-datepicker
+					style="margin-right: 1rem;"
+					[label]="'Select start date'"
+					[id]="'date-picker-1'"
+					[requiredText]="'Required'"
+					[helpText]="'You have to start from somewhere'"
+					[errorMsg]="validatorMessages"
+					[control]="mainFormGroup.controls['first']"
+					[minDate]="minDate"
+					[maxDate]="mainFormGroup.controls['second'].value ? mainFormGroup.controls['second'].value : maxDate">
+				</fudis-datepicker>
+				<fudis-datepicker
+					[label]="'Select end date'"
+					[id]="'date-picker-2'"
+					[requiredText]="'Required'"
+					[helpText]="'You have to end it to something'"
+					[errorMsg]="validatorMessagesSecond"
+					[control]="mainFormGroup.controls['second']"
+					[disabled]="!mainFormGroup.controls['first'].value && !mainFormGroup.controls['first'].valid"
+					[minDate]="mainFormGroup.controls['first'].value">
+				</fudis-datepicker>
+			</fieldset>
+			<fudis-guidance [helpText]="'Select both dates.'" [id]="id + '_guidance'">
+				<fudis-error-message
+					*ngIf="
+						mainFormGroup.controls['first']?.touched &&
+						mainFormGroup.controls['second'].touched &&
+						(mainFormGroup.controls['first']?.errors?.required || mainFormGroup.controls['second']?.errors?.required)
+					"
+					[id]="'error-on-missing-one'"
+					[message]="'Missing one or more values'"></fudis-error-message>
+			</fudis-guidance>
+
+			<div *ngIf="mainFormGroup.controls['first'].value">
+				<fudis-heading [tag]="'h3'" [size]="'m'">Values from first DatePicker</fudis-heading>
+
+				<fudis-body-text>The date output is: {{ mainFormGroup.controls['first'].value }}</fudis-body-text>
+				<fudis-body-text
+					>The date output with Angular date pipe is:
+					{{ mainFormGroup.controls['first'].value | date : 'dd.MM.yyyy' }}</fudis-body-text
+				>
+			</div>
+			<div *ngIf="mainFormGroup.controls['second'].value">
+				<fudis-heading [tag]="'h3'" [size]="'m'">Values from second DatePicker</fudis-heading>
+				<fudis-body-text>The date output is: {{ mainFormGroup.controls['second'].value }}</fudis-body-text>
+				<fudis-body-text
+					>The date output with Angular date pipe is:
+					{{ mainFormGroup.controls['second'].value | date : 'dd.MM.yyyy' }}</fudis-body-text
+				>
+			</div>
+		</form>
+	`,
+})
+class DateRangeExampleComponent implements AfterViewChecked {
+	id = 'date-range-example';
+
+	minDate = new Date();
+
+	minDateSecond = new Date();
+
+	disabled = true;
+
+	validatorMessages: TFudisFormErrorMessages = {
+		required: 'This is required field.',
+		matDatepickerMin: 'Start date has to be today or later.',
+		matDatepickerParse: 'Your date does is not a real date.',
+		matDatepickerMax: 'Starting date cannot be after ending date.',
+	};
+
+	validatorMessagesSecond: TFudisFormErrorMessages = {
+		required: 'This is required field.',
+		matDatepickerParse: 'Your date does is not a real date',
+		matDatepickerMin: 'Ending date cannot be earlier than starting date.',
+	};
+
+	mainFormGroup: FormGroup = this.formBuilder.group({
+		first: new FormControl('', [Validators.required]),
+		second: new FormControl('', Validators.required),
+	});
+
+	constructor(private formBuilder: FormBuilder, private readonly changeDetectorRef: ChangeDetectorRef) {}
+
+	ngAfterViewChecked(): void {
+		this.changeDetectorRef.detectChanges();
+	}
+}
 
 export default {
 	title: 'Components/Form/Datepicker',
@@ -14,6 +112,10 @@ export default {
 		},
 	},
 	decorators: [
+		moduleMetadata({
+			declarations: [DateRangeExampleComponent],
+			imports: [ReactiveFormsModule, FormsModule],
+		}),
 		applicationConfig({
 			providers: [importProvidersFrom(BrowserAnimationsModule)],
 		}),
@@ -21,8 +123,24 @@ export default {
 	argTypes: {},
 } as Meta;
 
+// Not best way to change the HTML language. Cleaner Angular way implemented in Sandbox.
+
+const changeLanguage = () => {
+	const currentLang = document.documentElement.getAttribute('lang');
+
+	if (currentLang === 'en') {
+		document.documentElement.setAttribute('lang', 'fi');
+	} else {
+		document.documentElement.setAttribute('lang', 'en');
+	}
+};
+
 const Template: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
-	props: args,
+	props: {
+		...args,
+		changeLanguage,
+	},
+
 	template: `
 	<fudis-datepicker 
 		[label]="label" 
@@ -40,6 +158,7 @@ const Template: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
 	</fudis-datepicker>
 	<fudis-body-text *ngIf=control.value>The date output is: {{ control.value }}</fudis-body-text>
 	<fudis-body-text *ngIf=control.value>The date output with Angular date pipe is: {{ control.value | date:'dd.MM.yyyy' }}</fudis-body-text>
+	<fudis-button style="margin-top: 1rem;" [variant]="'secondary'" *ngIf="!disabled" [label]="'Change calendar language'" (handleClick)="changeLanguage()"></fudis-button>
 	`,
 });
 
@@ -50,7 +169,7 @@ Datepicker.args = {
 	required: true,
 	requiredText: 'Required',
 	helpText: 'Choose your favourite date.',
-	errorMsg: { required: 'Date is required.' },
+	errorMsg: { required: 'Date is required.', matDatepickerParse: 'Your date does is not a real date.' },
 	tooltip: 'Is it your birthday?',
 	tooltipPosition: 'left',
 	tooltipToggle: true,
@@ -78,3 +197,9 @@ WithMinMaxValidator.args = {
 	minDate: new Date(2023, 2, 13),
 	maxDate: new Date(2023, 2, 26),
 };
+
+export const DateRange: StoryFn = () => ({
+	template: `
+		<example-date-range></example-date-range>
+	`,
+});
