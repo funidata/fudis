@@ -53,6 +53,7 @@ import { TextSpacingComponent } from './components/typography/text-spacing/text-
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { FormBaseDirective } from './directives/form/form-base.directive';
+import { FieldsetComponent } from './components/form/fieldset/fieldset.component';
 
 @NgModule({
 	/*
@@ -96,6 +97,7 @@ import { FormBaseDirective } from './directives/form/form-base.directive';
 		TextAreaComponent,
 		TooltipDirective,
 		FormBaseDirective,
+  FieldsetComponent,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
