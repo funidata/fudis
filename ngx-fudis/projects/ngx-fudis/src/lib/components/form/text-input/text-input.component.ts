@@ -1,19 +1,15 @@
 // eslint-disable-next-line max-classes-per-file
 import { Component, Input, ViewChild, ElementRef } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { TFudisFormErrorMessages } from '../../../types/forms';
-import { GuidanceComponent } from '../guidance/guidance.component';
-import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
+import { FormControl } from '@angular/forms';
+import { FormBaseDirective } from '../../../directives/form/form-base.directive';
 
 @Component({
 	selector: 'fudis-text-input[id][label]',
 	templateUrl: './text-input.component.html',
 	styleUrls: ['./text-input.component.scss'],
 })
-export class TextInputComponent extends TooltipApiDirective {
+export class TextInputComponent extends FormBaseDirective {
 	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;
-
-	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
 
 	/**
 	 * FormControl for the input
@@ -21,34 +17,9 @@ export class TextInputComponent extends TooltipApiDirective {
 	@Input() control: FormControl;
 
 	/**
-	 * Error message shown below the input
-	 */
-	@Input() errorMsg: TFudisFormErrorMessages;
-
-	/**
-	 * Input label
-	 */
-	@Input() label: string;
-
-	/**
-	 * Unique input id
-	 */
-	@Input() id: string;
-
-	/**
 	 * Available sizes for the input - defaults to large. Recommended size for number input is small.
 	 */
 	@Input() size?: 's' | 'm' | 'l' = 'l';
-
-	/**
-	 * Help text shown below the input
-	 */
-	@Input() helpText?: string;
-
-	/**
-	 * Text to indicate that input is required, shown above the input with asterisk
-	 */
-	@Input() requiredText: string;
 
 	/**
 	 * Type of the input - defaults to 'text'
@@ -79,10 +50,4 @@ export class TextInputComponent extends TooltipApiDirective {
 	 * Maximum number allowed by number input's maxNumber
 	 */
 	@Input() maxNumber: number;
-
-	requiredValidator = Validators.required;
-
-	handleBlur(): void {
-		this.guidanceToUpdate.checkErrors();
-	}
 }

@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { TFudisFormErrorMessages, IFudisDropdownOption } from '../../../types/forms';
-import { GuidanceComponent } from '../guidance/guidance.component';
-import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
+import { IFudisDropdownOption } from '../../../types/forms';
+import { FormBaseDirective } from '../../../directives/form/form-base.directive';
 
 @Component({
 	selector: 'fudis-dropdown[id][label]',
@@ -10,9 +9,7 @@ import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.dir
 	styleUrls: ['./dropdown.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class DropdownComponent extends TooltipApiDirective implements OnInit {
-	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
-
+export class DropdownComponent extends FormBaseDirective implements OnInit {
 	/**
 	 * Dropdown options
 	 */
@@ -23,40 +20,15 @@ export class DropdownComponent extends TooltipApiDirective implements OnInit {
 	 */
 	@Input() control: FormControl;
 
-	/*
-	 * Error message shown below the input
-	 */
-	@Input() errorMsg: TFudisFormErrorMessages;
-
 	/**
 	 * If true, user can choose multiple checkbox options from dropdown
 	 */
 	@Input() multipleOption = false;
 
 	/**
-	 * Label for the dropdown
-	 */
-	@Input() label: string;
-
-	/**
-	 * Unique dropdown id
-	 */
-	@Input() id: string;
-
-	/**
 	 * Custom placeholder text to show when no selection has been made
 	 */
 	@Input() placeholder: string;
-
-	/**
-	 * Help text, aligned underneath the dropdown
-	 */
-	@Input() helpText?: string;
-
-	/**
-	 * Text to indicate that input is required, shown above the input with asterisk
-	 */
-	@Input() requiredText: string;
 
 	/**
 	 * Available sizes for the dropdown - defaults to large.
@@ -69,13 +41,5 @@ export class DropdownComponent extends TooltipApiDirective implements OnInit {
 		if (this.control.hasValidator(Validators.required)) {
 			this.required = true;
 		}
-	}
-
-	handleBlur(): void {
-		this.guidanceToUpdate.checkErrors();
-	}
-
-	handleSelectionChange(): void {
-		this.guidanceToUpdate.checkErrors();
 	}
 }

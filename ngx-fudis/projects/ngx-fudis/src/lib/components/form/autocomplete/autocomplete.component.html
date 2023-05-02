@@ -16,7 +16,7 @@
 			[class.fudis-autocomplete__input--invalid]="control.invalid && control.touched"
 			[class.fudis-autocomplete__input--disabled]="disabled"
 			type="text"
-			(blur)="handleBlur()"
+			(blur)="updateErrors()"
 			[formControl]="control"
 			[matAutocomplete]="autocomplete"
 			[attr.aria-describedby]="id + '__guidance'"
