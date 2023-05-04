@@ -9,6 +9,7 @@
 		@include typography.text-field-label;
 		@include colorMixins.text-color('gray-dark');
 
+		/* stylelint-disable-next-line declaration-property-value-disallowed-list, property-disallowed-list */
 		border: none;
 
 		&__legend {
