@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { IFudisRadioButtonOption } from '../../../types/forms';
 
@@ -8,8 +8,11 @@ import { FieldsetBaseDirective } from '../../../directives/form/fieldset-base/fi
 	selector: 'fudis-radio-button-group[options][id][legend]',
 	templateUrl: './radio-button-group.component.html',
 	styleUrls: ['./radio-button-group.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class RadioButtonGroupComponent extends FieldsetBaseDirective implements OnInit {
+	@HostBinding('class') classes = 'fudis-radio-button-group-host';
+
 	/*
 	 * FormControl for Radio Button group
 	 */

@@ -19,6 +19,7 @@ const getDefaultValue = (options: IFudisRadioButtonOption[]): string | boolean |
 	template: `
 		<form [formGroup]="mainFormGroup">
 			<fudis-radio-button-group
+				style="margin-bottom: 1rem;"
 				[id]="'fruit-selection'"
 				[legend]="'Choose your preferred fruit'"
 				[helpText]="'Fruits are important for your health.'"
@@ -33,6 +34,7 @@ const getDefaultValue = (options: IFudisRadioButtonOption[]): string | boolean |
 				>No value chosen for the second :(</fudis-body-text
 			>
 			<fudis-radio-button-group
+				style="margin-top: 2rem;"
 				[id]="'pet-selection'"
 				[legend]="'Choose a pet'"
 				[helpText]="'We all should have a pet.'"
@@ -47,6 +49,7 @@ const getDefaultValue = (options: IFudisRadioButtonOption[]): string | boolean |
 				>Option chosen: {{ mainFormGroup.controls['second'].value }}</fudis-body-text
 			>
 			<fudis-radio-button-group
+				style="margin-top: 2rem; margin-bottom: 1rem;"
 				[id]="'boolean-selection'"
 				[legend]="'Choose a truth'"
 				[helpText]="'We all perceive truth individually.'"
