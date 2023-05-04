@@ -57,6 +57,7 @@
 }
 
 .fudis-autocomplete__option.mat-mdc-option .mdc-list-item__primary-text, .fudis-dropdown__option.mat-mdc-option .mdc-list-item__primary-text {
+  text-transform: initial;
   line-height: 1.125rem;
   font-family: "Fira Sans", sans-serif;
   font-size: 0.875rem;
