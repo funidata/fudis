@@ -34,7 +34,7 @@ const getDefaultValue = (options: IFudisRadioButtonOption[]): string | boolean |
 				>No value chosen for the second :(</fudis-body-text
 			>
 			<fudis-radio-button-group
-				style="margin-top: 2rem;"
+				style="margin-top: 2rem; margin-bottom: 1rem;"
 				[id]="'pet-selection'"
 				[legend]="'Choose a pet'"
 				[helpText]="'We all should have a pet.'"
