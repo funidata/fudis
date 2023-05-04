@@ -1,7 +1,6 @@
-import { Component, Output, EventEmitter, Input, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { TFudisFormErrorMessages, IFudisFormErrorSummaryItem } from '../../../types/forms';
-import { GuidanceComponent } from '../guidance/guidance.component';
+import { Component, Input, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { FormBaseDirective } from '../../../directives/form/form-base.directive';
 
 @Component({
 	selector: 'fudis-checkbox[id][label]',
@@ -9,10 +8,8 @@ import { GuidanceComponent } from '../guidance/guidance.component';
 	styleUrls: ['./checkbox.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class CheckboxComponent {
+export class CheckboxComponent extends FormBaseDirective {
 	@ViewChild('checkboxRef') input: ElementRef;
-
-	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
 
 	/*
 	 * FormControl for checkbox
@@ -20,52 +17,15 @@ export class CheckboxComponent {
 	@Input() control: FormControl;
 
 	/*
-	 * Id for checkbox
-	 */
-	@Input() id: string;
-
-	/*
-	 * FormControl for checkbox
-	 */
-	@Input() label: string;
-
-	/*
 	 * Name for checkbox
 	 */
 	@Input() name: string;
-
-	/*
-	 * FormControl for checkbox
-	 */
-	@Input() errorMessage: string;
-
-	/**
-	 * Error message shown below the input
-	 */
-	@Input() errorMsg: TFudisFormErrorMessages;
-
-	/**
-	 * Help text shown below the checkbox
-	 */
-	@Input() helpText?: string;
-
-	/**
-	 * TBD. Possibly used later for FudisErrorSummary
-	 */
-
-	@Output() errorOutput: EventEmitter<IFudisFormErrorSummaryItem> = new EventEmitter<IFudisFormErrorSummaryItem>();
 
 	showError: boolean = false;
 
 	isChecked: boolean;
 
-	requiredValidator = Validators.requiredTrue;
-
 	handleCheckboxClick(): void {
 		this.input.nativeElement.focus();
-	}
-
-	handleBlur(): void {
-		this.guidanceToUpdate.checkErrors();
 	}
 }

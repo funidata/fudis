@@ -3,8 +3,8 @@
 	<ul class="fudis-radio-button-group__reset-ul-style">
 		<li class="fudis-radio-button-group__option" *ngFor="let option of options; let index = index">
 			<fudis-radio-button
-				(radioButtonBlur)="handleBlur()"
-				(radioButtonChange)="handleChange()"
+				(radioButtonBlur)="updateErrors()"
+				(radioButtonChange)="updateErrors()"
 				[guidanceId]="id + '__guidance'"
 				[id]="option.id"
 				[name]="option.name"

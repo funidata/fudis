@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { Component, DoCheck, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, DoCheck, Inject, Input, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import {
 	MatDateFormats,
@@ -10,10 +10,9 @@ import {
 } from '@angular/material/core';
 
 import { DOCUMENT } from '@angular/common';
-import { TFudisFormErrorMessages, IFudisFormErrorSummaryItem } from '../../../types/forms';
-import { GuidanceComponent } from '../guidance/guidance.component';
-import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
+
 import { DatepickerCustomDateAdapter, FudisDateInputFormat } from './datepicker-custom-date-adapter';
+import { FormBaseDirective } from '../../../directives/form/form-base.directive';
 
 export const FUDIS_DATE_FORMATS: MatDateFormats = {
 	...MAT_NATIVE_DATE_FORMATS,
@@ -39,12 +38,10 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
 		{ provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
 	],
 })
-export class DatepickerComponent extends TooltipApiDirective implements OnInit, DoCheck {
+export class DatepickerComponent extends FormBaseDirective implements OnInit, DoCheck {
 	constructor(private readonly adapter: DateAdapter<Date>, @Inject(DOCUMENT) private document: Document) {
 		super();
 	}
-
-	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
 
 	/**
 	 * Datepicker FormControl
@@ -52,39 +49,9 @@ export class DatepickerComponent extends TooltipApiDirective implements OnInit, 
 	@Input() control: FormControl;
 
 	/**
-	 * Error message shown below the datepicker
-	 */
-	@Input() errorMsg: TFudisFormErrorMessages;
-
-	/**
-	 * Datepicker label
-	 */
-	@Input() label: string;
-
-	/**
-	 * Unique datepicker id
-	 */
-	@Input() id: string;
-
-	/**
 	 * Available sizes for the datepicker - defaults to medium.
 	 */
 	@Input() size?: 's' | 'm' | 'l' = 'm';
-
-	/**
-	 * Help text, aligned underneath the datepicker
-	 */
-	@Input() helpText?: string;
-
-	/**
-	 * Option for disabling the datepicker input and calendar dialog
-	 */
-	@Input() disabled: boolean = false;
-
-	/**
-	 * Text to indicate that date is required, shown above the datepicker input
-	 */
-	@Input() requiredText: string;
 
 	/**
 	 * Allowed range for minimun date
@@ -95,8 +62,6 @@ export class DatepickerComponent extends TooltipApiDirective implements OnInit, 
 	 * Allowed range for maximum date
 	 */
 	@Input() maxDate: Date;
-
-	@Output() errorOutput: EventEmitter<IFudisFormErrorSummaryItem> = new EventEmitter<IFudisFormErrorSummaryItem>();
 
 	required: boolean = false;
 
@@ -116,14 +81,6 @@ export class DatepickerComponent extends TooltipApiDirective implements OnInit, 
 			this.adapter.setLocale(this.updateLocale());
 			this.currentHtmlLang = this.document.documentElement.lang;
 		}
-	}
-
-	handleBlur(): void {
-		this.guidanceToUpdate.checkErrors();
-	}
-
-	handleSelectionChange(): void {
-		this.guidanceToUpdate.checkErrors();
 	}
 
 	updateLocale(): string {

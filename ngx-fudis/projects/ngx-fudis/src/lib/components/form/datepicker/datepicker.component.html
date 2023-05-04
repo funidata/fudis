@@ -9,8 +9,8 @@
 		[tooltipToggle]="tooltipToggle"></fudis-label>
 	<div class="fudis-datepicker__input-wrapper">
 		<input
-			(blur)="handleBlur()"
-			(dateChange)="handleSelectionChange()"
+			(blur)="updateErrors()"
+			(dateChange)="updateErrors()"
 			[id]="id"
 			[formControl]="control"
 			[matDatepicker]="picker"

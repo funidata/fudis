@@ -22,7 +22,6 @@ describe('CheckboxComponent', () => {
 		component = fixture.componentInstance;
 		component.id = 'checkbox-test-id';
 		component.control = uncheckedCheckbox;
-		component.errorMessage = 'Error message to appear!';
 		component.label = 'Please check me.';
 
 		fixture.detectChanges();

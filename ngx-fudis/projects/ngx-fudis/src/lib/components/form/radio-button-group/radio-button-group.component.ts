@@ -1,16 +1,14 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { IFudisRadioButtonOption, IFudisFormErrorSummaryItem, TFudisFormErrorMessages } from '../../../types/forms';
-import { GuidanceComponent } from '../guidance/guidance.component';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { IFudisRadioButtonOption } from '../../../types/forms';
+import { FormBaseDirective } from '../../../directives/form/form-base.directive';
 
 @Component({
 	selector: 'fudis-radio-button-group[options][id][legend]',
 	templateUrl: './radio-button-group.component.html',
 	styleUrls: ['./radio-button-group.component.scss'],
 })
-export class RadioButtonGroupComponent implements OnInit {
-	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
-
+export class RadioButtonGroupComponent extends FormBaseDirective implements OnInit {
 	/*
 	 * FormControl for Radio Button group
 	 */
@@ -21,34 +19,15 @@ export class RadioButtonGroupComponent implements OnInit {
 	 */
 	@Input() options: IFudisRadioButtonOption[];
 
-	/**
-	 * Error message shown below the input
-	 */
-	@Input() errorMsg: TFudisFormErrorMessages;
-
 	/*
 	 * Legend label for the group
 	 */
 	@Input() legend: string;
 
 	/*
-	 * Unique id of the form group, used for improved accessibility
-	 */
-	@Input() id: string;
-
-	/**
-	 * Help text shown below the radio button group
-	 */
-	@Input() helpText?: string;
-
-	/*
 	 * Message to show when FormControl is invalid, e. g. group is required and touched, but user has not made a selection
 	 */
 	@Input() errorMessage: string | undefined;
-
-	@Output() errorOutput: EventEmitter<IFudisFormErrorSummaryItem> = new EventEmitter<IFudisFormErrorSummaryItem>();
-
-	requiredValidator = Validators.required;
 
 	ngOnInit() {
 		if (this.options.length < 2) {
@@ -70,13 +49,5 @@ export class RadioButtonGroupComponent implements OnInit {
 				`From @Input array of options to fudis-radio-button-group value 'name' should be identical for all options.`
 			);
 		}
-	}
-
-	handleBlur(): void {
-		this.guidanceToUpdate.checkErrors();
-	}
-
-	handleChange(): void {
-		this.guidanceToUpdate.checkErrors();
 	}
 }

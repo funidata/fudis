@@ -7,8 +7,8 @@
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle"></fudis-label>
 	<mat-select
-		(blur)="handleBlur()"
-		(selectionChange)="handleSelectionChange()"
+		(blur)="updateErrors()"
+		(selectionChange)="updateErrors()"
 		[id]="id"
 		#fudisDropdown
 		disableOptionCentering

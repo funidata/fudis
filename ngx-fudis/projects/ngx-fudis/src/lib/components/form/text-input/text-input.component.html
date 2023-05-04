@@ -15,7 +15,7 @@
 		[attr.maxlength]="maxLength"
 		[attr.min]="minNumber"
 		[attr.max]="maxNumber"
-		(blur)="handleBlur()"
+		(blur)="updateErrors()"
 		[id]="id"
 		[type]="type"
 		[class.fudis-text-input__input--invalid]="control.invalid && control.touched"
