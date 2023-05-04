@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { MockComponent } from 'ng-mocks';
 import { FieldsetComponent } from './fieldset.component';
+import { GuidanceComponent } from '../guidance/guidance.component';
 
 describe('FieldsetComponent', () => {
 	let component: FieldsetComponent;
@@ -8,7 +10,7 @@ describe('FieldsetComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [FieldsetComponent],
+			declarations: [FieldsetComponent, MockComponent(GuidanceComponent)],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(FieldsetComponent);
