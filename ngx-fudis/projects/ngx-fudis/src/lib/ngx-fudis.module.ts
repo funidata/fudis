@@ -34,7 +34,7 @@ import { ErrorMessageComponent } from './components/form/error-message/error-mes
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
 import { ExpandableContentDirective, ExpandableActionsDirective } from './components/expandable/expandable-directives';
-
+import { FieldsetComponent } from './components/form/fieldset/fieldset.component';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { GridComponent } from './components/grid/grid.component';
 import { GridApiDirective } from './directives/grid/grid-api.directive';
@@ -42,7 +42,6 @@ import { GridDirective } from './directives/grid/grid.directive';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { IconComponent } from './components/icon/icon.component';
 import { LabelComponent } from './components/form/label/label.component';
-import { LegendComponent } from './components/form/legend/legend.component';
 import { LinkComponent } from './components/link/link.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
@@ -53,7 +52,6 @@ import { TextSpacingComponent } from './components/typography/text-spacing/text-
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { FormBaseDirective } from './directives/form/form-base.directive';
-import { FieldsetComponent } from './components/form/fieldset/fieldset.component';
 
 @NgModule({
 	/*
@@ -68,17 +66,19 @@ import { FieldsetComponent } from './components/form/fieldset/fieldset.component
 		DatepickerComponent,
 		DatepickerCustomHeaderComponent,
 		DescriptionListComponent,
+		DialogTitleDirective,
+		DialogComponent,
+		DialogActionsDirective,
+		DialogContentDirective,
+		DialogCloseDirective,
 		DropdownComponent,
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,
 		ExpandableActionsDirective,
 		ExpandableContentDirective,
-		DialogTitleDirective,
-		DialogComponent,
-		DialogActionsDirective,
-		DialogContentDirective,
-		DialogCloseDirective,
+		FieldsetComponent,
+		FormBaseDirective,
 		GridComponent,
 		GridApiDirective,
 		GridDirective,
@@ -86,7 +86,6 @@ import { FieldsetComponent } from './components/form/fieldset/fieldset.component
 		HeadingComponent,
 		IconComponent,
 		LabelComponent,
-		LegendComponent,
 		LinkComponent,
 		NotificationComponent,
 		RadioButtonComponent,
@@ -96,8 +95,6 @@ import { FieldsetComponent } from './components/form/fieldset/fieldset.component
 		TextSpacingComponent,
 		TextAreaComponent,
 		TooltipDirective,
-		FormBaseDirective,
-  FieldsetComponent,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
@@ -143,12 +140,12 @@ import { FieldsetComponent } from './components/form/fieldset/fieldset.component
 		DialogContentDirective,
 		DialogCloseDirective,
 		DialogActionsDirective,
+		FieldsetComponent,
 		GridComponent,
 		GridDirective,
 		GuidanceComponent,
 		HeadingComponent,
 		IconComponent,
-		LegendComponent,
 		LinkComponent,
 		NotificationComponent,
 		RadioButtonGroupComponent,

@@ -7,6 +7,7 @@
 // Body Text
 
 @mixin body-text-l-light {
+	text-transform: initial;
   line-height: tokens.$body-text-l-line-height;
   font-family: tokens.$font-family;
   font-size: tokens.$body-text-l-font-size;
@@ -14,6 +15,7 @@
 }
 
 @mixin body-text-l-regular {
+	text-transform: initial;
   line-height: tokens.$body-text-l-line-height;
   font-family: tokens.$font-family;
   font-size: tokens.$body-text-l-font-size;
@@ -21,6 +23,7 @@
 }
 
 @mixin body-text-m-light {
+	text-transform: initial;
   line-height: tokens.$body-text-m-line-height;
   font-family: tokens.$font-family;
   font-size: tokens.$body-text-m-font-size;
@@ -28,6 +31,7 @@
 }
 
 @mixin body-text-m-regular {
+	text-transform: initial;
   line-height: tokens.$body-text-m-line-height;
   font-family: tokens.$font-family;
   font-size: tokens.$body-text-m-font-size;
@@ -35,6 +39,7 @@
 }
 
 @mixin body-text-s-regular {
+	text-transform: initial;
   line-height: tokens.$body-text-s-line-height;
   font-family: tokens.$font-family;
   font-size: tokens.$body-text-s-font-size;
@@ -104,7 +109,7 @@
 // Text-input, text-area, dropdown, legend components
 
 @mixin text-field-label {
-  text-transform: tokens.$all-caps;
+  text-transform: uppercase;
 	line-height: tokens.$text-input-line-height;
   font-family: tokens.$font-family;
   font-size: tokens.$body-text-m-font-size;
@@ -121,7 +126,7 @@
 // Badge component
 
 @mixin badge-typography {
-	text-transform: tokens.$all-caps;
+	text-transform: uppercase;
 	line-height: tokens.$badge-line-height;
 	font-family: tokens.$font-family;
 	font-size: tokens.$body-text-s-font-size;
@@ -160,7 +165,7 @@
 @mixin button-typography {
 	@include letter-spacing("1px");
 
-	text-transform: tokens.$all-caps;
+	text-transform: uppercase;
 	line-height: tokens.$body-text-s-line-height;
 	font-family: tokens.$font-family, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: tokens.$body-text-m-font-size;
@@ -208,5 +213,5 @@
 
 @mixin text-link-inherit-typography {
 	font-family: tokens.$font-family;
-	font-size: tokens.$inherit;
+	font-size: inherit;
 }

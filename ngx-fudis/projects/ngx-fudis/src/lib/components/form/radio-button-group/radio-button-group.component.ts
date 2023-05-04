@@ -24,11 +24,6 @@ export class RadioButtonGroupComponent extends FormBaseDirective implements OnIn
 	 */
 	@Input() legend: string;
 
-	/*
-	 * Message to show when FormControl is invalid, e. g. group is required and touched, but user has not made a selection
-	 */
-	@Input() errorMessage: string | undefined;
-
 	ngOnInit() {
 		if (this.options.length < 2) {
 			throw new Error(

@@ -8,7 +8,6 @@ import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
-import { LegendComponent } from '../legend/legend.component';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 
 const getDefaultValue = (options: IFudisRadioButtonOption[]): string | boolean | undefined => {
@@ -41,11 +40,26 @@ const getDefaultValue = (options: IFudisRadioButtonOption[]): string | boolean |
 				*ngIf="mainFormGroup"
 				[control]="mainFormGroup.controls['second']"
 				[options]="petOptions"></fudis-radio-button-group>
+			<fudis-body-text *ngIf="!mainFormGroup.controls['second'].value"
+				>No value chosen for the second :(</fudis-body-text
+			>
 			<fudis-body-text *ngIf="mainFormGroup.controls['second'].value"
 				>Option chosen: {{ mainFormGroup.controls['second'].value }}</fudis-body-text
 			>
-			<fudis-body-text *ngIf="!mainFormGroup.controls['second'].value"
-				>No value chosen for the second :(</fudis-body-text
+			<fudis-radio-button-group
+				[id]="'boolean-selection'"
+				[legend]="'Choose a truth'"
+				[helpText]="'We all perceive truth individually.'"
+				[errorMsg]="{ required: 'You must choose a truth' }"
+				*ngIf="mainFormGroup"
+				[control]="mainFormGroup.controls['third']"
+				[options]="booleanOptions"></fudis-radio-button-group>
+			<fudis-body-text
+				*ngIf="mainFormGroup.controls['third'].value !== false && mainFormGroup.controls['third'].value !== true"
+				>No truth chosen. :(</fudis-body-text
+			>
+			<fudis-body-text *ngIf="mainFormGroup.controls['third'].value === false || mainFormGroup.controls['third'].value"
+				>Option chosen: {{ mainFormGroup.controls['third'].value }}</fudis-body-text
 			>
 		</form>
 	`,
@@ -66,9 +80,15 @@ class RadioButtonGroupExampleComponent {
 		{ value: 'capybara', viewValue: 'Capybara', id: 'pet-3', name: 'animal' },
 	];
 
+	booleanOptions: IFudisRadioButtonOption[] = [
+		{ value: false, viewValue: 'False', id: 'boolean-1', name: 'booleans' },
+		{ value: true, viewValue: 'True', id: 'boolean-2', name: 'booleans' },
+	];
+
 	mainFormGroup: FormGroup = this.formBuilder.group({
 		first: new FormControl(getDefaultValue(this.fruitOptions), Validators.required),
 		second: new FormControl(getDefaultValue(this.petOptions), Validators.required),
+		third: new FormControl(null, Validators.required),
 	});
 
 	constructor(private formBuilder: FormBuilder) {}
@@ -81,7 +101,6 @@ export default {
 		RadioButtonGroupComponent,
 		RadioButtonComponent,
 		BodyTextComponent,
-		LegendComponent,
 		ErrorMessageComponent,
 	},
 	decorators: [

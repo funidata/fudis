@@ -1,6 +1,5 @@
-<fieldset [attr.aria-labelledby]="id + '__legend'" [id]="id" class="fudis-form-element fudis-radio-button-group">
-	<fudis-legend [id]="id + '__legend'">{{ legend }}</fudis-legend>
-	<ul class="fudis-radio-button-group__reset-ul-style">
+<fudis-fieldset [legend]="legend" [id]="id" [helpText]="helpText" [errorMsg]="errorMsg">
+	<ul class="fudis-radio-button-group">
 		<li class="fudis-radio-button-group__option" *ngFor="let option of options; let index = index">
 			<fudis-radio-button
 				(radioButtonBlur)="updateErrors()"
@@ -15,6 +14,4 @@
 				[control]="control"></fudis-radio-button>
 		</li>
 	</ul>
-	<fudis-guidance [helpText]="helpText" [id]="id + '__guidance'" [errorMsg]="errorMsg" [control]="control">
-	</fudis-guidance>
-</fieldset>
+</fudis-fieldset>

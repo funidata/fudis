@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MockComponent } from 'ng-mocks';
-import { LegendComponent } from '../legend/legend.component';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
 import { IFudisRadioButtonOption } from '../../../types/forms';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
@@ -21,12 +20,7 @@ describe('RadioButtonGroupComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [
-				RadioButtonGroupComponent,
-				MockComponent(LegendComponent),
-				MockComponent(RadioButtonComponent),
-				MockComponent(GuidanceComponent),
-			],
+			declarations: [RadioButtonGroupComponent, MockComponent(RadioButtonComponent), MockComponent(GuidanceComponent)],
 			imports: [ReactiveFormsModule],
 		}).compileComponents();
 	});

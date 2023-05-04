@@ -1,0 +1,19 @@
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
+
+:host {
+	grid-column: 1/-1;
+
+	.fudis-fieldset {
+		@include typography.text-field-label;
+		@include colorMixins.text-color('gray-dark');
+
+		border: none;
+
+		&__legend {
+			margin-bottom: spacing.$spacing-xs;
+			padding: 0;
+		}
+	}
+}
