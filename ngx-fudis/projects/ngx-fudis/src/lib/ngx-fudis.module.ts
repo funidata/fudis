@@ -51,7 +51,8 @@ import { TextInputComponent } from './components/form/text-input/text-input.comp
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
-import { FormBaseDirective } from './directives/form/form-base.directive';
+import { InputBaseDirective } from './directives/form/input-base/input-base.directive';
+import { FieldsetBaseDirective } from './directives/form/fieldset-base/fieldset-base.directive';
 
 @NgModule({
 	/*
@@ -77,14 +78,15 @@ import { FormBaseDirective } from './directives/form/form-base.directive';
 		ExpandableComponent,
 		ExpandableActionsDirective,
 		ExpandableContentDirective,
+		FieldsetBaseDirective,
 		FieldsetComponent,
-		FormBaseDirective,
 		GridComponent,
 		GridApiDirective,
 		GridDirective,
 		GuidanceComponent,
 		HeadingComponent,
 		IconComponent,
+		InputBaseDirective,
 		LabelComponent,
 		LinkComponent,
 		NotificationComponent,

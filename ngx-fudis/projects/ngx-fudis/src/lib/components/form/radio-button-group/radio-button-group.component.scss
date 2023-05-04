@@ -8,8 +8,6 @@
 	padding: 0;
 
 	&__option {
-		list-style: none;
-
 		&:not(:last-of-type) {
 			margin-bottom: spacing.$spacing-s;
 		}

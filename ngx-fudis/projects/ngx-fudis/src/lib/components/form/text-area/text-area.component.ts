@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { FormBaseDirective } from '../../../directives/form/form-base.directive';
+import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
 @Component({
 	selector: 'fudis-text-area[id][label]',
 	templateUrl: './text-area.component.html',
 	styleUrls: ['./text-area.component.scss'],
 })
-export class TextAreaComponent extends FormBaseDirective {
+export class TextAreaComponent extends InputBaseDirective {
 	/**
 	 * Minimum length for text area, unset by default
 	 */

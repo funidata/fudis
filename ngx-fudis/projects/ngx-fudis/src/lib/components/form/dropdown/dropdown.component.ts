@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { IFudisDropdownOption } from '../../../types/forms';
-import { FormBaseDirective } from '../../../directives/form/form-base.directive';
+import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
 @Component({
 	selector: 'fudis-dropdown[id][label]',
@@ -9,7 +9,7 @@ import { FormBaseDirective } from '../../../directives/form/form-base.directive'
 	styleUrls: ['./dropdown.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class DropdownComponent extends FormBaseDirective implements OnInit {
+export class DropdownComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * Dropdown options
 	 */

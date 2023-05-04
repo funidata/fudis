@@ -1,22 +1,22 @@
 import { Directive, ViewChild, Input, EventEmitter, Output } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { GuidanceComponent } from '../../components/form/guidance/guidance.component';
-import { IFudisFormErrorSummaryItem, TFudisFormErrorMessages } from '../../types/forms';
-import { TooltipApiDirective } from '../tooltip/tooltip-api.directive';
+import { GuidanceComponent } from '../../../components/form/guidance/guidance.component';
+import { IFudisFormErrorSummaryItem, TFudisFormErrorMessages } from '../../../types/forms';
+import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 
 @Directive({
-	selector: '[fudisFormBase]',
+	selector: '[fudisInputBase]',
 })
-export class FormBaseDirective extends TooltipApiDirective {
+export class InputBaseDirective extends TooltipApiDirective {
 	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
 
 	/**
-	 * Label for autocomplete
+	 * Label for input
 	 */
 	@Input() label: string;
 
 	/**
-	 * Unique id for autocomplete
+	 * Unique id for input
 	 */
 	@Input() id: string;
 
@@ -31,7 +31,7 @@ export class FormBaseDirective extends TooltipApiDirective {
 	@Input() requiredText: string;
 
 	/**
-	 * Help text, aligned underneath the autocomplete input
+	 * Help text, aligned underneath the input
 	 */
 	@Input() helpText: string;
 
@@ -47,7 +47,7 @@ export class FormBaseDirective extends TooltipApiDirective {
 	@Output() errorOutput: EventEmitter<IFudisFormErrorSummaryItem> = new EventEmitter<IFudisFormErrorSummaryItem>();
 
 	/**
-	 * Check & update errors after user blurs focus from the autocomplete input
+	 * Check & update errors. Currently mostly binded to onBlur event.
 	 */
 	updateErrors(): void {
 		this.guidanceToUpdate.checkErrors();

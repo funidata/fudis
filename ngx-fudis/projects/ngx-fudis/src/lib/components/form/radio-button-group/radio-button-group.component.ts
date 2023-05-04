@@ -1,14 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { IFudisRadioButtonOption } from '../../../types/forms';
-import { FormBaseDirective } from '../../../directives/form/form-base.directive';
+
+import { FieldsetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 
 @Component({
 	selector: 'fudis-radio-button-group[options][id][legend]',
 	templateUrl: './radio-button-group.component.html',
 	styleUrls: ['./radio-button-group.component.scss'],
 })
-export class RadioButtonGroupComponent extends FormBaseDirective implements OnInit {
+export class RadioButtonGroupComponent extends FieldsetBaseDirective implements OnInit {
 	/*
 	 * FormControl for Radio Button group
 	 */
@@ -18,11 +19,6 @@ export class RadioButtonGroupComponent extends FormBaseDirective implements OnIn
 	 * Array of options for group of radio buttons
 	 */
 	@Input() options: IFudisRadioButtonOption[];
-
-	/*
-	 * Legend label for the group
-	 */
-	@Input() legend: string;
 
 	ngOnInit() {
 		if (this.options.length < 2) {
