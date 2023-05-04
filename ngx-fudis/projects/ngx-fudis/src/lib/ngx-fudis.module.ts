@@ -34,7 +34,7 @@ import { ErrorMessageComponent } from './components/form/error-message/error-mes
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
 import { ExpandableContentDirective, ExpandableActionsDirective } from './components/expandable/expandable-directives';
-
+import { FieldsetComponent } from './components/form/fieldset/fieldset.component';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { GridComponent } from './components/grid/grid.component';
 import { GridApiDirective } from './directives/grid/grid-api.directive';
@@ -42,7 +42,6 @@ import { GridDirective } from './directives/grid/grid.directive';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { IconComponent } from './components/icon/icon.component';
 import { LabelComponent } from './components/form/label/label.component';
-import { LegendComponent } from './components/form/legend/legend.component';
 import { LinkComponent } from './components/link/link.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
@@ -52,7 +51,8 @@ import { TextInputComponent } from './components/form/text-input/text-input.comp
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
-import { FormBaseDirective } from './directives/form/form-base.directive';
+import { InputBaseDirective } from './directives/form/input-base/input-base.directive';
+import { FieldsetBaseDirective } from './directives/form/fieldset-base/fieldset-base.directive';
 
 @NgModule({
 	/*
@@ -67,25 +67,27 @@ import { FormBaseDirective } from './directives/form/form-base.directive';
 		DatepickerComponent,
 		DatepickerCustomHeaderComponent,
 		DescriptionListComponent,
+		DialogTitleDirective,
+		DialogComponent,
+		DialogActionsDirective,
+		DialogContentDirective,
+		DialogCloseDirective,
 		DropdownComponent,
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,
 		ExpandableActionsDirective,
 		ExpandableContentDirective,
-		DialogTitleDirective,
-		DialogComponent,
-		DialogActionsDirective,
-		DialogContentDirective,
-		DialogCloseDirective,
+		FieldsetBaseDirective,
+		FieldsetComponent,
 		GridComponent,
 		GridApiDirective,
 		GridDirective,
 		GuidanceComponent,
 		HeadingComponent,
 		IconComponent,
+		InputBaseDirective,
 		LabelComponent,
-		LegendComponent,
 		LinkComponent,
 		NotificationComponent,
 		RadioButtonComponent,
@@ -95,7 +97,6 @@ import { FormBaseDirective } from './directives/form/form-base.directive';
 		TextSpacingComponent,
 		TextAreaComponent,
 		TooltipDirective,
-		FormBaseDirective,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
@@ -141,12 +142,12 @@ import { FormBaseDirective } from './directives/form/form-base.directive';
 		DialogContentDirective,
 		DialogCloseDirective,
 		DialogActionsDirective,
+		FieldsetComponent,
 		GridComponent,
 		GridDirective,
 		GuidanceComponent,
 		HeadingComponent,
 		IconComponent,
-		LegendComponent,
 		LinkComponent,
 		NotificationComponent,
 		RadioButtonGroupComponent,

@@ -7,7 +7,6 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 		<fudis-heading fudisDialogTitle tag="h2">Welcome to a Dialog!</fudis-heading>
 		<form>
 			<fudis-dialog-content>
-				<fudis-legend>This is an important form</fudis-legend>
 				<fudis-text-input
 					[id]="'example-input-power-animal'"
 					[label]="'What is your power animal?'"

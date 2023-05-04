@@ -1,6 +1,6 @@
 import { Component, Input, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FormBaseDirective } from '../../../directives/form/form-base.directive';
+import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
 @Component({
 	selector: 'fudis-checkbox[id][label]',
@@ -8,7 +8,7 @@ import { FormBaseDirective } from '../../../directives/form/form-base.directive'
 	styleUrls: ['./checkbox.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class CheckboxComponent extends FormBaseDirective {
+export class CheckboxComponent extends InputBaseDirective {
 	@ViewChild('checkboxRef') input: ElementRef;
 
 	/*

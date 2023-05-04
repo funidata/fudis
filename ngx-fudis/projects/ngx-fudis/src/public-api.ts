@@ -29,12 +29,12 @@ export {
 	ExpandableContentDirective,
 	ExpandableActionsDirective,
 } from './lib/components/expandable/expandable-directives';
+export { FieldsetComponent } from './lib/components/form/fieldset/fieldset.component';
 export { GridComponent } from './lib/components/grid/grid.component';
 export { GridDirective } from './lib/directives/grid/grid.directive';
 export { GuidanceComponent } from './lib/components/form/guidance/guidance.component';
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
 export { IconComponent } from './lib/components/icon/icon.component';
-export { LegendComponent } from './lib/components/form/legend/legend.component';
 export { LinkComponent } from './lib/components/link/link.component';
 export { NotificationComponent } from './lib/components/notification/notification.component';
 export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';

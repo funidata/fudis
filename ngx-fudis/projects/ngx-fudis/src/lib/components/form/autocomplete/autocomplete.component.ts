@@ -4,7 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IFudisAutocompleteOption } from '../../../types/forms';
-import { FormBaseDirective } from '../../../directives/form/form-base.directive';
+import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
 export type AutocompleteInputSize = 's' | 'm' | 'l';
 
@@ -13,7 +13,7 @@ export type AutocompleteInputSize = 's' | 'm' | 'l';
 	templateUrl: './autocomplete.component.html',
 	styleUrls: ['./autocomplete.component.scss'],
 })
-export class AutocompleteComponent extends FormBaseDirective implements OnInit {
+export class AutocompleteComponent extends InputBaseDirective implements OnInit {
 	@ViewChild('fudisAutocompleteInput') autocompleteInput: ElementRef;
 
 	/**

@@ -33,11 +33,6 @@ export class RadioButtonComponent {
 	@Input() name: string;
 
 	/*
-	 * If Radio Button is disabled
-	 */
-	@Input() disabled: boolean;
-
-	/*
 	 * If Radio Button group of same name selection is required
 	 */
 	@Input() required: boolean;

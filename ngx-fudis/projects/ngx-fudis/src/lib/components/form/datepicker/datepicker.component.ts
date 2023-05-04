@@ -12,7 +12,7 @@ import {
 import { DOCUMENT } from '@angular/common';
 
 import { DatepickerCustomDateAdapter, FudisDateInputFormat } from './datepicker-custom-date-adapter';
-import { FormBaseDirective } from '../../../directives/form/form-base.directive';
+import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
 export const FUDIS_DATE_FORMATS: MatDateFormats = {
 	...MAT_NATIVE_DATE_FORMATS,
@@ -38,7 +38,7 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
 		{ provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
 	],
 })
-export class DatepickerComponent extends FormBaseDirective implements OnInit, DoCheck {
+export class DatepickerComponent extends InputBaseDirective implements OnInit, DoCheck {
 	constructor(private readonly adapter: DateAdapter<Date>, @Inject(DOCUMENT) private document: Document) {
 		super();
 	}

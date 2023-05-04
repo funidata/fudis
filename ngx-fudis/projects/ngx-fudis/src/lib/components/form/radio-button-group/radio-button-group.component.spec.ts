@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MockComponent } from 'ng-mocks';
-import { LegendComponent } from '../legend/legend.component';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
 import { IFudisRadioButtonOption } from '../../../types/forms';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
+import { FieldsetComponent } from '../fieldset/fieldset.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 
 const testFormControl: FormControl = new FormControl('capybara');
@@ -23,8 +23,8 @@ describe('RadioButtonGroupComponent', () => {
 		await TestBed.configureTestingModule({
 			declarations: [
 				RadioButtonGroupComponent,
-				MockComponent(LegendComponent),
 				MockComponent(RadioButtonComponent),
+				MockComponent(FieldsetComponent),
 				MockComponent(GuidanceComponent),
 			],
 			imports: [ReactiveFormsModule],
