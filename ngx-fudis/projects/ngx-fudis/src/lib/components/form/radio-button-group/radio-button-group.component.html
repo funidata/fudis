@@ -1,18 +1,19 @@
 <fudis-fieldset [legend]="legend">
-	<div class="fudis-radio-button-group__option" *ngFor="let option of options; let index = index">
-		<fudis-radio-button
-			(radioButtonBlur)="updateErrors()"
-			(radioButtonChange)="updateErrors()"
-			[guidanceId]="id + '__guidance'"
-			[id]="option.id"
-			[name]="option.name"
-			[value]="option.value"
-			[viewValue]="option.viewValue"
-			[required]="control.hasValidator(requiredValidator)"
-			[checked]="control.value === option.value ? true : false"
-			[control]="control"></fudis-radio-button>
-	</div>
-
-	<fudis-guidance [helpText]="helpText" [id]="id + '__guidance'" [errorMsg]="errorMsg" [control]="control">
-	</fudis-guidance>
+	<ng-template fudisFieldsetContent>
+		<div class="fudis-radio-button-group__option" *ngFor="let option of options; let index = index">
+			<fudis-radio-button
+				(radioButtonBlur)="updateErrors()"
+				(radioButtonChange)="updateErrors()"
+				[guidanceId]="id + '__guidance'"
+				[id]="option.id"
+				[name]="option.name"
+				[value]="option.value"
+				[viewValue]="option.viewValue"
+				[required]="control.hasValidator(requiredValidator)"
+				[checked]="control.value === option.value ? true : false"
+				[control]="control"></fudis-radio-button>
+		</div>
+		<fudis-guidance [helpText]="helpText" [id]="id + '__guidance'" [errorMsg]="errorMsg" [control]="control">
+		</fudis-guidance>
+	</ng-template>
 </fudis-fieldset>

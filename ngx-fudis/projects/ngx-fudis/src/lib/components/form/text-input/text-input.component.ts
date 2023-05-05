@@ -1,14 +1,16 @@
 // eslint-disable-next-line max-classes-per-file
-import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
+import { LanguageSelectService } from '../fieldset/language-select.service';
+import { IFudisDropdownOption } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-text-input[id][label]',
 	templateUrl: './text-input.component.html',
 	styleUrls: ['./text-input.component.scss'],
 })
-export class TextInputComponent extends InputBaseDirective {
+export class TextInputComponent extends InputBaseDirective implements OnInit {
 	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;
 
 	/**
@@ -50,4 +52,27 @@ export class TextInputComponent extends InputBaseDirective {
 	 * Maximum number allowed by number input's maxNumber
 	 */
 	@Input() maxNumber: number;
+
+	selectedLanguage: IFudisDropdownOption | undefined | null;
+
+	constructor(public languageChangeService: LanguageSelectService) {
+		super();
+	}
+
+	ngOnInit(): void {
+		if (this.inputLanguage) {
+			// eslint-disable-next-line no-return-assign
+			this.languageChangeService.currentMessage.subscribe((language) => (this.selectedLanguage = language)); // <= Always get current value!
+		}
+	}
+
+	isVisible(): boolean {
+		if (
+			this.selectedLanguage?.value === this.inputLanguage ||
+			this.selectedLanguage?.viewValue === this.inputLanguage
+		) {
+			return true;
+		}
+		return false;
+	}
 }

@@ -19,5 +19,9 @@
 			margin-bottom: spacing.$spacing-xs;
 			padding: 0;
 		}
+
+		&__languages {
+			display: flex;
+		}
 	}
 }

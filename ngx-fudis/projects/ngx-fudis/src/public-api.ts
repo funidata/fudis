@@ -30,6 +30,11 @@ export {
 	ExpandableActionsDirective,
 } from './lib/components/expandable/expandable-directives';
 export { FieldsetComponent } from './lib/components/form/fieldset/fieldset.component';
+export {
+	FieldsetGuidanceDirective,
+	FieldsetContentDirective,
+} from './lib/components/form/fieldset/fieldset-directives';
+
 export { GridComponent } from './lib/components/grid/grid.component';
 export { GridDirective } from './lib/directives/grid/grid.directive';
 export { GuidanceComponent } from './lib/components/form/guidance/guidance.component';

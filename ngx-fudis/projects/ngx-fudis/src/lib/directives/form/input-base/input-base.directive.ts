@@ -8,7 +8,7 @@ import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 	selector: '[fudisInputBase]',
 })
 export class InputBaseDirective extends TooltipApiDirective {
-	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
+	@ViewChild(GuidanceComponent) guidanceToUpdate: GuidanceComponent;
 
 	/**
 	 * Label for input
@@ -39,6 +39,8 @@ export class InputBaseDirective extends TooltipApiDirective {
 	 * Error messages shown when form control validators are invalid
 	 */
 	@Input() errorMsg: TFudisFormErrorMessages;
+
+	@Input() inputLanguage: string | null | undefined;
 
 	/**
 	 * TBD. Possibly used later for FudisErrorSummary

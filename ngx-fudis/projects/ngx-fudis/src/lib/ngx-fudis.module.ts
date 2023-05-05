@@ -54,6 +54,10 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { InputBaseDirective } from './directives/form/input-base/input-base.directive';
 import { FieldsetBaseDirective } from './directives/form/fieldset-base/fieldset-base.directive';
 
+import { FieldsetGuidanceDirective, FieldsetContentDirective } from './components/form/fieldset/fieldset-directives';
+
+import { LanguageSelectService } from './components/form/fieldset/language-select.service';
+
 @NgModule({
 	/*
 	 * Include both internal and external Fudis components in 'declarations' array below.
@@ -80,6 +84,8 @@ import { FieldsetBaseDirective } from './directives/form/fieldset-base/fieldset-
 		ExpandableContentDirective,
 		FieldsetBaseDirective,
 		FieldsetComponent,
+		FieldsetGuidanceDirective,
+		FieldsetContentDirective,
 		GridComponent,
 		GridApiDirective,
 		GridDirective,
@@ -143,11 +149,14 @@ import { FieldsetBaseDirective } from './directives/form/fieldset-base/fieldset-
 		DialogCloseDirective,
 		DialogActionsDirective,
 		FieldsetComponent,
+		FieldsetGuidanceDirective,
+		FieldsetContentDirective,
 		GridComponent,
 		GridDirective,
 		GuidanceComponent,
 		HeadingComponent,
 		IconComponent,
+
 		LinkComponent,
 		NotificationComponent,
 		RadioButtonGroupComponent,
@@ -157,6 +166,6 @@ import { FieldsetBaseDirective } from './directives/form/fieldset-base/fieldset-
 		// TextSpacingComponent,
 		TooltipDirective,
 	],
-	providers: [DialogService],
+	providers: [DialogService, LanguageSelectService],
 })
 export class NgxFudisModule {}

@@ -19,6 +19,7 @@
 		floatPlaceholder="never"
 		[multiple]="multipleOption"
 		[formControl]="control"
+		(valueChange)="handleSelectionChange($event)"
 		[attr.required]="required"
 		[aria-labelledby]="'label_' + id"
 		[attr.aria-describedby]="id + '_guidance'">

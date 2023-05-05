@@ -7,7 +7,7 @@ import { TFudisFormErrorMessages, IFudisFormErrorSummaryItem } from '../../../ty
 	selector: '[fudisFieldsetBase]',
 })
 export class FieldsetBaseDirective {
-	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
+	@ViewChild(GuidanceComponent) guidanceToUpdate: GuidanceComponent;
 
 	/**
 	 * Legend for fieldset

@@ -16,6 +16,8 @@ export class GuidanceComponent {
 
 	@Input() maxLength: number | undefined;
 
+	@Input() ariaLive: 'off' | 'polite' | 'assertive' = 'off';
+
 	/**
 	 * Assistive text of max character count for screen readers
 	 */

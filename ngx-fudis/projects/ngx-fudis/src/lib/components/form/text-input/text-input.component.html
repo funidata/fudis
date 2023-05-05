@@ -1,4 +1,4 @@
-<div class="fudis-form-element fudis-text-input fudis-text-input__{{ size }}">
+<div *ngIf="isVisible()" class="fudis-form-element fudis-text-input fudis-text-input__{{ size }}">
 	<fudis-label
 		[for]="id"
 		[text]="label"

@@ -1,7 +1,7 @@
 <div class="fudis-guidance">
 	<div [id]="id">
 		<p *ngIf="helpText" class="fudis-guidance__help-text">{{ helpText }}</p>
-		<div aria-live="assertive">
+		<div [attr.ariaLive]="ariaLive">
 			<ng-container *ngFor="let error of errorMsg | keyvalue">
 				<fudis-error-message
 					[message]="error.value"
