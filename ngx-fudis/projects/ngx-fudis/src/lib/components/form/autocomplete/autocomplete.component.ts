@@ -54,8 +54,6 @@ export class AutocompleteComponent extends InputBaseDirective implements AfterCo
 	private _filter(viewValue: string): IFudisAutocompleteOption[] {
 		const filterValue = viewValue.toLowerCase();
 
-		console.log(this.control);
-
 		return this.options.filter((option) => option.viewValue.toLowerCase().includes(filterValue));
 	}
 

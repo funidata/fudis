@@ -1,4 +1,4 @@
-import { Component, ViewRef } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 

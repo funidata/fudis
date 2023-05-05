@@ -7,15 +7,17 @@
 			<div class="fudis-fieldset-with-language-options__inputs">
 				<ng-container *ngIf="formGroup.controls">
 					<ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
-						<ng-container *ngIf="control.key === dropdownControl.value.value">
-							<fudis-text-input
-								[errorMsg]="errorMsg"
-								[label]="inputLabel"
-								[id]="id + '_input_' + index"
-								[helpText]="inputHelpText"
-								[requiredText]="requiredText"
-								[control]="$any(formGroup).controls[control.key]"></fudis-text-input>
-						</ng-container>
+						<fudis-text-input
+							class="fudis-fieldset-with-language-options__inputs__item"
+							[class.fudis-fieldset-with-language-options__inputs__item--hidden]="
+								control.key !== dropdownControl.value.value
+							"
+							[errorMsg]="errorMsg"
+							[label]="inputLabel"
+							[id]="id + '_input_' + index"
+							[helpText]="inputHelpText"
+							[requiredText]="requiredText"
+							[control]="$any(formGroup).controls[control.key]"></fudis-text-input>
 					</ng-container>
 				</ng-container>
 			</div>

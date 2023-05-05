@@ -5,5 +5,11 @@
 
 	&__inputs {
 		margin-right: spacing.$spacing-xs;
+
+		&__item {
+			&--hidden {
+				display: none;
+			}
+		}
 	}
 }
