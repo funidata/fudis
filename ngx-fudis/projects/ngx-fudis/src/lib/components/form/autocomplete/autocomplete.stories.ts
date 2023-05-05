@@ -29,7 +29,6 @@ export const Autocomplete = Template.bind({});
 Autocomplete.args = {
 	id: 'example-id-for-autocomplete',
 	label: 'Choose one option',
-	required: true,
 	requiredText: 'Required',
 	clearFilterText: 'Clear filter',
 	helpText:

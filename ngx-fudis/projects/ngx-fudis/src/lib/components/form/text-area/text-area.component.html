@@ -3,7 +3,7 @@
 		[for]="id"
 		[id]="'label_' + id"
 		[text]="label"
-		[requiredText]="control.hasValidator(requiredValidator) && requiredText ? requiredText : null"
+		[requiredText]="isRequired() ? requiredText : null"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle">
@@ -17,7 +17,7 @@
 		[attr.aria-describedby]="id + '_guidance'"
 		[attr.minLength]="minLength"
 		[attr.maxLength]="maxLength"
-		[attr.required]="control.hasValidator(requiredValidator)">
+		[attr.required]="isRequired()">
 	</textarea>
 	<fudis-guidance
 		[maxLengthText]="maxLengthText"

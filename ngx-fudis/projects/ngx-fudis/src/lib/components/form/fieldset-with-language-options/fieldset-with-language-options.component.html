@@ -1,0 +1,30 @@
+<fudis-fieldset [legend]="legend" [id]="id">
+	<ng-template fudisFieldsetGuidance>
+		<fudis-guidance [helpText]="helpText" [id]="id + '__guidance'"></fudis-guidance>
+	</ng-template>
+	<ng-template fudisFieldsetContent>
+		<div class="fudis-fieldset-with-language-options">
+			<div class="fudis-fieldset-with-language-options__inputs">
+				<ng-container *ngIf="formGroup.controls">
+					<ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
+						<ng-container *ngIf="control.key === dropdownControl.value.value">
+							<fudis-text-input
+								[errorMsg]="errorMsg"
+								[label]="inputLabel"
+								[id]="id + '_input_' + index"
+								[helpText]="inputHelpText"
+								[requiredText]="requiredText"
+								[control]="$any(formGroup).controls[control.key]"></fudis-text-input>
+						</ng-container>
+					</ng-container>
+				</ng-container>
+			</div>
+			<fudis-dropdown
+				(selectionUpdate)="handleLanguageSelect($event)"
+				[control]="dropdownControl"
+				[label]="'Language'"
+				[id]="id + '_language-dropdown'"
+				[options]="options"></fudis-dropdown>
+		</div>
+	</ng-template>
+</fudis-fieldset>

@@ -56,7 +56,7 @@ import { FieldsetBaseDirective } from './directives/form/fieldset-base/fieldset-
 
 import { FieldsetGuidanceDirective, FieldsetContentDirective } from './components/form/fieldset/fieldset-directives';
 
-import { LanguageSelectService } from './components/form/fieldset/language-select.service';
+import { FieldsetWithLanguageOptionsComponent } from './components/form/fieldset-with-language-options/fieldset-with-language-options.component';
 
 @NgModule({
 	/*
@@ -86,6 +86,7 @@ import { LanguageSelectService } from './components/form/fieldset/language-selec
 		FieldsetComponent,
 		FieldsetGuidanceDirective,
 		FieldsetContentDirective,
+		FieldsetWithLanguageOptionsComponent,
 		GridComponent,
 		GridApiDirective,
 		GridDirective,
@@ -151,6 +152,7 @@ import { LanguageSelectService } from './components/form/fieldset/language-selec
 		FieldsetComponent,
 		FieldsetGuidanceDirective,
 		FieldsetContentDirective,
+		FieldsetWithLanguageOptionsComponent,
 		GridComponent,
 		GridDirective,
 		GuidanceComponent,
@@ -166,6 +168,6 @@ import { LanguageSelectService } from './components/form/fieldset/language-selec
 		// TextSpacingComponent,
 		TooltipDirective,
 	],
-	providers: [DialogService, LanguageSelectService],
+	providers: [DialogService],
 })
 export class NgxFudisModule {}

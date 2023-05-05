@@ -166,7 +166,6 @@ export const Datepicker = Template.bind({});
 Datepicker.args = {
 	id: 'example-id-for-datepicker-required-validation',
 	label: 'Select a date',
-	required: true,
 	requiredText: 'Required',
 	helpText: 'Choose your favourite date.',
 	errorMsg: { required: 'Date is required.', matDatepickerParse: 'Your date does is not a real date.' },

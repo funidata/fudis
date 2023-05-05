@@ -1,0 +1,9 @@
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+
+.fudis-fieldset-with-language-options {
+	display: flex;
+
+	&__inputs {
+		margin-right: spacing.$spacing-xs;
+	}
+}

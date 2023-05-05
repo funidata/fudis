@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
 
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
@@ -23,11 +22,6 @@ export class TextAreaComponent extends InputBaseDirective {
 	 * Assistive text of max character count for screen readers
 	 */
 	@Input() maxLengthText: string;
-
-	/**
-	 * FormControl for the text area
-	 */
-	@Input() control: FormControl;
 
 	/**
 	 * Fixed size options for text area

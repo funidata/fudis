@@ -5,23 +5,7 @@
 			<ng-container *ngTemplateOutlet="fieldsetGuidanceContent!.templateRef"></ng-container>
 		</ng-container>
 	</legend>
-	<ng-container *ngIf="fieldsetContent && (!languages || languages!.length === 0)">
+	<ng-container *ngIf="fieldsetContent">
 		<ng-container *ngTemplateOutlet="fieldsetContent!.templateRef"></ng-container>
-		ei oo kieliä
-	</ng-container>
-
-	<ng-container *ngIf="languages!.length > 0 && fieldsetContent && options">
-		<div class="fudis-fieldset__languages">
-			<div class="fudis-fieldset__languages__inputs">
-				<ng-container #contentChildren *ngTemplateOutlet="fieldsetContent!.templateRef"></ng-container>
-			</div>
-
-			<fudis-dropdown
-				(selectionUpdate)="handleLanguageSelect($event)"
-				[control]="dropdownControl"
-				[label]="'Language'"
-				[id]="'language-dropdown'"
-				[options]="options"></fudis-dropdown>
-		</div>
 	</ng-container>
 </fieldset>

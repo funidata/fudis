@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { AfterContentInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IFudisAutocompleteOption } from '../../../types/forms';
@@ -13,7 +12,7 @@ export type AutocompleteInputSize = 's' | 'm' | 'l';
 	templateUrl: './autocomplete.component.html',
 	styleUrls: ['./autocomplete.component.scss'],
 })
-export class AutocompleteComponent extends InputBaseDirective implements OnInit {
+export class AutocompleteComponent extends InputBaseDirective implements AfterContentInit {
 	@ViewChild('fudisAutocompleteInput') autocompleteInput: ElementRef;
 
 	/**
@@ -27,11 +26,6 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit 
 	filteredOptions: Observable<IFudisAutocompleteOption[]>;
 
 	/**
-	 * FormControl for autocomplete
-	 */
-	@Input() control: FormControl;
-
-	/**
 	 * Available sizes for the autocomplete - defaults to large.
 	 */
 	@Input() size: AutocompleteInputSize = 'l';
@@ -41,15 +35,7 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit 
 	 */
 	@Input() clearFilterText: string;
 
-	/**
-	 * If control has required validator, this is set to true
-	 */
-	required: boolean = false;
-
-	ngOnInit(): void {
-		if (this.control.hasValidator(Validators.required)) {
-			this.required = true;
-		}
+	ngAfterContentInit() {
 		this.filteredOptions = this.control.valueChanges.pipe(
 			map((value) => {
 				// Start filtering after three characters
@@ -67,6 +53,8 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit 
 	 */
 	private _filter(viewValue: string): IFudisAutocompleteOption[] {
 		const filterValue = viewValue.toLowerCase();
+
+		console.log(this.control);
 
 		return this.options.filter((option) => option.viewValue.toLowerCase().includes(filterValue));
 	}

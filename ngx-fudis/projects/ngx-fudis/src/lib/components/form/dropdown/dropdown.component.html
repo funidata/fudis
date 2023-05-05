@@ -2,7 +2,7 @@
 	<fudis-label
 		[text]="label"
 		[id]="'label_' + id"
-		[requiredText]="required && requiredText ? requiredText : null"
+		[requiredText]="isRequired() ? requiredText : null"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle"></fudis-label>
@@ -14,13 +14,13 @@
 		disableOptionCentering
 		panelClass="fudis-dropdown__option-list"
 		class="fudis-dropdown__select"
-		[class.fudis-dropdown--invalid]="control.touched && control.invalid"
+		[class.fudis-dropdown--invalid]="control?.touched && control?.invalid"
 		[placeholder]="placeholder"
 		floatPlaceholder="never"
 		[multiple]="multipleOption"
 		[formControl]="control"
 		(valueChange)="handleSelectionChange($event)"
-		[attr.required]="required"
+		[attr.required]="isRequired()"
 		[aria-labelledby]="'label_' + id"
 		[attr.aria-describedby]="id + '_guidance'">
 		<mat-option

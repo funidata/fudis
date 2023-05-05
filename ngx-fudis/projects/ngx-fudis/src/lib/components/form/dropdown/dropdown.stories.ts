@@ -53,7 +53,6 @@ export const SingleSelect = Template.bind({});
 SingleSelect.args = {
 	errorMsg: { required: "It is necessary to choose a pet. It's good for your health!" },
 	requiredText: 'Required',
-	required: true,
 	label: 'Select a pet',
 	placeholder: 'Choose a pet',
 	multipleOption: false,
@@ -79,7 +78,6 @@ MultiSelect.args = {
 	},
 	multipleOption: true,
 	requiredText: 'Required',
-	required: true,
 	label: 'Select from two to three pets',
 	placeholder: 'Choose a pet',
 	control: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(3)]),

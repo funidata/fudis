@@ -1,9 +1,9 @@
-<div *ngIf="isVisible()" class="fudis-form-element fudis-text-input fudis-text-input__{{ size }}">
+<div class="fudis-form-element fudis-text-input fudis-text-input__{{ size }}">
 	<fudis-label
 		[for]="id"
 		[text]="label"
 		[id]="'label_' + id"
-		[requiredText]="control.hasValidator(requiredValidator) && requiredText ? requiredText : null"
+		[requiredText]="isRequired() ? requiredText : null"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle">
@@ -21,7 +21,7 @@
 		[class.fudis-text-input__input--invalid]="control.invalid && control.touched"
 		class="fudis-text-input__input"
 		[attr.aria-describedby]="id + '_guidance'"
-		[attr.required]="control.hasValidator(requiredValidator)" />
+		[attr.required]="isRequired()" />
 	<fudis-guidance
 		[maxLengthText]="maxLengthText"
 		[maxLength]="maxLength"

@@ -1,5 +1,5 @@
-import { Directive, ViewChild, Input, EventEmitter, Output } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { Directive, ViewChild, Input, EventEmitter, Output, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { GuidanceComponent } from '../../../components/form/guidance/guidance.component';
 import { IFudisFormErrorSummaryItem, TFudisFormErrorMessages } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
@@ -7,8 +7,13 @@ import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 @Directive({
 	selector: '[fudisInputBase]',
 })
-export class InputBaseDirective extends TooltipApiDirective {
+export class InputBaseDirective extends TooltipApiDirective implements OnInit {
 	@ViewChild(GuidanceComponent) guidanceToUpdate: GuidanceComponent;
+
+	/**
+	 * FormControl for the input
+	 */
+	@Input() control: FormControl;
 
 	/**
 	 * Label for input
@@ -36,11 +41,15 @@ export class InputBaseDirective extends TooltipApiDirective {
 	@Input() helpText: string;
 
 	/**
+	 * If input is in invalid state, show provided error messages on component load without need for a blur event. Requires that input control has been touched.
+	 */
+
+	@Input() updateErrorsOnLoad: boolean = false;
+
+	/**
 	 * Error messages shown when form control validators are invalid
 	 */
 	@Input() errorMsg: TFudisFormErrorMessages;
-
-	@Input() inputLanguage: string | null | undefined;
 
 	/**
 	 * TBD. Possibly used later for FudisErrorSummary
@@ -55,5 +64,16 @@ export class InputBaseDirective extends TooltipApiDirective {
 		this.guidanceToUpdate.checkErrors();
 	}
 
-	requiredValidator = Validators.required;
+	ngOnInit(): void {
+		if (this.updateErrorsOnLoad) {
+			this.guidanceToUpdate.checkErrors();
+		}
+	}
+
+	isRequired(): boolean | null {
+		if (this.control?.hasValidator(Validators.required) && this.requiredText) {
+			return true;
+		}
+		return null;
+	}
 }
