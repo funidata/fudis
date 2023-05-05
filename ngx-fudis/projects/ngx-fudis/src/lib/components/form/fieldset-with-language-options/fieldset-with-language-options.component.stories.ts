@@ -3,9 +3,8 @@ import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/ang
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Component, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IFudisDropdownOption } from 'dist/ngx-fudis/lib/types/forms';
+import { IFudisDropdownOption, TFudisFormErrorMessages } from '../../../types/forms';
 import { FieldsetWithLanguageOptionsComponent } from './fieldset-with-language-options.component';
-import { TFudisFormErrorMessages } from '../../../types/forms';
 
 @Component({
 	selector: 'example-fieldset-with-language-options',
