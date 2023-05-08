@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AfterViewChecked, ChangeDetectorRef, Component, importProvidersFrom } from '@angular/core';
 import { DatepickerComponent } from './datepicker.component';
 import readme from './readme.mdx';
-import { TFudisFormErrorMessages } from '../../../types/forms';
+import { TFudisInputErrorMessages } from '../../../types/forms';
 
 @Component({
 	selector: 'example-date-range',
@@ -78,14 +78,14 @@ class DateRangeExampleComponent implements AfterViewChecked {
 
 	disabled = true;
 
-	validatorMessages: TFudisFormErrorMessages = {
+	validatorMessages: TFudisInputErrorMessages = {
 		required: 'This is required field.',
 		matDatepickerMin: 'Start date has to be today or later.',
 		matDatepickerParse: 'Your date does is not a real date.',
 		matDatepickerMax: 'Starting date cannot be after ending date.',
 	};
 
-	validatorMessagesSecond: TFudisFormErrorMessages = {
+	validatorMessagesSecond: TFudisInputErrorMessages = {
 		required: 'This is required field.',
 		matDatepickerParse: 'Your date does is not a real date',
 		matDatepickerMin: 'Ending date cannot be earlier than starting date.',

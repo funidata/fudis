@@ -1,8 +1,9 @@
-import { Component, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, HostBinding, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { IFudisRadioButtonOption } from '../../../types/forms';
+import { IFudisRadioButtonOption, TFudisInputErrorMessages } from '../../../types/forms';
 
 import { FieldsetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
+import { GuidanceComponent } from '../guidance/guidance.component';
 
 @Component({
 	selector: 'fudis-radio-button-group[options][id][legend]',
@@ -13,6 +14,8 @@ import { FieldsetBaseDirective } from '../../../directives/form/fieldset-base/fi
 export class RadioButtonGroupComponent extends FieldsetBaseDirective implements OnInit {
 	@HostBinding('class') classes = 'fudis-radio-button-group-host';
 
+	@ViewChild(GuidanceComponent) guidanceToUpdate: GuidanceComponent;
+
 	/*
 	 * FormControl for Radio Button group
 	 */
@@ -22,6 +25,11 @@ export class RadioButtonGroupComponent extends FieldsetBaseDirective implements 
 	 * Array of options for group of radio buttons
 	 */
 	@Input() options: IFudisRadioButtonOption[];
+
+	/**
+	 * Error messages shown when form control validators are invalid
+	 */
+	@Input() errorMsg: TFudisInputErrorMessages;
 
 	ngOnInit() {
 		if (this.options.length < 2) {
@@ -43,5 +51,12 @@ export class RadioButtonGroupComponent extends FieldsetBaseDirective implements 
 				`From @Input array of options to fudis-radio-button-group value 'name' should be identical for all options.`
 			);
 		}
+	}
+
+	/**
+	 * Check & update errors. Currently mostly binded to onBlur event.
+	 */
+	updateErrors(): void {
+		this.guidanceToUpdate.checkErrors();
 	}
 }

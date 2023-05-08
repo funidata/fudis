@@ -1,7 +1,7 @@
 import { Directive, ViewChild, Input, EventEmitter, Output, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { GuidanceComponent } from '../../../components/form/guidance/guidance.component';
-import { IFudisFormErrorSummaryItem, TFudisFormErrorMessages } from '../../../types/forms';
+import { IFudisFormErrorSummaryItem, TFudisInputErrorMessages } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 
 @Directive({
@@ -54,7 +54,7 @@ export class InputBaseDirective extends TooltipApiDirective implements OnInit {
 	/**
 	 * Error messages shown when form control validators are invalid
 	 */
-	@Input() errorMsg: TFudisFormErrorMessages;
+	@Input() errorMsg: TFudisInputErrorMessages;
 
 	/**
 	 * TBD. Possibly used later for FudisErrorSummary

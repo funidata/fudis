@@ -12,6 +12,5 @@ export class FieldsetGuidanceDirective {
 
 @Directive({ selector: '[fudisFieldsetContent]' })
 export class FieldsetContentDirective {
-	// constructor(public contentRef: ViewRef) {}
 	constructor(public templateRef: TemplateRef<unknown>) {}
 }

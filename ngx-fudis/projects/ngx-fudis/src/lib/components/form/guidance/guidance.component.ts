@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { TFudisFormErrorMessages, IFudisFormErrorSummaryItem } from '../../../types/forms';
+import { TFudisInputErrorMessages, IFudisFormErrorSummaryItem } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-guidance',
@@ -23,7 +23,7 @@ export class GuidanceComponent {
 	 */
 	@Input() maxLengthText: string;
 
-	@Input() errorMsg: TFudisFormErrorMessages;
+	@Input() errorMsg: TFudisInputErrorMessages;
 
 	@Output() errorOutput: EventEmitter<IFudisFormErrorSummaryItem> = new EventEmitter<IFudisFormErrorSummaryItem>();
 
@@ -37,7 +37,7 @@ export class GuidanceComponent {
 			this.errorsVisible = true;
 
 			Object.keys(this.control.errors).forEach((item) => {
-				const message = this.errorMsg[item as keyof TFudisFormErrorMessages];
+				const message = this.errorMsg[item as keyof TFudisInputErrorMessages];
 				if (message) {
 					this.errorsToShow.push(item);
 					this.getErrorOutput(this.id, message);
