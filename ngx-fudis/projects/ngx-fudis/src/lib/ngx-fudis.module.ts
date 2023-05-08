@@ -56,7 +56,7 @@ import { FieldsetBaseDirective } from './directives/form/fieldset-base/fieldset-
 
 import { FieldsetGuidanceDirective, FieldsetContentDirective } from './components/form/fieldset/fieldset-directives';
 
-import { FieldsetWithLanguageOptionsComponent } from './components/form/fieldset-with-language-options/fieldset-with-language-options.component';
+import { InputWithLanguageOptionsComponent } from './components/form/input-with-language-options/input-with-language-options.component';
 
 @NgModule({
 	/*
@@ -86,7 +86,7 @@ import { FieldsetWithLanguageOptionsComponent } from './components/form/fieldset
 		FieldsetComponent,
 		FieldsetGuidanceDirective,
 		FieldsetContentDirective,
-		FieldsetWithLanguageOptionsComponent,
+		InputWithLanguageOptionsComponent,
 		GridComponent,
 		GridApiDirective,
 		GridDirective,
@@ -152,7 +152,7 @@ import { FieldsetWithLanguageOptionsComponent } from './components/form/fieldset
 		FieldsetComponent,
 		FieldsetGuidanceDirective,
 		FieldsetContentDirective,
-		FieldsetWithLanguageOptionsComponent,
+		InputWithLanguageOptionsComponent,
 		GridComponent,
 		GridDirective,
 		GuidanceComponent,

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MockComponent } from 'ng-mocks';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { FieldsetWithLanguageOptionsComponent } from './fieldset-with-language-options.component';
+import { InputWithLanguageOptionsComponent } from './input-with-language-options.component';
 import { FieldsetComponent } from '../fieldset/fieldset.component';
 import { IFudisDropdownOption } from '../../../types/forms';
 
@@ -18,16 +18,16 @@ const languageOptions: IFudisDropdownOption[] = [
 	{ value: 'english', viewValue: 'En' },
 ];
 
-describe('FieldsetWithLanguageOptionsComponent', () => {
-	let component: FieldsetWithLanguageOptionsComponent;
-	let fixture: ComponentFixture<FieldsetWithLanguageOptionsComponent>;
+describe('InputWithLanguageOptionsComponent', () => {
+	let component: InputWithLanguageOptionsComponent;
+	let fixture: ComponentFixture<InputWithLanguageOptionsComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [FieldsetWithLanguageOptionsComponent, MockComponent(FieldsetComponent)],
+			declarations: [InputWithLanguageOptionsComponent, MockComponent(FieldsetComponent)],
 		}).compileComponents();
 
-		fixture = TestBed.createComponent(FieldsetWithLanguageOptionsComponent);
+		fixture = TestBed.createComponent(InputWithLanguageOptionsComponent);
 		component = fixture.componentInstance;
 		component.legend = 'Legend for testing purposes';
 		component.formGroup = testFormGroup;

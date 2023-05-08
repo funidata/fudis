@@ -16,6 +16,7 @@
 		padding: 0;
 
 		&__legend {
+			grid-column: 1/-1;
 			margin-bottom: spacing.$spacing-xs;
 			padding: 0;
 		}

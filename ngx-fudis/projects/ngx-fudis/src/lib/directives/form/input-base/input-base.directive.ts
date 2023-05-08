@@ -21,6 +21,11 @@ export class InputBaseDirective extends TooltipApiDirective implements OnInit {
 	@Input() label: string;
 
 	/**
+	 * For screen reader users for providing additional information. Used in e. g. input with language options for providing info about currently selected language.
+	 */
+	@Input() ariaLabel: string;
+
+	/**
 	 * Unique id for input
 	 */
 	@Input() id: string;
