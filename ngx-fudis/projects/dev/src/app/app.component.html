@@ -1,14 +1,18 @@
 <ng-container *transloco="let t">
 	<fudis-button (handleClick)="changeLanguage()" [label]="t('change_language')"></fudis-button>
-	<fudis-text-input
-		[label]="t('label')"
-		[id]="'uniikki-idjoo'"
-		[helpText]="t('helpText')"
-		[errorMsg]="{ required: t('error_required') }"
-		[requiredText]="t('required')"
-		[control]="textInputControl"></fudis-text-input>
-	<fudis-heading tag="h1" size="xl">Welcome to Fudis sandbox </fudis-heading>
+	<fudis-fieldset [legend]="'Fieldset alkaa tästä'">
+		<ng-template fudisFieldsetContent>
+			<fudis-text-input
+				[label]="t('label')"
+				[id]="'uniikki-idjoo'"
+				[helpText]="t('helpText')"
+				[errorMsg]="{ required: t('error_required') }"
+				[requiredText]="t('required')"
+				[control]="textInputControl"></fudis-text-input>
+		</ng-template>
+	</fudis-fieldset>
 
+	<fudis-heading tag="h1" size="xl">Welcome to Fudis sandbox </fudis-heading>
 	<form class="basic-flex-box">
 		<fudis-datepicker
 			[control]="datePickerControl"
@@ -48,16 +52,12 @@
 	</fudis-heading>
 	<fudis-button [label]="'Open dialog'" (handleClick)="openDialog()"></fudis-button>
 
-	<fudis-grid [columns]="'1fr'">
-		<fudis-expandable>
-			<ng-template fudisExpandableActions>
-				<fudis-button />
-			</ng-template>
-			<ng-template fudisExpandableContent>
-				<fudis-notification [variant]="'warning'">Moimoimo</fudis-notification>
-			</ng-template>
-		</fudis-expandable>
+	<fudis-grid [columns]="'1fr 1fr'">
+		<fudis-heading [tag]="'h3'" [size]="'xl'">Väliotsikko</fudis-heading>
+		<div>jotain grid kamaa</div>
+		<div>jotain grid kamaa</div>
 	</fudis-grid>
+	<fudis-description-list [data]="testData"></fudis-description-list>
 </ng-container>
 
 <ng-template #exampleDialogTemplate>

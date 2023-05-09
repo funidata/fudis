@@ -4,7 +4,7 @@
 			<fudis-radio-button
 				(radioButtonBlur)="updateErrors()"
 				(radioButtonChange)="updateErrors()"
-				[guidanceId]="id + '__guidance'"
+				[guidanceId]="id + '_guidance'"
 				[id]="option.id"
 				[name]="option.name"
 				[value]="option.value"
@@ -13,7 +13,6 @@
 				[checked]="control.value === option.value ? true : false"
 				[control]="control"></fudis-radio-button>
 		</div>
-		<fudis-guidance [helpText]="helpText" [id]="id + '__guidance'" [errorMsg]="errorMsg" [control]="control">
-		</fudis-guidance>
+		<fudis-guidance [helpText]="helpText" [inputId]="id" [errorMsg]="errorMsg" [control]="control"> </fudis-guidance>
 	</ng-template>
 </fudis-fieldset>

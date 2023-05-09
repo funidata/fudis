@@ -2,23 +2,19 @@
 @use '../../../foundations/typography/mixins.scss' as typography;
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
 
-:host {
-	grid-column: 1/-1;
+.fudis-fieldset {
+	@include typography.text-field-label;
+	@include colorMixins.text-color('gray-dark');
 
-	.fudis-fieldset {
-		@include typography.text-field-label;
-		@include colorMixins.text-color('gray-dark');
+	margin: 0;
+	
+	/* stylelint-disable-next-line declaration-property-value-disallowed-list, property-disallowed-list */
+	border: none;
+	padding: 0;
 
-		margin: 0;
-		
-		/* stylelint-disable-next-line declaration-property-value-disallowed-list, property-disallowed-list */
-		border: none;
+	&__legend {
+		grid-column: 1/-1;
+		margin-bottom: spacing.$spacing-xs;
 		padding: 0;
-
-		&__legend {
-			grid-column: 1/-1;
-			margin-bottom: spacing.$spacing-xs;
-			padding: 0;
-		}
 	}
 }

@@ -23,7 +23,9 @@ export { DescriptionListComponent } from './lib/components/description-list/desc
 export { DialogService } from './lib/components/dialog/dialog.service';
 export { DropdownComponent } from './lib/components/form/dropdown/dropdown.component';
 export { ErrorMessageComponent } from './lib/components/form/error-message/error-message.component';
-// export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';
+
+export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';
+export { ErrorSummaryService } from './lib/components/form/error-summary/error-summary.service';
 export { ExpandableComponent } from './lib/components/expandable/expandable.component';
 export {
 	ExpandableContentDirective,

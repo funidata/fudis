@@ -41,7 +41,7 @@ export interface IFudisDropdownOption {
 
 export interface IFudisFormErrorSummaryItem {
 	id: string;
-	message: string;
+	errors: string[];
 }
 
 export interface IFudisAutocompleteOption {

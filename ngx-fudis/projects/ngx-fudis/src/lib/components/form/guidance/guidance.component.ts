@@ -1,14 +1,15 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TFudisInputErrorMessages, IFudisFormErrorSummaryItem } from '../../../types/forms';
+import { ErrorSummaryService } from '../error-summary/error-summary.service';
 
 @Component({
 	selector: 'fudis-guidance',
 	templateUrl: './guidance.component.html',
 	styleUrls: ['./guidance.component.scss'],
 })
-export class GuidanceComponent {
-	@Input() id: string;
+export class GuidanceComponent implements AfterViewInit {
+	@Input() inputId: string;
 
 	@Input() control: FormControl;
 
@@ -31,21 +32,32 @@ export class GuidanceComponent {
 
 	errorsToShow: string[] = [];
 
+	constructor(private errorSummaryService: ErrorSummaryService) {}
+
+	ngAfterViewInit(): void {
+		this.errorSummaryService.reloadWatcher().subscribe(() => {
+			this.checkErrors();
+		});
+	}
+
 	checkErrors(): void {
 		this.errorsToShow = [];
+		const errorSummaryMessages: string[] = [];
 		if (this.control.touched && this.control.errors) {
 			this.errorsVisible = true;
 
 			Object.keys(this.control.errors).forEach((item) => {
 				const message = this.errorMsg[item as keyof TFudisInputErrorMessages];
 				if (message) {
+					errorSummaryMessages.push(message);
 					this.errorsToShow.push(item);
-					this.getErrorOutput(this.id, message);
 				}
 			});
 		} else {
 			this.errorsVisible = false;
 		}
+
+		this.getErrorOutput({ id: this.inputId, errors: errorSummaryMessages });
 	}
 
 	alertMaxLength(): boolean {
@@ -60,7 +72,8 @@ export class GuidanceComponent {
 		return false;
 	}
 
-	getErrorOutput(id: string, error: string) {
-		this.errorOutput.emit({ id, message: error });
+	getErrorOutput(error: IFudisFormErrorSummaryItem) {
+		// this.errorOutput.emit({ id, message: error });
+		this.errorSummaryService.updateErrorList(error);
 	}
 }

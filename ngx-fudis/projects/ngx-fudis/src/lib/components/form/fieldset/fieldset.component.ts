@@ -1,4 +1,4 @@
-import { Component, ContentChild } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, ElementRef } from '@angular/core';
 
 import { FieldsetContentDirective, FieldsetGuidanceDirective } from './fieldset-directives';
 import { FieldsetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
@@ -8,8 +8,18 @@ import { FieldsetBaseDirective } from '../../../directives/form/fieldset-base/fi
 	templateUrl: './fieldset.component.html',
 	styleUrls: ['./fieldset.component.scss'],
 })
-export class FieldsetComponent extends FieldsetBaseDirective {
+export class FieldsetComponent extends FieldsetBaseDirective implements AfterContentInit {
 	@ContentChild(FieldsetGuidanceDirective) fieldsetGuidanceContent: FieldsetGuidanceDirective;
 
 	@ContentChild(FieldsetContentDirective) fieldsetContent: FieldsetContentDirective;
+
+	constructor(private elementRef: ElementRef) {
+		super();
+	}
+
+	fieldsetElement: HTMLFieldSetElement | undefined;
+
+	ngAfterContentInit(): void {
+		this.fieldsetElement = this.elementRef.nativeElement as HTMLFieldSetElement;
+	}
 }

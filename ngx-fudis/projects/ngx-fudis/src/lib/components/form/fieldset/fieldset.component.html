@@ -4,6 +4,9 @@
 		<ng-container *ngIf="fieldsetGuidanceContent">
 			<ng-container *ngTemplateOutlet="fieldsetGuidanceContent!.templateRef"></ng-container>
 		</ng-container>
+		<ng-container *ngIf="fieldsetElement !== undefined">
+			<fudis-error-summary [parentComponent]="fieldsetElement"></fudis-error-summary>
+		</ng-container>
 	</legend>
 	<ng-container *ngIf="fieldsetContent">
 		<ng-container *ngTemplateOutlet="fieldsetContent!.templateRef"></ng-container>

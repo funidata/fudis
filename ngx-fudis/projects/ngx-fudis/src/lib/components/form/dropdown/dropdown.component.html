@@ -14,7 +14,7 @@
 		disableOptionCentering
 		panelClass="fudis-dropdown__option-list"
 		class="fudis-dropdown__select"
-		[class.fudis-dropdown--invalid]="control?.touched && control?.invalid"
+		[class.fudis-dropdown--invalid]="control.touched && control.invalid"
 		[placeholder]="placeholder"
 		floatPlaceholder="never"
 		[multiple]="multipleOption"
@@ -31,6 +31,5 @@
 			{{ option.viewValue }}
 		</mat-option>
 	</mat-select>
-	<fudis-guidance [helpText]="helpText" [id]="id + '_guidance'" [errorMsg]="errorMsg" [control]="control">
-	</fudis-guidance>
+	<fudis-guidance [helpText]="helpText" [inputId]="id" [errorMsg]="errorMsg" [control]="control"> </fudis-guidance>
 </div>

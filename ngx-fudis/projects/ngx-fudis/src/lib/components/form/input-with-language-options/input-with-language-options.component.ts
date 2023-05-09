@@ -21,6 +21,11 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	@Input() groupErrorMsg: TFudisFieldsetErrorMessages;
 
+	/**
+	 * Type of the input - defaults to 'text'
+	 */
+	@Input() type: 'email' | 'number' | 'password' | 'tel' | 'text' | 'url' = 'text';
+
 	override ngOnInit(): void {
 		this.dropdownControl = new FormControl(this.options[0]);
 	}

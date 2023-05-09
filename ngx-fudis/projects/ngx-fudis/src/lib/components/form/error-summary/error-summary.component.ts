@@ -1,47 +1,34 @@
-import { Component, QueryList, ContentChildren, AfterContentInit } from '@angular/core';
-import { GuidanceComponent } from '../guidance/guidance.component';
-import { TextInputComponent } from '../text-input/text-input.component';
-
-type ErrorSummary = {
-	id: string;
-	messages: Array<string>;
-};
+import { Component, Input, OnInit } from '@angular/core';
+import { ErrorSummaryService } from './error-summary.service';
+import { IFudisFormErrorSummaryItem } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-error-summary',
 	templateUrl: './error-summary.component.html',
 	styleUrls: ['./error-summary.component.scss'],
 })
-export class ErrorSummaryComponent implements AfterContentInit {
-	// Access text-input and its @Output for getting errors emitted
-	@ContentChildren(TextInputComponent, { descendants: true }) inputsToFocus: QueryList<TextInputComponent>;
+export class ErrorSummaryComponent implements OnInit {
+	@Input() parentComponent: HTMLFieldSetElement | undefined;
 
-	@ContentChildren(GuidanceComponent, { descendants: true }) templates: QueryList<GuidanceComponent>;
+	constructor(private errorSummaryService: ErrorSummaryService) {}
 
-	errors: Array<ErrorSummary> = [];
+	errorList: IFudisFormErrorSummaryItem[];
 
-	onErrorAdded(eventData: { id: string; message: string }) {
-		this.errors.forEach((error, index) => {
-			if (error.id === eventData.id && !error.messages.includes(eventData.message)) {
-				this.errors[index].messages.push(eventData.message);
-			}
-		});
-
-		const existingId = this.errors.some((error) => error.id === eventData.id);
-		if (!existingId) this.errors.push({ id: eventData.id, messages: [eventData.message] });
+	getErrors(): void {
+		// eslint-disable-next-line no-return-assign
+		this.errorSummaryService.getErrors().subscribe((message) => (this.errorList = message));
 	}
 
-	ngAfterContentInit() {
-		this.templates.forEach((template) => {
-			template.errorOutput.subscribe((error: any) => this.onErrorAdded(error));
-		});
+	ngOnInit(): void {
+		this.getErrors();
 	}
 
-	focusOnError(target: string) {
-		this.inputsToFocus.forEach((inputItem) => {
-			if (inputItem.id === target) {
-				inputItem.input.nativeElement.focus();
+	getVisibleErrors(): IFudisFormErrorSummaryItem[] {
+		return this.errorList.filter((item) => {
+			if (this.parentComponent?.querySelector(`#${item.id}`)) {
+				return item;
 			}
+			return undefined;
 		});
 	}
 }

@@ -10,31 +10,57 @@ import { InputWithLanguageOptionsComponent } from './input-with-language-options
 	selector: 'example-input-with-language-options',
 	template: `
 		<form>
-			<fudis-fieldset [legend]="legend" [id]="fieldsetId">
-				<ng-template fudisFieldsetGuidance>
-					<fudis-guidance [helpText]="helpText" [id]="fieldsetId + '__guidance'"></fudis-guidance>
-				</ng-template>
-				<ng-template fudisFieldsetContent>
-					<fudis-input-with-language-options
-						[id]="inputIdOne"
-						[options]="languageOptions"
-						[formGroup]="mainFormGroup"
-						[helpText]="inputHelpText"
-						[label]="labelOne"
-						[helpText]="inputHelpText"
-						[groupErrorMsg]="groupErrorMsg"
-						[requiredText]="requiredText"></fudis-input-with-language-options>
-					<fudis-input-with-language-options
-						[id]="inputIdTwo"
-						[options]="languageOptions"
-						[formGroup]="secondFormGroup"
-						[helpText]="inputHelpText"
-						[label]="labelTwo"
-						[helpText]="inputHelpText"
-						[groupErrorMsg]="groupErrorMsg"
-						[requiredText]="requiredText"></fudis-input-with-language-options>
-				</ng-template>
-			</fudis-fieldset>
+			<fudis-grid [columns]="'1fr 1fr'">
+				<fudis-fieldset [legend]="legend" [id]="fieldsetId">
+					<ng-template fudisFieldsetGuidance>
+						<fudis-guidance [helpText]="helpText" [id]="fieldsetid + '_guidance'"></fudis-guidance>
+					</ng-template>
+					<ng-template fudisFieldsetContent>
+						<fudis-input-with-language-options
+							[type]="email"
+							[id]="inputIdOne"
+							[options]="languageOptions"
+							[formGroup]="mainFormGroup"
+							[helpText]="inputHelpText"
+							[label]="labelOne"
+							[helpText]="inputHelpText"
+							[groupErrorMsg]="groupErrorMsg"
+							[requiredText]="requiredText"></fudis-input-with-language-options>
+						<fudis-input-with-language-options
+							[id]="inputIdTwo"
+							[options]="languageOptions"
+							[formGroup]="secondFormGroup"
+							[helpText]="inputHelpText"
+							[label]="labelTwo"
+							[helpText]="inputHelpText"
+							[groupErrorMsg]="groupErrorMsg"
+							[requiredText]="requiredText"></fudis-input-with-language-options>
+					</ng-template>
+				</fudis-fieldset>
+				<fudis-fieldset [legend]="legend" [id]="fieldsetId">
+					<ng-template fudisFieldsetGuidance>
+						<fudis-guidance [helpText]="helpText" [id]="fieldsetid + '_guidance'"></fudis-guidance>
+					</ng-template>
+					<ng-template fudisFieldsetContent>
+						<fudis-text-input
+							[id]="'text-input-1'"
+							[control]="$any(thirdFormGroup).controls['first']"
+							[helpText]="inputHelpText"
+							[label]="'Text input label'"
+							[helpText]="'Some help here'"
+							[errorMsg]="{ required: 'This input is required' }"
+							[requiredText]="requiredText"></fudis-text-input>
+						<fudis-text-input
+							[id]="'text-input-2'"
+							[helpText]="inputHelpText"
+							[control]="$any(thirdFormGroup).controls['second']"
+							[label]="'Text input label'"
+							[helpText]="'Help here as well'"
+							[errorMsg]="{ required: 'This input is required as well' }"
+							[requiredText]="requiredText"></fudis-text-input>
+					</ng-template>
+				</fudis-fieldset>
+			</fudis-grid>
 		</form>
 	`,
 })
@@ -45,6 +71,8 @@ class InputWithLanguageOptionsExampleComponent {
 		},
 		finnish: {
 			required: 'Missing course name on Finnish.',
+			email: 'Missing email',
+			minlength: 'Too short',
 		},
 	};
 
@@ -75,7 +103,7 @@ class InputWithLanguageOptionsExampleComponent {
 	requiredText = 'Required';
 
 	mainFormGroup: FormGroup = this.formBuilder.group({
-		finnish: new FormControl('', Validators.required),
+		finnish: new FormControl('', [Validators.required, Validators.email, Validators.minLength(5)]),
 		swedish: new FormControl(''),
 		english: new FormControl('', Validators.required),
 	});
@@ -84,6 +112,11 @@ class InputWithLanguageOptionsExampleComponent {
 		finnish: new FormControl('', Validators.required),
 		swedish: new FormControl(''),
 		english: new FormControl('', Validators.required),
+	});
+
+	thirdFormGroup: FormGroup = this.formBuilder.group({
+		first: new FormControl('', Validators.required),
+		second: new FormControl('', Validators.required),
 	});
 
 	constructor(private formBuilder: FormBuilder) {}

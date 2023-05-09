@@ -38,7 +38,7 @@ import { TFudisInputErrorMessages } from '../../../types/forms';
 					[minDate]="mainFormGroup.controls['first'].value">
 				</fudis-datepicker>
 			</fieldset>
-			<fudis-guidance [helpText]="'Select both dates.'" [id]="id + '_guidance'">
+			<fudis-guidance [helpText]="'Select both dates.'" [inputId]="id">
 				<fudis-error-message
 					*ngIf="
 						mainFormGroup.controls['first']?.touched &&

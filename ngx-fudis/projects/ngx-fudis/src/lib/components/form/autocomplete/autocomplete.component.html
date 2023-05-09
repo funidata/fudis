@@ -19,7 +19,7 @@
 			(blur)="updateErrors()"
 			[formControl]="control"
 			[matAutocomplete]="autocomplete"
-			[attr.aria-describedby]="id + '__guidance'"
+			[attr.aria-describedby]="id + '_guidance'"
 			[readonly]="disabled"
 			[attr.aria-disabled]="disabled"
 			[attr.required]="isRequired()" />
@@ -42,8 +42,7 @@
 			</fudis-icon>
 		</ng-container>
 	</div>
-	<fudis-guidance [helpText]="helpText" [id]="id + '__guidance'" [errorMsg]="errorMsg" [control]="control">
-	</fudis-guidance>
+	<fudis-guidance [helpText]="helpText" [inputId]="id" [errorMsg]="errorMsg" [control]="control"> </fudis-guidance>
 
 	<mat-autocomplete
 		class="fudis-autocomplete__option-list"

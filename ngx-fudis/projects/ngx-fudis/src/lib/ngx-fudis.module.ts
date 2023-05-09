@@ -31,6 +31,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { DialogService } from './components/dialog/dialog.service';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
+import { ErrorSummaryService } from './components/form/error-summary/error-summary.service';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
 import { ExpandableContentDirective, ExpandableActionsDirective } from './components/expandable/expandable-directives';
@@ -141,7 +142,7 @@ import { InputWithLanguageOptionsComponent } from './components/form/input-with-
 		DialogComponent,
 		DropdownComponent,
 		ErrorMessageComponent,
-		// ErrorSummaryComponent,
+		ErrorSummaryComponent,
 		ExpandableComponent,
 		ExpandableActionsDirective,
 		ExpandableContentDirective,
@@ -168,6 +169,6 @@ import { InputWithLanguageOptionsComponent } from './components/form/input-with-
 		// TextSpacingComponent,
 		TooltipDirective,
 	],
-	providers: [DialogService],
+	providers: [DialogService, ErrorSummaryService],
 })
 export class NgxFudisModule {}

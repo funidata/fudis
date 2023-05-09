@@ -1,5 +1,5 @@
 <div class="fudis-guidance">
-	<div [id]="id">
+	<div [id]="inputId + '_guidance'">
 		<p *ngIf="helpText" class="fudis-guidance__help-text">{{ helpText }}</p>
 		<div [attr.ariaLive]="ariaLive">
 			<ng-container *ngFor="let error of errorMsg | keyvalue">
