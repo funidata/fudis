@@ -44,6 +44,7 @@ export { HeadingComponent } from './lib/components/typography/heading/heading.co
 export { IconComponent } from './lib/components/icon/icon.component';
 export { LinkComponent } from './lib/components/link/link.component';
 export { NotificationComponent } from './lib/components/notification/notification.component';
+export { NotificationContentDirective } from './lib/components/notification/notification-directives';
 export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
 // export { SpacingDirective } from './lib/directives/spacing/spacing.directive';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';

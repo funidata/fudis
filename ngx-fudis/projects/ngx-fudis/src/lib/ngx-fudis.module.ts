@@ -45,6 +45,7 @@ import { IconComponent } from './components/icon/icon.component';
 import { LabelComponent } from './components/form/label/label.component';
 import { LinkComponent } from './components/link/link.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { NotificationContentDirective } from './components/notification/notification-directives';
 import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
 import { RadioButtonGroupComponent } from './components/form/radio-button-group/radio-button-group.component';
 import { SpacingDirective } from './directives/spacing/spacing.directive';
@@ -98,6 +99,7 @@ import { InputWithLanguageOptionsComponent } from './components/form/input-with-
 		LabelComponent,
 		LinkComponent,
 		NotificationComponent,
+		NotificationContentDirective,
 		RadioButtonComponent,
 		RadioButtonGroupComponent,
 		SpacingDirective,
@@ -162,6 +164,7 @@ import { InputWithLanguageOptionsComponent } from './components/form/input-with-
 
 		LinkComponent,
 		NotificationComponent,
+		NotificationContentDirective,
 		RadioButtonGroupComponent,
 		// SpacingDirective,
 		TextAreaComponent,

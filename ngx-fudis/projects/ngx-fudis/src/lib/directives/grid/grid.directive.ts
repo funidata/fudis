@@ -42,6 +42,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 			marginSides: this.marginSides,
 		};
 		// Collect and validate grid column @Input values, which are used in ngMaterial BreakpointObserver
+
 		this.columnsFromInput = createColumnInputForBreakpoints(
 			this.columns,
 			this.columnsXs,
@@ -66,6 +67,11 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 				}
 			});
 		});
+
+		(this.gridElement.nativeElement as HTMLElement).classList.value = getGridClasses(this.gridInputObject);
+
+		(this.gridElement.nativeElement as HTMLElement).style.alignItems = this.alignItemsY;
+		(this.gridElement.nativeElement as HTMLElement).style.justifyItems = this.alignItemsX;
 	}
 
 	ngOnChanges(): void {

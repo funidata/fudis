@@ -3,9 +3,8 @@
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
 
 .fudis-fieldset {
-	@include typography.text-field-label;
-	@include colorMixins.text-color('gray-dark');
-
+	display: flex;
+	flex-direction: column;
 	margin: 0;
 	
 	/* stylelint-disable-next-line declaration-property-value-disallowed-list, property-disallowed-list */
@@ -13,8 +12,15 @@
 	padding: 0;
 
 	&__legend {
-		grid-column: 1/-1;
+		display: flex;
+		flex-direction: column;
 		margin-bottom: spacing.$spacing-xs;
 		padding: 0;
+		width: 100%;
+
+		&__title {
+			@include colorMixins.text-color('gray-dark');
+			@include typography.text-field-label;
+		}
 	}
 }

@@ -1,8 +1,8 @@
 import { BehaviorSubject, Observable } from 'rxjs';
-import { IFudisFormErrorSummaryItem } from '../../../types/forms';
+import { TFudisFormErrorSummaryItem } from '../../../types/forms';
 
 export class ErrorSummaryService {
-	private errorListBus = new BehaviorSubject<IFudisFormErrorSummaryItem[]>([]);
+	private errorListBus = new BehaviorSubject<TFudisFormErrorSummaryItem[]>([]);
 
 	private reloadStore = new BehaviorSubject<boolean>(true);
 
@@ -10,11 +10,11 @@ export class ErrorSummaryService {
 
 	errorList = this.errorListBus.asObservable();
 
-	getErrors(): Observable<IFudisFormErrorSummaryItem[]> {
+	getErrors(): Observable<TFudisFormErrorSummaryItem[]> {
 		return this.errorList;
 	}
 
-	updateErrorList(message: IFudisFormErrorSummaryItem) {
+	updateErrorList(message: TFudisFormErrorSummaryItem) {
 		const currentErrors = this.errorListBus.value;
 
 		const errorListIndex = currentErrors.findIndex((error) => error.id === message.id);

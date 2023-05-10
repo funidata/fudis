@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ErrorSummaryService } from './error-summary.service';
-import { IFudisFormErrorSummaryItem } from '../../../types/forms';
+import { TFudisFormErrorSummaryItem } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-error-summary',
@@ -12,7 +12,7 @@ export class ErrorSummaryComponent implements OnInit {
 
 	constructor(private errorSummaryService: ErrorSummaryService) {}
 
-	errorList: IFudisFormErrorSummaryItem[];
+	errorList: TFudisFormErrorSummaryItem[];
 
 	getErrors(): void {
 		// eslint-disable-next-line no-return-assign
@@ -23,7 +23,7 @@ export class ErrorSummaryComponent implements OnInit {
 		this.getErrors();
 	}
 
-	getVisibleErrors(): IFudisFormErrorSummaryItem[] {
+	getVisibleErrors(): TFudisFormErrorSummaryItem[] {
 		return this.errorList.filter((item) => {
 			if (this.parentComponent?.querySelector(`#${item.id}`)) {
 				return item;

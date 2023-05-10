@@ -3,7 +3,6 @@ import { FormControl, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import { DialogService, ErrorSummaryService } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
-import { filter, pluck } from 'rxjs';
 
 @Component({
 	selector: 'app-root',
@@ -35,22 +34,14 @@ export class AppComponent implements OnInit {
 	differ: any;
 
 	ngOnInit(): void {
-		this.translocoService.setActiveLang('en');
 		this.translocoService.setActiveLang('fi');
 
 		this.textInputControl = new FormControl('', Validators.required);
 		this.document.documentElement.lang = 'fi';
 
-		this.translocoService.events$
-			.pipe(
-				filter((e) => e.type === 'langChanged'),
-				pluck('payload')
-			)
-			.subscribe(({ langName, scope }) => {
-				setTimeout(() => {
-					this.errorSummaryService.reloadErrors();
-				}, 1000);
-			});
+		this.translocoService.selectTranslation().subscribe(() => {
+			this.errorSummaryService.reloadErrors();
+		});
 	}
 
 	changeLanguage(): void {

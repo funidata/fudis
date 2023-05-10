@@ -9,7 +9,7 @@ export class ErrorMessageComponent {
 	/*
 	 * Error message to display
 	 */
-	@Input() message: string;
+	@Input() message: string | undefined | null;
 
 	/*
 	 * Used to link form element's attribute of 'aria-describedby' with error message

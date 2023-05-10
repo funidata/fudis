@@ -2,11 +2,26 @@
 	<div [id]="inputId + '_guidance'">
 		<p *ngIf="helpText" class="fudis-guidance__help-text">{{ helpText }}</p>
 		<div [attr.ariaLive]="ariaLive">
-			<ng-container *ngFor="let error of errorMsg | keyvalue">
-				<fudis-error-message
-					[message]="error.value"
-					*ngIf="errorsToShow.includes(error.key) && error.value"></fudis-error-message>
+			<ng-container *ngIf="formGroup?.controls && !control">
+				<ng-container *ngFor="let control of formGroup.controls | keyvalue">
+					<ng-container *ngIf="control.value.touched && control.value.errors">
+						<ng-container *ngFor="let error of control.value.errors | keyvalue">
+							<fudis-error-message
+								*ngIf="groupErrorMsg[control.key][asErrorkey(error.key)]"
+								[message]="groupErrorMsg[control.key][asErrorkey(error.key)]"></fudis-error-message>
+						</ng-container>
+					</ng-container>
+				</ng-container>
 			</ng-container>
+
+			<ng-container *ngIf="control?.errors && !formGroup && control?.touched">
+				<ng-container *ngFor="let error of control.errors | keyvalue">
+					<fudis-error-message
+						[message]="errorMsg[asErrorkey(error.key)]"
+						*ngIf="errorMsg[asErrorkey(error.key)]"></fudis-error-message>
+				</ng-container>
+			</ng-container>
+
 			<ng-content></ng-content>
 		</div>
 	</div>

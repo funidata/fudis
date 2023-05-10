@@ -13,6 +13,11 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	@Input() options: IFudisDropdownOption[];
 
+	/**
+	 * Available sizes for the input - defaults to large. Recommended size for number input is small.
+	 */
+	@Input() size?: 's' | 'm' | 'l' = 'l';
+
 	dropdownControl: FormControl;
 
 	controlPlaceholder = new FormControl();
@@ -32,5 +37,11 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	handleLanguageSelect(value: IFudisDropdownOption): void {
 		this.dropdownValue = value;
+	}
+
+	handleInputBlur(): void {
+		if (this.groupErrorMsg) {
+			this.updateErrors();
+		}
 	}
 }

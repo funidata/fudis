@@ -13,6 +13,12 @@
 				[checked]="control.value === option.value ? true : false"
 				[control]="control"></fudis-radio-button>
 		</div>
-		<fudis-guidance [helpText]="helpText" [inputId]="id" [errorMsg]="errorMsg" [control]="control"> </fudis-guidance>
+		<fudis-guidance
+			[inputLabel]="legend"
+			[helpText]="helpText"
+			[inputId]="id"
+			[errorMsg]="errorMsg"
+			[control]="control">
+		</fudis-guidance>
 	</ng-template>
 </fudis-fieldset>

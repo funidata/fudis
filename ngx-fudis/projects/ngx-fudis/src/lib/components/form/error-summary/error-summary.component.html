@@ -1,12 +1,17 @@
-<div>
-	<ng-container *ngFor="let errorItem of getVisibleErrors()">
-		<ul>
-			{{
-				errorItem.id
-			}}
-			<li *ngFor="let error of errorItem.errors">
-				{{ error }}
-			</li>
-		</ul>
-	</ng-container>
-</div>
+<fudis-notification [variant]="'danger'" *ngIf="getVisibleErrors().length > 0">
+	<ng-template fudisNotificationContent="">
+		<div class="fudis-error-summary">
+			<fudis-icon [icon]="'alert'"></fudis-icon>
+			<div class="fudis-error-summary__errors">
+				<ng-container *ngFor="let errorItem of getVisibleErrors()">
+					<ul class="fudis-error-summary__error-list">
+						<fudis-body-text *ngIf="errorItem.label" [size]="'l-regular'">{{ errorItem.label }}</fudis-body-text>
+						<li class="fudis-error-summary__error-list__item" *ngFor="let error of errorItem.errors">
+							<fudis-link [color]="'default'" [href]="'#' + errorItem.id" [linkTitle]="error"></fudis-link>
+						</li>
+					</ul>
+				</ng-container>
+			</div>
+		</div>
+	</ng-template>
+</fudis-notification>

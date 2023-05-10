@@ -1,5 +1,5 @@
 // eslint-disable-next-line max-classes-per-file
-import { Component, Input, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, ViewEncapsulation, HostBinding } from '@angular/core';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
 @Component({
@@ -10,6 +10,8 @@ import { InputBaseDirective } from '../../../directives/form/input-base/input-ba
 })
 export class TextInputComponent extends InputBaseDirective {
 	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;
+
+	@HostBinding('class') classes = 'fudis-text-input-host';
 
 	/**
 	 * Available sizes for the input - defaults to large. Recommended size for number input is small.

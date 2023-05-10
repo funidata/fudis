@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChild, ElementRef } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, ElementRef, ViewEncapsulation } from '@angular/core';
 
 import { FieldsetContentDirective, FieldsetGuidanceDirective } from './fieldset-directives';
 import { FieldsetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
@@ -7,6 +7,7 @@ import { FieldsetBaseDirective } from '../../../directives/form/fieldset-base/fi
 	selector: 'fudis-fieldset',
 	templateUrl: './fieldset.component.html',
 	styleUrls: ['./fieldset.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class FieldsetComponent extends FieldsetBaseDirective implements AfterContentInit {
 	@ContentChild(FieldsetGuidanceDirective) fieldsetGuidanceContent: FieldsetGuidanceDirective;

@@ -1,7 +1,7 @@
 import { Directive, ViewChild, Input, EventEmitter, Output, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { GuidanceComponent } from '../../../components/form/guidance/guidance.component';
-import { IFudisFormErrorSummaryItem, TFudisInputErrorMessages } from '../../../types/forms';
+import { TFudisFormErrorSummaryItem, TFudisInputErrorMessages } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 
 @Directive({
@@ -60,7 +60,21 @@ export class InputBaseDirective extends TooltipApiDirective implements OnInit {
 	 * TBD. Possibly used later for FudisErrorSummary
 	 */
 
-	@Output() errorOutput: EventEmitter<IFudisFormErrorSummaryItem> = new EventEmitter<IFudisFormErrorSummaryItem>();
+	@Output() errorOutput: EventEmitter<TFudisFormErrorSummaryItem> = new EventEmitter<TFudisFormErrorSummaryItem>();
+
+	/**
+	 * TBD. Possibly used later for FudisErrorSummary
+	 */
+
+	@Output() handleBlur: EventEmitter<Event> = new EventEmitter<Event>();
+
+	onBlur(event: Event): void {
+		if (this.errorMsg) {
+			this.updateErrors();
+		}
+
+		this.handleBlur.emit(event);
+	}
 
 	/**
 	 * Check & update errors. Currently mostly binded to onBlur event.

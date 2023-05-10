@@ -10,7 +10,7 @@ import { InputWithLanguageOptionsComponent } from './input-with-language-options
 	selector: 'example-input-with-language-options',
 	template: `
 		<form>
-			<fudis-grid [columns]="'1fr 1fr'">
+			<fudis-grid>
 				<fudis-fieldset [legend]="legend" [id]="fieldsetId">
 					<ng-template fudisFieldsetGuidance>
 						<fudis-guidance [helpText]="helpText" [id]="fieldsetid + '_guidance'"></fudis-guidance>
@@ -37,11 +37,13 @@ import { InputWithLanguageOptionsComponent } from './input-with-language-options
 							[requiredText]="requiredText"></fudis-input-with-language-options>
 					</ng-template>
 				</fudis-fieldset>
-				<fudis-fieldset [legend]="legend" [id]="fieldsetId">
-					<ng-template fudisFieldsetGuidance>
-						<fudis-guidance [helpText]="helpText" [id]="fieldsetid + '_guidance'"></fudis-guidance>
-					</ng-template>
-					<ng-template fudisFieldsetContent>
+			</fudis-grid>
+			<fudis-fieldset [legend]="legend" [id]="fieldsetId">
+				<ng-template fudisFieldsetGuidance>
+					<fudis-guidance [inputLabel]="label" [helpText]="helpText" [id]="fieldsetid + '_guidance'"></fudis-guidance>
+				</ng-template>
+				<ng-template fudisFieldsetContent>
+					<fudis-grid [columns]="'1fr 1fr'">
 						<fudis-text-input
 							[id]="'text-input-1'"
 							[control]="$any(thirdFormGroup).controls['first']"
@@ -58,9 +60,9 @@ import { InputWithLanguageOptionsComponent } from './input-with-language-options
 							[helpText]="'Help here as well'"
 							[errorMsg]="{ required: 'This input is required as well' }"
 							[requiredText]="requiredText"></fudis-text-input>
-					</ng-template>
-				</fudis-fieldset>
-			</fudis-grid>
+					</fudis-grid>
+				</ng-template>
+			</fudis-fieldset>
 		</form>
 	`,
 })
@@ -92,11 +94,11 @@ class InputWithLanguageOptionsExampleComponent {
 
 	legend = 'Fill in course information';
 
-	helpText = 'This help text is for all inputs containing general information for all of them';
+	helpText = 'This help text is for all inputs containing general information for all of them.';
 
-	labelOne = 'Course name';
+	labelOne = 'Course teacher email';
 
-	labelTwo = 'Course description';
+	labelTwo = 'Course name';
 
 	inputHelpText = 'Help text for an individual input';
 

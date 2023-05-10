@@ -39,10 +39,12 @@ export interface IFudisDropdownOption {
 	disabled?: boolean;
 }
 
-export interface IFudisFormErrorSummaryItem {
+export type TFudisFormErrorSummaryItem = {
 	id: string;
+	inputSiblings?: string[];
+	label?: string;
 	errors: string[];
-}
+};
 
 export interface IFudisAutocompleteOption {
 	/** Underlying value of the option */

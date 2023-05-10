@@ -1,7 +1,7 @@
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import { IFudisFormErrorSummaryItem } from '../../../types/forms';
+import { TFudisFormErrorSummaryItem } from '../../../types/forms';
 
 @Directive({
 	selector: '[fudisFieldsetBase]',
@@ -37,7 +37,7 @@ export class FieldsetBaseDirective {
 	 * TBD. Possibly used later for FudisErrorSummary
 	 */
 
-	@Output() errorOutput: EventEmitter<IFudisFormErrorSummaryItem> = new EventEmitter<IFudisFormErrorSummaryItem>();
+	@Output() errorOutput: EventEmitter<TFudisFormErrorSummaryItem> = new EventEmitter<TFudisFormErrorSummaryItem>();
 
 	requiredValidator = Validators.required;
 }

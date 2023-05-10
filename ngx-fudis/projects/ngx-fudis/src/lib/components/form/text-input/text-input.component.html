@@ -16,19 +16,22 @@
 		[attr.maxlength]="maxLength"
 		[attr.min]="minNumber"
 		[attr.max]="maxNumber"
-		(blur)="updateErrors()"
+		(blur)="onBlur($event)"
 		[id]="id"
 		[type]="type"
 		[class.fudis-text-input__input--invalid]="control.invalid && control.touched"
 		class="fudis-text-input__input"
 		[attr.aria-describedby]="id + '_guidance'"
 		[attr.required]="isRequired()" />
-	<fudis-guidance
-		[maxLengthText]="maxLengthText"
-		[maxLength]="maxLength"
-		[helpText]="helpText"
-		[inputId]="id"
-		[errorMsg]="errorMsg"
-		[control]="control">
-	</fudis-guidance>
+	<ng-container *ngIf="helpText || errorMsg">
+		<fudis-guidance
+			[inputLabel]="label"
+			[maxLengthText]="maxLengthText"
+			[maxLength]="maxLength"
+			[helpText]="helpText"
+			[inputId]="id"
+			[errorMsg]="errorMsg"
+			[control]="control">
+		</fudis-guidance
+	></ng-container>
 </div>
