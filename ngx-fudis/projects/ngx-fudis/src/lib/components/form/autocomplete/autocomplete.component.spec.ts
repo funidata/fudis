@@ -9,9 +9,11 @@ import { IconComponent } from '../../icon/icon.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { LabelComponent } from '../label/label.component';
 import { AutocompleteComponent, AutocompleteInputSize } from './autocomplete.component';
+import { ErrorSummaryService } from '../error-summary/error-summary.service';
+import { ErrorMessageComponent } from '../error-message/error-message.component';
 
 const autocompleteControl: FormControl = new FormControl('');
-const autocompletRequiredControl: FormControl = new FormControl('', Validators.required);
+const autocompleteRequiredControl: FormControl = new FormControl('', Validators.required);
 
 describe('AutocompleteComponent', () => {
 	let component: AutocompleteComponent;
@@ -25,7 +27,9 @@ describe('AutocompleteComponent', () => {
 				GuidanceComponent,
 				MockComponent(IconComponent),
 				MockComponent(ButtonComponent),
+				MockComponent(ErrorMessageComponent),
 			],
+			providers: [ErrorSummaryService],
 			imports: [MatAutocompleteModule, ReactiveFormsModule, BrowserAnimationsModule],
 		}).compileComponents();
 
@@ -33,6 +37,8 @@ describe('AutocompleteComponent', () => {
 		component = fixture.componentInstance;
 		component.control = autocompleteControl;
 		component.id = 'fudis-autocomplete-id';
+		component.label = 'Choose one option';
+		component.errorMsg = { required: 'This input is required' };
 		fixture.detectChanges();
 	});
 
@@ -50,9 +56,10 @@ describe('AutocompleteComponent', () => {
 
 	describe('child components', () => {
 		it('should display given label', () => {
-			component.label = 'Choose one option';
 			fixture.detectChanges();
-			const childLabelComponent = fixture.debugElement.query(By.css('.fudis-label__content'));
+			const childLabelComponent = fixture.debugElement.query(By.css('.fudis-label'));
+			console.log(fixture.debugElement.query(By.css('.fudis-label')));
+			console.log(childLabelComponent);
 			expect(childLabelComponent.nativeElement.innerHTML).toContain('Choose one option');
 		});
 
@@ -81,7 +88,7 @@ describe('AutocompleteComponent', () => {
 
 		it('should have invalid CSS styling if control is invalid', () => {
 			const autocompleteInput = fixture.nativeElement.querySelector('input');
-			component.control = autocompletRequiredControl;
+			component.control = autocompleteRequiredControl;
 			component.control.markAsTouched();
 			fixture.detectChanges();
 

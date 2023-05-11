@@ -76,7 +76,7 @@ describe('DatepickerComponent', () => {
 		it('should have fudis-guidance component present with given id and helpText', () => {
 			const childGuidanceComponent = fixture.debugElement.query(By.css('fudis-guidance'));
 			expect(childGuidanceComponent).toBeTruthy();
-			expect(childGuidanceComponent.attributes['ng-reflect-id']).toEqual('fudis-dp-unique-id-3_guidance');
+			expect(childGuidanceComponent.attributes['ng-reflect-input-id']).toEqual('fudis-dp-unique-id-3');
 
 			component.helpText = 'Select your favourite date';
 			fixture.detectChanges();
