@@ -1750,6 +1750,12 @@ textarea.cdk-textarea-autosize-measuring-firefox {
   clip: rect(0 0 0 0);
 }
 
+.fudis-box-reset {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 /* stylelint-disable color-no-hex */
 [data-theme=into] {
   --fudis-color-primary-light: #e0f4fd;
