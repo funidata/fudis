@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { IFudisDropdownOption, TFudisFieldsetErrorMessages } from '../../../types/forms';
+import { IFudisDropdownOption, TFudisGroupErrorMessages } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
 @Component({
@@ -26,7 +26,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	inputId: string = '';
 
-	@Input() groupErrorMsg: TFudisFieldsetErrorMessages;
+	@Input() groupErrorMsg: TFudisGroupErrorMessages;
 
 	/**
 	 * Type of the input - defaults to 'text'

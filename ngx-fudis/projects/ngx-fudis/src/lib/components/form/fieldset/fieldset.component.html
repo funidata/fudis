@@ -1,14 +1,18 @@
 <fieldset class="fudis-fieldset" [attr.id]="id">
-	<legend class="fudis-fieldset__legend">
-		<span class="fudis-fieldset__legend__title">{{ legend }}</span>
-		<ng-container *ngIf="fieldsetGuidanceContent">
-			<ng-container *ngTemplateOutlet="fieldsetGuidanceContent!.templateRef"></ng-container>
+	<fudis-grid [rowGap]="'xs'">
+		<legend class="fudis-fieldset__legend">
+			<span class="fudis-fieldset__legend__title">{{ legend }}</span>
+			<ng-container *ngIf="helpText">
+				<span class="fudis-fieldset__legend__help-text">{{ helpText }}</span>
+			</ng-container>
+			<ng-container *ngIf="fieldsetElement !== undefined && errorSummary">
+				<fudis-error-summary
+					[parentComponent]="fieldsetElement"
+					[helpText]="errorSummaryHelpText"></fudis-error-summary>
+			</ng-container>
+		</legend>
+		<ng-container *ngIf="fieldsetContent">
+			<ng-container *ngTemplateOutlet="fieldsetContent!.templateRef"></ng-container>
 		</ng-container>
-		<ng-container *ngIf="fieldsetElement !== undefined">
-			<fudis-error-summary [parentComponent]="fieldsetElement"></fudis-error-summary>
-		</ng-container>
-	</legend>
-	<ng-container *ngIf="fieldsetContent">
-		<ng-container *ngTemplateOutlet="fieldsetContent!.templateRef"></ng-container>
-	</ng-container>
+	</fudis-grid>
 </fieldset>

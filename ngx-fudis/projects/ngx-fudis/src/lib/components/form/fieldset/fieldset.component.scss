@@ -22,5 +22,13 @@
 			@include colorMixins.text-color('gray-dark');
 			@include typography.text-field-label;
 		}
+
+		&__help-text {
+			@include colorMixins.text-color('gray-dark');
+			@include typography.body-text-s-regular;
+
+			margin-top: spacing.$spacing-xs;
+			margin-bottom: spacing.$spacing-xs
+		}
 	}
 }

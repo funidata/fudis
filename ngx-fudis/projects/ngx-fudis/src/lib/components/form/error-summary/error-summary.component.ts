@@ -10,6 +10,8 @@ import { TFudisFormErrorSummaryItem } from '../../../types/forms';
 export class ErrorSummaryComponent implements OnInit {
 	@Input() parentComponent: HTMLFieldSetElement | undefined;
 
+	@Input() helpText: string | null | undefined;
+
 	constructor(private errorSummaryService: ErrorSummaryService) {}
 
 	errorList: TFudisFormErrorSummaryItem[];
@@ -25,7 +27,6 @@ export class ErrorSummaryComponent implements OnInit {
 
 	getVisibleErrors(): TFudisFormErrorSummaryItem[] {
 		return this.errorList.filter((item) => {
-			console.log(item.id);
 			if (this.parentComponent?.querySelector(`#${item.id}`)) {
 				return item;
 			}

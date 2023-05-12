@@ -3,11 +3,15 @@
 		<div class="fudis-error-summary">
 			<fudis-icon [icon]="'alert'"></fudis-icon>
 			<div class="fudis-error-summary__errors">
+				<ng-container *ngIf="helpText">
+					<fudis-body-text class="fudis-error-summary__errors__help-text" [size]="'l-light'">{{
+						helpText
+					}}</fudis-body-text>
+				</ng-container>
 				<ng-container *ngFor="let errorItem of getVisibleErrors()">
 					<ul class="fudis-error-summary__error-list">
-						<fudis-body-text *ngIf="errorItem.label" [size]="'l-regular'">{{ errorItem.label }}</fudis-body-text>
 						<li class="fudis-error-summary__error-list__item" *ngFor="let error of errorItem.errors">
-							<fudis-link [color]="'default'" [href]="'#' + errorItem.id" [linkTitle]="error"></fudis-link>
+							<fudis-link [href]="'#' + errorItem.id" [linkTitle]="errorItem.label + ': ' + error"></fudis-link>
 						</li>
 					</ul>
 				</ng-container>

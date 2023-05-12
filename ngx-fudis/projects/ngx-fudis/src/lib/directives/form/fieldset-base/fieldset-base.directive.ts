@@ -23,7 +23,7 @@ export class FieldsetBaseDirective {
 	@Input() requiredText: string;
 
 	/**
-	 * Help text, aligned underneath the autocomplete input
+	 * Additional guidance text, aligned underneath the main legend text
 	 */
 	@Input() helpText: string;
 

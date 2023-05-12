@@ -56,7 +56,7 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { InputBaseDirective } from './directives/form/input-base/input-base.directive';
 import { FieldsetBaseDirective } from './directives/form/fieldset-base/fieldset-base.directive';
 
-import { FieldsetGuidanceDirective, FieldsetContentDirective } from './components/form/fieldset/fieldset-directives';
+import { FieldsetContentDirective } from './components/form/fieldset/fieldset-directives';
 
 import { InputWithLanguageOptionsComponent } from './components/form/input-with-language-options/input-with-language-options.component';
 
@@ -86,7 +86,6 @@ import { InputWithLanguageOptionsComponent } from './components/form/input-with-
 		ExpandableContentDirective,
 		FieldsetBaseDirective,
 		FieldsetComponent,
-		FieldsetGuidanceDirective,
 		FieldsetContentDirective,
 		InputWithLanguageOptionsComponent,
 		GridComponent,
@@ -153,7 +152,6 @@ import { InputWithLanguageOptionsComponent } from './components/form/input-with-
 		DialogCloseDirective,
 		DialogActionsDirective,
 		FieldsetComponent,
-		FieldsetGuidanceDirective,
 		FieldsetContentDirective,
 		InputWithLanguageOptionsComponent,
 		GridComponent,

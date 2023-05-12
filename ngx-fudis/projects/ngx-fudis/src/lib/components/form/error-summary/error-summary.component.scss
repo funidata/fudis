@@ -7,13 +7,17 @@
 
 	display: flex;
 
-	&__errors{
-
+	&__errors {
+		&__help-text {
+			margin-top: spacing.$spacing-xs;
+		}
 	}
 
 	&__error-list {
 		margin-top: spacing.$spacing-xxs;
 		margin-bottom: spacing.$spacing-xs;
+		padding-left: 0;
+		
 		
 
 		&:last-of-type {
@@ -22,6 +26,7 @@
 
 		&__item {
 			margin-left: spacing.$spacing-s;
+			padding-left: spacing.$spacing-xxs;
 		}
 	}
 }

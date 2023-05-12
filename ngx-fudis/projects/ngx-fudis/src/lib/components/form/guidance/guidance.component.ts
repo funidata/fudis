@@ -1,10 +1,6 @@
 import { Component, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import {
-	TFudisInputErrorMessages,
-	TFudisFormErrorSummaryItem,
-	TFudisFieldsetErrorMessages,
-} from '../../../types/forms';
+import { TFudisInputErrorMessages, TFudisFormErrorSummaryItem, TFudisGroupErrorMessages } from '../../../types/forms';
 import { ErrorSummaryService } from '../error-summary/error-summary.service';
 
 @Component({
@@ -32,7 +28,7 @@ export class GuidanceComponent implements AfterViewInit {
 	 */
 	@Input() maxLengthText: string;
 
-	@Input() groupErrorMsg: TFudisFieldsetErrorMessages;
+	@Input() groupErrorMsg: TFudisGroupErrorMessages;
 
 	@Input() errorMsg: TFudisInputErrorMessages;
 
@@ -65,7 +61,7 @@ export class GuidanceComponent implements AfterViewInit {
 		this.getErrorOutput({ id: this.inputId, errors: this.errorSummaryMessages, label: this.inputLabel });
 	}
 
-	checkGroupErrors(group: FormGroup, errors: TFudisFieldsetErrorMessages): void {
+	checkGroupErrors(group: FormGroup, errors: TFudisGroupErrorMessages): void {
 		if (group.touched && group.invalid) {
 			Object.keys(group.controls).forEach((control) => {
 				if (errors[control]) {

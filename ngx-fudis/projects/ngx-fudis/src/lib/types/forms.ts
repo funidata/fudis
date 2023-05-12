@@ -26,7 +26,7 @@ export type TFudisInputErrorMessages = {
 	matDatepickerParse?: string;
 };
 
-export type TFudisFieldsetErrorMessages = {
+export type TFudisGroupErrorMessages = {
 	[key: string]: TFudisInputErrorMessages;
 };
 
