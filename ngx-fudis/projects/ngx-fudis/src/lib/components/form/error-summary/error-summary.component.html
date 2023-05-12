@@ -1,6 +1,6 @@
-<fudis-notification [variant]="'danger'" *ngIf="getVisibleErrors().length > 0">
+<fudis-notification [variant]="'danger'" *ngIf="visibleErrorList.length > 0">
 	<ng-template fudisNotificationContent="">
-		<div class="fudis-error-summary">
+		<div class="fudis-error-summary" tabindex="-1" #focusTarget>
 			<fudis-icon [icon]="'alert'"></fudis-icon>
 			<div class="fudis-error-summary__errors">
 				<ng-container *ngIf="helpText">
@@ -8,13 +8,13 @@
 						helpText
 					}}</fudis-body-text>
 				</ng-container>
-				<ng-container *ngFor="let errorItem of getVisibleErrors()">
-					<ul class="fudis-error-summary__error-list">
+				<ul class="fudis-error-summary__error-list">
+					<ng-container *ngFor="let errorItem of visibleErrorList">
 						<li class="fudis-error-summary__error-list__item" *ngFor="let error of errorItem.errors">
 							<fudis-link [href]="'#' + errorItem.id" [linkTitle]="errorItem.label + ': ' + error"></fudis-link>
 						</li>
-					</ul>
-				</ng-container>
+					</ng-container>
+				</ul>
 			</div>
 		</div>
 	</ng-template>

@@ -6,6 +6,26 @@
 	@include colorMixins.text-color('red');
 	@include typography.body-text-s-regular;
 
-	margin-top: spacing.$spacing-xs;
-	margin-bottom: spacing.$spacing-xs
+	opacity: 0;
+	margin-top: 0;
+	margin-bottom: 0;
+  height: 0;
+	animation-name: delay-appearance;
+	animation-delay: 0.2s;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+}
+
+@keyframes delay-appearance {
+	0% {
+		opacity: 0;
+		height: 0;
+	}
+
+	100% {
+		opacity: 1;
+		margin-top: spacing.$spacing-xs;
+		margin-bottom: spacing.$spacing-xs;
+		height: auto;
+	}
 }

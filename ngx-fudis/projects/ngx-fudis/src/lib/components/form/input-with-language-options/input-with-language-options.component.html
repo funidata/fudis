@@ -24,11 +24,13 @@
 		</ng-container>
 	</div>
 	<fudis-dropdown
+		[hideSingleSelectionIndicator]="true"
 		class="fudis-input-with-language-options__dropdown"
 		(selectionUpdate)="handleLanguageSelect($event)"
 		[control]="dropdownControl"
 		[label]="'Language'"
+		[size]="missingLanguage ? 'xs' : 'l'"
 		[id]="id + '_language-dropdown'"
-		[options]="options">
+		[options]="updatedOptions">
 	</fudis-dropdown>
 </div>

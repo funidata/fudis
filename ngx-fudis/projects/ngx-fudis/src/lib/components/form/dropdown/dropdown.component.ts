@@ -27,7 +27,9 @@ export class DropdownComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * Available sizes for the dropdown - defaults to large.
 	 */
-	@Input() size?: 's' | 'm' | 'l' = 'l';
+	@Input() size?: 'xs' | 's' | 'm' | 'l' = 'l';
+
+	@Input() hideSingleSelectionIndicator: boolean = false;
 
 	/**
 	 * Value output event

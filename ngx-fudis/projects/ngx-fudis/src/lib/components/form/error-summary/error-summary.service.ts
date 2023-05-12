@@ -2,20 +2,22 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { TFudisFormErrorSummaryItem } from '../../../types/forms';
 
 export class ErrorSummaryService {
-	private errorListBus = new BehaviorSubject<TFudisFormErrorSummaryItem[]>([]);
+	private currentErrorList: TFudisFormErrorSummaryItem[] = [];
 
 	private reloadStore = new BehaviorSubject<boolean>(true);
 
-	reload = this.reloadStore.asObservable();
+	private reload = this.reloadStore.asObservable();
 
-	errorList = this.errorListBus.asObservable();
+	private visibleErrorListStore = new BehaviorSubject<TFudisFormErrorSummaryItem[]>([]);
 
-	getErrors(): Observable<TFudisFormErrorSummaryItem[]> {
-		return this.errorList;
+	private visibleErrorList = this.visibleErrorListStore.asObservable();
+
+	getVisibleErrors(): Observable<TFudisFormErrorSummaryItem[]> {
+		return this.visibleErrorList;
 	}
 
 	updateErrorList(message: TFudisFormErrorSummaryItem) {
-		const currentErrors = this.errorListBus.value;
+		const currentErrors = this.currentErrorList;
 
 		const errorListIndex = currentErrors.findIndex((error) => error.id === message.id);
 
@@ -26,7 +28,7 @@ export class ErrorSummaryService {
 		} else if (message.errors.length > 0) {
 			currentErrors.push(message);
 		}
-		this.errorListBus.next(currentErrors);
+		this.currentErrorList = currentErrors;
 	}
 
 	reloadWatcher(): Observable<any> {
@@ -35,5 +37,7 @@ export class ErrorSummaryService {
 
 	reloadErrors() {
 		this.reloadStore.next(this.reloadStore.value);
+		const visibleErrors = [...this.currentErrorList];
+		this.visibleErrorListStore.next(visibleErrors);
 	}
 }

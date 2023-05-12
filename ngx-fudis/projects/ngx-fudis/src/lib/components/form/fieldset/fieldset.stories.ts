@@ -6,12 +6,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IFudisDropdownOption, TFudisGroupErrorMessages, TFudisInputErrorMessages } from '../../../types/forms';
 
 import { FieldsetComponent } from './fieldset.component';
+import { ErrorSummaryService } from '../error-summary/error-summary.service';
 
 @Component({
 	selector: 'example-input-with-language-options',
 	template: `
 		<form>
 			<fudis-fieldset
+				[errorSummaryScreenReaderHelpText]="'Attention:'"
 				[legend]="legend"
 				[id]="fieldsetId"
 				[errorSummaryHelpText]="errorSummaryHelpText"
@@ -20,6 +22,7 @@ import { FieldsetComponent } from './fieldset.component';
 				<ng-template fudisFieldsetContent>
 					<fudis-grid [columns]="'1fr 1fr'" [columnsM]="'1fr'" [width]="'m'">
 						<fudis-input-with-language-options
+							[missingLanguage]="'Missing'"
 							[id]="'unique-input-1'"
 							[options]="languageOptions"
 							[formGroup]="form.controls['name']"
@@ -28,6 +31,7 @@ import { FieldsetComponent } from './fieldset.component';
 							[groupErrorMsg]="errorName"
 							[requiredText]="requiredText"></fudis-input-with-language-options>
 						<fudis-input-with-language-options
+							[missingLanguage]="'Missing'"
 							[id]="'unique-input-2'"
 							[options]="languageOptions"
 							[formGroup]="form.controls['description']"
@@ -56,6 +60,7 @@ import { FieldsetComponent } from './fieldset.component';
 							<fudis-datepicker
 								[label]="labelStartDate"
 								[id]="'date-picker-1'"
+								[size]="'s'"
 								[requiredText]="requiredText"
 								[helpText]="'You have to start from somewhere'"
 								[errorMsg]="errorStartdate"
@@ -66,12 +71,13 @@ import { FieldsetComponent } from './fieldset.component';
 							<fudis-datepicker
 								[label]="labelEndDate"
 								[id]="'date-picker-2'"
+								[size]="'s'"
 								[requiredText]="requiredText"
 								[helpText]="'You have to end it to something'"
 								[errorMsg]="errorEnddate"
 								[control]="form.controls['endDate']"
 								[disabled]="!form.controls['startDate'].value && !form.controls['startDate'].valid"
-								[minDate]="form.controls['startDate']">
+								[minDate]="form.controls['startDate'].value">
 							</fudis-datepicker>
 						</fudis-grid>
 						<div></div>
@@ -90,6 +96,7 @@ class InputWithLanguageOptionsExampleComponent {
 
 		if (this.form.invalid) {
 			this.errorSummaryVisible = true;
+			this.errorSummaryService.reloadErrors();
 		} else {
 			this.errorSummaryVisible = false;
 		}
@@ -105,7 +112,7 @@ class InputWithLanguageOptionsExampleComponent {
 			required: 'Missing course name on Finnish.',
 		},
 		swedish: {
-			required: 'Missing course name on Finnish.',
+			required: 'Missing course name on Swedish.',
 		},
 	};
 
@@ -144,12 +151,6 @@ class InputWithLanguageOptionsExampleComponent {
 	};
 
 	fieldsetId = 'unique-fieldset-id';
-
-	languageOptions: IFudisDropdownOption[] = [
-		{ value: 'finnish', viewValue: 'Fi' },
-		{ value: 'swedish', viewValue: 'Sv' },
-		{ value: 'english', viewValue: 'En' },
-	];
 
 	minDate = new Date();
 
@@ -194,24 +195,16 @@ class InputWithLanguageOptionsExampleComponent {
 		endDate: new FormControl('', Validators.required),
 	});
 
-	mainFormGroup: FormGroup = this.formBuilder.group({
-		finnish: new FormControl('', [Validators.required, Validators.email, Validators.minLength(5)]),
-		swedish: new FormControl(''),
-		english: new FormControl('', Validators.required),
-	});
+	languageOptions: IFudisDropdownOption[] = [
+		// eslint-disable-next-line @typescript-eslint/dot-notation
+		{ value: 'finnish', viewValue: 'Fi' },
+		{ value: 'swedish', viewValue: 'Sv' },
+		{ value: 'english', viewValue: 'En' },
+	];
 
-	secondFormGroup: FormGroup = this.formBuilder.group({
-		finnish: new FormControl('', Validators.required),
-		swedish: new FormControl(''),
-		english: new FormControl('', Validators.required),
-	});
+	// `Fi${this.form.controls['name']['finnish'].invalid ? ' (missing)' : ''`
 
-	thirdFormGroup: FormGroup = this.formBuilder.group({
-		first: new FormControl('', Validators.required),
-		second: new FormControl('', Validators.required),
-	});
-
-	constructor(private formBuilder: FormBuilder) {}
+	constructor(private formBuilder: FormBuilder, private errorSummaryService: ErrorSummaryService) {}
 }
 
 export default {

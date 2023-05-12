@@ -31,6 +31,8 @@ export class FieldsetComponent extends FieldsetBaseDirective implements AfterCon
 
 	@Input() errorSummaryHelpText: string | null = null;
 
+	@Input() errorSummaryScreenReaderHelpText: string | null = null;
+
 	ngOnChanges(): void {
 		if (this.errorSummary) {
 			this.errorSummaryService.reloadErrors();

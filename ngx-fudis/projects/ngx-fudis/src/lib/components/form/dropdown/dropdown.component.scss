@@ -20,6 +20,10 @@
 	&__s {
 		max-width: calc(10 * spacing.$spacing-s);
 	}
+
+	&__xs {
+		max-width: spacing.$spacing-xxl;
+	}
 	
 
 	&__select {
@@ -40,6 +44,10 @@
 		&:focus {
 			@include focus.focus-form-field;
 		}
+
+		&__xs {
+			padding: spacing.$spacing-xs;
+		}
 	}
 
 	&__option-list {
@@ -48,7 +56,21 @@
 		top: spacing.$spacing-xs;
 		/* stylelint-disable-next-line unit-disallowed-list */
 		left: calc(-1px - spacing.$spacing-s);
+
+		&__xs {
+			/* stylelint-disable-next-line unit-disallowed-list */
+			left: calc(-1px - spacing.$spacing-xs);
+			/* stylelint-disable-next-line unit-disallowed-list */
+			min-width: 6rem;
+
+			/* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector, selector-class-pattern */
+			& .fudis-dropdown__option__xs {
+				padding: spacing.$spacing-xxs spacing.$spacing-xs;
+			}
+		}
 	}
+
+	
 
 	&__guidance {
 		&__help-text {
@@ -61,5 +83,6 @@
 	
 	&--invalid {
 		border-color: colors.$color-red;
-  }}
+  }
+}
 	

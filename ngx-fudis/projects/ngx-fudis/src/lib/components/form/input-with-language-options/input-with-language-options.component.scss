@@ -28,6 +28,6 @@
 	}
 
 	&__dropdown {
-		width: spacing.$spacing-xxl;
+		max-width: spacing.$spacing-xxl;
 	}
 }

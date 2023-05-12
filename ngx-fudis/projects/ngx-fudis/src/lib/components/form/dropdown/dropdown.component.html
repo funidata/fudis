@@ -12,8 +12,11 @@
 		[id]="id"
 		#fudisDropdown
 		disableOptionCentering
-		panelClass="fudis-dropdown__option-list"
+		[panelClass]="
+			size === 'xs' ? 'fudis-dropdown__option-list fudis-dropdown__option-list__xs' : 'fudis-dropdown__option-list'
+		"
 		class="fudis-dropdown__select"
+		[class.fudis-dropdown__select__xs]="size === 'xs'"
 		[class.fudis-dropdown--invalid]="control.touched && control.invalid"
 		[placeholder]="placeholder"
 		floatPlaceholder="never"
@@ -22,9 +25,11 @@
 		(valueChange)="handleSelectionChange($event)"
 		[attr.required]="isRequired()"
 		[aria-labelledby]="'label_' + id"
+		[hideSingleSelectionIndicator]="hideSingleSelectionIndicator"
 		[attr.aria-describedby]="id + '_guidance'">
 		<mat-option
 			class="fudis-dropdown__option"
+			[class.fudis-dropdown__option__xs]="size === 'xs'"
 			*ngFor="let option of options"
 			[value]="option"
 			[disabled]="option.disabled">

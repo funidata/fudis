@@ -1,6 +1,5 @@
 <div class="fudis-guidance">
 	<div [id]="inputId + '_guidance'">
-		<p *ngIf="helpText" class="fudis-guidance__help-text">{{ helpText }}</p>
 		<div [attr.ariaLive]="ariaLive">
 			<ng-container *ngIf="formGroup?.controls && !control">
 				<ng-container *ngFor="let control of formGroup.controls | keyvalue">
@@ -24,6 +23,7 @@
 
 			<ng-content></ng-content>
 		</div>
+		<p *ngIf="helpText" class="fudis-guidance__help-text">{{ helpText }}</p>
 	</div>
 	<small
 		class="fudis-guidance__character-limit-indicator"

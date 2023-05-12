@@ -50,15 +50,16 @@ const Template: StoryFn = () => ({
 			},
 		},
 		languageOptions: [
-			{ value: 'finnish', viewValue: 'Fi' },
-			{ value: 'swedish', viewValue: 'Sv' },
-			{ value: 'english', viewValue: 'En' },
+			{ value: 'finnish', viewValue: 'FI' },
+			{ value: 'swedish', viewValue: 'SV' },
+			{ value: 'english', viewValue: 'EN' },
 		],
 		formGroup: new FormGroup({
 			finnish: new FormControl('', [Validators.required, Validators.maxLength(12)]),
 			swedish: new FormControl('', [Validators.required, Validators.maxLength(12)]),
 			english: new FormControl('', [Validators.required, Validators.maxLength(12)]),
 		}),
+		missingLanguage: 'Missing',
 	},
 	template: `
 	<fudis-input-with-language-options
@@ -68,6 +69,7 @@ const Template: StoryFn = () => ({
 			[label]="label"
 			[helpText]="helpText"
 			[groupErrorMsg]="groupErrorMsg"
+			[missingLanguage]="missingLanguage"
 			[requiredText]="requiredText"></fudis-input-with-language-options>
 	`,
 });

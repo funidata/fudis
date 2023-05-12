@@ -9,6 +9,7 @@
 		[tooltipToggle]="tooltipToggle">
 	</fudis-label>
 	<input
+		[attr.aria-invalid]="control.invalid"
 		#fudisTextInput
 		[attr.aria-label]="ariaLabel"
 		[formControl]="control"
