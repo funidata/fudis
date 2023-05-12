@@ -11,6 +11,8 @@
 					[size]="'l'"
 					[label]="label"
 					[id]="id"
+					[showRequired]="true"
+					[invalidState]="formGroup.invalid && formGroup.touched"
 					[requiredText]="requiredText"
 					[control]="$any(formGroup).controls[control.key]"></fudis-text-input>
 			</ng-container>

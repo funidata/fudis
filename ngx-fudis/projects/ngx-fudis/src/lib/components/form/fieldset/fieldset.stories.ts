@@ -20,14 +20,20 @@ import { ErrorSummaryService } from '../error-summary/error-summary.service';
 				[errorSummary]="errorSummaryVisible"
 				[helpText]="helpText">
 				<ng-template fudisFieldsetContent>
-					<fudis-grid [columns]="'1fr 1fr'" [columnsM]="'1fr'" [width]="'m'">
+					<fudis-grid
+						[columns]="'1fr 1fr'"
+						[columnsM]="'1fr'"
+						[columnsS]="'1fr'"
+						[columnsXs]="'1fr'"
+						[width]="'m'"
+						[marginSides]="'none'">
 						<fudis-input-with-language-options
 							[missingLanguage]="'Missing'"
 							[id]="'unique-input-1'"
 							[options]="languageOptions"
 							[formGroup]="form.controls['name']"
 							[label]="labelName"
-							[helpText]="'Some name would be nice. Name for all languages must be given.'"
+							[helpText]="'Some name would be nice. Please provide course name in at least one language.'"
 							[groupErrorMsg]="errorName"
 							[requiredText]="requiredText"></fudis-input-with-language-options>
 						<fudis-input-with-language-options
@@ -56,7 +62,7 @@ import { ErrorSummaryService } from '../error-summary/error-summary.service';
 							[helpText]="'So that lazy students can ask for more time on their homework.'"
 							[errorMsg]="errorEmail"
 							[requiredText]="requiredText"></fudis-text-input>
-						<fudis-grid [columns]="'1fr 1fr'">
+						<fudis-grid [columns]="'1fr 1fr'" [marginSides]="'none'">
 							<fudis-datepicker
 								[label]="labelStartDate"
 								[id]="'date-picker-1'"
@@ -89,6 +95,22 @@ import { ErrorSummaryService } from '../error-summary/error-summary.service';
 	`,
 })
 class InputWithLanguageOptionsExampleComponent {
+	// eslint-disable-next-line class-methods-use-this
+	private atLeastOneValidator = () => {
+		return (controlGroup: any) => {
+			const { controls } = controlGroup;
+			if (controls) {
+				const theOne = Object.keys(controls).find((key) => controls[key].value !== '');
+				if (!theOne) {
+					return {
+						atLeastOneRequired: true,
+					};
+				}
+			}
+			return null;
+		};
+	};
+
 	errorSummaryVisible: boolean = false;
 
 	submitForm(): void {
@@ -105,15 +127,7 @@ class InputWithLanguageOptionsExampleComponent {
 	errorSummaryHelpText = 'There are errors in this fieldset. Please address these before trying to submit again.';
 
 	errorName: TFudisGroupErrorMessages = {
-		english: {
-			required: 'Missing course name on English.',
-		},
-		finnish: {
-			required: 'Missing course name on Finnish.',
-		},
-		swedish: {
-			required: 'Missing course name on Swedish.',
-		},
+		atLeastOneRequired: 'Course name is missing.',
 	};
 
 	errorDescription: TFudisGroupErrorMessages = {
@@ -179,11 +193,14 @@ class InputWithLanguageOptionsExampleComponent {
 	requiredText = 'Required';
 
 	form = new FormGroup({
-		name: new FormGroup({
-			finnish: new FormControl('', Validators.required),
-			swedish: new FormControl('', Validators.required),
-			english: new FormControl('', Validators.required),
-		}),
+		name: new FormGroup(
+			{
+				finnish: new FormControl(''),
+				swedish: new FormControl(''),
+				english: new FormControl(''),
+			},
+			[this.atLeastOneValidator()]
+		),
 		description: new FormGroup({
 			finnish: new FormControl('', [Validators.required, Validators.minLength(5)]),
 			swedish: new FormControl(''),

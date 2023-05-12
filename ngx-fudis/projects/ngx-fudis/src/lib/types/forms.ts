@@ -24,10 +24,12 @@ export type TFudisInputErrorMessages = {
 	matDatepickerMin?: string;
 	matDatepickerMax?: string;
 	matDatepickerParse?: string;
+	[key: string]: string | undefined;
 };
 
 export type TFudisGroupErrorMessages = {
-	[key: string]: TFudisInputErrorMessages;
+	atLeastOneRequired?: string;
+	[key: string]: TFudisInputErrorMessages | any;
 };
 
 export interface IFudisDropdownOption {

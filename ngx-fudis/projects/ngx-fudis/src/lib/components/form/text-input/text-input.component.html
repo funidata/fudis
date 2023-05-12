@@ -9,7 +9,7 @@
 		[tooltipToggle]="tooltipToggle">
 	</fudis-label>
 	<input
-		[attr.aria-invalid]="control.invalid"
+		[attr.aria-invalid]="control.invalid || invalidState ? true : false"
 		#fudisTextInput
 		[attr.aria-label]="ariaLabel"
 		[formControl]="control"
@@ -20,7 +20,7 @@
 		(blur)="onBlur($event)"
 		[id]="id"
 		[attr.type]="type"
-		[class.fudis-text-input__input--invalid]="control.invalid && control.touched"
+		[class.fudis-text-input__input--invalid]="(control.touched && control.invalid) || invalidState"
 		class="fudis-text-input__input"
 		[attr.aria-describedby]="id + '_guidance'"
 		[attr.required]="isRequired()" />

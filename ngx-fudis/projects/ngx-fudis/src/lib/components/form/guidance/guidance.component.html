@@ -1,7 +1,7 @@
 <div class="fudis-guidance">
 	<div [id]="inputId + '_guidance'">
 		<div [attr.ariaLive]="ariaLive">
-			<ng-container *ngIf="formGroup?.controls && !control">
+			<ng-container *ngIf="formGroup?.controls && !control && !formGroup.errors">
 				<ng-container *ngFor="let control of formGroup.controls | keyvalue">
 					<ng-container *ngIf="control.value.touched && control.value.errors">
 						<ng-container *ngFor="let error of control.value.errors | keyvalue">
@@ -10,6 +10,14 @@
 								[message]="groupErrorMsg[control.key][asErrorkey(error.key)]"></fudis-error-message>
 						</ng-container>
 					</ng-container>
+				</ng-container>
+			</ng-container>
+
+			<ng-container *ngIf="formGroup?.errors && formGroup.invalid && formGroup.touched">
+				<ng-container *ngFor="let error of formGroup.errors | keyvalue">
+					<fudis-error-message
+						*ngIf="groupErrorMsg[error.key]"
+						[message]="groupErrorMsg[error.key]"></fudis-error-message>
 				</ng-container>
 			</ng-container>
 

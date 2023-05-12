@@ -38,7 +38,7 @@ export class InputBaseDirective extends TooltipApiDirective implements OnInit {
 	/**
 	 * Text to indicate compulsory
 	 */
-	@Input() requiredText: string;
+	@Input() requiredText: string | null;
 
 	/**
 	 * Help text, aligned underneath the input
@@ -55,6 +55,10 @@ export class InputBaseDirective extends TooltipApiDirective implements OnInit {
 	 * Error messages shown when form control validators are invalid
 	 */
 	@Input() errorMsg: TFudisInputErrorMessages;
+
+	@Input() invalidState: boolean = false;
+
+	@Input() showRequired: boolean = false;
 
 	/**
 	 * TBD. Possibly used later for FudisErrorSummary
@@ -90,7 +94,7 @@ export class InputBaseDirective extends TooltipApiDirective implements OnInit {
 	}
 
 	isRequired(): boolean | null {
-		if (this.control?.hasValidator(Validators.required) && this.requiredText) {
+		if ((this.control?.hasValidator(Validators.required) && this.requiredText) || this.showRequired) {
 			return true;
 		}
 		return null;

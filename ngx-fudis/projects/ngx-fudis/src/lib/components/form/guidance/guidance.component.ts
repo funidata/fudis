@@ -53,7 +53,7 @@ export class GuidanceComponent implements AfterViewInit {
 		this.errorSummaryMessages = [];
 
 		if (!this.control && this.formGroup && this.groupErrorMsg) {
-			this.checkGroupErrors(this.formGroup, this.groupErrorMsg);
+			this.checkControlGroupErrors(this.formGroup, this.groupErrorMsg);
 		} else if (this.control && this.errorMsg) {
 			this.checkControlErrors(this.control, this.errorMsg);
 		}
@@ -61,15 +61,28 @@ export class GuidanceComponent implements AfterViewInit {
 		this.getErrorOutput({ id: this.inputId, errors: this.errorSummaryMessages, label: this.inputLabel });
 	}
 
-	checkGroupErrors(group: FormGroup, errors: TFudisGroupErrorMessages): void {
+	checkControlGroupErrors(group: FormGroup, errors: TFudisGroupErrorMessages): void {
 		if (group.touched && group.invalid) {
-			Object.keys(group.controls).forEach((control) => {
-				if (errors[control]) {
-					const currentControl = group.controls?.[control];
-					this.checkControlErrors(currentControl, errors[control]);
-				}
-			});
+			if (group.errors) {
+				this.checkFormGroupErrors(group.errors);
+			} else {
+				Object.keys(group.controls).forEach((control) => {
+					if (errors[control]) {
+						const currentControl = group.controls?.[control];
+						this.checkControlErrors(currentControl, errors[control]);
+					}
+				});
+			}
 		}
+	}
+
+	checkFormGroupErrors(errors: object): void {
+		Object.keys(errors).forEach((error) => {
+			const message = this.groupErrorMsg[error as keyof TFudisGroupErrorMessages];
+			if (message) {
+				this.errorSummaryMessages.push(message);
+			}
+		});
 	}
 
 	checkControlErrors(control: FormControl | any, errors: TFudisInputErrorMessages): void {
