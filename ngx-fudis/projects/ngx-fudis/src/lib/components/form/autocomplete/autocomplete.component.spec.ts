@@ -58,8 +58,6 @@ describe('AutocompleteComponent', () => {
 		it('should display given label', () => {
 			fixture.detectChanges();
 			const childLabelComponent = fixture.debugElement.query(By.css('.fudis-label'));
-			console.log(fixture.debugElement.query(By.css('.fudis-label')));
-			console.log(childLabelComponent);
 			expect(childLabelComponent.nativeElement.innerHTML).toContain('Choose one option');
 		});
 

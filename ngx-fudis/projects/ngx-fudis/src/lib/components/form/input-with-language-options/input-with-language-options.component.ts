@@ -24,6 +24,8 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	dropdownValue: IFudisDropdownOption;
 
+	inputId: string = '';
+
 	@Input() groupErrorMsg: TFudisFieldsetErrorMessages;
 
 	/**
@@ -33,10 +35,12 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	override ngOnInit(): void {
 		this.dropdownControl = new FormControl(this.options[0]);
+		this.inputId = `${this.id}_${this.options[0].value}`;
 	}
 
 	handleLanguageSelect(value: IFudisDropdownOption): void {
 		this.dropdownValue = value;
+		this.inputId = `${this.id}_${value.value}`;
 	}
 
 	handleInputBlur(): void {

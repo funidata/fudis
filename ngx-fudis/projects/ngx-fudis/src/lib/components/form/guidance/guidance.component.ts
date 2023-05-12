@@ -48,9 +48,9 @@ export class GuidanceComponent implements AfterViewInit {
 	constructor(private errorSummaryService: ErrorSummaryService) {}
 
 	ngAfterViewInit(): void {
-		// this.errorSummaryService.reloadWatcher().subscribe(() => {
-		// 	this.checkErrors();
-		// });
+		this.errorSummaryService.reloadWatcher().subscribe(() => {
+			this.checkErrors();
+		});
 	}
 
 	checkErrors(): void {

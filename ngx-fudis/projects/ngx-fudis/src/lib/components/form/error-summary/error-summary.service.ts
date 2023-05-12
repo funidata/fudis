@@ -17,6 +17,8 @@ export class ErrorSummaryService {
 	updateErrorList(message: TFudisFormErrorSummaryItem) {
 		const currentErrors = this.errorListBus.value;
 
+		console.log(message);
+
 		const errorListIndex = currentErrors.findIndex((error) => error.id === message.id);
 
 		if (errorListIndex !== -1 && message.errors.length > 0) {

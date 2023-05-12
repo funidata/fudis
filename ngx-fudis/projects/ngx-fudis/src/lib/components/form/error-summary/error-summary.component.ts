@@ -25,6 +25,7 @@ export class ErrorSummaryComponent implements OnInit {
 
 	getVisibleErrors(): TFudisFormErrorSummaryItem[] {
 		return this.errorList.filter((item) => {
+			console.log(item.id);
 			if (this.parentComponent?.querySelector(`#${item.id}`)) {
 				return item;
 			}

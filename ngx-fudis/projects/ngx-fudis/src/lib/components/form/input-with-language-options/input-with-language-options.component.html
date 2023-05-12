@@ -3,25 +3,24 @@
 		<ng-container *ngIf="formGroup.controls">
 			<ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
 				<fudis-text-input
+					*ngIf="control.key === dropdownControl.value.value"
 					(handleBlur)="handleInputBlur()"
 					[type]="type"
 					class="fudis-input-with-language-options__inputs__item"
-					[class.fudis-input-with-language-options__inputs__item--hidden]="control.key !== dropdownControl.value.value"
 					[ariaLabel]="label + ', ' + dropdownControl.value.viewValue"
 					[size]="'l'"
 					[label]="label"
-					[id]="id + '_' + control.key"
+					[id]="id"
 					[requiredText]="requiredText"
 					[control]="$any(formGroup).controls[control.key]"></fudis-text-input>
-				<fudis-guidance
-					[class.fudis-input-with-language-options__inputs__item--hidden]="control.key !== dropdownControl.value.value"
-					[inputLabel]="label"
-					[groupErrorMsg]="groupErrorMsg"
-					[helpText]="helpText"
-					[formGroup]="formGroup"
-					[inputId]="id + '_' + control.key">
-				</fudis-guidance>
 			</ng-container>
+			<fudis-guidance
+				[inputLabel]="label"
+				[groupErrorMsg]="groupErrorMsg"
+				[helpText]="helpText"
+				[formGroup]="formGroup"
+				[inputId]="id">
+			</fudis-guidance>
 		</ng-container>
 	</div>
 	<fudis-dropdown
