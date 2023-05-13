@@ -1,16 +1,7 @@
-import {
-	AfterContentInit,
-	Component,
-	ContentChild,
-	ElementRef,
-	Input,
-	OnChanges,
-	ViewEncapsulation,
-} from '@angular/core';
+import { AfterContentInit, Component, ContentChild, ElementRef, Input, ViewEncapsulation } from '@angular/core';
 
-import { FieldsetContentDirective } from './fieldset-directives';
-import { FieldsetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
-import { ErrorSummaryService } from '../error-summary/error-summary.service';
+import { FieldSetContentDirective } from './fieldset-directives';
+import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 
 @Component({
 	selector: 'fudis-fieldset',
@@ -18,26 +9,29 @@ import { ErrorSummaryService } from '../error-summary/error-summary.service';
 	styleUrls: ['./fieldset.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class FieldsetComponent extends FieldsetBaseDirective implements AfterContentInit, OnChanges {
-	@ContentChild(FieldsetContentDirective) fieldsetContent: FieldsetContentDirective;
+export class FieldSetComponent extends FieldSetBaseDirective implements AfterContentInit {
+	@ContentChild(FieldSetContentDirective) fieldsetContent: FieldSetContentDirective;
 
-	constructor(private elementRef: ElementRef, private errorSummaryService: ErrorSummaryService) {
+	constructor(private elementRef: ElementRef) {
 		super();
 	}
 
-	fieldsetElement: HTMLFieldSetElement | undefined;
+	/**
+	 * If Error Summary is visible. Usually set on click of form submit button.
+	 */
+	@Input() errorSummaryVisible: boolean = false;
 
-	@Input() errorSummary: boolean = false;
-
+	/**
+	 * Help text displayed in Error Summary before listing individual errors.
+	 */
 	@Input() errorSummaryHelpText: string | null = null;
 
+	/**
+	 * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.
+	 */
 	@Input() errorSummaryScreenReaderHelpText: string | null = null;
 
-	ngOnChanges(): void {
-		if (this.errorSummary) {
-			this.errorSummaryService.reloadErrors();
-		}
-	}
+	fieldsetElement: HTMLFieldSetElement | undefined;
 
 	ngAfterContentInit(): void {
 		this.fieldsetElement = this.elementRef.nativeElement as HTMLFieldSetElement;

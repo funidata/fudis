@@ -5,22 +5,23 @@ import { Component, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IFudisDropdownOption, TFudisGroupErrorMessages, TFudisInputErrorMessages } from '../../../types/forms';
 
-import { FieldsetComponent } from './fieldset.component';
+import { FieldSetComponent } from './fieldset.component';
 import { ErrorSummaryService } from '../error-summary/error-summary.service';
 import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 
 @Component({
-	selector: 'example-input-with-language-options',
+	selector: 'example-fieldset',
 	template: `
 		<form>
 			<fudis-fieldset
 				[errorSummaryScreenReaderHelpText]="'Attention:'"
 				[legend]="legend"
 				[id]="fieldsetId"
+				[errorSummaryScreenReaderHelpText]="'Attention'"
 				[errorSummaryHelpText]="errorSummaryHelpText"
-				[errorSummary]="errorSummaryVisible"
+				[errorSummaryVisible]="errorSummaryVisible"
 				[helpText]="helpText">
-				<ng-template fudisFieldsetContent>
+				<ng-template fudisFieldSetContent>
 					<fudis-grid
 						[columns]="'1fr 1fr'"
 						[columnsM]="'1fr'"
@@ -32,7 +33,7 @@ import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 							[missingLanguage]="'Missing'"
 							[id]="'unique-input-1'"
 							[options]="languageOptions"
-							[formGroup]="form.controls['name']"
+							[formGroup]="fieldsetExample.controls['name']"
 							[label]="labelName"
 							[helpText]="'Some name would be nice. Please provide course name in at least one language.'"
 							[groupErrorMsg]="errorName"
@@ -41,7 +42,7 @@ import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 							[missingLanguage]="'Missing'"
 							[id]="'unique-input-2'"
 							[options]="languageOptions"
-							[formGroup]="form.controls['description']"
+							[formGroup]="fieldsetExample.controls['description']"
 							[label]="labelDescription"
 							[helpText]="
 								'So that students know what they are getting into. Please give description at least in Finnish and English.'
@@ -50,7 +51,7 @@ import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 							[requiredText]="requiredText"></fudis-input-with-language-options>
 						<fudis-text-input
 							[id]="'unique-input-3'"
-							[control]="form.controls['teacher']"
+							[control]="fieldsetExample.controls['teacher']"
 							[label]="labelTeacher"
 							[helpText]="'Someone has to be responsible about this.'"
 							[errorMsg]="errorTeacher"
@@ -58,7 +59,7 @@ import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 						<fudis-text-input
 							[id]="'unique-input-4'"
 							[helpText]="inputHelpText"
-							[control]="form.controls['email']"
+							[control]="fieldsetExample.controls['email']"
 							[label]="labelEmail"
 							[helpText]="'So that lazy students can ask for more time on their homework.'"
 							[errorMsg]="errorEmail"
@@ -71,9 +72,11 @@ import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 								[requiredText]="requiredText"
 								[helpText]="'You have to start from somewhere'"
 								[errorMsg]="errorStartdate"
-								[control]="form.controls['startDate']"
+								[control]="fieldsetExample.controls['startDate']"
 								[minDate]="minDate"
-								[maxDate]="form.controls['endDate'].value ? form.controls['endDate'].value : maxDate">
+								[maxDate]="
+									fieldsetExample.controls['endDate'].value ? fieldsetExample.controls['endDate'].value : maxDate
+								">
 							</fudis-datepicker>
 							<fudis-datepicker
 								[label]="labelEndDate"
@@ -82,9 +85,11 @@ import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 								[requiredText]="requiredText"
 								[helpText]="'You have to end it to something'"
 								[errorMsg]="errorEnddate"
-								[control]="form.controls['endDate']"
-								[disabled]="!form.controls['startDate'].value && !form.controls['startDate'].valid"
-								[minDate]="form.controls['startDate'].value">
+								[control]="fieldsetExample.controls['endDate']"
+								[disabled]="
+									!fieldsetExample.controls['startDate'].value && !fieldsetExample.controls['startDate'].valid
+								"
+								[minDate]="fieldsetExample.controls['startDate'].value">
 							</fudis-datepicker>
 						</fudis-grid>
 						<div></div>
@@ -99,9 +104,9 @@ class InputWithLanguageOptionsExampleComponent {
 	errorSummaryVisible: boolean = false;
 
 	submitForm(): void {
-		this.form.markAllAsTouched();
+		this.fieldsetExample.markAllAsTouched();
 
-		if (this.form.invalid) {
+		if (this.fieldsetExample.invalid) {
 			this.errorSummaryVisible = true;
 			this.errorSummaryService.reloadErrors();
 		} else {
@@ -177,7 +182,7 @@ class InputWithLanguageOptionsExampleComponent {
 
 	requiredText = 'Required';
 
-	form = new FormGroup({
+	fieldsetExample = new FormGroup({
 		name: new FormGroup(
 			{
 				finnish: new FormControl(''),
@@ -204,14 +209,12 @@ class InputWithLanguageOptionsExampleComponent {
 		{ value: 'english', viewValue: 'En' },
 	];
 
-	// `Fi${this.form.controls['name']['finnish'].invalid ? ' (missing)' : ''`
-
 	constructor(private formBuilder: FormBuilder, private errorSummaryService: ErrorSummaryService) {}
 }
 
 export default {
-	title: 'Components/Form/Fieldset',
-	component: FieldsetComponent,
+	title: 'Components/Form/FieldSet',
+	component: FieldSetComponent,
 
 	argTypes: {},
 	decorators: [
@@ -232,7 +235,7 @@ export default {
 
 const Template: StoryFn = () => ({
 	template: `
-	<example-input-with-language-options></example-input-with-language-options>
+	<example-fieldset></example-fieldset>
 	`,
 });
 

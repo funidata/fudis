@@ -3,10 +3,10 @@
 import { Directive, TemplateRef } from '@angular/core';
 
 /**
- * A marker directive used to tag the template that will be rendered inside an `FieldsetComponent`.
+ * A marker directive used to tag the template that will be rendered inside an `FieldSetComponent`.
  */
 
-@Directive({ selector: '[fudisFieldsetContent]' })
-export class FieldsetContentDirective {
+@Directive({ selector: '[fudisFieldSetContent]' })
+export class FieldSetContentDirective {
 	constructor(public templateRef: TemplateRef<unknown>) {}
 }

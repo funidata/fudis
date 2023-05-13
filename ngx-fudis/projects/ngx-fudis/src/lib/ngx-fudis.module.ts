@@ -35,7 +35,7 @@ import { ErrorSummaryService } from './components/form/error-summary/error-summa
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
 import { ExpandableContentDirective, ExpandableActionsDirective } from './components/expandable/expandable-directives';
-import { FieldsetComponent } from './components/form/fieldset/fieldset.component';
+import { FieldSetComponent } from './components/form/fieldset/fieldset.component';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { GridComponent } from './components/grid/grid.component';
 import { GridApiDirective } from './directives/grid/grid-api.directive';
@@ -54,9 +54,9 @@ import { TextSpacingComponent } from './components/typography/text-spacing/text-
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { InputBaseDirective } from './directives/form/input-base/input-base.directive';
-import { FieldsetBaseDirective } from './directives/form/fieldset-base/fieldset-base.directive';
+import { FieldSetBaseDirective } from './directives/form/fieldset-base/fieldset-base.directive';
 
-import { FieldsetContentDirective } from './components/form/fieldset/fieldset-directives';
+import { FieldSetContentDirective } from './components/form/fieldset/fieldset-directives';
 
 import { InputWithLanguageOptionsComponent } from './components/form/input-with-language-options/input-with-language-options.component';
 
@@ -84,9 +84,9 @@ import { InputWithLanguageOptionsComponent } from './components/form/input-with-
 		ExpandableComponent,
 		ExpandableActionsDirective,
 		ExpandableContentDirective,
-		FieldsetBaseDirective,
-		FieldsetComponent,
-		FieldsetContentDirective,
+		FieldSetBaseDirective,
+		FieldSetComponent,
+		FieldSetContentDirective,
 		InputWithLanguageOptionsComponent,
 		GridComponent,
 		GridApiDirective,
@@ -151,8 +151,8 @@ import { InputWithLanguageOptionsComponent } from './components/form/input-with-
 		DialogContentDirective,
 		DialogCloseDirective,
 		DialogActionsDirective,
-		FieldsetComponent,
-		FieldsetContentDirective,
+		FieldSetComponent,
+		FieldSetContentDirective,
 		InputWithLanguageOptionsComponent,
 		GridComponent,
 		GridDirective,

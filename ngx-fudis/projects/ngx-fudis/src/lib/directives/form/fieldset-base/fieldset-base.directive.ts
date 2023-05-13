@@ -2,9 +2,9 @@ import { Directive, Input } from '@angular/core';
 import { Validators } from '@angular/forms';
 
 @Directive({
-	selector: '[fudisFieldsetBase]',
+	selector: '[fudisFieldSetBase]',
 })
-export class FieldsetBaseDirective {
+export class FieldSetBaseDirective {
 	/**
 	 * Legend for fieldset
 	 */

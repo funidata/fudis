@@ -4,7 +4,7 @@ import { MockComponent } from 'ng-mocks';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
 import { IFudisRadioButtonOption } from '../../../types/forms';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
-import { FieldsetComponent } from '../fieldset/fieldset.component';
+import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 
 const testFormControl: FormControl = new FormControl('capybara');
@@ -24,7 +24,7 @@ describe('RadioButtonGroupComponent', () => {
 			declarations: [
 				RadioButtonGroupComponent,
 				MockComponent(RadioButtonComponent),
-				MockComponent(FieldsetComponent),
+				MockComponent(FieldSetComponent),
 				MockComponent(GuidanceComponent),
 			],
 			imports: [ReactiveFormsModule],

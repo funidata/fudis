@@ -10,9 +10,20 @@ import { TFudisFormErrorSummaryItem } from '../../../types/forms';
 export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 	@ViewChild('focusTarget') focusTarget: ElementRef;
 
+	/**
+	 * FieldSet parent element of this ErrorSummaryComponent
+	 */
 	@Input() parentComponent: HTMLFieldSetElement | undefined;
 
+	/**
+	 * Help text displayed in Error Summary before listing individual errors.
+	 */
 	@Input() helpText: string | null | undefined;
+
+	/**
+	 * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.
+	 */
+	@Input() screenReaderHelpText: string | null | undefined;
 
 	constructor(private errorSummaryService: ErrorSummaryService) {}
 

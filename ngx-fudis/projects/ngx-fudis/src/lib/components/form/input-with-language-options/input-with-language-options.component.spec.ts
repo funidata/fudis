@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockComponent } from 'ng-mocks';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { InputWithLanguageOptionsComponent } from './input-with-language-options.component';
-import { FieldsetComponent } from '../fieldset/fieldset.component';
+import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { IFudisDropdownOption } from '../../../types/forms';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { TextInputComponent } from '../text-input/text-input.component';
@@ -29,7 +29,7 @@ describe('InputWithLanguageOptionsComponent', () => {
 		await TestBed.configureTestingModule({
 			declarations: [
 				InputWithLanguageOptionsComponent,
-				MockComponent(FieldsetComponent),
+				MockComponent(FieldSetComponent),
 				MockComponent(DropdownComponent),
 				MockComponent(TextInputComponent),
 				MockComponent(GuidanceComponent),

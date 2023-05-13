@@ -9,14 +9,32 @@ import { InputBaseDirective } from '../../../directives/form/input-base/input-ba
 	styleUrls: ['./input-with-language-options.component.scss'],
 })
 export class InputWithLanguageOptionsComponent extends InputBaseDirective implements OnInit {
+	/**
+	 * FormGroup including controls.
+	 */
 	@Input() formGroup: FormGroup;
 
+	/**
+	 * Option list for language selection Fudis Dropdown. To pair control with corresponding dropdown option Dropdown option "value" must equal to control's name. E.g. "{value: 'english', viewValue: 'EN'}" pairs with "english: New FormControl('')"
+	 */
 	@Input() options: IFudisDropdownOption[];
 
 	/**
-	 * Available sizes for the input - defaults to large. Recommended size for number input is small.
+	 * Available sizes for the input - defaults to large.
 	 */
 	@Input() size?: 's' | 'm' | 'l' = 'l';
+
+	/*
+	 * Object containing error messages for each FormControl and for the FormGroup.
+	 * E. g. {atLeastOneRequired: 'At least one input of any language must have a value.', finnish:{maxlength: 'Input in Finnish cannot be longer than X charactes.'}}
+	 */
+
+	@Input() groupErrorMsg: TFudisGroupErrorMessages;
+
+	/**
+	 * Indicator text added to the dropdown list if input of a language is empty.
+	 */
+	@Input() missingLanguage: string | null;
 
 	dropdownControl: FormControl;
 
@@ -29,15 +47,6 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	currentValues: { [key: string]: any } = {};
 
 	atLeastOneIsRequired: boolean = false;
-
-	@Input() groupErrorMsg: TFudisGroupErrorMessages;
-
-	@Input() missingLanguage: string | null;
-
-	/**
-	 * Type of the input - defaults to 'text'
-	 */
-	@Input() type: 'email' | 'number' | 'password' | 'tel' | 'text' | 'url' = 'text';
 
 	updatedOptions: IFudisDropdownOption[] = [];
 
