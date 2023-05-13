@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, Input, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TFudisInputErrorMessages, TFudisFormErrorSummaryItem, TFudisGroupErrorMessages } from '../../../types/forms';
 import { ErrorSummaryService } from '../error-summary/error-summary.service';
@@ -9,30 +9,55 @@ import { ErrorSummaryService } from '../error-summary/error-summary.service';
 	styleUrls: ['./guidance.component.scss'],
 })
 export class GuidanceComponent implements AfterViewInit {
-	@Input() inputId: string;
+	/**
+	 * Id of input, fieldset or similar which Guidance is related to. Used in aria attributes and in emit information for Error Summary Service
+	 */
+	@Input() for: string;
 
+	/**
+	 * Label text of input, fieldset or similar Guidance is related to. Used in emit information for Error Summary service.
+	 */
 	@Input() inputLabel: string;
 
+	/**
+	 * FormControl of related input.
+	 */
 	@Input() control: FormControl;
 
+	/**
+	 * FormGroup of related FormGroup
+	 */
 	@Input() formGroup: FormGroup;
 
+	/**
+	 * Text displayed as guidance help text.
+	 */
 	@Input() helpText: string | undefined;
 
-	@Input() maxLength: number | undefined;
-
+	/**
+	 * If there is no Fudis Fieldset and Error Summary associated with this input and its Guidance, 'polite' can be considered so that screen reader will get notified if there are new errors related to the input.
+	 */
 	@Input() ariaLive: 'off' | 'polite' | 'assertive' = 'off';
 
 	/**
-	 * Assistive text of max character count for screen readers
+	 * When set displays also a character count indicator.
+	 */
+	@Input() maxLength: number | undefined;
+
+	/**
+	 * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where "characters used" is "maxLengthText"
 	 */
 	@Input() maxLengthText: string;
 
+	/**
+	 * Used if FormGroup is associated with Guidance
+	 */
 	@Input() groupErrorMsg: TFudisGroupErrorMessages;
 
+	/**
+	 * Used if FormControl is associated with Guidance
+	 */
 	@Input() errorMsg: TFudisInputErrorMessages;
-
-	@Output() errorOutput: EventEmitter<TFudisFormErrorSummaryItem> = new EventEmitter<TFudisFormErrorSummaryItem>();
 
 	// eslint-disable-next-line class-methods-use-this
 	asErrorkey(errorKey: any): keyof TFudisInputErrorMessages {
@@ -58,7 +83,7 @@ export class GuidanceComponent implements AfterViewInit {
 			this.checkControlErrors(this.control, this.errorMsg);
 		}
 
-		this.getErrorOutput({ id: this.inputId, errors: this.errorSummaryMessages, label: this.inputLabel });
+		this.getErrorOutput({ id: this.for, errors: this.errorSummaryMessages, label: this.inputLabel });
 	}
 
 	checkControlGroupErrors(group: FormGroup, errors: TFudisGroupErrorMessages): void {

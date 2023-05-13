@@ -7,6 +7,7 @@ import { IFudisDropdownOption, TFudisGroupErrorMessages, TFudisInputErrorMessage
 
 import { FieldsetComponent } from './fieldset.component';
 import { ErrorSummaryService } from '../error-summary/error-summary.service';
+import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 
 @Component({
 	selector: 'example-input-with-language-options',
@@ -95,22 +96,6 @@ import { ErrorSummaryService } from '../error-summary/error-summary.service';
 	`,
 })
 class InputWithLanguageOptionsExampleComponent {
-	// eslint-disable-next-line class-methods-use-this
-	private atLeastOneValidator = () => {
-		return (controlGroup: any) => {
-			const { controls } = controlGroup;
-			if (controls) {
-				const theOne = Object.keys(controls).find((key) => controls[key].value !== '');
-				if (!theOne) {
-					return {
-						atLeastOneRequired: true,
-					};
-				}
-			}
-			return null;
-		};
-	};
-
 	errorSummaryVisible: boolean = false;
 
 	submitForm(): void {
@@ -199,7 +184,7 @@ class InputWithLanguageOptionsExampleComponent {
 				swedish: new FormControl(''),
 				english: new FormControl(''),
 			},
-			[this.atLeastOneValidator()]
+			[FudisFormGroupValidators.atLeastOneRequired()]
 		),
 		description: new FormGroup({
 			finnish: new FormControl('', [Validators.required, Validators.minLength(5)]),

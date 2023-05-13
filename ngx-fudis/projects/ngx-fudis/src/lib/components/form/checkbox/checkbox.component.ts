@@ -15,8 +15,6 @@ export class CheckboxComponent extends InputBaseDirective {
 	 */
 	@Input() name: string;
 
-	showError: boolean = false;
-
 	isChecked: boolean;
 
 	handleCheckboxClick(): void {

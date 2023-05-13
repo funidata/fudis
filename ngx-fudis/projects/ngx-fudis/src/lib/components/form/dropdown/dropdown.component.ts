@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
+import { Component, Input, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
 import { IFudisDropdownOption } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
@@ -8,7 +8,7 @@ import { InputBaseDirective } from '../../../directives/form/input-base/input-ba
 	styleUrls: ['./dropdown.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class DropdownComponent extends InputBaseDirective implements OnInit {
+export class DropdownComponent extends InputBaseDirective {
 	/**
 	 * Dropdown options
 	 */
@@ -29,10 +29,14 @@ export class DropdownComponent extends InputBaseDirective implements OnInit {
 	 */
 	@Input() size?: 'xs' | 's' | 'm' | 'l' = 'l';
 
+	/**
+	 * Hide select option checkmark in option list
+	 */
+
 	@Input() hideSingleSelectionIndicator: boolean = false;
 
 	/**
-	 * Value output event
+	 * Value output event on selectoion change
 	 */
 	@Output() selectionUpdate: EventEmitter<IFudisDropdownOption> = new EventEmitter<IFudisDropdownOption>();
 

@@ -1,5 +1,5 @@
 <div class="fudis-guidance">
-	<div [id]="inputId + '_guidance'">
+	<div [id]="for + '_guidance'">
 		<div [attr.ariaLive]="ariaLive">
 			<ng-container *ngIf="formGroup?.controls && !control && !formGroup.errors">
 				<ng-container *ngFor="let control of formGroup.controls | keyvalue">

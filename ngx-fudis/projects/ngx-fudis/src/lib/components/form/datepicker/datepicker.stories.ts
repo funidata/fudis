@@ -38,14 +38,13 @@ import { TFudisInputErrorMessages } from '../../../types/forms';
 					[minDate]="mainFormGroup.controls['first'].value">
 				</fudis-datepicker>
 			</fieldset>
-			<fudis-guidance [inputLabel]="label" [helpText]="'Select both dates.'" [inputId]="id">
+			<fudis-guidance [inputLabel]="label" [helpText]="'Select both dates.'" [for]="id">
 				<fudis-error-message
 					*ngIf="
 						mainFormGroup.controls['first']?.touched &&
 						mainFormGroup.controls['second'].touched &&
 						(mainFormGroup.controls['first']?.errors?.required || mainFormGroup.controls['second']?.errors?.required)
 					"
-					[id]="'error-on-missing-one'"
 					[message]="'Missing one or more values'"></fudis-error-message>
 			</fudis-guidance>
 

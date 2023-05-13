@@ -11,7 +11,7 @@
 					[size]="'l'"
 					[label]="label"
 					[id]="id"
-					[showRequired]="true"
+					[required]="checkAtLeastOneIsRequired(control.key, control.value.value)"
 					[invalidState]="formGroup.invalid && formGroup.touched"
 					[requiredText]="requiredText"
 					[control]="$any(formGroup).controls[control.key]"></fudis-text-input>
@@ -21,7 +21,7 @@
 				[groupErrorMsg]="groupErrorMsg"
 				[helpText]="helpText"
 				[formGroup]="formGroup"
-				[inputId]="id">
+				[for]="id">
 			</fudis-guidance>
 		</ng-container>
 	</div>

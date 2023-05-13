@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { AfterContentInit, Component, DoCheck, Inject, Input } from '@angular/core';
+import { AfterContentInit, Component, DoCheck, HostBinding, Inject, Input, ViewEncapsulation } from '@angular/core';
 import {
 	MatDateFormats,
 	MAT_NATIVE_DATE_FORMATS,
@@ -28,6 +28,7 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
 	selector: 'fudis-datepicker[id][label]',
 	templateUrl: './datepicker.component.html',
 	styleUrls: ['./datepicker.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 	providers: [
 		{
 			provide: DateAdapter,
@@ -38,6 +39,8 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
 	],
 })
 export class DatepickerComponent extends InputBaseDirective implements DoCheck, AfterContentInit {
+	@HostBinding('class') classes = 'fudis-datepicker-host';
+
 	constructor(private readonly adapter: DateAdapter<Date>, @Inject(DOCUMENT) private document: Document) {
 		super();
 	}

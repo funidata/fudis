@@ -24,7 +24,11 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	dropdownValue: IFudisDropdownOption;
 
-	inputId: string = '';
+	for: string = '';
+
+	currentValues: { [key: string]: any } = {};
+
+	atLeastOneIsRequired: boolean = false;
 
 	@Input() groupErrorMsg: TFudisGroupErrorMessages;
 
@@ -37,15 +41,15 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	updatedOptions: IFudisDropdownOption[] = [];
 
-	override ngOnInit(): void {
+	ngOnInit(): void {
 		this.updatedOptions = this.missingLanguage ? this.updateDropdownList() : this.options;
 		this.dropdownControl = new FormControl(this.updatedOptions[0]);
-		this.inputId = `${this.id}_${this.options[0].value}`;
+		this.for = `${this.id}_${this.options[0].value}`;
 	}
 
 	handleLanguageSelect(value: IFudisDropdownOption): void {
 		this.dropdownValue = value;
-		this.inputId = `${this.id}_${value.value}`;
+		this.for = `${this.id}_${value.value}`;
 	}
 
 	handleInputBlur(): void {
@@ -76,5 +80,28 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 		});
 
 		return newOptions;
+	}
+
+	checkAtLeastOneIsRequired(controlKey: string, controlValue: string): boolean {
+		if (!this.currentValues[controlKey]) {
+			this.currentValues = { ...this.currentValues, [controlKey]: controlValue };
+		} else {
+			this.currentValues[controlKey] = controlValue;
+		}
+
+		if (this.formGroup?.errors?.['atLeastOneRequired']) {
+			this.atLeastOneIsRequired = true;
+			return true;
+		}
+
+		const nonEmptyControls = Object.values(this.currentValues).filter((item) => {
+			return item !== '';
+		});
+
+		if (nonEmptyControls.length === 1 && controlValue && this.atLeastOneIsRequired) {
+			return true;
+		}
+
+		return false;
 	}
 }

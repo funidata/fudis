@@ -17,6 +17,7 @@
 	}
 
 	&__inputs {
+		flex: 1;
 		margin-right: spacing.$spacing-xxs;
 		max-width: calc(100% - spacing.$spacing-xxl - spacing.$spacing-xxs);
 
