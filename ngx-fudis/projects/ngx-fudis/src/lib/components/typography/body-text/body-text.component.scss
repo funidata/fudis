@@ -1,12 +1,14 @@
 @use '../../../foundations/typography/mixins.scss' as typography;
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
 @use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-body-text-host {
 	display: block;
 }
 
 .fudis-body-text {
+	@include utilities.box-reset;
 	@include colorMixins.text-color('gray-dark');
 
 	&__s-regular {
@@ -29,14 +31,6 @@
 		@include typography.body-text-l-light;
 	}
 
-	&__paragraph {
-		margin: 0;
-
-		fudis-link {
-			display: inline-block;
-		}
-	}
-
 	&__margin-bottom {
 		&__m {
 			margin-bottom: spacing.$spacing-m;
@@ -45,5 +39,10 @@
 		&__l {
 			margin-bottom: spacing.$spacing-l;
 		}
+	}
+
+	/* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
+	& fudis-link {
+		display: inline-block;
 	}
 }

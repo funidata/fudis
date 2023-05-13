@@ -5,7 +5,6 @@
 @use '../../foundations/grid/mixins.scss' as grid;
 @use '../../foundations/grid/tokens.scss' as gridTokens;
 @use '../../foundations/spacing/tokens.scss' as spacing;
-@use '../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-grid {
 	display: grid;
