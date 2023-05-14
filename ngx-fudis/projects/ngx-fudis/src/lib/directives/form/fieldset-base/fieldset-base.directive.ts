@@ -25,5 +25,10 @@ export class FieldSetBaseDirective {
 	 */
 	@Input() helpText: string;
 
+	/**
+	 * To disable Field Set content as Fudis Grid. Used in e. g. Radio Button Group.
+	 */
+	@Input() disableGrid: boolean = false;
+
 	requiredValidator = Validators.required;
 }

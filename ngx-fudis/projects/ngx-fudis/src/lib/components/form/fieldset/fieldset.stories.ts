@@ -3,7 +3,12 @@ import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/ang
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Component, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IFudisDropdownOption, TFudisGroupErrorMessages, TFudisInputErrorMessages } from '../../../types/forms';
+import {
+	IFudisDropdownOption,
+	IFudisRadioButtonOption,
+	TFudisGroupErrorMessages,
+	TFudisInputErrorMessages,
+} from '../../../types/forms';
 
 import { FieldSetComponent } from './fieldset.component';
 import { ErrorSummaryService } from '../error-summary/error-summary.service';
@@ -64,6 +69,13 @@ import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 							[helpText]="'So that lazy students can ask for more time on their homework.'"
 							[errorMsg]="errorEmail"
 							[requiredText]="requiredText"></fudis-text-input>
+
+						<fudis-radio-button-group
+							[legend]="labelCourseType"
+							[id]="'radio-button-group-1'"
+							[options]="courseTypeOptions"
+							[control]="fieldsetExample.controls['courseType']"
+							[errorMsg]="errorCourseType"></fudis-radio-button-group>
 						<fudis-grid [columns]="'1fr 1fr'" [marginSides]="'none'">
 							<fudis-datepicker
 								[label]="labelStartDate"
@@ -92,7 +104,6 @@ import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 								[minDate]="fieldsetExample.controls['startDate'].value">
 							</fudis-datepicker>
 						</fudis-grid>
-						<div></div>
 						<fudis-button [label]="'Submit'" (handleClick)="submitForm()"></fudis-button>
 					</fudis-grid>
 				</ng-template>
@@ -154,6 +165,10 @@ class InputWithLanguageOptionsExampleComponent {
 		matDatepickerParse: 'Date should be in dd.mm.yyyy format.',
 	};
 
+	errorCourseType: TFudisInputErrorMessages = {
+		required: 'Course type must be selected.',
+	};
+
 	fieldsetId = 'unique-fieldset-id';
 
 	minDate = new Date();
@@ -176,9 +191,7 @@ class InputWithLanguageOptionsExampleComponent {
 
 	labelEndDate = 'End date';
 
-	labelOne = 'Course teacher email';
-
-	labelTwo = 'Course name';
+	labelCourseType = 'Course type';
 
 	requiredText = 'Required';
 
@@ -200,13 +213,19 @@ class InputWithLanguageOptionsExampleComponent {
 		email: new FormControl('', [Validators.required, Validators.email, Validators.minLength(5)]),
 		startDate: new FormControl('', Validators.required),
 		endDate: new FormControl('', Validators.required),
+		courseType: new FormControl('', Validators.required),
 	});
 
 	languageOptions: IFudisDropdownOption[] = [
 		// eslint-disable-next-line @typescript-eslint/dot-notation
-		{ value: 'finnish', viewValue: 'Fi' },
-		{ value: 'swedish', viewValue: 'Sv' },
-		{ value: 'english', viewValue: 'En' },
+		{ value: 'finnish', viewValue: 'FI' },
+		{ value: 'swedish', viewValue: 'SV' },
+		{ value: 'english', viewValue: 'EN' },
+	];
+
+	courseTypeOptions: IFudisRadioButtonOption[] = [
+		{ value: 'basic', viewValue: 'Basic', id: 'courseType-1', name: 'courseType' },
+		{ value: 'advanced', viewValue: 'Advanced', id: 'courseType-1', name: 'courseType' },
 	];
 
 	constructor(private formBuilder: FormBuilder, private errorSummaryService: ErrorSummaryService) {}
