@@ -1,6 +1,6 @@
 import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/angular';
 
-import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -12,7 +12,7 @@ import {
 
 import { FieldSetComponent } from './fieldset.component';
 import { ErrorSummaryService } from '../error-summary/error-summary.service';
-import { FudisFormGroupValidators } from '../../../utilities/form/validators';
+import { FormGroupValidators } from '../../../utilities/form/validators';
 
 @Component({
 	selector: 'example-fieldset',
@@ -40,18 +40,17 @@ import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 							[options]="languageOptions"
 							[formGroup]="fieldsetExample.controls['name']"
 							[label]="labelName"
-							[helpText]="'Some name would be nice. Please provide course name in at least one language.'"
+							[helpText]="'Some name would be nice. Provide course name in at least one language.'"
 							[groupErrorMsg]="errorName"
 							[requiredText]="requiredText"></fudis-input-with-language-options>
 						<fudis-input-with-language-options
+							[variant]="'text-area'"
 							[missingLanguage]="'Missing'"
 							[id]="'unique-input-2'"
 							[options]="languageOptions"
 							[formGroup]="fieldsetExample.controls['description']"
 							[label]="labelDescription"
-							[helpText]="
-								'So that students know what they are getting into. Please give description at least in Finnish and English.'
-							"
+							[helpText]="'So that students know what they are getting into. Provide description in all languages.'"
 							[groupErrorMsg]="errorDescription"
 							[requiredText]="requiredText"></fudis-input-with-language-options>
 						<fudis-text-input
@@ -66,7 +65,7 @@ import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 							[helpText]="inputHelpText"
 							[control]="fieldsetExample.controls['email']"
 							[label]="labelEmail"
-							[helpText]="'So that lazy students can ask for more time on their homework.'"
+							[helpText]="'So that students can ask for more time on their homework.'"
 							[errorMsg]="errorEmail"
 							[requiredText]="requiredText"></fudis-text-input>
 
@@ -134,11 +133,12 @@ class InputWithLanguageOptionsExampleComponent {
 	errorDescription: TFudisGroupErrorMessages = {
 		english: {
 			required: 'Missing description in English.',
-			minlength: 'Description should at least 5 characters.',
+			minlength: 'Description should at least 10 characters.',
 		},
+		swedish: { required: 'Missing description in Swedish.', minlength: 'Description should at least 10 characters.' },
 		finnish: {
 			required: 'Missing description in Finnish.',
-			minlength: 'Description should at least 5 characters.',
+			minlength: 'Description should at least 10 characters.',
 		},
 	};
 
@@ -202,12 +202,12 @@ class InputWithLanguageOptionsExampleComponent {
 				swedish: new FormControl(''),
 				english: new FormControl(''),
 			},
-			[FudisFormGroupValidators.atLeastOneRequired()]
+			[FormGroupValidators.atLeastOneRequired()]
 		),
 		description: new FormGroup({
-			finnish: new FormControl('', [Validators.required, Validators.minLength(5)]),
-			swedish: new FormControl(''),
-			english: new FormControl('', [Validators.required, Validators.minLength(5)]),
+			finnish: new FormControl('', [Validators.required, Validators.minLength(10)]),
+			swedish: new FormControl('', [Validators.required, Validators.minLength(10)]),
+			english: new FormControl('', [Validators.required, Validators.minLength(10)]),
 		}),
 		teacher: new FormControl('', Validators.required),
 		email: new FormControl('', [Validators.required, Validators.email, Validators.minLength(5)]),
@@ -225,10 +225,10 @@ class InputWithLanguageOptionsExampleComponent {
 
 	courseTypeOptions: IFudisRadioButtonOption[] = [
 		{ value: 'basic', viewValue: 'Basic', id: 'courseType-1', name: 'courseType' },
-		{ value: 'advanced', viewValue: 'Advanced', id: 'courseType-1', name: 'courseType' },
+		{ value: 'advanced', viewValue: 'Advanced', id: 'courseType-2', name: 'courseType' },
 	];
 
-	constructor(private formBuilder: FormBuilder, private errorSummaryService: ErrorSummaryService) {}
+	constructor(private errorSummaryService: ErrorSummaryService) {}
 }
 
 export default {

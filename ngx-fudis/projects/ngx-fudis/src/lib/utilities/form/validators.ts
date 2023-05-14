@@ -1,4 +1,4 @@
-export module FudisFormGroupValidators {
+export module FormGroupValidators {
 	export function atLeastOneRequired() {
 		return (controlGroup: any) => {
 			const { controls } = controlGroup;

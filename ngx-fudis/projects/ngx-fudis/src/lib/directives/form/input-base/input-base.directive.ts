@@ -84,7 +84,9 @@ export class InputBaseDirective extends TooltipApiDirective {
 	 * Check & update errors. Currently mostly binded to onBlur event.
 	 */
 	updateErrors(): void {
-		this.guidanceToUpdate.checkErrors();
+		if (this.guidanceToUpdate) {
+			this.guidanceToUpdate.checkErrors();
+		}
 	}
 
 	isRequired(): boolean | null {

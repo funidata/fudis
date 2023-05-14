@@ -1,34 +1,36 @@
 <div class="fudis-guidance">
 	<div [id]="for + '_guidance'">
-		<div [attr.ariaLive]="ariaLive">
+		<div
+			[attr.ariaLive]="ariaLive"
+			[class.fudis-guidance__errors]="(control && control.touched) || (formGroup && formGroup.touched)">
+			<!-- Check errors for control group of FormGroup -->
 			<ng-container *ngIf="formGroup?.controls && !control && !formGroup.errors">
 				<ng-container *ngFor="let control of formGroup.controls | keyvalue">
 					<ng-container *ngIf="control.value.touched && control.value.errors">
 						<ng-container *ngFor="let error of control.value.errors | keyvalue">
 							<fudis-error-message
-								*ngIf="groupErrorMsg[control.key][asErrorkey(error.key)]"
-								[message]="groupErrorMsg[control.key][asErrorkey(error.key)]"></fudis-error-message>
+								*ngIf="groupOfControlsHasErrorMessage(control.key, error.key)"
+								[message]="groupErrorMsg?.[control.key][asErrorkey(error?.key)]"></fudis-error-message>
 						</ng-container>
 					</ng-container>
 				</ng-container>
 			</ng-container>
-
+			<!-- Check errors for FormGroup e. g. atLeastOneIsRequired -->
 			<ng-container *ngIf="formGroup?.errors && formGroup.invalid && formGroup.touched">
 				<ng-container *ngFor="let error of formGroup.errors | keyvalue">
 					<fudis-error-message
-						*ngIf="groupErrorMsg[error.key]"
-						[message]="groupErrorMsg[error.key]"></fudis-error-message>
+						*ngIf="groupHasErrorMessage(error.key)"
+						[message]="groupErrorMsg?.[error.key]"></fudis-error-message>
 				</ng-container>
 			</ng-container>
-
+			<!-- Check errors for single FormControl -->
 			<ng-container *ngIf="control?.errors && !formGroup && control?.touched">
 				<ng-container *ngFor="let error of control.errors | keyvalue">
 					<fudis-error-message
-						[message]="errorMsg[asErrorkey(error.key)]"
-						*ngIf="errorMsg[asErrorkey(error.key)]"></fudis-error-message>
+						*ngIf="controlHasErrorMessage(error.key)"
+						[message]="errorMsg?.[asErrorkey(error.key)]"></fudis-error-message>
 				</ng-container>
 			</ng-container>
-
 			<ng-content></ng-content>
 		</div>
 		<p *ngIf="helpText" class="fudis-guidance__help-text">{{ helpText }}</p>

@@ -7,6 +7,15 @@
 		justify-content: space-between;
 		width: 100%;
 
+		&__errors {
+			opacity: 0;
+			height: 0;
+			animation-name: delay-appearance;
+			animation-delay: 0.2s;
+			animation-iteration-count: 1;
+			animation-fill-mode: forwards;
+		}
+
 	&__help-text {
 		@include colorMixins.text-color('gray-dark');
 		@include typography.body-text-s-regular;
@@ -25,5 +34,17 @@
 		&__float-right {
 			margin-left: auto;
 		}
+	}
+}
+
+@keyframes delay-appearance {
+	0% {
+		opacity: 0;
+		height: 0;
+	}
+
+	100% {
+		opacity: 1;
+		height: auto;
 	}
 }

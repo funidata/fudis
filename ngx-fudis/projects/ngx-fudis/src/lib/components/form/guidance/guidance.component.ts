@@ -52,12 +52,12 @@ export class GuidanceComponent implements AfterViewInit {
 	/**
 	 * Used if FormGroup is associated with Guidance
 	 */
-	@Input() groupErrorMsg: TFudisGroupErrorMessages;
+	@Input() groupErrorMsg: TFudisGroupErrorMessages | null | undefined;
 
 	/**
 	 * Used if FormControl is associated with Guidance
 	 */
-	@Input() errorMsg: TFudisInputErrorMessages;
+	@Input() errorMsg: TFudisInputErrorMessages | null | undefined;
 
 	// eslint-disable-next-line class-methods-use-this
 	asErrorkey(errorKey: any): keyof TFudisInputErrorMessages {
@@ -65,6 +65,8 @@ export class GuidanceComponent implements AfterViewInit {
 	}
 
 	errorSummaryMessages: string[] = [];
+
+	betterErrorSummaryMessages: string[] = [];
 
 	constructor(private errorSummaryService: ErrorSummaryService) {}
 
@@ -103,7 +105,8 @@ export class GuidanceComponent implements AfterViewInit {
 
 	checkFormGroupErrors(errors: object): void {
 		Object.keys(errors).forEach((error) => {
-			const message = this.groupErrorMsg[error as keyof TFudisGroupErrorMessages];
+			const message = this.groupErrorMsg?.[error as keyof TFudisGroupErrorMessages];
+
 			if (message) {
 				this.errorSummaryMessages.push(message);
 			}
@@ -114,6 +117,7 @@ export class GuidanceComponent implements AfterViewInit {
 		if (control.touched && control.errors) {
 			Object.keys(control.errors).forEach((item) => {
 				const message = errors[item as keyof TFudisInputErrorMessages];
+
 				if (message) {
 					this.errorSummaryMessages.push(message);
 				}
@@ -129,11 +133,40 @@ export class GuidanceComponent implements AfterViewInit {
 				return true;
 			}
 		}
-
 		return false;
 	}
 
 	getErrorOutput(error: TFudisFormErrorSummaryItem) {
 		this.errorSummaryService.updateErrorList(error);
+	}
+
+	groupHasErrorMessage(errorKey: string): boolean {
+		if (!Object.prototype.hasOwnProperty.call(this.groupErrorMsg, errorKey)) {
+			throw new Error(`Fudis component with id of '${this.for}' is missing error message for '${errorKey}'`);
+		}
+
+		return true;
+	}
+
+	groupOfControlsHasErrorMessage(controlKey: string, errorKey: string): boolean {
+		if (!Object.prototype.hasOwnProperty.call(this.groupErrorMsg, controlKey)) {
+			throw new Error(
+				`Fudis component with id of '${this.for}' is missing error messages for FormControl of '${controlKey}'`
+			);
+		}
+		if (!Object.prototype.hasOwnProperty.call(this.groupErrorMsg?.[controlKey], errorKey)) {
+			throw new Error(
+				`Fudis component with id of '${this.for}' is missing error message of '${errorKey}' for FormControl of '${controlKey}'`
+			);
+		}
+		return true;
+	}
+
+	controlHasErrorMessage(errorKey: string): boolean {
+		if (!Object.prototype.hasOwnProperty.call(this.errorMsg, errorKey)) {
+			throw new Error(`Fudis component with id of '${this.for}' is missing error message for '${errorKey}'`);
+		}
+
+		return true;
 	}
 }

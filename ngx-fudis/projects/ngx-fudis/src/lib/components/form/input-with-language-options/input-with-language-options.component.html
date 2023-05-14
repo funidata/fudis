@@ -1,20 +1,7 @@
 <div class="fudis-input-with-language-options fudis-input-with-language-options__{{ size }}">
 	<div class="fudis-input-with-language-options__inputs">
 		<ng-container *ngIf="formGroup.controls">
-			<ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
-				<fudis-text-input
-					*ngIf="control.key === dropdownControl.value.value"
-					(handleBlur)="handleInputBlur()"
-					class="fudis-input-with-language-options__inputs__item"
-					[ariaLabel]="label + ', ' + dropdownControl.value.viewValue"
-					[size]="'l'"
-					[label]="label"
-					[id]="id"
-					[required]="checkAtLeastOneIsRequired(control.key, control.value.value)"
-					[invalidState]="formGroup.invalid && formGroup.touched"
-					[requiredText]="requiredText"
-					[control]="$any(formGroup).controls[control.key]"></fudis-text-input>
-			</ng-container>
+			<ng-container *ngTemplateOutlet="variant === 'text-area' ? textArea : textInput"></ng-container>
 			<fudis-guidance
 				[inputLabel]="label"
 				[groupErrorMsg]="groupErrorMsg"
@@ -35,3 +22,37 @@
 		[options]="updatedOptions">
 	</fudis-dropdown>
 </div>
+
+<ng-template #textInput>
+	<ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
+		<fudis-text-input
+			*ngIf="control.key === dropdownControl.value.value"
+			(handleBlur)="handleInputBlur()"
+			class="fudis-input-with-language-options__inputs__item"
+			[ariaLabel]="label + ', ' + dropdownControl.value.viewValue"
+			[size]="'l'"
+			[label]="label"
+			[id]="id"
+			[required]="checkAtLeastOneIsRequired(control.key, control.value.value)"
+			[invalidState]="formGroup.invalid && formGroup.touched"
+			[requiredText]="requiredText"
+			[control]="$any(formGroup).controls[control.key]"></fudis-text-input>
+	</ng-container>
+</ng-template>
+
+<ng-template #textArea>
+	<ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
+		<fudis-text-area
+			*ngIf="control.key === dropdownControl.value.value"
+			(handleBlur)="handleInputBlur()"
+			class="fudis-input-with-language-options__inputs__item"
+			[ariaLabel]="label + ', ' + dropdownControl.value.viewValue"
+			[size]="'l'"
+			[label]="label"
+			[id]="id"
+			[required]="checkAtLeastOneIsRequired(control.key, control.value.value)"
+			[invalidState]="formGroup.invalid && formGroup.touched"
+			[requiredText]="requiredText"
+			[control]="$any(formGroup).controls[control.key]"></fudis-text-area>
+	</ng-container>
+</ng-template>

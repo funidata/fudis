@@ -36,6 +36,8 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	 */
 	@Input() missingLanguage: string | null;
 
+	@Input() variant: 'text-input' | 'text-area' = 'text-input';
+
 	dropdownControl: FormControl;
 
 	controlPlaceholder = new FormControl();
