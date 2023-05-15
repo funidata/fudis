@@ -57,7 +57,7 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 							[id]="'unique-input-3'"
 							[control]="fieldsetExample.controls['teacher']"
 							[label]="labelTeacher"
-							[helpText]="'Someone has to be responsible about this.'"
+							[helpText]="'Someone has to be responsible for this.'"
 							[errorMsg]="errorTeacher"
 							[requiredText]="requiredText"></fudis-text-input>
 						<fudis-text-input
@@ -110,7 +110,7 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 		</form>
 	`,
 })
-class InputWithLanguageOptionsExampleComponent {
+class FieldsetExampleComponent {
 	errorSummaryVisible: boolean = false;
 
 	submitForm(): void {
@@ -238,7 +238,7 @@ export default {
 	argTypes: {},
 	decorators: [
 		moduleMetadata({
-			declarations: [InputWithLanguageOptionsExampleComponent],
+			declarations: [FieldsetExampleComponent],
 			imports: [ReactiveFormsModule, FormsModule],
 		}),
 		applicationConfig({
