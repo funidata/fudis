@@ -14,7 +14,10 @@
 
 <ng-template #content>
 	<legend class="fudis-fieldset__legend">
-		<span class="fudis-fieldset__legend__title">{{ legend }}</span>
+		<span class="fudis-fieldset__legend__title"
+			>{{ legend }}
+			<span *ngIf="requiredText" class="fudis-fieldset__legend__title__required">({{ requiredText }})</span></span
+		>
 		<ng-container *ngIf="helpText">
 			<span class="fudis-fieldset__legend__help-text">{{ helpText }}</span>
 		</ng-container>

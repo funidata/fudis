@@ -12,6 +12,15 @@
 				[errorMsg]="{ required: t('error_required') }"
 				[requiredText]="t('required')"
 				[control]="textInputControl"></fudis-text-input>
+			<fudis-radio-button-group
+				*ngIf="truthControl"
+				[requiredText]="t('required')"
+				[id]="'truth-selection'"
+				[legend]="t('chooseTruth')"
+				[helpText]="t('chooseTruthHelp')"
+				[errorMsg]="{ required: t('chooseTruthError') }"
+				[control]="truthControl"
+				[options]="radioButtonOptions"></fudis-radio-button-group>
 		</ng-template>
 	</fudis-fieldset>
 	<fudis-button [label]="'Submit!'" (handleClick)="clickSubmit()"></fudis-button>
