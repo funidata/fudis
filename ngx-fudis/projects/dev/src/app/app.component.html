@@ -1,6 +1,9 @@
 <ng-container *transloco="let t">
 	<fudis-button (handleClick)="changeLanguage()" [label]="t('change_language')"></fudis-button>
-	<fudis-fieldset [legend]="'FieldSet alkaa tästä'">
+	<fudis-fieldset
+		[legend]="'FieldSet alkaa tästä'"
+		[errorSummaryVisible]="errorSummaryVisible"
+		[errorSummaryHelpText]="'Here are some errors'">
 		<ng-template fudisFieldSetContent>
 			<fudis-text-input
 				[label]="t('label')"
@@ -11,6 +14,8 @@
 				[control]="textInputControl"></fudis-text-input>
 		</ng-template>
 	</fudis-fieldset>
+	<fudis-button [label]="'Submit!'" (handleClick)="clickSubmit()"></fudis-button>
+	<fudis-body-text *ngIf="showSuccessBodyText">It seems everything is okay!</fudis-body-text>
 
 	<fudis-heading tag="h1" size="xl">Welcome to Fudis sandbox </fudis-heading>
 	<form class="basic-flex-box">

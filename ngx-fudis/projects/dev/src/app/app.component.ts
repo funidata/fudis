@@ -29,9 +29,9 @@ export class AppComponent implements OnInit {
 		private errorSummaryService: ErrorSummaryService
 	) {}
 
-	name = 'Angular 5';
+	errorSummaryVisible: boolean = false;
 
-	differ: any;
+	showSuccessBodyText: boolean = false;
 
 	ngOnInit(): void {
 		this.translocoService.setActiveLang('fi');
@@ -40,7 +40,11 @@ export class AppComponent implements OnInit {
 		this.document.documentElement.lang = 'fi';
 
 		this.translocoService.selectTranslation().subscribe(() => {
-			this.errorSummaryService.reloadErrors();
+			if (this.errorSummaryVisible) {
+				setTimeout(() => {
+					this.errorSummaryService.reloadErrors();
+				}, 500);
+			}
 		});
 	}
 
@@ -69,4 +73,19 @@ export class AppComponent implements OnInit {
 		{ key: 'Enemy', value: 'Emmet Brickowski', subHeading: 'Archenemy' },
 		{ key: 'Enemy', value: 'Lucy', subHeading: 'Second Archenemy' },
 	];
+
+	clickSubmit(): void {
+		this.textInputControl.markAllAsTouched();
+
+		if (this.textInputControl.invalid) {
+			this.errorSummaryVisible = true;
+			this.showSuccessBodyText = false;
+			setTimeout(() => {
+				this.errorSummaryService.reloadErrors();
+			}, 500);
+		} else {
+			this.errorSummaryVisible = false;
+			this.showSuccessBodyText = true;
+		}
+	}
 }
