@@ -98,7 +98,7 @@ class RadioButtonGroupExampleComponent {
 }
 
 export default {
-	title: 'Components/Form/RadioButtonGroup',
+	title: 'Components/Form/Radio Button Group',
 	component: RadioButtonGroupComponent,
 	subcomponents: {
 		RadioButtonGroupComponent,

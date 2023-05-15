@@ -2,15 +2,21 @@
 @use '../../../foundations/typography/mixins.scss' as typography;
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
 @use '../../../foundations/utilities/mixins.scss' as utilities;
+@use '../../../foundations/focus/mixins.scss' as focus;
 
 .fudis-fieldset {
 	@include utilities.box-reset;
+	
 
 	display: flex;
 	flex-direction: column;
 	
 	/* stylelint-disable-next-line declaration-property-value-disallowed-list, property-disallowed-list */
 	border: none;
+
+	&:focus {
+		@include focus.focus-generic;
+	}
 
 	&__legend {
 		display: flex;

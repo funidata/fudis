@@ -232,7 +232,7 @@ class FieldsetExampleComponent {
 }
 
 export default {
-	title: 'Components/Form/FieldSet',
+	title: 'Components/Form/Field Set',
 	component: FieldSetComponent,
 
 	argTypes: {},

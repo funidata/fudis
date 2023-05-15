@@ -1,7 +1,7 @@
 import { TextSpacingComponent } from './text-spacing.component';
 
 export default {
-	title: 'Components/Typography/TextSpacing',
+	title: 'Components/Typography/Text Spacing',
 	component: TextSpacingComponent,
 };
 

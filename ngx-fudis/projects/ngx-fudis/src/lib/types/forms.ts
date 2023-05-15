@@ -42,8 +42,7 @@ export interface IFudisDropdownOption {
 }
 
 export type TFudisFormErrorSummaryItem = {
-	id: string | string[];
-	inputSiblings?: string[];
+	id: string;
 	label?: string;
 	errors: string[];
 };
