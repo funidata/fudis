@@ -32,7 +32,7 @@ export {
 	ExpandableActionsDirective,
 } from './lib/components/expandable/expandable-directives';
 export { FieldSetComponent } from './lib/components/form/fieldset/fieldset.component';
-export { FieldSetContentDirective } from './lib/components/form/fieldset/fieldset-directives';
+
 export { InputWithLanguageOptionsComponent } from './lib/components/form/input-with-language-options/input-with-language-options.component';
 export { GridComponent } from './lib/components/grid/grid.component';
 export { GridDirective } from './lib/directives/grid/grid.directive';

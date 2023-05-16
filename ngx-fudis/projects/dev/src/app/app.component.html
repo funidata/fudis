@@ -4,15 +4,14 @@
 		[legend]="'FieldSet alkaa tästä'"
 		[errorSummaryVisible]="errorSummaryVisible"
 		[errorSummaryHelpText]="'Here are some errors'">
-		<ng-template fudisFieldSetContent>
-			<fudis-text-input
-				[label]="t('label')"
-				[id]="'uniikki-idjoo'"
-				[helpText]="t('helpText')"
-				[errorMsg]="{ required: t('error_required') }"
-				[requiredText]="t('required')"
-				[control]="textInputControl"></fudis-text-input>
-		</ng-template>
+		<fudis-text-input
+			[label]="t('label')"
+			[id]="'uniikki-idjoo'"
+			[helpText]="t('helpText')"
+			[errorMsg]="{ required: t('error_required') }"
+			[requiredText]="t('required')"
+			[control]="textInputControl">
+		</fudis-text-input>
 	</fudis-fieldset>
 	<fudis-button [label]="'Submit!'" (handleClick)="clickSubmit()"></fudis-button>
 	<fudis-body-text *ngIf="showSuccessBodyText">It seems everything is okay!</fudis-body-text>

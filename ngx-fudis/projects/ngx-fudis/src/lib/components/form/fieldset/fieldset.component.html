@@ -25,7 +25,5 @@
 				[helpText]="errorSummaryHelpText"></fudis-error-summary>
 		</ng-container>
 	</legend>
-	<ng-container *ngIf="fieldsetContent">
-		<ng-container *ngTemplateOutlet="fieldsetContent!.templateRef"></ng-container>
-	</ng-container>
+	<ng-content></ng-content>
 </ng-template>
