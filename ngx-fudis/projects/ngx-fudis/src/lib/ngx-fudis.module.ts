@@ -56,8 +56,6 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { InputBaseDirective } from './directives/form/input-base/input-base.directive';
 import { FieldSetBaseDirective } from './directives/form/fieldset-base/fieldset-base.directive';
 
-import { FieldSetContentDirective } from './components/form/fieldset/fieldset-directives';
-
 import { InputWithLanguageOptionsComponent } from './components/form/input-with-language-options/input-with-language-options.component';
 
 @NgModule({
@@ -86,7 +84,6 @@ import { InputWithLanguageOptionsComponent } from './components/form/input-with-
 		ExpandableContentDirective,
 		FieldSetBaseDirective,
 		FieldSetComponent,
-		FieldSetContentDirective,
 		InputWithLanguageOptionsComponent,
 		GridComponent,
 		GridApiDirective,
@@ -152,7 +149,6 @@ import { InputWithLanguageOptionsComponent } from './components/form/input-with-
 		DialogCloseDirective,
 		DialogActionsDirective,
 		FieldSetComponent,
-		FieldSetContentDirective,
 		InputWithLanguageOptionsComponent,
 		GridComponent,
 		GridDirective,

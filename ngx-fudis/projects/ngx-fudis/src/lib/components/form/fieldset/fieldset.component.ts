@@ -1,6 +1,5 @@
-import { AfterContentInit, Component, ContentChild, ElementRef, Input, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
 
-import { FieldSetContentDirective } from './fieldset-directives';
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 
 @Component({
@@ -10,8 +9,6 @@ import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fi
 	encapsulation: ViewEncapsulation.None,
 })
 export class FieldSetComponent extends FieldSetBaseDirective implements AfterContentInit {
-	@ContentChild(FieldSetContentDirective) fieldsetContent: FieldSetContentDirective;
-
 	constructor(private elementRef: ElementRef) {
 		super();
 	}
