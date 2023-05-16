@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ErrorSummaryService } from './error-summary.service';
-import { TFudisFormErrorSummaryItem } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-error-summary',
@@ -27,19 +26,22 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 
 	constructor(private errorSummaryService: ErrorSummaryService) {}
 
-	visibleErrorList: TFudisFormErrorSummaryItem[] = [];
+	visibleErrorList: any = [];
 
 	getErrors(): void {
 		this.errorSummaryService.getVisibleErrors().subscribe((errorsFromService) => {
-			this.visibleErrorList = errorsFromService.filter((item) => {
-				if (this.parentComponent?.querySelector(`#${item.id}`)) {
-					return item;
+			this.visibleErrorList = [];
+			Object.keys(errorsFromService).forEach((item) => {
+				if (this.parentComponent?.querySelector(`#${item}`)) {
+					const { label } = errorsFromService[item];
+
+					Object.values(errorsFromService[item].errors).forEach((error: any) => {
+						this.visibleErrorList.push({ id: item, message: `${label}: ${error}` });
+					});
 				}
-				return undefined;
 			});
-			if (this.focusTarget && this.visibleErrorList.length > 0) {
-				(this.focusTarget.nativeElement as HTMLDivElement).focus();
-			}
+
+			this.focusToErrorSummary();
 		});
 	}
 
@@ -47,8 +49,13 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 		this.getErrors();
 	}
 
-	ngAfterViewInit(): void {
-		if (this.visibleErrorList.length > 0 && this.focusTarget)
+	focusToErrorSummary(): void {
+		if (this.focusTarget && this.visibleErrorList.length > 0) {
 			(this.focusTarget.nativeElement as HTMLDivElement).focus();
+		}
+	}
+
+	ngAfterViewInit(): void {
+		this.focusToErrorSummary();
 	}
 }

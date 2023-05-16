@@ -11,8 +11,11 @@
 	&:focus {
 		@include focus.focus-generic;
 	}
-	
 
+	&--hidden {
+		display: none;
+	}
+	
 	&__errors {
 		&__help-text {
 			margin-top: spacing.$spacing-xs;

@@ -1,6 +1,6 @@
-import { Directive, ViewChild, Input, EventEmitter, Output } from '@angular/core';
+import { Directive, Input, EventEmitter, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { GuidanceComponent } from '../../../components/form/guidance/guidance.component';
+
 import { TFudisInputErrorMessages } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 
@@ -8,8 +8,6 @@ import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 	selector: '[fudisInputBase]',
 })
 export class InputBaseDirective extends TooltipApiDirective {
-	@ViewChild(GuidanceComponent) guidanceToUpdate: GuidanceComponent;
-
 	/**
 	 * FormControl for the input.
 	 */
@@ -71,22 +69,7 @@ export class InputBaseDirective extends TooltipApiDirective {
 	@Output() handleBlur: EventEmitter<Event> = new EventEmitter<Event>();
 
 	onBlur(event: Event): void {
-		if (this.errorMsg) {
-			this.updateErrors();
-		}
-
 		this.handleBlur.emit(event);
-	}
-
-	/**
-	 * TBD: Check how this is still needed as after first onBlur control is touched and errors should update dynamically.
-	 *
-	 * Check & update errors. Currently mostly binded to onBlur event.
-	 */
-	updateErrors(): void {
-		if (this.guidanceToUpdate) {
-			this.guidanceToUpdate.checkErrors();
-		}
 	}
 
 	isRequired(): boolean | null {

@@ -52,11 +52,4 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 			);
 		}
 	}
-
-	/**
-	 * Check & update errors. Currently mostly binded to onBlur event.
-	 */
-	updateErrors(): void {
-		this.guidanceToUpdate.checkErrors();
-	}
 }

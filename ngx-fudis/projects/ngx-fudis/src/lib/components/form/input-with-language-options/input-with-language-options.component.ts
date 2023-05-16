@@ -40,8 +40,6 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	dropdownControl: FormControl;
 
-	controlPlaceholder = new FormControl();
-
 	dropdownValue: IFudisDropdownOption;
 
 	for: string = '';
@@ -64,9 +62,6 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	}
 
 	handleInputBlur(): void {
-		if (this.groupErrorMsg) {
-			this.updateErrors();
-		}
 		this.updatedOptions = this.missingLanguage ? this.updateDropdownList() : this.options;
 	}
 

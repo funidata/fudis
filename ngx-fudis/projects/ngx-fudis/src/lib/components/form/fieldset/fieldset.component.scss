@@ -14,7 +14,7 @@
 	/* stylelint-disable-next-line declaration-property-value-disallowed-list, property-disallowed-list */
 	border: none;
 
-	&:focus {
+	&:focus-visible {
 		@include focus.focus-generic;
 	}
 
