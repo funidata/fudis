@@ -1,14 +1,13 @@
-import { Component, Input, AfterViewInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { TFudisInputErrorMessages, TFudisFormErrorSummaryItem, TFudisGroupErrorMessages } from '../../../types/forms';
-import { ErrorSummaryService } from '../error-summary/error-summary.service';
+import { TFudisInputErrorMessages, TFudisGroupErrorMessages } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-guidance',
 	templateUrl: './guidance.component.html',
 	styleUrls: ['./guidance.component.scss'],
 })
-export class GuidanceComponent implements AfterViewInit {
+export class GuidanceComponent {
 	/**
 	 * Id of input, fieldset or similar which Guidance is related to. Used in aria attributes and in emit information for Error Summary Service
 	 */
@@ -64,67 +63,6 @@ export class GuidanceComponent implements AfterViewInit {
 		return errorKey;
 	}
 
-	errorSummaryMessages: string[] = [];
-
-	betterErrorSummaryMessages: string[] = [];
-
-	constructor(private errorSummaryService: ErrorSummaryService) {}
-
-	ngAfterViewInit(): void {
-		this.errorSummaryService.reloadWatcher().subscribe(() => {
-			this.checkErrors();
-		});
-	}
-
-	checkErrors(): void {
-		this.errorSummaryMessages = [];
-
-		if (!this.control && this.formGroup && this.groupErrorMsg) {
-			this.checkControlGroupErrors(this.formGroup, this.groupErrorMsg);
-		} else if (this.control && this.errorMsg) {
-			this.checkControlErrors(this.control, this.errorMsg);
-		}
-
-		this.getErrorOutput({ id: this.for, errors: this.errorSummaryMessages, label: this.inputLabel });
-	}
-
-	checkControlGroupErrors(group: FormGroup, errors: TFudisGroupErrorMessages): void {
-		if (group.touched && group.invalid) {
-			if (group.errors) {
-				this.checkFormGroupErrors(group.errors);
-			} else {
-				Object.keys(group.controls).forEach((control) => {
-					if (errors[control]) {
-						const currentControl = group.controls?.[control];
-						this.checkControlErrors(currentControl, errors[control]);
-					}
-				});
-			}
-		}
-	}
-
-	checkFormGroupErrors(errors: object): void {
-		Object.keys(errors).forEach((error) => {
-			const message = this.groupErrorMsg?.[error as keyof TFudisGroupErrorMessages];
-
-			if (message) {
-				this.errorSummaryMessages.push(message);
-			}
-		});
-	}
-
-	checkControlErrors(control: FormControl | any, errors: TFudisInputErrorMessages): void {
-		if (control.touched && control.errors) {
-			Object.keys(control.errors).forEach((item) => {
-				const message = errors[item as keyof TFudisInputErrorMessages];
-
-				if (message) {
-					this.errorSummaryMessages.push(message);
-				}
-			});
-		}
-	}
-
 	alertMaxLength(): boolean {
 		if (this.maxLength && this.control.value?.length) {
 			const charactersRemaining = this.maxLength - this.control.value.length;
@@ -134,10 +72,6 @@ export class GuidanceComponent implements AfterViewInit {
 			}
 		}
 		return false;
-	}
-
-	getErrorOutput(error: TFudisFormErrorSummaryItem) {
-		this.errorSummaryService.updateErrorList(error);
 	}
 
 	groupHasErrorMessage(errorKey: string): boolean {

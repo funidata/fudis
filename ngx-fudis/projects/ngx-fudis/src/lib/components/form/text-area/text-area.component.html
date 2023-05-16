@@ -11,7 +11,7 @@
 	<textarea
 		[id]="id"
 		[formControl]="control"
-		(blur)="updateErrors()"
+		(blur)="onBlur($event)"
 		class="fudis-text-area__input"
 		[class.fudis-text-area__input--invalid]="control.touched && control.invalid"
 		[attr.aria-describedby]="id + '_guidance'"

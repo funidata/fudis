@@ -5,7 +5,6 @@
 			[class.fudis-checkbox__box--invalid]="control.invalid && control.touched"
 			[class.fudis-checkbox__box--disabled]="control.disabled">
 			<input
-				(blur)="updateErrors()"
 				[formControl]="control"
 				#checkboxRef
 				[attr.aria-describedby]="id + '_guidance'"

@@ -22,7 +22,6 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 				[errorSummaryScreenReaderHelpText]="'Attention:'"
 				[legend]="legend"
 				[id]="fieldsetId"
-				[errorSummaryScreenReaderHelpText]="'Attention'"
 				[errorSummaryHelpText]="errorSummaryHelpText"
 				[errorSummaryVisible]="errorSummaryVisible"
 				[helpText]="helpText">

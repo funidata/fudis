@@ -1,8 +1,6 @@
-<fudis-fieldset [id]="id" [legend]="legend" [disableGrid]="true" [requiredText]="requiredText">
+<fudis-fieldset [id]="id" [legend]="legend" [disableGrid]="true" [errorSummaryVisible]="false">
 	<div class="fudis-radio-button-group__option" *ngFor="let option of options; let index = index">
 		<fudis-radio-button
-			(radioButtonBlur)="updateErrors()"
-			(radioButtonChange)="updateErrors()"
 			[guidanceId]="id + '_guidance'"
 			[id]="option.id"
 			[name]="option.name"
