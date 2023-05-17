@@ -146,6 +146,8 @@
   box-shadow: 0 0 0 0.25rem #ffffff;
 }
 
+/* stylelint-disable property-disallowed-list */
+/* stylelint-disable unit-disallowed-list */
 /* stylelint-disable selector-max-compound-selectors */
 /* stylelint-disable declaration-no-important */
 /* stylelint-disable declaration-property-value-disallowed-list */
@@ -187,6 +189,7 @@
 }
 
 .fudis-dialog-panel mat-dialog-container.mat-mdc-dialog-container .mat-mdc-dialog-content {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
@@ -1748,6 +1751,12 @@ textarea.cdk-textarea-autosize-measuring-firefox {
   overflow: hidden;
   white-space: nowrap;
   clip: rect(0 0 0 0);
+}
+
+.fudis-box-reset {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 /* stylelint-disable color-no-hex */
