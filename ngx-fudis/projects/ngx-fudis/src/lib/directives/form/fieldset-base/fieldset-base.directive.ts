@@ -1,14 +1,10 @@
-import { Directive, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { GuidanceComponent } from '../../../components/form/guidance/guidance.component';
-import { TFudisFormErrorMessages, IFudisFormErrorSummaryItem } from '../../../types/forms';
 
 @Directive({
-	selector: '[fudisFieldsetBase]',
+	selector: '[fudisFieldSetBase]',
 })
-export class FieldsetBaseDirective {
-	@ViewChild(GuidanceComponent, { static: true }) guidanceToUpdate: GuidanceComponent;
-
+export class FieldSetBaseDirective {
 	/**
 	 * Legend for fieldset
 	 */
@@ -25,27 +21,14 @@ export class FieldsetBaseDirective {
 	@Input() requiredText: string;
 
 	/**
-	 * Help text, aligned underneath the autocomplete input
+	 * Additional guidance text, aligned underneath the main legend text
 	 */
 	@Input() helpText: string;
 
 	/**
-	 * Error messages shown when form control validators are invalid
+	 * To disable Field Set content as Fudis Grid. Used in e. g. Radio Button Group.
 	 */
-	@Input() errorMsg: TFudisFormErrorMessages;
-
-	/**
-	 * TBD. Possibly used later for FudisErrorSummary
-	 */
-
-	@Output() errorOutput: EventEmitter<IFudisFormErrorSummaryItem> = new EventEmitter<IFudisFormErrorSummaryItem>();
-
-	/**
-	 * Check & update errors after user blurs focus from the autocomplete input
-	 */
-	updateErrors(): void {
-		this.guidanceToUpdate.checkErrors();
-	}
+	@Input() disableGrid: boolean = false;
 
 	requiredValidator = Validators.required;
 }

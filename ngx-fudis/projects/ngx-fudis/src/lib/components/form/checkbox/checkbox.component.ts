@@ -1,5 +1,4 @@
 import { Component, Input, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
 @Component({
@@ -12,16 +11,9 @@ export class CheckboxComponent extends InputBaseDirective {
 	@ViewChild('checkboxRef') input: ElementRef;
 
 	/*
-	 * FormControl for checkbox
-	 */
-	@Input() control: FormControl;
-
-	/*
 	 * Name for checkbox
 	 */
 	@Input() name: string;
-
-	showError: boolean = false;
 
 	isChecked: boolean;
 

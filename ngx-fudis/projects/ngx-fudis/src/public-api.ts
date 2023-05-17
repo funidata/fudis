@@ -23,13 +23,17 @@ export { DescriptionListComponent } from './lib/components/description-list/desc
 export { DialogService } from './lib/components/dialog/dialog.service';
 export { DropdownComponent } from './lib/components/form/dropdown/dropdown.component';
 export { ErrorMessageComponent } from './lib/components/form/error-message/error-message.component';
-// export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';
+
+export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';
+export { ErrorSummaryService } from './lib/components/form/error-summary/error-summary.service';
 export { ExpandableComponent } from './lib/components/expandable/expandable.component';
 export {
 	ExpandableContentDirective,
 	ExpandableActionsDirective,
 } from './lib/components/expandable/expandable-directives';
-export { FieldsetComponent } from './lib/components/form/fieldset/fieldset.component';
+export { FieldSetComponent } from './lib/components/form/fieldset/fieldset.component';
+
+export { InputWithLanguageOptionsComponent } from './lib/components/form/input-with-language-options/input-with-language-options.component';
 export { GridComponent } from './lib/components/grid/grid.component';
 export { GridDirective } from './lib/directives/grid/grid.directive';
 export { GuidanceComponent } from './lib/components/form/guidance/guidance.component';
@@ -37,6 +41,7 @@ export { HeadingComponent } from './lib/components/typography/heading/heading.co
 export { IconComponent } from './lib/components/icon/icon.component';
 export { LinkComponent } from './lib/components/link/link.component';
 export { NotificationComponent } from './lib/components/notification/notification.component';
+export { NotificationContentDirective } from './lib/components/notification/notification-directives';
 export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
 // export { SpacingDirective } from './lib/directives/spacing/spacing.directive';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';

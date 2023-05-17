@@ -3,14 +3,12 @@
 		[id]="'label_' + id"
 		[for]="id"
 		[text]="label"
-		[requiredText]="required && requiredText ? requiredText : null"
+		[requiredText]="isRequired() ? requiredText : null"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle"></fudis-label>
 	<div class="fudis-datepicker__input-wrapper">
 		<input
-			(blur)="updateErrors()"
-			(dateChange)="updateErrors()"
 			[id]="id"
 			[formControl]="control"
 			[matDatepicker]="picker"
@@ -22,7 +20,7 @@
 				'fudis-datepicker__input--invalid': control.invalid && control.touched,
 				'fudis-datepicker__input--disabled': disabled
 			}"
-			[attr.required]="required"
+			[attr.required]="isRequired()"
 			[attr.aria-describedby]="id + '_guidance'" />
 		<mat-datepicker-toggle
 			[disabled]="disabled"
@@ -36,6 +34,6 @@
 		</mat-datepicker-toggle>
 		<mat-datepicker #picker panelClass="fudis-datepicker__datepicker"></mat-datepicker>
 	</div>
-	<fudis-guidance [helpText]="helpText" [id]="id + '_guidance'" [errorMsg]="errorMsg" [control]="control">
+	<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="id" [errorMsg]="errorMsg" [control]="control">
 	</fudis-guidance>
 </div>

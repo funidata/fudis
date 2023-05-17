@@ -49,12 +49,6 @@ export class ExpandableComponent {
 	 */
 	@Input() subTitle?: string;
 
-	/**
-	 * This input is mainly for Storybook purposes to imitate expandable content.
-	 * Do not use this Input if your expandable contains more than just plain text.
-	 */
-	@Input() contentText?: string;
-
 	constructor(public ref: ElementRef) {}
 
 	private _collapsed = true;

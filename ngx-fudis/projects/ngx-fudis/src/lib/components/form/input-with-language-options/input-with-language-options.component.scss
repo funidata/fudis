@@ -1,0 +1,30 @@
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/utilities/mixins.scss' as utilities;
+
+.fudis-input-with-language-options {
+	@include utilities.box-reset;
+
+	display: flex;
+
+	&__l {
+		max-width: calc(23 * spacing.$spacing-s);
+	}
+
+	&__m {
+		max-width: calc(14 * spacing.$spacing-s);
+	}
+
+	&__s {
+		max-width: calc(10 * spacing.$spacing-s);
+	}
+
+	&__inputs {
+		flex: 1;
+		margin-right: spacing.$spacing-xxs;
+		max-width: calc(100% - spacing.$spacing-xxl - spacing.$spacing-xxs);
+	}
+
+	&__dropdown {
+		max-width: spacing.$spacing-xxl;
+	}
+}

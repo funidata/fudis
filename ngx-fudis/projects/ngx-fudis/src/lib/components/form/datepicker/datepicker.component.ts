@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { Component, DoCheck, Inject, Input, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { AfterContentInit, Component, DoCheck, HostBinding, Inject, Input, ViewEncapsulation } from '@angular/core';
 import {
 	MatDateFormats,
 	MAT_NATIVE_DATE_FORMATS,
@@ -29,6 +28,7 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
 	selector: 'fudis-datepicker[id][label]',
 	templateUrl: './datepicker.component.html',
 	styleUrls: ['./datepicker.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 	providers: [
 		{
 			provide: DateAdapter,
@@ -38,15 +38,12 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
 		{ provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
 	],
 })
-export class DatepickerComponent extends InputBaseDirective implements OnInit, DoCheck {
+export class DatepickerComponent extends InputBaseDirective implements DoCheck, AfterContentInit {
+	@HostBinding('class') classes = 'fudis-datepicker-host';
+
 	constructor(private readonly adapter: DateAdapter<Date>, @Inject(DOCUMENT) private document: Document) {
 		super();
 	}
-
-	/**
-	 * Datepicker FormControl
-	 */
-	@Input() control: FormControl;
 
 	/**
 	 * Available sizes for the datepicker - defaults to medium.
@@ -63,15 +60,9 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, D
 	 */
 	@Input() maxDate: Date;
 
-	required: boolean = false;
-
 	currentHtmlLang: string;
 
-	ngOnInit(): void {
-		if (this.control.hasValidator(Validators.required)) {
-			this.required = true;
-		}
-
+	ngAfterContentInit(): void {
 		this.currentHtmlLang = this.document.documentElement.lang;
 		this.adapter.setLocale(this.updateLocale());
 	}

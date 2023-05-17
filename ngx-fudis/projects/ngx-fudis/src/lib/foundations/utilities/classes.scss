@@ -3,3 +3,7 @@
 .fudis-visually-hidden {
   @include mixins.visually-hidden;
 }
+
+.fudis-box-reset {
+	@include mixins.box-reset;
+}

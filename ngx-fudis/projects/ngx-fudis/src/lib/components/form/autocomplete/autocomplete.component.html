@@ -3,7 +3,7 @@
 		[text]="label"
 		[id]="id + '__label'"
 		[for]="id"
-		[requiredText]="required && requiredText ? requiredText : null"
+		[requiredText]="isRequired() ? requiredText : null"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle">
@@ -16,13 +16,12 @@
 			[class.fudis-autocomplete__input--invalid]="control.invalid && control.touched"
 			[class.fudis-autocomplete__input--disabled]="disabled"
 			type="text"
-			(blur)="updateErrors()"
 			[formControl]="control"
 			[matAutocomplete]="autocomplete"
-			[attr.aria-describedby]="id + '__guidance'"
+			[attr.aria-describedby]="id + '_guidance'"
 			[readonly]="disabled"
 			[attr.aria-disabled]="disabled"
-			[attr.required]="required" />
+			[attr.required]="isRequired()" />
 		<ng-container *ngIf="control.value">
 			<fudis-button
 				class="fudis-autocomplete__input__icon"
@@ -42,7 +41,7 @@
 			</fudis-icon>
 		</ng-container>
 	</div>
-	<fudis-guidance [helpText]="helpText" [id]="id + '__guidance'" [errorMsg]="errorMsg" [control]="control">
+	<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="id" [errorMsg]="errorMsg" [control]="control">
 	</fudis-guidance>
 
 	<mat-autocomplete

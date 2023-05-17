@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { TFudisFormErrorMessages, IFudisFormErrorSummaryItem } from '../../../types/forms';
+import { Component, Input } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { TFudisInputErrorMessages, TFudisGroupErrorMessages } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-guidance',
@@ -8,42 +8,59 @@ import { TFudisFormErrorMessages, IFudisFormErrorSummaryItem } from '../../../ty
 	styleUrls: ['./guidance.component.scss'],
 })
 export class GuidanceComponent {
-	@Input() id: string;
+	/**
+	 * Id of input, fieldset or similar which Guidance is related to. Used in aria attributes and in emit information for Error Summary Service
+	 */
+	@Input() for: string;
 
+	/**
+	 * Label text of input, fieldset or similar Guidance is related to. Used in emit information for Error Summary service.
+	 */
+	@Input() inputLabel: string;
+
+	/**
+	 * FormControl of related input.
+	 */
 	@Input() control: FormControl;
 
+	/**
+	 * FormGroup of related FormGroup
+	 */
+	@Input() formGroup: FormGroup;
+
+	/**
+	 * Text displayed as guidance help text.
+	 */
 	@Input() helpText: string | undefined;
 
+	/**
+	 * If there is no Fudis FieldSet and Error Summary associated with this input and its Guidance, 'polite' can be considered so that screen reader will get notified if there are new errors related to the input.
+	 */
+	@Input() ariaLive: 'off' | 'polite' | 'assertive' = 'off';
+
+	/**
+	 * When set displays also a character count indicator.
+	 */
 	@Input() maxLength: number | undefined;
 
 	/**
-	 * Assistive text of max character count for screen readers
+	 * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where "characters used" is "maxLengthText"
 	 */
 	@Input() maxLengthText: string;
 
-	@Input() errorMsg: TFudisFormErrorMessages;
+	/**
+	 * Used if FormGroup is associated with Guidance
+	 */
+	@Input() groupErrorMsg: TFudisGroupErrorMessages | null | undefined;
 
-	@Output() errorOutput: EventEmitter<IFudisFormErrorSummaryItem> = new EventEmitter<IFudisFormErrorSummaryItem>();
+	/**
+	 * Used if FormControl is associated with Guidance
+	 */
+	@Input() errorMsg: TFudisInputErrorMessages | null | undefined;
 
-	errorsVisible: boolean = false;
-
-	errorsToShow: string[] = [];
-
-	checkErrors(): void {
-		this.errorsToShow = [];
-		if (this.control.touched && this.control.errors) {
-			this.errorsVisible = true;
-
-			Object.keys(this.control.errors).forEach((item) => {
-				const message = this.errorMsg[item as keyof TFudisFormErrorMessages];
-				if (message) {
-					this.errorsToShow.push(item);
-					this.getErrorOutput(this.id, message);
-				}
-			});
-		} else {
-			this.errorsVisible = false;
-		}
+	// eslint-disable-next-line class-methods-use-this
+	asErrorkey(errorKey: any): keyof TFudisInputErrorMessages {
+		return errorKey;
 	}
 
 	alertMaxLength(): boolean {
@@ -54,11 +71,6 @@ export class GuidanceComponent {
 				return true;
 			}
 		}
-
 		return false;
-	}
-
-	getErrorOutput(id: string, error: string) {
-		this.errorOutput.emit({ id, message: error });
 	}
 }

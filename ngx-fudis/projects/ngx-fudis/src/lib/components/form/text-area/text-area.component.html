@@ -3,7 +3,7 @@
 		[for]="id"
 		[id]="'label_' + id"
 		[text]="label"
-		[requiredText]="control.hasValidator(requiredValidator) && requiredText ? requiredText : null"
+		[requiredText]="isRequired() ? requiredText : null"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle">
@@ -11,20 +11,23 @@
 	<textarea
 		[id]="id"
 		[formControl]="control"
-		(blur)="updateErrors()"
+		(blur)="onBlur($event)"
 		class="fudis-text-area__input"
 		[class.fudis-text-area__input--invalid]="control.touched && control.invalid"
 		[attr.aria-describedby]="id + '_guidance'"
 		[attr.minLength]="minLength"
 		[attr.maxLength]="maxLength"
-		[attr.required]="control.hasValidator(requiredValidator)">
+		[attr.required]="isRequired()">
 	</textarea>
-	<fudis-guidance
-		[maxLengthText]="maxLengthText"
-		[maxLength]="maxLength"
-		[helpText]="helpText"
-		[id]="id + '_guidance'"
-		[errorMsg]="errorMsg"
-		[control]="control">
-	</fudis-guidance>
+	<ng-container *ngIf="helpText || errorMsg">
+		<fudis-guidance
+			[inputLabel]="label"
+			[maxLengthText]="maxLengthText"
+			[maxLength]="maxLength"
+			[helpText]="helpText"
+			[for]="id"
+			[errorMsg]="errorMsg"
+			[control]="control">
+		</fudis-guidance>
+	</ng-container>
 </div>

@@ -1,8 +1,8 @@
-import { FieldsetBaseDirective } from './fieldset-base.directive';
+import { FieldSetBaseDirective } from './fieldset-base.directive';
 
-describe('FieldsetBaseDirective', () => {
+describe('FieldSetBaseDirective', () => {
 	it('should create an instance', () => {
-		const directive = new FieldsetBaseDirective();
+		const directive = new FieldSetBaseDirective();
 		expect(directive).toBeTruthy();
 	});
 });

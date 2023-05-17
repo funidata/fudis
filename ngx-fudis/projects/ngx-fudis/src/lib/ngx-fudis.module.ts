@@ -31,10 +31,11 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { DialogService } from './components/dialog/dialog.service';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
+import { ErrorSummaryService } from './components/form/error-summary/error-summary.service';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
 import { ExpandableContentDirective, ExpandableActionsDirective } from './components/expandable/expandable-directives';
-import { FieldsetComponent } from './components/form/fieldset/fieldset.component';
+import { FieldSetComponent } from './components/form/fieldset/fieldset.component';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { GridComponent } from './components/grid/grid.component';
 import { GridApiDirective } from './directives/grid/grid-api.directive';
@@ -44,6 +45,7 @@ import { IconComponent } from './components/icon/icon.component';
 import { LabelComponent } from './components/form/label/label.component';
 import { LinkComponent } from './components/link/link.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { NotificationContentDirective } from './components/notification/notification-directives';
 import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
 import { RadioButtonGroupComponent } from './components/form/radio-button-group/radio-button-group.component';
 import { SpacingDirective } from './directives/spacing/spacing.directive';
@@ -52,7 +54,9 @@ import { TextSpacingComponent } from './components/typography/text-spacing/text-
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { InputBaseDirective } from './directives/form/input-base/input-base.directive';
-import { FieldsetBaseDirective } from './directives/form/fieldset-base/fieldset-base.directive';
+import { FieldSetBaseDirective } from './directives/form/fieldset-base/fieldset-base.directive';
+
+import { InputWithLanguageOptionsComponent } from './components/form/input-with-language-options/input-with-language-options.component';
 
 @NgModule({
 	/*
@@ -78,8 +82,9 @@ import { FieldsetBaseDirective } from './directives/form/fieldset-base/fieldset-
 		ExpandableComponent,
 		ExpandableActionsDirective,
 		ExpandableContentDirective,
-		FieldsetBaseDirective,
-		FieldsetComponent,
+		FieldSetBaseDirective,
+		FieldSetComponent,
+		InputWithLanguageOptionsComponent,
 		GridComponent,
 		GridApiDirective,
 		GridDirective,
@@ -90,6 +95,7 @@ import { FieldsetBaseDirective } from './directives/form/fieldset-base/fieldset-
 		LabelComponent,
 		LinkComponent,
 		NotificationComponent,
+		NotificationContentDirective,
 		RadioButtonComponent,
 		RadioButtonGroupComponent,
 		SpacingDirective,
@@ -134,7 +140,7 @@ import { FieldsetBaseDirective } from './directives/form/fieldset-base/fieldset-
 		DialogComponent,
 		DropdownComponent,
 		ErrorMessageComponent,
-		// ErrorSummaryComponent,
+		ErrorSummaryComponent,
 		ExpandableComponent,
 		ExpandableActionsDirective,
 		ExpandableContentDirective,
@@ -142,14 +148,17 @@ import { FieldsetBaseDirective } from './directives/form/fieldset-base/fieldset-
 		DialogContentDirective,
 		DialogCloseDirective,
 		DialogActionsDirective,
-		FieldsetComponent,
+		FieldSetComponent,
+		InputWithLanguageOptionsComponent,
 		GridComponent,
 		GridDirective,
 		GuidanceComponent,
 		HeadingComponent,
 		IconComponent,
+
 		LinkComponent,
 		NotificationComponent,
+		NotificationContentDirective,
 		RadioButtonGroupComponent,
 		// SpacingDirective,
 		TextAreaComponent,
@@ -157,6 +166,6 @@ import { FieldsetBaseDirective } from './directives/form/fieldset-base/fieldset-
 		// TextSpacingComponent,
 		TooltipDirective,
 	],
-	providers: [DialogService],
+	providers: [DialogService, ErrorSummaryService],
 })
 export class NgxFudisModule {}

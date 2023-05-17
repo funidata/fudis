@@ -14,3 +14,9 @@
     white-space: nowrap;
     clip: rect(0 0 0 0);
 }
+
+@mixin box-reset() {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}

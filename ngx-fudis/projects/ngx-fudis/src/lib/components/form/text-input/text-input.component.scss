@@ -6,15 +6,16 @@
 @use '../../../foundations/focus/mixins.scss' as focus; 
 
 .fudis-text-input {
-	display: grid;
-	max-width: calc(23 * spacing.$spacing-s);
+	box-sizing: border-box;
+	display: block;
+	width: 100%;
 
 	&__l {
-		width: 100%;
+		max-width: calc(23 * spacing.$spacing-s);
 	}
 
 	&__m {
-		width: calc(14 * spacing.$spacing-s);
+		max-width: calc(14 * spacing.$spacing-s);
 	}
 
 	&__s {

@@ -26,14 +26,14 @@ describe('BodyTextComponent', () => {
 	function bodyTextSizes(size: BodyTextSize): void {
 		component.size = size;
 		fixture.detectChanges();
-		assertBodyTextHasClasses(`fudis-body-text__paragraph fudis-body-text__${size}`);
+		assertBodyTextHasClasses(`fudis-body-text fudis-body-text__${size}`);
 	}
 
 	function marginBottomSizes(marginBottom: MarginBottomSize): void {
 		component.marginBottom = marginBottom;
 		fixture.detectChanges();
 		assertBodyTextHasClasses(
-			`fudis-body-text__paragraph fudis-body-text__m-regular fudis-body-text__margin-bottom__${marginBottom}`
+			`fudis-body-text fudis-body-text__m-regular fudis-body-text__margin-bottom__${marginBottom}`
 		);
 	}
 
@@ -54,7 +54,7 @@ describe('BodyTextComponent', () => {
 		it('should not have margin bottom CSS classes if margin bottom value is 0', () => {
 			component.marginBottom = '0';
 			fixture.detectChanges();
-			assertBodyTextHasClasses(`fudis-body-text__paragraph fudis-body-text__m-regular`);
+			assertBodyTextHasClasses(`fudis-body-text fudis-body-text__m-regular`);
 		});
 	});
 });

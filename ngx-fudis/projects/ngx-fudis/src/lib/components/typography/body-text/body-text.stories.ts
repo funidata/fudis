@@ -3,7 +3,7 @@ import { BodyTextComponent } from './body-text.component';
 import readme from './readme.mdx';
 
 export default {
-	title: 'Components/Typography/BodyText',
+	title: 'Components/Typography/Body Text',
 	component: BodyTextComponent,
 	parameters: {
 		docs: {

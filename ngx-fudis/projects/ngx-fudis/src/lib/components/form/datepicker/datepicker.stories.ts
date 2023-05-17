@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AfterViewChecked, ChangeDetectorRef, Component, importProvidersFrom } from '@angular/core';
 import { DatepickerComponent } from './datepicker.component';
 import readme from './readme.mdx';
-import { TFudisFormErrorMessages } from '../../../types/forms';
+import { TFudisInputErrorMessages } from '../../../types/forms';
 
 @Component({
 	selector: 'example-date-range',
@@ -38,14 +38,13 @@ import { TFudisFormErrorMessages } from '../../../types/forms';
 					[minDate]="mainFormGroup.controls['first'].value">
 				</fudis-datepicker>
 			</fieldset>
-			<fudis-guidance [helpText]="'Select both dates.'" [id]="id + '_guidance'">
+			<fudis-guidance [inputLabel]="label" [helpText]="'Select both dates.'" [for]="id">
 				<fudis-error-message
 					*ngIf="
 						mainFormGroup.controls['first']?.touched &&
 						mainFormGroup.controls['second'].touched &&
 						(mainFormGroup.controls['first']?.errors?.required || mainFormGroup.controls['second']?.errors?.required)
 					"
-					[id]="'error-on-missing-one'"
 					[message]="'Missing one or more values'"></fudis-error-message>
 			</fudis-guidance>
 
@@ -78,14 +77,14 @@ class DateRangeExampleComponent implements AfterViewChecked {
 
 	disabled = true;
 
-	validatorMessages: TFudisFormErrorMessages = {
+	validatorMessages: TFudisInputErrorMessages = {
 		required: 'This is required field.',
 		matDatepickerMin: 'Start date has to be today or later.',
 		matDatepickerParse: 'Your date does is not a real date.',
 		matDatepickerMax: 'Starting date cannot be after ending date.',
 	};
 
-	validatorMessagesSecond: TFudisFormErrorMessages = {
+	validatorMessagesSecond: TFudisInputErrorMessages = {
 		required: 'This is required field.',
 		matDatepickerParse: 'Your date does is not a real date',
 		matDatepickerMin: 'Ending date cannot be earlier than starting date.',
@@ -166,7 +165,6 @@ export const Datepicker = Template.bind({});
 Datepicker.args = {
 	id: 'example-id-for-datepicker-required-validation',
 	label: 'Select a date',
-	required: true,
 	requiredText: 'Required',
 	helpText: 'Choose your favourite date.',
 	errorMsg: { required: 'Date is required.', matDatepickerParse: 'Your date does is not a real date.' },

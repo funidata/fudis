@@ -1,5 +1,39 @@
 @use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/utilities/mixins.scss' as utilities;
+@use '../../../foundations/focus/mixins.scss' as focus;
 
 .fudis-error-summary {
-	@include typography.body-text-m-regular;
+	@include utilities.box-reset;
+
+	display: flex;
+
+	&:focus {
+		@include focus.focus-generic;
+	}
+
+	&--hidden {
+		display: none;
+	}
+	
+	&__errors {
+		&__help-text {
+			margin-top: spacing.$spacing-xs;
+		}
+	}
+
+	&__error-list {
+		margin-top: spacing.$spacing-xxs;
+		margin-bottom: spacing.$spacing-xs;
+		padding-left: 0;
+		
+		&__item {
+			margin-left: spacing.$spacing-s;
+			padding-left: spacing.$spacing-xxs;
+
+			&:not(:last-of-type) {
+				margin-bottom: spacing.$spacing-xxs;
+			}
+		}
+	}
 }

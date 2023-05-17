@@ -2,6 +2,7 @@
 @use '../../../foundations/spacing/tokens.scss' as spacing;
 @use '../../../foundations/colors/tokens.scss' as colors;
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../foundations/utilities/mixins.scss' as utilities;
 @use '../../../foundations/focus/mixins.scss' as focus; 
 @use '../../../foundations/typography/mixins.scss' as typography;
 
@@ -38,11 +39,11 @@
 	}
 
 	&__input {
+		@include utilities.box-reset;
+
 		appearance: none;
-		box-sizing: border-box;
 		display: grid;
 		place-content: center;
-		margin: 0;
 	}
 
 	&__icon {

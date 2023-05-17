@@ -1,7 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl } from '@angular/forms';
 
+import { MockComponent } from 'ng-mocks';
 import { GuidanceComponent } from './guidance.component';
+import { ErrorSummaryService } from '../error-summary/error-summary.service';
+import { ErrorMessageComponent } from '../error-message/error-message.component';
 
 const testControl = new FormControl('');
 
@@ -11,7 +14,8 @@ describe('GuidanceComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [GuidanceComponent],
+			declarations: [GuidanceComponent, MockComponent(ErrorMessageComponent)],
+			providers: [ErrorSummaryService],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(GuidanceComponent);

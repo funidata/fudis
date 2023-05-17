@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { Component, Input, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
 import { IFudisDropdownOption } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
@@ -9,16 +8,11 @@ import { InputBaseDirective } from '../../../directives/form/input-base/input-ba
 	styleUrls: ['./dropdown.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class DropdownComponent extends InputBaseDirective implements OnInit {
+export class DropdownComponent extends InputBaseDirective {
 	/**
 	 * Dropdown options
 	 */
 	@Input() options: IFudisDropdownOption[];
-
-	/**
-	 * FormControl for the dropdown
-	 */
-	@Input() control: FormControl;
 
 	/**
 	 * If true, user can choose multiple checkbox options from dropdown
@@ -33,13 +27,20 @@ export class DropdownComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * Available sizes for the dropdown - defaults to large.
 	 */
-	@Input() size?: 's' | 'm' | 'l' = 'l';
+	@Input() size?: 'xs' | 's' | 'm' | 'l' = 'l';
 
-	required: boolean = false;
+	/**
+	 * Hide select option checkmark in option list
+	 */
 
-	ngOnInit(): void {
-		if (this.control.hasValidator(Validators.required)) {
-			this.required = true;
-		}
+	@Input() hideSingleSelectionIndicator: boolean = false;
+
+	/**
+	 * Value output event on selectoion change
+	 */
+	@Output() selectionUpdate: EventEmitter<IFudisDropdownOption> = new EventEmitter<IFudisDropdownOption>();
+
+	handleSelectionChange(value: IFudisDropdownOption): void {
+		this.selectionUpdate.emit(value);
 	}
 }

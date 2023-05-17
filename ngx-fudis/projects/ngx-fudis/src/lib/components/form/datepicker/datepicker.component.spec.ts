@@ -11,6 +11,7 @@ import { LabelComponent } from '../label/label.component';
 import { DatepickerComponent } from './datepicker.component';
 
 const datepickerControl: FormControl = new FormControl('');
+const requiredDatepickerControl: FormControl = new FormControl('', Validators.required);
 
 describe('DatepickerComponent', () => {
 	let component: DatepickerComponent;
@@ -75,7 +76,7 @@ describe('DatepickerComponent', () => {
 		it('should have fudis-guidance component present with given id and helpText', () => {
 			const childGuidanceComponent = fixture.debugElement.query(By.css('fudis-guidance'));
 			expect(childGuidanceComponent).toBeTruthy();
-			expect(childGuidanceComponent.attributes['ng-reflect-id']).toEqual('fudis-dp-unique-id-3_guidance');
+			expect(childGuidanceComponent.attributes['ng-reflect-for']).toEqual('fudis-dp-unique-id-3');
 
 			component.helpText = 'Select your favourite date';
 			fixture.detectChanges();
@@ -95,7 +96,7 @@ describe('DatepickerComponent', () => {
 		});
 
 		it('should show requiredText in label if input is required and requiredText is given', () => {
-			component.required = true;
+			component.control = requiredDatepickerControl;
 			component.requiredText = 'Required';
 			fixture.detectChanges();
 
