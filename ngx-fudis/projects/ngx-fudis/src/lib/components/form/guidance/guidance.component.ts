@@ -73,34 +73,4 @@ export class GuidanceComponent {
 		}
 		return false;
 	}
-
-	groupHasErrorMessage(errorKey: string): boolean {
-		if (!Object.prototype.hasOwnProperty.call(this.groupErrorMsg, errorKey)) {
-			throw new Error(`Fudis component with id of '${this.for}' is missing error message for '${errorKey}'`);
-		}
-
-		return true;
-	}
-
-	groupOfControlsHasErrorMessage(controlKey: string, errorKey: string): boolean {
-		if (!Object.prototype.hasOwnProperty.call(this.groupErrorMsg, controlKey)) {
-			throw new Error(
-				`Fudis component with id of '${this.for}' is missing error messages for FormControl of '${controlKey}'`
-			);
-		}
-		if (!Object.prototype.hasOwnProperty.call(this.groupErrorMsg?.[controlKey], errorKey)) {
-			throw new Error(
-				`Fudis component with id of '${this.for}' is missing error message of '${errorKey}' for FormControl of '${controlKey}'`
-			);
-		}
-		return true;
-	}
-
-	controlHasErrorMessage(errorKey: string): boolean {
-		if (!Object.prototype.hasOwnProperty.call(this.errorMsg, errorKey)) {
-			throw new Error(`Fudis component with id of '${this.for}' is missing error message for '${errorKey}'`);
-		}
-
-		return true;
-	}
 }

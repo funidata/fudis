@@ -9,7 +9,6 @@
 					<ng-container *ngIf="control.value.errors">
 						<ng-container *ngFor="let error of control.value.errors | keyvalue">
 							<fudis-error-message
-								*ngIf="groupOfControlsHasErrorMessage(control.key, error.key)"
 								[inputId]="for"
 								[visible]="control.value.touched"
 								[type]="error.key"
@@ -24,7 +23,6 @@
 			<ng-container *ngIf="formGroup?.errors && formGroup.invalid">
 				<ng-container *ngFor="let error of formGroup.errors | keyvalue">
 					<fudis-error-message
-						*ngIf="groupHasErrorMessage(error.key)"
 						[visible]="formGroup.touched"
 						[inputId]="for"
 						[type]="error.key"
@@ -36,7 +34,6 @@
 			<ng-container *ngIf="control?.errors && !formGroup">
 				<ng-container *ngFor="let error of control.errors | keyvalue">
 					<fudis-error-message
-						*ngIf="controlHasErrorMessage(error.key)"
 						[visible]="control.touched"
 						[inputId]="for"
 						[inputLabel]="inputLabel"
@@ -55,6 +52,6 @@
 		{{ control.value.length || 0 }}/{{ maxLength }}
 	</small>
 </div>
-<ng-container *ngIf="alertMaxLength()">
+<ng-container *ngIf="maxLength && maxLengthText && alertMaxLength()">
 	<p class="fudis-visually-hidden" role="alert">{{ control.value.length || 0 }}/{{ maxLength }} {{ maxLengthText }}</p>
 </ng-container>

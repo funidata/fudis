@@ -49,6 +49,10 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 
 	ngOnInit(): void {
 		this.createError();
+
+		if (!this.message) {
+			this.throwError();
+		}
 	}
 
 	createError(): void {
@@ -80,5 +84,15 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 			type: this.type,
 			controlName: this.controlName,
 		});
+	}
+
+	throwError(): void {
+		if (this.controlName) {
+			throw new Error(
+				`Fudis component with id of '${this.inputId}' and control name of '${this.controlName}' is missing error message for '${this.type}'`
+			);
+		} else {
+			throw new Error(`Fudis component with id of '${this.inputId}' is missing error message for '${this.type}'`);
+		}
 	}
 }

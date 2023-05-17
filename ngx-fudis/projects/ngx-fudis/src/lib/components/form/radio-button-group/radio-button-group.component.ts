@@ -1,9 +1,8 @@
-import { Component, HostBinding, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { IFudisRadioButtonOption, TFudisInputErrorMessages } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
-import { GuidanceComponent } from '../guidance/guidance.component';
 
 @Component({
 	selector: 'fudis-radio-button-group[options][id][legend]',
@@ -13,8 +12,6 @@ import { GuidanceComponent } from '../guidance/guidance.component';
 })
 export class RadioButtonGroupComponent extends FieldSetBaseDirective implements OnInit {
 	@HostBinding('class') classes = 'fudis-radio-button-group-host';
-
-	@ViewChild(GuidanceComponent) guidanceToUpdate: GuidanceComponent;
 
 	/*
 	 * FormControl for Radio Button group
