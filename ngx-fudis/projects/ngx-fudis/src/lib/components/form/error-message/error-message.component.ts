@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 
 import { ErrorSummaryService } from '../error-summary/error-summary.service';
 import { TFudisFormErrorSummaryItem } from '../../../types/forms';
@@ -8,51 +8,77 @@ import { TFudisFormErrorSummaryItem } from '../../../types/forms';
 	templateUrl: './error-message.component.html',
 	styleUrls: ['./error-message.component.scss'],
 })
-export class ErrorMessageComponent implements OnInit, OnDestroy {
+export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	/*
 	 * Error message to display
 	 */
-	@Input() message: string | undefined | null;
+	@Input() message: string | undefined;
 
+	/**
+	 * Name of control this error is related to.
+	 */
+	@Input() controlName: string | undefined = undefined;
+
+	/**
+	 * Id of input this message is related to. Sent to Error Summary service.
+	 */
 	@Input() inputId: string;
 
+	/**
+	 * Label text of input this message is related to. Sent to Error Summary service.
+	 */
 	@Input() inputLabel: string;
 
+	/**
+	 * If error is visible or not.
+	 */
 	@Input() visible: boolean = false;
 
+	/**
+	 * Error type from different keys in e. g. control.errors such as 'required' and 'minlength'
+	 */
 	@Input() type: string;
 
 	errorSent: boolean = false;
 
+	currentMessage: string | undefined = undefined;
+
+	currentLabel: string | undefined = undefined;
+
 	constructor(private errorSummaryService: ErrorSummaryService) {}
 
 	ngOnInit(): void {
-		this.errorSummaryService.reloadWatcher().subscribe(() => {
-			if (!this.errorSent) {
-				this.createError();
-			}
-		});
+		this.createError();
 	}
 
 	createError(): void {
-		if (this.message) {
+		if (this.message && this.inputLabel) {
+			this.currentMessage = this.message;
+			this.currentLabel = this.inputLabel;
+
 			const newError: TFudisFormErrorSummaryItem = {
 				id: this.inputId,
-				error: this.message,
-				label: this.inputLabel,
+				error: this.currentMessage,
+				label: this.currentLabel,
 				type: this.type,
+				controlName: this.controlName,
 			};
 			this.errorSummaryService.addNewError(newError);
 			this.errorSent = true;
 		}
 	}
 
-	ngOnDestroy(): void {
-		if (this.errorSent) {
-			this.errorSummaryService.removeError({
-				id: this.inputId,
-				type: this.type,
-			});
+	ngOnChanges(): void {
+		if (this.message !== this.currentMessage || this.inputLabel !== this.currentLabel) {
+			this.createError();
 		}
+	}
+
+	ngOnDestroy(): void {
+		this.errorSummaryService.removeError({
+			id: this.inputId,
+			type: this.type,
+			controlName: this.controlName,
+		});
 	}
 }

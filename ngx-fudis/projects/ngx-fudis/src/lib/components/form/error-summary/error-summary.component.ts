@@ -32,15 +32,20 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 		this.errorSummaryService.getVisibleErrors().subscribe((errorsFromService) => {
 			this.visibleErrorList = [];
 			Object.keys(errorsFromService).forEach((item) => {
-				if (this.parentComponent?.querySelector(`#${item}`)) {
+				const errorId = errorsFromService[item].id;
+
+				if (this.parentComponent?.querySelector(`#${errorId}`)) {
 					const { label } = errorsFromService[item];
 
 					Object.values(errorsFromService[item].errors).forEach((error: any) => {
-						this.visibleErrorList.push({ id: item, message: `${label}: ${error}` });
+						this.visibleErrorList.push({ id: errorId, message: `${label}: ${error}` });
 					});
 				}
 			});
 
+			/**
+			 * Focus to Error Summary element when visible error list gets updated.
+			 */
 			this.focusToErrorSummary();
 		});
 	}
@@ -56,6 +61,9 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 	}
 
 	ngAfterViewInit(): void {
+		/**
+		 * Initial focus when Error Summary is loaded first time
+		 * */
 		this.focusToErrorSummary();
 	}
 }

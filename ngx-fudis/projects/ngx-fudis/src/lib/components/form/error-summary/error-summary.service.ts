@@ -16,13 +16,21 @@ export class ErrorSummaryService {
 		return this.visibleErrorList;
 	}
 
+	// eslint-disable-next-line class-methods-use-this
+	defineErrorId(id: string, controlName: string | undefined): string {
+		return controlName ? `${id}_${controlName}` : id;
+	}
+
 	addNewError(newError: TFudisFormErrorSummaryItem): void {
 		let currentErrors = this.currentErrorList;
 
-		if (!currentErrors[newError.id]) {
+		const errorId = this.defineErrorId(newError.id, newError.controlName);
+
+		if (!currentErrors[errorId]) {
 			currentErrors = {
 				...currentErrors,
-				[newError.id]: {
+				[errorId]: {
+					id: newError.id,
 					errors: { [newError.type]: newError.error },
 					label: newError.label,
 				},
@@ -30,8 +38,9 @@ export class ErrorSummaryService {
 		} else {
 			currentErrors = {
 				...currentErrors,
-				[newError.id]: {
-					errors: { ...currentErrors[newError.id].errors, [newError.type]: newError.error },
+				[errorId]: {
+					id: newError.id,
+					errors: { ...currentErrors[errorId].errors, [newError.type]: newError.error },
 					label: newError.label,
 				},
 			};
@@ -40,9 +49,12 @@ export class ErrorSummaryService {
 		this.currentErrorList = currentErrors;
 	}
 
-	removeError(error: { id: string; type: string }): void {
+	removeError(error: { id: string; controlName: string | undefined; type: string }): void {
 		const currentErrors = this.currentErrorList;
-		delete currentErrors[error.id].errors[error.type];
+
+		const errorId = error.controlName ? `${error.id}_${error.controlName}` : error.id;
+
+		delete currentErrors[errorId].errors[error.type];
 
 		this.currentErrorList = currentErrors;
 	}
@@ -52,11 +64,7 @@ export class ErrorSummaryService {
 	}
 
 	reloadErrors() {
-		this.reloadStore.next(this.reloadStore.value);
-
 		const visibleErrors = { ...this.currentErrorList };
-
-		// console.log(visibleErrors);
 		this.visibleErrorListStore.next(visibleErrors);
 	}
 }

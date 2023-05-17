@@ -13,6 +13,7 @@
 								[inputId]="for"
 								[visible]="control.value.touched"
 								[type]="error.key"
+								[controlName]="control.key"
 								[inputLabel]="inputLabel"
 								[message]="groupErrorMsg?.[control.key][asErrorkey(error?.key)]"></fudis-error-message>
 						</ng-container>

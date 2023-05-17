@@ -46,10 +46,12 @@ export type TFudisFormErrorSummaryItem = {
 	label: string;
 	error: string;
 	type: string;
+	controlName: string | undefined;
 };
 
 export type TFudisFormErrorSummaryObject = {
 	[id: string]: {
+		id: string;
 		errors: TFudisFormErrorSummaryObjectItemErrors;
 		label: string;
 	};
