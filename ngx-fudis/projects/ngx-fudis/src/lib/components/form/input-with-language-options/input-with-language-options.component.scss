@@ -1,7 +1,9 @@
 @use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-input-with-language-options {
-	box-sizing: border-box;
+	@include utilities.box-reset;
+
 	display: flex;
 
 	&__l {
@@ -20,12 +22,6 @@
 		flex: 1;
 		margin-right: spacing.$spacing-xxs;
 		max-width: calc(100% - spacing.$spacing-xxl - spacing.$spacing-xxs);
-
-		&__item {
-			&--hidden {
-				display: none;
-			}
-		}
 	}
 
 	&__dropdown {
