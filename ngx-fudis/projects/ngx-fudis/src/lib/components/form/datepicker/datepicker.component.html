@@ -3,7 +3,7 @@
 		[id]="'label_' + id"
 		[for]="id"
 		[text]="label"
-		[requiredText]="isRequired() ? requiredText : null"
+		[requiredText]="requiredText"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle"></fudis-label>
@@ -16,11 +16,10 @@
 			[max]="maxDate"
 			[readonly]="disabled"
 			class="fudis-datepicker__input"
-			[ngClass]="{
-				'fudis-datepicker__input--invalid': control.invalid && control.touched,
-				'fudis-datepicker__input--disabled': disabled
-			}"
-			[attr.required]="isRequired()"
+			[class.fudis-datepicker__input--invalid]="(control.invalid && control.touched) || invalidState"
+			[class.fudis-datepicker__input--disabled]="disabled"
+			[attr.aria-invalid]="control.invalid || invalidState"
+			[attr.required]="requiredText ? true : false"
 			[attr.aria-describedby]="id + '_guidance'" />
 		<mat-datepicker-toggle
 			[disabled]="disabled"

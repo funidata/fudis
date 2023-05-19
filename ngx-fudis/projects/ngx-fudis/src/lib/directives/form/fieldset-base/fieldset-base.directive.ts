@@ -1,5 +1,4 @@
 import { Directive, Input } from '@angular/core';
-import { Validators } from '@angular/forms';
 
 @Directive({
 	selector: '[fudisFieldSetBase]',
@@ -29,6 +28,4 @@ export class FieldSetBaseDirective {
 	 * To disable Field Set content as Fudis Grid. Used in e. g. Radio Button Group.
 	 */
 	@Input() disableGrid: boolean = false;
-
-	requiredValidator = Validators.required;
 }

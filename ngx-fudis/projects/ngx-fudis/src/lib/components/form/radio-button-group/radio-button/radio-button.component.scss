@@ -5,6 +5,12 @@
 @use '../../../../foundations/colors/mixins.scss' as colorMixins;
 @use '../../../../foundations/focus/mixins.scss' as focus; 
 
+.fudis-radio-button-host {
+	&:not(:last-of-type) {
+		margin-bottom: spacing.$spacing-s;
+	}
+}
+
 .fudis-radio-button {
 	@include typography.body-text-m-regular;
 	@include colorMixins.text-color('gray-dark');

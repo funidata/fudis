@@ -1,15 +1,13 @@
 <fudis-fieldset [id]="id" [legend]="legend" [disableGrid]="true" [errorSummaryVisible]="false">
-	<div class="fudis-radio-button-group__option" *ngFor="let option of options; let index = index">
-		<fudis-radio-button
-			[guidanceId]="id + '_guidance'"
-			[id]="option.id"
-			[name]="option.name"
-			[value]="option.value"
-			[viewValue]="option.viewValue"
-			[required]="control.hasValidator(requiredValidator)"
-			[checked]="control.value === option.value ? true : false"
-			[control]="control"></fudis-radio-button>
-	</div>
+	<fudis-radio-button
+		*ngFor="let option of options; let index = index"
+		[id]="option.id"
+		[name]="option.name"
+		[value]="option.value"
+		[viewValue]="option.viewValue"
+		[required]="control.hasValidator(requiredValidator)"
+		[checked]="control.value === option.value ? true : false"
+		[control]="control"></fudis-radio-button>
 	<fudis-guidance [inputLabel]="legend" [helpText]="helpText" [for]="id" [errorMsg]="errorMsg" [control]="control">
 	</fudis-guidance>
 </fudis-fieldset>

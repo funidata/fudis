@@ -3,7 +3,7 @@
 		[for]="id"
 		[id]="'label_' + id"
 		[text]="label"
-		[requiredText]="isRequired() ? requiredText : null"
+		[requiredText]="requiredText"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle">
@@ -13,11 +13,12 @@
 		[formControl]="control"
 		(blur)="onBlur($event)"
 		class="fudis-text-area__input"
-		[class.fudis-text-area__input--invalid]="control.touched && control.invalid"
+		[class.fudis-text-area__input--invalid]="(control.touched && control.invalid) || invalidState"
 		[attr.aria-describedby]="id + '_guidance'"
+		[attr.aria-invalid]="control.invalid || invalidState"
 		[attr.minLength]="minLength"
 		[attr.maxLength]="maxLength"
-		[attr.required]="isRequired()">
+		[attr.required]="requiredText ? true : false">
 	</textarea>
 	<ng-container *ngIf="helpText || errorMsg">
 		<fudis-guidance

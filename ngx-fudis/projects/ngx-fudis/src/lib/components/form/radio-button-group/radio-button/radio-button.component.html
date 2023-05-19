@@ -1,10 +1,11 @@
 <label [attr.for]="id" class="fudis-radio-button">
 	<input
+		[attr.aria-invalid]="control.invalid || invalidState"
 		(blur)="handleBlur()"
 		(change)="handleChange()"
 		class="fudis-radio-button__input"
 		type="radio"
-		[attr.aria-describedby]="guidanceId"
+		[attr.aria-describedby]="id + '_guidance'"
 		[id]="id"
 		[attr.name]="name"
 		[name]="name"
@@ -15,7 +16,7 @@
 	<div class="fudis-radio-button__content">
 		<div
 			class="fudis-radio-button__content__control"
-			[class.fudis-radio-button__content__control--invalid]="control.touched && control.invalid">
+			[class.fudis-radio-button__content__control--invalid]="(control.touched && control.invalid) || invalidState">
 			<span *ngIf="this.checked" class="fudis-radio-button__content__control__indicator"></span>
 		</div>
 		<span class="fudis-radio-button__label">{{ viewValue }}</span>

@@ -69,7 +69,6 @@ export class AppComponent implements OnInit {
 			this.translocoService.setActiveLang('en');
 			this.document.documentElement.lang = 'en';
 		}
-		console.log(this.translocoService.translate('chooseTruthTrue'));
 	}
 
 	openDialog(): void {

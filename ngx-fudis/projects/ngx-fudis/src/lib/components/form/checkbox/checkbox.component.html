@@ -2,9 +2,10 @@
 	<label class="fudis-checkbox__label" [attr.for]="id" (click)="handleCheckboxClick()">
 		<div
 			class="fudis-checkbox__box"
-			[class.fudis-checkbox__box--invalid]="control.invalid && control.touched"
+			[class.fudis-checkbox__box--invalid]="(control.invalid && control.touched) || invalidState"
 			[class.fudis-checkbox__box--disabled]="control.disabled">
 			<input
+				[attr.aria-invalid]="control.invalid || invalidState"
 				[formControl]="control"
 				#checkboxRef
 				[attr.aria-describedby]="id + '_guidance'"
@@ -14,7 +15,7 @@
 				[attr.name]="name"
 				[id]="id"
 				class="fudis-checkbox__input"
-				[attr.required]="isRequired()"
+				[attr.required]="requiredText ? true : false"
 				[attr.aria-disabled]="control.disabled" />
 			<svg
 				*ngIf="control.value"

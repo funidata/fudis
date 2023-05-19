@@ -11,18 +11,18 @@ import { TFudisInputErrorMessages } from '../../../types/forms';
 			<fudis-text-input
 				[control]="mainFormGroup.controls['first']"
 				[id]="'unique-text-input-id-1'"
-				label="I am a basic text input."
-				helpText="I don't have any validators."></fudis-text-input>
+				[label]="'I am a basic text input.'"
+				[helpText]="'I do not have any validators.'"></fudis-text-input>
 			<fudis-text-input
 				[control]="mainFormGroup.controls['second']"
 				[id]="'unique-text-input-id-2'"
-				requiredText="Required"
+				[requiredText]="'Required'"
 				[errorMsg]="{ required: 'Missing a value.' }"
-				label="I am a required text input"
-				tooltip="This is a tooltip text"
+				[label]="'I am a required text input'"
+				[tooltip]="'This is a tooltip text'"
 				[tooltipPosition]="'right'"
 				[tooltipToggle]="false"
-				helpText="Please add some values here above!"></fudis-text-input>
+				[helpText]="'Please add some values here above!'"></fudis-text-input>
 			<fudis-text-input
 				[control]="mainFormGroup.controls['third']"
 				requiredText="Required"
@@ -37,7 +37,7 @@ import { TFudisInputErrorMessages } from '../../../types/forms';
 			<fudis-text-input
 				[control]="mainFormGroup.controls['fourth']"
 				[id]="'unique-text-input-id-4'"
-				label="Number input"
+				label="Numberinput"
 				requiredText="Required"
 				[minNumber]="minNumber"
 				[maxNumber]="maxNumber"

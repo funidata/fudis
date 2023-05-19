@@ -14,7 +14,7 @@
 								[type]="error.key"
 								[controlName]="control.key"
 								[inputLabel]="inputLabel"
-								[message]="groupErrorMsg?.[control.key][asErrorkey(error?.key)]"></fudis-error-message>
+								[message]="groupErrorMsg?.[control.key]?.[asErrorkey(error?.key)]"></fudis-error-message>
 						</ng-container>
 					</ng-container>
 				</ng-container>

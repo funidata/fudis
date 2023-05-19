@@ -28,6 +28,11 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	 */
 	@Input() errorMsg: TFudisInputErrorMessages;
 
+	/**
+	 * Set Radio Button Group's visual style and ARIA attribute as invalid. Does not override if control.invalid is true.
+	 */
+	@Input() invalidState: boolean = false;
+
 	ngOnInit() {
 		if (this.options.length < 2) {
 			throw new Error(

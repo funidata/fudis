@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IFudisDropdownOption, TFudisGroupErrorMessages } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
@@ -44,9 +44,11 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	for: string = '';
 
-	currentValues: { [key: string]: any } = {};
+	requiredControls: { [key: string]: { value?: string; requiredText: string | undefined } } = {};
 
-	atLeastOneIsRequired: boolean = false;
+	atLeastOneRequired: boolean = false;
+
+	nonEmptyControls: string[] = [];
 
 	updatedOptions: IFudisDropdownOption[] = [];
 
@@ -54,6 +56,8 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 		this.updatedOptions = this.missingLanguage ? this.updateDropdownList() : this.options;
 		this.dropdownControl = new FormControl(this.updatedOptions[0]);
 		this.for = `${this.id}_${this.options[0].value}`;
+
+		this.initialRequiredCheck();
 	}
 
 	handleLanguageSelect(value: IFudisDropdownOption): void {
@@ -61,8 +65,10 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 		this.for = `${this.id}_${value.value}`;
 	}
 
-	handleInputBlur(): void {
+	handleInputBlur(event: Event, controlKey: string): void {
 		this.updatedOptions = this.missingLanguage ? this.updateDropdownList() : this.options;
+
+		this.isControlRequired((event.target as HTMLInputElement).value, controlKey);
 	}
 
 	updateDropdownList(): IFudisDropdownOption[] {
@@ -88,26 +94,86 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 		return newOptions;
 	}
 
-	checkAtLeastOneIsRequired(controlKey: string, controlValue: string): boolean {
-		if (!this.currentValues[controlKey]) {
-			this.currentValues = { ...this.currentValues, [controlKey]: controlValue };
+	/**
+	 * OnInit check to forward necessary "requiredText" attributes to all generated inputs.
+	 */
+	initialRequiredCheck(): void {
+		this.requiredControls = {};
+		if (this.formGroup.errors?.['atLeastOneRequired'] || this.groupErrorMsg.atLeastOneRequired) {
+			this.atLeastOneRequired = true;
+
+			Object.keys(this.formGroup.controls).forEach((control) => {
+				this.requiredControls = {
+					...this.requiredControls,
+					[control]: {
+						value: this.formGroup.controls[control].value,
+						requiredText: this.requiredText,
+					},
+				};
+			});
 		} else {
-			this.currentValues[controlKey] = controlValue;
+			Object.keys(this.formGroup.controls).forEach((control) => {
+				this.requiredControls = {
+					...this.requiredControls,
+					[control]: {
+						value: this.formGroup.controls[control].value,
+						requiredText: this.formGroup.controls[control].hasValidator(Validators.required)
+							? this.requiredText
+							: undefined,
+					},
+				};
+			});
 		}
+	}
 
-		if (this.formGroup?.errors?.['atLeastOneRequired']) {
-			this.atLeastOneIsRequired = true;
-			return true;
+	/**
+	 * Check onBlur if requiredText is needed to be shown
+	 */
+	isControlRequired(value: string, controlKey: string): void {
+		// If all controls are invalid run initialRequiredCheck()
+		if (this.formGroup.errors?.['atLeastOneRequired']) {
+			this.initialRequiredCheck();
+		} else if (this.atLeastOneRequired && controlKey) {
+			// Check how many controls are empty
+			this.requiredControls[controlKey].value = value;
+
+			this.nonEmptyControls = Object.keys(this.requiredControls).filter((control) => {
+				return this.requiredControls[control].value !== '';
+			});
+
+			// If only one control is not empty, include requiredText with that
+			if (this.nonEmptyControls.length === 1) {
+				this.requiredControls = {};
+				Object.keys(this.formGroup.controls).forEach((control) => {
+					this.requiredControls = {
+						...this.requiredControls,
+						[control]: {
+							value: this.formGroup.controls[control].value,
+							requiredText:
+								this.nonEmptyControls.includes(control) ||
+								this.formGroup.controls[control].hasValidator(Validators.required)
+									? this.requiredText
+									: undefined,
+						},
+					};
+				});
+			}
+
+			// If more than one control are not empty remove requiredText unless they have Validators.required
+			if (this.atLeastOneRequired && this.nonEmptyControls.length > 1) {
+				this.requiredControls = {};
+				Object.keys(this.formGroup.controls).forEach((control) => {
+					this.requiredControls = {
+						...this.requiredControls,
+						[control]: {
+							value: this.formGroup.controls[control].value,
+							requiredText: this.formGroup.controls[control].hasValidator(Validators.required)
+								? this.requiredText
+								: undefined,
+						},
+					};
+				});
+			}
 		}
-
-		const nonEmptyControls = Object.values(this.currentValues).filter((item) => {
-			return item !== '';
-		});
-
-		if (nonEmptyControls.length === 1 && controlValue && this.atLeastOneIsRequired) {
-			return true;
-		}
-
-		return false;
 	}
 }

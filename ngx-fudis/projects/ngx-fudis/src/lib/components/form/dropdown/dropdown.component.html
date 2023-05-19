@@ -2,7 +2,7 @@
 	<fudis-label
 		[text]="label"
 		[id]="'label_' + id"
-		[requiredText]="isRequired() ? requiredText : null"
+		[requiredText]="requiredText"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle"></fudis-label>
@@ -15,16 +15,17 @@
 		"
 		class="fudis-dropdown__select"
 		[class.fudis-dropdown__select__xs]="size === 'xs'"
-		[class.fudis-dropdown--invalid]="control.touched && control.invalid"
+		[class.fudis-dropdown--invalid]="(control.touched && control.invalid) || invalidState"
 		[placeholder]="placeholder"
 		floatPlaceholder="never"
 		[multiple]="multipleOption"
 		[formControl]="control"
 		(valueChange)="handleSelectionChange($event)"
-		[attr.required]="isRequired()"
+		[attr.required]="requiredText ? true : false"
 		[aria-labelledby]="'label_' + id"
 		[hideSingleSelectionIndicator]="hideSingleSelectionIndicator"
-		[attr.aria-describedby]="id + '_guidance'">
+		[attr.aria-describedby]="id + '_guidance'"
+		[attr.aria-invalid]="control.invalid || invalidState">
 		<mat-option
 			class="fudis-dropdown__option"
 			[class.fudis-dropdown__option__xs]="size === 'xs'"

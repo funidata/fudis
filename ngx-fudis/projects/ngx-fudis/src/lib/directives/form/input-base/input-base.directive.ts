@@ -36,7 +36,7 @@ export class InputBaseDirective extends TooltipApiDirective {
 	/**
 	 * Text to indicate compulsory.
 	 */
-	@Input() requiredText: string | null;
+	@Input() requiredText: string | undefined;
 
 	/**
 	 * Help text, aligned underneath the input.
@@ -50,32 +50,39 @@ export class InputBaseDirective extends TooltipApiDirective {
 	@Input() errorMsg: TFudisInputErrorMessages;
 
 	/**
-	 * TBD for all form components! Currently only used with text-input.
-	 * Set manually input's visual style and attributes as invalid.
+	 * Set input's visual style and attributes as invalid. Does not override if control.invalid is true.
 	 */
-
 	@Input() invalidState: boolean = false;
-
-	/**
-	 * Alternative to control's Validators.required for setting input as a required input. Requires still that requiredText string is provided.
-	 */
-
-	@Input() required: boolean = false;
 
 	/**
 	 * To listen for input's blur event.
 	 */
-
 	@Output() handleBlur: EventEmitter<Event> = new EventEmitter<Event>();
 
 	onBlur(event: Event): void {
 		this.handleBlur.emit(event);
 	}
 
-	isRequired(): boolean | null {
-		if (this.requiredText && (this.control?.hasValidator(Validators.required) || this.required)) {
-			return true;
+	// isRequired(): boolean | null {
+	// 	if (this.requiredText && (this.control?.hasValidator(Validators.required) || this.required)) {
+	// 		return true;
+	// 	}
+	// 	return null;
+	// }
+
+	checkRequiredAttributes(): void {
+		if (this.requiredText && !this.control.hasValidator(Validators.required)) {
+			// eslint-disable-next-line no-console
+			console.warn(
+				`Fudis component with id of '${this.id}' has requiredText of ${this.requiredText} but component's form control does not have 'Validators.required'`
+			);
 		}
-		return null;
+
+		if (!this.requiredText && this.control.hasValidator(Validators.required)) {
+			// eslint-disable-next-line no-console
+			console.warn(
+				`Fudis component with id of '${this.id}' from control has 'Validators.required' but no 'requiredText' is provided.`
+			);
+		}
 	}
 }
