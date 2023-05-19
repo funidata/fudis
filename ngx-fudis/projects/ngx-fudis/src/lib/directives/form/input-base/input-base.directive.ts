@@ -1,13 +1,15 @@
-import { Directive, Input, EventEmitter, Output } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { Directive, Input, EventEmitter, Output, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 import { TFudisInputErrorMessages } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 
+import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+
 @Directive({
 	selector: '[fudisInputBase]',
 })
-export class InputBaseDirective extends TooltipApiDirective {
+export class InputBaseDirective extends TooltipApiDirective implements OnInit {
 	/**
 	 * FormControl for the input.
 	 */
@@ -55,6 +57,11 @@ export class InputBaseDirective extends TooltipApiDirective {
 	@Input() invalidState: boolean = false;
 
 	/**
+	 * To ignore initial check if input has both requiredText and control Validators.required
+	 */
+	@Input() ignoreRequiredCheck: boolean = false;
+
+	/**
 	 * To listen for input's blur event.
 	 */
 	@Output() handleBlur: EventEmitter<Event> = new EventEmitter<Event>();
@@ -63,26 +70,7 @@ export class InputBaseDirective extends TooltipApiDirective {
 		this.handleBlur.emit(event);
 	}
 
-	// isRequired(): boolean | null {
-	// 	if (this.requiredText && (this.control?.hasValidator(Validators.required) || this.required)) {
-	// 		return true;
-	// 	}
-	// 	return null;
-	// }
-
-	checkRequiredAttributes(): void {
-		if (this.requiredText && !this.control.hasValidator(Validators.required)) {
-			// eslint-disable-next-line no-console
-			console.warn(
-				`Fudis component with id of '${this.id}' has requiredText of ${this.requiredText} but component's form control does not have 'Validators.required'`
-			);
-		}
-
-		if (!this.requiredText && this.control.hasValidator(Validators.required)) {
-			// eslint-disable-next-line no-console
-			console.warn(
-				`Fudis component with id of '${this.id}' from control has 'Validators.required' but no 'requiredText' is provided.`
-			);
-		}
+	ngOnInit(): void {
+		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 }

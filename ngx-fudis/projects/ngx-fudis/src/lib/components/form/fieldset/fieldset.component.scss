@@ -8,7 +8,6 @@
 .fudis-fieldset {
 	@include utilities.box-reset;
 	
-
 	display: flex;
 	flex-direction: column;
 	
@@ -27,10 +26,18 @@
 		width: 100%;
 
 		&__title {
-			@include colorMixins.text-color('gray-dark');
 			@include typography.text-field-label;
 
+			&__text {
+				@include colorMixins.text-color('gray-dark');
+				
+
+				margin-right: spacing.$spacing-xs;
+			}
+
 			&__required {
+				@include colorMixins.text-color('gray-middle');
+
 				text-transform: initial;
 				/* stylelint-disable-next-line property-disallowed-list */
 				font-size: typographyTokens.$body-text-s-font-size;

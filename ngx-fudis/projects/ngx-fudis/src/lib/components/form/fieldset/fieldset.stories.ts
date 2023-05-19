@@ -68,6 +68,7 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 						[requiredText]="requiredText"></fudis-text-input>
 
 					<fudis-radio-button-group
+						[requiredText]="requiredText"
 						[legend]="labelCourseType"
 						[id]="'radio-button-group-1'"
 						[options]="courseTypeOptions"

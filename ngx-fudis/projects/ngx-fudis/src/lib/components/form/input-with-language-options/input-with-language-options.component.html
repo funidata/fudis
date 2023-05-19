@@ -33,6 +33,7 @@
 			[size]="'l'"
 			[label]="label"
 			[id]="id"
+			[ignoreRequiredCheck]="true"
 			[requiredText]="requiredControls[control.key].requiredText"
 			[invalidState]="formGroup.invalid && formGroup.touched"
 			[control]="$any(formGroup).controls[control.key]"></fudis-text-input>
@@ -49,6 +50,7 @@
 			[size]="'l'"
 			[label]="label"
 			[id]="id"
+			[ignoreRequiredCheck]="true"
 			[invalidState]="formGroup.invalid && formGroup.touched"
 			[requiredText]="requiredControls[control.key].requiredText"
 			[control]="$any(formGroup).controls[control.key]"></fudis-text-area>

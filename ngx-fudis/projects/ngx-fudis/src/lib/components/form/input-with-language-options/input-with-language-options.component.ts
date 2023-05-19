@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IFudisDropdownOption, TFudisGroupErrorMessages } from '../../../types/forms';
+import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
 @Component({
@@ -52,7 +53,8 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	updatedOptions: IFudisDropdownOption[] = [];
 
-	ngOnInit(): void {
+	override ngOnInit(): void {
+		checkRequiredAttributes(this.id, this.requiredText, undefined, this.formGroup);
 		this.updatedOptions = this.missingLanguage ? this.updateDropdownList() : this.options;
 		this.dropdownControl = new FormControl(this.updatedOptions[0]);
 		this.for = `${this.id}_${this.options[0].value}`;
