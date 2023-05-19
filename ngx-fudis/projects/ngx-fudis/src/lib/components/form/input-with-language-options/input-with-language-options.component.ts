@@ -101,7 +101,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	 */
 	initialRequiredCheck(): void {
 		this.requiredControls = {};
-		if (this.formGroup.errors?.['atLeastOneRequired'] || this.groupErrorMsg.atLeastOneRequired) {
+		if (this.formGroup.errors?.['atLeastOneRequired'] || this.groupErrorMsg?.atLeastOneRequired) {
 			this.atLeastOneRequired = true;
 
 			Object.keys(this.formGroup.controls).forEach((control) => {

@@ -16,13 +16,6 @@ export const checkRequiredAttributes = (
 			);
 		}
 
-		if (!requiredText && group?.hasValidator(FormGroupValidators.atLeastOneRequired)) {
-			// eslint-disable-next-line no-console
-			console.warn(
-				`Fudis component with id of '${id}' has validator of 'FormGroupValidators.atLeastOneRequired' but is missing 'requiredText' attribute.`
-			);
-		}
-
 		if (!requiredText && group) {
 			Object.keys(group.controls).forEach((controlKey) => {
 				if (group.controls[controlKey].hasValidator(Validators.required)) {
@@ -38,6 +31,13 @@ export const checkRequiredAttributes = (
 			// eslint-disable-next-line no-console
 			console.warn(
 				`Fudis component with id of '${id}' from control has 'Validators.required' but no 'requiredText' is provided.`
+			);
+		}
+
+		if (!requiredText && group?.hasValidator(FormGroupValidators.atLeastOneRequired)) {
+			// eslint-disable-next-line no-console
+			console.warn(
+				`Fudis component with id of '${id}' has validator of 'FormGroupValidators.atLeastOneRequired' but is missing 'requiredText' attribute.`
 			);
 		}
 	}
