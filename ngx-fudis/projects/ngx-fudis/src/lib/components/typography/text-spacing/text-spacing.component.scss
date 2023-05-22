@@ -5,15 +5,15 @@
 @use '../../../foundations/borders/mixins.scss' as borders;
 
 :host {
-		& .fudis-heading[size="xl"] {
-			& + .fudis-body-text p {
-				@include borders.border("2px", "solid", "red")
-			}
+	& .fudis-heading[size='xl'] {
+		& + .fudis-body-text p {
+			@include borders.border('2px', 'solid', 'red');
 		}
+	}
 
-		& .fudis-heading[size="l"] {
-			& + .fudis-body-text p {
-				@include borders.border("2px", "solid", "green")
-			}
+	& .fudis-heading[size='l'] {
+		& + .fudis-body-text p {
+			@include borders.border('2px', 'solid', 'green');
 		}
+	}
 }

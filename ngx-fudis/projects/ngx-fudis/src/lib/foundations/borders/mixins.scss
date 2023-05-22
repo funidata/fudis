@@ -8,11 +8,14 @@
 // Generates border, i. e.:
 // border: 2px solid $primary-dark;
 @mixin border($width, $style, $color) {
-	@if map_has_key(spacing.$pixel-tokens, $width) and map_has_key(borderTokens.$border-styles, $style) and map_has_key(colors.$colors, $color) {
-		border: map.get(spacing.$pixel-tokens, $width) map.get(borderTokens.$border-styles, $style) map.get(colors.$colors, $color);
-	}
-
- @else {
+	@if map_has_key(spacing.$pixel-tokens, $width) and
+		map_has_key(borderTokens.$border-styles, $style) and
+		map_has_key(colors.$colors, $color)
+	{
+		border: map.get(spacing.$pixel-tokens, $width)
+			map.get(borderTokens.$border-styles, $style)
+			map.get(colors.$colors, $color);
+	} @else {
 		@error 'Unknown border parameter. Please check foundations/borders/mixins.scss for accepted arguments.';
 	}
 }
@@ -20,12 +23,15 @@
 // Generates outline, i. e.:
 // outline: 2px solid $primary-dark;
 @mixin outline($width, $style, $color) {
-	@if map_has_key(spacing.$pixel-tokens, $width) and map_has_key(borderTokens.$border-styles, $style) and map_has_key(colors.$colors, $color) {
-		outline: map.get(spacing.$pixel-tokens, $width) map.get(borderTokens.$border-styles, $style) map.get(colors.$colors, $color);
+	@if map_has_key(spacing.$pixel-tokens, $width) and
+		map_has_key(borderTokens.$border-styles, $style) and
+		map_has_key(colors.$colors, $color)
+	{
+		outline: map.get(spacing.$pixel-tokens, $width)
+			map.get(borderTokens.$border-styles, $style)
+			map.get(colors.$colors, $color);
 		outline-offset: -(map.get(spacing.$pixel-tokens, $width));
-	}
-
- @else {
+	} @else {
 		@error 'Unknown border parameter. Please check foundations/borders/mixins.scss for accepted arguments.';
 	}
 }
@@ -33,9 +39,7 @@
 @mixin border-radius($width) {
 	@if map_has_key(spacing.$pixel-tokens, $width) {
 		border-radius: map.get(spacing.$pixel-tokens, $width);
-	}
-
- @else {
+	} @else {
 		@error 'Unknown border-radius of #{$width}. It can only be "1px", "2px" or "3px"';
 	}
 }

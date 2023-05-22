@@ -47,10 +47,9 @@
 			@include typography.body-text-s-regular;
 			@include colorMixins.text-color('red');
 
-			
 			text-transform: none;
 		}
-		
+
 		&__character-limit-indicator {
 			@include colorMixins.text-color('gray-dark');
 			@include typography.body-text-s-regular;

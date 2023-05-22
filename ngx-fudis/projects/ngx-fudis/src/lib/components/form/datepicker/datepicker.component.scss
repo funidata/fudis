@@ -30,7 +30,7 @@
 
 		box-sizing: border-box;
 		padding: 0 0 0 spacing.$spacing-xs;
-		width: 100%; 
+		width: 100%;
 		height: spacing.$spacing-xl;
 
 		&:focus {
@@ -42,7 +42,7 @@
 		}
 
 		&--disabled {
-			@include borders.border('1px', 'dashed', 'gray-middle');	
+			@include borders.border('1px', 'dashed', 'gray-middle');
 			@include colorMixins.bg-color('gray-extra-light');
 
 			cursor: default;
@@ -68,7 +68,7 @@
 		&__help-text {
 			@include colorMixins.text-color('gray-dark');
 			@include typography.body-text-s-regular;
-	
+
 			margin-top: spacing.$spacing-xs;
 		}
 	}

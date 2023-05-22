@@ -4,49 +4,41 @@
 
 // Angular Material default typography styling
 $typography: mat.define-typography-config(
-  $font-family: "Fira Sans",
-  // fudis-heading-xxl
-  $headline-4: mat.define-typography-level(2.25rem, 2.5rem, 500),
-
-  // fudis-heading-xl
-  $headline-5: mat.define-typography-level(1.75rem, 2rem, 500),
-    
-  // fudis-heading-l
-  $headline-6: mat.define-typography-level(1.5rem, 1.75rem, 500),
-    
-  // fudis-heading-m
-  $subtitle-1: mat.define-typography-level(1.25rem, 1.75rem, 500),
-    
-  // fudis-heading-s 
-  $body-1: mat.define-typography-level(1.125rem, 1.125rem, 500),
-
-  // fudis-body-l-regular
-  $body-2: mat.define-typography-level(1rem, 1.25rem, 400),
-
-  // fudis-body-m-regular
-  $subtitle-2: mat.define-typography-level(0.875rem, 1.125rem, 400),
-
-  // fudis-body-s-regular
-  $caption: mat.define-typography-level(0.75rem, 1rem, 400),
-
-  // fudis-text-button
-  $button: mat.define-typography-level(0.875rem, 1rem, 500),
+	$font-family: 'Fira Sans',
+	// fudis-heading-xxl
+	$headline-4: mat.define-typography-level(2.25rem, 2.5rem, 500),
+	// fudis-heading-xl
+	$headline-5: mat.define-typography-level(1.75rem, 2rem, 500),
+	// fudis-heading-l
+	$headline-6: mat.define-typography-level(1.5rem, 1.75rem, 500),
+	// fudis-heading-m
+	$subtitle-1: mat.define-typography-level(1.25rem, 1.75rem, 500),
+	// fudis-heading-s
+	$body-1: mat.define-typography-level(1.125rem, 1.125rem, 500),
+	// fudis-body-l-regular
+	$body-2: mat.define-typography-level(1rem, 1.25rem, 400),
+	// fudis-body-m-regular
+	$subtitle-2: mat.define-typography-level(0.875rem, 1.125rem, 400),
+	// fudis-body-s-regular
+	$caption: mat.define-typography-level(0.75rem, 1rem, 400),
+	// fudis-text-button
+	$button: mat.define-typography-level(0.875rem, 1rem, 500),
 );
 $primary-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: mat.define-palette(palette.$palette-map-primary, 500),
-      accent: mat.define-palette(palette.$palette-map-accent, 500),
-    ),
-    typography: $typography,
-  )
+	(
+		color: (
+			primary: mat.define-palette(palette.$palette-map-primary, 500),
+			accent: mat.define-palette(palette.$palette-map-accent, 500),
+		),
+		typography: $typography,
+	)
 );
 $datepicker-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: mat.define-palette(palette.$palette-map-primary, 100),
-      accent: mat.define-palette(palette.$palette-map-accent, 500),
-    ),
-    typography: $typography,
-  )
+	(
+		color: (
+			primary: mat.define-palette(palette.$palette-map-primary, 100),
+			accent: mat.define-palette(palette.$palette-map-accent, 500),
+		),
+		typography: $typography,
+	)
 );

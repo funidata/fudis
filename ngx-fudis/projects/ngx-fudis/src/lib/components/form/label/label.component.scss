@@ -28,7 +28,7 @@
 		&__required {
 			@include typography.text-field-label;
 			@include colorMixins.text-color('gray-middle');
-			
+
 			text-transform: initial;
 			/* stylelint-disable-next-line property-disallowed-list */
 			font-size: typographyTokens.$body-text-s-font-size;

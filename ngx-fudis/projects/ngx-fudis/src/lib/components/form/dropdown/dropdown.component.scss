@@ -4,7 +4,7 @@
 @use '../../../foundations/typography/mixins.scss' as typography;
 @use '../../../foundations/colors/tokens.scss' as colors;
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../../foundations/focus/mixins.scss' as focus; 
+@use '../../../foundations/focus/mixins.scss' as focus;
 
 .fudis-dropdown {
 	max-width: calc(23 * spacing.$spacing-s);
@@ -24,7 +24,6 @@
 	&__xs {
 		max-width: spacing.$spacing-xxl;
 	}
-	
 
 	&__select {
 		@include borders.border('1px', 'solid', 'gray-middle');
@@ -70,19 +69,16 @@
 		}
 	}
 
-	
-
 	&__guidance {
 		&__help-text {
 			@include colorMixins.text-color('gray-dark');
 			@include typography.body-text-s-regular;
-	
+
 			margin-top: spacing.$spacing-xs;
 		}
 	}
-	
+
 	&--invalid {
 		border-color: colors.$color-red;
-  }
+	}
 }
-	

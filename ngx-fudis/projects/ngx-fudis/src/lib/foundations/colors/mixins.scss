@@ -5,9 +5,7 @@
 	@if map_has_key(colors.$colors, $color) {
 		/* stylelint-disable-next-line property-disallowed-list */
 		color: map.get(colors.$colors, $color);
-	}
-
- @else {
+	} @else {
 		@error 'Unknown palette color of #{$color}. Check colors/tokens.scss file for accepted arguments.';
 	}
 }
@@ -16,9 +14,7 @@
 	@if map_has_key(colors.$colors, $color) {
 		/* stylelint-disable-next-line property-disallowed-list */
 		background-color: map.get(colors.$colors, $color);
-	}
-
- @else {
+	} @else {
 		@error 'Unknown palette background color of #{$color}. Check colors/tokens.scss file for accepted arguments.';
 	}
 }

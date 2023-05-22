@@ -8,119 +8,119 @@
 
 @mixin body-text-l-light {
 	text-transform: initial;
-  line-height: tokens.$body-text-l-line-height;
-  font-family: tokens.$font-family;
-  font-size: tokens.$body-text-l-font-size;
-  font-weight: tokens.$font-weight-light;
+	line-height: tokens.$body-text-l-line-height;
+	font-family: tokens.$font-family;
+	font-size: tokens.$body-text-l-font-size;
+	font-weight: tokens.$font-weight-light;
 }
 
 @mixin body-text-l-regular {
 	text-transform: initial;
-  line-height: tokens.$body-text-l-line-height;
-  font-family: tokens.$font-family;
-  font-size: tokens.$body-text-l-font-size;
-  font-weight: tokens.$font-weight-regular;
+	line-height: tokens.$body-text-l-line-height;
+	font-family: tokens.$font-family;
+	font-size: tokens.$body-text-l-font-size;
+	font-weight: tokens.$font-weight-regular;
 }
 
 @mixin body-text-m-light {
 	text-transform: initial;
-  line-height: tokens.$body-text-m-line-height;
-  font-family: tokens.$font-family;
-  font-size: tokens.$body-text-m-font-size;
-  font-weight: tokens.$font-weight-light;
+	line-height: tokens.$body-text-m-line-height;
+	font-family: tokens.$font-family;
+	font-size: tokens.$body-text-m-font-size;
+	font-weight: tokens.$font-weight-light;
 }
 
 @mixin body-text-m-regular {
 	text-transform: initial;
-  line-height: tokens.$body-text-m-line-height;
-  font-family: tokens.$font-family;
-  font-size: tokens.$body-text-m-font-size;
-  font-weight: tokens.$font-weight-regular;
+	line-height: tokens.$body-text-m-line-height;
+	font-family: tokens.$font-family;
+	font-size: tokens.$body-text-m-font-size;
+	font-weight: tokens.$font-weight-regular;
 }
 
 @mixin body-text-s-regular {
 	text-transform: initial;
-  line-height: tokens.$body-text-s-line-height;
-  font-family: tokens.$font-family;
-  font-size: tokens.$body-text-s-font-size;
-  font-weight: tokens.$font-weight-regular;
+	line-height: tokens.$body-text-s-line-height;
+	font-family: tokens.$font-family;
+	font-size: tokens.$body-text-s-font-size;
+	font-weight: tokens.$font-weight-regular;
 }
 
 // Headings
 
 @mixin heading-xxl {
-  margin-bottom: spacing.$spacing-s;
-  line-height: tokens.$heading-l-line-height;
-  font-family: tokens.$font-family;
-  font-size: tokens.$heading-xxl-font-size;
-  font-weight: tokens.$font-weight-medium;
+	margin-bottom: spacing.$spacing-s;
+	line-height: tokens.$heading-l-line-height;
+	font-family: tokens.$font-family;
+	font-size: tokens.$heading-xxl-font-size;
+	font-weight: tokens.$font-weight-medium;
 }
 
 @mixin heading-xl {
-  margin-bottom: spacing.$spacing-s;
-  line-height: tokens.$heading-l-line-height;
-  font-family: tokens.$font-family;
-  font-size: tokens.$heading-xl-font-size;
-  font-weight: tokens.$font-weight-medium;
+	margin-bottom: spacing.$spacing-s;
+	line-height: tokens.$heading-l-line-height;
+	font-family: tokens.$font-family;
+	font-size: tokens.$heading-xl-font-size;
+	font-weight: tokens.$font-weight-medium;
 }
 
 @mixin heading-l {
-  margin-bottom: spacing.$spacing-xs;
-  line-height: tokens.$heading-m-line-height;
-  font-family: tokens.$font-family;
-  font-size: tokens.$heading-l-font-size;
-  font-weight: tokens.$font-weight-medium;
+	margin-bottom: spacing.$spacing-xs;
+	line-height: tokens.$heading-m-line-height;
+	font-family: tokens.$font-family;
+	font-size: tokens.$heading-l-font-size;
+	font-weight: tokens.$font-weight-medium;
 }
 
 @mixin heading-m {
-  margin-bottom: spacing.$spacing-xs;
-  line-height: tokens.$heading-m-line-height;
-  font-family: tokens.$font-family;
-  font-size: tokens.$heading-m-font-size;
-  font-weight: tokens.$font-weight-medium;
+	margin-bottom: spacing.$spacing-xs;
+	line-height: tokens.$heading-m-line-height;
+	font-family: tokens.$font-family;
+	font-size: tokens.$heading-m-font-size;
+	font-weight: tokens.$font-weight-medium;
 }
 
 @mixin heading-s {
-  margin-bottom: spacing.$spacing-xs;
-  line-height: tokens.$heading-s-line-height;
-  font-family: tokens.$font-family;
-  font-size: tokens.$heading-s-font-size;
-  font-weight: tokens.$font-weight-medium;
+	margin-bottom: spacing.$spacing-xs;
+	line-height: tokens.$heading-s-line-height;
+	font-family: tokens.$font-family;
+	font-size: tokens.$heading-s-font-size;
+	font-weight: tokens.$font-weight-medium;
 }
 
 @mixin heading-xs {
-  margin-bottom: spacing.$spacing-xs;
-  line-height: tokens.$heading-s-line-height;
-  font-family: tokens.$font-family;
-  font-size: tokens.$heading-xs-font-size;
-  font-weight: tokens.$font-weight-bold;
+	margin-bottom: spacing.$spacing-xs;
+	line-height: tokens.$heading-s-line-height;
+	font-family: tokens.$font-family;
+	font-size: tokens.$heading-xs-font-size;
+	font-weight: tokens.$font-weight-bold;
 }
 
 @mixin heading-xxs {
-  margin-bottom: spacing.$spacing-xs;
-  line-height: tokens.$heading-s-line-height;
-  font-family: tokens.$font-family;
-  font-size: tokens.$heading-xxs-font-size;
-  font-weight: tokens.$font-weight-bold;
+	margin-bottom: spacing.$spacing-xs;
+	line-height: tokens.$heading-s-line-height;
+	font-family: tokens.$font-family;
+	font-size: tokens.$heading-xxs-font-size;
+	font-weight: tokens.$font-weight-bold;
 }
 
-// Other UI styles 
+// Other UI styles
 
 // Text-input, text-area, dropdown, legend components
 
 @mixin text-field-label {
-  text-transform: uppercase;
+	text-transform: uppercase;
 	line-height: tokens.$text-input-line-height;
-  font-family: tokens.$font-family;
-  font-size: tokens.$body-text-m-font-size;
-  font-weight: tokens.$font-weight-regular;
+	font-family: tokens.$font-family;
+	font-size: tokens.$body-text-m-font-size;
+	font-weight: tokens.$font-weight-regular;
 }
 
 @mixin text-field-input {
 	line-height: tokens.$text-input-line-height;
 	font-family: tokens.$font-family;
-  font-size: tokens.$body-text-l-font-size;
-  font-weight: tokens.$font-weight-light;
+	font-size: tokens.$body-text-l-font-size;
+	font-weight: tokens.$font-weight-light;
 }
 
 // Badge component
@@ -141,21 +141,21 @@
 
 @mixin description-list-value-typography {
 	line-height: tokens.$body-text-l-line-height;
-  font-family: tokens.$font-family;
-  font-size: tokens.$body-text-l-font-size;
-  font-weight: tokens.$font-weight-light;
+	font-family: tokens.$font-family;
+	font-size: tokens.$body-text-l-font-size;
+	font-weight: tokens.$font-weight-light;
 }
 
 @mixin description-list-compact-key-typography {
 	line-height: tokens.$body-text-l-line-height;
-  font-family: tokens.$font-family;
+	font-family: tokens.$font-family;
 	font-size: tokens.$body-text-m-font-size;
-  font-weight: tokens.$font-weight-light;
+	font-weight: tokens.$font-weight-light;
 }
 
 @mixin description-list-compact-value-typography {
 	line-height: tokens.$body-text-l-line-height;
-  font-family: tokens.$font-family;
+	font-family: tokens.$font-family;
 	font-size: tokens.$body-text-m-font-size;
 	font-weight: tokens.$font-weight-regular;
 }
@@ -163,7 +163,7 @@
 // Button component
 
 @mixin button-typography {
-	@include letter-spacing("1px");
+	@include letter-spacing('1px');
 
 	text-transform: uppercase;
 	line-height: tokens.$body-text-s-line-height;
@@ -175,9 +175,7 @@
 @mixin letter-spacing($width) {
 	@if map_has_key(spacing.$pixel-tokens, $width) {
 		letter-spacing: map.get(spacing.$pixel-tokens, $width);
-	}
-
- @else {
+	} @else {
 		@error 'Unknown letter-spacing parameter. It can only be "1px", "2px" or "3px"';
 	}
 }
@@ -185,16 +183,16 @@
 // Expandable component
 
 @mixin expandable-regular-typography {
-  line-height: tokens.$body-text-l-line-height;
-  font-family: tokens.$font-family;
-  font-size: tokens.$body-text-l-font-size;
-  font-weight: tokens.$font-weight-regular;
+	line-height: tokens.$body-text-l-line-height;
+	font-family: tokens.$font-family;
+	font-size: tokens.$body-text-l-font-size;
+	font-weight: tokens.$font-weight-regular;
 }
 
 @mixin expandable-sub-title-typography {
-  font-family: tokens.$font-family;
-  font-size: tokens.$body-text-s-font-size;
-  font-weight: tokens.$font-weight-light;
+	font-family: tokens.$font-family;
+	font-size: tokens.$body-text-s-font-size;
+	font-weight: tokens.$font-weight-light;
 }
 
 // Link component
@@ -202,13 +200,13 @@
 @mixin text-link-m-typography {
 	font-family: tokens.$font-family;
 	font-size: tokens.$body-text-m-font-size;
-  font-weight: tokens.$font-weight-regular;
+	font-weight: tokens.$font-weight-regular;
 }
 
 @mixin text-link-l-typography {
 	font-family: tokens.$font-family;
 	font-size: tokens.$body-text-l-font-size;
-  font-weight: tokens.$font-weight-regular;
+	font-weight: tokens.$font-weight-regular;
 }
 
 @mixin text-link-inherit-typography {

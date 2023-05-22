@@ -7,10 +7,10 @@
 
 .fudis-fieldset {
 	@include utilities.box-reset;
-	
+
 	display: flex;
 	flex-direction: column;
-	
+
 	/* stylelint-disable-next-line declaration-property-value-disallowed-list, property-disallowed-list */
 	border: none;
 
@@ -30,7 +30,7 @@
 
 			&__text {
 				@include colorMixins.text-color('gray-dark');
-				
+
 				margin-right: spacing.$spacing-xs;
 			}
 
@@ -48,7 +48,7 @@
 			@include typography.body-text-s-regular;
 
 			margin-top: spacing.$spacing-xs;
-			margin-bottom: spacing.$spacing-xs
+			margin-bottom: spacing.$spacing-xs;
 		}
 	}
 }
