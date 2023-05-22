@@ -2,30 +2,22 @@
 	"extends": [
 		"stylelint-config-standard-scss",
 		"stylelint-config-sass-guidelines",
-		"stylelint-config-concentric-order",
-		"stylelint-config-prettier-scss"
+		"stylelint-config-prettier-scss",
+		"stylelint-config-concentric-order"
 	],
-	"ignoreFiles": [
-		"dist/**/*.scss"
-	],
+	"plugins": ["stylelint-prettier"],
+	"ignoreFiles": ["dist/**/*.scss"],
 	"rules": {
+		"prettier/prettier": true,
 		"order/properties-alphabetical-order": null,
 		"color-no-hex": true,
 		"color-hex-length": "long",
-		"unit-disallowed-list": [
-			"px",
-			"rem"
-		],
-		"function-parentheses-space-inside": "never-single-line",
+		"unit-disallowed-list": ["px", "rem"],
 		"max-nesting-depth": 4,
 		"declaration-no-important": true,
-		"selector-max-empty-lines": 0,
-		"max-empty-lines": 1,
 		"selector-max-class": 2,
 		"selector-class-pattern": "fudis-([a-z][a-z0-9]*)(-[a-z0-9]+)*$",
 		"no-descending-specificity": true,
-		"block-opening-brace-space-before": "always",
-		"block-closing-brace-empty-line-before": "never",
 		"property-disallowed-list": [
 			"color",
 			"background",
@@ -35,23 +27,6 @@
 			"font-size",
 			"line-height",
 			"font-family"
-		],
-		"at-rule-empty-line-before": [
-			"always",
-			{
-				"except": [
-					"first-nested",
-					"blockless-after-blockless"
-				],
-				"ignoreAtRules": [
-					"font-face",
-					"mixin",
-					"error"
-				],
-				"ignore": [
-					"after-comment"
-				]
-			}
 		]
 	}
 }

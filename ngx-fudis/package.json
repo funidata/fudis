@@ -10,7 +10,9 @@
 		"docs:json": "compodoc -p ./tsconfig.json -e json -d .",
 		"storybook": "ng run storybook:start",
 		"build-storybook": "npm run docs:json && ng run storybook:build",
+		"stylelint-scss-check": "stylelint-config-prettier-scss-check",
 		"lint": "ng lint",
+		"prettier": "stylelint-prettier '**/*.{css,scss}'",
 		"stylelint": "stylelint '**/*.{css,scss}'",
 		"asd": "echo $npm_package_version"
 	},
@@ -69,7 +71,7 @@
 		"karma-jasmine-html-reporter": "2.0.0",
 		"ng-mocks": "14.10.1",
 		"ng-packagr": "^16.0.1",
-		"prettier": "2.8.8",
+		"prettier": "^2.8.8",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"remark-gfm": "^3.0.1",
@@ -78,9 +80,10 @@
 		"storybook-version": "^0.1.1",
 		"stylelint": "15.6.2",
 		"stylelint-config-concentric-order": "^5.1.0",
-		"stylelint-config-prettier-scss": "^0.0.1",
-		"stylelint-config-sass-guidelines": "^10.0.0",
-		"stylelint-config-standard-scss": "^7.0.1",
+		"stylelint-config-prettier-scss": "1.0.0",
+		"stylelint-config-sass-guidelines": "10.0.0",
+		"stylelint-config-standard-scss": "9.0.0",
+		"stylelint-prettier": "^3.0.0",
 		"typescript": "^5.0.4"
 	}
 }
