@@ -12,7 +12,7 @@
 		"build-storybook": "npm run docs:json && ng run storybook:build",
 		"stylelint-scss-check": "stylelint-config-prettier-scss-check",
 		"lint": "ng lint",
-		"stylelint": "stylelint --fix '**/*.{css,scss}'",
+		"stylelint": "stylelint '**/*.{css,scss}'",
 		"asd": "echo $npm_package_version"
 	},
 	"private": true,
