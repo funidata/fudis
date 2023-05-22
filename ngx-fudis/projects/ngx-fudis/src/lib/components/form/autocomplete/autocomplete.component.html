@@ -22,7 +22,7 @@
 			[attr.aria-describedby]="id + '_guidance'"
 			[readonly]="disabled"
 			[attr.aria-disabled]="disabled"
-			[attr.required]="requiredText" />
+			[attr.required]="requiredText ? true : null" />
 		<ng-container *ngIf="control.value">
 			<fudis-button
 				class="fudis-autocomplete__input__icon"

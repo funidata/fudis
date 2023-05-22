@@ -1,7 +1,7 @@
 <label class="fudis-label" [attr.for]="for" [id]="id">
 	<span class="fudis-label__content">
 		<span class="fudis-label__content__text">{{ text }}</span>
-		<span class="fudis-label__content__required" *ngIf="requiredText">&nbsp;({{ requiredText }})</span>
+		<span class="fudis-label__content__required" *ngIf="requiredText">({{ requiredText }})</span>
 	</span>
 
 	<ng-container *ngIf="tooltip">

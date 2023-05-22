@@ -37,7 +37,7 @@ import { TFudisInputErrorMessages } from '../../../types/forms';
 			<fudis-text-input
 				[control]="mainFormGroup.controls['fourth']"
 				[id]="'unique-text-input-id-4'"
-				label="Numberinput"
+				label="Number input"
 				requiredText="Required"
 				[minNumber]="minNumber"
 				[maxNumber]="maxNumber"

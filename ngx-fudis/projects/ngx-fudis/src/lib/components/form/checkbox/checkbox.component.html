@@ -15,7 +15,7 @@
 				[attr.name]="name"
 				[id]="id"
 				class="fudis-checkbox__input"
-				[attr.required]="requiredText ? true : false"
+				[attr.required]="requiredText ? true : null"
 				[attr.aria-disabled]="control.disabled" />
 			<svg
 				*ngIf="control.value"

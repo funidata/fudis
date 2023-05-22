@@ -21,7 +21,7 @@
 		[multiple]="multipleOption"
 		[formControl]="control"
 		(valueChange)="handleSelectionChange($event)"
-		[attr.required]="requiredText ? true : false"
+		[attr.required]="requiredText ? true : null"
 		[aria-labelledby]="'label_' + id"
 		[hideSingleSelectionIndicator]="hideSingleSelectionIndicator"
 		[attr.aria-describedby]="id + '_guidance'"

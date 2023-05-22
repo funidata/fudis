@@ -23,7 +23,7 @@
 		[class.fudis-text-input__input--invalid]="(control.touched && control.invalid) || invalidState"
 		class="fudis-text-input__input"
 		[attr.aria-describedby]="id + '_guidance'"
-		[attr.required]="requiredText ? true : false" />
+		[attr.required]="requiredText ? true : null" />
 	<ng-container *ngIf="helpText || errorMsg">
 		<fudis-guidance
 			[inputLabel]="label"

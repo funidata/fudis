@@ -18,7 +18,7 @@
 		[attr.aria-invalid]="control.invalid || invalidState"
 		[attr.minLength]="minLength"
 		[attr.maxLength]="maxLength"
-		[attr.required]="requiredText ? true : false">
+		[attr.required]="requiredText ? true : null">
 	</textarea>
 	<ng-container *ngIf="helpText || errorMsg">
 		<fudis-guidance
