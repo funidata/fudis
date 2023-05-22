@@ -101,7 +101,7 @@ describe('DatepickerComponent', () => {
 			fixture.detectChanges();
 
 			const labelComponent = fixture.nativeElement.querySelector('fudis-label');
-			const requiredLabel = labelComponent.querySelector('.fudis-label__required');
+			const requiredLabel = labelComponent.querySelector('.fudis-label__content__required');
 			expect(requiredLabel.innerHTML).toContain(component.requiredText);
 		});
 

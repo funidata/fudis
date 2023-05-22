@@ -10,7 +10,7 @@ export class LabelComponent extends TooltipApiDirective {
 	/**
 	 * Text indicating if form element associated with label required or not
 	 */
-	@Input() requiredText: string | null = null;
+	@Input() requiredText: string | undefined = undefined;
 
 	/**
 	 * Text visible as label text

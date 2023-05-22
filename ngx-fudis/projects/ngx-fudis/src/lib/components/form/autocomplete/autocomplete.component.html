@@ -3,17 +3,18 @@
 		[text]="label"
 		[id]="id + '__label'"
 		[for]="id"
-		[requiredText]="isRequired() ? requiredText : null"
+		[requiredText]="requiredText"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle">
 	</fudis-label>
 	<div class="fudis-autocomplete__input-wrapper">
 		<input
+			[attr.aria-invalid]="control.invalid || invalidState"
 			#fudisAutocompleteInput
 			class="fudis-autocomplete__input"
 			[id]="id"
-			[class.fudis-autocomplete__input--invalid]="control.invalid && control.touched"
+			[class.fudis-autocomplete__input--invalid]="(control.invalid && control.touched) || invalidState"
 			[class.fudis-autocomplete__input--disabled]="disabled"
 			type="text"
 			[formControl]="control"
@@ -21,7 +22,7 @@
 			[attr.aria-describedby]="id + '_guidance'"
 			[readonly]="disabled"
 			[attr.aria-disabled]="disabled"
-			[attr.required]="isRequired()" />
+			[attr.required]="requiredText ? true : null" />
 		<ng-container *ngIf="control.value">
 			<fudis-button
 				class="fudis-autocomplete__input__icon"

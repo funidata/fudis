@@ -6,12 +6,14 @@
 .fudis-icon-host {
 	display: inline-flex;
 	position: relative;
+	vertical-align: middle;
 }
 
 .fudis-icon {
 	box-sizing: border-box;
 	display: inline-flex;
 	align-items: center;
+	
 	
 	&-rotate {
 		&__flip-180 {

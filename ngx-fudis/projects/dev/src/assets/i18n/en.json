@@ -1,8 +1,15 @@
 {
-  "label": "This is text input",
-  "change_language": "Change language",
-  "helpText": "This is English.",
-  "required": "Required",
-  "error_required": "This is required text input",
-  "dynamic": "transloco {{value}}"
+	"label": "This is text input",
+	"change_language": "Change language",
+	"helpText": "This is English.",
+	"required": "Required",
+	"error_required": "This is required text input",
+	"dynamic": "transloco {{value}}",
+	"chooseTruth": "Choose a truth",
+	"chooseTruthHelp": "We all perceive truth differently.",
+	"chooseTruthError": "Truth is missing!",
+	"options": {
+		"chooseTruthTrue": "True",
+		"chooseTruthFalse": "False"
+	}
 }

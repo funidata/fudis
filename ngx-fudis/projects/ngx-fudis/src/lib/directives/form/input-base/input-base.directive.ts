@@ -1,13 +1,15 @@
-import { Directive, Input, EventEmitter, Output } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { Directive, Input, EventEmitter, Output, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 import { TFudisInputErrorMessages } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 
+import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+
 @Directive({
 	selector: '[fudisInputBase]',
 })
-export class InputBaseDirective extends TooltipApiDirective {
+export class InputBaseDirective extends TooltipApiDirective implements OnInit {
 	/**
 	 * FormControl for the input.
 	 */
@@ -36,7 +38,7 @@ export class InputBaseDirective extends TooltipApiDirective {
 	/**
 	 * Text to indicate compulsory.
 	 */
-	@Input() requiredText: string | null;
+	@Input() requiredText: string | undefined;
 
 	/**
 	 * Help text, aligned underneath the input.
@@ -50,32 +52,25 @@ export class InputBaseDirective extends TooltipApiDirective {
 	@Input() errorMsg: TFudisInputErrorMessages;
 
 	/**
-	 * TBD for all form components! Currently only used with text-input.
-	 * Set manually input's visual style and attributes as invalid.
+	 * Set input's visual style and attributes as invalid. Does not override if control.invalid is true.
 	 */
-
 	@Input() invalidState: boolean = false;
 
 	/**
-	 * Alternative to control's Validators.required for setting input as a required input. Requires still that requiredText string is provided.
+	 * To ignore initial check if input has both requiredText and control Validators.required
 	 */
-
-	@Input() required: boolean = false;
+	@Input() ignoreRequiredCheck: boolean = false;
 
 	/**
 	 * To listen for input's blur event.
 	 */
-
 	@Output() handleBlur: EventEmitter<Event> = new EventEmitter<Event>();
 
 	onBlur(event: Event): void {
 		this.handleBlur.emit(event);
 	}
 
-	isRequired(): boolean | null {
-		if (this.requiredText && (this.control?.hasValidator(Validators.required) || this.required)) {
-			return true;
-		}
-		return null;
+	ngOnInit(): void {
+		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 }
