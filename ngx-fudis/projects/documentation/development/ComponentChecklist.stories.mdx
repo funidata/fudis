@@ -1,4 +1,4 @@
-import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Documentation/Development/Component Checklist" />
 
@@ -63,11 +63,11 @@ Check the [Naming Conventions](/docs/documentation-development-naming-convention
 - Component variants such as primary, secondary etc. should be documented on basic component. These variants should be accessed and controllable through Storybook controls.
 - If needed, create own story for clearly "other / different version" of the component. E. g. Button vs Button with Icon
 - Component all variants, can be documented as story by using Storybook template prop.
-  > _Note! This prevents component control throught ArgsTable. Template prop should be used mainly for a story spesific readme.mdx documentation._
-- Component has ArgsTable.
+  > _Note! This prevents component control throught ArgTypes. Template prop should be used mainly for a story spesific readme.mdx documentation._
+- Component has ArgTypes.
 - Component has all listed @Inputs and @Outputs and always with description and accepted values.
 - Components with event handlers have working actions.
-- Disabled and Invalid should be able to be switched on from ArgsTable.
+- Disabled and Invalid should be able to be switched on from ArgTypes.
 - Form components have functioning formControls for Storybook testing and demo purposes.
 
 ## 6. Component Has A Readme File
@@ -77,7 +77,7 @@ Check the [Naming Conventions](/docs/documentation-development-naming-convention
 - Related accessibility requirements are listed
 - Related and subcomponents are listed.
 - All Angular Material based components have link to Angular documentation.
-- ArgsTable is made visible.
+- ArgTypes is made visible.
 
 ## 7. Component Accessibility Is Tested
 

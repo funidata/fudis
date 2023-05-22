@@ -1,8 +1,9 @@
-import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import { ArgTypes, Meta, Story, Canvas } from '@storybook/addon-docs';
 import { linkTo } from '@storybook/addon-links';
 import { BodyTextComponent } from './body-text.component';
+import * as BodyTextStories from './body-text.stories.ts';
 
-<Meta title="BodyText" component={BodyTextComponent} />
+<Meta of={BodyTextStories} />
 
 # Body text
 
@@ -14,9 +15,7 @@ More information about typography can be found under [Foundations/Typography](/d
 
 ## Examples
 
-<Canvas>
-	<Story id="components-typography-body-text--all-variants"></Story>
-</Canvas>
+<Canvas of={BodyTextStories.AllVariants}></Canvas>
 
 ### Accessibility
 
@@ -29,4 +28,4 @@ More information about typography can be found under [Foundations/Typography](/d
 
 ## Properties
 
-<ArgsTable of={BodyTextComponent} />
+<ArgTypes of={BodyTextComponent} />
