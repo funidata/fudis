@@ -10,7 +10,7 @@
 
 .fudis-button {
 	@include borders.border-radius('2px');
-	@include colors.bg-color('transparent');  
+	@include colors.bg-color('transparent');
 	@include typography.button-typography;
 	@include borders.border('2px', 'solid', 'primary');
 
@@ -26,9 +26,7 @@
 		@include focus.focus-generic;
 	}
 
-	
-
-	&[aria-disabled="true"] {
+	&[aria-disabled='true'] {
 		@include colors.text-color('gray-dark');
 		@include colors.bg-color('gray-light');
 		@include borders.border('2px', 'solid', 'transparent');
@@ -58,11 +56,11 @@
 		&-small {
 			height: spacing.$spacing-m;
 		}
-	
+
 		&-medium {
 			height: spacing.$spacing-l;
 		}
-	
+
 		&-icon-only {
 			padding: 0;
 			width: spacing.$spacing-l;
@@ -70,13 +68,11 @@
 			height: spacing.$spacing-l;
 		}
 	}
-	
+
 	&__icon {
 		position: relative;
 		width: spacing.$spacing-l;
 		height: spacing.$spacing-l;
-		
-	
 
 		&__component {
 			position: absolute;

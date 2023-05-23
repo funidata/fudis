@@ -27,20 +27,20 @@
 		&__key {
 			@include typography.description-list-key-typography;
 			@include colorMixins.text-color('gray-dark');
-	
+
 			margin-bottom: spacing.$spacing-xs;
 		}
-	
+
 		&__value {
 			@include typography.description-list-value-typography;
 			@include colorMixins.text-color('gray-dark');
-	
+
 			margin-left: 0;
 		}
-	
+
 		&__sub-heading {
 			@include colorMixins.text-color('gray-dark');
-	
+
 			margin-top: 0;
 			margin-bottom: spacing.$spacing-xxs;
 			font-weight: typographyTokens.$font-weight-regular;
@@ -61,11 +61,11 @@
 		&__key {
 			@include typography.description-list-compact-key-typography;
 			@include colorMixins.text-color('gray-dark');
-	
+
 			display: inline-block;
 			position: relative;
 			padding-left: spacing.$spacing-xs;
-	
+
 			&::before {
 				@include colorMixins.bg-color('gray-light');
 
@@ -75,14 +75,14 @@
 				left: 0;
 				width: spacing.$pixel-1;
 				height: 80%;
-				content: "";
+				content: '';
 			}
 		}
-	
+
 		&__value {
 			@include typography.description-list-compact-value-typography;
 			@include colorMixins.text-color('gray-dark');
-	
+
 			display: inline;
 			margin-left: 0;
 			padding-left: spacing.$spacing-xxs;

@@ -13,22 +13,21 @@
 	box-sizing: border-box;
 	display: inline-flex;
 	align-items: center;
-	
-	
+
 	&-rotate {
 		&__flip-180 {
 			transform: rotate(180deg);
-			transition: all .6s ease;
+			transition: all 0.6s ease;
 		}
-	
+
 		&__cw-90 {
 			transform: rotate(90deg);
-			transition: all .6s ease;
+			transition: all 0.6s ease;
 		}
-	
+
 		&__ccw-90 {
 			transform: rotate(-90deg);
-			transition: all .6s ease;
+			transition: all 0.6s ease;
 		}
 	}
 
@@ -46,27 +45,27 @@
 		&__attention {
 			fill: colors.$color-yellow;
 		}
-	
+
 		&__danger {
 			fill: colors.$color-red;
 		}
-	
+
 		&__default {
 			fill: colors.$color-gray-dark;
 		}
-	
+
 		&__light {
 			fill: colors.$color-gray-light;
 		}
-	
+
 		&__primary {
 			fill: colors.$color-primary;
 		}
-	
+
 		&__success {
 			fill: colors.$color-green;
 		}
-	
+
 		&__white {
 			fill: colors.$color-white;
 		}

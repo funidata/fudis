@@ -1,8 +1,9 @@
-import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
 import { linkTo } from '@storybook/addon-links';
 import { DialogComponent } from './dialog.component.ts';
+import * as DialogStories from './dialog.stories.ts';
 
-<Meta title="Dialog" component={DialogComponent} />
+<Meta title="Components/Dialog" />
 
 # Dialog
 
@@ -12,9 +13,7 @@ Skip to see the [full code example](#full-code-example).
 
 ## Examples
 
-<Canvas>
-	<Story id="components-dialog--dialog"></Story>
-</Canvas>
+<Canvas of={DialogStories.Dialog}></Canvas>
 
 ## Usage Guidelines
 
@@ -141,4 +140,4 @@ class DialogExample {
 
 ## Properties
 
-<ArgsTable of={DialogComponent} />
+<ArgTypes of={DialogComponent} />

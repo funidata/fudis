@@ -3,7 +3,7 @@
 @use '../../../foundations/typography/mixins.scss' as typography;
 @use '../../../foundations/colors/tokens.scss' as colors;
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../../foundations/focus/mixins.scss' as focus; 
+@use '../../../foundations/focus/mixins.scss' as focus;
 
 .fudis-text-input {
 	box-sizing: border-box;
@@ -38,21 +38,21 @@
 
 		&--invalid {
 			border-color: colors.$color-red;
-		}	
+		}
 	}
 
 	&__guidance {
 		&__help-text {
 			@include colorMixins.text-color('gray-dark');
 			@include typography.body-text-s-regular;
-	
+
 			margin-top: spacing.$spacing-xs;
 		}
 	}
 
 	// Keep number input arrows visible all the time
-  /* stylelint-disable-next-line selector-no-qualifying-type */
-  input[type=number]::-webkit-inner-spin-button {  
+	/* stylelint-disable-next-line selector-no-qualifying-type */
+	input[type='number']::-webkit-inner-spin-button {
 		opacity: 1;
- 	}
+	}
 }

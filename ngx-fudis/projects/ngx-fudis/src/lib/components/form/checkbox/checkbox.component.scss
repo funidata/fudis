@@ -3,7 +3,7 @@
 @use '../../../foundations/colors/tokens.scss' as colors;
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
 @use '../../../foundations/utilities/mixins.scss' as utilities;
-@use '../../../foundations/focus/mixins.scss' as focus; 
+@use '../../../foundations/focus/mixins.scss' as focus;
 @use '../../../foundations/typography/mixins.scss' as typography;
 
 .fudis-checkbox {
@@ -22,10 +22,10 @@
 
 		:focus {
 			@include focus.focus-checkbox;
-		} 
+		}
 
 		&--disabled {
-			@include borders.border('1px', 'dashed', 'gray-middle');	
+			@include borders.border('1px', 'dashed', 'gray-middle');
 			@include colorMixins.bg-color('gray-extra-light');
 
 			cursor: default;
@@ -33,7 +33,7 @@
 
 		&--invalid {
 			@include borders.border('1px', 'solid', 'red');
-			
+
 			box-shadow: 0 0 0 spacing.$pixel-3 colors.$color-red-light;
 		}
 	}
@@ -70,7 +70,7 @@
 		&__help-text {
 			@include colorMixins.text-color('gray-dark');
 			@include typography.body-text-s-regular;
-	
+
 			margin-top: spacing.$spacing-xs;
 		}
 	}

@@ -7,7 +7,7 @@
 	@if map_has_key(tokens.$grid-widths, $width) {
 		$grid-width-value: map.get(tokens.$grid-widths, $width);
 
-    max-width: $grid-width-value;
+		max-width: $grid-width-value;
 
 		@if $width == xl or $width == xxl {
 			row-gap: spacing.$spacing-l;
@@ -23,9 +23,7 @@
 			row-gap: spacing.$spacing-s;
 			column-gap: spacing.$spacing-s;
 		}
-	}
-
- @else {
+	} @else {
 		@error 'Unknown grid width of #{$width}. Accepted arguments are: "xxl", "xl", "l", "m", "s", "xs".';
 	}
 }

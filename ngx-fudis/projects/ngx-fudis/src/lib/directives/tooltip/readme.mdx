@@ -1,8 +1,9 @@
-import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
 import { linkTo } from '@storybook/addon-links';
 import { TooltipDirective } from './tooltip.directive.ts';
+import * as TooltipStories from './tooltip.stories.ts';
 
-<Meta title="Tooltip" directive={TooltipDirective} />
+<Meta title="Directives/Tooltip" />
 
 # Tooltip
 
@@ -14,25 +15,19 @@ TooltipToggle makes tooltip function as clickable pop-over and it will not distr
 
 Code examples with icon component. Tooltip content can be edited with canvas controls panel.
 
-<Canvas>
-	<Story id="directives-tooltip--tooltip"></Story>
-</Canvas>
+<Canvas of={TooltipStories.Example}></Canvas>
 
 ### Related components
-
-[TextInput](/docs/components-form-text-input--text-input)
-
-[Icon](/docs/components-icon--icon)
 
 [Angular Material Tooltip](https://material.angular.io/components/tooltip/overview)
 
 ### Accessibility
 
-- Element where tooltip is binded should always be an interactive element
-- Keyboard and screen reader users can select element that triggeres tooltip
-- Tooltip content is read to screen readers when tooltip element receives focus
+- Element where tooltip is binded should always be an interactive element e. g. button.
+- Keyboard and screen reader users can select element that triggeres tooltip.
+- Tooltip content is read to screen readers when tooltip element receives focus.
 - Extensive and alternative content tooltips use tooltipToggle. Screen reader users are informed about the toggled hidden content when the element receives focus.
 
 ## Properties
 
-<ArgsTable of={TooltipDirective} />
+<ArgTypes of={TooltipDirective} />

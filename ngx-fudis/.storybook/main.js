@@ -11,6 +11,7 @@ module.exports = {
 		'@storybook/addon-interactions',
 		'@storybook/addon-a11y',
 		'storybook-version',
+		'@storybook/addon-mdx-gfm',
 	],
 	framework: {
 		name: '@storybook/angular',

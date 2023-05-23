@@ -1,8 +1,9 @@
-import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
 import { linkTo } from '@storybook/addon-links';
 import { ButtonComponent } from './button.component';
+import * as ButtonStories from './button.stories.ts';
 
-<Meta title="Button" component={ButtonComponent} />
+<Meta title="Components/Button" />
 
 # Button
 
@@ -13,9 +14,7 @@ There are three button sizes available: `medium`, `small` and `icon-only`.
 
 ## Examples
 
-<Canvas>
-	<Story id="components-button--all-variants"></Story>
-</Canvas>
+<Canvas of={ButtonStories.AllVariants}></Canvas>
 
 ### Button with icon
 
@@ -23,9 +22,7 @@ Button has option for icon. Frequently used icons: <code>search</code>, <code>th
 
 Icon is only a visual indicator and is always hidden from screen readers.
 
-<Canvas>
-	<Story id="components-button--icon-button"></Story>
-</Canvas>
+<Canvas of={ButtonStories.IconButton}></Canvas>
 
 ### Button with icon only
 
@@ -33,9 +30,7 @@ Button can be without a visible label but use this variation sparingly. To hide 
 
 If button has no visibile label and both `label` and `ariaLabel` are provided, those values are combined and reflected to `aria-label` HTML attribute.
 
-<Canvas>
-	<Story id="components-button--only-icon-button"></Story>
-</Canvas>
+<Canvas of={ButtonStories.OnlyIconButton}></Canvas>
 
 ### Accessibility
 
@@ -52,4 +47,4 @@ If button has no visibile label and both `label` and `ariaLabel` are provided, t
 
 ## Properties
 
-<ArgsTable of={ButtonComponent} />
+<ArgTypes of={ButtonComponent} />

@@ -1,8 +1,9 @@
-import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
 import { linkTo } from '@storybook/addon-links';
 import { DatepickerComponent } from './datepicker.component';
+import * as DatepickerStories from './datepicker.stories.ts';
 
-<Meta title="Datepicker" component={DatepickerComponent} />
+<Meta title="Components/Form/Datepicker" />
 
 # Datepicker
 
@@ -11,9 +12,7 @@ Datepicker allows user to select a date from valid options.
 
 ## Examples
 
-<Canvas>
-	<Story id="components-form-datepicker--datepicker"></Story>
-</Canvas>
+<Canvas of={DatepickerStories.Datepicker}></Canvas>
 
 ## Usage Guidelines
 
@@ -89,4 +88,4 @@ Current list of languages supported are:
 
 ## Properties
 
-<ArgsTable of={DatepickerComponent} />
+<ArgTypes of={DatepickerComponent} />

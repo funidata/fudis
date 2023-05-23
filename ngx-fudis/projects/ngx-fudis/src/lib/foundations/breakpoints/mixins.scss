@@ -5,28 +5,23 @@
 	@if map_has_key(tokens.$breakpoints, $breakpoint) {
 		$breakpoint-value: map.get(tokens.$breakpoints, $breakpoint);
 
-    @media screen and (min-width: #{$breakpoint-value}) {
-      @content;
-    }
-	}
-
- @else {
+		@media screen and (min-width: #{$breakpoint-value}) {
+			@content;
+		}
+	} @else {
 		@error 'Unknown minimum breakpoint of #{$breakpoint}. Accepted arguments are: "xxl", "xl", "l", "m", "s", "xs".';
 	}
 }
 
 @mixin breakpoint-max($breakpoint) {
 	@if map_has_key(tokens.$breakpoints, $breakpoint) and $breakpoint != 'xs' {
-		
 		$breakpoint-value: map.get(tokens.$breakpoints, $breakpoint);
 		$calc-max-width: calc($breakpoint-value - 0.01em);
 
-    @media screen and (max-width: #{$calc-max-width}) {
-      @content;
-    }
-	}
-
- @else {
+		@media screen and (max-width: #{$calc-max-width}) {
+			@content;
+		}
+	} @else {
 		@error 'Unknown maximum breakpoint of #{$breakpoint}. Accepted arguments are: "xxl", "xl", "l", "m", and "s"';
 	}
 }

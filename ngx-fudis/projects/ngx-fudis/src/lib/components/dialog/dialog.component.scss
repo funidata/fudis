@@ -6,7 +6,7 @@
 	position: relative;
 	padding: spacing.$spacing-m spacing.$spacing-s;
 	max-width: calc(100vw - (2 * spacing.$spacing-s));
-	
+
 	&__close {
 		float: right;
 	}

@@ -32,7 +32,6 @@
 			margin: spacing.$spacing-xxs 0 spacing.$spacing-s 0;
 			padding: 0;
 			pointer-events: none;
-			
 
 			&::before {
 				display: none;
@@ -46,7 +45,8 @@
 		& .mat-mdc-dialog-content {
 			@include utilities.box-reset;
 
-			&:focus-visible, &:focus {
+			&:focus-visible,
+			&:focus {
 				@include focus.focus-generic;
 			}
 		}
