@@ -53,12 +53,12 @@ export class DatepickerComponent extends InputBaseDirective implements DoCheck, 
 	/**
 	 * Allowed range for minimun date
 	 */
-	@Input() minDate: Date;
+	@Input() minDate: Date | null;
 
 	/**
 	 * Allowed range for maximum date
 	 */
-	@Input() maxDate: Date;
+	@Input() maxDate: Date | null;
 
 	currentHtmlLang: string;
 
