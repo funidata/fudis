@@ -41,8 +41,20 @@
 		</fudis-grid>
 	</form>
 	<fudis-notification variant="danger" ariaVariantText="Varoitus!">Whoops! Some error happened.</fudis-notification>
+	<fudis-button
+		[label]="'Menu'"
+		[labelHidden]="true"
+		[size]="'small'"
+		[variant]="'secondary'"
+		[icon]="'three-dots'"
+		[asMenuButton]="true">
+		<ng-template fudisDropdownMenu>
+			<fudis-dropdown-menu-item [label]="'Item 1'"></fudis-dropdown-menu-item>
+			<fudis-dropdown-menu-item [label]="'Item 22'"></fudis-dropdown-menu-item>
+		</ng-template>
+	</fudis-button>
 	<fudis-expandable title="Title for expandable">
-		<ng-template fudisExpandableHeaderButtons>
+		<ng-template fudisExpandableActions>
 			<fudis-button data-theme="sisu" type="submit" label="Lähetä"></fudis-button>
 			<fudis-button data-theme="sisu" label="Eiku" variant="secondary"></fudis-button>
 		</ng-template>

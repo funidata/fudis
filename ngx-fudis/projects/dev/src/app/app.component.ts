@@ -88,4 +88,9 @@ export class AppComponent implements OnInit {
 			this.showSuccessBodyText = true;
 		}
 	}
+
+	// eslint-disable-next-line class-methods-use-this
+	doSomething(event: any) {
+		console.log('eventti mennyt perille', event);
+	}
 }
