@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter, HostBinding, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostBinding, ViewEncapsulation, ContentChild } from '@angular/core';
 import { FudisIcon, FudisIconColor } from '../../types/icons';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
+import { DropdownMenuDirective } from '../dropdown-menu/dropdown-menu.directive';
 
 @Component({
 	selector: 'fudis-button',
@@ -10,6 +11,11 @@ import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.direct
 })
 export class ButtonComponent extends TooltipApiDirective {
 	@HostBinding('class') classes = 'fudis-button-host';
+
+	/**
+	 * If button is used as menu button it will have ng-template to place dropdown-items
+	 */
+	@ContentChild(DropdownMenuDirective) content: DropdownMenuDirective;
 
 	/**
 	 * Button variant options
@@ -52,6 +58,11 @@ export class ButtonComponent extends TooltipApiDirective {
 	@Input() icon: FudisIcon | undefined = undefined;
 
 	/**
+	 * Assign button as menu button with dropdown
+	 */
+	@Input() asMenuButton: boolean = false;
+
+	/**
 	 * Optional click handler
 	 */
 	@Output() handleClick = new EventEmitter<Event>();
@@ -60,6 +71,11 @@ export class ButtonComponent extends TooltipApiDirective {
 	 * Automatically sets icon color based on button variant
 	 */
 	iconColor: FudisIconColor = 'white';
+
+	/**
+	 * Toggle menu button
+	 */
+	toggleOn: boolean = false;
 
 	public get getClasses(): string[] {
 		if (this.disabled) {
@@ -77,5 +93,10 @@ export class ButtonComponent extends TooltipApiDirective {
 			return this.ariaLabel ? `${this.label} ${this.ariaLabel}` : this.label;
 		}
 		return this.ariaLabel;
+	}
+
+	toggleMenu(event: Event): void {
+		this.toggleOn = !this.toggleOn;
+		this.handleClick.emit(event);
 	}
 }
