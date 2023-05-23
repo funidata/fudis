@@ -10,8 +10,8 @@
 		@include colorMixins.bg-color('transparent');
 		@include borders.border-none; 
 
-		position: relative;
 		display: block;
+		position: relative;
 		cursor: pointer;
 		padding: spacing.$spacing-xs;
 		width: 100%;
@@ -25,7 +25,7 @@
 			@include focus.focus-generic;
 		}
 
-		&[aria-disabled="true"] {
+		&[aria-disabled='true'] {
 			@include colorMixins.bg-color('gray-extra-light');
 			@include colorMixins.text-color('gray-middle');
 
