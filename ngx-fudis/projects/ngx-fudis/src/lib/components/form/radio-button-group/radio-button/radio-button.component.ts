@@ -1,12 +1,15 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostBinding, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
 	selector: 'fudis-radio-button',
 	templateUrl: './radio-button.component.html',
 	styleUrls: ['./radio-button.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class RadioButtonComponent {
+	@HostBinding('class') classes = 'fudis-radio-button-host';
+
 	/*
 	 * Id of single Radio button
 	 */
@@ -42,10 +45,10 @@ export class RadioButtonComponent {
 	 */
 	@Input() checked: boolean;
 
-	/*
-	 * Using fudis-guidance to provide additional info for the user
+	/**
+	 * Set Radio Button's visual style and ARIA attribute as invalid. Does not override if control.invalid is true.
 	 */
-	@Input() guidanceId: string;
+	@Input() invalidState: boolean = false;
 
 	@Output() radioButtonBlur = new EventEmitter<string>();
 

@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import { DialogService, ErrorSummaryService } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
+import { IFudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
 
 @Component({
 	selector: 'app-root',
@@ -33,11 +34,23 @@ export class AppComponent implements OnInit {
 
 	showSuccessBodyText: boolean = false;
 
+	transLatedOptions: any = {};
+
+	radioButtonOptions: IFudisRadioButtonOption[] = [];
+
 	ngOnInit(): void {
+		this.translocoService.setActiveLang('en');
 		this.translocoService.setActiveLang('fi');
 
 		this.textInputControl = new FormControl('', Validators.required);
 		this.document.documentElement.lang = 'fi';
+
+		this.translocoService.selectTranslateObject('options').subscribe((value) => {
+			this.radioButtonOptions = [
+				{ value: true, viewValue: value.chooseTruthTrue, id: 'boolean-2', name: 'booleans' },
+				{ value: false, viewValue: value.chooseTruthFalse, id: 'boolean-1', name: 'booleans' },
+			];
+		});
 
 		this.translocoService.selectTranslation().subscribe(() => {
 			if (this.errorSummaryVisible) {
@@ -73,6 +86,8 @@ export class AppComponent implements OnInit {
 		{ key: 'Enemy', value: 'Emmet Brickowski', subHeading: 'Archenemy' },
 		{ key: 'Enemy', value: 'Lucy', subHeading: 'Second Archenemy' },
 	];
+
+	truthControl = new FormControl('', Validators.required);
 
 	clickSubmit(): void {
 		this.textInputControl.markAllAsTouched();

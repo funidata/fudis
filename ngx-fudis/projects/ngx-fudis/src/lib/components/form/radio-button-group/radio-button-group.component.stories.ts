@@ -20,6 +20,7 @@ const getDefaultValue = (options: IFudisRadioButtonOption[]): string | boolean |
 		<form [formGroup]="mainFormGroup">
 			<fudis-radio-button-group
 				style="margin-bottom: 1rem;"
+				[requiredText]="requiredText"
 				[id]="'fruit-selection'"
 				[legend]="'Choose your preferred fruit'"
 				[helpText]="'Fruits are important for your health.'"
@@ -35,6 +36,7 @@ const getDefaultValue = (options: IFudisRadioButtonOption[]): string | boolean |
 			>
 			<fudis-radio-button-group
 				style="margin-top: 2rem; margin-bottom: 1rem;"
+				[requiredText]="requiredText"
 				[id]="'pet-selection'"
 				[legend]="'Choose a pet'"
 				[helpText]="'We all should have a pet.'"
@@ -50,6 +52,7 @@ const getDefaultValue = (options: IFudisRadioButtonOption[]): string | boolean |
 			>
 			<fudis-radio-button-group
 				style="margin-top: 2rem; margin-bottom: 1rem;"
+				[requiredText]="requiredText"
 				[id]="'boolean-selection'"
 				[legend]="'Choose a truth'"
 				[helpText]="'We all perceive truth individually.'"
@@ -93,6 +96,8 @@ class RadioButtonGroupExampleComponent {
 		second: new FormControl(getDefaultValue(this.petOptions), Validators.required),
 		third: new FormControl(null, Validators.required),
 	});
+
+	requiredText = 'Required';
 
 	constructor(private formBuilder: FormBuilder) {}
 }

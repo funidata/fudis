@@ -3,13 +3,13 @@
 		[for]="id"
 		[text]="label"
 		[id]="'label_' + id"
-		[requiredText]="isRequired() ? requiredText : null"
+		[requiredText]="requiredText"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle">
 	</fudis-label>
 	<input
-		[attr.aria-invalid]="control.invalid || invalidState ? true : false"
+		[attr.aria-invalid]="control.invalid || invalidState"
 		#fudisTextInput
 		[attr.aria-label]="ariaLabel"
 		[formControl]="control"
@@ -23,7 +23,7 @@
 		[class.fudis-text-input__input--invalid]="(control.touched && control.invalid) || invalidState"
 		class="fudis-text-input__input"
 		[attr.aria-describedby]="id + '_guidance'"
-		[attr.required]="isRequired()" />
+		[attr.required]="requiredText ? true : null" />
 	<ng-container *ngIf="helpText || errorMsg">
 		<fudis-guidance
 			[inputLabel]="label"

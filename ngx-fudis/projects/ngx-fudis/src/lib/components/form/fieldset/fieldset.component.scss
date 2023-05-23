@@ -1,5 +1,6 @@
 @use '../../../foundations/spacing/tokens.scss' as spacing;
 @use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/typography/tokens.scss' as typographyTokens;
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
 @use '../../../foundations/utilities/mixins.scss' as utilities;
 @use '../../../foundations/focus/mixins.scss' as focus;
@@ -7,7 +8,6 @@
 .fudis-fieldset {
 	@include utilities.box-reset;
 	
-
 	display: flex;
 	flex-direction: column;
 	
@@ -26,8 +26,21 @@
 		width: 100%;
 
 		&__title {
-			@include colorMixins.text-color('gray-dark');
 			@include typography.text-field-label;
+
+			&__text {
+				@include colorMixins.text-color('gray-dark');
+				
+				margin-right: spacing.$spacing-xs;
+			}
+
+			&__required {
+				@include colorMixins.text-color('gray-middle');
+
+				text-transform: initial;
+				/* stylelint-disable-next-line property-disallowed-list */
+				font-size: typographyTokens.$body-text-s-font-size;
+			}
 		}
 
 		&__help-text {

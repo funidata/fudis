@@ -9,11 +9,4 @@
 .fudis-radio-button-group {
 	@include borders.border('1px', 'solid', 'transparent');
 	@include utilities.box-reset;
-	
-
-	&__option {
-		&:not(:last-of-type) {
-			margin-bottom: spacing.$spacing-s;
-		}
-	}
 }
