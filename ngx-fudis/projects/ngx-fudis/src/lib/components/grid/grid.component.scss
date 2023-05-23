@@ -165,96 +165,96 @@
 
 	&__xxl {
 		@include breakpoints.breakpoint('xs') {
-			@include grid.grid-max-width('xs')
+			@include grid.grid-max-width('xs');
 		}
 
 		@include breakpoints.breakpoint('s') {
-			@include grid.grid-max-width('s')
+			@include grid.grid-max-width('s');
 		}
 
 		@include breakpoints.breakpoint('m') {
-			@include grid.grid-max-width('m')
-		}	
-	
+			@include grid.grid-max-width('m');
+		}
+
 		@include breakpoints.breakpoint('l') {
-			@include grid.grid-max-width('l')
+			@include grid.grid-max-width('l');
 		}
 
 		@include breakpoints.breakpoint('xl') {
-		@include grid.grid-max-width('xl')
+			@include grid.grid-max-width('xl');
 		}
 
 		@include breakpoints.breakpoint('xxl') {
-			@include grid.grid-max-width('xxl')
+			@include grid.grid-max-width('xxl');
 		}
 	}
-	
+
 	&__xl {
 		@include breakpoints.breakpoint('xs') {
-			@include grid.grid-max-width('xs')
+			@include grid.grid-max-width('xs');
 		}
 
 		@include breakpoints.breakpoint('s') {
-			@include grid.grid-max-width('s')
+			@include grid.grid-max-width('s');
 		}
 
 		@include breakpoints.breakpoint('m') {
-			@include grid.grid-max-width('m')
-		}	
-	
+			@include grid.grid-max-width('m');
+		}
+
 		@include breakpoints.breakpoint('l') {
-			@include grid.grid-max-width('l')
+			@include grid.grid-max-width('l');
 		}
 
 		@include breakpoints.breakpoint('xl') {
-		@include grid.grid-max-width('xl')
+			@include grid.grid-max-width('xl');
 		}
 	}
 
 	&__l {
 		@include breakpoints.breakpoint('xs') {
-			@include grid.grid-max-width('xs')
+			@include grid.grid-max-width('xs');
 		}
 
 		@include breakpoints.breakpoint('s') {
-			@include grid.grid-max-width('s')
+			@include grid.grid-max-width('s');
 		}
 
 		@include breakpoints.breakpoint('m') {
-			@include grid.grid-max-width('m')
-		}	
-	
+			@include grid.grid-max-width('m');
+		}
+
 		@include breakpoints.breakpoint('l') {
-			@include grid.grid-max-width('l')
+			@include grid.grid-max-width('l');
 		}
 	}
 
 	&__m {
 		@include breakpoints.breakpoint('xs') {
-			@include grid.grid-max-width('xs')
+			@include grid.grid-max-width('xs');
 		}
 
 		@include breakpoints.breakpoint('s') {
-			@include grid.grid-max-width('s')
+			@include grid.grid-max-width('s');
 		}
 
 		@include breakpoints.breakpoint('m') {
-			@include grid.grid-max-width('m')
+			@include grid.grid-max-width('m');
 		}
 	}
 
 	&__s {
 		@include breakpoints.breakpoint('xs') {
-			@include grid.grid-max-width('xs')
+			@include grid.grid-max-width('xs');
 		}
 
 		@include breakpoints.breakpoint('s') {
-			@include grid.grid-max-width('s')
+			@include grid.grid-max-width('s');
 		}
 	}
 
 	&__xs {
-		@include grid.grid-max-width('xs')
+		@include grid.grid-max-width('xs');
 	}
 
 	&__row-gap {

@@ -1,8 +1,9 @@
-import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
 import { linkTo } from '@storybook/addon-links';
 import { AutocompleteComponent } from './autocomplete.component';
+import * as AutocompleteStories from './autocomplete.stories.ts';
 
-<Meta title="Autocomplete" component={AutocompleteComponent} />
+<Meta title="Components/Form/Autocomplete" />
 
 # Autocomplete
 
@@ -13,9 +14,7 @@ User can select one option from the dropdown and it will be displayed in the inp
 
 ## Example
 
-<Canvas>
-	<Story id="components-form-autocomplete--autocomplete"></Story>
-</Canvas>
+<Canvas of={AutocompleteStories.Autocomplete}></Canvas>
 
 ## Usage Guidelines
 
@@ -66,4 +65,4 @@ If Autocomplete is a required form field, provide `requiredText` string property
 
 ## Properties
 
-<ArgsTable of={AutocompleteComponent} />
+<ArgTypes of={AutocompleteComponent} />

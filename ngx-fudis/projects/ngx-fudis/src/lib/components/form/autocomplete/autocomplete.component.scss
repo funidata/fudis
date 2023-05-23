@@ -40,7 +40,7 @@
 
 		&__icon {
 			@include colorMixins.bg-color('white');
-			
+
 			position: absolute;
 			top: 50%;
 			right: spacing.$spacing-xxs;
@@ -56,7 +56,7 @@
 		}
 
 		&--disabled {
-			@include borders.border('1px', 'dashed', 'gray-middle');	
+			@include borders.border('1px', 'dashed', 'gray-middle');
 			@include colorMixins.bg-color('gray-extra-light');
 
 			cursor: default;

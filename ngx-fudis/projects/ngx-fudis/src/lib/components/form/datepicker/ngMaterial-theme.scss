@@ -54,16 +54,18 @@
 		}
 
 		& .mat-calendar-controls {
-				& .mat-mdc-button {
-					@include colorMixins.bg-color('transparent');
-				}
+			& .mat-mdc-button {
+				@include colorMixins.bg-color('transparent');
+			}
 
-				& .mat-mdc-icon-button {
-					@include colorMixins.bg-color('transparent');
-				}
+			& .mat-mdc-icon-button {
+				@include colorMixins.bg-color('transparent');
+			}
 		}
 
-		& .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover > .mat-calendar-body-cell-content:not(.mat-calendar-body-comparison-identical) {
+		&
+			.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
+			> .mat-calendar-body-cell-content:not(.mat-calendar-body-comparison-identical) {
 			@include colorMixins.bg-color('primary-light');
 		}
 

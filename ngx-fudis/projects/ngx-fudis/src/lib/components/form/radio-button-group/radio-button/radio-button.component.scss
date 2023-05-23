@@ -3,7 +3,7 @@
 @use '../../../../foundations/typography/mixins.scss' as typography;
 @use '../../../../foundations/colors/tokens.scss' as colors;
 @use '../../../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../../../foundations/focus/mixins.scss' as focus; 
+@use '../../../../foundations/focus/mixins.scss' as focus;
 
 .fudis-radio-button-host {
 	&:not(:last-of-type) {
@@ -26,7 +26,7 @@
 		margin-bottom: 0;
 		padding-left: spacing.$spacing-s;
 	}
-	
+
 	/* Radio button circle */
 	&__content {
 		display: flex;
@@ -34,8 +34,8 @@
 		padding-left: 0;
 
 		&__control {
-			@include borders.border('1px', 'solid', 'gray-middle');	
-	
+			@include borders.border('1px', 'solid', 'gray-middle');
+
 			display: flex;
 			top: 0;
 			left: 0;
@@ -45,13 +45,13 @@
 			width: spacing.$spacing-m;
 			min-width: spacing.$spacing-m;
 			height: spacing.$spacing-m;
-	
+
 			&--invalid {
 				@include borders.border('1px', 'solid', 'red');
-				
+
 				box-shadow: 0 0 0 spacing.$pixel-3 colors.$color-red-light;
 			}
-			
+
 			&__indicator {
 				@include colorMixins.bg-color('gray-dark');
 
@@ -74,7 +74,7 @@
 
 		/* stylelint-disable-next-line selector-class-pattern, selector-max-class */
 		&:focus + .fudis-radio-button__content .fudis-radio-button__content__control {
-				@include focus.focus-form-field;
+			@include focus.focus-form-field;
 		}
 	}
 }

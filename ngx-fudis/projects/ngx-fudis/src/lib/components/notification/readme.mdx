@@ -1,8 +1,9 @@
-import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs';
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
 import { linkTo } from '@storybook/addon-links';
 import { NotificationComponent } from './notification.component';
+import * as NotificationStories from './notification.component.stories.ts';
 
-<Meta title="Notification" component={NotificationComponent} />
+<Meta title="Components/Notification" />
 
 # Notification
 
@@ -10,19 +11,13 @@ Notifications are often informative contextual notifications that cannot be clic
 
 ## Examples
 
-<Canvas>
-	<Story id="components-notification--all-variants"></Story>
-</Canvas>
-
-/components-notification--notification
+<Canvas of={NotificationStories.AllVariants}></Canvas>
 
 ### Link notification
 
 Notification component property `link` accepts href address as a string. This link address is shown as default link title, but it can be changed with optinal `titleLink` property. When link referes to external site `externalLink` property should be set on true. This will add an external link icon to a link. It is recommended to use `externalLinkAriaLabel` in order describe link action to screen reader users.
 
-<Canvas>
-	<Story id="components-notification--link-notification"></Story>
-</Canvas>
+<Canvas of={NotificationStories.LinkNotification}></Canvas>
 
 ### Accessibility
 
@@ -38,4 +33,4 @@ Notification component property `link` accepts href address as a string. This li
 
 ## Properties
 
-<ArgsTable of={NotificationComponent} />
+<ArgTypes of={NotificationComponent} />
