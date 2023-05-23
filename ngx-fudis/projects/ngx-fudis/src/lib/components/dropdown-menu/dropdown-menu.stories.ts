@@ -1,0 +1,43 @@
+import { StoryFn, Meta, applicationConfig } from '@storybook/angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { importProvidersFrom } from '@angular/core';
+import { DropdownMenuComponent } from './dropdown-menu.component';
+// import readme from './readme.mdx';
+
+export default {
+	title: 'Components/DropdownMenu',
+	component: DropdownMenuComponent,
+	parameters: {
+		docs: {
+			// page: readme,
+		},
+		controls: {
+			exclude: ['content'],
+		},
+	},
+	decorators: [
+		applicationConfig({
+			providers: [importProvidersFrom(BrowserAnimationsModule)],
+		}),
+	],
+	argTypes: {},
+} as Meta;
+
+const Template: StoryFn = (args) => ({
+	props: args,
+	template: `
+	<fudis-button [label]="'Menu'" [labelHidden]="true" [size]="'small'" [variant]="'secondary'" [icon]="'three-dots'" [asMenuButton]="true">
+		<ng-template fudisDropdownMenu>
+			<fudis-dropdown-menu-item [label]="'Item 1'"></fudis-dropdown-menu-item>
+			<fudis-dropdown-menu-item [label]="'Item 22 disabled'" [disabled]="true"></fudis-dropdown-menu-item>
+			<fudis-dropdown-menu-item [label]="'Item 23'"></fudis-dropdown-menu-item>
+			<fudis-dropdown-menu-item [label]="'Item 45 with very long text so no one really bothers to even read it'"></fudis-dropdown-menu-item>
+			<fudis-dropdown-menu-item [label]="'Item 100'"></fudis-dropdown-menu-item>
+			<fudis-dropdown-menu-item [label]="'Item 2200250'"></fudis-dropdown-menu-item>
+			<fudis-dropdown-menu-item [label]="'Item 878787878571'"></fudis-dropdown-menu-item>
+		</ng-template>
+	</fudis-button>`,
+});
+
+export const DropdownMenu = Template.bind({});
+DropdownMenu.args = {};

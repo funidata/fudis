@@ -30,6 +30,9 @@ import {
 import { DialogComponent } from './components/dialog/dialog.component';
 import { DialogService } from './components/dialog/dialog.service';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
+import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
+import { DropdownMenuDirective } from './components/dropdown-menu/dropdown-menu.directive';
+import { DropdownMenuItemComponent } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
 import { ErrorSummaryService } from './components/form/error-summary/error-summary.service';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
@@ -77,6 +80,9 @@ import { InputWithLanguageOptionsComponent } from './components/form/input-with-
 		DialogContentDirective,
 		DialogCloseDirective,
 		DropdownComponent,
+		DropdownMenuComponent,
+		DropdownMenuDirective,
+		DropdownMenuItemComponent,
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,
@@ -139,6 +145,9 @@ import { InputWithLanguageOptionsComponent } from './components/form/input-with-
 		DescriptionListComponent,
 		DialogComponent,
 		DropdownComponent,
+		DropdownMenuComponent,
+		DropdownMenuDirective,
+		DropdownMenuItemComponent,
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,

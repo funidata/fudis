@@ -1,0 +1,10 @@
+<button
+	#dropdownItem
+	class="fudis-dropdown-menu-item__button"
+	role="menuitem"
+	[tabIndex]="0"
+	[attr.aria-disabled]="disabled"
+	(keydown)="handleKeyDown($event)"
+	(click)="handleClick.emit($event)">
+	{{ label }}
+</button>

@@ -1,0 +1,35 @@
+@use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../foundations/borders/mixins.scss' as borders;
+@use '../../../foundations/focus/mixins.scss' as focus;
+
+.fudis-dropdown-menu-item {
+	&__button {
+		@include typography.body-text-m-light;
+		@include colorMixins.bg-color('transparent');
+		@include borders.border-none; 
+
+		position: relative;
+		display: block;
+		cursor: pointer;
+		padding: spacing.$spacing-xs;
+		width: 100%;
+    text-align: left;
+
+		&:hover {
+			@include colorMixins.bg-color('primary-light');
+		}
+
+		&:focus-visible {
+			@include focus.focus-generic;
+		}
+
+		&[aria-disabled="true"] {
+			@include colorMixins.bg-color('gray-extra-light');
+			@include colorMixins.text-color('gray-middle');
+
+			cursor: default;
+		}
+	}
+}
