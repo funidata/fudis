@@ -137,26 +137,58 @@ export const createColumnInputForBreakpoints = (
 ) => {
 	const columnDataForBreakpoints: IFudisInputColumnObject[] = [];
 
-	if (defaultValue) {
+	const columnsCssDefault = getComputedStyle(document.documentElement).getPropertyValue('--fudis-grid-columns-default');
+
+	const columnsCssXs = getComputedStyle(document.documentElement).getPropertyValue('--fudis-grid-columns-xs');
+
+	const columnsCssSm = getComputedStyle(document.documentElement).getPropertyValue('--fudis-grid-columns-sm');
+
+	const columnsCssMd = getComputedStyle(document.documentElement).getPropertyValue('--fudis-grid-columns-md');
+
+	const columnsCssLg = getComputedStyle(document.documentElement).getPropertyValue('--fudis-grid-columns-lg');
+
+	const columnsCssXl = getComputedStyle(document.documentElement).getPropertyValue('--fudis-grid-columns-xl');
+
+	const columnsCssXxl = getComputedStyle(document.documentElement).getPropertyValue('--fudis-grid-columns-xxl');
+
+	if (defaultValue !== '1fr') {
+		columnDataForBreakpoints.push({ name: 'columns', value: defaultValue, breakpoint: gridBreakpoints.default });
+	} else if (columnsCssDefault) {
+		columnDataForBreakpoints.push({ name: 'columns', value: columnsCssDefault, breakpoint: gridBreakpoints.default });
+	} else {
 		columnDataForBreakpoints.push({ name: 'columns', value: defaultValue, breakpoint: gridBreakpoints.default });
 	}
+
 	if (xsmall) {
 		columnDataForBreakpoints.push({ name: 'columnsXs', value: xsmall, breakpoint: gridBreakpoints.xs });
+	} else if (columnsCssXs) {
+		columnDataForBreakpoints.push({ name: 'columnsXs', value: columnsCssXs, breakpoint: gridBreakpoints.xs });
 	}
+
 	if (small) {
 		columnDataForBreakpoints.push({ name: 'columnsS', value: small, breakpoint: gridBreakpoints.s });
+	} else if (columnsCssSm) {
+		columnDataForBreakpoints.push({ name: 'columnsS', value: columnsCssSm, breakpoint: gridBreakpoints.s });
 	}
 	if (medium) {
 		columnDataForBreakpoints.push({ name: 'columnsM', value: medium, breakpoint: gridBreakpoints.m });
+	} else if (columnsCssMd) {
+		columnDataForBreakpoints.push({ name: 'columnsS', value: columnsCssMd, breakpoint: gridBreakpoints.s });
 	}
 	if (large) {
 		columnDataForBreakpoints.push({ name: 'columnsL', value: large, breakpoint: gridBreakpoints.l });
+	} else if (columnsCssLg) {
+		columnDataForBreakpoints.push({ name: 'columnsS', value: columnsCssLg, breakpoint: gridBreakpoints.s });
 	}
 	if (xlarge) {
 		columnDataForBreakpoints.push({ name: 'columnsXl', value: xlarge, breakpoint: gridBreakpoints.xl });
+	} else if (columnsCssXl) {
+		columnDataForBreakpoints.push({ name: 'columnsS', value: columnsCssXl, breakpoint: gridBreakpoints.s });
 	}
 	if (xxlarge) {
 		columnDataForBreakpoints.push({ name: 'columnsXxl', value: xxlarge, breakpoint: gridBreakpoints.xxl });
+	} else if (columnsCssXxl) {
+		columnDataForBreakpoints.push({ name: 'columnsS', value: columnsCssXxl, breakpoint: gridBreakpoints.s });
 	}
 
 	validateColumnInputArray(columnDataForBreakpoints);
