@@ -35,16 +35,16 @@ const Template: StoryFn<DropdownComponent> = (args: DropdownComponent) => ({
 			[tooltipPosition]="tooltipPosition"
 			tooltipToggle="tooltipToggle"></fudis-dropdown>
 
-		<ng-container *ngIf="control.value.length > 0">
+		<ng-container *ngIf="control.value?.length > 0">
 			<ng-container *ngFor="let value of control.value">
 				<fudis-body-text>Looks picked a pet with 'viewValue' of: {{value.viewValue}}</fudis-body-text>
 				<fudis-body-text>And it's technical beep boop 'value' is: {{value.value}}</fudis-body-text>
 			</ng-container>
 		</ng-container>
 
-		<ng-container *ngIf="control.value.value">
+		<ng-container *ngIf="control.value?.value">
 			<fudis-body-text>Looks picked a pet with 'viewValue' of: {{control.value.viewValue}}</fudis-body-text>
-			<fudis-body-text>And it's technical beep boop 'value' is: {{control.value.value}}</fudis-body-text>
+			<fudis-body-text>And it's technical beep boop 'value' is: {{control.value?.value}}</fudis-body-text>
 		</ng-container>
 	`,
 });
@@ -80,7 +80,7 @@ MultiSelect.args = {
 	requiredText: 'Required',
 	label: 'Select from two to three pets',
 	placeholder: 'Choose a pet',
-	control: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(3)]),
+	control: new FormControl(undefined, [Validators.required, Validators.minLength(2), Validators.maxLength(3)]),
 	id: 'example-id-for-dropdown-multi-select',
 	helpText: 'All pets are equally important, but for sake of this example please pick two to three pets.',
 	tooltip: 'Platypus is the right choise',
