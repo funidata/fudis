@@ -64,7 +64,7 @@ export class GuidanceComponent {
 	}
 
 	alertMaxLength(): boolean {
-		if (this.maxLength && this.control.value?.length) {
+		if (this.maxLength && typeof this.control?.value === 'string' && this.control.value?.length) {
 			const charactersRemaining = this.maxLength - this.control.value.length;
 
 			if ((charactersRemaining === 5 && this.maxLength >= 5) || charactersRemaining === 0) {

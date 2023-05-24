@@ -5,16 +5,16 @@
 			[class.fudis-guidance__errors]="(control && control.touched) || (formGroup && formGroup.touched)">
 			<!-- Check errors for control group of FormGroup e. g. english, finnish, swedish-->
 			<ng-container *ngIf="formGroup?.controls && !control && !formGroup.errors">
-				<ng-container *ngFor="let control of formGroup.controls | keyvalue">
-					<ng-container *ngIf="control.value.errors">
-						<ng-container *ngFor="let error of control.value.errors | keyvalue">
+				<ng-container *ngFor="let singleControl of formGroup.controls | keyvalue">
+					<ng-container *ngIf="singleControl.value.errors">
+						<ng-container *ngFor="let error of singleControl.value.errors | keyvalue">
 							<fudis-error-message
 								[inputId]="for"
-								[visible]="control.value.touched"
+								[visible]="singleControl.value.touched"
 								[type]="error.key"
-								[controlName]="control.key"
+								[controlName]="singleControl.key"
 								[inputLabel]="inputLabel"
-								[message]="groupErrorMsg?.[control.key]?.[asErrorkey(error?.key)]"></fudis-error-message>
+								[message]="groupErrorMsg?.[singleControl.key]?.[asErrorkey(error?.key)]"></fudis-error-message>
 						</ng-container>
 					</ng-container>
 				</ng-container>
@@ -49,9 +49,9 @@
 		class="fudis-guidance__character-limit-indicator"
 		[class.fudis-guidance__character-limit-indicator__float-right]="!helpText"
 		*ngIf="maxLength">
-		{{ control.value.length || 0 }}/{{ maxLength }}
+		{{ control.value?.length || 0 }}/{{ maxLength }}
 	</small>
 </div>
 <ng-container *ngIf="maxLength && maxLengthText && alertMaxLength()">
-	<p class="fudis-visually-hidden" role="alert">{{ control.value.length || 0 }}/{{ maxLength }} {{ maxLengthText }}</p>
+	<p class="fudis-visually-hidden" role="alert">{{ control.value?.length || 0 }}/{{ maxLength }} {{ maxLengthText }}</p>
 </ng-container>
