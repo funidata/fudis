@@ -88,10 +88,12 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 
 	throwError(): void {
 		if (this.controlName) {
+			// eslint-disable-next-line no-console
 			console.warn(
 				`Fudis component with id of '${this.inputId}' and control name of '${this.controlName}' is missing error message for error type of: '${this.type}'`
 			);
 		} else {
+			// eslint-disable-next-line no-console
 			console.warn(
 				`Fudis component with id of '${this.inputId}' is missing error message for error type of: '${this.type}'`
 			);
