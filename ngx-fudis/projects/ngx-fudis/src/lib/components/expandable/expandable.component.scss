@@ -28,8 +28,9 @@
 			width: 100%;
 
 			&__button {
-				@include typography.expandable-regular-typography;
 				@include border.border-none;
+				@include color.bg-color('transparent');
+				@include typography.expandable-regular-typography;
 
 				cursor: pointer;
 				width: 100%;
