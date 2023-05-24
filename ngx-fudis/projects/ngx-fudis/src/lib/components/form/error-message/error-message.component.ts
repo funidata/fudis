@@ -88,11 +88,13 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 
 	throwError(): void {
 		if (this.controlName) {
-			throw new Error(
-				`Fudis component with id of '${this.inputId}' and control name of '${this.controlName}' is missing error message for '${this.type}'`
+			console.warn(
+				`Fudis component with id of '${this.inputId}' and control name of '${this.controlName}' is missing error message for error type of: '${this.type}'`
 			);
 		} else {
-			throw new Error(`Fudis component with id of '${this.inputId}' is missing error message for '${this.type}'`);
+			console.warn(
+				`Fudis component with id of '${this.inputId}' is missing error message for error type of: '${this.type}'`
+			);
 		}
 	}
 }
