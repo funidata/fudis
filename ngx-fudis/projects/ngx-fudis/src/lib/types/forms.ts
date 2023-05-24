@@ -60,12 +60,3 @@ export type TFudisFormErrorSummaryObject = {
 export type TFudisFormErrorSummaryObjectItemErrors = {
 	[errorType: string]: string;
 };
-
-export interface IFudisAutocompleteOption {
-	/** Underlying value of the option */
-	value: any;
-	/** Value that is shown in the UI */
-	viewValue: string;
-	/** Is option disabled in the options list dropdown */
-	disabled?: boolean;
-}
