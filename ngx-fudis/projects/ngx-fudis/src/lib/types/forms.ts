@@ -6,7 +6,7 @@ export interface IFudisRadioButtonOption {
 	/** Name for the group of radio buttons */
 	name: string;
 	/** Underlying value of the option */
-	value: boolean | null;
+	value: string | boolean | null;
 	/** Value that is shown in the UI */
 	viewValue: string;
 	/** Is option disabled in the dropdown */
@@ -33,6 +33,8 @@ export type TFudisGroupErrorMessages = {
 	atLeastOneRequired?: string;
 	[key: string]: TFudisInputErrorMessages | any;
 };
+
+export type FudisLanguageOption = {};
 
 export interface IFudisDropdownOption {
 	/** Underlying value of the option */
@@ -74,6 +76,20 @@ export interface IFudisAutocompleteOption {
 	disabled?: boolean;
 }
 
+export type TFudisDropdownLanguageOption =
+	| { value: 'finnish'; viewValue: 'FI' }
+	| { value: 'swedish'; viewValue: 'SV' }
+	| { value: 'english'; viewValue: 'EN' }
+	| { value: string; viewValue: string };
+
+export type TFudisTextInputControl = string | null;
+
+export type TFudisDropdownControl =
+	| IFudisDropdownOption
+	| IFudisDropdownOption[]
+	| TFudisDropdownLanguageOption[]
+	| null;
+
 export interface FudisInputWithLanguageOptionsFormGroup {
-	[language: string]: FormControl<string | null>;
+	[language: string]: FormControl<TFudisTextInputControl>;
 }

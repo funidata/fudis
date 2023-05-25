@@ -3,6 +3,7 @@ import { Component, Input, ViewChild, ElementRef, ViewEncapsulation, HostBinding
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+import { TFudisTextInputControl } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-text-input[id][label]',
@@ -16,7 +17,7 @@ export class TextInputComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * FormControl for the input.
 	 */
-	@Input() control: FormControl<string | null>;
+	@Input() control: FormControl<TFudisTextInputControl>;
 
 	@HostBinding('class') classes = 'fudis-text-input-host';
 

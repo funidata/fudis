@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+import { TFudisTextInputControl } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-text-area[id][label]',
@@ -13,7 +14,7 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * FormControl for the input.
 	 */
-	@Input() control: FormControl<string | null>;
+	@Input() control: FormControl<TFudisTextInputControl>;
 
 	/**
 	 * Minimum length for text area, unset by default

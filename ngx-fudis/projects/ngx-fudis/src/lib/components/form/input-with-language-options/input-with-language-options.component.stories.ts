@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { InputWithLanguageOptionsComponent } from './input-with-language-options.component';
 import { FormGroupValidators } from '../../../utilities/form/validators';
+import { FudisInputWithLanguageOptionsFormGroup, TFudisTextInputControl } from '../../../types/forms';
 
 export default {
 	title: 'Components/Form/Input With Language Options',
@@ -55,10 +56,10 @@ const TemplateAllRequired: StoryFn = () => ({
 			{ value: 'swedish', viewValue: 'SV' },
 			{ value: 'english', viewValue: 'EN' },
 		],
-		formGroup: new FormGroup({
-			finnish: new FormControl('', [Validators.required, Validators.maxLength(12)]),
-			swedish: new FormControl('', [Validators.required, Validators.maxLength(12)]),
-			english: new FormControl('', [Validators.required, Validators.maxLength(12)]),
+		formGroup: new FormGroup<FudisInputWithLanguageOptionsFormGroup>({
+			finnish: new FormControl<TFudisTextInputControl>(null, [Validators.required, Validators.maxLength(12)]),
+			swedish: new FormControl<TFudisTextInputControl>(null, [Validators.required, Validators.maxLength(12)]),
+			english: new FormControl<TFudisTextInputControl>(null, [Validators.required, Validators.maxLength(12)]),
 		}),
 		missingLanguage: 'Missing',
 	},
@@ -101,11 +102,11 @@ const TemplateOneRequired: StoryFn = () => ({
 			{ value: 'swedish', viewValue: 'SV' },
 			{ value: 'english', viewValue: 'EN' },
 		],
-		formGroup: new FormGroup(
+		formGroup: new FormGroup<FudisInputWithLanguageOptionsFormGroup>(
 			{
-				finnish: new FormControl('', [Validators.maxLength(12)]),
-				swedish: new FormControl('', [Validators.maxLength(12)]),
-				english: new FormControl('', [Validators.maxLength(12)]),
+				finnish: new FormControl<TFudisTextInputControl>(null, [Validators.maxLength(12)]),
+				swedish: new FormControl<TFudisTextInputControl>(null, [Validators.maxLength(12)]),
+				english: new FormControl<TFudisTextInputControl>(null, [Validators.maxLength(12)]),
 			},
 			[FormGroupValidators.atLeastOneRequired()]
 		),

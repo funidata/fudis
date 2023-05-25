@@ -10,7 +10,7 @@ import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 
-const getDefaultValue = (options: IFudisRadioButtonOption[]): string | boolean | undefined => {
+const getDefaultValue = (options: IFudisRadioButtonOption[]): string | boolean | undefined | null => {
 	const checkedValue = options.find((item) => item.checked);
 	return checkedValue?.value;
 };

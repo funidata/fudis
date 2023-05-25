@@ -1,6 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IFudisDropdownOption, TFudisGroupErrorMessages } from '../../../types/forms';
+import {
+	FudisInputWithLanguageOptionsFormGroup,
+	IFudisDropdownOption,
+	TFudisDropdownLanguageOption,
+	TFudisGroupErrorMessages,
+} from '../../../types/forms';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
@@ -13,12 +18,12 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	/**
 	 * FormGroup including controls.
 	 */
-	@Input() formGroup: FormGroup;
+	@Input() formGroup: FormGroup<FudisInputWithLanguageOptionsFormGroup>;
 
 	/**
 	 * Option list for language selection Fudis Dropdown. To pair control with corresponding dropdown option Dropdown option "value" must equal to control's name. E.g. "{value: 'english', viewValue: 'EN'}" pairs with "english: New FormControl('')"
 	 */
-	@Input() options: IFudisDropdownOption[];
+	@Input() options: TFudisDropdownLanguageOption[];
 
 	/**
 	 * Available sizes for the input - defaults to large.
@@ -45,7 +50,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	for: string = '';
 
-	requiredControls: { [key: string]: { value?: string; requiredText: string | undefined } } = {};
+	requiredControls: { [key: string]: { value?: string | null; requiredText: string | undefined } } = {};
 
 	atLeastOneRequired: boolean = false;
 
