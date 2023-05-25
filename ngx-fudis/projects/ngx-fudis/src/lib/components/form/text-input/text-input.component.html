@@ -9,7 +9,7 @@
 		[tooltipToggle]="tooltipToggle">
 	</fudis-label>
 	<input
-		[attr.aria-invalid]="control.invalid || invalidState"
+		[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
 		#fudisTextInput
 		[attr.aria-label]="ariaLabel"
 		[formControl]="control"
