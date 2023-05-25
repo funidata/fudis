@@ -33,9 +33,14 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 })
 export class LinkComponent {
 	/**
-	 * Link URL
+	 * Link URL using native href
 	 */
 	@Input() href: string;
+
+	/**
+	 * Link URL using Angular RouterLink
+	 */
+	@Input() routerLinkUrl: string | any[];
 
 	/**
 	 * Title for the link, if not defined title will be the same as link URL

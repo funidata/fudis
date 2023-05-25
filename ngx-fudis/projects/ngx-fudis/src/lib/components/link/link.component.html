@@ -15,7 +15,8 @@
 <ng-template #externalLink>
 	<a
 		attr.aria-label="{{ linkTitle ? linkTitle : href }}, {{ externalLinkAriaLabel }}"
-		[href]="href"
+		[href]="href ? href : null"
+		[routerLink]="routerLinkUrl"
 		target="_blank"
 		rel="noopener noreferrer"
 		class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__{{

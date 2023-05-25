@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation, EventEmitter, Output, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, Input, ViewEncapsulation, EventEmitter, Output, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisDropdownType, IFudisDropdownOption } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
@@ -10,7 +10,7 @@ import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnin
 	styleUrls: ['./dropdown.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class DropdownComponent extends InputBaseDirective implements OnInit, AfterViewChecked {
+export class DropdownComponent extends InputBaseDirective implements OnInit {
 	@Input() control: FormControl<FudisDropdownType>;
 
 	/**
@@ -55,6 +55,4 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, Aft
 	}
 
 	internalValue: any = '';
-
-	ngAfterViewChecked(): void {}
 }

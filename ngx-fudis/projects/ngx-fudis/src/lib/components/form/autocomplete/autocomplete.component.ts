@@ -108,7 +108,6 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 			this.autocompleteFormControl.patchValue(this.control.value[0].viewValue);
 		}
 		this.handleBlur.emit(event);
-		console.log(this.control.value);
 	}
 
 	ngOnInit(): void {
