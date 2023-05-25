@@ -1,6 +1,6 @@
 import { Component, Input, ViewEncapsulation, EventEmitter, Output, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { IFudisDropdownOption, TFudisDropdownControl } from '../../../types/forms';
+import { IFudisDropdownOption, TFudisDropdownLanguageOption } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 
@@ -14,7 +14,7 @@ export class DropdownComponent extends InputBaseDirective implements OnInit {
 	/*
 	 * FormControl for Radio Button group
 	 */
-	@Input() control: FormControl<TFudisDropdownControl>;
+	@Input() control: FormControl<IFudisDropdownOption | IFudisDropdownOption[] | TFudisDropdownLanguageOption[] | null>;
 
 	/**
 	 * Dropdown options

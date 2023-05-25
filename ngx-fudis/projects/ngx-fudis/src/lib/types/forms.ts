@@ -82,14 +82,6 @@ export type TFudisDropdownLanguageOption =
 	| { value: 'english'; viewValue: 'EN' }
 	| { value: string; viewValue: string };
 
-export type TFudisTextInputControl = string | null;
-
-export type TFudisDropdownControl =
-	| IFudisDropdownOption
-	| IFudisDropdownOption[]
-	| TFudisDropdownLanguageOption[]
-	| null;
-
 export interface FudisInputWithLanguageOptionsFormGroup {
-	[language: string]: FormControl<TFudisTextInputControl>;
+	[language: string]: FormControl<string | null>;
 }
