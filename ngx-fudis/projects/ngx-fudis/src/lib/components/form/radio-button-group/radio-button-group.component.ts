@@ -18,7 +18,7 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	/*
 	 * FormControl for Radio Button group
 	 */
-	@Input() control: FormControl;
+	@Input() control: FormControl<boolean | null>;
 
 	/*
 	 * Array of options for group of radio buttons

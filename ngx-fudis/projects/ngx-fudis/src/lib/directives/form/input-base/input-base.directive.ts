@@ -1,20 +1,12 @@
-import { Directive, Input, EventEmitter, Output, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Directive, Input, EventEmitter, Output } from '@angular/core';
 
 import { TFudisInputErrorMessages } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 
-import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
-
 @Directive({
 	selector: '[fudisInputBase]',
 })
-export class InputBaseDirective extends TooltipApiDirective implements OnInit {
-	/**
-	 * FormControl for the input.
-	 */
-	@Input() control: FormControl;
-
+export class InputBaseDirective extends TooltipApiDirective {
 	/**
 	 * Label for input.
 	 */
@@ -68,9 +60,5 @@ export class InputBaseDirective extends TooltipApiDirective implements OnInit {
 
 	onBlur(event: Event): void {
 		this.handleBlur.emit(event);
-	}
-
-	ngOnInit(): void {
-		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 }
