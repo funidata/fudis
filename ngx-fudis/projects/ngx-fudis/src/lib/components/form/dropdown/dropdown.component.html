@@ -30,7 +30,7 @@
 			class="fudis-dropdown__option"
 			[class.fudis-dropdown__option__xs]="size === 'xs'"
 			*ngFor="let option of options"
-			[value]="option"
+			[value]="multipleOption ? option : [option]"
 			[disabled]="option.disabled">
 			{{ option.viewValue }}
 		</mat-option>

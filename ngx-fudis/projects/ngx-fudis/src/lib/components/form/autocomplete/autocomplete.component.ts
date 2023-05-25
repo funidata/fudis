@@ -49,7 +49,7 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 
 	ngAfterContentInit() {
 		if (this.control.value) {
-			this.autocompleteFormControl.patchValue(this.control.value.viewValue);
+			this.autocompleteFormControl.patchValue(this.control.value[0].viewValue);
 		}
 
 		this.filteredOptions = this.autocompleteFormControl.valueChanges.pipe(
@@ -74,7 +74,7 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 			});
 
 			if (optionValue) {
-				this.control.patchValue(optionValue);
+				this.control.patchValue([optionValue]);
 			} else {
 				this.control.patchValue(null);
 			}
@@ -105,9 +105,10 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	autocompleteBlur(event: Event): void {
 		this.control.markAsTouched();
 		if (this.control.valid && this.control.value) {
-			this.autocompleteFormControl.patchValue(this.control.value.viewValue);
+			this.autocompleteFormControl.patchValue(this.control.value[0].viewValue);
 		}
 		this.handleBlur.emit(event);
+		console.log(this.control.value);
 	}
 
 	ngOnInit(): void {

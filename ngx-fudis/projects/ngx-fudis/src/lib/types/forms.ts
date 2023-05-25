@@ -67,7 +67,9 @@ export type TFudisFormErrorSummaryObjectItemErrors = {
 
 export type FudisDatepickerType = Date | null;
 
-export type FudisDropdownType = IFudisDropdownOption | null;
+export type FudisDropdownType = IFudisDropdownOption[] | null;
+
+export type TempFudisDropdownType = IFudisDropdownOption | null;
 
 export type FudisRadioButtonType = boolean | null;
 
