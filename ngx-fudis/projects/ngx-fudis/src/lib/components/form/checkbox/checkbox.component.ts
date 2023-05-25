@@ -1,5 +1,7 @@
 import { Component, Input, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
+import { FudisRadioButtonType } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-checkbox[id][label]',
@@ -9,6 +11,11 @@ import { InputBaseDirective } from '../../../directives/form/input-base/input-ba
 })
 export class CheckboxComponent extends InputBaseDirective {
 	@ViewChild('checkboxRef') input: ElementRef;
+
+	/**
+	 * FormControl for the input.
+	 */
+	@Input() control: FormControl<FudisRadioButtonType>;
 
 	/*
 	 * Name for checkbox

@@ -1,10 +1,11 @@
 /* eslint-disable no-underscore-dangle */
-import { AfterContentInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
-import { IFudisDropdownOption } from '../../../types/forms';
+import { FudisDropdownType, IFudisDropdownOption } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
+import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 
 export type AutocompleteInputSize = 's' | 'm' | 'l';
 
@@ -13,15 +14,18 @@ export type AutocompleteInputSize = 's' | 'm' | 'l';
 	templateUrl: './autocomplete.component.html',
 	styleUrls: ['./autocomplete.component.scss'],
 })
-export class AutocompleteComponent extends InputBaseDirective implements AfterContentInit {
+export class AutocompleteComponent extends InputBaseDirective implements OnInit, AfterContentInit {
 	@ViewChild('fudisAutocompleteInput') autocompleteInput: ElementRef;
+
+	/**
+	 * FormControl for the input.
+	 */
+	@Input() control: FormControl<FudisDropdownType>;
 
 	/**
 	 * Option list
 	 */
 	@Input() options: IFudisDropdownOption[];
-
-	@Input() override control: FormControl<IFudisDropdownOption | null>;
 
 	/**
 	 * Filtered options derived from options Input
@@ -104,5 +108,9 @@ export class AutocompleteComponent extends InputBaseDirective implements AfterCo
 			this.autocompleteFormControl.patchValue(this.control.value.viewValue);
 		}
 		this.handleBlur.emit(event);
+	}
+
+	ngOnInit(): void {
+		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 }

@@ -1,5 +1,14 @@
 /* eslint-disable no-underscore-dangle */
-import { AfterContentInit, Component, DoCheck, HostBinding, Inject, Input, ViewEncapsulation } from '@angular/core';
+import {
+	AfterContentInit,
+	Component,
+	DoCheck,
+	HostBinding,
+	Inject,
+	Input,
+	OnInit,
+	ViewEncapsulation,
+} from '@angular/core';
 import {
 	MatDateFormats,
 	MAT_NATIVE_DATE_FORMATS,
@@ -10,8 +19,11 @@ import {
 
 import { DOCUMENT } from '@angular/common';
 
+import { FormControl } from '@angular/forms';
 import { DatepickerCustomDateAdapter, FudisDateInputFormat } from './datepicker-custom-date-adapter';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
+import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+import { FudisDatepickerType } from '../../../types/forms';
 
 export const FUDIS_DATE_FORMATS: MatDateFormats = {
 	...MAT_NATIVE_DATE_FORMATS,
@@ -38,12 +50,17 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
 		{ provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
 	],
 })
-export class DatepickerComponent extends InputBaseDirective implements DoCheck, AfterContentInit {
+export class DatepickerComponent extends InputBaseDirective implements OnInit, DoCheck, AfterContentInit {
 	@HostBinding('class') classes = 'fudis-datepicker-host';
 
 	constructor(private readonly adapter: DateAdapter<Date>, @Inject(DOCUMENT) private document: Document) {
 		super();
 	}
+
+	/**
+	 * FormControl for the input.
+	 */
+	@Input() control: FormControl<FudisDatepickerType>;
 
 	/**
 	 * Available sizes for the datepicker - defaults to medium.
@@ -85,5 +102,9 @@ export class DatepickerComponent extends InputBaseDirective implements DoCheck, 
 			default:
 				return 'en-GB';
 		}
+	}
+
+	ngOnInit(): void {
+		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 }

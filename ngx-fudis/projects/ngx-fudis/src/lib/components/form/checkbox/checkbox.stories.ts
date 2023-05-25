@@ -30,7 +30,7 @@ import { CheckboxComponent } from './checkbox.component';
 class CheckboxExampleComponent {
 	checkboxFirst: FormControl = new FormControl({ value: true, disabled: true });
 
-	checkboxSecond: FormControl = new FormControl(false, Validators.requiredTrue);
+	checkboxSecond: FormControl = new FormControl(null, Validators.requiredTrue);
 
 	mainFormGroup: FormGroup = this.formBuilder.group({
 		checkboxFirst: this.checkboxFirst,

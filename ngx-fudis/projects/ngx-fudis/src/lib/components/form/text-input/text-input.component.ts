@@ -1,6 +1,9 @@
 // eslint-disable-next-line max-classes-per-file
-import { Component, Input, ViewChild, ElementRef, ViewEncapsulation, HostBinding } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, ViewEncapsulation, HostBinding, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
+import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+import { FudisTextInputType } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-text-input[id][label]',
@@ -8,10 +11,15 @@ import { InputBaseDirective } from '../../../directives/form/input-base/input-ba
 	styleUrls: ['./text-input.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class TextInputComponent extends InputBaseDirective {
+export class TextInputComponent extends InputBaseDirective implements OnInit {
 	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;
 
 	@HostBinding('class') classes = 'fudis-text-input-host';
+
+	/**
+	 * FormControl for the input.
+	 */
+	@Input() control: FormControl<FudisTextInputType>;
 
 	/**
 	 * Available sizes for the input - defaults to large. Recommended size for number input is small.
@@ -47,4 +55,8 @@ export class TextInputComponent extends InputBaseDirective {
 	 * Maximum number allowed by number input's maxNumber
 	 */
 	@Input() maxNumber: number;
+
+	ngOnInit(): void {
+		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
+	}
 }

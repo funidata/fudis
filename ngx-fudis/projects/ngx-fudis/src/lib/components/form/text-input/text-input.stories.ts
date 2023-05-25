@@ -2,7 +2,7 @@ import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { TextInputComponent } from './text-input.component';
-import { TFudisInputErrorMessages } from '../../../types/forms';
+import { FudisTextInputType, TFudisInputErrorMessages } from '../../../types/forms';
 
 @Component({
 	selector: 'example-text-input-with-form-control',
@@ -78,10 +78,10 @@ class TextInputWithFormControlExampleComponent {
 	};
 
 	mainFormGroup: FormGroup = this.formBuilder.group({
-		first: new FormControl(''),
-		second: new FormControl('', Validators.required),
-		third: new FormControl('', this.validatorsForThird),
-		fourth: new FormControl('', this.validatorsForFourth),
+		first: new FormControl<FudisTextInputType>(''),
+		second: new FormControl<FudisTextInputType>(null, Validators.required),
+		third: new FormControl<FudisTextInputType>(null, this.validatorsForThird),
+		fourth: new FormControl<FudisTextInputType>(null, this.validatorsForFourth),
 	});
 
 	constructor(private formBuilder: FormBuilder) {}
