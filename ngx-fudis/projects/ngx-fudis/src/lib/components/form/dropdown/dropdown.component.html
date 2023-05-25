@@ -25,7 +25,7 @@
 		[aria-labelledby]="'label_' + id"
 		[hideSingleSelectionIndicator]="hideSingleSelectionIndicator"
 		[attr.aria-describedby]="id + '_guidance'"
-		[attr.aria-invalid]="control.invalid || invalidState">
+		[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null">
 		<mat-option
 			class="fudis-dropdown__option"
 			[class.fudis-dropdown__option__xs]="size === 'xs'"
