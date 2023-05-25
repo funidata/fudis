@@ -10,7 +10,7 @@
 	</fudis-label>
 	<div class="fudis-autocomplete__input-wrapper">
 		<input
-			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState)"
+			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
 			#fudisAutocompleteInput
 			class="fudis-autocomplete__input"
 			[id]="id"

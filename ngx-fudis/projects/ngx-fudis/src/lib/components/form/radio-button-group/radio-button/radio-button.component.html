@@ -1,6 +1,6 @@
 <label [attr.for]="id" class="fudis-radio-button">
 	<input
-		[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState)"
+		[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
 		(blur)="handleBlur()"
 		(change)="handleChange()"
 		class="fudis-radio-button__input"
