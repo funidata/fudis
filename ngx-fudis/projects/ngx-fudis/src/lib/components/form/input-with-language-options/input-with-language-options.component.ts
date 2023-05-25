@@ -53,7 +53,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	updatedOptions: IFudisDropdownOption[] = [];
 
-	override ngOnInit(): void {
+	ngOnInit(): void {
 		checkRequiredAttributes(this.id, this.requiredText, undefined, this.formGroup);
 		this.updatedOptions = this.missingLanguage ? this.updateDropdownList() : this.options;
 		this.dropdownControl = new FormControl(this.updatedOptions[0]);
