@@ -14,7 +14,7 @@ export class DropdownComponent extends InputBaseDirective implements OnInit {
 	/*
 	 * FormControl for Radio Button group
 	 */
-	@Input() control: FormControl;
+	@Input() control: FormControl<IFudisDropdownOption | IFudisDropdownOption[] | null>;
 
 	/**
 	 * Dropdown options

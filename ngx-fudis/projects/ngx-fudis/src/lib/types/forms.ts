@@ -1,10 +1,12 @@
+import { FormControl } from '@angular/forms';
+
 export interface IFudisRadioButtonOption {
 	/** Unique id for single radio button option */
 	id: string;
 	/** Name for the group of radio buttons */
 	name: string;
 	/** Underlying value of the option */
-	value: string | boolean;
+	value: boolean | null;
 	/** Value that is shown in the UI */
 	viewValue: string;
 	/** Is option disabled in the dropdown */
@@ -39,6 +41,8 @@ export interface IFudisDropdownOption {
 	viewValue: string;
 	/** Is option disabled in the dropdown */
 	disabled?: boolean;
+	/** To store additional data */
+	[key: string]: any;
 }
 
 export type TFudisFormErrorSummaryItem = {
@@ -68,4 +72,8 @@ export interface IFudisAutocompleteOption {
 	viewValue: string;
 	/** Is option disabled in the options list dropdown */
 	disabled?: boolean;
+}
+
+export interface FudisInputWithLanguageOptionsFormGroup {
+	[language: string]: FormControl<string | null>;
 }

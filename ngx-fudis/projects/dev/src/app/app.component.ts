@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import { DialogService, ErrorSummaryService } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
-import { IFudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
+import { IFudisDropdownOption, IFudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
 
 @Component({
 	selector: 'app-root',
@@ -19,7 +19,18 @@ export class AppComponent implements OnInit {
 
 	textAreaControl: FormControl = new FormControl('');
 
-	datePickerControl: FormControl = new FormControl('', this.validatorsForDatepicker);
+	dropdownOptions: IFudisDropdownOption[] = [
+		{ value: 'value-1-dog', viewValue: 'Dog' },
+		{ value: 'value-2-capybara', viewValue: 'Capybara' },
+		{ value: 'value-3-platypys', viewValue: 'Platypus' },
+		{ value: 'value-4-cat', viewValue: 'Cat, disabled for demo purposes', disabled: true },
+		{ value: 'value-5-armadillo', viewValue: 'Screaming hairy armadillo' },
+		{ value: 'value-6-gecko', viewValue: 'Southern Titiwangsa Bent-Toed Gecko' },
+	];
+
+	dropdownControl: FormControl = new FormControl(this.dropdownOptions[2]);
+
+	datePickerControl: FormControl = new FormControl(null, this.validatorsForDatepicker);
 
 	textInputControl: any;
 
@@ -87,7 +98,7 @@ export class AppComponent implements OnInit {
 		{ key: 'Enemy', value: 'Lucy', subHeading: 'Second Archenemy' },
 	];
 
-	truthControl = new FormControl('', Validators.required);
+	truthControl = new FormControl(null, Validators.required);
 
 	clickSubmit(): void {
 		this.textInputControl.markAllAsTouched();

@@ -39,7 +39,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	@Input() variant: 'text-input' | 'text-area' = 'text-input';
 
-	dropdownControl: FormControl;
+	dropdownControl: FormControl<IFudisDropdownOption>;
 
 	dropdownValue: IFudisDropdownOption;
 
