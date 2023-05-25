@@ -1,6 +1,6 @@
 import { Component, Input, ViewEncapsulation, EventEmitter, Output, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FudisDropdownType, IFudisDropdownOption } from '../../../types/forms';
+import { IFudisDropdownOption } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 
@@ -11,7 +11,7 @@ import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnin
 	encapsulation: ViewEncapsulation.None,
 })
 export class DropdownComponent extends InputBaseDirective implements OnInit {
-	@Input() control: FormControl<FudisDropdownType>;
+	@Input() control: FormControl<IFudisDropdownOption | IFudisDropdownOption[] | null>;
 
 	/**
 	 * Dropdown options
@@ -50,8 +50,16 @@ export class DropdownComponent extends InputBaseDirective implements OnInit {
 
 	optionValue: any;
 
+	initialValue: IFudisDropdownOption | null | any = null;
+
 	ngOnInit(): void {
 		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
+
+		if (this.control.value) {
+			const { value } = this.control;
+
+			this.initialValue = value;
+		}
 	}
 
 	internalValue: any = '';

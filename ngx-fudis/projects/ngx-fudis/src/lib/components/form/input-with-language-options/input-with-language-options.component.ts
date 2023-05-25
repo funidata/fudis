@@ -1,12 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
 	FudisInputWithLanguageOptionsFormGroup,
 	IFudisDropdownOption,
+	TFudisDropdownLanguageOptionArray,
 	TFudisGroupErrorMessages,
 } from '../../../types/forms';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
+
+type RequiredControls = {
+	[key: string]: { value?: any; requiredText: string | undefined };
+};
 
 @Component({
 	selector: 'fudis-input-with-language-options',
@@ -17,12 +22,12 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	/**
 	 * FormGroup including controls.
 	 */
-	@Input() formGroup: FudisInputWithLanguageOptionsFormGroup;
+	@Input({ required: true }) formGroup: FormGroup<FudisInputWithLanguageOptionsFormGroup>;
 
 	/**
 	 * Option list for language selection Fudis Dropdown. To pair control with corresponding dropdown option Dropdown option "value" must equal to control's name. E.g. "{value: 'english', viewValue: 'EN'}" pairs with "english: New FormControl('')"
 	 */
-	@Input() options: IFudisDropdownOption[];
+	@Input({ required: true }) options: TFudisDropdownLanguageOptionArray;
 
 	/**
 	 * Available sizes for the input - defaults to large.
@@ -39,17 +44,17 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	/**
 	 * Indicator text added to the dropdown list if input of a language is empty.
 	 */
-	@Input() missingLanguage: string | null;
+	@Input({ required: true }) missingLanguage: string | null;
 
 	@Input() variant: 'text-input' | 'text-area' = 'text-input';
 
-	dropdownControl: FormControl;
+	dropdownControl: FormControl<IFudisDropdownOption | null>;
 
 	dropdownValue: IFudisDropdownOption;
 
 	for: string = '';
 
-	requiredControls: { [key: string]: { value?: string; requiredText: string | undefined } } = {};
+	requiredControls: RequiredControls = {};
 
 	atLeastOneRequired: boolean = false;
 
@@ -57,17 +62,25 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	updatedOptions: IFudisDropdownOption[] = [];
 
+	constructor() {
+		super();
+		this.dropdownControl = new FormControl<IFudisDropdownOption | null>({ value: 'moi', viewValue: 'juu' });
+	}
+
 	ngOnInit(): void {
 		checkRequiredAttributes(this.id, this.requiredText, undefined, this.formGroup);
 		this.updatedOptions = this.missingLanguage ? this.updateDropdownList() : this.options;
-		this.dropdownControl = new FormControl(this.updatedOptions[0]);
+
+		this.dropdownControl.patchValue(this.updatedOptions[0]);
 		this.for = `${this.id}_${this.options[0].value}`;
 
 		this.initialRequiredCheck();
 	}
 
 	handleLanguageSelect(value: IFudisDropdownOption): void {
-		this.dropdownValue = value;
+		const valueToApply = value[0];
+
+		this.dropdownValue = valueToApply;
 		this.for = `${this.id}_${value.value}`;
 	}
 
@@ -81,16 +94,16 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 		const newOptions: IFudisDropdownOption[] = [];
 
 		this.options.forEach((option) => {
-			if (this.formGroup.controls[option.value].invalid || !this.formGroup.controls[option.value].value) {
+			if (this.formGroup.controls?.[option.value]?.invalid || !this.formGroup.controls[option.value]?.value) {
 				const updatedOption = { ...option, viewValue: `${option.viewValue} (${this.missingLanguage})` };
 
 				newOptions.push(updatedOption);
 
-				if (option.value === this.dropdownControl?.value.value) {
+				if (this.dropdownControl?.value && option?.value === this.dropdownControl.value.value) {
 					this.dropdownControl.patchValue(updatedOption);
 				}
 			} else {
-				if (option.value === this.dropdownControl?.value.value) {
+				if (this.dropdownControl?.value && option?.value === this.dropdownControl.value.value) {
 					this.dropdownControl.patchValue(option);
 				}
 				newOptions.push(option);
@@ -140,11 +153,19 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 		if (this.formGroup.errors?.['atLeastOneRequired']) {
 			this.initialRequiredCheck();
 		} else if (this.atLeastOneRequired && controlKey) {
+			if (Object.prototype.hasOwnProperty.call(this.requiredControls, controlKey)) {
+				if (this.requiredControls[controlKey] !== undefined) {
+					this.requiredControls = {
+						...this.requiredControls,
+						[controlKey]: { ...this.requiredControls[controlKey], value },
+					};
+				}
+			}
+
 			// Check how many controls are empty
-			this.requiredControls[controlKey].value = value;
 
 			this.nonEmptyControls = Object.keys(this.requiredControls).filter((control) => {
-				return this.requiredControls[control].value !== '';
+				return this.requiredControls?.[control]?.value !== '';
 			});
 
 			// If only one control is not empty, include requiredText with that

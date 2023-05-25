@@ -5,7 +5,7 @@ export const checkRequiredAttributes = (
 	id: string,
 	requiredText: string | undefined,
 	control?: FormControl,
-	group?: FormGroup,
+	group?: FormGroup<any>,
 	ignoreRequiredCheck?: boolean
 ) => {
 	if (!ignoreRequiredCheck) {

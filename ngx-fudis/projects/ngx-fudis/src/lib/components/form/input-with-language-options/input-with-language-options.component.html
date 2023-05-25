@@ -26,33 +26,33 @@
 <ng-template #textInput>
 	<ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
 		<fudis-text-input
-			*ngIf="control.key === dropdownControl.value.value"
+			*ngIf="control.key === dropdownControl.value?.value"
 			(handleBlur)="handleInputBlur($event, control.key)"
 			class="fudis-input-with-language-options__inputs__item"
-			[ariaLabel]="label + ', ' + dropdownControl.value.viewValue"
+			[ariaLabel]="label + ', ' + dropdownControl.value?.viewValue"
 			[size]="'l'"
 			[label]="label"
 			[id]="id"
 			[ignoreRequiredCheck]="true"
 			[requiredText]="requiredControls[control.key].requiredText"
 			[invalidState]="formGroup.invalid && formGroup.touched"
-			[control]="$any(formGroup).controls[control.key]"></fudis-text-input>
+			[control]="formGroup.controls[control.key]"></fudis-text-input>
 	</ng-container>
 </ng-template>
 
 <ng-template #textArea>
 	<ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
 		<fudis-text-area
-			*ngIf="control.key === dropdownControl.value.value"
+			*ngIf="control.key === dropdownControl.value?.value"
 			(handleBlur)="handleInputBlur($event, control.key)"
 			class="fudis-input-with-language-options__inputs__item"
-			[ariaLabel]="label + ', ' + dropdownControl.value.viewValue"
+			[ariaLabel]="label + ', ' + dropdownControl.value?.viewValue"
 			[size]="'l'"
 			[label]="label"
 			[id]="id"
 			[ignoreRequiredCheck]="true"
 			[invalidState]="formGroup.invalid && formGroup.touched"
 			[requiredText]="requiredControls[control.key].requiredText"
-			[control]="$any(formGroup).controls[control.key]"></fudis-text-area>
+			[control]="formGroup.controls[control.key]"></fudis-text-area>
 	</ng-container>
 </ng-template>

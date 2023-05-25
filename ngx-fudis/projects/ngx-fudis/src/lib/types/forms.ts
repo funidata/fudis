@@ -1,4 +1,4 @@
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 export interface IFudisRadioButtonOption {
 	/** Unique id for single radio button option */
@@ -45,6 +45,13 @@ export interface IFudisDropdownOption {
 	[key: string]: any;
 }
 
+export type TFudisDropdownLanguageOption =
+	| { value: 'finnish'; viewValue: 'FI' }
+	| { value: 'swedish'; viewValue: 'SV' }
+	| { value: 'english'; viewValue: 'EN' };
+
+export type TFudisDropdownLanguageOptionArray = TFudisDropdownLanguageOption[];
+
 export type TFudisFormErrorSummaryItem = {
 	id: string;
 	label: string;
@@ -67,33 +74,12 @@ export type TFudisFormErrorSummaryObjectItemErrors = {
 
 export type FudisDatepickerType = Date | null;
 
-export type FudisDropdownType = IFudisDropdownOption[] | null;
-
 export type TempFudisDropdownType = IFudisDropdownOption | null;
 
 export type FudisRadioButtonType = boolean | null;
 
 export type FudisTextInputType = string | null;
 
-export interface FudisInputWithLanguageOptionsFormGroup extends FormGroup {
-	english?: FormControl<FudisTextInputType>;
-	finnish?: FormControl<FudisTextInputType>;
-	swedish?: FormControl<FudisTextInputType>;
+export interface FudisInputWithLanguageOptionsFormGroup {
+	[language: string]: FormControl<FudisTextInputType>;
 }
-
-/**
- * From: https://dev.to/jrubzjeknf/angular-typed-forms-supercharged-1op
- * Produces the controls for a typed FormGroup or FormArray.
- * Can be used to create a new FormGroup or FormArray.
- *
- * @example const myForm: MyForm = new FormGroup<Controls<MyForm>>({...});
- */
-export type Controls<TAbstractControl> = TAbstractControl extends FormGroup<infer TControls>
-	? {
-			[K in keyof TControls]: TControls[K];
-	  }
-	: TAbstractControl extends FormArray<infer TControls>
-	? TControls[]
-	: TAbstractControl extends FormControl
-	? TAbstractControl
-	: never;

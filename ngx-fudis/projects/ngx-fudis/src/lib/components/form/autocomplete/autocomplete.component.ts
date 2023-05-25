@@ -3,7 +3,7 @@ import { AfterContentInit, Component, ElementRef, Input, OnInit, ViewChild } fro
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
-import { FudisDropdownType, IFudisDropdownOption } from '../../../types/forms';
+import { IFudisDropdownOption } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 
@@ -20,7 +20,7 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	/**
 	 * FormControl for the input.
 	 */
-	@Input() control: FormControl<FudisDropdownType>;
+	@Input() control: FormControl<IFudisDropdownOption | null>;
 
 	/**
 	 * Option list
@@ -49,7 +49,7 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 
 	ngAfterContentInit() {
 		if (this.control.value) {
-			this.autocompleteFormControl.patchValue(this.control.value[0].viewValue);
+			this.autocompleteFormControl.patchValue(this.control.value.viewValue);
 		}
 
 		this.filteredOptions = this.autocompleteFormControl.valueChanges.pipe(
@@ -74,7 +74,7 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 			});
 
 			if (optionValue) {
-				this.control.patchValue([optionValue]);
+				this.control.patchValue(optionValue);
 			} else {
 				this.control.patchValue(null);
 			}
@@ -105,7 +105,7 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	autocompleteBlur(event: Event): void {
 		this.control.markAsTouched();
 		if (this.control.valid && this.control.value) {
-			this.autocompleteFormControl.patchValue(this.control.value[0].viewValue);
+			this.autocompleteFormControl.patchValue(this.control.value.viewValue);
 		}
 		this.handleBlur.emit(event);
 	}
