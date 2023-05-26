@@ -23,7 +23,6 @@ export { DescriptionListComponent } from './lib/components/description-list/desc
 export { DialogService } from './lib/components/dialog/dialog.service';
 export { DropdownComponent } from './lib/components/form/dropdown/dropdown.component';
 export { DropdownMenuComponent } from './lib/components/dropdown-menu/dropdown-menu.component';
-export { DropdownMenuDirective } from './lib/components/dropdown-menu/dropdown-menu.directive';
 export { DropdownMenuItemComponent } from './lib/components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
 export { ErrorMessageComponent } from './lib/components/form/error-message/error-message.component';
 
