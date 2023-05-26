@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AfterViewInit, Component, DestroyRef, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
+
+import { Subject, takeUntil } from 'rxjs';
 import { ErrorSummaryService } from './error-summary.service';
 
 @Component({
@@ -8,6 +9,8 @@ import { ErrorSummaryService } from './error-summary.service';
 	styleUrls: ['./error-summary.component.scss'],
 })
 export class ErrorSummaryComponent implements OnInit, AfterViewInit {
+	destroyRef = inject(DestroyRef);
+
 	@ViewChild('focusTarget') focusTarget: ElementRef;
 
 	/**
@@ -30,9 +33,11 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 	visibleErrorList: any = [];
 
 	getErrors(): void {
+		const destroyed = new Subject();
+
 		this.errorSummaryService
 			.getVisibleErrors()
-			.pipe(takeUntilDestroyed())
+			.pipe(takeUntil(destroyed))
 			.subscribe((errorsFromService) => {
 				this.visibleErrorList = [];
 				Object.keys(errorsFromService).forEach((item) => {
