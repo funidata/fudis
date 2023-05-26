@@ -8,21 +8,22 @@
 	&__button {
 		@include typography.body-text-m-light;
 		@include colorMixins.bg-color('transparent');
-		@include borders.border-none; 
+		@include borders.border-none;
 
 		display: block;
 		position: relative;
 		cursor: pointer;
 		padding: spacing.$spacing-xs;
 		width: 100%;
-    text-align: left;
+		text-align: left;
 
 		&:hover {
 			@include colorMixins.bg-color('primary-light');
 		}
 
-		&:focus-visible {
-			@include focus.focus-generic;
+		&:focus-visible,
+		&:focus {
+			@include focus.focus-dropdown;
 		}
 
 		&[aria-disabled='true'] {

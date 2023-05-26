@@ -26,17 +26,19 @@ export default {
 const Template: StoryFn = (args) => ({
 	props: args,
 	template: `
-	<fudis-button [label]="'Menu'" [labelHidden]="true" [size]="'small'" [variant]="'secondary'" [icon]="'three-dots'" [asMenuButton]="true">
-		<ng-template fudisDropdownMenu>
-			<fudis-dropdown-menu-item [label]="'Item 1'"></fudis-dropdown-menu-item>
-			<fudis-dropdown-menu-item [label]="'Item 22 disabled'" [disabled]="true"></fudis-dropdown-menu-item>
-			<fudis-dropdown-menu-item [label]="'Item 23'"></fudis-dropdown-menu-item>
-			<fudis-dropdown-menu-item [label]="'Item 45 with very long text so no one really bothers to even read it'"></fudis-dropdown-menu-item>
-			<fudis-dropdown-menu-item [label]="'Item 100'"></fudis-dropdown-menu-item>
-			<fudis-dropdown-menu-item [label]="'Item 2200250'"></fudis-dropdown-menu-item>
-			<fudis-dropdown-menu-item [label]="'Item 878787878571'"></fudis-dropdown-menu-item>
-		</ng-template>
-	</fudis-button>`,
+	<fudis-grid align="right">
+		<fudis-button [label]="'Menu'" [labelHidden]="true" [size]="'small'" [variant]="'secondary'" [icon]="'three-dots'" [asMenuButton]="true">
+			<fudis-dropdown-menu>
+				<fudis-dropdown-menu-item [label]="'Item 1'"></fudis-dropdown-menu-item>
+				<fudis-dropdown-menu-item [label]="'Item 22 disabled'" [disabled]="true"></fudis-dropdown-menu-item>
+				<fudis-dropdown-menu-item [label]="'Item 23'"></fudis-dropdown-menu-item>
+				<fudis-dropdown-menu-item [label]="'Item 45 with very long text so no one really bothers to even read it'"></fudis-dropdown-menu-item>
+				<fudis-dropdown-menu-item [label]="'Item 100'"></fudis-dropdown-menu-item>
+				<fudis-dropdown-menu-item [label]="'Item 2200250'"></fudis-dropdown-menu-item>
+				<fudis-dropdown-menu-item [label]="'Item 878787878571'"></fudis-dropdown-menu-item>
+			</fudis-dropdown-menu>
+		</fudis-button>
+	</fudis-grid>`,
 });
 
 export const DropdownMenu = Template.bind({});

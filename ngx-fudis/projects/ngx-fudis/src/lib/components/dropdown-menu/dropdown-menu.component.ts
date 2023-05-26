@@ -1,18 +1,27 @@
-import { Component, ContentChild, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
-import { DropdownMenuDirective } from './dropdown-menu.directive';
+import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 
 @Component({
 	selector: 'fudis-dropdown-menu',
 	templateUrl: './dropdown-menu.component.html',
 	styleUrls: ['./dropdown-menu.component.scss'],
 })
-export class DropdownMenuComponent implements AfterViewInit {
-	@ContentChild(DropdownMenuDirective) content: DropdownMenuDirective;
+export class DropdownMenuComponent {
+	@ViewChild('dropdownMenu') dropdownMenu: ElementRef<HTMLElement>;
 
-	@ViewChild('dropdownContent') dropdownContent: ElementRef<HTMLElement>;
+	/**
+	 * Dropdown-menu is aligned to open left side of the button by default but can be aligned to open right side if necessary
+	 */
+	@Input() alignMenu: 'left' | 'right' = 'left';
 
-	ngAfterViewInit() {
-		this.dropdownContent.nativeElement.setAttribute('tabindex', '-1');
-		this.dropdownContent.nativeElement.focus();
+	@HostListener('window:keydown.arrowDown', ['$event'])
+	handleKeyDown(event: KeyboardEvent) {
+		event.preventDefault();
+		const firstChildElement = this.dropdownMenu.nativeElement.children[0];
+
+		// If focus is on the menu button, only then listen keydown and focus on the first child
+		if (firstChildElement.closest('fudis-button')?.querySelector('.fudis-button') === document.activeElement) {
+			const firstChildButtonElement = firstChildElement.querySelector('button');
+			firstChildButtonElement?.focus();
+		}
 	}
 }

@@ -25,3 +25,9 @@
 	width: spacing.$spacing-s;
 	height: spacing.$spacing-s;
 }
+
+@mixin focus-dropdown {
+	outline: tokens.$focus-generic-outline;
+	outline-offset: -(spacing.$pixel-2);
+	box-shadow: 0 0 0 spacing.$spacing-xxs colors.$color-white;
+}

@@ -1,4 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { DropdownMenuItemService } from './dropdown-menu-item.service';
 
 @Component({
 	selector: 'fudis-dropdown-menu-item',
@@ -20,18 +21,30 @@ export class DropdownMenuItemComponent {
 
 	@Output() handleClick = new EventEmitter<Event>();
 
+	constructor(private clickService: DropdownMenuItemService) {}
+
 	// eslint-disable-next-line class-methods-use-this
 	handleKeyDown(event: KeyboardEvent) {
-		// TODO
-		if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-			console.log('keydown');
-			event.preventDefault();
-			console.log(event);
-			console.log(this.dropdownItem.nativeElement);
-			this.dropdownItem.nativeElement.focus();
+		if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
 
-			// console.log(event.target);
-			// (event.target as HTMLElement).focus();
+		const focusElement = document.querySelector(':focus');
+		const tabElements = document.querySelectorAll('fudis-dropdown-menu-item button');
+		const tabElementsCount = tabElements.length - 1;
+		event.preventDefault();
+
+		const focusIndex = Array.prototype.indexOf.call(tabElements, focusElement);
+
+		let elementToFocus = this.dropdownItem.nativeElement;
+		if (event.key === 'ArrowUp') {
+			elementToFocus = tabElements[focusIndex > 0 ? focusIndex - 1 : tabElementsCount];
 		}
+		if (event.key === 'ArrowDown') {
+			elementToFocus = tabElements[focusIndex < tabElementsCount ? focusIndex + 1 : 0];
+		}
+		elementToFocus.focus();
+	}
+
+	closeDropdown(): void {
+		this.clickService.close();
 	}
 }

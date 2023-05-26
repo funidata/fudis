@@ -5,7 +5,8 @@
 @use '../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-button-host {
-	display: block;
+	display: inline-block;
+	position: relative;
 }
 
 .fudis-button {

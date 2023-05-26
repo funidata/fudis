@@ -1,9 +1,11 @@
 <ng-container *ngIf="tooltip">
 	<button
+		#buttonElement
 		[type]="type"
 		[attr.aria-disabled]="disabled"
 		[attr.aria-label]="getAriaLabel"
 		(click)="!disabled && asMenuButton ? toggleMenu($event) : !disabled ? handleClick.emit($event) : null"
+		(keydown)="handleKeyDown($event)"
 		[ngClass]="getClasses"
 		fudisTooltip
 		[tooltip]="tooltip"
@@ -20,10 +22,12 @@
 
 <ng-container *ngIf="!tooltip">
 	<button
+		#buttonElement
 		[type]="type"
 		[attr.aria-disabled]="disabled"
 		[attr.aria-label]="getAriaLabel"
 		(click)="!disabled && asMenuButton ? toggleMenu($event) : !disabled ? handleClick.emit($event) : null"
+		(keydown)="handleKeyDown($event)"
 		[ngClass]="getClasses">
 		<ng-container *ngIf="icon">
 			<div class="fudis-button__icon">
@@ -34,6 +38,6 @@
 	</button>
 </ng-container>
 
-<fudis-dropdown-menu *ngIf="content?.templateRef && toggleOn" [attr.aria-label]="label">
-	<ng-container *ngTemplateOutlet="content.templateRef"></ng-container>
-</fudis-dropdown-menu>
+<ng-container *ngIf="asMenuButton && toggleOn">
+	<ng-content></ng-content>
+</ng-container>

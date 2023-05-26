@@ -3,14 +3,20 @@
 @use '../../foundations/colors/mixins.scss' as colorMixins;
 
 .fudis-dropdown-menu {
-	&__content {
-		@include borders.border('1px', 'solid', 'gray-dark');
-		@include colorMixins.bg-color('white');
+	@include borders.border('1px', 'solid', 'gray-dark');
+	@include colorMixins.bg-color('white');
 
-		position: absolute;
+	position: absolute;
 
-		&:focus-visible {
-			@include focus.focus-generic;
-		}
+	&:focus-visible {
+		@include focus.focus-generic;
+	}
+
+	&__right {
+		left: 0;
+	}
+
+	&__left {
+		right: 0;
 	}
 }

@@ -1,7 +1,17 @@
-import { Component, Input, Output, EventEmitter, HostBinding, ViewEncapsulation, ContentChild } from '@angular/core';
+import {
+	Component,
+	Input,
+	Output,
+	EventEmitter,
+	HostBinding,
+	ViewEncapsulation,
+	OnInit,
+	ViewChild,
+	ElementRef,
+} from '@angular/core';
 import { FudisIcon, FudisIconColor } from '../../types/icons';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
-import { DropdownMenuDirective } from '../dropdown-menu/dropdown-menu.directive';
+import { DropdownMenuItemService } from '../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 
 @Component({
 	selector: 'fudis-button',
@@ -9,13 +19,10 @@ import { DropdownMenuDirective } from '../dropdown-menu/dropdown-menu.directive'
 	styleUrls: ['./button.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class ButtonComponent extends TooltipApiDirective {
+export class ButtonComponent extends TooltipApiDirective implements OnInit {
 	@HostBinding('class') classes = 'fudis-button-host';
 
-	/**
-	 * If button is used as menu button it will have ng-template to place dropdown-items
-	 */
-	@ContentChild(DropdownMenuDirective) content: DropdownMenuDirective;
+	@ViewChild('buttonElement') buttonEl: ElementRef<HTMLElement>;
 
 	/**
 	 * Button variant options
@@ -77,6 +84,10 @@ export class ButtonComponent extends TooltipApiDirective {
 	 */
 	toggleOn: boolean = false;
 
+	constructor(private clickService: DropdownMenuItemService) {
+		super();
+	}
+
 	public get getClasses(): string[] {
 		if (this.disabled) {
 			this.iconColor = 'default';
@@ -95,8 +106,23 @@ export class ButtonComponent extends TooltipApiDirective {
 		return this.ariaLabel;
 	}
 
+	ngOnInit() {
+		if (this.asMenuButton) {
+			this.clickService.clickWatcher().subscribe(() => {
+				this.toggleOn = false;
+				this.buttonEl?.nativeElement.focus();
+			});
+		}
+	}
+
 	toggleMenu(event: Event): void {
 		this.toggleOn = !this.toggleOn;
 		this.handleClick.emit(event);
+	}
+
+	handleKeyDown(event: KeyboardEvent): void {
+		if (this.toggleOn && event.key === 'ArrowDown') {
+			event.preventDefault();
+		}
 	}
 }
