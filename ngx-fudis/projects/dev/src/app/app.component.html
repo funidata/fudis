@@ -20,6 +20,11 @@
 			[errorMsg]="{ required: t('chooseTruthError') }"
 			[control]="truthControl"
 			[options]="radioButtonOptions"></fudis-radio-button-group>
+		<fudis-dropdown
+			[id]="'dropdown-id-123'"
+			[label]="'Some dropdown'"
+			[options]="dropdownOptions"
+			[control]="dropdownControl"></fudis-dropdown>
 	</fudis-fieldset>
 	<fudis-button [label]="'Submit!'" (handleClick)="clickSubmit()"></fudis-button>
 	<fudis-body-text *ngIf="showSuccessBodyText">It seems everything is okay!</fudis-body-text>

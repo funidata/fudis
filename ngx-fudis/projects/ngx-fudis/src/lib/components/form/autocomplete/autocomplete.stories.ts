@@ -33,7 +33,7 @@ Autocomplete.args = {
 	clearFilterText: 'Clear filter',
 	helpText:
 		'This is autocomplete input, start writing (e.g mar) and after three letters the input will suggest matching options.',
-	control: new FormControl('', Validators.required),
+	control: new FormControl(null, Validators.required),
 	errorMsg: { required: 'This selection is required' },
 	options: [
 		{ value: 123, viewValue: 'Mary Rhubarb' },
@@ -54,7 +54,7 @@ Disabled.args = {
 	disabled: true,
 	helpText:
 		'This is autocomplete input, start writing (e.g mar) and after three letters the input will suggest matching options.',
-	control: new FormControl(''),
+	control: new FormControl(null),
 	options: [
 		{ value: 123, viewValue: 'Mary Rhubarb' },
 		{ value: '456-xx', viewValue: 'Kingsley Kale' },

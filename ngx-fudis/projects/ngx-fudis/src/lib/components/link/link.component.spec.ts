@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { MockComponent } from 'ng-mocks';
+import { RouterModule } from '@angular/router';
 import { IconComponent } from '../icon/icon.component';
 import { LinkComponent } from './link.component';
 
@@ -12,6 +13,7 @@ describe('LinkComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [LinkComponent, MockComponent(IconComponent)],
+			imports: [RouterModule.forRoot([])],
 		})
 			.overrideComponent(LinkComponent, {
 				set: { changeDetection: ChangeDetectionStrategy.Default },
