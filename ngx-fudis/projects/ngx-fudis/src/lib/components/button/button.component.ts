@@ -119,10 +119,4 @@ export class ButtonComponent extends TooltipApiDirective implements OnInit {
 		this.toggleOn = !this.toggleOn;
 		this.handleClick.emit(event);
 	}
-
-	handleKeyDown(event: KeyboardEvent): void {
-		if (this.toggleOn && event.key === 'ArrowDown') {
-			event.preventDefault();
-		}
-	}
 }

@@ -5,7 +5,6 @@
 		[attr.aria-disabled]="disabled"
 		[attr.aria-label]="getAriaLabel"
 		(click)="!disabled && asMenuButton ? toggleMenu($event) : !disabled ? handleClick.emit($event) : null"
-		(keydown)="handleKeyDown($event)"
 		[ngClass]="getClasses"
 		fudisTooltip
 		[tooltip]="tooltip"
@@ -27,7 +26,6 @@
 		[attr.aria-disabled]="disabled"
 		[attr.aria-label]="getAriaLabel"
 		(click)="!disabled && asMenuButton ? toggleMenu($event) : !disabled ? handleClick.emit($event) : null"
-		(keydown)="handleKeyDown($event)"
 		[ngClass]="getClasses">
 		<ng-container *ngIf="icon">
 			<div class="fudis-button__icon">
