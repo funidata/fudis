@@ -4,10 +4,6 @@ import { TFudisFormErrorSummaryObject, TFudisFormErrorSummaryItem } from '../../
 export class ErrorSummaryService {
 	private currentErrorList: TFudisFormErrorSummaryObject = {};
 
-	private reloadStore = new BehaviorSubject<boolean>(true);
-
-	private reload = this.reloadStore.asObservable();
-
 	private visibleErrorListStore = new BehaviorSubject<TFudisFormErrorSummaryObject>({});
 
 	private visibleErrorList = this.visibleErrorListStore.asObservable();
@@ -57,10 +53,6 @@ export class ErrorSummaryService {
 		delete currentErrors[errorId].errors[error.type];
 
 		this.currentErrorList = currentErrors;
-	}
-
-	reloadWatcher(): Observable<any> {
-		return this.reload;
 	}
 
 	reloadErrors() {

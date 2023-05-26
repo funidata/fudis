@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ErrorSummaryService } from './error-summary.service';
 
 @Component({
@@ -29,25 +30,28 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 	visibleErrorList: any = [];
 
 	getErrors(): void {
-		this.errorSummaryService.getVisibleErrors().subscribe((errorsFromService) => {
-			this.visibleErrorList = [];
-			Object.keys(errorsFromService).forEach((item) => {
-				const errorId = errorsFromService[item].id;
+		this.errorSummaryService
+			.getVisibleErrors()
+			.pipe(takeUntilDestroyed())
+			.subscribe((errorsFromService) => {
+				this.visibleErrorList = [];
+				Object.keys(errorsFromService).forEach((item) => {
+					const errorId = errorsFromService[item].id;
 
-				if (this.parentComponent?.querySelector(`#${errorId}`)) {
-					const { label } = errorsFromService[item];
+					if (this.parentComponent?.querySelector(`#${errorId}`)) {
+						const { label } = errorsFromService[item];
 
-					Object.values(errorsFromService[item].errors).forEach((error: any) => {
-						this.visibleErrorList.push({ id: errorId, message: `${label}: ${error}` });
-					});
-				}
+						Object.values(errorsFromService[item].errors).forEach((error: any) => {
+							this.visibleErrorList.push({ id: errorId, message: `${label}: ${error}` });
+						});
+					}
+				});
+
+				/**
+				 * Focus to Error Summary element when visible error list gets updated.
+				 */
+				this.focusToErrorSummary();
 			});
-
-			/**
-			 * Focus to Error Summary element when visible error list gets updated.
-			 */
-			this.focusToErrorSummary();
-		});
 	}
 
 	ngOnInit(): void {
