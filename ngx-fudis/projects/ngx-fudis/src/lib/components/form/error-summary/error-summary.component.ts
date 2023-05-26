@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, DestroyRef, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, Signal, ViewChild, effect } from '@angular/core';
 
-import { Subject, takeUntil } from 'rxjs';
 import { ErrorSummaryService } from './error-summary.service';
+import { TFudisFormErrorSummaryObject } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-error-summary',
@@ -9,8 +9,6 @@ import { ErrorSummaryService } from './error-summary.service';
 	styleUrls: ['./error-summary.component.scss'],
 })
 export class ErrorSummaryComponent implements OnInit, AfterViewInit {
-	destroyRef = inject(DestroyRef);
-
 	@ViewChild('focusTarget') focusTarget: ElementRef;
 
 	/**
@@ -28,35 +26,33 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 	 */
 	@Input() screenReaderHelpText: string | null | undefined;
 
-	constructor(private errorSummaryService: ErrorSummaryService) {}
+	constructor(private errorSummaryService: ErrorSummaryService) {
+		effect(() => {
+			this.getErrors();
+		});
+	}
 
 	visibleErrorList: any = [];
 
 	getErrors(): void {
-		const destroyed = new Subject();
+		const fetchedErrors: Signal<TFudisFormErrorSummaryObject> = this.errorSummaryService.getVisibleErrors();
 
-		this.errorSummaryService
-			.getVisibleErrors()
-			.pipe(takeUntil(destroyed))
-			.subscribe((errorsFromService) => {
-				this.visibleErrorList = [];
-				Object.keys(errorsFromService).forEach((item) => {
-					const errorId = errorsFromService[item].id;
+		this.visibleErrorList = [];
 
-					if (this.parentComponent?.querySelector(`#${errorId}`)) {
-						const { label } = errorsFromService[item];
-
-						Object.values(errorsFromService[item].errors).forEach((error: any) => {
-							this.visibleErrorList.push({ id: errorId, message: `${label}: ${error}` });
-						});
-					}
+		Object.keys(fetchedErrors()).forEach((item) => {
+			const errorId = fetchedErrors()[item].id;
+			if (this.parentComponent?.querySelector(`#${errorId}`)) {
+				const { label } = fetchedErrors()[item];
+				Object.values(fetchedErrors()[item].errors).forEach((error: any) => {
+					this.visibleErrorList.push({ id: errorId, message: `${label}: ${error}` });
 				});
+			}
+		});
 
-				/**
-				 * Focus to Error Summary element when visible error list gets updated.
-				 */
-				this.focusToErrorSummary();
-			});
+		/**
+		 * Focus to Error Summary element when visible error list gets updated.
+		 */
+		this.focusToErrorSummary();
 	}
 
 	ngOnInit(): void {

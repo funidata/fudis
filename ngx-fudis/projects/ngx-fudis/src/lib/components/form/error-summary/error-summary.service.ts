@@ -1,15 +1,16 @@
-import { BehaviorSubject, Observable } from 'rxjs';
+/* eslint-disable no-underscore-dangle */
+import { Signal, signal } from '@angular/core';
 import { TFudisFormErrorSummaryObject, TFudisFormErrorSummaryItem } from '../../../types/forms';
 
 export class ErrorSummaryService {
 	private currentErrorList: TFudisFormErrorSummaryObject = {};
 
-	private visibleErrorListStore = new BehaviorSubject<TFudisFormErrorSummaryObject>({});
+	private _signalCurrentErrorList = signal<TFudisFormErrorSummaryObject>({});
 
-	private visibleErrorList = this.visibleErrorListStore.asObservable();
+	signalCurrentErrorList = this._signalCurrentErrorList.asReadonly();
 
-	getVisibleErrors(): Observable<TFudisFormErrorSummaryObject> {
-		return this.visibleErrorList;
+	getVisibleErrors(): Signal<TFudisFormErrorSummaryObject> {
+		return this.signalCurrentErrorList;
 	}
 
 	// eslint-disable-next-line class-methods-use-this
@@ -56,7 +57,6 @@ export class ErrorSummaryService {
 	}
 
 	reloadErrors() {
-		const visibleErrors = { ...this.currentErrorList };
-		this.visibleErrorListStore.next(visibleErrors);
+		this._signalCurrentErrorList.set(this.currentErrorList);
 	}
 }
