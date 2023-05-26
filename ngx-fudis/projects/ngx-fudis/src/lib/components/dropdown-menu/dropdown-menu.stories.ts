@@ -2,17 +2,17 @@ import { StoryFn, Meta, applicationConfig } from '@storybook/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { DropdownMenuComponent } from './dropdown-menu.component';
-// import readme from './readme.mdx';
+import readme from './readme.mdx';
 
 export default {
-	title: 'Components/DropdownMenu',
+	title: 'Components/Dropdown Menu',
 	component: DropdownMenuComponent,
 	parameters: {
 		docs: {
-			// page: readme,
+			page: readme,
 		},
 		controls: {
-			exclude: ['content'],
+			exclude: ['content', 'alignMenu'],
 		},
 	},
 	decorators: [

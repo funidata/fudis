@@ -16,6 +16,7 @@
 		padding: spacing.$spacing-xs;
 		width: 100%;
 		text-align: left;
+		white-space: nowrap;
 
 		&:hover {
 			@include colorMixins.bg-color('primary-light');
@@ -24,6 +25,11 @@
 		&:focus-visible,
 		&:focus {
 			@include focus.focus-dropdown;
+		}
+
+		&:active {
+			@include colorMixins.bg-color('primary');
+			@include colorMixins.text-color('white');
 		}
 
 		&[aria-disabled='true'] {
