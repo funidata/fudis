@@ -62,8 +62,8 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 					this.columnsToApply = item.value;
 					(this.gridElement.nativeElement as HTMLElement).style.gridTemplateColumns = item.value;
 				} else if (state.breakpoints[item.breakpoint] && item.name === 'columns') {
-					this.columnsToApply = this.columns;
-					(this.gridElement.nativeElement as HTMLElement).style.gridTemplateColumns = this.columns;
+					this.columnsToApply = item.value;
+					(this.gridElement.nativeElement as HTMLElement).style.gridTemplateColumns = item.value;
 				}
 			});
 		});

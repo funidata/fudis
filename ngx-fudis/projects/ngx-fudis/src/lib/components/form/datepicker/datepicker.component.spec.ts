@@ -107,7 +107,7 @@ describe('DatepickerComponent', () => {
 
 		it('should have invalid class if datepicker is required, input is touched and no date has been chosen', () => {
 			const datepickerInput = fixture.nativeElement.querySelector('input');
-			const requiredControl = new FormControl('', Validators.required);
+			const requiredControl = new FormControl(null, Validators.required);
 			component.control = requiredControl;
 			fixture.detectChanges();
 

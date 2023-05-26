@@ -1,5 +1,7 @@
-import { Component, Input, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ViewEncapsulation, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
+import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 
 @Component({
 	selector: 'fudis-checkbox[id][label]',
@@ -7,8 +9,13 @@ import { InputBaseDirective } from '../../../directives/form/input-base/input-ba
 	styleUrls: ['./checkbox.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class CheckboxComponent extends InputBaseDirective {
+export class CheckboxComponent extends InputBaseDirective implements OnInit {
 	@ViewChild('checkboxRef') input: ElementRef;
+
+	/*
+	 * FormControl for Radio Button group
+	 */
+	@Input() control: FormControl<boolean | null>;
 
 	/*
 	 * Name for checkbox
@@ -19,5 +26,9 @@ export class CheckboxComponent extends InputBaseDirective {
 
 	handleCheckboxClick(): void {
 		this.input.nativeElement.focus();
+	}
+
+	ngOnInit(): void {
+		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 }

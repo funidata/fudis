@@ -1,6 +1,8 @@
-import { Component, Input, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
-import { IFudisDropdownOption } from '../../../types/forms';
+import { Component, Input, ViewEncapsulation, EventEmitter, Output, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { IFudisDropdownOption, TFudisDropdownLanguageOption } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
+import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 
 @Component({
 	selector: 'fudis-dropdown[id][label]',
@@ -8,7 +10,12 @@ import { InputBaseDirective } from '../../../directives/form/input-base/input-ba
 	styleUrls: ['./dropdown.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class DropdownComponent extends InputBaseDirective {
+export class DropdownComponent extends InputBaseDirective implements OnInit {
+	/*
+	 * FormControl for the input.
+	 */
+	@Input() control: FormControl<IFudisDropdownOption | IFudisDropdownOption[] | TFudisDropdownLanguageOption[] | null>;
+
 	/**
 	 * Dropdown options
 	 */
@@ -42,5 +49,9 @@ export class DropdownComponent extends InputBaseDirective {
 
 	handleSelectionChange(value: IFudisDropdownOption): void {
 		this.selectionUpdate.emit(value);
+	}
+
+	ngOnInit(): void {
+		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 }
