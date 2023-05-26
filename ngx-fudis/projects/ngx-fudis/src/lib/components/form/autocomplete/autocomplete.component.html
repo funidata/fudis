@@ -17,13 +17,14 @@
 			[class.fudis-autocomplete__input--invalid]="(control.invalid && control.touched) || invalidState"
 			[class.fudis-autocomplete__input--disabled]="disabled"
 			type="text"
-			[formControl]="control"
+			(blur)="autocompleteBlur($event)"
+			[formControl]="autocompleteFormControl"
 			[matAutocomplete]="autocomplete"
 			[attr.aria-describedby]="id + '_guidance'"
 			[readonly]="disabled"
 			[attr.aria-disabled]="disabled"
 			[attr.required]="requiredText ? true : null" />
-		<ng-container *ngIf="control.value">
+		<ng-container *ngIf="autocompleteFormControl.value">
 			<fudis-button
 				class="fudis-autocomplete__input__icon"
 				[size]="'icon-only'"
@@ -34,7 +35,8 @@
 				[labelHidden]="true">
 			</fudis-button>
 		</ng-container>
-		<ng-container *ngIf="!control.value || control.value === ''">
+
+		<ng-container *ngIf="!autocompleteFormControl.value || autocompleteFormControl.value === ''">
 			<fudis-icon
 				class="fudis-autocomplete__input__icon"
 				[icon]="'search'"
@@ -45,15 +47,11 @@
 	<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="id" [errorMsg]="errorMsg" [control]="control">
 	</fudis-guidance>
 
-	<mat-autocomplete
-		class="fudis-autocomplete__option-list"
-		#autocomplete="matAutocomplete"
-		autoActiveFirstOption
-		[displayWith]="displayFn">
+	<mat-autocomplete class="fudis-autocomplete__option-list" #autocomplete="matAutocomplete" autoActiveFirstOption>
 		<mat-option
 			class="fudis-autocomplete__option"
 			*ngFor="let option of filteredOptions | async"
-			[value]="option"
+			[value]="option.viewValue"
 			[disabled]="option.disabled">
 			{{ option.viewValue }}
 		</mat-option>

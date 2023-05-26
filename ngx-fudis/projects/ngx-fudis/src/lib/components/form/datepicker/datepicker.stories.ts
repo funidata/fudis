@@ -171,14 +171,14 @@ Datepicker.args = {
 	tooltip: 'Is it your birthday?',
 	tooltipPosition: 'left',
 	tooltipToggle: true,
-	control: new FormControl('', Validators.required),
+	control: new FormControl(null, Validators.required),
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
 	id: 'example-id-for-datepicker-disabled',
 	label: 'Select a date',
-	control: new FormControl(''),
+	control: new FormControl(null),
 	disabled: true,
 };
 
@@ -191,7 +191,7 @@ WithMinMaxValidator.args = {
 		matDatepickerMin: 'Date is not inside the allowed range.',
 		matDatepickerMax: 'Date is not inside the allowed range.',
 	},
-	control: new FormControl(''),
+	control: new FormControl(null),
 	minDate: new Date(2023, 2, 13),
 	maxDate: new Date(2023, 2, 26),
 };

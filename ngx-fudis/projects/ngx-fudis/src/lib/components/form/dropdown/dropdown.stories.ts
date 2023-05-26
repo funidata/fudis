@@ -56,7 +56,7 @@ SingleSelect.args = {
 	label: 'Select a pet',
 	placeholder: 'Choose a pet',
 	multipleOption: false,
-	control: new FormControl('', Validators.required),
+	control: new FormControl(null, Validators.required),
 	id: 'example-id-for-dropdown-select',
 	helpText: 'All pets are equally important, but for sake of this example please pick one.',
 	options: [
@@ -80,7 +80,7 @@ MultiSelect.args = {
 	requiredText: 'Required',
 	label: 'Select from two to three pets',
 	placeholder: 'Choose a pet',
-	control: new FormControl(undefined, [Validators.required, Validators.minLength(2), Validators.maxLength(3)]),
+	control: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(3)]),
 	id: 'example-id-for-dropdown-multi-select',
 	helpText: 'All pets are equally important, but for sake of this example please pick two to three pets.',
 	tooltip: 'Platypus is the right choise',
