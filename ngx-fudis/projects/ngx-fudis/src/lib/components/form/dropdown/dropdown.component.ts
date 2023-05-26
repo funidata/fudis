@@ -12,7 +12,7 @@ import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnin
 })
 export class DropdownComponent extends InputBaseDirective implements OnInit {
 	/*
-	 * FormControl for Radio Button group
+	 * FormControl for the input.
 	 */
 	@Input() control: FormControl<IFudisDropdownOption | IFudisDropdownOption[] | TFudisDropdownLanguageOption[] | null>;
 
