@@ -23,7 +23,7 @@ export class RadioButtonComponent {
 	/*
 	 * Selectable form value of a single Radio Button, e.g. "fair-trade-banana"
 	 */
-	@Input() value: string | boolean;
+	@Input() value: string | boolean | null;
 
 	/*
 	 * Visible label for a single Radio Button, e. g. "Fair trade banana"
