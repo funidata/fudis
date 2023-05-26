@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, Signal, ViewChild, effect } from '@angular/core';
 
 import { ErrorSummaryService } from './error-summary.service';
-import { TFudisFormErrorSummaryObject } from '../../../types/forms';
+import { TFudisFormErrorSummaryObject, TFudisFormErrorSummaryList } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-error-summary',
@@ -32,7 +32,7 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 		});
 	}
 
-	visibleErrorList: any = [];
+	visibleErrorList: TFudisFormErrorSummaryList[] = [];
 
 	getErrors(): void {
 		const fetchedErrors: Signal<TFudisFormErrorSummaryObject> = this.errorSummaryService.getVisibleErrors();
