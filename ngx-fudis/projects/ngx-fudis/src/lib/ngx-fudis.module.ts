@@ -44,7 +44,6 @@ import { GridApiDirective } from './directives/grid/grid-api.directive';
 import { GridDirective } from './directives/grid/grid.directive';
 import { GridItemComponent } from './components/grid/grid-item/grid-item.component';
 import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
-import { GridItemApiDirective } from './directives/grid/grid-item/grid-item-api.directive';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { IconComponent } from './components/icon/icon.component';
 import { InputBaseDirective } from './directives/form/input-base/input-base.directive';
@@ -94,7 +93,6 @@ import { GridService } from './directives/grid/grid-service/grid.service';
 		GridDirective,
 		GridItemComponent,
 		GridItemDirective,
-		GridItemApiDirective,
 		GuidanceComponent,
 		HeadingComponent,
 		IconComponent,
