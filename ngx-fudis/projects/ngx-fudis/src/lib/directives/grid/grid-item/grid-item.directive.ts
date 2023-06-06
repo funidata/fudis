@@ -1,4 +1,3 @@
-import { BreakpointObserver } from '@angular/cdk/layout';
 import { Directive, ElementRef, OnChanges, OnInit } from '@angular/core';
 
 import { GridItemApiDirective } from './grid-item-api.directive';
@@ -7,7 +6,7 @@ import { GridItemApiDirective } from './grid-item-api.directive';
 	selector: '[fudisGridItem]',
 })
 export class GridItemDirective extends GridItemApiDirective implements OnChanges, OnInit {
-	constructor(private gridBreakpointObserver: BreakpointObserver, private gridItemElement: ElementRef) {
+	constructor(private gridItemElement: ElementRef) {
 		super();
 	}
 

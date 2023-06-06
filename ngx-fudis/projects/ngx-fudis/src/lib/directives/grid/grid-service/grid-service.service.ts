@@ -21,9 +21,8 @@ export class GridService implements OnDestroy {
 	constructor(private gridBreakpointObserver: BreakpointObserver) {
 		gridBreakpointObserver.observe(breakpointsToObserve).subscribe((state: BreakpointState) => {
 			/*
-			 * When hitting a breakpoint, Loop through given column values for each breakpoint and if there are no given value e.g. for @Input columnsXs, apply general @Input columns value
+			 * When hitting a breakpoint, save results to a Signal
 			 */
-
 			this._currentScreenSize.set(state);
 		});
 	}

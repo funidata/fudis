@@ -60,15 +60,15 @@
 				margin-top: spacing.$spacing-xs;
 			}
 
-			&__s {
+			&__sm {
 				margin-top: spacing.$spacing-s;
 			}
 
-			&__m {
+			&__md {
 				margin-top: spacing.$spacing-m;
 			}
 
-			&__l {
+			&__lg {
 				margin-top: spacing.$spacing-l;
 			}
 
@@ -94,15 +94,15 @@
 				margin-bottom: spacing.$spacing-xs;
 			}
 
-			&__s {
+			&__sm {
 				margin-bottom: spacing.$spacing-s;
 			}
 
-			&__m {
+			&__md {
 				margin-bottom: spacing.$spacing-m;
 			}
 
-			&__l {
+			&__lg {
 				margin-bottom: spacing.$spacing-l;
 			}
 
@@ -131,17 +131,17 @@
 				margin-left: spacing.$spacing-xs;
 			}
 
-			&__s {
+			&__sm {
 				margin-right: spacing.$spacing-s;
 				margin-left: spacing.$spacing-s;
 			}
 
-			&__m {
+			&__md {
 				margin-right: spacing.$spacing-m;
 				margin-left: spacing.$spacing-m;
 			}
 
-			&__l {
+			&__lg {
 				margin-right: spacing.$spacing-l;
 				margin-left: spacing.$spacing-l;
 			}
@@ -212,7 +212,7 @@
 		}
 	}
 
-	&__l {
+	&__lg {
 		@include breakpoints.breakpoint('xs') {
 			@include grid.grid-max-width('xs');
 		}
@@ -230,7 +230,7 @@
 		}
 	}
 
-	&__m {
+	&__md {
 		@include breakpoints.breakpoint('xs') {
 			@include grid.grid-max-width('xs');
 		}
@@ -244,7 +244,7 @@
 		}
 	}
 
-	&__s {
+	&__sm {
 		@include breakpoints.breakpoint('xs') {
 			@include grid.grid-max-width('xs');
 		}
@@ -271,15 +271,15 @@
 			row-gap: spacing.$spacing-xs;
 		}
 
-		&__s {
+		&__sm {
 			row-gap: spacing.$spacing-s;
 		}
 
-		&__m {
+		&__md {
 			row-gap: spacing.$spacing-m;
 		}
 
-		&__l {
+		&__lg {
 			row-gap: spacing.$spacing-l;
 		}
 
@@ -305,15 +305,15 @@
 			column-gap: spacing.$spacing-xs;
 		}
 
-		&__s {
+		&__sm {
 			column-gap: spacing.$spacing-s;
 		}
 
-		&__m {
+		&__md {
 			column-gap: spacing.$spacing-m;
 		}
 
-		&__l {
+		&__lg {
 			column-gap: spacing.$spacing-l;
 		}
 

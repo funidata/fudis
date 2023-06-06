@@ -28,9 +28,9 @@ export const getGridClasses = (gridElement: GridAttributes) => {
 const gridBreakpoints = {
 	xxl: '(min-width: 100em)',
 	xl: '(min-width: 75em) and (max-width: 99.99em)',
-	l: '(min-width: 62em) and (max-width: 74.99em)',
-	m: '(min-width: 48em) and (max-width: 61.99em)',
-	s: '(min-width: 36em) and (max-width: 47.99em)',
+	lg: '(min-width: 62em) and (max-width: 74.99em)',
+	md: '(min-width: 48em) and (max-width: 61.99em)',
+	sm: '(min-width: 36em) and (max-width: 47.99em)',
 	xs: '(min-width: 0) and (max-width: 35.99em)',
 	default: '(min-width: 0)',
 };
@@ -42,9 +42,9 @@ const gridBreakpoints = {
 export const breakpointsToObserve = [
 	gridBreakpoints.xxl,
 	gridBreakpoints.xl,
-	gridBreakpoints.l,
-	gridBreakpoints.m,
-	gridBreakpoints.s,
+	gridBreakpoints.lg,
+	gridBreakpoints.md,
+	gridBreakpoints.sm,
 	gridBreakpoints.xs,
 	gridBreakpoints.default,
 ];
@@ -137,29 +137,29 @@ export const createColumnInputForBreakpoints = (
 	}
 
 	if (small) {
-		columnDataForBreakpoints.push({ name: 'columnsS', value: small, breakpoint: gridBreakpoints.s });
+		columnDataForBreakpoints.push({ name: 'columnsS', value: small, breakpoint: gridBreakpoints.sm });
 	} else if (columnsCssSm) {
-		columnDataForBreakpoints.push({ name: 'columnsS', value: columnsCssSm, breakpoint: gridBreakpoints.s });
+		columnDataForBreakpoints.push({ name: 'columnsS', value: columnsCssSm, breakpoint: gridBreakpoints.sm });
 	}
 	if (medium) {
-		columnDataForBreakpoints.push({ name: 'columnsM', value: medium, breakpoint: gridBreakpoints.m });
+		columnDataForBreakpoints.push({ name: 'columnsM', value: medium, breakpoint: gridBreakpoints.md });
 	} else if (columnsCssMd) {
-		columnDataForBreakpoints.push({ name: 'columnsS', value: columnsCssMd, breakpoint: gridBreakpoints.s });
+		columnDataForBreakpoints.push({ name: 'columnsS', value: columnsCssMd, breakpoint: gridBreakpoints.md });
 	}
 	if (large) {
-		columnDataForBreakpoints.push({ name: 'columnsL', value: large, breakpoint: gridBreakpoints.l });
+		columnDataForBreakpoints.push({ name: 'columnsL', value: large, breakpoint: gridBreakpoints.lg });
 	} else if (columnsCssLg) {
-		columnDataForBreakpoints.push({ name: 'columnsS', value: columnsCssLg, breakpoint: gridBreakpoints.s });
+		columnDataForBreakpoints.push({ name: 'columnsS', value: columnsCssLg, breakpoint: gridBreakpoints.lg });
 	}
 	if (xlarge) {
 		columnDataForBreakpoints.push({ name: 'columnsXl', value: xlarge, breakpoint: gridBreakpoints.xl });
 	} else if (columnsCssXl) {
-		columnDataForBreakpoints.push({ name: 'columnsS', value: columnsCssXl, breakpoint: gridBreakpoints.s });
+		columnDataForBreakpoints.push({ name: 'columnsS', value: columnsCssXl, breakpoint: gridBreakpoints.xl });
 	}
 	if (xxlarge) {
 		columnDataForBreakpoints.push({ name: 'columnsXxl', value: xxlarge, breakpoint: gridBreakpoints.xxl });
 	} else if (columnsCssXxl) {
-		columnDataForBreakpoints.push({ name: 'columnsS', value: columnsCssXxl, breakpoint: gridBreakpoints.s });
+		columnDataForBreakpoints.push({ name: 'columnsS', value: columnsCssXxl, breakpoint: gridBreakpoints.xxl });
 	}
 
 	validateColumnInputArray(columnDataForBreakpoints);
