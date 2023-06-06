@@ -1,5 +1,7 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, Signal, ViewChild, effect } from '@angular/core';
+
 import { ErrorSummaryService } from './error-summary.service';
+import { TFudisFormErrorSummaryObject, TFudisFormErrorSummaryList } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-error-summary',
@@ -24,30 +26,33 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 	 */
 	@Input() screenReaderHelpText: string | null | undefined;
 
-	constructor(private errorSummaryService: ErrorSummaryService) {}
+	constructor(private errorSummaryService: ErrorSummaryService) {
+		effect(() => {
+			this.getErrors();
+		});
+	}
 
-	visibleErrorList: any = [];
+	visibleErrorList: TFudisFormErrorSummaryList[] = [];
 
 	getErrors(): void {
-		this.errorSummaryService.getVisibleErrors().subscribe((errorsFromService) => {
-			this.visibleErrorList = [];
-			Object.keys(errorsFromService).forEach((item) => {
-				const errorId = errorsFromService[item].id;
+		const fetchedErrors: Signal<TFudisFormErrorSummaryObject> = this.errorSummaryService.getVisibleErrors();
 
-				if (this.parentComponent?.querySelector(`#${errorId}`)) {
-					const { label } = errorsFromService[item];
+		this.visibleErrorList = [];
 
-					Object.values(errorsFromService[item].errors).forEach((error: any) => {
-						this.visibleErrorList.push({ id: errorId, message: `${label}: ${error}` });
-					});
-				}
-			});
-
-			/**
-			 * Focus to Error Summary element when visible error list gets updated.
-			 */
-			this.focusToErrorSummary();
+		Object.keys(fetchedErrors()).forEach((item) => {
+			const errorId = fetchedErrors()[item].id;
+			if (this.parentComponent?.querySelector(`#${errorId}`)) {
+				const { label } = fetchedErrors()[item];
+				Object.values(fetchedErrors()[item].errors).forEach((error: any) => {
+					this.visibleErrorList.push({ id: errorId, message: `${label}: ${error}` });
+				});
+			}
 		});
+
+		/**
+		 * Focus to Error Summary element when visible error list gets updated.
+		 */
+		this.focusToErrorSummary();
 	}
 
 	ngOnInit(): void {

@@ -15,6 +15,7 @@
 			[min]="minDate"
 			[max]="maxDate"
 			[readonly]="disabled"
+			[attr.aria-disabled]="disabled ? true : null"
 			class="fudis-datepicker__input"
 			[class.fudis-datepicker__input--invalid]="(control.invalid && control.touched) || invalidState"
 			[class.fudis-datepicker__input--disabled]="disabled"

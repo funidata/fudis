@@ -63,6 +63,11 @@ export type TFudisFormErrorSummaryObject = {
 	};
 };
 
+export type TFudisFormErrorSummaryList = {
+	id: string;
+	message: string;
+};
+
 export type TFudisFormErrorSummaryObjectItemErrors = {
 	[errorType: string]: string;
 };
