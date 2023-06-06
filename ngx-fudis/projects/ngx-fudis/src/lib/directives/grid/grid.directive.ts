@@ -1,13 +1,9 @@
 import { Directive, ElementRef, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import {
-	breakpointsToObserve,
-	IFudisInputColumnObject,
-	createColumnInputForBreakpoints,
-	getGridClasses,
-	IFudisGridAttributes,
-} from './gridUtils';
+
+import { breakpointsToObserve, createColumnInputForBreakpoints, getGridClasses } from './gridUtils';
 import { GridApiDirective } from './grid-api.directive';
+import { GridAttributes, GridInputColumnObject } from '../../types/grid';
 
 @Directive({
 	selector: '[fudisGrid]',
@@ -26,9 +22,9 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	/*
 	 * Array used for applying breakpoint rules for given columns values
 	 */
-	columnsFromInput: IFudisInputColumnObject[] = [];
+	columnsFromInput: GridInputColumnObject[] = [];
 
-	gridInputObject: IFudisGridAttributes;
+	gridInputObject: GridAttributes;
 
 	ngOnInit() {
 		this.gridInputObject = {
@@ -57,7 +53,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 			/*
 			 * When hitting a breakpoint, Loop through given column values for each breakpoint and if there are no given value e.g. for @Input columnsXs, apply general @Input columns value
 			 */
-			(this.columnsFromInput as Array<IFudisInputColumnObject>).forEach((item) => {
+			(this.columnsFromInput as Array<GridInputColumnObject>).forEach((item) => {
 				if (state.breakpoints[item.breakpoint] && item.name !== 'columns') {
 					this.columnsToApply = item.value;
 					(this.gridElement.nativeElement as HTMLElement).style.gridTemplateColumns = item.value;

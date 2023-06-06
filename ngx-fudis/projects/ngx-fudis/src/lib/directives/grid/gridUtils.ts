@@ -1,35 +1,6 @@
-export interface IFudisInputColumnObject {
-	name: string; // e. g. XL or other size
-	value: string; // value to be applied to CSS grid-template-columns attribute
-	breakpoint: string; // breakpoint boundaries for this rule to happen
-}
+import { GridAttributes, GridInputColumnObject } from '../../types/grid';
 
-export type TFudisGridWidth = 'xxl' | 'xl' | 'l' | 'm' | 's' | 'xs';
-
-export type TFudisAlign = 'left' | 'right' | 'center';
-
-export type TFudisAlignItems = 'start' | 'center' | 'end' | 'stretch';
-
-export type TFudisGridMargin = 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'none';
-
-export type TFudisGridMarginSide = 'responsive' | 'none';
-
-export type TFudisSpacing = 'none' | 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
-
-export type TFudisGridGap = TFudisSpacing | 'responsive';
-
-export interface IFudisGridAttributes {
-	width: TFudisGridWidth;
-	align: TFudisAlign;
-	marginTop: TFudisGridMargin;
-	marginBottom: TFudisGridMargin;
-	rowGap: TFudisGridGap;
-	columnGap: TFudisGridGap;
-	marginSides: TFudisGridMarginSide;
-	classes: string[];
-}
-
-export const getGridClasses = (gridElement: IFudisGridAttributes) => {
+export const getGridClasses = (gridElement: GridAttributes) => {
 	let classList = [
 		'fudis-grid',
 		`fudis-grid__${gridElement.width}`,
@@ -82,7 +53,7 @@ export const breakpointsToObserve = [
  * Some validation, so that given column @Inputs are usable and valid grid-column-template values..
  */
 
-const validateColumnInputArray = (inputs: Array<IFudisInputColumnObject>) => {
+const validateColumnInputArray = (inputs: Array<GridInputColumnObject>) => {
 	inputs.forEach((item) => {
 		if (item.value.trim() === '') {
 			throw new Error(
@@ -135,7 +106,7 @@ export const createColumnInputForBreakpoints = (
 	xlarge: string,
 	xxlarge: string
 ) => {
-	const columnDataForBreakpoints: IFudisInputColumnObject[] = [];
+	const columnDataForBreakpoints: GridInputColumnObject[] = [];
 
 	const columnsCssDefault = getComputedStyle(document.documentElement).getPropertyValue('--fudis-grid-columns-default');
 

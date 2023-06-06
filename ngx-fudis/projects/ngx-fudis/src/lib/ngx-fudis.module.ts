@@ -36,13 +36,19 @@ import { ErrorSummaryService } from './components/form/error-summary/error-summa
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
 import { ExpandableContentDirective, ExpandableActionsDirective } from './components/expandable/expandable-directives';
+import { FieldSetBaseDirective } from './directives/form/fieldset-base/fieldset-base.directive';
 import { FieldSetComponent } from './components/form/fieldset/fieldset.component';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { GridComponent } from './components/grid/grid.component';
 import { GridApiDirective } from './directives/grid/grid-api.directive';
 import { GridDirective } from './directives/grid/grid.directive';
+import { GridItemComponent } from './components/grid/grid-item/grid-item.component';
+import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
+import { GridItemApiDirective } from './directives/grid/grid-item/grid-item-api.directive';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { IconComponent } from './components/icon/icon.component';
+import { InputBaseDirective } from './directives/form/input-base/input-base.directive';
+import { InputWithLanguageOptionsComponent } from './components/form/input-with-language-options/input-with-language-options.component';
 import { LabelComponent } from './components/form/label/label.component';
 import { LinkComponent } from './components/link/link.component';
 import { NotificationComponent } from './components/notification/notification.component';
@@ -54,10 +60,6 @@ import { TextInputComponent } from './components/form/text-input/text-input.comp
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
-import { InputBaseDirective } from './directives/form/input-base/input-base.directive';
-import { FieldSetBaseDirective } from './directives/form/fieldset-base/fieldset-base.directive';
-
-import { InputWithLanguageOptionsComponent } from './components/form/input-with-language-options/input-with-language-options.component';
 
 @NgModule({
 	/*
@@ -89,6 +91,9 @@ import { InputWithLanguageOptionsComponent } from './components/form/input-with-
 		GridComponent,
 		GridApiDirective,
 		GridDirective,
+		GridItemComponent,
+		GridItemDirective,
+		GridItemApiDirective,
 		GuidanceComponent,
 		HeadingComponent,
 		IconComponent,
@@ -154,6 +159,8 @@ import { InputWithLanguageOptionsComponent } from './components/form/input-with-
 		InputWithLanguageOptionsComponent,
 		GridComponent,
 		GridDirective,
+		GridItemComponent,
+		GridItemDirective,
 		GuidanceComponent,
 		HeadingComponent,
 		IconComponent,

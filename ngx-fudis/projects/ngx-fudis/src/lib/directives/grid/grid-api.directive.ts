@@ -1,12 +1,5 @@
 import { Directive, Input } from '@angular/core';
-import {
-	TFudisAlign,
-	TFudisAlignItems,
-	TFudisGridGap,
-	TFudisGridMargin,
-	TFudisGridWidth,
-	TFudisGridMarginSide,
-} from './gridUtils';
+import { GridWidth, GridMargin, GridMarginSide, GridGap, GridAlign, GridAlignItems } from '../../types/grid';
 
 @Directive({
 	selector: '[fudisGridApi]',
@@ -21,28 +14,28 @@ export class GridApiDirective {
 	 * S = Viewports smaller than 768px
 	 * Xs = Viewports smaller than 576px
 	 */
-	@Input() width: TFudisGridWidth = 'xxl';
+	@Input() width: GridWidth = 'xxl';
 
 	/**
 	 * Alignment of Grid component inside its parent
 	 */
-	@Input() align: TFudisAlign = 'center';
+	@Input() align: GridAlign = 'center';
 
 	/**
 	 * Vertical alignment of grid items in a row
 	 */
-	@Input() alignItemsY: TFudisAlignItems = 'stretch';
+	@Input() alignItemsY: GridAlignItems = 'stretch';
 
 	/**
 	 * Horizontal alignment of grid items in a row
 	 */
-	@Input() alignItemsX: TFudisAlignItems = 'stretch';
+	@Input() alignItemsX: GridAlignItems = 'stretch';
 
-	@Input() marginTop: TFudisGridMargin = 'none';
+	@Input() marginTop: GridMargin = 'none';
 
-	@Input() marginBottom: TFudisGridMargin = 'none';
+	@Input() marginBottom: GridMargin = 'none';
 
-	@Input() marginSides: TFudisGridMarginSide = 'responsive';
+	@Input() marginSides: GridMarginSide = 'responsive';
 
 	@Input() classes: string[];
 
@@ -96,11 +89,11 @@ export class GridApiDirective {
 	 * Grid column gap. Using Fudis spacing token values of xxs to xxl and 0.
 	 */
 
-	@Input() columnGap: TFudisGridGap = 'responsive';
+	@Input() columnGap: GridGap = 'responsive';
 
 	/**
 	 * Grid row gap. Using Fudis spacing token values of xxs to xxl and 0.
 	 */
 
-	@Input() rowGap: TFudisGridGap = 'responsive';
+	@Input() rowGap: GridGap = 'responsive';
 }
