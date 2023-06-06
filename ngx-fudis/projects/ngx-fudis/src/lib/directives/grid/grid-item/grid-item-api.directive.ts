@@ -6,9 +6,7 @@ type GridItemAlignment = 'start' | 'end' | 'center' | 'strecth';
 	selector: '[fudisGridItemApi]',
 })
 export class GridItemApiDirective {
-	@Input() gridColumn: string;
-
-	@Input() gridRow: string;
+	@Input() gridColumn: string | 'stretch' | 'auto' = 'auto';
 
 	@Input() alignX: GridItemAlignment = 'strecth';
 

@@ -84,6 +84,30 @@ const Template: StoryFn<GridItemComponent> = (args: any) => ({
 			<fudis-grid-item [alignX]="'start'" [alignY]="'start'">Align X & Y 'start'</fudis-grid-item>
 			<fudis-grid-item [alignX]="'end'" [alignY]="'end'">Align X & Y 'end'</fudis-grid-item>
 			<fudis-grid-item [alignX]="'center'" [alignY]="'center'">Align X & Y 'center'</fudis-grid-item>
+		</fudis-grid>
+		<fudis-grid [columns]="'1fr 1fr 1fr 1fr 1fr 1fr'">
+			<fudis-heading class="grid-test-item" tag="h1" size="l"
+				>This grid demonstrates gridColumn attribute. Parent grid has six columns of '1fr 1fr 1fr 1fr 1fr
+				1fr'</fudis-heading
+			>
+			<fudis-grid-item [gridColumn]="'stretch'">
+				<fudis-body-text>gridColumn is set to 'stretch' so it takes the full width</fudis-body-text>
+			</fudis-grid-item>
+			<fudis-grid-item>Normal grid-item</fudis-grid-item>
+			<fudis-grid-item>Normal grid-item</fudis-grid-item>
+			<fudis-grid-item [gridColumn]="'3/-1'"
+				>This item has 'gridColumn' attribute with value of '3/-1'. So it starts from the third column and streches to
+				the end</fudis-grid-item
+			>
+			<fudis-grid-item>Normal grid-item</fudis-grid-item>
+			<fudis-grid-item [gridColumn]="'2/4'"
+				>This has gridColumn value of '2/4'. So it starts from 2nd and ends in 4th column.</fudis-grid-item
+			>
+			<fudis-grid-item>Normal grid-item</fudis-grid-item>
+
+			<fudis-grid-item [gridColumn]="'5/-1'"
+				>With value of '5/-1'. Starts at 5th column and strecthes until the very end.</fudis-grid-item
+			>
 		</fudis-grid>`,
 });
 
