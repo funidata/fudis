@@ -56,7 +56,7 @@
 			<fudis-grid-item>Normal grid-item</fudis-grid-item>
 			<fudis-grid-item>Normal grid-item</fudis-grid-item>
 			<fudis-grid-item [gridColumn]="'3/-1'"
-				>This item has 'gridColumn' attribute with value of '3/-1'. So it starts from the third column and streches to
+				>This item has 'gridColumn' attribute with value of '3/-1'. So it starts from the third column and stretches to
 				the end</fudis-grid-item
 			>
 			<fudis-grid-item>Normal grid-item</fudis-grid-item>
@@ -66,7 +66,7 @@
 			<fudis-grid-item>Normal grid-item</fudis-grid-item>
 
 			<fudis-grid-item [gridColumn]="'5/-1'"
-				>With value of '5/-1'. Starts at 5th column and strecthes until the very end.</fudis-grid-item
+				>With value of '5/-1'. Starts at 5th column and stretches until the very end.</fudis-grid-item
 			>
 		</fudis-grid>`})).bind({})}}]);
-//# sourceMappingURL=components-grid-grid-item-grid-item-stories.1d0b502b.iframe.bundle.js.map
+//# sourceMappingURL=components-grid-grid-item-grid-item-stories.56cc61a4.iframe.bundle.js.map
