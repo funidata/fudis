@@ -85,7 +85,7 @@ const Template: StoryFn<GridItemComponent> = (args: any) => ({
 			<fudis-grid-item [alignX]="'end'" [alignY]="'end'">Align X & Y 'end'</fudis-grid-item>
 			<fudis-grid-item [alignX]="'center'" [alignY]="'center'">Align X & Y 'center'</fudis-grid-item>
 		</fudis-grid>
-		<fudis-grid [columns]="9">
+		<fudis-grid [columns]="6">
 			<fudis-heading class="grid-test-item" tag="h1" size="l"
 				>This grid demonstrates gridColumn attribute. Parent grid has six columns.
 			</fudis-heading>
