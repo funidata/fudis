@@ -1,19 +1,19 @@
 import { GridAttributes, GridInputColumnObject } from '../../types/grid';
 
-export const getGridClasses = (gridElement: GridAttributes) => {
+export const getGridClasses = (values: GridAttributes) => {
 	let classList = [
 		'fudis-grid',
-		`fudis-grid__${gridElement.width}`,
-		`fudis-grid__align__${gridElement.align}`,
-		`fudis-grid__margin__top__${gridElement.marginTop}`,
-		`fudis-grid__margin__bottom__${gridElement.marginBottom}`,
-		gridElement.rowGap === 'responsive' ? '' : `fudis-grid__row-gap__${gridElement.rowGap}`,
-		gridElement.columnGap === 'responsive' ? '' : `fudis-grid__column-gap__${gridElement.columnGap}`,
-		gridElement.marginSides === 'responsive' ? '' : `fudis-grid__margin__sides__${gridElement.marginSides}`,
+		`fudis-grid__${values.width}`,
+		`fudis-grid__align__${values.align}`,
+		`fudis-grid__margin__top__${values.marginTop}`,
+		`fudis-grid__margin__bottom__${values.marginBottom}`,
+		values.rowGap === 'responsive' ? '' : `fudis-grid__row-gap__${values.rowGap}`,
+		values.columnGap === 'responsive' ? '' : `fudis-grid__column-gap__${values.columnGap}`,
+		values.marginSides === 'responsive' ? '' : `fudis-grid__margin__sides__${values.marginSides}`,
 	];
 
-	if (gridElement.classes) {
-		classList = classList.concat(gridElement.classes);
+	if (values.classes) {
+		classList = classList.concat(values.classes);
 	}
 
 	const arrayToString = classList

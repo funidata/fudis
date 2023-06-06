@@ -64,21 +64,21 @@ export class GridApiDirective {
 	 * grid width is 960px
 	 * and viewport width is 992px-1199px
 	 */
-	@Input() columnsL: string;
+	@Input() columnsLg: string;
 
 	/**
 	 * Grid-template-columns when
 	 * grid width is 720px
 	 * and viewport width is 768px-991px
 	 */
-	@Input() columnsM: string;
+	@Input() columnsMd: string;
 
 	/**
 	 * Grid-template-columns when
 	 * grid width is 540px
 	 * and viewport width is 576px-767px
 	 */
-	@Input() columnsS: string;
+	@Input() columnsSm: string;
 
 	/**
 	 * Grid-template-columns when

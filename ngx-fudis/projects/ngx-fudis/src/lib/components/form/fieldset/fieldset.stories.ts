@@ -27,8 +27,8 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 				[helpText]="helpText">
 				<fudis-grid
 					[columns]="'1fr 1fr'"
-					[columnsM]="'1fr'"
-					[columnsS]="'1fr'"
+					[columnsMd]="'1fr'"
+					[columnsSm]="'1fr'"
 					[columnsXs]="'1fr'"
 					[width]="'m'"
 					[marginSides]="'none'">

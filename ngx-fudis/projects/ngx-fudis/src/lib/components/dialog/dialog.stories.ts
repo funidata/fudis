@@ -35,7 +35,7 @@ import readme from './readme.mdx';
 			</fudis-grid>
 			<fudis-description-list
 				[columns]="'1fr 1fr 1fr'"
-				[columnsS]="'1fr 1fr'"
+				[columnsSm]="'1fr 1fr'"
 				[marginSides]="'none'"
 				[columnsXs]="'1fr'"
 				[data]="[
@@ -47,7 +47,7 @@ import readme from './readme.mdx';
 			<hr />
 			<fudis-grid
 				[columns]="'1fr 1fr 1fr'"
-				[columnsS]="'1fr 1fr'"
+				[columnsSm]="'1fr 1fr'"
 				[columnsXs]="'1fr'"
 				[marginSides]="'none'"
 				[marginTop]="'s'"

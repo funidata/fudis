@@ -62,9 +62,9 @@ const Template: StoryFn<GridComponent> = (args: GridComponent) => ({
 	template: html`<fudis-grid
 		[columns]="columns"
 		[columnsXs]="columnsXs"
-		[columnsS]="columnsS"
-		[columnsM]="columnsM"
-		[columnsL]="columnsL"
+		[columnsSm]="columnsSm"
+		[columnsMd]="columnsMd"
+		[columnsLg]="columnsLg"
 		[columnsXl]="columnsXl"
 		[columnsXxl]="columnsXxl"
 		[align]="align"
@@ -106,9 +106,9 @@ export const Grid = Template.bind({});
 Grid.args = {
 	columns: '1fr 1fr 1fr',
 	columnsXs: '1fr',
-	columnsS: '1fr 1fr',
-	columnsM: undefined,
-	columnsL: undefined,
+	columnsSm: '1fr 1fr',
+	columnsMd: undefined,
+	columnsLg: undefined,
 	columnsXl: undefined,
 	columnsXxl: '1fr 1fr 1fr 1fr',
 	align: 'center',

@@ -13,17 +13,16 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	currentBreakpoints: BreakpointState | null;
 
 	constructor(private gridElement: ElementRef, private gridService: GridService) {
+		super();
+
 		effect(() => {
 			this.setColumns();
 		});
-
-		super();
 	}
 
 	/*
 	 * Default grid-template-columns value if there is none from @Inputs
 	 */
-
 	columnsToApply: string = '1fr';
 
 	/*
@@ -51,14 +50,16 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	}
 
 	ngOnInit() {
+		console.log(this.gridInputObject);
+
 		// Collect and validate grid column @Input values, which are used in ngMaterial BreakpointObserver
 
 		this.columnsFromInput = createColumnInputForBreakpoints(
 			this.columns,
 			this.columnsXs,
-			this.columnsS,
-			this.columnsM,
-			this.columnsL,
+			this.columnsSm,
+			this.columnsMd,
+			this.columnsLg,
 			this.columnsXl,
 			this.columnsXxl
 		);
