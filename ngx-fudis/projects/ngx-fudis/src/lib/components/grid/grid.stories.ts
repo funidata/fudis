@@ -72,6 +72,7 @@ const Template: StoryFn<GridComponent> = (args: GridComponent) => ({
 		[alignItemsY]="alignItemsY"
 		[marginTop]="marginTop"
 		[marginBottom]="marginBottom"
+		[marginSides]="marginSides"
 		[width]="width"
 		[columnGap]="columnGap"
 		[rowGap]="rowGap">
