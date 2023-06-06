@@ -11,6 +11,7 @@
 		[alignItemsY]="alignItemsY"
 		[marginTop]="marginTop"
 		[marginBottom]="marginBottom"
+		[marginSides]="marginSides"
 		[width]="width"
 		[columnGap]="columnGap"
 		[rowGap]="rowGap">
@@ -39,4 +40,4 @@
 			<fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
 		</div>
 	</fudis-grid>`})).bind({});Grid.args={columns:"1fr 1fr 1fr",columnsXs:"1fr",columnsSm:"1fr 1fr",columnsMd:void 0,columnsLg:void 0,columnsXl:void 0,columnsXxl:"1fr 1fr 1fr 1fr",align:"center",alignItemsX:"stretch",alignItemsY:"stretch",marginTop:"none",marginBottom:"none",marginSides:"none",width:"xxl",rowGap:"responsive",columnGap:"responsive"}}}]);
-//# sourceMappingURL=components-grid-grid-stories.62a7a202.iframe.bundle.js.map
+//# sourceMappingURL=components-grid-grid-stories.96eb83bb.iframe.bundle.js.map
