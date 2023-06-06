@@ -11,7 +11,7 @@ import readme from './readme.mdx';
 	template: `<fudis-dialog [closeButtonLabel]="'Close'" [size]="'l'">
 		<fudis-heading fudisDialogTitle tag="h2">Dialog with fudis-grid and scrollable content</fudis-heading>
 		<fudis-dialog-content>
-			<fudis-grid [marginTop]="'m'" [marginBottom]="'m'" [marginSides]="'none'">
+			<fudis-grid [marginTop]="'md'" [marginBottom]="'md'" [marginSides]="'none'">
 				<fudis-heading [tag]="'h3'" [size]="'s'">
 					I am fudis-heading inside the grid taking the whole width
 				</fudis-heading>

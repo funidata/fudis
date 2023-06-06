@@ -22,7 +22,7 @@
 			margin-right: auto;
 			margin-left: 0;
 
-			@include breakpoints.breakpoint-max('s') {
+			@include breakpoints.breakpoint-max('sm') {
 				@include grid.grid-xs-margins;
 			}
 		}
@@ -31,7 +31,7 @@
 			margin-right: auto;
 			margin-left: auto;
 
-			@include breakpoints.breakpoint-max('s') {
+			@include breakpoints.breakpoint-max('sm') {
 				@include grid.grid-xs-margins;
 			}
 		}
@@ -40,7 +40,7 @@
 			margin-right: 0;
 			margin-left: auto;
 
-			@include breakpoints.breakpoint-max('s') {
+			@include breakpoints.breakpoint-max('sm') {
 				@include grid.grid-xs-margins;
 			}
 		}
@@ -169,16 +169,16 @@
 			@include grid.grid-max-width('xs');
 		}
 
-		@include breakpoints.breakpoint('s') {
-			@include grid.grid-max-width('s');
+		@include breakpoints.breakpoint('sm') {
+			@include grid.grid-max-width('sm');
 		}
 
-		@include breakpoints.breakpoint('m') {
-			@include grid.grid-max-width('m');
+		@include breakpoints.breakpoint('md') {
+			@include grid.grid-max-width('md');
 		}
 
-		@include breakpoints.breakpoint('l') {
-			@include grid.grid-max-width('l');
+		@include breakpoints.breakpoint('lg') {
+			@include grid.grid-max-width('lg');
 		}
 
 		@include breakpoints.breakpoint('xl') {
@@ -195,16 +195,16 @@
 			@include grid.grid-max-width('xs');
 		}
 
-		@include breakpoints.breakpoint('s') {
-			@include grid.grid-max-width('s');
+		@include breakpoints.breakpoint('sm') {
+			@include grid.grid-max-width('sm');
 		}
 
-		@include breakpoints.breakpoint('m') {
-			@include grid.grid-max-width('m');
+		@include breakpoints.breakpoint('md') {
+			@include grid.grid-max-width('md');
 		}
 
-		@include breakpoints.breakpoint('l') {
-			@include grid.grid-max-width('l');
+		@include breakpoints.breakpoint('lg') {
+			@include grid.grid-max-width('lg');
 		}
 
 		@include breakpoints.breakpoint('xl') {
@@ -217,16 +217,16 @@
 			@include grid.grid-max-width('xs');
 		}
 
-		@include breakpoints.breakpoint('s') {
-			@include grid.grid-max-width('s');
+		@include breakpoints.breakpoint('sm') {
+			@include grid.grid-max-width('sm');
 		}
 
-		@include breakpoints.breakpoint('m') {
-			@include grid.grid-max-width('m');
+		@include breakpoints.breakpoint('md') {
+			@include grid.grid-max-width('md');
 		}
 
-		@include breakpoints.breakpoint('l') {
-			@include grid.grid-max-width('l');
+		@include breakpoints.breakpoint('lg') {
+			@include grid.grid-max-width('lg');
 		}
 	}
 
@@ -235,12 +235,12 @@
 			@include grid.grid-max-width('xs');
 		}
 
-		@include breakpoints.breakpoint('s') {
-			@include grid.grid-max-width('s');
+		@include breakpoints.breakpoint('sm') {
+			@include grid.grid-max-width('sm');
 		}
 
-		@include breakpoints.breakpoint('m') {
-			@include grid.grid-max-width('m');
+		@include breakpoints.breakpoint('md') {
+			@include grid.grid-max-width('md');
 		}
 	}
 
@@ -249,8 +249,8 @@
 			@include grid.grid-max-width('xs');
 		}
 
-		@include breakpoints.breakpoint('s') {
-			@include grid.grid-max-width('s');
+		@include breakpoints.breakpoint('sm') {
+			@include grid.grid-max-width('sm');
 		}
 	}
 

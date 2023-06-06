@@ -26,3 +26,13 @@ export interface GridAttributes {
 	marginSides: GridMarginSide;
 	classes: string[];
 }
+
+export interface GridColumns {
+	default?: string | number;
+	xs?: string | number;
+	sm?: string | number;
+	md?: string | number;
+	lg?: string | number;
+	xl?: string | number;
+	xxl?: string | number;
+}

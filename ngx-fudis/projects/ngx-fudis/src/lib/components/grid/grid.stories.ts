@@ -33,11 +33,11 @@ export default {
 			control: { type: 'select' },
 		},
 		rowGap: {
-			options: ['none', 'xxs', 'xs', 's', 'm', 'l', 'xl', 'xxl', 'responsive'],
+			options: ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'responsive'],
 			control: { type: 'select' },
 		},
 		columnGap: {
-			options: ['none', 'xxs', 'xs', 's', 'm', 'l', 'xl', 'xxl', 'responsive'],
+			options: ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'responsive'],
 			control: { type: 'select' },
 		},
 	},

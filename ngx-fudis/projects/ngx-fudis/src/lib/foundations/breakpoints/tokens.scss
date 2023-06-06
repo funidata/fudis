@@ -1,16 +1,16 @@
 // Meant to be used as "min-width" for breakpoints
 $breakpoint-xxl: 100em; // 1600px-;
 $breakpoint-xl: 75em; // 1200px-1599px;
-$breakpoint-l: 62em; // 992px-1199px;
-$breakpoint-m: 48em; // 768px-991px;
-$breakpoint-s: 36em; // 576px-767px;
+$breakpoint-lg: 62em; // 992px-1199px;
+$breakpoint-md: 48em; // 768px-991px;
+$breakpoint-sm: 36em; // 576px-767px;
 $breakpoint-xs: 0; // 0-575px;
 
 $breakpoints: (
 	'xxl': $breakpoint-xxl,
 	'xl': $breakpoint-xl,
-	'l': $breakpoint-l,
-	'm': $breakpoint-m,
-	's': $breakpoint-s,
+	'lg': $breakpoint-lg,
+	'md': $breakpoint-md,
+	'sm': $breakpoint-sm,
 	'xs': $breakpoint-xs,
 );

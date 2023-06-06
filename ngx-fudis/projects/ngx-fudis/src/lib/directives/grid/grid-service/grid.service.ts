@@ -2,12 +2,24 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Injectable, OnDestroy, signal } from '@angular/core';
 import { Subject } from 'rxjs';
+
+import { GridColumns } from '../../../types/grid';
 import { breakpointsToObserve } from '../gridUtils';
 
-@Injectable({
-	providedIn: 'root',
-})
+@Injectable()
 export class GridService implements OnDestroy {
+	private _defaultGridColumns = signal<GridColumns>({});
+
+	defaultGridColumns = this._defaultGridColumns.asReadonly();
+
+	setGridDefaultColumns(defaultColumns: GridColumns): void {
+		this._defaultGridColumns.set(defaultColumns);
+	}
+
+	getGridDefaultColumns(): GridColumns {
+		return this.defaultGridColumns();
+	}
+
 	destroyed = new Subject<void>();
 
 	private _currentScreenSize = signal<BreakpointState | null>(null);

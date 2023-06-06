@@ -1,4 +1,27 @@
-import { GridAttributes, GridInputColumnObject } from '../../types/grid';
+import { GridAttributes, GridColumns, GridInputColumnObject } from '../../types/grid';
+
+const gridBreakpoints = {
+	xxl: '(min-width: 100em)',
+	xl: '(min-width: 75em) and (max-width: 99.99em)',
+	lg: '(min-width: 62em) and (max-width: 74.99em)',
+	md: '(min-width: 48em) and (max-width: 61.99em)',
+	sm: '(min-width: 36em) and (max-width: 47.99em)',
+	xs: '(min-width: 0) and (max-width: 35.99em)',
+	default: '(min-width: 0)',
+};
+
+/*
+ * Array of brekpoint rules to observe, which is given to ngMaterial BreakpointObserver
+ */
+export const breakpointsToObserve = [
+	gridBreakpoints.xxl,
+	gridBreakpoints.xl,
+	gridBreakpoints.lg,
+	gridBreakpoints.md,
+	gridBreakpoints.sm,
+	gridBreakpoints.xs,
+	gridBreakpoints.default,
+];
 
 export const getGridClasses = (values: GridAttributes) => {
 	let classList = [
@@ -25,30 +48,6 @@ export const getGridClasses = (values: GridAttributes) => {
 	return arrayToString;
 };
 
-const gridBreakpoints = {
-	xxl: '(min-width: 100em)',
-	xl: '(min-width: 75em) and (max-width: 99.99em)',
-	lg: '(min-width: 62em) and (max-width: 74.99em)',
-	md: '(min-width: 48em) and (max-width: 61.99em)',
-	sm: '(min-width: 36em) and (max-width: 47.99em)',
-	xs: '(min-width: 0) and (max-width: 35.99em)',
-	default: '(min-width: 0)',
-};
-
-/*
- * Array of brekpoint rules to observe, which is given to ngMaterial BreakpointObserver
- */
-
-export const breakpointsToObserve = [
-	gridBreakpoints.xxl,
-	gridBreakpoints.xl,
-	gridBreakpoints.lg,
-	gridBreakpoints.md,
-	gridBreakpoints.sm,
-	gridBreakpoints.xs,
-	gridBreakpoints.default,
-];
-
 /*
  * Some validation, so that given column @Inputs are usable and valid grid-column-template values..
  */
@@ -63,12 +62,6 @@ const validateColumnInputArray = (inputs: Array<GridInputColumnObject>) => {
 
 		if (item.value.includes('px')) {
 			throw new Error(`Your fudis-grid column input of "${item.name}" should not contain px values.`);
-		}
-
-		if (item.value.includes('repeat')) {
-			throw new Error(
-				`Your fudis-grid column "${item.name}" input contains a "repeat" CSS function for grid-template-columns. Currently fudis-grid doesn't allow it.`
-			);
 		}
 
 		/*
@@ -97,69 +90,123 @@ const validateColumnInputArray = (inputs: Array<GridInputColumnObject>) => {
 	});
 };
 
+const defineColumnValue = (value: string | number): string => {
+	if (typeof value === 'number') {
+		return `repeat(${value}, 1fr)`;
+	}
+	return value;
+};
+
 export const createColumnInputForBreakpoints = (
-	defaultValue: string,
-	xsmall: string,
-	small: string,
-	medium: string,
-	large: string,
-	xlarge: string,
-	xxlarge: string
+	defaultValue: string | number,
+	xsmall: string | number,
+	small: string | number,
+	medium: string | number,
+	large: string | number,
+	xlarge: string | number,
+	xxlarge: string | number,
+	appDefaults: GridColumns
 ) => {
 	const columnDataForBreakpoints: GridInputColumnObject[] = [];
 
-	const columnsCssDefault = getComputedStyle(document.documentElement).getPropertyValue('--fudis-grid-columns-default');
-
-	const columnsCssXs = getComputedStyle(document.documentElement).getPropertyValue('--fudis-grid-columns-xs');
-
-	const columnsCssSm = getComputedStyle(document.documentElement).getPropertyValue('--fudis-grid-columns-sm');
-
-	const columnsCssMd = getComputedStyle(document.documentElement).getPropertyValue('--fudis-grid-columns-md');
-
-	const columnsCssLg = getComputedStyle(document.documentElement).getPropertyValue('--fudis-grid-columns-lg');
-
-	const columnsCssXl = getComputedStyle(document.documentElement).getPropertyValue('--fudis-grid-columns-xl');
-
-	const columnsCssXxl = getComputedStyle(document.documentElement).getPropertyValue('--fudis-grid-columns-xxl');
-
-	if (defaultValue !== '1fr') {
-		columnDataForBreakpoints.push({ name: 'columns', value: defaultValue, breakpoint: gridBreakpoints.default });
-	} else if (columnsCssDefault) {
-		columnDataForBreakpoints.push({ name: 'columns', value: columnsCssDefault, breakpoint: gridBreakpoints.default });
+	if (defaultValue !== 'default') {
+		columnDataForBreakpoints.push({
+			name: 'columns',
+			value: defineColumnValue(defaultValue),
+			breakpoint: gridBreakpoints.default,
+		});
+	} else if (appDefaults.default) {
+		columnDataForBreakpoints.push({
+			name: 'columns',
+			value: defineColumnValue(appDefaults.default),
+			breakpoint: gridBreakpoints.default,
+		});
 	} else {
-		columnDataForBreakpoints.push({ name: 'columns', value: defaultValue, breakpoint: gridBreakpoints.default });
+		columnDataForBreakpoints.push({
+			name: 'columns',
+			value: '1fr',
+			breakpoint: gridBreakpoints.default,
+		});
 	}
 
 	if (xsmall) {
-		columnDataForBreakpoints.push({ name: 'columnsXs', value: xsmall, breakpoint: gridBreakpoints.xs });
-	} else if (columnsCssXs) {
-		columnDataForBreakpoints.push({ name: 'columnsXs', value: columnsCssXs, breakpoint: gridBreakpoints.xs });
+		columnDataForBreakpoints.push({
+			name: 'columnsXs',
+			value: defineColumnValue(xsmall),
+			breakpoint: gridBreakpoints.xs,
+		});
+	} else if (appDefaults.xs) {
+		columnDataForBreakpoints.push({
+			name: 'columnsXs',
+			value: defineColumnValue(appDefaults.xs),
+			breakpoint: gridBreakpoints.xs,
+		});
 	}
 
 	if (small) {
-		columnDataForBreakpoints.push({ name: 'columnsS', value: small, breakpoint: gridBreakpoints.sm });
-	} else if (columnsCssSm) {
-		columnDataForBreakpoints.push({ name: 'columnsS', value: columnsCssSm, breakpoint: gridBreakpoints.sm });
+		columnDataForBreakpoints.push({
+			name: 'columnsSm',
+			value: defineColumnValue(small),
+			breakpoint: gridBreakpoints.sm,
+		});
+	} else if (appDefaults.sm) {
+		columnDataForBreakpoints.push({
+			name: 'columnsSm',
+			value: defineColumnValue(appDefaults.sm),
+			breakpoint: gridBreakpoints.sm,
+		});
 	}
 	if (medium) {
-		columnDataForBreakpoints.push({ name: 'columnsM', value: medium, breakpoint: gridBreakpoints.md });
-	} else if (columnsCssMd) {
-		columnDataForBreakpoints.push({ name: 'columnsS', value: columnsCssMd, breakpoint: gridBreakpoints.md });
+		columnDataForBreakpoints.push({
+			name: 'columnsMd',
+			value: defineColumnValue(medium),
+			breakpoint: gridBreakpoints.md,
+		});
+	} else if (appDefaults.md) {
+		columnDataForBreakpoints.push({
+			name: 'columnsMd',
+			value: defineColumnValue(appDefaults.md),
+			breakpoint: gridBreakpoints.md,
+		});
 	}
 	if (large) {
-		columnDataForBreakpoints.push({ name: 'columnsL', value: large, breakpoint: gridBreakpoints.lg });
-	} else if (columnsCssLg) {
-		columnDataForBreakpoints.push({ name: 'columnsS', value: columnsCssLg, breakpoint: gridBreakpoints.lg });
+		columnDataForBreakpoints.push({
+			name: 'columnsLg',
+			value: defineColumnValue(large),
+			breakpoint: gridBreakpoints.lg,
+		});
+	} else if (appDefaults.lg) {
+		columnDataForBreakpoints.push({
+			name: 'columnsLg',
+			value: defineColumnValue(appDefaults.lg),
+			breakpoint: gridBreakpoints.lg,
+		});
 	}
 	if (xlarge) {
-		columnDataForBreakpoints.push({ name: 'columnsXl', value: xlarge, breakpoint: gridBreakpoints.xl });
-	} else if (columnsCssXl) {
-		columnDataForBreakpoints.push({ name: 'columnsS', value: columnsCssXl, breakpoint: gridBreakpoints.xl });
+		columnDataForBreakpoints.push({
+			name: 'columnsXl',
+			value: defineColumnValue(xlarge),
+			breakpoint: gridBreakpoints.xl,
+		});
+	} else if (appDefaults.xl) {
+		columnDataForBreakpoints.push({
+			name: 'columnsXl',
+			value: defineColumnValue(appDefaults.xl),
+			breakpoint: gridBreakpoints.xl,
+		});
 	}
 	if (xxlarge) {
-		columnDataForBreakpoints.push({ name: 'columnsXxl', value: xxlarge, breakpoint: gridBreakpoints.xxl });
-	} else if (columnsCssXxl) {
-		columnDataForBreakpoints.push({ name: 'columnsS', value: columnsCssXxl, breakpoint: gridBreakpoints.xxl });
+		columnDataForBreakpoints.push({
+			name: 'columnsXxl',
+			value: defineColumnValue(xxlarge),
+			breakpoint: gridBreakpoints.xxl,
+		});
+	} else if (appDefaults.xxl) {
+		columnDataForBreakpoints.push({
+			name: 'columnsXxl',
+			value: defineColumnValue(appDefaults.xxl),
+			breakpoint: gridBreakpoints.xxl,
+		});
 	}
 
 	validateColumnInputArray(columnDataForBreakpoints);

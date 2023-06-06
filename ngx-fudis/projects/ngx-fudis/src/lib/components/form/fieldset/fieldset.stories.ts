@@ -30,7 +30,7 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 					[columnsMd]="'1fr'"
 					[columnsSm]="'1fr'"
 					[columnsXs]="'1fr'"
-					[width]="'m'"
+					[width]="'md'"
 					[marginSides]="'none'">
 					<fudis-input-with-language-options
 						[missingLanguage]="'Missing'"

@@ -4,7 +4,7 @@ import { BreakpointState } from '@angular/cdk/layout';
 import { createColumnInputForBreakpoints, getGridClasses } from './gridUtils';
 import { GridApiDirective } from './grid-api.directive';
 import { GridAttributes, GridInputColumnObject } from '../../types/grid';
-import { GridService } from './grid-service/grid-service.service';
+import { GridService } from './grid-service/grid.service';
 
 @Directive({
 	selector: '[fudisGrid]',
@@ -21,11 +21,6 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	}
 
 	/*
-	 * Default grid-template-columns value if there is none from @Inputs
-	 */
-	columnsToApply: string = '1fr';
-
-	/*
 	 * Array used for applying breakpoint rules for given columns values
 	 */
 	columnsFromInput: GridInputColumnObject[] = [];
@@ -40,18 +35,27 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		 */
 		(this.columnsFromInput as Array<GridInputColumnObject>).forEach((item) => {
 			if (this.currentBreakpoints?.breakpoints[item.breakpoint] && item.name !== 'columns') {
-				this.columnsToApply = item.value;
 				(this.gridElement.nativeElement as HTMLElement).style.gridTemplateColumns = item.value;
 			} else if (this.currentBreakpoints?.breakpoints[item.breakpoint] && item.name === 'columns') {
-				this.columnsToApply = item.value;
 				(this.gridElement.nativeElement as HTMLElement).style.gridTemplateColumns = item.value;
 			}
 		});
 	}
 
-	ngOnInit() {
-		console.log(this.gridInputObject);
+	getInputObject(): GridAttributes {
+		return {
+			width: this.width,
+			align: this.align,
+			marginTop: this.marginTop,
+			marginBottom: this.marginBottom,
+			rowGap: this.rowGap,
+			columnGap: this.columnGap,
+			classes: this.classes,
+			marginSides: this.marginSides,
+		};
+	}
 
+	ngOnInit() {
 		// Collect and validate grid column @Input values, which are used in ngMaterial BreakpointObserver
 
 		this.columnsFromInput = createColumnInputForBreakpoints(
@@ -61,21 +65,13 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 			this.columnsMd,
 			this.columnsLg,
 			this.columnsXl,
-			this.columnsXxl
+			this.columnsXxl,
+			this.gridService.getGridDefaultColumns()
 		);
 
 		this.setColumns();
 
-		this.gridInputObject = {
-			width: this.width,
-			align: this.align,
-			marginTop: this.marginTop,
-			marginBottom: this.marginBottom,
-			rowGap: this.rowGap,
-			columnGap: this.columnGap,
-			classes: this.classes,
-			marginSides: this.marginSides,
-		};
+		this.gridInputObject = this.getInputObject();
 
 		(this.gridElement.nativeElement as HTMLElement).classList.value = getGridClasses(this.gridInputObject);
 
@@ -84,16 +80,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	}
 
 	ngOnChanges(): void {
-		this.gridInputObject = {
-			width: this.width,
-			align: this.align,
-			marginTop: this.marginTop,
-			marginBottom: this.marginBottom,
-			rowGap: this.rowGap,
-			columnGap: this.columnGap,
-			classes: this.classes,
-			marginSides: this.marginSides,
-		};
+		this.gridInputObject = this.getInputObject();
 
 		(this.gridElement.nativeElement as HTMLElement).classList.value = getGridClasses(this.gridInputObject);
 

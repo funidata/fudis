@@ -7,7 +7,7 @@
 </ng-template>
 
 <ng-template #withGrid>
-	<fudis-grid [rowGap]="'xs'">
+	<fudis-grid [rowGap]="'none'" [columns]="'1fr'">
 		<ng-container *ngTemplateOutlet="content"></ng-container>
 	</fudis-grid>
 </ng-template>

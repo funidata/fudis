@@ -43,48 +43,48 @@ export class GridApiDirective {
 	/**
 	 * Default grid-template-columns value applied to all widths. Suggested values for native CSS grid are fr units.
 	 */
-	@Input() columns: string = '1fr';
+	@Input() columns: string | number = 'default';
 
 	/**
 	 * Grid-template-columns when
 	 * grid width is 1540px
 	 * and viewport width is larger than 1599px
 	 */
-	@Input() columnsXxl: string;
+	@Input() columnsXxl: string | number;
 
 	/**
 	 * Grid-template-columns when
 	 * grid width is 1040px
 	 * and viewport width is 1200px-1599px
 	 */
-	@Input() columnsXl: string;
+	@Input() columnsXl: string | number;
 
 	/**
 	 * Grid-template-columns when
 	 * grid width is 960px
 	 * and viewport width is 992px-1199px
 	 */
-	@Input() columnsLg: string;
+	@Input() columnsLg: string | number;
 
 	/**
 	 * Grid-template-columns when
 	 * grid width is 720px
 	 * and viewport width is 768px-991px
 	 */
-	@Input() columnsMd: string;
+	@Input() columnsMd: string | number;
 
 	/**
 	 * Grid-template-columns when
 	 * grid width is 540px
 	 * and viewport width is 576px-767px
 	 */
-	@Input() columnsSm: string;
+	@Input() columnsSm: string | number;
 
 	/**
 	 * Grid-template-columns when
 	 * viewport width is smaller than 576px
 	 */
-	@Input() columnsXs: string;
+	@Input() columnsXs: string | number;
 
 	/**
 	 * Grid column gap. Using Fudis spacing token values of xxs to xxl and 0.

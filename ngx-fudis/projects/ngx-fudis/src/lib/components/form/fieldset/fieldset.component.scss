@@ -21,12 +21,12 @@
 	&__legend {
 		display: flex;
 		flex-direction: column;
-		margin-bottom: spacing.$spacing-xs;
+		grid-column: 1/-1;
 		padding: 0;
 		width: 100%;
 
 		&__title {
-			@include typography.text-field-label;
+			@include typography.heading-xs;
 
 			&__text {
 				@include colorMixins.text-color('gray-dark');
@@ -47,7 +47,6 @@
 			@include colorMixins.text-color('gray-dark');
 			@include typography.body-text-s-regular;
 
-			margin-top: spacing.$spacing-xs;
 			margin-bottom: spacing.$spacing-xs;
 		}
 	}

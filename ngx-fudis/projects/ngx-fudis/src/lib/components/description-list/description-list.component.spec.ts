@@ -5,6 +5,7 @@ import { GridComponent } from '../grid/grid.component';
 import { GridDirective } from '../../directives/grid/grid.directive';
 
 import { DescriptionListComponent } from './description-list.component';
+import { GridService } from '../../directives/grid/grid-service/grid.service';
 
 describe('DescriptionListComponent', () => {
 	let component: DescriptionListComponent;
@@ -13,6 +14,7 @@ describe('DescriptionListComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [DescriptionListComponent, GridDirective, MockComponent(GridComponent)],
+			providers: [GridService],
 		}).compileComponents();
 	});
 

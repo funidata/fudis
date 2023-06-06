@@ -9,7 +9,7 @@
 			@content;
 		}
 	} @else {
-		@error 'Unknown minimum breakpoint of #{$breakpoint}. Accepted arguments are: "xxl", "xl", "l", "m", "s", "xs".';
+		@error 'Unknown minimum breakpoint of #{$breakpoint}. Accepted arguments are: "xxl", "xl", "lg", "md", "sm", "xs".';
 	}
 }
 
@@ -22,6 +22,6 @@
 			@content;
 		}
 	} @else {
-		@error 'Unknown maximum breakpoint of #{$breakpoint}. Accepted arguments are: "xxl", "xl", "l", "m", and "s"';
+		@error 'Unknown maximum breakpoint of #{$breakpoint}. Accepted arguments are: "xxl", "xl", "lg", "md", and "sm"';
 	}
 }

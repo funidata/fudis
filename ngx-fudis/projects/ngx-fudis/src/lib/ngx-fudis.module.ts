@@ -60,7 +60,7 @@ import { TextInputComponent } from './components/form/text-input/text-input.comp
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
-import { GridService } from './directives/grid/grid-service/grid-service.service';
+import { GridService } from './directives/grid/grid-service/grid.service';
 
 @NgModule({
 	/*
