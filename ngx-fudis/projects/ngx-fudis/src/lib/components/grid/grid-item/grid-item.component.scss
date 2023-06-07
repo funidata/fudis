@@ -6,8 +6,6 @@
 .fudis-grid-item {
 	@include utilities.box-reset;
 
-	border: 2px solid cornflowerblue;
-
 	&__justify-self {
 		&__start {
 			justify-self: start;
@@ -21,7 +19,7 @@
 			justify-self: center;
 		}
 
-		&__strecth {
+		&__stretch {
 			justify-self: stretch;
 		}
 	}
@@ -39,7 +37,7 @@
 			align-self: center;
 		}
 
-		&__strecth {
+		&__stretch {
 			align-self: stretch;
 		}
 	}

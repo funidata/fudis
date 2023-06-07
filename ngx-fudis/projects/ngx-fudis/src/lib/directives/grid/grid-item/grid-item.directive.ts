@@ -1,6 +1,6 @@
 import { Directive, ElementRef, OnChanges, OnInit, Input } from '@angular/core';
 
-type GridItemAlignment = 'start' | 'end' | 'center' | 'strecth';
+type GridItemAlignment = 'start' | 'end' | 'center' | 'stretch';
 
 type GridItemColumnSpan = string | 'stretch' | 'auto';
 
@@ -20,9 +20,9 @@ interface GridItemColumn {
 export class GridItemDirective implements OnInit, OnChanges {
 	@Input() columns: GridItemColumnSpan | GridItemColumn = 'auto';
 
-	@Input() alignX: GridItemAlignment = 'strecth';
+	@Input() alignX: GridItemAlignment = 'stretch';
 
-	@Input() alignY: GridItemAlignment = 'strecth';
+	@Input() alignY: GridItemAlignment = 'stretch';
 
 	constructor(private gridItemElement: ElementRef) {}
 
