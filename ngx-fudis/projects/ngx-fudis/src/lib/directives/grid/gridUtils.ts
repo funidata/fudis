@@ -1,6 +1,6 @@
 import { GridAttributes, GridColumns, GridInputColumnObject } from '../../types/grid';
 
-const gridBreakpoints = {
+export const gridBreakpoints = {
 	xxl: '(min-width: 100em)',
 	xl: '(min-width: 75em) and (max-width: 99.99em)',
 	lg: '(min-width: 62em) and (max-width: 74.99em)',

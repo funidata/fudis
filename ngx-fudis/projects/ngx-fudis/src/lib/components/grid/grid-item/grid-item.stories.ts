@@ -9,7 +9,7 @@ export default {
 	component: GridItemComponent,
 	parameters: {
 		controls: {
-			exclude: ['ngOnChanges', 'ngOnInit'],
+			exclude: ['ngOnChanges', 'ngOnInit', 'currentBreakpoints', 'setAlign', 'setColumns'],
 		},
 	},
 	decorators: [
@@ -215,14 +215,12 @@ export const columns: StoryFn<GridItemComponent> = (args: any) => ({
 		<fudis-grid-item class="grid-item"><fudis-body-text>Normal grid-item</fudis-body-text></fudis-grid-item>
 		<fudis-grid-item class="grid-item-highlight" [columns]="'3/-1'"
 			><fudis-body-text
-				>columns = '3/-1', so it starts from the third column and stretches to the end</fudis-body-text
+				>columns = '3/-1', so it starts from the 3rd column and stretches to the end</fudis-body-text
 			></fudis-grid-item
 		>
 		<fudis-grid-item class="grid-item"><fudis-body-text>Normal grid-item</fudis-body-text></fudis-grid-item>
-		<fudis-grid-item class="grid-item-highlight" [columns]="'2/4'"
-			><fudis-body-text
-				>columns = '2/4', so it starts from 2nd and ends in 4th column.</fudis-body-text
-			></fudis-grid-item
+		<fudis-grid-item class="grid-item-highlight" [columns]="2"
+			><fudis-body-text>columns = 2, so it spans 2 columns from where it starts.</fudis-body-text></fudis-grid-item
 		>
 		<fudis-grid-item class="grid-item" class="grid-item"
 			><fudis-body-text>Normal grid-item</fudis-body-text></fudis-grid-item
@@ -231,6 +229,35 @@ export const columns: StoryFn<GridItemComponent> = (args: any) => ({
 			><fudis-body-text
 				>columns = '5/-1', so it starts 5th column and stretches until the very end.</fudis-body-text
 			></fudis-grid-item
+		>
+	</fudis-grid>`,
+});
+
+export const responsiveColumns: StoryFn<GridItemComponent> = () => ({
+	props: {
+		exampleOne: { default: '1/4', xs: 'stretch' },
+		exampleOneString: "{'default: '1/4', xs: 'stretch'}",
+		exampleTwo: { xs: '4/-1' },
+		exampleTwoString: "{ xs: '4/-1' }",
+		exampleThree: { default: 4, xs: 5 },
+		exampleThreeString: '{ default: 3, xs: 5 }',
+	},
+	template: html`<fudis-grid [columns]="6">
+		<fudis-heading [tag]="'h1'" [size]="'l'"
+			>This grid demonstrates responsive 'columns' attribute for a Grid Item. Parent grid has six columns.
+		</fudis-heading>
+		<fudis-grid-item class="grid-item-highlight" [columns]="exampleOne">
+			<fudis-body-text>columns="{{exampleOneString}}"</fudis-body-text>
+		</fudis-grid-item>
+		<fudis-body-text class="grid-item">Normal grid-item</fudis-body-text>
+		<fudis-body-text class="grid-item">Normal grid-item</fudis-body-text>
+		<fudis-body-text class="grid-item">Normal grid-item</fudis-body-text>
+		<fudis-grid-item class="grid-item-highlight" [columns]="exampleTwo"
+			><fudis-body-text>columns="{{exampleTwoString}}"</fudis-body-text></fudis-grid-item
+		>
+		<fudis-grid-item class="grid-item"><fudis-body-text>Normal grid-item</fudis-body-text></fudis-grid-item>
+		<fudis-grid-item class="grid-item-highlight" [columns]="exampleThree"
+			><fudis-body-text>columns="{{exampleThreeString}}"</fudis-body-text></fudis-grid-item
 		>
 	</fudis-grid>`,
 });
