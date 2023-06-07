@@ -237,10 +237,10 @@ export const responsiveColumns: StoryFn<GridItemComponent> = () => ({
 	props: {
 		exampleOne: { default: '1/4', xs: 'stretch' },
 		exampleOneString: "{'default: '1/4', xs: 'stretch'}",
-		exampleTwo: { xs: '4/-1' },
-		exampleTwoString: "{ xs: '4/-1' }",
-		exampleThree: { default: 4, xs: 5 },
-		exampleThreeString: '{ default: 3, xs: 5 }',
+		exampleTwo: { xs: '4/-1', md: 2, default: 'stretch' },
+		exampleTwoString: "{ xs: '4/-1', md: 2, default: 'stretch' }",
+		exampleThree: { md: 3, xs: 'stretch' },
+		exampleThreeString: "{ xs: 'stretch', md:3  }",
 	},
 	template: html`<fudis-grid [columns]="6">
 		<fudis-heading [tag]="'h1'" [size]="'l'"

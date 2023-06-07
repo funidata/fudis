@@ -4,7 +4,7 @@ import { Injectable, OnDestroy, signal } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { GridColumns } from '../../../types/grid';
-import { breakpointsToObserve } from '../gridUtils';
+import { breakpointsToObserve, breakpointsMinWidthToObserve } from '../gridUtils';
 
 @Injectable()
 export class GridService implements OnDestroy {
@@ -30,12 +30,27 @@ export class GridService implements OnDestroy {
 		return this.currentScreenSize();
 	}
 
+	private _currentScreenMinWidth = signal<BreakpointState | null>(null);
+
+	currentScreenMinWidth = this._currentScreenMinWidth.asReadonly();
+
+	getBreakpointMinWidthState(): BreakpointState | null {
+		return this.currentScreenMinWidth();
+	}
+
 	constructor(private gridBreakpointObserver: BreakpointObserver) {
 		gridBreakpointObserver.observe(breakpointsToObserve).subscribe((state: BreakpointState) => {
 			/*
 			 * When hitting a breakpoint, save results to a Signal
 			 */
 			this._currentScreenSize.set(state);
+		});
+
+		gridBreakpointObserver.observe(breakpointsMinWidthToObserve).subscribe((state: BreakpointState) => {
+			/*
+			 * When hitting a breakpoint, save results to a Signal
+			 */
+			this._currentScreenMinWidth.set(state);
 		});
 	}
 

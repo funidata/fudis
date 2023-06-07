@@ -2,7 +2,7 @@
 import { Directive, ElementRef, OnChanges, OnInit, Input, effect } from '@angular/core';
 import { BreakpointState } from '@angular/cdk/layout';
 import { GridService } from '../grid-service/grid.service';
-import { gridBreakpoints } from '../gridUtils';
+import { gridBreakpoints, gridBreakpointsMinWidth } from '../gridUtils';
 import { GridInputColumnObject } from '../../../types/grid';
 
 type GridItemAlignment = 'start' | 'end' | 'center' | 'stretch';
@@ -27,7 +27,11 @@ export class GridItemDirective implements OnInit, OnChanges {
 
 	private _currentBreakpoints: BreakpointState | null;
 
+	private _currentBreakpointsMinWidth: BreakpointState | null;
+
 	private _columns: GridItemWidth | GridInputColumnObject[];
+
+	private _hasDefault: boolean = false;
 
 	@Input() set columns(value: GridItemWidth | GridItemColumn) {
 		if (!value) {
@@ -39,25 +43,31 @@ export class GridItemDirective implements OnInit, OnChanges {
 		} else {
 			const columnsArray: GridInputColumnObject[] = [];
 
-			if (!value.default) {
-				columnsArray.push({
-					name: 'default',
-					value: this._gridColumnDefault,
-					breakpoint: gridBreakpoints.default,
-				});
-			}
+			const sortOrder = ['default', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
+
+			this._hasDefault = !!value.default;
 
 			Object.keys(value).forEach((item) => {
+				const breakpoint = this._hasDefault
+					? gridBreakpoints[item as keyof GridItemColumn]
+					: gridBreakpointsMinWidth[item as keyof GridItemColumn];
+
 				columnsArray.push({
 					name: item,
 					value: this.setValue(value[item as keyof GridItemColumn]),
-					breakpoint: gridBreakpoints[item as keyof GridItemColumn],
+					breakpoint,
 				});
 			});
-			this._columns = columnsArray;
+
+			const sortedColumnsArray = columnsArray.sort((a, b) => {
+				return sortOrder.indexOf(a.name) - sortOrder.indexOf(b.name);
+			});
+
+			this._columns = sortedColumnsArray;
 		}
 	}
 
+	// eslint-disable-next-line class-methods-use-this
 	setValue(value: string | number): string {
 		if (typeof value === 'number') {
 			return `span ${value}`;
@@ -83,16 +93,20 @@ export class GridItemDirective implements OnInit, OnChanges {
 
 	setColumns(): void {
 		this._currentBreakpoints = this.gridService.getBreakpointState();
+
+		this._currentBreakpointsMinWidth = this.gridService.getBreakpointMinWidthState();
+
 		if (typeof this._columns === 'string') {
 			(this.gridItemElement.nativeElement as HTMLElement).style.gridColumn =
 				this._columns === 'stretch' ? '1/-1' : this._columns;
 		} else if (this._columns && typeof this._columns !== 'number') {
-			console.log(this._columns);
+			const breakpointsToLoop = this._hasDefault ? this._currentBreakpoints : this._currentBreakpointsMinWidth;
+
 			this._columns.forEach((item) => {
-				if (this._currentBreakpoints?.breakpoints[item.breakpoint] && item.name !== 'default') {
+				if (breakpointsToLoop?.breakpoints[item.breakpoint] && item.name !== 'default') {
 					(this.gridItemElement.nativeElement as HTMLElement).style.gridColumn =
 						item.value === 'stretch' ? '1/-1' : item.value;
-				} else if (this._currentBreakpoints?.breakpoints[item.breakpoint] && item.name === 'default') {
+				} else if (breakpointsToLoop?.breakpoints[item.breakpoint] && item.name === 'default') {
 					(this.gridItemElement.nativeElement as HTMLElement).style.gridColumn =
 						item.value === 'stretch' ? '1/-1' : item.value;
 				}
@@ -104,13 +118,11 @@ export class GridItemDirective implements OnInit, OnChanges {
 		(this.gridItemElement.nativeElement as HTMLElement).classList.add('fudis-grid-item');
 
 		this.setAlign();
-
 		this.setColumns();
 	}
 
 	ngOnChanges(): void {
 		this.setAlign();
-
 		this.setColumns();
 	}
 }

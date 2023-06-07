@@ -10,6 +10,16 @@ export const gridBreakpoints = {
 	default: '(min-width: 0)',
 };
 
+export const gridBreakpointsMinWidth = {
+	xxl: '(min-width: 100em)',
+	xl: '(min-width: 75em)',
+	lg: '(min-width: 62em)',
+	md: '(min-width: 48em)',
+	sm: '(min-width: 36em)',
+	xs: '(min-width: 0)',
+	default: '(min-width: 0)',
+};
+
 /*
  * Array of brekpoint rules to observe, which is given to ngMaterial BreakpointObserver
  */
@@ -21,6 +31,19 @@ export const breakpointsToObserve = [
 	gridBreakpoints.sm,
 	gridBreakpoints.xs,
 	gridBreakpoints.default,
+];
+
+/*
+ * Array of brekpoint rules to observe, which is given to ngMaterial BreakpointObserver
+ */
+export const breakpointsMinWidthToObserve = [
+	gridBreakpointsMinWidth.xxl,
+	gridBreakpointsMinWidth.xl,
+	gridBreakpointsMinWidth.lg,
+	gridBreakpointsMinWidth.md,
+	gridBreakpointsMinWidth.sm,
+	gridBreakpointsMinWidth.xs,
+	gridBreakpointsMinWidth.default,
 ];
 
 export const getGridClasses = (values: GridAttributes) => {
