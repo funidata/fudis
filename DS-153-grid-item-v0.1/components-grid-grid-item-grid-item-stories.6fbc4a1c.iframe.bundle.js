@@ -1,4 +1,4 @@
-"use strict";(self.webpackChunkngx_fudis=self.webpackChunkngx_fudis||[]).push([[9625],{"./projects/ngx-fudis/src/lib/components/grid/grid-item/grid-item.stories.ts":(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{__webpack_require__.r(__webpack_exports__),__webpack_require__.d(__webpack_exports__,{AlignX:()=>AlignX,AlignY:()=>AlignY,Example:()=>Example,alignXAndY:()=>alignXAndY,columns:()=>columns,default:()=>__WEBPACK_DEFAULT_EXPORT__});var _storybook_angular__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__("./node_modules/@storybook/angular/dist/index.mjs"),_grid_item_component__WEBPACK_IMPORTED_MODULE_1__=__webpack_require__("./projects/ngx-fudis/src/lib/components/grid/grid-item/grid-item.component.ts");const html=String.raw,__WEBPACK_DEFAULT_EXPORT__={title:"Components/Grid/Grid Item",component:_grid_item_component__WEBPACK_IMPORTED_MODULE_1__.b,parameters:{controls:{exclude:["ngOnChanges","ngOnInit"]}},decorators:[(0,_storybook_angular__WEBPACK_IMPORTED_MODULE_0__.componentWrapperDecorator)((story=>html`
+"use strict";(self.webpackChunkngx_fudis=self.webpackChunkngx_fudis||[]).push([[9625],{"./projects/ngx-fudis/src/lib/components/grid/grid-item/grid-item.stories.ts":(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{__webpack_require__.r(__webpack_exports__),__webpack_require__.d(__webpack_exports__,{AlignX:()=>AlignX,AlignY:()=>AlignY,Example:()=>Example,alignXAndY:()=>alignXAndY,columns:()=>columns,default:()=>__WEBPACK_DEFAULT_EXPORT__,responsiveColumns:()=>responsiveColumns});var _storybook_angular__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__("./node_modules/@storybook/angular/dist/index.mjs"),_grid_item_component__WEBPACK_IMPORTED_MODULE_1__=__webpack_require__("./projects/ngx-fudis/src/lib/components/grid/grid-item/grid-item.component.ts");const html=String.raw,__WEBPACK_DEFAULT_EXPORT__={title:"Components/Grid/Grid Item",component:_grid_item_component__WEBPACK_IMPORTED_MODULE_1__.b,parameters:{controls:{exclude:["ngOnChanges","ngOnInit","currentBreakpoints","setAlign","setColumns"]}},decorators:[(0,_storybook_angular__WEBPACK_IMPORTED_MODULE_0__.componentWrapperDecorator)((story=>html`
 				<style>
 					.grid-item-highlight {
 						background-color: #fdefb4;
@@ -152,14 +152,12 @@
 		<fudis-grid-item class="grid-item"><fudis-body-text>Normal grid-item</fudis-body-text></fudis-grid-item>
 		<fudis-grid-item class="grid-item-highlight" [columns]="'3/-1'"
 			><fudis-body-text
-				>columns = '3/-1', so it starts from the third column and stretches to the end</fudis-body-text
+				>columns = '3/-1', so it starts from the 3rd column and stretches to the end</fudis-body-text
 			></fudis-grid-item
 		>
 		<fudis-grid-item class="grid-item"><fudis-body-text>Normal grid-item</fudis-body-text></fudis-grid-item>
-		<fudis-grid-item class="grid-item-highlight" [columns]="'2/4'"
-			><fudis-body-text
-				>columns = '2/4', so it starts from 2nd and ends in 4th column.</fudis-body-text
-			></fudis-grid-item
+		<fudis-grid-item class="grid-item-highlight" [columns]="2"
+			><fudis-body-text>columns = 2, so it spans 2 columns from where it starts.</fudis-body-text></fudis-grid-item
 		>
 		<fudis-grid-item class="grid-item" class="grid-item"
 			><fudis-body-text>Normal grid-item</fudis-body-text></fudis-grid-item
@@ -169,5 +167,22 @@
 				>columns = '5/-1', so it starts 5th column and stretches until the very end.</fudis-body-text
 			></fudis-grid-item
 		>
+	</fudis-grid>`}),responsiveColumns=()=>({props:{exampleOne:{default:"1/4",xs:"stretch"},exampleOneString:"{'default: '1/4', xs: 'stretch'}",exampleTwo:{xs:"4/-1",md:2,default:"stretch"},exampleTwoString:"{ xs: '4/-1', md: 2, default: 'stretch' }",exampleThree:{md:3,xs:"stretch"},exampleThreeString:"{ xs: 'stretch', md:3  }"},template:html`<fudis-grid [columns]="6">
+		<fudis-heading [tag]="'h1'" [size]="'l'"
+			>This grid demonstrates responsive 'columns' attribute for a Grid Item. Parent grid has six columns.
+		</fudis-heading>
+		<fudis-grid-item class="grid-item-highlight" [columns]="exampleOne">
+			<fudis-body-text>columns="{{exampleOneString}}"</fudis-body-text>
+		</fudis-grid-item>
+		<fudis-body-text class="grid-item">Normal grid-item</fudis-body-text>
+		<fudis-body-text class="grid-item">Normal grid-item</fudis-body-text>
+		<fudis-body-text class="grid-item">Normal grid-item</fudis-body-text>
+		<fudis-grid-item class="grid-item-highlight" [columns]="exampleTwo"
+			><fudis-body-text>columns="{{exampleTwoString}}"</fudis-body-text></fudis-grid-item
+		>
+		<fudis-grid-item class="grid-item"><fudis-body-text>Normal grid-item</fudis-body-text></fudis-grid-item>
+		<fudis-grid-item class="grid-item-highlight" [columns]="exampleThree"
+			><fudis-body-text>columns="{{exampleThreeString}}"</fudis-body-text></fudis-grid-item
+		>
 	</fudis-grid>`});AlignX.parameters={controls:{disable:!0}},AlignY.parameters={controls:{disable:!0}},alignXAndY.parameters={controls:{disable:!0}},columns.parameters={controls:{disable:!0}}}}]);
-//# sourceMappingURL=components-grid-grid-item-grid-item-stories.a9d0b1f9.iframe.bundle.js.map
+//# sourceMappingURL=components-grid-grid-item-grid-item-stories.6fbc4a1c.iframe.bundle.js.map
