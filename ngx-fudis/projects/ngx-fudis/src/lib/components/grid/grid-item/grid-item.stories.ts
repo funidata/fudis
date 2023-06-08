@@ -191,7 +191,7 @@ export const AlignY: StoryFn<GridItemComponent> = (args: any) => ({
 
 export const alignXAndY: StoryFn<GridItemComponent> = (args: any) => ({
 	props: args,
-	template: html`<fudis-grid [columns]="2">
+	template: html`<fudis-grid [columns]="2" [width]="'sm'">
 		<fudis-heading [tag]="'h1'" [size]="'l'">This grid demonstrates combination of 'alignX' and 'alignY'</fudis-heading>
 		<fudis-grid-item class="grid-item-highlight">
 			<fudis-body-text>alignX = 'stretch' & alignY = 'stretch' (default)</fudis-body-text>
