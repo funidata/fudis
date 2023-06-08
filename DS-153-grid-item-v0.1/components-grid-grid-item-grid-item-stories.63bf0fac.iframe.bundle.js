@@ -124,7 +124,7 @@
 				boom.</fudis-body-text
 			></fudis-grid-item
 		>
-	</fudis-grid>`}),alignXAndY=args=>({props:args,template:html`<fudis-grid [columns]="2">
+	</fudis-grid>`}),alignXAndY=args=>({props:args,template:html`<fudis-grid [columns]="2" [width]="'sm'">
 		<fudis-heading [tag]="'h1'" [size]="'l'">This grid demonstrates combination of 'alignX' and 'alignY'</fudis-heading>
 		<fudis-grid-item class="grid-item-highlight">
 			<fudis-body-text>alignX = 'stretch' & alignY = 'stretch' (default)</fudis-body-text>
@@ -202,4 +202,4 @@
 			><fudis-body-text>columns="{{exampleThreeString}}"</fudis-body-text></fudis-grid-item
 		>
 	</fudis-grid> `});AlignX.parameters={controls:{disable:!0}},AlignY.parameters={controls:{disable:!0}},alignXAndY.parameters={controls:{disable:!0}},columns.parameters={controls:{disable:!0}},responsiveColumns.parameters={controls:{disable:!0}}}}]);
-//# sourceMappingURL=components-grid-grid-item-grid-item-stories.276b8b59.iframe.bundle.js.map
+//# sourceMappingURL=components-grid-grid-item-grid-item-stories.63bf0fac.iframe.bundle.js.map
