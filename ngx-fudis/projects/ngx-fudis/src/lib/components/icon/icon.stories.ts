@@ -122,7 +122,7 @@ export const AllIcons: StoryFn = () => ({
 		iconsArray,
 	},
 	template: `
-	<fudis-grid [columns]="'1fr 1fr 1fr 1fr'" [columnsXs]="'1fr 1fr'" [width]="'s'" [marginSides]="'none'">
+	<fudis-grid [columns]="'1fr 1fr 1fr 1fr'" [width]="'s'" [marginSides]="'none'">
 		<div class="storybook-flex" style="margin: 0.25rem; justify-content: space-between;" *ngFor="let icon of iconsArray;">
 		<fudis-body-text>{{icon}}</fudis-body-text>
 		<fudis-icon [icon]="icon"></fudis-icon>

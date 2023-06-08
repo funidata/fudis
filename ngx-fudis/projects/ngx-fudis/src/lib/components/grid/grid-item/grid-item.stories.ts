@@ -9,7 +9,16 @@ export default {
 	component: GridItemComponent,
 	parameters: {
 		controls: {
-			exclude: ['ngOnChanges', 'ngOnInit', 'currentBreakpoints', 'setAlign', 'setColumns'],
+			exclude: [
+				'ngOnChanges',
+				'ngOnInit',
+				'currentBreakpoints',
+				'setAlign',
+				'setColumns',
+				'_columns',
+				'_currentBreakpoints',
+				'_gridColumnDefault',
+			],
 		},
 	},
 	decorators: [
@@ -17,20 +26,23 @@ export default {
 			(story) => html`
 				<style>
 					.grid-item-highlight {
+						padding: 0.5rem;
 						background-color: #fdefb4;
 					}
 
 					.grid-item {
+						padding: 0.5rem;
 						background-color: #f1f1f1;
 					}
 
 					.grid-refresh-text {
 						width: 10rem;
+						margin-bottom: 2rem;
 					}
 				</style>
 				<fudis-body-text class="grid-refresh-text" [size]="'s-regular'">
-					If canvas doesn't refresh on knobs change, press toolbar's refresh button.
-				</fudis-body-text>
+					&uarr; Click 'Remount' refresh button from the toolbar to refresh canvas.</fudis-body-text
+				>
 				${story}
 			`
 		),
@@ -41,9 +53,16 @@ const Template: StoryFn<GridItemComponent> = (args: any) => ({
 	props: args,
 
 	template: html`<fudis-grid [columns]="4">
-		<fudis-heading [tag]="'h1'" [size]="'l'">This grid demonstrates adjusting a single item in a grid </fudis-heading>
+		<fudis-grid-item [columns]="'stretch'">
+			<fudis-heading [tag]="'h1'" [size]="'l'">This grid demonstrates adjusting a single item in a grid.</fudis-heading>
+			<fudis-body-text>Too see alignX and alignY clearly, make sure the preview canvas is wide enough.</fudis-body-text>
+			<fudis-body-text
+				>If the canvas do not refresh when changing knobs, click the refresh button from top of Storybook's
+				toolbar.</fudis-body-text
+			></fudis-grid-item
+		>
 		<fudis-grid-item class="grid-item-highlight" [alignX]="alignX" [alignY]="alignY" [columns]="columns">
-			<fudis-body-text>Adjustable grid item.</fudis-body-text>
+			<fudis-body-text>Adjustable grid item</fudis-body-text>
 		</fudis-grid-item>
 		<fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
 		<fudis-body-text class="grid-item"
@@ -71,7 +90,7 @@ Example.argTypes = {
 		control: { type: 'radio' },
 	},
 	columns: {
-		options: ['stretch', 'auto', '1/3', '2/4', '2/-1'],
+		options: ['stretch', 'auto', 2, '2/4', '2/-1'],
 		control: { type: 'radio' },
 	},
 };
@@ -235,32 +254,40 @@ export const columns: StoryFn<GridItemComponent> = (args: any) => ({
 
 export const responsiveColumns: StoryFn<GridItemComponent> = () => ({
 	props: {
-		exampleOne: { default: '1/4', xs: 'stretch' },
-		exampleOneString: "{'default: '1/4', xs: 'stretch'}",
-		exampleTwo: { xs: '4/-1', md: 2, default: 'stretch' },
-		exampleTwoString: "{ xs: '4/-1', md: 2, default: 'stretch' }",
-		exampleThree: { md: 3, xs: 'stretch' },
-		exampleThreeString: "{ xs: 'stretch', md:3  }",
+		exampleOne: { xs: 'stretch', md: 3, lg: 1 },
+		exampleOneString: "{'xs: 'stretch', md: 3, lg: 'auto'}",
+		exampleTwo: { default: '4/-1', md: 2 },
+		exampleTwoString: "{ default: '4/-1', md: 2 }",
+		exampleThree: { xs: '2/-1', md: 3, lg: '2/-1' },
+		exampleThreeString: "{ xs: '2/-1', md: 3, lg: '2/-1' }",
 	},
 	template: html`<fudis-grid [columns]="6">
-		<fudis-heading [tag]="'h1'" [size]="'l'"
-			>This grid demonstrates responsive 'columns' attribute for a Grid Item. Parent grid has six columns.
-		</fudis-heading>
+		<fudis-grid-item [columns]="'stretch'">
+			<fudis-heading [tag]="'h1'" [size]="'l'"
+				>This grid demonstrates responsive 'columns' attribute for a Grid Item. Parent grid has six columns.
+			</fudis-heading>
+			<fudis-body-text
+				>Try resizing canvas width, so different span widths for items are applied on different
+				breakpoints.</fudis-body-text
+			>
+		</fudis-grid-item>
+
 		<fudis-grid-item class="grid-item-highlight" [columns]="exampleOne">
 			<fudis-body-text>columns="{{exampleOneString}}"</fudis-body-text>
 		</fudis-grid-item>
 		<fudis-body-text class="grid-item">Normal grid-item</fudis-body-text>
 		<fudis-body-text class="grid-item">Normal grid-item</fudis-body-text>
-		<fudis-body-text class="grid-item">Normal grid-item</fudis-body-text>
-		<fudis-grid-item class="grid-item-highlight" [columns]="exampleTwo"
-			><fudis-body-text>columns="{{exampleTwoString}}"</fudis-body-text></fudis-grid-item
-		>
-		<fudis-grid-item class="grid-item"><fudis-body-text>Normal grid-item</fudis-body-text></fudis-grid-item>
-		<fudis-grid-item class="grid-item-highlight" [columns]="exampleThree"
-			><fudis-body-text>columns="{{exampleThreeString}}"</fudis-body-text></fudis-grid-item
-		>
 	</fudis-grid>`,
 });
+
+// <fudis-body-text class="grid-item">Normal grid-item</fudis-body-text>
+// 		<fudis-grid-item class="grid-item-highlight" [columns]="exampleTwo"
+// 			><fudis-body-text>columns="{{exampleTwoString}}"</fudis-body-text></fudis-grid-item
+// 		>
+// 		<fudis-grid-item class="grid-item"><fudis-body-text>Normal grid-item</fudis-body-text></fudis-grid-item>
+// 		<fudis-grid-item class="grid-item-highlight" [columns]="exampleThree"
+// 			><fudis-body-text>columns="{{exampleThreeString}}"</fudis-body-text></fudis-grid-item
+// 		>
 
 AlignX.parameters = {
 	controls: { disable: true },
@@ -275,5 +302,9 @@ alignXAndY.parameters = {
 };
 
 columns.parameters = {
+	controls: { disable: true },
+};
+
+responsiveColumns.parameters = {
 	controls: { disable: true },
 };

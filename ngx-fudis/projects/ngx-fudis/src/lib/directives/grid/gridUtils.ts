@@ -1,4 +1,10 @@
-import { GridAttributes, GridColumns, GridInputColumnObject } from '../../types/grid';
+import {
+	GridAttributes,
+	GridColumnsResponsive,
+	GridResponsiveData,
+	gridColumnDefault,
+	gridItemDefault,
+} from '../../types/grid';
 
 export const gridBreakpoints = {
 	xxl: '(min-width: 100em)',
@@ -75,7 +81,7 @@ export const getGridClasses = (values: GridAttributes) => {
  * Some validation, so that given column @Inputs are usable and valid grid-column-template values..
  */
 
-const validateColumnInputArray = (inputs: Array<GridInputColumnObject>) => {
+export const validateColumnInputArray = (inputs: Array<GridResponsiveData>) => {
 	inputs.forEach((item) => {
 		if (item.value.trim() === '') {
 			throw new Error(
@@ -113,126 +119,41 @@ const validateColumnInputArray = (inputs: Array<GridInputColumnObject>) => {
 	});
 };
 
-const defineColumnValue = (value: string | number): string => {
+export const getGridCssValue = (value: number | string, isGridItem?: boolean): string => {
 	if (typeof value === 'number') {
-		return `repeat(${value}, 1fr)`;
+		if (!isGridItem) {
+			return `repeat(${value}, 1fr)`;
+		}
+		return `span ${value}`;
+	}
+	if (value === 'stretch' && isGridItem) {
+		return '1/-1';
 	}
 	return value;
 };
 
-export const createColumnInputForBreakpoints = (
-	defaultValue: string | number,
-	xsmall: string | number,
-	small: string | number,
-	medium: string | number,
-	large: string | number,
-	xlarge: string | number,
-	xxlarge: string | number,
-	appDefaults: GridColumns
-) => {
-	const columnDataForBreakpoints: GridInputColumnObject[] = [];
+export const getGridBreakpointRules = (values: GridColumnsResponsive, isGridItem?: boolean): GridResponsiveData[] => {
+	const columnsArray: GridResponsiveData[] = [];
 
-	if (defaultValue !== 'default') {
-		columnDataForBreakpoints.push({
-			name: 'columns',
-			value: defineColumnValue(defaultValue),
-			breakpoint: gridBreakpoints.default,
-		});
-	} else if (appDefaults.default) {
-		columnDataForBreakpoints.push({
-			name: 'columns',
-			value: defineColumnValue(appDefaults.default),
-			breakpoint: gridBreakpoints.default,
-		});
-	} else {
-		columnDataForBreakpoints.push({
-			name: 'columns',
-			value: '1fr',
-			breakpoint: gridBreakpoints.default,
+	if (!values.default) {
+		columnsArray.push({
+			name: 'default',
+			value: isGridItem ? gridItemDefault : gridColumnDefault,
+			breakpoint: gridBreakpointsMinWidth.default,
 		});
 	}
 
-	if (xsmall) {
-		columnDataForBreakpoints.push({
-			name: 'columnsXs',
-			value: defineColumnValue(xsmall),
-			breakpoint: gridBreakpoints.xs,
-		});
-	} else if (appDefaults.xs) {
-		columnDataForBreakpoints.push({
-			name: 'columnsXs',
-			value: defineColumnValue(appDefaults.xs),
-			breakpoint: gridBreakpoints.xs,
-		});
-	}
+	Object.keys(values).forEach((key) => {
+		const value = values[key as keyof GridColumnsResponsive]!;
 
-	if (small) {
-		columnDataForBreakpoints.push({
-			name: 'columnsSm',
-			value: defineColumnValue(small),
-			breakpoint: gridBreakpoints.sm,
-		});
-	} else if (appDefaults.sm) {
-		columnDataForBreakpoints.push({
-			name: 'columnsSm',
-			value: defineColumnValue(appDefaults.sm),
-			breakpoint: gridBreakpoints.sm,
-		});
-	}
-	if (medium) {
-		columnDataForBreakpoints.push({
-			name: 'columnsMd',
-			value: defineColumnValue(medium),
-			breakpoint: gridBreakpoints.md,
-		});
-	} else if (appDefaults.md) {
-		columnDataForBreakpoints.push({
-			name: 'columnsMd',
-			value: defineColumnValue(appDefaults.md),
-			breakpoint: gridBreakpoints.md,
-		});
-	}
-	if (large) {
-		columnDataForBreakpoints.push({
-			name: 'columnsLg',
-			value: defineColumnValue(large),
-			breakpoint: gridBreakpoints.lg,
-		});
-	} else if (appDefaults.lg) {
-		columnDataForBreakpoints.push({
-			name: 'columnsLg',
-			value: defineColumnValue(appDefaults.lg),
-			breakpoint: gridBreakpoints.lg,
-		});
-	}
-	if (xlarge) {
-		columnDataForBreakpoints.push({
-			name: 'columnsXl',
-			value: defineColumnValue(xlarge),
-			breakpoint: gridBreakpoints.xl,
-		});
-	} else if (appDefaults.xl) {
-		columnDataForBreakpoints.push({
-			name: 'columnsXl',
-			value: defineColumnValue(appDefaults.xl),
-			breakpoint: gridBreakpoints.xl,
-		});
-	}
-	if (xxlarge) {
-		columnDataForBreakpoints.push({
-			name: 'columnsXxl',
-			value: defineColumnValue(xxlarge),
-			breakpoint: gridBreakpoints.xxl,
-		});
-	} else if (appDefaults.xxl) {
-		columnDataForBreakpoints.push({
-			name: 'columnsXxl',
-			value: defineColumnValue(appDefaults.xxl),
-			breakpoint: gridBreakpoints.xxl,
-		});
-	}
+		const valueToForward = getGridCssValue(value, isGridItem);
 
-	validateColumnInputArray(columnDataForBreakpoints);
+		columnsArray.push({
+			name: key as keyof GridColumnsResponsive,
+			value: valueToForward,
+			breakpoint: gridBreakpointsMinWidth[key as keyof GridColumnsResponsive],
+		});
+	});
 
-	return columnDataForBreakpoints;
+	return columnsArray;
 };

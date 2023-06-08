@@ -51,7 +51,7 @@ const TemplateWithDl: StoryFn<DescriptionListComponent> = () => ({
 		</fudis-grid>
 		<fudis-description-list [data]="testData" [marginBottom]="'xl'"></fudis-description-list>
 
-		<fudis-grid [columns]="columns" [columnsXs]="'1fr'">
+		<fudis-grid [columns]="columns">
 			<fudis-heading tag="h2" size="m"
 				>And here below is a Fudis Grid where DL item is used as child component</fudis-heading
 			>

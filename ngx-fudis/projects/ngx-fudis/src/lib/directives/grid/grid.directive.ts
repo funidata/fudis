@@ -1,21 +1,26 @@
+/* eslint-disable no-underscore-dangle */
 import { Directive, ElementRef, OnChanges, OnInit, effect } from '@angular/core';
 import { BreakpointState } from '@angular/cdk/layout';
 
-import { createColumnInputForBreakpoints, getGridClasses } from './gridUtils';
+import { getGridClasses } from './gridUtils';
 import { GridApiDirective } from './grid-api.directive';
-import { GridAttributes, GridInputColumnObject } from '../../types/grid';
+import { GridAttributes, GridResponsiveData } from '../../types/grid';
 import { GridService } from './grid-service/grid.service';
 
 @Directive({
 	selector: '[fudisGrid]',
 })
 export class GridDirective extends GridApiDirective implements OnInit, OnChanges {
-	currentBreakpoints: BreakpointState | null;
+	private _breakpointState: BreakpointState | null;
 
-	constructor(private gridElement: ElementRef, private gridService: GridService) {
-		super();
+	private _element: HTMLElement;
 
+	constructor(private _gridElement: ElementRef, private gridService: GridService) {
+		super(gridService);
+
+		this._element = _gridElement.nativeElement;
 		effect(() => {
+			this._gridService.getBreakpointState();
 			this.setColumns();
 		});
 	}
@@ -23,24 +28,22 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	/*
 	 * Array used for applying breakpoint rules for given columns values
 	 */
-	columnsFromInput: GridInputColumnObject[] = [];
+	columnsFromInput: GridResponsiveData[] = [];
 
 	gridInputObject: GridAttributes;
 
 	setColumns(): void {
-		this.currentBreakpoints = this.gridService.getBreakpointState();
-
-		/*
-		 * When hitting a breakpoint, Loop through given column values for each breakpoint and if there are no given value e.g. for @Input columnsXs, apply general @Input columns value
-		 */
-		(this.columnsFromInput as Array<GridInputColumnObject>).forEach((item) => {
-			if (this.currentBreakpoints?.breakpoints[item.breakpoint] && item.name !== 'columns') {
-				(this.gridElement.nativeElement as HTMLElement).style.gridTemplateColumns = item.value;
-			} else if (this.currentBreakpoints?.breakpoints[item.breakpoint] && item.name === 'columns') {
-				(this.gridElement.nativeElement as HTMLElement).style.gridTemplateColumns = item.value;
-			}
-		});
+		this._gridService.setGridAttributes(this._element, this._columns);
 	}
+
+	setAlign(): void {
+		this._element.style.alignItems = this.alignItemsY;
+		this._element.style.justifyItems = this.alignItemsX;
+	}
+
+	/*
+	 * When hitting a breakpoint, Loop through given column values for each breakpoint and if there are no given value e.g. for @Input columnsXs, apply general @Input columns value
+	 */
 
 	getInputObject(): GridAttributes {
 		return {
@@ -56,35 +59,19 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	}
 
 	ngOnInit() {
-		// Collect and validate grid column @Input values, which are used in ngMaterial BreakpointObserver
-
-		this.columnsFromInput = createColumnInputForBreakpoints(
-			this.columns,
-			this.columnsXs,
-			this.columnsSm,
-			this.columnsMd,
-			this.columnsLg,
-			this.columnsXl,
-			this.columnsXxl,
-			this.gridService.getGridDefaultColumns()
-		);
-
+		this.setAlign();
 		this.setColumns();
 
 		this.gridInputObject = this.getInputObject();
 
-		(this.gridElement.nativeElement as HTMLElement).classList.value = getGridClasses(this.gridInputObject);
-
-		(this.gridElement.nativeElement as HTMLElement).style.alignItems = this.alignItemsY;
-		(this.gridElement.nativeElement as HTMLElement).style.justifyItems = this.alignItemsX;
+		this._element.classList.value = getGridClasses(this.gridInputObject);
 	}
 
 	ngOnChanges(): void {
+		this.setAlign();
+		this.setColumns();
 		this.gridInputObject = this.getInputObject();
 
-		(this.gridElement.nativeElement as HTMLElement).classList.value = getGridClasses(this.gridInputObject);
-
-		(this.gridElement.nativeElement as HTMLElement).style.alignItems = this.alignItemsY;
-		(this.gridElement.nativeElement as HTMLElement).style.justifyItems = this.alignItemsX;
+		this._element.classList.value = getGridClasses(this.gridInputObject);
 	}
 }

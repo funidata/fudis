@@ -25,8 +25,6 @@ export class DescriptionListComponent extends GridApiDirective {
 
 	@Input() disableGrid: boolean = false;
 
-	override columns = '1fr 1fr';
-
 	getClasses(): string[] {
 		const cssClasses = [];
 

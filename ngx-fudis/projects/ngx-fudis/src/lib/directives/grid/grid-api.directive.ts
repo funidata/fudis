@@ -1,6 +1,19 @@
+/* eslint-disable no-underscore-dangle */
 import { Directive, Input } from '@angular/core';
-import { GridWidth, GridMarginSide, GridGap, GridAlign, GridAlignItems } from '../../types/grid';
+import {
+	GridWidth,
+	GridMarginSide,
+	GridGap,
+	GridAlign,
+	GridAlignItems,
+	GridColumnsResponsive,
+	GridResponsiveData,
+	gridColumnDefault,
+} from '../../types/grid';
 import { Spacing } from '../../types/spacing';
+
+import { GridService } from './grid-service/grid.service';
+import { getGridCssValue } from './gridUtils';
 
 @Directive({
 	selector: '[fudisGridApi]',
@@ -40,51 +53,32 @@ export class GridApiDirective {
 
 	@Input() classes: string[];
 
-	/**
-	 * Default grid-template-columns value applied to all widths. Suggested values for native CSS grid are fr units.
-	 */
-	@Input() columns: string | number = 'default';
+	_columns: string | GridResponsiveData[] = gridColumnDefault;
+
+	_gridService: GridService;
 
 	/**
-	 * Grid-template-columns when
-	 * grid width is 1540px
-	 * and viewport width is larger than 1599px
+	 * Setting of columns for the grid. Input will be converted to native CSS grid grid-template-columns values
+	 * E. g. as native string: [columns]="'1fr 1fr'" or [columns]="'1fr 2fr'"
+	 * E. g. as number [columns]="6", which converts to 'repeat(6, 1fr)'
+	 *
+	 * For responsive grid behavior, provide GridColumns object.
+	 * E. g. [columns]="{md: 2, xl: 3}".
+	 * Before md breakpoint Grid has default of '1fr' columns.
+	 * After md breakpoint it will have two columns 'repeat(2, 1fr)'
+	 * And after xl breakpoint 'repeat(3, 1fr)'
 	 */
-	@Input() columnsXxl: string | number;
-
-	/**
-	 * Grid-template-columns when
-	 * grid width is 1040px
-	 * and viewport width is 1200px-1599px
-	 */
-	@Input() columnsXl: string | number;
-
-	/**
-	 * Grid-template-columns when
-	 * grid width is 960px
-	 * and viewport width is 992px-1199px
-	 */
-	@Input() columnsLg: string | number;
-
-	/**
-	 * Grid-template-columns when
-	 * grid width is 720px
-	 * and viewport width is 768px-991px
-	 */
-	@Input() columnsMd: string | number;
-
-	/**
-	 * Grid-template-columns when
-	 * grid width is 540px
-	 * and viewport width is 576px-767px
-	 */
-	@Input() columnsSm: string | number;
-
-	/**
-	 * Grid-template-columns when
-	 * viewport width is smaller than 576px
-	 */
-	@Input() columnsXs: string | number;
+	@Input() set columns(value: string | number | GridColumnsResponsive) {
+		if (!value) {
+			this._columns = this._gridService.createGridBreakpointObject();
+		} else if (typeof value === 'string') {
+			this._columns = value;
+		} else if (typeof value === 'number') {
+			this._columns = getGridCssValue(value);
+		} else {
+			this._columns = this._gridService.createGridBreakpointObject(value);
+		}
+	}
 
 	/**
 	 * Grid column gap. Using Fudis spacing token values of xxs to xxl and 0.
@@ -97,4 +91,8 @@ export class GridApiDirective {
 	 */
 
 	@Input() rowGap: GridGap = 'responsive';
+
+	constructor(gridService: GridService) {
+		this._gridService = gridService;
+	}
 }
