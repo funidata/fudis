@@ -1,25 +1,35 @@
-"use strict";(self.webpackChunkngx_fudis=self.webpackChunkngx_fudis||[]).push([[9625],{"./projects/ngx-fudis/src/lib/components/grid/grid-item/grid-item.stories.ts":(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{__webpack_require__.r(__webpack_exports__),__webpack_require__.d(__webpack_exports__,{AlignX:()=>AlignX,AlignY:()=>AlignY,Example:()=>Example,alignXAndY:()=>alignXAndY,columns:()=>columns,default:()=>__WEBPACK_DEFAULT_EXPORT__,responsiveColumns:()=>responsiveColumns});var _storybook_angular__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__("./node_modules/@storybook/angular/dist/index.mjs"),_grid_item_component__WEBPACK_IMPORTED_MODULE_1__=__webpack_require__("./projects/ngx-fudis/src/lib/components/grid/grid-item/grid-item.component.ts");const html=String.raw,__WEBPACK_DEFAULT_EXPORT__={title:"Components/Grid/Grid Item",component:_grid_item_component__WEBPACK_IMPORTED_MODULE_1__.b,parameters:{controls:{exclude:["ngOnChanges","ngOnInit","currentBreakpoints","setAlign","setColumns"]}},decorators:[(0,_storybook_angular__WEBPACK_IMPORTED_MODULE_0__.componentWrapperDecorator)((story=>html`
+"use strict";(self.webpackChunkngx_fudis=self.webpackChunkngx_fudis||[]).push([[9625],{"./projects/ngx-fudis/src/lib/components/grid/grid-item/grid-item.stories.ts":(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{__webpack_require__.r(__webpack_exports__),__webpack_require__.d(__webpack_exports__,{AlignX:()=>AlignX,AlignY:()=>AlignY,Example:()=>Example,alignXAndY:()=>alignXAndY,columns:()=>columns,default:()=>__WEBPACK_DEFAULT_EXPORT__,responsiveColumns:()=>responsiveColumns});var _storybook_angular__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__("./node_modules/@storybook/angular/dist/index.mjs"),_grid_item_component__WEBPACK_IMPORTED_MODULE_1__=__webpack_require__("./projects/ngx-fudis/src/lib/components/grid/grid-item/grid-item.component.ts");const html=String.raw,__WEBPACK_DEFAULT_EXPORT__={title:"Components/Grid/Grid Item",component:_grid_item_component__WEBPACK_IMPORTED_MODULE_1__.b,parameters:{controls:{exclude:["ngOnChanges","ngOnInit","currentBreakpoints","setAlign","setColumns","_columns","_currentBreakpoints","_gridColumnDefault"]}},decorators:[(0,_storybook_angular__WEBPACK_IMPORTED_MODULE_0__.componentWrapperDecorator)((story=>html`
 				<style>
 					.grid-item-highlight {
+						padding: 0.5rem;
 						background-color: #fdefb4;
 					}
 
 					.grid-item {
+						padding: 0.5rem;
 						background-color: #f1f1f1;
 					}
 
 					.grid-refresh-text {
 						width: 10rem;
+						margin-bottom: 2rem;
 					}
 				</style>
 				<fudis-body-text class="grid-refresh-text" [size]="'s-regular'">
-					If canvas doesn't refresh on knobs change, press toolbar's refresh button.
-				</fudis-body-text>
+					&uarr; Click 'Remount' refresh button from the toolbar to refresh canvas.</fudis-body-text
+				>
 				${story}
 			`))]},Example=(args=>({props:args,template:html`<fudis-grid [columns]="4">
-		<fudis-heading [tag]="'h1'" [size]="'l'">This grid demonstrates adjusting a single item in a grid </fudis-heading>
+		<fudis-grid-item [columns]="'stretch'">
+			<fudis-heading [tag]="'h1'" [size]="'l'">This grid demonstrates adjusting a single item in a grid.</fudis-heading>
+			<fudis-body-text>Too see alignX and alignY clearly, make sure the preview canvas is wide enough.</fudis-body-text>
+			<fudis-body-text
+				>If the canvas do not refresh when changing knobs, click the refresh button from top of Storybook's
+				toolbar.</fudis-body-text
+			></fudis-grid-item
+		>
 		<fudis-grid-item class="grid-item-highlight" [alignX]="alignX" [alignY]="alignY" [columns]="columns">
-			<fudis-body-text>Adjustable grid item.</fudis-body-text>
+			<fudis-body-text>Adjustable grid item</fudis-body-text>
 		</fudis-grid-item>
 		<fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
 		<fudis-body-text class="grid-item"
@@ -30,7 +40,7 @@
 		<fudis-body-text class="grid-item"
 			>Normal grid item. With more content so effects of adjusting a single element can be seen better.</fudis-body-text
 		>
-	</fudis-grid>`})).bind({});Example.args={alignX:"stretch",alignY:"stretch",columns:"auto"},Example.argTypes={alignX:{control:{type:"radio"}},alignY:{control:{type:"radio"}},columns:{options:["stretch","auto","1/3","2/4","2/-1"],control:{type:"radio"}}};const AlignX=args=>({props:args,template:html`<fudis-grid [columns]="3">
+	</fudis-grid>`})).bind({});Example.args={alignX:"stretch",alignY:"stretch",columns:"auto"},Example.argTypes={alignX:{control:{type:"radio"}},alignY:{control:{type:"radio"}},columns:{options:["stretch","auto",2,"2/4","2/-1"],control:{type:"radio"}}};const AlignX=args=>({props:args,template:html`<fudis-grid [columns]="3">
 		<fudis-heading [tag]="'h1'" [size]="'l'">This grid demonstrates attribute of 'alignX'</fudis-heading>
 		<fudis-grid-item class="grid-item-highlight">
 			<fudis-body-text>alignX = 'stretch' (default)</fudis-body-text>
@@ -167,10 +177,17 @@
 				>columns = '5/-1', so it starts 5th column and stretches until the very end.</fudis-body-text
 			></fudis-grid-item
 		>
-	</fudis-grid>`}),responsiveColumns=()=>({props:{exampleOne:{default:"1/4",xs:"stretch"},exampleOneString:"{'default: '1/4', xs: 'stretch'}",exampleTwo:{xs:"4/-1",md:2,default:"stretch"},exampleTwoString:"{ xs: '4/-1', md: 2, default: 'stretch' }",exampleThree:{md:3,xs:"stretch"},exampleThreeString:"{ xs: 'stretch', md:3  }"},template:html`<fudis-grid [columns]="6">
-		<fudis-heading [tag]="'h1'" [size]="'l'"
-			>This grid demonstrates responsive 'columns' attribute for a Grid Item. Parent grid has six columns.
-		</fudis-heading>
+	</fudis-grid>`}),responsiveColumns=()=>({props:{exampleOne:{xs:"stretch",md:3,lg:1},exampleOneString:"{'xs: 'stretch', md: 3, lg: 'auto'}",exampleTwo:{default:"4/-1",md:2},exampleTwoString:"{ default: '4/-1', md: 2 }",exampleThree:{xs:"2/-1",md:3,lg:"2/-1"},exampleThreeString:"{ xs: '2/-1', md: 3, lg: '2/-1' }"},template:html`<fudis-grid [columns]="6">
+		<fudis-grid-item [columns]="'stretch'">
+			<fudis-heading [tag]="'h1'" [size]="'l'"
+				>This grid demonstrates responsive 'columns' attribute for a Grid Item. Parent grid has six columns.
+			</fudis-heading>
+			<fudis-body-text
+				>Try resizing canvas width, so different span widths for items are applied on different
+				breakpoints.</fudis-body-text
+			>
+		</fudis-grid-item>
+
 		<fudis-grid-item class="grid-item-highlight" [columns]="exampleOne">
 			<fudis-body-text>columns="{{exampleOneString}}"</fudis-body-text>
 		</fudis-grid-item>
@@ -184,5 +201,5 @@
 		<fudis-grid-item class="grid-item-highlight" [columns]="exampleThree"
 			><fudis-body-text>columns="{{exampleThreeString}}"</fudis-body-text></fudis-grid-item
 		>
-	</fudis-grid>`});AlignX.parameters={controls:{disable:!0}},AlignY.parameters={controls:{disable:!0}},alignXAndY.parameters={controls:{disable:!0}},columns.parameters={controls:{disable:!0}}}}]);
-//# sourceMappingURL=components-grid-grid-item-grid-item-stories.6fbc4a1c.iframe.bundle.js.map
+	</fudis-grid> `});AlignX.parameters={controls:{disable:!0}},AlignY.parameters={controls:{disable:!0}},alignXAndY.parameters={controls:{disable:!0}},columns.parameters={controls:{disable:!0}},responsiveColumns.parameters={controls:{disable:!0}}}}]);
+//# sourceMappingURL=components-grid-grid-item-grid-item-stories.276b8b59.iframe.bundle.js.map

@@ -7,7 +7,7 @@
 		</fudis-grid>
 		<fudis-description-list [data]="testData" [marginBottom]="'xl'"></fudis-description-list>
 
-		<fudis-grid [columns]="columns" [columnsXs]="'1fr'">
+		<fudis-grid [columns]="columns">
 			<fudis-heading tag="h2" size="m"
 				>And here below is a Fudis Grid where DL item is used as child component</fudis-heading
 			>
@@ -17,4 +17,4 @@
 				are both inside a Fudis Grid.</fudis-body-text
 			>
 		</fudis-grid>`,props:{testData,lonelyDataItem,columns:"1fr 1fr"}})).bind({})}}]);
-//# sourceMappingURL=components-description-list-description-list-stories.72aef4c8.iframe.bundle.js.map
+//# sourceMappingURL=components-description-list-description-list-stories.1edc5c0f.iframe.bundle.js.map
