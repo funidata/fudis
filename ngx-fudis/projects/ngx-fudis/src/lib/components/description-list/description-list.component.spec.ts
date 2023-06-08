@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { MockComponent } from 'ng-mocks';
-import { GridComponent } from '../grid/grid.component';
+import { GridComponent } from '../grid/grid/grid.component';
 import { GridDirective } from '../../directives/grid/grid.directive';
 
 import { DescriptionListComponent } from './description-list.component';

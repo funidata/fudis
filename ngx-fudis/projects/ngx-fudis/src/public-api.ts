@@ -34,7 +34,7 @@ export {
 export { FieldSetComponent } from './lib/components/form/fieldset/fieldset.component';
 
 export { InputWithLanguageOptionsComponent } from './lib/components/form/input-with-language-options/input-with-language-options.component';
-export { GridComponent } from './lib/components/grid/grid.component';
+export { GridComponent } from './lib/components/grid/grid/grid.component';
 export { GridItemComponent } from './lib/components/grid/grid-item/grid-item.component';
 export { GridDirective } from './lib/directives/grid/grid.directive';
 export { GridItemDirective } from './lib/directives/grid/grid-item/grid-item.directive';

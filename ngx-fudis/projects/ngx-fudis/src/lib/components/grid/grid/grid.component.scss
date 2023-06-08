@@ -1,10 +1,10 @@
 /* stylelint-disable order/order */
 
-@use '../../foundations/breakpoints/mixins.scss' as breakpoints;
-@use '../../foundations/breakpoints/tokens.scss' as breakpointTokens;
-@use '../../foundations/grid/mixins.scss' as grid;
-@use '../../foundations/grid/tokens.scss' as gridTokens;
-@use '../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/breakpoints/mixins.scss' as breakpoints;
+@use '../../../foundations/breakpoints/tokens.scss' as breakpointTokens;
+@use '../../../foundations/grid/mixins.scss' as grid;
+@use '../../../foundations/grid/tokens.scss' as gridTokens;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-grid {
 	display: grid;

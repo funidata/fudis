@@ -32,7 +32,7 @@ const allButColumnsExclude = [
 const combinedExclude = commonExclude.concat(allButColumnsExclude);
 
 export default {
-	title: 'Components/Grid',
+	title: 'Components/Grid/Grid',
 	component: GridComponent,
 	decorators: [
 		componentWrapperDecorator(

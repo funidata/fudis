@@ -39,7 +39,7 @@ import { ExpandableContentDirective, ExpandableActionsDirective } from './compon
 import { FieldSetBaseDirective } from './directives/form/fieldset-base/fieldset-base.directive';
 import { FieldSetComponent } from './components/form/fieldset/fieldset.component';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
-import { GridComponent } from './components/grid/grid.component';
+import { GridComponent } from './components/grid/grid/grid.component';
 import { GridApiDirective } from './directives/grid/grid-api.directive';
 import { GridDirective } from './directives/grid/grid.directive';
 import { GridItemComponent } from './components/grid/grid-item/grid-item.component';
