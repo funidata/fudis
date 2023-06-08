@@ -3,8 +3,8 @@ import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Injectable, OnDestroy, signal } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { BreakpointKey, GridColumnsResponsive, GridResponsiveData } from '../../../types/grid';
-import { breakpointsMinWidthToObserve, getGridBreakpointRules, validateColumnInputArray } from '../gridUtils';
+import { GridColumnsResponsive, GridResponsiveData } from '../../../types/grid';
+import { breakpointsMinWidthToObserve } from '../gridUtils';
 
 @Injectable()
 export class GridService implements OnDestroy {
@@ -12,23 +12,33 @@ export class GridService implements OnDestroy {
 
 	private _defaultGridColumns: GridColumnsResponsive | null = null;
 
-	setGridDefaultColumns(defaultColumns: GridColumnsResponsive): void {
-		this._defaultGridColumns = defaultColumns;
-	}
-
 	private _currentScreenSize = signal<BreakpointState | null>(null);
 
 	private currentScreenSize = this._currentScreenSize.asReadonly();
 
+	/**
+	 * To set from application default values for all Grids application uses.
+	 */
+	setGridDefaultColumns(defaultColumns: GridColumnsResponsive): void {
+		this._defaultGridColumns = defaultColumns;
+	}
+
+	getGridDefaultColumns(): GridColumnsResponsive | null {
+		return this._defaultGridColumns;
+	}
+
+	/**
+	 * Get current state of Breakpoints
+	 */
 	getBreakpointState(): BreakpointState | null {
 		return this.currentScreenSize();
 	}
 
-	constructor(private gridBreakpointObserver: BreakpointObserver) {
+	/**
+	 * Observe breakpoints and when hitting one, save results to Signal
+	 */
+	constructor(gridBreakpointObserver: BreakpointObserver) {
 		gridBreakpointObserver.observe(breakpointsMinWidthToObserve).subscribe((state: BreakpointState) => {
-			/*
-			 * When hitting a breakpoint, save results to a Signal
-			 */
 			this._currentScreenSize.set(state);
 		});
 	}
@@ -36,25 +46,6 @@ export class GridService implements OnDestroy {
 	ngOnDestroy() {
 		this.destroyed.next();
 		this.destroyed.complete();
-	}
-
-	createGridBreakpointObject(value?: GridColumnsResponsive, isGridItem?: boolean): GridResponsiveData[] {
-		if (value) {
-			const combinedValues: GridColumnsResponsive = isGridItem ? value : { ...this._defaultGridColumns, ...value };
-
-			const columnsArray: GridResponsiveData[] = getGridBreakpointRules(combinedValues, isGridItem);
-
-			const sortOrder: BreakpointKey[] = ['default', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
-
-			const sortedColumnsArray = columnsArray.sort((a, b) => {
-				return sortOrder.indexOf(a.name) - sortOrder.indexOf(b.name);
-			});
-
-			validateColumnInputArray(sortedColumnsArray);
-
-			return sortedColumnsArray;
-		}
-		return [];
 	}
 
 	setGridAttributes(element: HTMLElement, columns: string | GridResponsiveData[], isGridItem?: boolean): void {
@@ -71,7 +62,6 @@ export class GridService implements OnDestroy {
 				});
 			}
 		} else if (typeof columns === 'string') {
-			console.log(columns);
 			elementToModify.style.gridTemplateColumns = columns;
 		} else {
 			columns.forEach((item) => {

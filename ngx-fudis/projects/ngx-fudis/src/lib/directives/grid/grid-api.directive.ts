@@ -13,20 +13,30 @@ import {
 import { Spacing } from '../../types/spacing';
 
 import { GridService } from './grid-service/grid.service';
-import { getGridCssValue } from './gridUtils';
+import { getGridBreakpointDataArray, getGridCssValue } from './gridUtils';
 
 @Directive({
 	selector: '[fudisGridApi]',
 })
 export class GridApiDirective {
 	/**
+	 * Used to apply grid-template-columns values for the Grid
+	 */
+	protected _columns: string | GridResponsiveData[] = gridColumnDefault;
+
+	/**
+	 * Grid service to run utilities
+	 */
+	protected _gridService: GridService;
+
+	/**
 	 * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
-	 * XXL = Default value. Viewports of 1600px and larger
-	 * XL = Viewports smaller than 1600px
-	 * L = Viewports smaller than 1200px
-	 * M = Viewports smaller than 992px
-	 * S = Viewports smaller than 768px
-	 * Xs = Viewports smaller than 576px
+	 * xxl = Default value. Viewports of 1600px and larger
+	 * xl = Viewports smaller than 1600px
+	 * lg = Viewports smaller than 1200px
+	 * md = Viewports smaller than 992px
+	 * sm = Viewports smaller than 768px
+	 * xs = Viewports smaller than 576px
 	 */
 	@Input() width: GridWidth = 'xxl';
 
@@ -36,26 +46,34 @@ export class GridApiDirective {
 	@Input() align: GridAlign = 'center';
 
 	/**
-	 * Vertical alignment of grid items in a row
+	 * Vertical alignment of Grid Items in a row
 	 */
 	@Input() alignItemsY: GridAlignItems = 'stretch';
 
 	/**
-	 * Horizontal alignment of grid items in a row
+	 * Horizontal alignment of Grid Items in a row
 	 */
 	@Input() alignItemsX: GridAlignItems = 'stretch';
 
+	/**
+	 * Margin top for the Grid
+	 */
 	@Input() marginTop: Spacing = 'none';
 
+	/**
+	 * Margin bottom for the Grid
+	 */
 	@Input() marginBottom: Spacing = 'none';
 
+	/**
+	 * Horizontal margins left and right of the grid
+	 */
 	@Input() marginSides: GridMarginSide = 'responsive';
 
+	/**
+	 * Custom CSS classes for Grid element
+	 */
 	@Input() classes: string[];
-
-	_columns: string | GridResponsiveData[] = gridColumnDefault;
-
-	_gridService: GridService;
 
 	/**
 	 * Setting of columns for the grid. Input will be converted to native CSS grid grid-template-columns values
@@ -69,30 +87,37 @@ export class GridApiDirective {
 	 * And after xl breakpoint 'repeat(3, 1fr)'
 	 */
 	@Input() set columns(value: string | number | GridColumnsResponsive) {
-		if (!value) {
-			this._columns = this._gridService.createGridBreakpointObject();
-		} else if (typeof value === 'string') {
+		const defaultValues = this._gridService.getGridDefaultColumns();
+		// If no value provided, still check from the service, if application has provided default Grid values
+		if (!value && defaultValues) {
+			this._columns = getGridBreakpointDataArray(defaultValues);
+		}
+		// If value is normal string. E. g. '1fr 2fr 1fr'
+		else if (typeof value === 'string') {
 			this._columns = value;
-		} else if (typeof value === 'number') {
+		}
+		// If value is number, convert it to grid-template-column value. E. g. number 6 converts to 'repeat(6,1fr)'
+		else if (typeof value === 'number') {
 			this._columns = getGridCssValue(value);
-		} else {
-			this._columns = this._gridService.createGridBreakpointObject(value);
+		}
+		// Get breakpoint settings with provided default values and Input values
+		else {
+			const combinedValues: GridColumnsResponsive = { ...defaultValues, ...value };
+			this._columns = getGridBreakpointDataArray(combinedValues);
 		}
 	}
 
 	/**
 	 * Grid column gap. Using Fudis spacing token values of xxs to xxl and 0.
 	 */
-
 	@Input() columnGap: GridGap = 'responsive';
 
 	/**
 	 * Grid row gap. Using Fudis spacing token values of xxs to xxl and 0.
 	 */
-
 	@Input() rowGap: GridGap = 'responsive';
 
-	constructor(gridService: GridService) {
+	constructor(protected gridService: GridService) {
 		this._gridService = gridService;
 	}
 }

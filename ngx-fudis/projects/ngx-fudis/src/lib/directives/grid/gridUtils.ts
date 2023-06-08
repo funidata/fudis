@@ -1,4 +1,5 @@
 import {
+	BreakpointKey,
 	GridAttributes,
 	GridColumnsResponsive,
 	GridResponsiveData,
@@ -156,4 +157,21 @@ export const getGridBreakpointRules = (values: GridColumnsResponsive, isGridItem
 	});
 
 	return columnsArray;
+};
+
+export const getGridBreakpointDataArray = (
+	value: GridColumnsResponsive,
+	isGridItem?: boolean
+): GridResponsiveData[] => {
+	const columnsArray: GridResponsiveData[] = getGridBreakpointRules(value, isGridItem);
+
+	const sortOrder: BreakpointKey[] = ['default', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
+
+	const sortedColumnsArray = columnsArray.sort((a, b) => {
+		return sortOrder.indexOf(a.name) - sortOrder.indexOf(b.name);
+	});
+
+	validateColumnInputArray(sortedColumnsArray);
+
+	return sortedColumnsArray;
 };

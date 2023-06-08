@@ -277,17 +277,16 @@ export const responsiveColumns: StoryFn<GridItemComponent> = () => ({
 		</fudis-grid-item>
 		<fudis-body-text class="grid-item">Normal grid-item</fudis-body-text>
 		<fudis-body-text class="grid-item">Normal grid-item</fudis-body-text>
-	</fudis-grid>`,
+		<fudis-body-text class="grid-item">Normal grid-item</fudis-body-text>
+		<fudis-grid-item class="grid-item-highlight" [columns]="exampleTwo"
+			><fudis-body-text>columns="{{exampleTwoString}}"</fudis-body-text></fudis-grid-item
+		>
+		<fudis-grid-item class="grid-item"><fudis-body-text>Normal grid-item</fudis-body-text></fudis-grid-item>
+		<fudis-grid-item class="grid-item-highlight" [columns]="exampleThree"
+			><fudis-body-text>columns="{{exampleThreeString}}"</fudis-body-text></fudis-grid-item
+		>
+	</fudis-grid> `,
 });
-
-// <fudis-body-text class="grid-item">Normal grid-item</fudis-body-text>
-// 		<fudis-grid-item class="grid-item-highlight" [columns]="exampleTwo"
-// 			><fudis-body-text>columns="{{exampleTwoString}}"</fudis-body-text></fudis-grid-item
-// 		>
-// 		<fudis-grid-item class="grid-item"><fudis-body-text>Normal grid-item</fudis-body-text></fudis-grid-item>
-// 		<fudis-grid-item class="grid-item-highlight" [columns]="exampleThree"
-// 			><fudis-body-text>columns="{{exampleThreeString}}"</fudis-body-text></fudis-grid-item
-// 		>
 
 AlignX.parameters = {
 	controls: { disable: true },
