@@ -5,7 +5,7 @@
 	[align]="align"
 	[alignItemsX]="alignItemsX"
 	[alignItemsY]="alignItemsY"
-	[classes]="getClasses()"
+	[classes]="_classList"
 	[columnGap]="columnGap"
 	[rowGap]="variant === 'compact' ? 'none' : rowGap"
 	[columns]="columns"
@@ -16,7 +16,7 @@
 	<ng-container *ngTemplateOutlet="variant === 'regular' ? regular : compact"> </ng-container>
 </dl>
 
-<dl *ngIf="disableGrid" [class]="getClasses()" role="list">
+<dl *ngIf="disableGrid" [class]="_classList" role="list">
 	<ng-container *ngTemplateOutlet="variant === 'regular' ? regular : compact"> </ng-container>
 </dl>
 

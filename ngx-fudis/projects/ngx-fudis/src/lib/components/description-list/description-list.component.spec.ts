@@ -73,6 +73,8 @@ describe('DescriptionListComponent', () => {
 
 		it('should have fudis-description-list-compact and fudis-grid classes if compact list', () => {
 			component.variant = 'compact';
+			component.ngOnChanges();
+
 			fixture.detectChanges();
 			const classList = [
 				'fudis-description-list-compact',
@@ -87,6 +89,8 @@ describe('DescriptionListComponent', () => {
 		});
 		it('should not have fudis-grid classes if grid directive is disabled if regular list', () => {
 			component.disableGrid = true;
+			component.ngOnChanges();
+
 			fixture.detectChanges();
 			const classList = ['fudis-description-list', 'fudis-description-list__disabled-grid'];
 
@@ -96,6 +100,7 @@ describe('DescriptionListComponent', () => {
 		it('should not have fudis-grid classes if grid directive is disabled if compact list', () => {
 			component.variant = 'compact';
 			component.disableGrid = true;
+			component.ngOnChanges();
 			fixture.detectChanges();
 			const classList = ['fudis-description-list-compact', 'fudis-description-list-compact__disabled-grid'];
 			assertDescriptionListHasClasses(classList);
