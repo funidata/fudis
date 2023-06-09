@@ -34,7 +34,7 @@ import readme from './readme.mdx';
 				</fudis-body-text>
 			</fudis-grid>
 			<fudis-description-list
-				[columns]="'1fr 1fr 1fr'"
+				[columns]="{ xs: 1, sm: 2, md: 3 }"
 				[marginSides]="'none'"
 				[data]="[
 					{ key: 'Name', value: 'Mary Rhubarb', subHeading: 'The lady boss' },
@@ -43,7 +43,7 @@ import readme from './readme.mdx';
 					{ key: 'Awards', value: 'Pie maker 2023, Mix it up master 2008, Place setting champion 1987' }
 				]"></fudis-description-list>
 			<hr />
-			<fudis-grid [columns]="'1fr 1fr 1fr'" [marginSides]="'none'" [marginTop]="'s'" [marginBottom]="'s'">
+			<fudis-grid [columns]="{ xs: 1, sm: 2, md: 3 }" [marginSides]="'none'" [marginTop]="'s'" [marginBottom]="'s'">
 				<div style="border: 2px solid lightblue"><fudis-body-text>Showcase of grid items</fudis-body-text></div>
 				<div style="border: 2px solid lightblue"><fudis-body-text>Showcase of grid items</fudis-body-text></div>
 				<div style="border: 2px solid lightblue"><fudis-body-text>Showcase of grid items</fudis-body-text></div>

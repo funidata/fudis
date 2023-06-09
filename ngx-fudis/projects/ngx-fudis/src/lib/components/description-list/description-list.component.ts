@@ -44,7 +44,7 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 	 */
 	@Input() columns: string | number | GridColumnsResponsive = '1fr 1fr';
 
-	getClasses(): string[] {
+	private getClasses(): string[] {
 		const cssClasses = [];
 
 		if (this.variant === 'regular') {

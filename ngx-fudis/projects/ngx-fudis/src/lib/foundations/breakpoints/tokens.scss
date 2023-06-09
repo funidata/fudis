@@ -14,3 +14,10 @@ $breakpoints: (
 	'sm': $breakpoint-sm,
 	'xs': $breakpoint-xs,
 );
+$max-breakpoints: (
+	'xxl': $breakpoint-xxl,
+	'xl': $breakpoint-xl,
+	'lg': $breakpoint-lg,
+	'md': $breakpoint-md,
+	'sm': $breakpoint-sm,
+);
