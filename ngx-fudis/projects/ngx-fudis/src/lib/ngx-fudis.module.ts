@@ -40,8 +40,8 @@ import { FieldSetBaseDirective } from './directives/form/fieldset-base/fieldset-
 import { FieldSetComponent } from './components/form/fieldset/fieldset.component';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { GridComponent } from './components/grid/grid/grid.component';
-import { GridApiDirective } from './directives/grid/grid-api.directive';
-import { GridDirective } from './directives/grid/grid.directive';
+import { GridApiDirective } from './directives/grid/grid-api/grid-api.directive';
+import { GridDirective } from './directives/grid/grid/grid.directive';
 import { GridItemComponent } from './components/grid/grid-item/grid-item.component';
 import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
 import { HeadingComponent } from './components/typography/heading/heading.component';

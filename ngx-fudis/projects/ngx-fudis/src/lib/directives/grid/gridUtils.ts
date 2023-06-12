@@ -7,16 +7,9 @@ import {
 	gridItemDefault,
 } from '../../types/grid';
 
-export const gridBreakpoints = {
-	xxl: '(min-width: 100em)',
-	xl: '(min-width: 75em) and (max-width: 99.99em)',
-	lg: '(min-width: 62em) and (max-width: 74.99em)',
-	md: '(min-width: 48em) and (max-width: 61.99em)',
-	sm: '(min-width: 36em) and (max-width: 47.99em)',
-	xs: '(min-width: 0) and (max-width: 35.99em)',
-	default: '(min-width: 0)',
-};
-
+/**
+ * Utility object used with breakpointsMinWidthToObserve and BreakpointObserver
+ */
 export const gridBreakpointsMinWidth = {
 	xxl: '(min-width: 100em)',
 	xl: '(min-width: 75em)',
@@ -26,19 +19,6 @@ export const gridBreakpointsMinWidth = {
 	xs: '(min-width: 0)',
 	default: '(min-width: 0)',
 };
-
-/*
- * Array of brekpoint rules to observe, which is given to ngMaterial BreakpointObserver
- */
-export const breakpointsToObserve = [
-	gridBreakpoints.xxl,
-	gridBreakpoints.xl,
-	gridBreakpoints.lg,
-	gridBreakpoints.md,
-	gridBreakpoints.sm,
-	gridBreakpoints.xs,
-	gridBreakpoints.default,
-];
 
 /*
  * Array of brekpoint rules to observe, which is given to ngMaterial BreakpointObserver
@@ -53,7 +33,39 @@ export const breakpointsMinWidthToObserve = [
 	gridBreakpointsMinWidth.default,
 ];
 
-export const getGridClasses = (values: GridAttributes) => {
+/*
+
+export const gridBreakpoints = {
+	xxl: '(min-width: 100em)',
+	xl: '(min-width: 75em) and (max-width: 99.99em)',
+	lg: '(min-width: 62em) and (max-width: 74.99em)',
+	md: '(min-width: 48em) and (max-width: 61.99em)',
+	sm: '(min-width: 36em) and (max-width: 47.99em)',
+	xs: '(min-width: 0) and (max-width: 35.99em)',
+	default: '(min-width: 0)',
+};
+
+ // Array of brekpoint rules to observe, which is given to ngMaterial BreakpointObserver
+ 
+export const breakpointsToObserve = [
+	gridBreakpoints.xxl,
+	gridBreakpoints.xl,
+	gridBreakpoints.lg,
+	gridBreakpoints.md,
+	gridBreakpoints.sm,
+	gridBreakpoints.xs,
+	gridBreakpoints.default,
+];
+*/
+
+/**
+ *
+ * Utility function used with GridDirective.
+ * Takes in object of Input() attributes and creates CSS classlist out of those to be passed to Grid element.
+ *
+ */
+
+export const getGridClasses = (values: GridAttributes): string => {
 	let classList = [
 		'fudis-grid',
 		`fudis-grid__${values.width}`,
@@ -79,7 +91,7 @@ export const getGridClasses = (values: GridAttributes) => {
 };
 
 /*
- * Some validation, so that given column @Inputs are usable and valid grid-column-template values..
+ * Some validation, so that given column @Inputs are usable and v alid grid-column-template values..
  */
 
 export const validateColumnInputArray = (inputs: Array<GridResponsiveData>) => {
@@ -95,7 +107,7 @@ export const validateColumnInputArray = (inputs: Array<GridResponsiveData>) => {
 		}
 
 		/*
-		 * Check if sum of fr values is larger than 12.
+		 * Check if sum  of fr values is larger than 12.
 		 */
 
 		const inputStringToArray = item.value.split(' ');
@@ -120,6 +132,9 @@ export const validateColumnInputArray = (inputs: Array<GridResponsiveData>) => {
 	});
 };
 
+/**
+ * Utility function to convert parameters to either Grid CSS value 'grid-column-template' or CSS grid item value 'grid-column'
+ */
 export const getGridCssValue = (value: number | string, isGridItem?: boolean): string => {
 	if (typeof value === 'number') {
 		if (!isGridItem) {
@@ -133,6 +148,26 @@ export const getGridCssValue = (value: number | string, isGridItem?: boolean): s
 	return value;
 };
 
+/**
+ * Build an setting array of objects for breakpoint rules from Grid's / GridItem's Input() columns. Returns e. g. following object.
+ * [
+    {
+        "name": "default",
+        "value": "1fr",
+        "breakpoint": "(min-width: 0)"
+    },
+    {
+        "name": "md",
+        "value": "1fr 2fr",
+        "breakpoint": "(min-width: 48em)"
+    },
+    {
+        "name": "xxl",
+        "value": "repeat(6, 1fr)",
+        "breakpoint": "(min-width: 100em)"
+    }
+]
+ */
 export const getGridBreakpointRules = (values: GridColumnsResponsive, isGridItem?: boolean): GridResponsiveData[] => {
 	const columnsArray: GridResponsiveData[] = [];
 
@@ -159,6 +194,9 @@ export const getGridBreakpointRules = (values: GridColumnsResponsive, isGridItem
 	return columnsArray;
 };
 
+/**
+ * Builds, sorts and validates Grid's / GridItem's Input() columns.
+ */
 export const getGridBreakpointDataArray = (
 	value: GridColumnsResponsive,
 	isGridItem?: boolean

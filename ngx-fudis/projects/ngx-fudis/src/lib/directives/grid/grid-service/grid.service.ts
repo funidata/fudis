@@ -23,6 +23,9 @@ export class GridService implements OnDestroy {
 		this._defaultGridColumns = defaultColumns;
 	}
 
+	/**
+	 * Get application's default values for Grid
+	 */
 	getGridDefaultColumns(): GridColumnsResponsive | null {
 		return this._defaultGridColumns;
 	}
@@ -35,7 +38,7 @@ export class GridService implements OnDestroy {
 	}
 
 	/**
-	 * Observe breakpoints and when hitting one, save results to Signal
+	 * Observe breakpoints and when hitting one, save results to Signal.
 	 */
 	constructor(gridBreakpointObserver: BreakpointObserver) {
 		gridBreakpointObserver.observe(breakpointsMinWidthToObserve).subscribe((state: BreakpointState) => {
@@ -48,6 +51,9 @@ export class GridService implements OnDestroy {
 		this.destroyed.complete();
 	}
 
+	/**
+	 * Function which applies CSS attributes of grid-column-template for Grid and grid-column for GridItem.
+	 */
 	setGridAttributes(element: HTMLElement, columns: string | GridResponsiveData[], isGridItem?: boolean): void {
 		const elementToModify = element;
 

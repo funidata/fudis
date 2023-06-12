@@ -1,10 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 import { Directive, ElementRef, Input, OnChanges, OnInit, effect } from '@angular/core';
 
-import { getGridBreakpointDataArray, getGridClasses, getGridCssValue } from './gridUtils';
-import { GridApiDirective } from './grid-api.directive';
-import { GridAttributes, GridColumnsResponsive, GridResponsiveData, gridColumnDefault } from '../../types/grid';
-import { GridService } from './grid-service/grid.service';
+import { getGridBreakpointDataArray, getGridClasses, getGridCssValue } from '../gridUtils';
+import { GridApiDirective } from '../grid-api/grid-api.directive';
+import { GridAttributes, GridColumnsResponsive, GridResponsiveData, gridColumnDefault } from '../../../types/grid';
+import { GridService } from '../grid-service/grid.service';
 
 @Directive({
 	selector: '[fudisGrid]',
