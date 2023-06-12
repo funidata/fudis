@@ -12,21 +12,11 @@ Following documentation defines how Fudis core team has setupped their VSCode fo
 
 [Download and install VSCode from its website.](https://code.visualstudio.com/)
 
-## VSCode Extensions
-
-When you open up VSCode and select the Extensions tab from the left of UI, you should see highlighted recommended extensions for the project.
-
-These extensions include tools for syncing project's linting tools with VSCode and accessibility and other quality improvement tools.
-
-All recommended extensions are listed in project's file found in `settings/.vscode/extensions.json`.
-
-After you have installed extensions, you should restart VSCode to have it synced with project's settings.
-
 ## VSCode settings
 
-In root of the project is folder 'settings'. Fudis core developers use these settings and extensions to have mutual developer experience.
+In root of the project is folder 'settings'. Fudis core developers use these settings and extensions in their workspace to have mutual developer experience.
 
-To apply these settings to your Fudis projects:
+To apply these settings to your Fudis workspace:
 
 1. Copy folder 'settings/.vscode'
 2. Paste it to project root
@@ -35,3 +25,13 @@ To apply these settings to your Fudis projects:
 5. Try to edit TS or SCSS files. VSCode's 'Problems' tab should list of linting errors and other non-recommended conventions. Most of style & convention opinionated problems should be fixed automatically on save.
 
 You can override these project settings in your own personal VSCode settings, but keep in mind that if your own e.g. autoformatting rules are different from the project, you might get linting errors.
+
+## VSCode Extensions
+
+If you copied the workspace settings mentioned earlier, when you open up VSCode and select the Extensions tab from the left of UI, you should see highlighted recommended extensions for the project.
+
+These extensions include tools for syncing project's linting tools with VSCode and accessibility and other quality improvement tools.
+
+All recommended extensions are listed in project's file found in `settings/.vscode/extensions.json`.
+
+After you have installed extensions, you should restart VSCode to have it synced with project's settings.
