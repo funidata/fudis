@@ -26,7 +26,7 @@ export default {
 const Template: StoryFn = (args) => ({
 	props: args,
 	template: `
-	<fudis-grid align="right">
+	<fudis-grid [alignItemsX]="'right'">
 		<fudis-button [label]="'Menu'" [labelHidden]="true" [size]="'small'" [variant]="'secondary'" [icon]="'three-dots'" [asMenuButton]="true">
 			<fudis-dropdown-menu>
 				<fudis-dropdown-menu-item [label]="'Item 1'"></fudis-dropdown-menu-item>
