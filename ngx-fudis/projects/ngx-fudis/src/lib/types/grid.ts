@@ -37,9 +37,9 @@ export const gridColumnDefault = '1fr';
 export type GridWidth = 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
 
 /**
- * Alignment of whole Grid inside its container
+ * Alignment of whole Grid inside its container. For items inside the Grid use alignItemsX and alignItemsY.
  */
-export type GridAlign = 'left' | 'right' | 'center';
+export type GridAlign = 'start' | 'end' | 'center';
 
 /**
  * Alignment of Grid Items inside a Grid
