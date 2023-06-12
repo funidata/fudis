@@ -18,12 +18,20 @@ When you open up VSCode and select the Extensions tab from the left of UI, you s
 
 These extensions include tools for syncing project's linting tools with VSCode and accessibility and other quality improvement tools.
 
-All recommended extensions are listed in project's file found in `.vscode/extensions.json`.
+All recommended extensions are listed in project's file found in `settings/.vscode/extensions.json`.
 
 After you have installed extensions, you should restart VSCode to have it synced with project's settings.
 
 ## VSCode settings
 
-In project's file of `.vscode/settings.json` are defined Fudis project spesific VSCode setting rules which are synced with installed extensions as well.
+In root of the project is folder 'settings'. Fudis core developers use these settings and extensions to have mutual developer experience.
+
+To apply these settings to your Fudis projects:
+
+1. Copy folder 'settings/.vscode'
+2. Paste it to project root
+3. Install extensions
+4. Restart VSCode
+5. Try to edit TS or SCSS files. VSCode's 'Problems' tab should list of linting errors and other non-recommended conventions. Most of style & convention opinionated problems should be fixed automatically on save.
 
 You can override these project settings in your own personal VSCode settings, but keep in mind that if your own e.g. autoformatting rules are different from the project, you might get linting errors.
