@@ -39,11 +39,11 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	 */
 	@Input() type: string;
 
-	errorSent: boolean = false;
+	private _errorSent: boolean = false;
 
-	currentMessage: string | undefined = undefined;
+	private _currentMessage: string | undefined = undefined;
 
-	currentLabel: string | undefined = undefined;
+	private _currentLabel: string | undefined = undefined;
 
 	constructor(private errorSummaryService: ErrorSummaryService) {}
 
@@ -57,33 +57,35 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 
 	createError(): void {
 		if (this.message && this.inputLabel) {
-			this.currentMessage = this.message;
-			this.currentLabel = this.inputLabel;
+			this._currentMessage = this.message;
+			this._currentLabel = this.inputLabel;
 
 			const newError: TFudisFormErrorSummaryItem = {
 				id: this.inputId,
-				error: this.currentMessage,
-				label: this.currentLabel,
+				error: this._currentMessage,
+				label: this._currentLabel,
 				type: this.type,
 				controlName: this.controlName,
 			};
 			this.errorSummaryService.addNewError(newError);
-			this.errorSent = true;
+			this._errorSent = true;
 		}
 	}
 
 	ngOnChanges(): void {
-		if (this.message !== this.currentMessage || this.inputLabel !== this.currentLabel) {
+		if (this.message !== this._currentMessage || this.inputLabel !== this._currentLabel) {
 			this.createError();
 		}
 	}
 
 	ngOnDestroy(): void {
-		this.errorSummaryService.removeError({
-			id: this.inputId,
-			type: this.type,
-			controlName: this.controlName,
-		});
+		if (this._errorSent) {
+			this.errorSummaryService.removeError({
+				id: this.inputId,
+				type: this.type,
+				controlName: this.controlName,
+			});
+		}
 	}
 
 	throwError(): void {
