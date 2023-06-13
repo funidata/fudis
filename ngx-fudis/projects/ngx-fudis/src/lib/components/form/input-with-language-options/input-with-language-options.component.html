@@ -15,26 +15,26 @@
 		[hideSingleSelectionIndicator]="true"
 		class="fudis-input-with-language-options__dropdown"
 		(selectionUpdate)="handleLanguageSelect($event)"
-		[control]="dropdownControl"
-		[label]="'Language'"
+		[control]="_dropdownControl"
+		[label]="languageLabel"
 		[size]="missingLanguage ? 'xs' : 'l'"
 		[id]="id + '_language-dropdown'"
-		[options]="updatedOptions">
+		[options]="_updatedOptions">
 	</fudis-dropdown>
 </div>
 
 <ng-template #textInput>
 	<ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
 		<fudis-text-input
-			*ngIf="control.key === dropdownControl.value.value"
+			*ngIf="control.key === _dropdownControl.value.value"
 			(handleBlur)="handleInputBlur($event, control.key)"
 			class="fudis-input-with-language-options__inputs__item"
-			[ariaLabel]="label + ', ' + dropdownControl.value.viewValue"
+			[ariaLabel]="label + ', ' + _dropdownControl.value.viewValue"
 			[size]="'l'"
 			[label]="label"
 			[id]="id"
 			[ignoreRequiredCheck]="true"
-			[requiredText]="requiredControls[control.key].requiredText"
+			[requiredText]="_requiredControls[control.key].requiredText"
 			[invalidState]="formGroup.invalid && formGroup.touched"
 			[control]="$any(formGroup).controls[control.key]"></fudis-text-input>
 	</ng-container>
@@ -43,16 +43,16 @@
 <ng-template #textArea>
 	<ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
 		<fudis-text-area
-			*ngIf="control.key === dropdownControl.value.value"
+			*ngIf="control.key === _dropdownControl.value.value"
 			(handleBlur)="handleInputBlur($event, control.key)"
 			class="fudis-input-with-language-options__inputs__item"
-			[ariaLabel]="label + ', ' + dropdownControl.value.viewValue"
+			[ariaLabel]="label + ', ' + _dropdownControl.value.viewValue"
 			[size]="'l'"
 			[label]="label"
 			[id]="id"
 			[ignoreRequiredCheck]="true"
 			[invalidState]="formGroup.invalid && formGroup.touched"
-			[requiredText]="requiredControls[control.key].requiredText"
+			[requiredText]="_requiredControls[control.key].requiredText"
 			[control]="$any(formGroup).controls[control.key]"></fudis-text-area>
 	</ng-container>
 </ng-template>
