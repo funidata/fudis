@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { Directive, Input } from '@angular/core';
 import { GridWidth, GridMarginSide, GridGap, GridAlign, GridAlignItems } from '../../../types/grid';
 import { Spacing } from '../../../types/spacing';

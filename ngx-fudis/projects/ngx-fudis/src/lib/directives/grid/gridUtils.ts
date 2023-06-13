@@ -91,7 +91,7 @@ export const getGridClasses = (values: GridAttributes): string => {
 };
 
 /*
- * Some validation, so that given column @Inputs are usable and v alid grid-column-template values..
+ * Some validation, so that given column @Inputs are usable and valid grid-column-template values.
  */
 
 export const validateColumnInputArray = (inputs: Array<GridResponsiveData>) => {
@@ -107,7 +107,7 @@ export const validateColumnInputArray = (inputs: Array<GridResponsiveData>) => {
 		}
 
 		/*
-		 * Check if sum  of fr values is larger than 12.
+		 * Check if sum of fr values is larger than 12.
 		 */
 
 		const inputStringToArray = item.value.split(' ');

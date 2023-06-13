@@ -68,7 +68,7 @@ class DialogExampleContentComponent {}
 @Component({
 	selector: 'fudis-dialog-example-laucher',
 	template: `
-		<fudis-grid [columns]="'1fr 1fr'" [width]="'xs'" [align]="'left'">
+		<fudis-grid [columns]="'1fr 1fr'" [width]="'xs'" [align]="'start'">
 			<fudis-button (handleClick)="openDialog(dialogWithForm)" [label]="'Open dialog with form'"></fudis-button>
 			<fudis-button (handleClick)="openDialog(dialogContentComponent)" [label]="'Open dialog with grid'"></fudis-button>
 		</fudis-grid>
