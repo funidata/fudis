@@ -9,19 +9,19 @@
 			@content;
 		}
 	} @else {
-		@error 'Unknown minimum breakpoint of #{$breakpoint}. Accepted arguments are: "xxl", "xl", "l", "m", "s", "xs".';
+		@error 'Unknown minimum breakpoint of #{$breakpoint}. Accepted arguments are: "xxl", "xl", "lg", "md", "sm", "xs".';
 	}
 }
 
 @mixin breakpoint-max($breakpoint) {
-	@if map_has_key(tokens.$breakpoints, $breakpoint) and $breakpoint != 'xs' {
-		$breakpoint-value: map.get(tokens.$breakpoints, $breakpoint);
+	@if map_has_key(tokens.$max-breakpoints, $breakpoint) and $breakpoint != 'xs' {
+		$breakpoint-value: map.get(tokens.$max-breakpoints, $breakpoint);
 		$calc-max-width: calc($breakpoint-value - 0.01em);
 
 		@media screen and (max-width: #{$calc-max-width}) {
 			@content;
 		}
 	} @else {
-		@error 'Unknown maximum breakpoint of #{$breakpoint}. Accepted arguments are: "xxl", "xl", "l", "m", and "s"';
+		@error 'Unknown maximum breakpoint of #{$breakpoint}. Accepted arguments are: "xxl", "xl", "lg", "md", and "sm"';
 	}
 }

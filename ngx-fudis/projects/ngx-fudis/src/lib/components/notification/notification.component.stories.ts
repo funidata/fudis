@@ -41,7 +41,7 @@ LinkNotification.args = {
 
 export const AllVariants: StoryFn = () => ({
 	template: `
-	<fudis-grid align="left" width="m">
+	<fudis-grid [align]="'start'" [width]="'md'">
 		<fudis-notification variant="warning" ariaVariantText="Warning!">Note! Please don't do this, okey?</fudis-notification>
 		<fudis-notification variant="danger" ariaVariantText="Danger!">Whoops! Some error happened.</fudis-notification>
 		<fudis-notification variant="success">You succeeded!</fudis-notification>

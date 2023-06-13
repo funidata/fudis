@@ -15,7 +15,7 @@ export default {
 const Template: StoryFn = (args) => ({
 	props: args,
 	template: `
-	<fudis-grid width="m" align="left">
+	<fudis-grid [width]="'md'" [align]="'start'">
 		<div>
 			<fudis-body-text [size]="size" [marginBottom]="marginBottom">{{content}}</fudis-body-text>
 			<fudis-body-text [size]="size" [marginBottom]="marginBottom">{{content}}</fudis-body-text>
@@ -33,7 +33,7 @@ BodyText.args = {
 
 export const AllVariants: StoryFn = () => ({
 	template: `
-	<fudis-grid columns="1fr 1fr" align="left">
+	<fudis-grid columns="1fr 1fr" [align]="'start'">
 	<fudis-body-text [size]="'l-regular'">This paragraph has l-regular font size. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </fudis-body-text>
 	<fudis-body-text [size]="'l-light'">This paragraph has l-light font size. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</fudis-body-text>
 	<fudis-body-text [size]="'m-regular'">This paragraph has m-regular font size. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</fudis-body-text>

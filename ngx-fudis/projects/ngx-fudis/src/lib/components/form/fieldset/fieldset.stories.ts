@@ -25,13 +25,7 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 				[errorSummaryHelpText]="errorSummaryHelpText"
 				[errorSummaryVisible]="errorSummaryVisible"
 				[helpText]="helpText">
-				<fudis-grid
-					[columns]="'1fr 1fr'"
-					[columnsM]="'1fr'"
-					[columnsS]="'1fr'"
-					[columnsXs]="'1fr'"
-					[width]="'m'"
-					[marginSides]="'none'">
+				<fudis-grid [columns]="{ lg: 2 }" [width]="'md'" [marginSides]="'none'">
 					<fudis-input-with-language-options
 						[missingLanguage]="'Missing'"
 						[id]="'unique-input-1'"

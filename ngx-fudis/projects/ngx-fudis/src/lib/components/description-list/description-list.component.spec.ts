@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { MockComponent } from 'ng-mocks';
-import { GridComponent } from '../grid/grid.component';
-import { GridDirective } from '../../directives/grid/grid.directive';
+import { GridComponent } from '../grid/grid/grid.component';
+import { GridDirective } from '../../directives/grid/grid/grid.directive';
 
 import { DescriptionListComponent } from './description-list.component';
+import { GridService } from '../../directives/grid/grid-service/grid.service';
 
 describe('DescriptionListComponent', () => {
 	let component: DescriptionListComponent;
@@ -13,6 +14,7 @@ describe('DescriptionListComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [DescriptionListComponent, GridDirective, MockComponent(GridComponent)],
+			providers: [GridService],
 		}).compileComponents();
 	});
 
@@ -71,6 +73,8 @@ describe('DescriptionListComponent', () => {
 
 		it('should have fudis-description-list-compact and fudis-grid classes if compact list', () => {
 			component.variant = 'compact';
+			component.ngOnChanges();
+
 			fixture.detectChanges();
 			const classList = [
 				'fudis-description-list-compact',
@@ -85,6 +89,8 @@ describe('DescriptionListComponent', () => {
 		});
 		it('should not have fudis-grid classes if grid directive is disabled if regular list', () => {
 			component.disableGrid = true;
+			component.ngOnChanges();
+
 			fixture.detectChanges();
 			const classList = ['fudis-description-list', 'fudis-description-list__disabled-grid'];
 
@@ -94,6 +100,7 @@ describe('DescriptionListComponent', () => {
 		it('should not have fudis-grid classes if grid directive is disabled if compact list', () => {
 			component.variant = 'compact';
 			component.disableGrid = true;
+			component.ngOnChanges();
 			fixture.detectChanges();
 			const classList = ['fudis-description-list-compact', 'fudis-description-list-compact__disabled-grid'];
 			assertDescriptionListHasClasses(classList);

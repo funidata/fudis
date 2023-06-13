@@ -1,13 +1,20 @@
-import { Component, Input } from '@angular/core';
+/* eslint-disable no-underscore-dangle */
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { IFudisDescriptionListItem } from '../../types/lists';
-import { GridApiDirective } from '../../directives/grid/grid-api.directive';
+import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
+import { GridColumnsResponsive } from '../../types/grid';
 
 @Component({
 	selector: 'fudis-description-list',
 	templateUrl: './description-list.component.html',
 	styleUrls: ['./description-list.component.scss'],
 })
-export class DescriptionListComponent extends GridApiDirective {
+export class DescriptionListComponent extends GridApiDirective implements OnInit, OnChanges {
+	/**
+	 * CSS class list
+	 */
+	_classList: string[] = [];
+
 	/**
 	 * Item array to form description list data.
 	 * Contains mandatory key and value, and optional subHeading.
@@ -22,12 +29,22 @@ export class DescriptionListComponent extends GridApiDirective {
 	/**
 	 * Disable Fudis Grid behavior for Description List.
 	 */
-
 	@Input() disableGrid: boolean = false;
 
-	override columns = '1fr 1fr';
+	/**
+	 * Setting of columns for the description list. Input will be converted to native CSS grid grid-template-columns values
+	 * E. g. as native string: [columns]="'1fr 1fr'" or [columns]="'1fr 2fr'"
+	 * E. g. as number [columns]="6", which converts to 'repeat(6, 1fr)'
+	 *
+	 * For responsive grid behavior, provide GridColumns object.
+	 * E. g. [columns]="{md: 2, xl: 3}".
+	 * Before md breakpoint Grid has default of '1fr' columns.
+	 * After md breakpoint it will have two columns 'repeat(2, 1fr)'
+	 * And after xl breakpoint 'repeat(3, 1fr)'
+	 */
+	@Input() columns: string | number | GridColumnsResponsive = '1fr 1fr';
 
-	getClasses(): string[] {
+	private getClasses(): string[] {
 		const cssClasses = [];
 
 		if (this.variant === 'regular') {
@@ -45,5 +62,13 @@ export class DescriptionListComponent extends GridApiDirective {
 		}
 
 		return cssClasses;
+	}
+
+	ngOnInit(): void {
+		this._classList = this.getClasses();
+	}
+
+	ngOnChanges(): void {
+		this._classList = this.getClasses();
 	}
 }

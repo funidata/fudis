@@ -2,8 +2,9 @@
 import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
-import { DialogService, ErrorSummaryService } from 'ngx-fudis';
+import { DialogService, ErrorSummaryService, GridService } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
+
 import { IFudisDropdownOption, IFudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
 
 @Component({
@@ -39,8 +40,11 @@ export class AppComponent implements OnInit {
 		@Inject(DOCUMENT) private document: Document,
 		public dialog: DialogService,
 		private translocoService: TranslocoService,
-		private errorSummaryService: ErrorSummaryService
-	) {}
+		private errorSummaryService: ErrorSummaryService,
+		private gridService: GridService
+	) {
+		gridService.setGridDefaultColumns({ default: 3, md: 4 });
+	}
 
 	errorSummaryVisible: boolean = false;
 

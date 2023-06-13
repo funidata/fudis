@@ -17,36 +17,36 @@
 		}
 
 		&__s {
-			width: calc(gridTokens.$grid-width-s + 2 * spacing.$spacing-m);
+			width: calc(gridTokens.$grid-width-sm + 2 * spacing.$spacing-m);
 
-			@include breakpoints.breakpoint('m') {
-				width: calc(gridTokens.$grid-width-s + 2 * spacing.$spacing-xl);
+			@include breakpoints.breakpoint('md') {
+				width: calc(gridTokens.$grid-width-sm + 2 * spacing.$spacing-xl);
 			}
 		}
 
 		&__m {
-			width: calc(gridTokens.$grid-width-m + 2 * spacing.$spacing-m);
+			width: calc(gridTokens.$grid-width-md + 2 * spacing.$spacing-m);
 
-			@include breakpoints.breakpoint('m') {
-				width: calc(gridTokens.$grid-width-m + 2 * spacing.$spacing-xl);
+			@include breakpoints.breakpoint('md') {
+				width: calc(gridTokens.$grid-width-md + 2 * spacing.$spacing-xl);
 			}
 		}
 
 		&__l {
-			width: calc(gridTokens.$grid-width-l + 2 * spacing.$spacing-m);
+			width: calc(gridTokens.$grid-width-lg + 2 * spacing.$spacing-m);
 
-			@include breakpoints.breakpoint('m') {
-				width: calc(gridTokens.$grid-width-l + 2 * spacing.$spacing-xl);
+			@include breakpoints.breakpoint('md') {
+				width: calc(gridTokens.$grid-width-lg + 2 * spacing.$spacing-xl);
 			}
 		}
 	}
 
-	@include breakpoints.breakpoint('s') {
+	@include breakpoints.breakpoint('sm') {
 		padding: spacing.$spacing-m;
 		max-width: calc(100% - (2 * spacing.$spacing-m));
 	}
 
-	@include breakpoints.breakpoint('m') {
+	@include breakpoints.breakpoint('md') {
 		padding: spacing.$spacing-m spacing.$spacing-xl;
 		max-width: calc(100% - (2 * spacing.$spacing-xl));
 	}

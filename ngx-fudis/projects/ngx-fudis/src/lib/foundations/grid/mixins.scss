@@ -14,17 +14,17 @@
 			column-gap: spacing.$spacing-l;
 		}
 
-		@if $width == m or $width == l {
+		@if $width == md or $width == lg {
 			row-gap: spacing.$spacing-m;
 			column-gap: spacing.$spacing-m;
 		}
 
-		@if $width == s or $width == xs {
+		@if $width == sm or $width == xs {
 			row-gap: spacing.$spacing-s;
 			column-gap: spacing.$spacing-s;
 		}
 	} @else {
-		@error 'Unknown grid width of #{$width}. Accepted arguments are: "xxl", "xl", "l", "m", "s", "xs".';
+		@error 'Unknown grid width of #{$width}. Accepted arguments are: "xxl", "xl", "lg", "md", "sm", "xs".';
 	}
 }
 

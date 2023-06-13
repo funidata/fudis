@@ -1,8 +1,8 @@
 /* stylelint-disable unit-disallowed-list */
 $grid-width-xs: 34rem; // 320px-544px. For viewport smaller than 576px.
-$grid-width-s: 34rem; // 544px
-$grid-width-m: 45rem; // 720px
-$grid-width-l: 60rem; // 960px
+$grid-width-sm: 34rem; // 544px
+$grid-width-md: 45rem; // 720px
+$grid-width-lg: 60rem; // 960px
 $grid-width-xl: 65rem; // 1040px
 $grid-width-xxl: 96.25rem; // 1540px
 
@@ -11,8 +11,8 @@ $grid-min-width: 18rem; // 320px
 $grid-widths: (
 	'xxl': $grid-width-xxl,
 	'xl': $grid-width-xl,
-	'l': $grid-width-l,
-	'm': $grid-width-m,
-	's': $grid-width-s,
+	'lg': $grid-width-lg,
+	'md': $grid-width-md,
+	'sm': $grid-width-sm,
 	'xs': $grid-width-xs,
 );

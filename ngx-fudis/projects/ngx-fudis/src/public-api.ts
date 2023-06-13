@@ -36,8 +36,11 @@ export {
 export { FieldSetComponent } from './lib/components/form/fieldset/fieldset.component';
 
 export { InputWithLanguageOptionsComponent } from './lib/components/form/input-with-language-options/input-with-language-options.component';
-export { GridComponent } from './lib/components/grid/grid.component';
-export { GridDirective } from './lib/directives/grid/grid.directive';
+export { GridComponent } from './lib/components/grid/grid/grid.component';
+export { GridItemComponent } from './lib/components/grid/grid-item/grid-item.component';
+export { GridDirective } from './lib/directives/grid/grid/grid.directive';
+export { GridItemDirective } from './lib/directives/grid/grid-item/grid-item.directive';
+export { GridService } from './lib/directives/grid/grid-service/grid.service';
 export { GuidanceComponent } from './lib/components/form/guidance/guidance.component';
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
 export { IconComponent } from './lib/components/icon/icon.component';

@@ -8,6 +8,7 @@
 		"xyc.vscode-mdx-preview",
 		"dbaeumer.vscode-eslint",
 		"nhoizey.gremlins",
-		"deque-systems.vscode-axe-linter"
+		"deque-systems.vscode-axe-linter",
+		"tobermory.es6-string-html"
 	]
 }
