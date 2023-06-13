@@ -12,13 +12,16 @@ export class DropdownMenuItemComponent {
 	/**
 	 * Label for dropdown item
 	 */
-	@Input() label: string;
+	@Input({ required: true }) label: string;
 
 	/**
 	 * Option for disabling dropdown item
 	 */
 	@Input() disabled: boolean = false;
 
+	/**
+	 * Optional click handler
+	 */
 	@Output() handleClick = new EventEmitter<Event>();
 
 	constructor(private clickService: DropdownMenuItemService) {}
@@ -44,7 +47,18 @@ export class DropdownMenuItemComponent {
 		elementToFocus.focus();
 	}
 
+	handleBlur(event: FocusEvent): void {
+		const menuButton = this.dropdownItem.nativeElement.closest('fudis-button').querySelector('.fudis-button');
+
+		if (
+			!(event.relatedTarget as HTMLElement)?.classList?.contains('fudis-dropdown-menu-item') &&
+			(event.relatedTarget as HTMLElement) !== menuButton
+		) {
+			this.clickService.setMenuStatus(false);
+		}
+	}
+
 	closeDropdown(): void {
-		this.clickService.close();
+		this.clickService.setMenuStatus(false);
 	}
 }

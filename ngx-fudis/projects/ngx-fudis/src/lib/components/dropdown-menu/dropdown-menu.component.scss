@@ -1,12 +1,15 @@
 @use '../../foundations/borders/mixins.scss' as borders;
 @use '../../foundations/focus/mixins.scss' as focus;
 @use '../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-dropdown-menu {
+	@include utilities.box-reset;
 	@include borders.border('1px', 'solid', 'gray-dark');
 	@include colorMixins.bg-color('white');
 
 	position: absolute;
+	z-index: 10;
 
 	&:focus-visible {
 		@include focus.focus-generic;

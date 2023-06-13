@@ -3,6 +3,7 @@
 @use '../../foundations/borders/mixins.scss' as borders;
 @use '../../foundations/typography/mixins.scss' as typography;
 @use '../../foundations/spacing/tokens.scss' as spacing;
+@use '../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-button-host {
 	display: inline-block;
@@ -10,6 +11,7 @@
 }
 
 .fudis-button {
+	@include utilities.box-reset;
 	@include borders.border-radius('2px');
 	@include colors.bg-color('transparent');
 	@include typography.button-typography;

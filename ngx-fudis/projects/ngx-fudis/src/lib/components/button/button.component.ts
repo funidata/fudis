@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import {
 	Component,
 	Input,
@@ -8,6 +9,9 @@ import {
 	OnInit,
 	ViewChild,
 	ElementRef,
+	OnChanges,
+	effect,
+	Signal,
 } from '@angular/core';
 import { FudisIcon, FudisIconColor } from '../../types/icons';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
@@ -19,10 +23,10 @@ import { DropdownMenuItemService } from '../dropdown-menu/dropdown-menu-item/dro
 	styleUrls: ['./button.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class ButtonComponent extends TooltipApiDirective implements OnInit {
+export class ButtonComponent extends TooltipApiDirective implements OnInit, OnChanges {
 	@HostBinding('class') classes = 'fudis-button-host';
 
-	@ViewChild('buttonElement') buttonEl: ElementRef<HTMLElement>;
+	@ViewChild('buttonElement') buttonEl: ElementRef<HTMLButtonElement>;
 
 	/**
 	 * Button variant options
@@ -42,7 +46,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnInit {
 	/**
 	 * Text content of the button
 	 */
-	@Input() label: string;
+	@Input({ required: true }) label: string;
 
 	/**
 	 * Hide visible label text for icon-only buttons.
@@ -62,7 +66,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnInit {
 	/**
 	 * Icon for button if needed
 	 */
-	@Input() icon: FudisIcon | undefined = undefined;
+	@Input() icon: FudisIcon;
 
 	/**
 	 * Assign button as menu button with dropdown
@@ -77,46 +81,94 @@ export class ButtonComponent extends TooltipApiDirective implements OnInit {
 	/**
 	 * Automatically sets icon color based on button variant
 	 */
-	iconColor: FudisIconColor = 'white';
+	protected _iconColor: FudisIconColor = 'white';
 
 	/**
 	 * Toggle menu button
 	 */
-	toggleOn: boolean = false;
+	protected _toggleOn: boolean = false;
 
-	constructor(private clickService: DropdownMenuItemService) {
+	/**
+	 *
+	 */
+	protected _classList: string[] = [];
+
+	protected _ariaLabel: string = '';
+
+	private _menuStatus: Signal<boolean>;
+
+	constructor(private _clickService: DropdownMenuItemService) {
 		super();
+
+		this._menuStatus = this._clickService.getMenuStatus();
+
+		effect(() => {
+			this.closeMenu(this._menuStatus());
+		});
 	}
 
-	public get getClasses(): string[] {
+	private getClasses(): string[] {
 		if (this.disabled) {
-			this.iconColor = 'default';
+			this._iconColor = 'default';
 		} else if (this.variant === 'primary') {
-			this.iconColor = 'white';
+			this._iconColor = 'white';
 		} else if (this.variant === 'secondary' || this.variant === 'tertiary') {
-			this.iconColor = 'primary';
+			this._iconColor = 'primary';
 		}
 		return ['fudis-button', `fudis-button__size-${this.size}`, `fudis-button__${this.variant}`];
 	}
 
-	public get getAriaLabel(): string {
+	private getAriaLabel(): string {
 		if (this.labelHidden || this.size === 'icon-only') {
 			return this.ariaLabel ? `${this.label} ${this.ariaLabel}` : this.label;
 		}
 		return this.ariaLabel;
 	}
 
-	ngOnInit() {
+	toggleStatus: boolean;
+
+	closeMenu(menuStatus: boolean): void {
+		if (!menuStatus) {
+			this._toggleOn = false;
+			// this.buttonEl?.nativeElement.focus();
+		}
+
+		// if (this.asMenuButton && this._toggleOn) {
+		// 	// this._clickService.closeMenu();
+		// 	this._toggleOn = false;
+		// 	this.buttonEl?.nativeElement.focus();
+		// }
+	}
+
+	buttonClick(event: Event): void {
 		if (this.asMenuButton) {
-			this.clickService.clickWatcher().subscribe(() => {
-				this.toggleOn = false;
-				this.buttonEl?.nativeElement.focus();
-			});
+			this._toggleOn = !this._toggleOn;
+			this._clickService.setMenuStatus(this._toggleOn);
+		}
+		this.handleClick.emit(event);
+	}
+
+	ngOnInit(): void {
+		if (this.asMenuButton) {
+			// this.clickService.clickWatcher().subscribe(() => {
+			// 	this._toggleOn = false;
+			// 	this.buttonEl?.nativeElement.focus();
+			// });
 		}
 	}
 
-	toggleMenu(event: Event): void {
-		this.toggleOn = !this.toggleOn;
-		this.handleClick.emit(event);
+	ngOnChanges(): void {
+		this._classList = this.getClasses();
+		this._ariaLabel = this.getAriaLabel();
+	}
+
+	handleBlur(event: FocusEvent): void {
+		const targetIsDropdownMenuButton = (event.relatedTarget as HTMLElement)?.classList?.contains(
+			'fudis-dropdown-menu-item'
+		);
+
+		if (this.asMenuButton && !targetIsDropdownMenuButton) {
+			this._clickService.setMenuStatus(false);
+		}
 	}
 }

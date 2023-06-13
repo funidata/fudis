@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';

@@ -1,15 +1,14 @@
-import { BehaviorSubject, Observable } from 'rxjs';
+/* eslint-disable no-underscore-dangle */
+import { Signal, signal } from '@angular/core';
 
 export class DropdownMenuItemService {
-	private clickStore = new BehaviorSubject<boolean>(true);
+	private _signalDropdownMenuOpen = signal<boolean>(false);
 
-	private click = this.clickStore.asObservable();
-
-	clickWatcher(): Observable<any> {
-		return this.click;
+	setMenuStatus(status: boolean): void {
+		this._signalDropdownMenuOpen.set(status);
 	}
 
-	close(): void {
-		this.clickStore.next(true);
+	getMenuStatus(): Signal<boolean> {
+		return this._signalDropdownMenuOpen.asReadonly();
 	}
 }

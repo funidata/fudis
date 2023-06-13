@@ -1,4 +1,5 @@
 import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
+import { DropdownMenuItemService } from './dropdown-menu-item/dropdown-menu-item.service';
 
 @Component({
 	selector: 'fudis-dropdown-menu',
@@ -11,7 +12,9 @@ export class DropdownMenuComponent {
 	/**
 	 * Dropdown-menu is aligned to open left side of the button by default but can be aligned to open right side if necessary
 	 */
-	@Input() alignMenu: 'left' | 'right' = 'left';
+	@Input() align: 'left' | 'right' = 'left';
+
+	constructor(private clickService: DropdownMenuItemService) {}
 
 	@HostListener('window:keydown.arrowDown', ['$event'])
 	handleKeyDown(event: KeyboardEvent) {

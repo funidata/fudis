@@ -1,42 +1,42 @@
-@use '../../../foundations/typography/mixins.scss' as typography;
-@use '../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../foundations/colors/mixins.scss' as colorMixins;
 @use '../../../foundations/borders/mixins.scss' as borders;
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
 @use '../../../foundations/focus/mixins.scss' as focus;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-dropdown-menu-item {
-	&__button {
-		@include typography.body-text-m-light;
-		@include colorMixins.bg-color('transparent');
-		@include borders.border-none;
+	@include utilities.box-reset;
+	@include typography.body-text-m-light;
+	@include colorMixins.bg-color('transparent');
+	@include borders.border-none;
 
-		display: block;
-		position: relative;
-		cursor: pointer;
-		padding: spacing.$spacing-xs;
-		width: 100%;
-		text-align: left;
-		white-space: nowrap;
+	display: block;
+	position: relative;
+	cursor: pointer;
+	padding: spacing.$spacing-xs;
+	width: 100%;
+	text-align: left;
+	white-space: nowrap;
 
-		&:hover {
-			@include colorMixins.bg-color('primary-light');
-		}
+	&:hover {
+		@include colorMixins.bg-color('primary-light');
+	}
 
-		&:focus-visible,
-		&:focus {
-			@include focus.focus-dropdown;
-		}
+	&:focus-visible,
+	&:focus {
+		@include focus.focus-dropdown;
+	}
 
-		&:active {
-			@include colorMixins.bg-color('primary');
-			@include colorMixins.text-color('white');
-		}
+	&:active {
+		@include colorMixins.bg-color('primary');
+		@include colorMixins.text-color('white');
+	}
 
-		&[aria-disabled='true'] {
-			@include colorMixins.bg-color('gray-extra-light');
-			@include colorMixins.text-color('gray-middle');
+	&[aria-disabled='true'] {
+		@include colorMixins.bg-color('gray-extra-light');
+		@include colorMixins.text-color('gray-middle');
 
-			cursor: default;
-		}
+		cursor: default;
 	}
 }
