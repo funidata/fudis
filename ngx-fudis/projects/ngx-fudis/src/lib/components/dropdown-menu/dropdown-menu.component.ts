@@ -1,20 +1,17 @@
-import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
-import { DropdownMenuItemService } from './dropdown-menu-item/dropdown-menu-item.service';
+import { AfterViewInit, Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 
 @Component({
 	selector: 'fudis-dropdown-menu',
 	templateUrl: './dropdown-menu.component.html',
 	styleUrls: ['./dropdown-menu.component.scss'],
 })
-export class DropdownMenuComponent {
+export class DropdownMenuComponent implements AfterViewInit {
 	@ViewChild('dropdownMenu') dropdownMenu: ElementRef<HTMLElement>;
 
 	/**
 	 * Dropdown-menu is aligned to open left side of the button by default but can be aligned to open right side if necessary
 	 */
 	@Input() align: 'left' | 'right' = 'left';
-
-	constructor(private clickService: DropdownMenuItemService) {}
 
 	@HostListener('window:keydown.arrowDown', ['$event'])
 	handleKeyDown(event: KeyboardEvent) {
@@ -26,5 +23,24 @@ export class DropdownMenuComponent {
 			const firstChildButtonElement = firstChildElement.querySelector('button');
 			firstChildButtonElement?.focus();
 		}
+	}
+
+	protected maxWidth: string = 'initial';
+
+	@HostListener('window:click', ['$event'])
+	getMaxWidth(): void {
+		const elementInView = this.dropdownMenu?.nativeElement?.getBoundingClientRect();
+
+		if (elementInView?.x !== 0 && this.align === 'left') {
+			this.maxWidth = `${elementInView.width + elementInView.x}px`;
+		} else if (elementInView?.x !== 0) {
+			this.maxWidth = `${window.innerWidth - elementInView.x}px`;
+		} else {
+			this.maxWidth = 'initial';
+		}
+	}
+
+	ngAfterViewInit(): void {
+		this.getMaxWidth();
 	}
 }
