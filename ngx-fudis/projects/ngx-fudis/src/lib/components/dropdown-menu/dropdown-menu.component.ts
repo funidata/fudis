@@ -1,11 +1,11 @@
-import { AfterViewInit, Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 
 @Component({
 	selector: 'fudis-dropdown-menu',
 	templateUrl: './dropdown-menu.component.html',
 	styleUrls: ['./dropdown-menu.component.scss'],
 })
-export class DropdownMenuComponent implements AfterViewInit {
+export class DropdownMenuComponent implements AfterContentInit {
 	@ViewChild('dropdownMenu') dropdownMenu: ElementRef<HTMLElement>;
 
 	/**
@@ -29,18 +29,20 @@ export class DropdownMenuComponent implements AfterViewInit {
 
 	@HostListener('window:click', ['$event'])
 	getMaxWidth(): void {
-		const elementInView = this.dropdownMenu?.nativeElement?.getBoundingClientRect();
+		const elementInViewWidth = this.dropdownMenu?.nativeElement?.getBoundingClientRect()?.width;
 
-		if (elementInView?.width !== 0 && this.align === 'left') {
-			this.maxWidth = `${elementInView.width + elementInView.x}px`;
-		} else if (elementInView?.width !== 0) {
-			this.maxWidth = `${window.innerWidth - elementInView.x}px`;
+		const elementInViewX = this.dropdownMenu?.nativeElement?.getBoundingClientRect()?.x;
+
+		if (elementInViewX && elementInViewWidth && elementInViewWidth !== 0 && this.align === 'left') {
+			this.maxWidth = `${elementInViewWidth + elementInViewX}px`;
+		} else if (window?.innerWidth && elementInViewWidth !== 0) {
+			this.maxWidth = `${window.innerWidth - elementInViewX}px`;
 		} else {
 			this.maxWidth = 'initial';
 		}
 	}
 
-	ngAfterViewInit(): void {
+	ngAfterContentInit(): void {
 		this.getMaxWidth();
 	}
 }
