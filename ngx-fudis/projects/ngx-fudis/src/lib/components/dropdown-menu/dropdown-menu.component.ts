@@ -31,9 +31,9 @@ export class DropdownMenuComponent implements AfterViewInit {
 	getMaxWidth(): void {
 		const elementInView = this.dropdownMenu?.nativeElement?.getBoundingClientRect();
 
-		if (elementInView?.x !== 0 && this.align === 'left') {
+		if (elementInView?.width !== 0 && this.align === 'left') {
 			this.maxWidth = `${elementInView.width + elementInView.x}px`;
-		} else if (elementInView?.x !== 0) {
+		} else if (elementInView?.width !== 0) {
 			this.maxWidth = `${window.innerWidth - elementInView.x}px`;
 		} else {
 			this.maxWidth = 'initial';
