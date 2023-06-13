@@ -4,7 +4,7 @@ import { MockComponent } from 'ng-mocks';
 import { FieldSetComponent } from './fieldset.component';
 import { ErrorSummaryComponent } from '../error-summary/error-summary.component';
 import { ErrorSummaryService } from '../error-summary/error-summary.service';
-import { GridComponent } from '../../grid/grid.component';
+import { GridComponent } from '../../grid/grid/grid.component';
 
 describe('FieldSetComponent', () => {
 	let component: FieldSetComponent;

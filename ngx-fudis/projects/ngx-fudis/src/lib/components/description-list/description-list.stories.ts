@@ -39,10 +39,10 @@ const html = String.raw;
 export const DescriptionList: StoryFn = () => ({
 	props: { testData, testDataCompact },
 	template: html`<fudis-heading tag="h2" size="m"> Description List Regular Example</fudis-heading>
-		<fudis-description-list [data]="testData" [marginBottom]="'m'"></fudis-description-list>
+		<fudis-description-list [data]="testData" [marginBottom]="'md'"></fudis-description-list>
 		<hr />
 		<fudis-heading tag="h2" size="m">Description List Compact Example</fudis-heading>
-		<fudis-description-list [variant]="'compact'" [data]="testDataCompact"></fudis-description-list> `,
+		<fudis-description-list [variant]="'compact'" [data]="testDataCompact"></fudis-description-list>`,
 });
 
 const TemplateWithDl: StoryFn<DescriptionListComponent> = () => ({
@@ -51,7 +51,7 @@ const TemplateWithDl: StoryFn<DescriptionListComponent> = () => ({
 		</fudis-grid>
 		<fudis-description-list [data]="testData" [marginBottom]="'xl'"></fudis-description-list>
 
-		<fudis-grid [columns]="columns" [columnsXs]="'1fr'">
+		<fudis-grid [columns]="columns">
 			<fudis-heading tag="h2" size="m"
 				>And here below is a Fudis Grid where DL item is used as child component</fudis-heading
 			>

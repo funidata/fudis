@@ -4,7 +4,7 @@
 @use '../../foundations/colors/tokens.scss' as color;
 @use '../../foundations/spacing/tokens.scss' as spacing;
 @use '../../foundations/breakpoints/mixins.scss' as breakpoint;
-@forward '../grid/grid.component.scss';
+@forward '../grid/grid/grid.component.scss';
 
 .fudis-description-list {
 	&__disabled-grid {
@@ -18,7 +18,7 @@
 			}
 		}
 
-		@include breakpoint.breakpoint('m') {
+		@include breakpoint.breakpoint('md') {
 			columns: 2;
 		}
 	}
@@ -52,7 +52,7 @@
 	&__disabled-grid {
 		columns: 1;
 
-		@include breakpoint.breakpoint('m') {
+		@include breakpoint.breakpoint('md') {
 			columns: 2;
 		}
 	}

@@ -12,7 +12,7 @@ Load Fudis mixins and tokens to your file in your SCSS file with:
 
 ## Min-width mixin
 
-The mixins are using min-width, so when you are using the mixin **breakpoint('m')**, your styles will be applied from the medium breakpoint and up.
+The mixins are using min-width, so when you are using the mixin **breakpoint('md')**, your styles will be applied from the medium breakpoint and up.
 
 ```
 @include fudis.breakpoint($breakpoint){}
@@ -24,7 +24,7 @@ The mixins are using min-width, so when you are using the mixin **breakpoint('m'
 
 ```
 .my-element {
-  @include fudis.breakpoint('m'){
+  @include fudis.breakpoint('md'){
     // Rules defined here apply from breakpoint 'm' and up
   };
 }
@@ -33,7 +33,7 @@ The mixins are using min-width, so when you are using the mixin **breakpoint('m'
 
 ## Max-width mixin
 
-The mixins are using max-width, so when you are using the mixin **breakpoint-max('m')**, your styles will be applied if viewport is small than M size.
+The mixins are using max-width, so when you are using the mixin **breakpoint-max('md')**, your styles will be applied if viewport is small than M size.
 
 ```
 @include fudis.breakpoint-max($breakpoint){}
@@ -49,7 +49,7 @@ Breakpoints are based on Bootstrap's breakpoint system, which Sisu application u
 | --------------- | ------------ | ----- | ---------------- | ---------------- |
 | $breakpoint-xxl | xl           | 100em | 1600px           | +1600px          |
 | $breakpoint-xl  | l            | 75em  | 1200px           | 1200px-1599px    |
-| $breakpoint-l   | m            | 62em  | 992px            | 992px-1199px     |
-| $breakpoint-m   | s            | 48em  | 768px            | 768px-991px      |
-| $breakpoint-s   | xs           | 36em  | 576px            | 576px-767px      |
+| $breakpoint-lg  | m            | 62em  | 992px            | 992px-1199px     |
+| $breakpoint-md  | s            | 48em  | 768px            | 768px-991px      |
+| $breakpoint-sm  | xs           | 36em  | 576px            | 576px-767px      |
 | $breakpoint-xs  | xxs          | 0     | 0                | 0-575px          |
