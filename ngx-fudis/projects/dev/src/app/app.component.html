@@ -46,12 +46,12 @@
 			[maxLength]="20"
 			[helpText]="'Voit kirjoittaa tähän monia kivoja juttuja, mutta max 20 kirjainta'">
 		</fudis-text-area>
-		<fudis-grid [columns]="2">
+		<!-- <fudis-grid [columns]="2">
 			<fudis-button data-theme="sisu" type="submit" label="Lähetä"></fudis-button>
 			<fudis-button data-theme="sisu" label="Eiku" variant="secondary"></fudis-button>
 			<fudis-button icon="delete" data-theme="sisu" label="Poista" variant="tertiary"> </fudis-button>
 			<fudis-button icon="delete" data-theme="sisu" label="Poista" [disabled]="true"> </fudis-button>
-		</fudis-grid>
+		</fudis-grid> -->
 	</form>
 	<fudis-notification variant="danger" ariaVariantText="Varoitus!">Whoops! Some error happened.</fudis-notification>
 	<fudis-expandable title="Title for expandable">
@@ -69,8 +69,8 @@
 	</fudis-heading>
 	<fudis-button [label]="'Open dialog'" (handleClick)="openDialog()"></fudis-button>
 
-	<fudis-description-list [data]="testData"></fudis-description-list>
-	<fudis-grid [columns]="{ default: 1, lg: 6 }" [marginSides]="'none'" [marginTop]="'sm'" [marginBottom]="'sm'">
+	<!-- <fudis-description-list [data]="testData"></fudis-description-list> -->
+	<fudis-grid [columns]="{ default: 1 }" [marginSides]="'none'" [marginTop]="'sm'" [marginBottom]="'sm'">
 		<div style="border: 2px solid lightblue"><fudis-body-text>Showcase of grid items</fudis-body-text></div>
 		<div style="border: 2px solid lightblue"><fudis-body-text>Showcase of grid items</fudis-body-text></div>
 		<div style="border: 2px solid lightblue"><fudis-body-text>Showcase of grid items</fudis-body-text></div>

@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { Injectable, OnDestroy, signal } from '@angular/core';
+import { Injectable, OnDestroy, Signal, signal } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { GridColumnsResponsive, GridResponsiveData } from '../../../types/grid';
@@ -10,7 +10,7 @@ import { breakpointsMinWidthToObserve } from '../gridUtils';
 export class GridService implements OnDestroy {
 	destroyed = new Subject<void>();
 
-	private _defaultGridColumns: GridColumnsResponsive | null = null;
+	private _defaultGridColumns = signal<GridColumnsResponsive | null>(null);
 
 	private _currentScreenSize = signal<BreakpointState | null>(null);
 
@@ -20,14 +20,14 @@ export class GridService implements OnDestroy {
 	 * To set from application default values for all Grids application uses.
 	 */
 	setGridDefaultColumns(defaultColumns: GridColumnsResponsive): void {
-		this._defaultGridColumns = defaultColumns;
+		this._defaultGridColumns.set(defaultColumns);
 	}
 
 	/**
 	 * Get application's default values for Grid
 	 */
-	getGridDefaultColumns(): GridColumnsResponsive | null {
-		return this._defaultGridColumns;
+	getGridDefaultColumns(): Signal<GridColumnsResponsive | null> {
+		return this._defaultGridColumns.asReadonly();
 	}
 
 	/**

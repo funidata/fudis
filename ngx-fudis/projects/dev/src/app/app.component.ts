@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
 		private errorSummaryService: ErrorSummaryService,
 		private gridService: GridService
 	) {
-		gridService.setGridDefaultColumns({ default: 2, md: 4 });
+		gridService.setGridDefaultColumns({ default: 3, md: 4 });
 	}
 
 	errorSummaryVisible: boolean = false;

@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { Directive, ElementRef, Input, OnChanges, OnInit, effect } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, Signal, effect } from '@angular/core';
 
 import { getGridBreakpointDataArray, getGridClasses, getGridCssValue } from '../gridUtils';
 import { GridApiDirective } from '../grid-api/grid-api.directive';
@@ -9,7 +9,7 @@ import { GridService } from '../grid-service/grid.service';
 @Directive({
 	selector: '[fudisGrid]',
 })
-export class GridDirective extends GridApiDirective implements OnInit, OnChanges {
+export class GridDirective extends GridApiDirective implements OnChanges {
 	/**
 	 * Used to apply grid-template-columns values for the Grid
 	 */
@@ -30,6 +30,8 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	 */
 	private _gridService: GridService;
 
+	private _gridDefaultValues: Signal<GridColumnsResponsive | null>;
+
 	/**
 	 * Setting of columns for the grid. Input will be converted to native CSS grid grid-template-columns values
 	 * E. g. as native string: [columns]="'1fr 1fr'" or [columns]="'1fr 2fr'"
@@ -42,13 +44,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	 * And after xl breakpoint 'repeat(3, 1fr)'
 	 */
 	@Input() set columns(value: string | number | GridColumnsResponsive) {
-		const defaultValues = this._gridService.getGridDefaultColumns();
-		// If no value provided, still check from the service, if application has provided default Grid values
-		if (!value && defaultValues) {
-			this._columns = getGridBreakpointDataArray(defaultValues);
-		}
-		// If value is normal string. E. g. '1fr 2fr 1fr'
-		else if (typeof value === 'string') {
+		if (typeof value === 'string') {
 			this._columns = value;
 		}
 		// If value is number, convert it to grid-template-column value. E. g. number 6 converts to 'repeat(6,1fr)'
@@ -56,9 +52,12 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 			this._columns = getGridCssValue(value);
 		}
 		// Get breakpoint settings with provided default values and Input values
-		else {
-			const combinedValues: GridColumnsResponsive = { ...defaultValues, ...value };
+		else if (this._gridDefaultValues() !== null) {
+			const combinedValues: GridColumnsResponsive = { ...this._gridDefaultValues(), ...value };
+
 			this._columns = getGridBreakpointDataArray(combinedValues);
+		} else {
+			this._columns = getGridBreakpointDataArray(value);
 		}
 	}
 
@@ -66,6 +65,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		super();
 		this._gridService = gridService;
 		this._element = _gridElement.nativeElement;
+		this._gridDefaultValues = this._gridService.getGridDefaultColumns();
 
 		/**
 		 * When screen is resized check and apply new rules for Grid columns
@@ -115,11 +115,10 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		this._element.classList.value = getGridClasses(this._gridInputObject);
 	}
 
-	ngOnInit() {
-		this.applyGridCss();
-	}
-
 	ngOnChanges(): void {
+		if (this.columns === 'undefined' && this._gridDefaultValues()) {
+			this._columns = getGridBreakpointDataArray(this._gridDefaultValues()!);
+		}
 		this.applyGridCss();
 	}
 }
