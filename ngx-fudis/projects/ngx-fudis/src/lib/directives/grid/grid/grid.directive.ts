@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnChanges, Signal, effect } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, OnInit, Signal, effect } from '@angular/core';
 
 import { getGridBreakpointDataArray, getGridClasses, getGridCssValue } from '../gridUtils';
 import { GridApiDirective } from '../grid-api/grid-api.directive';
@@ -8,7 +8,7 @@ import { GridService } from '../grid-service/grid.service';
 @Directive({
 	selector: '[fudisGrid]',
 })
-export class GridDirective extends GridApiDirective implements OnChanges {
+export class GridDirective extends GridApiDirective implements OnInit, OnChanges {
 	/**
 	 * Used to apply grid-template-columns values for the Grid
 	 */
@@ -114,8 +114,15 @@ export class GridDirective extends GridApiDirective implements OnChanges {
 		this._element.classList.value = getGridClasses(this._gridInputObject);
 	}
 
+	ngOnInit(): void {
+		if (!this.columns && this._gridDefaultValues()) {
+			this._columns = getGridBreakpointDataArray(this._gridDefaultValues()!);
+		}
+		this.applyGridCss();
+	}
+
 	ngOnChanges(): void {
-		if (this.columns === 'undefined' && this._gridDefaultValues()) {
+		if (!this.columns && this._gridDefaultValues()) {
 			this._columns = getGridBreakpointDataArray(this._gridDefaultValues()!);
 		}
 		this.applyGridCss();
