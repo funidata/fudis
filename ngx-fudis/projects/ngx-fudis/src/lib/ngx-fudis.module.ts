@@ -52,6 +52,7 @@ import { GridService } from './directives/grid/grid-service/grid.service';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { IconComponent } from './components/icon/icon.component';
+import { IdService } from './utilities/id-service.service';
 import { InputBaseDirective } from './directives/form/input-base/input-base.directive';
 import { InputWithLanguageOptionsComponent } from './components/form/input-with-language-options/input-with-language-options.component';
 import { LabelComponent } from './components/form/label/label.component';
@@ -184,6 +185,6 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		TextInputComponent,
 		TooltipDirective,
 	],
-	providers: [DialogService, ErrorSummaryService, GridService, DropdownMenuItemService],
+	providers: [DialogService, ErrorSummaryService, GridService, DropdownMenuItemService, IdService],
 })
 export class NgxFudisModule {}

@@ -1,6 +1,7 @@
-import { Component, ContentChild, Input, Output, EventEmitter, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, ContentChild, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { ExpandableType } from '../../types/expandables';
 import { ExpandableContentDirective, ExpandableActionsDirective } from './expandable-directives';
+import { IdService } from '../../utilities/id-service.service';
 
 /**
  * Example usage:
@@ -31,7 +32,7 @@ export class ExpandableComponent {
 	/**
 	 * Tag is for semantic support for screen readers, this does not change the appearance of the expandable
 	 */
-	@Input() tag: 'h2' | 'h3' | 'h4' | 'h5' | 'h6' = 'h2';
+	@Input({ required: true }) tag: 'h2' | 'h3' | 'h4' | 'h5' | 'h6' = 'h2';
 
 	/**
 	 * Type i.e the look of the expandable
@@ -41,19 +42,19 @@ export class ExpandableComponent {
 	/**
 	 * Title for the expandable
 	 */
-	@Input() title: string;
+	@Input({ required: true }) title: string;
 
 	/**
 	 * Optional sub title, placed underneath the main title
 	 */
 	@Input() subTitle?: string;
 
-	constructor(public ref: ElementRef) {}
+	protected _collapsed = true;
 
-	private _collapsed = true;
+	protected _id: string;
 
-	get collapsed(): boolean {
-		return this._collapsed;
+	constructor(private _idService: IdService) {
+		this._id = _idService.getNewId('expandable');
 	}
 
 	/**

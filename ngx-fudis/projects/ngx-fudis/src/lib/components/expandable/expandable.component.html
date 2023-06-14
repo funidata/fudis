@@ -1,4 +1,7 @@
-<div class="fudis-expandable fudis-expandable__{{ variant }}" [class.fudis-expandable--collapsed]="collapsed">
+<section
+	[attr.aria-describedby]="_id"
+	class="fudis-expandable fudis-expandable__{{ variant }}"
+	[class.fudis-expandable--collapsed]="_collapsed">
 	<div class="fudis-expandable__header">
 		<ng-container
 			*ngTemplateOutlet="tag === 'h2' ? h2 : tag === 'h3' ? h3 : tag === 'h4' ? h4 : tag === 'h5' ? h5 : h6">
@@ -9,36 +12,36 @@
 			</div>
 		</ng-container>
 	</div>
-	<div class="fudis-expandable__content" *ngIf="openedOnce" [attr.aria-hidden]="collapsed" [hidden]="collapsed">
+	<div class="fudis-expandable__content" *ngIf="openedOnce" [attr.aria-hidden]="_collapsed" [hidden]="_collapsed">
 		<ng-container *ngTemplateOutlet="content!.templateRef"></ng-container>
 	</div>
-</div>
+</section>
 <ng-template #h2>
-	<h2 class="fudis-expandable__header__heading">
+	<h2 [id]="_id" class="fudis-expandable__header__heading">
 		<ng-container *ngTemplateOutlet="header"></ng-container>
 	</h2>
 </ng-template>
 
 <ng-template #h3>
-	<h3 class="fudis-expandable__header__heading">
+	<h3 [id]="_id" class="fudis-expandable__header__heading">
 		<ng-container *ngTemplateOutlet="header"></ng-container>
 	</h3>
 </ng-template>
 
 <ng-template #h4>
-	<h4 class="fudis-expandable__header__heading">
+	<h4 [id]="_id" class="fudis-expandable__header__heading">
 		<ng-container *ngTemplateOutlet="header"></ng-container>
 	</h4>
 </ng-template>
 
 <ng-template #h5>
-	<h5 class="fudis-expandable__header__heading">
+	<h5 [id]="_id" class="fudis-expandable__header__heading">
 		<ng-container *ngTemplateOutlet="header"></ng-container>
 	</h5>
 </ng-template>
 
 <ng-template #h6>
-	<h6 class="fudis-expandable__header__heading">
+	<h6 [id]="_id" class="fudis-expandable__header__heading">
 		<ng-container *ngTemplateOutlet="header"></ng-container>
 	</h6>
 </ng-template>
@@ -47,9 +50,9 @@
 	<button
 		type="button"
 		class="fudis-expandable__header__heading__button"
-		[attr.aria-expanded]="!collapsed"
-		(click)="setCollapsedStatus(!collapsed)">
-		<fudis-icon icon="chevron-ring-fill" [rotate]="collapsed ? 'none' : 'cw-90'"></fudis-icon>{{ title }}
+		[attr.aria-expanded]="!_collapsed"
+		(click)="setCollapsedStatus(!_collapsed)">
+		<fudis-icon icon="chevron-ring-fill" [rotate]="_collapsed ? 'none' : 'cw-90'"></fudis-icon>{{ title }}
 		<span *ngIf="subTitle" class="fudis-expandable__header__heading__button__sub-heading">{{ subTitle }}</span>
 	</button>
 </ng-template>

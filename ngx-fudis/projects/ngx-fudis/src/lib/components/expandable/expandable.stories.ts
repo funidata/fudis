@@ -26,6 +26,36 @@ const Template: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
         <fudis-body-text>Hey you! I am the content of the expandable.</fudis-body-text>
       </ng-template>
     </fudis-expandable>
+		<fudis-expandable [title]="title" [subTitle]="subTitle">
+      <ng-template fudisExpandableContent>
+        <fudis-body-text>Hey you! I am the content of the expandable.</fudis-body-text>
+      </ng-template>
+    </fudis-expandable>
+		<fudis-expandable [title]="title" [subTitle]="subTitle">
+      <ng-template fudisExpandableContent>
+        <fudis-body-text>Hey you! I am the content of the expandable.</fudis-body-text>
+      </ng-template>
+    </fudis-expandable>
+		<fudis-expandable [title]="title" [subTitle]="subTitle">
+      <ng-template fudisExpandableContent>
+        <fudis-body-text>Hey you! I am the content of the expandable.</fudis-body-text>
+      </ng-template>
+    </fudis-expandable>
+		<fudis-expandable [title]="title" [subTitle]="subTitle">
+      <ng-template fudisExpandableContent>
+        <fudis-body-text>Hey you! I am the content of the expandable.</fudis-body-text>
+      </ng-template>
+    </fudis-expandable>
+		<fudis-expandable [title]="title" [subTitle]="subTitle">
+      <ng-template fudisExpandableContent>
+        <fudis-body-text>Hey you! I am the content of the expandable.</fudis-body-text>
+      </ng-template>
+    </fudis-expandable>
+		<fudis-expandable [title]="title" [subTitle]="subTitle">
+      <ng-template fudisExpandableContent>
+        <fudis-body-text>Hey you! I am the content of the expandable.</fudis-body-text>
+      </ng-template>
+    </fudis-expandable>
   `,
 });
 
