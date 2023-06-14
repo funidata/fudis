@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
@@ -117,5 +118,10 @@ export class AppComponent implements OnInit {
 			this.errorSummaryVisible = false;
 			this.showSuccessBodyText = true;
 		}
+	}
+
+	// eslint-disable-next-line class-methods-use-this
+	doSomething(event: any) {
+		console.log('eventti mennyt perille', event);
 	}
 }

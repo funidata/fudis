@@ -41,8 +41,8 @@ IconButton.args = {
 export const OnlyIconButton = Template.bind({});
 OnlyIconButton.args = {
 	variant: 'secondary',
-	icon: 'three-dots',
-	label: 'Open additional menu',
+	icon: 'search',
+	label: 'Search button',
 	labelHidden: true,
 };
 

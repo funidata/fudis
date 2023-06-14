@@ -31,6 +31,9 @@ import {
 import { DialogComponent } from './components/dialog/dialog.component';
 import { DialogService } from './components/dialog/dialog.service';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
+import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
+import { DropdownMenuItemComponent } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
+import { DropdownMenuItemService } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
 import { ErrorSummaryService } from './components/form/error-summary/error-summary.service';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
@@ -82,6 +85,8 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		DialogContentDirective,
 		DialogCloseDirective,
 		DropdownComponent,
+		DropdownMenuComponent,
+		DropdownMenuItemComponent,
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,
@@ -149,6 +154,8 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		DescriptionListComponent,
 		DialogComponent,
 		DropdownComponent,
+		DropdownMenuComponent,
+		DropdownMenuItemComponent,
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,
@@ -177,6 +184,6 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		TextInputComponent,
 		TooltipDirective,
 	],
-	providers: [DialogService, ErrorSummaryService, GridService],
+	providers: [DialogService, ErrorSummaryService, GridService, DropdownMenuItemService],
 })
 export class NgxFudisModule {}

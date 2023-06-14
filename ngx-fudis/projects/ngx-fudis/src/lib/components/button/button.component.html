@@ -1,17 +1,20 @@
 <ng-container *ngIf="tooltip">
 	<button
+		#buttonElement
 		[type]="type"
+		(blur)="handleBlur($event)"
 		[attr.aria-disabled]="disabled"
-		[attr.aria-label]="getAriaLabel"
-		(click)="!disabled ? handleClick.emit($event) : null"
-		[ngClass]="getClasses"
+		[attr.aria-label]="_ariaLabel"
+		(click)="!disabled && buttonClick($event)"
+		[ngClass]="_classList"
+		[attr.aria-expanded]="!asMenuButton ? null : _toggleOn"
 		fudisTooltip
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle">
 		<ng-container *ngIf="icon">
 			<div class="fudis-button__icon">
-				<fudis-icon class="fudis-button__icon__component" [color]="iconColor" [icon]="icon"></fudis-icon>
+				<fudis-icon class="fudis-button__icon__component" [color]="_iconColor" [icon]="icon"></fudis-icon>
 			</div>
 		</ng-container>
 		{{ labelHidden || size === 'icon-only' ? '' : label }}
@@ -20,16 +23,23 @@
 
 <ng-container *ngIf="!tooltip">
 	<button
+		#buttonElement
 		[type]="type"
+		(blur)="handleBlur($event)"
 		[attr.aria-disabled]="disabled"
-		[attr.aria-label]="getAriaLabel"
-		(click)="!disabled ? handleClick.emit($event) : null"
-		[ngClass]="getClasses">
+		[attr.aria-label]="_ariaLabel"
+		(click)="!disabled && buttonClick($event)"
+		[ngClass]="_classList"
+		[attr.aria-expanded]="!asMenuButton ? null : _toggleOn">
 		<ng-container *ngIf="icon">
 			<div class="fudis-button__icon">
-				<fudis-icon class="fudis-button__icon__component" [color]="iconColor" [icon]="icon"></fudis-icon>
+				<fudis-icon class="fudis-button__icon__component" [color]="_iconColor" [icon]="icon"></fudis-icon>
 			</div>
 		</ng-container>
 		{{ labelHidden || size === 'icon-only' ? '' : label }}
 	</button>
+</ng-container>
+
+<ng-container *ngIf="asMenuButton && _toggleOn">
+	<ng-content></ng-content>
 </ng-container>
