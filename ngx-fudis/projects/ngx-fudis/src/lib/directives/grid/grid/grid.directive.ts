@@ -115,14 +115,14 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	}
 
 	ngOnInit(): void {
-		if (this.columns === 'undefined' && this._gridDefaultValues()) {
+		if (!this.columns && this._gridDefaultValues()) {
 			this._columns = getGridBreakpointDataArray(this._gridDefaultValues()!);
 		}
 		this.applyGridCss();
 	}
 
 	ngOnChanges(): void {
-		if (this.columns === 'undefined' && this._gridDefaultValues()) {
+		if (!this.columns && this._gridDefaultValues()) {
 			this._columns = getGridBreakpointDataArray(this._gridDefaultValues()!);
 		}
 		this.applyGridCss();
