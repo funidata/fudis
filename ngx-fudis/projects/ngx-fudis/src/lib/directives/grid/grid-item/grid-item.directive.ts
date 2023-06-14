@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { Directive, ElementRef, OnChanges, OnInit, Input, effect } from '@angular/core';
 import { GridService } from '../grid-service/grid.service';
 import {

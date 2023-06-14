@@ -10,7 +10,7 @@ export class InputBaseDirective extends TooltipApiDirective {
 	/**
 	 * Label for input.
 	 */
-	@Input() label: string;
+	@Input({ required: true }) label: string;
 
 	/**
 	 * For screen reader users for providing additional information by extending text content in normal label. Used in e. g. input with language options for providing info about currently selected language.
@@ -20,7 +20,7 @@ export class InputBaseDirective extends TooltipApiDirective {
 	/**
 	 * Unique id for input.
 	 */
-	@Input() id: string;
+	@Input({ required: true }) id: string;
 
 	/**
 	 * Option for disabling the input.

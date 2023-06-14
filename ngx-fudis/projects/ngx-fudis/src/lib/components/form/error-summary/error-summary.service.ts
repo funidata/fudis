@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { Signal, signal } from '@angular/core';
 import { TFudisFormErrorSummaryObject, TFudisFormErrorSummaryItem } from '../../../types/forms';
 
@@ -12,11 +11,11 @@ export class ErrorSummaryService {
 	}
 
 	// eslint-disable-next-line class-methods-use-this
-	defineErrorId(id: string, controlName: string | undefined): string {
+	private defineErrorId(id: string, controlName: string | undefined): string {
 		return controlName ? `${id}_${controlName}` : id;
 	}
 
-	addNewError(newError: TFudisFormErrorSummaryItem): void {
+	public addNewError(newError: TFudisFormErrorSummaryItem): void {
 		let currentErrors = this._currentErrorList;
 
 		const errorId = this.defineErrorId(newError.id, newError.controlName);
@@ -44,7 +43,7 @@ export class ErrorSummaryService {
 		this._currentErrorList = currentErrors;
 	}
 
-	removeError(error: { id: string; controlName: string | undefined; type: string }): void {
+	public removeError(error: { id: string; controlName: string | undefined; type: string }): void {
 		const currentErrors = this._currentErrorList;
 
 		const errorId = error.controlName ? `${error.id}_${error.controlName}` : error.id;
@@ -54,7 +53,7 @@ export class ErrorSummaryService {
 		this._currentErrorList = currentErrors;
 	}
 
-	reloadErrors() {
+	public reloadErrors(): void {
 		this._signalCurrentErrorList.set(this._currentErrorList);
 	}
 }
