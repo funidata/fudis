@@ -38,12 +38,15 @@ import { ExpandableComponent } from './components/expandable/expandable.componen
 import { ExpandableContentDirective, ExpandableActionsDirective } from './components/expandable/expandable-directives';
 import { FieldSetBaseDirective } from './directives/form/fieldset-base/fieldset-base.directive';
 import { FieldSetComponent } from './components/form/fieldset/fieldset.component';
-import { GuidanceComponent } from './components/form/guidance/guidance.component';
+import { FormComponent } from './components/form/form/form.component';
+import { FormSectionComponent } from './components/form/form-section/form-section.component';
 import { GridComponent } from './components/grid/grid/grid.component';
 import { GridApiDirective } from './directives/grid/grid-api/grid-api.directive';
 import { GridDirective } from './directives/grid/grid/grid.directive';
 import { GridItemComponent } from './components/grid/grid-item/grid-item.component';
 import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
+import { GridService } from './directives/grid/grid-service/grid.service';
+import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { IconComponent } from './components/icon/icon.component';
 import { InputBaseDirective } from './directives/form/input-base/input-base.directive';
@@ -59,7 +62,6 @@ import { TextInputComponent } from './components/form/text-input/text-input.comp
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
-import { GridService } from './directives/grid/grid-service/grid.service';
 
 @NgModule({
 	/*
@@ -87,6 +89,8 @@ import { GridService } from './directives/grid/grid-service/grid.service';
 		ExpandableContentDirective,
 		FieldSetBaseDirective,
 		FieldSetComponent,
+		FormComponent,
+		FormSectionComponent,
 		InputWithLanguageOptionsComponent,
 		GridComponent,
 		GridApiDirective,
@@ -155,6 +159,8 @@ import { GridService } from './directives/grid/grid-service/grid.service';
 		DialogCloseDirective,
 		DialogActionsDirective,
 		FieldSetComponent,
+		FormComponent,
+		FormSectionComponent,
 		InputWithLanguageOptionsComponent,
 		GridComponent,
 		GridDirective,
@@ -163,15 +169,12 @@ import { GridService } from './directives/grid/grid-service/grid.service';
 		GuidanceComponent,
 		HeadingComponent,
 		IconComponent,
-
 		LinkComponent,
 		NotificationComponent,
 		NotificationContentDirective,
 		RadioButtonGroupComponent,
-		// SpacingDirective,
 		TextAreaComponent,
 		TextInputComponent,
-		// TextSpacingComponent,
 		TooltipDirective,
 	],
 	providers: [DialogService, ErrorSummaryService, GridService],
