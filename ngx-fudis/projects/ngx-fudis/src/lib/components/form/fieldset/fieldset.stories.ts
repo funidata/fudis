@@ -11,20 +11,13 @@ import {
 } from '../../../types/forms';
 
 import { FieldSetComponent } from './fieldset.component';
-import { ErrorSummaryService } from '../error-summary/error-summary.service';
 import { FormGroupValidators } from '../../../utilities/form/validators';
 
 @Component({
 	selector: 'example-fieldset',
 	template: `
 		<form>
-			<fudis-fieldset
-				[errorSummaryScreenReaderHelpText]="'Attention:'"
-				[legend]="legend"
-				[id]="fieldsetId"
-				[errorSummaryHelpText]="errorSummaryHelpText"
-				[errorSummaryVisible]="errorSummaryVisible"
-				[helpText]="helpText">
+			<fudis-fieldset [legend]="legend" [id]="fieldsetId" [helpText]="helpText">
 				<fudis-grid [columns]="{ lg: 2 }" [width]="'md'" [marginSides]="'none'">
 					<fudis-input-with-language-options
 						[missingLanguage]="'Missing'"
@@ -103,20 +96,9 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 	`,
 })
 class FieldsetExampleComponent {
-	errorSummaryVisible: boolean = false;
-
 	submitForm(): void {
 		this.fieldsetExample.markAllAsTouched();
-
-		if (this.fieldsetExample.invalid) {
-			this.errorSummaryVisible = true;
-			this.errorSummaryService.reloadErrors();
-		} else {
-			this.errorSummaryVisible = false;
-		}
 	}
-
-	errorSummaryHelpText = 'There are errors in this fieldset. Please address these before trying to submit again.';
 
 	errorName: TFudisGroupErrorMessages = {
 		atLeastOneRequired: 'Course name is missing.',
@@ -219,8 +201,6 @@ class FieldsetExampleComponent {
 		{ value: 'basic', viewValue: 'Basic', id: 'courseType-1', name: 'courseType' },
 		{ value: 'advanced', viewValue: 'Advanced', id: 'courseType-2', name: 'courseType' },
 	];
-
-	constructor(private errorSummaryService: ErrorSummaryService) {}
 }
 
 export default {

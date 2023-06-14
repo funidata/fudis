@@ -17,14 +17,15 @@ import { FormComponent } from './form.component';
 @Component({
 	selector: 'example-form-content',
 	template: `
-		<form>
-			<fudis-fieldset
-				[errorSummaryScreenReaderHelpText]="'Attention:'"
-				[legend]="legend"
-				[id]="fieldsetId"
-				[errorSummaryHelpText]="errorSummaryHelpText"
-				[errorSummaryVisible]="errorSummaryVisible"
-				[helpText]="helpText">
+		<fudis-form
+			[titleTag]="titleTag"
+			[title]="title"
+			[id]="id"
+			[helpText]="formHelpText"
+			[errorSummaryScreenReaderHelpText]="errorSummaryScreenReaderHelpText"
+			[errorSummaryHelpText]="errorSummaryHelpText"
+			[errorSummaryVisible]="errorSummaryVisible">
+			<fudis-fieldset [legend]="legend" [id]="fieldsetId" [helpText]="helpText">
 				<fudis-grid [columns]="{ lg: 2 }" [width]="'md'" [marginSides]="'none'">
 					<fudis-input-with-language-options
 						[missingLanguage]="'Missing'"
@@ -96,10 +97,10 @@ import { FormComponent } from './form.component';
 							[minDate]="fieldsetExample.controls['startDate'].value">
 						</fudis-datepicker>
 					</fudis-grid>
-					<fudis-button [label]="'Submit'" (handleClick)="submitForm()"></fudis-button>
 				</fudis-grid>
 			</fudis-fieldset>
-		</form>
+			<fudis-button [label]="'Submit'" (handleClick)="submitForm()"></fudis-button>
+		</fudis-form>
 	`,
 })
 class FormContentExampleComponent {
@@ -115,8 +116,6 @@ class FormContentExampleComponent {
 			this.errorSummaryVisible = false;
 		}
 	}
-
-	errorSummaryHelpText = 'There are errors in this fieldset. Please address these before trying to submit again.';
 
 	errorName: TFudisGroupErrorMessages = {
 		atLeastOneRequired: 'Course name is missing.',
@@ -187,6 +186,17 @@ class FormContentExampleComponent {
 
 	requiredText = 'Required';
 
+	title = 'Example form heading';
+
+	titleTag = 'h1';
+
+	errorSummaryHelpText = 'There are errors in this form. Please address these before trying to submit again.';
+
+	errorSummaryScreenReaderHelpText = 'Attention';
+
+	formHelpText =
+		"Come about rope's end loot hail-shot belaying pin hornswaggle maroon quarter main sheet nipperkin. Pieces of Eight reef landlubber or just lubber reef sails loaded to the gunwalls coffer Sail ho draught capstan shrouds. Plate Fleet fluke Yellow Jack galleon wherry wench Cat o'nine tails yard coxswain square-rigged.";
+
 	fieldsetExample = new FormGroup({
 		name: new FormGroup(
 			{
@@ -246,19 +256,32 @@ export default {
 
 const html = String.raw;
 
+// const Template: StoryFn = () => ({
+// 	props: {
+// 		title: 'Example form heading',
+// 		titleTag: 'h1',
+// 		errorSummaryHelpText: 'There are errors in this fieldset. Please address these before trying to submit again.',
+// 		errorSummaryVisible: false,
+// 		errorSummaryScreenReaderHelpText: 'Attention',
+// 		helpText:
+// 			"Come about rope's end loot hail-shot belaying pin hornswaggle maroon quarter main sheet nipperkin. Pieces of Eight reef landlubber or just lubber reef sails loaded to the gunwalls coffer Sail ho draught capstan shrouds. Plate Fleet fluke Yellow Jack galleon wherry wench Cat o'nine tails yard coxswain square-rigged.",
+// 	},
+// 	template: html`
+// 		<fudis-form
+// 			[titleTag]="titleTag"
+// 			[title]="title"
+// 			[id]="id"
+// 			[helpText]="helpText"
+// 			[errorSummaryScreenReaderHelpText]="errorSummaryScreenReaderHelpText"
+// 			[errorSummaryHelpText]="errorSummaryHelpText"
+// 			[errorSummaryVisible]="errorSummaryVisible">
+// 			<example-form-content></example-form-content>
+// 		</fudis-form>
+// 	`,
+// });
+
 const Template: StoryFn = () => ({
-	props: {
-		title: 'Example form heading',
-		id: 'unique-fudis-form-abc',
-		titleTag: 'h1',
-		helpText:
-			"Come about rope's end loot hail-shot belaying pin hornswaggle maroon quarter main sheet nipperkin. Pieces of Eight reef landlubber or just lubber reef sails loaded to the gunwalls coffer Sail ho draught capstan shrouds. Plate Fleet fluke Yellow Jack galleon wherry wench Cat o'nine tails yard coxswain square-rigged.",
-	},
-	template: html`
-		<fudis-form [titleTag]="titleTag" [title]="title" [id]="id" [helpText]="helpText">
-			<example-form-content></example-form-content>
-		</fudis-form>
-	`,
+	template: html` <example-form-content></example-form-content> `,
 });
 
 export const Example = Template.bind({});

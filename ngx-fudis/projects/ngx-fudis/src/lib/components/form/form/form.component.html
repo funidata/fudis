@@ -1,10 +1,17 @@
-<form fudisGrid [id]="id" [attr.aria-describedBy]="id + '_header'">
-	<div [id]="id + '_header'">
+<form fudisGrid class="fudis-form" [rowGap]="'none'" [id]="_id" [attr.aria-describedBy]="_id + '_header'">
+	<div [id]="_id + '_header'" class="fudis-form__header">
 		<fudis-heading [tag]="titleTag">{{ title }}</fudis-heading>
 		<ng-container *ngIf="helpText">
 			<fudis-body-text>{{ helpText }}</fudis-body-text>
 		</ng-container>
+		<ng-container *ngIf="_formElement !== undefined && errorSummaryVisible">
+			<fudis-error-summary
+				[screenReaderHelpText]="errorSummaryScreenReaderHelpText"
+				[parentComponent]="_formElement"
+				[helpText]="errorSummaryHelpText"></fudis-error-summary>
+		</ng-container>
 	</div>
-
-	<ng-content></ng-content>
+	<div class="fudis-form__content">
+		<ng-content></ng-content>
+	</div>
 </form>

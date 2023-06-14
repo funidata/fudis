@@ -22,12 +22,6 @@
 		<ng-container *ngIf="helpText">
 			<span class="fudis-fieldset__legend__help-text">{{ helpText }}</span>
 		</ng-container>
-		<ng-container *ngIf="fieldsetElement !== undefined && errorSummaryVisible">
-			<fudis-error-summary
-				[screenReaderHelpText]="errorSummaryScreenReaderHelpText"
-				[parentComponent]="fieldsetElement"
-				[helpText]="errorSummaryHelpText"></fudis-error-summary>
-		</ng-container>
 	</legend>
 	<ng-content></ng-content>
 </ng-template>

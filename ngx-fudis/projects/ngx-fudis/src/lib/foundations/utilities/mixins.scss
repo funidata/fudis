@@ -1,5 +1,7 @@
 /* stylelint-disable property-disallowed-list */
 /* stylelint-disable unit-disallowed-list */
+@use '../spacing/tokens.scss' as spacing;
+
 @mixin visually-hidden() {
 	position: absolute;
 	left: 0;
@@ -19,4 +21,9 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+}
+
+html {
+	scroll-padding-top: spacing.$spacing-l;
+	scroll-behavior: smooth;
 }
