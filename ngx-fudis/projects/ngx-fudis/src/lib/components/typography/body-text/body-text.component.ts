@@ -1,8 +1,5 @@
 import { Component, Input, HostBinding, ViewEncapsulation } from '@angular/core';
-
-export type BodyTextSize = 'l-regular' | 'm-regular' | 's-regular' | 'l-light' | 'm-light';
-
-export type MarginBottomSize = 'm' | 'l' | 0 | '0';
+import { BodyTextSize, MarginBottomSize } from '../../../types/typography';
 
 @Component({
 	selector: 'fudis-body-text',
@@ -24,5 +21,5 @@ export class BodyTextComponent {
 	/**
 	 * Optional margin bottom
 	 */
-	@Input() marginBottom: MarginBottomSize = 0;
+	@Input() marginBottom: MarginBottomSize = 'none';
 }

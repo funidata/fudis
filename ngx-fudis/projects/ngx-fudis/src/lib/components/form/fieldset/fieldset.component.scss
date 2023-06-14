@@ -26,7 +26,13 @@
 		width: 100%;
 
 		&__title {
-			@include typography.heading-xs;
+			&__md {
+				@include typography.heading-xs;
+			}
+
+			&__sm {
+				@include typography.text-field-label;
+			}
 
 			&__text {
 				@include colorMixins.text-color('gray-dark');

@@ -1,1 +1,10 @@
-<p>form works!</p>
+<form fudisGrid [id]="id" [attr.aria-describedBy]="id + '_header'">
+	<div [id]="id + '_header'">
+		<fudis-heading [tag]="titleTag">{{ title }}</fudis-heading>
+		<ng-container *ngIf="helpText">
+			<fudis-body-text>{{ helpText }}</fudis-body-text>
+		</ng-container>
+	</div>
+
+	<ng-content></ng-content>
+</form>

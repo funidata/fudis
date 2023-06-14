@@ -39,6 +39,10 @@
 		&__l {
 			margin-bottom: spacing.$spacing-l;
 		}
+
+		&__none {
+			margin-bottom: spacing.$spacing-zero;
+		}
 	}
 
 	/* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
