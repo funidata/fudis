@@ -6,6 +6,7 @@ import { DialogService, ErrorSummaryService, GridService } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
 
 import { IFudisDropdownOption, IFudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
+import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 
 @Component({
 	selector: 'app-root',
@@ -89,6 +90,10 @@ export class AppComponent implements OnInit {
 
 	openDialog(): void {
 		this.dialog.open(this.templateRef);
+	}
+
+	openDialogFromComponent(): void {
+		this.dialog.open(DialogTestContentComponent);
 	}
 
 	testData = [

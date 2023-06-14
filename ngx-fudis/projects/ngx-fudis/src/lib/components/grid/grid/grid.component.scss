@@ -10,7 +10,6 @@
 	display: grid;
 	grid-template-rows: auto 1fr;
 	grid-template-columns: auto 1fr;
-	min-width: gridTokens.$grid-min-width;
 
 	/* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
 	& > fudis-heading {

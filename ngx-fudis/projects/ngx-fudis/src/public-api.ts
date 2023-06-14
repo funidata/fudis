@@ -5,11 +5,13 @@
 
 export * from './lib/ngx-fudis.module';
 
+export { ActionsDirective } from './lib/directives/content-projection/actions/actions.directive';
 export { AutocompleteComponent } from './lib/components/form/autocomplete/autocomplete.component';
 export { BadgeComponent } from './lib/components/badge/badge.component';
 export { BodyTextComponent } from './lib/components/typography/body-text/body-text.component';
 export { ButtonComponent } from './lib/components/button/button.component';
 export { CheckboxComponent } from './lib/components/form/checkbox/checkbox.component';
+export { ContentDirective } from './lib/directives/content-projection/content/content.directive';
 export { DatepickerComponent } from './lib/components/form/datepicker/datepicker.component';
 export {
 	DialogActionsDirective,
