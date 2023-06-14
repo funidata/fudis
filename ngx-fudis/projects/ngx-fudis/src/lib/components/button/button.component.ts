@@ -6,7 +6,6 @@ import {
 	EventEmitter,
 	HostBinding,
 	ViewEncapsulation,
-	OnInit,
 	ViewChild,
 	ElementRef,
 	OnChanges,
@@ -23,7 +22,7 @@ import { DropdownMenuItemService } from '../dropdown-menu/dropdown-menu-item/dro
 	styleUrls: ['./button.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class ButtonComponent extends TooltipApiDirective implements OnInit, OnChanges {
+export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 	@HostBinding('class') classes = 'fudis-button-host';
 
 	@ViewChild('buttonElement') buttonEl: ElementRef<HTMLButtonElement>;
@@ -130,14 +129,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnInit, OnCh
 	closeMenu(menuStatus: boolean): void {
 		if (!menuStatus) {
 			this._toggleOn = false;
-			// this.buttonEl?.nativeElement.focus();
 		}
-
-		// if (this.asMenuButton && this._toggleOn) {
-		// 	// this._clickService.closeMenu();
-		// 	this._toggleOn = false;
-		// 	this.buttonEl?.nativeElement.focus();
-		// }
 	}
 
 	buttonClick(event: Event): void {
@@ -146,15 +138,6 @@ export class ButtonComponent extends TooltipApiDirective implements OnInit, OnCh
 			this._clickService.setMenuStatus(this._toggleOn);
 		}
 		this.handleClick.emit(event);
-	}
-
-	ngOnInit(): void {
-		if (this.asMenuButton) {
-			// this.clickService.clickWatcher().subscribe(() => {
-			// 	this._toggleOn = false;
-			// 	this.buttonEl?.nativeElement.focus();
-			// });
-		}
 	}
 
 	ngOnChanges(): void {

@@ -25,7 +25,7 @@ export class DropdownMenuComponent implements AfterContentInit {
 		}
 	}
 
-	protected maxWidth: string = 'initial';
+	protected _maxWidth: string = 'initial';
 
 	@HostListener('window:click', ['$event'])
 	getMaxWidth(): void {
@@ -34,11 +34,11 @@ export class DropdownMenuComponent implements AfterContentInit {
 		const elementInViewX = this.dropdownMenu?.nativeElement?.getBoundingClientRect()?.x;
 
 		if (elementInViewX && elementInViewWidth && elementInViewWidth !== 0 && this.align === 'left') {
-			this.maxWidth = `${elementInViewWidth + elementInViewX}px`;
-		} else if (window?.innerWidth && elementInViewWidth !== 0) {
-			this.maxWidth = `${window.innerWidth - elementInViewX}px`;
+			this._maxWidth = `${elementInViewWidth + elementInViewX}px`;
+		} else if (window?.innerWidth && elementInViewX) {
+			this._maxWidth = `${window.innerWidth - elementInViewX}px`;
 		} else {
-			this.maxWidth = 'initial';
+			this._maxWidth = 'initial';
 		}
 	}
 
