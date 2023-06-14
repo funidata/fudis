@@ -1,6 +1,7 @@
 import { Component, ContentChild, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { ExpandableType } from '../../types/expandables';
-import { ExpandableContentDirective, ExpandableActionsDirective } from './expandable-directives';
+import { ContentDirective } from '../../directives/content-projection/content/content.directive';
+import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { IdService } from '../../utilities/id-service.service';
 
 /**
@@ -8,10 +9,10 @@ import { IdService } from '../../utilities/id-service.service';
  *
  * ```
  * <fudis-expandable>
- *  <ng-template fudisExpandableActions>
+ *  <ng-template fudisActions>
  *    <fudis-button />
  *  </ng-template>
- * 	<ng-template fudisExpandableContent>
+ * 	<ng-template fudisContent>
  * 		<your-body-template />
  * 	</ng-template>
  * </fudis-expandable>
@@ -25,14 +26,14 @@ import { IdService } from '../../utilities/id-service.service';
 	encapsulation: ViewEncapsulation.None,
 })
 export class ExpandableComponent {
-	@ContentChild(ExpandableContentDirective) content: ExpandableContentDirective;
+	@ContentChild(ContentDirective) content: ContentDirective;
 
-	@ContentChild(ExpandableActionsDirective) headerButtons: ExpandableActionsDirective;
+	@ContentChild(ActionsDirective) headerButtons: ActionsDirective;
 
 	/**
 	 * Tag is for semantic support for screen readers, this does not change the appearance of the expandable
 	 */
-	@Input({ required: true }) tag: 'h2' | 'h3' | 'h4' | 'h5' | 'h6' = 'h2';
+	@Input() tag: 'h2' | 'h3' | 'h4' | 'h5' | 'h6' = 'h2';
 
 	/**
 	 * Type i.e the look of the expandable
@@ -49,7 +50,14 @@ export class ExpandableComponent {
 	 */
 	@Input() subTitle?: string;
 
-	protected _collapsed = true;
+	/**
+	 * Expandable is initially collapsed by default but can be controlled by [collapsed] input property
+	 */
+	@Input() set collapsed(value: boolean) {
+		this.setCollapsedStatus(value);
+	}
+
+	_collapsed = true;
 
 	protected _id: string;
 
@@ -58,21 +66,14 @@ export class ExpandableComponent {
 	}
 
 	/**
-	 * Expandable is initially collapsed by default but can be controlled by [collapsed] input property
-	 */
-	@Input() set collapsed(value: boolean) {
-		this.setCollapsedStatus(value);
-	}
-
-	/**
 	 *  Lazy loading variable
 	 */
-	openedOnce = false;
+	_openedOnce = false;
 
 	setCollapsedStatus(value: boolean): void {
 		this._collapsed = value ?? this._collapsed;
-		this.openedOnce = this.openedOnce || !this.collapsed;
-		this.collapsedChange.emit(this.collapsed);
+		this._openedOnce = this._openedOnce || !this._collapsed;
+		this.collapsedChange.emit(this._collapsed);
 	}
 
 	@Output() collapsedChange = new EventEmitter<boolean>();

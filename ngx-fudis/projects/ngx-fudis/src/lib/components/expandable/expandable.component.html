@@ -12,7 +12,7 @@
 			</div>
 		</ng-container>
 	</div>
-	<div class="fudis-expandable__content" *ngIf="openedOnce" [attr.aria-hidden]="_collapsed" [hidden]="_collapsed">
+	<div class="fudis-expandable__content" *ngIf="_openedOnce" [attr.aria-hidden]="_collapsed" [hidden]="_collapsed">
 		<ng-container *ngTemplateOutlet="content!.templateRef"></ng-container>
 	</div>
 </section>

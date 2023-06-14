@@ -13,11 +13,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 
+import { ActionsDirective } from './directives/content-projection/actions/actions.directive';
 import { AutocompleteComponent } from './components/form/autocomplete/autocomplete.component';
 import { BadgeComponent } from './components/badge/badge.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/form/checkbox/checkbox.component';
+import { ContentDirective } from './directives/content-projection/content/content.directive';
 import { DatepickerComponent } from './components/form/datepicker/datepicker.component';
 
 import { DatepickerCustomHeaderComponent } from './components/form/datepicker/datepicker-custom-header/datepicker-custom-header.component';
@@ -38,7 +40,7 @@ import { ErrorMessageComponent } from './components/form/error-message/error-mes
 import { ErrorSummaryService } from './components/form/error-summary/error-summary.service';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
-import { ExpandableContentDirective, ExpandableActionsDirective } from './components/expandable/expandable-directives';
+
 import { FieldSetBaseDirective } from './directives/form/fieldset-base/fieldset-base.directive';
 import { FieldSetComponent } from './components/form/fieldset/fieldset.component';
 import { FormComponent } from './components/form/form/form.component';
@@ -58,7 +60,7 @@ import { InputWithLanguageOptionsComponent } from './components/form/input-with-
 import { LabelComponent } from './components/form/label/label.component';
 import { LinkComponent } from './components/link/link.component';
 import { NotificationComponent } from './components/notification/notification.component';
-import { NotificationContentDirective } from './components/notification/notification-directives';
+
 import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
 import { RadioButtonGroupComponent } from './components/form/radio-button-group/radio-button-group.component';
 import { SpacingDirective } from './directives/spacing/spacing.directive';
@@ -91,8 +93,7 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,
-		ExpandableActionsDirective,
-		ExpandableContentDirective,
+
 		FieldSetBaseDirective,
 		FieldSetComponent,
 		FormComponent,
@@ -110,7 +111,7 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		LabelComponent,
 		LinkComponent,
 		NotificationComponent,
-		NotificationContentDirective,
+
 		RadioButtonComponent,
 		RadioButtonGroupComponent,
 		SpacingDirective,
@@ -118,6 +119,8 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		TextSpacingComponent,
 		TextAreaComponent,
 		TooltipDirective,
+		ContentDirective,
+		ActionsDirective,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
@@ -146,11 +149,13 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 	 * when you want to expose it outside
 	 */
 	exports: [
+		ActionsDirective,
 		AutocompleteComponent,
 		BadgeComponent,
 		BodyTextComponent,
 		ButtonComponent,
 		CheckboxComponent,
+		ContentDirective,
 		DatepickerComponent,
 		DescriptionListComponent,
 		DialogComponent,
@@ -160,8 +165,6 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,
-		ExpandableActionsDirective,
-		ExpandableContentDirective,
 		DialogTitleDirective,
 		DialogContentDirective,
 		DialogCloseDirective,
@@ -179,7 +182,6 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		IconComponent,
 		LinkComponent,
 		NotificationComponent,
-		NotificationContentDirective,
 		RadioButtonGroupComponent,
 		TextAreaComponent,
 		TextInputComponent,

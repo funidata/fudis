@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BodyTextComponent, BodyTextSize, MarginBottomSize } from './body-text.component';
+import { BodyTextComponent } from './body-text.component';
+import { BodyTextSize, MarginBottomSize } from '../../../types/typography';
 
 describe('BodyTextComponent', () => {
 	let component: BodyTextComponent;
@@ -26,7 +27,7 @@ describe('BodyTextComponent', () => {
 	function bodyTextSizes(size: BodyTextSize): void {
 		component.size = size;
 		fixture.detectChanges();
-		assertBodyTextHasClasses(`fudis-body-text fudis-body-text__${size}`);
+		assertBodyTextHasClasses(`fudis-body-text fudis-body-text__${size} fudis-body-text__margin-bottom__none`);
 	}
 
 	function marginBottomSizes(marginBottom: MarginBottomSize): void {
@@ -49,12 +50,7 @@ describe('BodyTextComponent', () => {
 		it('should change the class according to the given margin bottom value', () => {
 			marginBottomSizes('m');
 			marginBottomSizes('l');
-		});
-
-		it('should not have margin bottom CSS classes if margin bottom value is 0', () => {
-			component.marginBottom = '0';
-			fixture.detectChanges();
-			assertBodyTextHasClasses(`fudis-body-text fudis-body-text__m-regular`);
+			marginBottomSizes('none');
 		});
 	});
 });

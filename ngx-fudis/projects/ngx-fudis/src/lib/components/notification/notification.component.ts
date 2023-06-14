@@ -1,6 +1,6 @@
 import { Component, ContentChild, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FudisIcon } from '../../types/icons';
-import { NotificationContentDirective } from './notification-directives';
+import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 
 export type NotificationType = 'warning' | 'danger' | 'success' | 'light';
 
@@ -10,12 +10,12 @@ export type NotificationType = 'warning' | 'danger' | 'success' | 'light';
 	styleUrls: ['./notification.component.scss'],
 })
 export class NotificationComponent implements OnChanges, OnInit {
-	@ContentChild(NotificationContentDirective) customContent: NotificationContentDirective;
+	@ContentChild(ContentDirective) customContent: ContentDirective;
 
 	/**
 	 * Notification variant options
 	 */
-	@Input() variant?: NotificationType;
+	@Input() variant: NotificationType = 'warning';
 
 	/**
 	 * Aria text of the notification variant
@@ -36,12 +36,12 @@ export class NotificationComponent implements OnChanges, OnInit {
 	/**
 	 * Aria-label for the external link
 	 */
-	@Input() externalLinkAriaLabel?: string;
+	@Input() externalLinkAriaLabel: string;
 
 	/**
 	 * Title for the link, if not defined title will be the same as link URL
 	 */
-	@Input() linkTitle?: string;
+	@Input() linkTitle: string;
 
 	/**
 	 * Icon for notification

@@ -1,9 +1,6 @@
 <ng-container *transloco="let t">
 	<fudis-button (handleClick)="changeLanguage()" [label]="t('change_language')"></fudis-button>
-	<fudis-fieldset
-		[legend]="'FieldSet alkaa tästä'"
-		[errorSummaryVisible]="errorSummaryVisible"
-		[errorSummaryHelpText]="'Here are some errors'">
+	<fudis-fieldset [legend]="'FieldSet alkaa tästä'">
 		<fudis-text-input
 			[label]="t('label')"
 			[id]="'uniikki-idjoo'"
@@ -55,11 +52,11 @@
 	</form>
 	<fudis-notification variant="danger" ariaVariantText="Varoitus!">Whoops! Some error happened.</fudis-notification>
 	<fudis-expandable title="Title for expandable">
-		<ng-template fudisExpandableActions>
+		<ng-template fudisActions>
 			<fudis-button data-theme="sisu" type="submit" label="Lähetä"></fudis-button>
 			<fudis-button data-theme="sisu" label="Eiku" variant="secondary"></fudis-button>
 		</ng-template>
-		<ng-template fudisExpandableContent>
+		<ng-template fudisContent>
 			<fudis-heading tag="h3" size="m">This is heading inside an expandable</fudis-heading>
 			<fudis-body-text>This is body text inside an expandable</fudis-body-text>
 		</ng-template>

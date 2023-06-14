@@ -29,10 +29,6 @@ export { ErrorMessageComponent } from './lib/components/form/error-message/error
 export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';
 export { ErrorSummaryService } from './lib/components/form/error-summary/error-summary.service';
 export { ExpandableComponent } from './lib/components/expandable/expandable.component';
-export {
-	ExpandableContentDirective,
-	ExpandableActionsDirective,
-} from './lib/components/expandable/expandable-directives';
 export { FieldSetComponent } from './lib/components/form/fieldset/fieldset.component';
 export { FormComponent } from './lib/components/form/form/form.component';
 export { FormSectionComponent } from './lib/components/form/form-section/form-section.component';
@@ -48,7 +44,7 @@ export { HeadingComponent } from './lib/components/typography/heading/heading.co
 export { IconComponent } from './lib/components/icon/icon.component';
 export { LinkComponent } from './lib/components/link/link.component';
 export { NotificationComponent } from './lib/components/notification/notification.component';
-export { NotificationContentDirective } from './lib/components/notification/notification-directives';
+
 export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
 // export { SpacingDirective } from './lib/directives/spacing/spacing.directive';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';

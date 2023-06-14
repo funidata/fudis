@@ -18,15 +18,17 @@ export default {
 	},
 } as Meta;
 
+const html = String.raw;
+
 const Template: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
 	props: args,
-	template: `
-    <fudis-expandable [title]="title" [subTitle]="subTitle">
-      <ng-template fudisExpandableContent>
-        <fudis-body-text>Hey you! I am the content of the expandable.</fudis-body-text>
-      </ng-template>
-    </fudis-expandable>
-  `,
+	template: html`
+		<fudis-expandable [title]="title" [subTitle]="subTitle">
+			<ng-template fudisContent>
+				<fudis-body-text>Hey you! I am the content of the expandable.</fudis-body-text>
+			</ng-template>
+		</fudis-expandable>
+	`,
 });
 
 export const Expandable = Template.bind({});
@@ -38,13 +40,13 @@ Expandable.args = {
 
 const SubTitleTemplate: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
 	props: args,
-	template: `
-    <fudis-expandable [title]="title" [subTitle]="subTitle">
-      <ng-template fudisExpandableContent>
-        <fudis-body-text>Hey you! I am the content of the expandable.</fudis-body-text>
-      </ng-template>
-    </fudis-expandable>
-  `,
+	template: html`
+		<fudis-expandable [title]="title" [subTitle]="subTitle">
+			<ng-template fudisContent>
+				<fudis-body-text>Hey you! I am the content of the expandable.</fudis-body-text>
+			</ng-template>
+		</fudis-expandable>
+	`,
 });
 
 export const ExpandableWithSubTitle = SubTitleTemplate.bind({});
@@ -57,16 +59,16 @@ ExpandableWithSubTitle.args = {
 
 const ActionTemplate: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
 	props: args,
-	template: `
-    <fudis-expandable [title]="title" [subTitle]="subTitle">
-      <ng-template fudisExpandableActions>
-        <fudis-button label="Button"></fudis-button>
-      </ng-template>
-      <ng-template fudisExpandableContent>
-        <fudis-body-text>Hey you! I am the content of the expandable.</fudis-body-text>
-      </ng-template>
-    </fudis-expandable>
-  `,
+	template: html`
+		<fudis-expandable [title]="title" [subTitle]="subTitle">
+			<ng-template fudisActions>
+				<fudis-button label="Button"></fudis-button>
+			</ng-template>
+			<ng-template fudisContent>
+				<fudis-body-text>Hey you! I am the content of the expandable.</fudis-body-text>
+			</ng-template>
+		</fudis-expandable>
+	`,
 });
 
 export const ExpandableWithActionButton = ActionTemplate.bind({});
