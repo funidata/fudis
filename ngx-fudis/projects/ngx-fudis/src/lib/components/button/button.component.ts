@@ -29,7 +29,7 @@ export class ButtonComponent extends TooltipApiDirective {
 	/**
 	 * Text content of the button
 	 */
-	@Input() label: string;
+	@Input({ required: true }) label: string;
 
 	/**
 	 * Hide visible label text for icon-only buttons.

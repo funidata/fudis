@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { IFudisDescriptionListItem } from '../../types/lists';
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';

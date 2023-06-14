@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { AfterContentInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';

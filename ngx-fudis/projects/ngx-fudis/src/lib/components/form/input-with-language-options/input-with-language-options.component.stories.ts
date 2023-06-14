@@ -28,6 +28,8 @@ export default {
 	},
 } as Meta;
 
+const html = String.raw;
+
 const TemplateAllRequired: StoryFn = () => ({
 	props: {
 		id: 'unique-input-id-superhero-name',
@@ -63,13 +65,14 @@ const TemplateAllRequired: StoryFn = () => ({
 		}),
 		missingLanguage: 'Missing',
 	},
-	template: `
-	<fudis-input-with-language-options
+	template: html`
+		<fudis-input-with-language-options
 			[id]="'unique-input-1'"
 			[options]="languageOptions"
 			[formGroup]="formGroup"
 			[label]="label"
 			[helpText]="helpText"
+			[languageLabel]="'Language'"
 			[groupErrorMsg]="groupErrorMsg"
 			[missingLanguage]="missingLanguage"
 			[requiredText]="requiredText"></fudis-input-with-language-options>
@@ -112,12 +115,13 @@ const TemplateOneRequired: StoryFn = () => ({
 		),
 		missingLanguage: 'Missing',
 	},
-	template: `
-	<fudis-input-with-language-options
+	template: html`
+		<fudis-input-with-language-options
 			[id]="'unique-input-1'"
 			[options]="languageOptions"
 			[formGroup]="formGroup"
 			[label]="label"
+			[languageLabel]="'Language'"
 			[helpText]="helpText"
 			[groupErrorMsg]="groupErrorMsg"
 			[missingLanguage]="missingLanguage"
