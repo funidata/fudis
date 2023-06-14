@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { Directive, ElementRef, Input, OnChanges, Signal, effect } from '@angular/core';
 
 import { getGridBreakpointDataArray, getGridClasses, getGridCssValue } from '../gridUtils';

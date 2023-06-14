@@ -30,6 +30,7 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 						[missingLanguage]="'Missing'"
 						[id]="'unique-input-1'"
 						[options]="languageOptions"
+						[languageLabel]="'Language'"
 						[formGroup]="fieldsetExample.controls['name']"
 						[label]="labelName"
 						[helpText]="'Some name would be nice. Provide course name in at least one language.'"
@@ -38,6 +39,7 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 					<fudis-input-with-language-options
 						[variant]="'text-area'"
 						[missingLanguage]="'Missing'"
+						[languageLabel]="'Language'"
 						[id]="'unique-input-2'"
 						[options]="languageOptions"
 						[formGroup]="fieldsetExample.controls['description']"

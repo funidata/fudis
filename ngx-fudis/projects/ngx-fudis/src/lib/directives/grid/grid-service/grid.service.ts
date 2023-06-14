@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Injectable, OnDestroy, Signal, signal } from '@angular/core';
 import { Subject } from 'rxjs';
