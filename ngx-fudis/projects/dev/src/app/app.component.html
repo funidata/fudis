@@ -5,7 +5,7 @@
 			>Whoops! Here is danger notification.</fudis-notification
 		>
 
-		<fudis-grid [columns]="{ xs: 1, sm: 2 }" [marginSides]="'none'">
+		<fudis-grid [marginSides]="'none'">
 			<div>
 				<fudis-heading [tag]="'h3'">
 					<fudis-link [href]="'#'" [linkTitle]="'Link inside a heading'"></fudis-link>
@@ -54,21 +54,20 @@
 								[helpText]="t('helpText')"
 								[errorMsg]="{ required: t('error_required') }"
 								[requiredText]="t('required')"
-								[control]="textInputControl"></fudis-text-input>
+								[control]="testFormGroup.controls['textInput']"></fudis-text-input>
 							<fudis-radio-button-group
-								*ngIf="truthControl"
 								[requiredText]="t('required')"
 								[id]="'truth-selection'"
 								[legend]="t('chooseTruth')"
 								[helpText]="t('chooseTruthHelp')"
 								[errorMsg]="{ required: t('chooseTruthError') }"
-								[control]="truthControl"
+								[control]="testFormGroup.controls['truth']"
 								[options]="radioButtonOptions"></fudis-radio-button-group>
 							<fudis-dropdown
 								[id]="'dropdown-id-123'"
 								[label]="'Some dropdown'"
 								[options]="dropdownOptions"
-								[control]="dropdownControl"></fudis-dropdown>
+								[control]="testFormGroup.controls['dropdown']"></fudis-dropdown>
 						</fudis-fieldset>
 					</fudis-grid>
 				</fudis-form>
@@ -86,7 +85,7 @@
 		<fudis-expandable [title]="'Grid stuff'">
 			<ng-template fudisContent>
 				<fudis-heading [tag]="'h3'" [size]="'xl'">Väliotsikko</fudis-heading>
-				<fudis-grid [columns]="{ default: 1, sm: 2 }" [marginSides]="'none'">
+				<fudis-grid [marginSides]="'none'">
 					<fudis-body-text>Showcase of grid items</fudis-body-text>
 					<fudis-body-text>Showcase of grid items</fudis-body-text>
 					<fudis-body-text>Showcase of grid items</fudis-body-text>
