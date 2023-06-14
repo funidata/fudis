@@ -31,8 +31,8 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	@Input() size?: 's' | 'm' | 'l' = 'l';
 
 	/*
-	 * Object containing error messages for each FormControl and _for the FormGroup.
-	 * E. g. {_atLeastOneRequired: 'At least one input of any language must have a value.', finnish:{maxlength: 'Input in Finnish cannot be longer than X charactes.'}}
+	 * Object containing error messages for each FormControl and for the FormGroup.
+	 * E. g. {atLeastOneRequired: 'At least one input of any language must have a value.', finnish:{maxlength: 'Input in Finnish cannot be longer than X charactes.'}}
 	 */
 
 	@Input() groupErrorMsg: TFudisGroupErrorMessages;
