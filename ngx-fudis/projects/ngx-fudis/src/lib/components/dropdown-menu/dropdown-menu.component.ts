@@ -1,9 +1,18 @@
-import { AfterContentInit, Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
+import {
+	AfterContentInit,
+	ChangeDetectionStrategy,
+	Component,
+	ElementRef,
+	HostListener,
+	Input,
+	ViewChild,
+} from '@angular/core';
 
 @Component({
 	selector: 'fudis-dropdown-menu',
 	templateUrl: './dropdown-menu.component.html',
 	styleUrls: ['./dropdown-menu.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownMenuComponent implements AfterContentInit {
 	@ViewChild('dropdownMenu') dropdownMenu: ElementRef<HTMLElement>;

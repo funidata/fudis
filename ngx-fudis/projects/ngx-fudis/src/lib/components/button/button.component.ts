@@ -11,6 +11,7 @@ import {
 	OnChanges,
 	effect,
 	Signal,
+	ChangeDetectionStrategy,
 } from '@angular/core';
 import { FudisIcon, FudisIconColor } from '../../types/icons';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
@@ -20,6 +21,7 @@ import { DropdownMenuItemService } from '../dropdown-menu/dropdown-menu-item/dro
 	selector: 'fudis-button',
 	templateUrl: './button.component.html',
 	styleUrls: ['./button.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	encapsulation: ViewEncapsulation.None,
 })
 export class ButtonComponent extends TooltipApiDirective implements OnChanges {
@@ -123,8 +125,6 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 		}
 		return this.ariaLabel;
 	}
-
-	toggleStatus: boolean;
 
 	closeMenu(menuStatus: boolean): void {
 		if (!menuStatus) {

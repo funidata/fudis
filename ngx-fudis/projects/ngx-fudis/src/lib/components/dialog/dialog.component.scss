@@ -3,6 +3,7 @@
 @use '../../foundations/grid/tokens.scss' as gridTokens;
 
 .fudis-dialog {
+	box-sizing: content-box;
 	position: relative;
 	padding: spacing.$spacing-m spacing.$spacing-s;
 	max-width: calc(100vw - (2 * spacing.$spacing-s));

@@ -46,7 +46,7 @@ export class NotificationComponent implements OnChanges, OnInit {
 	/**
 	 * Icon for notification
 	 */
-	icon: FudisIcon;
+	protected _icon: FudisIcon;
 
 	/**
 	 * Initialization
@@ -70,16 +70,16 @@ export class NotificationComponent implements OnChanges, OnInit {
 	private getClasses(): void {
 		switch (this.variant) {
 			case 'warning':
-				this.icon = 'exclamation-mark-circle';
+				this._icon = 'exclamation-mark-circle';
 				break;
 			case 'danger':
-				this.icon = 'alert';
+				this._icon = 'alert';
 				break;
 			case 'success':
-				this.icon = 'checkmark-circle';
+				this._icon = 'checkmark-circle';
 				break;
 			case 'light':
-				this.icon = 'info-circle';
+				this._icon = 'info-circle';
 				break;
 			default:
 				break;
