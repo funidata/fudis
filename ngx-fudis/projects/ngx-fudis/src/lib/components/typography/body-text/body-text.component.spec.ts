@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ChangeDetectionStrategy } from '@angular/core';
 import { BodyTextComponent } from './body-text.component';
 import { BodyTextSize, MarginBottomSize } from '../../../types/typography';
 
@@ -9,7 +10,11 @@ describe('BodyTextComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [BodyTextComponent],
-		}).compileComponents();
+		})
+			.overrideComponent(BodyTextComponent, {
+				set: { changeDetection: ChangeDetectionStrategy.Default },
+			})
+			.compileComponents();
 	});
 
 	beforeEach(() => {

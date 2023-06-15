@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding, ViewEncapsulation } from '@angular/core';
+import { Component, Input, HostBinding, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { HeadingSize, HeadingLevel } from '../../../types/typography';
 
 @Component({
@@ -6,13 +6,12 @@ import { HeadingSize, HeadingLevel } from '../../../types/typography';
 	templateUrl: './heading.component.html',
 	styleUrls: ['./heading.component.scss'],
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeadingComponent {
 	@HostBinding('class') mainClass = 'fudis-heading-host';
 
 	@Input() size: HeadingSize = 'l';
 
-	@Input() text: string;
-
-	@Input() tag: HeadingLevel;
+	@Input({ required: true }) tag: HeadingLevel;
 }

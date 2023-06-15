@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding, ViewEncapsulation } from '@angular/core';
+import { Component, Input, HostBinding, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { BodyTextSize, MarginBottomSize } from '../../../types/typography';
 
 @Component({
@@ -6,6 +6,7 @@ import { BodyTextSize, MarginBottomSize } from '../../../types/typography';
 	templateUrl: './body-text.component.html',
 	styleUrls: ['./body-text.component.scss'],
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BodyTextComponent {
 	/**

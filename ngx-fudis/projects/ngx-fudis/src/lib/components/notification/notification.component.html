@@ -1,6 +1,6 @@
 <div class="fudis-notification fudis-notification__{{ variant }}">
 	<ng-container *ngIf="!customContent">
-		<fudis-icon [icon]="icon"></fudis-icon>
+		<fudis-icon [icon]="_icon"></fudis-icon>
 		<fudis-body-text [size]="'l-regular'">
 			<span class="fudis-visually-hidden">{{ ariaVariantText }}&nbsp;</span>
 			<ng-content></ng-content>
