@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 import { FudisIcon, FudisIconColor } from '../../types/icons';
 
@@ -17,6 +17,7 @@ import { FudisIcon, FudisIconColor } from '../../types/icons';
 	templateUrl: './icon.component.html',
 	styleUrls: ['./icon.component.scss'],
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconComponent {
 	/**
@@ -27,7 +28,7 @@ export class IconComponent {
 	/**
 	 * Choose icon
 	 */
-	@Input() icon: FudisIcon;
+	@Input({ required: true }) icon: FudisIcon;
 
 	/**
 	 * Set color for icon

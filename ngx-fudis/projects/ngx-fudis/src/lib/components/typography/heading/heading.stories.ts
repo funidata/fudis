@@ -10,7 +10,7 @@ export default {
 const Template: StoryFn<HeadingComponent> = (args: HeadingComponent) => ({
 	props: args,
 	template: `
-  <fudis-heading [tag]="tag" [size]="size">{{text}}</fudis-heading>
+  <fudis-heading [tag]="tag" [size]="size">I am a heading component!</fudis-heading>
 `,
 });
 
@@ -18,5 +18,4 @@ export const Heading = Template.bind({});
 Heading.args = {
 	tag: 'h1',
 	size: 'xl',
-	text: 'I am a heading component!',
 };

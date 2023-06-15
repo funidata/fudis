@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { ChangeDetectionStrategy } from '@angular/core';
 import { BadgeComponent } from './badge.component';
 
 describe('BadgeComponent', () => {
@@ -9,12 +10,17 @@ describe('BadgeComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [BadgeComponent],
-		}).compileComponents();
+		})
+			.overrideComponent(BadgeComponent, {
+				set: { changeDetection: ChangeDetectionStrategy.Default },
+			})
+			.compileComponents();
 	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(BadgeComponent);
 		component = fixture.componentInstance;
+
 		fixture.detectChanges();
 	});
 
