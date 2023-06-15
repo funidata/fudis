@@ -2,7 +2,7 @@ import { Component, Input, HostBinding, ViewEncapsulation, ChangeDetectionStrate
 import { HeadingSize, HeadingLevel } from '../../../types/typography';
 
 @Component({
-	selector: 'fudis-heading[tag]',
+	selector: 'fudis-heading',
 	templateUrl: './heading.component.html',
 	styleUrls: ['./heading.component.scss'],
 	encapsulation: ViewEncapsulation.None,
