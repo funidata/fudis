@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { BodyTextComponent } from './body-text.component';
-import { BodyTextSize, BodyTextMarginBottomSize } from '../../../types/typography';
+import { BodyTextSize, BodyTextMarginBottom } from '../../../types/typography';
 
 describe('BodyTextComponent', () => {
 	let component: BodyTextComponent;
@@ -35,7 +35,7 @@ describe('BodyTextComponent', () => {
 		assertBodyTextHasClasses(`fudis-body-text fudis-body-text__${size} fudis-body-text__margin-bottom__none`);
 	}
 
-	function marginBottomSizes(marginBottom: BodyTextMarginBottomSize): void {
+	function marginBottomSizes(marginBottom: BodyTextMarginBottom): void {
 		component.marginBottom = marginBottom;
 		fixture.detectChanges();
 		assertBodyTextHasClasses(
