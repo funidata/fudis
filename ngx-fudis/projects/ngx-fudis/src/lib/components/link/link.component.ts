@@ -25,7 +25,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
  */
 
 @Component({
-	selector: 'fudis-link[href]',
+	selector: 'fudis-link',
 	templateUrl: './link.component.html',
 	styleUrls: ['./link.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -45,7 +45,7 @@ export class LinkComponent {
 	/**
 	 * Title for the link, if not defined title will be the same as link URL
 	 */
-	@Input() linkTitle?: string;
+	@Input() linkTitle: string;
 
 	/**
 	 * Link size - by default link will inherit its parent's font-size. If link is not inside e.g. <fudis-heading> or <fudis-body-text> its size can be defined either 'm' (14px) or 'l' (16px).

@@ -52,7 +52,11 @@
 		class="fudis-expandable__header__heading__button"
 		[attr.aria-expanded]="!_collapsed"
 		(click)="setCollapsedStatus(!_collapsed)">
-		<fudis-icon icon="chevron-ring-fill" [rotate]="_collapsed ? 'none' : 'cw-90'"></fudis-icon>{{ title }}
+		<fudis-icon
+			class="fudis-expandable__header__heading__button__icon"
+			icon="chevron-ring-fill"
+			[rotate]="_collapsed ? 'none' : 'cw-90'"></fudis-icon
+		>{{ title }}
 		<span *ngIf="subTitle" class="fudis-expandable__header__heading__button__sub-heading">{{ subTitle }}</span>
 	</button>
 </ng-template>

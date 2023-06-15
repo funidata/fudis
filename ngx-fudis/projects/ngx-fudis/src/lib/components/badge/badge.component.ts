@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 type BadgeVariant = 'accent' | 'danger' | 'primary' | 'secondary' | 'success';
 
@@ -6,6 +6,7 @@ type BadgeVariant = 'accent' | 'danger' | 'primary' | 'secondary' | 'success';
 	selector: 'fudis-badge',
 	templateUrl: './badge.component.html',
 	styleUrls: ['./badge.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgeComponent {
 	@Input() variant: BadgeVariant = 'primary';

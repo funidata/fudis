@@ -27,7 +27,7 @@ export class IconComponent {
 	/**
 	 * Choose icon
 	 */
-	@Input() icon: FudisIcon;
+	@Input({ required: true }) icon: FudisIcon;
 
 	/**
 	 * Set color for icon
