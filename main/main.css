@@ -1,3 +1,359 @@
+/* stylelint-disable unit-disallowed-list */ /* stylelint-disable property-disallowed-list */
+/* stylelint-disable unit-disallowed-list */
+html {
+  scroll-padding-top: 2rem;
+  scroll-behavior: smooth;
+}
+
+.fudis-grid-item {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.fudis-grid-item__justify-self__start {
+  justify-self: start;
+}
+.fudis-grid-item__justify-self__end {
+  justify-self: end;
+}
+.fudis-grid-item__justify-self__center {
+  justify-self: center;
+}
+.fudis-grid-item__justify-self__stretch {
+  justify-self: stretch;
+}
+.fudis-grid-item__align-self__start {
+  align-self: start;
+}
+.fudis-grid-item__align-self__end {
+  align-self: end;
+}
+.fudis-grid-item__align-self__center {
+  align-self: center;
+}
+.fudis-grid-item__align-self__stretch {
+  align-self: stretch;
+}
+
+/* stylelint-disable unit-disallowed-list */ /* stylelint-disable order/order */
+.fudis-grid {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto 1fr;
+  /* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
+  /*
+  By default Grid's @Input width is XXL. When viewport gets narrower, it will get corresponding max-widths of each smaller breakpoint from XXL to smallest XS.
+
+  On the other end, if @Input width is the smallest of XS, it gets only one max-width of XS and doesn't need any other breakpoint width logic.
+  */
+}
+.fudis-grid > fudis-heading {
+  grid-column: 1/-1;
+}
+.fudis-grid__align__left {
+  margin-right: auto;
+  margin-left: 0;
+}
+@media screen and (max-width: 35.99em) {
+  .fudis-grid__align__left {
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
+}
+.fudis-grid__align__center {
+  margin-right: auto;
+  margin-left: auto;
+}
+@media screen and (max-width: 35.99em) {
+  .fudis-grid__align__center {
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
+}
+.fudis-grid__align__right {
+  margin-right: 0;
+  margin-left: auto;
+}
+@media screen and (max-width: 35.99em) {
+  .fudis-grid__align__right {
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
+}
+.fudis-grid__margin__top__none {
+  margin-top: 0;
+}
+.fudis-grid__margin__top__xxs {
+  margin-top: 0.25rem;
+}
+.fudis-grid__margin__top__xs {
+  margin-top: 0.5rem;
+}
+.fudis-grid__margin__top__sm {
+  margin-top: 1rem;
+}
+.fudis-grid__margin__top__md {
+  margin-top: 1.5rem;
+}
+.fudis-grid__margin__top__lg {
+  margin-top: 2rem;
+}
+.fudis-grid__margin__top__xl {
+  margin-top: 2.5rem;
+}
+.fudis-grid__margin__top__xxl {
+  margin-top: 4rem;
+}
+.fudis-grid__margin__bottom__none {
+  margin-bottom: 0;
+}
+.fudis-grid__margin__bottom__xxs {
+  margin-bottom: 0.25rem;
+}
+.fudis-grid__margin__bottom__xs {
+  margin-bottom: 0.5rem;
+}
+.fudis-grid__margin__bottom__sm {
+  margin-bottom: 1rem;
+}
+.fudis-grid__margin__bottom__md {
+  margin-bottom: 1.5rem;
+}
+.fudis-grid__margin__bottom__lg {
+  margin-bottom: 2rem;
+}
+.fudis-grid__margin__bottom__xl {
+  margin-bottom: 2.5rem;
+}
+.fudis-grid__margin__bottom__xxl {
+  margin-bottom: 4rem;
+}
+.fudis-grid__margin__sides__none {
+  margin-right: 0;
+  margin-left: 0;
+}
+.fudis-grid__margin__sides__xxs {
+  margin-right: 0.25rem;
+  margin-left: 0.25rem;
+}
+.fudis-grid__margin__sides__xs {
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+}
+.fudis-grid__margin__sides__sm {
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+.fudis-grid__margin__sides__md {
+  margin-right: 1.5rem;
+  margin-left: 1.5rem;
+}
+.fudis-grid__margin__sides__lg {
+  margin-right: 2rem;
+  margin-left: 2rem;
+}
+.fudis-grid__margin__sides__xl {
+  margin-right: 2.5rem;
+  margin-left: 2.5rem;
+}
+.fudis-grid__margin__sides__xxl {
+  margin-right: 4rem;
+  margin-left: 4rem;
+}
+@media screen and (min-width: 0) {
+  .fudis-grid__xxl {
+    max-width: 34rem;
+    row-gap: 1rem;
+    column-gap: 1rem;
+  }
+}
+@media screen and (min-width: 36em) {
+  .fudis-grid__xxl {
+    max-width: 34rem;
+    row-gap: 1rem;
+    column-gap: 1rem;
+  }
+}
+@media screen and (min-width: 48em) {
+  .fudis-grid__xxl {
+    max-width: 45rem;
+    row-gap: 1.5rem;
+    column-gap: 1.5rem;
+  }
+}
+@media screen and (min-width: 62em) {
+  .fudis-grid__xxl {
+    max-width: 60rem;
+    row-gap: 1.5rem;
+    column-gap: 1.5rem;
+  }
+}
+@media screen and (min-width: 75em) {
+  .fudis-grid__xxl {
+    max-width: 65rem;
+    row-gap: 2rem;
+    column-gap: 2rem;
+  }
+}
+@media screen and (min-width: 100em) {
+  .fudis-grid__xxl {
+    max-width: 96.25rem;
+    row-gap: 2rem;
+    column-gap: 2rem;
+  }
+}
+@media screen and (min-width: 0) {
+  .fudis-grid__xl {
+    max-width: 34rem;
+    row-gap: 1rem;
+    column-gap: 1rem;
+  }
+}
+@media screen and (min-width: 36em) {
+  .fudis-grid__xl {
+    max-width: 34rem;
+    row-gap: 1rem;
+    column-gap: 1rem;
+  }
+}
+@media screen and (min-width: 48em) {
+  .fudis-grid__xl {
+    max-width: 45rem;
+    row-gap: 1.5rem;
+    column-gap: 1.5rem;
+  }
+}
+@media screen and (min-width: 62em) {
+  .fudis-grid__xl {
+    max-width: 60rem;
+    row-gap: 1.5rem;
+    column-gap: 1.5rem;
+  }
+}
+@media screen and (min-width: 75em) {
+  .fudis-grid__xl {
+    max-width: 65rem;
+    row-gap: 2rem;
+    column-gap: 2rem;
+  }
+}
+@media screen and (min-width: 0) {
+  .fudis-grid__lg {
+    max-width: 34rem;
+    row-gap: 1rem;
+    column-gap: 1rem;
+  }
+}
+@media screen and (min-width: 36em) {
+  .fudis-grid__lg {
+    max-width: 34rem;
+    row-gap: 1rem;
+    column-gap: 1rem;
+  }
+}
+@media screen and (min-width: 48em) {
+  .fudis-grid__lg {
+    max-width: 45rem;
+    row-gap: 1.5rem;
+    column-gap: 1.5rem;
+  }
+}
+@media screen and (min-width: 62em) {
+  .fudis-grid__lg {
+    max-width: 60rem;
+    row-gap: 1.5rem;
+    column-gap: 1.5rem;
+  }
+}
+@media screen and (min-width: 0) {
+  .fudis-grid__md {
+    max-width: 34rem;
+    row-gap: 1rem;
+    column-gap: 1rem;
+  }
+}
+@media screen and (min-width: 36em) {
+  .fudis-grid__md {
+    max-width: 34rem;
+    row-gap: 1rem;
+    column-gap: 1rem;
+  }
+}
+@media screen and (min-width: 48em) {
+  .fudis-grid__md {
+    max-width: 45rem;
+    row-gap: 1.5rem;
+    column-gap: 1.5rem;
+  }
+}
+@media screen and (min-width: 0) {
+  .fudis-grid__sm {
+    max-width: 34rem;
+    row-gap: 1rem;
+    column-gap: 1rem;
+  }
+}
+@media screen and (min-width: 36em) {
+  .fudis-grid__sm {
+    max-width: 34rem;
+    row-gap: 1rem;
+    column-gap: 1rem;
+  }
+}
+.fudis-grid__xs {
+  max-width: 34rem;
+  row-gap: 1rem;
+  column-gap: 1rem;
+}
+.fudis-grid__row-gap__none {
+  row-gap: 0;
+}
+.fudis-grid__row-gap__xxs {
+  row-gap: 0.25rem;
+}
+.fudis-grid__row-gap__xs {
+  row-gap: 0.5rem;
+}
+.fudis-grid__row-gap__sm {
+  row-gap: 1rem;
+}
+.fudis-grid__row-gap__md {
+  row-gap: 1.5rem;
+}
+.fudis-grid__row-gap__lg {
+  row-gap: 2rem;
+}
+.fudis-grid__row-gap__xl {
+  row-gap: 2.5rem;
+}
+.fudis-grid__row-gap__xxl {
+  row-gap: 4rem;
+}
+.fudis-grid__column-gap__none {
+  column-gap: 0;
+}
+.fudis-grid__column-gap__xxs {
+  column-gap: 0.25rem;
+}
+.fudis-grid__column-gap__xs {
+  column-gap: 0.5rem;
+}
+.fudis-grid__column-gap__sm {
+  column-gap: 1rem;
+}
+.fudis-grid__column-gap__md {
+  column-gap: 1.5rem;
+}
+.fudis-grid__column-gap__lg {
+  column-gap: 2rem;
+}
+.fudis-grid__column-gap__xl {
+  column-gap: 2.5rem;
+}
+.fudis-grid__column-gap__xxl {
+  column-gap: 4rem;
+}
+
 /* stylelint-disable color-no-hex */
 /*
   --- Primary Colors are defined in style.scss ---
@@ -156,6 +512,11 @@
 
 /* stylelint-disable property-disallowed-list */
 /* stylelint-disable unit-disallowed-list */
+html {
+  scroll-padding-top: 2rem;
+  scroll-behavior: smooth;
+}
+
 /* stylelint-disable selector-max-compound-selectors */
 /* stylelint-disable declaration-no-important */
 /* stylelint-disable declaration-property-value-disallowed-list */
@@ -1701,8 +2062,13 @@ textarea.cdk-textarea-autosize-measuring-firefox {
   font-weight: 600;
   font-style: normal;
 }
-/* stylelint-disable property-disallowed-list */
+/* stylelint-disable unit-disallowed-list */ /* stylelint-disable property-disallowed-list */
 /* stylelint-disable unit-disallowed-list */
+html {
+  scroll-padding-top: 2rem;
+  scroll-behavior: smooth;
+}
+
 .fudis-visually-hidden {
   position: absolute;
   left: 0;
