@@ -12,7 +12,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	/*
 	 * Error message to display
 	 */
-	@Input() message: string | undefined;
+	@Input({ required: true }) message: string | undefined;
 
 	/**
 	 * Name of control this error is related to.
@@ -22,12 +22,12 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	/**
 	 * Id of input this message is related to. Sent to Error Summary service.
 	 */
-	@Input() inputId: string;
+	@Input({ required: true }) inputId: string;
 
 	/**
 	 * Label text of input this message is related to. Sent to Error Summary service.
 	 */
-	@Input() inputLabel: string;
+	@Input({ required: true }) inputLabel: string;
 
 	/**
 	 * If error is visible or not.
@@ -37,7 +37,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	/**
 	 * Error type from different keys in e. g. control.errors such as 'required' and 'minlength'
 	 */
-	@Input() type: string;
+	@Input({ required: true }) type: string;
 
 	private _errorSent: boolean = false;
 
@@ -45,7 +45,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 
 	private _currentLabel: string | undefined = undefined;
 
-	constructor(private errorSummaryService: ErrorSummaryService) {}
+	constructor(private _errorSummaryService: ErrorSummaryService) {}
 
 	ngOnInit(): void {
 		this.createError();
@@ -67,7 +67,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 				type: this.type,
 				controlName: this.controlName,
 			};
-			this.errorSummaryService.addNewError(newError);
+			this._errorSummaryService.addNewError(newError);
 			this._errorSent = true;
 		}
 	}
@@ -80,7 +80,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 
 	ngOnDestroy(): void {
 		if (this._errorSent) {
-			this.errorSummaryService.removeError({
+			this._errorSummaryService.removeError({
 				id: this.inputId,
 				type: this.type,
 				controlName: this.controlName,

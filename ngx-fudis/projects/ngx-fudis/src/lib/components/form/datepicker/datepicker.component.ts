@@ -47,7 +47,7 @@ export class DatepickerComponent extends InputBaseDirective implements DoCheck, 
 	/**
 	 * FormControl for the input.
 	 */
-	@Input() control: FormControl<Date | null>;
+	@Input({ required: true }) control: FormControl<Date | null>;
 
 	/**
 	 * Available sizes for the datepicker - defaults to medium.

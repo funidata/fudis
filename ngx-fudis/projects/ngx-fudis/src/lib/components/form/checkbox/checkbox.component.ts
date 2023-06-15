@@ -14,7 +14,7 @@ export class CheckboxComponent extends InputBaseDirective implements OnInit {
 	/*
 	 * FormControl for Radio Button group
 	 */
-	@Input() control: FormControl<boolean | null>;
+	@Input({ required: true }) control: FormControl<boolean | null>;
 
 	/*
 	 * Name for checkbox
