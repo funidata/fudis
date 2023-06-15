@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 /**
  * Example usages:
@@ -29,7 +29,6 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 	templateUrl: './link.component.html',
 	styleUrls: ['./link.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	encapsulation: ViewEncapsulation.None,
 })
 export class LinkComponent {
 	/**
