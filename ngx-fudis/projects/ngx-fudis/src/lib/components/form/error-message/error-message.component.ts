@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 
 import { ErrorSummaryService } from '../error-summary/error-summary.service';
 import { TFudisFormErrorSummaryItem } from '../../../types/forms';
@@ -7,6 +7,7 @@ import { TFudisFormErrorSummaryItem } from '../../../types/forms';
 	selector: 'fudis-error-message',
 	templateUrl: './error-message.component.html',
 	styleUrls: ['./error-message.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	/*

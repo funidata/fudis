@@ -13,7 +13,7 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * FormControl for the input.
 	 */
-	@Input() control: FormControl<string | null>;
+	@Input({ required: true }) control: FormControl<string | null>;
 
 	/**
 	 * Minimum length for text area, unset by default
