@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockComponent } from 'ng-mocks';
+import { ChangeDetectionStrategy } from '@angular/core';
 import { IconComponent } from '../icon/icon.component';
 import { ButtonComponent } from './button.component';
 import { DropdownMenuItemService } from '../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
@@ -12,7 +13,11 @@ describe('ButtonComponent', () => {
 		await TestBed.configureTestingModule({
 			declarations: [ButtonComponent, MockComponent(IconComponent)],
 			providers: [DropdownMenuItemService],
-		}).compileComponents();
+		})
+			.overrideComponent(ButtonComponent, {
+				set: { changeDetection: ChangeDetectionStrategy.Default },
+			})
+			.compileComponents();
 	});
 
 	beforeEach(() => {
