@@ -3,4 +3,4 @@ export type HeadingSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
 
 export type BodyTextSize = 'l-regular' | 'm-regular' | 's-regular' | 'l-light' | 'm-light';
 
-export type MarginBottomSize = 'm' | 'l' | 'none';
+export type BodyTextMarginBottomSize = 'm' | 'l' | 'none';
