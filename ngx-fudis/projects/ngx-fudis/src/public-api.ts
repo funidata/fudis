@@ -5,11 +5,13 @@
 
 export * from './lib/ngx-fudis.module';
 
+export { ActionsDirective } from './lib/directives/content-projection/actions/actions.directive';
 export { AutocompleteComponent } from './lib/components/form/autocomplete/autocomplete.component';
 export { BadgeComponent } from './lib/components/badge/badge.component';
 export { BodyTextComponent } from './lib/components/typography/body-text/body-text.component';
 export { ButtonComponent } from './lib/components/button/button.component';
 export { CheckboxComponent } from './lib/components/form/checkbox/checkbox.component';
+export { ContentDirective } from './lib/directives/content-projection/content/content.directive';
 export { DatepickerComponent } from './lib/components/form/datepicker/datepicker.component';
 export {
 	DialogActionsDirective,
@@ -29,11 +31,9 @@ export { ErrorMessageComponent } from './lib/components/form/error-message/error
 export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';
 export { ErrorSummaryService } from './lib/components/form/error-summary/error-summary.service';
 export { ExpandableComponent } from './lib/components/expandable/expandable.component';
-export {
-	ExpandableContentDirective,
-	ExpandableActionsDirective,
-} from './lib/components/expandable/expandable-directives';
 export { FieldSetComponent } from './lib/components/form/fieldset/fieldset.component';
+export { FormComponent } from './lib/components/form/form/form.component';
+export { FormSectionComponent } from './lib/components/form/form-section/form-section.component';
 
 export { InputWithLanguageOptionsComponent } from './lib/components/form/input-with-language-options/input-with-language-options.component';
 export { GridComponent } from './lib/components/grid/grid/grid.component';
@@ -46,7 +46,7 @@ export { HeadingComponent } from './lib/components/typography/heading/heading.co
 export { IconComponent } from './lib/components/icon/icon.component';
 export { LinkComponent } from './lib/components/link/link.component';
 export { NotificationComponent } from './lib/components/notification/notification.component';
-export { NotificationContentDirective } from './lib/components/notification/notification-directives';
+
 export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
 // export { SpacingDirective } from './lib/directives/spacing/spacing.directive';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';

@@ -1,7 +1,5 @@
 import { Component, Input, HostBinding, ViewEncapsulation } from '@angular/core';
-
-type HeadingLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-type HeadingSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
+import { HeadingSize, HeadingLevel } from '../../../types/typography';
 
 @Component({
 	selector: 'fudis-heading[tag]',

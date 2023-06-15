@@ -10,13 +10,21 @@ import {
 	TFudisInputErrorMessages,
 } from '../../../types/forms';
 
-import { FieldSetComponent } from './fieldset.component';
+import { ErrorSummaryService } from '../error-summary/error-summary.service';
 import { FormGroupValidators } from '../../../utilities/form/validators';
+import { FormComponent } from './form.component';
 
 @Component({
-	selector: 'example-fieldset',
+	selector: 'example-form-content',
 	template: `
-		<form>
+		<fudis-form
+			[titleTag]="titleTag"
+			[title]="title"
+			[id]="id"
+			[helpText]="formHelpText"
+			[errorSummaryScreenReaderHelpText]="errorSummaryScreenReaderHelpText"
+			[errorSummaryHelpText]="errorSummaryHelpText"
+			[errorSummaryVisible]="errorSummaryVisible">
 			<fudis-fieldset [legend]="legend" [id]="fieldsetId" [helpText]="helpText">
 				<fudis-grid [columns]="{ lg: 2 }" [width]="'md'" [marginSides]="'none'">
 					<fudis-input-with-language-options
@@ -89,15 +97,24 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 							[minDate]="fieldsetExample.controls['startDate'].value">
 						</fudis-datepicker>
 					</fudis-grid>
-					<fudis-button [label]="'Submit'" (handleClick)="submitForm()"></fudis-button>
 				</fudis-grid>
 			</fudis-fieldset>
-		</form>
+			<fudis-button [label]="'Submit'" (handleClick)="submitForm()"></fudis-button>
+		</fudis-form>
 	`,
 })
-class FieldsetExampleComponent {
+class FormContentExampleComponent {
+	errorSummaryVisible: boolean = false;
+
 	submitForm(): void {
 		this.fieldsetExample.markAllAsTouched();
+
+		if (this.fieldsetExample.invalid) {
+			this.errorSummaryVisible = true;
+			this.errorSummaryService.reloadErrors();
+		} else {
+			this.errorSummaryVisible = false;
+		}
 	}
 
 	errorName: TFudisGroupErrorMessages = {
@@ -169,6 +186,17 @@ class FieldsetExampleComponent {
 
 	requiredText = 'Required';
 
+	title = 'Example form heading';
+
+	titleTag = 'h1';
+
+	errorSummaryHelpText = 'There are errors in this form. Please address these before trying to submit again.';
+
+	errorSummaryScreenReaderHelpText = 'Attention';
+
+	formHelpText =
+		"Come about rope's end loot hail-shot belaying pin hornswaggle maroon quarter main sheet nipperkin. Pieces of Eight reef landlubber or just lubber reef sails loaded to the gunwalls coffer Sail ho draught capstan shrouds. Plate Fleet fluke Yellow Jack galleon wherry wench Cat o'nine tails yard coxswain square-rigged.";
+
 	fieldsetExample = new FormGroup({
 		name: new FormGroup(
 			{
@@ -201,16 +229,18 @@ class FieldsetExampleComponent {
 		{ value: 'basic', viewValue: 'Basic', id: 'courseType-1', name: 'courseType' },
 		{ value: 'advanced', viewValue: 'Advanced', id: 'courseType-2', name: 'courseType' },
 	];
+
+	constructor(private errorSummaryService: ErrorSummaryService) {}
 }
 
 export default {
-	title: 'Components/Form/Field Set',
-	component: FieldSetComponent,
+	title: 'Components/Form/Form',
+	component: FormComponent,
 
 	argTypes: {},
 	decorators: [
 		moduleMetadata({
-			declarations: [FieldsetExampleComponent],
+			declarations: [FormContentExampleComponent],
 			imports: [ReactiveFormsModule, FormsModule],
 		}),
 		applicationConfig({
@@ -224,10 +254,34 @@ export default {
 	},
 } as Meta;
 
+const html = String.raw;
+
+// const Template: StoryFn = () => ({
+// 	props: {
+// 		title: 'Example form heading',
+// 		titleTag: 'h1',
+// 		errorSummaryHelpText: 'There are errors in this fieldset. Please address these before trying to submit again.',
+// 		errorSummaryVisible: false,
+// 		errorSummaryScreenReaderHelpText: 'Attention',
+// 		helpText:
+// 			"Come about rope's end loot hail-shot belaying pin hornswaggle maroon quarter main sheet nipperkin. Pieces of Eight reef landlubber or just lubber reef sails loaded to the gunwalls coffer Sail ho draught capstan shrouds. Plate Fleet fluke Yellow Jack galleon wherry wench Cat o'nine tails yard coxswain square-rigged.",
+// 	},
+// 	template: html`
+// 		<fudis-form
+// 			[titleTag]="titleTag"
+// 			[title]="title"
+// 			[id]="id"
+// 			[helpText]="helpText"
+// 			[errorSummaryScreenReaderHelpText]="errorSummaryScreenReaderHelpText"
+// 			[errorSummaryHelpText]="errorSummaryHelpText"
+// 			[errorSummaryVisible]="errorSummaryVisible">
+// 			<example-form-content></example-form-content>
+// 		</fudis-form>
+// 	`,
+// });
+
 const Template: StoryFn = () => ({
-	template: `
-	<example-fieldset></example-fieldset>
-	`,
+	template: html` <example-form-content></example-form-content> `,
 });
 
 export const Example = Template.bind({});

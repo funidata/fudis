@@ -14,17 +14,17 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 	/**
 	 * FieldSet parent element of this ErrorSummaryComponent
 	 */
-	@Input() parentComponent: HTMLFieldSetElement | undefined;
+	@Input({ required: true }) parentComponent: HTMLFormElement;
 
 	/**
 	 * Help text displayed in Error Summary before listing individual errors.
 	 */
-	@Input() helpText: string | null | undefined;
+	@Input({ required: true }) helpText: string;
 
 	/**
 	 * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.
 	 */
-	@Input() screenReaderHelpText: string | null | undefined;
+	@Input({ required: true }) screenReaderHelpText: string;
 
 	constructor(private errorSummaryService: ErrorSummaryService) {
 		effect(() => {

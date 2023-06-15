@@ -5,17 +5,19 @@ import { By } from '@angular/platform-browser';
 import { MockComponent } from 'ng-mocks';
 import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';
-import { ExpandableContentDirective, ExpandableActionsDirective } from './expandable-directives';
 
 import { ExpandableComponent } from './expandable.component';
+import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
+import { ContentDirective } from '../../directives/content-projection/content/content.directive';
+import { IdService } from '../../utilities/id-service.service';
 
 @Component({
 	selector: 'fudis-mock-container',
-	template: ` <fudis-expandable [collapsed]="collapsed">
-		<ng-template fudisExpandableActions>
-			<fudis-button></fudis-button>
+	template: `<fudis-expandable [collapsed]="collapsed" [title]="'Test title'">
+		<ng-template fudisActions>
+			<fudis-button [label]="'Action button'"></fudis-button>
 		</ng-template>
-		<ng-template fudisExpandableContent>
+		<ng-template fudisContent>
 			<fudis-mock-component
 				(initialized)="contentInitializationCount = contentInitializationCount + 1"></fudis-mock-component>
 		</ng-template>
@@ -46,14 +48,15 @@ describe('ExpandableComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [
-				ExpandableContentDirective,
-				ExpandableActionsDirective,
+				ContentDirective,
+				ActionsDirective,
 				ExpandableComponent,
 				MockContainerComponent,
 				MockContentComponent,
 				MockComponent(ButtonComponent),
 				MockComponent(IconComponent),
 			],
+			providers: [IdService],
 		}).compileComponents();
 	});
 
@@ -79,12 +82,12 @@ describe('ExpandableComponent', () => {
 	}
 
 	function assertExpandableIsExpanded(): void {
-		expect(getExpandable().collapsed).withContext('Expected the expandable to be expanded').toEqual(false);
+		expect(getExpandable()._collapsed).withContext('Expected the expandable to be expanded').toEqual(false);
 		expect(isContentVisible()).withContext('Expected the content component to be visible').toEqual(true);
 	}
 
 	function assertExpandableIsCollapsed(): void {
-		expect(getExpandable().collapsed).withContext('Expected the expandable to be collapsed').toEqual(true);
+		expect(getExpandable()._collapsed).withContext('Expected the expandable to be collapsed').toEqual(true);
 		expect(isContentVisible()).withContext('Expected the content component not to be visible').toEqual(false);
 	}
 

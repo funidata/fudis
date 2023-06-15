@@ -1,12 +1,18 @@
 /* eslint-disable no-console */
 import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import { DialogService, ErrorSummaryService, GridService } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
 
 import { IFudisDropdownOption, IFudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
+import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 
+type MyForm = {
+	dropdown: FormControl<IFudisDropdownOption | null>;
+	textInput: FormControl<string | null>;
+	truth: FormControl<boolean | null>;
+};
 @Component({
 	selector: 'app-root',
 	templateUrl: 'app.component.html',
@@ -17,10 +23,6 @@ export class AppComponent implements OnInit {
 
 	title = 'dev';
 
-	validatorsForDatepicker = [Validators.required];
-
-	textAreaControl: FormControl = new FormControl('');
-
 	dropdownOptions: IFudisDropdownOption[] = [
 		{ value: 'value-1-dog', viewValue: 'Dog' },
 		{ value: 'value-2-capybara', viewValue: 'Capybara' },
@@ -30,11 +32,11 @@ export class AppComponent implements OnInit {
 		{ value: 'value-6-gecko', viewValue: 'Southern Titiwangsa Bent-Toed Gecko' },
 	];
 
-	dropdownControl: FormControl = new FormControl(this.dropdownOptions[2]);
-
-	datePickerControl: FormControl = new FormControl(null, this.validatorsForDatepicker);
-
-	textInputControl: any;
+	testFormGroup = new FormGroup<MyForm>({
+		dropdown: new FormControl<IFudisDropdownOption | null>(this.dropdownOptions[2]),
+		textInput: new FormControl<string | null>(null, Validators.required),
+		truth: new FormControl<boolean | null>(null, Validators.required),
+	});
 
 	constructor(
 		@Inject(DOCUMENT) private document: Document,
@@ -43,7 +45,7 @@ export class AppComponent implements OnInit {
 		private errorSummaryService: ErrorSummaryService,
 		private gridService: GridService
 	) {
-		gridService.setGridDefaultColumns({ default: 3, md: 4 });
+		gridService.setGridDefaultColumns({ xs: 1, sm: 2 });
 	}
 
 	errorSummaryVisible: boolean = false;
@@ -58,7 +60,6 @@ export class AppComponent implements OnInit {
 		this.translocoService.setActiveLang('en');
 		this.translocoService.setActiveLang('fi');
 
-		this.textInputControl = new FormControl('', Validators.required);
 		this.document.documentElement.lang = 'fi';
 
 		this.translocoService.selectTranslateObject('options').subscribe((value) => {
@@ -91,6 +92,10 @@ export class AppComponent implements OnInit {
 		this.dialog.open(this.templateRef);
 	}
 
+	openDialogFromComponent(): void {
+		this.dialog.open(DialogTestContentComponent);
+	}
+
 	testData = [
 		{ key: 'First Name', value: 'Rex' },
 		{ key: 'Last Name', value: 'Dangerwest' },
@@ -103,12 +108,10 @@ export class AppComponent implements OnInit {
 		{ key: 'Enemy', value: 'Lucy', subHeading: 'Second Archenemy' },
 	];
 
-	truthControl = new FormControl(null, Validators.required);
-
 	clickSubmit(): void {
-		this.textInputControl.markAllAsTouched();
+		this.testFormGroup.markAllAsTouched();
 
-		if (this.textInputControl.invalid) {
+		if (this.testFormGroup.invalid) {
 			this.errorSummaryVisible = true;
 			this.showSuccessBodyText = false;
 			setTimeout(() => {
