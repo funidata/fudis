@@ -124,8 +124,6 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 		return this.ariaLabel;
 	}
 
-	toggleStatus: boolean;
-
 	closeMenu(menuStatus: boolean): void {
 		if (!menuStatus) {
 			this._toggleOn = false;
