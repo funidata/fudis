@@ -10,12 +10,7 @@ import { TFudisInputErrorMessages } from '../../../types/forms';
 	selector: 'example-date-range',
 	template: `
 		<form [formGroup]="mainFormGroup">
-			<fieldset
-				class="storybook-flex"
-				style="align-items: flex-start;"
-				[attr.id]="id"
-				[attr.aria-describedby]="id + '_guidance'">
-				<legend>Select a date range</legend>
+			<fudis-fieldset [legend]="'Select a date range'" [helpText]="'Select date range'">
 				<fudis-datepicker
 					style="margin-right: 1rem;"
 					[label]="'Select start date'"
@@ -37,16 +32,16 @@ import { TFudisInputErrorMessages } from '../../../types/forms';
 					[disabled]="!mainFormGroup.controls['first'].value && !mainFormGroup.controls['first'].valid"
 					[minDate]="mainFormGroup.controls['first'].value">
 				</fudis-datepicker>
-			</fieldset>
-			<fudis-guidance [inputLabel]="label" [helpText]="'Select both dates.'" [for]="id">
-				<fudis-error-message
-					*ngIf="
-						mainFormGroup.controls['first']?.touched &&
-						mainFormGroup.controls['second'].touched &&
-						(mainFormGroup.controls['first']?.errors?.required || mainFormGroup.controls['second']?.errors?.required)
-					"
-					[message]="'Missing one or more values'"></fudis-error-message>
-			</fudis-guidance>
+			</fudis-fieldset>
+
+			<fudis-error-message
+				[visible]="true"
+				*ngIf="
+					mainFormGroup.controls['first']?.touched &&
+					mainFormGroup.controls['second'].touched &&
+					(mainFormGroup.controls['first']?.errors?.required || mainFormGroup.controls['second']?.errors?.required)
+				"
+				[message]="'Missing one or more values'"></fudis-error-message>
 
 			<div *ngIf="mainFormGroup.controls['first'].value">
 				<fudis-heading [tag]="'h3'" [size]="'m'">Values from first DatePicker</fudis-heading>

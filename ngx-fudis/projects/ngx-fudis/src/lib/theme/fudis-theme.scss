@@ -33,6 +33,15 @@ $primary-theme: mat.define-light-theme(
 		typography: $typography,
 	)
 );
+$button-theme: mat.define-light-theme(
+	(
+		color: (
+			primary: mat.define-palette(palette.$palette-map-primary, 500),
+			accent: mat.define-palette(palette.$palette-map-accent, 500),
+		),
+		typography: $typography,
+	)
+);
 $datepicker-theme: mat.define-light-theme(
 	(
 		color: (
