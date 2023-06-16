@@ -44,7 +44,7 @@ import { ExpandableComponent } from './components/expandable/expandable.componen
 import { FieldSetBaseDirective } from './directives/form/fieldset-base/fieldset-base.directive';
 import { FieldSetComponent } from './components/form/fieldset/fieldset.component';
 import { FormComponent } from './components/form/form/form.component';
-import { FormSectionComponent } from './components/form/form-section/form-section.component';
+import { SectionComponent } from './components/section/section.component';
 import { GridComponent } from './components/grid/grid/grid.component';
 import { GridApiDirective } from './directives/grid/grid-api/grid-api.directive';
 import { GridDirective } from './directives/grid/grid/grid.directive';
@@ -93,11 +93,9 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,
-
 		FieldSetBaseDirective,
 		FieldSetComponent,
 		FormComponent,
-		FormSectionComponent,
 		InputWithLanguageOptionsComponent,
 		GridComponent,
 		GridApiDirective,
@@ -111,9 +109,9 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		LabelComponent,
 		LinkComponent,
 		NotificationComponent,
-
 		RadioButtonComponent,
 		RadioButtonGroupComponent,
+		SectionComponent,
 		SpacingDirective,
 		TextInputComponent,
 		TextSpacingComponent,
@@ -171,7 +169,6 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		DialogActionsDirective,
 		FieldSetComponent,
 		FormComponent,
-		FormSectionComponent,
 		InputWithLanguageOptionsComponent,
 		GridComponent,
 		GridDirective,
@@ -183,6 +180,7 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		LinkComponent,
 		NotificationComponent,
 		RadioButtonGroupComponent,
+		SectionComponent,
 		TextAreaComponent,
 		TextInputComponent,
 		TooltipDirective,
