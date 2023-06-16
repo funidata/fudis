@@ -40,7 +40,7 @@
 			<fudis-icon
 				class="fudis-autocomplete__input__icon"
 				[icon]="variant === 'search' ? 'search' : 'chevron'"
-				[rotate]="_collapsed ? 'cw-90' : 'ccw-90'"
+				[rotate]="variant === 'dropdown' ? 'cw-90' : 'none'"
 				[class.fudis-autocomplete__input__icon--disabled]="disabled">
 			</fudis-icon>
 		</ng-container>
@@ -48,7 +48,7 @@
 	<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="id" [errorMsg]="errorMsg" [control]="control">
 	</fudis-guidance>
 
-	<mat-autocomplete class="fudis-autocomplete__option-list" #autocomplete="matAutocomplete" autoActiveFirstOption>
+	<mat-autocomplete class="fudis-autocomplete__option-list" #autocomplete="matAutocomplete">
 		<mat-option
 			class="fudis-autocomplete__option"
 			*ngFor="let option of filteredOptions | async"

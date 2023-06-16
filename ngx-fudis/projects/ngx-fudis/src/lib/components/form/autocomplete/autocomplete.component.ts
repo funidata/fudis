@@ -51,13 +51,10 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	 */
 	autocompleteFormControl = new FormControl<string | null>('');
 
-	protected _collapsed: boolean = true;
-
 	ngAfterContentInit() {
 		if (this.control.value) {
 			this.autocompleteFormControl.patchValue(this.control.value.viewValue);
 		}
-
 		this.checkFilteredOptions();
 	}
 
@@ -68,10 +65,8 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 					this.updateControlValue(value);
 					// Start filtering after three characters
 					if (value && value.length > 2 && !this.control.value) {
-						// this.updateControlValue(value.toLowerCase());
 						return this._filter(value);
 					}
-					// this.updateControlValue(null);
 					return [];
 				})
 			);
@@ -100,8 +95,9 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 
 			if (optionValue) {
 				this.control.patchValue(optionValue);
+			} else {
+				this.control.patchValue(null);
 			}
-			this.control.patchValue(null);
 		}
 	}
 
@@ -111,7 +107,6 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	private _filter(value: string): IFudisDropdownOption[] {
 		if (value || value === '') {
 			const filterValue = value.toLowerCase();
-
 			return this.options.filter((option) => option.viewValue.toLowerCase().includes(filterValue));
 		}
 		return [];

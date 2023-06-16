@@ -21,14 +21,23 @@
 		&.mat-mdc-option {
 			min-height: spacing.$spacing-l;
 
-			// Change option hover color
+			// Change dropdown option list typography
+			& .mdc-list-item__primary-text {
+				@include typography.body-text-m-regular;
+			}
+		}
+	}
+}
 
+.fudis-dropdown {
+	&__option {
+		&.mat-mdc-option {
+			// Change option hover color
 			&:hover:not(.mdc-list-item--disabled) {
 				@include colorMixins.bg-color('primary-light');
 			}
 
 			// Change option focus color
-
 			&:focus:not(.mdc-list-item--disabled) {
 				@include colorMixins.bg-color('primary-light');
 			}
@@ -39,6 +48,7 @@
 			}
 
 			&.mat-mdc-option-active.mdc-list-item--selected {
+				// Background-color mixin does not work in this particular case
 				/* stylelint-disable-next-line property-disallowed-list */
 				background-color: colorTokens.$color-primary-light !important;
 			}
@@ -46,10 +56,28 @@
 			&.mdc-list-item--selected .mdc-list-item__primary-text {
 				@include colorMixins.text-color('gray-dark');
 			}
+		}
+	}
+}
 
-			// Change dropdown option list typography
-			& .mdc-list-item__primary-text {
-				@include typography.body-text-m-regular;
+.fudis-autocomplete {
+	&__option {
+		&.mat-mdc-option {
+			// Change option hover color
+			&:hover:not(.mdc-list-item--disabled) {
+				@include colorMixins.bg-color('primary-light');
+			}
+
+			// Change option focus color
+			&:focus:not(.mdc-list-item--disabled) {
+				@include colorMixins.bg-color('primary-light');
+			}
+
+			// Change option color when navigating with keyboard arrows
+			&.mat-mdc-option-active {
+				// Background-color mixin does not work in this particular case
+				/* stylelint-disable-next-line property-disallowed-list */
+				background-color: colorTokens.$color-primary-light !important;
 			}
 		}
 	}

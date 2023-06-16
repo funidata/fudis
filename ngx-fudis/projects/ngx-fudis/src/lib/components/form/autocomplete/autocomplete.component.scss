@@ -46,6 +46,11 @@
 			right: spacing.$spacing-xxs;
 			transform: translateY(-50%);
 
+			// Necessary for passing the chevron icon click and hit the input to open dropdown
+			&[ng-reflect-icon='chevron'] {
+				pointer-events: none;
+			}
+
 			&--disabled {
 				@include colorMixins.bg-color('transparent');
 			}
