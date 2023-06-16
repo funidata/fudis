@@ -39,7 +39,8 @@
 		<ng-container *ngIf="!autocompleteFormControl.value || autocompleteFormControl.value === ''">
 			<fudis-icon
 				class="fudis-autocomplete__input__icon"
-				[icon]="'search'"
+				[icon]="variant === 'search' ? 'search' : 'chevron'"
+				[rotate]="_collapsed ? 'cw-90' : 'ccw-90'"
 				[class.fudis-autocomplete__input__icon--disabled]="disabled">
 			</fudis-icon>
 		</ng-container>

@@ -25,10 +25,33 @@ const Template: StoryFn<AutocompleteComponent> = (args: AutocompleteComponent) =
 	props: args,
 });
 
-export const Autocomplete = Template.bind({});
-Autocomplete.args = {
+export const AutocompleteSearch = Template.bind({});
+AutocompleteSearch.args = {
 	id: 'example-id-for-autocomplete',
-	label: 'Choose one option',
+	label: 'Search and filter option',
+	requiredText: 'Required',
+	clearFilterText: 'Clear filter',
+	helpText:
+		'This is autocomplete input, start writing (e.g mar) and after three letters the input will suggest matching options.',
+	control: new FormControl(null, Validators.required),
+	errorMsg: { required: 'This selection is required' },
+	options: [
+		{ value: 123, viewValue: 'Mary Rhubarb' },
+		{ value: '456-xx', viewValue: 'Kingsley Kale' },
+		{ value: 789, viewValue: 'Martha Zuccini', disabled: true },
+		{ value: 'very-long-value', viewValue: 'Brian Eggplant with Marinated Pomegranate Seeds' },
+		{ value: 1234, viewValue: 'Martin Seeding' },
+	],
+	tooltip: 'well hello to you',
+	tooltipPosition: 'below',
+	tooltipToggle: true,
+};
+
+export const AutocompleteDropdown = Template.bind({});
+AutocompleteDropdown.args = {
+	id: 'example-id-for-autocomplete',
+	label: 'Choose and filter option',
+	variant: 'dropdown',
 	requiredText: 'Required',
 	clearFilterText: 'Clear filter',
 	helpText:
