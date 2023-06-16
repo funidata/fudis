@@ -1,1 +1,21 @@
-<p>form-section works!</p>
+<section
+	[attr.aria-describedby]="_headingId"
+	*ngIf="!disableGrid"
+	fudisGrid
+	[width]="width"
+	[align]="align"
+	[alignItemsX]="alignItemsX"
+	[alignItemsY]="alignItemsY"
+	[ngClass]="'fudis-section'"
+	[classes]="_classList"
+	[columnGap]="columnGap"
+	[rowGap]="'none'"
+	[columns]="columns"
+	[marginBottom]="marginBottom"
+	[marginTop]="marginTop"
+	[marginSides]="marginSides">
+	<fudis-heading [marginBottom]="'xs'" [id]="_headingId" [tag]="titleTag" [size]="titleSize">{{ title }}</fudis-heading>
+	<div class="fudis-section__content">
+		<ng-content></ng-content>
+	</div>
+</section>

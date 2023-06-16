@@ -45,7 +45,7 @@ export class GridApiDirective {
 	/**
 	 * Horizontal margins left and right of the grid
 	 */
-	@Input() marginSides: GridMarginSide = 'responsive';
+	@Input() marginSides: GridMarginSide = 'none';
 
 	/**
 	 * Custom CSS classes for Grid element

@@ -19,6 +19,7 @@ describe('HeadingComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(HeadingComponent);
 		component = fixture.componentInstance;
+		component.ngOnInit();
 		fixture.detectChanges();
 	});
 
