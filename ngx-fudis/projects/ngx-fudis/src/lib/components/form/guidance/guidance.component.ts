@@ -11,12 +11,12 @@ export class GuidanceComponent {
 	/**
 	 * Id of input, fieldset or similar which Guidance is related to. Used in aria attributes and in emit information for Error Summary Service
 	 */
-	@Input() for: string;
+	@Input({ required: true }) for: string;
 
 	/**
 	 * Label text of input, fieldset or similar Guidance is related to. Used in emit information for Error Summary service.
 	 */
-	@Input() inputLabel: string;
+	@Input({ required: true }) inputLabel: string;
 
 	/**
 	 * FormControl of related input.

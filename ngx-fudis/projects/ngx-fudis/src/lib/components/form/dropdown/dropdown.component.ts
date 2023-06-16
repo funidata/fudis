@@ -14,7 +14,9 @@ export class DropdownComponent extends InputBaseDirective implements OnInit {
 	/*
 	 * FormControl for the input.
 	 */
-	@Input() control: FormControl<IFudisDropdownOption | IFudisDropdownOption[] | TFudisDropdownLanguageOption[] | null>;
+	@Input({ required: true }) control: FormControl<
+		IFudisDropdownOption | IFudisDropdownOption[] | TFudisDropdownLanguageOption[] | null
+	>;
 
 	/**
 	 * Dropdown options

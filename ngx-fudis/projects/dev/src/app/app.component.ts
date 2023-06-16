@@ -12,6 +12,7 @@ type MyForm = {
 	dropdown: FormControl<IFudisDropdownOption | null>;
 	textInput: FormControl<string | null>;
 	truth: FormControl<boolean | null>;
+	date: FormControl<Date | null>;
 };
 @Component({
 	selector: 'app-root',
@@ -36,6 +37,7 @@ export class AppComponent implements OnInit {
 		dropdown: new FormControl<IFudisDropdownOption | null>(this.dropdownOptions[2]),
 		textInput: new FormControl<string | null>(null, Validators.required),
 		truth: new FormControl<boolean | null>(null, Validators.required),
+		date: new FormControl<Date | null>(null),
 	});
 
 	constructor(
@@ -45,7 +47,7 @@ export class AppComponent implements OnInit {
 		private errorSummaryService: ErrorSummaryService,
 		private gridService: GridService
 	) {
-		gridService.setGridDefaultColumns({ xs: 1, sm: 2 });
+		gridService.setGridDefaultColumns({ xs: 1, lg: 2 });
 	}
 
 	errorSummaryVisible: boolean = false;

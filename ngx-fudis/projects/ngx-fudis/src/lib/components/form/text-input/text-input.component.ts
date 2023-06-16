@@ -1,5 +1,5 @@
 // eslint-disable-next-line max-classes-per-file
-import { Component, Input, ViewChild, ElementRef, ViewEncapsulation, HostBinding, OnInit } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, HostBinding, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
@@ -8,7 +8,6 @@ import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnin
 	selector: 'fudis-text-input[id][label]',
 	templateUrl: './text-input.component.html',
 	styleUrls: ['./text-input.component.scss'],
-	encapsulation: ViewEncapsulation.None,
 })
 export class TextInputComponent extends InputBaseDirective implements OnInit {
 	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;

@@ -1,6 +1,4 @@
 @use '@angular/material' as mat;
-@forward './src/lib/components/grid/grid-item/grid-item.component.scss';
-@forward './src/lib/components/grid/grid/grid.component.scss';
 
 // Fudis theme import
 @import './src/lib/theme/component-themes-to-apply';

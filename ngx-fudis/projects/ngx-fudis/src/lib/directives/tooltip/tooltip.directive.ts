@@ -8,42 +8,42 @@ import { TooltipApiDirective } from './tooltip-api.directive';
 	providers: [MatTooltip],
 })
 export class TooltipDirective extends TooltipApiDirective implements OnInit {
-	constructor(public ngMaterialTooltip: MatTooltip, public tooltipElement: ElementRef) {
+	constructor(private _ngMaterialTooltip: MatTooltip, private _tooltipElement: ElementRef) {
 		super();
 	}
 
 	ngOnInit() {
-		this.ngMaterialTooltip.message = this.tooltip;
+		this._ngMaterialTooltip.message = this.tooltip;
 		if (this.tooltipPosition) {
-			this.ngMaterialTooltip.position = this.tooltipPosition;
+			this._ngMaterialTooltip.position = this.tooltipPosition;
 		}
 	}
 
 	@HostListener('mouseenter') onMouseEnter() {
-		if (!this.tooltipToggle && this.tooltipElement.nativeElement.hasAttribute('fudisTooltip')) {
-			this.ngMaterialTooltip.show();
+		if (!this.tooltipToggle && this._tooltipElement.nativeElement.hasAttribute('fudisTooltip')) {
+			this._ngMaterialTooltip.show();
 		}
 	}
 
 	@HostListener('mouseleave') onMouseLeave() {
 		if (!this.tooltipToggle) {
-			this.ngMaterialTooltip.hide();
+			this._ngMaterialTooltip.hide();
 		}
 	}
 
 	@HostListener('focus') onFocus() {
 		if (!this.tooltipToggle) {
-			this.ngMaterialTooltip.show();
+			this._ngMaterialTooltip.show();
 		}
 	}
 
 	@HostListener('blur') onBlur() {
-		this.ngMaterialTooltip.hide();
+		this._ngMaterialTooltip.hide();
 	}
 
 	@HostListener('click') onClick() {
-		if (this.tooltipToggle && this.tooltipElement.nativeElement.hasAttribute('fudisTooltip')) {
-			this.ngMaterialTooltip.toggle();
+		if (this.tooltipToggle && this._tooltipElement.nativeElement.hasAttribute('fudisTooltip')) {
+			this._ngMaterialTooltip.toggle();
 		}
 	}
 
@@ -51,10 +51,10 @@ export class TooltipDirective extends TooltipApiDirective implements OnInit {
 		if (
 			this.tooltipToggle &&
 			(event.key === 'Enter' || event.key === ' ') &&
-			this.tooltipElement.nativeElement.hasAttribute('fudisTooltip')
+			this._tooltipElement.nativeElement.hasAttribute('fudisTooltip')
 		) {
 			event.preventDefault();
-			this.ngMaterialTooltip.toggle();
+			this._ngMaterialTooltip.toggle();
 		}
 	}
 }
