@@ -3,14 +3,17 @@ import { linkTo } from '@storybook/addon-links';
 import { AutocompleteComponent } from './autocomplete.component';
 import * as AutocompleteStories from './autocomplete.stories.ts';
 
-<Meta title="Components/Form/Autocomplete" />
+<Meta title="Components/Form/Autocomplete (single-select)" />
 
-# Autocomplete
+# Autocomplete (single-select)
 
-Fudis-autocomplete is based on Angular Material Autocomplete.
+Fudis-autocomplete (single-select) is based on Angular Material Autocomplete.
 
-Autocomplete is a search input providing user with a list of suggestions based on what they type on the input. Filtering triggers after three characters.
-User can select one option from the dropdown and it will be displayed in the input field. Autocomplete can only have one option selected at a time.
+Autocomplete is a search input providing user with a list of suggestions. There are two variants for single-select autocomplete: `search` and `dropdown`. 
+
+**Search** variant is expecting user input and the option filtering is triggered after three characters. **Dropdown** variant will display options in a dropdown when input is focused, options can be filtered by typing. Filtering is triggered from the first character.
+
+Autocomplete (single-select) can only have one option selected at a time.
 
 ## Examples
 
@@ -23,18 +26,20 @@ Autocomplete is designed to use when basic [dropdown](/story/components-form-dro
 
 #### Mandatory Properties
 
-Autocomplete requires at least `label`, `id` and `options` object array with possible option values. For accessibility it is also mandatory to give `clearFilterText` which is passed to clear-button's aria-label.
+Autocomplete requires at least `label` and `options` object array with possible option values. For accessibility it is also mandatory to give `clearFilterText` which is passed to clear-button's aria-label.
 
 Options array takes in objects with the following signature:
 
 ```
 {
-	// Underlying value of the option
+	/** Underlying value of the option */
 	value: any;
-	// Value that is shown in the UI
+	/** Value that is shown in the UI */
 	viewValue: string;
-	// Is option disabled in the options list dropdown
+	/** Is option disabled in the options list dropdown */
 	disabled?: boolean;
+	/** To store additional data */
+	[key: string]: any;
 }
 ```
 
@@ -45,7 +50,9 @@ If Autocomplete is a required form field, provide `requiredText` string property
 ### Error Handling
 
 - **Required** error is shown if input is required and
-  - if control is touched and value is empty
+  - if control is touched and
+			- input value is empty or
+			- input value does not match to any option.value
 
 ### Accessibility
 
@@ -56,7 +63,7 @@ If Autocomplete is a required form field, provide `requiredText` string property
 - Options can be disabled
   - Disabled option is focusable with screen reader
   - Disabled state is communicated for screen reader
-- **NOTE:** Option list selection can be made with `enter` but not with `space` since it is considered as a search character
+- **NOTE:** Option list selection can only be made with `enter` and not with `space` since it is considered as a search character
 
 ### Related components
 

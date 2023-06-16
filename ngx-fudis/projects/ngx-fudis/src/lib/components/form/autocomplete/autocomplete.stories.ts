@@ -6,7 +6,7 @@ import { AutocompleteComponent } from './autocomplete.component';
 import readme from './readme.mdx';
 
 export default {
-	title: 'Components/Form/Autocomplete',
+	title: 'Components/Form/Autocomplete (single-select)',
 	component: AutocompleteComponent,
 	parameters: {
 		docs: {
