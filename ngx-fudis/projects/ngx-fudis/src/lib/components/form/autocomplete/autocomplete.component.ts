@@ -5,8 +5,9 @@ import { FormControl } from '@angular/forms';
 import { IFudisDropdownOption } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+import { IdService } from '../../../utilities/id-service.service';
 
-export type AutocompleteInputSize = 's' | 'm' | 'l';
+export type AutocompleteInputSize = 'sm' | 'md' | 'lg';
 
 @Component({
 	selector: 'fudis-autocomplete[label][id][options][clearFilterText]',
@@ -19,27 +20,27 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	/**
 	 * FormControl for the input.
 	 */
-	@Input() control: FormControl<IFudisDropdownOption | null>;
+	@Input({ required: true }) control: FormControl<IFudisDropdownOption | null>;
 
 	/**
 	 * Option list
 	 */
-	@Input() options: IFudisDropdownOption[];
+	@Input({ required: true }) options: IFudisDropdownOption[];
 
 	/**
-	 * Filtered options derived from options Input
+	 * Internal filtered options derived from options Input
 	 */
 	filteredOptions: Observable<IFudisDropdownOption[]>;
 
 	/**
 	 * Available sizes for the autocomplete - defaults to large.
 	 */
-	@Input() size: AutocompleteInputSize = 'l';
+	@Input() size: AutocompleteInputSize = 'lg';
 
 	/**
 	 * Aria-label for close icon which clears the input
 	 */
-	@Input() clearFilterText: string;
+	@Input({ required: true }) clearFilterText: string;
 
 	/**
 	 * Option whether the dropdown options are shown only after three charactes (search) or if options are displayed when focusing the search input even without typing (dropdown)
@@ -50,6 +51,13 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	 * Internal formControl to check if typed text matches with any of the options' viewValue
 	 */
 	autocompleteFormControl = new FormControl<string | null>('');
+
+	protected _id: string;
+
+	constructor(private _idService: IdService) {
+		super();
+		this._id = _idService.getNewId('autocomplete');
+	}
 
 	ngAfterContentInit() {
 		if (this.control.value) {
@@ -135,6 +143,6 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	}
 
 	ngOnInit(): void {
-		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
+		checkRequiredAttributes(this._id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 }

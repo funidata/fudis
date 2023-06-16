@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-type ComponentType = 'expandable' | 'form' | 'fieldset';
+type ComponentType = 'autocomplete' | 'expandable' | 'form' | 'fieldset';
 
 type IdInformation = {
 	[key in ComponentType]: number;
@@ -11,6 +11,7 @@ type IdInformation = {
 })
 export class IdService {
 	private _idList: IdInformation = {
+		autocomplete: 0,
 		expandable: 0,
 		form: 0,
 		fieldset: 0,

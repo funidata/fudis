@@ -27,7 +27,6 @@ const Template: StoryFn<AutocompleteComponent> = (args: AutocompleteComponent) =
 
 export const AutocompleteSearch = Template.bind({});
 AutocompleteSearch.args = {
-	id: 'example-id-for-autocomplete',
 	label: 'Search and filter option',
 	requiredText: 'Required',
 	clearFilterText: 'Clear filter',
@@ -49,7 +48,6 @@ AutocompleteSearch.args = {
 
 export const AutocompleteDropdown = Template.bind({});
 AutocompleteDropdown.args = {
-	id: 'example-id-for-autocomplete',
 	label: 'Choose and filter option',
 	variant: 'dropdown',
 	requiredText: 'Required',
@@ -72,7 +70,6 @@ AutocompleteDropdown.args = {
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-	id: 'example-id-for-disabled-autocomplete',
 	label: 'Choose one option',
 	disabled: true,
 	helpText:
