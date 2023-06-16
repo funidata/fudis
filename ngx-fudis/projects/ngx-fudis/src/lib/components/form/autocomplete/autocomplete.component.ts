@@ -65,13 +65,13 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 		if (this.variant === 'search') {
 			this.filteredOptions = this.autocompleteFormControl.valueChanges.pipe(
 				map((value) => {
+					this.updateControlValue(value);
 					// Start filtering after three characters
-					if (value && value.length > 2) {
-						this.isValueOption(value.toLowerCase());
+					if (value && value.length > 2 && !this.control.value) {
+						// this.updateControlValue(value.toLowerCase());
 						return this._filter(value);
 					}
-					this.isValueOption(null);
-					console.log('value', value);
+					// this.updateControlValue(null);
 					return [];
 				})
 			);
@@ -80,36 +80,28 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 			this.filteredOptions = this.autocompleteFormControl.valueChanges.pipe(
 				startWith(''),
 				map((value) => {
-					console.log('formControl value', this.control.value);
-					console.log('autocompleteControl value', this.autocompleteFormControl.value);
-					if (value || value === '') {
-						console.log('filteredOptions value', value);
-						this.isValueOption(value?.toLowerCase() as string);
-						return this._filter(value as string);
+					this.updateControlValue(value);
+					if ((value || value === '') && !this.control.value) {
+						return this._filter(value);
 					}
-					this.isValueOption(null);
 					return [];
 				})
 			);
 		}
 	}
 
-	isValueOption(value: string | null): void {
+	updateControlValue(value: string | null): void {
 		if (!value) {
 			this.control.patchValue(null);
-			// console.log('isValueOption value', value);
-			// console.log('isValueOption control', this.control.value);
 		} else {
 			const optionValue = this.options.find((option) => {
-				return option.viewValue.toLowerCase() === value ? option : null;
+				return option.viewValue.toLowerCase() === value.toLowerCase() ? option : null;
 			});
 
 			if (optionValue) {
-				// console.log('isValueOption optionValue', optionValue);
 				this.control.patchValue(optionValue);
-			} else {
-				this.control.patchValue(null);
 			}
+			this.control.patchValue(null);
 		}
 	}
 
@@ -118,7 +110,6 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	 */
 	private _filter(value: string): IFudisDropdownOption[] {
 		if (value || value === '') {
-			// console.log('_filter viewValue', value);
 			const filterValue = value.toLowerCase();
 
 			return this.options.filter((option) => option.viewValue.toLowerCase().includes(filterValue));
@@ -132,7 +123,6 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	clearFilter(): void {
 		// Clear input field and control value
 		this.control.setValue(null);
-		console.log(' clearFilter control value', this.control.value);
 		this.autocompleteFormControl.setValue(null);
 
 		this.checkFilteredOptions();
