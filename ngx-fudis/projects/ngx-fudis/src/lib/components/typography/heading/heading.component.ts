@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, HostBinding, ViewEncapsulation, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { HeadingSize, HeadingLevel } from '../../../types/typography';
 import { Spacing } from '../../../types/spacing';
 
@@ -9,7 +9,7 @@ import { Spacing } from '../../../types/spacing';
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeadingComponent {
+export class HeadingComponent implements OnInit {
 	@HostBinding('class') mainClass = 'fudis-heading-host';
 
 	@Input() size: HeadingSize = 'l';
@@ -25,22 +25,10 @@ export class HeadingComponent {
 	_marginBottom = 'l';
 
 	getHeadingMarginBottom(): string {
-		switch (this.size) {
-			case 'xxl':
-				return 's';
-			case 'xl':
-				return 's';
-			case 'l':
-				return 'xs';
-			case 'm':
-				return 'xs';
-			case 's':
-				return 'xs';
-			case 'xs':
-				return 'xs';
-			default:
-				return 'xs';
+		if (this.size === 'xxl' || this.size === 'xl') {
+			return 's';
 		}
+		return 'xs';
 	}
 
 	ngOnInit(): void {

@@ -17,7 +17,11 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 	selector: 'example-fieldset',
 	template: `
 		<form>
-			<fudis-fieldset [legend]="legend" [id]="fieldsetId" [helpText]="helpText">
+			<fudis-fieldset
+				[legend]="legend"
+				[id]="fieldsetId"
+				[helpText]="helpText"
+				[tooltip]="'Some additional information'">
 				<fudis-grid [columns]="{ lg: 2 }" [width]="'md'" [marginSides]="'none'">
 					<fudis-input-with-language-options
 						[missingLanguage]="'Missing'"

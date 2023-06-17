@@ -18,6 +18,18 @@
 			<span class="fudis-fieldset__legend__title__text">{{ legend }}</span>
 
 			<span *ngIf="requiredText" class="fudis-fieldset__legend__title__required">({{ requiredText }})</span>
+			<ng-container *ngIf="tooltip">
+				<fudis-button
+					class="fudis-fieldset__legend__title__button"
+					[size]="'icon-only'"
+					[variant]="'tertiary'"
+					[icon]="'info-circle'"
+					[labelHidden]="true"
+					[label]="tooltip"
+					[tooltip]="tooltip"
+					[tooltipPosition]="tooltipPosition"
+					[tooltipToggle]="tooltipToggle"></fudis-button>
+			</ng-container>
 		</span>
 		<ng-container *ngIf="helpText">
 			<span class="fudis-fieldset__legend__help-text">{{ helpText }}</span>

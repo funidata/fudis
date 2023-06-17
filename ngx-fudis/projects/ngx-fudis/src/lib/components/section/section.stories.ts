@@ -30,18 +30,18 @@ const html = String.raw;
 
 const Template: StoryFn = () => ({
 	props: {
-		title: 'This is title',
+		title: 'This is title of section',
 		titleTag: 'h2',
 		titleSize: 'xl',
 	},
 
 	template: html`<fudis-section [title]="title" [titleSize]="titleSize" [titleTag]="titleTag">
-		<fudis-expandable [title]="'Title'">
+		<fudis-expandable [title]="'Expandable inside section'">
 			<ng-template fudisContent>
 				<fudis-body-text>Some content inside expandable</fudis-body-text>
 			</ng-template>
 		</fudis-expandable>
-		<fudis-body-text>Some content inside section</fudis-body-text>
+		<fudis-body-text>Some text content inside section</fudis-body-text>
 	</fudis-section>`,
 });
 

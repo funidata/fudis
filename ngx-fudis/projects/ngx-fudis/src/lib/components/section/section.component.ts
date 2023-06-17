@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { IdService } from '../../utilities/id-service.service';
 import { HeadingLevel, HeadingSize } from '../../types/typography';
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
@@ -9,10 +9,10 @@ import { GridColumnsResponsive } from '../../types/grid';
 	templateUrl: './section.component.html',
 	styleUrls: ['./section.component.scss'],
 })
-export class SectionComponent extends GridApiDirective implements OnInit {
+export class SectionComponent extends GridApiDirective implements OnInit, OnChanges {
 	@Input() id: string;
 
-	@Input() title: string;
+	@Input({ required: true }) title: string;
 
 	@Input() titleTag: HeadingLevel = 'h2';
 

@@ -1,5 +1,5 @@
-/* stylelint-disable-next-line no-empty-source */
+@use '../../foundations/utilities/mixins.scss' as utilities;
+
 .fudis-section {
-	&__content {
-	}
+	@include utilities.box-reset;
 }
