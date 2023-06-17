@@ -1,12 +1,11 @@
 <section
-	[attr.aria-describedby]="_headingId"
 	*ngIf="!disableGrid"
+	[attr.aria-describedby]="_headingId"
 	fudisGrid
-	[width]="width"
 	[align]="align"
+	[width]="width"
 	[alignItemsX]="alignItemsX"
 	[alignItemsY]="alignItemsY"
-	[ngClass]="'fudis-section'"
 	[classes]="_classList"
 	[columnGap]="columnGap"
 	[rowGap]="'none'"
@@ -14,6 +13,12 @@
 	[marginBottom]="marginBottom"
 	[marginTop]="marginTop"
 	[marginSides]="marginSides">
+	<fudis-heading [marginBottom]="'xs'" [id]="_headingId" [tag]="titleTag" [size]="titleSize">{{ title }}</fudis-heading>
+	<div class="fudis-section__content">
+		<ng-content></ng-content>
+	</div>
+</section>
+<section [ngClass]="'fudis-section'" *ngIf="disableGrid">
 	<fudis-heading [marginBottom]="'xs'" [id]="_headingId" [tag]="titleTag" [size]="titleSize">{{ title }}</fudis-heading>
 	<div class="fudis-section__content">
 		<ng-content></ng-content>

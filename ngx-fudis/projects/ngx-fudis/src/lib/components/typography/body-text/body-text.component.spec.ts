@@ -33,11 +33,12 @@ describe('BodyTextComponent', () => {
 	function bodyTextSizes(size: BodyTextSize): void {
 		component.size = size;
 		fixture.detectChanges();
-		assertBodyTextHasClasses(`fudis-body-text fudis-body-text__${size} fudis-body-text__margin-bottom__none`);
+		assertBodyTextHasClasses(`fudis-body-text fudis-body-text__${size} fudis-mb-none`);
 	}
 
 	function marginBottomSizes(marginBottom: Spacing): void {
 		component.marginBottom = marginBottom;
+
 		fixture.detectChanges();
 		assertBodyTextHasClasses(`fudis-body-text fudis-body-text__m-regular fudis-mb-${marginBottom}`);
 	}
