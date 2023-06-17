@@ -13,11 +13,27 @@
 		margin-bottom: spacing.$spacing-xs;
 	}
 
+	&-s {
+		margin-bottom: spacing.$spacing-s;
+	}
+
+	&-sm {
+		margin-bottom: spacing.$spacing-s;
+	}
+
 	&-m {
 		margin-bottom: spacing.$spacing-m;
 	}
 
+	&-md {
+		margin-bottom: spacing.$spacing-m;
+	}
+
 	&-l {
+		margin-bottom: spacing.$spacing-l;
+	}
+
+	&-lg {
 		margin-bottom: spacing.$spacing-l;
 	}
 

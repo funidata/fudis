@@ -22,7 +22,7 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 				[id]="fieldsetId"
 				[helpText]="helpText"
 				[tooltip]="'Some additional information'">
-				<fudis-grid [columns]="{ lg: 2 }" [width]="'md'" [marginSides]="'none'">
+				<fudis-grid [columns]="{ lg: 2 }" [width]="'md'">
 					<fudis-input-with-language-options
 						[missingLanguage]="'Missing'"
 						[id]="'unique-input-1'"
@@ -67,7 +67,7 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 						[options]="courseTypeOptions"
 						[control]="fieldsetExample.controls['courseType']"
 						[errorMsg]="errorCourseType"></fudis-radio-button-group>
-					<fudis-grid [columns]="'1fr 1fr'" [marginSides]="'none'">
+					<fudis-grid [columns]="'1fr 1fr'">
 						<fudis-datepicker
 							[label]="labelStartDate"
 							[id]="'date-picker-1'"

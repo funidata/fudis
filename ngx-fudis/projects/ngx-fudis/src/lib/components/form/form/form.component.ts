@@ -1,18 +1,31 @@
-import { AfterContentInit, Component, ElementRef, Input, OnInit } from '@angular/core';
-import { HeadingLevel } from '../../../types/typography';
+import { AfterContentInit, Component, ContentChild, ElementRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { HeadingLevel, HeadingSize } from '../../../types/typography';
 import { IdService } from '../../../utilities/id-service.service';
+import { HeaderDirective } from '../../../directives/content-projection/header/header.directive';
+import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
+import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
+import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
 
 @Component({
 	selector: 'fudis-form',
 	templateUrl: './form.component.html',
 	styleUrls: ['./form.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
-export class FormComponent implements OnInit, AfterContentInit {
+export class FormComponent extends GridApiDirective implements OnInit, AfterContentInit {
+	@ContentChild(ActionsDirective) headerActions: ActionsDirective;
+
+	@ContentChild(HeaderDirective) headerContent: HeaderDirective;
+
+	@ContentChild(ContentDirective) mainContent: ContentDirective;
+
 	@Input() id: string;
 
 	@Input({ required: true }) title: string;
 
 	@Input({ required: true }) titleTag: HeadingLevel;
+
+	@Input() titleSize: HeadingSize = 'xl';
 
 	@Input() helpText: string;
 
@@ -33,7 +46,9 @@ export class FormComponent implements OnInit, AfterContentInit {
 
 	protected _id: string;
 
-	constructor(private _idService: IdService, private _elementRef: ElementRef) {}
+	constructor(private _idService: IdService, private _elementRef: ElementRef) {
+		super();
+	}
 
 	ngOnInit(): void {
 		this._id = this.id ? this.id : this._idService.getNewId('form');

@@ -1,17 +1,49 @@
-<form fudisGrid class="fudis-form" [rowGap]="'none'" [id]="_id" [attr.aria-describedBy]="_id + '_header'">
+<form
+	fudisGrid
+	[rowGap]="'none'"
+	[id]="_id"
+	[attr.aria-describedBy]="_id + '_header'"
+	[width]="width"
+	[align]="align"
+	[alignItemsX]="alignItemsX"
+	[alignItemsY]="alignItemsY"
+	[classes]="['fudis-form']"
+	[columnGap]="columnGap"
+	[rowGap]="'none'"
+	[marginBottom]="marginBottom"
+	[marginTop]="marginTop"
+	[marginSides]="marginSides">
 	<div [id]="_id + '_header'" class="fudis-form__header">
-		<fudis-heading [tag]="titleTag">{{ title }}</fudis-heading>
-		<ng-container *ngIf="helpText">
-			<fudis-body-text>{{ helpText }}</fudis-body-text>
-		</ng-container>
-		<ng-container *ngIf="_formElement !== undefined && errorSummaryVisible">
-			<fudis-error-summary
-				[screenReaderHelpText]="errorSummaryScreenReaderHelpText"
-				[parentComponent]="_formElement"
-				[helpText]="errorSummaryHelpText"></fudis-error-summary>
-		</ng-container>
+		<div class="fudis-form__header__main">
+			<div class="fudis-form__header__title">
+				<fudis-heading [marginBottom]="'xs'" [size]="titleSize" [tag]="titleTag">{{ title }}</fudis-heading>
+				<ng-container *ngIf="helpText">
+					<fudis-body-text [marginBottom]="'xs'">{{ helpText }}</fudis-body-text>
+				</ng-container>
+			</div>
+			<ng-container *ngIf="headerContent">
+				<div class="fudis-form__header__main__content">
+					<ng-container *ngTemplateOutlet="headerContent!.templateRef" />
+				</div>
+			</ng-container>
+			<ng-container *ngIf="_formElement !== undefined && errorSummaryVisible">
+				<div class="fudis-form__header__main__content">
+					<fudis-error-summary
+						[screenReaderHelpText]="errorSummaryScreenReaderHelpText"
+						[parentComponent]="_formElement"
+						[helpText]="errorSummaryHelpText" />
+				</div>
+			</ng-container>
+		</div>
 	</div>
-	<div class="fudis-form__content">
-		<ng-content></ng-content>
-	</div>
+	<ng-container *ngIf="headerActions">
+		<div class="fudis-form__header__actions">
+			<ng-container *ngTemplateOutlet="headerActions!.templateRef" />
+		</div>
+	</ng-container>
+	<ng-container *ngIf="mainContent">
+		<div class="fudis-form__content">
+			<ng-container *ngTemplateOutlet="mainContent!.templateRef" />
+		</div>
+	</ng-container>
 </form>

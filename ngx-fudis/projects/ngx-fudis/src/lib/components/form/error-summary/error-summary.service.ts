@@ -53,7 +53,9 @@ export class ErrorSummaryService {
 		this._currentErrorList = currentErrors;
 	}
 
-	public reloadErrors(): void {
-		this._signalCurrentErrorList.set(this._currentErrorList);
+	public reloadErrors(delay: number = 10): void {
+		setTimeout(() => {
+			this._signalCurrentErrorList.set(this._currentErrorList);
+		}, delay);
 	}
 }

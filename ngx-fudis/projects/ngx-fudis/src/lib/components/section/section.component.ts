@@ -16,7 +16,7 @@ export class SectionComponent extends GridApiDirective implements OnInit, OnChan
 
 	@Input() titleTag: HeadingLevel = 'h2';
 
-	@Input() titleSize: HeadingSize;
+	@Input() titleSize: HeadingSize = 'l';
 
 	@Input() disableGrid: boolean = false;
 
