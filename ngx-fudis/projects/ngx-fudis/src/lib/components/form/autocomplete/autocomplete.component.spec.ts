@@ -71,9 +71,9 @@ describe('AutocompleteComponent', () => {
 
 	describe('CSS classes', () => {
 		it('should have respective CSS class indicating the autocomplete size given as an Input', () => {
-			autocompleteSize('s');
-			autocompleteSize('m');
-			autocompleteSize('l');
+			autocompleteSize('sm');
+			autocompleteSize('md');
+			autocompleteSize('lg');
 		});
 
 		it('should have disabled CSS styling if input is disabled', () => {

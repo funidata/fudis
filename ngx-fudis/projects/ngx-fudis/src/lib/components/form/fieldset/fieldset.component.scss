@@ -51,7 +51,7 @@
 
 		&__help-text {
 			@include colorMixins.text-color('gray-dark');
-			@include typography.body-text-s-regular;
+			@include typography.body-text-sm-regular;
 
 			margin-bottom: spacing.$spacing-xs;
 		}

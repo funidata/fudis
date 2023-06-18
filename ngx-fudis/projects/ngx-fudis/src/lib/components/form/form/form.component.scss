@@ -6,14 +6,14 @@
 	&__header {
 		&__main {
 			&__content {
-				margin-bottom: spacing.$spacing-s;
+				margin-bottom: spacing.$spacing-sm;
 			}
 		}
 
 		&__actions {
 			display: grid;
 			grid-template-columns: 1fr 1fr;
-			margin-bottom: spacing.$spacing-s;
+			margin-bottom: spacing.$spacing-sm;
 
 			fudis-button {
 				&:nth-child(even) {
@@ -30,11 +30,11 @@
 				flex-wrap: wrap;
 				justify-content: space-between;
 				justify-content: flex-end;
-				margin-bottom: spacing.$spacing-m;
+				margin-bottom: spacing.$spacing-md;
 
 				fudis-button:not(:first-of-type) {
-					margin-bottom: spacing.$spacing-zero;
-					margin-left: spacing.$spacing-s;
+					margin-bottom: spacing.$spacing-none;
+					margin-left: spacing.$spacing-sm;
 				}
 			}
 		}

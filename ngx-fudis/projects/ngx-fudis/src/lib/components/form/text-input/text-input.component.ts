@@ -22,7 +22,7 @@ export class TextInputComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * Available sizes for the input - defaults to large. Recommended size for number input is small.
 	 */
-	@Input() size?: 's' | 'm' | 'l' = 'l';
+	@Input() size?: 'sm' | 'md' | 'lg' = 'lg';
 
 	/**
 	 * Type of the input - defaults to 'text'

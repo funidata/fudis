@@ -13,16 +13,16 @@
 		@include mixins.heading-xs;
 	}
 
-	&__s {
-		@include mixins.heading-s;
+	&__sm {
+		@include mixins.heading-sm;
 	}
 
-	&__m {
-		@include mixins.heading-m;
+	&__md {
+		@include mixins.heading-md;
 	}
 
-	&__l {
-		@include mixins.heading-l;
+	&__lg {
+		@include mixins.heading-lg;
 	}
 
 	&__xl {

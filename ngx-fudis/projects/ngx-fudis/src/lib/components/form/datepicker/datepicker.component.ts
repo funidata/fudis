@@ -52,7 +52,7 @@ export class DatepickerComponent extends InputBaseDirective implements DoCheck, 
 	/**
 	 * Available sizes for the datepicker - defaults to medium.
 	 */
-	@Input() size?: 's' | 'm' | 'l' = 'm';
+	@Input() size?: 'sm' | 'md' | 'lg' = 'md';
 
 	/**
 	 * Allowed range for minimun date

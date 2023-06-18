@@ -2,11 +2,11 @@ import { AfterContentInit, Component, ElementRef, Input, OnInit, ViewChild } fro
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
-import { IFudisDropdownOption } from '../../../types/forms';
+import { FudisDropdownOption } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 
-export type AutocompleteInputSize = 's' | 'm' | 'l';
+export type AutocompleteInputSize = 'sm' | 'md' | 'lg';
 
 @Component({
 	selector: 'fudis-autocomplete[label][id][options][clearFilterText]',
@@ -19,22 +19,22 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	/**
 	 * FormControl for the input.
 	 */
-	@Input() control: FormControl<IFudisDropdownOption | null>;
+	@Input() control: FormControl<FudisDropdownOption | null>;
 
 	/**
 	 * Option list
 	 */
-	@Input() options: IFudisDropdownOption[];
+	@Input() options: FudisDropdownOption[];
 
 	/**
 	 * Filtered options derived from options Input
 	 */
-	filteredOptions: Observable<IFudisDropdownOption[]>;
+	filteredOptions: Observable<FudisDropdownOption[]>;
 
 	/**
 	 * Available sizes for the autocomplete - defaults to large.
 	 */
-	@Input() size: AutocompleteInputSize = 'l';
+	@Input() size: AutocompleteInputSize = 'lg';
 
 	/**
 	 * Aria-label for close icon which clears the input
@@ -83,7 +83,7 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	/**
 	 * Filter options when user inputs text
 	 */
-	private _filter(viewValue: string): IFudisDropdownOption[] {
+	private _filter(viewValue: string): FudisDropdownOption[] {
 		const filterValue = viewValue.toLowerCase();
 
 		return this.options.filter((option) => option.viewValue.toLowerCase().includes(filterValue));

@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { IdService } from '../../utilities/id-service.service';
-import { HeadingLevel, HeadingSize } from '../../types/typography';
+import { FudisHeadingTag, FudisHeadingSize } from '../../types/typography';
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
 import { GridColumnsResponsive } from '../../types/grid';
 
@@ -14,9 +14,9 @@ export class SectionComponent extends GridApiDirective implements OnInit, OnChan
 
 	@Input({ required: true }) title: string;
 
-	@Input() titleTag: HeadingLevel = 'h2';
+	@Input() titleTag: FudisHeadingTag = 'h2';
 
-	@Input() titleSize: HeadingSize = 'l';
+	@Input() titleSize: FudisHeadingSize = 'lg';
 
 	@Input() disableGrid: boolean = false;
 

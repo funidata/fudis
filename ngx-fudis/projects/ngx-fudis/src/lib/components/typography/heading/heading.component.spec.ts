@@ -24,7 +24,7 @@ describe('HeadingComponent', () => {
 	});
 
 	function getHeading(): HTMLElement {
-		return fixture.nativeElement.querySelector('.fudis-heading__s') as HTMLElement;
+		return fixture.nativeElement.querySelector('.fudis-heading__sm') as HTMLElement;
 	}
 
 	function assertHeadingHasClasses(classes: string[]): void {
@@ -40,10 +40,10 @@ describe('HeadingComponent', () => {
 
 	describe('heading has CSS classes and prefered heading tag', () => {
 		it('should add size s to header', () => {
-			component.size = 's';
+			component.size = 'sm';
 			component.ngOnInit();
 			fixture.detectChanges();
-			assertHeadingHasClasses(['fudis-heading', 'fudis-heading__s', 'fudis-mb-xs']);
+			assertHeadingHasClasses(['fudis-heading', 'fudis-heading__sm', 'fudis-mb-xs']);
 		});
 
 		it('should add tags to header', () => {

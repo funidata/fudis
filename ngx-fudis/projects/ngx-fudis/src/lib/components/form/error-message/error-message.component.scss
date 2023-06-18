@@ -4,7 +4,7 @@
 
 .fudis-error-message {
 	@include colorMixins.text-color('red');
-	@include typography.body-text-s-regular;
+	@include typography.body-text-sm-regular;
 
 	margin-top: spacing.$spacing-xs;
 	margin-bottom: spacing.$spacing-xs;

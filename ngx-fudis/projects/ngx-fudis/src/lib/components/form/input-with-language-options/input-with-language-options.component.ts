@@ -2,9 +2,9 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
 	FudisInputWithLanguageOptionsFormGroup,
-	IFudisDropdownOption,
-	TFudisDropdownLanguageOption,
-	TFudisGroupErrorMessages,
+	FudisDropdownOption,
+	FudisDropdownLanguageOption,
+	FudisFormGroupErrors,
 } from '../../../types/forms';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
@@ -23,19 +23,19 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	/**
 	 * Option list for language selection Fudis Dropdown. To pair control with corresponding dropdown option Dropdown option "value" must equal to control's name. E.g. "{value: 'english', viewValue: 'EN'}" pairs with "english: New FormControl('')"
 	 */
-	@Input({ required: true }) options: TFudisDropdownLanguageOption[];
+	@Input({ required: true }) options: FudisDropdownLanguageOption[];
 
 	/**
 	 * Available sizes for the input - defaults to large.
 	 */
-	@Input() size?: 's' | 'm' | 'l' = 'l';
+	@Input() size?: 'sm' | 'md' | 'lg' = 'lg';
 
 	/*
 	 * Object containing error messages for each FormControl and for the FormGroup.
 	 * E. g. {atLeastOneRequired: 'At least one input of any language must have a value.', finnish:{maxlength: 'Input in Finnish cannot be longer than X charactes.'}}
 	 */
 
-	@Input() groupErrorMsg: TFudisGroupErrorMessages;
+	@Input() groupErrorMsg: FudisFormGroupErrors;
 
 	/**
 	 * Indicator text added to the dropdown list if input of a language is empty.
@@ -52,9 +52,9 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	 */
 	@Input() variant: 'text-input' | 'text-area' = 'text-input';
 
-	protected _dropdownControl: FormControl<IFudisDropdownOption>;
+	protected _dropdownControl: FormControl<FudisDropdownOption>;
 
-	private _dropdownValue: IFudisDropdownOption;
+	private _dropdownValue: FudisDropdownOption;
 
 	private _for: string = '';
 
@@ -64,9 +64,9 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	private _nonEmptyControls: string[] = [];
 
-	protected _updatedOptions: IFudisDropdownOption[] = [];
+	protected _updatedOptions: FudisDropdownOption[] = [];
 
-	handleLanguageSelect(value: IFudisDropdownOption): void {
+	handleLanguageSelect(value: FudisDropdownOption): void {
 		this._dropdownValue = value;
 		this._for = `${this.id}_${value.value}`;
 	}
@@ -77,8 +77,8 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 		this.isControlRequired((event.target as HTMLInputElement).value, controlKey);
 	}
 
-	updateDropdownList(): IFudisDropdownOption[] {
-		const newOptions: IFudisDropdownOption[] = [];
+	updateDropdownList(): FudisDropdownOption[] {
+		const newOptions: FudisDropdownOption[] = [];
 
 		this.options.forEach((option) => {
 			if (this.formGroup.controls[option.value].invalid || !this.formGroup.controls[option.value].value) {

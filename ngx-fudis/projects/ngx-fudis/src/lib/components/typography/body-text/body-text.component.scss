@@ -14,37 +14,37 @@
 	margin-top: 0;
 	padding: 0;
 
-	&__s-regular {
-		@include typography.body-text-s-regular;
+	&__sm-regular {
+		@include typography.body-text-sm-regular;
 	}
 
-	&__m-regular {
-		@include typography.body-text-m-regular;
+	&__md-regular {
+		@include typography.body-text-md-regular;
 	}
 
-	&__l-regular {
-		@include typography.body-text-l-regular;
+	&__lg-regular {
+		@include typography.body-text-lg-regular;
 	}
 
-	&__m-light {
-		@include typography.body-text-m-light;
+	&__md-light {
+		@include typography.body-text-md-light;
 	}
 
-	&__l-light {
-		@include typography.body-text-l-light;
+	&__lg-light {
+		@include typography.body-text-lg-light;
 	}
 
 	&__margin-bottom {
-		&__m {
-			margin-bottom: spacing.$spacing-m;
+		&__md {
+			margin-bottom: spacing.$spacing-md;
 		}
 
-		&__l {
-			margin-bottom: spacing.$spacing-l;
+		&__lg {
+			margin-bottom: spacing.$spacing-lg;
 		}
 
 		&__none {
-			margin-bottom: spacing.$spacing-zero;
+			margin-bottom: spacing.$spacing-none;
 		}
 	}
 

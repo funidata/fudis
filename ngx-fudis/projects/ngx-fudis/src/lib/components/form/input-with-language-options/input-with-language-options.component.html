@@ -17,7 +17,7 @@
 		(selectionUpdate)="handleLanguageSelect($event)"
 		[control]="_dropdownControl"
 		[label]="languageLabel"
-		[size]="missingLanguage ? 'xs' : 'l'"
+		[size]="missingLanguage ? 'xs' : 'lg'"
 		[id]="id + '_language-dropdown'"
 		[options]="_updatedOptions">
 	</fudis-dropdown>
@@ -30,7 +30,7 @@
 			(handleBlur)="handleInputBlur($event, control.key)"
 			class="fudis-input-with-language-options__inputs__item"
 			[ariaLabel]="label + ', ' + _dropdownControl.value.viewValue"
-			[size]="'l'"
+			[size]="'lg'"
 			[label]="label"
 			[id]="id"
 			[ignoreRequiredCheck]="true"
@@ -47,7 +47,7 @@
 			(handleBlur)="handleInputBlur($event, control.key)"
 			class="fudis-input-with-language-options__inputs__item"
 			[ariaLabel]="label + ', ' + _dropdownControl.value.viewValue"
-			[size]="'l'"
+			[size]="'lg'"
 			[label]="label"
 			[id]="id"
 			[ignoreRequiredCheck]="true"

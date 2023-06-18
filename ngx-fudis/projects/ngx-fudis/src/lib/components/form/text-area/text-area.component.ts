@@ -33,7 +33,7 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * Fixed size options for text area
 	 */
-	@Input() size: 's' | 'm' | 'l' = 'l';
+	@Input() size: 'sm' | 'md' | 'lg' = 'lg';
 
 	ngOnInit(): void {
 		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);

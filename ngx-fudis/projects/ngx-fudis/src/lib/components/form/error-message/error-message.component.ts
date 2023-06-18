@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 
 import { ErrorSummaryService } from '../error-summary/error-summary.service';
-import { TFudisFormErrorSummaryItem } from '../../../types/forms';
+import { FudisFormErrorSummaryItem } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-error-message',
@@ -61,7 +61,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 			this._currentMessage = this.message;
 			this._currentLabel = this.inputLabel;
 
-			const newError: TFudisFormErrorSummaryItem = {
+			const newError: FudisFormErrorSummaryItem = {
 				id: this.inputId,
 				error: this._currentMessage,
 				label: this._currentLabel,

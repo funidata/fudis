@@ -11,9 +11,9 @@
 	box-sizing: border-box;
 	display: flex;
 	align-items: center;
-	padding: 0 spacing.$spacing-s 0 spacing.$spacing-xxs;
+	padding: 0 spacing.$spacing-sm 0 spacing.$spacing-xxs;
 	width: 100%;
-	min-height: spacing.$spacing-m;
+	min-height: spacing.$spacing-md;
 
 	&__link {
 		margin-left: spacing.$spacing-xxs;

@@ -5,8 +5,8 @@
 .fudis-dialog {
 	box-sizing: content-box;
 	position: relative;
-	padding: spacing.$spacing-m spacing.$spacing-s;
-	max-width: calc(100vw - (2 * spacing.$spacing-s));
+	padding: spacing.$spacing-md spacing.$spacing-sm;
+	max-width: calc(100vw - (2 * spacing.$spacing-sm));
 
 	&__close {
 		float: right;
@@ -17,24 +17,24 @@
 			width: initial;
 		}
 
-		&__s {
-			width: calc(gridTokens.$grid-width-sm + 2 * spacing.$spacing-m);
+		&__sm {
+			width: calc(gridTokens.$grid-width-sm + 2 * spacing.$spacing-md);
 
 			@include breakpoints.breakpoint('md') {
 				width: calc(gridTokens.$grid-width-sm + 2 * spacing.$spacing-xl);
 			}
 		}
 
-		&__m {
-			width: calc(gridTokens.$grid-width-md + 2 * spacing.$spacing-m);
+		&__md {
+			width: calc(gridTokens.$grid-width-md + 2 * spacing.$spacing-md);
 
 			@include breakpoints.breakpoint('md') {
 				width: calc(gridTokens.$grid-width-md + 2 * spacing.$spacing-xl);
 			}
 		}
 
-		&__l {
-			width: calc(gridTokens.$grid-width-lg + 2 * spacing.$spacing-m);
+		&__lg {
+			width: calc(gridTokens.$grid-width-lg + 2 * spacing.$spacing-md);
 
 			@include breakpoints.breakpoint('md') {
 				width: calc(gridTokens.$grid-width-lg + 2 * spacing.$spacing-xl);
@@ -43,12 +43,12 @@
 	}
 
 	@include breakpoints.breakpoint('sm') {
-		padding: spacing.$spacing-m;
-		max-width: calc(100% - (2 * spacing.$spacing-m));
+		padding: spacing.$spacing-md;
+		max-width: calc(100% - (2 * spacing.$spacing-md));
 	}
 
 	@include breakpoints.breakpoint('md') {
-		padding: spacing.$spacing-m spacing.$spacing-xl;
+		padding: spacing.$spacing-md spacing.$spacing-xl;
 		max-width: calc(100% - (2 * spacing.$spacing-xl));
 	}
 }
