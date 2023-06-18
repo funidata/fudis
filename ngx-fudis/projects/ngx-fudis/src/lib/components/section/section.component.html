@@ -13,14 +13,15 @@
 	[marginBottom]="marginBottom"
 	[marginTop]="marginTop"
 	[marginSides]="marginSides">
+	<ng-container *ngTemplateOutlet="commonContent" />
+</section>
+<section class="fudis-section" *ngIf="disableGrid">
+	<ng-container *ngTemplateOutlet="commonContent" />
+</section>
+
+<ng-template #commonContent>
 	<fudis-heading [marginBottom]="'xs'" [id]="_headingId" [tag]="titleTag" [size]="titleSize">{{ title }}</fudis-heading>
 	<div class="fudis-section__content">
 		<ng-content></ng-content>
 	</div>
-</section>
-<section [ngClass]="'fudis-section'" *ngIf="disableGrid">
-	<fudis-heading [marginBottom]="'xs'" [id]="_headingId" [tag]="titleTag" [size]="titleSize">{{ title }}</fudis-heading>
-	<div class="fudis-section__content">
-		<ng-content></ng-content>
-	</div>
-</section>
+</ng-template>
