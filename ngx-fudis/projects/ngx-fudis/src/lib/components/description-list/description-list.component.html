@@ -1,5 +1,4 @@
 <dl
-	*ngIf="!disableGrid"
 	fudisGrid
 	[width]="width"
 	[align]="align"
@@ -12,36 +11,7 @@
 	[marginBottom]="marginBottom"
 	[marginTop]="marginTop"
 	[marginSides]="marginSides"
-	role="list">
-	<ng-container *ngTemplateOutlet="variant === 'regular' ? regular : compact"> </ng-container>
+	role="list"
+	*ngFor="let item of data">
+	<fudis-description-list-item [data]="item"></fudis-description-list-item>
 </dl>
-
-<dl *ngIf="disableGrid" [class]="_classList" role="list">
-	<ng-container *ngTemplateOutlet="variant === 'regular' ? regular : compact"> </ng-container>
-</dl>
-
-<ng-template #regular>
-	<div
-		*ngFor="let item of data"
-		class="fudis-description-list__item"
-		[class.fudis-description-list__disabled-grid__item]="disableGrid"
-		role="listitem">
-		<dt class="fudis-description-list__item__key">
-			{{ item.key }}
-		</dt>
-		<dd class="fudis-description-list__item__value">
-			<p *ngIf="item.subHeading" class="fudis-description-list__item__sub-heading">{{ item.subHeading }}</p>
-			{{ item.value }}
-		</dd>
-	</div>
-</ng-template>
-
-<ng-template #compact>
-	<div *ngFor="let item of data" class="fudis-description-list-compact__item">
-		<dt class="fudis-description-list-compact__item__key">{{ item.key }}:</dt>
-		<dd *ngIf="item.subHeading" class="fudis-description-list-compact__item__value">
-			{{ item.subHeading }} ({{ item.value }})
-		</dd>
-		<dd *ngIf="!item.subHeading" class="fudis-description-list-compact__item__value">{{ item.value }}</dd>
-	</div>
-</ng-template>

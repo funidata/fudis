@@ -68,6 +68,9 @@ import { TextInputComponent } from './components/form/text-input/text-input.comp
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
+import { DescriptionListItemComponent } from './components/description-list/description-list-item/description-list-item.component';
+import { DescriptionListItemTermComponent } from './components/description-list/description-list-item/description-list-item-term/description-list-item-term.component';
+import { DescriptionListItemDetailsComponent } from './components/description-list/description-list-item/description-list-item-details/description-list-item-details.component';
 
 @NgModule({
 	/*
@@ -121,6 +124,9 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		TooltipDirective,
 		ContentDirective,
 		ActionsDirective,
+		DescriptionListItemComponent,
+		DescriptionListItemTermComponent,
+		DescriptionListItemDetailsComponent,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.

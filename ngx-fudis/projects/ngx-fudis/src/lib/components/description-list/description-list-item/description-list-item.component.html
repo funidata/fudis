@@ -1,0 +1,7 @@
+<dl class="fudis-description-list__item" role="listitem">
+	<fudis-description-list-item-term>{{ data.key }}</fudis-description-list-item-term>
+	<fudis-description-list-item-details>
+		<p *ngIf="data.subHeading" class="fudis-description-list__item__sub-heading">{{ data.subHeading }}</p>
+		{{ data.value }}
+	</fudis-description-list-item-details>
+</dl>
