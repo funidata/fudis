@@ -34,20 +34,6 @@
 		@include typography.body-text-lg-light;
 	}
 
-	&__margin-bottom {
-		&__md {
-			margin-bottom: spacing.$spacing-md;
-		}
-
-		&__lg {
-			margin-bottom: spacing.$spacing-lg;
-		}
-
-		&__none {
-			margin-bottom: spacing.$spacing-none;
-		}
-	}
-
 	/* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
 	& fudis-link {
 		display: inline-block;
