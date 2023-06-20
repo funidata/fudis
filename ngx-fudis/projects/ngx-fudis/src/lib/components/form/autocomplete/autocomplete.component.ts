@@ -2,11 +2,9 @@ import { AfterContentInit, Component, ElementRef, Input, OnInit, ViewChild } fro
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
-import { FudisDropdownOption } from '../../../types/forms';
+import { FudisDropdownOption, FudisInputWidth } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
-
-export type AutocompleteInputSize = 'sm' | 'md' | 'lg';
 
 @Component({
 	selector: 'fudis-autocomplete[label][id][options][clearFilterText]',
@@ -34,7 +32,7 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	/**
 	 * Available sizes for the autocomplete - defaults to large.
 	 */
-	@Input() size: AutocompleteInputSize = 'lg';
+	@Input() size: FudisInputWidth = 'lg';
 
 	/**
 	 * Aria-label for close icon which clears the input

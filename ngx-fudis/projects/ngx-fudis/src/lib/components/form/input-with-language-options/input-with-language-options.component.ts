@@ -5,6 +5,7 @@ import {
 	FudisDropdownOption,
 	FudisDropdownLanguageOption,
 	FudisFormGroupErrors,
+	FudisInputWidth,
 } from '../../../types/forms';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
@@ -28,7 +29,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	/**
 	 * Available sizes for the input - defaults to large.
 	 */
-	@Input() size?: 'sm' | 'md' | 'lg' = 'lg';
+	@Input() size?: FudisInputWidth = 'lg';
 
 	/*
 	 * Object containing error messages for each FormControl and for the FormGroup.

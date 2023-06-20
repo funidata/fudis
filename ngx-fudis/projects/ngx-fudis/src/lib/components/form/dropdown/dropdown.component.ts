@@ -1,6 +1,6 @@
 import { Component, Input, ViewEncapsulation, EventEmitter, Output, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FudisDropdownOption, FudisDropdownLanguageOption } from '../../../types/forms';
+import { FudisDropdownOption, FudisDropdownLanguageOption, FudisInputWidth } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 
@@ -36,7 +36,7 @@ export class DropdownComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * Available sizes for the dropdown - defaults to large.
 	 */
-	@Input() size?: 'xs' | 'sm' | 'md' | 'lg' = 'lg';
+	@Input() size?: 'xs' | FudisInputWidth = 'lg';
 
 	/**
 	 * Hide select option checkmark in option list

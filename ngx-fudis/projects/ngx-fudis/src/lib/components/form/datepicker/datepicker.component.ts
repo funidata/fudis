@@ -13,6 +13,7 @@ import { FormControl } from '@angular/forms';
 import { DatepickerCustomDateAdapter, FudisDateInputFormat } from './datepicker-custom-date-adapter';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+import { FudisInputWidth } from '../../../types/forms';
 
 export const FUDIS_DATE_FORMATS: MatDateFormats = {
 	...MAT_NATIVE_DATE_FORMATS,
@@ -52,7 +53,7 @@ export class DatepickerComponent extends InputBaseDirective implements DoCheck, 
 	/**
 	 * Available sizes for the datepicker - defaults to medium.
 	 */
-	@Input() size?: 'sm' | 'md' | 'lg' = 'md';
+	@Input() size?: FudisInputWidth = 'md';
 
 	/**
 	 * Allowed range for minimun date

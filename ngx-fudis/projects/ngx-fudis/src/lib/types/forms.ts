@@ -1,5 +1,7 @@
 import { FormControl } from '@angular/forms';
 
+export type FudisInputWidth = 'sm' | 'md' | 'lg';
+
 export interface FudisRadioButtonOption {
 	/** Unique id for single radio button option */
 	id: string;
