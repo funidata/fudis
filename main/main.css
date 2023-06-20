@@ -651,6 +651,50 @@ mat-tooltip-component .mat-tooltip-handset {
   column-gap: 4rem;
 }
 
+.fudis-mb-none {
+  margin-bottom: 0;
+}
+
+.fudis-mb-xxs {
+  margin-bottom: 0.25rem;
+}
+
+.fudis-mb-xs {
+  margin-bottom: 0.5rem;
+}
+
+.fudis-mb-s {
+  margin-bottom: 1rem;
+}
+
+.fudis-mb-sm {
+  margin-bottom: 1rem;
+}
+
+.fudis-mb-m {
+  margin-bottom: 1.5rem;
+}
+
+.fudis-mb-md {
+  margin-bottom: 1.5rem;
+}
+
+.fudis-mb-l {
+  margin-bottom: 2rem;
+}
+
+.fudis-mb-lg {
+  margin-bottom: 2rem;
+}
+
+.fudis-mb-xl {
+  margin-bottom: 2.5rem;
+}
+
+.fudis-mb-xxl {
+  margin-bottom: 4rem;
+}
+
 .mat-ripple {
   overflow: hidden;
   position: relative;
