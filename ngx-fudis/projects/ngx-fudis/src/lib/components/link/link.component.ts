@@ -60,7 +60,7 @@ export class LinkComponent {
 	/**
 	 * Aria-label for the external link
 	 */
-	@Input() externalLinkAriaLabel?: string;
+	@Input() externalLinkAriaLabel: string;
 
 	/**
 	 * Link uses primary blue color.

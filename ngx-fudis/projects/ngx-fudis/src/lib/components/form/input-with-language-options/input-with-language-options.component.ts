@@ -29,7 +29,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	/**
 	 * Available sizes for the input - defaults to large.
 	 */
-	@Input() size?: FudisInputWidth = 'lg';
+	@Input() size: FudisInputWidth = 'lg';
 
 	/*
 	 * Object containing error messages for each FormControl and for the FormGroup.

@@ -23,7 +23,7 @@ export class TextInputComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * Available sizes for the input - defaults to large. Recommended size for number input is small.
 	 */
-	@Input() size?: FudisInputWidth = 'lg';
+	@Input() size: FudisInputWidth = 'lg';
 
 	/**
 	 * Type of the input - defaults to 'text'

@@ -36,7 +36,7 @@ export class DropdownComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * Available sizes for the dropdown - defaults to large.
 	 */
-	@Input() size?: 'xs' | FudisInputWidth = 'lg';
+	@Input() size: 'xs' | FudisInputWidth = 'lg';
 
 	/**
 	 * Hide select option checkmark in option list
