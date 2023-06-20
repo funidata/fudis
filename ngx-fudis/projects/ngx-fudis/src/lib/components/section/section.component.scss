@@ -1,0 +1,5 @@
+@use '../../foundations/utilities/mixins.scss' as utilities;
+
+.fudis-section {
+	@include utilities.box-reset;
+}

@@ -52,16 +52,22 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 		/**
 		 * Focus to Error Summary element when visible error list gets updated.
 		 */
-		this.focusToErrorSummary();
+		this.focusToErrorSummary(false);
 	}
 
 	ngOnInit(): void {
 		this.getErrors();
 	}
 
-	focusToErrorSummary(): void {
+	focusToErrorSummary(firstLoad: boolean): void {
 		if (this.focusTarget && this._visibleErrorList.length > 0) {
 			(this.focusTarget.nativeElement as HTMLDivElement).focus();
+		} else if (firstLoad) {
+			setTimeout(() => {
+				if (this.focusTarget && this._visibleErrorList.length > 0) {
+					(this.focusTarget.nativeElement as HTMLDivElement).focus();
+				}
+			}, 200);
 		}
 	}
 
@@ -69,6 +75,6 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 		/**
 		 * Initial focus when Error Summary is loaded first time
 		 * */
-		this.focusToErrorSummary();
+		this.focusToErrorSummary(true);
 	}
 }

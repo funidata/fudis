@@ -1,5 +1,6 @@
 import { Component, Input, HostBinding, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import { BodyTextSize, BodyTextMarginBottom } from '../../../types/typography';
+import { BodyTextSize } from '../../../types/typography';
+import { Spacing } from '../../../types/spacing';
 
 @Component({
 	selector: 'fudis-body-text',
@@ -22,5 +23,5 @@ export class BodyTextComponent {
 	/**
 	 * Optional margin bottom
 	 */
-	@Input() marginBottom: BodyTextMarginBottom = 'none';
+	@Input() marginBottom: Spacing = 'none';
 }

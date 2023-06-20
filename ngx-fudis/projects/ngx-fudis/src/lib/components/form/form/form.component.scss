@@ -1,1 +1,42 @@
-/* stylelint-disable-next-line no-empty-source */
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+
+@use '../../../foundations/breakpoints/mixins.scss' as breakpoints;
+
+.fudis-form {
+	&__header {
+		&__main {
+			&__content {
+				margin-bottom: spacing.$spacing-s;
+			}
+		}
+
+		&__actions {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			margin-bottom: spacing.$spacing-s;
+
+			fudis-button {
+				&:nth-child(even) {
+					justify-self: end;
+				}
+			}
+
+			fudis-button:not(:first-of-type) {
+				margin-bottom: spacing.$spacing-xs;
+			}
+
+			@include breakpoints.breakpoint('sm') {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+				justify-content: flex-end;
+				margin-bottom: spacing.$spacing-m;
+
+				fudis-button:not(:first-of-type) {
+					margin-bottom: spacing.$spacing-zero;
+					margin-left: spacing.$spacing-s;
+				}
+			}
+		}
+	}
+}

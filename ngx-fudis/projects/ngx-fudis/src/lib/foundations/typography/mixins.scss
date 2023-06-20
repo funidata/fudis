@@ -49,7 +49,6 @@
 // Headings
 
 @mixin heading-xxl {
-	margin-bottom: spacing.$spacing-s;
 	line-height: tokens.$heading-l-line-height;
 	font-family: tokens.$font-family;
 	font-size: tokens.$heading-xxl-font-size;
@@ -57,7 +56,6 @@
 }
 
 @mixin heading-xl {
-	margin-bottom: spacing.$spacing-s;
 	line-height: tokens.$heading-l-line-height;
 	font-family: tokens.$font-family;
 	font-size: tokens.$heading-xl-font-size;
@@ -65,7 +63,6 @@
 }
 
 @mixin heading-l {
-	margin-bottom: spacing.$spacing-xs;
 	line-height: tokens.$heading-m-line-height;
 	font-family: tokens.$font-family;
 	font-size: tokens.$heading-l-font-size;
@@ -73,7 +70,6 @@
 }
 
 @mixin heading-m {
-	margin-bottom: spacing.$spacing-xs;
 	line-height: tokens.$heading-m-line-height;
 	font-family: tokens.$font-family;
 	font-size: tokens.$heading-m-font-size;
@@ -81,7 +77,6 @@
 }
 
 @mixin heading-s {
-	margin-bottom: spacing.$spacing-xs;
 	line-height: tokens.$heading-s-line-height;
 	font-family: tokens.$font-family;
 	font-size: tokens.$heading-s-font-size;
@@ -89,7 +84,6 @@
 }
 
 @mixin heading-xs {
-	margin-bottom: spacing.$spacing-xs;
 	line-height: tokens.$heading-s-line-height;
 	font-family: tokens.$font-family;
 	font-size: tokens.$heading-xs-font-size;
@@ -97,7 +91,6 @@
 }
 
 @mixin heading-xxs {
-	margin-bottom: spacing.$spacing-xs;
 	line-height: tokens.$heading-s-line-height;
 	font-family: tokens.$font-family;
 	font-size: tokens.$heading-xxs-font-size;

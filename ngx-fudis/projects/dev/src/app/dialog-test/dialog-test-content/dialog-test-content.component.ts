@@ -7,7 +7,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 		<fudis-dialog [closeButtonLabel]="'Close'" [size]="'l'">
 			<fudis-heading fudisDialogTitle tag="h2">Dialog with fudis-grid and scrollable content</fudis-heading>
 			<fudis-dialog-content>
-				<fudis-grid [marginTop]="'md'" [marginBottom]="'md'" [marginSides]="'none'">
+				<fudis-grid [marginTop]="'md'" [marginBottom]="'md'">
 					<fudis-heading [tag]="'h3'" [size]="'s'">
 						I am fudis-heading inside the grid taking the whole width
 					</fudis-heading>
@@ -32,7 +32,6 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 				</fudis-grid>
 				<fudis-description-list
 					[columns]="'1fr 1fr 1fr'"
-					[marginSides]="'none'"
 					[data]="[
 						{ key: 'Name', value: 'Mary Rhubarb', subHeading: 'The lady boss' },
 						{ key: 'Occupation', value: 'Pie maker' },
@@ -40,7 +39,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 						{ key: 'Awards', value: 'Pie maker 2023, Mix it up master 2008, Place setting champion 1987' }
 					]"></fudis-description-list>
 				<hr />
-				<fudis-grid [columns]="3" [marginSides]="'none'" [marginTop]="'sm'" [marginBottom]="'sm'">
+				<fudis-grid [columns]="3" [marginTop]="'sm'" [marginBottom]="'sm'">
 					<div style="border: 2px solid lightblue"><fudis-body-text>Showcase of grid items</fudis-body-text></div>
 					<div style="border: 2px solid lightblue"><fudis-body-text>Showcase of grid items</fudis-body-text></div>
 					<div style="border: 2px solid lightblue"><fudis-body-text>Showcase of grid items</fudis-body-text></div>

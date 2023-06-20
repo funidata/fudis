@@ -33,8 +33,6 @@ export { ErrorSummaryService } from './lib/components/form/error-summary/error-s
 export { ExpandableComponent } from './lib/components/expandable/expandable.component';
 export { FieldSetComponent } from './lib/components/form/fieldset/fieldset.component';
 export { FormComponent } from './lib/components/form/form/form.component';
-export { FormSectionComponent } from './lib/components/form/form-section/form-section.component';
-
 export { InputWithLanguageOptionsComponent } from './lib/components/form/input-with-language-options/input-with-language-options.component';
 export { GridComponent } from './lib/components/grid/grid/grid.component';
 export { GridItemComponent } from './lib/components/grid/grid-item/grid-item.component';
@@ -42,6 +40,7 @@ export { GridDirective } from './lib/directives/grid/grid/grid.directive';
 export { GridItemDirective } from './lib/directives/grid/grid-item/grid-item.directive';
 export { GridService } from './lib/directives/grid/grid-service/grid.service';
 export { GuidanceComponent } from './lib/components/form/guidance/guidance.component';
+export { HeaderDirective } from './lib/directives/content-projection/header/header.directive';
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
 export { IconComponent } from './lib/components/icon/icon.component';
 export { LinkComponent } from './lib/components/link/link.component';
@@ -49,6 +48,7 @@ export { NotificationComponent } from './lib/components/notification/notificatio
 
 export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
 // export { SpacingDirective } from './lib/directives/spacing/spacing.directive';
+export { SectionComponent } from './lib/components/section/section.component';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';
 export { TextInputComponent } from './lib/components/form/text-input/text-input.component';
 // export { TextSpacingComponent } from './lib/components/typography/text-spacing/text-spacing.component';

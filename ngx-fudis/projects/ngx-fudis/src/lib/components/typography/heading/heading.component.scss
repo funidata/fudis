@@ -2,7 +2,8 @@
 @use '../../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-heading {
-	@include utilities.box-reset;
+	box-sizing: border-box;
+	margin-top: 0;
 
 	&__xxs {
 		@include mixins.heading-xxs;
