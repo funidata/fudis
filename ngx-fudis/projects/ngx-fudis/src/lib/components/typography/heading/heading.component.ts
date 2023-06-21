@@ -1,6 +1,7 @@
 import { Component, Input, HostBinding, ViewEncapsulation, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { FudisHeadingSize, FudisHeadingTag } from '../../../types/typography';
 import { FudisSpacing } from '../../../types/spacing';
+import { IdService } from '../../../utilities/id-service.service';
 
 @Component({
 	selector: 'fudis-heading',
@@ -24,6 +25,10 @@ export class HeadingComponent implements OnInit {
 
 	_marginBottom = 'lg';
 
+	protected _id: string;
+
+	constructor(private _idService: IdService) {}
+
 	getHeadingMarginBottom(): string {
 		if (this.size === 'xxl' || this.size === 'xl') {
 			return 'sm';
@@ -32,6 +37,8 @@ export class HeadingComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this._id = this.id ?? this._idService.getNewId('heading');
+
 		if (this.marginBottom) {
 			this._classList = `fudis-heading fudis-heading__${this.size} fudis-mb-${this.marginBottom}`;
 		} else {

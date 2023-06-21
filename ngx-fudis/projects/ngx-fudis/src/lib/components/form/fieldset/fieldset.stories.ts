@@ -16,13 +16,21 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 @Component({
 	selector: 'example-fieldset',
 	template: `
-		<form>
-			<fudis-fieldset
-				[legend]="legend"
-				[id]="fieldsetId"
-				[helpText]="helpText"
-				[tooltip]="'Some additional information'">
-				<fudis-grid [columns]="{ lg: 2 }" [width]="'md'">
+		<fudis-fieldset
+			[width]="'md'"
+			[title]="title"
+			[id]="fieldsetId"
+			[helpText]="helpText"
+			[marginSides]="'responsive'"
+			[tooltip]="'Some additional information'">
+			<ng-template fudisActions type="fieldset">
+				<fudis-button [variant]="'tertiary'" [icon]="'plus'" [label]="'Some action'" />
+			</ng-template>
+			<ng-template fudisNotifications type="fieldset"
+				><fudis-notification>This is notification</fudis-notification></ng-template
+			>
+			<ng-template fudisContent type="fieldset">
+				<fudis-grid [columns]="{ md: 2 }">
 					<fudis-input-with-language-options
 						[missingLanguage]="'Missing'"
 						[id]="'unique-input-1'"
@@ -62,7 +70,7 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 
 					<fudis-radio-button-group
 						[requiredText]="requiredText"
-						[legend]="labelCourseType"
+						[title]="labelCourseType"
 						[id]="'radio-button-group-1'"
 						[options]="courseTypeOptions"
 						[control]="fieldsetExample.controls['courseType']"
@@ -93,10 +101,9 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 							[minDate]="fieldsetExample.controls['startDate'].value">
 						</fudis-datepicker>
 					</fudis-grid>
-					<fudis-button [label]="'Submit'" (handleClick)="submitForm()"></fudis-button>
 				</fudis-grid>
-			</fudis-fieldset>
-		</form>
+			</ng-template>
+		</fudis-fieldset>
 	`,
 })
 class FieldsetExampleComponent {
@@ -153,7 +160,7 @@ class FieldsetExampleComponent {
 
 	maxDate = new Date(2023, 31, 5);
 
-	legend = 'Fill in course information';
+	title = 'Fill in course information';
 
 	helpText = 'Please fill in course information.';
 

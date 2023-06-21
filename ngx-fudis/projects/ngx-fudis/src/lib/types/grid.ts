@@ -34,7 +34,7 @@ export const gridColumnDefault = '1fr';
 /**
  * Grid widths
  */
-export type GridWidth = 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
+export type GridWidth = 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs' | 'initial';
 
 /**
  * Alignment of whole Grid inside its container. For items inside the Grid use alignItemsX and alignItemsY.

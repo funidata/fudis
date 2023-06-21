@@ -1,5 +1,6 @@
 @use '../../../foundations/spacing/tokens.scss' as spacing;
 @use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/breakpoints/mixins.scss' as breakpoints;
 @use '../../../foundations/typography/tokens.scss' as typographyTokens;
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
 @use '../../../foundations/utilities/mixins.scss' as utilities;
@@ -19,13 +20,32 @@
 	}
 
 	&__legend {
+		box-sizing: border-box;
 		display: flex;
 		flex-direction: column;
-		grid-column: 1/-1;
 		padding: 0;
 		width: 100%;
 
+		&__container {
+			display: flex;
+
+			&__row-start {
+				flex-wrap: wrap;
+			}
+
+			&__row-end {
+				flex-wrap: wrap;
+				justify-content: space-between;
+			}
+
+			&__column {
+				flex-direction: column;
+			}
+		}
+
 		&__title {
+			margin-right: spacing.$spacing-xl;
+
 			&__md {
 				@include typography.heading-xs;
 			}
@@ -49,11 +69,25 @@
 			}
 		}
 
+		&__notifications {
+			margin-bottom: spacing.$spacing-xs;
+		}
+
 		&__help-text {
 			@include colorMixins.text-color('gray-dark');
 			@include typography.body-text-sm-regular;
 
+			display: block;
 			margin-bottom: spacing.$spacing-xs;
+		}
+
+		&__actions {
+			margin-bottom: spacing.$spacing-sm;
+
+			fudis-button:not(:last-of-type) {
+				margin-right: spacing.$spacing-sm;
+				margin-bottom: spacing.$spacing-xs;
+			}
 		}
 	}
 }

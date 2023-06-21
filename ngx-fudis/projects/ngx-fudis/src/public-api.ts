@@ -40,10 +40,11 @@ export { GridDirective } from './lib/directives/grid/grid/grid.directive';
 export { GridItemDirective } from './lib/directives/grid/grid-item/grid-item.directive';
 export { GridService } from './lib/directives/grid/grid-service/grid.service';
 export { GuidanceComponent } from './lib/components/form/guidance/guidance.component';
-export { HeaderDirective } from './lib/directives/content-projection/header/header.directive';
+export { HeaderDirective, HeadingDirective } from './lib/directives/content-projection/header/header.directive';
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
 export { IconComponent } from './lib/components/icon/icon.component';
 export { LinkComponent } from './lib/components/link/link.component';
+export { NotificationsDirective } from './lib/directives/content-projection/notifications/notifications.directive';
 export { NotificationComponent } from './lib/components/notification/notification.component';
 
 export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';

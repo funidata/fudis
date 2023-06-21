@@ -36,7 +36,7 @@ describe('RadioButtonGroupComponent', () => {
 		component = fixture.componentInstance;
 		component.control = testFormControl;
 		component.options = petOptions;
-		component.legend = 'Choose a pet';
+		component.title = 'Choose a pet';
 		fixture.detectChanges();
 	});
 

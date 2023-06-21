@@ -7,7 +7,7 @@ import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fi
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 
 @Component({
-	selector: 'fudis-radio-button-group[options][id][legend]',
+	selector: 'fudis-radio-button-group[options][id][title]',
 	templateUrl: './radio-button-group.component.html',
 	styleUrls: ['./radio-button-group.component.scss'],
 	encapsulation: ViewEncapsulation.None,

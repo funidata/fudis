@@ -51,7 +51,7 @@ import { GridItemComponent } from './components/grid/grid-item/grid-item.compone
 import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
 import { GridService } from './directives/grid/grid-service/grid.service';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
-import { HeaderDirective } from './directives/content-projection/header/header.directive';
+import { HeaderDirective, HeadingDirective } from './directives/content-projection/header/header.directive';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { IconComponent } from './components/icon/icon.component';
 import { IdService } from './utilities/id-service.service';
@@ -69,6 +69,7 @@ import { TextInputComponent } from './components/form/text-input/text-input.comp
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
+import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
 
 @NgModule({
 	/*
@@ -80,8 +81,8 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		BadgeComponent,
 		BodyTextComponent,
 		ButtonComponent,
-		ContentDirective,
 		CheckboxComponent,
+		ContentDirective,
 		DatepickerComponent,
 		DatepickerCustomHeaderComponent,
 		DescriptionListComponent,
@@ -108,6 +109,7 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		GuidanceComponent,
 		HeaderDirective,
 		HeadingComponent,
+		HeadingDirective,
 		IconComponent,
 		InputBaseDirective,
 		LabelComponent,
@@ -121,6 +123,7 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		TextSpacingComponent,
 		TextAreaComponent,
 		TooltipDirective,
+		NotificationsDirective,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
@@ -171,17 +174,19 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		DialogActionsDirective,
 		FieldSetComponent,
 		FormComponent,
-		HeaderDirective,
 		InputWithLanguageOptionsComponent,
 		GridComponent,
 		GridDirective,
 		GridItemComponent,
 		GridItemDirective,
 		GuidanceComponent,
+		HeaderDirective,
 		HeadingComponent,
+		HeadingDirective,
 		IconComponent,
 		LinkComponent,
 		NotificationComponent,
+		NotificationsDirective,
 		RadioButtonGroupComponent,
 		SectionComponent,
 		TextAreaComponent,

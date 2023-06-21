@@ -14,10 +14,10 @@ import { IdService } from '../../utilities/id-service.service';
 @Component({
 	selector: 'fudis-mock-container',
 	template: `<fudis-expandable [collapsed]="collapsed" [title]="'Test title'">
-		<ng-template fudisActions>
+		<ng-template fudisActions type="expandable">
 			<fudis-button [label]="'Action button'"></fudis-button>
 		</ng-template>
-		<ng-template fudisContent>
+		<ng-template fudisContent type="expandable">
 			<fudis-mock-component
 				(initialized)="contentInitializationCount = contentInitializationCount + 1"></fudis-mock-component>
 		</ng-template>

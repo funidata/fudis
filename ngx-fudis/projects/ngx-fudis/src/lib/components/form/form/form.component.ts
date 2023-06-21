@@ -1,7 +1,7 @@
 import { AfterContentInit, Component, ContentChild, ElementRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FudisHeadingTag, FudisHeadingSize } from '../../../types/typography';
 import { IdService } from '../../../utilities/id-service.service';
-import { HeaderDirective } from '../../../directives/content-projection/header/header.directive';
+import { HeaderDirective, HeadingDirective } from '../../../directives/content-projection/header/header.directive';
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
@@ -17,11 +17,13 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 
 	@ContentChild(HeaderDirective) headerContent: HeaderDirective;
 
+	@ContentChild(HeadingDirective) headingContent: HeadingDirective;
+
 	@ContentChild(ContentDirective) mainContent: ContentDirective;
 
 	@Input() id: string;
 
-	@Input({ required: true }) title: string;
+	@Input() title: string;
 
 	@Input({ required: true }) titleTag: FudisHeadingTag;
 

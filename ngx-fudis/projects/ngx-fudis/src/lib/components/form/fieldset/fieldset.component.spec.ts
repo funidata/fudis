@@ -2,9 +2,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MockComponent } from 'ng-mocks';
 import { FieldSetComponent } from './fieldset.component';
-import { ErrorSummaryComponent } from '../error-summary/error-summary.component';
-import { ErrorSummaryService } from '../error-summary/error-summary.service';
+
 import { GridComponent } from '../../grid/grid/grid.component';
+import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
+import { GridDirective } from '../../../directives/grid/grid/grid.directive';
+import { GridService } from '../../../directives/grid/grid-service/grid.service';
 
 describe('FieldSetComponent', () => {
 	let component: FieldSetComponent;
@@ -12,8 +14,8 @@ describe('FieldSetComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [FieldSetComponent, MockComponent(GridComponent), MockComponent(ErrorSummaryComponent)],
-			providers: [ErrorSummaryService],
+			declarations: [FieldSetComponent, MockComponent(GridComponent), GridApiDirective, GridDirective],
+			providers: [GridService],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(FieldSetComponent);

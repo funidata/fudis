@@ -75,7 +75,7 @@ export class AppComponent implements OnInit {
 			if (this.errorSummaryVisible) {
 				setTimeout(() => {
 					this.errorSummaryService.reloadErrors();
-				}, 500);
+				}, 100);
 			}
 		});
 	}

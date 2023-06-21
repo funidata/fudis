@@ -1,15 +1,21 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, ContentChild, Input, OnChanges, OnInit } from '@angular/core';
 import { IdService } from '../../utilities/id-service.service';
-import { FudisHeadingTag, FudisHeadingSize } from '../../types/typography';
-import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
-import { GridColumnsResponsive } from '../../types/grid';
+import { FudisHeadingTag, FudisHeadingSize, FudisTooltipPosition } from '../../types/typography';
+import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
+import { ContentDirective } from '../../directives/content-projection/content/content.directive';
+import { GridWidth, GridAlign, GridMarginSide } from '../../types/grid';
+import { FudisSpacing } from '../../types/spacing';
 
 @Component({
 	selector: 'fudis-section',
 	templateUrl: './section.component.html',
 	styleUrls: ['./section.component.scss'],
 })
-export class SectionComponent extends GridApiDirective implements OnInit, OnChanges {
+export class SectionComponent implements OnInit, OnChanges {
+	@ContentChild(NotificationsDirective) notifications: NotificationsDirective | null;
+
+	@ContentChild(ContentDirective) content: ContentDirective | null;
+
 	@Input() id: string;
 
 	@Input({ required: true }) title: string;
@@ -18,33 +24,65 @@ export class SectionComponent extends GridApiDirective implements OnInit, OnChan
 
 	@Input() titleSize: FudisHeadingSize = 'lg';
 
-	@Input() disableGrid: boolean = false;
+	/**
+	 * Text placed on tooltip
+	 */
+	@Input() tooltip: string;
 
 	/**
-	 * Setting of columns for the section content. Input will be converted to native CSS grid grid-template-columns values
-	 * E. g. as native string: [columns]="'1fr 1fr'" or [columns]="'1fr 2fr'"
-	 * E. g. as number [columns]="6", which converts to 'repeat(6, 1fr)'
-	 *
-	 * For responsive grid behavior, provide GridColumns object.
-	 * E. g. [columns]="{md: 2, xl: 3}".
-	 * Before md breakpoint Grid has default of '1fr' columns.
-	 * After md breakpoint it will have two columns 'repeat(2, 1fr)'
-	 * And after xl breakpoint 'repeat(3, 1fr)'
+	 * tooltipToggle set on true makes tooltip appear when toggled. Default behavior is triggered on focus. TooltipToggle feature is prefered to be used with icons.
 	 */
-	@Input() columns: string | number | GridColumnsResponsive = '1fr';
+	@Input() tooltipToggle = false;
 
-	constructor(private _idService: IdService) {
-		super();
-	}
+	/**
+	 * Sets the position of the tooltip on the parent element. Position options are left, right, above and below the parent element.
+	 */
+	@Input() tooltipPosition: FudisTooltipPosition = 'below';
+
+	/**
+	 * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
+	 * xxl = Default value. Viewports of 1600px and larger
+	 * xl = Viewports smaller than 1600px
+	 * lg = Viewports smaller than 1200px
+	 * md = Viewports smaller than 992px
+	 * sm = Viewports smaller than 768px
+	 * xs = Viewports smaller than 576px
+	 */
+	@Input() width: GridWidth = 'initial';
+
+	/**
+	 * Alignment of Grid component inside its parent
+	 */
+	@Input() align: GridAlign = 'center';
+
+	/**
+	 * Margin top for the Grid
+	 */
+	@Input() marginTop: FudisSpacing = 'none';
+
+	/**
+	 * Margin bottom for the Grid
+	 */
+	@Input() marginBottom: FudisSpacing = 'none';
+
+	/**
+	 * Horizontal margins left and right of the grid
+	 */
+	@Input() marginSides: GridMarginSide = 'none';
+
+	/**
+	 * Custom CSS classes for Grid element
+	 */
+	@Input() classes: string[];
+
+	constructor(private _idService: IdService) {}
 
 	protected _headingId: string;
 
 	protected _classList: string[];
 
 	ngOnInit(): void {
-		const id = this.id ?? this._idService.getNewId('section');
-
-		this._headingId = `${id}_heading`;
+		this._headingId = this.id ?? this._idService.getNewId('section');
 
 		this._classList = this.getClasses();
 	}
