@@ -1,5 +1,6 @@
 @use '../../../foundations/spacing/tokens.scss' as spacing;
 @use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/breakpoints/mixins.scss' as breakpoints;
 @use '../../../foundations/typography/tokens.scss' as typographyTokens;
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
 @use '../../../foundations/utilities/mixins.scss' as utilities;
@@ -20,12 +21,27 @@
 
 	&__legend {
 		display: flex;
-		flex-direction: column;
-		grid-column: 1/-1;
 		padding: 0;
 		width: 100%;
 
+		&__align {
+			&__row-start {
+				flex-wrap: wrap;
+			}
+
+			&__row-end {
+				flex-wrap: wrap;
+				justify-content: space-between;
+			}
+
+			&__column {
+				flex-direction: column;
+			}
+		}
+
 		&__title {
+			margin-right: spacing.$spacing-xl;
+
 			&__md {
 				@include typography.heading-xs;
 			}
@@ -53,7 +69,17 @@
 			@include colorMixins.text-color('gray-dark');
 			@include typography.body-text-s-regular;
 
+			display: block;
 			margin-bottom: spacing.$spacing-xs;
+		}
+
+		&__actions {
+			margin-bottom: spacing.$spacing-s;
+
+			fudis-button:not(:last-of-type) {
+				margin-right: spacing.$spacing-s;
+				margin-bottom: spacing.$spacing-xs;
+			}
 		}
 	}
 }

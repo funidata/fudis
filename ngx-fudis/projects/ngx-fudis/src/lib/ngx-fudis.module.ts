@@ -13,13 +13,22 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 
-import { ActionsDirective } from './directives/content-projection/actions/actions.directive';
+import {
+	ExpandableActionsDirective,
+	FieldsetActionsDirective,
+	FormActionsDirective,
+} from './directives/content-projection/actions/actions.directive';
 import { AutocompleteComponent } from './components/form/autocomplete/autocomplete.component';
 import { BadgeComponent } from './components/badge/badge.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/form/checkbox/checkbox.component';
-import { ContentDirective } from './directives/content-projection/content/content.directive';
+import {
+	ExpandableContentDirective,
+	FieldsetContentDirective,
+	FormContentDirective,
+	NotificationContentDirective,
+} from './directives/content-projection/content/content.directive';
 import { DatepickerComponent } from './components/form/datepicker/datepicker.component';
 
 import { DatepickerCustomHeaderComponent } from './components/form/datepicker/datepicker-custom-header/datepicker-custom-header.component';
@@ -51,7 +60,7 @@ import { GridItemComponent } from './components/grid/grid-item/grid-item.compone
 import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
 import { GridService } from './directives/grid/grid-service/grid.service';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
-import { HeaderDirective } from './directives/content-projection/header/header.directive';
+import { FormHeaderDirective } from './directives/content-projection/header/header.directive';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { IconComponent } from './components/icon/icon.component';
 import { IdService } from './utilities/id-service.service';
@@ -75,12 +84,17 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 	 * Include both internal and external Fudis components in 'declarations' array below.
 	 */
 	declarations: [
-		ActionsDirective,
+		ExpandableActionsDirective,
+		FieldsetActionsDirective,
+		FormActionsDirective,
+		ExpandableContentDirective,
+		FieldsetContentDirective,
+		FormContentDirective,
+		NotificationContentDirective,
 		AutocompleteComponent,
 		BadgeComponent,
 		BodyTextComponent,
 		ButtonComponent,
-		ContentDirective,
 		CheckboxComponent,
 		DatepickerComponent,
 		DatepickerCustomHeaderComponent,
@@ -106,7 +120,7 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		GridItemComponent,
 		GridItemDirective,
 		GuidanceComponent,
-		HeaderDirective,
+		FormHeaderDirective,
 		HeadingComponent,
 		IconComponent,
 		InputBaseDirective,
@@ -149,13 +163,18 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 	 * when you want to expose it outside
 	 */
 	exports: [
-		ActionsDirective,
+		ExpandableActionsDirective,
+		FieldsetActionsDirective,
+		FormActionsDirective,
+		ExpandableContentDirective,
+		FieldsetContentDirective,
+		FormContentDirective,
+		NotificationContentDirective,
 		AutocompleteComponent,
 		BadgeComponent,
 		BodyTextComponent,
 		ButtonComponent,
 		CheckboxComponent,
-		ContentDirective,
 		DatepickerComponent,
 		DescriptionListComponent,
 		DialogComponent,
@@ -171,7 +190,7 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		DialogActionsDirective,
 		FieldSetComponent,
 		FormComponent,
-		HeaderDirective,
+		FormHeaderDirective,
 		InputWithLanguageOptionsComponent,
 		GridComponent,
 		GridDirective,

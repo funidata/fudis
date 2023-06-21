@@ -1,6 +1,6 @@
 import { Component, ContentChild, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FudisIcon } from '../../types/icons';
-import { ContentDirective } from '../../directives/content-projection/content/content.directive';
+import { NotificationContentDirective } from '../../directives/content-projection/content/content.directive';
 
 export type NotificationType = 'warning' | 'danger' | 'success' | 'light';
 
@@ -10,7 +10,7 @@ export type NotificationType = 'warning' | 'danger' | 'success' | 'light';
 	styleUrls: ['./notification.component.scss'],
 })
 export class NotificationComponent implements OnChanges, OnInit {
-	@ContentChild(ContentDirective) customContent: ContentDirective;
+	@ContentChild(NotificationContentDirective) customContent: NotificationContentDirective;
 
 	/**
 	 * Notification variant options

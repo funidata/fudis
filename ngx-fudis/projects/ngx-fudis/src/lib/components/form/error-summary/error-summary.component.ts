@@ -34,6 +34,8 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 
 	protected _visibleErrorList: TFudisFormErrorSummaryList[] = [];
 
+	private _numberOfFocusTries: number = 0;
+
 	getErrors(): void {
 		const fetchedErrors: Signal<TFudisFormErrorSummaryObject> = this._errorSummaryService.getVisibleErrors();
 
@@ -52,22 +54,23 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 		/**
 		 * Focus to Error Summary element when visible error list gets updated.
 		 */
-		this.focusToErrorSummary(false);
+
+		this.focusToErrorSummary();
 	}
 
 	ngOnInit(): void {
 		this.getErrors();
 	}
 
-	focusToErrorSummary(firstLoad: boolean): void {
+	focusToErrorSummary(): void {
 		if (this.focusTarget && this._visibleErrorList.length > 0) {
+			this._numberOfFocusTries = 0;
 			(this.focusTarget.nativeElement as HTMLDivElement).focus();
-		} else if (firstLoad) {
+		} else if (this._numberOfFocusTries < 50) {
 			setTimeout(() => {
-				if (this.focusTarget && this._visibleErrorList.length > 0) {
-					(this.focusTarget.nativeElement as HTMLDivElement).focus();
-				}
-			}, 200);
+				this._numberOfFocusTries += 1;
+				this.focusToErrorSummary();
+			}, 100);
 		}
 	}
 
@@ -75,6 +78,6 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 		/**
 		 * Initial focus when Error Summary is loaded first time
 		 * */
-		this.focusToErrorSummary(true);
+		this.focusToErrorSummary();
 	}
 }

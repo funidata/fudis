@@ -30,25 +30,30 @@ import { FormComponent } from './form.component';
 			<ng-template fudisHeader>
 				<fudis-description-list [columns]="1" [variant]="'compact'" [data]="formHeaderDl" />
 			</ng-template>
-			<ng-template fudisActions>
+			<ng-template fudisFormActions>
 				<fudis-button [label]="'Previous step'" [icon]="'back'" [variant]="'tertiary'" />
 				<fudis-button [label]="'Open menu'" [icon]="'three-dots'" [labelHidden]="true" [variant]="'secondary'" />
 				<fudis-button [variant]="'secondary'" [label]="'Save draft'" />
 				<fudis-button [label]="'Submit'" (handleClick)="submitForm()" />
 			</ng-template>
-			<ng-template fudisContent>
+			<ng-template fudisFormContent>
 				<fudis-section [title]="'Section title here'">
 					<fudis-expandable
 						(collapsedChange)="handleCollapsedOutput($event)"
 						[title]="'Some title here'"
 						[collapsed]="_collapsed">
-						<ng-template fudisContent>
+						<ng-template fudisExpandableContent>
 							<fudis-fieldset
 								[legend]="legend"
 								[id]="fieldsetId"
 								[helpText]="helpText"
 								[tooltip]="'Quite many fields are required.'">
-								<fudis-grid [columns]="{ lg: 2 }">
+								<ng-template fudisFieldsetActions [align]="'bottom'">
+									<fudis-button [label]="'Action'" />
+									<fudis-button [label]="'Action'" />
+									<fudis-button [label]="'Action'" />
+								</ng-template>
+								<fudis-grid [columns]="{ lg: 2 }" [width]="'xl'">
 									<fudis-input-with-language-options
 										[missingLanguage]="'Missing'"
 										[id]="'unique-input-1'"
@@ -141,7 +146,7 @@ class FormContentExampleComponent {
 		if (this.fieldsetExample.invalid) {
 			this._collapsed = false;
 			this.errorSummaryVisible = true;
-			this.errorSummaryService.reloadErrors(100);
+			this.errorSummaryService.reloadErrors(500);
 		} else {
 			this.errorSummaryVisible = false;
 		}

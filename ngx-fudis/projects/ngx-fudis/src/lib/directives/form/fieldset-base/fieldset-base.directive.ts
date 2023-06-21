@@ -26,11 +26,6 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
 	@Input() helpText: string;
 
 	/**
-	 * To disable Field Set content as Fudis Grid. Used in e. g. Radio Button Group.
-	 */
-	@Input() disableGrid: boolean = true;
-
-	/**
 	 * Visual size of legend. Default 'md' and 'sm' is similar to standard input label, used in e. g. RadioButtonGroup.
 	 */
 	@Input() titleSize: 'md' | 'sm' = 'md';

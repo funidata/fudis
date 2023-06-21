@@ -22,6 +22,11 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 				[id]="fieldsetId"
 				[helpText]="helpText"
 				[tooltip]="'Some additional information'">
+				<ng-template fudisFieldsetActions>
+					<fudis-button [label]="'Some action'" />
+					<fudis-button [label]="'Some action'" />
+					<fudis-button [label]="'Some action'" />
+				</ng-template>
 				<fudis-grid [columns]="{ lg: 2 }" [width]="'md'">
 					<fudis-input-with-language-options
 						[missingLanguage]="'Missing'"

@@ -1,9 +1,9 @@
 import { AfterContentInit, Component, ContentChild, ElementRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { HeadingLevel, HeadingSize } from '../../../types/typography';
 import { IdService } from '../../../utilities/id-service.service';
-import { HeaderDirective } from '../../../directives/content-projection/header/header.directive';
-import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
-import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
+import { FormHeaderDirective } from '../../../directives/content-projection/header/header.directive';
+import { FormActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
+import { FormContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
 
 @Component({
@@ -13,11 +13,11 @@ import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.dir
 	encapsulation: ViewEncapsulation.None,
 })
 export class FormComponent extends GridApiDirective implements OnInit, AfterContentInit {
-	@ContentChild(ActionsDirective) headerActions: ActionsDirective;
+	@ContentChild(FormActionsDirective) headerActions: FormActionsDirective;
 
-	@ContentChild(HeaderDirective) headerContent: HeaderDirective;
+	@ContentChild(FormHeaderDirective) headerContent: FormHeaderDirective;
 
-	@ContentChild(ContentDirective) mainContent: ContentDirective;
+	@ContentChild(FormContentDirective) mainContent: FormContentDirective;
 
 	@Input() id: string;
 
