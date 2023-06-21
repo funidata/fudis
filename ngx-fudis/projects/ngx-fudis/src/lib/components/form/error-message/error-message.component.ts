@@ -23,7 +23,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	/**
 	 * Id of input this message is related to. Sent to Error Summary service.
 	 */
-	@Input({ required: true }) inputId: string;
+	@Input({ required: true }) focusId: string;
 
 	/**
 	 * Label text of input this message is related to. Sent to Error Summary service.
@@ -42,7 +42,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 
 	private _errorSent: boolean = false;
 
-	private _currentMessage: string | undefined = undefined;
+	private _currentMessage: string;
 
 	private _currentLabel: string | undefined = undefined;
 
@@ -57,12 +57,12 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	createError(): void {
-		if (this.message && this.inputLabel) {
+		if (this.message !== undefined) {
 			this._currentMessage = this.message;
 			this._currentLabel = this.inputLabel;
 
 			const newError: TFudisFormErrorSummaryItem = {
-				id: this.inputId,
+				id: this.focusId,
 				error: this._currentMessage,
 				label: this._currentLabel,
 				type: this.type,
@@ -82,7 +82,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	ngOnDestroy(): void {
 		if (this._errorSent) {
 			this._errorSummaryService.removeError({
-				id: this.inputId,
+				id: this.focusId,
 				type: this.type,
 				controlName: this.controlName,
 			});
@@ -93,12 +93,12 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 		if (this.controlName) {
 			// eslint-disable-next-line no-console
 			console.warn(
-				`Fudis component with id of '${this.inputId}' and control name of '${this.controlName}' is missing error message for error type of: '${this.type}'`
+				`Fudis component with id of '${this.focusId}' and control name of '${this.controlName}' is missing error message for error type of: '${this.type}'`
 			);
 		} else {
 			// eslint-disable-next-line no-console
 			console.warn(
-				`Fudis component with id of '${this.inputId}' is missing error message for error type of: '${this.type}'`
+				`Fudis component with id of '${this.focusId}' is missing error message for error type of: '${this.type}'`
 			);
 		}
 	}

@@ -21,15 +21,15 @@ import { FormComponent } from './form.component';
 			[marginSides]="'responsive'"
 			[marginTop]="'xl'"
 			[titleTag]="titleTag"
-			[title]="title"
+			[title]="formTitle"
 			[id]="id"
 			[helpText]="formHelpText"
 			[errorSummaryScreenReaderHelpText]="errorSummaryScreenReaderHelpText"
 			[errorSummaryHelpText]="errorSummaryHelpText"
 			[errorSummaryVisible]="errorSummaryVisible">
-			<ng-template fudisHeading>
-				<fudis-heading [marginBottom]="'xs'" [tag]="titleTag">{{ title }}</fudis-heading></ng-template
-			>
+			<!-- <ng-template fudisHeading>
+				<fudis-heading [marginBottom]="'xs'" [tag]="titleTag">{{ formTitle }}</fudis-heading></ng-template
+			> -->
 			<ng-template fudisHeader>
 				<fudis-description-list [columns]="1" [variant]="'compact'" [data]="formHeaderDl" />
 			</ng-template>
@@ -231,7 +231,7 @@ class FormContentExampleComponent {
 
 	requiredText = 'Required';
 
-	title = 'Example form heading';
+	formTitle = 'Example form heading';
 
 	titleTag = 'h1';
 
