@@ -581,6 +581,10 @@ mat-tooltip-component .mat-tooltip-handset {
     column-gap: 1rem;
   }
 }
+.fudis-grid__initial {
+  width: initial;
+}
+
 .fudis-grid__xs {
   max-width: 34rem;
   row-gap: 1rem;
