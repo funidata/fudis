@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { IdService } from '../../utilities/id-service.service';
-import { HeadingLevel, HeadingSize } from '../../types/typography';
+import { FudisTooltipPosition, HeadingLevel, HeadingSize } from '../../types/typography';
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
 import { GridColumnsResponsive } from '../../types/grid';
 
@@ -18,7 +18,20 @@ export class SectionComponent extends GridApiDirective implements OnInit, OnChan
 
 	@Input() titleSize: HeadingSize = 'l';
 
-	@Input() disableGrid: boolean = false;
+	/**
+	 * Text placed on tooltip
+	 */
+	@Input() tooltip: string;
+
+	/**
+	 * tooltipToggle set on true makes tooltip appear when toggled. Default behavior is triggered on focus. TooltipToggle feature is prefered to be used with icons.
+	 */
+	@Input() tooltipToggle = false;
+
+	/**
+	 * Sets the position of the tooltip on the parent element. Position options are left, right, above and below the parent element.
+	 */
+	@Input() tooltipPosition: FudisTooltipPosition = 'below';
 
 	/**
 	 * Setting of columns for the section content. Input will be converted to native CSS grid grid-template-columns values
@@ -44,7 +57,7 @@ export class SectionComponent extends GridApiDirective implements OnInit, OnChan
 	ngOnInit(): void {
 		const id = this.id ?? this._idService.getNewId('section');
 
-		this._headingId = `${id}_heading`;
+		this._headingId = `${id}_header`;
 
 		this._classList = this.getClasses();
 	}

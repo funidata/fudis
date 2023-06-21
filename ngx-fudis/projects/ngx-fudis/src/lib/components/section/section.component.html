@@ -1,5 +1,4 @@
 <section
-	*ngIf="!disableGrid"
 	[attr.aria-describedby]="_headingId"
 	fudisGrid
 	[align]="align"
@@ -13,15 +12,22 @@
 	[marginBottom]="marginBottom"
 	[marginTop]="marginTop"
 	[marginSides]="marginSides">
-	<ng-container *ngTemplateOutlet="commonContent" />
-</section>
-<section class="fudis-section" *ngIf="disableGrid">
-	<ng-container *ngTemplateOutlet="commonContent" />
-</section>
-
-<ng-template #commonContent>
-	<fudis-heading [marginBottom]="'xs'" [id]="_headingId" [tag]="titleTag" [size]="titleSize">{{ title }}</fudis-heading>
+	<div class="fudis-section__header" [id]="_headingId">
+		<fudis-heading [marginBottom]="'none'" [tag]="titleTag" [size]="titleSize">{{ title }}</fudis-heading>
+		<ng-container *ngIf="tooltip">
+			<fudis-button
+				class="fudis-section__header__button"
+				[size]="'icon-only'"
+				[variant]="'tertiary'"
+				[icon]="'info-circle'"
+				[labelHidden]="true"
+				[label]="tooltip"
+				[tooltip]="tooltip"
+				[tooltipPosition]="tooltipPosition"
+				[tooltipToggle]="tooltipToggle"></fudis-button>
+		</ng-container>
+	</div>
 	<div class="fudis-section__content">
 		<ng-content></ng-content>
 	</div>
-</ng-template>
+</section>

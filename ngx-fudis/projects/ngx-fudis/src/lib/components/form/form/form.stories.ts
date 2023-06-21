@@ -47,15 +47,10 @@ import { FormComponent } from './form.component';
 						[collapsed]="_collapsed">
 						<ng-template fudisContent type="expandable">
 							<fudis-fieldset
-								[legend]="legend"
+								[title]="title"
 								[id]="fieldsetId"
 								[helpText]="helpText"
 								[tooltip]="'Quite many fields are required.'">
-								<ng-template fudisActions type="fieldset" [align]="'bottom'">
-									<fudis-button [label]="'Action'" />
-									<fudis-button [label]="'Action'" />
-									<fudis-button [label]="'Action'" />
-								</ng-template>
 								<fudis-grid [columns]="{ lg: 2 }" [width]="'xl'">
 									<fudis-input-with-language-options
 										[missingLanguage]="'Missing'"
@@ -98,7 +93,7 @@ import { FormComponent } from './form.component';
 
 									<fudis-radio-button-group
 										[requiredText]="requiredText"
-										[legend]="labelCourseType"
+										[title]="labelCourseType"
 										[id]="'radio-button-group-1'"
 										[options]="courseTypeOptions"
 										[control]="fieldsetExample.controls['courseType']"
@@ -216,7 +211,7 @@ class FormContentExampleComponent {
 
 	maxDate = new Date(2023, 31, 5);
 
-	legend = 'Fill in course information';
+	title = 'Fill in course information';
 
 	helpText = 'Please fill in course information.';
 

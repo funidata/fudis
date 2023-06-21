@@ -10,5 +10,5 @@ import { ActionsDirective } from '../../../directives/content-projection/actions
 	encapsulation: ViewEncapsulation.None,
 })
 export class FieldSetComponent extends FieldSetBaseDirective {
-	@ContentChild(ActionsDirective) headerActions: ActionsDirective;
+	@ContentChild(ActionsDirective) headerActions: ActionsDirective | null;
 }

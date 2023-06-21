@@ -1,12 +1,12 @@
 <fieldset class="fudis-fieldset" [attr.id]="id" [tabIndex]="-1">
 	<legend
 		class="fudis-fieldset__legend"
-		[class.fudis-fieldset__legend__align__row-end]="headerActions && headerActions.align === 'end'"
-		[class.fudis-fieldset__legend__align__column]="headerActions && headerActions.align === 'bottom'"
-		[class.fudis-fieldset__legend__align__row-start]="headerActions && headerActions.align === 'start'">
+		[class.fudis-fieldset__legend__align__row-end]="headerActions?.align === 'end'"
+		[class.fudis-fieldset__legend__align__column]="headerActions?.align === 'bottom'"
+		[class.fudis-fieldset__legend__align__row-start]="headerActions?.align === 'start'">
 		<div class="fudis-fieldset__legend__title">
 			<span class="fudis-fieldset__legend__title__{{ titleSize }}">
-				<span class="fudis-fieldset__legend__title__text">{{ legend }}</span>
+				<span class="fudis-fieldset__legend__title__text">{{ title }}</span>
 				<span *ngIf="requiredText" class="fudis-fieldset__legend__title__required">({{ requiredText }})</span>
 				<ng-container *ngIf="tooltip">
 					<fudis-button
@@ -25,7 +25,7 @@
 				<span class="fudis-fieldset__legend__help-text">{{ helpText }}</span>
 			</ng-container>
 		</div>
-		<ng-container *ngIf="headerActions && headerActions.type === 'fieldset'">
+		<ng-container *ngIf="headerActions?.type === 'fieldset'">
 			<div class="fudis-fieldset__legend__actions">
 				<ng-container *ngTemplateOutlet="headerActions!.templateRef" />
 			</div>

@@ -35,7 +35,11 @@ const Template: StoryFn = () => ({
 		titleSize: 'xl',
 	},
 
-	template: html`<fudis-section [title]="title" [titleSize]="titleSize" [titleTag]="titleTag">
+	template: html`<fudis-section
+		[title]="title"
+		[tooltip]="'More info about this section'"
+		[titleSize]="titleSize"
+		[titleTag]="titleTag">
 		<fudis-expandable [title]="'Expandable inside section'">
 			<ng-template fudisContent type="expandable">
 				<fudis-body-text>Some content inside expandable</fudis-body-text>

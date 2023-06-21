@@ -6,14 +6,14 @@
 		<ng-container
 			*ngTemplateOutlet="tag === 'h2' ? h2 : tag === 'h3' ? h3 : tag === 'h4' ? h4 : tag === 'h5' ? h5 : h6">
 		</ng-container>
-		<ng-container *ngIf="headerButtons && headerButtons.type === 'expandable'">
+		<ng-container *ngIf="headerButtons?.type === 'expandable'">
 			<div class="fudis-expandable__header__buttons">
 				<ng-container *ngTemplateOutlet="headerButtons!.templateRef"></ng-container>
 			</div>
 		</ng-container>
 	</div>
 	<div class="fudis-expandable__content" *ngIf="_openedOnce" [attr.aria-hidden]="_collapsed" [hidden]="_collapsed">
-		<ng-container *ngIf="content && content.type === 'expandable'">
+		<ng-container *ngIf="content?.type === 'expandable'">
 			<ng-container *ngTemplateOutlet="content!.templateRef"></ng-container>
 		</ng-container>
 	</div>

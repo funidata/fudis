@@ -253,6 +253,10 @@
 		}
 	}
 
+	&__initial {
+		width: initial;
+	}
+
 	&__xs {
 		@include grid.grid-max-width('xs');
 	}

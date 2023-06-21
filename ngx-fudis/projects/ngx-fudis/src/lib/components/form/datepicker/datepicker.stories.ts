@@ -10,7 +10,7 @@ import { TFudisInputErrorMessages } from '../../../types/forms';
 	selector: 'example-date-range',
 	template: `
 		<form [formGroup]="mainFormGroup">
-			<fudis-fieldset [legend]="'Select a date range'" [helpText]="'Select date range'">
+			<fudis-fieldset [title]="'Select a date range'" [helpText]="'Select date range'">
 				<fudis-datepicker
 					style="margin-right: 1rem;"
 					[label]="'Select start date'"

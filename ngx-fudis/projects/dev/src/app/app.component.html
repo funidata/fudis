@@ -48,7 +48,7 @@
 					[titleTag]="'h2'">
 					<ng-template fudisContent type="form">
 						<fudis-grid>
-							<fudis-fieldset [legend]="'FieldSet alkaa tästä'">
+							<fudis-fieldset [title]="'FieldSet alkaa tästä'">
 								<fudis-text-input
 									[label]="t('label')"
 									[id]="'uniikki-idjoo'"
@@ -59,7 +59,7 @@
 								<fudis-radio-button-group
 									[requiredText]="t('required')"
 									[id]="'truth-selection'"
-									[legend]="t('chooseTruth')"
+									[title]="t('chooseTruth')"
 									[helpText]="t('chooseTruthHelp')"
 									[errorMsg]="{ required: t('chooseTruthError') }"
 									[control]="testFormGroup.controls['truth']"

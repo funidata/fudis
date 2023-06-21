@@ -41,12 +41,12 @@
 			</ng-container>
 		</div>
 	</div>
-	<ng-container *ngIf="headerActions && headerActions.type === 'form'">
+	<ng-container *ngIf="headerActions?.type === 'form'">
 		<div class="fudis-form__header__actions">
 			<ng-container *ngTemplateOutlet="headerActions!.templateRef" />
 		</div>
 	</ng-container>
-	<ng-container *ngIf="mainContent && mainContent.type === 'form'">
+	<ng-container *ngIf="mainContent?.type === 'form'">
 		<div class="fudis-form__content">
 			<ng-container *ngTemplateOutlet="mainContent!.templateRef" />
 		</div>
