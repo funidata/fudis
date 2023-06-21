@@ -4,16 +4,16 @@
 @use '../../../foundations/borders/mixins.scss' as border;
 
 .fudis-text-area {
-	&__l {
-		max-width: calc(23 * spacing.$spacing-s);
+	&__lg {
+		max-width: calc(23 * spacing.$spacing-sm);
 	}
 
-	&__m {
-		width: calc(14 * spacing.$spacing-s);
+	&__md {
+		width: calc(14 * spacing.$spacing-sm);
 	}
 
-	&__s {
-		max-width: calc(10 * spacing.$spacing-s);
+	&__sm {
+		max-width: calc(10 * spacing.$spacing-sm);
 	}
 
 	&__input {
@@ -37,14 +37,14 @@
 
 		&__help-text {
 			@include colorMixins.text-color('gray-dark');
-			@include typography.body-text-s-regular;
+			@include typography.body-text-sm-regular;
 
 			margin-top: spacing.$spacing-xs;
 			text-transform: none;
 		}
 
 		&__error {
-			@include typography.body-text-s-regular;
+			@include typography.body-text-sm-regular;
 			@include colorMixins.text-color('red');
 
 			text-transform: none;
@@ -52,7 +52,7 @@
 
 		&__character-limit-indicator {
 			@include colorMixins.text-color('gray-dark');
-			@include typography.body-text-s-regular;
+			@include typography.body-text-sm-regular;
 
 			margin-top: spacing.$spacing-xs;
 			margin-left: spacing.$spacing-xs;

@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AfterViewChecked, ChangeDetectorRef, Component, importProvidersFrom } from '@angular/core';
 import { DatepickerComponent } from './datepicker.component';
 import readme from './readme.mdx';
-import { TFudisInputErrorMessages } from '../../../types/forms';
+import { FudisFormErrors } from '../../../types/forms';
 
 @Component({
 	selector: 'example-date-range',
@@ -44,7 +44,7 @@ import { TFudisInputErrorMessages } from '../../../types/forms';
 				[message]="'Missing one or more values'"></fudis-error-message>
 
 			<div *ngIf="mainFormGroup.controls['first'].value">
-				<fudis-heading [tag]="'h3'" [size]="'m'">Values from first DatePicker</fudis-heading>
+				<fudis-heading [tag]="'h3'" [size]="'md'">Values from first DatePicker</fudis-heading>
 
 				<fudis-body-text>The date output is: {{ mainFormGroup.controls['first'].value }}</fudis-body-text>
 				<fudis-body-text
@@ -53,7 +53,7 @@ import { TFudisInputErrorMessages } from '../../../types/forms';
 				>
 			</div>
 			<div *ngIf="mainFormGroup.controls['second'].value">
-				<fudis-heading [tag]="'h3'" [size]="'m'">Values from second DatePicker</fudis-heading>
+				<fudis-heading [tag]="'h3'" [size]="'md'">Values from second DatePicker</fudis-heading>
 				<fudis-body-text>The date output is: {{ mainFormGroup.controls['second'].value }}</fudis-body-text>
 				<fudis-body-text
 					>The date output with Angular date pipe is:
@@ -72,14 +72,14 @@ class DateRangeExampleComponent implements AfterViewChecked {
 
 	disabled = true;
 
-	validatorMessages: TFudisInputErrorMessages = {
+	validatorMessages: FudisFormErrors = {
 		required: 'This is required field.',
 		matDatepickerMin: 'Start date has to be today or later.',
 		matDatepickerParse: 'Your date does is not a real date.',
 		matDatepickerMax: 'Starting date cannot be after ending date.',
 	};
 
-	validatorMessagesSecond: TFudisInputErrorMessages = {
+	validatorMessagesSecond: FudisFormErrors = {
 		required: 'This is required field.',
 		matDatepickerParse: 'Your date does is not a real date',
 		matDatepickerMin: 'Ending date cannot be earlier than starting date.',

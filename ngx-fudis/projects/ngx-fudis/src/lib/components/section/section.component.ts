@@ -1,10 +1,10 @@
 import { Component, ContentChild, Input, OnChanges, OnInit } from '@angular/core';
 import { IdService } from '../../utilities/id-service.service';
-import { FudisTooltipPosition, HeadingLevel, HeadingSize } from '../../types/typography';
-import { GridAlign, GridMarginSide, GridWidth } from '../../types/grid';
+import { FudisHeadingTag, FudisHeadingSize, FudisTooltipPosition } from '../../types/typography';
 import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
-import { Spacing } from '../../types/spacing';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
+import { GridWidth, GridAlign, GridMarginSide } from '../../types/grid';
+import { FudisSpacing } from '../../types/spacing';
 
 @Component({
 	selector: 'fudis-section',
@@ -20,9 +20,9 @@ export class SectionComponent implements OnInit, OnChanges {
 
 	@Input({ required: true }) title: string;
 
-	@Input() titleTag: HeadingLevel = 'h2';
+	@Input() titleTag: FudisHeadingTag = 'h2';
 
-	@Input() titleSize: HeadingSize = 'l';
+	@Input() titleSize: FudisHeadingSize = 'lg';
 
 	/**
 	 * Text placed on tooltip
@@ -58,12 +58,12 @@ export class SectionComponent implements OnInit, OnChanges {
 	/**
 	 * Margin top for the Grid
 	 */
-	@Input() marginTop: Spacing = 'none';
+	@Input() marginTop: FudisSpacing = 'none';
 
 	/**
 	 * Margin bottom for the Grid
 	 */
-	@Input() marginBottom: Spacing = 'none';
+	@Input() marginBottom: FudisSpacing = 'none';
 
 	/**
 	 * Horizontal margins left and right of the grid

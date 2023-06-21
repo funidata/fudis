@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
-import { IFudisDescriptionListItem } from '../../types/lists';
+import { FudisDescriptionListItem } from '../../types/lists';
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
 import { GridColumnsResponsive } from '../../types/grid';
 
@@ -18,7 +18,7 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 	 * Item array to form description list data.
 	 * Contains mandatory key and value, and optional subHeading.
 	 */
-	@Input() data: IFudisDescriptionListItem[] = [];
+	@Input() data: FudisDescriptionListItem[] = [];
 
 	/**
 	 * Variant for description list structure and layout

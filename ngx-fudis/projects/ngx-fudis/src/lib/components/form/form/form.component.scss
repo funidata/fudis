@@ -6,15 +6,15 @@
 	&__header {
 		&__main {
 			&__content {
-				margin-bottom: spacing.$spacing-s;
+				margin-bottom: spacing.$spacing-sm;
 			}
 		}
 
 		&__actions {
-			margin-bottom: spacing.$spacing-s;
+			margin-bottom: spacing.$spacing-sm;
 
 			fudis-button:not(:last-of-type) {
-				margin-right: spacing.$spacing-s;
+				margin-right: spacing.$spacing-sm;
 				margin-bottom: spacing.$spacing-xs;
 			}
 
@@ -23,10 +23,10 @@
 				flex-wrap: wrap;
 				justify-content: space-between;
 				justify-content: flex-end;
-				margin-bottom: spacing.$spacing-m;
+				margin-bottom: spacing.$spacing-md;
 
 				fudis-button:not(:first-of-type) {
-					margin-bottom: spacing.$spacing-zero;
+					margin-bottom: spacing.$spacing-none;
 				}
 			}
 		}

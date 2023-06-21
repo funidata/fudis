@@ -18,21 +18,21 @@
 			align-items: center;
 			justify-content: center;
 			border-radius: 0;
-			width: spacing.$spacing-l;
-			height: spacing.$spacing-l;
+			width: spacing.$spacing-lg;
+			height: spacing.$spacing-lg;
 
 			&:focus {
 				@include focus.focus-generic;
 			}
 
 			& svg {
-				width: spacing.$spacing-l;
-				height: spacing.$spacing-l;
+				width: spacing.$spacing-lg;
+				height: spacing.$spacing-lg;
 			}
 
 			& mat-icon {
-				width: spacing.$spacing-l;
-				height: spacing.$spacing-l;
+				width: spacing.$spacing-lg;
+				height: spacing.$spacing-lg;
 			}
 		}
 	}

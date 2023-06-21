@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+import { FudisInputWidth } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-text-area[id][label]',
@@ -33,7 +34,7 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * Fixed size options for text area
 	 */
-	@Input() size: 's' | 'm' | 'l' = 'l';
+	@Input() size: FudisInputWidth = 'lg';
 
 	ngOnInit(): void {
 		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);

@@ -4,10 +4,10 @@ import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, Validators } 
 import { Component, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-	IFudisDropdownOption,
-	IFudisRadioButtonOption,
-	TFudisGroupErrorMessages,
-	TFudisInputErrorMessages,
+	FudisDropdownOption,
+	FudisRadioButtonOption,
+	FudisFormGroupErrors,
+	FudisFormErrors,
 } from '../../../types/forms';
 
 import { ErrorSummaryService } from '../error-summary/error-summary.service';
@@ -182,11 +182,11 @@ class FormContentExampleComponent {
 		{ key: 'Another important person', value: 'Mara Jade' },
 	];
 
-	errorName: TFudisGroupErrorMessages = {
+	errorName: FudisFormGroupErrors = {
 		atLeastOneRequired: 'Course name is missing.',
 	};
 
-	errorDescription: TFudisGroupErrorMessages = {
+	errorDescription: FudisFormGroupErrors = {
 		english: {
 			required: 'Missing description in English.',
 			minlength: 'Description should at least 10 characters.',
@@ -198,30 +198,30 @@ class FormContentExampleComponent {
 		},
 	};
 
-	errorTeacher: TFudisInputErrorMessages = {
+	errorTeacher: FudisFormErrors = {
 		required: "Missing teacher's name who is responsible for this course.",
 	};
 
-	errorEmail: TFudisInputErrorMessages = {
+	errorEmail: FudisFormErrors = {
 		required: 'Missing email contact.',
 		minlength: 'Email should be at least 5 characters.',
 		email: 'Input must be an email address.',
 	};
 
-	errorStartdate: TFudisInputErrorMessages = {
+	errorStartdate: FudisFormErrors = {
 		required: 'Start date is missing.',
 		matDatepickerMin: 'Start date cannot be earlier than this day.',
 		matDatepickerParse: 'Date should be in dd.mm.yyyy format.',
 		matDatepickerMax: 'Start date cannot be after end date.',
 	};
 
-	errorEnddate: TFudisInputErrorMessages = {
+	errorEnddate: FudisFormErrors = {
 		required: 'End date is missing.',
 		matDatepickerMin: 'End date cannot be before start date.',
 		matDatepickerParse: 'Date should be in dd.mm.yyyy format.',
 	};
 
-	errorCourseType: TFudisInputErrorMessages = {
+	errorCourseType: FudisFormErrors = {
 		required: 'Course type must be selected.',
 	};
 
@@ -282,14 +282,14 @@ class FormContentExampleComponent {
 		courseType: new FormControl('', Validators.required),
 	});
 
-	languageOptions: IFudisDropdownOption[] = [
+	languageOptions: FudisDropdownOption[] = [
 		// eslint-disable-next-line @typescript-eslint/dot-notation
 		{ value: 'finnish', viewValue: 'FI' },
 		{ value: 'swedish', viewValue: 'SV' },
 		{ value: 'english', viewValue: 'EN' },
 	];
 
-	courseTypeOptions: IFudisRadioButtonOption[] = [
+	courseTypeOptions: FudisRadioButtonOption[] = [
 		{ value: 'basic', viewValue: 'Basic', id: 'courseType-1', name: 'courseType' },
 		{ value: 'advanced', viewValue: 'Advanced', id: 'courseType-2', name: 'courseType' },
 	];

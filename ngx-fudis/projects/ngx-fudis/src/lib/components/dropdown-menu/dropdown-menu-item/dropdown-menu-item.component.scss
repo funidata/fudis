@@ -7,7 +7,7 @@
 
 .fudis-dropdown-menu-item {
 	@include utilities.box-reset;
-	@include typography.body-text-m-light;
+	@include typography.body-text-md-light;
 	@include colorMixins.bg-color('transparent');
 	@include borders.border-none;
 

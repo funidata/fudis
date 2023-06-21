@@ -7,11 +7,11 @@
 	margin-bottom: spacing.$spacing-xs;
 
 	&__body-text {
-		@include typography.body-text-m-regular;
+		@include typography.body-text-md-regular;
 	}
 
 	&__form-error {
 		@include colorMixins.text-color('red');
-		@include typography.body-text-s-regular;
+		@include typography.body-text-sm-regular;
 	}
 }

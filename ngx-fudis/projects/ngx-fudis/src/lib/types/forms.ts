@@ -1,6 +1,8 @@
 import { FormControl } from '@angular/forms';
 
-export interface IFudisRadioButtonOption {
+export type FudisInputWidth = 'sm' | 'md' | 'lg';
+
+export interface FudisRadioButtonOption {
 	/** Unique id for single radio button option */
 	id: string;
 	/** Name for the group of radio buttons */
@@ -15,7 +17,7 @@ export interface IFudisRadioButtonOption {
 	checked?: boolean;
 }
 
-export type TFudisInputErrorMessages = {
+export type FudisFormErrors = {
 	required?: string;
 	minlength?: string;
 	maxlength?: string;
@@ -29,14 +31,12 @@ export type TFudisInputErrorMessages = {
 	[key: string]: string | undefined;
 };
 
-export type TFudisGroupErrorMessages = {
+export type FudisFormGroupErrors = {
 	atLeastOneRequired?: string;
-	[key: string]: TFudisInputErrorMessages | any;
+	[key: string]: FudisFormErrors | any;
 };
 
-export type FudisLanguageOption = {};
-
-export interface IFudisDropdownOption {
+export interface FudisDropdownOption {
 	/** Underlying value of the option */
 	value: any;
 	/** Value that is shown in the UI */
@@ -47,7 +47,7 @@ export interface IFudisDropdownOption {
 	[key: string]: any;
 }
 
-export type TFudisFormErrorSummaryItem = {
+export type FudisFormErrorSummaryItem = {
 	id: string;
 	label: string;
 	error: string;
@@ -55,24 +55,24 @@ export type TFudisFormErrorSummaryItem = {
 	controlName: string | undefined;
 };
 
-export type TFudisFormErrorSummaryObject = {
+export type FudisFormErrorSummaryObject = {
 	[id: string]: {
 		id: string;
-		errors: TFudisFormErrorSummaryObjectItemErrors;
+		errors: FudisFormErrorSummaryObjectItemErrors;
 		label: string;
 	};
 };
 
-export type TFudisFormErrorSummaryList = {
+export type FudisFormErrorSummaryList = {
 	id: string;
 	message: string;
 };
 
-export type TFudisFormErrorSummaryObjectItemErrors = {
+export type FudisFormErrorSummaryObjectItemErrors = {
 	[errorType: string]: string;
 };
 
-export type TFudisDropdownLanguageOption =
+export type FudisDropdownLanguageOption =
 	| { value: 'finnish'; viewValue: 'FI' }
 	| { value: 'swedish'; viewValue: 'SV' }
 	| { value: 'english'; viewValue: 'EN' }

@@ -47,9 +47,9 @@ export class LinkComponent {
 	@Input() linkTitle: string;
 
 	/**
-	 * Link size - by default link will inherit its parent's font-size. If link is not inside e.g. <fudis-heading> or <fudis-body-text> its size can be defined either 'm' (14px) or 'l' (16px).
+	 * Link size - by default link will inherit its parent's font-size. If link is not inside e.g. <fudis-heading> or <fudis-body-text> its size can be defined either 'md' (14px) or 'lg' (16px).
 	 */
-	@Input() size: 'inherit' | 'm' | 'l' = 'inherit';
+	@Input() size: 'inherit' | 'md' | 'lg' = 'inherit';
 
 	/**
 	 * Option to create an external link to point a target page on another domain.
@@ -60,7 +60,7 @@ export class LinkComponent {
 	/**
 	 * Aria-label for the external link
 	 */
-	@Input() externalLinkAriaLabel?: string;
+	@Input() externalLinkAriaLabel: string;
 
 	/**
 	 * Link uses primary blue color.

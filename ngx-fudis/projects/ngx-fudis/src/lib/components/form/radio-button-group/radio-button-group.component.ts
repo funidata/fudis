@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { IFudisRadioButtonOption, TFudisInputErrorMessages } from '../../../types/forms';
+import { FudisRadioButtonOption, FudisFormErrors } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 
@@ -23,12 +23,12 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	/*
 	 * Array of options for group of radio buttons
 	 */
-	@Input() options: IFudisRadioButtonOption[];
+	@Input() options: FudisRadioButtonOption[];
 
 	/**
 	 * Error messages shown when form control validators are invalid
 	 */
-	@Input() errorMsg: TFudisInputErrorMessages;
+	@Input() errorMsg: FudisFormErrors;
 
 	/**
 	 * Set Radio Button Group's visual style and ARIA attribute as invalid. Does not override if control.invalid is true.

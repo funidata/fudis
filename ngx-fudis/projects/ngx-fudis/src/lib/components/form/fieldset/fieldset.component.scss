@@ -75,17 +75,17 @@
 
 		&__help-text {
 			@include colorMixins.text-color('gray-dark');
-			@include typography.body-text-s-regular;
+			@include typography.body-text-sm-regular;
 
 			display: block;
 			margin-bottom: spacing.$spacing-xs;
 		}
 
 		&__actions {
-			margin-bottom: spacing.$spacing-s;
+			margin-bottom: spacing.$spacing-sm;
 
 			fudis-button:not(:last-of-type) {
-				margin-right: spacing.$spacing-s;
+				margin-right: spacing.$spacing-sm;
 				margin-bottom: spacing.$spacing-xs;
 			}
 		}

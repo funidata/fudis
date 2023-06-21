@@ -4,7 +4,7 @@ import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fi
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
 import { NotificationsDirective } from '../../../directives/content-projection/notifications/notifications.directive';
 import { GridWidth, GridAlign, GridMarginSide } from '../../../types/grid';
-import { Spacing } from '../../../types/spacing';
+import { FudisSpacing } from '../../../types/spacing';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 
 @Component({
@@ -39,12 +39,12 @@ export class FieldSetComponent extends FieldSetBaseDirective {
 	/**
 	 * Margin top for the Grid
 	 */
-	@Input() marginTop: Spacing = 'none';
+	@Input() marginTop: FudisSpacing = 'none';
 
 	/**
 	 * Margin bottom for the Grid
 	 */
-	@Input() marginBottom: Spacing = 'none';
+	@Input() marginBottom: FudisSpacing = 'none';
 
 	/**
 	 * Horizontal margins left and right of the grid

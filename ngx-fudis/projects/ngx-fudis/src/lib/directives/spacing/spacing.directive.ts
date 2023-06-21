@@ -1,11 +1,11 @@
 import { Directive, Input } from '@angular/core';
-import { Spacing } from '../../types/spacing';
+import { FudisSpacing } from '../../types/spacing';
 
 @Directive({
 	selector: '[fudisSpacing]',
 })
 export class SpacingDirective {
-	@Input() margin: Spacing;
+	@Input() margin: FudisSpacing;
 
-	@Input() padding: Spacing;
+	@Input() padding: FudisSpacing;
 }

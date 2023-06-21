@@ -1,6 +1,6 @@
 import { Component, Input, HostBinding, ViewEncapsulation, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { HeadingSize, HeadingLevel } from '../../../types/typography';
-import { Spacing } from '../../../types/spacing';
+import { FudisHeadingSize, FudisHeadingTag } from '../../../types/typography';
+import { FudisSpacing } from '../../../types/spacing';
 import { IdService } from '../../../utilities/id-service.service';
 
 @Component({
@@ -13,17 +13,17 @@ import { IdService } from '../../../utilities/id-service.service';
 export class HeadingComponent implements OnInit {
 	@HostBinding('class') mainClass = 'fudis-heading-host';
 
-	@Input() size: HeadingSize = 'l';
+	@Input() size: FudisHeadingSize = 'lg';
 
-	@Input({ required: true }) tag: HeadingLevel;
+	@Input({ required: true }) tag: FudisHeadingTag;
 
-	@Input() marginBottom: Spacing;
+	@Input() marginBottom: FudisSpacing;
 
 	@Input() id: string;
 
 	protected _classList: string = '';
 
-	_marginBottom = 'l';
+	_marginBottom = 'lg';
 
 	protected _id: string;
 
@@ -31,7 +31,7 @@ export class HeadingComponent implements OnInit {
 
 	getHeadingMarginBottom(): string {
 		if (this.size === 'xxl' || this.size === 'xl') {
-			return 's';
+			return 'sm';
 		}
 		return 'xs';
 	}
