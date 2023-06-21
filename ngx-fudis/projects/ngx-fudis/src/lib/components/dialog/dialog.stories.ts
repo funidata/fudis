@@ -11,7 +11,7 @@ import readme from './readme.mdx';
 	template: `<fudis-dialog [closeButtonLabel]="'Close'" [size]="'l'">
 		<fudis-heading fudisDialogTitle tag="h2">Dialog with fudis-grid and scrollable content</fudis-heading>
 		<fudis-dialog-content>
-			<fudis-grid [marginTop]="'md'" [marginBottom]="'md'" [marginSides]="'none'">
+			<fudis-grid [marginTop]="'md'" [marginBottom]="'md'">
 				<fudis-heading [tag]="'h3'" [size]="'s'">
 					I am fudis-heading inside the grid taking the whole width
 				</fudis-heading>
@@ -35,7 +35,6 @@ import readme from './readme.mdx';
 			</fudis-grid>
 			<fudis-description-list
 				[columns]="{ xs: 1, sm: 2, md: 3 }"
-				[marginSides]="'none'"
 				[data]="[
 					{ key: 'Name', value: 'Mary Rhubarb', subHeading: 'The lady boss' },
 					{ key: 'Occupation', value: 'Pie maker' },
@@ -43,7 +42,7 @@ import readme from './readme.mdx';
 					{ key: 'Awards', value: 'Pie maker 2023, Mix it up master 2008, Place setting champion 1987' }
 				]"></fudis-description-list>
 			<hr />
-			<fudis-grid [columns]="{ xs: 1, sm: 2, md: 3 }" [marginSides]="'none'" [marginTop]="'s'" [marginBottom]="'s'">
+			<fudis-grid [columns]="{ xs: 1, sm: 2, md: 3 }" [marginTop]="'s'" [marginBottom]="'s'">
 				<div style="border: 2px solid lightblue"><fudis-body-text>Showcase of grid items</fudis-body-text></div>
 				<div style="border: 2px solid lightblue"><fudis-body-text>Showcase of grid items</fudis-body-text></div>
 				<div style="border: 2px solid lightblue"><fudis-body-text>Showcase of grid items</fudis-body-text></div>

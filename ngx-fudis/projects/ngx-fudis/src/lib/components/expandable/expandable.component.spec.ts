@@ -82,12 +82,12 @@ describe('ExpandableComponent', () => {
 	}
 
 	function assertExpandableIsExpanded(): void {
-		expect(getExpandable()._collapsed).withContext('Expected the expandable to be expanded').toEqual(false);
+		expect(getExpandable().getCollapsedStatus()).withContext('Expected the expandable to be expanded').toEqual(false);
 		expect(isContentVisible()).withContext('Expected the content component to be visible').toEqual(true);
 	}
 
 	function assertExpandableIsCollapsed(): void {
-		expect(getExpandable()._collapsed).withContext('Expected the expandable to be collapsed').toEqual(true);
+		expect(getExpandable().getCollapsedStatus()).withContext('Expected the expandable to be collapsed').toEqual(true);
 		expect(isContentVisible()).withContext('Expected the content component not to be visible').toEqual(false);
 	}
 

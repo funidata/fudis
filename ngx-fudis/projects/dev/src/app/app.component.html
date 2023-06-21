@@ -5,7 +5,7 @@
 			>Whoops! Here is danger notification.</fudis-notification
 		>
 
-		<fudis-grid [marginSides]="'none'">
+		<fudis-grid>
 			<div>
 				<fudis-heading [tag]="'h3'">
 					<fudis-link [href]="'#'" [linkTitle]="'Link inside a heading'"></fudis-link>
@@ -46,7 +46,7 @@
 					[errorSummaryHelpText]="'There were some errors'"
 					[errorSummaryScreenReaderHelpText]="'Attention'"
 					[titleTag]="'h2'">
-					<fudis-grid [marginSides]="'none'">
+					<fudis-grid>
 						<fudis-fieldset [legend]="'FieldSet alkaa tästä'">
 							<fudis-text-input
 								[label]="t('label')"
@@ -68,6 +68,10 @@
 								[label]="'Some dropdown'"
 								[options]="dropdownOptions"
 								[control]="testFormGroup.controls['dropdown']"></fudis-dropdown>
+							<fudis-datepicker
+								[id]="'datepicker-123'"
+								[label]="'Select some date'"
+								[control]="testFormGroup.controls['date']" />
 						</fudis-fieldset>
 					</fudis-grid>
 				</fudis-form>
@@ -85,7 +89,7 @@
 		<fudis-expandable [title]="'Grid stuff'">
 			<ng-template fudisContent>
 				<fudis-heading [tag]="'h3'" [size]="'xl'">Väliotsikko</fudis-heading>
-				<fudis-grid [marginSides]="'none'">
+				<fudis-grid>
 					<fudis-body-text>Showcase of grid items</fudis-body-text>
 					<fudis-body-text>Showcase of grid items</fudis-body-text>
 					<fudis-body-text>Showcase of grid items</fudis-body-text>

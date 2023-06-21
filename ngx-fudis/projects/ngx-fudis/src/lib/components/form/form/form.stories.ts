@@ -18,6 +18,8 @@ import { FormComponent } from './form.component';
 	selector: 'example-form-content',
 	template: `
 		<fudis-form
+			[marginSides]="'responsive'"
+			[marginTop]="'xl'"
 			[titleTag]="titleTag"
 			[title]="title"
 			[id]="id"
@@ -25,81 +27,108 @@ import { FormComponent } from './form.component';
 			[errorSummaryScreenReaderHelpText]="errorSummaryScreenReaderHelpText"
 			[errorSummaryHelpText]="errorSummaryHelpText"
 			[errorSummaryVisible]="errorSummaryVisible">
-			<fudis-fieldset [legend]="legend" [id]="fieldsetId" [helpText]="helpText">
-				<fudis-grid [columns]="{ lg: 2 }" [width]="'md'" [marginSides]="'none'">
-					<fudis-input-with-language-options
-						[missingLanguage]="'Missing'"
-						[id]="'unique-input-1'"
-						[options]="languageOptions"
-						[languageLabel]="'Language'"
-						[formGroup]="fieldsetExample.controls['name']"
-						[label]="labelName"
-						[helpText]="'Some name would be nice. Provide course name in at least one language.'"
-						[groupErrorMsg]="errorName"
-						[requiredText]="requiredText"></fudis-input-with-language-options>
-					<fudis-input-with-language-options
-						[variant]="'text-area'"
-						[missingLanguage]="'Missing'"
-						[languageLabel]="'Language'"
-						[id]="'unique-input-2'"
-						[options]="languageOptions"
-						[formGroup]="fieldsetExample.controls['description']"
-						[label]="labelDescription"
-						[helpText]="'So that students know what they are getting into. Provide description in all languages.'"
-						[groupErrorMsg]="errorDescription"
-						[requiredText]="requiredText"></fudis-input-with-language-options>
-					<fudis-text-input
-						[id]="'unique-input-3'"
-						[control]="fieldsetExample.controls['teacher']"
-						[label]="labelTeacher"
-						[helpText]="'Someone has to be responsible for this.'"
-						[errorMsg]="errorTeacher"
-						[requiredText]="requiredText"></fudis-text-input>
-					<fudis-text-input
-						[id]="'unique-input-4'"
-						[helpText]="inputHelpText"
-						[control]="fieldsetExample.controls['email']"
-						[label]="labelEmail"
-						[helpText]="'So that students can ask for more time on their homework.'"
-						[errorMsg]="errorEmail"
-						[requiredText]="requiredText"></fudis-text-input>
+			<ng-template fudisHeader>
+				<fudis-description-list [columns]="1" [variant]="'compact'" [data]="formHeaderDl" />
+			</ng-template>
+			<ng-template fudisActions>
+				<fudis-button [label]="'Previous step'" [icon]="'back'" [variant]="'tertiary'" />
+				<fudis-button [label]="'Open menu'" [icon]="'three-dots'" [labelHidden]="true" [variant]="'secondary'" />
+				<fudis-button [variant]="'secondary'" [label]="'Save draft'" />
+				<fudis-button [label]="'Submit'" (handleClick)="submitForm()" />
+			</ng-template>
+			<ng-template fudisContent>
+				<fudis-section [title]="'Section title here'">
+					<fudis-expandable
+						(collapsedChange)="handleCollapsedOutput($event)"
+						[title]="'Some title here'"
+						[collapsed]="_collapsed">
+						<ng-template fudisContent>
+							<fudis-fieldset
+								[legend]="legend"
+								[id]="fieldsetId"
+								[helpText]="helpText"
+								[tooltip]="'Quite many fields are required.'">
+								<fudis-grid [columns]="{ lg: 2 }">
+									<fudis-input-with-language-options
+										[missingLanguage]="'Missing'"
+										[id]="'unique-input-1'"
+										[options]="languageOptions"
+										[languageLabel]="'Language'"
+										[formGroup]="fieldsetExample.controls['name']"
+										[label]="labelName"
+										[helpText]="'Some name would be nice. Provide course name in at least one language.'"
+										[groupErrorMsg]="errorName"
+										[requiredText]="requiredText"></fudis-input-with-language-options>
+									<fudis-input-with-language-options
+										[variant]="'text-area'"
+										[missingLanguage]="'Missing'"
+										[languageLabel]="'Language'"
+										[id]="'unique-input-2'"
+										[options]="languageOptions"
+										[formGroup]="fieldsetExample.controls['description']"
+										[label]="labelDescription"
+										[helpText]="
+											'So that students know what they are getting into. Provide description in all languages.'
+										"
+										[groupErrorMsg]="errorDescription"
+										[requiredText]="requiredText"></fudis-input-with-language-options>
+									<fudis-text-input
+										[id]="'unique-input-3'"
+										[control]="fieldsetExample.controls['teacher']"
+										[label]="labelTeacher"
+										[helpText]="'Someone has to be responsible for this.'"
+										[errorMsg]="errorTeacher"
+										[requiredText]="requiredText"></fudis-text-input>
+									<fudis-text-input
+										[id]="'unique-input-4'"
+										[helpText]="inputHelpText"
+										[control]="fieldsetExample.controls['email']"
+										[label]="labelEmail"
+										[helpText]="'So that students can ask for more time on their homework.'"
+										[errorMsg]="errorEmail"
+										[requiredText]="requiredText"></fudis-text-input>
 
-					<fudis-radio-button-group
-						[requiredText]="requiredText"
-						[legend]="labelCourseType"
-						[id]="'radio-button-group-1'"
-						[options]="courseTypeOptions"
-						[control]="fieldsetExample.controls['courseType']"
-						[errorMsg]="errorCourseType"></fudis-radio-button-group>
-					<fudis-grid [columns]="'1fr 1fr'" [marginSides]="'none'">
-						<fudis-datepicker
-							[label]="labelStartDate"
-							[id]="'date-picker-1'"
-							[size]="'s'"
-							[requiredText]="requiredText"
-							[helpText]="'You have to start from somewhere'"
-							[errorMsg]="errorStartdate"
-							[control]="fieldsetExample.controls['startDate']"
-							[minDate]="minDate"
-							[maxDate]="
-								fieldsetExample.controls['endDate'].value ? fieldsetExample.controls['endDate'].value : maxDate
-							">
-						</fudis-datepicker>
-						<fudis-datepicker
-							[label]="labelEndDate"
-							[id]="'date-picker-2'"
-							[size]="'s'"
-							[requiredText]="requiredText"
-							[helpText]="'You have to end it to something'"
-							[errorMsg]="errorEnddate"
-							[control]="fieldsetExample.controls['endDate']"
-							[disabled]="!fieldsetExample.controls['startDate'].value && !fieldsetExample.controls['startDate'].valid"
-							[minDate]="fieldsetExample.controls['startDate'].value">
-						</fudis-datepicker>
-					</fudis-grid>
-				</fudis-grid>
-			</fudis-fieldset>
-			<fudis-button [label]="'Submit'" (handleClick)="submitForm()"></fudis-button>
+									<fudis-radio-button-group
+										[requiredText]="requiredText"
+										[legend]="labelCourseType"
+										[id]="'radio-button-group-1'"
+										[options]="courseTypeOptions"
+										[control]="fieldsetExample.controls['courseType']"
+										[errorMsg]="errorCourseType"></fudis-radio-button-group>
+									<fudis-grid [columns]="{ sm: 2 }">
+										<fudis-datepicker
+											[label]="labelStartDate"
+											[id]="'date-picker-1'"
+											[size]="'s'"
+											[requiredText]="requiredText"
+											[helpText]="'You have to start from somewhere'"
+											[errorMsg]="errorStartdate"
+											[control]="fieldsetExample.controls['startDate']"
+											[minDate]="minDate"
+											[maxDate]="
+												fieldsetExample.controls['endDate'].value ? fieldsetExample.controls['endDate'].value : maxDate
+											">
+										</fudis-datepicker>
+										<fudis-datepicker
+											[label]="labelEndDate"
+											[id]="'date-picker-2'"
+											[size]="'s'"
+											[requiredText]="requiredText"
+											[helpText]="'You have to end it to something'"
+											[errorMsg]="errorEnddate"
+											[control]="fieldsetExample.controls['endDate']"
+											[disabled]="
+												!fieldsetExample.controls['startDate'].value && !fieldsetExample.controls['startDate'].valid
+											"
+											[minDate]="fieldsetExample.controls['startDate'].value">
+										</fudis-datepicker>
+									</fudis-grid>
+								</fudis-grid>
+							</fudis-fieldset>
+						</ng-template>
+					</fudis-expandable>
+				</fudis-section>
+			</ng-template>
 		</fudis-form>
 	`,
 })
@@ -110,12 +139,25 @@ class FormContentExampleComponent {
 		this.fieldsetExample.markAllAsTouched();
 
 		if (this.fieldsetExample.invalid) {
+			this._collapsed = false;
 			this.errorSummaryVisible = true;
-			this.errorSummaryService.reloadErrors();
+			this.errorSummaryService.reloadErrors(100);
 		} else {
 			this.errorSummaryVisible = false;
 		}
 	}
+
+	handleCollapsedOutput(value: boolean): void {
+		this._collapsed = value;
+	}
+
+	private _collapsed: boolean = true;
+
+	formHeaderDl = [
+		{ key: 'Important person', value: 'Admiral Thrawn' },
+		{ key: 'Key', value: 'THX-1138' },
+		{ key: 'Another important person', value: 'Mara Jade' },
+	];
 
 	errorName: TFudisGroupErrorMessages = {
 		atLeastOneRequired: 'Course name is missing.',
@@ -194,8 +236,7 @@ class FormContentExampleComponent {
 
 	errorSummaryScreenReaderHelpText = 'Attention';
 
-	formHelpText =
-		"Come about rope's end loot hail-shot belaying pin hornswaggle maroon quarter main sheet nipperkin. Pieces of Eight reef landlubber or just lubber reef sails loaded to the gunwalls coffer Sail ho draught capstan shrouds. Plate Fleet fluke Yellow Jack galleon wherry wench Cat o'nine tails yard coxswain square-rigged.";
+	formHelpText = "Come about rope's end loot hail-shot belaying pin hornswaggle maroon quarter main sheet nipperkin.";
 
 	fieldsetExample = new FormGroup({
 		name: new FormGroup(

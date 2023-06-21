@@ -8,8 +8,11 @@
 }
 
 .fudis-body-text {
-	@include utilities.box-reset;
 	@include colorMixins.text-color('gray-dark');
+
+	box-sizing: border-box;
+	margin-top: 0;
+	padding: 0;
 
 	&__s-regular {
 		@include typography.body-text-s-regular;

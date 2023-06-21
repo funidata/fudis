@@ -1,13 +1,4 @@
-import {
-	AfterContentInit,
-	Component,
-	DoCheck,
-	HostBinding,
-	Inject,
-	Input,
-	OnInit,
-	ViewEncapsulation,
-} from '@angular/core';
+import { AfterContentInit, Component, DoCheck, Inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import {
 	MatDateFormats,
 	MAT_NATIVE_DATE_FORMATS,
@@ -49,16 +40,14 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
 	],
 })
 export class DatepickerComponent extends InputBaseDirective implements DoCheck, AfterContentInit, OnInit {
-	@HostBinding('class') classes = 'fudis-datepicker-host';
-
-	constructor(private readonly adapter: DateAdapter<Date>, @Inject(DOCUMENT) private document: Document) {
+	constructor(private readonly _adapter: DateAdapter<Date>, @Inject(DOCUMENT) private _document: Document) {
 		super();
 	}
 
 	/**
 	 * FormControl for the input.
 	 */
-	@Input() control: FormControl<Date | null>;
+	@Input({ required: true }) control: FormControl<Date | null>;
 
 	/**
 	 * Available sizes for the datepicker - defaults to medium.
@@ -75,26 +64,26 @@ export class DatepickerComponent extends InputBaseDirective implements DoCheck, 
 	 */
 	@Input() maxDate: Date | null;
 
-	currentHtmlLang: string;
+	private _currentHtmlLang: string;
 
 	ngOnInit(): void {
 		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 
 	ngAfterContentInit(): void {
-		this.currentHtmlLang = this.document.documentElement.lang;
-		this.adapter.setLocale(this.updateLocale());
+		this._currentHtmlLang = this._document.documentElement.lang;
+		this._adapter.setLocale(this.updateLocale());
 	}
 
 	ngDoCheck(): void {
-		if (this.document.documentElement.lang !== this.currentHtmlLang) {
-			this.adapter.setLocale(this.updateLocale());
-			this.currentHtmlLang = this.document.documentElement.lang;
+		if (this._document.documentElement.lang !== this._currentHtmlLang) {
+			this._adapter.setLocale(this.updateLocale());
+			this._currentHtmlLang = this._document.documentElement.lang;
 		}
 	}
 
 	updateLocale(): string {
-		switch (this.document.documentElement.lang) {
+		switch (this._document.documentElement.lang) {
 			case 'en':
 				return 'en-GB';
 			case 'fi':

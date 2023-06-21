@@ -1,9 +1,10 @@
 import { Directive, Input } from '@angular/core';
+import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 
 @Directive({
 	selector: '[fudisFieldSetBase]',
 })
-export class FieldSetBaseDirective {
+export class FieldSetBaseDirective extends TooltipApiDirective {
 	/**
 	 * Legend for fieldset
 	 */

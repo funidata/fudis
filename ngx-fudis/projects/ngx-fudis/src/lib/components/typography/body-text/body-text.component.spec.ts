@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ChangeDetectionStrategy } from '@angular/core';
 import { BodyTextComponent } from './body-text.component';
-import { BodyTextSize, MarginBottomSize } from '../../../types/typography';
+import { BodyTextSize } from '../../../types/typography';
+import { Spacing } from '../../../types/spacing';
 
 describe('BodyTextComponent', () => {
 	let component: BodyTextComponent;
@@ -9,7 +11,11 @@ describe('BodyTextComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [BodyTextComponent],
-		}).compileComponents();
+		})
+			.overrideComponent(BodyTextComponent, {
+				set: { changeDetection: ChangeDetectionStrategy.Default },
+			})
+			.compileComponents();
 	});
 
 	beforeEach(() => {
@@ -27,15 +33,14 @@ describe('BodyTextComponent', () => {
 	function bodyTextSizes(size: BodyTextSize): void {
 		component.size = size;
 		fixture.detectChanges();
-		assertBodyTextHasClasses(`fudis-body-text fudis-body-text__${size} fudis-body-text__margin-bottom__none`);
+		assertBodyTextHasClasses(`fudis-body-text fudis-body-text__${size} fudis-mb-none`);
 	}
 
-	function marginBottomSizes(marginBottom: MarginBottomSize): void {
+	function marginBottomSizes(marginBottom: Spacing): void {
 		component.marginBottom = marginBottom;
+
 		fixture.detectChanges();
-		assertBodyTextHasClasses(
-			`fudis-body-text fudis-body-text__m-regular fudis-body-text__margin-bottom__${marginBottom}`
-		);
+		assertBodyTextHasClasses(`fudis-body-text fudis-body-text__m-regular fudis-mb-${marginBottom}`);
 	}
 
 	describe('CSS classes', () => {
@@ -48,8 +53,13 @@ describe('BodyTextComponent', () => {
 		});
 
 		it('should change the class according to the given margin bottom value', () => {
-			marginBottomSizes('m');
-			marginBottomSizes('l');
+			marginBottomSizes('xxl');
+			marginBottomSizes('xl');
+			marginBottomSizes('md');
+			marginBottomSizes('lg');
+			marginBottomSizes('sm');
+			marginBottomSizes('xs');
+			marginBottomSizes('xxs');
 			marginBottomSizes('none');
 		});
 	});

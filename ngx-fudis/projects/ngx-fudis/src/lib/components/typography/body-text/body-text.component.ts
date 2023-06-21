@@ -1,11 +1,13 @@
-import { Component, Input, HostBinding, ViewEncapsulation } from '@angular/core';
-import { BodyTextSize, MarginBottomSize } from '../../../types/typography';
+import { Component, Input, HostBinding, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import { BodyTextSize } from '../../../types/typography';
+import { Spacing } from '../../../types/spacing';
 
 @Component({
 	selector: 'fudis-body-text',
 	templateUrl: './body-text.component.html',
 	styleUrls: ['./body-text.component.scss'],
 	encapsulation: ViewEncapsulation.None,
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BodyTextComponent {
 	/**
@@ -21,5 +23,5 @@ export class BodyTextComponent {
 	/**
 	 * Optional margin bottom
 	 */
-	@Input() marginBottom: MarginBottomSize = 'none';
+	@Input() marginBottom: Spacing = 'none';
 }

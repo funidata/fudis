@@ -7,16 +7,24 @@
 </div>
 
 <ng-template #anchorLink>
-	<a [href]="href" class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__{{ color }}">
-		{{ linkTitle ? linkTitle : href }}
-	</a>
+	<ng-container *ngIf="!routerLinkUrl">
+		<a [href]="href" class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__{{ color }}">
+			{{ linkTitle ? linkTitle : href }}
+		</a>
+	</ng-container>
+	<ng-container *ngIf="routerLinkUrl">
+		<a
+			[routerLink]="routerLinkUrl"
+			class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__{{ color }}">
+			{{ linkTitle ? linkTitle : href }}
+		</a>
+	</ng-container>
 </ng-template>
 
 <ng-template #externalLink>
 	<a
 		attr.aria-label="{{ linkTitle ? linkTitle : href }}, {{ externalLinkAriaLabel }}"
 		[href]="href ? href : null"
-		[routerLink]="routerLinkUrl"
 		target="_blank"
 		rel="noopener noreferrer"
 		class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__{{

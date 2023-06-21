@@ -40,9 +40,8 @@
 					@include focus.focus-generic;
 				}
 
-				> fudis-icon {
+				&__icon {
 					margin-right: spacing.$spacing-xs;
-					vertical-align: middle;
 				}
 
 				&__sub-heading {

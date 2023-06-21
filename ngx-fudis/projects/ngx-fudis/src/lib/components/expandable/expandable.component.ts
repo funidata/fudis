@@ -48,7 +48,7 @@ export class ExpandableComponent {
 	/**
 	 * Optional sub title, placed underneath the main title
 	 */
-	@Input() subTitle?: string;
+	@Input() subTitle: string;
 
 	/**
 	 * Expandable is initially collapsed by default but can be controlled by [collapsed] input property
@@ -57,7 +57,11 @@ export class ExpandableComponent {
 		this.setCollapsedStatus(value);
 	}
 
-	_collapsed = true;
+	protected _collapsed = true;
+
+	public getCollapsedStatus(): boolean {
+		return this._collapsed;
+	}
 
 	protected _id: string;
 
@@ -68,7 +72,7 @@ export class ExpandableComponent {
 	/**
 	 *  Lazy loading variable
 	 */
-	_openedOnce = false;
+	protected _openedOnce = false;
 
 	setCollapsedStatus(value: boolean): void {
 		this._collapsed = value ?? this._collapsed;

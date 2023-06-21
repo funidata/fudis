@@ -26,25 +26,25 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 	 */
 	@Input({ required: true }) screenReaderHelpText: string;
 
-	constructor(private errorSummaryService: ErrorSummaryService) {
+	constructor(private _errorSummaryService: ErrorSummaryService) {
 		effect(() => {
 			this.getErrors();
 		});
 	}
 
-	visibleErrorList: TFudisFormErrorSummaryList[] = [];
+	protected _visibleErrorList: TFudisFormErrorSummaryList[] = [];
 
 	getErrors(): void {
-		const fetchedErrors: Signal<TFudisFormErrorSummaryObject> = this.errorSummaryService.getVisibleErrors();
+		const fetchedErrors: Signal<TFudisFormErrorSummaryObject> = this._errorSummaryService.getVisibleErrors();
 
-		this.visibleErrorList = [];
+		this._visibleErrorList = [];
 
 		Object.keys(fetchedErrors()).forEach((item) => {
 			const errorId = fetchedErrors()[item].id;
 			if (this.parentComponent?.querySelector(`#${errorId}`)) {
 				const { label } = fetchedErrors()[item];
 				Object.values(fetchedErrors()[item].errors).forEach((error: any) => {
-					this.visibleErrorList.push({ id: errorId, message: `${label}: ${error}` });
+					this._visibleErrorList.push({ id: errorId, message: `${label}: ${error}` });
 				});
 			}
 		});
@@ -52,16 +52,22 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 		/**
 		 * Focus to Error Summary element when visible error list gets updated.
 		 */
-		this.focusToErrorSummary();
+		this.focusToErrorSummary(false);
 	}
 
 	ngOnInit(): void {
 		this.getErrors();
 	}
 
-	focusToErrorSummary(): void {
-		if (this.focusTarget && this.visibleErrorList.length > 0) {
+	focusToErrorSummary(firstLoad: boolean): void {
+		if (this.focusTarget && this._visibleErrorList.length > 0) {
 			(this.focusTarget.nativeElement as HTMLDivElement).focus();
+		} else if (firstLoad) {
+			setTimeout(() => {
+				if (this.focusTarget && this._visibleErrorList.length > 0) {
+					(this.focusTarget.nativeElement as HTMLDivElement).focus();
+				}
+			}, 200);
 		}
 	}
 
@@ -69,6 +75,6 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 		/**
 		 * Initial focus when Error Summary is loaded first time
 		 * */
-		this.focusToErrorSummary();
+		this.focusToErrorSummary(true);
 	}
 }

@@ -4,12 +4,16 @@
 @use '../components/form/datepicker/ngMaterial-theme.scss' as datePicker;
 @use '../components/dialog/ngMaterial-theme.scss' as dialog;
 @use '../directives/tooltip/ngMaterial-theme.scss' as tooltip;
+@use '../components/grid/grid-item/grid-item.component.scss' as gridItem;
+@use '../components/grid/grid/grid.component.scss' as grid;
+@use '../foundations/spacing/classes.scss' as spacingClasses;
 
 // Emit theme-dependent styles for common features used across multiple Material components.
 @include mat.core;
 @include mat.core-theme(theme.$primary-theme);
 @include mat.all-component-typographies(theme.$typography);
 @include mat.autocomplete-theme(theme.$primary-theme);
+@include mat.button-theme(theme.$button-theme);
 @include mat.datepicker-theme(theme.$datepicker-theme);
 @include mat.dialog-theme(theme.$primary-theme);
 @include mat.tooltip-theme(theme.$primary-theme);

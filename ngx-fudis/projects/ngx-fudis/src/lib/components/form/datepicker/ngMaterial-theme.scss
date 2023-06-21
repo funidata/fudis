@@ -1,3 +1,4 @@
+/* stylelint-disable declaration-no-important */
 /* stylelint-disable selector-max-class */
 /* stylelint-disable selector-class-pattern */
 /* stylelint-disable scss/selector-no-redundant-nesting-selector */
@@ -76,6 +77,12 @@
 	}
 }
 
-.mat-datepicker-close-button:focus {
-	@include focus.focus-generic;
+.mat-datepicker-close-button {
+	text-transform: uppercase !important;
+	/* stylelint-disable-next-line property-disallowed-list */
+	color: colors.$color-white !important;
+
+	&:focus {
+		@include focus.focus-generic;
+	}
 }
