@@ -8,11 +8,11 @@ import readme from './readme.mdx';
 
 @Component({
 	selector: 'example-dialog-content',
-	template: `<fudis-dialog [closeButtonLabel]="'Close'" [size]="'l'">
+	template: `<fudis-dialog [closeButtonLabel]="'Close'" [size]="'lg'">
 		<fudis-heading fudisDialogTitle tag="h2">Dialog with fudis-grid and scrollable content</fudis-heading>
 		<fudis-dialog-content>
 			<fudis-grid [marginTop]="'md'" [marginBottom]="'md'">
-				<fudis-heading [tag]="'h3'" [size]="'s'">
+				<fudis-heading [tag]="'h3'" [size]="'sm'">
 					I am fudis-heading inside the grid taking the whole width
 				</fudis-heading>
 				<fudis-body-text>
@@ -42,7 +42,7 @@ import readme from './readme.mdx';
 					{ key: 'Awards', value: 'Pie maker 2023, Mix it up master 2008, Place setting champion 1987' }
 				]"></fudis-description-list>
 			<hr />
-			<fudis-grid [columns]="{ xs: 1, sm: 2, md: 3 }" [marginTop]="'s'" [marginBottom]="'s'">
+			<fudis-grid [columns]="{ xs: 1, sm: 2, md: 3 }" [marginTop]="'sm'" [marginBottom]="'sm'">
 				<div style="border: 2px solid lightblue"><fudis-body-text>Showcase of grid items</fudis-body-text></div>
 				<div style="border: 2px solid lightblue"><fudis-body-text>Showcase of grid items</fudis-body-text></div>
 				<div style="border: 2px solid lightblue"><fudis-body-text>Showcase of grid items</fudis-body-text></div>
@@ -76,7 +76,7 @@ class DialogExampleContentComponent {}
 			<fudis-body-text>Great choise, your power animal is {{ this.chosenPowerAnimal }}.</fudis-body-text>
 		</ng-container>
 		<ng-template #dialogWithForm>
-			<fudis-dialog [closeButtonLabel]="'Close dialog'" [size]="'s'">
+			<fudis-dialog [closeButtonLabel]="'Close dialog'" [size]="'sm'">
 				<fudis-heading fudisDialogTitle [tag]="'h2'">Power animal dialog</fudis-heading>
 				<fudis-dialog-content>
 					<ng-container *ngIf="exampleDialogFormGroup">

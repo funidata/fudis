@@ -10,18 +10,18 @@
 		max-width: $grid-width-value;
 
 		@if $width == xl or $width == xxl {
-			row-gap: spacing.$spacing-l;
-			column-gap: spacing.$spacing-l;
+			row-gap: spacing.$spacing-lg;
+			column-gap: spacing.$spacing-lg;
 		}
 
 		@if $width == md or $width == lg {
-			row-gap: spacing.$spacing-m;
-			column-gap: spacing.$spacing-m;
+			row-gap: spacing.$spacing-md;
+			column-gap: spacing.$spacing-md;
 		}
 
 		@if $width == sm or $width == xs {
-			row-gap: spacing.$spacing-s;
-			column-gap: spacing.$spacing-s;
+			row-gap: spacing.$spacing-sm;
+			column-gap: spacing.$spacing-sm;
 		}
 	} @else {
 		@error 'Unknown grid width of #{$width}. Accepted arguments are: "xxl", "xl", "lg", "md", "sm", "xs".';
@@ -29,6 +29,6 @@
 }
 
 @mixin grid-xs-margins() {
-	margin-right: spacing.$spacing-s;
-	margin-left: spacing.$spacing-s;
+	margin-right: spacing.$spacing-sm;
+	margin-left: spacing.$spacing-sm;
 }

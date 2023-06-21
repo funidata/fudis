@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IFudisRadioButtonOption } from 'projects/ngx-fudis/src/lib/types/forms';
+import { FudisRadioButtonOption } from 'projects/ngx-fudis/src/lib/types/forms';
 
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
@@ -10,7 +10,7 @@ import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 
-const getDefaultValue = (options: IFudisRadioButtonOption[]): string | boolean | undefined | null => {
+const getDefaultValue = (options: FudisRadioButtonOption[]): string | boolean | undefined | null => {
 	const checkedValue = options.find((item) => item.checked);
 	return checkedValue?.value;
 };
@@ -74,19 +74,19 @@ class RadioButtonGroupExampleComponent {
 	/**
 	 * Options for testing purposes
 	 */
-	fruitOptions: IFudisRadioButtonOption[] = [
+	fruitOptions: FudisRadioButtonOption[] = [
 		{ value: 'apple', viewValue: 'Apple', id: 'fruit-1', name: 'fruit' },
 		{ value: 'fair-trade-banana', viewValue: 'Fair Trade Banana', id: 'fruit-2', name: 'fruit', checked: true },
 		{ value: 'cherry', viewValue: 'Cherry', id: 'fruit-3', name: 'fruit' },
 	];
 
-	petOptions: IFudisRadioButtonOption[] = [
+	petOptions: FudisRadioButtonOption[] = [
 		{ value: 'platypus', viewValue: 'Platypus', id: 'pet-1', name: 'animal' },
 		{ value: 'otter', viewValue: 'Otter', id: 'pet-2', name: 'animal' },
 		{ value: 'capybara', viewValue: 'Capybara', id: 'pet-3', name: 'animal' },
 	];
 
-	booleanOptions: IFudisRadioButtonOption[] = [
+	booleanOptions: FudisRadioButtonOption[] = [
 		{ value: false, viewValue: 'False', id: 'boolean-1', name: 'booleans' },
 		{ value: true, viewValue: 'True', id: 'boolean-2', name: 'booleans' },
 	];

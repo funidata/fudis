@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { BodyTextComponent } from './body-text.component';
-import { BodyTextSize } from '../../../types/typography';
-import { Spacing } from '../../../types/spacing';
+import { FudisBodyText } from '../../../types/typography';
+import { FudisSpacing } from '../../../types/spacing';
 
 describe('BodyTextComponent', () => {
 	let component: BodyTextComponent;
@@ -30,26 +30,26 @@ describe('BodyTextComponent', () => {
 		expect(componentClasses).toEqual(classes.split(' ').sort());
 	}
 
-	function bodyTextSizes(size: BodyTextSize): void {
+	function bodyTextSizes(size: FudisBodyText): void {
 		component.size = size;
 		fixture.detectChanges();
 		assertBodyTextHasClasses(`fudis-body-text fudis-body-text__${size} fudis-mb-none`);
 	}
 
-	function marginBottomSizes(marginBottom: Spacing): void {
+	function marginBottomSizes(marginBottom: FudisSpacing): void {
 		component.marginBottom = marginBottom;
 
 		fixture.detectChanges();
-		assertBodyTextHasClasses(`fudis-body-text fudis-body-text__m-regular fudis-mb-${marginBottom}`);
+		assertBodyTextHasClasses(`fudis-body-text fudis-body-text__md-regular fudis-mb-${marginBottom}`);
 	}
 
 	describe('CSS classes', () => {
 		it('should change the class according to the given body text size', () => {
-			bodyTextSizes('l-regular');
-			bodyTextSizes('m-regular');
-			bodyTextSizes('s-regular');
-			bodyTextSizes('l-light');
-			bodyTextSizes('m-light');
+			bodyTextSizes('lg-regular');
+			bodyTextSizes('md-regular');
+			bodyTextSizes('sm-regular');
+			bodyTextSizes('lg-light');
+			bodyTextSizes('md-light');
 		});
 
 		it('should change the class according to the given margin bottom value', () => {

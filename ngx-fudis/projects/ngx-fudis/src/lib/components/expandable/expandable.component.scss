@@ -6,7 +6,7 @@
 @use '../../foundations/breakpoints/mixins.scss' as breakpoint;
 
 .fudis-expandable {
-	margin-bottom: spacing.$spacing-s;
+	margin-bottom: spacing.$spacing-sm;
 	border-top: 0;
 
 	&--collapsed {
@@ -74,13 +74,13 @@
 
 	&__content {
 		@include breakpoint.breakpoint('md') {
-			padding: spacing.$spacing-m;
+			padding: spacing.$spacing-md;
 			padding-left: spacing.$spacing-xl;
 		}
 
 		@include breakpoint.breakpoint-max('md') {
-			padding: spacing.$spacing-s;
-			padding-left: spacing.$spacing-m;
+			padding: spacing.$spacing-sm;
+			padding-left: spacing.$spacing-md;
 		}
 	}
 }

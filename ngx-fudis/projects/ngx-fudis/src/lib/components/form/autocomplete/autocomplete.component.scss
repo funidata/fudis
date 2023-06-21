@@ -6,18 +6,18 @@
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
 
 .fudis-autocomplete {
-	max-width: calc(23 * spacing.$spacing-s);
+	max-width: calc(23 * spacing.$spacing-sm);
 
-	&__l {
+	&__lg {
 		width: 100%;
 	}
 
-	&__m {
-		width: calc(14 * spacing.$spacing-s);
+	&__md {
+		width: calc(14 * spacing.$spacing-sm);
 	}
 
-	&__s {
-		max-width: calc(10 * spacing.$spacing-s);
+	&__sm {
+		max-width: calc(10 * spacing.$spacing-sm);
 	}
 
 	&__input-wrapper {
@@ -30,7 +30,7 @@
 		@include borders.border-radius('2px');
 
 		box-sizing: border-box;
-		padding: spacing.$spacing-xxs spacing.$spacing-s;
+		padding: spacing.$spacing-xxs spacing.$spacing-sm;
 		width: 100%;
 		height: spacing.$spacing-xl;
 

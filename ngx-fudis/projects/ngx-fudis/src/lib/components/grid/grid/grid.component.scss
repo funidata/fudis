@@ -48,7 +48,7 @@
 	&__margin {
 		&__top {
 			&__none {
-				margin-top: spacing.$spacing-zero;
+				margin-top: spacing.$spacing-none;
 			}
 
 			&__xxs {
@@ -60,15 +60,15 @@
 			}
 
 			&__sm {
-				margin-top: spacing.$spacing-s;
+				margin-top: spacing.$spacing-sm;
 			}
 
 			&__md {
-				margin-top: spacing.$spacing-m;
+				margin-top: spacing.$spacing-md;
 			}
 
 			&__lg {
-				margin-top: spacing.$spacing-l;
+				margin-top: spacing.$spacing-lg;
 			}
 
 			&__xl {
@@ -82,7 +82,7 @@
 
 		&__bottom {
 			&__none {
-				margin-bottom: spacing.$spacing-zero;
+				margin-bottom: spacing.$spacing-none;
 			}
 
 			&__xxs {
@@ -94,15 +94,15 @@
 			}
 
 			&__sm {
-				margin-bottom: spacing.$spacing-s;
+				margin-bottom: spacing.$spacing-sm;
 			}
 
 			&__md {
-				margin-bottom: spacing.$spacing-m;
+				margin-bottom: spacing.$spacing-md;
 			}
 
 			&__lg {
-				margin-bottom: spacing.$spacing-l;
+				margin-bottom: spacing.$spacing-lg;
 			}
 
 			&__xl {
@@ -131,18 +131,18 @@
 			}
 
 			&__sm {
-				margin-right: spacing.$spacing-s;
-				margin-left: spacing.$spacing-s;
+				margin-right: spacing.$spacing-sm;
+				margin-left: spacing.$spacing-sm;
 			}
 
 			&__md {
-				margin-right: spacing.$spacing-m;
-				margin-left: spacing.$spacing-m;
+				margin-right: spacing.$spacing-md;
+				margin-left: spacing.$spacing-md;
 			}
 
 			&__lg {
-				margin-right: spacing.$spacing-l;
-				margin-left: spacing.$spacing-l;
+				margin-right: spacing.$spacing-lg;
+				margin-left: spacing.$spacing-lg;
 			}
 
 			&__xl {
@@ -259,7 +259,7 @@
 
 	&__row-gap {
 		&__none {
-			row-gap: spacing.$spacing-zero;
+			row-gap: spacing.$spacing-none;
 		}
 
 		&__xxs {
@@ -271,15 +271,15 @@
 		}
 
 		&__sm {
-			row-gap: spacing.$spacing-s;
+			row-gap: spacing.$spacing-sm;
 		}
 
 		&__md {
-			row-gap: spacing.$spacing-m;
+			row-gap: spacing.$spacing-md;
 		}
 
 		&__lg {
-			row-gap: spacing.$spacing-l;
+			row-gap: spacing.$spacing-lg;
 		}
 
 		&__xl {
@@ -293,7 +293,7 @@
 
 	&__column-gap {
 		&__none {
-			column-gap: spacing.$spacing-zero;
+			column-gap: spacing.$spacing-none;
 		}
 
 		&__xxs {
@@ -305,15 +305,15 @@
 		}
 
 		&__sm {
-			column-gap: spacing.$spacing-s;
+			column-gap: spacing.$spacing-sm;
 		}
 
 		&__md {
-			column-gap: spacing.$spacing-m;
+			column-gap: spacing.$spacing-md;
 		}
 
 		&__lg {
-			column-gap: spacing.$spacing-l;
+			column-gap: spacing.$spacing-lg;
 		}
 
 		&__xl {
