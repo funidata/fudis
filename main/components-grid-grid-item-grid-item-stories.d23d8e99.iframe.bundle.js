@@ -15,13 +15,15 @@
 						margin-bottom: 2rem;
 					}
 				</style>
-				<fudis-body-text class="grid-refresh-text" [size]="'s-regular'">
+				<fudis-body-text class="grid-refresh-text" [size]="'sm-regular'">
 					&uarr; Click 'Remount' refresh button from the toolbar to refresh canvas.</fudis-body-text
 				>
 				${story}
 			`))]},Example=(args=>({props:args,template:html`<fudis-grid [columns]="4">
 		<fudis-grid-item [columns]="'stretch'">
-			<fudis-heading [tag]="'h1'" [size]="'l'">This grid demonstrates adjusting a single item in a grid.</fudis-heading>
+			<fudis-heading [tag]="'h1'" [size]="'lg'"
+				>This grid demonstrates adjusting a single item in a grid.</fudis-heading
+			>
 			<fudis-body-text>Too see alignX and alignY clearly, make sure the preview canvas is wide enough.</fudis-body-text>
 			<fudis-body-text
 				>If the canvas do not refresh when changing knobs, click the refresh button from top of Storybook's
@@ -41,7 +43,7 @@
 			>Normal grid item. With more content so effects of adjusting a single element can be seen better.</fudis-body-text
 		>
 	</fudis-grid>`})).bind({});Example.args={alignX:"stretch",alignY:"stretch",columns:"auto"},Example.argTypes={alignX:{control:{type:"radio"}},alignY:{control:{type:"radio"}},columns:{options:["stretch","auto",2,"2/4","2/-1"],control:{type:"radio"}}};const AlignX=args=>({props:args,template:html`<fudis-grid [columns]="3">
-		<fudis-heading [tag]="'h1'" [size]="'l'">This grid demonstrates attribute of 'alignX'</fudis-heading>
+		<fudis-heading [tag]="'h1'" [size]="'lg'">This grid demonstrates attribute of 'alignX'</fudis-heading>
 		<fudis-grid-item class="grid-item-highlight">
 			<fudis-body-text>alignX = 'stretch' (default)</fudis-body-text>
 		</fudis-grid-item>
@@ -64,7 +66,7 @@
 		>
 		<fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
 	</fudis-grid>`}),AlignY=args=>({props:args,template:html`<fudis-grid [columns]="2" [width]="'sm'">
-		<fudis-heading [tag]="'h1'" [size]="'l'">This grid demonstrates attribute of 'alignY'</fudis-heading>
+		<fudis-heading [tag]="'h1'" [size]="'lg'">This grid demonstrates attribute of 'alignY'</fudis-heading>
 		<fudis-grid-item class="grid-item-highlight">
 			<fudis-body-text>alignY = 'stretch' (default)</fudis-body-text>
 		</fudis-grid-item>
@@ -125,7 +127,9 @@
 			></fudis-grid-item
 		>
 	</fudis-grid>`}),alignXAndY=args=>({props:args,template:html`<fudis-grid [columns]="2" [width]="'sm'">
-		<fudis-heading [tag]="'h1'" [size]="'l'">This grid demonstrates combination of 'alignX' and 'alignY'</fudis-heading>
+		<fudis-heading [tag]="'h1'" [size]="'lg'"
+			>This grid demonstrates combination of 'alignX' and 'alignY'</fudis-heading
+		>
 		<fudis-grid-item class="grid-item-highlight">
 			<fudis-body-text>alignX = 'stretch' & alignY = 'stretch' (default)</fudis-body-text>
 		</fudis-grid-item>
@@ -150,7 +154,7 @@
 			>Normal grid item. With more content so effects of adjusting a single element can be seen better.</fudis-body-text
 		>
 	</fudis-grid>`}),columns=args=>({props:args,template:html`<fudis-grid [columns]="6">
-		<fudis-heading [tag]="'h1'" [size]="'l'"
+		<fudis-heading [tag]="'h1'" [size]="'lg'"
 			>This grid demonstrates 'columns' attribute. Parent grid has six columns.
 		</fudis-heading>
 		<fudis-grid-item class="grid-item-highlight" [columns]="'stretch'">
@@ -179,7 +183,7 @@
 		>
 	</fudis-grid>`}),responsiveColumns=()=>({props:{exampleOne:{xs:"stretch",md:3,lg:1},exampleOneString:"{'xs: 'stretch', md: 3, lg: 'auto'}",exampleTwo:{default:"4/-1",md:2},exampleTwoString:"{ default: '4/-1', md: 2 }",exampleThree:{xs:"2/-1",md:3,lg:"2/-1"},exampleThreeString:"{ xs: '2/-1', md: 3, lg: '2/-1' }"},template:html`<fudis-grid [columns]="6">
 		<fudis-grid-item [columns]="'stretch'">
-			<fudis-heading [tag]="'h1'" [size]="'l'"
+			<fudis-heading [tag]="'h1'" [size]="'lg'"
 				>This grid demonstrates responsive 'columns' attribute for a Grid Item. Parent grid has six columns.
 			</fudis-heading>
 			<fudis-body-text
@@ -202,4 +206,4 @@
 			><fudis-body-text>columns="{{exampleThreeString}}"</fudis-body-text></fudis-grid-item
 		>
 	</fudis-grid> `});AlignX.parameters={controls:{disable:!0}},AlignY.parameters={controls:{disable:!0}},alignXAndY.parameters={controls:{disable:!0}},columns.parameters={controls:{disable:!0}},responsiveColumns.parameters={controls:{disable:!0}}}}]);
-//# sourceMappingURL=components-grid-grid-item-grid-item-stories.63bf0fac.iframe.bundle.js.map
+//# sourceMappingURL=components-grid-grid-item-grid-item-stories.d23d8e99.iframe.bundle.js.map
