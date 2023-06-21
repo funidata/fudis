@@ -31,6 +31,8 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 
 	private _gridDefaultValues: Signal<GridColumnsResponsive | null>;
 
+	private _hasInputColumns: boolean = false;
+
 	/**
 	 * Setting of columns for the grid. Input will be converted to native CSS grid grid-template-columns values
 	 * E. g. as native string: [columns]="'1fr 1fr'" or [columns]="'1fr 2fr'"
@@ -58,6 +60,8 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		} else {
 			this._columns = getGridBreakpointDataArray(value);
 		}
+
+		this._hasInputColumns = true;
 	}
 
 	constructor(private _gridElement: ElementRef, gridService: GridService) {
@@ -115,14 +119,14 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	}
 
 	ngOnInit(): void {
-		if (!this.columns && this._gridDefaultValues()) {
+		if (!this._hasInputColumns && this._gridDefaultValues()) {
 			this._columns = getGridBreakpointDataArray(this._gridDefaultValues()!);
 		}
 		this.applyGridCss();
 	}
 
 	ngOnChanges(): void {
-		if (!this.columns && this._gridDefaultValues()) {
+		if (!this._hasInputColumns && this._gridDefaultValues()) {
 			this._columns = getGridBreakpointDataArray(this._gridDefaultValues()!);
 		}
 		this.applyGridCss();

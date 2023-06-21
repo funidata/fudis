@@ -1,4 +1,3 @@
-/* eslint-disable max-classes-per-file */
 import { Directive, Input, TemplateRef } from '@angular/core';
 
 /**

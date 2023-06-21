@@ -7,7 +7,7 @@ import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fi
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 
 @Component({
-	selector: 'fudis-radio-button-group[options][id][title]',
+	selector: 'fudis-radio-button-group',
 	templateUrl: './radio-button-group.component.html',
 	styleUrls: ['./radio-button-group.component.scss'],
 	encapsulation: ViewEncapsulation.None,
@@ -18,12 +18,12 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	/*
 	 * FormControl for Radio Button group
 	 */
-	@Input() control: FormControl<boolean | null>;
+	@Input({ required: true }) control: FormControl<boolean | null>;
 
 	/*
 	 * Array of options for group of radio buttons
 	 */
-	@Input() options: FudisRadioButtonOption[];
+	@Input({ required: true }) options: FudisRadioButtonOption[];
 
 	/**
 	 * Error messages shown when form control validators are invalid

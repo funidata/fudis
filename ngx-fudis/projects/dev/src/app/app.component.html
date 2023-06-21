@@ -1,5 +1,5 @@
 <ng-container *transloco="let t">
-	<fudis-grid [marginTop]="'md'" [marginBottom]="'md'">
+	<fudis-grid [marginTop]="'md'" [marginBottom]="'md'" [marginSides]="'responsive'">
 		<fudis-heading tag="h1" size="xl">Welcome to Fudis sandbox </fudis-heading>
 		<fudis-notification variant="danger" ariaVariantText="Varoitus!"
 			>Whoops! Here is danger notification.</fudis-notification
@@ -47,8 +47,8 @@
 					[errorSummaryScreenReaderHelpText]="'Attention'"
 					[titleTag]="'h2'">
 					<ng-template fudisContent type="form">
-						<fudis-grid>
-							<fudis-fieldset [title]="'FieldSet alkaa tästä'">
+						<fudis-fieldset [title]="'FieldSet alkaa tästä'">
+							<ng-template fudisContent type="fieldset">
 								<fudis-text-input
 									[label]="t('label')"
 									[id]="'uniikki-idjoo'"
@@ -73,8 +73,8 @@
 									[id]="'datepicker-123'"
 									[label]="'Select some date'"
 									[control]="testFormGroup.controls['date']" />
-							</fudis-fieldset>
-						</fudis-grid>
+							</ng-template>
+						</fudis-fieldset>
 					</ng-template>
 				</fudis-form>
 

@@ -1,17 +1,18 @@
 import { Component, ContentChild, Input, OnChanges, OnInit } from '@angular/core';
 import { IdService } from '../../utilities/id-service.service';
-import { FudisHeadingTag, FudisHeadingSize, FudisTooltipPosition } from '../../types/typography';
+import { FudisHeadingTag, FudisHeadingSize } from '../../types/typography';
 import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { GridWidth, GridAlign, GridMarginSide } from '../../types/grid';
 import { FudisSpacing } from '../../types/spacing';
+import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 
 @Component({
 	selector: 'fudis-section',
 	templateUrl: './section.component.html',
 	styleUrls: ['./section.component.scss'],
 })
-export class SectionComponent implements OnInit, OnChanges {
+export class SectionComponent extends TooltipApiDirective implements OnInit, OnChanges {
 	@ContentChild(NotificationsDirective) notifications: NotificationsDirective | null;
 
 	@ContentChild(ContentDirective) content: ContentDirective | null;
@@ -23,21 +24,6 @@ export class SectionComponent implements OnInit, OnChanges {
 	@Input() titleTag: FudisHeadingTag = 'h2';
 
 	@Input() titleSize: FudisHeadingSize = 'lg';
-
-	/**
-	 * Text placed on tooltip
-	 */
-	@Input() tooltip: string;
-
-	/**
-	 * tooltipToggle set on true makes tooltip appear when toggled. Default behavior is triggered on focus. TooltipToggle feature is prefered to be used with icons.
-	 */
-	@Input() tooltipToggle = false;
-
-	/**
-	 * Sets the position of the tooltip on the parent element. Position options are left, right, above and below the parent element.
-	 */
-	@Input() tooltipPosition: FudisTooltipPosition = 'below';
 
 	/**
 	 * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
@@ -75,7 +61,9 @@ export class SectionComponent implements OnInit, OnChanges {
 	 */
 	@Input() classes: string[];
 
-	constructor(private _idService: IdService) {}
+	constructor(private _idService: IdService) {
+		super();
+	}
 
 	protected _headingId: string;
 
