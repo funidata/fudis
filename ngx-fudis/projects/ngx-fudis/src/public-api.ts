@@ -5,13 +5,22 @@
 
 export * from './lib/ngx-fudis.module';
 
-export { ActionsDirective } from './lib/directives/content-projection/actions/actions.directive';
+export {
+	ExpandableActionsDirective,
+	FieldsetActionsDirective,
+	FormActionsDirective,
+} from './lib/directives/content-projection/actions/actions.directive';
 export { AutocompleteComponent } from './lib/components/form/autocomplete/autocomplete.component';
 export { BadgeComponent } from './lib/components/badge/badge.component';
 export { BodyTextComponent } from './lib/components/typography/body-text/body-text.component';
 export { ButtonComponent } from './lib/components/button/button.component';
 export { CheckboxComponent } from './lib/components/form/checkbox/checkbox.component';
-export { ContentDirective } from './lib/directives/content-projection/content/content.directive';
+export {
+	ExpandableContentDirective,
+	FieldsetContentDirective,
+	FormContentDirective,
+	NotificationContentDirective,
+} from './lib/directives/content-projection/content/content.directive';
 export { DatepickerComponent } from './lib/components/form/datepicker/datepicker.component';
 export {
 	DialogActionsDirective,
@@ -40,7 +49,7 @@ export { GridDirective } from './lib/directives/grid/grid/grid.directive';
 export { GridItemDirective } from './lib/directives/grid/grid-item/grid-item.directive';
 export { GridService } from './lib/directives/grid/grid-service/grid.service';
 export { GuidanceComponent } from './lib/components/form/guidance/guidance.component';
-export { HeaderDirective } from './lib/directives/content-projection/header/header.directive';
+export { FormHeaderDirective } from './lib/directives/content-projection/header/header.directive';
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
 export { IconComponent } from './lib/components/icon/icon.component';
 export { LinkComponent } from './lib/components/link/link.component';

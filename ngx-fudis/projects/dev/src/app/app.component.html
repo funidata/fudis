@@ -35,45 +35,47 @@
 		</fudis-grid>
 
 		<fudis-expandable [title]="'Form with some transloco'" [collapsed]="false">
-			<ng-template fudisActions>
+			<ng-template fudisExpandableActions>
 				<fudis-button (handleClick)="changeLanguage()" [label]="t('change_language')"></fudis-button>
 				<fudis-button [label]="'Submit!'" (handleClick)="clickSubmit()"></fudis-button>
 			</ng-template>
-			<ng-template fudisContent>
+			<ng-template fudisExpandableContent>
 				<fudis-form
 					[errorSummaryVisible]="errorSummaryVisible"
 					[title]="'Form title here hello'"
 					[errorSummaryHelpText]="'There were some errors'"
 					[errorSummaryScreenReaderHelpText]="'Attention'"
 					[titleTag]="'h2'">
-					<fudis-grid>
-						<fudis-fieldset [legend]="'FieldSet alkaa tästä'">
-							<fudis-text-input
-								[label]="t('label')"
-								[id]="'uniikki-idjoo'"
-								[helpText]="t('helpText')"
-								[errorMsg]="{ required: t('error_required') }"
-								[requiredText]="t('required')"
-								[control]="testFormGroup.controls['textInput']"></fudis-text-input>
-							<fudis-radio-button-group
-								[requiredText]="t('required')"
-								[id]="'truth-selection'"
-								[legend]="t('chooseTruth')"
-								[helpText]="t('chooseTruthHelp')"
-								[errorMsg]="{ required: t('chooseTruthError') }"
-								[control]="testFormGroup.controls['truth']"
-								[options]="radioButtonOptions"></fudis-radio-button-group>
-							<fudis-dropdown
-								[id]="'dropdown-id-123'"
-								[label]="'Some dropdown'"
-								[options]="dropdownOptions"
-								[control]="testFormGroup.controls['dropdown']"></fudis-dropdown>
-							<fudis-datepicker
-								[id]="'datepicker-123'"
-								[label]="'Select some date'"
-								[control]="testFormGroup.controls['date']" />
-						</fudis-fieldset>
-					</fudis-grid>
+					<ng-template fudisFormContent>
+						<fudis-grid>
+							<fudis-fieldset [legend]="'FieldSet alkaa tästä'">
+								<fudis-text-input
+									[label]="t('label')"
+									[id]="'uniikki-idjoo'"
+									[helpText]="t('helpText')"
+									[errorMsg]="{ required: t('error_required') }"
+									[requiredText]="t('required')"
+									[control]="testFormGroup.controls['textInput']"></fudis-text-input>
+								<fudis-radio-button-group
+									[requiredText]="t('required')"
+									[id]="'truth-selection'"
+									[legend]="t('chooseTruth')"
+									[helpText]="t('chooseTruthHelp')"
+									[errorMsg]="{ required: t('chooseTruthError') }"
+									[control]="testFormGroup.controls['truth']"
+									[options]="radioButtonOptions"></fudis-radio-button-group>
+								<fudis-dropdown
+									[id]="'dropdown-id-123'"
+									[label]="'Some dropdown'"
+									[options]="dropdownOptions"
+									[control]="testFormGroup.controls['dropdown']"></fudis-dropdown>
+								<fudis-datepicker
+									[id]="'datepicker-123'"
+									[label]="'Select some date'"
+									[control]="testFormGroup.controls['date']" />
+							</fudis-fieldset>
+						</fudis-grid>
+					</ng-template>
 				</fudis-form>
 
 				<fudis-body-text *ngIf="showSuccessBodyText">It seems everything is okay!</fudis-body-text>
@@ -81,13 +83,13 @@
 		</fudis-expandable>
 
 		<fudis-expandable [title]="'Description list'">
-			<ng-template fudisContent>
+			<ng-template fudisExpandableContent>
 				<fudis-description-list [data]="testData"></fudis-description-list>
 			</ng-template>
 		</fudis-expandable>
 
 		<fudis-expandable [title]="'Grid stuff'">
-			<ng-template fudisContent>
+			<ng-template fudisExpandableContent>
 				<fudis-heading [tag]="'h3'" [size]="'xl'">Väliotsikko</fudis-heading>
 				<fudis-grid>
 					<fudis-body-text>Showcase of grid items</fudis-body-text>
