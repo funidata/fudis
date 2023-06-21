@@ -18,7 +18,7 @@ describe('ErrorMessageComponent', () => {
 		fixture = TestBed.createComponent(ErrorMessageComponent);
 		component = fixture.componentInstance;
 		component.focusId = 'some-input-id';
-		component.inputLabel = 'We have some label as well';
+		component.label = 'We have some label as well';
 		component.message = 'And error message to display and send to service!';
 		component.type = 'required';
 		fixture.detectChanges();

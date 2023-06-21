@@ -44,6 +44,7 @@ export { HeaderDirective, HeadingDirective } from './lib/directives/content-proj
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
 export { IconComponent } from './lib/components/icon/icon.component';
 export { LinkComponent } from './lib/components/link/link.component';
+export { NotificationsDirective } from './lib/directives/content-projection/notifications/notifications.directive';
 export { NotificationComponent } from './lib/components/notification/notification.component';
 
 export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';

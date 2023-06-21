@@ -5,12 +5,18 @@
 	@include utilities.box-reset;
 
 	&__header {
-		display: flex;
-		align-items: center;
-		margin-bottom: spacing.$spacing-xs;
+		&__container {
+			display: flex;
+			align-items: center;
+			margin-bottom: spacing.$spacing-xs;
 
-		&__button {
-			margin-left: spacing.$spacing-xs;
+			&__button {
+				margin-left: spacing.$spacing-xs;
+			}
 		}
+	}
+
+	&__notifications {
+		margin-bottom: spacing.$spacing-xs;
 	}
 }

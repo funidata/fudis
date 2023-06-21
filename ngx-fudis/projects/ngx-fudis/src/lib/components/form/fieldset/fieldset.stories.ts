@@ -16,80 +16,93 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 @Component({
 	selector: 'example-fieldset',
 	template: `
-		<fudis-fieldset [title]="title" [id]="fieldsetId" [helpText]="helpText" [tooltip]="'Some additional information'">
+		<fudis-fieldset
+			[width]="'md'"
+			[title]="title"
+			[id]="fieldsetId"
+			[helpText]="helpText"
+			[marginSides]="'responsive'"
+			[tooltip]="'Some additional information'">
 			<ng-template fudisActions type="fieldset">
 				<fudis-button [variant]="'tertiary'" [icon]="'plus'" [label]="'Some action'" />
 			</ng-template>
-			<fudis-grid [columns]="{ lg: 2 }" [width]="'md'">
-				<fudis-input-with-language-options
-					[missingLanguage]="'Missing'"
-					[id]="'unique-input-1'"
-					[options]="languageOptions"
-					[languageLabel]="'Language'"
-					[formGroup]="fieldsetExample.controls['name']"
-					[label]="labelName"
-					[helpText]="'Some name would be nice. Provide course name in at least one language.'"
-					[groupErrorMsg]="errorName"
-					[requiredText]="requiredText"></fudis-input-with-language-options>
-				<fudis-input-with-language-options
-					[variant]="'text-area'"
-					[missingLanguage]="'Missing'"
-					[languageLabel]="'Language'"
-					[id]="'unique-input-2'"
-					[options]="languageOptions"
-					[formGroup]="fieldsetExample.controls['description']"
-					[label]="labelDescription"
-					[helpText]="'So that students know what they are getting into. Provide description in all languages.'"
-					[groupErrorMsg]="errorDescription"
-					[requiredText]="requiredText"></fudis-input-with-language-options>
-				<fudis-text-input
-					[id]="'unique-input-3'"
-					[control]="fieldsetExample.controls['teacher']"
-					[label]="labelTeacher"
-					[helpText]="'Someone has to be responsible for this.'"
-					[errorMsg]="errorTeacher"
-					[requiredText]="requiredText"></fudis-text-input>
-				<fudis-text-input
-					[id]="'unique-input-4'"
-					[helpText]="inputHelpText"
-					[control]="fieldsetExample.controls['email']"
-					[label]="labelEmail"
-					[helpText]="'So that students can ask for more time on their homework.'"
-					[errorMsg]="errorEmail"
-					[requiredText]="requiredText"></fudis-text-input>
+			<ng-template fudisNotifications type="fieldset"
+				><fudis-notification>This is notification</fudis-notification></ng-template
+			>
+			<ng-template fudisContent type="fieldset">
+				<fudis-grid [columns]="{ md: 2 }">
+					<fudis-input-with-language-options
+						[missingLanguage]="'Missing'"
+						[id]="'unique-input-1'"
+						[options]="languageOptions"
+						[languageLabel]="'Language'"
+						[formGroup]="fieldsetExample.controls['name']"
+						[label]="labelName"
+						[helpText]="'Some name would be nice. Provide course name in at least one language.'"
+						[groupErrorMsg]="errorName"
+						[requiredText]="requiredText"></fudis-input-with-language-options>
+					<fudis-input-with-language-options
+						[variant]="'text-area'"
+						[missingLanguage]="'Missing'"
+						[languageLabel]="'Language'"
+						[id]="'unique-input-2'"
+						[options]="languageOptions"
+						[formGroup]="fieldsetExample.controls['description']"
+						[label]="labelDescription"
+						[helpText]="'So that students know what they are getting into. Provide description in all languages.'"
+						[groupErrorMsg]="errorDescription"
+						[requiredText]="requiredText"></fudis-input-with-language-options>
+					<fudis-text-input
+						[id]="'unique-input-3'"
+						[control]="fieldsetExample.controls['teacher']"
+						[label]="labelTeacher"
+						[helpText]="'Someone has to be responsible for this.'"
+						[errorMsg]="errorTeacher"
+						[requiredText]="requiredText"></fudis-text-input>
+					<fudis-text-input
+						[id]="'unique-input-4'"
+						[helpText]="inputHelpText"
+						[control]="fieldsetExample.controls['email']"
+						[label]="labelEmail"
+						[helpText]="'So that students can ask for more time on their homework.'"
+						[errorMsg]="errorEmail"
+						[requiredText]="requiredText"></fudis-text-input>
 
-				<fudis-radio-button-group
-					[requiredText]="requiredText"
-					[title]="labelCourseType"
-					[id]="'radio-button-group-1'"
-					[options]="courseTypeOptions"
-					[control]="fieldsetExample.controls['courseType']"
-					[errorMsg]="errorCourseType"></fudis-radio-button-group>
-				<fudis-grid [columns]="'1fr 1fr'">
-					<fudis-datepicker
-						[label]="labelStartDate"
-						[id]="'date-picker-1'"
-						[size]="'s'"
+					<fudis-radio-button-group
 						[requiredText]="requiredText"
-						[helpText]="'You have to start from somewhere'"
-						[errorMsg]="errorStartdate"
-						[control]="fieldsetExample.controls['startDate']"
-						[minDate]="minDate"
-						[maxDate]="fieldsetExample.controls['endDate'].value ? fieldsetExample.controls['endDate'].value : maxDate">
-					</fudis-datepicker>
-					<fudis-datepicker
-						[label]="labelEndDate"
-						[id]="'date-picker-2'"
-						[size]="'s'"
-						[requiredText]="requiredText"
-						[helpText]="'You have to end it to something'"
-						[errorMsg]="errorEnddate"
-						[control]="fieldsetExample.controls['endDate']"
-						[disabled]="!fieldsetExample.controls['startDate'].value && !fieldsetExample.controls['startDate'].valid"
-						[minDate]="fieldsetExample.controls['startDate'].value">
-					</fudis-datepicker>
+						[title]="labelCourseType"
+						[id]="'radio-button-group-1'"
+						[options]="courseTypeOptions"
+						[control]="fieldsetExample.controls['courseType']"
+						[errorMsg]="errorCourseType"></fudis-radio-button-group>
+					<fudis-grid [columns]="'1fr 1fr'">
+						<fudis-datepicker
+							[label]="labelStartDate"
+							[id]="'date-picker-1'"
+							[size]="'s'"
+							[requiredText]="requiredText"
+							[helpText]="'You have to start from somewhere'"
+							[errorMsg]="errorStartdate"
+							[control]="fieldsetExample.controls['startDate']"
+							[minDate]="minDate"
+							[maxDate]="
+								fieldsetExample.controls['endDate'].value ? fieldsetExample.controls['endDate'].value : maxDate
+							">
+						</fudis-datepicker>
+						<fudis-datepicker
+							[label]="labelEndDate"
+							[id]="'date-picker-2'"
+							[size]="'s'"
+							[requiredText]="requiredText"
+							[helpText]="'You have to end it to something'"
+							[errorMsg]="errorEnddate"
+							[control]="fieldsetExample.controls['endDate']"
+							[disabled]="!fieldsetExample.controls['startDate'].value && !fieldsetExample.controls['startDate'].valid"
+							[minDate]="fieldsetExample.controls['startDate'].value">
+						</fudis-datepicker>
+					</fudis-grid>
 				</fudis-grid>
-			</fudis-grid>
+			</ng-template>
 		</fudis-fieldset>
 	`,
 })

@@ -69,6 +69,7 @@ import { TextInputComponent } from './components/form/text-input/text-input.comp
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
+import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
 
 @NgModule({
 	/*
@@ -122,6 +123,7 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		TextSpacingComponent,
 		TextAreaComponent,
 		TooltipDirective,
+		NotificationsDirective,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
@@ -184,6 +186,7 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		IconComponent,
 		LinkComponent,
 		NotificationComponent,
+		NotificationsDirective,
 		RadioButtonGroupComponent,
 		SectionComponent,
 		TextAreaComponent,

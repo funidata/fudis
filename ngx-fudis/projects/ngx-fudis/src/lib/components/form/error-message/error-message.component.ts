@@ -28,7 +28,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	/**
 	 * Label text of input this message is related to. Sent to Error Summary service.
 	 */
-	@Input({ required: true }) inputLabel: string;
+	@Input({ required: true }) label: string;
 
 	/**
 	 * If error is visible or not.
@@ -39,6 +39,11 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	 * Error type from different keys in e. g. control.errors such as 'required' and 'minlength'
 	 */
 	@Input({ required: true }) type: string;
+
+	/**
+	 * Visual variant of error message
+	 */
+	@Input() variant: 'body-text' | 'form-error' = 'form-error';
 
 	private _errorSent: boolean = false;
 
@@ -59,7 +64,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	createError(): void {
 		if (this.message !== undefined) {
 			this._currentMessage = this.message;
-			this._currentLabel = this.inputLabel;
+			this._currentLabel = this.label;
 
 			const newError: TFudisFormErrorSummaryItem = {
 				id: this.focusId,
@@ -74,7 +79,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	ngOnChanges(): void {
-		if (this.message !== this._currentMessage || this.inputLabel !== this._currentLabel) {
+		if (this.message !== this._currentMessage || this.label !== this._currentLabel) {
 			this.createError();
 		}
 	}

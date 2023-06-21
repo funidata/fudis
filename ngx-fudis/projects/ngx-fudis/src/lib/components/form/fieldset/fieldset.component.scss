@@ -20,11 +20,15 @@
 	}
 
 	&__legend {
+		box-sizing: border-box;
 		display: flex;
+		flex-direction: column;
 		padding: 0;
 		width: 100%;
 
-		&__align {
+		&__container {
+			display: flex;
+
 			&__row-start {
 				flex-wrap: wrap;
 			}
@@ -63,6 +67,10 @@
 				/* stylelint-disable-next-line property-disallowed-list */
 				font-size: typographyTokens.$body-text-s-font-size;
 			}
+		}
+
+		&__notifications {
+			margin-bottom: spacing.$spacing-xs;
 		}
 
 		&__help-text {

@@ -9,5 +9,5 @@ import { Directive, Input, TemplateRef } from '@angular/core';
 export class ContentDirective {
 	constructor(public templateRef: TemplateRef<unknown>) {}
 
-	@Input({ required: true }) type: 'expandable' | 'notification' | 'form' | 'fieldset';
+	@Input({ required: true }) type: 'expandable' | 'notification' | 'form' | 'fieldset' | 'section';
 }

@@ -13,7 +13,7 @@
 								[visible]="singleControl.value.touched"
 								[type]="error.key"
 								[controlName]="singleControl.key"
-								[inputLabel]="inputLabel"
+								[label]="inputLabel"
 								[message]="groupErrorMsg?.[singleControl.key]?.[asErrorkey(error?.key)]"></fudis-error-message>
 						</ng-container>
 					</ng-container>
@@ -26,7 +26,7 @@
 						[visible]="formGroup.touched"
 						[focusId]="for"
 						[type]="error.key"
-						[inputLabel]="inputLabel"
+						[label]="inputLabel"
 						[message]="groupErrorMsg?.[error.key]"></fudis-error-message>
 				</ng-container>
 			</ng-container>
@@ -36,7 +36,7 @@
 					<fudis-error-message
 						[visible]="control.touched"
 						[focusId]="for"
-						[inputLabel]="inputLabel"
+						[label]="inputLabel"
 						[type]="error.key"
 						[message]="errorMsg?.[asErrorkey(error.key)]"></fudis-error-message>
 				</ng-container>
