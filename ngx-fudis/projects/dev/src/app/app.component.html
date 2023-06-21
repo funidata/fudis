@@ -35,18 +35,18 @@
 		</fudis-grid>
 
 		<fudis-expandable [title]="'Form with some transloco'" [collapsed]="false">
-			<ng-template fudisExpandableActions>
+			<ng-template fudisActions type="expandable">
 				<fudis-button (handleClick)="changeLanguage()" [label]="t('change_language')"></fudis-button>
 				<fudis-button [label]="'Submit!'" (handleClick)="clickSubmit()"></fudis-button>
 			</ng-template>
-			<ng-template fudisExpandableContent>
+			<ng-template fudisContent type="expandable">
 				<fudis-form
 					[errorSummaryVisible]="errorSummaryVisible"
 					[title]="'Form title here hello'"
 					[errorSummaryHelpText]="'There were some errors'"
 					[errorSummaryScreenReaderHelpText]="'Attention'"
 					[titleTag]="'h2'">
-					<ng-template fudisFormContent>
+					<ng-template fudisContent type="form">
 						<fudis-grid>
 							<fudis-fieldset [legend]="'FieldSet alkaa tästä'">
 								<fudis-text-input
@@ -83,13 +83,13 @@
 		</fudis-expandable>
 
 		<fudis-expandable [title]="'Description list'">
-			<ng-template fudisExpandableContent>
+			<ng-template fudisContent type="expandable">
 				<fudis-description-list [data]="testData"></fudis-description-list>
 			</ng-template>
 		</fudis-expandable>
 
 		<fudis-expandable [title]="'Grid stuff'">
-			<ng-template fudisExpandableContent>
+			<ng-template fudisContent type="expandable">
 				<fudis-heading [tag]="'h3'" [size]="'xl'">Väliotsikko</fudis-heading>
 				<fudis-grid>
 					<fudis-body-text>Showcase of grid items</fudis-body-text>

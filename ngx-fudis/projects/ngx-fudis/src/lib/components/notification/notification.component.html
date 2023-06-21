@@ -14,7 +14,7 @@
 				[color]="'default'"></fudis-link>
 		</fudis-body-text>
 	</ng-container>
-	<ng-container *ngIf="customContent">
+	<ng-container *ngIf="customContent && customContent.type === 'notification'">
 		<ng-container *ngTemplateOutlet="customContent!.templateRef"></ng-container>
 	</ng-container>
 </div>

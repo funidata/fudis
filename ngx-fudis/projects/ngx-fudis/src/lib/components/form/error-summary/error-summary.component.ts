@@ -66,7 +66,7 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 		if (this.focusTarget && this._visibleErrorList.length > 0) {
 			this._numberOfFocusTries = 0;
 			(this.focusTarget.nativeElement as HTMLDivElement).focus();
-		} else if (this._numberOfFocusTries < 50) {
+		} else if (this._numberOfFocusTries < 100) {
 			setTimeout(() => {
 				this._numberOfFocusTries += 1;
 				this.focusToErrorSummary();

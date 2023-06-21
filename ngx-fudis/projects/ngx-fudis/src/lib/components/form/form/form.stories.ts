@@ -27,28 +27,31 @@ import { FormComponent } from './form.component';
 			[errorSummaryScreenReaderHelpText]="errorSummaryScreenReaderHelpText"
 			[errorSummaryHelpText]="errorSummaryHelpText"
 			[errorSummaryVisible]="errorSummaryVisible">
+			<ng-template fudisHeading>
+				<fudis-heading [marginBottom]="'xs'" [tag]="titleTag">{{ title }}</fudis-heading></ng-template
+			>
 			<ng-template fudisHeader>
 				<fudis-description-list [columns]="1" [variant]="'compact'" [data]="formHeaderDl" />
 			</ng-template>
-			<ng-template fudisFormActions>
+			<ng-template fudisActions type="form">
 				<fudis-button [label]="'Previous step'" [icon]="'back'" [variant]="'tertiary'" />
 				<fudis-button [label]="'Open menu'" [icon]="'three-dots'" [labelHidden]="true" [variant]="'secondary'" />
 				<fudis-button [variant]="'secondary'" [label]="'Save draft'" />
 				<fudis-button [label]="'Submit'" (handleClick)="submitForm()" />
 			</ng-template>
-			<ng-template fudisFormContent>
+			<ng-template fudisContent type="form">
 				<fudis-section [title]="'Section title here'">
 					<fudis-expandable
 						(collapsedChange)="handleCollapsedOutput($event)"
 						[title]="'Some title here'"
 						[collapsed]="_collapsed">
-						<ng-template fudisExpandableContent>
+						<ng-template fudisContent type="expandable">
 							<fudis-fieldset
 								[legend]="legend"
 								[id]="fieldsetId"
 								[helpText]="helpText"
 								[tooltip]="'Quite many fields are required.'">
-								<ng-template fudisFieldsetActions [align]="'bottom'">
+								<ng-template fudisActions type="fieldset" [align]="'bottom'">
 									<fudis-button [label]="'Action'" />
 									<fudis-button [label]="'Action'" />
 									<fudis-button [label]="'Action'" />

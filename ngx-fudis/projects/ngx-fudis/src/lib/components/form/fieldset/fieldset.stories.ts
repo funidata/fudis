@@ -22,7 +22,7 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 				[id]="fieldsetId"
 				[helpText]="helpText"
 				[tooltip]="'Some additional information'">
-				<ng-template fudisFieldsetActions>
+				<ng-template fudisActions type="fieldset">
 					<fudis-button [label]="'Some action'" />
 					<fudis-button [label]="'Some action'" />
 					<fudis-button [label]="'Some action'" />

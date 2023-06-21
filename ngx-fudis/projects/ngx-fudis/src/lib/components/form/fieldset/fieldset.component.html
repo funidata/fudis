@@ -25,7 +25,7 @@
 				<span class="fudis-fieldset__legend__help-text">{{ helpText }}</span>
 			</ng-container>
 		</div>
-		<ng-container *ngIf="headerActions">
+		<ng-container *ngIf="headerActions && headerActions.type === 'fieldset'">
 			<div class="fudis-fieldset__legend__actions">
 				<ng-container *ngTemplateOutlet="headerActions!.templateRef" />
 			</div>

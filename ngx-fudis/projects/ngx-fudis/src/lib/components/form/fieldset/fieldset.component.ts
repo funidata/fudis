@@ -1,7 +1,7 @@
 import { Component, ContentChild, ViewEncapsulation } from '@angular/core';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
-import { FieldsetActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
+import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
 
 @Component({
 	selector: 'fudis-fieldset',
@@ -10,5 +10,5 @@ import { FieldsetActionsDirective } from '../../../directives/content-projection
 	encapsulation: ViewEncapsulation.None,
 })
 export class FieldSetComponent extends FieldSetBaseDirective {
-	@ContentChild(FieldsetActionsDirective) headerActions: FieldsetActionsDirective;
+	@ContentChild(ActionsDirective) headerActions: ActionsDirective;
 }

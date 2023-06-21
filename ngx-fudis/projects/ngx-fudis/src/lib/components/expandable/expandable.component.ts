@@ -1,7 +1,7 @@
 import { Component, ContentChild, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { ExpandableType } from '../../types/expandables';
-import { ExpandableContentDirective } from '../../directives/content-projection/content/content.directive';
-import { ExpandableActionsDirective } from '../../directives/content-projection/actions/actions.directive';
+import { ContentDirective } from '../../directives/content-projection/content/content.directive';
+import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { IdService } from '../../utilities/id-service.service';
 
 /**
@@ -9,10 +9,10 @@ import { IdService } from '../../utilities/id-service.service';
  *
  * ```
  * <fudis-expandable>
- *  <ng-template fudisExpandableActions>
+ *  <ng-template fudisActions type="expandable">
  *    <fudis-button />
  *  </ng-template>
- * 	<ng-template fudisExpandableContent>
+ * 	<ng-template fudisContent type="expandable">
  * 		<your-body-template />
  * 	</ng-template>
  * </fudis-expandable>
@@ -26,9 +26,9 @@ import { IdService } from '../../utilities/id-service.service';
 	encapsulation: ViewEncapsulation.None,
 })
 export class ExpandableComponent {
-	@ContentChild(ExpandableContentDirective) content: ExpandableContentDirective;
+	@ContentChild(ContentDirective) content: ContentDirective;
 
-	@ContentChild(ExpandableActionsDirective) headerButtons: ExpandableActionsDirective;
+	@ContentChild(ActionsDirective) headerButtons: ActionsDirective;
 
 	/**
 	 * Tag is for semantic support for screen readers, this does not change the appearance of the expandable

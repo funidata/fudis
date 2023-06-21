@@ -16,7 +16,12 @@
 	<div [id]="_id + '_header'" class="fudis-form__header">
 		<div class="fudis-form__header__main">
 			<div class="fudis-form__header__title">
-				<fudis-heading [marginBottom]="'xs'" [size]="titleSize" [tag]="titleTag">{{ title }}</fudis-heading>
+				<ng-container *ngIf="headingContent">
+					<ng-container *ngTemplateOutlet="headingContent!.templateRef" />
+				</ng-container>
+				<fudis-heading *ngIf="!headingContent && title" [marginBottom]="'xs'" [size]="titleSize" [tag]="titleTag">{{
+					title
+				}}</fudis-heading>
 				<ng-container *ngIf="helpText">
 					<fudis-body-text [marginBottom]="'xs'">{{ helpText }}</fudis-body-text>
 				</ng-container>
@@ -36,12 +41,12 @@
 			</ng-container>
 		</div>
 	</div>
-	<ng-container *ngIf="headerActions">
+	<ng-container *ngIf="headerActions && headerActions.type === 'form'">
 		<div class="fudis-form__header__actions">
 			<ng-container *ngTemplateOutlet="headerActions!.templateRef" />
 		</div>
 	</ng-container>
-	<ng-container *ngIf="mainContent">
+	<ng-container *ngIf="mainContent && mainContent.type === 'form'">
 		<div class="fudis-form__content">
 			<ng-container *ngTemplateOutlet="mainContent!.templateRef" />
 		</div>
