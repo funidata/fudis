@@ -2,9 +2,8 @@ import { Component, Input } from '@angular/core';
 import { IFudisDescriptionListItem } from '../../../../types/lists';
 
 @Component({
-	selector: 'fudis-description-list-item-details',
+	selector: 'fudis-dd',
 	templateUrl: './description-list-item-details.component.html',
-	styleUrls: ['./description-list-item-details.component.scss'],
 })
 export class DescriptionListItemDetailsComponent {
 	/**

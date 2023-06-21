@@ -3,9 +3,8 @@ import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.dir
 import { IFudisDescriptionListItem } from '../../../types/lists';
 
 @Component({
-	selector: 'fudis-description-list-item',
+	selector: 'fudis-dl-item',
 	templateUrl: './description-list-item.component.html',
-	styleUrls: ['./description-list-item.component.scss'],
 })
 export class DescriptionListItemComponent extends GridApiDirective {
 	/**

@@ -39,23 +39,23 @@ const html = String.raw;
 export const DescriptionList: StoryFn = () => ({
 	props: { testData, testDataCompact },
 	template: html`<fudis-heading tag="h2" size="m"> Description List Regular Example</fudis-heading>
-		<fudis-description-list [data]="testData" [marginBottom]="'md'"></fudis-description-list>
+		<fudis-dl [data]="testData" [marginBottom]="'md'"></fudis-dl>
 		<hr />
 		<fudis-heading tag="h2" size="m">Description List Compact Example</fudis-heading>
-		<fudis-description-list [variant]="'compact'" [data]="testDataCompact"></fudis-description-list>`,
+		<fudis-dl [variant]="'compact'" [data]="testDataCompact"></fudis-dl>`,
 });
 
 const TemplateWithDl: StoryFn<DescriptionListComponent> = () => ({
 	template: html`<fudis-grid>
 			<fudis-heading tag="h2" size="m">Here below is a regular Fudis Description List component</fudis-heading>
 		</fudis-grid>
-		<fudis-description-list [data]="testData" [marginBottom]="'xl'"></fudis-description-list>
+		<fudis-dl [data]="testData" [marginBottom]="'xl'"></fudis-dl>
 
 		<fudis-grid [columns]="columns">
 			<fudis-heading tag="h2" size="m"
 				>And here below is a Fudis Grid where DL item is used as child component</fudis-heading
 			>
-			<fudis-description-list [disableGrid]="true" [data]="lonelyDataItem"></fudis-description-list>
+			<fudis-dl [disableGrid]="true" [data]="lonelyDataItem"></fudis-dl>
 			<fudis-body-text
 				>Item next to this Body Text is a lonely Description List component with only one list item. This and DL item
 				are both inside a Fudis Grid.</fudis-body-text

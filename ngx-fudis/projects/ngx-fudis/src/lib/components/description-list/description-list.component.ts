@@ -1,12 +1,13 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ViewEncapsulation } from '@angular/core';
 import { IFudisDescriptionListItem } from '../../types/lists';
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
 import { GridColumnsResponsive } from '../../types/grid';
 
 @Component({
-	selector: 'fudis-description-list',
+	selector: 'fudis-dl, fudis-description-list',
 	templateUrl: './description-list.component.html',
 	styleUrls: ['./description-list.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class DescriptionListComponent extends GridApiDirective implements OnInit, OnChanges {
 	/**

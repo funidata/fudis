@@ -1,3 +1,4 @@
+<!-- *ngIf="!disableGrid" -->
 <dl
 	fudisGrid
 	[width]="width"
@@ -12,6 +13,56 @@
 	[marginTop]="marginTop"
 	[marginSides]="marginSides"
 	role="list"
-	*ngFor="let item of data">
-	<fudis-description-list-item [data]="item"></fudis-description-list-item>
+	[ngClass]="variant === 'compact' ? 'fudis-description-list-compact' : 'fudis-description-list'">
+	<ng-container *ngTemplateOutlet="variant === 'regular' ? regular : compact"></ng-container>
 </dl>
+
+<ng-template #regular>
+	<fudis-dl-item *ngFor="let item of data">
+		<fudis-dt>{{ item.key }}</fudis-dt>
+		<fudis-dd>
+			<p *ngIf="item.subHeading" subHeading>{{ item.subHeading }}</p>
+			{{ item.value }}
+		</fudis-dd>
+	</fudis-dl-item>
+</ng-template>
+
+<ng-template #compact>
+	<fudis-dl-item *ngFor="let item of data">
+		<fudis-dt>{{ item.key }}</fudis-dt>
+		<fudis-dd>
+			<p *ngIf="item.subHeading" subHeading>{{ item.subHeading }}</p>
+			{{ item.value }}
+		</fudis-dd>
+	</fudis-dl-item>
+</ng-template>
+<!-- <dl *ngIf="disableGrid" [class]="_classList" role="list">
+	<ng-container *ngTemplateOutlet="variant === 'regular' ? regular : compact"> </ng-container>
+</dl>
+
+
+<ng-template #regular>
+	<div
+		*ngFor="let item of data"
+		class="fudis-description-list__item"
+		[class.fudis-description-list__disabled-grid__item]="disableGrid"
+		role="listitem">
+		<dt class="fudis-description-list__item__key">
+			{{ item.key }}
+		</dt>
+		<dd class="fudis-description-list__item__value">
+			<p *ngIf="item.subHeading" class="fudis-description-list__item__sub-heading">{{ item.subHeading }}</p>
+			{{ item.value }}
+		</dd>
+	</div>
+</ng-template>
+
+<ng-template #compact>
+	<div *ngFor="let item of data" class="fudis-description-list-compact__item">
+		<dt class="fudis-description-list-compact__item__key">{{ item.key }}:</dt>
+		<dd *ngIf="item.subHeading" class="fudis-description-list-compact__item__value">
+			{{ item.subHeading }} ({{ item.value }})
+		</dd>
+		<dd *ngIf="!item.subHeading" class="fudis-description-list-compact__item__value">{{ item.value }}</dd>
+	</div>
+</ng-template> -->
