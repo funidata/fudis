@@ -2,6 +2,7 @@ import { AfterContentInit, Component, ElementRef, Input, OnInit, ViewChild } fro
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { FudisDropdownOption, FudisInputWidth } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
@@ -17,6 +18,8 @@ export type AutocompleteInputSize = 'sm' | 'md' | 'lg';
 export class AutocompleteComponent extends InputBaseDirective implements OnInit, AfterContentInit {
 	@ViewChild('fudisAutocompleteInput') autocompleteInput: ElementRef;
 
+	@ViewChild('scrollViewport') scrollViewport: CdkVirtualScrollViewport;
+
 	/**
 	 * FormControl for the input.
 	 */
@@ -26,6 +29,11 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	 * Option list
 	 */
 	@Input({ required: true }) options: FudisDropdownOption[];
+
+	/**
+	 * Unique id for autocomplete.
+	 */
+	@Input() override id: string;
 
 	/**
 	 * Internal filtered options derived from options Input
@@ -57,7 +65,11 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 
 	constructor(private _idService: IdService) {
 		super();
-		this._id = _idService.getNewId('autocomplete');
+	}
+
+	ngOnInit(): void {
+		this._id = this.id ?? this._idService.getNewId('autocomplete');
+		checkRequiredAttributes(this._id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 
 	ngAfterContentInit() {
@@ -116,7 +128,12 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	private _filter(value: string): FudisDropdownOption[] {
 		if (value || value === '') {
 			const filterValue = value.toLowerCase();
-			return this.options.filter((option) => option.viewValue.toLowerCase().includes(filterValue));
+			const filteredOptions = this.options.filter((option) => option.viewValue.toLowerCase().includes(filterValue));
+
+			if (this.scrollViewport?.elementRef?.nativeElement) {
+				this.scrollViewport.elementRef.nativeElement.style.height = `${filteredOptions.length * 2.5}rem`;
+			}
+			return filteredOptions;
 		}
 		return [];
 	}
@@ -141,9 +158,5 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 			this.autocompleteFormControl.patchValue(this.control.value.viewValue);
 		}
 		this.handleBlur.emit(event);
-	}
-
-	ngOnInit(): void {
-		checkRequiredAttributes(this._id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 }

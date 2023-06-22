@@ -49,7 +49,7 @@
 	</fudis-guidance>
 
 	<mat-autocomplete class="fudis-autocomplete__option-list" #autocomplete="matAutocomplete">
-		<cdk-virtual-scroll-viewport itemSize="1" class="fudis-autocomplete__viewport__{{ size }}">
+		<cdk-virtual-scroll-viewport #scrollViewport itemSize="32" class="fudis-autocomplete__viewport__{{ size }}">
 			<mat-option
 				class="fudis-autocomplete__option fudis-autocomplete__viewport__item"
 				*cdkVirtualFor="let option of filteredOptions | async"
