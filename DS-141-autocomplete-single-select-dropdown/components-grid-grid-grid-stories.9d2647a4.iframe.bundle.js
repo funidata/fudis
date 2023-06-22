@@ -19,16 +19,16 @@
 		[width]="width"
 		[columnGap]="columnGap"
 		[rowGap]="rowGap">
-		<fudis-heading class="grid-item" [tag]="'h1'" [size]="'l'"
+		<fudis-heading class="grid-item" [tag]="'h1'" [size]="'lg'"
 			>Fudis-headings will always take 100% width if they are direct child of Fudis grid component</fudis-heading
 		>
 
 		<div class="grid-item">
-			<fudis-heading [tag]="'h3'" [size]="'s'">This is fudis-heading inside a div</fudis-heading>
+			<fudis-heading [tag]="'h3'" [size]="'sm'">This is fudis-heading inside a div</fudis-heading>
 			<fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
 		</div>
 		<div class="grid-item">
-			<fudis-heading [tag]="'h3'" [size]="'s'">This is fudis-heading inside a div</fudis-heading>
+			<fudis-heading [tag]="'h3'" [size]="'sm'">This is fudis-heading inside a div</fudis-heading>
 			<fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
 		</div>
 		<fudis-body-text class="grid-item">Current value of grid-template-columns: {{columns}}</fudis-body-text>
@@ -36,7 +36,7 @@
 		<fudis-body-text class="grid-item">Current value of grid-template-columns: {{columns}}</fudis-body-text>
 		<fudis-body-text class="grid-item">Current value of grid-template-columns: {{columns}}</fudis-body-text>
 	</fudis-grid>`})).bind({});Example.args={columns:3,align:"center",alignItemsX:"stretch",alignItemsY:"stretch",marginTop:"none",marginBottom:"none",marginSides:"responsive",width:"xxl",rowGap:"responsive",columnGap:"responsive"};const EquallyWideColumns=(args=>({props:args,template:html`<fudis-grid [columns]="columns">
-		<fudis-heading class="grid-item" [tag]="'h1'" [size]="'l'">Equally wide columns with number values</fudis-heading>
+		<fudis-heading class="grid-item" [tag]="'h1'" [size]="'lg'">Equally wide columns with number values</fudis-heading>
 		<fudis-body-text class="grid-item">Grid item</fudis-body-text>
 		<fudis-body-text class="grid-item">Grid item</fudis-body-text>
 		<fudis-body-text class="grid-item">Grid item</fudis-body-text>
@@ -44,7 +44,7 @@
 		<fudis-body-text class="grid-item">Grid item</fudis-body-text>
 		<fudis-body-text class="grid-item">Grid item</fudis-body-text>
 	</fudis-grid>`})).bind({});EquallyWideColumns.args={columns:3},EquallyWideColumns.argTypes={columns:{options:[1,2,3,4,6],control:{type:"radio"}}},EquallyWideColumns.parameters={controls:{exclude:combinedExclude}};const UnequallyWideColumns=(args=>({props:args,template:html`<fudis-grid [columns]="columns">
-		<fudis-heading class="grid-item" [tag]="'h1'" [size]="'l'"
+		<fudis-heading class="grid-item" [tag]="'h1'" [size]="'lg'"
 			>To apply unequally proportioned colums, use native CSS grid-template-column 'fr' values.</fudis-heading
 		>
 		<fudis-body-text class="grid-item">Grid item</fudis-body-text>
@@ -55,7 +55,7 @@
 		<fudis-body-text class="grid-item">Grid item</fudis-body-text>
 	</fudis-grid>`})).bind({});UnequallyWideColumns.args={columns:"3fr 1fr"},UnequallyWideColumns.argTypes={columns:{options:["3fr 1fr","1fr 2fr","1fr 2fr 1fr","3fr 1fr 2fr"],control:{type:"radio"}}},UnequallyWideColumns.parameters={controls:{exclude:combinedExclude}};const ResponsiveColumns=(args=>({props:{...args,columnObjectOne:"{md: 2, xxl: 4}",defaultObject:"{xs: 1, md: 2, xl: 4}",columnObjectTwo:"{sm: 2, md: 3}",combinedObject:"{xs: 1, sm: 2, md: 3, xl: 4}"},template:html`<fudis-grid [columns]="columns">
 		<fudis-grid-item class="grid-item" [columns]="'stretch'">
-			<fudis-heading [tag]="'h1'" [size]="'l'"
+			<fudis-heading [tag]="'h1'" [size]="'lg'"
 				>Provide settings object to 'columns' attribute to make Grid columns behave differently on different breakpoints
 			</fudis-heading>
 			<fudis-body-text class="text-margin"> You don't need to provide value for all breakpoints.</fudis-body-text>
@@ -82,4 +82,4 @@
 		<fudis-body-text class="grid-item">Grid item</fudis-body-text>
 		<fudis-body-text class="grid-item">Grid item</fudis-body-text>
 	</fudis-grid>`})).bind({});ResponsiveColumns.args={columns:{xs:1,sm:2,md:"1fr 2fr",lg:3,xl:"1fr 2fr 1fr",xxl:6}},ResponsiveColumns.parameters={controls:{exclude:combinedExclude}}}}]);
-//# sourceMappingURL=components-grid-grid-grid-stories.862a05c1.iframe.bundle.js.map
+//# sourceMappingURL=components-grid-grid-grid-stories.9d2647a4.iframe.bundle.js.map

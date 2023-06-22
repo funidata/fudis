@@ -334,13 +334,13 @@ mat-tooltip-component .mat-tooltip-handset {
   grid-column: 1/-1;
 }
 
-.fudis-grid__align__left {
+.fudis-grid__align__start {
   margin-right: auto;
   margin-left: 0;
 }
 
 @media screen and (max-width: 35.99em) {
-  .fudis-grid__align__left {
+  .fudis-grid__align__start {
     margin-right: 1rem;
     margin-left: 1rem;
   }
@@ -356,13 +356,13 @@ mat-tooltip-component .mat-tooltip-handset {
     margin-left: 1rem;
   }
 }
-.fudis-grid__align__right {
+.fudis-grid__align__end {
   margin-right: 0;
   margin-left: auto;
 }
 
 @media screen and (max-width: 35.99em) {
-  .fudis-grid__align__right {
+  .fudis-grid__align__end {
     margin-right: 1rem;
     margin-left: 1rem;
   }
@@ -611,6 +611,10 @@ mat-tooltip-component .mat-tooltip-handset {
     column-gap: 1rem;
   }
 }
+.fudis-grid__initial {
+  width: initial;
+}
+
 .fudis-grid__xs {
   max-width: 34rem;
   row-gap: 1rem;
@@ -679,6 +683,38 @@ mat-tooltip-component .mat-tooltip-handset {
 
 .fudis-grid__column-gap__xxl {
   column-gap: 4rem;
+}
+
+.fudis-mb-none {
+  margin-bottom: 0;
+}
+
+.fudis-mb-xxs {
+  margin-bottom: 0.25rem;
+}
+
+.fudis-mb-xs {
+  margin-bottom: 0.5rem;
+}
+
+.fudis-mb-sm {
+  margin-bottom: 1rem;
+}
+
+.fudis-mb-md {
+  margin-bottom: 1.5rem;
+}
+
+.fudis-mb-lg {
+  margin-bottom: 2rem;
+}
+
+.fudis-mb-xl {
+  margin-bottom: 2.5rem;
+}
+
+.fudis-mb-xxl {
+  margin-bottom: 4rem;
 }
 
 .mat-ripple {
