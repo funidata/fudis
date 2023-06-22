@@ -16,6 +16,7 @@
 */
 /* stylelint-disable declaration-property-value-disallowed-list */
 /* stylelint-disable property-disallowed-list */
+/* stylelint-disable property-disallowed-list */
 /* stylelint-disable no-descending-specificity */
 /* stylelint-disable declaration-no-important */
 /* stylelint-disable scss/selector-no-redundant-nesting-selector */
@@ -58,13 +59,16 @@
 }
 
 .fudis-dropdown__option.mat-mdc-option.mat-mdc-option-active.mdc-list-item--selected {
-  /* stylelint-disable-next-line property-disallowed-list */
   background-color: var(--fudis-color-primary-light) !important;
 }
 
 .fudis-dropdown__option.mat-mdc-option.mdc-list-item--selected .mdc-list-item__primary-text {
   /* stylelint-disable-next-line property-disallowed-list */
   color: #484848;
+}
+
+.fudis-autocomplete__option.mat-mdc-option {
+  /* stylelint-disable-next-line selector-not-notation */
 }
 
 .fudis-autocomplete__option.mat-mdc-option:hover:not(.mdc-list-item--disabled) {
@@ -78,8 +82,24 @@
 }
 
 .fudis-autocomplete__option.mat-mdc-option.mat-mdc-option-active {
-  /* stylelint-disable-next-line property-disallowed-list */
   background-color: var(--fudis-color-primary-light) !important;
+}
+
+.fudis-autocomplete__option.mat-mdc-option .mdc-list-item__primary-text {
+  white-space: pre;
+}
+
+.fudis-autocomplete__option.mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(.mdc-list-item--disabled) {
+  background: transparent;
+}
+
+.fudis-autocomplete__option.mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+  /* stylelint-disable-next-line property-disallowed-list */
+  color: #484848;
+}
+
+.fudis-autocomplete__option.mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(.mdc-list-item--disabled) mat-pseudo-checkbox {
+  display: none;
 }
 
 /* stylelint-disable property-disallowed-list */ /* stylelint-disable declaration-no-important */
