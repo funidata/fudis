@@ -14,6 +14,7 @@ import { DatepickerCustomDateAdapter, FudisDateInputFormat } from './datepicker-
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { FudisInputWidth } from '../../../types/forms';
+import { IdService } from '../../../utilities/id-service.service';
 
 export const FUDIS_DATE_FORMATS: MatDateFormats = {
 	...MAT_NATIVE_DATE_FORMATS,
@@ -41,7 +42,11 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
 	],
 })
 export class DatepickerComponent extends InputBaseDirective implements DoCheck, AfterContentInit, OnInit {
-	constructor(private readonly _adapter: DateAdapter<Date>, @Inject(DOCUMENT) private _document: Document) {
+	constructor(
+		private readonly _adapter: DateAdapter<Date>,
+		@Inject(DOCUMENT) private _document: Document,
+		private _idService: IdService
+	) {
 		super();
 	}
 
@@ -67,7 +72,13 @@ export class DatepickerComponent extends InputBaseDirective implements DoCheck, 
 
 	private _currentHtmlLang: string;
 
+	/**
+	 * Internal id to generate unique id
+	 */
+	protected _id: string;
+
 	ngOnInit(): void {
+		this._id = this.id ?? this._idService.getNewId('datepicker');
 		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 

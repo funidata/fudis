@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { FudisDropdownOption, FudisDropdownLanguageOption, FudisInputWidth } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+import { IdService } from '../../../utilities/id-service.service';
 
 @Component({
 	selector: 'fudis-dropdown[id][label]',
@@ -11,6 +12,10 @@ import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnin
 	encapsulation: ViewEncapsulation.None,
 })
 export class DropdownComponent extends InputBaseDirective implements OnInit {
+	constructor(private _idService: IdService) {
+		super();
+	}
+
 	/*
 	 * FormControl for the input.
 	 */
@@ -49,11 +54,17 @@ export class DropdownComponent extends InputBaseDirective implements OnInit {
 	 */
 	@Output() selectionUpdate: EventEmitter<FudisDropdownOption> = new EventEmitter<FudisDropdownOption>();
 
+	/**
+	 * Internal id to generate unique id
+	 */
+	protected _id: string;
+
 	handleSelectionChange(value: FudisDropdownOption): void {
 		this.selectionUpdate.emit(value);
 	}
 
 	ngOnInit(): void {
+		this._id = this.id ?? this._idService.getNewId('dropdown');
 		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 }

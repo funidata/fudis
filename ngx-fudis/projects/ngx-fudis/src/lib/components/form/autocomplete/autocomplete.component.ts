@@ -16,6 +16,10 @@ export type AutocompleteInputSize = 'sm' | 'md' | 'lg';
 	styleUrls: ['./autocomplete.component.scss'],
 })
 export class AutocompleteComponent extends InputBaseDirective implements OnInit, AfterContentInit {
+	constructor(private _idService: IdService) {
+		super();
+	}
+
 	@ViewChild('fudisAutocompleteInput') autocompleteInput: ElementRef;
 
 	@ViewChild('scrollViewport') scrollViewport: CdkVirtualScrollViewport;
@@ -29,11 +33,6 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	 * Option list
 	 */
 	@Input({ required: true }) options: FudisDropdownOption[];
-
-	/**
-	 * Unique id for autocomplete.
-	 */
-	@Input() override id: string;
 
 	/**
 	 * Internal filtered options derived from options Input
@@ -62,10 +61,6 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 
 	/** Internal id to generate unique id */
 	protected _id: string;
-
-	constructor(private _idService: IdService) {
-		super();
-	}
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('autocomplete');

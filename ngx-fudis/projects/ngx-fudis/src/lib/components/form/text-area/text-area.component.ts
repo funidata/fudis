@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { FudisInputWidth } from '../../../types/forms';
+import { IdService } from '../../../utilities/id-service.service';
 
 @Component({
 	selector: 'fudis-text-area[id][label]',
@@ -11,6 +12,10 @@ import { FudisInputWidth } from '../../../types/forms';
 	styleUrls: ['./text-area.component.scss'],
 })
 export class TextAreaComponent extends InputBaseDirective implements OnInit {
+	constructor(private _idService: IdService) {
+		super();
+	}
+
 	/**
 	 * FormControl for the input.
 	 */
@@ -36,7 +41,13 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit {
 	 */
 	@Input() size: FudisInputWidth = 'lg';
 
+	/**
+	 * Internal id to generate unique id
+	 */
+	protected _id: string;
+
 	ngOnInit(): void {
+		this._id = this.id ?? this._idService.getNewId('textArea');
 		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 }

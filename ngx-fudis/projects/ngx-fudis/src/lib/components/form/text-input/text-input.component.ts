@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { FudisInputWidth } from '../../../types/forms';
+import { IdService } from '../../../utilities/id-service.service';
 
 @Component({
 	selector: 'fudis-text-input[id][label]',
@@ -11,6 +12,10 @@ import { FudisInputWidth } from '../../../types/forms';
 	styleUrls: ['./text-input.component.scss'],
 })
 export class TextInputComponent extends InputBaseDirective implements OnInit {
+	constructor(private _idService: IdService) {
+		super();
+	}
+
 	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;
 
 	/**
@@ -55,7 +60,13 @@ export class TextInputComponent extends InputBaseDirective implements OnInit {
 	 */
 	@Input() maxNumber: number;
 
+	/**
+	 * Internal id to generate unique id
+	 */
+	protected _id: string;
+
 	ngOnInit(): void {
+		this._id = this.id ?? this._idService.getNewId('textInput');
 		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 }
