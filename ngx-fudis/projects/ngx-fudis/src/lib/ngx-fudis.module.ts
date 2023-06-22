@@ -51,7 +51,7 @@ import { GridItemComponent } from './components/grid/grid-item/grid-item.compone
 import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
 import { GridService } from './directives/grid/grid-service/grid.service';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
-import { HeaderDirective, HeadingDirective } from './directives/content-projection/header/header.directive';
+import { HeaderDirective } from './directives/content-projection/header/header.directive';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { IconComponent } from './components/icon/icon.component';
 import { IdService } from './utilities/id-service.service';
@@ -109,7 +109,6 @@ import { NotificationsDirective } from './directives/content-projection/notifica
 		GuidanceComponent,
 		HeaderDirective,
 		HeadingComponent,
-		HeadingDirective,
 		IconComponent,
 		InputBaseDirective,
 		LabelComponent,
@@ -182,7 +181,6 @@ import { NotificationsDirective } from './directives/content-projection/notifica
 		GuidanceComponent,
 		HeaderDirective,
 		HeadingComponent,
-		HeadingDirective,
 		IconComponent,
 		LinkComponent,
 		NotificationComponent,

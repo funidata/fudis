@@ -1,4 +1,3 @@
-/* eslint-disable max-classes-per-file */
 import { Directive, TemplateRef } from '@angular/core';
 
 /**
@@ -7,10 +6,5 @@ import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({ selector: '[fudisHeader]' })
 export class HeaderDirective {
-	constructor(public templateRef: TemplateRef<unknown>) {}
-}
-
-@Directive({ selector: '[fudisHeading]' })
-export class HeadingDirective {
 	constructor(public templateRef: TemplateRef<unknown>) {}
 }

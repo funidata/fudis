@@ -61,4 +61,9 @@ export class GridApiDirective {
 	 * Grid row gap. Using Fudis spacing token values of xxs to xxl and 0.
 	 */
 	@Input() rowGap: GridGap = 'responsive';
+
+	/**
+	 * To make Grid ignore default values defined by application and GridService
+	 */
+	@Input() ignoreDefaults: boolean = false;
 }
