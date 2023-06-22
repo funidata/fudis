@@ -304,13 +304,13 @@ mat-tooltip-component .mat-tooltip-handset {
   grid-column: 1/-1;
 }
 
-.fudis-grid__align__left {
+.fudis-grid__align__start {
   margin-right: auto;
   margin-left: 0;
 }
 
 @media screen and (max-width: 35.99em) {
-  .fudis-grid__align__left {
+  .fudis-grid__align__start {
     margin-right: 1rem;
     margin-left: 1rem;
   }
@@ -326,13 +326,13 @@ mat-tooltip-component .mat-tooltip-handset {
     margin-left: 1rem;
   }
 }
-.fudis-grid__align__right {
+.fudis-grid__align__end {
   margin-right: 0;
   margin-left: auto;
 }
 
 @media screen and (max-width: 35.99em) {
-  .fudis-grid__align__right {
+  .fudis-grid__align__end {
     margin-right: 1rem;
     margin-left: 1rem;
   }
