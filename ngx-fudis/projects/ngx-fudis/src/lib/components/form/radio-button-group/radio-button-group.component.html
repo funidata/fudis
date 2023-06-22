@@ -1,4 +1,4 @@
-<fudis-fieldset [id]="id" [titleSize]="'sm'" [legend]="legend" [requiredText]="requiredText">
+<fudis-fieldset [id]="id" [titleSize]="'sm'" [title]="title" [requiredText]="requiredText">
 	<fudis-radio-button
 		*ngFor="let option of options; let index = index"
 		[id]="option.id"
@@ -8,6 +8,6 @@
 		[required]="requiredText ? true : false"
 		[checked]="control.value === option.value ? true : false"
 		[control]="control"></fudis-radio-button>
-	<fudis-guidance [inputLabel]="legend" [helpText]="helpText" [for]="id" [errorMsg]="errorMsg" [control]="control">
+	<fudis-guidance [inputLabel]="title" [helpText]="helpText" [for]="id" [errorMsg]="errorMsg" [control]="control">
 	</fudis-guidance>
 </fudis-fieldset>

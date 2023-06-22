@@ -20,11 +20,11 @@
 	&__option {
 		// Reduce dropdown option list height
 		&.mat-mdc-option {
-			min-height: spacing.$spacing-l;
+			min-height: spacing.$spacing-lg;
 
 			// Change dropdown option list typography
 			& .mdc-list-item__primary-text {
-				@include typography.body-text-m-regular;
+				@include typography.body-text-md-regular;
 			}
 		}
 	}

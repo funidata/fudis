@@ -42,23 +42,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	 * After md breakpoint it will have two columns 'repeat(2, 1fr)'
 	 * And after xl breakpoint 'repeat(3, 1fr)'
 	 */
-	@Input() set columns(value: string | number | GridColumnsResponsive) {
-		if (typeof value === 'string') {
-			this._columns = value;
-		}
-		// If value is number, convert it to grid-template-column value. E. g. number 6 converts to 'repeat(6,1fr)'
-		else if (typeof value === 'number') {
-			this._columns = getGridCssValue(value);
-		}
-		// Get breakpoint settings with provided default values and Input values
-		else if (this._gridDefaultValues() !== null) {
-			const combinedValues: GridColumnsResponsive = { ...this._gridDefaultValues(), ...value };
-
-			this._columns = getGridBreakpointDataArray(combinedValues);
-		} else {
-			this._columns = getGridBreakpointDataArray(value);
-		}
-	}
+	@Input() columns: string | number | GridColumnsResponsive;
 
 	constructor(private _gridElement: ElementRef, gridService: GridService) {
 		super();
@@ -73,6 +57,24 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 			this._gridService.getBreakpointState();
 			this.setColumns();
 		});
+	}
+
+	private defineColumns(): void {
+		if (typeof this.columns === 'string') {
+			this._columns = this.columns;
+		}
+		// If value is number, convert it to grid-template-column value. E. g. number 6 converts to 'repeat(6,1fr)'
+		else if (typeof this.columns === 'number') {
+			this._columns = getGridCssValue(this.columns);
+		}
+		// Get breakpoint settings with provided default values and Input values
+		else if (!this.ignoreDefaults && this._gridDefaultValues() !== null) {
+			const combinedValues: GridColumnsResponsive = { ...this._gridDefaultValues(), ...this.columns };
+
+			this._columns = getGridBreakpointDataArray(combinedValues);
+		} else {
+			this._columns = getGridBreakpointDataArray(this.columns);
+		}
 	}
 
 	/**
@@ -115,14 +117,18 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	}
 
 	ngOnInit(): void {
-		if (!this.columns && this._gridDefaultValues()) {
+		if (this.columns) {
+			this.defineColumns();
+		} else if (!this.ignoreDefaults && this._gridDefaultValues()) {
 			this._columns = getGridBreakpointDataArray(this._gridDefaultValues()!);
 		}
 		this.applyGridCss();
 	}
 
 	ngOnChanges(): void {
-		if (!this.columns && this._gridDefaultValues()) {
+		if (this.columns) {
+			this.defineColumns();
+		} else if (!this.ignoreDefaults && this._gridDefaultValues()) {
 			this._columns = getGridBreakpointDataArray(this._gridDefaultValues()!);
 		}
 		this.applyGridCss();

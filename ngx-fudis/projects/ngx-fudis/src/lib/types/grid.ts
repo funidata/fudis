@@ -1,4 +1,4 @@
-import { Spacing } from './spacing';
+import { FudisSpacing } from './spacing';
 
 /**
  * -------------------------------------------
@@ -34,7 +34,7 @@ export const gridColumnDefault = '1fr';
 /**
  * Grid widths
  */
-export type GridWidth = 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
+export type GridWidth = 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs' | 'initial';
 
 /**
  * Alignment of whole Grid inside its container. For items inside the Grid use alignItemsX and alignItemsY.
@@ -54,7 +54,7 @@ export type GridMarginSide = 'responsive' | 'none';
 /**
  * Spacing between columns and rows inside Grid
  */
-export type GridGap = Spacing | 'responsive';
+export type GridGap = FudisSpacing | 'responsive';
 
 /**
  * Input object from application to provide responsive settings for different breakpoints for Grid
@@ -69,8 +69,8 @@ export type GridColumnsResponsive = {
 export interface GridAttributes {
 	width: GridWidth;
 	align: GridAlign;
-	marginTop: Spacing;
-	marginBottom: Spacing;
+	marginTop: FudisSpacing;
+	marginBottom: FudisSpacing;
 	rowGap: GridGap;
 	columnGap: GridGap;
 	marginSides: GridMarginSide;

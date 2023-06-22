@@ -62,6 +62,7 @@ describe('DescriptionListComponent', () => {
 			const classList = [
 				'fudis-description-list',
 				'fudis-grid',
+				'fudis-grid__margin__sides__none',
 				'fudis-grid__align__center',
 				'fudis-grid__margin__bottom__none',
 				'fudis-grid__margin__top__none',
@@ -80,6 +81,7 @@ describe('DescriptionListComponent', () => {
 				'fudis-description-list-compact',
 				'fudis-grid',
 				'fudis-grid__align__center',
+				'fudis-grid__margin__sides__none',
 				'fudis-grid__margin__bottom__none',
 				'fudis-grid__margin__top__none',
 				'fudis-grid__row-gap__none',

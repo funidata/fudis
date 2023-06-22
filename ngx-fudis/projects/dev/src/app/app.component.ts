@@ -5,11 +5,11 @@ import { TranslocoService } from '@ngneat/transloco';
 import { DialogService, ErrorSummaryService, GridService } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
 
-import { IFudisDropdownOption, IFudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
+import { FudisDropdownOption, FudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 
 type MyForm = {
-	dropdown: FormControl<IFudisDropdownOption | null>;
+	dropdown: FormControl<FudisDropdownOption | null>;
 	textInput: FormControl<string | null>;
 	truth: FormControl<boolean | null>;
 	date: FormControl<Date | null>;
@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
 
 	title = 'dev';
 
-	dropdownOptions: IFudisDropdownOption[] = [
+	dropdownOptions: FudisDropdownOption[] = [
 		{ value: 'value-1-dog', viewValue: 'Dog' },
 		{ value: 'value-2-capybara', viewValue: 'Capybara' },
 		{ value: 'value-3-platypys', viewValue: 'Platypus' },
@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
 	});
 
 	testFormGroup = new FormGroup<MyForm>({
-		dropdown: new FormControl<IFudisDropdownOption | null>(this.dropdownOptions[2]),
+		dropdown: new FormControl<FudisDropdownOption | null>(this.dropdownOptions[2]),
 		textInput: new FormControl<string | null>(null, Validators.required),
 		truth: new FormControl<boolean | null>(null, Validators.required),
 		date: new FormControl<Date | null>(null),
@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
 		private errorSummaryService: ErrorSummaryService,
 		private gridService: GridService
 	) {
-		gridService.setGridDefaultColumns({ xs: 1, lg: 2 });
+		gridService.setGridDefaultColumns({ xs: 1, xl: 2 });
 	}
 
 	errorSummaryVisible: boolean = false;
@@ -67,7 +67,7 @@ export class AppComponent implements OnInit {
 
 	transLatedOptions: any = {};
 
-	radioButtonOptions: IFudisRadioButtonOption[] = [];
+	radioButtonOptions: FudisRadioButtonOption[] = [];
 
 	ngOnInit(): void {
 		this.translocoService.setActiveLang('en');
@@ -86,7 +86,7 @@ export class AppComponent implements OnInit {
 			if (this.errorSummaryVisible) {
 				setTimeout(() => {
 					this.errorSummaryService.reloadErrors();
-				}, 500);
+				}, 100);
 			}
 		});
 	}

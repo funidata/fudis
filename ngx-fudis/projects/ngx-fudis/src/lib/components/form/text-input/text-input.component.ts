@@ -3,6 +3,7 @@ import { Component, Input, ViewChild, ElementRef, HostBinding, OnInit } from '@a
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+import { FudisInputWidth } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-text-input[id][label]',
@@ -22,7 +23,7 @@ export class TextInputComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * Available sizes for the input - defaults to large. Recommended size for number input is small.
 	 */
-	@Input() size?: 's' | 'm' | 'l' = 'l';
+	@Input() size: FudisInputWidth = 'lg';
 
 	/**
 	 * Type of the input - defaults to 'text'

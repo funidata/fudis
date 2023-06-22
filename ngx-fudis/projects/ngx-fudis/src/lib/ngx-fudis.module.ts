@@ -45,7 +45,6 @@ import { ExpandableComponent } from './components/expandable/expandable.componen
 import { FieldSetBaseDirective } from './directives/form/fieldset-base/fieldset-base.directive';
 import { FieldSetComponent } from './components/form/fieldset/fieldset.component';
 import { FormComponent } from './components/form/form/form.component';
-import { FormSectionComponent } from './components/form/form-section/form-section.component';
 import { GridComponent } from './components/grid/grid/grid.component';
 import { GridApiDirective } from './directives/grid/grid-api/grid-api.directive';
 import { GridDirective } from './directives/grid/grid/grid.directive';
@@ -53,6 +52,7 @@ import { GridItemComponent } from './components/grid/grid-item/grid-item.compone
 import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
 import { GridService } from './directives/grid/grid-service/grid.service';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
+import { HeaderDirective } from './directives/content-projection/header/header.directive';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { IconComponent } from './components/icon/icon.component';
 import { IdService } from './utilities/id-service.service';
@@ -64,22 +64,26 @@ import { NotificationComponent } from './components/notification/notification.co
 
 import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
 import { RadioButtonGroupComponent } from './components/form/radio-button-group/radio-button-group.component';
+import { SectionComponent } from './components/section/section.component';
 import { SpacingDirective } from './directives/spacing/spacing.directive';
 import { TextInputComponent } from './components/form/text-input/text-input.component';
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
+import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
 
 @NgModule({
 	/*
 	 * Include both internal and external Fudis components in 'declarations' array below.
 	 */
 	declarations: [
+		ActionsDirective,
 		AutocompleteComponent,
 		BadgeComponent,
 		BodyTextComponent,
 		ButtonComponent,
 		CheckboxComponent,
+		ContentDirective,
 		DatepickerComponent,
 		DatepickerCustomHeaderComponent,
 		DescriptionListComponent,
@@ -94,11 +98,9 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,
-
 		FieldSetBaseDirective,
 		FieldSetComponent,
 		FormComponent,
-		FormSectionComponent,
 		InputWithLanguageOptionsComponent,
 		GridComponent,
 		GridApiDirective,
@@ -106,22 +108,22 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		GridItemComponent,
 		GridItemDirective,
 		GuidanceComponent,
+		HeaderDirective,
 		HeadingComponent,
 		IconComponent,
 		InputBaseDirective,
 		LabelComponent,
 		LinkComponent,
 		NotificationComponent,
-
 		RadioButtonComponent,
 		RadioButtonGroupComponent,
+		SectionComponent,
 		SpacingDirective,
 		TextInputComponent,
 		TextSpacingComponent,
 		TextAreaComponent,
 		TooltipDirective,
-		ContentDirective,
-		ActionsDirective,
+		NotificationsDirective,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
@@ -173,18 +175,20 @@ import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 		DialogActionsDirective,
 		FieldSetComponent,
 		FormComponent,
-		FormSectionComponent,
 		InputWithLanguageOptionsComponent,
 		GridComponent,
 		GridDirective,
 		GridItemComponent,
 		GridItemDirective,
 		GuidanceComponent,
+		HeaderDirective,
 		HeadingComponent,
 		IconComponent,
 		LinkComponent,
 		NotificationComponent,
+		NotificationsDirective,
 		RadioButtonGroupComponent,
+		SectionComponent,
 		TextAreaComponent,
 		TextInputComponent,
 		TooltipDirective,

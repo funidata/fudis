@@ -1,5 +1,6 @@
 import { Component, Input, HostBinding, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import { BodyTextSize, BodyTextMarginBottom } from '../../../types/typography';
+import { FudisBodyText } from '../../../types/typography';
+import { FudisSpacing } from '../../../types/spacing';
 
 @Component({
 	selector: 'fudis-body-text',
@@ -17,10 +18,10 @@ export class BodyTextComponent {
 	/**
 	 * Font size for the paragraph
 	 */
-	@Input() size: BodyTextSize = 'm-regular';
+	@Input() size: FudisBodyText = 'md-regular';
 
 	/**
 	 * Optional margin bottom
 	 */
-	@Input() marginBottom: BodyTextMarginBottom = 'none';
+	@Input() marginBottom: FudisSpacing = 'none';
 }

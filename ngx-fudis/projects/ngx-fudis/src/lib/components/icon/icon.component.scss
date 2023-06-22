@@ -32,13 +32,13 @@
 	}
 
 	&__large {
-		width: spacing.$spacing-l;
-		height: spacing.$spacing-l;
+		width: spacing.$spacing-lg;
+		height: spacing.$spacing-lg;
 	}
 
 	&__small {
-		width: spacing.$spacing-s;
-		height: spacing.$spacing-s;
+		width: spacing.$spacing-sm;
+		height: spacing.$spacing-sm;
 	}
 
 	&-color {

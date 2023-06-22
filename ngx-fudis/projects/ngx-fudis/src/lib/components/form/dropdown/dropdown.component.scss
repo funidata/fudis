@@ -7,18 +7,18 @@
 @use '../../../foundations/focus/mixins.scss' as focus;
 
 .fudis-dropdown {
-	max-width: calc(23 * spacing.$spacing-s);
+	max-width: calc(23 * spacing.$spacing-sm);
 
-	&__l {
+	&__lg {
 		width: 100%;
 	}
 
-	&__m {
-		width: calc(14 * spacing.$spacing-s);
+	&__md {
+		width: calc(14 * spacing.$spacing-sm);
 	}
 
-	&__s {
-		max-width: calc(10 * spacing.$spacing-s);
+	&__sm {
+		max-width: calc(10 * spacing.$spacing-sm);
 	}
 
 	&__xs {
@@ -37,7 +37,7 @@
 		display: flex !important;
 		align-items: center;
 		justify-content: center;
-		padding: spacing.$spacing-xxs spacing.$spacing-s;
+		padding: spacing.$spacing-xxs spacing.$spacing-sm;
 		height: spacing.$spacing-xl;
 
 		&:focus {
@@ -54,7 +54,7 @@
 		position: absolute !important;
 		top: spacing.$spacing-xs;
 		/* stylelint-disable-next-line unit-disallowed-list */
-		left: calc(-1px - spacing.$spacing-s);
+		left: calc(-1px - spacing.$spacing-sm);
 
 		&__xs {
 			/* stylelint-disable-next-line unit-disallowed-list */
@@ -72,7 +72,7 @@
 	&__guidance {
 		&__help-text {
 			@include colorMixins.text-color('gray-dark');
-			@include typography.body-text-s-regular;
+			@include typography.body-text-sm-regular;
 
 			margin-top: spacing.$spacing-xs;
 		}

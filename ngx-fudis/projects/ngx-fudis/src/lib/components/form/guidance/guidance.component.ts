@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { TFudisInputErrorMessages, TFudisGroupErrorMessages } from '../../../types/forms';
+import { FudisFormErrors, FudisFormGroupErrors } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-guidance',
@@ -51,15 +51,15 @@ export class GuidanceComponent {
 	/**
 	 * Used if FormGroup is associated with Guidance
 	 */
-	@Input() groupErrorMsg: TFudisGroupErrorMessages | null | undefined;
+	@Input() groupErrorMsg: FudisFormGroupErrors | null | undefined;
 
 	/**
 	 * Used if FormControl is associated with Guidance
 	 */
-	@Input() errorMsg: TFudisInputErrorMessages | null | undefined;
+	@Input() errorMsg: FudisFormErrors | null | undefined;
 
 	// eslint-disable-next-line class-methods-use-this
-	asErrorkey(errorKey: any): keyof TFudisInputErrorMessages {
+	asErrorkey(errorKey: any): keyof FudisFormErrors {
 		return errorKey;
 	}
 

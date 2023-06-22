@@ -1,13 +1,13 @@
 import { Component, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { IFudisRadioButtonOption, TFudisInputErrorMessages } from '../../../types/forms';
+import { FudisRadioButtonOption, FudisFormErrors } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 
 @Component({
-	selector: 'fudis-radio-button-group[options][id][legend]',
+	selector: 'fudis-radio-button-group',
 	templateUrl: './radio-button-group.component.html',
 	styleUrls: ['./radio-button-group.component.scss'],
 	encapsulation: ViewEncapsulation.None,
@@ -18,17 +18,17 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	/*
 	 * FormControl for Radio Button group
 	 */
-	@Input() control: FormControl<boolean | null>;
+	@Input({ required: true }) control: FormControl<boolean | null>;
 
 	/*
 	 * Array of options for group of radio buttons
 	 */
-	@Input() options: IFudisRadioButtonOption[];
+	@Input({ required: true }) options: FudisRadioButtonOption[];
 
 	/**
 	 * Error messages shown when form control validators are invalid
 	 */
-	@Input() errorMsg: TFudisInputErrorMessages;
+	@Input() errorMsg: FudisFormErrors;
 
 	/**
 	 * Set Radio Button Group's visual style and ARIA attribute as invalid. Does not override if control.invalid is true.

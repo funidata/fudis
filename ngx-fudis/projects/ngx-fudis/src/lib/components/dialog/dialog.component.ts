@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-type DialogSize = 's' | 'm' | 'l' | 'initial';
+type DialogSize = 'sm' | 'md' | 'lg' | 'initial';
 
 @Component({
 	selector: 'fudis-dialog',
@@ -10,5 +10,5 @@ type DialogSize = 's' | 'm' | 'l' | 'initial';
 export class DialogComponent {
 	@Input() closeButtonLabel: string;
 
-	@Input() size: DialogSize = 'm';
+	@Input() size: DialogSize = 'md';
 }

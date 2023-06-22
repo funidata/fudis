@@ -1,13 +1,14 @@
 import { Directive, Input } from '@angular/core';
+import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 
 @Directive({
 	selector: '[fudisFieldSetBase]',
 })
-export class FieldSetBaseDirective {
+export class FieldSetBaseDirective extends TooltipApiDirective {
 	/**
-	 * Legend for fieldset
+	 * Title legend for fieldset
 	 */
-	@Input({ required: true }) legend: string;
+	@Input({ required: true }) title: string;
 
 	/**
 	 * Unique id for fieldset
@@ -20,17 +21,12 @@ export class FieldSetBaseDirective {
 	@Input() requiredText: string;
 
 	/**
-	 * Additional guidance text, aligned underneath the main legend text
+	 * Additional guidance text, aligned underneath the main title legend text
 	 */
 	@Input() helpText: string;
 
 	/**
-	 * To disable Field Set content as Fudis Grid. Used in e. g. Radio Button Group.
-	 */
-	@Input() disableGrid: boolean = true;
-
-	/**
-	 * Visual size of legend. Default 'md' and 'sm' is similar to standard input label, used in e. g. RadioButtonGroup.
+	 * Visual size of title legend. Default 'md' and 'sm' is similar to standard input label, used in e. g. RadioButtonGroup.
 	 */
 	@Input() titleSize: 'md' | 'sm' = 'md';
 }

@@ -13,9 +13,9 @@ export const heading = {
 	size: {
 		xxs: 14,
 		xs: 16,
-		s: 18,
-		m: 20,
-		l: 24,
+		sm: 18,
+		md: 20,
+		lg: 24,
 		xl: 28,
 		xxl: 36,
 	},
@@ -30,32 +30,32 @@ export const body = {
 		regular: '400',
 	},
 	size: {
-		l: 16,
-		m: 14,
-		s: 12,
+		lg: 16,
+		md: 14,
+		sm: 12,
 	},
 };
 
 export const text_xxl = 'Fudis heading XXL (2.25rem) 500';
 export const text_xl = 'Fudis heading XL (1.75rem) 500';
-export const text_l = 'Fudis heading L (1.5rem) 500';
-export const text_m = 'Fudis heading M (1.25rem) 500';
-export const text_s = 'Fudis heading S (1.125rem) 500';
+export const text_lg = 'Fudis heading LG (1.5rem) 500';
+export const text_md = 'Fudis heading MD (1.25rem) 500';
+export const text_sm = 'Fudis heading SM (1.125rem) 500';
 export const text_xs = 'Fudis heading XS (1rem) 600';
 export const text_xxs = 'Fudis heading XXS (0.857rem) 600';
 
-export const body_s = 'Fudis body-text s-regular (0.75rem) 400: "The quick brown fox jumps over the lazy dog."';
-export const body_s_light = 'Fudis body-text s-light (0.75rem) 300: "The quick brown fox jumps over the lazy dog."';
-export const body_m = 'Fudis body-text m-regular (0.875rem) 400: "The quick brown fox jumps over the lazy dog."';
-export const body_m_light = 'Fudis body-text m-light (0.875rem) 300: "The quick brown fox jumps over the lazy dog."';
-export const body_l = 'Fudis body-text l-regular (1rem) 400: "The quick brown fox jumps over the lazy dog."';
-export const body_l_light = 'Fudis body-text l-light (1rem) 300: "The quick brown fox jumps over the lazy dog."';
+export const body_sm = 'Fudis body-text smd-regular (0.75rem) 400: "The quick brown fox jumps over the lazy dog."';
+export const body_sm_light = 'Fudis body-text smd-light (0.75rem) 300: "The quick brown fox jumps over the lazy dog."';
+export const body_md = 'Fudis body-text md-regular (0.875rem) 400: "The quick brown fox jumps over the lazy dog."';
+export const body_md_light = 'Fudis body-text md-light (0.875rem) 300: "The quick brown fox jumps over the lazy dog."';
+export const body_lg = 'Fudis body-text lg-regular (1rem) 400: "The quick brown fox jumps over the lazy dog."';
+export const body_lg_light = 'Fudis body-text lg-light (1rem) 300: "The quick brown fox jumps over the lazy dog."';
 
 # Typography
 
 **Font:** Fira Sans
 
-## Headings / Otsikot
+## Headings
 
 **Weights:** 500(medium), 600(bold)
 
@@ -74,23 +74,23 @@ export const body_l_light = 'Fudis body-text l-light (1rem) 300: "The quick brow
 />
 
 <Typeset
-	fontSizes={[Number(heading.size.l)]}
+	fontSizes={[Number(heading.size.lg)]}
 	fontWeight={heading.weight.medium}
-	sampleText={text_l}
+	sampleText={text_lg}
 	fontFamily={heading.type.primary}
 />
 
 <Typeset
-	fontSizes={[Number(heading.size.m)]}
+	fontSizes={[Number(heading.size.md)]}
 	fontWeight={heading.weight.medium}
-	sampleText={text_m}
+	sampleText={text_md}
 	fontFamily={heading.type.primary}
 />
 
 <Typeset
-	fontSizes={[Number(heading.size.s)]}
+	fontSizes={[Number(heading.size.sm)]}
 	fontWeight={heading.weight.medium}
-	sampleText={text_s}
+	sampleText={text_sm}
 	fontFamily={heading.type.primary}
 />
 
@@ -108,48 +108,48 @@ export const body_l_light = 'Fudis body-text l-light (1rem) 300: "The quick brow
 	fontFamily={heading.type.primary}
 />
 
-## Body Text / Leipäteksti
+## Body Text
 
 **Weights:** 300(light) 400(regular)
 
 <Typeset
-	fontSizes={[Number(body.size.l)]}
+	fontSizes={[Number(body.size.lg)]}
 	fontWeight={body.weight.regular}
-	sampleText={body_l}
+	sampleText={body_lg}
 	fontFamily={body.type.primary}
 />
 
 <Typeset
-	fontSizes={[Number(body.size.l)]}
+	fontSizes={[Number(body.size.lg)]}
 	fontWeight={body.weight.light}
-	sampleText={body_l_light}
+	sampleText={body_lg_light}
 	fontFamily={body.type.primary}
 />
 
 <Typeset
-	fontSizes={[Number(body.size.m)]}
+	fontSizes={[Number(body.size.md)]}
 	fontWeight={body.weight.regular}
-	sampleText={body_m}
+	sampleText={body_md}
 	fontFamily={body.type.primary}
 />
 
 <Typeset
-	fontSizes={[Number(body.size.m)]}
+	fontSizes={[Number(body.size.md)]}
 	fontWeight={body.weight.light}
-	sampleText={body_m_light}
+	sampleText={body_md_light}
 	fontFamily={body.type.primary}
 />
 
 <Typeset
-	fontSizes={[Number(body.size.s)]}
+	fontSizes={[Number(body.size.sm)]}
 	fontWeight={body.weight.regular}
-	sampleText={body_s}
+	sampleText={body_sm}
 	fontFamily={body.type.primary}
 />
 
 <Typeset
-	fontSizes={[Number(body.size.s)]}
+	fontSizes={[Number(body.size.sm)]}
 	fontWeight={body.weight.light}
-	sampleText={body_s_light}
+	sampleText={body_sm_light}
 	fontFamily={body.type.primary}
 />

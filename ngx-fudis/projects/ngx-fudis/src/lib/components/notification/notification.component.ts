@@ -10,7 +10,7 @@ export type NotificationType = 'warning' | 'danger' | 'success' | 'light';
 	styleUrls: ['./notification.component.scss'],
 })
 export class NotificationComponent implements OnChanges, OnInit {
-	@ContentChild(ContentDirective) customContent: ContentDirective;
+	@ContentChild(ContentDirective) content: ContentDirective | null;
 
 	/**
 	 * Notification variant options

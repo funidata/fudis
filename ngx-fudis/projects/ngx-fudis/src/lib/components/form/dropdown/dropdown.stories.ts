@@ -21,7 +21,7 @@ const Template: StoryFn<DropdownComponent> = (args: DropdownComponent) => ({
 	props: args,
 	template: html`
 		<fudis-dropdown
-			size="l"
+			[size]="'lg'"
 			[multipleOption]="multipleOption"
 			[placeholder]="placeholder"
 			[errorMsg]="errorMsg"

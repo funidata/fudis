@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, Signal, ViewChild, effect } from '@angular/core';
 
 import { ErrorSummaryService } from './error-summary.service';
-import { TFudisFormErrorSummaryObject, TFudisFormErrorSummaryList } from '../../../types/forms';
+import { FudisFormErrorSummaryObject, FudisFormErrorSummaryList } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-error-summary',
@@ -32,10 +32,12 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 		});
 	}
 
-	protected _visibleErrorList: TFudisFormErrorSummaryList[] = [];
+	protected _visibleErrorList: FudisFormErrorSummaryList[] = [];
+
+	private _numberOfFocusTries: number = 0;
 
 	getErrors(): void {
-		const fetchedErrors: Signal<TFudisFormErrorSummaryObject> = this._errorSummaryService.getVisibleErrors();
+		const fetchedErrors: Signal<FudisFormErrorSummaryObject> = this._errorSummaryService.getVisibleErrors();
 
 		this._visibleErrorList = [];
 
@@ -52,6 +54,7 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 		/**
 		 * Focus to Error Summary element when visible error list gets updated.
 		 */
+
 		this.focusToErrorSummary();
 	}
 
@@ -61,7 +64,13 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 
 	focusToErrorSummary(): void {
 		if (this.focusTarget && this._visibleErrorList.length > 0) {
+			this._numberOfFocusTries = 0;
 			(this.focusTarget.nativeElement as HTMLDivElement).focus();
+		} else if (this._numberOfFocusTries < 100) {
+			setTimeout(() => {
+				this._numberOfFocusTries += 1;
+				this.focusToErrorSummary();
+			}, 100);
 		}
 	}
 

@@ -1,12 +1,12 @@
 import { Signal, signal } from '@angular/core';
-import { TFudisFormErrorSummaryObject, TFudisFormErrorSummaryItem } from '../../../types/forms';
+import { FudisFormErrorSummaryObject, FudisFormErrorSummaryItem } from '../../../types/forms';
 
 export class ErrorSummaryService {
-	private _currentErrorList: TFudisFormErrorSummaryObject = {};
+	private _currentErrorList: FudisFormErrorSummaryObject = {};
 
-	private _signalCurrentErrorList = signal<TFudisFormErrorSummaryObject>({});
+	private _signalCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
 
-	getVisibleErrors(): Signal<TFudisFormErrorSummaryObject> {
+	getVisibleErrors(): Signal<FudisFormErrorSummaryObject> {
 		return this._signalCurrentErrorList.asReadonly();
 	}
 
@@ -15,7 +15,7 @@ export class ErrorSummaryService {
 		return controlName ? `${id}_${controlName}` : id;
 	}
 
-	public addNewError(newError: TFudisFormErrorSummaryItem): void {
+	public addNewError(newError: FudisFormErrorSummaryItem): void {
 		let currentErrors = this._currentErrorList;
 
 		const errorId = this.defineErrorId(newError.id, newError.controlName);
@@ -53,7 +53,9 @@ export class ErrorSummaryService {
 		this._currentErrorList = currentErrors;
 	}
 
-	public reloadErrors(): void {
-		this._signalCurrentErrorList.set(this._currentErrorList);
+	public reloadErrors(delay: number = 10): void {
+		setTimeout(() => {
+			this._signalCurrentErrorList.set(this._currentErrorList);
+		}, delay);
 	}
 }

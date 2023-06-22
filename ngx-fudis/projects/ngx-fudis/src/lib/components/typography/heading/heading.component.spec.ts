@@ -19,15 +19,17 @@ describe('HeadingComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(HeadingComponent);
 		component = fixture.componentInstance;
+		component.ngOnInit();
 		fixture.detectChanges();
 	});
 
 	function getHeading(): HTMLElement {
-		return fixture.nativeElement.querySelector('.fudis-heading__s') as HTMLElement;
+		return fixture.nativeElement.querySelector('.fudis-heading__sm') as HTMLElement;
 	}
 
-	function assertHeadingHasClasses(...classes: string[]): void {
+	function assertHeadingHasClasses(classes: string[]): void {
 		const headingClasses = getHeading()?.className ?? '';
+
 		expect(headingClasses.split(' ').sort()).toEqual([...classes].sort());
 	}
 
@@ -38,14 +40,16 @@ describe('HeadingComponent', () => {
 
 	describe('heading has CSS classes and prefered heading tag', () => {
 		it('should add size s to header', () => {
-			component.size = 's';
+			component.size = 'sm';
+			component.ngOnInit();
 			fixture.detectChanges();
-			assertHeadingHasClasses('fudis-heading__s');
+			assertHeadingHasClasses(['fudis-heading', 'fudis-heading__sm', 'fudis-mb-xs']);
 		});
 
 		it('should add tags to header', () => {
 			const headingLevel = 'h3';
 			component.tag = headingLevel;
+			component.ngOnInit();
 			fixture.detectChanges();
 			assertHeadingHasTag(headingLevel);
 		});

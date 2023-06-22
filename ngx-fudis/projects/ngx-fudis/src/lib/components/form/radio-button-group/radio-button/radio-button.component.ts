@@ -18,22 +18,22 @@ export class RadioButtonComponent {
 	/*
 	 * FormControl for Radio Button group
 	 */
-	@Input() control: FormControl;
+	@Input({ required: true }) control: FormControl;
 
 	/*
 	 * Selectable form value of a single Radio Button, e.g. "fair-trade-banana"
 	 */
-	@Input() value: string | boolean | null;
+	@Input({ required: true }) value: string | boolean | null;
 
 	/*
 	 * Visible label for a single Radio Button, e. g. "Fair trade banana"
 	 */
-	@Input() viewValue: string;
+	@Input({ required: true }) viewValue: string;
 
 	/*
 	 * Name for group of Radio Buttons, e.g. "fruit"
 	 */
-	@Input() name: string;
+	@Input({ required: true }) name: string;
 
 	/*
 	 * If Radio Button group of same name selection is required

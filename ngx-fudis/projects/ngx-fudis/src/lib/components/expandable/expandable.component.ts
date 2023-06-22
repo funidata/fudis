@@ -9,10 +9,10 @@ import { IdService } from '../../utilities/id-service.service';
  *
  * ```
  * <fudis-expandable>
- *  <ng-template fudisActions>
+ *  <ng-template fudisActions type="expandable">
  *    <fudis-button />
  *  </ng-template>
- * 	<ng-template fudisContent>
+ * 	<ng-template fudisContent type="expandable">
  * 		<your-body-template />
  * 	</ng-template>
  * </fudis-expandable>
@@ -28,7 +28,7 @@ import { IdService } from '../../utilities/id-service.service';
 export class ExpandableComponent {
 	@ContentChild(ContentDirective) content: ContentDirective;
 
-	@ContentChild(ActionsDirective) headerButtons: ActionsDirective;
+	@ContentChild(ActionsDirective) headerButtons: ActionsDirective | null;
 
 	/**
 	 * Tag is for semantic support for screen readers, this does not change the appearance of the expandable
@@ -66,7 +66,7 @@ export class ExpandableComponent {
 	protected _id: string;
 
 	constructor(private _idService: IdService) {
-		this._id = _idService.getNewId('expandable');
+		this._id = `${_idService.getNewId('expandable')}-heading`;
 	}
 
 	/**

@@ -1,6 +1,6 @@
 import { Directive, Input } from '@angular/core';
 import { GridWidth, GridMarginSide, GridGap, GridAlign, GridAlignItems } from '../../../types/grid';
-import { Spacing } from '../../../types/spacing';
+import { FudisSpacing } from '../../../types/spacing';
 
 @Directive({
 	selector: '[fudisGridApi]',
@@ -35,17 +35,17 @@ export class GridApiDirective {
 	/**
 	 * Margin top for the Grid
 	 */
-	@Input() marginTop: Spacing = 'none';
+	@Input() marginTop: FudisSpacing = 'none';
 
 	/**
 	 * Margin bottom for the Grid
 	 */
-	@Input() marginBottom: Spacing = 'none';
+	@Input() marginBottom: FudisSpacing = 'none';
 
 	/**
 	 * Horizontal margins left and right of the grid
 	 */
-	@Input() marginSides: GridMarginSide = 'responsive';
+	@Input() marginSides: GridMarginSide = 'none';
 
 	/**
 	 * Custom CSS classes for Grid element
@@ -61,4 +61,9 @@ export class GridApiDirective {
 	 * Grid row gap. Using Fudis spacing token values of xxs to xxl and 0.
 	 */
 	@Input() rowGap: GridGap = 'responsive';
+
+	/**
+	 * To make Grid ignore default values defined by application and GridService
+	 */
+	@Input() ignoreDefaults: boolean = false;
 }
