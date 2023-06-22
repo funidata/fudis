@@ -13,8 +13,8 @@ type MyForm = {
 	textInput: FormControl<string | null>;
 	truth: FormControl<boolean | null>;
 	date: FormControl<Date | null>;
-	autocompleteDropdown: FormControl<IFudisDropdownOption | null>;
-	autocompleteSearch: FormControl<IFudisDropdownOption | null>;
+	autocompleteDropdown: FormControl<FudisDropdownOption | null>;
+	autocompleteSearch: FormControl<FudisDropdownOption | null>;
 };
 @Component({
 	selector: 'app-root',
@@ -47,8 +47,8 @@ export class AppComponent implements OnInit {
 		textInput: new FormControl<string | null>(null, Validators.required),
 		truth: new FormControl<boolean | null>(null, Validators.required),
 		date: new FormControl<Date | null>(null),
-		autocompleteDropdown: new FormControl<IFudisDropdownOption | null>(null, Validators.required),
-		autocompleteSearch: new FormControl<IFudisDropdownOption | null>(null),
+		autocompleteDropdown: new FormControl<FudisDropdownOption | null>(null, Validators.required),
+		autocompleteSearch: new FormControl<FudisDropdownOption | null>(null),
 	});
 
 	constructor(
