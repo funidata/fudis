@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-type BadgeVariant = 'accent' | 'danger' | 'primary' | 'secondary' | 'success';
+export type BadgeVariant = 'accent' | 'danger' | 'primary' | 'secondary' | 'success';
 
 @Component({
 	selector: 'fudis-badge',
