@@ -28,7 +28,7 @@ import { FormComponent } from './form.component';
 			[errorSummaryHelpText]="errorSummaryHelpText"
 			[errorSummaryVisible]="errorSummaryVisible">
 			<ng-template fudisHeader>
-				<fudis-heading [marginBottom]="'xs'" [tag]="titleTag">{{ formTitle }}</fudis-heading>
+				<!-- <fudis-heading [marginBottom]="'xs'" [tag]="titleTag">{{ formTitle }}</fudis-heading> -->
 				<fudis-description-list [columns]="1" [variant]="'compact'" [data]="formHeaderDl" />
 			</ng-template>
 			<ng-template fudisActions type="form">
