@@ -49,12 +49,14 @@
 	</fudis-guidance>
 
 	<mat-autocomplete class="fudis-autocomplete__option-list" #autocomplete="matAutocomplete">
-		<mat-option
-			class="fudis-autocomplete__option"
-			*ngFor="let option of filteredOptions | async"
-			[value]="option.viewValue"
-			[disabled]="option.disabled">
-			{{ option.viewValue }}
-		</mat-option>
+		<cdk-virtual-scroll-viewport itemSize="1" class="fudis-autocomplete__viewport__{{ size }}">
+			<mat-option
+				class="fudis-autocomplete__option fudis-autocomplete__viewport__item"
+				*cdkVirtualFor="let option of filteredOptions | async"
+				[value]="option.viewValue"
+				[disabled]="option.disabled">
+				{{ option.viewValue }}
+			</mat-option>
+		</cdk-virtual-scroll-viewport>
 	</mat-autocomplete>
 </div>

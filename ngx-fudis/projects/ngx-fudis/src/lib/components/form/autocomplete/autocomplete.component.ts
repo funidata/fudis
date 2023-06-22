@@ -10,7 +10,7 @@ import { IdService } from '../../../utilities/id-service.service';
 export type AutocompleteInputSize = 'sm' | 'md' | 'lg';
 
 @Component({
-	selector: 'fudis-autocomplete[label][id][options][clearFilterText]',
+	selector: 'fudis-autocomplete',
 	templateUrl: './autocomplete.component.html',
 	styleUrls: ['./autocomplete.component.scss'],
 })
@@ -52,6 +52,7 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	 */
 	autocompleteFormControl = new FormControl<string | null>('');
 
+	/** Internal id to generate unique id */
 	protected _id: string;
 
 	constructor(private _idService: IdService) {

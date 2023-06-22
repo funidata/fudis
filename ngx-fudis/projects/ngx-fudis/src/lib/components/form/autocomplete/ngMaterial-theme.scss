@@ -1,3 +1,4 @@
+/* stylelint-disable property-disallowed-list */
 /* stylelint-disable no-descending-specificity */
 /* stylelint-disable declaration-no-important */
 /* stylelint-disable scss/selector-no-redundant-nesting-selector */
@@ -49,7 +50,6 @@
 
 			&.mat-mdc-option-active.mdc-list-item--selected {
 				// Background-color mixin does not work in this particular case
-				/* stylelint-disable-next-line property-disallowed-list */
 				background-color: colorTokens.$color-primary-light !important;
 			}
 
@@ -76,8 +76,27 @@
 			// Change option color when navigating with keyboard arrows
 			&.mat-mdc-option-active {
 				// Background-color mixin does not work in this particular case
-				/* stylelint-disable-next-line property-disallowed-list */
 				background-color: colorTokens.$color-primary-light !important;
+			}
+
+			& .mdc-list-item__primary-text {
+				// Display dropdown options in one line, without wrapping
+				white-space: pre;
+			}
+
+			// NOTE: These styles are just a hack for reverting ngMaterial styles from selected option, which is really not selected.
+			// The control value is null but somehow mat-autocomplete detects it as selected. Needs fixing.
+			/* stylelint-disable-next-line selector-not-notation */
+			&.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(.mdc-list-item--disabled) {
+				background: transparent;
+
+				& .mdc-list-item__primary-text {
+					@include colorMixins.text-color('gray-dark');
+				}
+
+				& mat-pseudo-checkbox {
+					display: none;
+				}
 			}
 		}
 	}

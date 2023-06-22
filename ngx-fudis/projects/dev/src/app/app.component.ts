@@ -13,6 +13,8 @@ type MyForm = {
 	textInput: FormControl<string | null>;
 	truth: FormControl<boolean | null>;
 	date: FormControl<Date | null>;
+	autocompleteDropdown: FormControl<IFudisDropdownOption | null>;
+	autocompleteSearch: FormControl<IFudisDropdownOption | null>;
 };
 @Component({
 	selector: 'app-root',
@@ -33,11 +35,20 @@ export class AppComponent implements OnInit {
 		{ value: 'value-6-gecko', viewValue: 'Southern Titiwangsa Bent-Toed Gecko' },
 	];
 
+	multipleOptions = Array.from({ length: 1000 }).map((value, i) => {
+		return {
+			value: i,
+			viewValue: `Item number ${i}`,
+		};
+	});
+
 	testFormGroup = new FormGroup<MyForm>({
 		dropdown: new FormControl<IFudisDropdownOption | null>(this.dropdownOptions[2]),
 		textInput: new FormControl<string | null>(null, Validators.required),
 		truth: new FormControl<boolean | null>(null, Validators.required),
 		date: new FormControl<Date | null>(null),
+		autocompleteDropdown: new FormControl<IFudisDropdownOption | null>(null, Validators.required),
+		autocompleteSearch: new FormControl<IFudisDropdownOption | null>(null),
 	});
 
 	constructor(

@@ -67,4 +67,22 @@
 			cursor: default;
 		}
 	}
+
+	&__viewport {
+		&__lg {
+			height: calc(14 * spacing.$spacing-s);
+		}
+
+		&__md {
+			height: calc(14 * spacing.$spacing-s);
+		}
+
+		&__sm {
+			height: calc(10 * spacing.$spacing-s);
+		}
+
+		&__item {
+			height: spacing.$spacing-xl;
+		}
+	}
 }

@@ -4,6 +4,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MockComponent } from 'ng-mocks';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
@@ -30,7 +31,7 @@ describe('AutocompleteComponent', () => {
 				MockComponent(ErrorMessageComponent),
 			],
 			providers: [ErrorSummaryService],
-			imports: [MatAutocompleteModule, ReactiveFormsModule, BrowserAnimationsModule],
+			imports: [MatAutocompleteModule, ScrollingModule, ReactiveFormsModule, BrowserAnimationsModule],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(AutocompleteComponent);
