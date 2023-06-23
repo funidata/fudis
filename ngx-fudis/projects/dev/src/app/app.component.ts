@@ -6,6 +6,7 @@ import { FudisDialogService, FudisErrorSummaryService, FudisGridService } from '
 import { DOCUMENT } from '@angular/common';
 
 import { FudisDropdownOption, FudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
+import { FudisConfigService } from 'projects/ngx-fudis/src/public-api';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 
 type MyForm = {
@@ -45,7 +46,8 @@ export class AppComponent implements OnInit {
 		public dialog: FudisDialogService,
 		private translocoService: TranslocoService,
 		private errorSummaryService: FudisErrorSummaryService,
-		private gridService: FudisGridService
+		private gridService: FudisGridService,
+		private fudisConfig: FudisConfigService
 	) {
 		gridService.setGridDefaultValues({ columns: { xs: 1, xl: 2 }, marginSides: 'responsive' });
 	}
@@ -63,6 +65,12 @@ export class AppComponent implements OnInit {
 		this.translocoService.setActiveLang('fi');
 
 		this.document.documentElement.lang = 'fi';
+
+		this.fudisConfig.setConfig({
+			datepicker: { closeLabel: 'Close calendar' },
+			requiredText: 'Required',
+			language: 'en',
+		});
 
 		this.translocoService.selectTranslateObject('options').subscribe((value) => {
 			this.radioButtonOptions = [
@@ -84,9 +92,19 @@ export class AppComponent implements OnInit {
 		if (this.translocoService.getActiveLang() === 'en') {
 			this.translocoService.setActiveLang('fi');
 			this.document.documentElement.lang = 'fi';
+			this.fudisConfig.setConfig({
+				datepicker: { closeLabel: 'Sulje kalenteri' },
+				requiredText: 'Pakollinen',
+				language: 'fi',
+			});
 		} else {
 			this.translocoService.setActiveLang('en');
 			this.document.documentElement.lang = 'en';
+			this.fudisConfig.setConfig({
+				datepicker: { closeLabel: 'Close calendar' },
+				requiredText: 'Required',
+				language: 'en',
+			});
 		}
 	}
 

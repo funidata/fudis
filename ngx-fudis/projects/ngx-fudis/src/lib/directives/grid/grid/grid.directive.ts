@@ -34,8 +34,6 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	 */
 	private _gridService: FudisGridService;
 
-	private _gridDefaultValues: Signal<FudisGridColumnsResponsive | null>;
-
 	private _gridDefaults: Signal<FudisGridAttributes | null>;
 
 	/**
@@ -101,20 +99,20 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		 * Collection of Grid attributes from Inputs() updated with possible default values provided from application
 		 */
 		this._gridInputObject = {
-			alignItemsX: this.alignItemsX,
-			alignItemsY: this.alignItemsY,
-			width: this.width,
-			align: this.align,
-			marginTop: this.marginTop,
-			marginBottom: this.marginBottom,
-			rowGap: this.rowGap,
-			columnGap: this.columnGap,
+			width: this.width ?? 'xxl',
+			align: this.align ?? 'center',
+			alignItemsX: this.alignItemsX ?? 'stretch',
+			alignItemsY: this.alignItemsY ?? 'stretch',
+			marginTop: this.marginTop ?? 'none',
+			marginBottom: this.marginBottom ?? 'none',
+			marginSides: this.marginSides ?? 'none',
+			rowGap: this.rowGap ?? 'responsive',
+			columnGap: this.columnGap ?? 'responsive',
 			classes: this.classes,
-			marginSides: this.marginSides,
 		};
 
 		if (!this.ignoreDefaults) {
-			this._gridInputObject = { ...this._gridInputObject, ...this._gridDefaults() };
+			this._gridInputObject = { ...this._gridDefaults(), ...this._gridInputObject };
 		}
 
 		/**

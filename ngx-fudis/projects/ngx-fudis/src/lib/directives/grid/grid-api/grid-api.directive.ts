@@ -21,37 +21,37 @@ export class GridApiDirective {
 	 * sm = Viewports smaller than 768px
 	 * xs = Viewports smaller than 576px
 	 */
-	@Input() width: FudisGridWidth = 'xxl';
+	@Input() width: FudisGridWidth;
 
 	/**
 	 * Alignment of Grid component inside its parent
 	 */
-	@Input() align: FudisGridAlign = 'center';
+	@Input() align: FudisGridAlign;
 
 	/**
 	 * Vertical alignment of Grid Items in a row
 	 */
-	@Input() alignItemsY: FudisGridAlignItems = 'stretch';
+	@Input() alignItemsY: FudisGridAlignItems;
 
 	/**
 	 * Horizontal alignment of Grid Items in a row
 	 */
-	@Input() alignItemsX: FudisGridAlignItems = 'stretch';
+	@Input() alignItemsX: FudisGridAlignItems;
 
 	/**
 	 * Margin top for the Grid
 	 */
-	@Input() marginTop: FudisSpacing = 'none';
+	@Input() marginTop: FudisSpacing;
 
 	/**
 	 * Margin bottom for the Grid
 	 */
-	@Input() marginBottom: FudisSpacing = 'none';
+	@Input() marginBottom: FudisSpacing;
 
 	/**
 	 * Horizontal margins left and right of the grid
 	 */
-	@Input() marginSides: FudisGridMarginSide = 'none';
+	@Input() marginSides: FudisGridMarginSide;
 
 	/**
 	 * Custom CSS classes for Grid element
@@ -61,12 +61,12 @@ export class GridApiDirective {
 	/**
 	 * Grid column gap. Using Fudis spacing token values of xxs to xxl and 0.
 	 */
-	@Input() columnGap: FudisGridGap = 'responsive';
+	@Input() columnGap: FudisGridGap;
 
 	/**
 	 * Grid row gap. Using Fudis spacing token values of xxs to xxl and 0.
 	 */
-	@Input() rowGap: FudisGridGap = 'responsive';
+	@Input() rowGap: FudisGridGap;
 
 	/**
 	 * To make Grid ignore default values defined by application and FudisGridService
