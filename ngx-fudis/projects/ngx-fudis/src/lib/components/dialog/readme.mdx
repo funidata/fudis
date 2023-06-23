@@ -111,7 +111,7 @@ This directive extends _MatDialogTitle_. Initial focus is set to this heading wh
 	`,
 })
 class DialogExample {
-	constructor(public dialog: DialogService) {}
+	constructor(public dialog: FudisDialogService) {}
 
 	openDialog(dialogToOpen: TemplateRef<any>) {
 		this.dialog.open(dialogToOpen);

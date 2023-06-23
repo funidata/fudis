@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 
-import { ErrorSummaryService } from '../error-summary/error-summary.service';
+import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
 import { FudisFormErrorSummaryItem } from '../../../types/forms';
 
 @Component({
@@ -51,7 +51,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 
 	private _currentLabel: string | undefined = undefined;
 
-	constructor(private _errorSummaryService: ErrorSummaryService) {}
+	constructor(private _errorSummaryService: FudisErrorSummaryService) {}
 
 	ngOnInit(): void {
 		this.createError();

@@ -6,7 +6,7 @@ import { GridColumnsResponsive, GridResponsiveData } from '../../../types/grid';
 import { breakpointsMinWidthToObserve } from '../gridUtils';
 
 @Injectable()
-export class GridService implements OnDestroy {
+export class FudisGridService implements OnDestroy {
 	destroyed = new Subject<void>();
 
 	private _defaultGridColumns = signal<GridColumnsResponsive | null>(null);

@@ -63,7 +63,7 @@ export class GridApiDirective {
 	@Input() rowGap: GridGap = 'responsive';
 
 	/**
-	 * To make Grid ignore default values defined by application and GridService
+	 * To make Grid ignore default values defined by application and FudisGridService
 	 */
 	@Input() ignoreDefaults: boolean = false;
 }

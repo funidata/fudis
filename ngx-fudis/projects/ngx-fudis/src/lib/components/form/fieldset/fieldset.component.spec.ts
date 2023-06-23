@@ -6,7 +6,7 @@ import { FieldSetComponent } from './fieldset.component';
 import { GridComponent } from '../../grid/grid/grid.component';
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
-import { GridService } from '../../../directives/grid/grid-service/grid.service';
+import { FudisGridService } from '../../../directives/grid/grid-service/grid.service';
 
 describe('FieldSetComponent', () => {
 	let component: FieldSetComponent;
@@ -15,7 +15,7 @@ describe('FieldSetComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [FieldSetComponent, MockComponent(GridComponent), GridApiDirective, GridDirective],
-			providers: [GridService],
+			providers: [FudisGridService],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(FieldSetComponent);

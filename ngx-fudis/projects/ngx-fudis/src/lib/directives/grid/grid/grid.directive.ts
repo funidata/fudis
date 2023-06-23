@@ -3,7 +3,7 @@ import { Directive, ElementRef, Input, OnChanges, OnInit, Signal, effect } from 
 import { getGridBreakpointDataArray, getGridClasses, getGridCssValue } from '../gridUtils';
 import { GridApiDirective } from '../grid-api/grid-api.directive';
 import { GridAttributes, GridColumnsResponsive, GridResponsiveData, gridColumnDefault } from '../../../types/grid';
-import { GridService } from '../grid-service/grid.service';
+import { FudisGridService } from '../grid-service/grid.service';
 
 @Directive({
 	selector: '[fudisGrid]',
@@ -27,7 +27,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	/**
 	 * Grid service to run utilities
 	 */
-	private _gridService: GridService;
+	private _gridService: FudisGridService;
 
 	private _gridDefaultValues: Signal<GridColumnsResponsive | null>;
 
@@ -44,7 +44,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	 */
 	@Input() columns: string | number | GridColumnsResponsive;
 
-	constructor(private _gridElement: ElementRef, gridService: GridService) {
+	constructor(private _gridElement: ElementRef, gridService: FudisGridService) {
 		super();
 		this._gridService = gridService;
 		this._element = _gridElement.nativeElement;

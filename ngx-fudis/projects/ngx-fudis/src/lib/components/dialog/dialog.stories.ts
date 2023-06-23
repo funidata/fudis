@@ -3,7 +3,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ComponentType } from '@angular/cdk/portal';
-import { DialogService } from './dialog.service';
+import { FudisDialogService } from './dialog.service';
 import readme from './readme.mdx';
 
 @Component({
@@ -108,7 +108,7 @@ class DialogExampleLauncherComponent implements OnInit {
 
 	dialogContentComponent: DialogExampleContentComponent;
 
-	constructor(public dialog: DialogService, private formBuilder: FormBuilder) {}
+	constructor(public dialog: FudisDialogService, private formBuilder: FormBuilder) {}
 
 	openDialog<T = any>(dialogToOpen: ComponentType<T> | TemplateRef<T>) {
 		const ref = this.dialog.open(dialogToOpen);
@@ -141,7 +141,7 @@ export default {
 	decorators: [
 		moduleMetadata({
 			imports: [ReactiveFormsModule, FormsModule],
-			providers: [DialogService],
+			providers: [FudisDialogService],
 			declarations: [DialogExampleContentComponent],
 		}),
 	],

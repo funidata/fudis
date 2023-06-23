@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { IdService } from './id-service.service';
+import { FudisIdService } from './id-service.service';
 
-describe('IdServiceService', () => {
-	let service: IdService;
+describe('FudisIdServiceService', () => {
+	let service: FudisIdService;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({});
-		service = TestBed.inject(IdService);
+		service = TestBed.inject(FudisIdService);
 	});
 
 	it('should be created', () => {

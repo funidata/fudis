@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { FudisIcon, FudisIconColor } from '../../types/icons';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
-import { DropdownMenuItemService } from '../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
+import { FudisDropdownMenuItemService } from '../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 
 @Component({
 	selector: 'fudis-button',
@@ -96,7 +96,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 
 	private _menuStatus: Signal<boolean>;
 
-	constructor(private _clickService: DropdownMenuItemService) {
+	constructor(private _clickService: FudisDropdownMenuItemService) {
 		super();
 
 		this._menuStatus = this._clickService.getMenuStatus();

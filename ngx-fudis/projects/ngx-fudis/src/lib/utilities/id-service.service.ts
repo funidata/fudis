@@ -9,7 +9,7 @@ type IdInformation = {
 @Injectable({
 	providedIn: 'root',
 })
-export class IdService {
+export class FudisIdService {
 	private _idList: IdInformation = {
 		expandable: 0,
 		form: 0,

@@ -1,5 +1,5 @@
 import { Component, ContentChild, Input, OnChanges, OnInit } from '@angular/core';
-import { IdService } from '../../utilities/id-service.service';
+import { FudisIdService } from '../../utilities/id-service.service';
 import { FudisHeadingTag, FudisHeadingSize } from '../../types/typography';
 import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
@@ -61,7 +61,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 	 */
 	@Input() classes: string[];
 
-	constructor(private _idService: IdService) {
+	constructor(private _idService: FudisIdService) {
 		super();
 	}
 

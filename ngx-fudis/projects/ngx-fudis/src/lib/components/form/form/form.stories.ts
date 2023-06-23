@@ -10,7 +10,7 @@ import {
 	FudisFormErrors,
 } from '../../../types/forms';
 
-import { ErrorSummaryService } from '../error-summary/error-summary.service';
+import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
 import { FormGroupValidators } from '../../../utilities/form/validators';
 import { FormComponent } from './form.component';
 
@@ -292,7 +292,7 @@ class FormContentExampleComponent {
 		{ value: 'advanced', viewValue: 'Advanced', id: 'courseType-2', name: 'courseType' },
 	];
 
-	constructor(private errorSummaryService: ErrorSummaryService) {}
+	constructor(private errorSummaryService: FudisErrorSummaryService) {}
 }
 
 export default {

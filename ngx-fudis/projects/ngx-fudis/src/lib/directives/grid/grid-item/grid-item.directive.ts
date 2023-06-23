@@ -1,5 +1,5 @@
 import { Directive, ElementRef, OnChanges, OnInit, Input, effect } from '@angular/core';
-import { GridService } from '../grid-service/grid.service';
+import { FudisGridService } from '../grid-service/grid.service';
 import {
 	GridResponsiveData,
 	GridItemAlignment,
@@ -48,7 +48,7 @@ export class GridItemDirective implements OnInit, OnChanges {
 	 */
 	@Input() alignY: GridItemAlignment = 'stretch';
 
-	constructor(private _gridItemElement: ElementRef, private _gridService: GridService) {
+	constructor(private _gridItemElement: ElementRef, private _gridService: FudisGridService) {
 		this._element = _gridItemElement.nativeElement;
 
 		/**
