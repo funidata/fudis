@@ -20,6 +20,8 @@ import { FormComponent } from './form.component';
 		<fudis-form
 			[marginSides]="'responsive'"
 			[marginTop]="'xl'"
+			[badge]="'primary'"
+			[badgeText]="'example'"
 			[titleTag]="titleTag"
 			[title]="formTitle"
 			[id]="id"

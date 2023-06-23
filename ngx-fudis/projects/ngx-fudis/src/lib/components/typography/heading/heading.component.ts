@@ -1,7 +1,8 @@
 import { Component, Input, HostBinding, ViewEncapsulation, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { FudisHeadingSize, FudisHeadingTag } from '../../../types/typography';
-import { FudisSpacing } from '../../../types/spacing';
+
 import { FudisIdService } from '../../../utilities/id-service.service';
+import { FudisSpacing } from '../../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-heading',

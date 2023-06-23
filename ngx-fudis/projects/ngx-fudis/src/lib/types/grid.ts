@@ -1,10 +1,10 @@
-import { FudisSpacing } from './spacing';
-
 /**
  * -------------------------------------------
  * Common types shared with Grid and Grid Item
  * -------------------------------------------
  */
+
+import { FudisSpacing } from './miscellaneous';
 
 /**
  * Object used to apply styles for certain breakpoints

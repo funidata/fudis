@@ -1,6 +1,5 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { ExpandableComponent } from './expandable.component';
-import { ExpandableType } from '../../types/expandables';
 
 export default {
 	title: 'Components/Expandable',
@@ -33,7 +32,7 @@ const Template: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
 
 export const Expandable = Template.bind({});
 Expandable.args = {
-	variant: ExpandableType.regular,
+	variant: 'regular',
 	title: 'Regular expandable',
 	collapsed: true,
 };
@@ -51,7 +50,7 @@ const SubTitleTemplate: StoryFn<ExpandableComponent> = (args: ExpandableComponen
 
 export const ExpandableWithSubTitle = SubTitleTemplate.bind({});
 ExpandableWithSubTitle.args = {
-	variant: ExpandableType.regular,
+	variant: 'regular',
 	title: 'Expandable with a sub title',
 	subTitle: 'This is my sub title for extra info',
 	collapsed: true,
@@ -73,7 +72,7 @@ const ActionTemplate: StoryFn<ExpandableComponent> = (args: ExpandableComponent)
 
 export const ExpandableWithActionButton = ActionTemplate.bind({});
 ExpandableWithActionButton.args = {
-	variant: ExpandableType.regular,
+	variant: 'regular',
 	title: 'Expandable with a header action button',
 	collapsed: true,
 };

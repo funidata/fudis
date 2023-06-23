@@ -1,5 +1,5 @@
 import { Component, ContentChild, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { ExpandableType } from '../../types/expandables';
+import { FudisExpandableType } from '../../types/miscellaneous';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { FudisIdService } from '../../utilities/id-service.service';
@@ -38,7 +38,7 @@ export class ExpandableComponent {
 	/**
 	 * Type i.e the look of the expandable
 	 */
-	@Input() variant: ExpandableType = ExpandableType.regular;
+	@Input() variant: FudisExpandableType = 'regular';
 
 	/**
 	 * Title for the expandable

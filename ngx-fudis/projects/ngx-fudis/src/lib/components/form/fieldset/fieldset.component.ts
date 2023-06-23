@@ -4,7 +4,7 @@ import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fi
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
 import { NotificationsDirective } from '../../../directives/content-projection/notifications/notifications.directive';
 import { FudisGridWidth, FudisGridAlign, FudisGridMarginSide } from '../../../types/grid';
-import { FudisSpacing } from '../../../types/spacing';
+import { FudisSpacing } from '../../../types/miscellaneous';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 
 @Component({

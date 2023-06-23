@@ -1,6 +1,6 @@
 import { Component, Input, HostBinding, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { FudisBodyText } from '../../../types/typography';
-import { FudisSpacing } from '../../../types/spacing';
+import { FudisSpacing } from '../../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-body-text',

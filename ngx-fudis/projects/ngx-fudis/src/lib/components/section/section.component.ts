@@ -4,8 +4,9 @@ import { FudisHeadingTag, FudisHeadingSize } from '../../types/typography';
 import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisGridWidth, FudisGridAlign, FudisGridMarginSide } from '../../types/grid';
-import { FudisSpacing } from '../../types/spacing';
+
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
+import { FudisSpacing } from '../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-section',

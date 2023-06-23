@@ -4,6 +4,12 @@
 
 .fudis-form {
 	&__header {
+		&__title {
+			&__badge {
+				margin-left: spacing.$spacing-xs;
+			}
+		}
+
 		&__main {
 			&__content {
 				margin-bottom: spacing.$spacing-sm;

@@ -5,6 +5,7 @@ import { HeaderDirective } from '../../../directives/content-projection/header/h
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
+import { FudisBadgeVariant } from '../../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-form',
@@ -28,6 +29,10 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 	@Input() titleSize: FudisHeadingSize = 'xl';
 
 	@Input() helpText: string;
+
+	@Input() badge: FudisBadgeVariant | null;
+
+	@Input() badgeText: string | null;
 
 	/**
 	 * If Error Summary is visible. Usually set on click of form submit button.

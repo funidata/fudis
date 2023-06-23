@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
-import { FudisDescriptionListItem } from '../../types/lists';
+import { FudisDescriptionListItem } from '../../types/miscellaneous';
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
 import { FudisGridColumnsResponsive } from '../../types/grid';
 
