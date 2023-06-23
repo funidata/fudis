@@ -33,12 +33,12 @@ export class TextInputComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * Minimium number of characters allowed by minLength
 	 */
-	@Input() minLength: number;
+	@Input() minLength: number | undefined = undefined;
 
 	/**
 	 * Maximum number of characters allowed by maxLength
 	 */
-	@Input() maxLength: number;
+	@Input() maxLength: number | undefined = undefined;
 
 	/**
 	 * Assistive text of max character count for screen readers

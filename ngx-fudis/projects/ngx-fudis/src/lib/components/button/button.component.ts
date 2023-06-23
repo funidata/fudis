@@ -65,7 +65,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 	/**
 	 * Icon for button if needed
 	 */
-	@Input() icon: FudisIcon;
+	@Input() icon: FudisIcon | undefined = undefined;
 
 	/**
 	 * Assign button as menu button with dropdown

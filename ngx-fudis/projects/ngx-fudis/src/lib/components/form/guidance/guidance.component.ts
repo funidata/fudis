@@ -41,7 +41,7 @@ export class GuidanceComponent {
 	/**
 	 * When set displays also a character count indicator.
 	 */
-	@Input() maxLength: number | undefined;
+	@Input() maxLength: number | undefined = undefined;
 
 	/**
 	 * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where "characters used" is "maxLengthText"
