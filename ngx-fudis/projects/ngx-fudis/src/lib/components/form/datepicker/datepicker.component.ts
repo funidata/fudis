@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, Input, OnInit, Signal, ViewEncapsulation, effect } from '@angular/core';
+import { AfterContentInit, Component, DoCheck, Inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import {
 	MatDateFormats,
 	MAT_NATIVE_DATE_FORMATS,
@@ -7,13 +7,13 @@ import {
 	MAT_DATE_LOCALE,
 } from '@angular/material/core';
 
-import { FormControl } from '@angular/forms';
+import { DOCUMENT } from '@angular/common';
 
+import { FormControl } from '@angular/forms';
 import { DatepickerCustomDateAdapter, FudisDateInputFormat } from './datepicker-custom-date-adapter';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
-import { FudisFormConfig, FudisInputWidth } from '../../../types/forms';
-import { FudisConfigService } from '../../../utilities/config.service';
+import { FudisInputWidth } from '../../../types/forms';
 
 export const FUDIS_DATE_FORMATS: MatDateFormats = {
 	...MAT_NATIVE_DATE_FORMATS,
@@ -40,17 +40,9 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
 		{ provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
 	],
 })
-export class DatepickerComponent extends InputBaseDirective implements AfterContentInit, OnInit {
-	constructor(private readonly _adapter: DateAdapter<Date>, private _configService: FudisConfigService) {
+export class DatepickerComponent extends InputBaseDirective implements DoCheck, AfterContentInit, OnInit {
+	constructor(private readonly _adapter: DateAdapter<Date>, @Inject(DOCUMENT) private _document: Document) {
 		super();
-
-		this._defaultConfig = this._configService.getConfig();
-
-		effect(() => {
-			this.changeDatepickerLanguage(this._defaultConfig());
-
-			console.log('effect');
-		});
 	}
 
 	/**
@@ -73,26 +65,26 @@ export class DatepickerComponent extends InputBaseDirective implements AfterCont
 	 */
 	@Input() maxDate: Date | null;
 
-	private _defaultConfig: Signal<FudisFormConfig>;
+	private _currentHtmlLang: string;
 
 	ngOnInit(): void {
 		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 
 	ngAfterContentInit(): void {
-		this.changeDatepickerLanguage(this._defaultConfig());
+		this._currentHtmlLang = this._document.documentElement.lang;
+		this._adapter.setLocale(this.updateLocale());
 	}
 
-	changeDatepickerLanguage(juttu: FudisFormConfig): void {
-		this._defaultConfig = this._configService.getConfig();
-		console.log(juttu.language);
-
-		this._adapter.setLocale(this.updateLocale(this._defaultConfig().language));
-		console.log('changing');
+	ngDoCheck(): void {
+		if (this._document.documentElement.lang !== this._currentHtmlLang) {
+			this._adapter.setLocale(this.updateLocale());
+			this._currentHtmlLang = this._document.documentElement.lang;
+		}
 	}
 
-	updateLocale(lang: string): string {
-		switch (lang) {
+	updateLocale(): string {
+		switch (this._document.documentElement.lang) {
 			case 'en':
 				return 'en-GB';
 			case 'fi':
