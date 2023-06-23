@@ -1,10 +1,10 @@
 import {
 	FudisBreakpointKey,
-	GridAttributes,
 	FudisGridColumnsResponsive,
 	FudisGridResponsiveData,
 	gridColumnDefault,
 	gridItemDefault,
+	FudisGridAttributes,
 } from '../../types/grid';
 
 /**
@@ -65,7 +65,7 @@ export const breakpointsToObserve = [
  *
  */
 
-export const getGridClasses = (values: GridAttributes): string => {
+export const getGridClasses = (values: FudisGridAttributes): string => {
 	let classList = [
 		'fudis-grid',
 		`fudis-grid__${values.width}`,

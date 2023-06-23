@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
 		private errorSummaryService: FudisErrorSummaryService,
 		private gridService: FudisGridService
 	) {
-		gridService.setGridDefaultColumns({ xs: 1, xl: 2 });
+		gridService.setGridDefaultValues({ columns: { xs: 1, xl: 2 }, marginSides: 'responsive' });
 	}
 
 	errorSummaryVisible: boolean = false;

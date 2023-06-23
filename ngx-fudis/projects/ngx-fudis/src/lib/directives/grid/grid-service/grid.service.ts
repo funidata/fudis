@@ -2,14 +2,14 @@ import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Injectable, OnDestroy, Signal, signal } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { FudisGridColumnsResponsive, FudisGridResponsiveData } from '../../../types/grid';
+import { FudisGridAttributes, FudisGridResponsiveData } from '../../../types/grid';
 import { breakpointsMinWidthToObserve } from '../gridUtils';
 
 @Injectable()
 export class FudisGridService implements OnDestroy {
 	destroyed = new Subject<void>();
 
-	private _defaultGridColumns = signal<FudisGridColumnsResponsive | null>(null);
+	private _defaultGridValues = signal<FudisGridAttributes>({});
 
 	private _currentScreenSize = signal<BreakpointState | null>(null);
 
@@ -18,15 +18,15 @@ export class FudisGridService implements OnDestroy {
 	/**
 	 * To set from application default values for all Grids application uses.
 	 */
-	setGridDefaultColumns(defaultColumns: FudisGridColumnsResponsive): void {
-		this._defaultGridColumns.set(defaultColumns);
+	setGridDefaultValues(defaultValues: FudisGridAttributes): void {
+		this._defaultGridValues.set(defaultValues);
 	}
 
 	/**
 	 * Get application's default values for Grid
 	 */
-	getGridDefaultColumns(): Signal<FudisGridColumnsResponsive | null> {
-		return this._defaultGridColumns.asReadonly();
+	getGridDefaultValues(): Signal<FudisGridAttributes | null> {
+		return this._defaultGridValues.asReadonly();
 	}
 
 	/**

@@ -66,15 +66,18 @@ export type FudisGridColumnsResponsive = {
 /**
  * Attributes for managing Grid
  */
-export interface GridAttributes {
-	width: FudisGridWidth;
-	align: FudisGridAlign;
-	marginTop: FudisSpacing;
-	marginBottom: FudisSpacing;
-	rowGap: FudisGridGap;
-	columnGap: FudisGridGap;
-	marginSides: FudisGridMarginSide;
-	classes: string[];
+export interface FudisGridAttributes {
+	alignItemsY?: FudisGridAlignItems;
+	alignItemsX?: FudisGridAlignItems;
+	columns?: FudisGridColumnsResponsive;
+	width?: FudisGridWidth;
+	align?: FudisGridAlign;
+	marginTop?: FudisSpacing;
+	marginBottom?: FudisSpacing;
+	rowGap?: FudisGridGap;
+	columnGap?: FudisGridGap;
+	marginSides?: FudisGridMarginSide;
+	classes?: string[];
 }
 
 /**
