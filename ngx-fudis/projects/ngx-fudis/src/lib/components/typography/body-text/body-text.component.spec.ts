@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { BodyTextComponent } from './body-text.component';
 import { FudisBodyText } from '../../../types/typography';
-import { FudisSpacing } from '../../../types/spacing';
+import { FudisSpacing } from '../../../types/miscellaneous';
 
 describe('BodyTextComponent', () => {
 	let component: BodyTextComponent;
