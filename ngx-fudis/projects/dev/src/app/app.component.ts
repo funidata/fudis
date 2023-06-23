@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
 
 	constructor(
 		@Inject(DOCUMENT) private document: Document,
-		public dialog: FudisDialogService,
+		private dialog: FudisDialogService,
 		private translocoService: TranslocoService,
 		private errorSummaryService: FudisErrorSummaryService,
 		private gridService: FudisGridService,
@@ -66,10 +66,10 @@ export class AppComponent implements OnInit {
 	radioButtonOptions: FudisRadioButtonOption[] = [];
 
 	ngOnInit(): void {
-		this.translocoService.setActiveLang('en');
 		this.translocoService.setActiveLang('fi');
+		this.translocoService.setActiveLang('en');
 
-		this.document.documentElement.lang = 'fi';
+		this.document.documentElement.lang = 'en';
 
 		this.translocoService.selectTranslateObject('options').subscribe((value) => {
 			this.radioButtonOptions = [
