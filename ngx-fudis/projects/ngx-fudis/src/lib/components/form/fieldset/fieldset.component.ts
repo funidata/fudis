@@ -3,7 +3,7 @@ import { Component, ContentChild, Input, ViewEncapsulation } from '@angular/core
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
 import { NotificationsDirective } from '../../../directives/content-projection/notifications/notifications.directive';
-import { GridWidth, GridAlign, GridMarginSide } from '../../../types/grid';
+import { FudisGridWidth, FudisGridAlign, FudisGridMarginSide } from '../../../types/grid';
 import { FudisSpacing } from '../../../types/spacing';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 
@@ -29,12 +29,12 @@ export class FieldSetComponent extends FieldSetBaseDirective {
 	 * sm = Viewports smaller than 768px
 	 * xs = Viewports smaller than 576px
 	 */
-	@Input() width: GridWidth = 'xxl';
+	@Input() width: FudisGridWidth = 'xxl';
 
 	/**
 	 * Alignment of Grid component inside its parent
 	 */
-	@Input() align: GridAlign = 'center';
+	@Input() align: FudisGridAlign = 'center';
 
 	/**
 	 * Margin top for the Grid
@@ -49,5 +49,5 @@ export class FieldSetComponent extends FieldSetBaseDirective {
 	/**
 	 * Horizontal margins left and right of the grid
 	 */
-	@Input() marginSides: GridMarginSide = 'none';
+	@Input() marginSides: FudisGridMarginSide = 'none';
 }

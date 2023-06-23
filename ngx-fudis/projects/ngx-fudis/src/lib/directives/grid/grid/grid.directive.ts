@@ -2,7 +2,12 @@ import { Directive, ElementRef, Input, OnChanges, OnInit, Signal, effect } from 
 
 import { getGridBreakpointDataArray, getGridClasses, getGridCssValue } from '../gridUtils';
 import { GridApiDirective } from '../grid-api/grid-api.directive';
-import { GridAttributes, GridColumnsResponsive, GridResponsiveData, gridColumnDefault } from '../../../types/grid';
+import {
+	GridAttributes,
+	FudisGridColumnsResponsive,
+	FudisGridResponsiveData,
+	gridColumnDefault,
+} from '../../../types/grid';
 import { FudisGridService } from '../grid-service/grid.service';
 
 @Directive({
@@ -12,7 +17,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	/**
 	 * Used to apply grid-template-columns values for the Grid
 	 */
-	protected _columns: string | GridResponsiveData[] = gridColumnDefault;
+	protected _columns: string | FudisGridResponsiveData[] = gridColumnDefault;
 
 	/**
 	 * Internal reference for the this Grid element
@@ -29,7 +34,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	 */
 	private _gridService: FudisGridService;
 
-	private _gridDefaultValues: Signal<GridColumnsResponsive | null>;
+	private _gridDefaultValues: Signal<FudisGridColumnsResponsive | null>;
 
 	/**
 	 * Setting of columns for the grid. Input will be converted to native CSS grid grid-template-columns values
@@ -42,7 +47,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	 * After md breakpoint it will have two columns 'repeat(2, 1fr)'
 	 * And after xl breakpoint 'repeat(3, 1fr)'
 	 */
-	@Input() columns: string | number | GridColumnsResponsive;
+	@Input() columns: string | number | FudisGridColumnsResponsive;
 
 	constructor(private _gridElement: ElementRef, gridService: FudisGridService) {
 		super();
@@ -69,7 +74,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		}
 		// Get breakpoint settings with provided default values and Input values
 		else if (!this.ignoreDefaults && this._gridDefaultValues() !== null) {
-			const combinedValues: GridColumnsResponsive = { ...this._gridDefaultValues(), ...this.columns };
+			const combinedValues: FudisGridColumnsResponsive = { ...this._gridDefaultValues(), ...this.columns };
 
 			this._columns = getGridBreakpointDataArray(combinedValues);
 		} else {

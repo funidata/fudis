@@ -1,7 +1,7 @@
 import { Directive, ElementRef, OnChanges, OnInit, Input, effect } from '@angular/core';
 import { FudisGridService } from '../grid-service/grid.service';
 import {
-	GridResponsiveData,
+	FudisGridResponsiveData,
 	GridItemAlignment,
 	GridItemResponsive,
 	GridItemWidth,
@@ -16,7 +16,7 @@ export class GridItemDirective implements OnInit, OnChanges {
 	/**
 	 * Used to apply CSS grid-column values for the Grid Item
 	 */
-	private _columns: string | GridResponsiveData[] = gridItemDefault;
+	private _columns: string | FudisGridResponsiveData[] = gridItemDefault;
 
 	/**
 	 * Internal reference for the this Grid Item element

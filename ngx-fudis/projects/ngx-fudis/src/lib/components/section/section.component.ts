@@ -3,7 +3,7 @@ import { FudisIdService } from '../../utilities/id-service.service';
 import { FudisHeadingTag, FudisHeadingSize } from '../../types/typography';
 import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
-import { GridWidth, GridAlign, GridMarginSide } from '../../types/grid';
+import { FudisGridWidth, FudisGridAlign, FudisGridMarginSide } from '../../types/grid';
 import { FudisSpacing } from '../../types/spacing';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 
@@ -34,12 +34,12 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 	 * sm = Viewports smaller than 768px
 	 * xs = Viewports smaller than 576px
 	 */
-	@Input() width: GridWidth = 'initial';
+	@Input() width: FudisGridWidth = 'initial';
 
 	/**
 	 * Alignment of Grid component inside its parent
 	 */
-	@Input() align: GridAlign = 'center';
+	@Input() align: FudisGridAlign = 'center';
 
 	/**
 	 * Margin top for the Grid
@@ -54,7 +54,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 	/**
 	 * Horizontal margins left and right of the grid
 	 */
-	@Input() marginSides: GridMarginSide = 'none';
+	@Input() marginSides: FudisGridMarginSide = 'none';
 
 	/**
 	 * Custom CSS classes for Grid element

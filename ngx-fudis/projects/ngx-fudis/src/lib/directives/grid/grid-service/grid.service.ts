@@ -2,14 +2,14 @@ import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Injectable, OnDestroy, Signal, signal } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { GridColumnsResponsive, GridResponsiveData } from '../../../types/grid';
+import { FudisGridColumnsResponsive, FudisGridResponsiveData } from '../../../types/grid';
 import { breakpointsMinWidthToObserve } from '../gridUtils';
 
 @Injectable()
 export class FudisGridService implements OnDestroy {
 	destroyed = new Subject<void>();
 
-	private _defaultGridColumns = signal<GridColumnsResponsive | null>(null);
+	private _defaultGridColumns = signal<FudisGridColumnsResponsive | null>(null);
 
 	private _currentScreenSize = signal<BreakpointState | null>(null);
 
@@ -18,14 +18,14 @@ export class FudisGridService implements OnDestroy {
 	/**
 	 * To set from application default values for all Grids application uses.
 	 */
-	setGridDefaultColumns(defaultColumns: GridColumnsResponsive): void {
+	setGridDefaultColumns(defaultColumns: FudisGridColumnsResponsive): void {
 		this._defaultGridColumns.set(defaultColumns);
 	}
 
 	/**
 	 * Get application's default values for Grid
 	 */
-	getGridDefaultColumns(): Signal<GridColumnsResponsive | null> {
+	getGridDefaultColumns(): Signal<FudisGridColumnsResponsive | null> {
 		return this._defaultGridColumns.asReadonly();
 	}
 
@@ -53,7 +53,7 @@ export class FudisGridService implements OnDestroy {
 	/**
 	 * Function which applies CSS attributes of grid-column-template for Grid and grid-column for GridItem.
 	 */
-	setGridAttributes(element: HTMLElement, columns: string | GridResponsiveData[], isGridItem?: boolean): void {
+	setGridAttributes(element: HTMLElement, columns: string | FudisGridResponsiveData[], isGridItem?: boolean): void {
 		const elementToModify = element;
 
 		if (isGridItem) {
