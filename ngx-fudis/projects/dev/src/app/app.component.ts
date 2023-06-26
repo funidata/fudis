@@ -48,7 +48,10 @@ export class AppComponent implements OnInit {
 		private gridService: FudisGridService,
 		private fudisConfig: FudisConfigService
 	) {
-		gridService.setGridDefaultValues({ columns: { xs: 1, xl: 2 }, marginSides: 'responsive' });
+		gridService.setGridDefaultValues({
+			columns: { xs: 1, xl: 2 },
+			marginSides: 'responsive',
+		});
 
 		fudisConfig.setConfig({
 			datepicker: { closeLabel: 'Close calendar' },

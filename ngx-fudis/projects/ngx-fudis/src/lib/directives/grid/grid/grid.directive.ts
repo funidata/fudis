@@ -97,27 +97,36 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 
 		/**
 		 * Collection of Grid attributes from Inputs() updated with possible default values provided from application
+		 * TODO: This could be improved
 		 */
-		this._gridInputObject = {
-			width: this.width ?? 'xxl',
-			align: this.align ?? 'center',
-			alignItemsX: this.alignItemsX ?? 'stretch',
-			alignItemsY: this.alignItemsY ?? 'stretch',
-			marginTop: this.marginTop ?? 'none',
-			marginBottom: this.marginBottom ?? 'none',
-			marginSides: this.marginSides ?? 'none',
-			rowGap: this.rowGap ?? 'responsive',
-			columnGap: this.columnGap ?? 'responsive',
-			classes: this.classes,
-		};
-
-		if (!this.ignoreDefaults) {
-			this._gridInputObject = { ...this._gridDefaults(), ...this._gridInputObject };
+		if (this.ignoreDefaults) {
+			this._gridInputObject = {
+				width: this.width ?? 'xxl',
+				align: this.align ?? 'center',
+				alignItemsX: this.alignItemsX ?? 'stretch',
+				alignItemsY: this.alignItemsY ?? 'stretch',
+				marginTop: this.marginTop ?? 'none',
+				marginBottom: this.marginBottom ?? 'none',
+				marginSides: this.marginSides ?? 'none',
+				rowGap: this.rowGap ?? 'responsive',
+				columnGap: this.columnGap ?? 'responsive',
+				classes: this.classes,
+			};
+		} else {
+			this._gridInputObject = {
+				width: this.width ?? this._gridDefaults()?.width ?? 'xxl',
+				align: this.align ?? this._gridDefaults()?.align ?? 'center',
+				alignItemsX: this.alignItemsX ?? this._gridDefaults()?.alignItemsX ?? 'stretch',
+				alignItemsY: this.alignItemsY ?? this._gridDefaults()?.alignItemsY ?? 'stretch',
+				marginTop: this.marginTop ?? this._gridDefaults()?.marginTop ?? 'none',
+				marginBottom: this.marginBottom ?? this._gridDefaults()?.marginBottom ?? 'none',
+				marginSides: this.marginSides ?? this._gridDefaults()?.marginSides ?? 'none',
+				rowGap: this.rowGap ?? this._gridDefaults()?.rowGap ?? 'responsive',
+				columnGap: this.columnGap ?? this._gridDefaults()?.columnGap ?? 'responsive',
+				classes: this.classes ?? this._gridDefaults()?.classes,
+			};
 		}
 
-		/**
-		 * Align all Grid items inside grid
-		 */
 		this._element.style.justifyItems = this._gridInputObject.alignItemsX!;
 		this._element.style.alignItems = this._gridInputObject.alignItemsY!;
 
