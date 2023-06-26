@@ -76,7 +76,6 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit {
 	@Input() maxDate: Date | null;
 
 	setConfigs(): void {
-		// this._configs = this._configService.getConfig();
 		this._configs = this._configService.getConfig();
 
 		this._adapter.setLocale(this.updateLocale(this._configs().language));
