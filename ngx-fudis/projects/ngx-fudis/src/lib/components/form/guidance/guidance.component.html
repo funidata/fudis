@@ -3,7 +3,6 @@
 		<div [class.fudis-guidance__errors]="(control && control.touched) || (formGroup && formGroup.touched)">
 			<fudis-icon
 				[icon]="'alert-fill'"
-				[color]="'attention'"
 				*ngIf="(control?.invalid && control?.touched) || (formGroup?.invalid && formGroup?.touched)" />
 
 			<div [attr.ariaLive]="ariaLive" class="fudis-guidance__errors__list">
