@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, Signal, ViewChild, effect } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Inject, Input, Signal, ViewChild, effect } from '@angular/core';
 
+import { DOCUMENT } from '@angular/common';
 import { FudisErrorSummaryService } from './error-summary.service';
 import { FudisFormErrorSummaryObject, FudisFormErrorSummaryList } from '../../../types/forms';
 
@@ -8,7 +9,7 @@ import { FudisFormErrorSummaryObject, FudisFormErrorSummaryList } from '../../..
 	templateUrl: './error-summary.component.html',
 	styleUrls: ['./error-summary.component.scss'],
 })
-export class ErrorSummaryComponent implements OnInit, AfterViewInit {
+export class ErrorSummaryComponent {
 	@ViewChild('focusTarget') focusTarget: ElementRef;
 
 	/**
@@ -26,7 +27,13 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 	 */
 	@Input({ required: true }) screenReaderHelpText: string;
 
-	constructor(private _errorSummaryService: FudisErrorSummaryService) {
+	@Input() liveRemove: boolean = false;
+
+	constructor(
+		@Inject(DOCUMENT) private _document: Document,
+		private _errorSummaryService: FudisErrorSummaryService,
+		private readonly _changeDetectorRef: ChangeDetectorRef
+	) {
 		effect(() => {
 			this.getErrors();
 		});
@@ -37,7 +44,9 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 	private _numberOfFocusTries: number = 0;
 
 	getErrors(): void {
-		const fetchedErrors: Signal<FudisFormErrorSummaryObject> = this._errorSummaryService.getVisibleErrors();
+		const fetchedErrors: Signal<FudisFormErrorSummaryObject> = this.liveRemove
+			? this._errorSummaryService.getDynamicErrors()
+			: this._errorSummaryService.getVisibleErrors();
 
 		this._visibleErrorList = [];
 
@@ -51,15 +60,16 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 			}
 		});
 
+		console.log(this._visibleErrorList.length);
+
+		this._changeDetectorRef.detectChanges();
+
 		/**
 		 * Focus to Error Summary element when visible error list gets updated.
 		 */
-
-		this.focusToErrorSummary();
-	}
-
-	ngOnInit(): void {
-		this.getErrors();
+		if (this._document.activeElement?.classList.contains('fudis-button')) {
+			this.focusToErrorSummary();
+		}
 	}
 
 	focusToErrorSummary(): void {
@@ -72,12 +82,5 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 				this.focusToErrorSummary();
 			}, 100);
 		}
-	}
-
-	ngAfterViewInit(): void {
-		/**
-		 * Initial focus when Error Summary is loaded first time
-		 * */
-		this.focusToErrorSummary();
 	}
 }
