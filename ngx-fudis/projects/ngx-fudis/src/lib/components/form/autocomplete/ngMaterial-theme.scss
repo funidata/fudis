@@ -90,6 +90,10 @@
 			&.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(.mdc-list-item--disabled) {
 				background: transparent;
 
+				&:hover {
+					@include colorMixins.bg-color('primary-light');
+				}
+
 				& .mdc-list-item__primary-text {
 					@include colorMixins.text-color('gray-dark');
 				}

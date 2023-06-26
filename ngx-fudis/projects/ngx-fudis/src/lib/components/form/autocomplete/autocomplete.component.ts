@@ -1,4 +1,12 @@
-import { AfterContentInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+	AfterContentInit,
+	ChangeDetectionStrategy,
+	Component,
+	ElementRef,
+	Input,
+	OnInit,
+	ViewChild,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
@@ -14,6 +22,7 @@ export type AutocompleteInputSize = 'sm' | 'md' | 'lg';
 	selector: 'fudis-autocomplete',
 	templateUrl: './autocomplete.component.html',
 	styleUrls: ['./autocomplete.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutocompleteComponent extends InputBaseDirective implements OnInit, AfterContentInit {
 	constructor(private _idService: IdService) {
@@ -23,6 +32,8 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	@ViewChild('fudisAutocompleteInput') autocompleteInput: ElementRef;
 
 	@ViewChild('scrollViewport') scrollViewport: CdkVirtualScrollViewport;
+
+	@ViewChild(CdkVirtualScrollViewport, { static: false }) cdkVirtualScrollViewport: CdkVirtualScrollViewport;
 
 	/**
 	 * FormControl for the input.
@@ -101,6 +112,11 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 		}
 	}
 
+	// eslint-disable-next-line class-methods-use-this
+	handleSelection() {
+		console.log('handleSelection');
+	}
+
 	updateControlValue(value: string | null): void {
 		if (!value) {
 			this.control.patchValue(null);
@@ -124,6 +140,7 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 		if (value || value === '') {
 			const filterValue = value.toLowerCase();
 			const filteredOptions = this.options.filter((option) => option.viewValue.toLowerCase().includes(filterValue));
+			console.log(filteredOptions.length);
 
 			if (this.scrollViewport?.elementRef?.nativeElement) {
 				this.scrollViewport.elementRef.nativeElement.style.height = `${filteredOptions.length * 2.5}rem`;
@@ -137,6 +154,9 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	 * Clear any written or selected value in the autocomplete field
 	 */
 	clearFilter(): void {
+		console.log(this.cdkVirtualScrollViewport);
+		this.cdkVirtualScrollViewport?.checkViewportSize();
+
 		// Clear input field and control value
 		this.control.setValue(null);
 		this.autocompleteFormControl.setValue(null);
