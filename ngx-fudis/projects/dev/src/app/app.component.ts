@@ -2,7 +2,7 @@
 import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
-import { DialogService, ErrorSummaryService, GridService } from 'ngx-fudis';
+import { FudisConfigService, FudisDialogService, FudisErrorSummaryService, FudisGridService } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
 
 import { FudisDropdownOption, FudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
@@ -42,12 +42,22 @@ export class AppComponent implements OnInit {
 
 	constructor(
 		@Inject(DOCUMENT) private document: Document,
-		public dialog: DialogService,
+		private dialog: FudisDialogService,
 		private translocoService: TranslocoService,
-		private errorSummaryService: ErrorSummaryService,
-		private gridService: GridService
+		private errorSummaryService: FudisErrorSummaryService,
+		private gridService: FudisGridService,
+		private fudisConfig: FudisConfigService
 	) {
-		gridService.setGridDefaultColumns({ xs: 1, xl: 2 });
+		gridService.setGridDefaultValues({
+			columns: { xs: 1, xl: 2 },
+			marginSides: 'responsive',
+		});
+
+		fudisConfig.setConfig({
+			datepicker: { closeLabel: 'Close calendar' },
+			requiredText: 'Required',
+			language: 'en',
+		});
 	}
 
 	errorSummaryVisible: boolean = false;
@@ -59,10 +69,10 @@ export class AppComponent implements OnInit {
 	radioButtonOptions: FudisRadioButtonOption[] = [];
 
 	ngOnInit(): void {
-		this.translocoService.setActiveLang('en');
 		this.translocoService.setActiveLang('fi');
+		this.translocoService.setActiveLang('en');
 
-		this.document.documentElement.lang = 'fi';
+		this.document.documentElement.lang = 'en';
 
 		this.translocoService.selectTranslateObject('options').subscribe((value) => {
 			this.radioButtonOptions = [
@@ -84,9 +94,19 @@ export class AppComponent implements OnInit {
 		if (this.translocoService.getActiveLang() === 'en') {
 			this.translocoService.setActiveLang('fi');
 			this.document.documentElement.lang = 'fi';
+			this.fudisConfig.setConfig({
+				datepicker: { closeLabel: 'Sulje kalenteri' },
+				requiredText: 'Pakollinen',
+				language: 'fi',
+			});
 		} else {
 			this.translocoService.setActiveLang('en');
 			this.document.documentElement.lang = 'en';
+			this.fudisConfig.setConfig({
+				datepicker: { closeLabel: 'Close calendar' },
+				requiredText: 'Required',
+				language: 'en',
+			});
 		}
 	}
 

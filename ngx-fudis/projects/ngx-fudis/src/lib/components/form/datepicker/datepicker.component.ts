@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, DoCheck, Inject, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, Signal, ViewEncapsulation, effect } from '@angular/core';
 import {
 	MatDateFormats,
 	MAT_NATIVE_DATE_FORMATS,
@@ -7,13 +7,13 @@ import {
 	MAT_DATE_LOCALE,
 } from '@angular/material/core';
 
-import { DOCUMENT } from '@angular/common';
-
 import { FormControl } from '@angular/forms';
+import { MatDatepickerIntl } from '@angular/material/datepicker';
 import { DatepickerCustomDateAdapter, FudisDateInputFormat } from './datepicker-custom-date-adapter';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
-import { FudisInputWidth } from '../../../types/forms';
+import { FudisFormConfig, FudisInputWidth } from '../../../types/forms';
+import { FudisConfigService } from '../../../utilities/config.service';
 
 export const FUDIS_DATE_FORMATS: MatDateFormats = {
 	...MAT_NATIVE_DATE_FORMATS,
@@ -40,10 +40,20 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
 		{ provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
 	],
 })
-export class DatepickerComponent extends InputBaseDirective implements DoCheck, AfterContentInit, OnInit {
-	constructor(private readonly _adapter: DateAdapter<Date>, @Inject(DOCUMENT) private _document: Document) {
+export class DatepickerComponent extends InputBaseDirective implements OnInit {
+	constructor(
+		private readonly _adapter: DateAdapter<Date>,
+		private _configService: FudisConfigService,
+		private _matDatepickerIntl: MatDatepickerIntl
+	) {
 		super();
+
+		effect(() => {
+			this.setConfigs();
+		});
 	}
+
+	protected _configs: Signal<FudisFormConfig>;
 
 	/**
 	 * FormControl for the input.
@@ -65,26 +75,21 @@ export class DatepickerComponent extends InputBaseDirective implements DoCheck, 
 	 */
 	@Input() maxDate: Date | null;
 
-	private _currentHtmlLang: string;
+	setConfigs(): void {
+		this._configs = this._configService.getConfig();
+
+		this._adapter.setLocale(this.updateLocale(this._configs().language));
+
+		this._matDatepickerIntl.closeCalendarLabel = this._configs().datepicker.closeLabel;
+	}
 
 	ngOnInit(): void {
 		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 
-	ngAfterContentInit(): void {
-		this._currentHtmlLang = this._document.documentElement.lang;
-		this._adapter.setLocale(this.updateLocale());
-	}
-
-	ngDoCheck(): void {
-		if (this._document.documentElement.lang !== this._currentHtmlLang) {
-			this._adapter.setLocale(this.updateLocale());
-			this._currentHtmlLang = this._document.documentElement.lang;
-		}
-	}
-
-	updateLocale(): string {
-		switch (this._document.documentElement.lang) {
+	// eslint-disable-next-line class-methods-use-this
+	updateLocale(value: string): string {
+		switch (value) {
 			case 'en':
 				return 'en-GB';
 			case 'fi':

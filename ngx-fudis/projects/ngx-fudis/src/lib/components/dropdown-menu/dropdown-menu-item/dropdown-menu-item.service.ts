@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { Signal, signal } from '@angular/core';
 
-export class DropdownMenuItemService {
+export class FudisDropdownMenuItemService {
 	private _signalDropdownMenuOpen = signal<boolean>(false);
 
 	setMenuStatus(status: boolean): void {
