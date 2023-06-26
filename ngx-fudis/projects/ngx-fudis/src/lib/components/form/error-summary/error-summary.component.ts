@@ -60,8 +60,6 @@ export class ErrorSummaryComponent {
 			}
 		});
 
-		console.log(this._visibleErrorList.length);
-
 		this._changeDetectorRef.detectChanges();
 
 		/**
