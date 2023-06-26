@@ -21,7 +21,7 @@ type IdInformation = {
 @Injectable({
 	providedIn: 'root',
 })
-export class IdService {
+export class FudisIdService {
 	private _idList: IdInformation = {
 		autocomplete: 0,
 		checkbox: 0,

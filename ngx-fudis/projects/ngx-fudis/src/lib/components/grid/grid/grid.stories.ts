@@ -190,7 +190,7 @@ const ResponsiveColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent) 
 				until hitting 'xxl' breakpoint.</fudis-body-text
 			>
 			<fudis-body-text class="text-margin"
-				>Using GridService's 'setGridDefaultColumns()' you can define default values applied to all your
+				>Using FudisGridService's 'setGridDefaultColumns()' you can define default values applied to all your
 				Grids.</fudis-body-text
 			>
 			<fudis-body-text class="text-margin"

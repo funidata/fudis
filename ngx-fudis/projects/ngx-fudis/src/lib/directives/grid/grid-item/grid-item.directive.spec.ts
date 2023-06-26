@@ -1,8 +1,8 @@
 // import { ElementRef } from '@angular/core';
-// import { GridService } from '../grid-service/grid.service';
+// import { FudisGridService } from '../grid-service/grid.service';
 // import { GridItemDirective } from './grid-item.directive';
 
-// const fakeGridService = jasmine.createSpyObj<GridService>('GridService', {
+// const fakeFudisGridService = jasmine.createSpyObj<FudisGridService>('FudisGridService', {
 // 	getBreakpointState: null,
 // });
 
@@ -12,7 +12,7 @@
 
 // describe('GridItemDirective', () => {
 // 	it('should create an instance', () => {
-// 		const directive = new GridItemDirective(fakeGridElement, fakeGridService);
+// 		const directive = new GridItemDirective(fakeGridElement, fakeFudisGridService);
 // 		expect(directive).toBeTruthy();
 // 	});
 // });

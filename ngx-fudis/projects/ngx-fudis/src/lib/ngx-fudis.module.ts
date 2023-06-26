@@ -32,13 +32,13 @@ import {
 	DialogActionsDirective,
 } from './components/dialog/dialog-directives';
 import { DialogComponent } from './components/dialog/dialog.component';
-import { DialogService } from './components/dialog/dialog.service';
+import { FudisDialogService } from './components/dialog/dialog.service';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
 import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
 import { DropdownMenuItemComponent } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
-import { DropdownMenuItemService } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
+import { FudisDropdownMenuItemService } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
-import { ErrorSummaryService } from './components/form/error-summary/error-summary.service';
+import { FudisErrorSummaryService } from './components/form/error-summary/error-summary.service';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
 
@@ -50,12 +50,12 @@ import { GridApiDirective } from './directives/grid/grid-api/grid-api.directive'
 import { GridDirective } from './directives/grid/grid/grid.directive';
 import { GridItemComponent } from './components/grid/grid-item/grid-item.component';
 import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
-import { GridService } from './directives/grid/grid-service/grid.service';
+import { FudisGridService } from './directives/grid/grid-service/grid.service';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { HeaderDirective } from './directives/content-projection/header/header.directive';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { IconComponent } from './components/icon/icon.component';
-import { IdService } from './utilities/id-service.service';
+import { FudisIdService } from './utilities/id-service.service';
 import { InputBaseDirective } from './directives/form/input-base/input-base.directive';
 import { InputWithLanguageOptionsComponent } from './components/form/input-with-language-options/input-with-language-options.component';
 import { LabelComponent } from './components/form/label/label.component';
@@ -71,6 +71,7 @@ import { TextSpacingComponent } from './components/typography/text-spacing/text-
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
+import { FudisConfigService } from './utilities/config.service';
 
 @NgModule({
 	/*
@@ -193,6 +194,13 @@ import { NotificationsDirective } from './directives/content-projection/notifica
 		TextInputComponent,
 		TooltipDirective,
 	],
-	providers: [DialogService, ErrorSummaryService, GridService, DropdownMenuItemService, IdService],
+	providers: [
+		FudisDialogService,
+		FudisErrorSummaryService,
+		FudisGridService,
+		FudisDropdownMenuItemService,
+		FudisIdService,
+		FudisConfigService,
+	],
 })
 export class NgxFudisModule {}

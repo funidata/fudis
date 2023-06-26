@@ -81,3 +81,13 @@ export type FudisDropdownLanguageOption =
 export interface FudisInputWithLanguageOptionsFormGroup {
 	[language: string]: FormControl<string | null>;
 }
+
+export interface FudisFormDatepickerConfig {
+	closeLabel: string;
+}
+
+export interface FudisFormConfig {
+	requiredText: string;
+	language: 'en' | 'fi' | 'sv';
+	datepicker: FudisFormDatepickerConfig;
+}

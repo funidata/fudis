@@ -1,7 +1,7 @@
 import { Signal, signal } from '@angular/core';
 import { FudisFormErrorSummaryObject, FudisFormErrorSummaryItem } from '../../../types/forms';
 
-export class ErrorSummaryService {
+export class FudisErrorSummaryService {
 	private _currentErrorList: FudisFormErrorSummaryObject = {};
 
 	private _signalCurrentErrorList = signal<FudisFormErrorSummaryObject>({});

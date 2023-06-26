@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { DropdownMenuItemService } from './dropdown-menu-item.service';
+import { FudisDropdownMenuItemService } from './dropdown-menu-item.service';
 
 @Component({
 	selector: 'fudis-dropdown-menu-item',
@@ -24,7 +24,7 @@ export class DropdownMenuItemComponent {
 	 */
 	@Output() handleClick = new EventEmitter<Event>();
 
-	constructor(private clickService: DropdownMenuItemService) {}
+	constructor(private clickService: FudisDropdownMenuItemService) {}
 
 	// eslint-disable-next-line class-methods-use-this
 	handleKeyDown(event: KeyboardEvent) {

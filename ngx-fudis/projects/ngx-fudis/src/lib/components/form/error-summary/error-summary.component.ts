@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, Signal, ViewChild, effect } from '@angular/core';
 
-import { ErrorSummaryService } from './error-summary.service';
+import { FudisErrorSummaryService } from './error-summary.service';
 import { FudisFormErrorSummaryObject, FudisFormErrorSummaryList } from '../../../types/forms';
 
 @Component({
@@ -26,7 +26,7 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 	 */
 	@Input({ required: true }) screenReaderHelpText: string;
 
-	constructor(private _errorSummaryService: ErrorSummaryService) {
+	constructor(private _errorSummaryService: FudisErrorSummaryService) {
 		effect(() => {
 			this.getErrors();
 		});

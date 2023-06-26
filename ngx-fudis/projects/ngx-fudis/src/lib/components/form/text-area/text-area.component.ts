@@ -24,12 +24,12 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * Minimum length for text area, unset by default
 	 */
-	@Input() minLength: number;
+	@Input() minLength: number | undefined = undefined;
 
 	/**
 	 * Maximum length for text area, unset by default. When set displays also a character count indicator.
 	 */
-	@Input() maxLength: number;
+	@Input() maxLength: number | undefined = undefined;
 
 	/**
 	 * Assistive text of max character count for screen readers
