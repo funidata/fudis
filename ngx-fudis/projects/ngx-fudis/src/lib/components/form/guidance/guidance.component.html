@@ -6,7 +6,7 @@
 				[color]="'attention'"
 				*ngIf="(control?.invalid && control?.touched) || (formGroup?.invalid && formGroup?.touched)" />
 
-			<div [attr.ariaLive]="ariaLive">
+			<div [attr.ariaLive]="ariaLive" class="fudis-guidance__errors__list">
 				<!-- Check errors for control group of FormGroup e. g. english, finnish, swedish-->
 				<ng-container *ngIf="formGroup?.controls && !control && !formGroup.errors">
 					<ng-container *ngFor="let singleControl of formGroup.controls | keyvalue">
