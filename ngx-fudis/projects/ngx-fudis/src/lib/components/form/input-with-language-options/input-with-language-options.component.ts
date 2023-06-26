@@ -9,7 +9,7 @@ import {
 } from '../../../types/forms';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
-import { IdService } from '../../../utilities/id-service.service';
+import { FudisIdService } from '../../../utilities/id-service.service';
 
 @Component({
 	selector: 'fudis-input-with-language-options',
@@ -17,14 +17,14 @@ import { IdService } from '../../../utilities/id-service.service';
 	styleUrls: ['./input-with-language-options.component.scss'],
 })
 export class InputWithLanguageOptionsComponent extends InputBaseDirective implements OnInit, OnChanges {
-	constructor(private _idService: IdService) {
+	constructor(private _idService: FudisIdService) {
 		super();
 	}
 
 	/**
 	 * FormGroup including controls.
 	 */
-	@Input({ required: true }) formGroup: FormGroup<FudisInputWithLanguageOptionsFormGroup>;
+	@Input({ required: true }) formGroup: FormGroup<FudisInputWithLanguageOptionsFormGroup | any>;
 
 	/**
 	 * Option list for language selection Fudis Dropdown. To pair control with corresponding dropdown option Dropdown option "value" must equal to control's name. E.g. "{value: 'english', viewValue: 'EN'}" pairs with "english: New FormControl('')"

@@ -2,7 +2,7 @@ import { Component, Input, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
-import { IdService } from '../../../utilities/id-service.service';
+import { FudisIdService } from '../../../utilities/id-service.service';
 
 @Component({
 	selector: 'fudis-checkbox[id][label]',
@@ -10,7 +10,7 @@ import { IdService } from '../../../utilities/id-service.service';
 	styleUrls: ['./checkbox.component.scss'],
 })
 export class CheckboxComponent extends InputBaseDirective implements OnInit {
-	constructor(private _idService: IdService) {
+	constructor(private _idService: FudisIdService) {
 		super();
 	}
 

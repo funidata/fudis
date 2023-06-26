@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DialogService } from 'ngx-fudis';
+import { FudisDialogService } from 'ngx-fudis';
 import { DialogTestContentComponent } from './dialog-test-content/dialog-test-content.component';
 
 @Component({
@@ -8,7 +8,7 @@ import { DialogTestContentComponent } from './dialog-test-content/dialog-test-co
 	styles: [],
 })
 export class DialogTestComponent {
-	constructor(public dialog: DialogService) {}
+	constructor(public dialog: FudisDialogService) {}
 
 	openDialog() {
 		const ref = this.dialog.open(DialogTestContentComponent);

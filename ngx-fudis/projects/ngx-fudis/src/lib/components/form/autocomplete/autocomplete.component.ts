@@ -14,7 +14,7 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { FudisDropdownOption, FudisInputWidth } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
-import { IdService } from '../../../utilities/id-service.service';
+import { FudisIdService } from '../../../utilities/id-service.service';
 
 @Component({
 	selector: 'fudis-autocomplete',
@@ -23,7 +23,7 @@ import { IdService } from '../../../utilities/id-service.service';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutocompleteComponent extends InputBaseDirective implements OnInit, AfterContentInit {
-	constructor(private _idService: IdService) {
+	constructor(private _idService: FudisIdService) {
 		super();
 	}
 

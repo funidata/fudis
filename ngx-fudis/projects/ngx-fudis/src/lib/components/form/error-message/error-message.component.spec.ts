@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ErrorMessageComponent } from './error-message.component';
-import { ErrorSummaryService } from '../error-summary/error-summary.service';
+import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
 
 describe('ErrorMessageComponent', () => {
 	let component: ErrorMessageComponent;
@@ -10,7 +10,7 @@ describe('ErrorMessageComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [ErrorMessageComponent],
-			providers: [ErrorSummaryService],
+			providers: [FudisErrorSummaryService],
 		}).compileComponents();
 	});
 

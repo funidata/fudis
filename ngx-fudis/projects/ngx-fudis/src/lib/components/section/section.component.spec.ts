@@ -3,9 +3,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SectionComponent } from './section.component';
 import { HeadingComponent } from '../typography/heading/heading.component';
 
-import { GridService } from '../../directives/grid/grid-service/grid.service';
+import { FudisGridService } from '../../directives/grid/grid-service/grid.service';
 
-import { IdService } from '../../utilities/id-service.service';
+import { FudisIdService } from '../../utilities/id-service.service';
 import { GridDirective } from '../../directives/grid/grid/grid.directive';
 
 describe('FormSectionComponent', () => {
@@ -15,7 +15,7 @@ describe('FormSectionComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [SectionComponent, HeadingComponent, GridDirective],
-			providers: [GridService, IdService],
+			providers: [FudisGridService, FudisIdService],
 		});
 		fixture = TestBed.createComponent(SectionComponent);
 

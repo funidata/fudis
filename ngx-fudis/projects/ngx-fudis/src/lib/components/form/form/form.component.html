@@ -18,7 +18,13 @@
 		<div class="fudis-form__header__main">
 			<ng-container *ngIf="title">
 				<div class="fudis-form__header__title">
-					<fudis-heading [marginBottom]="'xs'" [size]="titleSize" [tag]="titleTag">{{ title }}</fudis-heading>
+					<fudis-heading [marginBottom]="'xs'" [size]="titleSize" [tag]="titleTag"
+						>{{ title }}
+
+						<ng-container *ngIf="badge && badgeText">
+							<fudis-badge class="fudis-form__header__title__badge" [variant]="badge" [content]="badgeText" />
+						</ng-container>
+					</fudis-heading>
 					<ng-container *ngIf="helpText">
 						<fudis-body-text [marginBottom]="'xs'">{{ helpText }}</fudis-body-text>
 					</ng-container>

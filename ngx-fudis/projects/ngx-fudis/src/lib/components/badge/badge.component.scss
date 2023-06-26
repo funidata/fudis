@@ -9,6 +9,7 @@
 	@include colorMixin.text-color('gray-dark');
 
 	padding: spacing.$pixel-1 spacing.$pixel-3;
+	vertical-align: middle;
 
 	&__accent {
 		@include colorMixin.bg-color('yellow-light');

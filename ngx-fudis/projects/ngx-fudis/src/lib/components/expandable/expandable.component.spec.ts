@@ -9,7 +9,7 @@ import { IconComponent } from '../icon/icon.component';
 import { ExpandableComponent } from './expandable.component';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
-import { IdService } from '../../utilities/id-service.service';
+import { FudisIdService } from '../../utilities/id-service.service';
 
 @Component({
 	selector: 'fudis-mock-container',
@@ -56,7 +56,7 @@ describe('ExpandableComponent', () => {
 				MockComponent(ButtonComponent),
 				MockComponent(IconComponent),
 			],
-			providers: [IdService],
+			providers: [FudisIdService],
 		}).compileComponents();
 	});
 

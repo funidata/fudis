@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { FudisInputWidth } from '../../../types/forms';
-import { IdService } from '../../../utilities/id-service.service';
+import { FudisIdService } from '../../../utilities/id-service.service';
 
 @Component({
 	selector: 'fudis-text-area[id][label]',
@@ -12,7 +12,7 @@ import { IdService } from '../../../utilities/id-service.service';
 	styleUrls: ['./text-area.component.scss'],
 })
 export class TextAreaComponent extends InputBaseDirective implements OnInit {
-	constructor(private _idService: IdService) {
+	constructor(private _idService: FudisIdService) {
 		super();
 	}
 
@@ -24,12 +24,12 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * Minimum length for text area, unset by default
 	 */
-	@Input() minLength: number;
+	@Input() minLength: number | undefined = undefined;
 
 	/**
 	 * Maximum length for text area, unset by default. When set displays also a character count indicator.
 	 */
-	@Input() maxLength: number;
+	@Input() maxLength: number | undefined = undefined;
 
 	/**
 	 * Assistive text of max character count for screen readers
