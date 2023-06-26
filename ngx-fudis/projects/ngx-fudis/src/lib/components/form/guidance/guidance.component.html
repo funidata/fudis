@@ -1,47 +1,51 @@
 <div class="fudis-guidance">
 	<div [id]="for + '_guidance'">
-		<div
-			[attr.ariaLive]="ariaLive"
-			[class.fudis-guidance__errors]="(control && control.touched) || (formGroup && formGroup.touched)">
-			<!-- Check errors for control group of FormGroup e. g. english, finnish, swedish-->
-			<ng-container *ngIf="formGroup?.controls && !control && !formGroup.errors">
-				<ng-container *ngFor="let singleControl of formGroup.controls | keyvalue">
-					<ng-container *ngIf="singleControl.value.errors">
-						<ng-container *ngFor="let error of singleControl.value.errors | keyvalue">
-							<fudis-error-message
-								[focusId]="for"
-								[visible]="singleControl.value.touched"
-								[type]="error.key"
-								[controlName]="singleControl.key"
-								[label]="inputLabel"
-								[message]="groupErrorMsg?.[singleControl.key]?.[asErrorkey(error?.key)]"></fudis-error-message>
+		<div [class.fudis-guidance__errors]="(control && control.touched) || (formGroup && formGroup.touched)">
+			<fudis-icon
+				[icon]="'alert-fill'"
+				*ngIf="(control?.invalid && control?.touched) || (formGroup?.invalid && formGroup?.touched)" />
+
+			<div [attr.ariaLive]="ariaLive" class="fudis-guidance__errors__list">
+				<!-- Check errors for control group of FormGroup e. g. english, finnish, swedish-->
+				<ng-container *ngIf="formGroup?.controls && !control && !formGroup.errors">
+					<ng-container *ngFor="let singleControl of formGroup.controls | keyvalue">
+						<ng-container *ngIf="singleControl.value.errors">
+							<ng-container *ngFor="let error of singleControl.value.errors | keyvalue">
+								<fudis-error-message
+									[focusId]="for"
+									[visible]="singleControl.value.touched"
+									[type]="error.key"
+									[controlName]="singleControl.key"
+									[label]="inputLabel"
+									[message]="groupErrorMsg?.[singleControl.key]?.[asErrorkey(error?.key)]"></fudis-error-message>
+							</ng-container>
 						</ng-container>
 					</ng-container>
 				</ng-container>
-			</ng-container>
-			<!-- Check errors for FormGroup e. g. atLeastOneIsRequired -->
-			<ng-container *ngIf="formGroup?.errors && formGroup.invalid">
-				<ng-container *ngFor="let error of formGroup.errors | keyvalue">
-					<fudis-error-message
-						[visible]="formGroup.touched"
-						[focusId]="for"
-						[type]="error.key"
-						[label]="inputLabel"
-						[message]="groupErrorMsg?.[error.key]"></fudis-error-message>
+				<!-- Check errors for FormGroup e. g. atLeastOneIsRequired -->
+				<ng-container *ngIf="formGroup?.errors && formGroup.invalid">
+					<ng-container *ngFor="let error of formGroup.errors | keyvalue">
+						<fudis-error-message
+							[visible]="formGroup.touched"
+							[focusId]="for"
+							[type]="error.key"
+							[label]="inputLabel"
+							[message]="groupErrorMsg?.[error.key]"></fudis-error-message>
+					</ng-container>
 				</ng-container>
-			</ng-container>
-			<!-- Check errors for single FormControl e. g. single text-input with maxlength error -->
-			<ng-container *ngIf="control?.errors && !formGroup">
-				<ng-container *ngFor="let error of control.errors | keyvalue">
-					<fudis-error-message
-						[visible]="control.touched"
-						[focusId]="for"
-						[label]="inputLabel"
-						[type]="error.key"
-						[message]="errorMsg?.[asErrorkey(error.key)]"></fudis-error-message>
+				<!-- Check errors for single FormControl e. g. single text-input with maxlength error -->
+				<ng-container *ngIf="control?.errors && !formGroup">
+					<ng-container *ngFor="let error of control.errors | keyvalue">
+						<fudis-error-message
+							[visible]="control.touched"
+							[focusId]="for"
+							[label]="inputLabel"
+							[type]="error.key"
+							[message]="errorMsg?.[asErrorkey(error.key)]"></fudis-error-message>
+					</ng-container>
 				</ng-container>
-			</ng-container>
-			<ng-content></ng-content>
+				<ng-content></ng-content>
+			</div>
 		</div>
 		<p *ngIf="helpText" class="fudis-guidance__help-text">{{ helpText }}</p>
 	</div>
