@@ -27,7 +27,7 @@ const Template: StoryFn<AutocompleteComponent> = (args: AutocompleteComponent) =
 
 export const AutocompleteSearch = Template.bind({});
 AutocompleteSearch.args = {
-	label: 'Search and filter option',
+	label: 'Search autocomplete',
 	requiredText: 'Required',
 	clearFilterText: 'Clear filter',
 	helpText:
@@ -55,7 +55,7 @@ const manyOptions = Array.from({ length: 100 }).map((value, i) => {
 
 export const AutocompleteDropdown = Template.bind({});
 AutocompleteDropdown.args = {
-	label: 'Choose and filter option',
+	label: 'Dropdown autocomplete',
 	variant: 'dropdown',
 	requiredText: 'Required',
 	clearFilterText: 'Clear filter',

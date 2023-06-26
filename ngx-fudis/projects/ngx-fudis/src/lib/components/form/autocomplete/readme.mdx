@@ -24,6 +24,8 @@ Autocomplete (single-select) can only have one option selected at a time.
 
 Autocomplete is designed to use when basic [dropdown](/story/components-form-dropdown--single-select) is not enough - that is, cases where option list has too many objects to scroll through and user has an idea what they are searching for.
 
+**NOTE:** Autocomplete does not have any lazy loading at this time, all the data is loaded in the DOM when component is initialized. This can cause performance issues with `dropdown` variant if option list data is massive. Lazy loading will be implemented later on.
+
 #### Mandatory Properties
 
 Autocomplete requires at least `label` and `options` object array with possible option values. For accessibility it is also mandatory to give `clearFilterText` which is passed to clear-button's aria-label.
