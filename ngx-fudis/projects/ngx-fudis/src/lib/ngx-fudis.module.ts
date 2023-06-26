@@ -71,6 +71,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
 import { FudisConfigService } from './utilities/config.service';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
 	/*
@@ -124,6 +125,7 @@ import { FudisConfigService } from './utilities/config.service';
 		TextAreaComponent,
 		TooltipDirective,
 		NotificationsDirective,
+		FooterComponent,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
@@ -168,6 +170,7 @@ import { FudisConfigService } from './utilities/config.service';
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,
+		FooterComponent,
 		DialogTitleDirective,
 		DialogContentDirective,
 		DialogCloseDirective,
