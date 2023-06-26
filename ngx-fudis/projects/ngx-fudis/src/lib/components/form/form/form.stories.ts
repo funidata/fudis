@@ -28,6 +28,7 @@ import { FormComponent } from './form.component';
 			[helpText]="formHelpText"
 			[errorSummaryScreenReaderHelpText]="errorSummaryScreenReaderHelpText"
 			[errorSummaryHelpText]="errorSummaryHelpText"
+			[errorSummaryLiveRemove]="false"
 			[errorSummaryVisible]="errorSummaryVisible">
 			<ng-template fudisHeader>
 				<!-- <fudis-heading [marginBottom]="'xs'" [tag]="titleTag">{{ formTitle }}</fudis-heading> -->
@@ -53,12 +54,13 @@ import { FormComponent } from './form.component';
 									[helpText]="helpText"
 									[tooltip]="'Quite many fields are required.'">
 									<ng-template fudisNotifications type="fieldset">
-										<fudis-notification>
+										<fudis-notification *ngIf="firstLoad || errorSummaryVisible">
 											<fudis-body-text>
 												This is notification for a fieldset. It has one custom error-message which should pop up in the
 												error summary on submit.
 											</fudis-body-text>
 											<fudis-error-message
+												[type]="'fieldset'"
 												[variant]="'body-text'"
 												[visible]="true"
 												[focusId]="fieldsetId"
@@ -77,7 +79,7 @@ import { FormComponent } from './form.component';
 												[label]="labelName"
 												[helpText]="'Some name would be nice. Provide course name in at least one language.'"
 												[groupErrorMsg]="errorName"
-												[requiredText]="requiredText"></fudis-input-with-language-options>
+												[requiredText]="requiredText" />
 											<fudis-input-with-language-options
 												[variant]="'text-area'"
 												[missingLanguage]="'Missing'"
@@ -90,14 +92,14 @@ import { FormComponent } from './form.component';
 													'So that students know what they are getting into. Provide description in all languages.'
 												"
 												[groupErrorMsg]="errorDescription"
-												[requiredText]="requiredText"></fudis-input-with-language-options>
+												[requiredText]="requiredText" />
 											<fudis-text-input
 												[id]="'unique-input-3'"
 												[control]="fieldsetExample.controls['teacher']"
 												[label]="labelTeacher"
 												[helpText]="'Someone has to be responsible for this.'"
 												[errorMsg]="errorTeacher"
-												[requiredText]="requiredText"></fudis-text-input>
+												[requiredText]="requiredText" />
 											<fudis-text-input
 												[id]="'unique-input-4'"
 												[helpText]="inputHelpText"
@@ -105,7 +107,7 @@ import { FormComponent } from './form.component';
 												[label]="labelEmail"
 												[helpText]="'So that students can ask for more time on their homework.'"
 												[errorMsg]="errorEmail"
-												[requiredText]="requiredText"></fudis-text-input>
+												[requiredText]="requiredText" />
 
 											<fudis-radio-button-group
 												[requiredText]="requiredText"
@@ -113,7 +115,7 @@ import { FormComponent } from './form.component';
 												[id]="'radio-button-group-1'"
 												[options]="courseTypeOptions"
 												[control]="fieldsetExample.controls['courseType']"
-												[errorMsg]="errorCourseType"></fudis-radio-button-group>
+												[errorMsg]="errorCourseType" />
 											<fudis-grid [columns]="{ sm: 2 }">
 												<fudis-datepicker
 													[label]="labelStartDate"
@@ -158,8 +160,12 @@ import { FormComponent } from './form.component';
 class FormContentExampleComponent {
 	errorSummaryVisible: boolean = false;
 
+	firstLoad: boolean = true;
+
 	submitForm(): void {
 		this.fieldsetExample.markAllAsTouched();
+
+		this.firstLoad = false;
 
 		if (this.fieldsetExample.invalid) {
 			this._collapsed = false;

@@ -34,6 +34,8 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 
 	@Input() badgeText: string | null;
 
+	@Input() errorSummaryLiveRemove: boolean = false;
+
 	/**
 	 * If Error Summary is visible. Usually set on click of form submit button.
 	 */

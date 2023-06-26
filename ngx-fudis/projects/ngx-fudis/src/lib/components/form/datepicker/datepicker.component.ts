@@ -1,4 +1,13 @@
-import { Component, Input, OnInit, Signal, ViewEncapsulation, effect } from '@angular/core';
+import {
+	ChangeDetectorRef,
+	Component,
+	Input,
+	OnChanges,
+	OnInit,
+	Signal,
+	ViewEncapsulation,
+	effect,
+} from '@angular/core';
 import {
 	MatDateFormats,
 	MAT_NATIVE_DATE_FORMATS,
@@ -40,11 +49,12 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
 		{ provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
 	],
 })
-export class DatepickerComponent extends InputBaseDirective implements OnInit {
+export class DatepickerComponent extends InputBaseDirective implements OnInit, OnChanges {
 	constructor(
 		private readonly _adapter: DateAdapter<Date>,
 		private _configService: FudisConfigService,
-		private _matDatepickerIntl: MatDatepickerIntl
+		private _matDatepickerIntl: MatDatepickerIntl,
+		private _changeDetectorRef: ChangeDetectorRef
 	) {
 		super();
 
@@ -99,5 +109,9 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit {
 			default:
 				return 'en-GB';
 		}
+	}
+
+	ngOnChanges(): void {
+		this._changeDetectorRef.detectChanges();
 	}
 }

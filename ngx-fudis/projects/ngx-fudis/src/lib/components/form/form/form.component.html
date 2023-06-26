@@ -38,6 +38,7 @@
 			<ng-container *ngIf="_formElement !== undefined && errorSummaryVisible">
 				<div class="fudis-form__header__main__content">
 					<fudis-error-summary
+						[liveRemove]="errorSummaryLiveRemove"
 						[screenReaderHelpText]="errorSummaryScreenReaderHelpText"
 						[parentComponent]="_formElement"
 						[helpText]="errorSummaryHelpText" />
