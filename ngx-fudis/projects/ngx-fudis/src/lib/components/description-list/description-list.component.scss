@@ -63,6 +63,7 @@
 
 	& &__item {
 		display: inline;
+		min-height: spacing.$spacing-m;
 
 		&__term {
 			@include typography.description-list-compact-key-typography;
