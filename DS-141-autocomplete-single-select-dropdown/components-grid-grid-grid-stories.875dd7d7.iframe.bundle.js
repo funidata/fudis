@@ -64,7 +64,7 @@
 				until hitting 'xxl' breakpoint.</fudis-body-text
 			>
 			<fudis-body-text class="text-margin"
-				>Using GridService's 'setGridDefaultColumns()' you can define default values applied to all your
+				>Using FudisGridService's 'setGridDefaultColumns()' you can define default values applied to all your
 				Grids.</fudis-body-text
 			>
 			<fudis-body-text class="text-margin"
@@ -82,4 +82,4 @@
 		<fudis-body-text class="grid-item">Grid item</fudis-body-text>
 		<fudis-body-text class="grid-item">Grid item</fudis-body-text>
 	</fudis-grid>`})).bind({});ResponsiveColumns.args={columns:{xs:1,sm:2,md:"1fr 2fr",lg:3,xl:"1fr 2fr 1fr",xxl:6}},ResponsiveColumns.parameters={controls:{exclude:combinedExclude}}}}]);
-//# sourceMappingURL=components-grid-grid-grid-stories.9d2647a4.iframe.bundle.js.map
+//# sourceMappingURL=components-grid-grid-grid-stories.875dd7d7.iframe.bundle.js.map
