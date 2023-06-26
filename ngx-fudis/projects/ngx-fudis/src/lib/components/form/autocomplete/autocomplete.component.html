@@ -54,11 +54,10 @@
 			itemSize="40"
 			minBufferPx="300"
 			maxBufferPx="600"
-			class="fudis-autocomplete__viewport__{{ size }}">
+			class="fudis-autocomplete__viewport">
 			<mat-option
 				class="fudis-autocomplete__option fudis-autocomplete__viewport__item"
 				*cdkVirtualFor="let option of filteredOptions | async; templateCacheSize: 40"
-				(onSelectionChange)="handleSelection()"
 				[value]="option.viewValue"
 				[disabled]="option.disabled">
 				{{ option.viewValue }}

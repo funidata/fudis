@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MockComponent } from 'ng-mocks';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ChangeDetectionStrategy } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
@@ -33,7 +34,11 @@ describe('AutocompleteComponent', () => {
 			],
 			providers: [ErrorSummaryService],
 			imports: [MatAutocompleteModule, ScrollingModule, ReactiveFormsModule, BrowserAnimationsModule],
-		}).compileComponents();
+		})
+			.overrideComponent(AutocompleteComponent, {
+				set: { changeDetection: ChangeDetectionStrategy.Default },
+			})
+			.compileComponents();
 
 		fixture = TestBed.createComponent(AutocompleteComponent);
 		component = fixture.componentInstance;

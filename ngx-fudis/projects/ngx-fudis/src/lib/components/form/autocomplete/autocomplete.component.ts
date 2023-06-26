@@ -16,8 +16,6 @@ import { InputBaseDirective } from '../../../directives/form/input-base/input-ba
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { IdService } from '../../../utilities/id-service.service';
 
-export type AutocompleteInputSize = 'sm' | 'md' | 'lg';
-
 @Component({
 	selector: 'fudis-autocomplete',
 	templateUrl: './autocomplete.component.html',
@@ -32,8 +30,6 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	@ViewChild('fudisAutocompleteInput') autocompleteInput: ElementRef;
 
 	@ViewChild('scrollViewport') scrollViewport: CdkVirtualScrollViewport;
-
-	@ViewChild(CdkVirtualScrollViewport, { static: false }) cdkVirtualScrollViewport: CdkVirtualScrollViewport;
 
 	/**
 	 * FormControl for the input.
@@ -70,7 +66,9 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	 */
 	autocompleteFormControl = new FormControl<string | null>('');
 
-	/** Internal id to generate unique id */
+	/**
+	 * Internal id to generate unique id
+	 */
 	protected _id: string;
 
 	ngOnInit(): void {
@@ -112,11 +110,9 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 		}
 	}
 
-	// eslint-disable-next-line class-methods-use-this
-	handleSelection() {
-		console.log('handleSelection');
-	}
-
+	/**
+	 * Check that value is found from given options list, if not set control as null
+	 */
 	updateControlValue(value: string | null): void {
 		if (!value) {
 			this.control.patchValue(null);
@@ -134,15 +130,15 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	}
 
 	/**
-	 * Filter options when user inputs text
+	 * Filter options when user inputs text or opens dropdown
 	 */
 	private _filter(value: string): FudisDropdownOption[] {
 		if (value || value === '') {
 			const filterValue = value.toLowerCase();
 			const filteredOptions = this.options.filter((option) => option.viewValue.toLowerCase().includes(filterValue));
-			console.log(filteredOptions.length);
 
-			if (this.scrollViewport?.elementRef?.nativeElement) {
+			// Adjust dropdown height only if there are less than 6 options
+			if (this.scrollViewport?.elementRef?.nativeElement && filteredOptions.length < 6) {
 				this.scrollViewport.elementRef.nativeElement.style.height = `${filteredOptions.length * 2.5}rem`;
 			}
 			return filteredOptions;
@@ -154,9 +150,6 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	 * Clear any written or selected value in the autocomplete field
 	 */
 	clearFilter(): void {
-		console.log(this.cdkVirtualScrollViewport);
-		this.cdkVirtualScrollViewport?.checkViewportSize();
-
 		// Clear input field and control value
 		this.control.setValue(null);
 		this.autocompleteFormControl.setValue(null);

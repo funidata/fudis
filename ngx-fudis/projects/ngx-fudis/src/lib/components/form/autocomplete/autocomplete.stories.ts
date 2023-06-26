@@ -41,7 +41,7 @@ AutocompleteSearch.args = {
 		{ value: 'very-long-value', viewValue: 'Brian Eggplant with Marinated Pomegranate Seeds' },
 		{ value: 1234, viewValue: 'Martin Seeding' },
 	],
-	tooltip: 'well hello to you',
+	tooltip: 'Tooltip text for autocomplete',
 	tooltipPosition: 'below',
 	tooltipToggle: true,
 };
@@ -59,12 +59,11 @@ AutocompleteDropdown.args = {
 	variant: 'dropdown',
 	requiredText: 'Required',
 	clearFilterText: 'Clear filter',
-	helpText:
-		'This is autocomplete input, start writing (e.g mar) and after three letters the input will suggest matching options.',
+	helpText: 'This autocomplete displays dropdown option list when focusing to the input.',
 	control: new FormControl(null, Validators.required),
 	errorMsg: { required: 'This selection is required' },
 	options: manyOptions,
-	tooltip: 'well hello to you',
+	tooltip: 'Tooltip text for autocomplete',
 	tooltipPosition: 'below',
 	tooltipToggle: true,
 };

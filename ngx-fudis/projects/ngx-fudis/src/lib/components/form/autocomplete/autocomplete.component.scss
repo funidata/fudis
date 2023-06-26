@@ -69,17 +69,7 @@
 	}
 
 	&__viewport {
-		&__lg {
-			height: calc(14 * spacing.$spacing-sm);
-		}
-
-		&__md {
-			height: calc(14 * spacing.$spacing-sm);
-		}
-
-		&__sm {
-			height: calc(10 * spacing.$spacing-sm);
-		}
+		height: calc(14 * spacing.$spacing-sm);
 
 		&__item {
 			height: spacing.$spacing-xl;
