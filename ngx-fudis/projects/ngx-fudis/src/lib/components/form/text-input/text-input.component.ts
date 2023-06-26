@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { FudisInputWidth } from '../../../types/forms';
-import { IdService } from '../../../utilities/id-service.service';
+import { FudisIdService } from '../../../utilities/id-service.service';
 
 @Component({
 	selector: 'fudis-text-input[id][label]',
@@ -12,7 +12,7 @@ import { IdService } from '../../../utilities/id-service.service';
 	styleUrls: ['./text-input.component.scss'],
 })
 export class TextInputComponent extends InputBaseDirective implements OnInit {
-	constructor(private _idService: IdService) {
+	constructor(private _idService: FudisIdService) {
 		super();
 	}
 
