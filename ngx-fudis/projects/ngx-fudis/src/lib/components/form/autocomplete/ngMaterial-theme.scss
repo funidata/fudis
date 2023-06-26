@@ -10,6 +10,11 @@
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
 @use '../../../foundations/colors/tokens.scss' as colorTokens;
 
+/** 
+* Styles which affects to fudis-autocomplete (search and dropdown variants) and fudis-dropdown (single and multiselect variants) components. 
+* If you make changes, check that all of the above componenta and variants still work as wanted
+*/
+
 .fudis-autocomplete,
 .fudis-dropdown {
 	&__option-list {
@@ -22,6 +27,22 @@
 		&.mat-mdc-option {
 			min-height: spacing.$spacing-lg;
 
+			// Change option hover color
+			&:hover:not(.mdc-list-item--disabled) {
+				@include colorMixins.bg-color('primary-light');
+			}
+
+			// Change option focus color
+			&:focus:not(.mdc-list-item--disabled) {
+				@include colorMixins.bg-color('primary-light');
+			}
+
+			// Change option color when navigating with keyboard arrows
+			&.mat-mdc-option-active {
+				// Background-color mixin does not work in this particular case
+				background-color: colorTokens.$color-primary-light !important;
+			}
+
 			// Change dropdown option list typography
 			& .mdc-list-item__primary-text {
 				@include typography.body-text-md-regular;
@@ -33,73 +54,17 @@
 .fudis-dropdown {
 	&__option {
 		&.mat-mdc-option {
-			// Change option hover color
-			&:hover:not(.mdc-list-item--disabled) {
-				@include colorMixins.bg-color('primary-light');
-			}
-
-			// Change option focus color
-			&:focus:not(.mdc-list-item--disabled) {
-				@include colorMixins.bg-color('primary-light');
-			}
-
-			// Change option color when navigating with keyboard arrows
-			&.mat-mdc-option-active {
-				@include colorMixins.bg-color('primary-light');
-			}
-
 			&.mat-mdc-option-active.mdc-list-item--selected {
 				// Background-color mixin does not work in this particular case
 				background-color: colorTokens.$color-primary-light !important;
 			}
 
-			&.mdc-list-item--selected .mdc-list-item__primary-text {
-				@include colorMixins.text-color('gray-dark');
-			}
-		}
-	}
-}
-
-.fudis-autocomplete {
-	&__option {
-		&.mat-mdc-option {
-			// Change option hover color
-			&:hover:not(.mdc-list-item--disabled) {
-				@include colorMixins.bg-color('primary-light');
-			}
-
-			// Change option focus color
-			&:focus:not(.mdc-list-item--disabled) {
-				@include colorMixins.bg-color('primary-light');
-			}
-
-			// Change option color when navigating with keyboard arrows
-			&.mat-mdc-option-active {
+			&.mdc-list-item--selected {
 				// Background-color mixin does not work in this particular case
 				background-color: colorTokens.$color-primary-light !important;
-			}
-
-			& .mdc-list-item__primary-text {
-				// Display dropdown options in one line, without wrapping
-				white-space: pre;
-			}
-
-			// NOTE: These styles are just a hack for reverting ngMaterial styles from selected option, which is really not selected.
-			// The control value is null but somehow mat-autocomplete detects it as selected. Needs fixing.
-			/* stylelint-disable-next-line selector-not-notation */
-			&.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(.mdc-list-item--disabled) {
-				background: transparent;
-
-				&:hover {
-					@include colorMixins.bg-color('primary-light');
-				}
 
 				& .mdc-list-item__primary-text {
 					@include colorMixins.text-color('gray-dark');
-				}
-
-				& mat-pseudo-checkbox {
-					display: none;
 				}
 			}
 		}

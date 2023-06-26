@@ -10,7 +10,6 @@ import {
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { FudisDropdownOption, FudisInputWidth } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
@@ -28,8 +27,6 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	}
 
 	@ViewChild('fudisAutocompleteInput') autocompleteInput: ElementRef;
-
-	@ViewChild('scrollViewport') scrollViewport: CdkVirtualScrollViewport;
 
 	/**
 	 * FormControl for the input.
@@ -137,10 +134,6 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 			const filterValue = value.toLowerCase();
 			const filteredOptions = this.options.filter((option) => option.viewValue.toLowerCase().includes(filterValue));
 
-			// Adjust dropdown height only if there are less than 6 options
-			if (this.scrollViewport?.elementRef?.nativeElement && filteredOptions.length < 6) {
-				this.scrollViewport.elementRef.nativeElement.style.height = `${filteredOptions.length * 2.5}rem`;
-			}
 			return filteredOptions;
 		}
 		return [];
