@@ -22,6 +22,10 @@
 /* stylelint-disable scss/selector-no-redundant-nesting-selector */
 /* stylelint-disable selector-max-class */
 /* stylelint-disable selector-class-pattern */
+/** 
+* Styles which affects to fudis-autocomplete (search and dropdown variants) and fudis-dropdown (single and multiselect variants) components. 
+* If you make changes, check that all of the above componenta and variants still work as wanted
+*/
 .fudis-autocomplete__option-list,
 .fudis-dropdown__option-list {
   border: 1px solid #727272;
@@ -34,6 +38,23 @@
   min-height: 2rem;
 }
 
+.fudis-autocomplete__option.mat-mdc-option:hover:not(.mdc-list-item--disabled),
+.fudis-dropdown__option.mat-mdc-option:hover:not(.mdc-list-item--disabled) {
+  /* stylelint-disable-next-line property-disallowed-list */
+  background-color: var(--fudis-color-primary-light);
+}
+
+.fudis-autocomplete__option.mat-mdc-option:focus:not(.mdc-list-item--disabled),
+.fudis-dropdown__option.mat-mdc-option:focus:not(.mdc-list-item--disabled) {
+  /* stylelint-disable-next-line property-disallowed-list */
+  background-color: var(--fudis-color-primary-light);
+}
+
+.fudis-autocomplete__option.mat-mdc-option.mat-mdc-option-active,
+.fudis-dropdown__option.mat-mdc-option.mat-mdc-option-active {
+  background-color: var(--fudis-color-primary-light) !important;
+}
+
 .fudis-autocomplete__option.mat-mdc-option .mdc-list-item__primary-text,
 .fudis-dropdown__option.mat-mdc-option .mdc-list-item__primary-text {
   text-transform: initial;
@@ -43,68 +64,17 @@
   font-weight: 400;
 }
 
-.fudis-dropdown__option.mat-mdc-option:hover:not(.mdc-list-item--disabled) {
-  /* stylelint-disable-next-line property-disallowed-list */
-  background-color: var(--fudis-color-primary-light);
-}
-
-.fudis-dropdown__option.mat-mdc-option:focus:not(.mdc-list-item--disabled) {
-  /* stylelint-disable-next-line property-disallowed-list */
-  background-color: var(--fudis-color-primary-light);
-}
-
-.fudis-dropdown__option.mat-mdc-option.mat-mdc-option-active {
-  /* stylelint-disable-next-line property-disallowed-list */
-  background-color: var(--fudis-color-primary-light);
-}
-
 .fudis-dropdown__option.mat-mdc-option.mat-mdc-option-active.mdc-list-item--selected {
+  background-color: var(--fudis-color-primary-light) !important;
+}
+
+.fudis-dropdown__option.mat-mdc-option.mdc-list-item--selected {
   background-color: var(--fudis-color-primary-light) !important;
 }
 
 .fudis-dropdown__option.mat-mdc-option.mdc-list-item--selected .mdc-list-item__primary-text {
   /* stylelint-disable-next-line property-disallowed-list */
   color: #484848;
-}
-
-.fudis-autocomplete__option.mat-mdc-option {
-  /* stylelint-disable-next-line selector-not-notation */
-}
-
-.fudis-autocomplete__option.mat-mdc-option:hover:not(.mdc-list-item--disabled) {
-  /* stylelint-disable-next-line property-disallowed-list */
-  background-color: var(--fudis-color-primary-light);
-}
-
-.fudis-autocomplete__option.mat-mdc-option:focus:not(.mdc-list-item--disabled) {
-  /* stylelint-disable-next-line property-disallowed-list */
-  background-color: var(--fudis-color-primary-light);
-}
-
-.fudis-autocomplete__option.mat-mdc-option.mat-mdc-option-active {
-  background-color: var(--fudis-color-primary-light) !important;
-}
-
-.fudis-autocomplete__option.mat-mdc-option .mdc-list-item__primary-text {
-  white-space: pre;
-}
-
-.fudis-autocomplete__option.mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(.mdc-list-item--disabled) {
-  background: transparent;
-}
-
-.fudis-autocomplete__option.mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(.mdc-list-item--disabled):hover {
-  /* stylelint-disable-next-line property-disallowed-list */
-  background-color: var(--fudis-color-primary-light);
-}
-
-.fudis-autocomplete__option.mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
-  /* stylelint-disable-next-line property-disallowed-list */
-  color: #484848;
-}
-
-.fudis-autocomplete__option.mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(.mdc-list-item--disabled) mat-pseudo-checkbox {
-  display: none;
 }
 
 /* stylelint-disable property-disallowed-list */ /* stylelint-disable declaration-no-important */
