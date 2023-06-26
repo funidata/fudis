@@ -21,7 +21,7 @@ export class TextInputComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * FormControl for the input.
 	 */
-	@Input() control: FormControl<string | null>;
+	@Input() control: FormControl<string | null | number>;
 
 	@HostBinding('class') classes = 'fudis-text-input-host';
 
