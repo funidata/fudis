@@ -10,8 +10,8 @@ import {
 } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
 
+import { Subject, takeUntil } from 'rxjs';
 import { FudisDropdownOption, FudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 
 type MyForm = {
@@ -45,6 +45,8 @@ export class AppComponent implements OnInit {
 		truth: new FormControl<boolean | null>(null, Validators.required),
 		date: new FormControl<Date | null>(null),
 	});
+
+	private destroyed = new Subject<void>();
 
 	constructor(
 		@Inject(DOCUMENT) private document: Document,
@@ -86,7 +88,7 @@ export class AppComponent implements OnInit {
 
 		this.translocoService
 			.selectTranslateObject('options')
-			.pipe(takeUntilDestroyed())
+			.pipe(takeUntil(this.destroyed))
 			.subscribe((value) => {
 				this.radioButtonOptions = [
 					{ value: true, viewValue: value.chooseTruthTrue, id: 'boolean-2', name: 'booleans' },
@@ -96,7 +98,7 @@ export class AppComponent implements OnInit {
 
 		this.translocoService
 			.selectTranslation()
-			.pipe(takeUntilDestroyed())
+			.pipe(takeUntil(this.destroyed))
 			.subscribe(() => {
 				if (this.errorSummaryVisible) {
 					setTimeout(() => {

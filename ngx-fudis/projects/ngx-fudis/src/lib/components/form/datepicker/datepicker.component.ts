@@ -15,9 +15,10 @@ import {
 	DateAdapter,
 	MAT_DATE_LOCALE,
 } from '@angular/material/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
 import { FormControl } from '@angular/forms';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
+import { Subject, takeUntil } from 'rxjs';
 import { DatepickerCustomDateAdapter, FudisDateInputFormat } from './datepicker-custom-date-adapter';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
@@ -50,6 +51,8 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
 	],
 })
 export class DatepickerComponent extends InputBaseDirective implements OnInit, OnChanges {
+	private _destroyed = new Subject<void>();
+
 	constructor(
 		private readonly _adapter: DateAdapter<Date>,
 		private _configService: FudisTranslationConfigService,
@@ -96,7 +99,7 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 
 		this._configs()
-			.datepicker!.closeLabel.pipe(takeUntilDestroyed())
+			.datepicker!.closeLabel.pipe(takeUntil(this._destroyed))
 			.subscribe((value) => {
 				this._matDatepickerIntl.closeCalendarLabel = value as string;
 			});
