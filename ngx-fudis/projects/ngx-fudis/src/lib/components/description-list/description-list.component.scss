@@ -7,6 +7,22 @@
 @use '../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-description-list {
+	&__disabled-grid {
+		columns: 1;
+
+		&__item {
+			break-inside: avoid-column;
+
+			&:not(:last-of-type) {
+				margin-bottom: spacing.$spacing-m;
+			}
+		}
+
+		@include breakpoint.breakpoint('md') {
+			columns: 2;
+		}
+	}
+
 	& &__item {
 		@include utilities.box-reset;
 
@@ -24,46 +40,28 @@
 			@include colorMixins.text-color('gray-dark');
 
 			margin-left: 0;
-		}
 
-		&__sub-heading {
-			@include colorMixins.text-color('gray-dark');
+			&__sub-heading {
+				@include colorMixins.text-color('gray-dark');
 
-			margin-top: 0;
-			margin-bottom: spacing.$spacing-xxs;
-			font-weight: typographyTokens.$font-weight-regular;
+				margin-top: 0;
+				margin-bottom: spacing.$spacing-xxs;
+				font-weight: typographyTokens.$font-weight-regular;
+			}
 		}
 	}
-
-	// &__disabled-grid {
-	// 	columns: 1;
-
-	// 	&__item {
-	// 		break-inside: avoid-column;
-
-	// 		&:not(:last-of-type) {
-	// 			margin-bottom: spacing.$spacing-m;
-	// 		}
-	// 	}
-
-	// 	@include breakpoint.breakpoint('md') {
-	// 		columns: 2;
-	// 	}
-	// }
 }
 
 .fudis-description-list-compact {
-	// &__disabled-grid {
-	// 	columns: 1;
+	&__disabled-grid {
+		columns: 1;
 
-	// 	@include breakpoint.breakpoint('md') {
-	// 		columns: 2;
-	// 	}
-	// }
+		@include breakpoint.breakpoint('md') {
+			columns: 2;
+		}
+	}
 
 	& &__item {
-		@include utilities.box-reset;
-
 		display: inline;
 
 		&__term {
@@ -94,6 +92,11 @@
 			display: inline-block;
 			margin-left: 0;
 			padding-left: spacing.$spacing-xxs;
+
+			&__sub-heading,
+			&__value {
+				@include utilities.box-reset;
+			}
 		}
 	}
 }
