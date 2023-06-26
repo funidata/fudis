@@ -93,6 +93,11 @@
   background: transparent;
 }
 
+.fudis-autocomplete__option.mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(.mdc-list-item--disabled):hover {
+  /* stylelint-disable-next-line property-disallowed-list */
+  background-color: var(--fudis-color-primary-light);
+}
+
 .fudis-autocomplete__option.mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
   /* stylelint-disable-next-line property-disallowed-list */
   color: #484848;
