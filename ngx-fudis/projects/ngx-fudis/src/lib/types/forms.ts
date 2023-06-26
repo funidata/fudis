@@ -1,5 +1,7 @@
 import { FormControl } from '@angular/forms';
 
+import { Observable } from 'rxjs';
+
 export type FudisInputWidth = 'sm' | 'md' | 'lg';
 
 export interface FudisRadioButtonOption {
@@ -82,12 +84,8 @@ export interface FudisInputWithLanguageOptionsFormGroup {
 	[language: string]: FormControl<string | null>;
 }
 
-export interface FudisFormDatepickerConfig {
-	closeLabel: string;
-}
-
 export interface FudisFormConfig {
-	requiredText: string;
-	language: 'en' | 'fi' | 'sv';
-	datepicker: FudisFormDatepickerConfig;
+	requiredText?: Observable<string>;
+	appLanguage?: 'en' | 'fi' | 'sv' | string;
+	datepicker?: { closeLabel: Observable<string> };
 }

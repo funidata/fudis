@@ -70,7 +70,7 @@ import { TextSpacingComponent } from './components/typography/text-spacing/text-
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
-import { FudisConfigService } from './utilities/config.service';
+import { FudisTranslationConfigService } from './utilities/config.service';
 
 @NgModule({
 	/*
@@ -198,7 +198,7 @@ import { FudisConfigService } from './utilities/config.service';
 		FudisGridService,
 		FudisDropdownMenuItemService,
 		FudisIdService,
-		FudisConfigService,
+		FudisTranslationConfigService,
 	],
 })
 export class NgxFudisModule {}

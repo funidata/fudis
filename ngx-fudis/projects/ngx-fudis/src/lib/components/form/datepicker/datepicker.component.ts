@@ -15,14 +15,14 @@ import {
 	DateAdapter,
 	MAT_DATE_LOCALE,
 } from '@angular/material/core';
-
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl } from '@angular/forms';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
 import { DatepickerCustomDateAdapter, FudisDateInputFormat } from './datepicker-custom-date-adapter';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { FudisFormConfig, FudisInputWidth } from '../../../types/forms';
-import { FudisConfigService } from '../../../utilities/config.service';
+import { FudisTranslationConfigService } from '../../../utilities/config.service';
 
 export const FUDIS_DATE_FORMATS: MatDateFormats = {
 	...MAT_NATIVE_DATE_FORMATS,
@@ -52,13 +52,14 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
 export class DatepickerComponent extends InputBaseDirective implements OnInit, OnChanges {
 	constructor(
 		private readonly _adapter: DateAdapter<Date>,
-		private _configService: FudisConfigService,
+		private _configService: FudisTranslationConfigService,
 		private _matDatepickerIntl: MatDatepickerIntl,
 		private _changeDetectorRef: ChangeDetectorRef
 	) {
 		super();
 
 		effect(() => {
+			this._configs = this._configService.getConfig();
 			this.setConfigs();
 		});
 	}
@@ -85,16 +86,20 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 	 */
 	@Input() maxDate: Date | null;
 
+	_closeLabel: string;
+
 	setConfigs(): void {
-		this._configs = this._configService.getConfig();
-
-		this._adapter.setLocale(this.updateLocale(this._configs().language));
-
-		this._matDatepickerIntl.closeCalendarLabel = this._configs().datepicker.closeLabel;
+		this._adapter.setLocale(this.updateLocale(this._configs().appLanguage!));
 	}
 
 	ngOnInit(): void {
 		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
+
+		this._configs()
+			.datepicker!.closeLabel.pipe(takeUntilDestroyed())
+			.subscribe((value) => {
+				this._matDatepickerIntl.closeCalendarLabel = value as string;
+			});
 	}
 
 	// eslint-disable-next-line class-methods-use-this

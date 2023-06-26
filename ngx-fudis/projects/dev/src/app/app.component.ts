@@ -2,10 +2,16 @@
 import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
-import { FudisConfigService, FudisDialogService, FudisErrorSummaryService, FudisGridService } from 'ngx-fudis';
+import {
+	FudisTranslationConfigService,
+	FudisDialogService,
+	FudisErrorSummaryService,
+	FudisGridService,
+} from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
 
 import { FudisDropdownOption, FudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 
 type MyForm = {
@@ -46,18 +52,18 @@ export class AppComponent implements OnInit {
 		private translocoService: TranslocoService,
 		private errorSummaryService: FudisErrorSummaryService,
 		private gridService: FudisGridService,
-		private fudisConfig: FudisConfigService
+		private fudisConfig: FudisTranslationConfigService
 	) {
 		gridService.setGridDefaultValues({
 			columns: { xs: 1, xl: 2 },
 			marginSides: 'responsive',
 		});
 
-		fudisConfig.setConfig({
-			datepicker: { closeLabel: 'Close calendar' },
-			requiredText: 'Required',
-			language: 'en',
-		});
+		// fudisConfig.setConfig({
+		// 	datepicker: { closeLabel: 'Close calendar' },
+		// 	requiredText: 'Required',
+		// 	language: 'en',
+		// });
 	}
 
 	errorSummaryVisible: boolean = false;
@@ -68,25 +74,41 @@ export class AppComponent implements OnInit {
 
 	radioButtonOptions: FudisRadioButtonOption[] = [];
 
+	closeLabel: string = '';
+
+	requiredText: string = '';
+
 	ngOnInit(): void {
-		this.translocoService.setActiveLang('fi');
 		this.translocoService.setActiveLang('en');
+		this.translocoService.setActiveLang('fi');
 
-		this.document.documentElement.lang = 'en';
+		this.document.documentElement.lang = 'fi';
 
-		this.translocoService.selectTranslateObject('options').subscribe((value) => {
-			this.radioButtonOptions = [
-				{ value: true, viewValue: value.chooseTruthTrue, id: 'boolean-2', name: 'booleans' },
-				{ value: false, viewValue: value.chooseTruthFalse, id: 'boolean-1', name: 'booleans' },
-			];
-		});
+		this.translocoService
+			.selectTranslateObject('options')
+			.pipe(takeUntilDestroyed())
+			.subscribe((value) => {
+				this.radioButtonOptions = [
+					{ value: true, viewValue: value.chooseTruthTrue, id: 'boolean-2', name: 'booleans' },
+					{ value: false, viewValue: value.chooseTruthFalse, id: 'boolean-1', name: 'booleans' },
+				];
+			});
 
-		this.translocoService.selectTranslation().subscribe(() => {
-			if (this.errorSummaryVisible) {
-				setTimeout(() => {
-					this.errorSummaryService.reloadErrors();
-				}, 100);
-			}
+		this.translocoService
+			.selectTranslation()
+			.pipe(takeUntilDestroyed())
+			.subscribe(() => {
+				if (this.errorSummaryVisible) {
+					setTimeout(() => {
+						this.errorSummaryService.reloadErrors();
+					}, 100);
+				}
+			});
+
+		this.fudisConfig.setConfig({
+			appLanguage: this.document.documentElement.lang,
+			requiredText: this.translocoService.selectTranslate('required'),
+			datepicker: { closeLabel: this.translocoService.selectTranslate('closeCalendar') },
 		});
 	}
 
@@ -94,20 +116,11 @@ export class AppComponent implements OnInit {
 		if (this.translocoService.getActiveLang() === 'en') {
 			this.translocoService.setActiveLang('fi');
 			this.document.documentElement.lang = 'fi';
-			this.fudisConfig.setConfig({
-				datepicker: { closeLabel: 'Sulje kalenteri' },
-				requiredText: 'Pakollinen',
-				language: 'fi',
-			});
 		} else {
 			this.translocoService.setActiveLang('en');
 			this.document.documentElement.lang = 'en';
-			this.fudisConfig.setConfig({
-				datepicker: { closeLabel: 'Close calendar' },
-				requiredText: 'Required',
-				language: 'en',
-			});
 		}
+		this.fudisConfig.updateConfig({ appLanguage: this.document.documentElement.lang });
 	}
 
 	openDialog(): void {

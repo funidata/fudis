@@ -23,7 +23,7 @@ export { DialogComponent } from './lib/components/dialog/dialog.component';
 
 export { DescriptionListComponent } from './lib/components/description-list/description-list.component';
 export { FudisDialogService } from './lib/components/dialog/dialog.service';
-export { FudisConfigService } from './lib/utilities/config.service';
+export { FudisTranslationConfigService } from './lib/utilities/config.service';
 export { DropdownComponent } from './lib/components/form/dropdown/dropdown.component';
 export { DropdownMenuComponent } from './lib/components/dropdown-menu/dropdown-menu.component';
 export { DropdownMenuItemComponent } from './lib/components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
