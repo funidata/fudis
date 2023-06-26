@@ -1,5 +1,22 @@
 @use '../../foundations/utilities/mixins.scss' as utilities;
+@use '../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-section {
 	@include utilities.box-reset;
+
+	&__header {
+		&__container {
+			display: flex;
+			align-items: center;
+			margin-bottom: spacing.$spacing-xs;
+
+			&__button {
+				margin-left: spacing.$spacing-xs;
+			}
+		}
+	}
+
+	&__notifications {
+		margin-bottom: spacing.$spacing-xs;
+	}
 }

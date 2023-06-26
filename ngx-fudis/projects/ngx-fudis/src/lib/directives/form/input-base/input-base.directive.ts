@@ -1,6 +1,6 @@
 import { Directive, Input, EventEmitter, Output } from '@angular/core';
 
-import { TFudisInputErrorMessages } from '../../../types/forms';
+import { FudisFormErrors } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 
 @Directive({
@@ -41,7 +41,7 @@ export class InputBaseDirective extends TooltipApiDirective {
 	 * Error messages shown when form control validators are invalid
 	 */
 
-	@Input() errorMsg: TFudisInputErrorMessages;
+	@Input() errorMsg: FudisFormErrors;
 
 	/**
 	 * Set input's visual style and attributes as invalid. Does not override if control.invalid is true.

@@ -1,7 +1,6 @@
 import { Directive, Input } from '@angular/core';
 import { MatTooltip } from '@angular/material/tooltip';
-
-type Position = 'left' | 'right' | 'above' | 'below';
+import { FudisTooltipPosition } from '../../types/miscellaneous';
 
 @Directive({
 	selector: '[fudisTooltipApi]',
@@ -21,5 +20,5 @@ export class TooltipApiDirective {
 	/**
 	 * Sets the position of the tooltip on the parent element. Position options are left, right, above and below the parent element.
 	 */
-	@Input() tooltipPosition: Position = 'below';
+	@Input() tooltipPosition: FudisTooltipPosition = 'below';
 }

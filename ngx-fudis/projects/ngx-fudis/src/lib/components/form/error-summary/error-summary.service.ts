@@ -1,13 +1,19 @@
 import { Signal, signal } from '@angular/core';
-import { TFudisFormErrorSummaryObject, TFudisFormErrorSummaryItem } from '../../../types/forms';
+import { FudisFormErrorSummaryObject, FudisFormErrorSummaryItem } from '../../../types/forms';
 
-export class ErrorSummaryService {
-	private _currentErrorList: TFudisFormErrorSummaryObject = {};
+export class FudisErrorSummaryService {
+	private _currentErrorList: FudisFormErrorSummaryObject = {};
 
-	private _signalCurrentErrorList = signal<TFudisFormErrorSummaryObject>({});
+	private _signalCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
 
-	getVisibleErrors(): Signal<TFudisFormErrorSummaryObject> {
+	private _signalDynamicCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
+
+	getVisibleErrors(): Signal<FudisFormErrorSummaryObject> {
 		return this._signalCurrentErrorList.asReadonly();
+	}
+
+	getDynamicErrors(): Signal<FudisFormErrorSummaryObject> {
+		return this._signalDynamicCurrentErrorList.asReadonly();
 	}
 
 	// eslint-disable-next-line class-methods-use-this
@@ -15,7 +21,7 @@ export class ErrorSummaryService {
 		return controlName ? `${id}_${controlName}` : id;
 	}
 
-	public addNewError(newError: TFudisFormErrorSummaryItem): void {
+	public addNewError(newError: FudisFormErrorSummaryItem): void {
 		let currentErrors = this._currentErrorList;
 
 		const errorId = this.defineErrorId(newError.id, newError.controlName);
@@ -51,11 +57,14 @@ export class ErrorSummaryService {
 		delete currentErrors[errorId].errors[error.type];
 
 		this._currentErrorList = currentErrors;
+
+		this._signalDynamicCurrentErrorList.set(currentErrors);
 	}
 
 	public reloadErrors(delay: number = 10): void {
 		setTimeout(() => {
 			this._signalCurrentErrorList.set(this._currentErrorList);
+			this._signalDynamicCurrentErrorList.set(this._currentErrorList);
 		}, delay);
 	}
 }

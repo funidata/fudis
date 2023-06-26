@@ -3,7 +3,7 @@ import { Injectable, TemplateRef } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 
 @Injectable()
-export class DialogService {
+export class FudisDialogService {
 	constructor(public ngMaterialDialog: MatDialog) {}
 
 	/**
@@ -15,7 +15,7 @@ export class DialogService {
 	 */
 
 	open<T, R = any>(component: ComponentType<T> | TemplateRef<T>, config?: MatDialogConfig<any>): MatDialogRef<T, R> {
-		const dialogRef = this.ngMaterialDialog.open(component, DialogService.createConfig(config));
+		const dialogRef = this.ngMaterialDialog.open(component, FudisDialogService.createConfig(config));
 
 		dialogRef.keydownEvents().subscribe((event) => {
 			if (event.key === 'Escape') {

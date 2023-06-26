@@ -3,6 +3,7 @@ import { Component, Input, ViewChild, ElementRef, HostBinding, OnInit } from '@a
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+import { FudisInputWidth } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-text-input[id][label]',
@@ -15,14 +16,14 @@ export class TextInputComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * FormControl for the input.
 	 */
-	@Input() control: FormControl<string | null>;
+	@Input() control: FormControl<string | null | number>;
 
 	@HostBinding('class') classes = 'fudis-text-input-host';
 
 	/**
 	 * Available sizes for the input - defaults to large. Recommended size for number input is small.
 	 */
-	@Input() size?: 's' | 'm' | 'l' = 'l';
+	@Input() size: FudisInputWidth = 'lg';
 
 	/**
 	 * Type of the input - defaults to 'text'
@@ -32,12 +33,12 @@ export class TextInputComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * Minimium number of characters allowed by minLength
 	 */
-	@Input() minLength: number;
+	@Input() minLength: number | undefined = undefined;
 
 	/**
 	 * Maximum number of characters allowed by maxLength
 	 */
-	@Input() maxLength: number;
+	@Input() maxLength: number | undefined = undefined;
 
 	/**
 	 * Assistive text of max character count for screen readers

@@ -9,15 +9,15 @@ import { IconComponent } from '../icon/icon.component';
 import { ExpandableComponent } from './expandable.component';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
-import { IdService } from '../../utilities/id-service.service';
+import { FudisIdService } from '../../utilities/id-service.service';
 
 @Component({
 	selector: 'fudis-mock-container',
 	template: `<fudis-expandable [collapsed]="collapsed" [title]="'Test title'">
-		<ng-template fudisActions>
+		<ng-template fudisActions type="expandable">
 			<fudis-button [label]="'Action button'"></fudis-button>
 		</ng-template>
-		<ng-template fudisContent>
+		<ng-template fudisContent type="expandable">
 			<fudis-mock-component
 				(initialized)="contentInitializationCount = contentInitializationCount + 1"></fudis-mock-component>
 		</ng-template>
@@ -56,7 +56,7 @@ describe('ExpandableComponent', () => {
 				MockComponent(ButtonComponent),
 				MockComponent(IconComponent),
 			],
-			providers: [IdService],
+			providers: [FudisIdService],
 		}).compileComponents();
 	});
 

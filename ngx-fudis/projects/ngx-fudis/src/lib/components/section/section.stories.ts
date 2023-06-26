@@ -35,14 +35,24 @@ const Template: StoryFn = () => ({
 		titleSize: 'xl',
 	},
 
-	template: html`<fudis-section [title]="title" [titleSize]="titleSize" [titleTag]="titleTag">
-		<fudis-expandable [title]="'Expandable inside section'">
-			<ng-template fudisContent>
-				<fudis-body-text>Some content inside expandable</fudis-body-text>
-			</ng-template>
-		</fudis-expandable>
-		<fudis-body-text>Some text content inside section</fudis-body-text>
-	</fudis-section>`,
+	template: html`<fudis-section
+		[id]="'my-section-id'"
+		[title]="title"
+		[tooltip]="'More info about this section'"
+		[titleSize]="titleSize"
+		[titleTag]="titleTag">
+		<ng-template fudisNotifications type="section">
+			<fudis-notification>This is notification</fudis-notification>
+		</ng-template>
+		<ng-template fudisContent type="section">
+			<fudis-expandable [title]="'Expandable inside section'">
+				<ng-template fudisContent type="expandable">
+					<fudis-body-text fudis-body-text>Some content inside expandable</fudis-body-text>
+				</ng-template>
+			</fudis-expandable>
+			<fudis-body-text>Some text content inside section</fudis-body-text>
+		</ng-template>
+	</fudis-section> `,
 });
 
 export const Example = Template.bind({});

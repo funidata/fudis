@@ -4,10 +4,10 @@ import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, Validators } 
 import { Component, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-	IFudisDropdownOption,
-	IFudisRadioButtonOption,
-	TFudisGroupErrorMessages,
-	TFudisInputErrorMessages,
+	FudisDropdownOption,
+	FudisRadioButtonOption,
+	FudisFormGroupErrors,
+	FudisFormErrors,
 } from '../../../types/forms';
 
 import { FieldSetComponent } from './fieldset.component';
@@ -16,13 +16,21 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 @Component({
 	selector: 'example-fieldset',
 	template: `
-		<form>
-			<fudis-fieldset
-				[legend]="legend"
-				[id]="fieldsetId"
-				[helpText]="helpText"
-				[tooltip]="'Some additional information'">
-				<fudis-grid [columns]="{ lg: 2 }" [width]="'md'">
+		<fudis-fieldset
+			[width]="'md'"
+			[title]="title"
+			[id]="fieldsetId"
+			[helpText]="helpText"
+			[marginSides]="'responsive'"
+			[tooltip]="'Some additional information'">
+			<ng-template fudisActions type="fieldset">
+				<fudis-button [variant]="'tertiary'" [icon]="'plus'" [label]="'Some action'" />
+			</ng-template>
+			<ng-template fudisNotifications type="fieldset"
+				><fudis-notification>This is notification</fudis-notification></ng-template
+			>
+			<ng-template fudisContent type="fieldset">
+				<fudis-grid [columns]="{ md: 2 }">
 					<fudis-input-with-language-options
 						[missingLanguage]="'Missing'"
 						[id]="'unique-input-1'"
@@ -62,7 +70,7 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 
 					<fudis-radio-button-group
 						[requiredText]="requiredText"
-						[legend]="labelCourseType"
+						[title]="labelCourseType"
 						[id]="'radio-button-group-1'"
 						[options]="courseTypeOptions"
 						[control]="fieldsetExample.controls['courseType']"
@@ -71,7 +79,7 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 						<fudis-datepicker
 							[label]="labelStartDate"
 							[id]="'date-picker-1'"
-							[size]="'s'"
+							[size]="'sm'"
 							[requiredText]="requiredText"
 							[helpText]="'You have to start from somewhere'"
 							[errorMsg]="errorStartdate"
@@ -84,7 +92,7 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 						<fudis-datepicker
 							[label]="labelEndDate"
 							[id]="'date-picker-2'"
-							[size]="'s'"
+							[size]="'sm'"
 							[requiredText]="requiredText"
 							[helpText]="'You have to end it to something'"
 							[errorMsg]="errorEnddate"
@@ -93,10 +101,9 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 							[minDate]="fieldsetExample.controls['startDate'].value">
 						</fudis-datepicker>
 					</fudis-grid>
-					<fudis-button [label]="'Submit'" (handleClick)="submitForm()"></fudis-button>
 				</fudis-grid>
-			</fudis-fieldset>
-		</form>
+			</ng-template>
+		</fudis-fieldset>
 	`,
 })
 class FieldsetExampleComponent {
@@ -104,11 +111,11 @@ class FieldsetExampleComponent {
 		this.fieldsetExample.markAllAsTouched();
 	}
 
-	errorName: TFudisGroupErrorMessages = {
+	errorName: FudisFormGroupErrors = {
 		atLeastOneRequired: 'Course name is missing.',
 	};
 
-	errorDescription: TFudisGroupErrorMessages = {
+	errorDescription: FudisFormGroupErrors = {
 		english: {
 			required: 'Missing description in English.',
 			minlength: 'Description should at least 10 characters.',
@@ -120,30 +127,30 @@ class FieldsetExampleComponent {
 		},
 	};
 
-	errorTeacher: TFudisInputErrorMessages = {
+	errorTeacher: FudisFormErrors = {
 		required: "Missing teacher's name who is responsible for this course.",
 	};
 
-	errorEmail: TFudisInputErrorMessages = {
+	errorEmail: FudisFormErrors = {
 		required: 'Missing email contact.',
 		minlength: 'Email should be at least 5 characters.',
 		email: 'Input must be an email address.',
 	};
 
-	errorStartdate: TFudisInputErrorMessages = {
+	errorStartdate: FudisFormErrors = {
 		required: 'Start date is missing.',
 		matDatepickerMin: 'Start date cannot be earlier than this day.',
 		matDatepickerParse: 'Date should be in dd.mm.yyyy format.',
 		matDatepickerMax: 'Start date cannot be after end date.',
 	};
 
-	errorEnddate: TFudisInputErrorMessages = {
+	errorEnddate: FudisFormErrors = {
 		required: 'End date is missing.',
 		matDatepickerMin: 'End date cannot be before start date.',
 		matDatepickerParse: 'Date should be in dd.mm.yyyy format.',
 	};
 
-	errorCourseType: TFudisInputErrorMessages = {
+	errorCourseType: FudisFormErrors = {
 		required: 'Course type must be selected.',
 	};
 
@@ -153,7 +160,7 @@ class FieldsetExampleComponent {
 
 	maxDate = new Date(2023, 31, 5);
 
-	legend = 'Fill in course information';
+	title = 'Fill in course information';
 
 	helpText = 'Please fill in course information.';
 
@@ -194,14 +201,14 @@ class FieldsetExampleComponent {
 		courseType: new FormControl('', Validators.required),
 	});
 
-	languageOptions: IFudisDropdownOption[] = [
+	languageOptions: FudisDropdownOption[] = [
 		// eslint-disable-next-line @typescript-eslint/dot-notation
 		{ value: 'finnish', viewValue: 'FI' },
 		{ value: 'swedish', viewValue: 'SV' },
 		{ value: 'english', viewValue: 'EN' },
 	];
 
-	courseTypeOptions: IFudisRadioButtonOption[] = [
+	courseTypeOptions: FudisRadioButtonOption[] = [
 		{ value: 'basic', viewValue: 'Basic', id: 'courseType-1', name: 'courseType' },
 		{ value: 'advanced', viewValue: 'Advanced', id: 'courseType-2', name: 'courseType' },
 	];

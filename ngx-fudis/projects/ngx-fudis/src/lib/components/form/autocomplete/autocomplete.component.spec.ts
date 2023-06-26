@@ -8,9 +8,10 @@ import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { LabelComponent } from '../label/label.component';
-import { AutocompleteComponent, AutocompleteInputSize } from './autocomplete.component';
-import { ErrorSummaryService } from '../error-summary/error-summary.service';
+import { AutocompleteComponent } from './autocomplete.component';
+import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
+import { FudisInputWidth } from '../../../types/forms';
 
 const autocompleteControl: FormControl = new FormControl('');
 const autocompleteRequiredControl: FormControl = new FormControl('', Validators.required);
@@ -29,7 +30,7 @@ describe('AutocompleteComponent', () => {
 				MockComponent(ButtonComponent),
 				MockComponent(ErrorMessageComponent),
 			],
-			providers: [ErrorSummaryService],
+			providers: [FudisErrorSummaryService],
 			imports: [MatAutocompleteModule, ReactiveFormsModule, BrowserAnimationsModule],
 		}).compileComponents();
 
@@ -48,7 +49,7 @@ describe('AutocompleteComponent', () => {
 		expect(componentClasses).toEqual(classes.split(' ').sort());
 	}
 
-	function autocompleteSize(size: AutocompleteInputSize): void {
+	function autocompleteSize(size: FudisInputWidth): void {
 		component.size = size;
 		fixture.detectChanges();
 		assertAutocompleteHasClasses(`fudis-autocomplete fudis-autocomplete__${size}`);
@@ -71,9 +72,9 @@ describe('AutocompleteComponent', () => {
 
 	describe('CSS classes', () => {
 		it('should have respective CSS class indicating the autocomplete size given as an Input', () => {
-			autocompleteSize('s');
-			autocompleteSize('m');
-			autocompleteSize('l');
+			autocompleteSize('sm');
+			autocompleteSize('md');
+			autocompleteSize('lg');
 		});
 
 		it('should have disabled CSS styling if input is disabled', () => {

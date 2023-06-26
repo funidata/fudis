@@ -2,7 +2,7 @@
 
 .fudis-mb {
 	&-none {
-		margin-bottom: spacing.$spacing-zero;
+		margin-bottom: spacing.$spacing-none;
 	}
 
 	&-xxs {
@@ -13,28 +13,16 @@
 		margin-bottom: spacing.$spacing-xs;
 	}
 
-	&-s {
-		margin-bottom: spacing.$spacing-s;
-	}
-
 	&-sm {
-		margin-bottom: spacing.$spacing-s;
-	}
-
-	&-m {
-		margin-bottom: spacing.$spacing-m;
+		margin-bottom: spacing.$spacing-sm;
 	}
 
 	&-md {
-		margin-bottom: spacing.$spacing-m;
-	}
-
-	&-l {
-		margin-bottom: spacing.$spacing-l;
+		margin-bottom: spacing.$spacing-md;
 	}
 
 	&-lg {
-		margin-bottom: spacing.$spacing-l;
+		margin-bottom: spacing.$spacing-lg;
 	}
 
 	&-xl {

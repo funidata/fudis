@@ -31,11 +31,11 @@
 			@include typography.text-link-inherit-typography;
 		}
 
-		&__m {
+		&__md {
 			@include typography.text-link-m-typography;
 		}
 
-		&__l {
+		&__lg {
 			@include typography.text-link-l-typography;
 		}
 	}

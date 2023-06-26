@@ -14,7 +14,7 @@
 			break-inside: avoid-column;
 
 			&:not(:last-of-type) {
-				margin-bottom: spacing.$spacing-m;
+				margin-bottom: spacing.$spacing-md;
 			}
 		}
 

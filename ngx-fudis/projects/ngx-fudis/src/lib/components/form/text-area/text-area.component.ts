@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+import { FudisInputWidth } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-text-area[id][label]',
@@ -13,17 +14,17 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * FormControl for the input.
 	 */
-	@Input({ required: true }) control: FormControl<string | null>;
+	@Input({ required: true }) control: FormControl<string | null | number>;
 
 	/**
 	 * Minimum length for text area, unset by default
 	 */
-	@Input() minLength: number;
+	@Input() minLength: number | undefined = undefined;
 
 	/**
 	 * Maximum length for text area, unset by default. When set displays also a character count indicator.
 	 */
-	@Input() maxLength: number;
+	@Input() maxLength: number | undefined = undefined;
 
 	/**
 	 * Assistive text of max character count for screen readers
@@ -33,7 +34,7 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * Fixed size options for text area
 	 */
-	@Input() size: 's' | 'm' | 'l' = 'l';
+	@Input() size: FudisInputWidth = 'lg';
 
 	ngOnInit(): void {
 		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);

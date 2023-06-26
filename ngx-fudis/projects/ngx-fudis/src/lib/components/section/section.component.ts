@@ -1,39 +1,68 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { IdService } from '../../utilities/id-service.service';
-import { HeadingLevel, HeadingSize } from '../../types/typography';
-import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
-import { GridColumnsResponsive } from '../../types/grid';
+import { Component, ContentChild, Input, OnChanges, OnInit } from '@angular/core';
+import { FudisIdService } from '../../utilities/id-service.service';
+import { FudisHeadingTag, FudisHeadingSize } from '../../types/typography';
+import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
+import { ContentDirective } from '../../directives/content-projection/content/content.directive';
+import { FudisGridWidth, FudisGridAlign, FudisGridMarginSide } from '../../types/grid';
+
+import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
+import { FudisSpacing } from '../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-section',
 	templateUrl: './section.component.html',
 	styleUrls: ['./section.component.scss'],
 })
-export class SectionComponent extends GridApiDirective implements OnInit, OnChanges {
+export class SectionComponent extends TooltipApiDirective implements OnInit, OnChanges {
+	@ContentChild(NotificationsDirective) notifications: NotificationsDirective | null;
+
+	@ContentChild(ContentDirective) content: ContentDirective | null;
+
 	@Input() id: string;
 
 	@Input({ required: true }) title: string;
 
-	@Input() titleTag: HeadingLevel = 'h2';
+	@Input() titleTag: FudisHeadingTag = 'h2';
 
-	@Input() titleSize: HeadingSize = 'l';
-
-	@Input() disableGrid: boolean = false;
+	@Input() titleSize: FudisHeadingSize = 'lg';
 
 	/**
-	 * Setting of columns for the section content. Input will be converted to native CSS grid grid-template-columns values
-	 * E. g. as native string: [columns]="'1fr 1fr'" or [columns]="'1fr 2fr'"
-	 * E. g. as number [columns]="6", which converts to 'repeat(6, 1fr)'
-	 *
-	 * For responsive grid behavior, provide GridColumns object.
-	 * E. g. [columns]="{md: 2, xl: 3}".
-	 * Before md breakpoint Grid has default of '1fr' columns.
-	 * After md breakpoint it will have two columns 'repeat(2, 1fr)'
-	 * And after xl breakpoint 'repeat(3, 1fr)'
+	 * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
+	 * xxl = Default value. Viewports of 1600px and larger
+	 * xl = Viewports smaller than 1600px
+	 * lg = Viewports smaller than 1200px
+	 * md = Viewports smaller than 992px
+	 * sm = Viewports smaller than 768px
+	 * xs = Viewports smaller than 576px
 	 */
-	@Input() columns: string | number | GridColumnsResponsive = '1fr';
+	@Input() width: FudisGridWidth = 'initial';
 
-	constructor(private _idService: IdService) {
+	/**
+	 * Alignment of Grid component inside its parent
+	 */
+	@Input() align: FudisGridAlign = 'center';
+
+	/**
+	 * Margin top for the Grid
+	 */
+	@Input() marginTop: FudisSpacing = 'none';
+
+	/**
+	 * Margin bottom for the Grid
+	 */
+	@Input() marginBottom: FudisSpacing = 'none';
+
+	/**
+	 * Horizontal margins left and right of the grid
+	 */
+	@Input() marginSides: FudisGridMarginSide = 'none';
+
+	/**
+	 * Custom CSS classes for Grid element
+	 */
+	@Input() classes: string[];
+
+	constructor(private _idService: FudisIdService) {
 		super();
 	}
 
@@ -42,9 +71,7 @@ export class SectionComponent extends GridApiDirective implements OnInit, OnChan
 	protected _classList: string[];
 
 	ngOnInit(): void {
-		const id = this.id ?? this._idService.getNewId('section');
-
-		this._headingId = `${id}_heading`;
+		this._headingId = this.id ?? this._idService.getNewId('section');
 
 		this._classList = this.getClasses();
 	}

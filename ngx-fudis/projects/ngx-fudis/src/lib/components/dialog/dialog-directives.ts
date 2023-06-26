@@ -63,7 +63,7 @@ export class DialogContentDirective extends MatDialogContent implements OnInit {
 	selector: 'fudis-dialog-actions',
 })
 export class DialogActionsDirective extends MatDialogActions {
-	override align?: 'start' | 'center' | 'end' | undefined = 'end';
+	override align: 'start' | 'center' | 'end' = 'end';
 }
 
 @Directive({

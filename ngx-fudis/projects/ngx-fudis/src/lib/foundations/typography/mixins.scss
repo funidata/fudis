@@ -2,11 +2,11 @@
 /* stylelint-disable unit-disallowed-list */
 @use 'sass:map';
 @use '../spacing/tokens.scss' as spacing;
-@use './tokens.scss';
+@use './tokens.scss' as tokens;
 
 // Body Text
 
-@mixin body-text-l-light {
+@mixin body-text-lg-light {
 	text-transform: initial;
 	line-height: tokens.$body-text-l-line-height;
 	font-family: tokens.$font-family;
@@ -14,7 +14,7 @@
 	font-weight: tokens.$font-weight-light;
 }
 
-@mixin body-text-l-regular {
+@mixin body-text-lg-regular {
 	text-transform: initial;
 	line-height: tokens.$body-text-l-line-height;
 	font-family: tokens.$font-family;
@@ -22,7 +22,7 @@
 	font-weight: tokens.$font-weight-regular;
 }
 
-@mixin body-text-m-light {
+@mixin body-text-md-light {
 	text-transform: initial;
 	line-height: tokens.$body-text-m-line-height;
 	font-family: tokens.$font-family;
@@ -30,7 +30,7 @@
 	font-weight: tokens.$font-weight-light;
 }
 
-@mixin body-text-m-regular {
+@mixin body-text-md-regular {
 	text-transform: initial;
 	line-height: tokens.$body-text-m-line-height;
 	font-family: tokens.$font-family;
@@ -38,7 +38,7 @@
 	font-weight: tokens.$font-weight-regular;
 }
 
-@mixin body-text-s-regular {
+@mixin body-text-sm-regular {
 	text-transform: initial;
 	line-height: tokens.$body-text-s-line-height;
 	font-family: tokens.$font-family;
@@ -62,21 +62,21 @@
 	font-weight: tokens.$font-weight-medium;
 }
 
-@mixin heading-l {
+@mixin heading-lg {
 	line-height: tokens.$heading-m-line-height;
 	font-family: tokens.$font-family;
 	font-size: tokens.$heading-l-font-size;
 	font-weight: tokens.$font-weight-medium;
 }
 
-@mixin heading-m {
+@mixin heading-md {
 	line-height: tokens.$heading-m-line-height;
 	font-family: tokens.$font-family;
 	font-size: tokens.$heading-m-font-size;
 	font-weight: tokens.$font-weight-medium;
 }
 
-@mixin heading-s {
+@mixin heading-sm {
 	line-height: tokens.$heading-s-line-height;
 	font-family: tokens.$font-family;
 	font-size: tokens.$heading-s-font-size;

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 
-import { ErrorSummaryService } from '../error-summary/error-summary.service';
-import { TFudisFormErrorSummaryItem } from '../../../types/forms';
+import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
+import { FudisFormErrorSummaryItem } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-error-message',
@@ -23,12 +23,12 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	/**
 	 * Id of input this message is related to. Sent to Error Summary service.
 	 */
-	@Input({ required: true }) inputId: string;
+	@Input({ required: true }) focusId: string;
 
 	/**
 	 * Label text of input this message is related to. Sent to Error Summary service.
 	 */
-	@Input({ required: true }) inputLabel: string;
+	@Input({ required: true }) label: string;
 
 	/**
 	 * If error is visible or not.
@@ -40,13 +40,18 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	 */
 	@Input({ required: true }) type: string;
 
+	/**
+	 * Visual variant of error message
+	 */
+	@Input() variant: 'body-text' | 'form-error' = 'form-error';
+
 	private _errorSent: boolean = false;
 
-	private _currentMessage: string | undefined = undefined;
+	private _currentMessage: string;
 
 	private _currentLabel: string | undefined = undefined;
 
-	constructor(private _errorSummaryService: ErrorSummaryService) {}
+	constructor(private _errorSummaryService: FudisErrorSummaryService) {}
 
 	ngOnInit(): void {
 		this.createError();
@@ -57,12 +62,12 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	createError(): void {
-		if (this.message && this.inputLabel) {
+		if (this.message !== undefined) {
 			this._currentMessage = this.message;
-			this._currentLabel = this.inputLabel;
+			this._currentLabel = this.label;
 
-			const newError: TFudisFormErrorSummaryItem = {
-				id: this.inputId,
+			const newError: FudisFormErrorSummaryItem = {
+				id: this.focusId,
 				error: this._currentMessage,
 				label: this._currentLabel,
 				type: this.type,
@@ -74,7 +79,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	ngOnChanges(): void {
-		if (this.message !== this._currentMessage || this.inputLabel !== this._currentLabel) {
+		if (this.message !== this._currentMessage || this.label !== this._currentLabel) {
 			this.createError();
 		}
 	}
@@ -82,7 +87,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	ngOnDestroy(): void {
 		if (this._errorSent) {
 			this._errorSummaryService.removeError({
-				id: this.inputId,
+				id: this.focusId,
 				type: this.type,
 				controlName: this.controlName,
 			});
@@ -93,12 +98,12 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 		if (this.controlName) {
 			// eslint-disable-next-line no-console
 			console.warn(
-				`Fudis component with id of '${this.inputId}' and control name of '${this.controlName}' is missing error message for error type of: '${this.type}'`
+				`Fudis component with id of '${this.focusId}' and control name of '${this.controlName}' is missing error message for error type of: '${this.type}'`
 			);
 		} else {
 			// eslint-disable-next-line no-console
 			console.warn(
-				`Fudis component with id of '${this.inputId}' is missing error message for error type of: '${this.type}'`
+				`Fudis component with id of '${this.focusId}' is missing error message for error type of: '${this.type}'`
 			);
 		}
 	}

@@ -1,18 +1,18 @@
 import { Component, ContentChild, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { ExpandableType } from '../../types/expandables';
+import { FudisExpandableType } from '../../types/miscellaneous';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
-import { IdService } from '../../utilities/id-service.service';
+import { FudisIdService } from '../../utilities/id-service.service';
 
 /**
  * Example usage:
  *
  * ```
  * <fudis-expandable>
- *  <ng-template fudisActions>
+ *  <ng-template fudisActions type="expandable">
  *    <fudis-button />
  *  </ng-template>
- * 	<ng-template fudisContent>
+ * 	<ng-template fudisContent type="expandable">
  * 		<your-body-template />
  * 	</ng-template>
  * </fudis-expandable>
@@ -28,7 +28,7 @@ import { IdService } from '../../utilities/id-service.service';
 export class ExpandableComponent {
 	@ContentChild(ContentDirective) content: ContentDirective;
 
-	@ContentChild(ActionsDirective) headerButtons: ActionsDirective;
+	@ContentChild(ActionsDirective) headerButtons: ActionsDirective | null;
 
 	/**
 	 * Tag is for semantic support for screen readers, this does not change the appearance of the expandable
@@ -38,7 +38,7 @@ export class ExpandableComponent {
 	/**
 	 * Type i.e the look of the expandable
 	 */
-	@Input() variant: ExpandableType = ExpandableType.regular;
+	@Input() variant: FudisExpandableType = 'regular';
 
 	/**
 	 * Title for the expandable
@@ -65,8 +65,8 @@ export class ExpandableComponent {
 
 	protected _id: string;
 
-	constructor(private _idService: IdService) {
-		this._id = _idService.getNewId('expandable');
+	constructor(private _idService: FudisIdService) {
+		this._id = `${_idService.getNewId('expandable')}-heading`;
 	}
 
 	/**

@@ -2,7 +2,7 @@ import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { TextAreaComponent } from './text-area.component';
-import { TFudisInputErrorMessages } from '../../../types/forms';
+import { FudisFormErrors } from '../../../types/forms';
 
 @Component({
 	selector: 'example-text-area-with-form-control',
@@ -45,7 +45,7 @@ class TextAreaWithFormControlExampleComponent {
 	 * Options for testing purposes
 	 */
 
-	validatorMessages: TFudisInputErrorMessages = {
+	validatorMessages: FudisFormErrors = {
 		required: 'This is required field.',
 		minlength: `Too short input. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,
 		maxlength: `Too long input. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,

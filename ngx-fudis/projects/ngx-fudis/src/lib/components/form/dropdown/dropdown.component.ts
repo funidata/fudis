@@ -1,6 +1,6 @@
 import { Component, Input, ViewEncapsulation, EventEmitter, Output, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { IFudisDropdownOption, TFudisDropdownLanguageOption } from '../../../types/forms';
+import { FudisDropdownOption, FudisDropdownLanguageOption, FudisInputWidth } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 
@@ -15,13 +15,13 @@ export class DropdownComponent extends InputBaseDirective implements OnInit {
 	 * FormControl for the input.
 	 */
 	@Input({ required: true }) control: FormControl<
-		IFudisDropdownOption | IFudisDropdownOption[] | TFudisDropdownLanguageOption[] | null
+		FudisDropdownOption | FudisDropdownOption[] | FudisDropdownLanguageOption[] | null
 	>;
 
 	/**
 	 * Dropdown options
 	 */
-	@Input() options: IFudisDropdownOption[];
+	@Input() options: FudisDropdownOption[];
 
 	/**
 	 * If true, user can choose multiple checkbox options from dropdown
@@ -36,7 +36,7 @@ export class DropdownComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * Available sizes for the dropdown - defaults to large.
 	 */
-	@Input() size?: 'xs' | 's' | 'm' | 'l' = 'l';
+	@Input() size: 'xs' | FudisInputWidth = 'lg';
 
 	/**
 	 * Hide select option checkmark in option list
@@ -47,9 +47,9 @@ export class DropdownComponent extends InputBaseDirective implements OnInit {
 	/**
 	 * Value output event on selectoion change
 	 */
-	@Output() selectionUpdate: EventEmitter<IFudisDropdownOption> = new EventEmitter<IFudisDropdownOption>();
+	@Output() selectionUpdate: EventEmitter<FudisDropdownOption> = new EventEmitter<FudisDropdownOption>();
 
-	handleSelectionChange(value: IFudisDropdownOption): void {
+	handleSelectionChange(value: FudisDropdownOption): void {
 		this.selectionUpdate.emit(value);
 	}
 

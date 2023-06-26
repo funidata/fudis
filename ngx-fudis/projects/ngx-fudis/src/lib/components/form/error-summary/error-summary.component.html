@@ -1,11 +1,11 @@
 <ng-container *ngIf="_visibleErrorList.length > 0">
 	<fudis-notification [variant]="'danger'">
-		<ng-template fudisContent>
+		<ng-template fudisContent type="notification">
 			<div class="fudis-error-summary" #focusTarget tabindex="-1">
 				<fudis-icon [icon]="'alert'"></fudis-icon>
 				<div class="fudis-error-summary__errors">
 					<ng-container *ngIf="helpText">
-						<fudis-body-text class="fudis-error-summary__errors__help-text" [size]="'l-light'">
+						<fudis-body-text class="fudis-error-summary__errors__help-text" [size]="'lg-light'">
 							<ng-container *ngIf="screenReaderHelpText"
 								><span class="fudis-visually-hidden">{{ screenReaderHelpText }}:&nbsp;</span></ng-container
 							>

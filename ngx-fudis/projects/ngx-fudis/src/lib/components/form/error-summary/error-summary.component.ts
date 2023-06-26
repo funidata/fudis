@@ -1,14 +1,15 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, Signal, ViewChild, effect } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Inject, Input, Signal, ViewChild, effect } from '@angular/core';
 
-import { ErrorSummaryService } from './error-summary.service';
-import { TFudisFormErrorSummaryObject, TFudisFormErrorSummaryList } from '../../../types/forms';
+import { DOCUMENT } from '@angular/common';
+import { FudisErrorSummaryService } from './error-summary.service';
+import { FudisFormErrorSummaryObject, FudisFormErrorSummaryList } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-error-summary',
 	templateUrl: './error-summary.component.html',
 	styleUrls: ['./error-summary.component.scss'],
 })
-export class ErrorSummaryComponent implements OnInit, AfterViewInit {
+export class ErrorSummaryComponent {
 	@ViewChild('focusTarget') focusTarget: ElementRef;
 
 	/**
@@ -26,16 +27,26 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 	 */
 	@Input({ required: true }) screenReaderHelpText: string;
 
-	constructor(private _errorSummaryService: ErrorSummaryService) {
+	@Input() liveRemove: boolean = false;
+
+	constructor(
+		@Inject(DOCUMENT) private _document: Document,
+		private _errorSummaryService: FudisErrorSummaryService,
+		private readonly _changeDetectorRef: ChangeDetectorRef
+	) {
 		effect(() => {
 			this.getErrors();
 		});
 	}
 
-	protected _visibleErrorList: TFudisFormErrorSummaryList[] = [];
+	protected _visibleErrorList: FudisFormErrorSummaryList[] = [];
+
+	private _numberOfFocusTries: number = 0;
 
 	getErrors(): void {
-		const fetchedErrors: Signal<TFudisFormErrorSummaryObject> = this._errorSummaryService.getVisibleErrors();
+		const fetchedErrors: Signal<FudisFormErrorSummaryObject> = this.liveRemove
+			? this._errorSummaryService.getDynamicErrors()
+			: this._errorSummaryService.getVisibleErrors();
 
 		this._visibleErrorList = [];
 
@@ -49,32 +60,25 @@ export class ErrorSummaryComponent implements OnInit, AfterViewInit {
 			}
 		});
 
+		this._changeDetectorRef.detectChanges();
+
 		/**
 		 * Focus to Error Summary element when visible error list gets updated.
 		 */
-		this.focusToErrorSummary(false);
-	}
-
-	ngOnInit(): void {
-		this.getErrors();
-	}
-
-	focusToErrorSummary(firstLoad: boolean): void {
-		if (this.focusTarget && this._visibleErrorList.length > 0) {
-			(this.focusTarget.nativeElement as HTMLDivElement).focus();
-		} else if (firstLoad) {
-			setTimeout(() => {
-				if (this.focusTarget && this._visibleErrorList.length > 0) {
-					(this.focusTarget.nativeElement as HTMLDivElement).focus();
-				}
-			}, 200);
+		if (this._document.activeElement?.classList.contains('fudis-button')) {
+			this.focusToErrorSummary();
 		}
 	}
 
-	ngAfterViewInit(): void {
-		/**
-		 * Initial focus when Error Summary is loaded first time
-		 * */
-		this.focusToErrorSummary(true);
+	focusToErrorSummary(): void {
+		if (this.focusTarget && this._visibleErrorList.length > 0) {
+			this._numberOfFocusTries = 0;
+			(this.focusTarget.nativeElement as HTMLDivElement).focus();
+		} else if (this._numberOfFocusTries < 100) {
+			setTimeout(() => {
+				this._numberOfFocusTries += 1;
+				this.focusToErrorSummary();
+			}, 100);
+		}
 	}
 }

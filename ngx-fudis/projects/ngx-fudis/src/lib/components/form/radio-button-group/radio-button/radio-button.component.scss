@@ -7,12 +7,12 @@
 
 .fudis-radio-button-host {
 	&:not(:last-of-type) {
-		margin-bottom: spacing.$spacing-s;
+		margin-bottom: spacing.$spacing-sm;
 	}
 }
 
 .fudis-radio-button {
-	@include typography.body-text-m-regular;
+	@include typography.body-text-md-regular;
 	@include colorMixins.text-color('gray-dark');
 
 	display: inline-block;
@@ -24,7 +24,7 @@
 
 	&__label {
 		margin-bottom: 0;
-		padding-left: spacing.$spacing-s;
+		padding-left: spacing.$spacing-sm;
 	}
 
 	/* Radio button circle */
@@ -42,9 +42,9 @@
 			align-items: center;
 			justify-content: center;
 			border-radius: 50%;
-			width: spacing.$spacing-m;
-			min-width: spacing.$spacing-m;
-			height: spacing.$spacing-m;
+			width: spacing.$spacing-md;
+			min-width: spacing.$spacing-md;
+			height: spacing.$spacing-md;
 
 			&--invalid {
 				@include borders.border('1px', 'solid', 'red');
@@ -56,8 +56,8 @@
 				@include colorMixins.bg-color('gray-dark');
 
 				border-radius: 50%;
-				width: spacing.$spacing-s;
-				height: spacing.$spacing-s;
+				width: spacing.$spacing-sm;
+				height: spacing.$spacing-sm;
 			}
 		}
 	}

@@ -1,6 +1,12 @@
 import { Directive, Input } from '@angular/core';
-import { GridWidth, GridMarginSide, GridGap, GridAlign, GridAlignItems } from '../../../types/grid';
-import { Spacing } from '../../../types/spacing';
+import {
+	FudisGridWidth,
+	FudisGridMarginSide,
+	FudisGridGap,
+	FudisGridAlign,
+	FudisGridAlignItems,
+} from '../../../types/grid';
+import { FudisSpacing } from '../../../types/miscellaneous';
 
 @Directive({
 	selector: '[fudisGridApi]',
@@ -15,37 +21,37 @@ export class GridApiDirective {
 	 * sm = Viewports smaller than 768px
 	 * xs = Viewports smaller than 576px
 	 */
-	@Input() width: GridWidth = 'xxl';
+	@Input() width: FudisGridWidth;
 
 	/**
 	 * Alignment of Grid component inside its parent
 	 */
-	@Input() align: GridAlign = 'center';
+	@Input() align: FudisGridAlign;
 
 	/**
 	 * Vertical alignment of Grid Items in a row
 	 */
-	@Input() alignItemsY: GridAlignItems = 'stretch';
+	@Input() alignItemsY: FudisGridAlignItems;
 
 	/**
 	 * Horizontal alignment of Grid Items in a row
 	 */
-	@Input() alignItemsX: GridAlignItems = 'stretch';
+	@Input() alignItemsX: FudisGridAlignItems;
 
 	/**
 	 * Margin top for the Grid
 	 */
-	@Input() marginTop: Spacing = 'none';
+	@Input() marginTop: FudisSpacing;
 
 	/**
 	 * Margin bottom for the Grid
 	 */
-	@Input() marginBottom: Spacing = 'none';
+	@Input() marginBottom: FudisSpacing;
 
 	/**
 	 * Horizontal margins left and right of the grid
 	 */
-	@Input() marginSides: GridMarginSide = 'none';
+	@Input() marginSides: FudisGridMarginSide;
 
 	/**
 	 * Custom CSS classes for Grid element
@@ -55,10 +61,15 @@ export class GridApiDirective {
 	/**
 	 * Grid column gap. Using Fudis spacing token values of xxs to xxl and 0.
 	 */
-	@Input() columnGap: GridGap = 'responsive';
+	@Input() columnGap: FudisGridGap;
 
 	/**
 	 * Grid row gap. Using Fudis spacing token values of xxs to xxl and 0.
 	 */
-	@Input() rowGap: GridGap = 'responsive';
+	@Input() rowGap: FudisGridGap;
+
+	/**
+	 * To make Grid ignore default values defined by application and FudisGridService
+	 */
+	@Input() ignoreDefaults: boolean = false;
 }

@@ -7,26 +7,32 @@
 	justify-content: space-between;
 	width: 100%;
 
+	&__help-text {
+		@include colorMixins.text-color('gray-dark');
+		@include typography.body-text-sm-regular;
+
+		margin-top: spacing.$spacing-none;
+		margin-bottom: spacing.$spacing-xs;
+	}
+
 	&__errors {
+		display: flex;
+		transform: translateX(-(spacing.$spacing-xs));
 		opacity: 0;
-		height: 0;
+		height: spacing.$spacing-xs;
 		animation-name: delay-appearance;
 		animation-delay: 0.2s;
 		animation-iteration-count: 1;
 		animation-fill-mode: forwards;
-	}
 
-	&__help-text {
-		@include colorMixins.text-color('gray-dark');
-		@include typography.body-text-s-regular;
-
-		margin-top: spacing.$spacing-xs;
-		margin-bottom: spacing.$spacing-xs;
+		&__list {
+			min-height: spacing.$spacing-xs;
+		}
 	}
 
 	&__character-limit-indicator {
 		@include colorMixins.text-color('gray-dark');
-		@include typography.body-text-s-regular;
+		@include typography.body-text-sm-regular;
 
 		margin-top: spacing.$spacing-xs;
 		margin-left: spacing.$spacing-xs;
@@ -40,7 +46,7 @@
 @keyframes delay-appearance {
 	0% {
 		opacity: 0;
-		height: 0;
+		height: spacing.$spacing-xs;
 	}
 
 	100% {

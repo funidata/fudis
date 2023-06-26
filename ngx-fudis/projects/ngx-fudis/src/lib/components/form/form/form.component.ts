@@ -1,10 +1,11 @@
 import { AfterContentInit, Component, ContentChild, ElementRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { HeadingLevel, HeadingSize } from '../../../types/typography';
-import { IdService } from '../../../utilities/id-service.service';
+import { FudisHeadingTag, FudisHeadingSize } from '../../../types/typography';
+import { FudisIdService } from '../../../utilities/id-service.service';
 import { HeaderDirective } from '../../../directives/content-projection/header/header.directive';
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
+import { FudisBadgeVariant } from '../../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-form',
@@ -21,13 +22,19 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 
 	@Input() id: string;
 
-	@Input({ required: true }) title: string;
+	@Input() title: string;
 
-	@Input({ required: true }) titleTag: HeadingLevel;
+	@Input({ required: true }) titleTag: FudisHeadingTag;
 
-	@Input() titleSize: HeadingSize = 'xl';
+	@Input() titleSize: FudisHeadingSize = 'xl';
 
 	@Input() helpText: string;
+
+	@Input() badge: FudisBadgeVariant | null;
+
+	@Input() badgeText: string | null;
+
+	@Input() errorSummaryLiveRemove: boolean = false;
 
 	/**
 	 * If Error Summary is visible. Usually set on click of form submit button.
@@ -46,7 +53,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 
 	protected _id: string;
 
-	constructor(private _idService: IdService, private _elementRef: ElementRef) {
+	constructor(private _idService: FudisIdService, private _elementRef: ElementRef) {
 		super();
 	}
 
