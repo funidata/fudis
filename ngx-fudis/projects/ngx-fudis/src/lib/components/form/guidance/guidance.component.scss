@@ -7,21 +7,30 @@
 	justify-content: space-between;
 	width: 100%;
 
-	&__errors {
-		opacity: 0;
-		height: 0;
-		animation-name: delay-appearance;
-		animation-delay: 0.2s;
-		animation-iteration-count: 1;
-		animation-fill-mode: forwards;
-	}
-
 	&__help-text {
 		@include colorMixins.text-color('gray-dark');
 		@include typography.body-text-sm-regular;
 
 		margin-top: spacing.$spacing-xs;
 		margin-bottom: spacing.$spacing-xs;
+	}
+
+	&__errors {
+		display: flex;
+		transform: translateX(-(spacing.$spacing-xs));
+		opacity: 0;
+		height: 0;
+		animation-name: delay-appearance;
+		animation-delay: 0.2s;
+		animation-iteration-count: 1;
+		animation-fill-mode: forwards;
+
+		/* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
+		& + .fudis-guidance {
+			&__help-text {
+				margin-top: spacing.$spacing-none;
+			}
+		}
 	}
 
 	&__character-limit-indicator {
