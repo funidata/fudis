@@ -1,10 +1,16 @@
 import { StoryFn, Meta } from '@storybook/angular';
 
 import { DescriptionListComponent } from './description-list.component';
+import readme from './readme.mdx';
 
 export default {
 	title: 'Components/Description List',
 	component: DescriptionListComponent,
+	parameters: {
+		docs: {
+			page: readme,
+		},
+	},
 	argTypes: {},
 } as Meta;
 

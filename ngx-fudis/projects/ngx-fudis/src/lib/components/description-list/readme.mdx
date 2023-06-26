@@ -1,0 +1,26 @@
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import { linkTo } from '@storybook/addon-links';
+import { DescriptionListComponent } from './description-list.component.ts';
+import * as DescriptionListStories from './description-list.stories.ts';
+
+<Meta title="Components/DescriptionListComponent " />
+
+# DescriptionList Component
+
+Fudis DescriptionList component generates an item list from an array of objects type IFudisDescriptionListItem. Each description item has a key value pair. Value can also contain an optional sub-header value.
+
+## Examples
+
+Fudis descriptionList has two different variants 'regular' and 'compact'. Fudis description list's default behavior is to align with fudis grid. This feature can be turned off by setting `disableGrid` as true.
+
+<Canvas of={DescriptionListStories.DescriptionList}></Canvas>
+
+### Accessibility
+
+### Related components
+
+[Icon](/docs/components-icon--icon)
+
+## Properties
+
+<ArgTypes of={DescriptionListComponent} />
