@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ActionsDirective } from './directives/content-projection/actions/actions.directive';
 import { AutocompleteComponent } from './components/form/autocomplete/autocomplete.component';
 import { BadgeComponent } from './components/badge/badge.component';
@@ -144,6 +145,7 @@ import { FudisTranslationConfigService } from './utilities/config.service';
 		MatTooltipModule,
 		ReactiveFormsModule,
 		RouterModule,
+		ScrollingModule,
 	],
 
 	/*

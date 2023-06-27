@@ -20,7 +20,7 @@ export class InputBaseDirective extends TooltipApiDirective {
 	/**
 	 * Unique id for input.
 	 */
-	@Input({ required: true }) id: string;
+	@Input() id: string;
 
 	/**
 	 * Option for disabling the input.
