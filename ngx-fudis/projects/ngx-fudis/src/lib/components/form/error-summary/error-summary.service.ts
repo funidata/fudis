@@ -6,8 +6,14 @@ export class FudisErrorSummaryService {
 
 	private _signalCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
 
+	private _signalDynamicCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
+
 	getVisibleErrors(): Signal<FudisFormErrorSummaryObject> {
 		return this._signalCurrentErrorList.asReadonly();
+	}
+
+	getDynamicErrors(): Signal<FudisFormErrorSummaryObject> {
+		return this._signalDynamicCurrentErrorList.asReadonly();
 	}
 
 	// eslint-disable-next-line class-methods-use-this
@@ -51,11 +57,14 @@ export class FudisErrorSummaryService {
 		delete currentErrors[errorId].errors[error.type];
 
 		this._currentErrorList = currentErrors;
+
+		this._signalDynamicCurrentErrorList.set(currentErrors);
 	}
 
 	public reloadErrors(delay: number = 10): void {
 		setTimeout(() => {
 			this._signalCurrentErrorList.set(this._currentErrorList);
+			this._signalDynamicCurrentErrorList.set(this._currentErrorList);
 		}, delay);
 	}
 }
