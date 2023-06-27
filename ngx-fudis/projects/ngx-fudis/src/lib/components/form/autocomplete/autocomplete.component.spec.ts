@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MockComponent } from 'ng-mocks';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { By } from '@angular/platform-browser';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
@@ -31,7 +32,7 @@ describe('AutocompleteComponent', () => {
 				MockComponent(ErrorMessageComponent),
 			],
 			providers: [FudisErrorSummaryService],
-			imports: [MatAutocompleteModule, ReactiveFormsModule, BrowserAnimationsModule],
+			imports: [MatAutocompleteModule, ScrollingModule, ReactiveFormsModule, BrowserAnimationsModule],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(AutocompleteComponent);

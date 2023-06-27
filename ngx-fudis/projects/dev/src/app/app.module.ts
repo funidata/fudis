@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxFudisModule } from 'ngx-fudis';
 
 import { HttpClientModule } from '@angular/common/http';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AppComponent } from './app.component';
 import { DialogTestComponent } from './dialog-test/dialog-test.component';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
@@ -12,7 +13,15 @@ import { TranslocoRootModule } from './transloco-root.module';
 
 @NgModule({
 	declarations: [AppComponent, DialogTestComponent, DialogTestContentComponent],
-	imports: [BrowserModule, BrowserAnimationsModule, FormsModule, NgxFudisModule, HttpClientModule, TranslocoRootModule],
+	imports: [
+		BrowserModule,
+		BrowserAnimationsModule,
+		FormsModule,
+		NgxFudisModule,
+		ScrollingModule,
+		HttpClientModule,
+		TranslocoRootModule,
+	],
 	providers: [],
 	bootstrap: [AppComponent],
 })

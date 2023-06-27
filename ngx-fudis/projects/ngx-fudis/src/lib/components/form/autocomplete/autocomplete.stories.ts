@@ -6,7 +6,7 @@ import { AutocompleteComponent } from './autocomplete.component';
 import readme from './readme.mdx';
 
 export default {
-	title: 'Components/Form/Autocomplete',
+	title: 'Components/Form/Autocomplete (single-select)',
 	component: AutocompleteComponent,
 	parameters: {
 		docs: {
@@ -25,10 +25,9 @@ const Template: StoryFn<AutocompleteComponent> = (args: AutocompleteComponent) =
 	props: args,
 });
 
-export const Autocomplete = Template.bind({});
-Autocomplete.args = {
-	id: 'example-id-for-autocomplete',
-	label: 'Choose one option',
+export const AutocompleteSearch = Template.bind({});
+AutocompleteSearch.args = {
+	label: 'Search autocomplete',
 	requiredText: 'Required',
 	clearFilterText: 'Clear filter',
 	helpText:
@@ -42,14 +41,35 @@ Autocomplete.args = {
 		{ value: 'very-long-value', viewValue: 'Brian Eggplant with Marinated Pomegranate Seeds' },
 		{ value: 1234, viewValue: 'Martin Seeding' },
 	],
-	tooltip: 'well hello to you',
+	tooltip: 'Tooltip text for autocomplete',
+	tooltipPosition: 'below',
+	tooltipToggle: true,
+};
+
+const manyOptions = Array.from({ length: 100 }).map((value, i) => {
+	return {
+		value: i,
+		viewValue: `Item number ${i}`,
+	};
+});
+
+export const AutocompleteDropdown = Template.bind({});
+AutocompleteDropdown.args = {
+	label: 'Dropdown autocomplete',
+	variant: 'dropdown',
+	requiredText: 'Required',
+	clearFilterText: 'Clear filter',
+	helpText: 'This autocomplete displays dropdown option list when focusing to the input.',
+	control: new FormControl(null, Validators.required),
+	errorMsg: { required: 'This selection is required' },
+	options: manyOptions,
+	tooltip: 'Tooltip text for autocomplete',
 	tooltipPosition: 'below',
 	tooltipToggle: true,
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-	id: 'example-id-for-disabled-autocomplete',
 	label: 'Choose one option',
 	disabled: true,
 	helpText:

@@ -9,6 +9,7 @@ import {
 } from '../../../types/forms';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
+import { FudisIdService } from '../../../utilities/id-service.service';
 
 @Component({
 	selector: 'fudis-input-with-language-options',
@@ -16,6 +17,10 @@ import { InputBaseDirective } from '../../../directives/form/input-base/input-ba
 	styleUrls: ['./input-with-language-options.component.scss'],
 })
 export class InputWithLanguageOptionsComponent extends InputBaseDirective implements OnInit, OnChanges {
+	constructor(private _idService: FudisIdService) {
+		super();
+	}
+
 	/**
 	 * FormGroup including controls.
 	 */
@@ -66,6 +71,11 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	private _nonEmptyControls: string[] = [];
 
 	protected _updatedOptions: FudisDropdownOption[] = [];
+
+	/**
+	 * Internal id to generate unique id
+	 */
+	protected _id: string;
 
 	handleLanguageSelect(value: FudisDropdownOption): void {
 		this._dropdownValue = value;
@@ -185,6 +195,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	}
 
 	ngOnInit(): void {
+		this._id = this.id ?? this._idService.getNewId('inputWithLanguageOptions');
 		checkRequiredAttributes(this.id, this.requiredText, undefined, this.formGroup);
 
 		this._updatedOptions = this.missingLanguage ? this.updateDropdownList() : this.options;

@@ -1,33 +1,33 @@
 import { AfterContentInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { FudisDropdownOption, FudisInputWidth } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+import { FudisIdService } from '../../../utilities/id-service.service';
 
 @Component({
-	selector: 'fudis-autocomplete[label][id][options][clearFilterText]',
+	selector: 'fudis-autocomplete',
 	templateUrl: './autocomplete.component.html',
 	styleUrls: ['./autocomplete.component.scss'],
 })
 export class AutocompleteComponent extends InputBaseDirective implements OnInit, AfterContentInit {
+	constructor(private _idService: FudisIdService) {
+		super();
+	}
+
 	@ViewChild('fudisAutocompleteInput') autocompleteInput: ElementRef;
 
 	/**
 	 * FormControl for the input.
 	 */
-	@Input() control: FormControl<FudisDropdownOption | null>;
+	@Input({ required: true }) control: FormControl<FudisDropdownOption | null>;
 
 	/**
 	 * Option list
 	 */
-	@Input() options: FudisDropdownOption[];
-
-	/**
-	 * Filtered options derived from options Input
-	 */
-	filteredOptions: Observable<FudisDropdownOption[]>;
+	@Input({ required: true }) options: FudisDropdownOption[];
 
 	/**
 	 * Available sizes for the autocomplete - defaults to large.
@@ -37,37 +37,76 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	/**
 	 * Aria-label for close icon which clears the input
 	 */
-	@Input() clearFilterText: string;
+	@Input({ required: true }) clearFilterText: string;
+
+	/**
+	 * Option whether the dropdown options are shown only after three charactes (search) or if options are displayed when focusing the search input even without typing (dropdown)
+	 */
+	@Input() variant: 'search' | 'dropdown' = 'search';
 
 	/**
 	 * Internal formControl to check if typed text matches with any of the options' viewValue
 	 */
-	autocompleteFormControl = new FormControl<string>('');
+	protected _autocompleteFormControl = new FormControl<string | null>('');
+
+	/**
+	 * Internal filtered options derived from options Input
+	 */
+	protected _filteredOptions: Observable<FudisDropdownOption[]>;
+
+	/**
+	 * Internal id to generate unique id
+	 */
+	protected _id: string;
+
+	ngOnInit(): void {
+		this._id = this.id ?? this._idService.getNewId('autocomplete');
+		checkRequiredAttributes(this._id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
+	}
 
 	ngAfterContentInit() {
 		if (this.control.value) {
-			this.autocompleteFormControl.patchValue(this.control.value.viewValue);
+			this._autocompleteFormControl.patchValue(this.control.value.viewValue);
 		}
-
-		this.filteredOptions = this.autocompleteFormControl.valueChanges.pipe(
-			map((value) => {
-				// Start filtering after three characters
-				if (value && value.length > 2) {
-					this.isValueOption(value.toLowerCase());
-					return this._filter(value);
-				}
-				this.isValueOption(null);
-				return [];
-			})
-		);
+		this.checkFilteredOptions();
 	}
 
-	isValueOption(value: string | null): void {
+	checkFilteredOptions() {
+		if (this.variant === 'search') {
+			this._filteredOptions = this._autocompleteFormControl.valueChanges.pipe(
+				map((value) => {
+					this.updateControlValue(value);
+					// Start filtering after three characters
+					if (value && value.length > 2 && !this.control.value) {
+						return this._filter(value);
+					}
+					return [];
+				})
+			);
+		}
+		if (this.variant === 'dropdown') {
+			this._filteredOptions = this._autocompleteFormControl.valueChanges.pipe(
+				startWith(''),
+				map((value) => {
+					this.updateControlValue(value);
+					if ((value || value === '') && !this.control.value) {
+						return this._filter(value);
+					}
+					return [];
+				})
+			);
+		}
+	}
+
+	/**
+	 * Check that value is found from given options list, if not set control as null
+	 */
+	updateControlValue(value: string | null): void {
 		if (!value) {
 			this.control.patchValue(null);
 		} else {
 			const optionValue = this.options.find((option) => {
-				return option.viewValue.toLowerCase() === value ? option : null;
+				return option.viewValue.toLowerCase() === value.toLowerCase() ? option : null;
 			});
 
 			if (optionValue) {
@@ -79,12 +118,16 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	}
 
 	/**
-	 * Filter options when user inputs text
+	 * Filter options when user inputs text or opens dropdown
 	 */
-	private _filter(viewValue: string): FudisDropdownOption[] {
-		const filterValue = viewValue.toLowerCase();
+	private _filter(value: string): FudisDropdownOption[] {
+		if (value || value === '') {
+			const filterValue = value.toLowerCase();
+			const filteredOptions = this.options.filter((option) => option.viewValue.toLowerCase().includes(filterValue));
 
-		return this.options.filter((option) => option.viewValue.toLowerCase().includes(filterValue));
+			return filteredOptions;
+		}
+		return [];
 	}
 
 	/**
@@ -93,7 +136,9 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	clearFilter(): void {
 		// Clear input field and control value
 		this.control.setValue(null);
-		this.autocompleteFormControl.setValue(null);
+		this._autocompleteFormControl.setValue(null);
+
+		this.checkFilteredOptions();
 
 		// After clearing set focus back to input field
 		this.autocompleteInput.nativeElement.focus();
@@ -102,12 +147,8 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	autocompleteBlur(event: Event): void {
 		this.control.markAsTouched();
 		if (this.control.valid && this.control.value) {
-			this.autocompleteFormControl.patchValue(this.control.value.viewValue);
+			this._autocompleteFormControl.patchValue(this.control.value.viewValue);
 		}
 		this.handleBlur.emit(event);
-	}
-
-	ngOnInit(): void {
-		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 }

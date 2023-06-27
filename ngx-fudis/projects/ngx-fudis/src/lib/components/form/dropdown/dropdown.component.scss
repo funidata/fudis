@@ -7,18 +7,18 @@
 @use '../../../foundations/focus/mixins.scss' as focus;
 
 .fudis-dropdown {
-	max-width: calc(23 * spacing.$spacing-sm);
+	max-width: spacing.$spacing-input-lg;
 
 	&__lg {
 		width: 100%;
 	}
 
 	&__md {
-		width: calc(14 * spacing.$spacing-sm);
+		width: spacing.$spacing-input-md;
 	}
 
 	&__sm {
-		max-width: calc(10 * spacing.$spacing-sm);
+		max-width: spacing.$spacing-input-sm;
 	}
 
 	&__xs {
