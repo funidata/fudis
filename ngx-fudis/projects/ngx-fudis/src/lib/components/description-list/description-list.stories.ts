@@ -44,11 +44,14 @@ const html = String.raw;
 
 export const DescriptionList: StoryFn = () => ({
 	props: { testData, testDataCompact },
-	template: html`<fudis-heading tag="h2" size="md"> Description List Regular Example</fudis-heading>
+	template: html`<fudis-heading tag="h2" size="md"> Description List Regular With Data Looping</fudis-heading>
 		<fudis-description-list [data]="testData" [marginBottom]="'md'"></fudis-description-list>
 		<hr />
-		<fudis-heading tag="h2" size="md">Description List Compact Example</fudis-heading>
-		<fudis-description-list [variant]="'compact'" [data]="testDataCompact"></fudis-description-list>`,
+		<fudis-heading tag="h2" size="md">Description List Compact With Data Looping</fudis-heading>
+		<fudis-description-list
+			[columns]="{xs: 1, sm: 2}"
+			[variant]="'compact'"
+			[data]="testDataCompact"></fudis-description-list>`,
 });
 
 const TemplateWithDl: StoryFn<DescriptionListComponent> = () => ({
@@ -75,3 +78,39 @@ const TemplateWithDl: StoryFn<DescriptionListComponent> = () => ({
 });
 
 export const DescriptionListItemInsideGrid = TemplateWithDl.bind({});
+
+export const DescriptionListWithSubComponents: StoryFn = () => ({
+	props: { testData, testDataCompact },
+	template: html`<fudis-heading tag="h2" size="md">Description list built with sub components</fudis-heading>
+		<fudis-description-list [marginBottom]="'md'">
+			<fudis-description-list-item *ngFor="let item of testData; let i = index">
+				<fudis-dt>{{item.key}}</fudis-dt>
+				<fudis-dd [subHeading]="item.subHeading"
+					>{{item.value}}
+					<ng-container *ngIf="i === 1 || i === 4">
+						<ng-template fudisActions type="dd">
+							<fudis-button [label]="'Click!'" [variant]="'tertiary'" [size]="'small'" [icon]="'edit'" />
+						</ng-template>
+					</ng-container>
+				</fudis-dd>
+			</fudis-description-list-item>
+		</fudis-description-list>
+		<fudis-heading tag="h2" size="md">Description list compact built with sub components</fudis-heading>
+		<fudis-description-list [variant]="'compact'" [marginBottom]="'md'">
+			<fudis-description-list-item *ngFor="let item of testDataCompact; let i = index">
+				<fudis-dt>{{item.key}}</fudis-dt>
+				<fudis-dd [subHeading]="item.subHeading"
+					>{{item.value}}<ng-container *ngIf="i === 1 || i === 4">
+						<ng-template fudisActions type="dd">
+							<fudis-button [label]="'Click!'" [variant]="'tertiary'" [size]="'small'" [icon]="'edit'" />
+						</ng-template>
+					</ng-container>
+				</fudis-dd>
+			</fudis-description-list-item>
+		</fudis-description-list> `,
+});
+
+// <fudis-description-list-item *ngFor="let item of testData">
+// 				<fudis-dd>{{item.key}}</fudis-dd>
+// 				<fudis-dt>{{item.value}}</fudis-dt>
+// 			</fudis-description-list-item>

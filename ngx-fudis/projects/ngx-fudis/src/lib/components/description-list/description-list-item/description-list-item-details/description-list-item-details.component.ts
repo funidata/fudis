@@ -1,14 +1,13 @@
-import { Component, Input } from '@angular/core';
-import { FudisDescriptionListItem } from 'projects/ngx-fudis/src/lib/types/miscellaneous';
+import { ChangeDetectionStrategy, Component, ContentChild, Input } from '@angular/core';
+import { ActionsDirective } from 'projects/ngx-fudis/src/lib/directives/content-projection/actions/actions.directive';
 
 @Component({
 	selector: 'fudis-dd, fudis-description-list-details',
 	templateUrl: './description-list-item-details.component.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DescriptionListItemDetailsComponent {
-	/**
-	 * Item array to form description list data.
-	 * Contains mandatory key and value, and optional subHeading.
-	 */
-	@Input() item: FudisDescriptionListItem;
+	@ContentChild(ActionsDirective) actions: ActionsDirective;
+
+	@Input() subHeading: string | undefined;
 }

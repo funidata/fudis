@@ -1,14 +1,8 @@
-import { Component, Input } from '@angular/core';
-import { FudisDescriptionListItem } from '../../../../types/miscellaneous';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
 	selector: 'fudis-dt, fudis-description-list-term',
 	templateUrl: './description-list-item-term.component.html',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DescriptionListItemTermComponent {
-	/**
-	 * Item array to form description list data.
-	 * Contains mandatory key and value, and optional subHeading.
-	 */
-	@Input() item: FudisDescriptionListItem;
-}
+export class DescriptionListItemTermComponent {}

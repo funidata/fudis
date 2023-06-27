@@ -20,7 +20,7 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 	 * Item array to form description list data.
 	 * Contains mandatory key and value, and optional subHeading.
 	 */
-	@Input() data: FudisDescriptionListItem[] = [];
+	@Input() data: FudisDescriptionListItem[] | null = null;
 
 	/**
 	 * Variant for description list structure and layout
@@ -43,7 +43,7 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 	 * After md breakpoint it will have two columns 'repeat(2, 1fr)'
 	 * And after xl breakpoint 'repeat(3, 1fr)'
 	 */
-	@Input() columns: string | number | FudisGridColumnsResponsive = '1fr 1fr';
+	@Input() override columns: string | number | FudisGridColumnsResponsive = '1fr 1fr';
 
 	private getClasses(): string[] {
 		const cssClasses = [];

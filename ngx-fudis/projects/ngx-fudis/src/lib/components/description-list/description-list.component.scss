@@ -43,7 +43,22 @@
 			@include typography.description-list-value-typography;
 			@include colorMixins.text-color('gray-dark');
 
+			display: flex;
+			flex-direction: column;
 			margin-left: 0;
+
+			&__content {
+				display: flex;
+				flex-direction: column;
+
+				&__actions {
+					margin-top: spacing.$spacing-xs;
+				}
+			}
+
+			&__parenthesis {
+				display: none;
+			}
 
 			&__sub-heading {
 				@include colorMixins.text-color('gray-dark');
@@ -57,7 +72,11 @@
 }
 
 .fudis-description-list-compact {
+	box-sizing: border-box;
+
 	&__disabled-grid {
+		@include utilities.box-reset;
+
 		columns: 1;
 
 		@include breakpoint.breakpoint('md') {
@@ -66,7 +85,6 @@
 	}
 
 	& &__item {
-		display: inline;
 		min-height: spacing.$spacing-md;
 
 		&__term {
@@ -94,12 +112,19 @@
 			@include typography.description-list-compact-value-typography;
 			@include colorMixins.text-color('gray-dark');
 
-			display: inline-block;
+			display: inline;
 			margin-left: 0;
 			padding-left: spacing.$spacing-xxs;
 
-			&__sub-heading,
-			&__value {
+			&__content {
+				display: inline;
+			}
+
+			&__parenthesis {
+				display: initial;
+			}
+
+			&__sub-heading {
 				@include utilities.box-reset;
 			}
 		}
