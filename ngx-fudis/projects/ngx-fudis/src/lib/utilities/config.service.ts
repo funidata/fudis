@@ -2,37 +2,42 @@
 /* eslint-disable @typescript-eslint/no-useless-constructor */
 import { Injectable, Signal, signal } from '@angular/core';
 import { of } from 'rxjs';
-import { FudisFormConfig } from '../types/forms';
+import { FudisTranslationConfig } from '../types/forms';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class FudisTranslationConfigService {
-	_closeLabel = of('Close calendar');
-
-	_requiredText = of('Required');
-
-	private _config = signal<FudisFormConfig>({
-		requiredText: this._requiredText,
+	/**
+	 * Default config values
+	 */
+	private _defaultsValues: FudisTranslationConfig = {
 		appLanguage: 'en',
-		datepicker: { closeLabel: this._closeLabel },
-	});
+		requiredText: of('Required'),
+		datepicker: { closeLabel: of('Close calendar') },
+		dialog: { closeLabel: of('Close') },
+		inputWithLanguageOptions: {
+			languageLabel: of('Language'),
+			missingLanguage: of('Missing'),
+		},
+		icon: {
+			attention: of('Attention'),
+		},
+	};
+
+	private _config = signal<FudisTranslationConfig>(this._defaultsValues);
 
 	/**
-	 * To set from application default values for all components application uses.
+	 * To set from application values for all components application uses.
 	 */
-	setConfig(defaultValues: FudisFormConfig): void {
+	setConfig(defaultValues: FudisTranslationConfig): void {
 		this._config.set({ ...this._config(), ...defaultValues });
 	}
 
-	updateConfig(values: FudisFormConfig): void {
-		this._config.set({ ...this._config(), ...values });
-	}
-
 	/**
-	 * Get application's default values
+	 * Get application's config values
 	 */
-	getConfig(): Signal<FudisFormConfig> {
+	getConfig(): Signal<FudisTranslationConfig> {
 		return this._config.asReadonly();
 	}
 }

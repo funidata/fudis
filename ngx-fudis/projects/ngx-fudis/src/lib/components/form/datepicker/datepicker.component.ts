@@ -23,7 +23,7 @@ import { DatepickerCustomDateAdapter, FudisDateInputFormat } from './datepicker-
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { FudisIdService } from '../../../utilities/id-service.service';
-import { FudisFormConfig, FudisInputWidth } from '../../../types/forms';
+import { FudisTranslationConfig, FudisInputWidth } from '../../../types/forms';
 import { FudisTranslationConfigService } from '../../../utilities/config.service';
 
 export const FUDIS_DATE_FORMATS: MatDateFormats = {
@@ -69,7 +69,7 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 		});
 	}
 
-	protected _configs: Signal<FudisFormConfig>;
+	protected _configs: Signal<FudisTranslationConfig>;
 
 	/**
 	 * FormControl for the input.
@@ -107,7 +107,7 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 
 		this._configs()
-			.datepicker!.closeLabel.pipe(takeUntil(this._destroyed))
+			.datepicker!.closeLabel!.pipe(takeUntil(this._destroyed))
 			.subscribe((value) => {
 				this._matDatepickerIntl.closeCalendarLabel = value as string;
 			});

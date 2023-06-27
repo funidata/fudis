@@ -133,7 +133,7 @@ export class AppComponent implements OnInit {
 			this.translocoService.setActiveLang('en');
 			this.document.documentElement.lang = 'en';
 		}
-		this.fudisConfig.updateConfig({ appLanguage: this.document.documentElement.lang });
+		this.fudisConfig.setConfig({ appLanguage: this.document.documentElement.lang });
 	}
 
 	openDialog(): void {
