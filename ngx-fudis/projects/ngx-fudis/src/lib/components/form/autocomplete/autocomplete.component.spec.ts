@@ -4,7 +4,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MockComponent } from 'ng-mocks';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
@@ -34,11 +33,7 @@ describe('AutocompleteComponent', () => {
 			],
 			providers: [FudisErrorSummaryService],
 			imports: [MatAutocompleteModule, ScrollingModule, ReactiveFormsModule, BrowserAnimationsModule],
-		})
-			.overrideComponent(AutocompleteComponent, {
-				set: { changeDetection: ChangeDetectionStrategy.Default },
-			})
-			.compileComponents();
+		}).compileComponents();
 
 		fixture = TestBed.createComponent(AutocompleteComponent);
 		component = fixture.componentInstance;

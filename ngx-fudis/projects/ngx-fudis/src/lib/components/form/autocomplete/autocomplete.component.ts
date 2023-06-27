@@ -1,12 +1,4 @@
-import {
-	AfterContentInit,
-	ChangeDetectionStrategy,
-	Component,
-	ElementRef,
-	Input,
-	OnInit,
-	ViewChild,
-} from '@angular/core';
+import { AfterContentInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
@@ -19,7 +11,6 @@ import { FudisIdService } from '../../../utilities/id-service.service';
 	selector: 'fudis-autocomplete',
 	templateUrl: './autocomplete.component.html',
 	styleUrls: ['./autocomplete.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutocompleteComponent extends InputBaseDirective implements OnInit, AfterContentInit {
 	constructor(private _idService: FudisIdService) {
@@ -39,11 +30,6 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	@Input({ required: true }) options: FudisDropdownOption[];
 
 	/**
-	 * Internal filtered options derived from options Input
-	 */
-	filteredOptions: Observable<FudisDropdownOption[]>;
-
-	/**
 	 * Available sizes for the autocomplete - defaults to large.
 	 */
 	@Input() size: FudisInputWidth = 'lg';
@@ -61,7 +47,12 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	/**
 	 * Internal formControl to check if typed text matches with any of the options' viewValue
 	 */
-	autocompleteFormControl = new FormControl<string | null>('');
+	protected _autocompleteFormControl = new FormControl<string | null>('');
+
+	/**
+	 * Internal filtered options derived from options Input
+	 */
+	protected _filteredOptions: Observable<FudisDropdownOption[]>;
 
 	/**
 	 * Internal id to generate unique id
@@ -75,14 +66,14 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 
 	ngAfterContentInit() {
 		if (this.control.value) {
-			this.autocompleteFormControl.patchValue(this.control.value.viewValue);
+			this._autocompleteFormControl.patchValue(this.control.value.viewValue);
 		}
 		this.checkFilteredOptions();
 	}
 
 	checkFilteredOptions() {
 		if (this.variant === 'search') {
-			this.filteredOptions = this.autocompleteFormControl.valueChanges.pipe(
+			this._filteredOptions = this._autocompleteFormControl.valueChanges.pipe(
 				map((value) => {
 					this.updateControlValue(value);
 					// Start filtering after three characters
@@ -94,7 +85,7 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 			);
 		}
 		if (this.variant === 'dropdown') {
-			this.filteredOptions = this.autocompleteFormControl.valueChanges.pipe(
+			this._filteredOptions = this._autocompleteFormControl.valueChanges.pipe(
 				startWith(''),
 				map((value) => {
 					this.updateControlValue(value);
@@ -145,7 +136,7 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	clearFilter(): void {
 		// Clear input field and control value
 		this.control.setValue(null);
-		this.autocompleteFormControl.setValue(null);
+		this._autocompleteFormControl.setValue(null);
 
 		this.checkFilteredOptions();
 
@@ -156,7 +147,7 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	autocompleteBlur(event: Event): void {
 		this.control.markAsTouched();
 		if (this.control.valid && this.control.value) {
-			this.autocompleteFormControl.patchValue(this.control.value.viewValue);
+			this._autocompleteFormControl.patchValue(this.control.value.viewValue);
 		}
 		this.handleBlur.emit(event);
 	}
