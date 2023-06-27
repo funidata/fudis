@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { MockComponent } from 'ng-mocks';
+
 import { GridComponent } from '../grid/grid/grid.component';
 import { GridDirective } from '../../directives/grid/grid/grid.directive';
 
@@ -19,16 +19,16 @@ fdescribe('DescriptionListComponent', () => {
 			declarations: [
 				DescriptionListComponent,
 				GridDirective,
-				MockComponent(GridComponent),
-				MockComponent(DescriptionListItemComponent),
-				MockComponent(DescriptionListItemTermComponent),
-				MockComponent(DescriptionListItemDetailsComponent),
+				GridComponent,
+				DescriptionListItemComponent,
+				DescriptionListItemTermComponent,
+				DescriptionListItemDetailsComponent,
 			],
 			providers: [FudisGridService],
 		}).compileComponents();
 	});
 
-	beforeEach(() => {
+	beforeEach(async () => {
 		fixture = TestBed.createComponent(DescriptionListComponent);
 		component = fixture.componentInstance;
 		component.data = [
@@ -37,13 +37,13 @@ fdescribe('DescriptionListComponent', () => {
 				value: 'Tagalog',
 			},
 		];
+
 		fixture.detectChanges();
 	});
 
 	function getDescriptionList(): HTMLElement {
-		const a = fixture.nativeElement.querySelector('dl') as HTMLElement;
-		const b = fixture.debugElement.query(By.css('fudis-dl-item'));
-		console.log('tämä on dl', b.nativeElement);
+		const dlItemDisplayValue = fixture.debugElement.query(By.css('fudis-dl-item .fudis-description-list__item'));
+		console.log(getComputedStyle(dlItemDisplayValue.nativeElement).display);
 		return fixture.nativeElement.querySelector('dl') as HTMLElement;
 	}
 
