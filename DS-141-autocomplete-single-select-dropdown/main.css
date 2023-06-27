@@ -168,11 +168,6 @@
 
 /* stylelint-disable property-disallowed-list */
 /* stylelint-disable unit-disallowed-list */
-html {
-  scroll-padding-top: 2rem;
-  scroll-behavior: smooth;
-}
-
 /* stylelint-disable selector-max-compound-selectors */
 /* stylelint-disable declaration-no-important */
 /* stylelint-disable declaration-property-value-disallowed-list */
@@ -2316,11 +2311,6 @@ textarea.cdk-textarea-autosize-measuring-firefox {
 }
 /* stylelint-disable unit-disallowed-list */ /* stylelint-disable property-disallowed-list */
 /* stylelint-disable unit-disallowed-list */
-html {
-  scroll-padding-top: 2rem;
-  scroll-behavior: smooth;
-}
-
 .fudis-visually-hidden {
   position: absolute;
   left: 0;
