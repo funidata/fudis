@@ -1,0 +1,30 @@
+@use '../../foundations/typography/mixins.scss' as typography;
+@use '../../foundations/typography/tokens.scss' as typographyTokens;
+@use '../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../foundations/colors/tokens.scss' as color;
+@use '../../foundations/spacing/tokens.scss' as spacing;
+@use '../../foundations/breakpoints/mixins.scss' as breakpoint;
+
+.fudis-footer {
+	@include colorMixins.bg-color('gray-light');
+
+	width: 100%;
+
+	&__left-side {
+		display: block;
+		width: auto;
+
+		&__logo {
+			display: block;
+			background: url('../../assets/images/fd-logo.svg') no-repeat top center;
+			width: 8rem;
+			min-height: spacing.$spacing-lg;
+		}
+	}
+
+	&__right-side {
+		display: block;
+		width: auto;
+		text-align: right;
+	}
+}

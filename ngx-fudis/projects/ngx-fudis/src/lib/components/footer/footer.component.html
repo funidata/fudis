@@ -1,3 +1,17 @@
-<ng-container>
-	<p>footer works</p>
-</ng-container>
+<footer class="fudis-footer">
+	<ng-container *ngTemplateOutlet="left"> </ng-container>
+</footer>
+
+<ng-template #left>
+	<div class="fudis-footer__left-side">
+		<!-- <img src="../../assets/images/fd-logo.svg" alt="Funidata logo" width="500" height="600" /> -->
+		<div class="fudis-footer__left-side__logo"></div>
+		<ng-content></ng-content>
+	</div>
+</ng-template>
+
+<ng-template #right>
+	<div class="fudis-footer__right-side">
+		<ng-content></ng-content>
+	</div>
+</ng-template>
