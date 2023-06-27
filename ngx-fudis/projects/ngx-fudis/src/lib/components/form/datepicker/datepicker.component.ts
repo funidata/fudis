@@ -21,6 +21,7 @@ import { MatDatepickerIntl } from '@angular/material/datepicker';
 import { DatepickerCustomDateAdapter, FudisDateInputFormat } from './datepicker-custom-date-adapter';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+import { FudisIdService } from '../../../utilities/id-service.service';
 import { FudisFormConfig, FudisInputWidth } from '../../../types/forms';
 import { FudisConfigService } from '../../../utilities/config.service';
 
@@ -54,6 +55,7 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 		private readonly _adapter: DateAdapter<Date>,
 		private _configService: FudisConfigService,
 		private _matDatepickerIntl: MatDatepickerIntl,
+		private _idService: FudisIdService,
 		private _changeDetectorRef: ChangeDetectorRef
 	) {
 		super();
@@ -93,7 +95,13 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 		this._matDatepickerIntl.closeCalendarLabel = this._configs().datepicker.closeLabel;
 	}
 
+	/**
+	 * Internal id to generate unique id
+	 */
+	protected _id: string;
+
 	ngOnInit(): void {
+		this._id = this.id ?? this._idService.getNewId('datepicker');
 		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 
