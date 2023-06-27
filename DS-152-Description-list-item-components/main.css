@@ -16,11 +16,16 @@
 */
 /* stylelint-disable declaration-property-value-disallowed-list */
 /* stylelint-disable property-disallowed-list */
+/* stylelint-disable property-disallowed-list */
 /* stylelint-disable no-descending-specificity */
 /* stylelint-disable declaration-no-important */
 /* stylelint-disable scss/selector-no-redundant-nesting-selector */
 /* stylelint-disable selector-max-class */
 /* stylelint-disable selector-class-pattern */
+/** 
+* Styles which affects to fudis-autocomplete (search and dropdown variants) and fudis-dropdown (single and multiselect variants) components. 
+* If you make changes, check that all of the above componenta and variants still work as wanted
+*/
 .fudis-autocomplete__option-list,
 .fudis-dropdown__option-list {
   border: 1px solid #727272;
@@ -47,20 +52,7 @@
 
 .fudis-autocomplete__option.mat-mdc-option.mat-mdc-option-active,
 .fudis-dropdown__option.mat-mdc-option.mat-mdc-option-active {
-  /* stylelint-disable-next-line property-disallowed-list */
-  background-color: var(--fudis-color-primary-light);
-}
-
-.fudis-autocomplete__option.mat-mdc-option.mat-mdc-option-active.mdc-list-item--selected,
-.fudis-dropdown__option.mat-mdc-option.mat-mdc-option-active.mdc-list-item--selected {
-  /* stylelint-disable-next-line property-disallowed-list */
   background-color: var(--fudis-color-primary-light) !important;
-}
-
-.fudis-autocomplete__option.mat-mdc-option.mdc-list-item--selected .mdc-list-item__primary-text,
-.fudis-dropdown__option.mat-mdc-option.mdc-list-item--selected .mdc-list-item__primary-text {
-  /* stylelint-disable-next-line property-disallowed-list */
-  color: #484848;
 }
 
 .fudis-autocomplete__option.mat-mdc-option .mdc-list-item__primary-text,
@@ -70,6 +62,19 @@
   font-family: "Fira Sans", sans-serif;
   font-size: 0.875rem;
   font-weight: 400;
+}
+
+.fudis-dropdown__option.mat-mdc-option.mat-mdc-option-active.mdc-list-item--selected {
+  background-color: var(--fudis-color-primary-light) !important;
+}
+
+.fudis-dropdown__option.mat-mdc-option.mdc-list-item--selected {
+  background-color: var(--fudis-color-primary-light) !important;
+}
+
+.fudis-dropdown__option.mat-mdc-option.mdc-list-item--selected .mdc-list-item__primary-text {
+  /* stylelint-disable-next-line property-disallowed-list */
+  color: #484848;
 }
 
 /* stylelint-disable property-disallowed-list */ /* stylelint-disable declaration-no-important */
@@ -163,11 +168,6 @@
 
 /* stylelint-disable property-disallowed-list */
 /* stylelint-disable unit-disallowed-list */
-html {
-  scroll-padding-top: 2rem;
-  scroll-behavior: smooth;
-}
-
 /* stylelint-disable selector-max-compound-selectors */
 /* stylelint-disable declaration-no-important */
 /* stylelint-disable declaration-property-value-disallowed-list */
@@ -304,13 +304,13 @@ mat-tooltip-component .mat-tooltip-handset {
   grid-column: 1/-1;
 }
 
-.fudis-grid__align__left {
+.fudis-grid__align__start {
   margin-right: auto;
   margin-left: 0;
 }
 
 @media screen and (max-width: 35.99em) {
-  .fudis-grid__align__left {
+  .fudis-grid__align__start {
     margin-right: 1rem;
     margin-left: 1rem;
   }
@@ -326,13 +326,13 @@ mat-tooltip-component .mat-tooltip-handset {
     margin-left: 1rem;
   }
 }
-.fudis-grid__align__right {
+.fudis-grid__align__end {
   margin-right: 0;
   margin-left: auto;
 }
 
 @media screen and (max-width: 35.99em) {
-  .fudis-grid__align__right {
+  .fudis-grid__align__end {
     margin-right: 1rem;
     margin-left: 1rem;
   }
@@ -581,6 +581,10 @@ mat-tooltip-component .mat-tooltip-handset {
     column-gap: 1rem;
   }
 }
+.fudis-grid__initial {
+  width: initial;
+}
+
 .fudis-grid__xs {
   max-width: 34rem;
   row-gap: 1rem;
@@ -663,24 +667,12 @@ mat-tooltip-component .mat-tooltip-handset {
   margin-bottom: 0.5rem;
 }
 
-.fudis-mb-s {
-  margin-bottom: 1rem;
-}
-
 .fudis-mb-sm {
   margin-bottom: 1rem;
 }
 
-.fudis-mb-m {
-  margin-bottom: 1.5rem;
-}
-
 .fudis-mb-md {
   margin-bottom: 1.5rem;
-}
-
-.fudis-mb-l {
-  margin-bottom: 2rem;
 }
 
 .fudis-mb-lg {
@@ -2319,11 +2311,6 @@ textarea.cdk-textarea-autosize-measuring-firefox {
 }
 /* stylelint-disable unit-disallowed-list */ /* stylelint-disable property-disallowed-list */
 /* stylelint-disable unit-disallowed-list */
-html {
-  scroll-padding-top: 2rem;
-  scroll-behavior: smooth;
-}
-
 .fudis-visually-hidden {
   position: absolute;
   left: 0;
