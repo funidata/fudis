@@ -7,7 +7,11 @@
 @use '../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-description-list {
+	box-sizing: border-box;
+
 	&__disabled-grid {
+		@include utilities.box-reset;
+
 		columns: 1;
 
 		&__item {
@@ -63,7 +67,7 @@
 
 	& &__item {
 		display: inline;
-		min-height: spacing.$spacing-m;
+		min-height: spacing.$spacing-md;
 
 		&__term {
 			@include typography.description-list-compact-key-typography;

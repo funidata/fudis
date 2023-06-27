@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, OnChanges, ViewEncapsulation } from '@angular/core';
-import { IFudisDescriptionListItem } from '../../types/lists';
+
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
 import { FudisGridColumnsResponsive } from '../../types/grid';
+import { FudisDescriptionListItem } from '../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-dl, fudis-description-list',
