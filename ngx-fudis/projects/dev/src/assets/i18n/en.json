@@ -11,5 +11,6 @@
 	"options": {
 		"chooseTruthTrue": "True",
 		"chooseTruthFalse": "False"
-	}
+	},
+	"closeCalendar": "Close calendar"
 }
