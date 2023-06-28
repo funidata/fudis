@@ -72,11 +72,6 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	protected _updatedOptions: FudisDropdownOption[] = [];
 
-	/**
-	 * Internal id to generate unique id
-	 */
-	protected _id: string;
-
 	handleLanguageSelect(value: FudisDropdownOption): void {
 		this._dropdownValue = value;
 		this._for = `${this.id}_${value.value}`;

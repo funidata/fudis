@@ -54,11 +54,6 @@ export class DropdownComponent extends InputBaseDirective implements OnInit {
 	 */
 	@Output() selectionUpdate: EventEmitter<FudisDropdownOption> = new EventEmitter<FudisDropdownOption>();
 
-	/**
-	 * Internal id to generate unique id
-	 */
-	protected _id: string;
-
 	handleSelectionChange(value: FudisDropdownOption): void {
 		this.selectionUpdate.emit(value);
 	}

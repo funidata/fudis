@@ -34,7 +34,7 @@
 			</fudis-button>
 		</fudis-grid>
 
-		<fudis-expandable [title]="'Form with some transloco'" [collapsed]="false">
+		<fudis-expandable [title]="'Form with some transloco'" [collapsed]="true">
 			<ng-template fudisActions type="expandable">
 				<fudis-button (handleClick)="changeLanguage()" [label]="t('change_language')"></fudis-button>
 				<fudis-button [label]="'Submit!'" (handleClick)="clickSubmit()"></fudis-button>
@@ -123,6 +123,13 @@
 						[control]="testFormGroup.controls['autocompleteSearch']"
 						[errorMsg]="{ required: t('error_required') }"></fudis-autocomplete>
 				</fudis-grid>
+			</ng-template>
+		</fudis-expandable>
+		<fudis-expandable [title]="'Date range tests'" [collapsed]="false">
+			<ng-template fudisContent type="expandable">
+				Date range alkaa
+				<fudis-date-range [label]="'Tämä on label'" />
+				Date range päättyy
 			</ng-template>
 		</fudis-expandable>
 	</fudis-grid>

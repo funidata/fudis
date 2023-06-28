@@ -1,11 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { Injectable } from '@angular/core';
 import { NativeDateAdapter } from '@angular/material/core';
-
-export const FudisDateInputFormat = {
-	dateInput: 'DD.MM.YYYY',
-	monthYearLabel: 'MMM YYYY',
-};
+import { FudisDateInputFormat } from '../../../types/forms';
 
 @Injectable()
 export class DatepickerCustomDateAdapter extends NativeDateAdapter {

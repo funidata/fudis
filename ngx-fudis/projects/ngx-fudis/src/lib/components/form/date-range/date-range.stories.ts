@@ -2,7 +2,6 @@ import { importProvidersFrom } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DatepickerComponent } from '../datepicker/datepicker.component';
 import { DateRangeComponent } from './date-range.component';
 
 export default {
@@ -20,12 +19,10 @@ export default {
 	argTypes: {},
 } as Meta;
 
-const Template: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
+const Template: StoryFn<DateRangeComponent> = () => ({
 	props: {},
 	template: `
-	<fudis-date-range> 
-	</fudis-date-range>
-	
+	<fudis-date-range [label]="'Date range selection'" [helpText]="'Some help text here'"/>
 	`,
 });
 

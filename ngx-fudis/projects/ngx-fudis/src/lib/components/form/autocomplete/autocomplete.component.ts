@@ -54,11 +54,6 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	 */
 	protected _filteredOptions: Observable<FudisDropdownOption[]>;
 
-	/**
-	 * Internal id to generate unique id
-	 */
-	protected _id: string;
-
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('autocomplete');
 		checkRequiredAttributes(this._id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);

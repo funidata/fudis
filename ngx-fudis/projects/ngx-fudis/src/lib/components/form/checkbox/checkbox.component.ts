@@ -26,11 +26,6 @@ export class CheckboxComponent extends InputBaseDirective implements OnInit {
 	 */
 	@Input() name: string;
 
-	/**
-	 * Internal id to generate unique id
-	 */
-	protected _id: string;
-
 	handleCheckboxClick(): void {
 		this.input.nativeElement.focus();
 	}

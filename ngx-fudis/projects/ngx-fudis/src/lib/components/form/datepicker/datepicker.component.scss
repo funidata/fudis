@@ -27,6 +27,7 @@
 	&__input {
 		@include borders.border('1px', 'solid', 'gray-dark');
 		@include borders.border-radius('2px');
+		@include typography.text-field-input;
 
 		box-sizing: border-box;
 		padding: 0 0 0 spacing.$spacing-xs;

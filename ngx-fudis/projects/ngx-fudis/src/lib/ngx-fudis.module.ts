@@ -204,6 +204,7 @@ import { DateRangeComponent } from './components/form/date-range/date-range.comp
 		FudisDropdownMenuItemService,
 		FudisIdService,
 		FudisTranslationConfigService,
+		MatDatepickerModule,
 	],
 })
 export class NgxFudisModule {}

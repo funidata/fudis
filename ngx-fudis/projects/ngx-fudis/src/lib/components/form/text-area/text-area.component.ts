@@ -41,11 +41,6 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit {
 	 */
 	@Input() size: FudisInputWidth = 'lg';
 
-	/**
-	 * Internal id to generate unique id
-	 */
-	protected _id: string;
-
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('textArea');
 		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);

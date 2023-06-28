@@ -1,0 +1,80 @@
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../foundations/colors/tokens.scss' as colors;
+@use '../../../foundations/borders/mixins.scss' as borders;
+@use '../../../foundations/focus/mixins.scss' as focus;
+
+.fudis-daterange {
+	max-width: spacing.$spacing-input-lg;
+
+	&__lg {
+		width: 100%;
+	}
+
+	&__md {
+		width: spacing.$spacing-input-md;
+	}
+
+	&__sm {
+		max-width: spacing.$spacing-input-sm;
+	}
+
+	&__controls {
+		@include borders.border('1px', 'solid', 'gray-dark');
+		@include borders.border-radius('2px');
+
+		box-sizing: border-box;
+		display: grid;
+		position: relative;
+		grid-template-columns: auto 32px;
+		align-content: center;
+		padding: 0 0 0 spacing.$spacing-xs;
+		width: 100%;
+		height: spacing.$spacing-xl;
+
+		&__input {
+			&:focus {
+				@include focus.focus-form-field;
+
+				outline-offset: 2px;
+				border: none;
+			}
+
+			&--invalid {
+				border-color: colors.$color-red;
+			}
+
+			&--disabled {
+				@include borders.border('1px', 'dashed', 'gray-middle');
+				@include colorMixins.bg-color('gray-extra-light');
+
+				cursor: default;
+			}
+		}
+	}
+
+	&__toggle {
+		display: flex;
+		position: absolute;
+		top: 50%;
+		right: spacing.$spacing-xxs;
+		align-items: center;
+		justify-content: center;
+		transform: translateY(-50%);
+	}
+
+	&__datepicker {
+		@include colorMixins.bg-color('white');
+		@include borders.border('1px', 'solid', 'gray-dark');
+	}
+
+	&__guidance {
+		&__help-text {
+			@include colorMixins.text-color('gray-dark');
+			@include typography.body-text-sm-regular;
+
+			margin-top: spacing.$spacing-xs;
+		}
+	}
+}

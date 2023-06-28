@@ -8,34 +8,18 @@ import {
 	ViewEncapsulation,
 	effect,
 } from '@angular/core';
-import {
-	MatDateFormats,
-	MAT_NATIVE_DATE_FORMATS,
-	MAT_DATE_FORMATS,
-	DateAdapter,
-	MAT_DATE_LOCALE,
-} from '@angular/material/core';
+import { MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { FormControl } from '@angular/forms';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
 import { Subject, takeUntil } from 'rxjs';
-import { DatepickerCustomDateAdapter, FudisDateInputFormat } from './datepicker-custom-date-adapter';
+import { DatepickerCustomDateAdapter } from './datepicker-custom-date-adapter';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { FudisIdService } from '../../../utilities/id-service.service';
-import { FudisTranslationConfig, FudisInputWidth } from '../../../types/forms';
+import { FudisTranslationConfig, FudisInputWidth, FUDIS_DATE_FORMATS } from '../../../types/forms';
 import { FudisTranslationConfigService } from '../../../utilities/config.service';
-
-export const FUDIS_DATE_FORMATS: MatDateFormats = {
-	...MAT_NATIVE_DATE_FORMATS,
-	parse: {
-		dateInput: 'DD.MM.YYYY',
-	},
-	display: {
-		...MAT_NATIVE_DATE_FORMATS.display,
-		dateInput: FudisDateInputFormat as Intl.DateTimeFormatOptions,
-	},
-};
+import { updateLocale } from '../date-range/utilities';
 
 @Component({
 	selector: 'fudis-datepicker[id][label]',
@@ -94,13 +78,8 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 	_closeLabel: string;
 
 	setConfigs(): void {
-		this._adapter.setLocale(this.updateLocale(this._configs().appLanguage!));
+		this._adapter.setLocale(updateLocale(this._configs().appLanguage!));
 	}
-
-	/**
-	 * Internal id to generate unique id
-	 */
-	protected _id: string;
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('datepicker');
@@ -111,20 +90,6 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 			.subscribe((value) => {
 				this._matDatepickerIntl.closeCalendarLabel = value as string;
 			});
-	}
-
-	// eslint-disable-next-line class-methods-use-this
-	updateLocale(value: string): string {
-		switch (value) {
-			case 'en':
-				return 'en-GB';
-			case 'fi':
-				return 'fi-FI';
-			case 'sv':
-				return 'sv-SE';
-			default:
-				return 'en-GB';
-		}
 	}
 
 	ngOnChanges(): void {

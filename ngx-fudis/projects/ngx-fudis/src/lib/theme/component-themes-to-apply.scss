@@ -2,6 +2,7 @@
 @use './fudis-theme.scss' as theme;
 @use '../components/form/autocomplete/ngMaterial-theme.scss' as autoComplete;
 @use '../components/form/datepicker/ngMaterial-theme.scss' as datePicker;
+@use '../components/form/date-range/ngMaterial-theme.scss' as dateRange;
 @use '../components/dialog/ngMaterial-theme.scss' as dialog;
 @use '../directives/tooltip/ngMaterial-theme.scss' as tooltip;
 @use '../components/grid/grid-item/grid-item.component.scss' as gridItem;

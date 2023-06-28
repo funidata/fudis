@@ -58,6 +58,11 @@ export class InputBaseDirective extends TooltipApiDirective {
 	 */
 	@Output() handleBlur: EventEmitter<Event> = new EventEmitter<Event>();
 
+	/**
+	 * Internal id to generate unique id
+	 */
+	protected _id: string;
+
 	onBlur(event: Event): void {
 		this.handleBlur.emit(event);
 	}

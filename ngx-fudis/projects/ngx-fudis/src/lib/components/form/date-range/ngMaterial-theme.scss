@@ -1,0 +1,38 @@
+@use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+
+.mat-date-range-input-wrapper {
+	box-sizing: border-box;
+	width: initial;
+	min-width: spacing.$spacing-lg;
+	max-width: initial !important;
+	overflow: visible !important;
+}
+
+.mat-date-range-input-container {
+	box-sizing: border-box;
+}
+
+.fudis-daterange__controls {
+	& .mat-date-range-input-separator {
+		opacity: 1;
+
+		//margin: 0 4px 0 0;
+	}
+
+	& .mat-date-range-input {
+		display: flex;
+		align-items: center;
+
+		&-container {
+			// display: grid;
+			// grid-template-columns: auto spacing.$spacing-sm 1fr;
+			// align-content: center;
+			width: 100%;
+		}
+	}
+}
+
+.fudis-daterange__controls__input.mat-date-range-input-inner {
+	@include typography.text-field-input;
+}
