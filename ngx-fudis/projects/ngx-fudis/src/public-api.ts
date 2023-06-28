@@ -13,6 +13,7 @@ export { ButtonComponent } from './lib/components/button/button.component';
 export { CheckboxComponent } from './lib/components/form/checkbox/checkbox.component';
 export { ContentDirective } from './lib/directives/content-projection/content/content.directive';
 export { DatepickerComponent } from './lib/components/form/datepicker/datepicker.component';
+export { DateRangeComponent } from './lib/components/form/date-range/date-range.component';
 export {
 	DialogActionsDirective,
 	DialogCloseDirective,

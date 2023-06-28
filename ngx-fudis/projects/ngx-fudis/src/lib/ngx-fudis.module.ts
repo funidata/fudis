@@ -72,6 +72,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
 import { FudisTranslationConfigService } from './utilities/config.service';
+import { DateRangeComponent } from './components/form/date-range/date-range.component';
 
 @NgModule({
 	/*
@@ -85,6 +86,7 @@ import { FudisTranslationConfigService } from './utilities/config.service';
 		ButtonComponent,
 		CheckboxComponent,
 		ContentDirective,
+		DateRangeComponent,
 		DatepickerComponent,
 		DatepickerCustomHeaderComponent,
 		DescriptionListComponent,
@@ -162,6 +164,7 @@ import { FudisTranslationConfigService } from './utilities/config.service';
 		CheckboxComponent,
 		ContentDirective,
 		DatepickerComponent,
+		DateRangeComponent,
 		DescriptionListComponent,
 		DialogComponent,
 		DropdownComponent,
