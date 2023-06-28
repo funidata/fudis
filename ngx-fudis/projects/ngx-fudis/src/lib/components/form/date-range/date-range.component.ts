@@ -34,7 +34,7 @@ import { DatepickerCustomDateAdapter } from '../datepicker/datepicker-custom-dat
 		{ provide: MatDateRangePicker },
 	],
 })
-export class DateRangeComponent extends InputBaseDirective implements OnInit, OnChanges {
+export class DateRangeComponent extends InputBaseDirective implements OnInit {
 	private _destroyed = new Subject<void>();
 
 	constructor(
@@ -70,10 +70,6 @@ export class DateRangeComponent extends InputBaseDirective implements OnInit, On
 			.subscribe((value) => {
 				this._requiredText = value;
 			});
-	}
-
-	ngOnChanges(): void {
-		console.log(this._id);
 	}
 
 	setConfigs(): void {
