@@ -8,13 +8,12 @@
 	[ignoreDefaults]="true"
 	[columnGap]="columnGap"
 	[rowGap]="variant === 'compact' ? 'none' : rowGap"
-	[columns]="columns"
+	[columns]="columns ? columns : 2"
 	[marginBottom]="marginBottom"
 	[marginTop]="marginTop"
 	[marginSides]="marginSides"
 	role="list"
-	*ngIf="!disableGrid"
-	[ngClass]="variant === 'compact' ? 'fudis-description-list-compact' : 'fudis-description-list'">
+	*ngIf="!disableGrid">
 	<ng-container *ngTemplateOutlet="content" />
 </dl>
 

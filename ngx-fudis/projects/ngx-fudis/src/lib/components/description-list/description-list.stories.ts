@@ -55,10 +55,10 @@ export const DescriptionList: StoryFn = () => ({
 });
 
 const TemplateWithDl: StoryFn<DescriptionListComponent> = () => ({
-	template: html`<fudis-grid>
-			<fudis-heading tag="h2" size="md">Here below is a regular Fudis Description List component</fudis-heading>
-		</fudis-grid>
-		<fudis-dl [data]="testData" [marginBottom]="'xl'"></fudis-dl>
+	template: html` <fudis-heading tag="h2" size="md"
+			>Here below is a regular Fudis Description List component</fudis-heading
+		>
+		<fudis-dl [data]="testData" [marginBottom]="'xl'" [columns]="2"></fudis-dl>
 
 		<fudis-grid [columns]="columns">
 			<fudis-heading tag="h2" size="md"
