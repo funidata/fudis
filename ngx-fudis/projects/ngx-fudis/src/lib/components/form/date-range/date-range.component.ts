@@ -74,13 +74,9 @@ export class DateRangeComponent extends InputBaseDirective implements OnInit, On
 
 	@Input({ required: true }) controlEndDate: FormControl<Date | null>;
 
-	@Input() minStartDate: Date | null = null;
+	@Input() minDate: Date | null = null;
 
-	@Input() maxStartDate: Date | null = null;
-
-	@Input() minEndDate: Date | null = null;
-
-	@Input() maxEndDate: Date | null = null;
+	@Input() maxDate: Date | null = null;
 
 	// eslint-disable-next-line class-methods-use-this, @angular-eslint/no-empty-lifecycle-method
 	ngOnChanges(): void {

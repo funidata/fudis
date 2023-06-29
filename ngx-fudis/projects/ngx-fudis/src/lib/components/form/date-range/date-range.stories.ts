@@ -65,10 +65,16 @@ export default {
 	argTypes: {},
 } as Meta;
 
+const html = String.raw;
+
 const Template: StoryFn<DateRangeComponent> = () => ({
 	props: {
-		controlStartDate: new FormControl<Date | null>(null, Validators.required),
-		controlEndDate: new FormControl<Date | null>(null, Validators.required),
+		firstControlStartDate: new FormControl<Date | null>(null, Validators.required),
+		firstControlEndDate: new FormControl<Date | null>(null, Validators.required),
+		secondControlStartDate: new FormControl<Date | null>(null, Validators.required),
+		secondControlEndDate: new FormControl<Date | null>(null, Validators.required),
+		minDate: new Date('2023-05-01'),
+		maxDate: new Date('2023-05-31'),
 		groupErrorMsg: {
 			startDate: {
 				required: 'Start date is required',
@@ -80,9 +86,22 @@ const Template: StoryFn<DateRangeComponent> = () => ({
 			},
 		},
 	},
-	template: `
-	<fudis-date-range [groupErrorMsg]="groupErrorMsg" [controlStartDate]="controlStartDate" [controlEndDate]="controlEndDate" [label]="'Date range selection'" [helpText]="'Some help text here'"/>
-	<example-language-change-component/>
+	template: html`
+		<example-language-change-component />
+		<fudis-date-range
+			[groupErrorMsg]="groupErrorMsg"
+			[controlStartDate]="firstControlStartDate"
+			[controlEndDate]="firstControlEndDate"
+			[label]="'Date range selection'"
+			[helpText]="'Some help text here'" />
+		<fudis-date-range
+			[minDate]="minDate"
+			[maxDate]="maxDate"
+			[groupErrorMsg]="groupErrorMsg"
+			[controlStartDate]="secondControlStartDate"
+			[controlEndDate]="secondControlEndDate"
+			[label]="'Date range selection'"
+			[helpText]="'Some help text here'" />
 	`,
 });
 
