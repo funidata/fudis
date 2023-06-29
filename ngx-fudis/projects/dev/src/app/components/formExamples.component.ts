@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+/* eslint-disable no-underscore-dangle */
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import { FudisDropdownOption, FudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
@@ -19,12 +21,9 @@ type MyForm = {
 	templateUrl: 'formExamples.component.html',
 })
 export class AppFormExampleComponent implements OnInit {
-	private destroyed = new Subject<void>();
-
 	constructor(
 		private translocoService: TranslocoService,
 		private errorSummaryService: FudisErrorSummaryService,
-
 		private fudisConfig: FudisTranslationConfigService
 	) {
 		// fudisConfig.setConfig({
@@ -32,7 +31,15 @@ export class AppFormExampleComponent implements OnInit {
 		// 	requiredText: 'Required',
 		// 	language: 'en',
 		// });
+		this._destroyRef.onDestroy(() => {
+			this._destroyed.next();
+			this._destroyed.complete();
+		});
 	}
+
+	private _destroyed = new Subject<void>();
+
+	private _destroyRef = inject(DestroyRef);
 
 	errorSummaryVisible: boolean = false;
 
@@ -47,7 +54,7 @@ export class AppFormExampleComponent implements OnInit {
 	ngOnInit(): void {
 		this.translocoService
 			.selectTranslateObject('options')
-			.pipe(takeUntil(this.destroyed))
+			.pipe(takeUntil(this._destroyed))
 			.subscribe((value) => {
 				this.radioButtonOptions = [
 					{ value: true, viewValue: value.chooseTruthTrue, id: 'boolean-2', name: 'booleans' },
@@ -57,7 +64,7 @@ export class AppFormExampleComponent implements OnInit {
 
 		this.translocoService
 			.selectTranslation()
-			.pipe(takeUntil(this.destroyed))
+			.pipe(takeUntil(this._destroyed))
 			.subscribe(() => {
 				if (this.errorSummaryVisible) {
 					setTimeout(() => {

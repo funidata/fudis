@@ -1,14 +1,12 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { Injectable, OnDestroy, Signal, signal } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Injectable, Signal, signal } from '@angular/core';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisGridAttributes, FudisGridResponsiveData } from '../../../types/grid';
 import { breakpointsMinWidthToObserve } from '../gridUtils';
 
 @Injectable()
-export class FudisGridService implements OnDestroy {
-	destroyed = new Subject<void>();
-
+export class FudisGridService {
 	private _defaultGridValues = signal<FudisGridAttributes>({});
 
 	private _currentScreenSize = signal<BreakpointState | null>(null);
@@ -40,14 +38,12 @@ export class FudisGridService implements OnDestroy {
 	 * Observe breakpoints and when hitting one, save results to Signal.
 	 */
 	constructor(gridBreakpointObserver: BreakpointObserver) {
-		gridBreakpointObserver.observe(breakpointsMinWidthToObserve).subscribe((state: BreakpointState) => {
-			this._currentScreenSize.set(state);
-		});
-	}
-
-	ngOnDestroy() {
-		this.destroyed.next();
-		this.destroyed.complete();
+		gridBreakpointObserver
+			.observe(breakpointsMinWidthToObserve)
+			.pipe(takeUntilDestroyed())
+			.subscribe((state: BreakpointState) => {
+				this._currentScreenSize.set(state);
+			});
 	}
 
 	/**

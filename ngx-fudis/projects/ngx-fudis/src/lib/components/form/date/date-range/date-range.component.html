@@ -1,28 +1,42 @@
-<ng-container *ngIf="_dateRangeGroup.controls">
+<ng-container *ngIf="_dateRangeGroup?.controls?.startDate && _dateRangeGroup?.controls?.endDate">
 	<div class="fudis-daterange fudis-daterange__{{ size }}">
-		<fudis-fieldset [title]="label" [id]="_id" [titleSize]="'sm'" [requiredText]="_requiredText">
+		<fudis-fieldset
+			[tooltip]="tooltip"
+			[tooltipPosition]="tooltipPosition"
+			[tooltipToggle]="tooltipToggle"
+			[title]="label"
+			[id]="_id"
+			[titleSize]="'sm'"
+			[requiredText]="_requiredText">
 			<ng-template fudisContent type="fieldset">
 				<div class="fudis-daterange__controls">
-					<mat-date-range-input [formGroup]="_dateRangeGroup" [rangePicker]="picker" [min]="minDate" [max]="maxDate">
+					<mat-date-range-input
+						fudisDateRangeParseFix
+						[formGroup]="_dateRangeGroup"
+						[rangePicker]="picker"
+						[min]="minDate"
+						[max]="maxDate">
 						<input
-							[id]="_id + '-start-date'"
+							(blur)="handleInputBlur()"
 							matStartDate
+							class="fudis-daterange__controls__input"
+							[id]="_id + '-start-date'"
 							[formControl]="_dateRangeGroup.controls.startDate"
 							[readonly]="disabled"
 							[attr.aria-disabled]="disabled ? true : null"
-							class="fudis-daterange__controls__input"
 							[class.fudis-daterange__input--disabled]="disabled"
-							[attr.required]="requiredText ? true : null"
+							[attr.required]="_requiredText ? true : null"
 							[attr.aria-describedby]="id + '_guidance'" />
 						<input
+							(blur)="handleInputBlur()"
+							matEndDate
+							class="fudis-daterange__controls__input"
 							[id]="_id + '-end-date'"
 							[formControl]="_dateRangeGroup.controls.endDate"
-							matEndDate
 							[readonly]="disabled"
 							[attr.aria-disabled]="disabled ? true : null"
-							class="fudis-daterange__controls__input"
 							[class.fudis-daterange__input--disabled]="disabled"
-							[attr.required]="requiredText ? true : null"
+							[attr.required]="_requiredText ? true : null"
 							[attr.aria-describedby]="id + '_guidance'" />
 					</mat-date-range-input>
 

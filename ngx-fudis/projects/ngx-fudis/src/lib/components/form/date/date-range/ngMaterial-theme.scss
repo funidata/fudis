@@ -1,3 +1,6 @@
+/* stylelint-disable scss/selector-no-redundant-nesting-selector */
+/* stylelint-disable declaration-no-important */
+/* stylelint-disable selector-class-pattern */
 @use '../../../../foundations/typography/mixins.scss' as typography;
 @use '../../../../foundations/spacing/tokens.scss' as spacing;
 
@@ -16,8 +19,6 @@
 .fudis-daterange__controls {
 	& .mat-date-range-input-separator {
 		opacity: 1;
-
-		//margin: 0 4px 0 0;
 	}
 
 	& .mat-date-range-input {

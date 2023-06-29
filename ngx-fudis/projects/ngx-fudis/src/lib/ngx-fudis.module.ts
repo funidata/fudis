@@ -24,7 +24,7 @@ import { ContentDirective } from './directives/content-projection/content/conten
 import { DateRangeComponent } from './components/form/date/date-range/date-range.component';
 import { DatepickerComponent } from './components/form/date/datepicker/datepicker.component';
 
-import { DatepickerCustomHeaderComponent } from './components/form/date/datepicker/datepicker-custom-header/datepicker-custom-header.component';
+import { DatepickerCustomHeaderComponent } from './components/form/date/date-common/datepicker-custom-header/datepicker-custom-header.component';
 import { DescriptionListComponent } from './components/description-list/description-list.component';
 import {
 	DialogCloseDirective,
@@ -73,6 +73,7 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
 import { FudisTranslationConfigService } from './utilities/config.service';
+import { DateCommonDirective } from './components/form/date/date-common/date-common.directive';
 
 @NgModule({
 	/*
@@ -86,9 +87,10 @@ import { FudisTranslationConfigService } from './utilities/config.service';
 		ButtonComponent,
 		CheckboxComponent,
 		ContentDirective,
-		DateRangeComponent,
+		DateCommonDirective,
 		DatepickerComponent,
 		DatepickerCustomHeaderComponent,
+		DateRangeComponent,
 		DescriptionListComponent,
 		DialogTitleDirective,
 		DialogComponent,

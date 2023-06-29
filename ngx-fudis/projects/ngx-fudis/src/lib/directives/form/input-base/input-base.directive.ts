@@ -1,6 +1,6 @@
-import { Directive, Input, EventEmitter, Output, Signal, effect } from '@angular/core';
+import { Directive, Input, EventEmitter, Output, Signal, effect, DestroyRef, inject } from '@angular/core';
 
-import { takeUntil, Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { FudisFormErrors, FudisTranslationConfig } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisTranslationConfigService } from '../../../utilities/config.service';
@@ -11,6 +11,11 @@ import { FudisTranslationConfigService } from '../../../utilities/config.service
 export class InputBaseDirective extends TooltipApiDirective {
 	constructor(protected _configService: FudisTranslationConfigService) {
 		super();
+
+		this._destroyRef.onDestroy(() => {
+			this._destroyed.next();
+			this._destroyed.complete();
+		});
 
 		effect(() => {
 			this._configs = this._configService.getConfig();
@@ -78,6 +83,8 @@ export class InputBaseDirective extends TooltipApiDirective {
 	protected _requiredText: string;
 
 	protected _destroyed = new Subject<void>();
+
+	protected _destroyRef = inject(DestroyRef);
 
 	protected subscribeToRequiredText(): void {
 		this._configs()
