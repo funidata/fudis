@@ -42,38 +42,37 @@ describe('DescriptionListComponent', () => {
 	});
 
 	function getDescriptionList(): HTMLElement {
-		const dlItemDisplayValue = fixture.nativeElement.querySelector('dl') as HTMLElement;
-		return dlItemDisplayValue;
+		const descriptionListItemElement = fixture.nativeElement.querySelector('dl') as HTMLElement;
+		return descriptionListItemElement;
 	}
 
 	function getDescriptionListDt(classes: string): HTMLElement {
-		const itemTermValue = fixture.debugElement.query(By.css(`fudis-dt .${classes}`));
-		return itemTermValue.nativeElement;
+		const descriptionListItemKeyElement = fixture.debugElement.query(By.css(`fudis-dt .${classes}`));
+		return descriptionListItemKeyElement.nativeElement;
 	}
 
 	function getDescriptionListDd(classes: string): HTMLElement {
-		const itemDetail = fixture.debugElement.query(By.css(`fudis-dd .${classes}`));
-		return itemDetail.nativeElement;
+		const descriptionListItemValueElement = fixture.debugElement.query(By.css(`fudis-dd .${classes}`));
+		return descriptionListItemValueElement.nativeElement;
 	}
 
 	function assertDescriptionListHasClasses(classes: string[]): void {
-		const dlClasses = getDescriptionList()?.className ?? '';
-		expect(dlClasses.split(' ').sort()).toEqual(classes.sort());
+		const descriptionListItemClassName = getDescriptionList()?.className ?? '';
+		expect(descriptionListItemClassName.split(' ').sort()).toEqual(classes.sort());
 	}
 
 	function assertDtHasClasses(classes: string): void {
-		const itemTermElement = getDescriptionListDt(classes);
-		const dtClasses = itemTermElement.className ?? '';
+		const descriptionListItemKeyClassName = getDescriptionListDt(classes).className ?? '';
 
-		expect(dtClasses).toContain(classes);
+		expect(descriptionListItemKeyClassName).toContain(classes);
 	}
 
 	function assertDdHasClasses(classes: string, display: string) {
-		const itemDetailElement = getDescriptionListDd(classes);
-		const ddClasses = itemDetailElement.className ?? '';
-		const ddDisplay = getComputedStyle(itemDetailElement).display;
-		expect(ddDisplay).toEqual(display);
-		expect(ddClasses).toContain(classes);
+		const descriptionListItemValueElement = getDescriptionListDd(classes);
+		const descriptionListItemValueClassName = descriptionListItemValueElement.className ?? '';
+		const descriptionListItemValueDisplayStyle = getComputedStyle(descriptionListItemValueElement).display;
+		expect(descriptionListItemValueDisplayStyle).toEqual(display);
+		expect(descriptionListItemValueClassName).toContain(classes);
 	}
 
 	describe('Parent CSS class', () => {
@@ -124,11 +123,11 @@ describe('DescriptionListComponent', () => {
 
 	describe('description list item, term and detail components', () => {
 		it('should be present', () => {
-			const parent = fixture.debugElement.query(By.css('fudis-dl-item'));
-			const childDt = parent.nativeElement.querySelector('fudis-dt');
-			const childDd = parent.nativeElement.querySelector('fudis-dd');
-			expect(childDt).toBeTruthy();
-			expect(childDd).toBeTruthy();
+			const descriptionListItem = fixture.debugElement.query(By.css('fudis-dl-item'));
+			const descriptionListItemTerm = descriptionListItem.nativeElement.querySelector('fudis-dt');
+			const descriptionListItemDetails = descriptionListItem.nativeElement.querySelector('fudis-dd');
+			expect(descriptionListItemTerm).toBeTruthy();
+			expect(descriptionListItemDetails).toBeTruthy();
 		});
 
 		it('should have respective CSS classes and display style in regular list', () => {
