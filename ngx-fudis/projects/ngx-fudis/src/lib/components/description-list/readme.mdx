@@ -2,24 +2,47 @@ import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
 import { linkTo } from '@storybook/addon-links';
 import { DescriptionListComponent } from './description-list.component.ts';
 import * as DescriptionListStories from './description-list.stories.ts';
+import { Source } from '@storybook/blocks';
 
-<Meta title="Components/DescriptionListComponent " />
+<Meta title="Components/Description List Component " />
+<Meta of={DescriptionListStories} />
 
-# DescriptionList Component
+# Description List Component
 
-Fudis DescriptionList component generates an item list from an array of objects type IFudisDescriptionListItem. Each description item has a key value pair. Value can also contain an optional sub-header value.
+Fudis Description List takes a list of objects as a data input. Each list item contains key value pair. This value can also contain an optional sub-header value. Alternatively Fudis Description List can be rendered throught content projection, as shown in following code example:
+
+<Source of={DescriptionListStories.DescriptionList} />
+
+Alternative option to generate description list is to give list of items as an object.
+
+<Source of={DescriptionListStories.DescriptionListDataLoop} />
 
 ## Examples
 
-Fudis descriptionList has two different variants 'regular' and 'compact'. Fudis description list's default behavior is to align with fudis grid. This feature can be turned off by setting `disableGrid` as true.
+Fudis Description List has two different variants, default 'regular' list and 'compact list option. **Fudis Description extends Fudis Grid Directive and it can take all same inputs as Fudis Grid for an alignment.** Fudis Grid can be disabled in Fudis Description List by setting `disableGrid` as true.
+
+### Fudis Description List compact variant
 
 <Canvas of={DescriptionListStories.DescriptionList}></Canvas>
 
+### Fudis Description List with sub components
+
+It is possible to place buttons in Fudis Description List Item Detail (fudis-dd) by using `ng-template fudisActions type="dd"` for description list. This following example displayes, how Fudis Button is used inside of Fudis Description List.
+
+<Canvas of={DescriptionListStories.DescriptionListWithSubComponents}></Canvas>
+
 ### Accessibility
 
-### Related components
+- Fudis Description List component wraps list content into dl element
+- Each list item term is being described is contained within a dt element
+- Each description term is contained in one or more dd element
+- Description detail elements dd are placed directly after description term dt element
 
-[Icon](/docs/components-icon--icon)
+### Related components / directives
+
+- [Grid](/docs/components-grid-grid--example)
+- [Icon](/docs/components-icon--icon)
+- [ButtonComponent](/docs/components-button--button)
 
 ## Properties
 
