@@ -1,5 +1,5 @@
 import { Component, Signal, importProvidersFrom } from '@angular/core';
-import { ReactiveFormsModule, FormsModule, FormGroup, FormControl } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormControl, Validators } from '@angular/forms';
 import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BehaviorSubject } from 'rxjs';
@@ -67,13 +67,21 @@ export default {
 
 const Template: StoryFn<DateRangeComponent> = () => ({
 	props: {
-		group: new FormGroup({
-			startDate: new FormControl<Date | null>(null),
-			endDate: new FormControl<Date | null>(null),
-		}),
+		controlStartDate: new FormControl<Date | null>(null, Validators.required),
+		controlEndDate: new FormControl<Date | null>(null, Validators.required),
+		groupErrorMsg: {
+			startDate: {
+				required: 'Start date is required',
+				matDatepickerParse: 'Start date is not a proper date',
+			},
+			endDate: {
+				required: 'End date is required',
+				matDatepickerParse: 'End date is not a proper date',
+			},
+		},
 	},
 	template: `
-	<fudis-date-range [formGroup]="group" [label]="'Date range selection'" [helpText]="'Some help text here'"/>
+	<fudis-date-range [groupErrorMsg]="groupErrorMsg" [controlStartDate]="controlStartDate" [controlEndDate]="controlEndDate" [label]="'Date range selection'" [helpText]="'Some help text here'"/>
 	<example-language-change-component/>
 	`,
 });

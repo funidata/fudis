@@ -1,47 +1,54 @@
-<div class="fudis-daterange fudis-daterange__{{ size }}">
-	<fudis-label
-		[id]="'label_' + id"
-		[for]="id"
-		[text]="label"
-		[requiredText]="_requiredText"
-		[tooltip]="tooltip"
-		[tooltipPosition]="tooltipPosition"
-		[tooltipToggle]="tooltipToggle" />
-	<div class="fudis-daterange__controls">
-		<mat-date-range-input [formGroup]="formGroup" [rangePicker]="picker">
-			<input
-				[id]="id"
-				matStartDate
-				[formControl]="formGroup.controls.startDate"
-				[readonly]="disabled"
-				[attr.aria-disabled]="disabled ? true : null"
-				class="fudis-daterange__controls__input"
-				[class.fudis-daterange__input--disabled]="disabled"
-				[attr.required]="requiredText ? true : null"
-				[attr.aria-describedby]="id + '_guidance'" />
-			<input
-				[id]="id"
-				[formControl]="formGroup.controls.endDate"
-				matEndDate
-				[readonly]="disabled"
-				[attr.aria-disabled]="disabled ? true : null"
-				class="fudis-daterange__controls__input"
-				[class.fudis-daterange__input--disabled]="disabled"
-				[attr.required]="requiredText ? true : null"
-				[attr.aria-describedby]="id + '_guidance'" />
-		</mat-date-range-input>
+<ng-container *ngIf="_dateRangeGroup.controls">
+	<div class="fudis-daterange fudis-daterange__{{ size }}">
+		<fudis-label
+			[id]="'label_' + id"
+			[for]="id"
+			[text]="label"
+			[requiredText]="_requiredText"
+			[tooltip]="tooltip"
+			[tooltipPosition]="tooltipPosition"
+			[tooltipToggle]="tooltipToggle" />
+		<div class="fudis-daterange__controls">
+			<mat-date-range-input [formGroup]="_dateRangeGroup" [rangePicker]="picker">
+				<input
+					[id]="id"
+					matStartDate
+					[formControl]="_dateRangeGroup.controls.startDate"
+					[readonly]="disabled"
+					[attr.aria-disabled]="disabled ? true : null"
+					class="fudis-daterange__controls__input"
+					[class.fudis-daterange__input--disabled]="disabled"
+					[attr.required]="requiredText ? true : null"
+					[attr.aria-describedby]="id + '_guidance'" />
+				<input
+					[id]="id"
+					[formControl]="_dateRangeGroup.controls.endDate"
+					matEndDate
+					[readonly]="disabled"
+					[attr.aria-disabled]="disabled ? true : null"
+					class="fudis-daterange__controls__input"
+					[class.fudis-daterange__input--disabled]="disabled"
+					[attr.required]="requiredText ? true : null"
+					[attr.aria-describedby]="id + '_guidance'" />
+			</mat-date-range-input>
 
-		<mat-datepicker-toggle
-			[disabled]="disabled"
-			matSuffix
-			[for]="picker"
-			[disableRipple]="true"
-			class="fudis-datepicker__toggle">
-			<mat-icon matDatepickerToggleIcon>
-				<fudis-icon icon="calendar"></fudis-icon>
-			</mat-icon>
-		</mat-datepicker-toggle>
-		<mat-date-range-picker #picker panelClass="fudis-datepicker__datepicker" />
+			<mat-datepicker-toggle
+				[disabled]="disabled"
+				matSuffix
+				[for]="picker"
+				[disableRipple]="true"
+				class="fudis-datepicker__toggle">
+				<mat-icon matDatepickerToggleIcon>
+					<fudis-icon icon="calendar"></fudis-icon>
+				</mat-icon>
+			</mat-datepicker-toggle>
+			<mat-date-range-picker #picker panelClass="fudis-datepicker__datepicker" />
+		</div>
+		<fudis-guidance
+			[inputLabel]="label"
+			[helpText]="helpText"
+			[for]="id"
+			[groupErrorMsg]="groupErrorMsg"
+			[formGroup]="_dateRangeGroup" />
 	</div>
-	<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="id" [errorMsg]="errorMsg" [formGroup]="formGroup" />
-</div>
+</ng-container>

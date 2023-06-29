@@ -1,23 +1,14 @@
-import {
-	ChangeDetectorRef,
-	Component,
-	Input,
-	OnChanges,
-	OnInit,
-	Signal,
-	ViewEncapsulation,
-	effect,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, ViewEncapsulation, effect } from '@angular/core';
 import { MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { FormControl } from '@angular/forms';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
-import { Subject, takeUntil } from 'rxjs';
+import { takeUntil } from 'rxjs';
 import { DatepickerCustomDateAdapter } from './datepicker-custom-date-adapter';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { FudisIdService } from '../../../utilities/id-service.service';
-import { FudisTranslationConfig, FudisInputWidth, FUDIS_DATE_FORMATS } from '../../../types/forms';
+import { FudisInputWidth, FUDIS_DATE_FORMATS } from '../../../types/forms';
 import { FudisTranslationConfigService } from '../../../utilities/config.service';
 import { updateLocale } from '../date-range/utilities';
 
@@ -36,24 +27,19 @@ import { updateLocale } from '../date-range/utilities';
 	],
 })
 export class DatepickerComponent extends InputBaseDirective implements OnInit, OnChanges {
-	private _destroyed = new Subject<void>();
-
 	constructor(
 		private readonly _adapter: DateAdapter<Date>,
-		private _configService: FudisTranslationConfigService,
 		private _matDatepickerIntl: MatDatepickerIntl,
 		private _idService: FudisIdService,
-		private _changeDetectorRef: ChangeDetectorRef
+		private _changeDetectorRef: ChangeDetectorRef,
+		_configService: FudisTranslationConfigService
 	) {
-		super();
+		super(_configService);
 
 		effect(() => {
-			this._configs = this._configService.getConfig();
 			this.setConfigs();
 		});
 	}
-
-	protected _configs: Signal<FudisTranslationConfig>;
 
 	/**
 	 * FormControl for the input.

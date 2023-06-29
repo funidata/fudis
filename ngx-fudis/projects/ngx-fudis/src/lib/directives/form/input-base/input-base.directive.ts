@@ -1,12 +1,22 @@
-import { Directive, Input, EventEmitter, Output } from '@angular/core';
+import { Directive, Input, EventEmitter, Output, Signal, effect } from '@angular/core';
 
-import { FudisFormErrors } from '../../../types/forms';
+import { takeUntil, Subject } from 'rxjs';
+import { FudisFormErrors, FudisTranslationConfig } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
+import { FudisTranslationConfigService } from '../../../utilities/config.service';
 
 @Directive({
 	selector: '[fudisInputBase]',
 })
 export class InputBaseDirective extends TooltipApiDirective {
+	constructor(protected _configService: FudisTranslationConfigService) {
+		super();
+
+		effect(() => {
+			this._configs = this._configService.getConfig();
+		});
+	}
+
 	/**
 	 * Label for input.
 	 */
@@ -63,7 +73,21 @@ export class InputBaseDirective extends TooltipApiDirective {
 	 */
 	protected _id: string;
 
-	onBlur(event: Event): void {
+	protected _configs: Signal<FudisTranslationConfig>;
+
+	protected _requiredText: string;
+
+	protected _destroyed = new Subject<void>();
+
+	protected subscribeToRequiredText(): void {
+		this._configs()
+			.requiredText!.pipe(takeUntil(this._destroyed))
+			.subscribe((value) => {
+				this._requiredText = value;
+			});
+	}
+
+	public onBlur(event: Event): void {
 		this.handleBlur.emit(event);
 	}
 }

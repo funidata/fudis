@@ -10,6 +10,7 @@ import {
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../utilities/id-service.service';
+import { FudisTranslationConfigService } from '../../../utilities/config.service';
 
 @Component({
 	selector: 'fudis-input-with-language-options',
@@ -17,8 +18,8 @@ import { FudisIdService } from '../../../utilities/id-service.service';
 	styleUrls: ['./input-with-language-options.component.scss'],
 })
 export class InputWithLanguageOptionsComponent extends InputBaseDirective implements OnInit, OnChanges {
-	constructor(private _idService: FudisIdService) {
-		super();
+	constructor(private _idService: FudisIdService, _configService: FudisTranslationConfigService) {
+		super(_configService);
 	}
 
 	/**

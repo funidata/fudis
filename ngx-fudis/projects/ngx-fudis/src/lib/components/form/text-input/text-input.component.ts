@@ -5,6 +5,7 @@ import { InputBaseDirective } from '../../../directives/form/input-base/input-ba
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { FudisInputWidth } from '../../../types/forms';
 import { FudisIdService } from '../../../utilities/id-service.service';
+import { FudisTranslationConfigService } from '../../../utilities/config.service';
 
 @Component({
 	selector: 'fudis-text-input[id][label]',
@@ -12,8 +13,8 @@ import { FudisIdService } from '../../../utilities/id-service.service';
 	styleUrls: ['./text-input.component.scss'],
 })
 export class TextInputComponent extends InputBaseDirective implements OnInit {
-	constructor(private _idService: FudisIdService) {
-		super();
+	constructor(private _idService: FudisIdService, _configService: FudisTranslationConfigService) {
+		super(_configService);
 	}
 
 	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;

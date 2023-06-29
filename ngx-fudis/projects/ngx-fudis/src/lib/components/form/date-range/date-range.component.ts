@@ -1,14 +1,15 @@
-import { ChangeDetectorRef, Component, Input, OnInit, Signal, ViewEncapsulation, effect } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, ViewEncapsulation, effect } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDateRangePicker, MatDatepickerIntl } from '@angular/material/datepicker';
-import { FormGroup } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
+import { FormControl, FormGroup } from '@angular/forms';
+import { takeUntil } from 'rxjs';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../utilities/id-service.service';
-import { FudisTranslationConfigService } from '../../../utilities/config.service';
-import { FUDIS_DATE_FORMATS, FudisDateRange, FudisInputWidth, FudisTranslationConfig } from '../../../types/forms';
+
+import { FUDIS_DATE_FORMATS, FudisDateRange, FudisFormGroupErrors, FudisInputWidth } from '../../../types/forms';
 import { updateLocale } from './utilities';
 import { DatepickerCustomDateAdapter } from '../datepicker/datepicker-custom-date-adapter';
+import { FudisTranslationConfigService } from '../../../utilities/config.service';
 
 @Component({
 	selector: 'fudis-date-range',
@@ -25,30 +26,29 @@ import { DatepickerCustomDateAdapter } from '../datepicker/datepicker-custom-dat
 		{ provide: MatDateRangePicker },
 	],
 })
-export class DateRangeComponent extends InputBaseDirective implements OnInit {
-	private _destroyed = new Subject<void>();
-
+export class DateRangeComponent extends InputBaseDirective implements OnInit, OnChanges {
 	constructor(
 		private readonly _adapter: DateAdapter<Date>,
-		private _configService: FudisTranslationConfigService,
 		private _matDatepickerIntl: MatDatepickerIntl,
 		private _idService: FudisIdService,
-		private _changeDetectorRef: ChangeDetectorRef
+		_configService: FudisTranslationConfigService
 	) {
-		super();
+		super(_configService);
 
 		effect(() => {
-			this._configs = this._configService.getConfig();
 			this.setConfigs();
 		});
 	}
 
-	protected _configs: Signal<FudisTranslationConfig>;
-
-	protected _requiredText: string;
+	protected _dateRangeGroup: FormGroup<FudisDateRange>;
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('daterange');
+
+		this._dateRangeGroup = new FormGroup({
+			endDate: this.controlEndDate,
+			startDate: this.controlStartDate,
+		});
 
 		this._configs()
 			.datepicker!.closeLabel!.pipe(takeUntil(this._destroyed))
@@ -56,11 +56,7 @@ export class DateRangeComponent extends InputBaseDirective implements OnInit {
 				this._matDatepickerIntl.closeCalendarLabel = value as string;
 			});
 
-		this._configs()
-			.requiredText!.pipe(takeUntil(this._destroyed))
-			.subscribe((value) => {
-				this._requiredText = value;
-			});
+		this.subscribeToRequiredText();
 	}
 
 	setConfigs(): void {
@@ -72,5 +68,22 @@ export class DateRangeComponent extends InputBaseDirective implements OnInit {
 	 */
 	@Input() size: FudisInputWidth = 'md';
 
-	@Input({ required: true }) formGroup: FormGroup<FudisDateRange>;
+	@Input() groupErrorMsg: FudisFormGroupErrors;
+
+	@Input({ required: true }) controlStartDate: FormControl<Date | null>;
+
+	@Input({ required: true }) controlEndDate: FormControl<Date | null>;
+
+	@Input() minStartDate: Date | null = null;
+
+	@Input() maxStartDate: Date | null = null;
+
+	@Input() minEndDate: Date | null = null;
+
+	@Input() maxEndDate: Date | null = null;
+
+	// eslint-disable-next-line class-methods-use-this, @angular-eslint/no-empty-lifecycle-method
+	ngOnChanges(): void {
+		// console.log(this.controlStartDate.hasValidator(Validators.required));
+	}
 }
