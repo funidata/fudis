@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AfterViewChecked, ChangeDetectorRef, Component, importProvidersFrom } from '@angular/core';
 import { DatepickerComponent } from './datepicker.component';
 import readme from './readme.mdx';
-import { FudisFormErrors } from '../../../types/forms';
+import { FudisFormErrors } from '../../../../types/forms';
 
 @Component({
 	selector: 'example-date-range',
@@ -98,7 +98,7 @@ class DateRangeExampleComponent implements AfterViewChecked {
 }
 
 export default {
-	title: 'Components/Form/Datepicker',
+	title: 'Components/Form/Date/Datepicker',
 	component: DatepickerComponent,
 	parameters: {
 		docs: {

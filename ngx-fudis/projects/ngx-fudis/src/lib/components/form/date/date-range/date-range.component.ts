@@ -3,13 +3,13 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import { MatDateRangePicker, MatDatepickerIntl } from '@angular/material/datepicker';
 import { FormControl, FormGroup } from '@angular/forms';
 import { takeUntil } from 'rxjs';
-import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
-import { FudisIdService } from '../../../utilities/id-service.service';
+import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
+import { FudisIdService } from '../../../../utilities/id-service.service';
 
-import { FUDIS_DATE_FORMATS, FudisDateRange, FudisFormGroupErrors, FudisInputWidth } from '../../../types/forms';
+import { FUDIS_DATE_FORMATS, FudisDateRange, FudisFormGroupErrors, FudisInputWidth } from '../../../../types/forms';
 import { updateLocale } from './utilities';
 import { DatepickerCustomDateAdapter } from '../datepicker/datepicker-custom-date-adapter';
-import { FudisTranslationConfigService } from '../../../utilities/config.service';
+import { FudisTranslationConfigService } from '../../../../utilities/config.service';
 
 @Component({
 	selector: 'fudis-date-range',

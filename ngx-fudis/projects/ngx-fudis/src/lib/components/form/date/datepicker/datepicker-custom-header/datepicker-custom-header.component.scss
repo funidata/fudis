@@ -1,5 +1,5 @@
-@use '../../../../foundations/borders/mixins.scss' as borders;
-@use '../../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../../../foundations/borders/mixins.scss' as borders;
+@use '../../../../../foundations/colors/mixins.scss' as colorMixins;
 
 .fudis-datepicker-custom-header {
 	display: flex;

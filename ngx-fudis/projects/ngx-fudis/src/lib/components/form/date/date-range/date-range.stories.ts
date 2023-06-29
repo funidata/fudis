@@ -4,8 +4,8 @@ import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/ang
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BehaviorSubject } from 'rxjs';
 import { DateRangeComponent } from './date-range.component';
-import { FudisTranslationConfig } from '../../../types/forms';
-import { FudisTranslationConfigService } from '../../../utilities/config.service';
+import { FudisTranslationConfig } from '../../../../types/forms';
+import { FudisTranslationConfigService } from '../../../../utilities/config.service';
 
 @Component({
 	selector: 'example-language-change-component',
@@ -51,7 +51,7 @@ class LanguageChangeComponent {
 }
 
 export default {
-	title: 'Components/Form/Date Range',
+	title: 'Components/Form/Date/Date Range',
 	component: DateRangeComponent,
 	decorators: [
 		moduleMetadata({

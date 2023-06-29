@@ -5,11 +5,11 @@ import { FormControl } from '@angular/forms';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
 import { takeUntil } from 'rxjs';
 import { DatepickerCustomDateAdapter } from './datepicker-custom-date-adapter';
-import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
-import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
-import { FudisIdService } from '../../../utilities/id-service.service';
-import { FudisInputWidth, FUDIS_DATE_FORMATS } from '../../../types/forms';
-import { FudisTranslationConfigService } from '../../../utilities/config.service';
+import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
+import { checkRequiredAttributes } from '../../../../utilities/form/errorsAndWarnings';
+import { FudisIdService } from '../../../../utilities/id-service.service';
+import { FudisInputWidth, FUDIS_DATE_FORMATS } from '../../../../types/forms';
+import { FudisTranslationConfigService } from '../../../../utilities/config.service';
 import { updateLocale } from '../date-range/utilities';
 
 @Component({

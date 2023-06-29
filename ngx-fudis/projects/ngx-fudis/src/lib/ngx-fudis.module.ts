@@ -21,9 +21,10 @@ import { BodyTextComponent } from './components/typography/body-text/body-text.c
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/form/checkbox/checkbox.component';
 import { ContentDirective } from './directives/content-projection/content/content.directive';
-import { DatepickerComponent } from './components/form/datepicker/datepicker.component';
+import { DateRangeComponent } from './components/form/date/date-range/date-range.component';
+import { DatepickerComponent } from './components/form/date/datepicker/datepicker.component';
 
-import { DatepickerCustomHeaderComponent } from './components/form/datepicker/datepicker-custom-header/datepicker-custom-header.component';
+import { DatepickerCustomHeaderComponent } from './components/form/date/datepicker/datepicker-custom-header/datepicker-custom-header.component';
 import { DescriptionListComponent } from './components/description-list/description-list.component';
 import {
 	DialogCloseDirective,
@@ -72,7 +73,6 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
 import { FudisTranslationConfigService } from './utilities/config.service';
-import { DateRangeComponent } from './components/form/date-range/date-range.component';
 
 @NgModule({
 	/*
