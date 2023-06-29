@@ -1,18 +1,17 @@
 import { Component, Signal, importProvidersFrom } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormGroup, FormControl } from '@angular/forms';
 import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { DateRangeComponent } from './date-range.component';
 import { FudisTranslationConfig } from '../../../types/forms';
 import { FudisTranslationConfigService } from '../../../utilities/config.service';
 
 @Component({
-	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'language-change-component',
+	selector: 'example-language-change-component',
 	template: `<fudis-button [label]="_label" (handleClick)="changeLanguage()"></fudis-button>`,
 })
-export class LanguageChangeComponent {
+class LanguageChangeComponent {
 	_label = 'Change language';
 
 	_config: Signal<FudisTranslationConfig>;
@@ -33,6 +32,7 @@ export class LanguageChangeComponent {
 
 	changeLanguage(): void {
 		if (this._config().appLanguage === 'en') {
+			this._label = 'Vaihda kieli';
 			this.requiredText.next('Pakollinen');
 			this.closeLabel.next('Sulje kalenteri');
 
@@ -40,6 +40,7 @@ export class LanguageChangeComponent {
 				appLanguage: 'fi',
 			});
 		} else {
+			this._label = 'Change language';
 			this.requiredText.next('Required');
 			this.closeLabel.next('Close calendar');
 			this._configService.setConfig({
@@ -65,10 +66,15 @@ export default {
 } as Meta;
 
 const Template: StoryFn<DateRangeComponent> = () => ({
-	props: {},
+	props: {
+		group: new FormGroup({
+			startDate: new FormControl<Date | null>(null),
+			endDate: new FormControl<Date | null>(null),
+		}),
+	},
 	template: `
-	<fudis-date-range [label]="'Date range selection'" [helpText]="'Some help text here'"/>
-	<language-change-component/>
+	<fudis-date-range [formGroup]="group" [label]="'Date range selection'" [helpText]="'Some help text here'"/>
+	<example-language-change-component/>
 	`,
 });
 

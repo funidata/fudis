@@ -1,21 +1,12 @@
-import {
-	ChangeDetectorRef,
-	Component,
-	Input,
-	OnChanges,
-	OnInit,
-	Signal,
-	ViewEncapsulation,
-	effect,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, Signal, ViewEncapsulation, effect } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDateRangePicker, MatDatepickerIntl } from '@angular/material/datepicker';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../utilities/id-service.service';
 import { FudisTranslationConfigService } from '../../../utilities/config.service';
-import { FUDIS_DATE_FORMATS, FudisInputWidth, FudisTranslationConfig } from '../../../types/forms';
+import { FUDIS_DATE_FORMATS, FudisDateRange, FudisInputWidth, FudisTranslationConfig } from '../../../types/forms';
 import { updateLocale } from './utilities';
 import { DatepickerCustomDateAdapter } from '../datepicker/datepicker-custom-date-adapter';
 
@@ -76,13 +67,10 @@ export class DateRangeComponent extends InputBaseDirective implements OnInit {
 		this._adapter.setLocale(updateLocale(this._configs().appLanguage!));
 	}
 
-	range = new FormGroup({
-		start: new FormControl<Date | null>(null),
-		end: new FormControl<Date | null>(null),
-	});
-
 	/**
 	 * Available sizes for the datepicker - defaults to medium.
 	 */
 	@Input() size: FudisInputWidth = 'md';
+
+	@Input({ required: true }) formGroup: FormGroup<FudisDateRange>;
 }

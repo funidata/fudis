@@ -8,11 +8,11 @@
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle" />
 	<div class="fudis-daterange__controls">
-		<mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+		<mat-date-range-input [formGroup]="formGroup" [rangePicker]="picker">
 			<input
 				[id]="id"
 				matStartDate
-				[formControl]="range.controls.start"
+				[formControl]="formGroup.controls.startDate"
 				[readonly]="disabled"
 				[attr.aria-disabled]="disabled ? true : null"
 				class="fudis-daterange__controls__input"
@@ -21,7 +21,7 @@
 				[attr.aria-describedby]="id + '_guidance'" />
 			<input
 				[id]="id"
-				[formControl]="range.controls.end"
+				[formControl]="formGroup.controls.endDate"
 				matEndDate
 				[readonly]="disabled"
 				[attr.aria-disabled]="disabled ? true : null"
@@ -43,5 +43,5 @@
 		</mat-datepicker-toggle>
 		<mat-date-range-picker #picker panelClass="fudis-datepicker__datepicker" />
 	</div>
-	<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="id" [errorMsg]="errorMsg" [formGroup]="range" />
+	<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="id" [errorMsg]="errorMsg" [formGroup]="formGroup" />
 </div>
