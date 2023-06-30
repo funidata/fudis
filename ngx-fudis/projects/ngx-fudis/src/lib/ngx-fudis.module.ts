@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ActionsDirective } from './directives/content-projection/actions/actions.directive';
 import { AutocompleteComponent } from './components/form/autocomplete/autocomplete.component';
+import { AutocompleteMultiSelectComponent } from './components/autocomplete-multi-select/autocomplete-multi-select.component';
 import { AutocompleteMultiSelectSelectedItemChipComponent } from './components/autocomplete-multi-select/autocomplete-multi-select-selected-item-chip/autocomplete-multi-select-selected-item-chip.component';
 import { BadgeComponent } from './components/badge/badge.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
@@ -81,6 +82,7 @@ import { FudisConfigService } from './utilities/config.service';
 	declarations: [
 		ActionsDirective,
 		AutocompleteComponent,
+		AutocompleteMultiSelectComponent,
 		AutocompleteMultiSelectSelectedItemChipComponent,
 		BadgeComponent,
 		BodyTextComponent,
@@ -158,6 +160,7 @@ import { FudisConfigService } from './utilities/config.service';
 	exports: [
 		ActionsDirective,
 		AutocompleteComponent,
+		AutocompleteMultiSelectComponent,
 		BadgeComponent,
 		BodyTextComponent,
 		ButtonComponent,

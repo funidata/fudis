@@ -1,0 +1,51 @@
+<div
+	#autocompleteMultiSelectWrapper
+	class="fudis-autocomplete-multi-select fudis-autocomplete-multi-select__{{ size }}">
+	<fudis-label
+		[text]="label"
+		[id]="_id + '__label'"
+		[for]="_id"
+		[requiredText]="requiredText"
+		[tooltip]="tooltip"
+		[tooltipPosition]="tooltipPosition"
+		[tooltipToggle]="tooltipToggle">
+	</fudis-label>
+	<div class="fudis-autocomplete-multi-select__input-wrapper">
+		<input
+			(click)="handleInputClick()"
+			[id]="_id"
+			role="combobox"
+			[attr.aria-expanded]="_toggleOn"
+			class="fudis-autocomplete-multi-select__input-wrapper__input"
+			[attr.aria-describedby]="_id + '_guidance'" />
+		<fudis-button
+			class="fudis-autocomplete-multi-select__input-wrapper__icon-button"
+			(handleClick)="handleInputClick()"
+			[size]="'icon-only'"
+			[variant]="'tertiary'"
+			[icon]="'chevron'"
+			[iconRotate]="_toggleOn ? 'ccw-90' : 'cw-90'"
+			[label]="!_toggleOn ? openAriaLabel : closeAriaLabel"
+			[labelHidden]="true">
+		</fudis-button>
+	</div>
+	<ng-container *ngIf="_toggleOn">
+		<fudis-dropdown-menu [align]="'center'">
+			<ng-container *ngFor="let item of options">
+				<fudis-dropdown-menu-item
+					[label]="item.viewValue"
+					[close]="false"
+					[itemsWithCheckbox]="true"
+					(handleChecked)="selectItem(item)"
+					[checked]="isChecked(item)">
+				</fudis-dropdown-menu-item>
+			</ng-container>
+		</fudis-dropdown-menu>
+	</ng-container>
+	<ng-container *ngIf="selectedOptions.length > 0">
+		<fudis-autocomplete-multi-select-selected-item-chip [selectedItems]="selectedOptions" />
+	</ng-container>
+	<ng-container *ngIf="helpText">
+		<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="_id" />
+	</ng-container>
+</div>
