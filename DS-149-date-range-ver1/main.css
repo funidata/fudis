@@ -166,41 +166,6 @@
   box-shadow: 0 0 0 0.25rem #ffffff;
 }
 
-/* stylelint-disable scss/selector-no-redundant-nesting-selector */
-/* stylelint-disable declaration-no-important */
-/* stylelint-disable selector-class-pattern */
-.mat-date-range-input-wrapper {
-  box-sizing: border-box;
-  width: initial;
-  min-width: 2rem;
-  max-width: initial !important;
-  overflow: visible !important;
-}
-
-.mat-date-range-input-container {
-  box-sizing: border-box;
-}
-
-.fudis-daterange__controls .mat-date-range-input-separator {
-  opacity: 1;
-}
-
-.fudis-daterange__controls .mat-date-range-input {
-  display: flex;
-  align-items: center;
-}
-
-.fudis-daterange__controls .mat-date-range-input-container {
-  width: 100%;
-}
-
-.fudis-daterange__controls__input.mat-date-range-input-inner {
-  line-height: 1.5rem;
-  font-family: "Fira Sans", sans-serif;
-  font-size: 1rem;
-  font-weight: 300;
-}
-
 /* stylelint-disable property-disallowed-list */
 /* stylelint-disable unit-disallowed-list */
 /* stylelint-disable selector-max-compound-selectors */
