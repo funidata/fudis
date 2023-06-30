@@ -1,17 +1,19 @@
 <footer class="fudis-footer">
-	<ng-container *ngTemplateOutlet="left"> </ng-container>
+	<fudis-grid
+		[ignoreDefaults]="true"
+		[columns]="_columns"
+		[rowGap]="'md'"
+		[classes]="['fudis-footer__content']"
+		[marginSides]="'responsive'"
+		[width]="'xxl'">
+		<ng-container *ngIf="contentLeft">
+			<div class="fudis-footer__left-side">
+				<div class="fudis-footer__left-side__logo"></div>
+				<ng-container *ngTemplateOutlet="contentLeft!.templateRef" /></div
+		></ng-container>
+		<ng-container *ngIf="contentRight">
+			<div class="fudis-footer__right-side">
+				<ng-container *ngTemplateOutlet="contentRight!.templateRef" /></div
+		></ng-container>
+	</fudis-grid>
 </footer>
-
-<ng-template #left>
-	<div class="fudis-footer__left-side">
-		<!-- <img src="../../assets/images/fd-logo.svg" alt="Funidata logo" width="500" height="600" /> -->
-		<div class="fudis-footer__left-side__logo"></div>
-		<ng-content></ng-content>
-	</div>
-</ng-template>
-
-<ng-template #right>
-	<div class="fudis-footer__right-side">
-		<ng-content></ng-content>
-	</div>
-</ng-template>
