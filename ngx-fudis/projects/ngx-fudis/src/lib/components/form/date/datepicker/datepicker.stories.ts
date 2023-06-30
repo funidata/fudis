@@ -5,6 +5,8 @@ import { importProvidersFrom } from '@angular/core';
 import { DatepickerComponent } from './datepicker.component';
 import readme from './readme.mdx';
 
+const html = String.raw;
+
 export default {
 	title: 'Components/Form/Date/Datepicker',
 	component: DatepickerComponent,
@@ -30,23 +32,25 @@ const Template: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
 		...args,
 	},
 
-	template: `
-	<fudis-datepicker 
-		[label]="label" 
-		[id]="id" 
-		[requiredText]="requiredText"  
-		[helpText]="helpText" 
-		[errorMsg]="errorMsg" 
-		[control]="control" 
-		[disabled]="disabled" 
-		[minDate]="minDate" 
-		[maxDate]="maxDate"
-		[tooltip]="tooltip"
-		[tooltipPosition]="tooltipPosition"
-		[tooltipToggle]="tooltipToggle">
-	</fudis-datepicker>
-	<fudis-body-text *ngIf=control.value>The date output is: {{ control.value }}</fudis-body-text>
-	<fudis-body-text *ngIf=control.value>The date output with Angular date pipe is: {{ control.value | date:'dd.MM.yyyy' }}</fudis-body-text>
+	template: html`
+		<fudis-datepicker
+			[label]="label"
+			[id]="id"
+			[requiredText]="requiredText"
+			[helpText]="helpText"
+			[errorMsg]="errorMsg"
+			[control]="control"
+			[disabled]="disabled"
+			[minDate]="minDate"
+			[maxDate]="maxDate"
+			[tooltip]="tooltip"
+			[tooltipPosition]="tooltipPosition"
+			[tooltipToggle]="tooltipToggle">
+		</fudis-datepicker>
+		<fudis-body-text *ngIf="control.value">The date output is: {{ control.value }}</fudis-body-text>
+		<fudis-body-text *ngIf="control.value"
+			>The date output with Angular date pipe is: {{ control.value | date:'dd.MM.yyyy' }}</fudis-body-text
+		>
 	`,
 });
 

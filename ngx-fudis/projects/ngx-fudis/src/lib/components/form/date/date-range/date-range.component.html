@@ -1,64 +1,23 @@
-<ng-container *ngIf="_dateRangeGroup?.controls?.startDate && _dateRangeGroup?.controls?.endDate">
-	<div class="fudis-daterange fudis-daterange__{{ size }}">
-		<fudis-fieldset
-			[tooltip]="tooltip"
-			[tooltipPosition]="tooltipPosition"
-			[tooltipToggle]="tooltipToggle"
-			[title]="label"
-			[id]="_id"
-			[titleSize]="'sm'"
-			[requiredText]="_requiredText">
-			<ng-template fudisContent type="fieldset">
-				<div class="fudis-daterange__controls">
-					<mat-date-range-input
-						fudisDateRangeParseFix
-						[formGroup]="_dateRangeGroup"
-						[rangePicker]="picker"
-						[min]="minDate"
-						[max]="maxDate">
-						<input
-							(blur)="handleInputBlur()"
-							matStartDate
-							class="fudis-daterange__controls__input"
-							[id]="_id + '-start-date'"
-							[formControl]="_dateRangeGroup.controls.startDate"
-							[readonly]="disabled"
-							[attr.aria-disabled]="disabled ? true : null"
-							[class.fudis-daterange__input--disabled]="disabled"
-							[attr.required]="_requiredText ? true : null"
-							[attr.aria-describedby]="id + '_guidance'" />
-						<input
-							(blur)="handleInputBlur()"
-							matEndDate
-							class="fudis-daterange__controls__input"
-							[id]="_id + '-end-date'"
-							[formControl]="_dateRangeGroup.controls.endDate"
-							[readonly]="disabled"
-							[attr.aria-disabled]="disabled ? true : null"
-							[class.fudis-daterange__input--disabled]="disabled"
-							[attr.required]="_requiredText ? true : null"
-							[attr.aria-describedby]="id + '_guidance'" />
-					</mat-date-range-input>
-
-					<mat-datepicker-toggle
-						[disabled]="disabled"
-						matSuffix
-						[for]="picker"
-						[disableRipple]="true"
-						class="fudis-datepicker__toggle">
-						<mat-icon matDatepickerToggleIcon>
-							<fudis-icon icon="calendar"></fudis-icon>
-						</mat-icon>
-					</mat-datepicker-toggle>
-					<mat-date-range-picker #picker panelClass="fudis-datepicker__datepicker" />
-				</div>
-				<fudis-guidance
-					[inputLabel]="label"
-					[helpText]="helpText"
-					[for]="_id"
-					[groupErrorMsg]="groupErrorMsg"
-					[formGroup]="_dateRangeGroup" />
-			</ng-template>
-		</fudis-fieldset>
+<ng-container *ngIf="startDate && endDate">
+	<div class="fudis-daterange" [id]="_id">
+		<fudis-datepicker
+			class="fudis-daterange__start-date"
+			[size]="'sm'"
+			[minDate]="_startMin"
+			[maxDate]="_startMin"
+			[tooltip]="startDate.tooltip"
+			[errorMsg]="startDate.errorMsg"
+			[label]="startDate.label"
+			[control]="startDate.control"
+			[helpText]="startDate.helpText" />
+		<span class="fudis-daterange__gutter"></span>
+		<fudis-datepicker
+			[size]="'sm'"
+			[minDate]="_endMin"
+			[maxDate]="_endMax"
+			[errorMsg]="endDate.errorMsg"
+			[label]="endDate.label"
+			[control]="endDate.control"
+			[helpText]="endDate.helpText" />
 	</div>
 </ng-container>

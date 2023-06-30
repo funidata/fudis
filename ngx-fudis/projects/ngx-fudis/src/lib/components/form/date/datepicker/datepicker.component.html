@@ -3,7 +3,7 @@
 		[id]="'label_' + id"
 		[for]="id"
 		[text]="label"
-		[requiredText]="requiredText"
+		[requiredText]="_required ? _requiredText : undefined"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle"></fudis-label>
@@ -20,7 +20,7 @@
 			[class.fudis-datepicker__input--invalid]="(control.invalid && control.touched) || invalidState"
 			[class.fudis-datepicker__input--disabled]="disabled"
 			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
-			[attr.required]="requiredText ? true : null"
+			[attr.required]="_required ? true : null"
 			[attr.aria-describedby]="id + '_guidance'" />
 		<mat-datepicker-toggle
 			[disabled]="disabled"

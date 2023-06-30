@@ -50,13 +50,13 @@ export class InputBaseDirective extends TooltipApiDirective {
 	/**
 	 * Help text, aligned underneath the input.
 	 */
-	@Input() helpText: string;
+	@Input() helpText: string | undefined;
 
 	/**
 	 * Error messages shown when form control validators are invalid
 	 */
 
-	@Input() errorMsg: FudisFormErrors;
+	@Input() errorMsg: FudisFormErrors | undefined;
 
 	/**
 	 * Set input's visual style and attributes as invalid. Does not override if control.invalid is true.
@@ -81,6 +81,8 @@ export class InputBaseDirective extends TooltipApiDirective {
 	protected _configs: Signal<FudisTranslationConfig>;
 
 	protected _requiredText: string;
+
+	protected _required: boolean = false;
 
 	protected _destroyed = new Subject<void>();
 

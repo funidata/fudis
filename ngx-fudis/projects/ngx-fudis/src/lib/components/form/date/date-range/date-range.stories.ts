@@ -67,48 +67,45 @@ export default {
 
 const html = String.raw;
 
-const Template: StoryFn<DateRangeComponent> = () => ({
+const Template: StoryFn<DateRangeComponent> = (args: DateRangeComponent) => ({
 	props: {
-		firstControlStartDate: new FormControl<Date | null>(null, Validators.required),
-		firstControlEndDate: new FormControl<Date | null>(null, Validators.required),
-		secondControlStartDate: new FormControl<Date | null>(null, Validators.required),
-		secondControlEndDate: new FormControl<Date | null>(null, Validators.required),
-		minDate: new Date('2023-05-05'),
-		maxDate: new Date('2023-06-22'),
-		groupErrorMsg: {
-			startDate: {
-				required: 'Start date is required',
-				matDatepickerParse: 'Start date is not a proper date',
-				matDatepickerMin: 'Start date cannot be earlier than 5.5.2023',
-				matDatepickerMax: 'Start date cannot be later than 22.6.2023',
-				matStartDateInvalid: 'Start date cannot be after end date',
-			},
-			endDate: {
-				required: 'End date is required',
-				matDatepickerParse: 'End date is not a proper date',
-				matDatepickerMin: 'End date cannot be earlier than 5.5.2023',
-				matDatepickerMax: 'End date cannot be later than 22.6.2023',
-				matEndDateInvalid: 'End date cannot be before start date',
-			},
-		},
+		...args,
 	},
 	template: html`
 		<example-language-change-component />
-		<fudis-date-range
-			[groupErrorMsg]="groupErrorMsg"
-			[controlStartDate]="firstControlStartDate"
-			[controlEndDate]="firstControlEndDate"
-			[label]="'Date range selection'"
-			[helpText]="'Some help text here'" />
-		<fudis-date-range
-			[minDate]="minDate"
-			[maxDate]="maxDate"
-			[groupErrorMsg]="groupErrorMsg"
-			[controlStartDate]="secondControlStartDate"
-			[controlEndDate]="secondControlEndDate"
-			[label]="'Date range selection'"
-			[helpText]="'Some help text here'" />
+		<fudis-date-range [startDate]="startDate" [endDate]="endDate" />
 	`,
 });
 
 export const DateRange = Template.bind({});
+DateRange.args = {
+	startDate: {
+		label: 'Start date',
+		helpText: 'Select start date',
+		minDate: new Date('2023-05-01'),
+		maxDate: new Date('2023-05-07'),
+		tooltip: 'Tooltip for first',
+		errorMsg: {
+			required: 'Start date is required',
+			matDatepickerParse: 'Start date is not a proper date',
+			matDatepickerMin: 'Start date cannot be earlier than 5.5.2023',
+			matDatepickerMax: 'Start date cannot be later than 22.6.2023',
+			matStartDateInvalid: 'Start date cannot be after end date',
+		},
+		control: new FormControl<Date | null>(null, Validators.required),
+	},
+	endDate: {
+		label: 'End date',
+		helpText: 'Select end date',
+		minDate: new Date('2023-05-15'),
+		maxDate: new Date('2023-05-25'),
+		errorMsg: {
+			required: 'End date is required',
+			matDatepickerParse: 'End date is not a proper date',
+			matDatepickerMin: 'End date cannot be earlier than 5.5.2023',
+			matDatepickerMax: 'End date cannot be later than 22.6.2023',
+			matEndDateInvalid: 'End date cannot be before start date',
+		},
+		control: new FormControl<Date | null>(null, Validators.required),
+	},
+};

@@ -115,6 +115,16 @@ export interface FudisTranslationConfig {
 	};
 }
 
+export interface FudisDateRangeItem {
+	control: FormControl<Date | null>;
+	label: string;
+	helpText?: string;
+	errorMsg?: FudisFormErrors;
+	minDate?: Date | null;
+	maxDate?: Date | null;
+	tooltip?: string;
+}
+
 export const FudisDateInputFormat = {
 	dateInput: 'DD.MM.YYYY',
 	monthYearLabel: 'MMM YYYY',

@@ -1,92 +1,57 @@
-import {
-	AfterContentInit,
-	ChangeDetectorRef,
-	Component,
-	Input,
-	OnChanges,
-	OnInit,
-	ViewEncapsulation,
-	effect,
-} from '@angular/core';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MatDateRangePicker, MatDatepickerIntl } from '@angular/material/datepicker';
-import { FormControl, FormGroup } from '@angular/forms';
-import { distinctUntilChanged, takeUntil } from 'rxjs';
-import { FudisIdService } from '../../../../utilities/id-service.service';
-import { FUDIS_DATE_FORMATS, FudisDateRange, FudisFormGroupErrors } from '../../../../types/forms';
+import { AfterContentInit, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { DatepickerCustomDateAdapter } from '../date-common/datepicker-custom-date-adapter';
-import { FudisTranslationConfigService } from '../../../../utilities/config.service';
-import { DateCommonDirective } from '../date-common/date-common.directive';
+import { FormGroup } from '@angular/forms';
+import { Subject, distinctUntilChanged, takeUntil } from 'rxjs';
+import { FudisIdService } from '../../../../utilities/id-service.service';
+import { FudisDateRange, FudisDateRangeItem } from '../../../../types/forms';
 
 @Component({
 	selector: 'fudis-date-range',
 	templateUrl: './date-range.component.html',
 	styleUrls: ['./date-range.component.scss'],
 	encapsulation: ViewEncapsulation.None,
-	providers: [
-		{
-			provide: DateAdapter,
-			useClass: DatepickerCustomDateAdapter,
-			deps: [MAT_DATE_LOCALE],
-		},
-		{ provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
-		{ provide: MatDateRangePicker },
-	],
 })
-export class DateRangeComponent extends DateCommonDirective implements OnInit, OnChanges, AfterContentInit {
-	constructor(
-		private _idService: FudisIdService,
-		private _dateRangeDetectorRef: ChangeDetectorRef,
-		private _dateRangeConfigService: FudisTranslationConfigService,
-		private _dateRangeAdapter: DateAdapter<Date>,
-		private _dateRangematDatepickerIntl: MatDatepickerIntl
-	) {
-		super(_dateRangeDetectorRef, _dateRangeConfigService, _dateRangeAdapter, _dateRangematDatepickerIntl);
+export class DateRangeComponent implements OnInit, AfterContentInit {
+	constructor(private _idService: FudisIdService) {}
 
-		effect(() => {
-			this.setConfigs();
-		});
-	}
+	private _destroyed = new Subject<void>();
 
 	protected _dateRangeGroup: FormGroup<FudisDateRange>;
+
+	protected _id: string;
+
+	protected _startMin: Date | null | undefined;
+
+	protected _startMax: Date | null | undefined;
+
+	protected _endMax: Date | null | undefined;
+
+	protected _endMin: Date | null | undefined;
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('daterange');
 
-		this._dateRangeGroup = new FormGroup({
-			startDate: this.controlStartDate,
-			endDate: this.controlEndDate,
-		});
-
-		this.subscribeToRequiredText();
-		this.subscribeToCloseLabel();
+		this._startMin = this.startDate.minDate;
+		this._startMax = this.startDate.maxDate;
+		this._endMin = this.endDate.minDate;
+		this._endMax = this.endDate.maxDate;
 	}
+
+	@Input() id: string;
+
+	@Input({ required: true }) startDate: FudisDateRangeItem;
+
+	@Input({ required: true }) endDate: FudisDateRangeItem;
 
 	ngAfterContentInit(): void {
-		/**
-		 * Workaround for known ngMaterial issue reported multiple times.
-		 * E.g. https://github.com/angular/components/issues/21875
-		 * E.g. https://github.com/angular/components/issues/24075
-		 * E.g. https://github.com/angular/components/issues/27170
-		 * E.g. https://github.com/angular/components/issues/27260
-		 */
-		this.controlStartDate.valueChanges
-			.pipe(distinctUntilChanged(), takeUntil(this._destroyed))
-			.subscribe(() => setTimeout(() => this.controlEndDate.updateValueAndValidity()));
+		if (this.startDate?.control && this.endDate?.control) {
+			this.startDate.control.valueChanges.pipe(distinctUntilChanged(), takeUntil(this._destroyed)).subscribe(() => {
+				this.endDate.control.updateValueAndValidity();
+			});
 
-		this.controlEndDate.valueChanges
-			.pipe(distinctUntilChanged(), takeUntil(this._destroyed))
-			.subscribe(() => setTimeout(() => this.controlStartDate.updateValueAndValidity()));
-	}
-
-	@Input() groupErrorMsg: FudisFormGroupErrors;
-
-	@Input({ required: true }) controlStartDate: FormControl<Date | null>;
-
-	@Input({ required: true }) controlEndDate: FormControl<Date | null>;
-
-	handleInputBlur(): void {
-		console.log(this._dateRangeGroup);
+			this.endDate.control.valueChanges.pipe(distinctUntilChanged(), takeUntil(this._destroyed)).subscribe(() => {
+				this.startDate.control.updateValueAndValidity();
+			});
+		}
 	}
 }

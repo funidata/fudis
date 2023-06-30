@@ -1,4 +1,4 @@
-import { Directive, HostListener, OnInit, ElementRef } from '@angular/core';
+import { Directive, HostListener, OnInit, ElementRef, Input } from '@angular/core';
 import { MatTooltip } from '@angular/material/tooltip';
 import { TooltipApiDirective } from './tooltip-api.directive';
 
@@ -11,6 +11,11 @@ export class TooltipDirective extends TooltipApiDirective implements OnInit {
 	constructor(private _ngMaterialTooltip: MatTooltip, private _tooltipElement: ElementRef) {
 		super();
 	}
+
+	/**
+	 * Text placed on tooltip
+	 */
+	@Input() override tooltip: string;
 
 	ngOnInit() {
 		this._ngMaterialTooltip.message = this.tooltip;

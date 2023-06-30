@@ -73,7 +73,6 @@ import { TextAreaComponent } from './components/form/text-area/text-area.compone
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
 import { FudisTranslationConfigService } from './utilities/config.service';
-import { DateCommonDirective } from './components/form/date/date-common/date-common.directive';
 
 @NgModule({
 	/*
@@ -87,7 +86,6 @@ import { DateCommonDirective } from './components/form/date/date-common/date-com
 		ButtonComponent,
 		CheckboxComponent,
 		ContentDirective,
-		DateCommonDirective,
 		DatepickerComponent,
 		DatepickerCustomHeaderComponent,
 		DateRangeComponent,
