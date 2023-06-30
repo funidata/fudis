@@ -7,6 +7,8 @@ import { FudisDropdownMenuItemService } from './dropdown-menu-item.service';
 	styleUrls: ['./dropdown-menu-item.component.scss'],
 })
 export class DropdownMenuItemComponent {
+	constructor(private clickService: FudisDropdownMenuItemService) {}
+
 	@ViewChild('dropdownItem') dropdownItem: ElementRef;
 
 	/**
@@ -20,11 +22,29 @@ export class DropdownMenuItemComponent {
 	@Input() disabled: boolean = false;
 
 	/**
+	 * Option for closing or leaving dropdown open after clicking an item. Closes by default.
+	 */
+	@Input() close: boolean = true;
+
+	/**
+	 * Option to create dropdown items with checkbox. False by default. Checkbox option used e.g. in fudis-autocomplete-multi-select.
+	 */
+	@Input() itemsWithCheckbox: boolean = false;
+
+	/**
+	 * Checked state for dropdown-menu-item with checkbox
+	 */
+	@Input() checked: boolean;
+
+	/**
 	 * Optional click handler
 	 */
 	@Output() handleClick = new EventEmitter<Event>();
 
-	constructor(private clickService: FudisDropdownMenuItemService) {}
+	/**
+	 * Output for dropdown-menu-item with checkbox
+	 */
+	@Output() handleChecked = new EventEmitter<boolean>();
 
 	// eslint-disable-next-line class-methods-use-this
 	handleKeyDown(event: KeyboardEvent) {
@@ -59,6 +79,8 @@ export class DropdownMenuItemComponent {
 	}
 
 	closeDropdown(): void {
-		this.clickService.setMenuStatus(false);
+		if (this.close === true) {
+			this.clickService.setMenuStatus(false);
+		}
 	}
 }
