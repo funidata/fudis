@@ -21,9 +21,7 @@
 	<ng-container *ngIf="data">
 		<fudis-dl-item *ngFor="let item of data">
 			<fudis-dt>{{ item.key }}</fudis-dt>
-			<fudis-dd [subHeading]="item.subHeading">
-				{{ item.value }}
-			</fudis-dd>
+			<fudis-dd [subHeading]="item.subHeading">{{ item.value }}</fudis-dd>
 		</fudis-dl-item>
 	</ng-container>
 	<ng-content />

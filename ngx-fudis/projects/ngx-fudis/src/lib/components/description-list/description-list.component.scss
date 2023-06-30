@@ -6,7 +6,7 @@
 @use '../../foundations/breakpoints/mixins.scss' as breakpoint;
 @use '../../foundations/utilities/mixins.scss' as utilities;
 
-.fudis-description-list {
+.fudis-dl {
 	box-sizing: border-box;
 
 	&__disabled-grid {
@@ -71,7 +71,7 @@
 	}
 }
 
-.fudis-description-list-compact {
+.fudis-dl-compact {
 	box-sizing: border-box;
 
 	&__disabled-grid {

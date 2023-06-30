@@ -76,9 +76,9 @@ describe('DescriptionListComponent', () => {
 	}
 
 	describe('Parent CSS class', () => {
-		it('should have fudis-description-list and fudis-grid classes if regular list', () => {
+		it('should have fudis-dl and fudis-grid classes if regular list', () => {
 			const classList = [
-				'fudis-description-list',
+				'fudis-dl',
 				'fudis-grid',
 				'fudis-grid__margin__sides__none',
 				'fudis-grid__align__center',
@@ -88,12 +88,12 @@ describe('DescriptionListComponent', () => {
 			];
 			assertDescriptionListHasClasses(classList);
 		});
-		it('should have fudis-description-list-compact and fudis-grid classes if compact list', () => {
+		it('should have fudis-dl-compact and fudis-grid classes if compact list', () => {
 			component.variant = 'compact';
 			component.ngOnChanges();
 			fixture.detectChanges();
 			const classList = [
-				'fudis-description-list-compact',
+				'fudis-dl-compact',
 				'fudis-grid',
 				'fudis-grid__align__center',
 				'fudis-grid__margin__sides__none',
@@ -108,7 +108,7 @@ describe('DescriptionListComponent', () => {
 			component.disableGrid = true;
 			component.ngOnChanges();
 			fixture.detectChanges();
-			const classList = ['fudis-description-list', 'fudis-description-list__disabled-grid'];
+			const classList = ['fudis-dl', 'fudis-dl__disabled-grid'];
 			assertDescriptionListHasClasses(classList);
 		});
 		it('should not have fudis-grid classes if grid directive is disabled if compact list', () => {
@@ -116,7 +116,7 @@ describe('DescriptionListComponent', () => {
 			component.disableGrid = true;
 			component.ngOnChanges();
 			fixture.detectChanges();
-			const classList = ['fudis-description-list-compact', 'fudis-description-list-compact__disabled-grid'];
+			const classList = ['fudis-dl-compact', 'fudis-dl-compact__disabled-grid'];
 			assertDescriptionListHasClasses(classList);
 		});
 	});
@@ -131,16 +131,16 @@ describe('DescriptionListComponent', () => {
 		});
 
 		it('should have respective CSS classes and display style in regular list', () => {
-			assertDtHasClasses('fudis-description-list__item__term');
-			assertDdHasClasses('fudis-description-list__item__details', 'flex');
+			assertDtHasClasses('fudis-dl__item__term');
+			assertDdHasClasses('fudis-dl__item__details', 'flex');
 		});
 
 		it('should have respective CSS classes and display style in compact list', () => {
 			component.variant = 'compact';
 			component.ngOnChanges();
 			fixture.detectChanges();
-			assertDtHasClasses('fudis-description-list-compact__item__term');
-			assertDdHasClasses('fudis-description-list-compact__item__details', 'inline');
+			assertDtHasClasses('fudis-dl-compact__item__term');
+			assertDdHasClasses('fudis-dl-compact__item__details', 'inline');
 		});
 	});
 });

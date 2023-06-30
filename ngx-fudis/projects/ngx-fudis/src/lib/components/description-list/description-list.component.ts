@@ -36,17 +36,17 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 		const cssClasses = [];
 
 		if (this.variant === 'regular') {
-			cssClasses.push('fudis-description-list');
+			cssClasses.push('fudis-dl');
 
 			if (this.disableGrid) {
-				cssClasses.push('fudis-description-list__disabled-grid');
+				cssClasses.push('fudis-dl__disabled-grid');
 			}
 		}
 
 		if (this.variant === 'compact') {
-			cssClasses.push('fudis-description-list-compact');
+			cssClasses.push('fudis-dl-compact');
 			if (this.disableGrid) {
-				cssClasses.push('fudis-description-list-compact__disabled-grid');
+				cssClasses.push('fudis-dl-compact__disabled-grid');
 			}
 		}
 
