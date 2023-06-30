@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
-import { FudisIcon, FudisIconColor } from '../../types/icons';
+import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
 
 /**
  * Example: `<fudis-icon icon="info" color="primary"></fudis-icon>`
@@ -38,7 +38,7 @@ export class IconComponent {
 	/**
 	 * Use rotate to flip and rotate icon
 	 */
-	@Input() rotate?: 'flip-180' | 'cw-90' | 'ccw-90' | 'none' = 'none';
+	@Input() rotate: FudisIconRotate = 'none';
 
 	iconSize: 'small' | 'large' = 'large';
 

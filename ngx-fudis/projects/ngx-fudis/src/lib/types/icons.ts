@@ -93,3 +93,5 @@ export type FudisIcon =
 	| 'zoom-out';
 
 export type FudisIconColor = 'attention' | 'danger' | 'default' | 'light' | 'primary' | 'success' | 'white';
+
+export type FudisIconRotate = 'flip-180' | 'cw-90' | 'ccw-90' | 'none';

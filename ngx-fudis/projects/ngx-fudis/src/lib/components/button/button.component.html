@@ -14,7 +14,11 @@
 		[tooltipToggle]="tooltipToggle">
 		<ng-container *ngIf="icon">
 			<div class="fudis-button__icon">
-				<fudis-icon class="fudis-button__icon__component" [color]="_iconColor" [icon]="icon"></fudis-icon>
+				<fudis-icon
+					class="fudis-button__icon__component"
+					[color]="_iconColor"
+					[icon]="icon"
+					[rotate]="iconRotate"></fudis-icon>
 			</div>
 		</ng-container>
 		{{ labelHidden || size === 'icon-only' ? '' : label }}
@@ -33,7 +37,11 @@
 		[attr.aria-expanded]="!asMenuButton ? null : _toggleOn">
 		<ng-container *ngIf="icon">
 			<div class="fudis-button__icon">
-				<fudis-icon class="fudis-button__icon__component" [color]="_iconColor" [icon]="icon"></fudis-icon>
+				<fudis-icon
+					class="fudis-button__icon__component"
+					[color]="_iconColor"
+					[icon]="icon"
+					[rotate]="iconRotate"></fudis-icon>
 			</div>
 		</ng-container>
 		{{ labelHidden || size === 'icon-only' ? '' : label }}

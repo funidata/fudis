@@ -12,7 +12,7 @@ import {
 	effect,
 	Signal,
 } from '@angular/core';
-import { FudisIcon, FudisIconColor } from '../../types/icons';
+import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisDropdownMenuItemService } from '../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 
@@ -66,6 +66,11 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 	 * Icon for button if needed
 	 */
 	@Input() icon: FudisIcon | undefined = undefined;
+
+	/**
+	 * Icon rotation option
+	 */
+	@Input() iconRotate: FudisIconRotate = 'none';
 
 	/**
 	 * Assign button as menu button with dropdown
