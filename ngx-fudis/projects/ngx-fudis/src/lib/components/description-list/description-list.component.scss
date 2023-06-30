@@ -30,7 +30,7 @@
 	& &__item {
 		@include utilities.box-reset;
 
-		display: inline;
+		display: inline-block;
 
 		&__term {
 			@include typography.description-list-key-typography;
@@ -112,7 +112,7 @@
 			@include typography.description-list-compact-value-typography;
 			@include colorMixins.text-color('gray-dark');
 
-			display: inline;
+			display: inline-block;
 			margin-left: 0;
 			padding-left: spacing.$spacing-xxs;
 
