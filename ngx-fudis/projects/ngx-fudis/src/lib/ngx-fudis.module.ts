@@ -74,7 +74,7 @@ import { DescriptionListItemComponent } from './components/description-list/desc
 import { DescriptionListItemTermComponent } from './components/description-list/description-list-item/description-list-item-term/description-list-item-term.component';
 import { DescriptionListItemDetailsComponent } from './components/description-list/description-list-item/description-list-item-details/description-list-item-details.component';
 import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
-import { FudisConfigService } from './utilities/config.service';
+import { FudisTranslationConfigService } from './utilities/config.service';
 
 @NgModule({
 	/*
@@ -212,7 +212,7 @@ import { FudisConfigService } from './utilities/config.service';
 		FudisGridService,
 		FudisDropdownMenuItemService,
 		FudisIdService,
-		FudisConfigService,
+		FudisTranslationConfigService,
 	],
 })
 export class NgxFudisModule {}
