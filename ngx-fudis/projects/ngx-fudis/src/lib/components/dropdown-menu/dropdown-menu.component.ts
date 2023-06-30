@@ -20,7 +20,7 @@ export class DropdownMenuComponent implements AfterContentInit {
 	/**
 	 * Dropdown-menu is aligned to open left side of the button by default but can be aligned to open right side if necessary
 	 */
-	@Input() align: 'left' | 'right' = 'left';
+	@Input() align: 'left' | 'right' | 'center' = 'left';
 
 	@HostListener('window:keydown.arrowDown', ['$event'])
 	handleKeyDown(event: KeyboardEvent) {
