@@ -60,6 +60,11 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	@Input() closeAriaLabel: string = 'Close dropdown';
 
 	/**
+	 * Label for situations where no results with current filters were found
+	 */
+	@Input() noResultsFound: string = 'No results were found';
+
+	/**
 	 * Output for item click
 	 */
 	@Output() itemChange = new EventEmitter<FudisDropdownOption[]>();
@@ -70,17 +75,28 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	protected _id: string;
 
 	/**
-	 * Toggle dropdown visibility
+	 * Internal variable for toggle dropdown visibility
 	 */
 	protected _toggleOn: boolean;
 
 	/**
-	 * Signal for listening menu toggle
+	 * Internal variable for listening menu toggle Signal
 	 */
 	private _menuStatus: Signal<boolean>;
 
+	/**
+	 * Internal variable for user input filtering
+	 */
+	protected _filterText: string = '';
+
+	/**
+	 * Internal variable for results filtered from options
+	 */
+	protected _results: FudisDropdownOption[] = [];
+
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('autocompleteMultiSelect');
+		this._results = [...this.options];
 	}
 
 	closeMenu(menuStatus: boolean): void {
@@ -110,5 +126,13 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 
 	isChecked(item: FudisDropdownOption): boolean {
 		return this.selectedOptions.some((e) => e.viewValue === item.viewValue);
+	}
+
+	doSearch(event: any): void {
+		this._filterText = event.target.value;
+
+		this._results = this.options.filter((option) =>
+			option.viewValue.toLowerCase().includes(this._filterText.toLowerCase())
+		);
 	}
 }

@@ -13,7 +13,9 @@
 	<div class="fudis-autocomplete-multi-select__input-wrapper">
 		<input
 			(click)="handleInputClick()"
+			(keyup)="doSearch($event)"
 			[id]="_id"
+			[value]="_filterText"
 			role="combobox"
 			[attr.aria-expanded]="_toggleOn"
 			class="fudis-autocomplete-multi-select__input-wrapper__input"
@@ -31,7 +33,7 @@
 	</div>
 	<ng-container *ngIf="_toggleOn">
 		<fudis-dropdown-menu [align]="'center'">
-			<ng-container *ngFor="let item of options">
+			<ng-container *ngFor="let item of _results">
 				<fudis-dropdown-menu-item
 					[label]="item.viewValue"
 					[close]="false"
@@ -39,6 +41,9 @@
 					(handleChecked)="selectItem(item)"
 					[checked]="isChecked(item)">
 				</fudis-dropdown-menu-item>
+			</ng-container>
+			<ng-container *ngIf="_results.length === 0">
+				<fudis-body-text [size]="'md-light'">{{ noResultsFound }}</fudis-body-text>
 			</ng-container>
 		</fudis-dropdown-menu>
 	</ng-container>
