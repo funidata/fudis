@@ -42,37 +42,37 @@ describe('DescriptionListComponent', () => {
 	});
 
 	function getDescriptionList(): HTMLElement {
-		const descriptionListItemElement = fixture.nativeElement.querySelector('dl') as HTMLElement;
-		return descriptionListItemElement;
+		const descriptionListElement = fixture.nativeElement.querySelector('dl') as HTMLElement;
+		return descriptionListElement;
 	}
 
 	function getDescriptionListDt(classes: string): HTMLElement {
-		const descriptionListItemKeyElement = fixture.debugElement.query(By.css(`fudis-dt .${classes}`));
-		return descriptionListItemKeyElement.nativeElement;
+		const descriptionListItemTermElement = fixture.debugElement.query(By.css(`fudis-dt .${classes}`));
+		return descriptionListItemTermElement.nativeElement;
 	}
 
 	function getDescriptionListDd(classes: string): HTMLElement {
-		const descriptionListItemValueElement = fixture.debugElement.query(By.css(`fudis-dd .${classes}`));
-		return descriptionListItemValueElement.nativeElement;
+		const descriptionListItemDetailsElement = fixture.debugElement.query(By.css(`fudis-dd .${classes}`));
+		return descriptionListItemDetailsElement.nativeElement;
 	}
 
 	function assertDescriptionListHasClasses(classes: string[]): void {
-		const descriptionListItemClassName = getDescriptionList()?.className ?? '';
-		expect(descriptionListItemClassName.split(' ').sort()).toEqual(classes.sort());
+		const descriptionListClassName = getDescriptionList()?.className ?? '';
+		expect(descriptionListClassName.split(' ').sort()).toEqual(classes.sort());
 	}
 
 	function assertDtHasClasses(classes: string): void {
-		const descriptionListItemKeyClassName = getDescriptionListDt(classes).className ?? '';
+		const descriptionListItemTermClassName = getDescriptionListDt(classes).className ?? '';
 
-		expect(descriptionListItemKeyClassName).toContain(classes);
+		expect(descriptionListItemTermClassName).toContain(classes);
 	}
 
 	function assertDdHasClasses(classes: string, display: string) {
-		const descriptionListItemValueElement = getDescriptionListDd(classes);
-		const descriptionListItemValueClassName = descriptionListItemValueElement.className ?? '';
-		const descriptionListItemValueDisplayStyle = getComputedStyle(descriptionListItemValueElement).display;
+		const descriptionListItemDetailsElement = getDescriptionListDd(classes);
+		const descriptionListItemDetilsClassName = descriptionListItemDetailsElement.className ?? '';
+		const descriptionListItemValueDisplayStyle = getComputedStyle(descriptionListItemDetailsElement).display;
 		expect(descriptionListItemValueDisplayStyle).toEqual(display);
-		expect(descriptionListItemValueClassName).toContain(classes);
+		expect(descriptionListItemDetilsClassName).toContain(classes);
 	}
 
 	describe('Parent CSS class', () => {
@@ -140,7 +140,7 @@ describe('DescriptionListComponent', () => {
 			component.ngOnChanges();
 			fixture.detectChanges();
 			assertDtHasClasses('fudis-dl-compact__item__term');
-			assertDdHasClasses('fudis-dl-compact__item__details', 'inline');
+			assertDdHasClasses('fudis-dl-compact__item__details', 'inline-block');
 		});
 	});
 });
