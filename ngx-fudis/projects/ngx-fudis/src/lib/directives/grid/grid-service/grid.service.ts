@@ -7,7 +7,16 @@ import { breakpointsMinWidthToObserve } from '../gridUtils';
 
 @Injectable()
 export class FudisGridService implements OnDestroy {
-	destroyed = new Subject<void>();
+	/**
+	 * Observe breakpoints and when hitting one, save results to Signal.
+	 */
+	constructor(gridBreakpointObserver: BreakpointObserver) {
+		gridBreakpointObserver.observe(breakpointsMinWidthToObserve).subscribe((state: BreakpointState) => {
+			this._currentScreenSize.set(state);
+		});
+	}
+
+	private _destroyed = new Subject<void>();
 
 	private _defaultGridValues = signal<FudisGridAttributes>({});
 
@@ -36,18 +45,9 @@ export class FudisGridService implements OnDestroy {
 		return this.currentScreenSize();
 	}
 
-	/**
-	 * Observe breakpoints and when hitting one, save results to Signal.
-	 */
-	constructor(gridBreakpointObserver: BreakpointObserver) {
-		gridBreakpointObserver.observe(breakpointsMinWidthToObserve).subscribe((state: BreakpointState) => {
-			this._currentScreenSize.set(state);
-		});
-	}
-
 	ngOnDestroy() {
-		this.destroyed.next();
-		this.destroyed.complete();
+		this._destroyed.next();
+		this._destroyed.complete();
 	}
 
 	/**
@@ -72,6 +72,20 @@ export class FudisGridService implements OnDestroy {
 			columns.forEach((item) => {
 				if (this.currentScreenSize()?.breakpoints[item.breakpoint]) {
 					elementToModify.style.gridTemplateColumns = item.value;
+				}
+			});
+		}
+	}
+
+	setGridItemAlignX(element: HTMLElement, alignX: string | FudisGridResponsiveData[]): void {
+		const elementToModify = element;
+
+		if (typeof alignX === 'string') {
+			elementToModify.style.justifySelf = alignX;
+		} else {
+			alignX.forEach((item) => {
+				if (this.currentScreenSize()?.breakpoints[item.breakpoint]) {
+					elementToModify.style.justifySelf = item.value;
 				}
 			});
 		}

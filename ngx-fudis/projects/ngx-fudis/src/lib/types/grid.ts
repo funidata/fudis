@@ -97,6 +97,13 @@ export const gridItemDefault = 'auto';
 export type GridItemAlignment = 'start' | 'end' | 'center' | 'stretch';
 
 /**
+ * Alignment of Grid Item inside Grid for varying breakpoints
+ */
+export type GridItemAlignmentResponsive = {
+	[K in FudisBreakpointKey]?: GridItemWidth;
+};
+
+/**
  * Input value for width of Grid Item
  */
 export type GridItemWidth = number | string | 'stretch' | 'auto';
