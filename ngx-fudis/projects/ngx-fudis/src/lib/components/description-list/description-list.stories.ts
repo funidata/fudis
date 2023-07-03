@@ -95,21 +95,14 @@ DescriptionListDataLoop.args = {
 };
 
 const TemplateWithDl: StoryFn = () => ({
-	template: html` <fudis-heading tag="h2" size="md"
-			>Here below is a regular Fudis Description List component</fudis-heading
+	template: html`<fudis-grid [columns]="columns">
+		<fudis-heading tag="h2" size="md">This is Fudis Grid where DL is used as child component</fudis-heading>
+		<fudis-dl [disableGrid]="true" [data]="lonelyDataItem" />
+		<fudis-body-text
+			>Item next to this Body Text is a lonely Description List component with only one list item. This and DL item are
+			both inside a Fudis Grid.</fudis-body-text
 		>
-		<fudis-dl [data]="testData" [marginBottom]="'xl'" [columns]="2" />
-
-		<fudis-grid [columns]="columns">
-			<fudis-heading tag="h2" size="md"
-				>And here below is a Fudis Grid where DL item is used as child component</fudis-heading
-			>
-			<fudis-dl [disableGrid]="true" [data]="lonelyDataItem" />
-			<fudis-body-text
-				>Item next to this Body Text is a lonely Description List component with only one list item. This and DL item
-				are both inside a Fudis Grid.</fudis-body-text
-			>
-		</fudis-grid>`,
+	</fudis-grid>`,
 	props: {
 		testData,
 		lonelyDataItem,
@@ -118,6 +111,11 @@ const TemplateWithDl: StoryFn = () => ({
 });
 
 export const DescriptionListItemInsideGrid = TemplateWithDl.bind({});
+DescriptionListItemInsideGrid.parameters = {
+	controls: {
+		exclude: /.*/g,
+	},
+};
 
 const DescriptionListWithSubComponentsTemplate: StoryFn<DescriptionListComponent> = (
 	args: DescriptionListComponent
