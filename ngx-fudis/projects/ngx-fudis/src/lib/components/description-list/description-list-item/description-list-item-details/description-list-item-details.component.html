@@ -1,0 +1,19 @@
+<dd class="fudis-dl__item__details fudis-dl-compact__item__details">
+	<span class="fudis-dl__item__details__sub-heading fudis-dl-compact__item__details__sub-heading" *ngIf="subHeading">
+		{{ subHeading }}
+	</span>
+	<div class="fudis-dl__item__details__content fudis-dl-compact__item__details__content">
+		<span class="fudis-dl__item__details__parenthesis fudis-dl-compact__item__details__parenthesis" *ngIf="subHeading"
+			>&nbsp;&#40;</span
+		><ng-content /><span
+			class="fudis-dl__item__details__parenthesis fudis-dl-compact__item__details__parenthesis"
+			*ngIf="subHeading"
+			>&#41;</span
+		>
+		<ng-container *ngIf="actions?.type === 'dd'">
+			<span class="fudis-dl__item__details__content__actions fudis-dl-compact__item__details__content__actions">
+				<ng-container *ngTemplateOutlet="actions!.templateRef" />
+			</span>
+		</ng-container>
+	</div>
+</dd>
