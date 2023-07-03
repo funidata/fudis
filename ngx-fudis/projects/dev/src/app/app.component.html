@@ -151,12 +151,24 @@
 
 		<fudis-footer logoAltText="Link to Funidata homepage">
 			<ng-template fudisFooterRight>
-				<fudis-link [href]="'example.com'" [linkTitle]="'Tietosuojaseloste'" [isExternalLink]="true" />
-				<fudis-link [href]="'example.com'" [linkTitle]="'Saavutettavuusseloste'" [isExternalLink]="true" />
-				<fudis-link [href]="'example.com'" [linkTitle]="'Järjestelmätiedot'" [isExternalLink]="true" />
+				<fudis-link
+					[href]="'example.com'"
+					[linkTitle]="'Tietosuojaseloste'"
+					[isExternalLink]="true"
+					externalLinkAriaLabel="link to external source" />
+				<fudis-link
+					[href]="'example.com'"
+					[linkTitle]="'Saavutettavuusseloste'"
+					[isExternalLink]="true"
+					externalLinkAriaLabel="link to external source" />
+				<fudis-link [href]="'example.com'" [linkTitle]="'Järjestelmätiedot'" />
 			</ng-template>
 			<ng-template fudisFooterLeft>
-				<fudis-link [href]="'example.com'" [linkTitle]="'Promo link'" [isExternalLink]="true" />
+				<fudis-link
+					[href]="'example.com'"
+					[linkTitle]="'Promo link'"
+					[isExternalLink]="true"
+					externalLinkAriaLabel="link to external source" />
 			</ng-template>
 		</fudis-footer>
 	</div>

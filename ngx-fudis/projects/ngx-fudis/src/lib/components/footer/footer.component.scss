@@ -10,6 +10,7 @@
 	@include utilities.box-reset();
 	@include colorMixins.bg-color('gray-extra-light');
 
+	margin-top: spacing.$spacing-xxl;
 	position: relative;
 	text-align: center;
 

@@ -1,0 +1,32 @@
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import { linkTo } from '@storybook/addon-links';
+import { FooterComponent } from './footer.component';
+import * as FooterComponentStories from './footer.stories.ts';
+import { Source } from '@storybook/blocks';
+
+<Meta title="Components/Footer" />
+
+# Footer
+
+Fudis footer is designed to be used with content projection in listing [Fudis Link's](/docs/components-link--link) in a bottom of the page. Through content projection it's easier for developers to change related links depending on the application.
+By using directives `fudisFooterRight` or `fudisFooterLeft`, developers can determine which side of the footer links are displayed.
+The only fixed element in Fudis Footer is Funidata logo with a link to Funidata's homepage.
+This logo holds an mandatory image alt-text that can be changed with `logoAltText` when the application language changes.
+
+<Canvas of={FooterComponentStories.Footer} />
+
+### Accessibility
+
+- Fudis footer contains native footer element
+- All links to external source have `isExternalLink` set to true.
+- All links to external source have descriptive aria-label
+- Funidata logo has descriptive alt-text
+
+### Related components
+
+- [Link](/docs/components-link--link)
+- [Grid](/docs/components-grid-grid--example)
+
+## Properties
+
+<ArgTypes of={FooterComponent} />

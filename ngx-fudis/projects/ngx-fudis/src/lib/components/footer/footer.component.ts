@@ -16,8 +16,6 @@ export class FooterComponent {
 
 	@ContentChild(FooterContentRightDirective) contentRight: FooterContentRightDirective;
 
-	@Input() data: string[];
-
 	@Input() logoAltText: string;
 
 	_columns: FudisGridColumnsResponsive = { sm: 2 };
