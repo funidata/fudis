@@ -131,7 +131,7 @@ export const validateColumnInputArray = (inputs: Array<FudisGridResponsiveData>)
 	});
 };
 
-export const getGridInputValues = (value: string): string => {
+export const replaceFormInputWidthsToRem = (value: string): string => {
 	const inputXs: FudisGridFormInputWidth = 'inputXs';
 	const inputSm: FudisGridFormInputWidth = 'inputSm';
 	const inputMd: FudisGridFormInputWidth = 'inputMd';
@@ -157,7 +157,7 @@ export const getGridCssValue = (value: number | string, isGridItem?: boolean): s
 	if (value === 'stretch' && isGridItem) {
 		return '1/-1';
 	}
-	return getGridInputValues(value);
+	return replaceFormInputWidthsToRem(value);
 };
 
 /**
