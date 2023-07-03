@@ -14,6 +14,24 @@ import { FudisGridService } from '../grid-service/grid.service';
 	selector: '[fudisGrid]',
 })
 export class GridDirective extends GridApiDirective implements OnInit, OnChanges {
+	constructor(private _gridElement: ElementRef, gridService: FudisGridService) {
+		super();
+		this._gridService = gridService;
+		this._element = _gridElement.nativeElement;
+		this._gridDefaults = this._gridService.getGridDefaultValues();
+
+		/**
+		 * When screen is resized check and apply new rules for Grid columns
+		 */
+		effect(() => {
+			this._gridService.getBreakpointState();
+
+			if (typeof this._columns !== 'string' && typeof this._columns !== 'number') {
+				this.setColumns();
+			}
+		});
+	}
+
 	/**
 	 * Used to apply grid-template-columns values for the Grid
 	 */
@@ -36,21 +54,6 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 
 	private _gridDefaults: Signal<FudisGridAttributes | null>;
 
-	constructor(private _gridElement: ElementRef, gridService: FudisGridService) {
-		super();
-		this._gridService = gridService;
-		this._element = _gridElement.nativeElement;
-		this._gridDefaults = this._gridService.getGridDefaultValues();
-
-		/**
-		 * When screen is resized check and apply new rules for Grid columns
-		 */
-		effect(() => {
-			this._gridService.getBreakpointState();
-			this.setColumns();
-		});
-	}
-
 	private defineColumns(): void {
 		if (typeof this.columns === 'string') {
 			this._columns = this.columns;
@@ -63,9 +66,9 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		else if (!this.ignoreDefaults && this._gridDefaults()?.columns !== null) {
 			const combinedValues: FudisGridColumnsResponsive = { ...this._gridDefaults()!.columns, ...this.columns };
 
-			this._columns = getGridBreakpointDataArray(combinedValues);
+			this._columns = getGridBreakpointDataArray(combinedValues, gridColumnDefault);
 		} else {
-			this._columns = getGridBreakpointDataArray(this.columns);
+			this._columns = getGridBreakpointDataArray(this.columns, gridColumnDefault);
 		}
 	}
 
@@ -127,7 +130,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		if (this.columns) {
 			this.defineColumns();
 		} else if (!this.ignoreDefaults && this._gridDefaults()?.columns) {
-			this._columns = getGridBreakpointDataArray(this._gridDefaults()!.columns!);
+			this._columns = getGridBreakpointDataArray(this._gridDefaults()!.columns!, gridColumnDefault);
 		}
 		this.applyGridCss();
 	}
@@ -136,7 +139,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		if (this.columns) {
 			this.defineColumns();
 		} else if (!this.ignoreDefaults && this._gridDefaults()?.columns) {
-			this._columns = getGridBreakpointDataArray(this._gridDefaults()?.columns!);
+			this._columns = getGridBreakpointDataArray(this._gridDefaults()?.columns!, gridColumnDefault);
 		}
 		this.applyGridCss();
 	}
