@@ -11,6 +11,11 @@
 	@include colorMixins.bg-color('gray-extra-light');
 
 	position: relative;
+	text-align: center;
+
+	@include breakpoints.breakpoint('sm') {
+		text-align: initial;
+	}
 
 	fudis-link {
 		@include typography.text-link-m-typography;
@@ -22,52 +27,16 @@
 		bottom: 0;
 	}
 
-	&__left-side {
+	&__item {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		width: auto;
-
-		@include breakpoints.breakpoint('sm') {
-			align-items: flex-start;
-			justify-content: flex-start;
-		}
 
 		@include breakpoints.breakpoint('lg') {
 			flex-direction: row;
-			align-items: flex-start;
-			justify-content: flex-start;
 
 			&__logo {
 				margin-right: spacing.$spacing-md;
 			}
-		}
-
-		&__logo {
-			display: block;
-			background: url('../../assets/images/fd-logo.svg') no-repeat top center;
-			width: 8rem;
-			min-height: spacing.$spacing-lg;
-		}
-	}
-
-	&__right-side {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		width: auto;
-
-		@include breakpoints.breakpoint('sm') {
-			align-items: flex-end;
-			justify-content: flex-end;
-		}
-
-		@include breakpoints.breakpoint('lg') {
-			flex-direction: row;
-			align-items: flex-start;
-			justify-content: flex-end;
 
 			fudis-link {
 				&:not(:last-of-type) {

@@ -18,5 +18,7 @@ export class FooterComponent {
 
 	@Input() data: string[];
 
+	@Input() logoAltText: string;
+
 	_columns: FudisGridColumnsResponsive = { sm: 2 };
 }

@@ -7,13 +7,17 @@
 		[marginSides]="'responsive'"
 		[width]="'xxl'">
 		<ng-container *ngIf="contentLeft">
-			<div class="fudis-footer__left-side">
-				<div class="fudis-footer__left-side__logo"></div>
-				<ng-container *ngTemplateOutlet="contentLeft!.templateRef" /></div
-		></ng-container>
+			<fudis-grid-item [alignX]="{ xs: 'center', md: 'start' }" class="fudis-footer__item">
+				<a href="https://www.funidata.fi/" class="fudis-footer__item__logo"
+					><img src="fd-logo.svg" alt="{{ logoAltText }}"
+				/></a>
+				<ng-container *ngTemplateOutlet="contentLeft!.templateRef" />
+			</fudis-grid-item>
+		</ng-container>
 		<ng-container *ngIf="contentRight">
-			<div class="fudis-footer__right-side">
-				<ng-container *ngTemplateOutlet="contentRight!.templateRef" /></div
-		></ng-container>
+			<fudis-grid-item [alignX]="{ xs: 'center', md: 'end' }" class="fudis-footer__item">
+				<ng-container *ngTemplateOutlet="contentRight!.templateRef" />
+			</fudis-grid-item>
+		</ng-container>
 	</fudis-grid>
 </footer>

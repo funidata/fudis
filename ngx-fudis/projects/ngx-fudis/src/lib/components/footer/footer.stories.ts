@@ -9,7 +9,16 @@ export default {
 
 const Template: StoryFn = () => ({
 	template: `
-	<fudis-footer></fudis-footer>
+	<fudis-footer logoAltText="Link to Funidata homepage">
+		<ng-template fudisFooterRight>
+			<fudis-link [href]="'example.com'" [linkTitle]="'Tietosuojaseloste'" [isExternalLink]="true" />
+			<fudis-link [href]="'example.com'" [linkTitle]="'Saavutettavuusseloste'" [isExternalLink]="true" />
+			<fudis-link [href]="'example.com'" [linkTitle]="'Järjestelmätiedot'" [isExternalLink]="true" />
+		</ng-template>
+		<ng-template fudisFooterLeft>
+			<fudis-link [href]="'example.com'" [linkTitle]="'Promo link'" [isExternalLink]="true" />
+		</ng-template>
+</fudis-footer>
 	`,
 });
 
