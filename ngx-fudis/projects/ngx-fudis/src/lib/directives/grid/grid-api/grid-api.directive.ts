@@ -5,6 +5,7 @@ import {
 	FudisGridGap,
 	FudisGridAlign,
 	FudisGridAlignItems,
+	FudisGridColumnsResponsive,
 } from '../../../types/grid';
 import { FudisSpacing } from '../../../types/miscellaneous';
 
@@ -72,4 +73,17 @@ export class GridApiDirective {
 	 * To make Grid ignore default values defined by application and FudisGridService
 	 */
 	@Input() ignoreDefaults: boolean = false;
+
+	/**
+	 * Setting of columns for the grid. Input will be converted to native CSS grid grid-template-columns values
+	 * E. g. as native string: [columns]="'1fr 1fr'" or [columns]="'1fr 2fr'"
+	 * E. g. as number [columns]="6", which converts to 'repeat(6, 1fr)'
+	 *
+	 * For responsive grid behavior, provide GridColumns object.
+	 * E. g. [columns]="{md: 2, xl: 3}".
+	 * Before md breakpoint Grid has default of '1fr' columns.
+	 * After md breakpoint it will have two columns 'repeat(2, 1fr)'
+	 * And after xl breakpoint 'repeat(3, 1fr)'
+	 */
+	@Input() columns: string | number | FudisGridColumnsResponsive;
 }

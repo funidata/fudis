@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnChanges, OnInit, Signal, effect } from '@angular/core';
+import { Directive, ElementRef, OnChanges, OnInit, Signal, effect } from '@angular/core';
 
 import { getGridBreakpointDataArray, getGridClasses, getGridCssValue } from '../gridUtils';
 import { GridApiDirective } from '../grid-api/grid-api.directive';
@@ -35,19 +35,6 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	private _gridService: FudisGridService;
 
 	private _gridDefaults: Signal<FudisGridAttributes | null>;
-
-	/**
-	 * Setting of columns for the grid. Input will be converted to native CSS grid grid-template-columns values
-	 * E. g. as native string: [columns]="'1fr 1fr'" or [columns]="'1fr 2fr'"
-	 * E. g. as number [columns]="6", which converts to 'repeat(6, 1fr)'
-	 *
-	 * For responsive grid behavior, provide GridColumns object.
-	 * E. g. [columns]="{md: 2, xl: 3}".
-	 * Before md breakpoint Grid has default of '1fr' columns.
-	 * After md breakpoint it will have two columns 'repeat(2, 1fr)'
-	 * And after xl breakpoint 'repeat(3, 1fr)'
-	 */
-	@Input() columns: string | number | FudisGridColumnsResponsive;
 
 	constructor(private _gridElement: ElementRef, gridService: FudisGridService) {
 		super();

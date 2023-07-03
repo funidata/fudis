@@ -70,6 +70,9 @@ import { TextInputComponent } from './components/form/text-input/text-input.comp
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
+import { DescriptionListItemComponent } from './components/description-list/description-list-item/description-list-item.component';
+import { DescriptionListItemTermComponent } from './components/description-list/description-list-item/description-list-item-term/description-list-item-term.component';
+import { DescriptionListItemDetailsComponent } from './components/description-list/description-list-item/description-list-item-details/description-list-item-details.component';
 import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
 import { FudisTranslationConfigService } from './utilities/config.service';
 
@@ -88,6 +91,9 @@ import { FudisTranslationConfigService } from './utilities/config.service';
 		DatepickerComponent,
 		DatepickerCustomHeaderComponent,
 		DescriptionListComponent,
+		DescriptionListItemComponent,
+		DescriptionListItemTermComponent,
+		DescriptionListItemDetailsComponent,
 		DialogTitleDirective,
 		DialogComponent,
 		DialogActionsDirective,
@@ -124,6 +130,9 @@ import { FudisTranslationConfigService } from './utilities/config.service';
 		TextSpacingComponent,
 		TextAreaComponent,
 		TooltipDirective,
+		ContentDirective,
+		ActionsDirective,
+
 		NotificationsDirective,
 	],
 	/*
@@ -163,6 +172,9 @@ import { FudisTranslationConfigService } from './utilities/config.service';
 		ContentDirective,
 		DatepickerComponent,
 		DescriptionListComponent,
+		DescriptionListItemComponent,
+		DescriptionListItemTermComponent,
+		DescriptionListItemDetailsComponent,
 		DialogComponent,
 		DropdownComponent,
 		DropdownMenuComponent,
