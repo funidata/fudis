@@ -9,6 +9,7 @@ import {
 	ViewChild,
 	ViewEncapsulation,
 	effect,
+	HostListener,
 } from '@angular/core';
 import { InputBaseDirective } from '../../directives/form/input-base/input-base.directive';
 import { FudisDropdownOption, FudisInputWidth } from '../../types/forms';
@@ -94,6 +95,47 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	 */
 	protected _results: FudisDropdownOption[] = [];
 
+	@HostListener('window:keydown.arrowDown', ['$event'])
+	@HostListener('window:keydown.arrowUp', ['$event'])
+	@HostListener('window:keydown.Escape', ['$event'])
+	handleKeyDown(event: KeyboardEvent) {
+		event.preventDefault();
+		const dropdownMenuElement = this.wrapper.nativeElement.children[2];
+
+		const wrapperInput = this.wrapper.nativeElement.querySelector(
+			'.fudis-autocomplete-multi-select__input-wrapper__input'
+		);
+
+		const checkboxInput = dropdownMenuElement.querySelector('.fudis-dropdown-menu-item__checkbox__input');
+
+		// TODO Näppäinnavigointi toimimaan myös chevron napista
+		if (wrapperInput === document.activeElement) {
+			checkboxInput.focus();
+		} else if (wrapperInput !== document.activeElement) {
+			this.handleCheckboxFocus(event);
+		}
+	}
+
+	// eslint-disable-next-line class-methods-use-this
+	handleCheckboxFocus(event: any) {
+		const parent = event.target.closest('fudis-dropdown-menu-item');
+
+		// eslint-disable-next-line default-case
+		switch (event.key) {
+			case 'ArrowDown':
+				event.preventDefault();
+				parent.nextElementSibling?.querySelector('input').focus();
+				break;
+			case 'ArrowUp':
+				event.preventDefault();
+				parent.previousElementSibling?.querySelector('input').focus();
+				break;
+			case 'Escape':
+				this._toggleOn = false;
+			// TODO Mihin focus? Jos inputtiin niin dropdown aukeaa
+		}
+	}
+
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('autocompleteMultiSelect');
 		this._results = [...this.options];
@@ -108,6 +150,12 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	handleInputClick(): void {
 		this._toggleOn = !this._toggleOn;
 		this._clickService.setMenuStatus(this._toggleOn);
+	}
+
+	// eslint-disable-next-line class-methods-use-this
+	handleOnBlur(event: FocusEvent): void {
+		// TODO blur händläys
+		console.log(event);
 	}
 
 	selectItem(item: FudisDropdownOption): void {
@@ -129,6 +177,7 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	}
 
 	doSearch(event: any): void {
+		this._toggleOn = true;
 		this._filterText = event.target.value;
 
 		this._results = this.options.filter((option) =>

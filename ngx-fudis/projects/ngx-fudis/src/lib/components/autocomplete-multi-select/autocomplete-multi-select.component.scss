@@ -48,6 +48,7 @@
 }
 
 .fudis-dropdown-menu {
+	// TODO Dropdownin leveyden säätäminen input-kentän mukaiseksi (katso myös getMaxWidth)
 	max-width: spacing.$spacing-input-lg;
 	max-height: calc(spacing.$spacing-xxl * 4);
 	overflow: auto;

@@ -42,9 +42,15 @@ export class DropdownMenuItemComponent {
 	@Output() handleClick = new EventEmitter<Event>();
 
 	/**
-	 * Output for dropdown-menu-item with checkbox
+	 * Output for handling checked state in dropdown-menu-item with checkbox
 	 */
 	@Output() handleChecked = new EventEmitter<boolean>();
+
+	/**
+	 * Output for checkbox blur
+	 */
+	// TODO autocompleten blur händläys sekamelska
+	@Output() handleCheckboxBlur = new EventEmitter<FocusEvent>();
 
 	// eslint-disable-next-line class-methods-use-this
 	handleKeyDown(event: KeyboardEvent) {

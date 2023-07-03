@@ -22,7 +22,8 @@
 				type="checkbox"
 				class="fudis-dropdown-menu-item__checkbox__input"
 				[attr.aria-checked]="checked"
-				(click)="handleChecked.emit()" />
+				(click)="handleChecked.emit()"
+				(blur)="handleCheckboxBlur.emit($event)" />
 			<svg
 				*ngIf="checked"
 				width="100%"
