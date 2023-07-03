@@ -1,5 +1,6 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-console */
-import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, DestroyRef, Inject, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import {
@@ -9,8 +10,7 @@ import {
 	FudisGridService,
 } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
-
-import { Subject, takeUntil } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisDropdownOption, FudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 
@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
 		autocompleteSearch: new FormControl<FudisDropdownOption | null>(null),
 	});
 
-	private destroyed = new Subject<void>();
+	private _destroyRef = inject(DestroyRef);
 
 	constructor(
 		@Inject(DOCUMENT) private document: Document,
@@ -99,7 +99,7 @@ export class AppComponent implements OnInit {
 
 		this.translocoService
 			.selectTranslateObject('options')
-			.pipe(takeUntil(this.destroyed))
+			.pipe(takeUntilDestroyed(this._destroyRef))
 			.subscribe((value) => {
 				this.radioButtonOptions = [
 					{ value: true, viewValue: value.chooseTruthTrue, id: 'boolean-2', name: 'booleans' },
@@ -109,7 +109,7 @@ export class AppComponent implements OnInit {
 
 		this.translocoService
 			.selectTranslation()
-			.pipe(takeUntil(this.destroyed))
+			.pipe(takeUntilDestroyed(this._destroyRef))
 			.subscribe(() => {
 				if (this.errorSummaryVisible) {
 					setTimeout(() => {

@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DateAdapter, MatDateFormats, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatCalendar } from '@angular/material/datepicker';
-import { Subject, takeUntil } from 'rxjs';
 
 /**
  * NOTE: At the moment this custom header is not in use but left the code here for possible future reference
@@ -17,16 +17,14 @@ import { Subject, takeUntil } from 'rxjs';
 	styleUrls: ['./datepicker-custom-header.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DatepickerCustomHeaderComponent<D> implements OnDestroy, OnInit {
-	private _destroyed = new Subject<void>();
-
+export class DatepickerCustomHeaderComponent<D> implements OnInit {
 	constructor(
 		private _calendar: MatCalendar<D>,
 		private _dateAdapter: DateAdapter<D>,
 		@Inject(MAT_DATE_FORMATS) private _dateFormats: MatDateFormats,
 		cdr: ChangeDetectorRef
 	) {
-		_calendar.stateChanges.pipe(takeUntil(this._destroyed)).subscribe(() => cdr.markForCheck());
+		_calendar.stateChanges.pipe(takeUntilDestroyed()).subscribe(() => cdr.markForCheck());
 	}
 
 	ngOnInit() {
@@ -36,11 +34,6 @@ export class DatepickerCustomHeaderComponent<D> implements OnDestroy, OnInit {
 		this._dateAdapter.getFirstDayOfWeek = () => {
 			return 1;
 		};
-	}
-
-	ngOnDestroy() {
-		this._destroyed.next();
-		this._destroyed.complete();
 	}
 
 	get periodLabel() {
