@@ -3,6 +3,7 @@ import {
 	FudisGridColumnsResponsive,
 	FudisGridResponsiveData,
 	FudisGridAttributes,
+	FudisGridFormInputWidth,
 } from '../../types/grid';
 
 /**
@@ -130,6 +131,19 @@ export const validateColumnInputArray = (inputs: Array<FudisGridResponsiveData>)
 	});
 };
 
+export const getGridInputValues = (value: string): string => {
+	const inputXs: FudisGridFormInputWidth = 'inputXs';
+	const inputSm: FudisGridFormInputWidth = 'inputSm';
+	const inputMd: FudisGridFormInputWidth = 'inputMd';
+	const inputLg: FudisGridFormInputWidth = 'inputLg';
+
+	return value
+		.replaceAll(inputXs, '4rem')
+		.replaceAll(inputSm, '10rem')
+		.replaceAll(inputMd, '14rem')
+		.replaceAll(inputLg, '23rem');
+};
+
 /**
  * Utility function to convert parameters to either Grid CSS value 'grid-column-template' or CSS grid item value 'grid-column'
  */
@@ -143,7 +157,7 @@ export const getGridCssValue = (value: number | string, isGridItem?: boolean): s
 	if (value === 'stretch' && isGridItem) {
 		return '1/-1';
 	}
-	return value;
+	return getGridInputValues(value);
 };
 
 /**

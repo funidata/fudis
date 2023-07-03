@@ -1,6 +1,6 @@
 import { Directive, ElementRef, OnChanges, OnInit, Signal, effect } from '@angular/core';
 
-import { getGridBreakpointDataArray, getGridClasses, getGridCssValue } from '../gridUtils';
+import { getGridBreakpointDataArray, getGridClasses, getGridCssValue, getGridInputValues } from '../gridUtils';
 import { GridApiDirective } from '../grid-api/grid-api.directive';
 import {
 	FudisGridColumnsResponsive,
@@ -56,7 +56,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 
 	private defineColumns(): void {
 		if (typeof this.columns === 'string') {
-			this._columns = this.columns;
+			this._columns = getGridInputValues(this.columns);
 		}
 		// If value is number, convert it to grid-template-column value. E. g. number 6 converts to 'repeat(6,1fr)'
 		else if (typeof this.columns === 'number') {

@@ -69,7 +69,7 @@ import { FormComponent } from './form.component';
 										</fudis-notification>
 									</ng-template>
 									<ng-template fudisContent type="fieldset">
-										<fudis-grid [columns]="{ lg: 2 }" [width]="'xl'">
+										<fudis-grid [columns]="{ lg: 'inputLg inputLg' }" [width]>
 											<fudis-input-with-language-options
 												[missingLanguage]="'Missing'"
 												[id]="'unique-input-1'"
