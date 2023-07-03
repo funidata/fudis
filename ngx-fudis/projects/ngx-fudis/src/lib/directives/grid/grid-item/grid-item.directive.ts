@@ -2,10 +2,9 @@ import { Directive, ElementRef, OnChanges, OnInit, Input, effect } from '@angula
 import { FudisGridService } from '../grid-service/grid.service';
 import {
 	FudisGridResponsiveData,
-	GridItemAlignment,
-	GridItemAlignmentResponsive,
-	GridItemResponsive,
-	GridItemWidth,
+	FudisGridItemAlignment,
+	FudisGridItemAlignResponsive,
+	FudisGridItemWidth,
 	gridItemDefault,
 } from '../../../types/grid';
 import { getGridBreakpointDataArray, getGridCssValue } from '../gridUtils';
@@ -37,14 +36,14 @@ export class GridItemDirective implements OnInit, OnChanges {
 	 */
 	private _columns: string | FudisGridResponsiveData[] = gridItemDefault;
 
-	private _alignX: GridItemAlignment | FudisGridResponsiveData[] = 'stretch';
+	private _alignX: FudisGridItemAlignment | FudisGridResponsiveData[] = 'stretch';
 
 	/**
 	 * Internal reference for the this Grid Item element
 	 */
 	private _element: HTMLElement;
 
-	@Input() set columns(value: GridItemWidth | GridItemResponsive) {
+	@Input() set columns(value: FudisGridItemWidth | FudisGridItemAlignResponsive) {
 		// Convert given string value to proper CSS grid-column value
 		if (typeof value === 'string') {
 			this._columns = getGridCssValue(value, true);
@@ -62,12 +61,12 @@ export class GridItemDirective implements OnInit, OnChanges {
 	/**
 	 * Align Grid Item vertically
 	 */
-	@Input() alignY: GridItemAlignment = 'stretch';
+	@Input() alignY: FudisGridItemAlignment = 'stretch';
 
 	/**
 	 * Align Grid Item horizontally
 	 */
-	@Input() set alignX(value: GridItemAlignment | GridItemAlignmentResponsive) {
+	@Input() set alignX(value: FudisGridItemAlignment | FudisGridItemAlignResponsive) {
 		if (typeof value === 'string') {
 			this._alignX = value;
 		} else {
