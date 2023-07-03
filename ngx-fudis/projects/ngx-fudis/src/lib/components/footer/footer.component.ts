@@ -1,4 +1,4 @@
-import { Component, ContentChild, Input } from '@angular/core';
+import { Component, ContentChild, Input, ViewEncapsulation } from '@angular/core';
 import { FudisGridColumnsResponsive } from '../../types/grid';
 import {
 	FooterContentLeftDirective,
@@ -9,6 +9,7 @@ import {
 	selector: 'fudis-footer',
 	templateUrl: './footer.component.html',
 	styleUrls: ['./footer.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class FooterComponent {
 	@ContentChild(FooterContentLeftDirective) contentLeft: FooterContentLeftDirective;

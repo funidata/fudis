@@ -7,9 +7,14 @@
 @use '../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-footer {
-	@include colorMixins.bg-color('gray-extra-light');
 	@include utilities.box-reset();
+	@include colorMixins.bg-color('gray-extra-light');
+
 	position: relative;
+
+	fudis-link {
+		@include typography.text-link-m-typography;
+	}
 
 	&__content {
 		padding-top: spacing.$spacing-sm;
@@ -29,6 +34,16 @@
 			justify-content: flex-start;
 		}
 
+		@include breakpoints.breakpoint('lg') {
+			flex-direction: row;
+			align-items: flex-start;
+			justify-content: flex-start;
+
+			&__logo {
+				margin-right: spacing.$spacing-md;
+			}
+		}
+
 		&__logo {
 			display: block;
 			background: url('../../assets/images/fd-logo.svg') no-repeat top center;
@@ -44,26 +59,21 @@
 		justify-content: center;
 		width: auto;
 
-		fudis-link .fudis-link {
-			background-color: red;
-		}
-
 		@include breakpoints.breakpoint('sm') {
 			align-items: flex-end;
 			justify-content: flex-end;
 		}
 
-		@include breakpoints.breakpoint('md') {
+		@include breakpoints.breakpoint('lg') {
 			flex-direction: row;
 			align-items: flex-start;
 			justify-content: flex-end;
 
-			// .fudis-link {
-			// 	background-color: red;
-			// 	&:not(:last-of-type) {
-			// 		margin-right: spacing.$spacing-md;
-			// 	}
-			// }
+			fudis-link {
+				&:not(:last-of-type) {
+					margin-right: spacing.$spacing-md;
+				}
+			}
 		}
 	}
 }
