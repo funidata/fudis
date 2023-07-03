@@ -2,8 +2,6 @@ import {
 	FudisBreakpointKey,
 	FudisGridColumnsResponsive,
 	FudisGridResponsiveData,
-	gridColumnDefault,
-	gridItemDefault,
 	FudisGridAttributes,
 } from '../../types/grid';
 
@@ -170,6 +168,7 @@ export const getGridCssValue = (value: number | string, isGridItem?: boolean): s
  */
 export const getGridBreakpointRules = (
 	values: FudisGridColumnsResponsive,
+	defaultValue: string,
 	isGridItem?: boolean
 ): FudisGridResponsiveData[] => {
 	const columnsArray: FudisGridResponsiveData[] = [];
@@ -177,7 +176,7 @@ export const getGridBreakpointRules = (
 	if (!values.default) {
 		columnsArray.push({
 			name: 'default',
-			value: isGridItem ? gridItemDefault : gridColumnDefault,
+			value: defaultValue,
 			breakpoint: gridBreakpointsMinWidth.default,
 		});
 	}
@@ -202,9 +201,10 @@ export const getGridBreakpointRules = (
  */
 export const getGridBreakpointDataArray = (
 	value: FudisGridColumnsResponsive,
+	defaultValue: string,
 	isGridItem?: boolean
 ): FudisGridResponsiveData[] => {
-	const columnsArray: FudisGridResponsiveData[] = getGridBreakpointRules(value, isGridItem);
+	const columnsArray: FudisGridResponsiveData[] = getGridBreakpointRules(value, defaultValue, isGridItem);
 
 	const sortOrder: FudisBreakpointKey[] = ['default', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
 

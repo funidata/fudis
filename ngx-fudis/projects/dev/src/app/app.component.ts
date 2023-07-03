@@ -1,5 +1,6 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-console */
-import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, DestroyRef, Inject, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
 
 import { TranslocoService } from '@ngneat/transloco';
 import {
@@ -10,6 +11,7 @@ import {
 } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
 
+import { FudisDropdownOption } from 'dist/ngx-fudis/lib/types/forms';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 
 @Component({
@@ -21,6 +23,24 @@ export class AppComponent implements OnInit {
 	@ViewChild('exampleDialogTemplate', { static: true }) templateRef: TemplateRef<unknown>;
 
 	title = 'dev';
+
+	dropdownOptions: FudisDropdownOption[] = [
+		{ value: 'value-1-dog', viewValue: 'Dog' },
+		{ value: 'value-2-capybara', viewValue: 'Capybara' },
+		{ value: 'value-3-platypys', viewValue: 'Platypus' },
+		{ value: 'value-4-cat', viewValue: 'Cat, disabled for demo purposes', disabled: true },
+		{ value: 'value-5-armadillo', viewValue: 'Screaming hairy armadillo' },
+		{ value: 'value-6-gecko', viewValue: 'Southern Titiwangsa Bent-Toed Gecko' },
+	];
+
+	multipleOptions = Array.from({ length: 1000 }).map((value, i) => {
+		return {
+			value: i,
+			viewValue: `Item number ${i}`,
+		};
+	});
+
+	private _destroyRef = inject(DestroyRef);
 
 	constructor(
 		@Inject(DOCUMENT) private document: Document,
@@ -35,11 +55,11 @@ export class AppComponent implements OnInit {
 			marginSides: 'responsive',
 		});
 
-		// fudisConfig.setConfig({
-		// 	datepicker: { closeLabel: 'Close calendar' },
-		// 	requiredText: 'Required',
-		// 	language: 'en',
-		// });
+		fudisConfig.setConfig({
+			datepicker: { closeLabel: this.translocoService.selectTranslate('closeCalendar') },
+			requiredText: this.translocoService.selectTranslate('required'),
+			appLanguage: 'en',
+		});
 	}
 
 	ngOnInit(): void {
@@ -47,12 +67,6 @@ export class AppComponent implements OnInit {
 		this.translocoService.setActiveLang('fi');
 
 		this.document.documentElement.lang = 'fi';
-
-		this.fudisConfig.setConfig({
-			appLanguage: this.document.documentElement.lang,
-			requiredText: this.translocoService.selectTranslate('required'),
-			datepicker: { closeLabel: this.translocoService.selectTranslate('closeCalendar') },
-		});
 	}
 
 	changeLanguage(): void {

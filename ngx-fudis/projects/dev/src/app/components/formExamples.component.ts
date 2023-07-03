@@ -94,7 +94,7 @@ export class AppFormExampleComponent implements OnInit {
 		dropdown: new FormControl<FudisDropdownOption | null>(this.dropdownOptions[2]),
 		textInput: new FormControl<string | null>(null, Validators.required),
 		truth: new FormControl<boolean | null>(null, Validators.required),
-		date: new FormControl<Date | null>(null),
+		date: new FormControl<Date | null>(null, Validators.required),
 		autocompleteDropdown: new FormControl<FudisDropdownOption | null>(null, Validators.required),
 		autocompleteSearch: new FormControl<FudisDropdownOption | null>(null),
 	});

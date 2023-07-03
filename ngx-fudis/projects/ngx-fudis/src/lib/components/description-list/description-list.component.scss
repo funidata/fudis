@@ -4,10 +4,14 @@
 @use '../../foundations/colors/tokens.scss' as color;
 @use '../../foundations/spacing/tokens.scss' as spacing;
 @use '../../foundations/breakpoints/mixins.scss' as breakpoint;
-@forward '../grid/grid/grid.component.scss';
+@use '../../foundations/utilities/mixins.scss' as utilities;
 
-.fudis-description-list {
+.fudis-dl {
+	box-sizing: border-box;
+
 	&__disabled-grid {
+		@include utilities.box-reset;
+
 		columns: 1;
 
 		&__item {
@@ -23,33 +27,56 @@
 		}
 	}
 
-	&__item {
-		&__key {
+	& &__item {
+		@include utilities.box-reset;
+
+		display: inline-block;
+
+		&__term {
 			@include typography.description-list-key-typography;
 			@include colorMixins.text-color('gray-dark');
 
 			margin-bottom: spacing.$spacing-xs;
 		}
 
-		&__value {
+		&__details {
 			@include typography.description-list-value-typography;
 			@include colorMixins.text-color('gray-dark');
 
+			display: flex;
+			flex-direction: column;
 			margin-left: 0;
-		}
 
-		&__sub-heading {
-			@include colorMixins.text-color('gray-dark');
+			&__content {
+				display: flex;
+				flex-direction: column;
 
-			margin-top: 0;
-			margin-bottom: spacing.$spacing-xxs;
-			font-weight: typographyTokens.$font-weight-regular;
+				&__actions {
+					margin-top: spacing.$spacing-xs;
+				}
+			}
+
+			&__parenthesis {
+				display: none;
+			}
+
+			&__sub-heading {
+				@include colorMixins.text-color('gray-dark');
+
+				margin-top: 0;
+				margin-bottom: spacing.$spacing-xxs;
+				font-weight: typographyTokens.$font-weight-regular;
+			}
 		}
 	}
 }
 
-.fudis-description-list-compact {
+.fudis-dl-compact {
+	box-sizing: border-box;
+
 	&__disabled-grid {
+		@include utilities.box-reset;
+
 		columns: 1;
 
 		@include breakpoint.breakpoint('md') {
@@ -57,8 +84,10 @@
 		}
 	}
 
-	&__item {
-		&__key {
+	& &__item {
+		min-height: spacing.$spacing-md;
+
+		&__term {
 			@include typography.description-list-compact-key-typography;
 			@include colorMixins.text-color('gray-dark');
 
@@ -79,13 +108,25 @@
 			}
 		}
 
-		&__value {
+		&__details {
 			@include typography.description-list-compact-value-typography;
 			@include colorMixins.text-color('gray-dark');
 
-			display: inline;
+			display: inline-block;
 			margin-left: 0;
 			padding-left: spacing.$spacing-xxs;
+
+			&__content {
+				display: inline;
+			}
+
+			&__parenthesis {
+				display: initial;
+			}
+
+			&__sub-heading {
+				@include utilities.box-reset;
+			}
 		}
 	}
 }

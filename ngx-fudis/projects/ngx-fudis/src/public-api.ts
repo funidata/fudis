@@ -23,6 +23,9 @@ export {
 export { DialogComponent } from './lib/components/dialog/dialog.component';
 
 export { DescriptionListComponent } from './lib/components/description-list/description-list.component';
+export { DescriptionListItemComponent } from './lib/components/description-list/description-list-item/description-list-item.component';
+export { DescriptionListItemDetailsComponent } from './lib/components/description-list/description-list-item/description-list-item-details/description-list-item-details.component';
+export { DescriptionListItemTermComponent } from './lib/components/description-list/description-list-item/description-list-item-term/description-list-item-term.component';
 export { FudisDialogService } from './lib/components/dialog/dialog.service';
 export { FudisTranslationConfigService } from './lib/utilities/config.service';
 export { DropdownComponent } from './lib/components/form/dropdown/dropdown.component';

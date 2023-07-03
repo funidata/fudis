@@ -11,7 +11,7 @@ export class ActionsDirective {
 	/**
 	 * To component type to protect wrong content projection to nested components
 	 */
-	@Input({ required: true }) type: 'fieldset' | 'expandable' | 'form';
+	@Input({ required: true }) type: 'fieldset' | 'expandable' | 'form' | 'dd';
 
 	/**
 	 * Alignment of actions container, used in Fieldset Component
