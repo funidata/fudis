@@ -104,6 +104,49 @@
 					</fudis-grid>
 				</ng-template>
 			</fudis-expandable>
+			<fudis-expandable [title]="'Description list'">
+				<ng-template fudisContent type="expandable">
+					<fudis-description-list [data]="testData"></fudis-description-list>
+				</ng-template>
+			</fudis-expandable>
+
+			<fudis-expandable [title]="'Grid stuff'">
+				<ng-template fudisContent type="expandable">
+					<fudis-heading [tag]="'h3'" [size]="'xl'">Väliotsikko</fudis-heading>
+					<fudis-grid>
+						<fudis-body-text>Showcase of grid items</fudis-body-text>
+						<fudis-body-text>Showcase of grid items</fudis-body-text>
+						<fudis-body-text>Showcase of grid items</fudis-body-text>
+						<fudis-body-text>Showcase of grid items</fudis-body-text>
+						<fudis-body-text>Showcase of grid items</fudis-body-text>
+						<fudis-body-text>Showcase of grid items</fudis-body-text>
+					</fudis-grid>
+				</ng-template>
+			</fudis-expandable>
+
+			<fudis-expandable [title]="'Autocomplete examples'">
+				<ng-template fudisContent type="expandable">
+					<fudis-grid>
+						<fudis-heading [tag]="'h3'" [size]="'xl'">Single-select dropdown</fudis-heading>
+						<fudis-autocomplete
+							[label]="'Choose item'"
+							[clearFilterText]="'Clear'"
+							[variant]="'dropdown'"
+							[id]="'dropdown-1234'"
+							[options]="multipleOptions"
+							[requiredText]="'Required'"
+							[control]="testFormGroup.controls['autocompleteDropdown']"
+							[errorMsg]="{ required: t('error_required') }"></fudis-autocomplete>
+						<fudis-heading [tag]="'h3'" [size]="'xl'">Single-select search</fudis-heading>
+						<fudis-autocomplete
+							[label]="'Search item'"
+							[clearFilterText]="'Clear'"
+							[options]="multipleOptions"
+							[control]="testFormGroup.controls['autocompleteSearch']"
+							[errorMsg]="{ required: t('error_required') }"></fudis-autocomplete>
+					</fudis-grid>
+				</ng-template>
+			</fudis-expandable>
 		</fudis-grid>
 
 		<fudis-footer>

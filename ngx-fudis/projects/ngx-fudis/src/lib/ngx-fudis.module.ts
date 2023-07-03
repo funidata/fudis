@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ActionsDirective } from './directives/content-projection/actions/actions.directive';
 import { AutocompleteComponent } from './components/form/autocomplete/autocomplete.component';
 import { BadgeComponent } from './components/badge/badge.component';
@@ -73,9 +74,12 @@ import { TextInputComponent } from './components/form/text-input/text-input.comp
 import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
+import { DescriptionListItemComponent } from './components/description-list/description-list-item/description-list-item.component';
+import { DescriptionListItemTermComponent } from './components/description-list/description-list-item/description-list-item-term/description-list-item-term.component';
+import { DescriptionListItemDetailsComponent } from './components/description-list/description-list-item/description-list-item-details/description-list-item-details.component';
 import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
-import { FudisConfigService } from './utilities/config.service';
 import { FooterComponent } from './components/footer/footer.component';
+import { FudisTranslationConfigService } from './utilities/config.service';
 
 @NgModule({
 	/*
@@ -92,6 +96,9 @@ import { FooterComponent } from './components/footer/footer.component';
 		DatepickerComponent,
 		DatepickerCustomHeaderComponent,
 		DescriptionListComponent,
+		DescriptionListItemComponent,
+		DescriptionListItemTermComponent,
+		DescriptionListItemDetailsComponent,
 		DialogTitleDirective,
 		DialogComponent,
 		DialogActionsDirective,
@@ -130,6 +137,9 @@ import { FooterComponent } from './components/footer/footer.component';
 		TextSpacingComponent,
 		TextAreaComponent,
 		TooltipDirective,
+		ContentDirective,
+		ActionsDirective,
+
 		NotificationsDirective,
 		FooterComponent,
 	],
@@ -152,6 +162,7 @@ import { FooterComponent } from './components/footer/footer.component';
 		MatTooltipModule,
 		ReactiveFormsModule,
 		RouterModule,
+		ScrollingModule,
 	],
 
 	/*
@@ -169,6 +180,9 @@ import { FooterComponent } from './components/footer/footer.component';
 		ContentDirective,
 		DatepickerComponent,
 		DescriptionListComponent,
+		DescriptionListItemComponent,
+		DescriptionListItemTermComponent,
+		DescriptionListItemDetailsComponent,
 		DialogComponent,
 		DropdownComponent,
 		DropdownMenuComponent,
@@ -209,7 +223,7 @@ import { FooterComponent } from './components/footer/footer.component';
 		FudisGridService,
 		FudisDropdownMenuItemService,
 		FudisIdService,
-		FudisConfigService,
+		FudisTranslationConfigService,
 	],
 })
 export class NgxFudisModule {}
