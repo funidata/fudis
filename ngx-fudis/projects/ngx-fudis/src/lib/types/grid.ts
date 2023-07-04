@@ -94,16 +94,25 @@ export const gridItemDefault = 'auto';
 /**
  * Alignment of Grid Item inside Grid
  */
-export type GridItemAlignment = 'start' | 'end' | 'center' | 'stretch';
+export type FudisGridItemAlignment = 'start' | 'end' | 'center' | 'stretch';
+
+/**
+ * Alignment of Grid Item inside Grid for varying breakpoints
+ */
+export type FudisGridItemAlignResponsive = {
+	[K in FudisBreakpointKey]?: FudisGridItemAlignment;
+};
 
 /**
  * Input value for width of Grid Item
  */
-export type GridItemWidth = number | string | 'stretch' | 'auto';
+export type FudisGridItemWidth = number | string | 'stretch' | 'auto';
 
 /**
  * Input object from application to provide responsive settings for different breakpoints for Grid Item
  */
-export type GridItemResponsive = {
-	[K in FudisBreakpointKey]?: GridItemWidth;
+export type FudisGridItemColumnsResponsive = {
+	[K in FudisBreakpointKey]?: FudisGridItemWidth;
 };
+
+export type FudisGridFormInputWidth = 'inputXs' | 'inputSm' | 'inputMd' | 'inputLg';

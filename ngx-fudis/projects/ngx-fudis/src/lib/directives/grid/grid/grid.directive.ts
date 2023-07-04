@@ -1,6 +1,6 @@
-import { Directive, ElementRef, Input, OnChanges, OnInit, Signal, effect } from '@angular/core';
+import { Directive, ElementRef, OnChanges, OnInit, Signal, effect } from '@angular/core';
 
-import { getGridBreakpointDataArray, getGridClasses, getGridCssValue } from '../gridUtils';
+import { getGridBreakpointDataArray, getGridClasses, getGridCssValue, replaceFormInputWidthsToRem } from '../gridUtils';
 import { GridApiDirective } from '../grid-api/grid-api.directive';
 import {
 	FudisGridColumnsResponsive,
@@ -14,6 +14,24 @@ import { FudisGridService } from '../grid-service/grid.service';
 	selector: '[fudisGrid]',
 })
 export class GridDirective extends GridApiDirective implements OnInit, OnChanges {
+	constructor(private _gridElement: ElementRef, gridService: FudisGridService) {
+		super();
+		this._gridService = gridService;
+		this._element = _gridElement.nativeElement;
+		this._gridDefaults = this._gridService.getGridDefaultValues();
+
+		/**
+		 * When screen is resized check and apply new rules for Grid columns
+		 */
+		effect(() => {
+			this._gridService.getBreakpointState();
+
+			if (typeof this._columns !== 'string' && typeof this._columns !== 'number') {
+				this.setColumns();
+			}
+		});
+	}
+
 	/**
 	 * Used to apply grid-template-columns values for the Grid
 	 */
@@ -36,37 +54,9 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 
 	private _gridDefaults: Signal<FudisGridAttributes | null>;
 
-	/**
-	 * Setting of columns for the grid. Input will be converted to native CSS grid grid-template-columns values
-	 * E. g. as native string: [columns]="'1fr 1fr'" or [columns]="'1fr 2fr'"
-	 * E. g. as number [columns]="6", which converts to 'repeat(6, 1fr)'
-	 *
-	 * For responsive grid behavior, provide GridColumns object.
-	 * E. g. [columns]="{md: 2, xl: 3}".
-	 * Before md breakpoint Grid has default of '1fr' columns.
-	 * After md breakpoint it will have two columns 'repeat(2, 1fr)'
-	 * And after xl breakpoint 'repeat(3, 1fr)'
-	 */
-	@Input() columns: string | number | FudisGridColumnsResponsive;
-
-	constructor(private _gridElement: ElementRef, gridService: FudisGridService) {
-		super();
-		this._gridService = gridService;
-		this._element = _gridElement.nativeElement;
-		this._gridDefaults = this._gridService.getGridDefaultValues();
-
-		/**
-		 * When screen is resized check and apply new rules for Grid columns
-		 */
-		effect(() => {
-			this._gridService.getBreakpointState();
-			this.setColumns();
-		});
-	}
-
 	private defineColumns(): void {
 		if (typeof this.columns === 'string') {
-			this._columns = this.columns;
+			this._columns = replaceFormInputWidthsToRem(this.columns);
 		}
 		// If value is number, convert it to grid-template-column value. E. g. number 6 converts to 'repeat(6,1fr)'
 		else if (typeof this.columns === 'number') {
@@ -76,9 +66,9 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		else if (!this.ignoreDefaults && this._gridDefaults()?.columns !== null) {
 			const combinedValues: FudisGridColumnsResponsive = { ...this._gridDefaults()!.columns, ...this.columns };
 
-			this._columns = getGridBreakpointDataArray(combinedValues);
+			this._columns = getGridBreakpointDataArray(combinedValues, gridColumnDefault);
 		} else {
-			this._columns = getGridBreakpointDataArray(this.columns);
+			this._columns = getGridBreakpointDataArray(this.columns, gridColumnDefault);
 		}
 	}
 
@@ -140,7 +130,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		if (this.columns) {
 			this.defineColumns();
 		} else if (!this.ignoreDefaults && this._gridDefaults()?.columns) {
-			this._columns = getGridBreakpointDataArray(this._gridDefaults()!.columns!);
+			this._columns = getGridBreakpointDataArray(this._gridDefaults()!.columns!, gridColumnDefault);
 		}
 		this.applyGridCss();
 	}
@@ -149,7 +139,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		if (this.columns) {
 			this.defineColumns();
 		} else if (!this.ignoreDefaults && this._gridDefaults()?.columns) {
-			this._columns = getGridBreakpointDataArray(this._gridDefaults()?.columns!);
+			this._columns = getGridBreakpointDataArray(this._gridDefaults()?.columns!, gridColumnDefault);
 		}
 		this.applyGridCss();
 	}

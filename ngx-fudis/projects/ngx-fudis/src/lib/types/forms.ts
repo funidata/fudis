@@ -1,5 +1,7 @@
 import { FormControl } from '@angular/forms';
 
+import { Observable } from 'rxjs';
+
 export type FudisInputWidth = 'sm' | 'md' | 'lg';
 
 export interface FudisRadioButtonOption {
@@ -82,12 +84,27 @@ export interface FudisInputWithLanguageOptionsFormGroup {
 	[language: string]: FormControl<string | null>;
 }
 
-export interface FudisFormDatepickerConfig {
-	closeLabel: string;
-}
-
-export interface FudisFormConfig {
-	requiredText: string;
-	language: 'en' | 'fi' | 'sv';
-	datepicker: FudisFormDatepickerConfig;
+export interface FudisTranslationConfig {
+	// Shown with form inputs
+	requiredText?: Observable<string>;
+	// Used in e. g. to define Date picker language
+	appLanguage?: 'en' | 'fi' | 'sv' | string;
+	datepicker?: {
+		// Label for close button
+		closeLabel?: Observable<string>;
+	};
+	dialog?: {
+		// Label for close button
+		closeLabel?: Observable<string>;
+	};
+	inputWithLanguageOptions?: {
+		// Label for language selection dropdown
+		languageLabel?: Observable<string>;
+		// Text shown in dropdown options if input for a language is missing
+		missingLanguage?: Observable<string>;
+	};
+	icon?: {
+		// Alternative text for screen readers. Used in e. g. Error Summary
+		attention?: Observable<string>;
+	};
 }

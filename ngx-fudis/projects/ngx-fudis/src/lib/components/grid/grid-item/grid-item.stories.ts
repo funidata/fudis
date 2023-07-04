@@ -98,30 +98,32 @@ Example.argTypes = {
 };
 
 export const AlignX: StoryFn<GridItemComponent> = (args: any) => ({
-	props: args,
-	template: html`<fudis-grid [columns]="3">
+	props: { ...args, responsiveAlignX: "{ sm: 'start', md: 'end', lg: 'center' }" },
+	template: html`<fudis-grid [columns]="2">
 		<fudis-heading [tag]="'h1'" [size]="'lg'">This grid demonstrates attribute of 'alignX'</fudis-heading>
 		<fudis-grid-item class="grid-item-highlight">
 			<fudis-body-text>alignX = 'stretch' (default)</fudis-body-text>
 		</fudis-grid-item>
+
 		<fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
 		<fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
-		<fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
-		<fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
-		<fudis-grid-item class="grid-item-highlight" [alignX]="'start'"
+		<fudis-grid-item [alignX]="'start'" class="grid-item-highlight"
 			><fudis-body-text>alignX = 'start'</fudis-body-text></fudis-grid-item
 		>
 		<fudis-grid-item class="grid-item-highlight" [alignX]="'end'"
 			><fudis-body-text>alignX = 'end'</fudis-body-text></fudis-grid-item
 		>
 		<fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
-		<fudis-body-text class="grid-item">Normal grid item</fudis-body-text
-		><fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
 
 		<fudis-grid-item class="grid-item-highlight" [alignX]="'center'">
 			<fudis-body-text>alignX = 'center' </fudis-body-text></fudis-grid-item
 		>
 		<fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
+		<fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
+		<fudis-grid-item class="grid-item-highlight" [alignX]="{sm: 'start', md: 'end', lg: 'center'}">
+			<fudis-body-text>Responsive alignX =</fudis-body-text>
+			<fudis-body-text>"{{responsiveAlignX}}"</fudis-body-text>
+		</fudis-grid-item>
 	</fudis-grid>`,
 });
 
