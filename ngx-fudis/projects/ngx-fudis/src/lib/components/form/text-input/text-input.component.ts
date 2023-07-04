@@ -7,7 +7,7 @@ import { FudisInputWidth } from '../../../types/forms';
 import { FudisIdService } from '../../../utilities/id-service.service';
 
 @Component({
-	selector: 'fudis-text-input[id][label]',
+	selector: 'fudis-text-input',
 	templateUrl: './text-input.component.html',
 	styleUrls: ['./text-input.component.scss'],
 })

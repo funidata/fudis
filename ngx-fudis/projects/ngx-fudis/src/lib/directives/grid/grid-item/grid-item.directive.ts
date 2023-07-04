@@ -6,6 +6,7 @@ import {
 	FudisGridItemAlignResponsive,
 	FudisGridItemWidth,
 	gridItemDefault,
+	FudisGridItemColumnsResponsive,
 } from '../../../types/grid';
 import { getGridBreakpointDataArray, getGridCssValue } from '../gridUtils';
 
@@ -43,7 +44,7 @@ export class GridItemDirective implements OnInit, OnChanges {
 	 */
 	private _element: HTMLElement;
 
-	@Input() set columns(value: FudisGridItemWidth | FudisGridItemAlignResponsive) {
+	@Input() set columns(value: FudisGridItemWidth | FudisGridItemColumnsResponsive) {
 		// Convert given string value to proper CSS grid-column value
 		if (typeof value === 'string') {
 			this._columns = getGridCssValue(value, true);
