@@ -53,10 +53,10 @@
 		"@storybook/testing-library": "^0.2.0",
 		"@types/jasmine": "^4.3.2",
 		"@types/node": "^20.3.0",
-		"@typescript-eslint/eslint-plugin": "^5.59.9",
-		"@typescript-eslint/parser": "^5.59.9",
+		"@typescript-eslint/eslint-plugin": "^5.61.0",
+		"@typescript-eslint/parser": "^5.61.0",
 		"babel-loader": "^9.1.2",
-		"eslint": "^8.42.0",
+		"eslint": "^8.44.0",
 		"eslint-config-airbnb-typescript": "17.0.0",
 		"eslint-config-prettier": "8.8.0",
 		"eslint-plugin-import": "2.27.5",
@@ -83,6 +83,6 @@
 		"stylelint-config-sass-guidelines": "10.0.0",
 		"stylelint-config-standard-scss": "9.0.0",
 		"stylelint-prettier": "^3.0.0",
-		"typescript": "^5.0.4"
+		"typescript": "^5.1.6"
 	}
 }
