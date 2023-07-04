@@ -12,9 +12,9 @@
 	</fudis-label>
 	<div class="fudis-autocomplete-multi-select__input-wrapper">
 		<input
-			(click)="handleInputClick()"
+			#autocompleteInput
+			(focus)="handleInputFocus($event)"
 			(keyup)="doSearch($event)"
-			(blur)="handleOnBlur($event)"
 			[id]="_id"
 			[value]="_filterText"
 			role="combobox"
@@ -23,7 +23,7 @@
 			[attr.aria-describedby]="_id + '_guidance'" />
 		<fudis-button
 			class="fudis-autocomplete-multi-select__input-wrapper__icon-button"
-			(handleClick)="handleInputClick()"
+			(handleClick)="handleButtonClick()"
 			[size]="'icon-only'"
 			[variant]="'tertiary'"
 			[icon]="'chevron'"
@@ -33,14 +33,13 @@
 		</fudis-button>
 	</div>
 	<ng-container *ngIf="_toggleOn">
-		<fudis-dropdown-menu [align]="'center'">
+		<fudis-dropdown-menu [align]="'center'" [size]="size">
 			<ng-container *ngFor="let item of _results">
 				<fudis-dropdown-menu-item
 					[label]="item.viewValue"
 					[close]="false"
 					[itemsWithCheckbox]="true"
 					(handleChecked)="selectItem(item)"
-					(handleCheckboxBlur)="handleOnBlur($event)"
 					[checked]="isChecked(item)">
 				</fudis-dropdown-menu-item>
 			</ng-container>
@@ -50,7 +49,9 @@
 		</fudis-dropdown-menu>
 	</ng-container>
 	<ng-container *ngIf="selectedOptions.length > 0">
-		<fudis-autocomplete-multi-select-selected-item-chip [selectedItems]="selectedOptions" />
+		<fudis-autocomplete-multi-select-selected-item-chip
+			(deleteItem)="handleDeleteItem()"
+			[selectedItems]="selectedOptions" />
 	</ng-container>
 	<ng-container *ngIf="helpText">
 		<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="_id" />

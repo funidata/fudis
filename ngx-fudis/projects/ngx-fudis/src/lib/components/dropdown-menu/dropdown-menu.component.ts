@@ -7,6 +7,7 @@ import {
 	Input,
 	ViewChild,
 } from '@angular/core';
+import { FudisInputWidth } from '../../types/forms';
 
 @Component({
 	selector: 'fudis-dropdown-menu',
@@ -21,6 +22,11 @@ export class DropdownMenuComponent implements AfterContentInit {
 	 * Dropdown-menu is aligned to open left side of the button by default but can be aligned to open right side if necessary
 	 */
 	@Input() align: 'left' | 'right' | 'center' = 'left';
+
+	/**
+	 * Set dropdown size (should follow the given input element size)
+	 */
+	@Input() size: FudisInputWidth = 'lg';
 
 	@HostListener('window:keydown.arrowDown', ['$event'])
 	handleKeyDown(event: KeyboardEvent) {

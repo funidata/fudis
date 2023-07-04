@@ -1,5 +1,6 @@
 @use '../../foundations/borders/mixins.scss' as borders;
 @use '../../foundations/focus/mixins.scss' as focus;
+@use '../../foundations/spacing/tokens.scss' as spacing;
 @use '../../foundations/colors/mixins.scss' as colorMixins;
 @use '../../foundations/utilities/mixins.scss' as utilities;
 
@@ -26,5 +27,17 @@
 	&__center {
 		right: initial;
 		left: initial;
+	}
+
+	&__lg {
+		width: spacing.$spacing-input-lg;
+	}
+
+	&__md {
+		width: spacing.$spacing-input-md;
+	}
+
+	&__sm {
+		width: spacing.$spacing-input-sm;
 	}
 }

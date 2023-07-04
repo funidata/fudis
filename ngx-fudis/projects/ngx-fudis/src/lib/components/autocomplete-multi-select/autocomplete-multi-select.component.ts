@@ -35,6 +35,8 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 
 	@ViewChild('autocompleteMultiSelectWrapper') wrapper: ElementRef;
 
+	@ViewChild('autocompleteInput') input: ElementRef;
+
 	/**
 	 * Available sizes for the multi-select - defaults to large.
 	 */
@@ -116,7 +118,6 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 		}
 	}
 
-	// eslint-disable-next-line class-methods-use-this
 	handleCheckboxFocus(event: any) {
 		const parent = event.target.closest('fudis-dropdown-menu-item');
 
@@ -131,9 +132,17 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 				parent.previousElementSibling?.querySelector('input').focus();
 				break;
 			case 'Escape':
-				this._toggleOn = false;
-			// TODO Mihin focus? Jos inputtiin niin dropdown aukeaa
+				this.input.nativeElement.focus();
 		}
+	}
+
+	@HostListener('document:click', ['$event.target'])
+	handleWindowClick(targetElement: HTMLElement) {
+		// Close dropdown-menu if click is outside of the autocomple-multi-select component
+		if (targetElement && document.body.contains(targetElement) && !this.wrapper.nativeElement.contains(targetElement)) {
+			this._toggleOn = false;
+		}
+		this._clickService.setMenuStatus(this._toggleOn);
 	}
 
 	ngOnInit(): void {
@@ -147,15 +156,24 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 		}
 	}
 
-	handleInputClick(): void {
+	handleInputFocus(event: FocusEvent): void {
+		if ((event.relatedTarget as HTMLElement)?.classList.contains('fudis-dropdown-menu-item__checkbox__input')) {
+			this._toggleOn = false;
+		} else {
+			this._toggleOn = true;
+		}
+		this._clickService.setMenuStatus(this._toggleOn);
+	}
+
+	handleButtonClick(): void {
 		this._toggleOn = !this._toggleOn;
 		this._clickService.setMenuStatus(this._toggleOn);
 	}
 
-	// eslint-disable-next-line class-methods-use-this
-	handleOnBlur(event: FocusEvent): void {
-		// TODO blur händläys
-		console.log(event);
+	handleDeleteItem(): void {
+		if (this.selectedOptions.length === 0) {
+			this.input.nativeElement.focus();
+		}
 	}
 
 	selectItem(item: FudisDropdownOption): void {
@@ -170,6 +188,10 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	removeItem(item: FudisDropdownOption): void {
 		this.selectedOptions = this.selectedOptions.filter((option) => item.viewValue !== option.viewValue);
 		this.itemChange.emit(this.selectedOptions);
+
+		if (this.selectedOptions.length === 0) {
+			this.input.nativeElement.focus();
+		}
 	}
 
 	isChecked(item: FudisDropdownOption): boolean {
@@ -177,7 +199,11 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	}
 
 	doSearch(event: any): void {
-		this._toggleOn = true;
+		if (event.key !== 'Escape') {
+			this._toggleOn = true;
+			this._clickService.setMenuStatus(this._toggleOn);
+		}
+
 		this._filterText = event.target.value;
 
 		this._results = this.options.filter((option) =>
