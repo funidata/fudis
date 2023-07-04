@@ -61,7 +61,7 @@ export class FudisErrorSummaryService {
 		this._signalDynamicCurrentErrorList.set(currentErrors);
 	}
 
-	public reloadErrors(delay: number = 10): void {
+	public reloadErrors(delay: number = 0): void {
 		setTimeout(() => {
 			this._signalCurrentErrorList.set(this._currentErrorList);
 			this._signalDynamicCurrentErrorList.set(this._currentErrorList);
