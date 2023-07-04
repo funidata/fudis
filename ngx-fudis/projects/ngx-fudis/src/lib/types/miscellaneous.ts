@@ -4,6 +4,11 @@ export interface FudisDescriptionListItem {
 	key: string;
 	subHeading?: string;
 	value: string;
+	language?: FudisLanguageOptions;
+}
+
+export interface FudisLanguageOptions {
+	language: string[];
 }
 
 export type FudisExpandableType = 'regular';

@@ -47,6 +47,7 @@ export { GuidanceComponent } from './lib/components/form/guidance/guidance.compo
 export { HeaderDirective } from './lib/directives/content-projection/header/header.directive';
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
 export { IconComponent } from './lib/components/icon/icon.component';
+export { LanguageBadgeGroupComponent } from './lib/components/description-list/language-badge-group/language-badge-group.component';
 export { LinkComponent } from './lib/components/link/link.component';
 export { NotificationsDirective } from './lib/directives/content-projection/notifications/notifications.directive';
 export { NotificationComponent } from './lib/components/notification/notification.component';

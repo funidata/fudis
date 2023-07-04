@@ -39,7 +39,7 @@ export default {
 } as Meta;
 
 const testData = [
-	{ key: 'First Name', value: 'Rex' },
+	{ key: 'First Name', value: 'Rex', language: ['sv', 'en', 'fi'] },
 	{ key: 'Last Name', value: 'Dangerwest' },
 	{ key: 'Alias', value: 'Radical Emmet Xtreme' },
 	{ key: 'Voice actor', value: 'Chris Pratt' },
@@ -84,13 +84,18 @@ DescriptionList.args = {
 const DescriptionListDataLoopTemplate: StoryFn<DescriptionListComponent> = (args: DescriptionListComponent) => ({
 	props: args,
 	template: html`<fudis-heading tag="h2" size="md"> Description List Regular With Data Looping</fudis-heading>
-		<fudis-description-list [data]="data" [marginBottom]="'md'" [variant]="variant" [disableGrid]="disableGrid" />`,
+		<fudis-description-list
+			[data]="data"
+			[marginBottom]="'md'"
+			[variant]="variant"
+			[disableGrid]="disableGrid"
+			[translation]="true" />`,
 });
 
 export const DescriptionListDataLoop = DescriptionListDataLoopTemplate.bind({});
 DescriptionListDataLoop.args = {
 	data: testData,
-	variant: 'compact',
+	variant: 'regular',
 	disableGrid: false,
 };
 

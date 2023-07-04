@@ -32,6 +32,11 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 	 */
 	@Input() disableGrid: boolean = false;
 
+	/**
+	 * Add Fudis Language Badge Group in Fudis Description List Item Term element
+	 */
+	@Input() translation: boolean = false;
+
 	private getClasses(): string[] {
 		const cssClasses = [];
 

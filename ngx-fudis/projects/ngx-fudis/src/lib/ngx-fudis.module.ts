@@ -75,6 +75,8 @@ import { DescriptionListItemTermComponent } from './components/description-list/
 import { DescriptionListItemDetailsComponent } from './components/description-list/description-list-item/description-list-item-details/description-list-item-details.component';
 import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
 import { FudisTranslationConfigService } from './utilities/config.service';
+import { LanguageBadgeGroupComponent } from './components/description-list/language-badge-group/language-badge-group.component';
+import { LanguageBadgeComponent } from './components/description-list/language-badge-group/language-badge/language-badge.component';
 
 @NgModule({
 	/*
@@ -134,6 +136,8 @@ import { FudisTranslationConfigService } from './utilities/config.service';
 		ActionsDirective,
 
 		NotificationsDirective,
+		LanguageBadgeGroupComponent,
+		LanguageBadgeComponent,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
