@@ -1,0 +1,81 @@
+/*! For license information please see components-button-button-stories.6f6a7885.iframe.bundle.js.LICENSE.txt */
+"use strict";(self.webpackChunkngx_fudis=self.webpackChunkngx_fudis||[]).push([[4229],{"./node_modules/@mdx-js/react/lib/index.js":(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{__webpack_require__.d(__webpack_exports__,{NF:()=>withMDXComponents,Zo:()=>MDXProvider,ah:()=>useMDXComponents,pC:()=>MDXContext});var react__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__("./node_modules/react/index.js");const MDXContext=react__WEBPACK_IMPORTED_MODULE_0__.createContext({});function withMDXComponents(Component){return function boundMDXComponent(props){const allComponents=useMDXComponents(props.components);return react__WEBPACK_IMPORTED_MODULE_0__.createElement(Component,{...props,allComponents})}}function useMDXComponents(components){const contextComponents=react__WEBPACK_IMPORTED_MODULE_0__.useContext(MDXContext);return react__WEBPACK_IMPORTED_MODULE_0__.useMemo((()=>"function"==typeof components?components(contextComponents):{...contextComponents,...components}),[contextComponents,components])}const emptyObject={};function MDXProvider({components,children,disableParentContext}){let allComponents;return allComponents=disableParentContext?"function"==typeof components?components({}):components||emptyObject:useMDXComponents(components),react__WEBPACK_IMPORTED_MODULE_0__.createElement(MDXContext.Provider,{value:allComponents},children)}},"./projects/ngx-fudis/src/lib/components/button/button.stories.ts":(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{__webpack_require__.r(__webpack_exports__),__webpack_require__.d(__webpack_exports__,{AllVariants:()=>AllVariants,Button:()=>Button,IconButton:()=>IconButton,OnlyIconButton:()=>OnlyIconButton,default:()=>button_stories});var button_component=__webpack_require__("./projects/ngx-fudis/src/lib/components/button/button.component.ts"),jsx_runtime=(__webpack_require__("./node_modules/react/index.js"),__webpack_require__("./node_modules/react/jsx-runtime.js")),lib=__webpack_require__("./node_modules/@mdx-js/react/lib/index.js"),dist=__webpack_require__("./node_modules/@storybook/blocks/dist/index.mjs");__webpack_require__("./node_modules/@storybook/addon-links/dist/index.mjs");function _createMdxContent(props){const _components=Object.assign({h1:"h1",p:"p",code:"code",h2:"h2",h3:"h3",ul:"ul",li:"li",a:"a"},(0,lib.ah)(),props.components);return(0,jsx_runtime.jsxs)(jsx_runtime.Fragment,{children:[(0,jsx_runtime.jsx)(dist.h_,{title:"Components/Button"}),"\n",(0,jsx_runtime.jsx)(_components.h1,{id:"button",children:"Button"}),"\n",(0,jsx_runtime.jsxs)(_components.p,{children:["Buttons are categorized based on their importance and functionality, i.e ",(0,jsx_runtime.jsx)(_components.code,{children:"primary"}),", ",(0,jsx_runtime.jsx)(_components.code,{children:"secondary"})," and ",(0,jsx_runtime.jsx)(_components.code,{children:"tertiary"}),".\nIt is important to use the correct variant of the button for the intended action and not to overuse them to avoid overwhelming the user."]}),"\n",(0,jsx_runtime.jsxs)(_components.p,{children:["There are three button sizes available: ",(0,jsx_runtime.jsx)(_components.code,{children:"medium"}),", ",(0,jsx_runtime.jsx)(_components.code,{children:"small"})," and ",(0,jsx_runtime.jsx)(_components.code,{children:"icon-only"}),"."]}),"\n",(0,jsx_runtime.jsx)(_components.h2,{id:"examples",children:"Examples"}),"\n",(0,jsx_runtime.jsx)(dist.Xz,{of:AllVariants}),"\n",(0,jsx_runtime.jsx)(_components.h3,{id:"button-with-icon",children:"Button with icon"}),"\n",(0,jsx_runtime.jsxs)(_components.p,{children:["Button has option for icon. Frequently used icons: ",(0,jsx_runtime.jsx)("code",{children:"search"}),", ",(0,jsx_runtime.jsx)("code",{children:"three-dots"})," and ",(0,jsx_runtime.jsx)("code",{children:"delete"}),". Icon color is automatically set according to which button variant is in use."]}),"\n",(0,jsx_runtime.jsx)(_components.p,{children:"Icon is only a visual indicator and is always hidden from screen readers."}),"\n",(0,jsx_runtime.jsx)(dist.Xz,{of:IconButton}),"\n",(0,jsx_runtime.jsx)(_components.h3,{id:"button-with-icon-only",children:"Button with icon only"}),"\n",(0,jsx_runtime.jsxs)(_components.p,{children:["Button can be without a visible label but use this variation sparingly. To hide visible label, provide ",(0,jsx_runtime.jsx)(_components.code,{children:"labelHidden"})," property for the button component. When label is hidden, ",(0,jsx_runtime.jsx)(_components.code,{children:"label"})," property will be reflected to HTML ",(0,jsx_runtime.jsx)(_components.code,{children:"aria-label"})," attribute. This will communicate screen reader users about the button functionality."]}),"\n",(0,jsx_runtime.jsxs)(_components.p,{children:["If button has no visibile label and both ",(0,jsx_runtime.jsx)(_components.code,{children:"label"})," and ",(0,jsx_runtime.jsx)(_components.code,{children:"ariaLabel"})," are provided, those values are combined and reflected to ",(0,jsx_runtime.jsx)(_components.code,{children:"aria-label"})," HTML attribute."]}),"\n",(0,jsx_runtime.jsx)(dist.Xz,{of:OnlyIconButton}),"\n",(0,jsx_runtime.jsx)(_components.h3,{id:"accessibility",children:"Accessibility"}),"\n",(0,jsx_runtime.jsxs)(_components.ul,{children:["\n",(0,jsx_runtime.jsxs)(_components.li,{children:["Button uses primary-color variable (",(0,jsx_runtime.jsx)(_components.code,{children:"--fudis-color-primary"}),") which is set in the root of the application. Make sure the application's primary-color contrast ratio meets WCAG AA and AAA levels.","\n",(0,jsx_runtime.jsxs)(_components.ul,{children:["\n",(0,jsx_runtime.jsxs)(_components.li,{children:["Disabled button has static colors ",(0,jsx_runtime.jsx)(_components.code,{children:"#484848"})," and ",(0,jsx_runtime.jsx)(_components.code,{children:"#D4D4D4"})," with contrast ratio 6.2:1"]}),"\n"]}),"\n"]}),"\n",(0,jsx_runtime.jsx)(_components.li,{children:"Button has visible focus state"}),"\n",(0,jsx_runtime.jsx)(_components.li,{children:"Disabled button can be focused. State is communicated for screen reader"}),"\n",(0,jsx_runtime.jsxs)(_components.li,{children:["Button click can be triggered with keyboard ",(0,jsx_runtime.jsx)("code",{children:"enter"})," and ",(0,jsx_runtime.jsx)("code",{children:"space"})," key"]}),"\n",(0,jsx_runtime.jsxs)(_components.li,{children:["Label is a required property. If needed, button can be given additional ",(0,jsx_runtime.jsx)(_components.code,{children:"ariaLabel"})," property as well."]}),"\n"]}),"\n",(0,jsx_runtime.jsx)(_components.h3,{id:"related-components",children:"Related components"}),"\n",(0,jsx_runtime.jsx)(_components.p,{children:(0,jsx_runtime.jsx)(_components.a,{href:"/docs/components-icon--icon",children:"Icon"})}),"\n",(0,jsx_runtime.jsx)(_components.h2,{id:"properties",children:"Properties"}),"\n",(0,jsx_runtime.jsx)(dist.Ed,{of:button_component.r})]})}const readme=function MDXContent(props={}){const{wrapper:MDXLayout}=Object.assign({},(0,lib.ah)(),props.components);return MDXLayout?(0,jsx_runtime.jsx)(MDXLayout,Object.assign({},props,{children:(0,jsx_runtime.jsx)(_createMdxContent,props)})):_createMdxContent(props)},button_stories={title:"Components/Button",component:button_component.r,parameters:{docs:{page:readme},controls:{exclude:["_iconColor","_classList","getClasses","ngOnChanges","getAriaLabel"]}},argTypes:{icon:{control:{type:"text"}}}},html=String.raw,Template=args=>({props:args}),Button=Template.bind({});Button.args={variant:"primary",label:"Button"};const IconButton=Template.bind({});IconButton.args={variant:"secondary",label:"Icon Button",icon:"search"};const OnlyIconButton=Template.bind({});OnlyIconButton.args={variant:"secondary",icon:"search",label:"Search button",labelHidden:!0};const AllVariants=()=>({template:html`
+		<fudis-grid [marginBottom]="'md'" [columns]="4" [align]="'start'" rowGap="xs" marginBottom="md">
+			<fudis-heading tag="h4" size="sm">Medium size buttons</fudis-heading>
+			<fudis-button variant="primary" label="Primary"></fudis-button>
+			<fudis-button variant="secondary" label="Secondary"></fudis-button>
+			<fudis-button variant="tertiary" label="Tertiary"></fudis-button>
+			<fudis-button label="Disabled" [disabled]="true"></fudis-button>
+		</fudis-grid>
+		<fudis-grid [marginBottom]="'md'" [columns]="4" [align]="'start'" rowGap="xs" marginBottom="md">
+			<fudis-heading tag="h4" size="sm">Medium size buttons with icon</fudis-heading>
+			<fudis-button variant="primary" icon="search" label="Primary"></fudis-button>
+			<fudis-button variant="secondary" icon="search" label="Secondary"></fudis-button>
+			<fudis-button variant="tertiary" icon="search" label="Tertiary"></fudis-button>
+			<fudis-button label="Disabled" icon="search" [disabled]="true"></fudis-button>
+		</fudis-grid>
+		<fudis-grid [marginBottom]="'md'" [columns]="4" [align]="'start'" rowGap="xs" marginBottom="md">
+			<fudis-heading tag="h4" size="sm">Small size buttons</fudis-heading>
+			<fudis-button variant="primary" label="Primary" size="small"></fudis-button>
+			<fudis-button variant="secondary" label="Secondary" size="small"></fudis-button>
+			<fudis-button variant="tertiary" label="Tertiary" size="small"></fudis-button>
+			<fudis-button label="Disabled" [disabled]="true" size="small"></fudis-button>
+		</fudis-grid>
+
+		<fudis-grid [marginBottom]="'md'" [columns]="4" [align]="'start'" rowGap="xs" marginBottom="md">
+			<fudis-heading tag="h4" size="sm">Small size buttons with icons</fudis-heading>
+			<fudis-button variant="primary" icon="search" label="Primary" size="small"></fudis-button>
+			<fudis-button variant="secondary" icon="search" label="Secondary" size="small"></fudis-button>
+			<fudis-button variant="tertiary" icon="search" label="Tertiary" size="small"></fudis-button>
+			<fudis-button label="Disabled" icon="search" [disabled]="true" size="small"></fudis-button>
+		</fudis-grid>
+
+		<fudis-grid [marginBottom]="'md'" [columns]="4" [align]="'start'" rowGap="xs" marginBottom="md">
+			<fudis-heading tag="h4" size="sm">Medium sized buttons with label hidden</fudis-heading>
+			<fudis-button variant="primary" [labelHidden]="true" icon="search" label="Primary"></fudis-button>
+			<fudis-button variant="secondary" [labelHidden]="true" icon="search" label="Secondary"></fudis-button>
+			<fudis-button variant="tertiary" [labelHidden]="true" icon="search" label="Tertiary"></fudis-button>
+			<fudis-button label="Disabled" [labelHidden]="true" icon="search" [disabled]="true"></fudis-button>
+		</fudis-grid>
+
+		<fudis-grid [marginBottom]="'md'" [columns]="4" [align]="'start'" rowGap="xs" marginBottom="md">
+			<fudis-heading tag="h4" size="sm">Small sized buttons with label hidden</fudis-heading>
+			<fudis-button variant="primary" [labelHidden]="true" icon="search" label="Primary" size="small"></fudis-button>
+			<fudis-button
+				variant="secondary"
+				[labelHidden]="true"
+				icon="search"
+				label="Secondary"
+				size="small"></fudis-button>
+			<fudis-button variant="tertiary" [labelHidden]="true" icon="search" label="Tertiary" size="small"></fudis-button>
+			<fudis-button label="Disabled" [labelHidden]="true" icon="search" [disabled]="true" size="small"></fudis-button>
+		</fudis-grid>
+
+		<fudis-grid [columns]="4" [align]="'start'" rowGap="xs" marginBottom="md">
+			<fudis-heading tag="h4" size="sm">Icon only sized buttons with label hidden</fudis-heading>
+			<fudis-button
+				variant="primary"
+				[labelHidden]="true"
+				icon="search"
+				label="Primary"
+				size="icon-only"></fudis-button>
+			<fudis-button
+				variant="secondary"
+				[labelHidden]="true"
+				icon="search"
+				label="Secondary"
+				size="icon-only"></fudis-button>
+			<fudis-button
+				variant="tertiary"
+				[labelHidden]="true"
+				icon="search"
+				label="Tertiary"
+				size="icon-only"></fudis-button>
+			<fudis-button
+				label="Disabled"
+				[labelHidden]="true"
+				icon="search"
+				[disabled]="true"
+				size="icon-only"></fudis-button>
+		</fudis-grid>
+	`})},"./node_modules/@storybook/addon-links/dist/index.mjs":(__unused_webpack_module,__unused_webpack___webpack_exports__,__webpack_require__)=>{__webpack_require__("./node_modules/@storybook/addon-links/dist/chunk-DXNAW7Q2.mjs"),__webpack_require__("./node_modules/@storybook/addon-links/dist/chunk-JT3VIYBO.mjs")},"./node_modules/react/cjs/react-jsx-runtime.production.min.js":(__unused_webpack_module,exports,__webpack_require__)=>{var f=__webpack_require__("./node_modules/react/index.js"),k=Symbol.for("react.element"),l=Symbol.for("react.fragment"),m=Object.prototype.hasOwnProperty,n=f.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner,p={key:!0,ref:!0,__self:!0,__source:!0};function q(c,a,g){var b,d={},e=null,h=null;for(b in void 0!==g&&(e=""+g),void 0!==a.key&&(e=""+a.key),void 0!==a.ref&&(h=a.ref),a)m.call(a,b)&&!p.hasOwnProperty(b)&&(d[b]=a[b]);if(c&&c.defaultProps)for(b in a=c.defaultProps)void 0===d[b]&&(d[b]=a[b]);return{$$typeof:k,type:c,key:e,ref:h,props:d,_owner:n.current}}exports.Fragment=l,exports.jsx=q,exports.jsxs=q},"./node_modules/react/jsx-runtime.js":(module,__unused_webpack_exports,__webpack_require__)=>{module.exports=__webpack_require__("./node_modules/react/cjs/react-jsx-runtime.production.min.js")}}]);
