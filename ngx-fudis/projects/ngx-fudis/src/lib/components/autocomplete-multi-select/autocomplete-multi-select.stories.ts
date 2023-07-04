@@ -18,9 +18,24 @@ const Template: StoryFn = (args) => ({
 });
 
 const manyOptions = Array.from({ length: 100 }).map((value, i) => {
+	let a = 'a';
+	const first = String(i).charAt(0);
+
+	if (first === '1') {
+		a = 'b';
+	}
+	if (first === '2') {
+		a = 'c';
+	}
+	if (first === '3') {
+		a = 'd';
+	}
+	if (first === '4') {
+		a = 'e';
+	}
 	return {
 		value: i,
-		viewValue: `Item number ${i}`,
+		viewValue: `Item ${a} ${i}`,
 	};
 });
 
