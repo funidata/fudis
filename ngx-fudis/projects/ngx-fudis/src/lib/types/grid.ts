@@ -115,11 +115,4 @@ export type FudisGridItemColumnsResponsive = {
 	[K in FudisBreakpointKey]?: FudisGridItemWidth;
 };
 
-export interface FudisGridItemResponsiveData {
-	// @Input() columns
-	gridColumns?: string | FudisGridResponsiveData[];
-	// @Input() alignX
-	justifySelf?: string | FudisGridResponsiveData[];
-	// @Input() alignY
-	alignSelf?: string | FudisGridResponsiveData[];
-}
+export type FudisGridFormInputWidth = 'inputXs' | 'inputSm' | 'inputMd' | 'inputLg';
