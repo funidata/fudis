@@ -10,7 +10,6 @@
 	@include utilities.box-reset();
 	@include colorMixins.bg-color('gray-extra-light');
 
-	margin-top: spacing.$spacing-xxl;
 	position: relative;
 	text-align: center;
 
@@ -20,10 +19,18 @@
 
 	fudis-link {
 		@include typography.text-link-m-typography;
+
+		min-height: spacing.$spacing-lg;
+
+		@include breakpoints.breakpoint-max('lg') {
+			&:not(:first-of-type) {
+				margin-top: spacing.$spacing-sm;
+			}
+		}
 	}
 
 	&__content {
-		padding-top: spacing.$spacing-sm;
+		padding-top: spacing.$spacing-md;
 		padding-bottom: spacing.$spacing-xl;
 		bottom: 0;
 	}
@@ -32,8 +39,13 @@
 		display: flex;
 		flex-direction: column;
 
+		&__logo {
+			margin-bottom: spacing.$spacing-sm;
+		}
+
 		@include breakpoints.breakpoint('lg') {
 			flex-direction: row;
+			align-items: baseline;
 
 			&__logo {
 				margin-right: spacing.$spacing-md;
