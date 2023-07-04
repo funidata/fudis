@@ -28,9 +28,6 @@ export class AutocompleteMultiSelectSelectedItemChipComponent {
 			event.target.nextElementSibling.focus();
 		} else if (event.target.previousElementSibling) {
 			event.target.previousElementSibling.focus();
-		} else {
-			// TODO: Focus input kenttään jos/kun poistetaan ainoa/viimeinen chip itemi
-			console.log('TODO: focus input kenttään');
 		}
 
 		const index = this.selectedItems.indexOf(item);
