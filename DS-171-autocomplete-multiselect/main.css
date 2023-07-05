@@ -258,38 +258,6 @@ mat-tooltip-component .mat-tooltip-handset {
   padding: 0;
 }
 
-.fudis-grid-item__justify-self__start {
-  justify-self: start;
-}
-
-.fudis-grid-item__justify-self__end {
-  justify-self: end;
-}
-
-.fudis-grid-item__justify-self__center {
-  justify-self: center;
-}
-
-.fudis-grid-item__justify-self__stretch {
-  justify-self: stretch;
-}
-
-.fudis-grid-item__align-self__start {
-  align-self: start;
-}
-
-.fudis-grid-item__align-self__end {
-  align-self: end;
-}
-
-.fudis-grid-item__align-self__center {
-  align-self: center;
-}
-
-.fudis-grid-item__align-self__stretch {
-  align-self: stretch;
-}
-
 /* stylelint-disable unit-disallowed-list */ /* stylelint-disable order/order */
 .fudis-grid {
   display: grid;
