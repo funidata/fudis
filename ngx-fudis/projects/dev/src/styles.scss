@@ -1,3 +1,4 @@
+/* stylelint-disable selector-class-pattern */
 /* stylelint-disable color-no-hex */
 @use '@angular/material' as mat;
 @use '../../../dist/ngx-fudis/index' as fudis;
@@ -17,9 +18,9 @@
 }
 
 .root-style {
-	min-height: 100vh;
-	position: relative;
 	display: flex;
+	position: relative;
 	flex-direction: column;
 	justify-content: space-between;
+	min-height: 100vh;
 }
