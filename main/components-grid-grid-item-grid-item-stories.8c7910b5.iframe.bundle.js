@@ -42,7 +42,7 @@
 		<fudis-body-text class="grid-item"
 			>Normal grid item. With more content so effects of adjusting a single element can be seen better.</fudis-body-text
 		>
-	</fudis-grid>`})).bind({});Example.args={alignX:"stretch",alignY:"stretch",columns:"auto"},Example.argTypes={alignX:{control:{type:"radio"}},alignY:{control:{type:"radio"}},columns:{options:["stretch","auto",2,"2/4","2/-1"],control:{type:"radio"}}};const AlignX=args=>({props:{...args,responsiveAlignX:"{ sm: 'start', md: 'end', lg: 'center' }"},template:html`<fudis-grid [columns]="2">
+	</fudis-grid>`})).bind({});Example.args={alignX:"stretch",alignY:"stretch",columns:"auto"},Example.argTypes={alignX:{options:["stretch","start","end","center"],control:{type:"radio"}},alignY:{options:["stretch","start","end","center"],control:{type:"radio"}},columns:{options:["stretch","auto",2,"2/4","2/-1"],control:{type:"radio"}}};const AlignX=args=>({props:{...args,responsiveAlignX:"{ sm: 'start', md: 'end', lg: 'center' }"},template:html`<fudis-grid [columns]="2">
 		<fudis-heading [tag]="'h1'" [size]="'lg'">This grid demonstrates attribute of 'alignX'</fudis-heading>
 		<fudis-grid-item class="grid-item-highlight">
 			<fudis-body-text>alignX = 'stretch' (default)</fudis-body-text>
@@ -116,6 +116,20 @@
 		>
 		<fudis-grid-item class="grid-item-highlight" [alignY]="'center'"
 			><fudis-body-text>alignY = 'center'</fudis-body-text></fudis-grid-item
+		><fudis-grid-item class="grid-item">
+			<fudis-body-text style="margin-bottom: 1rem;"
+				>Normal grid item. With more content so effects of adjusting a single element can be seen
+				better.</fudis-body-text
+			>
+			<fudis-body-text
+				>Barkadeer splice the main brace fire in the hole Corsair cackle fruit topgallant six pounders careen avast
+				belay. Sutler Jack Ketch broadside six pounders gally knave landlubber or just lubber handsomely ballast draft.
+				Landlubber or just lubber Sea Legs bucko code of conduct chase wench spike lateen sail bilge
+				boom.</fudis-body-text
+			></fudis-grid-item
+		>
+		<fudis-grid-item class="grid-item-highlight" [alignY]="{xs: 'end', sm: 'stretch', md: 'start', lg: 'center'}"
+			><fudis-body-text>alignY = 'responsive'</fudis-body-text></fudis-grid-item
 		><fudis-grid-item class="grid-item">
 			<fudis-body-text style="margin-bottom: 1rem;"
 				>Normal grid item. With more content so effects of adjusting a single element can be seen
@@ -208,4 +222,4 @@
 			><fudis-body-text>columns="{{exampleThreeString}}"</fudis-body-text></fudis-grid-item
 		>
 	</fudis-grid> `});AlignX.parameters={controls:{disable:!0}},AlignY.parameters={controls:{disable:!0}},alignXAndY.parameters={controls:{disable:!0}},columns.parameters={controls:{disable:!0}},responsiveColumns.parameters={controls:{disable:!0}}}}]);
-//# sourceMappingURL=components-grid-grid-item-grid-item-stories.ced983ee.iframe.bundle.js.map
+//# sourceMappingURL=components-grid-grid-item-grid-item-stories.8c7910b5.iframe.bundle.js.map
