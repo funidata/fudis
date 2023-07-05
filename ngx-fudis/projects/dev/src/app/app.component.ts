@@ -16,6 +16,7 @@ import { DialogTestContentComponent } from './dialog-test/dialog-test-content/di
 
 type MyForm = {
 	dropdown: FormControl<FudisDropdownOption | null>;
+	dropdownMulti: FormControl<FudisDropdownOption[] | null>;
 	textInput: FormControl<string | null>;
 	truth: FormControl<boolean | null>;
 	date: FormControl<Date | null>;
@@ -50,6 +51,7 @@ export class AppComponent implements OnInit {
 
 	testFormGroup = new FormGroup<MyForm>({
 		dropdown: new FormControl<FudisDropdownOption | null>(this.dropdownOptions[2]),
+		dropdownMulti: new FormControl<FudisDropdownOption[] | null>([this.dropdownOptions[2], this.dropdownOptions[4]]),
 		textInput: new FormControl<string | null>(null, Validators.required),
 		truth: new FormControl<boolean | null>(null, Validators.required),
 		date: new FormControl<Date | null>(null),
@@ -137,6 +139,7 @@ export class AppComponent implements OnInit {
 	}
 
 	openDialog(): void {
+		console.log(this.testFormGroup.controls.dropdownMulti);
 		this.dialog.open(this.templateRef);
 	}
 

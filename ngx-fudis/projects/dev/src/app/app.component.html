@@ -69,6 +69,12 @@
 									[label]="'Some dropdown'"
 									[options]="dropdownOptions"
 									[control]="testFormGroup.controls['dropdown']"></fudis-dropdown>
+								<fudis-dropdown
+									[id]="'dropdown-id-multi'"
+									[label]="'Some multiselect dropdown'"
+									[options]="dropdownOptions"
+									[multipleOption]="true"
+									[control]="testFormGroup.controls['dropdownMulti']"></fudis-dropdown>
 								<fudis-datepicker
 									[id]="'datepicker-123'"
 									[label]="'Select some date'"
@@ -105,7 +111,7 @@
 		<fudis-expandable [title]="'Autocomplete examples'">
 			<ng-template fudisContent type="expandable">
 				<fudis-grid>
-					<fudis-heading [tag]="'h3'" [size]="'xl'">Single-select dropdown</fudis-heading>
+					<fudis-heading [tag]="'h3'" [size]="'md'">Single-select dropdown</fudis-heading>
 					<fudis-autocomplete
 						[label]="'Choose item'"
 						[clearFilterText]="'Clear'"
@@ -115,13 +121,17 @@
 						[requiredText]="'Required'"
 						[control]="testFormGroup.controls['autocompleteDropdown']"
 						[errorMsg]="{ required: t('error_required') }"></fudis-autocomplete>
-					<fudis-heading [tag]="'h3'" [size]="'xl'">Single-select search</fudis-heading>
+					<fudis-heading [tag]="'h3'" [size]="'md'">Single-select search</fudis-heading>
 					<fudis-autocomplete
 						[label]="'Search item'"
 						[clearFilterText]="'Clear'"
 						[options]="multipleOptions"
 						[control]="testFormGroup.controls['autocompleteSearch']"
 						[errorMsg]="{ required: t('error_required') }"></fudis-autocomplete>
+					<fudis-heading [tag]="'h3'" [size]="'md'">Autocomplete multi-select dropdown</fudis-heading>
+					<fudis-autocomplete-multi-select
+						[label]="'Search and choose items'"
+						[options]="multipleOptions"></fudis-autocomplete-multi-select>
 				</fudis-grid>
 			</ng-template>
 		</fudis-expandable>
