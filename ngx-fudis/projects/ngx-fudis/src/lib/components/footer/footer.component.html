@@ -1,0 +1,24 @@
+<footer class="fudis-footer">
+	<fudis-grid
+		[ignoreDefaults]="true"
+		[columns]="_columns"
+		[rowGap]="'md'"
+		[classes]="['fudis-footer__content']"
+		[marginSides]="'responsive'"
+		[width]="'xxl'"
+		[marginTop]="'xxl'">
+		<ng-container *ngIf="contentLeft">
+			<fudis-grid-item [alignX]="{ xs: 'center', sm: 'start' }" class="fudis-footer__item">
+				<a href="https://www.funidata.fi/" class="fudis-footer__item__logo"
+					><img src="fd-logo.svg" alt="{{ logoAltText }}"
+				/></a>
+				<ng-container *ngTemplateOutlet="contentLeft!.templateRef" />
+			</fudis-grid-item>
+		</ng-container>
+		<ng-container *ngIf="contentRight">
+			<fudis-grid-item [alignX]="{ xs: 'center', sm: 'end' }" class="fudis-footer__item">
+				<ng-container *ngTemplateOutlet="contentRight!.templateRef" />
+			</fudis-grid-item>
+		</ng-container>
+	</fudis-grid>
+</footer>

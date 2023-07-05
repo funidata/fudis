@@ -1,0 +1,61 @@
+@use '../../foundations/typography/mixins.scss' as typography;
+@use '../../foundations/typography/tokens.scss' as typographyTokens;
+@use '../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../foundations/colors/tokens.scss' as color;
+@use '../../foundations/spacing/tokens.scss' as spacing;
+@use '../../foundations/breakpoints/mixins.scss' as breakpoints;
+@use '../../foundations/utilities/mixins.scss' as utilities;
+
+.fudis-footer {
+	@include utilities.box-reset;
+	@include colorMixins.bg-color('gray-extra-light');
+
+	position: relative;
+	text-align: center;
+
+	fudis-link {
+		@include typography.text-link-m-typography;
+
+		min-height: spacing.$spacing-lg;
+
+		@include breakpoints.breakpoint-max('lg') {
+			&:not(:first-of-type) {
+				margin-top: spacing.$spacing-sm;
+			}
+		}
+	}
+
+	&__content {
+		bottom: 0;
+		padding-top: spacing.$spacing-md;
+		padding-bottom: spacing.$spacing-xl;
+	}
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+
+		&__logo {
+			margin-bottom: spacing.$spacing-sm;
+		}
+
+		@include breakpoints.breakpoint('lg') {
+			flex-direction: row;
+			align-items: baseline;
+
+			&__logo {
+				margin-right: spacing.$spacing-md;
+			}
+
+			fudis-link {
+				&:not(:last-of-type) {
+					margin-right: spacing.$spacing-md;
+				}
+			}
+		}
+	}
+
+	@include breakpoints.breakpoint('sm') {
+		text-align: initial;
+	}
+}

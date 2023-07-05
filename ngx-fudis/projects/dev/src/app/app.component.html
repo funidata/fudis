@@ -1,131 +1,177 @@
 <ng-container *transloco="let t">
-	<fudis-grid [marginTop]="'md'" [marginBottom]="'md'">
-		<fudis-heading tag="h1" size="xl">Welcome to Fudis sandbox </fudis-heading>
-		<fudis-notification variant="danger" ariaVariantText="Varoitus!"
-			>Whoops! Here is danger notification.</fudis-notification
-		>
+	<div class="root-style">
+		<fudis-grid [marginTop]="'md'" [marginBottom]="'md'">
+			<fudis-heading tag="h1" size="xl">Welcome to Fudis sandbox </fudis-heading>
+			<fudis-notification variant="danger" ariaVariantText="Varoitus!"
+				>Whoops! Here is danger notification.</fudis-notification
+			>
 
-		<fudis-grid [columns]="2">
-			<div>
-				<fudis-heading [tag]="'h3'">
-					<fudis-link [href]="'#'" [linkTitle]="'Link inside a heading'"></fudis-link>
-				</fudis-heading>
-			</div>
+			<fudis-grid [columns]="2">
+				<div>
+					<fudis-heading [tag]="'h3'">
+						<fudis-link [href]="'#'" [linkTitle]="'Link inside a heading'"></fudis-link>
+					</fudis-heading>
+				</div>
 
-			<fudis-button [label]="'Open dialog from template'" (handleClick)="openDialog()"></fudis-button>
-			<fudis-button [label]="'Open dialog from component'" (handleClick)="openDialogFromComponent()"></fudis-button>
-			<fudis-button
-				[label]="'Menu'"
-				[labelHidden]="true"
-				[size]="'small'"
-				[variant]="'secondary'"
-				[icon]="'three-dots'"
-				[asMenuButton]="true">
-				<fudis-dropdown-menu [align]="'right'">
-					<fudis-dropdown-menu-item [label]="'Item 1'" (handleClick)="doSomething($event)"></fudis-dropdown-menu-item>
-					<fudis-dropdown-menu-item [label]="'Item 22 disabled'" [disabled]="true"></fudis-dropdown-menu-item>
-					<fudis-dropdown-menu-item [label]="'Item 23'"></fudis-dropdown-menu-item>
-					<fudis-dropdown-menu-item
-						[label]="'Item 45 with very long text so no one really bothers to even read it'"></fudis-dropdown-menu-item>
-					<fudis-dropdown-menu-item [label]="'Item 100'"></fudis-dropdown-menu-item>
-					<fudis-dropdown-menu-item [label]="'Item 2200250'"></fudis-dropdown-menu-item>
-					<fudis-dropdown-menu-item [label]="'Item 878787878571'"></fudis-dropdown-menu-item>
-				</fudis-dropdown-menu>
-			</fudis-button>
+				<fudis-button [label]="'Open dialog from template'" (handleClick)="openDialog()"></fudis-button>
+				<fudis-button [label]="'Open dialog from component'" (handleClick)="openDialogFromComponent()"></fudis-button>
+				<fudis-button
+					[label]="'Menu'"
+					[labelHidden]="true"
+					[size]="'small'"
+					[variant]="'secondary'"
+					[icon]="'three-dots'"
+					[asMenuButton]="true">
+					<fudis-dropdown-menu [align]="'right'">
+						<fudis-dropdown-menu-item [label]="'Item 1'" (handleClick)="doSomething($event)"></fudis-dropdown-menu-item>
+						<fudis-dropdown-menu-item [label]="'Item 22 disabled'" [disabled]="true"></fudis-dropdown-menu-item>
+						<fudis-dropdown-menu-item [label]="'Item 23'"></fudis-dropdown-menu-item>
+						<fudis-dropdown-menu-item
+							[label]="
+								'Item 45 with very long text so no one really bothers to even read it'
+							"></fudis-dropdown-menu-item>
+						<fudis-dropdown-menu-item [label]="'Item 100'"></fudis-dropdown-menu-item>
+						<fudis-dropdown-menu-item [label]="'Item 2200250'"></fudis-dropdown-menu-item>
+						<fudis-dropdown-menu-item [label]="'Item 878787878571'"></fudis-dropdown-menu-item>
+					</fudis-dropdown-menu>
+				</fudis-button>
+			</fudis-grid>
+
+			<fudis-expandable [title]="'Form with some transloco'" [collapsed]="false">
+				<ng-template fudisActions type="expandable">
+					<fudis-button (handleClick)="changeLanguage()" [label]="t('change_language')"></fudis-button>
+					<fudis-button [label]="'Submit!'" (handleClick)="clickSubmit()"></fudis-button>
+				</ng-template>
+				<ng-template fudisContent type="expandable">
+					<fudis-form
+						[errorSummaryVisible]="errorSummaryVisible"
+						[title]="'Form title here hello'"
+						[errorSummaryHelpText]="'There were some errors'"
+						[errorSummaryScreenReaderHelpText]="'Attention'"
+						[titleTag]="'h2'">
+						<ng-template fudisContent type="form">
+							<fudis-fieldset [title]="'FieldSet alkaa tästä'">
+								<ng-template fudisContent type="fieldset">
+									<fudis-text-input
+										[label]="t('label')"
+										[id]="'uniikki-idjoo'"
+										[helpText]="t('helpText')"
+										[errorMsg]="{ required: t('error_required') }"
+										[requiredText]="t('required')"
+										[control]="testFormGroup.controls['textInput']"></fudis-text-input>
+									<fudis-radio-button-group
+										[requiredText]="t('required')"
+										[id]="'truth-selection'"
+										[title]="t('chooseTruth')"
+										[helpText]="t('chooseTruthHelp')"
+										[errorMsg]="{ required: t('chooseTruthError') }"
+										[control]="testFormGroup.controls['truth']"
+										[options]="radioButtonOptions"></fudis-radio-button-group>
+									<fudis-dropdown
+										[id]="'dropdown-id-123'"
+										[label]="'Some dropdown'"
+										[options]="dropdownOptions"
+										[control]="testFormGroup.controls['dropdown']"></fudis-dropdown>
+									<fudis-datepicker
+										[id]="'datepicker-123'"
+										[label]="'Select some date'"
+										[control]="testFormGroup.controls['date']" />
+								</ng-template>
+							</fudis-fieldset>
+						</ng-template>
+					</fudis-form>
+
+					<fudis-body-text *ngIf="showSuccessBodyText">It seems everything is okay!</fudis-body-text>
+				</ng-template>
+			</fudis-expandable>
+
+			<fudis-expandable [title]="'Description list'">
+				<ng-template fudisContent type="expandable">
+					<fudis-description-list [data]="testData"></fudis-description-list>
+				</ng-template>
+			</fudis-expandable>
+
+			<fudis-expandable [title]="'Grid stuff'">
+				<ng-template fudisContent type="expandable">
+					<fudis-heading [tag]="'h3'" [size]="'xl'">Väliotsikko</fudis-heading>
+					<fudis-grid>
+						<fudis-body-text>Showcase of grid items</fudis-body-text>
+						<fudis-body-text>Showcase of grid items</fudis-body-text>
+						<fudis-body-text>Showcase of grid items</fudis-body-text>
+						<fudis-body-text>Showcase of grid items</fudis-body-text>
+						<fudis-body-text>Showcase of grid items</fudis-body-text>
+						<fudis-body-text>Showcase of grid items</fudis-body-text>
+					</fudis-grid>
+				</ng-template>
+			</fudis-expandable>
+			<fudis-expandable [title]="'Description list'">
+				<ng-template fudisContent type="expandable">
+					<fudis-description-list [data]="testData"></fudis-description-list>
+				</ng-template>
+			</fudis-expandable>
+
+			<fudis-expandable [title]="'Grid stuff'">
+				<ng-template fudisContent type="expandable">
+					<fudis-heading [tag]="'h3'" [size]="'xl'">Väliotsikko</fudis-heading>
+					<fudis-grid>
+						<fudis-body-text>Showcase of grid items</fudis-body-text>
+						<fudis-body-text>Showcase of grid items</fudis-body-text>
+						<fudis-body-text>Showcase of grid items</fudis-body-text>
+						<fudis-body-text>Showcase of grid items</fudis-body-text>
+						<fudis-body-text>Showcase of grid items</fudis-body-text>
+						<fudis-body-text>Showcase of grid items</fudis-body-text>
+					</fudis-grid>
+				</ng-template>
+			</fudis-expandable>
+
+			<fudis-expandable [title]="'Autocomplete examples'">
+				<ng-template fudisContent type="expandable">
+					<fudis-grid>
+						<fudis-heading [tag]="'h3'" [size]="'xl'">Single-select dropdown</fudis-heading>
+						<fudis-autocomplete
+							[label]="'Choose item'"
+							[clearFilterText]="'Clear'"
+							[variant]="'dropdown'"
+							[id]="'dropdown-1234'"
+							[options]="multipleOptions"
+							[requiredText]="'Required'"
+							[control]="testFormGroup.controls['autocompleteDropdown']"
+							[errorMsg]="{ required: t('error_required') }"></fudis-autocomplete>
+						<fudis-heading [tag]="'h3'" [size]="'xl'">Single-select search</fudis-heading>
+						<fudis-autocomplete
+							[label]="'Search item'"
+							[clearFilterText]="'Clear'"
+							[options]="multipleOptions"
+							[control]="testFormGroup.controls['autocompleteSearch']"
+							[errorMsg]="{ required: t('error_required') }"></fudis-autocomplete>
+					</fudis-grid>
+				</ng-template>
+			</fudis-expandable>
 		</fudis-grid>
 
-		<fudis-expandable [title]="'Form with some transloco'" [collapsed]="false">
-			<ng-template fudisActions type="expandable">
-				<fudis-button (handleClick)="changeLanguage()" [label]="t('change_language')"></fudis-button>
-				<fudis-button [label]="'Submit!'" (handleClick)="clickSubmit()"></fudis-button>
+		<fudis-footer [logoAltText]="'Link to Funidata homepage'">
+			<ng-template fudisFooterRight>
+				<fudis-link
+					[href]="'example.com'"
+					[linkTitle]="'Tietosuojaseloste'"
+					[isExternalLink]="true"
+					[externalLinkAriaLabel]="'Link to external source'" />
+				<fudis-link
+					[href]="'example.com'"
+					[linkTitle]="'Saavutettavuusseloste'"
+					[isExternalLink]="true"
+					[externalLinkAriaLabel]="'Link to external source'" />
+				<fudis-link [href]="'example.com'" [linkTitle]="'Järjestelmätiedot'" />
 			</ng-template>
-			<ng-template fudisContent type="expandable">
-				<fudis-form
-					[errorSummaryVisible]="errorSummaryVisible"
-					[title]="'Form title here hello'"
-					[errorSummaryHelpText]="'There were some errors'"
-					[errorSummaryScreenReaderHelpText]="'Attention'"
-					[titleTag]="'h2'">
-					<ng-template fudisContent type="form">
-						<fudis-fieldset [title]="'FieldSet alkaa tästä'">
-							<ng-template fudisContent type="fieldset">
-								<fudis-text-input
-									[label]="t('label')"
-									[id]="'uniikki-idjoo'"
-									[helpText]="t('helpText')"
-									[errorMsg]="{ required: t('error_required') }"
-									[requiredText]="t('required')"
-									[control]="testFormGroup.controls['textInput']"></fudis-text-input>
-								<fudis-radio-button-group
-									[requiredText]="t('required')"
-									[id]="'truth-selection'"
-									[title]="t('chooseTruth')"
-									[helpText]="t('chooseTruthHelp')"
-									[errorMsg]="{ required: t('chooseTruthError') }"
-									[control]="testFormGroup.controls['truth']"
-									[options]="radioButtonOptions"></fudis-radio-button-group>
-								<fudis-dropdown
-									[id]="'dropdown-id-123'"
-									[label]="'Some dropdown'"
-									[options]="dropdownOptions"
-									[control]="testFormGroup.controls['dropdown']"></fudis-dropdown>
-								<fudis-datepicker
-									[id]="'datepicker-123'"
-									[label]="'Select some date'"
-									[control]="testFormGroup.controls['date']" />
-							</ng-template>
-						</fudis-fieldset>
-					</ng-template>
-				</fudis-form>
-
-				<fudis-body-text *ngIf="showSuccessBodyText">It seems everything is okay!</fudis-body-text>
+			<ng-template fudisFooterLeft>
+				<fudis-link
+					[href]="'example.com'"
+					[linkTitle]="'Promo link'"
+					[isExternalLink]="true"
+					[externalLinkAriaLabel]="'Link to external source'" />
 			</ng-template>
-		</fudis-expandable>
-
-		<fudis-expandable [title]="'Description list'">
-			<ng-template fudisContent type="expandable">
-				<fudis-description-list [data]="testData"></fudis-description-list>
-			</ng-template>
-		</fudis-expandable>
-
-		<fudis-expandable [title]="'Grid stuff'">
-			<ng-template fudisContent type="expandable">
-				<fudis-heading [tag]="'h3'" [size]="'xl'">Väliotsikko</fudis-heading>
-				<fudis-grid>
-					<fudis-body-text>Showcase of grid items</fudis-body-text>
-					<fudis-body-text>Showcase of grid items</fudis-body-text>
-					<fudis-body-text>Showcase of grid items</fudis-body-text>
-					<fudis-body-text>Showcase of grid items</fudis-body-text>
-					<fudis-body-text>Showcase of grid items</fudis-body-text>
-					<fudis-body-text>Showcase of grid items</fudis-body-text>
-				</fudis-grid>
-			</ng-template>
-		</fudis-expandable>
-
-		<fudis-expandable [title]="'Autocomplete examples'">
-			<ng-template fudisContent type="expandable">
-				<fudis-grid>
-					<fudis-heading [tag]="'h3'" [size]="'xl'">Single-select dropdown</fudis-heading>
-					<fudis-autocomplete
-						[label]="'Choose item'"
-						[clearFilterText]="'Clear'"
-						[variant]="'dropdown'"
-						[id]="'dropdown-1234'"
-						[options]="multipleOptions"
-						[requiredText]="'Required'"
-						[control]="testFormGroup.controls['autocompleteDropdown']"
-						[errorMsg]="{ required: t('error_required') }"></fudis-autocomplete>
-					<fudis-heading [tag]="'h3'" [size]="'xl'">Single-select search</fudis-heading>
-					<fudis-autocomplete
-						[label]="'Search item'"
-						[clearFilterText]="'Clear'"
-						[options]="multipleOptions"
-						[control]="testFormGroup.controls['autocompleteSearch']"
-						[errorMsg]="{ required: t('error_required') }"></fudis-autocomplete>
-				</fudis-grid>
-			</ng-template>
-		</fudis-expandable>
-	</fudis-grid>
+		</fudis-footer>
+	</div>
 </ng-container>
 
 <ng-template #exampleDialogTemplate>
