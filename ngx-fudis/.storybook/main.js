@@ -1,4 +1,3 @@
-import remarkGfm from 'remark-gfm';
 module.exports = {
 	stories: [
 		'../projects/ngx-fudis/src/lib/**/*.stories.ts',
@@ -26,11 +25,11 @@ module.exports = {
 	staticDirs: [
 		'./../projects/ngx-fudis/src/lib/assets/fonts/fira/woff2',
 		'./../projects/ngx-fudis/src/lib/assets/icons',
+		'./../projects/ngx-fudis/src/lib/assets/images',
 	],
 	docs: {
 		autodocs: true,
-		// see below for alternatives
-		defaultName: 'Documentation', // set to change the name of generated docs entries
+		defaultName: 'Documentation',
 	},
 
 	previewHead: (head) => `

@@ -6,7 +6,7 @@ import { FudisIdService } from '../../../utilities/id-service.service';
 import { FudisTranslationConfigService } from '../../../utilities/config.service';
 
 @Component({
-	selector: 'fudis-checkbox[id][label]',
+	selector: 'fudis-checkbox',
 	templateUrl: './checkbox.component.html',
 	styleUrls: ['./checkbox.component.scss'],
 })

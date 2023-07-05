@@ -20,8 +20,14 @@ import { BadgeComponent } from './components/badge/badge.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/form/checkbox/checkbox.component';
-import { ContentDirective } from './directives/content-projection/content/content.directive';
+
 import { DateRangeComponent } from './components/form/date/date-range/date-range.component';
+
+import {
+	ContentDirective,
+	FooterContentLeftDirective,
+	FooterContentRightDirective,
+} from './directives/content-projection/content/content.directive';
 import { DatepickerComponent } from './components/form/date/datepicker/datepicker.component';
 
 import { DatepickerCustomHeaderComponent } from './components/form/date/date-common/datepicker-custom-header/datepicker-custom-header.component';
@@ -75,6 +81,7 @@ import { DescriptionListItemComponent } from './components/description-list/desc
 import { DescriptionListItemTermComponent } from './components/description-list/description-list-item/description-list-item-term/description-list-item-term.component';
 import { DescriptionListItemDetailsComponent } from './components/description-list/description-list-item/description-list-item-details/description-list-item-details.component';
 import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
+import { FooterComponent } from './components/footer/footer.component';
 import { FudisTranslationConfigService } from './utilities/config.service';
 
 @NgModule({
@@ -109,6 +116,8 @@ import { FudisTranslationConfigService } from './utilities/config.service';
 		ExpandableComponent,
 		FieldSetBaseDirective,
 		FieldSetComponent,
+		FooterContentLeftDirective,
+		FooterContentRightDirective,
 		FormComponent,
 		InputWithLanguageOptionsComponent,
 		GridComponent,
@@ -136,6 +145,7 @@ import { FudisTranslationConfigService } from './utilities/config.service';
 		ActionsDirective,
 
 		NotificationsDirective,
+		FooterComponent,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
@@ -185,6 +195,9 @@ import { FudisTranslationConfigService } from './utilities/config.service';
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,
+		FooterComponent,
+		FooterContentLeftDirective,
+		FooterContentRightDirective,
 		DialogTitleDirective,
 		DialogContentDirective,
 		DialogCloseDirective,

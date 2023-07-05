@@ -8,7 +8,7 @@ import { FudisIdService } from '../../../utilities/id-service.service';
 import { FudisTranslationConfigService } from '../../../utilities/config.service';
 
 @Component({
-	selector: 'fudis-text-input[id][label]',
+	selector: 'fudis-text-input',
 	templateUrl: './text-input.component.html',
 	styleUrls: ['./text-input.component.scss'],
 })

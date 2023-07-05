@@ -86,4 +86,18 @@ export class FudisGridService {
 			});
 		}
 	}
+
+	setGridItemAlignY(element: HTMLElement, alignY: string | FudisGridResponsiveData[]): void {
+		const elementToModify = element;
+
+		if (typeof alignY === 'string') {
+			elementToModify.style.alignSelf = alignY;
+		} else {
+			alignY.forEach((item) => {
+				if (this.currentScreenSize()?.breakpoints[item.breakpoint]) {
+					elementToModify.style.alignSelf = item.value;
+				}
+			});
+		}
+	}
 }

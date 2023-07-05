@@ -7,7 +7,7 @@ import { FudisIdService } from '../../../utilities/id-service.service';
 import { FudisTranslationConfigService } from '../../../utilities/config.service';
 
 @Component({
-	selector: 'fudis-dropdown[id][label]',
+	selector: 'fudis-dropdown',
 	templateUrl: './dropdown.component.html',
 	styleUrls: ['./dropdown.component.scss'],
 	encapsulation: ViewEncapsulation.None,
