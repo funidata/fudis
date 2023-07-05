@@ -19,7 +19,8 @@
 .fudis-dropdown {
 	&__option-list {
 		@include borders.border('1px', 'solid', 'gray-middle');
-		@include colorMixins.bg-color('white');
+
+		background-color: colorTokens.$color-white !important;
 	}
 
 	&__option {
@@ -52,6 +53,12 @@
 }
 
 .fudis-dropdown {
+	&__select {
+		& .mat-mdc-select-value {
+			font-weight: lighter;
+		}
+	}
+
 	&__option {
 		&.mat-mdc-option {
 			&.mat-mdc-option-active.mdc-list-item--selected {
