@@ -29,8 +29,7 @@
 .fudis-autocomplete__option-list,
 .fudis-dropdown__option-list {
   border: 1px solid #727272;
-  /* stylelint-disable-next-line property-disallowed-list */
-  background-color: #ffffff;
+  background-color: #ffffff !important;
 }
 
 .fudis-autocomplete__option.mat-mdc-option,
@@ -62,6 +61,10 @@
   font-family: "Fira Sans", sans-serif;
   font-size: 0.875rem;
   font-weight: 400;
+}
+
+.fudis-dropdown__select .mat-mdc-select-value {
+  font-weight: lighter;
 }
 
 .fudis-dropdown__option.mat-mdc-option.mat-mdc-option-active.mdc-list-item--selected {
