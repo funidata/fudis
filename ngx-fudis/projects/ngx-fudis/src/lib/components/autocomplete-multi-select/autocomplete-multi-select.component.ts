@@ -125,11 +125,11 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 		switch (event.key) {
 			case 'ArrowDown':
 				event.preventDefault();
-				parent.nextElementSibling?.querySelector('input').focus();
+				parent?.nextElementSibling?.querySelector('input').focus();
 				break;
 			case 'ArrowUp':
 				event.preventDefault();
-				parent.previousElementSibling?.querySelector('input').focus();
+				parent?.previousElementSibling?.querySelector('input').focus();
 				break;
 			case 'Escape':
 				this.input.nativeElement.focus();
