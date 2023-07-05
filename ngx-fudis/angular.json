@@ -126,6 +126,11 @@
 								"output": "./"
 							},
 							{
+								"glob": "*.svg",
+								"input": "../ngx-fudis/projects/ngx-fudis/src/lib/assets/images",
+								"output": "./"
+							},
+							{
 								"glob": "*.woff2",
 								"input": "../ngx-fudis/projects/ngx-fudis/src/lib/assets/fonts/fira/woff2",
 								"output": "./"

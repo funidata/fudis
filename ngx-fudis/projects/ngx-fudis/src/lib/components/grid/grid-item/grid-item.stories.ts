@@ -86,9 +86,11 @@ Example.args = {
 };
 Example.argTypes = {
 	alignX: {
+		options: ['stretch', 'start', 'end', 'center'],
 		control: { type: 'radio' },
 	},
 	alignY: {
+		options: ['stretch', 'start', 'end', 'center'],
 		control: { type: 'radio' },
 	},
 	columns: {
@@ -178,6 +180,20 @@ export const AlignY: StoryFn<GridItemComponent> = (args: any) => ({
 		>
 		<fudis-grid-item class="grid-item-highlight" [alignY]="'center'"
 			><fudis-body-text>alignY = 'center'</fudis-body-text></fudis-grid-item
+		><fudis-grid-item class="grid-item">
+			<fudis-body-text style="margin-bottom: 1rem;"
+				>Normal grid item. With more content so effects of adjusting a single element can be seen
+				better.</fudis-body-text
+			>
+			<fudis-body-text
+				>Barkadeer splice the main brace fire in the hole Corsair cackle fruit topgallant six pounders careen avast
+				belay. Sutler Jack Ketch broadside six pounders gally knave landlubber or just lubber handsomely ballast draft.
+				Landlubber or just lubber Sea Legs bucko code of conduct chase wench spike lateen sail bilge
+				boom.</fudis-body-text
+			></fudis-grid-item
+		>
+		<fudis-grid-item class="grid-item-highlight" [alignY]="{xs: 'end', sm: 'stretch', md: 'start', lg: 'center'}"
+			><fudis-body-text>alignY = 'responsive'</fudis-body-text></fudis-grid-item
 		><fudis-grid-item class="grid-item">
 			<fudis-body-text style="margin-bottom: 1rem;"
 				>Normal grid item. With more content so effects of adjusting a single element can be seen

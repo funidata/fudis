@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import { Directive, Input, TemplateRef } from '@angular/core';
 
 /**
@@ -9,4 +10,14 @@ export class ContentDirective {
 	constructor(public templateRef: TemplateRef<unknown>) {}
 
 	@Input({ required: true }) type: 'expandable' | 'notification' | 'form' | 'fieldset' | 'section';
+}
+
+@Directive({ selector: '[fudisFooterLeft]' })
+export class FooterContentLeftDirective {
+	constructor(public templateRef: TemplateRef<unknown>) {}
+}
+
+@Directive({ selector: '[fudisFooterRight]' })
+export class FooterContentRightDirective {
+	constructor(public templateRef: TemplateRef<unknown>) {}
 }

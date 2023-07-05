@@ -29,6 +29,9 @@ export class GridItemDirective implements OnInit, OnChanges {
 			if (typeof this._alignX !== 'string') {
 				this.setAlignX();
 			}
+			if (typeof this._alignY !== 'string') {
+				this.setAlignY();
+			}
 		});
 	}
 
@@ -38,6 +41,8 @@ export class GridItemDirective implements OnInit, OnChanges {
 	private _columns: string | FudisGridResponsiveData[] = gridItemDefault;
 
 	private _alignX: FudisGridItemAlignment | FudisGridResponsiveData[] = 'stretch';
+
+	private _alignY: FudisGridItemAlignment | FudisGridResponsiveData[] = 'stretch';
 
 	/**
 	 * Internal reference for the this Grid Item element
@@ -60,11 +65,6 @@ export class GridItemDirective implements OnInit, OnChanges {
 	}
 
 	/**
-	 * Align Grid Item vertically
-	 */
-	@Input() alignY: FudisGridItemAlignment = 'stretch';
-
-	/**
 	 * Align Grid Item horizontally
 	 */
 	@Input() set alignX(value: FudisGridItemAlignment | FudisGridItemAlignResponsive) {
@@ -72,6 +72,17 @@ export class GridItemDirective implements OnInit, OnChanges {
 			this._alignX = value;
 		} else {
 			this._alignX = getGridBreakpointDataArray(value, 'stretch');
+		}
+	}
+
+	/**
+	 * Align Grid Item vertically
+	 */
+	@Input() set alignY(value: FudisGridItemAlignment | FudisGridItemAlignResponsive) {
+		if (typeof value === 'string') {
+			this._alignY = value;
+		} else {
+			this._alignY = getGridBreakpointDataArray(value, 'stretch');
 		}
 	}
 
@@ -86,14 +97,17 @@ export class GridItemDirective implements OnInit, OnChanges {
 		this._gridService.setGridItemAlignX(this._element, this._alignX);
 	}
 
+	setAlignY(): void {
+		this._gridService.setGridItemAlignY(this._element, this._alignY);
+	}
+
 	/**
 	 * Apply CSS settings from Inputs
 	 */
 	applyGridItemCss(): void {
-		this._element.classList.add(`fudis-grid-item__align-self__${this.alignY}`);
-
 		this.setColumns();
 		this.setAlignX();
+		this.setAlignY();
 	}
 
 	ngOnInit(): void {
