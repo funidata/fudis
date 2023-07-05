@@ -16,6 +16,9 @@ export class FooterComponent {
 
 	@ContentChild(FooterContentRightDirective) contentRight: FooterContentRightDirective;
 
+	/**
+	 * Alternative text for Funidata logo
+	 */
 	@Input({ required: true }) logoAltText: string;
 
 	protected _columns: FudisGridColumnsResponsive = { sm: 2 };
