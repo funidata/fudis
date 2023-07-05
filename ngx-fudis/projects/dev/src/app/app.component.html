@@ -149,18 +149,18 @@
 			</fudis-expandable>
 		</fudis-grid>
 
-		<fudis-footer logoAltText="Link to Funidata homepage">
+		<fudis-footer [logoAltText]="'Link to Funidata homepage'">
 			<ng-template fudisFooterRight>
 				<fudis-link
 					[href]="'example.com'"
 					[linkTitle]="'Tietosuojaseloste'"
 					[isExternalLink]="true"
-					externalLinkAriaLabel="link to external source" />
+					[externalLinkAriaLabel]="'Link to external source'" />
 				<fudis-link
 					[href]="'example.com'"
 					[linkTitle]="'Saavutettavuusseloste'"
 					[isExternalLink]="true"
-					externalLinkAriaLabel="link to external source" />
+					[externalLinkAriaLabel]="'Link to external source'" />
 				<fudis-link [href]="'example.com'" [linkTitle]="'Järjestelmätiedot'" />
 			</ng-template>
 			<ng-template fudisFooterLeft>
@@ -168,7 +168,7 @@
 					[href]="'example.com'"
 					[linkTitle]="'Promo link'"
 					[isExternalLink]="true"
-					externalLinkAriaLabel="link to external source" />
+					[externalLinkAriaLabel]="'Link to external source'" />
 			</ng-template>
 		</fudis-footer>
 	</div>

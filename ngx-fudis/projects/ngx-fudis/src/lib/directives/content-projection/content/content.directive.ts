@@ -9,14 +9,7 @@ import { Directive, Input, TemplateRef } from '@angular/core';
 export class ContentDirective {
 	constructor(public templateRef: TemplateRef<unknown>) {}
 
-	@Input({ required: true }) type:
-		| 'expandable'
-		| 'notification'
-		| 'form'
-		| 'fieldset'
-		| 'section'
-		| 'footer-left'
-		| 'footer-right';
+	@Input({ required: true }) type: 'expandable' | 'notification' | 'form' | 'fieldset' | 'section';
 }
 
 @Directive({ selector: '[fudisFooterLeft]' })
