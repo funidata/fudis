@@ -7,15 +7,11 @@
 @use '../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-footer {
-	@include utilities.box-reset();
+	@include utilities.box-reset;
 	@include colorMixins.bg-color('gray-extra-light');
 
 	position: relative;
 	text-align: center;
-
-	@include breakpoints.breakpoint('sm') {
-		text-align: initial;
-	}
 
 	fudis-link {
 		@include typography.text-link-m-typography;
@@ -30,9 +26,9 @@
 	}
 
 	&__content {
+		bottom: 0;
 		padding-top: spacing.$spacing-md;
 		padding-bottom: spacing.$spacing-xl;
-		bottom: 0;
 	}
 
 	&__item {
@@ -57,5 +53,9 @@
 				}
 			}
 		}
+	}
+
+	@include breakpoints.breakpoint('sm') {
+		text-align: initial;
 	}
 }
