@@ -5,7 +5,7 @@ import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnin
 import { FudisIdService } from '../../../utilities/id-service.service';
 
 @Component({
-	selector: 'fudis-checkbox[id][label]',
+	selector: 'fudis-checkbox',
 	templateUrl: './checkbox.component.html',
 	styleUrls: ['./checkbox.component.scss'],
 })

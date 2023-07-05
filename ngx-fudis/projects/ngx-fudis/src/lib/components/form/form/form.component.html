@@ -16,7 +16,7 @@
 	[marginSides]="marginSides">
 	<div [id]="_id + '_header'" class="fudis-form__header">
 		<div class="fudis-form__header__main">
-			<ng-container *ngIf="title">
+			<ng-container *ngIf="title && titleTag">
 				<div class="fudis-form__header__title">
 					<fudis-heading [marginBottom]="'xs'" [size]="titleSize" [tag]="titleTag"
 						>{{ title }}
