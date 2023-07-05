@@ -41,7 +41,7 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
 };
 
 @Component({
-	selector: 'fudis-datepicker[id][label]',
+	selector: 'fudis-datepicker',
 	templateUrl: './datepicker.component.html',
 	styleUrls: ['./datepicker.component.scss'],
 	encapsulation: ViewEncapsulation.None,

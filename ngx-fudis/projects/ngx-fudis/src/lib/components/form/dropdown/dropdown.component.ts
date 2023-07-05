@@ -6,7 +6,7 @@ import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnin
 import { FudisIdService } from '../../../utilities/id-service.service';
 
 @Component({
-	selector: 'fudis-dropdown[id][label]',
+	selector: 'fudis-dropdown',
 	templateUrl: './dropdown.component.html',
 	styleUrls: ['./dropdown.component.scss'],
 	encapsulation: ViewEncapsulation.None,

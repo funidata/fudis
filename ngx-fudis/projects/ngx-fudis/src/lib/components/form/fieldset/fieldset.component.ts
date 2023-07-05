@@ -1,4 +1,4 @@
-import { Component, ContentChild, Input, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ContentChild, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
@@ -13,12 +13,14 @@ import { ContentDirective } from '../../../directives/content-projection/content
 	styleUrls: ['./fieldset.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class FieldSetComponent extends FieldSetBaseDirective {
+export class FieldSetComponent extends FieldSetBaseDirective implements AfterViewInit {
 	@ContentChild(ActionsDirective) headerActions: ActionsDirective | null;
 
 	@ContentChild(NotificationsDirective) notifications: NotificationsDirective;
 
 	@ContentChild(ContentDirective) content: ContentDirective;
+
+	@ViewChild('fieldset') fieldset: ElementRef;
 
 	/**
 	 * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
@@ -50,4 +52,15 @@ export class FieldSetComponent extends FieldSetBaseDirective {
 	 * Horizontal margins left and right of the grid
 	 */
 	@Input() marginSides: FudisGridMarginSide = 'none';
+
+	/**
+	 * Set focus to fieldset when it appears first time
+	 */
+	@Input() initialFocus: boolean = false;
+
+	ngAfterViewInit(): void {
+		if (this.initialFocus) {
+			this.fieldset.nativeElement.focus();
+		}
+	}
 }

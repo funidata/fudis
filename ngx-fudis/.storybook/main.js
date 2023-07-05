@@ -1,4 +1,3 @@
-import remarkGfm from 'remark-gfm';
 module.exports = {
 	stories: [
 		'../projects/ngx-fudis/src/lib/**/*.stories.ts',
@@ -30,8 +29,7 @@ module.exports = {
 	],
 	docs: {
 		autodocs: true,
-		// see below for alternatives
-		defaultName: 'Documentation', // set to change the name of generated docs entries
+		defaultName: 'Documentation',
 	},
 
 	previewHead: (head) => `

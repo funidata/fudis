@@ -24,7 +24,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 
 	@Input() title: string;
 
-	@Input({ required: true }) titleTag: FudisHeadingTag;
+	@Input() titleTag: FudisHeadingTag;
 
 	@Input() titleSize: FudisHeadingSize = 'xl';
 
