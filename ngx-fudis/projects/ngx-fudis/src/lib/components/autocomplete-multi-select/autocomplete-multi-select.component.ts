@@ -139,7 +139,7 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	@HostListener('document:click', ['$event.target'])
 	handleWindowClick(targetElement: HTMLElement) {
 		// Close dropdown-menu if click is outside of the autocomple-multi-select component
-		if (targetElement && document.body.contains(targetElement) && !this.wrapper.nativeElement.contains(targetElement)) {
+		if (targetElement && !this.wrapper.nativeElement.contains(targetElement)) {
 			this._toggleOn = false;
 		}
 		this._clickService.setMenuStatus(this._toggleOn);
