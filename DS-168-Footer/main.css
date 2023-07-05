@@ -859,27 +859,24 @@ textarea.cdk-textarea-autosize-measuring-firefox {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.mat-mdc-option {
-  color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));
-}
-.mat-mdc-option:hover:not(.mdc-list-item--disabled), .mat-mdc-option:focus.mdc-list-item, .mat-mdc-option.mat-mdc-option-active.mdc-list-item, .mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(.mdc-list-item--disabled) {
-  background: rgba(0, 0, 0, 0.04);
-}
-
-.mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
-  color: var(--mdc-theme-primary, var(--fudis-color-primary));
+html {
+  --mat-option-selected-state-label-text-color: var(--fudis-color-primary);
+  --mat-option-label-text-color: rgba(0, 0, 0, 0.87);
+  --mat-option-hover-state-layer-color: rgba(0, 0, 0, 0.04);
+  --mat-option-focus-state-layer-color: rgba(0, 0, 0, 0.04);
+  --mat-option-selected-state-layer-color: rgba(0, 0, 0, 0.04);
 }
 
-.mat-accent .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
-  color: var(--mdc-theme-secondary, var(--fudis-color-primary));
+.mat-accent {
+  --mat-option-selected-state-label-text-color: var(--fudis-color-primary);
 }
 
-.mat-warn .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
-  color: var(--mdc-theme-error, #f44336);
+.mat-warn {
+  --mat-option-selected-state-label-text-color: #f44336;
 }
 
-.mat-mdc-optgroup-label {
-  color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));
+html {
+  --mat-optgroup-label-text-color: rgba(0, 0, 0, 0.87);
 }
 
 .mat-pseudo-checkbox-full {
@@ -1059,14 +1056,20 @@ textarea.cdk-textarea-autosize-measuring-firefox {
   display: none;
 }
 
-.mat-mdc-option {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-family: var(--mdc-typography-body1-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-body1-font-size, 1.125rem);
-  line-height: var(--mdc-typography-body1-line-height, 1.125rem);
-  font-weight: var(--mdc-typography-body1-font-weight, 500);
-  letter-spacing: var(--mdc-typography-body1-letter-spacing, normal);
+html {
+  --mat-option-label-text-font: Fira Sans;
+  --mat-option-label-text-line-height: 1.125rem;
+  --mat-option-label-text-size: 1.125rem;
+  --mat-option-label-text-tracking: normal;
+  --mat-option-label-text-weight: 500;
+}
+
+html {
+  --mat-optgroup-label-text-font: Fira Sans;
+  --mat-optgroup-label-text-line-height: 1.125rem;
+  --mat-optgroup-label-text-size: 1.125rem;
+  --mat-optgroup-label-text-tracking: normal;
+  --mat-optgroup-label-text-weight: 500;
 }
 
 .mat-badge-content {
@@ -1339,14 +1342,20 @@ textarea.cdk-textarea-autosize-measuring-firefox {
   font-size: 1rem;
 }
 
-.mat-mdc-option {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-family: var(--mdc-typography-body1-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-body1-font-size, 1.125rem);
-  line-height: var(--mdc-typography-body1-line-height, 1.125rem);
-  font-weight: var(--mdc-typography-body1-font-weight, 500);
-  letter-spacing: var(--mdc-typography-body1-letter-spacing, normal);
+html {
+  --mat-option-label-text-font: Fira Sans;
+  --mat-option-label-text-line-height: 1.125rem;
+  --mat-option-label-text-size: 1.125rem;
+  --mat-option-label-text-tracking: normal;
+  --mat-option-label-text-weight: 500;
+}
+
+html {
+  --mat-optgroup-label-text-font: Fira Sans;
+  --mat-optgroup-label-text-line-height: 1.125rem;
+  --mat-optgroup-label-text-size: 1.125rem;
+  --mat-optgroup-label-text-tracking: normal;
+  --mat-optgroup-label-text-weight: 500;
 }
 
 .mat-mdc-card {
@@ -1464,47 +1473,12 @@ textarea.cdk-textarea-autosize-measuring-firefox {
   font-size: 1.125rem;
 }
 
-.mat-mdc-select-panel {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-family: var(--mdc-typography-subtitle1-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-subtitle1-font-size, 1.25rem);
-  line-height: var(--mdc-typography-subtitle1-line-height, 1.75rem);
-  font-weight: var(--mdc-typography-subtitle1-font-weight, 500);
-  letter-spacing: var(--mdc-typography-subtitle1-letter-spacing, normal);
-  -webkit-text-decoration: var(--mdc-typography-subtitle1-text-decoration, inherit);
-          text-decoration: var(--mdc-typography-subtitle1-text-decoration, inherit);
-  text-transform: var(--mdc-typography-subtitle1-text-transform, none);
-  /* @alternate */
-  line-height: 1.125rem;
-}
-
-.mat-mdc-select {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-family: var(--mdc-typography-body1-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-body1-font-size, 1.125rem);
-  line-height: var(--mdc-typography-body1-line-height, 1.125rem);
-  font-weight: var(--mdc-typography-body1-font-weight, 500);
-  letter-spacing: var(--mdc-typography-body1-letter-spacing, normal);
-  -webkit-text-decoration: var(--mdc-typography-body1-text-decoration, inherit);
-          text-decoration: var(--mdc-typography-body1-text-decoration, inherit);
-  text-transform: var(--mdc-typography-body1-text-transform, none);
-}
-
-.mat-mdc-autocomplete-panel {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-family: var(--mdc-typography-subtitle1-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-subtitle1-font-size, 1.25rem);
-  line-height: var(--mdc-typography-subtitle1-line-height, 1.75rem);
-  font-weight: var(--mdc-typography-subtitle1-font-weight, 500);
-  letter-spacing: var(--mdc-typography-subtitle1-letter-spacing, normal);
-  -webkit-text-decoration: var(--mdc-typography-subtitle1-text-decoration, inherit);
-          text-decoration: var(--mdc-typography-subtitle1-text-decoration, inherit);
-  text-transform: var(--mdc-typography-subtitle1-text-transform, none);
-  /* @alternate */
-  line-height: 1.125rem;
+html {
+  --mat-select-trigger-text-font: Fira Sans;
+  --mat-select-trigger-text-line-height: 1.125rem;
+  --mat-select-trigger-text-size: 1.125rem;
+  --mat-select-trigger-text-tracking: normal;
+  --mat-select-trigger-text-weight: 500;
 }
 
 .mat-mdc-dialog-container {
@@ -1521,16 +1495,11 @@ textarea.cdk-textarea-autosize-measuring-firefox {
 }
 
 .mat-mdc-standard-chip {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-family: var(--mdc-typography-body2-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-body2-font-size, 1rem);
-  line-height: var(--mdc-typography-body2-line-height, 1.25rem);
-  font-weight: var(--mdc-typography-body2-font-weight, 400);
-  letter-spacing: var(--mdc-typography-body2-letter-spacing, normal);
-  -webkit-text-decoration: var(--mdc-typography-body2-text-decoration, inherit);
-          text-decoration: var(--mdc-typography-body2-text-decoration, inherit);
-  text-transform: var(--mdc-typography-body2-text-transform, none);
+  --mdc-chip-label-text-font: Fira Sans;
+  --mdc-chip-label-text-line-height: 1.25rem;
+  --mdc-chip-label-text-size: 1rem;
+  --mdc-chip-label-text-tracking: normal;
+  --mdc-chip-label-text-weight: 400;
 }
 
 .mdc-form-field {
@@ -1621,21 +1590,13 @@ textarea.cdk-textarea-autosize-measuring-firefox {
   letter-spacing: normal;
 }
 
-.mat-mdc-paginator {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-family: var(--mdc-typography-caption-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-caption-font-size, 0.75rem);
-  line-height: var(--mdc-typography-caption-line-height, 1rem);
-  font-weight: var(--mdc-typography-caption-font-weight, 400);
-  letter-spacing: var(--mdc-typography-caption-letter-spacing, normal);
-  -webkit-text-decoration: var(--mdc-typography-caption-text-decoration, inherit);
-          text-decoration: var(--mdc-typography-caption-text-decoration, inherit);
-  text-transform: var(--mdc-typography-caption-text-transform, none);
-}
-
-.mat-mdc-paginator .mat-mdc-select-value {
-  font-size: 0.75rem;
+html {
+  --mat-paginator-container-text-font: Fira Sans;
+  --mat-paginator-container-text-line-height: 1rem;
+  --mat-paginator-container-text-size: 0.75rem;
+  --mat-paginator-container-text-tracking: normal;
+  --mat-paginator-container-text-weight: 400;
+  --mat-paginator-select-trigger-text-size: 0.75rem;
 }
 
 .mat-mdc-tab-header {
@@ -1735,98 +1696,8 @@ textarea.cdk-textarea-autosize-measuring-firefox {
   /*rtl:end:ignore*/
 }
 
-.mdc-menu-surface {
-  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
-}
-.mdc-menu-surface {
-  background-color: var(--mdc-theme-surface, #fff);
-  color: var(--mdc-theme-on-surface, #000);
-}
-.mdc-list-item__primary-text {
-  color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));
-}
-
-.mdc-list-item__secondary-text {
-  color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54));
-}
-
-.mdc-list-item__overline-text {
-  color: var(--mdc-theme-text-hint-on-background, rgba(0, 0, 0, 0.38));
-}
-
-.mdc-list-item--with-leading-icon .mdc-list-item__start,
-.mdc-list-item--with-trailing-icon .mdc-list-item__end {
-  background-color: transparent;
-}
-
-.mdc-list-item--with-leading-icon .mdc-list-item__start,
-.mdc-list-item--with-trailing-icon .mdc-list-item__end {
-  color: var(--mdc-theme-text-icon-on-background, rgba(0, 0, 0, 0.38));
-}
-
-.mdc-list-item__end {
-  color: var(--mdc-theme-text-hint-on-background, rgba(0, 0, 0, 0.38));
-}
-
-.mdc-list-item--disabled .mdc-list-item__start,
-.mdc-list-item--disabled .mdc-list-item__content,
-.mdc-list-item--disabled .mdc-list-item__end {
-  opacity: 0.38;
-}
-
-.mdc-list-item--disabled .mdc-list-item__primary-text {
-  color: var(--mdc-theme-on-surface, #000);
-}
-.mdc-list-item--disabled .mdc-list-item__secondary-text {
-  color: var(--mdc-theme-on-surface, #000);
-}
-.mdc-list-item--disabled .mdc-list-item__overline-text {
-  color: var(--mdc-theme-on-surface, #000);
-}
-.mdc-list-item--disabled.mdc-list-item--with-leading-icon .mdc-list-item__start {
-  color: var(--mdc-theme-on-surface, #000);
-}
-.mdc-list-item--disabled.mdc-list-item--with-trailing-icon .mdc-list-item__end {
-  color: var(--mdc-theme-on-surface, #000);
-}
-.mdc-list-item--disabled.mdc-list-item--with-trailing-meta .mdc-list-item__end {
-  color: var(--mdc-theme-on-surface, #000);
-}
-
-.mdc-list-item--selected .mdc-list-item__primary-text,
-.mdc-list-item--activated .mdc-list-item__primary-text {
-  color: var(--mdc-theme-primary, var(--fudis-color-primary));
-}
-.mdc-list-item--selected.mdc-list-item--with-leading-icon .mdc-list-item__start,
-.mdc-list-item--activated.mdc-list-item--with-leading-icon .mdc-list-item__start {
-  color: var(--mdc-theme-primary, var(--fudis-color-primary));
-}
-
-.mdc-deprecated-list-group__subheader {
-  color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));
-}
-
-.mdc-list-divider::after {
-  border-bottom-color: white;
-}
-
-.mdc-list-divider {
-  background-color: rgba(0, 0, 0, 0.12);
-}
-
-.mat-mdc-autocomplete-panel {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-family: var(--mdc-typography-subtitle1-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-subtitle1-font-size, 1.25rem);
-  line-height: var(--mdc-typography-subtitle1-line-height, 1.75rem);
-  font-weight: var(--mdc-typography-subtitle1-font-weight, 500);
-  letter-spacing: var(--mdc-typography-subtitle1-letter-spacing, normal);
-  -webkit-text-decoration: var(--mdc-typography-subtitle1-text-decoration, inherit);
-          text-decoration: var(--mdc-typography-subtitle1-text-decoration, inherit);
-  text-transform: var(--mdc-typography-subtitle1-text-transform, none);
-  /* @alternate */
-  line-height: 1.125rem;
+html {
+  --mat-autocomplete-background-color: white;
 }
 
 .mat-mdc-button.mat-unthemed {
@@ -2242,7 +2113,7 @@ textarea.cdk-textarea-autosize-measuring-firefox {
 
 .mat-mdc-tooltip {
   --mdc-plain-tooltip-container-color: #616161;
-  --mdc-plain-tooltip-supporting-text-color: white;
+  --mdc-plain-tooltip-supporting-text-color: #fff;
 }
 
 .mat-mdc-tooltip {
