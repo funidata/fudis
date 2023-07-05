@@ -53,7 +53,7 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	@Input() selectedOptions: FudisDropdownOption[] = [];
 
 	/**
-	 * Aria-label for icon-only button when opeening dropdown
+	 * Aria-label for icon-only button when opening dropdown
 	 */
 	@Input() openAriaLabel: string = 'Open dropdown';
 
@@ -110,7 +110,7 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 
 		const checkboxInput = dropdownMenuElement.querySelector('.fudis-dropdown-menu-item__checkbox__input');
 
-		// TODO Näppäinnavigointi toimimaan myös chevron napista
+		// TODO Keyboard arrow navigation straight from chevron button - is it necessary?
 		if (wrapperInput === document.activeElement) {
 			checkboxInput.focus();
 		} else if (wrapperInput !== document.activeElement) {

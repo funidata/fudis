@@ -2,12 +2,27 @@ import { StoryFn, Meta } from '@storybook/angular';
 import { AutocompleteMultiSelectComponent } from './autocomplete-multi-select.component';
 import readme from './readme.mdx';
 
+const inputBaseDirectiveExcludes = [
+	'id',
+	'ariaLabel',
+	'disabled',
+	'errorMsg',
+	'ignoreRequiredCheck',
+	'invalidState',
+	'requiredText',
+	'onBlur',
+	'handleBlur',
+];
+
 export default {
 	title: 'Components/Autocomplete multi-select',
 	component: AutocompleteMultiSelectComponent,
 	parameters: {
 		docs: {
 			page: readme,
+		},
+		controls: {
+			exclude: inputBaseDirectiveExcludes,
 		},
 	},
 	argTypes: {},
