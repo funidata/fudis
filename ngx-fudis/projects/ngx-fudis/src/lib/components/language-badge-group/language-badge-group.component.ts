@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FudisLanguageOptions } from '../../../types/miscellaneous';
+import { FudisLanguageOption } from '../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-language-badge-group',
@@ -7,5 +7,5 @@ import { FudisLanguageOptions } from '../../../types/miscellaneous';
 	styleUrls: ['./language-badge-group.component.scss'],
 })
 export class LanguageBadgeGroupComponent {
-	languageOptions: FudisLanguageOptions[] = [];
+	languageOptions: FudisLanguageOption[] = [];
 }

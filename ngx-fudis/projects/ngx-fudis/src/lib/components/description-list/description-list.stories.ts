@@ -39,7 +39,7 @@ export default {
 } as Meta;
 
 const testData = [
-	{ key: 'First Name', value: 'Rex', language: ['sv', 'en', 'fi'] },
+	{ key: 'First Name', value: 'Rex' },
 	{ key: 'Last Name', value: 'Dangerwest' },
 	{ key: 'Alias', value: 'Radical Emmet Xtreme' },
 	{ key: 'Voice actor', value: 'Chris Pratt' },
