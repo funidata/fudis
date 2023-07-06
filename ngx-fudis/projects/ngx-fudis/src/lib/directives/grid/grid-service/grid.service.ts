@@ -1,9 +1,9 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Injectable, Signal, signal } from '@angular/core';
 
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisGridAttributes, FudisGridResponsiveData } from '../../../types/grid';
 import { breakpointsMinWidthToObserve } from '../gridUtils';
+import { untilDestroyed } from '../../../utilities/untilDestroyed';
 
 @Injectable()
 export class FudisGridService {
@@ -13,11 +13,13 @@ export class FudisGridService {
 	constructor(gridBreakpointObserver: BreakpointObserver) {
 		gridBreakpointObserver
 			.observe(breakpointsMinWidthToObserve)
-			.pipe(takeUntilDestroyed())
+			.pipe(this._untilDestroyed())
 			.subscribe((state: BreakpointState) => {
 				this._currentScreenSize.set(state);
 			});
 	}
+
+	private _untilDestroyed = untilDestroyed();
 
 	private _defaultGridValues = signal<FudisGridAttributes>({});
 

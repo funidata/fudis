@@ -1,13 +1,9 @@
 import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, ViewEncapsulation, effect } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
-
 import { FUDIS_DATE_FORMATS, FudisInputWidth } from 'projects/ngx-fudis/src/lib/types/forms';
 import { InputBaseDirective } from 'projects/ngx-fudis/src/lib/directives/form/input-base/input-base.directive';
-
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisIdService } from '../../../../utilities/id-service.service';
 import { FudisTranslationConfigService } from '../../../../utilities/config.service';
 
@@ -79,7 +75,7 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 	 */
 	protected subscribeToCloseLabel(): void {
 		this._configs()
-			.datepicker!.closeLabel!.pipe(takeUntilDestroyed())
+			.datepicker!.closeLabel!.pipe(this._untilDestroyed())
 			.subscribe((value) => {
 				this._datepickerIntl.closeCalendarLabel = value as string;
 			});

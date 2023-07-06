@@ -1,9 +1,9 @@
 import { Directive, Input, EventEmitter, Output, Signal, effect } from '@angular/core';
 
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisFormErrors, FudisTranslationConfig } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisTranslationConfigService } from '../../../utilities/config.service';
+import { untilDestroyed } from '../../../utilities/untilDestroyed';
 
 @Directive({
 	selector: '[fudisInputBase]',
@@ -79,9 +79,11 @@ export class InputBaseDirective extends TooltipApiDirective {
 
 	protected _required: boolean = false;
 
+	protected _untilDestroyed = untilDestroyed();
+
 	protected subscribeToRequiredText(): void {
 		this._configs()
-			.requiredText!.pipe(takeUntilDestroyed())
+			.requiredText!.pipe(this._untilDestroyed())
 			.subscribe((value) => {
 				this._requiredText = value;
 			});

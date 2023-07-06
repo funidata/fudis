@@ -1,10 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 import { Component, OnInit } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import { FudisDropdownOption, FudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
+import { untilDestroyed } from 'dist/ngx-fudis/lib/utilities/untilDestroyed';
 import { FudisErrorSummaryService, FudisTranslationConfigService } from 'ngx-fudis';
 
 type MyForm = {
@@ -33,7 +32,7 @@ export class AppFormExampleComponent implements OnInit {
 		// });
 	}
 
-	errorSummaryVisible: boolean = false;
+	_errorSummaryVisible: boolean = false;
 
 	showSuccessBodyText: boolean = false;
 
@@ -43,10 +42,12 @@ export class AppFormExampleComponent implements OnInit {
 
 	requiredText: string = '';
 
+	private _untilDestroyed = untilDestroyed();
+
 	ngOnInit(): void {
 		this.translocoService
 			.selectTranslateObject('options')
-			.pipe(takeUntilDestroyed())
+			.pipe(this._untilDestroyed())
 			.subscribe((value) => {
 				this.radioButtonOptions = [
 					{ value: true, viewValue: value.chooseTruthTrue, id: 'boolean-2', name: 'booleans' },
@@ -56,7 +57,7 @@ export class AppFormExampleComponent implements OnInit {
 
 		this.translocoService
 			.selectTranslation()
-			.pipe(takeUntilDestroyed())
+			.pipe(this._untilDestroyed())
 			.subscribe(() => {
 				if (this.errorSummaryVisible) {
 					setTimeout(() => {

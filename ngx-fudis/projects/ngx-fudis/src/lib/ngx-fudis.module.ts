@@ -143,7 +143,6 @@ import { FudisTranslationConfigService } from './utilities/config.service';
 		TooltipDirective,
 		ContentDirective,
 		ActionsDirective,
-
 		NotificationsDirective,
 		FooterComponent,
 	],
@@ -229,7 +228,6 @@ import { FudisTranslationConfigService } from './utilities/config.service';
 		FudisDropdownMenuItemService,
 		FudisIdService,
 		FudisTranslationConfigService,
-		MatDatepickerModule,
 	],
 })
 export class NgxFudisModule {}
