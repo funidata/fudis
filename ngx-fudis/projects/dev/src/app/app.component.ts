@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
 		private fudisConfig: FudisTranslationConfigService
 	) {
 		gridService.setGridDefaultValues({
-			columns: { xs: 1, xl: 2 },
+			columns: { xs: 1, lg: 2 },
 			marginSides: 'responsive',
 		});
 
