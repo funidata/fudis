@@ -5,13 +5,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MockComponent } from 'ng-mocks';
-import { IconComponent } from '../../icon/icon.component';
-import { GuidanceComponent } from '../guidance/guidance.component';
-import { LabelComponent } from '../label/label.component';
+import { IconComponent } from '../../../icon/icon.component';
+import { GuidanceComponent } from '../../guidance/guidance.component';
+import { LabelComponent } from '../../label/label.component';
 import { DatepickerComponent } from './datepicker.component';
 
 const datepickerControl: FormControl = new FormControl('');
-const requiredDatepickerControl: FormControl = new FormControl('', Validators.required);
 
 describe('DatepickerComponent', () => {
 	let component: DatepickerComponent;
@@ -93,16 +92,6 @@ describe('DatepickerComponent', () => {
 			fixture.detectChanges();
 
 			expect(datepickerInput.focus).toBeTruthy();
-		});
-
-		it('should show requiredText in label if input is required and requiredText is given', () => {
-			component.control = requiredDatepickerControl;
-			component.requiredText = 'Required';
-			fixture.detectChanges();
-
-			const labelComponent = fixture.nativeElement.querySelector('fudis-label');
-			const requiredLabel = labelComponent.querySelector('.fudis-label__content__required');
-			expect(requiredLabel.innerHTML).toContain(component.requiredText);
 		});
 
 		it('should have invalid class if datepicker is required, input is touched and no date has been chosen', () => {

@@ -12,7 +12,7 @@ import { FudisTranslationConfigService } from '../../../../utilities/config.serv
 	template: `<fudis-button [label]="_label" (handleClick)="changeLanguage()"></fudis-button>`,
 })
 class LanguageChangeComponent {
-	_label = 'Change language';
+	_label = 'Change calendar language';
 
 	_config: Signal<FudisTranslationConfig>;
 
@@ -25,23 +25,18 @@ class LanguageChangeComponent {
 
 		this._configService.setConfig({
 			appLanguage: 'en',
-			requiredText: this.requiredText,
 			datepicker: { closeLabel: this.closeLabel },
 		});
 	}
 
 	changeLanguage(): void {
 		if (this._config().appLanguage === 'en') {
-			this._label = 'Vaihda kieli';
-			this.requiredText.next('Pakollinen');
 			this.closeLabel.next('Sulje kalenteri');
 
 			this._configService.setConfig({
 				appLanguage: 'fi',
 			});
 		} else {
-			this._label = 'Change language';
-			this.requiredText.next('Required');
 			this.closeLabel.next('Close calendar');
 			this._configService.setConfig({
 				appLanguage: 'en',
@@ -62,50 +57,95 @@ export default {
 			providers: [importProvidersFrom(BrowserAnimationsModule)],
 		}),
 	],
-	argTypes: {},
+	argTypes: {
+		startDate: {
+			control: { type: 'object' },
+		},
+		endDate: {
+			control: { type: 'object' },
+		},
+	},
+	parameters: {
+		controls: {
+			exclude: [
+				'_dateRangeGroup',
+				'_destroyed',
+				'_heightSetTryCounter',
+				'_id',
+				'checkDateCrossings',
+				'ngOnInit',
+				'ngAfterContentInit',
+				'setLabelHeight',
+				'_dateRangeRef',
+			],
+		},
+	},
 } as Meta;
 
 const html = String.raw;
 
-const Template: StoryFn<DateRangeComponent> = (args: DateRangeComponent) => ({
+const TemplateDateRange: StoryFn<DateRangeComponent> = () => ({
 	props: {
-		...args,
+		startDate: {
+			label: 'Start date',
+			helpText: 'Select start date',
+			tooltip: 'Tooltip for first',
+			errorMsg: {
+				required: 'Start date is required',
+				matDatepickerParse: 'Start date is not a proper date',
+				matStartDateInvalid: 'Start date cannot be after end date',
+			},
+			control: new FormControl<Date | null>(null, Validators.required),
+		},
+		endDate: {
+			label: 'End date',
+			helpText: 'Select end date',
+			errorMsg: {
+				required: 'End date is required',
+				matDatepickerParse: 'End date is not a proper date',
+				matEndDateInvalid: 'End date cannot be before start date',
+			},
+			control: new FormControl<Date | null>(null, Validators.required),
+		},
 	},
-	template: html`
-		<example-language-change-component />
-		<fudis-date-range [startDate]="startDate" [endDate]="endDate" />
-	`,
+	template: html` <fudis-date-range [startDate]="startDate" [endDate]="endDate" /> `,
 });
 
-export const DateRange = Template.bind({});
-DateRange.args = {
-	startDate: {
-		label: 'Start date',
-		helpText: 'Select start date',
-		minDate: new Date('2023-05-01'),
-		maxDate: new Date('2023-05-07'),
-		tooltip: 'Tooltip for first',
-		errorMsg: {
-			required: 'Start date is required',
-			matDatepickerParse: 'Start date is not a proper date',
-			matDatepickerMin: 'Start date cannot be earlier than 5.5.2023',
-			matDatepickerMax: 'Start date cannot be later than 22.6.2023',
-			matStartDateInvalid: 'Start date cannot be after end date',
+export const DateRange = TemplateDateRange.bind({});
+
+const TemplateWithMinMax: StoryFn<DateRangeComponent> = () => ({
+	props: {
+		startDate: {
+			label: 'Start date',
+			helpText: 'Select start date',
+			minDate: new Date('2023-05-01'),
+			maxDate: new Date('2023-05-07'),
+			tooltip: 'Tooltip for first',
+			errorMsg: {
+				required: 'Start date is required',
+				matDatepickerParse: 'Start date is not a proper date',
+				matDatepickerMin: 'Start date cannot be earlier than 5.5.2023',
+				matDatepickerMax: 'Start date cannot be later than 22.6.2023',
+				matStartDateInvalid: 'Start date cannot be after end date',
+			},
+			control: new FormControl<Date | null>(null, Validators.required),
 		},
-		control: new FormControl<Date | null>(null, Validators.required),
-	},
-	endDate: {
-		label: 'End date',
-		helpText: 'Select end date',
-		minDate: new Date('2023-05-15'),
-		maxDate: new Date('2023-05-25'),
-		errorMsg: {
-			required: 'End date is required',
-			matDatepickerParse: 'End date is not a proper date',
-			matDatepickerMin: 'End date cannot be earlier than 5.5.2023',
-			matDatepickerMax: 'End date cannot be later than 22.6.2023',
-			matEndDateInvalid: 'End date cannot be before start date',
+		endDate: {
+			label: 'End date',
+			helpText: 'Select end date',
+			minDate: new Date('2023-05-15'),
+			maxDate: new Date('2023-05-25'),
+			errorMsg: {
+				required: 'End date is required',
+				matDatepickerParse: 'End date is not a proper date',
+				matDatepickerMin: 'End date cannot be earlier than 5.5.2023',
+				matDatepickerMax: 'End date cannot be later than 22.6.2023',
+				matEndDateInvalid: 'End date cannot be before start date',
+			},
+			control: new FormControl<Date | null>(null, Validators.required),
 		},
-		control: new FormControl<Date | null>(null, Validators.required),
 	},
-};
+	template: html` <fudis-date-range [startDate]="startDate" [endDate]="endDate" /> `,
+});
+
+export const WithMinAndMaxDates = TemplateWithMinMax.bind({});

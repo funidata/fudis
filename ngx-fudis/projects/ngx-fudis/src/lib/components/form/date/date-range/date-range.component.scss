@@ -3,7 +3,12 @@
 .fudis-daterange {
 	display: flex;
 	align-items: flex-start;
+	opacity: 0;
 	max-width: spacing.$spacing-input-lg;
+
+	&--visible {
+		opacity: 1;
+	}
 
 	&__start-date {
 		display: flex;
