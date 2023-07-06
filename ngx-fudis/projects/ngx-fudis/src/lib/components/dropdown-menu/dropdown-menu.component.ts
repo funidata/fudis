@@ -3,9 +3,11 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	ElementRef,
+	HostBinding,
 	HostListener,
 	Input,
 	ViewChild,
+	ViewEncapsulation,
 } from '@angular/core';
 import { FudisInputWidth } from '../../types/forms';
 
@@ -13,10 +15,16 @@ import { FudisInputWidth } from '../../types/forms';
 	selector: 'fudis-dropdown-menu',
 	templateUrl: './dropdown-menu.component.html',
 	styleUrls: ['./dropdown-menu.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownMenuComponent implements AfterContentInit {
 	@ViewChild('dropdownMenu') dropdownMenu: ElementRef<HTMLElement>;
+
+	/**
+	 * Binding fudis-dropdown-menu-host class to component wrapper
+	 */
+	@HostBinding('class') classes = 'fudis-dropdown-menu-host';
 
 	/**
 	 * Dropdown-menu is aligned to open left side of the button by default but can be aligned to open right side if necessary

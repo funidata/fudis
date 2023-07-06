@@ -4,6 +4,10 @@
 @use '../../foundations/colors/mixins.scss' as colorMixins;
 @use '../../foundations/utilities/mixins.scss' as utilities;
 
+.fudis-dropdown-menu-host {
+	display: block;
+}
+
 .fudis-dropdown-menu {
 	@include utilities.box-reset;
 	@include borders.border('1px', 'solid', 'gray-dark');
