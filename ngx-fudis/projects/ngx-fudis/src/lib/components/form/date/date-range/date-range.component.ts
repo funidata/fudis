@@ -8,8 +8,9 @@ import {
 	ViewChild,
 	ViewEncapsulation,
 } from '@angular/core';
-import { Subject, distinctUntilChanged, takeUntil } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FudisIdService } from '../../../../utilities/id-service.service';
 import { FudisDateRangeItem } from '../../../../types/forms';
 
@@ -23,8 +24,6 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
 	@ViewChild('dateRangeRef') _dateRangeRef: ElementRef;
 
 	constructor(@Inject(DOCUMENT) private _document: Document, private _idService: FudisIdService) {}
-
-	private _destroyed = new Subject<void>();
 
 	/**
 	 * Internal id for Date Range
@@ -65,11 +64,11 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
 		 * Subscribe to control value changes, so we can trigger start date and end date comparison
 		 */
 		if (this.startDate?.control && this.endDate?.control) {
-			this.startDate.control.valueChanges.pipe(distinctUntilChanged(), takeUntil(this._destroyed)).subscribe(() => {
+			this.startDate.control.valueChanges.pipe(distinctUntilChanged(), takeUntilDestroyed()).subscribe(() => {
 				this.checkDateCrossings();
 			});
 
-			this.endDate.control.valueChanges.pipe(distinctUntilChanged(), takeUntil(this._destroyed)).subscribe(() => {
+			this.endDate.control.valueChanges.pipe(distinctUntilChanged(), takeUntilDestroyed()).subscribe(() => {
 				this.checkDateCrossings();
 			});
 		}

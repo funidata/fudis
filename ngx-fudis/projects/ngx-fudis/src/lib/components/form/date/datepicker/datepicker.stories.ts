@@ -17,8 +17,6 @@ export default {
 		controls: {
 			exclude: [
 				'_configs',
-				'_destroyed',
-				'_destroyRef',
 				'_id',
 				'_required',
 				'_requiredText',

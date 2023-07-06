@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-console */
-import { Component, DestroyRef, Inject, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
+import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 import { TranslocoService } from '@ngneat/transloco';
 import {
@@ -39,8 +39,6 @@ export class AppComponent implements OnInit {
 			viewValue: `Item number ${i}`,
 		};
 	});
-
-	private _destroyRef = inject(DestroyRef);
 
 	constructor(
 		@Inject(DOCUMENT) private document: Document,
