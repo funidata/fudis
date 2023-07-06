@@ -2,7 +2,7 @@
 	*ngIf="!itemsWithCheckbox"
 	#dropdownItem
 	class="fudis-dropdown-menu-item"
-	role="menuitem"
+	[attr.role]="'menuitem'"
 	[attr.aria-disabled]="disabled"
 	(keydown)="handleKeyDown($event)"
 	(blur)="handleBlur($event)"
@@ -12,6 +12,7 @@
 
 <div
 	*ngIf="itemsWithCheckbox"
+	[attr.role]="'option'"
 	class="fudis-dropdown-menu-item__checkbox"
 	[class.fudis-dropdown-menu-item__checkbox--active]="checked">
 	<label

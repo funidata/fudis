@@ -1,7 +1,7 @@
 <div
 	class="fudis-dropdown-menu fudis-dropdown-menu__{{ align }} fudis-dropdown-menu__{{ size }}"
 	#dropdownMenu
-	role="menu"
+	[attr.role]="role"
 	[style.max-width]="_maxWidth">
 	<ng-content></ng-content>
 </div>

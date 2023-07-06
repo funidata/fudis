@@ -33,7 +33,7 @@
 		</fudis-button>
 	</div>
 	<ng-container *ngIf="_toggleOn">
-		<fudis-dropdown-menu [align]="'center'" [size]="size">
+		<fudis-dropdown-menu [align]="'center'" [size]="size" [role]="'listbox'">
 			<ng-container *ngFor="let item of _results">
 				<fudis-dropdown-menu-item
 					[label]="item.viewValue"

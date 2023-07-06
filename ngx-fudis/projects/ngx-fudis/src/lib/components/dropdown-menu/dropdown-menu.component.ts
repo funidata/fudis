@@ -27,6 +27,11 @@ export class DropdownMenuComponent implements AfterContentInit {
 	@HostBinding('class') classes = 'fudis-dropdown-menu-host';
 
 	/**
+	 * Assing correct role for the dropdown. Defaults to 'menu', 'listbox' is used in autocomplete-multi-select
+	 */
+	@Input() role: 'menu' | 'listbox' = 'menu';
+
+	/**
 	 * Dropdown-menu is aligned to open left side of the button by default but can be aligned to open right side if necessary
 	 */
 	@Input() align: 'left' | 'right' | 'center' = 'left';
