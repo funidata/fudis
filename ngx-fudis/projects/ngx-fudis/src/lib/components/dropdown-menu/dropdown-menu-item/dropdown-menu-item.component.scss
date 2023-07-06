@@ -98,6 +98,10 @@
 			display: grid;
 			position: absolute;
 			place-content: center;
+
+			&:focus {
+				@include focus.focus-generic;
+			}
 		}
 
 		&--active {
