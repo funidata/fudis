@@ -85,11 +85,6 @@ export interface FudisInputWithLanguageOptionsFormGroup {
 	[language: string]: FormControl<string | null>;
 }
 
-export interface FudisDateRange {
-	startDate: FormControl<Date | null>;
-	endDate: FormControl<Date | null>;
-}
-
 export interface FudisTranslationConfig {
 	// Shown with form inputs
 	requiredText?: Observable<string>;

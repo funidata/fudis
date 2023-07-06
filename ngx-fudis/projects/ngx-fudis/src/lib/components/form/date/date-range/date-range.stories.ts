@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 import { DateRangeComponent } from './date-range.component';
 import { FudisTranslationConfig } from '../../../../types/forms';
 import { FudisTranslationConfigService } from '../../../../utilities/config.service';
+import readme from './readme.mdx';
 
 @Component({
 	selector: 'example-language-change-component',
@@ -66,26 +67,20 @@ export default {
 		},
 	},
 	parameters: {
+		docs: {
+			page: readme,
+		},
 		controls: {
-			exclude: [
-				'_dateRangeGroup',
-				'_destroyed',
-				'_heightSetTryCounter',
-				'_id',
-				'checkDateCrossings',
-				'ngOnInit',
-				'ngAfterContentInit',
-				'setLabelHeight',
-				'_dateRangeRef',
-			],
+			exclude: /.*/g,
 		},
 	},
 } as Meta;
 
 const html = String.raw;
 
-const TemplateDateRange: StoryFn<DateRangeComponent> = () => ({
+const TemplateDateRange: StoryFn<DateRangeComponent> = (args: DateRangeComponent) => ({
 	props: {
+		...args,
 		startDate: {
 			label: 'Start date',
 			helpText: 'Select start date',
@@ -113,8 +108,9 @@ const TemplateDateRange: StoryFn<DateRangeComponent> = () => ({
 
 export const DateRange = TemplateDateRange.bind({});
 
-const TemplateWithMinMax: StoryFn<DateRangeComponent> = () => ({
+const TemplateWithMinMax: StoryFn<DateRangeComponent> = (args: DateRangeComponent) => ({
 	props: {
+		...args,
 		startDate: {
 			label: 'Start date',
 			helpText: 'Select start date',

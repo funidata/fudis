@@ -14,6 +14,22 @@ export default {
 		docs: {
 			page: readme,
 		},
+		controls: {
+			exclude: [
+				'_configs',
+				'_destroyed',
+				'_destroyRef',
+				'_id',
+				'_required',
+				'_requiredText',
+				'ngOnChanges',
+				'ngOnInit',
+				'setConfigs',
+				'subscribeToCloseLabel',
+				'onBlur',
+				'subscribeToRequiredText',
+			],
+		},
 	},
 	decorators: [
 		moduleMetadata({

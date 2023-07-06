@@ -70,12 +70,13 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 	 */
 	@Input() maxDate: Date | null | undefined;
 
-	_closeLabel: string;
-
 	protected setConfigs(): void {
 		this._adapter.setLocale(updateLocale(this._configs().appLanguage!));
 	}
 
+	/**
+	 * Set ngMaterial Calendar close button label
+	 */
 	protected subscribeToCloseLabel(): void {
 		this._configs()
 			.datepicker!.closeLabel!.pipe(takeUntil(this._destroyed))
