@@ -6,18 +6,24 @@
 @use '../../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-autocomplete-multi-select-selected-item-chip {
-	@include colorMixins.bg-color('gray-dark');
-	@include colorMixins.text-color('white');
-	@include typography.body-text-md-regular;
-	@include border.border-none;
-	@include utilities.box-reset;
+	&__list {
+		@include utilities.box-reset;
+	}
 
-	display: block;
-	margin-top: spacing.$spacing-xxs;
-	cursor: pointer;
-	padding: 0 spacing.$spacing-xs 0 0;
+	&__button {
+		@include colorMixins.bg-color('gray-dark');
+		@include colorMixins.text-color('white');
+		@include typography.body-text-md-regular;
+		@include border.border-none;
+		@include utilities.box-reset;
 
-	&:focus {
-		@include focus.focus-generic;
+		display: block;
+		margin-top: spacing.$spacing-xxs;
+		cursor: pointer;
+		padding: 0 spacing.$spacing-xs 0 0;
+
+		&:focus {
+			@include focus.focus-generic;
+		}
 	}
 }
