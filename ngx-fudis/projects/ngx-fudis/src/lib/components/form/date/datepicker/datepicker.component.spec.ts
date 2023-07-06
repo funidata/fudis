@@ -110,8 +110,8 @@ describe('DatepickerComponent', () => {
 		});
 
 		it('should have calendar icon from fudis-icon component', () => {
-			const datepickerIcon = fixture.nativeElement.querySelector('fudis-icon');
-			expect(datepickerIcon.attributes.icon.value).toEqual('calendar');
+			const datepickerIcon = fixture.debugElement.query(By.css('fudis-icon'));
+			expect(datepickerIcon.attributes['ng-reflect-icon']).toEqual('calendar');
 		});
 
 		it('should have fudis-datepicker__input--disabled class if input has been disabled', () => {
