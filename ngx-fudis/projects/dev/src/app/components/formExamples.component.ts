@@ -24,15 +24,9 @@ export class AppFormExampleComponent implements OnInit {
 		private translocoService: TranslocoService,
 		private errorSummaryService: FudisErrorSummaryService,
 		private fudisConfig: FudisTranslationConfigService
-	) {
-		// fudisConfig.setConfig({
-		// 	datepicker: { closeLabel: 'Close calendar' },
-		// 	requiredText: 'Required',
-		// 	language: 'en',
-		// });
-	}
+	) {}
 
-	_errorSummaryVisible: boolean = false;
+	errorSummaryVisible: boolean = false;
 
 	showSuccessBodyText: boolean = false;
 
