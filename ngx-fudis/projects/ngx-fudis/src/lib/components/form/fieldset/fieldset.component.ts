@@ -1,4 +1,14 @@
-import { AfterViewInit, Component, ContentChild, ElementRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+	AfterViewInit,
+	Component,
+	ContentChild,
+	ElementRef,
+	Input,
+	OnDestroy,
+	OnInit,
+	ViewChild,
+	ViewEncapsulation,
+} from '@angular/core';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
@@ -6,6 +16,9 @@ import { NotificationsDirective } from '../../../directives/content-projection/n
 import { FudisGridWidth, FudisGridAlign, FudisGridMarginSide } from '../../../types/grid';
 import { FudisSpacing } from '../../../types/miscellaneous';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
+import { FudisIdService } from '../../../utilities/id-service.service';
+import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
+import { FudisFormErrorSummarySection } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-fieldset',
@@ -13,7 +26,7 @@ import { ContentDirective } from '../../../directives/content-projection/content
 	styleUrls: ['./fieldset.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class FieldSetComponent extends FieldSetBaseDirective implements AfterViewInit {
+export class FieldSetComponent extends FieldSetBaseDirective implements AfterViewInit, OnInit, OnDestroy {
 	@ContentChild(ActionsDirective) headerActions: ActionsDirective | null;
 
 	@ContentChild(NotificationsDirective) notifications: NotificationsDirective;
@@ -21,6 +34,10 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	@ContentChild(ContentDirective) content: ContentDirective;
 
 	@ViewChild('fieldset') fieldset: ElementRef;
+
+	constructor(private _idService: FudisIdService, private _errorSummaryService: FudisErrorSummaryService) {
+		super();
+	}
 
 	/**
 	 * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
@@ -58,9 +75,44 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	 */
 	@Input() initialFocus: boolean = false;
 
+	/**
+	 * To disable sending information about this Fieldset to Error Summary service
+	 */
+	@Input() errorSummaryBreadcrumb: boolean = false;
+
+	private _fieldsetSent: boolean = false;
+
+	private _fieldsetInfo: FudisFormErrorSummarySection;
+
+	ngOnInit(): void {
+		this._id = this.id ?? this._idService.getNewId('fieldset');
+
+		this.addFieldsetToErrorSummary();
+	}
+
 	ngAfterViewInit(): void {
 		if (this.initialFocus) {
 			this.fieldset.nativeElement.focus();
 		}
+	}
+
+	addFieldsetToErrorSummary(): void {
+		if (!this.errorSummaryBreadcrumb) {
+			this._fieldsetInfo = { id: this._id, title: this.title };
+
+			this._errorSummaryService.addFieldset(this._fieldsetInfo);
+
+			this._fieldsetSent = true;
+		}
+	}
+
+	removeFieldsetFromErrorSummary(): void {
+		if (!this.errorSummaryBreadcrumb && this._fieldsetSent) {
+			this._errorSummaryService.removeFieldset(this._fieldsetInfo);
+		}
+	}
+
+	ngOnDestroy(): void {
+		this.removeFieldsetFromErrorSummary();
 	}
 }

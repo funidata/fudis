@@ -65,6 +65,11 @@ export type FudisFormErrorSummaryObject = {
 	};
 };
 
+export type FudisFormErrorSummarySection = {
+	id: string;
+	title: string;
+};
+
 export type FudisFormErrorSummaryList = {
 	id: string;
 	message: string;
@@ -108,3 +113,5 @@ export interface FudisTranslationConfig {
 		attention?: Observable<string>;
 	};
 }
+
+export type FudisFormErrorSummaryLink = 'router' | 'href';

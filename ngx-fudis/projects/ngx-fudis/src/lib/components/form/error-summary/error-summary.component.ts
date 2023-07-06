@@ -2,7 +2,12 @@ import { ChangeDetectorRef, Component, ElementRef, Inject, Input, Signal, ViewCh
 
 import { DOCUMENT } from '@angular/common';
 import { FudisErrorSummaryService } from './error-summary.service';
-import { FudisFormErrorSummaryObject, FudisFormErrorSummaryList } from '../../../types/forms';
+import {
+	FudisFormErrorSummaryObject,
+	FudisFormErrorSummaryList,
+	FudisFormErrorSummarySection,
+	FudisFormErrorSummaryLink,
+} from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-error-summary',
@@ -27,6 +32,8 @@ export class ErrorSummaryComponent {
 	 */
 	@Input({ required: true }) screenReaderHelpText: string;
 
+	@Input() linkType: FudisFormErrorSummaryLink = 'router';
+
 	@Input() liveRemove: boolean = false;
 
 	constructor(
@@ -50,12 +57,25 @@ export class ErrorSummaryComponent {
 
 		this._visibleErrorList = [];
 
+		const fieldsets: FudisFormErrorSummarySection[] = this._errorSummaryService.getFieldsetList();
+
 		Object.keys(fetchedErrors()).forEach((item) => {
 			const errorId = fetchedErrors()[item].id;
 			if (this.parentComponent?.querySelector(`#${errorId}`)) {
 				const { label } = fetchedErrors()[item];
 				Object.values(fetchedErrors()[item].errors).forEach((error: any) => {
-					this._visibleErrorList.push({ id: errorId, message: `${label}: ${error}` });
+					const parentFieldset = fieldsets.find((fieldset) => {
+						if (this.parentComponent?.querySelector(`#${fieldset.id} #${errorId}`)) {
+							return fieldset;
+						}
+						return null;
+					});
+
+					if (parentFieldset) {
+						this._visibleErrorList.push({ id: errorId, message: `${parentFieldset.title} / ${label}: ${error}` });
+					} else {
+						this._visibleErrorList.push({ id: errorId, message: `${label}: ${error}` });
+					}
 				});
 			}
 		});

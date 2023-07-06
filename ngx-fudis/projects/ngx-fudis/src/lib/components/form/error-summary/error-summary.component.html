@@ -14,7 +14,12 @@
 					</ng-container>
 					<ul class="fudis-error-summary__error-list">
 						<li class="fudis-error-summary__error-list__item" *ngFor="let error of _visibleErrorList">
-							<fudis-link [href]="'#' + error.id" [linkTitle]="error.message"></fudis-link>
+							<ng-container *ngIf="linkType === 'router'">
+								<fudis-link [routerLinkUrl]="'.'" [fragmentId]="error.id" [linkTitle]="error.message"></fudis-link>
+							</ng-container>
+							<ng-container *ngIf="linkType === 'href'">
+								<fudis-link [href]="'#' + error.id" [linkTitle]="error.message"></fudis-link>
+							</ng-container>
 						</li>
 					</ul>
 				</div>
