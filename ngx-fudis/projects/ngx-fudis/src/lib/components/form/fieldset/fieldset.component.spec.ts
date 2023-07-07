@@ -1,13 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MockComponent } from 'ng-mocks';
-import { FudisErrorSummaryService } from 'ngx-fudis';
 import { FieldSetComponent } from './fieldset.component';
-
 import { GridComponent } from '../../grid/grid/grid.component';
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisGridService } from '../../../directives/grid/grid-service/grid.service';
+import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
 
 describe('FieldSetComponent', () => {
 	let component: FieldSetComponent;
