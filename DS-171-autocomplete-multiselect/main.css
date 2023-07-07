@@ -281,7 +281,6 @@ mat-tooltip-component .mat-tooltip-handset {
   display: grid;
   grid-template-rows: auto 1fr;
   grid-template-columns: auto 1fr;
-  /* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
   /*
   By default Grid's @Input width is XXL. When viewport gets narrower, it will get corresponding max-widths of each smaller breakpoint from XXL to smallest XS.
 
@@ -289,6 +288,11 @@ mat-tooltip-component .mat-tooltip-handset {
   */
 }
 
+@media screen and (min-width: 36em) {
+  .fudis-grid {
+    width: 100%;
+  }
+}
 .fudis-grid > fudis-heading {
   grid-column: 1/-1;
 }
