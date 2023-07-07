@@ -57,7 +57,8 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('autocomplete');
-		
+
+		this.subscribeToRequiredText();
 	}
 
 	ngAfterContentInit() {

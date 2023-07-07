@@ -50,7 +50,6 @@ const Template: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
 		<fudis-datepicker
 			[label]="label"
 			[id]="id"
-			[requiredText]="requiredText"
 			[helpText]="helpText"
 			[errorMsg]="errorMsg"
 			[control]="control"
@@ -59,8 +58,7 @@ const Template: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
 			[maxDate]="maxDate"
 			[tooltip]="tooltip"
 			[tooltipPosition]="tooltipPosition"
-			[tooltipToggle]="tooltipToggle">
-		</fudis-datepicker>
+			[tooltipToggle]="tooltipToggle" />
 		<fudis-body-text *ngIf="control.value">The date output is: {{ control.value }}</fudis-body-text>
 		<fudis-body-text *ngIf="control.value"
 			>The date output with Angular date pipe is: {{ control.value | date:'dd.MM.yyyy' }}</fudis-body-text

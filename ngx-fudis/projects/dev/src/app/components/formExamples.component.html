@@ -18,21 +18,19 @@
 								[id]="'uniikki-idjoo'"
 								[helpText]="t('helpText')"
 								[errorMsg]="{ required: t('error_required') }"
-								[requiredText]="t('required')"
-								[control]="testFormGroup.controls['textInput']"></fudis-text-input>
+								[control]="testFormGroup.controls['textInput']" />
 							<fudis-radio-button-group
-								[requiredText]="t('required')"
 								[id]="'truth-selection'"
 								[title]="t('chooseTruth')"
 								[helpText]="t('chooseTruthHelp')"
 								[errorMsg]="{ required: t('chooseTruthError') }"
 								[control]="testFormGroup.controls['truth']"
-								[options]="radioButtonOptions"></fudis-radio-button-group>
+								[options]="radioButtonOptions" />
 							<fudis-dropdown
 								[id]="'dropdown-id-123'"
 								[label]="'Some dropdown'"
 								[options]="dropdownOptions"
-								[control]="testFormGroup.controls['dropdown']"></fudis-dropdown>
+								[control]="testFormGroup.controls['dropdown']" />
 							<fudis-datepicker
 								[id]="'datepicker-123'"
 								[label]="'Select some date'"
@@ -55,16 +53,15 @@
 					[variant]="'dropdown'"
 					[id]="'dropdown-1234'"
 					[options]="multipleOptions"
-					[requiredText]="'Required'"
 					[control]="testFormGroup.controls['autocompleteDropdown']"
-					[errorMsg]="{ required: t('error_required') }"></fudis-autocomplete>
+					[errorMsg]="{ required: t('error_required') }" />
 				<fudis-heading [tag]="'h3'" [size]="'xl'">Single-select search</fudis-heading>
 				<fudis-autocomplete
 					[label]="'Search item'"
 					[clearFilterText]="'Clear'"
 					[options]="multipleOptions"
 					[control]="testFormGroup.controls['autocompleteSearch']"
-					[errorMsg]="{ required: t('error_required') }"></fudis-autocomplete>
+					[errorMsg]="{ required: t('error_required') }" />
 			</fudis-grid>
 		</ng-template>
 	</fudis-expandable>

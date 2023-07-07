@@ -74,8 +74,7 @@ const TemplateAllRequired: StoryFn = () => ({
 			[helpText]="helpText"
 			[languageLabel]="'Language'"
 			[groupErrorMsg]="groupErrorMsg"
-			[missingLanguage]="missingLanguage"
-			[requiredText]="requiredText"></fudis-input-with-language-options>
+			[missingLanguage]="missingLanguage" />
 	`,
 });
 
@@ -124,8 +123,7 @@ const TemplateOneRequired: StoryFn = () => ({
 			[languageLabel]="'Language'"
 			[helpText]="helpText"
 			[groupErrorMsg]="groupErrorMsg"
-			[missingLanguage]="missingLanguage"
-			[requiredText]="requiredText"></fudis-input-with-language-options>
+			[missingLanguage]="missingLanguage" />
 	`,
 });
 

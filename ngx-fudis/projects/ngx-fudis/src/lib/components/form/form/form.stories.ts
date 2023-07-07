@@ -82,8 +82,7 @@ import { FormComponent } from './form.component';
 													[formGroup]="fieldsetExample.controls['name']"
 													[label]="labelName"
 													[helpText]="'Some name would be nice. Provide course name in at least one language.'"
-													[groupErrorMsg]="errorName"
-													[requiredText]="requiredText" />
+													[groupErrorMsg]="errorName" />
 												<fudis-input-with-language-options
 													[variant]="'text-area'"
 													[missingLanguage]="'Missing'"
@@ -95,10 +94,8 @@ import { FormComponent } from './form.component';
 													[helpText]="
 														'So that students know what they are getting into. Provide description in all languages.'
 													"
-													[groupErrorMsg]="errorDescription"
-													[requiredText]="requiredText" />
+													[groupErrorMsg]="errorDescription" />
 												<fudis-radio-button-group
-													[requiredText]="requiredText"
 													[title]="labelCourseType"
 													[id]="'radio-button-group-1'"
 													[options]="courseTypeOptions"
@@ -115,16 +112,14 @@ import { FormComponent } from './form.component';
 													[control]="fieldsetExample.controls['teacher']"
 													[label]="labelTeacher"
 													[helpText]="'Someone has to be responsible for this.'"
-													[errorMsg]="errorTeacher"
-													[requiredText]="requiredText" />
+													[errorMsg]="errorTeacher" />
 												<fudis-text-input
 													[id]="'unique-input-4'"
 													[helpText]="inputHelpText"
 													[control]="fieldsetExample.controls['email']"
 													[label]="labelEmail"
 													[helpText]="'So that students can ask for more time on their homework.'"
-													[errorMsg]="errorEmail"
-													[requiredText]="requiredText" />
+													[errorMsg]="errorEmail" />
 											</fudis-grid>
 										</ng-template>
 									</fudis-fieldset>

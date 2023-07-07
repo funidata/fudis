@@ -39,8 +39,7 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 						[formGroup]="fieldsetExample.controls['name']"
 						[label]="labelName"
 						[helpText]="'Some name would be nice. Provide course name in at least one language.'"
-						[groupErrorMsg]="errorName"
-						[requiredText]="requiredText"></fudis-input-with-language-options>
+						[groupErrorMsg]="errorName" />
 					<fudis-input-with-language-options
 						[variant]="'text-area'"
 						[missingLanguage]="'Missing'"
@@ -50,55 +49,48 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 						[formGroup]="fieldsetExample.controls['description']"
 						[label]="labelDescription"
 						[helpText]="'So that students know what they are getting into. Provide description in all languages.'"
-						[groupErrorMsg]="errorDescription"
-						[requiredText]="requiredText"></fudis-input-with-language-options>
+						[groupErrorMsg]="errorDescription" />
 					<fudis-text-input
 						[id]="'unique-input-3'"
 						[control]="fieldsetExample.controls['teacher']"
 						[label]="labelTeacher"
 						[helpText]="'Someone has to be responsible for this.'"
-						[errorMsg]="errorTeacher"
-						[requiredText]="requiredText"></fudis-text-input>
+						[errorMsg]="errorTeacher" />
 					<fudis-text-input
 						[id]="'unique-input-4'"
 						[helpText]="inputHelpText"
 						[control]="fieldsetExample.controls['email']"
 						[label]="labelEmail"
 						[helpText]="'So that students can ask for more time on their homework.'"
-						[errorMsg]="errorEmail"
-						[requiredText]="requiredText"></fudis-text-input>
+						[errorMsg]="errorEmail" />
 
 					<fudis-radio-button-group
-						[requiredText]="requiredText"
 						[title]="labelCourseType"
 						[id]="'radio-button-group-1'"
 						[options]="courseTypeOptions"
 						[control]="fieldsetExample.controls['courseType']"
-						[errorMsg]="errorCourseType"></fudis-radio-button-group>
+						[errorMsg]="errorCourseType" />
 					<fudis-grid [columns]="'1fr 1fr'">
 						<fudis-datepicker
 							[label]="labelStartDate"
 							[id]="'date-picker-1'"
 							[size]="'sm'"
-							[requiredText]="requiredText"
 							[helpText]="'You have to start from somewhere'"
 							[errorMsg]="errorStartdate"
 							[control]="fieldsetExample.controls['startDate']"
 							[minDate]="minDate"
 							[maxDate]="
 								fieldsetExample.controls['endDate'].value ? fieldsetExample.controls['endDate'].value : maxDate
-							">
-						</fudis-datepicker>
+							" />
 						<fudis-datepicker
 							[label]="labelEndDate"
 							[id]="'date-picker-2'"
 							[size]="'sm'"
-							[requiredText]="requiredText"
 							[helpText]="'You have to end it to something'"
 							[errorMsg]="errorEnddate"
 							[control]="fieldsetExample.controls['endDate']"
 							[disabled]="!fieldsetExample.controls['startDate'].value && !fieldsetExample.controls['startDate'].valid"
-							[minDate]="fieldsetExample.controls['startDate'].value">
+							[minDate]="fieldsetExample.controls['startDate'].value"/>
 						</fudis-datepicker>
 					</fudis-grid>
 				</fudis-grid>

@@ -27,14 +27,12 @@ const Template: StoryFn<DropdownComponent> = (args: DropdownComponent) => ({
 			[errorMsg]="errorMsg"
 			[control]="control"
 			[options]="options"
-			[requiredText]="requiredText"
 			[label]="label"
 			[id]="id"
 			[helpText]="helpText"
 			[tooltip]="tooltip"
 			[tooltipPosition]="tooltipPosition"
-			tooltipToggle="tooltipToggle"></fudis-dropdown>
-
+			tooltipToggle="tooltipToggle" />
 		<ng-container *ngIf="control.value?.length > 0">
 			<ng-container *ngFor="let value of control.value">
 				<fudis-body-text>Looks picked a pet with 'viewValue' of: {{value.viewValue}}</fudis-body-text>
