@@ -80,8 +80,6 @@ export class ErrorSummaryComponent {
 						return null;
 					});
 
-					console.log(sections);
-
 					const parentSectionString = parentSection ? `${parentSection.title} / ` : '';
 
 					const parentFieldsetString = parentFieldset ? `${parentFieldset.title} / ` : '';
