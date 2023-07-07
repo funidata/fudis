@@ -1,7 +1,7 @@
-import { AfterContentInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { FudisDropdownOption, FudisInputWidth } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
@@ -13,7 +13,7 @@ import { FudisTranslationConfigService } from '../../../utilities/translation-co
 	templateUrl: './autocomplete.component.html',
 	styleUrls: ['./autocomplete.component.scss'],
 })
-export class AutocompleteComponent extends InputBaseDirective implements OnInit, AfterContentInit {
+export class AutocompleteComponent extends InputBaseDirective implements OnInit, AfterContentInit, OnChanges {
 	constructor(private _idService: FudisIdService, _configService: FudisTranslationConfigService) {
 		super(_configService);
 	}
@@ -66,6 +66,10 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 			this._autocompleteFormControl.patchValue(this.control.value.viewValue);
 		}
 		this.checkFilteredOptions();
+	}
+
+	ngOnChanges(): void {
+		this._required = this.control.hasValidator(Validators.required);
 	}
 
 	checkFilteredOptions() {

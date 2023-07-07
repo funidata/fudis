@@ -33,8 +33,7 @@
 			[size]="'lg'"
 			[label]="label"
 			[id]="id"
-			[ignoreRequiredCheck]="true"
-			[requiredText]="_requiredControls[control.key].requiredText"
+			[required]="_requiredControls[control.key].required"
 			[invalidState]="formGroup.invalid && formGroup.touched"
 			[control]="$any(formGroup).controls[control.key]"></fudis-text-input>
 	</ng-container>
@@ -50,9 +49,8 @@
 			[size]="'lg'"
 			[label]="label"
 			[id]="id"
-			[ignoreRequiredCheck]="true"
 			[invalidState]="formGroup.invalid && formGroup.touched"
-			[requiredText]="_requiredControls[control.key].requiredText"
+			[required]="_requiredControls[control.key].required"
 			[control]="$any(formGroup).controls[control.key]"></fudis-text-area>
 	</ng-container>
 </ng-template>

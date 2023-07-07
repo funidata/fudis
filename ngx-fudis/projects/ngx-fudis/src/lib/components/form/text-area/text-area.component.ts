@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
 import { FudisInputWidth } from '../../../types/forms';
@@ -12,7 +12,7 @@ import { FudisTranslationConfigService } from '../../../utilities/translation-co
 	templateUrl: './text-area.component.html',
 	styleUrls: ['./text-area.component.scss'],
 })
-export class TextAreaComponent extends InputBaseDirective implements OnInit {
+export class TextAreaComponent extends InputBaseDirective implements OnInit, OnChanges {
 	constructor(private _idService: FudisIdService, _configService: FudisTranslationConfigService) {
 		super(_configService);
 	}
@@ -44,5 +44,10 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit {
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('textArea');
+		this.subscribeToRequiredText();
+	}
+
+	ngOnChanges(): void {
+		this._required = this.control.hasValidator(Validators.required);
 	}
 }

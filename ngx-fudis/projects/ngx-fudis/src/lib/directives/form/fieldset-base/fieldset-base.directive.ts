@@ -1,10 +1,21 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, Input, Signal, effect } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
+import { FudisTranslationConfig } from '../../../types/forms';
+import { untilDestroyed } from '../../../utilities/untilDestroyed';
+import { FudisTranslationConfigService } from '../../../utilities/translation-config.service';
 
 @Directive({
 	selector: '[fudisFieldSetBase]',
 })
 export class FieldSetBaseDirective extends TooltipApiDirective {
+	constructor(private _configService: FudisTranslationConfigService) {
+		super();
+
+		effect(() => {
+			this._configs = this._configService.getConfig();
+		});
+	}
+
 	/**
 	 * Title legend for fieldset
 	 */
@@ -18,7 +29,7 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
 	/**
 	 * Text to indicate compulsory
 	 */
-	@Input() requiredText: string;
+	@Input() requiredText: string | undefined;
 
 	/**
 	 * Additional guidance text, aligned underneath the main title legend text
@@ -34,4 +45,20 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
 	 * Internal id for component
 	 */
 	protected _id: string;
+
+	protected _requiredText: string;
+
+	protected _required: boolean = false;
+
+	protected _configs: Signal<FudisTranslationConfig>;
+
+	protected _untilDestroyed = untilDestroyed();
+
+	protected subscribeToRequiredText(): void {
+		this._configs()
+			.requiredText!.pipe(this._untilDestroyed())
+			.subscribe((value) => {
+				this._requiredText = value;
+			});
+	}
 }

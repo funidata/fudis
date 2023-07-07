@@ -1,5 +1,5 @@
-import { Component, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, HostBinding, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { FudisRadioButtonOption, FudisFormErrors } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
@@ -10,7 +10,7 @@ import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fi
 	styleUrls: ['./radio-button-group.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class RadioButtonGroupComponent extends FieldSetBaseDirective implements OnInit {
+export class RadioButtonGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
 	@HostBinding('class') classes = 'fudis-radio-button-group-host';
 
 	/*
@@ -53,5 +53,11 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 				`From @Input array of options to fudis-radio-button-group value 'name' should be identical for all options.`
 			);
 		}
+
+		this.subscribeToRequiredText();
+	}
+
+	ngOnChanges(): void {
+		this._required = this.control.hasValidator(Validators.required);
 	}
 }

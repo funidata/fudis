@@ -1,6 +1,6 @@
 // eslint-disable-next-line max-classes-per-file
-import { Component, Input, ViewChild, ElementRef, HostBinding, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, Input, ViewChild, ElementRef, HostBinding, OnInit, OnChanges } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
 import { FudisInputWidth } from '../../../types/forms';
@@ -12,7 +12,7 @@ import { FudisTranslationConfigService } from '../../../utilities/translation-co
 	templateUrl: './text-input.component.html',
 	styleUrls: ['./text-input.component.scss'],
 })
-export class TextInputComponent extends InputBaseDirective implements OnInit {
+export class TextInputComponent extends InputBaseDirective implements OnInit, OnChanges {
 	constructor(private _idService: FudisIdService, _configService: FudisTranslationConfigService) {
 		super(_configService);
 	}
@@ -63,5 +63,10 @@ export class TextInputComponent extends InputBaseDirective implements OnInit {
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('textInput');
+		this.subscribeToRequiredText();
+	}
+
+	ngOnChanges(): void {
+		this._required = this.control.hasValidator(Validators.required);
 	}
 }

@@ -2,7 +2,7 @@
 	<fudis-label
 		[text]="label"
 		[id]="'label_' + id"
-		[requiredText]="requiredText"
+		[requiredText]="_required ? _requiredText : undefined"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle"></fudis-label>
@@ -21,7 +21,7 @@
 		[multiple]="multipleOption"
 		[formControl]="control"
 		(valueChange)="handleSelectionChange($event)"
-		[attr.required]="requiredText ? true : null"
+		[attr.required]="_required ? true : null"
 		[aria-labelledby]="'label_' + id"
 		[hideSingleSelectionIndicator]="hideSingleSelectionIndicator"
 		[attr.aria-describedby]="id + '_guidance'"

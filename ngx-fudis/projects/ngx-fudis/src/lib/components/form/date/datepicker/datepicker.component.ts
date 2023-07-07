@@ -44,13 +44,6 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 	 */
 	@Input({ required: true }) control: FormControl<Date | null>;
 
-	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('datepicker');
-
-		this.subscribeToCloseLabel();
-		this.subscribeToRequiredText();
-	}
-
 	/**
 	 * Available sizes for the datepicker - defaults to medium.
 	 */
@@ -79,6 +72,13 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 			.subscribe((value) => {
 				this._datepickerIntl.closeCalendarLabel = value as string;
 			});
+	}
+
+	ngOnInit(): void {
+		this._id = this.id ?? this._idService.getNewId('datepicker');
+
+		this.subscribeToCloseLabel();
+		this.subscribeToRequiredText();
 	}
 
 	ngOnChanges(): void {

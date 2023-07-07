@@ -50,7 +50,6 @@ const Template: StoryFn<DropdownComponent> = (args: DropdownComponent) => ({
 export const SingleSelect = Template.bind({});
 SingleSelect.args = {
 	errorMsg: { required: "It is necessary to choose a pet. It's good for your health!" },
-	requiredText: 'Required',
 	label: 'Select a pet',
 	placeholder: 'Choose a pet',
 	multipleOption: false,
@@ -75,7 +74,6 @@ MultiSelect.args = {
 		maxlength: "That's probably too much already.",
 	},
 	multipleOption: true,
-	requiredText: 'Required',
 	label: 'Select from two to three pets',
 	placeholder: 'Choose a pet',
 	control: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(3)]),

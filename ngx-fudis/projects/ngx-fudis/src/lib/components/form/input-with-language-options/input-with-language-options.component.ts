@@ -65,7 +65,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	private _for: string = '';
 
-	protected _requiredControls: { [key: string]: { value?: string | null; requiredText: string | undefined } } = {};
+	protected _requiredControls: { [key: string]: { value?: string | null; required: boolean | undefined } } = {};
 
 	private _atLeastOneRequired: boolean = false;
 
@@ -108,7 +108,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	}
 
 	/**
-	 * OnInit check to forward necessary "requiredText" attributes to all generated inputs.
+	 * OnInit check to forward necessary "required" attributes to all generated inputs.
 	 */
 	initialRequiredCheck(): void {
 		this._requiredControls = {};
@@ -120,7 +120,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 					...this._requiredControls,
 					[control]: {
 						value: this.formGroup.controls[control].value,
-						requiredText: this.requiredText,
+						required: this.required,
 					},
 				};
 			});
@@ -130,9 +130,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 					...this._requiredControls,
 					[control]: {
 						value: this.formGroup.controls[control].value,
-						requiredText: this.formGroup.controls[control].hasValidator(Validators.required)
-							? this.requiredText
-							: undefined,
+						required: this.formGroup.controls[control].hasValidator(Validators.required) ? this.required : undefined,
 					},
 				};
 			});
@@ -140,7 +138,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	}
 
 	/**
-	 * Check onBlur if requiredText is needed to be shown
+	 * Check onBlur if required is needed to be shown
 	 */
 	isControlRequired(value: string, controlKey: string): void {
 		// If all controls are invalid run initialRequiredCheck()
@@ -154,7 +152,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 				return this._requiredControls[control].value !== '' && this._requiredControls[control].value !== null;
 			});
 
-			// If only one control is not empty, include requiredText with that
+			// If only one control is not empty, include required with that
 			if (this._nonEmptyControls.length === 1) {
 				this._requiredControls = {};
 				Object.keys(this.formGroup.controls).forEach((control) => {
@@ -162,17 +160,17 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 						...this._requiredControls,
 						[control]: {
 							value: this.formGroup.controls[control].value,
-							requiredText:
+							required:
 								this._nonEmptyControls.includes(control) ||
 								this.formGroup.controls[control].hasValidator(Validators.required)
-									? this.requiredText
+									? this.required
 									: undefined,
 						},
 					};
 				});
 			}
 
-			// If more than one control are not empty remove requiredText unless they have Validators.required
+			// If more than one control are not empty remove required unless they have Validators.required
 			if (this._atLeastOneRequired && this._nonEmptyControls.length > 1) {
 				this._requiredControls = {};
 				Object.keys(this.formGroup.controls).forEach((control) => {
@@ -180,9 +178,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 						...this._requiredControls,
 						[control]: {
 							value: this.formGroup.controls[control].value,
-							requiredText: this.formGroup.controls[control].hasValidator(Validators.required)
-								? this.requiredText
-								: undefined,
+							required: this.formGroup.controls[control].hasValidator(Validators.required) ? this.required : undefined,
 						},
 					};
 				});

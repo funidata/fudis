@@ -2,7 +2,7 @@
 	[id]="id"
 	[titleSize]="'sm'"
 	[title]="title"
-	[requiredText]="requiredText"
+	[requiredText]="_required ? _requiredText : undefined"
 	[errorSummaryBreadcrumb]="false">
 	<ng-template fudisContent type="fieldset">
 		<fudis-radio-button
@@ -11,7 +11,7 @@
 			[name]="option.name"
 			[value]="option.value"
 			[viewValue]="option.viewValue"
-			[required]="requiredText ? true : false"
+			[required]="_required ? true : false"
 			[checked]="control.value === option.value ? true : false"
 			[control]="control"></fudis-radio-button>
 		<fudis-guidance [inputLabel]="title" [helpText]="helpText" [for]="id" [errorMsg]="errorMsg" [control]="control">

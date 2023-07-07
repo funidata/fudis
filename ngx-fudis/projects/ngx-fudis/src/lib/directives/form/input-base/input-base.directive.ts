@@ -54,9 +54,9 @@ export class InputBaseDirective extends TooltipApiDirective {
 	@Input() invalidState: boolean = false;
 
 	/**
-	 * To ignore initial check if input has both requiredText and control Validators.required
+	 * Set form input as required. By default set to 'null' and this attribute is determined to true / false depending on if FormControl has Validators.required. This setting will override that.
 	 */
-	@Input() ignoreRequiredCheck: boolean = false;
+	@Input() required: boolean | undefined = undefined;
 
 	/**
 	 * To listen for input's blur event.

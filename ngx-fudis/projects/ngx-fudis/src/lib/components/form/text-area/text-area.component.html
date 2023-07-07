@@ -3,7 +3,7 @@
 		[for]="id"
 		[id]="'label_' + id"
 		[text]="label"
-		[requiredText]="requiredText"
+		[requiredText]="_required ? _requiredText : undefined"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle">
@@ -18,7 +18,7 @@
 		[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
 		[attr.minLength]="minLength"
 		[attr.maxLength]="maxLength"
-		[attr.required]="requiredText ? true : null">
+		[attr.required]="_required ? true : null">
 	</textarea>
 	<ng-container *ngIf="helpText || errorMsg">
 		<fudis-guidance

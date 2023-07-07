@@ -1,5 +1,5 @@
-import { Component, Input, ViewEncapsulation, EventEmitter, Output, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, Input, ViewEncapsulation, EventEmitter, Output, OnInit, OnChanges } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { FudisDropdownOption, FudisDropdownLanguageOption, FudisInputWidth } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../utilities/id-service.service';
@@ -11,7 +11,7 @@ import { FudisTranslationConfigService } from '../../../utilities/translation-co
 	styleUrls: ['./dropdown.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class DropdownComponent extends InputBaseDirective implements OnInit {
+export class DropdownComponent extends InputBaseDirective implements OnInit, OnChanges {
 	constructor(private _idService: FudisIdService, _configService: FudisTranslationConfigService) {
 		super(_configService);
 	}
@@ -60,5 +60,10 @@ export class DropdownComponent extends InputBaseDirective implements OnInit {
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('dropdown');
+		this.subscribeToRequiredText();
+	}
+
+	ngOnChanges(): void {
+		this._required = this.control.hasValidator(Validators.required);
 	}
 }
