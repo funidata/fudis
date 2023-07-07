@@ -6,7 +6,11 @@ export interface FudisDescriptionListItem {
 	value: string;
 }
 
-export type FudisLanguageOption = 'fi' | 'sv' | 'en';
+export type FudisLanguageOption =
+	| { value: 'finnish'; viewValue: 'FI' }
+	| { value: 'swedish'; viewValue: 'SV' }
+	| { value: 'english'; viewValue: 'EN' }
+	| { value: string; viewValue: string };
 
 export interface FudisLanguageBadgeTranslations {
 	en?: string;

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, Signal } from '@angular/core';
 import { FudisLanguageOption } from '../../types/miscellaneous';
+import { FudisTranslationConfig } from '../../types/forms';
 
 @Component({
 	selector: 'fudis-language-badge-group',
@@ -7,5 +8,14 @@ import { FudisLanguageOption } from '../../types/miscellaneous';
 	styleUrls: ['./language-badge-group.component.scss'],
 })
 export class LanguageBadgeGroupComponent {
-	languageOptions: FudisLanguageOption[] = [];
+	currentLanguage: FudisLanguageOption;
+
+	protected _configs: Signal<FudisTranslationConfig>;
+
+	@Input() languageOptions: FudisLanguageOption[] = [];
+
+	updateLanguage(value: any) {
+		this.currentLanguage = value;
+		console.log('current language is', this.currentLanguage);
+	}
 }

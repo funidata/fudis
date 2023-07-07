@@ -201,6 +201,7 @@ import { LanguageBadgeComponent } from './components/language-badge-group/langua
 		HeaderDirective,
 		HeadingComponent,
 		IconComponent,
+		LanguageBadgeGroupComponent,
 		LinkComponent,
 		NotificationComponent,
 		NotificationsDirective,

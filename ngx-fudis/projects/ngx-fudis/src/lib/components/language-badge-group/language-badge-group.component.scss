@@ -1,0 +1,10 @@
+@use '../../foundations/colors/mixins.scss' as colors;
+@use '../../foundations/typography/mixins.scss' as typography;
+@use '../../foundations/focus/mixins.scss' as focus;
+
+.fudis-language-badge-group {
+	&__items {
+		display: inline;
+		list-style: none;
+	}
+}
