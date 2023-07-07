@@ -4,6 +4,7 @@ type ComponentType =
 	| 'autocomplete'
 	| 'checkbox'
 	| 'datepicker'
+	| 'daterange'
 	| 'dropdown'
 	| 'expandable'
 	| 'fieldset'
@@ -26,6 +27,7 @@ export class FudisIdService {
 		autocomplete: 0,
 		checkbox: 0,
 		datepicker: 0,
+		daterange: 0,
 		dropdown: 0,
 		expandable: 0,
 		fieldset: 0,

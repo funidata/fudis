@@ -20,10 +20,17 @@ import { BadgeComponent } from './components/badge/badge.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/form/checkbox/checkbox.component';
-import { ContentDirective } from './directives/content-projection/content/content.directive';
-import { DatepickerComponent } from './components/form/datepicker/datepicker.component';
 
-import { DatepickerCustomHeaderComponent } from './components/form/datepicker/datepicker-custom-header/datepicker-custom-header.component';
+import { DateRangeComponent } from './components/form/date/date-range/date-range.component';
+
+import {
+	ContentDirective,
+	FooterContentLeftDirective,
+	FooterContentRightDirective,
+} from './directives/content-projection/content/content.directive';
+import { DatepickerComponent } from './components/form/date/datepicker/datepicker.component';
+
+import { DatepickerCustomHeaderComponent } from './components/form/date/date-common/datepicker-custom-header/datepicker-custom-header.component';
 import { DescriptionListComponent } from './components/description-list/description-list.component';
 import {
 	DialogCloseDirective,
@@ -74,6 +81,7 @@ import { DescriptionListItemComponent } from './components/description-list/desc
 import { DescriptionListItemTermComponent } from './components/description-list/description-list-item/description-list-item-term/description-list-item-term.component';
 import { DescriptionListItemDetailsComponent } from './components/description-list/description-list-item/description-list-item-details/description-list-item-details.component';
 import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
+import { FooterComponent } from './components/footer/footer.component';
 import { FudisTranslationConfigService } from './utilities/config.service';
 import { LanguageBadgeGroupComponent } from './components/language-badge-group/language-badge-group.component';
 import { LanguageBadgeComponent } from './components/language-badge-group/language-badge/language-badge.component';
@@ -92,6 +100,7 @@ import { LanguageBadgeComponent } from './components/language-badge-group/langua
 		ContentDirective,
 		DatepickerComponent,
 		DatepickerCustomHeaderComponent,
+		DateRangeComponent,
 		DescriptionListComponent,
 		DescriptionListItemComponent,
 		DescriptionListItemTermComponent,
@@ -109,6 +118,8 @@ import { LanguageBadgeComponent } from './components/language-badge-group/langua
 		ExpandableComponent,
 		FieldSetBaseDirective,
 		FieldSetComponent,
+		FooterContentLeftDirective,
+		FooterContentRightDirective,
 		FormComponent,
 		InputWithLanguageOptionsComponent,
 		GridComponent,
@@ -134,10 +145,10 @@ import { LanguageBadgeComponent } from './components/language-badge-group/langua
 		TooltipDirective,
 		ContentDirective,
 		ActionsDirective,
-
 		NotificationsDirective,
 		LanguageBadgeGroupComponent,
 		LanguageBadgeComponent,
+		FooterComponent,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
@@ -175,6 +186,7 @@ import { LanguageBadgeComponent } from './components/language-badge-group/langua
 		CheckboxComponent,
 		ContentDirective,
 		DatepickerComponent,
+		DateRangeComponent,
 		DescriptionListComponent,
 		DescriptionListItemComponent,
 		DescriptionListItemTermComponent,
@@ -186,6 +198,9 @@ import { LanguageBadgeComponent } from './components/language-badge-group/langua
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,
+		FooterComponent,
+		FooterContentLeftDirective,
+		FooterContentRightDirective,
 		DialogTitleDirective,
 		DialogContentDirective,
 		DialogCloseDirective,

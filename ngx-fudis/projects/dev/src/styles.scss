@@ -1,3 +1,4 @@
+/* stylelint-disable selector-class-pattern */
 /* stylelint-disable color-no-hex */
 @use '@angular/material' as mat;
 @use '../../../dist/ngx-fudis/index' as fudis;
@@ -14,4 +15,12 @@
 	--fudis-color-primary: #0a729e;
 	--fudis-color-primary-dark: #0e5d81;
 	--fudis-color-primary-extra-dark: #1b2e36;
+}
+
+.root-style {
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 100vh;
 }

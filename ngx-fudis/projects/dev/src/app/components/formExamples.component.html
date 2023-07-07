@@ -1,0 +1,71 @@
+<ng-container *transloco="let t">
+	<fudis-expandable [title]="'Form with some transloco'" [collapsed]="true">
+		<ng-template fudisActions type="expandable">
+			<fudis-button [label]="'Submit!'" (handleClick)="clickSubmit()"></fudis-button>
+		</ng-template>
+		<ng-template fudisContent type="expandable">
+			<fudis-form
+				[errorSummaryVisible]="errorSummaryVisible"
+				[title]="'Form title here hello'"
+				[errorSummaryHelpText]="'There were some errors'"
+				[errorSummaryScreenReaderHelpText]="'Attention'"
+				[titleTag]="'h2'">
+				<ng-template fudisContent type="form">
+					<fudis-fieldset [title]="'FieldSet alkaa tästä'">
+						<ng-template fudisContent type="fieldset">
+							<fudis-text-input
+								[label]="t('label')"
+								[id]="'uniikki-idjoo'"
+								[helpText]="t('helpText')"
+								[errorMsg]="{ required: t('error_required') }"
+								[requiredText]="t('required')"
+								[control]="testFormGroup.controls['textInput']"></fudis-text-input>
+							<fudis-radio-button-group
+								[requiredText]="t('required')"
+								[id]="'truth-selection'"
+								[title]="t('chooseTruth')"
+								[helpText]="t('chooseTruthHelp')"
+								[errorMsg]="{ required: t('chooseTruthError') }"
+								[control]="testFormGroup.controls['truth']"
+								[options]="radioButtonOptions"></fudis-radio-button-group>
+							<fudis-dropdown
+								[id]="'dropdown-id-123'"
+								[label]="'Some dropdown'"
+								[options]="dropdownOptions"
+								[control]="testFormGroup.controls['dropdown']"></fudis-dropdown>
+							<fudis-datepicker
+								[id]="'datepicker-123'"
+								[label]="'Select some date'"
+								[control]="testFormGroup.controls['date']" />
+						</ng-template>
+					</fudis-fieldset>
+				</ng-template>
+			</fudis-form>
+
+			<fudis-body-text *ngIf="showSuccessBodyText">It seems everything is okay!</fudis-body-text>
+		</ng-template>
+	</fudis-expandable>
+	<fudis-expandable [title]="'Autocomplete examples'">
+		<ng-template fudisContent type="expandable">
+			<fudis-grid>
+				<fudis-heading [tag]="'h3'" [size]="'xl'">Single-select dropdown</fudis-heading>
+				<fudis-autocomplete
+					[label]="'Choose item'"
+					[clearFilterText]="'Clear'"
+					[variant]="'dropdown'"
+					[id]="'dropdown-1234'"
+					[options]="multipleOptions"
+					[requiredText]="'Required'"
+					[control]="testFormGroup.controls['autocompleteDropdown']"
+					[errorMsg]="{ required: t('error_required') }"></fudis-autocomplete>
+				<fudis-heading [tag]="'h3'" [size]="'xl'">Single-select search</fudis-heading>
+				<fudis-autocomplete
+					[label]="'Search item'"
+					[clearFilterText]="'Clear'"
+					[options]="multipleOptions"
+					[control]="testFormGroup.controls['autocompleteSearch']"
+					[errorMsg]="{ required: t('error_required') }"></fudis-autocomplete>
+			</fudis-grid>
+		</ng-template>
+	</fudis-expandable>
+</ng-container>

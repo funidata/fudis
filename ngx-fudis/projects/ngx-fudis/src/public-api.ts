@@ -11,8 +11,15 @@ export { BadgeComponent } from './lib/components/badge/badge.component';
 export { BodyTextComponent } from './lib/components/typography/body-text/body-text.component';
 export { ButtonComponent } from './lib/components/button/button.component';
 export { CheckboxComponent } from './lib/components/form/checkbox/checkbox.component';
-export { ContentDirective } from './lib/directives/content-projection/content/content.directive';
-export { DatepickerComponent } from './lib/components/form/datepicker/datepicker.component';
+
+export { DatepickerComponent } from './lib/components/form/date/datepicker/datepicker.component';
+export { DateRangeComponent } from './lib/components/form/date/date-range/date-range.component';
+export {
+	ContentDirective,
+	FooterContentLeftDirective,
+	FooterContentRightDirective,
+} from './lib/directives/content-projection/content/content.directive';
+
 export {
 	DialogActionsDirective,
 	DialogCloseDirective,
@@ -36,6 +43,7 @@ export { ErrorSummaryComponent } from './lib/components/form/error-summary/error
 export { FudisErrorSummaryService } from './lib/components/form/error-summary/error-summary.service';
 export { ExpandableComponent } from './lib/components/expandable/expandable.component';
 export { FieldSetComponent } from './lib/components/form/fieldset/fieldset.component';
+export { FooterComponent } from './lib/components/footer/footer.component';
 export { FormComponent } from './lib/components/form/form/form.component';
 export { InputWithLanguageOptionsComponent } from './lib/components/form/input-with-language-options/input-with-language-options.component';
 export { GridComponent } from './lib/components/grid/grid/grid.component';
