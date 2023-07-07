@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MockComponent } from 'ng-mocks';
+import { FudisErrorSummaryService } from 'ngx-fudis';
 import { FieldSetComponent } from './fieldset.component';
 
 import { GridComponent } from '../../grid/grid/grid.component';
@@ -15,7 +16,7 @@ describe('FieldSetComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [FieldSetComponent, MockComponent(GridComponent), GridApiDirective, GridDirective],
-			providers: [FudisGridService],
+			providers: [FudisGridService, FudisErrorSummaryService],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(FieldSetComponent);
