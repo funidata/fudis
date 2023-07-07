@@ -7,10 +7,10 @@ import {
 	FudisFormGroupErrors,
 	FudisInputWidth,
 } from '../../../types/forms';
-import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../utilities/id-service.service';
-import { FudisTranslationConfigService } from '../../../utilities/config.service';
+import { FudisTranslationConfigService } from '../../../utilities/translation-config.service';
 
 @Component({
 	selector: 'fudis-input-with-language-options',
@@ -192,7 +192,6 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('inputWithLanguageOptions');
-		checkRequiredAttributes(this.id, this.requiredText, undefined, this.formGroup);
 
 		this._updatedOptions = this.missingLanguage ? this.updateDropdownList() : this.options;
 

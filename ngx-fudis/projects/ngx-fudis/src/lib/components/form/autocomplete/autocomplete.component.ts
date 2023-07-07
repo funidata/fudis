@@ -4,9 +4,9 @@ import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { FudisDropdownOption, FudisInputWidth } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
-import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+
 import { FudisIdService } from '../../../utilities/id-service.service';
-import { FudisTranslationConfigService } from '../../../utilities/config.service';
+import { FudisTranslationConfigService } from '../../../utilities/translation-config.service';
 
 @Component({
 	selector: 'fudis-autocomplete',
@@ -57,7 +57,7 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('autocomplete');
-		checkRequiredAttributes(this._id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
+		
 	}
 
 	ngAfterContentInit() {

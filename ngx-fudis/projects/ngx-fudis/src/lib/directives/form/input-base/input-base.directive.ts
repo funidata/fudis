@@ -2,7 +2,7 @@ import { Directive, Input, EventEmitter, Output, Signal, effect } from '@angular
 
 import { FudisFormErrors, FudisTranslationConfig } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
-import { FudisTranslationConfigService } from '../../../utilities/config.service';
+import { FudisTranslationConfigService } from '../../../utilities/translation-config.service';
 import { untilDestroyed } from '../../../utilities/untilDestroyed';
 
 @Directive({
@@ -36,11 +36,6 @@ export class InputBaseDirective extends TooltipApiDirective {
 	 * Option for disabling the input.
 	 */
 	@Input() disabled: boolean = false;
-
-	/**
-	 * Text to indicate compulsory.
-	 */
-	@Input() requiredText: string | undefined;
 
 	/**
 	 * Help text, aligned underneath the input.

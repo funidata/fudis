@@ -5,7 +5,7 @@ import { MatDatepickerIntl } from '@angular/material/datepicker';
 import { FUDIS_DATE_FORMATS, FudisInputWidth } from 'projects/ngx-fudis/src/lib/types/forms';
 import { InputBaseDirective } from 'projects/ngx-fudis/src/lib/directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../../utilities/id-service.service';
-import { FudisTranslationConfigService } from '../../../../utilities/config.service';
+import { FudisTranslationConfigService } from '../../../../utilities/translation-config.service';
 
 import { DatepickerCustomDateAdapter } from '../date-common/datepicker-custom-date-adapter';
 import { updateLocale } from '../date-common/utilities';

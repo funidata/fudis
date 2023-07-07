@@ -2,10 +2,10 @@
 import { Component, Input, ViewChild, ElementRef, HostBinding, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
-import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+
 import { FudisInputWidth } from '../../../types/forms';
 import { FudisIdService } from '../../../utilities/id-service.service';
-import { FudisTranslationConfigService } from '../../../utilities/config.service';
+import { FudisTranslationConfigService } from '../../../utilities/translation-config.service';
 
 @Component({
 	selector: 'fudis-text-input',
@@ -63,6 +63,5 @@ export class TextInputComponent extends InputBaseDirective implements OnInit {
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('textInput');
-		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 }

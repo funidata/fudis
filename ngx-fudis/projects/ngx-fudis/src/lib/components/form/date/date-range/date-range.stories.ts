@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BehaviorSubject } from 'rxjs';
 import { DateRangeComponent } from './date-range.component';
 import { FudisTranslationConfig } from '../../../../types/forms';
-import { FudisTranslationConfigService } from '../../../../utilities/config.service';
+import { FudisTranslationConfigService } from '../../../../utilities/translation-config.service';
 import readme from './readme.mdx';
 
 @Component({

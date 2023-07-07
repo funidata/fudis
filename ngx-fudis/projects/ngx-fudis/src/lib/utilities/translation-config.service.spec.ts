@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FudisTranslationConfigService } from './config.service';
+import { FudisTranslationConfigService } from './translation-config.service';
 
 describe('ConfigService', () => {
 	let service: FudisTranslationConfigService;

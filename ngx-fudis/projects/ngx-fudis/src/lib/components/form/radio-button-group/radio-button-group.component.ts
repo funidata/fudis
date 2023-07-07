@@ -4,8 +4,6 @@ import { FudisRadioButtonOption, FudisFormErrors } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 
-import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
-
 @Component({
 	selector: 'fudis-radio-button-group',
 	templateUrl: './radio-button-group.component.html',
@@ -36,8 +34,6 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	@Input() invalidState: boolean = false;
 
 	ngOnInit() {
-		checkRequiredAttributes(this.id, this.requiredText, this.control);
-
 		if (this.options.length < 2) {
 			throw new Error(
 				`Fudis-radio-button-group should have minimum of two options for radio buttons! Now it only got ${this.options.length} options`
