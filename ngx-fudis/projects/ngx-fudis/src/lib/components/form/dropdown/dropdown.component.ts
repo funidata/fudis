@@ -4,6 +4,7 @@ import { FudisDropdownOption, FudisDropdownLanguageOption, FudisInputWidth } fro
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { FudisIdService } from '../../../utilities/id-service.service';
+import { FudisTranslationConfigService } from '../../../utilities/config.service';
 
 @Component({
 	selector: 'fudis-dropdown',
@@ -12,8 +13,8 @@ import { FudisIdService } from '../../../utilities/id-service.service';
 	encapsulation: ViewEncapsulation.None,
 })
 export class DropdownComponent extends InputBaseDirective implements OnInit {
-	constructor(private _idService: FudisIdService) {
-		super();
+	constructor(private _idService: FudisIdService, _configService: FudisTranslationConfigService) {
+		super(_configService);
 	}
 
 	/*
@@ -53,11 +54,6 @@ export class DropdownComponent extends InputBaseDirective implements OnInit {
 	 * Value output event on selectoion change
 	 */
 	@Output() selectionUpdate: EventEmitter<FudisDropdownOption> = new EventEmitter<FudisDropdownOption>();
-
-	/**
-	 * Internal id to generate unique id
-	 */
-	protected _id: string;
 
 	handleSelectionChange(value: FudisDropdownOption): void {
 		this.selectionUpdate.emit(value);

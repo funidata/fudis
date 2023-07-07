@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
 import { FudisIdService } from '../../../utilities/id-service.service';
+import { FudisTranslationConfigService } from '../../../utilities/config.service';
 
 @Component({
 	selector: 'fudis-checkbox',
@@ -10,8 +11,8 @@ import { FudisIdService } from '../../../utilities/id-service.service';
 	styleUrls: ['./checkbox.component.scss'],
 })
 export class CheckboxComponent extends InputBaseDirective implements OnInit {
-	constructor(private _idService: FudisIdService) {
-		super();
+	constructor(private _idService: FudisIdService, _configService: FudisTranslationConfigService) {
+		super(_configService);
 	}
 
 	@ViewChild('checkboxRef') input: ElementRef;
@@ -25,11 +26,6 @@ export class CheckboxComponent extends InputBaseDirective implements OnInit {
 	 * Name for checkbox
 	 */
 	@Input() name: string;
-
-	/**
-	 * Internal id to generate unique id
-	 */
-	protected _id: string;
 
 	handleCheckboxClick(): void {
 		this.input.nativeElement.focus();

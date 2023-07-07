@@ -1,0 +1,16 @@
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import { linkTo } from '@storybook/addon-links';
+import { DateRangeComponent } from './date-range.component.ts';
+import * as DateRangeStories from './date-range.stories.ts';
+
+<Meta title="Components/Form/Date/Date Range" />
+
+# Date Range
+
+Fudis Date Range is component combination of two Date Pickers.
+
+## Examples
+
+<Canvas of={DateRangeStories.DateRange}></Canvas>
+
+<ArgTypes of={DateRangeComponent} />

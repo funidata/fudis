@@ -44,7 +44,9 @@
 		}
 
 		&__title {
-			margin-right: spacing.$spacing-xl;
+			&__margin-right {
+				margin-right: spacing.$spacing-xl;
+			}
 
 			&__md {
 				@include typography.heading-xs;

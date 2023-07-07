@@ -11,12 +11,15 @@ export { BadgeComponent } from './lib/components/badge/badge.component';
 export { BodyTextComponent } from './lib/components/typography/body-text/body-text.component';
 export { ButtonComponent } from './lib/components/button/button.component';
 export { CheckboxComponent } from './lib/components/form/checkbox/checkbox.component';
+
+export { DatepickerComponent } from './lib/components/form/date/datepicker/datepicker.component';
+export { DateRangeComponent } from './lib/components/form/date/date-range/date-range.component';
 export {
 	ContentDirective,
 	FooterContentLeftDirective,
 	FooterContentRightDirective,
 } from './lib/directives/content-projection/content/content.directive';
-export { DatepickerComponent } from './lib/components/form/datepicker/datepicker.component';
+
 export {
 	DialogActionsDirective,
 	DialogCloseDirective,
