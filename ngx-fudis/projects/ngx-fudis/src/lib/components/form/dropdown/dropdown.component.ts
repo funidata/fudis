@@ -59,8 +59,8 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 	}
 
 	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('dropdown');
 		this.subscribeToRequiredText();
+		this._id = this.id ?? this._idService.getNewId('dropdown');
 	}
 
 	ngOnChanges(): void {

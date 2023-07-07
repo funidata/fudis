@@ -92,30 +92,30 @@ export interface FudisInputWithLanguageOptionsFormGroup {
 
 export interface FudisTranslationConfig {
 	// Shown with form inputs
-	required?: Observable<string>;
+	required: Observable<string>;
 	// Used in e. g. to define Date picker language
-	appLanguage?: 'en' | 'fi' | 'sv' | string;
-	datepicker?: {
+	appLanguage: 'en' | 'fi' | 'sv' | string;
+	datepicker: {
+		// Label for close button
+		closeLabel: Observable<string>;
+	};
+	dialog: {
 		// Label for close button
 		closeLabel?: Observable<string>;
 	};
-	dialog?: {
-		// Label for close button
-		closeLabel?: Observable<string>;
-	};
-	inputWithLanguageOptions?: {
+	inputWithLanguageOptions: {
 		// Label for language selection dropdown
-		languageLabel?: Observable<string>;
+		languageLabel: Observable<string>;
 		// Text shown in dropdown options if input for a language is missing
-		missingLanguage?: Observable<string>;
+		missingLanguage: Observable<string>;
 	};
 	// Clear filter button label for screen readers
-	autoComplete?: {
+	autoComplete: {
 		clearFilter: Observable<string>;
 	};
-	icon?: {
+	icon: {
 		// Alternative text for screen readers. Used in e. g. Error Summary
-		attention?: Observable<string>;
+		attention: Observable<string>;
 	};
 }
 

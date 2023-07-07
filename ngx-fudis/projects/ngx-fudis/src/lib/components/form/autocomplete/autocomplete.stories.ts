@@ -28,7 +28,6 @@ const Template: StoryFn<AutocompleteComponent> = (args: AutocompleteComponent) =
 export const AutocompleteSearch = Template.bind({});
 AutocompleteSearch.args = {
 	label: 'Search autocomplete',
-	clearFilterText: 'Clear filter',
 	helpText:
 		'This is autocomplete input, start writing (e.g mar) and after three letters the input will suggest matching options.',
 	control: new FormControl(null, Validators.required),
@@ -56,7 +55,6 @@ export const AutocompleteDropdown = Template.bind({});
 AutocompleteDropdown.args = {
 	label: 'Dropdown autocomplete',
 	variant: 'dropdown',
-	clearFilterText: 'Clear filter',
 	helpText: 'This autocomplete displays dropdown option list when focusing to the input.',
 	control: new FormControl(null, Validators.required),
 	errorMsg: { required: 'This selection is required' },

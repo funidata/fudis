@@ -70,11 +70,13 @@ export class FudisErrorSummaryService {
 
 		const errorId = error.controlName ? `${error.id}_${error.controlName}` : error.id;
 
-		delete currentErrors[errorId].errors[error.type];
+		if (currentErrors?.[errorId]?.errors[error.type]) {
+			delete currentErrors[errorId].errors[error.type];
 
-		this._currentErrorList = currentErrors;
+			this._currentErrorList = currentErrors;
 
-		this._signalDynamicCurrentErrorList.set(currentErrors);
+			this._signalDynamicCurrentErrorList.set(currentErrors);
+		}
 	}
 
 	public addFieldset(fieldset: FudisFormErrorSummarySection): void {

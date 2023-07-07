@@ -36,11 +36,6 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	@Input() size: FudisInputWidth = 'lg';
 
 	/**
-	 * Aria-label for close icon which clears the input
-	 */
-	@Input({ required: true }) clearFilterText: string;
-
-	/**
 	 * Option whether the dropdown options are shown only after three charactes (search) or if options are displayed when focusing the search input even without typing (dropdown)
 	 */
 	@Input() variant: 'search' | 'dropdown' = 'search';
@@ -55,10 +50,15 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	 */
 	protected _filteredOptions: Observable<FudisDropdownOption[]>;
 
-	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('autocomplete');
+	/**
+	 * Aria-label for close icon which clears the input
+	 */
+	protected _clearFilterText: string;
 
+	ngOnInit(): void {
+		this.subscribeToFilterText();
 		this.subscribeToRequiredText();
+		this._id = this.id ?? this._idService.getNewId('autocomplete');
 	}
 
 	ngAfterContentInit() {
@@ -151,5 +151,13 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 			this._autocompleteFormControl.patchValue(this.control.value.viewValue);
 		}
 		this.handleBlur.emit(event);
+	}
+
+	private subscribeToFilterText(): void {
+		this._configs()
+			.autoComplete.clearFilter.pipe(this._untilDestroyed())
+			.subscribe((value) => {
+				this._clearFilterText = value;
+			});
 	}
 }

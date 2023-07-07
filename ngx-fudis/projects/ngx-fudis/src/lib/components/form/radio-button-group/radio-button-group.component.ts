@@ -39,6 +39,7 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	@Input() required: boolean | undefined = undefined;
 
 	ngOnInit() {
+		this.subscribeToRequiredText();
 		if (this.options.length < 2) {
 			throw new Error(
 				`Fudis-radio-button-group should have minimum of two options for radio buttons! Now it only got ${this.options.length} options`
@@ -58,8 +59,6 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 				`From @Input array of options to fudis-radio-button-group value 'name' should be identical for all options.`
 			);
 		}
-
-		this.subscribeToRequiredText();
 	}
 
 	ngOnChanges(): void {

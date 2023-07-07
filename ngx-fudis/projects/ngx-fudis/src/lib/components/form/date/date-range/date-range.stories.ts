@@ -2,7 +2,6 @@ import { Component, Signal, importProvidersFrom } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormControl, Validators } from '@angular/forms';
 import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BehaviorSubject } from 'rxjs';
 import { DateRangeComponent } from './date-range.component';
 import { FudisTranslationConfig } from '../../../../types/forms';
 import { FudisTranslationConfigService } from '../../../../utilities/translation-config.service';
@@ -17,31 +16,17 @@ class LanguageChangeComponent {
 
 	_config: Signal<FudisTranslationConfig>;
 
-	requiredText = new BehaviorSubject<string>('Required');
-
-	closeLabel = new BehaviorSubject<string>('Close calendar');
-
 	constructor(private _configService: FudisTranslationConfigService) {
 		this._config = this._configService.getConfig();
 
-		this._configService.setConfig({
-			appLanguage: 'en',
-			datepicker: { closeLabel: this.closeLabel },
-		});
+		this._configService.setConfig('en');
 	}
 
 	changeLanguage(): void {
 		if (this._config().appLanguage === 'en') {
-			this.closeLabel.next('Sulje kalenteri');
-
-			this._configService.setConfig({
-				appLanguage: 'fi',
-			});
+			this._configService.setConfig('fi');
 		} else {
-			this.closeLabel.next('Close calendar');
-			this._configService.setConfig({
-				appLanguage: 'en',
-			});
+			this._configService.setConfig('en');
 		}
 	}
 }

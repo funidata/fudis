@@ -43,8 +43,8 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit, OnC
 	@Input() size: FudisInputWidth = 'lg';
 
 	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('textArea');
 		this.subscribeToRequiredText();
+		this._id = this.id ?? this._idService.getNewId('textArea');
 	}
 
 	ngOnChanges(): void {

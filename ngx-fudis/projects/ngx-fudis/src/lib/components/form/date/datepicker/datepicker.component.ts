@@ -68,17 +68,16 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 	 */
 	protected subscribeToCloseLabel(): void {
 		this._configs()
-			.datepicker!.closeLabel!.pipe(this._untilDestroyed())
+			.datepicker.closeLabel.pipe(this._untilDestroyed())
 			.subscribe((value) => {
 				this._datepickerIntl.closeCalendarLabel = value as string;
 			});
 	}
 
 	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('datepicker');
-
 		this.subscribeToCloseLabel();
 		this.subscribeToRequiredText();
+		this._id = this.id ?? this._idService.getNewId('datepicker');
 	}
 
 	ngOnChanges(): void {

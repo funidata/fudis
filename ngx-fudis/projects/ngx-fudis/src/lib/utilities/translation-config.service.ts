@@ -11,7 +11,7 @@ export class FudisTranslationConfigService {
 	/**
 	 * Default config values
 	 */
-	private _defaultsValues: FudisTranslationConfig = {
+	private _defaultsEn: FudisTranslationConfig = {
 		appLanguage: 'en',
 		required: of('Required'),
 		datepicker: { closeLabel: of('Close calendar') },
@@ -28,13 +28,36 @@ export class FudisTranslationConfigService {
 		},
 	};
 
-	private _config = signal<FudisTranslationConfig>(this._defaultsValues);
+	private _defaultsFi: FudisTranslationConfig = {
+		appLanguage: 'fi',
+		required: of('Pakollinen'),
+		datepicker: { closeLabel: of('Sulje kalenteri') },
+		dialog: { closeLabel: of('Sulje') },
+		inputWithLanguageOptions: {
+			languageLabel: of('Kieli'),
+			missingLanguage: of('Puuttuu'),
+		},
+		autoComplete: {
+			clearFilter: of('Tyhjennä kenttä'),
+		},
+		icon: {
+			attention: of('Huomio'),
+		},
+	};
+
+	private _config = signal<FudisTranslationConfig>(this._defaultsEn);
 
 	/**
 	 * To set from application values for all components application uses.
 	 */
-	setConfig(defaultValues: FudisTranslationConfig): void {
-		this._config.set({ ...this._config(), ...defaultValues });
+	setConfig(defaultValues: 'en' | 'fi' | FudisTranslationConfig): void {
+		if (defaultValues === 'fi') {
+			this._config.set(this._defaultsFi);
+		} else if (defaultValues === 'en') {
+			this._config.set(this._defaultsEn);
+		} else {
+			this._config.set(defaultValues);
+		}
 	}
 
 	/**

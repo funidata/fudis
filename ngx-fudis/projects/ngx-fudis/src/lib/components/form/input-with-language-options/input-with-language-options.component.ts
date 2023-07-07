@@ -181,8 +181,9 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	}
 
 	ngOnInit(): void {
-		this.subscribeToRequiredText();
 		this.subscribeToDropdownTexts();
+		this.subscribeToRequiredText();
+
 		this._id = this.id ?? this._idService.getNewId('inputWithLanguageOptions');
 
 		this._updatedOptions = this._missingLanguage ? this.updateDropdownList() : this.options;
@@ -199,12 +200,12 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	private subscribeToDropdownTexts(): void {
 		this._configs()
-			.inputWithLanguageOptions!.missingLanguage!.pipe(this._untilDestroyed())
+			.inputWithLanguageOptions.missingLanguage.pipe(this._untilDestroyed())
 			.subscribe((value) => {
 				this._missingLanguage = value;
 			});
 		this._configs()
-			.inputWithLanguageOptions!.languageLabel!.pipe(this._untilDestroyed())
+			.inputWithLanguageOptions.languageLabel.pipe(this._untilDestroyed())
 			.subscribe((value) => {
 				this._languageLabel = value;
 			});

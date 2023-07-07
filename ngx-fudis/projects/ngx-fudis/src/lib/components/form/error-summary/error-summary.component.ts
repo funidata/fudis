@@ -50,6 +50,8 @@ export class ErrorSummaryComponent {
 
 	private _numberOfFocusTries: number = 0;
 
+	protected _attentionText: string;
+
 	getErrors(): void {
 		const fetchedErrors: Signal<FudisFormErrorSummaryObject> = this.liveRemove
 			? this._errorSummaryService.getDynamicErrors()

@@ -32,8 +32,8 @@ export class CheckboxComponent extends InputBaseDirective implements OnInit, OnC
 	}
 
 	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('checkbox');
 		this.subscribeToRequiredText();
+		this._id = this.id ?? this._idService.getNewId('checkbox');
 	}
 
 	ngOnChanges(): void {
