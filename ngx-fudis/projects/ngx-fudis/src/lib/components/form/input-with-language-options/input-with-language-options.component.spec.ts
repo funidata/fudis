@@ -41,7 +41,6 @@ describe('InputWithLanguageOptionsComponent', () => {
 		component.label = 'Label for testing purposes';
 		component.formGroup = testFormGroup;
 		component.options = languageOptions;
-		component.requiredText = 'Required';
 		fixture.detectChanges();
 	});
 
