@@ -12,7 +12,6 @@
 
 <div
 	*ngIf="itemsWithCheckbox"
-	[attr.role]="'option'"
 	class="fudis-dropdown-menu-item__checkbox"
 	[class.fudis-dropdown-menu-item__checkbox--active]="checked">
 	<label
@@ -22,6 +21,7 @@
 			<input
 				type="checkbox"
 				class="fudis-dropdown-menu-item__checkbox__input"
+				[attr.role]="'option'"
 				[attr.aria-checked]="checked"
 				(click)="handleChecked.emit()" />
 			<svg
