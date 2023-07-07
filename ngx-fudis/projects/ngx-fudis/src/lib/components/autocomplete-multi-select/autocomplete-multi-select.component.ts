@@ -68,6 +68,11 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	@Input() noResultsFound: string = 'No results were found';
 
 	/**
+	 * Aria-label to indicate deleting item chip
+	 */
+	@Input() removeItemText: string = 'Remove filter';
+
+	/**
 	 * Output for item click
 	 */
 	@Output() itemChange = new EventEmitter<FudisDropdownOption[]>();

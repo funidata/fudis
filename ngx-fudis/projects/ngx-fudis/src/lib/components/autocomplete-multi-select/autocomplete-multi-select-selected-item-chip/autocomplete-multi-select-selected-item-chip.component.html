@@ -2,7 +2,7 @@
 	<button
 		*ngFor="let item of selectedItems"
 		class="fudis-autocomplete-multi-select-selected-item-chip__button"
-		[attr.aria-label]="ariaLabel + ', ' + item.viewValue"
+		[attr.aria-describedby]="'remove-items'"
 		(click)="deleteChipItem($event, item)">
 		<fudis-icon [icon]="'close'" [color]="'white'"></fudis-icon>
 		{{ item.viewValue }}

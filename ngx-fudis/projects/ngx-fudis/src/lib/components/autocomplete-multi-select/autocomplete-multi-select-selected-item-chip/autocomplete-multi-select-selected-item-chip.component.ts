@@ -13,11 +13,6 @@ export class AutocompleteMultiSelectSelectedItemChipComponent {
 	@Input() selectedItems: FudisDropdownOption[];
 
 	/**
-	 * Aria-label to indicate deleting item chip
-	 */
-	@Input() ariaLabel: string = 'Remove filter';
-
-	/**
 	 * Output for deleting the chip item
 	 */
 	@Output() deleteItem = new EventEmitter<FudisDropdownOption>();

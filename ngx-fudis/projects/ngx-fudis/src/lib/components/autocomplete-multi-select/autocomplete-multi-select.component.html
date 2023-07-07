@@ -20,6 +20,7 @@
 			role="combobox"
 			[attr.aria-expanded]="_toggleOn"
 			class="fudis-autocomplete-multi-select__input-wrapper__input"
+			[attr.aria-labelledby]="'selected-items'"
 			[attr.aria-describedby]="_id + '_guidance'" />
 		<fudis-button
 			class="fudis-autocomplete-multi-select__input-wrapper__icon-button"
@@ -33,7 +34,7 @@
 		</fudis-button>
 	</div>
 	<ng-container *ngIf="_toggleOn">
-		<fudis-dropdown-menu [align]="'center'" [size]="size" [role]="'listbox'">
+		<fudis-dropdown-menu [align]="'center'" [size]="size" [role]="'listbox'" [attr.aria-multiselectable]="true">
 			<ng-container *ngFor="let item of _results">
 				<fudis-dropdown-menu-item
 					[label]="item.viewValue"
@@ -49,7 +50,9 @@
 		</fudis-dropdown-menu>
 	</ng-container>
 	<ng-container *ngIf="selectedOptions.length > 0">
+		<span id="remove-items" class="fudis-visually-hidden">{{ removeItemText }}</span>
 		<fudis-autocomplete-multi-select-selected-item-chip
+			id="selected-items"
 			(deleteItem)="handleDeleteItem()"
 			[selectedItems]="selectedOptions" />
 	</ng-container>
