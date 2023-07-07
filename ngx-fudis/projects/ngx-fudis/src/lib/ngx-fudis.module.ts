@@ -20,14 +20,17 @@ import { BadgeComponent } from './components/badge/badge.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/form/checkbox/checkbox.component';
+
+import { DateRangeComponent } from './components/form/date/date-range/date-range.component';
+
 import {
 	ContentDirective,
 	FooterContentLeftDirective,
 	FooterContentRightDirective,
 } from './directives/content-projection/content/content.directive';
-import { DatepickerComponent } from './components/form/datepicker/datepicker.component';
+import { DatepickerComponent } from './components/form/date/datepicker/datepicker.component';
 
-import { DatepickerCustomHeaderComponent } from './components/form/datepicker/datepicker-custom-header/datepicker-custom-header.component';
+import { DatepickerCustomHeaderComponent } from './components/form/date/date-common/datepicker-custom-header/datepicker-custom-header.component';
 import { DescriptionListComponent } from './components/description-list/description-list.component';
 import {
 	DialogCloseDirective,
@@ -95,6 +98,7 @@ import { FudisTranslationConfigService } from './utilities/config.service';
 		ContentDirective,
 		DatepickerComponent,
 		DatepickerCustomHeaderComponent,
+		DateRangeComponent,
 		DescriptionListComponent,
 		DescriptionListItemComponent,
 		DescriptionListItemTermComponent,
@@ -139,7 +143,6 @@ import { FudisTranslationConfigService } from './utilities/config.service';
 		TooltipDirective,
 		ContentDirective,
 		ActionsDirective,
-
 		NotificationsDirective,
 		FooterComponent,
 	],
@@ -179,6 +182,7 @@ import { FudisTranslationConfigService } from './utilities/config.service';
 		CheckboxComponent,
 		ContentDirective,
 		DatepickerComponent,
+		DateRangeComponent,
 		DescriptionListComponent,
 		DescriptionListItemComponent,
 		DescriptionListItemTermComponent,

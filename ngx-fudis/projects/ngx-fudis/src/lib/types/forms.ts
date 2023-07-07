@@ -1,4 +1,5 @@
 import { FormControl } from '@angular/forms';
+import { MatDateFormats, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
 
 import { Observable } from 'rxjs';
 
@@ -113,5 +114,31 @@ export interface FudisTranslationConfig {
 		attention?: Observable<string>;
 	};
 }
+
+export interface FudisDateRangeItem {
+	control: FormControl<Date | null>;
+	label: string;
+	helpText?: string;
+	errorMsg?: FudisFormErrors;
+	minDate?: Date | null;
+	maxDate?: Date | null;
+	tooltip?: string;
+}
+
+export const FudisDateInputFormat = {
+	dateInput: 'DD.MM.YYYY',
+	monthYearLabel: 'MMM YYYY',
+};
+
+export const FUDIS_DATE_FORMATS: MatDateFormats = {
+	...MAT_NATIVE_DATE_FORMATS,
+	parse: {
+		dateInput: 'DD.MM.YYYY',
+	},
+	display: {
+		...MAT_NATIVE_DATE_FORMATS.display,
+		dateInput: FudisDateInputFormat as Intl.DateTimeFormatOptions,
+	},
+};
 
 export type FudisFormErrorSummaryLink = 'router' | 'href';

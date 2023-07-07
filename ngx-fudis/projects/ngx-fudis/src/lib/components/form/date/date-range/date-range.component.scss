@@ -1,0 +1,36 @@
+@use '../../../../foundations/spacing/tokens.scss' as spacing;
+
+.fudis-daterange {
+	display: flex;
+	align-items: flex-start;
+	opacity: 0;
+	max-width: spacing.$spacing-input-lg;
+
+	&--visible {
+		opacity: 1;
+	}
+
+	&__start-date {
+		display: flex;
+		position: relative;
+
+		/* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector, selector-class-pattern */
+		& .fudis-datepicker__input-wrapper {
+			&::after {
+				position: absolute;
+				top: 50%;
+				right: 0;
+				transform: translate(spacing.$spacing-sm, -50%);
+				width: spacing.$spacing-xs;
+				height: spacing.$spacing-md;
+				content: '\2013';
+			}
+		}
+	}
+
+	&__gutter {
+		display: block;
+		width: spacing.$spacing-md;
+		height: 100%;
+	}
+}
