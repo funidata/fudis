@@ -34,7 +34,7 @@ export class AppFormExampleComponent implements OnInit {
 
 	closeLabel: string = '';
 
-	requiredText: string = '';
+	required: string = '';
 
 	private _untilDestroyed = untilDestroyed();
 

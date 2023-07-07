@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
 
 		fudisConfig.setConfig({
 			datepicker: { closeLabel: this.translocoService.selectTranslate('closeCalendar') },
-			requiredText: this.translocoService.selectTranslate('required'),
+			required: this.translocoService.selectTranslate('required'),
 			appLanguage: 'en',
 		});
 	}

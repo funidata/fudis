@@ -63,7 +63,6 @@ const TemplateAllRequired: StoryFn = () => ({
 			swedish: new FormControl<string | null>(null, [Validators.required, Validators.maxLength(12)]),
 			english: new FormControl<string | null>(null, [Validators.required, Validators.maxLength(12)]),
 		}),
-		missingLanguage: 'Missing',
 	},
 	template: html`
 		<fudis-input-with-language-options
@@ -72,9 +71,7 @@ const TemplateAllRequired: StoryFn = () => ({
 			[formGroup]="formGroup"
 			[label]="label"
 			[helpText]="helpText"
-			[languageLabel]="'Language'"
-			[groupErrorMsg]="groupErrorMsg"
-			[missingLanguage]="missingLanguage" />
+			[groupErrorMsg]="groupErrorMsg" />
 	`,
 });
 
@@ -112,7 +109,6 @@ const TemplateOneRequired: StoryFn = () => ({
 			},
 			[FormGroupValidators.atLeastOneRequired()]
 		),
-		missingLanguage: 'Missing',
 	},
 	template: html`
 		<fudis-input-with-language-options
@@ -120,10 +116,8 @@ const TemplateOneRequired: StoryFn = () => ({
 			[options]="languageOptions"
 			[formGroup]="formGroup"
 			[label]="label"
-			[languageLabel]="'Language'"
 			[helpText]="helpText"
-			[groupErrorMsg]="groupErrorMsg"
-			[missingLanguage]="missingLanguage" />
+			[groupErrorMsg]="groupErrorMsg" />
 	`,
 });
 

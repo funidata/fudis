@@ -92,7 +92,7 @@ export interface FudisInputWithLanguageOptionsFormGroup {
 
 export interface FudisTranslationConfig {
 	// Shown with form inputs
-	requiredText?: Observable<string>;
+	required?: Observable<string>;
 	// Used in e. g. to define Date picker language
 	appLanguage?: 'en' | 'fi' | 'sv' | string;
 	datepicker?: {
@@ -108,6 +108,10 @@ export interface FudisTranslationConfig {
 		languageLabel?: Observable<string>;
 		// Text shown in dropdown options if input for a language is missing
 		missingLanguage?: Observable<string>;
+	};
+	// Clear filter button label for screen readers
+	autoComplete?: {
+		clearFilter: Observable<string>;
 	};
 	icon?: {
 		// Alternative text for screen readers. Used in e. g. Error Summary

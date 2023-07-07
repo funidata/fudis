@@ -16,8 +16,8 @@
 		class="fudis-input-with-language-options__dropdown"
 		(selectionUpdate)="handleLanguageSelect($event)"
 		[control]="_dropdownControl"
-		[label]="languageLabel"
-		[size]="missingLanguage ? 'xs' : 'lg'"
+		[label]="_languageLabel"
+		[size]="_missingLanguage ? 'xs' : 'lg'"
 		[id]="_id + '_language-dropdown'"
 		[options]="_updatedOptions">
 	</fudis-dropdown>

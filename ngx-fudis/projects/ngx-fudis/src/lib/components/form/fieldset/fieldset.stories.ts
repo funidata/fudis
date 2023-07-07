@@ -32,18 +32,14 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 			<ng-template fudisContent type="fieldset">
 				<fudis-grid [columns]="{ md: 2 }">
 					<fudis-input-with-language-options
-						[missingLanguage]="'Missing'"
 						[id]="'unique-input-1'"
 						[options]="languageOptions"
-						[languageLabel]="'Language'"
 						[formGroup]="fieldsetExample.controls['name']"
 						[label]="labelName"
 						[helpText]="'Some name would be nice. Provide course name in at least one language.'"
 						[groupErrorMsg]="errorName" />
 					<fudis-input-with-language-options
 						[variant]="'text-area'"
-						[missingLanguage]="'Missing'"
-						[languageLabel]="'Language'"
 						[id]="'unique-input-2'"
 						[options]="languageOptions"
 						[formGroup]="fieldsetExample.controls['description']"

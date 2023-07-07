@@ -45,16 +45,6 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	@Input() groupErrorMsg: FudisFormGroupErrors;
 
 	/**
-	 * Indicator text added to the dropdown list if input of a language is empty.
-	 */
-	@Input({ required: true }) missingLanguage: string;
-
-	/**
-	 * Label for language selection dropdown
-	 */
-	@Input({ required: true }) languageLabel: string;
-
-	/**
 	 * Form element to display. Defaults to text-input
 	 */
 	@Input() variant: 'text-input' | 'text-area' = 'text-input';
@@ -73,13 +63,17 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	protected _updatedOptions: FudisDropdownOption[] = [];
 
+	protected _missingLanguage: string;
+
+	protected _languageLabel: string;
+
 	handleLanguageSelect(value: FudisDropdownOption): void {
 		this._dropdownValue = value;
 		this._for = `${this.id}_${value.value}`;
 	}
 
 	handleInputBlur(event: Event, controlKey: string): void {
-		this._updatedOptions = this.missingLanguage ? this.updateDropdownList() : this.options;
+		this._updatedOptions = this._missingLanguage ? this.updateDropdownList() : this.options;
 
 		this.isControlRequired((event.target as HTMLInputElement).value, controlKey);
 	}
@@ -89,7 +83,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 		this.options.forEach((option) => {
 			if (this.formGroup.controls[option.value].invalid || !this.formGroup.controls[option.value].value) {
-				const updatedOption = { ...option, viewValue: `${option.viewValue} (${this.missingLanguage})` };
+				const updatedOption = { ...option, viewValue: `${option.viewValue} (${this._missingLanguage})` };
 
 				newOptions.push(updatedOption);
 
@@ -120,7 +114,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 					...this._requiredControls,
 					[control]: {
 						value: this.formGroup.controls[control].value,
-						required: this.required,
+						required: this._atLeastOneRequired,
 					},
 				};
 			});
@@ -130,7 +124,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 					...this._requiredControls,
 					[control]: {
 						value: this.formGroup.controls[control].value,
-						required: this.formGroup.controls[control].hasValidator(Validators.required) ? this.required : undefined,
+						required: this.formGroup.controls[control].hasValidator(Validators.required) ? true : undefined,
 					},
 				};
 			});
@@ -163,7 +157,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 							required:
 								this._nonEmptyControls.includes(control) ||
 								this.formGroup.controls[control].hasValidator(Validators.required)
-									? this.required
+									? true
 									: undefined,
 						},
 					};
@@ -187,18 +181,32 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	}
 
 	ngOnInit(): void {
+		this.subscribeToRequiredText();
+		this.subscribeToDropdownTexts();
 		this._id = this.id ?? this._idService.getNewId('inputWithLanguageOptions');
 
-		this._updatedOptions = this.missingLanguage ? this.updateDropdownList() : this.options;
+		this._updatedOptions = this._missingLanguage ? this.updateDropdownList() : this.options;
 
 		this._dropdownControl = new FormControl(this._updatedOptions[0]);
 		this._for = `${this.id}_${this.options[0].value}`;
 
 		this.initialRequiredCheck();
-		this.subscribeToRequiredText();
 	}
 
 	ngOnChanges(): void {
-		this._updatedOptions = this.missingLanguage ? this.updateDropdownList() : this.options;
+		this._updatedOptions = this._missingLanguage ? this.updateDropdownList() : this.options;
+	}
+
+	private subscribeToDropdownTexts(): void {
+		this._configs()
+			.inputWithLanguageOptions!.missingLanguage!.pipe(this._untilDestroyed())
+			.subscribe((value) => {
+				this._missingLanguage = value;
+			});
+		this._configs()
+			.inputWithLanguageOptions!.languageLabel!.pipe(this._untilDestroyed())
+			.subscribe((value) => {
+				this._languageLabel = value;
+			});
 	}
 }

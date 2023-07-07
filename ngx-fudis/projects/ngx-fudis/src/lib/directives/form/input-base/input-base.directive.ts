@@ -78,7 +78,7 @@ export class InputBaseDirective extends TooltipApiDirective {
 
 	protected subscribeToRequiredText(): void {
 		this._configs()
-			.requiredText!.pipe(this._untilDestroyed())
+			.required!.pipe(this._untilDestroyed())
 			.subscribe((value) => {
 				this._requiredText = value;
 			});

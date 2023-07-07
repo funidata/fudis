@@ -13,12 +13,15 @@ export class FudisTranslationConfigService {
 	 */
 	private _defaultsValues: FudisTranslationConfig = {
 		appLanguage: 'en',
-		requiredText: of('Required'),
+		required: of('Required'),
 		datepicker: { closeLabel: of('Close calendar') },
 		dialog: { closeLabel: of('Close') },
 		inputWithLanguageOptions: {
 			languageLabel: of('Language'),
 			missingLanguage: of('Missing'),
+		},
+		autoComplete: {
+			clearFilter: of('Clear filter'),
 		},
 		icon: {
 			attention: of('Attention'),
