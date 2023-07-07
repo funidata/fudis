@@ -7,6 +7,7 @@ import { FudisGridWidth, FudisGridAlign, FudisGridMarginSide } from '../../types
 
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisSpacing } from '../../types/miscellaneous';
+import { FudisErrorSummaryService } from '../form/error-summary/error-summary.service';
 
 @Component({
 	selector: 'fudis-section',
@@ -62,7 +63,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 	 */
 	@Input() classes: string[];
 
-	constructor(private _idService: FudisIdService) {
+	constructor(private _idService: FudisIdService, private _errorSummaryService: FudisErrorSummaryService) {
 		super();
 	}
 
