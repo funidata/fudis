@@ -15,6 +15,7 @@ import { InputBaseDirective } from '../../directives/form/input-base/input-base.
 import { FudisDropdownOption, FudisInputWidth } from '../../types/forms';
 import { FudisIdService } from '../../utilities/id-service.service';
 import { FudisDropdownMenuItemService } from '../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
+import { FudisTranslationConfigService } from '../../utilities/config.service';
 
 @Component({
 	selector: 'fudis-autocomplete-multi-select',
@@ -23,8 +24,12 @@ import { FudisDropdownMenuItemService } from '../dropdown-menu/dropdown-menu-ite
 	encapsulation: ViewEncapsulation.None,
 })
 export class AutocompleteMultiSelectComponent extends InputBaseDirective implements OnInit {
-	constructor(private _idService: FudisIdService, private _clickService: FudisDropdownMenuItemService) {
-		super();
+	constructor(
+		private _idService: FudisIdService,
+		private _clickService: FudisDropdownMenuItemService,
+		_configService: FudisTranslationConfigService
+	) {
+		super(_configService);
 
 		this._menuStatus = this._clickService.getMenuStatus();
 
@@ -76,11 +81,6 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	 * Output for item click
 	 */
 	@Output() itemChange = new EventEmitter<FudisDropdownOption[]>();
-
-	/**
-	 * Internal id to generate unique id
-	 */
-	protected _id: string;
 
 	/**
 	 * Internal variable for toggle dropdown visibility
