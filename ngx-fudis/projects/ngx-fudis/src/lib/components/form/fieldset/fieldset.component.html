@@ -17,7 +17,9 @@
 			[class.fudis-fieldset__legend__container__row-end]="headerActions?.align === 'end'"
 			[class.fudis-fieldset__legend__container__column]="headerActions?.align === 'bottom'"
 			[class.fudis-fieldset__legend__container__row-start]="headerActions?.align === 'start'">
-			<div class="fudis-fieldset__legend__title">
+			<div
+				class="fudis-fieldset__legend__title"
+				[class.fudis-fieldset__legend__title__margin-right]="headerActions?.type === 'fieldset'">
 				<span class="fudis-fieldset__legend__title__{{ titleSize }}">
 					<span class="fudis-fieldset__legend__title__text">{{ title }}</span>
 					<span *ngIf="requiredText" class="fudis-fieldset__legend__title__required">({{ requiredText }})</span>

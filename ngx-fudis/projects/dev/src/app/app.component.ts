@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-console */
-import { Component, DestroyRef, Inject, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
+
 import { TranslocoService } from '@ngneat/transloco';
 import {
 	FudisTranslationConfigService,
@@ -10,19 +10,10 @@ import {
 	FudisGridService,
 } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FudisDropdownOption, FudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
+
+import { FudisDropdownOption } from 'dist/ngx-fudis/lib/types/forms';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 
-type MyForm = {
-	dropdown: FormControl<FudisDropdownOption | null>;
-	dropdownMulti: FormControl<FudisDropdownOption[] | null>;
-	textInput: FormControl<string | null>;
-	truth: FormControl<boolean | null>;
-	date: FormControl<Date | null>;
-	autocompleteDropdown: FormControl<FudisDropdownOption | null>;
-	autocompleteSearch: FormControl<FudisDropdownOption | null>;
-};
 @Component({
 	selector: 'app-root',
 	templateUrl: 'app.component.html',
@@ -49,18 +40,6 @@ export class AppComponent implements OnInit {
 		};
 	});
 
-	testFormGroup = new FormGroup<MyForm>({
-		dropdown: new FormControl<FudisDropdownOption | null>(this.dropdownOptions[2]),
-		dropdownMulti: new FormControl<FudisDropdownOption[] | null>([this.dropdownOptions[2], this.dropdownOptions[4]]),
-		textInput: new FormControl<string | null>(null, Validators.required),
-		truth: new FormControl<boolean | null>(null, Validators.required),
-		date: new FormControl<Date | null>(null),
-		autocompleteDropdown: new FormControl<FudisDropdownOption | null>(null, Validators.required),
-		autocompleteSearch: new FormControl<FudisDropdownOption | null>(null),
-	});
-
-	private _destroyRef = inject(DestroyRef);
-
 	constructor(
 		@Inject(DOCUMENT) private document: Document,
 		private dialog: FudisDialogService,
@@ -70,61 +49,22 @@ export class AppComponent implements OnInit {
 		private fudisConfig: FudisTranslationConfigService
 	) {
 		gridService.setGridDefaultValues({
-			columns: { xs: 1, xl: 2 },
+			columns: { xs: 1, lg: 2 },
 			marginSides: 'responsive',
 		});
 
-		// fudisConfig.setConfig({
-		// 	datepicker: { closeLabel: 'Close calendar' },
-		// 	requiredText: 'Required',
-		// 	language: 'en',
-		// });
+		fudisConfig.setConfig({
+			datepicker: { closeLabel: this.translocoService.selectTranslate('closeCalendar') },
+			requiredText: this.translocoService.selectTranslate('required'),
+			appLanguage: 'en',
+		});
 	}
-
-	errorSummaryVisible: boolean = false;
-
-	showSuccessBodyText: boolean = false;
-
-	transLatedOptions: any = {};
-
-	radioButtonOptions: FudisRadioButtonOption[] = [];
-
-	closeLabel: string = '';
-
-	requiredText: string = '';
 
 	ngOnInit(): void {
 		this.translocoService.setActiveLang('en');
 		this.translocoService.setActiveLang('fi');
 
 		this.document.documentElement.lang = 'fi';
-
-		this.translocoService
-			.selectTranslateObject('options')
-			.pipe(takeUntilDestroyed(this._destroyRef))
-			.subscribe((value) => {
-				this.radioButtonOptions = [
-					{ value: true, viewValue: value.chooseTruthTrue, id: 'boolean-2', name: 'booleans' },
-					{ value: false, viewValue: value.chooseTruthFalse, id: 'boolean-1', name: 'booleans' },
-				];
-			});
-
-		this.translocoService
-			.selectTranslation()
-			.pipe(takeUntilDestroyed(this._destroyRef))
-			.subscribe(() => {
-				if (this.errorSummaryVisible) {
-					setTimeout(() => {
-						this.errorSummaryService.reloadErrors();
-					}, 100);
-				}
-			});
-
-		this.fudisConfig.setConfig({
-			appLanguage: this.document.documentElement.lang,
-			requiredText: this.translocoService.selectTranslate('required'),
-			datepicker: { closeLabel: this.translocoService.selectTranslate('closeCalendar') },
-		});
 	}
 
 	changeLanguage(): void {
@@ -139,7 +79,6 @@ export class AppComponent implements OnInit {
 	}
 
 	openDialog(): void {
-		console.log(this.testFormGroup.controls.dropdownMulti);
 		this.dialog.open(this.templateRef);
 	}
 
@@ -158,21 +97,6 @@ export class AppComponent implements OnInit {
 		{ key: 'Enemy', value: 'Emmet Brickowski', subHeading: 'Archenemy' },
 		{ key: 'Enemy', value: 'Lucy', subHeading: 'Second Archenemy' },
 	];
-
-	clickSubmit(): void {
-		this.testFormGroup.markAllAsTouched();
-
-		if (this.testFormGroup.invalid) {
-			this.errorSummaryVisible = true;
-			this.showSuccessBodyText = false;
-			setTimeout(() => {
-				this.errorSummaryService.reloadErrors();
-			}, 500);
-		} else {
-			this.errorSummaryVisible = false;
-			this.showSuccessBodyText = true;
-		}
-	}
 
 	// eslint-disable-next-line class-methods-use-this
 	doSomething(event: any) {
