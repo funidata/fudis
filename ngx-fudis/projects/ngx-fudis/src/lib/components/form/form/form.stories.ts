@@ -30,7 +30,6 @@ import { FormComponent } from './form.component';
 			[id]="id"
 			[helpText]="formHelpText"
 			[errorSummaryLinkType]="'href'"
-			[errorSummaryScreenReaderHelpText]="errorSummaryScreenReaderHelpText"
 			[errorSummaryHelpText]="errorSummaryHelpText"
 			[errorSummaryLiveRemove]="false"
 			[errorSummaryVisible]="errorSummaryVisible">
@@ -244,8 +243,6 @@ class FormContentExampleComponent {
 	titleTag = 'h1';
 
 	errorSummaryHelpText = 'There are errors in this form. Please address these before trying to submit again.';
-
-	errorSummaryScreenReaderHelpText = 'Attention';
 
 	formHelpText = "Come about rope's end loot hail-shot belaying pin hornswaggle maroon quarter main sheet nipperkin.";
 

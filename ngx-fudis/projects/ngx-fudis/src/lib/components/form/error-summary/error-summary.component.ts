@@ -27,14 +27,14 @@ export class ErrorSummaryComponent {
 	 */
 	@Input({ required: true }) helpText: string;
 
-	/**
-	 * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.
-	 */
-	@Input({ required: true }) screenReaderHelpText: string;
-
 	@Input() linkType: FudisFormErrorSummaryLink = 'router';
 
 	@Input() liveRemove: boolean = false;
+
+	/**
+	 * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.
+	 */
+	_attentionIcon: string;
 
 	constructor(
 		@Inject(DOCUMENT) private _document: Document,
