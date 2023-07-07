@@ -87,7 +87,7 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('fieldset');
 
-		this.addFieldsetToErrorSummary();
+		this.addToErrorSummary();
 	}
 
 	ngAfterViewInit(): void {
@@ -96,7 +96,7 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 		}
 	}
 
-	addFieldsetToErrorSummary(): void {
+	addToErrorSummary(): void {
 		if (!this.errorSummaryBreadcrumb) {
 			this._fieldsetInfo = { id: this._id, title: this.title };
 
@@ -106,13 +106,13 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 		}
 	}
 
-	removeFieldsetFromErrorSummary(): void {
+	removeFromErrorSummary(): void {
 		if (!this.errorSummaryBreadcrumb && this._fieldsetSent) {
 			this._errorSummaryService.removeFieldset(this._fieldsetInfo);
 		}
 	}
 
 	ngOnDestroy(): void {
-		this.removeFieldsetFromErrorSummary();
+		this.removeFromErrorSummary();
 	}
 }
