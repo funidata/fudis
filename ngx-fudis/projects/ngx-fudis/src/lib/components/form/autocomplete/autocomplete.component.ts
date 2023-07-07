@@ -69,7 +69,7 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	}
 
 	ngOnChanges(): void {
-		this._required = this.control.hasValidator(Validators.required);
+		this._required = this.required ?? this.control.hasValidator(Validators.required);
 	}
 
 	checkFilteredOptions() {

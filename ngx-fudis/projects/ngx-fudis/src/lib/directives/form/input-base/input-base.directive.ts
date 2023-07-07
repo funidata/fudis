@@ -54,7 +54,7 @@ export class InputBaseDirective extends TooltipApiDirective {
 	@Input() invalidState: boolean = false;
 
 	/**
-	 * Set form input as required. By default set to 'null' and this attribute is determined to true / false depending on if FormControl has Validators.required. This setting will override that.
+	 * Set form input as required. By default set to 'undefined' and this attribute is determined to true / false depending on if FormControl has Validators.required. This setting will override that.
 	 */
 	@Input() required: boolean | undefined = undefined;
 

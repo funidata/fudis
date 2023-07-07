@@ -195,6 +195,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 		this._for = `${this.id}_${this.options[0].value}`;
 
 		this.initialRequiredCheck();
+		this.subscribeToRequiredText();
 	}
 
 	ngOnChanges(): void {

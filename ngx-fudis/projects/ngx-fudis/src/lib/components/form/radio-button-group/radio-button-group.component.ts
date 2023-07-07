@@ -33,6 +33,11 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	 */
 	@Input() invalidState: boolean = false;
 
+	/**
+	 * Set fieldset as required. By default set to 'undefined' and this attribute is determined to true / false depending on if FormControl has Validators.required. This setting will override that.
+	 */
+	@Input() required: boolean | undefined = undefined;
+
 	ngOnInit() {
 		if (this.options.length < 2) {
 			throw new Error(
@@ -58,6 +63,6 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	}
 
 	ngOnChanges(): void {
-		this._required = this.control.hasValidator(Validators.required);
+		this._required = this.required ?? this.control.hasValidator(Validators.required);
 	}
 }

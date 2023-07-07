@@ -67,6 +67,6 @@ export class TextInputComponent extends InputBaseDirective implements OnInit, On
 	}
 
 	ngOnChanges(): void {
-		this._required = this.control.hasValidator(Validators.required);
+		this._required = this.required ?? this.control.hasValidator(Validators.required);
 	}
 }
