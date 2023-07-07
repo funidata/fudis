@@ -75,9 +75,10 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 	}
 
 	ngOnInit(): void {
+		this._id = this.id ?? this._idService.getNewId('datepicker');
+
 		this.subscribeToCloseLabel();
 		this.subscribeToRequiredText();
-		this._id = this.id ?? this._idService.getNewId('datepicker');
 	}
 
 	ngOnChanges(): void {

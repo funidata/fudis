@@ -5,6 +5,7 @@
 		</ng-template>
 		<ng-template fudisContent type="expandable">
 			<fudis-form
+				[errorSummaryLinkType]="'href'"
 				[errorSummaryVisible]="errorSummaryVisible"
 				[title]="'Form title here hello'"
 				[errorSummaryHelpText]="'There were some errors'"
@@ -31,9 +32,9 @@
 								[options]="dropdownOptions"
 								[control]="testFormGroup.controls['dropdown']" />
 							<fudis-datepicker
-								[id]="'datepicker-123'"
 								[label]="'Select some date'"
-								[control]="testFormGroup.controls['date']" />
+								[control]="testFormGroup.controls['date']"
+								[errorMsg]="{ required: 'Date is required' }" />
 						</ng-template>
 					</fudis-fieldset>
 				</ng-template>

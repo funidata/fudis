@@ -11,6 +11,7 @@ type ComponentType =
 	| 'form'
 	| 'heading'
 	| 'inputWithLanguageOptions'
+	| 'radioButtonGroup'
 	| 'section'
 	| 'textArea'
 	| 'textInput';
@@ -34,6 +35,7 @@ export class FudisIdService {
 		form: 0,
 		heading: 0,
 		inputWithLanguageOptions: 0,
+		radioButtonGroup: 0,
 		section: 0,
 		textArea: 0,
 		textInput: 0,

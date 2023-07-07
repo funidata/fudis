@@ -3,6 +3,8 @@ import { FormControl, Validators } from '@angular/forms';
 import { FudisRadioButtonOption, FudisFormErrors } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
+import { FudisIdService } from '../../../utilities/id-service.service';
+import { FudisTranslationConfigService } from '../../../utilities/translation-config.service';
 
 @Component({
 	selector: 'fudis-radio-button-group',
@@ -38,7 +40,16 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	 */
 	@Input() required: boolean | undefined = undefined;
 
+	constructor(
+		private _idService: FudisIdService,
+		private radioButtonGroupConfigService: FudisTranslationConfigService
+	) {
+		super(radioButtonGroupConfigService);
+	}
+
 	ngOnInit() {
+		this._id = this.id ?? this._idService.getNewId('radioButtonGroup');
+
 		this.subscribeToRequiredText();
 		if (this.options.length < 2) {
 			throw new Error(
