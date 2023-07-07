@@ -1,13 +1,13 @@
 <div class="fudis-dropdown fudis-dropdown__{{ size }}">
 	<fudis-label
 		[text]="label"
-		[id]="'label_' + id"
+		[id]="'label_' + _id"
 		[requiredText]="_required ? _requiredText : undefined"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle"></fudis-label>
 	<mat-select
-		[id]="id"
+		[id]="_id"
 		#fudisDropdown
 		disableOptionCentering
 		[panelClass]="
@@ -22,9 +22,9 @@
 		[formControl]="control"
 		(valueChange)="handleSelectionChange($event)"
 		[attr.required]="_required ? true : null"
-		[aria-labelledby]="'label_' + id"
+		[aria-labelledby]="'label_' + _id"
 		[hideSingleSelectionIndicator]="hideSingleSelectionIndicator"
-		[attr.aria-describedby]="id + '_guidance'"
+		[attr.aria-describedby]="_id + '_guidance'"
 		[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null">
 		<mat-option
 			class="fudis-dropdown__option"
@@ -35,6 +35,6 @@
 			{{ option.viewValue }}
 		</mat-option>
 	</mat-select>
-	<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="id" [errorMsg]="errorMsg" [control]="control">
+	<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="_id" [errorMsg]="errorMsg" [control]="control">
 	</fudis-guidance>
 </div>

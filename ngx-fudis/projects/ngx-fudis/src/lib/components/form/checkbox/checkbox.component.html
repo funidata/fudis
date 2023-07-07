@@ -1,5 +1,5 @@
 <div class="fudis-checkbox">
-	<label class="fudis-checkbox__label" [attr.for]="id" (click)="handleCheckboxClick()">
+	<label class="fudis-checkbox__label" [attr.for]="_id" (click)="handleCheckboxClick()">
 		<div
 			class="fudis-checkbox__box"
 			[class.fudis-checkbox__box--invalid]="(control.invalid && control.touched) || invalidState"
@@ -8,12 +8,12 @@
 				[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
 				[formControl]="control"
 				#checkboxRef
-				[attr.aria-describedby]="id + '_guidance'"
+				[attr.aria-describedby]="_id + '_guidance'"
 				[attr.aria-label]="label"
 				type="checkbox"
 				[name]="name"
 				[attr.name]="name"
-				[id]="id"
+				[id]="_id"
 				class="fudis-checkbox__input"
 				[attr.required]="_required ? true : null"
 				[attr.aria-disabled]="control.disabled" />
@@ -34,6 +34,6 @@
 		</div>
 		<div class="fudis-checkbox__label__text">{{ label }}</div>
 	</label>
-	<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="id" [errorMsg]="errorMsg" [control]="control">
+	<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="_id" [errorMsg]="errorMsg" [control]="control">
 	</fudis-guidance>
 </div>

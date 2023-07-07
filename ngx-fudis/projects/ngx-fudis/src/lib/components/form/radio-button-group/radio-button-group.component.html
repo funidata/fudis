@@ -1,5 +1,5 @@
 <fudis-fieldset
-	[id]="id"
+	[id]="_id"
 	[titleSize]="'sm'"
 	[title]="title"
 	[requiredText]="_required ? _requiredText : undefined"
@@ -14,7 +14,7 @@
 			[required]="_required ? true : false"
 			[checked]="control.value === option.value ? true : false"
 			[control]="control"></fudis-radio-button>
-		<fudis-guidance [inputLabel]="title" [helpText]="helpText" [for]="id" [errorMsg]="errorMsg" [control]="control">
+		<fudis-guidance [inputLabel]="title" [helpText]="helpText" [for]="_id" [errorMsg]="errorMsg" [control]="control">
 		</fudis-guidance>
 	</ng-template>
 </fudis-fieldset>

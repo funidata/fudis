@@ -90,8 +90,7 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 							[errorMsg]="errorEnddate"
 							[control]="fieldsetExample.controls['endDate']"
 							[disabled]="!fieldsetExample.controls['startDate'].value && !fieldsetExample.controls['startDate'].valid"
-							[minDate]="fieldsetExample.controls['startDate'].value"/>
-						</fudis-datepicker>
+							[minDate]="fieldsetExample.controls['startDate'].value" />
 					</fudis-grid>
 				</fudis-grid>
 			</ng-template>

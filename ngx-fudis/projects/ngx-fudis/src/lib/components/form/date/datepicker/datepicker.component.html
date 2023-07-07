@@ -1,7 +1,7 @@
 <div class="fudis-datepicker fudis-datepicker__{{ size }}">
 	<fudis-label
-		[id]="'label_' + id"
-		[for]="id"
+		[id]="'label_' + _id"
+		[for]="_id"
 		[text]="label"
 		[requiredText]="_required ? _requiredText : undefined"
 		[tooltip]="tooltip"
@@ -9,7 +9,7 @@
 		[tooltipToggle]="tooltipToggle"></fudis-label>
 	<div class="fudis-datepicker__input-wrapper">
 		<input
-			[id]="id"
+			[id]="_id"
 			[formControl]="control"
 			[matDatepicker]="picker"
 			[min]="minDate"
@@ -21,7 +21,7 @@
 			[class.fudis-datepicker__input--disabled]="disabled"
 			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
 			[attr.required]="_required ? true : null"
-			[attr.aria-describedby]="id + '_guidance'" />
+			[attr.aria-describedby]="_id + '_guidance'" />
 		<mat-datepicker-toggle
 			[disabled]="disabled"
 			matSuffix
@@ -34,6 +34,6 @@
 		</mat-datepicker-toggle>
 		<mat-datepicker #picker panelClass="fudis-datepicker__datepicker"></mat-datepicker>
 	</div>
-	<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="id" [errorMsg]="errorMsg" [control]="control">
+	<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="_id" [errorMsg]="errorMsg" [control]="control">
 	</fudis-guidance>
 </div>

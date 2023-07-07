@@ -1,8 +1,8 @@
 <div class="fudis-form-element fudis-text-input fudis-text-input__{{ size }}">
 	<fudis-label
-		[for]="id"
+		[for]="_id"
 		[text]="label"
-		[id]="'label_' + id"
+		[id]="'label_' + _id"
 		[requiredText]="_required ? _requiredText : undefined"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
@@ -18,11 +18,11 @@
 		[attr.min]="minNumber"
 		[attr.max]="maxNumber"
 		(blur)="onBlur($event)"
-		[id]="id"
+		[id]="_id"
 		[attr.type]="type"
 		[class.fudis-text-input__input--invalid]="(control.touched && control.invalid) || invalidState"
 		class="fudis-text-input__input"
-		[attr.aria-describedby]="id + '_guidance'"
+		[attr.aria-describedby]="_id + '_guidance'"
 		[attr.required]="_required ? true : null" />
 	<ng-container *ngIf="helpText || errorMsg">
 		<fudis-guidance
@@ -30,7 +30,7 @@
 			[maxLengthText]="maxLengthText"
 			[maxLength]="maxLength"
 			[helpText]="helpText"
-			[for]="id"
+			[for]="_id"
 			[errorMsg]="errorMsg"
 			[control]="control">
 		</fudis-guidance
