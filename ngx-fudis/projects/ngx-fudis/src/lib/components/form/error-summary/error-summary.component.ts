@@ -59,6 +59,8 @@ export class ErrorSummaryComponent {
 
 		const fieldsets: FudisFormErrorSummarySection[] = this._errorSummaryService.getFieldsetList();
 
+		const sections: FudisFormErrorSummarySection[] = this._errorSummaryService.getSectionList();
+
 		Object.keys(fetchedErrors()).forEach((item) => {
 			const errorId = fetchedErrors()[item].id;
 			if (this.parentComponent?.querySelector(`#${errorId}`)) {
@@ -71,11 +73,23 @@ export class ErrorSummaryComponent {
 						return null;
 					});
 
-					if (parentFieldset) {
-						this._visibleErrorList.push({ id: errorId, message: `${parentFieldset.title} / ${label}: ${error}` });
-					} else {
-						this._visibleErrorList.push({ id: errorId, message: `${label}: ${error}` });
-					}
+					const parentSection = sections.find((section) => {
+						if (this.parentComponent?.querySelector(`#${section.id} #${errorId}`)) {
+							return section;
+						}
+						return null;
+					});
+
+					console.log(sections);
+
+					const parentSectionString = parentSection ? `${parentSection.title} / ` : '';
+
+					const parentFieldsetString = parentFieldset ? `${parentFieldset.title} / ` : '';
+
+					this._visibleErrorList.push({
+						id: errorId,
+						message: `${parentSectionString}${parentFieldsetString}${label}: ${error}`,
+					});
 				});
 			}
 		});

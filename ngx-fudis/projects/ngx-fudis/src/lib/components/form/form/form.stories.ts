@@ -48,6 +48,7 @@ import { FormComponent } from './form.component';
 				<fudis-section [title]="'Main section'">
 					<ng-template fudisContent type="section">
 						<fudis-expandable
+							[errorSummaryBreadcrumb]="true"
 							(collapsedChange)="handleCollapsedOutput($event)"
 							[title]="'Expandable section 1'"
 							[collapsed]="_collapsed">
@@ -145,7 +146,7 @@ import { FormComponent } from './form.component';
 								</fudis-grid>
 							</ng-template>
 						</fudis-expandable>
-						<fudis-expandable [collapsed]="_collapsed" [title]="'Expandable section 2'">
+						<fudis-expandable [collapsed]="_collapsed" [title]="'Expandable section 2'" [errorSummaryBreadcrumb]="true">
 							<ng-template fudisContent type="expandable">
 								<fudis-fieldset [title]="'More important dates'">
 									<ng-template fudisContent type="fieldset">

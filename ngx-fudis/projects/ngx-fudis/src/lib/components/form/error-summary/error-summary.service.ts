@@ -20,6 +20,10 @@ export class FudisErrorSummaryService {
 		return this._currentFieldsets;
 	}
 
+	getSectionList(): FudisFormErrorSummarySection[] {
+		return this._currentSections;
+	}
+
 	getVisibleErrors(): Signal<FudisFormErrorSummaryObject> {
 		return this._signalCurrentErrorList.asReadonly();
 	}

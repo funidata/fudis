@@ -1,4 +1,4 @@
-import { Component, ContentChild, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, ContentChild, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { FudisIdService } from '../../utilities/id-service.service';
 import { FudisHeadingTag, FudisHeadingSize } from '../../types/typography';
 import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
@@ -8,13 +8,14 @@ import { FudisGridWidth, FudisGridAlign, FudisGridMarginSide } from '../../types
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisSpacing } from '../../types/miscellaneous';
 import { FudisErrorSummaryService } from '../form/error-summary/error-summary.service';
+import { FudisFormErrorSummarySection } from '../../types/forms';
 
 @Component({
 	selector: 'fudis-section',
 	templateUrl: './section.component.html',
 	styleUrls: ['./section.component.scss'],
 })
-export class SectionComponent extends TooltipApiDirective implements OnInit, OnChanges {
+export class SectionComponent extends TooltipApiDirective implements OnInit, OnChanges, OnDestroy {
 	@ContentChild(NotificationsDirective) notifications: NotificationsDirective | null;
 
 	@ContentChild(ContentDirective) content: ContentDirective | null;
@@ -63,6 +64,8 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 	 */
 	@Input() classes: string[];
 
+	@Input() errorSummaryBreadcrumb: boolean = false;
+
 	constructor(private _idService: FudisIdService, private _errorSummaryService: FudisErrorSummaryService) {
 		super();
 	}
@@ -71,10 +74,27 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 
 	protected _classList: string[];
 
+	protected _id: string;
+
+	private _errorSummaryInfo: FudisFormErrorSummarySection;
+
+	private _errorSummaryInfoSent: boolean = false;
+
 	ngOnInit(): void {
-		this._headingId = this.id ?? this._idService.getNewId('section');
+		this._id = this.id ?? this._idService.getNewId('section');
+
+		this._headingId = `${this._id}-heading`;
 
 		this._classList = this.getClasses();
+		this.addToErrorSummary();
+	}
+
+	ngOnChanges(): void {
+		this._classList = this.getClasses();
+	}
+
+	ngOnDestroy(): void {
+		this.removeFromErrorSummary();
 	}
 
 	private getClasses(): string[] {
@@ -85,7 +105,20 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 		return cssClasses;
 	}
 
-	ngOnChanges(): void {
-		this._classList = this.getClasses();
+	addToErrorSummary(): void {
+		if (this.errorSummaryBreadcrumb) {
+			this._errorSummaryInfo = {
+				id: this._id,
+				title: this.title,
+			};
+			this._errorSummaryService.addSection(this._errorSummaryInfo);
+			this._errorSummaryInfoSent = true;
+		}
+	}
+
+	removeFromErrorSummary(): void {
+		if (this._errorSummaryInfoSent) {
+			this._errorSummaryService.removeSection(this._errorSummaryInfo);
+		}
 	}
 }
