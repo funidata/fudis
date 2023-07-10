@@ -1,21 +1,25 @@
-import { AfterContentInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ElementRef, Input, OnChanges, OnInit, ViewChild, effect } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { FudisDropdownOption, FudisInputWidth } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
-import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+
 import { FudisIdService } from '../../../utilities/id-service.service';
-import { FudisTranslationConfigService } from '../../../utilities/config.service';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'fudis-autocomplete',
 	templateUrl: './autocomplete.component.html',
 	styleUrls: ['./autocomplete.component.scss'],
 })
-export class AutocompleteComponent extends InputBaseDirective implements OnInit, AfterContentInit {
-	constructor(private _idService: FudisIdService, _configService: FudisTranslationConfigService) {
-		super(_configService);
+export class AutocompleteComponent extends InputBaseDirective implements OnInit, AfterContentInit, OnChanges {
+	constructor(private _idService: FudisIdService, _translationService: FudisTranslationService) {
+		super(_translationService);
+
+		effect(() => {
+			this._clearFilterText = this._translations().AUTOCOMPLETE.CLEAR;
+		});
 	}
 
 	@ViewChild('fudisAutocompleteInput') autocompleteInput: ElementRef;
@@ -36,11 +40,6 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	@Input() size: FudisInputWidth = 'lg';
 
 	/**
-	 * Aria-label for close icon which clears the input
-	 */
-	@Input({ required: true }) clearFilterText: string;
-
-	/**
 	 * Option whether the dropdown options are shown only after three charactes (search) or if options are displayed when focusing the search input even without typing (dropdown)
 	 */
 	@Input() variant: 'search' | 'dropdown' = 'search';
@@ -55,9 +54,13 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	 */
 	protected _filteredOptions: Observable<FudisDropdownOption[]>;
 
+	/**
+	 * Aria-label for close icon which clears the input
+	 */
+	protected _clearFilterText: string;
+
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('autocomplete');
-		checkRequiredAttributes(this._id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
 	}
 
 	ngAfterContentInit() {
@@ -65,6 +68,10 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 			this._autocompleteFormControl.patchValue(this.control.value.viewValue);
 		}
 		this.checkFilteredOptions();
+	}
+
+	ngOnChanges(): void {
+		this._required = this.required ?? this.control.hasValidator(Validators.required);
 	}
 
 	checkFilteredOptions() {

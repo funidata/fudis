@@ -80,17 +80,25 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 
 	private _errorSummaryInfoSent: boolean = false;
 
+	protected _title: string;
+
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('section');
 
 		this._headingId = `${this._id}-heading`;
 
 		this._classList = this.getClasses();
+		this._title = this.title;
 		this.addToErrorSummary();
 	}
 
 	ngOnChanges(): void {
 		this._classList = this.getClasses();
+
+		if (this.title !== this._title && this._id) {
+			this._title = this.title;
+			this.addToErrorSummary();
+		}
 	}
 
 	ngOnDestroy(): void {
@@ -109,7 +117,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 		if (this.errorSummaryBreadcrumb) {
 			this._errorSummaryInfo = {
 				id: this._id,
-				title: this.title,
+				title: this._title,
 			};
 			this._errorSummaryService.addSection(this._errorSummaryInfo);
 			this._errorSummaryInfoSent = true;

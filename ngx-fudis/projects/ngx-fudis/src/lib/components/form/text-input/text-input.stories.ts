@@ -12,20 +12,18 @@ import { FudisFormErrors } from '../../../types/forms';
 				[control]="mainFormGroup.controls['first']"
 				[id]="'unique-text-input-id-1'"
 				[label]="'I am a basic text input.'"
-				[helpText]="'I do not have any validators.'"></fudis-text-input>
+				[helpText]="'I do not have any validators.'" />
 			<fudis-text-input
 				[control]="mainFormGroup.controls['second']"
 				[id]="'unique-text-input-id-2'"
-				[requiredText]="'Required'"
 				[errorMsg]="{ required: 'Missing a value.' }"
 				[label]="'I am a required text input'"
 				[tooltip]="'This is a tooltip text'"
 				[tooltipPosition]="'right'"
 				[tooltipToggle]="false"
-				[helpText]="'Please add some values here above!'"></fudis-text-input>
+				[helpText]="'Please add some values here above!'" />
 			<fudis-text-input
 				[control]="mainFormGroup.controls['third']"
-				requiredText="Required"
 				[minLength]="minLength"
 				[maxLength]="maxLength"
 				[maxLengthText]="'characters used'"
@@ -33,12 +31,11 @@ import { FudisFormErrors } from '../../../types/forms';
 				label="Email"
 				[errorMsg]="validatorMessages"
 				type="email"
-				helpText="This is an example email input with multiple validations."></fudis-text-input>
+				helpText="This is an example email input with multiple validations." />
 			<fudis-text-input
 				[control]="mainFormGroup.controls['fourth']"
 				[id]="'unique-text-input-id-4'"
 				label="Number input"
-				requiredText="Required"
 				[minNumber]="minNumber"
 				[maxNumber]="maxNumber"
 				tooltip="This is a tooltip text as well"

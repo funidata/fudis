@@ -1,10 +1,22 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, Input, Signal, effect } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
+import { FudisTranslationConfig } from '../../../types/miscellaneous';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Directive({
 	selector: '[fudisFieldSetBase]',
 })
 export class FieldSetBaseDirective extends TooltipApiDirective {
+	constructor(private _translationService: FudisTranslationService) {
+		super();
+
+		effect(() => {
+			this._translations = this._translationService.getTranslations();
+
+			this._requiredText = this._translations().REQUIRED;
+		});
+	}
+
 	/**
 	 * Title legend for fieldset
 	 */
@@ -14,11 +26,6 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
 	 * Unique id for fieldset
 	 */
 	@Input() id: string;
-
-	/**
-	 * Text to indicate compulsory
-	 */
-	@Input() requiredText: string;
 
 	/**
 	 * Additional guidance text, aligned underneath the main title legend text
@@ -34,4 +41,10 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
 	 * Internal id for component
 	 */
 	protected _id: string;
+
+	protected _requiredText: string;
+
+	protected _required: boolean = false;
+
+	protected _translations: Signal<FudisTranslationConfig>;
 }

@@ -12,5 +12,6 @@
 		"chooseTruthTrue": "True",
 		"chooseTruthFalse": "False"
 	},
-	"closeCalendar": "Close calendar"
+	"closeCalendar": "Close calendar",
+	"fieldsetTitle": "Important fieldset title"
 }

@@ -12,5 +12,6 @@
 		"chooseTruthTrue": "Tosi",
 		"chooseTruthFalse": "Epätosi"
 	},
-	"closeCalendar": "Sulje kalenteri"
+	"closeCalendar": "Sulje kalenteri",
+	"fieldsetTitle": "Tärkeän lomakeryhmän otsikko"
 }

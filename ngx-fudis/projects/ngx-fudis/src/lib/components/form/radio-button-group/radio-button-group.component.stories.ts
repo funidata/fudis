@@ -20,14 +20,13 @@ const getDefaultValue = (options: FudisRadioButtonOption[]): string | boolean | 
 		<form [formGroup]="mainFormGroup">
 			<fudis-radio-button-group
 				style="margin-bottom: 1rem;"
-				[requiredText]="requiredText"
 				[id]="'fruit-selection'"
 				[title]="'Choose your preferred fruit'"
 				[helpText]="'Fruits are important for your health.'"
 				[errorMsg]="{ required: 'You must choose a fruit!' }"
 				*ngIf="mainFormGroup"
 				[control]="mainFormGroup.controls['first']"
-				[options]="fruitOptions"></fudis-radio-button-group>
+				[options]="fruitOptions" />
 			<fudis-body-text *ngIf="mainFormGroup.controls['first'].value"
 				>Option chosen: {{ mainFormGroup.controls['first'].value }}</fudis-body-text
 			>
@@ -36,14 +35,13 @@ const getDefaultValue = (options: FudisRadioButtonOption[]): string | boolean | 
 			>
 			<fudis-radio-button-group
 				style="margin-top: 2rem; margin-bottom: 1rem;"
-				[requiredText]="requiredText"
 				[id]="'pet-selection'"
 				[title]="'Choose a pet'"
 				[helpText]="'We all should have a pet.'"
 				[errorMsg]="{ required: 'You must choose a pet!' }"
 				*ngIf="mainFormGroup"
 				[control]="mainFormGroup.controls['second']"
-				[options]="petOptions"></fudis-radio-button-group>
+				[options]="petOptions" />
 			<fudis-body-text *ngIf="!mainFormGroup.controls['second'].value"
 				>No value chosen for the second :(</fudis-body-text
 			>
@@ -52,14 +50,13 @@ const getDefaultValue = (options: FudisRadioButtonOption[]): string | boolean | 
 			>
 			<fudis-radio-button-group
 				style="margin-top: 2rem; margin-bottom: 1rem;"
-				[requiredText]="requiredText"
 				[id]="'boolean-selection'"
 				[title]="'Choose a truth'"
 				[helpText]="'We all perceive truth individually.'"
 				[errorMsg]="{ required: 'You must choose a truth' }"
 				*ngIf="mainFormGroup"
 				[control]="mainFormGroup.controls['third']"
-				[options]="booleanOptions"></fudis-radio-button-group>
+				[options]="booleanOptions" />
 			<fudis-body-text
 				*ngIf="mainFormGroup.controls['third'].value !== false && mainFormGroup.controls['third'].value !== true"
 				>No truth chosen. :(</fudis-body-text
@@ -96,8 +93,6 @@ class RadioButtonGroupExampleComponent {
 		second: new FormControl(getDefaultValue(this.petOptions), Validators.required),
 		third: new FormControl(null, Validators.required),
 	});
-
-	requiredText = 'Required';
 
 	constructor(private formBuilder: FormBuilder) {}
 }

@@ -7,6 +7,7 @@ import {
 	ViewEncapsulation,
 	OnInit,
 	OnDestroy,
+	OnChanges,
 } from '@angular/core';
 import { FudisExpandableType } from '../../types/miscellaneous';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
@@ -36,7 +37,7 @@ import { FudisFormErrorSummarySection } from '../../types/forms';
 	styleUrls: ['./expandable.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class ExpandableComponent implements OnInit, OnDestroy {
+export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 	@ContentChild(ContentDirective) content: ContentDirective;
 
 	@ContentChild(ActionsDirective) headerButtons: ActionsDirective | null;
@@ -109,6 +110,8 @@ export class ExpandableComponent implements OnInit, OnDestroy {
 	 */
 	private _errorSummaryInfoSent: boolean = false;
 
+	protected _title: string;
+
 	setCollapsedStatus(value: boolean): void {
 		this._collapsed = value ?? this._collapsed;
 		this._openedOnce = this._openedOnce || !this._collapsed;
@@ -118,7 +121,15 @@ export class ExpandableComponent implements OnInit, OnDestroy {
 	@Output() collapsedChange = new EventEmitter<boolean>();
 
 	ngOnInit(): void {
+		this._title = this.title;
 		this.addToErrorSummary();
+	}
+
+	ngOnChanges(): void {
+		if (this.title !== this._title && this._id) {
+			this._title = this.title;
+			this.addToErrorSummary();
+		}
 	}
 
 	ngOnDestroy(): void {
@@ -129,7 +140,7 @@ export class ExpandableComponent implements OnInit, OnDestroy {
 		if (this.errorSummaryBreadcrumb) {
 			this._errorSummaryInfo = {
 				id: this._id,
-				title: this.title,
+				title: this._title,
 			};
 			this._errorSummaryService.addSection(this._errorSummaryInfo);
 			this._errorSummaryInfoSent = true;

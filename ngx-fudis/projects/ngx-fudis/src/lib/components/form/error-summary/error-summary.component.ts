@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, Inject, Input, Signal, ViewChild, effect } from '@angular/core';
 
 import { DOCUMENT } from '@angular/common';
+
 import { FudisErrorSummaryService } from './error-summary.service';
 import {
 	FudisFormErrorSummaryObject,
@@ -8,6 +9,8 @@ import {
 	FudisFormErrorSummarySection,
 	FudisFormErrorSummaryLink,
 } from '../../../types/forms';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
+import { FudisTranslationConfig } from '../../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-error-summary',
@@ -27,24 +30,31 @@ export class ErrorSummaryComponent {
 	 */
 	@Input({ required: true }) helpText: string;
 
-	/**
-	 * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.
-	 */
-	@Input({ required: true }) screenReaderHelpText: string;
-
 	@Input() linkType: FudisFormErrorSummaryLink = 'router';
 
 	@Input() liveRemove: boolean = false;
 
+	/**
+	 * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.
+	 */
+	_attentionText: string;
+
 	constructor(
 		@Inject(DOCUMENT) private _document: Document,
 		private _errorSummaryService: FudisErrorSummaryService,
-		private readonly _changeDetectorRef: ChangeDetectorRef
+		private readonly _changeDetectorRef: ChangeDetectorRef,
+		private _translationService: FudisTranslationService
 	) {
 		effect(() => {
 			this.getErrors();
+
+			this._translations = this._translationService.getTranslations();
+
+			this._attentionText = this._translations().ICON.ATTENTION;
 		});
 	}
+
+	protected _translations: Signal<FudisTranslationConfig>;
 
 	protected _visibleErrorList: FudisFormErrorSummaryList[] = [];
 
@@ -97,7 +107,10 @@ export class ErrorSummaryComponent {
 		/**
 		 * Focus to Error Summary element when visible error list gets updated.
 		 */
-		if (this._document.activeElement?.classList.contains('fudis-button')) {
+		if (
+			this._document.activeElement?.classList.contains('fudis-button') &&
+			this._errorSummaryService.getFocusToErrors()
+		) {
 			this.focusToErrorSummary();
 		}
 	}

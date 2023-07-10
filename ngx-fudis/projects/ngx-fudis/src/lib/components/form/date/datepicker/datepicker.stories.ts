@@ -16,16 +16,14 @@ export default {
 		},
 		controls: {
 			exclude: [
-				'_configs',
+				'_translations',
 				'_id',
 				'_required',
 				'_requiredText',
 				'ngOnChanges',
 				'ngOnInit',
 				'setConfigs',
-				'subscribeToCloseLabel',
 				'onBlur',
-				'subscribeToRequiredText',
 			],
 		},
 	},
@@ -50,7 +48,6 @@ const Template: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
 		<fudis-datepicker
 			[label]="label"
 			[id]="id"
-			[requiredText]="requiredText"
 			[helpText]="helpText"
 			[errorMsg]="errorMsg"
 			[control]="control"
@@ -59,8 +56,7 @@ const Template: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
 			[maxDate]="maxDate"
 			[tooltip]="tooltip"
 			[tooltipPosition]="tooltipPosition"
-			[tooltipToggle]="tooltipToggle">
-		</fudis-datepicker>
+			[tooltipToggle]="tooltipToggle" />
 		<fudis-body-text *ngIf="control.value">The date output is: {{ control.value }}</fudis-body-text>
 		<fudis-body-text *ngIf="control.value"
 			>The date output with Angular date pipe is: {{ control.value | date:'dd.MM.yyyy' }}</fudis-body-text
@@ -72,7 +68,6 @@ export const Datepicker = Template.bind({});
 Datepicker.args = {
 	id: 'example-id-for-datepicker-required-validation',
 	label: 'Select a date',
-	requiredText: 'Required',
 	helpText: 'Choose your favourite date.',
 	errorMsg: { required: 'Date is required.', matDatepickerParse: 'Your date does is not a real date.' },
 	tooltip: 'Is it your birthday?',

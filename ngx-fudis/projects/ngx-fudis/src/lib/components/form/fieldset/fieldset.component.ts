@@ -4,6 +4,7 @@ import {
 	ContentChild,
 	ElementRef,
 	Input,
+	OnChanges,
 	OnDestroy,
 	OnInit,
 	ViewChild,
@@ -19,6 +20,7 @@ import { ContentDirective } from '../../../directives/content-projection/content
 import { FudisIdService } from '../../../utilities/id-service.service';
 import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
 import { FudisFormErrorSummarySection } from '../../../types/forms';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'fudis-fieldset',
@@ -26,7 +28,7 @@ import { FudisFormErrorSummarySection } from '../../../types/forms';
 	styleUrls: ['./fieldset.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class FieldSetComponent extends FieldSetBaseDirective implements AfterViewInit, OnInit, OnDestroy {
+export class FieldSetComponent extends FieldSetBaseDirective implements AfterViewInit, OnInit, OnDestroy, OnChanges {
 	@ContentChild(ActionsDirective) headerActions: ActionsDirective | null;
 
 	@ContentChild(NotificationsDirective) notifications: NotificationsDirective;
@@ -35,8 +37,12 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 
 	@ViewChild('fieldset') fieldset: ElementRef;
 
-	constructor(private _idService: FudisIdService, private _errorSummaryService: FudisErrorSummaryService) {
-		super();
+	constructor(
+		private _idService: FudisIdService,
+		private _errorSummaryService: FudisErrorSummaryService,
+		private _fieldsetTranslationService: FudisTranslationService
+	) {
+		super(_fieldsetTranslationService);
 	}
 
 	/**
@@ -80,13 +86,20 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	 */
 	@Input() errorSummaryBreadcrumb: boolean = true;
 
+	/**
+	 * Display "Required" text next to fieldset main title. By default set to 'undefined'.
+	 */
+	@Input() required: boolean | undefined = undefined;
+
 	private _fieldsetSent: boolean = false;
 
 	private _fieldsetInfo: FudisFormErrorSummarySection;
 
+	protected _title: string;
+
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('fieldset');
-
+		this._title = this.title;
 		this.addToErrorSummary();
 	}
 
@@ -96,9 +109,19 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 		}
 	}
 
+	ngOnChanges(): void {
+		if (this.title !== this._title && this._id) {
+			this._title = this.title;
+			this.addToErrorSummary();
+		}
+	}
+
 	addToErrorSummary(): void {
 		if (this.errorSummaryBreadcrumb) {
-			this._fieldsetInfo = { id: this._id, title: this.title };
+			this._fieldsetInfo = {
+				id: this._id,
+				title: this._title,
+			};
 
 			this._errorSummaryService.addFieldset(this._fieldsetInfo);
 

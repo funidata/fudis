@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, Input, OnChanges, OnDestroy } from '@angular/core';
 
 import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
 import { FudisFormErrorSummaryItem } from '../../../types/forms';
@@ -9,7 +9,7 @@ import { FudisFormErrorSummaryItem } from '../../../types/forms';
 	styleUrls: ['./error-message.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
+export class ErrorMessageComponent implements OnChanges, OnDestroy, AfterViewInit {
 	/*
 	 * Error message to display
 	 */
@@ -53,16 +53,14 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 
 	constructor(private _errorSummaryService: FudisErrorSummaryService) {}
 
-	ngOnInit(): void {
-		this.createError();
-
+	ngAfterViewInit(): void {
 		if (!this.message) {
 			this.throwError();
 		}
 	}
 
 	createError(): void {
-		if (this.message !== undefined) {
+		if (this.message !== undefined && this.focusId) {
 			this._currentMessage = this.message;
 			this._currentLabel = this.label;
 
@@ -79,7 +77,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	ngOnChanges(): void {
-		if (this.message !== this._currentMessage || this.label !== this._currentLabel) {
+		if (this.message !== this._currentMessage && this.label !== this._currentLabel) {
 			this.createError();
 		}
 	}

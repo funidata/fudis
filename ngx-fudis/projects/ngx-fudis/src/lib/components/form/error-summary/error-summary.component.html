@@ -6,9 +6,7 @@
 				<div class="fudis-error-summary__errors">
 					<ng-container *ngIf="helpText">
 						<fudis-body-text class="fudis-error-summary__errors__help-text">
-							<ng-container *ngIf="screenReaderHelpText"
-								><span class="fudis-visually-hidden">{{ screenReaderHelpText }}:&nbsp;</span></ng-container
-							>
+							<span class="fudis-visually-hidden">{{ _attentionText }}:&nbsp;</span>
 							{{ helpText }}</fudis-body-text
 						>
 					</ng-container>

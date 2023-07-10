@@ -1,20 +1,20 @@
 // eslint-disable-next-line max-classes-per-file
-import { Component, Input, ViewChild, ElementRef, HostBinding, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, Input, ViewChild, ElementRef, HostBinding, OnInit, OnChanges } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
-import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+
 import { FudisInputWidth } from '../../../types/forms';
 import { FudisIdService } from '../../../utilities/id-service.service';
-import { FudisTranslationConfigService } from '../../../utilities/config.service';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'fudis-text-input',
 	templateUrl: './text-input.component.html',
 	styleUrls: ['./text-input.component.scss'],
 })
-export class TextInputComponent extends InputBaseDirective implements OnInit {
-	constructor(private _idService: FudisIdService, _configService: FudisTranslationConfigService) {
-		super(_configService);
+export class TextInputComponent extends InputBaseDirective implements OnInit, OnChanges {
+	constructor(private _idService: FudisIdService, _translationService: FudisTranslationService) {
+		super(_translationService);
 	}
 
 	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;
@@ -63,6 +63,9 @@ export class TextInputComponent extends InputBaseDirective implements OnInit {
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('textInput');
-		checkRequiredAttributes(this.id, this.requiredText, this.control, undefined, this.ignoreRequiredCheck);
+	}
+
+	ngOnChanges(): void {
+		this._required = this.required ?? this.control.hasValidator(Validators.required);
 	}
 }

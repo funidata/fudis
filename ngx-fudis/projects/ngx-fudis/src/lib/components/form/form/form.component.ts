@@ -47,11 +47,6 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 	 */
 	@Input({ required: true }) errorSummaryHelpText: string;
 
-	/**
-	 * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.
-	 */
-	@Input({ required: true }) errorSummaryScreenReaderHelpText: string;
-
 	@Input() errorSummaryLinkType: FudisFormErrorSummaryLink = 'router';
 
 	protected _id: string;
