@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable max-classes-per-file */
 import { HttpClient } from '@angular/common/http';
 import {
@@ -9,6 +10,7 @@ import {
 	TranslocoModule,
 } from '@ngneat/transloco';
 import { Injectable, NgModule } from '@angular/core';
+import { TranslocoPreloadLangsModule } from '@ngneat/transloco-preload-langs';
 import { environment } from '../environments/environment';
 
 @Injectable({ providedIn: 'root' })
@@ -21,6 +23,7 @@ export class TranslocoHttpLoader implements TranslocoLoader {
 }
 
 @NgModule({
+	imports: [TranslocoPreloadLangsModule.forRoot(['fi', ''])],
 	exports: [TranslocoModule],
 	providers: [
 		{
