@@ -13,21 +13,5 @@
 		"chooseTruthFalse": "Epätosi"
 	},
 	"closeCalendar": "Sulje kalenteri",
-	"config": {
-		"appLanguage": "fi",
-		"required": "Pakollinen",
-		"datepicker": { "closeLabel": "Sulje kalenteri" },
-		"dialog": { "closeLabel": "Sulje" },
-		"inputWithLanguageOptions": {
-			"languageLabel": "Kieli",
-			"missingLanguage": "Puuttuu"
-		},
-		"autoComplete": {
-			"clearFilter": "Tyhjennä haku"
-		},
-		"icon": {
-			"attention": "Huomio"
-		}
-	},
 	"fieldsetTitle": "Tärkeän lomakeryhmän otsikko"
 }
