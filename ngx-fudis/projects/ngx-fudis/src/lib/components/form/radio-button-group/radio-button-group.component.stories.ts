@@ -94,8 +94,6 @@ class RadioButtonGroupExampleComponent {
 		third: new FormControl(null, Validators.required),
 	});
 
-	requiredText = 'Required';
-
 	constructor(private formBuilder: FormBuilder) {}
 }
 

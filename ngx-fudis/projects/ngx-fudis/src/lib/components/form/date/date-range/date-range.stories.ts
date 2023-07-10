@@ -1,11 +1,10 @@
-import { Component, Signal, importProvidersFrom } from '@angular/core';
+import { Component, importProvidersFrom } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormControl, Validators } from '@angular/forms';
 import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FudisTranslationService } from 'projects/ngx-fudis/src/lib/utilities/translation/translation.service';
 import { DateRangeComponent } from './date-range.component';
-import { FudisTranslationConfig } from '../../../../types/forms';
 
 import readme from './readme.mdx';
 
@@ -16,17 +15,15 @@ import readme from './readme.mdx';
 class LanguageChangeComponent {
 	_label = 'Change calendar language';
 
-	_config: Signal<FudisTranslationConfig>;
-
-	constructor(private _configService: FudisTranslationService) {
-		this._configService.setConfig('en');
+	constructor(private _translationService: FudisTranslationService) {
+		this._translationService.setLanguage('en');
 	}
 
 	changeLanguage(): void {
-		if (this._configService.getLanguage() === 'en') {
-			this._configService.setConfig('fi');
+		if (this._translationService.getLanguage() === 'en') {
+			this._translationService.setLanguage('fi');
 		} else {
-			this._configService.setConfig('en');
+			this._translationService.setLanguage('en');
 		}
 	}
 }

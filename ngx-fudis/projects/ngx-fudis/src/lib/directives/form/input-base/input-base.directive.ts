@@ -1,20 +1,21 @@
 import { Directive, Input, EventEmitter, Output, Signal, effect } from '@angular/core';
 
-import { FudisFormErrors, FudisTranslationConfig } from '../../../types/forms';
+import { FudisFormErrors } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../utilities/translation/translation.service';
+import { FudisTranslationConfig } from '../../../types/miscellaneous';
 
 @Directive({
 	selector: '[fudisInputBase]',
 })
 export class InputBaseDirective extends TooltipApiDirective {
-	constructor(protected _configService: FudisTranslationService) {
+	constructor(protected _translationService: FudisTranslationService) {
 		super();
 
 		effect(() => {
-			this._configs = this._configService.getConfig();
+			this._translations = this._translationService.getTranslations();
 
-			this._requiredText = this._configs().required;
+			this._requiredText = this._translations().REQUIRED;
 		});
 	}
 
@@ -69,7 +70,7 @@ export class InputBaseDirective extends TooltipApiDirective {
 	 */
 	protected _id: string;
 
-	protected _configs: Signal<FudisTranslationConfig>;
+	protected _translations: Signal<FudisTranslationConfig>;
 
 	protected _requiredText: string;
 

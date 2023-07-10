@@ -14,11 +14,11 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	styleUrls: ['./autocomplete.component.scss'],
 })
 export class AutocompleteComponent extends InputBaseDirective implements OnInit, AfterContentInit, OnChanges {
-	constructor(private _idService: FudisIdService, _configService: FudisTranslationService) {
-		super(_configService);
+	constructor(private _idService: FudisIdService, _translationService: FudisTranslationService) {
+		super(_translationService);
 
 		effect(() => {
-			this._clearFilterText = this._configs().autoComplete.clearFilter;
+			this._clearFilterText = this._translations().AUTOCOMPLETE.CLEAR;
 		});
 	}
 

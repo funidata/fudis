@@ -1,68 +1,41 @@
 import { Injectable, Signal, signal } from '@angular/core';
-import { FudisTranslationConfig } from '../../types/forms';
-import { FudisLanguage } from '../../types/miscellaneous';
+import { FudisTranslationConfig, FudisLanguageAbbr } from '../../types/miscellaneous';
+
+import { fi, sv, en } from './translationKeys';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class FudisTranslationService {
-	private en = {
-		required: 'Required',
-		datepicker: { closeLabel: 'Close calendar' },
-		dialog: { closeLabel: 'Close' },
-		inputWithLanguageOptions: {
-			languageLabel: 'Language',
-			missingLanguage: 'Missing',
-		},
-		autoComplete: {
-			clearFilter: 'Clear filter',
-		},
-		icon: {
-			attention: 'Attention',
-		},
-	};
+	private _translations = signal<FudisTranslationConfig>(en);
 
-	private fi = {
-		required: 'Pakollinen',
-		datepicker: { closeLabel: 'Sulje kalenteri' },
-		dialog: { closeLabel: 'Sulje' },
-		inputWithLanguageOptions: {
-			languageLabel: 'Kieli',
-			missingLanguage: 'puuttuu',
-		},
-		autoComplete: {
-			clearFilter: 'Tyhjennä filtteri',
-		},
-		icon: {
-			attention: 'Huomio',
-		},
-	};
-
-	private _config = signal<FudisTranslationConfig>(this.en);
-
-	private _language = signal<FudisLanguage>('en');
+	private _language = signal<FudisLanguageAbbr>('en');
 
 	/**
 	 * To set from application values for all components application uses.
 	 */
-	setLanguage(language: FudisLanguage): void {
-		if (language === 'en') {
-			this._config.set(this.en);
-		} else if (language === 'fi') {
-			this._config.set(this.fi);
-		}
-
+	setLanguage(language: FudisLanguageAbbr): void {
 		this._language.set(language);
+		if (language === 'en') {
+			this._translations.set(en);
+		} else if (language === 'fi') {
+			this._translations.set(fi);
+		} else {
+			this._translations.set(sv);
+		}
 	}
 
-	getLanguage(): FudisLanguage {
+	/**
+	 * Get current language of Fudis configs
+	 */
+	getLanguage(): FudisLanguageAbbr {
 		return this._language();
 	}
 
 	/**
-	 * Get application's config values
+	 * Get application's tranlastion config values
 	 */
-	getConfig(): Signal<FudisTranslationConfig> {
-		return this._config.asReadonly();
+	getTranslations(): Signal<FudisTranslationConfig> {
+		return this._translations.asReadonly();
 	}
 }

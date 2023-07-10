@@ -35,9 +35,9 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 		super(_datePickerConfigService);
 
 		effect(() => {
-			this._datepickerIntl.closeCalendarLabel = this._configs().datepicker.closeLabel;
+			this._datepickerIntl.closeCalendarLabel = this._translations().DATEPICKER.CLOSE;
 
-			this._adapter.setLocale(updateLocale(this._configService.getLanguage()));
+			this._adapter.setLocale(updateLocale(this._translationService.getLanguage()));
 		});
 	}
 

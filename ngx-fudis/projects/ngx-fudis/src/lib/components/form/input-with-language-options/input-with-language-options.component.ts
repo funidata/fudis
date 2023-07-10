@@ -18,13 +18,13 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	styleUrls: ['./input-with-language-options.component.scss'],
 })
 export class InputWithLanguageOptionsComponent extends InputBaseDirective implements OnInit, OnChanges {
-	constructor(private _idService: FudisIdService, _configService: FudisTranslationService) {
-		super(_configService);
+	constructor(private _idService: FudisIdService, _translationService: FudisTranslationService) {
+		super(_translationService);
 
 		effect(() => {
-			this._languageLabel = this._configs().inputWithLanguageOptions.languageLabel;
+			this._languageLabel = this._translations().INPUT_WITH_LANGUAGE_OPTIONS.LANGUAGE;
 
-			this._missingLanguage = this._configs().inputWithLanguageOptions.missingLanguage;
+			this._missingLanguage = this._translations().INPUT_WITH_LANGUAGE_OPTIONS.MISSING;
 		});
 	}
 

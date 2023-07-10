@@ -35,7 +35,6 @@ const TemplateAllRequired: StoryFn = () => ({
 		id: 'unique-input-id-superhero-name',
 		label: 'Your superhero name',
 		helpText: 'Please provide superhero name in all languages.',
-		requiredText: 'Required',
 		groupErrorMsg: {
 			english: {
 				required: 'Missing superhero name on English.',
@@ -80,7 +79,6 @@ const TemplateOneRequired: StoryFn = () => ({
 		id: 'unique-input-id-superhero-name',
 		label: 'Your superhero name',
 		helpText: 'Please provide superhero name in atleast one language.',
-		requiredText: 'Required',
 		groupErrorMsg: {
 			atLeastOneRequired: 'Missing superhero name! Name in atleast one language is required.',
 			english: {

@@ -85,6 +85,11 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	 */
 	@Input() errorSummaryBreadcrumb: boolean = true;
 
+	/**
+	 * Display "Required" text next to fieldset main title. By default set to 'undefined'.
+	 */
+	@Input() required: boolean | undefined = undefined;
+
 	private _fieldsetSent: boolean = false;
 
 	private _fieldsetInfo: FudisFormErrorSummarySection;

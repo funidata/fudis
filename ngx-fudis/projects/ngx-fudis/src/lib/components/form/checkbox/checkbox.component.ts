@@ -11,8 +11,8 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	styleUrls: ['./checkbox.component.scss'],
 })
 export class CheckboxComponent extends InputBaseDirective implements OnInit, OnChanges {
-	constructor(private _idService: FudisIdService, _configService: FudisTranslationService) {
-		super(_configService);
+	constructor(private _idService: FudisIdService, _translationService: FudisTranslationService) {
+		super(_translationService);
 	}
 
 	@ViewChild('checkboxRef') input: ElementRef;

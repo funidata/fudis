@@ -24,7 +24,6 @@ import { FudisFormErrors } from '../../../types/forms';
 				[helpText]="'Please add some values here above!'" />
 			<fudis-text-input
 				[control]="mainFormGroup.controls['third']"
-				requiredText="Required"
 				[minLength]="minLength"
 				[maxLength]="maxLength"
 				[maxLengthText]="'characters used'"
@@ -37,7 +36,6 @@ import { FudisFormErrors } from '../../../types/forms';
 				[control]="mainFormGroup.controls['fourth']"
 				[id]="'unique-text-input-id-4'"
 				label="Number input"
-				requiredText="Required"
 				[minNumber]="minNumber"
 				[maxNumber]="maxNumber"
 				tooltip="This is a tooltip text as well"

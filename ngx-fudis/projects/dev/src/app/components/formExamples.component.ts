@@ -94,9 +94,7 @@ export class AppFormExampleComponent implements OnInit {
 		if (this.testFormGroup.invalid) {
 			this.errorSummaryVisible = true;
 			this.showSuccessBodyText = false;
-			setTimeout(() => {
-				this.errorSummaryService.reloadErrors();
-			}, 500);
+			this.errorSummaryService.reloadErrors();
 		} else {
 			this.errorSummaryVisible = false;
 			this.showSuccessBodyText = true;

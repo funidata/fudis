@@ -236,8 +236,6 @@ class FormContentExampleComponent {
 
 	labelCourseType = 'Course type';
 
-	requiredText = 'Required';
-
 	formTitle = 'Example form heading';
 
 	titleTag = 'h1';

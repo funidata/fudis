@@ -66,7 +66,6 @@ export class AppComponent implements OnInit {
 			this.document.documentElement.lang = 'en';
 			this.fudisLanguage.setLanguage('en');
 		}
-		// this.fudisConfig.setConfig({ appLanguage: this.document.documentElement.lang });
 	}
 
 	openDialog(): void {

@@ -88,33 +88,6 @@ export interface FudisInputWithLanguageOptionsFormGroup {
 	[language: string]: FormControl<string | null>;
 }
 
-export interface FudisTranslationConfig {
-	// Shown with form inputs
-	required: string;
-	datepicker: {
-		// Label for close button
-		closeLabel: string;
-	};
-	dialog: {
-		// Label for close button
-		closeLabel?: string;
-	};
-	inputWithLanguageOptions: {
-		// Label for language selection dropdown
-		languageLabel: string;
-		// Text shown in dropdown options if input for a language is missing
-		missingLanguage: string;
-	};
-	// Clear filter button label for screen readers
-	autoComplete: {
-		clearFilter: string;
-	};
-	icon: {
-		// Alternative text for screen readers. Used in e. g. Error Summary
-		attention: string;
-	};
-}
-
 export interface FudisDateRangeItem {
 	control: FormControl<Date | null>;
 	label: string;

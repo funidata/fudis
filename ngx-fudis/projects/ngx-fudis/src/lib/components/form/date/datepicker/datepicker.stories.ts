@@ -15,7 +15,16 @@ export default {
 			page: readme,
 		},
 		controls: {
-			exclude: ['_configs', '_id', '_required', '_requiredText', 'ngOnChanges', 'ngOnInit', 'setConfigs', 'onBlur'],
+			exclude: [
+				'_translations',
+				'_id',
+				'_required',
+				'_requiredText',
+				'ngOnChanges',
+				'ngOnInit',
+				'setConfigs',
+				'onBlur',
+			],
 		},
 	},
 	decorators: [

@@ -165,8 +165,6 @@ class FieldsetExampleComponent {
 
 	labelCourseType = 'Course type';
 
-	requiredText = 'Required';
-
 	fieldsetExample = new FormGroup({
 		name: new FormGroup(
 			{
