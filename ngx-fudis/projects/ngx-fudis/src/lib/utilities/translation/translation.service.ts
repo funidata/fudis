@@ -28,6 +28,7 @@ export class FudisTranslationService {
 	/**
 	 * Get current language of Fudis configs
 	 */
+
 	getLanguage(): FudisLanguageAbbr {
 		return this._language();
 	}

@@ -28,5 +28,6 @@
 		"icon": {
 			"attention": "Attention"
 		}
-	}
+	},
+	"fieldsetTitle": "Important fieldset title"
 }

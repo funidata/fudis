@@ -28,5 +28,6 @@
 		"icon": {
 			"attention": "Huomio"
 		}
-	}
+	},
+	"fieldsetTitle": "Tärkeän lomakeryhmän otsikko"
 }

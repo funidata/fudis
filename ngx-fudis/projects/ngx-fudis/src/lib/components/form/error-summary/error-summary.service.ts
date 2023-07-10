@@ -1,11 +1,20 @@
-import { Signal, signal } from '@angular/core';
+import { Injectable, Signal, effect, signal } from '@angular/core';
 import {
 	FudisFormErrorSummaryObject,
 	FudisFormErrorSummaryItem,
 	FudisFormErrorSummarySection,
 } from '../../../types/forms';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
+@Injectable({ providedIn: 'root' })
 export class FudisErrorSummaryService {
+	constructor(private _translationService: FudisTranslationService) {
+		effect(() => {
+			this._translationService.getLanguage();
+			this.reloadErrors();
+		});
+	}
+
 	private _currentErrorList: FudisFormErrorSummaryObject = {};
 
 	private _signalCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
@@ -15,6 +24,8 @@ export class FudisErrorSummaryService {
 	private _currentFieldsets: FudisFormErrorSummarySection[] = [];
 
 	private _currentSections: FudisFormErrorSummarySection[] = [];
+
+	private _numberOfTries: number = 0;
 
 	getFieldsetList(): FudisFormErrorSummarySection[] {
 		return this._currentFieldsets;
@@ -80,7 +91,16 @@ export class FudisErrorSummaryService {
 	}
 
 	public addFieldset(fieldset: FudisFormErrorSummarySection): void {
-		this._currentFieldsets.push(fieldset);
+		const existingItem = this._currentFieldsets.find((item) => {
+			return item.id === fieldset.id;
+		});
+
+		if (existingItem) {
+			const index = this._currentFieldsets.indexOf(existingItem);
+			this._currentFieldsets[index] = fieldset;
+		} else {
+			this._currentFieldsets.push(fieldset);
+		}
 	}
 
 	public removeFieldset(fieldset: FudisFormErrorSummarySection): void {
@@ -90,7 +110,16 @@ export class FudisErrorSummaryService {
 	}
 
 	public addSection(section: FudisFormErrorSummarySection): void {
-		this._currentSections.push(section);
+		const existingItem = this._currentSections.find((item) => {
+			return item.id === section.id;
+		});
+
+		if (existingItem) {
+			const index = this._currentSections.indexOf(existingItem);
+			this._currentSections[index] = section;
+		} else {
+			this._currentSections.push(section);
+		}
 	}
 
 	public removeSection(section: FudisFormErrorSummarySection): void {

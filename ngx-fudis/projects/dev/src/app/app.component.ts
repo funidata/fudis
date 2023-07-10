@@ -49,21 +49,21 @@ export class AppComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.translocoService.setActiveLang('en');
 		this.translocoService.setActiveLang('fi');
+		this.translocoService.setActiveLang('en');
 
-		this.document.documentElement.lang = 'fi';
-		this.fudisLanguage.setLanguage('fi');
+		this.document.documentElement.lang = 'en';
+		this.fudisLanguage.setLanguage('en');
 	}
 
 	changeLanguage(): void {
 		if (this.translocoService.getActiveLang() === 'en') {
-			this.translocoService.setActiveLang('fi');
 			this.document.documentElement.lang = 'fi';
 			this.fudisLanguage.setLanguage('fi');
+			this.translocoService.setActiveLang('fi');
 		} else {
-			this.translocoService.setActiveLang('en');
 			this.document.documentElement.lang = 'en';
+			this.translocoService.setActiveLang('en');
 			this.fudisLanguage.setLanguage('en');
 		}
 	}

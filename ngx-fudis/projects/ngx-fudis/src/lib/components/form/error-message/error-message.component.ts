@@ -77,7 +77,7 @@ export class ErrorMessageComponent implements OnChanges, OnDestroy, AfterViewIni
 	}
 
 	ngOnChanges(): void {
-		if (this.message !== this._currentMessage || this.label !== this._currentLabel) {
+		if (this.message !== this._currentMessage && this.label !== this._currentLabel) {
 			this.createError();
 		}
 	}

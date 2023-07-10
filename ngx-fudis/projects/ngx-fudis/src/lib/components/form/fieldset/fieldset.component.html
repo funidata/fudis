@@ -21,7 +21,7 @@
 				class="fudis-fieldset__legend__title"
 				[class.fudis-fieldset__legend__title__margin-right]="headerActions?.type === 'fieldset'">
 				<span class="fudis-fieldset__legend__title__{{ titleSize }}">
-					<span class="fudis-fieldset__legend__title__text">{{ title }}</span>
+					<span class="fudis-fieldset__legend__title__text">{{ _title }}</span>
 					<span *ngIf="required" class="fudis-fieldset__legend__title__required">({{ _requiredText }})</span>
 					<ng-container *ngIf="tooltip">
 						<fudis-button

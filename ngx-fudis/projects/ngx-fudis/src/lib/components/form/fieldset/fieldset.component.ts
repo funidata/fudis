@@ -4,6 +4,7 @@ import {
 	ContentChild,
 	ElementRef,
 	Input,
+	OnChanges,
 	OnDestroy,
 	OnInit,
 	ViewChild,
@@ -27,7 +28,7 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	styleUrls: ['./fieldset.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class FieldSetComponent extends FieldSetBaseDirective implements AfterViewInit, OnInit, OnDestroy {
+export class FieldSetComponent extends FieldSetBaseDirective implements AfterViewInit, OnInit, OnDestroy, OnChanges {
 	@ContentChild(ActionsDirective) headerActions: ActionsDirective | null;
 
 	@ContentChild(NotificationsDirective) notifications: NotificationsDirective;
@@ -39,9 +40,9 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	constructor(
 		private _idService: FudisIdService,
 		private _errorSummaryService: FudisErrorSummaryService,
-		private _fieldsetTranslationConfigService: FudisTranslationService
+		private _fieldsetTranslationService: FudisTranslationService
 	) {
-		super(_fieldsetTranslationConfigService);
+		super(_fieldsetTranslationService);
 	}
 
 	/**
@@ -94,9 +95,11 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 
 	private _fieldsetInfo: FudisFormErrorSummarySection;
 
+	protected _title: string;
+
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('fieldset');
-
+		this._title = this.title;
 		this.addToErrorSummary();
 	}
 
@@ -106,9 +109,19 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 		}
 	}
 
+	ngOnChanges(): void {
+		if (this.title !== this._title && this._id) {
+			this._title = this.title;
+			this.addToErrorSummary();
+		}
+	}
+
 	addToErrorSummary(): void {
 		if (this.errorSummaryBreadcrumb) {
-			this._fieldsetInfo = { id: this._id, title: this.title };
+			this._fieldsetInfo = {
+				id: this._id,
+				title: this._title,
+			};
 
 			this._errorSummaryService.addFieldset(this._fieldsetInfo);
 
