@@ -9,7 +9,6 @@ import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.direct
 import { FudisSpacing } from '../../types/miscellaneous';
 import { FudisErrorSummaryService } from '../form/error-summary/error-summary.service';
 import { FudisFormErrorSummarySection } from '../../types/forms';
-import { FudisTranslationService } from '../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'fudis-section',
@@ -67,11 +66,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 
 	@Input() errorSummaryBreadcrumb: boolean = false;
 
-	constructor(
-		private _idService: FudisIdService,
-		private _errorSummaryService: FudisErrorSummaryService,
-		private _translationService: FudisTranslationService
-	) {
+	constructor(private _idService: FudisIdService, private _errorSummaryService: FudisErrorSummaryService) {
 		super();
 	}
 
