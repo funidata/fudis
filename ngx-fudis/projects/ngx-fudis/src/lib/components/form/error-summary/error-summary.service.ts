@@ -25,8 +25,6 @@ export class FudisErrorSummaryService {
 
 	private _currentSections: FudisFormErrorSummarySection[] = [];
 
-	private _numberOfTries: number = 0;
-
 	getFieldsetList(): FudisFormErrorSummarySection[] {
 		return this._currentFieldsets;
 	}

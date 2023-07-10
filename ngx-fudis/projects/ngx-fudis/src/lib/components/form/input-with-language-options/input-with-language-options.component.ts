@@ -80,6 +80,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	handleInputBlur(event: Event, controlKey: string): void {
 		this._updatedOptions = this._missingLanguage ? this.updateDropdownList() : this.options;
+		this.formGroup.markAllAsTouched();
 
 		this.isControlRequired((event.target as HTMLInputElement).value, controlKey);
 	}
