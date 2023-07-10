@@ -10,8 +10,9 @@ export type FudisLanguageOption =
 	| { value: 'finnish'; viewValue: 'FI' }
 	| { value: 'swedish'; viewValue: 'SV' }
 	| { value: 'english'; viewValue: 'EN' }
-	| { value: string; viewValue: string };
+	| { value: string | FudisLanguageAbbr; viewValue: string };
 
+export type FudisLanguageAbbr = 'fi' | 'sv' | 'en';
 export interface FudisLanguageBadgeTranslations {
 	en?: string;
 	sv?: string;

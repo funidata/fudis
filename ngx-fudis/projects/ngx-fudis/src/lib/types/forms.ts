@@ -1,7 +1,7 @@
 import { FormControl } from '@angular/forms';
 import { MatDateFormats, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
-
 import { Observable } from 'rxjs';
+import { FudisLanguageAbbr } from './miscellaneous';
 
 export type FudisInputWidth = 'sm' | 'md' | 'lg';
 
@@ -79,7 +79,7 @@ export type FudisDropdownLanguageOption =
 	| { value: 'finnish'; viewValue: 'FI' }
 	| { value: 'swedish'; viewValue: 'SV' }
 	| { value: 'english'; viewValue: 'EN' }
-	| { value: string; viewValue: string };
+	| { value: FudisLanguageAbbr; viewValue: string };
 
 export interface FudisInputWithLanguageOptionsFormGroup {
 	[language: string]: FormControl<string | null>;
@@ -89,7 +89,7 @@ export interface FudisTranslationConfig {
 	// Shown with form inputs
 	requiredText?: Observable<string>;
 	// Used in e. g. to define Date picker language
-	appLanguage?: 'en' | 'fi' | 'sv' | string;
+	appLanguage?: FudisLanguageAbbr | string;
 	datepicker?: {
 		// Label for close button
 		closeLabel?: Observable<string>;

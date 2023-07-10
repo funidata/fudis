@@ -1,19 +1,19 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FudisLanguageOption } from '../../../types/miscellaneous';
+import { FudisLanguageAbbr } from '../../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-language-badge',
 	templateUrl: './language-badge.component.html',
 })
 export class LanguageBadgeComponent {
-	@Input() language: FudisLanguageOption;
+	@Input() language: FudisLanguageAbbr;
 
 	/**
 	 * Optional click handler
 	 */
-	@Output() handleClick = new EventEmitter<FudisLanguageOption>();
+	@Output() changeLanguage = new EventEmitter<FudisLanguageAbbr>();
 
 	handleLanguageSelect(): void {
-		this.handleClick.emit(this.language);
+		this.changeLanguage.emit(this.language);
 	}
 }
