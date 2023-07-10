@@ -9,6 +9,8 @@ import {
 	FudisFormErrorSummarySection,
 	FudisFormErrorSummaryLink,
 } from '../../../types/forms';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
+import { FudisTranslationConfig } from '../../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-error-summary',
@@ -40,12 +42,19 @@ export class ErrorSummaryComponent {
 	constructor(
 		@Inject(DOCUMENT) private _document: Document,
 		private _errorSummaryService: FudisErrorSummaryService,
-		private readonly _changeDetectorRef: ChangeDetectorRef
+		private readonly _changeDetectorRef: ChangeDetectorRef,
+		private _translationService: FudisTranslationService
 	) {
 		effect(() => {
 			this.getErrors();
+
+			this._translations = this._translationService.getTranslations();
+
+			this._attentionIcon = this._translations().ICON.ATTENTION;
 		});
 	}
+
+	protected _translations: Signal<FudisTranslationConfig>;
 
 	protected _visibleErrorList: FudisFormErrorSummaryList[] = [];
 
