@@ -11,7 +11,7 @@ export class FudisErrorSummaryService {
 	constructor(private _translationService: FudisTranslationService) {
 		effect(() => {
 			this._translationService.getLanguage();
-			this.reloadErrors();
+			this.reloadErrors(0, false);
 		});
 	}
 
@@ -24,6 +24,12 @@ export class FudisErrorSummaryService {
 	private _currentFieldsets: FudisFormErrorSummarySection[] = [];
 
 	private _currentSections: FudisFormErrorSummarySection[] = [];
+
+	private _focusToErrors: boolean = true;
+
+	getFocusToErrors(): boolean {
+		return this._focusToErrors;
+	}
 
 	getFieldsetList(): FudisFormErrorSummarySection[] {
 		return this._currentFieldsets;
@@ -126,7 +132,9 @@ export class FudisErrorSummaryService {
 		this._currentSections.splice(indexToRemove, 1);
 	}
 
-	public reloadErrors(delay: number = 0): void {
+	public reloadErrors(delay: number = 0, focusToErrors: boolean = true): void {
+		this._focusToErrors = focusToErrors;
+
 		setTimeout(() => {
 			this._signalCurrentErrorList.set(this._currentErrorList);
 			this._signalDynamicCurrentErrorList.set(this._currentErrorList);

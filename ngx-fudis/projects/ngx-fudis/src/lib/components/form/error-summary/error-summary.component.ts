@@ -107,7 +107,10 @@ export class ErrorSummaryComponent {
 		/**
 		 * Focus to Error Summary element when visible error list gets updated.
 		 */
-		if (this._document.activeElement?.classList.contains('fudis-button')) {
+		if (
+			this._document.activeElement?.classList.contains('fudis-button') &&
+			this._errorSummaryService.getFocusToErrors()
+		) {
 			this.focusToErrorSummary();
 		}
 	}
