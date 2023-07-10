@@ -1,4 +1,9 @@
-<fudis-fieldset [id]="id" [titleSize]="'sm'" [title]="title" [requiredText]="requiredText">
+<fudis-fieldset
+	[id]="id"
+	[titleSize]="'sm'"
+	[title]="title"
+	[requiredText]="requiredText"
+	[errorSummaryBreadcrumb]="false">
 	<ng-template fudisContent type="fieldset">
 		<fudis-radio-button
 			*ngFor="let option of options; let index = index"

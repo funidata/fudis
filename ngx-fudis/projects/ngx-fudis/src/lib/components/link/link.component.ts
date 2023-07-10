@@ -39,7 +39,12 @@ export class LinkComponent {
 	/**
 	 * Link URL using Angular RouterLink
 	 */
-	@Input() routerLinkUrl: string | any[];
+	@Input() routerLinkUrl: string | any[] | null | any;
+
+	/**
+	 * Fragment ID for Angular Router
+	 */
+	@Input() fragmentId: string | undefined;
 
 	/**
 	 * Title for the link, if not defined title will be the same as link URL

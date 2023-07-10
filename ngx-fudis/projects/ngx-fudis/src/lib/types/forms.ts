@@ -66,6 +66,11 @@ export type FudisFormErrorSummaryObject = {
 	};
 };
 
+export type FudisFormErrorSummarySection = {
+	id: string;
+	title: string;
+};
+
 export type FudisFormErrorSummaryList = {
 	id: string;
 	message: string;
@@ -135,3 +140,5 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
 		dateInput: FudisDateInputFormat as Intl.DateTimeFormatOptions,
 	},
 };
+
+export type FudisFormErrorSummaryLink = 'router' | 'href';

@@ -4,6 +4,7 @@
 
 .fudis-link {
 	&__anchor {
+		display: inline-block;
 		text-decoration: underline dotted;
 
 		&:hover {

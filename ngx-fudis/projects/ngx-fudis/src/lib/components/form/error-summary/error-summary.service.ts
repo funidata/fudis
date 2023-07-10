@@ -1,5 +1,9 @@
 import { Signal, signal } from '@angular/core';
-import { FudisFormErrorSummaryObject, FudisFormErrorSummaryItem } from '../../../types/forms';
+import {
+	FudisFormErrorSummaryObject,
+	FudisFormErrorSummaryItem,
+	FudisFormErrorSummarySection,
+} from '../../../types/forms';
 
 export class FudisErrorSummaryService {
 	private _currentErrorList: FudisFormErrorSummaryObject = {};
@@ -7,6 +11,18 @@ export class FudisErrorSummaryService {
 	private _signalCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
 
 	private _signalDynamicCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
+
+	private _currentFieldsets: FudisFormErrorSummarySection[] = [];
+
+	private _currentSections: FudisFormErrorSummarySection[] = [];
+
+	getFieldsetList(): FudisFormErrorSummarySection[] {
+		return this._currentFieldsets;
+	}
+
+	getSectionList(): FudisFormErrorSummarySection[] {
+		return this._currentSections;
+	}
 
 	getVisibleErrors(): Signal<FudisFormErrorSummaryObject> {
 		return this._signalCurrentErrorList.asReadonly();
@@ -59,6 +75,26 @@ export class FudisErrorSummaryService {
 		this._currentErrorList = currentErrors;
 
 		this._signalDynamicCurrentErrorList.set(currentErrors);
+	}
+
+	public addFieldset(fieldset: FudisFormErrorSummarySection): void {
+		this._currentFieldsets.push(fieldset);
+	}
+
+	public removeFieldset(fieldset: FudisFormErrorSummarySection): void {
+		const indexToRemove = this._currentFieldsets.indexOf(fieldset);
+
+		this._currentFieldsets.splice(indexToRemove, 1);
+	}
+
+	public addSection(section: FudisFormErrorSummarySection): void {
+		this._currentSections.push(section);
+	}
+
+	public removeSection(section: FudisFormErrorSummarySection): void {
+		const indexToRemove = this._currentSections.indexOf(section);
+
+		this._currentSections.splice(indexToRemove, 1);
 	}
 
 	public reloadErrors(delay: number = 0): void {
