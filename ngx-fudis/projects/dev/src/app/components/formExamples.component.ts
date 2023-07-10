@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import { FudisDropdownOption, FudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
 import { untilDestroyed } from 'projects/ngx-fudis/src/lib/utilities/untilDestroyed';
-import { FudisErrorSummaryService, FudisTranslationConfigService } from 'ngx-fudis';
+import { FudisErrorSummaryService, FudisTranslationService } from 'ngx-fudis';
 
 type MyForm = {
 	dropdown: FormControl<FudisDropdownOption | null>;
@@ -23,7 +23,7 @@ export class AppFormExampleComponent implements OnInit {
 	constructor(
 		private translocoService: TranslocoService,
 		private errorSummaryService: FudisErrorSummaryService,
-		private fudisConfig: FudisTranslationConfigService
+		private fudisConfig: FudisTranslationService
 	) {}
 
 	errorSummaryVisible: boolean = false;

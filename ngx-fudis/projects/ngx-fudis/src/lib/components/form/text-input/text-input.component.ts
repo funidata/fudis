@@ -5,7 +5,7 @@ import { InputBaseDirective } from '../../../directives/form/input-base/input-ba
 
 import { FudisInputWidth } from '../../../types/forms';
 import { FudisIdService } from '../../../utilities/id-service.service';
-import { FudisTranslationConfigService } from '../../../utilities/translation-config.service';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'fudis-text-input',
@@ -13,7 +13,7 @@ import { FudisTranslationConfigService } from '../../../utilities/translation-co
 	styleUrls: ['./text-input.component.scss'],
 })
 export class TextInputComponent extends InputBaseDirective implements OnInit, OnChanges {
-	constructor(private _idService: FudisIdService, _configService: FudisTranslationConfigService) {
+	constructor(private _idService: FudisIdService, _configService: FudisTranslationService) {
 		super(_configService);
 	}
 
@@ -62,7 +62,6 @@ export class TextInputComponent extends InputBaseDirective implements OnInit, On
 	@Input() maxNumber: number;
 
 	ngOnInit(): void {
-		this.subscribeToRequiredText();
 		this._id = this.id ?? this._idService.getNewId('textInput');
 	}
 

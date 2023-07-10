@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ElementRef, Input, OnChanges, OnInit, ViewChild, effect } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl, Validators } from '@angular/forms';
@@ -6,7 +6,7 @@ import { FudisDropdownOption, FudisInputWidth } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
 import { FudisIdService } from '../../../utilities/id-service.service';
-import { FudisTranslationConfigService } from '../../../utilities/translation-config.service';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'fudis-autocomplete',
@@ -14,8 +14,12 @@ import { FudisTranslationConfigService } from '../../../utilities/translation-co
 	styleUrls: ['./autocomplete.component.scss'],
 })
 export class AutocompleteComponent extends InputBaseDirective implements OnInit, AfterContentInit, OnChanges {
-	constructor(private _idService: FudisIdService, _configService: FudisTranslationConfigService) {
+	constructor(private _idService: FudisIdService, _configService: FudisTranslationService) {
 		super(_configService);
+
+		effect(() => {
+			this._clearFilterText = this._configs().autoComplete.clearFilter;
+		});
 	}
 
 	@ViewChild('fudisAutocompleteInput') autocompleteInput: ElementRef;
@@ -56,8 +60,6 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	protected _clearFilterText: string;
 
 	ngOnInit(): void {
-		this.subscribeToFilterText();
-		this.subscribeToRequiredText();
 		this._id = this.id ?? this._idService.getNewId('autocomplete');
 	}
 
@@ -151,13 +153,5 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 			this._autocompleteFormControl.patchValue(this.control.value.viewValue);
 		}
 		this.handleBlur.emit(event);
-	}
-
-	private subscribeToFilterText(): void {
-		this._configs()
-			.autoComplete.clearFilter.pipe(this._untilDestroyed())
-			.subscribe((value) => {
-				this._clearFilterText = value;
-			});
 	}
 }

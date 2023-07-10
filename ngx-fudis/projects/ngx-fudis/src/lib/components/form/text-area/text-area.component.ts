@@ -5,7 +5,7 @@ import { InputBaseDirective } from '../../../directives/form/input-base/input-ba
 
 import { FudisInputWidth } from '../../../types/forms';
 import { FudisIdService } from '../../../utilities/id-service.service';
-import { FudisTranslationConfigService } from '../../../utilities/translation-config.service';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'fudis-text-area',
@@ -13,7 +13,7 @@ import { FudisTranslationConfigService } from '../../../utilities/translation-co
 	styleUrls: ['./text-area.component.scss'],
 })
 export class TextAreaComponent extends InputBaseDirective implements OnInit, OnChanges {
-	constructor(private _idService: FudisIdService, _configService: FudisTranslationConfigService) {
+	constructor(private _idService: FudisIdService, _configService: FudisTranslationService) {
 		super(_configService);
 	}
 
@@ -43,7 +43,6 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit, OnC
 	@Input() size: FudisInputWidth = 'lg';
 
 	ngOnInit(): void {
-		this.subscribeToRequiredText();
 		this._id = this.id ?? this._idService.getNewId('textArea');
 	}
 

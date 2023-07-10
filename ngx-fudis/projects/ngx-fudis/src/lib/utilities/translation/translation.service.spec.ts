@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TranslationService } from './translation.service';
+import { FudisTranslationService } from './translation.service';
 
 describe('TranslationService', () => {
-  let service: TranslationService;
+	let service: FudisTranslationService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(TranslationService);
-  });
+	beforeEach(() => {
+		TestBed.configureTestingModule({});
+		service = TestBed.inject(FudisTranslationService);
+	});
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+	it('should be created', () => {
+		expect(service).toBeTruthy();
+	});
 });

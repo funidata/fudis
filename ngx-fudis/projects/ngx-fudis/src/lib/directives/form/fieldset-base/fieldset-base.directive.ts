@@ -1,18 +1,19 @@
 import { Directive, Input, Signal, effect } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisTranslationConfig } from '../../../types/forms';
-import { untilDestroyed } from '../../../utilities/untilDestroyed';
-import { FudisTranslationConfigService } from '../../../utilities/translation-config.service';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Directive({
 	selector: '[fudisFieldSetBase]',
 })
 export class FieldSetBaseDirective extends TooltipApiDirective {
-	constructor(private _configService: FudisTranslationConfigService) {
+	constructor(private _configService: FudisTranslationService) {
 		super();
 
 		effect(() => {
 			this._configs = this._configService.getConfig();
+
+			this.requiredText = this._configs().required;
 		});
 	}
 
@@ -51,14 +52,4 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
 	protected _required: boolean = false;
 
 	protected _configs: Signal<FudisTranslationConfig>;
-
-	protected _untilDestroyed = untilDestroyed();
-
-	protected subscribeToRequiredText(): void {
-		this._configs()
-			.required.pipe(this._untilDestroyed())
-			.subscribe((value) => {
-				this._requiredText = value;
-			});
-	}
 }

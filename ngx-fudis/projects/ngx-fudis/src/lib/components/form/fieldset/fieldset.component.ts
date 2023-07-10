@@ -19,7 +19,7 @@ import { ContentDirective } from '../../../directives/content-projection/content
 import { FudisIdService } from '../../../utilities/id-service.service';
 import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
 import { FudisFormErrorSummarySection } from '../../../types/forms';
-import { FudisTranslationConfigService } from '../../../utilities/translation-config.service';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'fudis-fieldset',
@@ -39,7 +39,7 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	constructor(
 		private _idService: FudisIdService,
 		private _errorSummaryService: FudisErrorSummaryService,
-		private _fieldsetTranslationConfigService: FudisTranslationConfigService
+		private _fieldsetTranslationConfigService: FudisTranslationService
 	) {
 		super(_fieldsetTranslationConfigService);
 	}

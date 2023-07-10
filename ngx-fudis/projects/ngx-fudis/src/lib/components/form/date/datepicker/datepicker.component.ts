@@ -5,7 +5,7 @@ import { MatDatepickerIntl } from '@angular/material/datepicker';
 import { FUDIS_DATE_FORMATS, FudisInputWidth } from 'projects/ngx-fudis/src/lib/types/forms';
 import { InputBaseDirective } from 'projects/ngx-fudis/src/lib/directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../../utilities/id-service.service';
-import { FudisTranslationConfigService } from '../../../../utilities/translation-config.service';
+import { FudisTranslationService } from '../../../../utilities/translation/translation.service';
 
 import { DatepickerCustomDateAdapter } from '../date-common/datepicker-custom-date-adapter';
 import { updateLocale } from '../date-common/utilities';
@@ -28,18 +28,16 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 	constructor(
 		private _idService: FudisIdService,
 		private _changeDetectorRef: ChangeDetectorRef,
-		private _datePickerConfigService: FudisTranslationConfigService,
+		private _datePickerConfigService: FudisTranslationService,
 		private _adapter: DateAdapter<Date>,
 		private _datepickerIntl: MatDatepickerIntl
 	) {
 		super(_datePickerConfigService);
 
 		effect(() => {
-			this.setConfigs();
-		});
+			this._datepickerIntl.closeCalendarLabel = this._configs().datepicker.closeLabel;
 
-		this._datePickerConfigService.getNewConfig().subscribe((value) => {
-			console.log(value);
+			this._adapter.setLocale(updateLocale(this._configService.getLanguage()));
 		});
 	}
 
@@ -63,26 +61,8 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 	 */
 	@Input() maxDate: Date | null | undefined;
 
-	protected setConfigs(): void {
-		this._adapter.setLocale(updateLocale(this._configs().appLanguage!));
-	}
-
-	/**
-	 * Set ngMaterial Calendar close button label
-	 */
-	protected subscribeToCloseLabel(): void {
-		this._configs()
-			.datepicker.closeLabel.pipe(this._untilDestroyed())
-			.subscribe((value) => {
-				this._datepickerIntl.closeCalendarLabel = value as string;
-			});
-	}
-
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('datepicker');
-
-		this.subscribeToCloseLabel();
-		this.subscribeToRequiredText();
 	}
 
 	ngOnChanges(): void {

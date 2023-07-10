@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, effect } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
 	FudisInputWithLanguageOptionsFormGroup,
@@ -10,7 +10,7 @@ import {
 
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../utilities/id-service.service';
-import { FudisTranslationConfigService } from '../../../utilities/translation-config.service';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'fudis-input-with-language-options',
@@ -18,8 +18,14 @@ import { FudisTranslationConfigService } from '../../../utilities/translation-co
 	styleUrls: ['./input-with-language-options.component.scss'],
 })
 export class InputWithLanguageOptionsComponent extends InputBaseDirective implements OnInit, OnChanges {
-	constructor(private _idService: FudisIdService, _configService: FudisTranslationConfigService) {
+	constructor(private _idService: FudisIdService, _configService: FudisTranslationService) {
 		super(_configService);
+
+		effect(() => {
+			this._languageLabel = this._configs().inputWithLanguageOptions.languageLabel;
+
+			this._missingLanguage = this._configs().inputWithLanguageOptions.missingLanguage;
+		});
 	}
 
 	/**
@@ -181,9 +187,6 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	}
 
 	ngOnInit(): void {
-		this.subscribeToDropdownTexts();
-		this.subscribeToRequiredText();
-
 		this._id = this.id ?? this._idService.getNewId('inputWithLanguageOptions');
 
 		this._updatedOptions = this._missingLanguage ? this.updateDropdownList() : this.options;
@@ -196,18 +199,5 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	ngOnChanges(): void {
 		this._updatedOptions = this._missingLanguage ? this.updateDropdownList() : this.options;
-	}
-
-	private subscribeToDropdownTexts(): void {
-		this._configs()
-			.inputWithLanguageOptions.missingLanguage.pipe(this._untilDestroyed())
-			.subscribe((value) => {
-				this._missingLanguage = value;
-			});
-		this._configs()
-			.inputWithLanguageOptions.languageLabel.pipe(this._untilDestroyed())
-			.subscribe((value) => {
-				this._languageLabel = value;
-			});
 	}
 }

@@ -6,7 +6,7 @@ import { FudisLanguage } from '../../types/miscellaneous';
 	providedIn: 'root',
 })
 export class FudisTranslationService {
-	private fi = {
+	private en = {
 		required: 'Required',
 		datepicker: { closeLabel: 'Close calendar' },
 		dialog: { closeLabel: 'Close' },
@@ -22,7 +22,7 @@ export class FudisTranslationService {
 		},
 	};
 
-	private en = {
+	private fi = {
 		required: 'Pakollinen',
 		datepicker: { closeLabel: 'Sulje kalenteri' },
 		dialog: { closeLabel: 'Sulje' },
@@ -40,7 +40,7 @@ export class FudisTranslationService {
 
 	private _config = signal<FudisTranslationConfig>(this.en);
 
-	private _language = signal<FudisLanguage>('fi');
+	private _language = signal<FudisLanguage>('en');
 
 	/**
 	 * To set from application values for all components application uses.

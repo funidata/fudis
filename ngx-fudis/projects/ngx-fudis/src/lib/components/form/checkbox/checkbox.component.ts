@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
 import { FudisIdService } from '../../../utilities/id-service.service';
-import { FudisTranslationConfigService } from '../../../utilities/translation-config.service';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'fudis-checkbox',
@@ -11,7 +11,7 @@ import { FudisTranslationConfigService } from '../../../utilities/translation-co
 	styleUrls: ['./checkbox.component.scss'],
 })
 export class CheckboxComponent extends InputBaseDirective implements OnInit, OnChanges {
-	constructor(private _idService: FudisIdService, _configService: FudisTranslationConfigService) {
+	constructor(private _idService: FudisIdService, _configService: FudisTranslationService) {
 		super(_configService);
 	}
 
@@ -32,7 +32,6 @@ export class CheckboxComponent extends InputBaseDirective implements OnInit, OnC
 	}
 
 	ngOnInit(): void {
-		this.subscribeToRequiredText();
 		this._id = this.id ?? this._idService.getNewId('checkbox');
 	}
 

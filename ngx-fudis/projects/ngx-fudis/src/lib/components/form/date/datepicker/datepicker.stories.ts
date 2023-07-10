@@ -15,18 +15,7 @@ export default {
 			page: readme,
 		},
 		controls: {
-			exclude: [
-				'_configs',
-				'_id',
-				'_required',
-				'_requiredText',
-				'ngOnChanges',
-				'ngOnInit',
-				'setConfigs',
-				'subscribeToCloseLabel',
-				'onBlur',
-				'subscribeToRequiredText',
-			],
+			exclude: ['_configs', '_id', '_required', '_requiredText', 'ngOnChanges', 'ngOnInit', 'setConfigs', 'onBlur'],
 		},
 	},
 	decorators: [
