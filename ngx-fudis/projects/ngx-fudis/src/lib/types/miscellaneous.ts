@@ -11,3 +11,5 @@ export type FudisExpandableType = 'regular';
 export type FudisSpacing = 'none' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
 export type FudisTooltipPosition = 'left' | 'right' | 'above' | 'below';
+
+export type FudisLanguage = 'fi' | 'sv' | 'en';

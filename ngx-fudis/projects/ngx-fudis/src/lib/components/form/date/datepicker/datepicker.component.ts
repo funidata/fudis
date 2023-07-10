@@ -37,6 +37,10 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 		effect(() => {
 			this.setConfigs();
 		});
+
+		this._datePickerConfigService.getNewConfig().subscribe((value) => {
+			console.log(value);
+		});
 	}
 
 	/**

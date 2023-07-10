@@ -1,8 +1,6 @@
 import { FormControl } from '@angular/forms';
 import { MatDateFormats, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
 
-import { Observable } from 'rxjs';
-
 export type FudisInputWidth = 'sm' | 'md' | 'lg';
 
 export interface FudisRadioButtonOption {
@@ -92,30 +90,28 @@ export interface FudisInputWithLanguageOptionsFormGroup {
 
 export interface FudisTranslationConfig {
 	// Shown with form inputs
-	required: Observable<string>;
-	// Used in e. g. to define Date picker language
-	appLanguage: 'en' | 'fi' | 'sv' | string;
+	required: string;
 	datepicker: {
 		// Label for close button
-		closeLabel: Observable<string>;
+		closeLabel: string;
 	};
 	dialog: {
 		// Label for close button
-		closeLabel?: Observable<string>;
+		closeLabel?: string;
 	};
 	inputWithLanguageOptions: {
 		// Label for language selection dropdown
-		languageLabel: Observable<string>;
+		languageLabel: string;
 		// Text shown in dropdown options if input for a language is missing
-		missingLanguage: Observable<string>;
+		missingLanguage: string;
 	};
 	// Clear filter button label for screen readers
 	autoComplete: {
-		clearFilter: Observable<string>;
+		clearFilter: string;
 	};
 	icon: {
 		// Alternative text for screen readers. Used in e. g. Error Summary
-		attention: Observable<string>;
+		attention: string;
 	};
 }
 

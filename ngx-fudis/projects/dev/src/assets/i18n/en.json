@@ -12,5 +12,21 @@
 		"chooseTruthTrue": "True",
 		"chooseTruthFalse": "False"
 	},
-	"closeCalendar": "Close calendar"
+	"closeCalendar": "Close calendar",
+	"config": {
+		"appLanguage": "en",
+		"required": "Required",
+		"datepicker": { "closeLabel": "Close calendar" },
+		"dialog": { "closeLabel": "Close" },
+		"inputWithLanguageOptions": {
+			"languageLabel": "Language",
+			"missingLanguage": "Missing"
+		},
+		"autoComplete": {
+			"clearFilter": "Clear filter"
+		},
+		"icon": {
+			"attention": "Attention"
+		}
+	}
 }

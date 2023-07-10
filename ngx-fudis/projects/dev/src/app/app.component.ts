@@ -53,11 +53,7 @@ export class AppComponent implements OnInit {
 			marginSides: 'responsive',
 		});
 
-		fudisConfig.setConfig({
-			datepicker: { closeLabel: this.translocoService.selectTranslate('closeCalendar') },
-			required: this.translocoService.selectTranslate('required'),
-			appLanguage: 'en',
-		});
+		this.fudisConfig.setNewConfig(this.translocoService.selectTranslateObject('config'));
 	}
 
 	ngOnInit(): void {
@@ -75,7 +71,7 @@ export class AppComponent implements OnInit {
 			this.translocoService.setActiveLang('en');
 			this.document.documentElement.lang = 'en';
 		}
-		this.fudisConfig.setConfig({ appLanguage: this.document.documentElement.lang });
+		// this.fudisConfig.setConfig({ appLanguage: this.document.documentElement.lang });
 	}
 
 	openDialog(): void {

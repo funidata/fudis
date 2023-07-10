@@ -33,7 +33,7 @@ export { DescriptionListItemComponent } from './lib/components/description-list/
 export { DescriptionListItemDetailsComponent } from './lib/components/description-list/description-list-item/description-list-item-details/description-list-item-details.component';
 export { DescriptionListItemTermComponent } from './lib/components/description-list/description-list-item/description-list-item-term/description-list-item-term.component';
 export { FudisDialogService } from './lib/components/dialog/dialog.service';
-export { FudisTranslationConfigService } from './lib/utilities/translation-config.service';
+export { FudisTranslationService } from './lib/utilities/translation/translation.service';
 export { DropdownComponent } from './lib/components/form/dropdown/dropdown.component';
 export { DropdownMenuComponent } from './lib/components/dropdown-menu/dropdown-menu.component';
 export { DropdownMenuItemComponent } from './lib/components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';

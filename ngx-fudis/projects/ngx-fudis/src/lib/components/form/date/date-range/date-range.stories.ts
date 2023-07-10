@@ -2,9 +2,11 @@ import { Component, Signal, importProvidersFrom } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormControl, Validators } from '@angular/forms';
 import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { FudisTranslationService } from 'projects/ngx-fudis/src/lib/utilities/translation/translation.service';
 import { DateRangeComponent } from './date-range.component';
 import { FudisTranslationConfig } from '../../../../types/forms';
-import { FudisTranslationConfigService } from '../../../../utilities/translation-config.service';
+
 import readme from './readme.mdx';
 
 @Component({
@@ -16,14 +18,12 @@ class LanguageChangeComponent {
 
 	_config: Signal<FudisTranslationConfig>;
 
-	constructor(private _configService: FudisTranslationConfigService) {
-		this._config = this._configService.getConfig();
-
+	constructor(private _configService: FudisTranslationService) {
 		this._configService.setConfig('en');
 	}
 
 	changeLanguage(): void {
-		if (this._config().appLanguage === 'en') {
+		if (this._configService.getLanguage() === 'en') {
 			this._configService.setConfig('fi');
 		} else {
 			this._configService.setConfig('en');
@@ -126,7 +126,9 @@ const TemplateWithMinMax: StoryFn<DateRangeComponent> = (args: DateRangeComponen
 			control: new FormControl<Date | null>(null, Validators.required),
 		},
 	},
-	template: html` <fudis-date-range [startDate]="startDate" [endDate]="endDate" /> `,
+	template: html`
+		<fudis-date-range [startDate]="startDate" [endDate]="endDate" /><example-language-change-component />
+	`,
 });
 
 export const WithMinAndMaxDates = TemplateWithMinMax.bind({});

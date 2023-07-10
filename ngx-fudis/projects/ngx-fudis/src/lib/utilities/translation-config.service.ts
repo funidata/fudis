@@ -1,13 +1,32 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-useless-constructor */
 import { Injectable, Signal, signal } from '@angular/core';
-import { of } from 'rxjs';
-import { FudisTranslationConfig } from '../types/forms';
+import { Observable, of } from 'rxjs';
+import { FudisTranslationConfig, NewFudisTranslationConfig } from '../types/forms';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class FudisTranslationConfigService {
+	private values = {
+		appLanguage: 'en',
+		required: 'Required',
+		datepicker: { closeLabel: 'Close calendar' },
+		dialog: { closeLabel: 'Close' },
+		inputWithLanguageOptions: {
+			languageLabel: 'Language',
+			missingLanguage: 'Missing',
+		},
+		autoComplete: {
+			clearFilter: 'Clear filter',
+		},
+		icon: {
+			attention: 'Attention',
+		},
+	};
+
+	private _newDefaults = new Observable<NewFudisTranslationConfig>();
+
 	/**
 	 * Default config values
 	 */
@@ -65,5 +84,13 @@ export class FudisTranslationConfigService {
 	 */
 	getConfig(): Signal<FudisTranslationConfig> {
 		return this._config.asReadonly();
+	}
+
+	getNewConfig(): Observable<NewFudisTranslationConfig> {
+		return this._newDefaults;
+	}
+
+	setNewConfig(values: Observable<NewFudisTranslationConfig>): void {
+		this._newDefaults = values;
 	}
 }
