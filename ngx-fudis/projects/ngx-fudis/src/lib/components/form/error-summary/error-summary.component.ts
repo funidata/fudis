@@ -37,7 +37,7 @@ export class ErrorSummaryComponent {
 	/**
 	 * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.
 	 */
-	_attentionIcon: string;
+	_attentionText: string;
 
 	constructor(
 		@Inject(DOCUMENT) private _document: Document,
@@ -50,7 +50,7 @@ export class ErrorSummaryComponent {
 
 			this._translations = this._translationService.getTranslations();
 
-			this._attentionIcon = this._translations().ICON.ATTENTION;
+			this._attentionText = this._translations().ICON.ATTENTION;
 		});
 	}
 
@@ -59,8 +59,6 @@ export class ErrorSummaryComponent {
 	protected _visibleErrorList: FudisFormErrorSummaryList[] = [];
 
 	private _numberOfFocusTries: number = 0;
-
-	protected _attentionText: string;
 
 	getErrors(): void {
 		const fetchedErrors: Signal<FudisFormErrorSummaryObject> = this.liveRemove
