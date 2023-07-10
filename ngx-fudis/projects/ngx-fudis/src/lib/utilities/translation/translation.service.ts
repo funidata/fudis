@@ -12,7 +12,7 @@ export class FudisTranslationService {
 	private _language = signal<FudisLanguageAbbr>('en');
 
 	/**
-	 * To set from application values for all components application uses.
+	 * Set language of repeated texts Fudis uses for its components. E. g. 'required' text of form components or help texts for screen readers for various buttons.
 	 */
 	setLanguage(language: FudisLanguageAbbr): void {
 		this._language.set(language);
@@ -28,7 +28,6 @@ export class FudisTranslationService {
 	/**
 	 * Get current language of Fudis configs
 	 */
-
 	getLanguage(): FudisLanguageAbbr {
 		return this._language();
 	}
