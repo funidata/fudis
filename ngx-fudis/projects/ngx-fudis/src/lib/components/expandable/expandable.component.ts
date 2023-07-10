@@ -79,8 +79,14 @@ export class ExpandableComponent implements OnInit, OnDestroy {
 		return this._collapsed;
 	}
 
+	/**
+	 * Internal id to generate unique id
+	 */
 	protected _id: string;
 
+	/**
+	 * Internal, separate unique heading id
+	 */
 	protected _headingId: string;
 
 	constructor(private _idService: FudisIdService, private _errorSummaryService: FudisErrorSummaryService) {
@@ -93,8 +99,14 @@ export class ExpandableComponent implements OnInit, OnDestroy {
 	 */
 	protected _openedOnce = false;
 
+	/**
+	 * Object to send for error-summary service
+	 */
 	private _errorSummaryInfo: FudisFormErrorSummarySection;
 
+	/**
+	 * Is info sent to error-summary service
+	 */
 	private _errorSummaryInfoSent: boolean = false;
 
 	setCollapsedStatus(value: boolean): void {

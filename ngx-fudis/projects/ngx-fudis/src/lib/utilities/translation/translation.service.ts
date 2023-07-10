@@ -45,7 +45,7 @@ export class FudisTranslationService {
 	/**
 	 * To set from application values for all components application uses.
 	 */
-	setConfig(language: FudisLanguage): void {
+	setLanguage(language: FudisLanguage): void {
 		if (language === 'en') {
 			this._config.set(this.en);
 		} else if (language === 'fi') {

@@ -83,7 +83,7 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	/**
 	 * To disable sending information about this Fieldset to Error Summary service
 	 */
-	@Input() errorSummaryBreadcrumb: boolean = false;
+	@Input() errorSummaryBreadcrumb: boolean = true;
 
 	private _fieldsetSent: boolean = false;
 
@@ -102,7 +102,7 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	}
 
 	addToErrorSummary(): void {
-		if (!this.errorSummaryBreadcrumb) {
+		if (this.errorSummaryBreadcrumb) {
 			this._fieldsetInfo = { id: this._id, title: this.title };
 
 			this._errorSummaryService.addFieldset(this._fieldsetInfo);
@@ -112,7 +112,7 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	}
 
 	removeFromErrorSummary(): void {
-		if (!this.errorSummaryBreadcrumb && this._fieldsetSent) {
+		if (this.errorSummaryBreadcrumb && this._fieldsetSent) {
 			this._errorSummaryService.removeFieldset(this._fieldsetInfo);
 		}
 	}
