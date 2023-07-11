@@ -29,37 +29,4 @@
 			@include border.border('1px', 'solid', 'red');
 		}
 	}
-
-	&__guidance {
-		display: flex;
-		justify-content: space-between;
-		width: 100%;
-
-		&__help-text {
-			@include colorMixins.text-color('gray-dark');
-			@include typography.body-text-sm-regular;
-
-			margin-top: spacing.$spacing-xs;
-			text-transform: none;
-		}
-
-		&__error {
-			@include typography.body-text-sm-regular;
-			@include colorMixins.text-color('red');
-
-			text-transform: none;
-		}
-
-		&__character-limit-indicator {
-			@include colorMixins.text-color('gray-dark');
-			@include typography.body-text-sm-regular;
-
-			margin-top: spacing.$spacing-xs;
-			margin-left: spacing.$spacing-xs;
-
-			&__float-right {
-				margin-left: auto;
-			}
-		}
-	}
 }
