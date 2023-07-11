@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ContentChild, Input } from '@angular/core';
-import { ActionsDirective } from 'projects/ngx-fudis/src/lib/directives/content-projection/actions/actions.directive';
+import { ActionsDirective } from '../../../../directives/content-projection/actions/actions.directive';
 
 @Component({
 	selector: 'fudis-dd, fudis-description-list-details',
