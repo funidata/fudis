@@ -3,12 +3,7 @@
 import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 import { TranslocoService } from '@ngneat/transloco';
-import {
-	FudisTranslationConfigService,
-	FudisDialogService,
-	FudisErrorSummaryService,
-	FudisGridService,
-} from 'ngx-fudis';
+import { FudisDialogService, FudisGridService, FudisTranslationService } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
 
 import { FudisDropdownOption } from 'dist/ngx-fudis/lib/types/forms';
@@ -44,38 +39,33 @@ export class AppComponent implements OnInit {
 		@Inject(DOCUMENT) private document: Document,
 		private dialog: FudisDialogService,
 		private translocoService: TranslocoService,
-		private errorSummaryService: FudisErrorSummaryService,
 		private gridService: FudisGridService,
-		private fudisConfig: FudisTranslationConfigService
+		private fudisLanguage: FudisTranslationService
 	) {
 		gridService.setGridDefaultValues({
 			columns: { xs: 1, lg: 2 },
 			marginSides: 'responsive',
 		});
-
-		fudisConfig.setConfig({
-			datepicker: { closeLabel: this.translocoService.selectTranslate('closeCalendar') },
-			requiredText: this.translocoService.selectTranslate('required'),
-			appLanguage: 'en',
-		});
 	}
 
 	ngOnInit(): void {
-		this.translocoService.setActiveLang('en');
 		this.translocoService.setActiveLang('fi');
+		this.translocoService.setActiveLang('en');
 
-		this.document.documentElement.lang = 'fi';
+		this.document.documentElement.lang = 'en';
+		this.fudisLanguage.setLanguage('en');
 	}
 
 	changeLanguage(): void {
 		if (this.translocoService.getActiveLang() === 'en') {
-			this.translocoService.setActiveLang('fi');
 			this.document.documentElement.lang = 'fi';
+			this.fudisLanguage.setLanguage('fi');
+			this.translocoService.setActiveLang('fi');
 		} else {
-			this.translocoService.setActiveLang('en');
 			this.document.documentElement.lang = 'en';
+			this.translocoService.setActiveLang('en');
+			this.fudisLanguage.setLanguage('en');
 		}
-		this.fudisConfig.setConfig({ appLanguage: this.document.documentElement.lang });
 	}
 
 	openDialog(): void {

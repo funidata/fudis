@@ -6,6 +6,7 @@ import { ActionsDirective } from '../../../directives/content-projection/actions
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
+import { FudisFormErrorSummaryLink } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-form',
@@ -46,10 +47,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 	 */
 	@Input({ required: true }) errorSummaryHelpText: string;
 
-	/**
-	 * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.
-	 */
-	@Input({ required: true }) errorSummaryScreenReaderHelpText: string;
+	@Input() errorSummaryLinkType: FudisFormErrorSummaryLink = 'router';
 
 	protected _id: string;
 

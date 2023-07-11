@@ -1,10 +1,10 @@
-import { Component, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, HostBinding, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { FudisRadioButtonOption, FudisFormErrors } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
-
-import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnings';
+import { FudisIdService } from '../../../utilities/id-service.service';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'fudis-radio-button-group',
@@ -12,7 +12,7 @@ import { checkRequiredAttributes } from '../../../utilities/form/errorsAndWarnin
 	styleUrls: ['./radio-button-group.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class RadioButtonGroupComponent extends FieldSetBaseDirective implements OnInit {
+export class RadioButtonGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
 	@HostBinding('class') classes = 'fudis-radio-button-group-host';
 
 	/*
@@ -35,8 +35,17 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	 */
 	@Input() invalidState: boolean = false;
 
+	/**
+	 * Set fieldset as required. By default set to 'undefined' and this attribute is determined to true / false depending on if FormControl has Validators.required. This setting will override that.
+	 */
+	@Input() required: boolean | undefined = undefined;
+
+	constructor(private _idService: FudisIdService, private radioButtonGroupConfigService: FudisTranslationService) {
+		super(radioButtonGroupConfigService);
+	}
+
 	ngOnInit() {
-		checkRequiredAttributes(this.id, this.requiredText, this.control);
+		this._id = this.id ?? this._idService.getNewId('radioButtonGroup');
 
 		if (this.options.length < 2) {
 			throw new Error(
@@ -57,5 +66,9 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 				`From @Input array of options to fudis-radio-button-group value 'name' should be identical for all options.`
 			);
 		}
+	}
+
+	ngOnChanges(): void {
+		this._required = this.required ?? this.control.hasValidator(Validators.required);
 	}
 }

@@ -7,7 +7,7 @@
 				[groupErrorMsg]="groupErrorMsg"
 				[helpText]="helpText"
 				[formGroup]="formGroup"
-				[for]="id">
+				[for]="_id">
 			</fudis-guidance>
 		</ng-container>
 	</div>
@@ -16,9 +16,9 @@
 		class="fudis-input-with-language-options__dropdown"
 		(selectionUpdate)="handleLanguageSelect($event)"
 		[control]="_dropdownControl"
-		[label]="languageLabel"
-		[size]="missingLanguage ? 'xs' : 'lg'"
-		[id]="id + '_language-dropdown'"
+		[label]="_languageLabel"
+		[size]="_missingLanguage ? 'xs' : 'lg'"
+		[id]="_id + '_language-dropdown'"
 		[options]="_updatedOptions">
 	</fudis-dropdown>
 </div>
@@ -32,9 +32,8 @@
 			[ariaLabel]="label + ', ' + _dropdownControl.value.viewValue"
 			[size]="'lg'"
 			[label]="label"
-			[id]="id"
-			[ignoreRequiredCheck]="true"
-			[requiredText]="_requiredControls[control.key].requiredText"
+			[id]="_id"
+			[required]="_requiredControls[control.key].required"
 			[invalidState]="formGroup.invalid && formGroup.touched"
 			[control]="$any(formGroup).controls[control.key]"></fudis-text-input>
 	</ng-container>
@@ -49,10 +48,9 @@
 			[ariaLabel]="label + ', ' + _dropdownControl.value.viewValue"
 			[size]="'lg'"
 			[label]="label"
-			[id]="id"
-			[ignoreRequiredCheck]="true"
+			[id]="_id"
 			[invalidState]="formGroup.invalid && formGroup.touched"
-			[requiredText]="_requiredControls[control.key].requiredText"
+			[required]="_requiredControls[control.key].required"
 			[control]="$any(formGroup).controls[control.key]"></fudis-text-area>
 	</ng-container>
 </ng-template>

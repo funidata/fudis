@@ -84,7 +84,8 @@ import { DescriptionListItemTermComponent } from './components/description-list/
 import { DescriptionListItemDetailsComponent } from './components/description-list/description-list-item/description-list-item-details/description-list-item-details.component';
 import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
 import { FooterComponent } from './components/footer/footer.component';
-import { FudisTranslationConfigService } from './utilities/config.service';
+
+import { FudisTranslationService } from './utilities/translation/translation.service';
 
 @NgModule({
 	/*
@@ -232,7 +233,7 @@ import { FudisTranslationConfigService } from './utilities/config.service';
 		FudisGridService,
 		FudisDropdownMenuItemService,
 		FudisIdService,
-		FudisTranslationConfigService,
+		FudisTranslationService,
 	],
 })
 export class NgxFudisModule {}

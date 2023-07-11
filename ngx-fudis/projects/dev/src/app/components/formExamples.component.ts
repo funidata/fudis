@@ -1,10 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-underscore-dangle */
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import { FudisDropdownOption, FudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
 import { untilDestroyed } from 'projects/ngx-fudis/src/lib/utilities/untilDestroyed';
-import { FudisErrorSummaryService, FudisTranslationConfigService } from 'ngx-fudis';
+import { FudisErrorSummaryService, FudisTranslationService } from 'ngx-fudis';
 
 type MyForm = {
 	dropdown: FormControl<FudisDropdownOption | null>;
@@ -24,18 +25,12 @@ export class AppFormExampleComponent implements OnInit {
 	constructor(
 		private translocoService: TranslocoService,
 		private errorSummaryService: FudisErrorSummaryService,
-		private fudisConfig: FudisTranslationConfigService
+		private fudisConfig: FudisTranslationService
 	) {}
 
 	errorSummaryVisible: boolean = false;
 
 	showSuccessBodyText: boolean = false;
-
-	transLatedOptions: any = {};
-
-	closeLabel: string = '';
-
-	requiredText: string = '';
 
 	private _untilDestroyed = untilDestroyed();
 
@@ -48,17 +43,6 @@ export class AppFormExampleComponent implements OnInit {
 					{ value: true, viewValue: value.chooseTruthTrue, id: 'boolean-2', name: 'booleans' },
 					{ value: false, viewValue: value.chooseTruthFalse, id: 'boolean-1', name: 'booleans' },
 				];
-			});
-
-		this.translocoService
-			.selectTranslation()
-			.pipe(this._untilDestroyed())
-			.subscribe(() => {
-				if (this.errorSummaryVisible) {
-					setTimeout(() => {
-						this.errorSummaryService.reloadErrors();
-					}, 100);
-				}
 			});
 	}
 
@@ -96,9 +80,7 @@ export class AppFormExampleComponent implements OnInit {
 		if (this.testFormGroup.invalid) {
 			this.errorSummaryVisible = true;
 			this.showSuccessBodyText = false;
-			setTimeout(() => {
-				this.errorSummaryService.reloadErrors();
-			}, 500);
+			this.errorSummaryService.reloadErrors();
 		} else {
 			this.errorSummaryVisible = false;
 			this.showSuccessBodyText = true;

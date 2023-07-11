@@ -11,7 +11,6 @@ import { FudisFormErrors } from '../../../types/forms';
 			<fudis-text-area
 				[control]="firstTextAreaControl"
 				[id]="'unique-text-area-id-1'"
-				requiredText="Required"
 				[errorMsg]="{ required: 'Missing a value.' }"
 				label="I am a required text input"
 				helpText="Please add some values here above!"
@@ -20,7 +19,6 @@ import { FudisFormErrors } from '../../../types/forms';
 				[tooltipToggle]="false"></fudis-text-area>
 			<fudis-text-area
 				[control]="secondTextAreaControl"
-				requiredText="Required"
 				[minLength]="minLength"
 				[maxLength]="maxLength"
 				[maxLengthText]="'characters used'"
