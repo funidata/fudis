@@ -12,7 +12,6 @@ export type FudisLanguageOption =
 	| { value: 'english'; viewValue: 'EN' }
 	| { value: string | FudisLanguageAbbr; viewValue: string };
 
-export type FudisLanguageAbbr = 'fi' | 'sv' | 'en';
 export interface FudisLanguageBadgeTranslations {
 	en?: string;
 	sv?: string;

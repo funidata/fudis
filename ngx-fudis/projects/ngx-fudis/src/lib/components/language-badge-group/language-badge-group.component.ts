@@ -1,7 +1,7 @@
 import { Component, Input, ViewEncapsulation, OnInit, Signal } from '@angular/core';
 import { FudisLanguageAbbr } from '../../types/miscellaneous';
 import { FudisIdService } from '../../utilities/id-service.service';
-import { FudisTranslationConfig } from '../../types/forms';
+import { FudisTranslationService } from '../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'fudis-language-badge-group',
@@ -26,7 +26,7 @@ export class LanguageBadgeGroupComponent implements OnInit {
 
 	protected _currentLanguage: FudisLanguageAbbr = 'en';
 
-	protected _configs: Signal<FudisTranslationConfig>;
+	protected _configs: Signal<FudisTranslationService>;
 
 	@Input() languageOptions: FudisLanguageAbbr[];
 
