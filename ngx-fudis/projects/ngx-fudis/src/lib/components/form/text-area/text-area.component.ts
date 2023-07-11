@@ -17,8 +17,6 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit, OnC
 		super(_translationService);
 
 		effect(() => {
-			this._translations = this._translationService.getTranslations();
-
 			this._maxLengthText = this._translations().TEXTAREA.MAX_LENGTH;
 		});
 	}
