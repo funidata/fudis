@@ -209,8 +209,8 @@ class FormContentExampleComponent {
 		},
 		swedish: { required: 'Missing description in Swedish.', minlength: 'Description should at least 10 characters.' },
 		finnish: {
-			required: 'Missing description in Finnish!!!!',
-			minlength: 'Description should at least 10 characters.',
+			required: 'Missing description in Finnish',
+			minlength: 'Description should at least 10 characters',
 		},
 	};
 
