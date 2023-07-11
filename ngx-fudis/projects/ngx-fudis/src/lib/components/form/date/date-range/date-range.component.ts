@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { distinctUntilChanged } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
-import { untilDestroyed } from 'projects/ngx-fudis/src/lib/utilities/untilDestroyed';
+import { untilDestroyed } from '../../../../utilities/untilDestroyed';
 import { FudisIdService } from '../../../../utilities/id-service.service';
 import { FudisDateRangeItem } from '../../../../types/forms';
 

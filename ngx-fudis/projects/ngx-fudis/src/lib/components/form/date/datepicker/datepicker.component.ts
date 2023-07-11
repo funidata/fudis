@@ -2,8 +2,8 @@ import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, ViewEncapsulati
 import { FormControl, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
-import { FUDIS_DATE_FORMATS, FudisInputWidth } from 'projects/ngx-fudis/src/lib/types/forms';
-import { InputBaseDirective } from 'projects/ngx-fudis/src/lib/directives/form/input-base/input-base.directive';
+import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
+import { FUDIS_DATE_FORMATS, FudisInputWidth } from '../../../../types/forms';
 import { FudisIdService } from '../../../../utilities/id-service.service';
 import { FudisTranslationService } from '../../../../utilities/translation/translation.service';
 
