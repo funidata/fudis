@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
-
 import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { FudisRadioButtonOption } from 'projects/ngx-fudis/src/lib/types/forms';
-
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { FudisRadioButtonOption } from '../../../types/forms';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
