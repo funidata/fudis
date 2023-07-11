@@ -19,8 +19,6 @@ export class FudisErrorSummaryService {
 
 	private _focusToErrors: boolean = true;
 
-	private _firstLoadDone: boolean = false;
-
 	getFocusToErrors(): boolean {
 		return this._focusToErrors;
 	}
