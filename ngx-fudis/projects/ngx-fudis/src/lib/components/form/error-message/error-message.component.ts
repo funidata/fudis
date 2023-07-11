@@ -2,6 +2,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, Input, OnChanges, On
 
 import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
 import { FudisFormErrorSummaryItem } from '../../../types/forms';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'fudis-error-message',
@@ -51,12 +52,17 @@ export class ErrorMessageComponent implements OnChanges, OnDestroy, AfterViewIni
 
 	private _currentLabel: string | undefined = undefined;
 
-	constructor(private _errorSummaryService: FudisErrorSummaryService) {}
+	constructor(
+		private _errorSummaryService: FudisErrorSummaryService,
+		private _translationService: FudisTranslationService
+	) {}
 
 	ngAfterViewInit(): void {
-		if (!this.message) {
-			this.throwError();
-		}
+		setTimeout(() => {
+			if (!this.message) {
+				this.throwError();
+			}
+		}, 1000);
 	}
 
 	createError(): void {
@@ -70,6 +76,7 @@ export class ErrorMessageComponent implements OnChanges, OnDestroy, AfterViewIni
 				label: this._currentLabel,
 				type: this.type,
 				controlName: this.controlName,
+				language: this._translationService.getLanguage(),
 			};
 			this._errorSummaryService.addNewError(newError);
 			this._errorSent = true;

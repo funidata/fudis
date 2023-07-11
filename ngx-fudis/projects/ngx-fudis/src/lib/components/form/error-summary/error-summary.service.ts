@@ -1,20 +1,12 @@
-import { Injectable, Signal, effect, signal } from '@angular/core';
+import { Injectable, Signal, signal } from '@angular/core';
 import {
 	FudisFormErrorSummaryObject,
 	FudisFormErrorSummaryItem,
 	FudisFormErrorSummarySection,
 } from '../../../types/forms';
-import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Injectable({ providedIn: 'root' })
 export class FudisErrorSummaryService {
-	constructor(private _translationService: FudisTranslationService) {
-		effect(() => {
-			this._translationService.getLanguage();
-			this.reloadErrors(0, false);
-		});
-	}
-
 	private _currentErrorList: FudisFormErrorSummaryObject = {};
 
 	private _signalCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
@@ -26,6 +18,8 @@ export class FudisErrorSummaryService {
 	private _currentSections: FudisFormErrorSummarySection[] = [];
 
 	private _focusToErrors: boolean = true;
+
+	private _firstLoadDone: boolean = false;
 
 	getFocusToErrors(): boolean {
 		return this._focusToErrors;
@@ -57,6 +51,8 @@ export class FudisErrorSummaryService {
 
 		const errorId = this.defineErrorId(newError.id, newError.controlName);
 
+		const langUpdated = currentErrors[errorId] && currentErrors[errorId]?.language !== newError.language;
+
 		if (!currentErrors[errorId]) {
 			currentErrors = {
 				...currentErrors,
@@ -64,6 +60,7 @@ export class FudisErrorSummaryService {
 					id: newError.id,
 					errors: { [newError.type]: newError.error },
 					label: newError.label,
+					language: newError.language,
 				},
 			};
 		} else {
@@ -73,11 +70,16 @@ export class FudisErrorSummaryService {
 					id: newError.id,
 					errors: { ...currentErrors[errorId].errors, [newError.type]: newError.error },
 					label: newError.label,
+					language: newError.language,
 				},
 			};
 		}
 
 		this._currentErrorList = currentErrors;
+
+		if (langUpdated) {
+			this.reloadErrors(0, false);
+		}
 	}
 
 	public removeError(error: { id: string; controlName: string | undefined; type: string }): void {

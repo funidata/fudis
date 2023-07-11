@@ -16,6 +16,7 @@ import {
 import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
 import { FormGroupValidators } from '../../../utilities/form/validators';
 import { FormComponent } from './form.component';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'example-form-content',
@@ -40,7 +41,7 @@ import { FormComponent } from './form.component';
 			<ng-template fudisActions type="form">
 				<fudis-button [label]="'Previous step'" [icon]="'back'" [variant]="'tertiary'" />
 				<fudis-button [label]="'Open menu'" [icon]="'three-dots'" [labelHidden]="true" [variant]="'secondary'" />
-				<fudis-button [variant]="'secondary'" [label]="'Save draft'" />
+				<fudis-button [variant]="'secondary'" (handleClick)="changeLanguage()" [label]="'Change language'" />
 				<fudis-button [label]="'Submit'" (handleClick)="submitForm()" />
 			</ng-template>
 			<ng-template fudisContent type="form">
@@ -171,6 +172,20 @@ class FormContentExampleComponent {
 		}
 	}
 
+	changeLanguage(): void {
+		const currentLang = this._translationService.getLanguage();
+
+		if (currentLang === 'fi') {
+			this._translationService.setLanguage('en');
+			// eslint-disable-next-line no-console
+			console.log('Fudis internal language is now: EN');
+		} else {
+			this._translationService.setLanguage('fi');
+			// eslint-disable-next-line no-console
+			console.log('Fudis internal language is now: FI');
+		}
+	}
+
 	handleCollapsedOutput(value: boolean): void {
 		this._collapsed = value;
 	}
@@ -297,7 +312,10 @@ class FormContentExampleComponent {
 		},
 	};
 
-	constructor(private errorSummaryService: FudisErrorSummaryService) {}
+	constructor(
+		private errorSummaryService: FudisErrorSummaryService,
+		private _translationService: FudisTranslationService
+	) {}
 }
 
 export default {
