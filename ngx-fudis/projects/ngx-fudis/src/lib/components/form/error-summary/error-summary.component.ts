@@ -94,9 +94,11 @@ export class ErrorSummaryComponent {
 
 					const parentFieldsetString = parentFieldset ? `${parentFieldset.title} / ` : '';
 
+					const cleanedError = error.replace(/[:!?]/g, '');
+
 					this._visibleErrorList.push({
 						id: errorId,
-						message: `${parentSectionString}${parentFieldsetString}${label}: ${error}`,
+						message: `${parentSectionString}${parentFieldsetString}${label}: ${cleanedError}`,
 					});
 				});
 			}
