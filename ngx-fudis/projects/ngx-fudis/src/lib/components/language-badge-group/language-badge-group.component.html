@@ -2,7 +2,7 @@
 	id="sektio"
 	aria-label="Valitse kieli"
 	class="fudis-language-badge-group"
-	*ngFor="let language of languageOptions; let index = index">
+	*ngFor="let language of _languageOptions; let index = index">
 	<fudis-language-badge
 		[id]="_id + index"
 		(changeLanguage)="updateLanguage($event)"

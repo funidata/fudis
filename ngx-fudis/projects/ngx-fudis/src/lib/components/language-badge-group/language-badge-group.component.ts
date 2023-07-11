@@ -1,5 +1,5 @@
-import { Component, Input, ViewEncapsulation, OnInit, Signal } from '@angular/core';
-import { FudisLanguageAbbr } from '../../types/miscellaneous';
+import { Component, Input, ViewEncapsulation, OnInit, Signal, effect, EventEmitter, Output } from '@angular/core';
+import { FudisLanguageAbbr, FudisTranslationConfig } from '../../types/miscellaneous';
 import { FudisIdService } from '../../utilities/id-service.service';
 import { FudisTranslationService } from '../../utilities/translation/translation.service';
 
@@ -10,7 +10,13 @@ import { FudisTranslationService } from '../../utilities/translation/translation
 	encapsulation: ViewEncapsulation.None,
 })
 export class LanguageBadgeGroupComponent implements OnInit {
-	constructor(private _idService: FudisIdService) {}
+	constructor(private _idService: FudisIdService, private _translationService: FudisTranslationService) {
+		effect(() => {
+			this._currentLanguage = _translationService.getLanguage();
+			this._translations = _translationService.getTranslations();
+			console.log(this._translations().LANGUAGE_BADGE);
+		});
+	}
 
 	/**
 	 * Internal id for Language Badge Group component
@@ -24,11 +30,13 @@ export class LanguageBadgeGroupComponent implements OnInit {
 
 	protected _ariaLabel: string = '';
 
-	protected _currentLanguage: FudisLanguageAbbr = 'en';
+	protected _currentLanguage: FudisLanguageAbbr;
 
-	protected _configs: Signal<FudisTranslationService>;
+	protected _translations: Signal<FudisTranslationConfig>;
 
-	@Input() languageOptions: FudisLanguageAbbr[];
+	protected _languageOptions: FudisLanguageAbbr[] = ['en', 'fi', 'sv'];
+
+	@Output() handleClick = new EventEmitter<FudisLanguageAbbr>();
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('button');
@@ -40,8 +48,8 @@ export class LanguageBadgeGroupComponent implements OnInit {
 	// 	return this._ariaLabel;
 	// }
 
-	updateLanguage(value: any) {
+	updateLanguage(value: FudisLanguageAbbr) {
 		this._currentLanguage = value;
-		console.log('current language is', this._currentLanguage);
+		this.handleClick.emit(this._currentLanguage);
 	}
 }

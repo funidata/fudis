@@ -51,4 +51,11 @@ export interface FudisTranslationConfig {
 		// Alternative text for screen readers. Used in e. g. Error Summary
 		ATTENTION: string;
 	};
+	LANGUAGE_BADGE: {
+		ARIA_LABEL: {
+			FI: string;
+			SV: string;
+			EN: string;
+		};
+	};
 }

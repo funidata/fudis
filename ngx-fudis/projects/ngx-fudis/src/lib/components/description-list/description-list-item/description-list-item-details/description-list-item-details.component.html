@@ -1,4 +1,8 @@
-<dd class="fudis-dl__item__details fudis-dl-compact__item__details">
+<dd
+	class="fudis-dl__item__details fudis-dl-compact__item__details"
+	[class.fudis-dl__item__details__fi]="lang === 'fi'"
+	[class.fudis-dl__item__details__en]="lang === 'en'"
+	[class.fudis-dl__item__details__sv]="lang === 'sv'">
 	<span class="fudis-dl__item__details__sub-heading fudis-dl-compact__item__details__sub-heading" *ngIf="subHeading">
 		{{ subHeading }}
 	</span>

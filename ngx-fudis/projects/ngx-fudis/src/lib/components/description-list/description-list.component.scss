@@ -47,6 +47,12 @@
 			flex-direction: column;
 			margin-left: 0;
 
+			&__fi,
+			&__sv,
+			&__en {
+				display: none;
+			}
+
 			&__content {
 				display: flex;
 				flex-direction: column;

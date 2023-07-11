@@ -14,6 +14,13 @@ export const en: FudisTranslationConfig = {
 	ICON: {
 		ATTENTION: 'Attention',
 	},
+	LANGUAGE_BADGE: {
+		ARIA_LABEL: {
+			FI: 'Finnish',
+			SV: 'Swedish',
+			EN: 'English',
+		},
+	},
 };
 
 export const fi: FudisTranslationConfig = {
@@ -30,6 +37,13 @@ export const fi: FudisTranslationConfig = {
 	ICON: {
 		ATTENTION: 'Huomio',
 	},
+	LANGUAGE_BADGE: {
+		ARIA_LABEL: {
+			FI: 'Suomeksi',
+			SV: 'Ruotsiksi',
+			EN: 'Englanniksi',
+		},
+	},
 };
 
 export const sv: FudisTranslationConfig = {
@@ -45,5 +59,12 @@ export const sv: FudisTranslationConfig = {
 	},
 	ICON: {
 		ATTENTION: 'Observera',
+	},
+	LANGUAGE_BADGE: {
+		ARIA_LABEL: {
+			FI: 'På Finska',
+			SV: 'På Svenska',
+			EN: 'På Engelska',
+		},
 	},
 };

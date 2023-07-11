@@ -1,0 +1,17 @@
+.fudis-dt-host {
+	&__fi {
+		& ~ fudis-dd .fudis-dl__item__details__fi {
+			display: block;
+		}
+	}
+	&__en {
+		& ~ fudis-dd .fudis-dl__item__details__en {
+			display: block;
+		}
+	}
+	&__sv {
+		& ~ fudis-dd .fudis-dl__item__details__sv {
+			display: block;
+		}
+	}
+}

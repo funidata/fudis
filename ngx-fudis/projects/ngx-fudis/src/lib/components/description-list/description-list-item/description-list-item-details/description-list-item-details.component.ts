@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ContentChild, Input } from '@angular/core';
+import { FudisLanguageAbbr } from '../../../../types/miscellaneous';
 import { ActionsDirective } from '../../../../directives/content-projection/actions/actions.directive';
 
 @Component({
@@ -7,6 +8,8 @@ import { ActionsDirective } from '../../../../directives/content-projection/acti
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DescriptionListItemDetailsComponent {
+	@Input() lang: FudisLanguageAbbr;
+
 	@ContentChild(ActionsDirective) actions: ActionsDirective;
 
 	@Input() subHeading: string | undefined;
