@@ -3,6 +3,7 @@ import {
 	FudisFormErrorSummaryObject,
 	FudisFormErrorSummaryItem,
 	FudisFormErrorSummarySection,
+	FudisErrorSummaryParent,
 } from '../../../types/forms';
 
 @Injectable({ providedIn: 'root' })
@@ -13,12 +14,18 @@ export class FudisErrorSummaryService {
 
 	private _signalDynamicCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
 
+	private _errorSummaryParentList = signal<FudisErrorSummaryParent[]>([]);
+
 	private _currentFieldsets: FudisFormErrorSummarySection[] = [];
 
 	private _currentSections: FudisFormErrorSummarySection[] = [];
 
 	getFieldsetList(): FudisFormErrorSummarySection[] {
 		return this._currentFieldsets;
+	}
+
+	getFormsWithErrorSummary(): Signal<FudisErrorSummaryParent[]> {
+		return this._errorSummaryParentList.asReadonly();
 	}
 
 	getSectionList(): FudisFormErrorSummarySection[] {
@@ -131,5 +138,32 @@ export class FudisErrorSummaryService {
 			this._signalCurrentErrorList.set(this._currentErrorList);
 			this._signalDynamicCurrentErrorList.set(this._currentErrorList);
 		}, delay);
+	}
+
+	public addErrorSummaryParent(parent: FudisErrorSummaryParent): void {
+		const currentParents = this._errorSummaryParentList();
+
+		const existingItem = currentParents.find((item) => {
+			return item.formId === parent.formId;
+		});
+
+		if (existingItem) {
+			const index = currentParents.indexOf(existingItem);
+			currentParents[index] = parent;
+		} else {
+			currentParents.push(parent);
+		}
+
+		this._errorSummaryParentList.set(currentParents);
+	}
+
+	public removeErrorSummaryParent(parent: FudisErrorSummaryParent): void {
+		const currentParents = this._errorSummaryParentList();
+
+		const filtered = currentParents.filter((item) => {
+			return item.formId !== parent.formId;
+		});
+
+		this._errorSummaryParentList.set(filtered);
 	}
 }
