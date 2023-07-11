@@ -1,0 +1,41 @@
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import { linkTo } from '@storybook/addon-links';
+import { TextAreaComponent } from './text-area.component';
+import * as TextAreaStories from './text-area.stories.ts';
+
+<Meta title="Components/Form/Text-area" />
+
+# Text area
+
+Basic text area component to use inside forms. 
+
+Text area can only be resized vertically, horizontal resizing is disabled to avoid layout breaking. Additional features include possibility to add tooltip to the label and maximum character indicator to the bottom right corner.
+
+## Examples
+
+<Canvas of={TextAreaStories.Examples}></Canvas>
+
+## Usage Guidelines
+
+#### Mandatory Properties
+
+Necessary properties for text area are `label` and `control`.
+
+#### As a required form field
+
+If text-area is a required form field include `Validators.required` in the form control validators and include a `required` error message in the `errorMsg` property.
+
+### Error Handling
+
+- **Required** error is shown if text-area is required and
+  - if control is touched and
+			- text area value is empty
+
+### Accessibility
+
+- Label and guidance are linked to the text-area via id
+- Screen reader is informed when maximum character length has 5 characters left and when maximum character count is reached
+
+## Properties
+
+<ArgTypes of={TextAreaComponent} />
