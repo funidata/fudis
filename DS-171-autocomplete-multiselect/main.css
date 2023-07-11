@@ -1320,26 +1320,14 @@ html {
   font-size: 0.75rem;
 }
 
-.mat-stepper-vertical, .mat-stepper-horizontal {
-  font-family: Fira Sans;
-}
-
-.mat-step-label {
-  font-size: 1rem;
-  font-weight: 400;
-}
-
-.mat-step-sub-label-error {
-  font-weight: normal;
-}
-
-.mat-step-label-error {
-  font-size: 1.125rem;
-}
-
-.mat-step-label-selected {
-  font-size: 1.125rem;
-  font-weight: 500;
+html {
+  --mat-stepper-container-text-font: Fira Sans;
+  --mat-stepper-header-label-text-font: Fira Sans;
+  --mat-stepper-header-label-text-size: 1rem;
+  --mat-stepper-header-label-text-weight: 400;
+  --mat-stepper-header-error-state-label-text-size: 1.125rem;
+  --mat-stepper-header-selected-state-label-text-size: 1.125rem;
+  --mat-stepper-header-selected-state-label-text-weight: 500;
 }
 
 .mat-toolbar,
@@ -1561,32 +1549,12 @@ html {
   --mdc-slider-label-label-text-weight: 400;
 }
 
-.mat-mdc-menu-content {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-family: var(--mdc-typography-subtitle1-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-subtitle1-font-size, 1.25rem);
-  line-height: var(--mdc-typography-subtitle1-line-height, 1.75rem);
-  font-weight: var(--mdc-typography-subtitle1-font-weight, 500);
-  letter-spacing: var(--mdc-typography-subtitle1-letter-spacing, normal);
-  -webkit-text-decoration: var(--mdc-typography-subtitle1-text-decoration, inherit);
-          text-decoration: var(--mdc-typography-subtitle1-text-decoration, inherit);
-  text-transform: var(--mdc-typography-subtitle1-text-transform, none);
-  /* @alternate */
-  line-height: 1.125rem;
-}
-.mat-mdc-menu-content,
-.mat-mdc-menu-content .mat-mdc-menu-item .mdc-list-item__primary-text {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-family: var(--mdc-typography-body1-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-body1-font-size, 1.125rem);
-  line-height: var(--mdc-typography-body1-line-height, 1.125rem);
-  font-weight: var(--mdc-typography-body1-font-weight, 500);
-  letter-spacing: var(--mdc-typography-body1-letter-spacing, normal);
-  -webkit-text-decoration: var(--mdc-typography-body1-text-decoration, inherit);
-          text-decoration: var(--mdc-typography-body1-text-decoration, inherit);
-  text-transform: var(--mdc-typography-body1-text-transform, none);
+html {
+  --mat-menu-item-label-text-font: Fira Sans;
+  --mat-menu-item-label-text-size: 1.125rem;
+  --mat-menu-item-label-text-tracking: normal;
+  --mat-menu-item-label-text-line-height: 1.125rem;
+  --mat-menu-item-label-text-weight: 500;
 }
 
 .mat-mdc-list-base {
