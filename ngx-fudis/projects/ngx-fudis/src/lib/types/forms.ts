@@ -1,6 +1,5 @@
 import { FormControl } from '@angular/forms';
 import { MatDateFormats, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
-import { Observable } from 'rxjs';
 import { FudisLanguageAbbr } from './miscellaneous';
 
 export type FudisInputWidth = 'sm' | 'md' | 'lg';
@@ -66,6 +65,11 @@ export type FudisFormErrorSummaryObject = {
 	};
 };
 
+export type FudisFormErrorSummarySection = {
+	id: string;
+	title: string;
+};
+
 export type FudisFormErrorSummaryList = {
 	id: string;
 	message: string;
@@ -84,32 +88,6 @@ export type FudisDropdownLanguageOption =
 export interface FudisInputWithLanguageOptionsFormGroup {
 	[language: string]: FormControl<string | null>;
 }
-
-export interface FudisTranslationConfig {
-	// Shown with form inputs
-	requiredText?: Observable<string>;
-	// Used in e. g. to define Date picker language
-	appLanguage?: FudisLanguageAbbr | string;
-	datepicker?: {
-		// Label for close button
-		closeLabel?: Observable<string>;
-	};
-	dialog?: {
-		// Label for close button
-		closeLabel?: Observable<string>;
-	};
-	inputWithLanguageOptions?: {
-		// Label for language selection dropdown
-		languageLabel?: Observable<string>;
-		// Text shown in dropdown options if input for a language is missing
-		missingLanguage?: Observable<string>;
-	};
-	icon?: {
-		// Alternative text for screen readers. Used in e. g. Error Summary
-		attention?: Observable<string>;
-	};
-}
-
 export interface FudisDateRangeItem {
 	control: FormControl<Date | null>;
 	label: string;
@@ -135,3 +113,5 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
 		dateInput: FudisDateInputFormat as Intl.DateTimeFormatOptions,
 	},
 };
+
+export type FudisFormErrorSummaryLink = 'router' | 'href';

@@ -35,7 +35,6 @@ const TemplateAllRequired: StoryFn = () => ({
 		id: 'unique-input-id-superhero-name',
 		label: 'Your superhero name',
 		helpText: 'Please provide superhero name in all languages.',
-		requiredText: 'Required',
 		groupErrorMsg: {
 			english: {
 				required: 'Missing superhero name on English.',
@@ -63,7 +62,6 @@ const TemplateAllRequired: StoryFn = () => ({
 			swedish: new FormControl<string | null>(null, [Validators.required, Validators.maxLength(12)]),
 			english: new FormControl<string | null>(null, [Validators.required, Validators.maxLength(12)]),
 		}),
-		missingLanguage: 'Missing',
 	},
 	template: html`
 		<fudis-input-with-language-options
@@ -72,10 +70,7 @@ const TemplateAllRequired: StoryFn = () => ({
 			[formGroup]="formGroup"
 			[label]="label"
 			[helpText]="helpText"
-			[languageLabel]="'Language'"
-			[groupErrorMsg]="groupErrorMsg"
-			[missingLanguage]="missingLanguage"
-			[requiredText]="requiredText"></fudis-input-with-language-options>
+			[groupErrorMsg]="groupErrorMsg" />
 	`,
 });
 
@@ -84,7 +79,6 @@ const TemplateOneRequired: StoryFn = () => ({
 		id: 'unique-input-id-superhero-name',
 		label: 'Your superhero name',
 		helpText: 'Please provide superhero name in atleast one language.',
-		requiredText: 'Required',
 		groupErrorMsg: {
 			atLeastOneRequired: 'Missing superhero name! Name in atleast one language is required.',
 			english: {
@@ -113,7 +107,6 @@ const TemplateOneRequired: StoryFn = () => ({
 			},
 			[FormGroupValidators.atLeastOneRequired()]
 		),
-		missingLanguage: 'Missing',
 	},
 	template: html`
 		<fudis-input-with-language-options
@@ -121,11 +114,8 @@ const TemplateOneRequired: StoryFn = () => ({
 			[options]="languageOptions"
 			[formGroup]="formGroup"
 			[label]="label"
-			[languageLabel]="'Language'"
 			[helpText]="helpText"
-			[groupErrorMsg]="groupErrorMsg"
-			[missingLanguage]="missingLanguage"
-			[requiredText]="requiredText"></fudis-input-with-language-options>
+			[groupErrorMsg]="groupErrorMsg" />
 	`,
 });
 

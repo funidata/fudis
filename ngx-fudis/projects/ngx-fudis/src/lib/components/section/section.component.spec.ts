@@ -7,15 +7,16 @@ import { FudisGridService } from '../../directives/grid/grid-service/grid.servic
 
 import { FudisIdService } from '../../utilities/id-service.service';
 import { GridDirective } from '../../directives/grid/grid/grid.directive';
+import { FudisErrorSummaryService } from '../form/error-summary/error-summary.service';
 
-describe('FormSectionComponent', () => {
+describe('SectionComponent', () => {
 	let component: SectionComponent;
 	let fixture: ComponentFixture<SectionComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [SectionComponent, HeadingComponent, GridDirective],
-			providers: [FudisGridService, FudisIdService],
+			providers: [FudisGridService, FudisIdService, FudisErrorSummaryService],
 		});
 		fixture = TestBed.createComponent(SectionComponent);
 

@@ -15,6 +15,7 @@
 	<ng-container *ngIf="routerLinkUrl">
 		<a
 			[routerLink]="routerLinkUrl"
+			[fragment]="fragmentId"
 			class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__{{ color }}">
 			{{ linkTitle ? linkTitle : href }}
 		</a>

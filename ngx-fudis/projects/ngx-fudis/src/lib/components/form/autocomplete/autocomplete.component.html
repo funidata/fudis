@@ -3,7 +3,7 @@
 		[text]="label"
 		[id]="_id + '__label'"
 		[for]="_id"
-		[requiredText]="requiredText"
+		[requiredText]="_required ? _requiredText : undefined"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle">
@@ -23,7 +23,7 @@
 			[attr.aria-describedby]="_id + '_guidance'"
 			[readonly]="disabled"
 			[attr.aria-disabled]="disabled"
-			[attr.required]="requiredText ? true : null" />
+			[attr.required]="_required ? true : null" />
 		<ng-container *ngIf="_autocompleteFormControl.value">
 			<fudis-button
 				class="fudis-autocomplete__input__icon"
@@ -31,7 +31,7 @@
 				[variant]="'tertiary'"
 				[icon]="'close'"
 				(handleClick)="clearFilter()"
-				[label]="clearFilterText"
+				[label]="_clearFilterText"
 				[labelHidden]="true">
 			</fudis-button>
 		</ng-container>

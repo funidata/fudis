@@ -1,24 +1,24 @@
 <div class="fudis-form-element fudis-text-area fudis-text-area__{{ size }}">
 	<fudis-label
-		[for]="id"
-		[id]="'label_' + id"
+		[for]="_id"
+		[id]="'label_' + _id"
 		[text]="label"
-		[requiredText]="requiredText"
+		[requiredText]="_required ? _requiredText : undefined"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle">
 	</fudis-label>
 	<textarea
-		[id]="id"
+		[id]="_id"
 		[formControl]="control"
 		(blur)="onBlur($event)"
 		class="fudis-text-area__input"
 		[class.fudis-text-area__input--invalid]="(control.touched && control.invalid) || invalidState"
-		[attr.aria-describedby]="id + '_guidance'"
+		[attr.aria-describedby]="_id + '_guidance'"
 		[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
 		[attr.minLength]="minLength"
 		[attr.maxLength]="maxLength"
-		[attr.required]="requiredText ? true : null">
+		[attr.required]="_required ? true : null">
 	</textarea>
 	<ng-container *ngIf="helpText || errorMsg">
 		<fudis-guidance
@@ -26,7 +26,7 @@
 			[maxLengthText]="maxLengthText"
 			[maxLength]="maxLength"
 			[helpText]="helpText"
-			[for]="id"
+			[for]="_id"
 			[errorMsg]="errorMsg"
 			[control]="control">
 		</fudis-guidance>

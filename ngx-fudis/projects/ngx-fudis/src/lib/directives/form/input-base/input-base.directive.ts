@@ -1,19 +1,21 @@
 import { Directive, Input, EventEmitter, Output, Signal, effect } from '@angular/core';
 
-import { FudisFormErrors, FudisTranslationConfig } from '../../../types/forms';
+import { FudisFormErrors } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
-import { FudisTranslationConfigService } from '../../../utilities/config.service';
-import { untilDestroyed } from '../../../utilities/untilDestroyed';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
+import { FudisTranslationConfig } from '../../../types/miscellaneous';
 
 @Directive({
 	selector: '[fudisInputBase]',
 })
 export class InputBaseDirective extends TooltipApiDirective {
-	constructor(protected _configService: FudisTranslationConfigService) {
+	constructor(protected _translationService: FudisTranslationService) {
 		super();
 
 		effect(() => {
-			this._configs = this._configService.getConfig();
+			this._translations = this._translationService.getTranslations();
+
+			this._requiredText = this._translations().REQUIRED;
 		});
 	}
 
@@ -38,11 +40,6 @@ export class InputBaseDirective extends TooltipApiDirective {
 	@Input() disabled: boolean = false;
 
 	/**
-	 * Text to indicate compulsory.
-	 */
-	@Input() requiredText: string | undefined;
-
-	/**
 	 * Help text, aligned underneath the input.
 	 */
 	@Input() helpText: string | undefined;
@@ -59,9 +56,9 @@ export class InputBaseDirective extends TooltipApiDirective {
 	@Input() invalidState: boolean = false;
 
 	/**
-	 * To ignore initial check if input has both requiredText and control Validators.required
+	 * Set form input as required. By default set to 'undefined' and this attribute is determined to true / false depending on if FormControl has Validators.required. This setting will override that.
 	 */
-	@Input() ignoreRequiredCheck: boolean = false;
+	@Input() required: boolean | undefined = undefined;
 
 	/**
 	 * To listen for input's blur event.
@@ -73,21 +70,11 @@ export class InputBaseDirective extends TooltipApiDirective {
 	 */
 	protected _id: string;
 
-	protected _configs: Signal<FudisTranslationConfig>;
+	protected _translations: Signal<FudisTranslationConfig>;
 
 	protected _requiredText: string;
 
 	protected _required: boolean = false;
-
-	protected _untilDestroyed = untilDestroyed();
-
-	protected subscribeToRequiredText(): void {
-		this._configs()
-			.requiredText!.pipe(this._untilDestroyed())
-			.subscribe((value) => {
-				this._requiredText = value;
-			});
-	}
 
 	public onBlur(event: Event): void {
 		this.handleBlur.emit(event);

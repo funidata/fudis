@@ -1,4 +1,5 @@
 @use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/colors/mixins.scss' as colors;
 @use '../../../foundations/spacing/tokens.scss' as spacing;
 @use '../../../foundations/utilities/mixins.scss' as utilities;
 @use '../../../foundations/focus/mixins.scss' as focus;
@@ -16,6 +17,10 @@
 		display: none;
 	}
 
+	&__icon {
+		margin-top: spacing.$spacing-xs;
+	}
+
 	&__errors {
 		&__help-text {
 			margin-top: spacing.$spacing-xs;
@@ -23,16 +28,34 @@
 	}
 
 	&__error-list {
-		margin-top: spacing.$spacing-xxs;
+		@include utilities.box-reset;
+
+		margin-top: spacing.$spacing-xs;
 		margin-bottom: spacing.$spacing-xs;
 		padding-left: 0;
+		list-style: none;
 
 		&__item {
+			position: relative;
 			margin-left: spacing.$spacing-sm;
 			padding-left: spacing.$spacing-xxs;
 
+			&::before {
+				@include colors.bg-color('gray-dark');
+
+				position: absolute;
+				top: 50%;
+				left: 0;
+				transform: translate(-1 * spacing.$spacing-xs, -50%);
+				border-radius: spacing.$spacing-xxl;
+				width: spacing.$pixel-3;
+				height: spacing.$pixel-3;
+				vertical-align: middle;
+				content: '';
+			}
+
 			&:not(:last-of-type) {
-				margin-bottom: spacing.$spacing-xxs;
+				margin-bottom: spacing.$spacing-xs;
 			}
 		}
 	}

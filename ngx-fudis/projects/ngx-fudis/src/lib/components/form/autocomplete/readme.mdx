@@ -9,7 +9,7 @@ import * as AutocompleteStories from './autocomplete.stories.ts';
 
 Fudis-autocomplete (single-select) is based on Angular Material Autocomplete.
 
-Autocomplete is a search input providing user with a list of suggestions. There are two variants for single-select autocomplete: `search` and `dropdown`. 
+Autocomplete is a search input providing user with a list of suggestions. There are two variants for single-select autocomplete: `search` and `dropdown`.
 
 **Search** variant is expecting user input and the option filtering is triggered after three characters. **Dropdown** variant will display options in a dropdown when input is focused, options can be filtered by typing. Filtering is triggered from the first character.
 
@@ -28,7 +28,7 @@ Autocomplete is designed to use when basic [dropdown](/story/components-form-dro
 
 #### Mandatory Properties
 
-Autocomplete requires at least `label` and `options` object array with possible option values. For accessibility it is also mandatory to give `clearFilterText` which is passed to clear-button's aria-label.
+Autocomplete requires at least `label` and `options` object array with possible option values.
 
 Options array takes in objects with the following signature:
 
@@ -47,14 +47,14 @@ Options array takes in objects with the following signature:
 
 #### As a required form field
 
-If Autocomplete is a required form field, provide `requiredText` string property, include `Validators.required` in the form control validators and include a `required` error message in the `errorMsg` property.
+If Autocomplete is a required form field, include `Validators.required` in the form control validators and include a `required` error message in the `errorMsg` property.
 
 ### Error Handling
 
 - **Required** error is shown if input is required and
   - if control is touched and
-			- input value is empty or
-			- input value does not match to any option.value
+    - input value is empty or
+    - input value does not match to any option.value
 
 ### Accessibility
 

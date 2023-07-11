@@ -85,9 +85,8 @@ class DialogExampleContentComponent {}
 								[id]="'example-input-power-animal'"
 								[label]="'What is your power animal?'"
 								[control]="exampleDialogFormGroup.controls['powerAnimal']"
-								[requiredText]="'Required'"
 								[helpText]="'Please add some values'"
-								[errorMsg]="{ required: 'This is required field.' }"></fudis-text-input>
+								[errorMsg]="{ required: 'This is required field.' }" />
 						</form>
 					</ng-container>
 				</fudis-dialog-content>
