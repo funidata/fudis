@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 type ComponentType =
 	| 'autocomplete'
+	| 'button'
 	| 'checkbox'
 	| 'datepicker'
 	| 'daterange'
@@ -25,6 +26,7 @@ type IdInformation = {
 export class FudisIdService {
 	private _idList: IdInformation = {
 		autocomplete: 0,
+		button: 0,
 		checkbox: 0,
 		datepicker: 0,
 		daterange: 0,

@@ -1,5 +1,11 @@
-<ul class="fudis-language-badge-group">
-	<li *ngFor="let item of languageOptions" class="fudis-language-badge-group__items">
-		<fudis-language-badge (changeLanguage)="updateLanguage($event)" [language]="item"></fudis-language-badge>
-	</li>
-</ul>
+<section
+	id="sektio"
+	aria-label="Valitse kieli"
+	class="fudis-language-badge-group"
+	*ngFor="let language of languageOptions; let index = index">
+	<fudis-language-badge
+		[id]="_id + index"
+		(changeLanguage)="updateLanguage($event)"
+		[language]="language"
+		[attr.aria-label]="_ariaLabel"></fudis-language-badge>
+</section>
