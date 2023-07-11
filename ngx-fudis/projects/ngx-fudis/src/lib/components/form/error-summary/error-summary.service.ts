@@ -3,7 +3,7 @@ import {
 	FudisFormErrorSummaryObject,
 	FudisFormErrorSummaryItem,
 	FudisFormErrorSummarySection,
-	FudisErrorSummaryInfo,
+	FudisErrorSummaryParent,
 } from '../../../types/forms';
 
 @Injectable({ providedIn: 'root' })
@@ -14,7 +14,7 @@ export class FudisErrorSummaryService {
 
 	private _signalDynamicCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
 
-	private _errorSummaryList = signal<FudisErrorSummaryInfo[]>([]);
+	private _errorSummaryParentList = signal<FudisErrorSummaryParent[]>([]);
 
 	private _currentFieldsets: FudisFormErrorSummarySection[] = [];
 
@@ -22,6 +22,10 @@ export class FudisErrorSummaryService {
 
 	getFieldsetList(): FudisFormErrorSummarySection[] {
 		return this._currentFieldsets;
+	}
+
+	getFormsWithErrorSummary(): Signal<FudisErrorSummaryParent[]> {
+		return this._errorSummaryParentList.asReadonly();
 	}
 
 	getSectionList(): FudisFormErrorSummarySection[] {
@@ -136,30 +140,30 @@ export class FudisErrorSummaryService {
 		}, delay);
 	}
 
-	public addErrorSummary(summary: FudisErrorSummaryInfo): void {
-		const currentSummaries = this._errorSummaryList();
+	public addErrorSummaryParent(parent: FudisErrorSummaryParent): void {
+		const currentParents = this._errorSummaryParentList();
 
-		const existingItem = currentSummaries.find((item) => {
-			return item.formId === summary.formId;
+		const existingItem = currentParents.find((item) => {
+			return item.formId === parent.formId;
 		});
 
 		if (existingItem) {
-			const index = currentSummaries.indexOf(existingItem);
-			currentSummaries[index] = summary;
+			const index = currentParents.indexOf(existingItem);
+			currentParents[index] = parent;
 		} else {
-			currentSummaries.push(summary);
+			currentParents.push(parent);
 		}
 
-		this._errorSummaryList.set(currentSummaries);
+		this._errorSummaryParentList.set(currentParents);
 	}
 
-	public removeErrorSummary(summary: FudisErrorSummaryInfo): void {
-		const currentSummaries = this._errorSummaryList();
+	public removeErrorSummaryParent(parent: FudisErrorSummaryParent): void {
+		const currentParents = this._errorSummaryParentList();
 
-		const filtered = currentSummaries.filter((item) => {
-			return item.formId !== summary.formId;
+		const filtered = currentParents.filter((item) => {
+			return item.formId !== parent.formId;
 		});
 
-		this._errorSummaryList.set(filtered);
+		this._errorSummaryParentList.set(filtered);
 	}
 }

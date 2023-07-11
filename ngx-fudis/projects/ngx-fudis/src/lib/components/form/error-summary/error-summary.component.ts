@@ -19,7 +19,7 @@ import {
 	FudisFormErrorSummaryList,
 	FudisFormErrorSummarySection,
 	FudisFormErrorSummaryLink,
-	FudisErrorSummaryInfo,
+	FudisErrorSummaryParent,
 } from '../../../types/forms';
 import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 import { FudisLanguageAbbr, FudisTranslationConfig } from '../../../types/miscellaneous';
@@ -55,7 +55,7 @@ export class ErrorSummaryComponent implements OnChanges, OnDestroy {
 
 	private _currentLanguage: FudisLanguageAbbr | undefined = undefined;
 
-	private _errorSummaryInfo: FudisErrorSummaryInfo;
+	private _errorSummaryParentInfo: FudisErrorSummaryParent;
 
 	constructor(
 		@Inject(DOCUMENT) private _document: Document,
@@ -153,15 +153,15 @@ export class ErrorSummaryComponent implements OnChanges, OnDestroy {
 	}
 
 	ngOnChanges(): void {
-		this._errorSummaryInfo = {
+		this._errorSummaryParentInfo = {
 			formId: this.parentComponent.querySelector('.fudis-form')?.getAttribute('id'),
 			parentElement: this.parentComponent,
 		};
 
-		this._errorSummaryService.addErrorSummary(this._errorSummaryInfo);
+		this._errorSummaryService.addErrorSummaryParent(this._errorSummaryParentInfo);
 	}
 
 	ngOnDestroy(): void {
-		this._errorSummaryService.removeErrorSummary(this._errorSummaryInfo);
+		this._errorSummaryService.removeErrorSummaryParent(this._errorSummaryParentInfo);
 	}
 }

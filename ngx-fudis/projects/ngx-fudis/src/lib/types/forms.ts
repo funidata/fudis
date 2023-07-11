@@ -72,7 +72,7 @@ export type FudisFormErrorSummarySection = {
 	title: string;
 };
 
-export type FudisErrorSummaryInfo = {
+export type FudisErrorSummaryParent = {
 	formId: string | null | undefined;
 	parentElement: HTMLFormElement;
 };
