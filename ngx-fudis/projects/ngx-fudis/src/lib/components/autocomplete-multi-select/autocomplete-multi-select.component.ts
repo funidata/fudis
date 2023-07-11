@@ -15,7 +15,7 @@ import { InputBaseDirective } from '../../directives/form/input-base/input-base.
 import { FudisDropdownOption, FudisInputWidth } from '../../types/forms';
 import { FudisIdService } from '../../utilities/id-service.service';
 import { FudisDropdownMenuItemService } from '../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
-import { FudisTranslationConfigService } from '../../utilities/config.service';
+import { FudisTranslationService } from '../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'fudis-autocomplete-multi-select',
@@ -27,9 +27,9 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	constructor(
 		private _idService: FudisIdService,
 		private _clickService: FudisDropdownMenuItemService,
-		_configService: FudisTranslationConfigService
+		_translationService: FudisTranslationService
 	) {
-		super(_configService);
+		super(_translationService);
 
 		this._menuStatus = this._clickService.getMenuStatus();
 
