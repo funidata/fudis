@@ -43,7 +43,6 @@
 
 	&__checkbox {
 		display: block;
-		padding: spacing.$spacing-xs spacing.$spacing-xs spacing.$spacing-xs 0;
 		width: auto;
 
 		&:hover {
@@ -76,6 +75,7 @@
 			display: flex;
 			align-items: center;
 			margin-bottom: 0;
+			padding: spacing.$spacing-xs spacing.$spacing-xs spacing.$spacing-xs 0;
 
 			&__text {
 				position: relative;

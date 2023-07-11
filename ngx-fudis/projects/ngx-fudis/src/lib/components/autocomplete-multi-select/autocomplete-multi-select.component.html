@@ -28,7 +28,7 @@
 			[variant]="'tertiary'"
 			[icon]="'chevron'"
 			[iconRotate]="_toggleOn ? 'ccw-90' : 'cw-90'"
-			[label]="!_toggleOn ? openAriaLabel : closeAriaLabel"
+			[label]="!_toggleOn ? _openAriaLabel : _closeAriaLabel"
 			[labelHidden]="true">
 		</fudis-button>
 	</div>
@@ -44,12 +44,12 @@
 				</fudis-dropdown-menu-item>
 			</ng-container>
 			<ng-container *ngIf="_results.length === 0">
-				<fudis-body-text [size]="'md-light'">{{ noResultsFound }}</fudis-body-text>
+				<fudis-body-text [size]="'md-light'">{{ _noResultsFound }}</fudis-body-text>
 			</ng-container>
 		</fudis-dropdown-menu>
 	</ng-container>
 	<ng-container *ngIf="selectedOptions.length > 0">
-		<span id="remove-items" class="fudis-visually-hidden">{{ removeItemText }}</span>
+		<span id="remove-items" class="fudis-visually-hidden">{{ _removeItemText }}</span>
 		<fudis-autocomplete-multi-select-selected-item-chip
 			id="selected-items"
 			(deleteItem)="handleDeleteItem()"

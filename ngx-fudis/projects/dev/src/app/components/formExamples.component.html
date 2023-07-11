@@ -60,16 +60,14 @@
 					[options]="multipleOptions"
 					[control]="testFormGroup.controls['autocompleteDropdown']"
 					[errorMsg]="{ required: t('error_required') }" />
-				<fudis-heading [tag]="'h3'" [size]="'xl'">Single-select search</fudis-heading>
+				<fudis-heading [tag]="'h3'" [size]="'md'">Single-select search</fudis-heading>
 				<fudis-autocomplete
 					[label]="'Search item'"
 					[options]="multipleOptions"
 					[control]="testFormGroup.controls['autocompleteSearch']"
-					[errorMsg]="{ required: t('error_required') }"></fudis-autocomplete>
+					[errorMsg]="{ required: t('error_required') }" />
 				<fudis-heading [tag]="'h3'" [size]="'md'">Autocomplete multi-select dropdown</fudis-heading>
-				<fudis-autocomplete-multi-select
-					[label]="'Search and choose items'"
-					[options]="multipleOptions"></fudis-autocomplete-multi-select>
+				<fudis-autocomplete-multi-select [label]="'Search and choose items'" [options]="multipleOptions" />
 			</fudis-grid>
 		</ng-template>
 	</fudis-expandable>

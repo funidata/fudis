@@ -35,6 +35,11 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 
 		effect(() => {
 			this.closeMenu(this._menuStatus());
+
+			this._openAriaLabel = this._translations().AUTOCOMPLETE.MULTISELECT.OPEN_DROPDOWN;
+			this._closeAriaLabel = this._translations().AUTOCOMPLETE.MULTISELECT.CLOSE_DROPDOWN;
+			this._noResultsFound = this._translations().AUTOCOMPLETE.MULTISELECT.NO_RESULTS;
+			this._removeItemText = this._translations().AUTOCOMPLETE.MULTISELECT.REMOVE_ITEM;
 		});
 	}
 
@@ -48,34 +53,14 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	@Input() size: FudisInputWidth = 'lg';
 
 	/**
-	 * Dropdown options
+	 * Dropdown options to display
 	 */
 	@Input({ required: true }) options: FudisDropdownOption[] = [];
 
 	/**
-	 * Selected options
+	 * Array of selected dropdown options which user is clicking. Can also be used to set preselected options.
 	 */
 	@Input() selectedOptions: FudisDropdownOption[] = [];
-
-	/**
-	 * Aria-label for icon-only button when opening dropdown
-	 */
-	@Input() openAriaLabel: string = 'Open dropdown';
-
-	/**
-	 * Aria-label for icon-only button when closing dropdown
-	 */
-	@Input() closeAriaLabel: string = 'Close dropdown';
-
-	/**
-	 * Label for situations where no results with current filters were found
-	 */
-	@Input() noResultsFound: string = 'No results were found';
-
-	/**
-	 * Aria-label to indicate deleting item chip
-	 */
-	@Input() removeItemText: string = 'Remove filter';
 
 	/**
 	 * Output for item click
@@ -83,14 +68,34 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	@Output() itemChange = new EventEmitter<FudisDropdownOption[]>();
 
 	/**
-	 * Internal variable for toggle dropdown visibility
+	 * Internal property for toggle dropdown visibility
 	 */
 	protected _toggleOn: boolean;
 
 	/**
-	 * Internal variable for listening menu toggle Signal
+	 * Internal property for listening menu toggle Signal
 	 */
 	private _menuStatus: Signal<boolean>;
+
+	/**
+	 * Internal property for icon-only button aria-label when opening dropdown
+	 */
+	protected _openAriaLabel: string;
+
+	/**
+	 * Internal property for icon-only button aria-label when closing dropdown
+	 */
+	protected _closeAriaLabel: string;
+
+	/**
+	 * Internal property label for situations where no results with current filters were found
+	 */
+	protected _noResultsFound: string;
+
+	/**
+	 * Internal property to indicate deleting item chip aria-label
+	 */
+	protected _removeItemText: string;
 
 	/**
 	 * Internal variable for user input filtering

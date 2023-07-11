@@ -12,6 +12,18 @@ const inputBaseDirectiveExcludes = [
 	'requiredText',
 	'onBlur',
 	'handleBlur',
+	'_closeAriaLabel',
+	'_filterText',
+	'_menuStatus',
+	'_noResultsFound',
+	'_openAriaLabel',
+	'_removeItemText',
+	'_results',
+	'_toggleOn',
+	'_id',
+	'_required',
+	'_requiredText',
+	'_translations',
 ];
 
 export default {
