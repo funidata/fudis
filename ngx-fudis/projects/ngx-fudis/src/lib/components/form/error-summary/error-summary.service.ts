@@ -3,6 +3,7 @@ import {
 	FudisFormErrorSummaryObject,
 	FudisFormErrorSummaryItem,
 	FudisFormErrorSummarySection,
+	FudisErrorSummaryInfo,
 } from '../../../types/forms';
 
 @Injectable({ providedIn: 'root' })
@@ -12,6 +13,8 @@ export class FudisErrorSummaryService {
 	private _signalCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
 
 	private _signalDynamicCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
+
+	private _errorSummaryList = signal<FudisErrorSummaryInfo[]>([]);
 
 	private _currentFieldsets: FudisFormErrorSummarySection[] = [];
 
@@ -131,5 +134,32 @@ export class FudisErrorSummaryService {
 			this._signalCurrentErrorList.set(this._currentErrorList);
 			this._signalDynamicCurrentErrorList.set(this._currentErrorList);
 		}, delay);
+	}
+
+	public addErrorSummary(summary: FudisErrorSummaryInfo): void {
+		const currentSummaries = this._errorSummaryList();
+
+		const existingItem = currentSummaries.find((item) => {
+			return item.formId === summary.formId;
+		});
+
+		if (existingItem) {
+			const index = currentSummaries.indexOf(existingItem);
+			currentSummaries[index] = summary;
+		} else {
+			currentSummaries.push(summary);
+		}
+
+		this._errorSummaryList.set(currentSummaries);
+	}
+
+	public removeErrorSummary(summary: FudisErrorSummaryInfo): void {
+		const currentSummaries = this._errorSummaryList();
+
+		const filtered = currentSummaries.filter((item) => {
+			return item.formId !== summary.formId;
+		});
+
+		this._errorSummaryList.set(filtered);
 	}
 }
