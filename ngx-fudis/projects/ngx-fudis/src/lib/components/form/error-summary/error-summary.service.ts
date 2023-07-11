@@ -1,20 +1,12 @@
-import { Injectable, Signal, effect, signal } from '@angular/core';
+import { Injectable, Signal, signal } from '@angular/core';
 import {
 	FudisFormErrorSummaryObject,
 	FudisFormErrorSummaryItem,
 	FudisFormErrorSummarySection,
 } from '../../../types/forms';
-import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Injectable({ providedIn: 'root' })
 export class FudisErrorSummaryService {
-	constructor(private _translationService: FudisTranslationService) {
-		effect(() => {
-			this._translationService.getLanguage();
-			this.reloadErrors(0, false);
-		});
-	}
-
 	private _currentErrorList: FudisFormErrorSummaryObject = {};
 
 	private _signalCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
@@ -24,12 +16,6 @@ export class FudisErrorSummaryService {
 	private _currentFieldsets: FudisFormErrorSummarySection[] = [];
 
 	private _currentSections: FudisFormErrorSummarySection[] = [];
-
-	private _focusToErrors: boolean = true;
-
-	getFocusToErrors(): boolean {
-		return this._focusToErrors;
-	}
 
 	getFieldsetList(): FudisFormErrorSummarySection[] {
 		return this._currentFieldsets;
@@ -57,6 +43,8 @@ export class FudisErrorSummaryService {
 
 		const errorId = this.defineErrorId(newError.id, newError.controlName);
 
+		const langUpdated = currentErrors[errorId] && currentErrors[errorId]?.language !== newError.language;
+
 		if (!currentErrors[errorId]) {
 			currentErrors = {
 				...currentErrors,
@@ -64,6 +52,7 @@ export class FudisErrorSummaryService {
 					id: newError.id,
 					errors: { [newError.type]: newError.error },
 					label: newError.label,
+					language: newError.language,
 				},
 			};
 		} else {
@@ -73,11 +62,16 @@ export class FudisErrorSummaryService {
 					id: newError.id,
 					errors: { ...currentErrors[errorId].errors, [newError.type]: newError.error },
 					label: newError.label,
+					language: newError.language,
 				},
 			};
 		}
 
 		this._currentErrorList = currentErrors;
+
+		if (langUpdated) {
+			this.reloadErrors();
+		}
 	}
 
 	public removeError(error: { id: string; controlName: string | undefined; type: string }): void {
@@ -132,9 +126,7 @@ export class FudisErrorSummaryService {
 		this._currentSections.splice(indexToRemove, 1);
 	}
 
-	public reloadErrors(delay: number = 0, focusToErrors: boolean = true): void {
-		this._focusToErrors = focusToErrors;
-
+	public reloadErrors(delay: number = 0): void {
 		setTimeout(() => {
 			this._signalCurrentErrorList.set(this._currentErrorList);
 			this._signalDynamicCurrentErrorList.set(this._currentErrorList);
