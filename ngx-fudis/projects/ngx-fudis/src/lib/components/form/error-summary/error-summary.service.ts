@@ -17,12 +17,6 @@ export class FudisErrorSummaryService {
 
 	private _currentSections: FudisFormErrorSummarySection[] = [];
 
-	private _focusToErrors: boolean = true;
-
-	getFocusToErrors(): boolean {
-		return this._focusToErrors;
-	}
-
 	getFieldsetList(): FudisFormErrorSummarySection[] {
 		return this._currentFieldsets;
 	}
@@ -76,7 +70,7 @@ export class FudisErrorSummaryService {
 		this._currentErrorList = currentErrors;
 
 		if (langUpdated) {
-			this.reloadErrors(0, false);
+			this.reloadErrors();
 		}
 	}
 
@@ -132,9 +126,7 @@ export class FudisErrorSummaryService {
 		this._currentSections.splice(indexToRemove, 1);
 	}
 
-	public reloadErrors(delay: number = 0, focusToErrors: boolean = true): void {
-		this._focusToErrors = focusToErrors;
-
+	public reloadErrors(delay: number = 0): void {
 		setTimeout(() => {
 			this._signalCurrentErrorList.set(this._currentErrorList);
 			this._signalDynamicCurrentErrorList.set(this._currentErrorList);

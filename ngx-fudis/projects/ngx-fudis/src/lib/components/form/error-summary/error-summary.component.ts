@@ -10,7 +10,7 @@ import {
 	FudisFormErrorSummaryLink,
 } from '../../../types/forms';
 import { FudisTranslationService } from '../../../utilities/translation/translation.service';
-import { FudisTranslationConfig } from '../../../types/miscellaneous';
+import { FudisLanguageAbbr, FudisTranslationConfig } from '../../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-error-summary',
@@ -39,6 +39,10 @@ export class ErrorSummaryComponent {
 	 */
 	_attentionText: string;
 
+	private _previousLanguage: FudisLanguageAbbr | undefined = undefined;
+
+	private _currentLanguage: FudisLanguageAbbr | undefined = undefined;
+
 	constructor(
 		@Inject(DOCUMENT) private _document: Document,
 		private _errorSummaryService: FudisErrorSummaryService,
@@ -46,11 +50,13 @@ export class ErrorSummaryComponent {
 		private _translationService: FudisTranslationService
 	) {
 		effect(() => {
-			this.getErrors();
-
 			this._translations = this._translationService.getTranslations();
 
+			this._previousLanguage = this._currentLanguage;
+
 			this._attentionText = this._translations().ICON.ATTENTION;
+
+			this.getErrors();
 		});
 	}
 
@@ -109,9 +115,12 @@ export class ErrorSummaryComponent {
 		/**
 		 * Focus to Error Summary element when visible error list gets updated.
 		 */
+
+		this._currentLanguage = this._translationService.getLanguage();
+
 		if (
 			this._document.activeElement?.classList.contains('fudis-button') &&
-			this._errorSummaryService.getFocusToErrors()
+			this._previousLanguage === this._currentLanguage
 		) {
 			this.focusToErrorSummary();
 		}

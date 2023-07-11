@@ -166,7 +166,7 @@ class FormContentExampleComponent {
 		if (this.fieldsetExample.invalid) {
 			this._collapsed = false;
 			this.errorSummaryVisible = true;
-			this.errorSummaryService.reloadErrors(500);
+			this.errorSummaryService.reloadErrors();
 		} else {
 			this.errorSummaryVisible = false;
 		}
