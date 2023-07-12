@@ -42,7 +42,7 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit, OnC
 	@Input() size: FudisInputWidth = 'lg';
 
 	/**
-	 * Internal property for assistive text of max character count for screen readers
+	 * Assistive text of max character count for screen readers
 	 */
 	protected _maxLengthText: string;
 
