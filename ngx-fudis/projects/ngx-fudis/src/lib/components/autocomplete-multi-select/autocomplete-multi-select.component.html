@@ -19,7 +19,7 @@
 			role="combobox"
 			[attr.aria-expanded]="_toggleOn"
 			class="fudis-autocomplete-multi-select__input-wrapper__input"
-			[attr.aria-labelledby]="'selected-items'"
+			[attr.aria-labelledby]="_id + '-selected-items'"
 			[attr.aria-describedby]="_id + '_guidance'" />
 		<fudis-button
 			class="fudis-autocomplete-multi-select__input-wrapper__icon-button"
@@ -32,26 +32,23 @@
 			[labelHidden]="true">
 		</fudis-button>
 	</div>
-	<ng-container *ngIf="_toggleOn">
-		<fudis-dropdown-menu [align]="'center'" [size]="size" [role]="'listbox'" [attr.aria-multiselectable]="true">
-			<ng-container *ngFor="let item of _results">
-				<fudis-dropdown-menu-item
-					[label]="item.viewValue"
-					[close]="false"
-					[itemsWithCheckbox]="true"
-					(handleChecked)="selectItem(item)"
-					[checked]="isChecked(item)">
-				</fudis-dropdown-menu-item>
-			</ng-container>
-			<ng-container *ngIf="_results.length === 0">
-				<fudis-body-text [size]="'md-light'">{{ _noResultsFound }}</fudis-body-text>
-			</ng-container>
-		</fudis-dropdown-menu>
-	</ng-container>
+	<fudis-dropdown-menu *ngIf="_toggleOn" [align]="'center'" [size]="size" [variant]="'multiselect'">
+		<ng-container *ngFor="let item of _results">
+			<fudis-dropdown-menu-item
+				[label]="item.viewValue"
+				[close]="false"
+				(handleChecked)="selectItem(item)"
+				[checked]="isChecked(item)">
+			</fudis-dropdown-menu-item>
+		</ng-container>
+		<ng-container *ngIf="_results.length === 0">
+			<fudis-body-text [size]="'md-light'">{{ _noResultsFound }}</fudis-body-text>
+		</ng-container>
+	</fudis-dropdown-menu>
 	<ng-container *ngIf="selectedOptions.length > 0">
-		<span id="remove-items" class="fudis-visually-hidden">{{ _removeItemText }}</span>
+		<span [attr.id]="_id + '-remove-items'" class="fudis-visually-hidden">{{ _removeItemText }}</span>
 		<fudis-autocomplete-multi-select-selected-item-chip
-			id="selected-items"
+			[parentId]="_id"
 			(deleteItem)="handleDeleteItem()"
 			[selectedItems]="selectedOptions" />
 	</ng-container>

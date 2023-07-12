@@ -63,9 +63,9 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	@Input() selectedOptions: FudisDropdownOption[] = [];
 
 	/**
-	 * Output for item click
+	 * Output for option click
 	 */
-	@Output() itemChange = new EventEmitter<FudisDropdownOption[]>();
+	@Output() optionChange = new EventEmitter<FudisDropdownOption[]>();
 
 	/**
 	 * Internal property for toggle dropdown visibility
@@ -118,10 +118,9 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 			'.fudis-autocomplete-multi-select__input-wrapper__input'
 		);
 
-		const checkboxInput = dropdownMenuElement.querySelector('.fudis-dropdown-menu-item__checkbox__input');
+		const checkboxInput = dropdownMenuElement?.querySelector('.fudis-dropdown-menu-item__checkbox__input');
 
-		// TODO Keyboard arrow navigation straight from chevron button - is it necessary?
-		if (wrapperInput === document.activeElement) {
+		if (wrapperInput === document.activeElement && checkboxInput) {
 			checkboxInput.focus();
 		} else if (wrapperInput !== document.activeElement) {
 			this.handleCheckboxFocus(event);
@@ -192,12 +191,12 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 		} else {
 			this.selectedOptions.push(item);
 		}
-		this.itemChange.emit(this.selectedOptions);
+		this.optionChange.emit(this.selectedOptions);
 	}
 
 	removeItem(item: FudisDropdownOption): void {
 		this.selectedOptions = this.selectedOptions.filter((option) => item.viewValue !== option.viewValue);
-		this.itemChange.emit(this.selectedOptions);
+		this.optionChange.emit(this.selectedOptions);
 
 		if (this.selectedOptions.length === 0) {
 			this.input.nativeElement.focus();

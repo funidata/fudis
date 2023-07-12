@@ -1,13 +1,17 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { OnInit, Component, ElementRef, EventEmitter, Host, Input, Output, ViewChild } from '@angular/core';
 import { FudisDropdownMenuItemService } from './dropdown-menu-item.service';
+import { DropdownMenuComponent } from '../dropdown-menu.component';
 
 @Component({
 	selector: 'fudis-dropdown-menu-item',
 	templateUrl: './dropdown-menu-item.component.html',
 	styleUrls: ['./dropdown-menu-item.component.scss'],
 })
-export class DropdownMenuItemComponent {
-	constructor(private clickService: FudisDropdownMenuItemService) {}
+export class DropdownMenuItemComponent implements OnInit {
+	constructor(
+		private clickService: FudisDropdownMenuItemService,
+		@Host() private _parentComponent: DropdownMenuComponent
+	) {}
 
 	@ViewChild('dropdownItem') dropdownItem: ElementRef;
 
@@ -27,11 +31,6 @@ export class DropdownMenuItemComponent {
 	@Input() close: boolean = true;
 
 	/**
-	 * Option to create dropdown items with checkbox. False by default. Checkbox option used e.g. in fudis-autocomplete-multi-select.
-	 */
-	@Input() itemsWithCheckbox: boolean = false;
-
-	/**
 	 * Checked state for dropdown-menu-item with checkbox
 	 */
 	@Input() checked: boolean;
@@ -45,6 +44,19 @@ export class DropdownMenuItemComponent {
 	 * Output for handling checked state in dropdown-menu-item with checkbox
 	 */
 	@Output() handleChecked = new EventEmitter<boolean>();
+
+	/**
+	 * Determine whether option is displayed as single-select or multiselect (with checkbox).
+	 * Multiselect is used e.g in autocomplete-multi-select.
+	 */
+	protected _isMultiselectOption: boolean = false;
+
+	ngOnInit(): void {
+		// Check parent component's public HostBinding for multiselect usage
+		if (this._parentComponent._isMultiselect) {
+			this._isMultiselectOption = true;
+		}
+	}
 
 	// eslint-disable-next-line class-methods-use-this
 	handleKeyDown(event: KeyboardEvent) {

@@ -52,7 +52,10 @@
 		&__box {
 			@include borders.border('1px', 'solid', 'gray-middle');
 
+			display: flex;
 			position: absolute;
+			align-items: center;
+			justify-content: center;
 			margin: spacing.$spacing-xs;
 			border-radius: 0;
 			cursor: pointer;

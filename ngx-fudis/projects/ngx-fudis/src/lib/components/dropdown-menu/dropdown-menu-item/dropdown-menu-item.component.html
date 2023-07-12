@@ -1,5 +1,5 @@
 <button
-	*ngIf="!itemsWithCheckbox"
+	*ngIf="!_isMultiselectOption"
 	#dropdownItem
 	class="fudis-dropdown-menu-item"
 	[attr.role]="'menuitem'"
@@ -11,7 +11,7 @@
 </button>
 
 <div
-	*ngIf="itemsWithCheckbox"
+	*ngIf="_isMultiselectOption"
 	class="fudis-dropdown-menu-item__checkbox"
 	[class.fudis-dropdown-menu-item__checkbox--active]="checked">
 	<label

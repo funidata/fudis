@@ -1,7 +1,10 @@
 <div
-	class="fudis-dropdown-menu fudis-dropdown-menu__{{ align }} fudis-dropdown-menu__{{ size }}"
+	class="fudis-dropdown-menu fudis-dropdown-menu__{{ align }} fudis-dropdown-menu__{{ size }} fudis-dropdown-menu__{{
+		variant
+	}}"
 	#dropdownMenu
-	[attr.role]="role"
+	[attr.aria-multiselectable]="variant === 'multiselect' ? true : null"
+	[attr.role]="variant === 'single-select' ? 'menu' : 'listbox'"
 	[style.max-width]="_maxWidth">
 	<ng-content></ng-content>
 </div>

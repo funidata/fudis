@@ -13,6 +13,11 @@ export class AutocompleteMultiSelectSelectedItemChipComponent {
 	@Input() selectedItems: FudisDropdownOption[];
 
 	/**
+	 * Parent component id for binding aria attributes
+	 */
+	@Input() parentId: string;
+
+	/**
 	 * Output for deleting the chip item
 	 */
 	@Output() deleteItem = new EventEmitter<FudisDropdownOption>();
