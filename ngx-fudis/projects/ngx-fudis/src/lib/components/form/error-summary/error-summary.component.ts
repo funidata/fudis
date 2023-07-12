@@ -1,4 +1,15 @@
-import { ChangeDetectorRef, Component, ElementRef, Inject, Input, Signal, ViewChild, effect } from '@angular/core';
+import {
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	Inject,
+	Input,
+	OnChanges,
+	OnDestroy,
+	Signal,
+	ViewChild,
+	effect,
+} from '@angular/core';
 
 import { DOCUMENT } from '@angular/common';
 
@@ -8,16 +19,17 @@ import {
 	FudisFormErrorSummaryList,
 	FudisFormErrorSummarySection,
 	FudisFormErrorSummaryLink,
+	FudisErrorSummaryParent,
 } from '../../../types/forms';
 import { FudisTranslationService } from '../../../utilities/translation/translation.service';
-import { FudisTranslationConfig } from '../../../types/miscellaneous';
+import { FudisLanguageAbbr, FudisTranslationConfig } from '../../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-error-summary',
 	templateUrl: './error-summary.component.html',
 	styleUrls: ['./error-summary.component.scss'],
 })
-export class ErrorSummaryComponent {
+export class ErrorSummaryComponent implements OnChanges, OnDestroy {
 	@ViewChild('focusTarget') focusTarget: ElementRef;
 
 	/**
@@ -37,7 +49,13 @@ export class ErrorSummaryComponent {
 	/**
 	 * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.
 	 */
-	_attentionText: string;
+	protected _attentionText: string;
+
+	private _previousLanguage: FudisLanguageAbbr | undefined = undefined;
+
+	private _currentLanguage: FudisLanguageAbbr | undefined = undefined;
+
+	private _errorSummaryParentInfo: FudisErrorSummaryParent;
 
 	constructor(
 		@Inject(DOCUMENT) private _document: Document,
@@ -46,11 +64,13 @@ export class ErrorSummaryComponent {
 		private _translationService: FudisTranslationService
 	) {
 		effect(() => {
-			this.getErrors();
-
 			this._translations = this._translationService.getTranslations();
 
+			this._previousLanguage = this._currentLanguage;
+
 			this._attentionText = this._translations().ICON.ATTENTION;
+
+			this.getErrors();
 		});
 	}
 
@@ -94,9 +114,11 @@ export class ErrorSummaryComponent {
 
 					const parentFieldsetString = parentFieldset ? `${parentFieldset.title} / ` : '';
 
+					const cleanedError = error.replace(/[:!?]$/, '');
+
 					this._visibleErrorList.push({
 						id: errorId,
-						message: `${parentSectionString}${parentFieldsetString}${label}: ${error}`,
+						message: `${parentSectionString}${parentFieldsetString}${label}: ${cleanedError}`,
 					});
 				});
 			}
@@ -107,9 +129,12 @@ export class ErrorSummaryComponent {
 		/**
 		 * Focus to Error Summary element when visible error list gets updated.
 		 */
+
+		this._currentLanguage = this._translationService.getLanguage();
+
 		if (
 			this._document.activeElement?.classList.contains('fudis-button') &&
-			this._errorSummaryService.getFocusToErrors()
+			this._previousLanguage === this._currentLanguage
 		) {
 			this.focusToErrorSummary();
 		}
@@ -125,5 +150,18 @@ export class ErrorSummaryComponent {
 				this.focusToErrorSummary();
 			}, 100);
 		}
+	}
+
+	ngOnChanges(): void {
+		this._errorSummaryParentInfo = {
+			formId: this.parentComponent.querySelector('.fudis-form')?.getAttribute('id'),
+			parentElement: this.parentComponent,
+		};
+
+		this._errorSummaryService.addErrorSummaryParent(this._errorSummaryParentInfo);
+	}
+
+	ngOnDestroy(): void {
+		this._errorSummaryService.removeErrorSummaryParent(this._errorSummaryParentInfo);
 	}
 }
