@@ -2,7 +2,8 @@
 @use '../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-section {
-	@include utilities.box-reset;
+	box-sizing: border-box;
+	padding: 0;
 
 	&__header {
 		&__container {
