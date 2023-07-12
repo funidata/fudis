@@ -53,6 +53,15 @@ export class LanguageBadgeGroupComponent implements OnInit {
 	// 	return this._ariaLabel;
 	// }
 
+	translationMissing(language: FudisLanguageAbbr): void {
+		this._missingTranslation.forEach((item) => {
+			if (item === language) {
+				return true;
+			}
+			return false;
+		});
+	}
+
 	updateLanguage(value: FudisLanguageAbbr) {
 		this._currentLanguage = value;
 		this.handleClick.emit(this._currentLanguage);
