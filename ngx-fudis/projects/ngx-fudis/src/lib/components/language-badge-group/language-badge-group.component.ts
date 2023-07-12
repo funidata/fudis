@@ -37,11 +37,4 @@ export class LanguageBadgeGroupComponent implements OnInit {
 	updateLanguage(value: FudisLanguageAbbr) {
 		this.handleClick.emit(value);
 	}
-
-	// eslint-disable-next-line class-methods-use-this
-	asLabelkey(key: any): keyof FudisTranslationConfig {
-		const transformed = key.toUpperCase();
-
-		return transformed;
-	}
 }
