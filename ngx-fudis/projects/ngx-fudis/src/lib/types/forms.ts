@@ -1,5 +1,6 @@
 import { FormControl } from '@angular/forms';
 import { MatDateFormats, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
+import { FudisLanguageAbbr } from './miscellaneous';
 
 export type FudisInputWidth = 'sm' | 'md' | 'lg';
 
@@ -54,6 +55,7 @@ export type FudisFormErrorSummaryItem = {
 	error: string;
 	type: string;
 	controlName: string | undefined;
+	language: FudisLanguageAbbr;
 };
 
 export type FudisFormErrorSummaryObject = {
@@ -61,12 +63,18 @@ export type FudisFormErrorSummaryObject = {
 		id: string;
 		errors: FudisFormErrorSummaryObjectItemErrors;
 		label: string;
+		language: FudisLanguageAbbr;
 	};
 };
 
 export type FudisFormErrorSummarySection = {
 	id: string;
 	title: string;
+};
+
+export type FudisErrorSummaryParent = {
+	formId: string | null | undefined;
+	parentElement: HTMLFormElement;
 };
 
 export type FudisFormErrorSummaryList = {
