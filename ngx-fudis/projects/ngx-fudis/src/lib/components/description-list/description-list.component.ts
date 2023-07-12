@@ -39,11 +39,6 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 
 	@Output() missingTranslations: FudisLanguageAbbr[];
 
-	/**
-	 * Languages input renders a Fudis language badge component for displaying Description List Item Detail values in given languages.
-	 */
-	@Input() languages: FudisLanguageAbbr[];
-
 	private getClasses(): string[] {
 		const cssClasses = [];
 

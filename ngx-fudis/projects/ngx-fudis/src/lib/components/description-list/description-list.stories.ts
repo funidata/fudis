@@ -148,3 +148,26 @@ DescriptionListWithSubComponents.args = {
 	disableGrid: false,
 	variant: 'regular',
 };
+
+const DescriptionListWithLanguagesTemplate: StoryFn<DescriptionListComponent> = (args: DescriptionListComponent) => ({
+	props: args,
+	template: html`<fudis-heading tag="h2" size="md">Description list built with sub components</fudis-heading>
+		<fudis-description-list [marginBottom]="'md'" [disableGrid]="disableGrid" [variant]="variant">
+			<fudis-description-list-item>
+				<fudis-dt [languages]="true">First thing</fudis-dt>
+				<fudis-dd [lang]="'fi'">Tämä on suomeksi</fudis-dd>
+				<fudis-dd [lang]="'en'">This is in English</fudis-dd>
+				<fudis-dd [lang]="'sv'">Och den här är på Svenska</fudis-dd>
+			</fudis-description-list-item>
+			<fudis-description-list-item>
+				<fudis-dt [languages]="true">Second thing</fudis-dt>
+				<fudis-dd [lang]="'fi'">Tähtien sota</fudis-dd>
+				<fudis-dd [lang]="'sv'">Stjärnornas krig </fudis-dd>
+			</fudis-description-list-item>
+		</fudis-description-list> `,
+});
+
+export const DescriptionListWithLanguages = DescriptionListWithLanguagesTemplate.bind({});
+DescriptionListWithLanguages.args = {
+	variant: 'regular',
+};

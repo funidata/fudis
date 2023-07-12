@@ -1,17 +1,29 @@
+/* stylelint-disable selector-class-pattern */
 .fudis-dt-host {
 	&__fi {
-		& ~ fudis-dd .fudis-dl__item__details__fi {
-			display: block;
+		~ fudis-dd,
+		~ fudis-description-list-details {
+			.fudis-dl__item__details__fi {
+				display: block;
+			}
 		}
 	}
+
 	&__en {
-		& ~ fudis-dd .fudis-dl__item__details__en {
-			display: block;
+		~ fudis-dd,
+		~ fudis-description-list-details {
+			.fudis-dl__item__details__en {
+				display: block;
+			}
 		}
 	}
+
 	&__sv {
-		& ~ fudis-dd .fudis-dl__item__details__sv {
-			display: block;
+		~ fudis-dd,
+		~ fudis-description-list-details {
+			.fudis-dl__item__details__sv {
+				display: block;
+			}
 		}
 	}
 }

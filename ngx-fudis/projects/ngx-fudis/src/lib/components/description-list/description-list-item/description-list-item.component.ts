@@ -1,30 +1,43 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ContentChildren, QueryList } from '@angular/core';
+import { AfterViewInit, Component, ContentChildren, Host, QueryList, Signal, effect, signal } from '@angular/core';
 import { DescriptionListItemDetailsComponent } from './description-list-item-details/description-list-item-details.component';
-import { FudisLanguageAbbr } from '../../../types/miscellaneous';
+import { FudisDescriptionListItemDetailInfo, FudisLanguageAbbr } from '../../../types/miscellaneous';
+import { FudisDescriptionListItemDetailsService } from './description-list-item-details/description-list-item-details.service';
 
 @Component({
 	selector: 'fudis-dl-item, fudis-description-list-item',
 	templateUrl: './description-list-item.component.html',
-	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DescriptionListItemComponent implements AfterViewInit {
+	constructor(private _detailsService: FudisDescriptionListItemDetailsService) {
+		effect(
+			() => {
+				this.checkCurrentChildren();
+			},
+			{ allowSignalWrites: true }
+		);
+	}
+
 	@ContentChildren(DescriptionListItemDetailsComponent)
 	contentChildren!: QueryList<DescriptionListItemDetailsComponent>;
 
-	_languageOptions: FudisLanguageAbbr[] = ['en', 'fi', 'sv'];
+	@Host() public _existingLanguageOptions = signal<FudisLanguageAbbr[]>([]);
 
-	_existingLanguageOptions: FudisLanguageAbbr[] = [];
-
-	missingTranslations: FudisLanguageAbbr[];
+	protected _languageOptions: FudisLanguageAbbr[] = ['en', 'fi', 'sv'];
 
 	ngAfterViewInit(): void {
-		this.contentChildren.forEach((item) => {
-			this._existingLanguageOptions.push(item.lang);
-		});
+		this.checkCurrentChildren();
+	}
 
-		this.missingTranslations = this._languageOptions.filter(
-			(missing) => !this._existingLanguageOptions.includes(missing)
-		);
-		console.log('Nämä kielet puuttuu', this.missingTranslations);
+	checkCurrentChildren(): void {
+		const temp: FudisLanguageAbbr[] = [];
+
+		const currentDetails: Signal<FudisDescriptionListItemDetailInfo[]> = this._detailsService.getCurrentDetails();
+
+		if (this.contentChildren && currentDetails().length > 0) {
+			this.contentChildren.forEach((item) => {
+				temp.push(item.lang);
+			});
+		}
+		this._existingLanguageOptions.set(temp);
 	}
 }

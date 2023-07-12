@@ -1,24 +1,3 @@
-@use '../../foundations/colors/mixins.scss' as colors;
-@use '../../foundations/typography/mixins.scss' as typography;
-@use '../../foundations/focus/mixins.scss' as focus;
-@use '../../foundations/colors/mixins.scss' as colorMixin;
-@use '../../foundations/borders/mixins.scss' as border;
-@use '../../foundations/spacing/tokens.scss' as spacing;
-
 .fudis-language-badge-group {
 	display: inline;
-
-	.fudis-language-badge {
-		@include colorMixin.bg-color('white');
-		@include border.border('1px', 'solid', 'gray-dark');
-		@include typography.body-text-sm-regular;
-
-		width: spacing.$spacing-md;
-		height: spacing.$spacing-md;
-		border-radius: 50%;
-
-		&:active {
-			@include border.border('2px', 'solid', 'primary');
-		}
-	}
 }

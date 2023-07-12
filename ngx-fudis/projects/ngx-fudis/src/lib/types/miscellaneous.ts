@@ -6,6 +6,11 @@ export interface FudisDescriptionListItem {
 	value: string;
 }
 
+export type FudisDescriptionListItemDetailInfo = {
+	id: string;
+	language: FudisLanguageAbbr;
+};
+
 export type FudisLanguageOption =
 	| { value: 'finnish'; viewValue: 'FI' }
 	| { value: 'swedish'; viewValue: 'SV' }

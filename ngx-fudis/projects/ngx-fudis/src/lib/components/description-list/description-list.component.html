@@ -20,7 +20,7 @@
 <ng-template #content>
 	<ng-container *ngIf="data">
 		<fudis-dl-item *ngFor="let item of data">
-			<fudis-dt [languages]="translation" [missingTranslation]="missingTranslations">{{ item.key }} </fudis-dt>
+			<fudis-dt [languages]="translation">{{ item.key }} </fudis-dt>
 			<fudis-dd [subHeading]="item.subHeading">{{ item.value }}</fudis-dd>
 		</fudis-dl-item>
 	</ng-container>

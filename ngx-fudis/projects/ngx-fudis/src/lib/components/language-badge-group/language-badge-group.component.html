@@ -1,12 +1,17 @@
-<section
-	id="sektio"
-	aria-label="Valitse kieli"
-	class="fudis-language-badge-group"
-	*ngFor="let language of _languageOptions; let index = index">
-	<fudis-language-badge
-		[id]="_id + index"
-		(changeLanguage)="updateLanguage($event)"
-		[language]="language"
-		[attr.aria-label]="_ariaLabel"
-		[class.fudis-language-badge__missing]="translationMissing(language)"></fudis-language-badge>
+<section id="sektio" aria-label="Valitse kieli" class="fudis-language-badge-group">
+	<ng-container *ngFor="let language of _languageOptions; let index = index">
+		<fudis-language-badge
+			[label]="
+				language === 'fi'
+					? _translations().LANGUAGE_BADGE.ARIA_LABEL.FI
+					: language === 'en'
+					? _translations().LANGUAGE_BADGE.ARIA_LABEL.EN
+					: _translations().LANGUAGE_BADGE.ARIA_LABEL.SV
+			"
+			[id]="_id + '-button-' + index"
+			(changeLanguage)="updateLanguage($event)"
+			[selected]="selectedLanguage === language"
+			[language]="language"
+			[variant]="languages.includes(language) ? 'standard' : 'missing'" />
+	</ng-container>
 </section>

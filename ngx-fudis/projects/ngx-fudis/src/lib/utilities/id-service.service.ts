@@ -6,12 +6,14 @@ type ComponentType =
 	| 'checkbox'
 	| 'datepicker'
 	| 'daterange'
+	| 'dlItemDetails'
 	| 'dropdown'
 	| 'expandable'
 	| 'fieldset'
 	| 'form'
 	| 'heading'
 	| 'inputWithLanguageOptions'
+	| 'languageBadgeGroup'
 	| 'radioButtonGroup'
 	| 'section'
 	| 'textArea'
@@ -28,9 +30,11 @@ export class FudisIdService {
 	private _idList: IdInformation = {
 		autocomplete: 0,
 		button: 0,
+		languageBadgeGroup: 0,
 		checkbox: 0,
 		datepicker: 0,
 		daterange: 0,
+		dlItemDetails: 0,
 		dropdown: 0,
 		expandable: 0,
 		fieldset: 0,

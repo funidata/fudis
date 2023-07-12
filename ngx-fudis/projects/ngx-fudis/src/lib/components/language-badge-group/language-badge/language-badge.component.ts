@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FudisLanguageAbbr } from '../../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-language-badge',
+	styleUrls: ['./language-badge.component.scss'],
 	templateUrl: './language-badge.component.html',
-	encapsulation: ViewEncapsulation.None,
 })
 export class LanguageBadgeComponent {
 	/*
@@ -12,7 +12,13 @@ export class LanguageBadgeComponent {
 	 */
 	@Input() id: string;
 
-	@Input() language: FudisLanguageAbbr;
+	@Input({ required: true }) language: FudisLanguageAbbr;
+
+	@Input() selected: boolean;
+
+	@Input() variant: 'standard' | 'missing' = 'standard';
+
+	@Input({ required: true }) label: string;
 
 	/**
 	 * Optional click handler
