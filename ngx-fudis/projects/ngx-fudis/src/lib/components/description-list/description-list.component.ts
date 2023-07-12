@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ViewEncapsulation, Output } from '@angular/core';
 
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
 
@@ -36,6 +36,8 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 	 * Add Fudis Language Badge Group in Fudis Description List Item Term element
 	 */
 	@Input() translation: boolean = false;
+
+	@Output() missingTranslations: FudisLanguageAbbr[];
 
 	/**
 	 * Languages input renders a Fudis language badge component for displaying Description List Item Detail values in given languages.

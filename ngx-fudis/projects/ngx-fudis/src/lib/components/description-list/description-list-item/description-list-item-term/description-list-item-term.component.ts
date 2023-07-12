@@ -18,6 +18,8 @@ export class DescriptionListItemTermComponent {
 	 */
 	@Input() languages: boolean = false;
 
+	@Input() missingTranslation: FudisLanguageAbbr[];
+
 	private _element: HTMLElement; /* Etsi toinen tyyppi */
 
 	selectLanguage(lang: FudisLanguageAbbr): void {

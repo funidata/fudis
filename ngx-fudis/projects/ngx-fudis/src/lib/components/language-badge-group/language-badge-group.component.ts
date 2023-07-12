@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation, OnInit, Signal, effect, EventEmitter, Output } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, Signal, effect, EventEmitter, Output, Input } from '@angular/core';
 import { FudisLanguageAbbr, FudisTranslationConfig } from '../../types/miscellaneous';
 import { FudisIdService } from '../../utilities/id-service.service';
 import { FudisTranslationService } from '../../utilities/translation/translation.service';
@@ -35,6 +35,11 @@ export class LanguageBadgeGroupComponent implements OnInit {
 	protected _translations: Signal<FudisTranslationConfig>;
 
 	protected _languageOptions: FudisLanguageAbbr[] = ['en', 'fi', 'sv'];
+
+	/**
+	 * Internal id for Language Badge Group component
+	 */
+	@Input() _missingTranslation: FudisLanguageAbbr[];
 
 	@Output() handleClick = new EventEmitter<FudisLanguageAbbr>();
 

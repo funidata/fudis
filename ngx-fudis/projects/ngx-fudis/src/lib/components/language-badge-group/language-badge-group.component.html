@@ -7,5 +7,6 @@
 		[id]="_id + index"
 		(changeLanguage)="updateLanguage($event)"
 		[language]="language"
-		[attr.aria-label]="_ariaLabel"></fudis-language-badge>
+		[attr.aria-label]="_ariaLabel"
+		[class.fudis-language-badge__missing]="language === _missingTranslation"></fudis-language-badge>
 </section>
