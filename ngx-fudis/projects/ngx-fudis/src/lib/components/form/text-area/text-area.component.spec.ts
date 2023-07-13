@@ -48,6 +48,7 @@ describe('TextAreaComponent', () => {
 			component.minLength = 5;
 			fixture.detectChanges();
 			const elem = fixture.debugElement.query(By.css('textarea'));
+
 			expect(elem.nativeElement.getAttribute('minlength')).toBe('5');
 		});
 
@@ -55,6 +56,7 @@ describe('TextAreaComponent', () => {
 			component.maxLength = 20;
 			fixture.detectChanges();
 			const elem = fixture.debugElement.query(By.css('textarea'));
+
 			expect(elem.nativeElement.getAttribute('maxlength')).toBe('20');
 		});
 	});
@@ -62,7 +64,6 @@ describe('TextAreaComponent', () => {
 	describe('Control', () => {
 		it('should set control as invalid if required text area is touched and empty', () => {
 			component.control = new FormControl('', Validators.required);
-			component.control.patchValue('');
 
 			expect(component.control.value).toEqual('');
 			expect(component.control.invalid).toBeTruthy();

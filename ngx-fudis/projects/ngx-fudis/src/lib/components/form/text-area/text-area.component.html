@@ -1,7 +1,7 @@
 <div class="fudis-text-area fudis-text-area__{{ size }}">
 	<fudis-label
 		[for]="_id"
-		[id]="'label_' + _id"
+		[id]="_id + '-label'"
 		[text]="label"
 		[requiredText]="_required ? _requiredText : undefined"
 		[tooltip]="tooltip"
