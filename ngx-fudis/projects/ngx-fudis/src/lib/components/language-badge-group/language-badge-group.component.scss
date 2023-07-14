@@ -1,3 +1,6 @@
+@use '../../foundations/spacing/tokens.scss' as spacing;
+
 .fudis-language-badge-group {
 	display: inline;
+	margin-left: spacing.$spacing-xxs;
 }

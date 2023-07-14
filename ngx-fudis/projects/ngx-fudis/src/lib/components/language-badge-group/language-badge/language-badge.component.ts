@@ -1,12 +1,15 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from '@angular/core';
 import { FudisLanguageAbbr } from '../../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-language-badge',
 	styleUrls: ['./language-badge.component.scss'],
 	templateUrl: './language-badge.component.html',
+	encapsulation: ViewEncapsulation.None,
 })
 export class LanguageBadgeComponent {
+	@HostBinding('class') classes = 'fudis-language-badge-host';
+
 	/*
 	 * Id of single Language Badge
 	 */

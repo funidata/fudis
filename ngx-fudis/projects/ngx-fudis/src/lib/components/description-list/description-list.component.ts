@@ -1,8 +1,9 @@
-import { Component, Input, OnInit, OnChanges, ViewEncapsulation, Output } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ViewEncapsulation } from '@angular/core';
 
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
 
-import { FudisDescriptionListItem, FudisLanguageAbbr } from '../../types/miscellaneous';
+import { FudisDescriptionListItem } from '../../types/miscellaneous';
+import { FudisDescriptionListService } from './description-list.service';
 
 @Component({
 	selector: 'fudis-dl, fudis-description-list',
@@ -11,6 +12,10 @@ import { FudisDescriptionListItem, FudisLanguageAbbr } from '../../types/miscell
 	encapsulation: ViewEncapsulation.None,
 })
 export class DescriptionListComponent extends GridApiDirective implements OnInit, OnChanges {
+	constructor(private _variantService: FudisDescriptionListService) {
+		super();
+	}
+
 	/**
 	 * CSS class list
 	 */
@@ -37,12 +42,11 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 	 */
 	@Input() translation: boolean = false;
 
-	@Output() missingTranslations: FudisLanguageAbbr[];
-
 	private getClasses(): string[] {
 		const cssClasses = [];
 
 		if (this.variant === 'regular') {
+			this._variantService.setVariant(this.variant);
 			cssClasses.push('fudis-dl');
 
 			if (this.disableGrid) {
@@ -51,6 +55,7 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 		}
 
 		if (this.variant === 'compact') {
+			this._variantService.setVariant(this.variant);
 			cssClasses.push('fudis-dl-compact');
 			if (this.disableGrid) {
 				cssClasses.push('fudis-dl-compact__disabled-grid');

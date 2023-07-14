@@ -5,24 +5,33 @@
 @use '../../../foundations/borders/mixins.scss' as border;
 @use '../../../foundations/spacing/tokens.scss' as spacing;
 
+.fudis-language-badge-host {
+	background-color: transparent;
+	display: inline-flex;
+	width: spacing.$spacing-lg;
+	height: spacing.$spacing-lg;
+	justify-content: center;
+	align-items: center;
+}
+
 .fudis-language-badge {
-	@include colorMixin.bg-color('white');
-	@include border.border('1px', 'solid', 'gray-dark');
 	@include typography.body-text-sm-regular;
 
 	border-radius: 50%;
 	width: spacing.$spacing-md;
 	height: spacing.$spacing-md;
+	@include colorMixin.bg-color('white');
+	@include border.border('1px', 'solid', 'gray-dark');
 
 	&:active {
 		@include border.border('2px', 'solid', 'primary');
 	}
 
-	&__missing {
-		background-color: lightcoral;
-	}
+	// &__missing {
+	// 	// background-color: lightcoral;
+	// }
 
-	&--selected {
-		background-color: lightblue;
-	}
+	// &--selected {
+	// 	// background-color: lightblue;
+	// }
 }

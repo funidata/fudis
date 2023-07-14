@@ -24,6 +24,8 @@ export class DescriptionListItemComponent implements AfterViewInit {
 
 	protected _languageOptions: FudisLanguageAbbr[] = ['en', 'fi', 'sv'];
 
+	protected _parentVariant: string;
+
 	ngAfterViewInit(): void {
 		this.checkCurrentChildren();
 	}
