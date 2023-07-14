@@ -17,13 +17,18 @@ Autocomplete multi-select is designed to be used for search filtering views. Use
 
 Autocomplete is not part of Fudis' form components, therefore it does not have formControl. Autocomplete-multi-select cannot be set as required or disabled.
 
+Tooltip can be given as an additional feature for the autocomplete-multi-select label.
+
 #### Mandatory Properties
 
 Autocomplete-multi-select requires `label` and `options` object array with possible option values. Selected option values are passed to `selectedOptions` array which can also be used when setting initial filter values.
 
 ### Accessibility
 
-- Component is accessible for keyboard and screen reader users
+- Label and guidance text are linked to the autocomplete-multi-select input via id.
+- Keyboard users can navigate dropdown option list with <code>ArrowDown</code>, <code>ArrowUp</code>, <code>Tab</code>, <code>Space</code>, <code>Enter</code> and <code>Escape</code> keys.
+- Screen reader users can navigate dropdown option list and screen reader is informed about the selections made.
+- Additional information from tooltip is communicated with screen reader.
 
 
 ### Related components

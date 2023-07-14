@@ -48,14 +48,14 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	@ViewChild('autocompleteInput') input: ElementRef;
 
 	/**
-	 * Available sizes for the multi-select - defaults to large.
-	 */
-	@Input() size: FudisInputWidth = 'lg';
-
-	/**
 	 * Dropdown options to display
 	 */
 	@Input({ required: true }) options: FudisDropdownOption[] = [];
+
+	/**
+	 * Available sizes for the multi-select - defaults to large.
+	 */
+	@Input() size: FudisInputWidth = 'lg';
 
 	/**
 	 * Array of selected dropdown options which user is clicking. Can also be used to set preselected options.
