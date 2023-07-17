@@ -27,9 +27,9 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 
 	@ContentChild(ContentDirective) content: ContentDirective | null;
 
-	@Input() id: string;
-
 	@Input({ required: true }) title: string;
+
+	@Input() id: string;
 
 	@Input() titleTag: FudisHeadingTag = 'h2';
 

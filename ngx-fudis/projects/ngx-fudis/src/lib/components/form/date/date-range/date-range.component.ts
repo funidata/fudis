@@ -29,11 +29,6 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
 	@ViewChild('dateRangeRef') _dateRangeRef: ElementRef;
 
 	/**
-	 * Id for Date Range component
-	 */
-	@Input() id: string;
-
-	/**
 	 * Settings for start date
 	 */
 	@Input({ required: true }) startDate: FudisDateRangeItem;
@@ -44,7 +39,12 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
 	@Input({ required: true }) endDate: FudisDateRangeItem;
 
 	/**
-	 * Internal id for Date Range
+	 * Id for Date Range component
+	 */
+	@Input() id: string;
+
+	/**
+	 * Internal id to generate unique id for Date Range
 	 */
 	protected _id: string;
 

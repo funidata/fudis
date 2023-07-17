@@ -22,11 +22,6 @@ export class ErrorMessageComponent implements OnChanges, OnDestroy, AfterViewIni
 	@Input({ required: true }) message: string | undefined;
 
 	/**
-	 * Name of control this error is related to.
-	 */
-	@Input() controlName: string | undefined = undefined;
-
-	/**
 	 * Id of input this message is related to. Sent to Error Summary service.
 	 */
 	@Input({ required: true }) focusId: string;
@@ -37,14 +32,19 @@ export class ErrorMessageComponent implements OnChanges, OnDestroy, AfterViewIni
 	@Input({ required: true }) label: string;
 
 	/**
-	 * If error is visible or not.
-	 */
-	@Input() visible: boolean = false;
-
-	/**
 	 * Error type from different keys in e. g. control.errors such as 'required' and 'minlength'
 	 */
 	@Input({ required: true }) type: string;
+
+	/**
+	 * Name of control this error is related to.
+	 */
+	@Input() controlName: string | undefined = undefined;
+
+	/**
+	 * If error is visible or not.
+	 */
+	@Input() visible: boolean = false;
 
 	/**
 	 * Visual variant of error message

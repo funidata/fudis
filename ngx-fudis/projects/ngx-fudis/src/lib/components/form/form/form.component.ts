@@ -28,6 +28,11 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 
 	@ContentChild(ContentDirective) mainContent: ContentDirective;
 
+	/**
+	 * Help text displayed in Error Summary before listing individual errors.
+	 */
+	@Input({ required: true }) errorSummaryHelpText: string;
+
 	@Input() id: string;
 
 	@Input() title: string;
@@ -48,11 +53,6 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 	 * If Error Summary is visible. Usually set on click of form submit button.
 	 */
 	@Input() errorSummaryVisible: boolean = false;
-
-	/**
-	 * Help text displayed in Error Summary before listing individual errors.
-	 */
-	@Input({ required: true }) errorSummaryHelpText: string;
 
 	@Input() errorSummaryLinkType: FudisFormErrorSummaryLink = 'router';
 

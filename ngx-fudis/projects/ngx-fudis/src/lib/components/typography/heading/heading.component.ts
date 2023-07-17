@@ -16,9 +16,9 @@ export class HeadingComponent implements OnInit {
 
 	@HostBinding('class') mainClass = 'fudis-heading-host';
 
-	@Input() size: FudisHeadingSize = 'lg';
-
 	@Input({ required: true }) tag: FudisHeadingTag;
+
+	@Input() size: FudisHeadingSize = 'lg';
 
 	@Input() marginBottom: FudisSpacing;
 

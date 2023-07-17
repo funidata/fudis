@@ -38,6 +38,11 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 	@ViewChild('buttonElement') buttonEl: ElementRef<HTMLButtonElement>;
 
 	/**
+	 * Text content of the button
+	 */
+	@Input({ required: true }) label: string;
+
+	/**
 	 * Button variant options
 	 */
 	@Input() variant: 'primary' | 'secondary' | 'tertiary' = 'primary';
@@ -51,11 +56,6 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 	 * Button type options
 	 */
 	@Input() type: 'button' | 'submit' = 'button';
-
-	/**
-	 * Text content of the button
-	 */
-	@Input({ required: true }) label: string;
 
 	/**
 	 * Hide visible label text for icon-only buttons.

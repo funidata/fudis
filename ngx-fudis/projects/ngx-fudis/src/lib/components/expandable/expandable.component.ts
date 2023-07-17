@@ -51,6 +51,11 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 	@ContentChild(ActionsDirective) headerButtons: ActionsDirective | null;
 
 	/**
+	 * Title for the expandable
+	 */
+	@Input({ required: true }) title: string;
+
+	/**
 	 * Tag is for semantic support for screen readers, this does not change the appearance of the expandable
 	 */
 	@Input() tag: 'h2' | 'h3' | 'h4' | 'h5' | 'h6' = 'h2';
@@ -59,11 +64,6 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 	 * Type i.e the look of the expandable
 	 */
 	@Input() variant: FudisExpandableType = 'regular';
-
-	/**
-	 * Title for the expandable
-	 */
-	@Input({ required: true }) title: string;
 
 	/**
 	 * Optional sub title, placed underneath the main title
