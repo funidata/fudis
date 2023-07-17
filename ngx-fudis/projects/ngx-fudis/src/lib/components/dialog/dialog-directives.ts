@@ -43,7 +43,10 @@ export class DialogTitleDirective extends MatDialogTitle implements OnInit {
 	selector: 'fudis-dialog-content',
 })
 export class DialogContentDirective extends MatDialogContent implements OnInit {
-	constructor(private elRef: ElementRef, private renderer: Renderer2) {
+	constructor(
+		private elRef: ElementRef,
+		private renderer: Renderer2
+	) {
 		super();
 	}
 

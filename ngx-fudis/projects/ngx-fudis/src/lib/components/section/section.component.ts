@@ -66,7 +66,10 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 
 	@Input() errorSummaryBreadcrumb: boolean = false;
 
-	constructor(private _idService: FudisIdService, private _errorSummaryService: FudisErrorSummaryService) {
+	constructor(
+		private _idService: FudisIdService,
+		private _errorSummaryService: FudisErrorSummaryService
+	) {
 		super();
 	}
 

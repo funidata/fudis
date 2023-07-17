@@ -36,17 +36,18 @@ export default {
 	component: GridComponent,
 	decorators: [
 		componentWrapperDecorator(
-			(story) => html` <style>
-					.grid-item {
-						padding: 0.5rem;
-						background-color: #f1f1f1;
-					}
+			(story) =>
+				html` <style>
+						.grid-item {
+							padding: 0.5rem;
+							background-color: #f1f1f1;
+						}
 
-					.text-margin {
-						margin-bottom: 1rem;
-					}
-				</style>
-				<div style="border: 3px solid #fdefb4">${story}</div>`
+						.text-margin {
+							margin-bottom: 1rem;
+						}
+					</style>
+					<div style="border: 3px solid #fdefb4">${story}</div>`
 		),
 	],
 

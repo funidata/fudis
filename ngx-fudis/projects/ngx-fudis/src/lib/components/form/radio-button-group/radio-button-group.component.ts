@@ -40,7 +40,10 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	 */
 	@Input() required: boolean | undefined = undefined;
 
-	constructor(private _idService: FudisIdService, private radioButtonGroupConfigService: FudisTranslationService) {
+	constructor(
+		private _idService: FudisIdService,
+		private radioButtonGroupConfigService: FudisTranslationService
+	) {
 		super(radioButtonGroupConfigService);
 	}
 

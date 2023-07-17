@@ -51,7 +51,10 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 
 	protected _id: string;
 
-	constructor(private _idService: FudisIdService, private _elementRef: ElementRef) {
+	constructor(
+		private _idService: FudisIdService,
+		private _elementRef: ElementRef
+	) {
 		super();
 	}
 

@@ -23,7 +23,10 @@ import { FudisDateRangeItem } from '../../../../types/forms';
 export class DateRangeComponent implements OnInit, AfterContentInit {
 	@ViewChild('dateRangeRef') _dateRangeRef: ElementRef;
 
-	constructor(@Inject(DOCUMENT) private _document: Document, private _idService: FudisIdService) {}
+	constructor(
+		@Inject(DOCUMENT) private _document: Document,
+		private _idService: FudisIdService
+	) {}
 
 	/**
 	 * Internal id for Date Range

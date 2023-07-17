@@ -14,7 +14,10 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	styleUrls: ['./autocomplete.component.scss'],
 })
 export class AutocompleteComponent extends InputBaseDirective implements OnInit, AfterContentInit, OnChanges {
-	constructor(private _idService: FudisIdService, _translationService: FudisTranslationService) {
+	constructor(
+		private _idService: FudisIdService,
+		_translationService: FudisTranslationService
+	) {
 		super(_translationService);
 
 		effect(() => {

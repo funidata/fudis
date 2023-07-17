@@ -107,7 +107,10 @@ class DialogExampleLauncherComponent implements OnInit {
 
 	dialogContentComponent: DialogExampleContentComponent;
 
-	constructor(public dialog: FudisDialogService, private formBuilder: FormBuilder) {}
+	constructor(
+		public dialog: FudisDialogService,
+		private formBuilder: FormBuilder
+	) {}
 
 	openDialog<T = any>(dialogToOpen: ComponentType<T> | TemplateRef<T>) {
 		const ref = this.dialog.open(dialogToOpen);

@@ -13,7 +13,10 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	styleUrls: ['./text-input.component.scss'],
 })
 export class TextInputComponent extends InputBaseDirective implements OnInit, OnChanges {
-	constructor(private _idService: FudisIdService, _translationService: FudisTranslationService) {
+	constructor(
+		private _idService: FudisIdService,
+		_translationService: FudisTranslationService
+	) {
 		super(_translationService);
 	}
 

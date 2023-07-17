@@ -90,7 +90,10 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 	 */
 	protected _headingId: string;
 
-	constructor(private _idService: FudisIdService, private _errorSummaryService: FudisErrorSummaryService) {
+	constructor(
+		private _idService: FudisIdService,
+		private _errorSummaryService: FudisErrorSummaryService
+	) {
 		this._id = this._idService.getNewId('expandable');
 		this._headingId = `${this._id}-heading`;
 	}

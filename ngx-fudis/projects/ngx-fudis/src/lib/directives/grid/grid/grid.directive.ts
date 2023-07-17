@@ -14,7 +14,10 @@ import { FudisGridService } from '../grid-service/grid.service';
 	selector: '[fudisGrid]',
 })
 export class GridDirective extends GridApiDirective implements OnInit, OnChanges {
-	constructor(private _gridElement: ElementRef, gridService: FudisGridService) {
+	constructor(
+		private _gridElement: ElementRef,
+		gridService: FudisGridService
+	) {
 		super();
 		this._gridService = gridService;
 		this._element = _gridElement.nativeElement;
