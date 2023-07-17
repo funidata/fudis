@@ -22,6 +22,8 @@ export class DropdownMenuComponent implements AfterContentInit {
 	 */
 	@Input() align: 'left' | 'right' = 'left';
 
+	protected _maxWidth: string = 'initial';
+
 	@HostListener('window:keydown.arrowDown', ['$event'])
 	handleKeyDown(event: KeyboardEvent) {
 		event.preventDefault();
@@ -33,8 +35,6 @@ export class DropdownMenuComponent implements AfterContentInit {
 			firstChildButtonElement?.focus();
 		}
 	}
-
-	protected _maxWidth: string = 'initial';
 
 	@HostListener('window:click', ['$event'])
 	getMaxWidth(): void {

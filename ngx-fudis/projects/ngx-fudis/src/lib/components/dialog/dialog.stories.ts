@@ -103,20 +103,21 @@ class DialogExampleContentComponent {}
 	`,
 })
 class DialogExampleLauncherComponent implements OnInit {
+	constructor(
+		public dialog: FudisDialogService,
+		private _formBuilder: FormBuilder
+	) {}
+
 	chosenPowerAnimal: string;
 
 	dialogContentComponent: DialogExampleContentComponent;
 
-	constructor(
-		public dialog: FudisDialogService,
-		private formBuilder: FormBuilder
-	) {}
+	exampleDialogFormGroup: FormGroup;
 
-	openDialog<T = any>(dialogToOpen: ComponentType<T> | TemplateRef<T>) {
-		const ref = this.dialog.open(dialogToOpen);
-		ref.afterClosed().subscribe((res: any) => {
-			// eslint-disable-next-line no-console
-			console.log(res);
+	ngOnInit(): void {
+		this.dialogContentComponent = DialogExampleContentComponent;
+		this.exampleDialogFormGroup = this._formBuilder.group({
+			powerAnimal: new FormControl('', Validators.required),
 		});
 	}
 
@@ -127,12 +128,11 @@ class DialogExampleLauncherComponent implements OnInit {
 		}
 	}
 
-	exampleDialogFormGroup: FormGroup;
-
-	ngOnInit(): void {
-		this.dialogContentComponent = DialogExampleContentComponent;
-		this.exampleDialogFormGroup = this.formBuilder.group({
-			powerAnimal: new FormControl('', Validators.required),
+	openDialog<T = any>(dialogToOpen: ComponentType<T> | TemplateRef<T>) {
+		const ref = this.dialog.open(dialogToOpen);
+		ref.afterClosed().subscribe((res: any) => {
+			// eslint-disable-next-line no-console
+			console.log(res);
 		});
 	}
 }

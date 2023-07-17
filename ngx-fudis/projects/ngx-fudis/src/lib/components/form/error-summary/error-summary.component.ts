@@ -30,33 +30,6 @@ import { FudisLanguageAbbr, FudisTranslationConfig } from '../../../types/miscel
 	styleUrls: ['./error-summary.component.scss'],
 })
 export class ErrorSummaryComponent implements OnChanges, OnDestroy {
-	@ViewChild('focusTarget') focusTarget: ElementRef;
-
-	/**
-	 * FieldSet parent element of this ErrorSummaryComponent
-	 */
-	@Input({ required: true }) parentComponent: HTMLFormElement;
-
-	/**
-	 * Help text displayed in Error Summary before listing individual errors.
-	 */
-	@Input({ required: true }) helpText: string;
-
-	@Input() linkType: FudisFormErrorSummaryLink = 'router';
-
-	@Input() liveRemove: boolean = false;
-
-	/**
-	 * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.
-	 */
-	protected _attentionText: string;
-
-	private _previousLanguage: FudisLanguageAbbr | undefined = undefined;
-
-	private _currentLanguage: FudisLanguageAbbr | undefined = undefined;
-
-	private _errorSummaryParentInfo: FudisErrorSummaryParent;
-
 	constructor(
 		@Inject(DOCUMENT) private _document: Document,
 		private _errorSummaryService: FudisErrorSummaryService,
@@ -74,9 +47,39 @@ export class ErrorSummaryComponent implements OnChanges, OnDestroy {
 		});
 	}
 
+	@ViewChild('focusTarget') focusTarget: ElementRef;
+
+	/**
+	 * FieldSet parent element of this ErrorSummaryComponent
+	 */
+	@Input({ required: true }) parentComponent: HTMLFormElement;
+
+	/**
+	 * Help text displayed in Error Summary before listing individual errors
+	 */
+	@Input({ required: true }) helpText: string;
+
+	/**
+	 * Type of the clickable error link
+	 */
+	@Input() linkType: FudisFormErrorSummaryLink = 'router';
+
+	@Input() liveRemove: boolean = false;
+
+	/**
+	 * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.
+	 */
+	protected _attentionText: string;
+
 	protected _translations: Signal<FudisTranslationConfig>;
 
 	protected _visibleErrorList: FudisFormErrorSummaryList[] = [];
+
+	private _previousLanguage: FudisLanguageAbbr | undefined = undefined;
+
+	private _currentLanguage: FudisLanguageAbbr | undefined = undefined;
+
+	private _errorSummaryParentInfo: FudisErrorSummaryParent;
 
 	private _numberOfFocusTries: number = 0;
 

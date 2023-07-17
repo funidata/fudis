@@ -21,33 +21,12 @@ import { FudisDateRangeItem } from '../../../../types/forms';
 	encapsulation: ViewEncapsulation.None,
 })
 export class DateRangeComponent implements OnInit, AfterContentInit {
-	@ViewChild('dateRangeRef') _dateRangeRef: ElementRef;
-
 	constructor(
 		@Inject(DOCUMENT) private _document: Document,
 		private _idService: FudisIdService
 	) {}
 
-	/**
-	 * Internal id for Date Range
-	 */
-	protected _id: string;
-
-	/**
-	 * Counter for number of tryes setting equal height to Date Picker
-	 */
-	private _heightSetTryCounter: number = 0;
-
-	/**
-	 * If setting height to equal is completed
-	 */
-	protected _heightSet: boolean = false;
-
-	private _untilDestroyed = untilDestroyed();
-
-	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('daterange');
-	}
+	@ViewChild('dateRangeRef') _dateRangeRef: ElementRef;
 
 	/**
 	 * Id for Date Range component
@@ -63,6 +42,27 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
 	 * Settings for end date
 	 */
 	@Input({ required: true }) endDate: FudisDateRangeItem;
+
+	/**
+	 * Internal id for Date Range
+	 */
+	protected _id: string;
+
+	/**
+	 * If setting height to equal is completed
+	 */
+	protected _heightSet: boolean = false;
+
+	/**
+	 * Counter for number of tries setting equal height to Date Picker
+	 */
+	private _heightSetTryCounter: number = 0;
+
+	private _untilDestroyed = untilDestroyed();
+
+	ngOnInit(): void {
+		this._id = this.id ?? this._idService.getNewId('daterange');
+	}
 
 	ngAfterContentInit(): void {
 		/**

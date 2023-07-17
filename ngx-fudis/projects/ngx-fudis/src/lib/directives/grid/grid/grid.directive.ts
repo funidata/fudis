@@ -30,7 +30,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 			this._gridService.getBreakpointState();
 
 			if (typeof this._columns !== 'string' && typeof this._columns !== 'number') {
-				this.setColumns();
+				this._setColumns();
 			}
 		});
 	}
@@ -57,7 +57,25 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 
 	private _gridDefaults: Signal<FudisGridAttributes | null>;
 
-	private defineColumns(): void {
+	ngOnInit(): void {
+		if (this.columns) {
+			this._defineColumns();
+		} else if (!this.ignoreDefaults && this._gridDefaults()?.columns) {
+			this._columns = getGridBreakpointDataArray(this._gridDefaults()!.columns!, gridColumnDefault);
+		}
+		this._applyGridCss();
+	}
+
+	ngOnChanges(): void {
+		if (this.columns) {
+			this._defineColumns();
+		} else if (!this.ignoreDefaults && this._gridDefaults()?.columns) {
+			this._columns = getGridBreakpointDataArray(this._gridDefaults()?.columns!, gridColumnDefault);
+		}
+		this._applyGridCss();
+	}
+
+	private _defineColumns(): void {
 		if (typeof this.columns === 'string') {
 			this._columns = replaceFormInputWidthsToRem(this.columns);
 		}
@@ -78,15 +96,15 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	/**
 	 * Set CSS grid-template-column attributes for this Grid element
 	 */
-	private setColumns(): void {
+	private _setColumns(): void {
 		this._gridService.setGridAttributes(this._element, this._columns);
 	}
 
 	/**
 	 * Apply CSS settings from Inputs
 	 */
-	private applyGridCss(): void {
-		this.setColumns();
+	private _applyGridCss(): void {
+		this._setColumns();
 
 		/**
 		 * Collection of Grid attributes from Inputs() updated with possible default values provided from application
@@ -127,23 +145,5 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		 * Get and apply list of CSS classes to align and position Grid
 		 */
 		this._element.classList.value = getGridClasses(this._gridInputObject);
-	}
-
-	ngOnInit(): void {
-		if (this.columns) {
-			this.defineColumns();
-		} else if (!this.ignoreDefaults && this._gridDefaults()?.columns) {
-			this._columns = getGridBreakpointDataArray(this._gridDefaults()!.columns!, gridColumnDefault);
-		}
-		this.applyGridCss();
-	}
-
-	ngOnChanges(): void {
-		if (this.columns) {
-			this.defineColumns();
-		} else if (!this.ignoreDefaults && this._gridDefaults()?.columns) {
-			this._columns = getGridBreakpointDataArray(this._gridDefaults()?.columns!, gridColumnDefault);
-		}
-		this.applyGridCss();
 	}
 }

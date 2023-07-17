@@ -23,7 +23,7 @@ export class FudisGridService {
 
 	private _currentScreenSize = signal<BreakpointState | null>(null);
 
-	private currentScreenSize = this._currentScreenSize.asReadonly();
+	private _screenSize = this._currentScreenSize.asReadonly();
 
 	/**
 	 * To set from application default values for all Grids application uses.
@@ -43,7 +43,7 @@ export class FudisGridService {
 	 * Get current state of Breakpoints
 	 */
 	getBreakpointState(): BreakpointState | null {
-		return this.currentScreenSize();
+		return this._screenSize();
 	}
 
 	/**
@@ -57,7 +57,7 @@ export class FudisGridService {
 				elementToModify.style.gridColumn = columns;
 			} else {
 				columns.forEach((item) => {
-					if (this.currentScreenSize()?.breakpoints[item.breakpoint]) {
+					if (this._screenSize()?.breakpoints[item.breakpoint]) {
 						elementToModify.style.gridColumn = item.value;
 					}
 				});
@@ -66,7 +66,7 @@ export class FudisGridService {
 			elementToModify.style.gridTemplateColumns = columns;
 		} else {
 			columns.forEach((item) => {
-				if (this.currentScreenSize()?.breakpoints[item.breakpoint]) {
+				if (this._screenSize()?.breakpoints[item.breakpoint]) {
 					elementToModify.style.gridTemplateColumns = item.value;
 				}
 			});
@@ -80,7 +80,7 @@ export class FudisGridService {
 			elementToModify.style.justifySelf = alignX;
 		} else {
 			alignX.forEach((item) => {
-				if (this.currentScreenSize()?.breakpoints[item.breakpoint]) {
+				if (this._screenSize()?.breakpoints[item.breakpoint]) {
 					elementToModify.style.justifySelf = item.value;
 				}
 			});
@@ -94,7 +94,7 @@ export class FudisGridService {
 			elementToModify.style.alignSelf = alignY;
 		} else {
 			alignY.forEach((item) => {
-				if (this.currentScreenSize()?.breakpoints[item.breakpoint]) {
+				if (this._screenSize()?.breakpoints[item.breakpoint]) {
 					elementToModify.style.alignSelf = item.value;
 				}
 			});

@@ -11,6 +11,11 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ErrorMessageComponent implements OnChanges, OnDestroy, AfterViewInit {
+	constructor(
+		private _errorSummaryService: FudisErrorSummaryService,
+		private _translationService: FudisTranslationService
+	) {}
+
 	/*
 	 * Error message to display
 	 */
@@ -46,16 +51,20 @@ export class ErrorMessageComponent implements OnChanges, OnDestroy, AfterViewIni
 	 */
 	@Input() variant: 'body-text' | 'form-error' = 'form-error';
 
+	/**
+	 * Has error been created and sent forward
+	 */
 	private _errorSent: boolean = false;
 
+	/**
+	 * Error message to include in error summary item
+	 */
 	private _currentMessage: string;
 
+	/**
+	 * Error label to include in error summary item
+	 */
 	private _currentLabel: string | undefined = undefined;
-
-	constructor(
-		private _errorSummaryService: FudisErrorSummaryService,
-		private _translationService: FudisTranslationService
-	) {}
 
 	ngAfterViewInit(): void {
 		setTimeout(() => {

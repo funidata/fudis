@@ -15,6 +15,13 @@ import { FudisFormErrorSummaryLink } from '../../../types/forms';
 	encapsulation: ViewEncapsulation.None,
 })
 export class FormComponent extends GridApiDirective implements OnInit, AfterContentInit {
+	constructor(
+		private _idService: FudisIdService,
+		private _elementRef: ElementRef
+	) {
+		super();
+	}
+
 	@ContentChild(ActionsDirective) headerActions: ActionsDirective;
 
 	@ContentChild(HeaderDirective) headerContent: HeaderDirective;
@@ -51,18 +58,11 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 
 	protected _id: string;
 
-	constructor(
-		private _idService: FudisIdService,
-		private _elementRef: ElementRef
-	) {
-		super();
-	}
+	protected _formElement: HTMLFormElement | undefined;
 
 	ngOnInit(): void {
 		this._id = this.id ? this.id : this._idService.getNewId('form');
 	}
-
-	protected _formElement: HTMLFormElement | undefined;
 
 	ngAfterContentInit(): void {
 		this._formElement = this._elementRef.nativeElement as HTMLFormElement;

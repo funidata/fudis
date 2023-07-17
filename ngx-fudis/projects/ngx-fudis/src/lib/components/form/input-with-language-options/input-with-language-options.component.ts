@@ -50,7 +50,6 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	 * Object containing error messages for each FormControl and for the FormGroup.
 	 * E. g. {atLeastOneRequired: 'At least one input of any language must have a value.', finnish:{maxlength: 'Input in Finnish cannot be longer than X charactes.'}}
 	 */
-
 	@Input() groupErrorMsg: FudisFormGroupErrors;
 
 	/**
@@ -60,21 +59,21 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	protected _dropdownControl: FormControl<FudisDropdownOption>;
 
-	private _dropdownValue: FudisDropdownOption;
-
-	private _for: string = '';
-
 	protected _requiredControls: { [key: string]: { value?: string | null; required: boolean | undefined } } = {};
-
-	private _atLeastOneRequired: boolean = false;
-
-	private _nonEmptyControls: string[] = [];
 
 	protected _updatedOptions: FudisDropdownOption[] = [];
 
 	protected _missingLanguage: string;
 
 	protected _languageLabel: string;
+
+	private _dropdownValue: FudisDropdownOption;
+
+	private _for: string = '';
+
+	private _atLeastOneRequired: boolean = false;
+
+	private _nonEmptyControls: string[] = [];
 
 	handleLanguageSelect(value: FudisDropdownOption): void {
 		this._dropdownValue = value;

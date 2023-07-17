@@ -124,19 +124,6 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 	}
 
 	/**
-	 * Filter options when user inputs text or opens dropdown
-	 */
-	private _filter(value: string): FudisDropdownOption[] {
-		if (value || value === '') {
-			const filterValue = value.toLowerCase();
-			const filteredOptions = this.options.filter((option) => option.viewValue.toLowerCase().includes(filterValue));
-
-			return filteredOptions;
-		}
-		return [];
-	}
-
-	/**
 	 * Clear any written or selected value in the autocomplete field
 	 */
 	clearFilter(): void {
@@ -150,11 +137,27 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 		this.autocompleteInput.nativeElement.focus();
 	}
 
+	/**
+	 * Handle blur
+	 */
 	autocompleteBlur(event: Event): void {
 		this.control.markAsTouched();
 		if (this.control.valid && this.control.value) {
 			this._autocompleteFormControl.patchValue(this.control.value.viewValue);
 		}
 		this.handleBlur.emit(event);
+	}
+
+	/**
+	 * Filter options when user inputs text or opens dropdown
+	 */
+	private _filter(value: string): FudisDropdownOption[] {
+		if (value || value === '') {
+			const filterValue = value.toLowerCase();
+			const filteredOptions = this.options.filter((option) => option.viewValue.toLowerCase().includes(filterValue));
+
+			return filteredOptions;
+		}
+		return [];
 	}
 }

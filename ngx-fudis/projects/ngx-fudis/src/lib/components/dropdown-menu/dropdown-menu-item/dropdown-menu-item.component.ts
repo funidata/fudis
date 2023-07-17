@@ -7,6 +7,8 @@ import { FudisDropdownMenuItemService } from './dropdown-menu-item.service';
 	styleUrls: ['./dropdown-menu-item.component.scss'],
 })
 export class DropdownMenuItemComponent {
+	constructor(private _clickService: FudisDropdownMenuItemService) {}
+
 	@ViewChild('dropdownItem') dropdownItem: ElementRef;
 
 	/**
@@ -23,8 +25,6 @@ export class DropdownMenuItemComponent {
 	 * Optional click handler
 	 */
 	@Output() handleClick = new EventEmitter<Event>();
-
-	constructor(private clickService: FudisDropdownMenuItemService) {}
 
 	// eslint-disable-next-line class-methods-use-this
 	handleKeyDown(event: KeyboardEvent) {
@@ -54,11 +54,11 @@ export class DropdownMenuItemComponent {
 			!(event.relatedTarget as HTMLElement)?.classList?.contains('fudis-dropdown-menu-item') &&
 			(event.relatedTarget as HTMLElement) !== menuButton
 		) {
-			this.clickService.setMenuStatus(false);
+			this._clickService.setMenuStatus(false);
 		}
 	}
 
 	closeDropdown(): void {
-		this.clickService.setMenuStatus(false);
+		this._clickService.setMenuStatus(false);
 	}
 }

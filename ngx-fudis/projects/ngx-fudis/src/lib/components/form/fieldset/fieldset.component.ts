@@ -29,14 +29,6 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	encapsulation: ViewEncapsulation.None,
 })
 export class FieldSetComponent extends FieldSetBaseDirective implements AfterViewInit, OnInit, OnDestroy, OnChanges {
-	@ContentChild(ActionsDirective) headerActions: ActionsDirective | null;
-
-	@ContentChild(NotificationsDirective) notifications: NotificationsDirective;
-
-	@ContentChild(ContentDirective) content: ContentDirective;
-
-	@ViewChild('fieldset') fieldset: ElementRef;
-
 	constructor(
 		private _idService: FudisIdService,
 		private _errorSummaryService: FudisErrorSummaryService,
@@ -44,6 +36,14 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	) {
 		super(_fieldsetTranslationService);
 	}
+
+	@ContentChild(ActionsDirective) headerActions: ActionsDirective | null;
+
+	@ContentChild(NotificationsDirective) notifications: NotificationsDirective;
+
+	@ContentChild(ContentDirective) content: ContentDirective;
+
+	@ViewChild('fieldset') fieldset: ElementRef;
 
 	/**
 	 * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
@@ -91,11 +91,20 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	 */
 	@Input() required: boolean | undefined = undefined;
 
+	/**
+	 * Title property to send to error summary service
+	 */
+	protected _title: string;
+
+	/**
+	 * Has fieldset been added to error summary
+	 */
 	private _fieldsetSent: boolean = false;
 
+	/**
+	 * Fieldset object to send to error summary
+	 */
 	private _fieldsetInfo: FudisFormErrorSummarySection;
-
-	protected _title: string;
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('fieldset');

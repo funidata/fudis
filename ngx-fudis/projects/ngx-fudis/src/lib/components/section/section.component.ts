@@ -16,6 +16,13 @@ import { FudisFormErrorSummarySection } from '../../types/forms';
 	styleUrls: ['./section.component.scss'],
 })
 export class SectionComponent extends TooltipApiDirective implements OnInit, OnChanges, OnDestroy {
+	constructor(
+		private _idService: FudisIdService,
+		private _errorSummaryService: FudisErrorSummaryService
+	) {
+		super();
+	}
+
 	@ContentChild(NotificationsDirective) notifications: NotificationsDirective | null;
 
 	@ContentChild(ContentDirective) content: ContentDirective | null;
@@ -66,37 +73,30 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 
 	@Input() errorSummaryBreadcrumb: boolean = false;
 
-	constructor(
-		private _idService: FudisIdService,
-		private _errorSummaryService: FudisErrorSummaryService
-	) {
-		super();
-	}
-
 	protected _headingId: string;
 
 	protected _classList: string[];
 
 	protected _id: string;
 
+	protected _title: string;
+
 	private _errorSummaryInfo: FudisFormErrorSummarySection;
 
 	private _errorSummaryInfoSent: boolean = false;
-
-	protected _title: string;
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('section');
 
 		this._headingId = `${this._id}-heading`;
 
-		this._classList = this.getClasses();
+		this._classList = this._getClasses();
 		this._title = this.title;
 		this.addToErrorSummary();
 	}
 
 	ngOnChanges(): void {
-		this._classList = this.getClasses();
+		this._classList = this._getClasses();
 
 		if (this.title !== this._title && this._id) {
 			this._title = this.title;
@@ -106,14 +106,6 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 
 	ngOnDestroy(): void {
 		this.removeFromErrorSummary();
-	}
-
-	private getClasses(): string[] {
-		const cssClasses = this.classes ?? [];
-
-		cssClasses.push('fudis-section');
-
-		return cssClasses;
 	}
 
 	addToErrorSummary(): void {
@@ -131,5 +123,13 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 		if (this._errorSummaryInfoSent) {
 			this._errorSummaryService.removeSection(this._errorSummaryInfo);
 		}
+	}
+
+	private _getClasses(): string[] {
+		const cssClasses = this.classes ?? [];
+
+		cssClasses.push('fudis-section');
+
+		return cssClasses;
 	}
 }

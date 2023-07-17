@@ -12,6 +12,8 @@ import { FudisSpacing } from '../../../types/miscellaneous';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeadingComponent implements OnInit {
+	constructor(private _idService: FudisIdService) {}
+
 	@HostBinding('class') mainClass = 'fudis-heading-host';
 
 	@Input() size: FudisHeadingSize = 'lg';
@@ -24,11 +26,7 @@ export class HeadingComponent implements OnInit {
 
 	protected _classList: string = '';
 
-	_marginBottom = 'lg';
-
 	protected _id: string;
-
-	constructor(private _idService: FudisIdService) {}
 
 	getHeadingMarginBottom(): string {
 		if (this.size === 'xxl' || this.size === 'xl') {

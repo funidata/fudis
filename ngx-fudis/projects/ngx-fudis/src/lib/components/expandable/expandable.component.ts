@@ -38,6 +38,14 @@ import { FudisFormErrorSummarySection } from '../../types/forms';
 	encapsulation: ViewEncapsulation.None,
 })
 export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
+	constructor(
+		private _idService: FudisIdService,
+		private _errorSummaryService: FudisErrorSummaryService
+	) {
+		this._id = this._idService.getNewId('expandable');
+		this._headingId = `${this._id}-heading`;
+	}
+
 	@ContentChild(ContentDirective) content: ContentDirective;
 
 	@ContentChild(ActionsDirective) headerButtons: ActionsDirective | null;
@@ -74,11 +82,9 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 		this.setCollapsedStatus(value);
 	}
 
-	protected _collapsed = true;
+	@Output() collapsedChange = new EventEmitter<boolean>();
 
-	public getCollapsedStatus(): boolean {
-		return this._collapsed;
-	}
+	protected _collapsed = true;
 
 	/**
 	 * Internal id to generate unique id
@@ -90,18 +96,15 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 	 */
 	protected _headingId: string;
 
-	constructor(
-		private _idService: FudisIdService,
-		private _errorSummaryService: FudisErrorSummaryService
-	) {
-		this._id = this._idService.getNewId('expandable');
-		this._headingId = `${this._id}-heading`;
-	}
-
 	/**
 	 *  Lazy loading variable
 	 */
 	protected _openedOnce = false;
+
+	/**
+	 * Internal, separate title property to send to error-summary service
+	 */
+	protected _title: string;
 
 	/**
 	 * Object to send for error-summary service
@@ -113,15 +116,15 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 	 */
 	private _errorSummaryInfoSent: boolean = false;
 
-	protected _title: string;
+	public getCollapsedStatus(): boolean {
+		return this._collapsed;
+	}
 
 	setCollapsedStatus(value: boolean): void {
 		this._collapsed = value ?? this._collapsed;
 		this._openedOnce = this._openedOnce || !this._collapsed;
 		this.collapsedChange.emit(this._collapsed);
 	}
-
-	@Output() collapsedChange = new EventEmitter<boolean>();
 
 	ngOnInit(): void {
 		this._title = this.title;
