@@ -16,16 +16,34 @@ export class HeadingComponent implements OnInit {
 
 	@HostBinding('class') mainClass = 'fudis-heading-host';
 
+	/**
+	 * Heading tag
+	 */
 	@Input({ required: true }) tag: FudisHeadingTag;
 
+	/**
+	 * Heading size
+	 */
 	@Input() size: FudisHeadingSize = 'lg';
 
+	/**
+	 * Margin bottom for heading
+	 */
 	@Input() marginBottom: FudisSpacing;
 
+	/**
+	 * Heading id
+	 */
 	@Input() id: string;
 
+	/**
+	 * Heading CSS class list
+	 */
 	protected _classList: string = '';
 
+	/**
+	 * Internal id to generate unique id
+	 */
 	protected _id: string;
 
 	getHeadingMarginBottom(): string {

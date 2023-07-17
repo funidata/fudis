@@ -22,6 +22,9 @@ export class DropdownMenuComponent implements AfterContentInit {
 	 */
 	@Input() align: 'left' | 'right' = 'left';
 
+	/**
+	 * Determine dropdown max-width
+	 */
 	protected _maxWidth: string = 'initial';
 
 	@HostListener('window:keydown.arrowDown', ['$event'])

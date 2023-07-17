@@ -102,17 +102,17 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 	protected _openedOnce = false;
 
 	/**
-	 * Internal, separate title property to send to error-summary service
+	 * Internal, separate title property to send to error summary service
 	 */
 	protected _title: string;
 
 	/**
-	 * Object to send for error-summary service
+	 * Object to send to error summary service
 	 */
 	private _errorSummaryInfo: FudisFormErrorSummarySection;
 
 	/**
-	 * Is info sent to error-summary service
+	 * Is info sent to error summary service
 	 */
 	private _errorSummaryInfoSent: boolean = false;
 

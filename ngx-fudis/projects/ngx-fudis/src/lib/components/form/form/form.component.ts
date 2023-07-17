@@ -33,20 +33,41 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 	 */
 	@Input({ required: true }) errorSummaryHelpText: string;
 
+	/**
+	 * Form id
+	 */
 	@Input() id: string;
 
+	/**
+	 * Form title
+	 */
 	@Input() title: string;
 
+	/**
+	 * Heading tag for the form title
+	 */
 	@Input() titleTag: FudisHeadingTag;
 
+	/**
+	 * Heading size for the form title
+	 */
 	@Input() titleSize: FudisHeadingSize = 'xl';
 
 	@Input() helpText: string;
 
+	/**
+	 * Possible badge to append the form title
+	 */
 	@Input() badge: FudisBadgeVariant | null;
 
+	/**
+	 * Badge text
+	 */
 	@Input() badgeText: string | null;
 
+	/**
+	 * Dynamic update of Error Summary
+	 */
 	@Input() errorSummaryLiveRemove: boolean = false;
 
 	/**
@@ -54,10 +75,19 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 	 */
 	@Input() errorSummaryVisible: boolean = false;
 
+	/**
+	 * Type of the clickable error link in Error Summary
+	 */
 	@Input() errorSummaryLinkType: FudisFormErrorSummaryLink = 'router';
 
+	/**
+	 * Separate internal id to generate unique id
+	 */
 	protected _id: string;
 
+	/**
+	 * HTML FormElement
+	 */
 	protected _formElement: HTMLFormElement | undefined;
 
 	ngOnInit(): void {

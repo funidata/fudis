@@ -64,6 +64,9 @@ export class ErrorSummaryComponent implements OnChanges, OnDestroy {
 	 */
 	@Input() linkType: FudisFormErrorSummaryLink = 'router';
 
+	/**
+	 * Dynamic update of visible errors in the summary
+	 */
 	@Input() liveRemove: boolean = false;
 
 	/**
@@ -71,16 +74,34 @@ export class ErrorSummaryComponent implements OnChanges, OnDestroy {
 	 */
 	protected _attentionText: string;
 
+	/**
+	 * Fudis translations
+	 */
 	protected _translations: Signal<FudisTranslationConfig>;
 
+	/**
+	 * Visible errors
+	 */
 	protected _visibleErrorList: FudisFormErrorSummaryList[] = [];
 
+	/**
+	 * Application language toggle property
+	 */
 	private _previousLanguage: FudisLanguageAbbr | undefined = undefined;
 
+	/**
+	 * Application language toggle property
+	 */
 	private _currentLanguage: FudisLanguageAbbr | undefined = undefined;
 
+	/**
+	 * Parent form of this Error Summary
+	 */
 	private _errorSummaryParentInfo: FudisErrorSummaryParent;
 
+	/**
+	 * Focus counter to hit the correct focus field
+	 */
 	private _numberOfFocusTries: number = 0;
 
 	getErrors(): void {
@@ -128,10 +149,6 @@ export class ErrorSummaryComponent implements OnChanges, OnDestroy {
 		});
 
 		this._changeDetectorRef.detectChanges();
-
-		/**
-		 * Focus to Error Summary element when visible error list gets updated.
-		 */
 
 		this._currentLanguage = this._translationService.getLanguage();
 

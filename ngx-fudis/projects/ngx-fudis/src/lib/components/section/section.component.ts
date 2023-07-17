@@ -27,12 +27,24 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 
 	@ContentChild(ContentDirective) content: ContentDirective | null;
 
+	/**
+	 * Section title
+	 */
 	@Input({ required: true }) title: string;
 
+	/**
+	 * Section id
+	 */
 	@Input() id: string;
 
+	/**
+	 * Heading tag for the section title
+	 */
 	@Input() titleTag: FudisHeadingTag = 'h2';
 
+	/**
+	 * Heading size for the section title
+	 */
 	@Input() titleSize: FudisHeadingSize = 'lg';
 
 	/**
@@ -71,18 +83,39 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 	 */
 	@Input() classes: string[];
 
+	/**
+	 * Is section title shown in error summary breadcrumb
+	 */
 	@Input() errorSummaryBreadcrumb: boolean = false;
 
+	/**
+	 * Internal, separate unique heading id
+	 */
 	protected _headingId: string;
 
+	/**
+	 * Section CSS class list
+	 */
 	protected _classList: string[];
 
+	/**
+	 * Internal id to generate unique id
+	 */
 	protected _id: string;
 
+	/**
+	 * Internal, separate title property to send to error summary service
+	 */
 	protected _title: string;
 
+	/**
+	 * Object to send to error summary service
+	 */
 	private _errorSummaryInfo: FudisFormErrorSummarySection;
 
+	/**
+	 * Is info sent to error summary service
+	 */
 	private _errorSummaryInfoSent: boolean = false;
 
 	ngOnInit(): void {

@@ -57,22 +57,49 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	 */
 	@Input() variant: 'text-input' | 'text-area' = 'text-input';
 
+	/**
+	 * Control for language option dropdown
+	 */
 	protected _dropdownControl: FormControl<FudisDropdownOption>;
 
+	/**
+	 * Property to check control values for required language options
+	 */
 	protected _requiredControls: { [key: string]: { value?: string | null; required: boolean | undefined } } = {};
 
+	/**
+	 * Updated options list after changes
+	 */
 	protected _updatedOptions: FudisDropdownOption[] = [];
 
+	/**
+	 * Fudis translation
+	 */
 	protected _missingLanguage: string;
 
+	/**
+	 * Fudis translation
+	 */
 	protected _languageLabel: string;
 
+	/**
+	 * Language option dropdown value
+	 */
 	private _dropdownValue: FudisDropdownOption;
 
+	/**
+	 * For attribute for dropdown value
+	 */
 	private _for: string = '';
 
+	/**
+	 * At least one language input is required
+	 */
 	private _atLeastOneRequired: boolean = false;
 
+	/**
+	 * Property to check that control is not empty
+	 */
 	private _nonEmptyControls: string[] = [];
 
 	handleLanguageSelect(value: FudisDropdownOption): void {

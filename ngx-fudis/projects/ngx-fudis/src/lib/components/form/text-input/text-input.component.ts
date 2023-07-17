@@ -20,14 +20,14 @@ export class TextInputComponent extends InputBaseDirective implements OnInit, On
 		super(_translationService);
 	}
 
+	@HostBinding('class') classes = 'fudis-text-input-host';
+
 	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;
 
 	/**
 	 * FormControl for the input.
 	 */
 	@Input() control: FormControl<string | null | number>;
-
-	@HostBinding('class') classes = 'fudis-text-input-host';
 
 	/**
 	 * Available sizes for the input - defaults to large. Recommended size for number input is small.
