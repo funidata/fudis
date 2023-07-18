@@ -28,16 +28,16 @@ import { CheckboxComponent } from './checkbox.component';
 	`,
 })
 class CheckboxExampleComponent {
+	constructor(private _formBuilder: FormBuilder) {}
+
 	checkboxFirst: FormControl = new FormControl({ value: true, disabled: true });
 
 	checkboxSecond: FormControl = new FormControl(false, Validators.requiredTrue);
 
-	mainFormGroup: FormGroup = this.formBuilder.group({
+	mainFormGroup: FormGroup = this._formBuilder.group({
 		checkboxFirst: this.checkboxFirst,
 		checkboxSecond: this.checkboxSecond,
 	});
-
-	constructor(private formBuilder: FormBuilder) {}
 }
 
 export default {

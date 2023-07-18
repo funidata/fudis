@@ -13,6 +13,13 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	encapsulation: ViewEncapsulation.None,
 })
 export class RadioButtonGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
+	constructor(
+		private _idService: FudisIdService,
+		private _radioButtonGroupConfigService: FudisTranslationService
+	) {
+		super(_radioButtonGroupConfigService);
+	}
+
 	@HostBinding('class') classes = 'fudis-radio-button-group-host';
 
 	/*
@@ -39,10 +46,6 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	 * Set fieldset as required. By default set to 'undefined' and this attribute is determined to true / false depending on if FormControl has Validators.required. This setting will override that.
 	 */
 	@Input() required: boolean | undefined = undefined;
-
-	constructor(private _idService: FudisIdService, private radioButtonGroupConfigService: FudisTranslationService) {
-		super(radioButtonGroupConfigService);
-	}
 
 	ngOnInit() {
 		this._id = this.id ?? this._idService.getNewId('radioButtonGroup');

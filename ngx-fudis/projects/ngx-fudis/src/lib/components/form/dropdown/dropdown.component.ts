@@ -12,7 +12,10 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	encapsulation: ViewEncapsulation.None,
 })
 export class DropdownComponent extends InputBaseDirective implements OnInit, OnChanges {
-	constructor(private _idService: FudisIdService, _translationService: FudisTranslationService) {
+	constructor(
+		private _idService: FudisIdService,
+		_translationService: FudisTranslationService
+	) {
 		super(_translationService);
 	}
 

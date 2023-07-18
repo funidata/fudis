@@ -15,7 +15,7 @@ export class FudisDialogService {
 	 */
 
 	open<T, R = any>(component: ComponentType<T> | TemplateRef<T>, config?: MatDialogConfig<any>): MatDialogRef<T, R> {
-		const dialogRef = this.ngMaterialDialog.open(component, FudisDialogService.createConfig(config));
+		const dialogRef = this.ngMaterialDialog.open(component, FudisDialogService._createConfig(config));
 
 		dialogRef.keydownEvents().subscribe((event) => {
 			if (event.key === 'Escape') {
@@ -33,7 +33,7 @@ export class FudisDialogService {
 	/**
 	 * Merge consumer's config with ours.
 	 */
-	private static createConfig(userConfig: MatDialogConfig<any> = {}): MatDialogConfig<any> {
+	private static _createConfig(userConfig: MatDialogConfig<any> = {}): MatDialogConfig<any> {
 		const overridableOptions = { hasBackdrop: true, disableClose: true, autoFocus: false };
 		const forcedOptions = { panelClass: 'fudis-dialog-panel' };
 		return { ...overridableOptions, ...userConfig, ...forcedOptions };

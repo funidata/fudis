@@ -48,6 +48,8 @@ import { FudisFormErrors } from '../../../types/forms';
 	`,
 })
 class TextInputWithFormControlExampleComponent {
+	constructor(private _formBuilder: FormBuilder) {}
+
 	minLength = 5;
 
 	maxLength = 20;
@@ -74,14 +76,12 @@ class TextInputWithFormControlExampleComponent {
 		max: `Given number is not inside the allowed range ${this.minNumber} - ${this.maxNumber}.`,
 	};
 
-	mainFormGroup: FormGroup = this.formBuilder.group({
+	mainFormGroup: FormGroup = this._formBuilder.group({
 		first: new FormControl(''),
 		second: new FormControl('', Validators.required),
 		third: new FormControl('', this.validatorsForThird),
 		fourth: new FormControl('', this.validatorsForFourth),
 	});
-
-	constructor(private formBuilder: FormBuilder) {}
 }
 
 export default {

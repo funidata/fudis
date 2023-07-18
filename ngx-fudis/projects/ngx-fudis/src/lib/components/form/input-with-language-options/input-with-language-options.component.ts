@@ -18,7 +18,10 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	styleUrls: ['./input-with-language-options.component.scss'],
 })
 export class InputWithLanguageOptionsComponent extends InputBaseDirective implements OnInit, OnChanges {
-	constructor(private _idService: FudisIdService, _translationService: FudisTranslationService) {
+	constructor(
+		private _idService: FudisIdService,
+		_translationService: FudisTranslationService
+	) {
 		super(_translationService);
 
 		effect(() => {
@@ -47,7 +50,6 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	 * Object containing error messages for each FormControl and for the FormGroup.
 	 * E. g. {atLeastOneRequired: 'At least one input of any language must have a value.', finnish:{maxlength: 'Input in Finnish cannot be longer than X charactes.'}}
 	 */
-
 	@Input() groupErrorMsg: FudisFormGroupErrors;
 
 	/**
@@ -55,23 +57,50 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	 */
 	@Input() variant: 'text-input' | 'text-area' = 'text-input';
 
+	/**
+	 * Control for language option dropdown
+	 */
 	protected _dropdownControl: FormControl<FudisDropdownOption>;
 
-	private _dropdownValue: FudisDropdownOption;
-
-	private _for: string = '';
-
+	/**
+	 * Property to check control values for required language options
+	 */
 	protected _requiredControls: { [key: string]: { value?: string | null; required: boolean | undefined } } = {};
 
-	private _atLeastOneRequired: boolean = false;
-
-	private _nonEmptyControls: string[] = [];
-
+	/**
+	 * Updated options list after changes
+	 */
 	protected _updatedOptions: FudisDropdownOption[] = [];
 
+	/**
+	 * Fudis translation
+	 */
 	protected _missingLanguage: string;
 
+	/**
+	 * Fudis translation
+	 */
 	protected _languageLabel: string;
+
+	/**
+	 * Language option dropdown value
+	 */
+	private _dropdownValue: FudisDropdownOption;
+
+	/**
+	 * For attribute for dropdown value
+	 */
+	private _for: string = '';
+
+	/**
+	 * At least one language input is required
+	 */
+	private _atLeastOneRequired: boolean = false;
+
+	/**
+	 * Property to check that control is not empty
+	 */
+	private _nonEmptyControls: string[] = [];
 
 	handleLanguageSelect(value: FudisDropdownOption): void {
 		this._dropdownValue = value;

@@ -11,11 +11,6 @@ export class RadioButtonComponent {
 	@HostBinding('class') classes = 'fudis-radio-button-host';
 
 	/*
-	 * Id of single Radio button
-	 */
-	@Input() id: string;
-
-	/*
 	 * FormControl for Radio Button group
 	 */
 	@Input({ required: true }) control: FormControl;
@@ -34,6 +29,11 @@ export class RadioButtonComponent {
 	 * Name for group of Radio Buttons, e.g. "fruit"
 	 */
 	@Input({ required: true }) name: string;
+
+	/*
+	 * Id of single Radio button
+	 */
+	@Input() id: string;
 
 	/*
 	 * If Radio Button group of same name selection is required
