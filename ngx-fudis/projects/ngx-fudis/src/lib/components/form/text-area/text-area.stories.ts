@@ -12,8 +12,8 @@ import readme from './readme.mdx';
 			<fudis-text-area
 				[control]="firstTextAreaControl"
 				[errorMsg]="{ required: 'Missing a value.' }"
-				label="Basic required text area"
-				helpText="Add some text to the text area."
+				[label]="'Basic required text area'"
+				[helpText]="'Add some text to the text area.'"
 				[tooltip]="'I am here to give you additional guidance'"
 				[tooltipPosition]="'right'"
 				[tooltipToggle]="false">
@@ -24,7 +24,7 @@ import readme from './readme.mdx';
 				[maxLength]="maxLength"
 				[label]="'Required text area with max and min character length'"
 				[errorMsg]="validatorMessages"
-				helpText="This is an example text area with multiple validations.">
+				[helpText]="'This is an example text area with multiple validations.'">
 			</fudis-text-area>
 		</form>
 	`,
@@ -45,7 +45,6 @@ class TextAreaWithFormControlExampleComponent {
 	validatorMessages: FudisFormErrors = {
 		required: 'This is required field.',
 		minlength: `Too short input. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,
-		maxlength: `Too long input. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,
 	};
 
 	firstTextAreaControl: FormControl = new FormControl('', [Validators.required]);
