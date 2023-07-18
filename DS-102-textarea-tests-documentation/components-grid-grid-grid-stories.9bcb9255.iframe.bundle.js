@@ -1,14 +1,14 @@
 "use strict";(self.webpackChunkngx_fudis=self.webpackChunkngx_fudis||[]).push([[6954],{"./projects/ngx-fudis/src/lib/components/grid/grid/grid.stories.ts":(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{__webpack_require__.r(__webpack_exports__),__webpack_require__.d(__webpack_exports__,{EquallyWideColumns:()=>EquallyWideColumns,Example:()=>Example,ResponsiveColumns:()=>ResponsiveColumns,UnequallyWideColumns:()=>UnequallyWideColumns,default:()=>__WEBPACK_DEFAULT_EXPORT__});var _storybook_angular__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__("./node_modules/@storybook/angular/dist/index.mjs"),_grid_component__WEBPACK_IMPORTED_MODULE_1__=__webpack_require__("./projects/ngx-fudis/src/lib/components/grid/grid/grid.component.ts");const html=String.raw,commonExclude=["_element","_gridInputObject","_columns","_gridService","applyGridCss","ngOnInit","ngOnChanges","setColumns","classes"],combinedExclude=commonExclude.concat(["align","alignItemsX","alignItemsY","classes","columnGap","marginBottom","marginSides","marginTop","rowGap","width"]),__WEBPACK_DEFAULT_EXPORT__={title:"Components/Grid/Grid",component:_grid_component__WEBPACK_IMPORTED_MODULE_1__.M,decorators:[(0,_storybook_angular__WEBPACK_IMPORTED_MODULE_0__.componentWrapperDecorator)((story=>html` <style>
-					.grid-item {
-						padding: 0.5rem;
-						background-color: #f1f1f1;
-					}
+						.grid-item {
+							padding: 0.5rem;
+							background-color: #f1f1f1;
+						}
 
-					.text-margin {
-						margin-bottom: 1rem;
-					}
-				</style>
-				<div style="border: 3px solid #fdefb4">${story}</div>`))],parameters:{controls:{exclude:commonExclude}}},Example=(args=>({props:args,argTypes:{columns:{options:["1fr 3fr","1fr 1fr","5fr 1fr"],control:{type:"select"}}},template:html`<fudis-grid
+						.text-margin {
+							margin-bottom: 1rem;
+						}
+					</style>
+					<div style="border: 3px solid #fdefb4">${story}</div>`))],parameters:{controls:{exclude:commonExclude}}},Example=(args=>({props:args,argTypes:{columns:{options:["1fr 3fr","1fr 1fr","5fr 1fr"],control:{type:"select"}}},template:html`<fudis-grid
 		[columns]="columns"
 		[align]="align"
 		[alignItemsX]="alignItemsX"
@@ -82,4 +82,4 @@
 		<fudis-body-text class="grid-item">Grid item</fudis-body-text>
 		<fudis-body-text class="grid-item">Grid item</fudis-body-text>
 	</fudis-grid>`})).bind({});ResponsiveColumns.args={columns:{xs:1,sm:2,md:"1fr 2fr",lg:3,xl:"1fr 2fr 1fr",xxl:6}},ResponsiveColumns.parameters={controls:{exclude:combinedExclude}}}}]);
-//# sourceMappingURL=components-grid-grid-grid-stories.875dd7d7.iframe.bundle.js.map
+//# sourceMappingURL=components-grid-grid-grid-stories.9bcb9255.iframe.bundle.js.map
