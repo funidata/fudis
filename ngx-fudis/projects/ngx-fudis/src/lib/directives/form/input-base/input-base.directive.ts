@@ -70,10 +70,19 @@ export class InputBaseDirective extends TooltipApiDirective {
 	 */
 	protected _id: string;
 
+	/**
+	 * Basic Fudis translation keys
+	 */
 	protected _translations: Signal<FudisTranslationConfig>;
 
+	/**
+	 * Fudis translation key for required text
+	 */
 	protected _requiredText: string;
 
+	/**
+	 * Set requiredText based on this boolean value
+	 */
 	protected _required: boolean = false;
 
 	public onBlur(event: Event): void {
