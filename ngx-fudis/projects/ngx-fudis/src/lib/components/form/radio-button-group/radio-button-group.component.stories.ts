@@ -65,6 +65,8 @@ const getDefaultValue = (options: FudisRadioButtonOption[]): string | boolean | 
 	`,
 })
 class RadioButtonGroupExampleComponent {
+	constructor(private _formBuilder: FormBuilder) {}
+
 	/**
 	 * Options for testing purposes
 	 */
@@ -85,13 +87,11 @@ class RadioButtonGroupExampleComponent {
 		{ value: true, viewValue: 'True', id: 'boolean-2', name: 'booleans' },
 	];
 
-	mainFormGroup: FormGroup = this.formBuilder.group({
+	mainFormGroup: FormGroup = this._formBuilder.group({
 		first: new FormControl(getDefaultValue(this.fruitOptions), Validators.required),
 		second: new FormControl(getDefaultValue(this.petOptions), Validators.required),
 		third: new FormControl(null, Validators.required),
 	});
-
-	constructor(private formBuilder: FormBuilder) {}
 }
 
 export default {

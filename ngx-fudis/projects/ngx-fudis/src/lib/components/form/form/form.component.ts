@@ -15,26 +15,59 @@ import { FudisFormErrorSummaryLink } from '../../../types/forms';
 	encapsulation: ViewEncapsulation.None,
 })
 export class FormComponent extends GridApiDirective implements OnInit, AfterContentInit {
+	constructor(
+		private _idService: FudisIdService,
+		private _elementRef: ElementRef
+	) {
+		super();
+	}
+
 	@ContentChild(ActionsDirective) headerActions: ActionsDirective;
 
 	@ContentChild(HeaderDirective) headerContent: HeaderDirective;
 
 	@ContentChild(ContentDirective) mainContent: ContentDirective;
 
+	/**
+	 * Help text displayed in Error Summary before listing individual errors.
+	 */
+	@Input({ required: true }) errorSummaryHelpText: string;
+
+	/**
+	 * Form id
+	 */
 	@Input() id: string;
 
+	/**
+	 * Form title
+	 */
 	@Input() title: string;
 
+	/**
+	 * Heading tag for the form title
+	 */
 	@Input() titleTag: FudisHeadingTag;
 
+	/**
+	 * Heading size for the form title
+	 */
 	@Input() titleSize: FudisHeadingSize = 'xl';
 
 	@Input() helpText: string;
 
+	/**
+	 * Possible badge to append the form title
+	 */
 	@Input() badge: FudisBadgeVariant | null;
 
+	/**
+	 * Badge text
+	 */
 	@Input() badgeText: string | null;
 
+	/**
+	 * Dynamic update of Error Summary
+	 */
 	@Input() errorSummaryLiveRemove: boolean = false;
 
 	/**
@@ -43,23 +76,23 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 	@Input() errorSummaryVisible: boolean = false;
 
 	/**
-	 * Help text displayed in Error Summary before listing individual errors.
+	 * Type of the clickable error link in Error Summary
 	 */
-	@Input({ required: true }) errorSummaryHelpText: string;
-
 	@Input() errorSummaryLinkType: FudisFormErrorSummaryLink = 'router';
 
+	/**
+	 * Separate internal id to generate unique id
+	 */
 	protected _id: string;
 
-	constructor(private _idService: FudisIdService, private _elementRef: ElementRef) {
-		super();
-	}
+	/**
+	 * HTML FormElement
+	 */
+	protected _formElement: HTMLFormElement | undefined;
 
 	ngOnInit(): void {
 		this._id = this.id ? this.id : this._idService.getNewId('form');
 	}
-
-	protected _formElement: HTMLFormElement | undefined;
 
 	ngAfterContentInit(): void {
 		this._formElement = this._elementRef.nativeElement as HTMLFormElement;

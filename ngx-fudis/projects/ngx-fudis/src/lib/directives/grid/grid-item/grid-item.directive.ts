@@ -14,7 +14,10 @@ import { getGridBreakpointDataArray, getGridCssValue } from '../gridUtils';
 	selector: '[fudisGridItem]',
 })
 export class GridItemDirective implements OnInit, OnChanges {
-	constructor(private _gridItemElement: ElementRef, private _gridService: FudisGridService) {
+	constructor(
+		private _gridItemElement: ElementRef,
+		private _gridService: FudisGridService
+	) {
 		this._element = _gridItemElement.nativeElement;
 
 		/**

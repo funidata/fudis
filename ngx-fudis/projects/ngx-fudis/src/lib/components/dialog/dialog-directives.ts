@@ -26,15 +26,15 @@ export class DialogTitleDirective extends MatDialogTitle implements OnInit {
 		_dialog: MatDialog,
 
 		// For Fudis DialogTitleDirective
-		private headingElementRef: ElementRef,
-		private renderer: Renderer2
+		private _headingElementRef: ElementRef,
+		private _renderer: Renderer2
 	) {
 		super(_dialogRef, _elementRef, _dialog);
 	}
 
 	override ngOnInit() {
-		this.renderer.setAttribute(this.headingElementRef.nativeElement, 'tabindex', '-1');
-		this.headingElementRef.nativeElement.focus();
+		this._renderer.setAttribute(this._headingElementRef.nativeElement, 'tabindex', '-1');
+		this._headingElementRef.nativeElement.focus();
 	}
 }
 
@@ -43,7 +43,10 @@ export class DialogTitleDirective extends MatDialogTitle implements OnInit {
 	selector: 'fudis-dialog-content',
 })
 export class DialogContentDirective extends MatDialogContent implements OnInit {
-	constructor(private elRef: ElementRef, private renderer: Renderer2) {
+	constructor(
+		private _elRef: ElementRef,
+		private _renderer: Renderer2
+	) {
 		super();
 	}
 
@@ -53,8 +56,8 @@ export class DialogContentDirective extends MatDialogContent implements OnInit {
 		 * https://adrianroselli.com/2022/06/keyboard-only-scrolling-areas.html
 		 * These can be removed, when browser support gets better.
 		 */
-		this.renderer.setAttribute(this.elRef.nativeElement, 'tabindex', '0');
-		this.renderer.setAttribute(this.elRef.nativeElement, 'role', 'region');
+		this._renderer.setAttribute(this._elRef.nativeElement, 'tabindex', '0');
+		this._renderer.setAttribute(this._elRef.nativeElement, 'role', 'region');
 	}
 }
 

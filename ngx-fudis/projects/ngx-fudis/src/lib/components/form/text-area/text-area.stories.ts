@@ -30,6 +30,8 @@ import readme from './readme.mdx';
 	`,
 })
 class TextAreaWithFormControlExampleComponent {
+	constructor(private _formBuilder: FormBuilder) {}
+
 	minLength = 5;
 
 	maxLength = 20;
@@ -50,12 +52,10 @@ class TextAreaWithFormControlExampleComponent {
 
 	secondTextAreaControl: FormControl = new FormControl('', this.validatorsForSecondTextInput);
 
-	mainFormGroup: FormGroup = this.formBuilder.group({
+	mainFormGroup: FormGroup = this._formBuilder.group({
 		firstTextAreaControl: this.firstTextAreaControl,
 		secondTextareaControl: this.secondTextAreaControl,
 	});
-
-	constructor(private formBuilder: FormBuilder) {}
 }
 
 export default {

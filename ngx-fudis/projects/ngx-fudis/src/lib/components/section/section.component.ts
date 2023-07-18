@@ -16,16 +16,35 @@ import { FudisFormErrorSummarySection } from '../../types/forms';
 	styleUrls: ['./section.component.scss'],
 })
 export class SectionComponent extends TooltipApiDirective implements OnInit, OnChanges, OnDestroy {
+	constructor(
+		private _idService: FudisIdService,
+		private _errorSummaryService: FudisErrorSummaryService
+	) {
+		super();
+	}
+
 	@ContentChild(NotificationsDirective) notifications: NotificationsDirective | null;
 
 	@ContentChild(ContentDirective) content: ContentDirective | null;
 
-	@Input() id: string;
-
+	/**
+	 * Section title
+	 */
 	@Input({ required: true }) title: string;
 
+	/**
+	 * Section id
+	 */
+	@Input() id: string;
+
+	/**
+	 * Heading tag for the section title
+	 */
 	@Input() titleTag: FudisHeadingTag = 'h2';
 
+	/**
+	 * Heading size for the section title
+	 */
 	@Input() titleSize: FudisHeadingSize = 'lg';
 
 	/**
@@ -64,36 +83,53 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 	 */
 	@Input() classes: string[];
 
+	/**
+	 * Is section title shown in error summary breadcrumb
+	 */
 	@Input() errorSummaryBreadcrumb: boolean = false;
 
-	constructor(private _idService: FudisIdService, private _errorSummaryService: FudisErrorSummaryService) {
-		super();
-	}
-
+	/**
+	 * Internal, separate unique heading id
+	 */
 	protected _headingId: string;
 
+	/**
+	 * Section CSS class list
+	 */
 	protected _classList: string[];
 
+	/**
+	 * Internal id to generate unique id
+	 */
 	protected _id: string;
 
+	/**
+	 * Internal, separate title property to send to error summary service
+	 */
+	protected _title: string;
+
+	/**
+	 * Object to send to error summary service
+	 */
 	private _errorSummaryInfo: FudisFormErrorSummarySection;
 
+	/**
+	 * Is info sent to error summary service
+	 */
 	private _errorSummaryInfoSent: boolean = false;
-
-	protected _title: string;
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('section');
 
 		this._headingId = `${this._id}-heading`;
 
-		this._classList = this.getClasses();
+		this._classList = this._getClasses();
 		this._title = this.title;
 		this.addToErrorSummary();
 	}
 
 	ngOnChanges(): void {
-		this._classList = this.getClasses();
+		this._classList = this._getClasses();
 
 		if (this.title !== this._title && this._id) {
 			this._title = this.title;
@@ -103,14 +139,6 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 
 	ngOnDestroy(): void {
 		this.removeFromErrorSummary();
-	}
-
-	private getClasses(): string[] {
-		const cssClasses = this.classes ?? [];
-
-		cssClasses.push('fudis-section');
-
-		return cssClasses;
 	}
 
 	addToErrorSummary(): void {
@@ -128,5 +156,13 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 		if (this._errorSummaryInfoSent) {
 			this._errorSummaryService.removeSection(this._errorSummaryInfo);
 		}
+	}
+
+	private _getClasses(): string[] {
+		const cssClasses = this.classes ?? [];
+
+		cssClasses.push('fudis-section');
+
+		return cssClasses;
 	}
 }

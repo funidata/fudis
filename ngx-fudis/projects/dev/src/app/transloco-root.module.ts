@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable max-classes-per-file */
 import { HttpClient } from '@angular/common/http';
@@ -15,10 +16,10 @@ import { environment } from '../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class TranslocoHttpLoader implements TranslocoLoader {
-	constructor(private http: HttpClient) {}
+	constructor(private _http: HttpClient) {}
 
 	getTranslation(lang: string) {
-		return this.http.get<Translation>(`../../assets/i18n/${lang}.json`);
+		return this._http.get<Translation>(`../../assets/i18n/${lang}.json`);
 	}
 }
 
