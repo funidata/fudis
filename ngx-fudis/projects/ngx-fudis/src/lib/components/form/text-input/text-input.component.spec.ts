@@ -9,7 +9,7 @@ import { FudisInputWidth } from '../../../types/forms';
 
 const textInputControl: FormControl = new FormControl('');
 
-fdescribe('TextInputComponent', () => {
+describe('TextInputComponent', () => {
 	let component: TextInputComponent;
 	let fixture: ComponentFixture<TextInputComponent>;
 
