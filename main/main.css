@@ -1271,18 +1271,17 @@ html {
   font-weight: 400;
 }
 
-.mat-expansion-panel-header {
-  font-family: Fira Sans;
-  font-size: 0.875rem;
-  font-weight: 400;
-}
-
-.mat-expansion-panel-content {
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.25rem;
-  font-family: Fira Sans;
-  letter-spacing: normal;
+html {
+  --mat-expansion-header-text-font: Fira Sans;
+  --mat-expansion-header-text-size: 0.875rem;
+  --mat-expansion-header-text-weight: 400;
+  --mat-expansion-header-text-line-height: inherit;
+  --mat-expansion-header-text-tracking: inherit;
+  --mat-expansion-container-text-font: Fira Sans;
+  --mat-expansion-container-text-line-height: 1.25rem;
+  --mat-expansion-container-text-size: 1rem;
+  --mat-expansion-container-text-tracking: normal;
+  --mat-expansion-container-text-weight: 400;
 }
 
 .mat-grid-tile-header,
