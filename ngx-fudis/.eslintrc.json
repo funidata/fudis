@@ -37,7 +37,41 @@
 					}
 				],
 				"import/prefer-default-export": "off",
-				"no-tabs": "off"
+				"no-tabs": "off",
+				"@typescript-eslint/no-confusing-non-null-assertion": "error",
+        "@typescript-eslint/no-non-null-asserted-nullish-coalescing": "error",
+        "@typescript-eslint/member-ordering": [
+          "error",
+          {
+            "default": {
+              "memberTypes": [
+                "constructor",
+                "decorated-field",
+                "public-field",
+                "protected-field",
+                "private-field",
+                "public-method",
+                "protected-method",
+                "private-method"
+              ]
+            }
+          }
+        ],
+				"@typescript-eslint/naming-convention": [
+					"error",
+					{
+						"selector": ["parameterProperty", "variable", "property", "method"],
+            "format": ["camelCase"],
+						"modifiers": ["private"],
+            "leadingUnderscore": "require"
+					}, 
+					{
+						"selector": ["parameterProperty", "variable", "property", "method"],
+            "format": ["camelCase"],
+						"modifiers": ["protected"],
+            "leadingUnderscore": "require"
+					} 
+				]
 			}
 		},
 		{

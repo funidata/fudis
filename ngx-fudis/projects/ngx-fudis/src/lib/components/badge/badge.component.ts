@@ -8,7 +8,13 @@ import { FudisBadgeVariant } from '../../types/miscellaneous';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgeComponent {
+	/**
+	 * Badge variant
+	 */
 	@Input() variant: FudisBadgeVariant = 'primary';
 
+	/**
+	 * Text content for the badge
+	 */
 	@Input() content: string;
 }

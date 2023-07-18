@@ -13,11 +13,11 @@ import readme from './readme.mdx';
 	template: `<fudis-button [label]="_label" (handleClick)="changeLanguage()"></fudis-button>`,
 })
 class LanguageChangeComponent {
-	_label = 'Change calendar language';
-
 	constructor(private _translationService: FudisTranslationService) {
 		this._translationService.setLanguage('en');
 	}
+
+	protected _label = 'Change calendar language';
 
 	changeLanguage(): void {
 		if (this._translationService.getLanguage() === 'en') {

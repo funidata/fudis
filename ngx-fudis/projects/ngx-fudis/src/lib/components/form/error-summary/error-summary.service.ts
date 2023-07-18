@@ -40,15 +40,10 @@ export class FudisErrorSummaryService {
 		return this._signalDynamicCurrentErrorList.asReadonly();
 	}
 
-	// eslint-disable-next-line class-methods-use-this
-	private defineErrorId(id: string, controlName: string | undefined): string {
-		return controlName ? `${id}_${controlName}` : id;
-	}
-
 	public addNewError(newError: FudisFormErrorSummaryItem): void {
 		let currentErrors = this._currentErrorList;
 
-		const errorId = this.defineErrorId(newError.id, newError.controlName);
+		const errorId = this._defineErrorId(newError.id, newError.controlName);
 
 		const langUpdated = currentErrors[errorId] && currentErrors[errorId]?.language !== newError.language;
 
@@ -165,5 +160,10 @@ export class FudisErrorSummaryService {
 		});
 
 		this._errorSummaryParentList.set(filtered);
+	}
+
+	// eslint-disable-next-line class-methods-use-this
+	private _defineErrorId(id: string, controlName: string | undefined): string {
+		return controlName ? `${id}_${controlName}` : id;
 	}
 }

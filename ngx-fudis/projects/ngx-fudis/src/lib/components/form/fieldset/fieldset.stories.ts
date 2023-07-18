@@ -94,10 +94,6 @@ import { FormGroupValidators } from '../../../utilities/form/validators';
 	`,
 })
 class FieldsetExampleComponent {
-	submitForm(): void {
-		this.fieldsetExample.markAllAsTouched();
-	}
-
 	errorName: FudisFormGroupErrors = {
 		atLeastOneRequired: 'Course name is missing.',
 	};
@@ -197,6 +193,10 @@ class FieldsetExampleComponent {
 		{ value: 'basic', viewValue: 'Basic', id: 'courseType-1', name: 'courseType' },
 		{ value: 'advanced', viewValue: 'Advanced', id: 'courseType-2', name: 'courseType' },
 	];
+
+	submitForm(): void {
+		this.fieldsetExample.markAllAsTouched();
+	}
 }
 
 export default {

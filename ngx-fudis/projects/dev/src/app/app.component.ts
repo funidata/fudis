@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-console */
 import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
@@ -15,6 +16,19 @@ import { DialogTestContentComponent } from './dialog-test/dialog-test-content/di
 	styleUrls: ['./app.scss'],
 })
 export class AppComponent implements OnInit {
+	constructor(
+		@Inject(DOCUMENT) private _document: Document,
+		private _dialog: FudisDialogService,
+		private _translocoService: TranslocoService,
+		private _gridService: FudisGridService,
+		private _fudisLanguage: FudisTranslationService
+	) {
+		_gridService.setGridDefaultValues({
+			columns: { xs: 1, lg: 2 },
+			marginSides: 'responsive',
+		});
+	}
+
 	@ViewChild('exampleDialogTemplate', { static: true }) templateRef: TemplateRef<unknown>;
 
 	title = 'dev';
@@ -35,47 +49,6 @@ export class AppComponent implements OnInit {
 		};
 	});
 
-	constructor(
-		@Inject(DOCUMENT) private document: Document,
-		private dialog: FudisDialogService,
-		private translocoService: TranslocoService,
-		private gridService: FudisGridService,
-		private fudisLanguage: FudisTranslationService
-	) {
-		gridService.setGridDefaultValues({
-			columns: { xs: 1, lg: 2 },
-			marginSides: 'responsive',
-		});
-	}
-
-	ngOnInit(): void {
-		this.translocoService.setActiveLang('fi');
-		this.translocoService.setActiveLang('en');
-
-		this.document.documentElement.lang = 'en';
-		this.fudisLanguage.setLanguage('en');
-	}
-
-	changeLanguage(): void {
-		if (this.translocoService.getActiveLang() === 'en') {
-			this.document.documentElement.lang = 'fi';
-			this.fudisLanguage.setLanguage('fi');
-			this.translocoService.setActiveLang('fi');
-		} else {
-			this.document.documentElement.lang = 'en';
-			this.translocoService.setActiveLang('en');
-			this.fudisLanguage.setLanguage('en');
-		}
-	}
-
-	openDialog(): void {
-		this.dialog.open(this.templateRef);
-	}
-
-	openDialogFromComponent(): void {
-		this.dialog.open(DialogTestContentComponent);
-	}
-
 	testData = [
 		{ key: 'First Name', value: 'Rex' },
 		{ key: 'Last Name', value: 'Dangerwest' },
@@ -88,7 +61,34 @@ export class AppComponent implements OnInit {
 		{ key: 'Enemy', value: 'Lucy', subHeading: 'Second Archenemy' },
 	];
 
-	// eslint-disable-next-line class-methods-use-this
+	ngOnInit(): void {
+		this._translocoService.setActiveLang('fi');
+		this._translocoService.setActiveLang('en');
+
+		this._document.documentElement.lang = 'en';
+		this._fudisLanguage.setLanguage('en');
+	}
+
+	changeLanguage(): void {
+		if (this._translocoService.getActiveLang() === 'en') {
+			this._document.documentElement.lang = 'fi';
+			this._fudisLanguage.setLanguage('fi');
+			this._translocoService.setActiveLang('fi');
+		} else {
+			this._document.documentElement.lang = 'en';
+			this._translocoService.setActiveLang('en');
+			this._fudisLanguage.setLanguage('en');
+		}
+	}
+
+	openDialog(): void {
+		this._dialog.open(this.templateRef);
+	}
+
+	openDialogFromComponent(): void {
+		this._dialog.open(DialogTestContentComponent);
+	}
+
 	doSomething(event: any) {
 		console.log('eventti mennyt perille', event);
 	}
