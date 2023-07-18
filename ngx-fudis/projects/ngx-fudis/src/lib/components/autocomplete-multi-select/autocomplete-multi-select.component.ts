@@ -73,11 +73,6 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	protected _toggleOn: boolean;
 
 	/**
-	 * Internal property for listening menu toggle Signal
-	 */
-	private _menuStatus: Signal<boolean>;
-
-	/**
 	 * Internal property for icon-only button aria-label when opening dropdown
 	 */
 	protected _openAriaLabel: string;
@@ -106,6 +101,11 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	 * Internal variable for results filtered from options
 	 */
 	protected _results: FudisDropdownOption[] = [];
+
+	/**
+	 * Internal property for listening menu toggle Signal
+	 */
+	private _menuStatus: Signal<boolean>;
 
 	@HostListener('window:keydown.arrowDown', ['$event'])
 	@HostListener('window:keydown.arrowUp', ['$event'])

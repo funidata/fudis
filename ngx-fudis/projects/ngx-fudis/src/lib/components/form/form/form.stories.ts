@@ -152,45 +152,16 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	`,
 })
 class FormContentExampleComponent {
+	constructor(
+		private _errorSummaryService: FudisErrorSummaryService,
+		private _translationService: FudisTranslationService
+	) {}
+
 	errorSummaryVisible: boolean = false;
 
 	firstLoad: boolean = true;
 
 	fieldsetId = 'first-fieldset-id';
-
-	submitForm(): void {
-		this.fieldsetExample.markAllAsTouched();
-
-		this.firstLoad = false;
-
-		if (this.fieldsetExample.invalid) {
-			this._collapsed = false;
-			this.errorSummaryVisible = true;
-			this.errorSummaryService.reloadErrors();
-		} else {
-			this.errorSummaryVisible = false;
-		}
-	}
-
-	changeLanguage(): void {
-		const currentLang = this._translationService.getLanguage();
-
-		if (currentLang === 'fi') {
-			this._translationService.setLanguage('en');
-			// eslint-disable-next-line no-console
-			console.log('Fudis internal language is now: EN');
-		} else {
-			this._translationService.setLanguage('fi');
-			// eslint-disable-next-line no-console
-			console.log('Fudis internal language is now: FI');
-		}
-	}
-
-	handleCollapsedOutput(value: boolean): void {
-		this._collapsed = value;
-	}
-
-	private _collapsed: boolean = true;
 
 	formHeaderDl = [
 		{ key: 'Important person', value: 'Admiral Thrawn' },
@@ -312,10 +283,39 @@ class FormContentExampleComponent {
 		},
 	};
 
-	constructor(
-		private errorSummaryService: FudisErrorSummaryService,
-		private _translationService: FudisTranslationService
-	) {}
+	private _collapsed: boolean = true;
+
+	submitForm(): void {
+		this.fieldsetExample.markAllAsTouched();
+
+		this.firstLoad = false;
+
+		if (this.fieldsetExample.invalid) {
+			this._collapsed = false;
+			this.errorSummaryVisible = true;
+			this._errorSummaryService.reloadErrors();
+		} else {
+			this.errorSummaryVisible = false;
+		}
+	}
+
+	changeLanguage(): void {
+		const currentLang = this._translationService.getLanguage();
+
+		if (currentLang === 'fi') {
+			this._translationService.setLanguage('en');
+			// eslint-disable-next-line no-console
+			console.log('Fudis internal language is now: EN');
+		} else {
+			this._translationService.setLanguage('fi');
+			// eslint-disable-next-line no-console
+			console.log('Fudis internal language is now: FI');
+		}
+	}
+
+	handleCollapsedOutput(value: boolean): void {
+		this._collapsed = value;
+	}
 }
 
 export default {

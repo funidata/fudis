@@ -52,7 +52,7 @@ export class NotificationComponent implements OnChanges, OnInit {
 	 * Initialization
 	 */
 	ngOnInit(): void {
-		this.getClasses();
+		this._getClasses();
 	}
 
 	/**
@@ -60,14 +60,14 @@ export class NotificationComponent implements OnChanges, OnInit {
 	 */
 	ngOnChanges(changes: SimpleChanges): void {
 		if (!changes['icon']) {
-			this.getClasses();
+			this._getClasses();
 		}
 	}
 
 	/**
 	 * Used to initialize notifications variant icons
 	 */
-	private getClasses(): void {
+	private _getClasses(): void {
 		switch (this.variant) {
 			case 'warning':
 				this._icon = 'exclamation-mark-circle';

@@ -47,6 +47,11 @@ export class DropdownMenuComponent implements AfterContentInit, OnInit {
 	 */
 	@Input() size: FudisInputWidth = 'lg';
 
+	/**
+	 * Determine dropdown max-width
+	 */
+	protected _maxWidth: string = 'initial';
+
 	@HostListener('window:keydown.arrowDown', ['$event'])
 	handleKeyDown(event: KeyboardEvent) {
 		event.preventDefault();
@@ -58,8 +63,6 @@ export class DropdownMenuComponent implements AfterContentInit, OnInit {
 			firstChildButtonElement?.focus();
 		}
 	}
-
-	protected _maxWidth: string = 'initial';
 
 	@HostListener('window:click', ['$event'])
 	getMaxWidth(): void {

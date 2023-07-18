@@ -12,7 +12,10 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	encapsulation: ViewEncapsulation.None,
 })
 export class DropdownComponent extends InputBaseDirective implements OnInit, OnChanges {
-	constructor(private _idService: FudisIdService, _translationService: FudisTranslationService) {
+	constructor(
+		private _idService: FudisIdService,
+		_translationService: FudisTranslationService
+	) {
 		super(_translationService);
 	}
 
@@ -44,9 +47,8 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 	@Input() size: 'xs' | FudisInputWidth = 'lg';
 
 	/**
-	 * Hide select option checkmark in option list
+	 * Hide selected option checkmark in option list
 	 */
-
 	@Input() hideSingleSelectionIndicator: boolean = false;
 
 	/**

@@ -9,7 +9,7 @@ import { DropdownMenuComponent } from '../dropdown-menu.component';
 })
 export class DropdownMenuItemComponent implements OnInit {
 	constructor(
-		private clickService: FudisDropdownMenuItemService,
+		private _clickService: FudisDropdownMenuItemService,
 		@Host() private _parentComponent: DropdownMenuComponent
 	) {}
 
@@ -86,13 +86,13 @@ export class DropdownMenuItemComponent implements OnInit {
 			!(event.relatedTarget as HTMLElement)?.classList?.contains('fudis-dropdown-menu-item') &&
 			(event.relatedTarget as HTMLElement) !== menuButton
 		) {
-			this.clickService.setMenuStatus(false);
+			this._clickService.setMenuStatus(false);
 		}
 	}
 
 	closeDropdown(): void {
 		if (this.close === true) {
-			this.clickService.setMenuStatus(false);
+			this._clickService.setMenuStatus(false);
 		}
 	}
 }

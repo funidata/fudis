@@ -8,7 +8,10 @@ import { TooltipApiDirective } from './tooltip-api.directive';
 	providers: [MatTooltip],
 })
 export class TooltipDirective extends TooltipApiDirective implements OnInit {
-	constructor(private _ngMaterialTooltip: MatTooltip, private _tooltipElement: ElementRef) {
+	constructor(
+		private _ngMaterialTooltip: MatTooltip,
+		private _tooltipElement: ElementRef
+	) {
 		super();
 	}
 
