@@ -50,8 +50,14 @@ export class RadioButtonComponent {
 	 */
 	@Input() invalidState: boolean = false;
 
+	/**
+	 * Blur event output
+	 */
 	@Output() radioButtonBlur = new EventEmitter<string>();
 
+	/**
+	 * Checked input change output
+	 */
 	@Output() radioButtonChange = new EventEmitter<string>();
 
 	handleBlur(): void {
