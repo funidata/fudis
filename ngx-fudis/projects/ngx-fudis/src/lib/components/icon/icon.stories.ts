@@ -1,15 +1,19 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { IconComponent } from './icon.component';
+import readme from './readme.mdx';
 
 export default {
 	title: 'Components/Icon',
 	component: IconComponent,
-	argTypes: {
-		rotate: {
-			options: ['flip-180', 'cw-90', 'ccw-90'],
-			control: { type: 'text' },
+	parameters: {
+		docs: {
+			page: readme,
+		},
+		controls: {
+			exclude: ['_iconSize', 'classes', '_classList', '_getClasses', 'ngOnChanges'],
 		},
 	},
+	argTypes: {},
 } as Meta;
 
 const Template: StoryFn<IconComponent> = (args: IconComponent) => ({
