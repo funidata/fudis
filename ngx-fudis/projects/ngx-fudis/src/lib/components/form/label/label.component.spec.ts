@@ -5,7 +5,7 @@ import { MockComponent } from 'ng-mocks';
 import { LabelComponent } from './label.component';
 import { ButtonComponent } from '../../button/button.component';
 
-fdescribe('LabelComponent', () => {
+describe('LabelComponent', () => {
 	let component: LabelComponent;
 	let fixture: ComponentFixture<LabelComponent>;
 
