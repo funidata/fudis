@@ -47,10 +47,11 @@ describe('BadgeComponent', () => {
 	});
 
 	describe('Content', () => {
-		it('should have text content according to the give content Input', () => {
+		it('should have text content according to the given content Input', () => {
 			component.content = 'Badge text';
 			fixture.detectChanges();
 			const elem = fixture.debugElement.query(By.css('.fudis-badge'));
+
 			// NOTE: Had to use toContain because there were some unexpected spaces in the HTML element,
 			// caused by Input and ng-content being displayed after one another (with space), hence toEqual did not pass.
 			expect(elem.nativeElement.innerHTML).toContain(component.content);
