@@ -1,16 +1,5 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
-
+import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { FudisIcon, FudisIconColor } from '../../types/icons';
-
-/**
- * Example: `<fudis-icon icon="info" color="primary"></fudis-icon>`
- *
- * Icons have default size of 32x32px. Icons with suffix _-small_ are scaled to 16x16px.
- *
- * Icons with suffix _-fill_ (e.g. "alert-fill", "info-circle-fill") have their default style with white background. These icons cannot be colored with css fill.
- *
- * Icons can be rotated 180degrees, 90 degrees clockwise and counterclockwise with rotate class.
- */
 
 @Component({
 	selector: 'fudis-icon',
@@ -19,19 +8,19 @@ import { FudisIcon, FudisIconColor } from '../../types/icons';
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IconComponent {
+export class IconComponent implements OnChanges {
 	/**
-	 * Binding fudis-icon class to component wrapper
+	 * Binding fudis-icon-host class to component wrapper
 	 */
 	@HostBinding('class') classes = 'fudis-icon-host';
 
 	/**
-	 * Choose icon
+	 * Fudis icon
 	 */
 	@Input({ required: true }) icon: FudisIcon;
 
 	/**
-	 * Set color for icon
+	 * Icon color
 	 */
 	@Input() color: FudisIconColor = 'default';
 
@@ -40,16 +29,28 @@ export class IconComponent {
 	 */
 	@Input() rotate?: 'flip-180' | 'cw-90' | 'ccw-90' | 'none' = 'none';
 
-	iconSize: 'small' | 'large' = 'large';
+	/**
+	 * Icon CSS class list
+	 */
+	protected _classList: string[] = [];
 
-	getClasses(): string[] {
-		this.iconSize = this.icon.includes('-small') ? 'small' : 'large';
+	/**
+	 * Determines icon size by its name. If icon name has suffix "-small", iconSize is set to sm, otherwise lg.
+	 */
+	private _iconSize: string;
+
+	ngOnChanges(): void {
+		this._classList = this._getClasses();
+	}
+
+	private _getClasses(): string[] {
+		this._iconSize = this.icon.includes('-small') ? 'sm' : 'lg';
 
 		const cssClasses = [
 			'fudis-icon',
 			`fudis-icon-color__${this.color}`,
 			`fudis-icon-rotate__${this.rotate}`,
-			`fudis-icon__${this.iconSize}`,
+			`fudis-icon__${this._iconSize}`,
 		];
 
 		return cssClasses;
