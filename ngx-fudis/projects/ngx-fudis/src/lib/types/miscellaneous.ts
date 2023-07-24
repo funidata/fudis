@@ -31,6 +31,10 @@ export interface FudisTranslationConfig {
 		// Text shown in dropdown options if input for a language is missing
 		MISSING: string;
 	};
+	LINK: {
+		// External link icon aria-label
+		EXTERNAL_LINK: string;
+	};
 	// Clear filter button label for screen readers
 	AUTOCOMPLETE: {
 		CLEAR: string;

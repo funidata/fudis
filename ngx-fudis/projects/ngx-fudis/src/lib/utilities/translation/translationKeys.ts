@@ -8,6 +8,9 @@ export const en: FudisTranslationConfig = {
 		LANGUAGE: 'Language',
 		MISSING: 'Missing',
 	},
+	LINK: {
+		EXTERNAL_LINK: '(opens in a new tab)',
+	},
 	AUTOCOMPLETE: {
 		CLEAR: 'Clear filter',
 	},
@@ -23,6 +26,9 @@ export const fi: FudisTranslationConfig = {
 	INPUT_WITH_LANGUAGE_OPTIONS: {
 		LANGUAGE: 'Kieli',
 		MISSING: 'Puuttuu',
+	},
+	LINK: {
+		EXTERNAL_LINK: '(aukeaa uuteen välilehteen)',
 	},
 	AUTOCOMPLETE: {
 		CLEAR: 'Tyhjennä valinta',
@@ -42,6 +48,9 @@ export const sv: FudisTranslationConfig = {
 	},
 	AUTOCOMPLETE: {
 		CLEAR: 'Radera val',
+	},
+	LINK: {
+		EXTERNAL_LINK: '(öppnas i en ny flik)',
 	},
 	ICON: {
 		ATTENTION: 'Observera',
