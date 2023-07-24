@@ -24,7 +24,7 @@
 
 <ng-template #externalLink>
 	<a
-		attr.aria-label="{{ linkTitle ? linkTitle : href }}, {{ externalLinkAriaLabel }}"
+		attr.aria-label="{{ linkTitle ? linkTitle : href }}, {{ _externalLinkAriaLabel }}"
 		[href]="href ? href : null"
 		target="_blank"
 		rel="noopener noreferrer"
@@ -32,6 +32,6 @@
 			color
 		}} fudis-link__anchor__external">
 		{{ linkTitle ? linkTitle : href }}
-		<fudis-icon icon="external" [color]="color"></fudis-icon>
+		<fudis-icon [icon]="'external'" [color]="color"></fudis-icon>
 	</a>
 </ng-template>
