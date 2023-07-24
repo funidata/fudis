@@ -18,26 +18,14 @@ export default {
 const Template: StoryFn<FooterComponent> = (args: FooterComponent) => ({
 	props: args,
 	template: html`
-		<fudis-footer [logoAltText]="'logoAltText'">
+		<fudis-footer [logoAltText]="logoAltText">
 			<ng-template fudisFooterRight>
-				<fudis-link
-					[href]="'example.com'"
-					[linkTitle]="'Tietosuojaseloste'"
-					[isExternalLink]="true"
-					[externalLinkAriaLabel]="'Link to external source'" />
-				<fudis-link
-					[href]="'example.com'"
-					[linkTitle]="'Saavutettavuusseloste'"
-					[isExternalLink]="true"
-					[externalLinkAriaLabel]="'Link to external source'" />
+				<fudis-link [href]="'example.com'" [linkTitle]="'Tietosuojaseloste'" [isExternalLink]="true" />
+				<fudis-link [href]="'example.com'" [linkTitle]="'Saavutettavuusseloste'" [isExternalLink]="true" />
 				<fudis-link [href]="'example.com'" [linkTitle]="'Järjestelmätiedot'" />
 			</ng-template>
 			<ng-template fudisFooterLeft>
-				<fudis-link
-					[href]="'example.com'"
-					[linkTitle]="'Promo link'"
-					[isExternalLink]="true"
-					[externalLinkAriaLabe]="'Link to external source'" />
+				<fudis-link [href]="'example.com'" [linkTitle]="'Promo link'" [isExternalLink]="true" />
 			</ng-template>
 		</fudis-footer>
 	`,
