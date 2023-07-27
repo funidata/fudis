@@ -6,7 +6,7 @@ export interface FudisDescriptionListItem {
 	value: string;
 }
 
-export type FudisExpandableType = 'regular';
+export type FudisExpandableType = 'regular' | 'lite';
 
 export type FudisSpacing = 'none' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 

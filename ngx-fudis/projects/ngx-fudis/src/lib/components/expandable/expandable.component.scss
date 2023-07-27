@@ -18,10 +18,12 @@
 	}
 
 	&__header {
-		@include color.bg-color('gray-extra-light');
-
 		display: block;
 		padding: spacing.$spacing-xs;
+
+		&__regular {
+			@include color.bg-color('gray-extra-light');
+		}
 
 		&__heading {
 			margin: 0;
@@ -40,7 +42,7 @@
 					@include focus.focus-generic;
 				}
 
-				&__icon {
+				&__icon__regular {
 					margin-right: spacing.$spacing-xs;
 				}
 
@@ -49,6 +51,11 @@
 
 					display: block;
 					margin-left: spacing.$spacing-xl;
+				}
+
+				&__lite {
+					@include color.text-color('primary');
+					@include typography.text-link-m-typography;
 				}
 			}
 		}
@@ -73,14 +80,21 @@
 	}
 
 	&__content {
-		@include breakpoint.breakpoint('md') {
-			padding: spacing.$spacing-md;
-			padding-left: spacing.$spacing-xl;
+		&__padding-default {
+			@include breakpoint.breakpoint('md') {
+				padding: spacing.$spacing-md;
+				padding-left: spacing.$spacing-xl;
+			}
+
+			@include breakpoint.breakpoint-max('md') {
+				padding: spacing.$spacing-sm;
+				padding-left: spacing.$spacing-md;
+			}
 		}
 
-		@include breakpoint.breakpoint-max('md') {
+		&__padding-small {
 			padding: spacing.$spacing-sm;
-			padding-left: spacing.$spacing-md;
+			padding-left: spacing.$spacing-sm;
 		}
 	}
 }
