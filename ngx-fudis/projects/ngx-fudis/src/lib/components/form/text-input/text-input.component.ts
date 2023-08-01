@@ -1,5 +1,4 @@
-// eslint-disable-next-line max-classes-per-file
-import { Component, Input, ViewChild, ElementRef, HostBinding, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, HostBinding, OnInit, OnChanges, effect } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
@@ -18,6 +17,10 @@ export class TextInputComponent extends InputBaseDirective implements OnInit, On
 		_translationService: FudisTranslationService
 	) {
 		super(_translationService);
+
+		effect(() => {
+			this._maxLengthText = this._translations().TEXTINPUT.MAX_LENGTH;
+		});
 	}
 
 	@HostBinding('class') classes = 'fudis-text-input-host';
@@ -25,12 +28,12 @@ export class TextInputComponent extends InputBaseDirective implements OnInit, On
 	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;
 
 	/**
-	 * FormControl for the input.
+	 * FormControl for text-input
 	 */
-	@Input() control: FormControl<string | null | number>;
+	@Input({ required: true }) control: FormControl<string | null | number>;
 
 	/**
-	 * Available sizes for the input - defaults to large. Recommended size for number input is small.
+	 * Available sizes for the input - defaults to large. Recommended size for number input is 'sm'.
 	 */
 	@Input() size: FudisInputWidth = 'lg';
 
@@ -50,11 +53,6 @@ export class TextInputComponent extends InputBaseDirective implements OnInit, On
 	@Input() maxLength: number | undefined = undefined;
 
 	/**
-	 * Assistive text of max character count for screen readers
-	 */
-	@Input() maxLengthText: string;
-
-	/**
 	 * Minimum number allowed by number input's minNumber
 	 */
 	@Input() minNumber: number;
@@ -63,6 +61,11 @@ export class TextInputComponent extends InputBaseDirective implements OnInit, On
 	 * Maximum number allowed by number input's maxNumber
 	 */
 	@Input() maxNumber: number;
+
+	/**
+	 * Assistive text of max character count for screen readers
+	 */
+	protected _maxLengthText: string;
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('textInput');
