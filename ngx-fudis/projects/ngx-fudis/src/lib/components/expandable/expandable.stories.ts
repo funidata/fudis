@@ -76,3 +76,19 @@ ExpandableWithActionButton.args = {
 	title: 'Expandable with a header action button',
 	collapsed: true,
 };
+
+const LiteTemplate: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
+	props: args,
+	template: html`
+		<fudis-expandable [title]="'Expandable lite'" [variant]="'lite'" [padding]="'small'">
+			<ng-template fudisContent type="expandable">
+				<fudis-body-text>You might want to use me with padding small.</fudis-body-text>
+			</ng-template>
+		</fudis-expandable>
+	`,
+});
+
+export const ExpandableLite = LiteTemplate.bind({});
+LiteTemplate.args = {
+	collapsed: true,
+};
