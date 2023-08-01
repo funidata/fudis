@@ -17,6 +17,9 @@ export const en: FudisTranslationConfig = {
 	TEXTAREA: {
 		MAX_LENGTH: 'characters used',
 	},
+	TEXTINPUT: {
+		MAX_LENGTH: 'characters used',
+	},
 };
 
 export const fi: FudisTranslationConfig = {
@@ -36,6 +39,9 @@ export const fi: FudisTranslationConfig = {
 	TEXTAREA: {
 		MAX_LENGTH: 'merkkiä käytetty',
 	},
+	TEXTINPUT: {
+		MAX_LENGTH: 'merkkiä käytetty',
+	},
 };
 
 export const sv: FudisTranslationConfig = {
@@ -53,6 +59,9 @@ export const sv: FudisTranslationConfig = {
 		ATTENTION: 'Observera',
 	},
 	TEXTAREA: {
+		MAX_LENGTH: 'tecken använt',
+	},
+	TEXTINPUT: {
 		MAX_LENGTH: 'tecken använt',
 	},
 };

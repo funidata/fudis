@@ -6,7 +6,7 @@ export interface FudisDescriptionListItem {
 	value: string;
 }
 
-export type FudisExpandableType = 'regular';
+export type FudisExpandableType = 'regular' | 'lite';
 
 export type FudisSpacing = 'none' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
@@ -40,6 +40,10 @@ export interface FudisTranslationConfig {
 		ATTENTION: string;
 	};
 	TEXTAREA: {
+		// Assistive text of max character count for screen readers
+		MAX_LENGTH: string;
+	};
+	TEXTINPUT: {
 		// Assistive text of max character count for screen readers
 		MAX_LENGTH: string;
 	};
