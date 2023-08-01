@@ -39,4 +39,8 @@ export interface FudisTranslationConfig {
 		// Alternative text for screen readers. Used in e. g. Error Summary
 		ATTENTION: string;
 	};
+	TEXTINPUT: {
+		// Assistive text of max character count for screen readers
+		MAX_LENGTH: string;
+	};
 }

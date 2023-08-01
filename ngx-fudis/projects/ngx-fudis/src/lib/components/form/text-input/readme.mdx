@@ -1,0 +1,64 @@
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import { linkTo } from '@storybook/addon-links';
+import { TextInputComponent } from './text-input.component';
+import * as TextInputStories from './text-input.stories.ts';
+
+<Meta title="Components/Form/Text-input" />
+
+# Text-input
+
+Basic text-input component with different type options: `email`, `number`, `password`, `tel`, `text` and `url`. Defaults to `text`.
+
+Additional features include possibility to add tooltip to the label and maximum character indicator to the bottom right corner.
+
+## Examples
+
+<Canvas of={TextInputStories.Examples}></Canvas>
+
+## Usage Guidelines
+
+#### Mandatory Properties
+
+Necessary properties for text-input are `label` and `control`.
+
+#### As a required form field
+
+If text-input is a required form field include `Validators.required` in the form control validators and include a `required` error message in the `errorMsg` property.
+
+#### With minLength and maxLength validators
+
+Text-input can have min and max length validators. 
+
+For min length, include `Validators.minLength()` in the form control validators and include `minlength` error messages in the `errorMsg` property. 
+
+Max length validator does not prompt any error message but disable user to input more than allowed length of characters to the input field. For max length, include `Validators.maxLength()` in the form control validators and pass wanted maxLength as an Input to the text-input <code>[maxLength]="maxLength"</code>. This will also activate the maximum character indicator to the bottom right corner of the input.
+
+#### As number input
+
+Text-input <code>[type]="'number'"</code> has `minNumber` and `maxNumber` attributes, they can be used separately or together. 
+
+Pass the wanted min and max values as an Input to the text-input <code>[minNumber]="minNumber"</code> and/or <code>[maxNumber]="maxNumber"</code>.
+Include `Validators.min()` and/or `Validators.max()`in the form control validators and include `min` and/or `max` error mesages in the `errorMsg` property. 
+
+### Error Handling
+
+- **Required** error is shown if text-input is required and
+  - if control is touched and
+			- if control value is null
+- **minLength** error is shown
+	- if control is touched and 
+		- if control value is not null and
+			- if control value is not respective to given **minlength** validator value
+- **minNumber** and/or **maxNumber** errors are shown
+	- if control is touched and
+		- if control value is not null and
+			- if control value is not respective to given **min** and/or **max** validator values
+
+### Accessibility
+
+- Label and guidance are linked to the text-input via id
+- Screen reader is informed when maximum character length has 5 characters left and when maximum character count is reached
+
+## Properties
+
+<ArgTypes of={TextInputComponent} />
