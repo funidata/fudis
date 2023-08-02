@@ -1,0 +1,56 @@
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import { linkTo } from '@storybook/addon-links';
+import { DropdownComponent } from './dropdown.component';
+import * as DropdownStories from './dropdown.stories.ts';
+
+<Meta title="Components/Dropdown" />
+
+# Dropdown
+
+Fudis Dropdown is based on Angular Material Select and it has two possible use cases: single-select and multiselect.
+
+## Examples
+
+<Canvas of={DropdownStories.SingleSelect}></Canvas>
+<Canvas of={DropdownStories.MultiSelect}></Canvas>
+
+## Usage Guidelines
+
+`multipleOption` boolean determines if component is rendered as single-select or multiselect dropdown. Preselected choices can only be set in the FormControl through indexing the wanted option from the options list.  
+
+Tooltip can be given as an additional feature for the dropdown label.
+
+#### Mandatory Properties
+
+Necessary properties for the dropdown are `label`, `control` and `options`.
+
+#### As a required form field
+
+If dropdown is a required form field include `Validators.required` in the form control validators and include `required` error message in the `errorMsg` property.
+
+#### With minLength and maxLength validators
+
+Multiselect dropdown can have min and max length validators. Include `Validators.minLength()` and/or `Validators.maxLength()` in the form control validators and include `minlength` and/or `maxlength` error messages in the `errorMsg` property. 
+
+### Error Handling
+
+- **Required** error is shown if dropdown is required and
+  - if control is touched and
+			- if control value is empty
+- **minLength** and/or **maxLength** errors are shown
+	- if control is touched and
+		- if control value length does not match the given validators length
+
+### Accessibility
+
+- Label and guidance text are linked to the dropdown select via id.
+- Keyboard users can navigate dropdown option list with <code>ArrowDown</code>, <code>ArrowUp</code>, <code>Tab</code>, <code>Space</code>, <code>Enter</code> and <code>Escape</code> keys.
+- Screen reader users can navigate dropdown option list and screen reader is informed about the selections made.
+
+### Related components
+
+[Angular Material Select](https://material.angular.io/components/select/overview)
+
+## Properties
+
+<ArgTypes of={DropdownComponent} />
