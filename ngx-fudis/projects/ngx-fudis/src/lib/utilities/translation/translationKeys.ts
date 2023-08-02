@@ -20,6 +20,9 @@ export const en: FudisTranslationConfig = {
 	ICON: {
 		ATTENTION: 'Attention',
 	},
+	TEXTINPUT: {
+		MAX_LENGTH: 'characters used',
+	},
 };
 
 export const fi: FudisTranslationConfig = {
@@ -42,6 +45,9 @@ export const fi: FudisTranslationConfig = {
 	ICON: {
 		ATTENTION: 'Huomio',
 	},
+	TEXTINPUT: {
+		MAX_LENGTH: 'merkkiä käytetty',
+	},
 };
 
 export const sv: FudisTranslationConfig = {
@@ -63,5 +69,8 @@ export const sv: FudisTranslationConfig = {
 	},
 	ICON: {
 		ATTENTION: 'Observera',
+	},
+	TEXTINPUT: {
+		MAX_LENGTH: 'tecken använt',
 	},
 };

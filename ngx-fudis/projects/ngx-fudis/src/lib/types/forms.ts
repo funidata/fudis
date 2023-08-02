@@ -13,9 +13,7 @@ export interface FudisRadioButtonOption {
 	value: string | boolean | null;
 	/** Value that is shown in the UI */
 	viewValue: string;
-	/** Is option disabled in the dropdown */
-	disabled?: boolean;
-	/** If option is selected or not */
+	/** Is option selected */
 	checked?: boolean;
 }
 
