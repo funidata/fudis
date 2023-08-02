@@ -1,0 +1,40 @@
+import { Meta, ArgTypes, Canvas } from '@storybook/blocks';
+import { linkTo } from '@storybook/addon-links';
+import { HeadingComponent } from './heading.component';
+import * as HeadingStories from './heading.stories.ts';
+
+<Meta title="Components/Typography/Heading" />
+
+# Heading
+
+Heading is essentially a header element which inherits Fudis font-family.
+
+There are six header options available from **h1** to **h6** and seven size options from **xxl** to **xxs**.
+In addition, default margin bottom can be modified if needed. Margin bottom uses Fudis spacing token sizes.
+
+More information about spacing tokens can be found from [Foundations/Spacing](/docs/foundations-spacing--documentation)
+
+More information about typography can be found from [Foundations/Typography](/docs/foundations-typography--documentation)
+
+## Examples
+
+Note that header tags does not affect to the heading size, i.e they are only essential for screen readers and other assistive technologies. 
+
+Size is opted to be modified as wanted with `size` property as follows.
+
+<Canvas of={HeadingStories.AllVariants}></Canvas>
+
+### Accessibility
+
+- Heading color `#484848` passes WCAG AAA requirement against white `#FFFFFF` background
+  - Contrast ratio 9.1:1
+- Semantically it is important to use correct header tag respective to the context
+	- Header size can be visually modified
+
+### Other typography components
+
+[BodyText](/docs/components-typography-body-text--body-text)
+
+## Properties
+
+<ArgTypes of={HeadingComponent} />
