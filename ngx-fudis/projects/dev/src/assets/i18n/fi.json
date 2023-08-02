@@ -13,5 +13,6 @@
 		"chooseTruthFalse": "Epätosi"
 	},
 	"closeCalendar": "Sulje kalenteri",
-	"fieldsetTitle": "Tärkeän lomakeryhmän otsikko"
+	"fieldsetTitle": "Tärkeän lomakeryhmän otsikko",
+	"notEnoughCharacters": "Liian vähän merkkejä."
 }
