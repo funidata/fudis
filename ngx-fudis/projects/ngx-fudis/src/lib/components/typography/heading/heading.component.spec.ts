@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { HeadingComponent } from './heading.component';
+import { FudisHeadingSize, FudisHeadingTag } from '../../../types/typography';
+import { FudisSpacing } from '../../../types/miscellaneous';
 
 describe('HeadingComponent', () => {
 	let component: HeadingComponent;
@@ -19,39 +21,45 @@ describe('HeadingComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(HeadingComponent);
 		component = fixture.componentInstance;
-		component.ngOnInit();
 		fixture.detectChanges();
 	});
 
-	function getHeading(): HTMLElement {
-		return fixture.nativeElement.querySelector('.fudis-heading__sm') as HTMLElement;
+	function getHeading(tag: FudisHeadingTag): HTMLElement {
+		fixture.detectChanges();
+		return fixture.debugElement.nativeElement.querySelector(tag) as HTMLElement;
 	}
 
-	function assertHeadingHasClasses(classes: string[]): void {
-		const headingClasses = getHeading()?.className ?? '';
-
-		expect(headingClasses.split(' ').sort()).toEqual([...classes].sort());
+	function assertHeadingHasClasses(classes: string, tag: FudisHeadingTag): void {
+		const headingClasses = getHeading(tag)?.className.split(' ').sort();
+		expect(headingClasses).toEqual(classes.split(' ').sort());
 	}
 
-	function assertHeadingHasTag(tag: string): void {
-		const Tag = fixture.nativeElement.querySelector(tag);
-		expect(Tag).toBeTruthy();
+	function headingCheck(size: FudisHeadingSize, marginBottom: FudisSpacing, tag: FudisHeadingTag): void {
+		component.size = size;
+		component.marginBottom = marginBottom;
+		component.tag = tag;
+		component.ngOnInit();
+		assertHeadingHasClasses(`fudis-heading fudis-heading__${size} fudis-mb-${marginBottom}`, tag);
 	}
 
-	describe('heading has CSS classes and prefered heading tag', () => {
-		it('should add size s to header', () => {
-			component.size = 'sm';
-			component.ngOnInit();
-			fixture.detectChanges();
-			assertHeadingHasClasses(['fudis-heading', 'fudis-heading__sm', 'fudis-mb-xs']);
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
+
+	describe('CSS classes', () => {
+		it('should have respective size, margin bottom and tag values according to given Inputs', () => {
+			headingCheck('xxl', 'xxl', 'h1');
+			headingCheck('xl', 'xl', 'h2');
+			headingCheck('lg', 'lg', 'h3');
+			headingCheck('md', 'md', 'h3');
+			headingCheck('sm', 'sm', 'h4');
+			headingCheck('xs', 'xs', 'h5');
+			headingCheck('xxs', 'xxs', 'h6');
+			headingCheck('xxs', 'none', 'h6');
 		});
+	});
 
-		it('should add tags to header', () => {
-			const headingLevel = 'h3';
-			component.tag = headingLevel;
-			component.ngOnInit();
-			fixture.detectChanges();
-			assertHeadingHasTag(headingLevel);
-		});
+	it('should have default classes', () => {
+		assertHeadingHasClasses('fudis-heading fudis-heading__lg fudis-mb-xs', 'h6');
 	});
 });

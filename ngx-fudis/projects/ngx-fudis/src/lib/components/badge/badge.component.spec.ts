@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ChangeDetectionStrategy } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { BadgeComponent } from './badge.component';
+import { FudisBadgeVariant } from '../../types/miscellaneous';
 
 describe('BadgeComponent', () => {
 	let component: BadgeComponent;
@@ -20,7 +21,6 @@ describe('BadgeComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(BadgeComponent);
 		component = fixture.componentInstance;
-
 		fixture.detectChanges();
 	});
 
@@ -30,11 +30,31 @@ describe('BadgeComponent', () => {
 		expect(componentClasses).toEqual(classes.split(' ').sort());
 	}
 
+	function badgeVariantCheck(variant: FudisBadgeVariant): void {
+		component.variant = variant;
+		fixture.detectChanges();
+		assertBadgeHasClasses(`fudis-badge fudis-badge__${variant}`);
+	}
+
 	describe('CSS classes', () => {
-		it('should change the class according to the given badge variant', () => {
-			component.variant = 'accent';
+		it('should change the class according to the given variant Input', () => {
+			badgeVariantCheck('accent');
+			badgeVariantCheck('danger');
+			badgeVariantCheck('primary');
+			badgeVariantCheck('secondary');
+			badgeVariantCheck('success');
+		});
+	});
+
+	describe('Content', () => {
+		it('should have text content according to the given content Input', () => {
+			component.content = 'Badge text';
 			fixture.detectChanges();
-			assertBadgeHasClasses('fudis-badge fudis-badge__accent');
+			const elem = fixture.debugElement.query(By.css('.fudis-badge'));
+
+			// NOTE: Had to use toContain because there were some unexpected spaces in the HTML element,
+			// caused by Input and ng-content being displayed after one another (with space), hence toEqual did not pass.
+			expect(elem.nativeElement.innerHTML).toContain(component.content);
 		});
 	});
 });
