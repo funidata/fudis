@@ -1,35 +1,37 @@
-@use '../../../foundations/typography/mixins.scss' as mixins;
-@use '../../../foundations/utilities/mixins.scss' as utilities;
+@use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
 
 .fudis-heading {
+	@include colorMixins.text-color('gray-dark');
+
 	box-sizing: border-box;
 	margin-top: 0;
 
 	&__xxs {
-		@include mixins.heading-xxs;
+		@include typography.heading-xxs;
 	}
 
 	&__xs {
-		@include mixins.heading-xs;
+		@include typography.heading-xs;
 	}
 
 	&__sm {
-		@include mixins.heading-sm;
+		@include typography.heading-sm;
 	}
 
 	&__md {
-		@include mixins.heading-md;
+		@include typography.heading-md;
 	}
 
 	&__lg {
-		@include mixins.heading-lg;
+		@include typography.heading-lg;
 	}
 
 	&__xl {
-		@include mixins.heading-xl;
+		@include typography.heading-xl;
 	}
 
 	&__xxl {
-		@include mixins.heading-xxl;
+		@include typography.heading-xxl;
 	}
 }

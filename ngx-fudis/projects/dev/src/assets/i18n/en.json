@@ -13,5 +13,6 @@
 		"chooseTruthFalse": "False"
 	},
 	"closeCalendar": "Close calendar",
-	"fieldsetTitle": "Important fieldset title"
+	"fieldsetTitle": "Important fieldset title",
+	"notEnoughCharacters": "Too few characters."
 }
