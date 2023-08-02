@@ -12,8 +12,8 @@ import readme from './readme.mdx';
 			<fudis-text-area
 				[control]="firstTextAreaControl"
 				[errorMsg]="{ required: 'Missing a value.' }"
-				[label]="'Basic required text area'"
-				[helpText]="'Add some text to the text area.'"
+				[label]="'Basic required Text Area'"
+				[helpText]="'Add some text to the Text Area.'"
 				[tooltip]="'I am here to give you additional guidance'"
 				[tooltipPosition]="'right'"
 				[tooltipToggle]="false">
@@ -22,9 +22,9 @@ import readme from './readme.mdx';
 				[control]="secondTextAreaControl"
 				[minLength]="minLength"
 				[maxLength]="maxLength"
-				[label]="'Required text area with max and min character length'"
+				[label]="'Required Text Area with max and min character length'"
 				[errorMsg]="validatorMessages"
-				[helpText]="'This is an example text area with multiple validations.'">
+				[helpText]="'This is an example Text Area with multiple validations.'">
 			</fudis-text-area>
 		</form>
 	`,
@@ -96,7 +96,7 @@ const Template: StoryFn<TextAreaComponent> = (args: TextAreaComponent) => ({
 
 export const TextArea = Template.bind({});
 TextArea.args = {
-	label: 'Text-area label example',
+	label: 'Text Area label example',
 	control: new FormControl(''),
 	helpText: 'Example help text',
 };
