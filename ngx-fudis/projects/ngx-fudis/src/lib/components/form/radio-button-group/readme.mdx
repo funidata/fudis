@@ -1,0 +1,60 @@
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import { linkTo } from '@storybook/addon-links';
+import { RadioButtonGroupComponent } from './radio-button-group.component';
+import * as RadioButtonGroupStories from './radio-button-group.stories.ts';
+
+<Meta title="Components/Form/Radio Button Group" />
+
+# Radio Button Group
+
+Radio-button-group is essentially a fieldset with legend and radio inputs.
+
+## Examples
+
+<Canvas of={RadioButtonGroupStories.Examples}></Canvas>
+
+## Usage Guidelines
+
+#### Mandatory Properties
+
+Necessary properties for radio-button-group are `title`, `control` and `options`.
+Radio-button-group has to have **at least** two radio options and should **not be used** with only one option available. Otherwise it will throw an error.
+
+Options array takes in objects with the following signature:
+
+```
+{
+	// Unique id for single radio button option
+	id: string;
+	// Name for the group of radio buttons
+	name: string;
+	// Underlying value of the option
+	value: string | boolean | null;
+	// Value that is shown in the UI
+	viewValue: string;
+	// Is option selected
+	checked?: boolean;
+}
+```
+
+**NOTE:** The _name_ value should be exactly the same in all objects in the options array. Otherwise it will throw an error.
+
+#### As a required form field
+
+If radio-button-group fieldset is a required form field include `Validators.required` in the form control validators and include a `required` error message in the `errorMsg` property.
+
+### Error Handling
+
+- **Required** error is shown if radio-button-group fieldset is required and
+  - if control is touched and
+			- if control value is null
+
+### Accessibility
+
+- Fieldset has a legend as its first child element
+- Radio-button options are grouped by name attribute
+- Guidance is linked to the radio-button-group via id
+
+## Properties
+
+<ArgTypes of={RadioButtonGroupComponent} />
