@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { DropdownComponent } from './dropdown.component';
+import readme from './readme.mdx';
 
 export default {
 	title: 'Components/Form/Dropdown',
@@ -12,7 +13,32 @@ export default {
 			providers: [importProvidersFrom(BrowserAnimationsModule)],
 		}),
 	],
-	argTypes: {},
+	parameters: {
+		docs: {
+			page: readme,
+		},
+		controls: {
+			exclude: [
+				'ariaLabel',
+				'disabled',
+				'id',
+				'invalidState',
+				'_id',
+				'_required',
+				'_requiredText',
+				'_translations',
+				'ngOnInit',
+				'ngOnChanges',
+				'onBlur',
+			],
+		},
+	},
+	argTypes: {
+		size: {
+			options: ['sm', 'md', 'lg'],
+			control: { type: 'radio' },
+		},
+	},
 } as Meta;
 
 const html = String.raw;
@@ -21,7 +47,7 @@ const Template: StoryFn<DropdownComponent> = (args: DropdownComponent) => ({
 	props: args,
 	template: html`
 		<fudis-dropdown
-			[size]="'lg'"
+			[size]="size"
 			[multipleOption]="multipleOption"
 			[placeholder]="placeholder"
 			[errorMsg]="errorMsg"
@@ -32,18 +58,7 @@ const Template: StoryFn<DropdownComponent> = (args: DropdownComponent) => ({
 			[helpText]="helpText"
 			[tooltip]="tooltip"
 			[tooltipPosition]="tooltipPosition"
-			tooltipToggle="tooltipToggle" />
-		<ng-container *ngIf="control.value?.length > 0">
-			<ng-container *ngFor="let value of control.value">
-				<fudis-body-text>Looks picked a pet with 'viewValue' of: {{value.viewValue}}</fudis-body-text>
-				<fudis-body-text>And it's technical beep boop 'value' is: {{value.value}}</fudis-body-text>
-			</ng-container>
-		</ng-container>
-
-		<ng-container *ngIf="control.value?.value">
-			<fudis-body-text>Looks picked a pet with 'viewValue' of: {{control.value.viewValue}}</fudis-body-text>
-			<fudis-body-text>And it's technical beep boop 'value' is: {{control.value?.value}}</fudis-body-text>
-		</ng-container>
+			[tooltipToggle]="tooltipToggle" />
 	`,
 });
 
@@ -51,10 +66,9 @@ export const SingleSelect = Template.bind({});
 SingleSelect.args = {
 	errorMsg: { required: "It is necessary to choose a pet. It's good for your health!" },
 	label: 'Select a pet',
+	size: 'md',
 	placeholder: 'Choose a pet',
-	multipleOption: false,
 	control: new FormControl(null, Validators.required),
-	id: 'example-id-for-dropdown-select',
 	helpText: 'All pets are equally important, but for sake of this example please pick one.',
 	options: [
 		{ value: 'value-1-dog', viewValue: 'Dog' },
@@ -75,11 +89,11 @@ MultiSelect.args = {
 	},
 	multipleOption: true,
 	label: 'Select from two to three pets',
-	placeholder: 'Choose a pet',
+	size: 'lg',
+	placeholder: 'Choose pets',
 	control: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(3)]),
-	id: 'example-id-for-dropdown-multi-select',
 	helpText: 'All pets are equally important, but for sake of this example please pick two to three pets.',
-	tooltip: 'Platypus is the right choise',
+	tooltip: 'Platypus is the right choice',
 	tooltipPosition: 'below',
 	tooltipToggle: false,
 	options: [

@@ -53,7 +53,7 @@ Check the [Naming Conventions](/docs/documentation-development-naming-convention
 
 - Component is created
 - Component has working @Inputs and @Outputs
-- Features that might break easily by some syntax change should be unit tested. E.g. if component has `[size]` input with values of `s, m, l` there should be a test for all of these values, so that if developer changes these values to `sm, md, lg` we can verify that component still works as intended with the change of API.
+- Features that might break easily by some syntax change should be unit tested. E.g. if component has `[size]` input with values of `sm, md, lg` there should be a test for all of these values, so we can verify that component still works as intended if there are changes in the API.
 - Error handling and good practises. E. g. Radio Button group should not be used with less than 2 options so unit tests should check that these principles work and throws an error, if group of 1 or 0 is tried to create.
 - Utilities should be tested. If component uses utility functions, those utility functions should have unit tests as well.
 
