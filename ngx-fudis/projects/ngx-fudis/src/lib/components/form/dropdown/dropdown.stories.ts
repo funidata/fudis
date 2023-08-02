@@ -33,7 +33,12 @@ export default {
 			],
 		},
 	},
-	argTypes: {},
+	argTypes: {
+		size: {
+			options: ['sm', 'md', 'lg'],
+			control: { type: 'radio' },
+		},
+	},
 } as Meta;
 
 const html = String.raw;
