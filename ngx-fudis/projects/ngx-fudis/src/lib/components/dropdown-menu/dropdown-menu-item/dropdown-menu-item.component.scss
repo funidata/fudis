@@ -40,4 +40,81 @@
 
 		cursor: default;
 	}
+
+	&__checkbox {
+		display: block;
+		width: auto;
+
+		&:hover {
+			@include colorMixins.bg-color('primary-light');
+		}
+
+		&__box {
+			@include borders.border('1px', 'solid', 'gray-middle');
+
+			display: flex;
+			position: absolute;
+			align-items: center;
+			justify-content: center;
+			margin: spacing.$spacing-xs;
+			border-radius: 0;
+			cursor: pointer;
+			width: spacing.$spacing-sm;
+			height: spacing.$spacing-sm;
+
+			:focus {
+				@include focus.focus-checkbox;
+			}
+
+			svg {
+				@include colorMixins.bg-color('white');
+			}
+		}
+
+		&__label {
+			@include typography.body-text-md-regular;
+			@include colorMixins.text-color('gray-dark');
+
+			display: flex;
+			align-items: center;
+			margin-bottom: 0;
+			padding: spacing.$spacing-xs spacing.$spacing-xs spacing.$spacing-xs 0;
+
+			&__text {
+				position: relative;
+				margin-left: spacing.$spacing-lg;
+			}
+
+			&--active {
+				@include colorMixins.text-color('white');
+
+				&:hover {
+					@include colorMixins.text-color('gray-dark');
+				}
+			}
+		}
+
+		&__input {
+			@include utilities.box-reset;
+
+			appearance: none;
+			display: grid;
+			position: absolute;
+			place-content: center;
+
+			&:focus {
+				@include focus.focus-generic;
+			}
+		}
+
+		&--active {
+			@include colorMixins.bg-color('primary-dark');
+
+			&:hover {
+				label {
+					@include colorMixins.text-color('gray-dark');
+				}
+			}
+		}
+	}
 }

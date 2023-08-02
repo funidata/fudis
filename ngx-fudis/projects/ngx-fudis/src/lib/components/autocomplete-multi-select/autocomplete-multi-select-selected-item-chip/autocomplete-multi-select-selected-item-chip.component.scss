@@ -1,0 +1,29 @@
+@use '../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/borders/mixins.scss' as border;
+@use '../../../foundations/focus/mixins.scss' as focus;
+@use '../../../foundations/utilities/mixins.scss' as utilities;
+
+.fudis-autocomplete-multi-select-selected-item-chip {
+	&__list {
+		@include utilities.box-reset;
+	}
+
+	&__button {
+		@include colorMixins.bg-color('gray-dark');
+		@include colorMixins.text-color('white');
+		@include typography.body-text-md-regular;
+		@include border.border-none;
+		@include utilities.box-reset;
+
+		display: block;
+		margin-top: spacing.$spacing-xxs;
+		cursor: pointer;
+		padding: 0 spacing.$spacing-xs 0 0;
+
+		&:focus {
+			@include focus.focus-generic;
+		}
+	}
+}

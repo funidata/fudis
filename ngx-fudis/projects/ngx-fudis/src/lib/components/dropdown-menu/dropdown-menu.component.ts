@@ -3,24 +3,49 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	ElementRef,
+	HostBinding,
 	HostListener,
 	Input,
+	OnInit,
 	ViewChild,
+	ViewEncapsulation,
 } from '@angular/core';
+import { FudisInputWidth } from '../../types/forms';
 
 @Component({
 	selector: 'fudis-dropdown-menu',
 	templateUrl: './dropdown-menu.component.html',
 	styleUrls: ['./dropdown-menu.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DropdownMenuComponent implements AfterContentInit {
+export class DropdownMenuComponent implements AfterContentInit, OnInit {
 	@ViewChild('dropdownMenu') dropdownMenu: ElementRef<HTMLElement>;
+
+	/**
+	 * Binding fudis-dropdown-menu-host class to component wrapper
+	 */
+	@HostBinding('class') classes = 'fudis-dropdown-menu-host';
+
+	/**
+	 * Binding public variable for querying variant type
+	 */
+	@HostBinding('class.fudis-dropdown-menu-host') public _isMultiselect = false;
 
 	/**
 	 * Dropdown-menu is aligned to open left side of the button by default but can be aligned to open right side if necessary
 	 */
-	@Input() align: 'left' | 'right' = 'left';
+	@Input() align: 'left' | 'right' | 'center' = 'left';
+
+	/**
+	 * Assign dropdown as single-select or multiselect (with checkboxes)
+	 */
+	@Input() variant: 'single-select' | 'multiselect' = 'single-select';
+
+	/**
+	 * Set dropdown size (should follow the given input element size)
+	 */
+	@Input() size: FudisInputWidth = 'lg';
 
 	/**
 	 * Determine dropdown max-width
@@ -51,6 +76,12 @@ export class DropdownMenuComponent implements AfterContentInit {
 			this._maxWidth = `${window.innerWidth - elementInViewX}px`;
 		} else {
 			this._maxWidth = 'initial';
+		}
+	}
+
+	ngOnInit(): void {
+		if (this.variant === 'multiselect') {
+			this._isMultiselect = true;
 		}
 	}
 

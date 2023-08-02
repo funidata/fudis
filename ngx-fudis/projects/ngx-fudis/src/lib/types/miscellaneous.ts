@@ -6,7 +6,7 @@ export interface FudisDescriptionListItem {
 	value: string;
 }
 
-export type FudisExpandableType = 'regular';
+export type FudisExpandableType = 'regular' | 'lite';
 
 export type FudisSpacing = 'none' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
@@ -31,12 +31,26 @@ export interface FudisTranslationConfig {
 		// Text shown in dropdown options if input for a language is missing
 		MISSING: string;
 	};
-	// Clear filter button label for screen readers
 	AUTOCOMPLETE: {
+		// Clear filter button label for screen readers
 		CLEAR: string;
+		MULTISELECT: {
+			OPEN_DROPDOWN: string;
+			CLOSE_DROPDOWN: string;
+			NO_RESULTS: string;
+			REMOVE_ITEM: string;
+		};
 	};
 	ICON: {
 		// Alternative text for screen readers. Used in e. g. Error Summary
 		ATTENTION: string;
+	};
+	TEXTAREA: {
+		// Assistive text of max character count for screen readers
+		MAX_LENGTH: string;
+	};
+	TEXTINPUT: {
+		// Assistive text of max character count for screen readers
+		MAX_LENGTH: string;
 	};
 }

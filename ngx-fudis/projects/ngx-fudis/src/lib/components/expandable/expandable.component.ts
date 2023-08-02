@@ -66,6 +66,11 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 	@Input() variant: FudisExpandableType = 'regular';
 
 	/**
+	 * Set expandable inner content padding.
+	 */
+	@Input() padding: 'default' | 'small' = 'default';
+
+	/**
 	 * Optional sub title, placed underneath the main title
 	 */
 	@Input() subTitle: string;
