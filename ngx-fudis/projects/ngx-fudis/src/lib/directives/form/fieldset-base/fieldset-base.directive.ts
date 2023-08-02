@@ -38,13 +38,22 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
 	@Input() titleSize: 'md' | 'sm' = 'md';
 
 	/**
-	 * Internal id for component
+	 * Internal id to generate unique id
 	 */
 	protected _id: string;
 
+	/**
+	 * Fudis translation key for required text
+	 */
 	protected _requiredText: string;
 
+	/**
+	 * Set requiredText based on this boolean value
+	 */
 	protected _required: boolean = false;
 
+	/**
+	 * Basic Fudis translation keys
+	 */
 	protected _translations: Signal<FudisTranslationConfig>;
 }
