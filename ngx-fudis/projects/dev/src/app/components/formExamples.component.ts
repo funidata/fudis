@@ -10,6 +10,7 @@ import { FudisErrorSummaryService } from 'ngx-fudis';
 type MyForm = {
 	dropdown: FormControl<FudisDropdownOption | null>;
 	dropdownMulti: FormControl<FudisDropdownOption[] | null>;
+	textArea: FormControl<string | null>;
 	textInput: FormControl<string | null | number>;
 	truth: FormControl<boolean | null>;
 	date: FormControl<Date | null>;
@@ -50,6 +51,7 @@ export class AppFormExampleComponent implements OnInit {
 	testFormGroup = new FormGroup<MyForm>({
 		dropdown: new FormControl<FudisDropdownOption | null>(this.dropdownOptions[2]),
 		dropdownMulti: new FormControl<FudisDropdownOption[] | null>([this.dropdownOptions[2], this.dropdownOptions[4]]),
+		textArea: new FormControl<string | null>(null, Validators.required),
 		textInput: new FormControl<string | null | number>(null, [
 			Validators.required,
 			Validators.minLength(5),

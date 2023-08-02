@@ -1,7 +1,7 @@
-<div class="fudis-form-element fudis-text-area fudis-text-area__{{ size }}">
+<div class="fudis-text-area fudis-text-area__{{ size }}">
 	<fudis-label
 		[for]="_id"
-		[id]="'label_' + _id"
+		[id]="_id + '-label'"
 		[text]="label"
 		[requiredText]="_required ? _requiredText : undefined"
 		[tooltip]="tooltip"
@@ -23,7 +23,7 @@
 	<ng-container *ngIf="helpText || errorMsg">
 		<fudis-guidance
 			[inputLabel]="label"
-			[maxLengthText]="maxLengthText"
+			[maxLengthText]="_maxLengthText"
 			[maxLength]="maxLength"
 			[helpText]="helpText"
 			[for]="_id"

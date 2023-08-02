@@ -44,6 +44,12 @@
 								[label]="'Select some date'"
 								[control]="testFormGroup.controls['date']"
 								[errorMsg]="{ required: 'Date is required' }" />
+							<fudis-text-area
+								[label]="'Basic required text-area'"
+								[control]="testFormGroup.controls['textArea']"
+								[maxLength]="20"
+								[errorMsg]="{ required: t('error_required') }">
+							</fudis-text-area>
 						</ng-template>
 					</fudis-fieldset>
 				</ng-template>
