@@ -1,7 +1,12 @@
 @use '../../foundations/borders/mixins.scss' as borders;
 @use '../../foundations/focus/mixins.scss' as focus;
+@use '../../foundations/spacing/tokens.scss' as spacing;
 @use '../../foundations/colors/mixins.scss' as colorMixins;
 @use '../../foundations/utilities/mixins.scss' as utilities;
+
+.fudis-dropdown-menu-host {
+	display: block;
+}
 
 .fudis-dropdown-menu {
 	@include utilities.box-reset;
@@ -21,5 +26,32 @@
 
 	&__left {
 		right: 0;
+	}
+
+	&__center {
+		right: initial;
+		left: initial;
+	}
+
+	&__lg {
+		width: spacing.$spacing-input-lg;
+	}
+
+	&__md {
+		width: spacing.$spacing-input-md;
+	}
+
+	&__sm {
+		width: spacing.$spacing-input-sm;
+	}
+
+	&__multiselect {
+		max-width: spacing.$spacing-input-lg;
+		max-height: calc(spacing.$spacing-xxl * 4);
+		overflow: auto;
+
+		fudis-body-text {
+			padding: spacing.$spacing-xs;
+		}
 	}
 }

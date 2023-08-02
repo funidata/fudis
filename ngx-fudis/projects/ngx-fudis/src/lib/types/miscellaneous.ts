@@ -31,9 +31,15 @@ export interface FudisTranslationConfig {
 		// Text shown in dropdown options if input for a language is missing
 		MISSING: string;
 	};
-	// Clear filter button label for screen readers
 	AUTOCOMPLETE: {
+		// Clear filter button label for screen readers
 		CLEAR: string;
+		MULTISELECT: {
+			OPEN_DROPDOWN: string;
+			CLOSE_DROPDOWN: string;
+			NO_RESULTS: string;
+			REMOVE_ITEM: string;
+		};
 	};
 	ICON: {
 		// Alternative text for screen readers. Used in e. g. Error Summary
