@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { IconComponent } from './icon.component';
-import { FudisIconColor } from '../../types/icons';
+import { FudisIconColor, FudisIconRotate } from '../../types/icons';
 
 describe('IconComponent', () => {
 	let component: IconComponent;
@@ -41,6 +41,13 @@ describe('IconComponent', () => {
 		assertIconHasClasses(['fudis-icon', `fudis-icon-color__${color}`, 'fudis-icon-rotate__none', 'fudis-icon__lg']);
 	}
 
+	function iconRotateCheck(rotate: FudisIconRotate): void {
+		component.rotate = rotate;
+		component.ngOnChanges();
+		fixture.detectChanges();
+		assertIconHasClasses(['fudis-icon', 'fudis-icon-color__default', `fudis-icon-rotate__${rotate}`, 'fudis-icon__lg']);
+	}
+
 	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
@@ -58,6 +65,13 @@ describe('IconComponent', () => {
 			iconColorCheck('primary');
 			iconColorCheck('success');
 			iconColorCheck('white');
+		});
+
+		it('should change rotate class according to given rotate Input value', () => {
+			iconRotateCheck('flip-180');
+			iconRotateCheck('cw-90');
+			iconRotateCheck('ccw-90');
+			iconRotateCheck('none');
 		});
 	});
 

@@ -26,7 +26,7 @@ export class IconComponent implements OnChanges {
 	@Input() color: FudisIconColor = 'default';
 
 	/**
-	 * Use rotate to flip and rotate icon
+	 * Icon rotation
 	 */
 	@Input() rotate: FudisIconRotate = 'none';
 
