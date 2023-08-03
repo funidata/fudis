@@ -1,7 +1,36 @@
-import { Meta } from '@storybook/blocks';
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
 import { IconComponent } from './icon.component';
 import * as IconStories from './icon.stories.ts';
 
 <Meta title="Components/Icon" />
 
 # Icon
+
+Icons are rendered as <code>svg</code> elements.
+
+## Examples
+
+<Canvas of={IconStories.Icon}></Canvas>
+
+## Usage Guidelines
+
+Icons have default size of 32x32px but icons with suffix **-small** (e. g. `alert-small`, `info-small`) are scaled to 16x16px.
+
+Icons with suffix **-fill** (e. g. `alert-fill`, `info-circle-fill`) have their default style with white background. These icons **cannot** be colored with the `color` property.
+
+#### Properties
+
+Fudis-icon component requires at least `icon` property. All available icons can be seen in All Icons story page.
+
+Optionally change the color through `color` property: _attention, danger, default, light, primary, success_ or _white._
+
+Flip and rotate the icon with `rotate` property: _flip-180, cw-90,_ or _ccw-90._
+
+### Accessibility
+
+- Icons are always hidden from screen readers
+	- Be cautious that no information is communicated only with icons
+
+## Properties
+
+<ArgTypes of={IconComponent} />
