@@ -9,22 +9,22 @@ import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.dir
 })
 export class LabelComponent extends TooltipApiDirective {
 	/**
-	 * Text indicating if form element associated with label required or not
+	 * Id for label, e. g. used in Dropdown to link ngMaterial mat-select with 'aria-labelledby' to fudis-label
 	 */
-	@Input() requiredText: string | undefined = undefined;
+	@Input({ required: true }) id: string;
 
 	/**
-	 * Text visible as label text
+	 * Text visible as label
 	 */
 	@Input({ required: true }) text: string;
 
 	/**
-	 * HTML 'for' attribute. E.g. if text-input's id is 'text-input-1' give this id as 'for' attribute to label
+	 * HTML 'for' attribute. E.g. if text-input's id is 'text-input-1', give this id as 'for' attribute to the label
 	 */
 	@Input() for: string;
 
 	/**
-	 * Id for label, e. g. used in Dropdown to link ngMaterial mat-select with 'aria-labelledby' to fudis-label
+	 * Text indicating if form element associated with the label is required or not
 	 */
-	@Input({ required: true }) id: string;
+	@Input() requiredText: string | undefined = undefined;
 }

@@ -1,0 +1,58 @@
+<div
+	#autocompleteMultiSelectWrapper
+	class="fudis-autocomplete-multi-select fudis-autocomplete-multi-select__{{ size }}">
+	<fudis-label
+		[text]="label"
+		[id]="_id + '__label'"
+		[for]="_id"
+		[tooltip]="tooltip"
+		[tooltipPosition]="tooltipPosition"
+		[tooltipToggle]="tooltipToggle">
+	</fudis-label>
+	<div class="fudis-autocomplete-multi-select__input-wrapper">
+		<input
+			#autocompleteInput
+			(focus)="handleInputFocus($event)"
+			(keyup)="doSearch($event)"
+			[id]="_id"
+			[value]="_filterText"
+			role="combobox"
+			[attr.aria-expanded]="_toggleOn"
+			class="fudis-autocomplete-multi-select__input-wrapper__input"
+			[attr.aria-labelledby]="_id + '-selected-items'"
+			[attr.aria-describedby]="_id + '_guidance'" />
+		<fudis-button
+			class="fudis-autocomplete-multi-select__input-wrapper__icon-button"
+			(handleClick)="handleButtonClick()"
+			[size]="'icon-only'"
+			[variant]="'tertiary'"
+			[icon]="'chevron'"
+			[iconRotate]="_toggleOn ? 'ccw-90' : 'cw-90'"
+			[label]="!_toggleOn ? _openAriaLabel : _closeAriaLabel"
+			[labelHidden]="true">
+		</fudis-button>
+	</div>
+	<fudis-dropdown-menu *ngIf="_toggleOn" [align]="'center'" [size]="size" [variant]="'multiselect'">
+		<ng-container *ngFor="let item of _results">
+			<fudis-dropdown-menu-item
+				[label]="item.viewValue"
+				[close]="false"
+				(handleChecked)="selectItem(item)"
+				[checked]="isChecked(item)">
+			</fudis-dropdown-menu-item>
+		</ng-container>
+		<ng-container *ngIf="_results.length === 0">
+			<fudis-body-text [size]="'md-light'">{{ _noResultsFound }}</fudis-body-text>
+		</ng-container>
+	</fudis-dropdown-menu>
+	<ng-container *ngIf="selectedOptions.length > 0">
+		<span [attr.id]="_id + '-remove-items'" class="fudis-visually-hidden">{{ _removeItemText }}</span>
+		<fudis-autocomplete-multi-select-selected-item-chip
+			[parentId]="_id"
+			(deleteItem)="handleDeleteItem()"
+			[selectedItems]="selectedOptions" />
+	</ng-container>
+	<ng-container *ngIf="helpText">
+		<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="_id" />
+	</ng-container>
+</div>

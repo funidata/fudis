@@ -11,12 +11,7 @@ export class RadioButtonComponent {
 	@HostBinding('class') classes = 'fudis-radio-button-host';
 
 	/*
-	 * Id of single Radio button
-	 */
-	@Input() id: string;
-
-	/*
-	 * FormControl for Radio Button group
+	 * FormControl for single Radio Button
 	 */
 	@Input({ required: true }) control: FormControl;
 
@@ -36,6 +31,11 @@ export class RadioButtonComponent {
 	@Input({ required: true }) name: string;
 
 	/*
+	 * Id for single Radio Button
+	 */
+	@Input() id: string;
+
+	/*
 	 * If Radio Button group of same name selection is required
 	 */
 	@Input() required: boolean;
@@ -50,8 +50,14 @@ export class RadioButtonComponent {
 	 */
 	@Input() invalidState: boolean = false;
 
+	/**
+	 * Blur event output
+	 */
 	@Output() radioButtonBlur = new EventEmitter<string>();
 
+	/**
+	 * Checked input change output
+	 */
 	@Output() radioButtonChange = new EventEmitter<string>();
 
 	handleBlur(): void {

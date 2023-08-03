@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 type ComponentType =
 	| 'autocomplete'
 	| 'button'
+	| 'autocompleteMultiSelect'
 	| 'checkbox'
 	| 'datepicker'
 	| 'daterange'
@@ -31,6 +32,7 @@ export class FudisIdService {
 		autocomplete: 0,
 		button: 0,
 		languageBadgeGroup: 0,
+		autocompleteMultiSelect: 0,
 		checkbox: 0,
 		datepicker: 0,
 		daterange: 0,

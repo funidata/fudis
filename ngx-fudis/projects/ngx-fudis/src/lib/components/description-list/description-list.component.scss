@@ -37,6 +37,10 @@
 			@include colorMixins.text-color('gray-dark');
 
 			margin-bottom: spacing.$spacing-xs;
+
+			&__colon {
+				display: none;
+			}
 		}
 
 		&__details {

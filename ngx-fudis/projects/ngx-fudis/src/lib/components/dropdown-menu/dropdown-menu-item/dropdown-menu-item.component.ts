@@ -1,12 +1,18 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { OnInit, Component, ElementRef, EventEmitter, Host, Input, Output, ViewChild } from '@angular/core';
 import { FudisDropdownMenuItemService } from './dropdown-menu-item.service';
+import { DropdownMenuComponent } from '../dropdown-menu.component';
 
 @Component({
 	selector: 'fudis-dropdown-menu-item',
 	templateUrl: './dropdown-menu-item.component.html',
 	styleUrls: ['./dropdown-menu-item.component.scss'],
 })
-export class DropdownMenuItemComponent {
+export class DropdownMenuItemComponent implements OnInit {
+	constructor(
+		private _clickService: FudisDropdownMenuItemService,
+		@Host() private _parentComponent: DropdownMenuComponent
+	) {}
+
 	@ViewChild('dropdownItem') dropdownItem: ElementRef;
 
 	/**
@@ -20,11 +26,37 @@ export class DropdownMenuItemComponent {
 	@Input() disabled: boolean = false;
 
 	/**
+	 * Option for closing or leaving dropdown open after clicking an item. Closes by default.
+	 */
+	@Input() close: boolean = true;
+
+	/**
+	 * Checked state for dropdown-menu-item with checkbox
+	 */
+	@Input() checked: boolean;
+
+	/**
 	 * Optional click handler
 	 */
 	@Output() handleClick = new EventEmitter<Event>();
 
-	constructor(private clickService: FudisDropdownMenuItemService) {}
+	/**
+	 * Output for handling checked state in dropdown-menu-item with checkbox
+	 */
+	@Output() handleChecked = new EventEmitter<boolean>();
+
+	/**
+	 * Determine whether option is displayed as single-select or multiselect (with checkbox).
+	 * Multiselect is used e.g in autocomplete-multi-select.
+	 */
+	protected _isMultiselectOption: boolean = false;
+
+	ngOnInit(): void {
+		// Check parent component's public HostBinding for multiselect usage
+		if (this._parentComponent._isMultiselect) {
+			this._isMultiselectOption = true;
+		}
+	}
 
 	// eslint-disable-next-line class-methods-use-this
 	handleKeyDown(event: KeyboardEvent) {
@@ -54,11 +86,13 @@ export class DropdownMenuItemComponent {
 			!(event.relatedTarget as HTMLElement)?.classList?.contains('fudis-dropdown-menu-item') &&
 			(event.relatedTarget as HTMLElement) !== menuButton
 		) {
-			this.clickService.setMenuStatus(false);
+			this._clickService.setMenuStatus(false);
 		}
 	}
 
 	closeDropdown(): void {
-		this.clickService.setMenuStatus(false);
+		if (this.close === true) {
+			this._clickService.setMenuStatus(false);
+		}
 	}
 }

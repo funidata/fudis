@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
@@ -62,11 +63,11 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 	styles: [],
 })
 export class DialogTestContentComponent {
+	constructor(private _formBuilder: FormBuilder) {}
+
 	chosenPowerAnimal: string;
 
-	constructor(private formBuilder: FormBuilder) {}
-
-	dialogFormGroup = this.formBuilder.group({
+	dialogFormGroup = this._formBuilder.group({
 		powerAnimal: new FormControl('', Validators.required),
 	});
 }

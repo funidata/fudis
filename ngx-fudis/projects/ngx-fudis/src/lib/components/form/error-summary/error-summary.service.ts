@@ -1,38 +1,31 @@
-import { Injectable, Signal, effect, signal } from '@angular/core';
+import { Injectable, Signal, signal } from '@angular/core';
 import {
 	FudisFormErrorSummaryObject,
 	FudisFormErrorSummaryItem,
 	FudisFormErrorSummarySection,
+	FudisErrorSummaryParent,
 } from '../../../types/forms';
-import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Injectable({ providedIn: 'root' })
 export class FudisErrorSummaryService {
-	constructor(private _translationService: FudisTranslationService) {
-		effect(() => {
-			this._translationService.getLanguage();
-			this.reloadErrors(0, false);
-		});
-	}
-
 	private _currentErrorList: FudisFormErrorSummaryObject = {};
 
 	private _signalCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
 
 	private _signalDynamicCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
 
+	private _errorSummaryParentList = signal<FudisErrorSummaryParent[]>([]);
+
 	private _currentFieldsets: FudisFormErrorSummarySection[] = [];
 
 	private _currentSections: FudisFormErrorSummarySection[] = [];
 
-	private _focusToErrors: boolean = true;
-
-	getFocusToErrors(): boolean {
-		return this._focusToErrors;
-	}
-
 	getFieldsetList(): FudisFormErrorSummarySection[] {
 		return this._currentFieldsets;
+	}
+
+	getFormsWithErrorSummary(): Signal<FudisErrorSummaryParent[]> {
+		return this._errorSummaryParentList.asReadonly();
 	}
 
 	getSectionList(): FudisFormErrorSummarySection[] {
@@ -47,15 +40,12 @@ export class FudisErrorSummaryService {
 		return this._signalDynamicCurrentErrorList.asReadonly();
 	}
 
-	// eslint-disable-next-line class-methods-use-this
-	private defineErrorId(id: string, controlName: string | undefined): string {
-		return controlName ? `${id}_${controlName}` : id;
-	}
-
 	public addNewError(newError: FudisFormErrorSummaryItem): void {
 		let currentErrors = this._currentErrorList;
 
-		const errorId = this.defineErrorId(newError.id, newError.controlName);
+		const errorId = this._defineErrorId(newError.id, newError.controlName);
+
+		const langUpdated = currentErrors[errorId] && currentErrors[errorId]?.language !== newError.language;
 
 		if (!currentErrors[errorId]) {
 			currentErrors = {
@@ -64,6 +54,7 @@ export class FudisErrorSummaryService {
 					id: newError.id,
 					errors: { [newError.type]: newError.error },
 					label: newError.label,
+					language: newError.language,
 				},
 			};
 		} else {
@@ -73,11 +64,16 @@ export class FudisErrorSummaryService {
 					id: newError.id,
 					errors: { ...currentErrors[errorId].errors, [newError.type]: newError.error },
 					label: newError.label,
+					language: newError.language,
 				},
 			};
 		}
 
 		this._currentErrorList = currentErrors;
+
+		if (langUpdated) {
+			this.reloadErrors();
+		}
 	}
 
 	public removeError(error: { id: string; controlName: string | undefined; type: string }): void {
@@ -132,12 +128,42 @@ export class FudisErrorSummaryService {
 		this._currentSections.splice(indexToRemove, 1);
 	}
 
-	public reloadErrors(delay: number = 0, focusToErrors: boolean = true): void {
-		this._focusToErrors = focusToErrors;
-
+	public reloadErrors(delay: number = 0): void {
 		setTimeout(() => {
 			this._signalCurrentErrorList.set(this._currentErrorList);
 			this._signalDynamicCurrentErrorList.set(this._currentErrorList);
 		}, delay);
+	}
+
+	public addErrorSummaryParent(parent: FudisErrorSummaryParent): void {
+		const currentParents = this._errorSummaryParentList();
+
+		const existingItem = currentParents.find((item) => {
+			return item.formId === parent.formId;
+		});
+
+		if (existingItem) {
+			const index = currentParents.indexOf(existingItem);
+			currentParents[index] = parent;
+		} else {
+			currentParents.push(parent);
+		}
+
+		this._errorSummaryParentList.set(currentParents);
+	}
+
+	public removeErrorSummaryParent(parent: FudisErrorSummaryParent): void {
+		const currentParents = this._errorSummaryParentList();
+
+		const filtered = currentParents.filter((item) => {
+			return item.formId !== parent.formId;
+		});
+
+		this._errorSummaryParentList.set(filtered);
+	}
+
+	// eslint-disable-next-line class-methods-use-this
+	private _defineErrorId(id: string, controlName: string | undefined): string {
+		return controlName ? `${id}_${controlName}` : id;
 	}
 }

@@ -2,6 +2,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, Input, OnChanges, On
 
 import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
 import { FudisFormErrorSummaryItem } from '../../../types/forms';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'fudis-error-message',
@@ -10,15 +11,15 @@ import { FudisFormErrorSummaryItem } from '../../../types/forms';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ErrorMessageComponent implements OnChanges, OnDestroy, AfterViewInit {
+	constructor(
+		private _errorSummaryService: FudisErrorSummaryService,
+		private _translationService: FudisTranslationService
+	) {}
+
 	/*
 	 * Error message to display
 	 */
 	@Input({ required: true }) message: string | undefined;
-
-	/**
-	 * Name of control this error is related to.
-	 */
-	@Input() controlName: string | undefined = undefined;
 
 	/**
 	 * Id of input this message is related to. Sent to Error Summary service.
@@ -31,32 +32,46 @@ export class ErrorMessageComponent implements OnChanges, OnDestroy, AfterViewIni
 	@Input({ required: true }) label: string;
 
 	/**
-	 * If error is visible or not.
-	 */
-	@Input() visible: boolean = false;
-
-	/**
 	 * Error type from different keys in e. g. control.errors such as 'required' and 'minlength'
 	 */
 	@Input({ required: true }) type: string;
+
+	/**
+	 * Name of control this error is related to.
+	 */
+	@Input() controlName: string | undefined = undefined;
+
+	/**
+	 * If error is visible or not.
+	 */
+	@Input() visible: boolean = false;
 
 	/**
 	 * Visual variant of error message
 	 */
 	@Input() variant: 'body-text' | 'form-error' = 'form-error';
 
+	/**
+	 * Has error been created and sent forward
+	 */
 	private _errorSent: boolean = false;
 
+	/**
+	 * Error message to include in error summary item
+	 */
 	private _currentMessage: string;
 
+	/**
+	 * Error label to include in error summary item
+	 */
 	private _currentLabel: string | undefined = undefined;
 
-	constructor(private _errorSummaryService: FudisErrorSummaryService) {}
-
 	ngAfterViewInit(): void {
-		if (!this.message) {
-			this.throwError();
-		}
+		setTimeout(() => {
+			if (!this.message) {
+				this.throwError();
+			}
+		}, 1000);
 	}
 
 	createError(): void {
@@ -70,6 +85,7 @@ export class ErrorMessageComponent implements OnChanges, OnDestroy, AfterViewIni
 				label: this._currentLabel,
 				type: this.type,
 				controlName: this.controlName,
+				language: this._translationService.getLanguage(),
 			};
 			this._errorSummaryService.addNewError(newError);
 			this._errorSent = true;

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, effect } from '@angular/core';
 
 import { FormControl, Validators } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
@@ -13,12 +13,19 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	styleUrls: ['./text-area.component.scss'],
 })
 export class TextAreaComponent extends InputBaseDirective implements OnInit, OnChanges {
-	constructor(private _idService: FudisIdService, _translationService: FudisTranslationService) {
+	constructor(
+		private _idService: FudisIdService,
+		_translationService: FudisTranslationService
+	) {
 		super(_translationService);
+
+		effect(() => {
+			this._maxLengthText = this._translations().TEXTAREA.MAX_LENGTH;
+		});
 	}
 
 	/**
-	 * FormControl for the input.
+	 * FormControl for text-area
 	 */
 	@Input({ required: true }) control: FormControl<string | null | number>;
 
@@ -33,14 +40,14 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit, OnC
 	@Input() maxLength: number | undefined = undefined;
 
 	/**
-	 * Assistive text of max character count for screen readers
-	 */
-	@Input() maxLengthText: string;
-
-	/**
-	 * Fixed size options for text area
+	 * Text-area size option
 	 */
 	@Input() size: FudisInputWidth = 'lg';
+
+	/**
+	 * Assistive text of max character count for screen readers
+	 */
+	protected _maxLengthText: string;
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('textArea');

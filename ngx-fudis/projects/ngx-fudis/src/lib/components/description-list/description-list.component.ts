@@ -17,20 +17,10 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 	}
 
 	/**
-	 * CSS class list
-	 */
-	protected _classList: string[] = [];
-
-	/**
 	 * Item array to form description list data.
 	 * Contains mandatory key and value, and optional subHeading.
 	 */
 	@Input() data: FudisDescriptionListItem[] | null = null;
-
-	/**
-	 * Variant for description list structure and layout
-	 */
-	@Input() variant: 'regular' | 'compact' = 'regular';
 
 	/**
 	 * Disable Fudis Grid behavior for Description List.
@@ -38,11 +28,29 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 	@Input() disableGrid: boolean = false;
 
 	/**
+	 * Variant for description list structure and layout
+	 */
+	@Input() variant: 'regular' | 'compact' = 'regular';
+
+	/**
 	 * Add Fudis Language Badge Group in Fudis Description List Item Term element
 	 */
 	@Input() translation: boolean = false;
 
-	private getClasses(): string[] {
+	/**
+	 * CSS class list
+	 */
+	protected _classList: string[] = [];
+
+	ngOnInit(): void {
+		this._classList = this._getClasses();
+	}
+
+	ngOnChanges(): void {
+		this._classList = this._getClasses();
+	}
+
+	private _getClasses(): string[] {
 		const cssClasses = [];
 
 		if (this.variant === 'regular') {
@@ -65,13 +73,5 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 		const combined = this.classes ? cssClasses.concat(this.classes) : cssClasses;
 
 		return combined;
-	}
-
-	ngOnInit(): void {
-		this._classList = this.getClasses();
-	}
-
-	ngOnChanges(): void {
-		this._classList = this.getClasses();
 	}
 }

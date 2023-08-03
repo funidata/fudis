@@ -16,6 +16,7 @@ import {
 import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
 import { FormGroupValidators } from '../../../utilities/form/validators';
 import { FormComponent } from './form.component';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'example-form-content',
@@ -40,7 +41,7 @@ import { FormComponent } from './form.component';
 			<ng-template fudisActions type="form">
 				<fudis-button [label]="'Previous step'" [icon]="'back'" [variant]="'tertiary'" />
 				<fudis-button [label]="'Open menu'" [icon]="'three-dots'" [labelHidden]="true" [variant]="'secondary'" />
-				<fudis-button [variant]="'secondary'" [label]="'Save draft'" />
+				<fudis-button [variant]="'secondary'" (handleClick)="changeLanguage()" [label]="'Change language'" />
 				<fudis-button [label]="'Submit'" (handleClick)="submitForm()" />
 			</ng-template>
 			<ng-template fudisContent type="form">
@@ -151,31 +152,16 @@ import { FormComponent } from './form.component';
 	`,
 })
 class FormContentExampleComponent {
+	constructor(
+		private _errorSummaryService: FudisErrorSummaryService,
+		private _translationService: FudisTranslationService
+	) {}
+
 	errorSummaryVisible: boolean = false;
 
 	firstLoad: boolean = true;
 
 	fieldsetId = 'first-fieldset-id';
-
-	submitForm(): void {
-		this.fieldsetExample.markAllAsTouched();
-
-		this.firstLoad = false;
-
-		if (this.fieldsetExample.invalid) {
-			this._collapsed = false;
-			this.errorSummaryVisible = true;
-			this.errorSummaryService.reloadErrors(500);
-		} else {
-			this.errorSummaryVisible = false;
-		}
-	}
-
-	handleCollapsedOutput(value: boolean): void {
-		this._collapsed = value;
-	}
-
-	private _collapsed: boolean = true;
 
 	formHeaderDl = [
 		{ key: 'Important person', value: 'Admiral Thrawn' },
@@ -194,8 +180,8 @@ class FormContentExampleComponent {
 		},
 		swedish: { required: 'Missing description in Swedish.', minlength: 'Description should at least 10 characters.' },
 		finnish: {
-			required: 'Missing description in Finnish.',
-			minlength: 'Description should at least 10 characters.',
+			required: 'Missing description in Finnish',
+			minlength: 'Description should at least 10 characters',
 		},
 	};
 
@@ -297,7 +283,39 @@ class FormContentExampleComponent {
 		},
 	};
 
-	constructor(private errorSummaryService: FudisErrorSummaryService) {}
+	private _collapsed: boolean = true;
+
+	submitForm(): void {
+		this.fieldsetExample.markAllAsTouched();
+
+		this.firstLoad = false;
+
+		if (this.fieldsetExample.invalid) {
+			this._collapsed = false;
+			this.errorSummaryVisible = true;
+			this._errorSummaryService.reloadErrors();
+		} else {
+			this.errorSummaryVisible = false;
+		}
+	}
+
+	changeLanguage(): void {
+		const currentLang = this._translationService.getLanguage();
+
+		if (currentLang === 'fi') {
+			this._translationService.setLanguage('en');
+			// eslint-disable-next-line no-console
+			console.log('Fudis internal language is now: EN');
+		} else {
+			this._translationService.setLanguage('fi');
+			// eslint-disable-next-line no-console
+			console.log('Fudis internal language is now: FI');
+		}
+	}
+
+	handleCollapsedOutput(value: boolean): void {
+		this._collapsed = value;
+	}
 }
 
 export default {

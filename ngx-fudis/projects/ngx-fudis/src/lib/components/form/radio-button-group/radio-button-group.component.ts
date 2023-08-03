@@ -13,6 +13,13 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	encapsulation: ViewEncapsulation.None,
 })
 export class RadioButtonGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
+	constructor(
+		private _idService: FudisIdService,
+		private _radioButtonGroupConfigService: FudisTranslationService
+	) {
+		super(_radioButtonGroupConfigService);
+	}
+
 	@HostBinding('class') classes = 'fudis-radio-button-group-host';
 
 	/*
@@ -40,30 +47,22 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	 */
 	@Input() required: boolean | undefined = undefined;
 
-	constructor(private _idService: FudisIdService, private radioButtonGroupConfigService: FudisTranslationService) {
-		super(radioButtonGroupConfigService);
-	}
-
 	ngOnInit() {
 		this._id = this.id ?? this._idService.getNewId('radioButtonGroup');
 
 		if (this.options.length < 2) {
 			throw new Error(
-				`Fudis-radio-button-group should have minimum of two options for radio buttons! Now it only got ${this.options.length} options`
+				`Fudis-radio-button-group should have minimum of two options for radio buttons, but it only got ${this.options.length} option.`
 			);
 		}
 
-		const optionNames = this.options.map((item) => {
-			return item.name;
-		});
+		const nameMismatch = this.options.filter((optionName) =>
+			this.options.some((item) => optionName.name !== item.name)
+		);
 
-		const namesAreIdentical = optionNames.some((item, index) => {
-			return optionNames.indexOf(item) === index;
-		});
-
-		if (!namesAreIdentical) {
+		if (nameMismatch.length > 0) {
 			throw new Error(
-				`From @Input array of options to fudis-radio-button-group value 'name' should be identical for all options.`
+				`In fudis-radio-button-group options array, each object's 'name' value should be identical for all options, but name mismatch was detected.`
 			);
 		}
 	}

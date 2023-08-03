@@ -36,31 +36,7 @@ export class DatepickerCustomDateAdapter extends NativeDateAdapter {
 
 		const dtf = new Intl.DateTimeFormat(this.selectLanguage(displayFormat), { ...displayFormat, timeZone: 'utc' });
 
-		return this.formatInputToDate(dtf, date);
-	}
-
-	/**
-	 * Determines from displayFormat value if the Date value
-	 * is coming from the input field or from the date picker calendar.
-	 * This ensures, that visible input value is always in Finnish DD.MM.YYYY
-	 * format, but calendar uses HTML lang in other context.
-	 */
-
-	selectLanguage(displayFormat: Object): string {
-		if (Object.prototype.valueOf.call(displayFormat) === FudisDateInputFormat) {
-			return 'fi-FI';
-		}
-		return this.locale;
-	}
-
-	private formatInputToDate(dtf: Intl.DateTimeFormat, date: Date) {
-		// Passing the year to the constructor causes year numbers <100 to be converted to 19xx.
-		// To work around this we use `setUTCFullYear` and `setUTCHours` instead.
-		const d = new Date();
-		d.setUTCFullYear(date.getFullYear(), date.getMonth(), date.getDate());
-		d.setUTCHours(date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
-
-		return dtf.format(d);
+		return this._formatInputToDate(dtf, date);
 	}
 
 	/**
@@ -68,5 +44,28 @@ export class DatepickerCustomDateAdapter extends NativeDateAdapter {
 	 */
 	override getFirstDayOfWeek(): number {
 		return 1;
+	}
+
+	/**
+	 * Determines from displayFormat value if the Date value
+	 * is coming from the input field or from the date picker calendar.
+	 * This ensures, that visible input value is always in Finnish DD.MM.YYYY format,
+	 * but calendar uses HTML lang in other context.
+	 */
+	selectLanguage(displayFormat: Object): string {
+		if (Object.prototype.valueOf.call(displayFormat) === FudisDateInputFormat) {
+			return 'fi-FI';
+		}
+		return this.locale;
+	}
+
+	private _formatInputToDate(dtf: Intl.DateTimeFormat, date: Date) {
+		// Passing the year to the constructor causes year numbers <100 to be converted to 19xx.
+		// To work around this we use `setUTCFullYear` and `setUTCHours` instead.
+		const d = new Date();
+		d.setUTCFullYear(date.getFullYear(), date.getMonth(), date.getDate());
+		d.setUTCHours(date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
+
+		return dtf.format(d);
 	}
 }

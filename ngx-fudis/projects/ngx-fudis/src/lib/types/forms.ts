@@ -13,9 +13,7 @@ export interface FudisRadioButtonOption {
 	value: string | boolean | null;
 	/** Value that is shown in the UI */
 	viewValue: string;
-	/** Is option disabled in the dropdown */
-	disabled?: boolean;
-	/** If option is selected or not */
+	/** Is option selected */
 	checked?: boolean;
 }
 
@@ -55,6 +53,7 @@ export type FudisFormErrorSummaryItem = {
 	error: string;
 	type: string;
 	controlName: string | undefined;
+	language: FudisLanguageAbbr;
 };
 
 export type FudisFormErrorSummaryObject = {
@@ -62,12 +61,18 @@ export type FudisFormErrorSummaryObject = {
 		id: string;
 		errors: FudisFormErrorSummaryObjectItemErrors;
 		label: string;
+		language: FudisLanguageAbbr;
 	};
 };
 
 export type FudisFormErrorSummarySection = {
 	id: string;
 	title: string;
+};
+
+export type FudisErrorSummaryParent = {
+	formId: string | null | undefined;
+	parentElement: HTMLFormElement;
 };
 
 export type FudisFormErrorSummaryList = {

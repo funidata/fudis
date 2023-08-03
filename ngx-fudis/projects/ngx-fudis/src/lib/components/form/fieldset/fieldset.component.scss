@@ -3,24 +3,22 @@
 @use '../../../foundations/breakpoints/mixins.scss' as breakpoints;
 @use '../../../foundations/typography/tokens.scss' as typographyTokens;
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../../foundations/utilities/mixins.scss' as utilities;
 @use '../../../foundations/focus/mixins.scss' as focus;
 
 .fudis-fieldset {
-	@include utilities.box-reset;
-
+	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
 
 	/* stylelint-disable-next-line declaration-property-value-disallowed-list, property-disallowed-list */
 	border: none;
+	padding: 0;
 
 	&:focus-visible {
 		@include focus.focus-generic;
 	}
 
 	&__legend {
-		box-sizing: border-box;
 		display: flex;
 		flex-direction: column;
 		padding: 0;
@@ -44,6 +42,8 @@
 		}
 
 		&__title {
+			margin-bottom: spacing.$spacing-xs;
+
 			&__margin-right {
 				margin-right: spacing.$spacing-xl;
 			}
@@ -59,6 +59,8 @@
 			&__text {
 				@include colorMixins.text-color('gray-dark');
 
+				display: inline-block;
+				margin-top: spacing.$spacing-xxs;
 				margin-right: spacing.$spacing-xs;
 			}
 
@@ -80,11 +82,10 @@
 			@include typography.body-text-sm-regular;
 
 			display: block;
-			margin-bottom: spacing.$spacing-xs;
 		}
 
 		&__actions {
-			margin-bottom: spacing.$spacing-sm;
+			margin-bottom: spacing.$spacing-xs;
 
 			fudis-button:not(:last-of-type) {
 				margin-right: spacing.$spacing-sm;
