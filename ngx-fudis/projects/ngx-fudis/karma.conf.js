@@ -4,6 +4,16 @@
 module.exports = function (config) {
   config.set({
     basePath: '',
+    files: [
+      { pattern: 'src/lib/assets/images/fd-logo.svg', watched: false, included: false, served: true, nocache: false },
+      { pattern: 'src/lib/assets/icons/*.*', watched: false, included: false, served: true, nocache: false }
+    ],
+    proxies: {
+      "/fd-logo.svg": "/base/src/lib/assets/images/fd-logo.svg",
+      "/clock.svg": "/base/src/lib/assets/icons/clock.svg",
+      "/info-circle.svg": "/base/src/lib/assets/icons/info-circle.svg",
+      "/calendar.svg": "/base/src/lib/assets/icons/calendar.svg",
+   },
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
       require('karma-jasmine'),
