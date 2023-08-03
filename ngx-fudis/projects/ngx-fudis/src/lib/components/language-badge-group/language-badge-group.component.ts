@@ -9,11 +9,20 @@ import { FudisTranslationService } from '../../utilities/translation/translation
 	styleUrls: ['./language-badge-group.component.scss'],
 })
 export class LanguageBadgeGroupComponent implements OnInit {
-	constructor(private _idService: FudisIdService, private _translationService: FudisTranslationService) {
+	constructor(
+		private _idService: FudisIdService,
+		private _translationService: FudisTranslationService
+	) {
 		effect(() => {
 			this._translations = _translationService.getTranslations();
 		});
 	}
+
+	@Input({ required: true }) selectedLanguage: FudisLanguageAbbr;
+
+	@Input({ required: true }) languages: FudisLanguageAbbr[];
+
+	@Output() handleClick = new EventEmitter<FudisLanguageAbbr>();
 
 	/**
 	 * Internal id for Language Badge Group component
@@ -23,12 +32,6 @@ export class LanguageBadgeGroupComponent implements OnInit {
 	protected _languageOptions: FudisLanguageAbbr[] = ['en', 'fi', 'sv'];
 
 	protected _translations: Signal<FudisTranslationConfig>;
-
-	@Input({ required: true }) selectedLanguage: FudisLanguageAbbr;
-
-	@Input({ required: true }) languages: FudisLanguageAbbr[];
-
-	@Output() handleClick = new EventEmitter<FudisLanguageAbbr>();
 
 	ngOnInit(): void {
 		this._id = this._idService.getNewId('languageBadgeGroup');

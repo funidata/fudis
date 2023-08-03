@@ -9,11 +9,14 @@ import { FudisDescriptionListItemDetailsService } from './description-list-item-
 	templateUrl: './description-list-item-details.component.html',
 })
 export class DescriptionListItemDetailsComponent implements OnInit, OnDestroy {
-	@ContentChild(ActionsDirective) actions: ActionsDirective;
-
-	constructor(private _idService: FudisIdService, private _detailsService: FudisDescriptionListItemDetailsService) {
+	constructor(
+		private _idService: FudisIdService,
+		private _detailsService: FudisDescriptionListItemDetailsService
+	) {
 		this._id = this._idService.getNewId('dlItemDetails');
 	}
+
+	@ContentChild(ActionsDirective) actions: ActionsDirective;
 
 	@Input() lang: FudisLanguageAbbr;
 
