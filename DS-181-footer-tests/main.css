@@ -16,6 +16,8 @@
 */
 /* stylelint-disable declaration-property-value-disallowed-list */
 /* stylelint-disable property-disallowed-list */
+/* stylelint-disable selector-no-qualifying-type */
+/* stylelint-disable max-nesting-depth */
 /* stylelint-disable property-disallowed-list */
 /* stylelint-disable no-descending-specificity */
 /* stylelint-disable declaration-no-important */
@@ -54,6 +56,32 @@
   background-color: var(--fudis-color-primary-light) !important;
 }
 
+.fudis-autocomplete__option.mat-mdc-option.mdc-list-item--selected,
+.fudis-dropdown__option.mat-mdc-option.mdc-list-item--selected {
+  background-color: var(--fudis-color-primary) !important;
+  color: #ffffff;
+}
+
+.fudis-autocomplete__option.mat-mdc-option.mdc-list-item--selected mat-pseudo-checkbox.mat-pseudo-checkbox-minimal::after,
+.fudis-dropdown__option.mat-mdc-option.mdc-list-item--selected mat-pseudo-checkbox.mat-pseudo-checkbox-minimal::after {
+  color: #ffffff;
+}
+
+.fudis-autocomplete__option.mat-mdc-option.mdc-list-item--selected mat-pseudo-checkbox.mat-pseudo-checkbox-full,
+.fudis-dropdown__option.mat-mdc-option.mdc-list-item--selected mat-pseudo-checkbox.mat-pseudo-checkbox-full {
+  background-color: #ffffff;
+}
+
+.fudis-autocomplete__option.mat-mdc-option.mdc-list-item--selected mat-pseudo-checkbox.mat-pseudo-checkbox-full::after,
+.fudis-dropdown__option.mat-mdc-option.mdc-list-item--selected mat-pseudo-checkbox.mat-pseudo-checkbox-full::after {
+  color: #484848;
+}
+
+.fudis-autocomplete__option.mat-mdc-option.mdc-list-item--selected .mdc-list-item__primary-text,
+.fudis-dropdown__option.mat-mdc-option.mdc-list-item--selected .mdc-list-item__primary-text {
+  color: #ffffff !important;
+}
+
 .fudis-autocomplete__option.mat-mdc-option .mdc-list-item__primary-text,
 .fudis-dropdown__option.mat-mdc-option .mdc-list-item__primary-text {
   text-transform: initial;
@@ -64,20 +92,10 @@
 }
 
 .fudis-dropdown__select .mat-mdc-select-value {
-  font-weight: lighter;
-}
-
-.fudis-dropdown__option.mat-mdc-option.mat-mdc-option-active.mdc-list-item--selected {
-  background-color: var(--fudis-color-primary-light) !important;
-}
-
-.fudis-dropdown__option.mat-mdc-option.mdc-list-item--selected {
-  background-color: var(--fudis-color-primary-light) !important;
-}
-
-.fudis-dropdown__option.mat-mdc-option.mdc-list-item--selected .mdc-list-item__primary-text {
-  /* stylelint-disable-next-line property-disallowed-list */
-  color: #484848;
+  line-height: 1.5rem;
+  font-family: "Fira Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
 }
 
 /* stylelint-disable property-disallowed-list */ /* stylelint-disable declaration-no-important */
