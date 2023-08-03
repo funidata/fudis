@@ -20,7 +20,7 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 	}
 
 	/*
-	 * FormControl for the input.
+	 * FormControl for the dropdown
 	 */
 	@Input({ required: true }) control: FormControl<
 		FudisDropdownOption | FudisDropdownOption[] | FudisDropdownLanguageOption[] | null
@@ -29,30 +29,30 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 	/**
 	 * Dropdown options
 	 */
-	@Input() options: FudisDropdownOption[];
+	@Input({ required: true }) options: FudisDropdownOption[];
 
 	/**
 	 * If true, user can choose multiple checkbox options from dropdown
 	 */
-	@Input() multipleOption = false;
+	@Input() multipleOption: boolean = false;
 
 	/**
-	 * Custom placeholder text to show when no selection has been made
+	 * Placeholder text for the dropdown input when no selection has been made
 	 */
 	@Input() placeholder: string;
 
 	/**
-	 * Available sizes for the dropdown - defaults to large.
+	 * Available sizes for the dropdown
 	 */
 	@Input() size: 'xs' | FudisInputWidth = 'lg';
 
 	/**
-	 * Hide selected option checkmark in option list
+	 * Hide selected option's checkmark in options list, used in input-with-language-options component
 	 */
 	@Input() hideSingleSelectionIndicator: boolean = false;
 
 	/**
-	 * Value output event on selectoion change
+	 * Value output event on selection change
 	 */
 	@Output() selectionUpdate: EventEmitter<FudisDropdownOption> = new EventEmitter<FudisDropdownOption>();
 

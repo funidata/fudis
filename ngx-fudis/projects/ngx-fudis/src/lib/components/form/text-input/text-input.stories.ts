@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, F
 import { Component } from '@angular/core';
 import { TextInputComponent } from './text-input.component';
 import { FudisFormErrors } from '../../../types/forms';
+import readme from './readme.mdx';
 
 @Component({
 	selector: 'example-text-input-with-form-control',
@@ -10,39 +11,34 @@ import { FudisFormErrors } from '../../../types/forms';
 		<form [formGroup]="mainFormGroup">
 			<fudis-text-input
 				[control]="mainFormGroup.controls['first']"
-				[id]="'unique-text-input-id-1'"
-				[label]="'I am a basic text input.'"
+				[label]="'Basic text input'"
 				[helpText]="'I do not have any validators.'" />
 			<fudis-text-input
 				[control]="mainFormGroup.controls['second']"
-				[id]="'unique-text-input-id-2'"
 				[errorMsg]="{ required: 'Missing a value.' }"
-				[label]="'I am a required text input'"
+				[label]="'Required text input'"
 				[tooltip]="'This is a tooltip text'"
 				[tooltipPosition]="'right'"
 				[tooltipToggle]="false"
-				[helpText]="'Please add some values here above!'" />
+				[helpText]="'Please add some content.'" />
 			<fudis-text-input
 				[control]="mainFormGroup.controls['third']"
 				[minLength]="minLength"
 				[maxLength]="maxLength"
-				[maxLengthText]="'characters used'"
-				[id]="'unique-text-input-id-3'"
-				label="Email"
+				[label]="'Email'"
 				[errorMsg]="validatorMessages"
-				type="email"
-				helpText="This is an example email input with multiple validations." />
+				[type]="'email'"
+				[helpText]="'This is an example email input with multiple validations.'" />
 			<fudis-text-input
 				[control]="mainFormGroup.controls['fourth']"
-				[id]="'unique-text-input-id-4'"
-				label="Number input"
+				[label]="'Number input'"
 				[minNumber]="minNumber"
 				[maxNumber]="maxNumber"
-				tooltip="This is a tooltip text as well"
+				[tooltip]="'You can choose any number between 1 and 99'"
 				[tooltipPosition]="'left'"
 				[tooltipToggle]="false"
-				type="number"
-				size="sm"
+				[type]="'number'"
+				[size]="'sm'"
 				[errorMsg]="validatorMessages"></fudis-text-input>
 		</form>
 	`,
@@ -93,15 +89,45 @@ export default {
 			imports: [ReactiveFormsModule, FormsModule],
 		}),
 	],
-	argTypes: {},
 	parameters: {
+		docs: {
+			page: readme,
+		},
 		controls: {
-			exclude: ['control'],
+			exclude: [
+				'_maxLengthText',
+				'classes',
+				'_id',
+				'_required',
+				'_requiredText',
+				'_translations',
+				'onBlur',
+				'handleBlur',
+				'ngOnChanges',
+				'ngOnInit',
+				'ariaLabel',
+				'disabled',
+				'id',
+				'errorMsg',
+				'invalidState',
+			],
 		},
 	},
+	argTypes: {},
 } as Meta;
 
-export const TextInput: StoryFn = () => ({
+const Template: StoryFn<TextInputComponent> = (args: TextInputComponent) => ({
+	props: args,
+});
+
+export const TextInput = Template.bind({});
+TextInput.args = {
+	label: 'Text-input label example',
+	control: new FormControl(''),
+	helpText: 'Example help text',
+};
+
+export const Examples: StoryFn = () => ({
 	template: `
 		<example-text-input-with-form-control></example-text-input-with-form-control>
 	`,

@@ -24,13 +24,17 @@ Self-explaining main location of documentation for product developers and Fudis 
 
 Static asset files, like fonts, SVG icons and similar are located here.
 
-### Foundations
-
-**Foundation** section contains the atoms of Fudis DS. Foundations directory contains all project foundation design tokens and mixins. Including tokens and mixins for e. g. borders, breakpoints, colors, spacing and typography. If there is need for a style variable or mixin, which is used in multiple components, usually it should be defined under Foundations.
-
 ### Components
 
 The molecules of Fudis, the components. Each component folder should contain files related to that spesific component like its Storybook stories file and file containing unit tests.
+
+### Directives
+
+Folder contains base directives for Fudis components to extend on and directive classes to help add additional behaviour to Fudis components, such as content projection, tooltip and the almighty grid.
+
+### Foundations
+
+**Foundation** section contains the atoms of Fudis DS. Foundations directory contains all project foundation design tokens and mixins. Including tokens and mixins for e. g. borders, breakpoints, colors, spacing and typography. If there is need for a style variable or mixin, which is used in multiple components, usually it should be defined under Foundations.
 
 ### Theme
 
@@ -41,6 +45,10 @@ If you are using ngMaterial component and the default theme doesn't apply colors
 ### Types
 
 Folder containing types and interfaces used in various Fudis components.
+
+### Utilities
+
+Folder containing services that are used throughout the project, e. g. `FudisIdService` and `FudisTranslationService`.
 
 <br />
 
@@ -70,8 +78,17 @@ design-system
 │ │ │ button.component.spec.ts
 │ │ │ button.component.ts
 │ │ │ button.stories.ts
+│ │ │ readme.mdx
 │ │ │
 │ │ ...
+│ │
+│ └───directives
+│ │ │
+│ │ ├──content-projection
+│ │ ├──form
+│ │ ├──grid
+│ │ ├──spacing
+│ │ └──tooltip
 │ │
 │ └───foundations
 │ │ │
@@ -81,11 +98,14 @@ design-system
 │ │ ├──focus
 │ │ ├──grid
 │ │ ├──spacing
-│ │ └──typography
+│ │ ├──typography
+│ │ └──utilities
 │ │
 │ └───theme
 │ │
 │ └───types
+│ │
+│ └───utilities
 │
 ...
 ```

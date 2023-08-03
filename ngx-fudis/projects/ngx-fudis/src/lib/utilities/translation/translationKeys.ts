@@ -13,9 +13,21 @@ export const en: FudisTranslationConfig = {
 	},
 	AUTOCOMPLETE: {
 		CLEAR: 'Clear filter',
+		MULTISELECT: {
+			OPEN_DROPDOWN: 'Open dropdown',
+			CLOSE_DROPDOWN: 'Close dropdown',
+			NO_RESULTS: 'No results found',
+			REMOVE_ITEM: 'Remove search filters',
+		},
 	},
 	ICON: {
 		ATTENTION: 'Attention',
+	},
+	TEXTAREA: {
+		MAX_LENGTH: 'characters used',
+	},
+	TEXTINPUT: {
+		MAX_LENGTH: 'characters used',
 	},
 };
 
@@ -32,9 +44,21 @@ export const fi: FudisTranslationConfig = {
 	},
 	AUTOCOMPLETE: {
 		CLEAR: 'Tyhjennä valinta',
+		MULTISELECT: {
+			OPEN_DROPDOWN: 'Avaa pudostuvalikko',
+			CLOSE_DROPDOWN: 'Sulje pudotusvalikko',
+			NO_RESULTS: 'Haku ei palauttanut yhtään tulosta',
+			REMOVE_ITEM: 'Poista hakukriteerejä',
+		},
 	},
 	ICON: {
 		ATTENTION: 'Huomio',
+	},
+	TEXTAREA: {
+		MAX_LENGTH: 'merkkiä käytetty',
+	},
+	TEXTINPUT: {
+		MAX_LENGTH: 'merkkiä käytetty',
 	},
 };
 
@@ -48,11 +72,23 @@ export const sv: FudisTranslationConfig = {
 	},
 	AUTOCOMPLETE: {
 		CLEAR: 'Radera val',
+		MULTISELECT: {
+			OPEN_DROPDOWN: 'Öppna menyn',
+			CLOSE_DROPDOWN: 'Stäng menyn',
+			NO_RESULTS: 'Inga sökresultat',
+			REMOVE_ITEM: 'Radera filtrering',
+		},
 	},
 	LINK: {
 		EXTERNAL_LINK: '(öppnas i en ny flik)',
 	},
 	ICON: {
 		ATTENTION: 'Observera',
+	},
+	TEXTAREA: {
+		MAX_LENGTH: 'tecken använt',
+	},
+	TEXTINPUT: {
+		MAX_LENGTH: 'tecken använt',
 	},
 };
