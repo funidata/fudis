@@ -8,6 +8,9 @@ export const en: FudisTranslationConfig = {
 		LANGUAGE: 'Language',
 		MISSING: 'Missing',
 	},
+	LINK: {
+		EXTERNAL_LINK: '(opens in a new tab)',
+	},
 	AUTOCOMPLETE: {
 		CLEAR: 'Clear filter',
 		MULTISELECT: {
@@ -16,6 +19,9 @@ export const en: FudisTranslationConfig = {
 			NO_RESULTS: 'No results found',
 			REMOVE_ITEM: 'Remove search filters',
 		},
+	},
+	IMAGE: {
+		FUNIDATA_LOGO: 'Link to Funidata homepage',
 	},
 	ICON: {
 		ATTENTION: 'Attention',
@@ -36,6 +42,9 @@ export const fi: FudisTranslationConfig = {
 		LANGUAGE: 'Kieli',
 		MISSING: 'Puuttuu',
 	},
+	LINK: {
+		EXTERNAL_LINK: '(aukeaa uuteen välilehteen)',
+	},
 	AUTOCOMPLETE: {
 		CLEAR: 'Tyhjennä valinta',
 		MULTISELECT: {
@@ -44,6 +53,9 @@ export const fi: FudisTranslationConfig = {
 			NO_RESULTS: 'Haku ei palauttanut yhtään tulosta',
 			REMOVE_ITEM: 'Poista hakukriteerejä',
 		},
+	},
+	IMAGE: {
+		FUNIDATA_LOGO: 'Linkki Funidatan kotisivuille',
 	},
 	ICON: {
 		ATTENTION: 'Huomio',
@@ -72,6 +84,12 @@ export const sv: FudisTranslationConfig = {
 			NO_RESULTS: 'Inga sökresultat',
 			REMOVE_ITEM: 'Radera filtrering',
 		},
+	},
+	IMAGE: {
+		FUNIDATA_LOGO: 'Länk till Funidatas hemsida',
+	},
+	LINK: {
+		EXTERNAL_LINK: '(öppnas i en ny flik)',
 	},
 	ICON: {
 		ATTENTION: 'Observera',

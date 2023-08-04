@@ -4,7 +4,6 @@ import { Directive, Input, TemplateRef } from '@angular/core';
 /**
  * A marker directive used to tag the template that will be rendered inside of components. Used in e. g. `ExpandableComponent`.
  */
-
 @Directive({ selector: '[fudisContent]' })
 export class ContentDirective {
 	constructor(public templateRef: TemplateRef<unknown>) {}
@@ -12,6 +11,9 @@ export class ContentDirective {
 	@Input({ required: true }) type: 'expandable' | 'notification' | 'form' | 'fieldset' | 'section';
 }
 
+/**
+ * Fudis Footer directives
+ */
 @Directive({ selector: '[fudisFooterLeft]' })
 export class FooterContentLeftDirective {
 	constructor(public templateRef: TemplateRef<unknown>) {}

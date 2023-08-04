@@ -34,11 +34,6 @@ export class NotificationComponent implements OnChanges, OnInit {
 	@Input() externalLink: boolean = false;
 
 	/**
-	 * Aria-label for the external link
-	 */
-	@Input() externalLinkAriaLabel: string;
-
-	/**
 	 * Title for the link, if not defined title will be the same as link URL
 	 */
 	@Input() linkTitle: string;

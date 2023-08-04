@@ -1,14 +1,16 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Signal, effect } from '@angular/core';
+import { FudisTranslationService } from '../../utilities/translation/translation.service';
+import { FudisTranslationConfig } from '../../types/miscellaneous';
 
 /**
  * Example usages:
  *
  * Inside another element e.g. fudis-heading
  * ```
- * <fudis-heading tag="h3">
+ * <fudis-heading [tag]="'h3'">
  * 		<fudis-link
- *     		href="/path-to"
- *     		linkTitle="Heading link">
+ *     		[href]="/path-to"
+ *     		[linkTitle]="'Heading link'">
  * 		</fudis-link>
  * </fudis-heading>
  * ```
@@ -16,9 +18,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
  * External link with icon and assistive aria-label
  * ```
  * <fudis-link
- *     href="https://www.example.com"
+ *     [href]="https://www.example.com"
  *     [isExternalLink]="true"
- *     externalLinkAriaLabel="Opens in a new window"
  * 	color="default">
  * </fudis-link>
  * ```
@@ -31,6 +32,14 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinkComponent {
+	constructor(private _translationService: FudisTranslationService) {
+		effect(() => {
+			this._translations = this._translationService.getTranslations();
+
+			this._externalLinkAriaLabel = this._translations().LINK.EXTERNAL_LINK;
+		});
+	}
+
 	/**
 	 * Link URL using native href
 	 */
@@ -63,13 +72,18 @@ export class LinkComponent {
 	@Input() isExternalLink: boolean = false;
 
 	/**
-	 * Aria-label for the external link
-	 */
-	@Input() externalLinkAriaLabel: string;
-
-	/**
 	 * Link uses primary blue color.
 	 * Option to set color to 'default' which is a dark gray color. It is mainly used in links inside notification component but can be added to any link component if necessary.
 	 */
 	@Input() color: 'primary' | 'default' = 'primary';
+
+	/**
+	 * Aria-label for the external link
+	 */
+	protected _externalLinkAriaLabel: string;
+
+	/**
+	 * Fudis translations
+	 */
+	protected _translations: Signal<FudisTranslationConfig>;
 }

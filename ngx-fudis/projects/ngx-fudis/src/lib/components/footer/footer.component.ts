@@ -1,5 +1,7 @@
-import { Component, ContentChild, Input, ViewEncapsulation } from '@angular/core';
+import { Component, ContentChild, ViewEncapsulation, Signal, effect } from '@angular/core';
 import { FudisGridColumnsResponsive } from '../../types/grid';
+import { FudisTranslationService } from '../../utilities/translation/translation.service';
+import { FudisTranslationConfig } from '../../types/miscellaneous';
 import {
 	FooterContentLeftDirective,
 	FooterContentRightDirective,
@@ -12,14 +14,27 @@ import {
 	encapsulation: ViewEncapsulation.None,
 })
 export class FooterComponent {
+	constructor(private _translationService: FudisTranslationService) {
+		effect(() => {
+			this._translations = this._translationService.getTranslations();
+
+			this._funidataLogoAltText = this._translations().IMAGE.FUNIDATA_LOGO;
+		});
+	}
+
 	@ContentChild(FooterContentLeftDirective) contentLeft: FooterContentLeftDirective;
 
 	@ContentChild(FooterContentRightDirective) contentRight: FooterContentRightDirective;
 
-	/**
-	 * Alternative text for Funidata logo
-	 */
-	@Input({ required: true }) logoAltText: string;
-
 	protected _columns: FudisGridColumnsResponsive = { sm: 2 };
+
+	/**
+	 * Alternative text for the Funidata logo
+	 */
+	protected _funidataLogoAltText: string;
+
+	/**
+	 * Fudis translations
+	 */
+	protected _translations: Signal<FudisTranslationConfig>;
 }
