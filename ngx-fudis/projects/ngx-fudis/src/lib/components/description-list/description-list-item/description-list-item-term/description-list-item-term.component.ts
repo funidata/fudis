@@ -22,6 +22,8 @@ export class DescriptionListItemTermComponent implements AfterViewInit {
 			this.setLanguageOptions();
 			this.hideLanguageOptions(this._currentVariant());
 		});
+
+		this._currentLanguage = _translationService.getLanguage();
 	}
 
 	/**
@@ -44,6 +46,9 @@ export class DescriptionListItemTermComponent implements AfterViewInit {
 	 */
 	protected _selectedLanguage: FudisLanguageAbbr;
 
+	/**
+	 * Internal property for Fudis confiq language
+	 */
 	private _currentLanguage: FudisLanguageAbbr;
 
 	private _firstLoadFinished: boolean = false;

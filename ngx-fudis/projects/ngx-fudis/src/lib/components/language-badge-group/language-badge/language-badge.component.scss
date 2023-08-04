@@ -6,32 +6,40 @@
 @use '../../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-language-badge-host {
-	background-color: transparent;
+	@include colors.bg-color('transparent');
+
 	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	width: spacing.$spacing-lg;
 	height: spacing.$spacing-lg;
-	justify-content: center;
-	align-items: center;
+
+	&:focus-within {
+		@include focus.focus-generic;
+	}
 }
 
 .fudis-language-badge {
 	@include typography.body-text-sm-regular;
-
-	border-radius: 50%;
-	width: spacing.$spacing-md;
-	height: spacing.$spacing-md;
 	@include colorMixin.bg-color('white');
 	@include border.border('1px', 'solid', 'gray-dark');
 
-	&:active {
-		@include border.border('2px', 'solid', 'primary');
+	border-radius: 50%;
+	padding-left: spacing.$spacing-xxs;
+	width: spacing.$spacing-md;
+	height: spacing.$spacing-md;
+	text-align: center;
+
+	&:focus-visible {
+		@include border.outline-none;
 	}
 
-	// &__missing {
-	// 	// background-color: lightcoral;
-	// }
+	&__missing {
+		@include border.border('1px', dashed, 'gray-dark');
+	}
 
-	// &--selected {
-	// 	// background-color: lightblue;
-	// }
+	&--selected,
+	&--selected:focus {
+		@include border.outline('2px', 'solid', 'primary');
+	}
 }
