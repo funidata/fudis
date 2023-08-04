@@ -45,6 +45,10 @@ export interface FudisTranslationConfig {
 			REMOVE_ITEM: string;
 		};
 	};
+	IMAGE: {
+		// Alternative text for screen readers.
+		FUNIDATA_LOGO: string;
+	};
 	ICON: {
 		// Alternative text for screen readers. Used in e. g. Error Summary
 		ATTENTION: string;

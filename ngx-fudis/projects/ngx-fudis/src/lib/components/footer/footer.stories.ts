@@ -18,7 +18,7 @@ export default {
 const Template: StoryFn<FooterComponent> = (args: FooterComponent) => ({
 	props: args,
 	template: html`
-		<fudis-footer [logoAltText]="logoAltText">
+		<fudis-footer>
 			<ng-template fudisFooterRight>
 				<fudis-link [href]="'example.com'" [linkTitle]="'Tietosuojaseloste'" [isExternalLink]="true" />
 				<fudis-link [href]="'example.com'" [linkTitle]="'Saavutettavuusseloste'" [isExternalLink]="true" />
@@ -32,6 +32,3 @@ const Template: StoryFn<FooterComponent> = (args: FooterComponent) => ({
 });
 
 export const Footer = Template.bind({});
-Footer.args = {
-	logoAltText: "Link to Funidata's site",
-};

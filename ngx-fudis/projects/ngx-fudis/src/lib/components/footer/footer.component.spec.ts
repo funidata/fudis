@@ -15,7 +15,7 @@ import { IconComponent } from '../icon/icon.component';
 
 @Component({
 	selector: 'fudis-mock-footer',
-	template: `<fudis-footer [logoAltText]="'Link to Funidata homepage'">
+	template: `<fudis-footer>
 		<ng-template fudisFooterRight>
 			<fudis-link [href]="'example.com'" [linkTitle]="'Tietosuojaseloste'" [isExternalLink]="true" />
 			<fudis-link [href]="'example.com'" [linkTitle]="'Saavutettavuusseloste'" [isExternalLink]="true" />
@@ -89,10 +89,11 @@ describe('FooterComponent', () => {
 				expect(getFooterGridElem().nativeElement.children[0].children.length).toEqual(2);
 			});
 
-			it('should have Funidata logo visible', () => {
+			it('should have Funidata logo visible with an alt text for screen readers', () => {
 				const firstGridItemElem = getFooterGridElem().nativeElement.children[0];
 				const anchorElem = firstGridItemElem.querySelector('.fudis-footer__item__logo');
 				expect(anchorElem.children.length).toEqual(1);
+				expect(anchorElem.children[0].getAttribute('alt')).toEqual('Link to Funidata homepage');
 			});
 		});
 	});

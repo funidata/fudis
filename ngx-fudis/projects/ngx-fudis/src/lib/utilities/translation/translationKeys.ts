@@ -20,6 +20,9 @@ export const en: FudisTranslationConfig = {
 			REMOVE_ITEM: 'Remove search filters',
 		},
 	},
+	IMAGE: {
+		FUNIDATA_LOGO: 'Link to Funidata homepage',
+	},
 	ICON: {
 		ATTENTION: 'Attention',
 	},
@@ -51,6 +54,9 @@ export const fi: FudisTranslationConfig = {
 			REMOVE_ITEM: 'Poista hakukriteerejä',
 		},
 	},
+	IMAGE: {
+		FUNIDATA_LOGO: 'Linkki Funidatan kotisivuille',
+	},
 	ICON: {
 		ATTENTION: 'Huomio',
 	},
@@ -78,6 +84,9 @@ export const sv: FudisTranslationConfig = {
 			NO_RESULTS: 'Inga sökresultat',
 			REMOVE_ITEM: 'Radera filtrering',
 		},
+	},
+	IMAGE: {
+		FUNIDATA_LOGO: 'Länk till Funidatas hemsida',
 	},
 	LINK: {
 		EXTERNAL_LINK: '(öppnas i en ny flik)',
