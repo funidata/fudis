@@ -25,6 +25,9 @@ export const en: FudisTranslationConfig = {
 			FI: 'Finnish',
 			SV: 'Swedish',
 			EN: 'English',
+			SELECT_LANGUAGE: 'Select language',
+			SELECTED: 'Selected',
+			MISSING_TRANSLATION: 'Missing translation',
 		},
 	},
 	TEXTAREA: {
@@ -60,6 +63,9 @@ export const fi: FudisTranslationConfig = {
 			FI: 'Suomeksi',
 			SV: 'Ruotsiksi',
 			EN: 'Englanniksi',
+			SELECT_LANGUAGE: 'Valitse kieli',
+			SELECTED: 'Valittu',
+			MISSING_TRANSLATION: 'Käännös puuttuu',
 		},
 	},
 	TEXTAREA: {
@@ -95,6 +101,9 @@ export const sv: FudisTranslationConfig = {
 			FI: 'På Finska',
 			SV: 'På Svenska',
 			EN: 'På Engelska',
+			SELECT_LANGUAGE: 'Välj språk',
+			SELECTED: 'Vald',
+			MISSING_TRANSLATION: 'Saknad översättning',
 		},
 	},
 	TEXTAREA: {

@@ -15,13 +15,23 @@ export class LanguageBadgeGroupComponent implements OnInit {
 	) {
 		effect(() => {
 			this._translations = _translationService.getTranslations();
+			this._ariaLabel = this._translations().LANGUAGE_BADGE.ARIA_LABEL.SELECT_LANGUAGE;
 		});
 	}
 
+	/**
+	 * Selected language
+	 */
 	@Input({ required: true }) selectedLanguage: FudisLanguageAbbr;
 
+	/**
+	 * Required language options for Language Badge Group
+	 */
 	@Input({ required: true }) languages: FudisLanguageAbbr[];
 
+	/**
+	 * Optional click handler
+	 */
 	@Output() handleClick = new EventEmitter<FudisLanguageAbbr>();
 
 	/**
@@ -29,9 +39,20 @@ export class LanguageBadgeGroupComponent implements OnInit {
 	 */
 	protected _id: string;
 
+	/**
+	 * Internal variable for languages that have existing translations
+	 */
 	protected _languageOptions: FudisLanguageAbbr[] = ['en', 'fi', 'sv'];
 
+	/**
+	 * Fudis translations
+	 */
 	protected _translations: Signal<FudisTranslationConfig>;
+
+	/**
+	 * Aria-label for Language Badge Group
+	 */
+	protected _ariaLabel: string;
 
 	ngOnInit(): void {
 		this._id = this._idService.getNewId('languageBadgeGroup');

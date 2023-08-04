@@ -15,13 +15,30 @@ export class LanguageBadgeComponent {
 	 */
 	@Input() id: string;
 
+	/*
+	 * Language abbreviation for Language Badge
+	 */
 	@Input({ required: true }) language: FudisLanguageAbbr;
 
+	/*
+	 * Selected state of a Language Badge
+	 */
 	@Input() selected: boolean;
 
+	/*
+	 * Language Badge variant
+	 */
 	@Input() variant: 'standard' | 'missing' = 'standard';
 
+	/*
+	 * Mandatory Language Badge label
+	 */
 	@Input({ required: true }) label: string;
+
+	/**
+	 * Language badge group component id for binding aria attributes
+	 */
+	@Input() badgeGroupId: string;
 
 	/**
 	 * Optional click handler

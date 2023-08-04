@@ -67,6 +67,9 @@ export interface FudisTranslationConfig {
 			FI: string;
 			SV: string;
 			EN: string;
+			SELECT_LANGUAGE: string;
+			SELECTED: string;
+			MISSING_TRANSLATION: string;
 		};
 	};
 	TEXTAREA: {
