@@ -56,9 +56,9 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 	@Input({ required: true }) title: string;
 
 	/**
-	 * Tag is for semantic support for screen readers, this does not change the appearance of the expandable
+	 * Determines semantic header aria-level for screen readers
 	 */
-	@Input() tag: 'h2' | 'h3' | 'h4' | 'h5' | 'h6' = 'h2';
+	@Input() level: number = 2;
 
 	/**
 	 * Type i.e the look of the expandable

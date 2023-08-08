@@ -4,12 +4,7 @@ import { ExpandableComponent } from './expandable.component';
 export default {
 	title: 'Components/Expandable',
 	component: ExpandableComponent,
-	argTypes: {
-		tag: {
-			options: ['h2', 'h3', 'h4', 'h5', 'h6'],
-			control: { type: 'radio' },
-		},
-	},
+	argTypes: { level: { control: { type: 'number', min: 1, max: 10 } } },
 	parameters: {
 		controls: {
 			exclude: ['_collapsed', 'openedOnce', 'ref', 'collapsedChange', 'setCollapsedStatus', 'content', 'headerButtons'],
@@ -22,7 +17,7 @@ const html = String.raw;
 const Template: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
 	props: args,
 	template: html`
-		<fudis-expandable [title]="title" [subTitle]="subTitle">
+		<fudis-expandable [title]="title" [subTitle]="subTitle" [level]="2">
 			<ng-template fudisContent type="expandable">
 				<fudis-body-text>Hey you! I am the content of the expandable.</fudis-body-text>
 			</ng-template>
