@@ -30,6 +30,19 @@ It is possible to incluce buttons in Fudis Description List Item Detail (fudis-d
 
 <Canvas of={DescriptionListStories.DescriptionListWithSubComponents}></Canvas>
 
+### Fudis Description List with languages
+
+Fudis Description List with languages displayes list details with translations. The use of language options requires that component is build in template from sub components.
+It's also good to note that Fudis Description List with languages is designed to be used only with description list **regular** variant.
+
+How to use:
+
+1. Fudis Description List Item Term (fudis-dt) -element takes an boolean value `languages`. By setting languages as true, Fudis Description List will render Fudis Language Badge Group next to description list key label. 
+2. In order to link language badge with selected translation, Fudis Description List Item Detail (fudis-dd) takes an `lang` input, which will specify the language used in fudis-dd content. 
+`lang` input uses `FudisLanguageAbbr` type, that have predefined languages of english, finnish and swedish. When language option is used, all of the fudis-dd elements need a suited lang input. If any of the three predefined `lang` inputs are missing, Fudis Language Badge Group will display this translation as missing.
+
+<Canvas of={DescriptionListStories.DescriptionListWithLanguages}></Canvas>
+
 ### Accessibility
 
 - Fudis Description List component wraps list content into dl element
