@@ -53,12 +53,11 @@ describe('LinkComponent', () => {
 		it('should have assistive aria-label for screen readers', () => {
 			component.href = 'www.example.com';
 			component.isExternalLink = true;
-			component.externalLinkAriaLabel = 'Open into a new tab';
 			fixture.detectChanges();
 			const externalLinkComponent = fixture.debugElement.query(By.css('.fudis-link__anchor__external'));
-			expect(externalLinkComponent.nativeElement.getAttribute('aria-label'))
-				.withContext(component.externalLinkAriaLabel)
-				.toEqual('www.example.com, Open into a new tab');
+			expect(externalLinkComponent.nativeElement.getAttribute('aria-label')).toEqual(
+				'www.example.com, (opens in a new tab)'
+			);
 		});
 	});
 });

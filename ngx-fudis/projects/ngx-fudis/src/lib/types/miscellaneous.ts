@@ -48,6 +48,10 @@ export interface FudisTranslationConfig {
 		// Text shown in dropdown options if input for a language is missing
 		MISSING: string;
 	};
+	LINK: {
+		// External link icon aria-label
+		EXTERNAL_LINK: string;
+	};
 	AUTOCOMPLETE: {
 		// Clear filter button label for screen readers
 		CLEAR: string;
@@ -57,6 +61,10 @@ export interface FudisTranslationConfig {
 			NO_RESULTS: string;
 			REMOVE_ITEM: string;
 		};
+	};
+	IMAGE: {
+		// Alternative text for screen readers.
+		FUNIDATA_LOGO: string;
 	};
 	ICON: {
 		// Alternative text for screen readers. Used in e. g. Error Summary

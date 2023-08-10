@@ -9,9 +9,8 @@ import { Source } from '@storybook/blocks';
 # Footer
 
 Fudis Footer is static component to be used as application's footer in the bottom of the page. It is designed to use [Fudis Link](/docs/components-link--link) components as its content. Through content projection it's easier for developers to change related links depending on the application.
-By using directives `fudisFooterRight` or `fudisFooterLeft`, developers can determine which side of the footer links are displayed.
-The only fixed element in Fudis Footer is Funidata logo with a link to Funidata's homepage.
-This logo holds an mandatory image alt-text that can be changed with `logoAltText` when the application language changes.
+By using directives `fudisFooterRight` and/or `fudisFooterLeft`, developers can determine which side of the footer links are displayed.
+The only fixed element in Fudis Footer is Funidata logo with a link to Funidata's homepage and translated alt text for screen readers.
 
 <Canvas of={FooterComponentStories.Footer} />
 
@@ -24,8 +23,9 @@ This logo holds an mandatory image alt-text that can be changed with `logoAltTex
 
 ### Related components
 
-- [Link](/docs/components-link--link)
-- [Grid](/docs/components-grid-grid--example)
+[Link](/docs/components-link--link)
+
+[Grid](/docs/components-grid-grid--example)
 
 ## Properties
 
