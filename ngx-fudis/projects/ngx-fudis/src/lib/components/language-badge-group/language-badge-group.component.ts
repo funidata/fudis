@@ -2,20 +2,22 @@ import { Component, OnInit, EventEmitter, Output, Input, Signal, effect } from '
 import { FudisLanguageAbbr, FudisTranslationConfig } from '../../types/miscellaneous';
 import { FudisIdService } from '../../utilities/id-service.service';
 import { FudisTranslationService } from '../../utilities/translation/translation.service';
+import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 
 @Component({
 	selector: 'fudis-language-badge-group',
 	templateUrl: './language-badge-group.component.html',
 	styleUrls: ['./language-badge-group.component.scss'],
 })
-export class LanguageBadgeGroupComponent implements OnInit {
+export class LanguageBadgeGroupComponent extends TooltipApiDirective implements OnInit {
 	constructor(
 		private _idService: FudisIdService,
 		private _translationService: FudisTranslationService
 	) {
+		super();
 		effect(() => {
 			this._translations = _translationService.getTranslations();
-			this._ariaLabel = this._translations().LANGUAGE_BADGE.ARIA_LABEL.SELECT_LANGUAGE;
+			this._ariaLabel = this._translations().LANGUAGE_BADGE.ARIA_LABEL.TRANSLATIONS;
 		});
 	}
 

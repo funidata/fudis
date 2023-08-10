@@ -28,12 +28,12 @@ export const en: FudisTranslationConfig = {
 	},
 	LANGUAGE_BADGE: {
 		ARIA_LABEL: {
-			FI: 'Finnish',
-			SV: 'Swedish',
-			EN: 'English',
-			SELECT_LANGUAGE: 'Select language',
-			SELECTED: 'Selected',
-			MISSING_TRANSLATION: 'Missing translation',
+			FI: 'Change translation to Finnish',
+			SV: 'Change translation to Swedish',
+			EN: 'Change translation to English',
+			TRANSLATIONS: 'Translations',
+			SELECTED: '(Selected)',
+			MISSING_TRANSLATION: '(Missing translation)',
 		},
 	},
 	TEXTAREA: {
@@ -72,12 +72,12 @@ export const fi: FudisTranslationConfig = {
 	},
 	LANGUAGE_BADGE: {
 		ARIA_LABEL: {
-			FI: 'Suomeksi',
-			SV: 'Ruotsiksi',
-			EN: 'Englanniksi',
-			SELECT_LANGUAGE: 'Valitse kieli',
-			SELECTED: 'Valittu',
-			MISSING_TRANSLATION: 'Käännös puuttuu',
+			FI: 'Vaihda käännöskieleksi Suomi',
+			SV: 'Vaihda käännöskieleksi Ruotsi',
+			EN: 'Vaihda käännöskieleksi Englanti',
+			TRANSLATIONS: 'Käännöskielet',
+			SELECTED: '(Valittuna)',
+			MISSING_TRANSLATION: '(Käännös puuttuu)',
 		},
 	},
 	TEXTAREA: {
@@ -116,10 +116,10 @@ export const sv: FudisTranslationConfig = {
 	},
 	LANGUAGE_BADGE: {
 		ARIA_LABEL: {
-			FI: 'På Finska',
-			SV: 'På Svenska',
-			EN: 'På Engelska',
-			SELECT_LANGUAGE: 'Välj språk',
+			FI: 'Ändra översättning till Finska',
+			SV: 'Ändra översättning till Svenska',
+			EN: 'Ändra översättning till Engelska',
+			TRANSLATIONS: 'Översättningar',
 			SELECTED: 'Vald',
 			MISSING_TRANSLATION: 'Saknad översättning',
 		},

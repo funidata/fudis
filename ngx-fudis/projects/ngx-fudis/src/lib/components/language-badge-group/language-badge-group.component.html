@@ -16,6 +16,21 @@
 			[badgeGroupId]="_id + '-selected'"
 			(changeLanguage)="updateLanguage($event)"
 			[selected]="selectedLanguage === _language"
+			fudisTooltip
+			[tooltip]="
+				(_language === 'fi'
+					? _translations().LANGUAGE_BADGE.ARIA_LABEL.FI
+					: _language === 'en'
+					? _translations().LANGUAGE_BADGE.ARIA_LABEL.EN
+					: _translations().LANGUAGE_BADGE.ARIA_LABEL.SV) +
+				(selectedLanguage === _language
+					? ' ' + _translations().LANGUAGE_BADGE.ARIA_LABEL.SELECTED
+					: '' || !languages.includes(_language)
+					? ' ' + _translations().LANGUAGE_BADGE.ARIA_LABEL.MISSING_TRANSLATION
+					: '')
+			"
+			[tooltipPosition]="tooltipPosition"
+			[tooltipToggle]="tooltipToggle"
 			[attr.aria-label]="
 				selectedLanguage === _language
 					? _translations().LANGUAGE_BADGE.ARIA_LABEL.SELECTED
