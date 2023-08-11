@@ -51,22 +51,22 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 	@ContentChild(ActionsDirective) headerButtons: ActionsDirective | null;
 
 	/**
-	 * Title for the expandable
+	 * Title of the expandable
 	 */
 	@Input({ required: true }) title: string;
 
 	/**
-	 * Determines semantic header aria-level for screen readers
+	 * Determines header's semantic aria-level for screen readers, default is equivalent for h2
 	 */
 	@Input() level: number = 2;
 
 	/**
-	 * Type i.e the look of the expandable
+	 * Type i.e visual variant of the expandable
 	 */
 	@Input() variant: FudisExpandableType = 'regular';
 
 	/**
-	 * Set expandable inner content padding.
+	 * Expandable content padding depth
 	 */
 	@Input() padding: 'default' | 'small' = 'default';
 
@@ -102,7 +102,7 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 	protected _headingId: string;
 
 	/**
-	 *  Lazy loading variable
+	 *  Lazy loading check for expanding content
 	 */
 	protected _openedOnce = false;
 
