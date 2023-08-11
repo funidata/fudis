@@ -2,7 +2,7 @@
 	[id]="_id"
 	[attr.aria-label]="_ariaLabel"
 	class="fudis-language-badge-group"
-	[attr.aria-labelledby]="_id + '-selected'">
+	[attr.aria-labelledby]="_id + '-group'">
 	<ng-container *ngFor="let _language of _languageOptions; let index = index">
 		<fudis-language-badge
 			[label]="
@@ -13,22 +13,9 @@
 					: _translations().LANGUAGE_BADGE.ARIA_LABEL.SV
 			"
 			[id]="_id + '-button-' + index"
-			[badgeGroupId]="_id + '-selected'"
+			[badgeGroupId]="_id + '-group'"
 			(changeLanguage)="updateLanguage($event)"
 			[selected]="selectedLanguage === _language"
-			fudisTooltip
-			[tooltip]="
-				(_language === 'fi'
-					? _translations().LANGUAGE_BADGE.ARIA_LABEL.FI
-					: _language === 'en'
-					? _translations().LANGUAGE_BADGE.ARIA_LABEL.EN
-					: _translations().LANGUAGE_BADGE.ARIA_LABEL.SV) +
-				(selectedLanguage === _language
-					? ' ' + _translations().LANGUAGE_BADGE.ARIA_LABEL.SELECTED
-					: '' || !languages.includes(_language)
-					? ' ' + _translations().LANGUAGE_BADGE.ARIA_LABEL.MISSING_TRANSLATION
-					: '')
-			"
 			[tooltipPosition]="tooltipPosition"
 			[tooltipToggle]="tooltipToggle"
 			[attr.aria-label]="

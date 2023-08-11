@@ -4,6 +4,10 @@
 	[attr.aria-disabled]="variant === 'missing'"
 	[class.fudis-language-badge--selected]="selected"
 	class="fudis-language-badge fudis-language-badge__{{ variant }}"
+	fudisTooltip
+	[tooltip]="label"
+	[tooltipPosition]="tooltipPosition"
+	[tooltipToggle]="tooltipToggle"
 	(click)="variant !== 'missing' && handleLanguageSelect()">
 	{{ language }}
 </button>

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from '@angular/core';
 import { FudisLanguageAbbr } from '../../../types/miscellaneous';
+import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 
 @Component({
 	selector: 'fudis-language-badge',
@@ -7,7 +8,7 @@ import { FudisLanguageAbbr } from '../../../types/miscellaneous';
 	templateUrl: './language-badge.component.html',
 	encapsulation: ViewEncapsulation.None,
 })
-export class LanguageBadgeComponent {
+export class LanguageBadgeComponent extends TooltipApiDirective {
 	@HostBinding('class') classes = 'fudis-language-badge-host';
 
 	/*
