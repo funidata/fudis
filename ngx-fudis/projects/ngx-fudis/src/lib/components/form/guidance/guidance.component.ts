@@ -9,7 +9,7 @@ import { FudisFormErrors, FudisFormGroupErrors } from '../../../types/forms';
 })
 export class GuidanceComponent {
 	/**
-	 * Id of input, fieldset or similar which Guidance is related to. Used in aria attributes and in emit information for Error Summary Service
+	 * Id of input, fieldset or similar which Guidance is related to. Used in aria attributes and in emit information for Error Summary Service.
 	 */
 	@Input({ required: true }) for: string;
 
@@ -24,7 +24,7 @@ export class GuidanceComponent {
 	@Input() control: FormControl;
 
 	/**
-	 * FormGroup of related FormGroup
+	 * FormGroup of related FormGroup.
 	 */
 	@Input() formGroup: FormGroup;
 
@@ -44,19 +44,24 @@ export class GuidanceComponent {
 	@Input() maxLength: number | undefined = undefined;
 
 	/**
-	 * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where "characters used" is "maxLengthText"
+	 * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where "characters used" is "maxLengthText".
 	 */
 	@Input() maxLengthText: string;
 
 	/**
-	 * Used if FormGroup is associated with Guidance
+	 * Used if FormGroup is associated with Guidance.
 	 */
 	@Input() groupErrorMsg: FudisFormGroupErrors | null | undefined;
 
 	/**
-	 * Used if FormControl is associated with Guidance
+	 * Used if FormControl is associated with Guidance.
 	 */
 	@Input() errorMsg: FudisFormErrors | null | undefined;
+
+	/**
+	 * Passing selected option for max length viewing. Used in input-with-language-options component.
+	 */
+	@Input() selectedOption: string;
 
 	// eslint-disable-next-line class-methods-use-this
 	asErrorkey(errorKey: any): keyof FudisFormErrors {

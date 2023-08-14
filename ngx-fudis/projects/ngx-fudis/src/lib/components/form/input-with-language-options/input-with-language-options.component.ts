@@ -58,6 +58,11 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	@Input() variant: 'text-input' | 'text-area' = 'text-input';
 
 	/**
+	 * Maximum length for text area, unset by default.
+	 */
+	@Input() maxLength: number | undefined = undefined;
+
+	/**
 	 * Control for language option dropdown
 	 */
 	protected _dropdownControl: FormControl<FudisDropdownOption>;
@@ -81,6 +86,11 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	 * Fudis translation
 	 */
 	protected _languageLabel: string;
+
+	/**
+	 * Assistive text of max character count for screen readers
+	 */
+	protected _maxLengthText: string;
 
 	/**
 	 * Language option dropdown value

@@ -52,6 +52,7 @@ const TemplateAllRequired: StoryFn = () => ({
 					'Swedish name is too long. Villains cannot yell it without pausing and drawing breath. It breaks the tension.',
 			},
 		},
+		maxLength: 12,
 		languageOptions: [
 			{ value: 'finnish', viewValue: 'FI' },
 			{ value: 'swedish', viewValue: 'SV' },
@@ -70,7 +71,8 @@ const TemplateAllRequired: StoryFn = () => ({
 			[formGroup]="formGroup"
 			[label]="label"
 			[helpText]="helpText"
-			[groupErrorMsg]="groupErrorMsg" />
+			[groupErrorMsg]="groupErrorMsg"
+			[maxLength]="maxLength" />
 	`,
 });
 
@@ -94,6 +96,7 @@ const TemplateOneRequired: StoryFn = () => ({
 					'Swedish name is too long. Villains cannot yell it without pausing and drawing breath. It breaks the tension.',
 			},
 		},
+		maxLength: 30,
 		languageOptions: [
 			{ value: 'finnish', viewValue: 'FI' },
 			{ value: 'swedish', viewValue: 'SV' },
@@ -101,9 +104,9 @@ const TemplateOneRequired: StoryFn = () => ({
 		],
 		formGroup: new FormGroup<FudisInputWithLanguageOptionsFormGroup>(
 			{
-				finnish: new FormControl<string | null>(null, [Validators.maxLength(12)]),
-				swedish: new FormControl<string | null>(null, [Validators.maxLength(12)]),
-				english: new FormControl<string | null>(null, [Validators.maxLength(12)]),
+				finnish: new FormControl<string | null>(null, [Validators.maxLength(30)]),
+				swedish: new FormControl<string | null>(null, [Validators.maxLength(30)]),
+				english: new FormControl<string | null>(null, [Validators.maxLength(30)]),
 			},
 			[FormGroupValidators.atLeastOneRequired()]
 		),
@@ -115,7 +118,8 @@ const TemplateOneRequired: StoryFn = () => ({
 			[formGroup]="formGroup"
 			[label]="label"
 			[helpText]="helpText"
-			[groupErrorMsg]="groupErrorMsg" />
+			[groupErrorMsg]="groupErrorMsg"
+			[maxLength]="maxLength" />
 	`,
 });
 
