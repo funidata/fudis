@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, effect } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit, effect } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
 	FudisInputWithLanguageOptionsFormGroup,
@@ -17,7 +17,7 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	templateUrl: './input-with-language-options.component.html',
 	styleUrls: ['./input-with-language-options.component.scss'],
 })
-export class InputWithLanguageOptionsComponent extends InputBaseDirective implements OnInit, OnChanges {
+export class InputWithLanguageOptionsComponent extends InputBaseDirective implements OnInit, OnChanges, AfterViewInit {
 	constructor(
 		private _idService: FudisIdService,
 		_translationService: FudisTranslationService
@@ -81,6 +81,11 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	 * Fudis translation
 	 */
 	protected _languageLabel: string;
+
+	/**
+	 * If component is loaded for the first time
+	 */
+	protected _firstLoad: boolean = true;
 
 	/**
 	 * Language option dropdown value
@@ -229,5 +234,11 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	ngOnChanges(): void {
 		this._updatedOptions = this._missingLanguage ? this.updateDropdownList() : this.options;
+	}
+
+	ngAfterViewInit(): void {
+		if (this._firstLoad) {
+			this._firstLoad = false;
+		}
 	}
 }

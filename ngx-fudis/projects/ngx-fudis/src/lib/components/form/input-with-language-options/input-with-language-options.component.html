@@ -27,12 +27,13 @@
 	<ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
 		<fudis-text-input
 			*ngIf="control.key === _dropdownControl.value.value"
-			(handleBlur)="handleInputBlur($event, control.key)"
 			class="fudis-input-with-language-options__inputs__item"
+			(handleBlur)="handleInputBlur($event, control.key)"
 			[ariaLabel]="label + ', ' + _dropdownControl.value.viewValue"
 			[size]="'lg'"
 			[label]="label"
 			[id]="_id"
+			[initialFocus]="initialFocus && _firstLoad"
 			[required]="_requiredControls[control.key].required"
 			[invalidState]="formGroup.invalid && formGroup.touched"
 			[control]="$any(formGroup).controls[control.key]"></fudis-text-input>
@@ -49,8 +50,9 @@
 			[size]="'lg'"
 			[label]="label"
 			[id]="_id"
-			[invalidState]="formGroup.invalid && formGroup.touched"
+			[initialFocus]="initialFocus && _firstLoad"
 			[required]="_requiredControls[control.key].required"
+			[invalidState]="formGroup.invalid && formGroup.touched"
 			[control]="$any(formGroup).controls[control.key]"></fudis-text-area>
 	</ng-container>
 </ng-template>
