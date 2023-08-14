@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, HostBinding, OnInit, OnChanges, effect } from '@angular/core';
+import { Component, Input, HostBinding, OnInit, OnChanges, effect, AfterViewInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
@@ -11,7 +11,7 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	templateUrl: './text-input.component.html',
 	styleUrls: ['./text-input.component.scss'],
 })
-export class TextInputComponent extends InputBaseDirective implements OnInit, OnChanges {
+export class TextInputComponent extends InputBaseDirective implements OnInit, OnChanges, AfterViewInit {
 	constructor(
 		private _idService: FudisIdService,
 		_translationService: FudisTranslationService
@@ -24,8 +24,6 @@ export class TextInputComponent extends InputBaseDirective implements OnInit, On
 	}
 
 	@HostBinding('class') classes = 'fudis-text-input-host';
-
-	@ViewChild('fudisTextInput') input: ElementRef<HTMLInputElement>;
 
 	/**
 	 * FormControl for text-input
@@ -73,5 +71,11 @@ export class TextInputComponent extends InputBaseDirective implements OnInit, On
 
 	ngOnChanges(): void {
 		this._required = this.required ?? this.control.hasValidator(Validators.required);
+	}
+
+	ngAfterViewInit(): void {
+		if (this.initialFocus) {
+			this.focusToInput();
+		}
 	}
 }
