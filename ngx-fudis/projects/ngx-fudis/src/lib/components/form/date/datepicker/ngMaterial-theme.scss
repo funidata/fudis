@@ -74,6 +74,21 @@
 			@include colorMixins.text-color('gray-dark');
 			@include colorMixins.bg-color('primary-light');
 		}
+
+		& button:focus {
+			@include focus.focus-generic;
+
+			/* stylelint-disable-next-line selector-no-qualifying-type */
+			&.mat-calendar-body-cell {
+				border-radius: spacing.$spacing-xxl;
+			}
+		}
+
+		& .mat-mdc-button-persistent-ripple.mdc-button__ripple {
+			&::before {
+				opacity: 0 !important;
+			}
+		}
 	}
 }
 
