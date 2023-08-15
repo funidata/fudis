@@ -18,6 +18,8 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective implements 
 		effect(() => {
 			this._translations = _translationService.getTranslations();
 			this._ariaLabel = this._translations().LANGUAGE_BADGE.ARIA_LABEL.TRANSLATIONS;
+			this._selectedLabel = this._translations().LANGUAGE_BADGE.ARIA_LABEL.SELECTED;
+			this._missingTranslation = this._translations().LANGUAGE_BADGE.ARIA_LABEL.MISSING_TRANSLATION;
 		});
 	}
 
@@ -56,11 +58,50 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective implements 
 	 */
 	protected _ariaLabel: string;
 
+	/**
+	 * Internal variable for language badge label
+	 */
+	protected _label: string;
+
+	/**
+	 * Internal variable for selected translation aria-label
+	 */
+	protected _selectedLabel: string;
+
+	/**
+	 * Internal variable for missing translation aria-label
+	 */
+	protected _missingTranslation: string;
+
+	/**
+	 * Internal variable for matching languages and label texts
+	 */
+	protected _languageLabels: any = [];
+
 	ngOnInit(): void {
 		this._id = this._idService.getNewId('languageBadgeGroup');
+
+		this._languageOptions.forEach((language) => {
+			const newItem = { key: language, label: this.getLabel(language) };
+			this._languageLabels.push(newItem);
+		});
 	}
 
 	updateLanguage(value: FudisLanguageAbbr) {
 		this.handleClick.emit(value);
+	}
+
+	getLabel(language: FudisLanguageAbbr): string {
+		let missingText = '';
+		if (!this.languages.includes(language)) {
+			missingText = ` ${this._missingTranslation}`;
+		}
+		if (language === 'fi') {
+			return `${this._translations().LANGUAGE_BADGE.ARIA_LABEL.FI}${missingText}`;
+		}
+		if (language === 'sv') {
+			return `${this._translations().LANGUAGE_BADGE.ARIA_LABEL.SV}${missingText}`;
+		}
+		return `${this._translations().LANGUAGE_BADGE.ARIA_LABEL.EN}${missingText}`;
 	}
 }
