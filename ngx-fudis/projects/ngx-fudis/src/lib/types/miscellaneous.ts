@@ -1,5 +1,7 @@
 export type FudisBadgeVariant = 'accent' | 'danger' | 'primary' | 'secondary' | 'success';
 
+export type FudisDescriptionListVariant = 'regular' | 'compact';
+
 export interface FudisDescriptionListItem {
 	key: string;
 	subHeading?: string;

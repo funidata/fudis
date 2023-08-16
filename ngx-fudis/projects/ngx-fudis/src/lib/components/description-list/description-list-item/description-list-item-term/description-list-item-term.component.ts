@@ -72,7 +72,7 @@ export class DescriptionListItemTermComponent implements AfterViewInit {
 	}
 
 	setLanguageOptions(): void {
-		this._parentLanguageOptions = this._parentDlItem._existingLanguageOptions();
+		this._parentLanguageOptions = this._parentDlItem.existingLanguageOptions();
 
 		if (!this._firstLoadFinished && this.languages && this._parentLanguageOptions.includes(this._currentLanguage)) {
 			this._firstLoadFinished = true;

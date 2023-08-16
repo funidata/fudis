@@ -2,7 +2,7 @@ import { Component, Input, OnInit, OnChanges, ViewEncapsulation } from '@angular
 
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
 
-import { FudisDescriptionListItem } from '../../types/miscellaneous';
+import { FudisDescriptionListItem, FudisDescriptionListVariant } from '../../types/miscellaneous';
 import { FudisDescriptionListService } from './description-list.service';
 
 @Component({
@@ -30,7 +30,7 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 	/**
 	 * Variant for description list structure and layout
 	 */
-	@Input() variant: 'regular' | 'compact' = 'regular';
+	@Input() variant: FudisDescriptionListVariant = 'regular';
 
 	/**
 	 * Add Fudis Language Badge Group in Fudis Description List Item Term element

@@ -20,7 +20,7 @@ export class DescriptionListItemComponent implements AfterViewInit {
 	@ContentChildren(DescriptionListItemDetailsComponent)
 	contentChildren!: QueryList<DescriptionListItemDetailsComponent>;
 
-	@Host() public _existingLanguageOptions = signal<FudisLanguageAbbr[]>([]);
+	@Host() public existingLanguageOptions = signal<FudisLanguageAbbr[]>([]);
 
 	protected _languageOptions: FudisLanguageAbbr[] = ['en', 'fi', 'sv'];
 
@@ -40,6 +40,6 @@ export class DescriptionListItemComponent implements AfterViewInit {
 				temp.push(item.lang);
 			});
 		}
-		this._existingLanguageOptions.set(temp);
+		this.existingLanguageOptions.set(temp);
 	}
 }

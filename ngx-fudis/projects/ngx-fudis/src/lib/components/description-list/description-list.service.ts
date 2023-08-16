@@ -1,14 +1,14 @@
-/* eslint-disable no-underscore-dangle */
 import { Signal, signal } from '@angular/core';
+import { FudisDescriptionListVariant } from '../../types/miscellaneous';
 
 export class FudisDescriptionListService {
-	private _signalVariant = signal<string>('');
+	private _signalVariant = signal<FudisDescriptionListVariant>('regular');
 
-	setVariant(variant: string): void {
+	public setVariant(variant: FudisDescriptionListVariant): void {
 		this._signalVariant.set(variant);
 	}
 
-	getVariant(): Signal<string> {
+	public getVariant(): Signal<FudisDescriptionListVariant> {
 		return this._signalVariant.asReadonly();
 	}
 }
