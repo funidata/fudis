@@ -88,7 +88,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LanguageBadgeGroupComponent } from './components/language-badge-group/language-badge-group.component';
 import { LanguageBadgeComponent } from './components/language-badge-group/language-badge/language-badge.component';
 import { FudisTranslationService } from './utilities/translation/translation.service';
-import { FudisDescriptionListItemDetailsService } from './components/description-list/description-list-item/description-list-item-details/description-list-item-details.service';
 
 @NgModule({
 	/*
@@ -234,7 +233,6 @@ import { FudisDescriptionListItemDetailsService } from './components/description
 		TooltipDirective,
 	],
 	providers: [
-		FudisDescriptionListItemDetailsService,
 		FudisDialogService,
 		FudisErrorSummaryService,
 		FudisGridService,

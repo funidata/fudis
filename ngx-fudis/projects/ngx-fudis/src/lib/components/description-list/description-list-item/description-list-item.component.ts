@@ -1,14 +1,13 @@
-import { AfterViewInit, Component, ContentChildren, Host, QueryList, Signal, effect, signal } from '@angular/core';
+import { AfterViewInit, Component, ContentChildren, Host, QueryList, effect, signal } from '@angular/core';
 import { DescriptionListItemDetailsComponent } from './description-list-item-details/description-list-item-details.component';
-import { FudisDescriptionListItemDetailInfo, FudisLanguageAbbr } from '../../../types/miscellaneous';
-import { FudisDescriptionListItemDetailsService } from './description-list-item-details/description-list-item-details.service';
+import { FudisLanguageAbbr } from '../../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-dl-item, fudis-description-list-item',
 	templateUrl: './description-list-item.component.html',
 })
 export class DescriptionListItemComponent implements AfterViewInit {
-	constructor(private _detailsService: FudisDescriptionListItemDetailsService) {
+	constructor() {
 		effect(
 			() => {
 				this.checkCurrentChildren();
@@ -33,9 +32,7 @@ export class DescriptionListItemComponent implements AfterViewInit {
 	checkCurrentChildren(): void {
 		const temp: FudisLanguageAbbr[] = [];
 
-		const currentDetails: Signal<FudisDescriptionListItemDetailInfo[]> = this._detailsService.getCurrentDetails();
-
-		if (this.contentChildren && currentDetails().length > 0) {
+		if (this.contentChildren) {
 			this.contentChildren.forEach((item) => {
 				temp.push(item.lang);
 			});

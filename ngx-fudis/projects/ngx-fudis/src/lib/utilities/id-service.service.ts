@@ -7,7 +7,6 @@ type ComponentType =
 	| 'checkbox'
 	| 'datepicker'
 	| 'daterange'
-	| 'dlItemDetails'
 	| 'dropdown'
 	| 'expandable'
 	| 'fieldset'
@@ -36,7 +35,6 @@ export class FudisIdService {
 		checkbox: 0,
 		datepicker: 0,
 		daterange: 0,
-		dlItemDetails: 0,
 		dropdown: 0,
 		expandable: 0,
 		fieldset: 0,

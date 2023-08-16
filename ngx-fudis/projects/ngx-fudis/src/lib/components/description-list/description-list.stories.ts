@@ -100,7 +100,7 @@ DescriptionListDataLoop.args = {
 };
 
 const TemplateWithDl: StoryFn = () => ({
-	template: html`<fudis-grid [columns]="columns">
+	template: html`<fudis-grid [columns]="columns" [rowGap]="'xs'">
 		<fudis-heading tag="h2" size="md">This is Fudis Grid where DL is used as child component</fudis-heading>
 		<fudis-dl [disableGrid]="true" [data]="lonelyDataItem" />
 		<fudis-body-text
