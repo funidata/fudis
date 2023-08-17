@@ -9,11 +9,12 @@
 		[tooltipToggle]="tooltipToggle">
 	</fudis-label>
 	<textarea
-		[id]="_id"
+		#inputRef
+		class="fudis-text-area__input"
 		[formControl]="control"
 		(blur)="onBlur($event)"
-		class="fudis-text-area__input"
 		[class.fudis-text-area__input--invalid]="(control.touched && control.invalid) || invalidState"
+		[id]="_id"
 		[attr.aria-describedby]="_id + '_guidance'"
 		[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
 		[attr.minLength]="minLength"

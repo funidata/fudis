@@ -1,4 +1,13 @@
-import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, ViewEncapsulation, effect } from '@angular/core';
+import {
+	AfterViewInit,
+	ChangeDetectorRef,
+	Component,
+	Input,
+	OnChanges,
+	OnInit,
+	ViewEncapsulation,
+	effect,
+} from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
@@ -24,7 +33,7 @@ import { updateLocale } from '../date-common/utilities';
 		{ provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
 	],
 })
-export class DatepickerComponent extends InputBaseDirective implements OnInit, OnChanges {
+export class DatepickerComponent extends InputBaseDirective implements OnInit, OnChanges, AfterViewInit {
 	constructor(
 		private _idService: FudisIdService,
 		private _changeDetectorRef: ChangeDetectorRef,
@@ -69,5 +78,11 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 		this._changeDetectorRef.detectChanges();
 
 		this._required = this.required ?? this.control.hasValidator(Validators.required);
+	}
+
+	ngAfterViewInit(): void {
+		if (this.initialFocus) {
+			this.focusToInput();
+		}
 	}
 }

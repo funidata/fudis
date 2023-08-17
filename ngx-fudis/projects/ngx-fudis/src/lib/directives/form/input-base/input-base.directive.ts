@@ -1,4 +1,4 @@
-import { Directive, Input, EventEmitter, Output, Signal, effect } from '@angular/core';
+import { Directive, Input, EventEmitter, Output, Signal, effect, ViewChild, ElementRef } from '@angular/core';
 
 import { FudisFormErrors } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
@@ -18,6 +18,11 @@ export class InputBaseDirective extends TooltipApiDirective {
 			this._requiredText = this._translations().REQUIRED;
 		});
 	}
+
+	/**
+	 * Template reference for input. Used in e. g. initialFocus
+	 */
+	@ViewChild('inputRef') inputRef: ElementRef;
 
 	/**
 	 * Label for input.
@@ -61,6 +66,11 @@ export class InputBaseDirective extends TooltipApiDirective {
 	@Input() required: boolean | undefined = undefined;
 
 	/**
+	 * Set browser focus to input on first load.
+	 */
+	@Input() initialFocus: boolean = false;
+
+	/**
 	 * To listen for input's blur event.
 	 */
 	@Output() handleBlur: EventEmitter<Event> = new EventEmitter<Event>();
@@ -85,7 +95,20 @@ export class InputBaseDirective extends TooltipApiDirective {
 	 */
 	protected _required: boolean = false;
 
+	private _focusTryCounter: number = 0;
+
 	public onBlur(event: Event): void {
 		this.handleBlur.emit(event);
+	}
+
+	focusToInput(): void {
+		if (this.inputRef?.nativeElement) {
+			this.inputRef.nativeElement.focus();
+		} else if (this._focusTryCounter < 100) {
+			setTimeout(() => {
+				this._focusTryCounter += 1;
+				this.focusToInput();
+			}, 100);
+		}
 	}
 }
