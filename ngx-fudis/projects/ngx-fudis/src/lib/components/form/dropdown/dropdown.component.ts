@@ -1,5 +1,16 @@
-import { Component, Input, ViewEncapsulation, EventEmitter, Output, OnInit, OnChanges } from '@angular/core';
+import {
+	Component,
+	Input,
+	ViewEncapsulation,
+	EventEmitter,
+	Output,
+	OnInit,
+	OnChanges,
+	AfterViewInit,
+	ViewChild,
+} from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { MatSelect } from '@angular/material/select';
 import { FudisDropdownOption, FudisDropdownLanguageOption, FudisInputWidth } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../utilities/id-service.service';
@@ -11,13 +22,18 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	styleUrls: ['./dropdown.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class DropdownComponent extends InputBaseDirective implements OnInit, OnChanges {
+export class DropdownComponent extends InputBaseDirective implements OnInit, OnChanges, AfterViewInit {
 	constructor(
 		private _idService: FudisIdService,
 		_translationService: FudisTranslationService
 	) {
 		super(_translationService);
 	}
+
+	/**
+	 * Template reference for input. Used in e. g. initialFocus
+	 */
+	@ViewChild('matSelect') matSelect: MatSelect;
 
 	/*
 	 * FormControl for the dropdown
@@ -62,6 +78,12 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('dropdown');
+	}
+
+	ngAfterViewInit(): void {
+		if (this.initialFocus) {
+			this.matSelect.focus();
+		}
 	}
 
 	ngOnChanges(): void {

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, effect } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit, effect } from '@angular/core';
 
 import { FormControl, Validators } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
@@ -12,7 +12,7 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	templateUrl: './text-area.component.html',
 	styleUrls: ['./text-area.component.scss'],
 })
-export class TextAreaComponent extends InputBaseDirective implements OnInit, OnChanges {
+export class TextAreaComponent extends InputBaseDirective implements OnInit, OnChanges, AfterViewInit {
 	constructor(
 		private _idService: FudisIdService,
 		_translationService: FudisTranslationService
@@ -55,5 +55,11 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit, OnC
 
 	ngOnChanges(): void {
 		this._required = this.required ?? this.control.hasValidator(Validators.required);
+	}
+
+	ngAfterViewInit(): void {
+		if (this.initialFocus) {
+			this.focusToInput();
+		}
 	}
 }
