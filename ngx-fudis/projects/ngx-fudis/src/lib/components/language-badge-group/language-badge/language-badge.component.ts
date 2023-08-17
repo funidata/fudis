@@ -54,9 +54,9 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
 	@Input() ariaLabel: string;
 
 	/**
-	 * Optional click handler
+	 * Click handler outputting clicked language abbreviation
 	 */
-	@Output() changeLanguage = new EventEmitter<FudisLanguageAbbr>();
+	@Output() handleClick = new EventEmitter<FudisLanguageAbbr>();
 
 	protected _label: string;
 
@@ -86,6 +86,6 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
 	}
 
 	handleLanguageSelect(): void {
-		this.changeLanguage.emit(this.language);
+		this.handleClick.emit(this.language);
 	}
 }

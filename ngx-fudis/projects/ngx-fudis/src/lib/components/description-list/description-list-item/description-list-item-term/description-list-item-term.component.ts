@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Host, Input, Signal, ViewEncapsulation, effect } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Host, Input, ViewEncapsulation, effect } from '@angular/core';
 import { FudisLanguageAbbr } from '../../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../../utilities/translation/translation.service';
 import { DescriptionListItemComponent } from '../description-list-item.component';
@@ -28,22 +28,17 @@ export class DescriptionListItemTermComponent implements AfterViewInit {
 	@Input() languages: boolean = false;
 
 	/**
-	 * Internal variable for languages that have existing translations
+	 * Available languages of sibling dt elements fetched from the parent dl-item element
 	 */
 	protected _parentLanguageOptions: FudisLanguageAbbr[];
 
 	/**
-	 * Internal property for listening description list variant Signal
-	 */
-	protected _currentVariant: Signal<string>;
-
-	/**
-	 * Internal variable for selected language
+	 * Selected language
 	 */
 	protected _selectedLanguage: FudisLanguageAbbr;
 
 	/**
-	 * Internal property for Fudis confiq language
+	 * Fudis confiq language
 	 */
 	private _currentLanguage: FudisLanguageAbbr;
 
@@ -56,7 +51,7 @@ export class DescriptionListItemTermComponent implements AfterViewInit {
 	/**
 	 * When Badge button is clicked, adjust host's CSS classes, so in SCSS other languages are set to 'display: none' and selected one is set to 'display: block'
 	 */
-	selectLanguage(lang: FudisLanguageAbbr): void {
+	setSelectedLanguage(lang: FudisLanguageAbbr): void {
 		if (this.languages) {
 			this._elementRef.nativeElement.classList.value = `fudis-dt-host fudis-dt-host__${lang}`;
 		}
@@ -74,9 +69,9 @@ export class DescriptionListItemTermComponent implements AfterViewInit {
 		 */
 		if (!this._firstLoadFinished && this.languages && this._parentLanguageOptions.includes(this._currentLanguage)) {
 			this._firstLoadFinished = true;
-			this.selectLanguage(this._currentLanguage);
+			this.setSelectedLanguage(this._currentLanguage);
 		} else if (this.languages && this._parentLanguageOptions.length > 0) {
-			this.selectLanguage(this._parentLanguageOptions[0]);
+			this.setSelectedLanguage(this._parentLanguageOptions[0]);
 		}
 	}
 }

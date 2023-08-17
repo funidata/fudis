@@ -32,9 +32,9 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective implements 
 	@Input({ required: true }) languages: FudisLanguageAbbr[];
 
 	/**
-	 * Optional click handler
+	 * Output Language abbreviation of clicked Badge
 	 */
-	@Output() handleClick = new EventEmitter<FudisLanguageAbbr>();
+	@Output() handleBadgeClick = new EventEmitter<FudisLanguageAbbr>();
 
 	/**
 	 * Internal variable for languages that have existing translations
@@ -69,7 +69,7 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective implements 
 	}
 
 	updateLanguage(value: FudisLanguageAbbr) {
-		this.handleClick.emit(value);
+		this.handleBadgeClick.emit(value);
 	}
 
 	getLabel(language: FudisLanguageAbbr): string {
