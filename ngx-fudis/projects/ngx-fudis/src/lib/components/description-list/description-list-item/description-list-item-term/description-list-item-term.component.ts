@@ -54,6 +54,9 @@ export class DescriptionListItemTermComponent implements AfterViewInit {
 		this.setLanguageOptions();
 	}
 
+	/**
+	 * When language is selected, adjust host's CSS classes, so in SCSS other languages are set to 'display: none' and selected one is set to 'display: block'
+	 */
 	selectLanguage(lang: FudisLanguageAbbr): void {
 		if (this.languages) {
 			this._elementRef.nativeElement.classList.value = `fudis-dt-host fudis-dt-host__${lang}`;
