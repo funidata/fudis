@@ -155,9 +155,9 @@ const DescriptionListWithLanguagesTemplate: StoryFn<DescriptionListComponent> = 
 		<fudis-description-list [marginBottom]="'md'" [disableGrid]="disableGrid" [variant]="variant">
 			<fudis-description-list-item>
 				<fudis-dt [languages]="true">Example paragraph</fudis-dt>
-				<fudis-dd [lang]="'fi'">Tämä on suomeksi</fudis-dd>
-				<fudis-dd [lang]="'en'">This is in English</fudis-dd>
 				<fudis-dd [lang]="'sv'">Och den här är på Svenska</fudis-dd>
+				<fudis-dd [lang]="'en'">This is in English</fudis-dd>
+				<fudis-dd [lang]="'fi'">Tämä on suomeksi</fudis-dd>
 			</fudis-description-list-item>
 			<fudis-description-list-item>
 				<fudis-dt [languages]="true">Example without one language</fudis-dt>

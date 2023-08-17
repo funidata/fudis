@@ -28,11 +28,6 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 	@Input() variant: FudisDescriptionListVariant = 'regular';
 
 	/**
-	 * Add Fudis Language Badge Group in Fudis Description List Item Term element
-	 */
-	@Input() translation: boolean = false;
-
-	/**
 	 * CSS class list
 	 */
 	protected _classList: string[] = [];

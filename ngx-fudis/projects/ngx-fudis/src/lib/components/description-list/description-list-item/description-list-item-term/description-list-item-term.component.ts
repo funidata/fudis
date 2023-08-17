@@ -16,11 +16,10 @@ export class DescriptionListItemTermComponent implements AfterViewInit {
 
 		@Host() private _parentDlItem: DescriptionListItemComponent
 	) {
+		this._currentLanguage = _translationService.getLanguage();
 		effect(() => {
 			this.setLanguageOptions();
 		});
-
-		this._currentLanguage = _translationService.getLanguage();
 	}
 
 	/**
@@ -55,19 +54,24 @@ export class DescriptionListItemTermComponent implements AfterViewInit {
 	}
 
 	/**
-	 * When language is selected, adjust host's CSS classes, so in SCSS other languages are set to 'display: none' and selected one is set to 'display: block'
+	 * When Badge button is clicked, adjust host's CSS classes, so in SCSS other languages are set to 'display: none' and selected one is set to 'display: block'
 	 */
 	selectLanguage(lang: FudisLanguageAbbr): void {
 		if (this.languages) {
 			this._elementRef.nativeElement.classList.value = `fudis-dt-host fudis-dt-host__${lang}`;
 		}
-
 		this._selectedLanguage = lang;
 	}
 
 	setLanguageOptions(): void {
+		/**
+		 * Get from parent dl-element list of available languages in dd-elements
+		 */
 		this._parentLanguageOptions = this._parentDlItem.existingLanguageOptions();
 
+		/**
+		 * On first load, set current language as selected, else just select first language as selected.
+		 */
 		if (!this._firstLoadFinished && this.languages && this._parentLanguageOptions.includes(this._currentLanguage)) {
 			this._firstLoadFinished = true;
 			this.selectLanguage(this._currentLanguage);

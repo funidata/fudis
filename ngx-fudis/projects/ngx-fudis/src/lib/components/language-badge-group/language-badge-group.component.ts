@@ -46,7 +46,7 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective implements 
 	/**
 	 * Internal variable for languages that have existing translations
 	 */
-	protected _languageOptions: FudisLanguageAbbr[] = ['en', 'fi', 'sv'];
+	protected _languageOptions: FudisLanguageAbbr[] = ['fi', 'sv', 'en'];
 
 	/**
 	 * Fudis translations

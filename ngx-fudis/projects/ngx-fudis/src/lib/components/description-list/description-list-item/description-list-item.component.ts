@@ -8,8 +8,11 @@ import { FudisLanguageAbbr } from '../../../types/miscellaneous';
 })
 export class DescriptionListItemComponent implements AfterViewInit {
 	@ContentChildren(DescriptionListItemDetailsComponent)
-	contentChildren!: QueryList<DescriptionListItemDetailsComponent>;
+	ddChildrenElements!: QueryList<DescriptionListItemDetailsComponent>;
 
+	/**
+	 * Storing list of available languages in dd-elements
+	 */
 	@Host() public existingLanguageOptions = signal<FudisLanguageAbbr[]>([]);
 
 	ngAfterViewInit(): void {
@@ -17,13 +20,13 @@ export class DescriptionListItemComponent implements AfterViewInit {
 	}
 
 	/**
-	 * Check for what languages are available as item's children
+	 * Check for what languages are available as item's children dd-elements
 	 */
 	checkCurrentChildren(): void {
 		const temp: FudisLanguageAbbr[] = [];
 
-		if (this.contentChildren) {
-			this.contentChildren.forEach((item) => {
+		if (this.ddChildrenElements) {
+			this.ddChildrenElements.forEach((item) => {
 				temp.push(item.lang);
 			});
 		}
