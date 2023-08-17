@@ -7,6 +7,7 @@ export const en: FudisTranslationConfig = {
 	INPUT_WITH_LANGUAGE_OPTIONS: {
 		LANGUAGE: 'Language',
 		MISSING: 'Missing',
+		MAX_LENGTH: 'characters used',
 	},
 	LINK: {
 		EXTERNAL_LINK: '(opens in a new tab)',
@@ -41,6 +42,7 @@ export const fi: FudisTranslationConfig = {
 	INPUT_WITH_LANGUAGE_OPTIONS: {
 		LANGUAGE: 'Kieli',
 		MISSING: 'Puuttuu',
+		MAX_LENGTH: 'merkkiä käytetty',
 	},
 	LINK: {
 		EXTERNAL_LINK: '(aukeaa uuteen välilehteen)',
@@ -75,6 +77,7 @@ export const sv: FudisTranslationConfig = {
 	INPUT_WITH_LANGUAGE_OPTIONS: {
 		LANGUAGE: 'Språk',
 		MISSING: 'Saknas',
+		MAX_LENGTH: 'tecken använt',
 	},
 	AUTOCOMPLETE: {
 		CLEAR: 'Radera val',

@@ -59,7 +59,7 @@ export class GuidanceComponent {
 	@Input() errorMsg: FudisFormErrors | null | undefined;
 
 	/**
-	 * Passing selected option for max length viewing. Used in input-with-language-options component.
+	 * Used to match FormControl value for an Input Language Options component so that the component can display the length of the entered input for the connected language option.
 	 */
 	@Input() selectedOption: string;
 
