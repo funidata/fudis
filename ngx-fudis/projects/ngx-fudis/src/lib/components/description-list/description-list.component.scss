@@ -97,6 +97,11 @@
 	& &__item {
 		min-height: spacing.$spacing-md;
 
+		/* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector, selector-max-class */
+		& .fudis-language-badge-group {
+			display: none;
+		}
+
 		&__term {
 			@include typography.description-list-compact-key-typography;
 			@include colorMixins.text-color('gray-dark');

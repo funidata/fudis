@@ -3,7 +3,6 @@ import { Component, Input, OnInit, OnChanges, ViewEncapsulation } from '@angular
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
 
 import { FudisDescriptionListItem, FudisDescriptionListVariant } from '../../types/miscellaneous';
-import { FudisDescriptionListService } from './description-list.service';
 
 @Component({
 	selector: 'fudis-dl, fudis-description-list',
@@ -12,10 +11,6 @@ import { FudisDescriptionListService } from './description-list.service';
 	encapsulation: ViewEncapsulation.None,
 })
 export class DescriptionListComponent extends GridApiDirective implements OnInit, OnChanges {
-	constructor(private _variantService: FudisDescriptionListService) {
-		super();
-	}
-
 	/**
 	 * Item array to form description list data.
 	 * Contains mandatory key and value, and optional subHeading.
@@ -54,7 +49,6 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 		const cssClasses = [];
 
 		if (this.variant === 'regular') {
-			this._variantService.setVariant(this.variant);
 			cssClasses.push('fudis-dl');
 
 			if (this.disableGrid) {
@@ -63,7 +57,6 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 		}
 
 		if (this.variant === 'compact') {
-			this._variantService.setVariant(this.variant);
 			cssClasses.push('fudis-dl-compact');
 			if (this.disableGrid) {
 				cssClasses.push('fudis-dl-compact__disabled-grid');

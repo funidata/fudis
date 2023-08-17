@@ -45,7 +45,7 @@ import { FudisDialogService } from './components/dialog/dialog.service';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
 import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
 import { DropdownMenuItemComponent } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
-import { FudisDescriptionListService } from './components/description-list/description-list.service';
+
 import { FudisDropdownMenuItemService } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
 import { FudisErrorSummaryService } from './components/form/error-summary/error-summary.service';
@@ -236,7 +236,7 @@ import { FudisTranslationService } from './utilities/translation/translation.ser
 		FudisDialogService,
 		FudisErrorSummaryService,
 		FudisGridService,
-		FudisDescriptionListService,
+
 		FudisDropdownMenuItemService,
 		FudisIdService,
 		FudisTranslationService,

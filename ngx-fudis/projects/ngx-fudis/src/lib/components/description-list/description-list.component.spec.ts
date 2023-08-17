@@ -10,7 +10,7 @@ import { FudisGridService } from '../../directives/grid/grid-service/grid.servic
 import { DescriptionListItemComponent } from './description-list-item/description-list-item.component';
 import { DescriptionListItemTermComponent } from './description-list-item/description-list-item-term/description-list-item-term.component';
 import { DescriptionListItemDetailsComponent } from './description-list-item/description-list-item-details/description-list-item-details.component';
-import { FudisDescriptionListService } from './description-list.service';
+
 import { LanguageBadgeGroupComponent } from '../language-badge-group/language-badge-group.component';
 
 describe('DescriptionListComponent', () => {
@@ -28,7 +28,7 @@ describe('DescriptionListComponent', () => {
 				DescriptionListItemDetailsComponent,
 				MockComponent(LanguageBadgeGroupComponent),
 			],
-			providers: [FudisGridService, FudisDescriptionListService],
+			providers: [FudisGridService],
 		}).compileComponents();
 	});
 

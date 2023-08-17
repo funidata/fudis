@@ -2,7 +2,6 @@ import { AfterViewInit, Component, ElementRef, Host, Input, Signal, ViewEncapsul
 import { FudisLanguageAbbr } from '../../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../../utilities/translation/translation.service';
 import { DescriptionListItemComponent } from '../description-list-item.component';
-import { FudisDescriptionListService } from '../../description-list.service';
 
 @Component({
 	selector: 'fudis-dt, fudis-description-list-term',
@@ -14,13 +13,11 @@ export class DescriptionListItemTermComponent implements AfterViewInit {
 	constructor(
 		private _elementRef: ElementRef,
 		private _translationService: FudisTranslationService,
-		private _variantService: FudisDescriptionListService,
+
 		@Host() private _parentDlItem: DescriptionListItemComponent
 	) {
-		this._currentVariant = _variantService.getVariant();
 		effect(() => {
 			this.setLanguageOptions();
-			this.hideLanguageOptions(this._currentVariant());
 		});
 
 		this._currentLanguage = _translationService.getLanguage();
@@ -52,12 +49,6 @@ export class DescriptionListItemTermComponent implements AfterViewInit {
 	private _currentLanguage: FudisLanguageAbbr;
 
 	private _firstLoadFinished: boolean = false;
-
-	hideLanguageOptions(currentVariant: string): void {
-		if (currentVariant === 'compact') {
-			this.languages = false;
-		}
-	}
 
 	ngAfterViewInit(): void {
 		this.setLanguageOptions();

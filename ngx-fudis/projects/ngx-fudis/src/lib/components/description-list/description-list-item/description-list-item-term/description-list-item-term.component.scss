@@ -1,3 +1,4 @@
+/* stylelint-disable selector-max-class */
 /* stylelint-disable selector-class-pattern */
 .fudis-dt-host {
 	&__fi {
@@ -5,6 +6,10 @@
 		~ fudis-description-list-details {
 			.fudis-dl__item__details__fi {
 				display: block;
+
+				&.fudis-dl-compact__item__details {
+					display: inline-block;
+				}
 			}
 		}
 	}
@@ -14,6 +19,10 @@
 		~ fudis-description-list-details {
 			.fudis-dl__item__details__en {
 				display: block;
+
+				&.fudis-dl-compact__item__details {
+					display: inline-block;
+				}
 			}
 		}
 	}
@@ -23,6 +32,10 @@
 		~ fudis-description-list-details {
 			.fudis-dl__item__details__sv {
 				display: block;
+
+				&.fudis-dl-compact__item__details {
+					display: inline-block;
+				}
 			}
 		}
 	}
