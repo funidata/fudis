@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, AfterViewInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
@@ -10,15 +10,13 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	templateUrl: './checkbox.component.html',
 	styleUrls: ['./checkbox.component.scss'],
 })
-export class CheckboxComponent extends InputBaseDirective implements OnInit, OnChanges {
+export class CheckboxComponent extends InputBaseDirective implements OnInit, OnChanges, AfterViewInit {
 	constructor(
 		private _idService: FudisIdService,
 		_translationService: FudisTranslationService
 	) {
 		super(_translationService);
 	}
-
-	@ViewChild('checkboxRef') input: ElementRef;
 
 	/*
 	 * FormControl for Radio Button group
@@ -31,11 +29,17 @@ export class CheckboxComponent extends InputBaseDirective implements OnInit, OnC
 	@Input() name: string;
 
 	handleCheckboxClick(): void {
-		this.input.nativeElement.focus();
+		this.inputRef.nativeElement.focus();
 	}
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('checkbox');
+	}
+
+	ngAfterViewInit(): void {
+		if (this.initialFocus) {
+			this.focusToInput();
+		}
 	}
 
 	ngOnChanges(): void {

@@ -10,7 +10,7 @@
 	</fudis-label>
 	<input
 		[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
-		#fudisTextInput
+		#inputRef
 		[attr.aria-label]="ariaLabel"
 		[formControl]="control"
 		[attr.minlength]="minLength"

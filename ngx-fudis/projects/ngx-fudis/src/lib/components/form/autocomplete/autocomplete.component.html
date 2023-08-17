@@ -10,8 +10,8 @@
 	</fudis-label>
 	<div class="fudis-autocomplete__input-wrapper">
 		<input
+			#inputRef
 			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
-			#fudisAutocompleteInput
 			class="fudis-autocomplete__input"
 			[id]="_id"
 			[class.fudis-autocomplete__input--invalid]="(control.invalid && control.touched) || invalidState"
