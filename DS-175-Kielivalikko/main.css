@@ -175,6 +175,21 @@
   background-color: var(--fudis-color-primary-light);
 }
 
+.fudis-datepicker__datepicker button:focus {
+  outline: 2px dashed #484848;
+  outline-offset: 1px;
+  box-shadow: 0 0 0 0.25rem #ffffff;
+  /* stylelint-disable-next-line selector-no-qualifying-type */
+}
+
+.fudis-datepicker__datepicker button:focus.mat-calendar-body-cell {
+  border-radius: 4rem;
+}
+
+.fudis-datepicker__datepicker .mat-mdc-button-persistent-ripple.mdc-button__ripple::before {
+  opacity: 0 !important;
+}
+
 .mat-datepicker-close-button {
   text-transform: uppercase !important;
   /* stylelint-disable-next-line property-disallowed-list */
