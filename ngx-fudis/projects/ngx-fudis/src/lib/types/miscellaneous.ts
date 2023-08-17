@@ -73,14 +73,7 @@ export interface FudisTranslationConfig {
 		ATTENTION: string;
 	};
 	LANGUAGE_BADGE: {
-		ARIA_LABEL: {
-			FI: string;
-			SV: string;
-			EN: string;
-			TRANSLATIONS: string;
-			SELECTED: string;
-			MISSING_TRANSLATION: string;
-		};
+		ARIA_LABEL: FudisTranslationLanguageBadgeAriaLabel;
 	};
 	TEXTAREA: {
 		// Assistive text of max character count for screen readers
@@ -90,4 +83,13 @@ export interface FudisTranslationConfig {
 		// Assistive text of max character count for screen readers
 		MAX_LENGTH: string;
 	};
+}
+
+export interface FudisTranslationLanguageBadgeAriaLabel {
+	FI: string;
+	SV: string;
+	EN: string;
+	TRANSLATIONS: string;
+	SELECTED: string;
+	MISSING_TRANSLATION: string;
 }

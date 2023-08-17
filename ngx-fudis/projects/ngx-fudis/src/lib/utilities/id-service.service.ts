@@ -13,7 +13,6 @@ type ComponentType =
 	| 'form'
 	| 'heading'
 	| 'inputWithLanguageOptions'
-	| 'languageBadgeGroup'
 	| 'radioButtonGroup'
 	| 'section'
 	| 'textArea'
@@ -30,7 +29,6 @@ export class FudisIdService {
 	private _idList: IdInformation = {
 		autocomplete: 0,
 		button: 0,
-		languageBadgeGroup: 0,
 		autocompleteMultiSelect: 0,
 		checkbox: 0,
 		datepicker: 0,

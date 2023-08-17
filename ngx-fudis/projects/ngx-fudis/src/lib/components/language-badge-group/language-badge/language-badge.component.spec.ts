@@ -20,8 +20,6 @@ fdescribe('LanguageBadgeComponent', () => {
 		component = fixture.componentInstance;
 		component.language = 'en';
 		component.variant = 'standard';
-		component.id = 'fudis-language-badge-button-id';
-		component.badgeGroupId = 'fudis-language-badge-button-id-group';
 		fixture.detectChanges();
 	});
 

@@ -1,6 +1,16 @@
-import { Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from '@angular/core';
-import { FudisLanguageAbbr } from '../../../types/miscellaneous';
+import {
+	Component,
+	EventEmitter,
+	HostBinding,
+	Input,
+	OnChanges,
+	Output,
+	Signal,
+	ViewEncapsulation,
+} from '@angular/core';
+import { FudisLanguageAbbr, FudisTranslationConfig } from '../../../types/miscellaneous';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'fudis-language-badge',
@@ -8,13 +18,15 @@ import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.dir
 	templateUrl: './language-badge.component.html',
 	encapsulation: ViewEncapsulation.None,
 })
-export class LanguageBadgeComponent extends TooltipApiDirective {
-	@HostBinding('class') classes = 'fudis-language-badge-host';
+export class LanguageBadgeComponent extends TooltipApiDirective implements OnChanges {
+	constructor(private _translationService: FudisTranslationService) {
+		super();
+		this._translations = this._translationService.getTranslations();
+		this._selectedLabel = this._translations().LANGUAGE_BADGE.ARIA_LABEL.SELECTED;
+		this._missingTranslation = this._translations().LANGUAGE_BADGE.ARIA_LABEL.MISSING_TRANSLATION;
+	}
 
-	/*
-	 * Id of single Language Badge
-	 */
-	@Input() id: string;
+	@HostBinding('class') classes = 'fudis-language-badge-host';
 
 	/*
 	 * Language abbreviation for Language Badge
@@ -36,15 +48,42 @@ export class LanguageBadgeComponent extends TooltipApiDirective {
 	 */
 	@Input({ required: true }) label: string;
 
-	/**
-	 * Language badge group component id for binding aria attributes
+	/*
+	 * Assistive aria-label
 	 */
-	@Input() badgeGroupId: string;
+	@Input() ariaLabel: string;
 
 	/**
 	 * Optional click handler
 	 */
 	@Output() changeLanguage = new EventEmitter<FudisLanguageAbbr>();
+
+	protected _label: string;
+
+	/**
+	 * Internal variable for selected translation aria-label
+	 */
+	protected _selectedLabel: string;
+
+	/**
+	 * Internal variable for missing translation aria-label
+	 */
+	protected _missingTranslation: string;
+
+	/**
+	 * Fudis translations
+	 */
+	protected _translations: Signal<FudisTranslationConfig>;
+
+	ngOnChanges(): void {
+		if (this.selected && this.variant !== 'missing') {
+			this._label = `${this.label} ${this._selectedLabel}`;
+		} else if (!this.selected && this.variant === 'missing') {
+			this._label = `${this.label} ${this._missingTranslation}`;
+		} else {
+			this._label = this.label;
+		}
+	}
 
 	handleLanguageSelect(): void {
 		this.changeLanguage.emit(this.language);
