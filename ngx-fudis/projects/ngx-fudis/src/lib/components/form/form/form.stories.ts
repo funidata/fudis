@@ -14,7 +14,7 @@ import {
 } from '../../../types/forms';
 
 import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
-import { FormGroupValidators } from '../../../utilities/form/validators';
+import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 import { FormComponent } from './form.component';
 import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
@@ -237,7 +237,7 @@ class FormContentExampleComponent {
 				swedish: new FormControl(null),
 				english: new FormControl(null),
 			},
-			[FormGroupValidators.atLeastOneRequired()]
+			[FudisFormGroupValidators.atLeastOneRequired()]
 		),
 		description: new FormGroup({
 			finnish: new FormControl(null, [Validators.required, Validators.minLength(10)]),
