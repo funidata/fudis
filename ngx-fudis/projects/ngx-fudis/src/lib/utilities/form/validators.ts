@@ -8,7 +8,7 @@ interface FudisGroupValidatorFn extends ValidatorFn {
 	(controlGroup: FormGroup): FudisValidationErrors | null;
 }
 
-export module FormGroupValidators {
+export module FudisFormGroupValidators {
 	export function atLeastOneRequired(): FudisGroupValidatorFn {
 		return (controlGroup: any): FudisValidationErrors | null => {
 			const { controls } = controlGroup;
