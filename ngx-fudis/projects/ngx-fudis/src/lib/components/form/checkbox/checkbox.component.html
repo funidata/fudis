@@ -5,9 +5,9 @@
 			[class.fudis-checkbox__box--invalid]="(control.invalid && control.touched) || invalidState"
 			[class.fudis-checkbox__box--disabled]="control.disabled">
 			<input
+				#inputRef
 				[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
 				[formControl]="control"
-				#checkboxRef
 				[attr.aria-describedby]="_id + '_guidance'"
 				[attr.aria-label]="label"
 				type="checkbox"

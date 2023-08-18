@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ElementRef, Input, OnChanges, OnInit, ViewChild, effect } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, Input, OnChanges, OnInit, effect } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl, Validators } from '@angular/forms';
@@ -13,7 +13,10 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	templateUrl: './autocomplete.component.html',
 	styleUrls: ['./autocomplete.component.scss'],
 })
-export class AutocompleteComponent extends InputBaseDirective implements OnInit, AfterContentInit, OnChanges {
+export class AutocompleteComponent
+	extends InputBaseDirective
+	implements OnInit, AfterContentInit, OnChanges, AfterViewInit
+{
 	constructor(
 		private _idService: FudisIdService,
 		_translationService: FudisTranslationService
@@ -24,8 +27,6 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 			this._clearFilterText = this._translations().AUTOCOMPLETE.CLEAR;
 		});
 	}
-
-	@ViewChild('fudisAutocompleteInput') autocompleteInput: ElementRef;
 
 	/**
 	 * FormControl for the input.
@@ -71,6 +72,12 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 			this._autocompleteFormControl.patchValue(this.control.value.viewValue);
 		}
 		this.checkFilteredOptions();
+	}
+
+	ngAfterViewInit(): void {
+		if (this.initialFocus) {
+			this.focusToInput();
+		}
 	}
 
 	ngOnChanges(): void {
@@ -134,7 +141,7 @@ export class AutocompleteComponent extends InputBaseDirective implements OnInit,
 		this.checkFilteredOptions();
 
 		// After clearing set focus back to input field
-		this.autocompleteInput.nativeElement.focus();
+		this.inputRef.nativeElement.focus();
 	}
 
 	/**
