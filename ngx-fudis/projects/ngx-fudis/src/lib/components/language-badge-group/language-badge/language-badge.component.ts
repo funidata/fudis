@@ -76,6 +76,14 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
 	protected _translations: Signal<FudisTranslationConfig>;
 
 	ngOnChanges(): void {
+		this.setLabel();
+	}
+
+	handleLanguageSelect(): void {
+		this.handleClick.emit(this.language);
+	}
+
+	setLabel(): void {
 		if (this.selected && this.variant !== 'missing') {
 			this._label = `${this.label} ${this._selectedLabel}`;
 		} else if (!this.selected && this.variant === 'missing') {
@@ -83,9 +91,5 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
 		} else {
 			this._label = this.label;
 		}
-	}
-
-	handleLanguageSelect(): void {
-		this.handleClick.emit(this.language);
 	}
 }

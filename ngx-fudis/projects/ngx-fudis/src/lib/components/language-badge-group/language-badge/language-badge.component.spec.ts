@@ -50,9 +50,33 @@ fdescribe('LanguageBadgeComponent', () => {
 
 		it('should have given label matching to aria-label', () => {
 			component.label = 'This is test label';
+			component.ngOnChanges();
 			fixture.detectChanges();
 			const LanguageBadgeLabel = fixture.debugElement.query(By.css('.fudis-language-badge'));
+
 			expect(LanguageBadgeLabel.nativeElement.getAttribute('aria-label')).toEqual('This is test label');
+		});
+
+		it('should have given label and selected text matching to aria-label', () => {
+			component.label = 'This is test label';
+			component.selected = true;
+			component.ngOnChanges();
+			fixture.detectChanges();
+			const LanguageBadgeLabel = fixture.debugElement.query(By.css('.fudis-language-badge'));
+
+			expect(LanguageBadgeLabel.nativeElement.getAttribute('aria-label')).toEqual('This is test label (Selected)');
+		});
+
+		it('should have given label and missing text matching to aria-label', () => {
+			component.label = 'This is test label';
+			component.variant = 'missing';
+			component.ngOnChanges();
+			fixture.detectChanges();
+			const LanguageBadgeLabel = fixture.debugElement.query(By.css('.fudis-language-badge'));
+
+			expect(LanguageBadgeLabel.nativeElement.getAttribute('aria-label')).toEqual(
+				'This is test label (Missing translation)'
+			);
 		});
 	});
 });
