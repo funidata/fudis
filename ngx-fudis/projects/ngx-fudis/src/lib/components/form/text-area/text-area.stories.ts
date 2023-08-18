@@ -75,7 +75,6 @@ export default {
 				'ariaLabel',
 				'disabled',
 				'id',
-				'_maxLengthText',
 				'_id',
 				'_required',
 				'_requiredText',

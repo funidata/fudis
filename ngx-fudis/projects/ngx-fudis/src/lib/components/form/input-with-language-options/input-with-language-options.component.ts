@@ -26,7 +26,6 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 		effect(() => {
 			this._languageLabel = this._translations().INPUT_WITH_LANGUAGE_OPTIONS.LANGUAGE;
-			this._maxLengthText = this._translations().INPUT_WITH_LANGUAGE_OPTIONS.MAX_LENGTH;
 			this._missingLanguage = this._translations().INPUT_WITH_LANGUAGE_OPTIONS.MISSING;
 		});
 	}
@@ -86,11 +85,6 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	 * Fudis translation
 	 */
 	protected _languageLabel: string;
-
-	/**
-	 * Assistive text of max character count for screen readers
-	 */
-	protected _maxLengthText: string;
 
 	/**
 	 * If component is loaded for the first time

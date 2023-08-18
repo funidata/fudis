@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, effect } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FudisFormErrors, FudisFormGroupErrors } from '../../../types/forms';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'fudis-guidance',
@@ -8,6 +9,12 @@ import { FudisFormErrors, FudisFormGroupErrors } from '../../../types/forms';
 	styleUrls: ['./guidance.component.scss'],
 })
 export class GuidanceComponent {
+	constructor(private _translationService: FudisTranslationService) {
+		effect(() => {
+			this._maxLengthText = _translationService.getTranslations()().TEXTINPUT.MAX_LENGTH;
+		});
+	}
+
 	/**
 	 * Id of input, fieldset or similar which Guidance is related to. Used in aria attributes and in emit information for Error Summary Service.
 	 */
@@ -44,11 +51,6 @@ export class GuidanceComponent {
 	@Input() maxLength: number | undefined = undefined;
 
 	/**
-	 * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where "characters used" is "maxLengthText".
-	 */
-	@Input() maxLengthText: string;
-
-	/**
 	 * Used if FormGroup is associated with Guidance.
 	 */
 	@Input() groupErrorMsg: FudisFormGroupErrors | null | undefined;
@@ -62,6 +64,11 @@ export class GuidanceComponent {
 	 * Used to match FormControl value for an Input Language Options component so that the component can display the length of the entered input for the connected language option.
 	 */
 	@Input() selectedOption: string;
+
+	/**
+	 * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where "characters used" is "maxLengthText".
+	 */
+	protected _maxLengthText: string;
 
 	// eslint-disable-next-line class-methods-use-this
 	asErrorkey(errorKey: any): keyof FudisFormErrors {

@@ -67,6 +67,8 @@
 		</ng-container>
 	</ng-container>
 </div>
-<ng-container *ngIf="maxLength && maxLengthText && alertMaxLength()">
-	<p class="fudis-visually-hidden" role="alert">{{ control.value?.length || 0 }}/{{ maxLength }} {{ maxLengthText }}</p>
+<ng-container *ngIf="maxLength && _maxLengthText && alertMaxLength()">
+	<p class="fudis-visually-hidden" role="alert">
+		{{ control.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText }}
+	</p>
 </ng-container>
