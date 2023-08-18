@@ -1,4 +1,4 @@
-import { Component, Input, effect } from '@angular/core';
+import { Component, Input, OnInit, effect } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FudisFormErrors, FudisFormGroupErrors } from '../../../types/forms';
 import { FudisTranslationService } from '../../../utilities/translation/translation.service';
@@ -8,7 +8,7 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	templateUrl: './guidance.component.html',
 	styleUrls: ['./guidance.component.scss'],
 })
-export class GuidanceComponent {
+export class GuidanceComponent implements OnInit {
 	constructor(private _translationService: FudisTranslationService) {
 		effect(() => {
 			this._maxLengthText = _translationService.getTranslations()().TEXTINPUT.MAX_LENGTH;
@@ -70,19 +70,29 @@ export class GuidanceComponent {
 	 */
 	protected _maxLengthText: string;
 
+	protected _currentLength: number;
+
+	protected _maxLengthAlertThreshold: number = 5;
+
+	ngOnInit(): void {
+		if (this.maxLength) {
+			this._maxLengthAlertThreshold = this.maxLength - 5;
+		}
+
+		// if (this.formGroup && this.maxLength) {
+		// 	this.formGroup.valueChanges.subscribe((val) => {
+		// 		console.log(val);
+		// 	});
+		// }
+		// if (this.control && this.maxLength) {
+		// 	this.control.valueChanges.subscribe((val) => {
+		// 		console.log(val);
+		// 	});
+		// }
+	}
+
 	// eslint-disable-next-line class-methods-use-this
 	asErrorkey(errorKey: any): keyof FudisFormErrors {
 		return errorKey;
-	}
-
-	alertMaxLength(): boolean {
-		if (this.maxLength && typeof this.control?.value === 'string' && this.control.value?.length) {
-			const charactersRemaining = this.maxLength - this.control.value.length;
-
-			if ((charactersRemaining === 5 && this.maxLength >= 5) || charactersRemaining === 0) {
-				return true;
-			}
-		}
-		return false;
 	}
 }
