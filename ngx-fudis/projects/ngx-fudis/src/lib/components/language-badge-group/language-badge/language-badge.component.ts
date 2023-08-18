@@ -4,6 +4,7 @@ import {
 	HostBinding,
 	Input,
 	OnChanges,
+	OnInit,
 	Output,
 	Signal,
 	ViewEncapsulation,
@@ -18,7 +19,7 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 	templateUrl: './language-badge.component.html',
 	encapsulation: ViewEncapsulation.None,
 })
-export class LanguageBadgeComponent extends TooltipApiDirective implements OnChanges {
+export class LanguageBadgeComponent extends TooltipApiDirective implements OnInit, OnChanges {
 	constructor(private _translationService: FudisTranslationService) {
 		super();
 		this._translations = this._translationService.getTranslations();
@@ -74,6 +75,10 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
 	 * Fudis translations
 	 */
 	protected _translations: Signal<FudisTranslationConfig>;
+
+	ngOnInit(): void {
+		this.setLabel();
+	}
 
 	ngOnChanges(): void {
 		this.setLabel();

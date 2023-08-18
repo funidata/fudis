@@ -10,7 +10,7 @@ export class TooltipApiDirective {
 	/**
 	 * Text placed on tooltip
 	 */
-	@Input() tooltip: string | undefined = '';
+	@Input() tooltip: string | undefined;
 
 	/**
 	 * tooltipToggle set on true makes tooltip appear when toggled. Default behavior is triggered on focus. TooltipToggle feature is prefered to be used with icons.

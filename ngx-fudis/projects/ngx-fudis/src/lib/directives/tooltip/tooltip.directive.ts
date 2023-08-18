@@ -1,4 +1,4 @@
-import { Directive, HostListener, OnInit, ElementRef, Input } from '@angular/core';
+import { Directive, HostListener, OnInit, ElementRef, OnChanges } from '@angular/core';
 import { MatTooltip } from '@angular/material/tooltip';
 import { TooltipApiDirective } from './tooltip-api.directive';
 
@@ -7,7 +7,7 @@ import { TooltipApiDirective } from './tooltip-api.directive';
 	exportAs: 'tooltip',
 	providers: [MatTooltip],
 })
-export class TooltipDirective extends TooltipApiDirective implements OnInit {
+export class TooltipDirective extends TooltipApiDirective implements OnInit, OnChanges {
 	constructor(
 		private _ngMaterialTooltip: MatTooltip,
 		private _tooltipElement: ElementRef
@@ -15,16 +15,12 @@ export class TooltipDirective extends TooltipApiDirective implements OnInit {
 		super();
 	}
 
-	/**
-	 * Text placed on tooltip
-	 */
-	@Input() override tooltip: string;
+	ngOnInit(): void {
+		this.setTooltip();
+	}
 
-	ngOnInit() {
-		this._ngMaterialTooltip.message = this.tooltip;
-		if (this.tooltipPosition) {
-			this._ngMaterialTooltip.position = this.tooltipPosition;
-		}
+	ngOnChanges(): void {
+		this.setTooltip();
 	}
 
 	@HostListener('mouseenter') onMouseEnter() {
@@ -63,6 +59,15 @@ export class TooltipDirective extends TooltipApiDirective implements OnInit {
 		) {
 			event.preventDefault();
 			this._ngMaterialTooltip.toggle();
+		}
+	}
+
+	setTooltip(): void {
+		if (this.tooltip) {
+			this._ngMaterialTooltip.message = this.tooltip;
+		}
+		if (this.tooltipPosition) {
+			this._ngMaterialTooltip.position = this.tooltipPosition;
 		}
 	}
 }
