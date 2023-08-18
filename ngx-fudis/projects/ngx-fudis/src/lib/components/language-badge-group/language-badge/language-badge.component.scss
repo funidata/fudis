@@ -3,6 +3,7 @@
 @use '../../../foundations/focus/mixins.scss' as focus;
 @use '../../../foundations/colors/mixins.scss' as colorMixin;
 @use '../../../foundations/borders/mixins.scss' as border;
+@use '../../../foundations/utilities/mixins.scss' as utilities;
 @use '../../../foundations/spacing/tokens.scss' as spacing;
 
 .fudis-language-badge-host {
@@ -23,12 +24,14 @@
 	@include typography.body-text-sm-regular;
 	@include colorMixin.bg-color('white');
 	@include border.border('1px', 'solid', 'gray-dark');
+	@include utilities.box-reset;
 
 	border-radius: 50%;
-	padding-left: spacing.$spacing-xxs;
 	width: spacing.$spacing-md;
 	height: spacing.$spacing-md;
 	text-align: center;
+	/* stylelint-disable-next-line unit-disallowed-list */
+	letter-spacing: 0.02rem;
 
 	&:focus-visible {
 		@include border.outline-none;
