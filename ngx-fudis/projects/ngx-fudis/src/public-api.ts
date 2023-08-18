@@ -68,4 +68,4 @@ export { TextInputComponent } from './lib/components/form/text-input/text-input.
 // export { TextSpacingComponent } from './lib/components/typography/text-spacing/text-spacing.component';
 export { TooltipDirective } from './lib/directives/tooltip/tooltip.directive';
 
-export { FormGroupValidators } from './lib/utilities/form/validators';
+export { FudisFormGroupValidators } from './lib/utilities/form/validators';
