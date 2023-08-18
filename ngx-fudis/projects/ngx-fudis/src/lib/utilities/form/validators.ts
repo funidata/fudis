@@ -1,6 +1,16 @@
+import { FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+
+interface FudisValidationErrors extends ValidationErrors {
+	atLeastOneRequired: boolean;
+}
+
+interface FudisGroupValidatorFn extends ValidatorFn {
+	(controlGroup: FormGroup): FudisValidationErrors | null;
+}
+
 export module FormGroupValidators {
-	export function atLeastOneRequired() {
-		return (controlGroup: any) => {
+	export function atLeastOneRequired(): FudisGroupValidatorFn {
+		return (controlGroup: any): FudisValidationErrors | null => {
 			const { controls } = controlGroup;
 
 			if (controls) {
