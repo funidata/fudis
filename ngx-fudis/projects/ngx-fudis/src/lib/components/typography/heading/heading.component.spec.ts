@@ -29,8 +29,8 @@ describe('HeadingComponent', () => {
 		return fixture.debugElement.nativeElement.querySelector(`h${level}`) as HTMLElement;
 	}
 
-	function assertHeadingHasClasses(classes: string, tag: FudisHeadingLevel): void {
-		const headingClasses = getHeading(tag)?.className.split(' ').sort();
+	function assertHeadingHasClasses(classes: string, level: FudisHeadingLevel): void {
+		const headingClasses = getHeading(level)?.className.split(' ').sort();
 		expect(headingClasses).toEqual(classes.split(' ').sort());
 	}
 
@@ -47,7 +47,7 @@ describe('HeadingComponent', () => {
 	});
 
 	describe('CSS classes', () => {
-		it('should have respective size, margin bottom and tag values according to given Inputs', () => {
+		it('should have respective size, margin bottom and level values according to given Inputs', () => {
 			headingCheck('xxl', 'xxl', 1);
 			headingCheck('xl', 'xl', 2);
 			headingCheck('lg', 'lg', 3);
