@@ -16,7 +16,7 @@ import { FudisErrorSummaryService } from '../form/error-summary/error-summary.se
 @Component({
 	selector: 'fudis-mock-container',
 	template: `<fudis-expandable
-		[collapsed]="collapsed"
+		[closed]="closed"
 		[title]="'Test title'"
 		[subTitle]="subTitle"
 		[level]="3"
@@ -32,7 +32,7 @@ import { FudisErrorSummaryService } from '../form/error-summary/error-summary.se
 	</fudis-expandable>`,
 })
 class MockContainerComponent {
-	collapsed: boolean;
+	closed: boolean;
 
 	variant: FudisExpandableType;
 
@@ -102,12 +102,12 @@ describe('ExpandableComponent', () => {
 	}
 
 	function assertExpandableIsExpanded(): void {
-		expect(getExpandable().getCollapsedStatus()).withContext('Expected the expandable to be expanded').toEqual(false);
+		expect(getExpandable().getClosedStatus()).withContext('Expected the expandable to be expanded').toEqual(false);
 		expect(isContentVisible()).withContext('Expected the content component to be visible').toEqual(true);
 	}
 
-	function assertExpandableIsCollapsed(): void {
-		expect(getExpandable().getCollapsedStatus()).withContext('Expected the expandable to be collapsed').toEqual(true);
+	function assertExpandableIsClosed(): void {
+		expect(getExpandable().getClosedStatus()).withContext('Expected the expandable to be closed').toEqual(true);
 		expect(isContentVisible()).withContext('Expected the content component not to be visible').toEqual(false);
 	}
 
@@ -194,12 +194,12 @@ describe('ExpandableComponent', () => {
 		it('should not initialize content when rendering expandable with default settings', () => {
 			fixture.detectChanges();
 
-			assertExpandableIsCollapsed();
+			assertExpandableIsClosed();
 			expect(containerComponent.contentInitializationCount).toBe(0);
 		});
 
 		it('should initialize the content when rendering expandable as initially expanded', () => {
-			containerComponent.collapsed = false;
+			containerComponent.closed = false;
 			fixture.detectChanges();
 
 			assertExpandableIsExpanded();
@@ -225,7 +225,7 @@ describe('ExpandableComponent', () => {
 
 			toggleExpandableState();
 			fixture.detectChanges();
-			assertExpandableIsCollapsed();
+			assertExpandableIsClosed();
 
 			toggleExpandableState();
 			fixture.detectChanges();
@@ -235,13 +235,13 @@ describe('ExpandableComponent', () => {
 		});
 
 		it('should not remove the projected content from the DOM when collapsing the expandable', () => {
-			containerComponent.collapsed = false;
+			containerComponent.closed = false;
 			fixture.detectChanges();
 			assertExpandableIsExpanded();
 
 			toggleExpandableState();
 			fixture.detectChanges();
-			assertExpandableIsCollapsed();
+			assertExpandableIsClosed();
 
 			expect(
 				fixture.nativeElement.querySelector('fudis-expandable .fudis-expandable__content[hidden] fudis-mock-component')

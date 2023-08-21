@@ -11,11 +11,11 @@ export default {
 		},
 		controls: {
 			exclude: [
-				'_collapsed',
+				'_closed',
 				'_openedOnce',
 				'ref',
-				'collapsedChange',
-				'setCollapsedStatus',
+				'closedChange',
+				'setClosedStatus',
 				'content',
 				'headerButtons',
 				'errorSummaryBreadcrumb',
@@ -25,7 +25,7 @@ export default {
 				'_id',
 				'_title',
 				'addToErrorSummary',
-				'getCollapsedStatus',
+				'getClosedStatus',
 				'ngOnChanges',
 				'ngOnDestroy',
 				'ngOnInit',
@@ -45,7 +45,7 @@ const Template: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
 			[subTitle]="subTitle"
 			[level]="level"
 			[variant]="variant"
-			[collapsed]="collapsed"
+			[closed]="closed"
 			[padding]="padding">
 			<ng-template fudisContent type="expandable">
 				<fudis-body-text>The content of the expandable.</fudis-body-text>
@@ -62,7 +62,7 @@ const ActionTemplate: StoryFn<ExpandableComponent> = (args: ExpandableComponent)
 			[subTitle]="subTitle"
 			[level]="level"
 			[variant]="variant"
-			[collapsed]="collapsed"
+			[closed]="closed"
 			[padding]="padding">
 			<ng-template fudisActions type="expandable">
 				<fudis-button label="Button"></fudis-button>
@@ -78,7 +78,7 @@ export const Expandable = Template.bind({});
 Expandable.args = {
 	variant: 'regular',
 	title: 'Regular expandable',
-	collapsed: true,
+	closed: true,
 	level: 2,
 	padding: 'default',
 };
@@ -88,7 +88,7 @@ ExpandableWithSubTitle.args = {
 	variant: 'regular',
 	title: 'Regular expandable with a sub title',
 	subTitle: 'Use me for an additional information',
-	collapsed: true,
+	closed: true,
 	level: 2,
 	padding: 'default',
 };
@@ -97,7 +97,7 @@ export const ExpandableWithActionButton = ActionTemplate.bind({});
 ExpandableWithActionButton.args = {
 	variant: 'regular',
 	title: 'Regular expandable with an action button',
-	collapsed: true,
+	closed: true,
 	level: 2,
 	padding: 'default',
 };
@@ -106,7 +106,7 @@ export const ExpandableLite = Template.bind({});
 ExpandableLite.args = {
 	variant: 'lite',
 	title: 'Lite expandable',
-	collapsed: true,
+	closed: true,
 	level: 2,
 	padding: 'default',
 };

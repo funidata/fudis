@@ -81,21 +81,21 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 	@Input() errorSummaryBreadcrumb: boolean = false;
 
 	/**
-	 * Expandable is initially collapsed by default but can be controlled by [collapsed] input property
+	 * Expandable is initially closed by default but can be controlled by [closed] input property
 	 */
-	@Input() set collapsed(value: boolean) {
-		this.setCollapsedStatus(value);
+	@Input() set closed(value: boolean) {
+		this.setClosedStatus(value);
 	}
 
 	/**
-	 * Optional output function when the collapsed status changes
+	 * Optional output function when the closed status changes
 	 */
-	@Output() collapsedChange = new EventEmitter<boolean>();
+	@Output() closedChange = new EventEmitter<boolean>();
 
 	/**
-	 * Internal boolean of whether the expandable is currently collapsed
+	 * Internal boolean of whether the expandable is currently closed
 	 */
-	protected _collapsed: boolean = true;
+	protected _closed: boolean = true;
 
 	/**
 	 * Internal id to generate unique id
@@ -127,14 +127,14 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 	 */
 	private _errorSummaryInfoSent: boolean = false;
 
-	public getCollapsedStatus(): boolean {
-		return this._collapsed;
+	public getClosedStatus(): boolean {
+		return this._closed;
 	}
 
-	setCollapsedStatus(value: boolean): void {
-		this._collapsed = value ?? this._collapsed;
-		this._openedOnce = this._openedOnce || !this._collapsed;
-		this.collapsedChange.emit(this._collapsed);
+	setClosedStatus(value: boolean): void {
+		this._closed = value ?? this._closed;
+		this._openedOnce = this._openedOnce || !this._closed;
+		this.closedChange.emit(this._closed);
 	}
 
 	ngOnInit(): void {
