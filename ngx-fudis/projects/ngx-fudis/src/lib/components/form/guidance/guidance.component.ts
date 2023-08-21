@@ -1,15 +1,22 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, effect } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FudisFormErrors, FudisFormGroupErrors } from '../../../types/forms';
+import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'fudis-guidance',
 	templateUrl: './guidance.component.html',
 	styleUrls: ['./guidance.component.scss'],
 })
-export class GuidanceComponent {
+export class GuidanceComponent implements OnInit {
+	constructor(private _translationService: FudisTranslationService) {
+		effect(() => {
+			this._maxLengthText = _translationService.getTranslations()().TEXTINPUT.MAX_LENGTH;
+		});
+	}
+
 	/**
-	 * Id of input, fieldset or similar which Guidance is related to. Used in aria attributes and in emit information for Error Summary Service
+	 * Id of input, fieldset or similar which Guidance is related to. Used in aria attributes and in emit information for Error Summary Service.
 	 */
 	@Input({ required: true }) for: string;
 
@@ -24,7 +31,7 @@ export class GuidanceComponent {
 	@Input() control: FormControl;
 
 	/**
-	 * FormGroup of related FormGroup
+	 * FormGroup of related FormGroup.
 	 */
 	@Input() formGroup: FormGroup;
 
@@ -44,33 +51,35 @@ export class GuidanceComponent {
 	@Input() maxLength: number | undefined = undefined;
 
 	/**
-	 * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where "characters used" is "maxLengthText"
-	 */
-	@Input() maxLengthText: string;
-
-	/**
-	 * Used if FormGroup is associated with Guidance
+	 * Used if FormGroup is associated with Guidance.
 	 */
 	@Input() groupErrorMsg: FudisFormGroupErrors | null | undefined;
 
 	/**
-	 * Used if FormControl is associated with Guidance
+	 * Used if FormControl is associated with Guidance.
 	 */
 	@Input() errorMsg: FudisFormErrors | null | undefined;
+
+	/**
+	 * Used to match FormControl value for an Input Language Options component so that the component can display the length of the entered input for the connected language option.
+	 */
+	@Input() selectedOption: string;
+
+	/**
+	 * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where "characters used" is "maxLengthText".
+	 */
+	protected _maxLengthText: string;
+
+	protected _maxLengthAlertThreshold: number;
+
+	ngOnInit(): void {
+		if (this.maxLength) {
+			this._maxLengthAlertThreshold = this.maxLength - 5;
+		}
+	}
 
 	// eslint-disable-next-line class-methods-use-this
 	asErrorkey(errorKey: any): keyof FudisFormErrors {
 		return errorKey;
-	}
-
-	alertMaxLength(): boolean {
-		if (this.maxLength && typeof this.control?.value === 'string' && this.control.value?.length) {
-			const charactersRemaining = this.maxLength - this.control.value.length;
-
-			if ((charactersRemaining === 5 && this.maxLength >= 5) || charactersRemaining === 0) {
-				return true;
-			}
-		}
-		return false;
 	}
 }
