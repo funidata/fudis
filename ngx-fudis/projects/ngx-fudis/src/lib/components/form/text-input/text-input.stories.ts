@@ -95,7 +95,6 @@ export default {
 		},
 		controls: {
 			exclude: [
-				'_maxLengthText',
 				'classes',
 				'_id',
 				'_required',
