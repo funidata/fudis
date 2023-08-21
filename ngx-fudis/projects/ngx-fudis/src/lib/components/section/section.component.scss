@@ -6,14 +6,24 @@
 	padding: 0;
 
 	&__header {
-		&__container {
+		&__heading {
 			display: flex;
 			align-items: center;
-			margin-bottom: spacing.$spacing-xs;
 
-			&__button {
+			&__tooltip {
 				margin-left: spacing.$spacing-xs;
 			}
+		}
+
+		&__actions {
+			margin-left: auto;
+		}
+
+		&__container {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			margin-bottom: spacing.$spacing-xs;
 		}
 	}
 

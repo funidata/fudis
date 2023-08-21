@@ -13,18 +13,25 @@
 	[marginSides]="marginSides">
 	<div class="fudis-section__header" [id]="_headingId">
 		<div class="fudis-section__header__container">
-			<fudis-heading [marginBottom]="'none'" [tag]="titleTag" [size]="titleSize">{{ _title }}</fudis-heading>
-			<ng-container *ngIf="tooltip">
-				<fudis-button
-					class="fudis-section__header__container__button"
-					[size]="'icon-only'"
-					[variant]="'tertiary'"
-					[icon]="'info-circle'"
-					[labelHidden]="true"
-					[label]="tooltip"
-					[tooltip]="tooltip"
-					[tooltipPosition]="tooltipPosition"
-					[tooltipToggle]="tooltipToggle"></fudis-button>
+			<div class="fudis-section__header__heading">
+				<fudis-heading [marginBottom]="'none'" [tag]="titleTag" [size]="titleSize">{{ _title }}</fudis-heading>
+				<ng-container *ngIf="tooltip">
+					<fudis-button
+						class="fudis-section__header__heading__tooltip"
+						[size]="'icon-only'"
+						[variant]="'tertiary'"
+						[icon]="'info-circle'"
+						[labelHidden]="true"
+						[label]="tooltip"
+						[tooltip]="tooltip"
+						[tooltipPosition]="tooltipPosition"
+						[tooltipToggle]="tooltipToggle"></fudis-button>
+				</ng-container>
+			</div>
+			<ng-container *ngIf="headerActions && headerActions?.type === 'section'">
+				<div class="fudis-section__header__actions">
+					<ng-container *ngTemplateOutlet="headerActions!.templateRef" />
+				</div>
 			</ng-container>
 		</div>
 		<ng-container *ngIf="notifications?.type === 'section'">

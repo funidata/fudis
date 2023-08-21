@@ -9,6 +9,7 @@ import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.direct
 import { FudisSpacing } from '../../types/miscellaneous';
 import { FudisErrorSummaryService } from '../form/error-summary/error-summary.service';
 import { FudisFormErrorSummarySection } from '../../types/forms';
+import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 
 @Component({
 	selector: 'fudis-section',
@@ -26,6 +27,8 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 	@ContentChild(NotificationsDirective) notifications: NotificationsDirective | null;
 
 	@ContentChild(ContentDirective) content: ContentDirective | null;
+
+	@ContentChild(ActionsDirective) headerActions: ActionsDirective | null;
 
 	/**
 	 * Section title
