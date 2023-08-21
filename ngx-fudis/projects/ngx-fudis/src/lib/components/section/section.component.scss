@@ -17,6 +17,10 @@
 
 		&__actions {
 			margin-left: auto;
+
+			fudis-button:not(:last-of-type) {
+				margin-right: spacing.$spacing-sm;
+			}
 		}
 
 		&__container {
