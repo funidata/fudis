@@ -51,22 +51,22 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 	@ContentChild(ActionsDirective) headerButtons: ActionsDirective | null;
 
 	/**
-	 * Title for the expandable
+	 * Title of the expandable
 	 */
 	@Input({ required: true }) title: string;
 
 	/**
-	 * Tag is for semantic support for screen readers, this does not change the appearance of the expandable
+	 * Determines header's semantic aria-level for screen readers, default is equivalent for h2
 	 */
-	@Input() tag: 'h2' | 'h3' | 'h4' | 'h5' | 'h6' = 'h2';
+	@Input() level: number = 2;
 
 	/**
-	 * Type i.e the look of the expandable
+	 * Type i.e visual variant of the expandable
 	 */
 	@Input() variant: FudisExpandableType = 'regular';
 
 	/**
-	 * Set expandable inner content padding.
+	 * Expandable content padding depth
 	 */
 	@Input() padding: 'default' | 'small' = 'default';
 
@@ -81,15 +81,21 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 	@Input() errorSummaryBreadcrumb: boolean = false;
 
 	/**
-	 * Expandable is initially collapsed by default but can be controlled by [collapsed] input property
+	 * Expandable is initially closed by default but can be controlled by [closed] input property
 	 */
-	@Input() set collapsed(value: boolean) {
-		this.setCollapsedStatus(value);
+	@Input() set closed(value: boolean) {
+		this.setClosedStatus(value);
 	}
 
-	@Output() collapsedChange = new EventEmitter<boolean>();
+	/**
+	 * Optional output function when the closed status changes
+	 */
+	@Output() closedChange = new EventEmitter<boolean>();
 
-	protected _collapsed = true;
+	/**
+	 * Internal boolean of whether the expandable is currently closed
+	 */
+	protected _closed: boolean = true;
 
 	/**
 	 * Internal id to generate unique id
@@ -102,9 +108,9 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 	protected _headingId: string;
 
 	/**
-	 *  Lazy loading variable
+	 *  Lazy loading check for expanding content
 	 */
-	protected _openedOnce = false;
+	protected _openedOnce: boolean = false;
 
 	/**
 	 * Internal, separate title property to send to error summary service
@@ -121,14 +127,14 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 	 */
 	private _errorSummaryInfoSent: boolean = false;
 
-	public getCollapsedStatus(): boolean {
-		return this._collapsed;
+	public getClosedStatus(): boolean {
+		return this._closed;
 	}
 
-	setCollapsedStatus(value: boolean): void {
-		this._collapsed = value ?? this._collapsed;
-		this._openedOnce = this._openedOnce || !this._collapsed;
-		this.collapsedChange.emit(this._collapsed);
+	setClosedStatus(value: boolean): void {
+		this._closed = value ?? this._closed;
+		this._openedOnce = this._openedOnce || !this._closed;
+		this.closedChange.emit(this._closed);
 	}
 
 	ngOnInit(): void {
