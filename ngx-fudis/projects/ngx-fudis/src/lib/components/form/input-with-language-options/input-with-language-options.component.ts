@@ -26,7 +26,6 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 		effect(() => {
 			this._languageLabel = this._translations().INPUT_WITH_LANGUAGE_OPTIONS.LANGUAGE;
-
 			this._missingLanguage = this._translations().INPUT_WITH_LANGUAGE_OPTIONS.MISSING;
 		});
 	}
@@ -56,6 +55,11 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	 * Form element to display. Defaults to text-input
 	 */
 	@Input() variant: 'text-input' | 'text-area' = 'text-input';
+
+	/**
+	 * Maximum length for text area, unset by default.
+	 */
+	@Input() maxLength: number | undefined = undefined;
 
 	/**
 	 * Control for language option dropdown
