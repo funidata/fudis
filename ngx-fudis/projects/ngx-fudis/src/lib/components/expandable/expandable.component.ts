@@ -87,9 +87,15 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 		this.setCollapsedStatus(value);
 	}
 
+	/**
+	 * Optional output function when the collapsed status changes
+	 */
 	@Output() collapsedChange = new EventEmitter<boolean>();
 
-	protected _collapsed = true;
+	/**
+	 * Internal boolean of whether the expandable is currently collapsed
+	 */
+	protected _collapsed: boolean = true;
 
 	/**
 	 * Internal id to generate unique id
@@ -104,7 +110,7 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 	/**
 	 *  Lazy loading check for expanding content
 	 */
-	protected _openedOnce = false;
+	protected _openedOnce: boolean = false;
 
 	/**
 	 * Internal, separate title property to send to error summary service
