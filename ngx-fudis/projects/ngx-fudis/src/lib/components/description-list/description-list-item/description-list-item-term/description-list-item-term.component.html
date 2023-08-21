@@ -1,3 +1,9 @@
 <dt class="fudis-dl__item__term fudis-dl-compact__item__term">
 	<ng-content></ng-content><span class="fudis-dl__item__term__colon">:</span>
+	<ng-container *ngIf="_selectedLanguage && _parentLanguageOptions">
+		<fudis-language-badge-group
+			[selectedLanguage]="_selectedLanguage"
+			[languages]="_parentLanguageOptions"
+			(handleBadgeClick)="setSelectedLanguage($event)" />
+	</ng-container>
 </dt>

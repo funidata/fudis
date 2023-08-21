@@ -45,6 +45,7 @@ import { FudisDialogService } from './components/dialog/dialog.service';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
 import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
 import { DropdownMenuItemComponent } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
+
 import { FudisDropdownMenuItemService } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
 import { FudisErrorSummaryService } from './components/form/error-summary/error-summary.service';
@@ -84,7 +85,8 @@ import { DescriptionListItemTermComponent } from './components/description-list/
 import { DescriptionListItemDetailsComponent } from './components/description-list/description-list-item/description-list-item-details/description-list-item-details.component';
 import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
 import { FooterComponent } from './components/footer/footer.component';
-
+import { LanguageBadgeGroupComponent } from './components/language-badge-group/language-badge-group.component';
+import { LanguageBadgeComponent } from './components/language-badge-group/language-badge/language-badge.component';
 import { FudisTranslationService } from './utilities/translation/translation.service';
 
 @NgModule({
@@ -149,6 +151,8 @@ import { FudisTranslationService } from './utilities/translation/translation.ser
 		ContentDirective,
 		ActionsDirective,
 		NotificationsDirective,
+		LanguageBadgeGroupComponent,
+		LanguageBadgeComponent,
 		FooterComponent,
 	],
 	/*
@@ -218,6 +222,7 @@ import { FudisTranslationService } from './utilities/translation/translation.ser
 		HeaderDirective,
 		HeadingComponent,
 		IconComponent,
+		LanguageBadgeGroupComponent,
 		LinkComponent,
 		NotificationComponent,
 		NotificationsDirective,
@@ -231,6 +236,7 @@ import { FudisTranslationService } from './utilities/translation/translation.ser
 		FudisDialogService,
 		FudisErrorSummaryService,
 		FudisGridService,
+
 		FudisDropdownMenuItemService,
 		FudisIdService,
 		FudisTranslationService,
