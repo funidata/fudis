@@ -6,6 +6,7 @@
 		[titleTag]="titleTag">
 		<ng-template fudisActions type="section">
 			<fudis-button [label]="'Some action'" />
+			<fudis-button [label]="'Another action'" />
 		</ng-template>
 		<ng-template fudisNotifications type="section">
 			<fudis-notification>This is notification</fudis-notification>
@@ -19,4 +20,4 @@
 			<fudis-body-text>Some text content inside section</fudis-body-text>
 		</ng-template>
 	</fudis-section> `})).bind({})}}]);
-//# sourceMappingURL=components-section-section-stories.660777dc.iframe.bundle.js.map
+//# sourceMappingURL=components-section-section-stories.74c1c2bc.iframe.bundle.js.map
