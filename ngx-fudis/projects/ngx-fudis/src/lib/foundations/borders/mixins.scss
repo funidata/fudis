@@ -47,3 +47,7 @@
 @mixin border-none() {
 	border: none;
 }
+
+@mixin outline-none() {
+	outline: none;
+}

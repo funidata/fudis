@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { MockComponent } from 'ng-mocks';
 
 import { GridComponent } from '../grid/grid/grid.component';
 import { GridDirective } from '../../directives/grid/grid/grid.directive';
@@ -9,6 +10,8 @@ import { FudisGridService } from '../../directives/grid/grid-service/grid.servic
 import { DescriptionListItemComponent } from './description-list-item/description-list-item.component';
 import { DescriptionListItemTermComponent } from './description-list-item/description-list-item-term/description-list-item-term.component';
 import { DescriptionListItemDetailsComponent } from './description-list-item/description-list-item-details/description-list-item-details.component';
+
+import { LanguageBadgeGroupComponent } from '../language-badge-group/language-badge-group.component';
 
 describe('DescriptionListComponent', () => {
 	let component: DescriptionListComponent;
@@ -23,6 +26,7 @@ describe('DescriptionListComponent', () => {
 				DescriptionListItemComponent,
 				DescriptionListItemTermComponent,
 				DescriptionListItemDetailsComponent,
+				MockComponent(LanguageBadgeGroupComponent),
 			],
 			providers: [FudisGridService],
 		}).compileComponents();

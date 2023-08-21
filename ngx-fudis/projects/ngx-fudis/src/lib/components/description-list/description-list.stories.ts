@@ -84,18 +84,23 @@ DescriptionList.args = {
 const DescriptionListDataLoopTemplate: StoryFn<DescriptionListComponent> = (args: DescriptionListComponent) => ({
 	props: args,
 	template: html`<fudis-heading tag="h2" size="md"> Description List Regular With Data Looping</fudis-heading>
-		<fudis-description-list [data]="data" [marginBottom]="'md'" [variant]="variant" [disableGrid]="disableGrid" />`,
+		<fudis-description-list
+			[data]="data"
+			[marginBottom]="'md'"
+			[variant]="variant"
+			[disableGrid]="disableGrid"
+			[translation]="true" />`,
 });
 
 export const DescriptionListDataLoop = DescriptionListDataLoopTemplate.bind({});
 DescriptionListDataLoop.args = {
 	data: testData,
-	variant: 'compact',
+	variant: 'regular',
 	disableGrid: false,
 };
 
 const TemplateWithDl: StoryFn = () => ({
-	template: html`<fudis-grid [columns]="columns">
+	template: html`<fudis-grid [columns]="columns" [rowGap]="'xs'">
 		<fudis-heading tag="h2" size="md">This is Fudis Grid where DL is used as child component</fudis-heading>
 		<fudis-dl [disableGrid]="true" [data]="lonelyDataItem" />
 		<fudis-body-text
@@ -141,5 +146,28 @@ export const DescriptionListWithSubComponents = DescriptionListWithSubComponents
 DescriptionListWithSubComponents.args = {
 	data: testData,
 	disableGrid: false,
+	variant: 'regular',
+};
+
+const DescriptionListWithLanguagesTemplate: StoryFn<DescriptionListComponent> = (args: DescriptionListComponent) => ({
+	props: args,
+	template: html`<fudis-heading tag="h2" size="md">Description List with Language Badges</fudis-heading>
+		<fudis-description-list [marginBottom]="'md'" [disableGrid]="disableGrid" [variant]="variant">
+			<fudis-description-list-item>
+				<fudis-dt [languages]="true">Example paragraph</fudis-dt>
+				<fudis-dd [lang]="'sv'">Och den här är på Svenska</fudis-dd>
+				<fudis-dd [lang]="'en'">This is in English</fudis-dd>
+				<fudis-dd [lang]="'fi'">Tämä on suomeksi</fudis-dd>
+			</fudis-description-list-item>
+			<fudis-description-list-item>
+				<fudis-dt [languages]="true">Example without one language</fudis-dt>
+				<fudis-dd [lang]="'fi'">Tähtien sota</fudis-dd>
+				<fudis-dd [lang]="'sv'">Stjärnornas krig </fudis-dd>
+			</fudis-description-list-item>
+		</fudis-description-list> `,
+});
+
+export const DescriptionListWithLanguages = DescriptionListWithLanguagesTemplate.bind({});
+DescriptionListWithLanguages.args = {
 	variant: 'regular',
 };

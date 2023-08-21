@@ -88,12 +88,11 @@ export type FudisDropdownLanguageOption =
 	| { value: 'finnish'; viewValue: 'FI' }
 	| { value: 'swedish'; viewValue: 'SV' }
 	| { value: 'english'; viewValue: 'EN' }
-	| { value: string; viewValue: string };
+	| { value: FudisLanguageAbbr; viewValue: string };
 
 export interface FudisInputWithLanguageOptionsFormGroup {
 	[language: string]: FormControl<string | null>;
 }
-
 export interface FudisDateRangeItem {
 	control: FormControl<Date | null>;
 	label: string;

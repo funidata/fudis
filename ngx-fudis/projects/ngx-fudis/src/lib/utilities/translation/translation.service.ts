@@ -33,7 +33,7 @@ export class FudisTranslationService {
 	}
 
 	/**
-	 * Get application's tranlastion config values
+	 * Get application's translation config values
 	 */
 	getTranslations(): Signal<FudisTranslationConfig> {
 		return this._translations.asReadonly();
