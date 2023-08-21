@@ -2,11 +2,27 @@
 	[id]="_id"
 	[attr.aria-describedby]="_headingId"
 	class="fudis-expandable fudis-expandable__{{ variant }}"
-	[class.fudis-expandable--collapsed]="_collapsed">
+	[class.fudis-expandable--closed]="_closed">
 	<div class="fudis-expandable__header fudis-expandable__header__{{ variant }}">
-		<ng-container
-			*ngTemplateOutlet="tag === 'h2' ? h2 : tag === 'h3' ? h3 : tag === 'h4' ? h4 : tag === 'h5' ? h5 : h6">
-		</ng-container>
+		<div role="heading" [attr.aria-level]="level" [id]="_headingId" class="fudis-expandable__header__heading">
+			<button
+				type="button"
+				class="fudis-expandable__header__heading__button fudis-expandable__header__heading__button__{{ variant }}"
+				[attr.aria-expanded]="!_closed"
+				(click)="setClosedStatus(!_closed)">
+				<fudis-icon
+					class="fudis-expandable__header__heading__button__icon fudis-expandable__header__heading__button__icon__{{
+						variant
+					}}"
+					[icon]="variant === 'lite' ? 'chevron' : 'chevron-ring-fill'"
+					[color]="variant === 'lite' ? 'primary' : 'default'"
+					[rotate]="_closed ? 'none' : 'cw-90'"></fudis-icon
+				>{{ _title }}
+				<span *ngIf="variant !== 'lite' && subTitle" class="fudis-expandable__header__heading__button__sub-heading">{{
+					subTitle
+				}}</span>
+			</button>
+		</div>
 		<ng-container *ngIf="headerButtons?.type === 'expandable'">
 			<div class="fudis-expandable__header__buttons">
 				<ng-container *ngTemplateOutlet="headerButtons!.templateRef"></ng-container>
@@ -16,59 +32,10 @@
 	<div
 		class="fudis-expandable__content fudis-expandable__content__padding-{{ padding }}"
 		*ngIf="_openedOnce"
-		[attr.aria-hidden]="_collapsed"
-		[hidden]="_collapsed">
+		[attr.aria-hidden]="_closed"
+		[hidden]="_closed">
 		<ng-container *ngIf="content?.type === 'expandable'">
 			<ng-container *ngTemplateOutlet="content!.templateRef"></ng-container>
 		</ng-container>
 	</div>
 </section>
-<ng-template #h2>
-	<h2 [id]="_headingId" class="fudis-expandable__header__heading">
-		<ng-container *ngTemplateOutlet="header"></ng-container>
-	</h2>
-</ng-template>
-
-<ng-template #h3>
-	<h3 [id]="_headingId" class="fudis-expandable__header__heading">
-		<ng-container *ngTemplateOutlet="header"></ng-container>
-	</h3>
-</ng-template>
-
-<ng-template #h4>
-	<h4 [id]="_headingId" class="fudis-expandable__header__heading">
-		<ng-container *ngTemplateOutlet="header"></ng-container>
-	</h4>
-</ng-template>
-
-<ng-template #h5>
-	<h5 [id]="_headingId" class="fudis-expandable__header__heading">
-		<ng-container *ngTemplateOutlet="header"></ng-container>
-	</h5>
-</ng-template>
-
-<ng-template #h6>
-	<h6 [id]="_headingId" class="fudis-expandable__header__heading">
-		<ng-container *ngTemplateOutlet="header"></ng-container>
-	</h6>
-</ng-template>
-
-<ng-template #header>
-	<button
-		type="button"
-		class="fudis-expandable__header__heading__button fudis-expandable__header__heading__button__{{ variant }}"
-		[attr.aria-expanded]="!_collapsed"
-		(click)="setCollapsedStatus(!_collapsed)">
-		<fudis-icon
-			class="fudis-expandable__header__heading__button__icon fudis-expandable__header__heading__button__icon__{{
-				variant
-			}}"
-			[icon]="variant === 'lite' ? 'chevron' : 'chevron-ring-fill'"
-			[color]="variant === 'lite' ? 'primary' : 'default'"
-			[rotate]="_collapsed ? 'none' : 'cw-90'"></fudis-icon
-		>{{ _title }}
-		<span *ngIf="variant !== 'lite' && subTitle" class="fudis-expandable__header__heading__button__sub-heading">{{
-			subTitle
-		}}</span>
-	</button>
-</ng-template>
