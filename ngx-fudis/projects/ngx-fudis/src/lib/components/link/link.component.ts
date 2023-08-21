@@ -7,7 +7,7 @@ import { FudisTranslationConfig } from '../../types/miscellaneous';
  *
  * Inside another element e.g. fudis-heading
  * ```
- * <fudis-heading [tag]="'h3'">
+ * <fudis-heading [level]="3">
  * 		<fudis-link
  *     		[href]="/path-to"
  *     		[linkTitle]="'Heading link'">

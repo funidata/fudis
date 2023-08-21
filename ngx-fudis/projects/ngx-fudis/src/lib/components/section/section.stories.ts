@@ -31,7 +31,7 @@ const html = String.raw;
 const Template: StoryFn = () => ({
 	props: {
 		title: 'This is title of section',
-		titleTag: 'h2',
+		titleLevel: 2,
 		titleSize: 'xl',
 	},
 
@@ -40,7 +40,7 @@ const Template: StoryFn = () => ({
 		[title]="title"
 		[tooltip]="'More info about this section'"
 		[titleSize]="titleSize"
-		[titleTag]="titleTag">
+		[titleLevel]="titleLevel">
 		<ng-template fudisNotifications type="section">
 			<fudis-notification>This is notification</fudis-notification>
 		</ng-template>

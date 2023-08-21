@@ -1,5 +1,5 @@
 import { Component, Input, HostBinding, ViewEncapsulation, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { FudisHeadingSize, FudisHeadingTag } from '../../../types/typography';
+import { FudisHeadingLevel, FudisHeadingSize } from '../../../types/typography';
 import { FudisIdService } from '../../../utilities/id-service.service';
 import { FudisSpacing } from '../../../types/miscellaneous';
 
@@ -16,9 +16,9 @@ export class HeadingComponent implements OnInit {
 	@HostBinding('class') mainClass = 'fudis-heading-host';
 
 	/**
-	 * Heading tag
+	 * ∑emantic level of heading
 	 */
-	@Input({ required: true }) tag: FudisHeadingTag;
+	@Input({ required: true }) level: FudisHeadingLevel;
 
 	/**
 	 * Heading size

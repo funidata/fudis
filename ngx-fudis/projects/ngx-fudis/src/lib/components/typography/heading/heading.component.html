@@ -1,10 +1,9 @@
 <ng-container
 	*ngTemplateOutlet="
-		tag === 'h1' ? h1 : tag === 'h2' ? h2 : tag === 'h3' ? h3 : tag === 'h4' ? h4 : tag === 'h5' ? h5 : h6
+		level === 1 ? h1 : level === 2 ? h2 : level === 3 ? h3 : level === 4 ? h4 : level === 5 ? h5 : h6
 	"></ng-container>
 
-<!-- From @Input choose which h-tag to render -->
-
+<!-- From level @Input choose which h-tag to render -->
 <ng-template #h1>
 	<h1 [id]="_id" [class]="_classList">
 		<ng-container *ngTemplateOutlet="headingContent"></ng-container>
@@ -42,7 +41,6 @@
 </ng-template>
 
 <!-- Render content inside fudis-heading tags -->
-
 <ng-template #headingContent>
 	<ng-content></ng-content>
 </ng-template>

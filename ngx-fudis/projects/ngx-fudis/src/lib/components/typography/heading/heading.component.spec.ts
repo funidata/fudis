@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { HeadingComponent } from './heading.component';
-import { FudisHeadingSize, FudisHeadingTag } from '../../../types/typography';
+import { FudisHeadingSize, FudisHeadingLevel } from '../../../types/typography';
 import { FudisSpacing } from '../../../types/miscellaneous';
 
 describe('HeadingComponent', () => {
@@ -24,22 +24,22 @@ describe('HeadingComponent', () => {
 		fixture.detectChanges();
 	});
 
-	function getHeading(tag: FudisHeadingTag): HTMLElement {
+	function getHeading(level: FudisHeadingLevel): HTMLElement {
 		fixture.detectChanges();
-		return fixture.debugElement.nativeElement.querySelector(tag) as HTMLElement;
+		return fixture.debugElement.nativeElement.querySelector(`h${level}`) as HTMLElement;
 	}
 
-	function assertHeadingHasClasses(classes: string, tag: FudisHeadingTag): void {
+	function assertHeadingHasClasses(classes: string, tag: FudisHeadingLevel): void {
 		const headingClasses = getHeading(tag)?.className.split(' ').sort();
 		expect(headingClasses).toEqual(classes.split(' ').sort());
 	}
 
-	function headingCheck(size: FudisHeadingSize, marginBottom: FudisSpacing, tag: FudisHeadingTag): void {
+	function headingCheck(size: FudisHeadingSize, marginBottom: FudisSpacing, level: FudisHeadingLevel): void {
 		component.size = size;
 		component.marginBottom = marginBottom;
-		component.tag = tag;
+		component.level = level;
 		component.ngOnInit();
-		assertHeadingHasClasses(`fudis-heading fudis-heading__${size} fudis-mb-${marginBottom}`, tag);
+		assertHeadingHasClasses(`fudis-heading fudis-heading__${size} fudis-mb-${marginBottom}`, level);
 	}
 
 	it('should create', () => {
@@ -48,18 +48,18 @@ describe('HeadingComponent', () => {
 
 	describe('CSS classes', () => {
 		it('should have respective size, margin bottom and tag values according to given Inputs', () => {
-			headingCheck('xxl', 'xxl', 'h1');
-			headingCheck('xl', 'xl', 'h2');
-			headingCheck('lg', 'lg', 'h3');
-			headingCheck('md', 'md', 'h3');
-			headingCheck('sm', 'sm', 'h4');
-			headingCheck('xs', 'xs', 'h5');
-			headingCheck('xxs', 'xxs', 'h6');
-			headingCheck('xxs', 'none', 'h6');
+			headingCheck('xxl', 'xxl', 1);
+			headingCheck('xl', 'xl', 2);
+			headingCheck('lg', 'lg', 3);
+			headingCheck('md', 'md', 4);
+			headingCheck('sm', 'sm', 5);
+			headingCheck('xs', 'xs', 5);
+			headingCheck('xxs', 'xxs', 6);
+			headingCheck('xxs', 'none', 6);
 		});
 	});
 
 	it('should have default classes', () => {
-		assertHeadingHasClasses('fudis-heading fudis-heading__lg fudis-mb-xs', 'h6');
+		assertHeadingHasClasses('fudis-heading fudis-heading__lg fudis-mb-xs', 6);
 	});
 });
