@@ -70,25 +70,12 @@ export class GuidanceComponent implements OnInit {
 	 */
 	protected _maxLengthText: string;
 
-	protected _currentLength: number;
-
-	protected _maxLengthAlertThreshold: number = 5;
+	protected _maxLengthAlertThreshold: number;
 
 	ngOnInit(): void {
 		if (this.maxLength) {
 			this._maxLengthAlertThreshold = this.maxLength - 5;
 		}
-
-		// if (this.formGroup && this.maxLength) {
-		// 	this.formGroup.valueChanges.subscribe((val) => {
-		// 		console.log(val);
-		// 	});
-		// }
-		// if (this.control && this.maxLength) {
-		// 	this.control.valueChanges.subscribe((val) => {
-		// 		console.log(val);
-		// 	});
-		// }
 	}
 
 	// eslint-disable-next-line class-methods-use-this
