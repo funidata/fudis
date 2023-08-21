@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding, OnInit, OnChanges, effect, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, Input, HostBinding, OnInit, OnChanges } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
@@ -17,10 +17,6 @@ export class TextInputComponent extends InputBaseDirective implements OnInit, On
 		_translationService: FudisTranslationService
 	) {
 		super(_translationService);
-
-		effect(() => {
-			this._maxLengthText = this._translations().TEXTINPUT.MAX_LENGTH;
-		});
 	}
 
 	@HostBinding('class') classes = 'fudis-text-input-host';
@@ -59,11 +55,6 @@ export class TextInputComponent extends InputBaseDirective implements OnInit, On
 	 * Maximum number allowed by number input's maxNumber
 	 */
 	@Input() maxNumber: number;
-
-	/**
-	 * Assistive text of max character count for screen readers
-	 */
-	protected _maxLengthText: string;
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('textInput');
