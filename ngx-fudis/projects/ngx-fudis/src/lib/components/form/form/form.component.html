@@ -16,9 +16,9 @@
 	[marginSides]="marginSides">
 	<div [id]="_id + '_header'" class="fudis-form__header">
 		<div class="fudis-form__header__main">
-			<ng-container *ngIf="title && titleTag">
+			<ng-container *ngIf="title && titleLevel">
 				<div class="fudis-form__header__title">
-					<fudis-heading [marginBottom]="'xs'" [size]="titleSize" [tag]="titleTag"
+					<fudis-heading [marginBottom]="'xs'" [size]="titleSize" [level]="titleLevel"
 						>{{ title }}
 
 						<ng-container *ngIf="badge && badgeText">

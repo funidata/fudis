@@ -1,6 +1,6 @@
 import { Component, ContentChild, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { FudisIdService } from '../../utilities/id-service.service';
-import { FudisHeadingTag, FudisHeadingSize } from '../../types/typography';
+import { FudisHeadingSize, FudisHeadingLevel } from '../../types/typography';
 import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisGridWidth, FudisGridAlign, FudisGridMarginSide } from '../../types/grid';
@@ -38,9 +38,9 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 	@Input() id: string;
 
 	/**
-	 * Heading tag for the section title
+	 * Heading level for the section title
 	 */
-	@Input() titleTag: FudisHeadingTag = 'h2';
+	@Input() titleLevel: FudisHeadingLevel = 2;
 
 	/**
 	 * Heading size for the section title

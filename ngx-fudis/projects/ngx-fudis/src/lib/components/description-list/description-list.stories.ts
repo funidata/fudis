@@ -83,7 +83,7 @@ DescriptionList.args = {
 
 const DescriptionListDataLoopTemplate: StoryFn<DescriptionListComponent> = (args: DescriptionListComponent) => ({
 	props: args,
-	template: html`<fudis-heading tag="h2" size="md"> Description List Regular With Data Looping</fudis-heading>
+	template: html`<fudis-heading [level]="2" size="md"> Description List Regular With Data Looping</fudis-heading>
 		<fudis-description-list
 			[data]="data"
 			[marginBottom]="'md'"
@@ -101,7 +101,7 @@ DescriptionListDataLoop.args = {
 
 const TemplateWithDl: StoryFn = () => ({
 	template: html`<fudis-grid [columns]="columns" [rowGap]="'xs'">
-		<fudis-heading tag="h2" size="md">This is Fudis Grid where DL is used as child component</fudis-heading>
+		<fudis-heading [level]="2" size="md">This is Fudis Grid where DL is used as child component</fudis-heading>
 		<fudis-dl [disableGrid]="true" [data]="lonelyDataItem" />
 		<fudis-body-text
 			>Item next to this Body Text is a lonely Description List component with only one list item. This and DL item are
@@ -126,7 +126,7 @@ const DescriptionListWithSubComponentsTemplate: StoryFn<DescriptionListComponent
 	args: DescriptionListComponent
 ) => ({
 	props: args,
-	template: html`<fudis-heading tag="h2" size="md">Description list built with sub components</fudis-heading>
+	template: html`<fudis-heading [level]="2" size="md">Description list built with sub components</fudis-heading>
 		<fudis-description-list [marginBottom]="'md'" [disableGrid]="disableGrid" [variant]="variant">
 			<fudis-description-list-item *ngFor="let item of data; let i = index">
 				<fudis-dt>{{item.key}}</fudis-dt>
