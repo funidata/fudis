@@ -16,7 +16,7 @@ export class HeadingComponent implements OnInit {
 	@HostBinding('class') mainClass = 'fudis-heading-host';
 
 	/**
-	 * ∑emantic level of heading
+	 * Semantic level of heading
 	 */
 	@Input({ required: true }) level: FudisHeadingLevel;
 
