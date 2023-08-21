@@ -30,6 +30,8 @@ export interface FudisTranslationConfig {
 		LANGUAGE: string;
 		// Text shown in dropdown options if input for a language is missing
 		MISSING: string;
+		// Assistive text of max character count for screen readers
+		MAX_LENGTH: string;
 	};
 	LINK: {
 		// External link icon aria-label
