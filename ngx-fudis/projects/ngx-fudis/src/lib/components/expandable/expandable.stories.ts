@@ -1,18 +1,36 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { ExpandableComponent } from './expandable.component';
+import readme from './readme.mdx';
 
 export default {
 	title: 'Components/Expandable',
 	component: ExpandableComponent,
-	argTypes: {
-		tag: {
-			options: ['h2', 'h3', 'h4', 'h5', 'h6'],
-			control: { type: 'radio' },
-		},
-	},
 	parameters: {
+		docs: {
+			page: readme,
+		},
 		controls: {
-			exclude: ['_collapsed', 'openedOnce', 'ref', 'collapsedChange', 'setCollapsedStatus', 'content', 'headerButtons'],
+			exclude: [
+				'_closed',
+				'_openedOnce',
+				'ref',
+				'closedChange',
+				'setClosedStatus',
+				'content',
+				'headerButtons',
+				'errorSummaryBreadcrumb',
+				'_errorSummaryInfo',
+				'_errorSummaryInfoSent',
+				'_headingId',
+				'_id',
+				'_title',
+				'addToErrorSummary',
+				'getClosedStatus',
+				'ngOnChanges',
+				'ngOnDestroy',
+				'ngOnInit',
+				'removeFromErrorSummary',
+			],
 		},
 	},
 } as Meta;
@@ -22,9 +40,35 @@ const html = String.raw;
 const Template: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
 	props: args,
 	template: html`
-		<fudis-expandable [title]="title" [subTitle]="subTitle">
+		<fudis-expandable
+			[title]="title"
+			[subTitle]="subTitle"
+			[level]="level"
+			[variant]="variant"
+			[closed]="closed"
+			[padding]="padding">
 			<ng-template fudisContent type="expandable">
-				<fudis-body-text>Hey you! I am the content of the expandable.</fudis-body-text>
+				<fudis-body-text>The content of the expandable.</fudis-body-text>
+			</ng-template>
+		</fudis-expandable>
+	`,
+});
+
+const ActionTemplate: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
+	props: args,
+	template: html`
+		<fudis-expandable
+			[title]="title"
+			[subTitle]="subTitle"
+			[level]="level"
+			[variant]="variant"
+			[closed]="closed"
+			[padding]="padding">
+			<ng-template fudisActions type="expandable">
+				<fudis-button label="Button"></fudis-button>
+			</ng-template>
+			<ng-template fudisContent type="expandable">
+				<fudis-body-text>The content of the expandable.</fudis-body-text>
 			</ng-template>
 		</fudis-expandable>
 	`,
@@ -34,61 +78,67 @@ export const Expandable = Template.bind({});
 Expandable.args = {
 	variant: 'regular',
 	title: 'Regular expandable',
-	collapsed: true,
+	closed: true,
+	level: 2,
+	padding: 'default',
 };
 
-const SubTitleTemplate: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
-	props: args,
-	template: html`
-		<fudis-expandable [title]="title" [subTitle]="subTitle">
-			<ng-template fudisContent type="expandable">
-				<fudis-body-text>Hey you! I am the content of the expandable.</fudis-body-text>
-			</ng-template>
-		</fudis-expandable>
-	`,
-});
-
-export const ExpandableWithSubTitle = SubTitleTemplate.bind({});
+export const ExpandableWithSubTitle = Template.bind({});
 ExpandableWithSubTitle.args = {
 	variant: 'regular',
-	title: 'Expandable with a sub title',
-	subTitle: 'This is my sub title for extra info',
-	collapsed: true,
+	title: 'Regular expandable with a sub title',
+	subTitle: 'Use me for an additional information',
+	closed: true,
+	level: 2,
+	padding: 'default',
 };
-
-const ActionTemplate: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
-	props: args,
-	template: html`
-		<fudis-expandable [title]="title" [subTitle]="subTitle">
-			<ng-template fudisActions type="expandable">
-				<fudis-button label="Button"></fudis-button>
-			</ng-template>
-			<ng-template fudisContent type="expandable">
-				<fudis-body-text>Hey you! I am the content of the expandable.</fudis-body-text>
-			</ng-template>
-		</fudis-expandable>
-	`,
-});
 
 export const ExpandableWithActionButton = ActionTemplate.bind({});
 ExpandableWithActionButton.args = {
 	variant: 'regular',
-	title: 'Expandable with a header action button',
-	collapsed: true,
+	title: 'Regular expandable with an action button',
+	closed: true,
+	level: 2,
+	padding: 'default',
 };
 
-const LiteTemplate: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
-	props: args,
+export const ExpandableLite = Template.bind({});
+ExpandableLite.args = {
+	variant: 'lite',
+	title: 'Lite expandable',
+	closed: true,
+	level: 2,
+	padding: 'default',
+};
+
+export const AllVariants: StoryFn = () => ({
 	template: html`
-		<fudis-expandable [title]="'Expandable lite'" [variant]="'lite'" [padding]="'small'">
-			<ng-template fudisContent type="expandable">
-				<fudis-body-text>You might want to use me with padding small.</fudis-body-text>
-			</ng-template>
-		</fudis-expandable>
+		<fudis-grid [align]="'start'" [width]="'xl'">
+			<fudis-expandable [title]="'Regular expandable'">
+				<ng-template fudisContent type="expandable">
+					<fudis-body-text>The content of the expandable.</fudis-body-text>
+				</ng-template>
+			</fudis-expandable>
+			<fudis-expandable
+				[title]="'Regular expandable with sub title'"
+				[subTitle]="'Use me for an additional information'">
+				<ng-template fudisContent type="expandable">
+					<fudis-body-text>The content of the expandable.</fudis-body-text>
+				</ng-template>
+			</fudis-expandable>
+			<fudis-expandable [title]="'Regular expandable with an action button'">
+				<ng-template fudisActions type="expandable">
+					<fudis-button label="Button"></fudis-button>
+				</ng-template>
+				<ng-template fudisContent type="expandable">
+					<fudis-body-text>The content of the expandable.</fudis-body-text>
+				</ng-template>
+			</fudis-expandable>
+			<fudis-expandable [title]="'Lite expandable'" [variant]="'lite'" [padding]="'small'">
+				<ng-template fudisContent type="expandable">
+					<fudis-body-text>The content of the expandable with padding small.</fudis-body-text>
+				</ng-template>
+			</fudis-expandable>
+		</fudis-grid>
 	`,
 });
-
-export const ExpandableLite = LiteTemplate.bind({});
-LiteTemplate.args = {
-	collapsed: true,
-};

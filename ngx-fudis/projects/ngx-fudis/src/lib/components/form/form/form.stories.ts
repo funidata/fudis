@@ -48,9 +48,9 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 				<fudis-section [title]="'Main section'">
 					<ng-template fudisContent type="section">
 						<fudis-expandable
-							(collapsedChange)="handleCollapsedOutput($event)"
+							(closedChange)="handleClosedOutput($event)"
 							[title]="'Expandable section 1'"
-							[collapsed]="_collapsed">
+							[closed]="_closed">
 							<ng-template fudisContent type="expandable">
 								<fudis-grid>
 									<fudis-fieldset
@@ -136,7 +136,7 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 								</fudis-grid>
 							</ng-template>
 						</fudis-expandable>
-						<fudis-expandable [collapsed]="_collapsed" [title]="'Expandable section 2'" [errorSummaryBreadcrumb]="true">
+						<fudis-expandable [closed]="_closed" [title]="'Expandable section 2'" [errorSummaryBreadcrumb]="true">
 							<ng-template fudisContent type="expandable">
 								<fudis-fieldset [title]="'More important dates'">
 									<ng-template fudisContent type="fieldset">
@@ -283,7 +283,7 @@ class FormContentExampleComponent {
 		},
 	};
 
-	private _collapsed: boolean = true;
+	private _closed: boolean = true;
 
 	submitForm(): void {
 		this.fieldsetExample.markAllAsTouched();
@@ -291,7 +291,7 @@ class FormContentExampleComponent {
 		this.firstLoad = false;
 
 		if (this.fieldsetExample.invalid) {
-			this._collapsed = false;
+			this._closed = false;
 			this.errorSummaryVisible = true;
 			this._errorSummaryService.reloadErrors();
 		} else {
@@ -313,8 +313,8 @@ class FormContentExampleComponent {
 		}
 	}
 
-	handleCollapsedOutput(value: boolean): void {
-		this._collapsed = value;
+	handleClosedOutput(value: boolean): void {
+		this._closed = value;
 	}
 }
 
