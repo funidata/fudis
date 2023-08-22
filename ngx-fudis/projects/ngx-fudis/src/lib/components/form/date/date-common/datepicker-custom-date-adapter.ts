@@ -11,22 +11,25 @@ export class DatepickerCustomDateAdapter extends NativeDateAdapter {
 	 */
 
 	override parse(value: any): Date | null {
-		// Split input value by non number values. E. g. 23/5/2023 --> [23,5,2023]
+		// Split input value by non number values. E. g. 25/5/1977 or 25.5.1977 --> [25,5,1977]
 		const valueAsArray = value.split(/[^\d+]+/).filter(Number);
 
-		// Switch position of first two items. As en-US format is MM/DD/YYYY, so we want to parse the input as DD/MM/YYYY
-		if (valueAsArray.length > 1) {
-			[valueAsArray[0], valueAsArray[1]] = [valueAsArray[1], valueAsArray[0]];
-		}
-		const joinedArray = valueAsArray.join('.');
-
-		if (typeof joinedArray === 'number') {
-			return new Date(joinedArray);
+		// Parse input and return new Date(YYYY-MM-DD)
+		if (valueAsArray.length === 3) {
+			return new Date(`${valueAsArray[2]}-${valueAsArray[1]}-${valueAsArray[0]}`);
 		}
 
-		const returnValue = joinedArray ? new Date(Date.parse(joinedArray)) : null;
+		// If no year is provided, assume it is current year
+		if (valueAsArray.length === 2) {
+			const currentYear = new Date().getFullYear();
+			return new Date(`${valueAsArray[1]}-${valueAsArray[0]}-${currentYear}`);
+		}
 
-		return returnValue;
+		if (typeof valueAsArray[0] === 'number') {
+			return new Date(valueAsArray[0]);
+		}
+
+		return null;
 	}
 
 	override format(date: Date, displayFormat: Object): string {

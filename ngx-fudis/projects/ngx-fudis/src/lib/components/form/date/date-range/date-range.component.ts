@@ -120,13 +120,14 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
 		const startDateErrors = this.startDate.control.errors;
 		const endDateErrors = this.endDate.control.errors;
 
-		if (
-			this.startDate.control.value &&
-			this.endDate.control.value &&
-			this.startDate.control.value > this.endDate.control.value
-		) {
-			this.startDate.control.setErrors({ ...startDateErrors, matStartDateInvalid: true });
-			this.endDate.control.setErrors({ ...endDateErrors, matEndDateInvalid: true });
+		if (this.startDate.control.value && this.endDate.control.value) {
+			const startDate = this.startDate.control.value;
+			const endDate = this.endDate.control.value;
+
+			if (startDate.setHours(0, 0, 0, 0) > endDate.setHours(0, 0, 0, 0)) {
+				this.startDate.control.setErrors({ ...startDateErrors, matStartDateInvalid: true });
+				this.endDate.control.setErrors({ ...endDateErrors, matEndDateInvalid: true });
+			}
 		} else if (startDateErrors || endDateErrors) {
 			if (startDateErrors) {
 				delete startDateErrors['matStartDateInvalid'];
