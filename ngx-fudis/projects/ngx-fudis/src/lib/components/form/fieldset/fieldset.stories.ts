@@ -11,7 +11,7 @@ import {
 } from '../../../types/forms';
 
 import { FieldSetComponent } from './fieldset.component';
-import { FormGroupValidators } from '../../../utilities/form/validators';
+import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 
 @Component({
 	selector: 'example-fieldset',
@@ -168,7 +168,7 @@ class FieldsetExampleComponent {
 				swedish: new FormControl(''),
 				english: new FormControl(''),
 			},
-			[FormGroupValidators.atLeastOneRequired()]
+			[FudisFormGroupValidators.atLeastOneRequired()]
 		),
 		description: new FormGroup({
 			finnish: new FormControl('', [Validators.required, Validators.minLength(10)]),

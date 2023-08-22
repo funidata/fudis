@@ -1,7 +1,30 @@
-import { StoryFn, Meta } from '@storybook/angular';
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 
+import { Component } from '@angular/core';
 import { DescriptionListComponent } from './description-list.component';
 import readme from './readme.mdx';
+import { FudisLanguageBadgeGroupService } from '../language-badge-group/language-badge-group.service';
+import { FudisLanguageAbbr } from '../../types/miscellaneous';
+
+@Component({
+	selector: 'example-language-service-change-component',
+	template: `
+		<fudis-grid [columns]="3" [width]="'sm'"
+			><fudis-button [label]="'Change to: fi, sv'" (handleClick)="changeBadgeLanguages(['fi', 'sv'])" />
+			<fudis-button [label]="'Change to: sv, en'" (handleClick)="changeBadgeLanguages(['sv', 'en'])" />
+			<fudis-button [label]="'Change to: sv, fi, en'" (handleClick)="changeBadgeLanguages(['sv', 'fi', 'en'])"
+		/></fudis-grid>
+	`,
+})
+class LanguageChangeComponent {
+	constructor(private _languageService: FudisLanguageBadgeGroupService) {
+		this._languageService.setLanguages(['sv', 'fi', 'en']);
+	}
+
+	changeBadgeLanguages(languages: FudisLanguageAbbr[]): void {
+		this._languageService.setLanguages(languages);
+	}
+}
 
 const html = String.raw;
 
@@ -28,6 +51,11 @@ const commonExclude = [
 export default {
 	title: 'Components/Description List',
 	component: DescriptionListComponent,
+	decorators: [
+		moduleMetadata({
+			declarations: [LanguageChangeComponent],
+		}),
+	],
 	parameters: {
 		docs: {
 			page: readme,
@@ -164,7 +192,9 @@ const DescriptionListWithLanguagesTemplate: StoryFn<DescriptionListComponent> = 
 				<fudis-dd [lang]="'fi'">Tähtien sota</fudis-dd>
 				<fudis-dd [lang]="'sv'">Stjärnornas krig </fudis-dd>
 			</fudis-description-list-item>
-		</fudis-description-list> `,
+		</fudis-description-list>
+
+		<example-language-service-change-component /> `,
 });
 
 export const DescriptionListWithLanguages = DescriptionListWithLanguagesTemplate.bind({});

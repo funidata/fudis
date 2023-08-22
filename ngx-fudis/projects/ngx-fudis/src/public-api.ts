@@ -57,6 +57,7 @@ export { HeaderDirective } from './lib/directives/content-projection/header/head
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
 export { IconComponent } from './lib/components/icon/icon.component';
 export { LanguageBadgeGroupComponent } from './lib/components/language-badge-group/language-badge-group.component';
+export { FudisLanguageBadgeGroupService } from './lib/components/language-badge-group/language-badge-group.service';
 export { LinkComponent } from './lib/components/link/link.component';
 export { NotificationsDirective } from './lib/directives/content-projection/notifications/notifications.directive';
 export { NotificationComponent } from './lib/components/notification/notification.component';
@@ -68,3 +69,5 @@ export { TextAreaComponent } from './lib/components/form/text-area/text-area.com
 export { TextInputComponent } from './lib/components/form/text-input/text-input.component';
 // export { TextSpacingComponent } from './lib/components/typography/text-spacing/text-spacing.component';
 export { TooltipDirective } from './lib/directives/tooltip/tooltip.directive';
+
+export { FudisFormGroupValidators } from './lib/utilities/form/validators';
