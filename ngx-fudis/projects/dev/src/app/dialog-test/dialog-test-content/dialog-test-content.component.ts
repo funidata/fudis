@@ -6,10 +6,10 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 	selector: 'app-dialog-test-content',
 	template: `
 		<fudis-dialog [closeButtonLabel]="'Close'" [size]="'lg'">
-			<fudis-heading fudisDialogTitle tag="h2">Dialog with fudis-grid and scrollable content</fudis-heading>
+			<fudis-heading fudisDialogTitle [level]="2">Dialog with fudis-grid and scrollable content</fudis-heading>
 			<fudis-dialog-content>
 				<fudis-grid [marginTop]="'md'" [marginBottom]="'md'">
-					<fudis-heading [tag]="'h3'" [size]="'sm'">
+					<fudis-heading [level]="3" [size]="'sm'">
 						I am fudis-heading inside the grid taking the whole width
 					</fudis-heading>
 					<fudis-body-text>

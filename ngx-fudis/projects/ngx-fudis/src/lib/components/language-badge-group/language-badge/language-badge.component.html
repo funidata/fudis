@@ -1,0 +1,13 @@
+<button
+	type="button"
+	fudisTooltip
+	class="fudis-language-badge fudis-language-badge__{{ variant }}"
+	[class.fudis-language-badge--selected]="selected"
+	[tooltip]="_label"
+	[tooltipPosition]="tooltipPosition"
+	[tooltipToggle]="tooltipToggle"
+	[attr.aria-label]="_label"
+	[attr.aria-disabled]="variant === 'missing' ? true : null"
+	(click)="variant !== 'missing' && handleLanguageSelect()">
+	{{ language }}
+</button>

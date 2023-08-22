@@ -1,13 +1,13 @@
 <ng-container *transloco="let t">
 	<div class="root-style">
 		<fudis-grid>
-			<fudis-heading [tag]="'h1'" [size]="'xl'">Welcome to Fudis sandbox </fudis-heading>
+			<fudis-heading [level]="1" [size]="'xl'">Welcome to Fudis sandbox </fudis-heading>
 			<fudis-notification variant="danger" ariaVariantText="Varoitus!"
 				>Whoops! Here is danger notification.</fudis-notification
 			>
 
 			<div>
-				<fudis-heading [tag]="'h3'">
+				<fudis-heading [level]="3">
 					<fudis-link [href]="'#'" [linkTitle]="'Link inside a heading'"></fudis-link>
 				</fudis-heading>
 			</div>
@@ -44,7 +44,7 @@
 
 			<fudis-expandable [title]="'Grid stuff'">
 				<ng-template fudisContent type="expandable">
-					<fudis-heading [tag]="'h3'" [size]="'xl'">Väliotsikko</fudis-heading>
+					<fudis-heading [level]="3" [size]="'xl'">Väliotsikko</fudis-heading>
 					<fudis-grid>
 						<fudis-body-text>Showcase of grid items</fudis-body-text>
 						<fudis-body-text>Showcase of grid items</fudis-body-text>
@@ -78,7 +78,7 @@
 
 <ng-template #exampleDialogTemplate>
 	<fudis-dialog [closeButtonLabel]="'Close'" [size]="'sm'">
-		<fudis-heading fudisDialogTitle tag="h2">Small test dialog</fudis-heading>
+		<fudis-heading fudisDialogTitle [level]="2">Small test dialog</fudis-heading>
 		<fudis-dialog-content>
 			<fudis-body-text>Some content</fudis-body-text>
 		</fudis-dialog-content>

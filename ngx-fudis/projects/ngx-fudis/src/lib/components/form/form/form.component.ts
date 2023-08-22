@@ -1,5 +1,5 @@
 import { AfterContentInit, Component, ContentChild, ElementRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { FudisHeadingTag, FudisHeadingSize } from '../../../types/typography';
+import { FudisHeadingSize, FudisHeadingLevel } from '../../../types/typography';
 import { FudisIdService } from '../../../utilities/id-service.service';
 import { HeaderDirective } from '../../../directives/content-projection/header/header.directive';
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
@@ -44,9 +44,9 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 	@Input() title: string;
 
 	/**
-	 * Heading tag for the form title
+	 * Heading level for the form title
 	 */
-	@Input() titleTag: FudisHeadingTag;
+	@Input() titleLevel: FudisHeadingLevel;
 
 	/**
 	 * Heading size for the form title
