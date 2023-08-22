@@ -67,6 +67,8 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 	 */
 	@Input() hideSingleSelectionIndicator: boolean = false;
 
+	@Input() selectedOptions: FudisDropdownOption | FudisDropdownOption[];
+
 	/**
 	 * Value output event on selection change
 	 */
@@ -88,5 +90,21 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 
 	ngOnChanges(): void {
 		this._required = this.required ?? this.control.hasValidator(Validators.required);
+	}
+
+	private _setInitialValues(): void {
+		if (this.selectedOptions.length >= 1) {
+			const foundOptions: FudisDropdownOption[] = [];
+
+			this.selectedOptions.forEach((selectedOption: FudisDropdownOption) => {
+				const foundOption = this.options.find((option) => {
+					return option.value === selectedOption.value && option.viewValue === selectedOption.viewValue;
+				});
+
+				if (foundOption) {
+					foundOptions.push(foundOption);
+				}
+			});
+		}
 	}
 }
