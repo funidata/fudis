@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, ElementRef, Host, Input, ViewEncapsulation, effect } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Host, Input, Signal, ViewEncapsulation, effect } from '@angular/core';
 import { FudisLanguageAbbr } from '../../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../../utilities/translation/translation.service';
 import { DescriptionListItemComponent } from '../description-list-item.component';
+import { FudisLanguageBadgeGroupService } from '../../../language-badge-group/language-badge-group.service';
 
 @Component({
 	selector: 'fudis-dt, fudis-description-list-term',
@@ -13,11 +14,12 @@ export class DescriptionListItemTermComponent implements AfterViewInit {
 	constructor(
 		private _elementRef: ElementRef,
 		private _translationService: FudisTranslationService,
-
+		private _languageBadgeGroupService: FudisLanguageBadgeGroupService,
 		@Host() private _parentDlItem: DescriptionListItemComponent
 	) {
-		this._currentLanguage = _translationService.getLanguage();
 		effect(() => {
+			this._currentLanguage = _translationService.getLanguage();
+			this._languageOptions = this._languageBadgeGroupService.getLanguages();
 			this.setLanguageOptions();
 		});
 	}
@@ -33,6 +35,11 @@ export class DescriptionListItemTermComponent implements AfterViewInit {
 	protected _parentLanguageOptions: FudisLanguageAbbr[];
 
 	/**
+	 * Filtered array, where DOM is compared with Language config set in FudisLanguageBadgeGroupService
+	 */
+	protected _availableLanguages: FudisLanguageAbbr[];
+
+	/**
 	 * Selected language
 	 */
 	protected _selectedLanguage: FudisLanguageAbbr;
@@ -42,6 +49,14 @@ export class DescriptionListItemTermComponent implements AfterViewInit {
 	 */
 	private _currentLanguage: FudisLanguageAbbr;
 
+	/**
+	 * Config array from FudisLanguageBadgeGroupService
+	 */
+	private _languageOptions: Signal<FudisLanguageAbbr[]>;
+
+	/**
+	 * Used in check to determine which Language Badge is selected by default on first load
+	 */
 	private _firstLoadFinished: boolean = false;
 
 	ngAfterViewInit(): void {
@@ -65,13 +80,18 @@ export class DescriptionListItemTermComponent implements AfterViewInit {
 		this._parentLanguageOptions = this._parentDlItem.existingLanguageOptions();
 
 		/**
-		 * On first load, set current language as selected, else just select first language as selected.
+		 * Compare config lang array with available DOM elements
 		 */
-		if (!this._firstLoadFinished && this.languages && this._parentLanguageOptions.includes(this._currentLanguage)) {
+		this._availableLanguages = this._languageOptions().filter((item) => this._parentLanguageOptions.includes(item));
+
+		/**
+		 * On first load, set current language as selected, else just select first available language as selected.
+		 */
+		if (!this._firstLoadFinished && this.languages && this._availableLanguages.includes(this._currentLanguage)) {
 			this._firstLoadFinished = true;
 			this.setSelectedLanguage(this._currentLanguage);
-		} else if (this.languages && this._parentLanguageOptions.length > 0) {
-			this.setSelectedLanguage(this._parentLanguageOptions[0]);
+		} else if (this.languages && this._availableLanguages.length > 0) {
+			this.setSelectedLanguage(this._availableLanguages[0]);
 		}
 	}
 }

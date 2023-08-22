@@ -88,6 +88,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LanguageBadgeGroupComponent } from './components/language-badge-group/language-badge-group.component';
 import { LanguageBadgeComponent } from './components/language-badge-group/language-badge/language-badge.component';
 import { FudisTranslationService } from './utilities/translation/translation.service';
+import { FudisLanguageBadgeGroupService } from './components/language-badge-group/language-badge-group.service';
 
 @NgModule({
 	/*
@@ -123,10 +124,10 @@ import { FudisTranslationService } from './utilities/translation/translation.ser
 		ExpandableComponent,
 		FieldSetBaseDirective,
 		FieldSetComponent,
+		FooterComponent,
 		FooterContentLeftDirective,
 		FooterContentRightDirective,
 		FormComponent,
-		InputWithLanguageOptionsComponent,
 		GridComponent,
 		GridApiDirective,
 		GridDirective,
@@ -137,9 +138,13 @@ import { FudisTranslationService } from './utilities/translation/translation.ser
 		HeadingComponent,
 		IconComponent,
 		InputBaseDirective,
+		InputWithLanguageOptionsComponent,
 		LabelComponent,
+		LanguageBadgeGroupComponent,
+		LanguageBadgeComponent,
 		LinkComponent,
 		NotificationComponent,
+		NotificationsDirective,
 		RadioButtonComponent,
 		RadioButtonGroupComponent,
 		SectionComponent,
@@ -148,12 +153,6 @@ import { FudisTranslationService } from './utilities/translation/translation.ser
 		TextSpacingComponent,
 		TextAreaComponent,
 		TooltipDirective,
-		ContentDirective,
-		ActionsDirective,
-		NotificationsDirective,
-		LanguageBadgeGroupComponent,
-		LanguageBadgeComponent,
-		FooterComponent,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
@@ -234,11 +233,11 @@ import { FudisTranslationService } from './utilities/translation/translation.ser
 	],
 	providers: [
 		FudisDialogService,
+		FudisDropdownMenuItemService,
 		FudisErrorSummaryService,
 		FudisGridService,
-
-		FudisDropdownMenuItemService,
 		FudisIdService,
+		FudisLanguageBadgeGroupService,
 		FudisTranslationService,
 	],
 })
