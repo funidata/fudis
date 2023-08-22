@@ -31,7 +31,7 @@ const html = String.raw;
 const Template: StoryFn = () => ({
 	props: {
 		title: 'This is title of section',
-		titleTag: 'h2',
+		titleLevel: 2,
 		titleSize: 'xl',
 	},
 

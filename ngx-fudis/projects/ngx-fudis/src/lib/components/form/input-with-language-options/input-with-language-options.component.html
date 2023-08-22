@@ -4,10 +4,12 @@
 			<ng-container *ngTemplateOutlet="variant === 'text-area' ? textArea : textInput"></ng-container>
 			<fudis-guidance
 				[inputLabel]="label"
+				[maxLength]="maxLength"
 				[groupErrorMsg]="groupErrorMsg"
 				[helpText]="helpText"
 				[formGroup]="formGroup"
-				[for]="_id">
+				[for]="_id"
+				[selectedOption]="_dropdownControl.value.value">
 			</fudis-guidance>
 		</ng-container>
 	</div>
@@ -33,6 +35,7 @@
 			[size]="'lg'"
 			[label]="label"
 			[id]="_id"
+			[maxLength]="maxLength"
 			[initialFocus]="initialFocus && _firstLoad"
 			[required]="_requiredControls[control.key].required"
 			[invalidState]="formGroup.invalid && formGroup.touched"
@@ -50,6 +53,8 @@
 			[size]="'lg'"
 			[label]="label"
 			[id]="_id"
+			[maxLength]="maxLength"
+			[invalidState]="formGroup.invalid && formGroup.touched"
 			[initialFocus]="initialFocus && _firstLoad"
 			[required]="_requiredControls[control.key].required"
 			[invalidState]="formGroup.invalid && formGroup.touched"

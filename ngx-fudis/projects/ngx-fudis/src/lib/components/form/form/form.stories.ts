@@ -14,7 +14,7 @@ import {
 } from '../../../types/forms';
 
 import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
-import { FormGroupValidators } from '../../../utilities/form/validators';
+import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 import { FormComponent } from './form.component';
 import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
@@ -26,7 +26,7 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 			[marginTop]="'xl'"
 			[badge]="'primary'"
 			[badgeText]="'example'"
-			[titleTag]="titleTag"
+			[titleLevel]="titleLevel"
 			[title]="formTitle"
 			[id]="id"
 			[helpText]="formHelpText"
@@ -35,7 +35,7 @@ import { FudisTranslationService } from '../../../utilities/translation/translat
 			[errorSummaryLiveRemove]="false"
 			[errorSummaryVisible]="errorSummaryVisible">
 			<ng-template fudisHeader>
-				<!-- <fudis-heading [marginBottom]="'xs'" [tag]="titleTag">{{ formTitle }}</fudis-heading> -->
+				<!-- <fudis-heading [marginBottom]="'xs'" [level]="titleLevel">{{ formTitle }}</fudis-heading> -->
 				<fudis-description-list [columns]="1" [variant]="'compact'" [data]="formHeaderDl" />
 			</ng-template>
 			<ng-template fudisActions type="form">
@@ -224,7 +224,7 @@ class FormContentExampleComponent {
 
 	formTitle = 'Example form heading';
 
-	titleTag = 'h1';
+	titleLevel = 1;
 
 	errorSummaryHelpText = 'There are errors in this form. Please address these before trying to submit again.';
 
@@ -237,7 +237,7 @@ class FormContentExampleComponent {
 				swedish: new FormControl(null),
 				english: new FormControl(null),
 			},
-			[FormGroupValidators.atLeastOneRequired()]
+			[FudisFormGroupValidators.atLeastOneRequired()]
 		),
 		description: new FormGroup({
 			finnish: new FormControl(null, [Validators.required, Validators.minLength(10)]),

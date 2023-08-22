@@ -5,7 +5,7 @@ import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { InputWithLanguageOptionsComponent } from './input-with-language-options.component';
-import { FormGroupValidators } from '../../../utilities/form/validators';
+import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 import { FudisInputWithLanguageOptionsFormGroup } from '../../../types/forms';
 
 export default {
@@ -38,20 +38,15 @@ const TemplateAllRequired: StoryFn = () => ({
 		groupErrorMsg: {
 			english: {
 				required: 'Missing superhero name on English.',
-				maxlength:
-					'English name is too long. Villains cannot yell it without pausing and drawing breath. It breaks the tension.',
 			},
 			finnish: {
 				required: 'Missing superhero name on Finnish.',
-				maxlength:
-					'Finnish name is too long. Villains cannot yell it without pausing and drawing breath. It breaks the tension.',
 			},
 			swedish: {
 				required: 'Missing superhero name on Swedish.',
-				maxlength:
-					'Swedish name is too long. Villains cannot yell it without pausing and drawing breath. It breaks the tension.',
 			},
 		},
+		maxLength: 12,
 		languageOptions: [
 			{ value: 'finnish', viewValue: 'FI' },
 			{ value: 'swedish', viewValue: 'SV' },
@@ -70,7 +65,8 @@ const TemplateAllRequired: StoryFn = () => ({
 			[formGroup]="formGroup"
 			[label]="label"
 			[helpText]="helpText"
-			[groupErrorMsg]="groupErrorMsg" />
+			[groupErrorMsg]="groupErrorMsg"
+			[maxLength]="maxLength" />
 	`,
 });
 
@@ -81,19 +77,8 @@ const TemplateOneRequired: StoryFn = () => ({
 		helpText: 'Please provide superhero name in atleast one language.',
 		groupErrorMsg: {
 			atLeastOneRequired: 'Missing superhero name! Name in atleast one language is required.',
-			english: {
-				maxlength:
-					'English name is too long. Villains cannot yell it without pausing and drawing breath. It breaks the tension.',
-			},
-			finnish: {
-				maxlength:
-					'Finnish name is too long. Villains cannot yell it without pausing and drawing breath. It breaks the tension.',
-			},
-			swedish: {
-				maxlength:
-					'Swedish name is too long. Villains cannot yell it without pausing and drawing breath. It breaks the tension.',
-			},
 		},
+		maxLength: 30,
 		languageOptions: [
 			{ value: 'finnish', viewValue: 'FI' },
 			{ value: 'swedish', viewValue: 'SV' },
@@ -101,11 +86,11 @@ const TemplateOneRequired: StoryFn = () => ({
 		],
 		formGroup: new FormGroup<FudisInputWithLanguageOptionsFormGroup>(
 			{
-				finnish: new FormControl<string | null>(null, [Validators.maxLength(12)]),
-				swedish: new FormControl<string | null>(null, [Validators.maxLength(12)]),
-				english: new FormControl<string | null>(null, [Validators.maxLength(12)]),
+				finnish: new FormControl<string | null>(null, [Validators.maxLength(30)]),
+				swedish: new FormControl<string | null>(null, [Validators.maxLength(30)]),
+				english: new FormControl<string | null>(null, [Validators.maxLength(30)]),
 			},
-			[FormGroupValidators.atLeastOneRequired()]
+			[FudisFormGroupValidators.atLeastOneRequired()]
 		),
 	},
 	template: html`
@@ -115,7 +100,8 @@ const TemplateOneRequired: StoryFn = () => ({
 			[formGroup]="formGroup"
 			[label]="label"
 			[helpText]="helpText"
-			[groupErrorMsg]="groupErrorMsg" />
+			[groupErrorMsg]="groupErrorMsg"
+			[maxLength]="maxLength" />
 	`,
 });
 

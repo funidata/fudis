@@ -51,7 +51,7 @@ This directive extends _MatDialogTitle_. Initial focus is set to this heading wh
 
 ```
 <fudis-dialog>
-	<fudis-heading [tag]="'h2'" fudisDialogTitle>
+	<fudis-heading [level]="2" fudisDialogTitle>
 		Heading for a dialog
 	</fudis-heading>
 </fudis-dialog>
@@ -99,7 +99,7 @@ This directive extends _MatDialogTitle_. Initial focus is set to this heading wh
 		</fudis-button>
 		<ng-template #dialogFromTemplate>
 			<fudis-dialog [closeButtonLabel]="'Close dialog'">
-				<fudis-heading [tag]="'h2'" fudisDialogTitle> This is Dialog Heading </fudis-heading>
+				<fudis-heading [level]="2" fudisDialogTitle> This is Dialog Heading </fudis-heading>
 				<fudis-dialog-content>
 					<fudis-body-text>Some content for Dialog</fudis-body-text>
 				</fudis-dialog-content>

@@ -1,9 +1,28 @@
 export type FudisBadgeVariant = 'accent' | 'danger' | 'primary' | 'secondary' | 'success';
 
+export type FudisDescriptionListVariant = 'regular' | 'compact';
+
 export interface FudisDescriptionListItem {
 	key: string;
 	subHeading?: string;
 	value: string;
+}
+
+export type FudisDescriptionListItemDetailInfo = {
+	id: string;
+	language: FudisLanguageAbbr;
+};
+
+export type FudisLanguageOption =
+	| { value: 'finnish'; viewValue: 'FI' }
+	| { value: 'swedish'; viewValue: 'SV' }
+	| { value: 'english'; viewValue: 'EN' }
+	| { value: string | FudisLanguageAbbr; viewValue: string };
+
+export interface FudisLanguageBadgeTranslations {
+	en?: string;
+	sv?: string;
+	fi?: string;
 }
 
 export type FudisExpandableType = 'regular' | 'lite';
@@ -30,6 +49,8 @@ export interface FudisTranslationConfig {
 		LANGUAGE: string;
 		// Text shown in dropdown options if input for a language is missing
 		MISSING: string;
+		// Assistive text of max character count for screen readers
+		MAX_LENGTH: string;
 	};
 	LINK: {
 		// External link icon aria-label
@@ -53,6 +74,9 @@ export interface FudisTranslationConfig {
 		// Alternative text for screen readers. Used in e. g. Error Summary
 		ATTENTION: string;
 	};
+	LANGUAGE_BADGE: {
+		ARIA_LABEL: FudisTranslationLanguageBadgeAriaLabel;
+	};
 	TEXTAREA: {
 		// Assistive text of max character count for screen readers
 		MAX_LENGTH: string;
@@ -61,4 +85,13 @@ export interface FudisTranslationConfig {
 		// Assistive text of max character count for screen readers
 		MAX_LENGTH: string;
 	};
+}
+
+export interface FudisTranslationLanguageBadgeAriaLabel {
+	FI: string;
+	SV: string;
+	EN: string;
+	TRANSLATIONS: string;
+	SELECTED: string;
+	MISSING_TRANSLATION: string;
 }

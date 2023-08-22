@@ -1,0 +1,13 @@
+<section [attr.aria-label]="_groupLabel" class="fudis-language-badge-group">
+	<ng-container *ngFor="let _language of _languageLabels; let index = index">
+		<fudis-language-badge
+			[label]="_language.label"
+			(handleClick)="updateLanguage($event)"
+			[selected]="selectedLanguage === _language.key"
+			[tooltip]="_language.label"
+			[tooltipPosition]="tooltipPosition"
+			[tooltipToggle]="tooltipToggle"
+			[language]="_language.key"
+			[variant]="languages.includes(_language.key) ? 'standard' : 'missing'" />
+	</ng-container>
+</section>

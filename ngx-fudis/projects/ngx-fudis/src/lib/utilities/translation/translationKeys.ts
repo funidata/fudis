@@ -7,6 +7,7 @@ export const en: FudisTranslationConfig = {
 	INPUT_WITH_LANGUAGE_OPTIONS: {
 		LANGUAGE: 'Language',
 		MISSING: 'Missing',
+		MAX_LENGTH: 'characters used',
 	},
 	LINK: {
 		EXTERNAL_LINK: '(opens in a new tab)',
@@ -26,6 +27,16 @@ export const en: FudisTranslationConfig = {
 	ICON: {
 		ATTENTION: 'Attention',
 	},
+	LANGUAGE_BADGE: {
+		ARIA_LABEL: {
+			FI: 'Change translation to Finnish',
+			SV: 'Change translation to Swedish',
+			EN: 'Change translation to English',
+			TRANSLATIONS: 'Translations',
+			SELECTED: '(Selected)',
+			MISSING_TRANSLATION: '(Missing translation)',
+		},
+	},
 	TEXTAREA: {
 		MAX_LENGTH: 'characters used',
 	},
@@ -41,6 +52,7 @@ export const fi: FudisTranslationConfig = {
 	INPUT_WITH_LANGUAGE_OPTIONS: {
 		LANGUAGE: 'Kieli',
 		MISSING: 'Puuttuu',
+		MAX_LENGTH: 'merkkiä käytetty',
 	},
 	LINK: {
 		EXTERNAL_LINK: '(aukeaa uuteen välilehteen)',
@@ -60,6 +72,16 @@ export const fi: FudisTranslationConfig = {
 	ICON: {
 		ATTENTION: 'Huomio',
 	},
+	LANGUAGE_BADGE: {
+		ARIA_LABEL: {
+			FI: 'Vaihda käännöskieleksi Suomi',
+			SV: 'Vaihda käännöskieleksi Ruotsi',
+			EN: 'Vaihda käännöskieleksi Englanti',
+			TRANSLATIONS: 'Käännöskielet',
+			SELECTED: '(Valittuna)',
+			MISSING_TRANSLATION: '(Käännös puuttuu)',
+		},
+	},
 	TEXTAREA: {
 		MAX_LENGTH: 'merkkiä käytetty',
 	},
@@ -75,6 +97,7 @@ export const sv: FudisTranslationConfig = {
 	INPUT_WITH_LANGUAGE_OPTIONS: {
 		LANGUAGE: 'Språk',
 		MISSING: 'Saknas',
+		MAX_LENGTH: 'tecken använt',
 	},
 	AUTOCOMPLETE: {
 		CLEAR: 'Radera val',
@@ -93,6 +116,16 @@ export const sv: FudisTranslationConfig = {
 	},
 	ICON: {
 		ATTENTION: 'Observera',
+	},
+	LANGUAGE_BADGE: {
+		ARIA_LABEL: {
+			FI: 'Ändra översättning till Finska',
+			SV: 'Ändra översättning till Svenska',
+			EN: 'Ändra översättning till Engelska',
+			TRANSLATIONS: 'Översättningar',
+			SELECTED: 'Vald',
+			MISSING_TRANSLATION: 'Saknad översättning',
+		},
 	},
 	TEXTAREA: {
 		MAX_LENGTH: 'tecken använt',
