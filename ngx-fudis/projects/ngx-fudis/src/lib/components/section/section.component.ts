@@ -1,4 +1,4 @@
-import { Component, ContentChild, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Component, ContentChild, Input, OnChanges, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FudisIdService } from '../../utilities/id-service.service';
 import { FudisHeadingSize, FudisHeadingLevel } from '../../types/typography';
 import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
@@ -9,11 +9,13 @@ import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.direct
 import { FudisSpacing } from '../../types/miscellaneous';
 import { FudisErrorSummaryService } from '../form/error-summary/error-summary.service';
 import { FudisFormErrorSummarySection } from '../../types/forms';
+import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 
 @Component({
 	selector: 'fudis-section',
 	templateUrl: './section.component.html',
 	styleUrls: ['./section.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class SectionComponent extends TooltipApiDirective implements OnInit, OnChanges, OnDestroy {
 	constructor(
@@ -26,6 +28,8 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 	@ContentChild(NotificationsDirective) notifications: NotificationsDirective | null;
 
 	@ContentChild(ContentDirective) content: ContentDirective | null;
+
+	@ContentChild(ActionsDirective) headerActions: ActionsDirective | null;
 
 	/**
 	 * Section title
