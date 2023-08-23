@@ -17,7 +17,7 @@
 			[class.fudis-autocomplete__input--invalid]="(control.invalid && control.touched) || invalidState"
 			[class.fudis-autocomplete__input--disabled]="disabled"
 			type="text"
-			(blur)="autocompleteBlur($event)"
+			(blur)="_autocompleteBlur($event)"
 			[formControl]="_autocompleteFormControl"
 			[matAutocomplete]="autocomplete"
 			[attr.aria-describedby]="_id + '_guidance'"
@@ -30,7 +30,7 @@
 				[size]="'icon-only'"
 				[variant]="'tertiary'"
 				[icon]="'close'"
-				(handleClick)="clearFilter()"
+				(handleClick)="_clearFilter()"
 				[label]="_clearFilterText"
 				[labelHidden]="true">
 			</fudis-button>

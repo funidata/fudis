@@ -68,6 +68,13 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 	@Input() hideSingleSelectionIndicator: boolean = false;
 
 	/**
+	 * Pre-selected dropdown options.
+	 * Expects an array if 'multipleOption' is true and if 'multipleOption' is false, expects a single FudisDropdownOption.
+	 * It searches given 'options' input array for matching 'value' and 'viewValue' with selectedOptions and updates formControl value with items from 'options' input.
+	 */
+	@Input() selectedOptions: FudisDropdownOption | FudisDropdownOption[];
+
+	/**
 	 * Value output event on selection change
 	 */
 	@Output() selectionUpdate: EventEmitter<FudisDropdownOption> = new EventEmitter<FudisDropdownOption>();
@@ -78,6 +85,8 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('dropdown');
+
+		this._setInitialValues();
 	}
 
 	ngAfterViewInit(): void {
@@ -88,5 +97,33 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 
 	ngOnChanges(): void {
 		this._required = this.required ?? this.control.hasValidator(Validators.required);
+	}
+
+	private _setInitialValues(): void {
+		if (this.selectedOptions?.length >= 1 && this.multipleOption) {
+			const foundOptions: FudisDropdownOption[] = [];
+
+			this.selectedOptions.forEach((selectedOption: FudisDropdownOption) => {
+				const foundIndex = this.options.findIndex((option) => {
+					return option.value === selectedOption.value && option.viewValue === selectedOption.viewValue;
+				});
+
+				if (foundIndex !== -1) {
+					foundOptions.push(this.options[foundIndex]);
+				}
+			});
+
+			this.control.patchValue(foundOptions);
+		} else if (!Array.isArray(this.selectedOptions) && !this.multipleOption) {
+			const valueToFind: FudisDropdownOption = this.selectedOptions;
+
+			const foundIndex = this.options.findIndex((option) => {
+				return option.value === valueToFind.value && option.viewValue === valueToFind.viewValue;
+			});
+
+			if (foundIndex !== -1) {
+				this.control.patchValue(this.options[foundIndex]);
+			}
+		}
 	}
 }
