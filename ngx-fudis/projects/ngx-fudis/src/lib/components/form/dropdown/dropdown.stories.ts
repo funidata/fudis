@@ -55,6 +55,7 @@ const Template: StoryFn<DropdownComponent> = (args: DropdownComponent) => ({
 			[options]="options"
 			[label]="label"
 			[id]="id"
+			[selectedOptions]="selectedOptions"
 			[helpText]="helpText"
 			[tooltip]="tooltip"
 			[tooltipPosition]="tooltipPosition"
@@ -70,6 +71,7 @@ SingleSelect.args = {
 	placeholder: 'Choose a pet',
 	control: new FormControl(null, Validators.required),
 	helpText: 'All pets are equally important, but for sake of this example please pick one.',
+	selectedOptions: { value: 'value-1-dog', viewValue: 'Dog' },
 	options: [
 		{ value: 'value-1-dog', viewValue: 'Dog' },
 		{ value: 'value-2-capybara', viewValue: 'Capybara' },
@@ -96,6 +98,10 @@ MultiSelect.args = {
 	tooltip: 'Platypus is the right choice',
 	tooltipPosition: 'below',
 	tooltipToggle: false,
+	selectedOptions: [
+		{ value: 'value-1-dog', viewValue: 'Dog' },
+		{ value: 'value-5-armadillo', viewValue: 'Screaming hairy armadillo' },
+	],
 	options: [
 		{ value: 'value-1-dog', viewValue: 'Dog' },
 		{ value: 'value-2-capybara', viewValue: 'Capybara' },

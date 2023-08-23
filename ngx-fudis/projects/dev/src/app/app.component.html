@@ -2,6 +2,7 @@
 	<div class="root-style">
 		<fudis-grid>
 			<fudis-heading [level]="1" [size]="'xl'">Welcome to Fudis sandbox </fudis-heading>
+
 			<fudis-notification variant="danger" ariaVariantText="Varoitus!"
 				>Whoops! Here is danger notification.</fudis-notification
 			>
@@ -33,7 +34,7 @@
 					<fudis-dropdown-menu-item [label]="'Item 878787878571'"></fudis-dropdown-menu-item>
 				</fudis-dropdown-menu>
 			</fudis-button>
-
+			<app-dropdown-examples fudisGridItem [columns]="'stretch'" />
 			<app-form-examples fudisGridItem [columns]="'stretch'" />
 
 			<fudis-expandable [title]="'Description list'">
