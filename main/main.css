@@ -303,6 +303,10 @@ mat-tooltip-component .mat-tooltip-handset {
   */
 }
 
+.fudis-grid > * {
+  min-width: 0;
+}
+
 @media screen and (min-width: 36em) {
   .fudis-grid {
     width: 100%;
