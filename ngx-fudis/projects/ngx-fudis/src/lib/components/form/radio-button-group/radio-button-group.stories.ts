@@ -3,9 +3,6 @@ import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveF
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FudisRadioButtonOption } from '../../../types/forms';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
-import { RadioButtonComponent } from './radio-button/radio-button.component';
-import { BodyTextComponent } from '../../typography/body-text/body-text.component';
-import { ErrorMessageComponent } from '../error-message/error-message.component';
 import readme from './readme.mdx';
 
 const getDefaultValue = (options: FudisRadioButtonOption[]): string | boolean | undefined | null => {
@@ -73,12 +70,6 @@ class RadioButtonGroupExampleComponent {
 export default {
 	title: 'Components/Form/Radio Button Group',
 	component: RadioButtonGroupComponent,
-	subcomponents: {
-		RadioButtonGroupComponent,
-		RadioButtonComponent,
-		BodyTextComponent,
-		ErrorMessageComponent,
-	},
 	decorators: [
 		moduleMetadata({
 			declarations: [RadioButtonGroupExampleComponent],
