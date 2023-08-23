@@ -44,7 +44,9 @@ export class AutocompleteComponent
 	@Input() size: FudisInputWidth = 'lg';
 
 	/**
-	 * Preselected value for Autocomplete. If
+	 * Pre-selected dropdown options.
+	 * If string, it fills the input with given string. NOTE: This sets formControl's value to 'null' if string does not match of any viewValues from 'options'.
+	 * If given FudisDropdownOption, it searches given 'options' input array for matching 'value' and 'viewValue' with selectedOptions and updates formControl value with item from 'options' input.
 	 */
 	@Input() selectedOption: string | FudisDropdownOption;
 
@@ -118,12 +120,12 @@ export class AutocompleteComponent
 		} else if (this.selectedOption && typeof this.selectedOption !== 'string') {
 			const findMe = this.selectedOption;
 
-			const optionFound = this.options.find(
+			const foundIndex = this.options.findIndex(
 				(option: FudisDropdownOption) => option.value === findMe.value && option.viewValue === findMe.viewValue
 			);
-			if (optionFound) {
-				this._autocompleteFormControl.patchValue(this.selectedOption.viewValue);
-				this.control.patchValue(this.selectedOption);
+			if (foundIndex !== -1) {
+				this._autocompleteFormControl.patchValue(this.options[foundIndex].viewValue);
+				this.control.patchValue(this.options[foundIndex]);
 			}
 		} else if (this.selectedOption) {
 			this._autocompleteFormControl.patchValue(this.selectedOption);
