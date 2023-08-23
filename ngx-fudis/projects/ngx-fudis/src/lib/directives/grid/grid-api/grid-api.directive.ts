@@ -14,25 +14,9 @@ import { FudisSpacing } from '../../../types/miscellaneous';
 })
 export class GridApiDirective {
 	/**
-	 * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
-	 * xxl = Default value. Viewports of 1600px and larger
-	 * xl = Viewports smaller than 1600px
-	 * lg = Viewports smaller than 1200px
-	 * md = Viewports smaller than 992px
-	 * sm = Viewports smaller than 768px
-	 * xs = Viewports smaller than 576px
-	 */
-	@Input() width: FudisGridWidth;
-
-	/**
 	 * Alignment of Grid component inside its parent
 	 */
 	@Input() align: FudisGridAlign;
-
-	/**
-	 * Vertical alignment of Grid Items in a row
-	 */
-	@Input() alignItemsY: FudisGridAlignItems;
 
 	/**
 	 * Horizontal alignment of Grid Items in a row
@@ -40,19 +24,9 @@ export class GridApiDirective {
 	@Input() alignItemsX: FudisGridAlignItems;
 
 	/**
-	 * Margin top for the Grid
+	 * Vertical alignment of Grid Items in a row
 	 */
-	@Input() marginTop: FudisSpacing;
-
-	/**
-	 * Margin bottom for the Grid
-	 */
-	@Input() marginBottom: FudisSpacing;
-
-	/**
-	 * Horizontal margins left and right of the grid
-	 */
-	@Input() marginSides: FudisGridMarginSide;
+	@Input() alignItemsY: FudisGridAlignItems;
 
 	/**
 	 * Custom CSS classes for Grid element
@@ -63,16 +37,6 @@ export class GridApiDirective {
 	 * Grid column gap. Using Fudis spacing token values of xxs to xxl and 0.
 	 */
 	@Input() columnGap: FudisGridGap;
-
-	/**
-	 * Grid row gap. Using Fudis spacing token values of xxs to xxl and 0.
-	 */
-	@Input() rowGap: FudisGridGap;
-
-	/**
-	 * To make Grid ignore default values defined by application and FudisGridService
-	 */
-	@Input() ignoreDefaults: boolean = false;
 
 	/**
 	 * Setting of columns for the grid. Input will be converted to native CSS grid grid-template-columns values
@@ -86,4 +50,40 @@ export class GridApiDirective {
 	 * And after xl breakpoint 'repeat(3, 1fr)'
 	 */
 	@Input() columns: string | number | FudisGridColumnsResponsive;
+
+	/**
+	 * To make Grid ignore default values defined by application and FudisGridService
+	 */
+	@Input() ignoreDefaults: boolean = false;
+
+	/**
+	 * Margin bottom for the Grid
+	 */
+	@Input() marginBottom: FudisSpacing;
+
+	/**
+	 * Horizontal margins left and right of the grid
+	 */
+	@Input() marginSides: FudisGridMarginSide;
+
+	/**
+	 * Margin top for the Grid
+	 */
+	@Input() marginTop: FudisSpacing;
+
+	/**
+	 * Grid row gap. Using Fudis spacing token values of xxs to xxl and 0.
+	 */
+	@Input() rowGap: FudisGridGap;
+
+	/**
+	 * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
+	 * xxl = Default value. Viewports of 1600px and larger
+	 * xl = Viewports smaller than 1600px
+	 * lg = Viewports smaller than 1200px
+	 * md = Viewports smaller than 992px
+	 * sm = Viewports smaller than 768px
+	 * xs = Viewports smaller than 576px
+	 */
+	@Input() width: FudisGridWidth;
 }
