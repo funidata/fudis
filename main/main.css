@@ -1,3 +1,4 @@
+/* stylelint-disable unit-disallowed-list */
 /* stylelint-disable color-no-hex */
 /*
   --- Primary Colors are defined in style.scss ---
@@ -5,8 +6,20 @@
 /*
   --- Secondary & Accent Colors ---
 */
-/* stylelint-disable unit-disallowed-list */ /* stylelint-disable unit-disallowed-list */ /* stylelint-disable unit-disallowed-list */ /* stylelint-disable property-disallowed-list */
+/* stylelint-disable selector-no-qualifying-type */
+/* stylelint-disable max-nesting-depth */
+/* stylelint-disable property-disallowed-list */
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable declaration-no-important */
+/* stylelint-disable scss/selector-no-redundant-nesting-selector */
+/* stylelint-disable selector-max-class */
+/* stylelint-disable selector-class-pattern */
+/* stylelint-disable property-disallowed-list */
 /* stylelint-disable unit-disallowed-list */
+/* stylelint-disable unit-disallowed-list */
+/* stylelint-disable unit-disallowed-list */
+/* stylelint-disable declaration-property-value-disallowed-list */
+/* stylelint-disable property-disallowed-list */
 /* stylelint-disable color-no-hex */
 /*
   --- Primary Colors are defined in style.scss ---
@@ -16,14 +29,8 @@
 */
 /* stylelint-disable declaration-property-value-disallowed-list */
 /* stylelint-disable property-disallowed-list */
-/* stylelint-disable selector-no-qualifying-type */
-/* stylelint-disable max-nesting-depth */
+/* stylelint-disable declaration-property-value-disallowed-list */
 /* stylelint-disable property-disallowed-list */
-/* stylelint-disable no-descending-specificity */
-/* stylelint-disable declaration-no-important */
-/* stylelint-disable scss/selector-no-redundant-nesting-selector */
-/* stylelint-disable selector-max-class */
-/* stylelint-disable selector-class-pattern */
 /** 
 * Styles which affects to fudis-autocomplete (search and dropdown variants) and fudis-dropdown (single and multiselect variants) components. 
 * If you make changes, check that all of the above componenta and variants still work as wanted
@@ -98,10 +105,11 @@
   font-weight: 300;
 }
 
-/* stylelint-disable property-disallowed-list */ /* stylelint-disable declaration-no-important */
+/* stylelint-disable declaration-no-important */
 /* stylelint-disable selector-max-class */
 /* stylelint-disable selector-class-pattern */
 /* stylelint-disable scss/selector-no-redundant-nesting-selector */
+/* stylelint-disable property-disallowed-list */
 .fudis-datepicker__toggle {
   /* Target mat-icon-button */
 }
@@ -202,8 +210,6 @@
   box-shadow: 0 0 0 0.25rem #ffffff;
 }
 
-/* stylelint-disable property-disallowed-list */
-/* stylelint-disable unit-disallowed-list */
 /* stylelint-disable selector-max-compound-selectors */
 /* stylelint-disable declaration-no-important */
 /* stylelint-disable declaration-property-value-disallowed-list */
@@ -212,6 +218,8 @@
 /* stylelint-disable selector-class-pattern */
 /* stylelint-disable selector-no-qualifying-type */
 /* stylelint-disable scss/selector-no-redundant-nesting-selector */
+/* stylelint-disable property-disallowed-list */
+/* stylelint-disable unit-disallowed-list */
 .cdk-global-overlay-wrapper {
   overflow: scroll;
 }
@@ -291,7 +299,8 @@ mat-tooltip-component .mat-tooltip-handset {
   padding: 0;
 }
 
-/* stylelint-disable unit-disallowed-list */ /* stylelint-disable order/order */
+/* stylelint-disable order/order */
+/* stylelint-disable unit-disallowed-list */
 .fudis-grid {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -1116,18 +1125,12 @@ html {
   --mat-optgroup-label-text-weight: 500;
 }
 
-.mat-badge-content {
-  font-weight: 600;
-  font-size: 12px;
-  font-family: Fira Sans;
-}
-
-.mat-badge-small .mat-badge-content {
-  font-size: 9px;
-}
-
-.mat-badge-large .mat-badge-content {
-  font-size: 24px;
+html {
+  --mat-badge-text-font: Fira Sans;
+  --mat-badge-text-size: 12px;
+  --mat-badge-text-weight: 600;
+  --mat-badge-small-size-text-size: 9px;
+  --mat-badge-large-size-text-size: 24px;
 }
 
 .mat-h1,
@@ -1277,35 +1280,28 @@ html {
   margin: 0 0 64px;
 }
 
-.mat-bottom-sheet-container {
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.25rem;
-  font-family: Fira Sans;
-  letter-spacing: normal;
+html {
+  --mat-bottom-sheet-container-text-font: Fira Sans;
+  --mat-bottom-sheet-container-text-line-height: 1.25rem;
+  --mat-bottom-sheet-container-text-size: 1rem;
+  --mat-bottom-sheet-container-text-tracking: normal;
+  --mat-bottom-sheet-container-text-weight: 400;
 }
 
-.mat-button-toggle {
-  font-family: Fira Sans;
+html {
+  --mat-legacy-button-toggle-text-font: Fira Sans;
+  --mat-standard-button-toggle-text-font: Fira Sans;
 }
 
-.mat-calendar {
-  font-family: Fira Sans;
-}
-
-.mat-calendar-body {
-  font-size: 13px;
-}
-
-.mat-calendar-body-label,
-.mat-calendar-period-button {
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.mat-calendar-table-header th {
-  font-size: 11px;
-  font-weight: 400;
+html {
+  --mat-datepicker-calendar-text-font: Fira Sans;
+  --mat-datepicker-calendar-text-size: 13px;
+  --mat-datepicker-calendar-body-label-text-size: 0.875rem;
+  --mat-datepicker-calendar-body-label-text-weight: 500;
+  --mat-datepicker-calendar-period-button-text-size: 0.875rem;
+  --mat-datepicker-calendar-period-button-text-weight: 500;
+  --mat-datepicker-calendar-header-text-size: 11px;
+  --mat-datepicker-calendar-header-text-weight: 400;
 }
 
 html {
@@ -1321,21 +1317,11 @@ html {
   --mat-expansion-container-text-weight: 400;
 }
 
-.mat-grid-tile-header,
-.mat-grid-tile-footer {
-  font-size: 1rem;
-}
-.mat-grid-tile-header .mat-line,
-.mat-grid-tile-footer .mat-line {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: block;
-  box-sizing: border-box;
-}
-.mat-grid-tile-header .mat-line:nth-child(n+2),
-.mat-grid-tile-footer .mat-line:nth-child(n+2) {
-  font-size: 0.75rem;
+html {
+  --mat-grid-list-tile-header-primary-text-size: 1rem;
+  --mat-grid-list-tile-header-secondary-text-size: 0.75rem;
+  --mat-grid-list-tile-footer-primary-text-size: 1rem;
+  --mat-grid-list-tile-footer-secondary-text-size: 0.75rem;
 }
 
 html {
@@ -1348,19 +1334,12 @@ html {
   --mat-stepper-header-selected-state-label-text-weight: 500;
 }
 
-.mat-toolbar,
-.mat-toolbar h1,
-.mat-toolbar h2,
-.mat-toolbar h3,
-.mat-toolbar h4,
-.mat-toolbar h5,
-.mat-toolbar h6 {
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 1.75rem;
-  font-family: Fira Sans;
-  letter-spacing: normal;
-  margin: 0;
+html {
+  --mat-toolbar-title-text-font: Fira Sans;
+  --mat-toolbar-title-text-line-height: 1.75rem;
+  --mat-toolbar-title-text-size: 1.5rem;
+  --mat-toolbar-title-text-tracking: normal;
+  --mat-toolbar-title-text-weight: 500;
 }
 
 .mat-tree {
@@ -1409,99 +1388,26 @@ html {
   --mdc-plain-tooltip-supporting-text-tracking: normal;
 }
 
-.mdc-text-field__input {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-family: var(--mdc-typography-subtitle1-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-subtitle1-font-size, 1.25rem);
-  font-weight: var(--mdc-typography-subtitle1-font-weight, 500);
-  letter-spacing: var(--mdc-typography-subtitle1-letter-spacing, normal);
-  -webkit-text-decoration: var(--mdc-typography-subtitle1-text-decoration, inherit);
-          text-decoration: var(--mdc-typography-subtitle1-text-decoration, inherit);
-  text-transform: var(--mdc-typography-subtitle1-text-transform, none);
-}
-.mdc-text-field__affix {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-family: var(--mdc-typography-subtitle1-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-subtitle1-font-size, 1.25rem);
-  font-weight: var(--mdc-typography-subtitle1-font-weight, 500);
-  letter-spacing: var(--mdc-typography-subtitle1-letter-spacing, normal);
-  -webkit-text-decoration: var(--mdc-typography-subtitle1-text-decoration, inherit);
-          text-decoration: var(--mdc-typography-subtitle1-text-decoration, inherit);
-  text-transform: var(--mdc-typography-subtitle1-text-transform, none);
-}
-[dir=rtl] .mdc-text-field--outlined.mdc-text-field--with-leading-icon, .mdc-text-field--outlined.mdc-text-field--with-leading-icon[dir=rtl] {
-  /*rtl:begin:ignore*/
-  /*rtl:end:ignore*/
-}
-
-[dir=rtl] .mdc-text-field--outlined.mdc-text-field--with-trailing-icon, .mdc-text-field--outlined.mdc-text-field--with-trailing-icon[dir=rtl] {
-  /*rtl:begin:ignore*/
-  /*rtl:end:ignore*/
-}
-
-.mdc-text-field--textarea .mdc-text-field__input {
-  line-height: 1.5rem;
-}
-[dir=rtl] .mdc-text-field--with-leading-icon.mdc-text-field--outlined, .mdc-text-field--with-leading-icon.mdc-text-field--outlined[dir=rtl] {
-  /*rtl:begin:ignore*/
-  /*rtl:end:ignore*/
-}
-[dir=rtl] .mdc-text-field--end-aligned .mdc-text-field__input, .mdc-text-field--end-aligned .mdc-text-field__input[dir=rtl] {
-  /*rtl:begin:ignore*/
-  /*rtl:end:ignore*/
-}
-
-[dir=rtl] .mdc-floating-label--required:not(.mdc-floating-label--hide-required-marker), .mdc-floating-label--required:not(.mdc-floating-label--hide-required-marker)[dir=rtl] {
-  /*rtl:begin:ignore*/
-  /*rtl:end:ignore*/
-}
-.mdc-floating-label {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-family: var(--mdc-typography-subtitle1-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-subtitle1-font-size, 1.25rem);
-  font-weight: var(--mdc-typography-subtitle1-font-weight, 500);
-  letter-spacing: var(--mdc-typography-subtitle1-letter-spacing, normal);
-  -webkit-text-decoration: var(--mdc-typography-subtitle1-text-decoration, inherit);
-          text-decoration: var(--mdc-typography-subtitle1-text-decoration, inherit);
-  text-transform: var(--mdc-typography-subtitle1-text-transform, none);
-}
-
-.mat-mdc-form-field-subscript-wrapper,
-.mat-mdc-form-field-bottom-align::before {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-family: var(--mdc-typography-caption-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-caption-font-size, 0.75rem);
-  line-height: var(--mdc-typography-caption-line-height, 1rem);
-  font-weight: var(--mdc-typography-caption-font-weight, 400);
-  letter-spacing: var(--mdc-typography-caption-letter-spacing, normal);
-  -webkit-text-decoration: var(--mdc-typography-caption-text-decoration, inherit);
-          text-decoration: var(--mdc-typography-caption-text-decoration, inherit);
-  text-transform: var(--mdc-typography-caption-text-transform, none);
-}
-
-.mat-mdc-form-field,
-.mat-mdc-floating-label {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-family: var(--mdc-typography-body1-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-body1-font-size, 1.125rem);
-  line-height: var(--mdc-typography-body1-line-height, 1.125rem);
-  font-weight: var(--mdc-typography-body1-font-weight, 500);
-  letter-spacing: var(--mdc-typography-body1-letter-spacing, normal);
-  -webkit-text-decoration: var(--mdc-typography-body1-text-decoration, inherit);
-          text-decoration: var(--mdc-typography-body1-text-decoration, inherit);
-  text-transform: var(--mdc-typography-body1-text-transform, none);
-}
-
-.mat-mdc-form-field .mdc-text-field--outlined .mdc-floating-label--float-above {
-  font-size: calc(1.125rem * var(--mat-mdc-form-field-floating-label-scale, 0.75));
-}
-.mat-mdc-form-field .mdc-text-field--outlined .mdc-notched-outline--upgraded .mdc-floating-label--float-above {
-  font-size: 1.125rem;
+html {
+  --mdc-filled-text-field-label-text-font: Fira Sans;
+  --mdc-filled-text-field-label-text-size: 1.125rem;
+  --mdc-filled-text-field-label-text-tracking: normal;
+  --mdc-filled-text-field-label-text-weight: 500;
+  --mdc-outlined-text-field-label-text-font: Fira Sans;
+  --mdc-outlined-text-field-label-text-size: 1.125rem;
+  --mdc-outlined-text-field-label-text-tracking: normal;
+  --mdc-outlined-text-field-label-text-weight: 500;
+  --mat-form-field-container-text-font: Fira Sans;
+  --mat-form-field-container-text-line-height: 1.125rem;
+  --mat-form-field-container-text-size: 1.125rem;
+  --mat-form-field-container-text-tracking: normal;
+  --mat-form-field-container-text-weight: 500;
+  --mat-form-field-outlined-label-text-populated-size: 1.125rem;
+  --mat-form-field-subscript-text-font: Fira Sans;
+  --mat-form-field-subscript-text-line-height: 1rem;
+  --mat-form-field-subscript-text-size: 0.75rem;
+  --mat-form-field-subscript-text-tracking: normal;
+  --mat-form-field-subscript-text-weight: 400;
 }
 
 html {
@@ -1533,17 +1439,38 @@ html {
   --mdc-chip-label-text-weight: 400;
 }
 
-.mdc-form-field {
+.mat-mdc-slide-toggle {
+  --mat-slide-toggle-label-text-font: Fira Sans;
+  --mat-slide-toggle-label-text-size: 1rem;
+  --mat-slide-toggle-label-text-tracking: normal;
+  --mat-slide-toggle-label-text-line-height: 1.25rem;
+  --mat-slide-toggle-label-text-weight: 400;
+}
+.mat-mdc-slide-toggle .mdc-form-field {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-family: var(--mdc-typography-body2-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-body2-font-size, 1rem);
+  font-family: Roboto, sans-serif;
+  /* @alternate */
+  font-family: var(--mdc-typography-body2-font-family, var(--mdc-typography-font-family, Roboto, sans-serif));
+  font-size: 0.875rem;
+  /* @alternate */
+  font-size: var(--mdc-typography-body2-font-size, 0.875rem);
+  line-height: 1.25rem;
+  /* @alternate */
   line-height: var(--mdc-typography-body2-line-height, 1.25rem);
+  font-weight: 400;
+  /* @alternate */
   font-weight: var(--mdc-typography-body2-font-weight, 400);
-  letter-spacing: var(--mdc-typography-body2-letter-spacing, normal);
+  letter-spacing: 0.0178571429em;
+  /* @alternate */
+  letter-spacing: var(--mdc-typography-body2-letter-spacing, 0.0178571429em);
+  text-decoration: inherit;
+  /* @alternate */
   -webkit-text-decoration: var(--mdc-typography-body2-text-decoration, inherit);
           text-decoration: var(--mdc-typography-body2-text-decoration, inherit);
-  text-transform: var(--mdc-typography-body2-text-transform, none);
+  text-transform: inherit;
+  /* @alternate */
+  text-transform: var(--mdc-typography-body2-text-transform, inherit);
 }
 
 .mat-mdc-radio-button .mdc-form-field {
@@ -1613,7 +1540,7 @@ html {
 .mat-mdc-tab-header {
   --mat-tab-header-label-text-font: Fira Sans;
   --mat-tab-header-label-text-size: 0.875rem;
-  --mat-tab-header-label-text-letter-spacing: normal;
+  --mat-tab-header-label-text-tracking: normal;
   --mat-tab-header-label-text-line-height: 1rem;
   --mat-tab-header-label-text-weight: 500;
 }
@@ -1656,6 +1583,13 @@ html {
           text-decoration: var(--mdc-typography-button-text-decoration, none);
   text-transform: var(--mdc-typography-button-text-transform, none);
 }
+.mat-mdc-extended-fab {
+  --mdc-extended-fab-label-text-font: Fira Sans;
+  --mdc-extended-fab-label-text-size: 0.875rem;
+  --mdc-extended-fab-label-text-tracking: normal;
+  --mdc-extended-fab-label-text-weight: 500;
+}
+
 .mat-mdc-snack-bar-container {
   --mdc-snackbar-supporting-text-font: Fira Sans;
   --mdc-snackbar-supporting-text-line-height: 1.25rem;
@@ -1663,48 +1597,22 @@ html {
   --mdc-snackbar-supporting-text-weight: 400;
 }
 
-.mdc-data-table__content {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-family: var(--mdc-typography-body2-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-body2-font-size, 1rem);
-  line-height: var(--mdc-typography-body2-line-height, 1.25rem);
-  font-weight: var(--mdc-typography-body2-font-weight, 400);
-  letter-spacing: var(--mdc-typography-body2-letter-spacing, normal);
-  -webkit-text-decoration: var(--mdc-typography-body2-text-decoration, inherit);
-          text-decoration: var(--mdc-typography-body2-text-decoration, inherit);
-  text-transform: var(--mdc-typography-body2-text-transform, none);
-}
-
-.mdc-data-table__cell {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-family: var(--mdc-typography-body2-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-body2-font-size, 1rem);
-  line-height: var(--mdc-typography-body2-line-height, 1.25rem);
-  font-weight: var(--mdc-typography-body2-font-weight, 400);
-  letter-spacing: var(--mdc-typography-body2-letter-spacing, normal);
-  -webkit-text-decoration: var(--mdc-typography-body2-text-decoration, inherit);
-          text-decoration: var(--mdc-typography-body2-text-decoration, inherit);
-  text-transform: var(--mdc-typography-body2-text-transform, none);
-}
-
-.mdc-data-table__header-cell {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-family: var(--mdc-typography-subtitle2-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-subtitle2-font-size, 0.875rem);
-  line-height: var(--mdc-typography-subtitle2-line-height, 1.125rem);
-  font-weight: var(--mdc-typography-subtitle2-font-weight, 400);
-  letter-spacing: var(--mdc-typography-subtitle2-letter-spacing, normal);
-  -webkit-text-decoration: var(--mdc-typography-subtitle2-text-decoration, inherit);
-          text-decoration: var(--mdc-typography-subtitle2-text-decoration, inherit);
-  text-transform: var(--mdc-typography-subtitle2-text-transform, none);
-}
-
-[dir=rtl] .mdc-data-table__pagination-button .mdc-button__icon, .mdc-data-table__pagination-button .mdc-button__icon[dir=rtl] {
-  /*rtl:begin:ignore*/
-  /*rtl:end:ignore*/
+html {
+  --mat-table-header-headline-font: Fira Sans;
+  --mat-table-header-headline-line-height: 1.125rem;
+  --mat-table-header-headline-size: 0.875rem;
+  --mat-table-header-headline-weight: 400;
+  --mat-table-header-headline-tracking: normal;
+  --mat-table-row-item-label-text-font: Fira Sans;
+  --mat-table-row-item-label-text-line-height: 1.25rem;
+  --mat-table-row-item-label-text-size: 1rem;
+  --mat-table-row-item-label-text-weight: 400;
+  --mat-table-row-item-label-text-tracking: normal;
+  --mat-table-footer-supporting-text-font: Fira Sans;
+  --mat-table-footer-supporting-text-line-height: 1.25rem;
+  --mat-table-footer-supporting-text-size: 1rem;
+  --mat-table-footer-supporting-text-weight: 400;
+  --mat-table-footer-supporting-text-tracking: normal;
 }
 
 html {
@@ -1869,209 +1777,67 @@ html {
   text-transform: var(--mdc-typography-button-text-transform, none);
 }
 
-.mat-calendar-arrow {
-  fill: rgba(0, 0, 0, 0.54);
+html {
+  --mat-datepicker-calendar-date-selected-state-text-color: #484848;
+  --mat-datepicker-calendar-date-selected-state-background-color: var(--fudis-color-primary-light);
+  --mat-datepicker-calendar-date-selected-disabled-state-background-color: rgba(0, 0, 0, 0.26);
+  --mat-datepicker-calendar-date-today-selected-state-outline-color: #484848;
+  --mat-datepicker-calendar-date-focus-state-background-color: var(--fudis-color-primary-light);
+  --mat-datepicker-calendar-date-hover-state-background-color: var(--fudis-color-primary-light);
+  --mat-datepicker-toggle-active-state-icon-color: var(--fudis-color-primary-light);
+  --mat-datepicker-calendar-date-in-range-state-background-color: rgba(var(--fudis-color-primary-light), 0.2);
+  --mat-datepicker-calendar-date-in-comparison-range-state-background-color: rgba(249, 171, 0, 0.2);
+  --mat-datepicker-calendar-date-in-overlap-range-state-background-color: #a8dab5;
+  --mat-datepicker-calendar-date-in-overlap-range-selected-state-background-color: #46a35e;
+  --mat-datepicker-toggle-icon-color: rgba(0, 0, 0, 0.54);
+  --mat-datepicker-calendar-body-label-text-color: rgba(0, 0, 0, 0.54);
+  --mat-datepicker-calendar-period-button-icon-color: rgba(0, 0, 0, 0.54);
+  --mat-datepicker-calendar-navigation-button-icon-color: rgba(0, 0, 0, 0.54);
+  --mat-datepicker-calendar-header-divider-color: rgba(0, 0, 0, 0.12);
+  --mat-datepicker-calendar-header-text-color: rgba(0, 0, 0, 0.54);
+  --mat-datepicker-calendar-date-today-outline-color: rgba(0, 0, 0, 0.38);
+  --mat-datepicker-calendar-date-today-disabled-state-outline-color: rgba(0, 0, 0, 0.18);
+  --mat-datepicker-calendar-date-text-color: rgba(0, 0, 0, 0.87);
+  --mat-datepicker-calendar-date-outline-color: transparent;
+  --mat-datepicker-calendar-date-disabled-state-text-color: rgba(0, 0, 0, 0.38);
+  --mat-datepicker-calendar-date-preview-state-outline-color: rgba(0, 0, 0, 0.24);
+  --mat-datepicker-range-input-separator-color: rgba(0, 0, 0, 0.87);
+  --mat-datepicker-range-input-disabled-state-separator-color: rgba(0, 0, 0, 0.38);
+  --mat-datepicker-range-input-disabled-state-text-color: rgba(0, 0, 0, 0.38);
+  --mat-datepicker-calendar-container-background-color: white;
+  --mat-datepicker-calendar-container-text-color: rgba(0, 0, 0, 0.87);
 }
 
-.mat-datepicker-toggle,
-.mat-datepicker-content .mat-calendar-next-button,
-.mat-datepicker-content .mat-calendar-previous-button {
-  color: rgba(0, 0, 0, 0.54);
+.mat-datepicker-content.mat-accent {
+  --mat-datepicker-calendar-date-selected-state-text-color: white;
+  --mat-datepicker-calendar-date-selected-state-background-color: var(--fudis-color-primary);
+  --mat-datepicker-calendar-date-selected-disabled-state-background-color: rgba(0, 0, 0, 0.26);
+  --mat-datepicker-calendar-date-today-selected-state-outline-color: white;
+  --mat-datepicker-calendar-date-focus-state-background-color: var(--fudis-color-primary);
+  --mat-datepicker-calendar-date-hover-state-background-color: var(--fudis-color-primary);
+  --mat-datepicker-calendar-date-in-range-state-background-color: rgba(var(--fudis-color-primary), 0.2);
+  --mat-datepicker-calendar-date-in-comparison-range-state-background-color: rgba(249, 171, 0, 0.2);
+  --mat-datepicker-calendar-date-in-overlap-range-state-background-color: #a8dab5;
+  --mat-datepicker-calendar-date-in-overlap-range-selected-state-background-color: #46a35e;
+}
+.mat-datepicker-content.mat-warn {
+  --mat-datepicker-calendar-date-selected-state-text-color: white;
+  --mat-datepicker-calendar-date-selected-state-background-color: #f44336;
+  --mat-datepicker-calendar-date-selected-disabled-state-background-color: rgba(244, 67, 54, 0.4);
+  --mat-datepicker-calendar-date-today-selected-state-outline-color: white;
+  --mat-datepicker-calendar-date-focus-state-background-color: rgba(244, 67, 54, 0.3);
+  --mat-datepicker-calendar-date-hover-state-background-color: rgba(244, 67, 54, 0.3);
+  --mat-datepicker-calendar-date-in-range-state-background-color: rgba(244, 67, 54, 0.2);
+  --mat-datepicker-calendar-date-in-comparison-range-state-background-color: rgba(249, 171, 0, 0.2);
+  --mat-datepicker-calendar-date-in-overlap-range-state-background-color: #a8dab5;
+  --mat-datepicker-calendar-date-in-overlap-range-selected-state-background-color: #46a35e;
 }
 
-.mat-calendar-table-header-divider::after {
-  background: rgba(0, 0, 0, 0.12);
-}
-
-.mat-calendar-table-header,
-.mat-calendar-body-label {
-  color: rgba(0, 0, 0, 0.54);
-}
-
-.mat-calendar-body-cell-content,
-.mat-date-range-input-separator {
-  color: rgba(0, 0, 0, 0.87);
-  border-color: transparent;
-}
-
-.mat-calendar-body-disabled > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
-  color: rgba(0, 0, 0, 0.38);
-}
-
-.mat-form-field-disabled .mat-date-range-input-separator {
-  color: rgba(0, 0, 0, 0.38);
-}
-
-.mat-calendar-body-in-preview {
-  color: rgba(0, 0, 0, 0.24);
-}
-
-.mat-calendar-body-today:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
-  border-color: rgba(0, 0, 0, 0.38);
-}
-
-.mat-calendar-body-disabled > .mat-calendar-body-today:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
-  border-color: rgba(0, 0, 0, 0.18);
-}
-
-.mat-calendar-body-in-range::before {
-  background: var(--fudis-color-primary-light);
-}
-
-.mat-calendar-body-comparison-identical,
-.mat-calendar-body-in-comparison-range::before {
-  background: rgba(249, 171, 0, 0.2);
-}
-
-.mat-calendar-body-comparison-bridge-start::before,
-[dir=rtl] .mat-calendar-body-comparison-bridge-end::before {
-  background: linear-gradient(to right, var(--fudis-color-primary-light) 50%, rgba(249, 171, 0, 0.2) 50%);
-}
-
-.mat-calendar-body-comparison-bridge-end::before,
-[dir=rtl] .mat-calendar-body-comparison-bridge-start::before {
-  background: linear-gradient(to left, var(--fudis-color-primary-light) 50%, rgba(249, 171, 0, 0.2) 50%);
-}
-
-.mat-calendar-body-in-range > .mat-calendar-body-comparison-identical,
-.mat-calendar-body-in-comparison-range.mat-calendar-body-in-range::after {
-  background: #a8dab5;
-}
-
-.mat-calendar-body-comparison-identical.mat-calendar-body-selected,
-.mat-calendar-body-in-comparison-range > .mat-calendar-body-selected {
-  background: #46a35e;
-}
-
-.mat-calendar-body-selected {
-  background-color: var(--fudis-color-primary-light);
-  color: #484848;
-}
-
-.mat-calendar-body-disabled > .mat-calendar-body-selected {
-  opacity: 0.2;
-}
-
-.mat-calendar-body-today.mat-calendar-body-selected {
-  box-shadow: inset 0 0 0 1px #484848;
-}
-
-.cdk-keyboard-focused .mat-calendar-body-active > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical),
-.cdk-program-focused .mat-calendar-body-active > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
-  background-color: var(--fudis-color-primary-light);
-}
-
-@media (hover: hover) {
-  .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
-    background-color: var(--fudis-color-primary-light);
-  }
-}
-.mat-datepicker-content {
-  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-  background-color: white;
-  color: rgba(0, 0, 0, 0.87);
-}
-.mat-datepicker-content.mat-accent .mat-calendar-body-in-range::before {
-  background: var(--fudis-color-primary);
-}
-.mat-datepicker-content.mat-accent .mat-calendar-body-comparison-identical,
-.mat-datepicker-content.mat-accent .mat-calendar-body-in-comparison-range::before {
-  background: rgba(249, 171, 0, 0.2);
-}
-.mat-datepicker-content.mat-accent .mat-calendar-body-comparison-bridge-start::before,
-.mat-datepicker-content.mat-accent [dir=rtl] .mat-calendar-body-comparison-bridge-end::before {
-  background: linear-gradient(to right, var(--fudis-color-primary) 50%, rgba(249, 171, 0, 0.2) 50%);
-}
-.mat-datepicker-content.mat-accent .mat-calendar-body-comparison-bridge-end::before,
-.mat-datepicker-content.mat-accent [dir=rtl] .mat-calendar-body-comparison-bridge-start::before {
-  background: linear-gradient(to left, var(--fudis-color-primary) 50%, rgba(249, 171, 0, 0.2) 50%);
-}
-.mat-datepicker-content.mat-accent .mat-calendar-body-in-range > .mat-calendar-body-comparison-identical,
-.mat-datepicker-content.mat-accent .mat-calendar-body-in-comparison-range.mat-calendar-body-in-range::after {
-  background: #a8dab5;
-}
-.mat-datepicker-content.mat-accent .mat-calendar-body-comparison-identical.mat-calendar-body-selected,
-.mat-datepicker-content.mat-accent .mat-calendar-body-in-comparison-range > .mat-calendar-body-selected {
-  background: #46a35e;
-}
-.mat-datepicker-content.mat-accent .mat-calendar-body-selected {
-  background-color: var(--fudis-color-primary);
-  color: white;
-}
-.mat-datepicker-content.mat-accent .mat-calendar-body-disabled > .mat-calendar-body-selected {
-  opacity: 0.2;
-}
-.mat-datepicker-content.mat-accent .mat-calendar-body-today.mat-calendar-body-selected {
-  box-shadow: inset 0 0 0 1px white;
-}
-.mat-datepicker-content.mat-accent .cdk-keyboard-focused .mat-calendar-body-active > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical),
-.mat-datepicker-content.mat-accent .cdk-program-focused .mat-calendar-body-active > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
-  background-color: var(--fudis-color-primary);
-}
-@media (hover: hover) {
-  .mat-datepicker-content.mat-accent .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
-    background-color: var(--fudis-color-primary);
-  }
-}
-.mat-datepicker-content.mat-warn .mat-calendar-body-in-range::before {
-  background: rgba(244, 67, 54, 0.2);
-}
-.mat-datepicker-content.mat-warn .mat-calendar-body-comparison-identical,
-.mat-datepicker-content.mat-warn .mat-calendar-body-in-comparison-range::before {
-  background: rgba(249, 171, 0, 0.2);
-}
-.mat-datepicker-content.mat-warn .mat-calendar-body-comparison-bridge-start::before,
-.mat-datepicker-content.mat-warn [dir=rtl] .mat-calendar-body-comparison-bridge-end::before {
-  background: linear-gradient(to right, rgba(244, 67, 54, 0.2) 50%, rgba(249, 171, 0, 0.2) 50%);
-}
-.mat-datepicker-content.mat-warn .mat-calendar-body-comparison-bridge-end::before,
-.mat-datepicker-content.mat-warn [dir=rtl] .mat-calendar-body-comparison-bridge-start::before {
-  background: linear-gradient(to left, rgba(244, 67, 54, 0.2) 50%, rgba(249, 171, 0, 0.2) 50%);
-}
-.mat-datepicker-content.mat-warn .mat-calendar-body-in-range > .mat-calendar-body-comparison-identical,
-.mat-datepicker-content.mat-warn .mat-calendar-body-in-comparison-range.mat-calendar-body-in-range::after {
-  background: #a8dab5;
-}
-.mat-datepicker-content.mat-warn .mat-calendar-body-comparison-identical.mat-calendar-body-selected,
-.mat-datepicker-content.mat-warn .mat-calendar-body-in-comparison-range > .mat-calendar-body-selected {
-  background: #46a35e;
-}
-.mat-datepicker-content.mat-warn .mat-calendar-body-selected {
-  background-color: #f44336;
-  color: white;
-}
-.mat-datepicker-content.mat-warn .mat-calendar-body-disabled > .mat-calendar-body-selected {
-  background-color: rgba(244, 67, 54, 0.4);
-}
-.mat-datepicker-content.mat-warn .mat-calendar-body-today.mat-calendar-body-selected {
-  box-shadow: inset 0 0 0 1px white;
-}
-.mat-datepicker-content.mat-warn .cdk-keyboard-focused .mat-calendar-body-active > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical),
-.mat-datepicker-content.mat-warn .cdk-program-focused .mat-calendar-body-active > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
-  background-color: rgba(244, 67, 54, 0.3);
-}
-@media (hover: hover) {
-  .mat-datepicker-content.mat-warn .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
-    background-color: rgba(244, 67, 54, 0.3);
-  }
-}
-
-.mat-datepicker-content-touch {
-  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
-}
-
-.mat-datepicker-toggle-active {
-  color: var(--fudis-color-primary-light);
-}
 .mat-datepicker-toggle-active.mat-accent {
-  color: var(--fudis-color-primary);
+  --mat-datepicker-toggle-active-state-icon-color: var(--fudis-color-primary);
 }
 .mat-datepicker-toggle-active.mat-warn {
-  color: #f44336;
-}
-
-.mat-date-range-input-inner[disabled] {
-  color: rgba(0, 0, 0, 0.38);
+  --mat-datepicker-toggle-active-state-icon-color: #f44336;
 }
 
 .mat-calendar-controls .mat-mdc-icon-button.mat-mdc-button-base {
@@ -2084,23 +1850,15 @@ html {
   display: none;
 }
 
-.mat-calendar {
-  font-family: Fira Sans;
-}
-
-.mat-calendar-body {
-  font-size: 13px;
-}
-
-.mat-calendar-body-label,
-.mat-calendar-period-button {
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.mat-calendar-table-header th {
-  font-size: 11px;
-  font-weight: 400;
+html {
+  --mat-datepicker-calendar-text-font: Fira Sans;
+  --mat-datepicker-calendar-text-size: 13px;
+  --mat-datepicker-calendar-body-label-text-size: 0.875rem;
+  --mat-datepicker-calendar-body-label-text-weight: 500;
+  --mat-datepicker-calendar-period-button-text-size: 0.875rem;
+  --mat-datepicker-calendar-period-button-text-weight: 500;
+  --mat-datepicker-calendar-header-text-size: 11px;
+  --mat-datepicker-calendar-header-text-weight: 400;
 }
 
 .mat-mdc-dialog-container {
@@ -2159,7 +1917,8 @@ html {
   font-weight: 600;
   font-style: normal;
 }
-/* stylelint-disable unit-disallowed-list */ /* stylelint-disable property-disallowed-list */
+/* stylelint-disable unit-disallowed-list */
+/* stylelint-disable property-disallowed-list */
 /* stylelint-disable unit-disallowed-list */
 .fudis-visually-hidden {
   position: absolute;
