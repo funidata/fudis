@@ -11,9 +11,16 @@ import { DialogTestComponent } from './dialog-test/dialog-test.component';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 import { TranslocoRootModule } from './transloco-root.module';
 import { AppFormExampleComponent } from './components/formExamples.component';
+import { AppDropdownExamplesComponent } from './components/dropdownExamples.component';
 
 @NgModule({
-	declarations: [AppComponent, DialogTestComponent, DialogTestContentComponent, AppFormExampleComponent],
+	declarations: [
+		AppComponent,
+		DialogTestComponent,
+		DialogTestContentComponent,
+		AppFormExampleComponent,
+		AppDropdownExamplesComponent,
+	],
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
