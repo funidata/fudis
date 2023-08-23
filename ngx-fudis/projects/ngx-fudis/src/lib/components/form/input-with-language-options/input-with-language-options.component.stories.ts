@@ -5,7 +5,7 @@ import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { InputWithLanguageOptionsComponent } from './input-with-language-options.component';
-import { FormGroupValidators } from '../../../utilities/form/validators';
+import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 import { FudisInputWithLanguageOptionsFormGroup } from '../../../types/forms';
 
 export default {
@@ -90,7 +90,7 @@ const TemplateOneRequired: StoryFn = () => ({
 				swedish: new FormControl<string | null>(null, [Validators.maxLength(30)]),
 				english: new FormControl<string | null>(null, [Validators.maxLength(30)]),
 			},
-			[FormGroupValidators.atLeastOneRequired()]
+			[FudisFormGroupValidators.atLeastOneRequired()]
 		),
 	},
 	template: html`
