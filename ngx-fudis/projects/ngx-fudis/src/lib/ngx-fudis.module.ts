@@ -89,6 +89,9 @@ import { LanguageBadgeGroupComponent } from './components/language-badge-group/l
 import { LanguageBadgeComponent } from './components/language-badge-group/language-badge/language-badge.component';
 import { FudisTranslationService } from './utilities/translation/translation.service';
 import { FudisLanguageBadgeGroupService } from './components/language-badge-group/language-badge-group.service';
+import { AlertComponent } from './components/alert/alert/alert.component';
+import { AlertGroupComponent } from './components/alert/alert-group/alert-group.component';
+import { FudisAlertService } from './components/alert/alert-service/alert.service';
 
 @NgModule({
 	/*
@@ -96,6 +99,8 @@ import { FudisLanguageBadgeGroupService } from './components/language-badge-grou
 	 */
 	declarations: [
 		ActionsDirective,
+		AlertComponent,
+		AlertGroupComponent,
 		AutocompleteComponent,
 		AutocompleteMultiSelectComponent,
 		AutocompleteMultiSelectSelectedItemChipComponent,
@@ -183,6 +188,8 @@ import { FudisLanguageBadgeGroupService } from './components/language-badge-grou
 	 */
 	exports: [
 		ActionsDirective,
+		AlertComponent,
+		AlertGroupComponent,
 		AutocompleteComponent,
 		AutocompleteMultiSelectComponent,
 		BadgeComponent,
@@ -232,6 +239,7 @@ import { FudisLanguageBadgeGroupService } from './components/language-badge-grou
 		TooltipDirective,
 	],
 	providers: [
+		FudisAlertService,
 		FudisDialogService,
 		FudisDropdownMenuItemService,
 		FudisErrorSummaryService,
