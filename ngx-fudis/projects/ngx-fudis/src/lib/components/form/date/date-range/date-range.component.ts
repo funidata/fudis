@@ -117,14 +117,14 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
 	 * Check and set, if start date is set to after end date.s
 	 */
 	checkDateCrossings(): void {
-		const startDateErrors = this.startDate.control.errors;
-		const endDateErrors = this.endDate.control.errors;
+		const startDateErrors = this.startDate.control?.errors;
+		const endDateErrors = this.endDate.control?.errors;
 
-		if (
-			this.startDate.control.value &&
-			this.endDate.control.value &&
-			this.startDate.control.value > this.endDate.control.value
-		) {
+		const startDate = this.startDate.control?.value;
+		const endDate = this.endDate.control?.value;
+
+		// Compate only dates, do not take hours into account.
+		if (startDate && endDate && startDate.setHours(0, 0, 0, 0) > endDate.setHours(0, 0, 0, 0)) {
 			this.startDate.control.setErrors({ ...startDateErrors, matStartDateInvalid: true });
 			this.endDate.control.setErrors({ ...endDateErrors, matEndDateInvalid: true });
 		} else if (startDateErrors || endDateErrors) {
