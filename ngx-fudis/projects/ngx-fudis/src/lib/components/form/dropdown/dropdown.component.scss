@@ -60,7 +60,7 @@
 
 			/* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector, selector-class-pattern */
 			& .fudis-dropdown__option__xs {
-				padding: spacing.$spacing-xxs spacing.$spacing-xs;
+				padding: spacing.$spacing-xxs spacing.$spacing-xxs spacing.$spacing-xxs spacing.$spacing-xs;
 			}
 		}
 	}
