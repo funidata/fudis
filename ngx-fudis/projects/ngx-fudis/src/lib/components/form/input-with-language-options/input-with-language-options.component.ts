@@ -27,6 +27,9 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 		effect(() => {
 			this._languageLabel = this._translations().INPUT_WITH_LANGUAGE_OPTIONS.LANGUAGE;
 			this._missingLanguage = this._translations().INPUT_WITH_LANGUAGE_OPTIONS.MISSING;
+			if (this.options) {
+				this._updatedOptions = this.updateDropdownList();
+			}
 		});
 	}
 
@@ -117,7 +120,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	}
 
 	handleInputBlur(event: Event, controlKey: string): void {
-		this._updatedOptions = this._missingLanguage ? this.updateDropdownList() : this.options;
+		this._updatedOptions = this.updateDropdownList();
 		this.formGroup.markAllAsTouched();
 
 		this.isControlRequired((event.target as HTMLInputElement).value, controlKey);
@@ -228,7 +231,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('inputWithLanguageOptions');
 
-		this._updatedOptions = this._missingLanguage ? this.updateDropdownList() : this.options;
+		this._updatedOptions = this.updateDropdownList();
 
 		this._dropdownControl = new FormControl(this._updatedOptions[0]);
 		this._for = `${this.id}_${this.options[0].value}`;
@@ -237,7 +240,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	}
 
 	ngOnChanges(): void {
-		this._updatedOptions = this._missingLanguage ? this.updateDropdownList() : this.options;
+		this._updatedOptions = this.updateDropdownList();
 	}
 
 	ngAfterViewInit(): void {
