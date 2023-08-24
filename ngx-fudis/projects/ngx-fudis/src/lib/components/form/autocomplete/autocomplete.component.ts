@@ -44,6 +44,13 @@ export class AutocompleteComponent
 	@Input() size: FudisInputWidth = 'lg';
 
 	/**
+	 * Pre-selected dropdown options.
+	 * If string, it fills the input with given string. NOTE: This sets formControl's value to 'null' if string does not match of any viewValues from 'options'.
+	 * If given FudisDropdownOption, it searches given 'options' input array for matching 'value' and 'viewValue' with selectedOptions and updates formControl value with item from 'options' input.
+	 */
+	@Input() selectedOption: string | FudisDropdownOption;
+
+	/**
 	 * Option whether the dropdown options are shown only after three charactes (search) or if options are displayed when focusing the search input even without typing (dropdown)
 	 */
 	@Input() variant: 'search' | 'dropdown' = 'search';
@@ -68,10 +75,8 @@ export class AutocompleteComponent
 	}
 
 	ngAfterContentInit() {
-		if (this.control.value) {
-			this._autocompleteFormControl.patchValue(this.control.value.viewValue);
-		}
-		this.checkFilteredOptions();
+		this._setInitialValues();
+		this._checkFilteredOptions();
 	}
 
 	ngAfterViewInit(): void {
@@ -84,11 +89,56 @@ export class AutocompleteComponent
 		this._required = this.required ?? this.control.hasValidator(Validators.required);
 	}
 
-	checkFilteredOptions() {
+	/**
+	 * Clear any written or selected value in the autocomplete field
+	 */
+	protected _clearFilter(): void {
+		// Clear input field and control value
+		this.control.setValue(null);
+		this._autocompleteFormControl.setValue(null);
+
+		this._checkFilteredOptions();
+
+		// After clearing set focus back to input field
+		this.inputRef.nativeElement.focus();
+	}
+
+	/**
+	 * Handle blur
+	 */
+	protected _autocompleteBlur(event: Event): void {
+		this.control.markAsTouched();
+		if (this.control.valid && this.control.value) {
+			this._autocompleteFormControl.patchValue(this.control.value.viewValue);
+		}
+		this.handleBlur.emit(event);
+	}
+
+	private _setInitialValues(): void {
+		if (this.control.value) {
+			this._autocompleteFormControl.patchValue(this.control.value.viewValue);
+		} else if (this.selectedOption && typeof this.selectedOption !== 'string') {
+			const findMe = this.selectedOption;
+
+			const foundIndex = this.options.findIndex(
+				(option: FudisDropdownOption) => option.value === findMe.value && option.viewValue === findMe.viewValue
+			);
+			if (foundIndex !== -1) {
+				this._autocompleteFormControl.patchValue(this.options[foundIndex].viewValue);
+				this.control.patchValue(this.options[foundIndex]);
+			}
+		} else if (this.selectedOption) {
+			this._autocompleteFormControl.patchValue(this.selectedOption);
+			this._updateControlValue(this.selectedOption);
+		}
+	}
+
+	private _checkFilteredOptions() {
 		if (this.variant === 'search') {
 			this._filteredOptions = this._autocompleteFormControl.valueChanges.pipe(
+				startWith(this._autocompleteFormControl.value),
 				map((value) => {
-					this.updateControlValue(value);
+					this._updateControlValue(value);
 					// Start filtering after three characters
 					if (value && value.length > 2 && !this.control.value) {
 						return this._filter(value);
@@ -99,9 +149,9 @@ export class AutocompleteComponent
 		}
 		if (this.variant === 'dropdown') {
 			this._filteredOptions = this._autocompleteFormControl.valueChanges.pipe(
-				startWith(''),
+				startWith(this._autocompleteFormControl.value),
 				map((value) => {
-					this.updateControlValue(value);
+					this._updateControlValue(value);
 					if ((value || value === '') && !this.control.value) {
 						return this._filter(value);
 					}
@@ -114,7 +164,7 @@ export class AutocompleteComponent
 	/**
 	 * Check that value is found from given options list, if not set control as null
 	 */
-	updateControlValue(value: string | null): void {
+	private _updateControlValue(value: string | null): void {
 		if (!value) {
 			this.control.patchValue(null);
 		} else {
@@ -128,31 +178,6 @@ export class AutocompleteComponent
 				this.control.patchValue(null);
 			}
 		}
-	}
-
-	/**
-	 * Clear any written or selected value in the autocomplete field
-	 */
-	clearFilter(): void {
-		// Clear input field and control value
-		this.control.setValue(null);
-		this._autocompleteFormControl.setValue(null);
-
-		this.checkFilteredOptions();
-
-		// After clearing set focus back to input field
-		this.inputRef.nativeElement.focus();
-	}
-
-	/**
-	 * Handle blur
-	 */
-	autocompleteBlur(event: Event): void {
-		this.control.markAsTouched();
-		if (this.control.valid && this.control.value) {
-			this._autocompleteFormControl.patchValue(this.control.value.viewValue);
-		}
-		this.handleBlur.emit(event);
 	}
 
 	/**
