@@ -118,7 +118,7 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 			const valueToFind: FudisDropdownOption = this.selectedOptions;
 
 			const foundIndex = this.options.findIndex((option) => {
-				return option.value === valueToFind.value && option.viewValue === valueToFind.viewValue;
+				return option.value === valueToFind?.value && option.viewValue === valueToFind?.viewValue;
 			});
 
 			if (foundIndex !== -1) {

@@ -3,8 +3,8 @@ import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/ang
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
 
+import { RouterModule } from '@angular/router';
 import {
 	FudisDropdownOption,
 	FudisRadioButtonOption,
@@ -326,7 +326,7 @@ export default {
 	decorators: [
 		moduleMetadata({
 			declarations: [FormContentExampleComponent],
-			imports: [ReactiveFormsModule, RouterTestingModule],
+			imports: [ReactiveFormsModule, RouterModule],
 		}),
 		applicationConfig({
 			providers: [importProvidersFrom(BrowserAnimationsModule)],
@@ -342,7 +342,7 @@ export default {
 const html = String.raw;
 
 const Template: StoryFn = () => ({
-	template: html` <example-form-content></example-form-content> `,
+	template: html` <example-form-content />`,
 });
 
 export const Example = Template.bind({});
