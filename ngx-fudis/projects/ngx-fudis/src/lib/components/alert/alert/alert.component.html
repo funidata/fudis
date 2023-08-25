@@ -1,1 +1,14 @@
-<p>alert works!</p>
+<div class="fudis-alert fudis-alert__{{ variant }}" [id]="id">
+	<fudis-body-text [size]="'lg-regular'" [color]="'white'">
+		{{ message }}
+		<fudis-link
+			class="fudis-notification__link"
+			*ngIf="routerLinkUrl && linkTitle"
+			[routerLinkUrl]="routerLinkUrl"
+			[linkTitle]="linkTitle"
+			[color]="'default'" />
+	</fudis-body-text>
+	<button class="fudis-alert__close">
+		<fudis-icon [icon]="'close-big'" />
+	</button>
+</div>

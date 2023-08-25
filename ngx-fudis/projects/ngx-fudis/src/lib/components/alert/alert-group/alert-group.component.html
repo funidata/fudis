@@ -1,1 +1,10 @@
-<p>alert-group works!</p>
+<section class="fudis-alert-group">
+	<ng-container *ngFor="let alert of _alertList()">
+		<fudis-alert
+			[variant]="alert.type"
+			[message]="alert.message"
+			[id]="alert.id"
+			[linkTitle]="alert.linkTitle"
+			[routerLinkUrl]="alert.routerLinkUrl" />
+	</ng-container>
+</section>

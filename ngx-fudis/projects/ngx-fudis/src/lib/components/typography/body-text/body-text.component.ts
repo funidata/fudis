@@ -24,4 +24,6 @@ export class BodyTextComponent {
 	 * Optional margin bottom
 	 */
 	@Input() marginBottom: FudisSpacing = 'none';
+
+	@Input() color: 'gray-dark' | 'white' = 'gray-dark';
 }

@@ -48,7 +48,7 @@ export class LinkComponent {
 	/**
 	 * Link URL using Angular RouterLink
 	 */
-	@Input() routerLinkUrl: string | any[] | null | any;
+	@Input() routerLinkUrl: string | any[] | null;
 
 	/**
 	 * Fragment ID for Angular Router

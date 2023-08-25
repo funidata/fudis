@@ -1,0 +1,26 @@
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../foundations/colors/mixins.scss' as colors;
+
+.fudis-alert {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: spacing.$spacing-lg;
+	text-align: center;
+
+	&__info {
+		@include colors.bg-color('primary');
+	}
+
+	&__success {
+		@include colors.bg-color('green');
+	}
+
+	&__danger {
+		@include colors.bg-color('red');
+	}
+
+	&__warning {
+		@include colors.bg-color('yellow');
+	}
+}
