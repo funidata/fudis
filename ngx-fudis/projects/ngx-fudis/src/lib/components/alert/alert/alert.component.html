@@ -1,5 +1,5 @@
 <div class="fudis-alert fudis-alert__{{ variant }}" [id]="id">
-	<fudis-body-text [size]="'lg-regular'" [color]="'white'">
+	<fudis-body-text [classList]="'fudis-alert__text'" [size]="'lg-regular'" [color]="'white'">
 		{{ message }}
 		<fudis-link
 			class="fudis-notification__link"
@@ -8,7 +8,8 @@
 			[linkTitle]="linkTitle"
 			[color]="'default'" />
 	</fudis-body-text>
-	<button class="fudis-alert__close">
-		<fudis-icon [icon]="'close-big'" />
+
+	<button class="fudis-alert__close fudis-alert__close__{{ variant }}">
+		<fudis-icon [icon]="'close'" />
 	</button>
 </div>

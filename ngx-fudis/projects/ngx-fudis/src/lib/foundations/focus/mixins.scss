@@ -10,6 +10,17 @@
 	box-shadow: 0 0 0 spacing.$spacing-xxs colors.$color-white;
 }
 
+/*
+* Use this inner focus only if absolutely must. Prefer standard generic one above.
+*/
+@mixin focus-generic-inner {
+	outline: tokens.$focus-generic-outline;
+	outline-offset: calc(0px - spacing.$pixel-3);
+	box-shadow:
+		0 0 0 0 colors.$color-white,
+		inset 0 0 0 spacing.$spacing-xxs colors.$color-white;
+}
+
 @mixin focus-form-field {
 	@include borders.border('1px', 'solid', 'focus-primary');
 
