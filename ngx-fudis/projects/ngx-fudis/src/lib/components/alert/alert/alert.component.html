@@ -9,7 +9,7 @@
 			[color]="'default'" />
 	</fudis-body-text>
 
-	<button class="fudis-alert__close fudis-alert__close__{{ variant }}">
+	<button (click)="_handleCloseClick()" class="fudis-alert__close fudis-alert__close__{{ variant }}">
 		<fudis-icon [icon]="'close'" />
 	</button>
 </div>

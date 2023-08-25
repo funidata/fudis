@@ -18,8 +18,6 @@ export class FudisAlertService {
 		currentAlerts.push(alertToAdd);
 
 		this._alerts.set(currentAlerts);
-
-		console.log(alertToAdd);
 	}
 
 	public dismissAlert(id: string): void {
