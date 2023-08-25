@@ -1,8 +1,7 @@
 import { Component, ContentChild, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FudisIcon } from '../../types/icons';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
-
-export type NotificationType = 'warning' | 'danger' | 'success' | 'light';
+import { FudisNotification } from '../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-notification',
@@ -15,7 +14,7 @@ export class NotificationComponent implements OnChanges, OnInit {
 	/**
 	 * Notification variant options
 	 */
-	@Input() variant: NotificationType = 'warning';
+	@Input() variant: FudisNotification = 'warning';
 
 	/**
 	 * Aria text of the notification variant
@@ -73,7 +72,7 @@ export class NotificationComponent implements OnChanges, OnInit {
 			case 'success':
 				this._icon = 'checkmark-circle';
 				break;
-			case 'light':
+			case 'info':
 				this._icon = 'info-circle';
 				break;
 			default:

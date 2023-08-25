@@ -25,9 +25,19 @@ export interface FudisLanguageBadgeTranslations {
 	fi?: string;
 }
 
+export interface FudisAlert {
+	message: string;
+	type: FudisNotification;
+	routerLinkUrl?: string | any[] | null;
+	linkTitle?: string;
+	id: string;
+}
+
 export type FudisExpandableType = 'regular' | 'lite';
 
 export type FudisSpacing = 'none' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+
+export type FudisNotification = 'warning' | 'danger' | 'success' | 'info';
 
 export type FudisTooltipPosition = 'left' | 'right' | 'above' | 'below';
 

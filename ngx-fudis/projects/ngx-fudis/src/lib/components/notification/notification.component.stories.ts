@@ -53,7 +53,7 @@ export const AllVariants: StoryFn = () => ({
 				Whoops! Some error happened.
 			</fudis-notification>
 			<fudis-notification [variant]="'success'">You succeeded!</fudis-notification>
-			<fudis-notification [variant]="'light'">This is a totally neutral message</fudis-notification>
+			<fudis-notification [variant]="'info'">This is a totally neutral message</fudis-notification>
 		</fudis-grid>
 	`,
 });
