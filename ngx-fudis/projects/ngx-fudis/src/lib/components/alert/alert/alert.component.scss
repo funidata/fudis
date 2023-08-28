@@ -11,6 +11,10 @@
 	min-height: spacing.$spacing-lg;
 	text-align: center;
 
+	&__link {
+		margin-left: spacing.$spacing-xxs;
+	}
+
 	&__text {
 		flex-grow: 1;
 	}

@@ -1,18 +1,27 @@
-<div class="fudis-alert fudis-alert__{{ variant }}" [id]="id">
+<div class="fudis-alert fudis-alert__{{ variant }}" [id]="htmlId">
 	<fudis-body-text
+		[attr.role]="!routerLinkUrl && !linkTitle ? 'alert' : null"
 		[classList]="'fudis-alert__text'"
 		[size]="'lg-regular'"
 		[color]="variant !== 'warning' ? 'white' : 'default'">
 		{{ message }}
 		<fudis-link
+			[attr.aria-label]="message"
+			[initialFocus]="true"
+			[trackFocus]="true"
 			[color]="variant !== 'warning' ? 'white' : 'default'"
-			class="fudis-notification__link"
+			class="fudis-alert__link"
 			*ngIf="routerLinkUrl && linkTitle"
 			[routerLinkUrl]="routerLinkUrl"
 			[linkTitle]="linkTitle" />
 	</fudis-body-text>
 
-	<button (click)="_handleCloseClick()" class="fudis-alert__close fudis-alert__close__{{ variant }}">
+	<button
+		[attr.aria-label]="message + ', ' + _closeLabel"
+		[id]="buttonId"
+		(click)="_handleCloseClick()"
+		(focus)="_handleFocus($event)"
+		class="fudis-alert__close fudis-alert__close__{{ variant }}">
 		<fudis-icon [icon]="'close'" [color]="variant !== 'warning' ? 'white' : 'default'" />
 	</button>
 </div>

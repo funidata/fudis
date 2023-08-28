@@ -1,6 +1,16 @@
-import { ChangeDetectionStrategy, Component, Input, Signal, effect } from '@angular/core';
+import {
+	AfterViewInit,
+	ChangeDetectionStrategy,
+	Component,
+	ElementRef,
+	Input,
+	Signal,
+	ViewChild,
+	effect,
+} from '@angular/core';
 import { FudisTranslationService } from '../../utilities/translation/translation.service';
 import { FudisTranslationConfig } from '../../types/miscellaneous';
+import { FudisFocusService } from '../../services/focus/focus.service';
 
 /**
  * Example usages:
@@ -31,14 +41,22 @@ import { FudisTranslationConfig } from '../../types/miscellaneous';
 	styleUrls: ['./link.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LinkComponent {
-	constructor(private _translationService: FudisTranslationService) {
+export class LinkComponent implements AfterViewInit {
+	constructor(
+		private _translationService: FudisTranslationService,
+		private _focusService: FudisFocusService
+	) {
 		effect(() => {
 			this._translations = this._translationService.getTranslations();
 
 			this._externalLinkAriaLabel = this._translations().LINK.EXTERNAL_LINK;
 		});
 	}
+
+	/**
+	 * Template reference for input. Used in e. g. initialFocus
+	 */
+	@ViewChild('linkRef') linkRef: ElementRef;
 
 	/**
 	 * Link URL using native href
@@ -78,6 +96,16 @@ export class LinkComponent {
 	@Input() color: 'primary' | 'default' | 'white' = 'primary';
 
 	/**
+	 * Set browser focus to link on first load.
+	 */
+	@Input() initialFocus: boolean = false;
+
+	/**
+	 * To track focus events in Alert Service to guide keyboard users' focus correctly.
+	 */
+	@Input() trackFocus: boolean = false;
+
+	/**
 	 * Aria-label for the external link
 	 */
 	protected _externalLinkAriaLabel: string;
@@ -86,4 +114,29 @@ export class LinkComponent {
 	 * Fudis translations
 	 */
 	protected _translations: Signal<FudisTranslationConfig>;
+
+	private _focusTryCounter: number = 0;
+
+	ngAfterViewInit(): void {
+		if (this.initialFocus) {
+			this._focusToLink();
+		}
+	}
+
+	protected _handleFocus(event: FocusEvent): void {
+		if (this.trackFocus) {
+			this._focusService.setFocusTarget(event.relatedTarget);
+		}
+	}
+
+	private _focusToLink(): void {
+		if (this.linkRef?.nativeElement) {
+			this.linkRef.nativeElement.focus();
+		} else if (this._focusTryCounter < 100) {
+			setTimeout(() => {
+				this._focusTryCounter += 1;
+				this._focusToLink();
+			}, 100);
+		}
+	}
 }

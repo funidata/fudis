@@ -1,7 +1,8 @@
 // also exported from '@storybook/angular' if you can deal with breaking changes in 6.1
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, Signal, effect } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FudisAlertElement } from 'dist/ngx-fudis/lib/types/miscellaneous';
 import readme from '../readme.mdx';
 import { AlertGroupComponent } from './alert-group.component';
 import { FudisAlertService } from '../alert-service/alert.service';
@@ -26,20 +27,23 @@ class AddAlertsComponent implements AfterViewInit {
 	constructor(
 		private _alertService: FudisAlertService,
 		private _idService: FudisIdService
-	) {}
+	) {
+		effect(() => {
+			this._alerts = this._alertService.getAlertsSignal();
+			this._marginCounter = 2 + this._alerts().length * 2;
+		});
+	}
 
 	protected _marginCounter = 2;
 
-	protected _alerts = this._alertService.getAlerts();
+	protected _alerts: Signal<FudisAlertElement[]>;
 
 	addDanger(): void {
 		const newAlert: FudisAlert = {
 			message: 'Something dangerous happened',
 			type: 'danger',
-			id: this._idService.getNewId('alert'),
+			id: 'my-own-id-1',
 		};
-
-		this._marginCounter += 2;
 
 		this._alertService.addAlert(newAlert);
 	}
@@ -48,12 +52,10 @@ class AddAlertsComponent implements AfterViewInit {
 		const newAlert: FudisAlert = {
 			message: 'Something dangerous MIGHT happen',
 			type: 'warning',
-			id: this._idService.getNewId('alert'),
-			routerLinkUrl: '/some-test-url',
+			id: 'my-own-id-2',
+			routerLinkUrl: '/',
 			linkTitle: 'More info',
 		};
-
-		this._marginCounter += 2;
 
 		this._alertService.addAlert(newAlert);
 	}
@@ -62,12 +64,10 @@ class AddAlertsComponent implements AfterViewInit {
 		const newAlert: FudisAlert = {
 			message: 'Yippee Ki-Yay! You were successful!',
 			type: 'success',
-			id: this._idService.getNewId('alert'),
-			routerLinkUrl: '/some-test-url',
+			id: 'my-own-id-3',
+			routerLinkUrl: '/',
 			linkTitle: 'More info',
 		};
-
-		this._marginCounter += 2;
 
 		this._alertService.addAlert(newAlert);
 	}
@@ -76,34 +76,34 @@ class AddAlertsComponent implements AfterViewInit {
 		const newAlert: FudisAlert = {
 			message: 'Nothing special here.',
 			type: 'info',
-			id: this._idService.getNewId('alert'),
+			id: 'my-own-id-4',
 		};
-
-		this._marginCounter += 2;
 
 		this._alertService.addAlert(newAlert);
 	}
 
 	dismissRandom(): void {
-		const alerts = this._alertService.getAlerts();
+		const alerts = this._alertService.getAlertsSignal();
 		const alertsLength = alerts().length;
 
 		if (alertsLength > 0) {
 			const random = Math.floor(Math.random() * alertsLength);
 			this._alertService.dismissAlert(alerts()[random].id);
-			this._marginCounter -= 2;
 		}
 	}
 
 	dismissAll(): void {
 		this._alertService.dismissAll();
-
-		this._marginCounter = 2;
 	}
 
 	// eslint-disable-next-line class-methods-use-this
 	ngAfterViewInit(): void {
 		document.querySelector('.sb-show-main.sb-main-padded')?.setAttribute('style', 'padding: 0');
+
+		this.addDanger();
+		this.addInfo();
+		this.addWarning();
+		this.addSuccess();
 	}
 }
 

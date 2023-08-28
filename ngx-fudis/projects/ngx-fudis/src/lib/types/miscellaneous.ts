@@ -33,6 +33,11 @@ export interface FudisAlert {
 	id: string;
 }
 
+export interface FudisAlertElement extends FudisAlert {
+	htmlId: string;
+	buttonId: string;
+}
+
 export type FudisExpandableType = 'regular' | 'lite';
 
 export type FudisSpacing = 'none' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
@@ -52,7 +57,7 @@ export interface FudisTranslationConfig {
 	};
 	DIALOG: {
 		// Label for close button
-		CLOSE?: string;
+		CLOSE: string;
 	};
 	INPUT_WITH_LANGUAGE_OPTIONS: {
 		// Label for language selection dropdown
