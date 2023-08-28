@@ -25,5 +25,5 @@ export class BodyTextComponent {
 	 */
 	@Input() marginBottom: FudisSpacing = 'none';
 
-	@Input() color: 'gray-dark' | 'white' = 'gray-dark';
+	@Input() color: 'default' | 'white' = 'default';
 }

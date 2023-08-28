@@ -1,7 +1,6 @@
 // also exported from '@storybook/angular' if you can deal with breaking changes in 6.1
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { AfterViewInit, Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import readme from '../readme.mdx';
 import { AlertGroupComponent } from './alert-group.component';
 import { FudisAlertService } from '../alert-service/alert.service';
@@ -49,6 +48,8 @@ class AddAlertsComponent implements AfterViewInit {
 			message: 'Something dangerous MIGHT happen',
 			type: 'warning',
 			id: this._idService.getNewId('alert'),
+			routerLinkUrl: '/some-test-url',
+			linkTitle: 'More info',
 		};
 
 		this._marginCounter += 2;
@@ -61,6 +62,8 @@ class AddAlertsComponent implements AfterViewInit {
 			message: 'Yippee Ki-Yay! You were successful!',
 			type: 'success',
 			id: this._idService.getNewId('alert'),
+			routerLinkUrl: '/some-test-url',
+			linkTitle: 'More info',
 		};
 
 		this._marginCounter += 2;
@@ -109,7 +112,6 @@ export default {
 	decorators: [
 		moduleMetadata({
 			declarations: [AddAlertsComponent],
-			imports: [RouterModule],
 		}),
 	],
 	parameters: {

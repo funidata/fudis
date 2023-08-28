@@ -18,13 +18,13 @@
 	&__close {
 		@include borders.border-none;
 		@include colors.bg-color('transparent');
+		@include borders.outline('1px', 'solid', 'white');
 
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		margin-right: spacing.$spacing-xxs;
 		margin-left: auto;
-		outline: 1px solid colorTokens.$color-white;
 		box-shadow: none;
 		width: spacing.$spacing-md;
 		height: spacing.$spacing-md;
@@ -33,17 +33,8 @@
 			@include focus.focus-generic;
 		}
 
-		&__info {
-		}
-
-		&__success {
-		}
-
-		&__danger {
-		}
-
 		&__warning {
-			outline: 1px solid colorTokens.$color-gray-dark;
+			@include borders.outline('1px', 'solid', 'gray-dark');
 		}
 	}
 
