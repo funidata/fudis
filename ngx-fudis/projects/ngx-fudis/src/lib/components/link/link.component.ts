@@ -75,7 +75,7 @@ export class LinkComponent {
 	 * Link uses primary blue color.
 	 * Option to set color to 'default' which is a dark gray color. It is mainly used in links inside notification component but can be added to any link component if necessary.
 	 */
-	@Input() color: 'primary' | 'default' = 'primary';
+	@Input() color: 'primary' | 'default' | 'white' = 'primary';
 
 	/**
 	 * Aria-label for the external link

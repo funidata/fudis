@@ -1,6 +1,7 @@
 // also exported from '@storybook/angular' if you can deal with breaking changes in 6.1
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { AfterViewInit, Component } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 import readme from '../readme.mdx';
 import { AlertGroupComponent } from './alert-group.component';
 import { FudisAlertService } from '../alert-service/alert.service';
@@ -111,6 +112,7 @@ export default {
 	component: AlertGroupComponent,
 	decorators: [
 		moduleMetadata({
+			imports: [RouterTestingModule],
 			declarations: [AddAlertsComponent],
 		}),
 	],

@@ -5,6 +5,7 @@
 		[color]="variant !== 'warning' ? 'white' : 'default'">
 		{{ message }}
 		<fudis-link
+			[color]="variant !== 'warning' ? 'white' : 'default'"
 			class="fudis-notification__link"
 			*ngIf="routerLinkUrl && linkTitle"
 			[routerLinkUrl]="routerLinkUrl"
