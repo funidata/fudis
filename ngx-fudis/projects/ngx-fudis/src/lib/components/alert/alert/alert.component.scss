@@ -1,5 +1,6 @@
 @use '../../../foundations/spacing/tokens.scss' as spacing;
 @use '../../../foundations/colors/mixins.scss' as colors;
+@use '../../../foundations/colors/tokens.scss' as colorTokens;
 @use '../../../foundations/focus/mixins.scss' as focus;
 @use '../../../foundations/borders/mixins.scss' as borders;
 
@@ -16,33 +17,33 @@
 
 	&__close {
 		@include borders.border-none;
+		@include colors.bg-color('transparent');
 
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		margin-right: spacing.$spacing-xxs;
 		margin-left: auto;
+		outline: 1px solid colorTokens.$color-white;
 		box-shadow: none;
-		width: spacing.$spacing-lg;
-		height: spacing.$spacing-lg;
+		width: spacing.$spacing-md;
+		height: spacing.$spacing-md;
 
 		&:focus {
-			@include focus.focus-generic-inner;
+			@include focus.focus-generic;
 		}
 
 		&__info {
-			@include colors.bg-color('primary-light');
 		}
 
 		&__success {
-			@include colors.bg-color('green-light');
 		}
 
 		&__danger {
-			@include colors.bg-color('red-light');
 		}
 
 		&__warning {
-			@include colors.bg-color('yellow-light');
+			outline: 1px solid colorTokens.$color-gray-dark;
 		}
 	}
 

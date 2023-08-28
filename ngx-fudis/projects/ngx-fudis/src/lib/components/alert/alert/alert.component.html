@@ -10,6 +10,6 @@
 	</fudis-body-text>
 
 	<button (click)="_handleCloseClick()" class="fudis-alert__close fudis-alert__close__{{ variant }}">
-		<fudis-icon [icon]="'close'" />
+		<fudis-icon [icon]="'close'" [color]="variant !== 'warning' && 'white'" />
 	</button>
 </div>
