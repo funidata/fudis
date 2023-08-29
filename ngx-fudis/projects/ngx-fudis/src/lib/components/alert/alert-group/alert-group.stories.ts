@@ -12,12 +12,13 @@ import { FudisIdService } from '../../../utilities/id-service.service';
 @Component({
 	selector: 'example-add-alerts',
 	template: `<div [style]="'margin-top:' + _marginCounter + 'rem'">
-		<fudis-grid [columns]="4" [width]="'sm'">
+		<fudis-grid [columns]="'repeat(4,auto)'" [width]="'sm'">
 			<fudis-button [label]="'Add danger'" (handleClick)="addDanger()" />
 			<fudis-button [label]="'Add warning'" (handleClick)="addWarning()" />
 			<fudis-button [label]="'Add success'" (handleClick)="addSuccess()" />
 			<fudis-button [label]="'Add info'" (handleClick)="addInfo()" />
-
+			<fudis-button [label]="'Add info with link'" (handleClick)="addInfoWithLink()" />
+			<fudis-button [label]="'Add warning with link'" (handleClick)="addWarningWithLink()" />
 			<fudis-button [label]="'Dismiss one random'" (handleClick)="dismissRandom()" />
 			<fudis-button [label]="'Dismiss all'" (handleClick)="dismissAll()" />
 		</fudis-grid>
@@ -53,8 +54,18 @@ class AddAlertsComponent implements AfterViewInit {
 			message: 'Something dangerous MIGHT happen',
 			type: 'warning',
 			id: 'my-own-id-2',
+		};
+
+		this._alertService.addAlert(newAlert);
+	}
+
+	addWarningWithLink(): void {
+		const newAlert: FudisAlert = {
+			message: 'Something dangerous MIGHT happen.',
+			type: 'warning',
+			id: 'my-own-id-3',
 			routerLinkUrl: '/',
-			linkTitle: 'More info',
+			linkTitle: 'More info about this warning.',
 		};
 
 		this._alertService.addAlert(newAlert);
@@ -64,9 +75,7 @@ class AddAlertsComponent implements AfterViewInit {
 		const newAlert: FudisAlert = {
 			message: 'Yippee Ki-Yay! You were successful!',
 			type: 'success',
-			id: 'my-own-id-3',
-			routerLinkUrl: '/',
-			linkTitle: 'More info',
+			id: 'my-own-id-4',
 		};
 
 		this._alertService.addAlert(newAlert);
@@ -76,7 +85,19 @@ class AddAlertsComponent implements AfterViewInit {
 		const newAlert: FudisAlert = {
 			message: 'Nothing special here.',
 			type: 'info',
-			id: 'my-own-id-4',
+			id: 'my-own-id-5',
+		};
+
+		this._alertService.addAlert(newAlert);
+	}
+
+	addInfoWithLink(): void {
+		const newAlert: FudisAlert = {
+			message: 'Mostly neutral information here.',
+			type: 'info',
+			id: 'my-own-id-6',
+			routerLinkUrl: '/',
+			linkTitle: 'Additional information about this situation.',
 		};
 
 		this._alertService.addAlert(newAlert);
