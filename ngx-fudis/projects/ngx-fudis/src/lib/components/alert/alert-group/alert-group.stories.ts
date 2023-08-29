@@ -2,11 +2,11 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { AfterViewInit, Component, Signal, effect } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
-import { FudisAlertElement } from 'dist/ngx-fudis/lib/types/miscellaneous';
+
 import readme from '../readme.mdx';
 import { AlertGroupComponent } from './alert-group.component';
 import { FudisAlertService } from '../alert-service/alert.service';
-import { FudisAlert } from '../../../types/miscellaneous';
+import { FudisAlert, FudisAlertElement } from '../../../types/miscellaneous';
 import { FudisIdService } from '../../../utilities/id-service.service';
 
 @Component({
