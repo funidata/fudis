@@ -8,7 +8,7 @@
 		{{ message }}
 		<fudis-link
 			(handleFocus)="_handleFocus($event)"
-			[attr.aria-label]="message"
+			[attr.aria-label]="_attentionText + ': ' + message"
 			[initialFocus]="true"
 			[trackFocus]="true"
 			[color]="variant !== 'warning' ? 'white' : 'default'"
@@ -19,7 +19,7 @@
 	</fudis-body-text>
 
 	<button
-		[attr.aria-label]="message + ', ' + _closeLabel"
+		[attr.aria-label]="_attentionText + ': ' + message + ', ' + _closeLabel"
 		[id]="buttonId"
 		(click)="_handleCloseClick()"
 		(focus)="_handleFocus($event)"
