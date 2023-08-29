@@ -56,6 +56,13 @@ export class AlertComponent {
 	}
 
 	protected _handleFocus(focusEvent: FocusEvent): void {
-		this._focusService.setFocusTarget(focusEvent.relatedTarget);
+		const relatedTarget = focusEvent?.relatedTarget as HTMLElement;
+
+		/**
+		 * Store source of focus event unless it originated from a link inside Alert.
+		 */
+		if (!relatedTarget?.closest('.fudis-alert') && !relatedTarget?.classList?.contains('fudis-link__anchor')) {
+			this._focusService.setFocusTarget(focusEvent.relatedTarget);
+		}
 	}
 }

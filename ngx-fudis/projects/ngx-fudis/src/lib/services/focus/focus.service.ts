@@ -24,9 +24,10 @@ export class FudisFocusService {
 			const element = target as HTMLElement;
 			if (element.classList.contains('fudis-alert__close')) {
 				this._focusCloseButton = element;
-			} else if (!element.classList.contains('fudis-link__anchor')) {
+			} else {
 				this._focusTarget = element;
 			}
+			console.log(this._focusTarget);
 		}
 	}
 }

@@ -1,4 +1,4 @@
-<div class="fudis-alert fudis-alert__{{ variant }}" [id]="htmlId">
+<div #alertRef class="fudis-alert fudis-alert__{{ variant }}" [id]="htmlId">
 	<fudis-body-text
 		[attr.role]="!routerLinkUrl && !linkTitle ? 'alert' : null"
 		[classList]="'fudis-alert__text'"
@@ -6,6 +6,7 @@
 		[color]="variant !== 'warning' ? 'white' : 'default'">
 		{{ message }}
 		<fudis-link
+			(handleFocus)="_handleFocus($event)"
 			[attr.aria-label]="message"
 			[initialFocus]="true"
 			[trackFocus]="true"

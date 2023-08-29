@@ -3,7 +3,9 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	ElementRef,
+	EventEmitter,
 	Input,
+	Output,
 	Signal,
 	ViewChild,
 	effect,
@@ -106,6 +108,11 @@ export class LinkComponent implements AfterViewInit {
 	@Input() trackFocus: boolean = false;
 
 	/**
+	 * Focus event output
+	 */
+	@Output() handleFocus = new EventEmitter<FocusEvent>();
+
+	/**
 	 * Aria-label for the external link
 	 */
 	protected _externalLinkAriaLabel: string;
@@ -124,9 +131,7 @@ export class LinkComponent implements AfterViewInit {
 	}
 
 	protected _handleFocus(event: FocusEvent): void {
-		if (this.trackFocus) {
-			this._focusService.setFocusTarget(event.relatedTarget);
-		}
+		this.handleFocus.emit(event);
 	}
 
 	private _focusToLink(): void {
