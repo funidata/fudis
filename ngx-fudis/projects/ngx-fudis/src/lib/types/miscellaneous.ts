@@ -100,6 +100,9 @@ export interface FudisTranslationConfig {
 		// Assistive text of max character count for screen readers
 		MAX_LENGTH: string;
 	};
+	ALERT: {
+		HEADING_LABEL: string;
+	};
 }
 
 export interface FudisTranslationLanguageBadgeAriaLabel {

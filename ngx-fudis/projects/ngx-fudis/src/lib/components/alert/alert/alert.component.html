@@ -4,6 +4,7 @@
 		[classList]="'fudis-alert__text'"
 		[size]="'lg-regular'"
 		[color]="variant !== 'warning' ? 'white' : 'default'">
+		<span class="fudis-visually-hidden">{{ _attentionText }}:&nbsp;</span>
 		{{ message }}
 		<fudis-link
 			(handleFocus)="_handleFocus($event)"
