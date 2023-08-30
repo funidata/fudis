@@ -224,9 +224,7 @@
 /* stylelint-disable property-disallowed-list */
 /* stylelint-disable unit-disallowed-list */
 .cdk-overlay-container .cdk-global-overlay-wrapper {
-  width: 100vw !important;
-  height: 100vh !important;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .fudis-dialog-panel {
