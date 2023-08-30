@@ -37,6 +37,8 @@ export class AlertComponent {
 
 	@Input({ required: true }) buttonId: string;
 
+	@Input() initialFocus: boolean = false;
+
 	protected _closeLabel: string;
 
 	protected _attentionText: string;
@@ -66,6 +68,15 @@ export class AlertComponent {
 		 */
 		if (!relatedTarget?.closest('.fudis-alert') && !relatedTarget?.classList?.contains('fudis-link__anchor')) {
 			this._focusService.setFocusTarget(focusEvent.relatedTarget);
+		}
+	}
+
+	protected _handleBlur(event: FocusEvent): void {
+		const nextElement = event.relatedTarget as HTMLElement;
+
+		if (this.initialFocus && nextElement?.classList?.contains('fudis-alert__close') && nextElement?.id) {
+			this._alertService.updateAlertLinkFocusState(this.htmlId);
+			this._focusService.focusToElementById(nextElement.id);
 		}
 	}
 }

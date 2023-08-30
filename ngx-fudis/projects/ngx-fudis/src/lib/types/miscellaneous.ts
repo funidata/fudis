@@ -36,6 +36,7 @@ export interface FudisAlert {
 export interface FudisAlertElement extends FudisAlert {
 	htmlId: string;
 	buttonId: string;
+	initialFocus: boolean;
 }
 
 export type FudisExpandableType = 'regular' | 'lite';

@@ -11,6 +11,7 @@
 		<a
 			#linkRef
 			(focus)="_handleFocus($event)"
+			(blur)="_handleBlur($event)"
 			[href]="href"
 			class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__{{ color }}">
 			{{ linkTitle ? linkTitle : href }}
@@ -20,6 +21,7 @@
 		<a
 			#linkRef
 			(focus)="_handleFocus($event)"
+			(blur)="_handleBlur($event)"
 			[routerLink]="routerLinkUrl"
 			[fragment]="fragmentId"
 			class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__{{ color }}">
@@ -32,6 +34,7 @@
 	<a
 		#linkRef
 		(focus)="_handleFocus($event)"
+		(blur)="_handleBlur($event)"
 		attr.aria-label="{{ linkTitle ? linkTitle : href }}, {{ _externalLinkAriaLabel }}"
 		[href]="href ? href : null"
 		target="_blank"

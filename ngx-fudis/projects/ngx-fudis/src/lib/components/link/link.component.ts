@@ -103,14 +103,14 @@ export class LinkComponent implements AfterViewInit {
 	@Input() initialFocus: boolean = false;
 
 	/**
-	 * To track focus events in Alert Service to guide keyboard users' focus correctly.
-	 */
-	@Input() trackFocus: boolean = false;
-
-	/**
 	 * Focus event output
 	 */
 	@Output() handleFocus = new EventEmitter<FocusEvent>();
+
+	/**
+	 * Blur event output
+	 */
+	@Output() handleBlur = new EventEmitter<FocusEvent>();
 
 	/**
 	 * Aria-label for the external link
@@ -132,6 +132,10 @@ export class LinkComponent implements AfterViewInit {
 
 	protected _handleFocus(event: FocusEvent): void {
 		this.handleFocus.emit(event);
+	}
+
+	protected _handleBlur(event: FocusEvent): void {
+		this.handleBlur.emit(event);
 	}
 
 	private _focusToLink(): void {

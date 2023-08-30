@@ -1,6 +1,10 @@
-<section class="fudis-alert-group" [attr.aria-label]="_alertGroupLabel">
+<section
+	*ngIf="_visible"
+	class="fudis-alert-group fudis-alert-group__{{ position }}"
+	[attr.aria-label]="_alertGroupLabel">
 	<ng-container *ngFor="let alert of _alertList()">
 		<fudis-alert
+			[initialFocus]="alert.initialFocus"
 			[variant]="alert.type"
 			[message]="alert.message"
 			[id]="alert.id"

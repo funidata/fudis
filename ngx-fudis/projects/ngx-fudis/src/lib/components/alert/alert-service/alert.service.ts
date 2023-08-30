@@ -1,4 +1,5 @@
 import { Injectable, Signal, signal } from '@angular/core';
+
 import { FudisAlert, FudisAlertElement } from '../../../types/miscellaneous';
 import { FudisIdService } from '../../../utilities/id-service.service';
 
@@ -10,6 +11,16 @@ export class FudisAlertService {
 
 	private _alerts = signal<FudisAlertElement[]>([]);
 
+	private _dialogOpen = signal<boolean>(false);
+
+	public getDialogOpenSignal(): Signal<boolean> {
+		return this._dialogOpen.asReadonly();
+	}
+
+	public setDialogOpenSignal(value: boolean): void {
+		this._dialogOpen.set(value);
+	}
+
 	public addAlert(newAlert: FudisAlert): void {
 		const alertToAdd = newAlert;
 
@@ -17,7 +28,7 @@ export class FudisAlertService {
 
 		const currentAlerts: FudisAlertElement[] = this._alerts();
 
-		currentAlerts.push({ ...alertToAdd, htmlId, buttonId: `${htmlId}-button` });
+		currentAlerts.push({ ...alertToAdd, htmlId, buttonId: `${htmlId}-button`, initialFocus: true });
 
 		this._alerts.set(currentAlerts);
 	}
@@ -44,5 +55,17 @@ export class FudisAlertService {
 
 	public getAlertsSignal(): Signal<FudisAlertElement[]> {
 		return this._alerts.asReadonly();
+	}
+
+	public updateAlertLinkFocusState(id: string): void {
+		const currentAlerts: FudisAlertElement[] = this._alerts();
+
+		const index = currentAlerts.findIndex((alert) => alert.htmlId === id);
+
+		if (index !== -1) {
+			currentAlerts[index] = { ...currentAlerts[index], initialFocus: false };
+
+			this._alerts.set(currentAlerts);
+		}
 	}
 }

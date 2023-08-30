@@ -8,9 +8,9 @@
 		{{ message }}
 		<fudis-link
 			(handleFocus)="_handleFocus($event)"
+			(handleBlur)="_handleBlur($event)"
 			[attr.aria-label]="_attentionText + ': ' + message"
-			[initialFocus]="true"
-			[trackFocus]="true"
+			[initialFocus]="initialFocus"
 			[color]="variant !== 'warning' ? 'white' : 'default'"
 			class="fudis-alert__link"
 			*ngIf="routerLinkUrl && linkTitle"

@@ -1,6 +1,6 @@
 // also exported from '@storybook/angular' if you can deal with breaking changes in 6.1
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { AfterViewInit, Component, Signal, effect } from '@angular/core';
+import { AfterViewInit, Component, Signal, TemplateRef, ViewChild, effect } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import readme from '../readme.mdx';
@@ -8,24 +8,38 @@ import { AlertGroupComponent } from './alert-group.component';
 import { FudisAlertService } from '../alert-service/alert.service';
 import { FudisAlert, FudisAlertElement } from '../../../types/miscellaneous';
 import { FudisIdService } from '../../../utilities/id-service.service';
+import { FudisDialogService } from '../../dialog/dialog.service';
 
 @Component({
 	selector: 'example-add-alerts',
 	template: `<div [style]="'margin-top:' + _marginCounter + 'rem'">
-		<fudis-grid [columns]="'repeat(4,auto)'" [width]="'sm'">
-			<fudis-button [label]="'Add danger'" (handleClick)="addDanger()" />
-			<fudis-button [label]="'Add warning'" (handleClick)="addWarning()" />
-			<fudis-button [label]="'Add success'" (handleClick)="addSuccess()" />
-			<fudis-button [label]="'Add info'" (handleClick)="addInfo()" />
-			<fudis-button [label]="'Add info with link'" (handleClick)="addInfoWithLink()" />
-			<fudis-button [label]="'Add warning with link'" (handleClick)="addWarningWithLink()" />
-			<fudis-button [label]="'Dismiss one random'" (handleClick)="dismissRandom()" />
-			<fudis-button [label]="'Dismiss all'" (handleClick)="dismissAll()" />
-		</fudis-grid>
-	</div>`,
+			<fudis-grid [columns]="'repeat(4,auto)'" [width]="'sm'">
+				<fudis-button [label]="'Add danger'" (handleClick)="addDanger()" />
+				<fudis-button [label]="'Add warning'" (handleClick)="addWarning()" />
+				<fudis-button [label]="'Add success'" (handleClick)="addSuccess()" />
+				<fudis-button [label]="'Add info'" (handleClick)="addInfo()" />
+				<fudis-button [label]="'Add info with link'" (handleClick)="addInfoWithLink()" />
+				<fudis-button [label]="'Add warning with link'" (handleClick)="addWarningWithLink()" />
+				<fudis-button [label]="'Dismiss random id'" (handleClick)="dismissRandom()" />
+				<fudis-button [label]="'Dismiss all'" (handleClick)="dismissAll()" />
+				<fudis-button [label]="'Open dialog'" (handleClick)="openDialog()" />
+			</fudis-grid>
+		</div>
+		<ng-template #exampleDialogTemplate>
+			<fudis-dialog [closeButtonLabel]="'Close'" [size]="'sm'">
+				<fudis-heading fudisDialogTitle [level]="2">Small test dialog</fudis-heading>
+				<fudis-dialog-content>
+					<fudis-body-text>Some content</fudis-body-text>
+				</fudis-dialog-content>
+				<fudis-dialog-actions>
+					<fudis-button fudisDialogClose [label]="'Ok'"></fudis-button>
+				</fudis-dialog-actions>
+			</fudis-dialog>
+		</ng-template>`,
 })
 class AddAlertsComponent implements AfterViewInit {
 	constructor(
+		private _dialog: FudisDialogService,
 		private _alertService: FudisAlertService,
 		private _idService: FudisIdService
 	) {
@@ -35,9 +49,15 @@ class AddAlertsComponent implements AfterViewInit {
 		});
 	}
 
+	@ViewChild('exampleDialogTemplate', { static: true }) templateRef: TemplateRef<unknown>;
+
 	protected _marginCounter = 2;
 
 	protected _alerts: Signal<FudisAlertElement[]>;
+
+	openDialog(): void {
+		this._dialog.open(this.templateRef);
+	}
 
 	addDanger(): void {
 		const newAlert: FudisAlert = {
