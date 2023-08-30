@@ -111,7 +111,7 @@
 			padding-left: spacing.$spacing-xs;
 
 			&::before {
-				@include colorMixins.bg-color('gray-light');
+				@include colorMixins.bg-color('gray-middle');
 
 				display: inline-block;
 				position: absolute;
