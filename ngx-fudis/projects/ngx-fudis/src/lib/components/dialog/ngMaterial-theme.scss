@@ -16,9 +16,7 @@
 
 .cdk-overlay-container {
 	& .cdk-global-overlay-wrapper {
-		width: 100vw !important;
-		height: 100vh !important;
-		overflow: scroll;
+		overflow: auto;
 	}
 }
 

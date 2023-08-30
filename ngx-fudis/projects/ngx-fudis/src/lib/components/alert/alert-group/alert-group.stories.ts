@@ -135,10 +135,7 @@ class AddAlertsComponent implements AfterViewInit {
 		this._alertService.dismissAll();
 	}
 
-	// eslint-disable-next-line class-methods-use-this
 	ngAfterViewInit(): void {
-		document.querySelector('.sb-show-main.sb-main-padded')?.setAttribute('style', 'padding: 0');
-
 		this.addDanger();
 		this.addInfo();
 		this.addWarning();
