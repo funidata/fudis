@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FudisAlertService } from '../alert/alert-service/alert.service';
 
 type DialogSize = 'sm' | 'md' | 'lg' | 'initial';
 
@@ -7,8 +8,18 @@ type DialogSize = 'sm' | 'md' | 'lg' | 'initial';
 	templateUrl: './dialog.component.html',
 	styleUrls: ['./dialog.component.scss'],
 })
-export class DialogComponent {
+export class DialogComponent implements OnInit, OnDestroy {
+	constructor(private _alertsService: FudisAlertService) {}
+
 	@Input() closeButtonLabel: string;
 
 	@Input() size: DialogSize = 'md';
+
+	ngOnInit(): void {
+		this._alertsService.setDialogOpenSignal(true);
+	}
+
+	ngOnDestroy(): void {
+		this._alertsService.setDialogOpenSignal(false);
+	}
 }

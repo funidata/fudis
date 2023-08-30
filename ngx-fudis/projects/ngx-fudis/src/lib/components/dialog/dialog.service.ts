@@ -35,7 +35,7 @@ export class FudisDialogService {
 	 */
 	private static _createConfig(userConfig: MatDialogConfig<any> = {}): MatDialogConfig<any> {
 		const overridableOptions = { hasBackdrop: true, disableClose: true, autoFocus: false };
-		const forcedOptions = { panelClass: 'fudis-dialog-panel' };
+		const forcedOptions = { enterAnimationDuration: 0, panelClass: 'fudis-dialog-panel' };
 		return { ...overridableOptions, ...userConfig, ...forcedOptions };
 	}
 }
