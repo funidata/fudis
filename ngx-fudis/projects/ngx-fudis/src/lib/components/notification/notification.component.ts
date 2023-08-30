@@ -1,7 +1,8 @@
-import { Component, ContentChild, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, ContentChild, Input, OnChanges, OnInit, SimpleChanges, effect } from '@angular/core';
 import { FudisIcon } from '../../types/icons';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisNotification } from '../../types/miscellaneous';
+import { FudisTranslationService } from '../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'fudis-notification',
@@ -9,17 +10,18 @@ import { FudisNotification } from '../../types/miscellaneous';
 	styleUrls: ['./notification.component.scss'],
 })
 export class NotificationComponent implements OnChanges, OnInit {
+	constructor(private _translateService: FudisTranslationService) {
+		effect(() => {
+			this._attentionText = this._translateService.getTranslations()().ICON.ATTENTION;
+		});
+	}
+
 	@ContentChild(ContentDirective) content: ContentDirective | null;
 
 	/**
 	 * Notification variant options
 	 */
 	@Input() variant: FudisNotification = 'warning';
-
-	/**
-	 * Aria text of the notification variant
-	 */
-	@Input() ariaVariantText: string;
 
 	/**
 	 * Add link href address
@@ -41,6 +43,11 @@ export class NotificationComponent implements OnChanges, OnInit {
 	 * Icon for notification
 	 */
 	protected _icon: FudisIcon;
+
+	/**
+	 * Screen reader text for icon
+	 */
+	protected _attentionText: string;
 
 	/**
 	 * Initialization

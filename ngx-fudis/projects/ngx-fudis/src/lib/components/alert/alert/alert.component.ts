@@ -19,7 +19,6 @@ export class AlertComponent {
 	) {
 		effect(() => {
 			this._closeLabel = this._translateService.getTranslations()().DIALOG.CLOSE;
-			this._attentionText = this._translateService.getTranslations()().ICON.ATTENTION;
 		});
 	}
 
@@ -40,8 +39,6 @@ export class AlertComponent {
 	@Input() initialFocus: boolean = false;
 
 	protected _closeLabel: string;
-
-	protected _attentionText: string;
 
 	private _targetOnClose: HTMLElement | null;
 

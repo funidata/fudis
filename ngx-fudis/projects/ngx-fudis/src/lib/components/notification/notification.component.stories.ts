@@ -19,26 +19,22 @@ const Template: StoryFn = (args) => ({
 	props: args,
 	template: html`<fudis-notification
 		[variant]="variant"
-		[ariaVariantText]="ariaVariantText"
 		[link]="link"
 		[linkTitle]="linkTitle"
 		[externalLink]="externalLink"
-		>{{content}}</fudis-notification
+		>This is notification.</fudis-notification
 	>`,
 });
 
 export const Notification = Template.bind({});
 Notification.args = {
 	variant: 'warning',
-	ariaVariantText: 'Warning!',
-	content: 'This is notification',
 };
 
 export const LinkNotification = Template.bind({});
 LinkNotification.args = {
 	variant: 'warning',
-	content: 'This link leads to another site.',
-	linkTitle: 'example',
+	linkTitle: 'This link opens in new tab.',
 	link: 'https://www.example.com',
 	externalLink: true,
 };
@@ -46,12 +42,8 @@ LinkNotification.args = {
 export const AllVariants: StoryFn = () => ({
 	template: html`
 		<fudis-grid [align]="'start'" [width]="'md'">
-			<fudis-notification [variant]="'warning'" [ariaVariantText]="'Warning!'">
-				Note! Please don't do this, okey?
-			</fudis-notification>
-			<fudis-notification [variant]="'danger'" [ariaVariantText]="'Danger!'">
-				Whoops! Some error happened.
-			</fudis-notification>
+			<fudis-notification [variant]="'warning'"> Note! Please don't do this, okey? </fudis-notification>
+			<fudis-notification [variant]="'danger'"> Whoops! Some error happened. </fudis-notification>
 			<fudis-notification [variant]="'success'">You succeeded!</fudis-notification>
 			<fudis-notification [variant]="'info'">This is a totally neutral message</fudis-notification>
 		</fudis-grid>

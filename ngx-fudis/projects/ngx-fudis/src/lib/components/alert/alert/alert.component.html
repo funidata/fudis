@@ -4,12 +4,11 @@
 		[classList]="'fudis-alert__text'"
 		[size]="'lg-regular'"
 		[color]="variant !== 'warning' ? 'white' : 'default'">
-		<span class="fudis-visually-hidden">{{ _attentionText }}:&nbsp;</span>
 		{{ message }}
 		<fudis-link
 			(handleFocus)="_handleFocus($event)"
 			(handleBlur)="_handleBlur($event)"
-			[attr.aria-label]="_attentionText + ': ' + message"
+			[attr.aria-label]="message"
 			[initialFocus]="initialFocus"
 			[color]="variant !== 'warning' ? 'white' : 'default'"
 			class="fudis-alert__link"
@@ -19,7 +18,7 @@
 	</fudis-body-text>
 
 	<button
-		[attr.aria-label]="_attentionText + ': ' + message + ', ' + _closeLabel"
+		[attr.aria-label]="message + ', ' + _closeLabel"
 		[id]="buttonId"
 		(click)="_handleCloseClick()"
 		(focus)="_handleFocus($event)"
