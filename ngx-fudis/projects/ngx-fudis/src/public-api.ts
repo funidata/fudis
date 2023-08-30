@@ -67,7 +67,7 @@ export { RadioButtonGroupComponent } from './lib/components/form/radio-button-gr
 export { SectionComponent } from './lib/components/section/section.component';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';
 export { TextInputComponent } from './lib/components/form/text-input/text-input.component';
-// export { TextSpacingComponent } from './lib/components/typography/text-spacing/text-spacing.component';
+
 export { TooltipDirective } from './lib/directives/tooltip/tooltip.directive';
 
 export { FudisFormGroupValidators } from './lib/utilities/form/validators';

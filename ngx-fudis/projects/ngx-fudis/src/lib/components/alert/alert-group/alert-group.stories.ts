@@ -7,7 +7,6 @@ import readme from '../readme.mdx';
 import { AlertGroupComponent } from './alert-group.component';
 import { FudisAlertService } from '../alert-service/alert.service';
 import { FudisAlert, FudisAlertElement } from '../../../types/miscellaneous';
-import { FudisIdService } from '../../../utilities/id-service.service';
 import { FudisDialogService } from '../../dialog/dialog.service';
 
 @Component({
@@ -40,8 +39,7 @@ import { FudisDialogService } from '../../dialog/dialog.service';
 class AddAlertsComponent implements AfterViewInit {
 	constructor(
 		private _dialog: FudisDialogService,
-		private _alertService: FudisAlertService,
-		private _idService: FudisIdService
+		private _alertService: FudisAlertService
 	) {
 		effect(() => {
 			this._alerts = this._alertService.getAlertsSignal();

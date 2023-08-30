@@ -4,10 +4,12 @@
 import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 import { TranslocoService } from '@ngneat/transloco';
-import { FudisDialogService, FudisGridService, FudisTranslationService } from 'ngx-fudis';
+import { FudisAlertService, FudisDialogService, FudisGridService, FudisTranslationService } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
 
 import { FudisDropdownOption } from 'dist/ngx-fudis/lib/types/forms';
+
+import { FudisAlert } from 'dist/ngx-fudis/lib/types/miscellaneous';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 
 @Component({
@@ -21,7 +23,8 @@ export class AppComponent implements OnInit {
 		private _dialog: FudisDialogService,
 		private _translocoService: TranslocoService,
 		private _gridService: FudisGridService,
-		private _fudisLanguage: FudisTranslationService
+		private _fudisLanguage: FudisTranslationService,
+		private _alertService: FudisAlertService
 	) {
 		_gridService.setGridDefaultValues({
 			columns: { xs: 1, lg: 2 },
@@ -67,6 +70,17 @@ export class AppComponent implements OnInit {
 
 		this._document.documentElement.lang = 'en';
 		this._fudisLanguage.setLanguage('en');
+	}
+
+	triggerAlert(): void {
+		const newAlert: FudisAlert = {
+			message: 'Something dangerous MIGHT happen.',
+			type: 'warning',
+			id: 'my-own-id-3',
+			routerLinkUrl: '/',
+			linkTitle: 'More info about this warning.',
+		};
+		this._alertService.addAlert(newAlert);
 	}
 
 	changeLanguage(): void {

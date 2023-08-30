@@ -78,7 +78,7 @@ import { RadioButtonGroupComponent } from './components/form/radio-button-group/
 import { SectionComponent } from './components/section/section.component';
 import { SpacingDirective } from './directives/spacing/spacing.directive';
 import { TextInputComponent } from './components/form/text-input/text-input.component';
-import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
+
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { DescriptionListItemComponent } from './components/description-list/description-list-item/description-list-item.component';
@@ -156,7 +156,6 @@ import { FudisAlertService } from './components/alert/alert-service/alert.servic
 		SectionComponent,
 		SpacingDirective,
 		TextInputComponent,
-		TextSpacingComponent,
 		TextAreaComponent,
 		TooltipDirective,
 	],
