@@ -7,3 +7,7 @@
 .fudis-box-reset {
 	@include mixins.box-reset;
 }
+
+.fudis-hr {
+	@include mixins.horizontal-rule;
+}
