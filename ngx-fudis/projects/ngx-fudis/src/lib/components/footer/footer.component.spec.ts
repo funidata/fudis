@@ -4,7 +4,7 @@ import { MockComponent } from 'ng-mocks';
 import { By } from '@angular/platform-browser';
 import { FooterComponent } from './footer.component';
 import { GridComponent } from '../grid/grid/grid.component';
-import { FudisGridService } from '../../directives/grid/grid-service/grid.service';
+import { FudisGridService } from '../../services/grid/grid.service';
 import {
 	FooterContentLeftDirective,
 	FooterContentRightDirective,
