@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { FudisRadioButtonOption, FudisFormErrors } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
-import { FudisIdService } from '../../../utilities/id-service.service';
+import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Component({

@@ -1,10 +1,12 @@
 import { ComponentType } from '@angular/cdk/portal';
-import { Injectable, TemplateRef } from '@angular/core';
+import { Injectable, Signal, TemplateRef, signal } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 
 @Injectable()
 export class FudisDialogService {
 	constructor(public ngMaterialDialog: MatDialog) {}
+
+	private _dialogOpen = signal<boolean>(false);
 
 	/**
 	 * Open new dialog.
@@ -14,7 +16,10 @@ export class FudisDialogService {
 	 * @returns Reference to the dialog that was opened.
 	 */
 
-	open<T, R = any>(component: ComponentType<T> | TemplateRef<T>, config?: MatDialogConfig<any>): MatDialogRef<T, R> {
+	public open<T, R = any>(
+		component: ComponentType<T> | TemplateRef<T>,
+		config?: MatDialogConfig<any>
+	): MatDialogRef<T, R> {
 		const dialogRef = this.ngMaterialDialog.open(component, FudisDialogService._createConfig(config));
 
 		dialogRef.keydownEvents().subscribe((event) => {
@@ -26,8 +31,16 @@ export class FudisDialogService {
 		return dialogRef;
 	}
 
-	close(): void {
+	public close(): void {
 		this.ngMaterialDialog.closeAll();
+	}
+
+	public getDialogOpenSignal(): Signal<boolean> {
+		return this._dialogOpen.asReadonly();
+	}
+
+	public setDialogOpenSignal(value: boolean): void {
+		this._dialogOpen.set(value);
 	}
 
 	/**
@@ -35,7 +48,7 @@ export class FudisDialogService {
 	 */
 	private static _createConfig(userConfig: MatDialogConfig<any> = {}): MatDialogConfig<any> {
 		const overridableOptions = { hasBackdrop: true, disableClose: true, autoFocus: false };
-		const forcedOptions = { panelClass: 'fudis-dialog-panel' };
+		const forcedOptions = { enterAnimationDuration: 0, panelClass: 'fudis-dialog-panel' };
 		return { ...overridableOptions, ...userConfig, ...forcedOptions };
 	}
 }

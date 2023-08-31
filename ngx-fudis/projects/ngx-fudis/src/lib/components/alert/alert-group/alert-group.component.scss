@@ -1,0 +1,14 @@
+.fudis-alert-group {
+	top: 0;
+	left: 0;
+	z-index: 10;
+	width: 100%;
+
+	&__absolute {
+		position: absolute;
+	}
+
+	&__fixed {
+		position: fixed;
+	}
+}

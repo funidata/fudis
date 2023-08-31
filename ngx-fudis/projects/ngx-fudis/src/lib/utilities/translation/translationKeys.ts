@@ -43,6 +43,9 @@ export const en: FudisTranslationConfig = {
 	TEXTINPUT: {
 		MAX_LENGTH: 'characters used',
 	},
+	ALERT: {
+		HEADING_LABEL: 'Notifications - Number of notifications',
+	},
 };
 
 export const fi: FudisTranslationConfig = {
@@ -88,6 +91,9 @@ export const fi: FudisTranslationConfig = {
 	TEXTINPUT: {
 		MAX_LENGTH: 'merkkiä käytetty',
 	},
+	ALERT: {
+		HEADING_LABEL: 'Ilmoitukset - Ilmoituksia yhteensä',
+	},
 };
 
 export const sv: FudisTranslationConfig = {
@@ -132,5 +138,8 @@ export const sv: FudisTranslationConfig = {
 	},
 	TEXTINPUT: {
 		MAX_LENGTH: 'tecken använt',
+	},
+	ALERT: {
+		HEADING_LABEL: 'Meddelanden - Totalt meddelanden',
 	},
 };

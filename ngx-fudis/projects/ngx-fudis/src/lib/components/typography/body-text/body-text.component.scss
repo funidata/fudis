@@ -8,11 +8,17 @@
 }
 
 .fudis-body-text {
-	@include colorMixins.text-color('gray-dark');
-
 	box-sizing: border-box;
 	margin-top: 0;
 	padding: 0;
+
+	&__default {
+		@include colorMixins.text-color('gray-dark');
+	}
+
+	&__white {
+		@include colorMixins.text-color('white');
+	}
 
 	&__sm-regular {
 		@include typography.body-text-sm-regular;

@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { InputBaseDirective } from '../../directives/form/input-base/input-base.directive';
 import { FudisDropdownOption, FudisInputWidth } from '../../types/forms';
-import { FudisIdService } from '../../utilities/id-service.service';
+import { FudisIdService } from '../../services/id/id.service';
 import { FudisDropdownMenuItemService } from '../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { FudisTranslationService } from '../../utilities/translation/translation.service';
 

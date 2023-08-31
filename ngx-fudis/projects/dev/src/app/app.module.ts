@@ -6,6 +6,7 @@ import { NgxFudisModule } from 'ngx-fudis';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { DialogTestComponent } from './dialog-test/dialog-test.component';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
@@ -29,6 +30,7 @@ import { AppDropdownExamplesComponent } from './components/dropdownExamples.comp
 		ScrollingModule,
 		HttpClientModule,
 		TranslocoRootModule,
+		RouterModule.forRoot([]),
 	],
 	providers: [],
 	bootstrap: [AppComponent],

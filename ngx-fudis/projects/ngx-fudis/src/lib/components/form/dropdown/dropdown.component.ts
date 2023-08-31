@@ -13,7 +13,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
 import { FudisDropdownOption, FudisDropdownLanguageOption, FudisInputWidth } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
-import { FudisIdService } from '../../../utilities/id-service.service';
+import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Component({

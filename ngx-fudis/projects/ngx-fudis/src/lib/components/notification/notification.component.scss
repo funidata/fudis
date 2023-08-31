@@ -40,7 +40,7 @@
 		border-left-width: spacing.$spacing-xs;
 	}
 
-	&__light {
+	&__info {
 		@include colors.bg-color('primary-light');
 		@include borders.border('2px', 'solid', 'primary-dark');
 

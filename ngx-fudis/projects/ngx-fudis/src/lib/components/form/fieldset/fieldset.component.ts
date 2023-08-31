@@ -17,7 +17,7 @@ import { NotificationsDirective } from '../../../directives/content-projection/n
 import { FudisGridWidth, FudisGridAlign, FudisGridMarginSide } from '../../../types/grid';
 import { FudisSpacing } from '../../../types/miscellaneous';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
-import { FudisIdService } from '../../../utilities/id-service.service';
+import { FudisIdService } from '../../../services/id/id.service';
 import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
 import { FudisFormErrorSummarySection } from '../../../types/forms';
 import { FudisTranslationService } from '../../../utilities/translation/translation.service';

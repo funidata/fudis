@@ -1,6 +1,18 @@
-import { ChangeDetectionStrategy, Component, Input, Signal, effect } from '@angular/core';
+import {
+	AfterViewInit,
+	ChangeDetectionStrategy,
+	Component,
+	ElementRef,
+	EventEmitter,
+	Input,
+	Output,
+	Signal,
+	ViewChild,
+	effect,
+} from '@angular/core';
 import { FudisTranslationService } from '../../utilities/translation/translation.service';
 import { FudisTranslationConfig } from '../../types/miscellaneous';
+import { FudisFocusService } from '../../services/focus/focus.service';
 
 /**
  * Example usages:
@@ -31,14 +43,22 @@ import { FudisTranslationConfig } from '../../types/miscellaneous';
 	styleUrls: ['./link.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LinkComponent {
-	constructor(private _translationService: FudisTranslationService) {
+export class LinkComponent implements AfterViewInit {
+	constructor(
+		private _translationService: FudisTranslationService,
+		private _focusService: FudisFocusService
+	) {
 		effect(() => {
 			this._translations = this._translationService.getTranslations();
 
 			this._externalLinkAriaLabel = this._translations().LINK.EXTERNAL_LINK;
 		});
 	}
+
+	/**
+	 * Template reference for input. Used in e. g. initialFocus
+	 */
+	@ViewChild('linkRef') linkRef: ElementRef;
 
 	/**
 	 * Link URL using native href
@@ -48,7 +68,7 @@ export class LinkComponent {
 	/**
 	 * Link URL using Angular RouterLink
 	 */
-	@Input() routerLinkUrl: string | any[] | null | any;
+	@Input() routerLinkUrl: string | any[] | null;
 
 	/**
 	 * Fragment ID for Angular Router
@@ -75,7 +95,22 @@ export class LinkComponent {
 	 * Link uses primary blue color.
 	 * Option to set color to 'default' which is a dark gray color. It is mainly used in links inside notification component but can be added to any link component if necessary.
 	 */
-	@Input() color: 'primary' | 'default' = 'primary';
+	@Input() color: 'primary' | 'default' | 'white' = 'primary';
+
+	/**
+	 * Set browser focus to link on first load.
+	 */
+	@Input() initialFocus: boolean = false;
+
+	/**
+	 * Focus event output
+	 */
+	@Output() handleFocus = new EventEmitter<FocusEvent>();
+
+	/**
+	 * Blur event output
+	 */
+	@Output() handleBlur = new EventEmitter<FocusEvent>();
 
 	/**
 	 * Aria-label for the external link
@@ -86,4 +121,31 @@ export class LinkComponent {
 	 * Fudis translations
 	 */
 	protected _translations: Signal<FudisTranslationConfig>;
+
+	private _focusTryCounter: number = 0;
+
+	ngAfterViewInit(): void {
+		if (this.initialFocus) {
+			this._focusToLink();
+		}
+	}
+
+	protected _handleFocus(event: FocusEvent): void {
+		this.handleFocus.emit(event);
+	}
+
+	protected _handleBlur(event: FocusEvent): void {
+		this.handleBlur.emit(event);
+	}
+
+	private _focusToLink(): void {
+		if (this.linkRef?.nativeElement) {
+			this.linkRef.nativeElement.focus();
+		} else if (this._focusTryCounter < 100) {
+			setTimeout(() => {
+				this._focusTryCounter += 1;
+				this._focusToLink();
+			}, 100);
+		}
+	}
 }

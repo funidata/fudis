@@ -4,7 +4,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FudisIdService } from 'projects/ngx-fudis/src/lib/utilities/id-service.service';
+import { FudisIdService } from 'projects/ngx-fudis/src/lib/services/id/id.service';
 import { TooltipDirective } from 'projects/ngx-fudis/src/public-api';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DateRangeComponent } from './date-range.component';
