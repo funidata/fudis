@@ -41,12 +41,13 @@ import {
 	DialogActionsDirective,
 } from './components/dialog/dialog-directives';
 import { DialogComponent } from './components/dialog/dialog.component';
-import { FudisDialogService } from './components/dialog/dialog.service';
+import { FudisDialogService } from './services/dialog/dialog.service';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
 import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
 import { DropdownMenuItemComponent } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
 
 import { FudisDropdownMenuItemService } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
+import { FudisFocusService } from './services/focus/focus.service';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
 import { FudisErrorSummaryService } from './components/form/error-summary/error-summary.service';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
@@ -65,7 +66,7 @@ import { GuidanceComponent } from './components/form/guidance/guidance.component
 import { HeaderDirective } from './directives/content-projection/header/header.directive';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { IconComponent } from './components/icon/icon.component';
-import { FudisIdService } from './utilities/id-service.service';
+import { FudisIdService } from './services/id/id.service';
 import { InputBaseDirective } from './directives/form/input-base/input-base.directive';
 import { InputWithLanguageOptionsComponent } from './components/form/input-with-language-options/input-with-language-options.component';
 import { LabelComponent } from './components/form/label/label.component';
@@ -77,7 +78,7 @@ import { RadioButtonGroupComponent } from './components/form/radio-button-group/
 import { SectionComponent } from './components/section/section.component';
 import { SpacingDirective } from './directives/spacing/spacing.directive';
 import { TextInputComponent } from './components/form/text-input/text-input.component';
-import { TextSpacingComponent } from './components/typography/text-spacing/text-spacing.component';
+
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 import { DescriptionListItemComponent } from './components/description-list/description-list-item/description-list-item.component';
@@ -89,6 +90,9 @@ import { LanguageBadgeGroupComponent } from './components/language-badge-group/l
 import { LanguageBadgeComponent } from './components/language-badge-group/language-badge/language-badge.component';
 import { FudisTranslationService } from './utilities/translation/translation.service';
 import { FudisLanguageBadgeGroupService } from './components/language-badge-group/language-badge-group.service';
+import { AlertComponent } from './components/alert/alert/alert.component';
+import { AlertGroupComponent } from './components/alert/alert-group/alert-group.component';
+import { FudisAlertService } from './services/alert/alert.service';
 
 @NgModule({
 	/*
@@ -96,6 +100,8 @@ import { FudisLanguageBadgeGroupService } from './components/language-badge-grou
 	 */
 	declarations: [
 		ActionsDirective,
+		AlertComponent,
+		AlertGroupComponent,
 		AutocompleteComponent,
 		AutocompleteMultiSelectComponent,
 		AutocompleteMultiSelectSelectedItemChipComponent,
@@ -150,7 +156,6 @@ import { FudisLanguageBadgeGroupService } from './components/language-badge-grou
 		SectionComponent,
 		SpacingDirective,
 		TextInputComponent,
-		TextSpacingComponent,
 		TextAreaComponent,
 		TooltipDirective,
 	],
@@ -183,6 +188,8 @@ import { FudisLanguageBadgeGroupService } from './components/language-badge-grou
 	 */
 	exports: [
 		ActionsDirective,
+		AlertComponent,
+		AlertGroupComponent,
 		AutocompleteComponent,
 		AutocompleteMultiSelectComponent,
 		BadgeComponent,
@@ -232,9 +239,11 @@ import { FudisLanguageBadgeGroupService } from './components/language-badge-grou
 		TooltipDirective,
 	],
 	providers: [
+		FudisAlertService,
 		FudisDialogService,
 		FudisDropdownMenuItemService,
 		FudisErrorSummaryService,
+		FudisFocusService,
 		FudisGridService,
 		FudisIdService,
 		FudisLanguageBadgeGroupService,

@@ -25,9 +25,25 @@ export interface FudisLanguageBadgeTranslations {
 	fi?: string;
 }
 
+export interface FudisAlert {
+	message: string;
+	type: FudisNotification;
+	routerLinkUrl?: string | any[] | null;
+	linkTitle?: string;
+	id: string;
+}
+
+export interface FudisAlertElement extends FudisAlert {
+	htmlId: string;
+	buttonId: string;
+	initialFocus: boolean;
+}
+
 export type FudisExpandableType = 'regular' | 'lite';
 
 export type FudisSpacing = 'none' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+
+export type FudisNotification = 'warning' | 'danger' | 'success' | 'info';
 
 export type FudisTooltipPosition = 'left' | 'right' | 'above' | 'below';
 
@@ -42,7 +58,7 @@ export interface FudisTranslationConfig {
 	};
 	DIALOG: {
 		// Label for close button
-		CLOSE?: string;
+		CLOSE: string;
 	};
 	INPUT_WITH_LANGUAGE_OPTIONS: {
 		// Label for language selection dropdown
@@ -84,6 +100,9 @@ export interface FudisTranslationConfig {
 	TEXTINPUT: {
 		// Assistive text of max character count for screen readers
 		MAX_LENGTH: string;
+	};
+	ALERT: {
+		HEADING_LABEL: string;
 	};
 }
 

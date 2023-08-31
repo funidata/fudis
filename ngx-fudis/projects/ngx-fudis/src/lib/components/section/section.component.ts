@@ -1,5 +1,5 @@
 import { Component, ContentChild, Input, OnChanges, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { FudisIdService } from '../../utilities/id-service.service';
+import { FudisIdService } from '../../services/id/id.service';
 import { FudisHeadingSize, FudisHeadingLevel } from '../../types/typography';
 import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';

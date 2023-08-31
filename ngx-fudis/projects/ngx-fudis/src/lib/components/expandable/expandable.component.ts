@@ -12,7 +12,7 @@ import {
 import { FudisExpandableType } from '../../types/miscellaneous';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
-import { FudisIdService } from '../../utilities/id-service.service';
+import { FudisIdService } from '../../services/id/id.service';
 import { FudisErrorSummaryService } from '../form/error-summary/error-summary.service';
 import { FudisFormErrorSummarySection } from '../../types/forms';
 

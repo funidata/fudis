@@ -23,6 +23,10 @@
 			@include colors.text-color('gray-dark');
 		}
 
+		&__white {
+			@include colors.text-color('white');
+		}
+
 		&__external {
 			display: inline-flex;
 			align-items: center;

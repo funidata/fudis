@@ -33,7 +33,7 @@ export { DescriptionListComponent } from './lib/components/description-list/desc
 export { DescriptionListItemComponent } from './lib/components/description-list/description-list-item/description-list-item.component';
 export { DescriptionListItemDetailsComponent } from './lib/components/description-list/description-list-item/description-list-item-details/description-list-item-details.component';
 export { DescriptionListItemTermComponent } from './lib/components/description-list/description-list-item/description-list-item-term/description-list-item-term.component';
-export { FudisDialogService } from './lib/components/dialog/dialog.service';
+export { FudisDialogService } from './lib/services/dialog/dialog.service';
 export { FudisTranslationService } from './lib/utilities/translation/translation.service';
 export { DropdownComponent } from './lib/components/form/dropdown/dropdown.component';
 export { DropdownMenuComponent } from './lib/components/dropdown-menu/dropdown-menu.component';
@@ -67,7 +67,11 @@ export { RadioButtonGroupComponent } from './lib/components/form/radio-button-gr
 export { SectionComponent } from './lib/components/section/section.component';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';
 export { TextInputComponent } from './lib/components/form/text-input/text-input.component';
-// export { TextSpacingComponent } from './lib/components/typography/text-spacing/text-spacing.component';
+
 export { TooltipDirective } from './lib/directives/tooltip/tooltip.directive';
 
 export { FudisFormGroupValidators } from './lib/utilities/form/validators';
+
+export { AlertComponent } from './lib/components/alert/alert/alert.component';
+export { AlertGroupComponent } from './lib/components/alert/alert-group/alert-group.component';
+export { FudisAlertService } from './lib/services/alert/alert.service';

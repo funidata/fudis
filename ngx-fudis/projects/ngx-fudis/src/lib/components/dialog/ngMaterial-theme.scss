@@ -14,8 +14,10 @@
 @use '../../foundations/utilities/mixins.scss' as utilities;
 @use '../../foundations/spacing/tokens.scss' as spacing;
 
-.cdk-global-overlay-wrapper {
-	overflow: scroll;
+.cdk-overlay-container {
+	& .cdk-global-overlay-wrapper {
+		overflow: auto;
+	}
 }
 
 .fudis-dialog-panel {

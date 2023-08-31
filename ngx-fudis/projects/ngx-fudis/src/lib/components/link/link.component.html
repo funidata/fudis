@@ -8,15 +8,23 @@
 
 <ng-template #anchorLink>
 	<ng-container *ngIf="!routerLinkUrl">
-		<a [href]="href" class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__{{ color }}">
+		<a
+			#linkRef
+			class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__{{ color }}"
+			(focus)="_handleFocus($event)"
+			(blur)="_handleBlur($event)"
+			[href]="href">
 			{{ linkTitle ? linkTitle : href }}
 		</a>
 	</ng-container>
 	<ng-container *ngIf="routerLinkUrl">
 		<a
+			#linkRef
+			class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__{{ color }}"
+			(focus)="_handleFocus($event)"
+			(blur)="_handleBlur($event)"
 			[routerLink]="routerLinkUrl"
-			[fragment]="fragmentId"
-			class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__{{ color }}">
+			[fragment]="fragmentId">
 			{{ linkTitle ? linkTitle : href }}
 		</a>
 	</ng-container>
@@ -24,6 +32,9 @@
 
 <ng-template #externalLink>
 	<a
+		#linkRef
+		(focus)="_handleFocus($event)"
+		(blur)="_handleBlur($event)"
 		attr.aria-label="{{ linkTitle ? linkTitle : href }}, {{ _externalLinkAriaLabel }}"
 		[href]="href ? href : null"
 		target="_blank"

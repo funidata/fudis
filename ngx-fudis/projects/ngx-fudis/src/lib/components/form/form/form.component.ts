@@ -1,6 +1,6 @@
 import { AfterContentInit, Component, ContentChild, ElementRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FudisHeadingSize, FudisHeadingLevel } from '../../../types/typography';
-import { FudisIdService } from '../../../utilities/id-service.service';
+import { FudisIdService } from '../../../services/id/id.service';
 import { HeaderDirective } from '../../../directives/content-projection/header/header.directive';
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';

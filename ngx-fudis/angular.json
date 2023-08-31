@@ -11,6 +11,7 @@
 				"build": {
 					"builder": "@storybook/angular:build-storybook",
 					"options": {
+						"enableProdMode": false,
 						"outputDir": "./static",
 						"tsConfig": ".storybook/tsconfig.json",
 						"styles": ["projects/ngx-fudis/style.scss"],

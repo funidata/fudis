@@ -4,7 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
 import { FudisInputWidth } from '../../../types/forms';
-import { FudisIdService } from '../../../utilities/id-service.service';
+import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 
 @Component({

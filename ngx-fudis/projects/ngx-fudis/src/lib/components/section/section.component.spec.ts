@@ -5,7 +5,7 @@ import { HeadingComponent } from '../typography/heading/heading.component';
 
 import { FudisGridService } from '../../directives/grid/grid-service/grid.service';
 
-import { FudisIdService } from '../../utilities/id-service.service';
+import { FudisIdService } from '../../services/id/id.service';
 import { GridDirective } from '../../directives/grid/grid/grid.directive';
 import { FudisErrorSummaryService } from '../form/error-summary/error-summary.service';
 

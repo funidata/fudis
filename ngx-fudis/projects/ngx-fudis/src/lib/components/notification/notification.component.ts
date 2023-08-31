@@ -1,8 +1,8 @@
-import { Component, ContentChild, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, ContentChild, Input, OnChanges, OnInit, SimpleChanges, effect } from '@angular/core';
 import { FudisIcon } from '../../types/icons';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
-
-export type NotificationType = 'warning' | 'danger' | 'success' | 'light';
+import { FudisNotification } from '../../types/miscellaneous';
+import { FudisTranslationService } from '../../utilities/translation/translation.service';
 
 @Component({
 	selector: 'fudis-notification',
@@ -10,17 +10,18 @@ export type NotificationType = 'warning' | 'danger' | 'success' | 'light';
 	styleUrls: ['./notification.component.scss'],
 })
 export class NotificationComponent implements OnChanges, OnInit {
+	constructor(private _translateService: FudisTranslationService) {
+		effect(() => {
+			this._attentionText = this._translateService.getTranslations()().ICON.ATTENTION;
+		});
+	}
+
 	@ContentChild(ContentDirective) content: ContentDirective | null;
 
 	/**
 	 * Notification variant options
 	 */
-	@Input() variant: NotificationType = 'warning';
-
-	/**
-	 * Aria text of the notification variant
-	 */
-	@Input() ariaVariantText: string;
+	@Input() variant: FudisNotification = 'warning';
 
 	/**
 	 * Add link href address
@@ -42,6 +43,11 @@ export class NotificationComponent implements OnChanges, OnInit {
 	 * Icon for notification
 	 */
 	protected _icon: FudisIcon;
+
+	/**
+	 * Screen reader text for icon
+	 */
+	protected _attentionText: string;
 
 	/**
 	 * Initialization
@@ -73,7 +79,7 @@ export class NotificationComponent implements OnChanges, OnInit {
 			case 'success':
 				this._icon = 'checkmark-circle';
 				break;
-			case 'light':
+			case 'info':
 				this._icon = 'info-circle';
 				break;
 			default:

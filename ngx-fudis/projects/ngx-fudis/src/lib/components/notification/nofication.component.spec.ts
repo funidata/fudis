@@ -3,7 +3,8 @@ import { MockComponent } from 'ng-mocks';
 import { IconComponent } from '../icon/icon.component';
 import { BodyTextComponent } from '../typography/body-text/body-text.component';
 import { LinkComponent } from '../link/link.component';
-import { NotificationComponent, NotificationType } from './notification.component';
+import { NotificationComponent } from './notification.component';
+import { FudisNotification } from '../../types/miscellaneous';
 
 describe('NotificationComponent', () => {
 	let component: NotificationComponent;
@@ -32,7 +33,7 @@ describe('NotificationComponent', () => {
 		expect(componentClasses).toEqual(classes.split(' ').sort());
 	}
 
-	function notificationVariants(variant: NotificationType): void {
+	function notificationVariants(variant: FudisNotification): void {
 		component.variant = variant;
 		fixture.detectChanges();
 		assertNotificationHasClasses(`fudis-notification fudis-notification__${variant}`);
@@ -43,7 +44,7 @@ describe('NotificationComponent', () => {
 			notificationVariants('danger');
 			notificationVariants('warning');
 			notificationVariants('success');
-			notificationVariants('light');
+			notificationVariants('info');
 		});
 	});
 });

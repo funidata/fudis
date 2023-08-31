@@ -11,7 +11,7 @@ import {
 import { distinctUntilChanged } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 import { untilDestroyed } from '../../../../utilities/untilDestroyed';
-import { FudisIdService } from '../../../../utilities/id-service.service';
+import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisDateRangeItem } from '../../../../types/forms';
 
 @Component({
