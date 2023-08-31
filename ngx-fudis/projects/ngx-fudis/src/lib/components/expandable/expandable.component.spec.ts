@@ -10,7 +10,7 @@ import { ExpandableComponent } from './expandable.component';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisExpandableType } from '../../types/miscellaneous';
-import { FudisIdService } from '../../utilities/id-service.service';
+import { FudisIdService } from '../../services/id/id.service';
 import { FudisErrorSummaryService } from '../form/error-summary/error-summary.service';
 
 @Component({

@@ -1,9 +1,9 @@
 import { Component, Inject, Input, effect } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FudisNotification } from '../../../types/miscellaneous';
-import { FudisAlertService } from '../alert-service/alert.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { FudisTranslationService } from '../../../utilities/translation/translation.service';
+import { FudisAlertService } from '../../../services/alert/alert.service';
 
 @Component({
 	selector: 'fudis-alert',

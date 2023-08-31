@@ -13,7 +13,7 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import { MatDatepickerIntl } from '@angular/material/datepicker';
 import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
 import { FUDIS_DATE_FORMATS, FudisInputWidth } from '../../../../types/forms';
-import { FudisIdService } from '../../../../utilities/id-service.service';
+import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../utilities/translation/translation.service';
 
 import { DatepickerCustomDateAdapter } from '../date-common/datepicker-custom-date-adapter';

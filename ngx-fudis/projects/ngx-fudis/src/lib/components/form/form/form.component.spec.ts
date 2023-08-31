@@ -4,7 +4,7 @@ import { FormComponent } from './form.component';
 import { HeadingComponent } from '../../typography/heading/heading.component';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
-import { FudisIdService } from '../../../utilities/id-service.service';
+import { FudisIdService } from '../../../services/id/id.service';
 import { FudisGridService } from '../../../directives/grid/grid-service/grid.service';
 
 describe('FormComponent', () => {

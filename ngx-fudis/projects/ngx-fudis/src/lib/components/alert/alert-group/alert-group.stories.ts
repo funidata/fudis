@@ -5,9 +5,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import readme from '../readme.mdx';
 import { AlertGroupComponent } from './alert-group.component';
-import { FudisAlertService } from '../alert-service/alert.service';
+
 import { FudisAlert, FudisAlertElement } from '../../../types/miscellaneous';
 import { FudisDialogService } from '../../dialog/dialog.service';
+import { FudisAlertService } from '../../../services/alert/alert.service';
 
 @Component({
 	selector: 'example-add-alerts',

@@ -66,7 +66,7 @@ import { GuidanceComponent } from './components/form/guidance/guidance.component
 import { HeaderDirective } from './directives/content-projection/header/header.directive';
 import { HeadingComponent } from './components/typography/heading/heading.component';
 import { IconComponent } from './components/icon/icon.component';
-import { FudisIdService } from './utilities/id-service.service';
+import { FudisIdService } from './services/id/id.service';
 import { InputBaseDirective } from './directives/form/input-base/input-base.directive';
 import { InputWithLanguageOptionsComponent } from './components/form/input-with-language-options/input-with-language-options.component';
 import { LabelComponent } from './components/form/label/label.component';
@@ -92,7 +92,7 @@ import { FudisTranslationService } from './utilities/translation/translation.ser
 import { FudisLanguageBadgeGroupService } from './components/language-badge-group/language-badge-group.service';
 import { AlertComponent } from './components/alert/alert/alert.component';
 import { AlertGroupComponent } from './components/alert/alert-group/alert-group.component';
-import { FudisAlertService } from './components/alert/alert-service/alert.service';
+import { FudisAlertService } from './services/alert/alert.service';
 
 @NgModule({
 	/*

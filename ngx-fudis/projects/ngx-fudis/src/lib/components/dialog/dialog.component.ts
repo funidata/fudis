@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FudisAlertService } from '../alert/alert-service/alert.service';
+import { FudisAlertService } from '../../services/alert/alert.service';
 
 type DialogSize = 'sm' | 'md' | 'lg' | 'initial';
 

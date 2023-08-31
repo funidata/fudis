@@ -1,7 +1,6 @@
 import { Injectable, Signal, signal } from '@angular/core';
-
-import { FudisAlert, FudisAlertElement } from '../../../types/miscellaneous';
-import { FudisIdService } from '../../../utilities/id-service.service';
+import { FudisIdService } from '../id/id.service';
+import { FudisAlert, FudisAlertElement } from '../../types/miscellaneous';
 
 @Injectable({
 	providedIn: 'root',

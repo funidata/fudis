@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FudisIdService } from './id-service.service';
+import { FudisIdService } from './id.service';
 
 describe('FudisIdServiceService', () => {
 	let service: FudisIdService;
