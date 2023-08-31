@@ -40,8 +40,6 @@ export class AlertComponent {
 
 	protected _closeLabel: string;
 
-	private _targetOnClose: HTMLElement | null;
-
 	protected _handleCloseClick(): void {
 		this._alertService.dismissAlertFromButton(this.buttonId);
 
@@ -51,20 +49,19 @@ export class AlertComponent {
 			const targetId = alerts[alerts.length - 1].buttonId;
 			this._document.getElementById(targetId)?.focus();
 		} else {
-			this._targetOnClose = this._focusService.getFocusTarget();
+			const target: HTMLElement = this._focusService.getFocusTarget();
+			target?.focus();
 		}
-
-		this._targetOnClose?.focus();
 	}
 
 	protected _handleFocus(focusEvent: FocusEvent): void {
 		const relatedTarget = focusEvent?.relatedTarget as HTMLElement;
 
 		/**
-		 * Store source of focus event unless it originated from a link inside Alert.
+		 * Store source of focus event unless it originated inside Alert
 		 */
-		if (!relatedTarget?.closest('.fudis-alert') && !relatedTarget?.classList?.contains('fudis-link__anchor')) {
-			this._focusService.setFocusTarget(focusEvent.relatedTarget);
+		if (relatedTarget && !relatedTarget?.closest('.fudis-alert')) {
+			this._focusService.setFocusTarget(relatedTarget);
 		}
 	}
 

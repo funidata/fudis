@@ -7,18 +7,16 @@ import { Inject, Injectable } from '@angular/core';
 export class FudisFocusService {
 	constructor(@Inject(DOCUMENT) private _document: Document) {}
 
-	private _focusTarget: HTMLElement | null = null;
+	private _focusTarget: HTMLElement;
 
-	public getFocusTarget(): HTMLElement | null {
+	public getFocusTarget(): HTMLElement {
 		return this._focusTarget;
 	}
 
-	public setFocusTarget(target: EventTarget | null): void {
-		if (target) {
-			const element = target as HTMLElement;
-			if (!element.classList.contains('fudis-alert__close')) {
-				this._focusTarget = element;
-			}
+	public setFocusTarget(target: HTMLElement): void {
+		const element = target as HTMLElement;
+		if (!element.classList.contains('fudis-alert__close')) {
+			this._focusTarget = element;
 		}
 	}
 
