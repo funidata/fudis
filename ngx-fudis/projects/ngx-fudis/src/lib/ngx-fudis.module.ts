@@ -61,7 +61,7 @@ import { GridApiDirective } from './directives/grid/grid-api/grid-api.directive'
 import { GridDirective } from './directives/grid/grid/grid.directive';
 import { GridItemComponent } from './components/grid/grid-item/grid-item.component';
 import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
-import { FudisGridService } from './directives/grid/grid-service/grid.service';
+import { FudisGridService } from './services/grid/grid.service';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { HeaderDirective } from './directives/content-projection/header/header.directive';
 import { HeadingComponent } from './components/typography/heading/heading.component';

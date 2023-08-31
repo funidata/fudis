@@ -1,5 +1,5 @@
 import { Directive, ElementRef, OnChanges, OnInit, Input, effect } from '@angular/core';
-import { FudisGridService } from '../grid-service/grid.service';
+import { FudisGridService } from '../../../services/grid/grid.service';
 import {
 	FudisGridResponsiveData,
 	FudisGridItemAlignment,
