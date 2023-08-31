@@ -1918,6 +1918,13 @@ html {
   font-style: normal;
 }
 /* stylelint-disable unit-disallowed-list */
+/* stylelint-disable color-no-hex */
+/*
+  --- Primary Colors are defined in style.scss ---
+*/
+/*
+  --- Secondary & Accent Colors ---
+*/
 /* stylelint-disable property-disallowed-list */
 /* stylelint-disable unit-disallowed-list */
 .fudis-visually-hidden {
@@ -1939,6 +1946,12 @@ html {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+.fudis-hr {
+  border: 0;
+  border-top: 1px solid #727272;
+  height: 1px;
 }
 
 /* stylelint-disable color-no-hex */
