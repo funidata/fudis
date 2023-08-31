@@ -1,9 +1,8 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-
 import { Component } from '@angular/core';
 import { DescriptionListComponent } from './description-list.component';
 import readme from './readme.mdx';
-import { FudisLanguageBadgeGroupService } from '../language-badge-group/language-badge-group.service';
+import { FudisLanguageBadgeGroupService } from '../../services/language-badge-group/language-badge-group.service';
 import { FudisLanguageAbbr } from '../../types/miscellaneous';
 
 @Component({
