@@ -14,9 +14,8 @@ export class FudisFocusService {
 	}
 
 	public setFocusTarget(target: HTMLElement): void {
-		const element = target as HTMLElement;
-		if (!element.classList.contains('fudis-alert__close')) {
-			this._focusTarget = element;
+		if (!target.classList.contains('fudis-alert__close')) {
+			this._focusTarget = target;
 		}
 	}
 
