@@ -220,8 +220,8 @@
 /* stylelint-disable scss/selector-no-redundant-nesting-selector */
 /* stylelint-disable property-disallowed-list */
 /* stylelint-disable unit-disallowed-list */
-.cdk-global-overlay-wrapper {
-  overflow: scroll;
+.cdk-overlay-container .cdk-global-overlay-wrapper {
+  overflow: auto;
 }
 
 .fudis-dialog-panel {
