@@ -5,7 +5,7 @@ import { GridComponent } from '../../grid/grid/grid.component';
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisGridService } from '../../../directives/grid/grid-service/grid.service';
-import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
+import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 
 describe('FieldSetComponent', () => {
 	let component: FieldSetComponent;

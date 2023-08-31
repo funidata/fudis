@@ -10,7 +10,7 @@ import { IconComponent } from '../../icon/icon.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { LabelComponent } from '../label/label.component';
 import { AutocompleteComponent } from './autocomplete.component';
-import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
+import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { FudisInputWidth } from '../../../types/forms';
 

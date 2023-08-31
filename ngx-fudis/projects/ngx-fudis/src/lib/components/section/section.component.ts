@@ -7,7 +7,7 @@ import { FudisGridWidth, FudisGridAlign, FudisGridMarginSide } from '../../types
 
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisSpacing } from '../../types/miscellaneous';
-import { FudisErrorSummaryService } from '../form/error-summary/error-summary.service';
+import { FudisErrorSummaryService } from '../../services/form/error-summary/error-summary.service';
 import { FudisFormErrorSummarySection } from '../../types/forms';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 

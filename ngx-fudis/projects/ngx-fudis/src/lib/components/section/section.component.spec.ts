@@ -7,7 +7,7 @@ import { FudisGridService } from '../../directives/grid/grid-service/grid.servic
 
 import { FudisIdService } from '../../services/id/id.service';
 import { GridDirective } from '../../directives/grid/grid/grid.directive';
-import { FudisErrorSummaryService } from '../form/error-summary/error-summary.service';
+import { FudisErrorSummaryService } from '../../services/form/error-summary/error-summary.service';
 
 describe('SectionComponent', () => {
 	let component: SectionComponent;

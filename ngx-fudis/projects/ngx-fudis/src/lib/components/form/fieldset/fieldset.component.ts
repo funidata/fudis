@@ -18,7 +18,7 @@ import { FudisGridWidth, FudisGridAlign, FudisGridMarginSide } from '../../../ty
 import { FudisSpacing } from '../../../types/miscellaneous';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { FudisIdService } from '../../../services/id/id.service';
-import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
+import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { FudisFormErrorSummarySection } from '../../../types/forms';
 import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 

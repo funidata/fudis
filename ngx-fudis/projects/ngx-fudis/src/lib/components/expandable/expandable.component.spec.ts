@@ -11,7 +11,7 @@ import { ActionsDirective } from '../../directives/content-projection/actions/ac
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisExpandableType } from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
-import { FudisErrorSummaryService } from '../form/error-summary/error-summary.service';
+import { FudisErrorSummaryService } from '../../services/form/error-summary/error-summary.service';
 
 @Component({
 	selector: 'fudis-mock-container',

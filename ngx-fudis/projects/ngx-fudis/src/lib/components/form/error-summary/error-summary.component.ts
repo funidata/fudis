@@ -13,7 +13,7 @@ import {
 
 import { DOCUMENT } from '@angular/common';
 
-import { FudisErrorSummaryService } from './error-summary.service';
+import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import {
 	FudisFormErrorSummaryObject,
 	FudisFormErrorSummaryList,
