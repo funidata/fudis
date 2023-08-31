@@ -10,16 +10,6 @@ export class FudisAlertService {
 
 	private _alerts = signal<FudisAlertElement[]>([]);
 
-	private _dialogOpen = signal<boolean>(false);
-
-	public getDialogOpenSignal(): Signal<boolean> {
-		return this._dialogOpen.asReadonly();
-	}
-
-	public setDialogOpenSignal(value: boolean): void {
-		this._dialogOpen.set(value);
-	}
-
 	public addAlert(newAlert: FudisAlert): void {
 		const alertToAdd = newAlert;
 

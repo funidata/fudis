@@ -3,7 +3,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ComponentType } from '@angular/cdk/portal';
-import { FudisDialogService } from './dialog.service';
+import { FudisDialogService } from '../../services/dialog/dialog.service';
 import readme from './readme.mdx';
 
 @Component({

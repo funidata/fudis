@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, Input, AfterViewInit, Signal, effect } fr
 import { FudisAlertElement } from '../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../utilities/translation/translation.service';
 import { FudisAlertService } from '../../../services/alert/alert.service';
+import { FudisDialogService } from '../../../services/dialog/dialog.service';
 
 @Component({
 	selector: 'fudis-alert-group',
@@ -13,7 +14,8 @@ export class AlertGroupComponent implements AfterViewInit {
 	constructor(
 		private _alertService: FudisAlertService,
 		private _translationService: FudisTranslationService,
-		private readonly _changeDetectorRef: ChangeDetectorRef
+		private readonly _changeDetectorRef: ChangeDetectorRef,
+		private _dialogService: FudisDialogService
 	) {
 		effect(() => {
 			this._alertList = this._alertService.getAlertsSignal();
@@ -21,7 +23,7 @@ export class AlertGroupComponent implements AfterViewInit {
 				this._alertList().length
 			}`;
 
-			this._dialogStatus = this._alertService.getDialogOpenSignal()();
+			this._dialogStatus = this._dialogService.getDialogOpenSignal()();
 
 			this._setVisibility();
 		});

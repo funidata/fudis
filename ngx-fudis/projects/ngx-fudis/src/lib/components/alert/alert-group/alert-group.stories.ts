@@ -7,7 +7,7 @@ import readme from '../readme.mdx';
 import { AlertGroupComponent } from './alert-group.component';
 
 import { FudisAlert, FudisAlertElement } from '../../../types/miscellaneous';
-import { FudisDialogService } from '../../dialog/dialog.service';
+import { FudisDialogService } from '../../../services/dialog/dialog.service';
 import { FudisAlertService } from '../../../services/alert/alert.service';
 
 @Component({

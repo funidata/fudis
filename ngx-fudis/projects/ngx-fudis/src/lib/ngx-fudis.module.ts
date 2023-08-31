@@ -41,7 +41,7 @@ import {
 	DialogActionsDirective,
 } from './components/dialog/dialog-directives';
 import { DialogComponent } from './components/dialog/dialog.component';
-import { FudisDialogService } from './components/dialog/dialog.service';
+import { FudisDialogService } from './services/dialog/dialog.service';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
 import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
 import { DropdownMenuItemComponent } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
