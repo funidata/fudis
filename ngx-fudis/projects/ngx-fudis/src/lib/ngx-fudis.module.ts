@@ -39,7 +39,7 @@ import {
 	DialogContentDirective,
 	DialogTitleDirective,
 	DialogActionsDirective,
-} from './components/dialog/dialog-directives';
+} from './directives/dialog/dialog-directives';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { FudisDialogService } from './services/dialog/dialog.service';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';

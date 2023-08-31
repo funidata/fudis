@@ -26,7 +26,7 @@ export {
 	DialogCloseDirective,
 	DialogContentDirective,
 	DialogTitleDirective,
-} from './lib/components/dialog/dialog-directives';
+} from './lib/directives/dialog/dialog-directives';
 export { DialogComponent } from './lib/components/dialog/dialog.component';
 
 export { DescriptionListComponent } from './lib/components/description-list/description-list.component';
