@@ -95,11 +95,12 @@ const lonelyDataItem = [{ key: 'Vastuuopettajan sähköposti', value: 'olli@ope.
 const DescriptionListTemplate: StoryFn<DescriptionListComponent> = (args: DescriptionListComponent) => ({
 	props: args,
 	template: html`<fudis-description-list [variant]="variant" [marginBottom]="'md'" [disableGrid]="disableGrid">
-		<fudis-description-list-item *ngFor="let item of data">
-			<fudis-dt>{{item.key}}</fudis-dt>
-			<fudis-dd [subHeading]="item.subHeading">{{item.value}} </fudis-dd>
-		</fudis-description-list-item>
-	</fudis-description-list>`,
+			<fudis-description-list-item *ngFor="let item of data">
+				<fudis-dt>{{item.key}}</fudis-dt>
+				<fudis-dd [subHeading]="item.subHeading">{{item.value}} </fudis-dd>
+			</fudis-description-list-item>
+		</fudis-description-list>
+		<hr class="fudis-hr" />`,
 });
 
 export const DescriptionList = DescriptionListTemplate.bind({});

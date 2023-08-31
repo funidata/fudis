@@ -1,6 +1,7 @@
 /* stylelint-disable property-disallowed-list */
 /* stylelint-disable unit-disallowed-list */
 @use '../spacing/tokens.scss' as spacing;
+@use '../colors/tokens.scss' as colors;
 
 @mixin visually-hidden() {
 	position: absolute;
@@ -21,4 +22,10 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+}
+
+@mixin horizontal-rule() {
+	border: 0;
+	border-top: spacing.$pixel-1 solid colors.$color-gray-middle;
+	height: spacing.$pixel-1;
 }
