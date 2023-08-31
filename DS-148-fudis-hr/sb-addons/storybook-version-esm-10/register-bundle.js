@@ -15,4 +15,3 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     `,`
   `])),C);return m.createElement(m.Fragment,null,m.createElement(I,{key:f,title:f},f))},R=Y;p.register(O,function(){p.add(h,{type:d.TOOL,title:"Version",match:function(){return!0},render:R})});
 }catch(e){ console.error("[Storybook] One of your manager-entries failed: " + import.meta.url, e); }
-//# sourceMappingURL=register-bundle.js.map
