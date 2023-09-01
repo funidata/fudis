@@ -21,7 +21,7 @@ import {
 	FudisFormErrorSummaryLink,
 	FudisErrorSummaryParent,
 } from '../../../types/forms';
-import { FudisTranslationService } from '../../../utilities/translation/translation.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisLanguageAbbr, FudisTranslationConfig } from '../../../types/miscellaneous';
 
 @Component({

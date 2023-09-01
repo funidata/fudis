@@ -5,7 +5,7 @@ import { InputBaseDirective } from '../../../directives/form/input-base/input-ba
 
 import { FudisInputWidth } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
-import { FudisTranslationService } from '../../../utilities/translation/translation.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 @Component({
 	selector: 'fudis-text-area',

@@ -2,7 +2,7 @@ import { Component, Inject, Input, effect } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FudisNotification } from '../../../types/miscellaneous';
 import { FudisFocusService } from '../../../services/focus/focus.service';
-import { FudisTranslationService } from '../../../utilities/translation/translation.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisAlertService } from '../../../services/alert/alert.service';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 

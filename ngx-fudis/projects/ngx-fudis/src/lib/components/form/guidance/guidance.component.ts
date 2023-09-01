@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, effect } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FudisFormErrors, FudisFormGroupErrors } from '../../../types/forms';
-import { FudisTranslationService } from '../../../utilities/translation/translation.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 @Component({
 	selector: 'fudis-guidance',

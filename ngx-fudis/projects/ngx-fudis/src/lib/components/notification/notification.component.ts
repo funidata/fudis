@@ -2,7 +2,7 @@ import { Component, ContentChild, Input, OnChanges, OnInit, SimpleChanges, effec
 import { FudisIcon } from '../../types/icons';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisNotification } from '../../types/miscellaneous';
-import { FudisTranslationService } from '../../utilities/translation/translation.service';
+import { FudisTranslationService } from '../../services/translation/translation.service';
 
 @Component({
 	selector: 'fudis-notification',

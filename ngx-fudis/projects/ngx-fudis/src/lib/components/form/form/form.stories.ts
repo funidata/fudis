@@ -16,7 +16,7 @@ import {
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 import { FormComponent } from './form.component';
-import { FudisTranslationService } from '../../../utilities/translation/translation.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 @Component({
 	selector: 'example-form-content',
