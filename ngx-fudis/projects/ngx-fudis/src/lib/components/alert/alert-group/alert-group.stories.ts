@@ -158,12 +158,7 @@ export default {
 			page: readme,
 		},
 		controls: {
-			exclude: [],
-		},
-	},
-	argTypes: {
-		icon: {
-			control: { type: 'text' },
+			exclude: /.*/g,
 		},
 	},
 } as Meta;
