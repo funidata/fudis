@@ -8,7 +8,7 @@ import {
 	gridColumnDefault,
 	FudisGridAttributes,
 } from '../../../types/grid';
-import { FudisGridService } from '../grid-service/grid.service';
+import { FudisGridService } from '../../../services/grid/grid.service';
 
 @Directive({
 	selector: '[fudisGrid]',

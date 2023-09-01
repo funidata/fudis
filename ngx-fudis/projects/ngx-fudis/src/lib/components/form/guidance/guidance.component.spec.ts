@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 
 import { MockComponent } from 'ng-mocks';
 import { GuidanceComponent } from './guidance.component';
-import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
+import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 
 const testControl = new FormControl('');

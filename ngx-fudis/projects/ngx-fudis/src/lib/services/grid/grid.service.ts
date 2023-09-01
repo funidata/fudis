@@ -2,8 +2,8 @@ import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Injectable, Signal, signal } from '@angular/core';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FudisGridAttributes, FudisGridResponsiveData } from '../../../types/grid';
-import { breakpointsMinWidthToObserve } from '../gridUtils';
+import { breakpointsMinWidthToObserve } from '../../directives/grid/gridUtils';
+import { FudisGridAttributes, FudisGridResponsiveData } from '../../types/grid';
 
 @Injectable()
 export class FudisGridService {

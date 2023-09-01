@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, Host, Input, Signal, ViewEncapsul
 import { FudisLanguageAbbr } from '../../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../../utilities/translation/translation.service';
 import { DescriptionListItemComponent } from '../description-list-item.component';
-import { FudisLanguageBadgeGroupService } from '../../../language-badge-group/language-badge-group.service';
+import { FudisLanguageBadgeGroupService } from '../../../../services/language-badge-group/language-badge-group.service';
 
 @Component({
 	selector: 'fudis-dt, fudis-description-list-term',

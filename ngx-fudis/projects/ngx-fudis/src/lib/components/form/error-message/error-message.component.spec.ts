@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ErrorMessageComponent } from './error-message.component';
-import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
+import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 
 describe('ErrorMessageComponent', () => {
 	let component: ErrorMessageComponent;

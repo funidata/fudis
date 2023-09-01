@@ -39,7 +39,7 @@ import {
 	DialogContentDirective,
 	DialogTitleDirective,
 	DialogActionsDirective,
-} from './components/dialog/dialog-directives';
+} from './directives/dialog/dialog-directives';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { FudisDialogService } from './services/dialog/dialog.service';
 import { DropdownComponent } from './components/form/dropdown/dropdown.component';
@@ -49,7 +49,7 @@ import { DropdownMenuItemComponent } from './components/dropdown-menu/dropdown-m
 import { FudisDropdownMenuItemService } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { FudisFocusService } from './services/focus/focus.service';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
-import { FudisErrorSummaryService } from './components/form/error-summary/error-summary.service';
+import { FudisErrorSummaryService } from './services/form/error-summary/error-summary.service';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
 
@@ -61,7 +61,7 @@ import { GridApiDirective } from './directives/grid/grid-api/grid-api.directive'
 import { GridDirective } from './directives/grid/grid/grid.directive';
 import { GridItemComponent } from './components/grid/grid-item/grid-item.component';
 import { GridItemDirective } from './directives/grid/grid-item/grid-item.directive';
-import { FudisGridService } from './directives/grid/grid-service/grid.service';
+import { FudisGridService } from './services/grid/grid.service';
 import { GuidanceComponent } from './components/form/guidance/guidance.component';
 import { HeaderDirective } from './directives/content-projection/header/header.directive';
 import { HeadingComponent } from './components/typography/heading/heading.component';
@@ -89,7 +89,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LanguageBadgeGroupComponent } from './components/language-badge-group/language-badge-group.component';
 import { LanguageBadgeComponent } from './components/language-badge-group/language-badge/language-badge.component';
 import { FudisTranslationService } from './utilities/translation/translation.service';
-import { FudisLanguageBadgeGroupService } from './components/language-badge-group/language-badge-group.service';
+import { FudisLanguageBadgeGroupService } from './services/language-badge-group/language-badge-group.service';
 import { AlertComponent } from './components/alert/alert/alert.component';
 import { AlertGroupComponent } from './components/alert/alert-group/alert-group.component';
 import { FudisAlertService } from './services/alert/alert.service';

@@ -3,11 +3,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SectionComponent } from './section.component';
 import { HeadingComponent } from '../typography/heading/heading.component';
 
-import { FudisGridService } from '../../directives/grid/grid-service/grid.service';
+import { FudisGridService } from '../../services/grid/grid.service';
 
 import { FudisIdService } from '../../services/id/id.service';
 import { GridDirective } from '../../directives/grid/grid/grid.directive';
-import { FudisErrorSummaryService } from '../form/error-summary/error-summary.service';
+import { FudisErrorSummaryService } from '../../services/form/error-summary/error-summary.service';
 
 describe('SectionComponent', () => {
 	let component: SectionComponent;

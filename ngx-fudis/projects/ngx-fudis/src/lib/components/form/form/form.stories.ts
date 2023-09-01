@@ -13,7 +13,7 @@ import {
 	FudisDateRangeItem,
 } from '../../../types/forms';
 
-import { FudisErrorSummaryService } from '../error-summary/error-summary.service';
+import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 import { FormComponent } from './form.component';
 import { FudisTranslationService } from '../../../utilities/translation/translation.service';

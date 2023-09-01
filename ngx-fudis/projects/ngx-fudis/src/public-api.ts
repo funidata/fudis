@@ -26,7 +26,7 @@ export {
 	DialogCloseDirective,
 	DialogContentDirective,
 	DialogTitleDirective,
-} from './lib/components/dialog/dialog-directives';
+} from './lib/directives/dialog/dialog-directives';
 export { DialogComponent } from './lib/components/dialog/dialog.component';
 
 export { DescriptionListComponent } from './lib/components/description-list/description-list.component';
@@ -41,7 +41,7 @@ export { DropdownMenuItemComponent } from './lib/components/dropdown-menu/dropdo
 export { ErrorMessageComponent } from './lib/components/form/error-message/error-message.component';
 
 export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';
-export { FudisErrorSummaryService } from './lib/components/form/error-summary/error-summary.service';
+export { FudisErrorSummaryService } from './lib/services/form/error-summary/error-summary.service';
 export { ExpandableComponent } from './lib/components/expandable/expandable.component';
 export { FieldSetComponent } from './lib/components/form/fieldset/fieldset.component';
 export { FooterComponent } from './lib/components/footer/footer.component';
@@ -51,13 +51,13 @@ export { GridComponent } from './lib/components/grid/grid/grid.component';
 export { GridItemComponent } from './lib/components/grid/grid-item/grid-item.component';
 export { GridDirective } from './lib/directives/grid/grid/grid.directive';
 export { GridItemDirective } from './lib/directives/grid/grid-item/grid-item.directive';
-export { FudisGridService } from './lib/directives/grid/grid-service/grid.service';
+export { FudisGridService } from './lib/services/grid/grid.service';
 export { GuidanceComponent } from './lib/components/form/guidance/guidance.component';
 export { HeaderDirective } from './lib/directives/content-projection/header/header.directive';
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
 export { IconComponent } from './lib/components/icon/icon.component';
 export { LanguageBadgeGroupComponent } from './lib/components/language-badge-group/language-badge-group.component';
-export { FudisLanguageBadgeGroupService } from './lib/components/language-badge-group/language-badge-group.service';
+export { FudisLanguageBadgeGroupService } from './lib/services/language-badge-group/language-badge-group.service';
 export { LinkComponent } from './lib/components/link/link.component';
 export { NotificationsDirective } from './lib/directives/content-projection/notifications/notifications.directive';
 export { NotificationComponent } from './lib/components/notification/notification.component';

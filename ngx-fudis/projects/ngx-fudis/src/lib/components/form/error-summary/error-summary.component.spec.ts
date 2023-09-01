@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MockComponent } from 'ng-mocks';
 import { ErrorSummaryComponent } from './error-summary.component';
-import { FudisErrorSummaryService } from './error-summary.service';
+import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { NotificationComponent } from '../../notification/notification.component';
 
 describe('ErrorSummaryComponent', () => {

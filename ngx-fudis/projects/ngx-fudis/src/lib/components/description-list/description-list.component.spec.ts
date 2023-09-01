@@ -6,7 +6,7 @@ import { GridComponent } from '../grid/grid/grid.component';
 import { GridDirective } from '../../directives/grid/grid/grid.directive';
 
 import { DescriptionListComponent } from './description-list.component';
-import { FudisGridService } from '../../directives/grid/grid-service/grid.service';
+import { FudisGridService } from '../../services/grid/grid.service';
 import { DescriptionListItemComponent } from './description-list-item/description-list-item.component';
 import { DescriptionListItemTermComponent } from './description-list-item/description-list-item-term/description-list-item-term.component';
 import { DescriptionListItemDetailsComponent } from './description-list-item/description-list-item-details/description-list-item-details.component';
