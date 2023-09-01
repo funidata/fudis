@@ -3,7 +3,7 @@ import { ReactiveFormsModule, FormsModule, FormControl, Validators } from '@angu
 import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { FudisTranslationService } from 'projects/ngx-fudis/src/lib/services/translation/translation.service';
+import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { DateRangeComponent } from './date-range.component';
 
 import readme from './readme.mdx';
