@@ -14,7 +14,7 @@ import { MatSelect } from '@angular/material/select';
 import { FudisDropdownOption, FudisDropdownLanguageOption, FudisInputWidth } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../services/id/id.service';
-import { FudisTranslationService } from '../../../utilities/translation/translation.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 @Component({
 	selector: 'fudis-dropdown',

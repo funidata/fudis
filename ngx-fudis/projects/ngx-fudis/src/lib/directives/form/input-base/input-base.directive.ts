@@ -2,7 +2,7 @@ import { Directive, Input, EventEmitter, Output, Signal, effect, ViewChild, Elem
 
 import { FudisFormErrors } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
-import { FudisTranslationService } from '../../../utilities/translation/translation.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisTranslationConfig } from '../../../types/miscellaneous';
 
 @Directive({

@@ -1,7 +1,7 @@
 import { Directive, Input, Signal, effect } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisTranslationConfig } from '../../../types/miscellaneous';
-import { FudisTranslationService } from '../../../utilities/translation/translation.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 @Directive({
 	selector: '[fudisFieldSetBase]',
