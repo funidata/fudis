@@ -10,7 +10,7 @@ import {
 	ViewChild,
 	effect,
 } from '@angular/core';
-import { FudisTranslationService } from '../../utilities/translation/translation.service';
+import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisTranslationConfig } from '../../types/miscellaneous';
 import { FudisFocusService } from '../../services/focus/focus.service';
 

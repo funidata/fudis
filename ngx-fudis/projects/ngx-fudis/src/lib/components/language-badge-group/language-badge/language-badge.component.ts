@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { FudisLanguageAbbr, FudisTranslationConfig } from '../../../types/miscellaneous';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
-import { FudisTranslationService } from '../../../utilities/translation/translation.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 @Component({
 	selector: 'fudis-language-badge',

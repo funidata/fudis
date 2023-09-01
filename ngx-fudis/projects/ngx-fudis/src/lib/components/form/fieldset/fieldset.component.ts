@@ -20,7 +20,7 @@ import { ContentDirective } from '../../../directives/content-projection/content
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { FudisFormErrorSummarySection } from '../../../types/forms';
-import { FudisTranslationService } from '../../../utilities/translation/translation.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 @Component({
 	selector: 'fudis-fieldset',

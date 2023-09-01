@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, AfterViewInit, Signal, effect } from '@angular/core';
 
 import { FudisAlertElement } from '../../../types/miscellaneous';
-import { FudisTranslationService } from '../../../utilities/translation/translation.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisAlertService } from '../../../services/alert/alert.service';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 
