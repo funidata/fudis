@@ -12,10 +12,7 @@ import { FudisAlertService } from '../../../services/alert/alert.service';
 
 @Component({
 	selector: 'example-add-alerts',
-	template: ` <fudis-heading [level]="'h1'">Alert demo</fudis-heading>
-		<fudis-body-text>Tämä teksti jää alerttien taakse.</fudis-body-text>
-		<fudis-alert-group />
-		<div [style]="'margin-top:' + _marginCounter + 'rem'">
+	template: `<div [style]="'margin-top:' + _marginCounter + 'rem'">
 			<fudis-grid [columns]="'repeat(4,auto)'" [width]="'sm'">
 				<fudis-button [label]="'Add danger'" (handleClick)="addDanger()" />
 				<fudis-button [label]="'Add warning'" (handleClick)="addWarning()" />
@@ -47,13 +44,13 @@ class AddAlertsComponent implements AfterViewInit {
 	) {
 		effect(() => {
 			this._alerts = this._alertService.getAlertsSignal();
-			this._marginCounter = 1 + this._alerts().length * 2;
+			this._marginCounter = 2 + this._alerts().length * 2;
 		});
 	}
 
 	@ViewChild('exampleDialogTemplate', { static: true }) templateRef: TemplateRef<unknown>;
 
-	protected _marginCounter = 0;
+	protected _marginCounter = 2;
 
 	protected _alerts: Signal<FudisAlertElement[]>;
 
@@ -166,5 +163,5 @@ export default {
 const html = String.raw;
 
 export const Example: StoryFn = () => ({
-	template: html`<example-add-alerts /> `,
+	template: html`<fudis-alert-group /><example-add-alerts /> `,
 });
