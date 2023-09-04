@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { AlertComponent } from './alert.component';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
