@@ -33,6 +33,7 @@ describe('DropdownComponent', () => {
 		fixture = TestBed.createComponent(DropdownComponent);
 		component = fixture.componentInstance;
 		component.control = dropdownControl;
+		component.options = dropdownOptions;
 		fixture.detectChanges();
 	});
 
@@ -49,6 +50,8 @@ describe('DropdownComponent', () => {
 	}
 
 	it('should create', () => {
+		component.control = new FormControl(null, Validators.required);
+		component.options = dropdownOptions;
 		expect(component).toBeTruthy();
 	});
 
