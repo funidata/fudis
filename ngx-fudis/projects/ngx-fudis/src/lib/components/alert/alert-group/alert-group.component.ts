@@ -29,24 +29,45 @@ export class AlertGroupComponent implements AfterViewInit {
 		});
 	}
 
-	@Input() position: 'fixed' | 'absolute' = 'fixed';
+	/**
+	 * CSS position of alerts. Defaults to fixed.
+	 */
+	@Input() position: 'fixed' | 'absolute' | 'static' = 'fixed';
 
-	@Input() variant: 'dialog' | 'default' = 'default';
+	/**
+	 * Boolean to determine if Alert Group is used as child in Fudis Dialog.
+	 */
+	@Input() insideDialog: boolean = false;
 
+	/**
+	 * List of Alerts fetched from service
+	 */
 	protected _alertList: Signal<FudisAlertElement[]>;
 
+	/**
+	 * Label for section element containing alerts
+	 */
 	protected _alertGroupLabel: string;
 
+	/**
+	 * Boolean from service to determine if Fudis Dialog is open.
+	 */
 	protected _dialogStatus: boolean;
 
+	/**
+	 * Boolean to determine if Alert group is visible. Used with _dialogStatus boolean.
+	 */
 	protected _visible: boolean = false;
 
 	ngAfterViewInit(): void {
 		this._setVisibility();
 	}
 
+	/**
+	 * Set visibility when Fudis Dialog is opened and closed.
+	 */
 	private _setVisibility(): void {
-		if ((this._dialogStatus && this.variant === 'dialog') || (!this._dialogStatus && this.variant === 'default')) {
+		if ((this._dialogStatus && this.insideDialog) || (!this._dialogStatus && !this.insideDialog)) {
 			this._visible = true;
 		} else {
 			this._visible = false;

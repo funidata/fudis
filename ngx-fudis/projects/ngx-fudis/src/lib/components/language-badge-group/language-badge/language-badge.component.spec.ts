@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { LanguageBadgeComponent } from './language-badge.component';
 import { TooltipDirective } from '../../../directives/tooltip/tooltip.directive';
 
-fdescribe('LanguageBadgeComponent', () => {
+describe('LanguageBadgeComponent', () => {
 	let component: LanguageBadgeComponent;
 	let fixture: ComponentFixture<LanguageBadgeComponent>;
 

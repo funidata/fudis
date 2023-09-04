@@ -157,14 +157,6 @@ export default {
 		docs: {
 			page: readme,
 		},
-		controls: {
-			exclude: [],
-		},
-	},
-	argTypes: {
-		icon: {
-			control: { type: 'text' },
-		},
 	},
 } as Meta;
 

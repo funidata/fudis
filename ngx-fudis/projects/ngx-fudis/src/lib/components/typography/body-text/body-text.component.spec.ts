@@ -33,14 +33,16 @@ describe('BodyTextComponent', () => {
 	function bodyTextSizes(size: FudisBodyText): void {
 		component.size = size;
 		fixture.detectChanges();
-		assertBodyTextHasClasses(`fudis-body-text fudis-body-text__${size} fudis-mb-none`);
+		assertBodyTextHasClasses(`fudis-body-text fudis-body-text__${size} fudis-mb-none fudis-body-text__default`);
 	}
 
 	function marginBottomSizes(marginBottom: FudisSpacing): void {
 		component.marginBottom = marginBottom;
 
 		fixture.detectChanges();
-		assertBodyTextHasClasses(`fudis-body-text fudis-body-text__md-regular fudis-mb-${marginBottom}`);
+		assertBodyTextHasClasses(
+			`fudis-body-text fudis-body-text__default fudis-body-text__md-regular fudis-mb-${marginBottom}`
+		);
 	}
 
 	describe('CSS classes', () => {
