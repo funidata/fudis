@@ -66,7 +66,7 @@ export class InputBaseDirective extends TooltipApiDirective {
 	@Input() required: boolean | undefined = undefined;
 
 	/**
-	 * Set browser focus to input on first load.
+	 * Set browser focus to input on the first load.
 	 */
 	@Input() initialFocus: boolean = false;
 

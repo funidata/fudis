@@ -44,7 +44,7 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
 	@Input() id: string;
 
 	/**
-	 * Set browser focus to start date input on first load.
+	 * Set browser focus to start date input on the first load.
 	 */
 	@Input() initialFocus: boolean = false;
 

@@ -35,27 +35,27 @@ export class AlertGroupComponent implements AfterViewInit {
 	@Input() position: 'fixed' | 'absolute' | 'static' = 'fixed';
 
 	/**
-	 * Boolean to determine if Alert Group is used as child in Fudis Dialog. Currently only used internally.
+	 * Boolean to determine if Alert Group is used as child in Fudis Dialog.
 	 */
 	@Input() insideDialog: boolean = false;
 
 	/**
-	 * List of alerts fetched from service
+	 * List of Alerts fetched from service
 	 */
 	protected _alertList: Signal<FudisAlertElement[]>;
 
 	/**
-	 * Label for section containing alerts
+	 * Label for section element containing alerts
 	 */
 	protected _alertGroupLabel: string;
 
 	/**
-	 * Boolean from service to determine if Fudis dialog is open.
+	 * Boolean from service to determine if Fudis Dialog is open.
 	 */
 	protected _dialogStatus: boolean;
 
 	/**
-	 * Boolean to determinen if Alert group is visible. Used with _dialogStatus boolean.
+	 * Boolean to determine if Alert group is visible. Used with _dialogStatus boolean.
 	 */
 	protected _visible: boolean = false;
 
@@ -64,7 +64,7 @@ export class AlertGroupComponent implements AfterViewInit {
 	}
 
 	/**
-	 * Set visibility when Fudis dialog is opened and closed.
+	 * Set visibility when Fudis Dialog is opened and closed.
 	 */
 	private _setVisibility(): void {
 		if ((this._dialogStatus && this.insideDialog) || (!this._dialogStatus && !this.insideDialog)) {

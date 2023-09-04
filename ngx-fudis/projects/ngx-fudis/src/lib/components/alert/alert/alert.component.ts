@@ -55,7 +55,7 @@ export class AlertComponent {
 	@Input() linkTitle: string | undefined;
 
 	/**
-	 * Used with links in alert, to force focus to the link on first load.
+	 * Used with links in alert, to force focus to the link on the first load.
 	 */
 	@Input() initialFocus: boolean = false;
 
@@ -65,7 +65,7 @@ export class AlertComponent {
 	protected _closeLabel: string;
 
 	/**
-	 * Handler for close button. Dismisses alert from service and sets focus to last alert in the list or to previous focusable element keyboard user were before focusing to alerts.
+	 * Handler for close button. Dismisses alert from service and sets focus to last alert in the list or to previously focused element stored with _handleFocus().
 	 */
 	protected _handleCloseClick(): void {
 		this._alertService.dismissAlertFromButton(this.buttonId);
@@ -82,7 +82,7 @@ export class AlertComponent {
 	}
 
 	/**
-	 * Focus handler for both link and close button inside alert. Saves info about the element focus originated from to restore focus there when there are no alerts left.
+	 * Focus handler for both link and close button inside alert. Saves the element focus originated from to restore focus there when there are no alerts left.
 	 */
 	protected _handleFocus(focusEvent: FocusEvent): void {
 		const relatedTarget = focusEvent?.relatedTarget as HTMLElement;
@@ -90,7 +90,7 @@ export class AlertComponent {
 		const isDialogOpen = this._dialogService.getDialogOpenSignal()();
 
 		/**
-		 * First if: when keyboard Tabbing through ngMaterial dialog, focus goes through their hidden focus-trap helper element which focuses on either first alert on the list or dialog close. So we store the dialog close as focus target.
+		 * First if: when keyboard tabbing through ngMaterial dialog, focus goes through its hidden focus-trap helper element which focuses on either first alert on the list or dialog close. So we store the dialog close as focus target.
 		 * Else if: Store source of focus event unless it originated inside Alert
 		 */
 
@@ -107,7 +107,7 @@ export class AlertComponent {
 	}
 
 	/**
-	 * When blurring from link inside alert, initialFocus is set to false. (So that in e. g. opening dialog doesn't re-focus to link). Because this makes alert to render again, if next focus target should be the close button in re-rendered alert, the focus is set to that close button.
+	 * When blurring from link inside alert, initialFocus is set to false. (So that in e. g. opening dialog doesn't re-focus to link). Because this makes alert to render again, the focus may be lost, so this blurring makes sure the next focus target is logical.
 	 */
 	protected _handleBlur(event: FocusEvent): void {
 		const nextElement = event.relatedTarget as HTMLElement;
