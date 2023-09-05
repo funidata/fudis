@@ -5,8 +5,13 @@ import { FudisSpacing } from './miscellaneous';
  * Responsive settings for different breakpoints for spacing
  */
 export type FudisSpacingResponsive = {
-	[key in FudisBreakpointKey]?: string | FudisSpacing;
+	[key in FudisBreakpointKey]?: FudisSpacing;
 };
+
+/**
+ * Default spacing value if none is given
+ */
+export const defaultSpacingValue = '0';
 
 /**
  * Object used to apply spacing for certain breakpoints
