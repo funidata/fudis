@@ -65,6 +65,7 @@ describe('FooterComponent', () => {
 	describe('CSS classes', () => {
 		it('should have fudis-footer class', () => {
 			const elem = fixture.debugElement.query(By.css('.fudis-footer'));
+
 			expect(elem.nativeElement.className).toEqual('fudis-footer');
 		});
 	});
@@ -92,6 +93,7 @@ describe('FooterComponent', () => {
 			it('should have Funidata logo visible with an alt text for screen readers', () => {
 				const firstGridItemElem = getFooterGridElem().nativeElement.children[0];
 				const anchorElem = firstGridItemElem.querySelector('.fudis-footer__item__logo');
+
 				expect(anchorElem.children.length).toEqual(1);
 				expect(anchorElem.children[0].getAttribute('alt')).toEqual('Link to Funidata homepage');
 			});

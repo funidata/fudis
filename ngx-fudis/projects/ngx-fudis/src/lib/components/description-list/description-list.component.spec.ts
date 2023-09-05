@@ -62,6 +62,7 @@ describe('DescriptionListComponent', () => {
 
 	function assertDescriptionListHasClasses(classes: string[]): void {
 		const descriptionListClassName = getDescriptionList()?.className ?? '';
+
 		expect(descriptionListClassName.split(' ').sort()).toEqual(classes.sort());
 	}
 
@@ -75,6 +76,7 @@ describe('DescriptionListComponent', () => {
 		const descriptionListItemDetailsElement = getDescriptionListDd(classes);
 		const descriptionListItemDetilsClassName = descriptionListItemDetailsElement.className ?? '';
 		const descriptionListItemValueDisplayStyle = getComputedStyle(descriptionListItemDetailsElement).display;
+
 		expect(descriptionListItemValueDisplayStyle).toEqual(display);
 		expect(descriptionListItemDetilsClassName).toContain(classes);
 	}
@@ -92,6 +94,7 @@ describe('DescriptionListComponent', () => {
 			];
 			assertDescriptionListHasClasses(classList);
 		});
+
 		it('should have fudis-dl-compact and fudis-grid classes if compact list', () => {
 			component.variant = 'compact';
 			component.ngOnChanges();
@@ -108,6 +111,7 @@ describe('DescriptionListComponent', () => {
 			];
 			assertDescriptionListHasClasses(classList);
 		});
+
 		it('should not have fudis-grid classes if grid directive is disabled if regular list', () => {
 			component.disableGrid = true;
 			component.ngOnChanges();
@@ -115,6 +119,7 @@ describe('DescriptionListComponent', () => {
 			const classList = ['fudis-dl', 'fudis-dl__disabled-grid'];
 			assertDescriptionListHasClasses(classList);
 		});
+
 		it('should not have fudis-grid classes if grid directive is disabled if compact list', () => {
 			component.variant = 'compact';
 			component.disableGrid = true;
@@ -130,6 +135,7 @@ describe('DescriptionListComponent', () => {
 			const descriptionListItem = fixture.debugElement.query(By.css('fudis-dl-item'));
 			const descriptionListItemTerm = descriptionListItem.nativeElement.querySelector('fudis-dt');
 			const descriptionListItemDetails = descriptionListItem.nativeElement.querySelector('fudis-dd');
+
 			expect(descriptionListItemTerm).toBeTruthy();
 			expect(descriptionListItemDetails).toBeTruthy();
 		});

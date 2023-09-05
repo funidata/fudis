@@ -186,6 +186,7 @@ describe('ExpandableComponent', () => {
 	describe('header buttons', () => {
 		it('should render fudis-button when one is given through a fudisExpandableHeaderButtons template', () => {
 			fixture.detectChanges();
+
 			expect(headerHasButtons()).toBeTruthy();
 		});
 	});
@@ -195,6 +196,7 @@ describe('ExpandableComponent', () => {
 			fixture.detectChanges();
 
 			assertExpandableIsClosed();
+
 			expect(containerComponent.contentInitializationCount).toBe(0);
 		});
 
@@ -203,6 +205,7 @@ describe('ExpandableComponent', () => {
 			fixture.detectChanges();
 
 			assertExpandableIsExpanded();
+
 			expect(containerComponent.contentInitializationCount).toBe(1);
 		});
 
@@ -213,6 +216,7 @@ describe('ExpandableComponent', () => {
 			fixture.detectChanges();
 
 			assertExpandableIsExpanded();
+
 			expect(containerComponent.contentInitializationCount).toBe(1);
 		});
 
@@ -264,17 +268,20 @@ describe('ExpandableComponent', () => {
 
 		it('onInit, should add section to error summary if errorSummaryBreadcrumb is true', () => {
 			component.ngOnInit();
+
 			expect(errorService.addSection).not.toHaveBeenCalled();
 
 			component.errorSummaryBreadcrumb = true;
 			fixture.detectChanges();
 
 			component.ngOnInit();
+
 			expect(errorService.addSection).toHaveBeenCalledWith({ id: 'fudis-expandable-2', title: 'Test title' });
 		});
 
 		it('onChanges, should add section to error summary if errorSummaryBreadcrumb is true and title is updated', () => {
 			component.ngOnChanges();
+
 			expect(errorService.addSection).not.toHaveBeenCalled();
 
 			component.errorSummaryBreadcrumb = true;
@@ -282,11 +289,13 @@ describe('ExpandableComponent', () => {
 			fixture.detectChanges();
 
 			component.ngOnChanges();
+
 			expect(errorService.addSection).toHaveBeenCalledWith({ id: 'fudis-expandable-2', title: 'New test title' });
 		});
 
 		it('onDestroy, should remove section from error summary if error summary info is sent', () => {
 			component.ngOnDestroy();
+
 			expect(errorService.removeSection).not.toHaveBeenCalled();
 
 			component.errorSummaryBreadcrumb = true;
@@ -294,6 +303,7 @@ describe('ExpandableComponent', () => {
 			component.addToErrorSummary();
 
 			component.ngOnDestroy();
+
 			expect(errorService.removeSection).toHaveBeenCalledWith({ id: 'fudis-expandable-2', title: 'Test title' });
 		});
 	});

@@ -77,6 +77,7 @@ describe('DateRangeComponent', () => {
 		};
 		fixture.detectChanges();
 		component.ngOnInit();
+
 		expect(component).toBeTruthy();
 	});
 });

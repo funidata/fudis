@@ -31,6 +31,7 @@ describe('HeadingComponent', () => {
 
 	function assertHeadingHasClasses(classes: string, level: FudisHeadingLevel): void {
 		const headingClasses = getHeading(level)?.className.split(' ').sort();
+
 		expect(headingClasses).toEqual(classes.split(' ').sort());
 	}
 

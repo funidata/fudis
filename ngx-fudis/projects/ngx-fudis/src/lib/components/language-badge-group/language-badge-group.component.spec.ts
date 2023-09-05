@@ -38,11 +38,14 @@ describe('LanguageBadgeGroupComponent', () => {
 	describe('Contents', () => {
 		it('should contain all three language badges', () => {
 			const parentComponent = fixture.debugElement.query(By.css('.fudis-language-badge-group'));
+
 			expect(parentComponent.nativeElement.children.length).toEqual(3);
 		});
+
 		it('should have missing translation for Swedish', () => {
 			const existingTranslation = component.languages;
 			const missingLanguage = internalLanguageOptions.filter((missing) => !existingTranslation.includes(missing));
+
 			expect(missingLanguage).toContain('sv');
 		});
 	});

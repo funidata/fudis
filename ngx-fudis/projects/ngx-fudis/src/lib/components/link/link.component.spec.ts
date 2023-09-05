@@ -31,12 +31,14 @@ describe('LinkComponent', () => {
 			component.linkTitle = 'My link';
 			fixture.detectChanges();
 			const anchorElement = fixture.debugElement.query(By.css('.fudis-link__anchor'));
+
 			expect(anchorElement.nativeNode.innerHTML).toEqual(' My link ');
 		});
 
 		it('should always have href', () => {
 			component.href = '';
 			fixture.detectChanges();
+
 			expect(component).not.toBeTrue();
 		});
 	});
@@ -47,6 +49,7 @@ describe('LinkComponent', () => {
 			fixture.detectChanges();
 			const externalLinkComponent = fixture.debugElement.query(By.css('.fudis-link__anchor__external'));
 			const iconExist = externalLinkComponent.query(By.css('fudis-icon'));
+
 			expect(iconExist).toBeTruthy();
 		});
 
@@ -55,6 +58,7 @@ describe('LinkComponent', () => {
 			component.isExternalLink = true;
 			fixture.detectChanges();
 			const externalLinkComponent = fixture.debugElement.query(By.css('.fudis-link__anchor__external'));
+
 			expect(externalLinkComponent.nativeElement.getAttribute('aria-label')).toEqual(
 				'www.example.com, (opens in a new tab)'
 			);
