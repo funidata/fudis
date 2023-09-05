@@ -3,6 +3,9 @@
 	"ignorePatterns": [
 		"projects/**/*"
 	],
+	"plugins": [
+		"eslint-plugin-jasmine"
+	],
 	"overrides": [
 		{
 			"files": [
@@ -39,38 +42,56 @@
 				"import/prefer-default-export": "off",
 				"no-tabs": "off",
 				"@typescript-eslint/no-confusing-non-null-assertion": "error",
-        "@typescript-eslint/no-non-null-asserted-nullish-coalescing": "error",
-        "@typescript-eslint/member-ordering": [
-          "error",
-          {
-            "default": {
-              "memberTypes": [
-                "constructor",
-                "decorated-field",
-                "public-field",
-                "protected-field",
-                "private-field",
-                "public-method",
-                "protected-method",
-                "private-method"
-              ]
-            }
-          }
-        ],
+				"@typescript-eslint/no-non-null-asserted-nullish-coalescing": "error",
+				"@typescript-eslint/member-ordering": [
+					"error",
+					{
+						"default": {
+							"memberTypes": [
+								"constructor",
+								"decorated-field",
+								"public-field",
+								"protected-field",
+								"private-field",
+								"public-method",
+								"protected-method",
+								"private-method"
+							]
+						}
+					}
+				],
 				"@typescript-eslint/naming-convention": [
 					"error",
 					{
-						"selector": ["parameterProperty", "variable", "property", "method"],
-            "format": ["camelCase"],
-						"modifiers": ["private"],
-            "leadingUnderscore": "require"
-					}, 
+						"selector": [
+							"parameterProperty",
+							"variable",
+							"property",
+							"method"
+						],
+						"format": [
+							"camelCase"
+						],
+						"modifiers": [
+							"private"
+						],
+						"leadingUnderscore": "require"
+					},
 					{
-						"selector": ["parameterProperty", "variable", "property", "method"],
-            "format": ["camelCase"],
-						"modifiers": ["protected"],
-            "leadingUnderscore": "require"
-					} 
+						"selector": [
+							"parameterProperty",
+							"variable",
+							"property",
+							"method"
+						],
+						"format": [
+							"camelCase"
+						],
+						"modifiers": [
+							"protected"
+						],
+						"leadingUnderscore": "require"
+					}
 				]
 			}
 		},
@@ -97,6 +118,35 @@
 						"parser": "angular"
 					}
 				]
+			}
+		},
+		{
+			"files": [
+				"*.spec.ts"
+			],
+			"extends": [
+				"plugin:jasmine/recommended"
+			],
+			"rules": {
+				"jasmine/expect-matcher": 1,
+				"jasmine/expect-single-argument": 1,
+				"jasmine/missing-expect": [
+					0,
+					"expect()"
+				],
+				"jasmine/named-spy": 1,
+				"jasmine/new-line-before-expect": 1,
+				"jasmine/new-line-between-declarations": 1,
+				"jasmine/no-expect-in-setup-teardown": 1,
+				"jasmine/no-disabled-tests": 1,
+				"jasmine/no-focused-tests": 2,
+				"jasmine/no-global-setup": 2,
+				"jasmine/no-spec-dupes": 1,
+				"jasmine/no-suite-callback-args": 2,
+				"jasmine/no-suite-dupes": 1,
+				"jasmine/no-unsafe-spy": 1,
+				"jasmine/prefer-jasmine-matcher": 1,
+				"jasmine/prefer-toBeUndefined": 2
 			}
 		}
 	]

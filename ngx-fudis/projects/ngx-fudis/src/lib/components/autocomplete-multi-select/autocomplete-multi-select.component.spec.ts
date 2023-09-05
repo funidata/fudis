@@ -40,6 +40,7 @@ describe('AutocompleteMultiSelectComponent', () => {
 	function asserMultiSelectHasClasses(classes: string): void {
 		const childSpan = fixture.nativeElement.childNodes;
 		const componentClasses = childSpan[0].className.split(' ').sort();
+
 		expect(componentClasses).toEqual(classes.split(' ').sort());
 	}
 
@@ -64,16 +65,19 @@ describe('AutocompleteMultiSelectComponent', () => {
 	describe('Methods', () => {
 		it('should select an option', () => {
 			component.selectItem(multiSelectOptions[1]);
+
 			expect(component.selectedOptions).toEqual(jasmine.arrayWithExactContents(multiSelectOptions));
 		});
 
 		it('should remove an option', () => {
 			component.removeItem(multiSelectOptions[0]);
+
 			expect(component.selectedOptions).toEqual([multiSelectOptions[2]]);
 		});
 
 		it('should remove an option by toggling checked	', () => {
 			component.selectItem(multiSelectOptions[0]);
+
 			expect(component.selectedOptions).toEqual([multiSelectOptions[2]]);
 		});
 	});

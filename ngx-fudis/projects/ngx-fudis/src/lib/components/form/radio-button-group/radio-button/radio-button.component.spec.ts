@@ -26,6 +26,7 @@ describe('RadioButtonComponent', () => {
 	function assertRadioButtonHasClasses(classes: string): void {
 		const childSpan = fixture.nativeElement.childNodes;
 		const componentClasses = childSpan[0].className.split(' ').sort();
+
 		expect(componentClasses).toEqual(classes.split(' ').sort());
 	}
 
@@ -38,6 +39,7 @@ describe('RadioButtonComponent', () => {
 			component.viewValue = 'Visible value';
 			fixture.detectChanges();
 			const elem = fixture.debugElement.query(By.css('.fudis-radio-button__label'));
+
 			expect(elem.nativeElement.innerHTML).toEqual(component.viewValue);
 		});
 	});
@@ -51,6 +53,7 @@ describe('RadioButtonComponent', () => {
 			component.checked = true;
 			fixture.detectChanges();
 			const elem = fixture.debugElement.query(By.css('.fudis-radio-button__content__control__indicator'));
+
 			expect(elem.nativeElement).toBeTruthy();
 		});
 	});

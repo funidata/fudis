@@ -43,6 +43,7 @@ describe('DatepickerComponent', () => {
 
 	function assertDatepickerTopWrapperDivHasClasses(...classes: string[]): void {
 		const datepickerTopDivClasses = getDatepickerTopWrapperDiv()?.className ?? '';
+
 		expect(datepickerTopDivClasses.split(' ').sort()).toEqual([...classes].sort());
 	}
 
@@ -67,6 +68,7 @@ describe('DatepickerComponent', () => {
 
 		it('should have fudis-label component present with given id', () => {
 			const childLabelComponent = fixture.debugElement.query(By.css('fudis-label'));
+
 			expect(childLabelComponent).toBeTruthy();
 			expect(childLabelComponent.attributes['ng-reflect-id']).toEqual('label_fudis-dp-unique-id-3');
 			expect(childLabelComponent.attributes['ng-reflect-for']).toEqual('fudis-dp-unique-id-3');
@@ -74,11 +76,13 @@ describe('DatepickerComponent', () => {
 
 		it('should have fudis-guidance component present with given id and helpText', () => {
 			const childGuidanceComponent = fixture.debugElement.query(By.css('fudis-guidance'));
+
 			expect(childGuidanceComponent).toBeTruthy();
 			expect(childGuidanceComponent.attributes['ng-reflect-for']).toEqual('fudis-dp-unique-id-3');
 
 			component.helpText = 'Select your favourite date';
 			fixture.detectChanges();
+
 			expect(childGuidanceComponent.attributes['ng-reflect-help-text'])
 				.withContext(component.helpText)
 				.toEqual('Select your favourite date');
@@ -111,6 +115,7 @@ describe('DatepickerComponent', () => {
 
 		it('should have calendar icon from fudis-icon component', () => {
 			const datepickerIcon = fixture.debugElement.query(By.css('fudis-icon'));
+
 			expect(datepickerIcon.attributes['ng-reflect-icon']).toEqual('calendar');
 		});
 

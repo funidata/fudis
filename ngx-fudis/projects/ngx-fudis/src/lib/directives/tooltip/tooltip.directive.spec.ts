@@ -46,10 +46,12 @@ describe('TooltipDirective', () => {
 
 	it('should find 2 directives with correct tooltip text', () => {
 		const all = getTooltipDirective();
+
 		expect(all.length).toEqual(2);
 
 		const button1 = all[0].injector.get<TooltipDirective>(TooltipDirective);
 		const button2 = all[1].injector.get<TooltipDirective>(TooltipDirective);
+
 		expect(button1.tooltip).toEqual('You should see me!');
 		expect(button2.tooltip).toEqual('I am toggle button!');
 	});
@@ -59,6 +61,7 @@ describe('TooltipDirective', () => {
 
 		const button1 = all[0].injector.get<TooltipDirective>(TooltipDirective);
 		const button2 = all[1].injector.get<TooltipDirective>(TooltipDirective);
+
 		expect(button1.tooltipPosition).toEqual('below');
 		expect(button2.tooltipPosition).toEqual('left');
 	});

@@ -40,6 +40,7 @@ describe('DropdownComponent', () => {
 	function assertDropdownHasClasses(classes: string): void {
 		const childSpan = fixture.nativeElement.childNodes;
 		const componentClasses = childSpan[0].className.split(' ').sort();
+
 		expect(componentClasses).toEqual(classes.split(' ').sort());
 	}
 
@@ -52,6 +53,7 @@ describe('DropdownComponent', () => {
 	it('should create', () => {
 		component.control = new FormControl(null, Validators.required);
 		component.options = dropdownOptions;
+
 		expect(component).toBeTruthy();
 	});
 
