@@ -47,6 +47,7 @@ describe('AutocompleteComponent', () => {
 	function assertAutocompleteHasClasses(classes: string): void {
 		const childSpan = fixture.nativeElement.childNodes;
 		const componentClasses = childSpan[0].className.split(' ').sort();
+
 		expect(componentClasses).toEqual(classes.split(' ').sort());
 	}
 
@@ -60,6 +61,7 @@ describe('AutocompleteComponent', () => {
 		it('should display given label', () => {
 			fixture.detectChanges();
 			const childLabelComponent = fixture.debugElement.query(By.css('.fudis-label'));
+
 			expect(childLabelComponent.nativeElement.innerHTML).toContain('Choose one option');
 		});
 
@@ -67,6 +69,7 @@ describe('AutocompleteComponent', () => {
 			component.helpText = 'This is autocomplete input';
 			fixture.detectChanges();
 			const helpText = fixture.debugElement.query(By.css('.fudis-guidance__help-text'));
+
 			expect(helpText.nativeElement.innerHTML).toBe('This is autocomplete input');
 		});
 	});

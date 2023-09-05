@@ -4,7 +4,7 @@ import {
 	FudisTranslationConfig,
 	FudisTranslationLanguageBadgeAriaLabel,
 } from '../../types/miscellaneous';
-import { FudisTranslationService } from '../../utilities/translation/translation.service';
+import { FudisTranslationService } from '../../services/translation/translation.service';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisLanguageBadgeGroupService } from '../../services/language-badge-group/language-badge-group.service';
 

@@ -15,7 +15,7 @@ import { InputBaseDirective } from '../../directives/form/input-base/input-base.
 import { FudisDropdownOption, FudisInputWidth } from '../../types/forms';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisDropdownMenuItemService } from '../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
-import { FudisTranslationService } from '../../utilities/translation/translation.service';
+import { FudisTranslationService } from '../../services/translation/translation.service';
 
 @Component({
 	selector: 'fudis-autocomplete-multi-select',

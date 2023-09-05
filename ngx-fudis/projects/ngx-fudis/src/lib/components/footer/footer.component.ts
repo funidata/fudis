@@ -1,6 +1,6 @@
 import { Component, ContentChild, ViewEncapsulation, Signal, effect } from '@angular/core';
 import { FudisGridColumnsResponsive } from '../../types/grid';
-import { FudisTranslationService } from '../../utilities/translation/translation.service';
+import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisTranslationConfig } from '../../types/miscellaneous';
 import {
 	FooterContentLeftDirective,

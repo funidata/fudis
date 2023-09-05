@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { LanguageBadgeComponent } from './language-badge.component';
 import { TooltipDirective } from '../../../directives/tooltip/tooltip.directive';
 
-fdescribe('LanguageBadgeComponent', () => {
+describe('LanguageBadgeComponent', () => {
 	let component: LanguageBadgeComponent;
 	let fixture: ComponentFixture<LanguageBadgeComponent>;
 
@@ -26,6 +26,7 @@ fdescribe('LanguageBadgeComponent', () => {
 	function assertLanguageBadgeHasClasses(classes: string): void {
 		const childSpan = fixture.nativeElement.childNodes;
 		const componentClasses = childSpan[0].className.split(' ').sort();
+
 		expect(componentClasses).toEqual(classes.split(' ').sort());
 	}
 

@@ -56,6 +56,7 @@ describe('RadioButtonGroupComponent', () => {
 			component.options = truthOption;
 			fixture.detectChanges();
 			const length = component.options.length as Number;
+
 			expect(() => {
 				component.ngOnInit();
 			}).toThrow(
@@ -68,6 +69,7 @@ describe('RadioButtonGroupComponent', () => {
 		it('should throw an error if radio-button option name attributes does not match', () => {
 			component.options = fruitOptions;
 			fixture.detectChanges();
+
 			expect(() => {
 				component.ngOnInit();
 			}).toThrow(

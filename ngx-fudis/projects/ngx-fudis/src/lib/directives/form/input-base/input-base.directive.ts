@@ -2,7 +2,7 @@ import { Directive, Input, EventEmitter, Output, Signal, effect, ViewChild, Elem
 
 import { FudisFormErrors } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
-import { FudisTranslationService } from '../../../utilities/translation/translation.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisTranslationConfig } from '../../../types/miscellaneous';
 
 @Directive({
@@ -66,7 +66,7 @@ export class InputBaseDirective extends TooltipApiDirective {
 	@Input() required: boolean | undefined = undefined;
 
 	/**
-	 * Set browser focus to input on first load.
+	 * Set browser focus to input on the first load.
 	 */
 	@Input() initialFocus: boolean = false;
 

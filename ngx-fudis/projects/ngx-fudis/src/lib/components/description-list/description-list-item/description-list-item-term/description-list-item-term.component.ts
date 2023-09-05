@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Host, Input, Signal, ViewEncapsulation, effect } from '@angular/core';
 import { FudisLanguageAbbr } from '../../../../types/miscellaneous';
-import { FudisTranslationService } from '../../../../utilities/translation/translation.service';
+import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { FudisLanguageBadgeGroupService } from '../../../../services/language-badge-group/language-badge-group.service';
 

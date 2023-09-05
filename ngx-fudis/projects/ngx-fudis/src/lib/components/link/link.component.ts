@@ -10,7 +10,7 @@ import {
 	ViewChild,
 	effect,
 } from '@angular/core';
-import { FudisTranslationService } from '../../utilities/translation/translation.service';
+import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisTranslationConfig } from '../../types/miscellaneous';
 import { FudisFocusService } from '../../services/focus/focus.service';
 
@@ -98,7 +98,7 @@ export class LinkComponent implements AfterViewInit {
 	@Input() color: 'primary' | 'default' | 'white' = 'primary';
 
 	/**
-	 * Set browser focus to link on first load.
+	 * Set browser focus to link on the first load.
 	 */
 	@Input() initialFocus: boolean = false;
 

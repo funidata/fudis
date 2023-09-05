@@ -33,6 +33,7 @@ describe('ButtonComponent', () => {
 
 	function assertButtonHasClasses(classes: string): void {
 		const buttonClasses = getButton().className.split(' ').sort();
+
 		expect(buttonClasses).toEqual(classes.split(' ').sort());
 	}
 
@@ -74,6 +75,7 @@ describe('ButtonComponent', () => {
 			});
 
 			getButton()?.click();
+
 			expect(clicked).withContext('No click event received').toEqual(true);
 		});
 
@@ -88,6 +90,7 @@ describe('ButtonComponent', () => {
 			fixture.detectChanges();
 
 			getButton()?.click();
+
 			expect(clicked).withContext('Unexpected click event received').toEqual(false);
 		});
 	});
@@ -101,6 +104,7 @@ describe('ButtonComponent', () => {
 			component.type = 'button';
 			component.ngOnChanges();
 			fixture.detectChanges();
+
 			expect(IconComponent).toBeTruthy();
 			expect(getButton().getAttribute('aria-label')).toBeTruthy();
 			expect(getButton().getAttribute('aria-label')).toEqual('Open additional menu It has nice things to click');
@@ -115,6 +119,7 @@ describe('ButtonComponent', () => {
 			component.type = 'submit';
 			component.ngOnChanges();
 			fixture.detectChanges();
+
 			expect(getButton().getAttribute('type')).toEqual('submit');
 			expect(getButton().innerText).toEqual('SUBMIT ME!');
 		});

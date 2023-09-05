@@ -90,7 +90,7 @@ import { NotificationsDirective } from './directives/content-projection/notifica
 import { FooterComponent } from './components/footer/footer.component';
 import { LanguageBadgeGroupComponent } from './components/language-badge-group/language-badge-group.component';
 import { LanguageBadgeComponent } from './components/language-badge-group/language-badge/language-badge.component';
-import { FudisTranslationService } from './utilities/translation/translation.service';
+import { FudisTranslationService } from './services/translation/translation.service';
 import { FudisLanguageBadgeGroupService } from './services/language-badge-group/language-badge-group.service';
 import { AlertComponent } from './components/alert/alert/alert.component';
 import { AlertGroupComponent } from './components/alert/alert-group/alert-group.component';
