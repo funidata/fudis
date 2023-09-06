@@ -1,7 +1,7 @@
 import { FudisBreakpointKey } from '../../types/grid';
 import { FudisSpacing } from '../../types/miscellaneous';
 import { FudisSpacingResponsive, FudisSpacingResponsiveData } from '../../types/spacing';
-import { fudisBreakpointsMinWidth } from '../breakpoint/breakpoint-utils';
+import { fudisBreakpointsMinWidth } from '../../utilities/breakpoint/breakpoint-utils';
 
 /**
  * Convert spacing tokens to rem values
