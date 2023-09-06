@@ -4,7 +4,6 @@ import { FudisSpacingResponsive, FudisSpacingResponsiveData } from '../../types/
 
 /**
  * Convert spacing tokens to rem values
- * TODO: Try out with switch case
  */
 export const convertSpacingTokenToRem = (value: FudisSpacing): string => {
 	const tokenXxs: FudisSpacing = 'xxs';
@@ -15,14 +14,41 @@ export const convertSpacingTokenToRem = (value: FudisSpacing): string => {
 	const tokenXl: FudisSpacing = 'xl';
 	const tokenXxl: FudisSpacing = 'xxl';
 
-	return value
-		.replaceAll(tokenXxs, '0.25rem')
-		.replaceAll(tokenXs, '0.5rem')
-		.replaceAll(tokenSm, '1rem')
-		.replaceAll(tokenMd, '1.5rem')
-		.replaceAll(tokenLg, '2rem')
-		.replaceAll(tokenXxl, '4rem')
-		.replaceAll(tokenXl, '2.5rem');
+	let convertedValue: string = '';
+	switch (value) {
+		case 'xxs': {
+			convertedValue = value.replace(tokenXxs, '0.25rem');
+			break;
+		}
+		case 'xs': {
+			convertedValue = value.replace(tokenXs, '0.5rem');
+			break;
+		}
+		case 'sm': {
+			convertedValue = value.replace(tokenSm, '1rem');
+			break;
+		}
+		case 'md': {
+			convertedValue = value.replace(tokenMd, '1.5rem');
+			break;
+		}
+		case 'lg': {
+			convertedValue = value.replace(tokenLg, '2rem');
+			break;
+		}
+		case 'xl': {
+			convertedValue = value.replace(tokenXl, '2.5rem');
+			break;
+		}
+		case 'xxl': {
+			convertedValue = value.replace(tokenXxl, '4rem');
+			break;
+		}
+		default:
+			convertedValue = '0';
+	}
+
+	return convertedValue;
 };
 
 // TODO: Below is duplicate code from gridUtils --> refactor
