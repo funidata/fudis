@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FudisIdService } from 'projects/ngx-fudis/src/lib/services/id/id.service';
 import { TooltipDirective } from 'projects/ngx-fudis/src/public-api';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MockComponent } from 'ng-mocks';
 import { DateRangeComponent } from './date-range.component';
 import { DatepickerComponent } from '../datepicker/datepicker.component';
 import { LabelComponent } from '../../label/label.component';
@@ -25,10 +26,10 @@ describe('DateRangeComponent', () => {
 				DateRangeComponent,
 				DatepickerComponent,
 				LabelComponent,
-				IconComponent,
 				GuidanceComponent,
 				ButtonComponent,
 				TooltipDirective,
+				MockComponent(IconComponent),
 			],
 			providers: [FudisIdService, FudisDropdownMenuItemService],
 			imports: [
