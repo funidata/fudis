@@ -5,65 +5,12 @@ import {
 	FudisGridAttributes,
 	FudisGridFormInputWidth,
 } from '../../types/grid';
+import { fudisBreakpointsMinWidth } from '../breakpoint/breakpoint-utils';
 
 /**
- * Utility object used with breakpointsMinWidthToObserve and BreakpointObserver
- */
-export const gridBreakpointsMinWidth = {
-	xxl: '(min-width: 100em)',
-	xl: '(min-width: 75em)',
-	lg: '(min-width: 62em)',
-	md: '(min-width: 48em)',
-	sm: '(min-width: 36em)',
-	xs: '(min-width: 0)',
-	default: '(min-width: 0)',
-};
-
-/*
- * Array of brekpoint rules to observe, which is given to ngMaterial BreakpointObserver
- */
-export const breakpointsMinWidthToObserve = [
-	gridBreakpointsMinWidth.xxl,
-	gridBreakpointsMinWidth.xl,
-	gridBreakpointsMinWidth.lg,
-	gridBreakpointsMinWidth.md,
-	gridBreakpointsMinWidth.sm,
-	gridBreakpointsMinWidth.xs,
-	gridBreakpointsMinWidth.default,
-];
-
-/*
-
-export const gridBreakpoints = {
-	xxl: '(min-width: 100em)',
-	xl: '(min-width: 75em) and (max-width: 99.99em)',
-	lg: '(min-width: 62em) and (max-width: 74.99em)',
-	md: '(min-width: 48em) and (max-width: 61.99em)',
-	sm: '(min-width: 36em) and (max-width: 47.99em)',
-	xs: '(min-width: 0) and (max-width: 35.99em)',
-	default: '(min-width: 0)',
-};
-
- // Array of brekpoint rules to observe, which is given to ngMaterial BreakpointObserver
- 
-export const breakpointsToObserve = [
-	gridBreakpoints.xxl,
-	gridBreakpoints.xl,
-	gridBreakpoints.lg,
-	gridBreakpoints.md,
-	gridBreakpoints.sm,
-	gridBreakpoints.xs,
-	gridBreakpoints.default,
-];
-*/
-
-/**
- *
  * Utility function used with GridDirective.
  * Takes in object of Input() attributes and creates CSS classlist out of those to be passed to Grid element.
- *
  */
-
 export const getGridClasses = (values: FudisGridAttributes): string => {
 	let classList = [
 		'fudis-grid',
@@ -90,9 +37,8 @@ export const getGridClasses = (values: FudisGridAttributes): string => {
 };
 
 /*
- * Some validation, so that given column @Inputs are usable and valid grid-column-template values.
+ * Basic validation, so that given column @Inputs are usable and valid grid-column-template values.
  */
-
 export const validateColumnInputArray = (inputs: Array<FudisGridResponsiveData>) => {
 	inputs.forEach((item) => {
 		if (item.value.trim() === '') {
@@ -108,7 +54,6 @@ export const validateColumnInputArray = (inputs: Array<FudisGridResponsiveData>)
 		/*
 		 * Check if sum of fr values is larger than 12.
 		 */
-
 		const inputStringToArray = item.value.split(' ');
 
 		let sumOfFrValues = 0;
@@ -161,7 +106,7 @@ export const getGridCssValue = (value: number | string, isGridItem?: boolean): s
 };
 
 /**
- * Build an setting array of objects for breakpoint rules from Grid's / GridItem's Input() columns. Returns e. g. following object.
+ * Build an setting array of objects for breakpoint rules from Grid's / GridItem's Input() columns. Returns e. g. following object:
  * [
     {
         "name": "default",
@@ -178,7 +123,7 @@ export const getGridCssValue = (value: number | string, isGridItem?: boolean): s
         "value": "repeat(6, 1fr)",
         "breakpoint": "(min-width: 100em)"
     }
-]
+	]
  */
 export const getGridBreakpointRules = (
 	values: FudisGridColumnsResponsive,
@@ -191,7 +136,7 @@ export const getGridBreakpointRules = (
 		columnsArray.push({
 			name: 'default',
 			value: defaultValue,
-			breakpoint: gridBreakpointsMinWidth.default,
+			breakpoint: fudisBreakpointsMinWidth.default,
 		});
 	}
 
@@ -203,7 +148,7 @@ export const getGridBreakpointRules = (
 		columnsArray.push({
 			name: key as keyof FudisGridColumnsResponsive,
 			value: valueToForward,
-			breakpoint: gridBreakpointsMinWidth[key as keyof FudisGridColumnsResponsive],
+			breakpoint: fudisBreakpointsMinWidth[key as keyof FudisGridColumnsResponsive],
 		});
 	});
 

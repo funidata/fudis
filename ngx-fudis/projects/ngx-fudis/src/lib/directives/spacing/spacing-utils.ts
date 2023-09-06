@@ -1,6 +1,7 @@
 import { FudisBreakpointKey } from '../../types/grid';
 import { FudisSpacing } from '../../types/miscellaneous';
 import { FudisSpacingResponsive, FudisSpacingResponsiveData } from '../../types/spacing';
+import { fudisBreakpointsMinWidth } from '../breakpoint/breakpoint-utils';
 
 /**
  * Convert spacing tokens to rem values
@@ -51,33 +52,6 @@ export const convertSpacingTokenToRem = (value: FudisSpacing): string => {
 	return convertedValue;
 };
 
-// TODO: Below is duplicate code from gridUtils --> refactor
-/**
- * Utility object used with breakpointsMinWidthToObserve and BreakpointObserver
- */
-export const spacingBreakpointsMinWidth = {
-	xxl: '(min-width: 100em)',
-	xl: '(min-width: 75em)',
-	lg: '(min-width: 62em)',
-	md: '(min-width: 48em)',
-	sm: '(min-width: 36em)',
-	xs: '(min-width: 0)',
-	default: '(min-width: 0)',
-};
-
-/*
- * Array of breakpoint rules to observe, which is given to ngMaterial BreakpointObserver
- */
-export const breakpointsMinWidthToObserve = [
-	spacingBreakpointsMinWidth.xxl,
-	spacingBreakpointsMinWidth.xl,
-	spacingBreakpointsMinWidth.lg,
-	spacingBreakpointsMinWidth.md,
-	spacingBreakpointsMinWidth.sm,
-	spacingBreakpointsMinWidth.xs,
-	spacingBreakpointsMinWidth.default,
-];
-
 export const getSpacingBreakpointRules = (
 	values: FudisSpacingResponsive,
 	defaultValue: string
@@ -88,7 +62,7 @@ export const getSpacingBreakpointRules = (
 		spacingsArray.push({
 			name: 'default',
 			value: defaultValue,
-			breakpoint: spacingBreakpointsMinWidth.default,
+			breakpoint: fudisBreakpointsMinWidth.default,
 		});
 	}
 
@@ -98,7 +72,7 @@ export const getSpacingBreakpointRules = (
 		spacingsArray.push({
 			name: key as keyof FudisSpacingResponsive,
 			value: convertSpacingTokenToRem(spacingValue),
-			breakpoint: spacingBreakpointsMinWidth[key as keyof FudisSpacingResponsive],
+			breakpoint: fudisBreakpointsMinWidth[key as keyof FudisSpacingResponsive],
 		});
 	});
 
