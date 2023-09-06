@@ -3,7 +3,7 @@
 	<ng-container *ngIf="_selectedLanguage && _parentLanguageOptions">
 		<fudis-language-badge-group
 			[selectedLanguage]="_selectedLanguage"
-			[languages]="_availableLanguages"
+			[languages]="_parentLanguageOptions"
 			(handleBadgeClick)="setSelectedLanguage($event)" />
 	</ng-container>
 </dt>

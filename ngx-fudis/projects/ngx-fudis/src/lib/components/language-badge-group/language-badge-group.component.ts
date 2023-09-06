@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Input, Signal, effect } from '@angular/core';
 import {
 	FudisLanguageAbbr,
+	FudisLanguageBadgeContent,
 	FudisTranslationConfig,
 	FudisTranslationLanguageBadgeAriaLabel,
 } from '../../types/miscellaneous';
@@ -35,7 +36,7 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective implements 
 	/**
 	 * Required language options for Language Badge Group
 	 */
-	@Input({ required: true }) languages: FudisLanguageAbbr[];
+	@Input({ required: true }) languages: FudisLanguageBadgeContent;
 
 	/**
 	 * Output Language abbreviation of clicked Badge
