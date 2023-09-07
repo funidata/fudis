@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MatDialogModule } from '@angular/material/dialog';
-import { sortClasses } from 'projects/ngx-fudis/utilities/tests/utilities';
+import { getElement, sortClasses } from 'projects/ngx-fudis/utilities/tests/utilities';
 import { MockComponent } from 'ng-mocks';
 import { AlertGroupComponent } from './alert-group.component';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
@@ -32,13 +32,9 @@ describe('AlertGroupComponent', () => {
 		expect(component).toBeTruthy();
 	});
 
-	function getAlertGroup(): HTMLElement {
-		return fixture.nativeElement.querySelector('section') as HTMLElement;
-	}
-
 	describe('Basic inputs', () => {
 		it('should have default CSS classes', () => {
-			const element = getAlertGroup();
+			const element = getElement(fixture, 'section');
 
 			expect(sortClasses(element.className)).toEqual(sortClasses('fudis-alert-group fudis-alert-group__fixed'));
 		});
@@ -47,7 +43,7 @@ describe('AlertGroupComponent', () => {
 			component.position = 'absolute';
 			fixture.detectChanges();
 
-			const element = getAlertGroup();
+			const element = getElement(fixture, 'section');
 
 			expect(sortClasses(element.className)).toEqual(sortClasses('fudis-alert-group fudis-alert-group__absolute'));
 		});
@@ -56,7 +52,7 @@ describe('AlertGroupComponent', () => {
 			component.position = 'static';
 			fixture.detectChanges();
 
-			const element = getAlertGroup();
+			const element = getElement(fixture, 'section');
 
 			expect(sortClasses(element.className)).toEqual(sortClasses('fudis-alert-group fudis-alert-group__static'));
 		});
