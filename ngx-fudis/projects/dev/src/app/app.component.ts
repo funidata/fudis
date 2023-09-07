@@ -10,6 +10,7 @@ import {
 	FudisGridService,
 	FudisSpacingService,
 	FudisTranslationService,
+	FudisBreakpointService,
 } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
 
@@ -31,7 +32,8 @@ export class AppComponent implements OnInit {
 		private _gridService: FudisGridService,
 		private _fudisLanguage: FudisTranslationService,
 		private _alertService: FudisAlertService,
-		private _spacingService: FudisSpacingService
+		private _spacingService: FudisSpacingService,
+		private _breakpointService: FudisBreakpointService
 	) {
 		_gridService.setGridDefaultValues({
 			columns: { xs: 1, lg: 2 },

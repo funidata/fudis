@@ -1,34 +1,10 @@
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { Injectable, signal } from '@angular/core';
-
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { breakpointsMinWidthToObserve } from '../../utilities/breakpoint/breakpoint-utils';
+import { Injectable } from '@angular/core';
 import { FudisSpacingResponsiveData } from '../../types/spacing';
+import { FudisBreakpointService } from '../breakpoint/breakpoint.service';
 
 @Injectable()
 export class FudisSpacingService {
-	/**
-	 * Observe breakpoints and when hitting one, save results to Signal.
-	 */
-	constructor(spacingBreakpointObserver: BreakpointObserver) {
-		spacingBreakpointObserver
-			.observe(breakpointsMinWidthToObserve)
-			.pipe(takeUntilDestroyed())
-			.subscribe((state: BreakpointState) => {
-				this._currentScreenSize.set(state);
-			});
-	}
-
-	private _currentScreenSize = signal<BreakpointState | null>(null);
-
-	private _screenSize = this._currentScreenSize.asReadonly();
-
-	/**
-	 * Get current state of Breakpoints
-	 */
-	getBreakpointState(): BreakpointState | null {
-		return this._screenSize();
-	}
+	constructor(private _breakpointService: FudisBreakpointService) {}
 
 	/**
 	 * Function which applies CSS attributes of margins
@@ -46,7 +22,7 @@ export class FudisSpacingService {
 			elementToModify.style.marginTop = marginTop;
 		} else {
 			marginTop?.forEach((item) => {
-				if (this._screenSize()?.breakpoints[item.breakpoint]) {
+				if (this._breakpointService._screenSize()?.breakpoints[item.breakpoint]) {
 					elementToModify.style.marginTop = item.value;
 				}
 			});
@@ -56,7 +32,7 @@ export class FudisSpacingService {
 			elementToModify.style.marginBottom = marginBottom;
 		} else {
 			marginBottom?.forEach((item) => {
-				if (this._screenSize()?.breakpoints[item.breakpoint]) {
+				if (this._breakpointService._screenSize()?.breakpoints[item.breakpoint]) {
 					elementToModify.style.marginBottom = item.value;
 				}
 			});
@@ -66,7 +42,7 @@ export class FudisSpacingService {
 			elementToModify.style.marginRight = marginRight;
 		} else {
 			marginRight?.forEach((item) => {
-				if (this._screenSize()?.breakpoints[item.breakpoint]) {
+				if (this._breakpointService._screenSize()?.breakpoints[item.breakpoint]) {
 					elementToModify.style.marginRight = item.value;
 				}
 			});
@@ -76,7 +52,7 @@ export class FudisSpacingService {
 			elementToModify.style.marginLeft = marginLeft;
 		} else {
 			marginLeft?.forEach((item) => {
-				if (this._screenSize()?.breakpoints[item.breakpoint]) {
+				if (this._breakpointService._screenSize()?.breakpoints[item.breakpoint]) {
 					elementToModify.style.marginLeft = item.value;
 				}
 			});

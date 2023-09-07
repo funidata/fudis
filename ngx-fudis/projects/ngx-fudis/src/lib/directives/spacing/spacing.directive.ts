@@ -3,6 +3,7 @@ import { SpacingApiDirective } from './spacing-api/spacing-api.directive';
 import { FudisSpacingService } from '../../services/spacing/spacing.service';
 import { FudisSpacingResponsiveData, defaultSpacingValue } from '../../types/spacing';
 import { convertSpacingTokenToRem, getSpacingBreakpointDataArray } from './spacing-utils';
+import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 
 @Directive({
 	selector: '[fudisSpacing]',
@@ -10,6 +11,7 @@ import { convertSpacingTokenToRem, getSpacingBreakpointDataArray } from './spaci
 export class SpacingDirective extends SpacingApiDirective implements OnInit, OnChanges {
 	constructor(
 		spacingService: FudisSpacingService,
+		private _breakpointService: FudisBreakpointService,
 		private _spacingElement: ElementRef
 	) {
 		super();
@@ -20,7 +22,7 @@ export class SpacingDirective extends SpacingApiDirective implements OnInit, OnC
 		 * When screen is resized check and apply new rules for spacings
 		 */
 		effect(() => {
-			this._spacingService.getBreakpointState();
+			this._breakpointService.getBreakpointState();
 
 			if (
 				typeof this._marginTop !== 'string' ||

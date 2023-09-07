@@ -95,6 +95,7 @@ import { FudisLanguageBadgeGroupService } from './services/language-badge-group/
 import { AlertComponent } from './components/alert/alert/alert.component';
 import { AlertGroupComponent } from './components/alert/alert-group/alert-group.component';
 import { FudisAlertService } from './services/alert/alert.service';
+import { FudisBreakpointService } from './services/breakpoint/breakpoint.service';
 
 @NgModule({
 	/*
@@ -244,6 +245,7 @@ import { FudisAlertService } from './services/alert/alert.service';
 	],
 	providers: [
 		FudisAlertService,
+		FudisBreakpointService,
 		FudisDialogService,
 		FudisDropdownMenuItemService,
 		FudisErrorSummaryService,
