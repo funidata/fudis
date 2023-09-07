@@ -1,5 +1,4 @@
 import { Directive, ElementRef, OnChanges, OnInit, Signal, effect } from '@angular/core';
-
 import { getGridBreakpointDataArray, getGridClasses, getGridCssValue, replaceFormInputWidthsToRem } from '../gridUtils';
 import { GridApiDirective } from '../grid-api/grid-api.directive';
 import {
@@ -9,6 +8,7 @@ import {
 	FudisGridAttributes,
 } from '../../../types/grid';
 import { FudisGridService } from '../../../services/grid/grid.service';
+import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 
 @Directive({
 	selector: '[fudisGrid]',
@@ -16,6 +16,7 @@ import { FudisGridService } from '../../../services/grid/grid.service';
 export class GridDirective extends GridApiDirective implements OnInit, OnChanges {
 	constructor(
 		private _gridElement: ElementRef,
+		private _breakpointService: FudisBreakpointService,
 		gridService: FudisGridService
 	) {
 		super();
@@ -27,7 +28,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		 * When screen is resized check and apply new rules for Grid columns
 		 */
 		effect(() => {
-			this._gridService.getBreakpointState();
+			this._breakpointService.getBreakpointState();
 
 			if (typeof this._columns !== 'string' && typeof this._columns !== 'number') {
 				this._setColumns();

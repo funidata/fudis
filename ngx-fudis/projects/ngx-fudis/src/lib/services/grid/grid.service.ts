@@ -1,29 +1,15 @@
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Injectable, Signal, signal } from '@angular/core';
-
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { breakpointsMinWidthToObserve } from '../../utilities/breakpoint/breakpoint-utils';
 import { FudisGridAttributes, FudisGridResponsiveData } from '../../types/grid';
+import { FudisBreakpointService } from '../breakpoint/breakpoint.service';
 
 @Injectable()
 export class FudisGridService {
 	/**
 	 * Observe breakpoints and when hitting one, save results to Signal.
 	 */
-	constructor(gridBreakpointObserver: BreakpointObserver) {
-		gridBreakpointObserver
-			.observe(breakpointsMinWidthToObserve)
-			.pipe(takeUntilDestroyed())
-			.subscribe((state: BreakpointState) => {
-				this._currentScreenSize.set(state);
-			});
-	}
+	constructor(private _breakpointService: FudisBreakpointService) {}
 
 	private _defaultGridValues = signal<FudisGridAttributes>({});
-
-	private _currentScreenSize = signal<BreakpointState | null>(null);
-
-	private _screenSize = this._currentScreenSize.asReadonly();
 
 	/**
 	 * To set from application default values for all Grids application uses.
@@ -40,13 +26,6 @@ export class FudisGridService {
 	}
 
 	/**
-	 * Get current state of Breakpoints
-	 */
-	getBreakpointState(): BreakpointState | null {
-		return this._screenSize();
-	}
-
-	/**
 	 * Function which applies CSS attributes of grid-column-template for Grid and grid-column for GridItem.
 	 */
 	setGridAttributes(element: HTMLElement, columns: string | FudisGridResponsiveData[], isGridItem?: boolean): void {
@@ -57,7 +36,7 @@ export class FudisGridService {
 				elementToModify.style.gridColumn = columns;
 			} else {
 				columns.forEach((item) => {
-					if (this._screenSize()?.breakpoints[item.breakpoint]) {
+					if (this._breakpointService._screenSize()?.breakpoints[item.breakpoint]) {
 						elementToModify.style.gridColumn = item.value;
 					}
 				});
@@ -66,7 +45,7 @@ export class FudisGridService {
 			elementToModify.style.gridTemplateColumns = columns;
 		} else {
 			columns.forEach((item) => {
-				if (this._screenSize()?.breakpoints[item.breakpoint]) {
+				if (this._breakpointService._screenSize()?.breakpoints[item.breakpoint]) {
 					elementToModify.style.gridTemplateColumns = item.value;
 				}
 			});
@@ -80,7 +59,7 @@ export class FudisGridService {
 			elementToModify.style.justifySelf = alignX;
 		} else {
 			alignX.forEach((item) => {
-				if (this._screenSize()?.breakpoints[item.breakpoint]) {
+				if (this._breakpointService._screenSize()?.breakpoints[item.breakpoint]) {
 					elementToModify.style.justifySelf = item.value;
 				}
 			});
@@ -94,7 +73,7 @@ export class FudisGridService {
 			elementToModify.style.alignSelf = alignY;
 		} else {
 			alignY.forEach((item) => {
-				if (this._screenSize()?.breakpoints[item.breakpoint]) {
+				if (this._breakpointService._screenSize()?.breakpoints[item.breakpoint]) {
 					elementToModify.style.alignSelf = item.value;
 				}
 			});

@@ -9,6 +9,7 @@ import {
 	FudisGridItemColumnsResponsive,
 } from '../../../types/grid';
 import { getGridBreakpointDataArray, getGridCssValue } from '../gridUtils';
+import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 
 @Directive({
 	selector: '[fudisGridItem]',
@@ -16,7 +17,8 @@ import { getGridBreakpointDataArray, getGridCssValue } from '../gridUtils';
 export class GridItemDirective implements OnInit, OnChanges {
 	constructor(
 		private _gridItemElement: ElementRef,
-		private _gridService: FudisGridService
+		private _gridService: FudisGridService,
+		private _breakpointService: FudisBreakpointService
 	) {
 		this._element = _gridItemElement.nativeElement;
 
@@ -24,7 +26,7 @@ export class GridItemDirective implements OnInit, OnChanges {
 		 * When screen is resized check and apply new rules for Grid Item
 		 */
 		effect(() => {
-			this._gridService.getBreakpointState();
+			this._breakpointService.getBreakpointState();
 
 			if (typeof this._columns !== 'string') {
 				this.setColumns();
