@@ -1,15 +1,22 @@
+/* eslint-disable max-classes-per-file */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockComponent } from 'ng-mocks';
 import { checkClasses, getElement, sortClasses } from 'projects/ngx-fudis/utilities/tests/utilities';
+import { Component } from '@angular/core';
 import { AlertComponent } from './alert.component';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { IconComponent } from '../../icon/icon.component';
 import { LinkComponent } from '../../link/link.component';
 import { FudisAlertService } from '../../../services/alert/alert.service';
+import { FudisFocusService } from '../../../services/focus/focus.service';
+import { FudisAlert } from '../../../types/miscellaneous';
+import { AlertGroupComponent } from '../alert-group/alert-group.component';
+import { ButtonComponent } from '../../button/button.component';
+import { FudisDropdownMenuItemService } from '../../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 
 const testMessage = 'Test message for alert';
 const testHtmlId = 'test-html-id';
@@ -17,28 +24,65 @@ const testButtonId = 'test-button-id';
 const testLinkTitle = 'Test link title';
 const testRouterLinkUrl = '/test/alert/url';
 
+@Component({
+	selector: 'fudis-mock-component',
+	template: `<div class="mock-container">
+		<fudis-alert-group />
+		<fudis-button [label]="'Test button'" />
+	</div>`,
+})
+class MockAlertComponent {
+	constructor(private _alertService: FudisAlertService) {
+		const firstAlert: FudisAlert = {
+			message: 'Test message',
+			id: 'my-test-id-1',
+			type: 'info',
+		};
+
+		_alertService.addAlert(firstAlert);
+
+		const secondAlert: FudisAlert = {
+			message: 'Second test message',
+			id: 'my-test-id-2',
+			type: 'warning',
+			linkTitle: 'Test link',
+			routerLinkUrl: '/test/url',
+		};
+		this._alertService.addAlert(secondAlert);
+	}
+}
+
 describe('AlertComponent', () => {
 	let component: AlertComponent;
-	let fixture: ComponentFixture<AlertComponent>;
+	let fixture: ComponentFixture<AlertComponent> | ComponentFixture<MockAlertComponent>;
 	let alertService: FudisAlertService;
+	let focusService: FudisFocusService;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [AlertComponent, BodyTextComponent, MockComponent(IconComponent), LinkComponent],
+			declarations: [
+				AlertComponent,
+				AlertGroupComponent,
+				ButtonComponent,
+				MockAlertComponent,
+				BodyTextComponent,
+				MockComponent(IconComponent),
+				LinkComponent,
+			],
 			imports: [MatDialogModule, RouterTestingModule],
-			providers: [FudisDialogService, FudisAlertService],
+			providers: [FudisDialogService, FudisAlertService, FudisDropdownMenuItemService],
 		});
 		fixture = TestBed.createComponent(AlertComponent);
 		component = fixture.componentInstance;
+		component.buttonId = testButtonId;
+		component.htmlId = testHtmlId;
+		component.message = testMessage;
+
 		fixture.detectChanges();
 	});
 
 	describe('basic inputs', () => {
 		it('should create alert with basic inputs', () => {
-			component.buttonId = testButtonId;
-			component.htmlId = testHtmlId;
-			component.message = testMessage;
-
 			fixture.detectChanges();
 
 			const element = getElement(fixture, '.fudis-alert');
@@ -59,9 +103,6 @@ describe('AlertComponent', () => {
 		});
 
 		it('should create alert with a link', () => {
-			component.buttonId = testButtonId;
-			component.htmlId = testHtmlId;
-			component.message = testMessage;
 			component.linkTitle = testLinkTitle;
 			component.routerLinkUrl = testRouterLinkUrl;
 			component.initialFocus = true;
@@ -84,10 +125,6 @@ describe('AlertComponent', () => {
 
 	describe('CSS classes', () => {
 		it('should create alert variations with proper CSS classes', () => {
-			component.buttonId = testButtonId;
-			component.htmlId = testHtmlId;
-			component.message = testMessage;
-
 			fixture.detectChanges();
 
 			const element = getElement(fixture, '.fudis-alert');
@@ -127,11 +164,8 @@ describe('AlertComponent', () => {
 			fixture.detectChanges();
 		});
 
-		it('should emit events when the button is enabled', () => {
+		it('should emit events when the close button is clicked', () => {
 			let clicked = false;
-			component.message = 'Testing clicking';
-
-			component.buttonId = testButtonId;
 
 			component.handleClose.subscribe(() => {
 				clicked = true;
@@ -139,15 +173,88 @@ describe('AlertComponent', () => {
 
 			fixture.detectChanges();
 
-			const element = getElement(fixture, '.fudis-alert .fudis-alert__close');
+			const closeButton = getElement(fixture, '.fudis-alert .fudis-alert__close');
 
-			element.click();
+			closeButton.click();
 
 			expect(clicked).withContext('Click event received').toEqual(true);
 
 			fixture.detectChanges();
 
 			expect(alertService.dismissAlertFromButton).toHaveBeenCalledWith(testButtonId);
+		});
+	});
+
+	describe('Focus and blur events', () => {
+		beforeEach(() => {
+			fixture = TestBed.createComponent(MockAlertComponent);
+			focusService = TestBed.inject(FudisFocusService) as jasmine.SpyObj<FudisFocusService>;
+			spyOn(focusService, 'setFocusTarget');
+			spyOn(focusService, 'getFocusTarget');
+			alertService = TestBed.inject(FudisAlertService) as jasmine.SpyObj<FudisAlertService>;
+			spyOn(alertService, 'addAlert');
+			spyOn(alertService, 'updateAlertLinkFocusState');
+			fixture.detectChanges();
+		});
+
+		it('should emit info to focusService when focusing on closeButton', () => {
+			const button = getElement(fixture, '.fudis-button');
+
+			button.focus();
+
+			const closeButton = getElement(fixture, '.fudis-alert .fudis-alert__close');
+
+			closeButton.focus();
+
+			expect(focusService.setFocusTarget).toHaveBeenCalledWith(button);
+		});
+
+		it('should emit info to focusService when focusing on link in alert', () => {
+			const button = getElement(fixture, '.fudis-button');
+
+			button.focus();
+
+			const linkInAlert = getElement(fixture, '.fudis-link__anchor');
+
+			linkInAlert.focus();
+
+			expect(focusService.setFocusTarget).toHaveBeenCalledWith(button);
+		});
+
+		it('should set focus to close button, if another close is clicked', () => {
+			const firstClose = getElement(fixture, '#fudis-alert-1 .fudis-alert__close');
+			const secondClose = getElement(fixture, '#fudis-alert-2 .fudis-alert__close');
+
+			spyOn(secondClose, 'focus');
+
+			firstClose.click();
+
+			expect(secondClose.focus).toHaveBeenCalledWith();
+		});
+
+		it('should call getFocusTargetCalled, when all alerts are closed', () => {
+			const uiButton = getElement(fixture, '.fudis-button');
+			uiButton.focus();
+
+			const firstClose = getElement(fixture, '#fudis-alert-1 .fudis-alert__close');
+
+			const secondClose = getElement(fixture, '#fudis-alert-2 .fudis-alert__close');
+
+			firstClose.click();
+			secondClose.click();
+
+			expect(focusService.getFocusTarget).toHaveBeenCalledWith();
+		});
+
+		it('should update initialFocus, when blurring from link', () => {
+			const alertLink = getElement(fixture, '#fudis-alert-2 .fudis-link__anchor');
+
+			alertLink.focus();
+			alertLink.blur();
+
+			console.log(alertLink);
+
+			expect(alertService.updateAlertLinkFocusState).toHaveBeenCalledWith('fudis-alert-2');
 		});
 	});
 });
