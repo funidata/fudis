@@ -91,6 +91,8 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnIni
 	setLabel(): void {
 		if (this.selected && this.variant !== 'missing') {
 			this._label = `${this.label} ${this._selectedLabel}`;
+		} else if (this.selected && this.variant === 'missing') {
+			this._label = `${this.label} ${this._missingTranslation} ${this._selectedLabel}`;
 		} else if (!this.selected && this.variant === 'missing') {
 			this._label = `${this.label} ${this._missingTranslation}`;
 		} else {

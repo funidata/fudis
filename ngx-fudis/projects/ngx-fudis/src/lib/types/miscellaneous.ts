@@ -13,6 +13,10 @@ export type FudisDescriptionListItemDetailInfo = {
 	language: FudisLanguageAbbr;
 };
 
+export type FudisLanguageBadgeContent = {
+	[key in FudisLanguageAbbr]?: string | null | undefined;
+};
+
 export type FudisLanguageOption =
 	| { value: 'finnish'; viewValue: 'FI' }
 	| { value: 'swedish'; viewValue: 'SV' }
