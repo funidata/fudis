@@ -8,6 +8,7 @@ import { FudisGridService } from '../../services/grid/grid.service';
 import { FudisIdService } from '../../services/id/id.service';
 import { GridDirective } from '../../directives/grid/grid/grid.directive';
 import { FudisErrorSummaryService } from '../../services/form/error-summary/error-summary.service';
+import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 
 describe('SectionComponent', () => {
 	let component: SectionComponent;
@@ -16,7 +17,7 @@ describe('SectionComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [SectionComponent, HeadingComponent, GridDirective],
-			providers: [FudisGridService, FudisIdService, FudisErrorSummaryService],
+			providers: [FudisGridService, FudisIdService, FudisErrorSummaryService, FudisBreakpointService],
 		});
 		fixture = TestBed.createComponent(SectionComponent);
 

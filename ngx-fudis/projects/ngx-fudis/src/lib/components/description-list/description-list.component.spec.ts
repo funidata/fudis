@@ -12,6 +12,7 @@ import { DescriptionListItemTermComponent } from './description-list-item/descri
 import { DescriptionListItemDetailsComponent } from './description-list-item/description-list-item-details/description-list-item-details.component';
 
 import { LanguageBadgeGroupComponent } from '../language-badge-group/language-badge-group.component';
+import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 
 describe('DescriptionListComponent', () => {
 	let component: DescriptionListComponent;
@@ -28,7 +29,7 @@ describe('DescriptionListComponent', () => {
 				DescriptionListItemDetailsComponent,
 				MockComponent(LanguageBadgeGroupComponent),
 			],
-			providers: [FudisGridService],
+			providers: [FudisGridService, FudisBreakpointService],
 		}).compileComponents();
 	});
 
