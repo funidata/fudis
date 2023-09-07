@@ -33,17 +33,9 @@ export class DescriptionListItemComponent implements AfterViewInit {
 					`.fudis-dl__item__details__${item.lang} .fudis-dl__item__details__content`
 				)?.textContent;
 
-				const textContent = htmlContent && htmlContent.replaceAll(' ', '') !== '' ? htmlContent : null;
+				const textContent = htmlContent && htmlContent.replace(/\s/g, '') !== '' ? htmlContent : null;
 
-				if (item.lang === 'fi') {
-					temp = { ...temp, fi: textContent };
-				}
-				if (item.lang === 'sv') {
-					temp = { ...temp, sv: textContent };
-				}
-				if (item.lang === 'en') {
-					temp = { ...temp, en: textContent };
-				}
+				temp = { ...temp, [item.lang]: textContent };
 			});
 		}
 
