@@ -8,6 +8,6 @@
 			[tooltipPosition]="tooltipPosition"
 			[tooltipToggle]="tooltipToggle"
 			[language]="_language.key"
-			[variant]="languages.includes(_language.key) ? 'standard' : 'missing'" />
+			[variant]="languages[_language.key] ? 'standard' : 'missing'" />
 	</ng-container>
 </section>

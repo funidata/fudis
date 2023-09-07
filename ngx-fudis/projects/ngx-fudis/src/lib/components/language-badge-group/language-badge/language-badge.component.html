@@ -7,7 +7,6 @@
 	[tooltipPosition]="tooltipPosition"
 	[tooltipToggle]="tooltipToggle"
 	[attr.aria-label]="_label"
-	[attr.aria-disabled]="variant === 'missing' ? true : null"
-	(click)="variant !== 'missing' && handleLanguageSelect()">
+	(click)="handleLanguageSelect()">
 	{{ language }}
 </button>

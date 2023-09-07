@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockComponent } from 'ng-mocks';
 import { By } from '@angular/platform-browser';
-import { FudisLanguageAbbr } from '../../types/miscellaneous';
+import { FudisLanguageBadgeContent } from '../../types/miscellaneous';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { LanguageBadgeGroupComponent } from './language-badge-group.component';
 import { LanguageBadgeComponent } from './language-badge/language-badge.component';
 
-const providedLanguages: FudisLanguageAbbr[] = ['en', 'fi'];
+const providedLanguages: FudisLanguageBadgeContent = { en: 'en', fi: 'fi' };
 
-const internalLanguageOptions: FudisLanguageAbbr[] = ['en', 'fi', 'sv'];
+const internalLanguageOptions: FudisLanguageBadgeContent = { en: 'en', fi: 'fi', sv: 'sv' };
 
 describe('LanguageBadgeGroupComponent', () => {
 	let component: LanguageBadgeGroupComponent;
@@ -44,7 +44,9 @@ describe('LanguageBadgeGroupComponent', () => {
 
 		it('should have missing translation for Swedish', () => {
 			const existingTranslation = component.languages;
-			const missingLanguage = internalLanguageOptions.filter((missing) => !existingTranslation.includes(missing));
+			const missingLanguage = Object.keys(internalLanguageOptions).filter(
+				(missing) => !Object.keys(existingTranslation).includes(missing)
+			);
 
 			expect(missingLanguage).toContain('sv');
 		});
