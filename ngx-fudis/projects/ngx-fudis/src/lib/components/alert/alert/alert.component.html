@@ -1,6 +1,12 @@
 <div class="fudis-alert fudis-alert__{{ variant }}" [id]="htmlId">
 	<fudis-body-text
-		[attr.role]="!routerLinkUrl && !linkTitle ? 'alert' : null"
+		[attr.role]="
+			!routerLinkUrl && !linkTitle && (variant === 'danger' || variant === 'warning')
+				? 'alert'
+				: !routerLinkUrl && !linkTitle
+				? 'status'
+				: null
+		"
 		[classList]="'fudis-alert__text'"
 		[size]="'lg-regular'"
 		[color]="variant !== 'warning' ? 'white' : 'default'">
