@@ -227,6 +227,7 @@ describe('AlertComponent', () => {
 
 			spyOn(secondClose, 'focus');
 
+			firstClose.focus();
 			firstClose.click();
 
 			expect(secondClose.focus).toHaveBeenCalledWith();
@@ -249,10 +250,11 @@ describe('AlertComponent', () => {
 		it('should update initialFocus, when blurring from link', () => {
 			const alertLink = getElement(fixture, '#fudis-alert-2 .fudis-link__anchor');
 
-			alertLink.focus();
-			alertLink.blur();
+			const secondClose = getElement(fixture, '#fudis-alert-2 .fudis-alert__close');
 
-			console.log(alertLink);
+			alertLink.focus();
+
+			secondClose.focus();
 
 			expect(alertService.updateAlertLinkFocusState).toHaveBeenCalledWith('fudis-alert-2');
 		});
