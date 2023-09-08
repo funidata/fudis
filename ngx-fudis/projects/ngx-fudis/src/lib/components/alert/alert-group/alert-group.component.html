@@ -1,7 +1,7 @@
 <section
 	*ngIf="_visible"
 	class="fudis-alert-group fudis-alert-group__{{ position }}"
-	[attr.aria-label]="_alertGroupLabel">
+	[attr.aria-label]="_alertGroupLabel + ': ' + _alertList().length">
 	<ng-container *ngFor="let alert of _alertList()">
 		<fudis-alert
 			[initialFocus]="alert.initialFocus"

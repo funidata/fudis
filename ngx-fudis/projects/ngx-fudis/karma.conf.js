@@ -13,6 +13,7 @@ module.exports = function (config) {
       "/clock.svg": "/base/src/lib/assets/icons/clock.svg",
       "/info-circle.svg": "/base/src/lib/assets/icons/info-circle.svg",
       "/calendar.svg": "/base/src/lib/assets/icons/calendar.svg",
+			"/alert.svg": "/base/src/lib/assets/icons/alert.svg",
    },
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
