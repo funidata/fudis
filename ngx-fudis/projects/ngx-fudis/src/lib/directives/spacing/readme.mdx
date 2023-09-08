@@ -11,11 +11,11 @@ Spacing directive allows you to add responsive margin attributes for desired com
 
 ## Usage Guidelines
 
-Spacing directive works similarly as when applying `columns` to [Grid directive](/docs/components-grid-grid--documentation). It can either be assigned as static value or as object with different breakpoint values.
+Spacing directive works similarly as when applying `columns` to [Grid directive](/docs/components-grid-grid--documentation). It can either be assigned as single static value for all breakpoints or as an object to define different margin for different breakpoints.
 
 ### Allowed attributes
 
-Spacing directive can take in four Input values: `marginTop`, `marginBottom`, `marginRight` and `marginLeft`. These are separate Inputs and `margin` shorthand is not available yet.
+Spacing directive can take in four Input values: `marginTop`, `marginBottom`, `marginRight` and `marginLeft`. These are separate Inputs and `margin` shorthand is not yet available.
 
 Below is **non-responsive** example. The same margin-top value will be applied throughout all screen sizes.
 ```
@@ -30,10 +30,15 @@ Below is **responsive** example. Margin-top will be adjusted to given breakpoint
 	[marginLeft]={sm: 'xxs', lg: 'xl'} />
 ```
 
-## Example
+## Examples
+
+### With single value for all breakpoints
 
 <Canvas of={SpacingStories.Example}></Canvas>
 
+### With varying values for different breakpoints
+
+<Canvas of={SpacingStories.ResponsiveExample}></Canvas>
 
 ## Properties
 
