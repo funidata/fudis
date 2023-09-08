@@ -1,8 +1,8 @@
 import { Directive, ElementRef, OnChanges, OnInit, effect } from '@angular/core';
 import { SpacingApiDirective } from './spacing-api/spacing-api.directive';
 import { FudisSpacingService } from '../../services/spacing/spacing.service';
-import { FudisSpacingResponsiveData, defaultSpacingValue } from '../../types/spacing';
-import { convertSpacingTokenToRem, getSpacingBreakpointDataArray } from './spacing-utils';
+import { FudisSpacingResponsiveData, defaultSpacingValue, fudisSpacingValues } from '../../types/spacing';
+import { getSpacingBreakpointDataArray } from './spacing-utils';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 
 @Directive({
@@ -84,25 +84,25 @@ export class SpacingDirective extends SpacingApiDirective implements OnInit, OnC
 	 */
 	private _defineSpacings(): void {
 		if (typeof this.marginTop === 'string') {
-			this._marginTop = convertSpacingTokenToRem(this.marginTop);
+			this._marginTop = fudisSpacingValues[this.marginTop];
 		} else if (this.marginTop) {
 			this._marginTop = getSpacingBreakpointDataArray(this.marginTop, defaultSpacingValue);
 		}
 
 		if (typeof this.marginBottom === 'string') {
-			this._marginBottom = convertSpacingTokenToRem(this.marginBottom);
+			this._marginBottom = fudisSpacingValues[this.marginBottom];
 		} else if (this.marginBottom) {
 			this._marginBottom = getSpacingBreakpointDataArray(this.marginBottom, defaultSpacingValue);
 		}
 
 		if (typeof this.marginRight === 'string') {
-			this._marginRight = convertSpacingTokenToRem(this.marginRight);
+			this._marginRight = fudisSpacingValues[this.marginRight];
 		} else if (this.marginRight) {
 			this._marginRight = getSpacingBreakpointDataArray(this.marginRight, defaultSpacingValue);
 		}
 
 		if (typeof this.marginLeft === 'string') {
-			this._marginLeft = convertSpacingTokenToRem(this.marginLeft);
+			this._marginLeft = fudisSpacingValues[this.marginLeft];
 		} else if (this.marginLeft) {
 			this._marginLeft = getSpacingBreakpointDataArray(this.marginLeft, defaultSpacingValue);
 		}

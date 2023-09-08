@@ -22,6 +22,22 @@ export interface FudisSpacingResponsiveData {
 	breakpoint: string; // breakpoint boundaries for this rule
 }
 
+type FudisSpacingValues = {
+	[key in FudisSpacing | 'default']: string;
+};
+
+export const fudisSpacingValues: FudisSpacingValues = {
+	xxs: '0.25rem',
+	xs: '0.5rem',
+	sm: '1rem',
+	md: '1.5rem',
+	lg: '2rem',
+	xl: '2.5rem',
+	xxl: '4rem',
+	none: '0',
+	default: defaultSpacingValue,
+};
+
 /**
  * Attributes for managing spacings
  */

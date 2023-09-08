@@ -1,3 +1,4 @@
+import { fudisBreakpointsMinWidth } from '../../types/breakpoints';
 import {
 	FudisBreakpointKey,
 	FudisGridColumnsResponsive,
@@ -5,7 +6,6 @@ import {
 	FudisGridAttributes,
 	FudisGridFormInputWidth,
 } from '../../types/grid';
-import { fudisBreakpointsMinWidth } from '../../utilities/breakpoint/breakpoint-utils';
 
 /**
  * Utility function used with GridDirective.

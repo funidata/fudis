@@ -1,56 +1,7 @@
+import { fudisBreakpointsMinWidth } from '../../types/breakpoints';
 import { FudisBreakpointKey } from '../../types/grid';
 import { FudisSpacing } from '../../types/miscellaneous';
-import { FudisSpacingResponsive, FudisSpacingResponsiveData } from '../../types/spacing';
-import { fudisBreakpointsMinWidth } from '../../utilities/breakpoint/breakpoint-utils';
-
-/**
- * Convert spacing tokens to rem values
- */
-export const convertSpacingTokenToRem = (value: FudisSpacing): string => {
-	const tokenXxs: FudisSpacing = 'xxs';
-	const tokenXs: FudisSpacing = 'xs';
-	const tokenSm: FudisSpacing = 'sm';
-	const tokenMd: FudisSpacing = 'md';
-	const tokenLg: FudisSpacing = 'lg';
-	const tokenXl: FudisSpacing = 'xl';
-	const tokenXxl: FudisSpacing = 'xxl';
-
-	let convertedValue: string = '';
-	switch (value) {
-		case 'xxs': {
-			convertedValue = value.replace(tokenXxs, '0.25rem');
-			break;
-		}
-		case 'xs': {
-			convertedValue = value.replace(tokenXs, '0.5rem');
-			break;
-		}
-		case 'sm': {
-			convertedValue = value.replace(tokenSm, '1rem');
-			break;
-		}
-		case 'md': {
-			convertedValue = value.replace(tokenMd, '1.5rem');
-			break;
-		}
-		case 'lg': {
-			convertedValue = value.replace(tokenLg, '2rem');
-			break;
-		}
-		case 'xl': {
-			convertedValue = value.replace(tokenXl, '2.5rem');
-			break;
-		}
-		case 'xxl': {
-			convertedValue = value.replace(tokenXxl, '4rem');
-			break;
-		}
-		default:
-			convertedValue = '0';
-	}
-
-	return convertedValue;
-};
+import { FudisSpacingResponsive, FudisSpacingResponsiveData, fudisSpacingValues } from '../../types/spacing';
 
 export const getSpacingBreakpointRules = (
 	values: FudisSpacingResponsive,
@@ -71,7 +22,7 @@ export const getSpacingBreakpointRules = (
 
 		spacingsArray.push({
 			name: key as keyof FudisSpacingResponsive,
-			value: convertSpacingTokenToRem(spacingValue),
+			value: fudisSpacingValues[spacingValue],
 			breakpoint: fudisBreakpointsMinWidth[key as keyof FudisSpacingResponsive],
 		});
 	});

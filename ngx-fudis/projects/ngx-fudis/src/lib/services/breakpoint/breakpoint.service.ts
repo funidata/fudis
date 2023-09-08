@@ -1,8 +1,7 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Injectable, signal } from '@angular/core';
-
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { breakpointsMinWidthToObserve } from '../../utilities/breakpoint/breakpoint-utils';
+import { breakpointsMinWidthToObserve } from '../../types/breakpoints';
 
 @Injectable()
 export class FudisBreakpointService {
