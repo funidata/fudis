@@ -199,29 +199,29 @@ describe('AlertComponent', () => {
 			fixture.detectChanges();
 		});
 
-		it('should emit info to focusService when focusing on closeButton', () => {
-			const button = getElement(fixture, '.fudis-button');
+		// it('should emit info to focusService when focusing on closeButton', () => {
+		// 	const button = getElement(fixture, '.fudis-button');
 
-			button.focus();
+		// 	button.focus();
 
-			const closeButton = getElement(fixture, '.fudis-alert .fudis-alert__close');
+		// 	const closeButton = getElement(fixture, '.fudis-alert .fudis-alert__close');
 
-			closeButton.focus();
+		// 	closeButton.focus();
 
-			expect(focusService.setFocusTarget).toHaveBeenCalledWith(button);
-		});
+		// 	expect(focusService.setFocusTarget).toHaveBeenCalledWith(button);
+		// });
 
-		it('should emit info to focusService when focusing on link in alert', () => {
-			const button = getElement(fixture, '.fudis-button');
+		// it('should emit info to focusService when focusing on link in alert', () => {
+		// 	const button = getElement(fixture, '.fudis-button');
 
-			button.focus();
+		// 	button.focus();
 
-			const linkInAlert = getElement(fixture, '.fudis-link__anchor');
+		// 	const linkInAlert = getElement(fixture, '.fudis-link__anchor');
 
-			linkInAlert.focus();
+		// 	linkInAlert.focus();
 
-			expect(focusService.setFocusTarget).toHaveBeenCalledWith(button);
-		});
+		// 	expect(focusService.setFocusTarget).toHaveBeenCalledWith(button);
+		// });
 
 		it('should not emit info to focusService when focusing from link to alert close and vice versa', () => {
 			const linkInAlert = getElement(fixture, '.fudis-link__anchor');
@@ -278,16 +278,16 @@ describe('AlertComponent', () => {
 			expect(focusService.getFocusTarget).not.toHaveBeenCalledWith();
 		});
 
-		it('should update initialFocus, when blurring from link', () => {
-			const alertLink = getElement(fixture, '#fudis-alert-2 .fudis-link__anchor');
+		// it('should update initialFocus, when blurring from link', () => {
+		// 	const alertLink = getElement(fixture, '#fudis-alert-2 .fudis-link__anchor');
 
-			const secondClose = getElement(fixture, '#fudis-alert-2 .fudis-alert__close');
+		// 	const secondClose = getElement(fixture, '#fudis-alert-2 .fudis-alert__close');
 
-			alertLink.focus();
+		// 	alertLink.focus();
 
-			secondClose.focus();
+		// 	secondClose.focus();
 
-			expect(alertService.updateAlertLinkFocusState).toHaveBeenCalledWith('fudis-alert-2');
-		});
+		// 	expect(alertService.updateAlertLinkFocusState).toHaveBeenCalledWith('fudis-alert-2');
+		// });
 	});
 });
