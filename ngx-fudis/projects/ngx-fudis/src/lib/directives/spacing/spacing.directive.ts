@@ -1,9 +1,10 @@
 import { Directive, ElementRef, OnChanges, OnInit, effect } from '@angular/core';
 import { SpacingApiDirective } from './spacing-api/spacing-api.directive';
 import { FudisSpacingService } from '../../services/spacing/spacing.service';
-import { FudisSpacingResponsiveData, defaultSpacingValue, fudisSpacingValues } from '../../types/spacing';
+import { defaultSpacingValue, fudisSpacingValues } from '../../types/spacing';
 import { getSpacingBreakpointDataArray } from './spacing-utils';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
+import { FudisBreakpointStyleResponsive } from '../../types/breakpoints';
 
 @Directive({
 	selector: '[fudisSpacing]',
@@ -38,22 +39,22 @@ export class SpacingDirective extends SpacingApiDirective implements OnInit, OnC
 	/**
 	 * Apply marginTop value
 	 */
-	protected _marginTop: string | FudisSpacingResponsiveData[] = defaultSpacingValue;
+	protected _marginTop: string | FudisBreakpointStyleResponsive[] = defaultSpacingValue;
 
 	/**
 	 * Apply marginBottom value
 	 */
-	protected _marginBottom: string | FudisSpacingResponsiveData[] = defaultSpacingValue;
+	protected _marginBottom: string | FudisBreakpointStyleResponsive[] = defaultSpacingValue;
 
 	/**
 	 * Apply marginRight value
 	 */
-	protected _marginRight: string | FudisSpacingResponsiveData[] = defaultSpacingValue;
+	protected _marginRight: string | FudisBreakpointStyleResponsive[] = defaultSpacingValue;
 
 	/**
 	 * Apply marginLeft value
 	 */
-	protected _marginLeft: string | FudisSpacingResponsiveData[] = defaultSpacingValue;
+	protected _marginLeft: string | FudisBreakpointStyleResponsive[] = defaultSpacingValue;
 
 	/**
 	 * Spacing service to run utilities
@@ -109,12 +110,9 @@ export class SpacingDirective extends SpacingApiDirective implements OnInit, OnC
 	}
 
 	private _setSpacings(): void {
-		this._spacingService.setSpacingAttributes(
-			this._element,
-			this._marginTop,
-			this._marginBottom,
-			this._marginRight,
-			this._marginLeft
-		);
+		this._breakpointService.setStyleAttributes(this._element, 'margin-top', this._marginTop);
+		this._breakpointService.setStyleAttributes(this._element, 'margin-bottom', this._marginBottom);
+		this._breakpointService.setStyleAttributes(this._element, 'margin-left', this._marginLeft);
+		this._breakpointService.setStyleAttributes(this._element, 'margin-right', this._marginRight);
 	}
 }

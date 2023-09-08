@@ -1,11 +1,5 @@
-import { fudisBreakpointsMinWidth } from '../../types/breakpoints';
-import {
-	FudisBreakpointKey,
-	FudisGridColumnsResponsive,
-	FudisGridResponsiveData,
-	FudisGridAttributes,
-	FudisGridFormInputWidth,
-} from '../../types/grid';
+import { FudisBreakpointKey, FudisBreakpointStyleResponsive, fudisBreakpointsMinWidth } from '../../types/breakpoints';
+import { FudisGridColumnsResponsive, FudisGridAttributes, FudisGridFormInputWidth } from '../../types/grid';
 
 /**
  * Utility function used with GridDirective.
@@ -39,7 +33,7 @@ export const getGridClasses = (values: FudisGridAttributes): string => {
 /*
  * Basic validation, so that given column @Inputs are usable and valid grid-column-template values.
  */
-export const validateColumnInputArray = (inputs: Array<FudisGridResponsiveData>) => {
+export const validateColumnInputArray = (inputs: Array<FudisBreakpointStyleResponsive>) => {
 	inputs.forEach((item) => {
 		if (item.value.trim() === '') {
 			throw new Error(
@@ -129,8 +123,8 @@ export const getGridBreakpointRules = (
 	values: FudisGridColumnsResponsive,
 	defaultValue: string,
 	isGridItem?: boolean
-): FudisGridResponsiveData[] => {
-	const columnsArray: FudisGridResponsiveData[] = [];
+): FudisBreakpointStyleResponsive[] => {
+	const columnsArray: FudisBreakpointStyleResponsive[] = [];
 
 	if (!values.default) {
 		columnsArray.push({
@@ -162,8 +156,8 @@ export const getGridBreakpointDataArray = (
 	value: FudisGridColumnsResponsive,
 	defaultValue: string,
 	isGridItem?: boolean
-): FudisGridResponsiveData[] => {
-	const columnsArray: FudisGridResponsiveData[] = getGridBreakpointRules(value, defaultValue, isGridItem);
+): FudisBreakpointStyleResponsive[] => {
+	const columnsArray: FudisBreakpointStyleResponsive[] = getGridBreakpointRules(value, defaultValue, isGridItem);
 
 	const sortOrder: FudisBreakpointKey[] = ['default', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
 

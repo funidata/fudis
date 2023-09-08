@@ -4,21 +4,8 @@
  * -------------------------------------------
  */
 
+import { FudisBreakpointKey } from './breakpoints';
 import { FudisSpacing } from './miscellaneous';
-
-/**
- * Object used to apply styles for certain breakpoints
- */
-export interface FudisGridResponsiveData {
-	name: FudisBreakpointKey; // e. g. XL or other size
-	value: string; // value to be applied to CSS grid-template-columns or grid-column attribute
-	breakpoint: string; // breakpoint boundaries for this rule.
-}
-
-/**
- * Breakpoint keys to watch
- */
-export type FudisBreakpointKey = 'default' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
 /**
  * -------------------------------------------

@@ -23,3 +23,28 @@ export const breakpointsMinWidthToObserve = [
 	fudisBreakpointsMinWidth.xs,
 	fudisBreakpointsMinWidth.default,
 ];
+
+export type FudisBreakpointStyle =
+	| 'margin-top'
+	| 'margin-bottom'
+	| 'margin-right'
+	| 'margin-left'
+	| 'grid-column'
+	| 'grid-template-columns'
+	| 'justify-self'
+	| 'align-self';
+
+/**
+ * Object used to apply styles for certain breakpoints
+ */
+
+export interface FudisBreakpointStyleResponsive {
+	name: FudisBreakpointKey; // breakpoint e.g md, xl etc.
+	value: string; // value to be applied to spacing attribute
+	breakpoint: string; // breakpoint boundaries for this rule
+}
+
+/**
+ * Breakpoint keys to watch
+ */
+export type FudisBreakpointKey = 'default' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';

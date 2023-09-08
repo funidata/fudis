@@ -1,4 +1,4 @@
-import { FudisBreakpointKey } from './grid';
+import { FudisBreakpointKey } from './breakpoints';
 import { FudisSpacing } from './miscellaneous';
 
 /**
@@ -12,15 +12,6 @@ export type FudisSpacingResponsive = {
  * Default spacing value if none is given
  */
 export const defaultSpacingValue = '0';
-
-/**
- * Object used to apply spacing for certain breakpoints
- */
-export interface FudisSpacingResponsiveData {
-	name: FudisBreakpointKey; // breakpoint e.g md, xl etc.
-	value: string; // value to be applied to spacing attribute
-	breakpoint: string; // breakpoint boundaries for this rule
-}
 
 type FudisSpacingValues = {
 	[key in FudisSpacing | 'default']: string;

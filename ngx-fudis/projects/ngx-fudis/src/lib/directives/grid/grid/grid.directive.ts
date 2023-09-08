@@ -1,14 +1,10 @@
 import { Directive, ElementRef, OnChanges, OnInit, Signal, effect } from '@angular/core';
 import { getGridBreakpointDataArray, getGridClasses, getGridCssValue, replaceFormInputWidthsToRem } from '../gridUtils';
 import { GridApiDirective } from '../grid-api/grid-api.directive';
-import {
-	FudisGridColumnsResponsive,
-	FudisGridResponsiveData,
-	gridColumnDefault,
-	FudisGridAttributes,
-} from '../../../types/grid';
+import { FudisGridColumnsResponsive, gridColumnDefault, FudisGridAttributes } from '../../../types/grid';
 import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
+import { FudisBreakpointStyleResponsive } from '../../../types/breakpoints';
 
 @Directive({
 	selector: '[fudisGrid]',
@@ -39,7 +35,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	/**
 	 * Used to apply grid-template-columns values for the Grid
 	 */
-	protected _columns: string | FudisGridResponsiveData[] = gridColumnDefault;
+	protected _columns: string | FudisBreakpointStyleResponsive[] = gridColumnDefault;
 
 	/**
 	 * Internal reference for the this Grid element
@@ -98,7 +94,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	 * Set CSS grid-template-column attributes for this Grid element
 	 */
 	private _setColumns(): void {
-		this._gridService.setGridAttributes(this._element, this._columns);
+		this._breakpointService.setStyleAttributes(this._element, 'grid-template-columns', this._columns);
 	}
 
 	/**

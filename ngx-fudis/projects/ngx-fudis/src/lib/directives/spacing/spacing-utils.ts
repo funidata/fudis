@@ -1,13 +1,12 @@
-import { fudisBreakpointsMinWidth } from '../../types/breakpoints';
-import { FudisBreakpointKey } from '../../types/grid';
+import { FudisBreakpointKey, FudisBreakpointStyleResponsive, fudisBreakpointsMinWidth } from '../../types/breakpoints';
 import { FudisSpacing } from '../../types/miscellaneous';
-import { FudisSpacingResponsive, FudisSpacingResponsiveData, fudisSpacingValues } from '../../types/spacing';
+import { FudisSpacingResponsive, fudisSpacingValues } from '../../types/spacing';
 
 export const getSpacingBreakpointRules = (
 	values: FudisSpacingResponsive,
 	defaultValue: string
-): FudisSpacingResponsiveData[] => {
-	const spacingsArray: FudisSpacingResponsiveData[] = [];
+): FudisBreakpointStyleResponsive[] => {
+	const spacingsArray: FudisBreakpointStyleResponsive[] = [];
 
 	if (!values.default) {
 		spacingsArray.push({
@@ -36,8 +35,8 @@ export const getSpacingBreakpointRules = (
 export const getSpacingBreakpointDataArray = (
 	value: FudisSpacingResponsive,
 	defaultValue: string
-): FudisSpacingResponsiveData[] => {
-	const spacingsArray: FudisSpacingResponsiveData[] = getSpacingBreakpointRules(value, defaultValue);
+): FudisBreakpointStyleResponsive[] => {
+	const spacingsArray: FudisBreakpointStyleResponsive[] = getSpacingBreakpointRules(value, defaultValue);
 
 	const sortOrder: FudisBreakpointKey[] = ['default', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
 
