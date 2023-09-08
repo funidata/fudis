@@ -76,7 +76,7 @@ describe('ButtonComponent', () => {
 
 			getButton()?.click();
 
-			expect(clicked).withContext('No click event received').toEqual(true);
+			expect(clicked).withContext('Click event received').toEqual(true);
 		});
 
 		it('should not emit events when the button is disabled', () => {
