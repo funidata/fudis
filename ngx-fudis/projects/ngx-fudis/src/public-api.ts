@@ -64,7 +64,6 @@ export { NotificationComponent } from './lib/components/notification/notificatio
 
 export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
 export { SpacingDirective } from './lib/directives/spacing/spacing.directive';
-export { FudisSpacingService } from './lib/services/spacing/spacing.service';
 export { SectionComponent } from './lib/components/section/section.component';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';
 export { TextInputComponent } from './lib/components/form/text-input/text-input.component';

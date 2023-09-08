@@ -1,6 +1,5 @@
 import { Directive, ElementRef, OnChanges, OnInit, effect } from '@angular/core';
 import { SpacingApiDirective } from './spacing-api/spacing-api.directive';
-import { FudisSpacingService } from '../../services/spacing/spacing.service';
 import { defaultSpacingValue, fudisSpacingValues } from '../../types/spacing';
 import { getSpacingBreakpointDataArray } from './spacing-utils';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
@@ -11,12 +10,10 @@ import { FudisBreakpointStyleResponsive } from '../../types/breakpoints';
 })
 export class SpacingDirective extends SpacingApiDirective implements OnInit, OnChanges {
 	constructor(
-		spacingService: FudisSpacingService,
 		private _breakpointService: FudisBreakpointService,
 		private _spacingElement: ElementRef
 	) {
 		super();
-		this._spacingService = spacingService;
 		this._element = _spacingElement.nativeElement;
 
 		/**
@@ -55,11 +52,6 @@ export class SpacingDirective extends SpacingApiDirective implements OnInit, OnC
 	 * Apply marginLeft value
 	 */
 	protected _marginLeft: string | FudisBreakpointStyleResponsive[] = defaultSpacingValue;
-
-	/**
-	 * Spacing service to run utilities
-	 */
-	private _spacingService: FudisSpacingService;
 
 	/**
 	 * Internal reference for the respective element

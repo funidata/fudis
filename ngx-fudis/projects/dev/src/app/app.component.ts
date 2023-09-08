@@ -8,7 +8,6 @@ import {
 	FudisAlertService,
 	FudisDialogService,
 	FudisGridService,
-	FudisSpacingService,
 	FudisTranslationService,
 	FudisBreakpointService,
 } from 'ngx-fudis';
@@ -32,7 +31,7 @@ export class AppComponent implements OnInit {
 		private _gridService: FudisGridService,
 		private _fudisLanguage: FudisTranslationService,
 		private _alertService: FudisAlertService,
-		private _spacingService: FudisSpacingService,
+
 		private _breakpointService: FudisBreakpointService
 	) {
 		_gridService.setGridDefaultValues({
