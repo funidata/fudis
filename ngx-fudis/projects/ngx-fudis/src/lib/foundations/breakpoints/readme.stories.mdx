@@ -12,7 +12,7 @@ Load Fudis mixins and tokens to your file in your SCSS file with:
 
 ## Min-width mixin
 
-The mixins are using min-width, so when you are using the mixin **breakpoint('md')**, your styles will be applied from the medium breakpoint and up.
+When you are using the mixin `breakpoint('md')`, your styles will be applied from `$breakpoint-md` and up.
 
 ```
 @include fudis.breakpoint($breakpoint){}
@@ -33,7 +33,7 @@ The mixins are using min-width, so when you are using the mixin **breakpoint('md
 
 ## Max-width mixin
 
-The mixins are using max-width, so when you are using the mixin **breakpoint-max('md')**, your styles will be applied if viewport is small than M size.
+When you are using the mixin `breakpoint-max('md')`, your styles will be applied when viewport is smaller than `$breakpoint-md`.
 
 ```
 @include fudis.breakpoint-max($breakpoint){}
@@ -47,9 +47,9 @@ Breakpoints are based on Bootstrap's breakpoint system, which Sisu application u
 
 | Name            | String value | Value | Default px value | Range it affects |
 | --------------- | ------------ | ----- | ---------------- | ---------------- |
-| $breakpoint-xxl | xl           | 100em | 1600px           | +1600px          |
-| $breakpoint-xl  | l            | 75em  | 1200px           | 1200px-1599px    |
-| $breakpoint-lg  | m            | 62em  | 992px            | 992px-1199px     |
-| $breakpoint-md  | s            | 48em  | 768px            | 768px-991px      |
-| $breakpoint-sm  | xs           | 36em  | 576px            | 576px-767px      |
-| $breakpoint-xs  | xxs          | 0     | 0                | 0-575px          |
+| $breakpoint-xxl | xxl          | 100em | 1600px           | +1600px          |
+| $breakpoint-xl  | xl           | 75em  | 1200px           | 1200px-1599px    |
+| $breakpoint-lg  | lg           | 62em  | 992px            | 992px-1199px     |
+| $breakpoint-md  | md           | 48em  | 768px            | 768px-991px      |
+| $breakpoint-sm  | sm           | 36em  | 576px            | 576px-767px      |
+| $breakpoint-xs  | xs           | 0     | 0                | 0-575px          |
