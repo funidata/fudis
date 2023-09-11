@@ -60,7 +60,7 @@ const Template: StoryFn<SpacingDirective> = (args: SpacingDirective) => ({
 		<div>
 			<fudis-body-text
 				>This Fudis Button has margins added through <strong>fudisSpacing</strong> directive. Go ahead and inspect the
-				button element.</fudis-body-text
+				button element while resizing the browser.</fudis-body-text
 			>
 			<fudis-button
 				fudisSpacing
