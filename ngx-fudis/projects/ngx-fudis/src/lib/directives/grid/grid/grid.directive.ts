@@ -1,10 +1,11 @@
 import { Directive, ElementRef, OnChanges, OnInit, Signal, effect } from '@angular/core';
-import { getGridBreakpointDataArray, getGridClasses, getGridCssValue, replaceFormInputWidthsToRem } from '../gridUtils';
+import { getGridClasses, getGridCssValue, replaceFormInputWidthsToRem } from '../gridUtils';
 import { GridApiDirective } from '../grid-api/grid-api.directive';
 import { FudisGridColumnsResponsive, gridColumnDefault, FudisGridAttributes } from '../../../types/grid';
 import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisBreakpointStyleResponsive } from '../../../types/breakpoints';
+import { getBreakpointDataArray } from '../../../utilities/breakpoint/breakpoint-utils';
 
 @Directive({
 	selector: '[fudisGrid]',
@@ -58,7 +59,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		if (this.columns) {
 			this._defineColumns();
 		} else if (!this.ignoreDefaults && this._gridDefaults()?.columns) {
-			this._columns = getGridBreakpointDataArray(this._gridDefaults()!.columns!, gridColumnDefault);
+			this._columns = getBreakpointDataArray(this._gridDefaults()!.columns!, gridColumnDefault);
 		}
 		this._applyGridCss();
 	}
@@ -67,7 +68,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		if (this.columns) {
 			this._defineColumns();
 		} else if (!this.ignoreDefaults && this._gridDefaults()?.columns) {
-			this._columns = getGridBreakpointDataArray(this._gridDefaults()?.columns!, gridColumnDefault);
+			this._columns = getBreakpointDataArray(this._gridDefaults()?.columns!, gridColumnDefault);
 		}
 		this._applyGridCss();
 	}
@@ -84,9 +85,9 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		else if (!this.ignoreDefaults && this._gridDefaults()?.columns !== null) {
 			const combinedValues: FudisGridColumnsResponsive = { ...this._gridDefaults()!.columns, ...this.columns };
 
-			this._columns = getGridBreakpointDataArray(combinedValues, gridColumnDefault);
+			this._columns = getBreakpointDataArray(combinedValues, gridColumnDefault);
 		} else {
-			this._columns = getGridBreakpointDataArray(this.columns, gridColumnDefault);
+			this._columns = getBreakpointDataArray(this.columns, gridColumnDefault);
 		}
 	}
 

@@ -7,9 +7,10 @@ import {
 	gridItemDefault,
 	FudisGridItemColumnsResponsive,
 } from '../../../types/grid';
-import { getGridBreakpointDataArray, getGridCssValue } from '../gridUtils';
+import { getGridCssValue } from '../gridUtils';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisBreakpointStyleResponsive } from '../../../types/breakpoints';
+import { getBreakpointDataArray } from '../../../utilities/breakpoint/breakpoint-utils';
 
 @Directive({
 	selector: '[fudisGridItem]',
@@ -65,7 +66,7 @@ export class GridItemDirective implements OnInit, OnChanges {
 		}
 		// Get breakpoint settings with provided values
 		else {
-			this._columns = getGridBreakpointDataArray(value, gridItemDefault, true);
+			this._columns = getBreakpointDataArray(value, gridItemDefault, true);
 		}
 	}
 
@@ -76,7 +77,7 @@ export class GridItemDirective implements OnInit, OnChanges {
 		if (typeof value === 'string') {
 			this._alignX = value;
 		} else {
-			this._alignX = getGridBreakpointDataArray(value, 'stretch');
+			this._alignX = getBreakpointDataArray(value, 'stretch');
 		}
 	}
 
@@ -87,7 +88,7 @@ export class GridItemDirective implements OnInit, OnChanges {
 		if (typeof value === 'string') {
 			this._alignY = value;
 		} else {
-			this._alignY = getGridBreakpointDataArray(value, 'stretch');
+			this._alignY = getBreakpointDataArray(value, 'stretch');
 		}
 	}
 

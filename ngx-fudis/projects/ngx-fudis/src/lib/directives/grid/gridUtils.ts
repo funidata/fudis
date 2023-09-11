@@ -1,5 +1,5 @@
-import { FudisBreakpointKey, FudisBreakpointStyleResponsive, fudisBreakpointsMinWidth } from '../../types/breakpoints';
-import { FudisGridColumnsResponsive, FudisGridAttributes, FudisGridFormInputWidth } from '../../types/grid';
+import { FudisBreakpointStyleResponsive } from '../../types/breakpoints';
+import { FudisGridAttributes, FudisGridFormInputWidth } from '../../types/grid';
 
 /**
  * Utility function used with GridDirective.
@@ -97,75 +97,4 @@ export const getGridCssValue = (value: number | string, isGridItem?: boolean): s
 		return '1/-1';
 	}
 	return replaceFormInputWidthsToRem(value);
-};
-
-/**
- * Build an setting array of objects for breakpoint rules from Grid's / GridItem's Input() columns. Returns e. g. following object:
- * [
-    {
-        "name": "default",
-        "value": "1fr",
-        "breakpoint": "(min-width: 0)"
-    },
-    {
-        "name": "md",
-        "value": "1fr 2fr",
-        "breakpoint": "(min-width: 48em)"
-    },
-    {
-        "name": "xxl",
-        "value": "repeat(6, 1fr)",
-        "breakpoint": "(min-width: 100em)"
-    }
-	]
- */
-export const getGridBreakpointRules = (
-	values: FudisGridColumnsResponsive,
-	defaultValue: string,
-	isGridItem?: boolean
-): FudisBreakpointStyleResponsive[] => {
-	const columnsArray: FudisBreakpointStyleResponsive[] = [];
-
-	if (!values.default) {
-		columnsArray.push({
-			name: 'default',
-			value: defaultValue,
-			breakpoint: fudisBreakpointsMinWidth.default,
-		});
-	}
-
-	Object.keys(values).forEach((key) => {
-		const value = values[key as keyof FudisGridColumnsResponsive]!;
-
-		const valueToForward = getGridCssValue(value, isGridItem);
-
-		columnsArray.push({
-			name: key as keyof FudisGridColumnsResponsive,
-			value: valueToForward,
-			breakpoint: fudisBreakpointsMinWidth[key as keyof FudisGridColumnsResponsive],
-		});
-	});
-
-	return columnsArray;
-};
-
-/**
- * Builds, sorts and validates Grid's / GridItem's Input() columns.
- */
-export const getGridBreakpointDataArray = (
-	value: FudisGridColumnsResponsive,
-	defaultValue: string,
-	isGridItem?: boolean
-): FudisBreakpointStyleResponsive[] => {
-	const columnsArray: FudisBreakpointStyleResponsive[] = getGridBreakpointRules(value, defaultValue, isGridItem);
-
-	const sortOrder: FudisBreakpointKey[] = ['default', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
-
-	const sortedColumnsArray = columnsArray.sort((a, b) => {
-		return sortOrder.indexOf(a.name) - sortOrder.indexOf(b.name);
-	});
-
-	validateColumnInputArray(sortedColumnsArray);
-
-	return sortedColumnsArray;
 };

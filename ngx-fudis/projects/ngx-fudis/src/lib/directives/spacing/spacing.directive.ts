@@ -1,9 +1,9 @@
 import { Directive, ElementRef, OnChanges, OnInit, effect } from '@angular/core';
 import { SpacingApiDirective } from './spacing-api/spacing-api.directive';
 import { defaultSpacingValue, fudisSpacingValues } from '../../types/spacing';
-import { getSpacingBreakpointDataArray } from './spacing-utils';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 import { FudisBreakpointStyleResponsive } from '../../types/breakpoints';
+import { getBreakpointDataArray } from '../../utilities/breakpoint/breakpoint-utils';
 
 @Directive({
 	selector: '[fudisSpacing]',
@@ -79,25 +79,25 @@ export class SpacingDirective extends SpacingApiDirective implements OnInit, OnC
 		if (typeof this.marginTop === 'string') {
 			this._marginTop = fudisSpacingValues[this.marginTop];
 		} else if (this.marginTop) {
-			this._marginTop = getSpacingBreakpointDataArray(this.marginTop, defaultSpacingValue);
+			this._marginTop = getBreakpointDataArray(this.marginTop, defaultSpacingValue);
 		}
 
 		if (typeof this.marginBottom === 'string') {
 			this._marginBottom = fudisSpacingValues[this.marginBottom];
 		} else if (this.marginBottom) {
-			this._marginBottom = getSpacingBreakpointDataArray(this.marginBottom, defaultSpacingValue);
+			this._marginBottom = getBreakpointDataArray(this.marginBottom, defaultSpacingValue);
 		}
 
 		if (typeof this.marginRight === 'string') {
 			this._marginRight = fudisSpacingValues[this.marginRight];
 		} else if (this.marginRight) {
-			this._marginRight = getSpacingBreakpointDataArray(this.marginRight, defaultSpacingValue);
+			this._marginRight = getBreakpointDataArray(this.marginRight, defaultSpacingValue);
 		}
 
 		if (typeof this.marginLeft === 'string') {
 			this._marginLeft = fudisSpacingValues[this.marginLeft];
 		} else if (this.marginLeft) {
-			this._marginLeft = getSpacingBreakpointDataArray(this.marginLeft, defaultSpacingValue);
+			this._marginLeft = getBreakpointDataArray(this.marginLeft, defaultSpacingValue);
 		}
 	}
 

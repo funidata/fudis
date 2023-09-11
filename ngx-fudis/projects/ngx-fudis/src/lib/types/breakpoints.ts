@@ -1,3 +1,5 @@
+import { FudisSpacing } from './miscellaneous';
+
 /**
  * Utility object used with breakpointsMinWidthToObserve and BreakpointObserver
  */
@@ -24,6 +26,9 @@ export const breakpointsMinWidthToObserve = [
 	fudisBreakpointsMinWidth.default,
 ];
 
+/**
+ * All the allowed style attributes that can be given to Grid or Spacing
+ */
 export type FudisBreakpointStyle =
 	| 'margin-top'
 	| 'margin-bottom'
@@ -37,12 +42,18 @@ export type FudisBreakpointStyle =
 /**
  * Object used to apply styles for certain breakpoints
  */
-
 export interface FudisBreakpointStyleResponsive {
 	name: FudisBreakpointKey; // breakpoint e.g md, xl etc.
 	value: string; // value to be applied to spacing attribute
 	breakpoint: string; // breakpoint boundaries for this rule
 }
+
+/**
+ * Responsive settings for different breakpoints
+ */
+export type FudisBreakpointValueResponsive = {
+	[key in FudisBreakpointKey]?: FudisSpacing | string | number;
+};
 
 /**
  * Breakpoint keys to watch

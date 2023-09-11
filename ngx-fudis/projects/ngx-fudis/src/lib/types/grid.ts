@@ -4,7 +4,7 @@
  * -------------------------------------------
  */
 
-import { FudisBreakpointKey } from './breakpoints';
+import { FudisBreakpointKey, FudisBreakpointValueResponsive } from './breakpoints';
 import { FudisSpacing } from './miscellaneous';
 
 /**
@@ -56,7 +56,7 @@ export type FudisGridColumnsResponsive = {
 export interface FudisGridAttributes {
 	alignItemsY?: FudisGridAlignItems;
 	alignItemsX?: FudisGridAlignItems;
-	columns?: FudisGridColumnsResponsive;
+	columns?: FudisBreakpointValueResponsive;
 	width?: FudisGridWidth;
 	align?: FudisGridAlign;
 	marginTop?: FudisSpacing;

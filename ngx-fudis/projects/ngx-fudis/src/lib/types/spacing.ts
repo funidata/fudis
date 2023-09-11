@@ -1,4 +1,4 @@
-import { FudisBreakpointKey } from './breakpoints';
+import { FudisBreakpointKey, FudisBreakpointValueResponsive } from './breakpoints';
 import { FudisSpacing } from './miscellaneous';
 
 /**
@@ -13,10 +13,18 @@ export type FudisSpacingResponsive = {
  */
 export const defaultSpacingValue = '0';
 
+/**
+ * Spacing tokens
+ * TODO: Would be better to not allow string type since we only want to allow spacing directive to take in predefined spacing token values.
+ * This affects in breakpoint-utils.ts when pushing new spacing value to FudisBreakpointStyleResponsive array
+ */
 type FudisSpacingValues = {
-	[key in FudisSpacing | 'default']: string;
+	[key in FudisSpacing | 'default' | string]: string;
 };
 
+/**
+ * Fudis spacing tokens converted to rem values
+ */
 export const fudisSpacingValues: FudisSpacingValues = {
 	xxs: '0.25rem',
 	xs: '0.5rem',
@@ -33,8 +41,8 @@ export const fudisSpacingValues: FudisSpacingValues = {
  * Attributes for managing spacings
  */
 export interface FudisSpacingAttributes {
-	marginTop?: FudisSpacing | FudisSpacingResponsive;
-	marginBottom?: FudisSpacing | FudisSpacingResponsive;
-	marginRight?: FudisSpacing | FudisSpacingResponsive;
-	marginLeft?: FudisSpacing | FudisSpacingResponsive;
+	marginTop?: FudisSpacing | FudisBreakpointValueResponsive;
+	marginBottom?: FudisSpacing | FudisBreakpointValueResponsive;
+	marginRight?: FudisSpacing | FudisBreakpointValueResponsive;
+	marginLeft?: FudisSpacing | FudisBreakpointValueResponsive;
 }
