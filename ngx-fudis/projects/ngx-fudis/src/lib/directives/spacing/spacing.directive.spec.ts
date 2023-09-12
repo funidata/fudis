@@ -10,9 +10,9 @@ import { FudisDropdownMenuItemService } from '../../components/dropdown-menu/dro
 @Component({
 	selector: 'fudis-mock-component',
 	template: `
-		<fudis-button [label]="'Test1'" fudisSpacing [marginTop]="{ sm: 'md', lg: 'xxl' }" />
+		<fudis-button [label]="'Test1'" fudisSpacing [marginTop]="'xxl'" />
 		<fudis-button [label]="'Test2'" fudisSpacing [marginBottom]="'xxs'" />
-		<fudis-button [label]="'Test3'" fudisSpacing [marginLeft]="'xs'" [marginRight]="{ md: 'lg', lg: 'xl' }" />
+		<fudis-button [label]="'Test3'" fudisSpacing [marginLeft]="'xs'" [marginRight]="'lg'" />
 		<fudis-button [label]="'Test4'" />
 	`,
 })
@@ -46,7 +46,7 @@ describe('SpacingDirective', () => {
 	});
 
 	it('should convert given margin inputs to margin shorthand', () => {
-		// Karma doesn't detect breakpoint changes so only the first given margin value inside the breakpoint object is tested
+		// Karma doesn't seem to detect breakpoint changes so only non-responsive margin attributes are tested
 		const elems = getSpacingDirective();
 		const first = elems[0].nativeElement.style.margin;
 		const second = elems[1].nativeElement.style.margin;
@@ -54,6 +54,6 @@ describe('SpacingDirective', () => {
 
 		expect(first).toBe('4rem 0px 0px');
 		expect(second).toBe('0px 0px 0.25rem');
-		expect(third).toBe('0px 2.5rem 0px 0.5rem');
+		expect(third).toBe('0px 2rem 0px 0.5rem');
 	});
 });
