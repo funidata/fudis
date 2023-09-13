@@ -1,10 +1,10 @@
-@use '../../../foundations/borders/mixins.scss' as borders;
-@use '../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../foundations/colors/tokens.scss' as colors;
-@use '../../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../../foundations/utilities/mixins.scss' as utilities;
-@use '../../../foundations/focus/mixins.scss' as focus;
-@use '../../../foundations/typography/mixins.scss' as typography;
+@use '../../../../foundations/borders/mixins.scss' as borders;
+@use '../../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../../foundations/colors/tokens.scss' as colors;
+@use '../../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../../foundations/utilities/mixins.scss' as utilities;
+@use '../../../../foundations/focus/mixins.scss' as focus;
+@use '../../../../foundations/typography/mixins.scss' as typography;
 
 .fudis-checkbox {
 	display: block;
@@ -17,10 +17,10 @@
 		margin: spacing.$spacing-xs;
 		border-radius: 0;
 		cursor: pointer;
-		width: spacing.$spacing-sm;
-		height: spacing.$spacing-sm;
+		width: 1.25rem;
+		height: 1.25rem;
 
-		:focus {
+		&--focused {
 			@include focus.focus-checkbox;
 		}
 
@@ -47,9 +47,11 @@
 	}
 
 	&__icon {
-		position: absolute;
-		top: spacing.$pixel-1;
-		fill: colors.$color-gray-middle;
+    & svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      fill: colors.$color-gray-middle;
+    }
 	}
 
 	&__label {
@@ -58,11 +60,11 @@
 
 		display: flex;
 		align-items: center;
-		margin-bottom: 0;
+		margin-bottom: spacing.$spacing-sm;
 
 		&__text {
 			position: relative;
-			margin-left: spacing.$spacing-lg;
+			margin-left: spacing.$spacing-xl;
 		}
 	}
 

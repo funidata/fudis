@@ -4,6 +4,21 @@ import { FudisLanguageAbbr } from './miscellaneous';
 
 export type FudisInputWidth = 'sm' | 'md' | 'lg';
 
+export interface FudisCheckboxOption {
+	/** Unique id for single checkbox option */
+	id: string;
+	/** Name for the group of checkboxes */
+	name: string;
+	/** Underlying value of the option */
+	value: string | boolean | null;
+	/** Value that is shown in the UI */
+	label: string;
+	/** I s option required */
+	required?: boolean;
+	/** Is option selected */
+	checked?: boolean;
+}
+
 export interface FudisRadioButtonOption {
 	/** Unique id for single radio button option */
 	id: string;

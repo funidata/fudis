@@ -5,6 +5,7 @@ type ComponentType =
 	| 'autocomplete'
 	| 'button'
 	| 'autocompleteMultiSelect'
+	| 'checkboxGroup'
 	| 'checkbox'
 	| 'datepicker'
 	| 'daterange'
@@ -32,6 +33,7 @@ export class FudisIdService {
 		autocomplete: 0,
 		button: 0,
 		autocompleteMultiSelect: 0,
+		checkboxGroup: 0,
 		checkbox: 0,
 		datepicker: 0,
 		daterange: 0,

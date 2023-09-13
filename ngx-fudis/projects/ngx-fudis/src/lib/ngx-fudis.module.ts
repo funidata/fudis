@@ -21,7 +21,8 @@ import { AutocompleteMultiSelectSelectedItemChipComponent } from './components/a
 import { BadgeComponent } from './components/badge/badge.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { ButtonComponent } from './components/button/button.component';
-import { CheckboxComponent } from './components/form/checkbox/checkbox.component';
+import { CheckboxComponent } from './components/form/checkbox-group/checkbox/checkbox.component';
+import { CheckboxGroupComponent } from './components/form/checkbox-group/checkbox-group.component';
 
 import { DateRangeComponent } from './components/form/date/date-range/date-range.component';
 
@@ -158,6 +159,8 @@ import { FudisAlertService } from './services/alert/alert.service';
 		TextInputComponent,
 		TextAreaComponent,
 		TooltipDirective,
+		CheckboxComponent,
+		CheckboxGroupComponent,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
@@ -196,6 +199,7 @@ import { FudisAlertService } from './services/alert/alert.service';
 		BodyTextComponent,
 		ButtonComponent,
 		CheckboxComponent,
+		CheckboxGroupComponent,
 		ContentDirective,
 		DatepickerComponent,
 		DateRangeComponent,

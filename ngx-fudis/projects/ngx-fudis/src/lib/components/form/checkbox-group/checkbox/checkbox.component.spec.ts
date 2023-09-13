@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MockComponent } from 'ng-mocks';
 import { CheckboxComponent } from './checkbox.component';
-import { GuidanceComponent } from '../guidance/guidance.component';
+import { GuidanceComponent } from '../../guidance/guidance.component';
 
 const uncheckedCheckbox: FormControl = new FormControl('false');
 

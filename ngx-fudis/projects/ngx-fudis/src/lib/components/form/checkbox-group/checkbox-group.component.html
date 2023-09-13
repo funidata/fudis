@@ -1,0 +1,21 @@
+<fudis-fieldset
+	[id]="_id"
+	[titleSize]="'sm'"
+	[title]="title"
+	[required]="_required ? _required : undefined"
+	[errorSummaryBreadcrumb]="false">
+	<ng-template fudisContent type="fieldset">
+		<fudis-checkbox
+			*ngFor="let option of options; let index = index"
+			[id]="option.id"
+			[name]="option.name"
+			[value]="option.value"
+			[label]="option.label"
+			[required]="option.required"
+			[checked]="isChecked(option)"
+			(checkboxChange)="toggleChecked(option)"
+			[control]="control"></fudis-checkbox>
+		<fudis-guidance [inputLabel]="title" [helpText]="helpText" [for]="_id" [errorMsg]="errorMsg" [control]="control">
+		</fudis-guidance>
+	</ng-template>
+</fudis-fieldset>

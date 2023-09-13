@@ -3,7 +3,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
-import { FudisDropdownOption, FudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
+import {
+	FudisCheckboxOption,
+	FudisDropdownOption,
+	FudisRadioButtonOption,
+} from 'projects/ngx-fudis/src/lib/types/forms';
 import { untilDestroyed } from 'projects/ngx-fudis/src/lib/utilities/untilDestroyed';
 import { FudisErrorSummaryService } from 'ngx-fudis';
 
@@ -13,6 +17,7 @@ type MyForm = {
 	textArea: FormControl<string | null>;
 	textInput: FormControl<string | null | number>;
 	truth: FormControl<boolean | null>;
+	checkbox: FormControl<FudisCheckboxOption[] | null>;
 	date: FormControl<Date | null>;
 	autocompleteDropdown: FormControl<FudisDropdownOption | null>;
 	autocompleteSearch: FormControl<FudisDropdownOption | null>;
@@ -59,11 +64,18 @@ export class AppFormExampleComponent implements OnInit {
 		]),
 		truth: new FormControl<boolean | null>(null, Validators.required),
 		date: new FormControl<Date | null>(null, Validators.required),
+		checkbox: new FormControl<FudisCheckboxOption[] | null>([], Validators.required),
 		autocompleteDropdown: new FormControl<FudisDropdownOption | null>(null, Validators.required),
 		autocompleteSearch: new FormControl<FudisDropdownOption | null>(null),
 	});
 
 	radioButtonOptions: FudisRadioButtonOption[] = [];
+
+	checkboxOptions: FudisCheckboxOption[] = [];
+
+	selectedOptions: FudisCheckboxOption[] = [];
+
+	checkboxHelpText = 'Valitse vähintään kolme herkkua';
 
 	private _untilDestroyed = untilDestroyed();
 
@@ -76,6 +88,13 @@ export class AppFormExampleComponent implements OnInit {
 					{ value: true, viewValue: value.chooseTruthTrue, id: 'boolean-2', name: 'booleans' },
 					{ value: false, viewValue: value.chooseTruthFalse, id: 'boolean-1', name: 'booleans' },
 				];
+				this.checkboxOptions = [
+					{ value: 'banaani', label: 'Banaani', id: 'ruoka-1', name: 'Herkkuja', required: true },
+					{ value: 'porkkana', label: 'Porkkana', id: 'ruoka-2', name: 'Herkkuja', checked: true },
+					{ value: 'tomaatti', label: 'Tomaatti', id: 'ruoka-3', name: 'Herkkuja' },
+					{ value: 'mansikka', label: 'Mansikka', id: 'ruoka-4', name: 'Herkkuja' },
+				];
+				this.selectedOptions = [this.checkboxOptions[1]];
 			});
 	}
 
@@ -90,5 +109,9 @@ export class AppFormExampleComponent implements OnInit {
 			this.errorSummaryVisible = false;
 			this.showSuccessBodyText = true;
 		}
+	}
+
+	toggleChecked(selected: FudisCheckboxOption[]): void {
+		this.selectedOptions = selected;
 	}
 }
