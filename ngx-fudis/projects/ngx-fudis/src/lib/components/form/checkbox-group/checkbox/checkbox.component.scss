@@ -1,3 +1,6 @@
+/* stylelint-disable selector-max-class */
+/* stylelint-disable unit-disallowed-list */
+/* stylelint-disable prettier/prettier */
 @use '../../../../foundations/borders/mixins.scss' as borders;
 @use '../../../../foundations/spacing/tokens.scss' as spacing;
 @use '../../../../foundations/colors/tokens.scss' as colors;
@@ -6,35 +9,62 @@
 @use '../../../../foundations/focus/mixins.scss' as focus;
 @use '../../../../foundations/typography/mixins.scss' as typography;
 
+.fudis-checkbox-host {
+	margin-bottom: spacing.$spacing-sm;
+}
+
 .fudis-checkbox {
-	display: block;
+	@include typography.body-text-md-regular;
+	@include colorMixins.text-color('gray-dark');
+
+	display: inline-block;
+	position: relative;
 	width: auto;
 
-	&__box {
-		@include borders.border('1px', 'solid', 'gray-middle');
+	&__content {
+		display: inline-flex;
+		align-items: center;
 
-		position: absolute;
-		margin: spacing.$spacing-xs;
-		border-radius: 0;
-		cursor: pointer;
-		width: 1.25rem;
-		height: 1.25rem;
+		&__box {
+			@include borders.border('1px', 'solid', 'gray-middle');
+	
+			position: absolute;
+			margin: spacing.$spacing-xs;
+			border-radius: 0;
+			cursor: pointer;
+			width: 1.25rem;
+			height: 1.25rem;
 
-		&--focused {
-			@include focus.focus-checkbox;
+			&__icon {
+				/* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
+				& svg {
+					width: 1.25rem;
+					height: 1.25rem;
+					fill: colors.$color-gray-middle;
+				}
+			}
+	
+			&--focused {
+				@include focus.focus-checkbox;
+			}
+			
+			&--disabled {
+				@include borders.border('1px', 'dashed', 'gray-middle');
+				@include colorMixins.bg-color('gray-extra-light');
+	
+				cursor: default;
+			}
+	
+			&--invalid {
+				@include borders.border('1px', 'solid', 'red');
+	
+				box-shadow: 0 0 0 spacing.$pixel-3 colors.$color-red-light;
+			}
 		}
 
-		&--disabled {
-			@include borders.border('1px', 'dashed', 'gray-middle');
-			@include colorMixins.bg-color('gray-extra-light');
-
-			cursor: default;
-		}
-
-		&--invalid {
-			@include borders.border('1px', 'solid', 'red');
-
-			box-shadow: 0 0 0 spacing.$pixel-3 colors.$color-red-light;
+		&__label {
+			position: relative;
+			margin-left: spacing.$spacing-xl;
 		}
 	}
 
@@ -44,27 +74,10 @@
 		appearance: none;
 		display: grid;
 		place-content: center;
-	}
 
-	&__icon {
-    & svg {
-      width: 1.25rem;
-      height: 1.25rem;
-      fill: colors.$color-gray-middle;
-    }
-	}
-
-	&__label {
-		@include typography.body-text-md-regular;
-		@include colorMixins.text-color('gray-dark');
-
-		display: flex;
-		align-items: center;
-		margin-bottom: spacing.$spacing-sm;
-
-		&__text {
-			position: relative;
-			margin-left: spacing.$spacing-xl;
+		/* stylelint-disable-next-line selector-class-pattern */
+		&:focus + .fudis-checkbox__content .fudis-checkbox__content__box {
+			@include focus.focus-form-field;
 		}
 	}
 
