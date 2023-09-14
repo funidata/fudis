@@ -4,7 +4,13 @@
 import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 import { TranslocoService } from '@ngneat/transloco';
-import { FudisAlertService, FudisDialogService, FudisGridService, FudisTranslationService } from 'ngx-fudis';
+import {
+	FudisAlertService,
+	FudisDialogService,
+	FudisGridService,
+	FudisTranslationService,
+	FudisBreakpointService,
+} from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
 
 import { FudisDropdownOption } from 'dist/ngx-fudis/lib/types/forms';
@@ -24,7 +30,9 @@ export class AppComponent implements OnInit {
 		private _translocoService: TranslocoService,
 		private _gridService: FudisGridService,
 		private _fudisLanguage: FudisTranslationService,
-		private _alertService: FudisAlertService
+		private _alertService: FudisAlertService,
+
+		private _breakpointService: FudisBreakpointService
 	) {
 		_gridService.setGridDefaultValues({
 			columns: { xs: 1, lg: 2 },

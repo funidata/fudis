@@ -76,6 +76,7 @@ import { NotificationComponent } from './components/notification/notification.co
 import { RadioButtonComponent } from './components/form/radio-button-group/radio-button/radio-button.component';
 import { RadioButtonGroupComponent } from './components/form/radio-button-group/radio-button-group.component';
 import { SectionComponent } from './components/section/section.component';
+import { SpacingApiDirective } from './directives/spacing/spacing-api/spacing-api.directive';
 import { SpacingDirective } from './directives/spacing/spacing.directive';
 import { TextInputComponent } from './components/form/text-input/text-input.component';
 
@@ -93,6 +94,7 @@ import { FudisLanguageBadgeGroupService } from './services/language-badge-group/
 import { AlertComponent } from './components/alert/alert/alert.component';
 import { AlertGroupComponent } from './components/alert/alert-group/alert-group.component';
 import { FudisAlertService } from './services/alert/alert.service';
+import { FudisBreakpointService } from './services/breakpoint/breakpoint.service';
 
 @NgModule({
 	/*
@@ -154,6 +156,7 @@ import { FudisAlertService } from './services/alert/alert.service';
 		RadioButtonComponent,
 		RadioButtonGroupComponent,
 		SectionComponent,
+		SpacingApiDirective,
 		SpacingDirective,
 		TextInputComponent,
 		TextAreaComponent,
@@ -234,12 +237,14 @@ import { FudisAlertService } from './services/alert/alert.service';
 		NotificationsDirective,
 		RadioButtonGroupComponent,
 		SectionComponent,
+		SpacingDirective,
 		TextAreaComponent,
 		TextInputComponent,
 		TooltipDirective,
 	],
 	providers: [
 		FudisAlertService,
+		FudisBreakpointService,
 		FudisDialogService,
 		FudisDropdownMenuItemService,
 		FudisErrorSummaryService,

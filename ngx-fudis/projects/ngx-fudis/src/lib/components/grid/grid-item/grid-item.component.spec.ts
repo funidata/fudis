@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GridItemComponent } from './grid-item.component';
 import { FudisGridService } from '../../../services/grid/grid.service';
+import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 
 describe('GridItemComponent', () => {
 	let component: GridItemComponent;
@@ -10,7 +11,7 @@ describe('GridItemComponent', () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			declarations: [GridItemComponent],
-			providers: [FudisGridService],
+			providers: [FudisGridService, FudisBreakpointService],
 		});
 		fixture = TestBed.createComponent(GridItemComponent);
 		component = fixture.componentInstance;

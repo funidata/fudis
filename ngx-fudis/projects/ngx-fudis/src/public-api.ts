@@ -63,7 +63,7 @@ export { NotificationsDirective } from './lib/directives/content-projection/noti
 export { NotificationComponent } from './lib/components/notification/notification.component';
 
 export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
-// export { SpacingDirective } from './lib/directives/spacing/spacing.directive';
+export { SpacingDirective } from './lib/directives/spacing/spacing.directive';
 export { SectionComponent } from './lib/components/section/section.component';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';
 export { TextInputComponent } from './lib/components/form/text-input/text-input.component';
@@ -75,3 +75,4 @@ export { FudisFormGroupValidators } from './lib/utilities/form/validators';
 export { AlertComponent } from './lib/components/alert/alert/alert.component';
 export { AlertGroupComponent } from './lib/components/alert/alert-group/alert-group.component';
 export { FudisAlertService } from './lib/services/alert/alert.service';
+export { FudisBreakpointService } from './lib/services/breakpoint/breakpoint.service';

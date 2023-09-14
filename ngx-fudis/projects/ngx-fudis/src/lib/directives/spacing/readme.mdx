@@ -1,0 +1,45 @@
+import { ArgTypes, Meta, Canvas, Controls } from '@storybook/blocks';
+import { linkTo } from '@storybook/addon-links';
+import { SpacingDirective } from './spacing.directive.ts';
+import * as SpacingStories from './spacing.stories.ts';
+
+<Meta title="Directives/Spacing" />
+
+# Spacing
+
+Spacing directive allows you to add responsive margin attributes for desired components. Allowed inputs are same as Fudis Foundation [spacing tokens](/docs/foundations-spacing--documentation) from `xxs` to `xxl`. Default value is always `0`.
+
+## Usage Guidelines
+
+Spacing directive works similarly as when applying `columns` to [Grid directive](/docs/components-grid-grid--documentation). It can either be assigned as single static value for all breakpoints or as an object to define different margin for different breakpoints.
+
+### Allowed attributes
+
+Spacing directive can take in four Input values: `marginTop`, `marginBottom`, `marginRight` and `marginLeft`. These are separate Inputs and `margin` shorthand is not yet available.
+
+Below is **non-responsive** example. The same margin-top value will be applied throughout all screen sizes.
+```
+<fudis-button fudisSpacing [marginTop]="'md'" />
+```
+
+Below is **responsive** example. Margin-top and margin-left will be adjusted to given breakpoints. More information on breakpoints, see Fudis Foundation [breakpoints](/docs/foundations-breakpoints--documentation) documentation.
+```
+<fudis-button 
+	fudisSpacing 
+	[marginTop]={sm: 'xs', md: 'lg', xxl: 'xxl'} 
+	[marginLeft]={sm: 'xxs', lg: 'xl'} />
+```
+
+## Examples
+
+### With single value for all breakpoints
+
+<Canvas of={SpacingStories.Example}></Canvas>
+
+### With varying values for different breakpoints
+
+<Canvas of={SpacingStories.ResponsiveExample}></Canvas>
+
+## Properties
+
+<ArgTypes of={SpacingDirective} />
