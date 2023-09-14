@@ -1,5 +1,4 @@
 import { Directive, ElementRef, OnChanges, OnInit, Input, effect } from '@angular/core';
-import { FudisGridService } from '../../../services/grid/grid.service';
 import {
 	FudisGridItemAlignment,
 	FudisGridItemAlignResponsive,
@@ -18,7 +17,6 @@ import { getBreakpointDataArray } from '../../../utilities/breakpoint/breakpoint
 export class GridItemDirective implements OnInit, OnChanges {
 	constructor(
 		private _gridItemElement: ElementRef,
-		private _gridService: FudisGridService,
 		private _breakpointService: FudisBreakpointService
 	) {
 		this._element = _gridItemElement.nativeElement;
