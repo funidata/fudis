@@ -1,6 +1,5 @@
 import { Component, Input, HostBinding, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { FudisBodyText } from '../../../types/typography';
-import { FudisSpacing } from '../../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-body-text',
@@ -21,9 +20,12 @@ export class BodyTextComponent {
 	@Input() size: FudisBodyText = 'md-regular';
 
 	/**
-	 * Optional margin bottom
+	 * Option to change text color if background is not compatible with dark text
 	 */
-	@Input() marginBottom: FudisSpacing = 'none';
-
 	@Input() color: 'default' | 'white' = 'default';
+
+	/**
+	 * Align body-text
+	 */
+	@Input() align: 'left' | 'right' | 'center' = 'left';
 }
