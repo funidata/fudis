@@ -1,14 +1,11 @@
 import { Directive, ElementRef, OnChanges, OnInit, Signal, effect } from '@angular/core';
-
-import { getGridBreakpointDataArray, getGridClasses, getGridCssValue, replaceFormInputWidthsToRem } from '../gridUtils';
+import { getGridClasses, getGridCssValue, replaceFormInputWidthsToRem } from '../gridUtils';
 import { GridApiDirective } from '../grid-api/grid-api.directive';
-import {
-	FudisGridColumnsResponsive,
-	FudisGridResponsiveData,
-	gridColumnDefault,
-	FudisGridAttributes,
-} from '../../../types/grid';
+import { FudisGridColumnsResponsive, gridColumnDefault, FudisGridAttributes } from '../../../types/grid';
 import { FudisGridService } from '../../../services/grid/grid.service';
+import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
+import { FudisBreakpointStyleResponsive } from '../../../types/breakpoints';
+import { getBreakpointDataArray } from '../../../utilities/breakpoint/breakpoint-utils';
 
 @Directive({
 	selector: '[fudisGrid]',
@@ -16,6 +13,7 @@ import { FudisGridService } from '../../../services/grid/grid.service';
 export class GridDirective extends GridApiDirective implements OnInit, OnChanges {
 	constructor(
 		private _gridElement: ElementRef,
+		private _breakpointService: FudisBreakpointService,
 		gridService: FudisGridService
 	) {
 		super();
@@ -27,7 +25,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		 * When screen is resized check and apply new rules for Grid columns
 		 */
 		effect(() => {
-			this._gridService.getBreakpointState();
+			this._breakpointService.getBreakpointState();
 
 			if (typeof this._columns !== 'string' && typeof this._columns !== 'number') {
 				this._setColumns();
@@ -38,7 +36,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	/**
 	 * Used to apply grid-template-columns values for the Grid
 	 */
-	protected _columns: string | FudisGridResponsiveData[] = gridColumnDefault;
+	protected _columns: string | FudisBreakpointStyleResponsive[] = gridColumnDefault;
 
 	/**
 	 * Internal reference for the this Grid element
@@ -61,7 +59,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		if (this.columns) {
 			this._defineColumns();
 		} else if (!this.ignoreDefaults && this._gridDefaults()?.columns) {
-			this._columns = getGridBreakpointDataArray(this._gridDefaults()!.columns!, gridColumnDefault);
+			this._columns = getBreakpointDataArray(this._gridDefaults()!.columns!, gridColumnDefault);
 		}
 		this._applyGridCss();
 	}
@@ -70,7 +68,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		if (this.columns) {
 			this._defineColumns();
 		} else if (!this.ignoreDefaults && this._gridDefaults()?.columns) {
-			this._columns = getGridBreakpointDataArray(this._gridDefaults()?.columns!, gridColumnDefault);
+			this._columns = getBreakpointDataArray(this._gridDefaults()?.columns!, gridColumnDefault);
 		}
 		this._applyGridCss();
 	}
@@ -87,9 +85,9 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 		else if (!this.ignoreDefaults && this._gridDefaults()?.columns !== null) {
 			const combinedValues: FudisGridColumnsResponsive = { ...this._gridDefaults()!.columns, ...this.columns };
 
-			this._columns = getGridBreakpointDataArray(combinedValues, gridColumnDefault);
+			this._columns = getBreakpointDataArray(combinedValues, gridColumnDefault);
 		} else {
-			this._columns = getGridBreakpointDataArray(this.columns, gridColumnDefault);
+			this._columns = getBreakpointDataArray(this.columns, gridColumnDefault);
 		}
 	}
 
@@ -97,7 +95,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	 * Set CSS grid-template-column attributes for this Grid element
 	 */
 	private _setColumns(): void {
-		this._gridService.setGridAttributes(this._element, this._columns);
+		this._breakpointService.setStyleAttributes(this._element, 'grid-template-columns', this._columns);
 	}
 
 	/**

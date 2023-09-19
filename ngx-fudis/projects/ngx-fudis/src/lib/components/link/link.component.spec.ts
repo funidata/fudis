@@ -64,4 +64,49 @@ describe('LinkComponent', () => {
 			);
 		});
 	});
+
+	describe('Link with routerUrl component', () => {
+		it('should have router link', () => {
+			component.routerLinkUrl = '/some/routerUrl';
+			fixture.detectChanges();
+
+			expect(fixture.nativeElement.querySelector('a').getAttribute('href')).toEqual('/some/routerUrl');
+		});
+
+		it('should have fragment link', () => {
+			component.routerLinkUrl = '/some/routerUrl';
+			component.fragmentId = 'test-fragment-id';
+			fixture.detectChanges();
+
+			expect(fixture.nativeElement.querySelector('a').getAttribute('href')).toEqual('/some/routerUrl#test-fragment-id');
+		});
+	});
+
+	describe('Link with initial focus', () => {
+		it('should have focus after first load', () => {
+			component.initialFocus = true;
+			fixture.detectChanges();
+
+			const linkElement = fixture.nativeElement.querySelector('a');
+
+			spyOn(linkElement, 'focus');
+
+			component.ngAfterViewInit();
+
+			expect(linkElement.focus).toHaveBeenCalledWith();
+		});
+
+		it('should NOT have focus after first load', () => {
+			component.initialFocus = false;
+			fixture.detectChanges();
+
+			const linkElement = fixture.nativeElement.querySelector('a');
+
+			spyOn(linkElement, 'focus');
+
+			component.ngAfterViewInit();
+
+			expect(linkElement.focus).not.toHaveBeenCalledWith();
+		});
+	});
 });

@@ -7,7 +7,7 @@ import { AlertGroupComponent } from './alert-group/alert-group.component.ts';
 
 # Alert Group
 
-`Alert Group` component displays list of toaster like `Alert` components with four variants: `success`, `info`, `warning` and `danger.` These variants are same ones as with `Notification` component.
+`Alert Group` component displays list of toaster-like `Alert` components with four variants: `success`, `info`, `warning` and `danger.` These variants are same ones as with `Notification` component.
 
 ## Adding and dismissing Alerts
 
@@ -75,7 +75,7 @@ When user click alert's close button, it will dismiss that single alert from the
 
 Usually Alert Group is positioned to the top of the screen right after navigation.
 
-CSS `position` of Alert Group can be set using `position` attribute. By default it is `fixed` but can be as well `static` or `absolute` currently.
+CSS `position` of Alert Group can be set using `position` attribute with three currently provided options. By default it is `fixed` but can be set to `static` or `absolute` as well.
 
 Fudis automatically embeddes Alert Group inside every Dialog, so that new and existing alerts are visible and available for keyboard users when Dialog is open.
 
@@ -83,7 +83,7 @@ Fudis automatically embeddes Alert Group inside every Dialog, so that new and ex
 
 ### Alerts without a link
 
-Alerts without links are readout to screen readers, as they have html attribute of `role='alert'`. Focus does not change even if a new alert appears.
+Alerts without links and with variant `danger` or `warning` are communicated to screen readers, as they have html attribute of `role='alert'`. Other variants have `role='status'`. Focus does not change even if new alert appears.
 
 ### With links
 
@@ -100,7 +100,7 @@ Fudis Dialog has a focus trap, so that keyboard are not able to navigate outside
 ### Other mentionable accessibility details
 
 - Focusable elements inside alert have visible focus state.
-- Alert without a link is readout to user using `role='alert'` attribute.
+- `Danger` and `warning` alerts without links are communicated to user using `role='alert'` attribute.
 - Contrast between background colors and text meet accessibility criteria.
 - Alert Group is wrapped inside a `section` element which has an automatic `aria-label` describing its content. E. g. 'Notifications - Number of notifications: 5'
 - Elements used in Alert Group have proper labels as needed for screen reader users.

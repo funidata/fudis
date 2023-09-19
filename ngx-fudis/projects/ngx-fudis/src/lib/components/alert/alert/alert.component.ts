@@ -1,4 +1,4 @@
-import { Component, Inject, Input, effect } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output, effect } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FudisNotification } from '../../../types/miscellaneous';
 import { FudisFocusService } from '../../../services/focus/focus.service';
@@ -60,6 +60,11 @@ export class AlertComponent {
 	@Input() initialFocus: boolean = false;
 
 	/**
+	 * Output for when Close button is clicked
+	 */
+	@Output() handleClose = new EventEmitter<Event>();
+
+	/**
 	 * Label for close button, fetched from FudisTranslationService
 	 */
 	protected _closeLabel: string;
@@ -67,7 +72,7 @@ export class AlertComponent {
 	/**
 	 * Handler for close button. Dismisses alert from service and sets focus to last alert in the list or to previously focused element stored with _handleFocus().
 	 */
-	protected _handleCloseClick(): void {
+	protected _handleCloseClick(event: Event): void {
 		this._alertService.dismissAlertFromButton(this.buttonId);
 
 		const alerts = this._alertService.getAlertsSignal()();
@@ -79,6 +84,8 @@ export class AlertComponent {
 			const target: HTMLElement = this._focusService.getFocusTarget();
 			target?.focus();
 		}
+
+		this.handleClose.emit(event);
 	}
 
 	/**

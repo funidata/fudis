@@ -12,6 +12,7 @@ import {
 import { GridItemComponent } from '../grid/grid-item/grid-item.component';
 import { LinkComponent } from '../link/link.component';
 import { IconComponent } from '../icon/icon.component';
+import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 
 @Component({
 	selector: 'fudis-mock-footer',
@@ -44,7 +45,7 @@ describe('FooterComponent', () => {
 				MockFooterComponent,
 				MockComponent(IconComponent),
 			],
-			providers: [FudisGridService],
+			providers: [FudisGridService, FudisBreakpointService],
 		}).compileComponents();
 	});
 

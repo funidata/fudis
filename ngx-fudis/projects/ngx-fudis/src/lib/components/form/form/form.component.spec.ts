@@ -6,6 +6,7 @@ import { BodyTextComponent } from '../../typography/body-text/body-text.componen
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisGridService } from '../../../services/grid/grid.service';
+import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 
 describe('FormComponent', () => {
 	let component: FormComponent;
@@ -14,7 +15,7 @@ describe('FormComponent', () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			declarations: [FormComponent, HeadingComponent, BodyTextComponent, GridDirective],
-			providers: [FudisIdService, FudisGridService],
+			providers: [FudisIdService, FudisGridService, FudisBreakpointService],
 		});
 		fixture = TestBed.createComponent(FormComponent);
 		component = fixture.componentInstance;

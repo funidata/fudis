@@ -19,9 +19,7 @@ export class AlertGroupComponent implements AfterViewInit {
 	) {
 		effect(() => {
 			this._alertList = this._alertService.getAlertsSignal();
-			this._alertGroupLabel = `${this._translationService.getTranslations()().ALERT.HEADING_LABEL}: ${
-				this._alertList().length
-			}`;
+			this._alertGroupLabel = this._translationService.getTranslations()().ALERT.HEADING_LABEL;
 
 			this._dialogStatus = this._dialogService.getDialogOpenSignal()();
 
@@ -50,17 +48,24 @@ export class AlertGroupComponent implements AfterViewInit {
 	protected _alertGroupLabel: string;
 
 	/**
-	 * Boolean from service to determine if Fudis Dialog is open.
-	 */
-	protected _dialogStatus: boolean;
-
-	/**
 	 * Boolean to determine if Alert group is visible. Used with _dialogStatus boolean.
 	 */
 	protected _visible: boolean = false;
 
+	/**
+	 * Boolean from service to determine if Fudis Dialog is open.
+	 */
+	private _dialogStatus: boolean;
+
 	ngAfterViewInit(): void {
 		this._setVisibility();
+	}
+
+	/**
+	 * Getter for visible status
+	 */
+	public getVisibleStatus(): boolean {
+		return this._visible;
 	}
 
 	/**

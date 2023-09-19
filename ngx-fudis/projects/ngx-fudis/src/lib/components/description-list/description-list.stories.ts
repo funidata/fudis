@@ -17,7 +17,7 @@ import { FudisLanguageAbbr } from '../../types/miscellaneous';
 })
 class LanguageChangeComponent {
 	constructor(private _languageService: FudisLanguageBadgeGroupService) {
-		this._languageService.setLanguages(['sv', 'fi', 'en']);
+		this._languageService.setLanguages(['fi', 'sv', 'en']);
 	}
 
 	changeBadgeLanguages(languages: FudisLanguageAbbr[]): void {
@@ -190,6 +190,7 @@ const DescriptionListWithLanguagesTemplate: StoryFn<DescriptionListComponent> = 
 			<fudis-description-list-item>
 				<fudis-dt [languages]="true">Example without one language</fudis-dt>
 				<fudis-dd [lang]="'fi'">Tähtien sota</fudis-dd>
+				<fudis-dd [lang]="'en'"></fudis-dd>
 				<fudis-dd [lang]="'sv'">Stjärnornas krig </fudis-dd>
 			</fudis-description-list-item>
 		</fudis-description-list>

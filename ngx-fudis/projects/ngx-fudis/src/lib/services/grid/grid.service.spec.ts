@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { FudisGridService } from './grid.service';
 
 describe('FudisGridService', () => {

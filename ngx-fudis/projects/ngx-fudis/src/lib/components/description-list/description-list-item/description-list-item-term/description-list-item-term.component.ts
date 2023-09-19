@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, Host, Input, Signal, ViewEncapsulation, effect } from '@angular/core';
-import { FudisLanguageAbbr } from '../../../../types/miscellaneous';
+import { AfterContentInit, Component, ElementRef, Host, Input, Signal, ViewEncapsulation, effect } from '@angular/core';
+import { FudisLanguageAbbr, FudisLanguageBadgeContent } from '../../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { FudisLanguageBadgeGroupService } from '../../../../services/language-badge-group/language-badge-group.service';
@@ -10,7 +10,7 @@ import { FudisLanguageBadgeGroupService } from '../../../../services/language-ba
 	styleUrls: ['./description-list-item-term.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class DescriptionListItemTermComponent implements AfterViewInit {
+export class DescriptionListItemTermComponent implements AfterContentInit {
 	constructor(
 		private _elementRef: ElementRef,
 		private _translationService: FudisTranslationService,
@@ -32,7 +32,7 @@ export class DescriptionListItemTermComponent implements AfterViewInit {
 	/**
 	 * Available languages of sibling dt elements fetched from the parent dl-item element
 	 */
-	protected _parentLanguageOptions: FudisLanguageAbbr[];
+	protected _parentLanguageOptions: FudisLanguageBadgeContent;
 
 	/**
 	 * Filtered array, where DOM is compared with Language config set in FudisLanguageBadgeGroupService
@@ -59,7 +59,7 @@ export class DescriptionListItemTermComponent implements AfterViewInit {
 	 */
 	private _firstLoadFinished: boolean = false;
 
-	ngAfterViewInit(): void {
+	ngAfterContentInit(): void {
 		this.setLanguageOptions();
 	}
 
@@ -82,7 +82,7 @@ export class DescriptionListItemTermComponent implements AfterViewInit {
 		/**
 		 * Compare config lang array with available DOM elements
 		 */
-		this._availableLanguages = this._languageOptions().filter((item) => this._parentLanguageOptions.includes(item));
+		this._availableLanguages = this._languageOptions().filter((item) => this._parentLanguageOptions[item]);
 
 		/**
 		 * On first load, set current language as selected, else just select first available language as selected.
