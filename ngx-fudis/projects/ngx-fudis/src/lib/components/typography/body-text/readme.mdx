@@ -9,13 +9,23 @@ import * as BodyTextStories from './body-text.stories.ts';
 
 Body text is essentially a paragraph element which inherits Fudis font-family.
 There are five size options available: `lg-regular`, `lg-light`, `md-regular`, `md-light` and `sm-regular`.
-In addition, optional margin bottom can be added to each individual body text element if needed. Margin bottom uses fudis spacing token sizes.
 
 More information about typography can be found under [Foundations/Typography](/docs/foundations-typography--documentation)
 
 ## Examples
 
 <Canvas of={BodyTextStories.AllVariants}></Canvas>
+
+## Usage Guidelines
+
+In addition to paragraph size, fudis-body-text can be modified through `align` and `color` properties. [Fudis spacing directive](/docs/directives-spacing--documentation) is applicable to body-text component as well.
+
+```
+<fudis-body-text
+	[align]="'center'" 
+	[color]="'white'" 
+	fudisSpacing [marginBottom]="'xs'" />
+```
 
 ### Accessibility
 
