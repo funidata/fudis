@@ -25,7 +25,8 @@
 			"outline",
 			"font-size",
 			"line-height",
-			"font-family"
+			"font-family",
+			"z-index"
 		]
 	}
 }
