@@ -1,9 +1,3 @@
-/**
- * -------------------------------------------
- * Common types shared with Grid and Grid Item
- * -------------------------------------------
- */
-
 import { FudisBreakpointKey, FudisBreakpointValueResponsive } from './breakpoints';
 import { FudisSpacing } from './miscellaneous';
 

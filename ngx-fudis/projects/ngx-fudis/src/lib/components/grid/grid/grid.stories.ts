@@ -195,7 +195,7 @@ const ResponsiveColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent) 
 				Grids.</fudis-body-text
 			>
 			<fudis-body-text class="text-margin"
-				>If you set default values and provide values values for single Grid, values are combined.
+				>If you set default values and provide values for single Grid, values are combined.
 			</fudis-body-text>
 			<fudis-body-text>
 				E. g. with default values of {{defaultObject}} and provided Grid values of {{columnObjectTwo}} applied values

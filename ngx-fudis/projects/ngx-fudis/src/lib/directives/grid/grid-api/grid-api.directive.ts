@@ -34,7 +34,7 @@ export class GridApiDirective {
 	@Input() classes: string[];
 
 	/**
-	 * Grid column gap. Using Fudis spacing token values of xxs to xxl and 0.
+	 * Grid column gap. Using Fudis spacing token values of xxs to xxl and none.
 	 */
 	@Input() columnGap: FudisGridGap;
 
@@ -72,7 +72,7 @@ export class GridApiDirective {
 	@Input() marginTop: FudisSpacing;
 
 	/**
-	 * Grid row gap. Using Fudis spacing token values of xxs to xxl and 0.
+	 * Grid row gap. Using Fudis spacing token values of xxs to xxl and none.
 	 */
 	@Input() rowGap: FudisGridGap;
 

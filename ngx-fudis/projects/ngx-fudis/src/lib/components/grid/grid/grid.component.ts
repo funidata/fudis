@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 
 @Component({
@@ -10,7 +9,7 @@ import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 })
 
 /**
- * Just a wrapper element to able to use Grid in templates using '<fudis-grid></fudis-grid>' tags.
+ * Just a wrapper element to be able to use Grid in templates using '<fudis-grid></fudis-grid>' tags.
  * Main functionality is in GridDirective
  */
 export class GridComponent extends GridDirective {}
