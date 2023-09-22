@@ -1,6 +1,6 @@
 import { StoryFn, Meta, componentWrapperDecorator } from '@storybook/angular';
-
 import { GridItemComponent } from './grid-item.component';
+import readme from './readme.mdx';
 
 const html = String.raw;
 
@@ -8,6 +8,9 @@ export default {
 	title: 'Components/Grid/Grid Item',
 	component: GridItemComponent,
 	parameters: {
+		docs: {
+			page: readme,
+		},
 		controls: {
 			exclude: [
 				'ngOnChanges',
