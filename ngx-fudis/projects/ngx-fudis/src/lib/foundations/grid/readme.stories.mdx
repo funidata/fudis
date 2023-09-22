@@ -5,7 +5,7 @@ import { Meta } from '@storybook/blocks';
 # Grid
 
 Fudis provides an extensive grid component with many possibilities to adjust its attributes to cater most cases.
-Here are some best practices and suggestions how to get the best out of Fudis Grid. More hands-on examples can be found under Components section, in [Grid](/docs/components-grid-grid--documentation) and [GridItem](/docs/components-grid-grid-item--documentation).
+Here are some best practices and suggestions how to get the best out of Fudis Grid. More illustrative and hands-on examples can be found under Components section, in [Grid](/docs/components-grid-grid--documentation) and [GridItem](/docs/components-grid-grid-item--documentation).
 
 ## How to start
 Start using the grid by simply surrounding wanted content with grid tags: 
@@ -98,7 +98,7 @@ It can take values from `xxl` to `xs` and `initial`, e.g `[width]="'lg'"`
 Grid can have grid-items as its children. With grid-item you can target certain rules to specific element. There are two ways to use grid-item, through `fudisGridItem` directive or `<fudis-grid-item>` tag. Following properties are available:
 
 #### Columns
-Just like grid itself, grid-item can be adjusted with `columns` attribute, you can pass string, number or object to it.
+Just like grid itself, grid-item can be adjusted with `columns` attribute. You can pass string, number or object to it, e.g `[columns]="{ sm: 2, md: 4, xxl: 6 }"`.
 
 #### AlignX
 Align single grid-item element horizontally `start`, `center`, `end` or `stretch`, e.g `[alignX]="'start'"`.
