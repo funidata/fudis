@@ -57,16 +57,18 @@ describe('GridItemDirective', () => {
 		return fixture.debugElement.queryAll(By.directive(GridItemDirective));
 	}
 
-	function getAlignXAttribute(index: number) {
-		return getGridItemDirective()[index].nativeElement.style.justifySelf;
-	}
-
-	function getAlignYAttribute(index: number) {
-		return getGridItemDirective()[index].nativeElement.style.alignSelf;
-	}
-
-	function getColumnsAttribute(index: number) {
-		return getGridItemDirective()[index].nativeElement.style.gridColumn;
+	// eslint-disable-next-line consistent-return
+	function getAttribute(index: number, attr: string) {
+		switch (attr) {
+			case 'justify-self':
+				return getGridItemDirective()[index].nativeElement.style.justifySelf;
+			case 'align-self':
+				return getGridItemDirective()[index].nativeElement.style.alignSelf;
+			case 'grid-column':
+				return getGridItemDirective()[index].nativeElement.style.gridColumn;
+			default:
+				break;
+		}
 	}
 
 	function getDefaultCSSClass(index: number) {
@@ -81,9 +83,7 @@ describe('GridItemDirective', () => {
 
 	describe('GridItem Directive', () => {
 		it('should find elements with fudisGridItem directive', () => {
-			const elements = getGridItemDirective();
-
-			expect(elements.length).toEqual(2);
+			expect(getGridItemDirective().length).toEqual(2);
 		});
 
 		it('should have respective grid-item CSS class present', () => {
@@ -96,40 +96,40 @@ describe('GridItemDirective', () => {
 		it('should convert alignX and alignY attributes to style properties', () => {
 			fixture.detectChanges();
 
-			expect(getAlignXAttribute(1)).toBe('stretch');
-			expect(getAlignYAttribute(1)).toBe('stretch');
+			expect(getAttribute(1, 'justify-self')).toBe('stretch');
+			expect(getAttribute(1, 'align-self')).toBe('stretch');
 
 			component.alignY = 'end';
 			component.alignX = 'end';
 			fixture.detectChanges();
 
-			expect(getAlignXAttribute(1)).toBe('end');
-			expect(getAlignYAttribute(1)).toBe('end');
+			expect(getAttribute(1, 'justify-self')).toBe('end');
+			expect(getAttribute(1, 'align-self')).toBe('end');
 
 			component.alignY = 'start';
 			component.alignX = 'start';
 			fixture.detectChanges();
 
-			expect(getAlignXAttribute(1)).toBe('start');
-			expect(getAlignYAttribute(1)).toBe('start');
+			expect(getAttribute(1, 'justify-self')).toBe('start');
+			expect(getAttribute(1, 'align-self')).toBe('start');
 
 			component.alignY = 'center';
 			component.alignX = 'center';
 			fixture.detectChanges();
 
-			expect(getAlignXAttribute(1)).toBe('center');
-			expect(getAlignYAttribute(1)).toBe('center');
+			expect(getAttribute(1, 'justify-self')).toBe('center');
+			expect(getAttribute(1, 'align-self')).toBe('center');
 		});
 
 		it('should convert columns attribute to grid-column properties', () => {
 			fixture.detectChanges();
 
-			expect(getColumnsAttribute(0)).toBe('2 / auto');
+			expect(getAttribute(0, 'grid-column')).toBe('2 / auto');
 
 			component.columns = '6';
 			fixture.detectChanges();
 
-			expect(getColumnsAttribute(0)).toBe('6 / auto');
+			expect(getAttribute(0, 'grid-column')).toBe('6 / auto');
 		});
 	});
 });
