@@ -1,0 +1,71 @@
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import { linkTo } from '@storybook/addon-links';
+import { CheckboxGroupComponent } from './checkbox-group.component';
+import * as CheckboxGroupStories from './checkbox-group.stories.ts';
+
+<Meta title="Components/Form/Checkbox Group" />
+
+# Checkbox Group
+
+Checkbox-group is essentially a fieldset with legend and checkbox inputs.
+
+## Examples
+
+<Canvas of={CheckboxGroupStories.Examples}></Canvas>
+
+## Usage Guidelines
+
+#### Mandatory Properties
+
+Necessary properties for checkbox-group are `title`, `control` and `options`.
+Checkbox-group has to have **at least** on checkbox option. Otherwise it will throw an error.
+
+Options array takes in objects with the following signature:
+
+```
+{
+	// Unique id for single checkbox option
+	id: string;
+	// Name for the group of checkboxes
+	name: string;
+	// Underlying value of the option
+	value: string | boolean | null;
+	// Value that is shown in the UI
+	label: string;
+	// I s option required
+	required?: boolean;
+	// Is option selected
+	checked?: boolean;
+}
+```
+
+**NOTE:** The _name_ value should be exactly the same in all objects in the options array. Otherwise it will throw an error.
+
+#### As a required form field
+
+If checkbox-group fieldset is a required form field include `Validators.required` in the form control validators and include a `required` error message in the `errorMsg` property.
+
+#### Minimum and maximum selectable options
+
+If checkbox-group fieldset has minimum and/or maximum options to be selected, form field include `Validators.min` and/or `Validators.max` in the form control validators and include a `min` and/or `max` error message in the `errorMsg` property.
+
+### Error Handling
+
+- **Required** error is shown if checkbox-group fieldset is required and
+  - if control is touched and
+	  - if control value is null
+- **Minimum** error is shown if checkbox-group fieldset is required and
+  - if control is touched and
+    - if control value is less than the given minimum value
+- **Maximum** error is shown if checkbox-group control is touched and
+  - if control value is more than the given maximum value
+
+### Accessibility
+
+- Fieldset has a legend as its first child element
+- Checkbox options are grouped by name attribute
+- Guidance is linked to the checkbox-group via id
+
+## Properties
+
+<ArgTypes of={CheckboxGroupComponent} />
