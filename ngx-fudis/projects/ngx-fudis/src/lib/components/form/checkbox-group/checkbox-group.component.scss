@@ -1,10 +1,5 @@
 @use '../../../foundations/borders/mixins.scss' as borders;
 @use '../../../foundations/utilities/mixins.scss' as utilities;
-@use '../../../foundations/spacing/tokens.scss' as spacing;
-
-.fudis-checkbox-group-host {
-	display: block;
-}
 
 .fudis-checkbox-group {
 	@include borders.border('1px', 'solid', 'transparent');
