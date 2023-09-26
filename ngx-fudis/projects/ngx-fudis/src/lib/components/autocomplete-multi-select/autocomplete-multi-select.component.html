@@ -12,6 +12,7 @@
 	<div class="fudis-autocomplete-multi-select__input-wrapper">
 		<input
 			#autocompleteInput
+			(blur)="closeMenu($event)"
 			(focus)="handleInputFocus($event)"
 			(keyup)="doSearch($event)"
 			[id]="_id"
@@ -38,6 +39,7 @@
 				[label]="item.viewValue"
 				[close]="false"
 				(handleChecked)="selectItem(item)"
+				(handleBlur)="closeMenu($event)"
 				[checked]="isChecked(item)">
 			</fudis-dropdown-menu-item>
 		</ng-container>

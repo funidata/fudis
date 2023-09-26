@@ -5,7 +5,6 @@ import {
 	Input,
 	OnInit,
 	Output,
-	Signal,
 	ViewChild,
 	ViewEncapsulation,
 	effect,
@@ -14,7 +13,6 @@ import {
 import { InputBaseDirective } from '../../directives/form/input-base/input-base.directive';
 import { FudisDropdownOption, FudisInputWidth } from '../../types/forms';
 import { FudisIdService } from '../../services/id/id.service';
-import { FudisDropdownMenuItemService } from '../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 
 @Component({
@@ -26,16 +24,12 @@ import { FudisTranslationService } from '../../services/translation/translation.
 export class AutocompleteMultiSelectComponent extends InputBaseDirective implements OnInit {
 	constructor(
 		private _idService: FudisIdService,
-		private _clickService: FudisDropdownMenuItemService,
+
 		_translationService: FudisTranslationService
 	) {
 		super(_translationService);
 
-		this._menuStatus = this._clickService.getMenuStatus();
-
 		effect(() => {
-			this.closeMenu(this._menuStatus());
-
 			this._openAriaLabel = this._translations().AUTOCOMPLETE.MULTISELECT.OPEN_DROPDOWN;
 			this._closeAriaLabel = this._translations().AUTOCOMPLETE.MULTISELECT.CLOSE_DROPDOWN;
 			this._noResultsFound = this._translations().AUTOCOMPLETE.MULTISELECT.NO_RESULTS;
@@ -102,15 +96,9 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	 */
 	protected _results: FudisDropdownOption[] = [];
 
-	/**
-	 * Internal property for listening menu toggle Signal
-	 */
-	private _menuStatus: Signal<boolean>;
-
 	@HostListener('window:keydown.arrowDown', ['$event'])
 	@HostListener('window:keydown.arrowUp', ['$event'])
-	@HostListener('window:keydown.Escape', ['$event'])
-	handleKeyDown(event: KeyboardEvent) {
+	handleArrowKeyDown(event: KeyboardEvent) {
 		event.preventDefault();
 		const dropdownMenuElement = this.wrapper.nativeElement.children[2];
 
@@ -124,6 +112,26 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 			checkboxInput.focus();
 		} else if (wrapperInput !== document.activeElement) {
 			this.handleCheckboxFocus(event);
+		}
+	}
+
+	@HostListener('window:keydown.Escape', ['$event'])
+	handleEscapeKeyDown(event: KeyboardEvent) {
+		event.preventDefault();
+
+		const wrapperInput = this.wrapper.nativeElement.querySelector(
+			'.fudis-autocomplete-multi-select__input-wrapper__input'
+		);
+
+		if (document.activeElement === wrapperInput) {
+			this._toggleOn = false;
+		}
+
+		if (
+			document.activeElement?.classList.contains('fudis-dropdown-menu-item__checkbox__input') &&
+			this.wrapper.nativeElement.contains(document.activeElement)
+		) {
+			wrapperInput.focus();
 		}
 	}
 
@@ -147,11 +155,10 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 
 	@HostListener('document:click', ['$event.target'])
 	handleWindowClick(targetElement: HTMLElement) {
-		// Close dropdown-menu if click is outside of the autocomple-multi-select component
+		// Close dropdown-menu if click is outside of the autocomplete-multi-select component
 		if (targetElement && !this.wrapper.nativeElement.contains(targetElement)) {
 			this._toggleOn = false;
 		}
-		this._clickService.setMenuStatus(this._toggleOn);
 	}
 
 	ngOnInit(): void {
@@ -159,24 +166,28 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 		this._results = [...this.options];
 	}
 
-	closeMenu(menuStatus: boolean): void {
-		if (!menuStatus) {
+	closeMenu(event: FocusEvent): void {
+		if (
+			!this.wrapper.nativeElement
+				.querySelector('.fudis-autocomplete-multi-select__input-wrapper')
+				?.contains(event.relatedTarget) &&
+			!this.wrapper.nativeElement.querySelector('.fudis-dropdown-menu')?.contains(event.relatedTarget)
+		) {
 			this._toggleOn = false;
 		}
 	}
 
 	handleInputFocus(event: FocusEvent): void {
+		// this._toggleOn = false;
 		if ((event.relatedTarget as HTMLElement)?.classList.contains('fudis-dropdown-menu-item__checkbox__input')) {
 			this._toggleOn = false;
 		} else {
 			this._toggleOn = true;
 		}
-		this._clickService.setMenuStatus(this._toggleOn);
 	}
 
 	handleButtonClick(): void {
 		this._toggleOn = !this._toggleOn;
-		this._clickService.setMenuStatus(this._toggleOn);
 	}
 
 	handleDeleteItem(): void {
@@ -210,7 +221,6 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	doSearch(event: any): void {
 		if (event.key !== 'Escape') {
 			this._toggleOn = true;
-			this._clickService.setMenuStatus(this._toggleOn);
 		}
 
 		this._filterText = event.target.value;
