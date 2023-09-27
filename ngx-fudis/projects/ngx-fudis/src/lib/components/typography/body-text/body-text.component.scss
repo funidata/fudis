@@ -40,6 +40,18 @@
 		@include typography.body-text-lg-light;
 	}
 
+	&__left {
+		text-align: left;
+	}
+
+	&__right {
+		text-align: right;
+	}
+
+	&__center {
+		text-align: center;
+	}
+
 	/* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
 	& fudis-link {
 		display: inline-block;
