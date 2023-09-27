@@ -64,7 +64,7 @@ describe('AutocompleteMultiSelectComponent', () => {
 
 	describe('Methods', () => {
 		it('should select an option', () => {
-			component.selectItem(multiSelectOptions[1]);
+			component.setItemSelection(multiSelectOptions[1]);
 
 			expect(component.selectedOptions).toEqual(jasmine.arrayWithExactContents(multiSelectOptions));
 		});
@@ -76,7 +76,7 @@ describe('AutocompleteMultiSelectComponent', () => {
 		});
 
 		it('should remove an option by toggling checked	', () => {
-			component.selectItem(multiSelectOptions[0]);
+			component.setItemSelection(multiSelectOptions[0]);
 
 			expect(component.selectedOptions).toEqual([multiSelectOptions[2]]);
 		});

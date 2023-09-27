@@ -38,7 +38,7 @@
 			<fudis-dropdown-menu-item
 				[label]="item.viewValue"
 				[close]="false"
-				(handleChecked)="_setItemSelection(item)"
+				(handleChecked)="setItemSelection(item)"
 				(handleBlur)="_closeMenuOnListExit($event)"
 				[checked]="_isChecked(item)">
 			</fudis-dropdown-menu-item>

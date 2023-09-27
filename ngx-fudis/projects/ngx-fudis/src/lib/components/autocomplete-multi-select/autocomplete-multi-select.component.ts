@@ -104,13 +104,22 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	/**
 	 * Remove / Add item from the list
 	 */
-	protected _setItemSelection(item: FudisDropdownOption): void {
+	public setItemSelection(item: FudisDropdownOption): void {
 		if (this._isChecked(item)) {
-			this._removeItem(item);
+			this.removeItem(item);
 		} else {
 			this.selectedOptions.push(item);
 		}
 		this.optionChange.emit(this.selectedOptions);
+	}
+
+	public removeItem(item: FudisDropdownOption): void {
+		this.selectedOptions = this.selectedOptions.filter((option) => item.viewValue !== option.viewValue);
+		this.optionChange.emit(this.selectedOptions);
+
+		if (this.selectedOptions.length === 0) {
+			this.input.nativeElement.focus();
+		}
 	}
 
 	protected _isChecked(item: FudisDropdownOption): boolean {
@@ -244,15 +253,6 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 			!targetElement.classList.contains('fudis-autocomplete-multi-select-selected-item-chip__button')
 		) {
 			this._toggleOn = false;
-		}
-	}
-
-	private _removeItem(item: FudisDropdownOption): void {
-		this.selectedOptions = this.selectedOptions.filter((option) => item.viewValue !== option.viewValue);
-		this.optionChange.emit(this.selectedOptions);
-
-		if (this.selectedOptions.length === 0) {
-			this.input.nativeElement.focus();
 		}
 	}
 }
