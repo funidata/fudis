@@ -96,12 +96,88 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	 */
 	protected _results: FudisDropdownOption[] = [];
 
+	ngOnInit(): void {
+		this._id = this.id ?? this._idService.getNewId('autocompleteMultiSelect');
+		this._results = [...this.options];
+	}
+
+	/**
+	 * Remove / Add item from the list
+	 */
+	protected _setItemSelection(item: FudisDropdownOption): void {
+		if (this._isChecked(item)) {
+			this._removeItem(item);
+		} else {
+			this.selectedOptions.push(item);
+		}
+		this.optionChange.emit(this.selectedOptions);
+	}
+
+	protected _isChecked(item: FudisDropdownOption): boolean {
+		return this.selectedOptions.some((e) => e.viewValue === item.viewValue);
+	}
+
+	/**
+	 * Open menu / Toggle dropdown menu on
+	 */
+	protected _openDropdown(): void {
+		this._toggleOn = true;
+	}
+
+	/**
+	 * Toggle dropdown menu on / off
+	 */
+	protected _toggleDropdown(): void {
+		this._toggleOn = !this._toggleOn;
+	}
+
+	/**
+	 * If there are no selections done, focus back to input on last item removal
+	 */
+	protected _handleDeleteItem(): void {
+		if (this.selectedOptions.length === 0) {
+			this.input.nativeElement.focus();
+		}
+	}
+
+	/**
+	 * Close dropdown if keyboard focus moves from dropdown menu to an element after it
+	 */
+	protected _closeMenuOnListExit(event: FocusEvent): void {
+		if (
+			event.relatedTarget ===
+			this.wrapper.nativeElement.querySelector('.fudis-autocomplete-multi-select-selected-item-chip__button')
+		) {
+			this._toggleOn = false;
+		}
+	}
+
+	/**
+	 * Filter options from keyboard input
+	 */
+	protected _doSearch(event: any): void {
+		this._filterText = event.target.value;
+
+		this._results = this.options.filter((option) =>
+			option.viewValue.toLowerCase().includes(this._filterText.toLowerCase())
+		);
+	}
+
+	/**
+	 * Close dropdown menu when focusing from input to previous element before it
+	 */
+	protected _closeOnShiftTab(event: KeyboardEvent): void {
+		if (event.shiftKey && event.key === 'Tab') {
+			this._toggleOn = false;
+		}
+	}
+
 	/**
 	 * Handle arrowkey down and up when target is checkbox in dropdown menu
 	 */
 	@HostListener('window:keydown.arrowDown', ['$event'])
 	@HostListener('window:keydown.arrowUp', ['$event'])
-	handleArrowKeyDown(event: KeyboardEvent) {
+	private _handleArrowKeyDown(event: KeyboardEvent) {
 		event.preventDefault();
 		const dropdownMenuElement = this.wrapper.nativeElement.children[2];
 
@@ -114,7 +190,7 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 		if (wrapperInput === document.activeElement && checkboxInput) {
 			checkboxInput.focus();
 		} else if (wrapperInput !== document.activeElement) {
-			this.handleCheckboxFocus(event);
+			this._handleCheckboxFocus(event);
 		}
 	}
 
@@ -122,7 +198,7 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	 * Handle escape key down and move focus to input
 	 */
 	@HostListener('window:keydown.Escape', ['$event'])
-	handleEscapeKeyDown(event: KeyboardEvent) {
+	private _handleEscapeKeyDown(event: KeyboardEvent) {
 		event.preventDefault();
 
 		const wrapperInput = this.wrapper.nativeElement.querySelector(
@@ -141,7 +217,7 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 		}
 	}
 
-	handleCheckboxFocus(event: any) {
+	private _handleCheckboxFocus(event: any) {
 		const parent = event.target.closest('fudis-dropdown-menu-item');
 
 		// eslint-disable-next-line default-case
@@ -160,78 +236,23 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	}
 
 	@HostListener('document:click', ['$event.target'])
-	handleWindowClick(targetElement: HTMLElement) {
+	private _handleWindowClick(targetElement: HTMLElement) {
 		// Close dropdown-menu if click is outside of the autocomplete-multi-select component
-		if (targetElement && !this.wrapper.nativeElement.contains(targetElement)) {
-			this._toggleOn = false;
-		}
-	}
-
-	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('autocompleteMultiSelect');
-		this._results = [...this.options];
-	}
-
-	closeMenu(event: FocusEvent): void {
 		if (
-			!this.wrapper.nativeElement
-				.querySelector('.fudis-autocomplete-multi-select__input-wrapper')
-				?.contains(event.relatedTarget) &&
-			!this.wrapper.nativeElement.querySelector('.fudis-dropdown-menu')?.contains(event.relatedTarget)
+			targetElement &&
+			!this.wrapper.nativeElement.contains(targetElement) &&
+			!targetElement.classList.contains('fudis-autocomplete-multi-select-selected-item-chip__button')
 		) {
 			this._toggleOn = false;
 		}
 	}
 
-	handleInputFocus(event: FocusEvent): void {
-		if ((event.relatedTarget as HTMLElement)?.classList.contains('fudis-dropdown-menu-item__checkbox__input')) {
-			this._toggleOn = false;
-		} else {
-			this._toggleOn = true;
-		}
-	}
-
-	handleButtonClick(): void {
-		this._toggleOn = !this._toggleOn;
-	}
-
-	handleDeleteItem(): void {
-		if (this.selectedOptions.length === 0) {
-			this.input.nativeElement.focus();
-		}
-	}
-
-	selectItem(item: FudisDropdownOption): void {
-		if (this.isChecked(item)) {
-			this.removeItem(item);
-		} else {
-			this.selectedOptions.push(item);
-		}
-		this.optionChange.emit(this.selectedOptions);
-	}
-
-	removeItem(item: FudisDropdownOption): void {
+	private _removeItem(item: FudisDropdownOption): void {
 		this.selectedOptions = this.selectedOptions.filter((option) => item.viewValue !== option.viewValue);
 		this.optionChange.emit(this.selectedOptions);
 
 		if (this.selectedOptions.length === 0) {
 			this.input.nativeElement.focus();
 		}
-	}
-
-	isChecked(item: FudisDropdownOption): boolean {
-		return this.selectedOptions.some((e) => e.viewValue === item.viewValue);
-	}
-
-	doSearch(event: any): void {
-		if (event.key !== 'Escape') {
-			this._toggleOn = true;
-		}
-
-		this._filterText = event.target.value;
-
-		this._results = this.options.filter((option) =>
-			option.viewValue.toLowerCase().includes(this._filterText.toLowerCase())
-		);
 	}
 }
