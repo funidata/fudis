@@ -46,6 +46,11 @@ export class DropdownMenuItemComponent implements OnInit {
 	@Output() handleChecked = new EventEmitter<boolean>();
 
 	/**
+	 * Output for blur event in dropdown-menu-item with checkbox
+	 */
+	@Output() handleBlur = new EventEmitter<FocusEvent>();
+
+	/**
 	 * Determine whether option is displayed as single-select or multiselect (with checkbox).
 	 * Multiselect is used e.g in autocomplete-multi-select.
 	 */
@@ -79,7 +84,7 @@ export class DropdownMenuItemComponent implements OnInit {
 		elementToFocus.focus();
 	}
 
-	handleBlur(event: FocusEvent): void {
+	handleButtonBlur(event: FocusEvent): void {
 		const menuButton = this.dropdownItem.nativeElement.closest('fudis-button').querySelector('.fudis-button');
 
 		if (
