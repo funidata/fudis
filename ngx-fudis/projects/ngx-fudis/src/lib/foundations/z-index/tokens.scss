@@ -1,0 +1,17 @@
+/**
+* Add new z-index layer names when needed. Do not clutter, keep z-index options minimum.
+*/
+$z-index-dropdown-menu: 100;
+$z-index-dialog: 200;
+$z-index-alert: 300;
+
+/**
+* If we don't want to maintain static z-index numbers, this could be refactored so that we have an array of layer names
+* and z-indexes are calculated according to the array indexes * 100.
+* This way the possible top/below priority doesn't need manual refactoring of the z-index values above.
+*/
+$layer-names: (
+	'dropdown-menu': $z-index-dropdown-menu,
+	'dialog': $z-index-dialog,
+	'alert': $z-index-alert,
+);
