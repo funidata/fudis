@@ -1,27 +1,28 @@
-<label class="fudis-checkbox" [attr.for]="_id">
-		<input
-			(blur)="onBlur()"
-			(change)="handleChange()"
-			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
-			[attr.checked]="checked ? true : null"
-			[formControl]="control"
-			[attr.aria-describedby]="_id + '_guidance'"
-			[attr.aria-label]="label"
-			type="checkbox"
-			[name]="name"
-			[attr.name]="name"
-			[id]="_id"
-			[value]="value"
-			class="fudis-checkbox__input"
-			[attr.required]="_required ? true : null"
-			[attr.aria-disabled]="control.disabled" />
-			<div class="fudis-checkbox__content">
-				<div class="fudis-checkbox__content__box" 			
-				[class.fudis-checkbox__content__box--focused]="_focused"
-				[class.fudis-checkbox__content__box--invalid]="(control.invalid && control.touched) || invalidState"
-				[class.fudis-checkbox__content__box--disabled]="control.disabled">
-				<fudis-icon *ngIf="checked" [icon]="'check-small'" class="fudis-checkbox__content__box__icon"></fudis-icon>
-				</div>
-				<div class="fudis-checkbox__content__label">{{ label }}</div>
-			</div>
+<label class="fudis-checkbox" [attr.for]="id">
+	<input
+		type="checkbox"
+		class="fudis-checkbox__input"
+		[id]="id"
+		[formControl]="control"
+		[value]="value"
+		[name]="name"
+		[attr.name]="name"
+		[attr.aria-label]="label"
+		[attr.aria-describedby]="id + '_guidance'"
+		[attr.aria-disabled]="control.disabled"
+		[attr.required]="required ? true : null"
+		[attr.checked]="checked ? true : null"
+		[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
+		(change)="onChange()"
+		(blur)="onBlur()" />
+	<span class="fudis-checkbox__content">
+		<span
+			class="fudis-checkbox__content__box"
+			[class.fudis-checkbox__content__box--focused]="_focused"
+			[class.fudis-checkbox__content__box--invalid]="(control.invalid && control.touched) || invalidState"
+			[class.fudis-checkbox__content__box--disabled]="control.disabled">
+			<fudis-icon *ngIf="checked" [icon]="'check-small'" class="fudis-checkbox__content__box__icon" />
+		</span>
+		<span class="fudis-checkbox__content__label">{{ label }}</span>
+	</span>
 </label>

@@ -5,15 +5,9 @@ import {
 	EventEmitter,
 	HostBinding,
 	ViewEncapsulation,
-	OnChanges,
-	OnInit,
-	AfterViewInit,
 } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
-
-import { FudisIdService } from '../../../../services/id/id.service';
-import { FudisTranslationService } from '../../../../services/translation/translation.service';
 
 @Component({
 	selector: 'fudis-checkbox',
@@ -21,13 +15,7 @@ import { FudisTranslationService } from '../../../../services/translation/transl
 	styleUrls: ['./checkbox.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class CheckboxComponent extends InputBaseDirective implements OnChanges, OnInit, AfterViewInit {
-	constructor(
-		private _idService: FudisIdService,
-		_translationService: FudisTranslationService
-	) {
-		super(_translationService);
-	}
+export class CheckboxComponent extends InputBaseDirective {
 
 	@HostBinding('class') classes = 'fudis-checkbox-host';
 
@@ -37,12 +25,12 @@ export class CheckboxComponent extends InputBaseDirective implements OnChanges, 
 	@Input({ required: true }) control: FormControl;
 
 	/*
-	 * Selectable form value of a single Checkbox, e.g. "fair-trade-banana"
+	 * Selectable form value of a single Checkbox
 	 */
 	@Input({ required: true }) value: string | boolean | null;
 
 	/*
-	 * Name for group of Checkboxes, e.g. "fruit"
+	 * Name for group of Checkboxes
 	 */
 	@Input({ required: true }) name: string;
 
@@ -58,7 +46,7 @@ export class CheckboxComponent extends InputBaseDirective implements OnChanges, 
 
 	protected _focused = false;
 
-	handleChange(): void {
+	onChange(): void {
 		this.checkboxChange.emit(!this.checked);
 		this._focused = !this._focused;
 	}
@@ -66,20 +54,5 @@ export class CheckboxComponent extends InputBaseDirective implements OnChanges, 
 	override onBlur(): void {
 		this._focused = false;
 		this.handleBlur.emit();
-	}
-
-	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('checkbox');
-	}
-
-	ngAfterViewInit(): void {
-		if (this.initialFocus) {
-			this.focusToInput();
-			this._focused = true;
-		}
-	}
-
-	ngOnChanges(): void {
-		this._required = this.required ?? this.control.hasValidator(Validators.required);
 	}
 }
