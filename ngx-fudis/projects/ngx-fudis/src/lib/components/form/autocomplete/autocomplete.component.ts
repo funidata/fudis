@@ -4,7 +4,6 @@ import { map, startWith } from 'rxjs/operators';
 import { FormControl, Validators } from '@angular/forms';
 import { FudisDropdownOption, FudisInputWidth } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
-
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 
@@ -104,7 +103,7 @@ export class AutocompleteComponent
 	}
 
 	/**
-	 * Handle blur
+	 * Handle blur and set control as touched
 	 */
 	protected _autocompleteBlur(event: Event): void {
 		this.control.markAsTouched();
@@ -149,7 +148,10 @@ export class AutocompleteComponent
 		}
 		if (this.variant === 'dropdown') {
 			this._filteredOptions = this._autocompleteFormControl.valueChanges.pipe(
-				startWith(this._autocompleteFormControl.value),
+				// Without empty string the dropdown does not open after clearing the input
+				// Without internal control value the validation does not work when using selectedOption
+				// TODO: Could be improved/get rid of startWith. This seems to be a bit sticky so current solution might affect performance.
+				startWith(this._autocompleteFormControl.value || ''),
 				map((value) => {
 					this._updateControlValue(value);
 					if ((value || value === '') && !this.control.value) {
