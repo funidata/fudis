@@ -12,8 +12,9 @@
 	<div class="fudis-autocomplete-multi-select__input-wrapper">
 		<input
 			#autocompleteInput
-			(focus)="handleInputFocus($event)"
-			(keyup)="doSearch($event)"
+			(focus)="_openDropdown()"
+			(keyup)="_doSearch($event)"
+			(keydown)="_closeOnShiftTab($event)"
 			[id]="_id"
 			[value]="_filterText"
 			role="combobox"
@@ -23,7 +24,7 @@
 			[attr.aria-describedby]="_id + '_guidance'" />
 		<fudis-button
 			class="fudis-autocomplete-multi-select__input-wrapper__icon-button"
-			(handleClick)="handleButtonClick()"
+			(handleClick)="_toggleDropdown()"
 			[size]="'icon-only'"
 			[variant]="'tertiary'"
 			[icon]="'chevron'"
@@ -37,8 +38,9 @@
 			<fudis-dropdown-menu-item
 				[label]="item.viewValue"
 				[close]="false"
-				(handleChecked)="selectItem(item)"
-				[checked]="isChecked(item)">
+				(handleChecked)="setItemSelection(item)"
+				(handleBlur)="_closeMenuOnListExit($event)"
+				[checked]="_isChecked(item)">
 			</fudis-dropdown-menu-item>
 		</ng-container>
 		<ng-container *ngIf="_results.length === 0">
@@ -49,7 +51,7 @@
 		<span [attr.id]="_id + '-remove-items'" class="fudis-visually-hidden">{{ _removeItemText }}</span>
 		<fudis-autocomplete-multi-select-selected-item-chip
 			[parentId]="_id"
-			(deleteItem)="handleDeleteItem()"
+			(deleteItem)="_handleDeleteItem()"
 			[selectedItems]="selectedOptions" />
 	</ng-container>
 	<ng-container *ngIf="helpText">
