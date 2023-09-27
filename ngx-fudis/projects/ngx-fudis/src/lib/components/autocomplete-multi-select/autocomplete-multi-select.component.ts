@@ -165,6 +165,10 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	 * Filter options from keyboard input
 	 */
 	protected _doSearch(event: any): void {
+		if (event.key !== 'Escape') {
+			this._toggleOn = true;
+		}
+
 		this._filterText = event.target.value;
 
 		this._results = this.options.filter((option) =>
