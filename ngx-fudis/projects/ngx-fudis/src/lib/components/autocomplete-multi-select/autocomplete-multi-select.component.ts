@@ -96,6 +96,9 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	 */
 	protected _results: FudisDropdownOption[] = [];
 
+	/**
+	 * Handle arrowkey down and up when target is checkbox in dropdown menu
+	 */
 	@HostListener('window:keydown.arrowDown', ['$event'])
 	@HostListener('window:keydown.arrowUp', ['$event'])
 	handleArrowKeyDown(event: KeyboardEvent) {
@@ -115,6 +118,9 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 		}
 	}
 
+	/**
+	 * Handle escape key down and move focus to input
+	 */
 	@HostListener('window:keydown.Escape', ['$event'])
 	handleEscapeKeyDown(event: KeyboardEvent) {
 		event.preventDefault();
@@ -178,7 +184,6 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	}
 
 	handleInputFocus(event: FocusEvent): void {
-		// this._toggleOn = false;
 		if ((event.relatedTarget as HTMLElement)?.classList.contains('fudis-dropdown-menu-item__checkbox__input')) {
 			this._toggleOn = false;
 		} else {
