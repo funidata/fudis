@@ -14,21 +14,19 @@
 					<fudis-fieldset [title]="t('fieldsetTitle')">
 						<ng-template fudisContent type="fieldset">
 							<fudis-checkbox-group
-								[title]="'Otsikko'"
-								[helpText]="checkboxHelpText"
-								[errorMsg]="{ required: 'Tähän pitää vastata' }"
+								[title]="t('chooseBerry')"
+								[helpText]="t('chooseBerryHelp')"
+								[errorMsg]="{
+									required: t('chooseBerryError'),
+									min: t('chooseBerryErrorMin'),
+									max: t('chooseBerryErrorMax')
+								}"
 								[options]="checkboxOptions"
 								[selectedOptions]="selectedOptions"
+								[tooltip]="t('chooseBerryTooltip')"
 								(optionsChange)="toggleChecked($event)"
 								[control]="testFormGroup.controls['checkbox']">
 							</fudis-checkbox-group>
-							<fudis-body-text>
-								Valittuja herkkuja ovat:
-								<br />
-								<ng-container *ngFor="let option of selectedOptions; last as isLast">
-									{{ option.label }}{{ isLast ? '.' : ',' }}
-								</ng-container>
-							</fudis-body-text>
 							<br />
 							<fudis-text-input
 								[label]="t('label')"

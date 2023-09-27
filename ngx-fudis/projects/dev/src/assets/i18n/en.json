@@ -5,12 +5,22 @@
 	"required": "Required",
 	"error_required": "This is required text input",
 	"dynamic": "transloco {{value}}",
+  "chooseBerry": "Choose your berries",
+  "chooseBerryHelp": "Pick desired amount of berries",
+  "chooseBerryError": "No berries picked!",
+  "chooseBerryMinError": "Not enough berries picked!",
+  "chooseBerryMaxError": "Too much berries picked!",
+  "chooseBerryTooltip": "This checkbox-group has multiple validators: required, min and max",
 	"chooseTruth": "Choose a truth",
 	"chooseTruthHelp": "We all perceive truth differently.",
 	"chooseTruthError": "Truth is missing!",
 	"options": {
 		"chooseTruthTrue": "True",
-		"chooseTruthFalse": "False"
+		"chooseTruthFalse": "False",
+    "blueberry": "Blueberry",
+    "cloudberry": "Cloudberry",
+    "raspberry": "Raspberry",
+    "strawberry": "Strawberry"
 	},
 	"closeCalendar": "Close calendar",
 	"fieldsetTitle": "Important fieldset title",

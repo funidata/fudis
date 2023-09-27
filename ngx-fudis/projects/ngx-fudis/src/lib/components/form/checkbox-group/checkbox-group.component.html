@@ -3,7 +3,10 @@
 	[titleSize]="'sm'"
 	[title]="title"
 	[required]="_required ? _required : undefined"
-	[errorSummaryBreadcrumb]="false">
+	[errorSummaryBreadcrumb]="false"
+	[tooltip]="tooltip"
+	[tooltipPosition]="tooltipPosition"
+	[tooltipToggle]="tooltipToggle">
 	<ng-template fudisContent type="fieldset">
 		<fudis-checkbox
 			*ngFor="let option of options; let index = index"

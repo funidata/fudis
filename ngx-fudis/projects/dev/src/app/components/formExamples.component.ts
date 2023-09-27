@@ -75,8 +75,6 @@ export class AppFormExampleComponent implements OnInit {
 
 	selectedOptions: FudisCheckboxOption[] = [];
 
-	checkboxHelpText = 'Valitse vähintään kolme herkkua';
-
 	private _untilDestroyed = untilDestroyed();
 
 	ngOnInit(): void {
@@ -89,10 +87,10 @@ export class AppFormExampleComponent implements OnInit {
 					{ value: false, viewValue: value.chooseTruthFalse, id: 'boolean-1', name: 'booleans' },
 				];
 				this.checkboxOptions = [
-					{ value: 'banaani', label: 'Banaani', id: 'ruoka-1', name: 'Herkkuja', required: true },
-					{ value: 'porkkana', label: 'Porkkana', id: 'ruoka-2', name: 'Herkkuja', checked: true },
-					{ value: 'tomaatti', label: 'Tomaatti', id: 'ruoka-3', name: 'Herkkuja' },
-					{ value: 'mansikka', label: 'Mansikka', id: 'ruoka-4', name: 'Herkkuja' },
+					{ value: 'blueberry', label: value.blueberry, id: 'berry-1', name: 'berries' },
+					{ value: 'cloudberry', label: value.cloudberry, id: 'berry-2', name: 'berries' },
+					{ value: 'raspberry', label: value.raspberry, id: 'berry-3', name: 'berries' },
+					{ value: 'strawberry', label: value.strawberry, id: 'berry-4', name: 'berries' },
 				];
 				this.selectedOptions = [this.checkboxOptions[1]];
 			});
