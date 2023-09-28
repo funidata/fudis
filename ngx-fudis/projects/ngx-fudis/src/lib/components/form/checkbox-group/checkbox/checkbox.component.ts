@@ -1,11 +1,4 @@
-import {
-	Component,
-	Input,
-	Output,
-	EventEmitter,
-	HostBinding,
-	ViewEncapsulation,
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostBinding, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
 
@@ -16,7 +9,6 @@ import { InputBaseDirective } from '../../../../directives/form/input-base/input
 	encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxComponent extends InputBaseDirective {
-
 	@HostBinding('class') classes = 'fudis-checkbox-host';
 
 	/*

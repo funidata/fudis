@@ -10,7 +10,7 @@ import {
 } from 'projects/ngx-fudis/src/lib/types/forms';
 import { untilDestroyed } from 'projects/ngx-fudis/src/lib/utilities/untilDestroyed';
 import { FudisErrorSummaryService } from 'ngx-fudis';
-import { FudisFormGroupValidators } from "projects/ngx-fudis/src/lib/utilities/form/validators";
+import { FudisFormGroupValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
 
 type MyForm = {
 	dropdown: FormControl<FudisDropdownOption | null>;
@@ -65,12 +65,15 @@ export class AppFormExampleComponent implements OnInit {
 		]),
 		truth: new FormControl<boolean | null>(null, Validators.required),
 		date: new FormControl<Date | null>(null, Validators.required),
-        checkboxFormGroup: new FormGroup({
-            checkbox0: new FormControl<FudisCheckboxOption | null>(null),
-            checkbox1: new FormControl<FudisCheckboxOption | null>(null),
-            checkbox2: new FormControl<FudisCheckboxOption | null>(null),
-            checkbox3: new FormControl<FudisCheckboxOption | null>(null)},
-          [FudisFormGroupValidators.atLeastOneRequired(), FudisFormGroupValidators.outOfRequiredRange(2, 3)]),
+		checkboxFormGroup: new FormGroup(
+			{
+				checkbox0: new FormControl<FudisCheckboxOption | null>(null),
+				checkbox1: new FormControl<FudisCheckboxOption | null>(null),
+				checkbox2: new FormControl<FudisCheckboxOption | null>(null),
+				checkbox3: new FormControl<FudisCheckboxOption | null>(null),
+			},
+			[FudisFormGroupValidators.atLeastOneRequired(), FudisFormGroupValidators.outOfRequiredRange(2, 3)]
+		),
 		autocompleteDropdown: new FormControl<FudisDropdownOption | null>(null, Validators.required),
 		autocompleteSearch: new FormControl<FudisDropdownOption | null>(null),
 	});
@@ -113,6 +116,6 @@ export class AppFormExampleComponent implements OnInit {
 	}
 
 	toggleChecked(updatedOptions: FudisCheckboxOption[]): void {
-    this.checkboxOptions = updatedOptions;
+		this.checkboxOptions = updatedOptions;
 	}
 }
