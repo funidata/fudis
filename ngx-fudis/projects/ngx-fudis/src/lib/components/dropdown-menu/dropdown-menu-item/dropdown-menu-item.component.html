@@ -5,7 +5,7 @@
 	[attr.role]="'menuitem'"
 	[attr.aria-disabled]="disabled"
 	(keydown)="handleKeyDown($event)"
-	(blur)="handleBlur($event)"
+	(blur)="handleButtonBlur($event)"
 	(click)="handleClick.emit($event); closeDropdown()">
 	{{ label }}
 </button>
@@ -23,6 +23,7 @@
 				class="fudis-dropdown-menu-item__checkbox__input"
 				[attr.role]="'option'"
 				[attr.aria-checked]="checked"
+				(blur)="handleBlur.emit($event)"
 				(click)="handleChecked.emit()" />
 			<svg
 				*ngIf="checked"
