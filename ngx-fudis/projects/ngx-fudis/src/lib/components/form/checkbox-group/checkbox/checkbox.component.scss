@@ -10,7 +10,7 @@
 	@include typography.body-text-md-regular;
 	@include colorMixins.text-color('gray-dark');
 
-	display: flex;
+	display: inline-flex;
 	position: relative;
 	align-items: center;
 	cursor: pointer;
