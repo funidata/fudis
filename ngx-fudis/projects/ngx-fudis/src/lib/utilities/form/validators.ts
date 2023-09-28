@@ -1,7 +1,9 @@
 import { FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 interface FudisValidationErrors extends ValidationErrors {
-	atLeastOneRequired: boolean;
+	atLeastOneRequired?: boolean;
+  lessThanRequiredRange?: boolean;
+  moreThanRequiredRange?: boolean;
 }
 
 interface FudisGroupValidatorFn extends ValidatorFn {
@@ -25,4 +27,32 @@ export module FudisFormGroupValidators {
 			return null;
 		};
 	}
+
+  export function outOfRequiredRange(min?: number, max?: number): FudisGroupValidatorFn {
+    return (controlGroup: any): FudisValidationErrors | null => {
+      const { controls } = controlGroup;
+      let amountOfSelected = 0;
+
+      if (controls) {
+        Object.keys(controls).forEach((key) => {
+          if(!!controls[key].value) {
+            amountOfSelected = ++amountOfSelected;
+          }
+        });
+
+        if (!!min && amountOfSelected < min) {
+          return {
+            lessThanRequiredRange: true,
+          };
+        }
+
+        if (!!max && amountOfSelected > max) {
+          return {
+            moreThanRequiredRange: true
+          };
+        }
+      }
+      return null;
+    };
+  }
 }
