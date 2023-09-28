@@ -15,10 +15,16 @@
 			[value]="option.value"
 			[label]="option.label"
 			[required]="option.required"
-			[checked]="isChecked(option)"
-			(checkboxChange)="toggleChecked(option)"
-			[control]="control"></fudis-checkbox>
-		<fudis-guidance [inputLabel]="title" [helpText]="helpText" [for]="_id" [errorMsg]="errorMsg" [control]="control">
+			[checked]="option.checked ? true : undefined"
+			[invalidState]="formGroup.invalid && formGroup.touched"
+			[control]="$any(formGroup).controls['checkbox' + index]"
+			(checkboxChange)="toggleChecked(option.id)"></fudis-checkbox>
+		<fudis-guidance
+			[inputLabel]="title"
+			[helpText]="helpText"
+			[for]="_id"
+			[groupErrorMsg]="groupErrorMsg"
+			[formGroup]="formGroup">
 		</fudis-guidance>
 	</ng-template>
 </fudis-fieldset>

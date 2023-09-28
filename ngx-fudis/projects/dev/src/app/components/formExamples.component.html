@@ -16,16 +16,16 @@
 							<fudis-checkbox-group
 								[title]="t('chooseBerry')"
 								[helpText]="t('chooseBerryHelp')"
-								[errorMsg]="{
-									required: t('chooseBerryError'),
-									min: t('chooseBerryErrorMin'),
-									max: t('chooseBerryErrorMax')
+								[required]="true"
+								[groupErrorMsg]="{
+									atLeastOneRequired: t('chooseBerryError'),
+									lessThanRequiredRange: t('chooseBerryErrorMin'),
+									moreThanRequiredRange: t('chooseBerryErrorMax')
 								}"
 								[options]="checkboxOptions"
-								[selectedOptions]="selectedOptions"
 								[tooltip]="t('chooseBerryTooltip')"
 								(optionsChange)="toggleChecked($event)"
-								[control]="testFormGroup.controls['checkbox']">
+								[formGroup]="testFormGroup.controls['checkboxFormGroup']">
 							</fudis-checkbox-group>
 							<br />
 							<fudis-text-input

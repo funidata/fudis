@@ -8,8 +8,8 @@ import {
 	Output,
 	ViewEncapsulation,
 } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { FudisCheckboxOption, FudisFormErrors } from '../../../types/forms';
+import { FormGroup, Validators } from '@angular/forms';
+import { FudisCheckboxOption, FudisFormGroupErrors } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -34,17 +34,17 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 	/*
 	 * FormControl for Checkbox group
 	 */
-	@Input({ required: true }) control: FormControl<FudisCheckboxOption[] | null>;
+	@Input({ required: true }) formGroup: FormGroup;
 
 	/*
-	 * Array of options for group of radio buttons
+	 * Array of options for group of checkboxes
 	 */
 	@Input({ required: true }) options: FudisCheckboxOption[];
 
-	/**
-	 * Error messages shown when form control validators are invalid
-	 */
-	@Input() errorMsg: FudisFormErrors;
+  /*
+   * Object containing error messages for each FormControl and for the FormGroup.
+   */
+  @Input() groupErrorMsg: FudisFormGroupErrors;
 
 	/**
 	 * Set Checkbox Group's visual style and ARIA attribute as invalid. Does not override if control.invalid is true.
@@ -57,38 +57,51 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 	@Input() required: boolean | undefined = undefined;
 
 	/**
-	 * Array of selected checkbox options which user is clicking. Can also be used to set preselected options.
-	 */
-	@Input() selectedOptions: FudisCheckboxOption[] = [];
-
-	/**
 	 * Output for option click
 	 */
 	@Output() optionsChange = new EventEmitter<FudisCheckboxOption[]>();
 
+  /**
+   * Updated options array after changes
+   */
+  protected _updatedOptions: FudisCheckboxOption[] = [];
+
 	ngOnInit() {
 		this._id = this.id ?? this._idService.getNewId('checkboxGroup');
+
+    if (this.options.length < 1) {
+      throw new Error(
+        `Fudis-checkbox-group should have at least one option for checkboxes.`
+      );
+    }
+
+    const nameMismatch = this.options.filter((optionName) =>
+      this.options.some((item) => optionName.name !== item.name)
+    );
+
+    if (nameMismatch.length > 0) {
+      throw new Error(
+        `In fudis-checkbox-group options array, each object's 'name' value should be identical for all options, but name mismatch was detected.`
+      );
+    }
 	}
 
 	ngOnChanges(): void {
-		this._required = this.required ?? this.control.hasValidator(Validators.required);
+		this._required = this.required ?? this.formGroup.hasValidator(Validators.required);
 	}
 
-	removeItem(id: string): void {
-		this.selectedOptions = this.selectedOptions.filter((option) => id !== option.id);
-		this.optionsChange.emit(this.selectedOptions);
-	}
+	toggleChecked(id: string): void {
 
-	isChecked(option: FudisCheckboxOption): boolean {
-		return this.selectedOptions.some((e) => e.id === option.id);
-	}
+    const newOptions: FudisCheckboxOption[] = [];
 
-	toggleChecked(option: FudisCheckboxOption): void {
-		if (this.isChecked(option)) {
-			this.removeItem(option.id);
-		} else {
-			this.selectedOptions.push(option);
-		}
-		this.optionsChange.emit(this.selectedOptions);
+    this.options.forEach((option) => {
+      if (option.id === id) {
+        option.checked = !option.checked;
+      }
+      newOptions.push(option);
+    });
+
+    this._updatedOptions = newOptions;
+		this.optionsChange.emit(this._updatedOptions);
 	}
 }

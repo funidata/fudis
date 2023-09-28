@@ -10,6 +10,7 @@ import {
 } from 'projects/ngx-fudis/src/lib/types/forms';
 import { untilDestroyed } from 'projects/ngx-fudis/src/lib/utilities/untilDestroyed';
 import { FudisErrorSummaryService } from 'ngx-fudis';
+import { FudisFormGroupValidators } from "projects/ngx-fudis/src/lib/utilities/form/validators";
 
 type MyForm = {
 	dropdown: FormControl<FudisDropdownOption | null>;
@@ -17,7 +18,7 @@ type MyForm = {
 	textArea: FormControl<string | null>;
 	textInput: FormControl<string | null | number>;
 	truth: FormControl<boolean | null>;
-	checkbox: FormControl<FudisCheckboxOption[] | null>;
+	checkboxFormGroup: FormGroup;
 	date: FormControl<Date | null>;
 	autocompleteDropdown: FormControl<FudisDropdownOption | null>;
 	autocompleteSearch: FormControl<FudisDropdownOption | null>;
@@ -64,7 +65,12 @@ export class AppFormExampleComponent implements OnInit {
 		]),
 		truth: new FormControl<boolean | null>(null, Validators.required),
 		date: new FormControl<Date | null>(null, Validators.required),
-		checkbox: new FormControl<FudisCheckboxOption[] | null>([], Validators.required),
+        checkboxFormGroup: new FormGroup({
+            checkbox0: new FormControl<FudisCheckboxOption | null>(null),
+            checkbox1: new FormControl<FudisCheckboxOption | null>(null),
+            checkbox2: new FormControl<FudisCheckboxOption | null>(null),
+            checkbox3: new FormControl<FudisCheckboxOption | null>(null)},
+          [FudisFormGroupValidators.atLeastOneRequired(), FudisFormGroupValidators.outOfRequiredRange(2, 3)]),
 		autocompleteDropdown: new FormControl<FudisDropdownOption | null>(null, Validators.required),
 		autocompleteSearch: new FormControl<FudisDropdownOption | null>(null),
 	});
@@ -72,8 +78,6 @@ export class AppFormExampleComponent implements OnInit {
 	radioButtonOptions: FudisRadioButtonOption[] = [];
 
 	checkboxOptions: FudisCheckboxOption[] = [];
-
-	selectedOptions: FudisCheckboxOption[] = [];
 
 	private _untilDestroyed = untilDestroyed();
 
@@ -92,7 +96,6 @@ export class AppFormExampleComponent implements OnInit {
 					{ value: 'raspberry', label: value.raspberry, id: 'berry-3', name: 'berries' },
 					{ value: 'strawberry', label: value.strawberry, id: 'berry-4', name: 'berries' },
 				];
-				this.selectedOptions = [this.checkboxOptions[1]];
 			});
 	}
 
@@ -109,7 +112,7 @@ export class AppFormExampleComponent implements OnInit {
 		}
 	}
 
-	toggleChecked(selected: FudisCheckboxOption[]): void {
-		this.selectedOptions = selected;
+	toggleChecked(updatedOptions: FudisCheckboxOption[]): void {
+    this.checkboxOptions = updatedOptions;
 	}
 }
