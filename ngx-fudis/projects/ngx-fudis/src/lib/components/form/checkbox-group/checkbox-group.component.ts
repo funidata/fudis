@@ -61,7 +61,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 	 */
 	@Output() optionsChange = new EventEmitter<FudisCheckboxOption[]>();
 
-	public groupFocusedIn = false;
+	protected _groupBlurredOut = false;
 
 	/**
 	 * Updated options array after changes
@@ -106,19 +106,9 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 		this.optionsChange.emit(this._updatedOptions);
 	}
 
-	onFocus(): void {
-		this.groupFocusedIn = true;
+	handleGroupFocusedOut(value: boolean): void {
+		if (value) {
+			this._groupBlurredOut = true;
+		}
 	}
-
-	// @HostListener('document:click', ['$event'])
-	// private _handleWindowClick(event: MouseEvent) {
-	// 	event.stopPropagation();
-	// 	// event.preventDefault();
-	// 	console.log(event);
-	// }
-
-	// @HostListener('window:keydown.tab', ['$event'])
-	// private _handleTabPress(event: KeyboardEvent) {
-	// 	console.log(event);
-	// }
 }

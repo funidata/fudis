@@ -65,6 +65,8 @@ export class GuidanceComponent implements OnInit {
 	 */
 	@Input() selectedOption: string;
 
+	@Input() groupBlurredOut: boolean = true;
+
 	/**
 	 * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where "characters used" is "maxLengthText".
 	 */

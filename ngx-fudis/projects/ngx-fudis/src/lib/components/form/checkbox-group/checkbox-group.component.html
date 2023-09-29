@@ -18,14 +18,15 @@
 				[viewValue]="option.label"
 				[required]="option.required"
 				[checked]="option.checked"
-				(handleFocus)="onFocus()"
-				[invalidState]="formGroup.invalid && formGroup.touched"
+				[invalidState]="_groupBlurredOut && formGroup.invalid && formGroup.touched"
 				[control]="$any(formGroup).controls['checkbox' + index]"
+				(groupFocusedOut)="handleGroupFocusedOut($event)"
 				(checkboxChange)="toggleChecked(option.id)" />
 			<fudis-guidance
 				[inputLabel]="title"
 				[helpText]="helpText"
 				[for]="_id"
+				[groupBlurredOut]="_groupBlurredOut"
 				[groupErrorMsg]="groupErrorMsg"
 				[formGroup]="formGroup">
 			</fudis-guidance>

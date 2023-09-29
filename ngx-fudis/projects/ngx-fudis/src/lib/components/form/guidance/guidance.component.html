@@ -1,6 +1,8 @@
 <div class="fudis-guidance">
 	<div [id]="for + '_guidance'">
-		<div [class.fudis-guidance__errors]="(control && control.touched) || (formGroup && formGroup.touched)">
+		<div
+			*ngIf="groupBlurredOut"
+			[class.fudis-guidance__errors]="(control && control.touched) || (formGroup && formGroup.touched)">
 			<fudis-icon
 				[icon]="'alert-fill'"
 				*ngIf="(control?.invalid && control?.touched) || (formGroup?.invalid && formGroup?.touched)" />

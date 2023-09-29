@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter, HostBinding, ViewEncapsulation } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Input, Output, EventEmitter, HostBinding, ViewEncapsulation, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -8,6 +9,8 @@ import { FormControl } from '@angular/forms';
 	encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxComponent {
+	constructor(@Inject(DOCUMENT) private _document: Document) {}
+
 	@HostBinding('class') classes = 'fudis-checkbox-host';
 
 	/*
@@ -61,6 +64,8 @@ export class CheckboxComponent {
 
 	@Output() handleBlur = new EventEmitter<FocusEvent>();
 
+	@Output() groupFocusedOut = new EventEmitter<boolean>();
+
 	protected _focused = false;
 
 	onChange(): void {
@@ -69,6 +74,14 @@ export class CheckboxComponent {
 
 	onBlur(event: FocusEvent): void {
 		this._focused = false;
+
+		if ((event.relatedTarget as HTMLElement)?.getAttribute('data-group-id') !== this.groupId) {
+			setTimeout(() => {
+				if (document.activeElement?.getAttribute('data-group-id') !== this.groupId) {
+					this.groupFocusedOut.emit(true);
+				}
+			}, 150);
+		}
 
 		this.handleBlur.emit(event);
 	}

@@ -16,7 +16,13 @@ export module FudisFormGroupValidators {
 			const { controls } = controlGroup;
 
 			if (controls) {
-				const theOne = Object.keys(controls).find((key) => controls[key].value !== null && controls[key].value !== '');
+				const theOne = Object.keys(controls).find(
+					(key) =>
+						controls[key].value !== null &&
+						controls[key].value !== '' &&
+						controls[key].value !== false &&
+						controls[key].value !== undefined
+				);
 
 				if (!theOne) {
 					return {
