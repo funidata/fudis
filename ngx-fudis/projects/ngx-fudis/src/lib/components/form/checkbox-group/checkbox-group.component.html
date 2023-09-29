@@ -10,15 +10,18 @@
 	<ng-template fudisContent type="fieldset">
 		<fudis-checkbox
 			*ngFor="let option of options; let index = index"
+			[groupId]="_id"
 			[id]="option.id"
 			[name]="option.name"
 			[value]="option.value"
 			[label]="option.label"
 			[required]="option.required"
-			[checked]="option.checked ? true : undefined"
+			[checked]="option.checked"
+			(handleFocus)="onFocus()"
 			[invalidState]="formGroup.invalid && formGroup.touched"
 			[control]="$any(formGroup).controls['checkbox' + index]"
 			(checkboxChange)="toggleChecked(option.id)"></fudis-checkbox>
+
 		<fudis-guidance
 			[inputLabel]="title"
 			[helpText]="helpText"

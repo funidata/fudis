@@ -28,7 +28,7 @@ export module FudisFormGroupValidators {
 		};
 	}
 
-	export function outOfRequiredRange(min?: number, max?: number): FudisGroupValidatorFn {
+	export function outOfRequiredRange(min: number = 0, max?: number): FudisGroupValidatorFn {
 		return (controlGroup: any): FudisValidationErrors | null => {
 			const { controls } = controlGroup;
 			let amountOfSelected = 0;

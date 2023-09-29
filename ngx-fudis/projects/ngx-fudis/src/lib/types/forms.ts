@@ -16,7 +16,7 @@ export interface FudisCheckboxOption {
 	/** I s option required */
 	required?: boolean;
 	/** Is option selected */
-	checked?: boolean;
+	checked?: boolean | null | undefined;
 }
 
 export interface FudisRadioButtonOption {

@@ -9,6 +9,13 @@ import { InputBaseDirective } from '../../../../directives/form/input-base/input
 	encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxComponent extends InputBaseDirective {
+	// constructor(
+	// 	@Host() private _parentGroupComponent: CheckboxGroupComponent,
+	// 	_translationService: FudisTranslationService
+	// ) {
+	// 	super(_translationService);
+	// }
+
 	@HostBinding('class') classes = 'fudis-checkbox-host';
 
 	/*
@@ -29,22 +36,34 @@ export class CheckboxComponent extends InputBaseDirective {
 	/*
 	 * If Checkbox is checked
 	 */
-	@Input() checked: boolean;
+	@Input() checked: boolean | null | undefined;
+
+	@Input() groupId: string;
 
 	/**
 	 * Checked input change output
 	 */
 	@Output() checkboxChange = new EventEmitter<boolean>();
 
+	@Output() handleFocus = new EventEmitter<FocusEvent>();
+
 	protected _focused = false;
 
 	onChange(): void {
 		this.checkboxChange.emit(!this.checked);
-		this._focused = !this._focused;
 	}
 
-	override onBlur(): void {
+	override onBlur(event: FocusEvent): void {
 		this._focused = false;
-		this.handleBlur.emit();
+
+		this.handleBlur.emit(event);
+	}
+
+	onFocus(event: FocusEvent): void {
+		this._focused = true;
+
+		this.handleFocus.emit(event);
+
+		// console.log(this._parentGroupComponent);
 	}
 }

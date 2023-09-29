@@ -24,9 +24,9 @@ import { FudisTranslationService } from '../../../services/translation/translati
 export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
 	constructor(
 		private _idService: FudisIdService,
-		private _checkboxGroupConfigService: FudisTranslationService
+		_translationService: FudisTranslationService
 	) {
-		super(_checkboxGroupConfigService);
+		super(_translationService);
 	}
 
 	@HostBinding('class') classes = 'fudis-checkbox-group-host';
@@ -60,6 +60,8 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 	 * Output for option click
 	 */
 	@Output() optionsChange = new EventEmitter<FudisCheckboxOption[]>();
+
+	public groupFocusedIn = false;
 
 	/**
 	 * Updated options array after changes
@@ -103,4 +105,20 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 		this._updatedOptions = newOptions;
 		this.optionsChange.emit(this._updatedOptions);
 	}
+
+	onFocus(): void {
+		this.groupFocusedIn = true;
+	}
+
+	// @HostListener('document:click', ['$event'])
+	// private _handleWindowClick(event: MouseEvent) {
+	// 	event.stopPropagation();
+	// 	// event.preventDefault();
+	// 	console.log(event);
+	// }
+
+	// @HostListener('window:keydown.tab', ['$event'])
+	// private _handleTabPress(event: KeyboardEvent) {
+	// 	console.log(event);
+	// }
 }

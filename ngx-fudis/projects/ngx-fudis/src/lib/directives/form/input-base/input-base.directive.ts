@@ -73,7 +73,7 @@ export class InputBaseDirective extends TooltipApiDirective {
 	/**
 	 * To listen for input's blur event.
 	 */
-	@Output() handleBlur: EventEmitter<Event> = new EventEmitter<Event>();
+	@Output() handleBlur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
 	/**
 	 * Internal id to generate unique id
@@ -97,7 +97,7 @@ export class InputBaseDirective extends TooltipApiDirective {
 
 	private _focusTryCounter: number = 0;
 
-	public onBlur(event: Event): void {
+	public onBlur(event: FocusEvent): void {
 		this.handleBlur.emit(event);
 	}
 
