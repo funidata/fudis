@@ -97,7 +97,7 @@ const html = String.raw;
 
 const Template: StoryFn<CheckboxGroupExampleComponent> = (args: CheckboxGroupExampleComponent) => ({
 	props: args,
-	template: html`<example-checkbox-group></example-checkbox-group> `,
+	template: html`<example-checkbox-group />`,
 });
 export const Examples = Template.bind({});
 Examples.args = {};

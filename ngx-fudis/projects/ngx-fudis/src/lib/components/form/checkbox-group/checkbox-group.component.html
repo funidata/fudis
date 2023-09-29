@@ -8,26 +8,27 @@
 	[tooltipPosition]="tooltipPosition"
 	[tooltipToggle]="tooltipToggle">
 	<ng-template fudisContent type="fieldset">
-		<fudis-checkbox
-			*ngFor="let option of options; let index = index"
-			[groupId]="_id"
-			[id]="option.id"
-			[name]="option.name"
-			[value]="option.value"
-			[label]="option.label"
-			[required]="option.required"
-			[checked]="option.checked"
-			(handleFocus)="onFocus()"
-			[invalidState]="formGroup.invalid && formGroup.touched"
-			[control]="$any(formGroup).controls['checkbox' + index]"
-			(checkboxChange)="toggleChecked(option.id)"></fudis-checkbox>
-
-		<fudis-guidance
-			[inputLabel]="title"
-			[helpText]="helpText"
-			[for]="_id"
-			[groupErrorMsg]="groupErrorMsg"
-			[formGroup]="formGroup">
-		</fudis-guidance>
+		<ng-container *ngIf="options.length > 0">
+			<fudis-checkbox
+				*ngFor="let option of options; let index = index"
+				[groupId]="_id"
+				[id]="option.id"
+				[name]="option.name"
+				[value]="option.value"
+				[viewValue]="option.label"
+				[required]="option.required"
+				[checked]="option.checked"
+				(handleFocus)="onFocus()"
+				[invalidState]="formGroup.invalid && formGroup.touched"
+				[control]="$any(formGroup).controls['checkbox' + index]"
+				(checkboxChange)="toggleChecked(option.id)" />
+			<fudis-guidance
+				[inputLabel]="title"
+				[helpText]="helpText"
+				[for]="_id"
+				[groupErrorMsg]="groupErrorMsg"
+				[formGroup]="formGroup">
+			</fudis-guidance>
+		</ng-container>
 	</ng-template>
 </fudis-fieldset>

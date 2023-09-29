@@ -6,7 +6,7 @@
 		[formControl]="control"
 		[value]="value"
 		[name]="name"
-		[attr.aria-label]="label"
+		[attr.aria-label]="viewValue"
 		[attr.aria-describedby]="id + '_guidance'"
 		[attr.aria-disabled]="control.disabled"
 		[attr.required]="required ? true : null"
@@ -24,6 +24,6 @@
 			[class.fudis-checkbox__content__box--disabled]="control.disabled">
 			<fudis-icon *ngIf="checked" [icon]="'check-small'" class="fudis-checkbox__content__box__icon" />
 		</span>
-		<span class="fudis-checkbox__content__label">{{ label }}</span>
+		<span class="fudis-checkbox__content__label">{{ viewValue }}</span>
 	</span>
 </label>

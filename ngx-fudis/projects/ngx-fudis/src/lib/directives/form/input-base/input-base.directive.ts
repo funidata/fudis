@@ -13,9 +13,11 @@ export class InputBaseDirective extends TooltipApiDirective {
 		super();
 
 		effect(() => {
-			this._translations = this._translationService.getTranslations();
+			this._translations = _translationService.getTranslations();
 
 			this._requiredText = this._translations().REQUIRED;
+
+			console.log(this._requiredText);
 		});
 	}
 
