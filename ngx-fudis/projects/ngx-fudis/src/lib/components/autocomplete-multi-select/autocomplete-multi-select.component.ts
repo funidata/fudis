@@ -147,6 +147,7 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 		if (this.selectedOptions.length === 0) {
 			this.input.nativeElement.focus();
 		}
+		this.optionChange.emit();
 	}
 
 	/**
