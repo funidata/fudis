@@ -18,20 +18,18 @@ export class AutocompleteMultiSelectSelectedItemChipComponent {
 	@Input() parentId: string;
 
 	/**
-	 * Output for deleting the chip item
+	 * Output for removed chip index in selectedItems
 	 */
-	@Output() deleteItem = new EventEmitter<FudisDropdownOption>();
+	@Output() removedChipIndex = new EventEmitter<number>();
 
-	// eslint-disable-next-line class-methods-use-this
-	deleteChipItem(event: any, item: FudisDropdownOption) {
-		if (event.target.nextElementSibling) {
-			event.target.nextElementSibling.focus();
-		} else if (event.target.previousElementSibling) {
-			event.target.previousElementSibling.focus();
+	removeChip(event: Event, index: number) {
+		const eventTarget = event.target as HTMLButtonElement;
+		if (eventTarget.nextElementSibling) {
+			(eventTarget.nextElementSibling as HTMLButtonElement).focus();
+		} else if (eventTarget.previousElementSibling) {
+			(eventTarget.previousElementSibling as HTMLButtonElement).focus();
 		}
 
-		const index = this.selectedItems.indexOf(item);
-		this.selectedItems.splice(index, 1);
-		this.deleteItem.emit(item);
+		this.removedChipIndex.emit(index);
 	}
 }

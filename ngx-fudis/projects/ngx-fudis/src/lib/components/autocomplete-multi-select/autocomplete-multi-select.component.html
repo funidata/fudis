@@ -51,7 +51,7 @@
 		<span [attr.id]="_id + '-remove-items'" class="fudis-visually-hidden">{{ _removeItemText }}</span>
 		<fudis-autocomplete-multi-select-selected-item-chip
 			[parentId]="_id"
-			(deleteItem)="_handleDeleteItem()"
+			(removedChipIndex)="_handleRemoveChip($event)"
 			[selectedItems]="selectedOptions" />
 	</ng-container>
 	<ng-container *ngIf="helpText">
