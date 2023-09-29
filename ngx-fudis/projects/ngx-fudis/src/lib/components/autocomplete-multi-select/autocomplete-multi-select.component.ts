@@ -109,8 +109,8 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 			this.removeItem(item);
 		} else {
 			this.selectedOptions.push(item);
+			this.optionChange.emit(this.selectedOptions);
 		}
-		this.optionChange.emit(this.selectedOptions);
 	}
 
 	public removeItem(item: FudisDropdownOption): void {
@@ -141,12 +141,16 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	}
 
 	/**
-	 * If there are no selections done, focus back to input on last item removal
+	 * Handle chip item remove by index. If there are no selections done, focus back to input on last item removal.
 	 */
-	protected _handleDeleteItem(): void {
+	protected _handleRemoveChip(index: number): void {
+		this.selectedOptions.splice(index, 1);
+
 		if (this.selectedOptions.length === 0) {
 			this.input.nativeElement.focus();
 		}
+
+		this.optionChange.emit(this.selectedOptions);
 	}
 
 	/**
