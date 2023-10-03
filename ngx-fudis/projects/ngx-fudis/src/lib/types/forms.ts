@@ -6,17 +6,15 @@ export type FudisInputWidth = 'sm' | 'md' | 'lg';
 
 export interface FudisCheckboxOption {
 	/** Unique id for single checkbox option */
-	id: string;
+	id?: string;
 	/** Name for the group of checkboxes */
-	name: string;
+	groupName?: string;
 	/** Underlying value of the option */
-	value: string | boolean | null;
+	controlName: string;
 	/** Value that is shown in the UI */
-	label: string;
-	/** I s option required */
-	required?: boolean;
+	viewValue: string;
 	/** Is option selected */
-	checked?: boolean | null | undefined;
+	value?: boolean | null | undefined;
 }
 
 export interface FudisRadioButtonOption {
@@ -108,6 +106,12 @@ export type FudisDropdownLanguageOption =
 export interface FudisInputWithLanguageOptionsFormGroup {
 	[language: string]: FormControl<string | null>;
 }
+
+export type FudisCheckboxControl = FormControl<boolean | null | undefined>;
+export interface FudisCheckboxGroupFormGroup {
+	[key: string]: FormControl<boolean | null | undefined>;
+}
+
 export interface FudisDateRangeItem {
 	control: FormControl<Date | null>;
 	label: string;

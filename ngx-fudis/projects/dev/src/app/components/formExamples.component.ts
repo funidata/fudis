@@ -67,10 +67,10 @@ export class AppFormExampleComponent implements OnInit {
 		date: new FormControl<Date | null>(null, Validators.required),
 		checkboxFormGroup: new FormGroup(
 			{
-				checkbox0: new FormControl<FudisCheckboxOption | null>(null),
-				checkbox1: new FormControl<FudisCheckboxOption | null>(null),
-				checkbox2: new FormControl<FudisCheckboxOption | null>(null),
-				checkbox3: new FormControl<FudisCheckboxOption | null>(null),
+				blueberry: new FormControl<FudisCheckboxOption | null>(null),
+				cloudberry: new FormControl<FudisCheckboxOption | null>(null),
+				raspberry: new FormControl<FudisCheckboxOption | null>(null),
+				strawberry: new FormControl<FudisCheckboxOption | null>(null),
 			},
 			[FudisFormGroupValidators.atLeastOneRequired(), FudisFormGroupValidators.outOfRequiredRange(2, 3)]
 		),
@@ -94,10 +94,10 @@ export class AppFormExampleComponent implements OnInit {
 					{ value: false, viewValue: value.chooseTruthFalse, id: 'boolean-1', name: 'booleans' },
 				];
 				this.checkboxOptions = [
-					{ value: 'blueberry', label: value.blueberry, id: 'berry-1', name: 'berries' },
-					{ value: 'cloudberry', label: value.cloudberry, id: 'berry-2', name: 'berries' },
-					{ value: 'raspberry', label: value.raspberry, id: 'berry-3', name: 'berries' },
-					{ value: 'strawberry', label: value.strawberry, id: 'berry-4', name: 'berries' },
+					{ controlName: 'blueberry', viewValue: value.blueberry },
+					{ controlName: 'cloudberry', viewValue: value.cloudberry },
+					{ controlName: 'raspberry', viewValue: value.raspberry },
+					{ controlName: 'strawberry', viewValue: value.strawberry },
 				];
 			});
 	}
@@ -115,7 +115,9 @@ export class AppFormExampleComponent implements OnInit {
 		}
 	}
 
-	toggleChecked(updatedOptions: FudisCheckboxOption[]): void {
-		this.checkboxOptions = updatedOptions;
+	// eslint-disable-next-line class-methods-use-this
+	handleChange(updatedOptions: FudisCheckboxOption): void {
+		// eslint-disable-next-line no-console
+		console.log(updatedOptions);
 	}
 }

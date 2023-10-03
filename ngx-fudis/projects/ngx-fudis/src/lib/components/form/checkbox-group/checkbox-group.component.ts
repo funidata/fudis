@@ -1,45 +1,24 @@
-import {
-	Component,
-	EventEmitter,
-	HostBinding,
-	Input,
-	OnChanges,
-	OnInit,
-	Output,
-	ViewEncapsulation,
-} from '@angular/core';
+import { Component, Host, Input, OnChanges, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { FudisCheckboxOption, FudisFormGroupErrors } from '../../../types/forms';
+import {
+	FudisCheckboxGroupFormGroup,
+	FudisCheckboxOption,
+	FudisFormGroupErrors,
+	FudisInputWidth,
+} from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
-import { FudisIdService } from '../../../services/id/id.service';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 @Component({
 	selector: 'fudis-checkbox-group',
 	templateUrl: './checkbox-group.component.html',
 	styleUrls: ['./checkbox-group.component.scss'],
-	encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
-	constructor(
-		private _idService: FudisIdService,
-		_translationService: FudisTranslationService
-	) {
-		super(_translationService);
-	}
-
-	@HostBinding('class') classes = 'fudis-checkbox-group-host';
-
 	/*
 	 * FormControl for Checkbox group
 	 */
-	@Input({ required: true }) formGroup: FormGroup;
-
-	/*
-	 * Array of options for group of checkboxes
-	 */
-	@Input({ required: true }) options: FudisCheckboxOption[];
+	@Input({ required: true }) formGroup: FormGroup<FudisCheckboxGroupFormGroup>;
 
 	/*
 	 * Object containing error messages for each FormControl and for the FormGroup.
@@ -47,20 +26,25 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 	@Input() groupErrorMsg: FudisFormGroupErrors;
 
 	/**
+	 * Set fieldset as required. By default set to 'undefined' and this attribute is determined to true / false depending on if FormGroup has Validators.required.
+	 */
+	@Input() required: boolean | undefined = undefined;
+
+	/**
 	 * Set Checkbox Group's visual style and ARIA attribute as invalid. Does not override if control.invalid is true.
 	 */
 	@Input() invalidState: boolean = false;
 
 	/**
-	 * Set fieldset as required. By default set to 'undefined' and this attribute is determined to true / false depending on if FormControl has Validators.required. This setting will override that.
+	 * Width size of the group - defaults to large.
 	 */
-	@Input() required: boolean | undefined = undefined;
+	@Input() size: FudisInputWidth = 'lg';
+
+	@Host() public groupId: string;
 
 	/**
-	 * Output for option click
+	 * To determine if focus has been moved out from the whole checkbox group, so possible errors will not show before that.
 	 */
-	@Output() optionsChange = new EventEmitter<FudisCheckboxOption[]>();
-
 	protected _groupBlurredOut = false;
 
 	/**
@@ -69,46 +53,18 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 	protected _updatedOptions: FudisCheckboxOption[] = [];
 
 	ngOnInit() {
-		this._id = this.id ?? this._idService.getNewId('checkboxGroup');
-
-		if (this.options.length < 1) {
-			throw new Error(`Fudis-checkbox-group should have at least one option for checkboxes.`);
-		}
-
-		const nameMismatch = this.options.filter((optionName) =>
-			this.options.some((item) => optionName.name !== item.name)
-		);
-
-		if (nameMismatch.length > 0) {
-			throw new Error(
-				`In fudis-checkbox-group options array, each object's 'name' value should be identical for all options, but name mismatch was detected.`
-			);
-		}
+		this.id = this.id ?? this._idService.getNewId('checkboxGroup');
 	}
 
-	ngOnChanges(): void {
-		this._required = this.required ?? this.formGroup.hasValidator(Validators.required);
-	}
-
-	toggleChecked(id: string): void {
-		const newOptions: FudisCheckboxOption[] = [];
-
-		this.options.forEach((option) => {
-			const newOption = option;
-
-			if (option.id === id) {
-				newOption.checked = !option.checked;
-			}
-			newOptions.push(newOption);
-		});
-
-		this._updatedOptions = newOptions;
-		this.optionsChange.emit(this._updatedOptions);
+	ngOnChanges() {
+		this.required = this.required || this.formGroup.hasValidator(Validators.required);
 	}
 
 	handleGroupFocusedOut(value: boolean): void {
 		if (value) {
 			this._groupBlurredOut = true;
+		} else {
+			this._groupBlurredOut = false;
 		}
 	}
 }

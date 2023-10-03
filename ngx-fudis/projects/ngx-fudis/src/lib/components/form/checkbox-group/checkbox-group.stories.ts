@@ -1,84 +1,16 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { Component } from '@angular/core';
+import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { CheckboxGroupComponent } from './checkbox-group.component';
-import { FudisCheckboxOption } from '../../../types/forms';
+import { FudisCheckboxGroupFormGroup } from '../../../types/forms';
 import readme from './readme.mdx';
 import { FudisFormGroupValidators } from '../../../utilities/form/validators';
-
-@Component({
-	selector: 'example-checkbox-group',
-	template: `
-		<form [formGroup]="mainFormGroup">
-			<fudis-checkbox-group
-				*ngIf="mainFormGroup"
-				style="margin-bottom: 1rem;"
-				[required]="true"
-				[title]="'Choose your preferred fruit'"
-				[helpText]="'Fruits are important for your health.'"
-				[groupErrorMsg]="{
-					atLeastOneRequired: 'No berries picked!'
-				}"
-				[options]="fruitOptions"
-				[formGroup]="mainFormGroup.controls['fruitFormGroup']" />
-			<fudis-checkbox-group
-				*ngIf="mainFormGroup"
-				style="margin-bottom: 1rem;"
-				[title]="'Choose a pet'"
-				[helpText]="'We all should have a pet.'"
-				[groupErrorMsg]="{
-					lessThanRequiredRange: 'Not enough pets picked!',
-					moreThanRequiredRange: 'Too much pets picked!'
-				}"
-				[options]="petOptions"
-				[tooltip]="'Choose from two to three pets'"
-				[formGroup]="mainFormGroup.controls['petFormGroup']" />
-		</form>
-	`,
-})
-class CheckboxGroupExampleComponent {
-	constructor(private _formBuilder: FormBuilder) {}
-
-	fruitOptions: FudisCheckboxOption[] = [
-		{ value: 'apple', label: 'Apple', id: 'fruit-1', name: 'fruit' },
-		{ value: 'fair-trade-banana', label: 'Fair Trade Banana', id: 'fruit-2', name: 'fruit' },
-		{ value: 'cherry', label: 'Cherry', id: 'fruit-3', name: 'fruit' },
-	];
-
-	petOptions: FudisCheckboxOption[] = [
-		{ value: 'platypus', label: 'Platypus', id: 'pet-1', name: 'animal' },
-		{ value: 'otter', label: 'Otter', id: 'pet-2', name: 'animal' },
-		{ value: 'capybara', label: 'Capybara', id: 'pet-3', name: 'animal' },
-		{ value: 'unicorn', label: 'Unicorn', id: 'pet-4', name: 'animal' },
-	];
-
-	mainFormGroup: FormGroup = this._formBuilder.group({
-		fruitFormGroup: new FormGroup(
-			{
-				checkbox0: new FormControl<FudisCheckboxOption | null>(null),
-				checkbox1: new FormControl<FudisCheckboxOption | null>(null),
-				checkbox2: new FormControl<FudisCheckboxOption | null>(null),
-			},
-			FudisFormGroupValidators.atLeastOneRequired()
-		),
-		petFormGroup: new FormGroup(
-			{
-				checkbox0: new FormControl<FudisCheckboxOption | null>(null),
-				checkbox1: new FormControl<FudisCheckboxOption | null>(null),
-				checkbox2: new FormControl<FudisCheckboxOption | null>(null),
-				checkbox3: new FormControl<FudisCheckboxOption | null>(null),
-			},
-			FudisFormGroupValidators.outOfRequiredRange(2, 3)
-		),
-	});
-}
 
 export default {
 	title: 'Components/Form/Checkbox Group',
 	component: CheckboxGroupComponent,
 	decorators: [
 		moduleMetadata({
-			declarations: [CheckboxGroupExampleComponent],
+			declarations: [],
 			imports: [ReactiveFormsModule, FormsModule],
 		}),
 	],
@@ -95,9 +27,107 @@ export default {
 
 const html = String.raw;
 
-const Template: StoryFn<CheckboxGroupExampleComponent> = (args: CheckboxGroupExampleComponent) => ({
-	props: args,
-	template: html`<example-checkbox-group />`,
+const options = [
+	{ controlName: 'apple', viewValue: 'Apple' },
+	{ controlName: 'fairTradeBanana', viewValue: 'Fair trade banana' },
+	{ controlName: 'pear', viewValue: 'Pear' },
+	{ controlName: 'pineapple', viewValue: 'Pineapple' },
+	{ controlName: 'orange', viewValue: 'Orange' },
+];
+
+const basicFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+	{
+		apple: new FormControl<boolean | null | undefined>(null),
+		fairTradeBanana: new FormControl<boolean | null | undefined>(null),
+		pear: new FormControl<boolean | null | undefined>(null),
+		pineapple: new FormControl<boolean | null | undefined>(null),
+		orange: new FormControl<boolean | null | undefined>(null),
+	},
+	[FudisFormGroupValidators.atLeastOneRequired()]
+);
+
+const withDisabledFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup>(
+	{
+		apple: new FormControl<boolean | null | undefined>({ value: true, disabled: true }),
+		fairTradeBanana: new FormControl<boolean | null | undefined | null>(null),
+		pear: new FormControl<boolean | null | undefined | null>({ value: false, disabled: true }),
+		pineapple: new FormControl<boolean | null | undefined | null>(null),
+		orange: new FormControl<boolean | null | undefined | null>({ value: null, disabled: true }),
+	},
+	[FudisFormGroupValidators.atLeastOneRequired()]
+);
+const withMinMaxFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup>(
+	{
+		apple: new FormControl<boolean | null | undefined>(null),
+		fairTradeBanana: new FormControl<boolean | null | undefined | null>(null),
+		pear: new FormControl<boolean | null | undefined | null>(null),
+		pineapple: new FormControl<boolean | null | undefined | null>(null),
+		orange: new FormControl<boolean | null | undefined | null>(null),
+	},
+	[FudisFormGroupValidators.outOfRequiredRange(2, 3)]
+);
+
+const ExampleTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupComponent) => ({
+	props: {
+		...args,
+		formGroup: basicFormGroup,
+		options,
+	},
+	template: html`<fudis-checkbox-group
+		[formGroup]="formGroup"
+		[required]="true"
+		[title]="'Choose your preferred fruits'"
+		[helpText]="'Pick at least one fruit.'"
+		[tooltip]="'Fruit sugar is great in small doces!'"
+		[groupErrorMsg]="{
+					atLeastOneRequired: 'No fruit picked!'
+				}">
+		<fudis-checkbox *ngFor="let option of options" [controlName]="option.controlName" [viewValue]="option.viewValue" />
+	</fudis-checkbox-group>`,
 });
-export const Examples = Template.bind({});
-Examples.args = {};
+
+export const Example = ExampleTemplate.bind({});
+Example.args = {};
+
+const ExampleWithDisabledTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupComponent) => ({
+	props: {
+		...args,
+		formGroup: withDisabledFormGroupOptions,
+		options,
+	},
+	template: html`<fudis-checkbox-group
+		[formGroup]="formGroup"
+		[required]="true"
+		[title]="'Choose your preferred fruits'"
+		[helpText]="'Pick at least one fruit.'"
+		[groupErrorMsg]="{
+					atLeastOneRequired: 'No fruit picked!'
+				}">
+		<fudis-checkbox *ngFor="let option of options" [controlName]="option.controlName" [viewValue]="option.viewValue" />
+	</fudis-checkbox-group>`,
+});
+
+export const ExampleWithDisabledOption = ExampleWithDisabledTemplate.bind({});
+ExampleWithDisabledOption.args = {};
+
+const ExampleWithMinMaxTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupComponent) => ({
+	props: {
+		...args,
+		formGroup: withMinMaxFormGroupOptions,
+		options,
+	},
+	template: html`<fudis-checkbox-group
+		[formGroup]="formGroup"
+		[required]="true"
+		[title]="'Choose your preferred fruits'"
+		[helpText]="'Pick from two to three fruits.'"
+		[groupErrorMsg]="{
+			lessThanRequiredRange: 'Not enough fruits picked',
+			moreThanRequiredRange: 'Too many fruits selected.'
+		}">
+		<fudis-checkbox *ngFor="let option of options" [controlName]="option.controlName" [viewValue]="option.viewValue" />
+	</fudis-checkbox-group>`,
+});
+
+export const ExampleWithMinMax = ExampleWithMinMaxTemplate.bind({});
+ExampleWithMinMax.args = {};

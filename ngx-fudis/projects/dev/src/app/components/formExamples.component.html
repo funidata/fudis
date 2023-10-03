@@ -22,10 +22,13 @@
 									lessThanRequiredRange: t('chooseBerryErrorMin'),
 									moreThanRequiredRange: t('chooseBerryErrorMax')
 								}"
-								[options]="checkboxOptions"
 								[tooltip]="t('chooseBerryTooltip')"
-								(optionsChange)="toggleChecked($event)"
 								[formGroup]="testFormGroup.controls['checkboxFormGroup']">
+								<fudis-checkbox
+									*ngFor="let option of checkboxOptions"
+									(handleChange)="handleChange($event)"
+									[controlName]="option.controlName"
+									[viewValue]="option.viewValue" />
 							</fudis-checkbox-group>
 							<fudis-text-input
 								[label]="t('label')"

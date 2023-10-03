@@ -15,6 +15,7 @@ type ComponentType =
 	| 'form'
 	| 'heading'
 	| 'inputWithLanguageOptions'
+	| 'radioButton'
 	| 'radioButtonGroup'
 	| 'section'
 	| 'textArea'
@@ -43,6 +44,7 @@ export class FudisIdService {
 		form: 0,
 		heading: 0,
 		inputWithLanguageOptions: 0,
+		radioButton: 0,
 		radioButtonGroup: 0,
 		section: 0,
 		textArea: 0,
@@ -54,6 +56,12 @@ export class FudisIdService {
 
 		this._idList = { ...this._idList, [componentType]: orderNumber };
 
+		if (componentType === 'checkbox' || componentType === 'radioButton') {
+			const idToReturn = `fudis-${componentType}Group-${
+				this._idList[`${componentType}Group`]
+			}-${componentType}-${orderNumber}`;
+			return idToReturn;
+		}
 		const idToReturn = `fudis-${componentType}-${orderNumber}`;
 
 		return idToReturn;

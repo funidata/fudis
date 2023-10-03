@@ -112,6 +112,7 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		BodyTextComponent,
 		ButtonComponent,
 		CheckboxComponent,
+		CheckboxGroupComponent,
 		ContentDirective,
 		DatepickerComponent,
 		DatepickerCustomHeaderComponent,
@@ -162,8 +163,6 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		TextInputComponent,
 		TextAreaComponent,
 		TooltipDirective,
-		CheckboxComponent,
-		CheckboxGroupComponent,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.

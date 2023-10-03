@@ -1,6 +1,8 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Input, Output, EventEmitter, HostBinding, ViewEncapsulation, Inject } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostBinding, ViewEncapsulation, Host, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { FudisIdService } from '../../../../services/id/id.service';
+import { CheckboxGroupComponent } from '../checkbox-group.component';
+import { FudisCheckboxOption } from '../../../../types/forms';
 
 @Component({
 	selector: 'fudis-checkbox',
@@ -8,40 +10,25 @@ import { FormControl } from '@angular/forms';
 	styleUrls: ['./checkbox.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class CheckboxComponent {
-	constructor(@Inject(DOCUMENT) private _document: Document) {}
+export class CheckboxComponent implements OnInit {
+	constructor(
+		private _idService: FudisIdService,
+		@Host() protected _checkboxGroup: CheckboxGroupComponent
+	) {}
 
 	@HostBinding('class') classes = 'fudis-checkbox-host';
 
 	/*
-	 * FormControl for single Radio Button
+	 * Control name from FormGroup
 	 */
-	@Input({ required: true }) control: FormControl;
+	@Input({ required: true }) controlName: string;
 
-	/*
-	 * Selectable form value of a single Radio Button, e.g. "fair-trade-banana"
-	 */
-	@Input({ required: true }) value: string | boolean | null;
-
-	/*
-	 * Visible label for a single Radio Button, e. g. "Fair trade banana"
-	 */
 	@Input({ required: true }) viewValue: string;
 
 	/*
-	 * Name for group of Radio Buttons, e.g. "fruit"
-	 */
-	@Input({ required: true }) name: string;
-
-	/*
-	 * Id for single Radio Button
+	 * Id for single Radio Button. By default generated.
 	 */
 	@Input() id: string;
-
-	/*
-	 * If Radio Button group of same name selection is required
-	 */
-	@Input() required: boolean | undefined;
 
 	/*
 	 * If Radio Button is checked
@@ -49,48 +36,60 @@ export class CheckboxComponent {
 	@Input() checked: boolean | null | undefined;
 
 	/**
-	 * Set Radio Button's visual style and ARIA attribute as invalid. Does not override if control.invalid is true.
-	 */
-	@Input() invalidState: boolean = false;
-
-	@Input() groupId: string;
-
-	/**
 	 * Checked input change output
 	 */
-	@Output() checkboxChange = new EventEmitter<boolean>();
+	@Output() handleChange = new EventEmitter<FudisCheckboxOption>();
 
-	@Output() handleFocus = new EventEmitter<FocusEvent>();
-
-	@Output() handleBlur = new EventEmitter<FocusEvent>();
-
-	@Output() groupFocusedOut = new EventEmitter<boolean>();
+	public control: FormControl<boolean | null | undefined>;
 
 	protected _focused = false;
 
+	protected _checked: boolean | null | undefined = null;
+
+	/**
+	 * Html id attribute
+	 */
+	protected _id: string;
+
+	protected _groupId: string;
+
+	ngOnInit(): void {
+		this._id = this.id ?? this._idService.getNewId('checkbox');
+		this._groupId = this._checkboxGroup.id;
+		this.isChecked();
+	}
+
 	onChange(): void {
-		this.checkboxChange.emit(!this.checked);
+		this.isChecked();
+
+		const optionToEmit: FudisCheckboxOption = {
+			id: this._id,
+			groupName: this._groupId,
+			controlName: this.controlName,
+			viewValue: this.viewValue,
+			value: this._checkboxGroup.formGroup.controls[this.controlName].value,
+		};
+
+		this.handleChange.emit(optionToEmit);
 	}
 
 	onBlur(event: FocusEvent): void {
 		this._focused = false;
 
-		if ((event.relatedTarget as HTMLElement)?.getAttribute('data-group-id') !== this.groupId) {
+		if ((event.relatedTarget as HTMLElement)?.getAttribute('name') !== this._groupId) {
 			setTimeout(() => {
-				if (document.activeElement?.getAttribute('data-group-id') !== this.groupId) {
-					this.groupFocusedOut.emit(true);
+				if (document.activeElement?.getAttribute('name') !== this._groupId) {
+					this._checkboxGroup.handleGroupFocusedOut(true);
 				}
 			}, 150);
 		}
-
-		this.handleBlur.emit(event);
 	}
 
-	onFocus(event: FocusEvent): void {
+	onFocus(): void {
 		this._focused = true;
+	}
 
-		this.handleFocus.emit(event);
-
-		// console.log(this._parentGroupComponent);
+	isChecked(): void {
+		this._checked = this._checkboxGroup.formGroup.controls[this.controlName].value ?? this.checked;
 	}
 }

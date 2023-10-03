@@ -1,29 +1,41 @@
-<label class="fudis-checkbox" [attr.for]="id">
+<label class="fudis-checkbox" [attr.for]="_id">
 	<input
 		type="checkbox"
 		class="fudis-checkbox__input"
-		[id]="id"
-		[formControl]="control"
-		[value]="value"
-		[name]="name"
+		[id]="_id"
+		[formControl]="_checkboxGroup.formGroup.controls[controlName]"
+		[value]="_checkboxGroup.formGroup.controls[controlName].value"
+		[name]="_groupId"
+		[attr.name]="_groupId"
 		[attr.aria-label]="viewValue"
-		[attr.aria-describedby]="id + '_guidance'"
-		[attr.aria-disabled]="control.disabled"
-		[attr.required]="required ? true : null"
-		[attr.checked]="checked ? true : null"
-		[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
-		[attr.data-group-id]="groupId"
+		[attr.aria-describedby]="_id + '_guidance'"
+		[attr.aria-disabled]="_checkboxGroup.formGroup.controls[controlName].disabled"
+		[attr.required]="_checkboxGroup.required ? true : null"
+		[attr.checked]="_checked ? true : null"
+		[attr.aria-invalid]="
+			(_checkboxGroup.formGroup.controls[controlName].touched &&
+				_checkboxGroup.formGroup.controls[controlName].invalid) ||
+			(_checkboxGroup.formGroup.controls[controlName].touched && _checkboxGroup.invalidState)
+				? true
+				: null
+		"
 		(change)="onChange()"
 		(blur)="onBlur($event)"
-		(focus)="onFocus($event)" />
+		(focus)="onFocus()" />
 	<span class="fudis-checkbox__content">
 		<span
 			class="fudis-checkbox__content__box"
 			[class.fudis-checkbox__content__box--focused]="_focused"
-			[class.fudis-checkbox__content__box--invalid]="(control.invalid && control.touched) || invalidState"
-			[class.fudis-checkbox__content__box--disabled]="control.disabled">
-			<fudis-icon *ngIf="checked" [icon]="'check-small'" class="fudis-checkbox__content__box__icon" />
+			[class.fudis-checkbox__content__box--invalid]="
+				(_checkboxGroup.formGroup.controls[controlName].invalid &&
+					_checkboxGroup.formGroup.controls[controlName].touched) ||
+				_checkboxGroup.invalidState
+			"
+			[class.fudis-checkbox__content__box--disabled]="_checkboxGroup.formGroup.controls[controlName].disabled">
+			<fudis-icon *ngIf="_checked" [icon]="'check-small'" class="fudis-checkbox__content__box__icon" />
 		</span>
-		<span class="fudis-checkbox__content__label">{{ viewValue }}</span>
+		<span class="fudis-checkbox__content__label">
+			{{ viewValue }}
+		</span>
 	</span>
 </label>

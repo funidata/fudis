@@ -19,7 +19,7 @@ import { FudisSpacing } from '../../../types/miscellaneous';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
-import { FudisFormErrorSummarySection } from '../../../types/forms';
+import { FudisFormErrorSummarySection, FudisInputWidth } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 @Component({
@@ -30,11 +30,11 @@ import { FudisTranslationService } from '../../../services/translation/translati
 })
 export class FieldSetComponent extends FieldSetBaseDirective implements AfterViewInit, OnInit, OnDestroy, OnChanges {
 	constructor(
-		private _idService: FudisIdService,
-		private _errorSummaryService: FudisErrorSummaryService,
-		private _fieldsetTranslationService: FudisTranslationService
+		_idService: FudisIdService,
+		_translationService: FudisTranslationService,
+		private _errorSummaryService: FudisErrorSummaryService
 	) {
-		super(_fieldsetTranslationService);
+		super(_idService, _translationService);
 	}
 
 	@ContentChild(ActionsDirective) headerActions: ActionsDirective | null;
@@ -55,6 +55,8 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	 * xs = Viewports smaller than 576px
 	 */
 	@Input() width: FudisGridWidth = 'xxl';
+
+	@Input() inputSize: FudisInputWidth;
 
 	/**
 	 * Alignment of Grid component inside its parent
@@ -96,6 +98,8 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	 */
 	protected _title: string;
 
+	protected _classes: string[];
+
 	/**
 	 * Has fieldset been added to error summary
 	 */
@@ -110,6 +114,7 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 		this._id = this.id ?? this._idService.getNewId('fieldset');
 		this._title = this.title;
 		this.addToErrorSummary();
+		this._setClasses();
 	}
 
 	ngAfterViewInit(): void {
@@ -123,6 +128,7 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 			this._title = this.title;
 			this.addToErrorSummary();
 		}
+		this._setClasses();
 	}
 
 	addToErrorSummary(): void {
@@ -146,5 +152,13 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 
 	ngOnDestroy(): void {
 		this.removeFromErrorSummary();
+	}
+
+	private _setClasses(): void {
+		if (this.inputSize) {
+			this._classes = ['fudis-fieldset', `fudis-fieldset__input-width__${this.inputSize}`];
+		} else {
+			this._classes = ['fudis-fieldset'];
+		}
 	}
 }

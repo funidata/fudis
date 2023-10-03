@@ -1,35 +1,22 @@
 <fudis-fieldset
-	[id]="_id"
+	[id]="id"
 	[titleSize]="'sm'"
 	[title]="title"
-	[required]="_required ? _required : undefined"
+	[required]="required ? required : undefined"
 	[errorSummaryBreadcrumb]="false"
+	[inputSize]="size"
 	[tooltip]="tooltip"
 	[tooltipPosition]="tooltipPosition"
 	[tooltipToggle]="tooltipToggle">
 	<ng-template fudisContent type="fieldset">
-		<ng-container *ngIf="options.length > 0">
-			<fudis-checkbox
-				*ngFor="let option of options; let index = index"
-				[groupId]="_id"
-				[id]="option.id"
-				[name]="option.name"
-				[value]="option.value"
-				[viewValue]="option.label"
-				[required]="option.required"
-				[checked]="option.checked"
-				[invalidState]="_groupBlurredOut && formGroup.invalid && formGroup.touched"
-				[control]="$any(formGroup).controls['checkbox' + index]"
-				(groupFocusedOut)="handleGroupFocusedOut($event)"
-				(checkboxChange)="toggleChecked(option.id)" />
-			<fudis-guidance
-				[inputLabel]="title"
-				[helpText]="helpText"
-				[for]="_id"
-				[groupBlurredOut]="_groupBlurredOut"
-				[groupErrorMsg]="groupErrorMsg"
-				[formGroup]="formGroup">
-			</fudis-guidance>
-		</ng-container>
+		<ng-content select="fudis-checkbox" />
+		<fudis-guidance
+			[inputLabel]="title"
+			[helpText]="helpText"
+			[for]="id"
+			[groupBlurredOut]="_groupBlurredOut"
+			[groupErrorMsg]="groupErrorMsg"
+			[formGroup]="formGroup">
+		</fudis-guidance>
 	</ng-template>
 </fudis-fieldset>
