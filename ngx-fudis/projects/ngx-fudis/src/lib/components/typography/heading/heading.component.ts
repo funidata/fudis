@@ -36,8 +36,8 @@ export class HeadingComponent implements OnInit {
 	@Input() id: string;
 
 	/**
- 	* Align heading
- 	*/
+	 * Align heading
+	 */
 	@Input() align: FudisTextAlign = 'left';
 
 	/**
@@ -51,7 +51,7 @@ export class HeadingComponent implements OnInit {
 	protected _id: string;
 
 	getHeadingMarginBottom(): string {
-		if (this.level === 1 || this.level === 2 ) {
+		if (this.level === 1 || this.level === 2) {
 			return 'sm';
 		}
 		return 'xs';

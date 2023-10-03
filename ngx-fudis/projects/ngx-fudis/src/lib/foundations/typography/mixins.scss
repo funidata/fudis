@@ -54,7 +54,6 @@
 	font-family: tokens.$font-family;
 	font-size: tokens.$heading-xxl-font-size;
 	font-weight: tokens.$font-weight-medium;
-	
 	@include breakpoints.breakpoint-max('sm') {
 		font-size: tokens.$heading-xl-font-size;
 	}
