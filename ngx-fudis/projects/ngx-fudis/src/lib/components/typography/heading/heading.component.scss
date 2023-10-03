@@ -34,4 +34,16 @@
 	&__xxl {
 		@include typography.heading-xxl;
 	}
+
+	&__left {
+		text-align: left;
+	}
+
+	&__right {
+		text-align: right;
+	}
+
+	&__center {
+		text-align: center;
+	}
 }

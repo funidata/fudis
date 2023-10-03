@@ -51,6 +51,8 @@ export type FudisNotification = 'warning' | 'danger' | 'success' | 'info';
 
 export type FudisTooltipPosition = 'left' | 'right' | 'above' | 'below';
 
+export type FudisTextAlign = 'left' | 'right' | 'center';
+
 export type FudisLanguageAbbr = 'fi' | 'sv' | 'en';
 
 export interface FudisTranslationConfig {

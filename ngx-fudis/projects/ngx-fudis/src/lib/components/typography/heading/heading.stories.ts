@@ -15,12 +15,10 @@ export default {
 	},
 } as Meta;
 
-const html = String.raw;
-
-const Template: StoryFn<HeadingComponent> = (args: HeadingComponent) => ({
+const Template: StoryFn = (args) => ({
 	props: args,
-	template: html`
-		<fudis-heading [level]="level" [size]="size" [marginBottom]="marginBottom">This is Fudis heading</fudis-heading>
+	template: `
+		<fudis-heading [level]="level" [size]="size" [marginBottom]="marginBottom" [align]="align">This is Fudis heading</fudis-heading>
 	`,
 });
 
@@ -28,11 +26,12 @@ export const Heading = Template.bind({});
 Heading.args = {
 	level: 1,
 	size: 'lg',
+	align: 'left',
 	marginBottom: 'xs',
 };
 
 export const AllVariants: StoryFn = () => ({
-	template: html`
+	template: `
 		<fudis-grid>
 			<fudis-heading [level]="1">This is Fudis heading: xxl</fudis-heading>
 			<fudis-heading [level]="2">This is Fudis heading: xl</fudis-heading>

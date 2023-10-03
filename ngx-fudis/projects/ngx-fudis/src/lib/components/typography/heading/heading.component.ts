@@ -1,7 +1,7 @@
 import { Component, Input, HostBinding, ViewEncapsulation, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { FudisHeadingLevel, FudisHeadingSize } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
-import { FudisSpacing } from '../../../types/miscellaneous';
+import { FudisSpacing, FudisTextAlign } from '../../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-heading',
@@ -23,17 +23,22 @@ export class HeadingComponent implements OnInit {
 	/**
 	 * Heading size
 	 */
-	@Input() size?: FudisHeadingSize;
+	@Input() size: FudisHeadingSize;
 
 	/**
 	 * Margin bottom for heading
 	 */
-	@Input() marginBottom?: FudisSpacing;
+	@Input() marginBottom: FudisSpacing;
 
 	/**
 	 * Heading id
 	 */
 	@Input() id: string;
+
+	/**
+ 	* Align heading
+ 	*/
+	@Input() align: FudisTextAlign = 'left';
 
 	/**
 	 * Heading CSS class list
@@ -67,7 +72,7 @@ export class HeadingComponent implements OnInit {
 			case 6:
 				return 'xs';
 			default:
-				return 'xl';
+				return 'lg';
 		}
 	}
 
@@ -85,5 +90,7 @@ export class HeadingComponent implements OnInit {
 		} else {
 			this._classList += ` fudis-mb-${this.marginBottom}`;
 		}
+
+		this._classList += ` fudis-heading__${this.align}`;
 	}
 }
