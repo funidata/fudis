@@ -6,16 +6,11 @@
 		[formControl]="_checkboxGroup.formGroup.controls[controlName]"
 		[value]="_checkboxGroup.formGroup.controls[controlName].value"
 		[name]="_groupId"
-		[attr.name]="_groupId"
-		[attr.aria-label]="viewValue"
 		[attr.aria-describedby]="_id + '_guidance'"
 		[attr.aria-disabled]="_checkboxGroup.formGroup.controls[controlName].disabled"
-		[attr.required]="_checkboxGroup.required ? true : null"
 		[attr.checked]="_checked ? true : null"
 		[attr.aria-invalid]="
-			(_checkboxGroup.formGroup.controls[controlName].touched &&
-				_checkboxGroup.formGroup.controls[controlName].invalid) ||
-			(_checkboxGroup.formGroup.controls[controlName].touched && _checkboxGroup.invalidState)
+			_checkboxGroup.formGroup.touched && (_checkboxGroup.formGroup.invalid || _checkboxGroup.invalidState)
 				? true
 				: null
 		"
