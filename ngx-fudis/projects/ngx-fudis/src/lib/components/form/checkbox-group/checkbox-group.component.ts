@@ -1,11 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import {
-	FudisCheckboxGroupFormGroup,
-	FudisCheckboxOption,
-	FudisFormGroupErrors,
-	FudisInputWidth,
-} from '../../../types/forms';
+import { FudisCheckboxGroupFormGroup, FudisFormGroupErrors, FudisInputWidth } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 
@@ -44,11 +39,6 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 	 * To determine if focus has been moved out from the whole checkbox group, so possible errors will not show before that.
 	 */
 	protected _groupBlurredOut = false;
-
-	/**
-	 * Updated options array after changes
-	 */
-	protected _updatedOptions: FudisCheckboxOption[] = [];
 
 	public ngOnInit() {
 		this.id = this.id ?? this._idService.getNewId('checkboxGroup');
