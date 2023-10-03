@@ -65,6 +65,9 @@ export class GuidanceComponent implements OnInit {
 	 */
 	@Input() selectedOption: string;
 
+	/**
+	 * Used with together with Checkbox Group component, to display errors only when focus has moved outside of whole Checkbox Group.
+	 */
 	@Input() groupBlurredOut: boolean = true;
 
 	/**

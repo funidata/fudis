@@ -56,6 +56,9 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	 */
 	@Input() width: FudisGridWidth = 'xxl';
 
+	/**
+	 * Overrides 'width' input. Used to set Checkbox Group and Radio Button Group as wide as other basic form components.
+	 */
 	@Input() inputSize: FudisInputWidth;
 
 	/**

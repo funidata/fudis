@@ -1,5 +1,4 @@
-import { Component, Input, Output, EventEmitter, Host, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, Input, Output, EventEmitter, Host, OnInit, ViewEncapsulation } from '@angular/core';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { CheckboxGroupComponent } from '../checkbox-group.component';
 import { FudisCheckboxOption } from '../../../../types/forms';
@@ -8,6 +7,7 @@ import { FudisCheckboxOption } from '../../../../types/forms';
 	selector: 'fudis-checkbox',
 	templateUrl: './checkbox.component.html',
 	styleUrls: ['./checkbox.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxComponent implements OnInit {
 	constructor(
@@ -36,14 +36,18 @@ export class CheckboxComponent implements OnInit {
 	@Input() checked: boolean | null | undefined;
 
 	/**
-	 * Checked input change output
+	 * Input change output
 	 */
 	@Output() handleChange = new EventEmitter<FudisCheckboxOption>();
 
-	public control: FormControl<boolean | null | undefined>;
-
+	/**
+	 * If checkbox has focus
+	 */
 	protected _focused = false;
 
+	/**
+	 * If checkbox is checked
+	 */
 	protected _checked: boolean | null | undefined = null;
 
 	/**
@@ -54,11 +58,14 @@ export class CheckboxComponent implements OnInit {
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('checkbox');
 
-		this.isChecked();
+		this._isChecked();
 	}
 
-	onChange(): void {
-		this.isChecked();
+	/**
+	 * For toggling checkbox
+	 */
+	protected _onChange(): void {
+		this._isChecked();
 
 		const optionToEmit: FudisCheckboxOption = {
 			id: this._id,
@@ -71,7 +78,10 @@ export class CheckboxComponent implements OnInit {
 		this.handleChange.emit(optionToEmit);
 	}
 
-	onBlur(event: FocusEvent): void {
+	/**
+	 * When focusing out from checkbox, determine if next focus target is outside of the same checkbox group. If yes, then tell parent Checkbox Group, that focus has moved outside.
+	 */
+	protected _onBlur(event: FocusEvent): void {
 		this._focused = false;
 
 		if ((event.relatedTarget as HTMLElement)?.getAttribute('name') !== this._checkboxGroup.id) {
@@ -83,11 +93,11 @@ export class CheckboxComponent implements OnInit {
 		}
 	}
 
-	onFocus(): void {
+	protected _onFocus(): void {
 		this._focused = true;
 	}
 
-	isChecked(): void {
+	protected _isChecked(): void {
 		this._checked = this._checkboxGroup.formGroup.controls[this.controlName].value ?? this.checked;
 	}
 }

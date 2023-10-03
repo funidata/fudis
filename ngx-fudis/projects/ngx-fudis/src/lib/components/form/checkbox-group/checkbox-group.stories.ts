@@ -28,11 +28,11 @@ export default {
 const html = String.raw;
 
 const options = [
-	{ controlName: 'apple', viewValue: 'Apple' },
-	{ controlName: 'fairTradeBanana', viewValue: 'Fair trade banana' },
-	{ controlName: 'pear', viewValue: 'Pear' },
-	{ controlName: 'pineapple', viewValue: 'Pineapple' },
-	{ controlName: 'orange', viewValue: 'Orange' },
+	{ controlName: 'apple', label: 'Apple' },
+	{ controlName: 'fairTradeBanana', label: 'Fair trade banana' },
+	{ controlName: 'pear', label: 'Pear' },
+	{ controlName: 'pineapple', label: 'Pineapple' },
+	{ controlName: 'orange', label: 'Orange' },
 ];
 
 const basicFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
@@ -82,7 +82,7 @@ const ExampleTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupCom
 		[groupErrorMsg]="{
 					atLeastOneRequired: 'No fruit picked!'
 				}">
-		<fudis-checkbox *ngFor="let option of options" [controlName]="option.controlName" [viewValue]="option.viewValue" />
+		<fudis-checkbox *ngFor="let option of options" [controlName]="option.controlName" [label]="option.label" />
 	</fudis-checkbox-group>`,
 });
 
@@ -103,7 +103,7 @@ const ExampleWithDisabledTemplate: StoryFn<CheckboxGroupComponent> = (args: Chec
 		[groupErrorMsg]="{
 					atLeastOneRequired: 'No fruit picked!'
 				}">
-		<fudis-checkbox *ngFor="let option of options" [controlName]="option.controlName" [viewValue]="option.viewValue" />
+		<fudis-checkbox *ngFor="let option of options" [controlName]="option.controlName" [label]="option.label" />
 	</fudis-checkbox-group>`,
 });
 
@@ -125,7 +125,7 @@ const ExampleWithMinMaxTemplate: StoryFn<CheckboxGroupComponent> = (args: Checkb
 			lessThanRequiredRange: 'Not enough fruits picked',
 			moreThanRequiredRange: 'Too many fruits selected.'
 		}">
-		<fudis-checkbox *ngFor="let option of options" [controlName]="option.controlName" [viewValue]="option.viewValue" />
+		<fudis-checkbox *ngFor="let option of options" [controlName]="option.controlName" [label]="option.label" />
 	</fudis-checkbox-group>`,
 });
 
