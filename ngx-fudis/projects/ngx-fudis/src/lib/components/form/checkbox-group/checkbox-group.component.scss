@@ -1,7 +1,1 @@
-@use '../../../foundations/borders/mixins.scss' as borders;
-@use '../../../foundations/utilities/mixins.scss' as utilities;
-
-.fudis-checkbox-group {
-	@include borders.border('1px', 'solid', 'transparent');
-	@include utilities.box-reset;
-}
+/* stylelint-disable-next-line no-empty-source */

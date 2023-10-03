@@ -51,11 +51,9 @@ export class CheckboxComponent implements OnInit {
 	 */
 	protected _id: string;
 
-	protected _groupId: string;
-
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('checkbox');
-		this._groupId = this._checkboxGroup.id;
+
 		this.isChecked();
 	}
 
@@ -64,7 +62,7 @@ export class CheckboxComponent implements OnInit {
 
 		const optionToEmit: FudisCheckboxOption = {
 			id: this._id,
-			groupName: this._groupId,
+			groupName: this._checkboxGroup.id,
 			controlName: this.controlName,
 			viewValue: this.viewValue,
 			value: this._checkboxGroup.formGroup.controls[this.controlName].value,
@@ -76,9 +74,9 @@ export class CheckboxComponent implements OnInit {
 	onBlur(event: FocusEvent): void {
 		this._focused = false;
 
-		if ((event.relatedTarget as HTMLElement)?.getAttribute('name') !== this._groupId) {
+		if ((event.relatedTarget as HTMLElement)?.getAttribute('name') !== this._checkboxGroup.id) {
 			setTimeout(() => {
-				if (document.activeElement?.getAttribute('name') !== this._groupId) {
+				if (document.activeElement?.getAttribute('name') !== this._checkboxGroup.id) {
 					this._checkboxGroup.handleGroupFocusedOut(true);
 				}
 			}, 150);
