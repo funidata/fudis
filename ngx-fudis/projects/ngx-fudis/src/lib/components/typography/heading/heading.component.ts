@@ -23,12 +23,12 @@ export class HeadingComponent implements OnInit {
 	/**
 	 * Heading size
 	 */
-	@Input() size: FudisHeadingSize = 'lg';
+	@Input() size?: FudisHeadingSize;
 
 	/**
 	 * Margin bottom for heading
 	 */
-	@Input() marginBottom: FudisSpacing;
+	@Input() marginBottom?: FudisSpacing;
 
 	/**
 	 * Heading id
@@ -46,19 +46,44 @@ export class HeadingComponent implements OnInit {
 	protected _id: string;
 
 	getHeadingMarginBottom(): string {
-		if (this.size === 'xxl' || this.size === 'xl') {
+		if (this.level === 1 || this.level === 2 ) {
 			return 'sm';
 		}
 		return 'xs';
 	}
 
+	getHeadingSize(): string {
+		switch (this.level) {
+			case 1:
+				return 'xxl';
+			case 2:
+				return 'xl';
+			case 3:
+				return 'lg';
+			case 4:
+				return 'md';
+			case 5:
+				return 'sm';
+			case 6:
+				return 'xs';
+			default:
+				return 'xl';
+		}
+	}
+
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('heading');
 
-		if (this.marginBottom) {
-			this._classList = `fudis-heading fudis-heading__${this.size} fudis-mb-${this.marginBottom}`;
+		if (!this.size) {
+			this._classList = `fudis-heading fudis-heading__${this.getHeadingSize()}`;
 		} else {
-			this._classList = `fudis-heading fudis-heading__${this.size} fudis-mb-${this.getHeadingMarginBottom()}`;
+			this._classList = `fudis-heading fudis-heading__${this.size}`;
+		}
+
+		if (!this.marginBottom) {
+			this._classList += ` fudis-mb-${this.getHeadingMarginBottom()}`;
+		} else {
+			this._classList += ` fudis-mb-${this.marginBottom}`;
 		}
 	}
 }

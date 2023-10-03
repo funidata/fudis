@@ -10,6 +10,9 @@ import * as HeadingStories from './heading.stories.ts';
 Heading is essentially a header element which inherits Fudis font-family.
 
 There are six header options available from **h1** to **h6** and seven size options from **xxl** to **xxs**.
+All of the heading levels have default sizes, where heading level **h1** is equivalent to size **xxl**. Heading sizes are responsive and on mobile devices where a screen size is less than
+[breakpoint('sm')](/docs/foundations-breakpoints--documentation#breakpoint-mixins) all of the headings are converted to a smaller heading sizes. 
+
 In addition, default margin bottom can be modified if needed. Margin bottom uses Fudis spacing token sizes.
 
 More information about spacing tokens can be found from [Foundations/Spacing](/docs/foundations-spacing--documentation)
@@ -18,7 +21,7 @@ More information about typography can be found from [Foundations/Typography](/do
 
 ## Examples
 
-Note that heading level does not affect to the heading size, i.e they are only essential for screen readers and other assistive technologies. 
+Note! When a heading size is set, heading level does not have an effect to a size, i.e they are only essential for screen readers and other assistive technologies. 
 
 Size is opted to be modified as wanted with `size` property as follows.
 
