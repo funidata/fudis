@@ -94,10 +94,10 @@ export class AppFormExampleComponent implements OnInit {
 					{ value: false, viewValue: value.chooseTruthFalse, id: 'boolean-1', name: 'booleans' },
 				];
 				this.checkboxOptions = [
-					{ controlName: 'blueberry', viewValue: value.blueberry },
-					{ controlName: 'cloudberry', viewValue: value.cloudberry },
-					{ controlName: 'raspberry', viewValue: value.raspberry },
-					{ controlName: 'strawberry', viewValue: value.strawberry },
+					{ controlName: 'blueberry', label: value.blueberry },
+					{ controlName: 'cloudberry', label: value.cloudberry },
+					{ controlName: 'raspberry', label: value.raspberry },
+					{ controlName: 'strawberry', label: value.strawberry },
 				];
 			});
 	}

@@ -28,7 +28,7 @@
 									*ngFor="let option of checkboxOptions"
 									(handleChange)="handleChange($event)"
 									[controlName]="option.controlName"
-									[viewValue]="option.viewValue" />
+									[label]="option.label" />
 							</fudis-checkbox-group>
 							<fudis-text-input
 								[label]="t('label')"

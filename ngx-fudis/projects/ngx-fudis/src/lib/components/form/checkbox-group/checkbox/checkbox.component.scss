@@ -30,12 +30,10 @@
 			width: spacing.$spacing-input-checkbox;
 			height: spacing.$spacing-input-checkbox;
 
-			&__icon {
-				svg {
-					width: spacing.$spacing-input-checkbox;
-					height: spacing.$spacing-input-checkbox;
-					fill: colors.$color-gray-middle;
-				}
+			&__icon .fudis-icon {
+				width: spacing.$spacing-input-checkbox;
+				height: spacing.$spacing-input-checkbox;
+				fill: colors.$color-gray-middle;
 			}
 
 			&--focused {
@@ -68,22 +66,5 @@
 		appearance: none;
 		display: grid;
 		place-content: center;
-
-		&:focus {
-			+ .fudis-checkbox {
-				&__content__box {
-					@include focus.focus-form-field;
-				}
-			}
-		}
-	}
-
-	&__guidance {
-		&__help-text {
-			@include colorMixins.text-color('gray-dark');
-			@include typography.body-text-sm-regular;
-
-			margin-top: spacing.$spacing-xs;
-		}
 	}
 }

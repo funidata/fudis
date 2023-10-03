@@ -12,7 +12,7 @@ export interface FudisCheckboxOption {
 	/** Underlying value of the option */
 	controlName: string;
 	/** Value that is shown in the UI */
-	viewValue: string;
+	label: string;
 	/** Is option selected */
 	value?: boolean | null | undefined;
 }

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, HostBinding, ViewEncapsulation, Host, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, Host, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { CheckboxGroupComponent } from '../checkbox-group.component';
@@ -8,7 +8,6 @@ import { FudisCheckboxOption } from '../../../../types/forms';
 	selector: 'fudis-checkbox',
 	templateUrl: './checkbox.component.html',
 	styleUrls: ['./checkbox.component.scss'],
-	encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxComponent implements OnInit {
 	constructor(
@@ -16,14 +15,15 @@ export class CheckboxComponent implements OnInit {
 		@Host() protected _checkboxGroup: CheckboxGroupComponent
 	) {}
 
-	@HostBinding('class') classes = 'fudis-checkbox-host';
-
 	/*
 	 * Control name from FormGroup
 	 */
 	@Input({ required: true }) controlName: string;
 
-	@Input({ required: true }) viewValue: string;
+	/**
+	 * Visible label of checkbox
+	 */
+	@Input({ required: true }) label: string;
 
 	/*
 	 * Id for single Radio Button. By default generated.
@@ -64,7 +64,7 @@ export class CheckboxComponent implements OnInit {
 			id: this._id,
 			groupName: this._checkboxGroup.id,
 			controlName: this.controlName,
-			viewValue: this.viewValue,
+			label: this.label,
 			value: this._checkboxGroup.formGroup.controls[this.controlName].value,
 		};
 
