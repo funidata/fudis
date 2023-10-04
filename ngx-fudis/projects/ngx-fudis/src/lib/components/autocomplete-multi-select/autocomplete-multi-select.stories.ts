@@ -72,6 +72,7 @@ AutocompleteMultiSelect.args = {
 	label: 'Autocomplete multi-select label',
 	helpText: 'Guidance text for autocomplete multi-select. Selected filter items should be above this guidance text.',
 	tooltip: 'With this multi-select you can choose unlimited number of filters for your search',
+	placeholder: 'Search and select options',
 	options: manyOptions,
 };
 

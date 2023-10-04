@@ -8,9 +8,7 @@
 }
 
 .fudis-body-text {
-	box-sizing: border-box;
-	margin-top: 0;
-	padding: 0;
+	@include utilities.box-reset;
 
 	&__default {
 		@include colorMixins.text-color('gray-dark');

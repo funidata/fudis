@@ -57,6 +57,11 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	@Input() selectedOptions: FudisDropdownOption[] = [];
 
 	/**
+	 * Placeholder text in input when selection is not yet made
+	 */
+	@Input() placeholder: string;
+
+	/**
 	 * Output for option click
 	 */
 	@Output() optionChange = new EventEmitter<FudisDropdownOption[]>();

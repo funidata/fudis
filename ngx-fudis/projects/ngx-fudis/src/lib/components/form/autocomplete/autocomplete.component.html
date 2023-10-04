@@ -11,18 +11,19 @@
 	<div class="fudis-autocomplete__input-wrapper">
 		<input
 			#inputRef
-			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
 			class="fudis-autocomplete__input"
-			[id]="_id"
 			[class.fudis-autocomplete__input--invalid]="(control.invalid && control.touched) || invalidState"
 			[class.fudis-autocomplete__input--disabled]="disabled"
 			type="text"
+			[id]="_id"
+			[matAutocomplete]="autocomplete"
 			(blur)="_autocompleteBlur($event)"
 			[formControl]="_autocompleteFormControl"
-			[matAutocomplete]="autocomplete"
-			[attr.aria-describedby]="_id + '_guidance'"
 			[readonly]="disabled"
+			[attr.aria-describedby]="_id + '_guidance'"
+			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
 			[attr.aria-disabled]="disabled"
+			[attr.placeholder]="placeholder ? placeholder : null"
 			[attr.required]="_required ? true : null" />
 		<ng-container *ngIf="_autocompleteFormControl.value">
 			<fudis-button
