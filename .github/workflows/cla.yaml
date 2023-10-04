@@ -28,7 +28,7 @@ jobs:
           PERSONAL_ACCESS_TOKEN: ${{ secrets.CLA_SIGNATURE_STORE_TOKEN }}
         with:
           path-to-signatures: "fudis_cla_v1_signatures.json"
-          path-to-document: "https://github.com/funidata/fudis/CLA"
+          path-to-document: "https://github.com/funidata/fudis/blob/main/CLA"
           branch: "main"
           # Add users here to bypass CLA requirements (teams/orgs not supported).
           allowlist: "dependabot[bot],videoeero,RiinaKuu,xanxan,Aleksuo,MayaMarjut"
