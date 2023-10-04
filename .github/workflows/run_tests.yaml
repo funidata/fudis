@@ -1,6 +1,18 @@
 name: Run test suite
 
-on: push
+on:
+  # Enable reusing this workflow.
+  workflow_call:
+  # Run after PR is merged to main.
+  push:
+    branches:
+      - main
+  # Run for PR's. External PR's require approval before running checks.
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
 
 jobs:
   test:
@@ -8,7 +20,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
