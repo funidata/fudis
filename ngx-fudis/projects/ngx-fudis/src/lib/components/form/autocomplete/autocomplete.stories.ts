@@ -39,6 +39,7 @@ AutocompleteSearch.args = {
 		{ value: 'very-long-value', viewValue: 'Brian Eggplant with Marinated Pomegranate Seeds' },
 		{ value: 1234, viewValue: 'Martin Seeding' },
 	],
+	placeholder: "Try searching for 'Mary'",
 	tooltip: 'Tooltip text for autocomplete',
 	tooltipPosition: 'below',
 	tooltipToggle: true,
@@ -60,6 +61,7 @@ AutocompleteDropdown.args = {
 	errorMsg: { required: 'This selection is required' },
 	options: manyOptions,
 	tooltip: 'Tooltip text for autocomplete',
+	placeholder: 'Focus here to expand options!',
 	tooltipPosition: 'below',
 	tooltipToggle: true,
 };

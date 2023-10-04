@@ -12,14 +12,15 @@
 	<div class="fudis-autocomplete-multi-select__input-wrapper">
 		<input
 			#autocompleteInput
+			role="combobox"
+			class="fudis-autocomplete-multi-select__input-wrapper__input"
 			(focus)="_openDropdown()"
 			(keyup)="_doSearch($event)"
 			(keydown)="_closeOnShiftTab($event)"
 			[id]="_id"
 			[value]="_filterText"
-			role="combobox"
+			[attr.placeholder]="placeholder ? placeholder : null"
 			[attr.aria-expanded]="_toggleOn"
-			class="fudis-autocomplete-multi-select__input-wrapper__input"
 			[attr.aria-labelledby]="_id + '-selected-items'"
 			[attr.aria-describedby]="_id + '_guidance'" />
 		<fudis-button
