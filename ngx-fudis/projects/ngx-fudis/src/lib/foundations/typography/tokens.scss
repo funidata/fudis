@@ -3,32 +3,32 @@
 $font-family: 'Fira Sans', sans-serif;
 
 // Body text font size
-$body-text-l-font-size: 1rem;
-$body-text-m-font-size: 0.875rem;
-$body-text-s-font-size: 0.75rem;
+$body-text-l-font-size: calc(1rem / var(--fudis-rem-multiplier));
+$body-text-m-font-size: calc(0.875rem / var(--fudis-rem-multiplier));
+$body-text-s-font-size: calc(0.75rem / var(--fudis-rem-multiplier));
 
 // Heading font size
-$heading-xxl-font-size: 2.25rem;
-$heading-xl-font-size: 1.75rem;
-$heading-l-font-size: 1.5rem;
-$heading-m-font-size: 1.25rem;
-$heading-s-font-size: 1.125rem;
-$heading-xs-font-size: 1rem;
-$heading-xxs-font-size: 0.875rem;
+$heading-xxl-font-size: calc(2.25rem / var(--fudis-rem-multiplier));
+$heading-xl-font-size: calc(1.75rem / var(--fudis-rem-multiplier));
+$heading-l-font-size: calc(1.5rem / var(--fudis-rem-multiplier));
+$heading-m-font-size: calc(1.25rem / var(--fudis-rem-multiplier));
+$heading-s-font-size: calc(1.125rem / var(--fudis-rem-multiplier));
+$heading-xs-font-size: calc(1rem / var(--fudis-rem-multiplier));
+$heading-xxs-font-size: calc(0.875rem / var(--fudis-rem-multiplier));
 
 // Body text line height
-$body-text-l-line-height: 1.25rem;
-$body-text-m-line-height: 1.125rem;
-$body-text-s-line-height: 1rem;
+$body-text-l-line-height: calc(1.25rem / var(--fudis-rem-multiplier));
+$body-text-m-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
+$body-text-s-line-height: calc(1rem / var(--fudis-rem-multiplier));
 
 // Heading line heights
-$heading-l-line-height: 2.5rem;
-$heading-m-line-height: 1.75rem;
-$heading-s-line-height: 1.125rem;
+$heading-l-line-height: calc(2.5rem / var(--fudis-rem-multiplier));
+$heading-m-line-height: calc(1.75rem / var(--fudis-rem-multiplier));
+$heading-s-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
 
 // Other UI line heights
-$text-input-line-height: 1.5rem;
-$badge-line-height: 0.875rem;
+$text-input-line-height: calc(1.5rem / var(--fudis-rem-multiplier));
+$badge-line-height: calc(0.875rem / var(--fudis-rem-multiplier));
 
 // Font weight
 $font-weight-light: 300;
