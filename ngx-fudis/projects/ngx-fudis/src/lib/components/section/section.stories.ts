@@ -40,7 +40,7 @@ const Template: StoryFn = () => ({
 		[title]="title"
 		[tooltip]="'More info about this section'"
 		[titleSize]="titleSize"
-		[titleTag]="titleTag">
+		[titleLevel]="titleLevel">
 		<ng-template fudisActions type="section">
 			<fudis-button [label]="'Some action'" />
 			<fudis-button [label]="'Another action'" />

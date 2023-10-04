@@ -79,16 +79,16 @@ export class HeadingComponent implements OnInit {
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('heading');
 
-		if (!this.size) {
-			this._classList = `fudis-heading fudis-heading__${this.getHeadingSize()}`;
-		} else {
+		if (this.size) {
 			this._classList = `fudis-heading fudis-heading__${this.size}`;
+		} else {
+			this._classList = `fudis-heading fudis-heading__${this.getHeadingSize()}`;
 		}
 
-		if (!this.marginBottom) {
-			this._classList += ` fudis-mb-${this.getHeadingMarginBottom()}`;
-		} else {
+		if (this.marginBottom) {
 			this._classList += ` fudis-mb-${this.marginBottom}`;
+		} else {
+			this._classList += ` fudis-mb-${this.getHeadingMarginBottom()}`;
 		}
 
 		this._classList += ` fudis-heading__${this.align}`;
