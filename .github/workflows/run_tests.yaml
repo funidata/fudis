@@ -1,0 +1,55 @@
+name: Run tests
+
+on:
+  # Enable reusing this workflow.
+  workflow_call:
+  # Run after PR is merged to main.
+  push:
+    branches:
+      - main
+  # Run for PR's. External PR's require approval before running checks.
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  lint:
+    name: Run linter
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.14
+      - name: Install Angular CLI
+        # TODO: Would be nice to get this version from package.json rather than hardcoding it here...
+        run: npm i -g @angular/cli@v16
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ngx-fudis
+      - name: Run linter
+        run: ng lint
+        working-directory: ngx-fudis
+
+  test:
+    name: Run tests
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.14
+      - name: Install Angular CLI
+        run: npm i -g @angular/cli@v16
+      - name: Install dependencies
+        run: npm ci
+        working-directory: ngx-fudis
+      - name: Run tests
+        run: ng test ngx-fudis --watch false --browsers ChromeHeadless
+        working-directory: ngx-fudis
