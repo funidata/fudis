@@ -55,6 +55,11 @@ export class AutocompleteComponent
 	@Input() variant: 'search' | 'dropdown' = 'search';
 
 	/**
+	 * Placeholder text in input when selection is not yet made
+	 */
+	@Input() placeholder: string;
+
+	/**
 	 * Internal formControl to check if typed text matches with any of the options' viewValue
 	 */
 	protected _autocompleteFormControl = new FormControl<string | null>('');
