@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { MockComponent } from 'ng-mocks';
-import { By } from '@angular/platform-browser';
+import { getDirective } from 'projects/ngx-fudis/utilities/tests/utilities';
 import { GridItemDirective } from './grid-item.directive';
 import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
@@ -54,7 +54,7 @@ describe('GridItemDirective', () => {
 	});
 
 	function getGridItemDirective() {
-		return fixture.debugElement.queryAll(By.directive(GridItemDirective));
+		return getDirective(fixture, GridItemDirective);
 	}
 
 	// eslint-disable-next-line consistent-return
