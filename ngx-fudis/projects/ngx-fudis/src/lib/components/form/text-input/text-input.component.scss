@@ -9,18 +9,6 @@
 	display: block;
 	width: 100%;
 
-	&__lg {
-		max-width: spacing.$spacing-input-lg;
-	}
-
-	&__md {
-		max-width: spacing.$spacing-input-md;
-	}
-
-	&__sm {
-		max-width: spacing.$spacing-input-sm;
-	}
-
 	&__input {
 		@include borders.border('1px', 'solid', 'gray-middle');
 		@include typography.text-field-input;
