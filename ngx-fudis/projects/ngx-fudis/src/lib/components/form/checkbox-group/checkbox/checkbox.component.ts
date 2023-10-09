@@ -16,7 +16,7 @@ export class CheckboxComponent implements OnInit {
 	) {}
 
 	/*
-	 * Control name from FormGroup
+	 * Control name for this checkbox from FormGroup
 	 */
 	@Input({ required: true }) controlName: string;
 
@@ -26,17 +26,12 @@ export class CheckboxComponent implements OnInit {
 	@Input({ required: true }) label: string;
 
 	/*
-	 * Id for single Radio Button. By default generated.
+	 * Id for single checkbox. By default generated.
 	 */
 	@Input() id: string;
 
-	/*
-	 * If Radio Button is checked
-	 */
-	@Input() checked: boolean | null | undefined;
-
 	/**
-	 * Input change output
+	 * For checkbox value change event
 	 */
 	@Output() handleChange = new EventEmitter<FudisCheckboxOption>();
 
@@ -46,27 +41,18 @@ export class CheckboxComponent implements OnInit {
 	protected _focused = false;
 
 	/**
-	 * If checkbox is checked
-	 */
-	protected _checked: boolean | null | undefined = null;
-
-	/**
 	 * Html id attribute
 	 */
 	protected _id: string;
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('checkbox');
-
-		this._isChecked();
 	}
 
 	/**
 	 * For toggling checkbox
 	 */
 	protected _onChange(): void {
-		this._isChecked();
-
 		const optionToEmit: FudisCheckboxOption = {
 			id: this._id,
 			groupName: this._checkboxGroup.id,
@@ -87,7 +73,7 @@ export class CheckboxComponent implements OnInit {
 		if ((event.relatedTarget as HTMLElement)?.getAttribute('name') !== this._checkboxGroup.id) {
 			setTimeout(() => {
 				if (document.activeElement?.getAttribute('name') !== this._checkboxGroup.id) {
-					this._checkboxGroup.handleGroupFocusedOut(true);
+					this._checkboxGroup.setGroupBlurredOut(true);
 				}
 			}, 150);
 		}
@@ -95,9 +81,5 @@ export class CheckboxComponent implements OnInit {
 
 	protected _onFocus(): void {
 		this._focused = true;
-	}
-
-	protected _isChecked(): void {
-		this._checked = this._checkboxGroup.formGroup.controls[this.controlName].value ?? this.checked;
 	}
 }

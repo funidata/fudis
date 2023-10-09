@@ -51,7 +51,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 	/**
 	 * Used to display possible error messages only when focus has moved out from all the group's checkboxes.
 	 */
-	public handleGroupFocusedOut(value: boolean): void {
+	public setGroupBlurredOut(value: boolean): void {
 		if (value) {
 			this._groupBlurredOut = true;
 		} else {

@@ -8,7 +8,7 @@
 		[name]="this._checkboxGroup.id"
 		[attr.aria-describedBy]="_checkboxGroup.id + '_guidance'"
 		[attr.aria-disabled]="_checkboxGroup.formGroup.controls[controlName].disabled"
-		[attr.checked]="_checked ? true : null"
+		[attr.checked]="_checkboxGroup.formGroup.controls[controlName].value ? true : null"
 		[attr.aria-invalid]="
 			_checkboxGroup.formGroup.touched && (_checkboxGroup.formGroup.invalid || _checkboxGroup.invalidState)
 				? true
@@ -27,7 +27,10 @@
 				_checkboxGroup.invalidState
 			"
 			[class.fudis-checkbox__content__box--disabled]="_checkboxGroup.formGroup.controls[controlName].disabled">
-			<fudis-icon *ngIf="_checked" [icon]="'check-small'" class="fudis-checkbox__content__box__icon" />
+			<fudis-icon
+				*ngIf="_checkboxGroup.formGroup.controls[controlName].value"
+				[icon]="'check-small'"
+				class="fudis-checkbox__content__box__icon" />
 		</span>
 		<span class="fudis-checkbox__content__label">
 			{{ label }}
