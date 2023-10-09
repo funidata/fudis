@@ -15,7 +15,6 @@
 	@include typography.body-text-md-regular;
 	@include colorMixins.text-color('gray-dark');
 
-	display: inline-block;
 	display: block;
 	position: relative;
 	margin-bottom: 0;

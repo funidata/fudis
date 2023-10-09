@@ -21,12 +21,6 @@
 		margin-top: spacing.$spacing-xs;
 	}
 
-	&__errors {
-		&__help-text {
-			margin-top: spacing.$spacing-xs;
-		}
-	}
-
 	&__error-list {
 		@include utilities.box-reset;
 

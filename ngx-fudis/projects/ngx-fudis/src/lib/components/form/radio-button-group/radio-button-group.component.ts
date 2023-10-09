@@ -1,10 +1,8 @@
 import { Component, HostBinding, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { FudisRadioButtonOption, FudisFormErrors } from '../../../types/forms';
+import { FudisRadioButtonOption, FudisFormErrors, FudisInputWidth } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
-import { FudisIdService } from '../../../services/id/id.service';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 @Component({
 	selector: 'fudis-radio-button-group',
@@ -13,13 +11,6 @@ import { FudisTranslationService } from '../../../services/translation/translati
 	encapsulation: ViewEncapsulation.None,
 })
 export class RadioButtonGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
-	constructor(
-		private _idService: FudisIdService,
-		private _radioButtonGroupConfigService: FudisTranslationService
-	) {
-		super(_radioButtonGroupConfigService);
-	}
-
 	@HostBinding('class') classes = 'fudis-radio-button-group-host';
 
 	/*
@@ -41,6 +32,8 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	 * Set Radio Button Group's visual style and ARIA attribute as invalid. Does not override if control.invalid is true.
 	 */
 	@Input() invalidState: boolean = false;
+
+	@Input() size: FudisInputWidth = 'lg';
 
 	/**
 	 * Set fieldset as required. By default set to 'undefined' and this attribute is determined to true / false depending on if FormControl has Validators.required. This setting will override that.

@@ -6,19 +6,19 @@ on:
       - main
 
 jobs:
-  # test:
-  #   name: Tests
-  #   uses: ./.github/workflows/test.yaml
+  test:
+    name: Run tests
+    uses: ./.github/workflows/run_tests.yaml
 
   publish:
     name: Publish ngx-fudis to NPM
     concurrency: npm-publish
     runs-on: ubuntu-22.04
-    # needs:
-    #   - test
+    needs:
+      - test
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -34,6 +34,8 @@ jobs:
       - name: Build library schematics
         run: npm ci && npm run build
         working-directory: ngx-fudis/projects/ngx-fudis
+      # TODO: We should eventually change to using GH releases to trigger publish workflow. After that, this step
+      # can be changed to just using `npm publish` directly (no need to check upstream version).
       - name: Publish @funidata/ngx-fudis
         id: npm-publish
         uses: JS-DevTools/npm-publish@v1

@@ -18,6 +18,20 @@
 		@include focus.focus-generic;
 	}
 
+	&__input-width {
+		&__sm {
+			max-width: spacing.$spacing-input-sm;
+		}
+
+		&__md {
+			max-width: spacing.$spacing-input-md;
+		}
+
+		&__lg {
+			max-width: spacing.$spacing-input-lg;
+		}
+	}
+
 	&__legend {
 		display: flex;
 		flex-direction: column;
@@ -26,6 +40,8 @@
 
 		&__container {
 			display: flex;
+			align-items: center;
+			min-height: spacing.$spacing-lg;
 
 			&__row-start {
 				flex-wrap: wrap;
@@ -44,33 +60,47 @@
 		&__title {
 			margin-bottom: spacing.$spacing-xs;
 
+			&__with-inputs {
+				margin-bottom: spacing.$spacing-none;
+			}
+
 			&__margin-right {
 				margin-right: spacing.$spacing-xl;
 			}
 
-			&__md {
-				@include typography.heading-xs;
-			}
+			&__main {
+				display: flex;
+				align-items: center;
 
-			&__sm {
-				@include typography.text-field-label;
+				&__sm {
+					@include typography.text-field-label;
+				}
+
+				&__md {
+					@include typography.heading-xs;
+				}
 			}
 
 			&__text {
 				@include colorMixins.text-color('gray-dark');
 
 				display: inline-block;
-				margin-top: spacing.$spacing-xxs;
+
+				// margin-top: spacing.$spacing-xxs;
 				margin-right: spacing.$spacing-xs;
-			}
 
-			&__required {
-				@include colorMixins.text-color('gray-middle');
+				&__required {
+					@include colorMixins.text-color('gray-middle');
 
-				text-transform: initial;
-				/* stylelint-disable-next-line property-disallowed-list */
-				font-size: typographyTokens.$body-text-s-font-size;
+					text-transform: initial;
+					/* stylelint-disable-next-line property-disallowed-list */
+					font-size: typographyTokens.$body-text-s-font-size;
+				}
 			}
+		}
+
+		&__tooltip-button {
+			margin-top: auto;
 		}
 
 		&__notifications {

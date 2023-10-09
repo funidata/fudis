@@ -55,6 +55,11 @@ export class AutocompleteComponent
 	@Input() variant: 'search' | 'dropdown' = 'search';
 
 	/**
+	 * Placeholder text in input when selection is not yet made
+	 */
+	@Input() placeholder: string;
+
+	/**
 	 * Internal formControl to check if typed text matches with any of the options' viewValue
 	 */
 	protected _autocompleteFormControl = new FormControl<string | null>('');
@@ -105,7 +110,7 @@ export class AutocompleteComponent
 	/**
 	 * Handle blur and set control as touched
 	 */
-	protected _autocompleteBlur(event: Event): void {
+	protected _autocompleteBlur(event: FocusEvent): void {
 		this.control.markAsTouched();
 		if (this.control.valid && this.control.value) {
 			this._autocompleteFormControl.patchValue(this.control.value.viewValue);

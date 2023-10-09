@@ -24,7 +24,6 @@ import { FudisTranslationService } from '../../services/translation/translation.
 export class AutocompleteMultiSelectComponent extends InputBaseDirective implements OnInit {
 	constructor(
 		private _idService: FudisIdService,
-
 		_translationService: FudisTranslationService
 	) {
 		super(_translationService);
@@ -55,6 +54,11 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	 * Array of selected dropdown options which user is clicking. Can also be used to set preselected options.
 	 */
 	@Input() selectedOptions: FudisDropdownOption[] = [];
+
+	/**
+	 * Placeholder text in input when selection is not yet made
+	 */
+	@Input() placeholder: string;
 
 	/**
 	 * Output for option click
