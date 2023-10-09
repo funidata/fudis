@@ -1,5 +1,6 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
+// karma.style.css includes styles that are essential for executing tests in suited application environment
 
 module.exports = function (config) {
   config.set({

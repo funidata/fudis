@@ -62,14 +62,36 @@ import { NgxFudisModule } from 'ngx-fudis';
 })
 ```
 
-#### 5. Define Application's Primary Colors as CSS Variables in Project Root Style
+#### 5. Define Application's Root Styles
 
+##### Define Primary Colors as CSS Variables in Project Root Style
 ```
 :root {
 	--fudis-color-primary-light: #hex;
 	--fudis-color-primary: #hex;
 	--fudis-color-primary-dark: #hex;
 	--fudis-color-primary-extra-dark: #hex;
+}
+```
+##### Define Application's REM base CSS Variables in Project Root Style
+
+By default Fudis rem values follow 8 pixel base values, when having default browser CSS font-size of 100%, 1 rem equals 2 * 8px = 16px.
+To apply this to your application, add to the root CSS style file:
+
+```
+:root {
+	--fudis-rem-multiplier: 1;
+}
+```
+If application uses other rem base value by setting font-size to e. g. 62.5% . Adjust -fudis-rem-multiplier accordingly.
+
+```
+html {
+ font-size: 62.5%; // this sets 1rem to equal 10px
+}
+
+:root{
+ -fudis-rem-multiplier: 0.625;
 }
 ```
 
