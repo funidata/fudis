@@ -44,6 +44,14 @@ export class AppComponent implements OnInit {
 
 	title = 'dev';
 
+	visibleRemValue: number;
+
+	fontSize: string = '100%';
+
+	multiplier: number;
+
+	newRemBase: string;
+
 	dropdownOptions: FudisDropdownOption[] = [
 		{ value: 'value-1-dog', viewValue: 'Dog' },
 		{ value: 'value-2-capybara', viewValue: 'Capybara' },
@@ -78,6 +86,7 @@ export class AppComponent implements OnInit {
 
 		this._document.documentElement.lang = 'en';
 		this._fudisLanguage.setLanguage('en');
+		this.getMultiplier();
 	}
 
 	triggerAlert(): void {
@@ -89,6 +98,31 @@ export class AppComponent implements OnInit {
 			linkTitle: 'More info about this warning.',
 		};
 		this._alertService.addAlert(newAlert);
+	}
+
+	getMultiplier(): void {
+		const currentRemBase: string = getComputedStyle(document.querySelector(':root') as HTMLElement).getPropertyValue(
+			'--fudis-rem-multiplier'
+		);
+		this.multiplier = Number(currentRemBase);
+		this.visibleRemValue = this.multiplier * 16;
+	}
+
+	/* Following function is for testing changing Application pixel base between 16 and 10 pixel base values */
+	changeRemBase(): void {
+		if (this.multiplier === 1) {
+			this.newRemBase = '0.625';
+			this.fontSize = '62.5%';
+		} else {
+			this.newRemBase = '1';
+			this.fontSize = '100%';
+		}
+		const documentRoot = document.querySelector(':root') as HTMLElement;
+		const documentHtml = document.querySelector('html') as HTMLElement;
+
+		documentRoot.style.setProperty('--fudis-rem-multiplier', this.newRemBase);
+		documentHtml.style.setProperty('font-size', this.fontSize);
+		this.getMultiplier();
 	}
 
 	changeLanguage(): void {
