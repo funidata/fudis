@@ -71,8 +71,6 @@
 				@include colorMixins.text-color('gray-dark');
 
 				display: inline-block;
-
-				// margin-top: spacing.$spacing-xxs;
 				margin-right: spacing.$spacing-xs;
 
 				&__required {
