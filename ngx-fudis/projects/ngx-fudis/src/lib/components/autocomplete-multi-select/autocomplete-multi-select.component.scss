@@ -5,19 +5,7 @@
 @use '../../foundations/colors/tokens.scss' as colors;
 
 .fudis-autocomplete-multi-select {
-	max-width: spacing.$spacing-input-lg;
-
-	&__lg {
-		width: 100%;
-	}
-
-	&__md {
-		max-width: spacing.$spacing-input-md;
-	}
-
-	&__sm {
-		max-width: spacing.$spacing-input-sm;
-	}
+	width: 100%;
 
 	&__input-wrapper {
 		display: flex;

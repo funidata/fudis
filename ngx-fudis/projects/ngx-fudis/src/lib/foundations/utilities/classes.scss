@@ -1,4 +1,5 @@
 @use './mixins.scss' as mixins;
+@use '../spacing/tokens.scss' as spacing;
 
 .fudis-visually-hidden {
 	@include mixins.visually-hidden;
@@ -10,4 +11,18 @@
 
 .fudis-hr {
 	@include mixins.horizontal-rule;
+}
+
+.fudis-input-size {
+	&__sm {
+		max-width: spacing.$spacing-input-sm;
+	}
+
+	&__md {
+		max-width: spacing.$spacing-input-md;
+	}
+
+	&__lg {
+		max-width: spacing.$spacing-input-lg;
+	}
 }
