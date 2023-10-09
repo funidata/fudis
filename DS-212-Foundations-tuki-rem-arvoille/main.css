@@ -1954,6 +1954,14 @@ html {
   height: 1px;
 }
 
+:root {
+  --fudis-rem-multiplier: 1;
+}
+
+html {
+  font-size: 100%;
+}
+
 /* stylelint-disable color-no-hex */
 [data-theme=into] {
   --fudis-color-primary-light: #e0f4fd;
