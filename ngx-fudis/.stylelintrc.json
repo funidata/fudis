@@ -6,7 +6,7 @@
 		"stylelint-config-prettier-scss",
 		"stylelint-config-concentric-order"
 	],
-	"ignoreFiles": ["dist/**/*.scss", "static/**/*"],
+	"ignoreFiles": ["dist/**/*.scss", "static/**/*", "projects/ngx-fudis/karma.style.css"],
 	"rules": {
 		"order/properties-alphabetical-order": null,
 		"color-no-hex": true,

@@ -6,7 +6,8 @@ module.exports = function (config) {
     basePath: '',
     files: [
       { pattern: 'src/lib/assets/images/fd-logo.svg', watched: false, included: false, served: true, nocache: false },
-      { pattern: 'src/lib/assets/icons/*.*', watched: false, included: false, served: true, nocache: false }
+      { pattern: 'src/lib/assets/icons/*.*', watched: false, included: false, served: true, nocache: false },
+			'karma.style.css'
     ],
     proxies: {
       "/fd-logo.svg": "/base/src/lib/assets/images/fd-logo.svg",
