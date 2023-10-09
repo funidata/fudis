@@ -53,6 +53,9 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 	 */
 	private _gridService: FudisGridService;
 
+	/**
+	 * Grid default values, setting will apply to all grid elements
+	 */
 	private _gridDefaults: Signal<FudisGridAttributes | null>;
 
 	ngOnInit(): void {
