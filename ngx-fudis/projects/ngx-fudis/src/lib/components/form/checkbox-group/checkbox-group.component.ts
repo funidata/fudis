@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { FudisCheckboxGroupFormGroup, FudisFormGroupErrors, FudisInputWidth } from '../../../types/forms';
+import { FudisCheckboxGroupFormGroup, FudisFormGroupErrors, FudisInputSize } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 
@@ -33,7 +33,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 	/**
 	 * Width size of the group - defaults to large.
 	 */
-	@Input() size: FudisInputWidth = 'lg';
+	@Input() size: FudisInputSize = 'lg';
 
 	/**
 	 * To determine if focus has been moved out from the whole checkbox group, so possible errors will not show before that.

@@ -8,7 +8,7 @@ import { DropdownComponent } from './dropdown.component';
 import { LabelComponent } from '../label/label.component';
 
 import { GuidanceComponent } from '../guidance/guidance.component';
-import { FudisDropdownOption, FudisInputWidth } from '../../../types/forms';
+import { FudisDropdownOption, FudisInputSize } from '../../../types/forms';
 import { IconComponent } from '../../icon/icon.component';
 
 const dropdownOptions: FudisDropdownOption[] = [
@@ -50,7 +50,7 @@ describe('DropdownComponent', () => {
 		expect(componentClasses).toEqual(classes.split(' ').sort());
 	}
 
-	function dropdownSizeCheck(size: FudisInputWidth): void {
+	function dropdownSizeCheck(size: FudisInputSize): void {
 		component.size = size;
 		fixture.detectChanges();
 		assertDropdownHasClasses(`fudis-dropdown fudis-dropdown__${size}`);
