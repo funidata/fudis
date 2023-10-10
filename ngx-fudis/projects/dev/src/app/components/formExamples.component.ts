@@ -3,9 +3,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
-import { FudisDropdownOption, FudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
+import {
+	FudisCheckboxOption,
+	FudisDropdownOption,
+	FudisRadioButtonOption,
+} from 'projects/ngx-fudis/src/lib/types/forms';
 import { untilDestroyed } from 'projects/ngx-fudis/src/lib/utilities/untilDestroyed';
 import { FudisErrorSummaryService } from 'ngx-fudis';
+import { FudisFormGroupValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
 
 type MyForm = {
 	dropdown: FormControl<FudisDropdownOption | null>;
@@ -13,6 +18,7 @@ type MyForm = {
 	textArea: FormControl<string | null>;
 	textInput: FormControl<string | null | number>;
 	truth: FormControl<boolean | null>;
+	checkboxFormGroup: FormGroup;
 	date: FormControl<Date | null>;
 	autocompleteDropdown: FormControl<FudisDropdownOption | null>;
 	autocompleteSearch: FormControl<FudisDropdownOption | null>;
@@ -59,11 +65,22 @@ export class AppFormExampleComponent implements OnInit {
 		]),
 		truth: new FormControl<boolean | null>(null, Validators.required),
 		date: new FormControl<Date | null>(null, Validators.required),
+		checkboxFormGroup: new FormGroup(
+			{
+				blueberry: new FormControl<FudisCheckboxOption | null>(null),
+				cloudberry: new FormControl<FudisCheckboxOption | null>(null),
+				raspberry: new FormControl<FudisCheckboxOption | null>(null),
+				strawberry: new FormControl<FudisCheckboxOption | null>(null),
+			},
+			[FudisFormGroupValidators.atLeastOneRequired(), FudisFormGroupValidators.outOfRequiredRange(2, 3)]
+		),
 		autocompleteDropdown: new FormControl<FudisDropdownOption | null>(null, Validators.required),
 		autocompleteSearch: new FormControl<FudisDropdownOption | null>(null),
 	});
 
 	radioButtonOptions: FudisRadioButtonOption[] = [];
+
+	checkboxOptions: FudisCheckboxOption[] = [];
 
 	private _untilDestroyed = untilDestroyed();
 
@@ -75,6 +92,12 @@ export class AppFormExampleComponent implements OnInit {
 				this.radioButtonOptions = [
 					{ value: true, viewValue: value.chooseTruthTrue, id: 'boolean-2', name: 'booleans' },
 					{ value: false, viewValue: value.chooseTruthFalse, id: 'boolean-1', name: 'booleans' },
+				];
+				this.checkboxOptions = [
+					{ controlName: 'blueberry', label: value.blueberry },
+					{ controlName: 'cloudberry', label: value.cloudberry },
+					{ controlName: 'raspberry', label: value.raspberry },
+					{ controlName: 'strawberry', label: value.strawberry },
 				];
 			});
 	}
@@ -90,5 +113,11 @@ export class AppFormExampleComponent implements OnInit {
 			this.errorSummaryVisible = false;
 			this.showSuccessBodyText = true;
 		}
+	}
+
+	// eslint-disable-next-line class-methods-use-this
+	handleChange(updatedOptions: FudisCheckboxOption): void {
+		// eslint-disable-next-line no-console
+		console.log(updatedOptions);
 	}
 }

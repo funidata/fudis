@@ -1,0 +1,22 @@
+<fudis-fieldset
+	[id]="id"
+	[titleSize]="'sm'"
+	[title]="title"
+	[required]="required ? required : undefined"
+	[errorSummaryBreadcrumb]="false"
+	[inputSize]="size"
+	[tooltip]="tooltip"
+	[tooltipPosition]="tooltipPosition"
+	[tooltipToggle]="tooltipToggle">
+	<ng-template fudisContent type="fieldset">
+		<ng-content select="fudis-checkbox" />
+		<fudis-guidance
+			[inputLabel]="title"
+			[helpText]="helpText"
+			[for]="id"
+			[groupBlurredOut]="_groupBlurredOut"
+			[groupErrorMsg]="groupErrorMsg"
+			[formGroup]="formGroup">
+		</fudis-guidance>
+	</ng-template>
+</fudis-fieldset>

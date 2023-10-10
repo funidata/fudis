@@ -24,7 +24,6 @@ import { FudisTranslationService } from '../../services/translation/translation.
 export class AutocompleteMultiSelectComponent extends InputBaseDirective implements OnInit {
 	constructor(
 		private _idService: FudisIdService,
-
 		_translationService: FudisTranslationService
 	) {
 		super(_translationService);
