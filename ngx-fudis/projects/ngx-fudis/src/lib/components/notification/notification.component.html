@@ -1,9 +1,9 @@
 <div class="fudis-notification fudis-notification__{{ variant }}">
 	<ng-container *ngIf="!content">
 		<fudis-icon [icon]="_icon" />
-		<fudis-body-text [size]="'lg-regular'">
+		<fudis-body-text class="fudis-notification__body-text" [size]="'lg-regular'">
 			<span class="fudis-visually-hidden">{{ _attentionText }}:&nbsp;</span>
-			<ng-content></ng-content>
+			<ng-content />
 			<fudis-link
 				class="fudis-notification__link"
 				*ngIf="link"
