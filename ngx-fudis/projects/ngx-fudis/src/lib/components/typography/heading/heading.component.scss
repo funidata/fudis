@@ -7,43 +7,47 @@
 	box-sizing: border-box;
 	margin-top: 0;
 
-	&__xxs {
-		@include typography.heading-xxs;
+	&__size {
+		&__xxs {
+			@include typography.heading-xxs;
+		}
+
+		&__xs {
+			@include typography.heading-xs;
+		}
+
+		&__sm {
+			@include typography.heading-sm;
+		}
+
+		&__md {
+			@include typography.heading-md;
+		}
+
+		&__lg {
+			@include typography.heading-lg;
+		}
+
+		&__xl {
+			@include typography.heading-xl;
+		}
+
+		&__xxl {
+			@include typography.heading-xxl;
+		}
 	}
 
-	&__xs {
-		@include typography.heading-xs;
-	}
+	&__align {
+		&__left {
+			text-align: left;
+		}
 
-	&__sm {
-		@include typography.heading-sm;
-	}
+		&__right {
+			text-align: right;
+		}
 
-	&__md {
-		@include typography.heading-md;
-	}
-
-	&__lg {
-		@include typography.heading-lg;
-	}
-
-	&__xl {
-		@include typography.heading-xl;
-	}
-
-	&__xxl {
-		@include typography.heading-xxl;
-	}
-
-	&__left {
-		text-align: left;
-	}
-
-	&__right {
-		text-align: right;
-	}
-
-	&__center {
-		text-align: center;
+		&__center {
+			text-align: center;
+		}
 	}
 }

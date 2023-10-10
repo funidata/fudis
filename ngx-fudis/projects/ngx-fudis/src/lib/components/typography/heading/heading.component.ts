@@ -43,21 +43,21 @@ export class HeadingComponent implements OnInit {
 	/**
 	 * Heading CSS class list
 	 */
-	protected _classList: string = '';
+	protected _classList: string[];
 
 	/**
 	 * Internal id to generate unique id
 	 */
 	protected _id: string;
 
-	getHeadingMarginBottom(): string {
+	getHeadingMarginBottom(): FudisSpacing {
 		if (this.level === 1 || this.level === 2) {
 			return 'sm';
 		}
 		return 'xs';
 	}
 
-	getHeadingSize(): string {
+	getHeadingSize(): FudisHeadingSize {
 		switch (this.level) {
 			case 1:
 				return 'xxl';
@@ -76,21 +76,24 @@ export class HeadingComponent implements OnInit {
 		}
 	}
 
+	_setClasses(): any {
+		this._classList = [
+			`fudis-heading`,
+			`fudis-heading__size__${this.size}`,
+			`fudis-mb-${this.marginBottom}`,
+			`fudis-heading__align__${this.align}`,
+		];
+	}
+
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('heading');
 
-		if (this.size) {
-			this._classList = `fudis-heading fudis-heading__${this.size}`;
-		} else {
-			this._classList = `fudis-heading fudis-heading__${this.getHeadingSize()}`;
+		if (!this.size) {
+			this.size = this.getHeadingSize();
 		}
-
-		if (this.marginBottom) {
-			this._classList += ` fudis-mb-${this.marginBottom}`;
-		} else {
-			this._classList += ` fudis-mb-${this.getHeadingMarginBottom()}`;
+		if (!this.marginBottom) {
+			this.marginBottom = this.getHeadingMarginBottom();
 		}
-
-		this._classList += ` fudis-heading__${this.align}`;
+		this._setClasses();
 	}
 }
