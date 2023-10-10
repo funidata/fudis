@@ -105,6 +105,20 @@
   font-weight: 300;
 }
 
+.fudis-dropdown__select .mat-mdc-select-placeholder {
+  /* stylelint-disable-next-line property-disallowed-list */
+  color: #727272;
+}
+
+.fudis-dropdown__select .mat-mdc-select-arrow-wrapper {
+  display: none;
+}
+
+.fudis-dropdown__select.mat-mdc-select-disabled {
+  /* stylelint-disable-next-line property-disallowed-list */
+  background-color: #f1f1f1;
+}
+
 /* stylelint-disable declaration-no-important */
 /* stylelint-disable selector-max-class */
 /* stylelint-disable selector-class-pattern */
