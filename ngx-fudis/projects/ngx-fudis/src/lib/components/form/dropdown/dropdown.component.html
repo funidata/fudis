@@ -7,34 +7,38 @@
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle">
 	</fudis-label>
-	<mat-select
-		#matSelect
-		[id]="_id"
-		disableOptionCentering
-		[panelClass]="
-			size === 'xs' ? 'fudis-dropdown__option-list fudis-dropdown__option-list__xs' : 'fudis-dropdown__option-list'
-		"
-		class="fudis-dropdown__select"
-		[class.fudis-dropdown__select__xs]="size === 'xs'"
-		[class.fudis-dropdown--invalid]="(control.touched && control.invalid) || invalidState"
-		[placeholder]="placeholder"
-		floatPlaceholder="never"
-		[multiple]="multipleOption"
-		[formControl]="control"
-		(valueChange)="handleSelectionChange($event)"
-		[attr.required]="_required ? true : null"
-		[aria-labelledby]="_id + '-label'"
-		[hideSingleSelectionIndicator]="hideSingleSelectionIndicator"
-		[attr.aria-describedby]="_id + '_guidance'"
-		[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null">
-		<mat-option
-			class="fudis-dropdown__option"
-			[class.fudis-dropdown__option__xs]="size === 'xs'"
-			*ngFor="let option of options"
-			[value]="option"
-			[disabled]="option.disabled">
-			{{ option.viewValue }}
-		</mat-option>
-	</mat-select>
+	<div class="fudis-dropdown__input">
+		<mat-select
+			#matSelect
+			[id]="_id"
+			disableOptionCentering
+			[panelClass]="
+				size === 'xs' ? 'fudis-dropdown__option-list fudis-dropdown__option-list__xs' : 'fudis-dropdown__option-list'
+			"
+			class="fudis-dropdown__select"
+			[class.fudis-dropdown__select__xs]="size === 'xs'"
+			[class.fudis-dropdown--invalid]="(control.touched && control.invalid) || invalidState"
+			[placeholder]="placeholder"
+			floatPlaceholder="never"
+			[multiple]="multipleOption"
+			[formControl]="control"
+			(valueChange)="handleSelectionChange($event)"
+			[attr.required]="_required ? true : null"
+			[aria-labelledby]="_id + '-label'"
+			[hideSingleSelectionIndicator]="hideSingleSelectionIndicator"
+			[attr.aria-describedby]="_id + '_guidance'"
+			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null">
+			<mat-option
+				class="fudis-dropdown__option"
+				[class.fudis-dropdown__option__xs]="size === 'xs'"
+				*ngFor="let option of options"
+				[value]="option"
+				[disabled]="option.disabled">
+				{{ option.viewValue }}
+			</mat-option>
+		</mat-select>
+		<fudis-icon class="fudis-dropdown__input__icon" [icon]="'chevron'" [rotate]="'cw-90'" />
+	</div>
+
 	<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="_id" [errorMsg]="errorMsg" [control]="control" />
 </div>

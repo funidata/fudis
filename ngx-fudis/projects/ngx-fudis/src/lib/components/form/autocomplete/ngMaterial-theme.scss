@@ -88,5 +88,17 @@
 		& .mat-mdc-select-value {
 			@include typography.text-field-input;
 		}
+
+		& .mat-mdc-select-placeholder {
+			@include colorMixins.text-color('gray-middle');
+		}
+
+		& .mat-mdc-select-arrow-wrapper {
+			display: none;
+		}
+
+		&.mat-mdc-select-disabled {
+			@include colorMixins.bg-color('gray-extra-light');
+		}
 	}
 }
