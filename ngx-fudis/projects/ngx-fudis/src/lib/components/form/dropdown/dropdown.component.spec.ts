@@ -9,6 +9,7 @@ import { LabelComponent } from '../label/label.component';
 
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { FudisDropdownOption, FudisInputSize } from '../../../types/forms';
+import { IconComponent } from '../../icon/icon.component';
 
 const dropdownOptions: FudisDropdownOption[] = [
 	{ value: 1, viewValue: 'Dog' },
@@ -24,7 +25,12 @@ describe('DropdownComponent', () => {
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [DropdownComponent, MockComponent(LabelComponent), MockComponent(GuidanceComponent)],
+			declarations: [
+				DropdownComponent,
+				MockComponent(LabelComponent),
+				MockComponent(GuidanceComponent),
+				MockComponent(IconComponent),
+			],
 			imports: [ReactiveFormsModule, MatFormFieldModule, MatSelectModule, BrowserAnimationsModule],
 		}).compileComponents();
 	});
