@@ -47,7 +47,7 @@ describe('HeadingComponent', () => {
 		component.align = align;
 		component.ngOnInit();
 		assertHeadingHasClasses(
-			`fudis-heading fudis-heading__${align} fudis-heading__${size} fudis-mb-${marginBottom}`,
+			`fudis-heading fudis-heading__align__${align} fudis-heading__size__${size} fudis-mb-${marginBottom}`,
 			level
 		);
 	}
@@ -70,6 +70,6 @@ describe('HeadingComponent', () => {
 	});
 
 	it('should have default classes', () => {
-		assertHeadingHasClasses('fudis-heading fudis-heading__left fudis-heading__lg fudis-mb-xs', 6);
+		assertHeadingHasClasses('fudis-heading fudis-heading__align__left fudis-heading__size__lg fudis-mb-xs', 6);
 	});
 });
