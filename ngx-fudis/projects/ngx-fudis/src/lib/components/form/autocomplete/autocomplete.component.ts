@@ -2,7 +2,7 @@ import { AfterContentInit, AfterViewInit, Component, Input, OnChanges, OnInit, e
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl, Validators } from '@angular/forms';
-import { FudisDropdownOption, FudisInputWidth } from '../../../types/forms';
+import { FudisDropdownOption, FudisInputSize } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -40,7 +40,7 @@ export class AutocompleteComponent
 	/**
 	 * Available sizes for the autocomplete - defaults to large.
 	 */
-	@Input() size: FudisInputWidth = 'lg';
+	@Input() size: FudisInputSize = 'lg';
 
 	/**
 	 * Pre-selected dropdown options.

@@ -12,7 +12,7 @@ import { LabelComponent } from '../label/label.component';
 import { AutocompleteComponent } from './autocomplete.component';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
-import { FudisInputWidth } from '../../../types/forms';
+import { FudisInputSize } from '../../../types/forms';
 
 const autocompleteControl: FormControl = new FormControl('');
 const autocompleteRequiredControl: FormControl = new FormControl('', Validators.required);
@@ -51,7 +51,7 @@ describe('AutocompleteComponent', () => {
 		expect(componentClasses).toEqual(classes.split(' ').sort());
 	}
 
-	function autocompleteSize(size: FudisInputWidth): void {
+	function autocompleteSize(size: FudisInputSize): void {
 		component.size = size;
 		fixture.detectChanges();
 		assertAutocompleteHasClasses(`fudis-autocomplete fudis-autocomplete__${size}`);
