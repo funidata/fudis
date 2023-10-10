@@ -3,9 +3,9 @@
 	#fieldset
 	[attr.id]="_id"
 	[tabIndex]="-1"
-	[classes]="['fudis-fieldset']"
+	[classes]="_classes"
 	[align]="align"
-	[width]="width"
+	[width]="inputSize ? 'initial' : width"
 	[ignoreDefaults]="true"
 	[rowGap]="'none'"
 	[marginBottom]="marginBottom"
@@ -19,13 +19,16 @@
 			[class.fudis-fieldset__legend__container__row-start]="headerActions?.align === 'start'">
 			<div
 				class="fudis-fieldset__legend__title"
+				[class.fudis-fieldset__legend__title__with-inputs]="inputSize"
 				[class.fudis-fieldset__legend__title__margin-right]="headerActions?.type === 'fieldset'">
-				<span class="fudis-fieldset__legend__title__{{ titleSize }}">
-					<span class="fudis-fieldset__legend__title__text">{{ _title }}</span>
-					<span *ngIf="required" class="fudis-fieldset__legend__title__required">({{ _requiredText }})</span>
+				<div class="fudis-fieldset__legend__title__main fudis-fieldset__legend__title__main__{{ titleSize }}">
+					<span class="fudis-fieldset__legend__title__text"
+						>{{ _title }}
+						<span *ngIf="required" class="fudis-fieldset__legend__title__text__required">({{ _requiredText }})</span>
+					</span>
 					<ng-container *ngIf="tooltip">
 						<fudis-button
-							class="fudis-fieldset__legend__title__button"
+							class="fudis-fieldset__legend__tooltip-button"
 							[size]="'icon-only'"
 							[variant]="'tertiary'"
 							[icon]="'info-circle'"
@@ -33,9 +36,9 @@
 							[label]="tooltip"
 							[tooltip]="tooltip"
 							[tooltipPosition]="tooltipPosition"
-							[tooltipToggle]="tooltipToggle"></fudis-button>
+							[tooltipToggle]="tooltipToggle" />
 					</ng-container>
-				</span>
+				</div>
 				<ng-container *ngIf="helpText">
 					<span class="fudis-fieldset__legend__help-text">{{ helpText }}</span>
 				</ng-container>

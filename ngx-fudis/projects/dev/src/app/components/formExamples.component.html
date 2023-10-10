@@ -1,5 +1,5 @@
 <ng-container *transloco="let t">
-	<fudis-expandable [title]="'Form with some transloco'" [closed]="true">
+	<fudis-expandable [title]="'Form with some transloco'" [closed]="false">
 		<ng-template fudisActions type="expandable">
 			<fudis-button [label]="'Submit!'" (handleClick)="clickSubmit()"></fudis-button>
 		</ng-template>
@@ -13,6 +13,23 @@
 				<ng-template fudisContent type="form">
 					<fudis-fieldset [title]="t('fieldsetTitle')">
 						<ng-template fudisContent type="fieldset">
+							<fudis-checkbox-group
+								[title]="t('chooseBerry')"
+								[helpText]="t('chooseBerryHelp')"
+								[required]="true"
+								[groupErrorMsg]="{
+									atLeastOneRequired: t('chooseBerryError'),
+									lessThanRequiredRange: t('chooseBerryErrorMin'),
+									moreThanRequiredRange: t('chooseBerryErrorMax')
+								}"
+								[tooltip]="t('chooseBerryTooltip')"
+								[formGroup]="testFormGroup.controls['checkboxFormGroup']">
+								<fudis-checkbox
+									*ngFor="let option of checkboxOptions"
+									(handleChange)="handleChange($event)"
+									[controlName]="option.controlName"
+									[label]="option.label" />
+							</fudis-checkbox-group>
 							<fudis-text-input
 								[label]="t('label')"
 								[helpText]="t('helpText')"

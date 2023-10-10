@@ -5,12 +5,22 @@
 	"required": "Pakollinen",
 	"error_required": "Tämä on pakollinen kenttä!",
 	"dynamic": "transloco {{value}}",
+  "chooseBerry": "Valitse marjasi",
+  "chooseBerryHelp": "Valitse toivottu määrä marjoja",
+  "chooseBerryError": "Ei lainkaan marjoja valittuna!",
+  "chooseBerryErrorMin": "Ei riittävästi marjoja valittuna!",
+  "chooseBerryErrorMax": "Liian monta marjaa valittuna!",
+  "chooseBerryTooltip": "Tällä checkbox-ryhmällä on useampi validaattori: pakollinen, min ja max",
 	"chooseTruth": "Valitse totuus",
 	"chooseTruthHelp": "Me kaikki ymmärrämme totuuden eri tavalla.",
 	"chooseTruthError": "Totuus puuttuu!",
 	"options": {
 		"chooseTruthTrue": "Tosi",
-		"chooseTruthFalse": "Epätosi"
+		"chooseTruthFalse": "Epätosi",
+    "blueberry": "Mustikka",
+    "cloudberry": "Hilla",
+    "raspberry": "Vadelma",
+    "strawberry": "Mansikka"
 	},
 	"closeCalendar": "Sulje kalenteri",
 	"fieldsetTitle": "Tärkeän lomakeryhmän otsikko",

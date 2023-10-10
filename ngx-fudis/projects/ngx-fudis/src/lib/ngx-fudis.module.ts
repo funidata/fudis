@@ -21,7 +21,8 @@ import { AutocompleteMultiSelectSelectedItemChipComponent } from './components/a
 import { BadgeComponent } from './components/badge/badge.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { ButtonComponent } from './components/button/button.component';
-import { CheckboxComponent } from './components/form/checkbox/checkbox.component';
+import { CheckboxComponent } from './components/form/checkbox-group/checkbox/checkbox.component';
+import { CheckboxGroupComponent } from './components/form/checkbox-group/checkbox-group.component';
 
 import { DateRangeComponent } from './components/form/date/date-range/date-range.component';
 
@@ -111,6 +112,7 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		BodyTextComponent,
 		ButtonComponent,
 		CheckboxComponent,
+		CheckboxGroupComponent,
 		ContentDirective,
 		DatepickerComponent,
 		DatepickerCustomHeaderComponent,
@@ -199,6 +201,7 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		BodyTextComponent,
 		ButtonComponent,
 		CheckboxComponent,
+		CheckboxGroupComponent,
 		ContentDirective,
 		DatepickerComponent,
 		DateRangeComponent,
