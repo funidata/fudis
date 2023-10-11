@@ -7,7 +7,7 @@ import * as CheckboxGroupStories from './checkbox-group.stories.ts';
 
 # Checkbox Group
 
-Checkbox-group is essentially a fieldset with legend and checkbox inputs.
+Checkbox Group is a form fieldset element constructing from `fieldset` `legend` and `<input type="checkbox">` elements.
 
 ## Examples
 
@@ -17,31 +17,57 @@ Checkbox-group is essentially a fieldset with legend and checkbox inputs.
 
 #### Mandatory Properties
 
-Necessary properties for checkbox-group are `title`, `control` and `options`.
-Checkbox-group has to have **at least** on checkbox option. Otherwise it will throw an error.
+Necessary properties for Checkbox Group are `title` and `formGroup`.
 
-Options array takes in objects with the following signature:
+For child Checkbox elements require `controlName` and `label`. Checkbox's `controlName` must match with the corresponding control in the main `formGroup`.
 
 ```
-{
-	// Unique id for single checkbox option
-	id: string;
-	// Name for the group of checkboxes
-	name: string;
-	// Underlying value of the option
-	value: string | boolean | null;
-	// Value that is shown in the UI
-	label: string;
-	// I s option required
-	required?: boolean;
-	// Is option selected
-	checked?: boolean;
-}
-```
+// In HTML template
 
-**NOTE:** The _name_ value should be exactly the same in all objects in the options array. Otherwise it will throw an error.
+	<fudis-checkbox-group [formGroup]="myFormGroup" [title]="'Example checkbox group'">
+		<fudis-checkbox [controlName]="'firstControlName'" [label]="'First checkbox'"/>
+		<fudis-checkbox [controlName]="'secondControlName'" [label]="'Second checkbox'"/>
+	</fudis-checkbox-group>
+
+
+// In TypeScript file
+
+myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+	{
+		firstControlName: new FormControl<boolean | null | undefined>(null),
+		secondControlName: new FormControl<boolean | null | undefined>(null),
+	}
+);
+```
 
 #### As a required form field
+
+To display visible 'required' text with the fieldset group, set `required` input as true to Checkbox Group and include validator `FudisFormGroupValidators.atLeastOneRequired()` in the validators array of `formGroup`.
+
+```
+// In HTML template
+
+<fudis-checkbox-group
+	[formGroup]="myFormGroup"
+	[title]="'Choose at least one'"
+	[required]="true"
+	[groupErrorMsg]="{atLeastOneRequired: 'No checkbox checked!'}">
+	<fudis-checkbox [controlName]="'firstControlName'" [label]="'You should check this'"/>
+	<fudis-checkbox [controlName]="'secondControlName'" [label]="'Or this, or both!'"/>
+</fudis-checkbox-group>
+
+// In TypeScript file
+
+myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+	{
+		firstControlName: new FormControl<boolean | null | undefined>(null),
+		secondControlName: new FormControl<boolean | null | undefined>(null),
+	},[FudisFormGroupValidators.atLeastOneRequired()]
+);
+
+
+```
+
 
 If checkbox-group fieldset is a required form field include `Validators.required` in the form control validators and include a `required` error message in the `errorMsg` property.
 
@@ -65,6 +91,7 @@ If checkbox-group fieldset has minimum and/or maximum options to be selected, fo
 - Fieldset has a legend as its first child element
 - Checkbox options are grouped by name attribute
 - Guidance is linked to the checkbox-group via id
+- Possible error messages are displayed after user blurs out from the whole checkbox group
 
 ## Properties
 
