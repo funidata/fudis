@@ -12,7 +12,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
 import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
-import { FUDIS_DATE_FORMATS, FudisInputWidth } from '../../../../types/forms';
+import { FUDIS_DATE_FORMATS, FudisInputSize } from '../../../../types/forms';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 
@@ -58,7 +58,7 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 	/**
 	 * Available sizes for the datepicker - defaults to medium.
 	 */
-	@Input() size: FudisInputWidth = 'md';
+	@Input() size: FudisInputSize = 'md';
 
 	/**
 	 * Allowed range for minimun date

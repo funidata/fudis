@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { TextAreaComponent } from './text-area.component';
 import { LabelComponent } from '../label/label.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
-import { FudisInputWidth } from '../../../types/forms';
+import { FudisInputSize } from '../../../types/forms';
 
 const textAreaControl: FormControl = new FormControl('');
 
@@ -34,7 +34,7 @@ describe('TextAreaComponent', () => {
 		expect(componentClasses).toEqual(classes.split(' ').sort());
 	}
 
-	function textAreaSizeCheck(size: FudisInputWidth): void {
+	function textAreaSizeCheck(size: FudisInputSize): void {
 		component.size = size;
 		fixture.detectChanges();
 		assertTextAreaHasClasses(`fudis-text-area fudis-text-area__${size}`);

@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
-import { FudisDropdownOption, FudisDropdownLanguageOption, FudisInputWidth } from '../../../types/forms';
+import { FudisDropdownOption, FudisDropdownLanguageOption, FudisInputSize } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -60,7 +60,7 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 	/**
 	 * Available sizes for the dropdown
 	 */
-	@Input() size: 'xs' | FudisInputWidth = 'lg';
+	@Input() size: 'xs' | FudisInputSize = 'lg';
 
 	/**
 	 * Hide selected option's checkmark in options list, used in input-with-language-options component

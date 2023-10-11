@@ -4,7 +4,7 @@ import { AutocompleteMultiSelectComponent } from './autocomplete-multi-select.co
 import { FudisDropdownMenuItemService } from '../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { LabelComponent } from '../form/label/label.component';
 import { ButtonComponent } from '../button/button.component';
-import { FudisDropdownOption, FudisInputWidth } from '../../types/forms';
+import { FudisDropdownOption, FudisInputSize } from '../../types/forms';
 import { AutocompleteMultiSelectSelectedItemChipComponent } from './autocomplete-multi-select-selected-item-chip/autocomplete-multi-select-selected-item-chip.component';
 
 const multiSelectOptions: FudisDropdownOption[] = [
@@ -44,7 +44,7 @@ describe('AutocompleteMultiSelectComponent', () => {
 		expect(componentClasses).toEqual(classes.split(' ').sort());
 	}
 
-	function multiSelectSizeCheck(size: FudisInputWidth): void {
+	function multiSelectSizeCheck(size: FudisInputSize): void {
 		component.size = size;
 		fixture.detectChanges();
 		asserMultiSelectHasClasses(`fudis-autocomplete-multi-select fudis-autocomplete-multi-select__${size}`);

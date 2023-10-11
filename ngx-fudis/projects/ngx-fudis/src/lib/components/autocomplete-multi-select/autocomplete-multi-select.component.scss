@@ -17,9 +17,13 @@
 			@include typography.text-field-input;
 
 			box-sizing: border-box;
-			padding: 0 0 0 spacing.$spacing-xs;
+			padding: spacing.$spacing-xxs spacing.$spacing-sm;
 			width: 100%;
 			height: spacing.$spacing-xl;
+
+			&::placeholder {
+				@include colorMixins.text-color('gray-middle');
+			}
 		}
 
 		&__icon-button button {

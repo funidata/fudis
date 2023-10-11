@@ -19,7 +19,7 @@ import { FudisSpacing } from '../../../types/miscellaneous';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
-import { FudisFormErrorSummarySection, FudisInputWidth } from '../../../types/forms';
+import { FudisFormErrorSummarySection, FudisInputSize } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 @Component({
@@ -59,7 +59,7 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	/**
 	 * Overrides 'width' input. Used to set Checkbox Group and Radio Button Group as wide as other basic form components.
 	 */
-	@Input() inputSize: FudisInputWidth;
+	@Input() inputSize: FudisInputSize;
 
 	/**
 	 * Alignment of Grid component inside its parent
