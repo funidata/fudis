@@ -10,7 +10,7 @@ import {
 	ViewChild,
 	ViewEncapsulation,
 } from '@angular/core';
-import { FudisInputWidth } from '../../types/forms';
+import { FudisInputSize } from '../../types/forms';
 
 @Component({
 	selector: 'fudis-dropdown-menu',
@@ -45,7 +45,7 @@ export class DropdownMenuComponent implements AfterContentInit, OnInit {
 	/**
 	 * Set dropdown size (should follow the given input element size)
 	 */
-	@Input() size: FudisInputWidth = 'lg';
+	@Input() size: FudisInputSize = 'lg';
 
 	/**
 	 * Determine dropdown max-width

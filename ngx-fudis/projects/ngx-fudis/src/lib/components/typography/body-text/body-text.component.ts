@@ -1,5 +1,6 @@
 import { Component, Input, HostBinding, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { FudisBodyText } from '../../../types/typography';
+import { FudisTextAlign } from '../../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-body-text',
@@ -27,5 +28,5 @@ export class BodyTextComponent {
 	/**
 	 * Align body-text
 	 */
-	@Input() align: 'left' | 'right' | 'center' = 'left';
+	@Input() align: FudisTextAlign = 'left';
 }

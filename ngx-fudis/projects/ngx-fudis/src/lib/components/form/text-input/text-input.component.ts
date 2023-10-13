@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input, HostBinding, OnInit, OnChanges } from 
 import { FormControl, Validators } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
-import { FudisInputWidth } from '../../../types/forms';
+import { FudisInputSize } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 
@@ -29,7 +29,7 @@ export class TextInputComponent extends InputBaseDirective implements OnInit, On
 	/**
 	 * Available sizes for the input - defaults to large. Recommended size for number input is 'sm'.
 	 */
-	@Input() size: FudisInputWidth = 'lg';
+	@Input() size: FudisInputSize = 'lg';
 
 	/**
 	 * Type of the input - defaults to 'text'
