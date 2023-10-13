@@ -40,19 +40,28 @@ export class GridItemDirective implements OnInit, OnChanges {
 	}
 
 	/**
-	 * Used to apply CSS grid-column values for the Grid Item
+	 * Apply CSS grid-column values for the Grid Item
 	 */
 	private _columns: string | FudisBreakpointStyleResponsive[] = gridItemDefault;
 
+	/**
+	 * Apply horizontal CSS values for the Grid Item
+	 */
 	private _alignX: FudisGridItemAlignment | FudisBreakpointStyleResponsive[] = 'stretch';
 
+	/**
+	 * Apply vertical CSS values for the Grid Item
+	 */
 	private _alignY: FudisGridItemAlignment | FudisBreakpointStyleResponsive[] = 'stretch';
 
 	/**
-	 * Internal reference for the this Grid Item element
+	 * Internal reference for the Grid Item element
 	 */
 	private _element: HTMLElement;
 
+	/**
+	 * Set columns for single Grid Item
+	 */
 	@Input() set columns(value: FudisGridItemWidth | FudisGridItemColumnsResponsive) {
 		// Convert given string value to proper CSS grid-column value
 		if (typeof value === 'string') {
@@ -97,10 +106,16 @@ export class GridItemDirective implements OnInit, OnChanges {
 		this._breakpointService.setStyleAttributes(this._element, 'grid-column', this._columns);
 	}
 
+	/**
+	 * Set CSS justify-self attributes for this Grid Item element
+	 */
 	setAlignX(): void {
 		this._breakpointService.setStyleAttributes(this._element, 'justify-self', this._alignX);
 	}
 
+	/**
+	 * Set CSS align-self attributes for this Grid Item element
+	 */
 	setAlignY(): void {
 		this._breakpointService.setStyleAttributes(this._element, 'align-self', this._alignY);
 	}

@@ -1,6 +1,6 @@
 import { StoryFn, Meta, componentWrapperDecorator } from '@storybook/angular';
-
 import { GridComponent } from './grid.component';
+import readme from './readme.mdx';
 
 const html = String.raw;
 
@@ -52,6 +52,9 @@ export default {
 	],
 
 	parameters: {
+		docs: {
+			page: readme,
+		},
 		controls: {
 			exclude: commonExclude,
 		},
@@ -191,11 +194,11 @@ const ResponsiveColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent) 
 				until hitting 'xxl' breakpoint.</fudis-body-text
 			>
 			<fudis-body-text class="text-margin"
-				>Using FudisGridService's 'setGridDefaultColumns()' you can define default values applied to all your
+				>Using FudisGridService's 'setGridDefaultValues()' you can define default values applied to all your
 				Grids.</fudis-body-text
 			>
 			<fudis-body-text class="text-margin"
-				>If you set default values and provide values values for single Grid, values are combined.
+				>If you set default values and provide values for single Grid, values are combined.
 			</fudis-body-text>
 			<fudis-body-text>
 				E. g. with default values of {{defaultObject}} and provided Grid values of {{columnObjectTwo}} applied values
