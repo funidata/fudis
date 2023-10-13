@@ -5,7 +5,7 @@
 				<fudis-icon class="fudis-error-summary__icon" [icon]="'alert'"></fudis-icon>
 				<div class="fudis-error-summary__errors">
 					<ng-container *ngIf="helpText">
-						<fudis-body-text class="fudis-error-summary__errors__help-text">
+						<fudis-body-text fudisSpacing [marginTop]="'xs'">
 							<span class="fudis-visually-hidden">{{ _attentionText }}:&nbsp;</span>
 							{{ helpText }}</fudis-body-text
 						>

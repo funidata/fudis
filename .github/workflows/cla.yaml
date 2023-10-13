@@ -1,0 +1,36 @@
+name: CLA Assistant
+on:
+  issue_comment:
+    types:
+      - created
+  # DANGER! See our internal documentation and https://securitylab.github.com/research/github-actions-preventing-pwn-requests/ before you modify anything.
+  pull_request_target:
+    types:
+      - opened
+      - closed
+      - synchronize
+
+permissions:
+  actions: write
+  pull-requests: write
+  statuses: write
+
+jobs:
+  cla:
+    name: Require CLA from outside collaborators
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run CLA Assistant Action
+        if: (github.event.comment.body == 'recheck' || github.event.comment.body == 'I have read the CLA Document and I hereby sign the CLA') || github.event_name == 'pull_request_target'
+        uses: contributor-assistant/github-action@v2.3.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.CLA_SIGNATURE_STORE_TOKEN }}
+        with:
+          path-to-signatures: "fudis_cla_v1_signatures.json"
+          path-to-document: "https://github.com/funidata/fudis/blob/main/CLA"
+          branch: "main"
+          # Add users here to bypass CLA requirements (teams/orgs not supported).
+          allowlist: "dependabot[bot],videoeero,RiinaKuu,xanxan,Aleksuo,MayaMarjut"
+          remote-organization-name: funidata
+          remote-repository-name: cla-signature-store

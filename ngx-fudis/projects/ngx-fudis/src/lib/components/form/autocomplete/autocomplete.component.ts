@@ -2,7 +2,7 @@ import { AfterContentInit, AfterViewInit, Component, Input, OnChanges, OnInit, e
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl, Validators } from '@angular/forms';
-import { FudisDropdownOption, FudisInputWidth } from '../../../types/forms';
+import { FudisDropdownOption, FudisInputSize } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -40,7 +40,7 @@ export class AutocompleteComponent
 	/**
 	 * Available sizes for the autocomplete - defaults to large.
 	 */
-	@Input() size: FudisInputWidth = 'lg';
+	@Input() size: FudisInputSize = 'lg';
 
 	/**
 	 * Pre-selected dropdown options.
@@ -53,6 +53,11 @@ export class AutocompleteComponent
 	 * Option whether the dropdown options are shown only after three charactes (search) or if options are displayed when focusing the search input even without typing (dropdown)
 	 */
 	@Input() variant: 'search' | 'dropdown' = 'search';
+
+	/**
+	 * Placeholder text in input when selection is not yet made
+	 */
+	@Input() placeholder: string;
 
 	/**
 	 * Internal formControl to check if typed text matches with any of the options' viewValue
@@ -105,7 +110,7 @@ export class AutocompleteComponent
 	/**
 	 * Handle blur and set control as touched
 	 */
-	protected _autocompleteBlur(event: Event): void {
+	protected _autocompleteBlur(event: FocusEvent): void {
 		this.control.markAsTouched();
 		if (this.control.valid && this.control.value) {
 			this._autocompleteFormControl.patchValue(this.control.value.viewValue);

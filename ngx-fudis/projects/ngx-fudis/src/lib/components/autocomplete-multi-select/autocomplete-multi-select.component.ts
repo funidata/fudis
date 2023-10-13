@@ -11,7 +11,7 @@ import {
 	HostListener,
 } from '@angular/core';
 import { InputBaseDirective } from '../../directives/form/input-base/input-base.directive';
-import { FudisDropdownOption, FudisInputWidth } from '../../types/forms';
+import { FudisDropdownOption, FudisInputSize } from '../../types/forms';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 
@@ -24,7 +24,6 @@ import { FudisTranslationService } from '../../services/translation/translation.
 export class AutocompleteMultiSelectComponent extends InputBaseDirective implements OnInit {
 	constructor(
 		private _idService: FudisIdService,
-
 		_translationService: FudisTranslationService
 	) {
 		super(_translationService);
@@ -49,12 +48,17 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	/**
 	 * Available sizes for the multi-select - defaults to large.
 	 */
-	@Input() size: FudisInputWidth = 'lg';
+	@Input() size: FudisInputSize = 'lg';
 
 	/**
 	 * Array of selected dropdown options which user is clicking. Can also be used to set preselected options.
 	 */
 	@Input() selectedOptions: FudisDropdownOption[] = [];
+
+	/**
+	 * Placeholder text in input when selection is not yet made
+	 */
+	@Input() placeholder: string;
 
 	/**
 	 * Output for option click

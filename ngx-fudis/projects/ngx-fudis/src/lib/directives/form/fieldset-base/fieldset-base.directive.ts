@@ -2,12 +2,16 @@ import { Directive, Input, Signal, effect } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisTranslationConfig } from '../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { FudisIdService } from '../../../services/id/id.service';
 
 @Directive({
 	selector: '[fudisFieldSetBase]',
 })
 export class FieldSetBaseDirective extends TooltipApiDirective {
-	constructor(private _translationService: FudisTranslationService) {
+	constructor(
+		protected _idService: FudisIdService,
+		protected _translationService: FudisTranslationService
+	) {
 		super();
 
 		effect(() => {
@@ -38,7 +42,7 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
 	@Input() titleSize: 'md' | 'sm' = 'md';
 
 	/**
-	 * Internal id to generate unique id
+	 * Html id attribute
 	 */
 	protected _id: string;
 

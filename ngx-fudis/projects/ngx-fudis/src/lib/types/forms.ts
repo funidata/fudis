@@ -2,7 +2,20 @@ import { FormControl } from '@angular/forms';
 import { MatDateFormats, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
 import { FudisLanguageAbbr } from './miscellaneous';
 
-export type FudisInputWidth = 'sm' | 'md' | 'lg';
+export type FudisInputSize = 'sm' | 'md' | 'lg';
+
+export interface FudisCheckboxOption {
+	/** Unique id for single checkbox option */
+	id?: string;
+	/** Name for the group of checkboxes */
+	groupName?: string;
+	/** Underlying value of the option */
+	controlName: string;
+	/** Value that is shown in the UI */
+	label: string;
+	/** Is option selected */
+	value?: boolean | null | undefined;
+}
 
 export interface FudisRadioButtonOption {
 	/** Unique id for single radio button option */
@@ -93,6 +106,12 @@ export type FudisDropdownLanguageOption =
 export interface FudisInputWithLanguageOptionsFormGroup {
 	[language: string]: FormControl<string | null>;
 }
+
+export type FudisCheckboxControl = FormControl<boolean | null | undefined>;
+export interface FudisCheckboxGroupFormGroup {
+	[key: string]: FormControl<boolean | null | undefined>;
+}
+
 export interface FudisDateRangeItem {
 	control: FormControl<Date | null>;
 	label: string;
