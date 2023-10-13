@@ -1,7 +1,6 @@
 @use 'sass:map';
-@use './tokens';
+@use './tokens' as tokens;
 @use '../spacing/tokens.scss' as spacing;
-@use '../breakpoints/mixins.scss' as breakpoints;
 
 @mixin grid-max-width($width) {
 	@if map_has_key(tokens.$grid-widths, $width) {
