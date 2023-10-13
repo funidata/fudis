@@ -7,6 +7,14 @@
 @import './src/lib/assets/fonts/fonts';
 @import './src/lib/foundations/utilities/classes';
 
+:root {
+	--fudis-rem-multiplier: 1;
+}
+
+html {
+	font-size: 100%;
+}
+
 /* stylelint-disable color-no-hex */
 [data-theme='into'] {
 	--fudis-color-primary-light: #e0f4fd;

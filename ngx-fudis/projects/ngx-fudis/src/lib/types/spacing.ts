@@ -1,5 +1,6 @@
 import { FudisBreakpointKey, FudisBreakpointValueResponsive } from './breakpoints';
 import { FudisSpacing } from './miscellaneous';
+import { convertToRemValue } from '../utilities/rem-converter';
 
 /**
  * Responsive settings for different breakpoints for spacing
@@ -26,13 +27,13 @@ type FudisSpacingValues = {
  * Fudis spacing tokens converted to rem values
  */
 export const fudisSpacingValues: FudisSpacingValues = {
-	xxs: '0.25rem',
-	xs: '0.5rem',
-	sm: '1rem',
-	md: '1.5rem',
-	lg: '2rem',
-	xl: '2.5rem',
-	xxl: '4rem',
+	xxs: convertToRemValue(0.25),
+	xs: convertToRemValue(0.5),
+	sm: convertToRemValue(1),
+	md: convertToRemValue(1.5),
+	lg: convertToRemValue(2),
+	xl: convertToRemValue(2.5),
+	xxl: convertToRemValue(4),
 	none: '0',
 	default: defaultSpacingValue,
 };

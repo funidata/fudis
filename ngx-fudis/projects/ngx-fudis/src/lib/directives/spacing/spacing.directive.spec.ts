@@ -52,8 +52,8 @@ describe('SpacingDirective', () => {
 		const second = elems[1].nativeElement.style.margin;
 		const third = elems[2].nativeElement.style.margin;
 
-		expect(first).toBe('4rem 0px 0px');
-		expect(second).toBe('0px 0px 0.25rem');
-		expect(third).toBe('0px 2rem 0px 0.5rem');
+		expect(first).toBe('6.4rem 0px 0px');
+		expect(second).toBe('0px 0px 0.4rem');
+		expect(third).toBe('0px 3.2rem 0px 0.8rem');
 	});
 });

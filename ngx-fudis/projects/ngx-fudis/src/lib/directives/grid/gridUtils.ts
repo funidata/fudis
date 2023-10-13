@@ -1,5 +1,6 @@
 import { FudisBreakpointStyleResponsive } from '../../types/breakpoints';
 import { FudisGridAttributes, FudisGridFormInputWidth } from '../../types/grid';
+import { convertToRemValue } from '../../utilities/rem-converter';
 
 /**
  * Utility function used with GridDirective.
@@ -77,10 +78,10 @@ export const replaceFormInputWidthsToRem = (value: string): string => {
 	const inputLg: FudisGridFormInputWidth = 'inputLg';
 
 	return value
-		.replaceAll(inputXs, '4rem')
-		.replaceAll(inputSm, '10rem')
-		.replaceAll(inputMd, '14rem')
-		.replaceAll(inputLg, '23rem');
+		.replaceAll(inputXs, convertToRemValue(4))
+		.replaceAll(inputSm, convertToRemValue(10))
+		.replaceAll(inputMd, convertToRemValue(14))
+		.replaceAll(inputLg, convertToRemValue(23));
 };
 
 /**

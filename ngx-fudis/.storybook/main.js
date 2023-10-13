@@ -39,7 +39,7 @@ module.exports = {
                 display: flex;
                 align-items: center;
             }
-            .storybook-flex-column{
+            .storybook-flex-column {
                 display: flex;
                 align-items: center;
                 flex-direction: column;

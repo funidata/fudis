@@ -4,13 +4,13 @@
 // Based on default 16px base value
 
 $spacing-none: 0; // 0px
-$spacing-xxs: 0.25rem; // 4px
-$spacing-xs: 0.5rem; // 8px
-$spacing-sm: 1rem; // 16px
-$spacing-md: 1.5rem; // 24px
-$spacing-lg: 2rem; // 32px
-$spacing-xl: 2.5rem; // 40px
-$spacing-xxl: 4rem; // 64px
+$spacing-xxs: calc(0.25rem / var(--fudis-rem-multiplier)); // 4px
+$spacing-xs: calc(0.5rem / var(--fudis-rem-multiplier)); // 8px
+$spacing-sm: calc(1rem / var(--fudis-rem-multiplier)); // 16px
+$spacing-md: calc(1.5rem / var(--fudis-rem-multiplier)); // 24px
+$spacing-lg: calc(2rem / var(--fudis-rem-multiplier)); // 32px
+$spacing-xl: calc(2.5rem / var(--fudis-rem-multiplier)); // 40px
+$spacing-xxl: calc(4rem / var(--fudis-rem-multiplier)); // 64px
 
 $pixel-1: 1px;
 $pixel-2: 2px;
@@ -22,10 +22,11 @@ $pixel-tokens: (
 	'2px': $pixel-2,
 	'3px': $pixel-3,
 );
-$spacing-input-xs: 4rem;
-$spacing-input-sm: 10rem;
-$spacing-input-md: 14rem;
-$spacing-input-lg: 23rem;
+
+$spacing-input-xs: calc(4rem / var(--fudis-rem-multiplier));
+$spacing-input-sm: calc(10rem / var(--fudis-rem-multiplier));
+$spacing-input-md: calc(14rem / var(--fudis-rem-multiplier));
+$spacing-input-lg: calc(23rem / var(--fudis-rem-multiplier));
 
 // Fixed size for checkboxes' visual input box. Clickable input area should be 2rem high.
-$spacing-input-checkbox: 1.25rem;
+$spacing-input-checkbox: calc(1.25rem / var(--fudis-rem-multiplier));
