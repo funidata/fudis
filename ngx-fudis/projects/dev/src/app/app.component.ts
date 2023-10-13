@@ -21,7 +21,6 @@ import { DialogTestContentComponent } from './dialog-test/dialog-test-content/di
 @Component({
 	selector: 'app-root',
 	templateUrl: 'app.component.html',
-	styleUrls: ['./app.scss'],
 })
 export class AppComponent implements OnInit {
 	constructor(
@@ -46,7 +45,7 @@ export class AppComponent implements OnInit {
 
 	visibleRemValue: number;
 
-	fontSize: string = '100%';
+	fontSize: string;
 
 	multiplier: number;
 
@@ -87,6 +86,7 @@ export class AppComponent implements OnInit {
 		this._document.documentElement.lang = 'en';
 		this._fudisLanguage.setLanguage('en');
 		this.getMultiplier();
+		this.getApplicationFontSize();
 	}
 
 	triggerAlert(): void {
@@ -98,6 +98,13 @@ export class AppComponent implements OnInit {
 			linkTitle: 'More info about this warning.',
 		};
 		this._alertService.addAlert(newAlert);
+	}
+
+	getApplicationFontSize(): void {
+		this.fontSize = getComputedStyle(document.querySelector('html') as HTMLElement).getPropertyValue('font-size');
+		if (this.fontSize === '16px') {
+			this.fontSize = '100%';
+		}
 	}
 
 	getMultiplier(): void {
