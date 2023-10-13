@@ -1,4 +1,5 @@
 import { FudisGridAttributes } from '../../types/grid';
+import { convertToRemValue } from '../../utilities/rem-converter';
 import * as utils from './gridUtils';
 
 describe('GridUtils', () => {
@@ -29,22 +30,22 @@ describe('GridUtils', () => {
 			value = 'inputXs';
 			correctReturnString = utils.getGridCssValue(value);
 
-			expect(correctReturnString).toBe('4rem');
+			expect(correctReturnString).toBe(convertToRemValue(4));
 
 			value = 'inputSm';
 			correctReturnString = utils.getGridCssValue(value);
 
-			expect(correctReturnString).toBe('10rem');
+			expect(correctReturnString).toBe(convertToRemValue(10));
 
 			value = 'inputMd';
 			correctReturnString = utils.getGridCssValue(value);
 
-			expect(correctReturnString).toBe('14rem');
+			expect(correctReturnString).toBe(convertToRemValue(14));
 
 			value = 'inputLg';
 			correctReturnString = utils.getGridCssValue(value);
 
-			expect(correctReturnString).toBe('23rem');
+			expect(correctReturnString).toBe(convertToRemValue(23));
 		});
 	});
 
