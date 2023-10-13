@@ -23,7 +23,7 @@ import { FudisSpacing } from '../../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-mock-grid-directive',
-	template: `<div fudisGrid [align]="align" [alignItemsX]="alignItemsX" [alignItemsY]="alignItemxY" [columns]="3">
+	template: `<div fudisGrid [align]="align" [alignItemsX]="alignItemsX" [alignItemsY]="alignItemsY" [columns]="3">
 			<fudis-heading [level]="3">I am test heading</fudis-heading>
 			<fudis-body-text>Paragraph text for testing grid directive.</fudis-body-text>
 			<fudis-button [label]="'Test button'" />
@@ -137,28 +137,26 @@ describe('GridDirective', () => {
 			expect(getAttribute(0, 'align-items')).toBe('stretch');
 			expect(getAttribute(0, 'justify-items')).toBe('stretch');
 
-			// TODO: fixture.detectChanges() has no effect after the first expects. This same implemention works in grid-item unit tests.
+			component.alignItemsX = 'start';
+			component.alignItemsY = 'start';
+			fixture.detectChanges();
 
-			// component.alignItemsX = 'start';
-			// component.alignItemsY = 'start';
-			// fixture.detectChanges();
+			expect(getAttribute(0, 'align-items')).toBe('start');
+			expect(getAttribute(0, 'justify-items')).toBe('start');
 
-			// expect(getAttribute(0, 'align-items')).toBe('start');
-			// expect(getAttribute(0, 'justify-items')).toBe('start');
+			component.alignItemsX = 'center';
+			component.alignItemsY = 'center';
+			fixture.detectChanges();
 
-			// component.alignItemsX = 'center';
-			// component.alignItemsY = 'center';
-			// fixture.detectChanges();
+			expect(getAttribute(0, 'align-items')).toBe('center');
+			expect(getAttribute(0, 'justify-items')).toBe('center');
 
-			// expect(getAttribute(0, 'align-items')).toBe('center');
-			// expect(getAttribute(0, 'justify-items')).toBe('center');
+			component.alignItemsX = 'end';
+			component.alignItemsY = 'end';
+			fixture.detectChanges();
 
-			// component.alignItemsX = 'end';
-			// component.alignItemsY = 'end';
-			// fixture.detectChanges();
-
-			// expect(getAttribute(0, 'align-items')).toBe('end');
-			// expect(getAttribute(0, 'justify-items')).toBe('end');
+			expect(getAttribute(0, 'align-items')).toBe('end');
+			expect(getAttribute(0, 'justify-items')).toBe('end');
 		});
 
 		it('should convert marginTop and marginBottom attributes to respective CSS classes', () => {
