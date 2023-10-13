@@ -70,6 +70,7 @@ export const Disabled = Template.bind({});
 Disabled.args = {
 	label: 'Choose one option',
 	disabled: true,
+	placeholder: 'Placeholder text',
 	helpText:
 		'This is autocomplete input, start writing (e.g mar) and after three letters the input will suggest matching options.',
 	control: new FormControl(null),

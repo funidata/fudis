@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { TextInputComponent } from './text-input.component';
 import { LabelComponent } from '../label/label.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
-import { FudisInputWidth } from '../../../types/forms';
+import { FudisInputSize } from '../../../types/forms';
 
 const textInputControl: FormControl = new FormControl('');
 
@@ -34,7 +34,7 @@ describe('TextInputComponent', () => {
 		expect(componentClasses).toEqual(classes.split(' ').sort());
 	}
 
-	function textInputSizeCheck(size: FudisInputWidth): void {
+	function textInputSizeCheck(size: FudisInputSize): void {
 		component.size = size;
 		fixture.detectChanges();
 		assertTextInputHasClasses(`fudis-text-input fudis-text-input__${size}`);

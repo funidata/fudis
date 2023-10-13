@@ -3,7 +3,7 @@ import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/cor
 import { FormControl, Validators } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
-import { FudisInputWidth } from '../../../types/forms';
+import { FudisInputSize } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 
@@ -38,7 +38,7 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit, OnC
 	/**
 	 * Text-area size option
 	 */
-	@Input() size: FudisInputWidth = 'lg';
+	@Input() size: FudisInputSize = 'lg';
 
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('textArea');
