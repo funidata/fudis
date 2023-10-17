@@ -37,7 +37,7 @@ describe('TextInputComponent', () => {
 	function textInputSizeCheck(size: FudisInputSize): void {
 		component.size = size;
 		fixture.detectChanges();
-		assertTextInputHasClasses(`fudis-text-input fudis-text-input__${size}`);
+		assertTextInputHasClasses(`fudis-text-input fudis-input-size__${size}`);
 	}
 
 	it('should create', () => {

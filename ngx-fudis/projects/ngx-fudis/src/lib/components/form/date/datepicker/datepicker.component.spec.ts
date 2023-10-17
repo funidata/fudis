@@ -49,21 +49,21 @@ describe('DatepickerComponent', () => {
 
 	describe('Top wrapper div', () => {
 		it('should always have default CSS classes: fudis-datepicker and fudis-datepicker__md', () => {
-			assertDatepickerTopWrapperDivHasClasses('fudis-datepicker', 'fudis-datepicker__md');
+			assertDatepickerTopWrapperDivHasClasses('fudis-datepicker', 'fudis-input-size__md');
 		});
 
 		it('should have respective CSS class indicating the datepicker size of small', () => {
 			component.size = 'sm';
 			fixture.detectChanges();
 
-			assertDatepickerTopWrapperDivHasClasses('fudis-datepicker', 'fudis-datepicker__sm');
+			assertDatepickerTopWrapperDivHasClasses('fudis-datepicker', 'fudis-input-size__sm');
 		});
 
 		it('should have respective CSS class indicating the datepicker size of large', () => {
 			component.size = 'lg';
 			fixture.detectChanges();
 
-			assertDatepickerTopWrapperDivHasClasses('fudis-datepicker', 'fudis-datepicker__lg');
+			assertDatepickerTopWrapperDivHasClasses('fudis-datepicker', 'fudis-input-size__lg');
 		});
 
 		it('should have fudis-label component present with given id', () => {

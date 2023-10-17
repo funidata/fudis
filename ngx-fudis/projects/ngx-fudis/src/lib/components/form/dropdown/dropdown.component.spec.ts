@@ -53,7 +53,7 @@ describe('DropdownComponent', () => {
 	function dropdownSizeCheck(size: FudisInputSize): void {
 		component.size = size;
 		fixture.detectChanges();
-		assertDropdownHasClasses(`fudis-dropdown fudis-dropdown__${size}`);
+		assertDropdownHasClasses(`fudis-dropdown fudis-input-size__${size}`);
 	}
 
 	it('should create', () => {
