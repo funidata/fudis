@@ -1968,6 +1968,19 @@ html {
   height: 1px;
 }
 
+.fudis-input-size__xs {
+  max-width: calc(4rem / var(--fudis-rem-multiplier));
+}
+.fudis-input-size__sm {
+  max-width: calc(10rem / var(--fudis-rem-multiplier));
+}
+.fudis-input-size__md {
+  max-width: calc(14rem / var(--fudis-rem-multiplier));
+}
+.fudis-input-size__lg {
+  max-width: calc(23rem / var(--fudis-rem-multiplier));
+}
+
 :root {
   --fudis-rem-multiplier: 1;
 }
