@@ -159,7 +159,7 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 
 	private _setClasses(): void {
 		if (this.inputSize) {
-			this._classes = ['fudis-fieldset', `fudis-fieldset__input-width__${this.inputSize}`];
+			this._classes = ['fudis-fieldset', `fudis-input-size__${this.inputSize}`];
 		} else {
 			this._classes = ['fudis-fieldset'];
 		}

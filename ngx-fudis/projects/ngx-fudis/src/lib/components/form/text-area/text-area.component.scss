@@ -3,18 +3,6 @@
 @use '../../../foundations/borders/mixins.scss' as border;
 
 .fudis-text-area {
-	&__lg {
-		max-width: spacing.$spacing-input-lg;
-	}
-
-	&__md {
-		max-width: spacing.$spacing-input-md;
-	}
-
-	&__sm {
-		max-width: spacing.$spacing-input-sm;
-	}
-
 	&__input {
 		@include typography.text-field-input;
 

@@ -54,7 +54,7 @@ describe('AutocompleteComponent', () => {
 	function autocompleteSize(size: FudisInputSize): void {
 		component.size = size;
 		fixture.detectChanges();
-		assertAutocompleteHasClasses(`fudis-autocomplete fudis-autocomplete__${size}`);
+		assertAutocompleteHasClasses(`fudis-autocomplete fudis-input-size__${size}`);
 	}
 
 	describe('child components', () => {

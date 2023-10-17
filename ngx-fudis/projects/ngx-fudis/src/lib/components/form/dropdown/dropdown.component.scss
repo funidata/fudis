@@ -6,22 +6,6 @@
 @use '../../../foundations/focus/mixins.scss' as focus;
 
 .fudis-dropdown {
-	&__lg {
-		max-width: spacing.$spacing-input-lg;
-	}
-
-	&__md {
-		max-width: spacing.$spacing-input-md;
-	}
-
-	&__sm {
-		max-width: spacing.$spacing-input-sm;
-	}
-
-	&__xs {
-		max-width: spacing.$spacing-input-xs;
-	}
-
 	&__input {
 		position: relative;
 

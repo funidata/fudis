@@ -18,20 +18,6 @@
 		@include focus.focus-generic;
 	}
 
-	&__input-width {
-		&__sm {
-			max-width: spacing.$spacing-input-sm;
-		}
-
-		&__md {
-			max-width: spacing.$spacing-input-md;
-		}
-
-		&__lg {
-			max-width: spacing.$spacing-input-lg;
-		}
-	}
-
 	&__legend {
 		display: flex;
 		flex-direction: column;
@@ -85,8 +71,6 @@
 				@include colorMixins.text-color('gray-dark');
 
 				display: inline-block;
-
-				// margin-top: spacing.$spacing-xxs;
 				margin-right: spacing.$spacing-xs;
 
 				&__required {

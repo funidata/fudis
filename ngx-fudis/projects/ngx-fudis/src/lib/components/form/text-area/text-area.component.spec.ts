@@ -37,7 +37,7 @@ describe('TextAreaComponent', () => {
 	function textAreaSizeCheck(size: FudisInputSize): void {
 		component.size = size;
 		fixture.detectChanges();
-		assertTextAreaHasClasses(`fudis-text-area fudis-text-area__${size}`);
+		assertTextAreaHasClasses(`fudis-text-area fudis-input-size__${size}`);
 	}
 
 	it('should create', () => {

@@ -19,6 +19,10 @@
 		margin-left: spacing.$spacing-xxs;
 	}
 
+	&__body-text {
+		white-space: pre-wrap;
+	}
+
 	&__warning {
 		@include colors.bg-color('yellow-light');
 		@include borders.border('2px', 'solid', 'yellow');

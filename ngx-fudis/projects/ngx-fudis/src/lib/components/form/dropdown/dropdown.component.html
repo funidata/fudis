@@ -1,4 +1,4 @@
-<div class="fudis-dropdown fudis-dropdown__{{ size }}">
+<div class="fudis-dropdown fudis-input-size__{{ size }}">
 	<fudis-label
 		[text]="label"
 		[id]="_id + '-label'"
@@ -39,6 +39,5 @@
 		</mat-select>
 		<fudis-icon class="fudis-dropdown__input__icon" [icon]="'chevron'" [rotate]="'cw-90'" />
 	</div>
-
 	<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="_id" [errorMsg]="errorMsg" [control]="control" />
 </div>

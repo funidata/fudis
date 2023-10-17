@@ -47,7 +47,7 @@ describe('AutocompleteMultiSelectComponent', () => {
 	function multiSelectSizeCheck(size: FudisInputSize): void {
 		component.size = size;
 		fixture.detectChanges();
-		asserMultiSelectHasClasses(`fudis-autocomplete-multi-select fudis-autocomplete-multi-select__${size}`);
+		asserMultiSelectHasClasses(`fudis-autocomplete-multi-select fudis-input-size__${size}`);
 	}
 
 	it('should create', () => {

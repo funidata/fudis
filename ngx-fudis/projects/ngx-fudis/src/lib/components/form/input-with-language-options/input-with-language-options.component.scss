@@ -6,18 +6,6 @@
 
 	display: flex;
 
-	&__lg {
-		max-width: spacing.$spacing-input-lg;
-	}
-
-	&__md {
-		max-width: spacing.$spacing-input-md;
-	}
-
-	&__sm {
-		max-width: spacing.$spacing-input-sm;
-	}
-
 	&__inputs {
 		flex: 1;
 		margin-right: spacing.$spacing-xxs;
