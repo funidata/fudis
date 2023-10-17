@@ -1,12 +1,14 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
+// karma.style.css includes styles that are essential for executing tests in suited application environment
 
 module.exports = function (config) {
   config.set({
     basePath: '',
     files: [
       { pattern: 'src/lib/assets/images/fd-logo.svg', watched: false, included: false, served: true, nocache: false },
-      { pattern: 'src/lib/assets/icons/*.*', watched: false, included: false, served: true, nocache: false }
+      { pattern: 'src/lib/assets/icons/*.*', watched: false, included: false, served: true, nocache: false },
+			'karma.style.css'
     ],
     proxies: {
       "/fd-logo.svg": "/base/src/lib/assets/images/fd-logo.svg",

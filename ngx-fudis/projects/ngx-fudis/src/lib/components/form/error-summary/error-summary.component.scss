@@ -40,7 +40,7 @@
 				position: absolute;
 				top: 50%;
 				left: 0;
-				transform: translate(-1 * spacing.$spacing-xs, -50%);
+				transform: translate(calc(-1 * spacing.$spacing-xs), -50%);
 				border-radius: spacing.$spacing-xxl;
 				width: spacing.$pixel-3;
 				height: spacing.$pixel-3;

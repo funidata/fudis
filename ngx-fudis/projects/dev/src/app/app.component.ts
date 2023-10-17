@@ -21,7 +21,6 @@ import { DialogTestContentComponent } from './dialog-test/dialog-test-content/di
 @Component({
 	selector: 'app-root',
 	templateUrl: 'app.component.html',
-	styleUrls: ['./app.scss'],
 })
 export class AppComponent implements OnInit {
 	constructor(
@@ -43,6 +42,14 @@ export class AppComponent implements OnInit {
 	@ViewChild('exampleDialogTemplate', { static: true }) templateRef: TemplateRef<unknown>;
 
 	title = 'dev';
+
+	visibleRemValue: number;
+
+	fontSize: string;
+
+	multiplier: number;
+
+	newRemBase: string;
 
 	dropdownOptions: FudisDropdownOption[] = [
 		{ value: 'value-1-dog', viewValue: 'Dog' },
@@ -78,6 +85,8 @@ export class AppComponent implements OnInit {
 
 		this._document.documentElement.lang = 'en';
 		this._fudisLanguage.setLanguage('en');
+		this.getMultiplier();
+		this.getApplicationFontSize();
 	}
 
 	triggerAlert(): void {
@@ -89,6 +98,38 @@ export class AppComponent implements OnInit {
 			linkTitle: 'More info about this warning.',
 		};
 		this._alertService.addAlert(newAlert);
+	}
+
+	getApplicationFontSize(): void {
+		this.fontSize = getComputedStyle(document.querySelector('html') as HTMLElement).getPropertyValue('font-size');
+		if (this.fontSize === '16px') {
+			this.fontSize = '100%';
+		}
+	}
+
+	getMultiplier(): void {
+		const currentRemBase: string = getComputedStyle(document.querySelector(':root') as HTMLElement).getPropertyValue(
+			'--fudis-rem-multiplier'
+		);
+		this.multiplier = Number(currentRemBase);
+		this.visibleRemValue = this.multiplier * 16;
+	}
+
+	/* Following function is for testing changing Application pixel base between 16 and 10 pixel base values */
+	changeRemBase(): void {
+		if (this.multiplier === 1) {
+			this.newRemBase = '0.625';
+			this.fontSize = '62.5%';
+		} else {
+			this.newRemBase = '1';
+			this.fontSize = '100%';
+		}
+		const documentRoot = document.querySelector(':root') as HTMLElement;
+		const documentHtml = document.querySelector('html') as HTMLElement;
+
+		documentRoot.style.setProperty('--fudis-rem-multiplier', this.newRemBase);
+		documentHtml.style.setProperty('font-size', this.fontSize);
+		this.getMultiplier();
 	}
 
 	changeLanguage(): void {
