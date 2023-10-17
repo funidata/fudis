@@ -8,6 +8,7 @@
 	@include typography.badge-typography;
 	@include colorMixin.text-color('gray-dark');
 
+	display: inline-block;
 	padding: spacing.$pixel-1 spacing.$pixel-3;
 	vertical-align: middle;
 
