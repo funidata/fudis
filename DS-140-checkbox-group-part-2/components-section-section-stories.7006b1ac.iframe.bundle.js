@@ -3,7 +3,7 @@
 		[title]="title"
 		[tooltip]="'More info about this section'"
 		[titleSize]="titleSize"
-		[titleTag]="titleTag">
+		[titleLevel]="titleLevel">
 		<ng-template fudisActions type="section">
 			<fudis-button [label]="'Some action'" />
 			<fudis-button [label]="'Another action'" />
@@ -20,4 +20,4 @@
 			<fudis-body-text>Some text content inside section</fudis-body-text>
 		</ng-template>
 	</fudis-section> `})).bind({})}}]);
-//# sourceMappingURL=components-section-section-stories.9c4cc533.iframe.bundle.js.map
+//# sourceMappingURL=components-section-section-stories.7006b1ac.iframe.bundle.js.map
