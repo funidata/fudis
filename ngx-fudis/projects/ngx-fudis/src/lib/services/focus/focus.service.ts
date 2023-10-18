@@ -7,6 +7,8 @@ import { Inject, Injectable } from '@angular/core';
 export class FudisFocusService {
 	constructor(@Inject(DOCUMENT) private _document: Document) {}
 
+	private _ignoreInitialFocusArray: string[] = [];
+
 	private _focusTarget: HTMLElement;
 
 	public getFocusTarget(): HTMLElement {
@@ -29,5 +31,23 @@ export class FudisFocusService {
 				this.focusToElementById(id, tryCounter - 1);
 			}
 		}, 50);
+	}
+
+	public addToIgnoreInitialFocus(id: string): void {
+		if (!this._ignoreInitialFocusArray.includes(id)) {
+			this._ignoreInitialFocusArray.push(id);
+		}
+	}
+
+	public removeFromIgnoreInitialFocus(id: string): void {
+		if (this._ignoreInitialFocusArray.includes(id)) {
+			this._ignoreInitialFocusArray = this._ignoreInitialFocusArray.filter((item) => {
+				return item !== id;
+			});
+		}
+	}
+
+	public getIgnoreInitialFocusArray(): string[] {
+		return this._ignoreInitialFocusArray;
 	}
 }

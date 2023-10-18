@@ -11,6 +11,7 @@ import {
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Component({
 	selector: 'fudis-input-with-language-options',
@@ -20,9 +21,10 @@ import { FudisTranslationService } from '../../../services/translation/translati
 export class InputWithLanguageOptionsComponent extends InputBaseDirective implements OnInit, OnChanges, AfterViewInit {
 	constructor(
 		private _idService: FudisIdService,
-		_translationService: FudisTranslationService
+		_translationService: FudisTranslationService,
+		_focusService: FudisFocusService
 	) {
-		super(_translationService);
+		super(_translationService, _focusService);
 
 		effect(() => {
 			this._languageLabel = this._translations().INPUT_WITH_LANGUAGE_OPTIONS.LANGUAGE;

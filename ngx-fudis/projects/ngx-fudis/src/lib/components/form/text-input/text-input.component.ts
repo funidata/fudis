@@ -5,6 +5,7 @@ import { InputBaseDirective } from '../../../directives/form/input-base/input-ba
 import { FudisInputSize } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Component({
 	selector: 'fudis-text-input',
@@ -14,9 +15,10 @@ import { FudisTranslationService } from '../../../services/translation/translati
 export class TextInputComponent extends InputBaseDirective implements OnInit, OnChanges, AfterViewInit {
 	constructor(
 		private _idService: FudisIdService,
-		_translationService: FudisTranslationService
+		_translationService: FudisTranslationService,
+		_focusService: FudisFocusService
 	) {
-		super(_translationService);
+		super(_translationService, _focusService);
 	}
 
 	@HostBinding('class') classes = 'fudis-text-input-host';

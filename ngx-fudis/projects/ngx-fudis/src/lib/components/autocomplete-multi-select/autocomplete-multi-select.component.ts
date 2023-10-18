@@ -14,6 +14,7 @@ import { InputBaseDirective } from '../../directives/form/input-base/input-base.
 import { FudisDropdownOption, FudisInputSize } from '../../types/forms';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisTranslationService } from '../../services/translation/translation.service';
+import { FudisFocusService } from '../../services/focus/focus.service';
 
 @Component({
 	selector: 'fudis-autocomplete-multi-select',
@@ -24,9 +25,10 @@ import { FudisTranslationService } from '../../services/translation/translation.
 export class AutocompleteMultiSelectComponent extends InputBaseDirective implements OnInit {
 	constructor(
 		private _idService: FudisIdService,
-		_translationService: FudisTranslationService
+		_translationService: FudisTranslationService,
+		_focusService: FudisFocusService
 	) {
-		super(_translationService);
+		super(_translationService, _focusService);
 
 		effect(() => {
 			this._openAriaLabel = this._translations().AUTOCOMPLETE.MULTISELECT.OPEN_DROPDOWN;
