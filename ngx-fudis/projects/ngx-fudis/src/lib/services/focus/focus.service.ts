@@ -7,7 +7,7 @@ import { Inject, Injectable } from '@angular/core';
 export class FudisFocusService {
 	constructor(@Inject(DOCUMENT) private _document: Document) {}
 
-	private _ignoreInitialFocusArray: string[] = [];
+	private _ignoreInitialFocusList: string[] = [];
 
 	private _focusTarget: HTMLElement;
 
@@ -33,26 +33,29 @@ export class FudisFocusService {
 		}, 50);
 	}
 
-	public addToIgnoreInitialFocus(id: string): void {
-		if (!this._ignoreInitialFocusArray.includes(id)) {
-			this._ignoreInitialFocusArray.push(id);
+	/**
+	 * Add component with given id to ignore list, so that initialFocus is ignored with that. Used in e. g. a form where same component is added multiple times when user clicks 'New item' or similar and focus is wanted to move there except with
+	 */
+	public addToIgnoreList(id: string): void {
+		if (!this._ignoreInitialFocusList.includes(id)) {
+			this._ignoreInitialFocusList.push(id);
 		}
 	}
 
-	public removeFromIgnoreInitialFocus(id: string): void {
-		if (this._ignoreInitialFocusArray.includes(id)) {
-			this._ignoreInitialFocusArray = this._ignoreInitialFocusArray.filter((item) => {
+	public removeFromIgnoreList(id: string): void {
+		if (this._ignoreInitialFocusList.includes(id)) {
+			this._ignoreInitialFocusList = this._ignoreInitialFocusList.filter((item) => {
 				return item !== id;
 			});
 		}
 	}
 
-	public getIgnoreInitialFocusArray(): string[] {
-		return this._ignoreInitialFocusArray;
+	public getIgnoreList(): string[] {
+		return this._ignoreInitialFocusList;
 	}
 
-	public isInitialFocusIgnored(id: string): boolean {
-		if (this._ignoreInitialFocusArray.includes(id)) {
+	public isIgnored(id: string): boolean {
+		if (this._ignoreInitialFocusList.includes(id)) {
 			return true;
 		}
 		return false;

@@ -86,7 +86,7 @@ export class AutocompleteComponent
 	}
 
 	ngAfterViewInit(): void {
-		if (this.initialFocus && !this._focusService.isInitialFocusIgnored(this._id)) {
+		if (this.initialFocus && !this._focusService.isIgnored(this._id)) {
 			this.focusToInput();
 		}
 	}
