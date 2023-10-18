@@ -18,9 +18,9 @@ changelog:
     # - title: "Chore"
     #   labels:
     #     - "chore"
-    - title: "Dependencies"
+    - title: Dependencies
       labels:
-        - "dependencies"
+        - dependencies
     # - title: "Other Changes"
     #   labels:
     #     - "*"
