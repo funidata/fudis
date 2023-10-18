@@ -7,7 +7,7 @@
 
 # List projects to update here by their folder name.
 projects=(
-  "ngx-fudis/projects"
+  "ngx-fudis"
   "ngx-fudis/projects/ngx-fudis"
 )
 
