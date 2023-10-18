@@ -9,6 +9,7 @@ import {
 	ViewEncapsulation,
 	effect,
 	HostListener,
+	AfterViewInit,
 } from '@angular/core';
 import { InputBaseDirective } from '../../directives/form/input-base/input-base.directive';
 import { FudisDropdownOption, FudisInputSize } from '../../types/forms';
@@ -22,13 +23,13 @@ import { FudisFocusService } from '../../services/focus/focus.service';
 	styleUrls: ['./autocomplete-multi-select.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class AutocompleteMultiSelectComponent extends InputBaseDirective implements OnInit {
+export class AutocompleteMultiSelectComponent extends InputBaseDirective implements OnInit, AfterViewInit {
 	constructor(
 		private _idService: FudisIdService,
-		_translationService: FudisTranslationService,
-		_focusService: FudisFocusService
+		private _focusService: FudisFocusService,
+		_translationService: FudisTranslationService
 	) {
-		super(_translationService, _focusService);
+		super(_translationService);
 
 		effect(() => {
 			this._openAriaLabel = this._translations().AUTOCOMPLETE.MULTISELECT.OPEN_DROPDOWN;
@@ -105,6 +106,12 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('autocompleteMultiSelect');
 		this._results = [...this.options];
+	}
+
+	ngAfterViewInit(): void {
+		if (this.initialFocus && !this._focusService.isInitialFocusIgnored(this._id)) {
+			this.focusToInput();
+		}
 	}
 
 	/**

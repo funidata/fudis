@@ -50,4 +50,11 @@ export class FudisFocusService {
 	public getIgnoreInitialFocusArray(): string[] {
 		return this._ignoreInitialFocusArray;
 	}
+
+	public isInitialFocusIgnored(id: string): boolean {
+		if (this._ignoreInitialFocusArray.includes(id)) {
+			return true;
+		}
+		return false;
+	}
 }

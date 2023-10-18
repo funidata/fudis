@@ -19,10 +19,10 @@ export class AutocompleteComponent
 {
 	constructor(
 		private _idService: FudisIdService,
-		_translationService: FudisTranslationService,
-		_focusService: FudisFocusService
+		private _focusService: FudisFocusService,
+		_translationService: FudisTranslationService
 	) {
-		super(_translationService, _focusService);
+		super(_translationService);
 
 		effect(() => {
 			this._clearFilterText = this._translations().AUTOCOMPLETE.CLEAR;
@@ -86,7 +86,7 @@ export class AutocompleteComponent
 	}
 
 	ngAfterViewInit(): void {
-		if (this.initialFocus) {
+		if (this.initialFocus && !this._focusService.isInitialFocusIgnored(this._id)) {
 			this.focusToInput();
 		}
 	}

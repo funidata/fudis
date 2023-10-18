@@ -4,16 +4,12 @@ import { FudisFormErrors } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisTranslationConfig } from '../../../types/miscellaneous';
-import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Directive({
 	selector: '[fudisInputBase]',
 })
 export class InputBaseDirective extends TooltipApiDirective {
-	constructor(
-		protected _translationService: FudisTranslationService,
-		protected _focusService: FudisFocusService
-	) {
+	constructor(protected _translationService: FudisTranslationService) {
 		super();
 
 		effect(() => {
@@ -106,8 +102,6 @@ export class InputBaseDirective extends TooltipApiDirective {
 	}
 
 	focusToInput(): void {
-		console.log(this._focusService.getIgnoreInitialFocusArray());
-
 		if (this.inputRef?.nativeElement) {
 			this.inputRef.nativeElement.focus();
 		} else if (this._focusTryCounter < 100) {

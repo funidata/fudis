@@ -41,9 +41,9 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 		private _datePickerConfigService: FudisTranslationService,
 		private _adapter: DateAdapter<Date>,
 		private _datepickerIntl: MatDatepickerIntl,
-		_focusService: FudisFocusService
+		private _focusService: FudisFocusService
 	) {
-		super(_datePickerConfigService, _focusService);
+		super(_datePickerConfigService);
 
 		effect(() => {
 			this._datepickerIntl.closeCalendarLabel = this._translations().DATEPICKER.CLOSE;
@@ -83,7 +83,7 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 	}
 
 	ngAfterViewInit(): void {
-		if (this.initialFocus) {
+		if (this.initialFocus && !this._focusService.isInitialFocusIgnored(this._id)) {
 			this.focusToInput();
 		}
 	}
