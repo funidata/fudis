@@ -1,7 +1,6 @@
 import { NgxFudisModule } from '../projects/ngx-fudis/src/lib/ngx-fudis.module';
 import { useTheme } from './useTheme';
-import { importProvidersFrom } from '@angular/core';
-import { moduleMetadata, applicationConfig } from '@storybook/angular';
+import { moduleMetadata } from '@storybook/angular';
 import { setCompodocJson } from '@storybook/addon-docs/angular';
 import docJson from '../documentation.json';
 import getVersion from './getVersion';
@@ -29,11 +28,14 @@ const preview = {
 						[
 							'Getting Started',
 							'Setup VSCode',
+							'Code Linting and Formatting',
 							'Project Structure',
 							'Ways of Working',
 							'Naming Conventions',
 							'Creating A Component',
 							'Component Checklist',
+							'Releases',
+							'DevOps Info'
 						],
 					],
 					'Foundations',
