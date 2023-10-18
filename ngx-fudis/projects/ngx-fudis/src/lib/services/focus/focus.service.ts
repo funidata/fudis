@@ -34,7 +34,7 @@ export class FudisFocusService {
 	}
 
 	/**
-	 * Add component with given id to ignore list, so that initialFocus is ignored with that. Used in e. g. a form where same component is added multiple times when user clicks 'New item' or similar and focus is wanted to move there except with
+	 * Add component with given id to ignore list, so that initialFocus is ignored with that. Used in e. g. a form where same component is added multiple times when user clicks 'New item' or similar and focus is wanted to move there except with 'item-id-x'.
 	 */
 	public addToIgnoreList(id: string): void {
 		if (!this._ignoreInitialFocusList.includes(id)) {
@@ -42,6 +42,9 @@ export class FudisFocusService {
 		}
 	}
 
+	/**
+	 * Remove id from ignore initialFocus list
+	 */
 	public removeFromIgnoreList(id: string): void {
 		if (this._ignoreInitialFocusList.includes(id)) {
 			this._ignoreInitialFocusList = this._ignoreInitialFocusList.filter((item) => {
