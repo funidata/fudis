@@ -1,26 +1,26 @@
 changelog:
-  # exclude:
-  #   labels:
-  #     - "exclude from release notes"
+  exclude:
+    labels:
+      - "exclude from release notes"
   categories:
-    # - title: "Breaking Changes"
-    #   labels:
-    #     - "breaking change"
-    # - title: "Features"
-    #   labels:
-    #     - "feature"
-    # - title: "Improvements"
-    #   labels:
-    #     - "improvement"
-    # - title: "Bug Fixes"
-    #   labels:
-    #     - "bug fix"
-    # - title: "Chore"
-    #   labels:
-    #     - "chore"
-    - title: Dependencies
+    - title: "Breaking Changes"
       labels:
-        - dependencies
-    # - title: "Other Changes"
-    #   labels:
-    #     - "*"
+        - "breaking change"
+    - title: "Features"
+      labels:
+        - "feature"
+    - title: "Improvements"
+      labels:
+        - "improvement"
+    - title: "Bug Fixes"
+      labels:
+        - "bug fix"
+    - title: "Chore"
+      labels:
+        - "chore"
+    - title: "Dependencies"
+      labels:
+        - "dependencies"
+    - title: "Other Changes"
+      labels:
+        - "*"
