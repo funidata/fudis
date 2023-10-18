@@ -9,18 +9,15 @@
 		max-width: $grid-width-value;
 
 		@if $width == xl or $width == xxl {
-			row-gap: spacing.$spacing-lg;
-			column-gap: spacing.$spacing-lg;
+			gap: spacing.$spacing-lg spacing.$spacing-lg;
 		}
 
 		@if $width == md or $width == lg {
-			row-gap: spacing.$spacing-md;
-			column-gap: spacing.$spacing-md;
+			gap: spacing.$spacing-md spacing.$spacing-md;
 		}
 
 		@if $width == sm or $width == xs {
-			row-gap: spacing.$spacing-sm;
-			column-gap: spacing.$spacing-sm;
+			gap: spacing.$spacing-sm spacing.$spacing-sm;
 		}
 	} @else {
 		@error 'Unknown grid width of #{$width}. Accepted arguments are: "xxl", "xl", "lg", "md", "sm", "xs".';
