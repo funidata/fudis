@@ -1,7 +1,7 @@
 import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/angular';
 
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Component, importProvidersFrom } from '@angular/core';
+import { Component, OnInit, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RouterModule } from '@angular/router';
@@ -17,6 +17,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
 import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 import { FormComponent } from './form.component';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Component({
 	selector: 'example-form-content',
@@ -104,6 +105,7 @@ import { FudisTranslationService } from '../../../services/translation/translati
 										<ng-template fudisContent type="fieldset">
 											<fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
 												<fudis-text-input
+													[initialFocus]="true"
 													[id]="'unique-input-3'"
 													[control]="fieldsetExample.controls['teacher']"
 													[label]="labelTeacher"
@@ -151,10 +153,11 @@ import { FudisTranslationService } from '../../../services/translation/translati
 		</fudis-form>
 	`,
 })
-class FormContentExampleComponent {
+class FormContentExampleComponent implements OnInit {
 	constructor(
 		private _errorSummaryService: FudisErrorSummaryService,
-		private _translationService: FudisTranslationService
+		private _translationService: FudisTranslationService,
+		private _focusService: FudisFocusService
 	) {}
 
 	errorSummaryVisible: boolean = false;
@@ -284,6 +287,10 @@ class FormContentExampleComponent {
 	};
 
 	private _closed: boolean = true;
+
+	ngOnInit(): void {
+		this._focusService.addToIgnoreList('unique-input-3');
+	}
 
 	submitForm(): void {
 		this.fieldsetExample.markAllAsTouched();

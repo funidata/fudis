@@ -37,7 +37,7 @@
 				{{ option.viewValue }}
 			</mat-option>
 		</mat-select>
-		<fudis-icon class="fudis-dropdown__input__icon" [icon]="'chevron'" [rotate]="'cw-90'" />
+		<fudis-icon *ngIf="size !== 'xs'" class="fudis-dropdown__input__icon" [icon]="'chevron'" [rotate]="'cw-90'" />
 	</div>
 	<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="_id" [errorMsg]="errorMsg" [control]="control" />
 </div>
