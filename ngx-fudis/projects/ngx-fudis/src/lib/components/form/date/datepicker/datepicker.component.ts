@@ -18,6 +18,7 @@ import { FudisTranslationService } from '../../../../services/translation/transl
 
 import { DatepickerCustomDateAdapter } from '../date-common/datepicker-custom-date-adapter';
 import { updateLocale } from '../date-common/utilities';
+import { FudisFocusService } from '../../../../services/focus/focus.service';
 
 @Component({
 	selector: 'fudis-datepicker',
@@ -39,7 +40,8 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 		private _changeDetectorRef: ChangeDetectorRef,
 		private _datePickerConfigService: FudisTranslationService,
 		private _adapter: DateAdapter<Date>,
-		private _datepickerIntl: MatDatepickerIntl
+		private _datepickerIntl: MatDatepickerIntl,
+		private _focusService: FudisFocusService
 	) {
 		super(_datePickerConfigService);
 
@@ -81,7 +83,7 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 	}
 
 	ngAfterViewInit(): void {
-		if (this.initialFocus) {
+		if (this.initialFocus && !this._focusService.isIgnored(this._id)) {
 			this.focusToInput();
 		}
 	}

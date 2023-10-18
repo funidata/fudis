@@ -6,6 +6,7 @@ import { FudisDropdownOption, FudisInputSize } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Component({
 	selector: 'fudis-autocomplete',
@@ -18,6 +19,7 @@ export class AutocompleteComponent
 {
 	constructor(
 		private _idService: FudisIdService,
+		private _focusService: FudisFocusService,
 		_translationService: FudisTranslationService
 	) {
 		super(_translationService);
@@ -84,7 +86,7 @@ export class AutocompleteComponent
 	}
 
 	ngAfterViewInit(): void {
-		if (this.initialFocus) {
+		if (this.initialFocus && !this._focusService.isIgnored(this._id)) {
 			this.focusToInput();
 		}
 	}

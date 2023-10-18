@@ -15,6 +15,7 @@ import { FudisDropdownOption, FudisDropdownLanguageOption, FudisInputSize } from
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Component({
 	selector: 'fudis-dropdown',
@@ -25,6 +26,7 @@ import { FudisTranslationService } from '../../../services/translation/translati
 export class DropdownComponent extends InputBaseDirective implements OnInit, OnChanges, AfterViewInit {
 	constructor(
 		private _idService: FudisIdService,
+		private _focusService: FudisFocusService,
 		_translationService: FudisTranslationService
 	) {
 		super(_translationService);
@@ -90,7 +92,7 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 	}
 
 	ngAfterViewInit(): void {
-		if (this.initialFocus) {
+		if (this.initialFocus && !this._focusService.isIgnored(this._id)) {
 			this.matSelect.focus();
 		}
 	}

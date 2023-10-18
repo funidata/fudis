@@ -9,11 +9,13 @@ import {
 	ViewEncapsulation,
 	effect,
 	HostListener,
+	AfterViewInit,
 } from '@angular/core';
 import { InputBaseDirective } from '../../directives/form/input-base/input-base.directive';
 import { FudisDropdownOption, FudisInputSize } from '../../types/forms';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisTranslationService } from '../../services/translation/translation.service';
+import { FudisFocusService } from '../../services/focus/focus.service';
 
 @Component({
 	selector: 'fudis-autocomplete-multi-select',
@@ -21,9 +23,10 @@ import { FudisTranslationService } from '../../services/translation/translation.
 	styleUrls: ['./autocomplete-multi-select.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class AutocompleteMultiSelectComponent extends InputBaseDirective implements OnInit {
+export class AutocompleteMultiSelectComponent extends InputBaseDirective implements OnInit, AfterViewInit {
 	constructor(
 		private _idService: FudisIdService,
+		private _focusService: FudisFocusService,
 		_translationService: FudisTranslationService
 	) {
 		super(_translationService);
@@ -103,6 +106,12 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	ngOnInit(): void {
 		this._id = this.id ?? this._idService.getNewId('autocompleteMultiSelect');
 		this._results = [...this.options];
+	}
+
+	ngAfterViewInit(): void {
+		if (this.initialFocus && !this._focusService.isIgnored(this._id)) {
+			this.focusToInput();
+		}
 	}
 
 	/**
