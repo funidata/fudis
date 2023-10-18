@@ -479,141 +479,121 @@ mat-tooltip-component .mat-tooltip-handset {
 @media screen and (min-width: 0) {
   .fudis-grid__xxl {
     max-width: calc(34rem / var(--fudis-rem-multiplier));
-    row-gap: calc(1rem / var(--fudis-rem-multiplier));
-    column-gap: calc(1rem / var(--fudis-rem-multiplier));
+    gap: calc(1rem / var(--fudis-rem-multiplier)) calc(1rem / var(--fudis-rem-multiplier));
   }
 }
 @media screen and (min-width: 36em) {
   .fudis-grid__xxl {
     max-width: calc(34rem / var(--fudis-rem-multiplier));
-    row-gap: calc(1rem / var(--fudis-rem-multiplier));
-    column-gap: calc(1rem / var(--fudis-rem-multiplier));
+    gap: calc(1rem / var(--fudis-rem-multiplier)) calc(1rem / var(--fudis-rem-multiplier));
   }
 }
 @media screen and (min-width: 48em) {
   .fudis-grid__xxl {
     max-width: calc(45rem / var(--fudis-rem-multiplier));
-    row-gap: calc(1.5rem / var(--fudis-rem-multiplier));
-    column-gap: calc(1.5rem / var(--fudis-rem-multiplier));
+    gap: calc(1.5rem / var(--fudis-rem-multiplier)) calc(1.5rem / var(--fudis-rem-multiplier));
   }
 }
 @media screen and (min-width: 62em) {
   .fudis-grid__xxl {
     max-width: calc(60rem / var(--fudis-rem-multiplier));
-    row-gap: calc(1.5rem / var(--fudis-rem-multiplier));
-    column-gap: calc(1.5rem / var(--fudis-rem-multiplier));
+    gap: calc(1.5rem / var(--fudis-rem-multiplier)) calc(1.5rem / var(--fudis-rem-multiplier));
   }
 }
 @media screen and (min-width: 75em) {
   .fudis-grid__xxl {
     max-width: calc(65rem / var(--fudis-rem-multiplier));
-    row-gap: calc(2rem / var(--fudis-rem-multiplier));
-    column-gap: calc(2rem / var(--fudis-rem-multiplier));
+    gap: calc(2rem / var(--fudis-rem-multiplier)) calc(2rem / var(--fudis-rem-multiplier));
   }
 }
 @media screen and (min-width: 100em) {
   .fudis-grid__xxl {
     max-width: calc(96.25rem / var(--fudis-rem-multiplier));
-    row-gap: calc(2rem / var(--fudis-rem-multiplier));
-    column-gap: calc(2rem / var(--fudis-rem-multiplier));
+    gap: calc(2rem / var(--fudis-rem-multiplier)) calc(2rem / var(--fudis-rem-multiplier));
   }
 }
 @media screen and (min-width: 0) {
   .fudis-grid__xl {
     max-width: calc(34rem / var(--fudis-rem-multiplier));
-    row-gap: calc(1rem / var(--fudis-rem-multiplier));
-    column-gap: calc(1rem / var(--fudis-rem-multiplier));
+    gap: calc(1rem / var(--fudis-rem-multiplier)) calc(1rem / var(--fudis-rem-multiplier));
   }
 }
 @media screen and (min-width: 36em) {
   .fudis-grid__xl {
     max-width: calc(34rem / var(--fudis-rem-multiplier));
-    row-gap: calc(1rem / var(--fudis-rem-multiplier));
-    column-gap: calc(1rem / var(--fudis-rem-multiplier));
+    gap: calc(1rem / var(--fudis-rem-multiplier)) calc(1rem / var(--fudis-rem-multiplier));
   }
 }
 @media screen and (min-width: 48em) {
   .fudis-grid__xl {
     max-width: calc(45rem / var(--fudis-rem-multiplier));
-    row-gap: calc(1.5rem / var(--fudis-rem-multiplier));
-    column-gap: calc(1.5rem / var(--fudis-rem-multiplier));
+    gap: calc(1.5rem / var(--fudis-rem-multiplier)) calc(1.5rem / var(--fudis-rem-multiplier));
   }
 }
 @media screen and (min-width: 62em) {
   .fudis-grid__xl {
     max-width: calc(60rem / var(--fudis-rem-multiplier));
-    row-gap: calc(1.5rem / var(--fudis-rem-multiplier));
-    column-gap: calc(1.5rem / var(--fudis-rem-multiplier));
+    gap: calc(1.5rem / var(--fudis-rem-multiplier)) calc(1.5rem / var(--fudis-rem-multiplier));
   }
 }
 @media screen and (min-width: 75em) {
   .fudis-grid__xl {
     max-width: calc(65rem / var(--fudis-rem-multiplier));
-    row-gap: calc(2rem / var(--fudis-rem-multiplier));
-    column-gap: calc(2rem / var(--fudis-rem-multiplier));
+    gap: calc(2rem / var(--fudis-rem-multiplier)) calc(2rem / var(--fudis-rem-multiplier));
   }
 }
 @media screen and (min-width: 0) {
   .fudis-grid__lg {
     max-width: calc(34rem / var(--fudis-rem-multiplier));
-    row-gap: calc(1rem / var(--fudis-rem-multiplier));
-    column-gap: calc(1rem / var(--fudis-rem-multiplier));
+    gap: calc(1rem / var(--fudis-rem-multiplier)) calc(1rem / var(--fudis-rem-multiplier));
   }
 }
 @media screen and (min-width: 36em) {
   .fudis-grid__lg {
     max-width: calc(34rem / var(--fudis-rem-multiplier));
-    row-gap: calc(1rem / var(--fudis-rem-multiplier));
-    column-gap: calc(1rem / var(--fudis-rem-multiplier));
+    gap: calc(1rem / var(--fudis-rem-multiplier)) calc(1rem / var(--fudis-rem-multiplier));
   }
 }
 @media screen and (min-width: 48em) {
   .fudis-grid__lg {
     max-width: calc(45rem / var(--fudis-rem-multiplier));
-    row-gap: calc(1.5rem / var(--fudis-rem-multiplier));
-    column-gap: calc(1.5rem / var(--fudis-rem-multiplier));
+    gap: calc(1.5rem / var(--fudis-rem-multiplier)) calc(1.5rem / var(--fudis-rem-multiplier));
   }
 }
 @media screen and (min-width: 62em) {
   .fudis-grid__lg {
     max-width: calc(60rem / var(--fudis-rem-multiplier));
-    row-gap: calc(1.5rem / var(--fudis-rem-multiplier));
-    column-gap: calc(1.5rem / var(--fudis-rem-multiplier));
+    gap: calc(1.5rem / var(--fudis-rem-multiplier)) calc(1.5rem / var(--fudis-rem-multiplier));
   }
 }
 @media screen and (min-width: 0) {
   .fudis-grid__md {
     max-width: calc(34rem / var(--fudis-rem-multiplier));
-    row-gap: calc(1rem / var(--fudis-rem-multiplier));
-    column-gap: calc(1rem / var(--fudis-rem-multiplier));
+    gap: calc(1rem / var(--fudis-rem-multiplier)) calc(1rem / var(--fudis-rem-multiplier));
   }
 }
 @media screen and (min-width: 36em) {
   .fudis-grid__md {
     max-width: calc(34rem / var(--fudis-rem-multiplier));
-    row-gap: calc(1rem / var(--fudis-rem-multiplier));
-    column-gap: calc(1rem / var(--fudis-rem-multiplier));
+    gap: calc(1rem / var(--fudis-rem-multiplier)) calc(1rem / var(--fudis-rem-multiplier));
   }
 }
 @media screen and (min-width: 48em) {
   .fudis-grid__md {
     max-width: calc(45rem / var(--fudis-rem-multiplier));
-    row-gap: calc(1.5rem / var(--fudis-rem-multiplier));
-    column-gap: calc(1.5rem / var(--fudis-rem-multiplier));
+    gap: calc(1.5rem / var(--fudis-rem-multiplier)) calc(1.5rem / var(--fudis-rem-multiplier));
   }
 }
 @media screen and (min-width: 0) {
   .fudis-grid__sm {
     max-width: calc(34rem / var(--fudis-rem-multiplier));
-    row-gap: calc(1rem / var(--fudis-rem-multiplier));
-    column-gap: calc(1rem / var(--fudis-rem-multiplier));
+    gap: calc(1rem / var(--fudis-rem-multiplier)) calc(1rem / var(--fudis-rem-multiplier));
   }
 }
 @media screen and (min-width: 36em) {
   .fudis-grid__sm {
     max-width: calc(34rem / var(--fudis-rem-multiplier));
-    row-gap: calc(1rem / var(--fudis-rem-multiplier));
-    column-gap: calc(1rem / var(--fudis-rem-multiplier));
+    gap: calc(1rem / var(--fudis-rem-multiplier)) calc(1rem / var(--fudis-rem-multiplier));
   }
 }
 .fudis-grid__initial {
@@ -622,8 +602,7 @@ mat-tooltip-component .mat-tooltip-handset {
 
 .fudis-grid__xs {
   max-width: calc(34rem / var(--fudis-rem-multiplier));
-  row-gap: calc(1rem / var(--fudis-rem-multiplier));
-  column-gap: calc(1rem / var(--fudis-rem-multiplier));
+  gap: calc(1rem / var(--fudis-rem-multiplier)) calc(1rem / var(--fudis-rem-multiplier));
 }
 
 .fudis-grid__row-gap__none {
