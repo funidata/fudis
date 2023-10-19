@@ -19,14 +19,20 @@ Checkbox Group is a form fieldset element constructing from `fieldset` `legend` 
 
 Necessary properties for Checkbox Group are `title` and `formGroup`.
 
-For child Checkbox elements require `controlName` and `label`. Checkbox's `controlName` must match with the corresponding control in the main `formGroup`.
+For child Checkbox elements mandatory properties are `controlName` and `label`. Checkbox's `controlName` must match with the corresponding control in the main `formGroup`.
 
 ```
 // In HTML template
 
-	<fudis-checkbox-group [formGroup]="myFormGroup" [title]="'Example checkbox group'">
-		<fudis-checkbox [controlName]="'firstControlName'" [label]="'First checkbox'"/>
-		<fudis-checkbox [controlName]="'secondControlName'" [label]="'Second checkbox'"/>
+	<fudis-checkbox-group
+	[formGroup]="myFormGroup"
+	[title]="'Example checkbox group'">
+		<fudis-checkbox
+		[controlName]="'firstControlName'"
+		[label]="'First checkbox'"/>
+		<fudis-checkbox
+		[controlName]="'secondControlName'"
+		[label]="'Second checkbox'"/>
 	</fudis-checkbox-group>
 
 
@@ -40,7 +46,7 @@ myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
 );
 ```
 
-#### As a required form field
+#### As a required form field and at least one required selection
 
 To display visible 'required' text with the fieldset group, set `required` input as true to Checkbox Group and include validator `FudisFormGroupValidators.atLeastOneRequired()` in the validators array of `formGroup`.
 
@@ -50,41 +56,48 @@ To display visible 'required' text with the fieldset group, set `required` input
 <fudis-checkbox-group
 	[formGroup]="myFormGroup"
 	[title]="'Choose at least one'"
-	[required]="true"
-	[groupErrorMsg]="{atLeastOneRequired: 'No checkbox checked!'}">
-	<fudis-checkbox [controlName]="'firstControlName'" [label]="'You should check this'"/>
-	<fudis-checkbox [controlName]="'secondControlName'" [label]="'Or this, or both!'"/>
+	[required]="true">
+	<fudis-checkbox
+	[controlName]="'first'"
+	[label]="'You should check this'"/>
+	<fudis-checkbox
+	[controlName]="'second'"
+	[label]="'Or this, or both!'"/>
 </fudis-checkbox-group>
 
 // In TypeScript file
 
 myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
 	{
-		firstControlName: new FormControl<boolean | null | undefined>(null),
-		secondControlName: new FormControl<boolean | null | undefined>(null),
-	},[FudisFormGroupValidators.atLeastOneRequired()]
+	first: new FormControl<boolean | null | undefined>(null),
+	second: new FormControl<boolean | null | undefined>(null),
+	},
+	[FudisFormGroupValidators.atLeastOneRequired(new BehaviorSubject('Select at least one checkbox!'))]
 );
 
 
 ```
 
+#### Minimum and maximum selection validation
 
-If checkbox-group fieldset is a required form field include `Validators.required` in the form control validators and include a `required` error message in the `errorMsg` property.
+If checkbox-group fieldset has minimum and/or maximum options to be selected, form field include `FudisFormGroupValidators.min` and/or `FudisFormGroupValidators.max` in the group validators.
 
-#### Minimum and maximum selectable options
+```
+// In TypeScript file
 
-If checkbox-group fieldset has minimum and/or maximum options to be selected, form field include `Validators.min` and/or `Validators.max` in the form control validators and include a `min` and/or `max` error message in the `errorMsg` property.
-
-### Error Handling
-
-- **Required** error is shown if checkbox-group fieldset is required and
-  - if control is touched and
-	  - if control value is null
-- **Minimum** error is shown if checkbox-group fieldset is required and
-  - if control is touched and
-    - if control value is less than the given minimum value
-- **Maximum** error is shown if checkbox-group control is touched and
-  - if control value is more than the given maximum value
+myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+	{
+		first: new FormControl<boolean | null | undefined>(null),
+		second: new FormControl<boolean | null | undefined>(null),
+		third: new FormControl<boolean | null | undefined>(null),
+		forth: new FormControl<boolean | null | undefined>(null),
+	},
+	[
+		FudisFormGroupValidators.min({value: 2, message: new BehaviorSubject('Too few selected!')}),
+		FudisFormGroupValidators.max({value: 3, message: new BehaviorSubject('Too many selected!')})
+	]
+);
+```
 
 ### Accessibility
 

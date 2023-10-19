@@ -3,6 +3,7 @@ import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/ang
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BehaviorSubject } from 'rxjs';
 import {
 	FudisDropdownOption,
 	FudisRadioButtonOption,
@@ -168,7 +169,7 @@ class FieldsetExampleComponent {
 				swedish: new FormControl(''),
 				english: new FormControl(''),
 			},
-			[FudisFormGroupValidators.atLeastOneRequired()]
+			[FudisFormGroupValidators.atLeastOneRequired(new BehaviorSubject('error message here!'))]
 		),
 		description: new FormGroup({
 			finnish: new FormControl('', [Validators.required, Validators.minLength(10)]),

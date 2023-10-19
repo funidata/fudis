@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, Validators } 
 import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { BehaviorSubject } from 'rxjs';
 import { InputWithLanguageOptionsComponent } from './input-with-language-options.component';
 import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 import { FudisInputWithLanguageOptionsFormGroup } from '../../../types/forms';
@@ -75,9 +76,6 @@ const TemplateOneRequired: StoryFn = () => ({
 		id: 'unique-input-id-superhero-name',
 		label: 'Your superhero name',
 		helpText: 'Please provide superhero name in atleast one language.',
-		groupErrorMsg: {
-			atLeastOneRequired: 'Missing superhero name! Name in atleast one language is required.',
-		},
 		maxLength: 30,
 		languageOptions: [
 			{ value: 'finnish', viewValue: 'FI' },
@@ -90,7 +88,7 @@ const TemplateOneRequired: StoryFn = () => ({
 				swedish: new FormControl<string | null>(null, [Validators.maxLength(30)]),
 				english: new FormControl<string | null>(null, [Validators.maxLength(30)]),
 			},
-			[FudisFormGroupValidators.atLeastOneRequired()]
+			[FudisFormGroupValidators.atLeastOneRequired(new BehaviorSubject('Give name in at least in one language'))]
 		),
 	},
 	template: html`

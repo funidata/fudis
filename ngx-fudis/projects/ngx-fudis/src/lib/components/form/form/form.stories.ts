@@ -5,6 +5,7 @@ import { Component, OnInit, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RouterModule } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import {
 	FudisDropdownOption,
 	FudisRadioButtonOption,
@@ -240,7 +241,7 @@ class FormContentExampleComponent implements OnInit {
 				swedish: new FormControl(null),
 				english: new FormControl(null),
 			},
-			[FudisFormGroupValidators.atLeastOneRequired()]
+			[FudisFormGroupValidators.atLeastOneRequired(new BehaviorSubject('error message here!'))]
 		),
 		description: new FormGroup({
 			finnish: new FormControl(null, [Validators.required, Validators.minLength(10)]),

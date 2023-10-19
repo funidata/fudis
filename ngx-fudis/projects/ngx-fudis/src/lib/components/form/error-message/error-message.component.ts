@@ -1,5 +1,6 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, Input, OnChanges, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 
+import { Observable, Subscription } from 'rxjs';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { FudisFormErrorSummaryItem } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -8,9 +9,8 @@ import { FudisTranslationService } from '../../../services/translation/translati
 	selector: 'fudis-error-message',
 	templateUrl: './error-message.component.html',
 	styleUrls: ['./error-message.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ErrorMessageComponent implements OnChanges, OnDestroy, AfterViewInit {
+export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
 	constructor(
 		private _errorSummaryService: FudisErrorSummaryService,
 		private _translationService: FudisTranslationService
@@ -19,7 +19,7 @@ export class ErrorMessageComponent implements OnChanges, OnDestroy, AfterViewIni
 	/*
 	 * Error message to display
 	 */
-	@Input({ required: true }) message: string | undefined;
+	@Input({ required: true }) message: Observable<string> | string | undefined;
 
 	/**
 	 * Id of input this message is related to. Sent to Error Summary service.
@@ -52,31 +52,41 @@ export class ErrorMessageComponent implements OnChanges, OnDestroy, AfterViewIni
 	@Input() variant: 'body-text' | 'form-error' = 'form-error';
 
 	/**
+	 * Error message to include in error summary item
+	 */
+	protected _currentMessage: string;
+
+	/**
 	 * Has error been created and sent forward
 	 */
 	private _errorSent: boolean = false;
-
-	/**
-	 * Error message to include in error summary item
-	 */
-	private _currentMessage: string;
 
 	/**
 	 * Error label to include in error summary item
 	 */
 	private _currentLabel: string | undefined = undefined;
 
+	private _subscribtion: Subscription;
+
+	ngOnInit(): void {
+		if (this.message && typeof this.message !== 'string') {
+			this._subscribtion = this.message.subscribe((value: string) => {
+				this._currentMessage = value;
+				this.createError();
+			});
+		}
+	}
+
 	ngAfterViewInit(): void {
 		setTimeout(() => {
-			if (!this.message) {
+			if (typeof this.message !== 'string' && !this.message) {
 				this.throwError();
 			}
 		}, 1000);
 	}
 
 	createError(): void {
-		if (this.message !== undefined && this.focusId) {
-			this._currentMessage = this.message;
+		if (this.focusId) {
 			this._currentLabel = this.label;
 
 			const newError: FudisFormErrorSummaryItem = {
@@ -93,7 +103,12 @@ export class ErrorMessageComponent implements OnChanges, OnDestroy, AfterViewIni
 	}
 
 	ngOnChanges(): void {
-		if (this.message !== this._currentMessage && this.label !== this._currentLabel) {
+		if (
+			typeof this.message === 'string' &&
+			this.message !== this._currentMessage &&
+			this.label !== this._currentLabel
+		) {
+			this._currentMessage = this.message;
 			this.createError();
 		}
 	}
@@ -105,6 +120,10 @@ export class ErrorMessageComponent implements OnChanges, OnDestroy, AfterViewIni
 				type: this.type,
 				controlName: this.controlName,
 			});
+		}
+
+		if (this._subscribtion) {
+			this._subscribtion.unsubscribe();
 		}
 	}
 

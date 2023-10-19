@@ -23,7 +23,7 @@
 										[type]="error.key"
 										[controlName]="singleControl.key"
 										[label]="inputLabel"
-										[message]="groupErrorMsg?.[singleControl.key]?.[asErrorkey(error?.key)]"></fudis-error-message>
+										[message]="groupErrorMsg?.[singleControl.key]?.[asErrorkey(error?.key)]" />
 								</ng-container>
 							</ng-container>
 						</ng-container>
@@ -32,11 +32,20 @@
 					<ng-container *ngIf="formGroup?.errors && formGroup.invalid">
 						<ng-container *ngFor="let error of formGroup.errors | keyvalue">
 							<fudis-error-message
+								*ngIf="error.value?.message"
 								[visible]="formGroup.touched"
 								[focusId]="for"
 								[type]="error.key"
 								[label]="inputLabel"
-								[message]="groupErrorMsg?.[error.key]"></fudis-error-message>
+								[message]="error.value?.message" />
+							<!-- Todo: remove below deprecated version when Into is misgrated to above  -->
+							<fudis-error-message
+								*ngIf="!error.value?.message"
+								[visible]="formGroup.touched"
+								[focusId]="for"
+								[type]="error.key"
+								[label]="inputLabel"
+								[message]="groupErrorMsg?.[error.key]" />
 						</ng-container>
 					</ng-container>
 					<!-- Check errors for single FormControl e. g. single text-input with maxlength error -->
@@ -47,7 +56,7 @@
 								[focusId]="for"
 								[label]="inputLabel"
 								[type]="error.key"
-								[message]="errorMsg?.[asErrorkey(error.key)]"></fudis-error-message>
+								[message]="errorMsg?.[asErrorkey(error.key)]" />
 						</ng-container>
 					</ng-container>
 					<ng-content></ng-content>
