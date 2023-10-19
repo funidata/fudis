@@ -4,6 +4,8 @@ import { Meta } from '@storybook/blocks';
 
 # Creating a Release
 
+New versions are published to NPM using GitHub Releases. After tagging and creating a release on GitHub, an automatic workflow handles packaging and publishing Fudis to NPM.
+
 ## Versioning
 
 Fudis uses [semantic versioning](https://semver.org/).
@@ -27,21 +29,21 @@ Find release notes for the latest [Fudis Version](https://github.com/funidata/fu
 ## Release Pipeline
 
 **Steps for creating a new release:**
-* Create a new branch `release_v[version-number]`
-* Depending on the changes included in the release, run one of the following command `npm version patch / minor / major`
-	* `npm version` will automatically increment the version number in all project's package.json files
-	* The action makes a git commit and a push, including git tag to a spesific version
-* Go to project's GitHub main page 'Releases'
-* Select 'Draft a new release'
-* Select 'Choose a tag'. Choose the newest generated version tag from a list
-* If necessary choose from 'Previous tag' dropdown, the version you want to compare to. Otherwise use default 'Previous tag: auto'
-* Select 'Generate release notes'
-* Replace 'What's Changed' heading with a current date
-* Check from 'Preview' that everything looks correct
-* Check that 'Set as the latest release' checkbox is selected
-* Publish release
-* Check that the npm package has [updated to latest version](https://www.npmjs.com/package/@funidata/ngx-fudis)
-* Merge created pull request
+- Create a new branch `release_v[version-number]`
+	> Note! Make sure your local main branch is up to date when creating a new branch. This ensures you have all current commits before tagging a new release. Otherwise, if releasing from an existing branch, make sure to rebase onto current main before tagging
+- Depending on the changes included in the release, run one of the following command `npm version <major|minor|patch>`
+	> The command increments version number fields in `package.json` files, commits the changes, tags that commit as the new version, and pushes commits and tags to GitHub
+- Go to project's GitHub main page **Releases**
+- Select **Draft a new release**
+- Select **Choose a tag**. Choose the newest generated version tag from a list
+- If necessary choose from **Previous tag** dropdown, the version you want to compare to. Otherwise use default 'Previous tag: auto'
+- Select **Generate release notes**
+- Replace **What's Changed** heading with a current date
+- Check from **Preview** that everything looks correct
+- Check that **Set as the latest release** checkbox is selected
+- Publish release
+- Check that the npm package has [updated to latest version](https://www.npmjs.com/package/@funidata/ngx-fudis)
+- Merge created pull request
 
-**Note!** \
+### Note!
 If something goes wrong with the release, create a new patch version instead of trying to fix already published version. Overwriting released version might produce unwanted concequences with the work of other project developers.
