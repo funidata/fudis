@@ -22,7 +22,7 @@ function update_sub_project_version {
   echo -n "${project_name}: "
 
   # Don't commit, just bump to given version.
-  npm version --git-tag-version false $new_version -m "Bump to version v%s"
+  npm version --git-tag-version false $new_version
   # Running `npm version` in root will not stage extra files, so add them here.
   git add "${dir}/package.json" "${dir}/package-lock.json"
 }
