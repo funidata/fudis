@@ -1,0 +1,47 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Documentation/Development/Creating a Release" />
+
+# Creating a Release
+
+## Versioning
+
+Fudis uses [semantic versioning](https://semver.org/).
+
+### Patch
+Patch updates are interchangeable, meaning clients can upgrade or downgrade freely between versions.\
+**Example:** Bug fix, interval tweak.
+
+### Minor
+Minor updates are compatible with previous versions and usually includes additional features.\
+**Example:** New features, old features declared as deprecated.
+
+### Major
+Major changes are backward incompatible and will have breaking changes.\
+**Example:** Changes in API endpoint name, remove of an endpoint.
+
+## Changelog
+
+Find release notes for the latest [Fudis Version](https://github.com/funidata/fudis/releases).
+
+## Release Pipeline
+
+**Steps for creating a new release:**
+* Create a new branch `release_v[version-number]`
+* Depending on the changes included in the release, run one of the following command `npm version patch / minor / major`
+	* `npm version` will automatically increment the version number in all project's package.json files
+	* The action makes a git commit and a push, including git tag to a spesific version
+* Go to project's GitHub main page 'Releases'
+* Select 'Draft a new release'
+* Select 'Choose a tag'. Choose the newest generated version tag from a list
+* If necessary choose from 'Previous tag' dropdown, the version you want to compare to. Otherwise use default 'Previous tag: auto'
+* Select 'Generate release notes'
+* Replace 'What's Changed' heading with a current date
+* Check from 'Preview' that everything looks correct
+* Check that 'Set as the latest release' checkbox is selected
+* Publish release
+* Check that the npm package has [updated to latest version](https://www.npmjs.com/package/@funidata/ngx-fudis)
+* Merge created pull request
+
+**Note!** \
+If something goes wrong with the release, create a new patch version instead of trying to fix already published version. Overwriting released version might produce unwanted concequences with the work of other project developers.
