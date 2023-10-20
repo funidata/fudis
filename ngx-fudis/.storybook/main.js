@@ -47,12 +47,10 @@ module.exports = {
     </style>
   `,
 	env: (config) => {
-		console.log('---------------');
-		console.log(process.env);
-		console.log(process.env.STORYBOOK_FUDIS_VERSION);
 		return({
-		...config,
-		STORYBOOK_FUDIS_VERSION: process.env.STORYBOOK_FUDIS_VERSION,
-	})},
+			...config,
+			STORYBOOK_FUDIS_VERSION: process.env.STORYBOOK_FUDIS_VERSION,
+		})
+	},
 
 };
