@@ -4,15 +4,14 @@ import pkg from '../package.json';
 const packageVersion = pkg.version;
 
 // The path, i.e., the branch name or tag under which we are deploying.
-const tagOrBranchName = process.env.VERSION || '';
+const tagOrBranchName = process.env.STORYBOOK_FUDIS_VERSION || '';
 
 const getVersion = () => {
-
 	// If branch name is passed, prefix it with current version.
 	if (!isValidSemVer(tagOrBranchName)) {
 		return {
 			...parseSemVer(packageVersion),
-			build: tagOrBranchName,
+			postfix: tagOrBranchName,
 		};
 	}
 

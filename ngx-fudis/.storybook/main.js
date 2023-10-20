@@ -46,8 +46,13 @@ module.exports = {
             }
     </style>
   `,
-	env: (config) => ({
+	env: (config) => {
+		console.log('---------------');
+		console.log(process.env);
+		console.log(process.env.STORYBOOK_FUDIS_VERSION);
+		return({
 		...config,
-		VERSION: process.env.VERSION | '0.0.0',
-	}),
+		STORYBOOK_FUDIS_VERSION: process.env.STORYBOOK_FUDIS_VERSION,
+	})},
+
 };
