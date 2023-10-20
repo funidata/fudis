@@ -32,9 +32,9 @@ const preview = {
 							'Project Structure',
 							'Ways of Working',
 							'Naming Conventions',
-							'Creating A Component',
+							'Creating a Component',
 							'Component Checklist',
-							'Releases',
+							'Creating a Release',
 							'DevOps Info'
 						],
 					],
