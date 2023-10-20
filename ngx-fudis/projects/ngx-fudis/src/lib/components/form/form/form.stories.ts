@@ -173,10 +173,6 @@ class FormContentExampleComponent implements OnInit {
 		{ key: 'Another important person', value: 'Mara Jade' },
 	];
 
-	errorName: FudisFormGroupErrors = {
-		atLeastOneRequired: 'Course name is missing.',
-	};
-
 	errorDescription: FudisFormGroupErrors = {
 		english: {
 			required: 'Missing description in English.',
@@ -241,7 +237,7 @@ class FormContentExampleComponent implements OnInit {
 				swedish: new FormControl(null),
 				english: new FormControl(null),
 			},
-			[FudisFormGroupValidators.atLeastOneRequired(new BehaviorSubject('error message here!'))]
+			[FudisFormGroupValidators.atLeastOneRequired(new BehaviorSubject('Course name is missing.'))]
 		),
 		description: new FormGroup({
 			finnish: new FormControl(null, [Validators.required, Validators.minLength(10)]),

@@ -21,11 +21,7 @@
 		<span
 			class="fudis-checkbox__content__box"
 			[class.fudis-checkbox__content__box--focused]="_focused"
-			[class.fudis-checkbox__content__box--invalid]="
-				(_checkboxGroup.formGroup.controls[controlName].invalid &&
-					_checkboxGroup.formGroup.controls[controlName].touched) ||
-				_checkboxGroup.invalidState
-			"
+			[class.fudis-checkbox__content__box--invalid]="_checkboxGroup.formGroup.invalid && _checkboxGroup.groupBlurredOut"
 			[class.fudis-checkbox__content__box--disabled]="_checkboxGroup.formGroup.controls[controlName].disabled">
 			<fudis-icon
 				*ngIf="_checkboxGroup.formGroup.controls[controlName].value"
@@ -33,7 +29,7 @@
 				class="fudis-checkbox__content__box__icon" />
 		</span>
 		<span class="fudis-checkbox__content__label">
-			{{ label }}
+			{{ label }} {{ _checkboxGroup.formGroup.controls[controlName].invalid }}
 		</span>
 	</span>
 </label>

@@ -33,7 +33,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 	/**
 	 * To determine if focus has been moved out from the whole checkbox group, so possible errors will not show before that.
 	 */
-	protected _groupBlurredOut = false;
+	public groupBlurredOut = false;
 
 	public ngOnInit() {
 		this.id = this.id ?? this._idService.getNewId('checkboxGroup');
@@ -48,9 +48,9 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 	 */
 	public setGroupBlurredOut(value: boolean): void {
 		if (value) {
-			this._groupBlurredOut = true;
+			this.groupBlurredOut = true;
 		} else {
-			this._groupBlurredOut = false;
+			this.groupBlurredOut = false;
 		}
 	}
 }

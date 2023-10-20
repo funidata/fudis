@@ -37,8 +37,7 @@ import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 						[options]="languageOptions"
 						[formGroup]="fieldsetExample.controls['name']"
 						[label]="labelName"
-						[helpText]="'Some name would be nice. Provide course name in at least one language.'"
-						[groupErrorMsg]="errorName" />
+						[helpText]="'Some name would be nice. Provide course name in at least one language.'" />
 					<fudis-input-with-language-options
 						[variant]="'text-area'"
 						[id]="'unique-input-2'"
@@ -95,10 +94,6 @@ import { FudisFormGroupValidators } from '../../../utilities/form/validators';
 	`,
 })
 class FieldsetExampleComponent {
-	errorName: FudisFormGroupErrors = {
-		atLeastOneRequired: 'Course name is missing.',
-	};
-
 	errorDescription: FudisFormGroupErrors = {
 		english: {
 			required: 'Missing description in English.',
@@ -169,7 +164,7 @@ class FieldsetExampleComponent {
 				swedish: new FormControl(''),
 				english: new FormControl(''),
 			},
-			[FudisFormGroupValidators.atLeastOneRequired(new BehaviorSubject('error message here!'))]
+			[FudisFormGroupValidators.atLeastOneRequired(new BehaviorSubject('Course name is missing'))]
 		),
 		description: new FormGroup({
 			finnish: new FormControl('', [Validators.required, Validators.minLength(10)]),
