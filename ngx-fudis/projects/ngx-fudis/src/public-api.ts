@@ -77,3 +77,5 @@ export { AlertComponent } from './lib/components/alert/alert/alert.component';
 export { AlertGroupComponent } from './lib/components/alert/alert-group/alert-group.component';
 export { FudisAlertService } from './lib/services/alert/alert.service';
 export { FudisBreakpointService } from './lib/services/breakpoint/breakpoint.service';
+
+export { BreadcrumbsComponent } from './lib/components/breadcrumbs/breadcrumbs.component';

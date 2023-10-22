@@ -43,5 +43,10 @@
 		&__lg {
 			@include typography.text-link-l-typography;
 		}
+
+		&--disabled {
+			text-decoration: none;
+			pointer-events: none;
+		}
 	}
 }
