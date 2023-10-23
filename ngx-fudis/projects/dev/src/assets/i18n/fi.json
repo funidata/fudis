@@ -4,6 +4,7 @@
 	"helpText": "Kivaa jos näet minut suomeksi!",
 	"required": "Pakollinen",
 	"error_required": "Tämä on pakollinen kenttä!",
+	"error_one_required": "Ainakin yhdellä kielellä tarvitaan tekstiä!",
 	"dynamic": "transloco {{value}}",
   "chooseBerry": "Valitse marjasi",
   "chooseBerryHelp": "Valitse toivottu määrä marjoja",

@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { FudisCheckboxGroupFormGroup, FudisFormGroupErrors, FudisInputSize } from '../../../types/forms';
+import { FudisCheckboxGroupFormGroup, FudisInputSize } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 
@@ -14,11 +14,6 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 	 * FormControl for Checkbox group
 	 */
 	@Input({ required: true }) formGroup: FormGroup<FudisCheckboxGroupFormGroup>;
-
-	/*
-	 * Object containing error messages for each FormControl and for the FormGroup.
-	 */
-	@Input() groupErrorMsg: FudisFormGroupErrors;
 
 	/**
 	 * Set fieldset as required. Alternatively provide FormGroup Validators.required to display 'required' text in the legend lable.
@@ -38,7 +33,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 	/**
 	 * To determine if focus has been moved out from the whole checkbox group, so possible errors will not show before that.
 	 */
-	protected _groupBlurredOut = false;
+	public groupBlurredOut = false;
 
 	public ngOnInit() {
 		this.id = this.id ?? this._idService.getNewId('checkboxGroup');
@@ -53,9 +48,9 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 	 */
 	public setGroupBlurredOut(value: boolean): void {
 		if (value) {
-			this._groupBlurredOut = true;
+			this.groupBlurredOut = true;
 		} else {
-			this._groupBlurredOut = false;
+			this.groupBlurredOut = false;
 		}
 	}
 }

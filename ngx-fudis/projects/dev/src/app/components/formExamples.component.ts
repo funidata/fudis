@@ -11,6 +11,7 @@ import {
 import { untilDestroyed } from 'projects/ngx-fudis/src/lib/utilities/untilDestroyed';
 import { FudisErrorSummaryService } from 'ngx-fudis';
 import { FudisFormGroupValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
+import { FudisDropdownLanguageOption, FudisInputWithLanguageOptionsFormGroup } from 'dist/ngx-fudis/lib/types/forms';
 
 type MyForm = {
 	dropdown: FormControl<FudisDropdownOption | null>;
@@ -22,6 +23,7 @@ type MyForm = {
 	date: FormControl<Date | null>;
 	autocompleteDropdown: FormControl<FudisDropdownOption | null>;
 	autocompleteSearch: FormControl<FudisDropdownOption | null>;
+	withLanguages: FormGroup<FudisInputWithLanguageOptionsFormGroup>;
 };
 
 @Component({
@@ -72,11 +74,35 @@ export class AppFormExampleComponent implements OnInit {
 				raspberry: new FormControl<FudisCheckboxOption | null>(null),
 				strawberry: new FormControl<FudisCheckboxOption | null>(null),
 			},
-			[FudisFormGroupValidators.atLeastOneRequired(), FudisFormGroupValidators.outOfRequiredRange(2, 3)]
+			[
+				FudisFormGroupValidators.atLeastOneRequired(this._translocoService.selectTranslate('chooseBerryError')),
+				FudisFormGroupValidators.min({
+					value: 2,
+					message: this._translocoService.selectTranslate('chooseBerryErrorMin'),
+				}),
+				FudisFormGroupValidators.max({
+					value: 3,
+					message: this._translocoService.selectTranslate('chooseBerryErrorMax'),
+				}),
+			]
 		),
 		autocompleteDropdown: new FormControl<FudisDropdownOption | null>(null, Validators.required),
 		autocompleteSearch: new FormControl<FudisDropdownOption | null>(null),
+		withLanguages: new FormGroup<FudisInputWithLanguageOptionsFormGroup>(
+			{
+				finnish: new FormControl<string | null>(null),
+				swedish: new FormControl<string | null>(null),
+				english: new FormControl<string | null>(null),
+			},
+			[FudisFormGroupValidators.atLeastOneRequired(this._translocoService.selectTranslate('error_one_required'))]
+		),
 	});
+
+	_languageOptions: FudisDropdownLanguageOption[] = [
+		{ value: 'finnish', viewValue: 'FI' },
+		{ value: 'swedish', viewValue: 'SV' },
+		{ value: 'english', viewValue: 'EN' },
+	];
 
 	radioButtonOptions: FudisRadioButtonOption[] = [];
 

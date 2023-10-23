@@ -50,7 +50,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 	/*
 	 * Object containing error messages for each FormControl and for the FormGroup.
-	 * E. g. {atLeastOneRequired: 'At least one input of any language must have a value.', finnish:{maxlength: 'Input in Finnish cannot be longer than X charactes.'}}
+	 * E. g. {finnish:{maxlength: 'Input in Finnish cannot be longer than X charactes.'}}
 	 */
 	@Input() groupErrorMsg: FudisFormGroupErrors;
 
@@ -154,7 +154,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	 */
 	initialRequiredCheck(): void {
 		this._requiredControls = {};
-		if (this.formGroup.errors?.['atLeastOneRequired'] || this.groupErrorMsg?.atLeastOneRequired) {
+		if (this.formGroup.errors?.['atLeastOneRequired']) {
 			this._atLeastOneRequired = true;
 
 			Object.keys(this.formGroup.controls).forEach((control) => {
