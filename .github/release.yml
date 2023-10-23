@@ -12,7 +12,7 @@ changelog:
     - title: "Improvements"
       labels:
         - "improvement"
-    - title: "Bug Fixes"
+    - title: "Fixes"
       labels:
         - "bug fix"
     - title: "Chore"
@@ -21,6 +21,6 @@ changelog:
     - title: "Dependencies"
       labels:
         - "dependencies"
-    - title: "Other Changes"
+    - title: "Other"
       labels:
         - "*"
