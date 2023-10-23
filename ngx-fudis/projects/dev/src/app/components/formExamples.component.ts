@@ -75,7 +75,6 @@ export class AppFormExampleComponent implements OnInit {
 				strawberry: new FormControl<FudisCheckboxOption | null>(null),
 			},
 			[
-				FudisGroupValidator.atLeastOneRequired(this._translocoService.selectTranslate('chooseBerryError')),
 				FudisGroupValidator.min({
 					value: 2,
 					message: this._translocoService.selectTranslate('chooseBerryErrorMin'),

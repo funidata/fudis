@@ -1,5 +1,5 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { FudisCheckboxGroupFormGroup, FudisInputSize } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
@@ -9,7 +9,7 @@ import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fi
 	templateUrl: './checkbox-group.component.html',
 	styleUrls: ['./checkbox-group.component.scss'],
 })
-export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
+export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnInit {
 	/*
 	 * FormControl for Checkbox group
 	 */
@@ -37,10 +37,15 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 
 	public ngOnInit() {
 		this.id = this.id ?? this._idService.getNewId('checkboxGroup');
-	}
 
-	public ngOnChanges() {
-		this.required = this.required || this.formGroup.hasValidator(Validators.required);
+		/**
+		 * Extend original markAllAsTouched function to change groupNlurredOut value to 'true', so erro
+		 */
+		const { markAllAsTouched } = this.formGroup;
+		this.formGroup.markAllAsTouched = () => {
+			markAllAsTouched.apply(this.formGroup);
+			this.groupBlurredOut = true;
+		};
 	}
 
 	/**
@@ -51,6 +56,16 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 			this.groupBlurredOut = true;
 		} else {
 			this.groupBlurredOut = false;
+		}
+	}
+
+	public checkAreControlsTouched(): void {
+		const nonTouched = Object.keys(this.formGroup.controls).find((key) => {
+			return this.formGroup.controls[key].touched === false;
+		});
+
+		if (!nonTouched) {
+			this.groupBlurredOut = true;
 		}
 	}
 }

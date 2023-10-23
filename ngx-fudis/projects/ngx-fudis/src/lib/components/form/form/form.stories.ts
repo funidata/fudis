@@ -28,16 +28,15 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 			[marginTop]="'xl'"
 			[badge]="'primary'"
 			[badgeText]="'example'"
-			[titleLevel]="titleLevel"
-			[title]="formTitle"
+			[titleLevel]="1"
+			[title]="'Example form heading'"
 			[id]="id"
-			[helpText]="formHelpText"
+			[helpText]="'Come about ropes end loot hail-shot belaying pin hornswaggle maroon quarter main sheet nipperkin.'"
 			[errorSummaryLinkType]="'href'"
-			[errorSummaryHelpText]="errorSummaryHelpText"
+			[errorSummaryHelpText]="'There are errors in this form. Please address these before trying to submit again.'"
 			[errorSummaryLiveRemove]="false"
 			[errorSummaryVisible]="errorSummaryVisible">
 			<ng-template fudisHeader>
-				<!-- <fudis-heading [marginBottom]="'xs'" [level]="titleLevel">{{ formTitle }}</fudis-heading> -->
 				<fudis-description-list [columns]="1" [variant]="'compact'" [data]="formHeaderDl" />
 			</ng-template>
 			<ng-template fudisActions type="form">
@@ -80,7 +79,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 													[id]="'unique-input-1'"
 													[options]="languageOptions"
 													[formGroup]="fieldsetExample.controls['name']"
-													[label]="labelName"
+													[label]="'Course name'"
 													[helpText]="'Some name would be nice. Provide course name in at least one language.'"
 													[groupErrorMsg]="errorName" />
 												<fudis-input-with-language-options
@@ -88,17 +87,26 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 													[id]="'unique-input-2'"
 													[options]="languageOptions"
 													[formGroup]="fieldsetExample.controls['description']"
-													[label]="labelDescription"
+													[label]="'Course description'"
 													[helpText]="
 														'So that students know what they are getting into. Provide description in all languages.'
 													"
 													[groupErrorMsg]="errorDescription" />
 												<fudis-radio-button-group
-													[title]="labelCourseType"
+													[title]="'Course type'"
 													[id]="'radio-button-group-1'"
 													[options]="courseTypeOptions"
 													[control]="fieldsetExample.controls['courseType']"
 													[errorMsg]="errorCourseType" />
+												<fudis-checkbox-group
+													[formGroup]="fieldsetExample.controls.courseBooks"
+													[title]="'Course books'"
+													[required]="true"
+													[helpText]="'Select 1-2 coursebooks'">
+													<fudis-checkbox [controlName]="'first'" [label]="'Heir to the Empire'" />
+													<fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
+													<fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
+												</fudis-checkbox-group>
 											</fudis-grid>
 										</ng-template>
 									</fudis-fieldset>
@@ -109,14 +117,14 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 													[initialFocus]="true"
 													[id]="'unique-input-3'"
 													[control]="fieldsetExample.controls['teacher']"
-													[label]="labelTeacher"
+													[label]="'Responsible teacher'"
 													[helpText]="'Someone has to be responsible for this.'"
 													[errorMsg]="errorTeacher" />
 												<fudis-text-input
 													[id]="'unique-input-4'"
 													[helpText]="inputHelpText"
 													[control]="fieldsetExample.controls['email']"
-													[label]="labelEmail"
+													[label]="'Contact email'"
 													[helpText]="'So that students can ask for more time on their homework.'"
 													[errorMsg]="errorEmail" />
 											</fudis-grid>
@@ -126,7 +134,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 										<ng-template fudisContent type="fieldset">
 											<fudis-grid [columns]="{ lg: 'inputSm inputSm' }">
 												<fudis-datepicker
-													[label]="labelStartDate"
+													[label]="'Start date'"
 													[id]="'date-picker-1'"
 													[size]="'s'"
 													[helpText]="'You have to start from somewhere'"
@@ -204,32 +212,6 @@ class FormContentExampleComponent implements OnInit {
 		required: 'Course type must be selected.',
 	};
 
-	title = 'Fill in course information';
-
-	helpText = 'Please fill in course information.';
-
-	labelName = 'Course name';
-
-	labelDescription = 'Course description';
-
-	labelTeacher = 'Responsible teacher';
-
-	labelEmail = 'Contact email';
-
-	labelStartDate = 'Start date';
-
-	labelEndDate = 'End date';
-
-	labelCourseType = 'Course type';
-
-	formTitle = 'Example form heading';
-
-	titleLevel = 1;
-
-	errorSummaryHelpText = 'There are errors in this form. Please address these before trying to submit again.';
-
-	formHelpText = "Come about rope's end loot hail-shot belaying pin hornswaggle maroon quarter main sheet nipperkin.";
-
 	fieldsetExample = new FormGroup({
 		name: new FormGroup(
 			{
@@ -244,6 +226,17 @@ class FormContentExampleComponent implements OnInit {
 			swedish: new FormControl(null, [Validators.required, Validators.minLength(10)]),
 			english: new FormControl(null, [Validators.required, Validators.minLength(10)]),
 		}),
+		courseBooks: new FormGroup(
+			{
+				first: new FormControl(null),
+				second: new FormControl(null),
+				third: new FormControl(null),
+			},
+			[
+				FudisGroupValidator.min({ value: 1, message: new BehaviorSubject('No book selected') }),
+				FudisGroupValidator.max({ value: 2, message: new BehaviorSubject('Too many selected') }),
+			]
+		),
 		teacher: new FormControl(null, Validators.required),
 		email: new FormControl(null, [Validators.required, Validators.email, Validators.minLength(5)]),
 		importantDate: new FormControl(null, Validators.required),
@@ -325,7 +318,6 @@ class FormContentExampleComponent implements OnInit {
 export default {
 	title: 'Components/Form/Form',
 	component: FormComponent,
-
 	argTypes: {},
 	decorators: [
 		moduleMetadata({
