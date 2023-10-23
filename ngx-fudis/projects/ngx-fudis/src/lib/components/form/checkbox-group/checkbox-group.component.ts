@@ -37,15 +37,18 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 
 	public ngOnInit() {
 		this.id = this.id ?? this._idService.getNewId('checkboxGroup');
-
-		/**
-		 * Extend original markAllAsTouched function to change groupNlurredOut value to 'true', so erro
-		 */
-		const { markAllAsTouched } = this.formGroup;
-		this.formGroup.markAllAsTouched = () => {
-			markAllAsTouched.apply(this.formGroup);
+		if (this.formGroup.touched) {
 			this.groupBlurredOut = true;
-		};
+		} else {
+			/**
+			 * Extend original markAllAsTouched function to change groupNlurredOut value to 'true', so error messages are loaded when e.g. on Submit touched value is changed programatically
+			 */
+			const originalMarkAllAsTouched = this.formGroup.markAllAsTouched;
+			this.formGroup.markAllAsTouched = () => {
+				originalMarkAllAsTouched.apply(this.formGroup);
+				this.groupBlurredOut = true;
+			};
+		}
 	}
 
 	/**
