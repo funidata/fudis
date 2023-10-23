@@ -94,7 +94,7 @@ export class AppFormExampleComponent implements OnInit {
 				swedish: new FormControl<string | null>(null),
 				english: new FormControl<string | null>(null),
 			},
-			[FudisGroupValidator.atLeastOneRequired(this._translocoService.translate('error_one_required'))]
+			[FudisGroupValidator.atLeastOneRequired(this._translocoService.selectTranslate('error_one_required'))]
 		),
 	});
 
