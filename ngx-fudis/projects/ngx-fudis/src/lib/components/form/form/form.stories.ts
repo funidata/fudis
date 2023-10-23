@@ -107,6 +107,14 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 													<fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
 													<fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
 												</fudis-checkbox-group>
+												<fudis-datepicker
+													[label]="'Start date'"
+													[id]="'date-picker-1'"
+													[size]="'md'"
+													[helpText]="'You have to start from somewhere'"
+													[errorMsg]="errorImportantDate"
+													[control]="formExample.controls['importantDate']">
+												</fudis-datepicker>
 											</fudis-grid>
 										</ng-template>
 									</fudis-fieldset>
@@ -127,20 +135,6 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 													[label]="'Contact email'"
 													[helpText]="'So that students can ask for more time on their homework.'"
 													[errorMsg]="errorEmail" />
-											</fudis-grid>
-										</ng-template>
-									</fudis-fieldset>
-									<fudis-fieldset [title]="'Important dates'" [tooltip]="'Quite many fields are required.'">
-										<ng-template fudisContent type="fieldset">
-											<fudis-grid [columns]="{ lg: 'inputSm inputSm' }">
-												<fudis-datepicker
-													[label]="'Start date'"
-													[id]="'date-picker-1'"
-													[size]="'s'"
-													[helpText]="'You have to start from somewhere'"
-													[errorMsg]="errorImportantDate"
-													[control]="formExample.controls['importantDate']">
-												</fudis-datepicker>
 											</fudis-grid>
 										</ng-template>
 									</fudis-fieldset>

@@ -86,6 +86,10 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 	}
 
 	createError(): void {
+		if (typeof this.message === 'string') {
+			this._currentMessage = this.message;
+		}
+
 		if (this.focusId) {
 			this._currentLabel = this.label;
 
@@ -103,11 +107,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 	}
 
 	ngOnChanges(): void {
-		if (typeof this.message === 'string') {
-			this._currentMessage = this.message;
-			this._currentLabel = this.label;
-			this.createError();
-		}
+		this.createError();
 	}
 
 	ngOnDestroy(): void {
