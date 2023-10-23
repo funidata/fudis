@@ -78,7 +78,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 												<fudis-input-with-language-options
 													[id]="'unique-input-1'"
 													[options]="languageOptions"
-													[formGroup]="fieldsetExample.controls['name']"
+													[formGroup]="formExample.controls['name']"
 													[label]="'Course name'"
 													[helpText]="'Some name would be nice. Provide course name in at least one language.'"
 													[groupErrorMsg]="errorName" />
@@ -86,7 +86,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 													[variant]="'text-area'"
 													[id]="'unique-input-2'"
 													[options]="languageOptions"
-													[formGroup]="fieldsetExample.controls['description']"
+													[formGroup]="formExample.controls['description']"
 													[label]="'Course description'"
 													[helpText]="
 														'So that students know what they are getting into. Provide description in all languages.'
@@ -96,10 +96,10 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 													[title]="'Course type'"
 													[id]="'radio-button-group-1'"
 													[options]="courseTypeOptions"
-													[control]="fieldsetExample.controls['courseType']"
+													[control]="formExample.controls['courseType']"
 													[errorMsg]="errorCourseType" />
 												<fudis-checkbox-group
-													[formGroup]="fieldsetExample.controls.courseBooks"
+													[formGroup]="formExample.controls.courseBooks"
 													[title]="'Course books'"
 													[required]="true"
 													[helpText]="'Select 1-2 coursebooks'">
@@ -116,14 +116,14 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 												<fudis-text-input
 													[initialFocus]="true"
 													[id]="'unique-input-3'"
-													[control]="fieldsetExample.controls['teacher']"
+													[control]="formExample.controls['teacher']"
 													[label]="'Responsible teacher'"
 													[helpText]="'Someone has to be responsible for this.'"
 													[errorMsg]="errorTeacher" />
 												<fudis-text-input
 													[id]="'unique-input-4'"
 													[helpText]="inputHelpText"
-													[control]="fieldsetExample.controls['email']"
+													[control]="formExample.controls['email']"
 													[label]="'Contact email'"
 													[helpText]="'So that students can ask for more time on their homework.'"
 													[errorMsg]="errorEmail" />
@@ -139,7 +139,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 													[size]="'s'"
 													[helpText]="'You have to start from somewhere'"
 													[errorMsg]="errorImportantDate"
-													[control]="fieldsetExample.controls['importantDate']">
+													[control]="formExample.controls['importantDate']">
 												</fudis-datepicker>
 											</fudis-grid>
 										</ng-template>
@@ -212,7 +212,7 @@ class FormContentExampleComponent implements OnInit {
 		required: 'Course type must be selected.',
 	};
 
-	fieldsetExample = new FormGroup({
+	formExample = new FormGroup({
 		name: new FormGroup(
 			{
 				finnish: new FormControl(null),
@@ -257,7 +257,7 @@ class FormContentExampleComponent implements OnInit {
 	];
 
 	dateRangeStartDate: FudisDateRangeItem = {
-		control: this.fieldsetExample.controls.startDate,
+		control: this.formExample.controls.startDate,
 		label: 'Start date',
 		errorMsg: {
 			required: 'Start date is required',
@@ -267,7 +267,7 @@ class FormContentExampleComponent implements OnInit {
 	};
 
 	dateRangeEndDate: FudisDateRangeItem = {
-		control: this.fieldsetExample.controls.endDate,
+		control: this.formExample.controls.endDate,
 		label: 'End date',
 		errorMsg: {
 			required: 'End date is required',
@@ -283,11 +283,11 @@ class FormContentExampleComponent implements OnInit {
 	}
 
 	submitForm(): void {
-		this.fieldsetExample.markAllAsTouched();
+		this.formExample.markAllAsTouched();
 
 		this.firstLoad = false;
 
-		if (this.fieldsetExample.invalid) {
+		if (this.formExample.invalid) {
 			this._closed = false;
 			this.errorSummaryVisible = true;
 			this._errorSummaryService.reloadErrors();

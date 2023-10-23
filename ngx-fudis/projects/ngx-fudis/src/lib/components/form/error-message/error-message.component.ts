@@ -103,12 +103,9 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 	}
 
 	ngOnChanges(): void {
-		if (
-			typeof this.message === 'string' &&
-			this.message !== this._currentMessage &&
-			this.label !== this._currentLabel
-		) {
+		if (typeof this.message === 'string') {
 			this._currentMessage = this.message;
+			this._currentLabel = this.label;
 			this.createError();
 		}
 	}
