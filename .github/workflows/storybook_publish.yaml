@@ -50,7 +50,7 @@ jobs:
         run: npm ci
         working-directory: ngx-fudis
       - name: Build
-        run: VERSION=${{ inputs.path }} npm run build-storybook
+        run: STORYBOOK_FUDIS_VERSION=${{ inputs.path }} npm run build-storybook
         working-directory: ngx-fudis
       - name: Deploy to Pages under branch name
         uses: peaceiris/actions-gh-pages@v3
