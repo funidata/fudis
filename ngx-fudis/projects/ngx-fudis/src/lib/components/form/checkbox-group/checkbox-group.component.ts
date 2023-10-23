@@ -41,7 +41,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 			this.groupBlurredOut = true;
 		} else {
 			/**
-			 * Extend original markAllAsTouched function to change groupNlurredOut value to 'true', so error messages are loaded when e.g. on Submit touched value is changed programatically
+			 * Extend original markAllAsTouched function to change groupBlurredOut value to 'true', so error messages are loaded when e.g. on Submit touched value is changed programatically
 			 */
 			const originalMarkAllAsTouched = this.formGroup.markAllAsTouched;
 			this.formGroup.markAllAsTouched = () => {
