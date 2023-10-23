@@ -10,6 +10,7 @@ import {
 	FudisGridService,
 	FudisTranslationService,
 	FudisBreakpointService,
+	FudisErrorSummaryService,
 } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
 
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit {
 		private _gridService: FudisGridService,
 		private _fudisLanguage: FudisTranslationService,
 		private _alertService: FudisAlertService,
+		private _errorSummaryService: FudisErrorSummaryService,
 
 		private _breakpointService: FudisBreakpointService
 	) {
@@ -142,6 +144,8 @@ export class AppComponent implements OnInit {
 			this._translocoService.setActiveLang('en');
 			this._fudisLanguage.setLanguage('en');
 		}
+
+		this._errorSummaryService.reloadErrors();
 	}
 
 	openDialog(): void {
