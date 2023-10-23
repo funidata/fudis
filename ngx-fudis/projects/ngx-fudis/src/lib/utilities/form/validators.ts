@@ -5,7 +5,7 @@ interface FudisValidationErrors extends ValidationErrors {
 	[key: string]: { message: Observable<string>; value?: number };
 }
 
-interface FudisValidatorMinMaxSetting {
+interface FudisGroupValidatorMinMaxSettings {
 	value: number;
 	message: Observable<string>;
 }
@@ -38,7 +38,7 @@ export module FudisGroupValidator {
 		};
 	}
 
-	export function min(settings: FudisValidatorMinMaxSetting): FudisGroupValidatorFn {
+	export function min(settings: FudisGroupValidatorMinMaxSettings): FudisGroupValidatorFn {
 		return (controlGroup: any): FudisValidationErrors | null => {
 			const { controls } = controlGroup;
 			let amountOfSelected = 0;
@@ -60,7 +60,7 @@ export module FudisGroupValidator {
 		};
 	}
 
-	export function max(settings: FudisValidatorMinMaxSetting): FudisGroupValidatorFn {
+	export function max(settings: FudisGroupValidatorMinMaxSettings): FudisGroupValidatorFn {
 		return (controlGroup: any): FudisValidationErrors | null => {
 			const { controls } = controlGroup;
 			let amountOfSelected = 0;
