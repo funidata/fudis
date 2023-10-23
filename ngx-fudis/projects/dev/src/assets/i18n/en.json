@@ -4,6 +4,7 @@
 	"helpText": "This is English.",
 	"required": "Required",
 	"error_required": "This is required text input",
+	"error_one_required": "At least one language is required",
 	"dynamic": "transloco {{value}}",
   "chooseBerry": "Choose your berries",
   "chooseBerryHelp": "Pick desired amount of berries",
