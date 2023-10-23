@@ -15,7 +15,7 @@ import {
 } from '../../../types/forms';
 
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
-import { FudisFormGroupValidators } from '../../../utilities/form/validators';
+import { FudisGroupValidator } from '../../../utilities/form/validators';
 import { FormComponent } from './form.component';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
@@ -237,7 +237,7 @@ class FormContentExampleComponent implements OnInit {
 				swedish: new FormControl(null),
 				english: new FormControl(null),
 			},
-			[FudisFormGroupValidators.atLeastOneRequired(new BehaviorSubject('Course name is missing.'))]
+			[FudisGroupValidator.atLeastOneRequired(new BehaviorSubject('Course name is missing.'))]
 		),
 		description: new FormGroup({
 			finnish: new FormControl(null, [Validators.required, Validators.minLength(10)]),
