@@ -1,6 +1,7 @@
 import { FudisTranslationConfig } from '../../types/miscellaneous';
 
 export const en: FudisTranslationConfig = {
+	BREADCRUMBS: { PREFIX: 'Breadcrumbs' },
 	REQUIRED: 'Required',
 	DATEPICKER: { CLOSE: 'Close calendar' },
 	DIALOG: { CLOSE: 'Close' },
@@ -49,6 +50,7 @@ export const en: FudisTranslationConfig = {
 };
 
 export const fi: FudisTranslationConfig = {
+	BREADCRUMBS: { PREFIX: 'Murupolku' },
 	REQUIRED: 'Pakollinen',
 	DATEPICKER: { CLOSE: 'Sulje kalenteri' },
 	DIALOG: { CLOSE: 'Sulje' },
@@ -97,6 +99,7 @@ export const fi: FudisTranslationConfig = {
 };
 
 export const sv: FudisTranslationConfig = {
+	BREADCRUMBS: { PREFIX: 'Länkstig' },
 	REQUIRED: 'Obligatorisk',
 	DATEPICKER: { CLOSE: 'Stäng kalender' },
 	DIALOG: { CLOSE: 'Stäng' },

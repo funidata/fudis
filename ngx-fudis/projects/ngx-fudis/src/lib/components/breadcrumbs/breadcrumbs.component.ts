@@ -1,5 +1,6 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, effect } from '@angular/core';
 import { FudisBreadcrumb } from '../../types/miscellaneous';
+import { FudisTranslationService } from '../../services/translation/translation.service';
 
 @Component({
 	selector: 'fudis-breadcrumbs',
@@ -8,7 +9,15 @@ import { FudisBreadcrumb } from '../../types/miscellaneous';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbsComponent {
-	@Input({ required: true }) breadcrumbsAriaLabel: string;
+	constructor(private _translationService: FudisTranslationService) {
+		effect(() => {
+			this._breadcrumbsPrefix = this._translationService.getTranslations()().BREADCRUMBS.PREFIX;
+		});
+	}
+
+	@Input({ required: true }) breadcrumbsLabel: string;
 
 	@Input({ required: true }) links: FudisBreadcrumb[] = [];
+
+	protected _breadcrumbsPrefix: string;
 }

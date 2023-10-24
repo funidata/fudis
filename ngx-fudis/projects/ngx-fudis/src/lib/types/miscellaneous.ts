@@ -56,6 +56,10 @@ export type FudisTextAlign = 'left' | 'right' | 'center';
 export type FudisLanguageAbbr = 'fi' | 'sv' | 'en';
 
 export interface FudisTranslationConfig {
+	BREADCRUMBS: {
+		// Universal prefix to notify user about breadcrumbs navigation
+		PREFIX: string;
+	};
 	// Shown with form inputs
 	REQUIRED: string;
 	DATEPICKER: {
