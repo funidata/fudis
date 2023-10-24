@@ -25,5 +25,6 @@
 	},
 	"closeCalendar": "Close calendar",
 	"fieldsetTitle": "Important fieldset title",
-	"notEnoughCharacters": "Too few characters."
+	"notEnoughCharacters": "Too few characters.",
+	"breadcrumbsLabel": "Random stuff expandable"
 }

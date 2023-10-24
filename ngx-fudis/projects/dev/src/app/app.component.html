@@ -16,7 +16,8 @@
 
 			<fudis-expandable [title]="'Random stuff'">
 				<ng-template fudisContent type="expandable">
-					<fudis-grid>
+					<fudis-breadcrumbs [links]="breadcrumbsLinks" [breadcrumbsLabel]="t('breadcrumbsLabel')"></fudis-breadcrumbs>
+					<fudis-grid [marginTop]="'md'">
 						<fudis-notification variant="danger" ariaVariantText="Varoitus!"
 							>Whoops! Here is danger notification.</fudis-notification
 						>

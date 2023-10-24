@@ -69,6 +69,16 @@ export class AppComponent implements OnInit {
 		};
 	});
 
+	breadcrumbsLinks = [
+		{ label: 'Fudis', url: '/example' },
+		{ label: 'Sandbox', url: '/example' },
+		{ label: 'Random', url: '/example' },
+		{ label: 'Stuff', url: '/example' },
+		{ label: 'Expandable', url: '/example' },
+		{ label: 'Breadcrumbs', url: '/example' },
+		{ label: 'Example', url: '/example' },
+	];
+
 	testData = [
 		{ key: 'First Name', value: 'Rex' },
 		{ key: 'Last Name', value: 'Dangerwest' },
