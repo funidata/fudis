@@ -96,6 +96,7 @@ import { AlertComponent } from './components/alert/alert/alert.component';
 import { AlertGroupComponent } from './components/alert/alert-group/alert-group.component';
 import { FudisAlertService } from './services/alert/alert.service';
 import { FudisBreakpointService } from './services/breakpoint/breakpoint.service';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
 	/*
@@ -163,6 +164,7 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		TextInputComponent,
 		TextAreaComponent,
 		TooltipDirective,
+		BreadcrumbsComponent,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
@@ -244,6 +246,7 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		TextAreaComponent,
 		TextInputComponent,
 		TooltipDirective,
+		BreadcrumbsComponent,
 	],
 	providers: [
 		FudisAlertService,
