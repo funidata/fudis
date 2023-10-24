@@ -10,7 +10,7 @@ import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fi
 	styleUrls: ['./checkbox-group.component.scss'],
 })
 export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnInit {
-	/*
+	/**
 	 * FormControl for Checkbox group
 	 */
 	@Input({ required: true }) formGroup: FormGroup<FudisCheckboxGroupFormGroup>;

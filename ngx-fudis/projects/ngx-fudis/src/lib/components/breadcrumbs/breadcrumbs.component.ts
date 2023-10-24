@@ -15,9 +15,18 @@ export class BreadcrumbsComponent {
 		});
 	}
 
+	/**
+	 * Label to attach to aria-label
+	 */
 	@Input({ required: true }) breadcrumbsLabel: string;
 
+	/**
+	 * Breadcrumb item array
+	 */
 	@Input({ required: true }) links: FudisBreadcrumb[] = [];
 
+	/**
+	 * Prefix for aria-label from Fudis translation keys
+	 */
 	protected _breadcrumbsPrefix: string;
 }
