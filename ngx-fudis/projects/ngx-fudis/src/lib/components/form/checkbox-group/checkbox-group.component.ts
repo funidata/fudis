@@ -61,14 +61,4 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 			this.groupBlurredOut = false;
 		}
 	}
-
-	public checkAreControlsTouched(): void {
-		const nonTouched = Object.keys(this.formGroup.controls).find((key) => {
-			return this.formGroup.controls[key].touched === false;
-		});
-
-		if (!nonTouched) {
-			this.groupBlurredOut = true;
-		}
-	}
 }
