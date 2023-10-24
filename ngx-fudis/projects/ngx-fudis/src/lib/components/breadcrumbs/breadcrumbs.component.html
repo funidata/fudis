@@ -8,7 +8,7 @@
 				*ngIf="link.url"
 				[linkTitle]="link.label"
 				[attr.aria-current]="last ? 'page' : null" />
-			<fudis-icon class="fudis-breadcrumbs__icon" aria-hidden="true" icon="chevron" *ngIf="!last" />
+			<fudis-icon class="fudis-breadcrumbs__icon" [icon]="'chevron'" *ngIf="!last" />
 		</li>
 	</ul>
 </nav>

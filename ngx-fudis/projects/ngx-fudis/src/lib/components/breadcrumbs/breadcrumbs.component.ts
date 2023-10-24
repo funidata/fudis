@@ -8,7 +8,7 @@ import { FudisBreadcrumb } from '../../types/miscellaneous';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbsComponent {
-	@Input() breadcrumbsAriaLabel: string;
+	@Input({ required: true }) breadcrumbsAriaLabel: string;
 
-	@Input() links: FudisBreadcrumb[] = [];
+	@Input({ required: true }) links: FudisBreadcrumb[] = [];
 }
