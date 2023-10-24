@@ -25,7 +25,7 @@ Find release notes for the latest [Fudis Version](https://github.com/funidata/fu
 
 ## Release Pipeline
 **Steps for creating a new release:**
-- Depending on the changes included in the release, run the following command with the correct argument `npm run fudis-release -- <major|minor|patch>`. **Example:** `npm run release -- patch`
+- Depending on the changes included in the release, run the following command with the correct argument `npm run fudis-release -- <major|minor|patch>`. **Example:** `npm run fudis-release -- patch`
 	> This will run a release shell script which creates a new branch named `release` and automatically runs `npm version` command with given argument.\
 	> `npm version` will increment version number in `package.json` files, commits the changes, tags that commit as the new version, and pushes commits and tags to GitHub.
 - Create Pull Request 

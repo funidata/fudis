@@ -1,5 +1,5 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { FudisCheckboxGroupFormGroup, FudisInputSize } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
@@ -9,7 +9,7 @@ import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fi
 	templateUrl: './checkbox-group.component.html',
 	styleUrls: ['./checkbox-group.component.scss'],
 })
-export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
+export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnInit {
 	/*
 	 * FormControl for Checkbox group
 	 */
@@ -37,10 +37,18 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 
 	public ngOnInit() {
 		this.id = this.id ?? this._idService.getNewId('checkboxGroup');
-	}
-
-	public ngOnChanges() {
-		this.required = this.required || this.formGroup.hasValidator(Validators.required);
+		if (this.formGroup.touched) {
+			this.groupBlurredOut = true;
+		} else {
+			/**
+			 * Extend original markAllAsTouched function to change groupBlurredOut value to 'true', so error messages are loaded when e.g. on Submit touched value is changed programatically
+			 */
+			const originalMarkAllAsTouched = this.formGroup.markAllAsTouched;
+			this.formGroup.markAllAsTouched = () => {
+				originalMarkAllAsTouched.apply(this.formGroup);
+				this.groupBlurredOut = true;
+			};
+		}
 	}
 
 	/**

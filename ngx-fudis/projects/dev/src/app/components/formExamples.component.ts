@@ -10,7 +10,7 @@ import {
 } from 'projects/ngx-fudis/src/lib/types/forms';
 import { untilDestroyed } from 'projects/ngx-fudis/src/lib/utilities/untilDestroyed';
 import { FudisErrorSummaryService } from 'ngx-fudis';
-import { FudisFormGroupValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
+import { FudisGroupValidator } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
 import { FudisDropdownLanguageOption, FudisInputWithLanguageOptionsFormGroup } from 'dist/ngx-fudis/lib/types/forms';
 
 type MyForm = {
@@ -75,12 +75,11 @@ export class AppFormExampleComponent implements OnInit {
 				strawberry: new FormControl<FudisCheckboxOption | null>(null),
 			},
 			[
-				FudisFormGroupValidators.atLeastOneRequired(this._translocoService.selectTranslate('chooseBerryError')),
-				FudisFormGroupValidators.min({
+				FudisGroupValidator.min({
 					value: 2,
 					message: this._translocoService.selectTranslate('chooseBerryErrorMin'),
 				}),
-				FudisFormGroupValidators.max({
+				FudisGroupValidator.max({
 					value: 3,
 					message: this._translocoService.selectTranslate('chooseBerryErrorMax'),
 				}),
@@ -94,7 +93,7 @@ export class AppFormExampleComponent implements OnInit {
 				swedish: new FormControl<string | null>(null),
 				english: new FormControl<string | null>(null),
 			},
-			[FudisFormGroupValidators.atLeastOneRequired(this._translocoService.selectTranslate('error_one_required'))]
+			[FudisGroupValidator.atLeastOneRequired(this._translocoService.selectTranslate('error_one_required'))]
 		),
 	});
 

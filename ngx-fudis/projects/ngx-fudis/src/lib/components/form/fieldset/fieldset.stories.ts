@@ -12,7 +12,7 @@ import {
 } from '../../../types/forms';
 
 import { FieldSetComponent } from './fieldset.component';
-import { FudisFormGroupValidators } from '../../../utilities/form/validators';
+import { FudisGroupValidator } from '../../../utilities/form/validators';
 
 @Component({
 	selector: 'example-fieldset',
@@ -164,7 +164,7 @@ class FieldsetExampleComponent {
 				swedish: new FormControl(''),
 				english: new FormControl(''),
 			},
-			[FudisFormGroupValidators.atLeastOneRequired(new BehaviorSubject('Course name is missing'))]
+			[FudisGroupValidator.atLeastOneRequired(new BehaviorSubject('Course name is missing'))]
 		),
 		description: new FormGroup({
 			finnish: new FormControl('', [Validators.required, Validators.minLength(10)]),

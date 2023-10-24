@@ -2,12 +2,10 @@ import { FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 interface FudisValidationErrors extends ValidationErrors {
-	atLeastOneRequired?: { message: Observable<string> };
-	lessThanRequiredRange?: { message: Observable<string> };
-	moreThanRequiredRange?: { message: Observable<string> };
+	[key: string]: { message: Observable<string>; value?: number };
 }
 
-interface FudisValidatorMinMaxSetting {
+interface FudisGroupValidatorMinMaxSettings {
 	value: number;
 	message: Observable<string>;
 }
@@ -16,7 +14,7 @@ interface FudisGroupValidatorFn extends ValidatorFn {
 	(controlGroup: FormGroup): FudisValidationErrors | null;
 }
 
-export module FudisFormGroupValidators {
+export module FudisGroupValidator {
 	export function atLeastOneRequired(message: Observable<string>): FudisGroupValidatorFn {
 		return (controlGroup: any): FudisValidationErrors | null => {
 			const { controls } = controlGroup;
@@ -40,7 +38,7 @@ export module FudisFormGroupValidators {
 		};
 	}
 
-	export function min(settings: FudisValidatorMinMaxSetting): FudisGroupValidatorFn {
+	export function min(settings: FudisGroupValidatorMinMaxSettings): FudisGroupValidatorFn {
 		return (controlGroup: any): FudisValidationErrors | null => {
 			const { controls } = controlGroup;
 			let amountOfSelected = 0;
@@ -54,7 +52,7 @@ export module FudisFormGroupValidators {
 
 				if (amountOfSelected < settings.value) {
 					return {
-						min: { message: settings.message },
+						min: { message: settings.message, value: settings.value },
 					};
 				}
 			}
@@ -62,7 +60,7 @@ export module FudisFormGroupValidators {
 		};
 	}
 
-	export function max(settings: FudisValidatorMinMaxSetting): FudisGroupValidatorFn {
+	export function max(settings: FudisGroupValidatorMinMaxSettings): FudisGroupValidatorFn {
 		return (controlGroup: any): FudisValidationErrors | null => {
 			const { controls } = controlGroup;
 			let amountOfSelected = 0;
@@ -76,7 +74,7 @@ export module FudisFormGroupValidators {
 
 				if (amountOfSelected > settings.value) {
 					return {
-						max: { message: settings.message },
+						max: { message: settings.message, value: settings.value },
 					};
 				}
 			}
