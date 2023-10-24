@@ -1,0 +1,42 @@
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import { linkTo } from '@storybook/addon-links';
+import { BreadcrumbsComponent } from './breadcrumbs.component';
+import * as BreadcrumbsStories from './breadcrumbs.stories.ts';
+
+<Meta title="Components/Breadcrumbs" />
+
+# Breadcrumbs
+
+Breadcrumbs is essentially a navigation element.
+
+## Example
+
+<Canvas of={BreadcrumbsStories.Breadcrumbs}></Canvas>
+
+## Usage Guidelines
+
+#### Mandatory Properties
+
+Necessary properties for Breadcrumbs Component are `links` and `breadcrumbsLabel`.
+
+`breadcrumbsLabel` is used as aria-label and it should indicate in which breadcrumbs section user is, e.g. _"Shopping Cart"_. 
+Aria-label will automatically have a prefix _"Breadcrumbs: "_ which will be followed by the given label. 
+
+`links` is an array of FudisBreadcrumb objects with label and url properties.
+
+```
+FudisBreadcrumb {
+ label: string;
+ url: string;
+}
+```
+
+
+### Accessibility
+- Aria-label is mandatory and will give additional information about the breadcrumbs
+- Each breadcrumb is a link
+- Current page is communicated and its link is disabled
+
+## Properties
+
+<ArgTypes of={BreadcrumbsComponent} />
