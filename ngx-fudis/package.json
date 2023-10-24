@@ -1,6 +1,6 @@
 {
   "name": "ngx-fudis",
-  "version": "0.0.49",
+  "version": "0.1.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
-    "storybook": "ng run storybook:start",
+    "storybook": "STORYBOOK_FUDIS_VERSION='' ng run storybook:start",
     "build-storybook": "npm run docs:json && ng run storybook:build",
     "stylelint-scss-check": "stylelint-config-prettier-scss-check",
     "lint": "ng lint",

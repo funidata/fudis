@@ -1,6 +1,6 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
-import { FudisCheckboxGroupFormGroup, FudisFormGroupErrors, FudisInputSize } from '../../../types/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { FudisCheckboxGroupFormGroup, FudisInputSize } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 
@@ -9,16 +9,11 @@ import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fi
 	templateUrl: './checkbox-group.component.html',
 	styleUrls: ['./checkbox-group.component.scss'],
 })
-export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
+export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnInit {
 	/*
 	 * FormControl for Checkbox group
 	 */
 	@Input({ required: true }) formGroup: FormGroup<FudisCheckboxGroupFormGroup>;
-
-	/*
-	 * Object containing error messages for each FormControl and for the FormGroup.
-	 */
-	@Input() groupErrorMsg: FudisFormGroupErrors;
 
 	/**
 	 * Set fieldset as required. Alternatively provide FormGroup Validators.required to display 'required' text in the legend lable.
@@ -38,14 +33,22 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 	/**
 	 * To determine if focus has been moved out from the whole checkbox group, so possible errors will not show before that.
 	 */
-	protected _groupBlurredOut = false;
+	public groupBlurredOut = false;
 
 	public ngOnInit() {
 		this.id = this.id ?? this._idService.getNewId('checkboxGroup');
-	}
-
-	public ngOnChanges() {
-		this.required = this.required || this.formGroup.hasValidator(Validators.required);
+		if (this.formGroup.touched) {
+			this.groupBlurredOut = true;
+		} else {
+			/**
+			 * Extend original markAllAsTouched function to change groupBlurredOut value to 'true', so error messages are loaded when e.g. on Submit touched value is changed programatically
+			 */
+			const originalMarkAllAsTouched = this.formGroup.markAllAsTouched;
+			this.formGroup.markAllAsTouched = () => {
+				originalMarkAllAsTouched.apply(this.formGroup);
+				this.groupBlurredOut = true;
+			};
+		}
 	}
 
 	/**
@@ -53,9 +56,9 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 	 */
 	public setGroupBlurredOut(value: boolean): void {
 		if (value) {
-			this._groupBlurredOut = true;
+			this.groupBlurredOut = true;
 		} else {
-			this._groupBlurredOut = false;
+			this.groupBlurredOut = false;
 		}
 	}
 }

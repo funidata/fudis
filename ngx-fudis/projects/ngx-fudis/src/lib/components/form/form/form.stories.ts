@@ -5,6 +5,7 @@ import { Component, OnInit, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RouterModule } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import {
 	FudisDropdownOption,
 	FudisRadioButtonOption,
@@ -14,7 +15,7 @@ import {
 } from '../../../types/forms';
 
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
-import { FudisFormGroupValidators } from '../../../utilities/form/validators';
+import { FudisGroupValidator } from '../../../utilities/form/validators';
 import { FormComponent } from './form.component';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
@@ -27,16 +28,15 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 			[marginTop]="'xl'"
 			[badge]="'primary'"
 			[badgeText]="'example'"
-			[titleLevel]="titleLevel"
-			[title]="formTitle"
+			[titleLevel]="1"
+			[title]="'Example form heading'"
 			[id]="id"
-			[helpText]="formHelpText"
+			[helpText]="'Come about ropes end loot hail-shot belaying pin hornswaggle maroon quarter main sheet nipperkin.'"
 			[errorSummaryLinkType]="'href'"
-			[errorSummaryHelpText]="errorSummaryHelpText"
+			[errorSummaryHelpText]="'There are errors in this form. Please address these before trying to submit again.'"
 			[errorSummaryLiveRemove]="false"
 			[errorSummaryVisible]="errorSummaryVisible">
 			<ng-template fudisHeader>
-				<!-- <fudis-heading [marginBottom]="'xs'" [level]="titleLevel">{{ formTitle }}</fudis-heading> -->
 				<fudis-description-list [columns]="1" [variant]="'compact'" [data]="formHeaderDl" />
 			</ng-template>
 			<ng-template fudisActions type="form">
@@ -78,26 +78,43 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 												<fudis-input-with-language-options
 													[id]="'unique-input-1'"
 													[options]="languageOptions"
-													[formGroup]="fieldsetExample.controls['name']"
-													[label]="labelName"
+													[formGroup]="formExample.controls['name']"
+													[label]="'Course name'"
 													[helpText]="'Some name would be nice. Provide course name in at least one language.'"
 													[groupErrorMsg]="errorName" />
 												<fudis-input-with-language-options
 													[variant]="'text-area'"
 													[id]="'unique-input-2'"
 													[options]="languageOptions"
-													[formGroup]="fieldsetExample.controls['description']"
-													[label]="labelDescription"
+													[formGroup]="formExample.controls['description']"
+													[label]="'Course description'"
 													[helpText]="
 														'So that students know what they are getting into. Provide description in all languages.'
 													"
 													[groupErrorMsg]="errorDescription" />
 												<fudis-radio-button-group
-													[title]="labelCourseType"
+													[title]="'Course type'"
 													[id]="'radio-button-group-1'"
 													[options]="courseTypeOptions"
-													[control]="fieldsetExample.controls['courseType']"
+													[control]="formExample.controls['courseType']"
 													[errorMsg]="errorCourseType" />
+												<fudis-checkbox-group
+													[formGroup]="formExample.controls.courseBooks"
+													[title]="'Course books'"
+													[required]="true"
+													[helpText]="'Select 1-2 coursebooks'">
+													<fudis-checkbox [controlName]="'first'" [label]="'Heir to the Empire'" />
+													<fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
+													<fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
+												</fudis-checkbox-group>
+												<fudis-datepicker
+													[label]="'Start date'"
+													[id]="'date-picker-1'"
+													[size]="'md'"
+													[helpText]="'You have to start from somewhere'"
+													[errorMsg]="errorImportantDate"
+													[control]="formExample.controls['importantDate']">
+												</fudis-datepicker>
 											</fudis-grid>
 										</ng-template>
 									</fudis-fieldset>
@@ -107,31 +124,17 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 												<fudis-text-input
 													[initialFocus]="true"
 													[id]="'unique-input-3'"
-													[control]="fieldsetExample.controls['teacher']"
-													[label]="labelTeacher"
+													[control]="formExample.controls['teacher']"
+													[label]="'Responsible teacher'"
 													[helpText]="'Someone has to be responsible for this.'"
 													[errorMsg]="errorTeacher" />
 												<fudis-text-input
 													[id]="'unique-input-4'"
 													[helpText]="inputHelpText"
-													[control]="fieldsetExample.controls['email']"
-													[label]="labelEmail"
+													[control]="formExample.controls['email']"
+													[label]="'Contact email'"
 													[helpText]="'So that students can ask for more time on their homework.'"
 													[errorMsg]="errorEmail" />
-											</fudis-grid>
-										</ng-template>
-									</fudis-fieldset>
-									<fudis-fieldset [title]="'Important dates'" [tooltip]="'Quite many fields are required.'">
-										<ng-template fudisContent type="fieldset">
-											<fudis-grid [columns]="{ lg: 'inputSm inputSm' }">
-												<fudis-datepicker
-													[label]="labelStartDate"
-													[id]="'date-picker-1'"
-													[size]="'s'"
-													[helpText]="'You have to start from somewhere'"
-													[errorMsg]="errorImportantDate"
-													[control]="fieldsetExample.controls['importantDate']">
-												</fudis-datepicker>
 											</fudis-grid>
 										</ng-template>
 									</fudis-fieldset>
@@ -172,10 +175,6 @@ class FormContentExampleComponent implements OnInit {
 		{ key: 'Another important person', value: 'Mara Jade' },
 	];
 
-	errorName: FudisFormGroupErrors = {
-		atLeastOneRequired: 'Course name is missing.',
-	};
-
 	errorDescription: FudisFormGroupErrors = {
 		english: {
 			required: 'Missing description in English.',
@@ -207,46 +206,31 @@ class FormContentExampleComponent implements OnInit {
 		required: 'Course type must be selected.',
 	};
 
-	title = 'Fill in course information';
-
-	helpText = 'Please fill in course information.';
-
-	labelName = 'Course name';
-
-	labelDescription = 'Course description';
-
-	labelTeacher = 'Responsible teacher';
-
-	labelEmail = 'Contact email';
-
-	labelStartDate = 'Start date';
-
-	labelEndDate = 'End date';
-
-	labelCourseType = 'Course type';
-
-	formTitle = 'Example form heading';
-
-	titleLevel = 1;
-
-	errorSummaryHelpText = 'There are errors in this form. Please address these before trying to submit again.';
-
-	formHelpText = "Come about rope's end loot hail-shot belaying pin hornswaggle maroon quarter main sheet nipperkin.";
-
-	fieldsetExample = new FormGroup({
+	formExample = new FormGroup({
 		name: new FormGroup(
 			{
 				finnish: new FormControl(null),
 				swedish: new FormControl(null),
 				english: new FormControl(null),
 			},
-			[FudisFormGroupValidators.atLeastOneRequired()]
+			[FudisGroupValidator.atLeastOneRequired(new BehaviorSubject('Course name is missing.'))]
 		),
 		description: new FormGroup({
 			finnish: new FormControl(null, [Validators.required, Validators.minLength(10)]),
 			swedish: new FormControl(null, [Validators.required, Validators.minLength(10)]),
 			english: new FormControl(null, [Validators.required, Validators.minLength(10)]),
 		}),
+		courseBooks: new FormGroup(
+			{
+				first: new FormControl(null),
+				second: new FormControl(null),
+				third: new FormControl(null),
+			},
+			[
+				FudisGroupValidator.min({ value: 1, message: new BehaviorSubject('No book selected') }),
+				FudisGroupValidator.max({ value: 2, message: new BehaviorSubject('Too many selected') }),
+			]
+		),
 		teacher: new FormControl(null, Validators.required),
 		email: new FormControl(null, [Validators.required, Validators.email, Validators.minLength(5)]),
 		importantDate: new FormControl(null, Validators.required),
@@ -267,7 +251,7 @@ class FormContentExampleComponent implements OnInit {
 	];
 
 	dateRangeStartDate: FudisDateRangeItem = {
-		control: this.fieldsetExample.controls.startDate,
+		control: this.formExample.controls.startDate,
 		label: 'Start date',
 		errorMsg: {
 			required: 'Start date is required',
@@ -277,7 +261,7 @@ class FormContentExampleComponent implements OnInit {
 	};
 
 	dateRangeEndDate: FudisDateRangeItem = {
-		control: this.fieldsetExample.controls.endDate,
+		control: this.formExample.controls.endDate,
 		label: 'End date',
 		errorMsg: {
 			required: 'End date is required',
@@ -293,11 +277,11 @@ class FormContentExampleComponent implements OnInit {
 	}
 
 	submitForm(): void {
-		this.fieldsetExample.markAllAsTouched();
+		this.formExample.markAllAsTouched();
 
 		this.firstLoad = false;
 
-		if (this.fieldsetExample.invalid) {
+		if (this.formExample.invalid) {
 			this._closed = false;
 			this.errorSummaryVisible = true;
 			this._errorSummaryService.reloadErrors();
@@ -328,7 +312,6 @@ class FormContentExampleComponent implements OnInit {
 export default {
 	title: 'Components/Form/Form',
 	component: FormComponent,
-
 	argTypes: {},
 	decorators: [
 		moduleMetadata({

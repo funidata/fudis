@@ -1,17 +1,21 @@
 import { FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 interface FudisValidationErrors extends ValidationErrors {
-	atLeastOneRequired?: boolean;
-	lessThanRequiredRange?: boolean;
-	moreThanRequiredRange?: boolean;
+	[key: string]: { message: Observable<string>; value?: number };
+}
+
+interface FudisGroupValidatorMinMaxSettings {
+	value: number;
+	message: Observable<string>;
 }
 
 interface FudisGroupValidatorFn extends ValidatorFn {
 	(controlGroup: FormGroup): FudisValidationErrors | null;
 }
 
-export module FudisFormGroupValidators {
-	export function atLeastOneRequired(): FudisGroupValidatorFn {
+export module FudisGroupValidator {
+	export function atLeastOneRequired(message: Observable<string>): FudisGroupValidatorFn {
 		return (controlGroup: any): FudisValidationErrors | null => {
 			const { controls } = controlGroup;
 
@@ -26,7 +30,7 @@ export module FudisFormGroupValidators {
 
 				if (!theOne) {
 					return {
-						atLeastOneRequired: true,
+						atLeastOneRequired: { message },
 					};
 				}
 			}
@@ -34,7 +38,7 @@ export module FudisFormGroupValidators {
 		};
 	}
 
-	export function outOfRequiredRange(min: number = 0, max?: number): FudisGroupValidatorFn {
+	export function min(settings: FudisGroupValidatorMinMaxSettings): FudisGroupValidatorFn {
 		return (controlGroup: any): FudisValidationErrors | null => {
 			const { controls } = controlGroup;
 			let amountOfSelected = 0;
@@ -46,15 +50,31 @@ export module FudisFormGroupValidators {
 					}
 				});
 
-				if (!!min && amountOfSelected < min) {
+				if (amountOfSelected < settings.value) {
 					return {
-						lessThanRequiredRange: true,
+						min: { message: settings.message, value: settings.value },
 					};
 				}
+			}
+			return null;
+		};
+	}
 
-				if (!!max && amountOfSelected > max) {
+	export function max(settings: FudisGroupValidatorMinMaxSettings): FudisGroupValidatorFn {
+		return (controlGroup: any): FudisValidationErrors | null => {
+			const { controls } = controlGroup;
+			let amountOfSelected = 0;
+
+			if (controls) {
+				Object.keys(controls).forEach((key) => {
+					if (controls[key].value) {
+						amountOfSelected += 1;
+					}
+				});
+
+				if (amountOfSelected > settings.value) {
 					return {
-						moreThanRequiredRange: true,
+						max: { message: settings.message, value: settings.value },
 					};
 				}
 			}

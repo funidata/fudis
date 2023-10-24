@@ -17,11 +17,6 @@
 								[title]="t('chooseBerry')"
 								[helpText]="t('chooseBerryHelp')"
 								[required]="true"
-								[groupErrorMsg]="{
-									atLeastOneRequired: t('chooseBerryError'),
-									lessThanRequiredRange: t('chooseBerryErrorMin'),
-									moreThanRequiredRange: t('chooseBerryErrorMax')
-								}"
 								[tooltip]="t('chooseBerryTooltip')"
 								[formGroup]="testFormGroup.controls['checkboxFormGroup']">
 								<fudis-checkbox
@@ -65,8 +60,11 @@
 								[label]="'Basic required text-area'"
 								[control]="testFormGroup.controls['textArea']"
 								[maxLength]="20"
-								[errorMsg]="{ required: t('error_required') }">
-							</fudis-text-area>
+								[errorMsg]="{ required: t('error_required') }" />
+							<fudis-input-with-language-options
+								[label]="'At least one required'"
+								[formGroup]="testFormGroup.controls['withLanguages']"
+								[options]="_languageOptions" />
 						</ng-template>
 					</fudis-fieldset>
 				</ng-template>
