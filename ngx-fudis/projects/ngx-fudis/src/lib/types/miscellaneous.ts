@@ -120,3 +120,8 @@ export interface FudisTranslationLanguageBadgeAriaLabel {
 	SELECTED: string;
 	MISSING_TRANSLATION: string;
 }
+
+export interface FudisBreadcrumb {
+	label: string;
+	url: string;
+}

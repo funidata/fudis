@@ -1,0 +1,14 @@
+@use '../../foundations/typography/mixins.scss' as typography;
+
+.fudis-breadcrumbs {
+	@include typography.body-text-md-regular;
+
+	display: flex;
+	align-items: center;
+	list-style: none;
+
+	&__item {
+		display: flex;
+		align-items: center;
+	}
+}

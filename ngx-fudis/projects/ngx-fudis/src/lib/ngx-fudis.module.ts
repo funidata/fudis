@@ -96,6 +96,7 @@ import { AlertComponent } from './components/alert/alert/alert.component';
 import { AlertGroupComponent } from './components/alert/alert-group/alert-group.component';
 import { FudisAlertService } from './services/alert/alert.service';
 import { FudisBreakpointService } from './services/breakpoint/breakpoint.service';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
 	/*
@@ -110,6 +111,7 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		AutocompleteMultiSelectSelectedItemChipComponent,
 		BadgeComponent,
 		BodyTextComponent,
+		BreadcrumbsComponent,
 		ButtonComponent,
 		CheckboxComponent,
 		CheckboxGroupComponent,
@@ -199,6 +201,7 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		AutocompleteMultiSelectComponent,
 		BadgeComponent,
 		BodyTextComponent,
+		BreadcrumbsComponent,
 		ButtonComponent,
 		CheckboxComponent,
 		CheckboxGroupComponent,
@@ -210,6 +213,10 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		DescriptionListItemTermComponent,
 		DescriptionListItemDetailsComponent,
 		DialogComponent,
+		DialogTitleDirective,
+		DialogContentDirective,
+		DialogCloseDirective,
+		DialogActionsDirective,
 		DropdownComponent,
 		DropdownMenuComponent,
 		DropdownMenuItemComponent,
@@ -219,13 +226,8 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		FooterComponent,
 		FooterContentLeftDirective,
 		FooterContentRightDirective,
-		DialogTitleDirective,
-		DialogContentDirective,
-		DialogCloseDirective,
-		DialogActionsDirective,
 		FieldSetComponent,
 		FormComponent,
-		InputWithLanguageOptionsComponent,
 		GridComponent,
 		GridDirective,
 		GridItemComponent,
@@ -234,6 +236,7 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		HeaderDirective,
 		HeadingComponent,
 		IconComponent,
+		InputWithLanguageOptionsComponent,
 		LanguageBadgeGroupComponent,
 		LinkComponent,
 		NotificationComponent,

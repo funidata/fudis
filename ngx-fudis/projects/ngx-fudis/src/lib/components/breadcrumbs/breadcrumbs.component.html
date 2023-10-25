@@ -1,0 +1,14 @@
+<nav [attr.aria-label]="breadcrumbsAriaLabel" *ngIf="links.length > 0">
+	<ul class="fudis-breadcrumbs">
+		<li class="fudis-breadcrumbs__item" *ngFor="let link of links; let last = last">
+			<fudis-link
+				[disabled]="last"
+				[color]="last ? 'default' : 'primary'"
+				[routerLinkUrl]="link.url"
+				*ngIf="link.url"
+				[linkTitle]="link.label"
+				[attr.aria-current]="last ? 'page' : null" />
+			<fudis-icon class="fudis-breadcrumbs__icon" [icon]="'chevron'" *ngIf="!last" />
+		</li>
+	</ul>
+</nav>
