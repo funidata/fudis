@@ -7,7 +7,7 @@
 		[value]="_checkboxGroup.formGroup.controls[controlName].value"
 		[name]="this._checkboxGroup.id"
 		[attr.aria-describedBy]="_checkboxGroup.id + '_guidance'"
-		[attr.aria-disabled]="_checkboxGroup.formGroup.controls[controlName].disabled"
+		[attr.aria-disabled]="_checkboxGroup.formGroup.controls[controlName].disabled ? true : null"
 		[attr.checked]="_checkboxGroup.formGroup.controls[controlName].value ? true : null"
 		[attr.aria-invalid]="
 			_checkboxGroup.formGroup.touched && (_checkboxGroup.formGroup.invalid || _checkboxGroup.invalidState)
