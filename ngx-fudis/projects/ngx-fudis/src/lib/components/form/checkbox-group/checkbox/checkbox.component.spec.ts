@@ -1,13 +1,13 @@
 // eslint-disable-next-line max-classes-per-file
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
-
+import { By } from '@angular/platform-browser';
 import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoint.service';
 import { FudisGridService } from '../../../../services/grid/grid.service';
 import { ContentDirective } from '../../../../directives/content-projection/content/content.directive';
-import { FudisCheckboxGroupFormGroup } from '../../../../types/forms';
+import { FudisCheckboxGroupFormGroup, FudisCheckboxOption } from '../../../../types/forms';
 import { FudisGroupValidator } from '../../../../utilities/form/validators';
 import { CheckboxGroupComponent } from '../checkbox-group.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
@@ -64,8 +64,6 @@ class MockContentComponent implements OnInit {
 }
 
 describe('CheckboxComponent', () => {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	let containerComponent: MockContainerComponent;
 	let fixture: ComponentFixture<MockContainerComponent> | ComponentFixture<CheckboxComponent>;
 
 	beforeEach(async () => {
@@ -90,12 +88,11 @@ describe('CheckboxComponent', () => {
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(MockContainerComponent);
-		containerComponent = fixture.componentInstance;
 
 		fixture.detectChanges();
 	});
 
-	fit('should create checkbox without checked status, when control is null', () => {
+	it('should create as unchecked, when control is null', () => {
 		const nullCheckbox = fixture.nativeElement.querySelector('[ng-reflect-control-name="apple"]');
 
 		const inputValue: string | null | undefined = nullCheckbox.querySelector('input').getAttribute('value');
@@ -113,7 +110,7 @@ describe('CheckboxComponent', () => {
 		expect(checkedIcon).toBeNull();
 	});
 
-	it('should create checkbox without checked status, when control is false', () => {
+	it('should create as unchecked, when control is false', () => {
 		const falseCheckbox = fixture.nativeElement.querySelector('[ng-reflect-control-name="fairTradeBanana"]');
 
 		const inputValue: string | null | undefined = falseCheckbox.querySelector('input').getAttribute('value');
@@ -124,7 +121,7 @@ describe('CheckboxComponent', () => {
 		expect(checkedIcon).toBeNull();
 	});
 
-	it('should create checkbox without checked status, when control value is undefined', () => {
+	it('should create unchecked, when control value is undefined', () => {
 		const undefinedCheckbox = fixture.nativeElement.querySelector('[ng-reflect-control-name="orange"]');
 
 		const inputValue: string | null | undefined = undefinedCheckbox.querySelector('input').getAttribute('value');
@@ -135,7 +132,7 @@ describe('CheckboxComponent', () => {
 		expect(checkedIcon).toBeNull();
 	});
 
-	it('should create with checked status, if control value is true', () => {
+	it('should create as checked, when control value is true', () => {
 		const checkedCheckbox = fixture.nativeElement.querySelector('[ng-reflect-control-name="pear"]');
 
 		const checkedIcon = checkedCheckbox.querySelector('fudis-icon[ng-reflect-icon="check-small"]');
@@ -146,7 +143,7 @@ describe('CheckboxComponent', () => {
 		expect(inputValue).toEqual('true');
 	});
 
-	it('should create with disabled status, if control is disabled', () => {
+	it('should create with disabled status, if control is set as disabled', () => {
 		const checkedCheckbox = fixture.nativeElement.querySelector('[ng-reflect-control-name="pineapple"]');
 
 		const checkedIcon = checkedCheckbox.querySelector('fudis-icon[ng-reflect-icon="check-small"]');
@@ -154,8 +151,6 @@ describe('CheckboxComponent', () => {
 		const inputElement = checkedCheckbox.querySelector('input');
 
 		const inputValue: string | null | undefined = inputElement.getAttribute('value');
-
-		console.log(inputElement);
 
 		const inputDisabled = inputElement.getAttribute('disabled');
 		const inputAriaDisabled = inputElement.getAttribute('aria-disabled');
@@ -173,4 +168,63 @@ describe('CheckboxComponent', () => {
 
 		expect(labelText).toEqual('Fair trade banana');
 	});
+
+	it('should have proper CSS classes before, during and after when input focused', () => {
+		const checkboxComponent = fixture.nativeElement.querySelector(
+			'[ng-reflect-control-name="fairTradeBanana"] .fudis-checkbox'
+		);
+
+		const labelBox: HTMLSpanElement = checkboxComponent.querySelector('.fudis-checkbox__content__box');
+
+		expect(labelBox.className).toEqual('fudis-checkbox__content__box');
+
+		const input: HTMLInputElement = checkboxComponent.querySelector('input');
+
+		input.dispatchEvent(new Event('focus'));
+
+		fixture.detectChanges();
+
+		expect(labelBox.className).toEqual('fudis-checkbox__content__box fudis-checkbox__content__box--focused');
+
+		input.dispatchEvent(new Event('blur'));
+		fixture.detectChanges();
+
+		expect(labelBox.className).toEqual('fudis-checkbox__content__box');
+	});
+
+	it('should display the check icon and emit handleChange() when clicking component', waitForAsync(() => {
+		const checkboxComponentToSpy = fixture.debugElement.query(By.directive(CheckboxComponent)).componentInstance;
+
+		const optionToMatch: FudisCheckboxOption = {
+			id: 'fudis-checkboxGroup-1-checkbox-1',
+			groupName: 'fudis-checkboxGroup-1',
+			controlName: 'apple',
+			label: 'Apple',
+			value: true,
+		};
+
+		let correctOptionReceived = false;
+
+		checkboxComponentToSpy.handleChange.subscribe((value: FudisCheckboxOption) => {
+			if (JSON.stringify(optionToMatch) === JSON.stringify(value)) {
+				correctOptionReceived = true;
+			}
+		});
+
+		const input: HTMLInputElement = fixture.debugElement.nativeElement.querySelector(
+			'input#fudis-checkboxGroup-1-checkbox-1'
+		);
+
+		input.dispatchEvent(new MouseEvent('click'));
+
+		fixture.detectChanges();
+
+		const icon = fixture.nativeElement.querySelector('[ng-reflect-control-name="apple"] fudis-icon');
+
+		const inputValue = input.getAttribute('value');
+
+		expect(correctOptionReceived).toEqual(true);
+		expect(inputValue).toEqual('true');
+		expect(icon).toBeDefined();
+	}));
 });
