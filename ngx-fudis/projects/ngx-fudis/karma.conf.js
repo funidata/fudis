@@ -17,6 +17,7 @@ module.exports = function (config) {
       "/calendar.svg": "/base/src/lib/assets/icons/calendar.svg",
 			"/alert.svg": "/base/src/lib/assets/icons/alert.svg",
 			"/check-small.svg": "/base/src/lib/assets/icons/check-small.svg",
+			"/alert-fill.svg": "/base/src/lib/assets/icons/alert-fill.svg",
    },
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
