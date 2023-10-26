@@ -24,7 +24,7 @@ export default {
 
 const Template: StoryFn<BreadcrumbsComponent> = (args: BreadcrumbsComponent) => ({
 	props: args,
-	template: '<fudis-breadcrumbs [links]="links" [breadcrumbsLabel]="breadcrumbsLabel"></fudis-breadcrumbs>',
+	template: '<fudis-breadcrumbs [links]="links" [label]="label"></fudis-breadcrumbs>',
 });
 
 export const Breadcrumbs = Template.bind({});
@@ -34,5 +34,5 @@ Breadcrumbs.args = {
 		{ label: 'Breadcrumbs', url: '/components/breadcrumbs' },
 		{ label: 'Documentation', url: '/components/breadcrumbs/documentation' },
 	],
-	breadcrumbsLabel: 'Fudis Storybook documentation',
+	label: 'Fudis Storybook documentation',
 };

@@ -1,4 +1,4 @@
-<nav [attr.aria-label]="_breadcrumbsPrefix + ': ' + breadcrumbsLabel" *ngIf="links.length > 0">
+<nav [attr.aria-label]="_breadcrumbsPrefix + ': ' + label" *ngIf="links.length > 0">
 	<ul class="fudis-breadcrumbs">
 		<li class="fudis-breadcrumbs__item" *ngFor="let link of links; let last = last">
 			<fudis-link

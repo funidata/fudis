@@ -18,7 +18,7 @@ export class BreadcrumbsComponent {
 	/**
 	 * Label to attach to aria-label
 	 */
-	@Input({ required: true }) breadcrumbsLabel: string;
+	@Input({ required: true }) label: string;
 
 	/**
 	 * Breadcrumb item array
