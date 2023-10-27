@@ -32,7 +32,7 @@ import { FudisFocusService } from '../../services/focus/focus.service';
  * <fudis-link
  *     [href]="https://www.example.com"
  *     [isExternalLink]="true"
- * 	color="default">
+ * 	[color]="'default'">
  * </fudis-link>
  * ```
  */
