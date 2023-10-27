@@ -61,11 +61,6 @@ export class LinkComponent implements AfterViewInit {
 	@ViewChild('linkRef') linkRef: ElementRef;
 
 	/**
-	 * Determines if the link is disabled or not. When disabled, the link won't be interactive.
-	 */
-	@Input() disabled: boolean = false;
-
-	/**
 	 * Link URL using native href
 	 */
 	@Input() href: string;
