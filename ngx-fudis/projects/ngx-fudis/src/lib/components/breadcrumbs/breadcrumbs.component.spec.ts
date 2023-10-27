@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
-import { MockComponent } from 'ng-mocks';
+import { MockComponents } from 'ng-mocks';
 import { BreadcrumbsComponent } from './breadcrumbs.component';
 import { LinkComponent } from '../link/link.component';
 import { IconComponent } from '../icon/icon.component';
+import { BodyTextComponent } from '../typography/body-text/body-text.component';
 
 describe('BreadcrumbsComponent', () => {
 	let component: BreadcrumbsComponent;
@@ -12,7 +13,7 @@ describe('BreadcrumbsComponent', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			declarations: [BreadcrumbsComponent, LinkComponent, MockComponent(IconComponent)],
+			declarations: [BreadcrumbsComponent, LinkComponent, MockComponents(IconComponent, BodyTextComponent)],
 			imports: [RouterTestingModule],
 		});
 		fixture = TestBed.createComponent(BreadcrumbsComponent);
@@ -28,7 +29,8 @@ describe('BreadcrumbsComponent', () => {
 		fixture.detectChanges();
 		const breadcrumbAnchors = fixture.debugElement.queryAll(By.css('a'));
 
-		expect(breadcrumbAnchors.length).toBe(3);
+		// Finds two link elements since the last one is always body-text element
+		expect(breadcrumbAnchors.length).toBe(2);
 	});
 
 	it('should display the correct breadcrumb labels', () => {
@@ -37,24 +39,11 @@ describe('BreadcrumbsComponent', () => {
 			{ label: 'Breadcrumbs', url: '/breadcrumbs' },
 		];
 		fixture.detectChanges();
-		const breadcrumbItems = fixture.debugElement.queryAll(By.css('a'));
+		const breadcrumbAnchorItems = fixture.debugElement.queryAll(By.css('a'));
+		const breadcrumbTextItems = fixture.debugElement.queryAll(By.css('fudis-body-text'));
 
-		expect(breadcrumbItems[0].nativeElement.textContent).toContain('Components');
+		expect(breadcrumbAnchorItems[0].nativeElement.textContent).toContain('Components');
 
-		expect(breadcrumbItems[1].nativeElement.textContent).toContain('Breadcrumbs');
-	});
-
-	it('should disable the last breadcrumb item', () => {
-		component.links = [
-			{ label: 'Components', url: '/components' },
-			{ label: 'Breadcrumbs', url: '/breadcrumbs' },
-		];
-		fixture.detectChanges();
-
-		const breadcrumbAnchors = fixture.debugElement.queryAll(By.css('a'));
-
-		expect(
-			breadcrumbAnchors[breadcrumbAnchors.length - 1].nativeElement.classList.contains('fudis-link__anchor--disabled')
-		).toBeTruthy();
+		expect(breadcrumbTextItems[0].nativeElement.textContent).toContain('Breadcrumbs');
 	});
 });
