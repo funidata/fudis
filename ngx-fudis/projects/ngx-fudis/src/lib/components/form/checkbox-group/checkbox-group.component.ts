@@ -21,11 +21,6 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 	@Input() required: boolean | undefined = undefined;
 
 	/**
-	 * Set Checkbox Group's visual style and ARIA attribute as invalid. Does not override if control.invalid is true.
-	 */
-	@Input() invalidState: boolean = false;
-
-	/**
 	 * Width size of the group - defaults to large.
 	 */
 	@Input() size: FudisInputSize = 'lg';
