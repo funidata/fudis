@@ -22,17 +22,27 @@ export default {
 	argTypes: {},
 } as Meta;
 
+const html = String.raw;
+
+const links = [
+	{ label: 'Components', url: '/Components' },
+	{ label: 'Breadcrumbs', url: '/components/breadcrumbs' },
+	{ label: 'Documentation', url: '/components/breadcrumbs/documentation' },
+];
+
 const Template: StoryFn<BreadcrumbsComponent> = (args: BreadcrumbsComponent) => ({
-	props: args,
-	template: '<fudis-breadcrumbs [links]="links" [label]="label"></fudis-breadcrumbs>',
+	props: {
+		...args,
+		links,
+	},
+	template: html`
+		<fudis-breadcrumbs [label]="label">
+			<fudis-breadcrumbs-item *ngFor="let link of links" [label]="link.label" [url]="link.url" />
+		</fudis-breadcrumbs>
+	`,
 });
 
 export const Breadcrumbs = Template.bind({});
 Breadcrumbs.args = {
-	links: [
-		{ label: 'Components', url: '/Components' },
-		{ label: 'Breadcrumbs', url: '/components/breadcrumbs' },
-		{ label: 'Documentation', url: '/components/breadcrumbs/documentation' },
-	],
 	label: 'Fudis Storybook documentation',
 };

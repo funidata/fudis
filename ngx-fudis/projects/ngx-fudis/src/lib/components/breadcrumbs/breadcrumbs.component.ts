@@ -1,6 +1,6 @@
-import { Component, Input, ChangeDetectionStrategy, effect } from '@angular/core';
-import { FudisBreadcrumb } from '../../types/miscellaneous';
+import { Component, Input, ChangeDetectionStrategy, effect, OnInit } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
+import { FudisIdService } from '../../services/id/id.service';
 
 @Component({
 	selector: 'fudis-breadcrumbs',
@@ -8,8 +8,11 @@ import { FudisTranslationService } from '../../services/translation/translation.
 	styleUrls: ['./breadcrumbs.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BreadcrumbsComponent {
-	constructor(private _translationService: FudisTranslationService) {
+export class BreadcrumbsComponent implements OnInit {
+	constructor(
+		private _translationService: FudisTranslationService,
+		private _idService: FudisIdService
+	) {
 		effect(() => {
 			this._breadcrumbsPrefix = this._translationService.getTranslations()().BREADCRUMBS.PREFIX;
 		});
@@ -20,13 +23,19 @@ export class BreadcrumbsComponent {
 	 */
 	@Input({ required: true }) label: string;
 
+	public id: string;
+
 	/**
 	 * Breadcrumb item array
 	 */
-	@Input({ required: true }) links: FudisBreadcrumb[] = [];
+	// @Input({ required: true }) links: FudisBreadcrumb[] = [];
 
 	/**
 	 * Prefix for aria-label from Fudis translation keys
 	 */
 	protected _breadcrumbsPrefix: string;
+
+	ngOnInit(): void {
+		this.id = this._idService.getNewParentId('breadcrumbs');
+	}
 }

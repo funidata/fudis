@@ -42,11 +42,6 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
 	@Input() titleSize: 'md' | 'sm' = 'md';
 
 	/**
-	 * Html id attribute
-	 */
-	protected _id: string;
-
-	/**
 	 * Fudis translation key for required text
 	 */
 	protected _requiredText: string;

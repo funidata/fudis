@@ -40,13 +40,12 @@ export class CheckboxComponent implements OnInit {
 	 */
 	protected _focused = false;
 
-	/**
-	 * Html id attribute
-	 */
-	protected _id: string;
-
 	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('checkbox');
+		if (this.id) {
+			this._idService.addNewChildId('checkboxGroup', this._checkboxGroup.id, this.id);
+		} else {
+			this.id = this._idService.getNewChildId('checkboxGroup', this._checkboxGroup.id);
+		}
 	}
 
 	/**
@@ -54,7 +53,7 @@ export class CheckboxComponent implements OnInit {
 	 */
 	protected _onChange(): void {
 		const optionToEmit: FudisCheckboxOption = {
-			id: this._id,
+			id: this.id,
 			groupName: this._checkboxGroup.id,
 			controlName: this.controlName,
 			label: this.label,

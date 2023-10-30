@@ -41,7 +41,11 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	@Input() required: boolean | undefined = undefined;
 
 	ngOnInit() {
-		this._id = this.id ?? this._idService.getNewId('radioButtonGroup');
+		if (this.id) {
+			this._idService.addNewParentId('radiobuttonGroup', this.id);
+		} else {
+			this.id = this._idService.getNewParentId('radiobuttonGroup');
+		}
 
 		if (this.options.length < 2) {
 			throw new Error(

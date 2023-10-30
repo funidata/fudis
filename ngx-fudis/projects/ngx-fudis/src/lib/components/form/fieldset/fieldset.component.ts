@@ -114,7 +114,7 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	private _fieldsetInfo: FudisFormErrorSummarySection;
 
 	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('fieldset');
+		this.id = this.id ?? this._idService.getNewId('fieldset');
 		this._title = this.title;
 		this.addToErrorSummary();
 		this._setClasses();
@@ -127,7 +127,7 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	}
 
 	ngOnChanges(): void {
-		if (this.title !== this._title && this._id) {
+		if (this.title !== this._title && this.id) {
 			this._title = this.title;
 			this.addToErrorSummary();
 		}
@@ -137,7 +137,7 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	addToErrorSummary(): void {
 		if (this.errorSummaryBreadcrumb) {
 			this._fieldsetInfo = {
-				id: this._id,
+				id: this.id,
 				title: this._title,
 			};
 

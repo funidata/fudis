@@ -204,6 +204,7 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		BadgeComponent,
 		BodyTextComponent,
 		BreadcrumbsComponent,
+		BreadcrumbsItemComponent,
 		ButtonComponent,
 		CheckboxComponent,
 		CheckboxGroupComponent,
