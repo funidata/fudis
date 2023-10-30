@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test --source-map=false",
+    "test": "ng test",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "STORYBOOK_FUDIS_VERSION='' ng run storybook:start",
     "build-storybook": "npm run docs:json && ng run storybook:build",
