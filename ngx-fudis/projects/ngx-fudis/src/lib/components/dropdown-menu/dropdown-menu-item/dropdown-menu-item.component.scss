@@ -62,10 +62,6 @@
 			width: spacing.$spacing-sm;
 			height: spacing.$spacing-sm;
 
-			:focus {
-				@include focus.focus-checkbox;
-			}
-
 			svg {
 				@include colorMixins.bg-color('white');
 			}
@@ -103,7 +99,7 @@
 			place-content: center;
 
 			&:focus {
-				@include focus.focus-generic;
+				@include focus.focus-checkbox;
 			}
 		}
 
