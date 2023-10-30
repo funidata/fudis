@@ -185,7 +185,7 @@ describe('CheckboxComponent', () => {
 			const checkboxComponentToSpy = fixture.debugElement.query(By.directive(CheckboxComponent)).componentInstance;
 
 			const optionToMatch: FudisCheckboxOption = {
-				id: 'fudis-checkboxGroup-1-checkbox-1',
+				id: 'fudis-checkboxGroup-1-item-1',
 				groupName: 'fudis-checkboxGroup-1',
 				controlName: 'apple',
 				label: 'Apple',
@@ -201,7 +201,7 @@ describe('CheckboxComponent', () => {
 			});
 
 			const input: HTMLInputElement = fixture.debugElement.nativeElement.querySelector(
-				'input#fudis-checkboxGroup-1-checkbox-1'
+				'input#fudis-checkboxGroup-1-item-1'
 			);
 
 			input.dispatchEvent(new MouseEvent('click'));
