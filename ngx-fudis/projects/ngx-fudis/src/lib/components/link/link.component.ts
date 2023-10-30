@@ -14,29 +14,6 @@ import { FudisTranslationService } from '../../services/translation/translation.
 import { FudisTranslationConfig } from '../../types/miscellaneous';
 import { FudisFocusService } from '../../services/focus/focus.service';
 
-/**
- * Example usages:
- *
- * Inside another element e.g. fudis-heading
- * ```
- * <fudis-heading [level]="3">
- * 		<fudis-link
- *     		[href]="/path-to"
- *     		[linkTitle]="'Heading link'">
- * 		</fudis-link>
- * </fudis-heading>
- * ```
- *
- * External link with icon and assistive aria-label
- * ```
- * <fudis-link
- *     [href]="https://www.example.com"
- *     [isExternalLink]="true"
- * 	[color]="'default'">
- * </fudis-link>
- * ```
- */
-
 @Component({
 	selector: 'fudis-link',
 	templateUrl: './link.component.html',
@@ -97,8 +74,7 @@ export class LinkComponent implements AfterViewInit {
 	@Input() isExternalLink: boolean = false;
 
 	/**
-	 * Link uses primary blue color.
-	 * Option to set color to 'default' which is a dark gray color. It is mainly used in links inside notification component but can be added to any link component if necessary.
+	 * Link color
 	 */
 	@Input() color: 'primary' | 'default' | 'white' = 'primary';
 
