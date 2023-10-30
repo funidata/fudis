@@ -19,7 +19,6 @@ import { IconComponent } from '../../icon/icon.component';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
-import { ButtonComponent } from '../../button/button.component';
 import { FudisDropdownMenuItemService } from '../../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 
 const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
@@ -36,13 +35,12 @@ const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
 @Component({
 	selector: 'fudis-mock-component',
 	template: `<fudis-checkbox-group
-			[formGroup]="testFromGroup"
-			[title]="'Choose minimum of one fruit'"
-			[required]="true">
-			<p class="do-not-find-me">This should not be shown</p>
-			<fudis-checkbox *ngFor="let option of options" [controlName]="option.controlName" [label]="option.label" />
-		</fudis-checkbox-group>
-		<fudis-button [label]="'Button outside group'" />`,
+		[formGroup]="testFromGroup"
+		[title]="'Choose minimum of one fruit'"
+		[required]="true">
+		<p class="do-not-find-me">This should not be shown</p>
+		<fudis-checkbox *ngFor="let option of options" [controlName]="option.controlName" [label]="option.label" />
+	</fudis-checkbox-group>`,
 })
 class MockContainerComponent {
 	public testFromGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
@@ -87,7 +85,6 @@ describe('CheckboxGroupComponent', () => {
 				GuidanceComponent,
 				IconComponent,
 				ErrorMessageComponent,
-				ButtonComponent,
 			],
 			providers: [FudisBreakpointService, FudisGridService, FudisDropdownMenuItemService],
 			imports: [ReactiveFormsModule],

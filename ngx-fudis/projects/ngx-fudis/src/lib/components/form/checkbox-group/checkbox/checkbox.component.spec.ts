@@ -82,11 +82,8 @@ describe('CheckboxComponent', () => {
 	describe('Determine checked status from formControl value', () => {
 		it('should create as unchecked, when control is null', () => {
 			const nullCheckbox = fixture.nativeElement.querySelector('[ng-reflect-control-name="apple"]');
-
-			const inputValue: string | null | undefined = nullCheckbox.querySelector('input').getAttribute('value');
-
 			const input = nullCheckbox.querySelector('input');
-
+			const inputValue: string | null | undefined = input.getAttribute('value');
 			const checkedIcon = nullCheckbox.querySelector('fudis-icon');
 
 			const inputDisabled = input.getAttribute('disabled');
@@ -127,7 +124,7 @@ describe('CheckboxComponent', () => {
 
 			const inputValue: string | null | undefined = checkedCheckbox.querySelector('input').getAttribute('value');
 
-			expect(checkedIcon).toBeDefined();
+			expect(checkedIcon).not.toBeNull();
 			expect(inputValue).toEqual('true');
 		});
 
@@ -141,10 +138,11 @@ describe('CheckboxComponent', () => {
 			const inputValue: string | null | undefined = inputElement.getAttribute('value');
 
 			const inputDisabled = inputElement.getAttribute('disabled');
+
 			const inputAriaDisabled = inputElement.getAttribute('aria-disabled');
 
-			expect(checkedIcon).toBeDefined();
-			expect(inputDisabled).toBeDefined();
+			expect(checkedIcon).toBeNull();
+			expect(inputDisabled).not.toBeNull();
 			expect(inputAriaDisabled).toEqual('true');
 			expect(inputValue).toEqual('false');
 		});
@@ -171,7 +169,6 @@ describe('CheckboxComponent', () => {
 			const input: HTMLInputElement = checkboxComponent.querySelector('input');
 
 			input.dispatchEvent(new Event('focus'));
-
 			fixture.detectChanges();
 
 			expect(labelBox.className).toEqual('fudis-checkbox__content__box fudis-checkbox__content__box--focused');
@@ -208,16 +205,14 @@ describe('CheckboxComponent', () => {
 			);
 
 			input.dispatchEvent(new MouseEvent('click'));
-
 			fixture.detectChanges();
 
 			const icon = fixture.nativeElement.querySelector('[ng-reflect-control-name="apple"] fudis-icon');
-
 			const inputValue = input.getAttribute('value');
 
 			expect(correctOptionReceived).toEqual(true);
 			expect(inputValue).toEqual('true');
-			expect(icon).toBeDefined();
+			expect(icon).not.toBeNull();
 		}));
 	});
 });
