@@ -57,7 +57,7 @@ export type FudisLanguageAbbr = 'fi' | 'sv' | 'en';
 
 export interface FudisTranslationConfig {
 	BREADCRUMBS: {
-		// Universal prefix to notify user about breadcrumbs navigation
+		// Prefix visible to screen reader
 		PREFIX: string;
 	};
 	// Shown with form inputs
