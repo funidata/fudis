@@ -7,4 +7,27 @@
 	flex-wrap: wrap;
 	align-items: center;
 	list-style: none;
+
+	&-item-host {
+		&:not(:last-of-type) {
+			.fudis-breadcrumbs-item {
+				&__current {
+					display: none;
+				}
+			}
+		}
+
+		&:last-of-type {
+			.fudis-breadcrumbs-item {
+				&__current {
+					display: block;
+				}
+
+				&__link,
+				&__icon {
+					display: none;
+				}
+			}
+		}
+	}
 }

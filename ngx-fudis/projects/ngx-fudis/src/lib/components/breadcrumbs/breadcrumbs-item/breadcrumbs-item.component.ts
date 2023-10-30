@@ -1,4 +1,4 @@
-import { Component, Host, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Host, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FudisIdService } from '../../../services/id/id.service';
 import { BreadcrumbsComponent } from '../breadcrumbs.component';
 
@@ -6,12 +6,16 @@ import { BreadcrumbsComponent } from '../breadcrumbs.component';
 	selector: 'fudis-breadcrumbs-item',
 	templateUrl: './breadcrumbs-item.component.html',
 	styleUrls: ['./breadcrumbs-item.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.None,
 })
 export class BreadcrumbsItemComponent implements OnInit {
 	constructor(
 		private _idService: FudisIdService,
 		@Host() protected _breadCrumbs: BreadcrumbsComponent
 	) {}
+
+	@HostBinding('class') classes = 'fudis-breadcrumbs-item-host';
 
 	/**
 	 * Label to attach to aria-label

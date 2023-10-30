@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, effect, OnInit } from '@angular/core';
+import { Component, Input, effect, OnInit, ViewEncapsulation } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisIdService } from '../../services/id/id.service';
 
@@ -6,7 +6,7 @@ import { FudisIdService } from '../../services/id/id.service';
 	selector: 'fudis-breadcrumbs',
 	templateUrl: './breadcrumbs.component.html',
 	styleUrls: ['./breadcrumbs.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.None,
 })
 export class BreadcrumbsComponent implements OnInit {
 	constructor(
