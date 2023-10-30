@@ -19,6 +19,8 @@ import { AutocompleteComponent } from './components/form/autocomplete/autocomple
 import { AutocompleteMultiSelectComponent } from './components/autocomplete-multi-select/autocomplete-multi-select.component';
 import { AutocompleteMultiSelectSelectedItemChipComponent } from './components/autocomplete-multi-select/autocomplete-multi-select-selected-item-chip/autocomplete-multi-select-selected-item-chip.component';
 import { BadgeComponent } from './components/badge/badge.component';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { BreadcrumbsItemComponent } from './components/breadcrumbs/breadcrumbs-item/breadcrumbs-item.component';
 import { BodyTextComponent } from './components/typography/body-text/body-text.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/form/checkbox-group/checkbox/checkbox.component';
@@ -96,7 +98,6 @@ import { AlertComponent } from './components/alert/alert/alert.component';
 import { AlertGroupComponent } from './components/alert/alert-group/alert-group.component';
 import { FudisAlertService } from './services/alert/alert.service';
 import { FudisBreakpointService } from './services/breakpoint/breakpoint.service';
-import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
 	/*
@@ -112,6 +113,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
 		BadgeComponent,
 		BodyTextComponent,
 		BreadcrumbsComponent,
+		BreadcrumbsItemComponent,
 		ButtonComponent,
 		CheckboxComponent,
 		CheckboxGroupComponent,
