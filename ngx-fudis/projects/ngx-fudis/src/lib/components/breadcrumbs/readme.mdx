@@ -13,29 +13,38 @@ Breadcrumbs is essentially a navigation element.
 
 <Canvas of={BreadcrumbsStories.Breadcrumbs}></Canvas>
 
+```
+<fudis-breadcrumbs [label]="'My Lego Collection'">
+	<fudis-breadcrumbs-item [label]="'My Legos'" [url]="'/'"/>
+	<fudis-breadcrumbs-item [label]="'Genre'" [url]="'/genre'"/>
+	<fudis-breadcrumbs-item [label]="'Star Wars\u{2122}'" [url]="'/genre/star-wars'"/>
+	<fudis-breadcrumbs-item [label]="'UCS Imperial Star Destroyer\u{2122}'" [url]="'/genre/star-wars/set-75252'"/>
+</fudis-breadcrumbs-item>
+```
+
 ## Usage Guidelines
 
-#### Mandatory Properties
+Breadcrumbs organism is built using parent wrapper of Breadcrumbs Component `<fudis-breadcrumbs>` and adding Breadcrumbs Item Components `<fudis-breadcrumbs-item>` as its children.
 
-Necessary properties for Breadcrumbs Component are `links` and `label`.
+### Breadcrumbs - Parent Component
 
-`label` is used as aria-label and it should indicate in which breadcrumbs section user is, e.g. _"Shopping Cart"_. 
-Aria-label will automatically have a prefix _"Breadcrumbs: "_ which will be followed by the given label. 
+Necessary properties for Breadcrumbs Component is `label`.
 
-`links` is an array of FudisBreadcrumb objects with label and url properties.
+`label` is used as aria-label and it should describe the name of the section breadcrumbs consists from, e.g. _"My profile"_. 
+Aria-label will automatically have a prefix _"Breadcrumbs: "_ which will be followed by the given label.
 
-```
-FudisBreadcrumb {
- label: string;
- url: string;
-}
-```
+### Breadcrumbs Item - Child Component
+
+Breadcrumbs Item has two mandatory properties: `label` and `url`. Label is the visible label and url is the actual url for the Angular router.
+
+The last Breadcrumbs Item Component is always displayed as non-link and just plain text. This is achieved through CSS and doesn't require configuration from the app.
 
 
-### Accessibility
+## Accessibility
+- Breadcrumbs is a `nav` element containing `ul` list of Breadcrumbs Items
 - Aria-label is mandatory and will give additional information about the breadcrumbs
-- Each breadcrumb is a link
-- Current page is communicated
+- Each visible Breadcrumbs Item, except the last one, is a link
+- The last visible list item has `aria-current="page"` attribute
 
 ## Properties
 

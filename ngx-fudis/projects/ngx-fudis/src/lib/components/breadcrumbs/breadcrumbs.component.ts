@@ -23,19 +23,18 @@ export class BreadcrumbsComponent implements OnInit {
 	 */
 	@Input({ required: true }) label: string;
 
-	public id: string;
-
-	/**
-	 * Breadcrumb item array
-	 */
-	// @Input({ required: true }) links: FudisBreadcrumb[] = [];
-
 	/**
 	 * Prefix for aria-label from Fudis translation keys
 	 */
 	protected _breadcrumbsPrefix: string;
 
+	protected _id: string;
+
 	ngOnInit(): void {
-		this.id = this._idService.getNewParentId('breadcrumbs');
+		this._id = this._idService.getNewParentId('breadcrumbs');
+	}
+
+	getId(): string {
+		return this._id;
 	}
 }

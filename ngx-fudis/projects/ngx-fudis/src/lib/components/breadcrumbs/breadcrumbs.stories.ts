@@ -25,9 +25,10 @@ export default {
 const html = String.raw;
 
 const links = [
-	{ label: 'Components', url: '/Components' },
-	{ label: 'Breadcrumbs', url: '/components/breadcrumbs' },
-	{ label: 'Documentation', url: '/components/breadcrumbs/documentation' },
+	{ label: 'My Legos', url: '/my-legos' },
+	{ label: 'Genre', url: '/my-legos/genre' },
+	{ label: 'Star Wars\u{2122}', url: '/my-legos/genre/star-wars' },
+	{ label: 'UCS Imperial Star Destroyer\u{2122}', url: '/my-legos/genre/star-wars/set-75252' },
 ];
 
 const Template: StoryFn<BreadcrumbsComponent> = (args: BreadcrumbsComponent) => ({
@@ -44,5 +45,5 @@ const Template: StoryFn<BreadcrumbsComponent> = (args: BreadcrumbsComponent) => 
 
 export const Breadcrumbs = Template.bind({});
 Breadcrumbs.args = {
-	label: 'Fudis Storybook documentation',
+	label: 'My Lego Collection',
 };
