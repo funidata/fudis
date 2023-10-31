@@ -11,7 +11,7 @@ import {
 	providedIn: 'root',
 })
 export class FudisIdService {
-	private _idList: FudisIdComponentAmounts = {
+	private _componentList: FudisIdComponentAmounts = {
 		alert: 0,
 		autocomplete: 0,
 		button: 0,
@@ -29,7 +29,7 @@ export class FudisIdService {
 		textInput: 0,
 	};
 
-	private _familyIdList: FudisIdFamilyData = {
+	private _familyData: FudisIdFamilyData = {
 		breadcrumbs: [],
 		checkboxGroup: [],
 		radiobuttonGroup: [],
@@ -41,11 +41,11 @@ export class FudisIdService {
 			children: [],
 		};
 
-		this._familyIdList[componentType].push(newItem);
+		this._familyData[componentType].push(newItem);
 	}
 
 	public addNewChildId(parentType: FudisIdParent, parentId: string, newId: string) {
-		this._familyIdList[parentType].forEach((item) => {
+		this._familyData[parentType].forEach((item) => {
 			if (item.parent === parentId) {
 				item.children.push(newId);
 			}
@@ -53,7 +53,7 @@ export class FudisIdService {
 	}
 
 	public getNewParentId(componentType: FudisIdParent): string {
-		const orderNumber = this._familyIdList[componentType].length + 1;
+		const orderNumber = this._familyData[componentType].length + 1;
 
 		const newId = `fudis-${componentType}-${orderNumber}`;
 
@@ -62,14 +62,14 @@ export class FudisIdService {
 			children: [],
 		};
 
-		this._familyIdList[componentType].push(newItem);
+		this._familyData[componentType].push(newItem);
 
 		return newId;
 	}
 
 	public getNewChildId(parentType: FudisIdParent, parentId: string): string {
 		let newId = '';
-		this._familyIdList[parentType].forEach((item) => {
+		this._familyData[parentType].forEach((item) => {
 			if (item.parent === parentId) {
 				const orderNumber = item.children.length + 1;
 				newId = `${parentId}-item-${orderNumber}`;
@@ -80,13 +80,21 @@ export class FudisIdService {
 		return newId;
 	}
 
-	public getNewId(componentType: FudisIdComponentType): string {
-		const orderNumber = this._idList[componentType] + 1;
+	public getFamilyData(): FudisIdFamilyData {
+		return this._familyData;
+	}
 
-		this._idList = { ...this._idList, [componentType]: orderNumber };
+	public getNewId(componentType: FudisIdComponentType): string {
+		const orderNumber = this._componentList[componentType] + 1;
+
+		this._componentList = { ...this._componentList, [componentType]: orderNumber };
 
 		const idToReturn = `fudis-${componentType}-${orderNumber}`;
 
 		return idToReturn;
+	}
+
+	public getComponentAmounts(): FudisIdComponentAmounts {
+		return this._componentList;
 	}
 }

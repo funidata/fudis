@@ -2,24 +2,29 @@
  * File containing types used in FudisIdService
  */
 
-export type FudisIdComponentType =
-	| 'alert'
-	| 'autocomplete'
-	| 'button'
-	| 'autocompleteMultiSelect'
-	| 'datepicker'
-	| 'daterange'
-	| 'dropdown'
-	| 'expandable'
-	| 'fieldset'
-	| 'form'
-	| 'heading'
-	| 'inputWithLanguageOptions'
-	| 'section'
-	| 'textArea'
-	| 'textInput';
+export const fudisIdComponents = [
+	'alert',
+	'autocomplete',
+	'button',
+	'autocompleteMultiSelect',
+	'datepicker',
+	'daterange',
+	'dropdown',
+	'expandable',
+	'fieldset',
+	'form',
+	'heading',
+	'inputWithLanguageOptions',
+	'section',
+	'textArea',
+	'textInput',
+] as const;
 
-export type FudisIdParent = 'breadcrumbs' | 'checkboxGroup' | 'radiobuttonGroup';
+export type FudisIdComponentType = (typeof fudisIdComponents)[number];
+
+export const fudisIdParents = ['breadcrumbs', 'checkboxGroup', 'radiobuttonGroup'] as const;
+
+export type FudisIdParent = (typeof fudisIdParents)[number];
 
 export type FudisIdFamily = {
 	parent: string;
