@@ -104,7 +104,7 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	protected _results: FudisDropdownOption[] = [];
 
 	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('autocompleteMultiSelect');
+		this._id = this.id ?? this._idService.getNewId('autocomplete-multi-select');
 		this._results = [...this.options];
 	}
 

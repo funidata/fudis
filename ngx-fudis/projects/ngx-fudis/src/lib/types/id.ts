@@ -6,7 +6,7 @@ export const fudisIdComponents = [
 	'alert',
 	'autocomplete',
 	'button',
-	'autocompleteMultiSelect',
+	'autocomplete-multi-select',
 	'datepicker',
 	'daterange',
 	'dropdown',
@@ -14,15 +14,15 @@ export const fudisIdComponents = [
 	'fieldset',
 	'form',
 	'heading',
-	'inputWithLanguageOptions',
+	'input-with-language-options',
 	'section',
-	'textArea',
-	'textInput',
+	'text-area',
+	'text-input',
 ] as const;
 
 export type FudisIdComponentType = (typeof fudisIdComponents)[number];
 
-export const fudisIdParents = ['breadcrumbs', 'checkboxGroup', 'radiobuttonGroup'] as const;
+export const fudisIdParents = ['breadcrumbs', 'checkbox-group', 'radio-button-group'] as const;
 
 export type FudisIdParent = (typeof fudisIdParents)[number];
 

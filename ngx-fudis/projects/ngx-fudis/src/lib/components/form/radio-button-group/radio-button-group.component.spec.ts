@@ -6,6 +6,7 @@ import { FudisRadioButtonOption } from '../../../types/forms';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
+import { FudisIdService } from '../../../services/id/id.service';
 
 const testFormControl: FormControl = new FormControl('capybara');
 
@@ -31,10 +32,11 @@ describe('RadioButtonGroupComponent', () => {
 		await TestBed.configureTestingModule({
 			declarations: [
 				RadioButtonGroupComponent,
-				MockComponent(RadioButtonComponent),
+				RadioButtonComponent,
 				MockComponent(FieldSetComponent),
 				MockComponent(GuidanceComponent),
 			],
+			providers: [FudisIdService],
 			imports: [ReactiveFormsModule],
 		}).compileComponents();
 	});

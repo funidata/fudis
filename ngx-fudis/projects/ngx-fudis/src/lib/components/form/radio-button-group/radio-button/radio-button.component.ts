@@ -1,5 +1,7 @@
-import { Component, Input, Output, EventEmitter, HostBinding, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostBinding, ViewEncapsulation, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+
+import { FudisIdService } from '../../../../services/id/id.service';
 
 @Component({
 	selector: 'fudis-radio-button',
@@ -7,7 +9,9 @@ import { FormControl } from '@angular/forms';
 	styleUrls: ['./radio-button.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class RadioButtonComponent {
+export class RadioButtonComponent implements OnInit {
+	constructor(private _idService: FudisIdService) {}
+
 	@HostBinding('class') classes = 'fudis-radio-button-host';
 
 	/*
@@ -30,10 +34,12 @@ export class RadioButtonComponent {
 	 */
 	@Input({ required: true }) name: string;
 
+	@Input({ required: true }) groupId: string;
+
 	/*
 	 * Id for single Radio Button
 	 */
-	@Input() id: string;
+	@Input() id: string | undefined;
 
 	/*
 	 * If Radio Button group of same name selection is required
@@ -59,6 +65,14 @@ export class RadioButtonComponent {
 	 * Checked input change output
 	 */
 	@Output() radioButtonChange = new EventEmitter<string>();
+
+	ngOnInit(): void {
+		if (this.id) {
+			this._idService.addNewChildId('radio-button-group', this.groupId, this.id);
+		} else {
+			this.id = this._idService.getNewChildId('radio-button-group', this.groupId);
+		}
+	}
 
 	handleBlur(): void {
 		this.radioButtonBlur.emit();

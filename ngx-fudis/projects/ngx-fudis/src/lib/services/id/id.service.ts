@@ -15,7 +15,7 @@ export class FudisIdService {
 		alert: 0,
 		autocomplete: 0,
 		button: 0,
-		autocompleteMultiSelect: 0,
+		'autocomplete-multi-select': 0,
 		datepicker: 0,
 		daterange: 0,
 		dropdown: 0,
@@ -23,16 +23,16 @@ export class FudisIdService {
 		fieldset: 0,
 		form: 0,
 		heading: 0,
-		inputWithLanguageOptions: 0,
+		'input-with-language-options': 0,
 		section: 0,
-		textArea: 0,
-		textInput: 0,
+		'text-area': 0,
+		'text-input': 0,
 	};
 
 	private _familyData: FudisIdFamilyData = {
 		breadcrumbs: [],
-		checkboxGroup: [],
-		radiobuttonGroup: [],
+		'checkbox-group': [],
+		'radio-button-group': [],
 	};
 
 	public addNewParentId(componentType: FudisIdParent, id: string) {

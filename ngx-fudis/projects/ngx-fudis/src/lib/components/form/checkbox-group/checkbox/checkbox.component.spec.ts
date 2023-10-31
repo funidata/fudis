@@ -185,23 +185,23 @@ describe('CheckboxComponent', () => {
 			const checkboxComponentToSpy = fixture.debugElement.query(By.directive(CheckboxComponent)).componentInstance;
 
 			const optionToMatch: FudisCheckboxOption = {
-				id: 'fudis-checkboxGroup-1-item-1',
-				groupName: 'fudis-checkboxGroup-1',
+				id: 'fudis-checkbox-group-1-item-1',
+				groupName: 'fudis-checkbox-group-1',
 				controlName: 'apple',
 				label: 'Apple',
 				value: true,
 			};
 
-			let correctOptionReceived = false;
+			let correctOptionReceived = 'optionToMatch was not same!';
 
 			checkboxComponentToSpy.handleChange.subscribe((value: FudisCheckboxOption) => {
 				if (JSON.stringify(optionToMatch) === JSON.stringify(value)) {
-					correctOptionReceived = true;
+					correctOptionReceived = 'all is fine';
 				}
 			});
 
 			const input: HTMLInputElement = fixture.debugElement.nativeElement.querySelector(
-				'input#fudis-checkboxGroup-1-item-1'
+				'input#fudis-checkbox-group-1-item-1'
 			);
 
 			input.dispatchEvent(new MouseEvent('click'));
@@ -210,7 +210,7 @@ describe('CheckboxComponent', () => {
 			const icon = fixture.nativeElement.querySelector('[ng-reflect-control-name="apple"] fudis-icon');
 			const inputValue = input.getAttribute('value');
 
-			expect(correctOptionReceived).toEqual(true);
+			expect(correctOptionReceived).toEqual('all is fine');
 			expect(inputValue).toEqual('true');
 			expect(icon).not.toBeNull();
 		}));

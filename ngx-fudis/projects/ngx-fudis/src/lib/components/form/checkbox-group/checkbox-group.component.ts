@@ -32,9 +32,9 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 
 	public ngOnInit() {
 		if (this.id) {
-			this._idService.addNewParentId('checkboxGroup', this.id);
+			this._idService.addNewParentId('checkbox-group', this.id);
 		} else {
-			this.id = this._idService.getNewParentId('checkboxGroup');
+			this.id = this._idService.getNewParentId('checkbox-group');
 		}
 
 		if (this.formGroup.touched) {

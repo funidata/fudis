@@ -8,7 +8,8 @@
 	<ng-template fudisContent type="fieldset">
 		<fudis-radio-button
 			*ngFor="let option of options; let index = index"
-			[id]="option.id"
+			[id]="option.id ? option.id : undefined"
+			[groupId]="id"
 			[name]="option.name"
 			[value]="option.value"
 			[viewValue]="option.viewValue"

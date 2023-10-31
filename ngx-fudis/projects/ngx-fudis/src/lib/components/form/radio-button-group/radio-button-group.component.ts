@@ -1,7 +1,6 @@
 import { Component, HostBinding, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { FudisRadioButtonOption, FudisFormErrors, FudisInputSize } from '../../../types/forms';
-
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 
 @Component({
@@ -42,9 +41,9 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 
 	ngOnInit() {
 		if (this.id) {
-			this._idService.addNewParentId('radiobuttonGroup', this.id);
+			this._idService.addNewParentId('radio-button-group', this.id);
 		} else {
-			this.id = this._idService.getNewParentId('radiobuttonGroup');
+			this.id = this._idService.getNewParentId('radio-button-group');
 		}
 
 		if (this.options.length < 2) {

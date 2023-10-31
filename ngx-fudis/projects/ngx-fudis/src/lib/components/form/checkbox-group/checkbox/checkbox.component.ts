@@ -42,9 +42,9 @@ export class CheckboxComponent implements OnInit {
 
 	ngOnInit(): void {
 		if (this.id) {
-			this._idService.addNewChildId('checkboxGroup', this._checkboxGroup.id, this.id);
+			this._idService.addNewChildId('checkbox-group', this._checkboxGroup.id, this.id);
 		} else {
-			this.id = this._idService.getNewChildId('checkboxGroup', this._checkboxGroup.id);
+			this.id = this._idService.getNewChildId('checkbox-group', this._checkboxGroup.id);
 		}
 	}
 
