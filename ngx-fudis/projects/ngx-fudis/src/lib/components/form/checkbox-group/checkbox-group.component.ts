@@ -31,11 +31,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 	public groupBlurredOut = false;
 
 	public ngOnInit() {
-		if (this.id) {
-			this._idService.addNewParentId('checkbox-group', this.id);
-		} else {
-			this.id = this._idService.getNewParentId('checkbox-group');
-		}
+		this._setParentId('checkbox-group');
 
 		if (this.formGroup.touched) {
 			this.groupBlurredOut = true;
