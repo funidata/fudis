@@ -18,12 +18,12 @@ export class BreadcrumbsItemComponent implements OnInit {
 	@HostBinding('class') classes = 'fudis-breadcrumbs-item-host';
 
 	/**
-	 * Label to attach to aria-label
+	 * Visible label
 	 */
 	@Input({ required: true }) label: string;
 
 	/**
-	 * Label to attach to aria-label
+	 * Angular Router url
 	 */
 	@Input({ required: true }) url: string;
 

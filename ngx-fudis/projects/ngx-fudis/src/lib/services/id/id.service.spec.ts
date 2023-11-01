@@ -4,7 +4,7 @@ import { FudisIdService } from './id.service';
 import {
 	fudisIdComponents,
 	fudisIdParents,
-	FudisIdComponentAmounts,
+	FudisIdComponentData,
 	FudisIdFamilyData,
 	FudisIdParent,
 } from '../../types/id';
@@ -12,40 +12,55 @@ import {
 describe('FudisIdServiceService', () => {
 	let idService: FudisIdService;
 
-	const componentDataBefore: FudisIdComponentAmounts = {
-		alert: 0,
-		autocomplete: 0,
-		button: 0,
-		'autocomplete-multi-select': 0,
-		datepicker: 0,
-		daterange: 0,
-		dropdown: 0,
-		expandable: 0,
-		fieldset: 0,
-		form: 0,
-		heading: 0,
-		'input-with-language-options': 0,
-		section: 0,
-		'text-area': 0,
-		'text-input': 0,
+	const componentDataBefore: FudisIdComponentData = {
+		alert: [],
+		autocomplete: [],
+		button: [],
+		'autocomplete-multi-select': [],
+		datepicker: [],
+		daterange: [],
+		dropdown: [],
+		expandable: [],
+		fieldset: [],
+		form: [],
+		heading: [],
+		'input-with-language-options': [],
+		section: [],
+		'text-area': [],
+		'text-input': [],
 	};
 
-	const componentDataAfter: FudisIdComponentAmounts = {
-		alert: 10,
-		autocomplete: 10,
-		button: 10,
-		'autocomplete-multi-select': 10,
-		datepicker: 10,
-		daterange: 10,
-		dropdown: 10,
-		expandable: 10,
-		fieldset: 10,
-		form: 10,
-		heading: 10,
-		'input-with-language-options': 10,
-		section: 10,
-		'text-area': 10,
-		'text-input': 10,
+	const componentDataAfter: FudisIdComponentData = {
+		alert: ['fudis-alert-1', 'fudis-alert-2', 'custom-id-for-alert', 'fudis-alert-4'],
+		autocomplete: [
+			'fudis-autocomplete-1',
+			'fudis-autocomplete-2',
+			'custom-id-for-autocomplete',
+			'fudis-autocomplete-4',
+		],
+		button: ['fudis-button-1', 'fudis-button-2', 'custom-id-for-button', 'fudis-button-4'],
+		'autocomplete-multi-select': [
+			'fudis-autocomplete-multi-select-1',
+			'fudis-autocomplete-multi-select-2',
+			'custom-id-for-autocomplete-multi-select',
+			'fudis-autocomplete-multi-select-4',
+		],
+		datepicker: ['fudis-datepicker-1', 'fudis-datepicker-2', 'custom-id-for-datepicker', 'fudis-datepicker-4'],
+		daterange: ['fudis-daterange-1', 'fudis-daterange-2', 'custom-id-for-daterange', 'fudis-daterange-4'],
+		dropdown: ['fudis-dropdown-1', 'fudis-dropdown-2', 'custom-id-for-dropdown', 'fudis-dropdown-4'],
+		expandable: ['fudis-expandable-1', 'fudis-expandable-2', 'custom-id-for-expandable', 'fudis-expandable-4'],
+		fieldset: ['fudis-fieldset-1', 'fudis-fieldset-2', 'custom-id-for-fieldset', 'fudis-fieldset-4'],
+		form: ['fudis-form-1', 'fudis-form-2', 'custom-id-for-form', 'fudis-form-4'],
+		heading: ['fudis-heading-1', 'fudis-heading-2', 'custom-id-for-heading', 'fudis-heading-4'],
+		'input-with-language-options': [
+			'fudis-input-with-language-options-1',
+			'fudis-input-with-language-options-2',
+			'custom-id-for-input-with-language-options',
+			'fudis-input-with-language-options-4',
+		],
+		section: ['fudis-section-1', 'fudis-section-2', 'custom-id-for-section', 'fudis-section-4'],
+		'text-area': ['fudis-text-area-1', 'fudis-text-area-2', 'custom-id-for-text-area', 'fudis-text-area-4'],
+		'text-input': ['fudis-text-input-1', 'fudis-text-input-2', 'custom-id-for-text-input', 'fudis-text-input-4'],
 	};
 
 	const familyDataBefore: FudisIdFamilyData = {
@@ -153,17 +168,21 @@ describe('FudisIdServiceService', () => {
 	};
 
 	const testAllComponents = () => {
-		expect(idService.getComponentAmounts()).toEqual(componentDataBefore);
+		expect(idService.getComponentIdList()).toEqual(componentDataBefore);
 
 		fudisIdComponents.forEach((componentType) => {
-			for (let index = 1; index <= 10; index += 1) {
-				const newId = idService.getNewId(componentType);
+			for (let index = 1; index <= 4; index += 1) {
+				if (index !== 3) {
+					const newId = idService.getNewId(componentType);
 
-				expect(newId).toEqual(`fudis-${componentType}-${index}`);
+					expect(newId).toEqual(`fudis-${componentType}-${index}`);
+				} else {
+					idService.addNewId(componentType, `custom-id-for-${componentType}`);
+				}
 			}
 		});
 
-		expect(idService.getComponentAmounts()).toEqual(componentDataAfter);
+		expect(idService.getComponentIdList()).toEqual(componentDataAfter);
 	};
 
 	const testChildComponents = (componentType: FudisIdParent, parentIndex: number, parentId: string) => {
@@ -181,7 +200,7 @@ describe('FudisIdServiceService', () => {
 	};
 
 	const testFamilyComponents = () => {
-		expect(idService.getFamilyData()).toEqual(familyDataBefore);
+		expect(idService.getFamilyIdData()).toEqual(familyDataBefore);
 
 		fudisIdParents.forEach((componentType) => {
 			for (let index = 1; index <= 3; index += 1) {
@@ -207,7 +226,7 @@ describe('FudisIdServiceService', () => {
 			}
 		});
 
-		expect(idService.getFamilyData()).toEqual(familyDataAfter);
+		expect(idService.getFamilyIdData()).toEqual(familyDataAfter);
 	};
 
 	beforeEach(() => {

@@ -20,7 +20,7 @@ export const fudisIdComponents = [
 	'text-input',
 ] as const;
 
-export type FudisIdComponentType = (typeof fudisIdComponents)[number];
+export type FudisIdComponent = (typeof fudisIdComponents)[number];
 
 export const fudisIdParents = ['breadcrumbs', 'checkbox-group', 'radio-button-group'] as const;
 
@@ -35,6 +35,6 @@ export type FudisIdFamilyData = {
 	[key in FudisIdParent]: FudisIdFamily[];
 };
 
-export type FudisIdComponentAmounts = {
-	[key in FudisIdComponentType]: number;
+export type FudisIdComponentData = {
+	[key in FudisIdComponent]: string[];
 };

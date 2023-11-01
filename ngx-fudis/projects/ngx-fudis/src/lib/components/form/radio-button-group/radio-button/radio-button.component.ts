@@ -34,6 +34,9 @@ export class RadioButtonComponent implements OnInit {
 	 */
 	@Input({ required: true }) name: string;
 
+	/**
+	 * Parent wrapper's id. TODO: remove when component is refactored to be similar like like Checkbox Group and Checkboxes
+	 */
 	@Input({ required: true }) groupId: string;
 
 	/*

@@ -8,6 +8,12 @@
 	align-items: center;
 	list-style: none;
 
+	/*
+	* Following CSS rules targets all child Breadcrumbs Item components and
+	* - From all but last one hide the body text element
+	* - From last one display body text element, and hide link and icon
+	*/
+
 	&-item-host {
 		&:not(:last-of-type) {
 			.fudis-breadcrumbs-item {

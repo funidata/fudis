@@ -32,6 +32,9 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	 */
 	@Input() invalidState: boolean = false;
 
+	/**
+	 * Width of Radiobutton Group
+	 */
 	@Input() size: FudisInputSize = 'lg';
 
 	/**
