@@ -19,7 +19,6 @@ import { IconComponent } from '../../icon/icon.component';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
-import { FudisDropdownMenuItemService } from '../../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 
 const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
 	{
@@ -86,7 +85,7 @@ describe('CheckboxGroupComponent', () => {
 				IconComponent,
 				ErrorMessageComponent,
 			],
-			providers: [FudisBreakpointService, FudisGridService, FudisDropdownMenuItemService],
+			providers: [FudisBreakpointService, FudisGridService],
 			imports: [ReactiveFormsModule],
 		}).compileComponents();
 	});

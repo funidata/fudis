@@ -19,7 +19,7 @@ export interface FudisCheckboxOption {
 
 export interface FudisRadioButtonOption {
 	/** Unique id for single radio button option */
-	id: string;
+	id?: string;
 	/** Name for the group of radio buttons */
 	name: string;
 	/** Underlying value of the option */

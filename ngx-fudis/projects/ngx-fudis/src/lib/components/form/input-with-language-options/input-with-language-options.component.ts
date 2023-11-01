@@ -229,7 +229,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	}
 
 	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('inputWithLanguageOptions');
+		this._id = this.id ?? this._idService.getNewId('input-with-language-options');
 
 		this._updatedOptions = this.updateDropdownList();
 

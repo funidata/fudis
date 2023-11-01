@@ -59,7 +59,7 @@ export class TextInputComponent extends InputBaseDirective implements OnInit, On
 	@Input() maxNumber: number;
 
 	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('textInput');
+		this._id = this.id ?? this._idService.getNewId('text-input');
 	}
 
 	ngOnChanges(): void {

@@ -10,8 +10,6 @@
 	<ng-container *ngIf="!routerLinkUrl">
 		<a
 			#linkRef
-			[class.fudis-link__anchor--disabled]="disabled"
-			[attr.aria-disabled]="disabled"
 			class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__{{ color }}"
 			(focus)="_handleFocus($event)"
 			(blur)="_handleBlur($event)"
@@ -23,8 +21,6 @@
 		<a
 			#linkRef
 			class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__{{ color }}"
-			[class.fudis-link__anchor--disabled]="disabled"
-			[attr.aria-disabled]="disabled"
 			(focus)="_handleFocus($event)"
 			(blur)="_handleBlur($event)"
 			[routerLink]="routerLinkUrl"
@@ -39,8 +35,6 @@
 		#linkRef
 		(focus)="_handleFocus($event)"
 		(blur)="_handleBlur($event)"
-		[class.fudis-link__anchor--disabled]="disabled"
-		[attr.aria-disabled]="disabled"
 		attr.aria-label="{{ linkTitle ? linkTitle : href }}, {{ _externalLinkAriaLabel }}"
 		[href]="href ? href : null"
 		target="_blank"

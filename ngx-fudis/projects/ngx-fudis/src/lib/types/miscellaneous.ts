@@ -56,6 +56,10 @@ export type FudisTextAlign = 'left' | 'right' | 'center';
 export type FudisLanguageAbbr = 'fi' | 'sv' | 'en';
 
 export interface FudisTranslationConfig {
+	BREADCRUMBS: {
+		// Prefix visible to screen reader
+		PREFIX: string;
+	};
 	// Shown with form inputs
 	REQUIRED: string;
 	DATEPICKER: {
@@ -119,9 +123,4 @@ export interface FudisTranslationLanguageBadgeAriaLabel {
 	TRANSLATIONS: string;
 	SELECTED: string;
 	MISSING_TRANSLATION: string;
-}
-
-export interface FudisBreadcrumb {
-	label: string;
-	url: string;
 }

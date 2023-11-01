@@ -10,6 +10,8 @@ export { AutocompleteComponent } from './lib/components/form/autocomplete/autoco
 export { AutocompleteMultiSelectComponent } from './lib/components/autocomplete-multi-select/autocomplete-multi-select.component';
 export { BadgeComponent } from './lib/components/badge/badge.component';
 export { BodyTextComponent } from './lib/components/typography/body-text/body-text.component';
+export { BreadcrumbsComponent } from './lib/components/breadcrumbs/breadcrumbs.component';
+export { BreadcrumbsItemComponent } from './lib/components/breadcrumbs/breadcrumbs-item/breadcrumbs-item.component';
 export { ButtonComponent } from './lib/components/button/button.component';
 export { CheckboxComponent } from './lib/components/form/checkbox-group/checkbox/checkbox.component';
 export { CheckboxGroupComponent } from './lib/components/form/checkbox-group/checkbox-group.component';
@@ -77,5 +79,3 @@ export { AlertComponent } from './lib/components/alert/alert/alert.component';
 export { AlertGroupComponent } from './lib/components/alert/alert-group/alert-group.component';
 export { FudisAlertService } from './lib/services/alert/alert.service';
 export { FudisBreakpointService } from './lib/services/breakpoint/breakpoint.service';
-
-export { BreadcrumbsComponent } from './lib/components/breadcrumbs/breadcrumbs.component';

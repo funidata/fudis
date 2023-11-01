@@ -1,0 +1,51 @@
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import { linkTo } from '@storybook/addon-links';
+import { BreadcrumbsComponent } from './breadcrumbs.component';
+import * as BreadcrumbsStories from './breadcrumbs.stories.ts';
+
+<Meta title="Components/Breadcrumbs" />
+
+# Breadcrumbs
+
+Breadcrumbs is essentially a navigation element.
+
+## Example
+
+<Canvas of={BreadcrumbsStories.Breadcrumbs}></Canvas>
+
+```
+<fudis-breadcrumbs [label]="'My Lego Collection'">
+	<fudis-breadcrumbs-item [label]="'My Legos'" [url]="'/'"/>
+	<fudis-breadcrumbs-item [label]="'Genre'" [url]="'/genre'"/>
+	<fudis-breadcrumbs-item [label]="'Star Wars\u{2122}'" [url]="'/genre/star-wars'"/>
+	<fudis-breadcrumbs-item [label]="'UCS Imperial Star Destroyer\u{2122}'" [url]="'/genre/star-wars/set-75252'"/>
+</fudis-breadcrumbs-item>
+```
+
+## Usage Guidelines
+
+Breadcrumbs organism is built using parent wrapper of Breadcrumbs Component `<fudis-breadcrumbs>` and adding Breadcrumbs Item Components `<fudis-breadcrumbs-item>` as its children.
+
+### Breadcrumbs - Parent Component
+
+Necessary properties for Breadcrumbs Component is `label`.
+
+`label` is used as aria-label and it should describe the name of the section breadcrumbs consists from, e.g. _"My profile"_. 
+Aria-label will automatically have a prefix _"Breadcrumbs: "_ which will be followed by the given label.
+
+### Breadcrumbs Item - Child Component
+
+Breadcrumbs Item has two mandatory properties: `label` and `url`. Label is the visible label and url is the actual url for the Angular router.
+
+The last Breadcrumbs Item Component is always displayed as non-link and just plain text. This is achieved through CSS and doesn't require configuration from the app.
+
+
+## Accessibility
+- Breadcrumbs is a `nav` element containing `ul` list of Breadcrumbs Items
+- Aria-label is mandatory and will give additional information about the breadcrumbs
+- Each visible Breadcrumbs Item, except the last one, is a link
+- The last visible list item has `aria-current="page"` attribute
+
+## Properties
+
+<ArgTypes of={BreadcrumbsComponent} />

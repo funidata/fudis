@@ -1,0 +1,7 @@
+@use '../../../foundations/spacing/tokens.scss' as spacing;
+
+.fudis-breadcrumbs-item {
+	display: flex;
+	align-items: center;
+	min-height: spacing.$spacing-lg;
+}
