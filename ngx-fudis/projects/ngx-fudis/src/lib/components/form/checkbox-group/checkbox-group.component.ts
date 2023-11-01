@@ -10,7 +10,7 @@ import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fi
 	styleUrls: ['./checkbox-group.component.scss'],
 })
 export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnInit {
-	/*
+	/**
 	 * FormControl for Checkbox group
 	 */
 	@Input({ required: true }) formGroup: FormGroup<FudisCheckboxGroupFormGroup>;
@@ -31,7 +31,12 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 	public groupBlurredOut = false;
 
 	public ngOnInit() {
-		this.id = this.id ?? this._idService.getNewId('checkboxGroup');
+		if (this.id) {
+			this._idService.addNewParentId('checkbox-group', this.id);
+		} else {
+			this.id = this._idService.getNewParentId('checkbox-group');
+		}
+
 		if (this.formGroup.touched) {
 			this.groupBlurredOut = true;
 		} else {

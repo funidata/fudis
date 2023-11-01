@@ -1,8 +1,8 @@
-<label class="fudis-checkbox" [attr.for]="_id">
+<label class="fudis-checkbox" [attr.for]="id">
 	<input
 		type="checkbox"
 		class="fudis-checkbox__input"
-		[id]="_id"
+		[id]="id"
 		[formControl]="_checkboxGroup.formGroup.controls[controlName]"
 		[value]="_checkboxGroup.formGroup.controls[controlName].value"
 		[name]="this._checkboxGroup.id"

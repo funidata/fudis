@@ -1,69 +1,130 @@
 import { Injectable } from '@angular/core';
-
-type ComponentType =
-	| 'alert'
-	| 'autocomplete'
-	| 'button'
-	| 'autocompleteMultiSelect'
-	| 'checkboxGroup'
-	| 'checkbox'
-	| 'datepicker'
-	| 'daterange'
-	| 'dropdown'
-	| 'expandable'
-	| 'fieldset'
-	| 'form'
-	| 'heading'
-	| 'inputWithLanguageOptions'
-	| 'radioButton'
-	| 'radioButtonGroup'
-	| 'section'
-	| 'textArea'
-	| 'textInput';
-
-type IdInformation = {
-	[key in ComponentType]: number;
-};
+import {
+	FudisIdComponentData,
+	FudisIdComponent,
+	FudisIdFamily,
+	FudisIdFamilyData,
+	FudisIdParent,
+} from '../../types/id';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class FudisIdService {
-	private _idList: IdInformation = {
-		alert: 0,
-		autocomplete: 0,
-		button: 0,
-		autocompleteMultiSelect: 0,
-		checkboxGroup: 0,
-		checkbox: 0,
-		datepicker: 0,
-		daterange: 0,
-		dropdown: 0,
-		expandable: 0,
-		fieldset: 0,
-		form: 0,
-		heading: 0,
-		inputWithLanguageOptions: 0,
-		radioButton: 0,
-		radioButtonGroup: 0,
-		section: 0,
-		textArea: 0,
-		textInput: 0,
+	/**
+	 * TODO: refactor to store exact id: both generated and customs
+	 */
+	private _componentList: FudisIdComponentData = {
+		alert: [],
+		autocomplete: [],
+		button: [],
+		'autocomplete-multi-select': [],
+		datepicker: [],
+		daterange: [],
+		dropdown: [],
+		expandable: [],
+		fieldset: [],
+		form: [],
+		heading: [],
+		'input-with-language-options': [],
+		section: [],
+		'text-area': [],
+		'text-input': [],
 	};
 
-	public getNewId(componentType: ComponentType): string {
-		const orderNumber = this._idList[componentType] + 1;
+	/**
+	 * To store family id data
+	 */
+	private _familyData: FudisIdFamilyData = {
+		breadcrumbs: [],
+		'checkbox-group': [],
+		'radio-button-group': [],
+	};
 
-		this._idList = { ...this._idList, [componentType]: orderNumber };
+	/**
+	 * Generate and get a new id for a single component
+	 */
+	public getNewId(componentType: FudisIdComponent): string {
+		const orderNumber = this._componentList[componentType].length + 1;
 
-		if (componentType === 'checkbox' || componentType === 'radioButton') {
-			const idToReturn = `fudis-${componentType}Group-${
-				this._idList[`${componentType}Group`]
-			}-${componentType}-${orderNumber}`;
-			return idToReturn;
-		}
-		const idToReturn = `fudis-${componentType}-${orderNumber}`;
+		const newId = `fudis-${componentType}-${orderNumber}`;
 
-		return idToReturn;
+		this._componentList[componentType].push(newId);
+
+		return newId;
+	}
+
+	/**
+	 * Generate and get a new parent id in family
+	 */
+	public getNewParentId(componentType: FudisIdParent): string {
+		const orderNumber = this._familyData[componentType].length + 1;
+
+		const newId = `fudis-${componentType}-${orderNumber}`;
+
+		const newItem: FudisIdFamily = {
+			parent: newId,
+			children: [],
+		};
+
+		this._familyData[componentType].push(newItem);
+
+		return newId;
+	}
+
+	/**
+	 * Generate and get a new child id in family
+	 */
+	public getNewChildId(parentType: FudisIdParent, parentId: string): string {
+		let newId = '';
+		this._familyData[parentType].forEach((item) => {
+			if (item.parent === parentId) {
+				const orderNumber = item.children.length + 1;
+				newId = `${parentId}-item-${orderNumber}`;
+				item.children.push(newId);
+			}
+		});
+		return newId;
+	}
+
+	/**
+	 * To add custom id for a parent in family
+	 */
+	public addNewParentId(componentType: FudisIdParent, id: string) {
+		const newItem: FudisIdFamily = {
+			parent: id,
+			children: [],
+		};
+
+		this._familyData[componentType].push(newItem);
+	}
+
+	/**
+	 * To add custom id for a child in family
+	 */
+	public addNewChildId(parentType: FudisIdParent, parentId: string, newId: string) {
+		this._familyData[parentType].forEach((item) => {
+			if (item.parent === parentId) {
+				item.children.push(newId);
+			}
+		});
+	}
+
+	public addNewId(componentType: FudisIdComponent, customId: string): void {
+		this._componentList[componentType].push(customId);
+	}
+
+	/**
+	 * Get list of component amounts
+	 */
+	public getComponentIdList(): FudisIdComponentData {
+		return this._componentList;
+	}
+
+	/**
+	 * Get family data
+	 */
+	public getFamilyIdData(): FudisIdFamilyData {
+		return this._familyData;
 	}
 }

@@ -1,6 +1,7 @@
 import { RouterTestingModule } from '@angular/router/testing';
 import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
 import { BreadcrumbsComponent } from './breadcrumbs.component';
+import readme from './readme.mdx';
 
 export default {
 	title: 'Components/Breadcrumbs',
@@ -10,29 +11,39 @@ export default {
 			imports: [RouterTestingModule],
 		}),
 	],
-	argTypes: {
-		links: {
-			description: 'List of breadcrumb links.',
-			control: 'object',
-			table: {
-				type: {
-					summary: '{ label: string; url: string }[]',
-				},
-			},
+	parameters: {
+		docs: {
+			page: readme,
+		},
+		controls: {
+			exclude: '_breadcrumbsPrefix',
 		},
 	},
+	argTypes: {},
 } as Meta;
 
+const html = String.raw;
+
+const links = [
+	{ label: 'My Legos', url: '/my-legos' },
+	{ label: 'Genre', url: '/my-legos/genre' },
+	{ label: 'Star Wars\u{2122}', url: '/my-legos/genre/star-wars' },
+	{ label: 'UCS Imperial Star Destroyer\u{2122}', url: '/my-legos/genre/star-wars/set-75252' },
+];
+
 const Template: StoryFn<BreadcrumbsComponent> = (args: BreadcrumbsComponent) => ({
-	props: args,
-	template: '<fudis-breadcrumbs [links]="links"></fudis-breadcrumbs>',
+	props: {
+		...args,
+		links,
+	},
+	template: html`
+		<fudis-breadcrumbs [label]="label">
+			<fudis-breadcrumbs-item *ngFor="let link of links" [label]="link.label" [url]="link.url" />
+		</fudis-breadcrumbs>
+	`,
 });
 
 export const Breadcrumbs = Template.bind({});
 Breadcrumbs.args = {
-	links: [
-		{ label: 'Components', url: '/Components' },
-		{ label: 'Breadcrumbs', url: '/components/breadcrumbs' },
-		{ label: 'Documentation', url: '/components/breadcrumbs/documentation' },
-	],
+	label: 'My Lego Collection',
 };
