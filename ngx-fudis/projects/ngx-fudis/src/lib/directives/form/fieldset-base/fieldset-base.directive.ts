@@ -3,6 +3,7 @@ import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisTranslationConfig } from '../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
+import { FudisIdParent } from '../../../types/id';
 
 @Directive({
 	selector: '[fudisFieldSetBase]',
@@ -55,4 +56,12 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
 	 * Basic Fudis translation keys
 	 */
 	protected _translations: Signal<FudisTranslationConfig>;
+
+	protected _setParentId(parentType: FudisIdParent): void {
+		if (this.id) {
+			this._idService.addNewParentId(parentType, this.id);
+		} else {
+			this.id = this._idService.getNewParentId(parentType);
+		}
+	}
 }

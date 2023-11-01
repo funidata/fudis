@@ -1,9 +1,9 @@
 <ng-container *ngIf="startDate && endDate">
-	<div #dateRangeRef class="fudis-daterange" [id]="_id" [class.fudis-daterange--visible]="_heightSet">
+	<div #dateRangeRef class="fudis-daterange" [id]="id" [class.fudis-daterange--visible]="_heightSet">
 		<fudis-datepicker
 			class="fudis-daterange__start-date"
 			[size]="'sm'"
-			[id]="_id + '-start-date'"
+			[id]="id + '-start-date'"
 			[initialFocus]="initialFocus"
 			[minDate]="startDate.minDate"
 			[maxDate]="startDate.maxDate"
@@ -14,7 +14,7 @@
 			[helpText]="startDate.helpText" />
 		<span class="fudis-daterange__gutter"></span>
 		<fudis-datepicker
-			[id]="_id + '-end-date'"
+			[id]="id + '-end-date'"
 			[size]="'sm'"
 			[minDate]="endDate.minDate"
 			[maxDate]="endDate.maxDate"

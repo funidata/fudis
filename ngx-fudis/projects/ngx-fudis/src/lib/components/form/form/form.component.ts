@@ -7,6 +7,7 @@ import { ContentDirective } from '../../../directives/content-projection/content
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
 import { FudisFormErrorSummaryLink } from '../../../types/forms';
+import { FudisIdComponent } from '../../../types/id';
 
 @Component({
 	selector: 'fudis-form',
@@ -81,20 +82,23 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 	@Input() errorSummaryLinkType: FudisFormErrorSummaryLink = 'router';
 
 	/**
-	 * Separate internal id to generate unique id
-	 */
-	protected _id: string;
-
-	/**
 	 * HTML FormElement
 	 */
 	protected _formElement: HTMLFormElement | undefined;
 
 	ngOnInit(): void {
-		this._id = this.id ? this.id : this._idService.getNewId('form');
+		this._setFormId('form');
 	}
 
 	ngAfterContentInit(): void {
 		this._formElement = this._elementRef.nativeElement as HTMLFormElement;
+	}
+
+	private _setFormId(componentType: FudisIdComponent): void {
+		if (this.id) {
+			this._idService.addNewId(componentType, this.id);
+		} else {
+			this.id = this._idService.getNewId(componentType);
+		}
 	}
 }

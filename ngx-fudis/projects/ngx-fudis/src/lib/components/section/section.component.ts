@@ -10,6 +10,7 @@ import { FudisSpacing } from '../../types/miscellaneous';
 import { FudisErrorSummaryService } from '../../services/form/error-summary/error-summary.service';
 import { FudisFormErrorSummarySection } from '../../types/forms';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
+import { FudisIdComponent } from '../../types/id';
 
 @Component({
 	selector: 'fudis-section',
@@ -103,11 +104,6 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 	protected _classList: string[];
 
 	/**
-	 * Internal id to generate unique id
-	 */
-	protected _id: string;
-
-	/**
 	 * Internal, separate title property to send to error summary service
 	 */
 	protected _title: string;
@@ -123,9 +119,9 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 	private _errorSummaryInfoSent: boolean = false;
 
 	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('section');
+		this._setSectionId('section');
 
-		this._headingId = `${this._id}-heading`;
+		this._headingId = `${this.id}-heading`;
 
 		this._classList = this._getClasses();
 		this._title = this.title;
@@ -135,7 +131,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 	ngOnChanges(): void {
 		this._classList = this._getClasses();
 
-		if (this.title !== this._title && this._id) {
+		if (this.title !== this._title && this.id) {
 			this._title = this.title;
 			this.addToErrorSummary();
 		}
@@ -148,7 +144,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 	addToErrorSummary(): void {
 		if (this.errorSummaryBreadcrumb) {
 			this._errorSummaryInfo = {
-				id: this._id,
+				id: this.id,
 				title: this._title,
 			};
 			this._errorSummaryService.addSection(this._errorSummaryInfo);
@@ -168,5 +164,13 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 		cssClasses.push('fudis-section');
 
 		return cssClasses;
+	}
+
+	private _setSectionId(componentType: FudisIdComponent): void {
+		if (this.id) {
+			this._idService.addNewId(componentType, this.id);
+		} else {
+			this.id = this._idService.getNewId(componentType);
+		}
 	}
 }

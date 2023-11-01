@@ -36,14 +36,14 @@ import { FudisFocusService } from '../../../../services/focus/focus.service';
 })
 export class DatepickerComponent extends InputBaseDirective implements OnInit, OnChanges, AfterViewInit {
 	constructor(
-		private _idService: FudisIdService,
 		private _changeDetectorRef: ChangeDetectorRef,
 		private _datePickerConfigService: FudisTranslationService,
 		private _adapter: DateAdapter<Date>,
 		private _datepickerIntl: MatDatepickerIntl,
-		private _focusService: FudisFocusService
+		private _focusService: FudisFocusService,
+		_idService: FudisIdService
 	) {
-		super(_datePickerConfigService);
+		super(_datePickerConfigService, _idService);
 
 		effect(() => {
 			this._datepickerIntl.closeCalendarLabel = this._translations().DATEPICKER.CLOSE;
@@ -73,7 +73,7 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 	@Input() maxDate: Date | null | undefined;
 
 	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('datepicker');
+		this._setInputId('datepicker');
 	}
 
 	ngOnChanges(): void {
@@ -83,7 +83,7 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 	}
 
 	ngAfterViewInit(): void {
-		if (this.initialFocus && !this._focusService.isIgnored(this._id)) {
+		if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
 			this.focusToInput();
 		}
 	}

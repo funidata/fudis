@@ -21,6 +21,7 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { FudisFormErrorSummarySection, FudisInputSize } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { FudisIdComponent } from '../../../types/id';
 
 @Component({
 	selector: 'fudis-fieldset',
@@ -114,7 +115,8 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	private _fieldsetInfo: FudisFormErrorSummarySection;
 
 	ngOnInit(): void {
-		this.id = this.id ?? this._idService.getNewId('fieldset');
+		this._setFieldsetId('fieldset');
+
 		this._title = this.title;
 		this.addToErrorSummary();
 		this._setClasses();
@@ -162,6 +164,14 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 			this._classes = ['fudis-fieldset', `fudis-input-size__${this.inputSize}`];
 		} else {
 			this._classes = ['fudis-fieldset'];
+		}
+	}
+
+	private _setFieldsetId(componentType: FudisIdComponent): void {
+		if (this.id) {
+			this._idService.addNewId(componentType, this.id);
+		} else {
+			this.id = this._idService.getNewId(componentType);
 		}
 	}
 }

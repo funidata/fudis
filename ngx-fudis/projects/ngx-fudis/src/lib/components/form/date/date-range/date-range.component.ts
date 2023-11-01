@@ -49,11 +49,6 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
 	@Input() initialFocus: boolean = false;
 
 	/**
-	 * Internal id to generate unique id for Date Range
-	 */
-	protected _id: string;
-
-	/**
 	 * If setting height to equal is completed
 	 */
 	protected _heightSet: boolean = false;
@@ -66,7 +61,11 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
 	private _untilDestroyed = untilDestroyed();
 
 	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('daterange');
+		if (this.id) {
+			this._idService.addNewId('daterange', this.id);
+		} else {
+			this.id = this._idService.getNewId('daterange');
+		}
 	}
 
 	ngAfterContentInit(): void {

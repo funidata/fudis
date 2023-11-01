@@ -1,8 +1,8 @@
 <form
 	fudisGrid
 	[rowGap]="'none'"
-	[id]="_id"
-	[attr.aria-describedBy]="_id + '_header'"
+	[id]="id"
+	[attr.aria-describedBy]="id + '_header'"
 	[width]="width"
 	[align]="align"
 	[ignoreDefaults]="true"
@@ -14,7 +14,7 @@
 	[marginBottom]="marginBottom"
 	[marginTop]="marginTop"
 	[marginSides]="marginSides">
-	<div [id]="_id + '_header'" class="fudis-form__header">
+	<div [id]="id + '_header'" class="fudis-form__header">
 		<div class="fudis-form__header__main">
 			<ng-container *ngIf="title && titleLevel">
 				<div class="fudis-form__header__title">

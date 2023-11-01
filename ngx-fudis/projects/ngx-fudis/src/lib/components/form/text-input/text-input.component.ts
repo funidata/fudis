@@ -14,11 +14,11 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 })
 export class TextInputComponent extends InputBaseDirective implements OnInit, OnChanges, AfterViewInit {
 	constructor(
-		private _idService: FudisIdService,
 		private _focusService: FudisFocusService,
+		_idService: FudisIdService,
 		_translationService: FudisTranslationService
 	) {
-		super(_translationService);
+		super(_translationService, _idService);
 	}
 
 	@HostBinding('class') classes = 'fudis-text-input-host';
@@ -59,7 +59,7 @@ export class TextInputComponent extends InputBaseDirective implements OnInit, On
 	@Input() maxNumber: number;
 
 	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('text-input');
+		this._setInputId('text-input');
 	}
 
 	ngOnChanges(): void {
@@ -67,7 +67,7 @@ export class TextInputComponent extends InputBaseDirective implements OnInit, On
 	}
 
 	ngAfterViewInit(): void {
-		if (this.initialFocus && !this._focusService.isIgnored(this._id)) {
+		if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
 			this.focusToInput();
 		}
 	}

@@ -18,11 +18,8 @@ import { FudisTranslationService } from '../../../services/translation/translati
 	styleUrls: ['./input-with-language-options.component.scss'],
 })
 export class InputWithLanguageOptionsComponent extends InputBaseDirective implements OnInit, OnChanges, AfterViewInit {
-	constructor(
-		private _idService: FudisIdService,
-		_translationService: FudisTranslationService
-	) {
-		super(_translationService);
+	constructor(_idService: FudisIdService, _translationService: FudisTranslationService) {
+		super(_translationService, _idService);
 
 		effect(() => {
 			this._languageLabel = this._translations().INPUT_WITH_LANGUAGE_OPTIONS.LANGUAGE;
@@ -229,7 +226,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	}
 
 	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('input-with-language-options');
+		this._setInputId('input-with-language-options');
 
 		this._updatedOptions = this.updateDropdownList();
 

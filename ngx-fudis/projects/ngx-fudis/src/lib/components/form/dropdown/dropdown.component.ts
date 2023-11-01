@@ -25,11 +25,11 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 })
 export class DropdownComponent extends InputBaseDirective implements OnInit, OnChanges, AfterViewInit {
 	constructor(
-		private _idService: FudisIdService,
 		private _focusService: FudisFocusService,
+		_idService: FudisIdService,
 		_translationService: FudisTranslationService
 	) {
-		super(_translationService);
+		super(_translationService, _idService);
 	}
 
 	/**
@@ -86,13 +86,13 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 	}
 
 	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('dropdown');
+		this._setInputId('dropdown');
 
 		this._setInitialValues();
 	}
 
 	ngAfterViewInit(): void {
-		if (this.initialFocus && !this._focusService.isIgnored(this._id)) {
+		if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
 			this.matSelect.focus();
 		}
 	}
