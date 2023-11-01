@@ -101,7 +101,7 @@ export class InputBaseDirective extends TooltipApiDirective {
 		this.handleBlur.emit(event);
 	}
 
-	focusToInput(): void {
+	public focusToInput(): void {
 		if (this.inputRef?.nativeElement) {
 			this.inputRef.nativeElement.focus();
 		} else if (this._focusTryCounter < 100) {
