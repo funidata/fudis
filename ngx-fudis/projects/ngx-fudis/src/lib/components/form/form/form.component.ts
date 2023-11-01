@@ -7,7 +7,6 @@ import { ContentDirective } from '../../../directives/content-projection/content
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
 import { FudisFormErrorSummaryLink } from '../../../types/forms';
-import { FudisIdComponent } from '../../../types/id';
 
 @Component({
 	selector: 'fudis-form',
@@ -87,18 +86,18 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 	protected _formElement: HTMLFormElement | undefined;
 
 	ngOnInit(): void {
-		this._setFormId('form');
+		this._setFormId();
 	}
 
 	ngAfterContentInit(): void {
 		this._formElement = this._elementRef.nativeElement as HTMLFormElement;
 	}
 
-	private _setFormId(componentType: FudisIdComponent): void {
+	private _setFormId(): void {
 		if (this.id) {
-			this._idService.addNewId(componentType, this.id);
+			this._idService.addNewId('form', this.id);
 		} else {
-			this.id = this._idService.getNewId(componentType);
+			this.id = this._idService.getNewId('form');
 		}
 	}
 }

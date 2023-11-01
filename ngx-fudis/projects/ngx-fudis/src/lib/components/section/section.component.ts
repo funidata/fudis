@@ -10,7 +10,6 @@ import { FudisSpacing } from '../../types/miscellaneous';
 import { FudisErrorSummaryService } from '../../services/form/error-summary/error-summary.service';
 import { FudisFormErrorSummarySection } from '../../types/forms';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
-import { FudisIdComponent } from '../../types/id';
 
 @Component({
 	selector: 'fudis-section',
@@ -119,7 +118,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 	private _errorSummaryInfoSent: boolean = false;
 
 	ngOnInit(): void {
-		this._setSectionId('section');
+		this._setSectionId();
 
 		this._headingId = `${this.id}-heading`;
 
@@ -166,11 +165,11 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 		return cssClasses;
 	}
 
-	private _setSectionId(componentType: FudisIdComponent): void {
+	private _setSectionId(): void {
 		if (this.id) {
-			this._idService.addNewId(componentType, this.id);
+			this._idService.addNewId('section', this.id);
 		} else {
-			this.id = this._idService.getNewId(componentType);
+			this.id = this._idService.getNewId('section');
 		}
 	}
 }
