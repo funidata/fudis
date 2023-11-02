@@ -17,7 +17,7 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 
 import { DatepickerCustomDateAdapter } from '../date-common/datepicker-custom-date-adapter';
-import { updateLocale } from '../date-common/utilities';
+import { updateLocale, updateTranslations } from '../date-common/utilities';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 
 @Component({
@@ -46,19 +46,9 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 		super(_datePickerConfigService);
 
 		effect(() => {
-			this._datepickerIntl.calendarLabel = this._translations().DATEPICKER.CALENDAR;
-			this._datepickerIntl.closeCalendarLabel = this._translations().DATEPICKER.CLOSE;
-			this._datepickerIntl.openCalendarLabel = this._translations().DATEPICKER.OPEN;
-			this._datepickerIntl.prevMonthLabel = this._translations().DATEPICKER.PREV_MONTH;
-			this._datepickerIntl.nextMonthLabel = this._translations().DATEPICKER.NEXT_MONTH;
-			this._datepickerIntl.prevYearLabel = this._translations().DATEPICKER.PREV_YEAR;
-			this._datepickerIntl.nextYearLabel = this._translations().DATEPICKER.NEXT_YEAR;
-			this._datepickerIntl.prevMultiYearLabel = this._translations().DATEPICKER.PREV_MULTIYEAR;
-			this._datepickerIntl.nextMultiYearLabel = this._translations().DATEPICKER.NEXT_MULTIYEAR;
-			this._datepickerIntl.switchToMonthViewLabel = this._translations().DATEPICKER.SWITCH_MONTH_VIEW;
-			this._datepickerIntl.switchToMultiYearViewLabel = this._translations().DATEPICKER.SWITCH_MULTIYEAR_VIEW;
-
 			this._adapter.setLocale(updateLocale(this._translationService.getLanguage()));
+
+			this._datepickerIntl = updateTranslations(this._translations(), this._datepickerIntl);
 		});
 	}
 
@@ -97,4 +87,18 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 			this.focusToInput();
 		}
 	}
+
+	// private _updateTranslations(): void {
+	// 	this._datepickerIntl.calendarLabel = this._translations().DATEPICKER.CALENDAR;
+	// 	this._datepickerIntl.closeCalendarLabel = this._translations().DATEPICKER.CLOSE;
+	// 	this._datepickerIntl.openCalendarLabel = this._translations().DATEPICKER.OPEN;
+	// 	this._datepickerIntl.prevMonthLabel = this._translations().DATEPICKER.PREV_MONTH;
+	// 	this._datepickerIntl.nextMonthLabel = this._translations().DATEPICKER.NEXT_MONTH;
+	// 	this._datepickerIntl.prevYearLabel = this._translations().DATEPICKER.PREV_YEAR;
+	// 	this._datepickerIntl.nextYearLabel = this._translations().DATEPICKER.NEXT_YEAR;
+	// 	this._datepickerIntl.prevMultiYearLabel = this._translations().DATEPICKER.PREV_MULTIYEAR;
+	// 	this._datepickerIntl.nextMultiYearLabel = this._translations().DATEPICKER.NEXT_MULTIYEAR;
+	// 	this._datepickerIntl.switchToMonthViewLabel = this._translations().DATEPICKER.SWITCH_MONTH_VIEW;
+	// 	this._datepickerIntl.switchToMultiYearViewLabel = this._translations().DATEPICKER.SWITCH_MULTIYEAR_VIEW;
+	// }
 }
