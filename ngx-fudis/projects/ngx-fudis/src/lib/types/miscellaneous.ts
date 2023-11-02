@@ -62,9 +62,19 @@ export interface FudisTranslationConfig {
 	};
 	// Shown with form inputs
 	REQUIRED: string;
+	// Necessary keys for ngMaterial Datepicker
 	DATEPICKER: {
-		// Label for close button
+		CALENDAR: string;
 		CLOSE: string;
+		OPEN: string;
+		PREV_MONTH: string;
+		NEXT_MONTH: string;
+		PREV_YEAR: string;
+		NEXT_YEAR: string;
+		PREV_MULTIYEAR: string;
+		NEXT_MULTIYEAR: string;
+		SWITCH_MONTH_VIEW: string;
+		SWITCH_MULTIYEAR_VIEW: string;
 	};
 	DIALOG: {
 		// Label for close button
