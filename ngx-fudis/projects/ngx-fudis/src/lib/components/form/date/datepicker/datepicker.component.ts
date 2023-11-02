@@ -87,18 +87,4 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 			this.focusToInput();
 		}
 	}
-
-	// private _updateTranslations(): void {
-	// 	this._datepickerIntl.calendarLabel = this._translations().DATEPICKER.CALENDAR;
-	// 	this._datepickerIntl.closeCalendarLabel = this._translations().DATEPICKER.CLOSE;
-	// 	this._datepickerIntl.openCalendarLabel = this._translations().DATEPICKER.OPEN;
-	// 	this._datepickerIntl.prevMonthLabel = this._translations().DATEPICKER.PREV_MONTH;
-	// 	this._datepickerIntl.nextMonthLabel = this._translations().DATEPICKER.NEXT_MONTH;
-	// 	this._datepickerIntl.prevYearLabel = this._translations().DATEPICKER.PREV_YEAR;
-	// 	this._datepickerIntl.nextYearLabel = this._translations().DATEPICKER.NEXT_YEAR;
-	// 	this._datepickerIntl.prevMultiYearLabel = this._translations().DATEPICKER.PREV_MULTIYEAR;
-	// 	this._datepickerIntl.nextMultiYearLabel = this._translations().DATEPICKER.NEXT_MULTIYEAR;
-	// 	this._datepickerIntl.switchToMonthViewLabel = this._translations().DATEPICKER.SWITCH_MONTH_VIEW;
-	// 	this._datepickerIntl.switchToMultiYearViewLabel = this._translations().DATEPICKER.SWITCH_MULTIYEAR_VIEW;
-	// }
 }
