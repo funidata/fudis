@@ -14,7 +14,7 @@ export const updateLocale = (value: string): string => {
 	}
 };
 
-export const updateTranslations = (
+export const updateMatDatePickerTranslations = (
 	translations: FudisTranslationConfig,
 	datepickerIntl: MatDatepickerIntl
 ): MatDatepickerIntl => {
