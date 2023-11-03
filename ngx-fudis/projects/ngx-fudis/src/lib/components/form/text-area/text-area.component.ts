@@ -15,11 +15,11 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 })
 export class TextAreaComponent extends InputBaseDirective implements OnInit, OnChanges, AfterViewInit {
 	constructor(
-		private _idService: FudisIdService,
 		private _focusService: FudisFocusService,
+		_idService: FudisIdService,
 		_translationService: FudisTranslationService
 	) {
-		super(_translationService);
+		super(_translationService, _idService);
 	}
 
 	/**
@@ -43,7 +43,7 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit, OnC
 	@Input() size: FudisInputSize = 'lg';
 
 	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('text-area');
+		this._setInputId('text-area');
 	}
 
 	ngOnChanges(): void {
@@ -51,7 +51,7 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit, OnC
 	}
 
 	ngAfterViewInit(): void {
-		if (this.initialFocus && !this._focusService.isIgnored(this._id)) {
+		if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
 			this.focusToInput();
 		}
 	}

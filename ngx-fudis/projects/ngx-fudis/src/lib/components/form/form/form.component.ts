@@ -81,20 +81,23 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 	@Input() errorSummaryLinkType: FudisFormErrorSummaryLink = 'router';
 
 	/**
-	 * Separate internal id to generate unique id
-	 */
-	protected _id: string;
-
-	/**
 	 * HTML FormElement
 	 */
 	protected _formElement: HTMLFormElement | undefined;
 
 	ngOnInit(): void {
-		this._id = this.id ? this.id : this._idService.getNewId('form');
+		this._setFormId();
 	}
 
 	ngAfterContentInit(): void {
 		this._formElement = this._elementRef.nativeElement as HTMLFormElement;
+	}
+
+	private _setFormId(): void {
+		if (this.id) {
+			this._idService.addNewId('form', this.id);
+		} else {
+			this.id = this._idService.getNewId('form');
+		}
 	}
 }

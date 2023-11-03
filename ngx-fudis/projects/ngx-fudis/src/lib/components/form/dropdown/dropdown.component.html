@@ -1,7 +1,7 @@
 <div class="fudis-dropdown fudis-input-size__{{ size }}">
 	<fudis-label
 		[text]="label"
-		[id]="_id + '-label'"
+		[id]="id + '-label'"
 		[requiredText]="_required ? _requiredText : undefined"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
@@ -10,7 +10,7 @@
 	<div class="fudis-dropdown__input">
 		<mat-select
 			#matSelect
-			[id]="_id"
+			[id]="id"
 			disableOptionCentering
 			[panelClass]="
 				size === 'xs' ? 'fudis-dropdown__option-list fudis-dropdown__option-list__xs' : 'fudis-dropdown__option-list'
@@ -24,9 +24,9 @@
 			[formControl]="control"
 			(valueChange)="handleSelectionChange($event)"
 			[attr.required]="_required ? true : null"
-			[aria-labelledby]="_id + '-label'"
+			[aria-labelledby]="id + '-label'"
 			[hideSingleSelectionIndicator]="hideSingleSelectionIndicator"
-			[attr.aria-describedby]="_id + '_guidance'"
+			[attr.aria-describedby]="id + '_guidance'"
 			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null">
 			<mat-option
 				class="fudis-dropdown__option"
@@ -39,5 +39,5 @@
 		</mat-select>
 		<fudis-icon *ngIf="size !== 'xs'" class="fudis-dropdown__input__icon" [icon]="'chevron'" [rotate]="'cw-90'" />
 	</div>
-	<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="_id" [errorMsg]="errorMsg" [control]="control" />
+	<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="id" [errorMsg]="errorMsg" [control]="control" />
 </div>

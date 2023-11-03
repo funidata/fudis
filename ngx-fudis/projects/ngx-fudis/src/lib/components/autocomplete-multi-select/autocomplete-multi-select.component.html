@@ -1,8 +1,8 @@
 <div #autocompleteMultiSelectWrapper class="fudis-autocomplete-multi-select fudis-input-size__{{ size }}">
 	<fudis-label
 		[text]="label"
-		[id]="_id + '__label'"
-		[for]="_id"
+		[id]="id + '__label'"
+		[for]="id"
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle">
@@ -15,12 +15,12 @@
 			(focus)="_openDropdown()"
 			(keyup)="_doSearch($event)"
 			(keydown)="_closeOnShiftTab($event)"
-			[id]="_id"
+			[id]="id"
 			[value]="_filterText"
 			[attr.placeholder]="placeholder ? placeholder : null"
 			[attr.aria-expanded]="_toggleOn"
-			[attr.aria-labelledby]="_id + '-selected-items'"
-			[attr.aria-describedby]="_id + '_guidance'" />
+			[attr.aria-labelledby]="id + '-selected-items'"
+			[attr.aria-describedby]="id + '_guidance'" />
 		<fudis-button
 			class="fudis-autocomplete-multi-select__input-wrapper__icon-button"
 			(handleClick)="_toggleDropdown()"
@@ -47,13 +47,13 @@
 		</ng-container>
 	</fudis-dropdown-menu>
 	<ng-container *ngIf="selectedOptions.length > 0">
-		<span [attr.id]="_id + '-remove-items'" class="fudis-visually-hidden">{{ _removeItemText }}</span>
+		<span [attr.id]="id + '-remove-items'" class="fudis-visually-hidden">{{ _removeItemText }}</span>
 		<fudis-autocomplete-multi-select-selected-item-chip
-			[parentId]="_id"
+			[parentId]="id"
 			(removedChipIndex)="_handleRemoveChip($event)"
 			[selectedItems]="selectedOptions" />
 	</ng-container>
 	<ng-container *ngIf="helpText">
-		<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="_id" />
+		<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="id" />
 	</ng-container>
 </div>

@@ -8,7 +8,7 @@
 				[groupErrorMsg]="groupErrorMsg"
 				[helpText]="helpText"
 				[formGroup]="formGroup"
-				[for]="_id"
+				[for]="id"
 				[selectedOption]="_dropdownControl.value.value">
 			</fudis-guidance>
 		</ng-container>
@@ -20,7 +20,7 @@
 		[control]="_dropdownControl"
 		[label]="_languageLabel"
 		[size]="_missingLanguage ? 'xs' : 'lg'"
-		[id]="_id + '_language-dropdown'"
+		[id]="id + '_language-dropdown'"
 		[options]="_updatedOptions">
 	</fudis-dropdown>
 </div>
@@ -34,7 +34,7 @@
 			[ariaLabel]="label + ', ' + _dropdownControl.value.viewValue"
 			[size]="'lg'"
 			[label]="label"
-			[id]="_id"
+			[id]="id"
 			[maxLength]="maxLength"
 			[initialFocus]="initialFocus && _firstLoad"
 			[required]="_requiredControls[control.key].required"
@@ -52,7 +52,7 @@
 			[ariaLabel]="label + ', ' + _dropdownControl.value.viewValue"
 			[size]="'lg'"
 			[label]="label"
-			[id]="_id"
+			[id]="id"
 			[maxLength]="maxLength"
 			[invalidState]="formGroup.invalid && formGroup.touched"
 			[initialFocus]="initialFocus && _firstLoad"

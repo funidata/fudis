@@ -114,7 +114,8 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	private _fieldsetInfo: FudisFormErrorSummarySection;
 
 	ngOnInit(): void {
-		this.id = this.id ?? this._idService.getNewId('fieldset');
+		this._setFieldsetId();
+
 		this._title = this.title;
 		this.addToErrorSummary();
 		this._setClasses();
@@ -162,6 +163,14 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 			this._classes = ['fudis-fieldset', `fudis-input-size__${this.inputSize}`];
 		} else {
 			this._classes = ['fudis-fieldset'];
+		}
+	}
+
+	private _setFieldsetId(): void {
+		if (this.id) {
+			this._idService.addNewId('fieldset', this.id);
+		} else {
+			this.id = this._idService.getNewId('fieldset');
 		}
 	}
 }

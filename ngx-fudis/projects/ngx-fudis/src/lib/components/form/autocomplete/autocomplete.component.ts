@@ -18,11 +18,11 @@ export class AutocompleteComponent
 	implements OnInit, AfterContentInit, OnChanges, AfterViewInit
 {
 	constructor(
-		private _idService: FudisIdService,
 		private _focusService: FudisFocusService,
+		_idService: FudisIdService,
 		_translationService: FudisTranslationService
 	) {
-		super(_translationService);
+		super(_translationService, _idService);
 
 		effect(() => {
 			this._clearFilterText = this._translations().AUTOCOMPLETE.CLEAR;
@@ -77,7 +77,7 @@ export class AutocompleteComponent
 	protected _clearFilterText: string;
 
 	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('autocomplete');
+		this._setInputId('autocomplete');
 	}
 
 	ngAfterContentInit() {
@@ -86,7 +86,7 @@ export class AutocompleteComponent
 	}
 
 	ngAfterViewInit(): void {
-		if (this.initialFocus && !this._focusService.isIgnored(this._id)) {
+		if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
 			this.focusToInput();
 		}
 	}

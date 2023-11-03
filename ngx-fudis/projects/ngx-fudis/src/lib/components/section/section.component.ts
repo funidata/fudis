@@ -103,11 +103,6 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 	protected _classList: string[];
 
 	/**
-	 * Internal id to generate unique id
-	 */
-	protected _id: string;
-
-	/**
 	 * Internal, separate title property to send to error summary service
 	 */
 	protected _title: string;
@@ -123,9 +118,9 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 	private _errorSummaryInfoSent: boolean = false;
 
 	ngOnInit(): void {
-		this._id = this.id ?? this._idService.getNewId('section');
+		this._setSectionId();
 
-		this._headingId = `${this._id}-heading`;
+		this._headingId = `${this.id}-heading`;
 
 		this._classList = this._getClasses();
 		this._title = this.title;
@@ -135,7 +130,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 	ngOnChanges(): void {
 		this._classList = this._getClasses();
 
-		if (this.title !== this._title && this._id) {
+		if (this.title !== this._title && this.id) {
 			this._title = this.title;
 			this.addToErrorSummary();
 		}
@@ -148,7 +143,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 	addToErrorSummary(): void {
 		if (this.errorSummaryBreadcrumb) {
 			this._errorSummaryInfo = {
-				id: this._id,
+				id: this.id,
 				title: this._title,
 			};
 			this._errorSummaryService.addSection(this._errorSummaryInfo);
@@ -168,5 +163,13 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 		cssClasses.push('fudis-section');
 
 		return cssClasses;
+	}
+
+	private _setSectionId(): void {
+		if (this.id) {
+			this._idService.addNewId('section', this.id);
+		} else {
+			this.id = this._idService.getNewId('section');
+		}
 	}
 }

@@ -4,12 +4,17 @@ import { FudisFormErrors } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisTranslationConfig } from '../../../types/miscellaneous';
+import { FudisIdComponent } from '../../../types/id';
+import { FudisIdService } from '../../../services/id/id.service';
 
 @Directive({
 	selector: '[fudisInputBase]',
 })
 export class InputBaseDirective extends TooltipApiDirective {
-	constructor(protected _translationService: FudisTranslationService) {
+	constructor(
+		protected _translationService: FudisTranslationService,
+		protected _idService: FudisIdService
+	) {
 		super();
 
 		effect(() => {
@@ -76,11 +81,6 @@ export class InputBaseDirective extends TooltipApiDirective {
 	@Output() handleBlur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
 	/**
-	 * Internal id to generate unique id
-	 */
-	protected _id: string;
-
-	/**
 	 * Basic Fudis translation keys
 	 */
 	protected _translations: Signal<FudisTranslationConfig>;
@@ -101,7 +101,7 @@ export class InputBaseDirective extends TooltipApiDirective {
 		this.handleBlur.emit(event);
 	}
 
-	focusToInput(): void {
+	public focusToInput(): void {
 		if (this.inputRef?.nativeElement) {
 			this.inputRef.nativeElement.focus();
 		} else if (this._focusTryCounter < 100) {
@@ -109,6 +109,14 @@ export class InputBaseDirective extends TooltipApiDirective {
 				this._focusTryCounter += 1;
 				this.focusToInput();
 			}, 100);
+		}
+	}
+
+	protected _setInputId(componentType: FudisIdComponent): void {
+		if (this.id) {
+			this._idService.addNewId(componentType, this.id);
+		} else {
+			this.id = this._idService.getNewId(componentType);
 		}
 	}
 }
