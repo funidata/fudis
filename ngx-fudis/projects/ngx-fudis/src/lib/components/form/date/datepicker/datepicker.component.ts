@@ -17,7 +17,7 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 
 import { DatepickerCustomDateAdapter } from '../date-common/datepicker-custom-date-adapter';
-import { updateLocale } from '../date-common/utilities';
+import { updateLocale, updateMatDatePickerTranslations } from '../date-common/utilities';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 
 @Component({
@@ -46,9 +46,9 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 		super(_datePickerConfigService, _idService);
 
 		effect(() => {
-			this._datepickerIntl.closeCalendarLabel = this._translations().DATEPICKER.CLOSE;
-
 			this._adapter.setLocale(updateLocale(this._translationService.getLanguage()));
+
+			this._datepickerIntl = updateMatDatePickerTranslations(this._translations(), this._datepickerIntl);
 		});
 	}
 

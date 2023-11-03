@@ -3,7 +3,19 @@ import { FudisTranslationConfig } from '../../types/miscellaneous';
 export const en: FudisTranslationConfig = {
 	BREADCRUMBS: { PREFIX: 'Breadcrumbs' },
 	REQUIRED: 'Required',
-	DATEPICKER: { CLOSE: 'Close calendar' },
+	DATEPICKER: {
+		CALENDAR: 'Calendar',
+		CLOSE: 'Close calendar',
+		OPEN: 'Open calendar',
+		PREV_MONTH: 'Previous month',
+		NEXT_MONTH: 'Next month',
+		PREV_YEAR: 'Previous year',
+		NEXT_YEAR: 'Next year',
+		PREV_MULTIYEAR: 'Previous 24 years',
+		NEXT_MULTIYEAR: 'Next 24 years',
+		SWITCH_MONTH_VIEW: 'Switch to month view',
+		SWITCH_MULTIYEAR_VIEW: 'Switch to year view',
+	},
 	DIALOG: { CLOSE: 'Close' },
 	INPUT_WITH_LANGUAGE_OPTIONS: {
 		LANGUAGE: 'Language',
@@ -52,7 +64,19 @@ export const en: FudisTranslationConfig = {
 export const fi: FudisTranslationConfig = {
 	BREADCRUMBS: { PREFIX: 'Murupolku' },
 	REQUIRED: 'Pakollinen',
-	DATEPICKER: { CLOSE: 'Sulje kalenteri' },
+	DATEPICKER: {
+		CALENDAR: 'Kalenteri',
+		CLOSE: 'Sulje kalenteri',
+		OPEN: 'Avaa kalenteri',
+		PREV_MONTH: 'Edellinen kuukausi',
+		NEXT_MONTH: 'Seuraava kuukausi',
+		PREV_YEAR: 'Edellinen vuosi',
+		NEXT_YEAR: 'Seuraava vuosi',
+		PREV_MULTIYEAR: 'Edelliset 24 vuotta',
+		NEXT_MULTIYEAR: 'Seuraavat 24 vuotta',
+		SWITCH_MONTH_VIEW: 'Vaihda kuukausinäkymään',
+		SWITCH_MULTIYEAR_VIEW: 'Vaihda vuosinäkymään',
+	},
 	DIALOG: { CLOSE: 'Sulje' },
 	INPUT_WITH_LANGUAGE_OPTIONS: {
 		LANGUAGE: 'Kieli',
@@ -101,7 +125,19 @@ export const fi: FudisTranslationConfig = {
 export const sv: FudisTranslationConfig = {
 	BREADCRUMBS: { PREFIX: 'Länkstig' },
 	REQUIRED: 'Obligatorisk',
-	DATEPICKER: { CLOSE: 'Stäng kalender' },
+	DATEPICKER: {
+		CALENDAR: 'Kalender',
+		CLOSE: 'Stäng kalender',
+		OPEN: 'Öppna kalender',
+		PREV_MONTH: 'Förra månaden',
+		NEXT_MONTH: 'Nästa månad',
+		PREV_YEAR: 'Förra året',
+		NEXT_YEAR: 'Nästa år',
+		PREV_MULTIYEAR: 'Tidigare 24 år',
+		NEXT_MULTIYEAR: 'Nästa 24 år',
+		SWITCH_MONTH_VIEW: 'Byta till månadsvy',
+		SWITCH_MULTIYEAR_VIEW: 'Byta till årsvy',
+	},
 	DIALOG: { CLOSE: 'Stäng' },
 	INPUT_WITH_LANGUAGE_OPTIONS: {
 		LANGUAGE: 'Språk',
