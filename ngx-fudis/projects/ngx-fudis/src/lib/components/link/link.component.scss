@@ -12,7 +12,7 @@
 		}
 
 		&__primary {
-			@include colors.text-color('primary');
+			@include colors.text-color('primary-dark');
 		}
 
 		&__default {
