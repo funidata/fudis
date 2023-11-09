@@ -66,6 +66,7 @@ describe('FudisIdServiceService', () => {
 	const familyDataBefore: FudisIdFamilyData = {
 		breadcrumbs: [],
 		'checkbox-group': [],
+		'dropdown-menu': [],
 		'radio-button-group': [],
 	};
 	const familyDataAfter: FudisIdFamilyData = {
@@ -130,6 +131,38 @@ describe('FudisIdServiceService', () => {
 					'checkbox-group-3-custom-child-id',
 					'fudis-checkbox-group-3-item-4',
 					'fudis-checkbox-group-3-item-5',
+				],
+			},
+		],
+		'dropdown-menu': [
+			{
+				parent: 'fudis-dropdown-menu-1',
+				children: [
+					'fudis-dropdown-menu-1-item-1',
+					'fudis-dropdown-menu-1-item-2',
+					'dropdown-menu-1-custom-child-id',
+					'fudis-dropdown-menu-1-item-4',
+					'fudis-dropdown-menu-1-item-5',
+				],
+			},
+			{
+				parent: 'dropdown-menu-some-custom-id',
+				children: [
+					'dropdown-menu-some-custom-id-item-1',
+					'dropdown-menu-some-custom-id-item-2',
+					'dropdown-menu-2-custom-child-id',
+					'dropdown-menu-some-custom-id-item-4',
+					'dropdown-menu-some-custom-id-item-5',
+				],
+			},
+			{
+				parent: 'fudis-dropdown-menu-3',
+				children: [
+					'fudis-dropdown-menu-3-item-1',
+					'fudis-dropdown-menu-3-item-2',
+					'dropdown-menu-3-custom-child-id',
+					'fudis-dropdown-menu-3-item-4',
+					'fudis-dropdown-menu-3-item-5',
 				],
 			},
 		],

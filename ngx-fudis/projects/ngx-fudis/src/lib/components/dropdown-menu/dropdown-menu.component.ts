@@ -11,6 +11,7 @@ import {
 	ViewEncapsulation,
 } from '@angular/core';
 import { FudisInputSize } from '../../types/forms';
+import { FudisIdService } from '../../services/id/id.service';
 
 @Component({
 	selector: 'fudis-dropdown-menu',
@@ -20,6 +21,10 @@ import { FudisInputSize } from '../../types/forms';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownMenuComponent implements AfterContentInit, OnInit {
+	constructor(private _idService: FudisIdService) {
+		this.id = _idService.getNewParentId('dropdown-menu');
+	}
+
 	@ViewChild('dropdownMenu') dropdownMenu: ElementRef<HTMLElement>;
 
 	/**
@@ -46,6 +51,11 @@ export class DropdownMenuComponent implements AfterContentInit, OnInit {
 	 * Set dropdown size (should follow the given input element size)
 	 */
 	@Input() size: FudisInputSize = 'lg';
+
+	/**
+	 * Id for Dropdown Menu parent. Generated with FudisIdService
+	 */
+	public id: string;
 
 	/**
 	 * Determine dropdown max-width

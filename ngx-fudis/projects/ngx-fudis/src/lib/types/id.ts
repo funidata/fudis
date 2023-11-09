@@ -22,7 +22,7 @@ export const fudisIdComponents = [
 
 export type FudisIdComponent = (typeof fudisIdComponents)[number];
 
-export const fudisIdParents = ['breadcrumbs', 'checkbox-group', 'radio-button-group'] as const;
+export const fudisIdParents = ['breadcrumbs', 'checkbox-group', 'dropdown-menu', 'radio-button-group'] as const;
 
 export type FudisIdParent = (typeof fudisIdParents)[number];
 
