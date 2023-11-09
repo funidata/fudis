@@ -11,9 +11,9 @@
 			"cypress",
 			"node"
 		],
-		"esModuleInterop": true,
+		"sourceMap": false
 	},
-	"include": [
-		"**/*.ts"
-	]
+	"files": [
+		"../cypress.config.ts"
+	],
 }

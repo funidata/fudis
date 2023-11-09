@@ -29,6 +29,7 @@
 					"error",
 					{
 						"devDependencies": [
+							"./cypress/support/e2e.ts",
 							"cypress.config.ts",
 							"**/*.stories.*",
 							"**/.storybook/**/*.*",

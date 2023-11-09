@@ -37,5 +37,11 @@
 		"strictInjectionParameters": true,
 		"strictInputAccessModifiers": true,
 		"strictTemplates": true
-	}
+	},
+	"include": [
+		"./projects"
+	],
+	"exclude": [
+		"./cypress"
+	]
 }
