@@ -29,7 +29,8 @@
 			"dom"
 		],
 		"strictPropertyInitialization": false,
-		"useDefineForClassFields": false
+		"useDefineForClassFields": false,
+		"esModuleInterop": true
 	},
 	"angularCompilerOptions": {
 		"enableI18nLegacyMessageIdFormat": false,
