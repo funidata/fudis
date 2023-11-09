@@ -29,6 +29,7 @@
 					"error",
 					{
 						"devDependencies": [
+							"cypress.config.ts",
 							"**/*.stories.*",
 							"**/.storybook/**/*.*",
 							"**/*.spec.ts",
