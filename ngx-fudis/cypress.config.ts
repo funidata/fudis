@@ -9,12 +9,12 @@ export default defineConfig({
 	reporterOptions: {
 		configFile: 'cypress/reporter-config.json',
 	},
-
-	trashAssetsBeforeRuns: false,
+	screenshotsFolder: 'cypress/screenshots',
+	trashAssetsBeforeRuns: true,
 	video: false,
 	videosFolder: 'cypress/target/videos',
-	viewportWidth: 1080,
-	viewportHeight: 768,
+	viewportWidth: 1280,
+	viewportHeight: 800,
 	scrollBehavior: 'center',
 
 	retries: {

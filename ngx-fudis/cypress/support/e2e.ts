@@ -34,3 +34,7 @@ declare global {
 	}
 }
 compareSnapshotCommand();
+
+after(() => {
+	cy.task('generateReport');
+});

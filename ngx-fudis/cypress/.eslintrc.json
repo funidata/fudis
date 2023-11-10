@@ -17,7 +17,8 @@
 		},
 		{
 			"files": [
-				"*.cy.ts"
+				"*.cy.ts",
+				"*.ts"
 			],
 			"extends": [
 				"plugin:cypress/recommended"

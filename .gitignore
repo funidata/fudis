@@ -8,6 +8,11 @@
 **/.storybook/target
 /ngx-fudis/static
 
+# Cypress
+/ngx-fudis/cypress/cypress-visual-screenshots/comparison
+/ngx-fudis/cypress/cypress-visual-screenshots/diff
+
+
 # Node
 node_modules
 npm-debug.log

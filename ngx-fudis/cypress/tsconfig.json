@@ -18,6 +18,7 @@
 	],
 	"exclude": [],
 	"files": [
+		"../cypress-image-diff.config.ts",
 		"../cypress.config.ts",
 	],
 }

@@ -43,6 +43,6 @@
 		"types"
 	],
 	"exclude": [
-		"cypress"
+		"./cypress"
 	]
 }
