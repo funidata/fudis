@@ -115,12 +115,12 @@ describe('GridItemComponent', () => {
 		it('should convert columns attribute to grid-column properties', () => {
 			fixture.detectChanges();
 
-			expect(getAttribute(0, 'grid-column')).toBe('1 / auto');
+			expect(getAttribute(0, 'grid-column')).toBe('1');
 
 			component.columns = '3';
 			fixture.detectChanges();
 
-			expect(getAttribute(0, 'grid-column')).toBe('3 / auto');
+			expect(getAttribute(0, 'grid-column')).toBe('3');
 		});
 	});
 });
