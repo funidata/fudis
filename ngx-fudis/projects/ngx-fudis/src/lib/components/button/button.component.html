@@ -5,6 +5,7 @@
 		(blur)="handleBlur($event)"
 		[attr.aria-disabled]="disabled"
 		[attr.aria-label]="_ariaLabel"
+		[attr.id]="_id"
 		(click)="!disabled && buttonClick($event)"
 		[ngClass]="_classList"
 		[attr.aria-expanded]="!asMenuButton ? null : _toggleOn"
@@ -32,6 +33,7 @@
 		(blur)="handleBlur($event)"
 		[attr.aria-disabled]="disabled"
 		[attr.aria-label]="_ariaLabel"
+		[attr.id]="_id"
 		(click)="!disabled && buttonClick($event)"
 		[ngClass]="_classList"
 		[attr.aria-expanded]="!asMenuButton ? null : _toggleOn">

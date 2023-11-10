@@ -1,7 +1,8 @@
 <fudis-alert-group [insideDialog]="true" />
-<div class="fudis-dialog fudis-dialog__size__{{ size }}">
+<div class="fudis-dialog fudis-dialog__size__{{ size }}" [attr.id]="_id">
 	<fudis-button
 		class="fudis-dialog__close"
+		[attr.id]="_id + '-close'"
 		[label]="closeButtonLabel"
 		[labelHidden]="true"
 		fudisDialogClose

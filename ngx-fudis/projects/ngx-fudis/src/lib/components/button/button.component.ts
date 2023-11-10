@@ -15,6 +15,7 @@ import {
 import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisDropdownMenuItemService } from '../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
+import { FudisIdService } from '../../services/id/id.service';
 
 @Component({
 	selector: 'fudis-button',
@@ -23,8 +24,13 @@ import { FudisDropdownMenuItemService } from '../dropdown-menu/dropdown-menu-ite
 	encapsulation: ViewEncapsulation.None,
 })
 export class ButtonComponent extends TooltipApiDirective implements OnChanges {
-	constructor(private _clickService: FudisDropdownMenuItemService) {
+	constructor(
+		private _clickService: FudisDropdownMenuItemService,
+		private _idService: FudisIdService
+	) {
 		super();
+
+		this._id = _idService.getNewId('button');
 
 		this._menuStatus = this._clickService.getMenuStatus();
 
@@ -111,6 +117,11 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 	 * Aria-label for icon-only buttons
 	 */
 	protected _ariaLabel: string = '';
+
+	/**
+	 * Id generated with FudisIdService
+	 */
+	protected _id: string;
 
 	/**
 	 * Menu status property if button is used as dropdown menu button
