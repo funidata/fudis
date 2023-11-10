@@ -11,6 +11,8 @@ export const fudisScreenshots = (
 	const desktopName = name ? `${name}_desktop` : 'desktop';
 	const mobileName = name ? `${name}_mobile` : 'mobile';
 
+	cy.wait(1000);
+
 	if (screenSize === 'both' || screenSize === 'desktop') {
 		if (wait) {
 			cy.wait(wait);

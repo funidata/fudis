@@ -4,7 +4,6 @@ describe('Dropdown Menu screenshot', () => {
 	it('should match with previous screenshot, desktop interaction', () => {
 		cy.visit('/iframe.html?args=&id=components-dropdown-menu--dropdown-menu&viewMode=story');
 
-		cy.wait(1000);
 		cy.get('#fudis-button-1').click();
 		fudisScreenshots('desktop', '1-opened');
 		cy.get('#fudis-dropdown-menu-1-item-3').focus();
@@ -19,7 +18,7 @@ describe('Dropdown Menu screenshot', () => {
 
 	it('should match with previous screenshot, mobile interaction', () => {
 		cy.visit('/iframe.html?args=&id=components-dropdown-menu--dropdown-menu&viewMode=story');
-		cy.wait(1000);
+
 		cy.viewport('iphone-x');
 		cy.get('#fudis-button-1').click();
 		fudisScreenshots('mobile', '1-opened');
