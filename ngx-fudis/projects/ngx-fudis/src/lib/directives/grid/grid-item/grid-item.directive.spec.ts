@@ -124,12 +124,18 @@ describe('GridItemDirective', () => {
 		it('should convert columns attribute to grid-column properties', () => {
 			fixture.detectChanges();
 
-			expect(getAttribute(0, 'grid-column')).toBe('2');
+			const columnsBeforeValid =
+				(getAttribute(0, 'grid-column') === '2' || getAttribute(0, 'grid-column') === '2 / auto') ?? true;
+
+			expect(columnsBeforeValid).toBeTrue();
 
 			component.columns = '6';
 			fixture.detectChanges();
 
-			expect(getAttribute(0, 'grid-column')).toBe('6');
+			const columnsAfterValid =
+				(getAttribute(0, 'grid-column') === '6' || getAttribute(0, 'grid-column') === '6 / auto') ?? true;
+
+			expect(columnsAfterValid).toBeTrue();
 		});
 	});
 });
