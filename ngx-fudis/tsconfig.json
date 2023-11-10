@@ -30,7 +30,7 @@
 		],
 		"strictPropertyInitialization": false,
 		"useDefineForClassFields": false,
-		"esModuleInterop": true
+		"esModuleInterop": true,
 	},
 	"angularCompilerOptions": {
 		"enableI18nLegacyMessageIdFormat": false,
@@ -39,9 +39,10 @@
 		"strictTemplates": true
 	},
 	"include": [
-		"./projects"
+		"projects",
+		"types"
 	],
 	"exclude": [
-		"./cypress"
+		"cypress"
 	]
 }

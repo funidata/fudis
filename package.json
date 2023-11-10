@@ -17,6 +17,7 @@
 		"build-local-package": "cd ngx-fudis && ng build ngx-fudis && cd dist/ngx-fudis && npm pack --pack-destination ~",
 		"version": "scripts/version_sub_projects.sh $npm_package_version",
 		"postversion": "git commit --amend -m \"Bump to version v$npm_package_version\" && git push && git push origin v$npm_package_version",
+		"cypress":"cd ngxfudis && npx cypress run",
 		"fudis-release": "scripts/release.sh"
 	},
 	"repository": {

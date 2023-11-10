@@ -13,7 +13,11 @@
 		],
 		"sourceMap": false
 	},
+	"include": [
+		"**/*/*.ts",
+	],
+	"exclude": [],
 	"files": [
-		"../cypress.config.ts"
+		"../cypress.config.ts",
 	],
 }

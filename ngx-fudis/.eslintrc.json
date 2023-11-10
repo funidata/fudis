@@ -4,7 +4,8 @@
 		"projects/**/*"
 	],
 	"plugins": [
-		"eslint-plugin-jasmine"
+		"eslint-plugin-jasmine",
+		"cypress"
 	],
 	"overrides": [
 		{
