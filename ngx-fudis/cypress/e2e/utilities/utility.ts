@@ -28,17 +28,17 @@ export const fudisScreenshots = (
 	cy.wait(1000);
 
 	if (screenSize === 'both' || screenSize === 'desktop') {
+		cy.viewport('macbook-13');
 		if (wait) {
 			cy.wait(wait);
 		}
-		cy.viewport('macbook-13');
 		cy.compareSnapshot(desktopName, 0, retryOptions);
 	}
 	if (screenSize === 'both' || screenSize === 'mobile') {
+		cy.viewport('iphone-x');
 		if (wait) {
 			cy.wait(wait);
 		}
-		cy.viewport('iphone-x');
 		cy.compareSnapshot(mobileName, 0, retryOptions);
 	}
 };
