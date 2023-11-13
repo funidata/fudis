@@ -42,7 +42,7 @@ export const fudisScreenshots = (
 		if (fullScreenshot) {
 			cy.compareSnapshot(desktopName, 0, retryOptions);
 		} else {
-			cy.get('storybook-root').compareSnapshot(desktopName, 0, retryOptions);
+			cy.get('#storybook-root').compareSnapshot(desktopName, 0, retryOptions);
 		}
 	}
 	if (screenSize === 'both' || screenSize === 'mobile') {
@@ -53,7 +53,7 @@ export const fudisScreenshots = (
 		if (fullScreenshot) {
 			cy.compareSnapshot(mobileName, 0, retryOptions);
 		} else {
-			cy.get('storybook-root').compareSnapshot(mobileName, 0, retryOptions);
+			cy.get('#storybook-root').compareSnapshot(mobileName, 0, retryOptions);
 		}
 	}
 };
