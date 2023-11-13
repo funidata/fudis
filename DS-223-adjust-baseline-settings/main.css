@@ -1967,6 +1967,10 @@ html {
 html {
   font-size: 100%;
 }
+html.hidden-scrollbar::-webkit-scrollbar {
+  visibility: hidden;
+  width: 0;
+}
 
 /* stylelint-disable color-no-hex */
 [data-theme=into] {
