@@ -3,6 +3,7 @@
 	#dropdownItem
 	class="fudis-dropdown-menu-item"
 	[attr.role]="'menuitem'"
+	[attr.id]="_id"
 	[attr.aria-disabled]="disabled"
 	(keydown)="handleKeyDown($event)"
 	(blur)="handleButtonBlur($event)"
@@ -13,6 +14,7 @@
 <div
 	*ngIf="_isMultiselectOption"
 	class="fudis-dropdown-menu-item__checkbox"
+	[attr.id]="_id"
 	[class.fudis-dropdown-menu-item__checkbox--active]="checked">
 	<label
 		class="fudis-dropdown-menu-item__checkbox__label"

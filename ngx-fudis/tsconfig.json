@@ -29,12 +29,20 @@
 			"dom"
 		],
 		"strictPropertyInitialization": false,
-		"useDefineForClassFields": false
+		"useDefineForClassFields": false,
+		"esModuleInterop": true,
 	},
 	"angularCompilerOptions": {
 		"enableI18nLegacyMessageIdFormat": false,
 		"strictInjectionParameters": true,
 		"strictInputAccessModifiers": true,
 		"strictTemplates": true
-	}
+	},
+	"include": [
+		"projects",
+		"types"
+	],
+	"exclude": [
+		"./cypress"
+	]
 }

@@ -21,6 +21,7 @@ export class FudisIdService {
 		'autocomplete-multi-select': [],
 		datepicker: [],
 		daterange: [],
+		dialog: [],
 		dropdown: [],
 		expandable: [],
 		fieldset: [],
@@ -38,6 +39,7 @@ export class FudisIdService {
 	private _familyData: FudisIdFamilyData = {
 		breadcrumbs: [],
 		'checkbox-group': [],
+		'dropdown-menu': [],
 		'radio-button-group': [],
 	};
 
