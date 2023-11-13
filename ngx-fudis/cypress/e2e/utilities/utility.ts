@@ -11,6 +11,20 @@ export const fudisScreenshots = (
 	const desktopName = name ? `${name}_desktop` : 'desktop';
 	const mobileName = name ? `${name}_mobile` : 'mobile';
 
+	cy.wrap(
+		Cypress.automation('remote:debugger:protocol', {
+			command: 'Emulation.setDeviceMetricsOverride',
+			params: {
+				// target DPR here
+				deviceScaleFactor: 1,
+				// width and height set to 0 remove overrides
+				width: 0,
+				height: 0,
+				// my use case wasn't on mobile
+				mobile: false,
+			},
+		})
+	);
 	cy.wait(1000);
 
 	if (screenSize === 'both' || screenSize === 'desktop') {
