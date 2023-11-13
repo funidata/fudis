@@ -1,8 +1,9 @@
-import { fudisScreenshots } from './utilities/utility';
+import { fudisScreenshots, fudisScreenshotInit } from './utilities/utility';
 
 describe('Expadanble screenshot', () => {
 	it('should match with previous screenshot', () => {
 		cy.visit('/iframe.html?args=&id=components-expandable--all-variants&viewMode=story');
+		fudisScreenshotInit();
 		fudisScreenshots('both', '1-all-closed');
 		cy.get('#fudis-expandable-1-heading .fudis-expandable__header__heading__button').click();
 		fudisScreenshots('both', '2-regular-opened');

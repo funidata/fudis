@@ -1,8 +1,9 @@
-import { fudisScreenshots } from './utilities/utility';
+import { fudisScreenshots, fudisScreenshotInit } from './utilities/utility';
 
 describe('Dialog screenshot', () => {
 	it('should match with previous screenshot om DESKTOP', () => {
 		cy.visit('/iframe.html?args=&id=components-dialog--dialog&viewMode=story');
+		fudisScreenshotInit();
 		cy.get('#fudis-button-1').click();
 		fudisScreenshots('desktop', '1', 500);
 		cy.get('#fudis-dialog-1-close').click();
@@ -14,6 +15,7 @@ describe('Dialog screenshot', () => {
 
 	it('should match with previous screenshot on MOBILE', () => {
 		cy.visit('/iframe.html?args=&id=components-dialog--dialog&viewMode=story');
+		fudisScreenshotInit();
 		cy.get('#fudis-button-1').click();
 		fudisScreenshots('mobile', '1', 500);
 		cy.get('#fudis-dialog-1-close').click();

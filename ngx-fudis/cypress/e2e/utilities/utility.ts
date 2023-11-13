@@ -3,13 +3,8 @@ const retryOptions = {
 	delay: 500, // delay before next iteration, ms
 };
 
-export const fudisScreenshots = (
-	screenSize: 'both' | 'desktop' | 'mobile' = 'both',
-	name?: string | null,
-	wait?: number | null
-) => {
-	const desktopName = name ? `${name}_desktop` : 'desktop';
-	const mobileName = name ? `${name}_mobile` : 'mobile';
+export const fudisScreenshotInit = () => {
+	cy.get('html, body').invoke('attr', 'style', 'height: auto; scroll-behavior: auto;');
 
 	cy.wrap(
 		Cypress.automation('remote:debugger:protocol', {
@@ -25,6 +20,18 @@ export const fudisScreenshots = (
 			},
 		})
 	);
+};
+
+export const fudisScreenshots = (
+	screenSize: 'both' | 'desktop' | 'mobile' = 'both',
+	name?: string | null,
+	wait?: number | null,
+	fullScreenshot?: boolean
+) => {
+	const desktopName = name ? `${name}_desktop` : 'desktop';
+	const mobileName = name ? `${name}_mobile` : 'mobile';
+
+	// eslint-disable-next-line cypress/no-unnecessary-waiting
 	cy.wait(1000);
 
 	if (screenSize === 'both' || screenSize === 'desktop') {
@@ -32,13 +39,21 @@ export const fudisScreenshots = (
 		if (wait) {
 			cy.wait(wait);
 		}
-		cy.compareSnapshot(desktopName, 0, retryOptions);
+		if (fullScreenshot) {
+			cy.compareSnapshot(desktopName, 0, retryOptions);
+		} else {
+			cy.get('storybook-root').compareSnapshot(desktopName, 0, retryOptions);
+		}
 	}
 	if (screenSize === 'both' || screenSize === 'mobile') {
 		cy.viewport('iphone-x');
 		if (wait) {
 			cy.wait(wait);
 		}
-		cy.compareSnapshot(mobileName, 0, retryOptions);
+		if (fullScreenshot) {
+			cy.compareSnapshot(mobileName, 0, retryOptions);
+		} else {
+			cy.get('storybook-root').compareSnapshot(mobileName, 0, retryOptions);
+		}
 	}
 };
