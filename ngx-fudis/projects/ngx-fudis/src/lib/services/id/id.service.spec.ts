@@ -19,6 +19,7 @@ describe('FudisIdServiceService', () => {
 		'autocomplete-multi-select': [],
 		datepicker: [],
 		daterange: [],
+		dialog: [],
 		dropdown: [],
 		expandable: [],
 		fieldset: [],
@@ -47,6 +48,7 @@ describe('FudisIdServiceService', () => {
 		],
 		datepicker: ['fudis-datepicker-1', 'fudis-datepicker-2', 'custom-id-for-datepicker', 'fudis-datepicker-4'],
 		daterange: ['fudis-daterange-1', 'fudis-daterange-2', 'custom-id-for-daterange', 'fudis-daterange-4'],
+		dialog: ['fudis-dialog-1', 'fudis-dialog-2', 'custom-id-for-dialog', 'fudis-dialog-4'],
 		dropdown: ['fudis-dropdown-1', 'fudis-dropdown-2', 'custom-id-for-dropdown', 'fudis-dropdown-4'],
 		expandable: ['fudis-expandable-1', 'fudis-expandable-2', 'custom-id-for-expandable', 'fudis-expandable-4'],
 		fieldset: ['fudis-fieldset-1', 'fudis-fieldset-2', 'custom-id-for-fieldset', 'fudis-fieldset-4'],
@@ -66,6 +68,7 @@ describe('FudisIdServiceService', () => {
 	const familyDataBefore: FudisIdFamilyData = {
 		breadcrumbs: [],
 		'checkbox-group': [],
+		'dropdown-menu': [],
 		'radio-button-group': [],
 	};
 	const familyDataAfter: FudisIdFamilyData = {
@@ -130,6 +133,38 @@ describe('FudisIdServiceService', () => {
 					'checkbox-group-3-custom-child-id',
 					'fudis-checkbox-group-3-item-4',
 					'fudis-checkbox-group-3-item-5',
+				],
+			},
+		],
+		'dropdown-menu': [
+			{
+				parent: 'fudis-dropdown-menu-1',
+				children: [
+					'fudis-dropdown-menu-1-item-1',
+					'fudis-dropdown-menu-1-item-2',
+					'dropdown-menu-1-custom-child-id',
+					'fudis-dropdown-menu-1-item-4',
+					'fudis-dropdown-menu-1-item-5',
+				],
+			},
+			{
+				parent: 'dropdown-menu-some-custom-id',
+				children: [
+					'dropdown-menu-some-custom-id-item-1',
+					'dropdown-menu-some-custom-id-item-2',
+					'dropdown-menu-2-custom-child-id',
+					'dropdown-menu-some-custom-id-item-4',
+					'dropdown-menu-some-custom-id-item-5',
+				],
+			},
+			{
+				parent: 'fudis-dropdown-menu-3',
+				children: [
+					'fudis-dropdown-menu-3-item-1',
+					'fudis-dropdown-menu-3-item-2',
+					'dropdown-menu-3-custom-child-id',
+					'fudis-dropdown-menu-3-item-4',
+					'fudis-dropdown-menu-3-item-5',
 				],
 			},
 		],

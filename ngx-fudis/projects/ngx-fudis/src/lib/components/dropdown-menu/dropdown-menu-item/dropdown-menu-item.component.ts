@@ -1,6 +1,7 @@
 import { OnInit, Component, ElementRef, EventEmitter, Host, Input, Output, ViewChild } from '@angular/core';
 import { FudisDropdownMenuItemService } from './dropdown-menu-item.service';
 import { DropdownMenuComponent } from '../dropdown-menu.component';
+import { FudisIdService } from '../../../services/id/id.service';
 
 @Component({
 	selector: 'fudis-dropdown-menu-item',
@@ -10,6 +11,7 @@ import { DropdownMenuComponent } from '../dropdown-menu.component';
 export class DropdownMenuItemComponent implements OnInit {
 	constructor(
 		private _clickService: FudisDropdownMenuItemService,
+		private _idService: FudisIdService,
 		@Host() private _parentComponent: DropdownMenuComponent
 	) {}
 
@@ -56,11 +58,18 @@ export class DropdownMenuItemComponent implements OnInit {
 	 */
 	protected _isMultiselectOption: boolean = false;
 
+	/**
+	 * Id generated with FudisIdService
+	 */
+	protected _id: string;
+
 	ngOnInit(): void {
 		// Check parent component's public HostBinding for multiselect usage
 		if (this._parentComponent._isMultiselect) {
 			this._isMultiselectOption = true;
 		}
+
+		this._id = this._idService.getNewChildId('dropdown-menu', this._parentComponent.id);
 	}
 
 	// eslint-disable-next-line class-methods-use-this

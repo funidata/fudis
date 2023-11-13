@@ -4,7 +4,8 @@
 		"projects/**/*"
 	],
 	"plugins": [
-		"eslint-plugin-jasmine"
+		"eslint-plugin-jasmine",
+		"cypress"
 	],
 	"overrides": [
 		{
@@ -29,6 +30,8 @@
 					"error",
 					{
 						"devDependencies": [
+							"./cypress/support/e2e.ts",
+							"cypress.config.ts",
 							"**/*.stories.*",
 							"**/.storybook/**/*.*",
 							"**/*.spec.ts",
