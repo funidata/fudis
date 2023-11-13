@@ -18,6 +18,10 @@ const defaultConfig: FudisScreenshotTestConfig = {
 export const fudisScreenshotInits = () => {
 	cy.get('html, body').invoke('attr', 'style', 'height: auto; scroll-behavior: auto; ');
 
+	cy.get('html').invoke('attr', 'class', 'hidden-scrollbar');
+
+	// document.querySelector('html')!.classList.add('hidden-scrollbar');
+
 	cy.wrap(
 		Cypress.automation('remote:debugger:protocol', {
 			command: 'Emulation.setDeviceMetricsOverride',

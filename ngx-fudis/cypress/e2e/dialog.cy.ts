@@ -32,7 +32,7 @@ const mobile_config_1: FudisScreenshotTestConfig = {
 const mobile_config_2: FudisScreenshotTestConfig = {
 	...commonConfig,
 	testName: '2',
-	deviceType: 'desktop',
+	deviceType: 'mobile',
 };
 
 const mobile_config_3: FudisScreenshotTestConfig = {
