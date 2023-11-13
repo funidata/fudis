@@ -19,7 +19,9 @@
 		"postversion": "git commit --amend -m \"Bump to version v$npm_package_version\" && git push && git push origin v$npm_package_version",
 		"build-storybook": "cd ngx-fudis && npm run docs:json && ng run storybook:build",
 		"cypress":"cd ngx-fudis && npx cypress run",
-		"fudis-release": "scripts/release.sh"
+		"local-storybook": "scripts/local-storybook.sh",
+		"fudis-release": "scripts/release.sh",
+		"host-static-storybook": "cd ngx-fudis && npx http-server ./static"
 	},
 	"repository": {
 		"type": "git",
