@@ -2,7 +2,7 @@ import { fudisScreenshots, fudisScreenshotInits, FudisScreenshotTestConfig } fro
 
 const config: FudisScreenshotTestConfig = {
 	deviceType: 'both',
-	captureArea: 'wholePage',
+	isFullscreenScreenshot: true,
 };
 
 describe('Visuals', () => {

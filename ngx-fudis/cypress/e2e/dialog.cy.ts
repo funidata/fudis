@@ -1,8 +1,9 @@
 import { fudisScreenshots, fudisScreenshotInits, FudisScreenshotTestConfig } from './utilities/utility';
 
 const commonConfig: FudisScreenshotTestConfig = {
+	componentName: 'dialog',
 	loadWait: 500,
-	captureArea: 'wholePage',
+	isFullscreenScreenshot: true,
 };
 
 const desktop_config_1: FudisScreenshotTestConfig = {

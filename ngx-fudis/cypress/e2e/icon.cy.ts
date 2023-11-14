@@ -2,7 +2,7 @@ import { fudisScreenshots, fudisScreenshotInits, FudisScreenshotTestConfig } fro
 
 const config: FudisScreenshotTestConfig = {
 	loadWait: 500,
-	threshold: 0.004,
+	errorThreshold: 0.004,
 };
 
 describe('Icon screenshot', () => {

@@ -2,8 +2,7 @@ import { fudisScreenshots, fudisScreenshotInits, FudisScreenshotTestConfig } fro
 
 const commonConfig: FudisScreenshotTestConfig = {
 	loadWait: 200,
-	captureArea: 'wholePage',
-	threshold: 0.002,
+	isFullscreenScreenshot: true,
 };
 
 const desktop_config_1: FudisScreenshotTestConfig = {

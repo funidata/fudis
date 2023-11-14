@@ -1,7 +1,7 @@
 import { fudisScreenshotInits, fudisScreenshots, FudisScreenshotTestConfig } from './utilities/utility';
 
 const commonConfig: FudisScreenshotTestConfig = {
-	captureArea: 'wholePage',
+	isFullscreenScreenshot: true,
 	loadWait: 200,
 };
 
