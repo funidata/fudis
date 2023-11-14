@@ -1,38 +1,38 @@
 import { fudisScreenshots, fudisScreenshotInits, FudisScreenshotTestConfig } from './utilities/utility';
 
-const config_1: FudisScreenshotTestConfig = {
+const config1: FudisScreenshotTestConfig = {
 	testName: 'regular',
 };
 
-const config_2: FudisScreenshotTestConfig = {
+const config2: FudisScreenshotTestConfig = {
 	testName: 'compact',
 };
 
-const config_3: FudisScreenshotTestConfig = {
+const config3: FudisScreenshotTestConfig = {
 	testName: 'inside-grid',
 };
 
-const config_4: FudisScreenshotTestConfig = {
+const config4: FudisScreenshotTestConfig = {
 	testName: 'sub-components-regular',
 };
 
-const config_5: FudisScreenshotTestConfig = {
+const config5: FudisScreenshotTestConfig = {
 	testName: 'sub-components-compact',
 };
 
-const config_6: FudisScreenshotTestConfig = {
+const config6: FudisScreenshotTestConfig = {
 	testName: 'language-badges-1',
 };
 
-const config_7: FudisScreenshotTestConfig = {
+const config7: FudisScreenshotTestConfig = {
 	testName: 'language-badges-2',
 };
 
-const config_8: FudisScreenshotTestConfig = {
+const config8: FudisScreenshotTestConfig = {
 	testName: 'language-badges-3',
 };
 
-const config_9: FudisScreenshotTestConfig = {
+const config9: FudisScreenshotTestConfig = {
 	testName: 'language-badges-4',
 };
 
@@ -40,42 +40,42 @@ describe('Description List screenshot', () => {
 	it('should match with previous screenshot, variant regular', () => {
 		cy.visit('/iframe.html?args=&id=components-description-list--description-list-data-loop&viewMode=story');
 		fudisScreenshotInits();
-		fudisScreenshots(config_1);
+		fudisScreenshots(config1);
 	});
 	it('should match with previous screenshot, variant compact', () => {
 		cy.visit(
 			'/iframe.html?args=variant:compact&id=components-description-list--description-list-data-loop&viewMode=story'
 		);
 		fudisScreenshotInits();
-		fudisScreenshots(config_2);
+		fudisScreenshots(config2);
 	});
 	it('should match with previous screenshot, DL inside Grid', () => {
 		cy.visit('/iframe.html?args=&id=components-description-list--description-list-item-inside-grid&viewMode=story');
 		fudisScreenshotInits();
-		fudisScreenshots(config_3);
+		fudisScreenshots(config3);
 	});
 	it('should match with previous screenshot, sub components regular', () => {
 		cy.visit('/iframe.html?args=&id=components-description-list--description-list-with-sub-components&viewMode=story');
 		fudisScreenshotInits();
-		fudisScreenshots(config_4);
+		fudisScreenshots(config4);
 	});
 	it('should match with previous screenshot, sub components compact', () => {
 		cy.visit(
 			'/iframe.html?args=variant:compact&id=components-description-list--description-list-with-sub-components&viewMode=story'
 		);
 		fudisScreenshotInits();
-		fudisScreenshots(config_5);
+		fudisScreenshots(config5);
 	});
 
 	it('should match with previous screenshot, with language badges', () => {
 		cy.visit('/iframe.html?args=&id=components-description-list--description-list-with-languages&viewMode=story');
 		fudisScreenshotInits();
-		fudisScreenshots(config_6);
+		fudisScreenshots(config6);
 		cy.get('#fudis-button-1').click();
-		fudisScreenshots(config_7);
+		fudisScreenshots(config7);
 		cy.get('#fudis-button-2').click();
-		fudisScreenshots(config_8);
+		fudisScreenshots(config8);
 		cy.get('#fudis-button-3').click();
-		fudisScreenshots(config_9);
+		fudisScreenshots(config9);
 	});
 });

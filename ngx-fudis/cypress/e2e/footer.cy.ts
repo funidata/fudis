@@ -1,4 +1,4 @@
-import { fudisScreenshots, fudisScreenshotInits,  FudisScreenshotTestConfig} from './utilities/utility';
+import { fudisScreenshots, fudisScreenshotInits } from './utilities/utility';
 
 describe('Footer screenshot', () => {
 	it('should match with previous screenshot', () => {

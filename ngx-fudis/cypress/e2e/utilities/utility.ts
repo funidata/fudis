@@ -3,8 +3,6 @@ export interface FudisScreenshotTestConfig {
 	deviceType?: 'both' | 'desktop' | 'mobile';
 	// If Storyview has multiple screenshots to be taken, an individual name should be spesified
 	testName?: undefined | string;
-	// What component is tested, used for easier structure folders of test results
-	componentName?: string;
 	// If needed add some wait time before running screenshot of a certain state. Used in e. g. wait after clicking a button to make sure browser has really loaded updated view
 	loadWait?: number | undefined;
 	// By default takes screenshot only about the cropped area where the view is, but if needed e. g. with modals and dropdowns set to true to disable cropping
@@ -49,8 +47,8 @@ export const fudisScreenshotInits = () => {
 export const fudisScreenshots = (updatedConfig?: FudisScreenshotTestConfig) => {
 	const testConfig: FudisScreenshotTestConfig = { ...defaultConfig, ...updatedConfig };
 
-	const desktopName = testConfig.testName ? `${testConfig.componentName}/${testConfig.testName}_desktop` : 'desktop';
-	const mobileName = testConfig.testName ? `${testConfig.componentName}/${testConfig.testName}_mobile` : 'mobile';
+	const desktopName = testConfig.testName ? `/${testConfig.testName}_desktop` : '/desktop';
+	const mobileName = testConfig.testName ? `/${testConfig.testName}_mobile` : '/mobile';
 
 	const retryOptions = {
 		limit: testConfig.tryLimit, // max number of retries
