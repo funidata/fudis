@@ -16,8 +16,20 @@ html {
 
 	&.hidden-scrollbar{
 		&::-webkit-scrollbar {
+			scrollbar-width: none;
+			display: none;
+			background: transparent;
 			visibility: hidden;
 			width: 0;
+		}
+		& * {
+			scrollbar-width: none;  /* Firefox */
+			&::-webkit-scrollbar{
+				display: none;
+				visibility: hidden;
+				width: 0;
+				background: transparent;
+			}
 		}
 	}
 }
