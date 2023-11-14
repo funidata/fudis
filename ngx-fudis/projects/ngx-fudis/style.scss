@@ -13,7 +13,28 @@
 
 html {
 	font-size: 100%;
+
+	&.hidden-scrollbar{
+		&::-webkit-scrollbar {
+			scrollbar-width: none;
+			display: none;
+			background: transparent;
+			visibility: hidden;
+			width: 0;
+		}
+		& * {
+			scrollbar-width: none;  /* Firefox */
+			&::-webkit-scrollbar{
+				display: none;
+				visibility: hidden;
+				width: 0;
+				background: transparent;
+			}
+		}
+	}
 }
+
+
 
 /* stylelint-disable color-no-hex */
 [data-theme='into'] {
