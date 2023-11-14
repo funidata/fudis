@@ -33,7 +33,7 @@ export const fudisScreenshotInits = () => {
 			command: 'Emulation.setDeviceMetricsOverride',
 			params: {
 				// target DPR here
-				deviceScaleFactor: 1,
+				deviceScaleFactor: 2,
 				// width and height set to 0 remove overrides
 				width: 0,
 				height: 0,
