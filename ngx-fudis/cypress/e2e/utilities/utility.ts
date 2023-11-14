@@ -1,6 +1,8 @@
+type devices = 'desktopLarge' | 'desktop' | 'mobile' | 'tablet';
+
 export interface FudisScreenshotTestConfig {
 	// Simulated device types of  desktop 'Macbook 13' and mobile 'iPhone X'
-	deviceType?: 'both' | 'desktop' | 'mobile';
+	devices?: devices[];
 	// If Storyview has multiple screenshots to be taken, an individual name should be spesified
 	testName?: undefined | string;
 	// If needed add some wait time before running screenshot of a certain state. Used in e. g. wait after clicking a button to make sure browser has really loaded updated view
@@ -16,7 +18,7 @@ export interface FudisScreenshotTestConfig {
 }
 
 const defaultConfig: FudisScreenshotTestConfig = {
-	deviceType: 'both',
+	devices: ['mobile', 'desktop'],
 	errorThreshold: 0,
 	tryLimit: 3,
 	newTryDelay: 500,
@@ -44,40 +46,47 @@ export const fudisScreenshotInits = () => {
 	);
 };
 
+const screenshotHelper = (name: string, config: FudisScreenshotTestConfig) => {
+	const retryOptions = {
+		limit: config.tryLimit, // max number of retries
+		delay: config.newTryDelay, // delay before next iteration, ms
+	};
+
+	if (config.loadWait) {
+		cy.wait(config.loadWait);
+	}
+	if (config.isFullscreenScreenshot) {
+		cy.compareSnapshot(name, config.errorThreshold, retryOptions);
+	} else {
+		cy.get('#storybook-root').compareSnapshot(name, config.errorThreshold, retryOptions);
+	}
+};
+
 export const fudisScreenshots = (updatedConfig?: FudisScreenshotTestConfig) => {
 	const testConfig: FudisScreenshotTestConfig = { ...defaultConfig, ...updatedConfig };
 
+	const desktopLargeName = testConfig.testName ? `/${testConfig.testName}_desktop_large` : '/desktop_large';
 	const desktopName = testConfig.testName ? `/${testConfig.testName}_desktop` : '/desktop';
 	const mobileName = testConfig.testName ? `/${testConfig.testName}_mobile` : '/mobile';
-
-	const retryOptions = {
-		limit: testConfig.tryLimit, // max number of retries
-		delay: testConfig.newTryDelay, // delay before next iteration, ms
-	};
+	const tabletName = testConfig.testName ? `/${testConfig.testName}_tablet` : '/tablet';
 
 	// eslint-disable-next-line cypress/no-unnecessary-waiting
 	cy.wait(1000);
 
-	if (testConfig.deviceType === 'both' || testConfig.deviceType === 'desktop') {
-		cy.viewport('macbook-13');
-		if (testConfig.loadWait) {
-			cy.wait(testConfig.loadWait);
-		}
-		if (testConfig.isFullscreenScreenshot) {
-			cy.compareSnapshot(desktopName, testConfig.errorThreshold, retryOptions);
-		} else {
-			cy.get('#storybook-root').compareSnapshot(desktopName, testConfig.errorThreshold, retryOptions);
-		}
+	if (testConfig.devices?.includes('desktopLarge')) {
+		cy.viewport('macbook-16');
+		screenshotHelper(desktopLargeName, testConfig);
 	}
-	if (testConfig.deviceType === 'both' || testConfig.deviceType === 'mobile') {
+	if (testConfig.devices?.includes('desktop')) {
+		cy.viewport('macbook-13');
+		screenshotHelper(desktopName, testConfig);
+	}
+	if (testConfig.devices?.includes('tablet')) {
+		cy.viewport('ipad-2');
+		screenshotHelper(tabletName, testConfig);
+	}
+	if (testConfig.devices?.includes('mobile')) {
 		cy.viewport('iphone-x');
-		if (testConfig.loadWait) {
-			cy.wait(testConfig.loadWait);
-		}
-		if (testConfig.isFullscreenScreenshot) {
-			cy.compareSnapshot(mobileName, testConfig.errorThreshold, retryOptions);
-		} else {
-			cy.get('#storybook-root').compareSnapshot(mobileName, testConfig.errorThreshold, retryOptions);
-		}
+		screenshotHelper(mobileName, testConfig);
 	}
 };

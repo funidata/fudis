@@ -1,17 +1,17 @@
 import { fudisScreenshots, fudisScreenshotInits, FudisScreenshotTestConfig } from './utilities/utility';
 
 const configRegular: FudisScreenshotTestConfig = {
-	deviceType: 'mobile',
+	devices: ['mobile'],
 	testName: 'regular',
 };
 
 const configExternal: FudisScreenshotTestConfig = {
-	deviceType: 'mobile',
+	devices: ['mobile'],
 	testName: 'external',
 };
 
 const configWithTitle: FudisScreenshotTestConfig = {
-	deviceType: 'mobile',
+	devices: ['mobile'],
 	testName: 'with-title',
 };
 

@@ -1,7 +1,7 @@
 import { fudisScreenshots, fudisScreenshotInits, FudisScreenshotTestConfig } from './utilities/utility';
 
 const config: FudisScreenshotTestConfig = {
-	deviceType: 'both',
+	devices: ['desktop', 'mobile'],
 	isFullscreenScreenshot: true,
 };
 

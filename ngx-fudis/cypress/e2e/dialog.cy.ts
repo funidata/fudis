@@ -8,37 +8,37 @@ const commonConfig: FudisScreenshotTestConfig = {
 const desktopConfig1: FudisScreenshotTestConfig = {
 	...commonConfig,
 	testName: '1',
-	deviceType: 'desktop',
+	devices: ['desktop'],
 };
 
 const desktopConfig2: FudisScreenshotTestConfig = {
 	...commonConfig,
 	testName: '2',
-	deviceType: 'desktop',
+	devices: ['desktop'],
 };
 
 const desktopConfig3: FudisScreenshotTestConfig = {
 	...commonConfig,
 	testName: '3',
-	deviceType: 'desktop',
+	devices: ['desktop'],
 };
 
 const mobileConfig1: FudisScreenshotTestConfig = {
 	...commonConfig,
 	testName: '1',
-	deviceType: 'mobile',
+	devices: ['mobile'],
 };
 
 const mobileConfig2: FudisScreenshotTestConfig = {
 	...commonConfig,
 	testName: '2',
-	deviceType: 'mobile',
+	devices: ['mobile'],
 };
 
 const mobileConfig3: FudisScreenshotTestConfig = {
 	...commonConfig,
 	testName: '3',
-	deviceType: 'mobile',
+	devices: ['mobile'],
 };
 
 describe('Dialog screenshot', () => {

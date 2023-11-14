@@ -7,49 +7,49 @@ const commonConfig: FudisScreenshotTestConfig = {
 
 const desktopConfig1: FudisScreenshotTestConfig = {
 	...commonConfig,
-	deviceType: 'desktop',
+	devices: ['desktop'],
 	testName: '1-initial',
 };
 
 const desktopConfig2: FudisScreenshotTestConfig = {
 	...commonConfig,
-	deviceType: 'desktop',
+	devices: ['desktop'],
 	testName: '2-focused',
 };
 
 const desktopConfig3: FudisScreenshotTestConfig = {
 	...commonConfig,
-	deviceType: 'desktop',
+	devices: ['desktop'],
 	testName: '3-selecting',
 };
 
 const desktopConfig4: FudisScreenshotTestConfig = {
 	...commonConfig,
 	testName: '4-blurred',
-	deviceType: 'desktop',
+	devices: ['desktop'],
 };
 
 const mobileConfig1: FudisScreenshotTestConfig = {
 	...commonConfig,
-	deviceType: 'mobile',
+	devices: ['mobile'],
 	testName: '1-initial',
 };
 
 const mobileConfig2: FudisScreenshotTestConfig = {
 	...commonConfig,
-	deviceType: 'mobile',
+	devices: ['mobile'],
 	testName: '2-focused',
 };
 
 const mobileConfig3: FudisScreenshotTestConfig = {
 	...commonConfig,
-	deviceType: 'mobile',
+	devices: ['mobile'],
 	testName: '3-selecting',
 };
 
 const mobileConfig4: FudisScreenshotTestConfig = {
 	...commonConfig,
-	deviceType: 'mobile',
+	devices: ['mobile'],
 	testName: '4-blurred',
 };
 
