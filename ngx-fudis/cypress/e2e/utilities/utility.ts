@@ -21,7 +21,7 @@ const defaultConfig: FudisScreenshotTestConfig = {
 	devices: ['mobile', 'desktop'],
 	errorThreshold: 0,
 	tryLimit: 3,
-	newTryDelay: 500,
+	newTryDelay: 1000,
 	isFullscreenScreenshot: false,
 };
 
@@ -71,7 +71,7 @@ export const fudisScreenshots = (updatedConfig?: FudisScreenshotTestConfig) => {
 	const tabletName = testConfig.testName ? `/${testConfig.testName}_tablet` : '/tablet';
 
 	// eslint-disable-next-line cypress/no-unnecessary-waiting
-	cy.wait(1000);
+	cy.wait(200);
 
 	if (testConfig.devices?.includes('desktopLarge')) {
 		cy.viewport('macbook-16');
