@@ -1,74 +1,96 @@
 {
-  "total": 5,
-  "totalPassed": 5,
+  "total": 7,
+  "totalPassed": 7,
   "totalFailed": 0,
   "totalSuites": 1,
   "suites": [
     {
-      "name": "checkboxGroup.cy.ts",
-      "path": "cypress/e2e/form/checkboxGroup.cy.ts",
+      "name": "datepicker.cy.ts",
+      "path": "cypress/e2e/form/datepicker.cy.ts",
       "tests": [
         {
           "status": "pass",
-          "name": "checkboxGroup.cy.ts/normal-1-init_mobile",
+          "name": "datepicker.cy.ts/normal-1-init_mobile",
           "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/form/checkboxGroup.cy.ts",
-          "specFilename": "checkboxGroup.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/checkboxGroup.cy.ts/normal-1-init_mobile.png",
+          "specPath": "cypress/e2e/form/datepicker.cy.ts",
+          "specFilename": "datepicker.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/normal-1-init_mobile.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/checkboxGroup.cy.ts/normal-1-init_mobile.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/datepicker.cy.ts/normal-1-init_mobile.png"
         },
         {
           "status": "pass",
-          "name": "checkboxGroup.cy.ts/normal-2-focus_mobile",
+          "name": "datepicker.cy.ts/normal-2-focus_mobile",
           "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/form/checkboxGroup.cy.ts",
-          "specFilename": "checkboxGroup.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/checkboxGroup.cy.ts/normal-2-focus_mobile.png",
+          "specPath": "cypress/e2e/form/datepicker.cy.ts",
+          "specFilename": "datepicker.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/normal-2-focus_mobile.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/checkboxGroup.cy.ts/normal-2-focus_mobile.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/datepicker.cy.ts/normal-2-focus_mobile.png"
         },
         {
           "status": "pass",
-          "name": "checkboxGroup.cy.ts/normal-3-blur_mobile",
+          "name": "datepicker.cy.ts/normal-3-opened_mobile",
           "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/form/checkboxGroup.cy.ts",
-          "specFilename": "checkboxGroup.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/checkboxGroup.cy.ts/normal-3-blur_mobile.png",
+          "specPath": "cypress/e2e/form/datepicker.cy.ts",
+          "specFilename": "datepicker.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/normal-3-opened_mobile.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/checkboxGroup.cy.ts/normal-3-blur_mobile.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/datepicker.cy.ts/normal-3-opened_mobile.png"
         },
         {
           "status": "pass",
-          "name": "checkboxGroup.cy.ts/normal-4-select_mobile",
+          "name": "datepicker.cy.ts/normal-4-select_mobile",
           "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/form/checkboxGroup.cy.ts",
-          "specFilename": "checkboxGroup.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/checkboxGroup.cy.ts/normal-4-select_mobile.png",
+          "specPath": "cypress/e2e/form/datepicker.cy.ts",
+          "specFilename": "datepicker.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/normal-4-select_mobile.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/checkboxGroup.cy.ts/normal-4-select_mobile.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/datepicker.cy.ts/normal-4-select_mobile.png"
         },
         {
           "status": "pass",
-          "name": "checkboxGroup.cy.ts/disabled_mobile",
+          "name": "datepicker.cy.ts/normal-5-reopen_mobile",
           "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/form/checkboxGroup.cy.ts",
-          "specFilename": "checkboxGroup.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/checkboxGroup.cy.ts/disabled_mobile.png",
+          "specPath": "cypress/e2e/form/datepicker.cy.ts",
+          "specFilename": "datepicker.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/normal-5-reopen_mobile.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/checkboxGroup.cy.ts/disabled_mobile.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/datepicker.cy.ts/normal-5-reopen_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "datepicker.cy.ts/disabled_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/datepicker.cy.ts",
+          "specFilename": "datepicker.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/disabled_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/datepicker.cy.ts/disabled_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "datepicker.cy.ts/min-max-opened_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/datepicker.cy.ts",
+          "specFilename": "datepicker.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/min-max-opened_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/datepicker.cy.ts/min-max-opened_mobile.png"
         }
       ]
     }
   ],
-  "startedAt": "2023-11-15T09:32:48.454Z",
-  "endedAt": "2023-11-15T09:32:53.131Z",
-  "duration": 4677,
+  "startedAt": "2023-11-15T09:51:20.623Z",
+  "endedAt": "2023-11-15T09:51:27.518Z",
+  "duration": 6895,
   "browserName": "electron",
   "browserVersion": "114.0.5735.289",
   "cypressVersion": "13.5.0"
