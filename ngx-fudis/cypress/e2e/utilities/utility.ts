@@ -25,7 +25,10 @@ const defaultConfig: FudisScreenshotTestConfig = {
 	isFullscreenScreenshot: false,
 };
 
-export const fudisScreenshotInits = () => {
+export const fudisScreenshotInit = () => {
+	// eslint-disable-next-line cypress/no-unnecessary-waiting
+	cy.wait(200);
+
 	cy.get('html, body').invoke('attr', 'style', 'height: auto; scroll-behavior: auto; ');
 
 	cy.get('html').invoke('attr', 'class', 'hidden-scrollbar');
@@ -69,9 +72,6 @@ export const fudisScreenshots = (updatedConfig?: FudisScreenshotTestConfig) => {
 	const desktopName = testConfig.testName ? `/${testConfig.testName}_desktop` : '/desktop';
 	const mobileName = testConfig.testName ? `/${testConfig.testName}_mobile` : '/mobile';
 	const tabletName = testConfig.testName ? `/${testConfig.testName}_tablet` : '/tablet';
-
-	// eslint-disable-next-line cypress/no-unnecessary-waiting
-	cy.wait(200);
 
 	if (testConfig.devices?.includes('desktopLarge')) {
 		cy.viewport('macbook-16');

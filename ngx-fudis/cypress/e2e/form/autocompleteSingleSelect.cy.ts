@@ -1,4 +1,4 @@
-import { fudisScreenshots, fudisScreenshotInits, FudisScreenshotTestConfig } from '../utilities/utility';
+import { fudisScreenshots, fudisScreenshotInit, FudisScreenshotTestConfig } from '../utilities/utility';
 
 const configCommon: FudisScreenshotTestConfig = {
 	loadWait: 200,
@@ -67,7 +67,7 @@ const configDisabled2Focus: FudisScreenshotTestConfig = {
 describe('Autocomplete (single-select) screenshot', () => {
 	it('should match with previous screenshot, search', () => {
 		cy.visit('/iframe.html?args=&id=components-form-autocomplete-single-select--autocomplete-search&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		fudisScreenshots(configSearch1Init);
 		cy.get('#fudis-autocomplete-1').focus();
 		fudisScreenshots(configSearch2Focus);
@@ -83,7 +83,7 @@ describe('Autocomplete (single-select) screenshot', () => {
 
 	it('should match with previous screenshot, dropdown', () => {
 		cy.visit('/iframe.html?args=&id=components-form-autocomplete-single-select--autocomplete-dropdown&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		fudisScreenshots(configDropdown1Init);
 		cy.get('#fudis-autocomplete-1').focus();
 		fudisScreenshots(configDropdown2Focus);
@@ -96,7 +96,7 @@ describe('Autocomplete (single-select) screenshot', () => {
 
 	it('should match with previous screenshot, disabled', () => {
 		cy.visit('/iframe.html?args=&id=components-form-autocomplete-single-select--disabled&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		fudisScreenshots(configDisabled1Init);
 		cy.get('#fudis-autocomplete-1').focus();
 		fudisScreenshots(configDisabled2Focus);

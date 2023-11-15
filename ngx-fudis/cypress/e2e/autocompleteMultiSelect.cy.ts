@@ -1,4 +1,4 @@
-import { fudisScreenshotInits, fudisScreenshots, FudisScreenshotTestConfig } from './utilities/utility';
+import { fudisScreenshotInit, fudisScreenshots, FudisScreenshotTestConfig } from './utilities/utility';
 
 const commonConfig: FudisScreenshotTestConfig = {
 	isFullscreenScreenshot: true,
@@ -56,7 +56,7 @@ const mobileConfig4: FudisScreenshotTestConfig = {
 describe('Autocomplete Multi Select screenshot', () => {
 	it('should match with previous screenshot on DESKTOP', () => {
 		cy.visit('/iframe.html?args=&id=components-autocomplete-multi-select--multiple-multiselects&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		fudisScreenshots(desktopConfig1);
 		cy.get('#fudis-autocomplete-multi-select-2').focus();
 		fudisScreenshots(desktopConfig2);
@@ -73,7 +73,7 @@ describe('Autocomplete Multi Select screenshot', () => {
 
 	it('should match with previous screenshot on MOBILE', () => {
 		cy.visit('/iframe.html?args=&id=components-autocomplete-multi-select--multiple-multiselects&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		fudisScreenshots(mobileConfig1);
 		cy.get('#fudis-autocomplete-multi-select-2').focus();
 		fudisScreenshots(mobileConfig2);

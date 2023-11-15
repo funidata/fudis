@@ -1,4 +1,4 @@
-import { fudisScreenshots, fudisScreenshotInits, FudisScreenshotTestConfig } from './utilities/utility';
+import { fudisScreenshots, fudisScreenshotInit, FudisScreenshotTestConfig } from './utilities/utility';
 
 const configBasic: FudisScreenshotTestConfig = {
 	devices: ['mobile', 'tablet', 'desktop'],
@@ -32,37 +32,37 @@ const configResponsiveColumns: FudisScreenshotTestConfig = {
 describe('Grid screenshot', () => {
 	it('should match with previous screenshot, basic', () => {
 		cy.visit('/iframe.html?args=&id=components-grid-grid-item--example&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		fudisScreenshots(configBasic);
 	});
 
 	it('should match with previous screenshot, align X', () => {
 		cy.visit('/iframe.html?args=&id=components-grid-grid-item--align-x&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		fudisScreenshots(configAlignX);
 	});
 
 	it('should match with previous screenshot, align X', () => {
 		cy.visit('/iframe.html?args=&id=components-grid-grid-item--align-y&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		fudisScreenshots(configAlignY);
 	});
 
 	it('should match with previous screenshot, align X', () => {
 		cy.visit('/iframe.html?args=&id=components-grid-grid-item--align-x-and-y&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		fudisScreenshots(configAlignXAndY);
 	});
 
 	it('should match with previous screenshot, align X', () => {
 		cy.visit('/iframe.html?args=&id=components-grid-grid-item--columns&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		fudisScreenshots(configColumns);
 	});
 
 	it('should match with previous screenshot, align X', () => {
 		cy.visit('/iframe.html?args=&id=components-grid-grid-item--responsive-columns&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		fudisScreenshots(configResponsiveColumns);
 	});
 });

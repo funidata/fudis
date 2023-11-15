@@ -1,4 +1,4 @@
-import { fudisScreenshots, fudisScreenshotInits, FudisScreenshotTestConfig } from './utilities/utility';
+import { fudisScreenshots, fudisScreenshotInit, FudisScreenshotTestConfig } from './utilities/utility';
 
 const config: FudisScreenshotTestConfig = {
 	loadWait: 500,
@@ -8,7 +8,7 @@ const config: FudisScreenshotTestConfig = {
 describe('Icon screenshot', () => {
 	it('should match with previous screenshot', () => {
 		cy.visit('/iframe.html?args=&id=components-icon--all-icons&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		fudisScreenshots(config);
 	});
 });

@@ -1,4 +1,4 @@
-import { fudisScreenshots, fudisScreenshotInits, FudisScreenshotTestConfig } from './utilities/utility';
+import { fudisScreenshots, fudisScreenshotInit, FudisScreenshotTestConfig } from './utilities/utility';
 
 const configRegular: FudisScreenshotTestConfig = {
 	devices: ['mobile'],
@@ -18,19 +18,19 @@ const configWithTitle: FudisScreenshotTestConfig = {
 describe('Link screenshot', () => {
 	it('should match with previous screenshot, regular', () => {
 		cy.visit('/iframe.html?args=&id=components-link--link&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		fudisScreenshots(configRegular);
 	});
 
 	it('should match with previous screenshot, external link', () => {
 		cy.visit('/iframe.html?args=&id=components-link--external-link&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		fudisScreenshots(configExternal);
 	});
 
 	it('should match with previous screenshot, with title', () => {
 		cy.visit('/iframe.html?args=&id=components-link--link-with-title&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		fudisScreenshots(configWithTitle);
 	});
 });

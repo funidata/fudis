@@ -1,4 +1,4 @@
-import { fudisScreenshots, fudisScreenshotInits, FudisScreenshotTestConfig } from '../utilities/utility';
+import { fudisScreenshots, fudisScreenshotInit, FudisScreenshotTestConfig } from '../utilities/utility';
 
 const configCommon: FudisScreenshotTestConfig = {
 	loadWait: 100,
@@ -30,7 +30,7 @@ const configNormal4Select: FudisScreenshotTestConfig = {
 describe('Checkbox Group screenshot', () => {
 	it('should match with previous screenshot, normal', () => {
 		cy.visit('/iframe.html?args=&id=components-form-checkbox-group--example&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		fudisScreenshots(configNormal1Init);
 		cy.get('#fudis-checkbox-group-1-item-3').focus();
 		fudisScreenshots(configNormal2Focus);

@@ -1,4 +1,4 @@
-import { fudisScreenshots, fudisScreenshotInits, FudisScreenshotTestConfig } from './utilities/utility';
+import { fudisScreenshots, fudisScreenshotInit, FudisScreenshotTestConfig } from './utilities/utility';
 
 const commonConfig: FudisScreenshotTestConfig = {
 	loadWait: 200,
@@ -44,7 +44,7 @@ const mobileConfig3: FudisScreenshotTestConfig = {
 describe('Dropdown Menu screenshot', () => {
 	it('should match with previous screenshot, desktop interaction', () => {
 		cy.visit('/iframe.html?args=&id=components-dropdown-menu--dropdown-menu&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		cy.get('#fudis-button-1').click();
 		fudisScreenshots(desktopConfig1);
 		cy.get('#fudis-dropdown-menu-1-item-3').focus();
@@ -58,7 +58,7 @@ describe('Dropdown Menu screenshot', () => {
 
 	it('should match with previous screenshot, mobile interaction', () => {
 		cy.visit('/iframe.html?args=&id=components-dropdown-menu--dropdown-menu&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		cy.viewport('iphone-x');
 		cy.get('#fudis-button-1').click();
 		fudisScreenshots(mobileConfig1);

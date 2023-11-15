@@ -1,4 +1,4 @@
-import { fudisScreenshots, fudisScreenshotInits, FudisScreenshotTestConfig } from './utilities/utility';
+import { fudisScreenshots, fudisScreenshotInit, FudisScreenshotTestConfig } from './utilities/utility';
 
 const configAll: FudisScreenshotTestConfig = {
 	testName: 'all-variants',
@@ -11,13 +11,13 @@ const configLink: FudisScreenshotTestConfig = {
 describe('Notification screenshot', () => {
 	it('should match with previous screenshot, all variants', () => {
 		cy.visit('/iframe.html?args=&id=components-notification--all-variants&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		fudisScreenshots(configAll);
 	});
 
 	it('should match with previous screenshot, with link', () => {
 		cy.visit('/iframe.html?args=&id=components-notification--link-notification&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		fudisScreenshots(configLink);
 	});
 });

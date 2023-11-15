@@ -1,4 +1,4 @@
-import { fudisScreenshots, fudisScreenshotInits, FudisScreenshotTestConfig } from './utilities/utility';
+import { fudisScreenshots, fudisScreenshotInit, FudisScreenshotTestConfig } from './utilities/utility';
 
 const commonConfig: FudisScreenshotTestConfig = {
 	loadWait: 500,
@@ -44,7 +44,7 @@ const mobileConfig3: FudisScreenshotTestConfig = {
 describe('Dialog screenshot', () => {
 	it('should match with previous screenshot om DESKTOP', () => {
 		cy.visit('/iframe.html?args=&id=components-dialog--dialog&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		cy.get('#fudis-button-1').click();
 		fudisScreenshots(desktopConfig1);
 		cy.get('#fudis-dialog-1-close').click();
@@ -56,7 +56,7 @@ describe('Dialog screenshot', () => {
 
 	it('should match with previous screenshot on MOBILE', () => {
 		cy.visit('/iframe.html?args=&id=components-dialog--dialog&viewMode=story');
-		fudisScreenshotInits();
+		fudisScreenshotInit();
 		cy.get('#fudis-button-1').click();
 		fudisScreenshots(mobileConfig1);
 		cy.get('#fudis-dialog-1-close').click();
