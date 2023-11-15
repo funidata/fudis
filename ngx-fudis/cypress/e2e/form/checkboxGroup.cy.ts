@@ -45,4 +45,10 @@ describe('Checkbox Group screenshot', () => {
 		cy.get('#fudis-checkbox-group-1-item-3-label').click();
 		fudisScreenshots(configNormal4Select);
 	});
+
+	it('should match with previous screenshot, disabled', () => {
+		cy.visit('/iframe.html?args=&id=components-form-checkbox-group--example-with-disabled-option&viewMode=story');
+		fudisScreenshotInit();
+		fudisScreenshots(configDisabled);
+	});
 });
