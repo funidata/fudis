@@ -27,6 +27,11 @@ const configNormal4Select: FudisScreenshotTestConfig = {
 	testName: 'normal-4-select',
 };
 
+const configDisabled: FudisScreenshotTestConfig = {
+	...configCommon,
+	testName: 'disabled',
+};
+
 describe('Checkbox Group screenshot', () => {
 	it('should match with previous screenshot, normal', () => {
 		cy.visit('/iframe.html?args=&id=components-form-checkbox-group--example&viewMode=story');
