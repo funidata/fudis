@@ -98,10 +98,6 @@ MultiSelect.args = {
 	tooltip: 'Platypus is the right choice',
 	tooltipPosition: 'below',
 	tooltipToggle: false,
-	selectedOptions: [
-		{ value: 'value-1-dog', viewValue: 'Dog' },
-		{ value: 'value-5-armadillo', viewValue: 'Screaming hairy armadillo' },
-	],
 	options: [
 		{ value: 'value-1-dog', viewValue: 'Dog' },
 		{ value: 'value-2-capybara', viewValue: 'Capybara' },
