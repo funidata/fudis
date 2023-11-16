@@ -1,63 +1,1851 @@
 {
-  "total": 4,
-  "totalPassed": 4,
+  "total": 154,
+  "totalPassed": 154,
   "totalFailed": 0,
-  "totalSuites": 1,
+  "totalSuites": 24,
   "suites": [
+    {
+      "name": "alertGroup.cy.ts",
+      "path": "cypress/e2e/alertGroup.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "alertGroup.cy.ts/desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/alertGroup.cy.ts",
+          "specFilename": "alertGroup.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/alertGroup.cy.ts/desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/alertGroup.cy.ts/desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "alertGroup.cy.ts/mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/alertGroup.cy.ts",
+          "specFilename": "alertGroup.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/alertGroup.cy.ts/mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/alertGroup.cy.ts/mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "autocompleteMultiSelect.cy.ts",
+      "path": "cypress/e2e/autocompleteMultiSelect.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "autocompleteMultiSelect.cy.ts/1-initial_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/autocompleteMultiSelect.cy.ts",
+          "specFilename": "autocompleteMultiSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteMultiSelect.cy.ts/1-initial_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteMultiSelect.cy.ts/1-initial_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteMultiSelect.cy.ts/2-focused_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/autocompleteMultiSelect.cy.ts",
+          "specFilename": "autocompleteMultiSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteMultiSelect.cy.ts/2-focused_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteMultiSelect.cy.ts/2-focused_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteMultiSelect.cy.ts/3-selecting_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/autocompleteMultiSelect.cy.ts",
+          "specFilename": "autocompleteMultiSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteMultiSelect.cy.ts/3-selecting_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteMultiSelect.cy.ts/3-selecting_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteMultiSelect.cy.ts/4-blurred_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/autocompleteMultiSelect.cy.ts",
+          "specFilename": "autocompleteMultiSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteMultiSelect.cy.ts/4-blurred_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteMultiSelect.cy.ts/4-blurred_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteMultiSelect.cy.ts/1-initial_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/autocompleteMultiSelect.cy.ts",
+          "specFilename": "autocompleteMultiSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteMultiSelect.cy.ts/1-initial_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteMultiSelect.cy.ts/1-initial_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteMultiSelect.cy.ts/2-focused_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/autocompleteMultiSelect.cy.ts",
+          "specFilename": "autocompleteMultiSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteMultiSelect.cy.ts/2-focused_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteMultiSelect.cy.ts/2-focused_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteMultiSelect.cy.ts/3-selecting_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/autocompleteMultiSelect.cy.ts",
+          "specFilename": "autocompleteMultiSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteMultiSelect.cy.ts/3-selecting_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteMultiSelect.cy.ts/3-selecting_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteMultiSelect.cy.ts/4-blurred_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/autocompleteMultiSelect.cy.ts",
+          "specFilename": "autocompleteMultiSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteMultiSelect.cy.ts/4-blurred_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteMultiSelect.cy.ts/4-blurred_mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "badge.cy.ts",
+      "path": "cypress/e2e/badge.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "badge.cy.ts/mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/badge.cy.ts",
+          "specFilename": "badge.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/badge.cy.ts/mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/badge.cy.ts/mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "breadcrumbs.cy.ts",
+      "path": "cypress/e2e/breadcrumbs.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "breadcrumbs.cy.ts/tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/breadcrumbs.cy.ts",
+          "specFilename": "breadcrumbs.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/breadcrumbs.cy.ts/tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/breadcrumbs.cy.ts/tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "breadcrumbs.cy.ts/mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/breadcrumbs.cy.ts",
+          "specFilename": "breadcrumbs.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/breadcrumbs.cy.ts/mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/breadcrumbs.cy.ts/mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "button.cy.ts",
+      "path": "cypress/e2e/button.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "button.cy.ts/desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/button.cy.ts",
+          "specFilename": "button.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/button.cy.ts/desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/button.cy.ts/desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "button.cy.ts/mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/button.cy.ts",
+          "specFilename": "button.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/button.cy.ts/mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/button.cy.ts/mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "descriptionList.cy.ts",
+      "path": "cypress/e2e/descriptionList.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/regular_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/regular_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/regular_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/regular_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/regular_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/regular_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/compact_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/compact_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/compact_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/compact_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/compact_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/compact_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/inside-grid_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/inside-grid_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/inside-grid_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/inside-grid_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/inside-grid_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/inside-grid_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/sub-components-regular_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/sub-components-regular_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/sub-components-regular_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/sub-components-regular_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/sub-components-regular_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/sub-components-regular_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/sub-components-compact_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/sub-components-compact_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/sub-components-compact_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/sub-components-compact_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/sub-components-compact_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/sub-components-compact_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/language-badges-1_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/language-badges-1_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/language-badges-1_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/language-badges-1_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/language-badges-1_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/language-badges-1_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/language-badges-2_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/language-badges-2_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/language-badges-2_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/language-badges-2_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/language-badges-2_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/language-badges-2_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/language-badges-3_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/language-badges-3_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/language-badges-3_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/language-badges-3_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/language-badges-3_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/language-badges-3_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/language-badges-4_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/language-badges-4_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/language-badges-4_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/language-badges-4_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/language-badges-4_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/language-badges-4_mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "dialog.cy.ts",
+      "path": "cypress/e2e/dialog.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "dialog.cy.ts/1_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/dialog.cy.ts",
+          "specFilename": "dialog.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dialog.cy.ts/1_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dialog.cy.ts/1_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "dialog.cy.ts/2_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/dialog.cy.ts",
+          "specFilename": "dialog.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dialog.cy.ts/2_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dialog.cy.ts/2_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "dialog.cy.ts/3_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/dialog.cy.ts",
+          "specFilename": "dialog.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dialog.cy.ts/3_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dialog.cy.ts/3_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "dialog.cy.ts/1_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/dialog.cy.ts",
+          "specFilename": "dialog.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dialog.cy.ts/1_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dialog.cy.ts/1_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "dialog.cy.ts/2_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/dialog.cy.ts",
+          "specFilename": "dialog.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dialog.cy.ts/2_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dialog.cy.ts/2_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "dialog.cy.ts/3_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/dialog.cy.ts",
+          "specFilename": "dialog.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dialog.cy.ts/3_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dialog.cy.ts/3_mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "dropdownMenu.cy.ts",
+      "path": "cypress/e2e/dropdownMenu.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "dropdownMenu.cy.ts/1-opened_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/dropdownMenu.cy.ts",
+          "specFilename": "dropdownMenu.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dropdownMenu.cy.ts/1-opened_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dropdownMenu.cy.ts/1-opened_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "dropdownMenu.cy.ts/2-opened_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/dropdownMenu.cy.ts",
+          "specFilename": "dropdownMenu.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dropdownMenu.cy.ts/2-opened_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dropdownMenu.cy.ts/2-opened_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "dropdownMenu.cy.ts/3-open-another-menu-while-first-is-open_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/dropdownMenu.cy.ts",
+          "specFilename": "dropdownMenu.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dropdownMenu.cy.ts/3-open-another-menu-while-first-is-open_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dropdownMenu.cy.ts/3-open-another-menu-while-first-is-open_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "dropdownMenu.cy.ts/1-opened_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/dropdownMenu.cy.ts",
+          "specFilename": "dropdownMenu.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dropdownMenu.cy.ts/1-opened_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dropdownMenu.cy.ts/1-opened_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "dropdownMenu.cy.ts/2-opened_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/dropdownMenu.cy.ts",
+          "specFilename": "dropdownMenu.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dropdownMenu.cy.ts/2-opened_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dropdownMenu.cy.ts/2-opened_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "dropdownMenu.cy.ts/3-open-another-menu-while-first-is-open_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/dropdownMenu.cy.ts",
+          "specFilename": "dropdownMenu.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dropdownMenu.cy.ts/3-open-another-menu-while-first-is-open_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dropdownMenu.cy.ts/3-open-another-menu-while-first-is-open_mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "expandable.cy.ts",
+      "path": "cypress/e2e/expandable.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "expandable.cy.ts/1-all-closed_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/expandable.cy.ts",
+          "specFilename": "expandable.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/expandable.cy.ts/1-all-closed_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/expandable.cy.ts/1-all-closed_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "expandable.cy.ts/1-all-closed_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/expandable.cy.ts",
+          "specFilename": "expandable.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/expandable.cy.ts/1-all-closed_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/expandable.cy.ts/1-all-closed_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "expandable.cy.ts/2-regular-opened_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/expandable.cy.ts",
+          "specFilename": "expandable.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/expandable.cy.ts/2-regular-opened_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/expandable.cy.ts/2-regular-opened_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "expandable.cy.ts/2-regular-opened_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/expandable.cy.ts",
+          "specFilename": "expandable.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/expandable.cy.ts/2-regular-opened_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/expandable.cy.ts/2-regular-opened_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "expandable.cy.ts/3-regular-closed_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/expandable.cy.ts",
+          "specFilename": "expandable.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/expandable.cy.ts/3-regular-closed_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/expandable.cy.ts/3-regular-closed_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "expandable.cy.ts/3-regular-closed_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/expandable.cy.ts",
+          "specFilename": "expandable.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/expandable.cy.ts/3-regular-closed_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/expandable.cy.ts/3-regular-closed_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "expandable.cy.ts/4-lite-open_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/expandable.cy.ts",
+          "specFilename": "expandable.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/expandable.cy.ts/4-lite-open_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/expandable.cy.ts/4-lite-open_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "expandable.cy.ts/4-lite-open_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/expandable.cy.ts",
+          "specFilename": "expandable.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/expandable.cy.ts/4-lite-open_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/expandable.cy.ts/4-lite-open_mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "footer.cy.ts",
+      "path": "cypress/e2e/footer.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "footer.cy.ts/desktop_large",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/footer.cy.ts",
+          "specFilename": "footer.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/footer.cy.ts/desktop_large.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/footer.cy.ts/desktop_large.png"
+        },
+        {
+          "status": "pass",
+          "name": "footer.cy.ts/desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/footer.cy.ts",
+          "specFilename": "footer.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/footer.cy.ts/desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/footer.cy.ts/desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "footer.cy.ts/tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/footer.cy.ts",
+          "specFilename": "footer.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/footer.cy.ts/tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/footer.cy.ts/tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "footer.cy.ts/mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/footer.cy.ts",
+          "specFilename": "footer.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/footer.cy.ts/mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/footer.cy.ts/mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "grid.cy.ts",
+      "path": "cypress/e2e/grid.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "grid.cy.ts/basic_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/grid.cy.ts",
+          "specFilename": "grid.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/grid.cy.ts/basic_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/grid.cy.ts/basic_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "grid.cy.ts/basic_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/grid.cy.ts",
+          "specFilename": "grid.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/grid.cy.ts/basic_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/grid.cy.ts/basic_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "grid.cy.ts/basic_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/grid.cy.ts",
+          "specFilename": "grid.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/grid.cy.ts/basic_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/grid.cy.ts/basic_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "grid.cy.ts/align-X_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/grid.cy.ts",
+          "specFilename": "grid.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/grid.cy.ts/align-X_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/grid.cy.ts/align-X_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "grid.cy.ts/align-X_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/grid.cy.ts",
+          "specFilename": "grid.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/grid.cy.ts/align-X_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/grid.cy.ts/align-X_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "grid.cy.ts/align-X_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/grid.cy.ts",
+          "specFilename": "grid.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/grid.cy.ts/align-X_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/grid.cy.ts/align-X_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "grid.cy.ts/align-Y_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/grid.cy.ts",
+          "specFilename": "grid.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/grid.cy.ts/align-Y_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/grid.cy.ts/align-Y_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "grid.cy.ts/align-Y_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/grid.cy.ts",
+          "specFilename": "grid.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/grid.cy.ts/align-Y_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/grid.cy.ts/align-Y_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "grid.cy.ts/align-X-and-Y_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/grid.cy.ts",
+          "specFilename": "grid.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/grid.cy.ts/align-X-and-Y_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/grid.cy.ts/align-X-and-Y_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "grid.cy.ts/align-X-and-Y_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/grid.cy.ts",
+          "specFilename": "grid.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/grid.cy.ts/align-X-and-Y_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/grid.cy.ts/align-X-and-Y_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "grid.cy.ts/columns_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/grid.cy.ts",
+          "specFilename": "grid.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/grid.cy.ts/columns_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/grid.cy.ts/columns_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "grid.cy.ts/columns_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/grid.cy.ts",
+          "specFilename": "grid.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/grid.cy.ts/columns_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/grid.cy.ts/columns_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "grid.cy.ts/responsive-columns_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/grid.cy.ts",
+          "specFilename": "grid.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/grid.cy.ts/responsive-columns_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/grid.cy.ts/responsive-columns_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "grid.cy.ts/responsive-columns_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/grid.cy.ts",
+          "specFilename": "grid.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/grid.cy.ts/responsive-columns_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/grid.cy.ts/responsive-columns_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "grid.cy.ts/responsive-columns_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/grid.cy.ts",
+          "specFilename": "grid.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/grid.cy.ts/responsive-columns_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/grid.cy.ts/responsive-columns_mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "icon.cy.ts",
+      "path": "cypress/e2e/icon.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "icon.cy.ts/tablet",
+          "percentage": 0,
+          "failureThreshold": 0.004,
+          "specPath": "cypress/e2e/icon.cy.ts",
+          "specFilename": "icon.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/icon.cy.ts/tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/icon.cy.ts/tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "icon.cy.ts/mobile",
+          "percentage": 0,
+          "failureThreshold": 0.004,
+          "specPath": "cypress/e2e/icon.cy.ts",
+          "specFilename": "icon.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/icon.cy.ts/mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/icon.cy.ts/mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "link.cy.ts",
+      "path": "cypress/e2e/link.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "link.cy.ts/regular_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/link.cy.ts",
+          "specFilename": "link.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/link.cy.ts/regular_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/link.cy.ts/regular_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "link.cy.ts/external_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/link.cy.ts",
+          "specFilename": "link.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/link.cy.ts/external_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/link.cy.ts/external_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "link.cy.ts/with-title_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/link.cy.ts",
+          "specFilename": "link.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/link.cy.ts/with-title_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/link.cy.ts/with-title_mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "notification.cy.ts",
+      "path": "cypress/e2e/notification.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "notification.cy.ts/all-variants_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/notification.cy.ts",
+          "specFilename": "notification.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/notification.cy.ts/all-variants_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/notification.cy.ts/all-variants_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "notification.cy.ts/all-variants_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/notification.cy.ts",
+          "specFilename": "notification.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/notification.cy.ts/all-variants_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/notification.cy.ts/all-variants_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "notification.cy.ts/with-link_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/notification.cy.ts",
+          "specFilename": "notification.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/notification.cy.ts/with-link_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/notification.cy.ts/with-link_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "notification.cy.ts/with-link_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/notification.cy.ts",
+          "specFilename": "notification.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/notification.cy.ts/with-link_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/notification.cy.ts/with-link_mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "section.cy.ts",
+      "path": "cypress/e2e/section.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "section.cy.ts/desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/section.cy.ts",
+          "specFilename": "section.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/section.cy.ts/desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/section.cy.ts/desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "section.cy.ts/tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/section.cy.ts",
+          "specFilename": "section.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/section.cy.ts/tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/section.cy.ts/tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "section.cy.ts/mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/section.cy.ts",
+          "specFilename": "section.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/section.cy.ts/mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/section.cy.ts/mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "autocompleteSingleSelect.cy.ts",
+      "path": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/search-1-init_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/search-1-init_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/search-1-init_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/search-1-init_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/search-1-init_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/search-1-init_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/search-2-focus_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/search-2-focus_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/search-2-focus_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/search-2-focus_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/search-2-focus_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/search-2-focus_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/search-3-type-mar_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/search-3-type-mar_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/search-3-type-mar_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/search-3-type-mar_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/search-3-type-mar_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/search-3-type-mar_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/search-4-type-mary_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/search-4-type-mary_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/search-4-type-mary_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/search-4-type-mary_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/search-4-type-mary_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/search-4-type-mary_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/search-5-selected_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/search-5-selected_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/search-5-selected_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/search-5-selected_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/search-5-selected_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/search-5-selected_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/search-6-cleared_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/search-6-cleared_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/search-6-cleared_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/search-6-cleared_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/search-6-cleared_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/search-6-cleared_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/dropdown-1-init_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/dropdown-1-init_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/dropdown-1-init_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/dropdown-1-init_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/dropdown-1-init_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/dropdown-1-init_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/dropdown-2-focus_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/dropdown-2-focus_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/dropdown-2-focus_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/dropdown-2-focus_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/dropdown-2-focus_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/dropdown-2-focus_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/dropdown-3-type-number1_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/dropdown-3-type-number1_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/dropdown-3-type-number1_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/dropdown-3-type-number1_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/dropdown-3-type-number1_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/dropdown-3-type-number1_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/dropdown-4-selected_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/dropdown-4-selected_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/dropdown-4-selected_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/dropdown-4-selected_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/dropdown-4-selected_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/dropdown-4-selected_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/disabled-1-init_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/disabled-1-init_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/disabled-1-init_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/disabled-1-init_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/disabled-1-init_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/disabled-1-init_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/disabled-2-focus_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/disabled-2-focus_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/disabled-2-focus_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/disabled-2-focus_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/disabled-2-focus_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/disabled-2-focus_mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "checkboxGroup.cy.ts",
+      "path": "cypress/e2e/form/checkboxGroup.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "checkboxGroup.cy.ts/normal-1-init_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/checkboxGroup.cy.ts",
+          "specFilename": "checkboxGroup.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/checkboxGroup.cy.ts/normal-1-init_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/checkboxGroup.cy.ts/normal-1-init_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "checkboxGroup.cy.ts/normal-2-focus_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/checkboxGroup.cy.ts",
+          "specFilename": "checkboxGroup.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/checkboxGroup.cy.ts/normal-2-focus_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/checkboxGroup.cy.ts/normal-2-focus_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "checkboxGroup.cy.ts/normal-3-blur_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/checkboxGroup.cy.ts",
+          "specFilename": "checkboxGroup.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/checkboxGroup.cy.ts/normal-3-blur_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/checkboxGroup.cy.ts/normal-3-blur_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "checkboxGroup.cy.ts/normal-4-select_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/checkboxGroup.cy.ts",
+          "specFilename": "checkboxGroup.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/checkboxGroup.cy.ts/normal-4-select_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/checkboxGroup.cy.ts/normal-4-select_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "checkboxGroup.cy.ts/disabled_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/checkboxGroup.cy.ts",
+          "specFilename": "checkboxGroup.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/checkboxGroup.cy.ts/disabled_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/checkboxGroup.cy.ts/disabled_mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "dateRange.cy.ts",
+      "path": "cypress/e2e/form/dateRange.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "dateRange.cy.ts/init_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/dateRange.cy.ts",
+          "specFilename": "dateRange.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dateRange.cy.ts/init_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dateRange.cy.ts/init_mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "datepicker.cy.ts",
+      "path": "cypress/e2e/form/datepicker.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "datepicker.cy.ts/normal-1-init_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/datepicker.cy.ts",
+          "specFilename": "datepicker.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/normal-1-init_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/datepicker.cy.ts/normal-1-init_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "datepicker.cy.ts/normal-2-focus_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/datepicker.cy.ts",
+          "specFilename": "datepicker.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/normal-2-focus_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/datepicker.cy.ts/normal-2-focus_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "datepicker.cy.ts/normal-3-opened_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/datepicker.cy.ts",
+          "specFilename": "datepicker.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/normal-3-opened_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/datepicker.cy.ts/normal-3-opened_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "datepicker.cy.ts/normal-4-select_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/datepicker.cy.ts",
+          "specFilename": "datepicker.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/normal-4-select_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/datepicker.cy.ts/normal-4-select_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "datepicker.cy.ts/normal-5-reopen_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/datepicker.cy.ts",
+          "specFilename": "datepicker.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/normal-5-reopen_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/datepicker.cy.ts/normal-5-reopen_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "datepicker.cy.ts/disabled_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/datepicker.cy.ts",
+          "specFilename": "datepicker.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/disabled_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/datepicker.cy.ts/disabled_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "datepicker.cy.ts/min-max-opened_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/datepicker.cy.ts",
+          "specFilename": "datepicker.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/min-max-opened_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/datepicker.cy.ts/min-max-opened_mobile.png"
+        }
+      ]
+    },
     {
       "name": "dropdown.cy.ts",
       "path": "cypress/e2e/form/dropdown.cy.ts",
       "tests": [
         {
           "status": "pass",
-          "name": "dropdown.cy.ts/normal-1-init_mobile",
+          "name": "dropdown.cy.ts/single-1-init_mobile",
           "percentage": 0,
           "failureThreshold": 0,
           "specPath": "cypress/e2e/form/dropdown.cy.ts",
           "specFilename": "dropdown.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dropdown.cy.ts/normal-1-init_mobile.png",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dropdown.cy.ts/single-1-init_mobile.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dropdown.cy.ts/normal-1-init_mobile.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dropdown.cy.ts/single-1-init_mobile.png"
         },
         {
           "status": "pass",
-          "name": "dropdown.cy.ts/normal-2-focus_mobile",
+          "name": "dropdown.cy.ts/single-2-focus_mobile",
           "percentage": 0,
           "failureThreshold": 0,
           "specPath": "cypress/e2e/form/dropdown.cy.ts",
           "specFilename": "dropdown.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dropdown.cy.ts/normal-2-focus_mobile.png",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dropdown.cy.ts/single-2-focus_mobile.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dropdown.cy.ts/normal-2-focus_mobile.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dropdown.cy.ts/single-2-focus_mobile.png"
         },
         {
           "status": "pass",
-          "name": "dropdown.cy.ts/normal-3-opened_mobile",
+          "name": "dropdown.cy.ts/single-3-opened_mobile",
           "percentage": 0,
           "failureThreshold": 0,
           "specPath": "cypress/e2e/form/dropdown.cy.ts",
           "specFilename": "dropdown.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dropdown.cy.ts/normal-3-opened_mobile.png",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dropdown.cy.ts/single-3-opened_mobile.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dropdown.cy.ts/normal-3-opened_mobile.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dropdown.cy.ts/single-3-opened_mobile.png"
         },
         {
           "status": "pass",
-          "name": "dropdown.cy.ts/normal-4-select_mobile",
+          "name": "dropdown.cy.ts/single-4-select_mobile",
           "percentage": 0,
           "failureThreshold": 0,
           "specPath": "cypress/e2e/form/dropdown.cy.ts",
           "specFilename": "dropdown.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dropdown.cy.ts/normal-4-select_mobile.png",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dropdown.cy.ts/single-4-select_mobile.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dropdown.cy.ts/normal-4-select_mobile.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dropdown.cy.ts/single-4-select_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "dropdown.cy.ts/multi-1-init_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/dropdown.cy.ts",
+          "specFilename": "dropdown.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dropdown.cy.ts/multi-1-init_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dropdown.cy.ts/multi-1-init_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "dropdown.cy.ts/multi-2-focus_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/dropdown.cy.ts",
+          "specFilename": "dropdown.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dropdown.cy.ts/multi-2-focus_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dropdown.cy.ts/multi-2-focus_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "dropdown.cy.ts/multi-3-opened_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/dropdown.cy.ts",
+          "specFilename": "dropdown.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dropdown.cy.ts/multi-3-opened_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dropdown.cy.ts/multi-3-opened_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "dropdown.cy.ts/multi-4-select-first_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/dropdown.cy.ts",
+          "specFilename": "dropdown.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dropdown.cy.ts/multi-4-select-first_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dropdown.cy.ts/multi-4-select-first_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "dropdown.cy.ts/multi-5-select-second_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/dropdown.cy.ts",
+          "specFilename": "dropdown.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dropdown.cy.ts/multi-5-select-second_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dropdown.cy.ts/multi-5-select-second_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "dropdown.cy.ts/multi-6-de-select_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/dropdown.cy.ts",
+          "specFilename": "dropdown.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dropdown.cy.ts/multi-6-de-select_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dropdown.cy.ts/multi-6-de-select_mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "fieldset.cy.ts",
+      "path": "cypress/e2e/form/fieldset.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "fieldset.cy.ts/desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/fieldset.cy.ts",
+          "specFilename": "fieldset.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/fieldset.cy.ts/desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/fieldset.cy.ts/desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "fieldset.cy.ts/tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/fieldset.cy.ts",
+          "specFilename": "fieldset.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/fieldset.cy.ts/tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/fieldset.cy.ts/tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "fieldset.cy.ts/mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/fieldset.cy.ts",
+          "specFilename": "fieldset.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/fieldset.cy.ts/mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/fieldset.cy.ts/mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "form.cy.ts",
+      "path": "cypress/e2e/form/form.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "form.cy.ts/init_desktop_large",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/init_desktop_large.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/init_desktop_large.png"
+        },
+        {
+          "status": "pass",
+          "name": "form.cy.ts/init_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/init_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/init_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "form.cy.ts/init_tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/init_tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/init_tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "form.cy.ts/init_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/init_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/init_mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "bodytext.cy.ts",
+      "path": "cypress/e2e/typography/bodytext.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "bodytext.cy.ts/align-left_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/typography/bodytext.cy.ts",
+          "specFilename": "bodytext.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/align-left_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/align-left_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "bodytext.cy.ts/align-left_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/typography/bodytext.cy.ts",
+          "specFilename": "bodytext.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/align-left_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/align-left_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "bodytext.cy.ts/align-right_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/typography/bodytext.cy.ts",
+          "specFilename": "bodytext.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/align-right_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/align-right_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "bodytext.cy.ts/align-right_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/typography/bodytext.cy.ts",
+          "specFilename": "bodytext.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/align-right_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/align-right_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "bodytext.cy.ts/align-center_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/typography/bodytext.cy.ts",
+          "specFilename": "bodytext.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/align-center_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/align-center_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "bodytext.cy.ts/align-center_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/typography/bodytext.cy.ts",
+          "specFilename": "bodytext.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/align-center_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/align-center_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "bodytext.cy.ts/all-variants_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/typography/bodytext.cy.ts",
+          "specFilename": "bodytext.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/all-variants_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/all-variants_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "bodytext.cy.ts/all-variants_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/typography/bodytext.cy.ts",
+          "specFilename": "bodytext.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/all-variants_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/all-variants_mobile.png"
+        }
+      ]
+    },
+    {
+      "name": "heading.cy.ts",
+      "path": "cypress/e2e/typography/heading.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "heading.cy.ts/align-left_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/typography/heading.cy.ts",
+          "specFilename": "heading.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/align-left_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/align-left_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "heading.cy.ts/align-left_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/typography/heading.cy.ts",
+          "specFilename": "heading.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/align-left_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/align-left_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "heading.cy.ts/align-right_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/typography/heading.cy.ts",
+          "specFilename": "heading.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/align-right_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/align-right_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "heading.cy.ts/align-right_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/typography/heading.cy.ts",
+          "specFilename": "heading.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/align-right_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/align-right_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "heading.cy.ts/align-center_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/typography/heading.cy.ts",
+          "specFilename": "heading.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/align-center_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/align-center_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "heading.cy.ts/align-center_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/typography/heading.cy.ts",
+          "specFilename": "heading.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/align-center_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/align-center_mobile.png"
+        },
+        {
+          "status": "pass",
+          "name": "heading.cy.ts/all-variants_desktop",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/typography/heading.cy.ts",
+          "specFilename": "heading.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/all-variants_desktop.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/all-variants_desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "heading.cy.ts/all-variants_mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/typography/heading.cy.ts",
+          "specFilename": "heading.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/all-variants_mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/all-variants_mobile.png"
         }
       ]
     }
   ],
-  "startedAt": "2023-11-15T09:59:45.467Z",
-  "endedAt": "2023-11-15T09:59:49.030Z",
-  "duration": 3563,
+  "startedAt": "2023-11-16T13:20:26.142Z",
+  "endedAt": "2023-11-16T13:23:59.142Z",
+  "duration": 181625,
   "browserName": "electron",
   "browserVersion": "114.0.5735.289",
   "cypressVersion": "13.5.0"

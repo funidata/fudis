@@ -86,12 +86,5 @@ describe('Dropdown screenshot', () => {
 		fudisScreenshots(configMulti5SelectSecond);
 		cy.get('.fudis-dropdown__option-list > .fudis-dropdown__option').eq(2).click();
 		fudisScreenshots(configMulti6DeSelect);
-		
 	});
-
-	// it('should match with previous screenshot, multiselect', () => {
-	// 	cy.visit('/iframe.html?args=&id=components-form-date-datepicker--disabled&viewMode=story');
-	// 	fudisScreenshotInit();
-	// 	fudisScreenshots(configDisabled);
-	// });
 });

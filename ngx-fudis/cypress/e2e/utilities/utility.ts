@@ -29,9 +29,20 @@ export const fudisScreenshotInit = () => {
 	// eslint-disable-next-line cypress/no-unnecessary-waiting
 	cy.wait(200);
 
+	/**
+	 * Recommendation from cypress-image-diff documentation
+	 */
 	cy.get('html, body').invoke('attr', 'style', 'height: auto; scroll-behavior: auto; ');
 
-	cy.get('html').invoke('attr', 'class', 'hidden-scrollbar');
+	/**
+	 * Native scrollbar styles differ by test devices, so this tries to hides it
+	 */
+	cy.get('html').invoke('attr', 'class', 'cypress-hidden-scrollbar');
+
+	/**
+	 * Remove padding from Storybook removes
+	 */
+	cy.get('body').invoke('attr', 'class', 'cypress-storybook-box-reset');
 
 	cy.wrap(
 		Cypress.automation('remote:debugger:protocol', {

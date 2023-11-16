@@ -14,7 +14,7 @@
 html {
 	font-size: 100%;
 
-	&.hidden-scrollbar{
+	&.cypress-hidden-scrollbar{
 		&::-webkit-scrollbar {
 			scrollbar-width: none;
 			display: none;
@@ -31,6 +31,13 @@ html {
 				background: transparent;
 			}
 		}
+	}
+}
+
+body {
+	&.cypress-storybook-box-reset{
+		padding: 0;
+		margin: 0;
 	}
 }
 

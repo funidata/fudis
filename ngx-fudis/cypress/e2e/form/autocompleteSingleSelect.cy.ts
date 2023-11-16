@@ -3,6 +3,7 @@ import { fudisScreenshots, fudisScreenshotInit, FudisScreenshotTestConfig } from
 const configCommon: FudisScreenshotTestConfig = {
 	loadWait: 200,
 	isFullscreenScreenshot: true,
+	devices: ['mobile', 'tablet'],
 };
 
 const configSearch1Init: FudisScreenshotTestConfig = {

@@ -1,6 +1,7 @@
 import { fudisScreenshots, fudisScreenshotInit, FudisScreenshotTestConfig } from './utilities/utility';
 
 const config: FudisScreenshotTestConfig = {
+	devices: ['mobile', 'tablet'],
 	loadWait: 500,
 	errorThreshold: 0.004,
 };
