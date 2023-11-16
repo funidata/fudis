@@ -1967,21 +1967,26 @@ html {
 html {
   font-size: 100%;
 }
-html.hidden-scrollbar::-webkit-scrollbar {
+html.cypress-hidden-scrollbar::-webkit-scrollbar {
   scrollbar-width: none;
   display: none;
   background: transparent;
   visibility: hidden;
   width: 0;
 }
-html.hidden-scrollbar * {
+html.cypress-hidden-scrollbar * {
   scrollbar-width: none; /* Firefox */
 }
-html.hidden-scrollbar *::-webkit-scrollbar {
+html.cypress-hidden-scrollbar *::-webkit-scrollbar {
   display: none;
   visibility: hidden;
   width: 0;
   background: transparent;
+}
+
+body.cypress-storybook-box-reset {
+  padding: 0;
+  margin: 0;
 }
 
 /* stylelint-disable color-no-hex */
