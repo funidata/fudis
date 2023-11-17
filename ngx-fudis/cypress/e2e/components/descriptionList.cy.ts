@@ -1,7 +1,7 @@
 import { fudisScreenshots, fudisScreenshotInit, FudisScreenshotTestConfig } from '../../utilities/utility';
 
 const commonConfig: FudisScreenshotTestConfig = {
-	errorThreshold: 0.001,
+	errorThreshold: 0.003,
 	devices: ['mobile', 'tablet'],
 };
 

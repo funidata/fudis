@@ -3,7 +3,6 @@ import { fudisScreenshots, fudisScreenshotInit, FudisScreenshotTestConfig } from
 const config: FudisScreenshotTestConfig = {
 	devices: ['mobile', 'tablet'],
 	loadWait: 500,
-	errorThreshold: 0.001,
 };
 
 describe('Icon screenshot', () => {

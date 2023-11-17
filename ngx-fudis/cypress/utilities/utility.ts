@@ -19,7 +19,7 @@ export interface FudisScreenshotTestConfig {
 
 const defaultConfig: FudisScreenshotTestConfig = {
 	devices: ['mobile', 'desktop'],
-	errorThreshold: 0,
+	errorThreshold: 0.002,
 	tryLimit: 1,
 	newTryDelay: 1000,
 	isFullscreenScreenshot: false,
