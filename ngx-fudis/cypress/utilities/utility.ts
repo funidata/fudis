@@ -20,14 +20,14 @@ export interface FudisScreenshotTestConfig {
 const defaultConfig: FudisScreenshotTestConfig = {
 	devices: ['mobile', 'desktop'],
 	errorThreshold: 0,
-	tryLimit: 3,
+	tryLimit: 1,
 	newTryDelay: 1000,
 	isFullscreenScreenshot: false,
 };
 
 export const fudisScreenshotInit = () => {
 	// eslint-disable-next-line cypress/no-unnecessary-waiting
-	cy.wait(200);
+	cy.wait(1000);
 
 	/**
 	 * Recommendation from cypress-image-diff documentation
