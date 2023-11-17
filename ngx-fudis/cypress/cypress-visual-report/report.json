@@ -1,107 +1,63 @@
 {
-  "total": 8,
-  "totalPassed": 8,
+  "total": 4,
+  "totalPassed": 4,
   "totalFailed": 0,
   "totalSuites": 1,
   "suites": [
     {
-      "name": "textInput.cy.ts",
-      "path": "cypress/e2e/form/textInput.cy.ts",
+      "name": "spacing.cy.ts",
+      "path": "cypress/e2e/directives/spacing.cy.ts",
       "tests": [
         {
           "status": "pass",
-          "name": "textInput.cy.ts/tablet-1-init",
+          "name": "spacing.cy.ts/desktop_large",
           "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/form/textInput.cy.ts",
-          "specFilename": "textInput.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/textInput.cy.ts/tablet-1-init.png",
+          "specPath": "cypress/e2e/directives/spacing.cy.ts",
+          "specFilename": "spacing.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/desktop_large.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textInput.cy.ts/tablet-1-init.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/desktop_large.png"
         },
         {
           "status": "pass",
-          "name": "textInput.cy.ts/mobile-1-init",
+          "name": "spacing.cy.ts/desktop",
           "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/form/textInput.cy.ts",
-          "specFilename": "textInput.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/textInput.cy.ts/mobile-1-init.png",
+          "specPath": "cypress/e2e/directives/spacing.cy.ts",
+          "specFilename": "spacing.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/desktop.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textInput.cy.ts/mobile-1-init.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/desktop.png"
         },
         {
           "status": "pass",
-          "name": "textInput.cy.ts/tablet-2-focus",
+          "name": "spacing.cy.ts/tablet",
           "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/form/textInput.cy.ts",
-          "specFilename": "textInput.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/textInput.cy.ts/tablet-2-focus.png",
+          "specPath": "cypress/e2e/directives/spacing.cy.ts",
+          "specFilename": "spacing.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/tablet.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textInput.cy.ts/tablet-2-focus.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/tablet.png"
         },
         {
           "status": "pass",
-          "name": "textInput.cy.ts/mobile-2-focus",
+          "name": "spacing.cy.ts/mobile",
           "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/form/textInput.cy.ts",
-          "specFilename": "textInput.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/textInput.cy.ts/mobile-2-focus.png",
+          "specPath": "cypress/e2e/directives/spacing.cy.ts",
+          "specFilename": "spacing.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/mobile.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textInput.cy.ts/mobile-2-focus.png"
-        },
-        {
-          "status": "pass",
-          "name": "textInput.cy.ts/tablet-3-type-1",
-          "percentage": 0,
-          "failureThreshold": 0,
-          "specPath": "cypress/e2e/form/textInput.cy.ts",
-          "specFilename": "textInput.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/textInput.cy.ts/tablet-3-type-1.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textInput.cy.ts/tablet-3-type-1.png"
-        },
-        {
-          "status": "pass",
-          "name": "textInput.cy.ts/mobile-3-type-1",
-          "percentage": 0,
-          "failureThreshold": 0,
-          "specPath": "cypress/e2e/form/textInput.cy.ts",
-          "specFilename": "textInput.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/textInput.cy.ts/mobile-3-type-1.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textInput.cy.ts/mobile-3-type-1.png"
-        },
-        {
-          "status": "pass",
-          "name": "textInput.cy.ts/tablet-4-type-2",
-          "percentage": 0,
-          "failureThreshold": 0,
-          "specPath": "cypress/e2e/form/textInput.cy.ts",
-          "specFilename": "textInput.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/textInput.cy.ts/tablet-4-type-2.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textInput.cy.ts/tablet-4-type-2.png"
-        },
-        {
-          "status": "pass",
-          "name": "textInput.cy.ts/mobile-4-type-2",
-          "percentage": 0,
-          "failureThreshold": 0,
-          "specPath": "cypress/e2e/form/textInput.cy.ts",
-          "specFilename": "textInput.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/textInput.cy.ts/mobile-4-type-2.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textInput.cy.ts/mobile-4-type-2.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/mobile.png"
         }
       ]
     }
   ],
-  "startedAt": "2023-11-17T08:30:49.775Z",
-  "endedAt": "2023-11-17T08:30:57.406Z",
-  "duration": 7631,
+  "startedAt": "2023-11-17T09:33:54.478Z",
+  "endedAt": "2023-11-17T09:33:57.905Z",
+  "duration": 3427,
   "browserName": "electron",
   "browserVersion": "114.0.5735.289",
   "cypressVersion": "13.5.0"
