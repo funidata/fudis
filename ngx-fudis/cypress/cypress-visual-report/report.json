@@ -1,9 +1,109 @@
 {
-  "total": 191,
-  "totalPassed": 181,
-  "totalFailed": 10,
+  "total": 232,
+  "totalPassed": 232,
+  "totalFailed": 0,
   "totalSuites": 30,
   "suites": [
+    {
+      "name": "spacing.cy.ts",
+      "path": "cypress/e2e/directives/spacing.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "spacing.cy.ts/mobile-step-1",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/directives/spacing.cy.ts",
+          "specFilename": "spacing.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/mobile-step-1.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/mobile-step-1.png"
+        },
+        {
+          "status": "pass",
+          "name": "spacing.cy.ts/tablet-step-2",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/directives/spacing.cy.ts",
+          "specFilename": "spacing.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/tablet-step-2.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/tablet-step-2.png"
+        },
+        {
+          "status": "pass",
+          "name": "spacing.cy.ts/desktop-step-3",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/directives/spacing.cy.ts",
+          "specFilename": "spacing.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/desktop-step-3.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/desktop-step-3.png"
+        },
+        {
+          "status": "pass",
+          "name": "spacing.cy.ts/tablet-step-4",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/directives/spacing.cy.ts",
+          "specFilename": "spacing.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/tablet-step-4.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/tablet-step-4.png"
+        },
+        {
+          "status": "pass",
+          "name": "spacing.cy.ts/mobile-step-5",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/directives/spacing.cy.ts",
+          "specFilename": "spacing.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/mobile-step-5.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/mobile-step-5.png"
+        },
+        {
+          "status": "pass",
+          "name": "spacing.cy.ts/tablet-step-6",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/directives/spacing.cy.ts",
+          "specFilename": "spacing.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/tablet-step-6.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/tablet-step-6.png"
+        },
+        {
+          "status": "pass",
+          "name": "spacing.cy.ts/desktop-step-7",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/directives/spacing.cy.ts",
+          "specFilename": "spacing.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/desktop-step-7.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/desktop-step-7.png"
+        }
+      ]
+    },
+    {
+      "name": "tooltip.cy.ts",
+      "path": "cypress/e2e/directives/tooltip.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "tooltip.cy.ts/mobile",
+          "percentage": 0,
+          "failureThreshold": 0.001,
+          "specPath": "cypress/e2e/directives/tooltip.cy.ts",
+          "specFilename": "tooltip.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/tooltip.cy.ts/mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/tooltip.cy.ts/mobile.png"
+        }
+      ]
+    },
     {
       "name": "alertGroup.cy.ts",
       "path": "cypress/e2e/components/alertGroup.cy.ts",
@@ -207,7 +307,7 @@
           "status": "pass",
           "name": "descriptionList.cy.ts/tablet-regular",
           "percentage": 0,
-          "failureThreshold": 0,
+          "failureThreshold": 0.001,
           "specPath": "cypress/e2e/components/descriptionList.cy.ts",
           "specFilename": "descriptionList.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/tablet-regular.png",
@@ -218,7 +318,7 @@
           "status": "pass",
           "name": "descriptionList.cy.ts/mobile-regular",
           "percentage": 0,
-          "failureThreshold": 0,
+          "failureThreshold": 0.001,
           "specPath": "cypress/e2e/components/descriptionList.cy.ts",
           "specFilename": "descriptionList.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/mobile-regular.png",
@@ -229,7 +329,7 @@
           "status": "pass",
           "name": "descriptionList.cy.ts/tablet-compact",
           "percentage": 0,
-          "failureThreshold": 0,
+          "failureThreshold": 0.001,
           "specPath": "cypress/e2e/components/descriptionList.cy.ts",
           "specFilename": "descriptionList.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/tablet-compact.png",
@@ -240,7 +340,7 @@
           "status": "pass",
           "name": "descriptionList.cy.ts/mobile-compact",
           "percentage": 0,
-          "failureThreshold": 0,
+          "failureThreshold": 0.001,
           "specPath": "cypress/e2e/components/descriptionList.cy.ts",
           "specFilename": "descriptionList.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/mobile-compact.png",
@@ -251,7 +351,7 @@
           "status": "pass",
           "name": "descriptionList.cy.ts/tablet-inside-grid",
           "percentage": 0,
-          "failureThreshold": 0,
+          "failureThreshold": 0.001,
           "specPath": "cypress/e2e/components/descriptionList.cy.ts",
           "specFilename": "descriptionList.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/tablet-inside-grid.png",
@@ -262,7 +362,7 @@
           "status": "pass",
           "name": "descriptionList.cy.ts/mobile-inside-grid",
           "percentage": 0,
-          "failureThreshold": 0,
+          "failureThreshold": 0.001,
           "specPath": "cypress/e2e/components/descriptionList.cy.ts",
           "specFilename": "descriptionList.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/mobile-inside-grid.png",
@@ -273,7 +373,7 @@
           "status": "pass",
           "name": "descriptionList.cy.ts/tablet-sub-components-regular",
           "percentage": 0,
-          "failureThreshold": 0,
+          "failureThreshold": 0.001,
           "specPath": "cypress/e2e/components/descriptionList.cy.ts",
           "specFilename": "descriptionList.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/tablet-sub-components-regular.png",
@@ -284,7 +384,7 @@
           "status": "pass",
           "name": "descriptionList.cy.ts/mobile-sub-components-regular",
           "percentage": 0,
-          "failureThreshold": 0,
+          "failureThreshold": 0.001,
           "specPath": "cypress/e2e/components/descriptionList.cy.ts",
           "specFilename": "descriptionList.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/mobile-sub-components-regular.png",
@@ -295,7 +395,7 @@
           "status": "pass",
           "name": "descriptionList.cy.ts/tablet-sub-components-compact",
           "percentage": 0,
-          "failureThreshold": 0,
+          "failureThreshold": 0.001,
           "specPath": "cypress/e2e/components/descriptionList.cy.ts",
           "specFilename": "descriptionList.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/tablet-sub-components-compact.png",
@@ -306,7 +406,7 @@
           "status": "pass",
           "name": "descriptionList.cy.ts/mobile-sub-components-compact",
           "percentage": 0,
-          "failureThreshold": 0,
+          "failureThreshold": 0.001,
           "specPath": "cypress/e2e/components/descriptionList.cy.ts",
           "specFilename": "descriptionList.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/mobile-sub-components-compact.png",
@@ -314,15 +414,92 @@
           "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/mobile-sub-components-compact.png"
         },
         {
-          "status": "fail",
+          "status": "pass",
           "name": "descriptionList.cy.ts/tablet-language-badges-1",
-          "percentage": 0.0013020833333333333,
-          "failureThreshold": 0,
+          "percentage": 0,
+          "failureThreshold": 0.001,
           "specPath": "cypress/e2e/components/descriptionList.cy.ts",
           "specFilename": "descriptionList.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/tablet-language-badges-1.png",
-          "diffPath": "cypress/cypress-visual-screenshots/diff/descriptionList.cy.ts/tablet-language-badges-1.png",
+          "diffPath": "",
           "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/tablet-language-badges-1.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/mobile-language-badges-1",
+          "percentage": 0,
+          "failureThreshold": 0.001,
+          "specPath": "cypress/e2e/components/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/mobile-language-badges-1.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/mobile-language-badges-1.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/tablet-language-badges-2",
+          "percentage": 0,
+          "failureThreshold": 0.001,
+          "specPath": "cypress/e2e/components/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/tablet-language-badges-2.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/tablet-language-badges-2.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/mobile-language-badges-2",
+          "percentage": 0,
+          "failureThreshold": 0.001,
+          "specPath": "cypress/e2e/components/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/mobile-language-badges-2.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/mobile-language-badges-2.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/tablet-language-badges-3",
+          "percentage": 0,
+          "failureThreshold": 0.001,
+          "specPath": "cypress/e2e/components/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/tablet-language-badges-3.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/tablet-language-badges-3.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/mobile-language-badges-3",
+          "percentage": 0,
+          "failureThreshold": 0.001,
+          "specPath": "cypress/e2e/components/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/mobile-language-badges-3.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/mobile-language-badges-3.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/tablet-language-badges-4",
+          "percentage": 0,
+          "failureThreshold": 0.001,
+          "specPath": "cypress/e2e/components/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/tablet-language-badges-4.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/tablet-language-badges-4.png"
+        },
+        {
+          "status": "pass",
+          "name": "descriptionList.cy.ts/mobile-language-badges-4",
+          "percentage": 0,
+          "failureThreshold": 0.001,
+          "specPath": "cypress/e2e/components/descriptionList.cy.ts",
+          "specFilename": "descriptionList.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/descriptionList.cy.ts/mobile-language-badges-4.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/descriptionList.cy.ts/mobile-language-badges-4.png"
         }
       ]
     },
@@ -790,15 +967,26 @@
       "path": "cypress/e2e/components/icon.cy.ts",
       "tests": [
         {
-          "status": "fail",
+          "status": "pass",
           "name": "icon.cy.ts/tablet",
-          "percentage": 0.0009682768219059289,
-          "failureThreshold": 0,
+          "percentage": 0,
+          "failureThreshold": 0.001,
           "specPath": "cypress/e2e/components/icon.cy.ts",
           "specFilename": "icon.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/icon.cy.ts/tablet.png",
-          "diffPath": "cypress/cypress-visual-screenshots/diff/icon.cy.ts/tablet.png",
+          "diffPath": "",
           "comparisonPath": "cypress/cypress-visual-screenshots/comparison/icon.cy.ts/tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "icon.cy.ts/mobile",
+          "percentage": 0,
+          "failureThreshold": 0.001,
+          "specPath": "cypress/e2e/components/icon.cy.ts",
+          "specFilename": "icon.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/icon.cy.ts/mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/icon.cy.ts/mobile.png"
         }
       ]
     },
@@ -931,102 +1119,190 @@
       ]
     },
     {
-      "name": "spacing.cy.ts",
-      "path": "cypress/e2e/directives/spacing.cy.ts",
+      "name": "bodytext.cy.ts",
+      "path": "cypress/e2e/components/typography/bodytext.cy.ts",
       "tests": [
         {
           "status": "pass",
-          "name": "spacing.cy.ts/mobile-step-1",
+          "name": "bodytext.cy.ts/desktop-align-left",
           "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/directives/spacing.cy.ts",
-          "specFilename": "spacing.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/mobile-step-1.png",
+          "specPath": "cypress/e2e/components/typography/bodytext.cy.ts",
+          "specFilename": "bodytext.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/desktop-align-left.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/mobile-step-1.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/desktop-align-left.png"
         },
         {
           "status": "pass",
-          "name": "spacing.cy.ts/tablet-step-2",
+          "name": "bodytext.cy.ts/mobile-align-left",
           "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/directives/spacing.cy.ts",
-          "specFilename": "spacing.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/tablet-step-2.png",
+          "specPath": "cypress/e2e/components/typography/bodytext.cy.ts",
+          "specFilename": "bodytext.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/mobile-align-left.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/tablet-step-2.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/mobile-align-left.png"
         },
         {
           "status": "pass",
-          "name": "spacing.cy.ts/desktop-step-3",
+          "name": "bodytext.cy.ts/desktop-align-right",
           "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/directives/spacing.cy.ts",
-          "specFilename": "spacing.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/desktop-step-3.png",
+          "specPath": "cypress/e2e/components/typography/bodytext.cy.ts",
+          "specFilename": "bodytext.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/desktop-align-right.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/desktop-step-3.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/desktop-align-right.png"
         },
         {
           "status": "pass",
-          "name": "spacing.cy.ts/tablet-step-4",
+          "name": "bodytext.cy.ts/mobile-align-right",
           "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/directives/spacing.cy.ts",
-          "specFilename": "spacing.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/tablet-step-4.png",
+          "specPath": "cypress/e2e/components/typography/bodytext.cy.ts",
+          "specFilename": "bodytext.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/mobile-align-right.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/tablet-step-4.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/mobile-align-right.png"
         },
         {
           "status": "pass",
-          "name": "spacing.cy.ts/mobile-step-5",
+          "name": "bodytext.cy.ts/desktop-align-center",
           "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/directives/spacing.cy.ts",
-          "specFilename": "spacing.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/mobile-step-5.png",
+          "specPath": "cypress/e2e/components/typography/bodytext.cy.ts",
+          "specFilename": "bodytext.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/desktop-align-center.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/mobile-step-5.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/desktop-align-center.png"
         },
         {
           "status": "pass",
-          "name": "spacing.cy.ts/tablet-step-6",
+          "name": "bodytext.cy.ts/mobile-align-center",
           "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/directives/spacing.cy.ts",
-          "specFilename": "spacing.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/tablet-step-6.png",
+          "specPath": "cypress/e2e/components/typography/bodytext.cy.ts",
+          "specFilename": "bodytext.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/mobile-align-center.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/tablet-step-6.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/mobile-align-center.png"
         },
         {
           "status": "pass",
-          "name": "spacing.cy.ts/desktop-step-7",
+          "name": "bodytext.cy.ts/desktop-all-variants",
           "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/directives/spacing.cy.ts",
-          "specFilename": "spacing.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/desktop-step-7.png",
+          "specPath": "cypress/e2e/components/typography/bodytext.cy.ts",
+          "specFilename": "bodytext.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/desktop-all-variants.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/desktop-step-7.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/desktop-all-variants.png"
+        },
+        {
+          "status": "pass",
+          "name": "bodytext.cy.ts/mobile-all-variants",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/typography/bodytext.cy.ts",
+          "specFilename": "bodytext.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/mobile-all-variants.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/mobile-all-variants.png"
         }
       ]
     },
     {
-      "name": "tooltip.cy.ts",
-      "path": "cypress/e2e/directives/tooltip.cy.ts",
+      "name": "heading.cy.ts",
+      "path": "cypress/e2e/components/typography/heading.cy.ts",
       "tests": [
         {
-          "status": "fail",
-          "name": "tooltip.cy.ts/mobile",
-          "percentage": 0.0009061004703659372,
+          "status": "pass",
+          "name": "heading.cy.ts/desktop-align-left",
+          "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/directives/tooltip.cy.ts",
-          "specFilename": "tooltip.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/tooltip.cy.ts/mobile.png",
-          "diffPath": "cypress/cypress-visual-screenshots/diff/tooltip.cy.ts/mobile.png",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/tooltip.cy.ts/mobile.png"
+          "specPath": "cypress/e2e/components/typography/heading.cy.ts",
+          "specFilename": "heading.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/desktop-align-left.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/desktop-align-left.png"
+        },
+        {
+          "status": "pass",
+          "name": "heading.cy.ts/mobile-align-left",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/typography/heading.cy.ts",
+          "specFilename": "heading.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/mobile-align-left.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/mobile-align-left.png"
+        },
+        {
+          "status": "pass",
+          "name": "heading.cy.ts/desktop-align-right",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/typography/heading.cy.ts",
+          "specFilename": "heading.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/desktop-align-right.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/desktop-align-right.png"
+        },
+        {
+          "status": "pass",
+          "name": "heading.cy.ts/mobile-align-right",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/typography/heading.cy.ts",
+          "specFilename": "heading.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/mobile-align-right.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/mobile-align-right.png"
+        },
+        {
+          "status": "pass",
+          "name": "heading.cy.ts/desktop-align-center",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/typography/heading.cy.ts",
+          "specFilename": "heading.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/desktop-align-center.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/desktop-align-center.png"
+        },
+        {
+          "status": "pass",
+          "name": "heading.cy.ts/mobile-align-center",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/typography/heading.cy.ts",
+          "specFilename": "heading.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/mobile-align-center.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/mobile-align-center.png"
+        },
+        {
+          "status": "pass",
+          "name": "heading.cy.ts/desktop-all-variants",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/typography/heading.cy.ts",
+          "specFilename": "heading.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/desktop-all-variants.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/desktop-all-variants.png"
+        },
+        {
+          "status": "pass",
+          "name": "heading.cy.ts/mobile-all-variants",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/typography/heading.cy.ts",
+          "specFilename": "heading.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/mobile-all-variants.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/mobile-all-variants.png"
         }
       ]
     },
@@ -1386,7 +1662,7 @@
           "status": "pass",
           "name": "datepicker.cy.ts/mobile-normal-1-init",
           "percentage": 0,
-          "failureThreshold": 0,
+          "failureThreshold": 0.002,
           "specPath": "cypress/e2e/components/form/datepicker.cy.ts",
           "specFilename": "datepicker.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/mobile-normal-1-init.png",
@@ -1397,7 +1673,7 @@
           "status": "pass",
           "name": "datepicker.cy.ts/mobile-normal-2-focus",
           "percentage": 0,
-          "failureThreshold": 0,
+          "failureThreshold": 0.002,
           "specPath": "cypress/e2e/components/form/datepicker.cy.ts",
           "specFilename": "datepicker.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/mobile-normal-2-focus.png",
@@ -1405,21 +1681,43 @@
           "comparisonPath": "cypress/cypress-visual-screenshots/comparison/datepicker.cy.ts/mobile-normal-2-focus.png"
         },
         {
-          "status": "fail",
+          "status": "pass",
           "name": "datepicker.cy.ts/mobile-normal-3-opened",
-          "percentage": 0.0015694120514358613,
-          "failureThreshold": 0,
+          "percentage": 0,
+          "failureThreshold": 0.002,
           "specPath": "cypress/e2e/components/form/datepicker.cy.ts",
           "specFilename": "datepicker.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/mobile-normal-3-opened.png",
-          "diffPath": "cypress/cypress-visual-screenshots/diff/datepicker.cy.ts/mobile-normal-3-opened.png",
+          "diffPath": "",
           "comparisonPath": "cypress/cypress-visual-screenshots/comparison/datepicker.cy.ts/mobile-normal-3-opened.png"
+        },
+        {
+          "status": "pass",
+          "name": "datepicker.cy.ts/mobile-normal-4-select",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/form/datepicker.cy.ts",
+          "specFilename": "datepicker.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/mobile-normal-4-select.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/datepicker.cy.ts/mobile-normal-4-select.png"
+        },
+        {
+          "status": "pass",
+          "name": "datepicker.cy.ts/mobile-normal-5-reopen",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/form/datepicker.cy.ts",
+          "specFilename": "datepicker.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/mobile-normal-5-reopen.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/datepicker.cy.ts/mobile-normal-5-reopen.png"
         },
         {
           "status": "pass",
           "name": "datepicker.cy.ts/mobile-disabled",
           "percentage": 0,
-          "failureThreshold": 0,
+          "failureThreshold": 0.002,
           "specPath": "cypress/e2e/components/form/datepicker.cy.ts",
           "specFilename": "datepicker.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/mobile-disabled.png",
@@ -1427,14 +1725,14 @@
           "comparisonPath": "cypress/cypress-visual-screenshots/comparison/datepicker.cy.ts/mobile-disabled.png"
         },
         {
-          "status": "fail",
+          "status": "pass",
           "name": "datepicker.cy.ts/mobile-min-max-opened",
-          "percentage": 0.001281419574064149,
-          "failureThreshold": 0,
+          "percentage": 0,
+          "failureThreshold": 0.002,
           "specPath": "cypress/e2e/components/form/datepicker.cy.ts",
           "specFilename": "datepicker.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/datepicker.cy.ts/mobile-min-max-opened.png",
-          "diffPath": "cypress/cypress-visual-screenshots/diff/datepicker.cy.ts/mobile-min-max-opened.png",
+          "diffPath": "",
           "comparisonPath": "cypress/cypress-visual-screenshots/comparison/datepicker.cy.ts/mobile-min-max-opened.png"
         }
       ]
@@ -1560,15 +1858,37 @@
       "path": "cypress/e2e/components/form/fieldset.cy.ts",
       "tests": [
         {
-          "status": "fail",
+          "status": "pass",
           "name": "fieldset.cy.ts/desktop",
-          "percentage": 0.0025788419159072434,
+          "percentage": 0,
           "failureThreshold": 0,
           "specPath": "cypress/e2e/components/form/fieldset.cy.ts",
           "specFilename": "fieldset.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/fieldset.cy.ts/desktop.png",
-          "diffPath": "cypress/cypress-visual-screenshots/diff/fieldset.cy.ts/desktop.png",
+          "diffPath": "",
           "comparisonPath": "cypress/cypress-visual-screenshots/comparison/fieldset.cy.ts/desktop.png"
+        },
+        {
+          "status": "pass",
+          "name": "fieldset.cy.ts/tablet",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/fieldset.cy.ts",
+          "specFilename": "fieldset.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/fieldset.cy.ts/tablet.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/fieldset.cy.ts/tablet.png"
+        },
+        {
+          "status": "pass",
+          "name": "fieldset.cy.ts/mobile",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/fieldset.cy.ts",
+          "specFilename": "fieldset.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/fieldset.cy.ts/mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/fieldset.cy.ts/mobile.png"
         }
       ]
     },
@@ -1621,26 +1941,224 @@
           "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/mobile-1-init.png"
         },
         {
-          "status": "fail",
+          "status": "pass",
           "name": "form.cy.ts/desktop-large-2-instant-submit",
-          "percentage": 0.0013772305588421487,
+          "percentage": 0,
           "failureThreshold": 0,
           "specPath": "cypress/e2e/components/form/form.cy.ts",
           "specFilename": "form.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/desktop-large-2-instant-submit.png",
-          "diffPath": "cypress/cypress-visual-screenshots/diff/form.cy.ts/desktop-large-2-instant-submit.png",
+          "diffPath": "",
           "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/desktop-large-2-instant-submit.png"
         },
         {
-          "status": "fail",
+          "status": "pass",
+          "name": "form.cy.ts/desktop-2-instant-submit",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/desktop-2-instant-submit.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/desktop-2-instant-submit.png"
+        },
+        {
+          "status": "pass",
+          "name": "form.cy.ts/tablet-2-instant-submit",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/tablet-2-instant-submit.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/tablet-2-instant-submit.png"
+        },
+        {
+          "status": "pass",
+          "name": "form.cy.ts/mobile-2-instant-submit",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/mobile-2-instant-submit.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/mobile-2-instant-submit.png"
+        },
+        {
+          "status": "pass",
+          "name": "form.cy.ts/desktop-large-3-change-language",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/desktop-large-3-change-language.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/desktop-large-3-change-language.png"
+        },
+        {
+          "status": "pass",
+          "name": "form.cy.ts/desktop-3-change-language",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/desktop-3-change-language.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/desktop-3-change-language.png"
+        },
+        {
+          "status": "pass",
+          "name": "form.cy.ts/tablet-3-change-language",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/tablet-3-change-language.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/tablet-3-change-language.png"
+        },
+        {
+          "status": "pass",
+          "name": "form.cy.ts/mobile-3-change-language",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/mobile-3-change-language.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/mobile-3-change-language.png"
+        },
+        {
+          "status": "pass",
           "name": "form.cy.ts/desktop-large-4-fill-first-input",
-          "percentage": 0.0015460232653692302,
+          "percentage": 0,
           "failureThreshold": 0,
           "specPath": "cypress/e2e/components/form/form.cy.ts",
           "specFilename": "form.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/desktop-large-4-fill-first-input.png",
-          "diffPath": "cypress/cypress-visual-screenshots/diff/form.cy.ts/desktop-large-4-fill-first-input.png",
+          "diffPath": "",
           "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/desktop-large-4-fill-first-input.png"
+        },
+        {
+          "status": "pass",
+          "name": "form.cy.ts/desktop-4-fill-first-input",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/desktop-4-fill-first-input.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/desktop-4-fill-first-input.png"
+        },
+        {
+          "status": "pass",
+          "name": "form.cy.ts/tablet-4-fill-first-input",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/tablet-4-fill-first-input.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/tablet-4-fill-first-input.png"
+        },
+        {
+          "status": "pass",
+          "name": "form.cy.ts/mobile-4-fill-first-input",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/mobile-4-fill-first-input.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/mobile-4-fill-first-input.png"
+        },
+        {
+          "status": "pass",
+          "name": "form.cy.ts/desktop-large-5-submit-after-first-fill",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/desktop-large-5-submit-after-first-fill.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/desktop-large-5-submit-after-first-fill.png"
+        },
+        {
+          "status": "pass",
+          "name": "form.cy.ts/desktop-5-submit-after-first-fill",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/desktop-5-submit-after-first-fill.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/desktop-5-submit-after-first-fill.png"
+        },
+        {
+          "status": "pass",
+          "name": "form.cy.ts/tablet-5-submit-after-first-fill",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/tablet-5-submit-after-first-fill.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/tablet-5-submit-after-first-fill.png"
+        },
+        {
+          "status": "pass",
+          "name": "form.cy.ts/mobile-5-submit-after-first-fill",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/mobile-5-submit-after-first-fill.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/mobile-5-submit-after-first-fill.png"
+        },
+        {
+          "status": "pass",
+          "name": "form.cy.ts/desktop-large-6-fill-second-input",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/desktop-large-6-fill-second-input.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/desktop-large-6-fill-second-input.png"
+        },
+        {
+          "status": "pass",
+          "name": "form.cy.ts/desktop-6-fill-second-input",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/desktop-6-fill-second-input.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/desktop-6-fill-second-input.png"
+        },
+        {
+          "status": "pass",
+          "name": "form.cy.ts/tablet-6-fill-second-input",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/tablet-6-fill-second-input.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/tablet-6-fill-second-input.png"
+        },
+        {
+          "status": "pass",
+          "name": "form.cy.ts/mobile-6-fill-second-input",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/form.cy.ts",
+          "specFilename": "form.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/form.cy.ts/mobile-6-fill-second-input.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/form.cy.ts/mobile-6-fill-second-input.png"
         }
       ]
     },
@@ -2035,15 +2553,92 @@
       "path": "cypress/e2e/components/form/textArea.cy.ts",
       "tests": [
         {
-          "status": "fail",
+          "status": "pass",
           "name": "textArea.cy.ts/tablet-1-init",
-          "percentage": 0.007415012180043828,
+          "percentage": 0,
           "failureThreshold": 0,
           "specPath": "cypress/e2e/components/form/textArea.cy.ts",
           "specFilename": "textArea.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/textArea.cy.ts/tablet-1-init.png",
-          "diffPath": "cypress/cypress-visual-screenshots/diff/textArea.cy.ts/tablet-1-init.png",
+          "diffPath": "",
           "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textArea.cy.ts/tablet-1-init.png"
+        },
+        {
+          "status": "pass",
+          "name": "textArea.cy.ts/mobile-1-init",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/textArea.cy.ts",
+          "specFilename": "textArea.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/textArea.cy.ts/mobile-1-init.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textArea.cy.ts/mobile-1-init.png"
+        },
+        {
+          "status": "pass",
+          "name": "textArea.cy.ts/tablet-2-focus",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/textArea.cy.ts",
+          "specFilename": "textArea.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/textArea.cy.ts/tablet-2-focus.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textArea.cy.ts/tablet-2-focus.png"
+        },
+        {
+          "status": "pass",
+          "name": "textArea.cy.ts/mobile-2-focus",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/textArea.cy.ts",
+          "specFilename": "textArea.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/textArea.cy.ts/mobile-2-focus.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textArea.cy.ts/mobile-2-focus.png"
+        },
+        {
+          "status": "pass",
+          "name": "textArea.cy.ts/tablet-3-type-1",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/textArea.cy.ts",
+          "specFilename": "textArea.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/textArea.cy.ts/tablet-3-type-1.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textArea.cy.ts/tablet-3-type-1.png"
+        },
+        {
+          "status": "pass",
+          "name": "textArea.cy.ts/mobile-3-type-1",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/textArea.cy.ts",
+          "specFilename": "textArea.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/textArea.cy.ts/mobile-3-type-1.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textArea.cy.ts/mobile-3-type-1.png"
+        },
+        {
+          "status": "pass",
+          "name": "textArea.cy.ts/tablet-4-type-2",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/textArea.cy.ts",
+          "specFilename": "textArea.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/textArea.cy.ts/tablet-4-type-2.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textArea.cy.ts/tablet-4-type-2.png"
+        },
+        {
+          "status": "pass",
+          "name": "textArea.cy.ts/mobile-4-type-2",
+          "percentage": 0,
+          "failureThreshold": 0,
+          "specPath": "cypress/e2e/components/form/textArea.cy.ts",
+          "specFilename": "textArea.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/textArea.cy.ts/mobile-4-type-2.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textArea.cy.ts/mobile-4-type-2.png"
         }
       ]
     },
@@ -2085,210 +2680,66 @@
           "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textInput.cy.ts/tablet-2-focus.png"
         },
         {
-          "status": "fail",
+          "status": "pass",
           "name": "textInput.cy.ts/mobile-2-focus",
-          "percentage": 0.011136920927794091,
+          "percentage": 0,
           "failureThreshold": 0,
           "specPath": "cypress/e2e/components/form/textInput.cy.ts",
           "specFilename": "textInput.cy.ts",
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/textInput.cy.ts/mobile-2-focus.png",
-          "diffPath": "cypress/cypress-visual-screenshots/diff/textInput.cy.ts/mobile-2-focus.png",
+          "diffPath": "",
           "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textInput.cy.ts/mobile-2-focus.png"
-        }
-      ]
-    },
-    {
-      "name": "bodytext.cy.ts",
-      "path": "cypress/e2e/components/typography/bodytext.cy.ts",
-      "tests": [
-        {
-          "status": "pass",
-          "name": "bodytext.cy.ts/desktop-align-left",
-          "percentage": 0,
-          "failureThreshold": 0,
-          "specPath": "cypress/e2e/components/typography/bodytext.cy.ts",
-          "specFilename": "bodytext.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/desktop-align-left.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/desktop-align-left.png"
         },
         {
           "status": "pass",
-          "name": "bodytext.cy.ts/mobile-align-left",
+          "name": "textInput.cy.ts/tablet-3-type-1",
           "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/components/typography/bodytext.cy.ts",
-          "specFilename": "bodytext.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/mobile-align-left.png",
+          "specPath": "cypress/e2e/components/form/textInput.cy.ts",
+          "specFilename": "textInput.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/textInput.cy.ts/tablet-3-type-1.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/mobile-align-left.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textInput.cy.ts/tablet-3-type-1.png"
         },
         {
           "status": "pass",
-          "name": "bodytext.cy.ts/desktop-align-right",
+          "name": "textInput.cy.ts/mobile-3-type-1",
           "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/components/typography/bodytext.cy.ts",
-          "specFilename": "bodytext.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/desktop-align-right.png",
+          "specPath": "cypress/e2e/components/form/textInput.cy.ts",
+          "specFilename": "textInput.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/textInput.cy.ts/mobile-3-type-1.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/desktop-align-right.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textInput.cy.ts/mobile-3-type-1.png"
         },
         {
           "status": "pass",
-          "name": "bodytext.cy.ts/mobile-align-right",
+          "name": "textInput.cy.ts/tablet-4-type-2",
           "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/components/typography/bodytext.cy.ts",
-          "specFilename": "bodytext.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/mobile-align-right.png",
+          "specPath": "cypress/e2e/components/form/textInput.cy.ts",
+          "specFilename": "textInput.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/textInput.cy.ts/tablet-4-type-2.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/mobile-align-right.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textInput.cy.ts/tablet-4-type-2.png"
         },
         {
           "status": "pass",
-          "name": "bodytext.cy.ts/desktop-align-center",
+          "name": "textInput.cy.ts/mobile-4-type-2",
           "percentage": 0,
           "failureThreshold": 0,
-          "specPath": "cypress/e2e/components/typography/bodytext.cy.ts",
-          "specFilename": "bodytext.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/desktop-align-center.png",
+          "specPath": "cypress/e2e/components/form/textInput.cy.ts",
+          "specFilename": "textInput.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/textInput.cy.ts/mobile-4-type-2.png",
           "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/desktop-align-center.png"
-        },
-        {
-          "status": "pass",
-          "name": "bodytext.cy.ts/mobile-align-center",
-          "percentage": 0,
-          "failureThreshold": 0,
-          "specPath": "cypress/e2e/components/typography/bodytext.cy.ts",
-          "specFilename": "bodytext.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/mobile-align-center.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/mobile-align-center.png"
-        },
-        {
-          "status": "pass",
-          "name": "bodytext.cy.ts/desktop-all-variants",
-          "percentage": 0,
-          "failureThreshold": 0,
-          "specPath": "cypress/e2e/components/typography/bodytext.cy.ts",
-          "specFilename": "bodytext.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/desktop-all-variants.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/desktop-all-variants.png"
-        },
-        {
-          "status": "pass",
-          "name": "bodytext.cy.ts/mobile-all-variants",
-          "percentage": 0,
-          "failureThreshold": 0,
-          "specPath": "cypress/e2e/components/typography/bodytext.cy.ts",
-          "specFilename": "bodytext.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/bodytext.cy.ts/mobile-all-variants.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/bodytext.cy.ts/mobile-all-variants.png"
-        }
-      ]
-    },
-    {
-      "name": "heading.cy.ts",
-      "path": "cypress/e2e/components/typography/heading.cy.ts",
-      "tests": [
-        {
-          "status": "pass",
-          "name": "heading.cy.ts/desktop-align-left",
-          "percentage": 0,
-          "failureThreshold": 0,
-          "specPath": "cypress/e2e/components/typography/heading.cy.ts",
-          "specFilename": "heading.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/desktop-align-left.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/desktop-align-left.png"
-        },
-        {
-          "status": "pass",
-          "name": "heading.cy.ts/mobile-align-left",
-          "percentage": 0,
-          "failureThreshold": 0,
-          "specPath": "cypress/e2e/components/typography/heading.cy.ts",
-          "specFilename": "heading.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/mobile-align-left.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/mobile-align-left.png"
-        },
-        {
-          "status": "pass",
-          "name": "heading.cy.ts/desktop-align-right",
-          "percentage": 0,
-          "failureThreshold": 0,
-          "specPath": "cypress/e2e/components/typography/heading.cy.ts",
-          "specFilename": "heading.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/desktop-align-right.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/desktop-align-right.png"
-        },
-        {
-          "status": "pass",
-          "name": "heading.cy.ts/mobile-align-right",
-          "percentage": 0,
-          "failureThreshold": 0,
-          "specPath": "cypress/e2e/components/typography/heading.cy.ts",
-          "specFilename": "heading.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/mobile-align-right.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/mobile-align-right.png"
-        },
-        {
-          "status": "pass",
-          "name": "heading.cy.ts/desktop-align-center",
-          "percentage": 0,
-          "failureThreshold": 0,
-          "specPath": "cypress/e2e/components/typography/heading.cy.ts",
-          "specFilename": "heading.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/desktop-align-center.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/desktop-align-center.png"
-        },
-        {
-          "status": "pass",
-          "name": "heading.cy.ts/mobile-align-center",
-          "percentage": 0,
-          "failureThreshold": 0,
-          "specPath": "cypress/e2e/components/typography/heading.cy.ts",
-          "specFilename": "heading.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/mobile-align-center.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/mobile-align-center.png"
-        },
-        {
-          "status": "pass",
-          "name": "heading.cy.ts/desktop-all-variants",
-          "percentage": 0,
-          "failureThreshold": 0,
-          "specPath": "cypress/e2e/components/typography/heading.cy.ts",
-          "specFilename": "heading.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/desktop-all-variants.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/desktop-all-variants.png"
-        },
-        {
-          "status": "pass",
-          "name": "heading.cy.ts/mobile-all-variants",
-          "percentage": 0,
-          "failureThreshold": 0,
-          "specPath": "cypress/e2e/components/typography/heading.cy.ts",
-          "specFilename": "heading.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/heading.cy.ts/mobile-all-variants.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/heading.cy.ts/mobile-all-variants.png"
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/textInput.cy.ts/mobile-4-type-2.png"
         }
       ]
     }
   ],
-  "startedAt": "2023-11-17T11:25:26.530Z",
-  "endedAt": "2023-11-17T11:37:06.050Z",
-  "duration": 647722,
+  "startedAt": "2023-11-17T13:00:04.658Z",
+  "endedAt": "2023-11-17T13:10:55.600Z",
+  "duration": 592631,
   "browserName": "electron",
   "browserVersion": "114.0.5735.289",
   "cypressVersion": "13.5.0"
