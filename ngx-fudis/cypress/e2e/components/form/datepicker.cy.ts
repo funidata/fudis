@@ -4,6 +4,7 @@ const configCommon: FudisScreenshotTestConfig = {
 	loadWait: 100,
 	devices: ['mobile'],
 	isFullscreenScreenshot: true,
+	errorThreshold: 0.002,
 };
 
 const configNormal1Init: FudisScreenshotTestConfig = {

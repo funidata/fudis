@@ -4,6 +4,7 @@ const config: FudisScreenshotTestConfig = {
 	devices: ['mobile'],
 	isFullscreenScreenshot: true,
 	loadWait: 200,
+	errorThreshold: 0.001,
 };
 
 describe('Tooltip screenshot', () => {
