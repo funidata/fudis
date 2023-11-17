@@ -54,7 +54,7 @@ export class FudisBreakpointService {
 				if (this._screenSize()?.breakpoints[item.breakpoint]) {
 					elementToModify.style.cssText = `
 					${previousStyles};
-					${attribute}: ${item.value};
+					${attribute}: ${item.value === 'none' ? '0' : item.value};
 					`;
 				}
 			});
