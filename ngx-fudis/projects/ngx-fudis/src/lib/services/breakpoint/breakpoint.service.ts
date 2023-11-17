@@ -47,7 +47,7 @@ export class FudisBreakpointService {
 		if (typeof value === 'string') {
 			elementToModify.style.cssText = `
 					${previousStyles};
-					${attribute}: ${value};
+					${attribute}: ${value === 'none' ? '0' : value};
 					`;
 		} else {
 			value?.forEach((item) => {
