@@ -35,9 +35,9 @@ export const fudisScreenshotInit = () => {
 	cy.get('html, body').invoke('attr', 'style', 'height: auto; scroll-behavior: auto; ');
 
 	/**
-	 * Native scrollbar styles differ by test devices, so this tries to hides it
+	 * Native scrollbar, input caret and text area resize styles differ by test devices, so this tries to hides it
 	 */
-	cy.get('html').invoke('attr', 'class', 'cypress-hidden-scrollbar');
+	cy.get('html').invoke('attr', 'class', 'cypress-hide-unstyled-elements');
 
 	/**
 	 * Remove padding from Storybook removes

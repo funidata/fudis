@@ -14,7 +14,16 @@
 html {
 	font-size: 100%;
 
-	&.cypress-hidden-scrollbar{
+	&.cypress-hide-unstyled-elements{
+
+		& textarea.fudis-text-area__input {
+			resize: none;
+		}
+
+		& input, textarea{
+			caret-color: transparent;
+		}
+
 		&::-webkit-scrollbar {
 			scrollbar-width: none;
 			display: none;
