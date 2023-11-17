@@ -34,6 +34,8 @@ const preview = {
 							'Naming Conventions',
 							'Creating a Component',
 							'Component Checklist',
+							'Testing Practises',
+							'Git and GitHub Conventions',
 							'Creating a Release',
 							'DevOps Info'
 						],
