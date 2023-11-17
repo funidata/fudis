@@ -79,10 +79,10 @@ const screenshotHelper = (name: string, config: FudisScreenshotTestConfig) => {
 export const fudisScreenshots = (updatedConfig?: FudisScreenshotTestConfig) => {
 	const testConfig: FudisScreenshotTestConfig = { ...defaultConfig, ...updatedConfig };
 
-	const desktopLargeName = testConfig.testName ? `/${testConfig.testName}_desktop_large` : '/desktop_large';
-	const desktopName = testConfig.testName ? `/${testConfig.testName}_desktop` : '/desktop';
-	const mobileName = testConfig.testName ? `/${testConfig.testName}_mobile` : '/mobile';
-	const tabletName = testConfig.testName ? `/${testConfig.testName}_tablet` : '/tablet';
+	const desktopLargeName = testConfig.testName ? `/desktop-large-${testConfig.testName}` : '/desktop_large';
+	const desktopName = testConfig.testName ? `/desktop-${testConfig.testName}` : '/desktop';
+	const mobileName = testConfig.testName ? `/mobile-${testConfig.testName}` : '/mobile';
+	const tabletName = testConfig.testName ? `/tablet-${testConfig.testName}` : '/tablet';
 
 	if (testConfig.devices?.includes('desktopLarge')) {
 		cy.viewport('macbook-16');
