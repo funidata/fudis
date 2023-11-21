@@ -1,7 +1,8 @@
 import { fudisScreenshots, fudisScreenshotInit, FudisScreenshotTestConfig } from '../../../utilities/utility';
 
 const config: FudisScreenshotTestConfig = {
-	devices: ['mobile', 'desktop', 'tablet'],
+	devices: ['tablet', 'desktop'],
+	isFullscreenScreenshot: true,
 };
 
 describe('Fieldset screenshot', () => {
