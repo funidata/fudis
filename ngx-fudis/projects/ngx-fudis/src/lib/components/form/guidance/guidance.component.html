@@ -52,6 +52,15 @@
 					<ng-container *ngIf="control?.errors && !formGroup">
 						<ng-container *ngFor="let error of control.errors | keyvalue">
 							<fudis-error-message
+								*ngIf="error.value?.message"
+								[visible]="control.touched"
+								[focusId]="for"
+								[type]="error.key"
+								[label]="inputLabel"
+								[message]="error.value?.message" />
+							<!-- Todo: remove below deprecated version when Into is misgrated to above  -->
+							<fudis-error-message
+								*ngIf="!error.value?.message"
 								[visible]="control.touched"
 								[focusId]="for"
 								[label]="inputLabel"

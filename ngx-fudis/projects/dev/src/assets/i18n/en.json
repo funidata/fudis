@@ -3,7 +3,15 @@
 	"change_language": "Change language",
 	"helpText": "This is English.",
 	"required": "Required",
-	"error_required": "This is required text input",
+	"form_errors": {
+		"required": "This form field is required",
+		"one_required": "At least one language is required",
+		"berry_min":"Not enough berries picked!",
+		"berry_max":"Too much berries picked!",
+		"boolean_truth": "Truth is missing!",
+		"too_few_chars": "Too few characters.",
+		"email": "That is not an email!"
+	},
 	"error_one_required": "At least one language is required",
 	"dynamic": "transloco {{value}}",
   "chooseBerry": "Choose your berries",
