@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { TextInputComponent } from './text-input.component';
 import { FudisFormErrors } from '../../../types/forms';
 import readme from './readme.mdx';
+import { FudisFormControlValidators } from '../../../utilities/form/validators';
 
 @Component({
 	selector: 'example-text-input-with-form-control',
@@ -15,7 +16,6 @@ import readme from './readme.mdx';
 				[helpText]="'I do not have any validators.'" />
 			<fudis-text-input
 				[control]="mainFormGroup.controls['second']"
-				[errorMsg]="{ required: 'Missing a value.' }"
 				[label]="'Required text input'"
 				[tooltip]="'This is a tooltip text'"
 				[tooltipPosition]="'right'"
@@ -57,14 +57,17 @@ class TextInputWithFormControlExampleComponent {
 	validatorsForThird = [
 		Validators.minLength(this.minLength),
 		Validators.maxLength(this.maxLength),
-		Validators.required,
+		FudisFormControlValidators.required('This is required field.'),
 		Validators.email,
 	];
 
-	validatorsForFourth = [Validators.min(this.minNumber), Validators.max(this.maxNumber), Validators.required];
+	validatorsForFourth = [
+		Validators.min(this.minNumber),
+		Validators.max(this.maxNumber),
+		FudisFormControlValidators.required('This is required field.'),
+	];
 
 	validatorMessages: FudisFormErrors = {
-		required: 'This is required field.',
 		email: 'Your input is not in email format.',
 		minlength: `Too short email. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,
 		maxlength: `Too long email. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,
@@ -74,7 +77,7 @@ class TextInputWithFormControlExampleComponent {
 
 	mainFormGroup: FormGroup = this._formBuilder.group({
 		first: new FormControl(''),
-		second: new FormControl('', Validators.required),
+		second: new FormControl('', FudisFormControlValidators.required('This is required field.')),
 		third: new FormControl('', this.validatorsForThird),
 		fourth: new FormControl('', this.validatorsForFourth),
 	});
@@ -122,7 +125,7 @@ const Template: StoryFn<TextInputComponent> = (args: TextInputComponent) => ({
 export const TextInput = Template.bind({});
 TextInput.args = {
 	label: 'Text-input label example',
-	control: new FormControl(''),
+	control: new FormControl('moi', FudisFormControlValidators.required('This is required field.')),
 	helpText: 'Example help text',
 };
 
