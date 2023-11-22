@@ -6,30 +6,30 @@ const configCommon: FudisScreenshotTestConfig = {
 	isFullscreenScreenshot: true,
 };
 
-const configNormal1Init: FudisScreenshotTestConfig = {
+const configPreselected1Init: FudisScreenshotTestConfig = {
 	...configCommon,
-	testName: 'normal-1-init',
+	testName: 'preselected-1-init',
 };
 
-const configNormal2Focus: FudisScreenshotTestConfig = {
+const configPreselected2Focus: FudisScreenshotTestConfig = {
 	...configCommon,
-	testName: 'normal-2-focus',
+	testName: 'preselected-2-focus',
 };
 
-const configNormal3Opened: FudisScreenshotTestConfig = {
+const configPreselected3Opened: FudisScreenshotTestConfig = {
 	...configCommon,
 	loadWait: 200,
-	testName: 'normal-3-opened',
+	testName: 'preselected-3-opened',
 };
 
-const configNormal4Select: FudisScreenshotTestConfig = {
+const configPreselected4Focused: FudisScreenshotTestConfig = {
 	...configCommon,
-	testName: 'normal-4-select',
+	testName: 'preselected-4-focused',
 };
 
-const configNormal5Reopen: FudisScreenshotTestConfig = {
+const configPreselected5Reopen: FudisScreenshotTestConfig = {
 	...configCommon,
-	testName: 'normal-5-reopen',
+	testName: 'preselected-5-reopen',
 };
 
 const configDisabled: FudisScreenshotTestConfig = {
@@ -42,18 +42,22 @@ const configMinMaxOpened: FudisScreenshotTestConfig = {
 };
 
 describe('Datepicker screenshot', () => {
-	it('should match with previous screenshot, normal', () => {
-		cy.visit('/iframe.html?id=components-form-date-datepicker--datepicker&viewMode=story');
+	it('should match with previous screenshot, preselected', () => {
+		cy.visit('/iframe.html?args=&id=components-form-date-datepicker--datepicker-preselected-date&viewMode=story');
 		fudisScreenshotInit();
-		fudisScreenshots(configNormal1Init);
+		fudisScreenshots(configPreselected1Init);
 		cy.get('.mdc-icon-button').focus();
-		fudisScreenshots(configNormal2Focus);
+		fudisScreenshots(configPreselected2Focus);
 		cy.get('.mdc-icon-button').click();
-		fudisScreenshots(configNormal3Opened);
+		fudisScreenshots(configPreselected3Opened);
+		cy.get('.mat-calendar-body button.mat-calendar-body-cell').eq(1).focus();
+		fudisScreenshots(configPreselected4Focused);
 		cy.focused().click();
-		fudisScreenshots(configNormal4Select);
+		cy.focused().click();
+		// eslint-disable-next-line cypress/no-unnecessary-waiting
+		cy.wait(200);
 		cy.get('.mdc-icon-button').click();
-		fudisScreenshots(configNormal5Reopen);
+		fudisScreenshots(configPreselected5Reopen);
 	});
 
 	it('should match with previous screenshot, disabled', () => {

@@ -76,6 +76,17 @@ Datepicker.args = {
 	control: new FormControl(null, Validators.required),
 };
 
+export const DatepickerPreselectedDate = Template.bind({});
+DatepickerPreselectedDate.args = {
+	label: 'Select a date',
+	helpText: 'Choose your favourite date.',
+	errorMsg: { matDatepickerParse: 'Your date does is not a real date.' },
+	tooltip: 'Is it your birthday?',
+	tooltipPosition: 'left',
+	tooltipToggle: true,
+	control: new FormControl(new Date('1977-12-16')),
+};
+
 export const Disabled = Template.bind({});
 Disabled.args = {
 	id: 'example-id-for-datepicker-disabled',
