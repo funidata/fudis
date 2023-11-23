@@ -15,8 +15,8 @@
 		[formControl]="control"
 		[attr.minlength]="minLength"
 		[attr.maxlength]="maxLength"
-		[attr.min]="type === 'number' && minNumber ? minNumber : null"
-		[attr.max]="type === 'number' && maxNumber ? maxNumber : null"
+		[attr.min]="minNumber"
+		[attr.max]="maxNumber"
 		(blur)="onBlur($event)"
 		[id]="id"
 		[attr.type]="type"
@@ -25,6 +25,7 @@
 		[attr.aria-describedby]="id + '_guidance'"
 		[attr.required]="_required ? true : null" />
 	<fudis-guidance
+		*ngIf="!this._inputWithLanguageOptions"
 		[inputLabel]="label"
 		[maxLength]="maxLength"
 		[helpText]="helpText"

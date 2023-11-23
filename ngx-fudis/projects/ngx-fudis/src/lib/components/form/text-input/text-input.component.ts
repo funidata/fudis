@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, HostBinding, OnInit, OnChanges } from '@angular/core';
+import { AfterViewInit, Component, Input, HostBinding, OnInit, OnChanges, Optional, Host } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
@@ -6,6 +6,7 @@ import { FudisInputSize } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
+import { InputWithLanguageOptionsComponent } from '../input-with-language-options/input-with-language-options.component';
 
 @Component({
 	selector: 'fudis-text-input',
@@ -16,7 +17,8 @@ export class TextInputComponent extends InputBaseDirective implements OnInit, On
 	constructor(
 		private _focusService: FudisFocusService,
 		_idService: FudisIdService,
-		_translationService: FudisTranslationService
+		_translationService: FudisTranslationService,
+		@Optional() @Host() protected _inputWithLanguageOptions: InputWithLanguageOptionsComponent
 	) {
 		super(_translationService, _idService);
 	}
