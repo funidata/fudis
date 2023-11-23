@@ -98,7 +98,7 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 	}
 
 	ngOnChanges(): void {
-		this._required = this.required ?? !!this.control.validator?.('' as any as AbstractControl);
+		this._isRequired(this.control);
 	}
 
 	private _setInitialValues(): void {

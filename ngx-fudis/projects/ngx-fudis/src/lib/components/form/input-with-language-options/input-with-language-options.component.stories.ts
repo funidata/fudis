@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { BehaviorSubject } from 'rxjs';
 import { InputWithLanguageOptionsComponent } from './input-with-language-options.component';
-import { FudisGroupValidator } from '../../../utilities/form/validators';
+import { FudisGroupValidator, FudisValidators } from '../../../utilities/form/validators';
 import { FudisInputWithLanguageOptionsFormGroup } from '../../../types/forms';
 
 export default {
@@ -54,9 +54,18 @@ const TemplateAllRequired: StoryFn = () => ({
 			{ value: 'english', viewValue: 'EN' },
 		],
 		formGroup: new FormGroup<FudisInputWithLanguageOptionsFormGroup>({
-			finnish: new FormControl<string | null>(null, [Validators.required, Validators.maxLength(12)]),
-			swedish: new FormControl<string | null>(null, [Validators.required, Validators.maxLength(12)]),
-			english: new FormControl<string | null>(null, [Validators.required, Validators.maxLength(12)]),
+			finnish: new FormControl<string | null>(null, [
+				FudisValidators.required('Required in Finnish'),
+				Validators.maxLength(12),
+			]),
+			swedish: new FormControl<string | null>(null, [
+				FudisValidators.required('Required in Swedish'),
+				Validators.maxLength(12),
+			]),
+			english: new FormControl<string | null>(null, [
+				FudisValidators.required('Required in English'),
+				Validators.maxLength(12),
+			]),
 		}),
 	},
 	template: html`

@@ -6,6 +6,7 @@ import { TextAreaComponent } from './text-area.component';
 import { LabelComponent } from '../label/label.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { FudisInputSize } from '../../../types/forms';
+import { FudisValidators } from '../../../utilities/form/validators';
 
 const textAreaControl: FormControl = new FormControl('');
 
@@ -64,7 +65,7 @@ describe('TextAreaComponent', () => {
 
 	describe('Control', () => {
 		it('should set control as invalid if required text area is touched and empty', () => {
-			component.control = new FormControl('', Validators.required);
+			component.control = new FormControl('', FudisValidators.required('This is required'));
 
 			expect(component.control.value).toEqual('');
 			expect(component.control.invalid).toBeTruthy();

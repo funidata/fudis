@@ -18,6 +18,17 @@
 							<ng-container *ngIf="singleControl.value.errors">
 								<ng-container *ngFor="let error of singleControl.value.errors | keyvalue">
 									<fudis-error-message
+										*ngIf="error.value.message"
+										[focusId]="for"
+										[visible]="singleControl.value.touched"
+										[type]="error.key"
+										[controlName]="singleControl.key"
+										[label]="inputLabel"
+										[message]="error.value.message" />
+									<!-- Todo: remove below deprecated version when Into is misgrated to above  -->
+									<fudis-error-message
+										*ngIf="!error.value.message"
+										[deprecationWarning]="true"
 										[focusId]="for"
 										[visible]="singleControl.value.touched"
 										[type]="error.key"
@@ -42,6 +53,7 @@
 							<fudis-error-message
 								*ngIf="!error.value?.message"
 								[visible]="formGroup.touched"
+								[deprecationWarning]="true"
 								[focusId]="for"
 								[type]="error.key"
 								[label]="inputLabel"
@@ -54,6 +66,7 @@
 							<fudis-error-message
 								*ngIf="error.value?.message"
 								[visible]="control.touched"
+								[deprecationWarning]="true"
 								[focusId]="for"
 								[type]="error.key"
 								[label]="inputLabel"

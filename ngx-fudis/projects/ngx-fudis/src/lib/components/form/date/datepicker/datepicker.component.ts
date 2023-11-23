@@ -79,7 +79,7 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 	ngOnChanges(): void {
 		this._changeDetectorRef.detectChanges();
 
-		this._required = this.required ?? !!this.control.validator?.('' as any as AbstractControl);
+		this._isRequired(this.control);
 	}
 
 	ngAfterViewInit(): void {

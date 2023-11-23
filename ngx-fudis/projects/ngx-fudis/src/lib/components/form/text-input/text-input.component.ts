@@ -63,7 +63,7 @@ export class TextInputComponent extends InputBaseDirective implements OnInit, On
 	}
 
 	ngOnChanges(): void {
-		this._required = this.required ?? !!this.control.validator?.('' as any as AbstractControl);
+		this._isRequired(this.control);
 	}
 
 	ngAfterViewInit(): void {

@@ -1,5 +1,6 @@
 import { Directive, Input, EventEmitter, Output, Signal, effect, ViewChild, ElementRef } from '@angular/core';
 
+import { AbstractControl, FormControl, Validators } from '@angular/forms';
 import { FudisFormErrors } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -117,6 +118,18 @@ export class InputBaseDirective extends TooltipApiDirective {
 			this._idService.addNewId(componentType, this.id);
 		} else {
 			this.id = this._idService.getNewId(componentType);
+		}
+	}
+
+	protected _isRequired(control: FormControl<any>): void {
+		const nativeRequired = control.hasValidator(Validators.required);
+
+		const fudisRequired = !!control.validator?.('' as any as AbstractControl);
+
+		if (this.required || nativeRequired || fudisRequired) {
+			this._required = true;
+		} else {
+			this._required = false;
 		}
 	}
 }

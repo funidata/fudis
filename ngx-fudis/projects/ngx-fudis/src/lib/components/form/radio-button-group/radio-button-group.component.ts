@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, FormControl } from '@angular/forms';
+import { AbstractControl, FormControl, Validators } from '@angular/forms';
 import { FudisRadioButtonOption, FudisFormErrors, FudisInputSize } from '../../../types/forms';
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 
@@ -38,7 +38,7 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	@Input() size: FudisInputSize = 'lg';
 
 	/**
-	 * Set fieldset as required. By default set to 'undefined' and this attribute is determined to true / false depending on if FormControl has Validators.required. This setting will override that.
+	 * Set fieldset as required. By default set to 'undefined'.
 	 */
 	@Input() required: boolean | undefined = undefined;
 
@@ -63,6 +63,14 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	}
 
 	ngOnChanges(): void {
-		this._required = this.required ?? !!this.control.validator?.('' as any as AbstractControl);
+		const nativeRequired = this.control.hasValidator(Validators.required);
+
+		const fudisRequired = !!this.control.validator?.('' as any as AbstractControl);
+
+		if (this.required || nativeRequired || fudisRequired) {
+			this._required = true;
+		} else {
+			this._required = false;
+		}
 	}
 }

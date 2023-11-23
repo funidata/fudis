@@ -52,6 +52,11 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 	@Input() variant: 'body-text' | 'form-error' = 'form-error';
 
 	/**
+	 * Temporary warning as Form Error Message is been refactored from 'errorMsg' to be binded with FudisValidators and FudisFormGroupValidators
+	 */
+	@Input() deprecationWarning: boolean = false;
+
+	/**
 	 * Error message to include in error summary item
 	 */
 	protected _currentMessage: string;
@@ -74,6 +79,13 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 				this._currentMessage = value;
 				this.createError();
 			});
+		}
+
+		if (this.deprecationWarning) {
+			// eslint-disable-next-line no-console
+			console.warn(
+				`Component with id of '${this.focusId}' received form error messages from 'errorMsg' input. This will be removed in version Fudis v1.0.0, as error message logic will be binded straight with FudisValidators and FudisFormGroupValidators.`
+			);
 		}
 	}
 
