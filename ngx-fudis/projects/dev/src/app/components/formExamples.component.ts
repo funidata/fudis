@@ -10,7 +10,7 @@ import {
 } from 'projects/ngx-fudis/src/lib/types/forms';
 import { untilDestroyed } from 'projects/ngx-fudis/src/lib/utilities/untilDestroyed';
 import { FudisErrorSummaryService } from 'ngx-fudis';
-import { FudisGroupValidator, FudisFormControlValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
+import { FudisGroupValidator, FudisValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
 import { FudisDropdownLanguageOption, FudisInputWithLanguageOptionsFormGroup } from 'dist/ngx-fudis/lib/types/forms';
 
 type MyForm = {
@@ -61,17 +61,20 @@ export class AppFormExampleComponent implements OnInit {
 		dropdownMulti: new FormControl<FudisDropdownOption[] | null>([this.dropdownOptions[2], this.dropdownOptions[4]]),
 		textArea: new FormControl<string | null>(
 			null,
-			FudisFormControlValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
+			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
 		),
 		textInput: new FormControl<string | null | number>(null, [
-			FudisFormControlValidators.required(this._translocoService.selectTranslateObject('form_errors.required')),
+			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required')),
 			Validators.minLength(5),
 			Validators.maxLength(20),
 		]),
-		truth: new FormControl<boolean | null>(null, Validators.required),
+		truth: new FormControl<boolean | null>(
+			null,
+			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
+		),
 		date: new FormControl<Date | null>(
 			null,
-			FudisFormControlValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
+			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
 		),
 		checkboxFormGroup: new FormGroup(
 			{
@@ -93,11 +96,11 @@ export class AppFormExampleComponent implements OnInit {
 		),
 		autocompleteDropdown: new FormControl<FudisDropdownOption | null>(
 			null,
-			FudisFormControlValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
+			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
 		),
 		autocompleteSearch: new FormControl<FudisDropdownOption | null>(
 			null,
-			FudisFormControlValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
+			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
 		),
 		withLanguages: new FormGroup<FudisInputWithLanguageOptionsFormGroup>(
 			{

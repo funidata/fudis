@@ -26,7 +26,7 @@ Necessary properties for the dropdown are `label`, `control` and `options`.
 
 #### As a required form field
 
-If dropdown is a required form field include `Validators.required` in the form control validators and include `required` error message in the `errorMsg` property.
+If Dropdown is a **required** form field, include `FudisValidators.required()` in the form control validator with message parameter either as a string or as an observable string. E.g. `FudisValidators.required('This is required field')`.
 
 #### With minLength and maxLength validators
 

@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { AbstractControl, FormControl } from '@angular/forms';
 import { FudisRadioButtonOption, FudisFormErrors, FudisInputSize } from '../../../types/forms';
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 
@@ -63,6 +63,6 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	}
 
 	ngOnChanges(): void {
-		this._required = this.required ?? this.control.hasValidator(Validators.required);
+		this._required = this.required ?? !!this.control.validator?.('' as any as AbstractControl);
 	}
 }

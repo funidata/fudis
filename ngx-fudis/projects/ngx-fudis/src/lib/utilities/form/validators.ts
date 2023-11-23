@@ -21,7 +21,7 @@ interface FudisValidatorFn extends ValidatorFn {
 /**
  * Fudis version of Validators.required
  */
-export module FudisFormControlValidators {
+export module FudisValidators {
 	export function required(message: Observable<string> | string): FudisValidatorFn {
 		return (control: AbstractControl) => {
 			if (Validators.required(control) === null || Validators.required(control) === undefined) {

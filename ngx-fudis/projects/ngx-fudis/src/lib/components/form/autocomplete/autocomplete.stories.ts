@@ -1,9 +1,10 @@
 import { StoryFn, Meta, applicationConfig } from '@storybook/angular';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { AutocompleteComponent } from './autocomplete.component';
 import readme from './readme.mdx';
+import { FudisValidators } from '../../../utilities/form/validators';
 
 export default {
 	title: 'Components/Form/Autocomplete (single-select)',
@@ -30,8 +31,7 @@ AutocompleteSearch.args = {
 	label: 'Search autocomplete',
 	helpText:
 		'This is autocomplete input, start writing (e.g mar) and after three letters the input will suggest matching options.',
-	control: new FormControl(null, Validators.required),
-	errorMsg: { required: 'This selection is required' },
+	control: new FormControl(null, FudisValidators.required('This selection is required')),
 	options: [
 		{ value: 123, viewValue: 'Mary Rhubarb' },
 		{ value: '456-xx', viewValue: 'Kingsley Kale' },
@@ -57,8 +57,7 @@ AutocompleteDropdown.args = {
 	label: 'Dropdown autocomplete',
 	variant: 'dropdown',
 	helpText: 'This autocomplete displays dropdown option list when focusing to the input.',
-	control: new FormControl(null, Validators.required),
-	errorMsg: { required: 'This selection is required' },
+	control: new FormControl(null, FudisValidators.required('This selection is required')),
 	options: manyOptions,
 	tooltip: 'Tooltip text for autocomplete',
 	placeholder: 'Focus here to expand options!',

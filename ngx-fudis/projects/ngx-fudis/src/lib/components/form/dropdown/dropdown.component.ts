@@ -9,7 +9,7 @@ import {
 	AfterViewInit,
 	ViewChild,
 } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { AbstractControl, FormControl } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
 import { FudisDropdownOption, FudisDropdownLanguageOption, FudisInputSize } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
@@ -98,7 +98,7 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 	}
 
 	ngOnChanges(): void {
-		this._required = this.required ?? this.control.hasValidator(Validators.required);
+		this._required = this.required ?? !!this.control.validator?.('' as any as AbstractControl);
 	}
 
 	private _setInitialValues(): void {

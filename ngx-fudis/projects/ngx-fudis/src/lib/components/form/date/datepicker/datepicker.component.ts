@@ -8,7 +8,7 @@ import {
 	ViewEncapsulation,
 	effect,
 } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { AbstractControl, FormControl } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
 import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
@@ -79,7 +79,7 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 	ngOnChanges(): void {
 		this._changeDetectorRef.detectChanges();
 
-		this._required = this.required ?? this.control.hasValidator(Validators.required);
+		this._required = this.required ?? !!this.control.validator?.('' as any as AbstractControl);
 	}
 
 	ngAfterViewInit(): void {

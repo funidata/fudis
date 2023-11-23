@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
 
-import { FormControl, Validators } from '@angular/forms';
+import { AbstractControl, FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
 import { FudisInputSize } from '../../../types/forms';
@@ -47,7 +47,7 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit, OnC
 	}
 
 	ngOnChanges(): void {
-		this._required = this.required ?? this.control.hasValidator(Validators.required);
+		this._required = this.required ?? !!this.control.validator?.('' as any as AbstractControl);
 	}
 
 	ngAfterViewInit(): void {
