@@ -106,7 +106,6 @@ class FieldsetExampleComponent {
 
 	errorEmail: FudisFormErrors = {
 		minlength: 'Email should be at least 5 characters.',
-		email: 'Input must be an email address.',
 	};
 
 	errorStartdate: FudisFormErrors = {
@@ -173,7 +172,7 @@ class FieldsetExampleComponent {
 		),
 		email: new FormControl('', [
 			FudisValidators.required('Missing email contact.'),
-			Validators.email,
+			FudisValidators.email('Input must be an email address.'),
 			Validators.minLength(5),
 		]),
 		startDate: new FormControl('', FudisValidators.required('Start date is missing.')),

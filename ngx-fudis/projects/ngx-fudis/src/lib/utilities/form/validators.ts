@@ -1,8 +1,9 @@
 import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
+type FudisValidatorMessage = Observable<string> | string;
 interface FudisValidationErrors extends ValidationErrors {
-	[key: string]: { message: Observable<string> | string; value?: any } | null;
+	[key: string]: { message: FudisValidatorMessage; value?: any } | null;
 }
 
 interface FudisGroupValidatorMinMaxSettings {
@@ -22,7 +23,7 @@ interface FudisValidatorFn extends ValidatorFn {
  * Fudis version of Validators.required
  */
 export module FudisValidators {
-	export function required(message: Observable<string> | string): FudisValidatorFn {
+	export function required(message: FudisValidatorMessage): FudisValidatorFn {
 		return (control: AbstractControl) => {
 			if (Validators.required(control) === null || Validators.required(control) === undefined) {
 				return null;
@@ -31,7 +32,7 @@ export module FudisValidators {
 		};
 	}
 
-	export function email(message: Observable<string>): FudisValidatorFn {
+	export function email(message: FudisValidatorMessage): FudisValidatorFn {
 		return (control: AbstractControl) => {
 			if (Validators.email(control) === null || Validators.email(control) === undefined) {
 				return null;

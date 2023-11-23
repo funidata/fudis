@@ -187,7 +187,6 @@ class FormContentExampleComponent implements OnInit {
 
 	errorEmail: FudisFormErrors = {
 		minlength: 'Email should be at least 5 characters.',
-		email: 'Input must be an email address.',
 	};
 
 	errorImportantDate: FudisFormErrors = {
@@ -234,7 +233,7 @@ class FormContentExampleComponent implements OnInit {
 		),
 		email: new FormControl(null, [
 			FudisValidators.required('Missing email contact.'),
-			Validators.email,
+			FudisValidators.email('Input must be an email address.'),
 			Validators.minLength(5),
 		]),
 		importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
