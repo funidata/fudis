@@ -9,7 +9,7 @@ import {
 	AfterViewInit,
 	ViewChild,
 } from '@angular/core';
-import { AbstractControl, FormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
 import { FudisDropdownOption, FudisDropdownLanguageOption, FudisInputSize } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';

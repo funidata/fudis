@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input, HostBinding, OnInit, OnChanges } from '@angular/core';
-import { FormControl, AbstractControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
 import { FudisInputSize } from '../../../types/forms';
