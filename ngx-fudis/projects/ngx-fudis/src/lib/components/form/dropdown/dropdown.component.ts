@@ -16,6 +16,7 @@ import { InputBaseDirective } from '../../../directives/form/input-base/input-ba
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
+import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 
 @Component({
 	selector: 'fudis-dropdown',
@@ -98,7 +99,7 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 	}
 
 	ngOnChanges(): void {
-		this._isRequired(this.control);
+		this._required = this.required ?? hasRequiredValidator(this.control);
 	}
 
 	private _setInitialValues(): void {

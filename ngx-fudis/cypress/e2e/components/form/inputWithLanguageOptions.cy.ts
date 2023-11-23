@@ -90,7 +90,7 @@ describe('Input With Language Options screenshot', () => {
 		fudisScreenshots(configAll_1);
 		cy.get('#unique-input-1').focus();
 		cy.get('#unique-input-1_language-dropdown').focus();
-		cy.get('#fudis-guidance-2-errors').invoke('attr', 'class', 'fudis-guidance__errors--visible');
+		cy.get('#fudis-guidance-1-errors').invoke('attr', 'class', 'fudis-guidance__errors--visible');
 		fudisScreenshots(configAll_2);
 		cy.get('#unique-input-1').focus();
 		cy.get('#unique-input-1').type('Kapteeni Jälkiviisaus');
@@ -120,7 +120,7 @@ describe('Input With Language Options screenshot', () => {
 		fudisScreenshots(configOneRequired_1);
 		cy.get('#unique-input-1').focus();
 		cy.get('#unique-input-1_language-dropdown').focus();
-		cy.get('#fudis-guidance-2-errors').invoke('attr', 'class', 'fudis-guidance__errors--visible');
+		cy.get('#fudis-guidance-1-errors').invoke('attr', 'class', 'fudis-guidance__errors--visible');
 		fudisScreenshots(configOneRequired_2);
 		cy.get('#unique-input-1').focus();
 		cy.get('#unique-input-1').type('Kapteeni Jälkiviisaus');

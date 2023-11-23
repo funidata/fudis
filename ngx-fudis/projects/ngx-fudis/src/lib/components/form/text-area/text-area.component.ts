@@ -7,6 +7,11 @@ import { FudisInputSize } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
+import {
+	getMaxLengthFromValidator,
+	getMinLengthFromValidator,
+	hasRequiredValidator,
+} from '../../../utilities/form/getValidators';
 
 @Component({
 	selector: 'fudis-text-area',
@@ -47,7 +52,9 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit, OnC
 	}
 
 	ngOnChanges(): void {
-		this._isRequired(this.control);
+		this._required = this.required ?? hasRequiredValidator(this.control);
+		this.maxLength = this.maxLength ?? getMaxLengthFromValidator(this.control);
+		this.minLength = this.minLength ?? getMinLengthFromValidator(this.control);
 	}
 
 	ngAfterViewInit(): void {

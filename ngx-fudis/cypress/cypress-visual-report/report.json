@@ -2726,9 +2726,9 @@
       ]
     }
   ],
-  "startedAt": "2023-11-23T17:14:49.815Z",
-  "endedAt": "2023-11-23T17:21:04.971Z",
-  "duration": 345871,
+  "startedAt": "2023-11-23T21:12:34.222Z",
+  "endedAt": "2023-11-23T21:18:52.237Z",
+  "duration": 348594,
   "browserName": "electron",
   "browserVersion": "114.0.5735.289",
   "cypressVersion": "13.5.0"

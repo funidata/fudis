@@ -19,6 +19,7 @@ import { FudisTranslationService } from '../../../../services/translation/transl
 import { DatepickerCustomDateAdapter } from '../date-common/datepicker-custom-date-adapter';
 import { updateLocale, updateMatDatePickerTranslations } from '../date-common/utilities';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
+import { hasRequiredValidator } from '../../../../utilities/form/getValidators';
 
 @Component({
 	selector: 'fudis-datepicker',
@@ -79,7 +80,7 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 	ngOnChanges(): void {
 		this._changeDetectorRef.detectChanges();
 
-		this._isRequired(this.control);
+		this._required = this.required ?? hasRequiredValidator(this.control);
 	}
 
 	ngAfterViewInit(): void {
