@@ -25,7 +25,7 @@ interface FudisValidatorFn extends ValidatorFn {
 export module FudisValidators {
 	export function required(message: FudisValidatorMessage): FudisValidatorFn {
 		return (control: AbstractControl) => {
-			if (Validators.required(control) === null || Validators.required(control) === undefined) {
+			if (!Validators.required(control)) {
 				return null;
 			}
 			return { required: { message } };
@@ -34,7 +34,7 @@ export module FudisValidators {
 
 	export function email(message: FudisValidatorMessage): FudisValidatorFn {
 		return (control: AbstractControl) => {
-			if (Validators.email(control) === null || Validators.email(control) === undefined) {
+			if (!Validators.email(control)) {
 				return null;
 			}
 			return { email: { message } };
@@ -80,7 +80,6 @@ export module FudisValidators {
 /**
  * Form Group Validators
  */
-
 export module FudisGroupValidator {
 	export function atLeastOneRequired(message: Observable<string>): FudisValidatorFn {
 		return (controlGroup: any): FudisValidationErrors | null => {
