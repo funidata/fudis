@@ -48,9 +48,9 @@ class RadioButtonGroupExampleComponent {
 	];
 
 	petOptions: FudisRadioButtonOption[] = [
-		{ value: 'platypus', viewValue: 'Platypus', id: 'pet-1', name: 'animal' },
-		{ value: 'otter', viewValue: 'Otter', id: 'pet-2', name: 'animal' },
-		{ value: 'capybara', viewValue: 'Capybara', id: 'pet-3', name: 'animal' },
+		{ value: 'platypus', viewValue: 'Platypus' },
+		{ value: 'otter', viewValue: 'Otter', name: 'animal' },
+		{ value: 'capybara', viewValue: 'Capybara' },
 	];
 
 	booleanOptions: FudisRadioButtonOption[] = [

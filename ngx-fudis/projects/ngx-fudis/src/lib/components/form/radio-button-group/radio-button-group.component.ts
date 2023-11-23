@@ -42,6 +42,11 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 	 */
 	@Input() required: boolean | undefined = undefined;
 
+	/**
+	 * If options array items don't all have same 'name', use generated one
+	 */
+	protected _name: string;
+
 	ngOnInit() {
 		this._setParentId('radio-button-group');
 
@@ -56,9 +61,7 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
 		);
 
 		if (nameMismatch.length > 0) {
-			throw new Error(
-				`In fudis-radio-button-group options array, each object's 'name' value should be identical for all options, but name mismatch was detected.`
-			);
+			this._name = this.id;
 		}
 	}
 

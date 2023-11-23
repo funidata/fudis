@@ -4,6 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { FudisFormErrorSummaryItem } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { FudisIdService } from '../../../services/id/id.service';
 
 @Component({
 	selector: 'fudis-error-message',
@@ -13,8 +14,11 @@ import { FudisTranslationService } from '../../../services/translation/translati
 export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
 	constructor(
 		private _errorSummaryService: FudisErrorSummaryService,
-		private _translationService: FudisTranslationService
-	) {}
+		private _translationService: FudisTranslationService,
+		private _idService: FudisIdService
+	) {
+		this._id = _idService.getNewId('error-message');
+	}
 
 	/*
 	 * Error message to display
@@ -60,6 +64,8 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 	 * Error message to include in error summary item
 	 */
 	protected _currentMessage: string;
+
+	protected _id: string;
 
 	/**
 	 * Has error been created and sent forward

@@ -1,6 +1,7 @@
-<div class="fudis-guidance">
+<div class="fudis-guidance" [id]="_id">
 	<div [id]="for + '_guidance'">
 		<div
+			[id]="_id + '-errors'"
 			[class.fudis-guidance__errors]="
 				(control && control.touched) || (formGroup && formGroup.touched && groupBlurredOut)
 			">

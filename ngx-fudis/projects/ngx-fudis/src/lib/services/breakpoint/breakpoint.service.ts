@@ -47,14 +47,14 @@ export class FudisBreakpointService {
 		if (typeof value === 'string') {
 			elementToModify.style.cssText = `
 					${previousStyles};
-					${attribute}: ${value};
+					${attribute}: ${value === 'none' ? '0' : value};
 					`;
 		} else {
 			value?.forEach((item) => {
 				if (this._screenSize()?.breakpoints[item.breakpoint]) {
 					elementToModify.style.cssText = `
 					${previousStyles};
-					${attribute}: ${item.value};
+					${attribute}: ${item.value === 'none' ? '0' : item.value};
 					`;
 				}
 			});

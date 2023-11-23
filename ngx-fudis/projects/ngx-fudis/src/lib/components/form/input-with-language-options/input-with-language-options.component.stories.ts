@@ -47,7 +47,7 @@ const TemplateAllRequired: StoryFn = () => ({
 				required: 'Missing superhero name on Swedish.',
 			},
 		},
-		maxLength: 12,
+		maxLength: 22,
 		languageOptions: [
 			{ value: 'finnish', viewValue: 'FI' },
 			{ value: 'swedish', viewValue: 'SV' },

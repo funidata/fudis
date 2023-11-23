@@ -57,11 +57,11 @@ const html = String.raw;
 
 const Template: StoryFn<SpacingDirective> = (args: SpacingDirective) => ({
 	template: html`
-		<div>
-			<fudis-body-text
-				>This Fudis Button has margins added through <strong>fudisSpacing</strong> directive. Go ahead and inspect the
-				button element while resizing the browser.</fudis-body-text
-			>
+		<fudis-body-text
+			>This Fudis Button has margins added through <strong>fudisSpacing</strong> directive. Go ahead and inspect the
+			button element while resizing the browser.</fudis-body-text
+		>
+		<div style="border: 2px solid var(--fudis-color-primary-light); display: inline-block;">
 			<fudis-button
 				fudisSpacing
 				[marginTop]="marginTop"
@@ -84,8 +84,8 @@ Example.args = {
 
 export const ResponsiveExample = Template.bind({});
 ResponsiveExample.args = {
-	marginTop: { xs: 'md', md: 'xl' },
-	marginBottom: { xs: 'xl', sm: 'sm' },
-	marginRight: { sm: 'xxl', xxl: 'xl' },
-	marginLeft: { xs: 'md', md: 'xl', xl: 'none' },
+	marginTop: { xs: 'xxl', sm: 'lg', md: 'md', lg: 'sm' },
+	marginBottom: { xs: 'none', sm: 'sm', md: 'md', lg: 'lg' },
+	marginRight: { xs: 'xs', sm: 'sm', md: 'md', lg: 'lg' },
+	marginLeft: { xs: 'xxl', sm: 'xl', md: 'lg', lg: 'md' },
 };
