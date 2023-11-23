@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { TextAreaComponent } from './text-area.component';
 import { FudisFormErrors } from '../../../types/forms';
 import readme from './readme.mdx';
+import { FudisValidators } from '../../../utilities/form/validators';
 
 @Component({
 	selector: 'example-text-area-with-form-control',
@@ -11,7 +12,6 @@ import readme from './readme.mdx';
 		<form [formGroup]="mainFormGroup">
 			<fudis-text-area
 				[control]="firstTextAreaControl"
-				[errorMsg]="{ required: 'Missing a value.' }"
 				[label]="'Basic required Text Area'"
 				[helpText]="'Add some text to the Text Area.'"
 				[tooltip]="'I am here to give you additional guidance'"
@@ -39,15 +39,14 @@ class TextAreaWithFormControlExampleComponent {
 	validatorsForSecondTextInput = [
 		Validators.minLength(this.minLength),
 		Validators.maxLength(this.maxLength),
-		Validators.required,
+		FudisValidators.required('This is required field.'),
 	];
 
 	validatorMessages: FudisFormErrors = {
-		required: 'This is required field.',
 		minlength: `Too short input. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,
 	};
 
-	firstTextAreaControl: FormControl = new FormControl('', [Validators.required]);
+	firstTextAreaControl: FormControl = new FormControl('', [FudisValidators.required('Missing a value.')]);
 
 	secondTextAreaControl: FormControl = new FormControl('', this.validatorsForSecondTextInput);
 

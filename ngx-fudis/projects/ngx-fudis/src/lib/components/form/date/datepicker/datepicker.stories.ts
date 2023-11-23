@@ -1,9 +1,10 @@
 import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { DatepickerComponent } from './datepicker.component';
 import readme from './readme.mdx';
+import { FudisValidators } from '../../../../utilities/form/validators';
 
 const html = String.raw;
 
@@ -69,11 +70,11 @@ Datepicker.args = {
 	id: 'example-id-for-datepicker-required-validation',
 	label: 'Select a date',
 	helpText: 'Choose your favourite date.',
-	errorMsg: { required: 'Date is required.', matDatepickerParse: 'Your date does is not a real date.' },
+	errorMsg: { matDatepickerParse: 'Your date does is not a real date.' },
 	tooltip: 'Is it your birthday?',
 	tooltipPosition: 'left',
 	tooltipToggle: true,
-	control: new FormControl(null, Validators.required),
+	control: new FormControl(null, FudisValidators.required('Date is required.')),
 };
 
 export const Disabled = Template.bind({});

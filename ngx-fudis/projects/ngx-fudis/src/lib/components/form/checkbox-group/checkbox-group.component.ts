@@ -16,7 +16,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
 	@Input({ required: true }) formGroup: FormGroup<FudisCheckboxGroupFormGroup>;
 
 	/**
-	 * Set fieldset as required. Alternatively provide FormGroup Validators.required to display 'required' text in the legend lable.
+	 * Set fieldset as required.
 	 */
 	@Input() required: boolean | undefined = undefined;
 

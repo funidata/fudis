@@ -10,6 +10,7 @@ import { LabelComponent } from '../label/label.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { FudisDropdownOption, FudisInputSize } from '../../../types/forms';
 import { IconComponent } from '../../icon/icon.component';
+import { FudisValidators } from '../../../utilities/form/validators';
 
 const dropdownOptions: FudisDropdownOption[] = [
 	{ value: 1, viewValue: 'Dog' },
@@ -57,7 +58,7 @@ describe('DropdownComponent', () => {
 	}
 
 	it('should create', () => {
-		component.control = new FormControl(null, Validators.required);
+		component.control = new FormControl(null, FudisValidators.required('Selection is required'));
 		component.options = dropdownOptions;
 
 		expect(component).toBeTruthy();
@@ -65,7 +66,7 @@ describe('DropdownComponent', () => {
 
 	describe('Control', () => {
 		it('should set control as invalid if required dropdown is touched and empty', () => {
-			component.control = new FormControl(null, Validators.required);
+			component.control = new FormControl(null, FudisValidators.required('Selection is required'));
 
 			expect(component.control.value).toEqual(null);
 			expect(component.control.invalid).toBeTruthy();

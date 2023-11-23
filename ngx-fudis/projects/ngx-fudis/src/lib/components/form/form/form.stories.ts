@@ -15,7 +15,7 @@ import {
 } from '../../../types/forms';
 
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
-import { FudisGroupValidator } from '../../../utilities/form/validators';
+import { FudisGroupValidator, FudisValidators } from '../../../utilities/form/validators';
 import { FormComponent } from './form.component';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
@@ -177,33 +177,21 @@ class FormContentExampleComponent implements OnInit {
 
 	errorDescription: FudisFormGroupErrors = {
 		english: {
-			required: 'Missing description in English.',
 			minlength: 'Description should at least 10 characters.',
 		},
-		swedish: { required: 'Missing description in Swedish.', minlength: 'Description should at least 10 characters.' },
+		swedish: { minlength: 'Description should at least 10 characters.' },
 		finnish: {
-			required: 'Missing description in Finnish',
 			minlength: 'Description should at least 10 characters',
 		},
 	};
 
-	errorTeacher: FudisFormErrors = {
-		required: "Missing teacher's name who is responsible for this course.",
-	};
-
 	errorEmail: FudisFormErrors = {
-		required: 'Missing email contact.',
 		minlength: 'Email should be at least 5 characters.',
 		email: 'Input must be an email address.',
 	};
 
 	errorImportantDate: FudisFormErrors = {
-		required: 'Start date is missing.',
 		matDatepickerParse: 'Date should be in dd.mm.yyyy format.',
-	};
-
-	errorCourseType: FudisFormErrors = {
-		required: 'Course type must be selected.',
 	};
 
 	formExample = new FormGroup({
@@ -216,9 +204,18 @@ class FormContentExampleComponent implements OnInit {
 			[FudisGroupValidator.atLeastOneRequired(new BehaviorSubject('Course name is missing.'))]
 		),
 		description: new FormGroup({
-			finnish: new FormControl(null, [Validators.required, Validators.minLength(10)]),
-			swedish: new FormControl(null, [Validators.required, Validators.minLength(10)]),
-			english: new FormControl(null, [Validators.required, Validators.minLength(10)]),
+			finnish: new FormControl(null, [
+				FudisValidators.required('Missing description in Finnish.'),
+				Validators.minLength(10),
+			]),
+			swedish: new FormControl(null, [
+				FudisValidators.required('Missing description in Swedish.'),
+				Validators.minLength(10),
+			]),
+			english: new FormControl(null, [
+				FudisValidators.required('Missing description in English.'),
+				Validators.minLength(10),
+			]),
 		}),
 		courseBooks: new FormGroup(
 			{
@@ -231,12 +228,19 @@ class FormContentExampleComponent implements OnInit {
 				FudisGroupValidator.max({ value: 2, message: new BehaviorSubject('Too many selected') }),
 			]
 		),
-		teacher: new FormControl(null, Validators.required),
-		email: new FormControl(null, [Validators.required, Validators.email, Validators.minLength(5)]),
-		importantDate: new FormControl(null, Validators.required),
-		courseType: new FormControl(null, Validators.required),
-		startDate: new FormControl<Date | null>(null, Validators.required),
-		endDate: new FormControl<Date | null>(null, Validators.required),
+		teacher: new FormControl(
+			null,
+			FudisValidators.required("Missing teacher's name who is responsible for this course.")
+		),
+		email: new FormControl(null, [
+			FudisValidators.required('Missing email contact.'),
+			Validators.email,
+			Validators.minLength(5),
+		]),
+		importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
+		courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
+		startDate: new FormControl<Date | null>(null, FudisValidators.required('Start date is missing.')),
+		endDate: new FormControl<Date | null>(null, FudisValidators.required('End date is missing.')),
 	});
 
 	languageOptions: FudisDropdownOption[] = [
@@ -254,7 +258,6 @@ class FormContentExampleComponent implements OnInit {
 		control: this.formExample.controls.startDate,
 		label: 'Start date',
 		errorMsg: {
-			required: 'Start date is required',
 			matDatepickerParse: 'Start date is not proper date',
 			matStartDateInvalid: 'Start date cannot be after end date',
 		},
@@ -264,7 +267,6 @@ class FormContentExampleComponent implements OnInit {
 		control: this.formExample.controls.endDate,
 		label: 'End date',
 		errorMsg: {
-			required: 'End date is required',
 			matDatepickerParse: 'End date is not proper date',
 			matEndDateInvalid: 'End date cannot be before start date',
 		},

@@ -125,7 +125,7 @@ const Template: StoryFn<TextInputComponent> = (args: TextInputComponent) => ({
 export const TextInput = Template.bind({});
 TextInput.args = {
 	label: 'Text-input label example',
-	control: new FormControl('moi', FudisValidators.required('This is required field.')),
+	control: new FormControl('', FudisValidators.required('This is required field.')),
 	helpText: 'Example help text',
 };
 

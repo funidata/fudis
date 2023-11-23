@@ -12,7 +12,7 @@ import {
 } from '../../../types/forms';
 
 import { FieldSetComponent } from './fieldset.component';
-import { FudisGroupValidator } from '../../../utilities/form/validators';
+import { FudisGroupValidator, FudisValidators } from '../../../utilities/form/validators';
 
 @Component({
 	selector: 'example-fieldset',
@@ -96,41 +96,28 @@ import { FudisGroupValidator } from '../../../utilities/form/validators';
 class FieldsetExampleComponent {
 	errorDescription: FudisFormGroupErrors = {
 		english: {
-			required: 'Missing description in English.',
 			minlength: 'Description should at least 10 characters.',
 		},
-		swedish: { required: 'Missing description in Swedish.', minlength: 'Description should at least 10 characters.' },
+		swedish: { minlength: 'Description should at least 10 characters.' },
 		finnish: {
-			required: 'Missing description in Finnish.',
 			minlength: 'Description should at least 10 characters.',
 		},
-	};
-
-	errorTeacher: FudisFormErrors = {
-		required: "Missing teacher's name who is responsible for this course.",
 	};
 
 	errorEmail: FudisFormErrors = {
-		required: 'Missing email contact.',
 		minlength: 'Email should be at least 5 characters.',
 		email: 'Input must be an email address.',
 	};
 
 	errorStartdate: FudisFormErrors = {
-		required: 'Start date is missing.',
 		matDatepickerMin: 'Start date cannot be earlier than this day.',
 		matDatepickerParse: 'Date should be in dd.mm.yyyy format.',
 		matDatepickerMax: 'Start date cannot be after end date.',
 	};
 
 	errorEnddate: FudisFormErrors = {
-		required: 'End date is missing.',
 		matDatepickerMin: 'End date cannot be before start date.',
 		matDatepickerParse: 'Date should be in dd.mm.yyyy format.',
-	};
-
-	errorCourseType: FudisFormErrors = {
-		required: 'Course type must be selected.',
 	};
 
 	fieldsetId = 'unique-fieldset-id';
@@ -167,15 +154,31 @@ class FieldsetExampleComponent {
 			[FudisGroupValidator.atLeastOneRequired(new BehaviorSubject('Course name is missing'))]
 		),
 		description: new FormGroup({
-			finnish: new FormControl('', [Validators.required, Validators.minLength(10)]),
-			swedish: new FormControl('', [Validators.required, Validators.minLength(10)]),
-			english: new FormControl('', [Validators.required, Validators.minLength(10)]),
+			finnish: new FormControl('', [
+				FudisValidators.required('Missing description in Finnish.'),
+				Validators.minLength(10),
+			]),
+			swedish: new FormControl('', [
+				FudisValidators.required('Missing description in Swedish.'),
+				Validators.minLength(10),
+			]),
+			english: new FormControl('', [
+				FudisValidators.required('Missing description in English.'),
+				Validators.minLength(10),
+			]),
 		}),
-		teacher: new FormControl('', Validators.required),
-		email: new FormControl('', [Validators.required, Validators.email, Validators.minLength(5)]),
-		startDate: new FormControl('', Validators.required),
-		endDate: new FormControl('', Validators.required),
-		courseType: new FormControl('', Validators.required),
+		teacher: new FormControl(
+			'',
+			FudisValidators.required("Missing teacher's name who is responsible for this course.")
+		),
+		email: new FormControl('', [
+			FudisValidators.required('Missing email contact.'),
+			Validators.email,
+			Validators.minLength(5),
+		]),
+		startDate: new FormControl('', FudisValidators.required('Start date is missing.')),
+		endDate: new FormControl('', FudisValidators.required('Start date is missing.')),
+		courseType: new FormControl('', FudisValidators.required('Course type must be selected.')),
 	});
 
 	languageOptions: FudisDropdownOption[] = [

@@ -6,6 +6,7 @@ import { TextInputComponent } from './text-input.component';
 import { LabelComponent } from '../label/label.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { FudisInputSize } from '../../../types/forms';
+import { FudisValidators } from '../../../utilities/form/validators';
 
 const textInputControl: FormControl = new FormControl('');
 
@@ -82,7 +83,7 @@ describe('TextInputComponent', () => {
 
 	describe('Control', () => {
 		it('should set control as invalid if required text-input is touched and empty', () => {
-			component.control = new FormControl('', Validators.required);
+			component.control = new FormControl('', FudisValidators.required('This field is required'));
 
 			expect(component.control.value).toEqual('');
 			expect(component.control.invalid).toBeTruthy();
