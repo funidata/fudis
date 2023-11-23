@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MockComponent } from 'ng-mocks';
@@ -73,7 +73,7 @@ describe('DropdownComponent', () => {
 		});
 
 		it('should set control as invalid if control value length does not match to given minLength validator value', () => {
-			component.control = new FormControl(null, [Validators.minLength(2)]);
+			component.control = new FormControl(null, [FudisValidators.minLength(2, 'Too few selections!')]);
 			component.control.patchValue([dropdownOptions[0]]);
 
 			expect(component.control.value?.length).toEqual(1);
@@ -81,7 +81,7 @@ describe('DropdownComponent', () => {
 		});
 
 		it('should set control as invalid if control value length is bigger than given maxLength validator value', () => {
-			component.control = new FormControl(null, [Validators.maxLength(2)]);
+			component.control = new FormControl(null, [FudisValidators.maxLength(2, 'Too many selected')]);
 			component.control.patchValue(dropdownOptions);
 
 			expect(component.control.value?.length).toEqual(3);

@@ -1,5 +1,5 @@
 import { Meta, applicationConfig, StoryFn } from '@storybook/angular';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { DropdownComponent } from './dropdown.component';
@@ -87,18 +87,14 @@ SingleSelect.args = {
 
 export const MultiSelect = Template.bind({});
 MultiSelect.args = {
-	errorMsg: {
-		minlength: 'Choose at least two pets',
-		maxlength: "That's probably too much already.",
-	},
 	multipleOption: true,
 	label: 'Select from two to three pets',
 	size: 'lg',
 	placeholder: 'Choose pets',
 	control: new FormControl(null, [
 		FudisValidators.required("It is necessary to choose multiple pets. It's even better for your health!"),
-		Validators.minLength(2),
-		Validators.maxLength(3),
+		FudisValidators.minLength(2, 'Choose at least two pets'),
+		FudisValidators.maxLength(3, "That's probably too much already."),
 	]),
 	helpText: 'All pets are equally important, but for sake of this example please pick two to three pets.',
 	tooltip: 'Platypus is the right choice',

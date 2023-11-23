@@ -10,7 +10,8 @@
 		"berry_max":"Liian monta marjaa valittuna!",
 		"boolean_truth": "Totuus puuttuu!",
 		"too_few_chars": "Liian vähän merkkejä.",
-		"email": "Syöte ei näytä sähköpostilta."
+		"email": "Syöte ei näytä sähköpostilta.",
+		"notEnoughCharacters": "Liian vähän merkkejä."
 	},
 	"error_one_required": "Ainakin yhdellä kielellä tarvitaan tekstiä!",
 	"dynamic": "transloco {{value}}",
@@ -33,6 +34,5 @@
 	},
 	"closeCalendar": "Sulje kalenteri",
 	"fieldsetTitle": "Tärkeän lomakeryhmän otsikko",
-	"notEnoughCharacters": "Liian vähän merkkejä.",
 	"breadcrumbsLabel": "Sekalaisen setin haitari"
 }

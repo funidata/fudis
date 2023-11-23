@@ -1,8 +1,8 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { TextAreaComponent } from './text-area.component';
-import { FudisFormErrors } from '../../../types/forms';
+
 import readme from './readme.mdx';
 import { FudisValidators } from '../../../utilities/form/validators';
 
@@ -23,7 +23,6 @@ import { FudisValidators } from '../../../utilities/form/validators';
 				[minLength]="minLength"
 				[maxLength]="maxLength"
 				[label]="'Required Text Area with max and min character length'"
-				[errorMsg]="validatorMessages"
 				[helpText]="'This is an example Text Area with multiple validations.'">
 			</fudis-text-area>
 		</form>
@@ -37,14 +36,13 @@ class TextAreaWithFormControlExampleComponent {
 	maxLength = 20;
 
 	validatorsForSecondTextInput = [
-		Validators.minLength(this.minLength),
-		Validators.maxLength(this.maxLength),
+		FudisValidators.minLength(
+			this.minLength,
+			`Too short input. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`
+		),
+		FudisValidators.maxLength(this.maxLength, 'Too long input'),
 		FudisValidators.required('This is required field.'),
 	];
-
-	validatorMessages: FudisFormErrors = {
-		minlength: `Too short input. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,
-	};
 
 	firstTextAreaControl: FormControl = new FormControl('', [FudisValidators.required('Missing a value.')]);
 

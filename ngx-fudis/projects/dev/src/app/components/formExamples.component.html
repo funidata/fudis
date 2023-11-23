@@ -29,9 +29,6 @@
 								[label]="t('label')"
 								[helpText]="t('helpText')"
 								[maxLength]="20"
-								[errorMsg]="{
-									minlength: t('notEnoughCharacters')
-								}"
 								[control]="testFormGroup.controls['textInput']"
 								[tooltip]="'This text-input has multiple validators: required, minlength and maxlength'" />
 							<fudis-radio-button-group

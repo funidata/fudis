@@ -90,7 +90,7 @@ describe('TextInputComponent', () => {
 		});
 
 		it('should set control as invalid if text is too short according to given minLength validator value', () => {
-			component.control = new FormControl('', [Validators.minLength(10)]);
+			component.control = new FormControl('', [FudisValidators.minLength(10, 'Too short')]);
 			component.control.patchValue('too short');
 
 			expect(component.control.value).toEqual('too short');

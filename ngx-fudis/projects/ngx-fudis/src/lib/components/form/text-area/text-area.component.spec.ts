@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MockComponent } from 'ng-mocks';
 import { By } from '@angular/platform-browser';
 import { TextAreaComponent } from './text-area.component';
@@ -72,7 +72,7 @@ describe('TextAreaComponent', () => {
 		});
 
 		it('should set control as invalid if text is too short according to given minLength validator value', () => {
-			component.control = new FormControl('', [Validators.minLength(10)]);
+			component.control = new FormControl('', [FudisValidators.minLength(10, 'Too short!')]);
 			component.control.patchValue('too short');
 
 			expect(component.control.value).toEqual('too short');

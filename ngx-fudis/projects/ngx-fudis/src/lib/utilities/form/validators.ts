@@ -41,6 +41,28 @@ export module FudisValidators {
 		};
 	}
 
+	export function maxLength(length: number, message: FudisValidatorMessage): FudisValidatorFn {
+		return (control: AbstractControl) => {
+			if (!Validators.maxLength(length)(control) || length < 1) {
+				return null;
+			}
+			return { maxLength: { message } };
+		};
+	}
+
+	export function minLength(length: number, message: FudisValidatorMessage): FudisValidatorFn {
+		return (control: AbstractControl) => {
+			if (!Validators.minLength(length)(control) || length < 1) {
+				return null;
+			}
+			return {
+				minLength: {
+					message,
+				},
+			};
+		};
+	}
+
 	export function pattern(regex: string | RegExp, message: FudisValidatorMessage): FudisValidatorFn {
 		return (control: AbstractControl) => {
 			if (Validators.pattern(regex)(control) === null || Validators.pattern(regex)(control) === undefined) {

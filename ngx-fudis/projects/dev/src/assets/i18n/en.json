@@ -10,7 +10,8 @@
 		"berry_max":"Too much berries picked!",
 		"boolean_truth": "Truth is missing!",
 		"too_few_chars": "Too few characters.",
-		"email": "That is not an email!"
+		"email": "That is not an email!",
+		"notEnoughCharacters": "Too few characters."
 	},
 	"error_one_required": "At least one language is required",
 	"dynamic": "transloco {{value}}",
@@ -33,6 +34,5 @@
 	},
 	"closeCalendar": "Close calendar",
 	"fieldsetTitle": "Important fieldset title",
-	"notEnoughCharacters": "Too few characters.",
 	"breadcrumbsLabel": "Random stuff expandable"
 }

@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-underscore-dangle */
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import {
 	FudisCheckboxOption,
@@ -65,8 +65,7 @@ export class AppFormExampleComponent implements OnInit {
 		),
 		textInput: new FormControl<string | null | number>(null, [
 			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required')),
-			Validators.minLength(5),
-			Validators.maxLength(20),
+			FudisValidators.minLength(5, this._translocoService.selectTranslateObject('form_errors.notEnoughCharacters')),
 		]),
 		truth: new FormControl<boolean | null>(
 			null,

@@ -1,15 +1,10 @@
 import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/angular';
 
-import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormControl, FormGroup } from '@angular/forms';
 import { Component, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BehaviorSubject } from 'rxjs';
-import {
-	FudisDropdownOption,
-	FudisRadioButtonOption,
-	FudisFormGroupErrors,
-	FudisFormErrors,
-} from '../../../types/forms';
+import { FudisDropdownOption, FudisRadioButtonOption, FudisFormErrors } from '../../../types/forms';
 
 import { FieldSetComponent } from './fieldset.component';
 import { FudisGroupValidator, FudisValidators } from '../../../utilities/form/validators';
@@ -94,20 +89,6 @@ import { FudisGroupValidator, FudisValidators } from '../../../utilities/form/va
 	`,
 })
 class FieldsetExampleComponent {
-	errorDescription: FudisFormGroupErrors = {
-		english: {
-			minlength: 'Description should at least 10 characters.',
-		},
-		swedish: { minlength: 'Description should at least 10 characters.' },
-		finnish: {
-			minlength: 'Description should at least 10 characters.',
-		},
-	};
-
-	errorEmail: FudisFormErrors = {
-		minlength: 'Email should be at least 5 characters.',
-	};
-
 	errorStartdate: FudisFormErrors = {
 		matDatepickerMin: 'Start date cannot be earlier than this day.',
 		matDatepickerParse: 'Date should be in dd.mm.yyyy format.',
@@ -155,15 +136,15 @@ class FieldsetExampleComponent {
 		description: new FormGroup({
 			finnish: new FormControl('', [
 				FudisValidators.required('Missing description in Finnish.'),
-				Validators.minLength(10),
+				FudisValidators.minLength(10, 'Description should at least 10 characters.'),
 			]),
 			swedish: new FormControl('', [
 				FudisValidators.required('Missing description in Swedish.'),
-				Validators.minLength(10),
+				FudisValidators.minLength(10, 'Description should at least 10 characters.'),
 			]),
 			english: new FormControl('', [
 				FudisValidators.required('Missing description in English.'),
-				Validators.minLength(10),
+				FudisValidators.minLength(10, 'Description should at least 10 characters.'),
 			]),
 		}),
 		teacher: new FormControl(
@@ -173,7 +154,7 @@ class FieldsetExampleComponent {
 		email: new FormControl('', [
 			FudisValidators.required('Missing email contact.'),
 			FudisValidators.email('Input must be an email address.'),
-			Validators.minLength(5),
+			FudisValidators.minLength(5, 'Email should be at least 5 characters.'),
 		]),
 		startDate: new FormControl('', FudisValidators.required('Start date is missing.')),
 		endDate: new FormControl('', FudisValidators.required('Start date is missing.')),

@@ -1,18 +1,12 @@
 import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/angular';
 
-import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { Component, OnInit, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RouterModule } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import {
-	FudisDropdownOption,
-	FudisRadioButtonOption,
-	FudisFormGroupErrors,
-	FudisFormErrors,
-	FudisDateRangeItem,
-} from '../../../types/forms';
+import { FudisDropdownOption, FudisRadioButtonOption, FudisFormErrors, FudisDateRangeItem } from '../../../types/forms';
 
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { FudisGroupValidator, FudisValidators } from '../../../utilities/form/validators';
@@ -126,8 +120,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 													[id]="'unique-input-3'"
 													[control]="formExample.controls['teacher']"
 													[label]="'Responsible teacher'"
-													[helpText]="'Someone has to be responsible for this.'"
-													[errorMsg]="errorTeacher" />
+													[helpText]="'Someone has to be responsible for this.'" />
 												<fudis-text-input
 													[id]="'unique-input-4'"
 													[helpText]="inputHelpText"
@@ -175,20 +168,6 @@ class FormContentExampleComponent implements OnInit {
 		{ key: 'Another important person', value: 'Mara Jade' },
 	];
 
-	errorDescription: FudisFormGroupErrors = {
-		english: {
-			minlength: 'Description should at least 10 characters.',
-		},
-		swedish: { minlength: 'Description should at least 10 characters.' },
-		finnish: {
-			minlength: 'Description should at least 10 characters',
-		},
-	};
-
-	errorEmail: FudisFormErrors = {
-		minlength: 'Email should be at least 5 characters.',
-	};
-
 	errorImportantDate: FudisFormErrors = {
 		matDatepickerParse: 'Date should be in dd.mm.yyyy format.',
 	};
@@ -205,15 +184,15 @@ class FormContentExampleComponent implements OnInit {
 		description: new FormGroup({
 			finnish: new FormControl(null, [
 				FudisValidators.required('Missing description in Finnish.'),
-				Validators.minLength(10),
+				FudisValidators.minLength(10, 'Description should at least 10 characters.'),
 			]),
 			swedish: new FormControl(null, [
 				FudisValidators.required('Missing description in Swedish.'),
-				Validators.minLength(10),
+				FudisValidators.minLength(10, 'Description should at least 10 characters.'),
 			]),
 			english: new FormControl(null, [
 				FudisValidators.required('Missing description in English.'),
-				Validators.minLength(10),
+				FudisValidators.minLength(10, 'Description should at least 10 characters.'),
 			]),
 		}),
 		courseBooks: new FormGroup(
@@ -234,7 +213,7 @@ class FormContentExampleComponent implements OnInit {
 		email: new FormControl(null, [
 			FudisValidators.required('Missing email contact.'),
 			FudisValidators.email('Input must be an email address.'),
-			Validators.minLength(5),
+			FudisValidators.minLength(5, 'Email should be at least 5 characters.'),
 		]),
 		importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
 		courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),

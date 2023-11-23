@@ -11,18 +11,18 @@ import { FudisValidators } from '../../../utilities/form/validators';
 	template: `
 		<form [formGroup]="mainFormGroup">
 			<fudis-text-input
-				[control]="mainFormGroup.controls['first']"
+				[control]="mainFormGroup.controls['basic']"
 				[label]="'Basic text input'"
 				[helpText]="'I do not have any validators.'" />
 			<fudis-text-input
-				[control]="mainFormGroup.controls['second']"
+				[control]="mainFormGroup.controls['required']"
 				[label]="'Required text input'"
 				[tooltip]="'This is a tooltip text'"
 				[tooltipPosition]="'right'"
 				[tooltipToggle]="false"
 				[helpText]="'Please add some content.'" />
 			<fudis-text-input
-				[control]="mainFormGroup.controls['third']"
+				[control]="mainFormGroup.controls['email']"
 				[minLength]="minLength"
 				[maxLength]="maxLength"
 				[label]="'Email'"
@@ -35,7 +35,7 @@ import { FudisValidators } from '../../../utilities/form/validators';
 				[errorMsg]="validatorMessages"
 				[helpText]="'Do not use low case letters!'" />
 			<fudis-text-input
-				[control]="mainFormGroup.controls['fourth']"
+				[control]="mainFormGroup.controls['number']"
 				[label]="'Number input'"
 				[minNumber]="minNumber"
 				[maxNumber]="maxNumber"
@@ -59,31 +59,35 @@ class TextInputWithFormControlExampleComponent {
 
 	maxNumber = 99;
 
-	validatorsForThird = [
-		Validators.minLength(this.minLength),
-		Validators.maxLength(this.maxLength),
+	validatorsForEmail = [
+		FudisValidators.minLength(
+			this.minLength,
+			`Too short email. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`
+		),
+		FudisValidators.maxLength(
+			15,
+			`Too long email. Minimum length is ${this.minLength} and maximum length is actually 15, although you can type to up to ${this.maxLength} characters.`
+		),
 		FudisValidators.required('This is required field.'),
 		FudisValidators.email('Input must be an email address.'),
 	];
 
-	validatorsForFourth = [
+	validatorsForNumber = [
 		Validators.min(this.minNumber),
 		Validators.max(this.maxNumber),
 		FudisValidators.required('This is required field.'),
 	];
 
 	validatorMessages: FudisFormErrors = {
-		minlength: `Too short email. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,
-		maxlength: `Too long email. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,
 		min: `Given number is not inside the allowed range ${this.minNumber} - ${this.maxNumber}.`,
 		max: `Given number is not inside the allowed range ${this.minNumber} - ${this.maxNumber}.`,
 	};
 
 	mainFormGroup: FormGroup = this._formBuilder.group({
-		first: new FormControl(''),
-		second: new FormControl('', FudisValidators.required('This is required field.')),
-		third: new FormControl('', this.validatorsForThird),
-		fourth: new FormControl('', this.validatorsForFourth),
+		basic: new FormControl(''),
+		required: new FormControl('', FudisValidators.required('This is required field.')),
+		email: new FormControl('', this.validatorsForEmail),
+		number: new FormControl('', this.validatorsForNumber),
 		pattern: new FormControl(null, FudisValidators.pattern(/^[A-Z \d\W]+$/, 'YOU USED LOW CAPS! SHAME ON YOU!')),
 	});
 }
