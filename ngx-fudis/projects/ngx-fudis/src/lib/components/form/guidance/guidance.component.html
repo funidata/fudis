@@ -67,7 +67,6 @@
 							<fudis-error-message
 								*ngIf="error.value?.message"
 								[visible]="control.touched"
-								[deprecationWarning]="true"
 								[focusId]="for"
 								[type]="error.key"
 								[label]="inputLabel"
@@ -79,6 +78,7 @@
 								[focusId]="for"
 								[label]="inputLabel"
 								[type]="error.key"
+								[deprecationWarning]="true"
 								[message]="errorMsg?.[asErrorkey(error.key)]" />
 						</ng-container>
 					</ng-container>

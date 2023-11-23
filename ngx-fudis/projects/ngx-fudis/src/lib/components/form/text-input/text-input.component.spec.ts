@@ -98,7 +98,7 @@ describe('TextInputComponent', () => {
 		});
 
 		it('should set control as invalid if number is not respective to given min validator value', () => {
-			component.control = new FormControl('', [Validators.min(1)]);
+			component.control = new FormControl('', [FudisValidators.min(1, 'Too small!')]);
 			component.control.patchValue('-10');
 
 			expect(component.control.value).toEqual('-10');

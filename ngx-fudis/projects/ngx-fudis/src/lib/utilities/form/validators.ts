@@ -63,9 +63,35 @@ export module FudisValidators {
 		};
 	}
 
+	export function min(minValue: number, message: FudisValidatorMessage): FudisValidatorFn {
+		return (control: AbstractControl) => {
+			if (!Validators.min(minValue)(control)) {
+				return null;
+			}
+			return {
+				min: {
+					message,
+				},
+			};
+		};
+	}
+
+	export function max(maxValue: number, message: FudisValidatorMessage): FudisValidatorFn {
+		return (control: AbstractControl) => {
+			if (!Validators.max(maxValue)(control)) {
+				return null;
+			}
+			return {
+				max: {
+					message,
+				},
+			};
+		};
+	}
+
 	export function pattern(regex: string | RegExp, message: FudisValidatorMessage): FudisValidatorFn {
 		return (control: AbstractControl) => {
-			if (Validators.pattern(regex)(control) === null || Validators.pattern(regex)(control) === undefined) {
+			if (!Validators.pattern(regex)(control)) {
 				return null;
 			}
 			return {
