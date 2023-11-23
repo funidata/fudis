@@ -30,6 +30,11 @@ import { FudisValidators } from '../../../utilities/form/validators';
 				[type]="'email'"
 				[helpText]="'This is an example email input with multiple validations.'" />
 			<fudis-text-input
+				[control]="mainFormGroup.controls['pattern']"
+				[label]="'Pattern'"
+				[errorMsg]="validatorMessages"
+				[helpText]="'Do not use low case letters!'" />
+			<fudis-text-input
 				[control]="mainFormGroup.controls['fourth']"
 				[label]="'Number input'"
 				[minNumber]="minNumber"
@@ -79,6 +84,7 @@ class TextInputWithFormControlExampleComponent {
 		second: new FormControl('', FudisValidators.required('This is required field.')),
 		third: new FormControl('', this.validatorsForThird),
 		fourth: new FormControl('', this.validatorsForFourth),
+		pattern: new FormControl(null, FudisValidators.pattern(/^[A-Z \d\W]+$/, 'YOU USED LOW CAPS! SHAME ON YOU!')),
 	});
 }
 

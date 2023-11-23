@@ -40,6 +40,19 @@ export module FudisValidators {
 			return { email: { message } };
 		};
 	}
+
+	export function pattern(regex: string | RegExp, message: FudisValidatorMessage): FudisValidatorFn {
+		return (control: AbstractControl) => {
+			if (Validators.pattern(regex)(control) === null || Validators.pattern(regex)(control) === undefined) {
+				return null;
+			}
+			return {
+				pattern: {
+					message,
+				},
+			};
+		};
+	}
 }
 
 /**
