@@ -18,12 +18,6 @@ const petOptions: FudisRadioButtonOption[] = [
 
 const truthOption: FudisRadioButtonOption[] = [{ value: true, viewValue: 'true', id: 'test-truth', name: 'truth' }];
 
-const fruitOptions: FudisRadioButtonOption[] = [
-	{ value: 'apple', viewValue: 'Apple', id: 'fruit-1', name: 'fruit' },
-	{ value: 'fair-trade-banana', viewValue: 'Fair Trade Banana', id: 'fruit-2', name: 'fruit' },
-	{ value: 'cherry', viewValue: 'Cherry', id: 'fruit-3', name: 'berry' },
-];
-
 describe('RadioButtonGroupComponent', () => {
 	let component: RadioButtonGroupComponent;
 	let fixture: ComponentFixture<RadioButtonGroupComponent>;
@@ -64,19 +58,6 @@ describe('RadioButtonGroupComponent', () => {
 			}).toThrow(
 				new Error(
 					`Fudis-radio-button-group should have minimum of two options for radio buttons, but it only got ${length} option.`
-				)
-			);
-		});
-
-		it('should throw an error if radio-button option name attributes does not match', () => {
-			component.options = fruitOptions;
-			fixture.detectChanges();
-
-			expect(() => {
-				component.ngOnInit();
-			}).toThrow(
-				new Error(
-					`In fudis-radio-button-group options array, each object's 'name' value should be identical for all options, but name mismatch was detected.`
 				)
 			);
 		});

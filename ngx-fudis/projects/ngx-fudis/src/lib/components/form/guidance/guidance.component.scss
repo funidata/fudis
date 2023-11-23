@@ -25,6 +25,13 @@
 		animation-iteration-count: 1;
 		animation-fill-mode: forwards;
 
+		&--visible {
+			display: flex;
+			transform: translateX(calc(-1 * spacing.$spacing-xs));
+			opacity: 1;
+			height: auto;
+		}
+
 		&__list {
 			min-height: spacing.$spacing-xs;
 		}

@@ -47,16 +47,16 @@ const TemplateAllRequired: StoryFn = () => ({
 				required: 'Missing superhero name on Swedish.',
 			},
 		},
-		maxLength: 12,
+		maxLength: 22,
 		languageOptions: [
 			{ value: 'finnish', viewValue: 'FI' },
 			{ value: 'swedish', viewValue: 'SV' },
 			{ value: 'english', viewValue: 'EN' },
 		],
 		formGroup: new FormGroup<FudisInputWithLanguageOptionsFormGroup>({
-			finnish: new FormControl<string | null>(null, [Validators.required, Validators.maxLength(12)]),
-			swedish: new FormControl<string | null>(null, [Validators.required, Validators.maxLength(12)]),
-			english: new FormControl<string | null>(null, [Validators.required, Validators.maxLength(12)]),
+			finnish: new FormControl<string | null>(null, [Validators.required, Validators.maxLength(22)]),
+			swedish: new FormControl<string | null>(null, [Validators.required, Validators.maxLength(22)]),
+			english: new FormControl<string | null>(null, [Validators.required, Validators.maxLength(22)]),
 		}),
 	},
 	template: html`

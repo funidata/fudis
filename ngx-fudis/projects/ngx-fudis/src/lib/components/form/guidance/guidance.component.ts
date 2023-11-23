@@ -2,6 +2,7 @@ import { Component, Input, OnInit, effect } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FudisFormErrors, FudisFormGroupErrors } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { FudisIdService } from '../../../services/id/id.service';
 
 @Component({
 	selector: 'fudis-guidance',
@@ -9,7 +10,12 @@ import { FudisTranslationService } from '../../../services/translation/translati
 	styleUrls: ['./guidance.component.scss'],
 })
 export class GuidanceComponent implements OnInit {
-	constructor(private _translationService: FudisTranslationService) {
+	constructor(
+		private _translationService: FudisTranslationService,
+		private _idService: FudisIdService
+	) {
+		this._id = _idService.getNewId('guidance');
+
 		effect(() => {
 			this._maxLengthText = _translationService.getTranslations()().TEXTINPUT.MAX_LENGTH;
 		});
@@ -76,6 +82,8 @@ export class GuidanceComponent implements OnInit {
 	protected _maxLengthText: string;
 
 	protected _maxLengthAlertThreshold: number;
+
+	protected _id: string;
 
 	ngOnInit(): void {
 		if (this.maxLength) {

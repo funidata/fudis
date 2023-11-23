@@ -13,8 +13,8 @@ export default defineConfig({
 	trashAssetsBeforeRuns: true,
 	video: false,
 	videosFolder: 'cypress/target/videos',
-	viewportWidth: 1280,
-	viewportHeight: 800,
+	viewportWidth: 1920,
+	viewportHeight: 1080,
 	scrollBehavior: 'center',
 
 	retries: {

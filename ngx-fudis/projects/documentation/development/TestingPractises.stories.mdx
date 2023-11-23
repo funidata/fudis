@@ -1,0 +1,19 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Documentation/Development/Testing Practises" />
+
+# Testing Practises
+
+## Unit Testing
+
+## E2E Testing with Screenshot Regression Tests
+
+Cypress is used for E2E testing with Storybook examples of Fudis components, organisms, directives etc.
+
+Primary reason for Cypress E2E tests are screenshot regression tests. These are used to catch, even pixel level bugs and other unwanted style changes in Fudis components.
+
+### Running tests
+
+- Start Storybook
+- Run all tests with command `npm run cypress`
+- To run a single test, in `ngx-fudis` folder use CLI command of e. g. `npx cypress run --spec 'cypress/e2e/components/button.cy.ts'`
