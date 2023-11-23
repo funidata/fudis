@@ -70,7 +70,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 													[visible]="true"
 													[focusId]="fieldsetId"
 													[label]="'Basic info'"
-													[message]="'There might be some errors in the fieldset'" />
+													[message]="'There might be some errors in the fieldset.'" />
 											</fudis-notification>
 										</ng-template>
 										<ng-template fudisContent type="fieldset">
@@ -224,8 +224,8 @@ class FormContentExampleComponent implements OnInit {
 				third: new FormControl(null),
 			},
 			[
-				FudisGroupValidator.min({ value: 1, message: new BehaviorSubject('No book selected') }),
-				FudisGroupValidator.max({ value: 2, message: new BehaviorSubject('Too many selected') }),
+				FudisGroupValidator.min({ value: 1, message: new BehaviorSubject('No book selected.') }),
+				FudisGroupValidator.max({ value: 2, message: new BehaviorSubject('Too many selected.') }),
 			]
 		),
 		teacher: new FormControl(
@@ -239,8 +239,8 @@ class FormContentExampleComponent implements OnInit {
 		]),
 		importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
 		courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
-		startDate: new FormControl<Date | null>(null, FudisValidators.required('Start date is missing.')),
-		endDate: new FormControl<Date | null>(null, FudisValidators.required('End date is missing.')),
+		startDate: new FormControl<Date | null>(null, FudisValidators.required('Start date is required.')),
+		endDate: new FormControl<Date | null>(null, FudisValidators.required('End date is required.')),
 	});
 
 	languageOptions: FudisDropdownOption[] = [

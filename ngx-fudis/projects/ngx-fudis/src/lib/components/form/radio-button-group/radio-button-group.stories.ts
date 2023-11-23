@@ -60,7 +60,7 @@ class RadioButtonGroupExampleComponent {
 
 	mainFormGroup: FormGroup = this._formBuilder.group({
 		first: new FormControl(getDefaultValue(this.fruitOptions), FudisValidators.required('You must choose a fruit')),
-		second: new FormControl(getDefaultValue(this.petOptions), FudisValidators.required('You must choose a pet')),
+		second: new FormControl(getDefaultValue(this.petOptions), FudisValidators.required('You must choose a pet.')),
 		third: new FormControl(null, FudisValidators.required('You must choose a truth')),
 	});
 }

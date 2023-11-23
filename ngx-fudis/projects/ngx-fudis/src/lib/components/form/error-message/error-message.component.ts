@@ -90,7 +90,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 		if (this.deprecationWarning) {
 			// eslint-disable-next-line no-console
 			console.warn(
-				`Component with id of '${this.focusId}' received form error messages from 'errorMsg' input. This will be removed in version Fudis v1.0.0, as error message logic will be binded straight with FudisValidators and FudisFormGroupValidators.`
+				`Component with id of '${this.focusId}' and label of '${this.label}' received form error messages from 'errorMsg' input. This will be removed in version Fudis v1.0.0, as error message logic will be binded straight with FudisValidators and FudisFormGroupValidators.`
 			);
 		}
 	}

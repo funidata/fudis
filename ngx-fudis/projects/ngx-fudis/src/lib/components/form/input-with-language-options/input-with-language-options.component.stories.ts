@@ -36,17 +36,6 @@ const TemplateAllRequired: StoryFn = () => ({
 		id: 'unique-input-id-superhero-name',
 		label: 'Your superhero name',
 		helpText: 'Please provide superhero name in all languages.',
-		groupErrorMsg: {
-			english: {
-				required: 'Missing superhero name on English.',
-			},
-			finnish: {
-				required: 'Missing superhero name on Finnish.',
-			},
-			swedish: {
-				required: 'Missing superhero name on Swedish.',
-			},
-		},
 		maxLength: 22,
 		languageOptions: [
 			{ value: 'finnish', viewValue: 'FI' },
@@ -55,16 +44,16 @@ const TemplateAllRequired: StoryFn = () => ({
 		],
 		formGroup: new FormGroup<FudisInputWithLanguageOptionsFormGroup>({
 			finnish: new FormControl<string | null>(null, [
-				FudisValidators.required('Required in Finnish'),
-				Validators.maxLength(12),
+				FudisValidators.required('Missing superhero name on Finnish.'),
+				Validators.maxLength(22),
 			]),
 			swedish: new FormControl<string | null>(null, [
-				FudisValidators.required('Required in Swedish'),
-				Validators.maxLength(12),
+				FudisValidators.required('Missing superhero name on Swedish.'),
+				Validators.maxLength(22),
 			]),
 			english: new FormControl<string | null>(null, [
-				FudisValidators.required('Required in English'),
-				Validators.maxLength(12),
+				FudisValidators.required('Missing superhero name on English.'),
+				Validators.maxLength(22),
 			]),
 		}),
 	},
