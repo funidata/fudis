@@ -35,6 +35,12 @@
 		</mat-datepicker-toggle>
 		<mat-datepicker #picker panelClass="fudis-datepicker__datepicker"></mat-datepicker>
 	</div>
-	<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="id" [errorMsg]="errorMsg" [control]="control">
+	<fudis-guidance
+		*ngIf="!disableGuidance"
+		[inputLabel]="label"
+		[helpText]="helpText"
+		[for]="id"
+		[errorMsg]="errorMsg"
+		[control]="control">
 	</fudis-guidance>
 </div>

@@ -22,7 +22,7 @@
 		[attr.required]="_required ? true : null">
 	</textarea>
 	<fudis-guidance
-		*ngIf="!this._inputWithLanguageOptions"
+		*ngIf="!disableGuidance"
 		[inputLabel]="label"
 		[maxLength]="maxLength"
 		[helpText]="helpText"

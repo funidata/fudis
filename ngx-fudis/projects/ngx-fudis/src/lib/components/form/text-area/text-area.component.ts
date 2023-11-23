@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Host, Input, OnChanges, OnInit, Optional } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
 
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
@@ -7,7 +7,6 @@ import { FudisInputSize } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
-import { InputWithLanguageOptionsComponent } from '../input-with-language-options/input-with-language-options.component';
 
 @Component({
 	selector: 'fudis-text-area',
@@ -18,8 +17,7 @@ export class TextAreaComponent extends InputBaseDirective implements OnInit, OnC
 	constructor(
 		private _focusService: FudisFocusService,
 		_idService: FudisIdService,
-		_translationService: FudisTranslationService,
-		@Optional() @Host() protected _inputWithLanguageOptions: InputWithLanguageOptionsComponent
+		_translationService: FudisTranslationService
 	) {
 		super(_translationService, _idService);
 	}

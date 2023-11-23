@@ -77,6 +77,11 @@ export class InputBaseDirective extends TooltipApiDirective {
 	@Input() initialFocus: boolean = false;
 
 	/**
+	 * If Guidance should be disabled for this component instance. No help text or errors will be visible.
+	 */
+	@Input() disableGuidance: boolean;
+
+	/**
 	 * To listen for input's blur event.
 	 */
 	@Output() handleBlur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
