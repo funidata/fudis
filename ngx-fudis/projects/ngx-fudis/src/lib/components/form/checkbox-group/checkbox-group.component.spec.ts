@@ -9,7 +9,7 @@ import { CheckboxGroupComponent } from './checkbox-group.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { FudisCheckboxGroupFormGroup } from '../../../types/forms';
-import { FudisGroupValidator } from '../../../utilities/form/validators';
+import { FudisGroupValidators } from '../../../utilities/form/validators';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisGridService } from '../../../services/grid/grid.service';
 import { GridComponent } from '../../grid/grid/grid.component';
@@ -28,7 +28,7 @@ const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
 		pineapple: new FormControl<boolean | null | undefined>(null),
 		orange: new FormControl<boolean | null | undefined>(null),
 	},
-	[FudisGroupValidator.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))]
+	[FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))]
 );
 
 @Component({
@@ -51,8 +51,8 @@ class MockContainerComponent {
 			pineapple: new FormControl<boolean | null | undefined>({ value: false, disabled: true }),
 		},
 		[
-			FudisGroupValidator.min({ value: 2, message: new BehaviorSubject('Too few selected') }),
-			FudisGroupValidator.max({ value: 3, message: new BehaviorSubject('Too many selected') }),
+			FudisGroupValidators.min({ value: 2, message: new BehaviorSubject('Too few selected') }),
+			FudisGroupValidators.max({ value: 3, message: new BehaviorSubject('Too many selected') }),
 		]
 	);
 

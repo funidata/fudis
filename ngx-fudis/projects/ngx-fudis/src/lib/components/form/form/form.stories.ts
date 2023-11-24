@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 import { FudisDropdownOption, FudisRadioButtonOption, FudisFormErrors, FudisDateRangeItem } from '../../../types/forms';
 
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
-import { FudisGroupValidator, FudisValidators } from '../../../utilities/form/validators';
+import { FudisGroupValidators, FudisValidators } from '../../../utilities/form/validators';
 import { FormComponent } from './form.component';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
@@ -179,7 +179,7 @@ class FormContentExampleComponent implements OnInit {
 				swedish: new FormControl(null),
 				english: new FormControl(null),
 			},
-			[FudisGroupValidator.atLeastOneRequired(new BehaviorSubject('Course name is missing.'))]
+			[FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Course name is missing.'))]
 		),
 		description: new FormGroup({
 			finnish: new FormControl(null, [
@@ -202,8 +202,8 @@ class FormContentExampleComponent implements OnInit {
 				third: new FormControl(null),
 			},
 			[
-				FudisGroupValidator.min({ value: 1, message: new BehaviorSubject('No book selected.') }),
-				FudisGroupValidator.max({ value: 2, message: new BehaviorSubject('Too many selected.') }),
+				FudisGroupValidators.min({ value: 1, message: new BehaviorSubject('No book selected.') }),
+				FudisGroupValidators.max({ value: 2, message: new BehaviorSubject('Too many selected.') }),
 			]
 		),
 		teacher: new FormControl(

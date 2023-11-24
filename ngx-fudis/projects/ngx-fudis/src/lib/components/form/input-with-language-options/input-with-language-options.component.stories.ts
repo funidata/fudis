@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { BehaviorSubject } from 'rxjs';
 import { InputWithLanguageOptionsComponent } from './input-with-language-options.component';
-import { FudisGroupValidator, FudisValidators } from '../../../utilities/form/validators';
+import { FudisGroupValidators, FudisValidators } from '../../../utilities/form/validators';
 import { FudisInputWithLanguageOptionsFormGroup } from '../../../types/forms';
 
 export default {
@@ -86,7 +86,7 @@ const TemplateOneRequired: StoryFn = () => ({
 				swedish: new FormControl<string | null>(null, [FudisValidators.maxLength(30, 'Too long name')]),
 				english: new FormControl<string | null>(null, [FudisValidators.maxLength(30, 'Too long name')]),
 			},
-			[FudisGroupValidator.atLeastOneRequired(new BehaviorSubject('Give name in at least in one language'))]
+			[FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Give name in at least in one language'))]
 		),
 	},
 	template: html`

@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 import { FudisDropdownOption, FudisRadioButtonOption, FudisFormErrors } from '../../../types/forms';
 
 import { FieldSetComponent } from './fieldset.component';
-import { FudisGroupValidator, FudisValidators } from '../../../utilities/form/validators';
+import { FudisGroupValidators, FudisValidators } from '../../../utilities/form/validators';
 
 @Component({
 	selector: 'example-fieldset',
@@ -131,7 +131,7 @@ class FieldsetExampleComponent {
 				swedish: new FormControl(''),
 				english: new FormControl(''),
 			},
-			[FudisGroupValidator.atLeastOneRequired(new BehaviorSubject('Course name is missing'))]
+			[FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Course name is missing'))]
 		),
 		description: new FormGroup({
 			finnish: new FormControl('', [

@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
 import { FudisCheckboxGroupFormGroup } from '../../../types/forms';
 import readme from './readme.mdx';
-import { FudisGroupValidator } from '../../../utilities/form/validators';
+import { FudisGroupValidators } from '../../../utilities/form/validators';
 
 export default {
 	title: 'Components/Form/Checkbox Group',
@@ -44,7 +44,7 @@ const basicFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
 		pineapple: new FormControl<boolean | null | undefined>(null),
 		orange: new FormControl<boolean | null | undefined>(null),
 	},
-	[FudisGroupValidator.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))]
+	[FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))]
 );
 
 const withDisabledFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup>(
@@ -55,7 +55,7 @@ const withDisabledFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup>(
 		pineapple: new FormControl<boolean | null | undefined | null>(null),
 		orange: new FormControl<boolean | null | undefined | null>({ value: null, disabled: true }),
 	},
-	[FudisGroupValidator.atLeastOneRequired(new BehaviorSubject('Please pick one! :('))]
+	[FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Please pick one! :('))]
 );
 const withMinMaxFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup>(
 	{
@@ -66,11 +66,11 @@ const withMinMaxFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup>(
 		orange: new FormControl<boolean | null | undefined | null>(null),
 	},
 	[
-		FudisGroupValidator.min({
+		FudisGroupValidators.min({
 			value: 2,
 			message: new BehaviorSubject('Not enough fruits picked'),
 		}),
-		FudisGroupValidator.max({
+		FudisGroupValidators.max({
 			value: 3,
 			message: new BehaviorSubject('Too many fruits selected!'),
 		}),

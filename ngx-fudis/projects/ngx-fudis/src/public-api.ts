@@ -73,7 +73,7 @@ export { TextInputComponent } from './lib/components/form/text-input/text-input.
 
 export { TooltipDirective } from './lib/directives/tooltip/tooltip.directive';
 
-export { FudisGroupValidator } from './lib/utilities/form/validators';
+export { FudisGroupValidators, FudisValidators } from './lib/utilities/form/validators';
 
 export { AlertComponent } from './lib/components/alert/alert/alert.component';
 export { AlertGroupComponent } from './lib/components/alert/alert-group/alert-group.component';

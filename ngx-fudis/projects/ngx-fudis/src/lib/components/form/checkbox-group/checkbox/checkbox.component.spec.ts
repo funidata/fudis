@@ -8,7 +8,7 @@ import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoi
 import { FudisGridService } from '../../../../services/grid/grid.service';
 import { ContentDirective } from '../../../../directives/content-projection/content/content.directive';
 import { FudisCheckboxGroupFormGroup, FudisCheckboxOption } from '../../../../types/forms';
-import { FudisGroupValidator } from '../../../../utilities/form/validators';
+import { FudisGroupValidators } from '../../../../utilities/form/validators';
 import { CheckboxGroupComponent } from '../checkbox-group.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { CheckboxComponent } from './checkbox.component';
@@ -37,8 +37,8 @@ class MockContainerComponent {
 			pineapple: new FormControl<boolean | null | undefined>({ value: false, disabled: true }),
 		},
 		[
-			FudisGroupValidator.min({ value: 2, message: new BehaviorSubject('Too few selected') }),
-			FudisGroupValidator.max({ value: 3, message: new BehaviorSubject('Too many selected') }),
+			FudisGroupValidators.min({ value: 2, message: new BehaviorSubject('Too few selected') }),
+			FudisGroupValidators.max({ value: 3, message: new BehaviorSubject('Too many selected') }),
 		]
 	);
 

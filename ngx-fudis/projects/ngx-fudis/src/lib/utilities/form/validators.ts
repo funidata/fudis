@@ -1,17 +1,17 @@
 import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-type FudisValidatorMessage = Observable<string> | string;
-interface FudisValidationErrors extends ValidationErrors {
+export type FudisValidatorMessage = Observable<string> | string;
+export interface FudisValidationErrors extends ValidationErrors {
 	[key: string]: { message: FudisValidatorMessage; value?: any } | null;
 }
 
-interface FudisGroupValidatorMinMaxSettings {
+export interface FudisGroupValidatorsMinMaxSettings {
 	value: number;
 	message: Observable<string>;
 }
 
-interface FudisValidatorFn extends ValidatorFn {
+export interface FudisValidatorFn extends ValidatorFn {
 	(control: AbstractControl): FudisValidationErrors | null;
 }
 
@@ -109,7 +109,7 @@ export module FudisValidators {
 /**
  * Form Group Validators
  */
-export module FudisGroupValidator {
+export module FudisGroupValidators {
 	export function atLeastOneRequired(message: Observable<string>): FudisValidatorFn {
 		return (controlGroup: any): FudisValidationErrors | null => {
 			const { controls } = controlGroup;
@@ -133,7 +133,7 @@ export module FudisGroupValidator {
 		};
 	}
 
-	export function min(settings: FudisGroupValidatorMinMaxSettings): FudisValidatorFn {
+	export function min(settings: FudisGroupValidatorsMinMaxSettings): FudisValidatorFn {
 		return (controlGroup: any): FudisValidationErrors | null => {
 			const { controls } = controlGroup;
 			let amountOfSelected = 0;
@@ -155,7 +155,7 @@ export module FudisGroupValidator {
 		};
 	}
 
-	export function max(settings: FudisGroupValidatorMinMaxSettings): FudisValidatorFn {
+	export function max(settings: FudisGroupValidatorsMinMaxSettings): FudisValidatorFn {
 		return (controlGroup: any): FudisValidationErrors | null => {
 			const { controls } = controlGroup;
 			let amountOfSelected = 0;
