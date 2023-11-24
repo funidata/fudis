@@ -1,5 +1,5 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, FormsModule, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { TextInputComponent } from './text-input.component';
 
@@ -23,8 +23,6 @@ import { FudisValidators } from '../../../utilities/form/validators';
 				[helpText]="'Please add some content.'" />
 			<fudis-text-input
 				[control]="mainFormGroup.controls['email']"
-				[minLength]="minLength"
-				[maxLength]="maxLength"
 				[label]="'Email'"
 				[type]="'email'"
 				[helpText]="'This is an example email input with multiple validations.'" />
@@ -35,13 +33,11 @@ import { FudisValidators } from '../../../utilities/form/validators';
 			<fudis-text-input
 				[control]="mainFormGroup.controls['number']"
 				[label]="'Number input'"
-				[minNumber]="minNumber"
-				[maxNumber]="maxNumber"
 				[tooltip]="'You can choose any number between 1 and 5'"
 				[tooltipPosition]="'left'"
 				[tooltipToggle]="false"
 				[type]="'number'"
-				[size]="'sm'"></fudis-text-input>
+				[size]="'sm'" />
 		</form>
 	`,
 })
@@ -61,19 +57,13 @@ class TextInputWithFormControlExampleComponent {
 			this.minLength,
 			`Too short email. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`
 		),
-		FudisValidators.maxLength(
-			15,
-			`Too long email. Minimum length is ${this.minLength} and maximum length is actually 15, although you can type to up to ${this.maxLength} characters.`
-		),
+		FudisValidators.maxLength(this.maxLength, `Too long email.`),
 		FudisValidators.required('This is required field.'),
 		FudisValidators.email('Input must be an email address.'),
 	];
 
 	validatorsForNumber = [
-		FudisValidators.min(
-			this.minNumber,
-			`Given number is not inside the allowed range ${this.minNumber} - ${this.maxNumber}.`
-		),
+		Validators.min(1),
 		FudisValidators.max(
 			this.maxNumber,
 			`Given number is not inside the allowed range ${this.minNumber} - ${this.maxNumber}.`

@@ -46,7 +46,7 @@ export module FudisValidators {
 			if (!Validators.maxLength(length)(control) || length < 1) {
 				return null;
 			}
-			return { maxLength: { message } };
+			return { maxlength: { message, requiredLength: length } };
 		};
 	}
 
@@ -56,9 +56,9 @@ export module FudisValidators {
 				return null;
 			}
 			return {
-				minLength: {
+				minlength: {
 					message,
-					value: length,
+					requiredLength: length,
 				},
 			};
 		};
@@ -72,7 +72,7 @@ export module FudisValidators {
 			return {
 				min: {
 					message,
-					value: minValue,
+					min: minValue,
 				},
 			};
 		};
@@ -86,7 +86,7 @@ export module FudisValidators {
 			return {
 				max: {
 					message,
-					value: message,
+					max: maxValue,
 				},
 			};
 		};
@@ -97,6 +97,7 @@ export module FudisValidators {
 			if (!Validators.pattern(regex)(control)) {
 				return null;
 			}
+
 			return {
 				pattern: {
 					message,

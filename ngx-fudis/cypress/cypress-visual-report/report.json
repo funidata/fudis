@@ -5,6 +5,106 @@
   "totalSuites": 30,
   "suites": [
     {
+      "name": "spacing.cy.ts",
+      "path": "cypress/e2e/directives/spacing.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "spacing.cy.ts/mobile-step-1",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/directives/spacing.cy.ts",
+          "specFilename": "spacing.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/mobile-step-1.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/mobile-step-1.png"
+        },
+        {
+          "status": "pass",
+          "name": "spacing.cy.ts/tablet-step-2",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/directives/spacing.cy.ts",
+          "specFilename": "spacing.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/tablet-step-2.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/tablet-step-2.png"
+        },
+        {
+          "status": "pass",
+          "name": "spacing.cy.ts/desktop-step-3",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/directives/spacing.cy.ts",
+          "specFilename": "spacing.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/desktop-step-3.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/desktop-step-3.png"
+        },
+        {
+          "status": "pass",
+          "name": "spacing.cy.ts/tablet-step-4",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/directives/spacing.cy.ts",
+          "specFilename": "spacing.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/tablet-step-4.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/tablet-step-4.png"
+        },
+        {
+          "status": "pass",
+          "name": "spacing.cy.ts/mobile-step-5",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/directives/spacing.cy.ts",
+          "specFilename": "spacing.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/mobile-step-5.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/mobile-step-5.png"
+        },
+        {
+          "status": "pass",
+          "name": "spacing.cy.ts/tablet-step-6",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/directives/spacing.cy.ts",
+          "specFilename": "spacing.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/tablet-step-6.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/tablet-step-6.png"
+        },
+        {
+          "status": "pass",
+          "name": "spacing.cy.ts/desktop-step-7",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/directives/spacing.cy.ts",
+          "specFilename": "spacing.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/desktop-step-7.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/desktop-step-7.png"
+        }
+      ]
+    },
+    {
+      "name": "tooltip.cy.ts",
+      "path": "cypress/e2e/directives/tooltip.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "tooltip.cy.ts/mobile",
+          "percentage": 0.0009061004703659372,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/directives/tooltip.cy.ts",
+          "specFilename": "tooltip.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/tooltip.cy.ts/mobile.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/tooltip.cy.ts/mobile.png"
+        }
+      ]
+    },
+    {
       "name": "alertGroup.cy.ts",
       "path": "cypress/e2e/components/alertGroup.cy.ts",
       "tests": [
@@ -1015,106 +1115,6 @@
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/section.cy.ts/mobile.png",
           "diffPath": "",
           "comparisonPath": "cypress/cypress-visual-screenshots/comparison/section.cy.ts/mobile.png"
-        }
-      ]
-    },
-    {
-      "name": "spacing.cy.ts",
-      "path": "cypress/e2e/directives/spacing.cy.ts",
-      "tests": [
-        {
-          "status": "pass",
-          "name": "spacing.cy.ts/mobile-step-1",
-          "percentage": 0,
-          "failureThreshold": 0.002,
-          "specPath": "cypress/e2e/directives/spacing.cy.ts",
-          "specFilename": "spacing.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/mobile-step-1.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/mobile-step-1.png"
-        },
-        {
-          "status": "pass",
-          "name": "spacing.cy.ts/tablet-step-2",
-          "percentage": 0,
-          "failureThreshold": 0.002,
-          "specPath": "cypress/e2e/directives/spacing.cy.ts",
-          "specFilename": "spacing.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/tablet-step-2.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/tablet-step-2.png"
-        },
-        {
-          "status": "pass",
-          "name": "spacing.cy.ts/desktop-step-3",
-          "percentage": 0,
-          "failureThreshold": 0.002,
-          "specPath": "cypress/e2e/directives/spacing.cy.ts",
-          "specFilename": "spacing.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/desktop-step-3.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/desktop-step-3.png"
-        },
-        {
-          "status": "pass",
-          "name": "spacing.cy.ts/tablet-step-4",
-          "percentage": 0,
-          "failureThreshold": 0.002,
-          "specPath": "cypress/e2e/directives/spacing.cy.ts",
-          "specFilename": "spacing.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/tablet-step-4.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/tablet-step-4.png"
-        },
-        {
-          "status": "pass",
-          "name": "spacing.cy.ts/mobile-step-5",
-          "percentage": 0,
-          "failureThreshold": 0.002,
-          "specPath": "cypress/e2e/directives/spacing.cy.ts",
-          "specFilename": "spacing.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/mobile-step-5.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/mobile-step-5.png"
-        },
-        {
-          "status": "pass",
-          "name": "spacing.cy.ts/tablet-step-6",
-          "percentage": 0,
-          "failureThreshold": 0.002,
-          "specPath": "cypress/e2e/directives/spacing.cy.ts",
-          "specFilename": "spacing.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/tablet-step-6.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/tablet-step-6.png"
-        },
-        {
-          "status": "pass",
-          "name": "spacing.cy.ts/desktop-step-7",
-          "percentage": 0,
-          "failureThreshold": 0.002,
-          "specPath": "cypress/e2e/directives/spacing.cy.ts",
-          "specFilename": "spacing.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/spacing.cy.ts/desktop-step-7.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/spacing.cy.ts/desktop-step-7.png"
-        }
-      ]
-    },
-    {
-      "name": "tooltip.cy.ts",
-      "path": "cypress/e2e/directives/tooltip.cy.ts",
-      "tests": [
-        {
-          "status": "pass",
-          "name": "tooltip.cy.ts/mobile",
-          "percentage": 0.0009061004703659372,
-          "failureThreshold": 0.002,
-          "specPath": "cypress/e2e/directives/tooltip.cy.ts",
-          "specFilename": "tooltip.cy.ts",
-          "baselinePath": "cypress/cypress-visual-screenshots/baseline/tooltip.cy.ts/mobile.png",
-          "diffPath": "",
-          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/tooltip.cy.ts/mobile.png"
         }
       ]
     },
@@ -2726,9 +2726,9 @@
       ]
     }
   ],
-  "startedAt": "2023-11-23T21:12:34.222Z",
-  "endedAt": "2023-11-23T21:18:52.237Z",
-  "duration": 348594,
+  "startedAt": "2023-11-24T09:55:40.926Z",
+  "endedAt": "2023-11-24T10:01:57.762Z",
+  "duration": 347495,
   "browserName": "electron",
   "browserVersion": "114.0.5735.289",
   "cypressVersion": "13.5.0"

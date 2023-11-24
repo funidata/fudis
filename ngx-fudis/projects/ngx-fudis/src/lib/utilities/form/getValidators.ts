@@ -19,7 +19,8 @@ export const getMaxLengthFromValidator = (control: AbstractControl): number | un
 	}
 
 	const errors = validatorFn(new FormControl({ length: Infinity }));
-	return errors?.['maxLength'].value;
+
+	return errors?.['maxlength']?.requiredLength;
 };
 
 export const getMinLengthFromValidator = (control: AbstractControl): number | undefined => {
@@ -30,5 +31,28 @@ export const getMinLengthFromValidator = (control: AbstractControl): number | un
 	}
 
 	const errors = validatorFn(new FormControl({ length: -Infinity }));
-	return errors?.['minLength'].value;
+
+	return errors?.['minlength']?.requiredLength;
+};
+
+export const getMaxFromValidator = (control: AbstractControl): number | undefined => {
+	const validatorFn = control.validator;
+
+	if (validatorFn === null) {
+		return undefined;
+	}
+
+	const errors = validatorFn(new FormControl(Infinity)) ?? {};
+	return errors?.['max']?.max;
+};
+
+export const getMinFromValidator = (control: AbstractControl): number | undefined => {
+	const validatorFn = control.validator;
+
+	if (validatorFn === null) {
+		return undefined;
+	}
+
+	const errors = validatorFn(new FormControl(-Infinity)) ?? {};
+	return errors?.['min']?.min;
 };

@@ -7,7 +7,9 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import {
+	getMaxFromValidator,
 	getMaxLengthFromValidator,
+	getMinFromValidator,
 	getMinLengthFromValidator,
 	hasRequiredValidator,
 } from '../../../utilities/form/getValidators';
@@ -44,11 +46,13 @@ export class TextInputComponent extends InputBaseDirective implements OnInit, On
 	@Input() type: 'email' | 'number' | 'password' | 'tel' | 'text' | 'url' = 'text';
 
 	/**
-	 * Minimium number of characters allowed by minLength
+	 * Prefer FudisValidators.minLength over this
+	 * Minimium number of characters allowed by minLength.
 	 */
 	@Input() minLength: number | undefined = undefined;
 
 	/**
+	 * * Prefer FudisValidators.maxLength over this
 	 * Maximum number of characters allowed by maxLength
 	 */
 	@Input() maxLength: number | undefined = undefined;
@@ -69,8 +73,13 @@ export class TextInputComponent extends InputBaseDirective implements OnInit, On
 
 	ngOnChanges(): void {
 		this._required = this.required ?? hasRequiredValidator(this.control);
-		this.maxLength = this.maxLength ?? getMaxLengthFromValidator(this.control);
-		this.minLength = this.minLength ?? getMinLengthFromValidator(this.control);
+		if (this.type === 'number') {
+			this.minNumber = this.minNumber ?? getMinFromValidator(this.control);
+			this.maxNumber = this.maxNumber ?? getMaxFromValidator(this.control);
+		} else {
+			this.maxLength = this.maxLength ?? getMaxLengthFromValidator(this.control);
+			this.minLength = this.minLength ?? getMinLengthFromValidator(this.control);
+		}
 	}
 
 	ngAfterViewInit(): void {

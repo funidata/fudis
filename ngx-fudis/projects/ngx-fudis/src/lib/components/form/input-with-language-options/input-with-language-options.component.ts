@@ -11,6 +11,7 @@ import {
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 
 @Component({
 	selector: 'fudis-input-with-language-options',
@@ -165,14 +166,13 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 			});
 		} else {
 			Object.keys(this.formGroup.controls).forEach((control) => {
-				const nativeRequired = this.formGroup.controls[control].hasValidator(Validators.required);
+				const isRequired = hasRequiredValidator(this.formGroup.controls[control]);
 
-				const fudisRequired = !!this.formGroup.controls[control].validator?.('' as any as AbstractControl);
 				this._requiredControls = {
 					...this._requiredControls,
 					[control]: {
 						value: this.formGroup.controls[control].value,
-						required: nativeRequired || fudisRequired ? true : undefined,
+						required: isRequired ? true : undefined,
 					},
 				};
 			});
@@ -198,14 +198,13 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 			if (this._nonEmptyControls.length === 1) {
 				this._requiredControls = {};
 				Object.keys(this.formGroup.controls).forEach((control) => {
-					const nativeRequired = this.formGroup.controls[control].hasValidator(Validators.required);
+					const isRequired = hasRequiredValidator(this.formGroup.controls[control]);
 
-					const fudisRequired = !!this.formGroup.controls[control].validator?.('' as any as AbstractControl);
 					this._requiredControls = {
 						...this._requiredControls,
 						[control]: {
 							value: this.formGroup.controls[control].value,
-							required: this._nonEmptyControls.includes(control) || nativeRequired || fudisRequired ? true : undefined,
+							required: this._nonEmptyControls.includes(control) || isRequired ? true : undefined,
 						},
 					};
 				});

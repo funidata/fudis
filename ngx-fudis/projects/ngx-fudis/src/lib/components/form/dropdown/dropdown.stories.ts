@@ -51,7 +51,6 @@ const Template: StoryFn<DropdownComponent> = (args: DropdownComponent) => ({
 			[size]="size"
 			[multipleOption]="multipleOption"
 			[placeholder]="placeholder"
-			[errorMsg]="errorMsg"
 			[control]="control"
 			[options]="options"
 			[label]="label"

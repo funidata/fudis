@@ -1,5 +1,5 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, FormsModule, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { TextAreaComponent } from './text-area.component';
 
@@ -20,8 +20,6 @@ import { FudisValidators } from '../../../utilities/form/validators';
 			</fudis-text-area>
 			<fudis-text-area
 				[control]="secondTextAreaControl"
-				[minLength]="minLength"
-				[maxLength]="maxLength"
 				[label]="'Required Text Area with max and min character length'"
 				[helpText]="'This is an example Text Area with multiple validations.'">
 			</fudis-text-area>
@@ -93,7 +91,7 @@ const Template: StoryFn<TextAreaComponent> = (args: TextAreaComponent) => ({
 export const TextArea = Template.bind({});
 TextArea.args = {
 	label: 'Text Area label example',
-	control: new FormControl(''),
+	control: new FormControl('', [FudisValidators.minLength(5, 'Give at least 5 characters.'), Validators.maxLength(20)]),
 	helpText: 'Example help text',
 };
 
