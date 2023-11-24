@@ -8,7 +8,7 @@ import {
 	ViewEncapsulation,
 	effect,
 } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
 import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
@@ -19,6 +19,7 @@ import { FudisTranslationService } from '../../../../services/translation/transl
 import { DatepickerCustomDateAdapter } from '../date-common/datepicker-custom-date-adapter';
 import { updateLocale, updateMatDatePickerTranslations } from '../date-common/utilities';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
+import { hasRequiredValidator } from '../../../../utilities/form/getValidators';
 
 @Component({
 	selector: 'fudis-datepicker',
@@ -79,7 +80,7 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 	ngOnChanges(): void {
 		this._changeDetectorRef.detectChanges();
 
-		this._required = this.required ?? this.control.hasValidator(Validators.required);
+		this._required = this.required ?? hasRequiredValidator(this.control);
 	}
 
 	ngAfterViewInit(): void {

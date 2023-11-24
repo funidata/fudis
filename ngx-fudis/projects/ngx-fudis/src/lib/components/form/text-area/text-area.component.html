@@ -21,14 +21,12 @@
 		[attr.maxLength]="maxLength"
 		[attr.required]="_required ? true : null">
 	</textarea>
-	<ng-container *ngIf="helpText || errorMsg">
-		<fudis-guidance
-			[inputLabel]="label"
-			[maxLength]="maxLength"
-			[helpText]="helpText"
-			[for]="id"
-			[errorMsg]="errorMsg"
-			[control]="control">
-		</fudis-guidance>
-	</ng-container>
+	<fudis-guidance
+		*ngIf="!disableGuidance"
+		[inputLabel]="label"
+		[maxLength]="maxLength"
+		[helpText]="helpText"
+		[for]="id"
+		[errorMsg]="errorMsg"
+		[control]="control" />
 </div>

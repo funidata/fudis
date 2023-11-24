@@ -39,5 +39,11 @@
 		</mat-select>
 		<fudis-icon *ngIf="size !== 'xs'" class="fudis-dropdown__input__icon" [icon]="'chevron'" [rotate]="'cw-90'" />
 	</div>
-	<fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="id" [errorMsg]="errorMsg" [control]="control" />
+	<fudis-guidance
+		*ngIf="!disableGuidance"
+		[inputLabel]="label"
+		[helpText]="helpText"
+		[for]="id"
+		[errorMsg]="errorMsg"
+		[control]="control" />
 </div>

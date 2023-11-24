@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MockComponent } from 'ng-mocks';
@@ -13,9 +13,13 @@ import { AutocompleteComponent } from './autocomplete.component';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { FudisInputSize } from '../../../types/forms';
+import { FudisValidators } from '../../../utilities/form/validators';
 
 const autocompleteControl: FormControl = new FormControl('');
-const autocompleteRequiredControl: FormControl = new FormControl('', Validators.required);
+const autocompleteRequiredControl: FormControl = new FormControl(
+	'',
+	FudisValidators.required('This input is required')
+);
 
 describe('AutocompleteComponent', () => {
 	let component: AutocompleteComponent;
@@ -40,7 +44,6 @@ describe('AutocompleteComponent', () => {
 		component.control = autocompleteControl;
 		component.id = 'fudis-autocomplete-id';
 		component.label = 'Choose one option';
-		component.errorMsg = { required: 'This input is required' };
 		fixture.detectChanges();
 	});
 

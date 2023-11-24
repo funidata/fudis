@@ -1,12 +1,13 @@
 import { AfterContentInit, AfterViewInit, Component, Input, OnChanges, OnInit, effect } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { FudisDropdownOption, FudisInputSize } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
+import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 
 @Component({
 	selector: 'fudis-autocomplete',
@@ -92,7 +93,7 @@ export class AutocompleteComponent
 	}
 
 	ngOnChanges(): void {
-		this._required = this.required ?? this.control.hasValidator(Validators.required);
+		this._required = this.required ?? hasRequiredValidator(this.control);
 	}
 
 	/**

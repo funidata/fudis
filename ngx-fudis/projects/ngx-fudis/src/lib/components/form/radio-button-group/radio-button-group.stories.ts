@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FudisRadioButtonOption } from '../../../types/forms';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
 import readme from './readme.mdx';
+import { FudisValidators } from '../../../utilities/form/validators';
 
 const getDefaultValue = (options: FudisRadioButtonOption[]): string | boolean | undefined | null => {
 	const checkedValue = options.find((item) => item.checked);
@@ -14,27 +15,24 @@ const getDefaultValue = (options: FudisRadioButtonOption[]): string | boolean | 
 	template: `
 		<form [formGroup]="mainFormGroup">
 			<fudis-radio-button-group
+				*ngIf="mainFormGroup"
 				style="margin-bottom: 1rem;"
 				[title]="'Choose your preferred fruit'"
 				[helpText]="'Fruits are important for your health.'"
-				[errorMsg]="{ required: 'You must choose a fruit.' }"
-				*ngIf="mainFormGroup"
 				[control]="mainFormGroup.controls['first']"
 				[options]="fruitOptions" />
 			<fudis-radio-button-group
+				*ngIf="mainFormGroup"
 				style="margin-top: 2rem; margin-bottom: 1rem;"
 				[title]="'Choose a pet'"
 				[helpText]="'We all should have a pet.'"
-				[errorMsg]="{ required: 'You must choose a pet.' }"
-				*ngIf="mainFormGroup"
 				[control]="mainFormGroup.controls['second']"
 				[options]="petOptions" />
 			<fudis-radio-button-group
+				*ngIf="mainFormGroup"
 				style="margin-top: 2rem; margin-bottom: 1rem;"
 				[title]="'Choose a truth'"
 				[helpText]="'We all perceive truth individually.'"
-				[errorMsg]="{ required: 'You must choose a truth.' }"
-				*ngIf="mainFormGroup"
 				[control]="mainFormGroup.controls['third']"
 				[options]="booleanOptions" />
 		</form>
@@ -61,9 +59,9 @@ class RadioButtonGroupExampleComponent {
 	];
 
 	mainFormGroup: FormGroup = this._formBuilder.group({
-		first: new FormControl(getDefaultValue(this.fruitOptions), Validators.required),
-		second: new FormControl(getDefaultValue(this.petOptions), Validators.required),
-		third: new FormControl(null, Validators.required),
+		first: new FormControl(getDefaultValue(this.fruitOptions), FudisValidators.required('You must choose a fruit')),
+		second: new FormControl(getDefaultValue(this.petOptions), FudisValidators.required('You must choose a pet.')),
+		third: new FormControl(null, FudisValidators.required('You must choose a truth')),
 	});
 }
 

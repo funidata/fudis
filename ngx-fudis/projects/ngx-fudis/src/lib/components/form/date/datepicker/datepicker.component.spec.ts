@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MockComponent } from 'ng-mocks';
+import { FudisValidators } from '../../../../utilities/form/validators';
 import { IconComponent } from '../../../icon/icon.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { LabelComponent } from '../../label/label.component';
@@ -100,7 +101,7 @@ describe('DatepickerComponent', () => {
 
 		it('should have invalid class if datepicker is required, input is touched and no date has been chosen', () => {
 			const datepickerInput = fixture.nativeElement.querySelector('input');
-			const requiredControl = new FormControl(null, Validators.required);
+			const requiredControl = new FormControl(null, FudisValidators.required('Date is required'));
 			component.control = requiredControl;
 			fixture.detectChanges();
 

@@ -1,10 +1,10 @@
 import { Component, importProvidersFrom } from '@angular/core';
-import { ReactiveFormsModule, FormsModule, FormControl, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormControl } from '@angular/forms';
 import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { DateRangeComponent } from './date-range.component';
+import { FudisValidators } from '../../../../utilities/form/validators';
 
 import readme from './readme.mdx';
 
@@ -68,21 +68,19 @@ const TemplateDateRange: StoryFn<DateRangeComponent> = (args: DateRangeComponent
 			helpText: 'Select start date',
 			tooltip: 'Tooltip for first',
 			errorMsg: {
-				required: 'Start date is required',
 				matDatepickerParse: 'Start date is not a proper date',
 				matStartDateInvalid: 'Start date cannot be after end date',
 			},
-			control: new FormControl<Date | null>(null, Validators.required),
+			control: new FormControl<Date | null>(null, FudisValidators.required('Start date is required')),
 		},
 		endDate: {
 			label: 'End date',
 			helpText: 'Select end date',
 			errorMsg: {
-				required: 'End date is required',
 				matDatepickerParse: 'End date is not a proper date',
 				matEndDateInvalid: 'End date cannot be before start date',
 			},
-			control: new FormControl<Date | null>(null, Validators.required),
+			control: new FormControl<Date | null>(null, FudisValidators.required('End date is required')),
 		},
 	},
 	template: html` <fudis-date-range [startDate]="startDate" [endDate]="endDate" /> `,
@@ -100,13 +98,12 @@ const TemplateWithMinMax: StoryFn<DateRangeComponent> = (args: DateRangeComponen
 			maxDate: new Date('2023-05-07'),
 			tooltip: 'Tooltip for first',
 			errorMsg: {
-				required: 'Start date is required',
 				matDatepickerParse: 'Start date is not a proper date',
 				matDatepickerMin: 'Start date cannot be earlier than 5.5.2023',
 				matDatepickerMax: 'Start date cannot be later than 22.6.2023',
 				matStartDateInvalid: 'Start date cannot be after end date',
 			},
-			control: new FormControl<Date | null>(null, Validators.required),
+			control: new FormControl<Date | null>(null, FudisValidators.required('Start date is required')),
 		},
 		endDate: {
 			label: 'End date',
@@ -114,13 +111,12 @@ const TemplateWithMinMax: StoryFn<DateRangeComponent> = (args: DateRangeComponen
 			minDate: new Date('2023-05-15'),
 			maxDate: new Date('2023-05-25'),
 			errorMsg: {
-				required: 'End date is required',
 				matDatepickerParse: 'End date is not a proper date',
 				matDatepickerMin: 'End date cannot be earlier than 5.5.2023',
 				matDatepickerMax: 'End date cannot be later than 22.6.2023',
 				matEndDateInvalid: 'End date cannot be before start date',
 			},
-			control: new FormControl<Date | null>(null, Validators.required),
+			control: new FormControl<Date | null>(null, FudisValidators.required('End date is required')),
 		},
 	},
 	template: html`

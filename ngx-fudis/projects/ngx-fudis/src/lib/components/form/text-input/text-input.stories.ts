@@ -1,45 +1,43 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, FormsModule, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { TextInputComponent } from './text-input.component';
-import { FudisFormErrors } from '../../../types/forms';
+
 import readme from './readme.mdx';
+import { FudisValidators } from '../../../utilities/form/validators';
 
 @Component({
 	selector: 'example-text-input-with-form-control',
 	template: `
 		<form [formGroup]="mainFormGroup">
 			<fudis-text-input
-				[control]="mainFormGroup.controls['first']"
+				[control]="mainFormGroup.controls['basic']"
 				[label]="'Basic text input'"
 				[helpText]="'I do not have any validators.'" />
 			<fudis-text-input
-				[control]="mainFormGroup.controls['second']"
-				[errorMsg]="{ required: 'Missing a value.' }"
+				[control]="mainFormGroup.controls['required']"
 				[label]="'Required text input'"
 				[tooltip]="'This is a tooltip text'"
 				[tooltipPosition]="'right'"
 				[tooltipToggle]="false"
 				[helpText]="'Please add some content.'" />
 			<fudis-text-input
-				[control]="mainFormGroup.controls['third']"
-				[minLength]="minLength"
-				[maxLength]="maxLength"
+				[control]="mainFormGroup.controls['email']"
 				[label]="'Email'"
-				[errorMsg]="validatorMessages"
 				[type]="'email'"
 				[helpText]="'This is an example email input with multiple validations.'" />
 			<fudis-text-input
-				[control]="mainFormGroup.controls['fourth']"
+				[control]="mainFormGroup.controls['pattern']"
+				[label]="'Pattern'"
+				[helpText]="'Do not use low case letters!'" />
+			<fudis-text-input
+				[control]="mainFormGroup.controls['number']"
 				[label]="'Number input'"
-				[minNumber]="minNumber"
-				[maxNumber]="maxNumber"
-				[tooltip]="'You can choose any number between 1 and 99'"
+				[tooltip]="'You can choose any number between 1 and 5'"
 				[tooltipPosition]="'left'"
 				[tooltipToggle]="false"
 				[type]="'number'"
-				[size]="'sm'"
-				[errorMsg]="validatorMessages"></fudis-text-input>
+				[size]="'sm'" />
 		</form>
 	`,
 })
@@ -52,31 +50,33 @@ class TextInputWithFormControlExampleComponent {
 
 	minNumber = 1;
 
-	maxNumber = 99;
+	maxNumber = 5;
 
-	validatorsForThird = [
-		Validators.minLength(this.minLength),
-		Validators.maxLength(this.maxLength),
-		Validators.required,
-		Validators.email,
+	validatorsForEmail = [
+		FudisValidators.minLength(
+			this.minLength,
+			`Too short email. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`
+		),
+		FudisValidators.maxLength(this.maxLength, `Too long email.`),
+		FudisValidators.required('This is required field.'),
+		FudisValidators.email('Input must be an email address.'),
 	];
 
-	validatorsForFourth = [Validators.min(this.minNumber), Validators.max(this.maxNumber), Validators.required];
-
-	validatorMessages: FudisFormErrors = {
-		required: 'This is required field.',
-		email: 'Your input is not in email format.',
-		minlength: `Too short email. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,
-		maxlength: `Too long email. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,
-		min: `Given number is not inside the allowed range ${this.minNumber} - ${this.maxNumber}.`,
-		max: `Given number is not inside the allowed range ${this.minNumber} - ${this.maxNumber}.`,
-	};
+	validatorsForNumber = [
+		Validators.min(1),
+		FudisValidators.max(
+			this.maxNumber,
+			`Given number is not inside the allowed range ${this.minNumber} - ${this.maxNumber}.`
+		),
+		FudisValidators.required('This is required field.'),
+	];
 
 	mainFormGroup: FormGroup = this._formBuilder.group({
-		first: new FormControl(''),
-		second: new FormControl('', Validators.required),
-		third: new FormControl('', this.validatorsForThird),
-		fourth: new FormControl('', this.validatorsForFourth),
+		basic: new FormControl(''),
+		required: new FormControl('', FudisValidators.required('This is required field.')),
+		email: new FormControl('', this.validatorsForEmail),
+		number: new FormControl('', this.validatorsForNumber),
+		pattern: new FormControl(null, FudisValidators.pattern(/^[A-Z \d\W]+$/, 'YOU USED LOW CAPS! SHAME ON YOU!')),
 	});
 }
 
@@ -122,7 +122,7 @@ const Template: StoryFn<TextInputComponent> = (args: TextInputComponent) => ({
 export const TextInput = Template.bind({});
 TextInput.args = {
 	label: 'Text-input label example',
-	control: new FormControl(''),
+	control: new FormControl('', FudisValidators.required('This is required field.')),
 	helpText: 'Example help text',
 };
 

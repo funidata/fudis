@@ -1,6 +1,6 @@
 {
-  "total": 219,
-  "totalPassed": 219,
+  "total": 231,
+  "totalPassed": 231,
   "totalFailed": 0,
   "totalSuites": 30,
   "suites": [
@@ -1253,6 +1253,138 @@
           "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/mobile-search-6-cleared.png",
           "diffPath": "",
           "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/mobile-search-6-cleared.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/tablet-dropdown-1-init",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/tablet-dropdown-1-init.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/tablet-dropdown-1-init.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/mobile-dropdown-1-init",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/mobile-dropdown-1-init.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/mobile-dropdown-1-init.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/tablet-dropdown-2-focus",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/tablet-dropdown-2-focus.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/tablet-dropdown-2-focus.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/mobile-dropdown-2-focus",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/mobile-dropdown-2-focus.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/mobile-dropdown-2-focus.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/tablet-dropdown-3-type-number1",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/tablet-dropdown-3-type-number1.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/tablet-dropdown-3-type-number1.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/mobile-dropdown-3-type-number1",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/mobile-dropdown-3-type-number1.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/mobile-dropdown-3-type-number1.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/tablet-dropdown-4-selected",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/tablet-dropdown-4-selected.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/tablet-dropdown-4-selected.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/mobile-dropdown-4-selected",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/mobile-dropdown-4-selected.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/mobile-dropdown-4-selected.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/tablet-disabled-1-init",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/tablet-disabled-1-init.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/tablet-disabled-1-init.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/mobile-disabled-1-init",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/mobile-disabled-1-init.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/mobile-disabled-1-init.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/tablet-disabled-2-focus",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/tablet-disabled-2-focus.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/tablet-disabled-2-focus.png"
+        },
+        {
+          "status": "pass",
+          "name": "autocompleteSingleSelect.cy.ts/mobile-disabled-2-focus",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/form/autocompleteSingleSelect.cy.ts",
+          "specFilename": "autocompleteSingleSelect.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/autocompleteSingleSelect.cy.ts/mobile-disabled-2-focus.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/autocompleteSingleSelect.cy.ts/mobile-disabled-2-focus.png"
         }
       ]
     },
@@ -1656,7 +1788,7 @@
         {
           "status": "pass",
           "name": "form.cy.ts/desktop-large-3-change-language",
-          "percentage": 0.0004250225777990149,
+          "percentage": 0,
           "failureThreshold": 0.002,
           "specPath": "cypress/e2e/components/form/form.cy.ts",
           "specFilename": "form.cy.ts",
@@ -1678,7 +1810,7 @@
         {
           "status": "pass",
           "name": "form.cy.ts/tablet-3-change-language",
-          "percentage": 0.00038748933644018976,
+          "percentage": 0,
           "failureThreshold": 0.002,
           "specPath": "cypress/e2e/components/form/form.cy.ts",
           "specFilename": "form.cy.ts",
@@ -1711,7 +1843,7 @@
         {
           "status": "pass",
           "name": "form.cy.ts/desktop-4-fill-first-input",
-          "percentage": 0.0006401144456239864,
+          "percentage": 0,
           "failureThreshold": 0.002,
           "specPath": "cypress/e2e/components/form/form.cy.ts",
           "specFilename": "form.cy.ts",
@@ -1722,7 +1854,7 @@
         {
           "status": "pass",
           "name": "form.cy.ts/tablet-4-fill-first-input",
-          "percentage": 0.000602075875666341,
+          "percentage": 0,
           "failureThreshold": 0.002,
           "specPath": "cypress/e2e/components/form/form.cy.ts",
           "specFilename": "form.cy.ts",
@@ -2594,10 +2726,10 @@
       ]
     }
   ],
-  "startedAt": "2023-11-22T20:31:43.771Z",
-  "endedAt": "2023-11-22T20:49:19.266Z",
-  "duration": 1025310,
+  "startedAt": "2023-11-24T09:55:40.926Z",
+  "endedAt": "2023-11-24T10:01:57.762Z",
+  "duration": 347495,
   "browserName": "electron",
   "browserVersion": "114.0.5735.289",
-  "cypressVersion": "13.5.1"
+  "cypressVersion": "13.5.0"
 }

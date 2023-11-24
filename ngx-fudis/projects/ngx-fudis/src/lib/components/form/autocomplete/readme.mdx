@@ -47,7 +47,7 @@ Options array takes in objects with the following signature:
 
 #### As a required form field
 
-If Autocomplete is a required form field, include `Validators.required` in the form control validators and include a `required` error message in the `errorMsg` property.
+If Autocomplete is a required form field, include `FudisValidators.required()` in the form control validator with message parameter either as a string or as an observable string. E.g. `FudisValidators.required('This is required field')`.
 
 ### Error Handling
 

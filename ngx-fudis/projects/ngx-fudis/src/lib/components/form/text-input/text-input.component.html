@@ -24,14 +24,12 @@
 		class="fudis-text-input__input"
 		[attr.aria-describedby]="id + '_guidance'"
 		[attr.required]="_required ? true : null" />
-	<ng-container *ngIf="helpText || errorMsg">
-		<fudis-guidance
-			[inputLabel]="label"
-			[maxLength]="maxLength"
-			[helpText]="helpText"
-			[for]="id"
-			[errorMsg]="errorMsg"
-			[control]="control">
-		</fudis-guidance
-	></ng-container>
+	<fudis-guidance
+		*ngIf="!disableGuidance"
+		[inputLabel]="label"
+		[maxLength]="maxLength"
+		[helpText]="helpText"
+		[for]="id"
+		[errorMsg]="errorMsg"
+		[control]="control" />
 </div>

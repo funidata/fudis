@@ -29,16 +29,11 @@
 								[label]="t('label')"
 								[helpText]="t('helpText')"
 								[maxLength]="20"
-								[errorMsg]="{
-									required: t('error_required'),
-									minlength: t('notEnoughCharacters')
-								}"
 								[control]="testFormGroup.controls['textInput']"
 								[tooltip]="'This text-input has multiple validators: required, minlength and maxlength'" />
 							<fudis-radio-button-group
 								[title]="t('chooseTruth')"
 								[helpText]="t('chooseTruthHelp')"
-								[errorMsg]="{ required: t('chooseTruthError') }"
 								[control]="testFormGroup.controls['truth']"
 								[options]="radioButtonOptions" />
 							<fudis-dropdown
@@ -52,15 +47,11 @@
 								[options]="dropdownOptions"
 								[multipleOption]="true"
 								[control]="testFormGroup.controls['dropdownMulti']" />
-							<fudis-datepicker
-								[label]="'Select some date'"
-								[control]="testFormGroup.controls['date']"
-								[errorMsg]="{ required: 'Date is required' }" />
+							<fudis-datepicker [label]="'Select some date'" [control]="testFormGroup.controls['date']" />
 							<fudis-text-area
 								[label]="'Basic required text-area'"
 								[control]="testFormGroup.controls['textArea']"
-								[maxLength]="20"
-								[errorMsg]="{ required: t('error_required') }" />
+								[maxLength]="20" />
 							<fudis-input-with-language-options
 								[label]="'At least one required'"
 								[formGroup]="testFormGroup.controls['withLanguages']"
@@ -82,14 +73,12 @@
 					[variant]="'dropdown'"
 					[id]="'dropdown-1234'"
 					[options]="multipleOptions"
-					[control]="testFormGroup.controls['autocompleteDropdown']"
-					[errorMsg]="{ required: t('error_required') }" />
+					[control]="testFormGroup.controls['autocompleteDropdown']" />
 				<fudis-heading [level]="3" [size]="'md'">Single-select search</fudis-heading>
 				<fudis-autocomplete
 					[label]="'Search item'"
 					[options]="multipleOptions"
-					[control]="testFormGroup.controls['autocompleteSearch']"
-					[errorMsg]="{ required: t('error_required') }" />
+					[control]="testFormGroup.controls['autocompleteSearch']" />
 				<fudis-heading [level]="3" [size]="'md'">Autocomplete multi-select dropdown</fudis-heading>
 				<fudis-autocomplete-multi-select [label]="'Search and choose items'" [options]="multipleOptions" />
 			</fudis-grid>

@@ -6,6 +6,7 @@ import { TextInputComponent } from './text-input.component';
 import { LabelComponent } from '../label/label.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { FudisInputSize } from '../../../types/forms';
+import { FudisValidators } from '../../../utilities/form/validators';
 
 const textInputControl: FormControl = new FormControl('');
 
@@ -82,14 +83,14 @@ describe('TextInputComponent', () => {
 
 	describe('Control', () => {
 		it('should set control as invalid if required text-input is touched and empty', () => {
-			component.control = new FormControl('', Validators.required);
+			component.control = new FormControl('', FudisValidators.required('This field is required'));
 
 			expect(component.control.value).toEqual('');
 			expect(component.control.invalid).toBeTruthy();
 		});
 
 		it('should set control as invalid if text is too short according to given minLength validator value', () => {
-			component.control = new FormControl('', [Validators.minLength(10)]);
+			component.control = new FormControl('', [FudisValidators.minLength(10, 'Too short')]);
 			component.control.patchValue('too short');
 
 			expect(component.control.value).toEqual('too short');
@@ -97,7 +98,7 @@ describe('TextInputComponent', () => {
 		});
 
 		it('should set control as invalid if number is not respective to given min validator value', () => {
-			component.control = new FormControl('', [Validators.min(1)]);
+			component.control = new FormControl('', [FudisValidators.min(1, 'Too small!')]);
 			component.control.patchValue('-10');
 
 			expect(component.control.value).toEqual('-10');

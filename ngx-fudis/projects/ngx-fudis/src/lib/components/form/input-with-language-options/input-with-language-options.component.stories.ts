@@ -1,12 +1,12 @@
 import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/angular';
 
-import { ReactiveFormsModule, FormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormControl, FormGroup } from '@angular/forms';
 import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { BehaviorSubject } from 'rxjs';
 import { InputWithLanguageOptionsComponent } from './input-with-language-options.component';
-import { FudisGroupValidator } from '../../../utilities/form/validators';
+import { FudisGroupValidators, FudisValidators } from '../../../utilities/form/validators';
 import { FudisInputWithLanguageOptionsFormGroup } from '../../../types/forms';
 
 export default {
@@ -36,17 +36,6 @@ const TemplateAllRequired: StoryFn = () => ({
 		id: 'unique-input-id-superhero-name',
 		label: 'Your superhero name',
 		helpText: 'Please provide superhero name in all languages.',
-		groupErrorMsg: {
-			english: {
-				required: 'Missing superhero name on English.',
-			},
-			finnish: {
-				required: 'Missing superhero name on Finnish.',
-			},
-			swedish: {
-				required: 'Missing superhero name on Swedish.',
-			},
-		},
 		maxLength: 22,
 		languageOptions: [
 			{ value: 'finnish', viewValue: 'FI' },
@@ -54,9 +43,18 @@ const TemplateAllRequired: StoryFn = () => ({
 			{ value: 'english', viewValue: 'EN' },
 		],
 		formGroup: new FormGroup<FudisInputWithLanguageOptionsFormGroup>({
-			finnish: new FormControl<string | null>(null, [Validators.required, Validators.maxLength(22)]),
-			swedish: new FormControl<string | null>(null, [Validators.required, Validators.maxLength(22)]),
-			english: new FormControl<string | null>(null, [Validators.required, Validators.maxLength(22)]),
+			finnish: new FormControl<string | null>(null, [
+				FudisValidators.required('Missing superhero name on Finnish.'),
+				FudisValidators.maxLength(22, 'Too long name'),
+			]),
+			swedish: new FormControl<string | null>(null, [
+				FudisValidators.required('Missing superhero name on Swedish.'),
+				FudisValidators.maxLength(22, 'Too long name'),
+			]),
+			english: new FormControl<string | null>(null, [
+				FudisValidators.required('Missing superhero name on English.'),
+				FudisValidators.maxLength(22, 'Too long name'),
+			]),
 		}),
 	},
 	template: html`
@@ -84,11 +82,11 @@ const TemplateOneRequired: StoryFn = () => ({
 		],
 		formGroup: new FormGroup<FudisInputWithLanguageOptionsFormGroup>(
 			{
-				finnish: new FormControl<string | null>(null, [Validators.maxLength(30)]),
-				swedish: new FormControl<string | null>(null, [Validators.maxLength(30)]),
-				english: new FormControl<string | null>(null, [Validators.maxLength(30)]),
+				finnish: new FormControl<string | null>(null, [FudisValidators.maxLength(30, 'Too long name')]),
+				swedish: new FormControl<string | null>(null, [FudisValidators.maxLength(30, 'Too long name')]),
+				english: new FormControl<string | null>(null, [FudisValidators.maxLength(30, 'Too long name')]),
 			},
-			[FudisGroupValidator.atLeastOneRequired(new BehaviorSubject('Give name in at least in one language'))]
+			[FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Give name in at least in one language'))]
 		),
 	},
 	template: html`

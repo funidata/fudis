@@ -1,10 +1,11 @@
 // eslint-disable-next-line max-classes-per-file
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ComponentType } from '@angular/cdk/portal';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 import readme from './readme.mdx';
+import { FudisValidators } from '../../utilities/form/validators';
 
 @Component({
 	selector: 'example-dialog-content',
@@ -85,8 +86,7 @@ class DialogExampleContentComponent {}
 								[id]="'example-input-power-animal'"
 								[label]="'What is your power animal?'"
 								[control]="exampleDialogFormGroup.controls['powerAnimal']"
-								[helpText]="'Please add some values'"
-								[errorMsg]="{ required: 'This is required field.' }" />
+								[helpText]="'Please add some values'" />
 						</form>
 					</ng-container>
 				</fudis-dialog-content>
@@ -117,7 +117,7 @@ class DialogExampleLauncherComponent implements OnInit {
 	ngOnInit(): void {
 		this.dialogContentComponent = DialogExampleContentComponent;
 		this.exampleDialogFormGroup = this._formBuilder.group({
-			powerAnimal: new FormControl('', Validators.required),
+			powerAnimal: new FormControl('', FudisValidators.required('This is required field.')),
 		});
 	}
 

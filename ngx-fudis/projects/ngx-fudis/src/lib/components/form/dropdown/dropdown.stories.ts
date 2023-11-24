@@ -1,9 +1,10 @@
 import { Meta, applicationConfig, StoryFn } from '@storybook/angular';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { DropdownComponent } from './dropdown.component';
 import readme from './readme.mdx';
+import { FudisValidators } from '../../../utilities/form/validators';
 
 export default {
 	title: 'Components/Form/Dropdown',
@@ -50,7 +51,6 @@ const Template: StoryFn<DropdownComponent> = (args: DropdownComponent) => ({
 			[size]="size"
 			[multipleOption]="multipleOption"
 			[placeholder]="placeholder"
-			[errorMsg]="errorMsg"
 			[control]="control"
 			[options]="options"
 			[label]="label"
@@ -65,11 +65,13 @@ const Template: StoryFn<DropdownComponent> = (args: DropdownComponent) => ({
 
 export const SingleSelect = Template.bind({});
 SingleSelect.args = {
-	errorMsg: { required: "It is necessary to choose a pet. It's good for your health!" },
 	label: 'Select a pet',
 	size: 'md',
 	placeholder: 'Choose a pet',
-	control: new FormControl(null, Validators.required),
+	control: new FormControl(
+		null,
+		FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
+	),
 	helpText: 'All pets are equally important, but for sake of this example please pick one.',
 	selectedOptions: { value: 'value-1-dog', viewValue: 'Dog' },
 	options: [
@@ -84,16 +86,15 @@ SingleSelect.args = {
 
 export const MultiSelect = Template.bind({});
 MultiSelect.args = {
-	errorMsg: {
-		required: "It is necessary to choose multiple pets. It's even better for your health!",
-		minlength: 'Choose at least two pets',
-		maxlength: "That's probably too much already.",
-	},
 	multipleOption: true,
 	label: 'Select from two to three pets',
 	size: 'lg',
 	placeholder: 'Choose pets',
-	control: new FormControl(null, [Validators.required, Validators.minLength(2), Validators.maxLength(3)]),
+	control: new FormControl(null, [
+		FudisValidators.required("It is necessary to choose multiple pets. It's even better for your health!"),
+		FudisValidators.minLength(2, 'Choose at least two pets'),
+		FudisValidators.maxLength(3, "That's probably too much already."),
+	]),
 	helpText: 'All pets are equally important, but for sake of this example please pick two to three pets.',
 	tooltip: 'Platypus is the right choice',
 	tooltipPosition: 'below',

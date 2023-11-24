@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-underscore-dangle */
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import {
 	FudisCheckboxOption,
@@ -10,7 +10,7 @@ import {
 } from 'projects/ngx-fudis/src/lib/types/forms';
 import { untilDestroyed } from 'projects/ngx-fudis/src/lib/utilities/untilDestroyed';
 import { FudisErrorSummaryService } from 'ngx-fudis';
-import { FudisGroupValidator } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
+import { FudisGroupValidators, FudisValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
 import { FudisDropdownLanguageOption, FudisInputWithLanguageOptionsFormGroup } from 'dist/ngx-fudis/lib/types/forms';
 
 type MyForm = {
@@ -59,14 +59,22 @@ export class AppFormExampleComponent implements OnInit {
 	testFormGroup = new FormGroup<MyForm>({
 		dropdown: new FormControl<FudisDropdownOption | null>(this.dropdownOptions[2]),
 		dropdownMulti: new FormControl<FudisDropdownOption[] | null>([this.dropdownOptions[2], this.dropdownOptions[4]]),
-		textArea: new FormControl<string | null>(null, Validators.required),
+		textArea: new FormControl<string | null>(
+			null,
+			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
+		),
 		textInput: new FormControl<string | null | number>(null, [
-			Validators.required,
-			Validators.minLength(5),
-			Validators.maxLength(20),
+			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required')),
+			FudisValidators.minLength(5, this._translocoService.selectTranslateObject('form_errors.notEnoughCharacters')),
 		]),
-		truth: new FormControl<boolean | null>(null, Validators.required),
-		date: new FormControl<Date | null>(null, Validators.required),
+		truth: new FormControl<boolean | null>(
+			null,
+			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
+		),
+		date: new FormControl<Date | null>(
+			null,
+			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
+		),
 		checkboxFormGroup: new FormGroup(
 			{
 				blueberry: new FormControl<FudisCheckboxOption | null>(null),
@@ -75,25 +83,31 @@ export class AppFormExampleComponent implements OnInit {
 				strawberry: new FormControl<FudisCheckboxOption | null>(null),
 			},
 			[
-				FudisGroupValidator.min({
+				FudisGroupValidators.min({
 					value: 2,
 					message: this._translocoService.selectTranslate('chooseBerryErrorMin'),
 				}),
-				FudisGroupValidator.max({
+				FudisGroupValidators.max({
 					value: 3,
 					message: this._translocoService.selectTranslate('chooseBerryErrorMax'),
 				}),
 			]
 		),
-		autocompleteDropdown: new FormControl<FudisDropdownOption | null>(null, Validators.required),
-		autocompleteSearch: new FormControl<FudisDropdownOption | null>(null),
+		autocompleteDropdown: new FormControl<FudisDropdownOption | null>(
+			null,
+			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
+		),
+		autocompleteSearch: new FormControl<FudisDropdownOption | null>(
+			null,
+			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
+		),
 		withLanguages: new FormGroup<FudisInputWithLanguageOptionsFormGroup>(
 			{
 				finnish: new FormControl<string | null>(null),
 				swedish: new FormControl<string | null>(null),
 				english: new FormControl<string | null>(null),
 			},
-			[FudisGroupValidator.atLeastOneRequired(this._translocoService.selectTranslate('error_one_required'))]
+			[FudisGroupValidators.atLeastOneRequired(this._translocoService.selectTranslate('error_one_required'))]
 		),
 	});
 

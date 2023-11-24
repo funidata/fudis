@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MockComponent } from 'ng-mocks';
@@ -10,6 +10,7 @@ import { LabelComponent } from '../label/label.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { FudisDropdownOption, FudisInputSize } from '../../../types/forms';
 import { IconComponent } from '../../icon/icon.component';
+import { FudisValidators } from '../../../utilities/form/validators';
 
 const dropdownOptions: FudisDropdownOption[] = [
 	{ value: 1, viewValue: 'Dog' },
@@ -57,7 +58,7 @@ describe('DropdownComponent', () => {
 	}
 
 	it('should create', () => {
-		component.control = new FormControl(null, Validators.required);
+		component.control = new FormControl(null, FudisValidators.required('Selection is required'));
 		component.options = dropdownOptions;
 
 		expect(component).toBeTruthy();
@@ -65,14 +66,14 @@ describe('DropdownComponent', () => {
 
 	describe('Control', () => {
 		it('should set control as invalid if required dropdown is touched and empty', () => {
-			component.control = new FormControl(null, Validators.required);
+			component.control = new FormControl(null, FudisValidators.required('Selection is required'));
 
 			expect(component.control.value).toEqual(null);
 			expect(component.control.invalid).toBeTruthy();
 		});
 
 		it('should set control as invalid if control value length does not match to given minLength validator value', () => {
-			component.control = new FormControl(null, [Validators.minLength(2)]);
+			component.control = new FormControl(null, [FudisValidators.minLength(2, 'Too few selections!')]);
 			component.control.patchValue([dropdownOptions[0]]);
 
 			expect(component.control.value?.length).toEqual(1);
@@ -80,7 +81,7 @@ describe('DropdownComponent', () => {
 		});
 
 		it('should set control as invalid if control value length is bigger than given maxLength validator value', () => {
-			component.control = new FormControl(null, [Validators.maxLength(2)]);
+			component.control = new FormControl(null, [FudisValidators.maxLength(2, 'Too many selected')]);
 			component.control.patchValue(dropdownOptions);
 
 			expect(component.control.value?.length).toEqual(3);

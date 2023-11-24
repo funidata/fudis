@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input, OnChanges, OnInit, effect } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
 	FudisInputWithLanguageOptionsFormGroup,
 	FudisDropdownOption,
@@ -11,6 +11,7 @@ import {
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 
 @Component({
 	selector: 'fudis-input-with-language-options',
@@ -165,11 +166,13 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 			});
 		} else {
 			Object.keys(this.formGroup.controls).forEach((control) => {
+				const isRequired = hasRequiredValidator(this.formGroup.controls[control]);
+
 				this._requiredControls = {
 					...this._requiredControls,
 					[control]: {
 						value: this.formGroup.controls[control].value,
-						required: this.formGroup.controls[control].hasValidator(Validators.required) ? true : undefined,
+						required: isRequired ? true : undefined,
 					},
 				};
 			});
@@ -195,29 +198,31 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 			if (this._nonEmptyControls.length === 1) {
 				this._requiredControls = {};
 				Object.keys(this.formGroup.controls).forEach((control) => {
+					const isRequired = hasRequiredValidator(this.formGroup.controls[control]);
+
 					this._requiredControls = {
 						...this._requiredControls,
 						[control]: {
 							value: this.formGroup.controls[control].value,
-							required:
-								this._nonEmptyControls.includes(control) ||
-								this.formGroup.controls[control].hasValidator(Validators.required)
-									? true
-									: undefined,
+							required: this._nonEmptyControls.includes(control) || isRequired ? true : undefined,
 						},
 					};
 				});
 			}
 
-			// If more than one control are not empty remove required unless they have Validators.required
+			// If two or more controls have a value, remove visible required text unless control has FudisValidators.required() or Validators.required
 			if (this._atLeastOneRequired && this._nonEmptyControls.length > 1) {
 				this._requiredControls = {};
 				Object.keys(this.formGroup.controls).forEach((control) => {
+					const nativeRequired = this.formGroup.controls[control].hasValidator(Validators.required);
+
+					const fudisRequired = !!this.formGroup.controls[control].validator?.('' as any as AbstractControl);
+
 					this._requiredControls = {
 						...this._requiredControls,
 						[control]: {
 							value: this.formGroup.controls[control].value,
-							required: this.formGroup.controls[control].hasValidator(Validators.required) ? this.required : undefined,
+							required: nativeRequired || fudisRequired ? this.required : undefined,
 						},
 					};
 				});

@@ -35,7 +35,8 @@ describe('Text Input screenshot', () => {
 		cy.get('#fudis-text-input-3').type('hey!');
 		cy.get('#fudis-guidance-3-errors').invoke('attr', 'class', 'fudis-guidance__errors--visible');
 		cy.get('#fudis-text-input-4').focus();
-		cy.get('#fudis-text-input-4').type('1');
+		cy.get('#fudis-text-input-4').type("MANNY! you couldn't find a sale AT A YACHT CLUB!!!");
+		cy.get('#fudis-guidance-4-errors').invoke('attr', 'class', 'fudis-guidance__errors--visible');
 		fudisScreenshots(configType1);
 		cy.get('#fudis-text-input-3').focus();
 		cy.get('#fudis-text-input-3').clear();

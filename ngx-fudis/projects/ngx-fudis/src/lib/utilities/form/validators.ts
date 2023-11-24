@@ -1,21 +1,117 @@
-import { FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-interface FudisValidationErrors extends ValidationErrors {
-	[key: string]: { message: Observable<string>; value?: number };
+export type FudisValidatorMessage = Observable<string> | string;
+export interface FudisValidationErrors extends ValidationErrors {
+	[key: string]: { message: FudisValidatorMessage; value?: any } | null;
 }
 
-interface FudisGroupValidatorMinMaxSettings {
+export interface FudisGroupValidatorsMinMaxSettings {
 	value: number;
 	message: Observable<string>;
 }
 
-interface FudisGroupValidatorFn extends ValidatorFn {
-	(controlGroup: FormGroup): FudisValidationErrors | null;
+export interface FudisValidatorFn extends ValidatorFn {
+	(control: AbstractControl): FudisValidationErrors | null;
 }
 
-export module FudisGroupValidator {
-	export function atLeastOneRequired(message: Observable<string>): FudisGroupValidatorFn {
+/**
+ * Form Control Validators
+ */
+
+/**
+ * Fudis version of Validators.required
+ */
+export module FudisValidators {
+	export function required(message: FudisValidatorMessage): FudisValidatorFn {
+		return (control: AbstractControl) => {
+			if (!Validators.required(control)) {
+				return null;
+			}
+			return { required: { message } };
+		};
+	}
+
+	export function email(message: FudisValidatorMessage): FudisValidatorFn {
+		return (control: AbstractControl) => {
+			if (!Validators.email(control)) {
+				return null;
+			}
+			return { email: { message } };
+		};
+	}
+
+	export function maxLength(length: number, message: FudisValidatorMessage): FudisValidatorFn {
+		return (control: AbstractControl) => {
+			if (!Validators.maxLength(length)(control) || length < 1) {
+				return null;
+			}
+			return { maxlength: { message, requiredLength: length } };
+		};
+	}
+
+	export function minLength(length: number, message: FudisValidatorMessage): FudisValidatorFn {
+		return (control: AbstractControl) => {
+			if (!Validators.minLength(length)(control) || length < 1) {
+				return null;
+			}
+			return {
+				minlength: {
+					message,
+					requiredLength: length,
+				},
+			};
+		};
+	}
+
+	export function min(minValue: number, message: FudisValidatorMessage): FudisValidatorFn {
+		return (control: AbstractControl) => {
+			if (!Validators.min(minValue)(control)) {
+				return null;
+			}
+			return {
+				min: {
+					message,
+					min: minValue,
+				},
+			};
+		};
+	}
+
+	export function max(maxValue: number, message: FudisValidatorMessage): FudisValidatorFn {
+		return (control: AbstractControl) => {
+			if (!Validators.max(maxValue)(control)) {
+				return null;
+			}
+			return {
+				max: {
+					message,
+					max: maxValue,
+				},
+			};
+		};
+	}
+
+	export function pattern(regex: string | RegExp, message: FudisValidatorMessage): FudisValidatorFn {
+		return (control: AbstractControl) => {
+			if (!Validators.pattern(regex)(control)) {
+				return null;
+			}
+
+			return {
+				pattern: {
+					message,
+				},
+			};
+		};
+	}
+}
+
+/**
+ * Form Group Validators
+ */
+export module FudisGroupValidators {
+	export function atLeastOneRequired(message: Observable<string>): FudisValidatorFn {
 		return (controlGroup: any): FudisValidationErrors | null => {
 			const { controls } = controlGroup;
 
@@ -38,7 +134,7 @@ export module FudisGroupValidator {
 		};
 	}
 
-	export function min(settings: FudisGroupValidatorMinMaxSettings): FudisGroupValidatorFn {
+	export function min(settings: FudisGroupValidatorsMinMaxSettings): FudisValidatorFn {
 		return (controlGroup: any): FudisValidationErrors | null => {
 			const { controls } = controlGroup;
 			let amountOfSelected = 0;
@@ -60,7 +156,7 @@ export module FudisGroupValidator {
 		};
 	}
 
-	export function max(settings: FudisGroupValidatorMinMaxSettings): FudisGroupValidatorFn {
+	export function max(settings: FudisGroupValidatorsMinMaxSettings): FudisValidatorFn {
 		return (controlGroup: any): FudisValidationErrors | null => {
 			const { controls } = controlGroup;
 			let amountOfSelected = 0;

@@ -1,21 +1,15 @@
 import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/angular';
 
-import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { Component, OnInit, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RouterModule } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import {
-	FudisDropdownOption,
-	FudisRadioButtonOption,
-	FudisFormGroupErrors,
-	FudisFormErrors,
-	FudisDateRangeItem,
-} from '../../../types/forms';
+import { FudisDropdownOption, FudisRadioButtonOption, FudisFormErrors, FudisDateRangeItem } from '../../../types/forms';
 
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
-import { FudisGroupValidator } from '../../../utilities/form/validators';
+import { FudisGroupValidators, FudisValidators } from '../../../utilities/form/validators';
 import { FormComponent } from './form.component';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
@@ -70,7 +64,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 													[visible]="true"
 													[focusId]="fieldsetId"
 													[label]="'Basic info'"
-													[message]="'There might be some errors in the fieldset'" />
+													[message]="'There might be some errors in the fieldset.'" />
 											</fudis-notification>
 										</ng-template>
 										<ng-template fudisContent type="fieldset">
@@ -126,8 +120,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 													[id]="'unique-input-3'"
 													[control]="formExample.controls['teacher']"
 													[label]="'Responsible teacher'"
-													[helpText]="'Someone has to be responsible for this.'"
-													[errorMsg]="errorTeacher" />
+													[helpText]="'Someone has to be responsible for this.'" />
 												<fudis-text-input
 													[id]="'unique-input-4'"
 													[helpText]="inputHelpText"
@@ -175,35 +168,8 @@ class FormContentExampleComponent implements OnInit {
 		{ key: 'Another important person', value: 'Mara Jade' },
 	];
 
-	errorDescription: FudisFormGroupErrors = {
-		english: {
-			required: 'Missing description in English.',
-			minlength: 'Description should at least 10 characters.',
-		},
-		swedish: { required: 'Missing description in Swedish.', minlength: 'Description should at least 10 characters.' },
-		finnish: {
-			required: 'Missing description in Finnish',
-			minlength: 'Description should at least 10 characters',
-		},
-	};
-
-	errorTeacher: FudisFormErrors = {
-		required: "Missing teacher's name who is responsible for this course.",
-	};
-
-	errorEmail: FudisFormErrors = {
-		required: 'Missing email contact.',
-		minlength: 'Email should be at least 5 characters.',
-		email: 'Input must be an email address.',
-	};
-
 	errorImportantDate: FudisFormErrors = {
-		required: 'Start date is missing.',
 		matDatepickerParse: 'Date should be in dd.mm.yyyy format.',
-	};
-
-	errorCourseType: FudisFormErrors = {
-		required: 'Course type must be selected.',
 	};
 
 	formExample = new FormGroup({
@@ -213,12 +179,21 @@ class FormContentExampleComponent implements OnInit {
 				swedish: new FormControl(null),
 				english: new FormControl(null),
 			},
-			[FudisGroupValidator.atLeastOneRequired(new BehaviorSubject('Course name is missing.'))]
+			[FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Course name is missing.'))]
 		),
 		description: new FormGroup({
-			finnish: new FormControl(null, [Validators.required, Validators.minLength(10)]),
-			swedish: new FormControl(null, [Validators.required, Validators.minLength(10)]),
-			english: new FormControl(null, [Validators.required, Validators.minLength(10)]),
+			finnish: new FormControl(null, [
+				FudisValidators.required('Missing description in Finnish.'),
+				FudisValidators.minLength(10, 'Description should at least 10 characters.'),
+			]),
+			swedish: new FormControl(null, [
+				FudisValidators.required('Missing description in Swedish.'),
+				FudisValidators.minLength(10, 'Description should at least 10 characters.'),
+			]),
+			english: new FormControl(null, [
+				FudisValidators.required('Missing description in English.'),
+				FudisValidators.minLength(10, 'Description should at least 10 characters.'),
+			]),
 		}),
 		courseBooks: new FormGroup(
 			{
@@ -227,16 +202,23 @@ class FormContentExampleComponent implements OnInit {
 				third: new FormControl(null),
 			},
 			[
-				FudisGroupValidator.min({ value: 1, message: new BehaviorSubject('No book selected') }),
-				FudisGroupValidator.max({ value: 2, message: new BehaviorSubject('Too many selected') }),
+				FudisGroupValidators.min({ value: 1, message: new BehaviorSubject('No book selected.') }),
+				FudisGroupValidators.max({ value: 2, message: new BehaviorSubject('Too many selected.') }),
 			]
 		),
-		teacher: new FormControl(null, Validators.required),
-		email: new FormControl(null, [Validators.required, Validators.email, Validators.minLength(5)]),
-		importantDate: new FormControl(null, Validators.required),
-		courseType: new FormControl(null, Validators.required),
-		startDate: new FormControl<Date | null>(null, Validators.required),
-		endDate: new FormControl<Date | null>(null, Validators.required),
+		teacher: new FormControl(
+			null,
+			FudisValidators.required("Missing teacher's name who is responsible for this course.")
+		),
+		email: new FormControl(null, [
+			FudisValidators.required('Missing email contact.'),
+			FudisValidators.email('Input must be an email address.'),
+			FudisValidators.minLength(5, 'Email should be at least 5 characters.'),
+		]),
+		importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
+		courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
+		startDate: new FormControl<Date | null>(null, FudisValidators.required('Start date is required.')),
+		endDate: new FormControl<Date | null>(null, FudisValidators.required('End date is required.')),
 	});
 
 	languageOptions: FudisDropdownOption[] = [
@@ -254,7 +236,6 @@ class FormContentExampleComponent implements OnInit {
 		control: this.formExample.controls.startDate,
 		label: 'Start date',
 		errorMsg: {
-			required: 'Start date is required',
 			matDatepickerParse: 'Start date is not proper date',
 			matStartDateInvalid: 'Start date cannot be after end date',
 		},
@@ -264,7 +245,6 @@ class FormContentExampleComponent implements OnInit {
 		control: this.formExample.controls.endDate,
 		label: 'End date',
 		errorMsg: {
-			required: 'End date is required',
 			matDatepickerParse: 'End date is not proper date',
 			matEndDateInvalid: 'End date cannot be before start date',
 		},

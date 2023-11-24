@@ -48,7 +48,7 @@ myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
 
 #### As a required form field and at least one required selection
 
-To display visible 'required' text with the fieldset group, set `required` input as true to Checkbox Group and include validator `FudisGroupValidator.atLeastOneRequired()` in the validators array of `formGroup`.
+To display visible 'required' text with the fieldset group, set `required` input as true to Checkbox Group and include validator `FudisGroupValidators.atLeastOneRequired()` in the validators array of `formGroup`.
 
 ```
 // In HTML template
@@ -72,7 +72,7 @@ myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
 	first: new FormControl<boolean | null | undefined>(null),
 	second: new FormControl<boolean | null | undefined>(null),
 	},
-	[FudisGroupValidator.atLeastOneRequired(new BehaviorSubject('Select at least one checkbox!'))]
+	[FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Select at least one checkbox!'))]
 );
 
 
@@ -80,7 +80,7 @@ myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
 
 #### Minimum and maximum selection validation
 
-If checkbox-group fieldset has minimum and/or maximum options to be selected, form field include `FudisGroupValidator.min` and/or `FudisGroupValidator.max` in the group validators.
+If checkbox-group fieldset has minimum and/or maximum options to be selected, form field include `FudisGroupValidators.min` and/or `FudisGroupValidators.max` in the group validators.
 
 ```
 // In TypeScript file
@@ -93,8 +93,8 @@ myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
 		forth: new FormControl<boolean | null | undefined>(null),
 	},
 	[
-		FudisGroupValidator.min({value: 2, message: new BehaviorSubject('Too few selected!')}),
-		FudisGroupValidator.max({value: 3, message: new BehaviorSubject('Too many selected!')})
+		FudisGroupValidators.min({value: 2, message: new BehaviorSubject('Too few selected!')}),
+		FudisGroupValidators.max({value: 3, message: new BehaviorSubject('Too many selected!')})
 	]
 );
 ```
