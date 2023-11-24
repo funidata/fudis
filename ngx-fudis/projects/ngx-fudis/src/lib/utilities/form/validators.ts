@@ -58,6 +58,7 @@ export module FudisValidators {
 			return {
 				minLength: {
 					message,
+					value: length,
 				},
 			};
 		};
@@ -71,6 +72,7 @@ export module FudisValidators {
 			return {
 				min: {
 					message,
+					value: minValue,
 				},
 			};
 		};
@@ -84,6 +86,7 @@ export module FudisValidators {
 			return {
 				max: {
 					message,
+					value: message,
 				},
 			};
 		};
