@@ -98,6 +98,9 @@ import { AlertComponent } from './components/alert/alert/alert.component';
 import { AlertGroupComponent } from './components/alert/alert-group/alert-group.component';
 import { FudisAlertService } from './services/alert/alert.service';
 import { FudisBreakpointService } from './services/breakpoint/breakpoint.service';
+import { SelectComponent } from './components/form/select/select.component';
+import { SelectItemComponent } from './components/form/select/select-item/select-item.component';
+import { SelectGroupComponent } from './components/form/select/select-group/select-group.component';
 
 @NgModule({
 	/*
@@ -162,6 +165,9 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		RadioButtonComponent,
 		RadioButtonGroupComponent,
 		SectionComponent,
+		SelectComponent,
+		SelectGroupComponent,
+		SelectItemComponent,
 		SpacingApiDirective,
 		SpacingDirective,
 		TextInputComponent,
@@ -246,6 +252,9 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		NotificationsDirective,
 		RadioButtonGroupComponent,
 		SectionComponent,
+		SelectComponent,
+		SelectItemComponent,
+		SelectGroupComponent,
 		SpacingDirective,
 		TextAreaComponent,
 		TextInputComponent,
