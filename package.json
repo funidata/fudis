@@ -7,6 +7,9 @@
 		"doc": "docs"
 	},
 	"scripts": {
+		"start": "docker compose up --build -d && npm run logs",
+		"logs": "docker compose logs -f",
+		"stop": "docker compose down",
 		"dev": "cd ngx-fudis && ng build ngx-fudis --watch",
 		"storybook": "cd ngx-fudis && npm run storybook",
 		"sandbox": "cd ngx-fudis && ng serve",
@@ -18,7 +21,7 @@
 		"version": "scripts/version_sub_projects.sh $npm_package_version",
 		"postversion": "git commit --amend -m \"Bump to version v$npm_package_version\" && git push && git push origin v$npm_package_version",
 		"build-storybook": "cd ngx-fudis && npm run docs:json && ng run storybook:build",
-		"cypress":"cd ngx-fudis && npx cypress run",
+		"cypress": "cd ngx-fudis && npx cypress run",
 		"local-storybook": "scripts/local-storybook.sh",
 		"fudis-release": "scripts/release.sh",
 		"host-static-storybook": "cd ngx-fudis && npx http-server ./static"
