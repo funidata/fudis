@@ -1,0 +1,8 @@
+services:
+  storybook:
+    build: ./ngx-fudis/
+    container_name: fudis-storybook
+    ports:
+      - 6006:6006
+    volumes:
+      - ./ngx-fudis/projects/ngx-fudis/src:/usr/src/app/projects/ngx-fudis/src
