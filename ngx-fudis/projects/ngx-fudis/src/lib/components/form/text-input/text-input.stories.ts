@@ -20,7 +20,14 @@ import { FudisValidators } from '../../../utilities/form/validators';
 				[tooltip]="'This is a tooltip text'"
 				[tooltipPosition]="'right'"
 				[tooltipToggle]="false"
-				[helpText]="'Please add some content.'" />
+				[helpText]="'Please add some content.'">
+				<fudis-error-message
+					[message]="'Backend threw an error, it is not totally fault of this component'"
+					[focusId]="'get-me-from-parent-guidance'"
+					[label]="'Read me from parent as well'"
+					[type]="'required'"
+					[visible]="true" />
+			</fudis-text-input>
 			<fudis-text-input
 				[control]="mainFormGroup.controls['email']"
 				[label]="'Email'"
