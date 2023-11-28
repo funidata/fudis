@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.14
+          node-version: 18.18.2
           registry-url: https://registry.npmjs.org/
       - name: Install Angular CLI
         run: npm i -g @angular/cli@v16
