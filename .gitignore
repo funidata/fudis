@@ -27,11 +27,11 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
-.vscode
 
 # Visual Studio Code
 .vscode
 !settings/.vscode
+!ngx-fudis/.vscode
 .history/*
 
 # Miscellaneous
