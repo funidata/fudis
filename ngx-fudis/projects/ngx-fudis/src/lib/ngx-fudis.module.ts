@@ -99,8 +99,11 @@ import { AlertGroupComponent } from './components/alert/alert-group/alert-group.
 import { FudisAlertService } from './services/alert/alert.service';
 import { FudisBreakpointService } from './services/breakpoint/breakpoint.service';
 import { SelectComponent } from './components/form/select/select.component';
-import { SelectItemComponent } from './components/form/select/select-item/select-item.component';
+import { SelectOptionComponent } from './components/form/select/select-option/select-option.component';
 import { SelectGroupComponent } from './components/form/select/select-group/select-group.component';
+import { DropdownItemBaseDirective } from './directives/form/dropdown-item-base/dropdown-item-base.directive';
+import { DropdownBaseDirective } from './directives/form/dropdown-base/dropdown-base.directive';
+import { SelectDropdownComponent } from './components/form/select/select-dropdown/select-dropdown.component';
 
 @NgModule({
 	/*
@@ -135,6 +138,7 @@ import { SelectGroupComponent } from './components/form/select/select-group/sele
 		DialogCloseDirective,
 		DropdownComponent,
 		DropdownMenuComponent,
+		DropdownItemBaseDirective,
 		DropdownMenuItemComponent,
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
@@ -167,12 +171,14 @@ import { SelectGroupComponent } from './components/form/select/select-group/sele
 		SectionComponent,
 		SelectComponent,
 		SelectGroupComponent,
-		SelectItemComponent,
+		SelectOptionComponent,
 		SpacingApiDirective,
 		SpacingDirective,
 		TextInputComponent,
 		TextAreaComponent,
 		TooltipDirective,
+  DropdownBaseDirective,
+  SelectDropdownComponent,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
@@ -253,7 +259,7 @@ import { SelectGroupComponent } from './components/form/select/select-group/sele
 		RadioButtonGroupComponent,
 		SectionComponent,
 		SelectComponent,
-		SelectItemComponent,
+		SelectOptionComponent,
 		SelectGroupComponent,
 		SpacingDirective,
 		TextAreaComponent,

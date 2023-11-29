@@ -1,1 +1,91 @@
-<p>select works!</p>
+<div class="fudis-select fudis-input-size__{{ size }}">
+	<fudis-label
+		[text]="label"
+		[id]="id + '-label'"
+		[requiredText]="_required ? _requiredText : undefined"
+		[tooltip]="tooltip"
+		[tooltipPosition]="tooltipPosition"
+		[tooltipToggle]="tooltipToggle">
+	</fudis-label>
+	<div class="fudis-select__input-wrapper">
+		<input
+			#inputRef
+			[value]="control.value?.viewValue"
+			class="fudis-select__input-wrapper__input"
+			role="combobox"
+			[attr.aria-autocomplete]="'none'"
+			aria-haspopup="listbox"
+			[attr.aria-expanded]="false"
+			[attr.aria-disabled]="disabled"
+			[attr.placeholder]="placeholder"
+			[attr.required]="_required ? true : null"
+			[attr.aria-labelledby]="id + '-label'"
+			[attr.aria-describedby]="id + '_guidance'"
+			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null" />
+		<ng-container *ngIf="size !== 'xs'">
+			<fudis-icon
+				*ngIf="variant !== 'autocomplete'"
+				class="fudis-select__input-wrapper__icon"
+				[icon]="'chevron'"
+				[rotate]="'cw-90'" />
+			<fudis-button
+				*ngIf="variant === 'autocomplete'"
+				class="fudis-select__input-wrapper__icon-button"
+				(handleClick)="_toggleDropdown()"
+				[size]="'icon-only'"
+				[variant]="'tertiary'"
+				[icon]="'chevron'"
+				[iconRotate]="_toggleOn ? 'ccw-90' : 'cw-90'"
+				[label]="!_toggleOn ? _openAriaLabel : _closeAriaLabel"
+				[labelHidden]="true" />
+		</ng-container>
+	</div>
+	<fudis-select-dropdown
+		*ngIf="_toggleOn"
+		[control]="control"
+		[variant]="multiselect ? 'multiselect' : 'single-select'"
+		[align]="'center'"
+		[size]="size">
+		<ng-content select="fudis-select-option"
+	/></fudis-select-dropdown>
+
+	<!-- <div class="fudis-select__input">
+		<mat-select
+			#matSelect
+			[id]="id"
+			disableOptionCentering
+			[panelClass]="
+				size === 'xs' ? 'fudis-select__option-list fudis-select__option-list__xs' : 'fudis-select__option-list'
+			"
+			class="fudis-select__select"
+			[class.fudis-select__select__xs]="size === 'xs'"
+			[class.fudis-select--invalid]="(control.touched && control.invalid) || invalidState"
+			[placeholder]="placeholder"
+			floatPlaceholder="never"
+			[multiple]="multipleOption"
+			[formControl]="control"
+			(valueChange)="handleSelectionChange($event)"
+			[attr.required]="_required ? true : null"
+			[aria-labelledby]="id + '-label'"
+			[hideSingleSelectionIndicator]="hideSingleSelectionIndicator"
+			[attr.aria-describedby]="id + '_guidance'"
+			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null">
+			<mat-option
+				class="fudis-select__option"
+				[class.fudis-select__option__xs]="size === 'xs'"
+				*ngFor="let option of options"
+				[value]="option"
+				[disabled]="option.disabled">
+				{{ option.viewValue }}
+			</mat-option>
+		</mat-select>
+		<fudis-icon *ngIf="size !== 'xs'" class="fudis-select__input__icon" [icon]="'chevron'" [rotate]="'cw-90'" />
+	</div> -->
+	<fudis-guidance
+		*ngIf="!disableGuidance"
+		[inputLabel]="label"
+		[helpText]="helpText"
+		[for]="id"
+		[errorMsg]="errorMsg"
+		[control]="control" />
+</div>

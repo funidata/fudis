@@ -210,13 +210,13 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	@HostListener('window:keydown.arrowUp', ['$event'])
 	private _handleArrowKeyDown(event: KeyboardEvent) {
 		event.preventDefault();
-		const dropdownMenuElement = this.wrapper.nativeElement.children[2];
+		const dropdownElement = this.wrapper.nativeElement.children[2];
 
 		const wrapperInput = this.wrapper.nativeElement.querySelector(
 			'.fudis-autocomplete-multi-select__input-wrapper__input'
 		);
 
-		const checkboxInput = dropdownMenuElement?.querySelector('.fudis-dropdown-menu-item__checkbox__input');
+		const checkboxInput = dropdownElement?.querySelector('.fudis-dropdown-menu-item__checkbox__input');
 
 		if (wrapperInput === document.activeElement && checkboxInput) {
 			checkboxInput.focus();

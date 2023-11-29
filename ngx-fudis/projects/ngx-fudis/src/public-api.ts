@@ -80,5 +80,5 @@ export { AlertGroupComponent } from './lib/components/alert/alert-group/alert-gr
 export { FudisAlertService } from './lib/services/alert/alert.service';
 export { FudisBreakpointService } from './lib/services/breakpoint/breakpoint.service';
 export { SelectComponent } from './lib/components/form/select/select.component';
-export { SelectItemComponent } from './lib/components/form/select/select-item/select-item.component';
+export { SelectOptionComponent } from './lib/components/form/select/select-option/select-option.component';
 export { SelectGroupComponent } from './lib/components/form/select/select-group/select-group.component';
