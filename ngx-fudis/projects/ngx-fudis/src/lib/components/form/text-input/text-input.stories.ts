@@ -23,8 +23,6 @@ import { FudisValidators } from '../../../utilities/form/validators';
 				[helpText]="'Please add some content.'">
 				<fudis-error-message
 					[message]="'Backend threw an error, it is not totally fault of this component'"
-					[focusId]="'get-me-from-parent-guidance'"
-					[label]="'Read me from parent as well'"
 					[type]="'required'"
 					[visible]="true" />
 			</fudis-text-input>

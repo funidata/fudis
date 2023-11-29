@@ -28,16 +28,6 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 	@Input({ required: true }) message: Observable<string> | string | undefined;
 
 	/**
-	 * Id of input this message is related to. Sent to Error Summary service.
-	 */
-	@Input({ required: true }) focusId: string;
-
-	/**
-	 * Label text of input this message is related to. Sent to Error Summary service.
-	 */
-	@Input({ required: true }) label: string;
-
-	/**
 	 * Error type from different keys in e. g. control.errors such as 'required' and 'minlength'
 	 */
 	@Input({ required: true }) type: string;
@@ -92,7 +82,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 		if (this.deprecationWarning) {
 			// eslint-disable-next-line no-console
 			console.warn(
-				`Component with id of '${this.focusId}' and label of '${this.label}' received form error messages from 'errorMsg' input. This will be removed in version Fudis v1.0.0, as error message logic will be binded straight with FudisValidators and FudisFormGroupValidators.`
+				`Component with id of '${this._parentGuidance?.for}' and label of '${this._parentGuidance?.inputLabel}' received form error messages from 'errorMsg' input. This will be removed in version Fudis v1.0.0, as error message logic will be binded straight with FudisValidators and FudisFormGroupValidators.`
 			);
 		}
 	}
@@ -110,11 +100,11 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 			this._currentMessage = this.message;
 		}
 
-		if (this.focusId) {
-			this._currentLabel = this.label;
+		if (this._parentGuidance?.for) {
+			this._currentLabel = this._parentGuidance?.inputLabel;
 
 			const newError: FudisFormErrorSummaryItem = {
-				id: this.focusId,
+				id: this._parentGuidance?.for,
 				error: this._currentMessage,
 				label: this._currentLabel,
 				type: this.type,
@@ -133,7 +123,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 	ngOnDestroy(): void {
 		if (this._errorSent) {
 			this._errorSummaryService.removeError({
-				id: this.focusId,
+				id: this._parentGuidance?.for,
 				type: this.type,
 				controlName: this.controlName,
 			});
@@ -148,12 +138,12 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 		if (this.controlName) {
 			// eslint-disable-next-line no-console
 			console.warn(
-				`Fudis component with id of '${this.focusId}' and control name of '${this.controlName}' is missing error message for error type of: '${this.type}'`
+				`Fudis component with id of '${this._parentGuidance?.for}' and control name of '${this.controlName}' is missing error message for error type of: '${this.type}'`
 			);
 		} else {
 			// eslint-disable-next-line no-console
 			console.warn(
-				`Fudis component with id of '${this.focusId}' is missing error message for error type of: '${this.type}'`
+				`Fudis component with id of '${this._parentGuidance?.for}' is missing error message for error type of: '${this.type}'`
 			);
 		}
 	}
