@@ -54,6 +54,7 @@
 		[for]="id"
 		[errorMsg]="errorMsg"
 		[control]="control">
+		<ng-content select="fudis-error-message" />
 	</fudis-guidance>
 
 	<mat-autocomplete class="fudis-autocomplete__option-list" #autocomplete="matAutocomplete">
