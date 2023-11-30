@@ -29,13 +29,12 @@ Most important function is `dialogService.open()` which takes either an Angular 
 
 ### Component
 
-Dialog component is a wrapper component taking two parameters: `size` and `closeButtonLabel`.
+Dialog component is a wrapper component taking one parameter: `size`.
 
 Size determines the horizontal size of the dialog. Available options are `sm`, `md`, `lg` and `initial` (defaults to `md`).
-CloseButtonLabel is passed to the close icon button on the top right corner for screen readers.
 
 ```
-<fudis-dialog [closeButtonLabel]="'Close dialog'" [size]="'sm'">
+<fudis-dialog [size]="'sm'">
 	...
 </fudis-dialog>
 ```
@@ -98,7 +97,7 @@ This directive extends _MatDialogTitle_. Initial focus is set to this heading wh
 		<fudis-button (handleClick)="openDialog(dialogFromTemplate)" [label]="'Open dialog'">
 		</fudis-button>
 		<ng-template #dialogFromTemplate>
-			<fudis-dialog [closeButtonLabel]="'Close dialog'">
+			<fudis-dialog>
 				<fudis-heading [level]="2" fudisDialogTitle> This is Dialog Heading </fudis-heading>
 				<fudis-dialog-content>
 					<fudis-body-text>Some content for Dialog</fudis-body-text>

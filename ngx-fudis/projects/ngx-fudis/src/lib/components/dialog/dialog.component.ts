@@ -1,6 +1,7 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, effect } from '@angular/core';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { FudisIdService } from '../../services/id/id.service';
+import { FudisTranslationService } from '../../services/translation/translation.service';
 
 type DialogSize = 'sm' | 'md' | 'lg' | 'initial';
 
@@ -12,19 +13,29 @@ type DialogSize = 'sm' | 'md' | 'lg' | 'initial';
 export class DialogComponent implements OnInit, OnDestroy {
 	constructor(
 		private _dialogService: FudisDialogService,
-		private _idService: FudisIdService
+		private _idService: FudisIdService,
+		private _translateService: FudisTranslationService
 	) {
+		effect(() => {
+			this._closeLabel = this._translateService.getTranslations()().DIALOG.CLOSE;
+		});
 		this._id = _idService.getNewId('dialog');
 	}
 
-	@Input() closeButtonLabel: string;
-
+	/**
+	 * Dialog size
+	 */
 	@Input() size: DialogSize = 'md';
 
 	/**
 	 * Id generated from FudisIdService
 	 */
 	protected _id: string;
+
+	/**
+	 * Aria-label for top right close button
+	 */
+	protected _closeLabel: string;
 
 	ngOnInit(): void {
 		this._dialogService.setDialogOpenSignal(true);

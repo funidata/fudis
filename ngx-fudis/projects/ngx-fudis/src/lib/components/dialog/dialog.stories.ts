@@ -15,7 +15,7 @@ type TestForm = {
 
 @Component({
 	selector: 'example-dialog-content',
-	template: `<fudis-dialog [closeButtonLabel]="'Close'" [size]="'lg'">
+	template: `<fudis-dialog [size]="'lg'">
 		<fudis-heading fudisDialogTitle [level]="2">Dialog with fudis-grid and scrollable content</fudis-heading>
 		<fudis-dialog-content>
 			<fudis-grid [marginTop]="'md'" [marginBottom]="'md'">
@@ -83,7 +83,7 @@ class DialogExampleContentComponent {}
 			<fudis-body-text>Great choise, your power animal is {{ this.chosenPowerAnimal }}.</fudis-body-text>
 		</ng-container>
 		<ng-template #dialogWithForm>
-			<fudis-dialog [closeButtonLabel]="'Close dialog'" [size]="'sm'">
+			<fudis-dialog [size]="'sm'">
 				<fudis-heading fudisDialogTitle [level]="2">Power animal dialog</fudis-heading>
 				<fudis-dialog-content>
 					<fudis-form
