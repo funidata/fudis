@@ -11,13 +11,21 @@ import {
 	FudisTranslationService,
 	FudisBreakpointService,
 	FudisErrorSummaryService,
+	FudisValidators,
+	FudisGroupValidators,
 } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
 
-import { FudisDropdownOption } from 'dist/ngx-fudis/lib/types/forms';
+import { FudisDropdownOption, FudisCheckboxOption } from 'dist/ngx-fudis/lib/types/forms';
 
 import { FudisAlert } from 'dist/ngx-fudis/lib/types/miscellaneous';
+import { FormControl, FormGroup } from '@angular/forms';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
+
+type MyForm = {
+	textInput: FormControl<string | null | number>;
+	checkboxFormGroup: FormGroup;
+};
 
 @Component({
 	selector: 'app-root',
@@ -32,7 +40,6 @@ export class AppComponent implements OnInit {
 		private _fudisLanguage: FudisTranslationService,
 		private _alertService: FudisAlertService,
 		private _errorSummaryService: FudisErrorSummaryService,
-
 		private _breakpointService: FudisBreakpointService
 	) {
 		_gridService.setGridDefaultValues({
@@ -52,6 +59,8 @@ export class AppComponent implements OnInit {
 	multiplier: number;
 
 	newRemBase: string;
+
+	errorSummaryVisible = false;
 
 	dropdownOptions: FudisDropdownOption[] = [
 		{ value: 'value-1-dog', viewValue: 'Dog' },
@@ -80,6 +89,38 @@ export class AppComponent implements OnInit {
 		{ key: 'Enemy', value: 'Emmet Brickowski', subHeading: 'Archenemy' },
 		{ key: 'Enemy', value: 'Lucy', subHeading: 'Second Archenemy' },
 	];
+
+	checkboxOptions: FudisCheckboxOption[] = [
+		{ controlName: 'blueberry', label: 'blueberry' },
+		{ controlName: 'cloudberry', label: 'cloudberry' },
+		{ controlName: 'raspberry', label: 'raspberry' },
+		{ controlName: 'strawberry', label: 'strawberry' },
+	];
+
+	testFormGroup = new FormGroup<MyForm>({
+		textInput: new FormControl<string | null | number>(null, [
+			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required')),
+			FudisValidators.minLength(5, this._translocoService.selectTranslateObject('form_errors.notEnoughCharacters')),
+		]),
+		checkboxFormGroup: new FormGroup(
+			{
+				blueberry: new FormControl<FudisCheckboxOption | null>(null),
+				cloudberry: new FormControl<FudisCheckboxOption | null>(null),
+				raspberry: new FormControl<FudisCheckboxOption | null>(null),
+				strawberry: new FormControl<FudisCheckboxOption | null>(null),
+			},
+			[
+				FudisGroupValidators.min({
+					value: 2,
+					message: this._translocoService.selectTranslate('chooseBerryErrorMin'),
+				}),
+				FudisGroupValidators.max({
+					value: 3,
+					message: this._translocoService.selectTranslate('chooseBerryErrorMax'),
+				}),
+			]
+		),
+	});
 
 	ngOnInit(): void {
 		this._translocoService.setActiveLang('fi');
@@ -154,6 +195,18 @@ export class AppComponent implements OnInit {
 
 	openDialogFromComponent(): void {
 		this._dialog.open(DialogTestContentComponent);
+	}
+
+	submitDialogForm(): void {
+		this.testFormGroup.markAllAsTouched();
+
+		if (this.testFormGroup.invalid) {
+			this.errorSummaryVisible = true;
+			this._errorSummaryService.reloadErrors();
+		} else {
+			this.errorSummaryVisible = false;
+			this._dialog.close();
+		}
 	}
 
 	doSomething(event: any) {
