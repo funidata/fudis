@@ -1,7 +1,7 @@
 services:
-  storybook:
+  fudis:
     build: ./ngx-fudis/
-    container_name: fudis-storybook
+    container_name: fudis
     tty: true
     ports:
       - 6006:6006

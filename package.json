@@ -10,7 +10,7 @@
 		"start": "docker compose up --build -d && npm run logs",
 		"logs": "docker compose logs -f",
 		"stop": "docker compose down",
-		"build": "docker compose build && docker cp fudis-storybook:/usr/src/app/dist ./ngx-fudis/dist",
+		"build": "docker build -t fudis:latest ./ngx-fudis && docker cp $(docker create fudis:latest):/usr/src/app/dist ./ngx-fudis/dist",
 		"dev": "cd ngx-fudis && ng build ngx-fudis --watch",
 		"storybook": "cd ngx-fudis && npm run storybook",
 		"sandbox": "cd ngx-fudis && ng serve",
