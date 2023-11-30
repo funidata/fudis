@@ -47,8 +47,8 @@ export class AutocompleteComponent
 
 	/**
 	 * Pre-selected dropdown options.
-	 * If string, it fills the input with given string. NOTE: This sets formControl's value to 'null' if string does not match of any viewValues from 'options'.
-	 * If given FudisDropdownOption, it searches given 'options' input array for matching 'value' and 'viewValue' with selectedOptions and updates formControl value with item from 'options' input.
+	 * If string, it fills the input with given string. NOTE: This sets formControl's value to 'null' if string does not match of any labels from 'options'.
+	 * If given FudisDropdownOption, it searches given 'options' input array for matching 'value' and 'label' with selectedOptions and updates formControl value with item from 'options' input.
 	 */
 	@Input() selectedOption: string | FudisDropdownOption;
 
@@ -63,7 +63,7 @@ export class AutocompleteComponent
 	@Input() placeholder: string;
 
 	/**
-	 * Internal formControl to check if typed text matches with any of the options' viewValue
+	 * Internal formControl to check if typed text matches with any of the options' label
 	 */
 	protected _autocompleteFormControl = new FormControl<string | null>('');
 
@@ -116,22 +116,22 @@ export class AutocompleteComponent
 	protected _autocompleteBlur(event: FocusEvent): void {
 		this.control.markAsTouched();
 		if (this.control.valid && this.control.value) {
-			this._autocompleteFormControl.patchValue(this.control.value.viewValue);
+			this._autocompleteFormControl.patchValue(this.control.value.label);
 		}
 		this.handleBlur.emit(event);
 	}
 
 	private _setInitialValues(): void {
 		if (this.control.value) {
-			this._autocompleteFormControl.patchValue(this.control.value.viewValue);
+			this._autocompleteFormControl.patchValue(this.control.value.label);
 		} else if (this.selectedOption && typeof this.selectedOption !== 'string') {
 			const findMe = this.selectedOption;
 
 			const foundIndex = this.options.findIndex(
-				(option: FudisDropdownOption) => option.value === findMe.value && option.viewValue === findMe.viewValue
+				(option: FudisDropdownOption) => option.value === findMe.value && option.label === findMe.label
 			);
 			if (foundIndex !== -1) {
-				this._autocompleteFormControl.patchValue(this.options[foundIndex].viewValue);
+				this._autocompleteFormControl.patchValue(this.options[foundIndex].label);
 				this.control.patchValue(this.options[foundIndex]);
 			}
 		} else if (this.selectedOption) {
@@ -179,7 +179,7 @@ export class AutocompleteComponent
 			this.control.patchValue(null);
 		} else {
 			const optionValue = this.options.find((option) => {
-				return option.viewValue.toLowerCase() === value.toLowerCase() ? option : null;
+				return option.label.toLowerCase() === value.toLowerCase() ? option : null;
 			});
 
 			if (optionValue) {
@@ -196,7 +196,7 @@ export class AutocompleteComponent
 	private _filter(value: string): FudisDropdownOption[] {
 		if (value || value === '') {
 			const filterValue = value.toLowerCase();
-			const filteredOptions = this.options.filter((option) => option.viewValue.toLowerCase().includes(filterValue));
+			const filteredOptions = this.options.filter((option) => option.label.toLowerCase().includes(filterValue));
 
 			return filteredOptions;
 		}

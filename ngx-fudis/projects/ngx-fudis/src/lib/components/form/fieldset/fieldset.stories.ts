@@ -163,14 +163,14 @@ class FieldsetExampleComponent {
 
 	languageOptions: FudisDropdownOption[] = [
 		// eslint-disable-next-line @typescript-eslint/dot-notation
-		{ value: 'finnish', viewValue: 'FI' },
-		{ value: 'swedish', viewValue: 'SV' },
-		{ value: 'english', viewValue: 'EN' },
+		{ value: 'finnish', label: 'FI' },
+		{ value: 'swedish', label: 'SV' },
+		{ value: 'english', label: 'EN' },
 	];
 
 	courseTypeOptions: FudisRadioButtonOption[] = [
-		{ value: 'basic', viewValue: 'Basic', id: 'courseType-1', name: 'courseType' },
-		{ value: 'advanced', viewValue: 'Advanced', id: 'courseType-2', name: 'courseType' },
+		{ value: 'basic', label: 'Basic', id: 'courseType-1', name: 'courseType' },
+		{ value: 'advanced', label: 'Advanced', id: 'courseType-2', name: 'courseType' },
 	];
 
 	submitForm(): void {

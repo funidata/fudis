@@ -17,9 +17,9 @@ const testFormGroup: FormGroup = new FormGroup({
 });
 
 const languageOptions: FudisDropdownOption[] = [
-	{ value: 'finnish', viewValue: 'Fi' },
-	{ value: 'swedish', viewValue: 'Sv' },
-	{ value: 'english', viewValue: 'En' },
+	{ value: 'finnish', label: 'Fi' },
+	{ value: 'swedish', label: 'Sv' },
+	{ value: 'english', label: 'En' },
 ];
 
 describe('InputWithLanguageOptionsComponent', () => {

@@ -1,8 +1,8 @@
-import { Component, ElementRef, Host, Input, OnInit, Optional, ViewChild } from '@angular/core';
+import { Component, ElementRef, Host, Injector, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { DropdownItemBaseDirective } from '../../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { FudisDropdownMenuItemService } from '../../../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { FudisIdService } from '../../../../services/id/id.service';
-import { DropdownMenuComponent } from '../../../dropdown-menu/dropdown-menu.component';
+import { SelectComponent } from '../select.component';
 
 @Component({
 	selector: 'fudis-select-option',
@@ -11,9 +11,11 @@ import { DropdownMenuComponent } from '../../../dropdown-menu/dropdown-menu.comp
 })
 export class SelectOptionComponent extends DropdownItemBaseDirective implements OnInit {
 	constructor(
+		private _viewRef: ViewContainerRef,
+		private _injector: Injector,
 		_clickService: FudisDropdownMenuItemService,
 		private _idService: FudisIdService,
-		@Host() @Optional() private _parentComponent: DropdownMenuComponent
+		@Host() protected _parentComponent: SelectComponent
 	) {
 		super(_clickService);
 	}
@@ -24,11 +26,20 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 
 	ngOnInit(): void {
 		if (this._parentComponent) {
-			if (this._parentComponent?._isMultiselect) {
-				this._isMultiselectOption = true;
-			}
-
 			this._id = this._idService.getNewChildId('dropdown-menu', this._parentComponent.id);
+		}
+	}
+
+	protected _clickOption(event: Event): void {
+		this.handleClick.emit(event);
+		this._closeDropdown();
+
+		// console.log(this._parent);
+		// console.log(this._parentComponent);
+		// console.log(this._viewRef.injector);
+
+		if (this._parentComponent?.control) {
+			this._parentComponent.control.patchValue({ value: this.value, label: this.label });
 		}
 	}
 

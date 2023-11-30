@@ -73,14 +73,14 @@ SingleSelect.args = {
 		FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
 	),
 	helpText: 'All pets are equally important, but for sake of this example please pick one.',
-	selectedOptions: { value: 'value-1-dog', viewValue: 'Dog' },
+	selectedOptions: { value: 'value-1-dog', label: 'Dog' },
 	options: [
-		{ value: 'value-1-dog', viewValue: 'Dog' },
-		{ value: 'value-2-capybara', viewValue: 'Capybara' },
-		{ value: 'value-3-platypys', viewValue: 'Platypus' },
-		{ value: 'value-4-cat', viewValue: 'Cat, disabled for demo purposes', disabled: true },
-		{ value: 'value-5-armadillo', viewValue: 'Screaming hairy armadillo' },
-		{ value: 'value-6-gecko', viewValue: 'Southern Titiwangsa Bent-Toed Gecko' },
+		{ value: 'value-1-dog', label: 'Dog' },
+		{ value: 'value-2-capybara', label: 'Capybara' },
+		{ value: 'value-3-platypys', label: 'Platypus' },
+		{ value: 'value-4-cat', label: 'Cat, disabled for demo purposes', disabled: true },
+		{ value: 'value-5-armadillo', label: 'Screaming hairy armadillo' },
+		{ value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
 	],
 };
 
@@ -100,11 +100,11 @@ MultiSelect.args = {
 	tooltipPosition: 'below',
 	tooltipToggle: false,
 	options: [
-		{ value: 'value-1-dog', viewValue: 'Dog' },
-		{ value: 'value-2-capybara', viewValue: 'Capybara' },
-		{ value: 'value-3-platypys', viewValue: 'Platypus' },
-		{ value: 'value-4-cat', viewValue: 'Cat, disabled for demo purposes', disabled: true },
-		{ value: 'value-5-armadillo', viewValue: 'Screaming hairy armadillo' },
-		{ value: 'value-6-gecko', viewValue: 'Southern Titiwangsa Bent-Toed Gecko' },
+		{ value: 'value-1-dog', label: 'Dog' },
+		{ value: 'value-2-capybara', label: 'Capybara' },
+		{ value: 'value-3-platypys', label: 'Platypus' },
+		{ value: 'value-4-cat', label: 'Cat, disabled for demo purposes', disabled: true },
+		{ value: 'value-5-armadillo', label: 'Screaming hairy armadillo' },
+		{ value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
 	],
 };

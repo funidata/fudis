@@ -10,18 +10,20 @@
 	<div class="fudis-select__input-wrapper">
 		<input
 			#inputRef
-			[value]="control.value?.viewValue"
+			(click)="_toggleDropdown()"
+			[value]="control.value?.label"
 			class="fudis-select__input-wrapper__input"
+			[class.fudis-select__input-wrapper__input--invalid]="(control.touched && control.invalid) || invalidState"
 			role="combobox"
-			[attr.aria-autocomplete]="'none'"
 			aria-haspopup="listbox"
-			[attr.aria-expanded]="false"
+			[attr.aria-autocomplete]="'none'"
 			[attr.aria-disabled]="disabled"
 			[attr.placeholder]="placeholder"
 			[attr.required]="_required ? true : null"
 			[attr.aria-labelledby]="id + '-label'"
 			[attr.aria-describedby]="id + '_guidance'"
 			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null" />
+
 		<ng-container *ngIf="size !== 'xs'">
 			<fudis-icon
 				*ngIf="variant !== 'autocomplete'"
@@ -40,14 +42,11 @@
 				[labelHidden]="true" />
 		</ng-container>
 	</div>
-	<fudis-select-dropdown
-		*ngIf="_toggleOn"
-		[control]="control"
-		[variant]="multiselect ? 'multiselect' : 'single-select'"
-		[align]="'center'"
-		[size]="size">
-		<ng-content select="fudis-select-option"
-	/></fudis-select-dropdown>
+	<fudis-select-dropdown *ngIf="_toggleOn" [multiselect]="multiselect" [size]="size">
+		<ng-container *ngIf="content?.type === 'select-options'">
+			<ng-container *ngTemplateOutlet="content!.templateRef"></ng-container>
+		</ng-container>
+	</fudis-select-dropdown>
 
 	<!-- <div class="fudis-select__input">
 		<mat-select
@@ -76,7 +75,7 @@
 				*ngFor="let option of options"
 				[value]="option"
 				[disabled]="option.disabled">
-				{{ option.viewValue }}
+				{{ option.label }}
 			</mat-option>
 		</mat-select>
 		<fudis-icon *ngIf="size !== 'xs'" class="fudis-select__input__icon" [icon]="'chevron'" [rotate]="'cw-90'" />

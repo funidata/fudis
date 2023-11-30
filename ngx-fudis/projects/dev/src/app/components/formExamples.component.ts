@@ -41,18 +41,18 @@ export class AppFormExampleComponent implements OnInit {
 	showSuccessBodyText: boolean = false;
 
 	dropdownOptions: FudisDropdownOption[] = [
-		{ value: 'value-1-dog', viewValue: 'Dog' },
-		{ value: 'value-2-capybara', viewValue: 'Capybara' },
-		{ value: 'value-3-platypys', viewValue: 'Platypus' },
-		{ value: 'value-4-cat', viewValue: 'Cat, disabled for demo purposes', disabled: true },
-		{ value: 'value-5-armadillo', viewValue: 'Screaming hairy armadillo' },
-		{ value: 'value-6-gecko', viewValue: 'Southern Titiwangsa Bent-Toed Gecko' },
+		{ value: 'value-1-dog', label: 'Dog' },
+		{ value: 'value-2-capybara', label: 'Capybara' },
+		{ value: 'value-3-platypys', label: 'Platypus' },
+		{ value: 'value-4-cat', label: 'Cat, disabled for demo purposes', disabled: true },
+		{ value: 'value-5-armadillo', label: 'Screaming hairy armadillo' },
+		{ value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
 	];
 
 	multipleOptions = Array.from({ length: 1000 }).map((value, i) => {
 		return {
 			value: i,
-			viewValue: `Item number ${i}`,
+			label: `Item number ${i}`,
 		};
 	});
 
@@ -112,9 +112,9 @@ export class AppFormExampleComponent implements OnInit {
 	});
 
 	_languageOptions: FudisDropdownLanguageOption[] = [
-		{ value: 'finnish', viewValue: 'FI' },
-		{ value: 'swedish', viewValue: 'SV' },
-		{ value: 'english', viewValue: 'EN' },
+		{ value: 'finnish', label: 'FI' },
+		{ value: 'swedish', label: 'SV' },
+		{ value: 'english', label: 'EN' },
 	];
 
 	radioButtonOptions: FudisRadioButtonOption[] = [];
@@ -129,8 +129,8 @@ export class AppFormExampleComponent implements OnInit {
 			.pipe(this._untilDestroyed())
 			.subscribe((value) => {
 				this.radioButtonOptions = [
-					{ value: true, viewValue: value.chooseTruthTrue, id: 'boolean-2', name: 'booleans' },
-					{ value: false, viewValue: value.chooseTruthFalse, id: 'boolean-1', name: 'booleans' },
+					{ value: true, label: value.chooseTruthTrue, id: 'boolean-2', name: 'booleans' },
+					{ value: false, label: value.chooseTruthFalse, id: 'boolean-1', name: 'booleans' },
 				];
 				this.checkboxOptions = [
 					{ controlName: 'blueberry', label: value.blueberry },

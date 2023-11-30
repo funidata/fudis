@@ -25,7 +25,7 @@ export interface FudisRadioButtonOption {
 	/** Underlying value of the option */
 	value: string | boolean | null;
 	/** Value that is shown in the UI */
-	viewValue: string;
+	label: string;
 	/** Is option selected */
 	checked?: boolean;
 }
@@ -53,7 +53,7 @@ export interface FudisDropdownOption {
 	/** Underlying value of the option */
 	value: any;
 	/** Value that is shown in the UI */
-	viewValue: string;
+	label: string;
 	/** Is option disabled in the dropdown */
 	disabled?: boolean;
 	/** To store additional data */
@@ -98,10 +98,10 @@ export type FudisFormErrorSummaryObjectItemErrors = {
 };
 
 export type FudisDropdownLanguageOption =
-	| { value: 'finnish'; viewValue: 'FI' }
-	| { value: 'swedish'; viewValue: 'SV' }
-	| { value: 'english'; viewValue: 'EN' }
-	| { value: FudisLanguageAbbr; viewValue: string };
+	| { value: 'finnish'; label: 'FI' }
+	| { value: 'swedish'; label: 'SV' }
+	| { value: 'english'; label: 'EN' }
+	| { value: FudisLanguageAbbr; label: string };
 
 export interface FudisInputWithLanguageOptionsFormGroup {
 	[language: string]: FormControl<string | null>;

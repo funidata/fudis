@@ -18,10 +18,10 @@ export type FudisLanguageBadgeContent = {
 };
 
 export type FudisLanguageOption =
-	| { value: 'finnish'; viewValue: 'FI' }
-	| { value: 'swedish'; viewValue: 'SV' }
-	| { value: 'english'; viewValue: 'EN' }
-	| { value: string | FudisLanguageAbbr; viewValue: string };
+	| { value: 'finnish'; label: 'FI' }
+	| { value: 'swedish'; label: 'SV' }
+	| { value: 'english'; label: 'EN' }
+	| { value: string | FudisLanguageAbbr; label: string };
 
 export interface FudisLanguageBadgeTranslations {
 	en?: string;

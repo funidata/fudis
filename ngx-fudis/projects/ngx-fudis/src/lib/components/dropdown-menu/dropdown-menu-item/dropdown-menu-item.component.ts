@@ -13,7 +13,7 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective impleme
 	constructor(
 		_clickService: FudisDropdownMenuItemService,
 		private _idService: FudisIdService,
-		@Host() private _parentComponent: DropdownMenuComponent
+		@Host() protected _parentComponent: DropdownMenuComponent
 	) {
 		super(_clickService);
 	}
@@ -21,11 +21,6 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective impleme
 	@ViewChild('dropdownItem') dropdownItem: ElementRef;
 
 	ngOnInit(): void {
-		// Check parent component's public HostBinding for multiselect usage
-		if (this._parentComponent?._isMultiselect) {
-			this._isMultiselectOption = true;
-		}
-
 		this._id = this._idService.getNewChildId('dropdown-menu', this._parentComponent.id);
 	}
 

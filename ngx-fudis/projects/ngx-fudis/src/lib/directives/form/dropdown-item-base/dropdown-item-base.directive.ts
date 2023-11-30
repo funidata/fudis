@@ -43,12 +43,6 @@ export class DropdownItemBaseDirective {
 	@Output() handleBlur = new EventEmitter<FocusEvent>();
 
 	/**
-	 * Determine whether option is displayed as single-select or multiselect (with checkbox).
-	 * Multiselect is used e.g in autocomplete-multi-select.
-	 */
-	protected _isMultiselectOption: boolean = false;
-
-	/**
 	 * Id generated with FudisIdService
 	 */
 	protected _id: string;

@@ -60,9 +60,9 @@
 		<mat-option
 			class="fudis-autocomplete__option"
 			*ngFor="let option of _filteredOptions | async"
-			[value]="option.viewValue"
+			[value]="option.label"
 			[disabled]="option.disabled">
-			{{ option.viewValue }}
+			{{ option.label }}
 		</mat-option>
 	</mat-autocomplete>
 </div>

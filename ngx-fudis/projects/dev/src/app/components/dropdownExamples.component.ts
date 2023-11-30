@@ -18,7 +18,7 @@ export class AppDropdownExamplesComponent {
 	});
 
 	_options = [
-		{ value: '123', viewValue: 'This is really long option, to see what is happening' },
-		{ value: '124', viewValue: 'Shorter option' },
+		{ value: '123', label: 'This is really long option, to see what is happening' },
+		{ value: '124', label: 'Shorter option' },
 	];
 }

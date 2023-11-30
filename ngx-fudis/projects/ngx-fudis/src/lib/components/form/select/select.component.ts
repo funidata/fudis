@@ -1,6 +1,7 @@
 import {
 	AfterViewInit,
 	Component,
+	ContentChild,
 	EventEmitter,
 	Input,
 	OnChanges,
@@ -17,6 +18,7 @@ import { InputBaseDirective } from '../../../directives/form/input-base/input-ba
 import { FudisDropdownOption, FudisInputSize } from '../../../types/forms';
 import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 import { FudisDropdownMenuItemService } from '../../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
+import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 
 @Component({
 	selector: 'fudis-select',
@@ -42,6 +44,8 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 			this._toggleOn = _clickService.getMenuStatus()();
 		});
 	}
+
+	@ContentChild(ContentDirective) content: ContentDirective;
 
 	/*
 	 * FormControl for the dropdown
@@ -73,7 +77,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	/**
 	 * Pre-selected dropdown options.
 	 * Expects an array if 'multipleOption' is true and if 'multipleOption' is false, expects a single FudisDropdownOption.
-	 * It searches given 'options' input array for matching 'value' and 'viewValue' with selectedOptions and updates formControl value with items from 'options' input.
+	 * It searches given 'options' input array for matching 'value' and 'label' with selectedOptions and updates formControl value with items from 'options' input.
 	 */
 	@Input() selectedOptions: FudisDropdownOption | FudisDropdownOption[];
 
@@ -125,6 +129,10 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 
 	ngOnChanges(): void {
 		this._required = this.required ?? hasRequiredValidator(this.control);
+
+		this.control.valueChanges.subscribe((value) => {
+			console.log(value);
+		});
 	}
 
 	protected _toggleDropdown(): void {
@@ -143,7 +151,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	// 		const valueToFind: FudisDropdownOption = this.selectedOptions;
 
 	// 		const foundIndex = this.options.findIndex((option) => {
-	// 			return option.value === valueToFind?.value && option.viewValue === valueToFind?.viewValue;
+	// 			return option.value === valueToFind?.value && option.label === valueToFind?.label;
 	// 		});
 
 	// 		if (foundIndex !== -1) {

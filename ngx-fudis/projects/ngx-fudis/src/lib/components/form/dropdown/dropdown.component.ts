@@ -73,7 +73,7 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 	/**
 	 * Pre-selected dropdown options.
 	 * Expects an array if 'multipleOption' is true and if 'multipleOption' is false, expects a single FudisDropdownOption.
-	 * It searches given 'options' input array for matching 'value' and 'viewValue' with selectedOptions and updates formControl value with items from 'options' input.
+	 * It searches given 'options' input array for matching 'value' and 'label' with selectedOptions and updates formControl value with items from 'options' input.
 	 */
 	@Input() selectedOptions: FudisDropdownOption | FudisDropdownOption[];
 
@@ -108,7 +108,7 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 
 			this.selectedOptions.forEach((selectedOption: FudisDropdownOption) => {
 				const foundIndex = this.options.findIndex((option) => {
-					return option.value === selectedOption.value && option.viewValue === selectedOption.viewValue;
+					return option.value === selectedOption.value && option.label === selectedOption.label;
 				});
 
 				if (foundIndex !== -1) {
@@ -121,7 +121,7 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 			const valueToFind: FudisDropdownOption = this.selectedOptions;
 
 			const foundIndex = this.options.findIndex((option) => {
-				return option.value === valueToFind?.value && option.viewValue === valueToFind?.viewValue;
+				return option.value === valueToFind?.value && option.label === valueToFind?.label;
 			});
 
 			if (foundIndex !== -1) {

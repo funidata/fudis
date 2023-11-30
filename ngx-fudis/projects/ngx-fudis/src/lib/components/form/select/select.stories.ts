@@ -48,12 +48,12 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 	props: {
 		...args,
 		options: [
-			{ value: 'value-1-dog', viewValue: 'Dog' },
-			{ value: 'value-2-capybara', viewValue: 'Capybara' },
-			{ value: 'value-3-platypys', viewValue: 'Platypus' },
-			{ value: 'value-4-cat', viewValue: 'Cat, disabled for demo purposes', disabled: true },
-			{ value: 'value-5-armadillo', viewValue: 'Screaming hairy armadillo' },
-			{ value: 'value-6-gecko', viewValue: 'Southern Titiwangsa Bent-Toed Gecko' },
+			{ value: 'value-1-dog', label: 'Dog' },
+			{ value: 'value-2-capybara', label: 'Capybara' },
+			{ value: 'value-3-platypys', label: 'Platypus' },
+			{ value: 'value-4-cat', label: 'Cat, disabled for demo purposes', disabled: true },
+			{ value: 'value-5-armadillo', label: 'Screaming hairy armadillo' },
+			{ value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
 		],
 	},
 	template: html`
@@ -69,7 +69,9 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			[tooltip]="tooltip"
 			[tooltipPosition]="tooltipPosition"
 			[tooltipToggle]="tooltipToggle">
-			<fudis-select-option *ngFor="let option of options" [label]="option.viewValue" [value]="option.value" />
+			<ng-template fudisContent type="select-options">
+				<fudis-select-option *ngFor="let option of options" [label]="option.label" [value]="option.value" />
+			</ng-template>
 		</fudis-select>
 	`,
 });
@@ -84,7 +86,7 @@ SingleSelect.args = {
 		FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
 	),
 	helpText: 'All pets are equally important, but for sake of this example please pick one.',
-	selectedOptions: { value: 'value-1-dog', viewValue: 'Dog' },
+	selectedOptions: { value: 'value-1-dog', label: 'Dog' },
 };
 
 // export const MultiSelect = Template.bind({});
@@ -103,11 +105,11 @@ SingleSelect.args = {
 // 	tooltipPosition: 'below',
 // 	tooltipToggle: false,
 // 	options: [
-// 		{ value: 'value-1-dog', viewValue: 'Dog' },
-// 		{ value: 'value-2-capybara', viewValue: 'Capybara' },
-// 		{ value: 'value-3-platypys', viewValue: 'Platypus' },
-// 		{ value: 'value-4-cat', viewValue: 'Cat, disabled for demo purposes', disabled: true },
-// 		{ value: 'value-5-armadillo', viewValue: 'Screaming hairy armadillo' },
-// 		{ value: 'value-6-gecko', viewValue: 'Southern Titiwangsa Bent-Toed Gecko' },
+// 		{ value: 'value-1-dog', label: 'Dog' },
+// 		{ value: 'value-2-capybara', label: 'Capybara' },
+// 		{ value: 'value-3-platypys', label: 'Platypus' },
+// 		{ value: 'value-4-cat', label: 'Cat, disabled for demo purposes', disabled: true },
+// 		{ value: 'value-5-armadillo', label: 'Screaming hairy armadillo' },
+// 		{ value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
 // 	],
 // };

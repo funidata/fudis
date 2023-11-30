@@ -8,9 +8,9 @@ import { FudisDropdownOption, FudisInputSize } from '../../types/forms';
 import { AutocompleteMultiSelectSelectedItemChipComponent } from './autocomplete-multi-select-selected-item-chip/autocomplete-multi-select-selected-item-chip.component';
 
 const multiSelectOptions: FudisDropdownOption[] = [
-	{ value: 1, viewValue: 'Dog' },
-	{ value: 2, viewValue: 'Cat' },
-	{ value: 3, viewValue: 'Parrot' },
+	{ value: 1, label: 'Dog' },
+	{ value: 2, label: 'Cat' },
+	{ value: 3, label: 'Parrot' },
 ];
 
 describe('AutocompleteMultiSelectComponent', () => {

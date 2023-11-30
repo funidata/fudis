@@ -27,7 +27,7 @@ export class RadioButtonComponent implements OnInit {
 	/*
 	 * Visible label for a single Radio Button, e. g. "Fair trade banana"
 	 */
-	@Input({ required: true }) viewValue: string;
+	@Input({ required: true }) label: string;
 
 	/*
 	 * Name for group of Radio Buttons, e.g. "fruit"

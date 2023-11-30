@@ -1,18 +1,18 @@
 <button
-	*ngIf="!_isMultiselectOption"
+	*ngIf="!_parentComponent.multiselect"
 	#dropdownItem
 	class="fudis-dropdown-menu-item"
-	[attr.role]="'menuitem'"
+	role="menuitem"
 	[attr.id]="_id"
 	[attr.aria-disabled]="disabled"
 	(keydown)="_handleKeyDown($event)"
 	(blur)="_handleButtonBlur($event)"
-	(click)="handleClick.emit($event); _closeDropdown()">
+	(click)="_clickOption($event)">
 	{{ label }}
 </button>
 
 <div
-	*ngIf="_isMultiselectOption"
+	*ngIf="_parentComponent.multiselect"
 	class="fudis-dropdown-menu-item__checkbox"
 	[attr.id]="_id"
 	[class.fudis-dropdown-menu-item__checkbox--active]="checked">

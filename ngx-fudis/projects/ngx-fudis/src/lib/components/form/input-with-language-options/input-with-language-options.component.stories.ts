@@ -38,9 +38,9 @@ const TemplateAllRequired: StoryFn = () => ({
 		helpText: 'Please provide superhero name in all languages.',
 		maxLength: 22,
 		languageOptions: [
-			{ value: 'finnish', viewValue: 'FI' },
-			{ value: 'swedish', viewValue: 'SV' },
-			{ value: 'english', viewValue: 'EN' },
+			{ value: 'finnish', label: 'FI' },
+			{ value: 'swedish', label: 'SV' },
+			{ value: 'english', label: 'EN' },
 		],
 		formGroup: new FormGroup<FudisInputWithLanguageOptionsFormGroup>({
 			finnish: new FormControl<string | null>(null, [
@@ -76,9 +76,9 @@ const TemplateOneRequired: StoryFn = () => ({
 		helpText: 'Please provide superhero name in atleast one language.',
 		maxLength: 30,
 		languageOptions: [
-			{ value: 'finnish', viewValue: 'FI' },
-			{ value: 'swedish', viewValue: 'SV' },
-			{ value: 'english', viewValue: 'EN' },
+			{ value: 'finnish', label: 'FI' },
+			{ value: 'swedish', label: 'SV' },
+			{ value: 'english', label: 'EN' },
 		],
 		formGroup: new FormGroup<FudisInputWithLanguageOptionsFormGroup>(
 			{

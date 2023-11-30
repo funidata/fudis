@@ -37,7 +37,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	@Input({ required: true }) formGroup: FormGroup<FudisInputWithLanguageOptionsFormGroup | any>;
 
 	/**
-	 * Option list for language selection Fudis Dropdown. To pair control with corresponding dropdown option Dropdown option "value" must equal to control's name. E.g. "{value: 'english', viewValue: 'EN'}" pairs with "english: New FormControl('')"
+	 * Option list for language selection Fudis Dropdown. To pair control with corresponding dropdown option Dropdown option "value" must equal to control's name. E.g. "{value: 'english', label: 'EN'}" pairs with "english: New FormControl('')"
 	 */
 	@Input({ required: true }) options: FudisDropdownLanguageOption[];
 
@@ -129,7 +129,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 
 		this.options.forEach((option) => {
 			if (this.formGroup.controls[option.value].invalid || !this.formGroup.controls[option.value].value) {
-				const updatedOption = { ...option, viewValue: `${option.viewValue} (${this._missingLanguage})` };
+				const updatedOption = { ...option, label: `${option.label} (${this._missingLanguage})` };
 
 				newOptions.push(updatedOption);
 

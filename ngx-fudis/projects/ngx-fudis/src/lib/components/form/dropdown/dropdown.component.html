@@ -34,7 +34,7 @@
 				*ngFor="let option of options"
 				[value]="option"
 				[disabled]="option.disabled">
-				{{ option.viewValue }}
+				{{ option.label }}
 			</mat-option>
 		</mat-select>
 		<fudis-icon *ngIf="size !== 'xs'" class="fudis-dropdown__input__icon" [icon]="'chevron'" [rotate]="'cw-90'" />

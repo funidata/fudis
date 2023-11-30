@@ -128,7 +128,7 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	}
 
 	public removeItem(item: FudisDropdownOption): void {
-		this.selectedOptions = this.selectedOptions.filter((option) => item.viewValue !== option.viewValue);
+		this.selectedOptions = this.selectedOptions.filter((option) => item.label !== option.label);
 		this.optionChange.emit(this.selectedOptions);
 
 		if (this.selectedOptions.length === 0) {
@@ -137,7 +137,7 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	}
 
 	protected _isChecked(item: FudisDropdownOption): boolean {
-		return this.selectedOptions.some((e) => e.viewValue === item.viewValue);
+		return this.selectedOptions.some((e) => e.label === item.label);
 	}
 
 	/**
@@ -190,7 +190,7 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 		this._filterText = event.target.value;
 
 		this._results = this.options.filter((option) =>
-			option.viewValue.toLowerCase().includes(this._filterText.toLowerCase())
+			option.label.toLowerCase().includes(this._filterText.toLowerCase())
 		);
 	}
 

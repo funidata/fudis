@@ -1,19 +1,10 @@
-import {
-	AfterContentInit,
-	OnInit,
-	Directive,
-	ElementRef,
-	HostBinding,
-	HostListener,
-	Input,
-	ViewChild,
-} from '@angular/core';
+import { Directive, ElementRef, HostBinding, HostListener, Input, ViewChild } from '@angular/core';
 import { FudisInputSize } from '../../../types/forms';
 
 @Directive({
 	selector: '[fudisDropdownBase]',
 })
-export class DropdownBaseDirective implements OnInit, AfterContentInit {
+export class DropdownBaseDirective {
 	@ViewChild('dropdownElement') dropdownElement: ElementRef<HTMLElement>;
 
 	/**
@@ -27,14 +18,9 @@ export class DropdownBaseDirective implements OnInit, AfterContentInit {
 	@HostBinding('class.fudis-dropdown-menu-host') public _isMultiselect = false;
 
 	/**
-	 * Dropdown-menu is aligned to open left side of the button by default but can be aligned to open right side if necessary
-	 */
-	@Input() align: 'left' | 'right' | 'center' = 'left';
-
-	/**
 	 * Assign dropdown as single-select or multiselect (with checkboxes)
 	 */
-	@Input() variant: 'single-select' | 'multiselect' = 'single-select';
+	@Input() multiselect: boolean = false;
 
 	/**
 	 * Set dropdown size (should follow the given input element size)
@@ -61,30 +47,5 @@ export class DropdownBaseDirective implements OnInit, AfterContentInit {
 			const firstChildButtonElement = firstChildElement.querySelector('button');
 			firstChildButtonElement?.focus();
 		}
-	}
-
-	@HostListener('window:click', ['$event'])
-	getMaxWidth(): void {
-		const elementInViewWidth = this.dropdownElement?.nativeElement?.getBoundingClientRect()?.width;
-
-		const elementInViewX = this.dropdownElement?.nativeElement?.getBoundingClientRect()?.x;
-
-		if (elementInViewX && elementInViewWidth && elementInViewWidth !== 0 && this.align === 'left') {
-			this._maxWidth = `${elementInViewWidth + elementInViewX}px`;
-		} else if (window?.innerWidth && elementInViewX) {
-			this._maxWidth = `${window.innerWidth - elementInViewX}px`;
-		} else {
-			this._maxWidth = 'initial';
-		}
-	}
-
-	ngOnInit(): void {
-		if (this.variant === 'multiselect') {
-			this._isMultiselect = true;
-		}
-	}
-
-	ngAfterContentInit(): void {
-		this.getMaxWidth();
 	}
 }
