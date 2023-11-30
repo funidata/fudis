@@ -5,7 +5,7 @@ import { FudisDropdownMenuItemService } from '../../../components/dropdown-menu/
 	selector: '[fudisDropdownItemBase]',
 })
 export class DropdownItemBaseDirective {
-	constructor(protected _clickService: FudisDropdownMenuItemService) {}
+	constructor(protected _menuService: FudisDropdownMenuItemService) {}
 
 	/**
 	 * Label for dropdown item
@@ -49,7 +49,7 @@ export class DropdownItemBaseDirective {
 
 	protected _closeDropdown(): void {
 		if (this.close === true) {
-			this._clickService.setMenuStatus(false);
+			this._menuService.setMenuStatus(false);
 		}
 	}
 
@@ -81,7 +81,7 @@ export class DropdownItemBaseDirective {
 			!(event.relatedTarget as HTMLElement)?.classList?.contains('fudis-dropdown-menu-item') &&
 			(event.relatedTarget as HTMLElement) !== menuButton
 		) {
-			this._clickService.setMenuStatus(false);
+			this._menuService.setMenuStatus(false);
 		}
 	}
 }

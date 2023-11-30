@@ -25,14 +25,14 @@ import { FudisIdService } from '../../services/id/id.service';
 })
 export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 	constructor(
-		private _clickService: FudisDropdownMenuItemService,
+		private _menuService: FudisDropdownMenuItemService,
 		private _idService: FudisIdService
 	) {
 		super();
 
 		this._id = _idService.getNewId('button');
 
-		this._menuStatus = this._clickService.getMenuStatus();
+		this._menuStatus = this._menuService.getMenuStatus();
 
 		effect(() => {
 			this.closeMenu(this._menuStatus());
@@ -136,7 +136,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 	buttonClick(event: Event): void {
 		if (this.asMenuButton) {
 			this._toggleOn = !this._toggleOn;
-			this._clickService.setMenuStatus(this._toggleOn);
+			this._menuService.setMenuStatus(this._toggleOn);
 		}
 		this.handleClick.emit(event);
 	}
@@ -153,7 +153,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 		);
 
 		if (this.asMenuButton && !targetIsDropdownMenuButton) {
-			this._clickService.setMenuStatus(false);
+			this._menuService.setMenuStatus(false);
 		}
 	}
 

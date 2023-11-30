@@ -11,11 +11,11 @@ import { DropdownItemBaseDirective } from '../../../directives/form/dropdown-ite
 })
 export class DropdownMenuItemComponent extends DropdownItemBaseDirective implements OnInit {
 	constructor(
-		_clickService: FudisDropdownMenuItemService,
+		_menuService: FudisDropdownMenuItemService,
 		private _idService: FudisIdService,
 		@Host() protected _parentComponent: DropdownMenuComponent
 	) {
-		super(_clickService);
+		super(_menuService);
 	}
 
 	@ViewChild('dropdownItem') dropdownItem: ElementRef;

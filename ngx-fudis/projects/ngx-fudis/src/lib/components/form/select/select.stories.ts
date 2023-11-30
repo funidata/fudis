@@ -70,7 +70,11 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			[tooltipPosition]="tooltipPosition"
 			[tooltipToggle]="tooltipToggle">
 			<ng-template fudisContent type="select-options">
-				<fudis-select-option *ngFor="let option of options" [label]="option.label" [value]="option.value" />
+				<fudis-select-option
+					*ngFor="let option of options"
+					[label]="option.label"
+					[value]="option.value"
+					[disabled]="option.disabled" />
 			</ng-template>
 		</fudis-select>
 	`,

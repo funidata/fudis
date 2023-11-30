@@ -7,6 +7,7 @@ import {
 	OnChanges,
 	OnInit,
 	Output,
+	Signal,
 	ViewEncapsulation,
 	effect,
 } from '@angular/core';
@@ -31,9 +32,11 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		private _focusService: FudisFocusService,
 		_idService: FudisIdService,
 		_translationService: FudisTranslationService,
-		private _clickService: FudisDropdownMenuItemService
+		private _menuService: FudisDropdownMenuItemService
 	) {
 		super(_translationService, _idService);
+
+		this._dropdownOpenSignal = _menuService.getMenuStatus();
 
 		effect(() => {
 			this._openAriaLabel = this._translations().AUTOCOMPLETE.MULTISELECT.OPEN_DROPDOWN;
@@ -41,7 +44,9 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 			this._noResultsFound = this._translations().AUTOCOMPLETE.MULTISELECT.NO_RESULTS;
 			this._removeItemText = this._translations().AUTOCOMPLETE.MULTISELECT.REMOVE_ITEM;
 
-			this._toggleOn = _clickService.getMenuStatus()();
+			this._toggleOn = this._dropdownOpenSignal();
+
+			console.log(this._toggleOn);
 		});
 	}
 
@@ -66,11 +71,6 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	 * Available sizes for the dropdown
 	 */
 	@Input() size: 'xs' | FudisInputSize = 'lg';
-
-	/**
-	 * Hide selected option's checkmark in options list, used in input-with-language-options component
-	 */
-	@Input() hideSingleSelectionIndicator: boolean = false;
 
 	@Input() variant: 'dropdown' | 'autocomplete' = 'dropdown';
 
@@ -111,6 +111,8 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	 */
 	protected _removeItemText: string;
 
+	private _dropdownOpenSignal: Signal<boolean>;
+
 	handleSelectionChange(value: FudisDropdownOption): void {
 		this.selectionUpdate.emit(value);
 	}
@@ -129,14 +131,11 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 
 	ngOnChanges(): void {
 		this._required = this.required ?? hasRequiredValidator(this.control);
-
-		this.control.valueChanges.subscribe((value) => {
-			console.log(value);
-		});
 	}
 
 	protected _toggleDropdown(): void {
 		this._toggleOn = !this._toggleOn;
+		this._menuService.setMenuStatus(this._toggleOn);
 	}
 
 	/**
@@ -144,6 +143,12 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	 */
 	protected _openDropdown(): void {
 		this._toggleOn = true;
+	}
+
+	protected _handleKeypress(event: KeyboardEvent): void {
+		if (this.variant !== 'autocomplete') {
+			event.preventDefault();
+		}
 	}
 
 	// private _setInitialValues(): void {

@@ -12,10 +12,12 @@
 			#inputRef
 			(click)="_toggleDropdown()"
 			[value]="control.value?.label"
-			class="fudis-select__input-wrapper__input"
+			class="fudis-select__input"
+			[class.fudis-select__input__dropdown]="variant !== 'autocomplete'"
 			[class.fudis-select__input-wrapper__input--invalid]="(control.touched && control.invalid) || invalidState"
 			role="combobox"
 			aria-haspopup="listbox"
+			(keypress)="_handleKeypress($event)"
 			[attr.aria-autocomplete]="'none'"
 			[attr.aria-disabled]="disabled"
 			[attr.placeholder]="placeholder"
@@ -23,10 +25,10 @@
 			[attr.aria-labelledby]="id + '-label'"
 			[attr.aria-describedby]="id + '_guidance'"
 			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null" />
-
 		<ng-container *ngIf="size !== 'xs'">
 			<fudis-icon
 				*ngIf="variant !== 'autocomplete'"
+				(click)="_toggleDropdown()"
 				class="fudis-select__input-wrapper__icon"
 				[icon]="'chevron'"
 				[rotate]="'cw-90'" />

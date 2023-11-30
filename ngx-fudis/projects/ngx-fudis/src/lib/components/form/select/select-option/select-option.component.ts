@@ -13,11 +13,11 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 	constructor(
 		private _viewRef: ViewContainerRef,
 		private _injector: Injector,
-		_clickService: FudisDropdownMenuItemService,
+		_menuService: FudisDropdownMenuItemService,
 		private _idService: FudisIdService,
 		@Host() protected _parentComponent: SelectComponent
 	) {
-		super(_clickService);
+		super(_menuService);
 	}
 
 	@ViewChild('dropdownItem') dropdownItem: ElementRef;
@@ -32,13 +32,9 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 
 	protected _clickOption(event: Event): void {
 		this.handleClick.emit(event);
-		this._closeDropdown();
 
-		// console.log(this._parent);
-		// console.log(this._parentComponent);
-		// console.log(this._viewRef.injector);
-
-		if (this._parentComponent?.control) {
+		if (!this.disabled) {
+			this._closeDropdown();
 			this._parentComponent.control.patchValue({ value: this.value, label: this.label });
 		}
 	}
