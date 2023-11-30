@@ -2,12 +2,14 @@ import {
 	AfterViewInit,
 	Component,
 	ContentChild,
+	ElementRef,
 	EventEmitter,
 	Input,
 	OnChanges,
 	OnInit,
 	Output,
 	Signal,
+	ViewChild,
 	ViewEncapsulation,
 	effect,
 } from '@angular/core';
@@ -44,11 +46,11 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 			this._noResultsFound = this._translations().AUTOCOMPLETE.MULTISELECT.NO_RESULTS;
 			this._removeItemText = this._translations().AUTOCOMPLETE.MULTISELECT.REMOVE_ITEM;
 
-			this._toggleOn = this._dropdownOpenSignal();
-
-			console.log(this._toggleOn);
+			this._dropdownOpen = this._dropdownOpenSignal();
 		});
 	}
+
+	@ViewChild('dropdownRef') dropdownRef: ElementRef;
 
 	@ContentChild(ContentDirective) content: ContentDirective;
 
@@ -89,7 +91,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	/**
 	 * Internal property for toggle dropdown visibility
 	 */
-	protected _toggleOn: boolean;
+	protected _dropdownOpen: boolean;
 
 	/**
 	 * Internal property for icon-only button aria-label when opening dropdown
@@ -110,6 +112,8 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	 * Internal property to indicate deleting item chip aria-label
 	 */
 	protected _removeItemText: string;
+
+	protected _firstOpenDone: boolean = false;
 
 	private _dropdownOpenSignal: Signal<boolean>;
 
@@ -134,19 +138,31 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	}
 
 	protected _toggleDropdown(): void {
-		this._toggleOn = !this._toggleOn;
-		this._menuService.setMenuStatus(this._toggleOn);
+		this._dropdownOpen = !this._dropdownOpen;
+		this._menuService.setMenuStatus(this._dropdownOpen);
+
+		if (!this._firstOpenDone && this._dropdownOpen) {
+			this._firstOpenDone = true;
+		}
 	}
 
 	/**
 	 * Open menu / Toggle dropdown menu on
 	 */
 	protected _openDropdown(): void {
-		this._toggleOn = true;
+		this._dropdownOpen = true;
+		this._menuService.setMenuStatus(this._dropdownOpen);
 	}
 
 	protected _handleKeypress(event: KeyboardEvent): void {
 		if (this.variant !== 'autocomplete') {
+			if (event.key === ' ') {
+				this._toggleDropdown();
+			}
+			if (event.key === 'ArrowDown' && !this._dropdownOpen) {
+				this._openDropdown();
+			}
+
 			event.preventDefault();
 		}
 	}

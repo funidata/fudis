@@ -28,6 +28,11 @@ export class DropdownBaseDirective {
 	@Input() size: FudisInputSize | 'xs' = 'lg';
 
 	/**
+	 * Set dropdown open
+	 */
+	@Input() open: boolean = false;
+
+	/**
 	 * Id for Dropdown Menu parent. Generated with FudisIdService
 	 */
 	public id: string;
@@ -40,12 +45,21 @@ export class DropdownBaseDirective {
 	@HostListener('window:keydown.arrowDown', ['$event'])
 	handleKeyDown(event: KeyboardEvent) {
 		event.preventDefault();
-		const firstChildElement = this.dropdownElement.nativeElement.children[0];
 
-		// If focus is on the menu button, only then listen keydown and focus on the first child
-		if (firstChildElement.closest('fudis-button')?.querySelector('.fudis-button') === document.activeElement) {
-			const firstChildButtonElement = firstChildElement.querySelector('button');
-			firstChildButtonElement?.focus();
+		if (this.open) {
+			const firstChildElement = this.dropdownElement.nativeElement.children[0];
+
+			const focusOnMenuButton =
+				firstChildElement.closest('fudis-button')?.querySelector('.fudis-button') === document.activeElement;
+
+			const focusOnSelectInput =
+				firstChildElement.closest('fudis-select')?.querySelector('.fudis-select__input') === document.activeElement;
+
+			// If focus is on the menu button, only then listen keydown and focus on the first child
+			if (focusOnMenuButton || focusOnSelectInput) {
+				const firstChildButtonElement = firstChildElement.querySelector('button');
+				firstChildButtonElement?.focus();
+			}
 		}
 	}
 }

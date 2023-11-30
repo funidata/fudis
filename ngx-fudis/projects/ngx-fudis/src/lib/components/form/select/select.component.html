@@ -17,7 +17,7 @@
 			[class.fudis-select__input-wrapper__input--invalid]="(control.touched && control.invalid) || invalidState"
 			role="combobox"
 			aria-haspopup="listbox"
-			(keypress)="_handleKeypress($event)"
+			(keydown)="_handleKeypress($event)"
 			[attr.aria-autocomplete]="'none'"
 			[attr.aria-disabled]="disabled"
 			[attr.placeholder]="placeholder"
@@ -39,12 +39,17 @@
 				[size]="'icon-only'"
 				[variant]="'tertiary'"
 				[icon]="'chevron'"
-				[iconRotate]="_toggleOn ? 'ccw-90' : 'cw-90'"
-				[label]="!_toggleOn ? _openAriaLabel : _closeAriaLabel"
+				[iconRotate]="_dropdownOpen ? 'ccw-90' : 'cw-90'"
+				[label]="!_dropdownOpen ? _openAriaLabel : _closeAriaLabel"
 				[labelHidden]="true" />
 		</ng-container>
 	</div>
-	<fudis-select-dropdown *ngIf="_toggleOn" [multiselect]="multiselect" [size]="size">
+	<fudis-select-dropdown
+		*ngIf="_firstOpenDone"
+		#dropdownRef
+		[open]="_dropdownOpen"
+		[multiselect]="multiselect"
+		[size]="size">
 		<ng-container *ngIf="content?.type === 'select-options'">
 			<ng-container *ngTemplateOutlet="content!.templateRef"></ng-container>
 		</ng-container>

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Host, Injector, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, Host, Input, OnInit, ViewChild } from '@angular/core';
 import { DropdownItemBaseDirective } from '../../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { FudisDropdownMenuItemService } from '../../../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { FudisIdService } from '../../../../services/id/id.service';
@@ -11,8 +11,6 @@ import { SelectComponent } from '../select.component';
 })
 export class SelectOptionComponent extends DropdownItemBaseDirective implements OnInit {
 	constructor(
-		private _viewRef: ViewContainerRef,
-		private _injector: Injector,
 		_menuService: FudisDropdownMenuItemService,
 		private _idService: FudisIdService,
 		@Host() protected _parentComponent: SelectComponent
@@ -36,6 +34,7 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 		if (!this.disabled) {
 			this._closeDropdown();
 			this._parentComponent.control.patchValue({ value: this.value, label: this.label });
+			this._parentComponent.inputRef.nativeElement.focus();
 		}
 	}
 
