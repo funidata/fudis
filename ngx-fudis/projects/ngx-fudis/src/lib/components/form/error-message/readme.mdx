@@ -1,0 +1,39 @@
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import { linkTo } from '@storybook/addon-links';
+import { ErrorMessageComponent } from './error-message.component'
+import * as ErrorMessageStories from './error-message.stories'
+
+<Meta title="Components/Form/Error Message" />
+
+# Error message
+
+Fudis Error Message component is rendered as a part of [Guidance Component](/docs/components-guidance) when a form field contains validation errors.
+
+## Validation Error Message
+
+
+
+<Canvas of={ErrorMessageStories.ErrorMessageExample}></Canvas>
+
+
+
+## Custom Error Message
+
+
+
+````
+<form [formGroup]="mainFormGroup">
+	<fudis-text-input
+	[control]="mainFormGroup.controls['required']"
+	[label]="'Required text input'"
+	[tooltip]="'This is a tooltip text'"
+	[tooltipPosition]="'right'"
+	[tooltipToggle]="false"
+	[helpText]="'Please add some content.'">
+	<fudis-error-message
+		[message]="'This is a custom error message'"
+		[type]="'required'"
+		[visible]="mainFormGroup.controls['required'].invalid && mainFormGroup.controls['required'].touched" />
+</fudis-text-input>
+</form>`
+````

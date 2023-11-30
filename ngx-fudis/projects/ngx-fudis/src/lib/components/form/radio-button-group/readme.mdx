@@ -15,7 +15,7 @@ Radio-button-group is essentially a fieldset with legend and radio inputs.
 
 ## Usage Guidelines
 
-#### Mandatory Properties
+### Mandatory Properties
 
 Necessary properties for radio-button-group are `title`, `control` and `options`.
 Radio-button-group has to have **at least** two radio options and should **not be used** with only one option available. Otherwise it will throw an error.
@@ -39,17 +39,16 @@ Options array takes in objects with the following signature:
 
 **NOTE:** The _name_ value should be exactly the same in all objects in the options array. Otherwise it will throw an error.
 
-#### As a required form field
+### Included validators
 
-If radio-button-group fieldset is a **required** form field include `FudisValidators.required()` in the form control validator with message parameter either as a string or as an observable string. E.g. `FudisValidators.required('This is required field')`.
+- **Required**
 
-### Error Handling
+See the full documentation for validators and error handling on [Fudis Validators page](/docs/utilities-validators--documentation).
 
-- **Required** error is shown if radio-button-group fieldset is required and
-  - if control is touched and
-			- if control value is null
+### Custom Error message
+For creating a custom error message, see the full documentation on [Error Message page](/docs/components-form-error-message--documentation).
 
-### Accessibility
+## Accessibility
 
 - Fieldset has a legend as its first child element
 - Radio-button options are grouped by name attribute
