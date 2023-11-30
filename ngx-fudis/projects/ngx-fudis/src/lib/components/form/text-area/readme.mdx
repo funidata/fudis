@@ -17,33 +17,21 @@ Text Area can only be resized vertically, horizontal resizing is disabled to avo
 
 ## Usage Guidelines
 
-#### Mandatory Properties
+### Mandatory Properties
 
 Necessary properties for Text Area are `label` and `control`.
 
-#### As a required form field
+### Included validators
 
-If Text Area is a **required** form field, include `FudisValidators.required()` in the form control validator with message parameter either as a string or as an observable string. E.g. `FudisValidators.required('This is required field')`.
+- **required**
+- **minLength and maxLength**
 
-#### With minLength and maxLength validators
+See the full documentation for validators and error handling on [Fudis Validators page](/docs/utilities-validators--documentation).
 
-Text Area can have min and max length validators. 
+### Custom Error message
+For creating a custom error message, see the full documentation on [Error Message page](/docs/components-form-error-message--documentation).
 
-For min length, include `FudisValidators.minLength()` in the form control validators.
-
-Max length validator does not prompt any error message but disable user to input more than allowed length of characters to the input field. For max length, include `FudisValidators.maxLength()` in the form control validators and pass wanted maxLength as an Input to the Text Area <code>[maxLength]="maxLength"</code>. This will also activate the maximum character indicator to the bottom right corner of the input.
-
-### Error Handling
-
-- **Required** error is shown if text Area is required and
-  - if control is touched and
-			- Text Area value is null
-- **minLength** error is shown
-	- if control is touched and 
-		- if control value is not null and
-			- if control value is not respective to given **minlength** validator value
-
-### Accessibility
+## Accessibility
 
 - Label and guidance are linked to the Text Area via id
 - Screen reader is informed when maximum character length has 5 characters left and when maximum character count is reached

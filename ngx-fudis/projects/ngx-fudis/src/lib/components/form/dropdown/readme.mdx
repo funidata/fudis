@@ -20,28 +20,22 @@ Fudis Dropdown is based on Angular Material Select and it has two possible use c
 
 Tooltip can be given as an additional feature for the dropdown label.
 
-#### Mandatory Properties
+### Mandatory Properties
 
 Necessary properties for the dropdown are `label`, `control` and `options`.
 
-#### As a required form field
+### Included validators
 
-If Dropdown is a **required** form field, include `FudisValidators.required()` in the form control validator with message parameter either as a string or as an observable string. E.g. `FudisValidators.required('This is required field')`.
+- **required**
+- **minLength and maxLength**
 
-#### With minLength and maxLength validators
+See the full documentation for validators and error handling on [Fudis Validators page](/docs/utilities-validators--documentation).
 
-Multiselect dropdown can have min and max length validators. Include `FudisValidators.minLength()` and/or `FudisValidators.maxLength()` in the form control validators with a threshold number and proper message property.
+### Custom Error message
 
-### Error Handling
+For creating a custom error message, see the full documentation on [Error Message page](/docs/components-form-error-message--documentation).
 
-- **Required** error is shown if dropdown is required and
-  - if control is touched and
-			- if control value is empty
-- **minLength** and/or **maxLength** errors are shown
-	- if control is touched and
-		- if control value length does not match the given validators length
-
-### Accessibility
+## Accessibility
 
 - Label and guidance text are linked to the dropdown select via id.
 - Keyboard users can navigate dropdown option list with <code>ArrowDown</code>, <code>ArrowUp</code>, <code>Tab</code>, <code>Space</code>, <code>Enter</code> and <code>Escape</code> keys.
