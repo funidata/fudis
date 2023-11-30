@@ -5,16 +5,14 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:ngx-fudis": "ng build ngx-fudis",
-    "watch": "ng build --watch --configuration development",
+    "build:ngx-fudis": "ng build ngx-fudis -c production",
     "test": "ng test",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "STORYBOOK_FUDIS_VERSION='' ng run storybook:start",
     "build-storybook": "npm run docs:json && STORYBOOK_FUDIS_VERSION=\"${STORYBOOK_FUDIS_VERSION- }\" ng run storybook:build",
     "stylelint-scss-check": "stylelint-config-prettier-scss-check",
     "lint": "ng lint",
-    "stylelint": "stylelint '**/*.{css,scss}'",
-    "asd": "echo $npm_package_version"
+    "stylelint": "stylelint '**/*.{css,scss}'"
   },
   "private": true,
   "dependencies": {
