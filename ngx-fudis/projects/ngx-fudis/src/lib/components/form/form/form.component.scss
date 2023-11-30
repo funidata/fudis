@@ -37,4 +37,16 @@
 			}
 		}
 	}
+
+	&__content {
+		&__actions {
+			float: right;
+			margin-right: spacing.$spacing-xs;
+			margin-bottom: spacing.$spacing-xs;
+
+			fudis-button:not(:first-of-type) {
+				padding: spacing.$spacing-xs 0 0 spacing.$spacing-xs;
+			}
+		}
+	}
 }

@@ -46,7 +46,7 @@
 			</ng-container>
 		</div>
 	</div>
-	<ng-container *ngIf="headerActions?.type === 'form'">
+	<ng-container *ngIf="headerActions?.type === 'form' && !headerActions.bottomButtons">
 		<div class="fudis-form__header__actions">
 			<ng-container *ngTemplateOutlet="headerActions!.templateRef" />
 		</div>
@@ -54,6 +54,11 @@
 	<ng-container *ngIf="mainContent?.type === 'form'">
 		<div class="fudis-form__content">
 			<ng-container *ngTemplateOutlet="mainContent!.templateRef" />
+			<ng-container *ngIf="headerActions?.type === 'form' && headerActions.bottomButtons">
+				<div class="fudis-form__content__actions">
+					<ng-container *ngTemplateOutlet="headerActions!.templateRef" />
+				</div>
+			</ng-container>
 		</div>
 	</ng-container>
 </form>
