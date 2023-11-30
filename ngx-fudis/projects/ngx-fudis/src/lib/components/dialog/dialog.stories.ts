@@ -1,11 +1,17 @@
 // eslint-disable-next-line max-classes-per-file
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentType } from '@angular/cdk/portal';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 import readme from './readme.mdx';
 import { FudisValidators } from '../../utilities/form/validators';
+import { FudisErrorSummaryService } from '../../services/form/error-summary/error-summary.service';
+
+type TestForm = {
+	powerAnimal: FormControl<string | null>;
+};
 
 @Component({
 	selector: 'example-dialog-content',
@@ -80,23 +86,28 @@ class DialogExampleContentComponent {}
 			<fudis-dialog [closeButtonLabel]="'Close dialog'" [size]="'sm'">
 				<fudis-heading fudisDialogTitle [level]="2">Power animal dialog</fudis-heading>
 				<fudis-dialog-content>
-					<ng-container *ngIf="exampleDialogFormGroup">
-						<form>
-							<fudis-text-input
-								[id]="'example-input-power-animal'"
-								[label]="'What is your power animal?'"
-								[control]="exampleDialogFormGroup.controls['powerAnimal']"
-								[helpText]="'Please add some values'" />
-						</form>
-					</ng-container>
+					<fudis-form
+						[errorSummaryVisible]="errorSummaryVisible"
+						[title]="'Dialog with fudis-form'"
+						[errorSummaryLinkType]="'href'"
+						[errorSummaryHelpText]="'You need to fill up the information.'">
+						<ng-template fudisContent [type]="'form'">
+							<fudis-fieldset [title]="'Answer this'">
+								<ng-template fudisContent [type]="'fieldset'">
+									<fudis-text-input
+										[id]="'example-input-power-animal'"
+										[label]="'What is your power animal?'"
+										[control]="exampleDialogFormGroup.controls['powerAnimal']"
+										[helpText]="'Please add some values'" />
+								</ng-template>
+							</fudis-fieldset>
+						</ng-template>
+						<ng-template fudisActions type="form" [bottomButtons]="true">
+							<fudis-button (handleClick)="closeDialogWithForm()" [label]="'Save'"></fudis-button>
+							<fudis-button fudisDialogClose [label]="'Cancel'"></fudis-button>
+						</ng-template>
+					</fudis-form>
 				</fudis-dialog-content>
-				<fudis-dialog-actions>
-					<fudis-button fudisDialogClose [label]="'Cancel'"></fudis-button>
-					<fudis-button
-						(handleClick)="closeDialogWithForm()"
-						[disabled]="!exampleDialogFormGroup.valid"
-						[label]="'Save'"></fudis-button>
-				</fudis-dialog-actions>
 			</fudis-dialog>
 		</ng-template>
 		<ng-template #dialogWithGrid> </ng-template>
@@ -105,25 +116,32 @@ class DialogExampleContentComponent {}
 class DialogExampleLauncherComponent implements OnInit {
 	constructor(
 		public dialog: FudisDialogService,
-		private _formBuilder: FormBuilder
+		private _errorSummaryService: FudisErrorSummaryService
 	) {}
 
-	chosenPowerAnimal: string;
+	chosenPowerAnimal: string | null;
+
+	errorSummaryVisible = false;
 
 	dialogContentComponent: DialogExampleContentComponent;
 
-	exampleDialogFormGroup: FormGroup;
+	exampleDialogFormGroup = new FormGroup<TestForm>({
+		powerAnimal: new FormControl(null, FudisValidators.required('You need to choose your power animal')),
+	});
 
 	ngOnInit(): void {
 		this.dialogContentComponent = DialogExampleContentComponent;
-		this.exampleDialogFormGroup = this._formBuilder.group({
-			powerAnimal: new FormControl('', FudisValidators.required('This is required field.')),
-		});
 	}
 
 	closeDialogWithForm() {
-		if (this.exampleDialogFormGroup.valid) {
-			this.chosenPowerAnimal = this.exampleDialogFormGroup.controls['powerAnimal'].value;
+		this.exampleDialogFormGroup.markAllAsTouched();
+
+		if (this.exampleDialogFormGroup.invalid) {
+			this.errorSummaryVisible = true;
+			this._errorSummaryService.reloadErrors();
+		} else {
+			this.errorSummaryVisible = false;
+			this.chosenPowerAnimal = this.exampleDialogFormGroup.controls.powerAnimal.value;
 			this.dialog.close();
 		}
 	}
@@ -142,7 +160,7 @@ export default {
 	component: DialogExampleLauncherComponent,
 	decorators: [
 		moduleMetadata({
-			imports: [ReactiveFormsModule, FormsModule],
+			imports: [ReactiveFormsModule, FormsModule, RouterTestingModule],
 			providers: [FudisDialogService],
 			declarations: [DialogExampleContentComponent],
 		}),
