@@ -13,6 +13,8 @@
 			(click)="_toggleDropdown()"
 			[value]="control.value?.label"
 			class="fudis-select__input"
+			[class.fudis-form-input--disabled]="disabled"
+			[class.fudis-form-input--invalid]="(control.touched && control.invalid) || (control.touched && invalidState)"
 			[class.fudis-select__input__dropdown]="variant !== 'autocomplete'"
 			[class.fudis-select__input-wrapper__input--invalid]="(control.touched && control.invalid) || invalidState"
 			role="combobox"

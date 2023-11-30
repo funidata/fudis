@@ -13,7 +13,7 @@
 		class="fudis-text-area__input"
 		[formControl]="control"
 		(blur)="onBlur($event)"
-		[class.fudis-text-area__input--invalid]="(control.touched && control.invalid) || invalidState"
+		[class.fudis-form-input--invalid]="(control.touched && control.invalid) || invalidState"
 		[id]="id"
 		[attr.aria-describedby]="id + '_guidance'"
 		[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"

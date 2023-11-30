@@ -11,9 +11,5 @@
 		padding: spacing.$spacing-xxs;
 		width: 100%;
 		resize: vertical; // Enable resizing the textarea only vertically. Can be also 'none' if we want to disable resizing all together
-
-		&--invalid {
-			@include border.border('1px', 'solid', 'red');
-		}
 	}
 }

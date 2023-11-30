@@ -137,6 +137,9 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		this._required = this.required ?? hasRequiredValidator(this.control);
 	}
 
+	/**
+	 * Toggle dropdown menu
+	 */
 	protected _toggleDropdown(): void {
 		this._dropdownOpen = !this._dropdownOpen;
 		this._menuService.setMenuStatus(this._dropdownOpen);
@@ -147,37 +150,41 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	}
 
 	/**
-	 * Open menu / Toggle dropdown menu on
+	 * Open dropdown menu
 	 */
 	protected _openDropdown(): void {
 		this._dropdownOpen = true;
-		this._menuService.setMenuStatus(this._dropdownOpen);
+		this._menuService.setMenuStatus(true);
+	}
+
+	/**
+	 * Close dropdown menu
+	 */
+	protected _closeDropdown(): void {
+		this._dropdownOpen = false;
+		this._menuService.setMenuStatus(false);
 	}
 
 	protected _handleKeypress(event: KeyboardEvent): void {
 		if (this.variant !== 'autocomplete') {
-			if (event.key === ' ') {
-				this._toggleDropdown();
-			}
-			if (event.key === 'ArrowDown' && !this._dropdownOpen) {
-				this._openDropdown();
-			}
+			const { key } = event;
 
-			event.preventDefault();
+			switch (key) {
+				case ' ':
+				case 'Enter':
+					event.preventDefault();
+					this._toggleDropdown();
+					break;
+				case 'ArrowDown':
+					if (!this._dropdownOpen) {
+						this._openDropdown();
+					}
+					break;
+				case 'Tab':
+					break;
+				default:
+					event.preventDefault();
+			}
 		}
 	}
-
-	// private _setInitialValues(): void {
-	// 	if (!Array.isArray(this.selectedOptions) && !this.multipleOption) {
-	// 		const valueToFind: FudisDropdownOption = this.selectedOptions;
-
-	// 		const foundIndex = this.options.findIndex((option) => {
-	// 			return option.value === valueToFind?.value && option.label === valueToFind?.label;
-	// 		});
-
-	// 		if (foundIndex !== -1) {
-	// 			this.control.patchValue(this.options[foundIndex]);
-	// 		}
-	// 	}
-	// }
 }

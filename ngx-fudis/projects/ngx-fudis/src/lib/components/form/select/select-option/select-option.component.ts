@@ -1,4 +1,5 @@
 import { Component, ElementRef, Host, Input, OnInit, ViewChild } from '@angular/core';
+import { FudisDropdownOption } from '../../../../types/forms';
 import { DropdownItemBaseDirective } from '../../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { FudisDropdownMenuItemService } from '../../../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { FudisIdService } from '../../../../services/id/id.service';
@@ -32,8 +33,11 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 		this.handleClick.emit(event);
 
 		if (!this.disabled) {
+			const selectedOption: FudisDropdownOption = { value: this.value, label: this.label };
+
 			this._closeDropdown();
-			this._parentComponent.control.patchValue({ value: this.value, label: this.label });
+			this._parentComponent.control.patchValue(selectedOption);
+			this._parentComponent.handleSelectionChange(selectedOption);
 			this._parentComponent.inputRef.nativeElement.focus();
 		}
 	}

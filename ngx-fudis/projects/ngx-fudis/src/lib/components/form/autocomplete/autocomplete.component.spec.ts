@@ -98,7 +98,7 @@ describe('AutocompleteComponent', () => {
 			component.control.markAsTouched();
 			fixture.detectChanges();
 
-			expect(autocompleteInput.className).toContain('fudis-autocomplete__input--invalid');
+			expect(autocompleteInput.className).toContain('fudis-form-input--invalid');
 		});
 	});
 });

@@ -22,10 +22,6 @@
 		&:focus {
 			@include focus.focus-form-field;
 		}
-
-		&--invalid {
-			border-color: colors.$color-red;
-		}
 	}
 
 	// Keep number input arrows visible all the time

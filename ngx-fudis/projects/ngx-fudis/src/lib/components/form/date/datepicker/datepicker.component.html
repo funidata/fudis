@@ -18,8 +18,8 @@
 			[readonly]="disabled"
 			[attr.aria-disabled]="disabled ? true : null"
 			class="fudis-datepicker__input"
-			[class.fudis-datepicker__input--invalid]="(control.invalid && control.touched) || invalidState"
-			[class.fudis-datepicker__input--disabled]="disabled"
+			[class.fudis-form-input--invalid]="(control.invalid && control.touched) || invalidState"
+			[class.fudis-form-input--disabled]="disabled"
 			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
 			[attr.required]="_required ? true : null"
 			[attr.aria-describedby]="id + '_guidance'" />

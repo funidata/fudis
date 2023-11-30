@@ -42,17 +42,6 @@
 				@include colorMixins.bg-color('transparent');
 			}
 		}
-
-		&--invalid {
-			border-color: colors.$color-red;
-		}
-
-		&--disabled {
-			@include borders.border('1px', 'dashed', 'gray-middle');
-			@include colorMixins.bg-color('gray-extra-light');
-
-			cursor: default;
-		}
 	}
 
 	&__viewport {
