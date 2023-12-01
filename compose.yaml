@@ -1,5 +1,5 @@
 services:
-  fudis:
+  fudis-storybook:
     build: ./ngx-fudis/
     image: fudis
     container_name: fudis-storybook
@@ -10,7 +10,7 @@ services:
       - ./ngx-fudis/projects/ngx-fudis/src:/usr/src/app/projects/ngx-fudis/src
       - ./ngx-fudis/projects/documentation:/usr/src/app/projects/documentation
 
-  sandbox:
+  fudis-sandbox:
     image: fudis
     container_name: fudis-sandbox
     command: npm start

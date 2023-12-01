@@ -7,9 +7,13 @@
 		"doc": "docs"
 	},
 	"scripts": {
-		"start": "docker compose up --build -d && npm run logs",
-		"logs": "docker compose logs -f",
+		"setup": "npm ci && cd ngx-fudis && npm ci",
+		"start": "npm run start:storybook && npm run logs",
+		"start:all": "npm run start:storybook && npm run start:sandbox && npm run logs",
+		"start:sandbox": "docker compose up --build -d fudis-sandbox",
+		"start:storybook": "docker compose up --build -d fudis-storybook",
 		"stop": "docker compose down",
+		"logs": "docker compose logs -f",
 		"build": "docker build -t fudis:latest ./ngx-fudis && docker cp $(docker create fudis:latest):/usr/src/app/dist ./ngx-fudis/dist",
 		"dev": "cd ngx-fudis && ng build ngx-fudis --watch",
 		"storybook": "cd ngx-fudis && npm run storybook",
