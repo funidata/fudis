@@ -92,7 +92,7 @@ class DialogExampleContentComponent {}
 						[errorSummaryLinkType]="'href'"
 						[errorSummaryHelpText]="'You need to fill up the information.'">
 						<ng-template fudisContent [type]="'form'">
-							<fudis-fieldset [title]="'Answer this'">
+							<fudis-fieldset [title]="'Question about your power animal'">
 								<ng-template fudisContent [type]="'fieldset'">
 									<fudis-text-input
 										[id]="'example-input-power-animal'"
@@ -103,7 +103,7 @@ class DialogExampleContentComponent {}
 							</fudis-fieldset>
 						</ng-template>
 						<ng-template fudisActions type="form">
-							<fudis-button (handleClick)="closeDialogWithForm()" [label]="'Save'"></fudis-button>
+							<fudis-button (handleClick)="closeDialogWithForm()" [label]="'Submit'"></fudis-button>
 							<fudis-button fudisDialogClose [label]="'Cancel'"></fudis-button>
 						</ng-template>
 					</fudis-form>
