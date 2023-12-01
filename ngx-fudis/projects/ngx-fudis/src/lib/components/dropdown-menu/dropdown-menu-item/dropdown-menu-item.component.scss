@@ -35,13 +35,6 @@
 			@include colorMixins.text-color('white');
 		}
 
-		&[aria-disabled='true'] {
-			@include colorMixins.bg-color('gray-extra-light');
-			@include colorMixins.text-color('gray-middle');
-
-			cursor: default;
-		}
-
 		&--checked {
 			@include colorMixins.bg-color('primary-dark');
 			@include colorMixins.text-color('white');
@@ -52,9 +45,18 @@
 				}
 			}
 		}
+
+		&--disabled {
+			@include colorMixins.bg-color('gray-extra-light');
+			@include colorMixins.text-color('gray-middle');
+
+			cursor: default;
+		}
 	}
 
 	&__multiselect {
+		@include colorMixins.text-color('gray-dark');
+
 		display: block;
 		width: auto;
 
@@ -62,20 +64,34 @@
 			@include colorMixins.bg-color('primary-light');
 		}
 
+		&--disabled {
+			@include colorMixins.bg-color('gray-extra-light');
+			@include colorMixins.text-color('gray-middle');
+
+			cursor: default;
+		}
+
+		&--checked {
+			@include colorMixins.text-color('white');
+			@include colorMixins.bg-color('primary');
+
+			&:hover {
+				@include colorMixins.text-color('gray-dark');
+			}
+		}
+
+		&--focused {
+			@include colorMixins.bg-color('primary-light');
+			@include colorMixins.text-color('gray-dark');
+		}
+
 		&__label {
 			@include typography.body-text-md-regular;
-			@include colorMixins.text-color('gray-dark');
 
 			display: flex;
 			align-items: center;
 			margin-bottom: 0;
 			padding: spacing.$spacing-xs spacing.$spacing-xs spacing.$spacing-xs 0;
-
-			&--focus {
-			}
-
-			&--checked {
-			}
 
 			&__checkbox {
 				@include borders.border('1px', 'solid', 'gray-middle');
@@ -90,7 +106,7 @@
 				width: spacing.$spacing-sm;
 				height: spacing.$spacing-sm;
 
-				svg {
+				&__icon {
 					@include colorMixins.bg-color('white');
 				}
 
@@ -102,6 +118,7 @@
 					position: absolute;
 					place-content: center;
 
+					/* stylelint-disable-next-line max-nesting-depth */
 					&:focus {
 						@include focus.focus-checkbox;
 					}
@@ -112,27 +129,6 @@
 				position: relative;
 				margin-left: spacing.$spacing-lg;
 			}
-		}
-	}
-
-	&__checkbox {
-		&__box {
-		}
-
-		&__label {
-			&__text {
-			}
-
-			&--active {
-				@include colorMixins.text-color('white');
-
-				&:hover {
-					@include colorMixins.text-color('gray-dark');
-				}
-			}
-		}
-
-		&__input {
 		}
 	}
 }

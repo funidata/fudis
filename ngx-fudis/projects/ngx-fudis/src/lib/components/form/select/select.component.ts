@@ -22,6 +22,7 @@ import { FudisDropdownOption, FudisInputSize } from '../../../types/forms';
 import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 import { FudisDropdownMenuItemService } from '../../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
+import { SelectDropdownComponent } from './select-dropdown/select-dropdown.component';
 
 @Component({
 	selector: 'fudis-select',
@@ -50,7 +51,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		});
 	}
 
-	@ViewChild('dropdownRef') dropdownRef: ElementRef;
+	@ViewChild('dropdownRef') dropdownRef: SelectDropdownComponent;
 
 	@ContentChild(ContentDirective) content: ContentDirective;
 
@@ -135,12 +136,24 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	/**
 	 * Toggle dropdown menu
 	 */
-	protected _toggleDropdown(): void {
+	protected _toggleDropdown(focusToFirstOption?: boolean): void {
 		this._dropdownOpen = !this._dropdownOpen;
 		this._menuService.setMenuStatus(this._dropdownOpen);
 
 		if (!this._firstOpenDone && this._dropdownOpen) {
 			this._firstOpenDone = true;
+		}
+
+		if (focusToFirstOption) {
+			setTimeout(() => {
+				console.log(
+					(
+						this.dropdownRef.dropdownElement.nativeElement.querySelector(
+							'.fudis-dropdown-menu-item__multiselect__label__checkbox__input'
+						) as HTMLInputElement
+					).focus()
+				);
+			}, 1000);
 		}
 	}
 
@@ -165,6 +178,8 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	}
 
 	protected _handleKeypress(event: KeyboardEvent): void {
+		console.log('wrum');
+
 		if (this.variant !== 'autocomplete') {
 			const { key } = event;
 
@@ -176,7 +191,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 					break;
 				case 'ArrowDown':
 					if (!this._dropdownOpen) {
-						this._openDropdown();
+						this._toggleDropdown(true);
 					}
 					break;
 				case 'Tab':

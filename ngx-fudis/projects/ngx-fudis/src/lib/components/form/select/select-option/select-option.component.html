@@ -2,6 +2,7 @@
 	*ngIf="!_parentComponent.multiselect"
 	#dropdownItem
 	class="fudis-dropdown-menu-item__single-select"
+	[class.fudis-dropdown-menu-item__single-select--disabled]="disabled"
 	role="menuitem"
 	[attr.id]="_id"
 	[attr.aria-disabled]="disabled"
@@ -15,7 +16,9 @@
 	*ngIf="_parentComponent.multiselect"
 	class="fudis-dropdown-menu-item__multiselect"
 	[attr.id]="_id"
-	[class.fudis-dropdown-menu-item__multiselect--checked]="checked">
+	[class.fudis-dropdown-menu-item__multiselect--checked]="checked"
+	[class.fudis-dropdown-menu-item__multiselect--focused]="_focused"
+	[class.fudis-dropdown-menu-item__multiselect--disabled]="disabled">
 	<label
 		class="fudis-dropdown-menu-item__multiselect__label"
 		[class.fudis-dropdown-menu-item__multiselect__label--focus]="_focused"
@@ -24,7 +27,7 @@
 			<input
 				#dropdownItem
 				type="checkbox"
-				class="fudis-dropdown-menu-item__multiselect__checkbox__input"
+				class="fudis-dropdown-menu-item__multiselect__label__checkbox__input"
 				[attr.role]="'option'"
 				[attr.aria-disabled]="disabled"
 				(click)="_clickMultiselectOption($event)"
@@ -34,6 +37,7 @@
 				(blur)="_blurFromOption($event)" />
 			<svg
 				*ngIf="checked"
+				class="fudis-dropdown-menu-item__multiselect__label__checkbox__icon"
 				width="100%"
 				height="100%"
 				preserveAspectRatio="xMidYMin"
