@@ -1,6 +1,6 @@
 {
 	"name": "@funidata/ngx-fudis",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"exports": {
 		".": {
 			"sass": "./_index.scss"
