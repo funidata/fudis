@@ -11,15 +11,16 @@ Fudis Form components uses FudisValidators that have following types: `required`
 
 ### Required validator
 
-**required** error is shown if user input is required and
-- if control is touched and
-		- if control value is null
-
 For required form field, include `FudisValidators.required()` in the form control validator with message parameter either as a string or as an observable string.
 
 ```
 FudisValidators.required('This is required field')
 ```
+#### Error handling
+
+**required** error is shown if user input is required and
+- if control is touched and
+		- if control value is null
 
 ---
 
@@ -36,25 +37,22 @@ FudisValidators.email('Input must be an email address.')
 
 ### MinLength and MaxLength validators
 
-**minLength** and/or **maxLength** errors are shown
-- if control is touched and
-	- if control value is not null and
-		- if control value length does not match the given validators length
-
 For minLength and maxLength, include `FudisValidators.minLength()` and `FudisValidators.maxLength()` in the form control validator with prefered input length as number and a message parameter as a string or as an observable string.
 Max length validator does not prompt any error message but disable user to input more than allowed length of characters to the input field. 
 
 ```
 FudisValidators.maxLength(20, 'Too long email.')
 ```
+#### Error handling
+
+**minLength** and/or **maxLength** errors are shown
+- if control is touched and
+	- if control value is not null and
+		- if control value length does not match the given validators length
+
 ---
 
 ### Min and Max validators
-
-**minNumber** and/or **maxNumber** errors are shown
-	- if control is touched and
-		- if control value is not null and
-			- if control value is not respective to given **min** and/or **max** validator values
 
 Min and Max validators are used with form field `[type]="'number'"` Min and Max validator disables inputs that exceeds over or fall below the allowed values.
 Form components that use 
@@ -65,6 +63,13 @@ Form components that include min/max validation reguire a validation number and 
 FudisValidators.max(10,'Given number is cannot exceed over 10.')
 
 ```
+#### Error handling
+
+**minNumber** and/or **maxNumber** errors are shown
+	- if control is touched and
+		- if control value is not null and
+			- if control value is not respective to given **min** and/or **max** validator values
+
 ---
 
 ### Pattern validator

@@ -22,16 +22,16 @@ Datepicker allows user to select a date from valid options.
 
 Datepicker requires at least `label` and `id` properties for accessibility.
 
-### Included validators
+### Validators and Error handling
 
-- **required**
+Fudis form components use Fudis Validators. See the full documentation on [how to use Fudis Validators](/docs/utilities-validators--documentation). 
 
-See the full documentation for validators and error handling on [Fudis Validators page](/docs/utilities-validators--documentation).
+If a custom validation is used, read [how to add Custom Error message](/docs/components-form-error-message--documentation).
+
+**Datepicker validators**
+- required
 
 ### Other validation options
-
-**matDatepickerMin** and/or **matDatepickerMax** error is shown
-  - if written date is outside the range of min and max
 
 If you need minimum / maximum date selection range, add `min` and/or `max` properties to the component.
 
@@ -50,6 +50,10 @@ For unknown input format provide `matDatepickerParse` value for `errorMsg` prope
 >
 </fudis-datepicker>
 ```
+#### Error handling
+
+**matDatepickerMin** and/or **matDatepickerMax** error is shown
+  - if written date is outside the range of min and max
 
 ## Localization
 
