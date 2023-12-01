@@ -16,7 +16,7 @@ import {
 } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
 
-import { FudisDropdownOption, FudisCheckboxOption } from 'dist/ngx-fudis/lib/types/forms';
+import { FudisDropdownOption, FudisCheckboxOption, FudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
 
 import { FudisAlert } from 'dist/ngx-fudis/lib/types/miscellaneous';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -25,6 +25,7 @@ import { DialogTestContentComponent } from './dialog-test/dialog-test-content/di
 type MyForm = {
 	textInput: FormControl<string | null | number>;
 	checkboxFormGroup: FormGroup;
+	truth: FormControl<boolean | null>;
 };
 
 @Component({
@@ -97,6 +98,11 @@ export class AppComponent implements OnInit {
 		{ controlName: 'strawberry', label: 'strawberry' },
 	];
 
+	radioButtonOptions: FudisRadioButtonOption[] = [
+		{ value: true, viewValue: 'True', id: 'boolean-2', name: 'booleans' },
+		{ value: false, viewValue: 'False', id: 'boolean-1', name: 'booleans' },
+	];
+
 	testFormGroup = new FormGroup<MyForm>({
 		textInput: new FormControl<string | null | number>(null, [
 			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required')),
@@ -119,6 +125,10 @@ export class AppComponent implements OnInit {
 					message: this._translocoService.selectTranslate('chooseBerryErrorMax'),
 				}),
 			]
+		),
+		truth: new FormControl<boolean | null>(
+			null,
+			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
 		),
 	});
 

@@ -8,6 +8,10 @@
 			&__badge {
 				margin-left: spacing.$spacing-xs;
 			}
+
+			&__dialog {
+				max-width: calc(100% - spacing.$spacing-lg);
+			}
 		}
 
 		&__main {
@@ -17,6 +21,7 @@
 		}
 
 		&__actions {
+			margin-right: spacing.$spacing-xs;
 			margin-bottom: spacing.$spacing-sm;
 
 			fudis-button:not(:last-of-type) {
@@ -34,18 +39,6 @@
 				fudis-button:not(:first-of-type) {
 					margin-bottom: spacing.$spacing-none;
 				}
-			}
-		}
-	}
-
-	&__content {
-		&__actions {
-			float: right;
-			margin-right: spacing.$spacing-xs;
-			margin-bottom: spacing.$spacing-xs;
-
-			fudis-button:not(:first-of-type) {
-				padding: spacing.$spacing-xs 0 0 spacing.$spacing-xs;
 			}
 		}
 	}

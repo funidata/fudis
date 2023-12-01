@@ -2,13 +2,14 @@
 <div class="fudis-dialog fudis-dialog__size__{{ size }}" [attr.id]="_id">
 	<fudis-button
 		class="fudis-dialog__close"
+		[class.fudis-dialog__close__absolute]="closeButtonPositionAbsolute"
 		[attr.id]="_id + '-close'"
 		[label]="_closeLabel"
 		[labelHidden]="true"
-		fudisDialogClose
 		[size]="'icon-only'"
 		[icon]="'ring-close'"
-		[variant]="'tertiary'">
+		[variant]="'tertiary'"
+		fudisDialogClose>
 	</fudis-button>
 	<ng-content></ng-content>
 </div>

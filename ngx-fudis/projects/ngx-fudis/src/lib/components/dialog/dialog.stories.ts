@@ -84,11 +84,11 @@ class DialogExampleContentComponent {}
 		</ng-container>
 		<ng-template #dialogWithForm>
 			<fudis-dialog [size]="'sm'">
-				<fudis-heading fudisDialogTitle [level]="2">Power animal dialog</fudis-heading>
 				<fudis-dialog-content>
 					<fudis-form
 						[errorSummaryVisible]="errorSummaryVisible"
 						[title]="'Dialog with fudis-form'"
+						[titleLevel]="2"
 						[errorSummaryLinkType]="'href'"
 						[errorSummaryHelpText]="'You need to fill up the information.'">
 						<ng-template fudisContent [type]="'form'">
@@ -102,7 +102,7 @@ class DialogExampleContentComponent {}
 								</ng-template>
 							</fudis-fieldset>
 						</ng-template>
-						<ng-template fudisActions type="form" [bottomButtons]="true">
+						<ng-template fudisActions type="form">
 							<fudis-button (handleClick)="closeDialogWithForm()" [label]="'Save'"></fudis-button>
 							<fudis-button fudisDialogClose [label]="'Cancel'"></fudis-button>
 						</ng-template>

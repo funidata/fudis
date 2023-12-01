@@ -17,9 +17,4 @@ export class ActionsDirective {
 	 * Alignment of actions container, used in Fieldset Component
 	 */
 	@Input() align: 'bottom' | 'end' | 'start' = 'start';
-
-	/**
-	 * Action button alignment, should be used if fudis-form is inside fudis-dialog
-	 */
-	@Input() bottomButtons: boolean = false;
 }

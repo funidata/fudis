@@ -28,6 +28,11 @@ export class DialogComponent implements OnInit, OnDestroy {
 	@Input() size: DialogSize = 'md';
 
 	/**
+	 * Dialog's close button has to have absolute positioning when used inside fudis-form
+	 */
+	public closeButtonPositionAbsolute: boolean = false;
+
+	/**
 	 * Id generated from FudisIdService
 	 */
 	protected _id: string;
