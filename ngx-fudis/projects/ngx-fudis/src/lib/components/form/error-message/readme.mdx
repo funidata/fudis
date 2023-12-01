@@ -7,17 +7,20 @@ import * as ErrorMessageStories from './error-message.stories'
 
 # Error message
 
-Fudis Error Message component is rendered as a part of [Guidance Component](/docs/components-guidance) when a form field contains validation errors.
+Fudis Error Message component is shown when form components contain validation errors. Fudis form components use 
+Error Message is always rendered as a part of [Guidance Component](/docs/components-guidance). 
 
-## Validation Error Message
-
-
+## Examples
 
 <Canvas of={ErrorMessageStories.ErrorMessageExample}></Canvas>
 
 
 
-## Custom Error Message
+## Usage Guidelines
+
+### Mandatory Properties
+
+Necessary properties for error-message are `message` and `visible`.
 
 
 

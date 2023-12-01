@@ -63,8 +63,6 @@ class TextInputWithFormControlExampleComponent {
 			`Too short email. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`
 		),
 		FudisValidators.maxLength(this.maxLength, `Too long email.`),
-		FudisValidators.required('This is required field.'),
-		FudisValidators.email('Input must be an email address.'),
 	];
 
 	validatorsForNumber = [

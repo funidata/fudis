@@ -45,10 +45,10 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 						<fudis-expandable
 							(closedChange)="handleClosedOutput($event)"
 							[title]="'Expandable section 1'"
-							[closed]="_closed">
+							[closed]="false">
 							<ng-template fudisContent type="expandable">
 								<fudis-grid>
-									<fudis-fieldset
+									<!-- <fudis-fieldset
 										[title]="'Basic info'"
 										[helpText]="'Some generic info about this course'"
 										[id]="fieldsetId">
@@ -111,7 +111,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 												</fudis-datepicker>
 											</fudis-grid>
 										</ng-template>
-									</fudis-fieldset>
+									</fudis-fieldset> -->
 									<fudis-fieldset [title]="'Tearcher info'" [tooltip]="'Quite many fields are required.'">
 										<ng-template fudisContent type="fieldset">
 											<fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
@@ -120,21 +120,26 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 													[id]="'unique-input-3'"
 													[control]="formExample.controls['teacher']"
 													[label]="'Responsible teacher'"
-													[helpText]="'Someone has to be responsible for this.'" />
-												<fudis-text-input
+													[helpText]="'Someone has to be responsible for this.'">
+													<fudis-error-message
+														[message]="'Olaaa'"
+														[type]="'customABC'"
+														[visible]="true"></fudis-error-message>
+												</fudis-text-input>
+												<!-- <fudis-text-input
 													[id]="'unique-input-4'"
 													[helpText]="inputHelpText"
 													[control]="formExample.controls['email']"
 													[label]="'Contact email'"
 													[helpText]="'So that students can ask for more time on their homework.'"
-													[errorMsg]="errorEmail" />
+													[errorMsg]="errorEmail" /> -->
 											</fudis-grid>
 										</ng-template>
 									</fudis-fieldset>
 								</fudis-grid>
 							</ng-template>
 						</fudis-expandable>
-						<fudis-expandable [closed]="_closed" [title]="'Expandable section 2'" [errorSummaryBreadcrumb]="true">
+						<!-- <fudis-expandable [closed]="_closed" [title]="'Expandable section 2'" [errorSummaryBreadcrumb]="true">
 							<ng-template fudisContent type="expandable">
 								<fudis-fieldset [title]="'More important dates'">
 									<ng-template fudisContent type="fieldset">
@@ -142,7 +147,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 									</ng-template>
 								</fudis-fieldset>
 							</ng-template>
-						</fudis-expandable>
+						</fudis-expandable> -->
 					</ng-template>
 				</fudis-section>
 			</ng-template>

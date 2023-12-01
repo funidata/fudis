@@ -6,6 +6,7 @@ import { FudisFormErrorSummaryItem } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
 import { GuidanceComponent } from '../guidance/guidance.component';
+import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
 @Component({
 	selector: 'fudis-error-message',
@@ -17,7 +18,8 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 		private _errorSummaryService: FudisErrorSummaryService,
 		private _translationService: FudisTranslationService,
 		private _idService: FudisIdService,
-		@Host() @Optional() protected _parentGuidance: GuidanceComponent
+		@Host() @Optional() protected _parentGuidance: GuidanceComponent,
+		@Host() @Optional() protected _parentInput: InputBaseDirective
 	) {
 		this._id = _idService.getNewId('error-message');
 	}
@@ -52,6 +54,10 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 	 */
 	@Input() deprecationWarning: boolean = false;
 
+	@Input() isCustomError: boolean = true;
+
+	parent: any;
+
 	/**
 	 * Error message to include in error summary item
 	 */
@@ -85,6 +91,8 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 				`Component with id of '${this._parentGuidance?.for}' and label of '${this._parentGuidance?.inputLabel}' received form error messages from 'errorMsg' input. This will be removed in version Fudis v1.0.0, as error message logic will be binded straight with FudisValidators and FudisFormGroupValidators.`
 			);
 		}
+
+		this.createError();
 	}
 
 	ngAfterViewInit(): void {
@@ -96,6 +104,9 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 	}
 
 	createError(): void {
+		console.log(this.message);
+		console.log('alallalala', this.parent);
+
 		if (typeof this.message === 'string') {
 			this._currentMessage = this.message;
 		}
@@ -117,7 +128,9 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 	}
 
 	ngOnChanges(): void {
-		this.createError();
+		if (this._errorSent) {
+			this.createError();
+		}
 	}
 
 	ngOnDestroy(): void {

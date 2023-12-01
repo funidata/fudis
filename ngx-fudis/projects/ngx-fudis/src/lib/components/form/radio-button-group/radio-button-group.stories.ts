@@ -34,7 +34,12 @@ const getDefaultValue = (options: FudisRadioButtonOption[]): string | boolean | 
 				[title]="'Choose a truth'"
 				[helpText]="'We all perceive truth individually.'"
 				[control]="mainFormGroup.controls['third']"
-				[options]="booleanOptions" />
+				[options]="booleanOptions">
+				<fudis-error-message
+					[message]="'Backend threw an error, it is not totally fault of this component'"
+					[type]="'required'"
+					[visible]="mainFormGroup.controls['third'].invalid && mainFormGroup.controls['third'].touched" />
+			</fudis-radio-button-group>
 		</form>
 	`,
 })

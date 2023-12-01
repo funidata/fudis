@@ -1,4 +1,14 @@
-import { Directive, Input, EventEmitter, Output, Signal, effect, ViewChild, ElementRef } from '@angular/core';
+import {
+	Directive,
+	Input,
+	EventEmitter,
+	Output,
+	Signal,
+	effect,
+	ViewChild,
+	ElementRef,
+	ContentChild,
+} from '@angular/core';
 
 import { FudisFormErrors } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
@@ -6,6 +16,7 @@ import { FudisTranslationService } from '../../../services/translation/translati
 import { FudisTranslationConfig } from '../../../types/miscellaneous';
 import { FudisIdComponent } from '../../../types/id';
 import { FudisIdService } from '../../../services/id/id.service';
+import { ContentDirective } from '../../content-projection/content/content.directive';
 
 @Directive({
 	selector: '[fudisInputBase]',
@@ -23,6 +34,8 @@ export class InputBaseDirective extends TooltipApiDirective {
 			this._requiredText = this._translations().REQUIRED;
 		});
 	}
+
+	@ContentChild(ContentDirective) content: ContentDirective;
 
 	/**
 	 * Template reference for input. Used in e. g. initialFocus
