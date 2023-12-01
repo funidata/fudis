@@ -43,6 +43,7 @@ export class FudisIdService {
 		'checkbox-group': [],
 		'dropdown-menu': [],
 		'radio-button-group': [],
+		select: [],
 	};
 
 	/**

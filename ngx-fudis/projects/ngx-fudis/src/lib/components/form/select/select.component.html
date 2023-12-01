@@ -11,6 +11,7 @@
 		<input
 			#inputRef
 			(click)="_toggleDropdown()"
+			(blur)="_inputBlur()"
 			[value]="control.value?.label"
 			class="fudis-select__input"
 			[class.fudis-form-input--disabled]="disabled"
@@ -56,39 +57,6 @@
 			<ng-container *ngTemplateOutlet="content!.templateRef"></ng-container>
 		</ng-container>
 	</fudis-select-dropdown>
-
-	<!-- <div class="fudis-select__input">
-		<mat-select
-			#matSelect
-			[id]="id"
-			disableOptionCentering
-			[panelClass]="
-				size === 'xs' ? 'fudis-select__option-list fudis-select__option-list__xs' : 'fudis-select__option-list'
-			"
-			class="fudis-select__select"
-			[class.fudis-select__select__xs]="size === 'xs'"
-			[class.fudis-select--invalid]="(control.touched && control.invalid) || invalidState"
-			[placeholder]="placeholder"
-			floatPlaceholder="never"
-			[multiple]="multipleOption"
-			[formControl]="control"
-			(valueChange)="handleSelectionChange($event)"
-			[attr.required]="_required ? true : null"
-			[aria-labelledby]="id + '-label'"
-			[hideSingleSelectionIndicator]="hideSingleSelectionIndicator"
-			[attr.aria-describedby]="id + '_guidance'"
-			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null">
-			<mat-option
-				class="fudis-select__option"
-				[class.fudis-select__option__xs]="size === 'xs'"
-				*ngFor="let option of options"
-				[value]="option"
-				[disabled]="option.disabled">
-				{{ option.label }}
-			</mat-option>
-		</mat-select>
-		<fudis-icon *ngIf="size !== 'xs'" class="fudis-select__input__icon" [icon]="'chevron'" [rotate]="'cw-90'" />
-	</div> -->
 	<fudis-guidance
 		*ngIf="!disableGuidance"
 		[inputLabel]="label"

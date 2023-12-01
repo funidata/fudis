@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 
 import { Observable, Subscription } from 'rxjs';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
@@ -19,6 +19,8 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 	) {
 		this._id = _idService.getNewId('error-message');
 	}
+
+	@ViewContainerRef()
 
 	/*
 	 * Error message to display

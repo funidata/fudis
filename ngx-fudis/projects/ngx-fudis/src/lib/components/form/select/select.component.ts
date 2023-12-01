@@ -77,13 +77,6 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	@Input() variant: 'dropdown' | 'autocomplete' = 'dropdown';
 
 	/**
-	 * Pre-selected dropdown options.
-	 * Expects an array if 'multipleOption' is true and if 'multipleOption' is false, expects a single FudisDropdownOption.
-	 * It searches given 'options' input array for matching 'value' and 'label' with selectedOptions and updates formControl value with items from 'options' input.
-	 */
-	@Input() selectedOptions: FudisDropdownOption | FudisDropdownOption[];
-
-	/**
 	 * Value output event on selection change
 	 */
 	@Output() selectionUpdate: EventEmitter<FudisDropdownOption> = new EventEmitter<FudisDropdownOption>();
@@ -137,6 +130,8 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		this._required = this.required ?? hasRequiredValidator(this.control);
 	}
 
+	public handleMultiSelectionChange(option: FudisDropdownOption): void {}
+
 	/**
 	 * Toggle dropdown menu
 	 */
@@ -163,6 +158,10 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	protected _closeDropdown(): void {
 		this._dropdownOpen = false;
 		this._menuService.setMenuStatus(false);
+	}
+
+	protected _inputBlur(): void {
+		this.control.markAsTouched();
 	}
 
 	protected _handleKeypress(event: KeyboardEvent): void {

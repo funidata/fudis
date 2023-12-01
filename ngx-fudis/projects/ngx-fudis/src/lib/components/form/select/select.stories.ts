@@ -64,7 +64,6 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			[control]="control"
 			[label]="label"
 			[id]="id"
-			[selectedOptions]="selectedOptions"
 			[helpText]="helpText"
 			[tooltip]="tooltip"
 			[tooltipPosition]="tooltipPosition"
@@ -83,14 +82,14 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 export const SingleSelect = Template.bind({});
 SingleSelect.args = {
 	label: 'Select a pet',
-	size: 'md',
+	size: 'lg',
 	placeholder: 'Choose a pet',
+	multiselect: true,
 	control: new FormControl(
 		null,
 		FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
 	),
 	helpText: 'All pets are equally important, but for sake of this example please pick one.',
-	selectedOptions: { value: 'value-1-dog', label: 'Dog' },
 };
 
 // export const MultiSelect = Template.bind({});

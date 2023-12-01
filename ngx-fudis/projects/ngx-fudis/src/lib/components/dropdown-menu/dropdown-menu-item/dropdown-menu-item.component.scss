@@ -6,65 +6,60 @@
 @use '../../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-dropdown-menu-item {
-	@include utilities.box-reset;
-	@include typography.body-text-md-light;
-	@include colorMixins.bg-color('transparent');
-	@include borders.border-none;
+	&__single-select {
+		@include utilities.box-reset;
+		@include typography.body-text-md-light;
+		@include colorMixins.bg-color('transparent');
+		@include borders.border-none;
 
-	display: block;
-	position: relative;
-	cursor: pointer;
-	padding: spacing.$spacing-xs;
-	width: 100%;
-	overflow: hidden;
-	text-align: left;
-	white-space: nowrap;
-
-	&:hover {
-		@include colorMixins.bg-color('primary-light');
-	}
-
-	&:focus-visible,
-	&:focus {
-		@include focus.focus-dropdown;
-	}
-
-	&:active {
-		@include colorMixins.bg-color('primary');
-		@include colorMixins.text-color('white');
-	}
-
-	&[aria-disabled='true'] {
-		@include colorMixins.bg-color('gray-extra-light');
-		@include colorMixins.text-color('gray-middle');
-
-		cursor: default;
-	}
-
-	&__checkbox {
 		display: block;
-		width: auto;
+		position: relative;
+		cursor: pointer;
+		padding: spacing.$spacing-xs;
+		width: 100%;
+		overflow: hidden;
+		text-align: left;
+		white-space: nowrap;
 
 		&:hover {
 			@include colorMixins.bg-color('primary-light');
 		}
 
-		&__box {
-			@include borders.border('1px', 'solid', 'gray-middle');
+		&:focus-visible,
+		&:focus {
+			@include focus.focus-dropdown;
+		}
 
-			display: flex;
-			position: absolute;
-			align-items: center;
-			justify-content: center;
-			margin: spacing.$spacing-xs;
-			border-radius: 0;
-			cursor: pointer;
-			width: spacing.$spacing-sm;
-			height: spacing.$spacing-sm;
+		&:active {
+			@include colorMixins.bg-color('primary');
+			@include colorMixins.text-color('white');
+		}
 
-			svg {
-				@include colorMixins.bg-color('white');
+		&[aria-disabled='true'] {
+			@include colorMixins.bg-color('gray-extra-light');
+			@include colorMixins.text-color('gray-middle');
+
+			cursor: default;
+		}
+
+		&--checked {
+			@include colorMixins.bg-color('primary-dark');
+			@include colorMixins.text-color('white');
+
+			&:hover {
+				label {
+					@include colorMixins.text-color('gray-dark');
+				}
 			}
+		}
+	}
+
+	&__multiselect {
+		display: block;
+		width: auto;
+
+		&:hover {
+			@include colorMixins.bg-color('primary-light');
 		}
 
 		&__label {
@@ -76,9 +71,56 @@
 			margin-bottom: 0;
 			padding: spacing.$spacing-xs spacing.$spacing-xs spacing.$spacing-xs 0;
 
+			&--focus {
+			}
+
+			&--checked {
+			}
+
+			&__checkbox {
+				@include borders.border('1px', 'solid', 'gray-middle');
+
+				display: flex;
+				position: absolute;
+				align-items: center;
+				justify-content: center;
+				margin: spacing.$spacing-xs;
+				border-radius: 0;
+				cursor: pointer;
+				width: spacing.$spacing-sm;
+				height: spacing.$spacing-sm;
+
+				svg {
+					@include colorMixins.bg-color('white');
+				}
+
+				&__input {
+					@include utilities.box-reset;
+
+					appearance: none;
+					display: grid;
+					position: absolute;
+					place-content: center;
+
+					&:focus {
+						@include focus.focus-checkbox;
+					}
+				}
+			}
+
 			&__text {
 				position: relative;
 				margin-left: spacing.$spacing-lg;
+			}
+		}
+	}
+
+	&__checkbox {
+		&__box {
+		}
+
+		&__label {
+			&__text {
 			}
 
 			&--active {
@@ -91,26 +133,6 @@
 		}
 
 		&__input {
-			@include utilities.box-reset;
-
-			appearance: none;
-			display: grid;
-			position: absolute;
-			place-content: center;
-
-			&:focus {
-				@include focus.focus-checkbox;
-			}
-		}
-
-		&--active {
-			@include colorMixins.bg-color('primary-dark');
-
-			&:hover {
-				label {
-					@include colorMixins.text-color('gray-dark');
-				}
-			}
 		}
 	}
 }
