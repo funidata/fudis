@@ -18,6 +18,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      # Recent Node.js is included in `ubuntu-latest` but `setup-node` is still required to setup NPM auth via token.
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.18.2
+          # Specifying `registry-url` triggers `setup-node` to setup NPM authentication.
+          registry-url: https://registry.npmjs.org/
       - name: Build ngx-fudis
         run: npm run build
       - run: npm publish --access public
