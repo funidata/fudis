@@ -266,6 +266,10 @@
   box-shadow: 0 0 0 calc(0.25rem / var(--fudis-rem-multiplier)) #ffffff;
 }
 
+.fudis-dialog-panel mat-dialog-container.mat-mdc-dialog-container .mat-mdc-dialog-title:focus-visible.fudis-form__header__title__dialog {
+  outline-offset: -2px;
+}
+
 .fudis-dialog-panel mat-dialog-container.mat-mdc-dialog-container .mat-mdc-dialog-content {
   box-sizing: border-box;
   margin: 0;
