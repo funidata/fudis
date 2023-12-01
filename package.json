@@ -11,7 +11,7 @@
 		"start": "npm run start:storybook && npm run logs",
 		"start:all": "npm run start:storybook && npm run start:sandbox && npm run logs",
 		"start:sandbox": "docker compose up --build -d fudis-sandbox",
-		"start:storybook": "docker compose up --build -d fudis-storybook",
+		"start:storybook": "BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD) docker compose up --build -d fudis-storybook",
 		"stop": "docker compose down",
 		"logs": "docker compose logs -f",
 		"build": "docker build -t fudis:latest ./ngx-fudis && docker cp $(docker create fudis:latest):/usr/src/app/dist ./ngx-fudis/dist",

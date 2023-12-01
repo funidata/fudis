@@ -8,7 +8,7 @@
     "build:ngx-fudis": "ng build ngx-fudis -c production",
     "test": "ng test",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
-    "storybook": "STORYBOOK_FUDIS_VERSION='' ng run storybook:start",
+    "storybook": "ng run storybook:start",
     "build-storybook": "npm run docs:json && STORYBOOK_FUDIS_VERSION=\"${STORYBOOK_FUDIS_VERSION- }\" ng run storybook:build",
     "stylelint-scss-check": "stylelint-config-prettier-scss-check",
     "lint": "ng lint",
