@@ -44,6 +44,30 @@ export default {
 
 const html = String.raw;
 
+const multiselectProps = {
+	label: 'Multiselect pet',
+	size: 'lg',
+	placeholder: 'Multiselect a pet',
+	multiselect: true,
+	control: new FormControl(
+		null,
+		FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
+	),
+	helpText: 'All pets are equally important, but for sake of this example please pick one.',
+};
+
+const autoCompleteProps = {
+	label: 'Autoselect pet',
+	size: 'lg',
+	placeholder: 'Autoselect a pet',
+	multiselect: false,
+	control: new FormControl(
+		null,
+		FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
+	),
+	helpText: 'All pets are equally important, but for sake of this example please pick one.',
+};
+
 const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 	props: {
 		...args,
@@ -56,15 +80,7 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			{ value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
 		],
 		secondControl: {
-			label: 'Single select a pet',
-			size: 'lg',
-			placeholder: 'Choose a pet',
-			multiselect: false,
-			control: new FormControl(
-				null,
-				FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
-			),
-			helpText: 'All pets are equally important, but for sake of this example please pick one.',
+			...multiselectProps,
 		},
 	},
 	template: html`
@@ -106,7 +122,7 @@ SingleSelect.args = {
 	label: 'Select a pet',
 	size: 'lg',
 	placeholder: 'Choose a pet',
-	multiselect: true,
+	multiselect: false,
 	control: new FormControl(
 		null,
 		FudisValidators.required("It is necessary to choose a pet. It's good for your health!")

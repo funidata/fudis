@@ -79,7 +79,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	 */
 	@Output() selectionUpdate: EventEmitter<FudisDropdownOption> = new EventEmitter<FudisDropdownOption>();
 
-	public inputLabel: string | null = null;
+	public selectionLabelText: string | null = null;
 
 	/**
 	 * Internal property for toggle dropdown visibility
@@ -110,11 +110,13 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 
 	private _preventClick: boolean = false;
 
+	private _preventDropdownReopen: boolean = false;
+
 	handleSelectionChange(value: FudisDropdownOption): void {
 		this.selectionUpdate.emit(value);
 		this.control.patchValue(value);
 
-		this.inputLabel = value.label;
+		this.selectionLabelText = value.label;
 	}
 
 	ngOnInit(): void {
@@ -148,12 +150,25 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		}
 	}
 
-	public closeDropdown(): void {
+	public closeDropdown(selectionClick?: boolean): void {
 		this._dropdownOpen = false;
+
+		if (selectionClick) {
+			this._preventDropdownReopen = true;
+		}
+		this.inputRef.nativeElement.focus();
 	}
 
 	protected _inputBlur(event: FocusEvent): void {
-		if (
+		if (!event.relatedTarget && this.multiselect) {
+			setTimeout(() => {
+				if (
+					!document.activeElement?.classList.contains('fudis-dropdown-menu-item__multiselect__label__checkbox__input')
+				) {
+					this._dropdownOpen = false;
+				}
+			}, 100);
+		} else if (
 			!(event.relatedTarget as HTMLElement)?.classList.contains('fudis-dropdown-menu-item__single-select') &&
 			!(event.relatedTarget as HTMLElement)?.classList.contains(
 				'fudis-dropdown-menu-item__multiselect__label__checkbox__input'
@@ -166,9 +181,10 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	}
 
 	protected _inputFocus(): void {
-		if (this.openOnFocus && !this._dropdownOpen) {
+		if (this.openOnFocus && !this._dropdownOpen && !this._preventDropdownReopen) {
 			this._openDropdown();
 			this._preventClick = true;
+			this._preventDropdownReopen = false;
 		}
 	}
 
@@ -256,20 +272,21 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 			sortedOptions.forEach((item: FudisDropdownOption) => {
 				label.push(item.label);
 			});
-			this.inputLabel = label.join(', ');
+			this.selectionLabelText = label.join(', ');
 			this.control.patchValue(sortedOptions);
 		} else {
-			this.inputLabel = value[0].label;
+			this.selectionLabelText = value[0].label;
 			this.control.patchValue(value);
 		}
 	}
 
 	@HostListener('document:click', ['$event.target'])
 	private _handleWindowClick(targetElement: HTMLElement) {
-		if (
-			!this.inputWrapperRef.nativeElement.contains(targetElement) &&
-			!this.dropdownRef?.dropdownElement?.nativeElement.contains(targetElement)
-		) {
+		const inputAreaClick = this.inputWrapperRef.nativeElement.contains(targetElement);
+
+		const dropdownAreaClick = this.dropdownRef?.dropdownElement?.nativeElement.contains(targetElement);
+
+		if (!inputAreaClick && !dropdownAreaClick) {
 			this._dropdownOpen = false;
 		}
 	}

@@ -1,7 +1,6 @@
 import { Component, ElementRef, Host, Input, OnInit, ViewChild } from '@angular/core';
 import { FudisDropdownOption } from '../../../../types/forms';
 import { DropdownItemBaseDirective } from '../../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
-import { FudisDropdownMenuItemService } from '../../../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectComponent } from '../select.component';
 
@@ -12,11 +11,10 @@ import { SelectComponent } from '../select.component';
 })
 export class SelectOptionComponent extends DropdownItemBaseDirective implements OnInit {
 	constructor(
-		_menuService: FudisDropdownMenuItemService,
 		private _idService: FudisIdService,
 		@Host() protected _parentComponent: SelectComponent
 	) {
-		super(_menuService);
+		super();
 	}
 
 	@ViewChild('dropdownItem') dropdownItem: ElementRef;
@@ -35,11 +33,11 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 		this.handleClick.emit(event);
 
 		if (!this.disabled) {
-			this._closeDropdown();
 			const selectedOption: FudisDropdownOption = { value: this.value, label: this.label, htmlId: this._id };
 
+			this._parentComponent.closeDropdown(true);
+
 			this._parentComponent.handleSelectionChange(selectedOption);
-			this._parentComponent.inputRef.nativeElement.focus();
 		}
 	}
 

@@ -37,12 +37,32 @@
 		@include borders.border-radius('2px');
 
 		box-sizing: border-box;
-		padding: spacing.$spacing-xxs spacing.$spacing-sm;
+		display: flex;
+		align-items: baseline;
+		justify-content: flex-start;
+		padding: spacing.$spacing-xxs spacing.$spacing-lg spacing.$spacing-xxs spacing.$spacing-sm;
 		width: 100%;
 		height: spacing.$spacing-xl;
+		max-height: spacing.$spacing-xl;
+		/* stylelint-disable-next-line property-disallowed-list */
+		line-height: spacing.$spacing-lg;
 
 		&::placeholder {
 			@include colorMixins.text-color('gray-middle');
+		}
+
+		&__label {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		&__placeholder {
+			@include colorMixins.text-color('gray-middle');
+
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
 		}
 
 		&__dropdown {

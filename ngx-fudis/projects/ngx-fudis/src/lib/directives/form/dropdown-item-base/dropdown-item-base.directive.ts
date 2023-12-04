@@ -1,12 +1,9 @@
 import { Directive, ElementRef, EventEmitter, Input, Output } from '@angular/core';
-import { FudisDropdownMenuItemService } from '../../../components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 
 @Directive({
 	selector: '[fudisDropdownItemBase]',
 })
 export class DropdownItemBaseDirective {
-	constructor(protected _menuService: FudisDropdownMenuItemService) {}
-
 	/**
 	 * Label for dropdown item
 	 */
@@ -46,12 +43,6 @@ export class DropdownItemBaseDirective {
 	 * Id generated with FudisIdService
 	 */
 	protected _id: string;
-
-	protected _closeDropdown(): void {
-		if (this.close === true) {
-			this._menuService.setMenuStatus({ id: this._id, open: false });
-		}
-	}
 
 	// eslint-disable-next-line class-methods-use-this
 	protected _baseHandleKeyDown(event: KeyboardEvent, element: ElementRef, selector: string) {

@@ -6,8 +6,8 @@
 	[attr.id]="_id"
 	[attr.aria-disabled]="disabled"
 	(keydown)="_handleKeyDown($event)"
-	(blur)="_handleButtonBlur($event, _parentComponent.id)"
-	(click)="handleClick.emit($event); _closeDropdown()">
+	(blur)="_handleButtonBlur($event)"
+	(click)="_closeDropdown($event)">
 	{{ label }}
 </button>
 
