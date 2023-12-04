@@ -16,6 +16,7 @@ import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisDropdownMenuItemService } from '../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { FudisIdService } from '../../services/id/id.service';
+import { FudisDropdownMenuStatus } from '../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-button',
@@ -35,7 +36,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 		this._menuStatus = this._menuService.getMenuStatus();
 
 		effect(() => {
-			this.closeMenu(this._menuStatus());
+			this.closeMenu(this._menuStatus()?.open);
 		});
 	}
 
@@ -126,7 +127,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 	/**
 	 * Menu status property if button is used as dropdown menu button
 	 */
-	private _menuStatus: Signal<boolean>;
+	private _menuStatus: Signal<FudisDropdownMenuStatus>;
 
 	ngOnChanges(): void {
 		this._classList = this._getClasses();
@@ -136,12 +137,12 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 	buttonClick(event: Event): void {
 		if (this.asMenuButton) {
 			this._toggleOn = !this._toggleOn;
-			this._menuService.setMenuStatus(this._toggleOn);
+			this._menuService.setMenuStatus({ id: this._id, open: this._toggleOn });
 		}
 		this.handleClick.emit(event);
 	}
 
-	closeMenu(menuStatus: boolean): void {
+	closeMenu(menuStatus: boolean | null | undefined): void {
 		if (!menuStatus) {
 			this._toggleOn = false;
 		}
@@ -153,7 +154,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 		);
 
 		if (this.asMenuButton && !targetIsDropdownMenuButton) {
-			this._menuService.setMenuStatus(false);
+			this._menuService.setMenuStatus({ id: this._id, open: false });
 		}
 	}
 

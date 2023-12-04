@@ -55,6 +55,17 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			{ value: 'value-5-armadillo', label: 'Screaming hairy armadillo' },
 			{ value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
 		],
+		secondControl: {
+			label: 'Single select a pet',
+			size: 'lg',
+			placeholder: 'Choose a pet',
+			multiselect: false,
+			control: new FormControl(
+				null,
+				FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
+			),
+			helpText: 'All pets are equally important, but for sake of this example please pick one.',
+		},
 	},
 	template: html`
 		<fudis-select
@@ -68,6 +79,20 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			[tooltip]="tooltip"
 			[tooltipPosition]="tooltipPosition"
 			[tooltipToggle]="tooltipToggle">
+			<fudis-select-option
+				*ngFor="let option of options"
+				[label]="option.label"
+				[value]="option.value"
+				[disabled]="option.disabled" />
+		</fudis-select>
+		<fudis-select
+			*ngIf="false"
+			[size]="size"
+			[multiselect]="secondControl.multiselect"
+			[placeholder]="secondControl.placeholder"
+			[control]="secondControl.control"
+			[label]="secondControl.label"
+			[helpText]="secondControl.helpText">
 			<fudis-select-option
 				*ngFor="let option of options"
 				[label]="option.label"

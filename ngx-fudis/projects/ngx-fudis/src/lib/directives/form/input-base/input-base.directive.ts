@@ -100,7 +100,7 @@ export class InputBaseDirective extends TooltipApiDirective {
 	 */
 	protected _required: boolean = false;
 
-	private _focusTryCounter: number = 0;
+	protected _focusTryCounter: number = 0;
 
 	public onBlur(event: FocusEvent): void {
 		this.handleBlur.emit(event);
@@ -109,6 +109,7 @@ export class InputBaseDirective extends TooltipApiDirective {
 	public focusToInput(): void {
 		if (this.inputRef?.nativeElement) {
 			this.inputRef.nativeElement.focus();
+			this._focusTryCounter = 0;
 		} else if (this._focusTryCounter < 100) {
 			setTimeout(() => {
 				this._focusTryCounter += 1;

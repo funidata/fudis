@@ -28,7 +28,7 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective impleme
 		this._baseHandleKeyDown(event, this.dropdownItem, 'fudis-dropdown-menu-item button');
 	}
 
-	protected _handleButtonBlur(event: FocusEvent): void {
-		this._baseHandleButtonBlur(event, this.dropdownItem);
+	protected _handleButtonBlur(event: FocusEvent, id: string): void {
+		this._baseHandleButtonBlur(event, this.dropdownItem, id);
 	}
 }

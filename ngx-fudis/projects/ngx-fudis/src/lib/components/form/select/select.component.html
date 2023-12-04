@@ -1,4 +1,4 @@
-<div class="fudis-select fudis-input-size__{{ size }}">
+<div class="fudis-select fudis-input-size__{{ size }}" #selectRef>
 	<fudis-label
 		[text]="label"
 		[id]="id + '-label'"
@@ -7,17 +7,17 @@
 		[tooltipPosition]="tooltipPosition"
 		[tooltipToggle]="tooltipToggle">
 	</fudis-label>
-	<div class="fudis-select__input-wrapper">
+	<div #inputWrapperRef class="fudis-select__input-wrapper" (click)="_clickInput()">
 		<input
 			#inputRef
-			(click)="_toggleDropdown()"
+			(focus)="_inputFocus()"
 			(blur)="_inputBlur()"
-			[value]="control.value?.label"
+			[value]="inputLabel"
 			class="fudis-select__input"
 			[class.fudis-form-input--disabled]="disabled"
 			[class.fudis-form-input--invalid]="(control.touched && control.invalid) || (control.touched && invalidState)"
 			[class.fudis-select__input__dropdown]="variant !== 'autocomplete'"
-			[class.fudis-select__input-wrapper__input--invalid]="(control.touched && control.invalid) || invalidState"
+			[class.fudis-select__input--invalid]="(control.touched && control.invalid) || invalidState"
 			role="combobox"
 			aria-haspopup="listbox"
 			(keydown)="_handleKeypress($event)"
@@ -31,14 +31,12 @@
 		<ng-container *ngIf="size !== 'xs'">
 			<fudis-icon
 				*ngIf="variant !== 'autocomplete'"
-				(click)="_toggleDropdown()"
 				class="fudis-select__input-wrapper__icon"
 				[icon]="'chevron'"
 				[rotate]="'cw-90'" />
 			<fudis-button
 				*ngIf="variant === 'autocomplete'"
 				class="fudis-select__input-wrapper__icon-button"
-				(handleClick)="_toggleDropdown()"
 				[size]="'icon-only'"
 				[variant]="'tertiary'"
 				[icon]="'chevron'"
@@ -53,7 +51,7 @@
 		[open]="_dropdownOpen"
 		[multiselect]="multiselect"
 		[size]="size">
-		<ng-content select="fudis-select-option" />
+		<ng-content #options select="fudis-select-option" />
 	</fudis-select-dropdown>
 	<fudis-guidance
 		*ngIf="!disableGuidance"

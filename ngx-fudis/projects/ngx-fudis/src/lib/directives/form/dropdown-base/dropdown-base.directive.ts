@@ -43,7 +43,7 @@ export class DropdownBaseDirective {
 	protected _maxWidth: string = 'initial';
 
 	@HostListener('window:keydown.arrowDown', ['$event'])
-	handleKeyDown(event: KeyboardEvent) {
+	handleArrowDownPress(event: KeyboardEvent) {
 		event.preventDefault();
 
 		if (this.open) {

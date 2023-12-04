@@ -1,14 +1,13 @@
 import {
 	AfterViewInit,
 	Component,
-	ContentChild,
 	ElementRef,
 	EventEmitter,
+	HostListener,
 	Input,
 	OnChanges,
 	OnInit,
 	Output,
-	Signal,
 	ViewChild,
 	ViewEncapsulation,
 	effect,
@@ -20,8 +19,7 @@ import { FudisTranslationService } from '../../../services/translation/translati
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisDropdownOption, FudisInputSize } from '../../../types/forms';
 import { hasRequiredValidator } from '../../../utilities/form/getValidators';
-import { FudisDropdownMenuItemService } from '../../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
-import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
+
 import { SelectDropdownComponent } from './select-dropdown/select-dropdown.component';
 
 @Component({
@@ -34,31 +32,28 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	constructor(
 		private _focusService: FudisFocusService,
 		_idService: FudisIdService,
-		_translationService: FudisTranslationService,
-		private _menuService: FudisDropdownMenuItemService
+		_translationService: FudisTranslationService
 	) {
 		super(_translationService, _idService);
-
-		this._dropdownOpenSignal = _menuService.getMenuStatus();
 
 		effect(() => {
 			this._openAriaLabel = this._translations().AUTOCOMPLETE.MULTISELECT.OPEN_DROPDOWN;
 			this._closeAriaLabel = this._translations().AUTOCOMPLETE.MULTISELECT.CLOSE_DROPDOWN;
 			this._noResultsFound = this._translations().AUTOCOMPLETE.MULTISELECT.NO_RESULTS;
 			this._removeItemText = this._translations().AUTOCOMPLETE.MULTISELECT.REMOVE_ITEM;
-
-			this._dropdownOpen = this._dropdownOpenSignal();
 		});
 	}
 
 	@ViewChild('dropdownRef') dropdownRef: SelectDropdownComponent;
 
-	@ContentChild(ContentDirective) content: ContentDirective;
+	@ViewChild('selectRef') selectElementRef: ElementRef;
+
+	@ViewChild('inputWrapperRef') inputWrapperRef: ElementRef;
 
 	/*
 	 * FormControl for the dropdown
 	 */
-	@Input({ required: true }) control: FormControl<FudisDropdownOption | null>;
+	@Input({ required: true }) control: FormControl<FudisDropdownOption | FudisDropdownOption[] | null>;
 
 	/**
 	 * If true, user can choose multiple checkbox options from dropdown
@@ -77,10 +72,14 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 
 	@Input() variant: 'dropdown' | 'autocomplete' = 'dropdown';
 
+	@Input() openOnFocus: boolean = true;
+
 	/**
 	 * Value output event on selection change
 	 */
 	@Output() selectionUpdate: EventEmitter<FudisDropdownOption> = new EventEmitter<FudisDropdownOption>();
+
+	public inputLabel: string | null = null;
 
 	/**
 	 * Internal property for toggle dropdown visibility
@@ -109,16 +108,17 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 
 	protected _firstOpenDone: boolean = false;
 
-	private _dropdownOpenSignal: Signal<boolean>;
+	private _preventClick: boolean = false;
 
 	handleSelectionChange(value: FudisDropdownOption): void {
 		this.selectionUpdate.emit(value);
+		this.control.patchValue(value);
+
+		this.inputLabel = value.label;
 	}
 
 	ngOnInit(): void {
-		this._setInputId('dropdown');
-
-		// this._setInitialValues();
+		this._setParentId();
 	}
 
 	ngAfterViewInit(): void {
@@ -131,55 +131,45 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		this._required = this.required ?? hasRequiredValidator(this.control);
 	}
 
-	public handleMultiSelectionChange(option: FudisDropdownOption): void {}
+	public handleMultiSelectionChange(option: FudisDropdownOption, removeSelection: boolean): void {
+		const currentControlValue = this.control.value;
 
-	/**
-	 * Toggle dropdown menu
-	 */
-	protected _toggleDropdown(focusToFirstOption?: boolean): void {
-		this._dropdownOpen = !this._dropdownOpen;
-		this._menuService.setMenuStatus(this._dropdownOpen);
+		if (removeSelection && currentControlValue) {
+			const newControlValue = currentControlValue.filter((item: FudisDropdownOption) => {
+				return item.value !== option.value;
+			});
 
-		if (!this._firstOpenDone && this._dropdownOpen) {
-			this._firstOpenDone = true;
+			this._sortAndPatchValue(newControlValue, true);
+		} else if (currentControlValue === null || currentControlValue.length === 0) {
+			this._sortAndPatchValue([option], false);
+		} else {
+			currentControlValue.push(option);
+			this._sortAndPatchValue(currentControlValue as FudisDropdownOption[], true);
 		}
-
-		if (focusToFirstOption) {
-			setTimeout(() => {
-				console.log(
-					(
-						this.dropdownRef.dropdownElement.nativeElement.querySelector(
-							'.fudis-dropdown-menu-item__multiselect__label__checkbox__input'
-						) as HTMLInputElement
-					).focus()
-				);
-			}, 1000);
-		}
-	}
-
-	/**
-	 * Open dropdown menu
-	 */
-	protected _openDropdown(): void {
-		this._dropdownOpen = true;
-		this._menuService.setMenuStatus(true);
-	}
-
-	/**
-	 * Close dropdown menu
-	 */
-	protected _closeDropdown(): void {
-		this._dropdownOpen = false;
-		this._menuService.setMenuStatus(false);
 	}
 
 	protected _inputBlur(): void {
 		this.control.markAsTouched();
 	}
 
-	protected _handleKeypress(event: KeyboardEvent): void {
-		console.log('wrum');
+	protected _inputFocus(): void {
+		if (this.openOnFocus && !this._dropdownOpen) {
+			this._openDropdown();
+			this._preventClick = true;
+		}
+	}
 
+	protected _clickInput(): void {
+		if (this._preventClick) {
+			this._preventClick = false;
+		} else {
+			this._toggleDropdown();
+		}
+
+		this.inputRef.nativeElement.focus();
+	}
+
+	protected _handleKeypress(event: KeyboardEvent): void {
 		if (this.variant !== 'autocomplete') {
 			const { key } = event;
 
@@ -191,14 +181,94 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 					break;
 				case 'ArrowDown':
 					if (!this._dropdownOpen) {
-						this._toggleDropdown(true);
+						this._toggleDropdown();
 					}
+					this._focusToFirstOption();
 					break;
 				case 'Tab':
 					break;
 				default:
 					event.preventDefault();
 			}
+		}
+	}
+
+	private _openDropdown(): void {
+		this._dropdownOpen = true;
+		this._firstOpenDone = true;
+	}
+
+	private _toggleDropdown(): void {
+		this._dropdownOpen = !this._dropdownOpen;
+		this._firstOpenDone = true;
+	}
+
+	private _focusToFirstOption(): void {
+		const firstOption: HTMLInputElement = this.dropdownRef?.dropdownElement.nativeElement.querySelector(
+			'.fudis-dropdown-menu-item__multiselect__label__checkbox__input'
+		) as HTMLInputElement;
+		if (firstOption) {
+			firstOption.focus();
+			this._focusTryCounter = 0;
+		} else if (this._focusTryCounter < 100) {
+			setTimeout(() => {
+				this._focusTryCounter += 1;
+				this._focusToFirstOption();
+			}, 100);
+		}
+	}
+
+	private _setParentId(): void {
+		if (this.id) {
+			this._idService.addNewParentId('select', this.id);
+		} else {
+			this.id = this._idService.getNewParentId('select');
+		}
+	}
+
+	private _sortAndPatchValue(value: FudisDropdownOption[], sort: boolean): void {
+		if (sort) {
+			const label: string[] = [];
+
+			const sortedOptions = value.sort((a: FudisDropdownOption, b: FudisDropdownOption) => {
+				if (a['htmlId'] < b['htmlId']) {
+					return -1;
+				}
+				if (a['htmlId'] > b['htmlId']) {
+					return 1;
+				}
+				return 0;
+			});
+
+			sortedOptions.forEach((item: FudisDropdownOption) => {
+				label.push(item.label);
+			});
+			this.inputLabel = label.join(', ');
+			this.control.patchValue(sortedOptions);
+		} else {
+			this.inputLabel = value[0].label;
+			this.control.patchValue(value);
+		}
+	}
+
+	@HostListener('document:click', ['$event.target'])
+	private _handleWindowClick(targetElement: HTMLElement) {
+		if (
+			!this.inputWrapperRef.nativeElement.contains(targetElement) &&
+			!this.dropdownRef?.dropdownElement?.nativeElement.contains(targetElement)
+		) {
+			this._dropdownOpen = false;
+		}
+	}
+
+	@HostListener('window:keydown.escape', ['$event'])
+	private _handleEscapePress(event: KeyboardEvent) {
+		if (this._dropdownOpen) {
+			event.preventDefault();
+
+			(event.target as HTMLElement).closest('fudis-select')?.querySelector('input')?.focus();
+
+			this._dropdownOpen = false;
 		}
 	}
 }

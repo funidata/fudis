@@ -27,7 +27,7 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 
 	ngOnInit(): void {
 		if (this._parentComponent) {
-			this._id = this._idService.getNewChildId('dropdown-menu', this._parentComponent.id);
+			this._id = this._idService.getNewChildId('select', this._parentComponent.id);
 		}
 	}
 
@@ -35,22 +35,27 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 		this.handleClick.emit(event);
 
 		if (!this.disabled) {
-			const selectedOption: FudisDropdownOption = { value: this.value, label: this.label };
 			this._closeDropdown();
-			this._parentComponent.control.patchValue(selectedOption);
+			const selectedOption: FudisDropdownOption = { value: this.value, label: this.label, htmlId: this._id };
+
 			this._parentComponent.handleSelectionChange(selectedOption);
 			this._parentComponent.inputRef.nativeElement.focus();
 		}
 	}
 
 	protected _clickMultiselectOption(event: Event): void {
-		this.handleClick.emit(event);
-		this.handleChecked.emit();
-
 		if (!this.disabled) {
 			this.checked = !this.checked;
-			const selectedOption: FudisDropdownOption = { value: this.value, label: this.label };
-			this._parentComponent.handleMultiSelectionChange(selectedOption);
+			const selectedOption: FudisDropdownOption = { value: this.value, label: this.label, htmlId: this._id };
+
+			if (this.checked) {
+				this._parentComponent.handleMultiSelectionChange(selectedOption, false);
+			} else {
+				this._parentComponent.handleMultiSelectionChange(selectedOption, true);
+			}
+
+			this.handleClick.emit(event);
+			this.handleChecked.emit();
 		}
 	}
 
@@ -70,6 +75,6 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 	}
 
 	protected _handleButtonBlur(event: FocusEvent): void {
-		this._baseHandleButtonBlur(event, this.dropdownItem);
+		this._baseHandleButtonBlur(event, this.dropdownItem, this._parentComponent.id);
 	}
 }

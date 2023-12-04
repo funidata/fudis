@@ -28,11 +28,21 @@
 		&:focus-visible,
 		&:focus {
 			@include focus.focus-dropdown;
+			@include colorMixins.bg-color('primary-light');
 		}
 
 		&:active {
 			@include colorMixins.bg-color('primary');
 			@include colorMixins.text-color('white');
+		}
+
+		&--selected {
+			@include colorMixins.bg-color('primary');
+			@include colorMixins.text-color('white');
+
+			&:focus {
+				@include colorMixins.text-color('gray-dark');
+			}
 		}
 
 		&--checked {
