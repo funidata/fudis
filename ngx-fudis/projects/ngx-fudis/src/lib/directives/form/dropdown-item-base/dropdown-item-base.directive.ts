@@ -74,14 +74,19 @@ export class DropdownItemBaseDirective {
 		}
 	}
 
-	protected _baseHandleButtonBlur(event: FocusEvent, element: ElementRef, id: string): void {
+	// eslint-disable-next-line class-methods-use-this
+	protected _focusedOutFromComponent(event: FocusEvent, element: ElementRef): boolean {
 		const menuButton = element.nativeElement.closest('fudis-button')?.querySelector('.fudis-button');
 
 		if (
 			!(event.relatedTarget as HTMLElement)?.classList?.contains('fudis-dropdown-menu-item') &&
+			!(event.relatedTarget as HTMLElement)?.classList?.contains(
+				'fudis-dropdown-menu-item__multiselect__label__checkbox__input'
+			) &&
 			(event.relatedTarget as HTMLElement) !== menuButton
 		) {
-			this._menuService.setMenuStatus({ id, open: false });
+			return true;
 		}
+		return false;
 	}
 }

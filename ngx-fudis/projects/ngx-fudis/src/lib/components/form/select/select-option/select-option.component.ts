@@ -63,11 +63,6 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 		this._focused = true;
 	}
 
-	protected _blurFromOption(event: FocusEvent): void {
-		this._focused = false;
-		this.handleBlur.emit(event);
-	}
-
 	protected _handleKeyDown(event: KeyboardEvent, selector: string) {
 		if (event.key !== ' ') {
 			this._baseHandleKeyDown(event, this.dropdownItem, selector);
@@ -75,6 +70,12 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 	}
 
 	protected _handleButtonBlur(event: FocusEvent): void {
-		this._baseHandleButtonBlur(event, this.dropdownItem, this._parentComponent.id);
+		this._focused = false;
+		this.handleBlur.emit(event);
+		const closeDropdown = this._focusedOutFromComponent(event, this.dropdownItem);
+
+		if (closeDropdown) {
+			this._parentComponent.closeDropdown();
+		}
 	}
 }

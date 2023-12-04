@@ -11,7 +11,7 @@
 		<input
 			#inputRef
 			(focus)="_inputFocus()"
-			(blur)="_inputBlur()"
+			(blur)="_inputBlur($event)"
 			[value]="inputLabel"
 			class="fudis-select__input"
 			[class.fudis-form-input--disabled]="disabled"

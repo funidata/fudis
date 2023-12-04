@@ -86,7 +86,6 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 				[disabled]="option.disabled" />
 		</fudis-select>
 		<fudis-select
-			*ngIf="false"
 			[size]="size"
 			[multiselect]="secondControl.multiselect"
 			[placeholder]="secondControl.placeholder"

@@ -35,7 +35,7 @@
 				[attr.aria-checked]="checked"
 				(focus)="_focusToOption()"
 				(keydown)="_handleKeyDown($event, 'fudis-select-option input')"
-				(blur)="_blurFromOption($event)" />
+				(blur)="_handleButtonBlur($event)" />
 			<svg
 				*ngIf="checked"
 				class="fudis-dropdown-menu-item__multiselect__label__checkbox__icon"

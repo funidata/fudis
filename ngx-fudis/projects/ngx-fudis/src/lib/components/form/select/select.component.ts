@@ -148,7 +148,20 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		}
 	}
 
-	protected _inputBlur(): void {
+	public closeDropdown(): void {
+		this._dropdownOpen = false;
+	}
+
+	protected _inputBlur(event: FocusEvent): void {
+		if (
+			!(event.relatedTarget as HTMLElement)?.classList.contains('fudis-dropdown-menu-item__single-select') &&
+			!(event.relatedTarget as HTMLElement)?.classList.contains(
+				'fudis-dropdown-menu-item__multiselect__label__checkbox__input'
+			)
+		) {
+			this._dropdownOpen = false;
+		}
+
 		this.control.markAsTouched();
 	}
 

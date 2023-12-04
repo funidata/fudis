@@ -23,6 +23,7 @@
 
 		&:hover {
 			@include colorMixins.bg-color('primary-light');
+			@include colorMixins.text-color('gray-dark');
 		}
 
 		&:focus-visible,
