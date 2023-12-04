@@ -1,6 +1,4 @@
-/* eslint-disable no-underscore-dangle */
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
 	selector: 'app-dialog-test-content',
@@ -62,6 +60,4 @@ import { FormBuilder } from '@angular/forms';
 	`,
 	styles: [],
 })
-export class DialogTestContentComponent {
-	constructor(private _formBuilder: FormBuilder) {}
-}
+export class DialogTestContentComponent {}

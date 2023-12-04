@@ -147,11 +147,7 @@ class DialogExampleLauncherComponent implements OnInit {
 	}
 
 	openDialog<T = any>(dialogToOpen: ComponentType<T> | TemplateRef<T>) {
-		const ref = this.dialog.open(dialogToOpen);
-		ref.afterClosed().subscribe((res: any) => {
-			// eslint-disable-next-line no-console
-			console.log(res);
-		});
+		this.dialog.open(dialogToOpen);
 	}
 }
 
