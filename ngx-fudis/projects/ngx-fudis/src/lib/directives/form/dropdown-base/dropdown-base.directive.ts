@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostBinding, HostListener, Input, ViewChild } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, ViewChild } from '@angular/core';
 import { FudisInputSize } from '../../../types/forms';
 
 @Directive({
@@ -6,11 +6,6 @@ import { FudisInputSize } from '../../../types/forms';
 })
 export class DropdownBaseDirective {
 	@ViewChild('dropdownElement') dropdownElement: ElementRef<HTMLElement>;
-
-	/**
-	 * Binding fudis-dropdown-menu-host class to component wrapper
-	 */
-	@HostBinding('class') classes = 'fudis-dropdown-menu-host';
 
 	/**
 	 * Binding public variable for querying variant type
@@ -42,24 +37,24 @@ export class DropdownBaseDirective {
 	 */
 	protected _maxWidth: string = 'initial';
 
-	@HostListener('window:keydown.arrowDown', ['$event'])
-	handleArrowDownPress(event: KeyboardEvent) {
-		event.preventDefault();
+	// @HostListener('window:keydown.arrowDown', ['$event'])
+	// handleArrowDownPress(event: KeyboardEvent) {
+	// 	event.preventDefault();
 
-		if (this.open) {
-			const firstChildElement = this.dropdownElement.nativeElement.children[0];
+	// 	if (this.open) {
+	// 		const firstChildElement = this.dropdownElement.nativeElement.children[0];
 
-			const focusOnMenuButton =
-				firstChildElement.closest('fudis-button')?.querySelector('.fudis-button') === document.activeElement;
+	// 		const focusOnMenuButton =
+	// 			firstChildElement.closest('fudis-button')?.querySelector('.fudis-button') === document.activeElement;
 
-			const focusOnSelectInput =
-				firstChildElement.closest('fudis-select')?.querySelector('.fudis-select__input') === document.activeElement;
+	// 		const focusOnSelectInput =
+	// 			firstChildElement.closest('fudis-select')?.querySelector('.fudis-select__input') === document.activeElement;
 
-			// If focus is on the menu button, only then listen keydown and focus on the first child
-			if (focusOnMenuButton || focusOnSelectInput) {
-				const firstChildButtonElement = firstChildElement.querySelector('button');
-				firstChildButtonElement?.focus();
-			}
-		}
-	}
+	// 		// If focus is on the menu button, only then listen keydown and focus on the first child
+	// 		if (focusOnMenuButton || focusOnSelectInput) {
+	// 			const firstChildButtonElement = firstChildElement.querySelector('button');
+	// 			firstChildButtonElement?.focus();
+	// 		}
+	// 	}
+	// }
 }

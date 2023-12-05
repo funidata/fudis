@@ -1,9 +1,9 @@
 <div
-	[attr.id]="id"
-	class="fudis-select-dropdown fudis-input-size__{{ size }}"
 	#dropdownElement
+	class="fudis-select-dropdown fudis-input-size__{{ size }}"
 	[class.fudis-select-dropdown--open]="open"
 	[class.fudis-select-dropdown__multiselect]="multiselect"
+	[attr.id]="id"
 	[attr.aria-multiselectable]="multiselect ? true : null"
 	[attr.role]="multiselect ? 'listbox' : 'menu'">
 	<ng-content></ng-content>

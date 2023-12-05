@@ -2,6 +2,7 @@
 	*ngIf="!_parentComponent.multiselect"
 	#dropdownItem
 	class="fudis-dropdown-menu-item fudis-dropdown-menu-item__single-select"
+	[class.fudis-dropdown-menu-item__focusable]="optionVisible"
 	[class.fudis-dropdown-menu-item__single-select--disabled]="disabled"
 	[class.fudis-dropdown-menu-item__single-select--selected]="_parentComponent.selectionLabelText === label"
 	role="menuitem"
@@ -15,8 +16,9 @@
 
 <div
 	*ngIf="_parentComponent.multiselect"
-	class="fudis-dropdown-menu-item__multiselect"
+	class="fudis-dropdown-menu-item fudis-dropdown-menu-item__multiselect"
 	[attr.id]="_id"
+	[class.fudis-dropdown-menu-item--visible]="optionVisible"
 	[class.fudis-dropdown-menu-item__multiselect--checked]="checked"
 	[class.fudis-dropdown-menu-item__multiselect--focused]="_focused"
 	[class.fudis-dropdown-menu-item__multiselect--disabled]="disabled">
@@ -27,6 +29,7 @@
 		<div class="fudis-dropdown-menu-item__multiselect__label__checkbox">
 			<input
 				#dropdownItem
+				[class.fudis-dropdown-menu-item__focusable]="optionVisible"
 				type="checkbox"
 				class="fudis-dropdown-menu-item__multiselect__label__checkbox__input"
 				[attr.role]="'option'"

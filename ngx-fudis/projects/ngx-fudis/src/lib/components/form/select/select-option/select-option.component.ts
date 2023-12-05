@@ -1,4 +1,5 @@
-import { Component, ElementRef, Host, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Host, Input, OnInit, ViewChild, effect } from '@angular/core';
+
 import { FudisDropdownOption } from '../../../../types/forms';
 import { DropdownItemBaseDirective } from '../../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { FudisIdService } from '../../../../services/id/id.service';
@@ -15,13 +16,25 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 		@Host() protected _parentComponent: SelectComponent
 	) {
 		super();
+
+		effect(() => {
+			if (this._parentComponent.variant === 'autocomplete') {
+				this._isOptionVisible(_parentComponent.getAutocompleteFilterText()());
+
+				this._isOptionTyped(_parentComponent.getAutocompleteFilterText()());
+			}
+		});
 	}
 
 	@ViewChild('dropdownItem') dropdownItem: ElementRef;
 
 	@Input({ required: true }) value: string;
 
+	public optionVisible: boolean = true;
+
 	protected _focused: boolean = false;
+
+	private _preventTypeChange: boolean = false;
 
 	ngOnInit(): void {
 		if (this._parentComponent) {
@@ -30,6 +43,8 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 	}
 
 	protected _clickSelectOption(event: Event): void {
+		this._preventTypeChange = true;
+
 		this.handleClick.emit(event);
 
 		if (!this.disabled) {
@@ -74,6 +89,26 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 
 		if (closeDropdown) {
 			this._parentComponent.closeDropdown();
+		}
+	}
+
+	private _isOptionVisible(filterText: string | undefined): void {
+		if (filterText) {
+			this.optionVisible = this.label.toLowerCase().includes(filterText.toLowerCase());
+		} else {
+			this.optionVisible = true;
+		}
+	}
+
+	private _isOptionTyped(filterText: string | undefined): void {
+		if (!this.disabled && !this._preventTypeChange && this.label?.toLowerCase() === filterText?.toLowerCase()) {
+			const selectedOption: FudisDropdownOption = { value: this.value, label: this.label, htmlId: this._id };
+
+			this._parentComponent.closeDropdown(true);
+
+			this._parentComponent.handleSelectionChange(selectedOption, true);
+		} else {
+			this._preventTypeChange = false;
 		}
 	}
 }

@@ -6,13 +6,21 @@
 @use '../../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-dropdown-menu-item {
+	display: none;
+	visibility: none;
+
+	&__focusable,
+	&--visible {
+		display: block;
+		visibility: visible;
+	}
+
 	&__single-select {
 		@include utilities.box-reset;
 		@include typography.body-text-md-light;
 		@include colorMixins.bg-color('transparent');
 		@include borders.border-none;
 
-		display: block;
 		position: relative;
 		cursor: pointer;
 		padding: spacing.$spacing-xs;
@@ -68,7 +76,6 @@
 	&__multiselect {
 		@include colorMixins.text-color('gray-dark');
 
-		display: block;
 		width: auto;
 
 		&:hover {

@@ -2,6 +2,7 @@
 @use '../../../foundations/borders/mixins.scss' as borders;
 @use '../../../foundations/typography/mixins.scss' as typography;
 @use '../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../foundations/focus/mixins.scss' as focus;
 @use '../../../foundations/colors/tokens.scss' as colors;
 
 .fudis-select {
@@ -49,6 +50,11 @@
 
 		&::placeholder {
 			@include colorMixins.text-color('gray-middle');
+		}
+
+		&:focus,
+		&:focus-visible {
+			@include focus.focus-form-field;
 		}
 
 		&__label {

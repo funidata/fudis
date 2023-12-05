@@ -82,10 +82,15 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 		secondControl: {
 			...multiselectProps,
 		},
+		autocomplete: {
+			...autoCompleteProps,
+		},
 	},
 	template: html`
 		<fudis-select
+			*ngIf="false"
 			[size]="size"
+			[openOnFocus]="false"
 			[multiselect]="multiselect"
 			[placeholder]="placeholder"
 			[control]="control"
@@ -102,6 +107,8 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 				[disabled]="option.disabled" />
 		</fudis-select>
 		<fudis-select
+			*ngIf="false"
+			[openOnFocus]="false"
 			[size]="size"
 			[multiselect]="secondControl.multiselect"
 			[placeholder]="secondControl.placeholder"
@@ -114,6 +121,22 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 				[value]="option.value"
 				[disabled]="option.disabled" />
 		</fudis-select>
+		<fudis-select
+			[variant]="'autocomplete'"
+			[openOnFocus]="false"
+			[size]="size"
+			[multiselect]="autocomplete.multiselect"
+			[placeholder]="autocomplete.placeholder"
+			[control]="autocomplete.control"
+			[label]="autocomplete.label"
+			[helpText]="autocomplete.helpText">
+			<fudis-select-option
+				*ngFor="let option of options"
+				[label]="option.label"
+				[value]="option.value"
+				[disabled]="option.disabled" />
+		</fudis-select>
+		{{autocomplete.control?.value?.label}}
 	`,
 });
 

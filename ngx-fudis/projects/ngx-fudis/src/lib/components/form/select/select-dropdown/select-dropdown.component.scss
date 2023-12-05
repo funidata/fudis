@@ -5,13 +5,8 @@
 @use '../../../../foundations/utilities/mixins.scss' as utilities;
 @use '../../../../foundations/z-index/mixins.scss' as zIndex;
 
-.fudis-dropdown-menu-host {
-	display: block;
-}
-
 .fudis-select-dropdown {
 	@include utilities.box-reset;
-	@include borders.border('1px', 'solid', 'gray-dark');
 	@include colorMixins.bg-color('white');
 	@include zIndex.z-index('dropdown-menu');
 
@@ -59,6 +54,8 @@
 	}
 
 	&--open {
+		@include borders.border('1px', 'solid', 'gray-dark');
+
 		display: block;
 	}
 }

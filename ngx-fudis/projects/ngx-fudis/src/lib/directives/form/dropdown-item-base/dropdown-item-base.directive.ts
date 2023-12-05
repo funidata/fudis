@@ -67,17 +67,35 @@ export class DropdownItemBaseDirective {
 
 	// eslint-disable-next-line class-methods-use-this
 	protected _focusedOutFromComponent(event: FocusEvent, element: ElementRef): boolean {
-		const menuButton = element.nativeElement.closest('fudis-button')?.querySelector('.fudis-button');
+		if (!event.relatedTarget) {
+			setTimeout(() => {
+				if (!document.activeElement?.classList.contains('fudis-dropdown-menu-item__focusable')) {
+					return false;
+				}
+				const menuButton = element.nativeElement.closest('fudis-button')?.querySelector('.fudis-button');
 
-		if (
-			!(event.relatedTarget as HTMLElement)?.classList?.contains('fudis-dropdown-menu-item') &&
-			!(event.relatedTarget as HTMLElement)?.classList?.contains(
-				'fudis-dropdown-menu-item__multiselect__label__checkbox__input'
-			) &&
-			(event.relatedTarget as HTMLElement) !== menuButton
-		) {
-			return true;
+				if (
+					!(event.relatedTarget as HTMLElement)?.classList?.contains('fudis-dropdown-menu-item__focusable') &&
+					(event.relatedTarget as HTMLElement) !== menuButton
+				) {
+					return true;
+				}
+				return false;
+			}, 100);
+		} else {
+			const menuButton = element.nativeElement.closest('fudis-button')?.querySelector('.fudis-button');
+
+			const selectInput = element.nativeElement.closest('fudis-select')?.querySelector('.fudis-select__input');
+
+			if (
+				!(event.relatedTarget as HTMLElement)?.classList?.contains('fudis-dropdown-menu-item__focusable') &&
+				(event.relatedTarget as HTMLElement) !== selectInput &&
+				(event.relatedTarget as HTMLElement) !== menuButton
+			) {
+				return true;
+			}
 		}
+
 		return false;
 	}
 }

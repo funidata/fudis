@@ -9,21 +9,21 @@
 	</fudis-label>
 	<div #inputWrapperRef class="fudis-select__input-wrapper" (click)="_clickInput()">
 		<div
+			*ngIf="variant !== 'autocomplete'"
 			#inputRef
 			tabindex="0"
-			(focus)="_inputFocus()"
-			(blur)="_inputBlur($event)"
-			class="fudis-select__input"
+			class="fudis-select__input fudis-select__input__dropdown"
 			[class.fudis-form-input--disabled]="disabled"
 			[class.fudis-form-input--invalid]="(control.touched && control.invalid) || (control.touched && invalidState)"
-			[class.fudis-select__input__dropdown]="variant !== 'autocomplete'"
 			[class.fudis-select__input--invalid]="(control.touched && control.invalid) || invalidState"
 			role="combobox"
 			aria-haspopup="listbox"
-			(keydown)="_handleKeypress($event)"
+			(focus)="_inputFocus()"
+			(blur)="_inputBlur($event)"
+			(keydown)="_dropdownKeypress($event)"
 			[attr.aria-autocomplete]="'none'"
+			[attr.aria-expanded]="_dropdownOpen"
 			[attr.aria-disabled]="disabled"
-			[attr.placeholder]="placeholder"
 			[attr.required]="_required ? true : null"
 			[attr.aria-labelledby]="id + '-label'"
 			[attr.aria-describedby]="id + '_guidance'"
@@ -31,6 +31,28 @@
 			<span *ngIf="!selectionLabelText" class="fudis-select__input__placeholder">{{ placeholder }}</span>
 			<span *ngIf="selectionLabelText" class="fudis-select__input__label">{{ selectionLabelText }}</span>
 		</div>
+		{{ selectionLabelText }}
+		<input
+			type="text"
+			*ngIf="variant === 'autocomplete'"
+			#inputRef
+			[value]="selectionLabelText"
+			class="fudis-select__input fudis-select__input__autocomplete"
+			[class.fudis-form-input--disabled]="disabled"
+			[class.fudis-form-input--invalid]="(control.touched && control.invalid) || (control.touched && invalidState)"
+			[class.fudis-select__input--invalid]="(control.touched && control.invalid) || invalidState"
+			role="combobox"
+			aria-haspopup="listbox"
+			(focus)="_inputFocus()"
+			(blur)="_inputBlur($event)"
+			(keyup)="_autocompleteKeypress($event)"
+			[attr.aria-autocomplete]="'none'"
+			[attr.aria-disabled]="disabled"
+			[attr.placeholder]="placeholder"
+			[attr.required]="_required ? true : null"
+			[attr.aria-labelledby]="id + '-label'"
+			[attr.aria-describedby]="id + '_guidance'"
+			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null" />
 		<ng-container *ngIf="size !== 'xs'">
 			<fudis-icon
 				*ngIf="variant !== 'autocomplete'"
@@ -48,13 +70,8 @@
 				[labelHidden]="true" />
 		</ng-container>
 	</div>
-	<fudis-select-dropdown
-		*ngIf="_firstOpenDone"
-		#dropdownRef
-		[open]="_dropdownOpen"
-		[multiselect]="multiselect"
-		[size]="size">
-		<ng-content #options select="fudis-select-option" />
+	<fudis-select-dropdown #dropdownRef [open]="_dropdownOpen" [multiselect]="multiselect" [size]="size">
+		<ng-content select="fudis-select-option" />
 	</fudis-select-dropdown>
 	<fudis-guidance
 		*ngIf="!disableGuidance"

@@ -8,9 +8,12 @@ import {
 	OnChanges,
 	OnInit,
 	Output,
+	Signal,
 	ViewChild,
 	ViewEncapsulation,
+	WritableSignal,
 	effect,
+	signal,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisFocusService } from '../../../services/focus/focus.service';
@@ -46,7 +49,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 
 	@ViewChild('dropdownRef') dropdownRef: SelectDropdownComponent;
 
-	@ViewChild('selectRef') selectElementRef: ElementRef;
+	@ViewChild('selectRef', { static: false }) selectElementRef: ElementRef;
 
 	@ViewChild('inputWrapperRef') inputWrapperRef: ElementRef;
 
@@ -77,7 +80,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	/**
 	 * Value output event on selection change
 	 */
-	@Output() selectionUpdate: EventEmitter<FudisDropdownOption> = new EventEmitter<FudisDropdownOption>();
+	@Output() selectionUpdate: EventEmitter<FudisDropdownOption | null> = new EventEmitter<FudisDropdownOption | null>();
 
 	public selectionLabelText: string | null = null;
 
@@ -106,17 +109,26 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	 */
 	protected _removeItemText: string;
 
-	protected _firstOpenDone: boolean = false;
-
 	private _preventClick: boolean = false;
 
 	private _preventDropdownReopen: boolean = false;
 
-	handleSelectionChange(value: FudisDropdownOption): void {
+	private _inputFocused: boolean = false;
+
+	/**
+	 * Autocomplete user input filtering
+	 */
+	private _autocompleteFilterText: WritableSignal<string> = signal<string>('');
+
+	handleSelectionChange(value: FudisDropdownOption | null, disableSignalEmit?: boolean): void {
 		this.selectionUpdate.emit(value);
 		this.control.patchValue(value);
 
-		this.selectionLabelText = value.label;
+		this.selectionLabelText = value?.label ? value.label : '';
+
+		if (value && this.variant === 'autocomplete' && !disableSignalEmit) {
+			this._autocompleteFilterText.set(value.label);
+		}
 	}
 
 	ngOnInit(): void {
@@ -131,6 +143,10 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 
 	ngOnChanges(): void {
 		this._required = this.required ?? hasRequiredValidator(this.control);
+	}
+
+	getAutocompleteFilterText(): Signal<string> {
+		return this._autocompleteFilterText.asReadonly();
 	}
 
 	public handleMultiSelectionChange(option: FudisDropdownOption, removeSelection: boolean): void {
@@ -162,20 +178,15 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	protected _inputBlur(event: FocusEvent): void {
 		if (!event.relatedTarget && this.multiselect) {
 			setTimeout(() => {
-				if (
-					!document.activeElement?.classList.contains('fudis-dropdown-menu-item__multiselect__label__checkbox__input')
-				) {
+				if (!document.activeElement?.classList.contains('fudis-dropdown-menu-item__focusable')) {
 					this._dropdownOpen = false;
 				}
-			}, 100);
-		} else if (
-			!(event.relatedTarget as HTMLElement)?.classList.contains('fudis-dropdown-menu-item__single-select') &&
-			!(event.relatedTarget as HTMLElement)?.classList.contains(
-				'fudis-dropdown-menu-item__multiselect__label__checkbox__input'
-			)
-		) {
+			}, 150);
+		} else if (!(event.relatedTarget as HTMLElement)?.classList.contains('fudis-dropdown-menu-item__focusable')) {
 			this._dropdownOpen = false;
 		}
+
+		this._inputFocused = false;
 
 		this.control.markAsTouched();
 	}
@@ -186,11 +197,16 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 			this._preventClick = true;
 			this._preventDropdownReopen = false;
 		}
+
+		this._inputFocused = true;
 	}
 
 	protected _clickInput(): void {
 		if (this._preventClick) {
 			this._preventClick = false;
+		} else if (this._dropdownOpen) {
+			this._dropdownOpen = false;
+			this._preventDropdownReopen = true;
 		} else {
 			this._toggleDropdown();
 		}
@@ -198,44 +214,90 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		this.inputRef.nativeElement.focus();
 	}
 
-	protected _handleKeypress(event: KeyboardEvent): void {
-		if (this.variant !== 'autocomplete') {
-			const { key } = event;
+	protected _dropdownKeypress(event: KeyboardEvent): void {
+		const { key } = event;
 
-			switch (key) {
-				case ' ':
-				case 'Enter':
-					event.preventDefault();
+		switch (key) {
+			case ' ':
+			case 'Enter':
+				event.preventDefault();
+				this._toggleDropdown();
+				break;
+			case 'ArrowDown':
+				if (!this._dropdownOpen) {
 					this._toggleDropdown();
-					break;
-				case 'ArrowDown':
-					if (!this._dropdownOpen) {
-						this._toggleDropdown();
-					}
+				}
+				if (this._inputFocused) {
 					this._focusToFirstOption();
-					break;
-				case 'Tab':
-					break;
-				default:
-					event.preventDefault();
-			}
+				}
+				break;
+			case 'Tab':
+				break;
+			default:
+				event.preventDefault();
+		}
+	}
+
+	/**
+	 * Filter options from keyboard input
+	 */
+	protected _autocompleteKeypress(event: any): void {
+		if (event.key !== 'Escape') {
+			this._dropdownOpen = true;
+		}
+
+		const { key } = event;
+
+		switch (key) {
+			case 'ArrowDown':
+				if (this._inputFocused) {
+					this._focusToFirstOption();
+				}
+				break;
+			default:
+				break;
+		}
+
+		this._autocompleteFilterText.set(event.target.value);
+
+		if (
+			this.control.value &&
+			event.target.value.toLowerCase() !== (this.control.value as FudisDropdownOption).label.toLowerCase()
+		) {
+			this.selectionUpdate.emit(null);
+			this.control.patchValue(null);
 		}
 	}
 
 	private _openDropdown(): void {
 		this._dropdownOpen = true;
-		this._firstOpenDone = true;
 	}
 
 	private _toggleDropdown(): void {
 		this._dropdownOpen = !this._dropdownOpen;
-		this._firstOpenDone = true;
 	}
 
+	/**
+	 * Generate html id for parent FudisSelect
+	 */
+	private _setParentId(): void {
+		if (this.id) {
+			this._idService.addNewParentId('select', this.id);
+		} else {
+			this.id = this._idService.getNewParentId('select');
+		}
+	}
+
+	/**
+	 *
+	 */
 	private _focusToFirstOption(): void {
+		const selectorCss = '.fudis-dropdown-menu-item__focusable';
+
 		const firstOption: HTMLInputElement = this.dropdownRef?.dropdownElement.nativeElement.querySelector(
-			'.fudis-dropdown-menu-item__multiselect__label__checkbox__input'
+			selectorCss
 		) as HTMLInputElement;
+
 		if (firstOption) {
 			firstOption.focus();
 			this._focusTryCounter = 0;
@@ -247,14 +309,11 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		}
 	}
 
-	private _setParentId(): void {
-		if (this.id) {
-			this._idService.addNewParentId('select', this.id);
-		} else {
-			this.id = this._idService.getNewParentId('select');
-		}
-	}
-
+	/**
+	 * Arranges selected options in an order they are present in the DOM
+	 * @param value list of options to be sorted and patched
+	 * @param sort used if there more than one option selected
+	 */
 	private _sortAndPatchValue(value: FudisDropdownOption[], sort: boolean): void {
 		if (sort) {
 			const label: string[] = [];
@@ -280,24 +339,32 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		}
 	}
 
+	/**
+	 * When user clicks somewhere else than DropdownMenu or input element area, close dropdown
+	 * @param targetElement
+	 */
 	@HostListener('document:click', ['$event.target'])
 	private _handleWindowClick(targetElement: HTMLElement) {
-		const inputAreaClick = this.inputWrapperRef.nativeElement.contains(targetElement);
+		if (this._dropdownOpen) {
+			const inputAreaClick = this.inputWrapperRef.nativeElement.contains(targetElement);
 
-		const dropdownAreaClick = this.dropdownRef?.dropdownElement?.nativeElement.contains(targetElement);
+			const dropdownAreaClick = this.dropdownRef?.dropdownElement?.nativeElement.contains(targetElement);
 
-		if (!inputAreaClick && !dropdownAreaClick) {
-			this._dropdownOpen = false;
+			if (!inputAreaClick && !dropdownAreaClick) {
+				this._dropdownOpen = false;
+			}
 		}
 	}
 
+	/**
+	 * When pressing keyboard Esc, focus to FudisSelect input and close dropdown
+	 * @param event
+	 */
 	@HostListener('window:keydown.escape', ['$event'])
 	private _handleEscapePress(event: KeyboardEvent) {
 		if (this._dropdownOpen) {
 			event.preventDefault();
-
 			(event.target as HTMLElement).closest('fudis-select')?.querySelector('input')?.focus();
-
 			this._dropdownOpen = false;
 		}
 	}
