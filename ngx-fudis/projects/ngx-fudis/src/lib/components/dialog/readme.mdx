@@ -166,6 +166,18 @@ class FormDialogComponent {
 	openDialog(dialogToOpen: TemplateRef<any>) {
 		this.dialog.open(dialogToOpen);
 	}
+
+	closeDialogWithForm(): void {
+		this.exampleDialogFormGroup.markAllAsTouched();
+
+		if (this.exampleDialogFormGroup.invalid) {
+			this.errorSummaryVisible = true;
+			this._errorSummaryService.reloadErrors();
+		} else {
+			this.errorSummaryVisible = false;
+			this.dialog.close();
+		}
+	}
 }
 ```
 
