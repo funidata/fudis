@@ -1,6 +1,8 @@
 services:
   fudis-storybook:
-    build: ./ngx-fudis/
+    build:
+      context: ./ngx-fudis/
+      target: dev
     image: fudis
     container_name: fudis-storybook
     tty: true

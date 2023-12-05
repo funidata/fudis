@@ -1,0 +1,25 @@
+name: Build library
+
+on:
+  workflow_call:
+
+jobs:
+  build-test:
+    name: Build and save library image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build image
+        uses: docker/build-push-action@v4
+        with:
+          context: ngx-fudis
+          tags: fudis
+          outputs: type=docker,dest=/tmp/fudis.tar
+      - name: Save image as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: fudis
+          path: /tmp/fudis.tar
