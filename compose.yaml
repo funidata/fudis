@@ -1,0 +1,10 @@
+services:
+  fudis:
+    build: ./ngx-fudis/
+    container_name: fudis
+    tty: true
+    ports:
+      - 6006:6006
+    volumes:
+      - ./ngx-fudis/projects/ngx-fudis/src:/usr/src/app/projects/ngx-fudis/src
+      - ./ngx-fudis/projects/documentation:/usr/src/app/projects/documentation
