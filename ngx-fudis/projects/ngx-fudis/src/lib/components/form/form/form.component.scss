@@ -29,6 +29,16 @@
 				margin-bottom: spacing.$spacing-xs;
 			}
 
+			&__dialog {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: flex-end;
+
+				fudis-button:not(:last-of-type) {
+					margin-right: spacing.$spacing-sm;
+				}
+			}
+
 			@include breakpoints.breakpoint('sm') {
 				display: flex;
 				flex-wrap: wrap;
