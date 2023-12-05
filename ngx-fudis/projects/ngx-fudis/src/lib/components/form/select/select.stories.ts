@@ -88,7 +88,6 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 	},
 	template: html`
 		<fudis-select
-			*ngIf="false"
 			[size]="size"
 			[openOnFocus]="false"
 			[multiselect]="multiselect"
@@ -107,7 +106,6 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 				[disabled]="option.disabled" />
 		</fudis-select>
 		<fudis-select
-			*ngIf="false"
 			[openOnFocus]="false"
 			[size]="size"
 			[multiselect]="secondControl.multiselect"
@@ -136,7 +134,6 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 				[value]="option.value"
 				[disabled]="option.disabled" />
 		</fudis-select>
-		{{autocomplete.control?.value?.label}}
 	`,
 });
 

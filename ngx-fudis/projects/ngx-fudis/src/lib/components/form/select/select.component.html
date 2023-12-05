@@ -28,15 +28,15 @@
 			[attr.aria-labelledby]="id + '-label'"
 			[attr.aria-describedby]="id + '_guidance'"
 			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null">
-			<span *ngIf="!selectionLabelText" class="fudis-select__input__placeholder">{{ placeholder }}</span>
-			<span *ngIf="selectionLabelText" class="fudis-select__input__label">{{ selectionLabelText }}</span>
+			<span *ngIf="!dropdownSelectionLabelText" class="fudis-select__input__placeholder">{{ placeholder }}</span>
+			<span *ngIf="dropdownSelectionLabelText" class="fudis-select__input__label">{{
+				dropdownSelectionLabelText
+			}}</span>
 		</div>
-		{{ selectionLabelText }}
 		<input
 			type="text"
 			*ngIf="variant === 'autocomplete'"
 			#inputRef
-			[value]="selectionLabelText"
 			class="fudis-select__input fudis-select__input__autocomplete"
 			[class.fudis-form-input--disabled]="disabled"
 			[class.fudis-form-input--invalid]="(control.touched && control.invalid) || (control.touched && invalidState)"
@@ -44,7 +44,7 @@
 			role="combobox"
 			aria-haspopup="listbox"
 			(focus)="_inputFocus()"
-			(blur)="_inputBlur($event)"
+			(blur)="_inputBlur($event); _setInputValueOnBlur()"
 			(keyup)="_autocompleteKeypress($event)"
 			[attr.aria-autocomplete]="'none'"
 			[attr.aria-disabled]="disabled"

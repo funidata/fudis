@@ -52,6 +52,10 @@
 			&:focus {
 				@include colorMixins.text-color('gray-dark');
 			}
+
+			&:active {
+				@include colorMixins.text-color('white');
+			}
 		}
 
 		&--checked {

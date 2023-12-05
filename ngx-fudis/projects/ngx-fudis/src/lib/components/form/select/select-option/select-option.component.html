@@ -4,11 +4,11 @@
 	class="fudis-dropdown-menu-item fudis-dropdown-menu-item__single-select"
 	[class.fudis-dropdown-menu-item__focusable]="optionVisible"
 	[class.fudis-dropdown-menu-item__single-select--disabled]="disabled"
-	[class.fudis-dropdown-menu-item__single-select--selected]="_parentComponent.selectionLabelText === label"
+	[class.fudis-dropdown-menu-item__single-select--selected]="$any(_parentComponent.control.value)?.label === label"
 	role="menuitem"
 	[attr.id]="_id"
 	[attr.aria-disabled]="disabled"
-	(keydown)="_handleKeyDown($event, 'fudis-select-option button')"
+	(keydown)="_handleKeyDown($event, 'fudis-select-option .fudis-dropdown-menu-item__focusable')"
 	(blur)="_handleButtonBlur($event)"
 	(click)="_clickSelectOption($event)">
 	{{ label }}
@@ -37,7 +37,7 @@
 				(click)="_clickMultiselectOption($event)"
 				[attr.aria-checked]="checked"
 				(focus)="_focusToOption()"
-				(keydown)="_handleKeyDown($event, 'fudis-select-option input')"
+				(keydown)="_handleKeyDown($event, 'fudis-select-option .fudis-dropdown-menu-item__focusable')"
 				(blur)="_handleButtonBlur($event)" />
 			<svg
 				*ngIf="checked"
