@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FudisSelectOption } from '../../../types/forms';
+import { FudisSelectOption } from '../../../../types/forms';
 
 @Component({
-	selector: 'fudis-autocomplete-multi-select-selected-item-chip',
-	templateUrl: './autocomplete-multi-select-selected-item-chip.component.html',
-	styleUrls: ['./autocomplete-multi-select-selected-item-chip.component.scss'],
+	selector: 'fudis-select-multiselect-chip-list',
+	templateUrl: './select-multiselect-chip-list.component.html',
+	styleUrls: ['./select-multiselect-chip-list.component.scss'],
 })
-export class AutocompleteMultiSelectSelectedItemChipComponent {
+export class SelectMultiselectChipListComponent {
 	/**
 	 * Array of selected chip items
 	 */

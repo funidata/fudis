@@ -104,6 +104,7 @@ import { SelectGroupComponent } from './components/form/select/select-group/sele
 import { DropdownItemBaseDirective } from './directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { DropdownBaseDirective } from './directives/form/dropdown-base/dropdown-base.directive';
 import { SelectDropdownComponent } from './components/form/select/select-dropdown/select-dropdown.component';
+import { SelectMultiselectChipListComponent } from './components/form/select/select-multiselect-chip/select-multiselect-chip-list.component';
 
 @NgModule({
 	/*
@@ -179,6 +180,7 @@ import { SelectDropdownComponent } from './components/form/select/select-dropdow
 		TooltipDirective,
   DropdownBaseDirective,
   SelectDropdownComponent,
+  SelectMultiselectChipListComponent,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.

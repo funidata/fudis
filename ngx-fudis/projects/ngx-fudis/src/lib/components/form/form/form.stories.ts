@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RouterModule } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { FudisDropdownOption, FudisRadioButtonOption, FudisFormErrors, FudisDateRangeItem } from '../../../types/forms';
+import { FudisSelectOption, FudisRadioButtonOption, FudisFormErrors, FudisDateRangeItem } from '../../../types/forms';
 
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { FudisGroupValidators, FudisValidators } from '../../../utilities/form/validators';
@@ -221,7 +221,7 @@ class FormContentExampleComponent implements OnInit {
 		endDate: new FormControl<Date | null>(null, FudisValidators.required('End date is required.')),
 	});
 
-	languageOptions: FudisDropdownOption[] = [
+	languageOptions: FudisSelectOption[] = [
 		{ value: 'finnish', label: 'FI' },
 		{ value: 'swedish', label: 'SV' },
 		{ value: 'english', label: 'EN' },

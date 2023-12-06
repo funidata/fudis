@@ -49,7 +49,7 @@ export type FudisFormGroupErrors = {
 	[key: string]: FudisFormErrors | any;
 };
 
-export interface FudisDropdownOption {
+export interface FudisSelectOption {
 	/** Underlying value of the option */
 	value: any;
 	/** Value that is shown in the UI */

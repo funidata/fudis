@@ -6,6 +6,7 @@ import {
 	HostListener,
 	Input,
 	OnChanges,
+	OnDestroy,
 	OnInit,
 	Output,
 	Signal,
@@ -16,14 +17,16 @@ import {
 	signal,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
-import { FudisDropdownOption, FudisInputSize } from '../../../types/forms';
+import { FudisSelectOption, FudisInputSize } from '../../../types/forms';
 import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 
 import { SelectDropdownComponent } from './select-dropdown/select-dropdown.component';
+import { joinInputValues, sortValues } from './selectUtilities';
 
 @Component({
 	selector: 'fudis-select',
@@ -31,7 +34,7 @@ import { SelectDropdownComponent } from './select-dropdown/select-dropdown.compo
 	styleUrls: ['./select.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class SelectComponent extends InputBaseDirective implements OnInit, AfterViewInit, OnChanges {
+export class SelectComponent extends InputBaseDirective implements OnInit, AfterViewInit, OnChanges, OnDestroy {
 	constructor(
 		private _focusService: FudisFocusService,
 		_idService: FudisIdService,
@@ -56,7 +59,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	/*
 	 * FormControl for the dropdown
 	 */
-	@Input({ required: true }) control: FormControl<FudisDropdownOption | FudisDropdownOption[] | null>;
+	@Input({ required: true }) control: FormControl<FudisSelectOption | FudisSelectOption[] | null>;
 
 	/**
 	 * If true, user can choose multiple checkbox options from dropdown
@@ -73,16 +76,35 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	 */
 	@Input() size: 'xs' | FudisInputSize = 'lg';
 
+	/**
+	 * "dropdown" variant for regular dropdown and "autocomplete" enables user typing for search result filtering
+	 */
 	@Input() variant: 'dropdown' | 'autocomplete' = 'dropdown';
 
+	/**
+	 * When focusing on input, open dropdown menu
+	 */
 	@Input() openOnFocus: boolean = true;
 
 	/**
 	 * Value output event on selection change
 	 */
-	@Output() selectionUpdate: EventEmitter<FudisDropdownOption | null> = new EventEmitter<FudisDropdownOption | null>();
+	@Output() selectionUpdate: EventEmitter<FudisSelectOption | null> = new EventEmitter<FudisSelectOption | null>();
 
+	/**
+	 * Selected option or options label for non-autocomplete dropdowns
+	 */
 	public dropdownSelectionLabelText: string | null = null;
+
+	/**
+	 * Used when filtering autocomplete results to check if 'No results found' text is visible
+	 */
+	public visibleOptionsValues: string[] = [];
+
+	/**
+	 * Used in control.valueChanges subscription to not run update functions unless valueChange comes from application
+	 */
+	public controlValueChangedInternally: boolean = false;
 
 	/**
 	 * Internal property for toggle dropdown visibility
@@ -100,32 +122,43 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	protected _closeAriaLabel: string;
 
 	/**
-	 * Internal property label for situations where no results with current filters were found
+	 * Internal translated label for situations where no results with current filters were found
 	 */
 	protected _noResultsFound: string;
 
 	/**
-	 * Internal property to indicate deleting item chip aria-label
+	 * Internal translated text to indicate deleting item chip aria-label
 	 */
 	protected _removeItemText: string;
 
+	/**
+	 * When selecting / deselecting options, sort them in same order as in DOM
+	 */
+	protected _sortedSelectedOptions: FudisSelectOption[] = [];
+
+	protected _autocompleteFilterText: WritableSignal<string> = signal<string>('');
+
+	private _sortedSelectedOptionsSignal: WritableSignal<FudisSelectOption[]> = signal<FudisSelectOption[]>([]);
+
 	private _preventClick: boolean = false;
 
-	private _preventDropdownReopen: boolean = false;
+	private _preventDropdownReopen: boolean | undefined = false;
 
 	private _inputFocused: boolean = false;
+
+	private _controlValueSubscription: Subscription;
 
 	/**
 	 * Autocomplete user input filtering
 	 */
-	private _autocompleteFilterText: WritableSignal<string> = signal<string>('');
 
-	handleSelectionChange(value: FudisDropdownOption | null, disableSignalEmit?: boolean): void {
+	handleSelectionChange(value: FudisSelectOption | null, disableSignalEmit?: boolean): void {
 		this.selectionUpdate.emit(value);
+		this.controlValueChangedInternally = true;
 		this.control.patchValue(value);
 
 		if (this.variant === 'autocomplete') {
-			(this.inputRef.nativeElement as HTMLInputElement).value = (this.control.value as FudisDropdownOption).label;
+			(this.inputRef.nativeElement as HTMLInputElement).value = (this.control.value as FudisSelectOption).label;
 		} else {
 			this.dropdownSelectionLabelText = value?.label ? value.label : '';
 		}
@@ -137,11 +170,23 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 
 	ngOnInit(): void {
 		this._setParentId();
+
+		this._controlValueSubscription = this.control.valueChanges.subscribe(() => {
+			if (!this.controlValueChangedInternally) {
+				this._updateSelectionFromControlValue();
+			}
+
+			this.controlValueChangedInternally = false;
+		});
 	}
 
 	ngAfterViewInit(): void {
 		if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
 			this.focusToInput();
+		}
+
+		if (this.control.value) {
+			this._updateSelectionFromControlValue();
 		}
 	}
 
@@ -149,33 +194,44 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		this._required = this.required ?? hasRequiredValidator(this.control);
 	}
 
-	getAutocompleteFilterText(): Signal<string> {
+	ngOnDestroy(): void {
+		this._controlValueSubscription.unsubscribe();
+	}
+
+	public getAutocompleteFilterText(): Signal<string> {
 		return this._autocompleteFilterText.asReadonly();
 	}
 
-	public handleMultiSelectionChange(option: FudisDropdownOption, removeSelection: boolean): void {
-		const currentControlValue = this.control.value;
+	public getSelectedOptions(): Signal<FudisSelectOption[]> {
+		return this._sortedSelectedOptionsSignal.asReadonly();
+	}
 
-		if (removeSelection && currentControlValue) {
-			const newControlValue = currentControlValue.filter((item: FudisDropdownOption) => {
+	public handleMultiSelectionChange(option: FudisSelectOption, removeSelection: boolean): void {
+		let updatedValue = this.control.value as FudisSelectOption[] | null;
+
+		if (removeSelection && updatedValue) {
+			updatedValue = updatedValue.filter((item: FudisSelectOption) => {
 				return item.value !== option.value;
 			});
-
-			this._sortAndPatchValue(newControlValue, true);
-		} else if (currentControlValue === null || currentControlValue.length === 0) {
-			this._sortAndPatchValue([option], false);
+		} else if (!updatedValue) {
+			updatedValue = [option];
 		} else {
-			currentControlValue.push(option);
-			this._sortAndPatchValue(currentControlValue as FudisDropdownOption[], true);
+			updatedValue.push(option);
 		}
+
+		this._sortedSelectedOptions = sortValues(updatedValue);
+
+		this.dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
+
+		this.controlValueChangedInternally = true;
+		this.control.patchValue(this._sortedSelectedOptions);
 	}
 
 	public closeDropdown(selectionClick?: boolean): void {
 		this._dropdownOpen = false;
 
-		if (selectionClick) {
-			this._preventDropdownReopen = true;
-		}
+		this._preventDropdownReopen = selectionClick;
+
 		this.inputRef.nativeElement.focus();
 	}
 
@@ -196,8 +252,8 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	}
 
 	protected _setInputValueOnBlur(): void {
-		if (this.control.value) {
-			(this.inputRef.nativeElement as HTMLInputElement).value = (this.control.value as FudisDropdownOption).label;
+		if (this.control.value && !this.multiselect) {
+			(this.inputRef.nativeElement as HTMLInputElement).value = (this.control.value as FudisSelectOption).label;
 		}
 	}
 
@@ -258,25 +314,42 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 			this._dropdownOpen = true;
 		}
 
-		switch (key) {
-			case 'ArrowDown':
-				event.preventDefault();
-				if (this._inputFocused) {
-					this._focusToFirstOption();
-				}
-				break;
-			default:
-				break;
+		if (key === 'ArrowDown' && this._inputFocused) {
+			event.preventDefault();
+			this._focusToFirstOption();
 		}
 
-		this._autocompleteFilterText.set(event.target.value);
+		if (this._autocompleteFilterText() !== event.target.value) {
+			this._autocompleteFilterText.set(event.target.value);
+		}
 
-		if (
-			this.control.value &&
-			event.target.value.toLowerCase() !== (this.control.value as FudisDropdownOption).label.toLowerCase()
-		) {
-			this.selectionUpdate.emit(null);
-			this.control.patchValue(null);
+		if (!this.multiselect) {
+			if (
+				this.control.value &&
+				event.target.value.toLowerCase() !== (this.control.value as FudisSelectOption).label.toLowerCase()
+			) {
+				this.selectionUpdate.emit(null);
+				this.controlValueChangedInternally = true;
+				this.control.patchValue(null);
+			}
+		}
+	}
+
+	/**
+	 * Handle chip item remove by index. If there are no selections done, focus back to input on last item removal.
+	 */
+	protected _handleRemoveChip(index: number): void {
+		const currentValue = this.control.value as FudisSelectOption[];
+
+		if (currentValue) {
+			currentValue.splice(index, 1);
+			if (currentValue!.length === 0) {
+				this.inputRef.nativeElement.focus();
+			}
+
+			this._sortedSelectedOptionsSignal.set(currentValue);
+			this.controlValueChangedInternally = true;
+			this.control.patchValue(currentValue);
 		}
 	}
 
@@ -325,33 +398,29 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		}
 	}
 
-	/**
-	 * Arranges selected options in an order they are present in the DOM
-	 * @param value list of options to be sorted and patched
-	 * @param sort used if there more than one option selected
-	 */
-	private _sortAndPatchValue(value: FudisDropdownOption[], sort: boolean): void {
-		if (sort) {
-			const label: string[] = [];
+	private _updateSelectionFromControlValue(): void {
+		if (!this.multiselect) {
+			/**
+			 * Single select dropdown
+			 */
+			this.dropdownSelectionLabelText = (this.control.value as FudisSelectOption).label;
 
-			const sortedOptions = value.sort((a: FudisDropdownOption, b: FudisDropdownOption) => {
-				if (a['htmlId'] < b['htmlId']) {
-					return -1;
-				}
-				if (a['htmlId'] > b['htmlId']) {
-					return 1;
-				}
-				return 0;
-			});
+			if (this.variant === 'autocomplete') {
+				const { label } = this.control.value as FudisSelectOption;
 
-			sortedOptions.forEach((item: FudisDropdownOption) => {
-				label.push(item.label);
-			});
-			this.dropdownSelectionLabelText = label.join(', ');
-			this.control.patchValue(sortedOptions);
-		} else {
-			this.dropdownSelectionLabelText = value[0].label;
-			this.control.patchValue(value);
+				(this.inputRef.nativeElement as HTMLInputElement).value = label;
+				this._autocompleteFilterText.set(label);
+			}
+		} else if (this.multiselect) {
+			/**
+			 * Multiselect
+			 */
+			this._sortedSelectedOptionsSignal.set(this.control.value as FudisSelectOption[]);
+			this._sortedSelectedOptions = sortValues(this.control.value as FudisSelectOption[]);
+
+			if (this.variant === 'dropdown') {
+				this.dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
+			}
 		}
 	}
 

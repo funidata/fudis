@@ -70,8 +70,14 @@
 				[labelHidden]="true" />
 		</ng-container>
 	</div>
-	<fudis-select-dropdown #dropdownRef [open]="_dropdownOpen" [multiselect]="multiselect" [size]="size">
+	<fudis-select-dropdown *ngIf="false" #dropdownRef [open]="_dropdownOpen" [multiselect]="multiselect" [size]="size">
 		<ng-content select="fudis-select-option" />
+		<fudis-body-text
+			*ngIf="_autocompleteFilterText() !== '' && visibleOptionsValues.length === 0"
+			class="fudis-select-dropdown__no-results"
+			[size]="'md-light'"
+			>{{ _noResultsFound }}</fudis-body-text
+		>
 	</fudis-select-dropdown>
 	<fudis-guidance
 		*ngIf="!disableGuidance"
@@ -80,4 +86,11 @@
 		[for]="id"
 		[errorMsg]="errorMsg"
 		[control]="control" />
+	<ng-container *ngIf="control.value && multiselect && variant === 'autocomplete'">
+		<span [attr.id]="id + '-remove-items'" class="fudis-visually-hidden">{{ _removeItemText }}</span>
+		<fudis-select-multiselect-chip-list
+			[selectedItems]="_sortedSelectedOptions"
+			[parentId]="id"
+			(removedChipIndex)="_handleRemoveChip($event)" />
+	</ng-container>
 </div>

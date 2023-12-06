@@ -14,7 +14,7 @@ import {
 } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
 
-import { FudisDropdownOption } from 'dist/ngx-fudis/lib/types/forms';
+import { FudisSelectOption } from 'dist/ngx-fudis/lib/types/forms';
 
 import { FudisAlert } from 'dist/ngx-fudis/lib/types/miscellaneous';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
 
 	newRemBase: string;
 
-	dropdownOptions: FudisDropdownOption[] = [
+	dropdownOptions: FudisSelectOption[] = [
 		{ value: 'value-1-dog', label: 'Dog' },
 		{ value: 'value-2-capybara', label: 'Capybara' },
 		{ value: 'value-3-platypys', label: 'Platypus' },

@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
-import { FudisDropdownOption, FudisDropdownLanguageOption, FudisInputSize } from '../../../types/forms';
+import { FudisSelectOption, FudisDropdownLanguageOption, FudisInputSize } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -42,13 +42,13 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 	 * FormControl for the dropdown
 	 */
 	@Input({ required: true }) control: FormControl<
-		FudisDropdownOption | FudisDropdownOption[] | FudisDropdownLanguageOption[] | null
+		FudisSelectOption | FudisSelectOption[] | FudisDropdownLanguageOption[] | null
 	>;
 
 	/**
 	 * Dropdown options
 	 */
-	@Input({ required: true }) options: FudisDropdownOption[];
+	@Input({ required: true }) options: FudisSelectOption[];
 
 	/**
 	 * If true, user can choose multiple checkbox options from dropdown
@@ -72,17 +72,17 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 
 	/**
 	 * Pre-selected dropdown options.
-	 * Expects an array if 'multipleOption' is true and if 'multipleOption' is false, expects a single FudisDropdownOption.
+	 * Expects an array if 'multipleOption' is true and if 'multipleOption' is false, expects a single FudisSelectOption.
 	 * It searches given 'options' input array for matching 'value' and 'label' with selectedOptions and updates formControl value with items from 'options' input.
 	 */
-	@Input() selectedOptions: FudisDropdownOption | FudisDropdownOption[];
+	@Input() selectedOptions: FudisSelectOption | FudisSelectOption[];
 
 	/**
 	 * Value output event on selection change
 	 */
-	@Output() selectionUpdate: EventEmitter<FudisDropdownOption> = new EventEmitter<FudisDropdownOption>();
+	@Output() selectionUpdate: EventEmitter<FudisSelectOption> = new EventEmitter<FudisSelectOption>();
 
-	handleSelectionChange(value: FudisDropdownOption): void {
+	handleSelectionChange(value: FudisSelectOption): void {
 		this.selectionUpdate.emit(value);
 	}
 
@@ -104,9 +104,9 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 
 	private _setInitialValues(): void {
 		if (this.selectedOptions?.length >= 1 && this.multipleOption) {
-			const foundOptions: FudisDropdownOption[] = [];
+			const foundOptions: FudisSelectOption[] = [];
 
-			this.selectedOptions.forEach((selectedOption: FudisDropdownOption) => {
+			this.selectedOptions.forEach((selectedOption: FudisSelectOption) => {
 				const foundIndex = this.options.findIndex((option) => {
 					return option.value === selectedOption.value && option.label === selectedOption.label;
 				});
@@ -118,7 +118,7 @@ export class DropdownComponent extends InputBaseDirective implements OnInit, OnC
 
 			this.control.patchValue(foundOptions);
 		} else if (!Array.isArray(this.selectedOptions) && !this.multipleOption) {
-			const valueToFind: FudisDropdownOption = this.selectedOptions;
+			const valueToFind: FudisSelectOption = this.selectedOptions;
 
 			const foundIndex = this.options.findIndex((option) => {
 				return option.value === valueToFind?.value && option.label === valueToFind?.label;

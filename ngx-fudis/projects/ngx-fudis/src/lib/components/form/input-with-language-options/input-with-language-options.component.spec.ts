@@ -4,7 +4,7 @@ import { MockComponent } from 'ng-mocks';
 import { FormGroup, FormControl } from '@angular/forms';
 import { InputWithLanguageOptionsComponent } from './input-with-language-options.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
-import { FudisDropdownOption } from '../../../types/forms';
+import { FudisSelectOption } from '../../../types/forms';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { TextInputComponent } from '../text-input/text-input.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
@@ -16,7 +16,7 @@ const testFormGroup: FormGroup = new FormGroup({
 	english: new FormControl('', FudisValidators.required('Required in English')),
 });
 
-const languageOptions: FudisDropdownOption[] = [
+const languageOptions: FudisSelectOption[] = [
 	{ value: 'finnish', label: 'Fi' },
 	{ value: 'swedish', label: 'Sv' },
 	{ value: 'english', label: 'En' },

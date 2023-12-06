@@ -9,10 +9,14 @@
 	@include utilities.box-reset;
 	@include colorMixins.bg-color('white');
 	@include zIndex.z-index('dropdown-menu');
+	@include borders.border('1px', 'solid', 'gray-dark');
 
 	display: none;
 	position: absolute;
 	width: 100%;
+	max-width: spacing.$spacing-input-lg;
+	max-height: calc(spacing.$spacing-xxl * 4);
+	overflow: auto;
 
 	&:focus-visible {
 		@include focus.focus-generic;
@@ -43,19 +47,11 @@
 		width: spacing.$spacing-input-sm;
 	}
 
-	&__multiselect {
-		max-width: spacing.$spacing-input-lg;
-		max-height: calc(spacing.$spacing-xxl * 4);
-		overflow: auto;
-
-		fudis-body-text {
-			padding: spacing.$spacing-xs;
-		}
+	&__no-results {
+		padding: spacing.$spacing-xs;
 	}
 
 	&--open {
-		@include borders.border('1px', 'solid', 'gray-dark');
-
 		display: block;
 	}
 }

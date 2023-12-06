@@ -1,0 +1,10 @@
+<ul class="fudis-select-multiselect-chip__list" [attr.id]="parentId + '-selected-items'">
+	<button
+		*ngFor="let item of selectedItems; let index = index"
+		class="fudis-select-multiselect-chip__button"
+		[attr.aria-describedby]="parentId + '-remove-items'"
+		(click)="removeChip($event, index)">
+		<fudis-icon [icon]="'close'" [color]="'white'"></fudis-icon>
+		{{ item.label }}
+	</button>
+</ul>

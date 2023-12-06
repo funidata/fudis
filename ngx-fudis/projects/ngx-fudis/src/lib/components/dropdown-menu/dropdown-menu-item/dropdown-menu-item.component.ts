@@ -1,4 +1,4 @@
-import { OnInit, Component, ElementRef, Host, ViewChild } from '@angular/core';
+import { OnInit, Component, ElementRef, Host, ViewChild, Input } from '@angular/core';
 import { DropdownMenuComponent } from '../dropdown-menu.component';
 import { FudisIdService } from '../../../services/id/id.service';
 import { DropdownItemBaseDirective } from '../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
@@ -17,6 +17,11 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective impleme
 	}
 
 	@ViewChild('dropdownItem') dropdownItem: ElementRef;
+
+	/**
+	 * Label for dropdown item
+	 */
+	@Input({ required: true }) label: string;
 
 	ngOnInit(): void {
 		this._id = this._idService.getNewChildId('dropdown-menu', this._parentComponent.id);

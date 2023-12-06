@@ -4,10 +4,10 @@ import { AutocompleteMultiSelectComponent } from './autocomplete-multi-select.co
 import { FudisDropdownMenuItemService } from '../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { LabelComponent } from '../form/label/label.component';
 import { ButtonComponent } from '../button/button.component';
-import { FudisDropdownOption, FudisInputSize } from '../../types/forms';
+import { FudisSelectOption, FudisInputSize } from '../../types/forms';
 import { AutocompleteMultiSelectSelectedItemChipComponent } from './autocomplete-multi-select-selected-item-chip/autocomplete-multi-select-selected-item-chip.component';
 
-const multiSelectOptions: FudisDropdownOption[] = [
+const multiSelectOptions: FudisSelectOption[] = [
 	{ value: 1, label: 'Dog' },
 	{ value: 2, label: 'Cat' },
 	{ value: 3, label: 'Parrot' },

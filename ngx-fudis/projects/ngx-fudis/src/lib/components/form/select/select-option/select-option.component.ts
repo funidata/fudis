@@ -1,6 +1,16 @@
-import { Component, ElementRef, Host, Input, OnInit, ViewChild, effect } from '@angular/core';
+import {
+	AfterViewInit,
+	Component,
+	ElementRef,
+	Host,
+	HostBinding,
+	Input,
+	OnInit,
+	ViewChild,
+	effect,
+} from '@angular/core';
 
-import { FudisDropdownOption } from '../../../../types/forms';
+import { FudisSelectOption } from '../../../../types/forms';
 import { DropdownItemBaseDirective } from '../../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectComponent } from '../select.component';
@@ -10,7 +20,7 @@ import { SelectComponent } from '../select.component';
 	templateUrl: './select-option.component.html',
 	styleUrls: ['../../../dropdown-menu/dropdown-menu-item/dropdown-menu-item.component.scss'],
 })
-export class SelectOptionComponent extends DropdownItemBaseDirective implements OnInit {
+export class SelectOptionComponent extends DropdownItemBaseDirective implements OnInit, AfterViewInit {
 	constructor(
 		private _idService: FudisIdService,
 		@Host() protected _parentComponent: SelectComponent
@@ -18,17 +28,24 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 		super();
 
 		effect(() => {
-			if (this._parentComponent.variant === 'autocomplete') {
-				this._isOptionVisible(_parentComponent.getAutocompleteFilterText()());
+			if (this.data) {
+				if (this._parentComponent.variant === 'autocomplete') {
+					this._isOptionVisible(this._parentComponent.getAutocompleteFilterText()());
+					this._isOptionTyped(this._parentComponent.getAutocompleteFilterText()());
+				}
 
-				this._isOptionTyped(_parentComponent.getAutocompleteFilterText()());
+				if (this._parentComponent.multiselect) {
+					this._isOptionChecked(this._parentComponent.getSelectedOptions()());
+				}
 			}
 		});
 	}
 
 	@ViewChild('dropdownItem') dropdownItem: ElementRef;
 
-	@Input({ required: true }) value: string;
+	@Input({ required: true }) data: FudisSelectOption;
+
+	@HostBinding('class') classes = 'fudis-select-option-host';
 
 	public optionVisible: boolean = true;
 
@@ -42,13 +59,25 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 		}
 	}
 
+	ngAfterViewInit() {
+		console.log('wrum');
+		if (this._parentComponent.variant === 'autocomplete') {
+			this._isOptionVisible(this._parentComponent.getAutocompleteFilterText()());
+			this._isOptionTyped(this._parentComponent.getAutocompleteFilterText()());
+		}
+
+		if (this._parentComponent.multiselect) {
+			this._isOptionChecked(this._parentComponent.getSelectedOptions()());
+		}
+	}
+
 	protected _clickSelectOption(event: Event): void {
 		this._preventTypeChange = true;
 
 		this.handleClick.emit(event);
 
-		if (!this.disabled) {
-			const selectedOption: FudisDropdownOption = { value: this.value, label: this.label, htmlId: this._id };
+		if (!this.data.disabled) {
+			const selectedOption: FudisSelectOption = { ...this.data, htmlId: this._id };
 
 			this._parentComponent.closeDropdown(true);
 
@@ -57,9 +86,9 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 	}
 
 	protected _clickMultiselectOption(event: Event): void {
-		if (!this.disabled) {
+		if (!this.data.disabled) {
 			this.checked = !this.checked;
-			const selectedOption: FudisDropdownOption = { value: this.value, label: this.label, htmlId: this._id };
+			const selectedOption: FudisSelectOption = { ...this.data, htmlId: this._id };
 
 			if (this.checked) {
 				this._parentComponent.handleMultiSelectionChange(selectedOption, false);
@@ -93,22 +122,41 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 	}
 
 	private _isOptionVisible(filterText: string | undefined): void {
-		if (filterText) {
-			this.optionVisible = this.label.toLowerCase().includes(filterText.toLowerCase());
-		} else {
-			this.optionVisible = true;
+		this.optionVisible =
+			filterText && this.data.label.toLowerCase().includes(filterText.toLowerCase()) ? true : !filterText;
+
+		if (this.data) {
+			if (this.optionVisible && !this._parentComponent.visibleOptionsValues.includes(this.data.value)) {
+				this._parentComponent.visibleOptionsValues.push(this.data.value);
+			} else if (!this.optionVisible && this._parentComponent.visibleOptionsValues.includes(this.data.value)) {
+				const index = this._parentComponent.visibleOptionsValues.indexOf(this.data.value);
+
+				this._parentComponent.visibleOptionsValues.splice(index, 1);
+			}
 		}
 	}
 
 	private _isOptionTyped(filterText: string | undefined): void {
-		if (!this.disabled && !this._preventTypeChange && this.label?.toLowerCase() === filterText?.toLowerCase()) {
-			const selectedOption: FudisDropdownOption = { value: this.value, label: this.label, htmlId: this._id };
-
+		if (
+			!this.data?.disabled &&
+			!this._preventTypeChange &&
+			this.data?.label?.toLowerCase() === filterText?.toLowerCase()
+		) {
 			this._parentComponent.closeDropdown(true);
 
-			this._parentComponent.handleSelectionChange(selectedOption, true);
+			if (this._parentComponent.control.value !== this.data) {
+				const selectedOption: FudisSelectOption = { ...this.data, htmlId: this._id };
+
+				this._parentComponent.handleSelectionChange(selectedOption, true);
+			}
 		} else {
 			this._preventTypeChange = false;
 		}
+	}
+
+	private _isOptionChecked(options: FudisSelectOption[]): void {
+		const result = options.find((option) => option.label === this.data.label && option.value === this.data.value);
+
+		this.checked = !!result;
 	}
 }

@@ -5,16 +5,6 @@ import { Directive, ElementRef, EventEmitter, Input, Output } from '@angular/cor
 })
 export class DropdownItemBaseDirective {
 	/**
-	 * Label for dropdown item
-	 */
-	@Input({ required: true }) label: string;
-
-	/**
-	 * Option for disabling dropdown item
-	 */
-	@Input() disabled: boolean = false;
-
-	/**
 	 * Option for closing or leaving dropdown open after clicking an item. Closes by default.
 	 */
 	@Input() close: boolean = true;
@@ -83,14 +73,19 @@ export class DropdownItemBaseDirective {
 				return false;
 			}, 100);
 		} else {
+			const parentSelect = element.nativeElement.closest('fudis-select');
+
 			const menuButton = element.nativeElement.closest('fudis-button')?.querySelector('.fudis-button');
 
-			const selectInput = element.nativeElement.closest('fudis-select')?.querySelector('.fudis-select__input');
+			const selectInput = parentSelect?.querySelector('.fudis-select__input');
+
+			const autocompleteChevronButton = parentSelect?.querySelector('.fudis-select__input-wrapper__icon-button button');
 
 			if (
 				!(event.relatedTarget as HTMLElement)?.classList?.contains('fudis-dropdown-menu-item__focusable') &&
 				(event.relatedTarget as HTMLElement) !== selectInput &&
-				(event.relatedTarget as HTMLElement) !== menuButton
+				(event.relatedTarget as HTMLElement) !== menuButton &&
+				(event.relatedTarget as HTMLElement) !== autocompleteChevronButton
 			) {
 				return true;
 			}

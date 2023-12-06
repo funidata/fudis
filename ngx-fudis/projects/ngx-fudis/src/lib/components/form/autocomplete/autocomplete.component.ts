@@ -2,7 +2,7 @@ import { AfterContentInit, AfterViewInit, Component, Input, OnChanges, OnInit, e
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
-import { FudisDropdownOption, FudisInputSize } from '../../../types/forms';
+import { FudisSelectOption, FudisInputSize } from '../../../types/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -33,12 +33,12 @@ export class AutocompleteComponent
 	/**
 	 * FormControl for the input.
 	 */
-	@Input({ required: true }) control: FormControl<FudisDropdownOption | null>;
+	@Input({ required: true }) control: FormControl<FudisSelectOption | null>;
 
 	/**
 	 * Option list
 	 */
-	@Input({ required: true }) options: FudisDropdownOption[];
+	@Input({ required: true }) options: FudisSelectOption[];
 
 	/**
 	 * Available sizes for the autocomplete - defaults to large.
@@ -48,9 +48,9 @@ export class AutocompleteComponent
 	/**
 	 * Pre-selected dropdown options.
 	 * If string, it fills the input with given string. NOTE: This sets formControl's value to 'null' if string does not match of any labels from 'options'.
-	 * If given FudisDropdownOption, it searches given 'options' input array for matching 'value' and 'label' with selectedOptions and updates formControl value with item from 'options' input.
+	 * If given FudisSelectOption, it searches given 'options' input array for matching 'value' and 'label' with selectedOptions and updates formControl value with item from 'options' input.
 	 */
-	@Input() selectedOption: string | FudisDropdownOption;
+	@Input() selectedOption: string | FudisSelectOption;
 
 	/**
 	 * Option whether the dropdown options are shown only after three charactes (search) or if options are displayed when focusing the search input even without typing (dropdown)
@@ -70,7 +70,7 @@ export class AutocompleteComponent
 	/**
 	 * Internal filtered options derived from options Input
 	 */
-	protected _filteredOptions: Observable<FudisDropdownOption[]>;
+	protected _filteredOptions: Observable<FudisSelectOption[]>;
 
 	/**
 	 * Aria-label for close icon which clears the input
@@ -128,7 +128,7 @@ export class AutocompleteComponent
 			const findMe = this.selectedOption;
 
 			const foundIndex = this.options.findIndex(
-				(option: FudisDropdownOption) => option.value === findMe.value && option.label === findMe.label
+				(option: FudisSelectOption) => option.value === findMe.value && option.label === findMe.label
 			);
 			if (foundIndex !== -1) {
 				this._autocompleteFormControl.patchValue(this.options[foundIndex].label);
@@ -193,7 +193,7 @@ export class AutocompleteComponent
 	/**
 	 * Filter options when user inputs text or opens dropdown
 	 */
-	private _filter(value: string): FudisDropdownOption[] {
+	private _filter(value: string): FudisSelectOption[] {
 		if (value || value === '') {
 			const filterValue = value.toLowerCase();
 			const filteredOptions = this.options.filter((option) => option.label.toLowerCase().includes(filterValue));
