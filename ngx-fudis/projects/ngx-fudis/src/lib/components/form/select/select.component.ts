@@ -1,6 +1,7 @@
 import {
 	AfterViewInit,
 	Component,
+	ContentChild,
 	ElementRef,
 	EventEmitter,
 	HostListener,
@@ -27,6 +28,7 @@ import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 
 import { SelectDropdownComponent } from './select-dropdown/select-dropdown.component';
 import { joinInputValues, sortValues } from './selectUtilities';
+import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 
 @Component({
 	selector: 'fudis-select',
@@ -55,6 +57,8 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	@ViewChild('selectRef', { static: false }) selectElementRef: ElementRef;
 
 	@ViewChild('inputWrapperRef') inputWrapperRef: ElementRef;
+
+	@ContentChild(ContentDirective) content: ContentDirective;
 
 	/*
 	 * FormControl for the dropdown
@@ -137,6 +141,11 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	protected _sortedSelectedOptions: FudisSelectOption[] = [];
 
 	protected _autocompleteFilterText: WritableSignal<string> = signal<string>('');
+
+	/**
+	 *  Lazy loading check for expanding content
+	 */
+	protected _openedOnce: boolean = false;
 
 	private _sortedSelectedOptionsSignal: WritableSignal<FudisSelectOption[]> = signal<FudisSelectOption[]>([]);
 
@@ -262,6 +271,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 			this._openDropdown();
 			this._preventClick = true;
 			this._preventDropdownReopen = false;
+			this._openedOnce = true;
 		}
 
 		this._inputFocused = true;

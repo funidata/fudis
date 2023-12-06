@@ -1,14 +1,4 @@
-import {
-	AfterViewInit,
-	Component,
-	ElementRef,
-	Host,
-	HostBinding,
-	Input,
-	OnInit,
-	ViewChild,
-	effect,
-} from '@angular/core';
+import { Component, ElementRef, Host, HostBinding, Input, OnInit, ViewChild, effect } from '@angular/core';
 
 import { FudisSelectOption } from '../../../../types/forms';
 import { DropdownItemBaseDirective } from '../../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
@@ -20,7 +10,7 @@ import { SelectComponent } from '../select.component';
 	templateUrl: './select-option.component.html',
 	styleUrls: ['../../../dropdown-menu/dropdown-menu-item/dropdown-menu-item.component.scss'],
 })
-export class SelectOptionComponent extends DropdownItemBaseDirective implements OnInit, AfterViewInit {
+export class SelectOptionComponent extends DropdownItemBaseDirective implements OnInit {
 	constructor(
 		private _idService: FudisIdService,
 		@Host() protected _parentComponent: SelectComponent
@@ -57,10 +47,7 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 		if (this._parentComponent) {
 			this._id = this._idService.getNewChildId('select', this._parentComponent.id);
 		}
-	}
 
-	ngAfterViewInit() {
-		console.log('wrum');
 		if (this._parentComponent.variant === 'autocomplete') {
 			this._isOptionVisible(this._parentComponent.getAutocompleteFilterText()());
 			this._isOptionTyped(this._parentComponent.getAutocompleteFilterText()());

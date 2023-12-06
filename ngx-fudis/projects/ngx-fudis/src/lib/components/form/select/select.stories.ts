@@ -132,7 +132,9 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			[tooltip]="tooltip"
 			[tooltipPosition]="tooltipPosition"
 			[tooltipToggle]="tooltipToggle">
-			<fudis-select-option *ngFor="let option of defaultOptions" [data]="option" />
+			<ng-template fudisContent type="select-options">
+				<fudis-select-option *ngFor="let option of defaultOptions" [data]="option"
+			/></ng-template>
 		</fudis-select>
 		<fudis-select
 			[openOnFocus]="true"
@@ -141,7 +143,9 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			[control]="multiselect.control"
 			[label]="multiselect.label"
 			[helpText]="multiselect.helpText">
-			<fudis-select-option *ngFor="let option of options" [data]="option" />
+			<ng-template fudisContent type="select-options">
+				<fudis-select-option *ngFor="let option of options" [data]="option"
+			/></ng-template>
 		</fudis-select>
 		<fudis-select
 			[variant]="'autocomplete'"
@@ -151,7 +155,9 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			[control]="autocomplete.control"
 			[label]="autocomplete.label"
 			[helpText]="autocomplete.helpText">
-			<fudis-select-option *ngFor="let option of options" [data]="option" />
+			<ng-template fudisContent type="select-options">
+				<fudis-select-option *ngFor="let option of options" [data]="option"
+			/></ng-template>
 		</fudis-select>
 		<fudis-select
 			[variant]="'autocomplete'"
@@ -161,7 +167,9 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			[control]="autocompleteMultiselect.control"
 			[label]="autocompleteMultiselect.label"
 			[helpText]="autocompleteMultiselect.helpText">
-			<fudis-select-option *ngFor="let option of options" [data]="option" />
+			<ng-template fudisContent type="select-options">
+				<fudis-select-option *ngFor="let option of options" [data]="option"
+			/></ng-template>
 		</fudis-select>
 	`,
 });
