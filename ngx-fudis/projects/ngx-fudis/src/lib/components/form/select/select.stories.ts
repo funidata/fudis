@@ -137,7 +137,6 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			/></ng-template>
 		</fudis-select>
 		<fudis-select
-			[openOnFocus]="true"
 			[multiselect]="multiselect.multiselect"
 			[placeholder]="multiselect.placeholder"
 			[control]="multiselect.control"

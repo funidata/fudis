@@ -2,12 +2,12 @@
 	Singleselect option
 -->
 <button
-	*ngIf="!_parentComponent.multiselect"
+	*ngIf="!_parent.multiselect"
 	#dropdownItem
 	class="fudis-dropdown-menu-item fudis-dropdown-menu-item__single-select"
 	[class.fudis-dropdown-menu-item__focusable]="optionVisible"
 	[class.fudis-dropdown-menu-item__single-select--disabled]="data.disabled"
-	[class.fudis-dropdown-menu-item__single-select--selected]="$any(_parentComponent.control.value)?.label === data.label"
+	[class.fudis-dropdown-menu-item__single-select--selected]="$any(_parent.control.value)?.label === data.label"
 	role="menuitem"
 	[attr.id]="_id"
 	[attr.aria-disabled]="data.disabled ? true : null"
@@ -21,7 +21,7 @@
 	Multiselect option
 -->
 <div
-	*ngIf="_parentComponent.multiselect"
+	*ngIf="_parent.multiselect"
 	class="fudis-dropdown-menu-item fudis-dropdown-menu-item__multiselect"
 	[attr.id]="_id"
 	[class.fudis-dropdown-menu-item--visible]="optionVisible"

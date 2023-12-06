@@ -80,7 +80,7 @@
 			<ng-container *ngTemplateOutlet="content!.templateRef"></ng-container>
 		</ng-container>
 		<fudis-body-text
-			*ngIf="_autocompleteFilterText() !== '' && visibleOptionsValues.length === 0"
+			*ngIf="visibleOptionsValues.length === 0 && !control.value"
 			class="fudis-select-dropdown__no-results"
 			[size]="'md-light'"
 			>{{ _noResultsFound }}</fudis-body-text
@@ -93,7 +93,7 @@
 		[for]="id"
 		[errorMsg]="errorMsg"
 		[control]="control" />
-	<ng-container *ngIf="control.value && multiselect && variant === 'autocomplete'">
+	<ng-container *ngIf="control.value && multiselect && showSelectionChips">
 		<span [attr.id]="id + '-remove-items'" class="fudis-visually-hidden">{{ _removeItemText }}</span>
 		<fudis-select-multiselect-chip-list
 			[selectedItems]="_sortedSelectedOptions"

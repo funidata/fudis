@@ -90,6 +90,8 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	 */
 	@Input() openOnFocus: boolean = true;
 
+	@Input() showSelectionChips = true;
+
 	/**
 	 * Value output event on selection change
 	 */
@@ -160,7 +162,6 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	/**
 	 * Autocomplete user input filtering
 	 */
-
 	handleSelectionChange(value: FudisSelectOption | null, disableSignalEmit?: boolean): void {
 		this.selectionUpdate.emit(value);
 		this.controlValueChangedInternally = true;
@@ -236,23 +237,25 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		this.control.patchValue(this._sortedSelectedOptions);
 	}
 
-	public closeDropdown(selectionClick?: boolean): void {
+	public closeDropdown(focusToInput: boolean = true, selectionClick: boolean = false): void {
 		this._dropdownOpen = false;
 
 		this._preventDropdownReopen = selectionClick;
 
-		this.inputRef.nativeElement.focus();
+		if (focusToInput) {
+			this.inputRef.nativeElement.focus();
+		}
 	}
 
 	protected _inputBlur(event: FocusEvent): void {
 		if (!event.relatedTarget && this.multiselect) {
 			setTimeout(() => {
 				if (!document.activeElement?.classList.contains('fudis-dropdown-menu-item__focusable')) {
-					this._dropdownOpen = false;
+					this.closeDropdown(false);
 				}
 			}, 150);
 		} else if (!(event.relatedTarget as HTMLElement)?.classList.contains('fudis-dropdown-menu-item__focusable')) {
-			this._dropdownOpen = false;
+			this.closeDropdown(false);
 		}
 
 		this._inputFocused = false;
@@ -281,7 +284,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		if (this._preventClick) {
 			this._preventClick = false;
 		} else if (this._dropdownOpen) {
-			this._dropdownOpen = false;
+			this.closeDropdown(false);
 			this._preventDropdownReopen = true;
 		} else {
 			this._toggleDropdown();
@@ -320,8 +323,8 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	protected _autocompleteKeypress(event: any): void {
 		const { key } = event;
 
-		if (key !== 'Escape' && key !== 'Enter') {
-			this._dropdownOpen = true;
+		if (!this._dropdownOpen && key !== 'Escape' && key !== 'Enter') {
+			this._openDropdown();
 		}
 
 		if (key === 'ArrowDown' && this._inputFocused) {
@@ -357,6 +360,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 				this.inputRef.nativeElement.focus();
 			}
 
+			this.dropdownSelectionLabelText = joinInputValues(currentValue);
 			this._sortedSelectedOptionsSignal.set(currentValue);
 			this.controlValueChangedInternally = true;
 			this.control.patchValue(currentValue);
@@ -446,7 +450,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 			const dropdownAreaClick = this.dropdownRef?.dropdownElement?.nativeElement.contains(targetElement);
 
 			if (!inputAreaClick && !dropdownAreaClick) {
-				this._dropdownOpen = false;
+				this.closeDropdown(false);
 			}
 		}
 	}
@@ -463,7 +467,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 				(event.target as HTMLElement).closest('fudis-select')?.querySelector('.fudis-select__input') as HTMLInputElement
 			)?.focus();
 
-			this._dropdownOpen = false;
+			this.closeDropdown();
 		}
 	}
 }
