@@ -23,6 +23,11 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective impleme
 	 */
 	@Input({ required: true }) label: string;
 
+	/**
+	 * Option for disabling dropdown item
+	 */
+	@Input() disabled: boolean = false;
+
 	ngOnInit(): void {
 		this._id = this._idService.getNewChildId('dropdown-menu', this._parentComponent.id);
 	}
