@@ -13,7 +13,7 @@ import { FudisExpandableType } from '../../types/miscellaneous';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { FudisIdService } from '../../services/id/id.service';
-import { FudisErrorSummaryService } from '../../services/form/error-summary/error-summary.service';
+import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisFormErrorSummarySection } from '../../types/forms';
 
 /**
@@ -40,7 +40,7 @@ import { FudisFormErrorSummarySection } from '../../types/forms';
 export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 	constructor(
 		private _idService: FudisIdService,
-		private _errorSummaryService: FudisErrorSummaryService
+		private _errorSummaryService: FudisInternalErrorSummaryService
 	) {
 		this._id = this._idService.getNewId('expandable');
 		this._headingId = `${this._id}-heading`;

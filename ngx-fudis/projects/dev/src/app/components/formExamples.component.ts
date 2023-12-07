@@ -9,7 +9,7 @@ import {
 	FudisRadioButtonOption,
 } from 'projects/ngx-fudis/src/lib/types/forms';
 import { untilDestroyed } from 'projects/ngx-fudis/src/lib/utilities/untilDestroyed';
-import { FudisReloadErrorsErrorSummaryService } from 'ngx-fudis';
+import { FudisErrorSummaryService } from 'ngx-fudis';
 import { FudisGroupValidators, FudisValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
 import { FudisDropdownLanguageOption, FudisInputWithLanguageOptionsFormGroup } from 'dist/ngx-fudis/lib/types/forms';
 
@@ -33,7 +33,7 @@ type MyForm = {
 export class AppFormExampleComponent implements OnInit {
 	constructor(
 		private _translocoService: TranslocoService,
-		private _reloadErrorsErrorSummaryService: FudisReloadErrorsErrorSummaryService
+		private _errorSummaryService: FudisErrorSummaryService
 	) {}
 
 	errorSummaryVisible: boolean = false;
@@ -147,7 +147,7 @@ export class AppFormExampleComponent implements OnInit {
 		if (this.testFormGroup.invalid) {
 			this.errorSummaryVisible = true;
 			this.showSuccessBodyText = false;
-			this._reloadErrorsErrorSummaryService.reloadErrors();
+			this._errorSummaryService.reloadErrors();
 		} else {
 			this.errorSummaryVisible = false;
 			this.showSuccessBodyText = true;
