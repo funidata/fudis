@@ -53,7 +53,7 @@ import { FudisDropdownMenuItemService } from './components/dropdown-menu/dropdow
 import { FudisFocusService } from './services/focus/focus.service';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
 import { FudisErrorSummaryService } from './services/form/error-summary/error-summary.service';
-import { FudisReloadErrorsErrorSummaryService } from './services/form/error-summary/reload-errors-error-summary.service';
+import { FudisReloadErrorsErrorSummaryService } from './services/form/error-summary/reload-errors/reload-errors-error-summary.service';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
 

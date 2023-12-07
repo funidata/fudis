@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { FudisDropdownOption, FudisRadioButtonOption, FudisFormErrors, FudisDateRangeItem } from '../../../types/forms';
 
-import { FudisReloadErrorsErrorSummaryService } from '../../../services/form/error-summary/reload-errors-error-summary.service';
+import { FudisReloadErrorsErrorSummaryService } from '../../../services/form/error-summary/reload-errors/reload-errors-error-summary.service';
 import { FudisGroupValidators, FudisValidators } from '../../../utilities/form/validators';
 import { FormComponent } from './form.component';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
