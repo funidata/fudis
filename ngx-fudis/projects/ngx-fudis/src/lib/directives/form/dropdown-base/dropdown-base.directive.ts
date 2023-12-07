@@ -36,25 +36,4 @@ export class DropdownBaseDirective {
 	 * Determine dropdown max-width
 	 */
 	protected _maxWidth: string = 'initial';
-
-	// @HostListener('window:keydown.arrowDown', ['$event'])
-	// handleArrowDownPress(event: KeyboardEvent) {
-	// 	event.preventDefault();
-
-	// 	if (this.open) {
-	// 		const firstChildElement = this.dropdownElement.nativeElement.children[0];
-
-	// 		const focusOnMenuButton =
-	// 			firstChildElement.closest('fudis-button')?.querySelector('.fudis-button') === document.activeElement;
-
-	// 		const focusOnSelectInput =
-	// 			firstChildElement.closest('fudis-select')?.querySelector('.fudis-select__input') === document.activeElement;
-
-	// 		// If focus is on the menu button, only then listen keydown and focus on the first child
-	// 		if (focusOnMenuButton || focusOnSelectInput) {
-	// 			const firstChildButtonElement = firstChildElement.querySelector('button');
-	// 			firstChildButtonElement?.focus();
-	// 		}
-	// 	}
-	// }
 }

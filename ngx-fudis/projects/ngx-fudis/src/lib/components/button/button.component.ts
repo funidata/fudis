@@ -9,14 +9,10 @@ import {
 	ViewChild,
 	ElementRef,
 	OnChanges,
-	effect,
-	Signal,
 } from '@angular/core';
 import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
-import { FudisDropdownMenuItemService } from '../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { FudisIdService } from '../../services/id/id.service';
-import { FudisDropdownMenuStatus } from '../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-button',
@@ -25,19 +21,10 @@ import { FudisDropdownMenuStatus } from '../../types/miscellaneous';
 	encapsulation: ViewEncapsulation.None,
 })
 export class ButtonComponent extends TooltipApiDirective implements OnChanges {
-	constructor(
-		private _menuService: FudisDropdownMenuItemService,
-		private _idService: FudisIdService
-	) {
+	constructor(private _idService: FudisIdService) {
 		super();
 
 		this._id = _idService.getNewId('button');
-
-		this._menuStatus = this._menuService.getMenuStatus();
-
-		effect(() => {
-			this.closeMenu(this._menuStatus()?.open);
-		});
 	}
 
 	@HostBinding('class') classes = 'fudis-button-host';
@@ -100,14 +87,14 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 	@Output() handleClick = new EventEmitter<Event>();
 
 	/**
+	 * Toggle menu button
+	 */
+	public dropdownOpen: boolean = false;
+
+	/**
 	 * Automatically sets icon color based on button variant
 	 */
 	protected _iconColor: FudisIconColor = 'white';
-
-	/**
-	 * Toggle menu button
-	 */
-	protected _toggleOn: boolean = false;
 
 	/**
 	 * Button CSS class list
@@ -124,11 +111,6 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 	 */
 	protected _id: string;
 
-	/**
-	 * Menu status property if button is used as dropdown menu button
-	 */
-	private _menuStatus: Signal<FudisDropdownMenuStatus>;
-
 	ngOnChanges(): void {
 		this._classList = this._getClasses();
 		this._ariaLabel = this._getAriaLabel();
@@ -136,16 +118,21 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 
 	buttonClick(event: Event): void {
 		if (this.asMenuButton) {
-			this._toggleOn = !this._toggleOn;
-			this._menuService.setMenuStatus({ id: this._id, open: this._toggleOn });
+			this.toggleMenu();
 		}
 		this.handleClick.emit(event);
 	}
 
-	closeMenu(menuStatus: boolean | null | undefined): void {
-		if (!menuStatus) {
-			this._toggleOn = false;
-		}
+	toggleMenu(): void {
+		this.dropdownOpen = !this.dropdownOpen;
+	}
+
+	openMenu(): void {
+		this.dropdownOpen = true;
+	}
+
+	closeMenu(): void {
+		this.dropdownOpen = false;
 	}
 
 	handleBlur(event: FocusEvent): void {
@@ -154,7 +141,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 		);
 
 		if (this.asMenuButton && !targetIsDropdownMenuButton) {
-			this._menuService.setMenuStatus({ id: this._id, open: false });
+			this.dropdownOpen = false;
 		}
 	}
 

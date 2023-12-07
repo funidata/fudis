@@ -216,19 +216,19 @@ describe('FudisIdServiceService', () => {
 				children: [
 					'fudis-select-1-item-1',
 					'fudis-select-1-item-2',
-					'fudis-select-1-custom-child-id',
+					'select-1-custom-child-id',
 					'fudis-select-1-item-4',
 					'fudis-select-1-item-5',
 				],
 			},
 			{
-				parent: 'fudis-select-some-custom-id',
+				parent: 'select-some-custom-id',
 				children: [
-					'fudis-select-some-custom-id-item-1',
-					'fudis-select-some-custom-id-item-2',
-					'fudis-select-some-custom-id-custom-child-id',
-					'fudis-select-some-custom-id-item-4',
-					'fudis-select-some-custom-id-id-item-5',
+					'select-some-custom-id-item-1',
+					'select-some-custom-id-item-2',
+					'select-2-custom-child-id',
+					'select-some-custom-id-item-4',
+					'select-some-custom-id-item-5',
 				],
 			},
 			{
@@ -236,7 +236,7 @@ describe('FudisIdServiceService', () => {
 				children: [
 					'fudis-select-3-item-1',
 					'fudis-select-3-item-2',
-					'fudis-select-3-custom-child-id',
+					'select-3-custom-child-id',
 					'fudis-select-3-item-4',
 					'fudis-select-3-item-5',
 				],

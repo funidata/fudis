@@ -49,7 +49,6 @@ import { DropdownComponent } from './components/form/dropdown/dropdown.component
 import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
 import { DropdownMenuItemComponent } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
 
-import { FudisDropdownMenuItemService } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { FudisFocusService } from './services/focus/focus.service';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
 import { FudisErrorSummaryService } from './services/form/error-summary/error-summary.service';
@@ -178,9 +177,9 @@ import { SelectMultiselectChipListComponent } from './components/form/select/sel
 		TextInputComponent,
 		TextAreaComponent,
 		TooltipDirective,
-  DropdownBaseDirective,
-  SelectDropdownComponent,
-  SelectMultiselectChipListComponent,
+		DropdownBaseDirective,
+		SelectDropdownComponent,
+		SelectMultiselectChipListComponent,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
@@ -272,7 +271,6 @@ import { SelectMultiselectChipListComponent } from './components/form/select/sel
 		FudisAlertService,
 		FudisBreakpointService,
 		FudisDialogService,
-		FudisDropdownMenuItemService,
 		FudisErrorSummaryService,
 		FudisFocusService,
 		FudisGridService,

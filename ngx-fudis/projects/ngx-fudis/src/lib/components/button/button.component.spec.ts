@@ -3,7 +3,6 @@ import { MockComponent } from 'ng-mocks';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { IconComponent } from '../icon/icon.component';
 import { ButtonComponent } from './button.component';
-import { FudisDropdownMenuItemService } from '../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 
 describe('ButtonComponent', () => {
 	let component: ButtonComponent;
@@ -12,7 +11,7 @@ describe('ButtonComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [ButtonComponent, MockComponent(IconComponent)],
-			providers: [FudisDropdownMenuItemService],
+			providers: [],
 		})
 			.overrideComponent(ButtonComponent, {
 				set: { changeDetection: ChangeDetectionStrategy.Default },

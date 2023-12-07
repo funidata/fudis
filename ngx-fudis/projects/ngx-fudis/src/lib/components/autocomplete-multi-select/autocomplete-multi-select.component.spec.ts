@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockComponent } from 'ng-mocks';
 import { AutocompleteMultiSelectComponent } from './autocomplete-multi-select.component';
-import { FudisDropdownMenuItemService } from '../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { LabelComponent } from '../form/label/label.component';
 import { ButtonComponent } from '../button/button.component';
 import { FudisSelectOption, FudisInputSize } from '../../types/forms';
@@ -25,7 +24,7 @@ describe('AutocompleteMultiSelectComponent', () => {
 				MockComponent(ButtonComponent),
 				MockComponent(AutocompleteMultiSelectSelectedItemChipComponent),
 			],
-			providers: [FudisDropdownMenuItemService],
+			providers: [],
 		}).compileComponents();
 	});
 

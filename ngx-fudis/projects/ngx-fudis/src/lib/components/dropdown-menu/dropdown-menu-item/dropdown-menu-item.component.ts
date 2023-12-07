@@ -2,6 +2,7 @@ import { OnInit, Component, ElementRef, Host, ViewChild, Input } from '@angular/
 import { DropdownMenuComponent } from '../dropdown-menu.component';
 import { FudisIdService } from '../../../services/id/id.service';
 import { DropdownItemBaseDirective } from '../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
+import { ButtonComponent } from '../../button/button.component';
 
 @Component({
 	selector: 'fudis-dropdown-menu-item',
@@ -11,7 +12,8 @@ import { DropdownItemBaseDirective } from '../../../directives/form/dropdown-ite
 export class DropdownMenuItemComponent extends DropdownItemBaseDirective implements OnInit {
 	constructor(
 		private _idService: FudisIdService,
-		@Host() protected _parentComponent: DropdownMenuComponent
+		@Host() protected _parentComponent: DropdownMenuComponent,
+		@Host() protected _parentButton: ButtonComponent
 	) {
 		super();
 	}
@@ -45,6 +47,10 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective impleme
 	}
 
 	protected _closeDropdown(event: Event): void {
+		if (this._parentButton) {
+			this._parentButton.closeMenu();
+		}
+
 		this.handleClick.emit(event);
 	}
 }
