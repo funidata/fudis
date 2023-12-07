@@ -98,6 +98,8 @@ import { AlertComponent } from './components/alert/alert/alert.component';
 import { AlertGroupComponent } from './components/alert/alert-group/alert-group.component';
 import { FudisAlertService } from './services/alert/alert.service';
 import { FudisBreakpointService } from './services/breakpoint/breakpoint.service';
+import { CustomErrorMessageComponent } from './components/form/error-message/custom-error-message/custom-error-message.component';
+import { ErrorMessageBaseDirective } from './components/form/error-message/error-message-base/error-message-base.directive';
 
 @NgModule({
 	/*
@@ -167,6 +169,8 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		TextInputComponent,
 		TextAreaComponent,
 		TooltipDirective,
+		CustomErrorMessageComponent,
+		ErrorMessageBaseDirective,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
@@ -209,6 +213,7 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		CheckboxComponent,
 		CheckboxGroupComponent,
 		ContentDirective,
+		CustomErrorMessageComponent,
 		DatepickerComponent,
 		DateRangeComponent,
 		DescriptionListComponent,
@@ -223,7 +228,6 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		DropdownComponent,
 		DropdownMenuComponent,
 		DropdownMenuItemComponent,
-		ErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,
 		FooterComponent,

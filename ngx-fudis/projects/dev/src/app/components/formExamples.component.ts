@@ -40,6 +40,8 @@ export class AppFormExampleComponent implements OnInit {
 
 	showSuccessBodyText: boolean = false;
 
+	customError: boolean = true;
+
 	dropdownOptions: FudisDropdownOption[] = [
 		{ value: 'value-1-dog', viewValue: 'Dog' },
 		{ value: 'value-2-capybara', viewValue: 'Capybara' },
@@ -63,10 +65,11 @@ export class AppFormExampleComponent implements OnInit {
 			null,
 			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
 		),
-		textInput: new FormControl<string | null | number>(null, [
-			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required')),
-			FudisValidators.minLength(5, this._translocoService.selectTranslateObject('form_errors.notEnoughCharacters')),
-		]),
+		textInput: new FormControl<string | null | number>(null),
+		// textInput: new FormControl<string | null | number>(null, [
+		// 	FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required')),
+		// 	FudisValidators.minLength(5, this._translocoService.selectTranslateObject('form_errors.notEnoughCharacters')),
+		// ]),
 		truth: new FormControl<boolean | null>(
 			null,
 			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
@@ -152,6 +155,10 @@ export class AppFormExampleComponent implements OnInit {
 			this.errorSummaryVisible = false;
 			this.showSuccessBodyText = true;
 		}
+	}
+
+	toggleCustomError(): void {
+		this.customError = !this.customError;
 	}
 
 	// eslint-disable-next-line class-methods-use-this

@@ -121,10 +121,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 													[control]="formExample.controls['teacher']"
 													[label]="'Responsible teacher'"
 													[helpText]="'Someone has to be responsible for this.'">
-													<fudis-error-message
-														[message]="'Olaaa'"
-														[type]="'customABC'"
-														[visible]="true"></fudis-error-message>
+													<fudis-custom-error-message [message]="'Olaaa'" [visible]="true" />
 												</fudis-text-input>
 												<!-- <fudis-text-input
 													[id]="'unique-input-4'"

@@ -8,6 +8,8 @@ import {
 	ViewChild,
 	ElementRef,
 	ContentChild,
+	ContentChildren,
+	QueryList,
 } from '@angular/core';
 
 import { FudisFormErrors } from '../../../types/forms';
@@ -17,6 +19,7 @@ import { FudisTranslationConfig } from '../../../types/miscellaneous';
 import { FudisIdComponent } from '../../../types/id';
 import { FudisIdService } from '../../../services/id/id.service';
 import { ContentDirective } from '../../content-projection/content/content.directive';
+import { CustomErrorMessageComponent } from '../../../components/form/error-message/custom-error-message/custom-error-message.component';
 
 @Directive({
 	selector: '[fudisInputBase]',
@@ -30,12 +33,14 @@ export class InputBaseDirective extends TooltipApiDirective {
 
 		effect(() => {
 			this._translations = _translationService.getTranslations();
-
 			this._requiredText = this._translations().REQUIRED;
 		});
 	}
 
 	@ContentChild(ContentDirective) content: ContentDirective;
+
+	@ContentChildren(CustomErrorMessageComponent)
+	private _errorMessages: QueryList<CustomErrorMessageComponent>;
 
 	/**
 	 * Template reference for input. Used in e. g. initialFocus
@@ -135,6 +140,15 @@ export class InputBaseDirective extends TooltipApiDirective {
 			this._idService.addNewId(componentType, this.id);
 		} else {
 			this.id = this._idService.getNewId(componentType);
+		}
+	}
+
+	protected _sendDataToCustomErrorMessages(): void {
+		if (this._errorMessages?.first) {
+			this._errorMessages.first.setParentProperties(this.id, this.label);
+		}
+		if (this._errorMessages?.last) {
+			this._errorMessages.last.setParentProperties(this.id, this.label);
 		}
 	}
 }

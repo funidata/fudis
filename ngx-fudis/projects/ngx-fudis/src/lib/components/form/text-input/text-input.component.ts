@@ -1,14 +1,4 @@
-import {
-	AfterViewInit,
-	Component,
-	Input,
-	HostBinding,
-	OnInit,
-	OnChanges,
-	ViewChild,
-	ContentChild,
-	AfterContentInit,
-} from '@angular/core';
+import { AfterViewInit, Component, Input, HostBinding, OnInit, OnChanges, AfterContentInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
@@ -23,8 +13,6 @@ import {
 	getMinLengthFromValidator,
 	hasRequiredValidator,
 } from '../../../utilities/form/getValidators';
-import { GuidanceComponent } from '../guidance/guidance.component';
-import { ErrorMessageComponent } from '../error-message/error-message.component';
 
 @Component({
 	selector: 'fudis-text-input',
@@ -42,10 +30,6 @@ export class TextInputComponent
 	) {
 		super(_translationService, _idService);
 	}
-
-	@ViewChild('fudisGuidance') _guidance: GuidanceComponent;
-
-	@ContentChild(ErrorMessageComponent) _errorMessage: ErrorMessageComponent;
 
 	@HostBinding('class') classes = 'fudis-text-input-host';
 
@@ -108,8 +92,6 @@ export class TextInputComponent
 	}
 
 	ngAfterContentInit(): void {
-		if (this._errorMessage) {
-			this._errorMessage.parent = this._guidance;
-		}
+		this._sendDataToCustomErrorMessages();
 	}
 }

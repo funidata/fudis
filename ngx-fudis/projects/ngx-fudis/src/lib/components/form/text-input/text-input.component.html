@@ -25,7 +25,6 @@
 		[attr.aria-describedby]="id + '_guidance'"
 		[attr.required]="_required ? true : null" />
 	<fudis-guidance
-		#fudisGuidance
 		*ngIf="!disableGuidance"
 		[inputLabel]="label"
 		[maxLength]="maxLength"
@@ -33,6 +32,6 @@
 		[for]="id"
 		[errorMsg]="errorMsg"
 		[control]="control">
-		<ng-content></ng-content>
+		<ng-content />
 	</fudis-guidance>
 </div>

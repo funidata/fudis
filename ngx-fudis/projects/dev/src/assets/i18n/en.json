@@ -11,7 +11,8 @@
 		"boolean_truth": "Truth is missing!",
 		"too_few_chars": "Too few characters.",
 		"email": "That is not an email!",
-		"notEnoughCharacters": "Too few characters."
+		"notEnoughCharacters": "Too few characters.",
+		"customErrorMessage": "Some really weird custom error happened!"
 	},
 	"error_one_required": "At least one language is required",
 	"dynamic": "transloco {{value}}",
