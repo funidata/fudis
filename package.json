@@ -7,7 +7,8 @@
 		"doc": "docs"
 	},
 	"scripts": {
-		"setup": "npm ci && cd ngx-fudis && npm ci",
+		"postinstall": "cd ngx-fudis && npm ci",
+		"setup:husky": "husky install",
 		"start": "npm run start:storybook && npm run logs",
 		"start:all": "npm run start:storybook && npm run start:sandbox && npm run logs",
 		"start:sandbox": "docker compose up --build -d fudis-sandbox",
@@ -18,8 +19,7 @@
 		"dev": "cd ngx-fudis && ng build ngx-fudis --watch",
 		"storybook": "cd ngx-fudis && npm run storybook",
 		"sandbox": "cd ngx-fudis && ng serve",
-		"test": "cd ngx-fudis && npm run test",
-		"prepare": "husky install",
+		"test": "cd ngx-fudis && npm test",
 		"lint": "cd ngx-fudis && npm run lint",
 		"stylelint": "cd ngx-fudis && npm run stylelint",
 		"build-local-package": "cd ngx-fudis && ng build ngx-fudis && cd dist/ngx-fudis && npm pack --pack-destination ~",
@@ -36,7 +36,7 @@
 		"url": "git+https://github.com/funidata/fudis.git"
 	},
 	"author": "Funidata",
-	"license": "ISC",
+	"license": "CC-BY-NC-SA-4.0",
 	"bugs": {
 		"url": "https://github.com/funidata/fudis/issues"
 	},

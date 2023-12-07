@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "build:ngx-fudis": "ng build ngx-fudis -c production",
-    "test": "ng test",
+    "test": "ng test ngx-fudis --watch false --browsers ChromeHeadless",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "ng run storybook:start",
     "build-storybook": "npm run docs:json && STORYBOOK_FUDIS_VERSION=\"${STORYBOOK_FUDIS_VERSION- }\" ng run storybook:build",
@@ -15,6 +15,7 @@
     "stylelint": "stylelint '**/*.{css,scss}'"
   },
   "private": true,
+  "license": "CC-BY-NC-SA-4.0",
   "dependencies": {
     "@angular/animations": "16.2.12",
     "@angular/cdk": "16.2.12",
