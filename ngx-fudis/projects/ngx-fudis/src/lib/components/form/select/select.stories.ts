@@ -133,8 +133,10 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			[tooltipPosition]="tooltipPosition"
 			[tooltipToggle]="tooltipToggle">
 			<ng-template fudisContent type="select-options">
-				<fudis-select-option *ngFor="let option of defaultOptions" [data]="option"
-			/></ng-template>
+				<fudis-select-group [label]="'Otsikko juU!'">
+					<fudis-select-option *ngFor="let option of defaultOptions" [data]="option" />
+				</fudis-select-group>
+			</ng-template>
 		</fudis-select>
 		<fudis-select
 			[multiselect]="multiselect.multiselect"
@@ -143,8 +145,9 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			[label]="multiselect.label"
 			[helpText]="multiselect.helpText">
 			<ng-template fudisContent type="select-options">
-				<fudis-select-option *ngFor="let option of options" [data]="option"
-			/></ng-template>
+				<fudis-select-group [label]="'Otsikko juU!'">
+					<fudis-select-option *ngFor="let option of options" [data]="option" /> </fudis-select-group
+			></ng-template>
 		</fudis-select>
 		<fudis-select
 			[variant]="'autocomplete'"
@@ -155,8 +158,9 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			[label]="autocomplete.label"
 			[helpText]="autocomplete.helpText">
 			<ng-template fudisContent type="select-options">
-				<fudis-select-option *ngFor="let option of options" [data]="option"
-			/></ng-template>
+				<fudis-select-group [label]="'Otsikko juU!'">
+					<fudis-select-option *ngFor="let option of options" [data]="option" /> </fudis-select-group
+			></ng-template>
 		</fudis-select>
 		<fudis-select
 			[variant]="'autocomplete'"
@@ -167,8 +171,9 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			[label]="autocompleteMultiselect.label"
 			[helpText]="autocompleteMultiselect.helpText">
 			<ng-template fudisContent type="select-options">
-				<fudis-select-option *ngFor="let option of options" [data]="option"
-			/></ng-template>
+				<fudis-select-group [label]="'Otsikko juU!'">
+					<fudis-select-option *ngFor="let option of options" [data]="option" /></fudis-select-group
+			></ng-template>
 		</fudis-select>
 	`,
 });

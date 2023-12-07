@@ -79,6 +79,7 @@ describe('FudisIdServiceService', () => {
 		'checkbox-group': [],
 		'dropdown-menu': [],
 		'radio-button-group': [],
+		select: [],
 	};
 	const familyDataAfter: FudisIdFamilyData = {
 		breadcrumbs: [
@@ -206,6 +207,38 @@ describe('FudisIdServiceService', () => {
 					'radio-button-group-3-custom-child-id',
 					'fudis-radio-button-group-3-item-4',
 					'fudis-radio-button-group-3-item-5',
+				],
+			},
+		],
+		select: [
+			{
+				parent: 'fudis-select-1',
+				children: [
+					'fudis-select-1-item-1',
+					'fudis-select-1-item-2',
+					'fudis-select-1-custom-child-id',
+					'fudis-select-1-item-4',
+					'fudis-select-1-item-5',
+				],
+			},
+			{
+				parent: 'fudis-select-some-custom-id',
+				children: [
+					'fudis-select-some-custom-id-item-1',
+					'fudis-select-some-custom-id-item-2',
+					'fudis-select-some-custom-id-custom-child-id',
+					'fudis-select-some-custom-id-item-4',
+					'fudis-select-some-custom-id-id-item-5',
+				],
+			},
+			{
+				parent: 'fudis-select-3',
+				children: [
+					'fudis-select-3-item-1',
+					'fudis-select-3-item-2',
+					'fudis-select-3-custom-child-id',
+					'fudis-select-3-item-4',
+					'fudis-select-3-item-5',
 				],
 			},
 		],

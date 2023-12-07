@@ -2,16 +2,16 @@
 	Singleselect option
 -->
 <button
-	*ngIf="!_parent.multiselect"
+	*ngIf="!_parentSelect.multiselect"
 	#dropdownItem
-	class="fudis-dropdown-menu-item fudis-dropdown-menu-item__single-select"
-	[class.fudis-dropdown-menu-item__focusable]="optionVisible"
-	[class.fudis-dropdown-menu-item__single-select--disabled]="data.disabled"
-	[class.fudis-dropdown-menu-item__single-select--selected]="$any(_parent.control.value)?.label === data.label"
+	class="fudis-select-option fudis-select-option__single-select"
+	[class.fudis-select-option__focusable]="optionVisible"
+	[class.fudis-select-option__single-select--disabled]="data.disabled"
+	[class.fudis-select-option__single-select--selected]="$any(_parentSelect.control.value)?.label === data.label"
 	role="menuitem"
 	[attr.id]="_id"
 	[attr.aria-disabled]="data.disabled ? true : null"
-	(keydown)="_handleKeyDown($event, 'fudis-select-option .fudis-dropdown-menu-item__focusable')"
+	(keydown)="_handleKeyDown($event, 'fudis-select-option .fudis-select-option__focusable')"
 	(blur)="_handleButtonBlur($event)"
 	(click)="_clickSelectOption($event)">
 	{{ data.label }}
@@ -21,33 +21,33 @@
 	Multiselect option
 -->
 <div
-	*ngIf="_parent.multiselect"
-	class="fudis-dropdown-menu-item fudis-dropdown-menu-item__multiselect"
+	*ngIf="_parentSelect.multiselect"
+	class="fudis-select-option fudis-select-option__multiselect"
 	[attr.id]="_id"
-	[class.fudis-dropdown-menu-item--visible]="optionVisible"
-	[class.fudis-dropdown-menu-item__multiselect--checked]="checked"
-	[class.fudis-dropdown-menu-item__multiselect--focused]="_focused"
-	[class.fudis-dropdown-menu-item__multiselect--disabled]="data.disabled">
+	[class.fudis-select-option--visible]="optionVisible"
+	[class.fudis-select-option__multiselect--checked]="checked"
+	[class.fudis-select-option__multiselect--focused]="_focused"
+	[class.fudis-select-option__multiselect--disabled]="data.disabled">
 	<label
-		class="fudis-dropdown-menu-item__multiselect__label"
-		[class.fudis-dropdown-menu-item__multiselect__label--focus]="_focused"
-		[class.fudis-dropdown-menu-item__multiselect__label--checked]="checked">
-		<div class="fudis-dropdown-menu-item__multiselect__label__checkbox">
+		class="fudis-select-option__multiselect__label"
+		[class.fudis-select-option__multiselect__label--focus]="_focused"
+		[class.fudis-select-option__multiselect__label--checked]="checked">
+		<div class="fudis-select-option__multiselect__label__checkbox">
 			<input
 				#dropdownItem
-				[class.fudis-dropdown-menu-item__focusable]="optionVisible"
+				[class.fudis-select-option__focusable]="optionVisible"
 				type="checkbox"
-				class="fudis-dropdown-menu-item__multiselect__label__checkbox__input"
+				class="fudis-select-option__multiselect__label__checkbox__input"
 				[attr.role]="'option'"
 				[attr.aria-disabled]="data.disabled ? true : null"
 				(click)="_clickMultiselectOption($event)"
 				[attr.aria-checked]="checked"
 				(focus)="_focusToOption()"
-				(keydown)="_handleKeyDown($event, 'fudis-select-option .fudis-dropdown-menu-item__focusable')"
+				(keydown)="_handleKeyDown($event, 'fudis-select-option .fudis-select-option__focusable')"
 				(blur)="_handleButtonBlur($event)" />
 			<svg
 				*ngIf="checked"
-				class="fudis-dropdown-menu-item__multiselect__label__checkbox__icon"
+				class="fudis-select-option__multiselect__label__checkbox__icon"
 				width="100%"
 				height="100%"
 				preserveAspectRatio="xMidYMin"
@@ -60,6 +60,6 @@
 					d="M9.0171,16.5A1.5,1.5,0,0,1,7.9,16.0012l-4.0171-4.48a1.5,1.5,0,0,1,2.2334-2.003L8.8706,12.59l5.9-8.4487A1.5,1.5,0,1,1,17.23,5.8591l-6.9824,10a1.4978,1.4978,0,0,1-1.1392.6387C9.0776,16.4992,9.0474,16.5,9.0171,16.5Z" />
 			</svg>
 		</div>
-		<div class="fudis-dropdown-menu-item__multiselect__label__text">{{ data.label }}</div>
+		<div class="fudis-select-option__multiselect__label__text">{{ data.label }}</div>
 	</label>
 </div>

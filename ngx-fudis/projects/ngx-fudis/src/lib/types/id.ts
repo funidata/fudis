@@ -35,9 +35,15 @@ export const fudisIdParents = [
 
 export type FudisIdParent = (typeof fudisIdParents)[number];
 
+type FudisIdFamilyBase = {
+	parent: string;
+	children: string[];
+};
+
 export type FudisIdFamily = {
 	parent: string;
 	children: string[];
+	childrenGroups?: FudisIdFamilyBase[];
 };
 
 export type FudisIdFamilyData = {

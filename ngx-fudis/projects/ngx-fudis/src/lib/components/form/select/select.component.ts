@@ -303,6 +303,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 				this._toggleDropdown();
 				break;
 			case 'ArrowDown':
+				event.preventDefault();
 				if (!this._dropdownOpen) {
 					this._toggleDropdown();
 				}

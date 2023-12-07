@@ -1,0 +1,8 @@
+@use '../../../../foundations/spacing/tokens.scss' as spacing;
+
+.fudis-select-group {
+	&__label {
+		padding: spacing.$spacing-xxs spacing.$spacing-md;
+		font-weight: 400;
+	}
+}
