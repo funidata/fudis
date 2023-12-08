@@ -38,7 +38,7 @@ export class DialogComponent implements OnInit, OnDestroy {
 	protected _id: string;
 
 	/**
-	 * Aria-label for top right close button
+	 * Internal translated aria-label for top right close button
 	 */
 	protected _closeLabel: string;
 

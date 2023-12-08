@@ -1,6 +1,7 @@
 <fudis-alert-group [insideDialog]="true" />
 <div class="fudis-dialog fudis-dialog__size__{{ size }}" [attr.id]="_id">
 	<fudis-button
+		fudisDialogClose
 		class="fudis-dialog__close"
 		[class.fudis-dialog__close__absolute]="closeButtonPositionAbsolute"
 		[attr.id]="_id + '-close'"
@@ -8,8 +9,7 @@
 		[labelHidden]="true"
 		[size]="'icon-only'"
 		[icon]="'ring-close'"
-		[variant]="'tertiary'"
-		fudisDialogClose>
+		[variant]="'tertiary'">
 	</fudis-button>
 	<ng-content></ng-content>
 </div>
