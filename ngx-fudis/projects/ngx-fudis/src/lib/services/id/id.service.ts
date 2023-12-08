@@ -132,7 +132,6 @@ export class FudisIdService {
 				});
 			}
 		});
-		console.log(this._familyData[grandParentType]);
 
 		return newId;
 	}

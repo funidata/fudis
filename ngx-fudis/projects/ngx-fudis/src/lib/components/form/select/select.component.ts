@@ -250,11 +250,11 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	protected _inputBlur(event: FocusEvent): void {
 		if (!event.relatedTarget && this.multiselect) {
 			setTimeout(() => {
-				if (!document.activeElement?.classList.contains('fudis-dropdown-menu-item__focusable')) {
+				if (!document.activeElement?.classList.contains('fudis-select-option__focusable')) {
 					this.closeDropdown(false);
 				}
 			}, 150);
-		} else if (!(event.relatedTarget as HTMLElement)?.classList.contains('fudis-dropdown-menu-item__focusable')) {
+		} else if (!(event.relatedTarget as HTMLElement)?.classList.contains('fudis-select-option__focusable')) {
 			this.closeDropdown(false);
 		}
 
@@ -391,7 +391,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	 *
 	 */
 	private _focusToFirstOption(): void {
-		const selectorCss = '.fudis-dropdown-menu-item__focusable';
+		const selectorCss = '.fudis-select-option__focusable';
 
 		const firstOption: HTMLInputElement = this.dropdownRef?.dropdownElement.nativeElement.querySelector(
 			selectorCss

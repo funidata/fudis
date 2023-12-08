@@ -56,16 +56,16 @@ export class DropdownItemBaseDirective {
 	}
 
 	// eslint-disable-next-line class-methods-use-this
-	protected _focusedOutFromComponent(event: FocusEvent, element: ElementRef): boolean {
+	protected _focusedOutFromComponent(event: FocusEvent, element: ElementRef, selector: string): boolean {
 		if (!event.relatedTarget) {
 			setTimeout(() => {
-				if (!document.activeElement?.classList.contains('fudis-dropdown-menu-item__focusable')) {
+				if (!document.activeElement?.classList.contains(selector)) {
 					return false;
 				}
 				const menuButton = element.nativeElement.closest('fudis-button')?.querySelector('.fudis-button');
 
 				if (
-					!(event.relatedTarget as HTMLElement)?.classList?.contains('fudis-dropdown-menu-item__focusable') &&
+					!(event.relatedTarget as HTMLElement)?.classList?.contains(selector) &&
 					(event.relatedTarget as HTMLElement) !== menuButton
 				) {
 					return true;
@@ -82,7 +82,7 @@ export class DropdownItemBaseDirective {
 			const autocompleteChevronButton = parentSelect?.querySelector('.fudis-select__input-wrapper__icon-button button');
 
 			if (
-				!(event.relatedTarget as HTMLElement)?.classList?.contains('fudis-dropdown-menu-item__focusable') &&
+				!(event.relatedTarget as HTMLElement)?.classList?.contains(selector) &&
 				(event.relatedTarget as HTMLElement) !== selectInput &&
 				(event.relatedTarget as HTMLElement) !== menuButton &&
 				(event.relatedTarget as HTMLElement) !== autocompleteChevronButton

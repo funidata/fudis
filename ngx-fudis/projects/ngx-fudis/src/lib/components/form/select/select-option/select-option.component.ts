@@ -103,7 +103,7 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 	protected _handleButtonBlur(event: FocusEvent): void {
 		this._focused = false;
 		this.handleBlur.emit(event);
-		const closeDropdown = this._focusedOutFromComponent(event, this.dropdownItem);
+		const closeDropdown = this._focusedOutFromComponent(event, this.dropdownItem, 'fudis-select-option__focusable');
 
 		if (closeDropdown) {
 			this._parentSelect.closeDropdown();

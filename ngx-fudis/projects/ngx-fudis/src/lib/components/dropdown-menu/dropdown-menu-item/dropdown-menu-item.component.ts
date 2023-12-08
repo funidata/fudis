@@ -39,7 +39,11 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective impleme
 	}
 
 	protected _handleButtonBlur(event: FocusEvent): void {
-		const closeDropdown = this._focusedOutFromComponent(event, this.dropdownItem);
+		const closeDropdown = this._focusedOutFromComponent(
+			event,
+			this.dropdownItem,
+			'fudis-dropdown-menu-item__focusable'
+		);
 
 		if (closeDropdown) {
 			this._parentComponent.open = false;

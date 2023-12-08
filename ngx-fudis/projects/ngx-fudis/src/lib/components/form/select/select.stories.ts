@@ -5,7 +5,7 @@ import { importProvidersFrom } from '@angular/core';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { SelectComponent } from './select.component';
 import readme from './readme.mdx';
-import { selectMockData } from './mock_data';
+import { selectMockData, generateRandomGroups } from './mock_data';
 import { FudisSelectOption } from '../../../types/forms';
 
 export default {
@@ -102,6 +102,10 @@ const defaultOptions: FudisSelectOption[] = [
 	{ value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
 ];
 
+// const randomGroups = generateRandomGroups();
+
+// console.log(randomGroups);
+
 const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 	props: {
 		...args,
@@ -133,9 +137,7 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			[tooltipPosition]="tooltipPosition"
 			[tooltipToggle]="tooltipToggle">
 			<ng-template fudisContent type="select-options">
-				<fudis-select-group [label]="'Otsikko juU!'">
-					<fudis-select-option *ngFor="let option of defaultOptions" [data]="option" />
-				</fudis-select-group>
+				<fudis-select-option *ngFor="let option of defaultOptions" [data]="option" />
 			</ng-template>
 		</fudis-select>
 		<fudis-select
@@ -144,10 +146,7 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			[control]="multiselect.control"
 			[label]="multiselect.label"
 			[helpText]="multiselect.helpText">
-			<ng-template fudisContent type="select-options">
-				<fudis-select-group [label]="'Otsikko juU!'">
-					<fudis-select-option *ngFor="let option of options" [data]="option" /> </fudis-select-group
-			></ng-template>
+			<ng-template fudisContent type="select-options"> </ng-template>
 		</fudis-select>
 		<fudis-select
 			[variant]="'autocomplete'"
@@ -158,9 +157,8 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			[label]="autocomplete.label"
 			[helpText]="autocomplete.helpText">
 			<ng-template fudisContent type="select-options">
-				<fudis-select-group [label]="'Otsikko juU!'">
-					<fudis-select-option *ngFor="let option of options" [data]="option" /> </fudis-select-group
-			></ng-template>
+				<fudis-select-option *ngFor="let option of options" [data]="option" />
+			</ng-template>
 		</fudis-select>
 		<fudis-select
 			[variant]="'autocomplete'"
@@ -171,9 +169,8 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			[label]="autocompleteMultiselect.label"
 			[helpText]="autocompleteMultiselect.helpText">
 			<ng-template fudisContent type="select-options">
-				<fudis-select-group [label]="'Otsikko juU!'">
-					<fudis-select-option *ngFor="let option of options" [data]="option" /></fudis-select-group
-			></ng-template>
+				<fudis-select-option *ngFor="let option of options" [data]="option"
+			/></ng-template>
 		</fudis-select>
 	`,
 });

@@ -538,3 +538,153 @@ export const selectMockData: FudisSelectOption[] = [
 	},
 	{ value: '4d5da0b9-f8f7-498a-be7f-c5a66b689d5c', label: 'European wild cat', scienceName: 'Felis silvestris lybica' },
 ];
+
+const countries = [
+	{ country: 'Netherlands' },
+	{ country: 'Brazil' },
+	{ country: 'China' },
+	{ country: 'Indonesia' },
+	{ country: 'China' },
+	{ country: 'Colombia' },
+	{ country: 'China' },
+	{ country: 'Canada' },
+	{ country: 'Malaysia' },
+	{ country: 'Austria' },
+	{ country: 'China' },
+	{ country: 'United States' },
+	{ country: 'Sweden' },
+	{ country: 'France' },
+	{ country: 'Russia' },
+	{ country: 'Mexico' },
+	{ country: 'Portugal' },
+	{ country: 'Brazil' },
+	{ country: 'Syria' },
+	{ country: 'China' },
+	{ country: 'Indonesia' },
+	{ country: 'Indonesia' },
+	{ country: 'Kazakhstan' },
+	{ country: 'Dominican Republic' },
+	{ country: 'France' },
+	{ country: 'Indonesia' },
+	{ country: 'Ukraine' },
+	{ country: 'China' },
+	{ country: 'Indonesia' },
+	{ country: 'Argentina' },
+	{ country: 'Indonesia' },
+	{ country: 'China' },
+	{ country: 'Portugal' },
+	{ country: 'Albania' },
+	{ country: 'China' },
+	{ country: 'China' },
+	{ country: 'Azerbaijan' },
+	{ country: 'Botswana' },
+	{ country: 'Indonesia' },
+	{ country: 'Portugal' },
+	{ country: 'China' },
+	{ country: 'China' },
+	{ country: 'Cyprus' },
+	{ country: 'Nigeria' },
+	{ country: 'Japan' },
+	{ country: 'Indonesia' },
+	{ country: 'China' },
+	{ country: 'Brazil' },
+	{ country: 'China' },
+	{ country: 'Dominican Republic' },
+	{ country: 'Indonesia' },
+	{ country: 'Madagascar' },
+	{ country: 'Indonesia' },
+	{ country: 'Indonesia' },
+	{ country: 'Cuba' },
+	{ country: 'Canada' },
+	{ country: 'Russia' },
+	{ country: 'Poland' },
+	{ country: 'China' },
+	{ country: 'Philippines' },
+	{ country: 'Poland' },
+	{ country: 'Iran' },
+	{ country: 'Pakistan' },
+	{ country: 'Honduras' },
+	{ country: 'Indonesia' },
+	{ country: 'Argentina' },
+	{ country: 'China' },
+	{ country: 'Vietnam' },
+	{ country: 'Poland' },
+	{ country: 'Indonesia' },
+	{ country: 'Indonesia' },
+	{ country: 'Albania' },
+	{ country: 'United States' },
+	{ country: 'Russia' },
+	{ country: 'Mauritius' },
+	{ country: 'Mexico' },
+	{ country: 'Thailand' },
+	{ country: 'Indonesia' },
+	{ country: 'South Korea' },
+	{ country: 'China' },
+	{ country: 'France' },
+	{ country: 'Burkina Faso' },
+	{ country: 'China' },
+	{ country: 'Philippines' },
+	{ country: 'China' },
+	{ country: 'Luxembourg' },
+	{ country: 'United States' },
+	{ country: 'United States' },
+	{ country: 'Latvia' },
+	{ country: 'Sweden' },
+	{ country: 'Poland' },
+	{ country: 'Philippines' },
+	{ country: 'Japan' },
+	{ country: 'United States' },
+	{ country: 'Indonesia' },
+	{ country: 'Colombia' },
+	{ country: 'Philippines' },
+	{ country: 'Indonesia' },
+	{ country: 'Russia' },
+	{ country: 'Cuba' },
+];
+
+const pickRandomCountry = () => {
+	return countries[Math.floor(Math.random() * countries.length)].country;
+};
+
+export const generateRandomGroups = (): any[] => {
+	const arrayToReturn: any[] = [];
+
+	let counter = 0;
+
+	const usedCountries: string[] = [];
+
+	let newCountryData: any;
+
+	selectMockData.forEach((item) => {
+		if (counter === 0) {
+			let tryAgain = false;
+			const newCountry = pickRandomCountry();
+
+			do {
+				if (usedCountries.includes(newCountry)) {
+					tryAgain = true;
+				} else {
+					tryAgain = false;
+				}
+			} while (tryAgain === true);
+
+			usedCountries.push(newCountry);
+
+			newCountryData = {
+				country: newCountry,
+				options: [item],
+			};
+		} else if (counter < 8) {
+			newCountryData.options.push(item);
+		} else {
+			newCountryData.options.push(item);
+
+			arrayToReturn.push(newCountryData);
+			counter = 0;
+		}
+	});
+
+	console.log(arrayToReturn);
+
+	return arrayToReturn;
+};
