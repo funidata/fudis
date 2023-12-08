@@ -1,11 +1,9 @@
-/* eslint-disable no-underscore-dangle */
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
 	selector: 'app-dialog-test-content',
 	template: `
-		<fudis-dialog [closeButtonLabel]="'Close'" [size]="'lg'">
+		<fudis-dialog [size]="'lg'">
 			<fudis-heading fudisDialogTitle [level]="2">Dialog with fudis-grid and scrollable content</fudis-heading>
 			<fudis-dialog-content>
 				<fudis-grid [marginTop]="'md'" [marginBottom]="'md'">
@@ -62,6 +60,4 @@ import { FormBuilder } from '@angular/forms';
 	`,
 	styles: [],
 })
-export class DialogTestContentComponent {
-	constructor(private _formBuilder: FormBuilder) {}
-}
+export class DialogTestContentComponent {}

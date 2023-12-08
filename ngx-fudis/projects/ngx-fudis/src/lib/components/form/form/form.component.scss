@@ -8,6 +8,10 @@
 			&__badge {
 				margin-left: spacing.$spacing-xs;
 			}
+
+			&__dialog {
+				max-width: calc(100% - spacing.$spacing-lg);
+			}
 		}
 
 		&__main {
@@ -17,11 +21,24 @@
 		}
 
 		&__actions {
+			margin-right: spacing.$spacing-xs;
 			margin-bottom: spacing.$spacing-sm;
 
 			fudis-button:not(:last-of-type) {
 				margin-right: spacing.$spacing-sm;
 				margin-bottom: spacing.$spacing-xs;
+			}
+
+			&__dialog {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: flex-end;
+				margin-right: spacing.$spacing-xs;
+				margin-bottom: spacing.$spacing-sm;
+
+				fudis-button:not(:last-of-type) {
+					margin-right: spacing.$spacing-sm;
+				}
 			}
 
 			@include breakpoints.breakpoint('sm') {

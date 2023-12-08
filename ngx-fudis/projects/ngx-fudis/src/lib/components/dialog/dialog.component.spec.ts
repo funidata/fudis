@@ -9,6 +9,7 @@ import { AlertGroupComponent } from '../alert/alert-group/alert-group.component'
 describe('DialogComponent', () => {
 	let component: DialogComponent;
 	let fixture: ComponentFixture<DialogComponent>;
+	let dialogService: FudisDialogService;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
@@ -17,12 +18,50 @@ describe('DialogComponent', () => {
 			providers: [FudisDialogService],
 		}).compileComponents();
 
+		dialogService = TestBed.inject(FudisDialogService);
+
 		fixture = TestBed.createComponent(DialogComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});
 
-	it('should create', () => {
+	it('should be created', () => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should have correct size attribute', () => {
+		expect(component.size).toBe('md');
+
+		component.size = 'sm';
+		fixture.detectChanges();
+		component.ngOnInit();
+
+		expect(component.size).toBe('sm');
+
+		component.size = 'lg';
+		fixture.detectChanges();
+		component.ngOnInit();
+
+		expect(component.size).toBe('lg');
+
+		component.size = 'initial';
+		fixture.detectChanges();
+		component.ngOnInit();
+
+		expect(component.size).toBe('initial');
+	});
+
+	it('should call open signal on initialisation', () => {
+		const dialogSpy = spyOn(dialogService, 'setDialogOpenSignal').and.callThrough();
+		component.ngOnInit();
+
+		expect(dialogSpy).toHaveBeenCalledWith(true);
+	});
+
+	it('should call open signal on destroy', () => {
+		const dialogSpy = spyOn(dialogService, 'setDialogOpenSignal').and.callThrough();
+		component.ngOnDestroy();
+
+		expect(dialogSpy).toHaveBeenCalledWith(false);
 	});
 });
