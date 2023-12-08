@@ -42,8 +42,6 @@ export { DropdownComponent } from './lib/components/form/dropdown/dropdown.compo
 export { DropdownMenuComponent } from './lib/components/dropdown-menu/dropdown-menu.component';
 export { DropdownMenuItemComponent } from './lib/components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
 export { ErrorMessageComponent } from './lib/components/form/error-message/error-message.component';
-
-export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';
 export { FudisErrorSummaryService } from './lib/services/form/error-summary/error-summary.service';
 export { ExpandableComponent } from './lib/components/expandable/expandable.component';
 export { FieldSetComponent } from './lib/components/form/fieldset/fieldset.component';

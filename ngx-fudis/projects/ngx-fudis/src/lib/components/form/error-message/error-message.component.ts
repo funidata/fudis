@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 
 import { Observable, Subscription } from 'rxjs';
-import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FudisFormErrorSummaryItem } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -13,7 +13,7 @@ import { FudisIdService } from '../../../services/id/id.service';
 })
 export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
 	constructor(
-		private _errorSummaryService: FudisErrorSummaryService,
+		private _errorSummaryService: FudisInternalErrorSummaryService,
 		private _translationService: FudisTranslationService,
 		private _idService: FudisIdService
 	) {

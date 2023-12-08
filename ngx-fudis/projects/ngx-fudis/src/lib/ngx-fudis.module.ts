@@ -52,6 +52,7 @@ import { DropdownMenuItemComponent } from './components/dropdown-menu/dropdown-m
 import { FudisDropdownMenuItemService } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { FudisFocusService } from './services/focus/focus.service';
 import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
+import { FudisInternalErrorSummaryService } from './services/form/error-summary/internal-error-summary.service';
 import { FudisErrorSummaryService } from './services/form/error-summary/error-summary.service';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
@@ -224,7 +225,6 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		DropdownMenuComponent,
 		DropdownMenuItemComponent,
 		ErrorMessageComponent,
-		ErrorSummaryComponent,
 		ExpandableComponent,
 		FooterComponent,
 		FooterContentLeftDirective,
@@ -256,11 +256,12 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		FudisBreakpointService,
 		FudisDialogService,
 		FudisDropdownMenuItemService,
-		FudisErrorSummaryService,
+		FudisInternalErrorSummaryService,
 		FudisFocusService,
 		FudisGridService,
 		FudisIdService,
 		FudisLanguageBadgeGroupService,
+		FudisErrorSummaryService,
 		FudisTranslationService,
 	],
 })
