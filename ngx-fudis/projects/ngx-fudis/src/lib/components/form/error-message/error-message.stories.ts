@@ -9,10 +9,6 @@ import readme from './readme.mdx';
 	selector: 'example-text-input-with-error-message',
 	template: ` <form [formGroup]="mainFormGroup">
 		<fudis-text-input [control]="mainFormGroup.controls['required']" [label]="'Required text input'">
-			<fudis-custom-error-message
-				[message]="'This is a custom error message has ben added with content projection'"
-				[type]="'required'"
-				[visible]="mainFormGroup.controls['required'].invalid && mainFormGroup.controls['required'].touched" />
 		</fudis-text-input>
 	</form>`,
 })
@@ -25,7 +21,7 @@ class TextInputWithErrorMessageComponent {
 }
 
 export default {
-	title: 'Components/Form/Error Message',
+	title: 'Components/Form/Error Messages/Error Message',
 	component: ErrorMessageComponent,
 	decorators: [
 		moduleMetadata({

@@ -3,7 +3,7 @@ import { linkTo } from '@storybook/addon-links';
 import { ErrorMessageComponent } from './error-message.component'
 import * as ErrorMessageStories from './error-message.stories'
 
-<Meta title="Components/Form/Error Message" />
+<Meta title="Components/Form/Error Messages/Error Message" />
 
 # Error message
 
@@ -13,30 +13,3 @@ Error Message is always rendered as a part of [Guidance Component](/docs/compone
 ## Examples
 
 <Canvas of={ErrorMessageStories.ErrorMessageExample}></Canvas>
-
-
-
-## Usage Guidelines
-
-### Mandatory Properties
-
-Necessary properties for error-message are `message` and `visible`.
-
-
-
-````
-<form [formGroup]="mainFormGroup">
-	<fudis-text-input
-	[control]="mainFormGroup.controls['required']"
-	[label]="'Required text input'"
-	[tooltip]="'This is a tooltip text'"
-	[tooltipPosition]="'right'"
-	[tooltipToggle]="false"
-	[helpText]="'Please add some content.'">
-	<fudis-error-message
-		[message]="'This is a custom error message'"
-		[type]="'required'"
-		[visible]="mainFormGroup.controls['required'].invalid && mainFormGroup.controls['required'].touched" />
-</fudis-text-input>
-</form>`
-````
