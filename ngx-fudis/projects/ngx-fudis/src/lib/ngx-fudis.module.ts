@@ -225,7 +225,6 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		DropdownMenuComponent,
 		DropdownMenuItemComponent,
 		ErrorMessageComponent,
-		ErrorSummaryComponent,
 		ExpandableComponent,
 		FooterComponent,
 		FooterContentLeftDirective,
