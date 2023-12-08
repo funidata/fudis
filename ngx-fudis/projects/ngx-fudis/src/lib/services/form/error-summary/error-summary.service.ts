@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { FudisInternalErrorSummaryService } from './internal-error-summary.service';
 
 /**
- * This service extends internal Error Summary service's reloadErrors function to public use
+ * This service is for Error Summary service's public methods and tools
  */
 @Injectable({ providedIn: 'root' })
 export class FudisErrorSummaryService {

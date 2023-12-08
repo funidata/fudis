@@ -6,6 +6,9 @@ import {
 	FudisErrorSummaryParent,
 } from '../../../types/forms';
 
+/**
+ * Internal ErrorSummary tools not exposed to public
+ */
 @Injectable({ providedIn: 'root' })
 export class FudisInternalErrorSummaryService {
 	/**

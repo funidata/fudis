@@ -2,7 +2,7 @@ import { Meta } from '@storybook/blocks';
 
 <Meta title="Services/Error Summary" />
 
-# Error Summary
+# Error Summary Service
 
 ## Functions
 
@@ -30,6 +30,22 @@ this._service.reloadErrors(); // sets timeout to 0ms
 this._service.reloadErrors(100); // sets timeout to 100ms
 ```
 
+Recommended pattern is to call above function when user clicks form's Submit button which also sets Form's error summary as visible.
+
+```
+protected _submitButtonClick():void {
+	if(this.form.invalid){
+		// @Input property of FudisForm
+		this._errorSummaryVisible = true;
+		// Reload errors for the FudisForm
+		this._service.reloadErrors();
+	} else {
+		// Success and profit!
+	}
+}
+
+```
+
 ## Related components
 
-[Error-summary](/docs/components-form-error-summary--documentation)
+[ErrorSummary](/docs/components-form-error-summary--documentation)
