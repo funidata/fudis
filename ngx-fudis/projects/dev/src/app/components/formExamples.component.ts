@@ -3,11 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
-import {
-	FudisCheckboxOption,
-	FudisSelectOption,
-	FudisRadioButtonOption,
-} from 'projects/ngx-fudis/src/lib/types/forms';
+import { FudisCheckboxOption, FudisSelectOption, FudisRadioButtonOption } from 'projects/ngx-fudis/src/lib/types/forms';
 import { untilDestroyed } from 'projects/ngx-fudis/src/lib/utilities/untilDestroyed';
 import { FudisErrorSummaryService } from 'ngx-fudis';
 import { FudisGroupValidators, FudisValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
