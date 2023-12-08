@@ -13,7 +13,7 @@ import {
 
 import { DOCUMENT } from '@angular/common';
 
-import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import {
 	FudisFormErrorSummaryObject,
 	FudisFormErrorSummaryList,
@@ -32,7 +32,7 @@ import { FudisLanguageAbbr, FudisTranslationConfig } from '../../../types/miscel
 export class ErrorSummaryComponent implements OnChanges, OnDestroy {
 	constructor(
 		@Inject(DOCUMENT) private _document: Document,
-		private _errorSummaryService: FudisErrorSummaryService,
+		private _errorSummaryService: FudisInternalErrorSummaryService,
 		private readonly _changeDetectorRef: ChangeDetectorRef,
 		private _translationService: FudisTranslationService
 	) {

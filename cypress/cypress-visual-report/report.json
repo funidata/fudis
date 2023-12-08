@@ -1,0 +1,130 @@
+{
+  "total": 10,
+  "totalPassed": 10,
+  "totalFailed": 0,
+  "totalSuites": 1,
+  "suites": [
+    {
+      "name": "dialog.cy.ts",
+      "path": "cypress/e2e/components/dialog.cy.ts",
+      "tests": [
+        {
+          "status": "pass",
+          "name": "dialog.cy.ts/desktop-1",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/dialog.cy.ts",
+          "specFilename": "dialog.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dialog.cy.ts/desktop-1.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dialog.cy.ts/desktop-1.png"
+        },
+        {
+          "status": "pass",
+          "name": "dialog.cy.ts/desktop-2",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/dialog.cy.ts",
+          "specFilename": "dialog.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dialog.cy.ts/desktop-2.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dialog.cy.ts/desktop-2.png"
+        },
+        {
+          "status": "pass",
+          "name": "dialog.cy.ts/desktop-3",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/dialog.cy.ts",
+          "specFilename": "dialog.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dialog.cy.ts/desktop-3.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dialog.cy.ts/desktop-3.png"
+        },
+        {
+          "status": "pass",
+          "name": "dialog.cy.ts/desktop-4",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/dialog.cy.ts",
+          "specFilename": "dialog.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dialog.cy.ts/desktop-4.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dialog.cy.ts/desktop-4.png"
+        },
+        {
+          "status": "pass",
+          "name": "dialog.cy.ts/desktop-5",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/dialog.cy.ts",
+          "specFilename": "dialog.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dialog.cy.ts/desktop-5.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dialog.cy.ts/desktop-5.png"
+        },
+        {
+          "status": "pass",
+          "name": "dialog.cy.ts/mobile-1",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/dialog.cy.ts",
+          "specFilename": "dialog.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dialog.cy.ts/mobile-1.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dialog.cy.ts/mobile-1.png"
+        },
+        {
+          "status": "pass",
+          "name": "dialog.cy.ts/mobile-2",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/dialog.cy.ts",
+          "specFilename": "dialog.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dialog.cy.ts/mobile-2.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dialog.cy.ts/mobile-2.png"
+        },
+        {
+          "status": "pass",
+          "name": "dialog.cy.ts/mobile-3",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/dialog.cy.ts",
+          "specFilename": "dialog.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dialog.cy.ts/mobile-3.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dialog.cy.ts/mobile-3.png"
+        },
+        {
+          "status": "pass",
+          "name": "dialog.cy.ts/mobile-4",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/dialog.cy.ts",
+          "specFilename": "dialog.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dialog.cy.ts/mobile-4.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dialog.cy.ts/mobile-4.png"
+        },
+        {
+          "status": "pass",
+          "name": "dialog.cy.ts/mobile-5",
+          "percentage": 0,
+          "failureThreshold": 0.002,
+          "specPath": "cypress/e2e/components/dialog.cy.ts",
+          "specFilename": "dialog.cy.ts",
+          "baselinePath": "cypress/cypress-visual-screenshots/baseline/dialog.cy.ts/mobile-5.png",
+          "diffPath": "",
+          "comparisonPath": "cypress/cypress-visual-screenshots/comparison/dialog.cy.ts/mobile-5.png"
+        }
+      ]
+    }
+  ],
+  "startedAt": "2023-12-05T08:20:22.876Z",
+  "endedAt": "2023-12-05T08:20:51.222Z",
+  "duration": 28346,
+  "browserName": "electron",
+  "browserVersion": "114.0.5735.289",
+  "cypressVersion": "13.5.1"
+}

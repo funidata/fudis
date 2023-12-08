@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 
 import { MockComponent } from 'ng-mocks';
 import { GuidanceComponent } from './guidance.component';
-import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 
 const testControl = new FormControl('');
@@ -15,7 +15,7 @@ describe('GuidanceComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [GuidanceComponent, MockComponent(ErrorMessageComponent)],
-			providers: [FudisErrorSummaryService],
+			providers: [FudisInternalErrorSummaryService],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(GuidanceComponent);

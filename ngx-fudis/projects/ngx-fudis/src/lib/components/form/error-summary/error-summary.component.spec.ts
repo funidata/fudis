@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MockComponent } from 'ng-mocks';
 import { ErrorSummaryComponent } from './error-summary.component';
-import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { NotificationComponent } from '../../notification/notification.component';
 
 describe('ErrorSummaryComponent', () => {
@@ -12,7 +12,7 @@ describe('ErrorSummaryComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [ErrorSummaryComponent, MockComponent(NotificationComponent)],
-			providers: [FudisErrorSummaryService],
+			providers: [FudisInternalErrorSummaryService],
 		}).compileComponents();
 	});
 

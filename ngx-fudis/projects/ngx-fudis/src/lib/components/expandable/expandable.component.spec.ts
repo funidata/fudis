@@ -11,7 +11,7 @@ import { ActionsDirective } from '../../directives/content-projection/actions/ac
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisExpandableType } from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
-import { FudisErrorSummaryService } from '../../services/form/error-summary/error-summary.service';
+import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
 	selector: 'fudis-mock-container',
@@ -56,7 +56,7 @@ class MockContentComponent implements OnInit {
 }
 
 describe('ExpandableComponent', () => {
-	let errorService: FudisErrorSummaryService;
+	let errorService: FudisInternalErrorSummaryService;
 	let component: ExpandableComponent;
 	let containerComponent: MockContainerComponent;
 	let fixture: ComponentFixture<MockContainerComponent> | ComponentFixture<ExpandableComponent>;
@@ -72,7 +72,7 @@ describe('ExpandableComponent', () => {
 				MockComponent(ButtonComponent),
 				MockComponent(IconComponent),
 			],
-			providers: [FudisIdService, FudisErrorSummaryService],
+			providers: [FudisIdService, FudisInternalErrorSummaryService],
 		}).compileComponents();
 	});
 
@@ -260,7 +260,9 @@ describe('ExpandableComponent', () => {
 			fixture = TestBed.createComponent(ExpandableComponent);
 			component = fixture.componentInstance;
 			component.title = 'Test title';
-			errorService = TestBed.inject(FudisErrorSummaryService) as jasmine.SpyObj<FudisErrorSummaryService>;
+			errorService = TestBed.inject(
+				FudisInternalErrorSummaryService
+			) as jasmine.SpyObj<FudisInternalErrorSummaryService>;
 			spyOn(errorService, 'addSection');
 			spyOn(errorService, 'removeSection');
 			fixture.detectChanges();

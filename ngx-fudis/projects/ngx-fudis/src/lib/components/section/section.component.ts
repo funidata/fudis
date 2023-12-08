@@ -7,7 +7,7 @@ import { FudisGridWidth, FudisGridAlign, FudisGridMarginSide } from '../../types
 
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisSpacing } from '../../types/miscellaneous';
-import { FudisErrorSummaryService } from '../../services/form/error-summary/error-summary.service';
+import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisFormErrorSummarySection } from '../../types/forms';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 
@@ -20,7 +20,7 @@ import { ActionsDirective } from '../../directives/content-projection/actions/ac
 export class SectionComponent extends TooltipApiDirective implements OnInit, OnChanges, OnDestroy {
 	constructor(
 		private _idService: FudisIdService,
-		private _errorSummaryService: FudisErrorSummaryService
+		private _errorSummaryService: FudisInternalErrorSummaryService
 	) {
 		super();
 	}
