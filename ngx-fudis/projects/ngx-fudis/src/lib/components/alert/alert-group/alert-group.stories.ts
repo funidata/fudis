@@ -26,7 +26,7 @@ import { FudisAlertService } from '../../../services/alert/alert.service';
 			</fudis-grid>
 		</div>
 		<ng-template #exampleDialogTemplate>
-			<fudis-dialog [closeButtonLabel]="'Close'" [size]="'sm'">
+			<fudis-dialog [size]="'sm'">
 				<fudis-heading fudisDialogTitle [level]="2">Small test dialog</fudis-heading>
 				<fudis-dialog-content>
 					<fudis-body-text>Some content</fudis-body-text>

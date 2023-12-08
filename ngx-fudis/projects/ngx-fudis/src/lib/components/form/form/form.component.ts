@@ -1,4 +1,14 @@
-import { AfterContentInit, Component, ContentChild, ElementRef, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+	AfterContentInit,
+	Component,
+	ContentChild,
+	ElementRef,
+	Host,
+	Input,
+	OnInit,
+	Optional,
+	ViewEncapsulation,
+} from '@angular/core';
 import { FudisHeadingSize, FudisHeadingLevel } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
 import { HeaderDirective } from '../../../directives/content-projection/header/header.directive';
@@ -7,6 +17,7 @@ import { ContentDirective } from '../../../directives/content-projection/content
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
 import { FudisFormErrorSummaryLink } from '../../../types/forms';
+import { DialogComponent } from '../../dialog/dialog.component';
 
 @Component({
 	selector: 'fudis-form',
@@ -17,7 +28,8 @@ import { FudisFormErrorSummaryLink } from '../../../types/forms';
 export class FormComponent extends GridApiDirective implements OnInit, AfterContentInit {
 	constructor(
 		private _idService: FudisIdService,
-		private _elementRef: ElementRef
+		private _elementRef: ElementRef,
+		@Host() @Optional() protected _dialogParent: DialogComponent
 	) {
 		super();
 	}
@@ -87,6 +99,10 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 
 	ngOnInit(): void {
 		this._setFormId();
+
+		if (this._dialogParent) {
+			this._dialogParent.closeButtonPositionAbsolute = true;
+		}
 	}
 
 	ngAfterContentInit(): void {

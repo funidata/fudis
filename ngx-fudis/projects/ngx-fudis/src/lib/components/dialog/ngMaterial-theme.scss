@@ -42,6 +42,10 @@
 			&:focus-visible {
 				@include focus.focus-generic;
 			}
+
+			&:focus-visible.fudis-form__header__title__dialog {
+				outline-offset: -2px;
+			}
 		}
 
 		& .mat-mdc-dialog-content {
@@ -50,6 +54,13 @@
 			&:focus-visible,
 			&:focus {
 				@include focus.focus-generic;
+			}
+
+			// Checkbox and radio-button elements need small padding if form is inside dialog
+			// Otherwise focus and invalid styles won't show properly as dialog padding is overlapping them
+			& fudis-checkbox,
+			& fudis-radio-button {
+				padding-left: spacing.$spacing-xxs;
 			}
 		}
 
