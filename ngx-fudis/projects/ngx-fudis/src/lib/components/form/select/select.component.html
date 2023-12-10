@@ -72,15 +72,16 @@
 	</div>
 	<fudis-select-dropdown
 		*ngIf="_openedOnce"
-		#dropdownRef
 		[open]="_dropdownOpen"
+		#dropdownRef
+		[open]="true"
 		[multiselect]="multiselect"
 		[size]="size">
 		<ng-container *ngIf="content?.type === 'select-options'">
 			<ng-container *ngTemplateOutlet="content!.templateRef"></ng-container>
 		</ng-container>
 		<fudis-body-text
-			*ngIf="visibleOptionsValues.length === 0 && !control.value"
+			*ngIf="_visibleOptionsValues.length === 0 && !control.value"
 			class="fudis-select-dropdown__no-results"
 			[size]="'md-light'"
 			>{{ _noResultsFound }}</fudis-body-text

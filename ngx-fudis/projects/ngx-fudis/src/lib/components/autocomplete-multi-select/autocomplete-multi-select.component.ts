@@ -32,10 +32,10 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 		super(_translationService, _idService);
 
 		effect(() => {
-			this._openAriaLabel = this._translations().AUTOCOMPLETE.MULTISELECT.OPEN_DROPDOWN;
-			this._closeAriaLabel = this._translations().AUTOCOMPLETE.MULTISELECT.CLOSE_DROPDOWN;
-			this._noResultsFound = this._translations().AUTOCOMPLETE.MULTISELECT.NO_RESULTS;
-			this._removeItemText = this._translations().AUTOCOMPLETE.MULTISELECT.REMOVE_ITEM;
+			this._openAriaLabel = this._translations().SELECT.OPEN_DROPDOWN;
+			this._closeAriaLabel = this._translations().SELECT.CLOSE_DROPDOWN;
+			this._noResultsFound = this._translations().SELECT.AUTOCOMPLETE.NO_RESULTS;
+			this._removeItemText = this._translations().SELECT.MULTISELECT.REMOVE_ITEM;
 		});
 	}
 

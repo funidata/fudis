@@ -100,14 +100,17 @@ export interface FudisTranslationConfig {
 		// External link icon aria-label
 		EXTERNAL_LINK: string;
 	};
-	AUTOCOMPLETE: {
-		// Clear filter button label for screen readers
-		CLEAR: string;
+	SELECT: {
+		DISABLED: string;
+		OPEN_DROPDOWN: string;
+		CLOSE_DROPDOWN: string;
 		MULTISELECT: {
-			OPEN_DROPDOWN: string;
-			CLOSE_DROPDOWN: string;
-			NO_RESULTS: string;
 			REMOVE_ITEM: string;
+		};
+		AUTOCOMPLETE: {
+			// Clear filter button label for screen readers
+			CLEAR: string;
+			NO_RESULTS: string;
 		};
 	};
 	IMAGE: {

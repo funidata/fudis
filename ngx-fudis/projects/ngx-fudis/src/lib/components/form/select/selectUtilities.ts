@@ -9,7 +9,17 @@ import { FudisSelectOption } from '../../../types/forms';
 export const sortValues = (value: FudisSelectOption[]): FudisSelectOption[] => {
 	let valueToSort: FudisSelectOption | FudisSelectOption[] = value;
 
+	// console.log(valueToSort);
+
 	valueToSort = value.sort((a: FudisSelectOption, b: FudisSelectOption) => {
+		if (a['htmlId']?.includes('-group-') && !b['htmlId']?.includes('-group-')) {
+			return 1;
+		}
+
+		if (!a['htmlId']?.includes('-group-') && b['htmlId']?.includes('-group-')) {
+			return -1;
+		}
+
 		if (a['htmlId'] < b['htmlId']) {
 			return -1;
 		}
@@ -31,4 +41,20 @@ export const joinInputValues = (values: FudisSelectOption[]): string => {
 	const joinedValues = label.join(', ');
 
 	return joinedValues;
+};
+
+export const setVisibleOptionsList = (currentList: string[], valueToUpdate: string, visible: boolean): string[] => {
+	const listToReturn = currentList;
+
+	const valueExists = listToReturn.includes(valueToUpdate);
+
+	if (visible && !valueExists) {
+		listToReturn.push(valueToUpdate);
+	} else if (valueExists && !visible) {
+		const index = listToReturn.indexOf(valueToUpdate);
+
+		listToReturn.splice(index, 1);
+	}
+
+	return listToReturn;
 };

@@ -7,7 +7,7 @@
 	class="fudis-select-option fudis-select-option__single-select"
 	[class.fudis-select-option__focusable]="optionVisible"
 	[class.fudis-select-option__single-select--disabled]="data.disabled"
-	[class.fudis-select-option__single-select--selected]="$any(_parentSelect.control.value)?.label === data.label"
+	[class.fudis-select-option__single-select--selected]="$any(_parentSelect.control.value)?.value === data.value"
 	role="menuitem"
 	[attr.id]="_id"
 	[attr.aria-disabled]="data.disabled ? true : null"
@@ -15,6 +15,13 @@
 	(blur)="_handleButtonBlur($event)"
 	(click)="_clickSelectOption($event)">
 	{{ data.label }}
+	<fudis-icon
+		*ngIf="!data.disabled && $any(_parentSelect.control.value)?.value === data.value"
+		[icon]="'check'"
+		[color]="'primary'" />
+	<span *ngIf="data.disabled" class="fudis-select-option__disabled-text"
+		>({{ this._parentSelect.optionDisabledText }})</span
+	>
 </button>
 
 <!--

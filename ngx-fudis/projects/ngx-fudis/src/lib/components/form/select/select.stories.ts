@@ -5,7 +5,7 @@ import { importProvidersFrom } from '@angular/core';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { SelectComponent } from './select.component';
 import readme from './readme.mdx';
-import { selectMockData, generateRandomGroups } from './mock_data';
+import { selectMockData, groupedMockData } from './mock_data';
 import { FudisSelectOption } from '../../../types/forms';
 
 export default {
@@ -64,7 +64,7 @@ const multiselectProps = {
 	placeholder: 'Multiselect a pet',
 	multiselect: true,
 	control: new FormControl(
-		[selectMockData[1], selectMockData[3], selectMockData[5]],
+		[selectMockData[1]],
 		FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
 	),
 	helpText: 'All pets are equally important, but for sake of this example please pick one.',
@@ -102,15 +102,19 @@ const defaultOptions: FudisSelectOption[] = [
 	{ value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
 ];
 
-// const randomGroups = generateRandomGroups();
-
-// console.log(randomGroups);
+const defaultOptionsTwo: FudisSelectOption[] = [
+	{ value: 'value-1-dog', label: 'Dog' },
+	{ value: 'value-2-capybara', label: 'Capybara' },
+	{ value: 'value-3-platypys', label: 'Platypus' },
+];
 
 const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 	props: {
 		...args,
 		defaultOptions,
 		options: selectMockData,
+		groupedMockData,
+		defaultOptionsTwo,
 		singleselect: {
 			...singleselectProps,
 		},
@@ -142,11 +146,17 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 		</fudis-select>
 		<fudis-select
 			[multiselect]="multiselect.multiselect"
+			[showSelectionChips]="false"
 			[placeholder]="multiselect.placeholder"
 			[control]="multiselect.control"
 			[label]="multiselect.label"
 			[helpText]="multiselect.helpText">
-			<ng-template fudisContent type="select-options"> </ng-template>
+			<ng-template fudisContent type="select-options">
+				<fudis-select-option *ngFor="let option of defaultOptionsTwo" [data]="option" />
+				<fudis-select-group *ngFor="let group of groupedMockData" [label]="group.country">
+					<fudis-select-option *ngFor="let groupedOption of group.options" [data]="groupedOption" />
+				</fudis-select-group>
+			</ng-template>
 		</fudis-select>
 		<fudis-select
 			[variant]="'autocomplete'"
@@ -169,8 +179,11 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			[label]="autocompleteMultiselect.label"
 			[helpText]="autocompleteMultiselect.helpText">
 			<ng-template fudisContent type="select-options">
-				<fudis-select-option *ngFor="let option of options" [data]="option"
-			/></ng-template>
+				<fudis-select-option *ngFor="let option of defaultOptionsTwo" [data]="option" />
+				<fudis-select-group *ngFor="let group of groupedMockData" [label]="group.country">
+					<fudis-select-option *ngFor="let groupedOption of group.options" [data]="groupedOption" />
+				</fudis-select-group>
+			</ng-template>
 		</fudis-select>
 	`,
 });

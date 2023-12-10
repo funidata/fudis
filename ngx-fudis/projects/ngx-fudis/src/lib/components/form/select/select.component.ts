@@ -27,7 +27,7 @@ import { FudisSelectOption, FudisInputSize } from '../../../types/forms';
 import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 
 import { SelectDropdownComponent } from './select-dropdown/select-dropdown.component';
-import { joinInputValues, sortValues } from './selectUtilities';
+import { joinInputValues, setVisibleOptionsList, sortValues } from './selectUtilities';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 
 @Component({
@@ -45,10 +45,11 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		super(_translationService, _idService);
 
 		effect(() => {
-			this._openAriaLabel = this._translations().AUTOCOMPLETE.MULTISELECT.OPEN_DROPDOWN;
-			this._closeAriaLabel = this._translations().AUTOCOMPLETE.MULTISELECT.CLOSE_DROPDOWN;
-			this._noResultsFound = this._translations().AUTOCOMPLETE.MULTISELECT.NO_RESULTS;
-			this._removeItemText = this._translations().AUTOCOMPLETE.MULTISELECT.REMOVE_ITEM;
+			this._openAriaLabel = this._translations().SELECT.OPEN_DROPDOWN;
+			this._closeAriaLabel = this._translations().SELECT.CLOSE_DROPDOWN;
+			this._noResultsFound = this._translations().SELECT.AUTOCOMPLETE.NO_RESULTS;
+			this._removeItemText = this._translations().SELECT.MULTISELECT.REMOVE_ITEM;
+			this.optionDisabledText = this._translations().SELECT.DISABLED;
 		});
 	}
 
@@ -90,6 +91,9 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	 */
 	@Input() openOnFocus: boolean = true;
 
+	/**
+	 * With multiselects, disable or enable selection chips rendered below Select input
+	 */
 	@Input() showSelectionChips = true;
 
 	/**
@@ -103,14 +107,14 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	public dropdownSelectionLabelText: string | null = null;
 
 	/**
-	 * Used when filtering autocomplete results to check if 'No results found' text is visible
-	 */
-	public visibleOptionsValues: string[] = [];
-
-	/**
 	 * Used in control.valueChanges subscription to not run update functions unless valueChange comes from application
 	 */
 	public controlValueChangedInternally: boolean = false;
+
+	/**
+	 * Internal translated text for disabled select option
+	 */
+	public optionDisabledText: string;
 
 	/**
 	 * Internal property for toggle dropdown visibility
@@ -118,12 +122,12 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	protected _dropdownOpen: boolean;
 
 	/**
-	 * Internal property for icon-only button aria-label when opening dropdown
+	 * Internal translated text for icon-only button aria-label when opening dropdown
 	 */
 	protected _openAriaLabel: string;
 
 	/**
-	 * Internal property for icon-only button aria-label when closing dropdown
+	 * Internal translated text for icon-only button aria-label when closing dropdown
 	 */
 	protected _closeAriaLabel: string;
 
@@ -149,6 +153,11 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	 */
 	protected _openedOnce: boolean = false;
 
+	/**
+	 * Used when filtering autocomplete results to check if 'No results found' text is visible
+	 */
+	protected _visibleOptionsValues: string[] = [];
+
 	private _sortedSelectedOptionsSignal: WritableSignal<FudisSelectOption[]> = signal<FudisSelectOption[]>([]);
 
 	private _preventClick: boolean = false;
@@ -162,7 +171,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	/**
 	 * Autocomplete user input filtering
 	 */
-	handleSelectionChange(value: FudisSelectOption | null, disableSignalEmit?: boolean): void {
+	public handleSelectionChange(value: FudisSelectOption | null, disableSignalEmit?: boolean): void {
 		this.selectionUpdate.emit(value);
 		this.controlValueChangedInternally = true;
 		this.control.patchValue(value);
@@ -176,6 +185,28 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		if (value && this.variant === 'autocomplete' && !disableSignalEmit) {
 			this._autocompleteFilterText.set(value.label);
 		}
+	}
+
+	public handleMultiSelectionChange(option: FudisSelectOption, removeSelection: boolean): void {
+		let updatedValue = this.control.value as FudisSelectOption[] | null;
+
+		if (removeSelection && updatedValue) {
+			updatedValue = updatedValue.filter((item: FudisSelectOption) => {
+				return item.value !== option.value;
+			});
+		} else if (!updatedValue) {
+			updatedValue = [option];
+		} else {
+			updatedValue.push(option);
+		}
+
+		this._sortedSelectedOptions = sortValues(updatedValue);
+
+		this.dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
+
+		this.controlValueChangedInternally = true;
+
+		this.control.patchValue(this._sortedSelectedOptions);
 	}
 
 	ngOnInit(): void {
@@ -216,27 +247,6 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		return this._sortedSelectedOptionsSignal.asReadonly();
 	}
 
-	public handleMultiSelectionChange(option: FudisSelectOption, removeSelection: boolean): void {
-		let updatedValue = this.control.value as FudisSelectOption[] | null;
-
-		if (removeSelection && updatedValue) {
-			updatedValue = updatedValue.filter((item: FudisSelectOption) => {
-				return item.value !== option.value;
-			});
-		} else if (!updatedValue) {
-			updatedValue = [option];
-		} else {
-			updatedValue.push(option);
-		}
-
-		this._sortedSelectedOptions = sortValues(updatedValue);
-
-		this.dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
-
-		this.controlValueChangedInternally = true;
-		this.control.patchValue(this._sortedSelectedOptions);
-	}
-
 	public closeDropdown(focusToInput: boolean = true, selectionClick: boolean = false): void {
 		this._dropdownOpen = false;
 
@@ -245,6 +255,10 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		if (focusToInput) {
 			this.inputRef.nativeElement.focus();
 		}
+	}
+
+	public setOptionsVisibility(value: string, visible: boolean) {
+		this._visibleOptionsValues = setVisibleOptionsList(this._visibleOptionsValues, value, visible);
 	}
 
 	protected _inputBlur(event: FocusEvent): void {
@@ -430,8 +444,8 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 			/**
 			 * Multiselect
 			 */
-			this._sortedSelectedOptionsSignal.set(this.control.value as FudisSelectOption[]);
 			this._sortedSelectedOptions = sortValues(this.control.value as FudisSelectOption[]);
+			this._sortedSelectedOptionsSignal.set(this._sortedSelectedOptions);
 
 			if (this.variant === 'dropdown') {
 				this.dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);

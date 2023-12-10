@@ -6,13 +6,8 @@
 @use '../../../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-select-option {
-	display: none;
-	visibility: none;
-
-	&__focusable,
-	&--visible {
-		display: block;
-		visibility: visible;
+	&__disabled-text {
+		padding-right: spacing.$spacing-xs;
 	}
 
 	&__single-select {
@@ -21,13 +16,22 @@
 		@include colorMixins.bg-color('transparent');
 		@include borders.border-none;
 
+		display: flex;
 		position: relative;
+		align-items: center;
+		justify-content: space-between;
 		cursor: pointer;
-		padding: spacing.$spacing-xs;
+		padding-left: spacing.$spacing-xs;
 		width: 100%;
+		height: spacing.$spacing-lg;
 		overflow: hidden;
 		text-align: left;
 		white-space: nowrap;
+		/* stylelint-disable-next-line selector-class-pattern */
+		&:not(.fudis-select-option__focusable) {
+			display: none;
+			visibility: none;
+		}
 
 		&:hover {
 			@include colorMixins.bg-color('primary-light');
@@ -36,37 +40,13 @@
 
 		&:focus-visible,
 		&:focus {
-			@include focus.focus-dropdown;
 			@include colorMixins.bg-color('primary-light');
+			@include focus.focus-dropdown;
 		}
 
 		&:active {
 			@include colorMixins.bg-color('primary');
 			@include colorMixins.text-color('white');
-		}
-
-		&--selected {
-			@include colorMixins.bg-color('primary');
-			@include colorMixins.text-color('white');
-
-			&:focus {
-				@include colorMixins.text-color('gray-dark');
-			}
-
-			&:active {
-				@include colorMixins.text-color('white');
-			}
-		}
-
-		&--checked {
-			@include colorMixins.bg-color('primary-dark');
-			@include colorMixins.text-color('white');
-
-			&:hover {
-				label {
-					@include colorMixins.text-color('gray-dark');
-				}
-			}
 		}
 
 		&--disabled {
@@ -75,12 +55,24 @@
 
 			cursor: default;
 		}
+
+		&__focusable,
+		&--visible {
+			display: block;
+			visibility: visible;
+		}
 	}
 
 	&__multiselect {
 		@include colorMixins.text-color('gray-dark');
 
 		width: auto;
+
+		/* stylelint-disable-next-line selector-class-pattern */
+		&:not(.fudis-select-option--visible) {
+			display: none;
+			visibility: none;
+		}
 
 		&:hover {
 			@include colorMixins.bg-color('primary-light');

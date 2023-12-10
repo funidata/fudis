@@ -26,7 +26,7 @@ export class AutocompleteComponent
 		super(_translationService, _idService);
 
 		effect(() => {
-			this._clearFilterText = this._translations().AUTOCOMPLETE.CLEAR;
+			this._clearFilterText = this._translations().SELECT.AUTOCOMPLETE.CLEAR;
 		});
 	}
 

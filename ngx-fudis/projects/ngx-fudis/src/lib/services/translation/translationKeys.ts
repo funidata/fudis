@@ -25,13 +25,16 @@ export const en: FudisTranslationConfig = {
 	LINK: {
 		EXTERNAL_LINK: '(opens in a new tab)',
 	},
-	AUTOCOMPLETE: {
-		CLEAR: 'Clear filter',
+	SELECT: {
+		DISABLED: 'Disabled',
+		OPEN_DROPDOWN: 'Open dropdown',
+		CLOSE_DROPDOWN: 'Close dropdown',
 		MULTISELECT: {
-			OPEN_DROPDOWN: 'Open dropdown',
-			CLOSE_DROPDOWN: 'Close dropdown',
-			NO_RESULTS: 'No results found',
 			REMOVE_ITEM: 'Remove search filters',
+		},
+		AUTOCOMPLETE: {
+			CLEAR: 'Clear filter',
+			NO_RESULTS: 'No results found',
 		},
 	},
 	IMAGE: {
@@ -86,13 +89,16 @@ export const fi: FudisTranslationConfig = {
 	LINK: {
 		EXTERNAL_LINK: '(aukeaa uuteen välilehteen)',
 	},
-	AUTOCOMPLETE: {
-		CLEAR: 'Tyhjennä valinta',
+	SELECT: {
+		DISABLED: 'Ei valittavissa',
+		OPEN_DROPDOWN: 'Avaa pudostuvalikko',
+		CLOSE_DROPDOWN: 'Sulje pudotusvalikko',
 		MULTISELECT: {
-			OPEN_DROPDOWN: 'Avaa pudostuvalikko',
-			CLOSE_DROPDOWN: 'Sulje pudotusvalikko',
-			NO_RESULTS: 'Haku ei palauttanut yhtään tulosta',
 			REMOVE_ITEM: 'Poista hakukriteerejä',
+		},
+		AUTOCOMPLETE: {
+			CLEAR: 'Tyhjennä valinta',
+			NO_RESULTS: 'Haku ei palauttanut yhtään tulosta',
 		},
 	},
 	IMAGE: {
@@ -144,13 +150,16 @@ export const sv: FudisTranslationConfig = {
 		MISSING: 'Saknas',
 		MAX_LENGTH: 'tecken använt',
 	},
-	AUTOCOMPLETE: {
-		CLEAR: 'Radera val',
+	SELECT: {
+		DISABLED: 'Inaktiverad',
+		OPEN_DROPDOWN: 'Öppna menyn',
+		CLOSE_DROPDOWN: 'Stäng menyn',
 		MULTISELECT: {
-			OPEN_DROPDOWN: 'Öppna menyn',
-			CLOSE_DROPDOWN: 'Stäng menyn',
-			NO_RESULTS: 'Inga sökresultat',
 			REMOVE_ITEM: 'Radera filtrering',
+		},
+		AUTOCOMPLETE: {
+			CLEAR: 'Radera val',
+			NO_RESULTS: 'Inga sökresultat',
 		},
 	},
 	IMAGE: {

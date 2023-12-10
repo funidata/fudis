@@ -47,6 +47,9 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 
 	protected _focused: boolean = false;
 
+	// Translated text for disabled option
+	protected _disabledText: string;
+
 	private _preventTypeChange: boolean = false;
 
 	ngOnInit(): void {
@@ -115,12 +118,16 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 			this.optionVisible =
 				filterText && this.data.label.toLowerCase().includes(filterText.toLowerCase()) ? true : !filterText;
 
-			if (this.optionVisible && !this._parentSelect.visibleOptionsValues.includes(this.data.value)) {
-				this._parentSelect.visibleOptionsValues.push(this.data.value);
-			} else if (!this.optionVisible && this._parentSelect.visibleOptionsValues.includes(this.data.value)) {
-				const index = this._parentSelect.visibleOptionsValues.indexOf(this.data.value);
+			if (this.optionVisible) {
+				this._parentSelect.setOptionsVisibility(this.data.value, true);
+			} else if (!this.optionVisible) {
+				this._parentSelect.setOptionsVisibility(this.data.value, false);
+			}
 
-				this._parentSelect.visibleOptionsValues.splice(index, 1);
+			if (this.optionVisible && this._parentGroup) {
+				this._parentGroup.setOptionsVisibility(this.data.value, true);
+			} else if (this._parentGroup) {
+				this._parentGroup.setOptionsVisibility(this.data.value, false);
 			}
 		}
 	}
