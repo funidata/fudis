@@ -5,6 +5,11 @@
 @use '../../../foundations/focus/mixins.scss' as focus;
 @use '../../../foundations/colors/tokens.scss' as colors;
 
+.fudis-select-host {
+	display: block;
+	position: relative;
+}
+
 .fudis-select {
 	width: 100%;
 

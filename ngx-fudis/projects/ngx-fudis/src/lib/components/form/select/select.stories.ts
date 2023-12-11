@@ -49,53 +49,6 @@ export default {
 
 const html = String.raw;
 
-const singleselectProps = {
-	label: 'Select a pet',
-	size: 'lg',
-	placeholder: 'Choose a pet',
-	multiselect: false,
-	control: new FormControl(
-		defaultOptions[2],
-		FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
-	),
-	helpText: 'All pets are equally important, but for sake of this example please pick one.',
-};
-
-const multiselectProps = {
-	label: 'Multiselect pet',
-	size: 'lg',
-	placeholder: 'Multiselect a pet',
-	multiselect: true,
-	control: new FormControl(
-		[selectMockData[1]],
-		FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
-	),
-	helpText: 'All pets are equally important, but for sake of this example please pick one.',
-};
-
-const autoCompleteProps = {
-	label: 'Autoselect pet',
-	size: 'lg',
-	placeholder: 'Autoselect a pet',
-	multiselect: false,
-	control: new FormControl(
-		selectMockData[72],
-		FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
-	),
-	helpText: 'All pets are equally important, but for sake of this example please pick one.',
-};
-const autocompleteMultiselectProps = {
-	label: 'Multiselect autocomplete pet',
-	size: 'lg',
-	placeholder: 'Autoselect a pet',
-	multiselect: true,
-	control: new FormControl(
-		[selectMockData[1], selectMockData[3], selectMockData[5]],
-		FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
-	),
-	helpText: 'All pets are equally important, but for sake of this example please pick one.',
-};
-
 const AllSelectsTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 	props: {
 		...args,
@@ -103,74 +56,110 @@ const AllSelectsTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => 
 		selectMockData,
 		groupedMockData,
 		singleselect: {
-			...singleselectProps,
+			label: 'Select one pet',
+			placeholder: 'Choose a pet',
+			control: new FormControl(
+				defaultOptions[2],
+				FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
+			),
+			helpText: 'All pets are equally important, but for sake of this example please pick one.',
 		},
 		multiselect: {
-			...multiselectProps,
+			label: 'Multiselect pet',
+			placeholder: 'Multiselect a pet',
+			multiselect: true,
+			control: new FormControl(
+				[selectMockData[1]],
+				FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
+			),
+			helpText: 'All pets are equally important, but for sake of this example please pick one.',
 		},
 		autocomplete: {
-			...autoCompleteProps,
+			label: 'Autoselect pet',
+			placeholder: 'Autoselect a pet',
+			control: new FormControl(
+				selectMockData[72],
+				FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
+			),
+			helpText: 'All pets are equally important, but for sake of this example please pick one.',
 		},
 		autocompleteMultiselect: {
-			...autocompleteMultiselectProps,
+			label: 'Multiselect autocomplete pet',
+			placeholder: 'Autoselect a pet',
+			multiselect: true,
+			control: new FormControl(
+				[selectMockData[1], selectMockData[3], selectMockData[5]],
+				FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
+			),
+			helpText: 'All pets are equally important, but for sake of this example please pick one.',
 		},
 	},
 	template: html`
-		<fudis-select
-			[openOnFocus]="true"
-			[multiselect]="singleselect.multiselect"
-			[placeholder]="singleselect.placeholder"
-			[control]="singleselect.control"
-			[label]="singleselect.label"
-			[id]="id"
-			[helpText]="singleselect.helpText"
-			[tooltip]="tooltip"
-			[tooltipPosition]="tooltipPosition"
-			[tooltipToggle]="tooltipToggle">
-			<ng-template fudisContent type="select-options">
-				<fudis-select-option *ngFor="let option of defaultOptions" [data]="option" />
-			</ng-template>
-		</fudis-select>
-		<fudis-select
-			[multiselect]="multiselect.multiselect"
-			[placeholder]="multiselect.placeholder"
-			[control]="multiselect.control"
-			[label]="multiselect.label"
-			[helpText]="multiselect.helpText">
-			<ng-template fudisContent type="select-options">
-				<fudis-select-option *ngFor="let option of defaultOptions" [data]="option" />
-				<fudis-select-group *ngFor="let group of groupedMockData" [label]="group.country">
-					<fudis-select-option *ngFor="let groupedOption of group.options" [data]="groupedOption" />
-				</fudis-select-group>
-			</ng-template>
-		</fudis-select>
-		<fudis-select
-			[variant]="'autocomplete'"
-			[openOnFocus]="true"
-			[multiselect]="autocomplete.multiselect"
-			[placeholder]="autocomplete.placeholder"
-			[control]="autocomplete.control"
-			[label]="autocomplete.label"
-			[helpText]="autocomplete.helpText">
-			<ng-template fudisContent type="select-options">
-				<fudis-select-option *ngFor="let option of selectMockData" [data]="option" />
-			</ng-template>
-		</fudis-select>
-		<fudis-select
-			[variant]="'autocomplete'"
-			[openOnFocus]="true"
-			[multiselect]="autocompleteMultiselect.multiselect"
-			[placeholder]="autocompleteMultiselect.placeholder"
-			[control]="autocompleteMultiselect.control"
-			[label]="autocompleteMultiselect.label"
-			[helpText]="autocompleteMultiselect.helpText">
-			<ng-template fudisContent type="select-options">
-				<fudis-select-option *ngFor="let option of defaultOptionsTwo" [data]="option" />
-				<fudis-select-group *ngFor="let group of groupedMockData" [label]="group.country">
-					<fudis-select-option *ngFor="let groupedOption of group.options" [data]="groupedOption" />
-				</fudis-select-group>
-			</ng-template>
-		</fudis-select>
+		<fudis-grid [columns]="2">
+			<div>
+				<fudis-heading [level]="2">Dropdown Select</fudis-heading>
+				<fudis-select
+					[placeholder]="'Select one pet'"
+					[control]="singleselect.control"
+					[label]="singleselect.label"
+					[id]="id"
+					[helpText]="singleselect.helpText"
+					[tooltip]="tooltip"
+					[tooltipPosition]="tooltipPosition"
+					[tooltipToggle]="tooltipToggle">
+					<ng-template fudisContent type="select-options">
+						<fudis-select-option *ngFor="let option of defaultOptions" [data]="option" />
+					</ng-template>
+				</fudis-select>
+			</div>
+			<div>
+				<fudis-heading [level]="2">Autocomplete Select</fudis-heading>
+				<fudis-select
+					[variant]="'autocomplete'"
+					[placeholder]="autocomplete.placeholder"
+					[control]="autocomplete.control"
+					[label]="autocomplete.label"
+					[helpText]="autocomplete.helpText">
+					<ng-template fudisContent type="select-options">
+						<fudis-select-option *ngFor="let option of selectMockData" [data]="option" />
+					</ng-template>
+				</fudis-select>
+			</div>
+			<div>
+				<fudis-heading [level]="2">Dropdown Multiselect</fudis-heading>
+				<fudis-select
+					[multiselect]="true"
+					[placeholder]="multiselect.placeholder"
+					[control]="multiselect.control"
+					[label]="multiselect.label"
+					[helpText]="multiselect.helpText">
+					<ng-template fudisContent type="select-options">
+						<fudis-select-option *ngFor="let option of defaultOptions" [data]="option" />
+						<fudis-select-group *ngFor="let group of groupedMockData" [label]="group.country">
+							<fudis-select-option *ngFor="let groupedOption of group.options" [data]="groupedOption" />
+						</fudis-select-group>
+					</ng-template>
+				</fudis-select>
+			</div>
+
+			<div>
+				<fudis-heading [level]="2">Autocomplete Multiselect</fudis-heading>
+				<fudis-select
+					[variant]="'autocomplete'"
+					[multiselect]="true"
+					[placeholder]="autocompleteMultiselect.placeholder"
+					[control]="autocompleteMultiselect.control"
+					[label]="autocompleteMultiselect.label"
+					[helpText]="autocompleteMultiselect.helpText">
+					<ng-template fudisContent type="select-options">
+						<fudis-select-option *ngFor="let option of defaultOptionsTwo" [data]="option" />
+						<fudis-select-group *ngFor="let group of groupedMockData" [label]="group.country">
+							<fudis-select-option *ngFor="let groupedOption of group.options" [data]="groupedOption" />
+						</fudis-select-group>
+					</ng-template>
+				</fudis-select>
+			</div>
+		</fudis-grid>
 	`,
 });
 
@@ -179,16 +168,16 @@ const ExampleTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 		...args,
 		defaultOptions,
 		control: new FormControl(
-			args.multiselect ? [defaultOptions[2], groupedMockData[1].options[1]] : defaultOptions[2],
+			defaultOptions[2],
 			FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
 		),
 		groupedMockData,
 	},
 	template: html`
 		<fudis-select
-			[variant]="variant"
+			[variant]="'dropdown'"
 			[size]="size"
-			[multiselect]="multiselect"
+			[multiselect]="false"
 			[showSelectionChips]="showSelectionChips"
 			[placeholder]="placeholder"
 			[control]="control"
@@ -207,9 +196,8 @@ const ExampleTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 export const Example = ExampleTemplate.bind({});
 Example.args = {
 	label: 'Select a pet',
-	size: 'sm',
+	size: 'lg',
 	placeholder: 'Choose a pet',
-	multiselect: false,
 	variant: 'autocomplete',
 	showSelectionChips: true,
 	helpText: 'All pets are equally important, but for sake of this example please pick one.',
@@ -217,28 +205,3 @@ Example.args = {
 
 export const AllSelects = AllSelectsTemplate.bind({});
 AllSelects.args = {};
-
-// export const MultiSelect = Template.bind({});
-// MultiSelect.args = {
-// 	multipleOption: true,
-// 	label: 'Select from two to three pets',
-// 	size: 'lg',
-// 	placeholder: 'Choose pets',
-// 	control: new FormControl(null, [
-// 		FudisValidators.required("It is necessary to choose multiple pets. It's even better for your health!"),
-// 		FudisValidators.minLength(2, 'Choose at least two pets'),
-// 		FudisValidators.maxLength(3, "That's probably too much already."),
-// 	]),
-// 	helpText: 'All pets are equally important, but for sake of this example please pick two to three pets.',
-// 	tooltip: 'Platypus is the right choice',
-// 	tooltipPosition: 'below',
-// 	tooltipToggle: false,
-// 	options: [
-// 		{ value: 'value-1-dog', label: 'Dog' },
-// 		{ value: 'value-2-capybara', label: 'Capybara' },
-// 		{ value: 'value-3-platypys', label: 'Platypus' },
-// 		{ value: 'value-4-cat', label: 'Really dangerous cat', disabled: true },
-// 		{ value: 'value-5-armadillo', label: 'Screaming hairy armadillo' },
-// 		{ value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
-// 	],
-// };

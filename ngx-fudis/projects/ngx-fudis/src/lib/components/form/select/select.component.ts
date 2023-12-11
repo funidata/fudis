@@ -4,6 +4,7 @@ import {
 	ContentChild,
 	ElementRef,
 	EventEmitter,
+	HostBinding,
 	HostListener,
 	Input,
 	OnChanges,
@@ -52,6 +53,8 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 			this.optionDisabledText = this._translations().SELECT.DISABLED;
 		});
 	}
+
+	@HostBinding('class') classes = 'fudis-select-host';
 
 	@ViewChild('dropdownRef') dropdownRef: SelectDropdownComponent;
 
@@ -226,10 +229,12 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	ngOnInit(): void {
 		this._setParentId();
 
-		this._controlValueSubscription = this.control.valueChanges.subscribe(() => {
+		this._controlValueSubscription = this.control.valueChanges.subscribe((value) => {
 			if (!this.controlValueChangedInternally) {
 				this._updateSelectionFromControlValue();
 			}
+
+			console.table(value);
 
 			this.controlValueChangedInternally = false;
 		});
@@ -415,6 +420,10 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 
 	private _toggleDropdown(): void {
 		this._dropdownOpen = !this._dropdownOpen;
+
+		if (this._dropdownOpen) {
+			this._openedOnce = true;
+		}
 	}
 
 	/**
