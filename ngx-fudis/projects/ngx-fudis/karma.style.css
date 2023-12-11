@@ -1,9 +1,0 @@
-/* These rem multiplier styles are essential for executing karma tests */
-
-html {
-	font-size: 62.5%;
-}
-
-:root {
-	--fudis-rem-multiplier: 0.625;
-}

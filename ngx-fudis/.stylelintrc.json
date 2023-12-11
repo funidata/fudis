@@ -6,12 +6,20 @@
 		"stylelint-config-prettier-scss",
 		"stylelint-config-concentric-order"
 	],
-	"ignoreFiles": ["dist/**/*.scss", "static/**/*", "projects/ngx-fudis/karma.style.css", "projects/ngx-fudis/style.scss", "coverage/**/*"],
+	"ignoreFiles": [
+		"dist/**/*.scss",
+		"static/**/*",
+		"projects/ngx-fudis/style.scss",
+		"coverage/**/*"
+	],
 	"rules": {
 		"order/properties-alphabetical-order": null,
 		"color-no-hex": true,
 		"color-hex-length": "long",
-		"unit-disallowed-list": ["px", "rem"],
+		"unit-disallowed-list": [
+			"px",
+			"rem"
+		],
 		"max-nesting-depth": 4,
 		"declaration-no-important": true,
 		"selector-max-class": 2,
