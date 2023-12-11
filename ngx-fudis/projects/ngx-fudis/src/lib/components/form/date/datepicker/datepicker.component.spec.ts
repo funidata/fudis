@@ -84,9 +84,7 @@ describe('DatepickerComponent', () => {
 			component.helpText = 'Select your favourite date';
 			fixture.detectChanges();
 
-			expect(childGuidanceComponent.attributes['ng-reflect-help-text'])
-				.withContext(component.helpText)
-				.toEqual('Select your favourite date');
+			expect(childGuidanceComponent.attributes['ng-reflect-help-text']).toEqual('Select your favourite date');
 		});
 	});
 

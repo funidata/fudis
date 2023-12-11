@@ -152,9 +152,9 @@ describe('CheckboxComponent', () => {
 		it('should create with correct label', () => {
 			const checkedCheckbox = fixture.nativeElement.querySelector('[ng-reflect-control-name="fairTradeBanana"]');
 
-			const labelText: string = checkedCheckbox.querySelector('.fudis-checkbox__content__label').innerText;
+			const label = checkedCheckbox.querySelector('.fudis-checkbox__content__label') as HTMLElement;
 
-			expect(labelText).toEqual('Fair trade banana');
+			expect(label.textContent).toContain('Fair trade banana');
 		});
 
 		it('should have proper CSS classes before, during and after when input focused', () => {
