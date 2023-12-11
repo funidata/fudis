@@ -30,6 +30,7 @@ import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 import { SelectDropdownComponent } from './select-dropdown/select-dropdown.component';
 import { joinInputValues, setVisibleOptionsList, sortValues } from './selectUtilities';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
+import { ButtonComponent } from '../../button/button.component';
 
 @Component({
 	selector: 'fudis-select',
@@ -51,12 +52,15 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 			this._noResultsFound = this._translations().SELECT.AUTOCOMPLETE.NO_RESULTS;
 			this._removeItemText = this._translations().SELECT.MULTISELECT.REMOVE_ITEM;
 			this.optionDisabledText = this._translations().SELECT.DISABLED;
+			this._clearFilterText = this._translations().SELECT.AUTOCOMPLETE.CLEAR;
 		});
 	}
 
 	@HostBinding('class') classes = 'fudis-select-host';
 
 	@ViewChild('dropdownRef') dropdownRef: SelectDropdownComponent;
+
+	@ViewChild('clearFilterButton') _clearFilterButton: ButtonComponent;
 
 	@ViewChild('selectRef', { static: false }) selectElementRef: ElementRef;
 
@@ -90,9 +94,9 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	@Input() variant: 'dropdown' | 'autocomplete' = 'dropdown';
 
 	/**
-	 * When focusing on input, open dropdown menu
+	 * Enable / disable autocomplete variant's Clear button. When 'false' autocomplete acts like a dropdown and opens on focus and hides 'Clear' icon button.
 	 */
-	@Input() openOnFocus: boolean = true;
+	@Input() autocompleteClearButton: boolean = true;
 
 	/**
 	 * With multiselects, disable or enable selection chips rendered below Select input
@@ -161,6 +165,11 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	 */
 	protected _visibleOptionsValues: string[] = [];
 
+	/**
+	 * Translated aria-label for autocomplete close icon button which clears the input
+	 */
+	protected _clearFilterText: string;
+
 	private _sortedSelectedOptionsSignal: WritableSignal<FudisSelectOption[]> = signal<FudisSelectOption[]>([]);
 
 	private _preventClick: boolean = false;
@@ -174,7 +183,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	/**
 	 * Autocomplete user input filtering
 	 */
-	public handleSelectionChange(value: FudisSelectOption | null, disableSignalEmit?: boolean): void {
+	public handleSelectionChange(value: FudisSelectOption, disableSignalEmit?: boolean): void {
 		this.selectionUpdate.emit(value);
 		this.controlValueChangedInternally = true;
 		this.control.patchValue(value);
@@ -229,12 +238,10 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	ngOnInit(): void {
 		this._setParentId();
 
-		this._controlValueSubscription = this.control.valueChanges.subscribe((value) => {
+		this._controlValueSubscription = this.control.valueChanges.subscribe(() => {
 			if (!this.controlValueChangedInternally) {
 				this._updateSelectionFromControlValue();
 			}
-
-			console.table(value);
 
 			this.controlValueChangedInternally = false;
 		});
@@ -316,8 +323,9 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	}
 
 	protected _inputFocus(): void {
-		if (this.openOnFocus && !this._dropdownOpen && !this._preventDropdownReopen) {
+		if (!this.autocompleteClearButton && !this._dropdownOpen && !this._preventDropdownReopen) {
 			this._openDropdown();
+
 			this._preventClick = true;
 			this._preventDropdownReopen = false;
 		}
@@ -325,14 +333,22 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		this._inputFocused = true;
 	}
 
-	protected _clickInput(): void {
-		if (this._preventClick) {
-			this._preventClick = false;
-		} else if (this._dropdownOpen) {
-			this.closeDropdown(false);
-			this._preventDropdownReopen = true;
-		} else {
-			this._toggleDropdown();
+	protected _clickInput(event: Event): void {
+		const clickFromClearButton =
+			event.target !== this._clearFilterButton.buttonEl.nativeElement ||
+			event.target !== this._clearFilterButton.buttonEl.nativeElement.querySelector('fudis-icon');
+
+		if (!clickFromClearButton) {
+			if (event.target !== this._clearFilterButton.buttonEl.nativeElement) {
+				if (this._preventClick) {
+					this._preventClick = false;
+				} else if (this._dropdownOpen) {
+					this.closeDropdown(false);
+					this._preventDropdownReopen = true;
+				} else {
+					this._toggleDropdown();
+				}
+			}
 		}
 
 		this.inputRef.nativeElement.focus();
@@ -369,17 +385,19 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	protected _autocompleteKeypress(event: any): void {
 		const { key } = event;
 
-		if (!this._dropdownOpen && key !== 'Escape' && key !== 'Enter') {
+		if (this._autocompleteFilterText() !== event.target.value) {
+			this._autocompleteFilterText.set(event.target.value);
+		}
+
+		if (this.autocompleteClearButton && this._autocompleteFilterText() === '') {
+			this.closeDropdown();
+		} else if (this.autocompleteClearButton && !this._dropdownOpen && key !== 'Escape' && key !== 'Enter') {
 			this._openDropdown();
 		}
 
 		if (key === 'ArrowDown' && this._inputFocused) {
 			event.preventDefault();
 			this._focusToFirstOption();
-		}
-
-		if (this._autocompleteFilterText() !== event.target.value) {
-			this._autocompleteFilterText.set(event.target.value);
 		}
 
 		if (!this.multiselect) {
@@ -413,17 +431,17 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		}
 	}
 
-	private _openDropdown(): void {
-		this._openedOnce = true;
-		this._dropdownOpen = true;
-	}
-
-	private _toggleDropdown(): void {
+	protected _toggleDropdown(): void {
 		this._dropdownOpen = !this._dropdownOpen;
 
 		if (this._dropdownOpen) {
 			this._openedOnce = true;
 		}
+	}
+
+	private _openDropdown(): void {
+		this._openedOnce = true;
+		this._dropdownOpen = true;
 	}
 
 	/**

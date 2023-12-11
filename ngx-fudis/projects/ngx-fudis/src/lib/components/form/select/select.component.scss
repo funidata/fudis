@@ -17,17 +17,23 @@
 		display: flex;
 		position: relative;
 
-		&__icon.fudis-icon-host,
-		&__icon.fudis-button-host {
-			position: absolute;
-			top: 50%;
-			right: spacing.$spacing-xxs;
-			transform: translateY(-50%);
-		}
+		&__icon {
+			&.fudis-icon-host,
+			&.fudis-button-host {
+				position: absolute;
+				top: 50%;
+				right: spacing.$spacing-xxs;
+				transform: translateY(-50%);
+			}
 
-		&__icon.fudis-icon-host,
-		&__icon.fudis-button-host svg {
-			pointer-events: none;
+			&.fudis-icon-host,
+			&.fudis-button-host svg {
+				pointer-events: none;
+			}
+
+			&--hidden.fudis-button-host {
+				display: none;
+			}
 		}
 	}
 

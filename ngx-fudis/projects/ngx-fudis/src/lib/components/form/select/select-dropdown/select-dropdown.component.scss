@@ -46,8 +46,16 @@
 	// 	width: spacing.$spacing-input-sm;
 	// }
 
-	&__no-results {
-		padding: spacing.$spacing-xs;
+	&__no-results.fudis-body-text-host {
+		display: none;
+		visibility: hidden;
+		padding: none;
+
+		&--visible {
+			display: block;
+			visibility: visible;
+			padding: spacing.$spacing-xs;
+		}
 	}
 
 	&--open {

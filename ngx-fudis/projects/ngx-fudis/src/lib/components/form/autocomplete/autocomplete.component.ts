@@ -73,7 +73,7 @@ export class AutocompleteComponent
 	protected _filteredOptions: Observable<FudisSelectOption[]>;
 
 	/**
-	 * Aria-label for close icon which clears the input
+	 * Translated aria-label for close icon which clears the input
 	 */
 	protected _clearFilterText: string;
 

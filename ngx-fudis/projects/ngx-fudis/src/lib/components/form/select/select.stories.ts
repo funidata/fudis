@@ -175,7 +175,7 @@ const ExampleTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 	},
 	template: html`
 		<fudis-select
-			[variant]="'dropdown'"
+			[variant]="'autocomplete'"
 			[size]="size"
 			[multiselect]="false"
 			[showSelectionChips]="showSelectionChips"
