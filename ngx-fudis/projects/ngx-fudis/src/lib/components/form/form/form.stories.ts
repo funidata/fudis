@@ -58,7 +58,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 													This is notification for a fieldset. It has one custom error-message which should pop up in
 													the error summary on submit.
 												</fudis-body-text>
-												<fudis-error-message
+												<fudis-validation-error-message
 													[type]="'fieldset'"
 													[variant]="'body-text'"
 													[visible]="true"
@@ -121,7 +121,9 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 													[control]="formExample.controls['teacher']"
 													[label]="'Responsible teacher'"
 													[helpText]="'Someone has to be responsible for this.'">
-													<fudis-custom-error-message [message]="'Olaaa'" [visible]="true" />
+													<fudis-error-message
+														[message]="'Backend threw an error, it is not totally fault of this component'"
+														[visible]="true" />
 												</fudis-text-input>
 												<!-- <fudis-text-input
 													[id]="'unique-input-4'"

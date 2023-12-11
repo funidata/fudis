@@ -83,7 +83,16 @@ const TemplateDateRange: StoryFn<DateRangeComponent> = (args: DateRangeComponent
 			control: new FormControl<Date | null>(null, FudisValidators.required('End date is required')),
 		},
 	},
-	template: html` <fudis-date-range [startDate]="startDate" [endDate]="endDate" /> `,
+	template: html`
+		<fudis-date-range [startDate]="startDate" [endDate]="endDate">
+			<ng-template fudisDateStartError>
+				<fudis-error-message [message]="'Backend threw an error on start date'" [visible]="true" />
+			</ng-template>
+			<ng-template fudisDateEndError>
+				<fudis-error-message [message]="'Backend threw an error on end date'" [visible]="true" />
+			</ng-template>
+		</fudis-date-range>
+	`,
 });
 
 export const DateRange = TemplateDateRange.bind({});
@@ -120,7 +129,15 @@ const TemplateWithMinMax: StoryFn<DateRangeComponent> = (args: DateRangeComponen
 		},
 	},
 	template: html`
-		<fudis-date-range [startDate]="startDate" [endDate]="endDate" /><example-language-change-component />
+		<fudis-date-range [startDate]="startDate" [endDate]="endDate">
+			<ng-template fudisDateStartError>
+				<fudis-error-message [message]="'Backend threw an error on start date'" [visible]="true" />
+			</ng-template>
+			<ng-template fudisDateEndError>
+				<fudis-error-message [message]="'Backend threw an error on end date'" [visible]="true" />
+			</ng-template>
+		</fudis-date-range>
+		<example-language-change-component />
 	`,
 });
 

@@ -16,7 +16,7 @@ import { IconComponent } from '../../../icon/icon.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { ButtonComponent } from '../../../button/button.component';
 import { FudisDropdownMenuItemService } from '../../../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
-import { ErrorMessageComponent } from '../../error-message/error-message.component';
+import { ValidationErrorMessageComponent } from '../../error-message/validation-error-message.component';
 
 describe('DateRangeComponent', () => {
 	let component: DateRangeComponent;
@@ -29,7 +29,7 @@ describe('DateRangeComponent', () => {
 				DatepickerComponent,
 				LabelComponent,
 				GuidanceComponent,
-				ErrorMessageComponent,
+				ValidationErrorMessageComponent,
 				ButtonComponent,
 				TooltipDirective,
 				MockComponent(IconComponent),

@@ -11,7 +11,11 @@
 			[errorMsg]="startDate.errorMsg"
 			[label]="startDate.label"
 			[control]="startDate.control"
-			[helpText]="startDate.helpText" />
+			[helpText]="startDate.helpText">
+			<ng-container *ngIf="errorStartDate">
+				<ng-container *ngTemplateOutlet="errorStartDate!.templateRef" />
+			</ng-container>
+		</fudis-datepicker>
 		<span class="fudis-daterange__gutter"></span>
 		<fudis-datepicker
 			[id]="id + '-end-date'"
@@ -21,6 +25,10 @@
 			[errorMsg]="endDate.errorMsg"
 			[label]="endDate.label"
 			[control]="endDate.control"
-			[helpText]="endDate.helpText" />
+			[helpText]="endDate.helpText">
+			<ng-container *ngIf="errorEndDate">
+				<ng-container *ngTemplateOutlet="errorEndDate!.templateRef" />
+			</ng-container>
+		</fudis-datepicker>
 	</div>
 </ng-container>

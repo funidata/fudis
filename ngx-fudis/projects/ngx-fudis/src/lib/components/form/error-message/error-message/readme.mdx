@@ -1,0 +1,51 @@
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import { linkTo } from '@storybook/addon-links';
+import { ErrorMessageComponent } from './error-message.component'
+import * as ErrorMessageStories from './error-message.stories'
+
+<Meta title="Components/Form/Error Messages/Error Message" />
+
+# Error message
+
+Fudis form components can implement Error Message through content projection. 
+Like the regular Error Message, Error Message is rendered as a part [Guidance Component](/docs/components-guidance). 
+
+## Examples
+
+<Canvas of={ErrorMessageStories.ErrorMessageExample}></Canvas>
+
+
+
+## Usage Guidelines
+
+### Mandatory Properties
+
+The mandatory properties for error-message are `message` and `visible`. Error Message component takes a message parameter either as a string or as an observable string.
+The property visible is a boolean value that determines when an error is displayed, but has no effect on the form's validity. In order for the error message alert icon to be displayed, 
+the related form control must be in invalid state and passed to error-message component in `visible` property.
+
+````
+<form [formGroup]="mainFormGroup">
+	<fudis-text-input
+	[control]="mainFormGroup.controls['required']"
+	[label]="'Required text input'">
+	<fudis-error-message
+		[message]="'This is a custom error message has ben added with content projection'"
+		[visible]="true" />
+</fudis-text-input>
+</form>`
+````
+### Using multiple Custom Errors
+
+**Note!** It is recommended to use only one Error Message at a time. When using multiple error-messages it is mandatory to pass related form field id as `parentId` and a form field label as `parenLabel` input. 
+These inputs are used for linking custom-error-message content with related input fields and with [Error Summary](/docs/components-form-error-summary--documentation).
+
+## Accessibility
+
+- Related Form field label and id are linked to custom error message
+- Error Message is correctly passed to [Error Summary](/docs/components-form-error-summary--documentation).
+
+## Related Components
+
+- [Guidance Component](/docs/components-guidance)
+- [Error Summary](/docs/components-form-error-summary--documentation)

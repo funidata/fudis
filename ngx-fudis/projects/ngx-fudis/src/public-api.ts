@@ -20,6 +20,8 @@ export { DatepickerComponent } from './lib/components/form/date/datepicker/datep
 export { DateRangeComponent } from './lib/components/form/date/date-range/date-range.component';
 export {
 	ContentDirective,
+	DateStartCustomErrorDirective,
+	DateEndCustomErrorDirective,
 	FooterContentLeftDirective,
 	FooterContentRightDirective,
 } from './lib/directives/content-projection/content/content.directive';
@@ -41,7 +43,7 @@ export { FudisTranslationService } from './lib/services/translation/translation.
 export { DropdownComponent } from './lib/components/form/dropdown/dropdown.component';
 export { DropdownMenuComponent } from './lib/components/dropdown-menu/dropdown-menu.component';
 export { DropdownMenuItemComponent } from './lib/components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
-export { CustomErrorMessageComponent } from './lib/components/form/error-message/custom-error-message/custom-error-message.component';
+export { ErrorMessageComponent } from './lib/components/form/error-message/error-message/error-message.component';
 
 export { ErrorSummaryComponent } from './lib/components/form/error-summary/error-summary.component';
 export { FudisErrorSummaryService } from './lib/services/form/error-summary/error-summary.service';

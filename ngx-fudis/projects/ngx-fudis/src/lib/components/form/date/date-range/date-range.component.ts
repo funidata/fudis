@@ -1,6 +1,7 @@
 import {
 	AfterContentInit,
 	Component,
+	ContentChild,
 	ElementRef,
 	Inject,
 	Input,
@@ -13,6 +14,10 @@ import { DOCUMENT } from '@angular/common';
 import { untilDestroyed } from '../../../../utilities/untilDestroyed';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisDateRangeItem } from '../../../../types/forms';
+import {
+	DateEndCustomErrorDirective,
+	DateStartCustomErrorDirective,
+} from '../../../../directives/content-projection/content/content.directive';
 
 @Component({
 	selector: 'fudis-date-range',
@@ -27,6 +32,10 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
 	) {}
 
 	@ViewChild('dateRangeRef') _dateRangeRef: ElementRef;
+
+	@ContentChild(DateStartCustomErrorDirective) errorStartDate: DateStartCustomErrorDirective;
+
+	@ContentChild(DateEndCustomErrorDirective) errorEndDate: DateEndCustomErrorDirective;
 
 	/**
 	 * Settings for start date

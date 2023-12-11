@@ -21,8 +21,8 @@ import { FudisValidators } from '../../../utilities/form/validators';
 				[tooltipPosition]="'right'"
 				[tooltipToggle]="false"
 				[helpText]="'Please add some content.'">
-				<fudis-custom-error-message
-					[message]="'STRINGI Backend threw an error, it is not totally fault of this component'"
+				<fudis-error-message
+					[message]="'Backend threw an error, it is not totally fault of this component'"
 					[visible]="true" />
 			</fudis-text-input>
 			<fudis-text-input

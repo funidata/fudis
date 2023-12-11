@@ -32,8 +32,10 @@
 								[maxLength]="20"
 								[control]="testFormGroup.controls['textInput']"
 								[tooltip]="'This text-input has multiple validators: required, minlength and maxlength'">
-								<fudis-custom-error-message [visible]="customError" [message]="t('form_errors.customErrorMessage')" />
-								<fudis-custom-error-message [visible]="customError" [message]="'Olen toinen virhe'" />
+								<fudis-error-message [visible]="customError" [message]="t('form_errors.customErrorMessage')" />
+								<fudis-error-message
+									[visible]="customError"
+									[message]="'Backend threw an error, it is not totally fault of this component'" />
 							</fudis-text-input>
 							<fudis-radio-button-group
 								[title]="t('chooseTruth')"

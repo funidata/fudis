@@ -30,6 +30,8 @@ import { DateRangeComponent } from './components/form/date/date-range/date-range
 
 import {
 	ContentDirective,
+	DateStartCustomErrorDirective,
+	DateEndCustomErrorDirective,
 	FooterContentLeftDirective,
 	FooterContentRightDirective,
 } from './directives/content-projection/content/content.directive';
@@ -51,7 +53,7 @@ import { DropdownMenuItemComponent } from './components/dropdown-menu/dropdown-m
 
 import { FudisDropdownMenuItemService } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { FudisFocusService } from './services/focus/focus.service';
-import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
+import { ValidationErrorMessageComponent } from './components/form/error-message/validation-error-message.component';
 import { FudisErrorSummaryService } from './services/form/error-summary/error-summary.service';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
@@ -98,7 +100,7 @@ import { AlertComponent } from './components/alert/alert/alert.component';
 import { AlertGroupComponent } from './components/alert/alert-group/alert-group.component';
 import { FudisAlertService } from './services/alert/alert.service';
 import { FudisBreakpointService } from './services/breakpoint/breakpoint.service';
-import { CustomErrorMessageComponent } from './components/form/error-message/custom-error-message/custom-error-message.component';
+import { ErrorMessageComponent } from './components/form/error-message/error-message/error-message.component';
 import { ErrorMessageBaseDirective } from './components/form/error-message/error-message-base/error-message-base.directive';
 
 @NgModule({
@@ -120,9 +122,11 @@ import { ErrorMessageBaseDirective } from './components/form/error-message/error
 		CheckboxComponent,
 		CheckboxGroupComponent,
 		ContentDirective,
+		DateEndCustomErrorDirective,
 		DatepickerComponent,
 		DatepickerCustomHeaderComponent,
 		DateRangeComponent,
+		DateStartCustomErrorDirective,
 		DescriptionListComponent,
 		DescriptionListItemComponent,
 		DescriptionListItemTermComponent,
@@ -135,7 +139,7 @@ import { ErrorMessageBaseDirective } from './components/form/error-message/error
 		DropdownComponent,
 		DropdownMenuComponent,
 		DropdownMenuItemComponent,
-		ErrorMessageComponent,
+		ValidationErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,
 		FieldSetBaseDirective,
@@ -169,7 +173,7 @@ import { ErrorMessageBaseDirective } from './components/form/error-message/error
 		TextInputComponent,
 		TextAreaComponent,
 		TooltipDirective,
-		CustomErrorMessageComponent,
+		ErrorMessageComponent,
 		ErrorMessageBaseDirective,
 	],
 	/*
@@ -213,9 +217,11 @@ import { ErrorMessageBaseDirective } from './components/form/error-message/error
 		CheckboxComponent,
 		CheckboxGroupComponent,
 		ContentDirective,
-		CustomErrorMessageComponent,
+		ErrorMessageComponent,
+		DateEndCustomErrorDirective,
 		DatepickerComponent,
 		DateRangeComponent,
+		DateStartCustomErrorDirective,
 		DescriptionListComponent,
 		DescriptionListItemComponent,
 		DescriptionListItemTermComponent,

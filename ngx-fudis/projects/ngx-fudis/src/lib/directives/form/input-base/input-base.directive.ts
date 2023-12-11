@@ -19,7 +19,7 @@ import { FudisTranslationConfig } from '../../../types/miscellaneous';
 import { FudisIdComponent } from '../../../types/id';
 import { FudisIdService } from '../../../services/id/id.service';
 import { ContentDirective } from '../../content-projection/content/content.directive';
-import { CustomErrorMessageComponent } from '../../../components/form/error-message/custom-error-message/custom-error-message.component';
+import { ErrorMessageComponent } from '../../../components/form/error-message/error-message/error-message.component';
 
 @Directive({
 	selector: '[fudisInputBase]',
@@ -39,8 +39,8 @@ export class InputBaseDirective extends TooltipApiDirective {
 
 	@ContentChild(ContentDirective) content: ContentDirective;
 
-	@ContentChildren(CustomErrorMessageComponent)
-	private _errorMessages: QueryList<CustomErrorMessageComponent>;
+	@ContentChildren(ErrorMessageComponent)
+	private _errorMessages: QueryList<ErrorMessageComponent>;
 
 	/**
 	 * Template reference for input. Used in e. g. initialFocus

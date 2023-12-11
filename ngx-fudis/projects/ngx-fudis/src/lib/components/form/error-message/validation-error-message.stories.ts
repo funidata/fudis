@@ -1,7 +1,7 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
-import { ErrorMessageComponent } from './error-message.component';
+import { ValidationErrorMessageComponent } from './validation-error-message.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import readme from './readme.mdx';
 
@@ -12,7 +12,7 @@ import readme from './readme.mdx';
 		</fudis-text-input>
 	</form>`,
 })
-class TextInputWithErrorMessageComponent {
+class TextInputWithValidationErrorMessageComponent {
 	constructor(private _formBuilder: FormBuilder) {}
 
 	mainFormGroup: FormGroup = this._formBuilder.group({
@@ -21,11 +21,11 @@ class TextInputWithErrorMessageComponent {
 }
 
 export default {
-	title: 'Components/Form/Error Messages/Error Message',
-	component: ErrorMessageComponent,
+	title: 'Components/Form/Error Messages/Validation Error Message',
+	component: ValidationErrorMessageComponent,
 	decorators: [
 		moduleMetadata({
-			declarations: [TextInputWithErrorMessageComponent],
+			declarations: [TextInputWithValidationErrorMessageComponent],
 			imports: [ReactiveFormsModule, FormsModule],
 		}),
 	],
@@ -40,7 +40,7 @@ export default {
 	argTypes: {},
 } as Meta;
 
-export const ErrorMessageExample: StoryFn = () => ({
+export const ValidationErrorMessageExample: StoryFn = () => ({
 	template: `
 	<example-text-input-with-error-message></example-text-input-with-error-message>
 	`,

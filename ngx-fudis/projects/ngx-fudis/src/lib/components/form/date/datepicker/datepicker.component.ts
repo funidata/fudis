@@ -2,6 +2,7 @@ import {
 	AfterViewInit,
 	ChangeDetectorRef,
 	Component,
+	ContentChild,
 	Input,
 	OnChanges,
 	OnInit,
@@ -11,6 +12,10 @@ import {
 import { FormControl } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
+import {
+	DateEndCustomErrorDirective,
+	DateStartCustomErrorDirective,
+} from '../../../../directives/content-projection/content/content.directive';
 import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
 import { FUDIS_DATE_FORMATS, FudisInputSize } from '../../../../types/forms';
 import { FudisIdService } from '../../../../services/id/id.service';
@@ -52,6 +57,10 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 			this._datepickerIntl = updateMatDatePickerTranslations(this._translations(), this._datepickerIntl);
 		});
 	}
+
+	@ContentChild(DateStartCustomErrorDirective) errorStartDate: DateStartCustomErrorDirective;
+
+	@ContentChild(DateEndCustomErrorDirective) errorEndDate: DateEndCustomErrorDirective;
 
 	/**
 	 * FormControl for the input.

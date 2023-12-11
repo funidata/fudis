@@ -6,11 +6,11 @@ import { FudisErrorSummaryService } from '../../../../services/form/error-summar
 import { ErrorMessageBaseDirective } from '../error-message-base/error-message-base.directive';
 
 @Component({
-	selector: 'fudis-custom-error-message',
-	templateUrl: './custom-error-message.component.html',
-	styleUrls: ['../error-message.component.scss'],
+	selector: 'fudis-error-message',
+	templateUrl: './error-message.component.html',
+	styleUrls: ['../validation-error-message.component.scss'],
 })
-export class CustomErrorMessageComponent extends ErrorMessageBaseDirective implements OnInit, OnChanges, OnDestroy {
+export class ErrorMessageComponent extends ErrorMessageBaseDirective implements OnInit, OnChanges, OnDestroy {
 	constructor(
 		_errorSummaryService: FudisErrorSummaryService,
 		_translationService: FudisTranslationService,

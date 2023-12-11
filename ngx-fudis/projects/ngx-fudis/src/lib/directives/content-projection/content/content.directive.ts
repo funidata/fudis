@@ -8,7 +8,7 @@ import { Directive, Input, TemplateRef } from '@angular/core';
 export class ContentDirective {
 	constructor(public templateRef: TemplateRef<unknown>) {}
 
-	@Input({ required: true }) type: 'expandable' | 'notification' | 'error-message' | 'form' | 'fieldset' | 'section';
+	@Input({ required: true }) type: 'expandable' | 'notification' | 'form' | 'fieldset' | 'section';
 }
 
 /**
@@ -21,5 +21,15 @@ export class FooterContentLeftDirective {
 
 @Directive({ selector: '[fudisFooterRight]' })
 export class FooterContentRightDirective {
+	constructor(public templateRef: TemplateRef<unknown>) {}
+}
+
+@Directive({ selector: '[fudisDateStartError]' })
+export class DateStartCustomErrorDirective {
+	constructor(public templateRef: TemplateRef<unknown>) {}
+}
+
+@Directive({ selector: '[fudisDateEndError]' })
+export class DateEndCustomErrorDirective {
 	constructor(public templateRef: TemplateRef<unknown>) {}
 }
