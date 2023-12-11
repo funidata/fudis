@@ -17,7 +17,7 @@ import { FudisGridService } from '../../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoint.service';
 import { GridComponent } from '../../../grid/grid/grid.component';
 import { IconComponent } from '../../../icon/icon.component';
-import { ValidationErrorMessageComponent } from '../../error-message/validation-error-message.component';
+import { ValidationErrorMessageComponent } from '../../error-message/validation-error-message/validation-error-message.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 
 @Component({

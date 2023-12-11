@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { MockComponent } from 'ng-mocks';
 import { GuidanceComponent } from './guidance.component';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
-import { ValidationErrorMessageComponent } from '../error-message/validation-error-message.component';
+import { ValidationErrorMessageComponent } from '../error-message/validation-error-message/validation-error-message.component';
 
 const testControl = new FormControl('');
 

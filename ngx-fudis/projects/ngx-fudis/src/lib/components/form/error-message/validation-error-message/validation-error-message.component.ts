@@ -1,14 +1,14 @@
 import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
-import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FudisIdService } from '../../../services/id/id.service';
-import { ErrorMessageBaseDirective } from './error-message-base/error-message-base.directive';
-import { FudisFormErrorSummaryItem } from '../../../types/forms';
+import { FudisErrorSummaryService } from '../../../../services/form/error-summary/error-summary.service';
+import { FudisTranslationService } from '../../../../services/translation/translation.service';
+import { FudisIdService } from '../../../../services/id/id.service';
+import { ErrorMessageBaseDirective } from '../error-message-base/error-message-base.directive';
+import { FudisFormErrorSummaryItem } from '../../../../types/forms';
 
 @Component({
 	selector: 'fudis-validation-error-message',
 	templateUrl: './validation-error-message.component.html',
-	styleUrls: ['./validation-error-message.component.scss'],
+	styleUrls: ['../error-message/error-message.component.scss'],
 })
 export class ValidationErrorMessageComponent
 	extends ErrorMessageBaseDirective

@@ -11,7 +11,6 @@ import readme from './readme.mdx';
 		<fudis-text-input [control]="mainFormGroup.controls['required']" [label]="'Required text input'">
 			<fudis-error-message
 				[message]="'This is a custom error message that has been added with content projection'"
-				[type]="'required'"
 				[visible]="true" />
 		</fudis-text-input>
 	</form>`,
@@ -25,7 +24,7 @@ class TextInputWithErrorMessageComponent {
 }
 
 export default {
-	title: 'Components/Form/Error Messages/Error Message',
+	title: 'Components/Form/Error Message',
 	component: ErrorMessageComponent,
 	decorators: [
 		moduleMetadata({
