@@ -83,9 +83,9 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 			const selectedOption: FudisSelectOption = { ...this.data, htmlId: this._id };
 
 			if (this.checked) {
-				this._parentSelect.handleMultiSelectionChange(selectedOption, false);
+				this._parentSelect.handleMultiSelectionChange(selectedOption, 'add');
 			} else {
-				this._parentSelect.handleMultiSelectionChange(selectedOption, true);
+				this._parentSelect.handleMultiSelectionChange(selectedOption, 'remove');
 			}
 
 			this.handleClick.emit(event);
@@ -113,10 +113,15 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 		}
 	}
 
-	private _isOptionVisible(filterText: string | undefined): void {
+	private _isOptionVisible(filterText: string): void {
 		if (this.data) {
 			this.optionVisible =
 				filterText && this.data.label.toLowerCase().includes(filterText.toLowerCase()) ? true : !filterText;
+
+			// this.optionVisible =
+			// 	filterText !== '' && this.data.label.toLowerCase().includes(filterText.toLowerCase())
+			// 		? true
+			// 		: filterText === '';
 
 			if (this.optionVisible) {
 				this._parentSelect.setOptionsVisibility(this.data.value, true);
@@ -153,6 +158,10 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 			const result = options.find((option) => option.label === this.data.label && option.value === this.data.value);
 
 			this.checked = !!result;
+
+			if (this.checked) {
+				this._parentSelect.handleCheckedSort({ ...this.data, htmlId: this._id });
+			}
 		}
 	}
 }

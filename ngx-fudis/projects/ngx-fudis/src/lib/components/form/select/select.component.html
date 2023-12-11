@@ -53,28 +53,34 @@
 			[attr.aria-labelledby]="id + '-label'"
 			[attr.aria-describedby]="id + '_guidance'"
 			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null" />
-		<ng-container *ngIf="size !== 'xs'">
-			<fudis-icon
-				*ngIf="variant !== 'autocomplete'"
-				class="fudis-select__input-wrapper__icon"
-				[icon]="'chevron'"
-				[rotate]="'cw-90'" />
+
+		<fudis-icon
+			*ngIf="variant !== 'autocomplete'"
+			class="fudis-select__input-wrapper__icon"
+			[icon]="'chevron'"
+			[rotate]="_dropdownOpen ? 'cw-90' : 'ccw-90'" />
+		<ng-container *ngIf="variant === 'autocomplete'">
 			<fudis-button
-				*ngIf="variant === 'autocomplete'"
-				class="fudis-select__input-wrapper__icon-button"
+				*ngIf="_autocompleteFilterText()"
+				class="fudis-select__input-wrapper__icon"
+				(click)="_clearAutocompleteFilterText()"
 				[size]="'icon-only'"
 				[variant]="'tertiary'"
-				[icon]="'chevron'"
+				[icon]="'close'"
 				[iconRotate]="_dropdownOpen ? 'ccw-90' : 'cw-90'"
 				[label]="!_dropdownOpen ? _openAriaLabel : _closeAriaLabel"
 				[labelHidden]="true" />
+			<fudis-icon
+				*ngIf="!_autocompleteFilterText()"
+				class="fudis-select__input-wrapper__icon"
+				[icon]="'search'"
+				[class.fudis-select__input-wrapper__icon-button--disabled]="control.disabled" />
 		</ng-container>
 	</div>
 	<fudis-select-dropdown
 		*ngIf="_openedOnce"
-		[open]="_dropdownOpen"
 		#dropdownRef
-		[open]="true"
+		[open]="_dropdownOpen"
 		[multiselect]="multiselect"
 		[size]="size">
 		<ng-container *ngIf="content?.type === 'select-options'">

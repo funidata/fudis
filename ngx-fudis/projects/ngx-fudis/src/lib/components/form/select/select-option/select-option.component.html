@@ -14,12 +14,15 @@
 	(keydown)="_handleKeyDown($event, 'fudis-select-option .fudis-select-option__focusable')"
 	(blur)="_handleButtonBlur($event)"
 	(click)="_clickSelectOption($event)">
-	{{ data.label }}
+	<span class="fudis-select-option__label">
+		{{ data.label }}
+	</span>
+
 	<fudis-icon
 		*ngIf="!data.disabled && $any(_parentSelect.control.value)?.value === data.value"
 		[icon]="'check'"
 		[color]="'primary'" />
-	<span *ngIf="data.disabled" class="fudis-select-option__disabled-text"
+	<span *ngIf="data.disabled" class="fudis-select-option__label fudis-select-option__disabled-text"
 		>({{ this._parentSelect.optionDisabledText }})</span
 	>
 </button>

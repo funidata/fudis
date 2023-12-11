@@ -1,5 +1,14 @@
 import { FudisSelectOption } from '../../../types/forms';
 
+export const defaultOptions: FudisSelectOption[] = [
+	{ value: 'value-1-dog', label: 'Dog' },
+	{ value: 'value-2-capybara', label: 'Capybara' },
+	{ value: 'value-3-platypys', label: 'Platypus' },
+	{ value: 'value-4-cat', label: 'Really dangerous cat', disabled: true },
+	{ value: 'value-5-armadillo', label: 'Screaming hairy armadillo' },
+	{ value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
+];
+
 export const selectMockData: FudisSelectOption[] = [
 	{
 		value: '4257d865-872c-4ea6-80e6-8bd04ce56ad7',

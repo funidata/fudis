@@ -10,6 +10,12 @@
 		padding-right: spacing.$spacing-xs;
 	}
 
+	&__label {
+		margin: spacing.$spacing-xs 0;
+		/* stylelint-disable-next-line property-disallowed-list */
+		line-height: spacing.$spacing-sm;
+	}
+
 	&__single-select {
 		@include utilities.box-reset;
 		@include typography.body-text-md-light;
@@ -18,15 +24,15 @@
 
 		display: flex;
 		position: relative;
-		align-items: center;
+		align-items: flex-start;
 		justify-content: space-between;
 		cursor: pointer;
-		padding-left: spacing.$spacing-xs;
+		padding-left: spacing.$spacing-sm;
 		width: 100%;
-		height: spacing.$spacing-lg;
+		min-height: spacing.$spacing-lg;
 		overflow: hidden;
 		text-align: left;
-		white-space: nowrap;
+
 		/* stylelint-disable-next-line selector-class-pattern */
 		&:not(.fudis-select-option__focusable) {
 			display: none;

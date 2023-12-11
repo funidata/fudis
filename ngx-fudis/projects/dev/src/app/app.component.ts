@@ -65,7 +65,7 @@ export class AppComponent implements OnInit {
 		{ value: 'value-1-dog', label: 'Dog' },
 		{ value: 'value-2-capybara', label: 'Capybara' },
 		{ value: 'value-3-platypys', label: 'Platypus' },
-		{ value: 'value-4-cat', label: 'Cat, disabled for demo purposes', disabled: true },
+		{ value: 'value-4-cat', label: 'Really dangerous cat', disabled: true },
 		{ value: 'value-5-armadillo', label: 'Screaming hairy armadillo' },
 		{ value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
 	];

@@ -12,23 +12,17 @@
 		display: flex;
 		position: relative;
 
-		&__icon.fudis-icon-host {
+		&__icon.fudis-icon-host,
+		&__icon.fudis-button-host {
 			position: absolute;
 			top: 50%;
 			right: spacing.$spacing-xxs;
 			transform: translateY(-50%);
-			pointer-events: none;
 		}
 
-		&__icon-button button {
-			position: absolute;
-			top: 50%;
-			right: spacing.$spacing-xxs;
-			transform: translateY(-50%);
-
-			svg {
-				fill: colors.$color-gray-dark;
-			}
+		&__icon.fudis-icon-host,
+		&__icon.fudis-button-host svg {
+			pointer-events: none;
 		}
 	}
 

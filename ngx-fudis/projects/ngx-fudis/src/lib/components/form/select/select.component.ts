@@ -79,7 +79,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	/**
 	 * Available sizes for the dropdown
 	 */
-	@Input() size: 'xs' | FudisInputSize = 'lg';
+	@Input() size: FudisInputSize = 'lg';
 
 	/**
 	 * "dropdown" variant for regular dropdown and "autocomplete" enables user typing for search result filtering
@@ -119,7 +119,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	/**
 	 * Internal property for toggle dropdown visibility
 	 */
-	protected _dropdownOpen: boolean;
+	protected _dropdownOpen: boolean = false;
 
 	/**
 	 * Internal translated text for icon-only button aria-label when opening dropdown
@@ -187,16 +187,16 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		}
 	}
 
-	public handleMultiSelectionChange(option: FudisSelectOption, removeSelection: boolean): void {
+	public handleMultiSelectionChange(option: FudisSelectOption, type: 'add' | 'remove'): void {
 		let updatedValue = this.control.value as FudisSelectOption[] | null;
 
-		if (removeSelection && updatedValue) {
+		if (type === 'remove' && updatedValue) {
 			updatedValue = updatedValue.filter((item: FudisSelectOption) => {
 				return item.value !== option.value;
 			});
 		} else if (!updatedValue) {
 			updatedValue = [option];
-		} else {
+		} else if (type === 'add') {
 			updatedValue.push(option);
 		}
 
@@ -207,6 +207,20 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		this.controlValueChangedInternally = true;
 
 		this.control.patchValue(this._sortedSelectedOptions);
+	}
+
+	public handleCheckedSort(checkedOption: FudisSelectOption): void {
+		const foundIndex: number = this._sortedSelectedOptions.findIndex((option) => {
+			return option.value === checkedOption.value && option.label === checkedOption.label;
+		});
+
+		if (foundIndex !== -1) {
+			this._sortedSelectedOptions[foundIndex] = checkedOption;
+
+			this._sortedSelectedOptions = sortValues(this._sortedSelectedOptions);
+
+			this.dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
+		}
 	}
 
 	ngOnInit(): void {
@@ -283,12 +297,24 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 		}
 	}
 
+	/**
+	 * Clear any written or selected value in the autocomplete field
+	 */
+	protected _clearAutocompleteFilterText(): void {
+		// Clear input field and control value
+		(this.inputRef.nativeElement as HTMLInputElement).value = '';
+		this.controlValueChangedInternally = true;
+
+		this._autocompleteFilterText.set('');
+
+		this.control.patchValue(null);
+	}
+
 	protected _inputFocus(): void {
 		if (this.openOnFocus && !this._dropdownOpen && !this._preventDropdownReopen) {
 			this._openDropdown();
 			this._preventClick = true;
 			this._preventDropdownReopen = false;
-			this._openedOnce = true;
 		}
 
 		this._inputFocused = true;
@@ -356,8 +382,8 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 				this.control.value &&
 				event.target.value.toLowerCase() !== (this.control.value as FudisSelectOption).label.toLowerCase()
 			) {
-				this.selectionUpdate.emit(null);
 				this.controlValueChangedInternally = true;
+				this.selectionUpdate.emit(null);
 				this.control.patchValue(null);
 			}
 		}
@@ -383,6 +409,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	}
 
 	private _openDropdown(): void {
+		this._openedOnce = true;
 		this._dropdownOpen = true;
 	}
 
@@ -435,20 +462,27 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 			this.dropdownSelectionLabelText = (this.control.value as FudisSelectOption).label;
 
 			if (this.variant === 'autocomplete') {
-				const { label } = this.control.value as FudisSelectOption;
+				const { label, value } = this.control.value as FudisSelectOption;
 
 				(this.inputRef.nativeElement as HTMLInputElement).value = label;
 				this._autocompleteFilterText.set(label);
+
+				this._visibleOptionsValues = [value];
 			}
 		} else if (this.multiselect) {
 			/**
 			 * Multiselect
 			 */
-			this._sortedSelectedOptions = sortValues(this.control.value as FudisSelectOption[]);
+
+			const value = this.control.value as FudisSelectOption[];
+
+			this._sortedSelectedOptions = sortValues(value);
 			this._sortedSelectedOptionsSignal.set(this._sortedSelectedOptions);
 
 			if (this.variant === 'dropdown') {
 				this.dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
+			} else {
+				this._visibleOptionsValues = value.map((option) => option.value);
 			}
 		}
 	}
@@ -459,10 +493,10 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	 */
 	@HostListener('document:click', ['$event.target'])
 	private _handleWindowClick(targetElement: HTMLElement) {
-		if (this._dropdownOpen) {
-			const inputAreaClick = this.inputWrapperRef.nativeElement.contains(targetElement);
-
+		if (this._dropdownOpen && !this._inputFocused) {
 			const dropdownAreaClick = this.dropdownRef?.dropdownElement?.nativeElement.contains(targetElement);
+
+			const inputAreaClick = (this.inputWrapperRef.nativeElement as HTMLElement).contains(targetElement);
 
 			if (!inputAreaClick && !dropdownAreaClick) {
 				this.closeDropdown(false);

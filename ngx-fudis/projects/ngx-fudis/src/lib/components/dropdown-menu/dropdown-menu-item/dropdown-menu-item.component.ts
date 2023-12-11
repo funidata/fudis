@@ -1,4 +1,4 @@
-import { OnInit, Component, ElementRef, Host, ViewChild, Input } from '@angular/core';
+import { OnInit, Component, ElementRef, Host, ViewChild, Input, Optional } from '@angular/core';
 import { DropdownMenuComponent } from '../dropdown-menu.component';
 import { FudisIdService } from '../../../services/id/id.service';
 import { DropdownItemBaseDirective } from '../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
@@ -13,7 +13,7 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective impleme
 	constructor(
 		private _idService: FudisIdService,
 		@Host() protected _parentComponent: DropdownMenuComponent,
-		@Host() protected _parentButton: ButtonComponent
+		@Host() @Optional() protected _parentButton: ButtonComponent
 	) {
 		super();
 	}

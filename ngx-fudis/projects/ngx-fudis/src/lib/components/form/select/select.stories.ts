@@ -5,8 +5,7 @@ import { importProvidersFrom } from '@angular/core';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { SelectComponent } from './select.component';
 import readme from './readme.mdx';
-import { selectMockData, groupedMockData } from './mock_data';
-import { FudisSelectOption } from '../../../types/forms';
+import { selectMockData, groupedMockData, defaultOptions } from './mock_data';
 
 export default {
 	title: 'Components/Form/Select',
@@ -41,6 +40,10 @@ export default {
 			options: ['sm', 'md', 'lg'],
 			control: { type: 'radio' },
 		},
+		variant: {
+			options: ['dropdown', 'autocomplete'],
+			control: { type: 'radio' },
+		},
 	},
 } as Meta;
 
@@ -52,7 +55,7 @@ const singleselectProps = {
 	placeholder: 'Choose a pet',
 	multiselect: false,
 	control: new FormControl(
-		selectMockData[2],
+		defaultOptions[2],
 		FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
 	),
 	helpText: 'All pets are equally important, but for sake of this example please pick one.',
@@ -93,28 +96,12 @@ const autocompleteMultiselectProps = {
 	helpText: 'All pets are equally important, but for sake of this example please pick one.',
 };
 
-const defaultOptions: FudisSelectOption[] = [
-	{ value: 'value-1-dog', label: 'Dog' },
-	{ value: 'value-2-capybara', label: 'Capybara' },
-	{ value: 'value-3-platypys', label: 'Platypus' },
-	{ value: 'value-4-cat', label: 'Cat, disabled for demo purposes', disabled: true },
-	{ value: 'value-5-armadillo', label: 'Screaming hairy armadillo' },
-	{ value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
-];
-
-const defaultOptionsTwo: FudisSelectOption[] = [
-	{ value: 'value-1-dog', label: 'Dog' },
-	{ value: 'value-2-capybara', label: 'Capybara' },
-	{ value: 'value-3-platypys', label: 'Platypus' },
-];
-
-const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
+const AllSelectsTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 	props: {
 		...args,
 		defaultOptions,
-		options: selectMockData,
+		selectMockData,
 		groupedMockData,
-		defaultOptionsTwo,
 		singleselect: {
 			...singleselectProps,
 		},
@@ -146,13 +133,12 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 		</fudis-select>
 		<fudis-select
 			[multiselect]="multiselect.multiselect"
-			[showSelectionChips]="false"
 			[placeholder]="multiselect.placeholder"
 			[control]="multiselect.control"
 			[label]="multiselect.label"
 			[helpText]="multiselect.helpText">
 			<ng-template fudisContent type="select-options">
-				<fudis-select-option *ngFor="let option of defaultOptionsTwo" [data]="option" />
+				<fudis-select-option *ngFor="let option of defaultOptions" [data]="option" />
 				<fudis-select-group *ngFor="let group of groupedMockData" [label]="group.country">
 					<fudis-select-option *ngFor="let groupedOption of group.options" [data]="groupedOption" />
 				</fudis-select-group>
@@ -167,7 +153,7 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 			[label]="autocomplete.label"
 			[helpText]="autocomplete.helpText">
 			<ng-template fudisContent type="select-options">
-				<fudis-select-option *ngFor="let option of options" [data]="option" />
+				<fudis-select-option *ngFor="let option of selectMockData" [data]="option" />
 			</ng-template>
 		</fudis-select>
 		<fudis-select
@@ -188,8 +174,49 @@ const Template: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 	`,
 });
 
-export const SingleSelect = Template.bind({});
-SingleSelect.args = {};
+const ExampleTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
+	props: {
+		...args,
+		defaultOptions,
+		control: new FormControl(
+			args.multiselect ? [defaultOptions[2], groupedMockData[1].options[1]] : defaultOptions[2],
+			FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
+		),
+		groupedMockData,
+	},
+	template: html`
+		<fudis-select
+			[variant]="variant"
+			[size]="size"
+			[multiselect]="multiselect"
+			[showSelectionChips]="showSelectionChips"
+			[placeholder]="placeholder"
+			[control]="control"
+			[label]="label"
+			[helpText]="helpText">
+			<ng-template fudisContent type="select-options">
+				<fudis-select-option *ngFor="let option of defaultOptions" [data]="option" />
+				<fudis-select-group *ngFor="let group of groupedMockData" [label]="group.country">
+					<fudis-select-option *ngFor="let groupedOption of group.options" [data]="groupedOption" />
+				</fudis-select-group>
+			</ng-template>
+		</fudis-select>
+	`,
+});
+
+export const Example = ExampleTemplate.bind({});
+Example.args = {
+	label: 'Select a pet',
+	size: 'sm',
+	placeholder: 'Choose a pet',
+	multiselect: false,
+	variant: 'autocomplete',
+	showSelectionChips: true,
+	helpText: 'All pets are equally important, but for sake of this example please pick one.',
+};
+
+export const AllSelects = AllSelectsTemplate.bind({});
+AllSelects.args = {};
 
 // export const MultiSelect = Template.bind({});
 // MultiSelect.args = {
@@ -210,7 +237,7 @@ SingleSelect.args = {};
 // 		{ value: 'value-1-dog', label: 'Dog' },
 // 		{ value: 'value-2-capybara', label: 'Capybara' },
 // 		{ value: 'value-3-platypys', label: 'Platypus' },
-// 		{ value: 'value-4-cat', label: 'Cat, disabled for demo purposes', disabled: true },
+// 		{ value: 'value-4-cat', label: 'Really dangerous cat', disabled: true },
 // 		{ value: 'value-5-armadillo', label: 'Screaming hairy armadillo' },
 // 		{ value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
 // 	],

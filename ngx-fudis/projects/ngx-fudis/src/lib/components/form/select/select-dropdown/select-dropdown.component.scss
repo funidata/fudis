@@ -14,7 +14,6 @@
 	display: none;
 	position: absolute;
 	width: 100%;
-	max-width: spacing.$spacing-input-lg;
 	max-height: calc(spacing.$spacing-xxl * 4);
 	overflow: auto;
 
@@ -35,17 +34,17 @@
 		left: initial;
 	}
 
-	&__lg {
-		width: spacing.$spacing-input-lg;
-	}
+	// &__lg {
+	// 	width: spacing.$spacing-input-lg;
+	// }
 
-	&__md {
-		width: spacing.$spacing-input-md;
-	}
+	// &__md {
+	// 	width: spacing.$spacing-input-md;
+	// }
 
-	&__sm {
-		width: spacing.$spacing-input-sm;
-	}
+	// &__sm {
+	// 	width: spacing.$spacing-input-sm;
+	// }
 
 	&__no-results {
 		padding: spacing.$spacing-xs;

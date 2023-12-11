@@ -7,7 +7,7 @@ import { FudisSelectOption } from '../../../types/forms';
  * @param sort used if there more than one option selected
  */
 export const sortValues = (value: FudisSelectOption[]): FudisSelectOption[] => {
-	let valueToSort: FudisSelectOption | FudisSelectOption[] = value;
+	let valueToSort: FudisSelectOption[] = value;
 
 	// console.log(valueToSort);
 
