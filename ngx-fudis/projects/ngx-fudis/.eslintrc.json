@@ -1,18 +1,11 @@
 {
 	"extends": "../../.eslintrc.json",
-	"ignorePatterns": [
-		"!**/*"
-	],
+	"ignorePatterns": ["!**/*"],
 	"overrides": [
 		{
-			"files": [
-				"*.ts"
-			],
+			"files": ["*.ts"],
 			"parserOptions": {
-				"project": [
-					"projects/ngx-fudis/tsconfig.lib.json",
-					"projects/ngx-fudis/tsconfig.spec.json"
-				],
+				"project": ["projects/ngx-fudis/tsconfig.lib.json", "projects/ngx-fudis/tsconfig.spec.json"],
 				"createDefaultProgram": true
 			},
 			"rules": {
@@ -29,19 +22,20 @@
 					"error",
 					{
 						"type": "element",
-						"prefix": [
-							"fudis",
-							"example"
-						],
+						"prefix": ["fudis", "example"],
 						"style": "kebab-case"
+					}
+				],
+				"import/no-extraneous-dependencies": [
+					"error",
+					{
+						"devDependencies": ["**/setup-jest.ts"]
 					}
 				]
 			}
 		},
 		{
-			"files": [
-				"*.html"
-			],
+			"files": ["*.html"],
 			"rules": {}
 		}
 	]

@@ -39,8 +39,8 @@ jobs:
         run: ng lint
         working-directory: ngx-fudis
 
-  unit-tests:
-    name: Unit tests
+  component-tests:
+    name: Component tests
     needs:
       - build
     runs-on: ubuntu-22.04
@@ -57,23 +57,4 @@ jobs:
       - name: Load image
         run: docker load --input /tmp/fudis.tar
       - name: Run unit tests
-        run: docker run -t fudis npm test
-
-  test:
-    name: Run tests
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.14
-      - name: Install Angular CLI
-        run: npm i -g @angular/cli@v16
-      - name: Install dependencies
-        run: npm ci
-        working-directory: ngx-fudis
-      - name: Run tests
-        run: ng test ngx-fudis --watch false --browsers ChromeHeadless
-        working-directory: ngx-fudis
+        run: docker run -te CI=true fudis npm test
