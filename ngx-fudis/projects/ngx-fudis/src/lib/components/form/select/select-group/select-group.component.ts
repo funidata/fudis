@@ -16,7 +16,7 @@ export class SelectGroupComponent {
 		this.id = this._idService.getNewChildId('select', this._parentSelect.id, true);
 	}
 
-	@ViewChild('selectGroup') selectGroup: ElementRef;
+	@ViewChild('selectGroup') selectGroup: ElementRef<HTMLDivElement>;
 
 	/**
 	 * Visible title label for this group of options

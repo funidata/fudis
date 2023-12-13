@@ -73,6 +73,7 @@
 				[label]="_clearFilterText"
 				[labelHidden]="true" />
 			<fudis-button
+				#toggleDropdownButton
 				*ngIf="!autocompleteClearButton"
 				class="fudis-select__input-wrapper__icon"
 				(handleClick)="_toggleDropdown()"
@@ -83,15 +84,20 @@
 				[label]="!_dropdownOpen ? _openAriaLabel : _closeAriaLabel"
 				[labelHidden]="true" />
 			<fudis-icon
-				*ngIf="!_autocompleteFilterText()"
+				*ngIf="!_autocompleteFilterText() && autocompleteClearButton"
 				class="fudis-select__input-wrapper__icon"
 				[icon]="'search'"
 				[class.fudis-select__input-wrapper__icon-button--disabled]="control.disabled" />
 		</ng-container>
 	</div>
-	<fudis-select-dropdown *ngIf="_openedOnce" #dropdownRef [open]="true" [multiselect]="multiselect" [size]="size">
-		<ng-container *ngIf="content?.type === 'select-options'">
-			<ng-container *ngTemplateOutlet="content!.templateRef"></ng-container>
+	<fudis-select-dropdown
+		*ngIf="_openedOnce"
+		#dropdownRef
+		[open]="_dropdownOpen"
+		[multiselect]="multiselect"
+		[size]="size">
+		<ng-container *ngIf="_content?.type === 'select-options'">
+			<ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>
 		</ng-container>
 		<fudis-body-text
 			*ngIf="!control.value"

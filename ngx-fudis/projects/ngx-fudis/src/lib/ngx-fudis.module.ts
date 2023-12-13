@@ -105,6 +105,7 @@ import { DropdownItemBaseDirective } from './directives/form/dropdown-item-base/
 import { DropdownBaseDirective } from './directives/form/dropdown-base/dropdown-base.directive';
 import { SelectDropdownComponent } from './components/form/select/select-dropdown/select-dropdown.component';
 import { SelectMultiselectChipListComponent } from './components/form/select/select-multiselect-chip/select-multiselect-chip-list.component';
+import { SelectBaseDirective } from './components/form/select/select-base/select-base.directive';
 
 @NgModule({
 	/*
@@ -170,17 +171,18 @@ import { SelectMultiselectChipListComponent } from './components/form/select/sel
 		RadioButtonComponent,
 		RadioButtonGroupComponent,
 		SectionComponent,
+		SelectBaseDirective,
 		SelectComponent,
+		SelectDropdownComponent,
 		SelectGroupComponent,
 		SelectOptionComponent,
+		SelectMultiselectChipListComponent,
 		SpacingApiDirective,
 		SpacingDirective,
 		TextInputComponent,
 		TextAreaComponent,
 		TooltipDirective,
 		DropdownBaseDirective,
-		SelectDropdownComponent,
-		SelectMultiselectChipListComponent,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.

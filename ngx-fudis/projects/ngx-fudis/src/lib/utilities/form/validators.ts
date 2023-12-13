@@ -8,7 +8,7 @@ export interface FudisValidationErrors extends ValidationErrors {
 
 export interface FudisGroupValidatorsMinMaxSettings {
 	value: number;
-	message: Observable<string>;
+	message: Observable<string> | string;
 }
 
 export interface FudisValidatorFn extends ValidatorFn {

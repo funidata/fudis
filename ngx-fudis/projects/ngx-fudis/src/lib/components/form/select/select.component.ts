@@ -58,15 +58,15 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 
 	@HostBinding('class') classes = 'fudis-select-host';
 
-	@ViewChild('dropdownRef') dropdownRef: SelectDropdownComponent;
+	@ViewChild('dropdownRef') private _dropdownRef: SelectDropdownComponent;
 
-	@ViewChild('clearFilterButton') _clearFilterButton: ButtonComponent;
+	@ViewChild('clearFilterButton') private _clearFilterButton: ButtonComponent;
 
-	@ViewChild('selectRef', { static: false }) selectElementRef: ElementRef;
+	@ViewChild('toggleDropdownButton') private _toggleDropdownButton: ButtonComponent;
 
-	@ViewChild('inputWrapperRef') inputWrapperRef: ElementRef;
+	@ViewChild('inputWrapperRef') private _inputWrapperRef: ElementRef<HTMLDivElement>;
 
-	@ContentChild(ContentDirective) content: ContentDirective;
+	@ContentChild(ContentDirective) protected _content: ContentDirective;
 
 	/*
 	 * FormControl for the dropdown
@@ -180,9 +180,6 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 
 	private _controlValueSubscription: Subscription;
 
-	/**
-	 * Autocomplete user input filtering
-	 */
 	public handleSelectionChange(value: FudisSelectOption, disableSignalEmit?: boolean): void {
 		this.selectionUpdate.emit(value);
 		this.controlValueChangedInternally = true;
@@ -334,20 +331,20 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	}
 
 	protected _clickInput(event: Event): void {
-		const clickFromClearButton =
-			event.target !== this._clearFilterButton.buttonEl.nativeElement ||
-			event.target !== this._clearFilterButton.buttonEl.nativeElement.querySelector('fudis-icon');
+		const clickFromInputButton =
+			event.target === this._toggleDropdownButton?.buttonEl.nativeElement.querySelector('fudis-icon') ||
+			event.target === this._toggleDropdownButton?.buttonEl.nativeElement ||
+			event.target === this._clearFilterButton?.buttonEl.nativeElement ||
+			event.target === this._clearFilterButton?.buttonEl.nativeElement.querySelector('fudis-icon');
 
-		if (!clickFromClearButton) {
-			if (event.target !== this._clearFilterButton.buttonEl.nativeElement) {
-				if (this._preventClick) {
-					this._preventClick = false;
-				} else if (this._dropdownOpen) {
-					this.closeDropdown(false);
-					this._preventDropdownReopen = true;
-				} else {
-					this._toggleDropdown();
-				}
+		if (!clickFromInputButton) {
+			if (this._preventClick) {
+				this._preventClick = false;
+			} else if (this._dropdownOpen) {
+				this.closeDropdown(false);
+				this._preventDropdownReopen = true;
+			} else {
+				this._toggleDropdown();
 			}
 		}
 
@@ -391,7 +388,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 
 		if (this.autocompleteClearButton && this._autocompleteFilterText() === '') {
 			this.closeDropdown();
-		} else if (this.autocompleteClearButton && !this._dropdownOpen && key !== 'Escape' && key !== 'Enter') {
+		} else if (!this._dropdownOpen && key !== 'Escape' && key !== 'Enter') {
 			this._openDropdown();
 		}
 
@@ -461,7 +458,7 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	private _focusToFirstOption(): void {
 		const selectorCss = '.fudis-select-option__focusable';
 
-		const firstOption: HTMLInputElement = this.dropdownRef?.dropdownElement.nativeElement.querySelector(
+		const firstOption: HTMLInputElement = this._dropdownRef?.dropdownElement.nativeElement.querySelector(
 			selectorCss
 		) as HTMLInputElement;
 
@@ -521,9 +518,9 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	@HostListener('document:click', ['$event.target'])
 	private _handleWindowClick(targetElement: HTMLElement) {
 		if (this._dropdownOpen && !this._inputFocused) {
-			const dropdownAreaClick = this.dropdownRef?.dropdownElement?.nativeElement.contains(targetElement);
+			const dropdownAreaClick = this._dropdownRef?.dropdownElement?.nativeElement.contains(targetElement);
 
-			const inputAreaClick = (this.inputWrapperRef.nativeElement as HTMLElement).contains(targetElement);
+			const inputAreaClick = (this._inputWrapperRef.nativeElement as HTMLElement).contains(targetElement);
 
 			if (!inputAreaClick && !dropdownAreaClick) {
 				this.closeDropdown(false);

@@ -2,7 +2,7 @@ import { Meta, applicationConfig, StoryFn } from '@storybook/angular';
 import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
-import { FudisValidators } from '../../../utilities/form/validators';
+import { FudisGroupValidators, FudisValidators } from '../../../utilities/form/validators';
 import { SelectComponent } from './select.component';
 import readme from './readme.mdx';
 import { selectMockData, groupedMockData, defaultOptions } from './mock_data';
@@ -117,6 +117,7 @@ const AllSelectsTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => 
 				<fudis-select
 					[variant]="'autocomplete'"
 					[placeholder]="autocomplete.placeholder"
+					[autocompleteClearButton]="false"
 					[control]="autocomplete.control"
 					[label]="autocomplete.label"
 					[helpText]="autocomplete.helpText">
@@ -168,17 +169,16 @@ const ExampleTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 		...args,
 		defaultOptions,
 		control: new FormControl(
-			defaultOptions[2],
-			FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
+			[defaultOptions[2]],
+			FudisGroupValidators.min({ value: 4, message: 'KÄÄÄK VALITSE NELJÄ' })
 		),
 		groupedMockData,
 	},
 	template: html`
 		<fudis-select
-			[variant]="'autocomplete'"
 			[size]="size"
-			[multiselect]="false"
-			[showSelectionChips]="showSelectionChips"
+			[multiselect]="true"
+			[showSelectionChips]="true"
 			[placeholder]="placeholder"
 			[control]="control"
 			[label]="label"

@@ -37,7 +37,7 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 		});
 	}
 
-	@ViewChild('dropdownItem') dropdownItem: ElementRef;
+	@ViewChild('dropdownItem') dropdownItem: ElementRef<HTMLInputElement | HTMLButtonElement>;
 
 	@Input({ required: true }) data: FudisSelectOption;
 
