@@ -98,7 +98,7 @@ import { AlertComponent } from './components/alert/alert/alert.component';
 import { AlertGroupComponent } from './components/alert/alert-group/alert-group.component';
 import { FudisAlertService } from './services/alert/alert.service';
 import { FudisBreakpointService } from './services/breakpoint/breakpoint.service';
-import { SelectComponent } from './components/form/select/select.component';
+import { SelectComponent } from './components/form/select/select/select.component';
 import { SelectOptionComponent } from './components/form/select/select-option/select-option.component';
 import { SelectGroupComponent } from './components/form/select/select-group/select-group.component';
 import { DropdownItemBaseDirective } from './directives/form/dropdown-item-base/dropdown-item-base.directive';
@@ -106,6 +106,7 @@ import { DropdownBaseDirective } from './directives/form/dropdown-base/dropdown-
 import { SelectDropdownComponent } from './components/form/select/select-dropdown/select-dropdown.component';
 import { SelectMultiselectChipListComponent } from './components/form/select/select-multiselect-chip/select-multiselect-chip-list.component';
 import { SelectBaseDirective } from './components/form/select/select-base/select-base.directive';
+import { MultiselectComponent } from './components/form/select/multiselect/multiselect.component';
 
 @NgModule({
 	/*
@@ -138,6 +139,7 @@ import { SelectBaseDirective } from './components/form/select/select-base/select
 		DialogActionsDirective,
 		DialogContentDirective,
 		DialogCloseDirective,
+		DropdownBaseDirective,
 		DropdownComponent,
 		DropdownMenuComponent,
 		DropdownItemBaseDirective,
@@ -166,6 +168,7 @@ import { SelectBaseDirective } from './components/form/select/select-base/select
 		LanguageBadgeGroupComponent,
 		LanguageBadgeComponent,
 		LinkComponent,
+		MultiselectComponent,
 		NotificationComponent,
 		NotificationsDirective,
 		RadioButtonComponent,
@@ -182,7 +185,6 @@ import { SelectBaseDirective } from './components/form/select/select-base/select
 		TextInputComponent,
 		TextAreaComponent,
 		TooltipDirective,
-		DropdownBaseDirective,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.

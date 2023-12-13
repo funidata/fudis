@@ -1,6 +1,6 @@
 import { Component, ElementRef, Host, Input, ViewChild } from '@angular/core';
 import { FudisIdService } from '../../../../services/id/id.service';
-import { SelectComponent } from '../select.component';
+import { SelectComponent } from '../select/select.component';
 import { setVisibleOptionsList } from '../selectUtilities';
 
 @Component({

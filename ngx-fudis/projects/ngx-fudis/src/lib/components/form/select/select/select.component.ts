@@ -20,17 +20,18 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { FudisFocusService } from '../../../services/focus/focus.service';
-import { FudisIdService } from '../../../services/id/id.service';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
-import { FudisSelectOption, FudisInputSize } from '../../../types/forms';
-import { hasRequiredValidator } from '../../../utilities/form/getValidators';
+import { FudisFocusService } from '../../../../services/focus/focus.service';
+import { FudisIdService } from '../../../../services/id/id.service';
+import { FudisTranslationService } from '../../../../services/translation/translation.service';
 
-import { SelectDropdownComponent } from './select-dropdown/select-dropdown.component';
-import { joinInputValues, setVisibleOptionsList, sortValues } from './selectUtilities';
-import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
-import { ButtonComponent } from '../../button/button.component';
+import { FudisSelectOption } from '../../../../types/forms';
+import { hasRequiredValidator } from '../../../../utilities/form/getValidators';
+
+import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
+import { joinInputValues, setVisibleOptionsList, sortValues } from '../selectUtilities';
+import { ContentDirective } from '../../../../directives/content-projection/content/content.directive';
+import { ButtonComponent } from '../../../button/button.component';
+import { SelectBaseDirective } from '../select-base/select-base.directive';
 
 @Component({
 	selector: 'fudis-select',
@@ -38,7 +39,7 @@ import { ButtonComponent } from '../../button/button.component';
 	styleUrls: ['./select.component.scss'],
 	encapsulation: ViewEncapsulation.None,
 })
-export class SelectComponent extends InputBaseDirective implements OnInit, AfterViewInit, OnChanges, OnDestroy {
+export class SelectComponent extends SelectBaseDirective implements OnInit, AfterViewInit, OnChanges, OnDestroy {
 	constructor(
 		private _focusService: FudisFocusService,
 		_idService: FudisIdService,
@@ -74,19 +75,9 @@ export class SelectComponent extends InputBaseDirective implements OnInit, After
 	@Input({ required: true }) control: FormControl<FudisSelectOption | FudisSelectOption[] | null>;
 
 	/**
-	 * If true, user can choose multiple checkbox options from dropdown
-	 */
-	@Input() multiselect: boolean = false;
-
-	/**
 	 * Placeholder text for the dropdown input when no selection has been made
 	 */
 	@Input() placeholder: string;
-
-	/**
-	 * Available sizes for the dropdown
-	 */
-	@Input() size: FudisInputSize = 'lg';
 
 	/**
 	 * "dropdown" variant for regular dropdown and "autocomplete" enables user typing for search result filtering

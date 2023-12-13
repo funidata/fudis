@@ -1,9 +1,9 @@
-@use '../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../foundations/borders/mixins.scss' as borders;
-@use '../../../foundations/typography/mixins.scss' as typography;
-@use '../../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../../foundations/focus/mixins.scss' as focus;
-@use '../../../foundations/colors/tokens.scss' as colors;
+@use '../../../../foundations/spacing/tokens.scss' as spacing;
+@use '../../../../foundations/borders/mixins.scss' as borders;
+@use '../../../../foundations/typography/mixins.scss' as typography;
+@use '../../../../foundations/colors/mixins.scss' as colorMixins;
+@use '../../../../foundations/focus/mixins.scss' as focus;
+@use '../../../../foundations/colors/tokens.scss' as colors;
 
 .fudis-select-host {
 	display: block;

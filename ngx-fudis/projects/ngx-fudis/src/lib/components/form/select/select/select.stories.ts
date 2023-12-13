@@ -2,10 +2,10 @@ import { Meta, applicationConfig, StoryFn } from '@storybook/angular';
 import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
-import { FudisGroupValidators, FudisValidators } from '../../../utilities/form/validators';
+import { FudisGroupValidators, FudisValidators } from '../../../../utilities/form/validators';
 import { SelectComponent } from './select.component';
 import readme from './readme.mdx';
-import { selectMockData, groupedMockData, defaultOptions } from './mock_data';
+import { selectMockData, groupedMockData, defaultOptions } from '../mock_data';
 
 export default {
 	title: 'Components/Form/Select',

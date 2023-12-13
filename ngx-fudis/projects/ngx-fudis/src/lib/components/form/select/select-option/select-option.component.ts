@@ -3,7 +3,7 @@ import { Component, ElementRef, Host, HostBinding, Input, OnInit, Optional, View
 import { FudisSelectOption } from '../../../../types/forms';
 import { DropdownItemBaseDirective } from '../../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { FudisIdService } from '../../../../services/id/id.service';
-import { SelectComponent } from '../select.component';
+import { SelectComponent } from '../select/select.component';
 import { SelectGroupComponent } from '../select-group/select-group.component';
 
 @Component({
@@ -100,6 +100,8 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 	protected _handleKeyDown(event: KeyboardEvent, selector: string) {
 		if (event.key !== ' ') {
 			this._baseHandleKeyDown(event, this.dropdownItem, selector);
+		} else {
+			this._clickSelectOption(event);
 		}
 	}
 

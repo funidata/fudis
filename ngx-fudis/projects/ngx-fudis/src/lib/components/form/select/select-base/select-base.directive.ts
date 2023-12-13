@@ -1,10 +1,11 @@
 import { Directive, ElementRef, Input, ViewChild } from '@angular/core';
 import { FudisInputSize } from '../../../../types/forms';
+import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
 
 @Directive({
 	selector: '[fudisSelectBase]',
 })
-export class SelectBaseDirective {
+export class SelectBaseDirective extends InputBaseDirective {
 	@ViewChild('dropdownElement') dropdownElement: ElementRef<HTMLElement>;
 
 	/**
