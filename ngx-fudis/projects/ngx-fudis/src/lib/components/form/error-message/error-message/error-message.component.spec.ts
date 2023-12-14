@@ -8,6 +8,7 @@ import { ErrorMessageComponent } from './error-message.component';
 import { TextInputComponent } from '../../text-input/text-input.component';
 import { LabelComponent } from '../../label/label.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
+import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 import { ValidationErrorMessageComponent } from '../validation-error-message/validation-error-message.component';
 
 @Component({
@@ -16,16 +17,18 @@ import { ValidationErrorMessageComponent } from '../validation-error-message/val
 		<fudis-text-input [control]="errorMessageControl" [label]="'Test label'">
 			<fudis-error-message
 				#testError
-				*ngIf="errorMessageIsVisible"
+				*ngIf="errorMessageExists"
 				[message]="'Test error message'"
 				[visible]="errorMessageControl.touched && errorMessageControl.invalid" />
 		</fudis-text-input>
 	`,
 })
 class MockTestErrorComponent {
+	constructor(private _errorSummaryService: FudisInternalErrorSummaryService) {}
+
 	@ViewChild('testError') testError: ErrorMessageComponent;
 
-	errorMessageIsVisible: boolean;
+	errorMessageExists: boolean;
 
 	errorMessageControl: FormControl = new FormControl('', FudisValidators.required('This is required'));
 }
@@ -33,6 +36,7 @@ class MockTestErrorComponent {
 describe('ErrorMessageComponent', () => {
 	let component: MockTestErrorComponent;
 	let fixture: ComponentFixture<MockTestErrorComponent>;
+	let errorSummaryService: FudisInternalErrorSummaryService;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -46,13 +50,14 @@ describe('ErrorMessageComponent', () => {
 				ValidationErrorMessageComponent,
 			],
 			imports: [ReactiveFormsModule],
+			providers: [FudisInternalErrorSummaryService],
 		}).compileComponents();
 	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(MockTestErrorComponent);
 		component = fixture.componentInstance;
-		component.errorMessageIsVisible = true;
+		component.errorMessageExists = true;
 		fixture.detectChanges();
 	});
 
@@ -62,10 +67,39 @@ describe('ErrorMessageComponent', () => {
 	}
 
 	function hideErrorMessage() {
-		component.errorMessageIsVisible = false;
+		component.errorMessageExists = false;
 		component.errorMessageControl.markAsUntouched();
 		fixture.detectChanges();
 	}
+
+	describe('send message to error summary service ', () => {
+		beforeEach(() => {
+			errorSummaryService = TestBed.inject(
+				FudisInternalErrorSummaryService
+			) as jasmine.SpyObj<FudisInternalErrorSummaryService>;
+			spyOn(errorSummaryService, 'addNewError');
+
+			fixture.detectChanges();
+		});
+
+		it('should send error message when component is rendered', () => {
+			spyOn(component.testError, 'createCustomError');
+			component.testError.visible = false;
+			component.testError.ngOnInit();
+			fixture.detectChanges();
+
+			expect(component.testError.createCustomError).toHaveBeenCalledWith();
+		});
+
+		it('should remove error message when component is destroyed', () => {
+			spyOn(component.testError, 'removeCustomError');
+			component.testError.visible = false;
+			component.testError.ngOnDestroy();
+			fixture.detectChanges();
+
+			expect(component.testError.removeCustomError).toHaveBeenCalledWith();
+		});
+	});
 
 	describe('error message parent components', () => {
 		it('should display error message, when control is touched', () => {

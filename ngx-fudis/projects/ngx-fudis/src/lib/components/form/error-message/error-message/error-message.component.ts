@@ -20,8 +20,14 @@ export class ErrorMessageComponent extends ErrorMessageBaseDirective implements 
 		this._id = _idService.getNewId('error-message');
 	}
 
+	/**
+	 * Manually included parenLabel input for situations when multiple error messages are projected to same form component.
+	 */
 	@Input() parentLabel: string;
 
+	/**
+	 * Manually included parenId for linking multiple error messages with parent form component.
+	 */
 	@Input() parentId: string;
 
 	ngOnInit(): void {
@@ -29,22 +35,23 @@ export class ErrorMessageComponent extends ErrorMessageBaseDirective implements 
 			this._subscribtion = this.message.subscribe((value: string) => {
 				this._currentMessage = value;
 
-				this._createCustomError();
+				this.createCustomError();
 			});
 		} else if (this.message) {
 			this._currentMessage = this.message;
-			this._createCustomError();
+			this.createCustomError();
 		}
 	}
 
 	ngOnChanges(): void {
 		if (typeof this.message === 'string') {
 			this._currentMessage = this.message;
-			this._createCustomError();
+			this.createCustomError();
 		}
 	}
 
 	ngOnDestroy(): void {
+		this.removeCustomError();
 		if (this._subscribtion) {
 			this._subscribtion.unsubscribe();
 		}
@@ -55,12 +62,12 @@ export class ErrorMessageComponent extends ErrorMessageBaseDirective implements 
 
 		if (label !== this.parentLabel) {
 			this.parentLabel = label;
-			this._createCustomError();
+			this.createCustomError();
 		}
 	}
 
-	private _createCustomError(): void {
-		if (this._currentMessage && this.parentId && this.parentLabel && this.visible) {
+	public createCustomError(): void {
+		if (this._currentMessage && this.parentId && this.parentLabel) {
 			const newError: FudisFormErrorSummaryItem = {
 				id: this.parentId,
 				error: this._currentMessage,
@@ -70,7 +77,11 @@ export class ErrorMessageComponent extends ErrorMessageBaseDirective implements 
 				language: this._translationService.getLanguage(),
 			};
 			this._createError(newError);
-		} else if (this._errorSent && !this.visible && this.parentId) {
+		}
+	}
+
+	public removeCustomError(): void {
+		if (this._errorSent) {
 			this._errorSummaryService.removeError({
 				id: this.parentId,
 				type: this._id,
