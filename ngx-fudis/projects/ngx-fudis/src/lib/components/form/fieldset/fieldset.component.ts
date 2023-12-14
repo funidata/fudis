@@ -18,7 +18,7 @@ import { FudisGridWidth, FudisGridAlign, FudisGridMarginSide } from '../../../ty
 import { FudisSpacing } from '../../../types/miscellaneous';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { FudisIdService } from '../../../services/id/id.service';
-import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FudisFormErrorSummarySection, FudisInputSize } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 
@@ -32,7 +32,7 @@ export class FieldSetComponent extends FieldSetBaseDirective implements AfterVie
 	constructor(
 		_idService: FudisIdService,
 		_translationService: FudisTranslationService,
-		private _errorSummaryService: FudisErrorSummaryService
+		private _errorSummaryService: FudisInternalErrorSummaryService
 	) {
 		super(_idService, _translationService);
 	}

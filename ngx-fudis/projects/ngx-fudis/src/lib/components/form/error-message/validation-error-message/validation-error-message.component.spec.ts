@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ValidationErrorMessageComponent } from './validation-error-message.component';
-import { FudisErrorSummaryService } from '../../../../services/form/error-summary/error-summary.service';
+import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 
-describe('ErrorMessageComponent', () => {
+describe('ValidationErrorMessageComponent', () => {
 	let component: ValidationErrorMessageComponent;
 	let fixture: ComponentFixture<ValidationErrorMessageComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [ValidationErrorMessageComponent],
-			providers: [FudisErrorSummaryService],
+			providers: [FudisInternalErrorSummaryService],
 		}).compileComponents();
 	});
 

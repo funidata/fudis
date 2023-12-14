@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { FudisFormErrorSummaryItem } from '../../../../types/forms';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
-import { FudisErrorSummaryService } from '../../../../services/form/error-summary/error-summary.service';
+import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 import { ErrorMessageBaseDirective } from '../error-message-base/error-message-base.directive';
 
 @Component({
@@ -12,7 +12,7 @@ import { ErrorMessageBaseDirective } from '../error-message-base/error-message-b
 })
 export class ErrorMessageComponent extends ErrorMessageBaseDirective implements OnInit, OnChanges, OnDestroy {
 	constructor(
-		_errorSummaryService: FudisErrorSummaryService,
+		_errorSummaryService: FudisInternalErrorSummaryService,
 		_translationService: FudisTranslationService,
 		_idService: FudisIdService
 	) {

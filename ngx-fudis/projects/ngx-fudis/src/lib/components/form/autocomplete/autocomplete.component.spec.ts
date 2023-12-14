@@ -10,7 +10,7 @@ import { IconComponent } from '../../icon/icon.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { LabelComponent } from '../label/label.component';
 import { AutocompleteComponent } from './autocomplete.component';
-import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { ValidationErrorMessageComponent } from '../error-message/validation-error-message/validation-error-message.component';
 import { FudisInputSize } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
@@ -35,7 +35,7 @@ describe('AutocompleteComponent', () => {
 				MockComponent(ButtonComponent),
 				MockComponent(ValidationErrorMessageComponent),
 			],
-			providers: [FudisErrorSummaryService],
+			providers: [FudisInternalErrorSummaryService],
 			imports: [MatAutocompleteModule, ScrollingModule, ReactiveFormsModule, BrowserAnimationsModule],
 		}).compileComponents();
 

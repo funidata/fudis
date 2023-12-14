@@ -3,14 +3,14 @@ import { Observable, Subscription } from 'rxjs';
 import { FudisFormErrorSummaryItem } from '../../../../types/forms';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisIdService } from '../../../../services/id/id.service';
-import { FudisErrorSummaryService } from '../../../../services/form/error-summary/error-summary.service';
+import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 
 @Directive({
 	selector: '[fudisErrorMessageBase]',
 })
 export class ErrorMessageBaseDirective {
 	constructor(
-		protected _errorSummaryService: FudisErrorSummaryService,
+		protected _errorSummaryService: FudisInternalErrorSummaryService,
 		protected _translationService: FudisTranslationService,
 		protected _idService: FudisIdService
 	) {}

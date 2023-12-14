@@ -5,7 +5,7 @@ import { GridComponent } from '../../grid/grid/grid.component';
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
 import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { FudisGridService } from '../../../services/grid/grid.service';
-import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 
 describe('FieldSetComponent', () => {
@@ -15,7 +15,7 @@ describe('FieldSetComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [FieldSetComponent, MockComponent(GridComponent), GridApiDirective, GridDirective],
-			providers: [FudisGridService, FudisErrorSummaryService, FudisBreakpointService],
+			providers: [FudisGridService, FudisInternalErrorSummaryService, FudisBreakpointService],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(FieldSetComponent);

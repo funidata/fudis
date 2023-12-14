@@ -42,6 +42,8 @@ const preview = {
 					],
 					'Foundations',
 					'Components',
+          'Directives',
+          'Services',
 				],
 			},
 		},

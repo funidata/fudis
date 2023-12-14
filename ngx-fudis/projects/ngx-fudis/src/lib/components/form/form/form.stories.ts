@@ -13,6 +13,7 @@ import { FudisGroupValidators, FudisValidators } from '../../../utilities/form/v
 import { FormComponent } from './form.component';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
+import readme from './readme.mdx';
 
 @Component({
 	selector: 'example-form-content',
@@ -307,6 +308,9 @@ export default {
 		}),
 	],
 	parameters: {
+		docs: {
+			page: readme,
+		},
 		controls: {
 			exclude: ['control'],
 		},
