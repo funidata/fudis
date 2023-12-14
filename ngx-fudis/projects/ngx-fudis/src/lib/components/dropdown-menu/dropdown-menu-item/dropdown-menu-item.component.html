@@ -1,7 +1,7 @@
 <button
 	*ngIf="!_parentComponent.multiselect"
 	#dropdownItem
-	class="fudis-dropdown-menu-item"
+	class="fudis-dropdown-menu-item fudis-dropdown-menu-item__focusable"
 	[attr.role]="'menuitem'"
 	[attr.id]="_id"
 	[attr.aria-disabled]="disabled"
@@ -22,7 +22,7 @@
 		<div class="fudis-dropdown-menu-item__checkbox__box">
 			<input
 				type="checkbox"
-				class="fudis-dropdown-menu-item__checkbox__input"
+				class="fudis-dropdown-menu-item__checkbox__input fudis-dropdown-menu-item__focusable"
 				[attr.role]="'option'"
 				[attr.aria-checked]="checked"
 				(blur)="handleBlur.emit($event)"

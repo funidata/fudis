@@ -20,7 +20,7 @@
 			aria-haspopup="listbox"
 			(focus)="_inputFocus()"
 			(blur)="_inputBlur($event)"
-			(keydown)="_dropdownKeypress($event)"
+			(keydown)="_dropdownKeypress($event, '.fudis-select-option__focusable')"
 			[attr.aria-autocomplete]="'none'"
 			[attr.aria-expanded]="_dropdownOpen"
 			[attr.aria-disabled]="disabled"
@@ -45,7 +45,7 @@
 			aria-haspopup="listbox"
 			(focus)="_inputFocus()"
 			(blur)="_inputBlur($event); _setInputValueOnBlur()"
-			(keyup)="_autocompleteKeypress($event)"
+			(keyup)="_autocompleteSelectKeypress($event)"
 			[attr.aria-autocomplete]="'none'"
 			[attr.aria-disabled]="disabled"
 			[attr.placeholder]="placeholder"
@@ -90,12 +90,7 @@
 				[class.fudis-select__input-wrapper__icon-button--disabled]="control.disabled" />
 		</ng-container>
 	</div>
-	<fudis-select-dropdown
-		*ngIf="_openedOnce"
-		#dropdownRef
-		[open]="_dropdownOpen"
-		[multiselect]="multiselect"
-		[size]="size">
+	<fudis-select-dropdown *ngIf="_openedOnce" #dropdownRef [open]="_dropdownOpen" [size]="size">
 		<ng-container *ngIf="_content?.type === 'select-options'">
 			<ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>
 		</ng-container>
@@ -114,11 +109,4 @@
 		[for]="id"
 		[errorMsg]="errorMsg"
 		[control]="control" />
-	<ng-container *ngIf="control.value && multiselect && showSelectionChips">
-		<span [attr.id]="id + '-remove-items'" class="fudis-visually-hidden">{{ _removeItemText }}</span>
-		<fudis-select-multiselect-chip-list
-			[selectedItems]="_sortedSelectedOptions"
-			[parentId]="id"
-			(removedChipIndex)="_handleRemoveChip($event)" />
-	</ng-container>
 </div>

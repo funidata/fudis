@@ -31,6 +31,7 @@ export const fudisIdParents = [
 	'dropdown-menu',
 	'radio-button-group',
 	'select',
+	'multiselect',
 ] as const;
 
 export type FudisIdParent = (typeof fudisIdParents)[number];

@@ -44,6 +44,7 @@ export class FudisIdService {
 		'dropdown-menu': [],
 		'radio-button-group': [],
 		select: [],
+		multiselect: [],
 	};
 
 	/**

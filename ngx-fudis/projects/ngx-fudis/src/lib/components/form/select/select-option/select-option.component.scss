@@ -6,6 +6,57 @@
 @use '../../../../foundations/utilities/mixins.scss' as utilities;
 
 .fudis-select-option {
+	@include utilities.box-reset;
+	@include typography.body-text-md-light;
+	@include colorMixins.bg-color('transparent');
+	@include borders.border-none;
+
+	display: flex;
+	position: relative;
+	align-items: flex-start;
+	justify-content: space-between;
+	cursor: pointer;
+	padding-left: spacing.$spacing-sm;
+	width: 100%;
+	min-height: spacing.$spacing-lg;
+	overflow: hidden;
+	text-align: left;
+
+	/* stylelint-disable-next-line selector-class-pattern */
+	&:not(.fudis-select-option__focusable) {
+		display: none;
+		visibility: none;
+	}
+
+	&:hover {
+		@include colorMixins.bg-color('primary-light');
+		@include colorMixins.text-color('gray-dark');
+	}
+
+	&:focus-visible,
+	&:focus {
+		@include colorMixins.bg-color('primary-light');
+		@include focus.focus-dropdown;
+	}
+
+	&:active {
+		@include colorMixins.bg-color('primary');
+		@include colorMixins.text-color('white');
+	}
+
+	&--disabled {
+		@include colorMixins.bg-color('gray-extra-light');
+		@include colorMixins.text-color('gray-middle');
+
+		cursor: default;
+	}
+
+	&__focusable,
+	&--visible {
+		display: flex;
+		visibility: visible;
+	}
+
 	&__disabled-text {
 		padding-right: spacing.$spacing-xs;
 	}
@@ -14,141 +65,5 @@
 		margin: spacing.$spacing-xs 0;
 		/* stylelint-disable-next-line property-disallowed-list */
 		line-height: spacing.$spacing-sm;
-	}
-
-	&__single-select {
-		@include utilities.box-reset;
-		@include typography.body-text-md-light;
-		@include colorMixins.bg-color('transparent');
-		@include borders.border-none;
-
-		display: flex;
-		position: relative;
-		align-items: flex-start;
-		justify-content: space-between;
-		cursor: pointer;
-		padding-left: spacing.$spacing-sm;
-		width: 100%;
-		min-height: spacing.$spacing-lg;
-		overflow: hidden;
-		text-align: left;
-
-		/* stylelint-disable-next-line selector-class-pattern */
-		&:not(.fudis-select-option__focusable) {
-			display: none;
-			visibility: none;
-		}
-
-		&:hover {
-			@include colorMixins.bg-color('primary-light');
-			@include colorMixins.text-color('gray-dark');
-		}
-
-		&:focus-visible,
-		&:focus {
-			@include colorMixins.bg-color('primary-light');
-			@include focus.focus-dropdown;
-		}
-
-		&:active {
-			@include colorMixins.bg-color('primary');
-			@include colorMixins.text-color('white');
-		}
-
-		&--disabled {
-			@include colorMixins.bg-color('gray-extra-light');
-			@include colorMixins.text-color('gray-middle');
-
-			cursor: default;
-		}
-
-		&__focusable,
-		&--visible {
-			display: block;
-			visibility: visible;
-		}
-	}
-
-	&__multiselect {
-		@include colorMixins.text-color('gray-dark');
-
-		width: auto;
-
-		/* stylelint-disable-next-line selector-class-pattern */
-		&:not(.fudis-select-option--visible) {
-			display: none;
-			visibility: none;
-		}
-
-		&:hover {
-			@include colorMixins.bg-color('primary-light');
-		}
-
-		&--disabled {
-			@include colorMixins.bg-color('gray-extra-light');
-			@include colorMixins.text-color('gray-middle');
-
-			cursor: default;
-		}
-
-		&--checked {
-			@include colorMixins.text-color('white');
-			@include colorMixins.bg-color('primary');
-
-			&:hover {
-				@include colorMixins.text-color('gray-dark');
-			}
-		}
-
-		&--focused {
-			@include colorMixins.bg-color('primary-light');
-			@include colorMixins.text-color('gray-dark');
-		}
-
-		&__label {
-			@include typography.body-text-md-regular;
-
-			display: flex;
-			align-items: center;
-			margin-bottom: 0;
-			padding: spacing.$spacing-xs spacing.$spacing-xs spacing.$spacing-xs 0;
-
-			&__checkbox {
-				@include borders.border('1px', 'solid', 'gray-middle');
-
-				display: flex;
-				position: absolute;
-				align-items: center;
-				justify-content: center;
-				margin: spacing.$spacing-xs;
-				border-radius: 0;
-				cursor: pointer;
-				width: spacing.$spacing-sm;
-				height: spacing.$spacing-sm;
-
-				&__icon {
-					@include colorMixins.bg-color('white');
-				}
-
-				&__input {
-					@include utilities.box-reset;
-
-					appearance: none;
-					display: grid;
-					position: absolute;
-					place-content: center;
-
-					/* stylelint-disable-next-line max-nesting-depth */
-					&:focus {
-						@include focus.focus-checkbox;
-					}
-				}
-			}
-
-			&__text {
-				position: relative;
-				margin-left: spacing.$spacing-lg;
-			}
-		}
 	}
 }

@@ -107,6 +107,7 @@ import { SelectDropdownComponent } from './components/form/select/select-dropdow
 import { SelectMultiselectChipListComponent } from './components/form/select/select-multiselect-chip/select-multiselect-chip-list.component';
 import { SelectBaseDirective } from './components/form/select/select-base/select-base.directive';
 import { MultiselectComponent } from './components/form/select/multiselect/multiselect.component';
+import { MultiselectOptionComponent } from './components/form/select/multiselect-option/multiselect-option.component';
 
 @NgModule({
 	/*
@@ -169,6 +170,7 @@ import { MultiselectComponent } from './components/form/select/multiselect/multi
 		LanguageBadgeComponent,
 		LinkComponent,
 		MultiselectComponent,
+		MultiselectOptionComponent,
 		NotificationComponent,
 		NotificationsDirective,
 		RadioButtonComponent,
@@ -259,6 +261,8 @@ import { MultiselectComponent } from './components/form/select/multiselect/multi
 		InputWithLanguageOptionsComponent,
 		LanguageBadgeGroupComponent,
 		LinkComponent,
+		MultiselectComponent,
+		MultiselectOptionComponent,
 		NotificationComponent,
 		NotificationsDirective,
 		RadioButtonGroupComponent,

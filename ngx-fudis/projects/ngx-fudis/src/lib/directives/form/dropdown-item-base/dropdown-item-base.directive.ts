@@ -1,9 +1,12 @@
-import { Directive, ElementRef, EventEmitter, Input, Output } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Directive, ElementRef, EventEmitter, Inject, Input, Output } from '@angular/core';
 
 @Directive({
 	selector: '[fudisDropdownItemBase]',
 })
 export class DropdownItemBaseDirective {
+	constructor(@Inject(DOCUMENT) protected _document: Document) {}
+
 	/**
 	 * Option for closing or leaving dropdown open after clicking an item. Closes by default.
 	 */
@@ -37,19 +40,21 @@ export class DropdownItemBaseDirective {
 	// eslint-disable-next-line class-methods-use-this
 	protected _baseHandleKeyDown(event: KeyboardEvent, element: ElementRef, selector: string) {
 		if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-			const focusElement = document.querySelector(':focus');
-			const tabElements = document.querySelectorAll(selector);
-			const tabElementsCount = tabElements.length - 1;
+			const focusElement = this._document.querySelector(':focus');
+
+			const siblingElements = element.nativeElement.closest('.fudis-select-dropdown').querySelectorAll(selector);
+
+			const siblingElementsCount = siblingElements.length - 1;
 			event.preventDefault();
 
-			const focusIndex = Array.prototype.indexOf.call(tabElements, focusElement);
+			const focusIndex = Array.prototype.indexOf.call(siblingElements, focusElement);
 
 			let elementToFocus = element.nativeElement;
 			if (event.key === 'ArrowUp') {
-				elementToFocus = tabElements[focusIndex > 0 ? focusIndex - 1 : tabElementsCount];
+				elementToFocus = siblingElements[focusIndex > 0 ? focusIndex - 1 : siblingElementsCount];
 			}
 			if (event.key === 'ArrowDown') {
-				elementToFocus = tabElements[focusIndex < tabElementsCount ? focusIndex + 1 : 0];
+				elementToFocus = siblingElements[focusIndex < siblingElementsCount ? focusIndex + 1 : 0];
 			}
 			elementToFocus.focus();
 		}

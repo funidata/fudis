@@ -1,4 +1,5 @@
-import { OnInit, Component, ElementRef, Host, ViewChild, Input, Optional } from '@angular/core';
+import { OnInit, Component, ElementRef, Host, ViewChild, Input, Optional, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { DropdownMenuComponent } from '../dropdown-menu.component';
 import { FudisIdService } from '../../../services/id/id.service';
 import { DropdownItemBaseDirective } from '../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
@@ -13,9 +14,10 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective impleme
 	constructor(
 		private _idService: FudisIdService,
 		@Host() protected _parentComponent: DropdownMenuComponent,
+		@Inject(DOCUMENT) _document: Document,
 		@Host() @Optional() protected _parentButton: ButtonComponent
 	) {
-		super();
+		super(_document);
 	}
 
 	@ViewChild('dropdownItem') dropdownItem: ElementRef;
@@ -35,7 +37,7 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective impleme
 	}
 
 	protected _handleKeyDown(event: KeyboardEvent) {
-		this._baseHandleKeyDown(event, this.dropdownItem, 'fudis-dropdown-menu-item button');
+		this._baseHandleKeyDown(event, this.dropdownItem, '.fudis-dropdown-menu-item__focusable');
 	}
 
 	protected _handleButtonBlur(event: FocusEvent): void {
