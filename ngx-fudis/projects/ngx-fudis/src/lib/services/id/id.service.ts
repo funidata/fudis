@@ -33,7 +33,7 @@ export class FudisIdService {
 		section: [],
 		'text-area': [],
 		'text-input': [],
-		'validation-error-message': [],
+		'validator-error-message': [],
 	};
 
 	/**

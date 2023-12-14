@@ -53,7 +53,7 @@ import { DropdownMenuItemComponent } from './components/dropdown-menu/dropdown-m
 
 import { FudisDropdownMenuItemService } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { FudisFocusService } from './services/focus/focus.service';
-import { ValidationErrorMessageComponent } from './components/form/error-message/validation-error-message/validation-error-message.component';
+import { ValidatorErrorMessageComponent } from './components/form/error-message/validator-error-message/validator-error-message.component';
 import { FudisInternalErrorSummaryService } from './services/form/error-summary/internal-error-summary.service';
 import { FudisErrorSummaryService } from './services/form/error-summary/error-summary.service';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
@@ -140,7 +140,7 @@ import { ErrorMessageBaseDirective } from './components/form/error-message/error
 		DropdownComponent,
 		DropdownMenuComponent,
 		DropdownMenuItemComponent,
-		ValidationErrorMessageComponent,
+		ValidatorErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,
 		FieldSetBaseDirective,

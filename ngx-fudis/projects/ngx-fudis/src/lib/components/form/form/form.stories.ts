@@ -59,7 +59,7 @@ import readme from './readme.mdx';
 													This is notification for a fieldset. It has one custom error-message which should pop up in
 													the error summary on submit.
 												</fudis-body-text>
-												<fudis-validation-error-message
+												<fudis-validator-error-message
 													[type]="'fieldset'"
 													[variant]="'body-text'"
 													[visible]="true"

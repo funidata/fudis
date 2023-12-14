@@ -6,11 +6,11 @@ import { ErrorMessageBaseDirective } from '../error-message-base/error-message-b
 import { FudisFormErrorSummaryItem } from '../../../../types/forms';
 
 @Component({
-	selector: 'fudis-validation-error-message',
-	templateUrl: './validation-error-message.component.html',
+	selector: 'fudis-validator-error-message',
+	templateUrl: './validator-error-message.component.html',
 	styleUrls: ['../error-message/error-message.component.scss'],
 })
-export class ValidationErrorMessageComponent
+export class ValidatorErrorMessageComponent
 	extends ErrorMessageBaseDirective
 	implements OnInit, OnChanges, OnDestroy, AfterViewInit
 {
@@ -20,7 +20,7 @@ export class ValidationErrorMessageComponent
 		_idService: FudisIdService
 	) {
 		super(_errorSummaryService, _translationService, _idService);
-		this._id = _idService.getNewId('validation-error-message');
+		this._id = _idService.getNewId('validator-error-message');
 	}
 
 	/**

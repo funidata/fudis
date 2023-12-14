@@ -9,7 +9,7 @@ import { TextInputComponent } from '../../text-input/text-input.component';
 import { LabelComponent } from '../../label/label.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
-import { ValidationErrorMessageComponent } from '../validation-error-message/validation-error-message.component';
+import { ValidatorErrorMessageComponent } from '../validator-error-message/validator-error-message.component';
 
 @Component({
 	selector: 'fudis-mock-test-error',
@@ -47,7 +47,7 @@ describe('ErrorMessageComponent', () => {
 				MockComponent(LabelComponent),
 				TextInputComponent,
 				MockComponent(GuidanceComponent),
-				ValidationErrorMessageComponent,
+				ValidatorErrorMessageComponent,
 			],
 			imports: [ReactiveFormsModule],
 			providers: [FudisInternalErrorSummaryService],

@@ -18,7 +18,7 @@ import { GridDirective } from '../../../directives/grid/grid/grid.directive';
 import { IconComponent } from '../../icon/icon.component';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { GuidanceComponent } from '../guidance/guidance.component';
-import { ValidationErrorMessageComponent } from '../error-message/validation-error-message/validation-error-message.component';
+import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 
 const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
 	{
@@ -83,7 +83,7 @@ describe('CheckboxGroupComponent', () => {
 				ContentDirective,
 				GuidanceComponent,
 				IconComponent,
-				ValidationErrorMessageComponent,
+				ValidatorErrorMessageComponent,
 			],
 			providers: [FudisBreakpointService, FudisGridService],
 			imports: [ReactiveFormsModule],

@@ -17,7 +17,7 @@ import { FudisGridService } from '../../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoint.service';
 import { GridComponent } from '../../../grid/grid/grid.component';
 import { IconComponent } from '../../../icon/icon.component';
-import { ValidationErrorMessageComponent } from '../../error-message/validation-error-message/validation-error-message.component';
+import { ValidatorErrorMessageComponent } from '../../error-message/validator-error-message/validator-error-message.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 
 @Component({
@@ -50,7 +50,7 @@ describe('RadioButtonComponent', () => {
 				ContentDirective,
 				GuidanceComponent,
 				IconComponent,
-				ValidationErrorMessageComponent,
+				ValidatorErrorMessageComponent,
 			],
 			providers: [FudisIdService, FudisBreakpointService, FudisGridService, FudisTranslationService],
 			imports: [ReactiveFormsModule],
