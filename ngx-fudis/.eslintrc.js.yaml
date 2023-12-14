@@ -1,0 +1,7 @@
+root: true
+extends:
+  - '.eslintrc.yaml'
+overrides:
+  - files: transloco.config.js
+    env:
+      node: true

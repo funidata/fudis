@@ -1,0 +1,7 @@
+root: true
+extends:
+  - '.eslintrc.yaml'
+  - 'plugin:@angular-eslint/template/recommended'
+  - 'plugin:@angular-eslint/template/accessibility'
+  # Keep prettier last so it overrides other configs correctly!
+  - prettier

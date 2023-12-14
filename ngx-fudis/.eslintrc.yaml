@@ -1,0 +1,8 @@
+root: true
+ignorePatterns:
+  - 'projects/ngx-fudis/coverage'
+  - 'coverage'
+  - 'dist'
+  - 'static'
+extends:
+  - 'eslint:recommended'

@@ -1,0 +1,10 @@
+root: true
+parser: '@typescript-eslint/parser'
+extends:
+  - '.eslintrc.yaml'
+  - 'plugin:@typescript-eslint/recommended'
+  - 'plugin:@angular-eslint/eslint-plugin/recommended'
+  # Keep prettier last so it overrides other configs correctly!
+  - prettier
+parserOptions:
+  project: 'tsconfig.json'

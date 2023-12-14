@@ -1,40 +1,38 @@
 {
-	"extends": [
-		"stylelint-config-standard-scss",
-		"stylelint-config-sass-guidelines",
-		"stylelint-prettier/recommended",
-		"stylelint-config-prettier-scss",
-		"stylelint-config-concentric-order"
-	],
-	"ignoreFiles": [
-		"dist/**/*.scss",
-		"static/**/*",
-		"projects/ngx-fudis/style.scss",
-		"coverage/**/*"
-	],
-	"rules": {
-		"order/properties-alphabetical-order": null,
-		"color-no-hex": true,
-		"color-hex-length": "long",
-		"unit-disallowed-list": [
-			"px",
-			"rem"
-		],
-		"max-nesting-depth": 4,
-		"declaration-no-important": true,
-		"selector-max-class": 2,
-		"selector-class-pattern": "fudis-([a-z][a-z0-9]*)(-[a-z0-9]+)*$",
-		"no-descending-specificity": true,
-		"property-disallowed-list": [
-			"color",
-			"background",
-			"background-color",
-			"border",
-			"outline",
-			"font-size",
-			"line-height",
-			"font-family",
-			"z-index"
-		]
-	}
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-config-sass-guidelines",
+    "stylelint-prettier/recommended",
+    "stylelint-config-prettier-scss",
+    "stylelint-config-concentric-order"
+  ],
+  "ignoreFiles": [
+    "dist/**/*",
+    "static/**/*",
+    "projects/ngx-fudis/style.scss",
+    "projects/ngx-fudis/coverage/**/*",
+    "coverage/**/*"
+  ],
+  "rules": {
+    "order/properties-alphabetical-order": null,
+    "color-no-hex": true,
+    "color-hex-length": "long",
+    "unit-disallowed-list": ["px", "rem"],
+    "max-nesting-depth": 4,
+    "declaration-no-important": true,
+    "selector-max-class": 2,
+    "selector-class-pattern": "fudis-([a-z][a-z0-9]*)(-[a-z0-9]+)*$",
+    "no-descending-specificity": true,
+    "property-disallowed-list": [
+      "color",
+      "background",
+      "background-color",
+      "border",
+      "outline",
+      "font-size",
+      "line-height",
+      "font-family",
+      "z-index"
+    ]
+  }
 }
