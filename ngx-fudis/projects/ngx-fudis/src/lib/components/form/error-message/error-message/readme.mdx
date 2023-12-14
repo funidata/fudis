@@ -18,9 +18,9 @@ Read the following documentation on exceptions and on how to use multiple custom
 
 ### Mandatory Properties
 
-The mandatory properties for error-message are `message` and `visible`. Error Message component takes a message parameter either as a string or as an observable string.
-The property visible is a boolean value that determines when an error is displayed, but has no effect on the form's validity. In order for the error message alert icon to be displayed, 
-the related form control must be in invalid state and passed to error message component in `visible` property.
+The mandatory properties for Error Message are `message` and `visible`. Also, the **NgIf** directive is required so that the Error Message can be passed to Error Summary Component. For the properties, the message parameter can be either passed as a string or as an observable string.
+The property visible is a boolean value that is designed to be used with form control state in determining when an error is shown. Notice that property visible does not have an effect on the form's validity. In order for the error message alert icon to be displayed, 
+the related form control must be in invalid state and passed to Error Message component in visible property.
 
 ````
 <form [formGroup]="mainFormGroup">
@@ -30,7 +30,7 @@ the related form control must be in invalid state and passed to error message co
 	<fudis-error-message
 		*ngIf="true"
 		[message]="'This is a custom error message has been added with content projection'"
-		[visible]="true" />
+		[visible]="mainFormGroup.controls['required'].touched" />
 </fudis-text-input>
 </form>`
 ````
