@@ -28,6 +28,7 @@ the related form control must be in invalid state and passed to error message co
 	[control]="mainFormGroup.controls['required']"
 	[label]="'Required text input'">
 	<fudis-error-message
+		*ngIf="true"
 		[message]="'This is a custom error message has been added with content projection'"
 		[visible]="true" />
 </fudis-text-input>
@@ -45,10 +46,10 @@ When it is mandatory to target error message to a single Form Control in Date Ra
 `````
 <fudis-date-range [startDate]="startDate" [endDate]="endDate">
 	<ng-template fudisDateStartError>
-		<fudis-error-message [message]="'Backend threw an error on start date'" [visible]="true" />
+		<fudis-error-message *ngIf="true" [message]="'Backend threw an error on start date'" [visible]="true" />
 	</ng-template>
 	<ng-template fudisDateEndError>
-		<fudis-error-message [message]="'Backend threw an error on end date'" [visible]="true" />
+		<fudis-error-message *ngIf="true" [message]="'Backend threw an error on end date'" [visible]="true" />
 	</ng-template>
 </fudis-date-range>
 `````

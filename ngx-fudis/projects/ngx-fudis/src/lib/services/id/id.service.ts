@@ -19,7 +19,6 @@ export class FudisIdService {
 		autocomplete: [],
 		button: [],
 		'autocomplete-multi-select': [],
-		'custom-error-message': [],
 		datepicker: [],
 		daterange: [],
 		dialog: [],
@@ -34,6 +33,7 @@ export class FudisIdService {
 		section: [],
 		'text-area': [],
 		'text-input': [],
+		'validation-error-message': [],
 	};
 
 	/**

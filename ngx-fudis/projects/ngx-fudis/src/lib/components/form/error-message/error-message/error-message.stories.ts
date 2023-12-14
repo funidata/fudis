@@ -10,8 +10,9 @@ import readme from './readme.mdx';
 	template: ` <form [formGroup]="mainFormGroup">
 		<fudis-text-input [control]="mainFormGroup.controls['required']" [label]="'Required text input'">
 			<fudis-error-message
+				*ngIf="mainFormGroup.controls['required'].touched"
 				[message]="'This is a custom error message that has been added with content projection'"
-				[visible]="true" />
+				[visible]="mainFormGroup.controls['required'].touched" />
 		</fudis-text-input>
 	</form>`,
 })

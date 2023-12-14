@@ -20,7 +20,7 @@ export class ValidationErrorMessageComponent
 		_idService: FudisIdService
 	) {
 		super(_errorSummaryService, _translationService, _idService);
-		this._id = _idService.getNewId('error-message');
+		this._id = _idService.getNewId('validation-error-message');
 	}
 
 	/**

@@ -7,7 +7,6 @@ export const fudisIdComponents = [
 	'autocomplete',
 	'button',
 	'autocomplete-multi-select',
-	'custom-error-message',
 	'datepicker',
 	'daterange',
 	'dialog',
@@ -22,6 +21,7 @@ export const fudisIdComponents = [
 	'section',
 	'text-area',
 	'text-input',
+	'validation-error-message',
 ] as const;
 
 export type FudisIdComponent = (typeof fudisIdComponents)[number];

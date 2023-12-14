@@ -17,7 +17,7 @@ export class ErrorMessageComponent extends ErrorMessageBaseDirective implements 
 		_idService: FudisIdService
 	) {
 		super(_errorSummaryService, _translationService, _idService);
-		this._id = _idService.getNewId('custom-error-message');
+		this._id = _idService.getNewId('error-message');
 	}
 
 	@Input() parentLabel: string;
