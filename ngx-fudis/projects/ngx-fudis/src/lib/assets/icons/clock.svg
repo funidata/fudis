@@ -1,5 +1,1 @@
-<svg class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" id="clock">
-    <path class="a" d="M8.5,15A6.5,6.5,0,1,1,15,21.5,6.5,6.5,0,0,1,8.5,15Zm12,0A5.5,5.5,0,1,0,15,20.5,5.5,5.5,0,0,0,20.5,15Z"/>
-    <polygon class="a" points="17.242 16.855 14.5 15.291 14.5 10.5 15.5 10.5 15.5 14.71 17.738 15.986 17.242 16.855"/>
-    <path class="b" d="M10.5,14.5h1v1h-1Zm8,0h1v1h-1Zm-4,4h1v1h-1Z"/>
-</svg>
+<svg id="clock" xmlns="http://www.w3.org/2000/svg" width="32" height="32"><path fill-rule="evenodd" d="M9.066 16a6.933 6.933 0 1 1 13.867 0 6.933 6.933 0 0 1-13.867 0Zm12.8 0A5.867 5.867 0 0 0 16 10.133 5.877 5.877 0 0 0 10.133 16a5.867 5.867 0 0 0 11.733 0Z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M16.5 15.71V11.2h-1v5.09l2.908 1.659.496-.869-2.404-1.37Z" clip-rule="evenodd"/><path d="M11.2 15.467h1.067v1.067H11.2zM19.733 15.467H20.8v1.067h-1.067zM15.467 19.733h1.067V20.8h-1.067z"/></svg>

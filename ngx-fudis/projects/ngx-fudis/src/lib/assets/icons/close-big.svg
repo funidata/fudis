@@ -1,3 +1,1 @@
-<svg class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="close-big">
-    <path class="a" d="M16.0459,14.9855l7.9551-7.955A.75.75,0,1,0,22.94,5.97l-7.955,7.9551L7.03,5.97A.75.75,0,1,0,5.97,7.0305l7.9551,7.955L5.97,22.9406A.75.75,0,1,0,7.03,24.0012l7.9551-7.9551,7.955,7.9551a.75.75,0,0,0,1.0606-1.0606Z"/>
-</svg>
+<svg id="close-big" xmlns="http://www.w3.org/2000/svg" width="32" height="32"><path fill-rule="evenodd" d="M25.566 6.403a.75.75 0 0 1 0 1.06L7.464 25.567a.75.75 0 0 1-1.06-1.061L24.504 6.403a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M6.403 6.403a.75.75 0 0 1 1.06 0l18.103 18.102a.75.75 0 0 1-1.06 1.06L6.402 7.465a.75.75 0 0 1 0-1.061Z" clip-rule="evenodd"/></svg>

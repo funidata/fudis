@@ -1,12 +1,1 @@
-<svg class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="change-log">
-    <defs>
-        <mask id="a" x="8.5" y="8.5" width="13" height="13" maskUnits="userSpaceOnUse">
-            <path class="a" d="M8.5,15a6.5,6.5,0,1,1,3.5023,5.7675l.4632-.8913A5.4956,5.4956,0,1,0,9.5045,15Z"/>
-        </mask>
-    </defs>
-    <polygon class="b" points="17.243 16.929 14.5 15.283 14.5 10.5 15.5 10.5 15.5 14.717 17.757 16.071 17.243 16.929"/>
-    <g class="c">
-        <path class="b" d="M8.5,15a6.5,6.5,0,1,1,3.5023,5.7675l.4632-.8913A5.4956,5.4956,0,1,0,9.5045,15Z"/>
-    </g>
-    <polygon class="b" points="9 17.5 7 15 11 15 9 17.5"/>
-</svg>
+<svg id="change-log" xmlns="http://www.w3.org/2000/svg" width="32" height="32"><path fill-rule="evenodd" d="M16.5 15.717V11.2h-1v5.083l2.91 1.746.514-.858-2.424-1.454Z" clip-rule="evenodd"/><path d="M9.066 16a6.934 6.934 0 1 1 3.736 6.152l.494-.95A5.862 5.862 0 1 0 10.138 16H9.066Z"/><path d="M7.467 16h4.266L9.6 18.667 7.467 16Z"/></svg>
