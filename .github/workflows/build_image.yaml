@@ -16,10 +16,10 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ngx-fudis
-          tags: fudis
-          outputs: type=docker,dest=/tmp/fudis.tar
+          tags: fudis-test
+          outputs: type=docker,dest=/tmp/fudis-test.image.tar
       - name: Save image as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: fudis
-          path: /tmp/fudis.tar
+          name: fudis-test
+          path: /tmp/fudis-test.image.tar
