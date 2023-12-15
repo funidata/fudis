@@ -12,10 +12,7 @@
     "storybook": "ng run storybook:start",
     "build-storybook": "npm run docs:json && STORYBOOK_FUDIS_VERSION=\"${STORYBOOK_FUDIS_VERSION- }\" ng run storybook:build",
     "stylelint-scss-check": "stylelint-config-prettier-scss-check",
-    "lint": "npm run lint:ts && npm run lint:js && npm run lint:html",
-    "lint:ts": "eslint -c .eslintrc.ts.yaml --ext .ts .",
-    "lint:js": "eslint -c .eslintrc.js.yaml --ext .js .",
-    "lint:html": "eslint -c .eslintrc.html.yaml --ext .html .",
+    "lint": "eslint .",
     "stylelint": "stylelint '**/*.{css,scss}'"
   },
   "private": true,

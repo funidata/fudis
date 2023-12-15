@@ -1,4 +1,8 @@
 {
+  // IMPORTANT! Due to the way eslint resolves configuration, this settings is required to make
+  // `esbenp.prettier-vscode` (eslint VS Code support) work when you open VS Code in repository root.
+  // (Without this you will have to open VS Code in `ngx-fudis/` folder, where .eslintrc resides).
+  "eslint.workingDirectories": ["ngx-fudis"],
   // It is debatable, whether even `formatOnSave` should be included here or left up to the developer.
   "editor.formatOnSave": true,
   // This is useful as it makes the formatting change applied by prettier smaller which is at least visually appealing.

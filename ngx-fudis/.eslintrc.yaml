@@ -1,8 +1,32 @@
 root: true
 ignorePatterns:
-  - 'projects/ngx-fudis/coverage'
-  - 'coverage'
-  - 'dist'
-  - 'static'
+  - "projects/ngx-fudis/coverage"
+  - "coverage"
+  - "dist"
+  - "static"
 extends:
-  - 'eslint:recommended'
+  - "eslint:recommended"
+overrides:
+  - files: "**/*.ts"
+    parser: "@typescript-eslint/parser"
+    extends:
+      - "plugin:@typescript-eslint/recommended"
+      - "plugin:@angular-eslint/eslint-plugin/recommended"
+      # Keep prettier last so it overrides other configs correctly!
+      - prettier
+    parserOptions:
+      project: "tsconfig.json"
+
+  - files: transloco.config.js
+    extends:
+      # Keep prettier last so it overrides other configs correctly!
+      - prettier
+    env:
+      node: true
+
+  - files: "**/*.html"
+    extends:
+      - "plugin:@angular-eslint/template/recommended"
+      - "plugin:@angular-eslint/template/accessibility"
+      # Keep prettier last so it overrides other configs correctly!
+      - prettier
