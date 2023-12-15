@@ -38,10 +38,10 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 		super(_translationService, _idService);
 
 		effect(() => {
-			this._openAriaLabel = this._translations().SELECT.OPEN_DROPDOWN;
-			this._closeAriaLabel = this._translations().SELECT.CLOSE_DROPDOWN;
-			this._noResultsFound = this._translations().SELECT.AUTOCOMPLETE.NO_RESULTS;
-			this._clearFilterText = this._translations().SELECT.AUTOCOMPLETE.CLEAR;
+			this._translationOpenAriaLabel = this._translations().SELECT.OPEN_DROPDOWN;
+			this._translationCloseAriaLabel = this._translations().SELECT.CLOSE_DROPDOWN;
+			this._translationNoResultsFound = this._translations().SELECT.AUTOCOMPLETE.NO_RESULTS;
+			this._translationClearFilterText = this._translations().SELECT.AUTOCOMPLETE.CLEAR;
 		});
 	}
 
@@ -106,24 +106,29 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	public controlValueChangedInternally: boolean = false;
 
 	/**
-	 * Internal property for toggle dropdown visibility
+	 * For setting dropdown open / closed
 	 */
 	protected _dropdownOpen: boolean = false;
 
 	/**
 	 * Internal translated text for icon-only button aria-label when opening dropdown
 	 */
-	protected _openAriaLabel: string;
+	protected _translationOpenAriaLabel: string;
 
 	/**
 	 * Internal translated text for icon-only button aria-label when closing dropdown
 	 */
-	protected _closeAriaLabel: string;
+	protected _translationCloseAriaLabel: string;
 
 	/**
 	 * Internal translated label for situations where no results with current filters were found
 	 */
-	protected _noResultsFound: string;
+	protected _translationNoResultsFound: string;
+
+	/**
+	 * Translated aria-label for autocomplete close icon button which clears the input
+	 */
+	protected _translationClearFilterText: string;
 
 	/**
 	 * Signal to Select & MultiselectOption for listening autocomplete filter text changes
@@ -141,11 +146,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	protected _visibleOptionsValues: string[] = [];
 
 	/**
-	 * Translated aria-label for autocomplete close icon button which clears the input
-	 */
-	protected _clearFilterText: string;
-
-	/**
 	 * Status of input focus
 	 */
 	protected _inputFocused: boolean = false;
@@ -159,6 +159,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	 * Used to handle exceptions when mouse click event fires before / after focus event
 	 */
 	protected _preventClick: boolean = false;
+
+	protected _preventAutocompleteKeypress: boolean = false;
 
 	/**
 	 * Subscription to listen to control's value changes coming from outside Fudis components
@@ -196,8 +198,15 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 		}
 	}
 
+	public closeDropdownFromSelection(): void {
+		this._dropdownOpen = false;
+		this._preventAutocompleteKeypress = true;
+		this._preventDropdownReopen = true;
+		this.inputRef.nativeElement.focus();
+	}
+
 	/**
-	 * Each option sends information to parent if they are visible or not
+	 * With autocomplete, each option sends information to parent if they are visible or not
 	 * @param value option value
 	 * @param visible is this option visible or not
 	 */
@@ -207,6 +216,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 
 	/**
 	 * Clear any written or selected value in the autocomplete field
+	 * @param resetControlValue reset or not control value
 	 */
 	protected _clearAutocompleteFilterText(resetControlValue?: boolean): void {
 		// Clear input field and control value
@@ -300,7 +310,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 			this.closeDropdown();
 		} else if (!this._dropdownOpen && key !== 'Escape' && key !== 'Enter') {
 			this._openDropdown();
-		} else if (key === 'ArrowDown' && this._inputFocused) {
+		} else if (key === 'ArrowDown' && this._inputFocused && this._visibleOptionsValues.length !== 0) {
 			event.preventDefault();
 			this._focusToFirstOption(selector);
 		}

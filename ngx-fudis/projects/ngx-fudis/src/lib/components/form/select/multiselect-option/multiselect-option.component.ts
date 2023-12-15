@@ -60,6 +60,8 @@ export class MultiselectOptionComponent extends DropdownItemBaseDirective implem
 	// Translated text for disabled option
 	protected _disabledText: string;
 
+	private _preventTypeChange: boolean = false;
+
 	ngOnInit(): void {
 		if (this._parent.autocomplete) {
 			this._isOptionVisible(this._parent.getAutocompleteFilterText()());
@@ -106,7 +108,7 @@ export class MultiselectOptionComponent extends DropdownItemBaseDirective implem
 		);
 
 		if (closeDropdown) {
-			this._parent.closeDropdown(false, false);
+			this._parent.closeDropdown();
 		}
 	}
 

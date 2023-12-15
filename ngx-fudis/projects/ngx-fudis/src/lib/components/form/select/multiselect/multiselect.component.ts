@@ -32,7 +32,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 		super(_focusService, _translationService, _idService);
 
 		effect(() => {
-			this._removeItemText = this._translations().SELECT.MULTISELECT.REMOVE_ITEM;
+			this._translationRemoveItem = this._translations().SELECT.MULTISELECT.REMOVE_ITEM;
 		});
 	}
 
@@ -54,7 +54,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 	/**
 	 * Internal translated text to indicate deleting item chip aria-label
 	 */
-	protected _removeItemText: string;
+	protected _translationRemoveItem: string;
 
 	/**
 	 * When selecting / deselecting options, variable for storing them in the order of their id's (usually the DOM order)
@@ -151,6 +151,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 			this.closeDropdown(false);
 		}
 
+		this._inputFocused = false;
 		this.control.markAsTouched();
 	}
 

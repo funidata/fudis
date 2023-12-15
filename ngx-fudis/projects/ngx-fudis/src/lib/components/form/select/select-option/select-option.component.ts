@@ -71,12 +71,12 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 	protected _clickSelectOption(event: Event): void {
 		this._preventTypeChange = true;
 
-		this.handleClick.emit(event);
-
 		if (!this.data.disabled) {
 			const selectedOption: FudisSelectOption = { ...this.data, htmlId: this._id };
 
-			this._parentSelect.closeDropdown(true, true);
+			this.handleClick.emit(event);
+
+			this._parentSelect.closeDropdownFromSelection();
 
 			this._parentSelect.handleSelectionChange(selectedOption);
 		}

@@ -30,7 +30,7 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 		super(_focusService, _translationService, _idService);
 
 		effect(() => {
-			this.optionDisabledText = this._translations().SELECT.DISABLED;
+			this.translationOptionDisabledText = this._translations().SELECT.DISABLED;
 		});
 	}
 
@@ -47,7 +47,7 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 	/**
 	 * Internal translated text for disabled select option
 	 */
-	public optionDisabledText: string;
+	public translationOptionDisabledText: string;
 
 	ngOnInit(): void {
 		this._setParentId();
@@ -92,6 +92,8 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 			this.closeDropdown(false);
 		}
 
+		this._inputFocused = false;
+
 		this.control.markAsTouched();
 	}
 
@@ -101,16 +103,25 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 		}
 	}
 
-	protected _autocompleteSelectKeypress(event: any): void {
-		this._autocompleteBaseKeypress(event, '.fudis-select-option__focusable');
+	protected _autocompleteSelectKeyUp(event: any): void {
+		if (!this._preventAutocompleteKeypress) {
+			this._autocompleteBaseKeypress(event, '.fudis-select-option__focusable');
 
-		if (
-			this.control.value &&
-			event.target.value.toLowerCase() !== (this.control.value as FudisSelectOption).label.toLowerCase()
-		) {
-			this.controlValueChangedInternally = true;
-			this.selectionUpdate.emit(null);
-			this.control.patchValue(null);
+			if (
+				this.control.value &&
+				event.target.value.toLowerCase() !== (this.control.value as FudisSelectOption).label.toLowerCase()
+			) {
+				this.controlValueChangedInternally = true;
+				this.selectionUpdate.emit(null);
+				this.control.patchValue(null);
+			}
+		}
+		this._preventAutocompleteKeypress = false;
+	}
+
+	protected _autocompleteSelectKeypress(event: any): void {
+		if (this._preventAutocompleteKeypress) {
+			event.preventDefault();
 		}
 	}
 

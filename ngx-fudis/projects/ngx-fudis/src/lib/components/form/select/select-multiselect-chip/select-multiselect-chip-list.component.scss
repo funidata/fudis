@@ -8,6 +8,9 @@
 .fudis-select-multiselect-chip {
 	&__list {
 		@include utilities.box-reset;
+
+		display: flex;
+		flex-wrap: wrap;
 	}
 
 	&__button {
@@ -21,6 +24,10 @@
 		margin-top: spacing.$spacing-xxs;
 		cursor: pointer;
 		padding: 0 spacing.$spacing-xs 0 0;
+
+		&:not(:last-of-type) {
+			margin-right: spacing.$spacing-xxs;
+		}
 
 		&:focus {
 			@include focus.focus-generic;
