@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Convenience script to make releases.
-# Creates a new branch from main and runs npm version command with given argument.
+# Convenience script for tagging releases.
+# Creates a new branch from main and runs `npm version`` with given command.
 #
 # Usage: release.sh <major|minor|patch>
 

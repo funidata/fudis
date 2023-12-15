@@ -7,6 +7,7 @@
     "build": "ng build",
     "build:ngx-fudis": "ng build ngx-fudis -c production",
     "test": "jest --coverage false",
+    "test:watch": "jest --coverage false --watch",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "ng run storybook:start",
     "build-storybook": "npm run docs:json && STORYBOOK_FUDIS_VERSION=\"${STORYBOOK_FUDIS_VERSION- }\" ng run storybook:build",
