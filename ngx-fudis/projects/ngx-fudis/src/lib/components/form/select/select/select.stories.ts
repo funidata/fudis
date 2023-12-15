@@ -40,8 +40,8 @@ export default {
 			options: ['sm', 'md', 'lg'],
 			control: { type: 'radio' },
 		},
-		variant: {
-			options: ['dropdown', 'autocomplete'],
+		autocomplete: {
+			options: [true, false],
 			control: { type: 'radio' },
 		},
 	},
@@ -113,7 +113,7 @@ const AllSelectsTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => 
 			<div>
 				<fudis-heading [level]="2">Autocomplete Select</fudis-heading>
 				<fudis-select
-					[variant]="'autocomplete'"
+					[autocomplete]="true"
 					[placeholder]="autocomplete.placeholder"
 					[autocompleteClearButton]="false"
 					[control]="autocomplete.control"
@@ -143,7 +143,7 @@ const AllSelectsTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => 
 			<div>
 				<fudis-heading [level]="2">Autocomplete Multiselect</fudis-heading>
 				<fudis-multiselect
-					[variant]="'autocomplete'"
+					[autocomplete]="true"
 					[placeholder]="autocompleteMultiselect.placeholder"
 					[control]="autocompleteMultiselect.control"
 					[label]="autocompleteMultiselect.label"
@@ -174,7 +174,6 @@ const ExampleTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 		<fudis-select
 			[size]="size"
 			[multiselect]="true"
-			[showSelectionChips]="true"
 			[placeholder]="placeholder"
 			[control]="control"
 			[label]="label"
@@ -194,8 +193,6 @@ Example.args = {
 	label: 'Select a pet',
 	size: 'lg',
 	placeholder: 'Choose a pet',
-	variant: 'autocomplete',
-	showSelectionChips: true,
 	helpText: 'All pets are equally important, but for sake of this example please pick one.',
 };
 

@@ -1,4 +1,15 @@
-import { AfterViewInit, Component, Input, OnInit, Signal, WritableSignal, effect, signal } from '@angular/core';
+import {
+	AfterViewInit,
+	Component,
+	EventEmitter,
+	Input,
+	OnInit,
+	Output,
+	Signal,
+	WritableSignal,
+	effect,
+	signal,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
@@ -25,12 +36,30 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 		});
 	}
 
+	/**
+	 * Array type control for selected FudisSelectOptions
+	 */
 	@Input({ required: true }) override control: FormControl<FudisSelectOption[] | null>;
+
+	/**
+	 * Hide or show selection chips rendered below input
+	 */
+	@Input() showSelectionChips = true;
+
+	/**
+	 * Value output event on selection change
+	 */
+	@Output() selectionUpdate: EventEmitter<FudisSelectOption[] | null> = new EventEmitter<FudisSelectOption[] | null>();
 
 	/**
 	 * Internal translated text to indicate deleting item chip aria-label
 	 */
 	protected _removeItemText: string;
+
+	/**
+	 * When selecting / deselecting options, variable for storing them in the order of their id's (usually the DOM order)
+	 */
+	protected _sortedSelectedOptions: FudisSelectOption[] = [];
 
 	private _sortedSelectedOptionsSignal: WritableSignal<FudisSelectOption[]> = signal<FudisSelectOption[]>([]);
 
@@ -78,7 +107,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 		this.dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
 
 		this.controlValueChangedInternally = true;
-
+		this.selectionUpdate.emit(this._sortedSelectedOptions);
 		this.control.patchValue(this._sortedSelectedOptions);
 	}
 
@@ -101,7 +130,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 			this._sortedSelectedOptions = sortValues(this.control.value);
 			this._sortedSelectedOptionsSignal.set(this._sortedSelectedOptions);
 
-			if (this.variant === 'dropdown') {
+			if (!this.autocomplete) {
 				this.dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
 			} else {
 				this._visibleOptionsValues = this.control.value.map((option) => option.value);
@@ -121,8 +150,6 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 		} else if (!(event.relatedTarget as HTMLElement)?.classList.contains('fudis-multiselect-option__focusable')) {
 			this.closeDropdown(false);
 		}
-
-		this._inputFocused = false;
 
 		this.control.markAsTouched();
 	}

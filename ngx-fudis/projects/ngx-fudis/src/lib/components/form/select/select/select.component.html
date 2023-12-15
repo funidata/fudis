@@ -9,7 +9,7 @@
 	</fudis-label>
 	<div #inputWrapperRef class="fudis-select__input-wrapper" (click)="_clickInput($event)">
 		<div
-			*ngIf="variant !== 'autocomplete'"
+			*ngIf="!autocomplete"
 			#inputRef
 			tabindex="0"
 			class="fudis-select__input fudis-select__input__dropdown"
@@ -35,7 +35,7 @@
 		</div>
 		<input
 			type="text"
-			*ngIf="variant === 'autocomplete'"
+			*ngIf="autocomplete"
 			#inputRef
 			class="fudis-select__input fudis-select__input__autocomplete"
 			[class.fudis-form-input--disabled]="disabled"
@@ -55,34 +55,24 @@
 			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null" />
 
 		<fudis-icon
-			*ngIf="variant !== 'autocomplete'"
+			*ngIf="!autocomplete || (autocomplete && !autocompleteClearButton)"
 			class="fudis-select__input-wrapper__icon"
 			[icon]="'chevron'"
 			[rotate]="_dropdownOpen ? 'cw-90' : 'ccw-90'" />
-		<ng-container *ngIf="variant === 'autocomplete'">
+		<ng-container *ngIf="autocomplete">
 			<fudis-button
 				#clearFilterButton
 				*ngIf="autocompleteClearButton"
 				class="fudis-select__input-wrapper__icon"
 				[class.fudis-select__input-wrapper__icon--hidden]="!_autocompleteFilterText()"
-				(click)="_clearAutocompleteFilterText()"
+				(click)="_clearAutocompleteFilterText(true)"
 				[size]="'icon-only'"
 				[variant]="'tertiary'"
 				[icon]="'close'"
 				[iconRotate]="_dropdownOpen ? 'ccw-90' : 'cw-90'"
 				[label]="_clearFilterText"
 				[labelHidden]="true" />
-			<fudis-button
-				#toggleDropdownButton
-				*ngIf="!autocompleteClearButton"
-				class="fudis-select__input-wrapper__icon"
-				(handleClick)="_toggleDropdown()"
-				[size]="'icon-only'"
-				[variant]="'tertiary'"
-				[icon]="'chevron'"
-				[iconRotate]="_dropdownOpen ? 'ccw-90' : 'cw-90'"
-				[label]="!_dropdownOpen ? _openAriaLabel : _closeAriaLabel"
-				[labelHidden]="true" />
+
 			<fudis-icon
 				*ngIf="!_autocompleteFilterText() && autocompleteClearButton"
 				class="fudis-select__input-wrapper__icon"
@@ -95,7 +85,6 @@
 			<ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>
 		</ng-container>
 		<fudis-body-text
-			*ngIf="!control.value"
 			class="fudis-select-dropdown__no-results"
 			[class.fudis-select-dropdown__no-results--visible]="_visibleOptionsValues.length === 0"
 			[size]="'md-light'"

@@ -39,7 +39,7 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 		}
 
 		effect(() => {
-			if (this._parentSelect.variant === 'autocomplete') {
+			if (this._parentSelect.autocomplete) {
 				this._isOptionVisible(this._parentSelect.getAutocompleteFilterText()());
 				this._isOptionTyped(this._parentSelect.getAutocompleteFilterText()());
 			}
@@ -62,7 +62,7 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 	private _preventTypeChange: boolean = false;
 
 	ngOnInit(): void {
-		if (this._parentSelect.variant === 'autocomplete') {
+		if (this._parentSelect.autocomplete) {
 			this._isOptionVisible(this._parentSelect.getAutocompleteFilterText()());
 			this._isOptionTyped(this._parentSelect.getAutocompleteFilterText()());
 		}
@@ -110,15 +110,15 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 				filterText && this.data.label.toLowerCase().includes(filterText.toLowerCase()) ? true : !filterText;
 
 			if (this.optionVisible) {
-				this._parentSelect.setOptionsVisibility(this.data.value, true);
+				this._parentSelect.setOptionVisibility(this.data.value, true);
 			} else {
-				this._parentSelect.setOptionsVisibility(this.data.value, false);
+				this._parentSelect.setOptionVisibility(this.data.value, false);
 			}
 
 			if (this.optionVisible && this._parentGroup) {
-				this._parentGroup.setOptionsVisibility(this.data.value, true);
+				this._parentGroup.setOptionVisibility(this.data.value, true);
 			} else if (this._parentGroup) {
-				this._parentGroup.setOptionsVisibility(this.data.value, false);
+				this._parentGroup.setOptionVisibility(this.data.value, false);
 			}
 		}
 	}

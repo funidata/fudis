@@ -1,4 +1,13 @@
-import { AfterViewInit, Component, Input, OnInit, ViewEncapsulation, effect } from '@angular/core';
+import {
+	AfterViewInit,
+	Component,
+	EventEmitter,
+	Input,
+	OnInit,
+	Output,
+	ViewEncapsulation,
+	effect,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
@@ -29,6 +38,11 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 	 * FormControl for the dropdown
 	 */
 	@Input({ required: true }) override control: FormControl<FudisSelectOption | null>;
+
+	/**
+	 * Value output event on selection change
+	 */
+	@Output() selectionUpdate: EventEmitter<FudisSelectOption | null> = new EventEmitter<FudisSelectOption | null>();
 
 	/**
 	 * Internal translated text for disabled select option
@@ -62,13 +76,13 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 		this.controlValueChangedInternally = true;
 		this.control.patchValue(value);
 
-		if (this.variant === 'autocomplete') {
+		if (this.autocomplete) {
 			(this.inputRef.nativeElement as HTMLInputElement).value = (this.control.value as FudisSelectOption).label;
 		} else {
 			this.dropdownSelectionLabelText = value?.label ? value.label : '';
 		}
 
-		if (value && this.variant === 'autocomplete' && !disableSignalEmit) {
+		if (value && this.autocomplete && !disableSignalEmit) {
 			this._autocompleteFilterText.set(value.label);
 		}
 	}
@@ -77,8 +91,6 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 		if (!(event.relatedTarget as HTMLElement)?.classList.contains('fudis-select-option__focusable')) {
 			this.closeDropdown(false);
 		}
-
-		this._inputFocused = false;
 
 		this.control.markAsTouched();
 	}
@@ -106,7 +118,7 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 		if (this.control.value) {
 			this.dropdownSelectionLabelText = this.control.value.label;
 
-			if (this.variant === 'autocomplete') {
+			if (this.autocomplete) {
 				(this.inputRef.nativeElement as HTMLInputElement).value = this.control.value.label;
 				this._autocompleteFilterText.set(this.control.value.label);
 

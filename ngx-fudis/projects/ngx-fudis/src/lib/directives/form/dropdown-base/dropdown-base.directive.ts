@@ -10,7 +10,7 @@ export class DropdownBaseDirective {
 	/**
 	 * Binding public variable for querying variant type
 	 */
-	@HostBinding('class.fudis-dropdown-menu-host') public _isMultiselect = false;
+	@HostBinding('class') classes = 'fudis-dropdown-menu-host';
 
 	/**
 	 * Assign dropdown as single-select or multiselect (with checkboxes)
@@ -28,7 +28,7 @@ export class DropdownBaseDirective {
 	@Input() open: boolean = false;
 
 	/**
-	 * Id for Dropdown Menu parent. Generated with FudisIdService
+	 * Id for Dropdown Menu. Generated with FudisIdService
 	 */
 	public id: string;
 

@@ -52,7 +52,7 @@ export class SelectGroupComponent {
 
 	private _visibleOptionsValues: string[] = [];
 
-	public setOptionsVisibility(value: string, visible: boolean) {
+	public setOptionVisibility(value: string, visible: boolean) {
 		this._visibleOptionsValues = setVisibleOptionsList(this._visibleOptionsValues, value, visible);
 
 		this._hasChildOptions = this._visibleOptionsValues.length !== 0;

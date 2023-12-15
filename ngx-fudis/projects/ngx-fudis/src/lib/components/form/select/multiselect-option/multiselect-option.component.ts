@@ -39,7 +39,7 @@ export class MultiselectOptionComponent extends DropdownItemBaseDirective implem
 		}
 
 		effect(() => {
-			if (this._parent.variant === 'autocomplete') {
+			if (this._parent.autocomplete) {
 				this._isOptionVisible(this._parent.getAutocompleteFilterText()());
 			}
 
@@ -60,10 +60,8 @@ export class MultiselectOptionComponent extends DropdownItemBaseDirective implem
 	// Translated text for disabled option
 	protected _disabledText: string;
 
-	private _preventTypeChange: boolean = false;
-
 	ngOnInit(): void {
-		if (this._parent.variant === 'autocomplete') {
+		if (this._parent.autocomplete) {
 			this._isOptionVisible(this._parent.getAutocompleteFilterText()());
 		}
 		this._isOptionChecked(this._parent.getSelectedOptions()());
@@ -100,6 +98,7 @@ export class MultiselectOptionComponent extends DropdownItemBaseDirective implem
 	protected _handleButtonBlur(event: FocusEvent): void {
 		this._focused = false;
 		this.handleBlur.emit(event);
+
 		const closeDropdown = this._focusedOutFromComponent(
 			event,
 			this.dropdownItem,
@@ -107,7 +106,7 @@ export class MultiselectOptionComponent extends DropdownItemBaseDirective implem
 		);
 
 		if (closeDropdown) {
-			this._parent.closeDropdown();
+			this._parent.closeDropdown(false, false);
 		}
 	}
 
@@ -117,15 +116,15 @@ export class MultiselectOptionComponent extends DropdownItemBaseDirective implem
 				filterText && this.data.label.toLowerCase().includes(filterText.toLowerCase()) ? true : !filterText;
 
 			if (this.optionVisible) {
-				this._parent.setOptionsVisibility(this.data.value, true);
+				this._parent.setOptionVisibility(this.data.value, true);
 			} else {
-				this._parent.setOptionsVisibility(this.data.value, false);
+				this._parent.setOptionVisibility(this.data.value, false);
 			}
 
 			if (this.optionVisible && this._parentGroup) {
-				this._parentGroup.setOptionsVisibility(this.data.value, true);
+				this._parentGroup.setOptionVisibility(this.data.value, true);
 			} else if (this._parentGroup) {
-				this._parentGroup.setOptionsVisibility(this.data.value, false);
+				this._parentGroup.setOptionVisibility(this.data.value, false);
 			}
 		}
 	}
