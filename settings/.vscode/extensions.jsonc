@@ -1,0 +1,17 @@
+{
+  "unwantedRecommendations": [
+    // Unnecessary when using the official prettier and eslint extensions.
+    "rvest.vs-code-prettier-eslint"
+  ],
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint",
+    "formulahendry.auto-rename-tag",
+    "naumovs.color-highlight",
+    "unifiedjs.vscode-mdx",
+    "xyc.vscode-mdx-preview",
+    "nhoizey.gremlins",
+    "deque-systems.vscode-axe-linter",
+    "tobermory.es6-string-html"
+  ]
+}
