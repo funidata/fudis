@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
-import { MockComponent } from 'ng-mocks';
+import { MockComponents } from 'ng-mocks';
 import { IconComponent } from '../../../icon/icon.component';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { ErrorMessageComponent } from './error-message.component';
@@ -44,10 +44,9 @@ describe('ErrorMessageComponent', () => {
 				ErrorMessageComponent,
 				IconComponent,
 				MockTestErrorComponent,
-				MockComponent(LabelComponent),
 				TextInputComponent,
-				MockComponent(GuidanceComponent),
 				ValidatorErrorMessageComponent,
+				MockComponents(LabelComponent, GuidanceComponent),
 			],
 			imports: [ReactiveFormsModule],
 			providers: [FudisInternalErrorSummaryService],

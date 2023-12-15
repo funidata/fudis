@@ -6,8 +6,8 @@ import * as ErrorMessageStories from './error-message.stories';
 # Error message
 
 Fudis form components can implement two types of error messages. Fudis Validator Error Message is an internal error message used by [Fudis Validators](/docs/utilities-validators--documentation).
-Also it is possible to add custom error message to Fudis form components through content projection. This requires the use of selector `fudis-error-message` when projecting content to another form component. 
-Both types of error messages share the same design and are always rendered as a part Guidance Component.
+Also, it is possible to add custom error message to Fudis form components through content projection. This requires the use of selector `fudis-error-message` when projecting content to another form component. 
+Both types of error messages share the same design and are always rendered as a part of Guidance Component.
 Read the following documentation on exceptions and on how to use multiple custom error messages at a single form component.
 
 ## Examples
@@ -18,7 +18,7 @@ Read the following documentation on exceptions and on how to use multiple custom
 
 ### Mandatory Properties
 
-The mandatory properties for Error Message are `message` and `visible`. Also, the **NgIf** directive is required so that the Error Message can be passed to Error Summary Component. For the properties, the message parameter can be either passed as a string or as an observable string.
+The mandatory properties for Error Message are `message` and `visible`. Also, the **NgIf** directive is required so that the Error Message can be passed to Error Summary Component. For the properties, the message parameter can be passed either as a string or as an observable string.
 The property visible is a boolean value that is designed to be used with form control state in determining when an error is shown. Notice that property visible does not have an effect on the form's validity. In order for the error message alert icon to be displayed, 
 the related form control must be in invalid state and passed to Error Message component in visible property.
 
@@ -34,9 +34,9 @@ the related form control must be in invalid state and passed to Error Message co
 </fudis-text-input>
 </form>`
 ````
-### Using multiple Errors Messages
+### Using multiple Error Messages
 
-**Note!** It is recommended to use only one Error Message at a time. When using multiple error messages it is mandatory to pass related form field id as `parentId` and a form field label as `parenLabel` input. 
+**Note!** It is recommended to use only one Error Message at a time. When using multiple error messages it is mandatory to pass related form field id as `parentId` and a form field label as `parentLabel` input. 
 These inputs are used for linking error message content with related input fields and with [Error Summary](/docs/components-form-error-summary--documentation).
 
 ### Error Message with Date Range component

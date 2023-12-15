@@ -21,12 +21,12 @@ export class ErrorMessageComponent extends ErrorMessageBaseDirective implements 
 	}
 
 	/**
-	 * Manually included parenLabel input for situations when multiple error messages are projected to same form component.
+	 * Manually included parentLabel input for situations when multiple error messages are projected to same form component.
 	 */
 	@Input() parentLabel: string;
 
 	/**
-	 * Manually included parenId for linking multiple error messages with parent form component.
+	 * Manually included parentId for linking multiple error messages with parent form component.
 	 */
 	@Input() parentId: string;
 
