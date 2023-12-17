@@ -131,7 +131,6 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 		) {
 			if (this._parentSelect.control.value !== this.data) {
 				const selectedOption: FudisSelectOption = { ...this.data, htmlId: this._id };
-
 				this._parentSelect.handleSelectionChange(selectedOption, true);
 			}
 		} else {

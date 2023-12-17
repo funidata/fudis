@@ -21,10 +21,11 @@ import { hasRequiredValidator } from '../../../../utilities/form/getValidators';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
-import { FudisInputSize } from '../../../../types/forms';
+import { FudisInputSize, FudisSelectOption } from '../../../../types/forms';
 import { ButtonComponent } from '../../../button/button.component';
 import { setVisibleOptionsList } from '../selectUtilities';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
+import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.component';
 
 @Directive({
 	selector: '[fudisSelectBase]',
@@ -59,6 +60,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	 * Reference for div containing select / multiselect dropdown input
 	 */
 	@ViewChild('inputWrapperRef') private _inputWrapperRef: ElementRef<HTMLDivElement>;
+
+	@ViewChild('autocompleteRef') protected _autocompleteRef: SelectAutocompleteComponent;
 
 	/**
 	 * To lazy load options on first open
@@ -126,6 +129,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	protected _translationNoResultsFound: string;
 
 	/**
+	 * TODO: remove
 	 * Translated aria-label for autocomplete close icon button which clears the input
 	 */
 	protected _translationClearFilterText: string;
@@ -193,7 +197,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 
 		this._preventDropdownReopen = preventDropdownReopen;
 
-		if (focusToInput) {
+		if (this.autocomplete && focusToInput) {
+			this._autocompleteRef.inputRef.nativeElement.focus();
+		} else if (focusToInput) {
 			this.inputRef.nativeElement.focus();
 		}
 	}
@@ -202,7 +208,12 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 		this._dropdownOpen = false;
 		this._preventAutocompleteKeypress = true;
 		this._preventDropdownReopen = true;
-		this.inputRef.nativeElement.focus();
+
+		if (this.autocomplete) {
+			this._autocompleteRef.inputRef.nativeElement.focus();
+		} else {
+			this.inputRef.nativeElement.focus();
+		}
 	}
 
 	/**
@@ -214,19 +225,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 		this._visibleOptionsValues = setVisibleOptionsList(this._visibleOptionsValues, value, visible);
 	}
 
-	/**
-	 * Clear any written or selected value in the autocomplete field
-	 * @param resetControlValue reset or not control value
-	 */
-	protected _clearAutocompleteFilterText(resetControlValue?: boolean): void {
-		// Clear input field and control value
-		(this.inputRef.nativeElement as HTMLInputElement).value = '';
-		this._autocompleteFilterText.set('');
-
-		if (resetControlValue) {
-			this.controlValueChangedInternally = true;
-			this.control.patchValue(null);
-		}
+	protected _patchControlValue(value: FudisSelectOption | null) {
+		this.controlValueChangedInternally = true;
+		this.control.patchValue(value);
 	}
 
 	/**
@@ -293,6 +294,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	}
 
 	/**
+	 *
+	 * TODO: remove
 	 * Filter options from keyboard input
 	 */
 	protected _autocompleteBaseKeypress(event: KeyboardEvent, selector: string): void {
@@ -341,16 +344,20 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	/**
 	 * Open dropdown
 	 */
-	private _openDropdown(): void {
+	protected _openDropdown(): void {
 		this._openedOnce = true;
 		this._dropdownOpen = true;
+	}
+
+	protected _filterTextUpdate(text: string): void {
+		this._autocompleteFilterText.set(text);
 	}
 
 	/**
 	 * To focus on first option when dropdown opens
 	 * @param focusSelector CSS selector to focus to
 	 */
-	private _focusToFirstOption(focusSelector: string): void {
+	protected _focusToFirstOption(focusSelector: string): void {
 		const firstOption: HTMLInputElement = this._dropdownRef?.dropdownElement.nativeElement.querySelector(
 			focusSelector
 		) as HTMLInputElement;

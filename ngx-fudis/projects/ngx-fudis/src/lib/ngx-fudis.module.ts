@@ -108,6 +108,7 @@ import { SelectMultiselectChipListComponent } from './components/form/select/sel
 import { SelectBaseDirective } from './components/form/select/select-base/select-base.directive';
 import { MultiselectComponent } from './components/form/select/multiselect/multiselect.component';
 import { MultiselectOptionComponent } from './components/form/select/multiselect-option/multiselect-option.component';
+import { SelectAutocompleteComponent } from './components/form/select/autocomplete/autocomplete.component';
 
 @NgModule({
 	/*
@@ -176,6 +177,7 @@ import { MultiselectOptionComponent } from './components/form/select/multiselect
 		RadioButtonComponent,
 		RadioButtonGroupComponent,
 		SectionComponent,
+		SelectAutocompleteComponent,
 		SelectBaseDirective,
 		SelectComponent,
 		SelectDropdownComponent,

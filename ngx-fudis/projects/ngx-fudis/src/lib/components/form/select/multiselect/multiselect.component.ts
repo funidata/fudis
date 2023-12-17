@@ -66,7 +66,8 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 	ngOnInit(): void {
 		this._setParentId();
 
-		this._controlValueSubscription = this.control.valueChanges.subscribe(() => {
+		this._controlValueSubscription = this.control.valueChanges.subscribe((value) => {
+			console.log(value);
 			if (!this.controlValueChangedInternally) {
 				this._updateMultiselectionFromControlValue();
 			}
@@ -155,10 +156,6 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 		this.control.markAsTouched();
 	}
 
-	protected _autocompleteMultiselectKeypress(event: any): void {
-		this._autocompleteBaseKeypress(event, '.fudis-multiselect-option__focusable');
-	}
-
 	/**
 	 * Handle chip item remove by index. If there are no selections done, focus back to input on last item removal.
 	 */
@@ -167,7 +164,9 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 
 		if (currentValue) {
 			currentValue.splice(index, 1);
-			if (currentValue!.length === 0) {
+			if (currentValue!.length === 0 && this.autocomplete) {
+				this._autocompleteRef.inputRef.nativeElement.focus();
+			} else if (currentValue!.length === 0) {
 				this.inputRef.nativeElement.focus();
 			}
 

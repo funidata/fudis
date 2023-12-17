@@ -9,6 +9,7 @@ import {
 	effect,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { areObjectsDeepEquals } from '../../../../utilities/areObjectsDeepEquals';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisIdService } from '../../../../services/id/id.service';
@@ -52,7 +53,8 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 	ngOnInit(): void {
 		this._setParentId();
 
-		this._controlValueSubscription = this.control.valueChanges.subscribe(() => {
+		this._controlValueSubscription = this.control.valueChanges.subscribe((value) => {
+			console.log(value);
 			if (!this.controlValueChangedInternally) {
 				this._updateSelectionFromControlValue();
 			}
@@ -72,18 +74,24 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 	}
 
 	public handleSelectionChange(value: FudisSelectOption, disableSignalEmit?: boolean): void {
-		this.selectionUpdate.emit(value);
-		this.controlValueChangedInternally = true;
-		this.control.patchValue(value);
+		const equalValues = areObjectsDeepEquals(value, this.control.value!);
 
-		if (this.autocomplete) {
-			(this.inputRef.nativeElement as HTMLInputElement).value = (this.control.value as FudisSelectOption).label;
-		} else {
-			this.dropdownSelectionLabelText = value?.label ? value.label : '';
-		}
+		if (!equalValues) {
+			this.selectionUpdate.emit(value);
+			this.controlValueChangedInternally = true;
+			this.control.patchValue(value);
 
-		if (value && this.autocomplete && !disableSignalEmit) {
-			this._autocompleteFilterText.set(value.label);
+			if (this.autocomplete) {
+				(this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value = (
+					this.control.value as FudisSelectOption
+				).label;
+			} else {
+				this.dropdownSelectionLabelText = value?.label ? value.label : '';
+			}
+
+			if (value && this.autocomplete && !disableSignalEmit) {
+				this._autocompleteFilterText.set(value.label);
+			}
 		}
 	}
 
@@ -103,25 +111,11 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 		}
 	}
 
-	protected _autocompleteSelectKeyUp(event: any): void {
-		if (!this._preventAutocompleteKeypress) {
-			this._autocompleteBaseKeypress(event, '.fudis-select-option__focusable');
-
-			if (
-				this.control.value &&
-				event.target.value.toLowerCase() !== (this.control.value as FudisSelectOption).label.toLowerCase()
-			) {
-				this.controlValueChangedInternally = true;
-				this.selectionUpdate.emit(null);
-				this.control.patchValue(null);
-			}
-		}
-		this._preventAutocompleteKeypress = false;
-	}
-
-	protected _autocompleteSelectKeypress(event: any): void {
-		if (this._preventAutocompleteKeypress) {
-			event.preventDefault();
+	protected _checkIfValueNull(text: string): void {
+		if (this.control.value && text.toLowerCase() !== (this.control.value as FudisSelectOption).label.toLowerCase()) {
+			this.controlValueChangedInternally = true;
+			this.selectionUpdate.emit(null);
+			this.control.patchValue(null);
 		}
 	}
 
@@ -130,7 +124,7 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 			this.dropdownSelectionLabelText = this.control.value.label;
 
 			if (this.autocomplete) {
-				(this.inputRef.nativeElement as HTMLInputElement).value = this.control.value.label;
+				(this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value = this.control.value.label;
 				this._autocompleteFilterText.set(this.control.value.label);
 
 				this._visibleOptionsValues = [this.control.value.value];

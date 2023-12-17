@@ -1,0 +1,43 @@
+<div class="fudis-select-autocomplete">
+	<input
+		#inputRef
+		type="text"
+		aria-required="true"
+		class="fudis-select-autocomplete__input"
+		[class.fudis-form-input--disabled]="control.disabled"
+		[class.fudis-form-input--invalid]="(control.touched && control.invalid) || (control.touched && invalidState)"
+		role="combobox"
+		aria-haspopup="listbox"
+		(focus)="_inputFocus()"
+		(blur)="_inputBlur($event)"
+		(keyup)="_keyUp($event)"
+		[attr.aria-autocomplete]="'none'"
+		[attr.aria-disabled]="control.disabled"
+		[attr.placeholder]="placeholder"
+		[attr.required]="required ? true : null"
+		[attr.aria-labelledby]="id + '-label'"
+		[attr.aria-describedby]="id + '_guidance'"
+		[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null" />
+	<fudis-button
+		#clearFilterButton
+		*ngIf="autocompleteClearButton"
+		class="fudis-select-autocomplete__icon"
+		[class.fudis-select-autocomplete__icon--hidden]="!_filterText"
+		(click)="_clearAutocompleteFilterText()"
+		[size]="'icon-only'"
+		[variant]="'tertiary'"
+		[icon]="'close'"
+		[iconRotate]="dropdownOpen ? 'ccw-90' : 'cw-90'"
+		[label]="_translationClearFilterText"
+		[labelHidden]="true" />
+	<fudis-icon
+		*ngIf="!autocompleteClearButton"
+		class="fudis-select-autocomplete__icon"
+		[icon]="'chevron'"
+		[rotate]="dropdownOpen ? 'cw-90' : 'ccw-90'" />
+	<fudis-icon
+		*ngIf="!_filterText && autocompleteClearButton"
+		class="fudis-select-autocomplete__icon"
+		[icon]="'search'"
+		[class.fudis-select-autocomplete__icon--disabled]="control.disabled" />
+</div>
