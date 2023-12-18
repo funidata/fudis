@@ -4,7 +4,8 @@
 	[class.fudis-select-dropdown--open]="open"
 	[class.fudis-select-dropdown__multiselect]="multiselect"
 	[attr.id]="id"
+	[attr.aria-labelledby]="labelId"
 	[attr.aria-multiselectable]="multiselect ? true : null"
-	[attr.role]="multiselect ? 'listbox' : 'menu'">
+	role="listbox">
 	<ng-content></ng-content>
 </div>

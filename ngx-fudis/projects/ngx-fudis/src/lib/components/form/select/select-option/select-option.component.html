@@ -7,6 +7,7 @@
 	[class.fudis-select-option__focusable]="_optionVisible"
 	[class.fudis-select-option--disabled]="data.disabled"
 	[class.fudis-select-option--selected]="_parentSelect.control.value?.value === data.value"
+	[attr.aria-selected]="_parentSelect.control.value?.value === data.value"
 	role="option"
 	tabindex="-1"
 	[attr.id]="_id"

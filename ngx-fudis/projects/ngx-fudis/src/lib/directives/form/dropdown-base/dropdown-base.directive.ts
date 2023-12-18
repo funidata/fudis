@@ -28,6 +28,11 @@ export class DropdownBaseDirective {
 	@Input() open: boolean = false;
 
 	/**
+	 * Id of parent component's label. e.g. in Select or Multiselect form components
+	 */
+	@Input() labelId: string;
+
+	/**
 	 * Id for Dropdown Menu. Generated with FudisIdService
 	 */
 	public id: string;

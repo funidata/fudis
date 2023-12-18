@@ -129,7 +129,7 @@ export class MultiselectOptionComponent extends DropdownItemBaseDirective implem
 		);
 
 		if (closeDropdown) {
-			this._parent.closeDropdown();
+			this._parent.closeDropdown(true, true);
 		}
 	}
 

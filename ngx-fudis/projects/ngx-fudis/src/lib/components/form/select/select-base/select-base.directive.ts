@@ -215,6 +215,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	 */
 	protected _inputFocus(): void {
 		this._inputFocused = true;
+
 		const openAutocomplete =
 			this.autocomplete &&
 			this._autocompleteFilterText() !== '' &&
@@ -369,11 +370,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	private _handleEscapePress(event: KeyboardEvent) {
 		if (this._dropdownOpen) {
 			event.preventDefault();
-			(
-				(event.target as HTMLElement).closest('fudis-select')?.querySelector('.fudis-select__input') as HTMLInputElement
-			)?.focus();
-
-			this.closeDropdown();
+			this.closeDropdown(true, true);
 		}
 	}
 }

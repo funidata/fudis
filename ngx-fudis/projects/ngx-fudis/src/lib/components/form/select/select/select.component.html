@@ -13,11 +13,13 @@
 			#inputRef
 			tabindex="0"
 			class="fudis-select__input fudis-select__input__dropdown"
+			[id]="id"
 			[class.fudis-form-input--disabled]="disabled"
 			[class.fudis-form-input--invalid]="(control.touched && control.invalid) || (control.touched && invalidState)"
 			[class.fudis-select__input--invalid]="(control.touched && control.invalid) || invalidState"
 			role="combobox"
 			aria-haspopup="listbox"
+			[attr.aria-activedescendant]="control.value?.['htmlId'] ? control.value?.['htmlId'] : null"
 			(click)="_clickInput($event)"
 			(focus)="_inputFocus()"
 			(blur)="_inputBlur($event)"
@@ -59,7 +61,12 @@
 			(triggerFocus)="_inputFocus()"
 			(triggerBlur)="_inputBlur($event)" />
 	</div>
-	<fudis-select-dropdown *ngIf="_openedOnce" #dropdownRef [open]="_dropdownOpen" [size]="size">
+	<fudis-select-dropdown
+		*ngIf="_openedOnce"
+		#dropdownRef
+		[open]="_dropdownOpen"
+		[size]="size"
+		[labelId]="id + '-label'">
 		<ng-container *ngIf="_content?.type === 'select-options'">
 			<ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>
 		</ng-container>

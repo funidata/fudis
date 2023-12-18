@@ -15,10 +15,10 @@
 				[class.fudis-multiselect-option__focusable]="_optionVisible"
 				type="checkbox"
 				class="fudis-multiselect-option__label__checkbox__input"
-				[attr.role]="'option'"
+				role="option"
 				[attr.aria-disabled]="data.disabled ? true : null"
 				(click)="_clickOption($event)"
-				[attr.aria-checked]="checked ? true : null"
+				[attr.aria-selected]="checked"
 				(focus)="_focus()"
 				(keydown)="_keyDown($event, '.fudis-multiselect-option__focusable')"
 				(blur)="_blur($event)" />

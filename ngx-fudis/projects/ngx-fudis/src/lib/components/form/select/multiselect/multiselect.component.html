@@ -59,7 +59,13 @@
 			(triggerFocus)="_inputFocus()"
 			(triggerBlur)="_inputBlur($event)" />
 	</div>
-	<fudis-select-dropdown *ngIf="_openedOnce" #dropdownRef [open]="_dropdownOpen" [multiselect]="true" [size]="size">
+	<fudis-select-dropdown
+		*ngIf="_openedOnce"
+		#dropdownRef
+		[open]="_dropdownOpen"
+		[multiselect]="true"
+		[size]="size"
+		[labelId]="id + '-label'">
 		<ng-container *ngIf="_content?.type === 'select-options'">
 			<ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>
 		</ng-container>
