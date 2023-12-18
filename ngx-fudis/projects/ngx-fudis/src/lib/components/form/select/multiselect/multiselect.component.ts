@@ -61,8 +61,14 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 	 */
 	protected _sortedSelectedOptions: FudisSelectOption[] = [];
 
+	/**
+	 * Signal for dropdown options to listen when either Application updates its control value or user clicks (removes) selection chip
+	 */
 	private _sortedSelectedOptionsSignal: WritableSignal<FudisSelectOption[]> = signal<FudisSelectOption[]>([]);
 
+	/**
+	 * Set component's id and subscribe to value changes for form control coming from application
+	 */
 	ngOnInit(): void {
 		this._setParentId('multiselect');
 
@@ -70,25 +76,35 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 			if (!this.controlValueChangedInternally) {
 				this._updateMultiselectionFromControlValue();
 			}
-
 			this.controlValueChangedInternally = false;
 		});
 	}
 
+	/**
+	 * Set initial focus and update component's state if control has value on initialisation
+	 */
 	ngAfterViewInit(): void {
 		if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
 			this.focusToInput();
 		}
-
 		if (this.control.value) {
 			this._updateMultiselectionFromControlValue();
 		}
 	}
 
+	/**
+	 * Getter used in multiselect options
+	 * @returns Signal array of sorted selected options
+	 */
 	public getSelectedOptions(): Signal<FudisSelectOption[]> {
 		return this._sortedSelectedOptionsSignal.asReadonly();
 	}
 
+	/**
+	 * Handler for adding / removing selections
+	 * @param option FudisSelectOption to handle
+	 * @param type add or remove multiselect option
+	 */
 	public handleMultiSelectionChange(option: FudisSelectOption, type: 'add' | 'remove'): void {
 		let updatedValue = this.control.value;
 
@@ -111,6 +127,10 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 		this.control.patchValue(this._sortedSelectedOptions);
 	}
 
+	/**
+	 * Function called by multiselect option if they are checked
+	 * @param checkedOption FudisSelectOption to handle
+	 */
 	public handleCheckedSort(checkedOption: FudisSelectOption): void {
 		const foundIndex: number = this._sortedSelectedOptions.findIndex((option) => {
 			return option.value === checkedOption.value && option.label === checkedOption.label;
@@ -125,6 +145,9 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 		}
 	}
 
+	/**
+	 * Update internal states when Application updates control value
+	 */
 	protected _updateMultiselectionFromControlValue(): void {
 		if (this.control.value) {
 			this._sortedSelectedOptions = sortValues(this.control.value);
@@ -140,7 +163,12 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 		}
 	}
 
+	/**
+	 * Handler for multiselect input field blur
+	 * @param event FocusEvent
+	 */
 	protected _inputBlur(event: FocusEvent): void {
+		// Time out used for user mouse click cases
 		if (!event.relatedTarget) {
 			setTimeout(() => {
 				if (!document.activeElement?.classList.contains('fudis-multiselect-option__focusable')) {

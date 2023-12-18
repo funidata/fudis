@@ -61,7 +61,12 @@ export class DropdownItemBaseDirective {
 	}
 
 	// eslint-disable-next-line class-methods-use-this
-	protected _focusedOutFromComponent(event: FocusEvent, element: ElementRef, selector: string): boolean {
+	protected _focusedOutFromComponent(
+		event: FocusEvent,
+		element: ElementRef,
+		selector: string,
+		multiselect?: boolean
+	): boolean {
 		if (!event.relatedTarget) {
 			setTimeout(() => {
 				if (!document.activeElement?.classList.contains(selector)) {
@@ -78,7 +83,12 @@ export class DropdownItemBaseDirective {
 				return false;
 			}, 100);
 		} else {
-			const parentSelect = element.nativeElement.closest('fudis-select');
+			let parentSelect;
+			if (!multiselect) {
+				parentSelect = element.nativeElement.closest('fudis-multiselect');
+			} else {
+				parentSelect = element.nativeElement.closest('fudis-select');
+			}
 
 			const menuButton = element.nativeElement.closest('fudis-button')?.querySelector('.fudis-button');
 

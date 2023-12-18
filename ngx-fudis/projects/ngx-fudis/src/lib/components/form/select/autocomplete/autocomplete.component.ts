@@ -197,8 +197,6 @@ export class SelectAutocompleteComponent {
 	 * @param resetControlValue reset or not control value, used with single selects
 	 */
 	protected _clearAutocompleteFilterText(): void {
-		// Clear input field and control value
-
 		this.triggerFilterTextUpdate.emit('');
 
 		(this.inputRef.nativeElement as HTMLInputElement).value = '';

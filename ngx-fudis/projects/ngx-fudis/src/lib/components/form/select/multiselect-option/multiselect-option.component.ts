@@ -104,7 +104,8 @@ export class MultiselectOptionComponent extends DropdownItemBaseDirective implem
 		const closeDropdown = this._focusedOutFromComponent(
 			event,
 			this.dropdownItem,
-			'fudis-multiselect-option__focusable'
+			'fudis-multiselect-option__focusable',
+			true
 		);
 
 		if (closeDropdown) {
