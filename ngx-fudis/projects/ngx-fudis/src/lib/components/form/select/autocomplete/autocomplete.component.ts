@@ -36,39 +36,95 @@ export class SelectAutocompleteComponent {
 
 	@HostBinding('class') classes = 'fudis-select-autocomplete-host';
 
-	@Input({ required: true }) control: FormControl<any>;
+	/**
+	 * Form control used mostly to define HTML attributes and CSS styles
+	 */
+	@Input({ required: true }) control: FormControl<FudisSelectOption | FudisSelectOption[] | null>;
 
+	/**
+	 * Set input fields required attribute
+	 */
 	@Input({ required: true }) required: boolean;
 
+	/**
+	 * Id for autocomplete input form field
+	 */
 	@Input({ required: true }) id: string;
 
+	/**
+	 * If parent's dropdown is open or not
+	 */
 	@Input({ required: true }) dropdownOpen: boolean = false;
 
+	/**
+	 * Manually set input as invalid
+	 */
 	@Input() invalidState: boolean = false;
 
+	/**
+	 * If autocomplete is used with multiselect
+	 */
+	@Input() multiselect: boolean = false;
+
+	/**
+	 * Placeholder text when there's no filter text
+	 */
 	@Input() placeholder: string;
 
+	/**
+	 * Enable / disable autocomplete variant's Clear button. When 'false' autocomplete acts like a dropdown and opens on focus and hides 'Clear' icon button.
+	 */
 	@Input() autocompleteClearButton: boolean = true;
 
+	/**
+	 * Output event for input field blur
+	 */
 	@Output() triggerBlur = new EventEmitter<FocusEvent>();
 
-	@Output() triggerFocus = new EventEmitter<void>();
+	/**
+	 * Output event for input field focus
+	 */
+	@Output() triggerFocus = new EventEmitter<FocusEvent>();
 
-	@Output() triggerToggle = new EventEmitter<void>();
+	/**
+	 * Output event for toggling parent dropdown
+	 */
+	@Output() triggerDropdownToggle = new EventEmitter<void>();
 
-	@Output() triggerClose = new EventEmitter<void>();
+	/**
+	 * Output event for closing parent dropdown
+	 */
+	@Output() triggerDropdownClose = new EventEmitter<void>();
 
-	@Output() triggerOpen = new EventEmitter<void>();
+	/**
+	 * Output event for opening parent dropdown
+	 */
+	@Output() triggerDropdownOpen = new EventEmitter<void>();
 
+	/**
+	 * Output event for updating parent's filter text signal
+	 */
 	@Output() triggerFilterTextUpdate = new EventEmitter<string>();
 
+	/**
+	 * Output event for updating parent's filter text signal
+	 */
 	@Output() triggerFocusToFirstOption = new EventEmitter<void>();
 
-	@Output() triggerControlValueChangedInternally = new EventEmitter<null | FudisSelectOption>();
+	/**
+	 * Output event for clicking clear button
+	 */
+	@Output() triggerClearFilterButtonClick = new EventEmitter<void>();
 
+	/**
+	 * Used to prevent case when user selects an option from dropdown with Space key, which would add an extra space to filter text and "breaking" the selection.
+	 */
+	public preventSpaceKeypress: boolean = false;
+
+	/**
+	 * Input form field focus status
+	 */
 	protected _focused: boolean = false;
-
-	protected _filterText: string;
 
 	/**
 	 * Basic Fudis translation keys
@@ -80,33 +136,56 @@ export class SelectAutocompleteComponent {
 	 */
 	protected _translationClearFilterText: string;
 
+	/**
+	 * Blur event function for input form field blur
+	 * @param event FocusEvent
+	 */
 	protected _inputBlur(event: FocusEvent): void {
 		this._focused = false;
 		this.triggerBlur.emit(event);
 	}
 
-	protected _inputFocus(): void {
+	/**
+	 * Blur event function for input form field blur
+	 * @param event FocusEvent
+	 */
+	protected _inputFocus(event: FocusEvent): void {
 		this._focused = true;
-		this.triggerFocus.emit();
+		this.triggerFocus.emit(event);
 	}
 
+	/**
+	 * Keypress handler to prevent selection exception case with space key press
+	 * @param event KeyboardEvent
+	 */
+	protected _keyPress(event: KeyboardEvent): void {
+		if (this.preventSpaceKeypress && event.key === ' ' && this.control.value) {
+			event.preventDefault();
+		}
+	}
+
+	/**
+	 * Key up handler function which emits outputs to parent Select / Multiselect
+	 * @param event KeyboardEvent
+	 */
 	protected _keyUp(event: KeyboardEvent): void {
 		const { key } = event;
-
 		const inputValue = (event.target as HTMLInputElement).value;
 
-		if (this._filterText !== inputValue) {
-			this._filterText = inputValue;
-
-			this.triggerFilterTextUpdate.emit(this._filterText);
+		if (this.preventSpaceKeypress && key === ' ' && this.control.value) {
+			event.preventDefault();
+		} else {
+			this.triggerFilterTextUpdate.emit(inputValue);
 		}
 
+		this.preventSpaceKeypress = false;
+
 		if (key === 'Enter') {
-			this.triggerToggle.emit();
-		} else if (key !== 'ArrowDown' && this.autocompleteClearButton && this._filterText === '') {
-			this.triggerClose.emit();
+			this.triggerDropdownToggle.emit();
+		} else if (key !== 'ArrowDown' && this.autocompleteClearButton && inputValue === '') {
+			this.triggerDropdownClose.emit();
 		} else if (!this.dropdownOpen && key !== 'Escape' && key !== 'Enter') {
-			this.triggerOpen.emit();
+			this.triggerDropdownOpen.emit();
 		} else if (key === 'ArrowDown' && this._focused) {
 			event.preventDefault();
 			this.triggerFocusToFirstOption.emit();
@@ -115,17 +194,18 @@ export class SelectAutocompleteComponent {
 
 	/**
 	 * Clear any written or selected value in the autocomplete field
-	 * @param resetControlValue reset or not control value
+	 * @param resetControlValue reset or not control value, used with single selects
 	 */
-	protected _clearAutocompleteFilterText(resetControlValue?: boolean): void {
+	protected _clearAutocompleteFilterText(): void {
 		// Clear input field and control value
-		(this.inputRef.nativeElement as HTMLInputElement).value = '';
 
-		this._filterText = '';
 		this.triggerFilterTextUpdate.emit('');
 
-		if (resetControlValue) {
-			this.triggerControlValueChangedInternally.emit(null);
+		(this.inputRef.nativeElement as HTMLInputElement).value = '';
+
+		if (!this.multiselect) {
+			this.triggerClearFilterButtonClick.emit();
 		}
+		this.inputRef.nativeElement.focus();
 	}
 }

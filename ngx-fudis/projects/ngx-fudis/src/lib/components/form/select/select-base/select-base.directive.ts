@@ -42,7 +42,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 			this._translationOpenAriaLabel = this._translations().SELECT.OPEN_DROPDOWN;
 			this._translationCloseAriaLabel = this._translations().SELECT.CLOSE_DROPDOWN;
 			this._translationNoResultsFound = this._translations().SELECT.AUTOCOMPLETE.NO_RESULTS;
-			this._translationClearFilterText = this._translations().SELECT.AUTOCOMPLETE.CLEAR;
 		});
 	}
 
@@ -129,12 +128,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	protected _translationNoResultsFound: string;
 
 	/**
-	 * TODO: remove
-	 * Translated aria-label for autocomplete close icon button which clears the input
-	 */
-	protected _translationClearFilterText: string;
-
-	/**
 	 * Signal to Select & MultiselectOption for listening autocomplete filter text changes
 	 */
 	protected _autocompleteFilterText: WritableSignal<string> = signal<string>('');
@@ -155,7 +148,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	protected _inputFocused: boolean = false;
 
 	/**
-	 * Used to handle exceptions when mouse click event fires before / after focus event
+	 * Used to handle exceptions when mouse click event fires before / after focus event or user has clicked autocomplete clear button
 	 */
 	protected _preventDropdownReopen: boolean | undefined = false;
 
@@ -163,8 +156,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	 * Used to handle exceptions when mouse click event fires before / after focus event
 	 */
 	protected _preventClick: boolean = false;
-
-	protected _preventAutocompleteKeypress: boolean = false;
 
 	/**
 	 * Subscription to listen to control's value changes coming from outside Fudis components
@@ -206,7 +197,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 
 	public closeDropdownFromSelection(): void {
 		this._dropdownOpen = false;
-		this._preventAutocompleteKeypress = true;
 		this._preventDropdownReopen = true;
 
 		if (this.autocomplete) {
@@ -227,6 +217,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 
 	protected _patchControlValue(value: FudisSelectOption | null) {
 		this.controlValueChangedInternally = true;
+		this._preventDropdownReopen = true;
 		this.control.patchValue(value);
 	}
 
@@ -234,14 +225,22 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	 * To handle input focus
 	 */
 	protected _inputFocus(): void {
-		if (!this.autocompleteClearButton && !this._dropdownOpen && !this._preventDropdownReopen) {
+		this._inputFocused = true;
+		const openAutocomplete =
+			this.autocomplete &&
+			this._autocompleteFilterText() !== '' &&
+			!this.autocompleteClearButton &&
+			!this._preventDropdownReopen &&
+			!this._dropdownOpen;
+
+		const openDropdown = !this.autocomplete && !this._preventDropdownReopen && !this._dropdownOpen;
+
+		if (openAutocomplete || openDropdown) {
 			this._openDropdown();
 
 			this._preventClick = true;
 			this._preventDropdownReopen = false;
 		}
-
-		this._inputFocused = true;
 	}
 
 	/**
@@ -294,39 +293,17 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	}
 
 	/**
-	 *
-	 * TODO: remove
-	 * Filter options from keyboard input
-	 */
-	protected _autocompleteBaseKeypress(event: KeyboardEvent, selector: string): void {
-		const { key } = event;
-
-		const inputValue = (event.target as HTMLInputElement).value;
-
-		if (this._autocompleteFilterText() !== inputValue) {
-			this._autocompleteFilterText.set(inputValue);
-		}
-
-		if (key === 'Enter') {
-			this._toggleDropdown();
-		} else if (key !== 'ArrowDown' && this.autocompleteClearButton && this._autocompleteFilterText() === '') {
-			this.closeDropdown();
-		} else if (!this._dropdownOpen && key !== 'Escape' && key !== 'Enter') {
-			this._openDropdown();
-		} else if (key === 'ArrowDown' && this._inputFocused && this._visibleOptionsValues.length !== 0) {
-			event.preventDefault();
-			this._focusToFirstOption(selector);
-		}
-	}
-
-	/**
 	 * Generate html id for parent FudisSelect
 	 */
-	protected _setParentId(): void {
-		if (this.id) {
+	protected _setParentId(type: 'multiselect' | 'select'): void {
+		if (this.id && type === 'select') {
 			this._idService.addNewParentId('select', this.id);
-		} else {
+		} else if (type === 'select') {
 			this.id = this._idService.getNewParentId('select');
+		} else if (this.id && type === 'multiselect') {
+			this._idService.addNewParentId('multiselect', this.id);
+		} else {
+			this.id = this._idService.getNewParentId('multiselect');
 		}
 	}
 
@@ -334,10 +311,10 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	 * Toggle dropdown
 	 */
 	protected _toggleDropdown(): void {
-		this._dropdownOpen = !this._dropdownOpen;
-
 		if (this._dropdownOpen) {
-			this._openedOnce = true;
+			this._openDropdown();
+		} else {
+			this.closeDropdown();
 		}
 	}
 

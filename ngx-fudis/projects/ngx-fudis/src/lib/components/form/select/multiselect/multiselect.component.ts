@@ -64,10 +64,9 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 	private _sortedSelectedOptionsSignal: WritableSignal<FudisSelectOption[]> = signal<FudisSelectOption[]>([]);
 
 	ngOnInit(): void {
-		this._setParentId();
+		this._setParentId('multiselect');
 
-		this._controlValueSubscription = this.control.valueChanges.subscribe((value) => {
-			console.log(value);
+		this._controlValueSubscription = this.control.valueChanges.subscribe(() => {
 			if (!this.controlValueChangedInternally) {
 				this._updateMultiselectionFromControlValue();
 			}
@@ -91,7 +90,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 	}
 
 	public handleMultiSelectionChange(option: FudisSelectOption, type: 'add' | 'remove'): void {
-		let updatedValue = this.control.value as FudisSelectOption[] | null;
+		let updatedValue = this.control.value;
 
 		if (type === 'remove' && updatedValue) {
 			updatedValue = updatedValue.filter((item: FudisSelectOption) => {
@@ -160,7 +159,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 	 * Handle chip item remove by index. If there are no selections done, focus back to input on last item removal.
 	 */
 	protected _handleRemoveChip(index: number): void {
-		const currentValue = this.control.value as FudisSelectOption[];
+		const currentValue = this.control.value;
 
 		if (currentValue) {
 			currentValue.splice(index, 1);

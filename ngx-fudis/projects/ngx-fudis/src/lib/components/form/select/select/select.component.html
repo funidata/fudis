@@ -43,6 +43,7 @@
 			*ngIf="autocomplete"
 			#autocompleteRef
 			[id]="id"
+			[placeholder]="placeholder"
 			[control]="control"
 			[dropdownOpen]="_dropdownOpen"
 			[required]="_required"
@@ -50,11 +51,11 @@
 			(triggerFocusToFirstOption)="
 				_visibleOptionsValues.length !== 0 && _focusToFirstOption('.fudis-select-option__focusable')
 			"
-			(triggerOpen)="_openDropdown()"
 			(triggerFilterTextUpdate)="_filterTextUpdate($event); _checkIfValueNull($event)"
-			(triggerControlValueChangedInternally)="_patchControlValue($event)"
-			(triggerClose)="closeDropdown()"
-			(triggerToggle)="_toggleDropdown()"
+			(triggerClearFilterButtonClick)="_patchControlValue(null)"
+			(triggerDropdownOpen)="_openDropdown()"
+			(triggerDropdownClose)="closeDropdown()"
+			(triggerDropdownToggle)="_toggleDropdown()"
 			(triggerFocus)="_inputFocus()"
 			(triggerBlur)="_inputBlur($event)" />
 	</div>
@@ -63,6 +64,7 @@
 			<ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>
 		</ng-container>
 		<fudis-body-text
+			*ngIf="autocomplete"
 			class="fudis-select-dropdown__no-results"
 			[class.fudis-select-dropdown__no-results--visible]="_visibleOptionsValues.length === 0"
 			[size]="'md-light'"

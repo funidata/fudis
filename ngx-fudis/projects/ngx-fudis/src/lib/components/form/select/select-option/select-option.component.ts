@@ -59,8 +59,6 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 	// Translated text for disabled option
 	protected _disabledText: string;
 
-	private _preventTypeChange: boolean = false;
-
 	ngOnInit(): void {
 		if (this._parentSelect.autocomplete) {
 			this._isOptionVisible(this._parentSelect.getAutocompleteFilterText()());
@@ -69,16 +67,13 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 	}
 
 	protected _clickSelectOption(event: Event): void {
-		this._preventTypeChange = true;
-
 		if (!this.data.disabled) {
-			const selectedOption: FudisSelectOption = { ...this.data, htmlId: this._id };
+			const selectedOption: FudisSelectOption = { ...this.data, fudisGeneratedHtmlId: this._id };
 
+			this._parentSelect.handleSelectionChange(selectedOption);
 			this.handleClick.emit(event);
 
 			this._parentSelect.closeDropdownFromSelection();
-
-			this._parentSelect.handleSelectionChange(selectedOption);
 		}
 	}
 
@@ -124,17 +119,11 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 	}
 
 	private _isOptionTyped(filterText: string | undefined): void {
-		if (
-			!this.data?.disabled &&
-			!this._preventTypeChange &&
-			this.data?.label?.toLowerCase() === filterText?.toLowerCase()
-		) {
+		if (!this.data?.disabled && this.data?.label?.toLowerCase() === filterText?.toLowerCase()) {
 			if (this._parentSelect.control.value !== this.data) {
-				const selectedOption: FudisSelectOption = { ...this.data, htmlId: this._id };
+				const selectedOption: FudisSelectOption = { ...this.data, fudisGeneratedHtmlId: this._id };
 				this._parentSelect.handleSelectionChange(selectedOption, true);
 			}
-		} else {
-			this._preventTypeChange = false;
 		}
 	}
 }

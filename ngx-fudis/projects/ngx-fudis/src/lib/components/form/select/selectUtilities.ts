@@ -12,18 +12,18 @@ export const sortValues = (value: FudisSelectOption[]): FudisSelectOption[] => {
 	// console.log(valueToSort);
 
 	valueToSort = value.sort((a: FudisSelectOption, b: FudisSelectOption) => {
-		if (a['htmlId']?.includes('-group-') && !b['htmlId']?.includes('-group-')) {
+		if (a['fudisGeneratedHtmlId']?.includes('-group-') && !b['fudisGeneratedHtmlId']?.includes('-group-')) {
 			return 1;
 		}
 
-		if (!a['htmlId']?.includes('-group-') && b['htmlId']?.includes('-group-')) {
+		if (!a['fudisGeneratedHtmlId']?.includes('-group-') && b['fudisGeneratedHtmlId']?.includes('-group-')) {
 			return -1;
 		}
 
-		if (a['htmlId'] < b['htmlId']) {
+		if (a['fudisGeneratedHtmlId'] < b['fudisGeneratedHtmlId']) {
 			return -1;
 		}
-		if (a['htmlId'] > b['htmlId']) {
+		if (a['fudisGeneratedHtmlId'] > b['fudisGeneratedHtmlId']) {
 			return 1;
 		}
 		return 0;

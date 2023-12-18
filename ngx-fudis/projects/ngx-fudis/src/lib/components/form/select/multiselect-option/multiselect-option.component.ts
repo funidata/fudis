@@ -72,7 +72,7 @@ export class MultiselectOptionComponent extends DropdownItemBaseDirective implem
 	protected _clickMultiselectOption(event: Event): void {
 		if (!this.data.disabled) {
 			this.checked = !this.checked;
-			const selectedOption: FudisSelectOption = { ...this.data, htmlId: this._id };
+			const selectedOption: FudisSelectOption = { ...this.data, fudisGeneratedHtmlId: this._id };
 
 			if (this.checked) {
 				this._parent.handleMultiSelectionChange(selectedOption, 'add');
@@ -138,7 +138,7 @@ export class MultiselectOptionComponent extends DropdownItemBaseDirective implem
 			this.checked = !!result;
 
 			if (this.checked) {
-				this._parent.handleCheckedSort({ ...this.data, htmlId: this._id });
+				this._parent.handleCheckedSort({ ...this.data, fudisGeneratedHtmlId: this._id });
 			}
 		}
 	}

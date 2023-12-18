@@ -51,10 +51,9 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 	public translationOptionDisabledText: string;
 
 	ngOnInit(): void {
-		this._setParentId();
+		this._setParentId('select');
 
-		this._controlValueSubscription = this.control.valueChanges.subscribe((value) => {
-			console.log(value);
+		this._controlValueSubscription = this.control.valueChanges.subscribe(() => {
 			if (!this.controlValueChangedInternally) {
 				this._updateSelectionFromControlValue();
 			}
@@ -82,9 +81,9 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 			this.control.patchValue(value);
 
 			if (this.autocomplete) {
-				(this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value = (
-					this.control.value as FudisSelectOption
-				).label;
+				this._autocompleteRef.preventSpaceKeypress = true;
+
+				(this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value = this.control.value!.label;
 			} else {
 				this.dropdownSelectionLabelText = value?.label ? value.label : '';
 			}
@@ -105,14 +104,8 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 		this.control.markAsTouched();
 	}
 
-	protected _setInputValueOnBlur(): void {
-		if (this.control.value) {
-			(this.inputRef.nativeElement as HTMLInputElement).value = this.control.value.label;
-		}
-	}
-
 	protected _checkIfValueNull(text: string): void {
-		if (this.control.value && text.toLowerCase() !== (this.control.value as FudisSelectOption).label.toLowerCase()) {
+		if (this.control.value && text.toLowerCase() !== this.control.value?.label.toLowerCase()) {
 			this.controlValueChangedInternally = true;
 			this.selectionUpdate.emit(null);
 			this.control.patchValue(null);
@@ -124,7 +117,7 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 			this.dropdownSelectionLabelText = this.control.value.label;
 
 			if (this.autocomplete) {
-				(this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value = this.control.value.label;
+				(this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value = this.control.value!.label;
 				this._autocompleteFilterText.set(this.control.value.label);
 
 				this._visibleOptionsValues = [this.control.value.value];
