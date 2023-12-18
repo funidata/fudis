@@ -14,7 +14,7 @@
 				<ng-template fudisContent type="form">
 					<fudis-fieldset [title]="t('fieldsetTitle')">
 						<ng-template fudisContent type="fieldset">
-							<!-- <fudis-checkbox-group
+							<fudis-checkbox-group
 								[title]="t('chooseBerry')"
 								[helpText]="t('chooseBerryHelp')"
 								[required]="true"
@@ -25,16 +25,20 @@
 									(handleChange)="handleChange($event)"
 									[controlName]="option.controlName"
 									[label]="option.label" />
-							</fudis-checkbox-group> -->
+							</fudis-checkbox-group>
 							<fudis-text-input
 								[label]="t('label')"
 								[helpText]="t('helpText')"
 								[maxLength]="20"
 								[control]="testFormGroup.controls['textInput']"
 								[tooltip]="'This text-input has multiple validators: required, minlength and maxlength'">
-								<fudis-error-message [visible]="customError" [message]="t('form_errors.customErrorMessage')" />
 								<fudis-error-message
-									[visible]="customError"
+									*ngIf="customError"
+									[visible]="testFormGroup.controls['textInput'].touched && customError"
+									[message]="t('form_errors.customErrorMessage')" />
+								<fudis-error-message
+									*ngIf="customError"
+									[visible]="testFormGroup.controls['textInput'].touched && customError"
 									[message]="'Backend threw an error, it is not totally fault of this component'" />
 							</fudis-text-input>
 							<fudis-radio-button-group

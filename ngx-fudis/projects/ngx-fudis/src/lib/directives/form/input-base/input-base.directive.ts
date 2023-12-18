@@ -7,7 +7,6 @@ import {
 	effect,
 	ViewChild,
 	ElementRef,
-	ContentChild,
 	ContentChildren,
 	QueryList,
 } from '@angular/core';
@@ -18,7 +17,6 @@ import { FudisTranslationService } from '../../../services/translation/translati
 import { FudisTranslationConfig } from '../../../types/miscellaneous';
 import { FudisIdComponent } from '../../../types/id';
 import { FudisIdService } from '../../../services/id/id.service';
-import { ContentDirective } from '../../content-projection/content/content.directive';
 import { ErrorMessageComponent } from '../../../components/form/error-message/error-message/error-message.component';
 
 @Directive({
@@ -36,8 +34,6 @@ export class InputBaseDirective extends TooltipApiDirective {
 			this._requiredText = this._translations().REQUIRED;
 		});
 	}
-
-	@ContentChild(ContentDirective) content: ContentDirective;
 
 	@ContentChildren(ErrorMessageComponent)
 	private _errorMessages: QueryList<ErrorMessageComponent>;

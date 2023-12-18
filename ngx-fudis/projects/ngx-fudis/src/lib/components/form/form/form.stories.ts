@@ -49,7 +49,7 @@ import readme from './readme.mdx';
 							[closed]="false">
 							<ng-template fudisContent type="expandable">
 								<fudis-grid>
-									<!-- <fudis-fieldset
+									<fudis-fieldset
 										[title]="'Basic info'"
 										[helpText]="'Some generic info about this course'"
 										[id]="fieldsetId">
@@ -112,7 +112,7 @@ import readme from './readme.mdx';
 												</fudis-datepicker>
 											</fudis-grid>
 										</ng-template>
-									</fudis-fieldset> -->
+									</fudis-fieldset>
 									<fudis-fieldset [title]="'Tearcher info'" [tooltip]="'Quite many fields are required.'">
 										<ng-template fudisContent type="fieldset">
 											<fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
@@ -122,24 +122,21 @@ import readme from './readme.mdx';
 													[control]="formExample.controls['teacher']"
 													[label]="'Responsible teacher'"
 													[helpText]="'Someone has to be responsible for this.'">
-													<fudis-error-message
-														[message]="'Backend threw an error, it is not totally fault of this component'"
-														[visible]="true" />
 												</fudis-text-input>
-												<!-- <fudis-text-input
+												<fudis-text-input
 													[id]="'unique-input-4'"
 													[helpText]="inputHelpText"
 													[control]="formExample.controls['email']"
 													[label]="'Contact email'"
 													[helpText]="'So that students can ask for more time on their homework.'"
-													[errorMsg]="errorEmail" /> -->
+													[errorMsg]="errorEmail" />
 											</fudis-grid>
 										</ng-template>
 									</fudis-fieldset>
 								</fudis-grid>
 							</ng-template>
 						</fudis-expandable>
-						<!-- <fudis-expandable [closed]="_closed" [title]="'Expandable section 2'" [errorSummaryBreadcrumb]="true">
+						<fudis-expandable [closed]="_closed" [title]="'Expandable section 2'" [errorSummaryBreadcrumb]="true">
 							<ng-template fudisContent type="expandable">
 								<fudis-fieldset [title]="'More important dates'">
 									<ng-template fudisContent type="fieldset">
@@ -147,7 +144,7 @@ import readme from './readme.mdx';
 									</ng-template>
 								</fudis-fieldset>
 							</ng-template>
-						</fudis-expandable> -->
+						</fudis-expandable>
 					</ng-template>
 				</fudis-section>
 			</ng-template>

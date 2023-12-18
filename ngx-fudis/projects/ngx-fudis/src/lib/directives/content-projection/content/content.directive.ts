@@ -23,13 +23,15 @@ export class FooterContentLeftDirective {
 export class FooterContentRightDirective {
 	constructor(public templateRef: TemplateRef<unknown>) {}
 }
-
+/**
+ * Fudis Error Message directives for a use of Fudis Date Range Component
+ */
 @Directive({ selector: '[fudisDateStartError]' })
-export class DateStartCustomErrorDirective {
+export class DateStartErrorDirective {
 	constructor(public templateRef: TemplateRef<unknown>) {}
 }
 
 @Directive({ selector: '[fudisDateEndError]' })
-export class DateEndCustomErrorDirective {
+export class DateEndErrorDirective {
 	constructor(public templateRef: TemplateRef<unknown>) {}
 }

@@ -65,11 +65,10 @@ export class AppFormExampleComponent implements OnInit {
 			null,
 			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
 		),
-		textInput: new FormControl<string | null | number>(null),
-		// textInput: new FormControl<string | null | number>(null, [
-		// 	FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required')),
-		// 	FudisValidators.minLength(5, this._translocoService.selectTranslateObject('form_errors.notEnoughCharacters')),
-		// ]),
+		textInput: new FormControl<string | null | number>(null, [
+			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required')),
+			FudisValidators.minLength(5, this._translocoService.selectTranslateObject('form_errors.notEnoughCharacters')),
+		]),
 		truth: new FormControl<boolean | null>(
 			null,
 			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))

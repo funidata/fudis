@@ -25,11 +25,16 @@ Necessary properties for Text Area are `label` and `control`.
 
 Fudis form components use Fudis Validators. See the full documentation on [how to use Fudis Validators](/docs/utilities-validators--documentation). 
 
-If a custom validation is used, read [how to add Error message](/docs/components-form-error-messages-error-message--documentation).
+If a custom validation is used, read [how to add Error message](/docs/components-form-error-message--documentation).
 
 **Text Area validators**
 - required
 - minLength and maxLength
+
+#### Text Area maxLength indicator
+
+[MaxLength](/docs/utilities-validators--documentation&args=#minlength-and-maxlength-validators) validator on Text Area does not prompt any error message but disable user to input more than allowed length of characters to the input field.
+Additionally, when maxLength validation is used, by passing maxLength Input <code>[maxLength]="maxLength"</code> to Text Area, will activate the maximum character indicator to the bottom right corner.
 
 ## Accessibility
 

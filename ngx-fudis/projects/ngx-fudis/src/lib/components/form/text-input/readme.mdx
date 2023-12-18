@@ -5,7 +5,7 @@ import * as TextInputStories from './text-input.stories.ts';
 
 <Meta title="Components/Form/Text-input" />
 
-# Text-input
+# Text Input
 
 Basic text-input component with different type options: `email`, `number`, `password`, `tel`, `text` and `url`. Defaults to `text`.
 
@@ -25,20 +25,19 @@ Necessary properties for text-input are `label` and `control`.
 
 Fudis form components use Fudis Validators. See the full documentation on [how to use Fudis Validators](/docs/utilities-validators--documentation). 
 
-If a custom validation is used, read [how to add Error message](/docs/components-form-error-messages-error-message--documentation).
+If a custom validation is used, read [how to add Error message](/docs/components-form-error-message--documentation).
 
-**TextInput validators**
+**Text Input validators**
 - All of the Fudis Validators can be assigned to Text-input component.
 
-#### Text-input maxLength indicator
+#### Text Input maxLength indicator
 
-Text-input [MaxLength](/docs/utilities-validators--documentation&args=#minlength-and-maxlength-validators) validator has additional <code>[maxLength]="maxLength"</code> Input.
-Assigning a `maxLength` will activate the maximum character indicator to the bottom right corner of the text-input.
+[MaxLength](/docs/utilities-validators--documentation&args=#minlength-and-maxlength-validators) validator on Text Input does not prompt any error message but disable user to input more than allowed length of characters to the input field.
+Additionally, when maxLength validation is used, by passing maxLength Input <code>[maxLength]="maxLength"</code> to Text Input, will activate the maximum character indicator to the bottom right corner.
 
-#### Text-input as number input
+#### Text Input as number input
 
 Text-input [Min and max](/docs/utilities-validators--documentation&args=#min-and-max-validators) validators have additional <code>[minNumber]="minNumber"</code> and <code>[maxNumber]="maxNumber"</code> attributes for passing wanted min and max values to the text-input.
-Both Inputs can be used separately or together.
 
 ## Accessibility
 

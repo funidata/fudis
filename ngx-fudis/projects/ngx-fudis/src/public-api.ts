@@ -20,8 +20,8 @@ export { DatepickerComponent } from './lib/components/form/date/datepicker/datep
 export { DateRangeComponent } from './lib/components/form/date/date-range/date-range.component';
 export {
 	ContentDirective,
-	DateStartCustomErrorDirective,
-	DateEndCustomErrorDirective,
+	DateStartErrorDirective,
+	DateEndErrorDirective,
 	FooterContentLeftDirective,
 	FooterContentRightDirective,
 } from './lib/directives/content-projection/content/content.directive';

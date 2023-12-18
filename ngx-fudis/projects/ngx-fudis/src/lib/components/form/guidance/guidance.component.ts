@@ -1,9 +1,8 @@
-import { Component, ContentChild, Input, OnInit, effect } from '@angular/core';
+import { Component, Input, OnInit, effect } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FudisFormErrors, FudisFormGroupErrors } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
-import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 
 @Component({
 	selector: 'fudis-guidance',
@@ -21,8 +20,6 @@ export class GuidanceComponent implements OnInit {
 			this._maxLengthText = _translationService.getTranslations()().TEXTINPUT.MAX_LENGTH;
 		});
 	}
-
-	@ContentChild(ContentDirective) content: ContentDirective;
 
 	/**
 	 * Id of input, fieldset or similar which Guidance is related to. Used in aria attributes and in emit information for Error Summary Service.

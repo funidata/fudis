@@ -37,8 +37,10 @@ FudisValidators.email('Input must be an email address.')
 
 ### MinLength and MaxLength validators
 
-For minLength and maxLength, include `FudisValidators.minLength()` and `FudisValidators.maxLength()` in the form control validator with preferred input length as number and a message parameter as a string or as an observable string.
-Max length validator does not prompt any error message but disable user to input more than allowed length of characters to the input field. 
+For minLength and maxLength, include `FudisValidators.minLength()` and `FudisValidators.maxLength()` in the form control validator with prefered input length as number and a message parameter as a string or as an observable string.
+When maxLength validation is used, [Text Input](/docs/components-form-text-input--documentation) and [Text Area](/docs/components-form-text-area--documentation) component's disable the user from inputing more than allowed length of characters and have additional maxLength indicator.
+When using [Dropdown](/docs/components-form-dropdown--documentation) with maxLength validator, error message is prompted when the desired maximum amount of options are selected.
+
 
 ```
 FudisValidators.maxLength(20, 'Too long email.')
@@ -57,7 +59,6 @@ FudisValidators.maxLength(20, 'Too long email.')
 Min and Max validators are used with form field `[type]="'number'"`. Min and Max validator disables inputs that exceed or fall below the allowed values.
 Form components that use Error message is prompt when the user inputs lower or higher value than the allowed value to the input field. 
 Form components that include min/max validation require a validation number and message parameter as a string or as an observable string.
-
 ```
 FudisValidators.max(10, 'Number cannot exceed 10.')
 
