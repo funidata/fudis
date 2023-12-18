@@ -4,7 +4,7 @@
 <div
 	#dropdownItem
 	class="fudis-select-option"
-	[class.fudis-select-option__focusable]="optionVisible"
+	[class.fudis-select-option__focusable]="_optionVisible"
 	[class.fudis-select-option--disabled]="data.disabled"
 	[class.fudis-select-option--selected]="_parentSelect.control.value?.value === data.value"
 	role="option"

@@ -1,7 +1,7 @@
 <div
 	class="fudis-multiselect-option"
 	[attr.id]="_id"
-	[class.fudis-multiselect-option--visible]="optionVisible"
+	[class.fudis-multiselect-option--visible]="_optionVisible"
 	[class.fudis-multiselect-option--checked]="checked"
 	[class.fudis-multiselect-option--focused]="_focused"
 	[class.fudis-multiselect-option--disabled]="data.disabled">
@@ -11,17 +11,17 @@
 		[class.fudis-multiselect-option__label--checked]="checked">
 		<div class="fudis-multiselect-option__label__checkbox">
 			<input
-				#dropdownItem
-				[class.fudis-multiselect-option__focusable]="optionVisible"
+				#optionInputRef
+				[class.fudis-multiselect-option__focusable]="_optionVisible"
 				type="checkbox"
 				class="fudis-multiselect-option__label__checkbox__input"
 				[attr.role]="'option'"
 				[attr.aria-disabled]="data.disabled ? true : null"
-				(click)="_clickMultiselectOption($event)"
-				[attr.aria-checked]="checked"
-				(focus)="_focusToOption()"
-				(keydown)="_handleKeyDown($event, '.fudis-multiselect-option__focusable')"
-				(blur)="_handleButtonBlur($event)" />
+				(click)="_clickOption($event)"
+				[attr.aria-checked]="checked ? true : null"
+				(focus)="_focus()"
+				(keydown)="_keyDown($event, '.fudis-multiselect-option__focusable')"
+				(blur)="_blur($event)" />
 			<svg
 				*ngIf="checked"
 				class="fudis-multiselect-option__label__checkbox__icon"

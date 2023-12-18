@@ -47,21 +47,34 @@ export class MultiselectOptionComponent extends DropdownItemBaseDirective implem
 		});
 	}
 
-	@ViewChild('dropdownItem') dropdownItem: ElementRef<HTMLInputElement | HTMLButtonElement>;
+	/**
+	 * ElementRef for option <input> element
+	 */
+	@ViewChild('optionInputRef') optionInputRef: ElementRef<HTMLInputElement | HTMLButtonElement>;
 
-	@Input({ required: true }) data: FudisSelectOption;
-
+	/**
+	 * Bind CSS class to Angular component wrapper
+	 */
 	@HostBinding('class') classes = 'fudis-select-option-host';
 
-	public optionVisible: boolean = true;
+	/**
+	 * Option info containing at least value & label
+	 */
+	@Input({ required: true }) data: FudisSelectOption;
 
+	/**
+	 * State of option visibility with autocomplete
+	 */
+	protected _optionVisible: boolean = true;
+
+	/**
+	 * State of user focus for the option
+	 */
 	protected _focused: boolean = false;
 
-	// Translated text for disabled option
-	protected _disabledText: string;
-
-	private _preventTypeChange: boolean = false;
-
+	/**
+	 * On init check if option is visible or checked
+	 */
 	ngOnInit(): void {
 		if (this._parent.autocomplete) {
 			this._isOptionVisible(this._parent.getAutocompleteFilterText()());
@@ -69,7 +82,11 @@ export class MultiselectOptionComponent extends DropdownItemBaseDirective implem
 		this._isOptionChecked(this._parent.getSelectedOptions()());
 	}
 
-	protected _clickMultiselectOption(event: Event): void {
+	/**
+	 * Click handler for clicking the option
+	 * @param event Event
+	 */
+	protected _clickOption(event: Event): void {
 		if (!this.data.disabled) {
 			this.checked = !this.checked;
 			const selectedOption: FudisSelectOption = { ...this.data, fudisGeneratedHtmlId: this._id };
@@ -85,25 +102,28 @@ export class MultiselectOptionComponent extends DropdownItemBaseDirective implem
 		}
 	}
 
-	protected _focusToOption(): void {
+	/**
+	 * User focus handler
+	 */
+	protected _focus(): void {
 		this._focused = true;
 	}
 
-	protected _handleKeyDown(event: KeyboardEvent, cssClassSelector: string) {
+	protected _keyDown(event: KeyboardEvent, cssClassSelector: string) {
 		if (event.key === 'Enter') {
-			this._clickMultiselectOption(event);
+			this._clickOption(event);
 		} else if (event.key !== ' ') {
-			this._baseHandleKeyDown(event, this.dropdownItem, cssClassSelector);
+			this._baseHandleKeyDown(event, this.optionInputRef, cssClassSelector);
 		}
 	}
 
-	protected _handleButtonBlur(event: FocusEvent): void {
+	protected _blur(event: FocusEvent): void {
 		this._focused = false;
 		this.handleBlur.emit(event);
 
 		const closeDropdown = this._focusedOutFromComponent(
 			event,
-			this.dropdownItem,
+			this.optionInputRef,
 			'fudis-multiselect-option__focusable',
 			true
 		);
@@ -115,16 +135,16 @@ export class MultiselectOptionComponent extends DropdownItemBaseDirective implem
 
 	private _isOptionVisible(filterText: string): void {
 		if (this.data) {
-			this.optionVisible =
+			this._optionVisible =
 				filterText && this.data.label.toLowerCase().includes(filterText.toLowerCase()) ? true : !filterText;
 
-			if (this.optionVisible) {
+			if (this._optionVisible) {
 				this._parent.setOptionVisibility(this.data.value, true);
 			} else {
 				this._parent.setOptionVisibility(this.data.value, false);
 			}
 
-			if (this.optionVisible && this._parentGroup) {
+			if (this._optionVisible && this._parentGroup) {
 				this._parentGroup.setOptionVisibility(this.data.value, true);
 			} else if (this._parentGroup) {
 				this._parentGroup.setOptionVisibility(this.data.value, false);

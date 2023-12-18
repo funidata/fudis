@@ -195,17 +195,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 		}
 	}
 
-	public closeDropdownFromSelection(): void {
-		this._dropdownOpen = false;
-		this._preventDropdownReopen = true;
-
-		if (this.autocomplete) {
-			this._autocompleteRef.inputRef.nativeElement.focus();
-		} else {
-			this.inputRef.nativeElement.focus();
-		}
-	}
-
 	/**
 	 * With autocomplete, each option sends information to parent if they are visible or not
 	 * @param value option value
@@ -312,9 +301,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	 */
 	protected _toggleDropdown(): void {
 		if (this._dropdownOpen) {
-			this._openDropdown();
-		} else {
 			this.closeDropdown();
+		} else {
+			this._openDropdown();
 		}
 	}
 

@@ -52,7 +52,7 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 
 	@HostBinding('class') classes = 'fudis-select-option-host';
 
-	public optionVisible: boolean = true;
+	public _optionVisible: boolean = true;
 
 	protected _focused: boolean = false;
 
@@ -72,9 +72,9 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 
 			this._parentSelect.handleSelectionChange(selectedOption);
 			this.handleClick.emit(event);
-
-			this._parentSelect.closeDropdownFromSelection();
 		}
+
+		this._parentSelect.closeDropdown(true, true);
 	}
 
 	protected _focusToOption(): void {
@@ -95,22 +95,22 @@ export class SelectOptionComponent extends DropdownItemBaseDirective implements 
 		const closeDropdown = this._focusedOutFromComponent(event, this.dropdownItem, 'fudis-select-option__focusable');
 
 		if (closeDropdown) {
-			this._parentSelect.closeDropdown();
+			this._parentSelect.closeDropdown(true, true);
 		}
 	}
 
 	private _isOptionVisible(filterText: string): void {
 		if (this.data) {
-			this.optionVisible =
+			this._optionVisible =
 				filterText && this.data.label.toLowerCase().includes(filterText.toLowerCase()) ? true : !filterText;
 
-			if (this.optionVisible) {
+			if (this._optionVisible) {
 				this._parentSelect.setOptionVisibility(this.data.value, true);
 			} else {
 				this._parentSelect.setOptionVisibility(this.data.value, false);
 			}
 
-			if (this.optionVisible && this._parentGroup) {
+			if (this._optionVisible && this._parentGroup) {
 				this._parentGroup.setOptionVisibility(this.data.value, true);
 			} else if (this._parentGroup) {
 				this._parentGroup.setOptionVisibility(this.data.value, false);
