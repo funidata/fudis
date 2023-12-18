@@ -109,6 +109,7 @@ import { SelectBaseDirective } from './components/form/select/select-base/select
 import { MultiselectComponent } from './components/form/select/multiselect/multiselect.component';
 import { MultiselectOptionComponent } from './components/form/select/multiselect-option/multiselect-option.component';
 import { SelectAutocompleteComponent } from './components/form/select/autocomplete/autocomplete.component';
+import { SelectOptionBaseDirective } from './components/form/select/select-option-base/select-option-base.directive';
 
 @NgModule({
 	/*
@@ -189,6 +190,7 @@ import { SelectAutocompleteComponent } from './components/form/select/autocomple
 		TextInputComponent,
 		TextAreaComponent,
 		TooltipDirective,
+  SelectOptionBaseDirective,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.

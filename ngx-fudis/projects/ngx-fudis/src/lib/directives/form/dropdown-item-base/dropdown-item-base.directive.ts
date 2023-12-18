@@ -38,11 +38,13 @@ export class DropdownItemBaseDirective {
 	protected _id: string;
 
 	// eslint-disable-next-line class-methods-use-this
-	protected _baseHandleKeyDown(event: KeyboardEvent, element: ElementRef, selector: string) {
+	protected _baseHandleKeyDown(event: KeyboardEvent, element: ElementRef, cssClassSelector: string) {
 		if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+			const cssClass = `.${cssClassSelector}`;
+
 			const focusElement = this._document.querySelector(':focus');
 
-			const siblingElements = element.nativeElement.closest('.fudis-select-dropdown').querySelectorAll(selector);
+			const siblingElements = element.nativeElement.closest('.fudis-select-dropdown').querySelectorAll(cssClass);
 
 			const siblingElementsCount = siblingElements.length - 1;
 			event.preventDefault();

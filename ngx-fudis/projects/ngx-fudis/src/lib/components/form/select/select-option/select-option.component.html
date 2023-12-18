@@ -2,7 +2,7 @@
 	Singleselect option
 -->
 <div
-	#dropdownItem
+	#optionInputRef
 	class="fudis-select-option"
 	[class.fudis-select-option__focusable]="_optionVisible"
 	[class.fudis-select-option--disabled]="data.disabled"
@@ -12,9 +12,10 @@
 	tabindex="-1"
 	[attr.id]="_id"
 	[attr.aria-disabled]="data.disabled ? true : null"
-	(keydown)="_handleKeyDown($event, '.fudis-select-option__focusable')"
-	(blur)="_handleButtonBlur($event)"
-	(click)="_clickSelectOption($event)">
+	(focus)="_focus()"
+	(keydown)="_keyDown($event)"
+	(blur)="_blur($event)"
+	(click)="_clickOption($event)">
 	<span class="fudis-select-option__label">
 		{{ data.label }}
 	</span>

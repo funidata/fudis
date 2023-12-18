@@ -20,7 +20,7 @@
 				(click)="_clickOption($event)"
 				[attr.aria-selected]="checked"
 				(focus)="_focus()"
-				(keydown)="_keyDown($event, '.fudis-multiselect-option__focusable')"
+				(keydown)="_keyDown($event)"
 				(blur)="_blur($event)" />
 			<svg
 				*ngIf="checked"
