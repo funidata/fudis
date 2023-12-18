@@ -1,4 +1,4 @@
-import { Component, Host, HostBinding, Inject, OnInit, Optional, effect } from '@angular/core';
+import { Component, Host, Inject, OnInit, Optional, effect } from '@angular/core';
 
 import { DOCUMENT } from '@angular/common';
 import { FudisSelectOption } from '../../../../types/forms';
@@ -23,8 +23,6 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
 
 		this._parent = _parentSelect;
 
-		this._focusSelector = 'fudis-select-option__focusable';
-
 		if (this._parentGroup) {
 			this._id = this._idService.getNewGrandChildId('select', this._parent.id, this._parentGroup.id);
 		} else {
@@ -38,8 +36,6 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
 		});
 	}
 
-	@HostBinding('class') classes = 'fudis-select-option-host';
-
 	ngOnInit(): void {
 		if (this._parent.autocomplete) {
 			this._isOptionVisible(this._parent.getAutocompleteFilterText()());
@@ -47,6 +43,10 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
 		}
 	}
 
+	/**
+	 * Click handler for Select Option click
+	 * @param event event emitted
+	 */
 	protected override _clickOption(event: Event): void {
 		if (!this.data.disabled) {
 			const selectedOption: FudisSelectOption = { ...this.data, fudisGeneratedHtmlId: this._id };
@@ -57,6 +57,10 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
 		this._parent.closeDropdown(true, true);
 	}
 
+	/**
+	 * Used with autocomplete to check if filter text matches this option. If yes, then trigger selection change in the parent
+	 * @param filterText autocomplete filter text from parent
+	 */
 	private _isOptionTyped(filterText: string | undefined): void {
 		if (!this.data?.disabled && this.data?.label?.toLowerCase() === filterText?.toLowerCase()) {
 			if (this._parent.control.value !== this.data) {

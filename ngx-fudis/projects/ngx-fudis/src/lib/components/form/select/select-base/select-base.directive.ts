@@ -21,7 +21,7 @@ import { hasRequiredValidator } from '../../../../utilities/form/getValidators';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
-import { FudisInputSize, FudisSelectOption } from '../../../../types/forms';
+import { FudisInputSize } from '../../../../types/forms';
 import { ButtonComponent } from '../../../button/button.component';
 import { setVisibleOptionsList } from '../selectUtilities';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
@@ -60,6 +60,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	 */
 	@ViewChild('inputWrapperRef') private _inputWrapperRef: ElementRef<HTMLDivElement>;
 
+	/**
+	 * Reference to autocomplete element
+	 */
 	@ViewChild('autocompleteRef') protected _autocompleteRef: SelectAutocompleteComponent;
 
 	/**
@@ -68,7 +71,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	@ContentChild(ContentDirective) protected _content: ContentDirective;
 
 	/**
-	 * Add CSS class to host
+	 * Adds CSS class to host
 	 */
 	@HostBinding('class') classes = 'fudis-select-host';
 
@@ -106,6 +109,11 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	 * Used in control.valueChanges subscription to not run update functions unless valueChange comes from application
 	 */
 	public controlValueChangedInternally: boolean = false;
+
+	/**
+	 * CSS selector for querying focus states
+	 */
+	public focusSelector: string;
 
 	/**
 	 * For setting dropdown open / closed
@@ -179,9 +187,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	}
 
 	/**
-	 *
+	 * Close dropdown
 	 * @param focusToInput: when dropdown closes, focus or not to the input
-	 * @param preventDropdownReopen: especially if click comes from clicking a option in a dropdown, prevent dropdown to reopen when focusing back
+	 * @param preventDropdownReopen: For cases, when closing comes from outside and there's no need to reopen the dropdown when focusing back to the input, which usually triggers opening the dropdown.
 	 */
 	public closeDropdown(focusToInput: boolean = true, preventDropdownReopen: boolean = false): void {
 		this._dropdownOpen = false;
@@ -202,12 +210,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	 */
 	public setOptionVisibility(value: string, visible: boolean) {
 		this._visibleOptionsValues = setVisibleOptionsList(this._visibleOptionsValues, value, visible);
-	}
-
-	protected _patchControlValue(value: FudisSelectOption | null) {
-		this.controlValueChangedInternally = true;
-		this._preventDropdownReopen = true;
-		this.control.patchValue(value);
 	}
 
 	/**
@@ -231,6 +233,26 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 			this._preventClick = true;
 			this._preventDropdownReopen = false;
 		}
+	}
+
+	/**
+	 * Handler for input field blur
+	 * @param event FocusEvent
+	 */
+	protected _inputBlur(event: FocusEvent): void {
+		// Time out used for user mouse click cases
+		if (!event.relatedTarget) {
+			setTimeout(() => {
+				if (!document.activeElement?.classList.contains(this.focusSelector)) {
+					this.closeDropdown(false);
+				}
+			}, 150);
+		} else if (!(event.relatedTarget as HTMLElement)?.classList.contains(this.focusSelector)) {
+			this.closeDropdown(false);
+		}
+
+		this._inputFocused = false;
+		this.control.markAsTouched();
 	}
 
 	/**
@@ -322,11 +344,13 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 
 	/**
 	 * To focus on first option when dropdown opens
-	 * @param focusSelector CSS selector to focus to
+	 * @param cssFocusSelector CSS class to focus to
 	 */
-	protected _focusToFirstOption(focusSelector: string): void {
+	protected _focusToFirstOption(cssFocusSelector: string): void {
+		const cssSelector = `.${cssFocusSelector}`;
+
 		const firstOption: HTMLInputElement = this._dropdownRef?.dropdownElement.nativeElement.querySelector(
-			focusSelector
+			cssSelector
 		) as HTMLInputElement;
 
 		if (firstOption) {
@@ -340,7 +364,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 		} else if (this._focusTryCounter < 100) {
 			setTimeout(() => {
 				this._focusTryCounter += 1;
-				this._focusToFirstOption(focusSelector);
+				this._focusToFirstOption(cssSelector);
 			}, 100);
 		}
 	}

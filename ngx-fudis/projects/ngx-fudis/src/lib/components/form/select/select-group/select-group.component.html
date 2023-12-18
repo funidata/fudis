@@ -1,11 +1,9 @@
 <div
-	#selectGroup
 	*ngIf="visible"
 	class="fudis-select-group"
-	[class.fudis-select-group--hidden]="!_hasChildOptions"
+	[class.fudis-select-group--hidden]="_visibleOptionsValues.length === 0"
 	[attr.aria-labelledby]="id"
 	role="group">
 	<span class="fudis-select-group__label" [attr.aria-hidden]="true" [attr.id]="id">{{ label }}</span>
 	<ng-content></ng-content>
-	<!-- <ng-content select="fudis-select-option"></ng-content> -->
 </div>

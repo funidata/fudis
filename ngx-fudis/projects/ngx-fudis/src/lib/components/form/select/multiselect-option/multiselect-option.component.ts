@@ -1,4 +1,4 @@
-import { Component, Host, HostBinding, Inject, OnInit, Optional, effect } from '@angular/core';
+import { Component, Host, Inject, OnInit, Optional, effect } from '@angular/core';
 
 import { DOCUMENT } from '@angular/common';
 import { FudisSelectOption } from '../../../../types/forms';
@@ -22,7 +22,6 @@ export class MultiselectOptionComponent extends SelectOptionBaseDirective implem
 		super(_document, _parentGroup);
 
 		this._parent = this._parentMultiselect;
-		this._focusSelector = 'fudis-multiselect-option__focusable';
 
 		if (this._parentGroup) {
 			this._id = this._idService.getNewGrandChildId('multiselect', this._parent.id, this._parentGroup.id);
@@ -34,11 +33,6 @@ export class MultiselectOptionComponent extends SelectOptionBaseDirective implem
 			this._isOptionChecked(this._parentMultiselect.getSelectedOptions()());
 		});
 	}
-
-	/**
-	 * Bind CSS class to Angular component wrapper
-	 */
-	@HostBinding('class') classes = 'fudis-select-option-host';
 
 	/**
 	 * On init check if option is visible or checked
@@ -70,6 +64,10 @@ export class MultiselectOptionComponent extends SelectOptionBaseDirective implem
 		}
 	}
 
+	/**
+	 * Checks if this option is checked or not and updates parents state accordingly
+	 * @param options currently selected options
+	 */
 	private _isOptionChecked(options: FudisSelectOption[]): void {
 		if (this.data) {
 			const result = options.find((option) => option.label === this.data.label && option.value === this.data.value);

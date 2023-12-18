@@ -30,6 +30,8 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 	) {
 		super(_focusService, _translationService, _idService);
 
+		this.focusSelector = 'fudis-select-option__focusable';
+
 		effect(() => {
 			this.translationOptionDisabledText = this._translations().SELECT.DISABLED;
 		});
@@ -72,6 +74,11 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 		}
 	}
 
+	/**
+	 * Handler for triggered option selection change
+	 * @param value option to be selected
+	 * @param disableSignalEmit disable signal update to reduce unneeded state updates
+	 */
 	public handleSelectionChange(value: FudisSelectOption, disableSignalEmit?: boolean): void {
 		const equalValues = areObjectsDeepEquals(value, this.control.value!);
 
@@ -94,17 +101,11 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 		}
 	}
 
-	protected _inputBlur(event: FocusEvent): void {
-		if (!(event.relatedTarget as HTMLElement)?.classList.contains('fudis-select-option__focusable')) {
-			this.closeDropdown(false);
-		}
-
-		this._inputFocused = false;
-
-		this.control.markAsTouched();
-	}
-
-	protected _checkIfValueNull(text: string): void {
+	/**
+	 * Checks if currently typed filter text is not same as control label value
+	 * @param text filter text value emitted from autocomplete
+	 */
+	protected _checkIfAutocompleteValueNull(text: string): void {
 		if (this.control.value && text.toLowerCase() !== this.control.value?.label.toLowerCase()) {
 			this.controlValueChangedInternally = true;
 			this.selectionUpdate.emit(null);
@@ -112,6 +113,19 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 		}
 	}
 
+	/**
+	 * Function to patch internally control's value
+	 * @param value Option value to patch
+	 */
+	protected _patchControlValue(value: FudisSelectOption | null) {
+		this.controlValueChangedInternally = true;
+		this._preventDropdownReopen = true;
+		this.control.patchValue(value);
+	}
+
+	/**
+	 * If control value is updated from the Application, update component's state accordingly
+	 */
 	private _updateSelectionFromControlValue(): void {
 		if (this.control.value) {
 			this.dropdownSelectionLabelText = this.control.value.label;

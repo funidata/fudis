@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FudisSelectOption } from '../../../../types/forms';
 
 @Component({
-	selector: 'fudis-select-multiselect-chip-list',
-	templateUrl: './select-multiselect-chip-list.component.html',
-	styleUrls: ['./select-multiselect-chip-list.component.scss'],
+	selector: 'fudis-multiselect-chip-list',
+	templateUrl: './multiselect-chip-list.component.html',
+	styleUrls: ['./multiselect-chip-list.component.scss'],
 })
-export class SelectMultiselectChipListComponent {
+export class MultiselectChipListComponent {
 	/**
 	 * Array of selected chip items
 	 */
@@ -20,16 +20,20 @@ export class SelectMultiselectChipListComponent {
 	/**
 	 * Output for removed chip index in selectedItems
 	 */
-	@Output() removedChipIndex = new EventEmitter<number>();
+	@Output() handleClick = new EventEmitter<number>();
 
-	removeChip(event: Event, index: number) {
+	/**
+	 * Focuses to the sibling and emits clicked index
+	 * @param event click event
+	 * @param index clicked index
+	 */
+	protected _clickChip(event: Event, index: number) {
 		const eventTarget = event.target as HTMLButtonElement;
 		if (eventTarget.nextElementSibling) {
 			(eventTarget.nextElementSibling as HTMLButtonElement).focus();
 		} else if (eventTarget.previousElementSibling) {
 			(eventTarget.previousElementSibling as HTMLButtonElement).focus();
 		}
-
-		this.removedChipIndex.emit(index);
+		this.handleClick.emit(index);
 	}
 }

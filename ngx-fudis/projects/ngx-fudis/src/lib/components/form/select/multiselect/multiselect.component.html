@@ -21,7 +21,7 @@
 			(click)="_clickInput($event)"
 			(focus)="_inputFocus()"
 			(blur)="_inputBlur($event)"
-			(keydown)="_dropdownKeypress($event, '.fudis-multiselect-option__focusable')"
+			(keydown)="_dropdownKeypress($event, focusSelector)"
 			[attr.aria-autocomplete]="'none'"
 			[attr.aria-expanded]="_dropdownOpen"
 			[attr.aria-disabled]="disabled"
@@ -49,9 +49,7 @@
 			[required]="_required"
 			[invalidState]="invalidState"
 			[multiselect]="true"
-			(triggerFocusToFirstOption)="
-				_visibleOptionsValues.length !== 0 && _focusToFirstOption('.fudis-multiselect-option__focusable')
-			"
+			(triggerFocusToFirstOption)="_visibleOptionsValues.length !== 0 && _focusToFirstOption(this.focusSelector)"
 			(triggerFilterTextUpdate)="_filterTextUpdate($event)"
 			(triggerDropdownOpen)="_openDropdown()"
 			(triggerDropdownClose)="closeDropdown()"
@@ -86,9 +84,9 @@
 		[control]="control" />
 	<ng-container *ngIf="control.value && showSelectionChips">
 		<span [attr.id]="id + '-remove-items'" class="fudis-visually-hidden">{{ _translationRemoveItem }}</span>
-		<fudis-select-multiselect-chip-list
+		<fudis-multiselect-chip-list
 			[selectedItems]="_sortedSelectedOptions"
 			[parentId]="id"
-			(removedChipIndex)="_handleRemoveChip($event)" />
+			(handleClick)="_handleRemoveChip($event)" />
 	</ng-container>
 </div>

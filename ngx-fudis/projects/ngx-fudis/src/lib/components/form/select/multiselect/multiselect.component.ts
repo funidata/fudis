@@ -31,6 +31,8 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 	) {
 		super(_focusService, _translationService, _idService);
 
+		this.focusSelector = 'fudis-multiselect-option__focusable';
+
 		effect(() => {
 			this._translationRemoveItem = this._translations().SELECT.MULTISELECT.REMOVE_ITEM;
 		});
@@ -164,27 +166,8 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
 	}
 
 	/**
-	 * Handler for multiselect input field blur
-	 * @param event FocusEvent
-	 */
-	protected _inputBlur(event: FocusEvent): void {
-		// Time out used for user mouse click cases
-		if (!event.relatedTarget) {
-			setTimeout(() => {
-				if (!document.activeElement?.classList.contains('fudis-multiselect-option__focusable')) {
-					this.closeDropdown(false);
-				}
-			}, 150);
-		} else if (!(event.relatedTarget as HTMLElement)?.classList.contains('fudis-multiselect-option__focusable')) {
-			this.closeDropdown(false);
-		}
-
-		this._inputFocused = false;
-		this.control.markAsTouched();
-	}
-
-	/**
 	 * Handle chip item remove by index. If there are no selections done, focus back to input on last item removal.
+	 * @param index index to remove
 	 */
 	protected _handleRemoveChip(index: number): void {
 		const currentValue = this.control.value;

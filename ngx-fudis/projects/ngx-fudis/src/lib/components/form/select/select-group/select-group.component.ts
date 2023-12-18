@@ -1,4 +1,4 @@
-import { Component, ElementRef, Host, Input, Optional, ViewChild } from '@angular/core';
+import { Component, Host, Input, Optional } from '@angular/core';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectComponent } from '../select/select.component';
 import { setVisibleOptionsList } from '../selectUtilities';
@@ -21,8 +21,6 @@ export class SelectGroupComponent {
 			this.id = this._idService.getNewChildId('multiselect', this._parentMultiselect.id, true);
 		}
 	}
-
-	@ViewChild('selectGroup') selectGroup: ElementRef<HTMLDivElement>;
 
 	/**
 	 * Visible title label for this group of options
@@ -47,14 +45,14 @@ export class SelectGroupComponent {
 	/**
 	 * Used when filtering autocomplete results to check if 'No results found' text is visible
 	 */
+	protected _visibleOptionsValues: string[] = [];
 
-	protected _hasChildOptions: boolean = true;
-
-	private _visibleOptionsValues: string[] = [];
-
+	/**
+	 * Called from SelectOption and MultiselectOption to set if the option is visible or not
+	 * @param value value of option
+	 * @param visible state of option's visibility
+	 */
 	public setOptionVisibility(value: string, visible: boolean) {
 		this._visibleOptionsValues = setVisibleOptionsList(this._visibleOptionsValues, value, visible);
-
-		this._hasChildOptions = this._visibleOptionsValues.length !== 0;
 	}
 }

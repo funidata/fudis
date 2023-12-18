@@ -104,7 +104,7 @@ import { SelectGroupComponent } from './components/form/select/select-group/sele
 import { DropdownItemBaseDirective } from './directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { DropdownBaseDirective } from './directives/form/dropdown-base/dropdown-base.directive';
 import { SelectDropdownComponent } from './components/form/select/select-dropdown/select-dropdown.component';
-import { SelectMultiselectChipListComponent } from './components/form/select/select-multiselect-chip/select-multiselect-chip-list.component';
+import { MultiselectChipListComponent } from './components/form/select/multiselect-chip-list/multiselect-chip-list.component';
 import { SelectBaseDirective } from './components/form/select/select-base/select-base.directive';
 import { MultiselectComponent } from './components/form/select/multiselect/multiselect.component';
 import { MultiselectOptionComponent } from './components/form/select/multiselect-option/multiselect-option.component';
@@ -172,6 +172,7 @@ import { SelectOptionBaseDirective } from './components/form/select/select-optio
 		LanguageBadgeComponent,
 		LinkComponent,
 		MultiselectComponent,
+		MultiselectChipListComponent,
 		MultiselectOptionComponent,
 		NotificationComponent,
 		NotificationsDirective,
@@ -184,13 +185,12 @@ import { SelectOptionBaseDirective } from './components/form/select/select-optio
 		SelectDropdownComponent,
 		SelectGroupComponent,
 		SelectOptionComponent,
-		SelectMultiselectChipListComponent,
 		SpacingApiDirective,
 		SpacingDirective,
 		TextInputComponent,
 		TextAreaComponent,
 		TooltipDirective,
-  SelectOptionBaseDirective,
+		SelectOptionBaseDirective,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.

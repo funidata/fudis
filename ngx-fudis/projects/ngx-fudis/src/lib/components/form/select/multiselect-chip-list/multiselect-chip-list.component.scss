@@ -5,13 +5,11 @@
 @use '../../../../foundations/focus/mixins.scss' as focus;
 @use '../../../../foundations/utilities/mixins.scss' as utilities;
 
-.fudis-select-multiselect-chip {
-	&__list {
-		@include utilities.box-reset;
+.fudis-multiselect-chip-list {
+	@include utilities.box-reset;
 
-		display: flex;
-		flex-wrap: wrap;
-	}
+	display: flex;
+	flex-wrap: wrap;
 
 	&__button {
 		@include colorMixins.bg-color('gray-dark');
