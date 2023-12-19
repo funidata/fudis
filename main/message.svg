@@ -1,3 +1,1 @@
-<svg class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="message">
-    <path d="M21 10v7c0 .55-.45 1-1 1h-6l-3 3v-3H9c-.55 0-1-.45-1-1v-7c0-.55.45-1 1-1h11c.55 0 1 .45 1 1Zm-11 2h8v-1h-8v1Zm0 3h5v-1h-5v1Z"></path>
-</svg>
+<svg id="message" xmlns="http://www.w3.org/2000/svg" width="32" height="32"><path d="M11 25.5V22h3.5L11 25.5Z"/><path fill-rule="evenodd" d="M7 11a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v-9Zm3 5.75a.75.75 0 0 1 .75-.75h6.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1-.75-.75Zm.75-4.75a.75.75 0 0 0 0 1.5h10.5a.75.75 0 0 0 0-1.5h-10.5Z" clip-rule="evenodd"/></svg>

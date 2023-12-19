@@ -1,4 +1,1 @@
-<svg class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="-1 -1 32 32" id="ring-plus">
-    <path class="a" d="M15,28A13,13,0,1,1,28,15,13.0147,13.0147,0,0,1,15,28ZM15,3A12,12,0,1,0,27,15,12.0137,12.0137,0,0,0,15,3Z"/>
-    <polygon class="a" points="20.55 14.75 15.52 14.75 15.52 9.72 14.52 9.72 14.52 14.75 9.49 14.75 9.49 15.75 14.52 15.75 14.52 20.78 15.52 20.78 15.52 15.75 20.55 15.75 20.55 14.75"/>
-</svg>
+<svg id="ring-plus" xmlns="http://www.w3.org/2000/svg" width="32" height="32"><path fill-rule="evenodd" d="M16 28c6.627 0 12-5.373 12-12S22.627 4 16 4 4 9.373 4 16s5.373 12 12 12Zm0 1c7.18 0 13-5.82 13-13S23.18 3 16 3 3 8.82 3 16s5.82 13 13 13Z" clip-rule="evenodd"/><path d="M16 9h1v13h-1z"/><path d="M10 15h13v1H10z"/></svg>
