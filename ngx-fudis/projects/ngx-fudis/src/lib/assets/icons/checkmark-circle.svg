@@ -1,4 +1,1 @@
-<svg class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="checkmark-circle">
-    <path class="a" d="M15,25A10,10,0,1,1,25,15,10.0114,10.0114,0,0,1,15,25ZM15,6a9,9,0,1,0,9,9A9.01,9.01,0,0,0,15,6Z"/>
-    <path class="a" d="M14,20a.9984.9984,0,0,1-.707-.293l-3-3a1,1,0,1,1,1.414-1.414l2.1656,2.165,4.3139-6.0391a1,1,0,1,1,1.627,1.1621l-5,7a1.0018,1.0018,0,0,1-.7315.4161C14.0547,19.9992,14.0273,20,14,20Z"/>
-</svg>
+<svg id="checkmark-circle" xmlns="http://www.w3.org/2000/svg" width="32" height="32"><path fill-rule="evenodd" d="M16 25a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 1c5.523 0 10-4.477 10-10S21.523 6 16 6 6 10.477 6 16s4.477 10 10 10Z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M21.573 11.18a1 1 0 0 1 .247 1.393l-5.713 8.181a1 1 0 0 1-1.564.095l-3.287-3.665a1 1 0 0 1 1.489-1.335l2.444 2.726 4.991-7.147a1 1 0 0 1 1.393-.248Z" clip-rule="evenodd"/></svg>

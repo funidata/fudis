@@ -120,7 +120,7 @@ describe('CheckboxComponent', () => {
 		it('should create as checked, when control value is true', () => {
 			const checkedCheckbox = fixture.nativeElement.querySelector('[ng-reflect-control-name="pear"]');
 
-			const checkedIcon = checkedCheckbox.querySelector('fudis-icon[ng-reflect-icon="check-small"]');
+			const checkedIcon = checkedCheckbox.querySelector('fudis-icon[ng-reflect-icon="check"]');
 
 			const inputValue: string | null | undefined = checkedCheckbox.querySelector('input').getAttribute('value');
 

@@ -24,15 +24,16 @@
 		&__box {
 			@include borders.border('1px', 'solid', 'gray-middle');
 
+			display: flex;
 			position: absolute;
+			align-items: center;
+			justify-content: center;
 			margin-right: spacing.$spacing-xs;
 			border-radius: 0;
 			width: spacing.$spacing-input-checkbox;
 			height: spacing.$spacing-input-checkbox;
 
 			&__icon .fudis-icon {
-				width: spacing.$spacing-input-checkbox;
-				height: spacing.$spacing-input-checkbox;
 				fill: colors.$color-gray-middle;
 			}
 
