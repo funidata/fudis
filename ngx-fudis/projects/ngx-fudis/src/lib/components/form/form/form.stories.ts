@@ -46,7 +46,7 @@ import readme from './readme.mdx';
 						<fudis-expandable
 							(closedChange)="handleClosedOutput($event)"
 							[title]="'Expandable section 1'"
-							[closed]="false">
+							[closed]="_closed">
 							<ng-template fudisContent type="expandable">
 								<fudis-grid>
 									<fudis-fieldset

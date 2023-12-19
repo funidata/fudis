@@ -34,8 +34,7 @@ const getDefaultValue = (options: FudisRadioButtonOption[]): string | boolean | 
 				[title]="'Choose a truth'"
 				[helpText]="'We all perceive truth individually.'"
 				[control]="mainFormGroup.controls['third']"
-				[options]="booleanOptions">
-			</fudis-radio-button-group>
+				[options]="booleanOptions" />
 		</form>
 	`,
 })
