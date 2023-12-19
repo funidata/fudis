@@ -9,8 +9,6 @@ import { FudisSelectOption } from '../../../types/forms';
 export const sortValues = (value: FudisSelectOption[]): FudisSelectOption[] => {
 	let valueToSort: FudisSelectOption[] = value;
 
-	// console.log(valueToSort);
-
 	valueToSort = value.sort((a: FudisSelectOption, b: FudisSelectOption) => {
 		if (a['fudisGeneratedHtmlId']?.includes('-group-') && !b['fudisGeneratedHtmlId']?.includes('-group-')) {
 			return 1;

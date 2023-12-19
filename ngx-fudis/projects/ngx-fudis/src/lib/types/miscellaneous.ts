@@ -2,13 +2,6 @@ export type FudisBadgeVariant = 'accent' | 'danger' | 'primary' | 'secondary' | 
 
 export type FudisDescriptionListVariant = 'regular' | 'compact';
 
-export type FudisDropdownMenuStatus =
-	| {
-			id: string;
-			open: boolean;
-	  }
-	| null
-	| undefined;
 
 export interface FudisDescriptionListItem {
 	key: string;

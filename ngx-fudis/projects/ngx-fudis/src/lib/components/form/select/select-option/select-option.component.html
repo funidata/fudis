@@ -20,7 +20,7 @@
 		{{ data.label }}
 	</span>
 	<fudis-icon
-		*ngIf="!data.disabled && $any(_parentSelect.control.value)?.value === data.value"
+		*ngIf="!data.disabled && _parentSelect.control.value?.value === data.value"
 		[icon]="'check'"
 		[color]="'primary'" />
 	<span *ngIf="data.disabled" class="fudis-select-option__label fudis-select-option__disabled-text"

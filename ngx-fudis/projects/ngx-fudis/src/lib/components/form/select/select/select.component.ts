@@ -38,7 +38,7 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 	}
 
 	/*
-	 * FormControl for the dropdown
+	 * FormControl for single select
 	 */
 	@Input({ required: true }) override control: FormControl<FudisSelectOption | null>;
 
