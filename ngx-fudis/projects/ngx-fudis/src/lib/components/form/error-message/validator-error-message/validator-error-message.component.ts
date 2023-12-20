@@ -8,7 +8,7 @@ import { FudisFormErrorSummaryItem } from '../../../../types/forms';
 @Component({
 	selector: 'fudis-validator-error-message',
 	templateUrl: './validator-error-message.component.html',
-	styleUrls: ['../error-message/error-message.component.scss'],
+	styleUrls: ['./validator-error-message.component.scss'],
 })
 export class ValidatorErrorMessageComponent
 	extends ErrorMessageBaseDirective

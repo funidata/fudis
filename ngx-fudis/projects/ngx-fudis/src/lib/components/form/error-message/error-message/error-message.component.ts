@@ -1,36 +1,36 @@
-import { Component, Host, OnChanges, OnDestroy, OnInit, Optional } from '@angular/core';
-import { AbstractControl, FormControl } from '@angular/forms';
-import { FudisValidatorFn, FudisValidatorMessage } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
-import { FudisFormErrorSummaryRemoveItem } from '../../../../types/forms';
+import { Component, EventEmitter, Host, Input, OnChanges, OnDestroy, OnInit, Optional, Output } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { AbstractControl } from '@angular/forms';
+import { FudisValidationErrors, FudisValidatorFn, FudisValidatorMessage } from '../../../../utilities/form/validators';
+
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
-import { ErrorMessageBaseDirective } from '../error-message-base/error-message-base.directive';
 import { TextInputComponent } from '../../text-input/text-input.component';
 import { TextAreaComponent } from '../../text-area/text-area.component';
 import { DropdownComponent } from '../../dropdown/dropdown.component';
 import { DatepickerComponent } from '../../date/datepicker/datepicker.component';
 import { AutocompleteComponent } from '../../autocomplete/autocomplete.component';
+import { InputWithLanguageOptionsComponent } from '../../input-with-language-options/input-with-language-options.component';
+import { CheckboxGroupComponent } from '../../checkbox-group/checkbox-group.component';
 
 @Component({
 	selector: 'fudis-error-message',
-	templateUrl: './error-message.component.html',
-	styleUrls: ['./error-message.component.scss'],
+	template: '',
 })
-export class ErrorMessageComponent extends ErrorMessageBaseDirective implements OnInit, OnChanges, OnDestroy {
+export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	constructor(
-		_errorSummaryService: FudisInternalErrorSummaryService,
-		_translationService: FudisTranslationService,
-		_idService: FudisIdService,
+		private _errorSummaryService: FudisInternalErrorSummaryService,
+		private _translationService: FudisTranslationService,
+		private _idService: FudisIdService,
 		@Host() @Optional() private _textInput: TextInputComponent,
 		@Host() @Optional() private _textArea: TextAreaComponent,
-
 		@Host() @Optional() private _dropdown: DropdownComponent,
 		@Host() @Optional() private _datePicker: DatepickerComponent,
-		@Host() @Optional() private _autocomplete: AutocompleteComponent
+		@Host() @Optional() private _autocomplete: AutocompleteComponent,
+		@Host() @Optional() private _inputWithLanguageOptions: InputWithLanguageOptionsComponent,
+		@Host() @Optional() private _checkboxGroup: CheckboxGroupComponent
 	) {
-		super(_errorSummaryService, _translationService, _idService);
-
 		if (_textInput) {
 			this._parent = _textInput;
 		} else if (_textArea) {
@@ -41,37 +41,78 @@ export class ErrorMessageComponent extends ErrorMessageBaseDirective implements 
 			this._parent = _datePicker;
 		} else if (_autocomplete) {
 			this._parent = _autocomplete;
+		} else if (_inputWithLanguageOptions) {
+			this._parentGroup = _inputWithLanguageOptions;
+		} else if (_checkboxGroup) {
+			this._parentGroup = _checkboxGroup;
 		}
 
 		this._id = _idService.getNewId('error-message');
 	}
 
-	protected _control: FormControl<any>;
+	/*
+	 * Error message to display
+	 */
+	@Input({ required: true }) message: Observable<string> | string;
 
-	protected _parent:
+	@Input({ required: true }) visible: boolean;
+
+	@Output() handleAddError = new EventEmitter<FudisValidationErrors>();
+
+	@Output() handleRemoveError = new EventEmitter<FudisValidationErrors>();
+
+	private _id: string;
+
+	private _subscribtion: Subscription;
+
+	private _errorAdded: boolean = false;
+
+	/**
+	 * Error message to include in error summary item
+	 */
+	private _currentMessage: string;
+
+	private _parent:
 		| TextInputComponent
 		| TextAreaComponent
 		| DropdownComponent
 		| AutocompleteComponent
 		| DatepickerComponent;
 
+	private _parentGroup: InputWithLanguageOptionsComponent | CheckboxGroupComponent;
+
+	private _customValidatorInstance: FudisValidatorFn;
+
 	ngOnInit(): void {
-		if (this._parent) {
-			if (typeof this.message !== 'string') {
-				this._subscribtion = this.message!.subscribe((value: string) => {
-					this._currentMessage = value;
-				});
-			} else {
-				this._currentMessage = this.message;
-			}
-			this._createCustomError();
+		if (typeof this.message !== 'string') {
+			this._subscribtion = this.message!.subscribe((value: string) => {
+				this._currentMessage = value;
+			});
+		} else {
+			this._currentMessage = this.message;
+		}
+
+		this._customValidatorInstance = this._customControlValidatorFn(this.message);
+
+		if ((this._parent || this._parentGroup) && this.message) {
+			this._addControlValidator();
 		}
 	}
 
 	ngOnChanges(): void {
-		if (this._parent && typeof this.message === 'string') {
+		/**
+		 * Update validator message if message is a string and not observable
+		 */
+		if (this.visible && typeof this.message === 'string') {
 			this._currentMessage = this.message;
-			this._createCustomError();
+		}
+		/**
+		 * Always remove error, if visible is false
+		 */
+		if (this.visible) {
+			this._addControlValidator();
+		} else {
+			this._removeValidator();
 		}
 	}
 
@@ -79,10 +120,10 @@ export class ErrorMessageComponent extends ErrorMessageBaseDirective implements 
 		if (this._subscribtion) {
 			this._subscribtion.unsubscribe();
 		}
-		this._removeCustomError();
+		this._removeValidator();
 	}
 
-	private _smallTest(message: FudisValidatorMessage): FudisValidatorFn {
+	private _customControlValidatorFn(message: FudisValidatorMessage): FudisValidatorFn {
 		return (control: AbstractControl) => {
 			if (!control) {
 				return null;
@@ -91,22 +132,31 @@ export class ErrorMessageComponent extends ErrorMessageBaseDirective implements 
 		};
 	}
 
-	private _createCustomError(): void {
-		this._parent.control.addValidators(this._smallTest(this.message));
+	private _addControlValidator(): void {
+		if (this._parent && this.visible && this._currentMessage) {
+			this._errorAdded = true;
+			this._parent.control.addValidators(this._customValidatorInstance);
+			this._parent.control.updateValueAndValidity();
+			this.handleAddError.emit({ [this._id]: { message: this.message } });
+		} else if (this._parentGroup && this.visible && this._currentMessage) {
+			this._errorAdded = true;
+			this._parentGroup.formGroup.addValidators(this._customValidatorInstance);
+			this._parentGroup.formGroup.updateValueAndValidity();
+			this.handleAddError.emit({ [this._id]: { message: this.message } });
+		}
 	}
 
-	private _removeCustomError(): void {
-		if (this._errorSent) {
-			const errorToRemove: FudisFormErrorSummaryRemoveItem = {
-				id: this._parent.id,
-				type: this._id,
-				controlName: this.controlName,
-			};
-
-			this._errorSummaryService.removeError(errorToRemove);
-
-			this.handleRemoveError.emit(errorToRemove);
-			this._errorSent = false;
+	private _removeValidator(): void {
+		if (this._parent && this._customValidatorInstance && this._errorAdded) {
+			this._errorAdded = false;
+			this._parent.control.removeValidators(this._customValidatorInstance);
+			this._parent.control.updateValueAndValidity();
+			this.handleRemoveError.emit({ [this._id]: { message: this.message } });
+		} else if (this._parentGroup && this._customValidatorInstance && this._errorAdded) {
+			this._errorAdded = false;
+			this._parentGroup.formGroup.removeValidators(this._customValidatorInstance);
+			this._parentGroup.formGroup.updateValueAndValidity();
+			this.handleRemoveError.emit({ [this._id]: { message: this.message } });
 		}
 	}
 }

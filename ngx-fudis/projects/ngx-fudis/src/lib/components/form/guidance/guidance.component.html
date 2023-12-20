@@ -72,14 +72,15 @@
 								[label]="inputLabel"
 								[message]="error.value?.message" />
 							<!-- Todo: remove below deprecated version when Into is misgrated to above  -->
+
 							<fudis-validator-error-message
-								*ngIf="!error.value?.message"
+								*ngIf="!error.value?.message && errorMsg?.[asErrorkey(error.key)]"
 								[visible]="control.touched"
 								[focusId]="for"
 								[label]="inputLabel"
 								[type]="error.key"
 								[deprecationWarning]="true"
-								[message]="errorMsg?.[asErrorkey(error.key)]" />
+								[message]="$any(errorMsg?.[asErrorkey(error.key)])" />
 						</ng-container>
 					</ng-container>
 					<ng-content />
