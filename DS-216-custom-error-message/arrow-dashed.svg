@@ -1,4 +1,1 @@
-<svg class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="arrow-dashed">
-    <path d="M22 16h-7v-2h7v2Zm-10 0H5v-2h7v2Z"></path>
-    <path d="m24.85 15-5.64 4v-8l5.64 4Z"></path>
-</svg>
+<svg id="arrow-dashed" xmlns="http://www.w3.org/2000/svg" width="32" height="32"><path d="M23.466 17.067H16v-2.134h7.466v2.134Zm-10.666 0H5.333v-2.134H12.8v2.134Z"/><path d="m26.506 16-6.016 4.267v-8.534L26.506 16Z"/></svg>

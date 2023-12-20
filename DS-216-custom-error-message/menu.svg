@@ -1,3 +1,1 @@
-<svg class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="menu">
-    <path d="M27 8.5H3V5h24v3.5Zm0 4.5H3v3.5h24V13Zm0 8H3v3.5h24V21Z"></path>
-</svg>
+<svg id="menu" xmlns="http://www.w3.org/2000/svg" width="32" height="32"><path d="M28.8 9.067H3.2V5.333h25.6v3.734Zm0 4.8H3.2V17.6h25.6v-3.733Zm0 8.533H3.2v3.733h25.6V22.4Z"/></svg>
