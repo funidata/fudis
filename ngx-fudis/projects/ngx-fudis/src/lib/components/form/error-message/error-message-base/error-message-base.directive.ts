@@ -1,4 +1,4 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { FudisFormErrorSummaryItem } from '../../../../types/forms';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
@@ -40,6 +40,10 @@ export class ErrorMessageBaseDirective {
 	 */
 	@Input() deprecationWarning: boolean = false;
 
+	@Output() handleAddError = new EventEmitter<FudisFormErrorSummaryItem>();
+
+	@Output() handleRemoveError = new EventEmitter<FudisFormErrorSummaryItem>();
+
 	/**
 	 * Error message to include in error summary item
 	 */
@@ -62,6 +66,7 @@ export class ErrorMessageBaseDirective {
 		if (error.id && this._currentMessage) {
 			this._errorSummaryService.addNewError(error);
 			this._errorSent = true;
+			this.handleAddError.emit(error);
 		}
 	}
 }

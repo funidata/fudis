@@ -1,39 +1,48 @@
+/* eslint-disable max-classes-per-file */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { FudisValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
 import { By } from '@angular/platform-browser';
+import { MockComponent } from 'ng-mocks';
+import { FudisFormErrorSummaryItem } from '../../../../types/forms';
 import { ValidatorErrorMessageComponent } from './validator-error-message.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 import { TextInputComponent } from '../../text-input/text-input.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { LabelComponent } from '../../label/label.component';
+import { IconComponent } from '../../../icon/icon.component';
 
 @Component({
-	selector: 'fudis-mock-validator-error',
+	selector: 'fudis-text-input-with-validator-error-message',
 	template: `
 		<fudis-text-input [control]="textInputControl" [id]="'test-id'" [label]="'Test Label'"></fudis-text-input>
 	`,
 })
-class MockValidatorErrorMessageComponent {
+class TextInputWithValidatorErrorMessageComponent {
 	constructor(private _errorSummaryService: FudisInternalErrorSummaryService) {}
 
 	textInputControl: FormControl = new FormControl('', FudisValidators.required('This field is required'));
 }
 
-describe('ValidatorErrorMessageComponent', () => {
-	let component: MockValidatorErrorMessageComponent;
-	let fixture: ComponentFixture<MockValidatorErrorMessageComponent>;
+describe('TextInputWithValidatorErrorMessageComponent', () => {
+	let component: ValidatorErrorMessageComponent;
+	let textInputComponent: TextInputWithValidatorErrorMessageComponent;
+	let errorSummaryService: FudisInternalErrorSummaryService;
+	let fixture:
+		| ComponentFixture<TextInputWithValidatorErrorMessageComponent>
+		| ComponentFixture<ValidatorErrorMessageComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [
 				ValidatorErrorMessageComponent,
-				MockValidatorErrorMessageComponent,
+				TextInputWithValidatorErrorMessageComponent,
 				TextInputComponent,
 				GuidanceComponent,
 				LabelComponent,
+				MockComponent(IconComponent),
 			],
 			imports: [ReactiveFormsModule],
 			providers: [FudisInternalErrorSummaryService],
@@ -41,12 +50,12 @@ describe('ValidatorErrorMessageComponent', () => {
 	});
 
 	function showErrorMessage() {
-		component.textInputControl.markAllAsTouched();
+		textInputComponent.textInputControl.markAllAsTouched();
 	}
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(MockValidatorErrorMessageComponent);
-		component = fixture.componentInstance;
+		fixture = TestBed.createComponent(TextInputWithValidatorErrorMessageComponent);
+		textInputComponent = fixture.componentInstance;
 		fixture.detectChanges();
 		showErrorMessage();
 	});
@@ -72,4 +81,45 @@ describe('ValidatorErrorMessageComponent', () => {
 			expect(message.attributes['ng-reflect-message']).toEqual('This field is required');
 		});
 	});
+
+	// describe('send message to error summary service', () => {
+	// 	beforeEach(() => {
+	// 		fixture = TestBed.createComponent(ValidatorErrorMessageComponent);
+	// 		component = fixture.componentInstance;
+	// 		errorSummaryService = TestBed.inject(
+	// 			FudisInternalErrorSummaryService
+	// 		) as jasmine.SpyObj<FudisInternalErrorSummaryService>;
+	// 		spyOn(errorSummaryService, 'addNewError');
+
+	// 		fixture.detectChanges();
+	// 	});
+
+	// 	fit('should send error message when component is rendered', () => {
+	// 		component.message = 'Lisää tämä';
+	// 		component.focusId = 'test-id';
+	// 		component.label = 'Test label';
+	// 		component.type = 'required';
+	// 		component.controlName = undefined;
+	// 		fixture.detectChanges();
+	// 		spyOn(component.handleAddError, 'emit');
+
+	// 		const testError: FudisFormErrorSummaryItem = {
+	// 			id: 'test-id',
+	// 			error: 'Lisää tämä',
+	// 			label: 'Test label',
+	// 			type: 'required',
+	// 			controlName: undefined,
+	// 			language: 'en',
+	// 		};
+	// 		errorSummaryService.addNewError(testError);
+
+	// 		component.ngOnInit();
+	// 		fixture.detectChanges();
+	// 		console.log('olAAA', component);
+	// 		// const message = fixture.debugElement.query(By.css('fudis-validator-error-message'));
+	// 		// spyOn(message.attributes['ngOnInit']);
+
+	// 		expect(component.handleAddError.emit).toHaveBeenCalledWith(testError);
+	// 	});
+	// });
 });
