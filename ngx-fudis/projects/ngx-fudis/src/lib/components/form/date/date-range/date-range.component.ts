@@ -33,9 +33,15 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
 
 	@ViewChild('dateRangeRef') _dateRangeRef: ElementRef;
 
-	@ContentChild(DateStartErrorDirective) errorStartDate: DateStartErrorDirective;
+	/**
+	 * Content projection directive fudisDateStartError is used when there's a need to bind custom ErrorMessage to Date Range's start date
+	 */
+	@ContentChild(DateStartErrorDirective) startDateError: DateStartErrorDirective;
 
-	@ContentChild(DateEndErrorDirective) errorEndDate: DateEndErrorDirective;
+	/**
+	 * Content projection directive fudisDateEndError is used when there's a need to bind custom ErrorMessage to Date Range's end date
+	 */
+	@ContentChild(DateEndErrorDirective) endDateError: DateEndErrorDirective;
 
 	/**
 	 * Settings for start date

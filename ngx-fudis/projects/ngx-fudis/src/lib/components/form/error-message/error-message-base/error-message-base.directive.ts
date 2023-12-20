@@ -1,6 +1,6 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { FudisFormErrorSummaryItem } from '../../../../types/forms';
+import { FudisFormErrorSummaryItem, FudisFormErrorSummaryRemoveItem } from '../../../../types/forms';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
@@ -18,17 +18,12 @@ export class ErrorMessageBaseDirective {
 	/*
 	 * Error message to display
 	 */
-	@Input({ required: true }) message: Observable<string> | string | undefined;
+	@Input({ required: true }) message: Observable<string> | string;
 
 	/**
 	 * Name of control this error is related to.
 	 */
 	@Input() controlName: string | undefined = undefined;
-
-	/**
-	 * If error is visible or not.
-	 */
-	@Input() visible: boolean = false;
 
 	/**
 	 * Visual variant of error message
@@ -39,6 +34,10 @@ export class ErrorMessageBaseDirective {
 	 * Temporary warning as Form Error Message is been refactored from 'errorMsg' to be binded with FudisValidators and FudisFormGroupValidators
 	 */
 	@Input() deprecationWarning: boolean = false;
+
+	@Output() handleCreateError = new EventEmitter<FudisFormErrorSummaryItem>();
+
+	@Output() handleRemoveError = new EventEmitter<FudisFormErrorSummaryRemoveItem>();
 
 	/**
 	 * Error message to include in error summary item
@@ -62,6 +61,7 @@ export class ErrorMessageBaseDirective {
 		if (error.id && this._currentMessage) {
 			this._errorSummaryService.addNewError(error);
 			this._errorSent = true;
+			this.handleCreateError.emit(error);
 		}
 	}
 }

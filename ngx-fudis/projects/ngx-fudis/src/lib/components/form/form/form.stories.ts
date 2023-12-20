@@ -59,12 +59,8 @@ import readme from './readme.mdx';
 													This is notification for a fieldset. It has one custom error-message which should pop up in
 													the error summary on submit.
 												</fudis-body-text>
-												<fudis-validator-error-message
-													[type]="'fieldset'"
+												<fudis-error-message
 													[variant]="'body-text'"
-													[visible]="true"
-													[focusId]="fieldsetId"
-													[label]="'Basic info'"
 													[message]="'There might be some errors in the fieldset.'" />
 											</fudis-notification>
 										</ng-template>
@@ -76,7 +72,8 @@ import readme from './readme.mdx';
 													[formGroup]="formExample.controls['name']"
 													[label]="'Course name'"
 													[helpText]="'Some name would be nice. Provide course name in at least one language.'"
-													[groupErrorMsg]="errorName" />
+													[groupErrorMsg]="errorName">
+												</fudis-input-with-language-options>
 												<fudis-input-with-language-options
 													[variant]="'text-area'"
 													[id]="'unique-input-2'"
@@ -109,6 +106,9 @@ import readme from './readme.mdx';
 													[helpText]="'You have to start from somewhere'"
 													[errorMsg]="errorImportantDate"
 													[control]="formExample.controls['importantDate']">
+													<fudis-error-message
+														*ngIf="formExample.controls['importantDate'].value?.getTime() !== releaseDate"
+														[message]="'Wrong date chosen. 1.5.1991 would be great!'" />
 												</fudis-datepicker>
 											</fudis-grid>
 										</ng-template>
@@ -157,6 +157,8 @@ class FormContentExampleComponent implements OnInit {
 		private _translationService: FudisTranslationService,
 		private _focusService: FudisFocusService
 	) {}
+
+	releaseDate: number = new Date('1991-5-1').getTime();
 
 	errorSummaryVisible: boolean = false;
 

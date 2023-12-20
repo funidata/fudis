@@ -38,6 +38,11 @@ export class ValidatorErrorMessageComponent
 	 */
 	@Input({ required: true }) type: string;
 
+	/**
+	 * If error is visible or not.
+	 */
+	@Input() visible: boolean = false;
+
 	ngOnInit(): void {
 		if (this.message && typeof this.message !== 'string') {
 			this._subscribtion = this.message.subscribe((value: string) => {

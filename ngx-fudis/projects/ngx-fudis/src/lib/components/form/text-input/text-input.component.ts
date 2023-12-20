@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, HostBinding, OnInit, OnChanges, AfterContentInit } from '@angular/core';
+import { AfterViewInit, Component, Input, HostBinding, OnInit, OnChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 
@@ -19,10 +19,7 @@ import {
 	templateUrl: './text-input.component.html',
 	styleUrls: ['./text-input.component.scss'],
 })
-export class TextInputComponent
-	extends InputBaseDirective
-	implements OnInit, OnChanges, AfterViewInit, AfterContentInit
-{
+export class TextInputComponent extends InputBaseDirective implements OnInit, OnChanges, AfterViewInit {
 	constructor(
 		private _focusService: FudisFocusService,
 		_idService: FudisIdService,
@@ -89,9 +86,5 @@ export class TextInputComponent
 		if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
 			this.focusToInput();
 		}
-	}
-
-	ngAfterContentInit(): void {
-		this._sendDataToCustomErrorMessages();
 	}
 }

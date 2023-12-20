@@ -1,27 +1,38 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, FormsModule, FormControlOptions } from '@angular/forms';
 import { Component } from '@angular/core';
 import { ErrorMessageComponent } from './error-message.component';
-import { FudisValidators } from '../../../../utilities/form/validators';
 import readme from './readme.mdx';
 
 @Component({
 	selector: 'example-text-input-with-error-message',
-	template: ` <form [formGroup]="mainFormGroup">
-		<fudis-text-input [control]="mainFormGroup.controls['required']" [label]="'Required text input'">
+	template: `
+		<fudis-text-input [control]="control" [label]="'Required text input'">
 			<fudis-error-message
-				*ngIf="mainFormGroup.controls['required'].touched"
-				[message]="'This is a custom error message that has been added with content projection'"
-				[visible]="mainFormGroup.controls['required'].touched" />
+				*ngIf="_errorExists"
+				[message]="'This is a custom error message that has been added with content projection'" />
 		</fudis-text-input>
-	</form>`,
+		<fudis-button (click)="toggleCustomError()" [label]="'Toggle custom error'" />
+	`,
 })
 class TextInputWithErrorMessageComponent {
-	constructor(private _formBuilder: FormBuilder) {}
+	constructor() {
+		this.control = new FormControl('');
+	}
 
-	mainFormGroup: FormGroup = this._formBuilder.group({
-		required: new FormControl('', FudisValidators.required('This is a regular error message')),
-	});
+	customErrorExists: FormControlOptions;
+
+	control: FormControl<string | null>;
+
+	protected _errorExists: boolean = true;
+
+	toggleCustomError(): void {
+		// this._errorExists = !this._errorExists;
+
+		setTimeout(() => {
+			console.log(this.control);
+		}, 1000);
+	}
 }
 
 export default {
@@ -46,6 +57,6 @@ export default {
 
 export const ErrorMessageExample: StoryFn = () => ({
 	template: `
-	<example-text-input-with-error-message></example-text-input-with-error-message>
+	<example-text-input-with-error-message/>
 	`,
 });
