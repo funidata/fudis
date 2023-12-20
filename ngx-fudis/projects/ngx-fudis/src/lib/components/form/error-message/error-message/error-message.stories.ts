@@ -10,11 +10,13 @@ import { FudisValidators } from '../../../../utilities/form/validators';
 @Component({
 	selector: 'example-text-input-with-error-message',
 	template: `
-		<fudis-text-input [control]="control" [label]="'Required text input'">
-			<fudis-error-message [visible]="_errorExists" [message]="message" />
-		</fudis-text-input>
-		<fudis-button (click)="toggleCustomError()" [label]="'Toggle custom error'" />
-		<fudis-button (click)="switchErrorMessage()" [label]="'Switch custom message content'" />
+		<fudis-grid [columns]="2" [width]="'xs'">
+			<fudis-text-input fudisGridItem [columns]="'stretch'" [control]="control" [label]="'Required text input'">
+				<fudis-error-message [visible]="_errorExists" [message]="message" />
+			</fudis-text-input>
+			<fudis-button (click)="toggleCustomError()" [label]="'Toggle custom error'" />
+			<fudis-button (click)="switchErrorMessage()" [label]="'Switch message content'" />
+		</fudis-grid>
 	`,
 })
 class TextInputWithErrorMessageComponent {
@@ -71,6 +73,10 @@ export default {
 
 export const ErrorMessageExample: StoryFn = () => ({
 	template: `
-	<example-text-input-with-error-message/>
+<!--
+Full code example available in:
+components/form/error-message/error-message/error-message.stories.ts
+-->
+<example-text-input-with-error-message/>
 	`,
 });
