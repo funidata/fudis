@@ -44,7 +44,7 @@ describe('LinkComponent', () => {
 	});
 
 	describe('External link component', () => {
-		it('should have external icon', () => {
+		it('should have new-tab icon', () => {
 			component.isExternalLink = true;
 			fixture.detectChanges();
 			const externalLinkComponent = fixture.debugElement.query(By.css('.fudis-link__anchor__external'));

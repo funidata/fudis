@@ -1,4 +1,1 @@
-<svg class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="arrow-solid">
-    <path d="M22.37 14H4v2h18.37v-2Z"></path>
-    <path d="m25.34 15-9.94 7V8l9.94 7Z"></path>
-</svg>
+<svg id="arrow-solid" xmlns="http://www.w3.org/2000/svg" width="32" height="32"><path d="M25.868 15.182a1 1 0 0 1 0 1.636l-7.865 5.539a1 1 0 0 1-1.576-.818V10.461a1 1 0 0 1 1.576-.818l7.865 5.54Z"/><path fill-rule="evenodd" d="M5.5 16a1 1 0 0 1 1-1H20a1 1 0 1 1 0 2H6.5a1 1 0 0 1-1-1Z" clip-rule="evenodd"/></svg>
