@@ -13,6 +13,7 @@ import { DatepickerComponent } from '../../date/datepicker/datepicker.component'
 import { AutocompleteComponent } from '../../autocomplete/autocomplete.component';
 import { InputWithLanguageOptionsComponent } from '../../input-with-language-options/input-with-language-options.component';
 import { CheckboxGroupComponent } from '../../checkbox-group/checkbox-group.component';
+import { RadioButtonGroupComponent } from '../../radio-button-group/radio-button-group.component';
 
 @Component({
 	selector: 'fudis-error-message',
@@ -29,7 +30,8 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 		@Host() @Optional() private _datePicker: DatepickerComponent,
 		@Host() @Optional() private _autocomplete: AutocompleteComponent,
 		@Host() @Optional() private _inputWithLanguageOptions: InputWithLanguageOptionsComponent,
-		@Host() @Optional() private _checkboxGroup: CheckboxGroupComponent
+		@Host() @Optional() private _checkboxGroup: CheckboxGroupComponent,
+		@Host() @Optional() private _radioButtonGroup: RadioButtonGroupComponent
 	) {
 		if (_textInput) {
 			this._parent = _textInput;
@@ -41,6 +43,8 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 			this._parent = _datePicker;
 		} else if (_autocomplete) {
 			this._parent = _autocomplete;
+		} else if (_radioButtonGroup) {
+			this._parent = _radioButtonGroup;
 		} else if (_inputWithLanguageOptions) {
 			this._parentGroup = _inputWithLanguageOptions;
 		} else if (_checkboxGroup) {
@@ -77,7 +81,8 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 		| TextAreaComponent
 		| DropdownComponent
 		| AutocompleteComponent
-		| DatepickerComponent;
+		| DatepickerComponent
+		| RadioButtonGroupComponent;
 
 	private _parentGroup: InputWithLanguageOptionsComponent | CheckboxGroupComponent;
 
