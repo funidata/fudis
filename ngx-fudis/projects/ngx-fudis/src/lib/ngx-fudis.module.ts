@@ -30,6 +30,8 @@ import { DateRangeComponent } from './components/form/date/date-range/date-range
 
 import {
 	ContentDirective,
+	DateStartErrorDirective,
+	DateEndErrorDirective,
 	FooterContentLeftDirective,
 	FooterContentRightDirective,
 } from './directives/content-projection/content/content.directive';
@@ -51,7 +53,7 @@ import { DropdownMenuItemComponent } from './components/dropdown-menu/dropdown-m
 
 import { FudisDropdownMenuItemService } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { FudisFocusService } from './services/focus/focus.service';
-import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
+import { ValidatorErrorMessageComponent } from './components/form/error-message/validator-error-message/validator-error-message.component';
 import { FudisInternalErrorSummaryService } from './services/form/error-summary/internal-error-summary.service';
 import { FudisErrorSummaryService } from './services/form/error-summary/error-summary.service';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
@@ -99,6 +101,7 @@ import { AlertComponent } from './components/alert/alert/alert.component';
 import { AlertGroupComponent } from './components/alert/alert-group/alert-group.component';
 import { FudisAlertService } from './services/alert/alert.service';
 import { FudisBreakpointService } from './services/breakpoint/breakpoint.service';
+import { ErrorMessageComponent } from './components/form/error-message/error-message/error-message.component';
 
 @NgModule({
 	/*
@@ -119,9 +122,11 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		CheckboxComponent,
 		CheckboxGroupComponent,
 		ContentDirective,
+		DateEndErrorDirective,
 		DatepickerComponent,
 		DatepickerCustomHeaderComponent,
 		DateRangeComponent,
+		DateStartErrorDirective,
 		DescriptionListComponent,
 		DescriptionListItemComponent,
 		DescriptionListItemTermComponent,
@@ -134,6 +139,7 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		DropdownComponent,
 		DropdownMenuComponent,
 		DropdownMenuItemComponent,
+		ValidatorErrorMessageComponent,
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,
@@ -210,8 +216,11 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		CheckboxComponent,
 		CheckboxGroupComponent,
 		ContentDirective,
+		ErrorMessageComponent,
+		DateEndErrorDirective,
 		DatepickerComponent,
 		DateRangeComponent,
+		DateStartErrorDirective,
 		DescriptionListComponent,
 		DescriptionListItemComponent,
 		DescriptionListItemTermComponent,
@@ -224,7 +233,7 @@ import { FudisBreakpointService } from './services/breakpoint/breakpoint.service
 		DropdownComponent,
 		DropdownMenuComponent,
 		DropdownMenuItemComponent,
-		ErrorMessageComponent,
+		ErrorSummaryComponent,
 		ExpandableComponent,
 		FooterComponent,
 		FooterContentLeftDirective,

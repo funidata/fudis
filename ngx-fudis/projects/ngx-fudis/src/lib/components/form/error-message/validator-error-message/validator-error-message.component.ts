@@ -1,29 +1,23 @@
-import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
-
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { FudisFormErrorSummaryItem } from '../../../types/forms';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FudisIdService } from '../../../services/id/id.service';
+import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
+import { FudisTranslationService } from '../../../../services/translation/translation.service';
+import { FudisIdService } from '../../../../services/id/id.service';
+import { FudisFormErrorSummaryItem, FudisFormErrorSummaryRemoveItem } from '../../../../types/forms';
 
 @Component({
-	selector: 'fudis-error-message',
-	templateUrl: './error-message.component.html',
-	styleUrls: ['./error-message.component.scss'],
+	selector: 'fudis-validator-error-message',
+	templateUrl: './validator-error-message.component.html',
+	styleUrls: ['./validator-error-message.component.scss'],
 })
-export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
+export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
 	constructor(
 		private _errorSummaryService: FudisInternalErrorSummaryService,
 		private _translationService: FudisTranslationService,
 		private _idService: FudisIdService
 	) {
-		this._id = _idService.getNewId('error-message');
+		this._id = _idService.getNewId('validator-error-message');
 	}
-
-	/*
-	 * Error message to display
-	 */
-	@Input({ required: true }) message: Observable<string> | string | undefined;
 
 	/**
 	 * Id of input this message is related to. Sent to Error Summary service.
@@ -41,14 +35,19 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 	@Input({ required: true }) type: string;
 
 	/**
-	 * Name of control this error is related to.
-	 */
-	@Input() controlName: string | undefined = undefined;
-
-	/**
 	 * If error is visible or not.
 	 */
 	@Input() visible: boolean = false;
+
+	/*
+	 * Error message to display
+	 */
+	@Input({ required: true }) message: Observable<string> | string;
+
+	/**
+	 * Name of control this error is related to.
+	 */
+	@Input() controlName: string | undefined = undefined;
 
 	/**
 	 * Visual variant of error message
@@ -60,6 +59,10 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 	 */
 	@Input() deprecationWarning: boolean = false;
 
+	@Output() handleCreateError = new EventEmitter<FudisFormErrorSummaryItem>();
+
+	@Output() handleRemoveError = new EventEmitter<FudisFormErrorSummaryRemoveItem>();
+
 	/**
 	 * Error message to include in error summary item
 	 */
@@ -70,20 +73,25 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 	/**
 	 * Has error been created and sent forward
 	 */
-	private _errorSent: boolean = false;
+	protected _errorSent: boolean = false;
 
-	/**
-	 * Error label to include in error summary item
-	 */
-	private _currentLabel: string | undefined = undefined;
-
-	private _subscribtion: Subscription;
+	protected _subscribtion: Subscription;
 
 	ngOnInit(): void {
 		if (this.message && typeof this.message !== 'string') {
 			this._subscribtion = this.message.subscribe((value: string) => {
 				this._currentMessage = value;
-				this.createError();
+
+				const newError: FudisFormErrorSummaryItem = {
+					id: this.focusId,
+					error: this._currentMessage,
+					label: this.label,
+					type: this.type,
+					controlName: this.controlName,
+					language: this._translationService.getLanguage(),
+				};
+
+				this._createError(newError);
 			});
 		}
 
@@ -103,29 +111,21 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 		}, 1000);
 	}
 
-	createError(): void {
+	ngOnChanges(): void {
 		if (typeof this.message === 'string') {
 			this._currentMessage = this.message;
 		}
 
-		if (this.focusId) {
-			this._currentLabel = this.label;
+		const newError: FudisFormErrorSummaryItem = {
+			id: this.focusId,
+			error: this._currentMessage,
+			label: this.label,
+			type: this.type,
+			controlName: this.controlName,
+			language: this._translationService.getLanguage(),
+		};
 
-			const newError: FudisFormErrorSummaryItem = {
-				id: this.focusId,
-				error: this._currentMessage,
-				label: this._currentLabel,
-				type: this.type,
-				controlName: this.controlName,
-				language: this._translationService.getLanguage(),
-			};
-			this._errorSummaryService.addNewError(newError);
-			this._errorSent = true;
-		}
-	}
-
-	ngOnChanges(): void {
-		this.createError();
+		this._createError(newError);
 	}
 
 	ngOnDestroy(): void {
@@ -153,6 +153,18 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy, Afte
 			console.warn(
 				`Fudis component with id of '${this.focusId}' is missing error message for error type of: '${this.type}'`
 			);
+		}
+	}
+
+	protected _createError(error: FudisFormErrorSummaryItem): void {
+		if (typeof this.message === 'string') {
+			this._currentMessage = this.message;
+		}
+
+		if (error.id && this._currentMessage) {
+			this._errorSummaryService.addNewError(error);
+			this._errorSent = true;
+			this.handleCreateError.emit(error);
 		}
 	}
 }

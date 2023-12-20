@@ -21,6 +21,7 @@ export const fudisIdComponents = [
 	'section',
 	'text-area',
 	'text-input',
+	'validator-error-message',
 ] as const;
 
 export type FudisIdComponent = (typeof fudisIdComponents)[number];

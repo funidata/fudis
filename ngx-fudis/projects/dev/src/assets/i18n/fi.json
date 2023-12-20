@@ -11,7 +11,8 @@
 		"boolean_truth": "Totuus puuttuu!",
 		"too_few_chars": "Liian vähän merkkejä.",
 		"email": "Syöte ei näytä sähköpostilta.",
-		"notEnoughCharacters": "Liian vähän merkkejä."
+		"notEnoughCharacters": "Liian vähän merkkejä.",
+		"customErrorMessage": "Jostain kummallisesta paikasta tuli custom-virhe!"
 	},
 	"error_one_required": "Ainakin yhdellä kielellä tarvitaan tekstiä!",
 	"dynamic": "transloco {{value}}",

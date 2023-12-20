@@ -31,6 +31,7 @@ describe('FudisIdServiceService', () => {
 		section: [],
 		'text-area': [],
 		'text-input': [],
+		'validator-error-message': [],
 	};
 
 	const componentDataAfter: FudisIdComponentData = {
@@ -72,6 +73,12 @@ describe('FudisIdServiceService', () => {
 		section: ['fudis-section-1', 'fudis-section-2', 'custom-id-for-section', 'fudis-section-4'],
 		'text-area': ['fudis-text-area-1', 'fudis-text-area-2', 'custom-id-for-text-area', 'fudis-text-area-4'],
 		'text-input': ['fudis-text-input-1', 'fudis-text-input-2', 'custom-id-for-text-input', 'fudis-text-input-4'],
+		'validator-error-message': [
+			'fudis-validator-error-message-1',
+			'fudis-validator-error-message-2',
+			'custom-id-for-validator-error-message',
+			'fudis-validator-error-message-4',
+		],
 	};
 
 	const familyDataBefore: FudisIdFamilyData = {

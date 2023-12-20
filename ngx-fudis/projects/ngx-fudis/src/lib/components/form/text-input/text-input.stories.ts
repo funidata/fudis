@@ -1,5 +1,5 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, FormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { TextInputComponent } from './text-input.component';
 
@@ -20,7 +20,11 @@ import { FudisValidators } from '../../../utilities/form/validators';
 				[tooltip]="'This is a tooltip text'"
 				[tooltipPosition]="'right'"
 				[tooltipToggle]="false"
-				[helpText]="'Please add some content.'" />
+				[helpText]="'Please add some content.'">
+				<fudis-error-message
+					[message]="'Backend threw an error, it is not totally fault of this component'"
+					[visible]="true" />
+			</fudis-text-input>
 			<fudis-text-input
 				[control]="mainFormGroup.controls['email']"
 				[label]="'Email'"
@@ -58,12 +62,11 @@ class TextInputWithFormControlExampleComponent {
 			`Too short email. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`
 		),
 		FudisValidators.maxLength(this.maxLength, `Too long email.`),
-		FudisValidators.required('This is required field.'),
 		FudisValidators.email('Input must be an email address.'),
 	];
 
 	validatorsForNumber = [
-		Validators.min(1),
+		FudisValidators.min(this.minNumber, 'Number is too small'),
 		FudisValidators.max(
 			this.maxNumber,
 			`Given number is not inside the allowed range ${this.minNumber} - ${this.maxNumber}.`

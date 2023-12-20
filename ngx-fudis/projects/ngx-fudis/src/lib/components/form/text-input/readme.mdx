@@ -5,7 +5,7 @@ import * as TextInputStories from './text-input.stories.ts';
 
 <Meta title="Components/Form/Text-input" />
 
-# Text-input
+# Text Input
 
 Basic text-input component with different type options: `email`, `number`, `password`, `tel`, `text` and `url`. Defaults to `text`.
 
@@ -17,44 +17,29 @@ Additional features include possibility to add tooltip to the label and maximum 
 
 ## Usage Guidelines
 
-#### Mandatory Properties
+### Mandatory Properties
 
 Necessary properties for text-input are `label` and `control`.
 
-#### As a required form field
+### Validators and Error Handling
 
-If text-input is a **required** form field, include `FudisValidators.required()` in the form control validator with message parameter either as a string or as an observable string. E.g. `FudisValidators.required('This is required field')`.
+Fudis form components use Fudis Validators. See the full documentation on [how to use Fudis Validators](/docs/utilities-validators--documentation). 
 
-#### With minLength and maxLength validators
+If a custom validation is used, read [how to add Error message](/docs/components-form-error-message--documentation).
 
-Text-input can have min and max length validators. 
+**Text Input validators**
+- All of the Fudis Validators can be assigned to Text-input component.
 
-For min length, include `FudisValidators.minLength()` in the form control validator.
+#### Text Input maxLength indicator
 
-Max length validator does not prompt any error message but disable user to input more than allowed length of characters to the input field. For max length, include `FudisValidators.maxLength()` in the form control validators and pass wanted maxLength as an Input to the text-input <code>[maxLength]="maxLength"</code>. This will also activate the maximum character indicator to the bottom right corner of the input.
+[MaxLength](/docs/utilities-validators--documentation&args=#minlength-and-maxlength-validators) validator on Text Input does not prompt any error message but disable user to input more than allowed length of characters to the input field.
+Additionally, when maxLength validation is used, by passing maxLength Input <code>[maxLength]="maxLength"</code> to Text Input, will activate the maximum character indicator to the bottom right corner.
 
-#### As number input
+#### Text Input as number input
 
-Text-input <code>[type]="'number'"</code> has `minNumber` and `maxNumber` attributes, they can be used separately or together. 
+Text-input [Min and max](/docs/utilities-validators--documentation&args=#min-and-max-validators) validators have additional <code>[minNumber]="minNumber"</code> and <code>[maxNumber]="maxNumber"</code> attributes for passing wanted min and max values to the text-input.
 
-Pass the wanted min and max values as an Input to the text-input <code>[minNumber]="minNumber"</code> and/or <code>[maxNumber]="maxNumber"</code>.
-Include `FudisValidators.min()` and/or `FudisValidators.max()`in the form control validators. 
-
-### Error Handling
-
-- **Required** error is shown if text-input is required and
-  - if control is touched and
-			- if control value is null
-- **minLength** error is shown
-	- if control is touched and 
-		- if control value is not null and
-			- if control value is not respective to given **minlength** validator value
-- **minNumber** and/or **maxNumber** errors are shown
-	- if control is touched and
-		- if control value is not null and
-			- if control value is not respective to given **min** and/or **max** validator values
-
-### Accessibility
+## Accessibility
 
 - Label and guidance are linked to the text-input via id
 - Screen reader is informed when maximum character length has 5 characters left and when maximum character count is reached

@@ -26,7 +26,7 @@ Autocomplete is designed to use when basic [dropdown](/story/components-form-dro
 
 **NOTE:** Autocomplete does not have any lazy loading at this time, all the data is loaded in the DOM when component is initialized. This can cause performance issues with `dropdown` variant if option list data is massive. Lazy loading will be implemented later on.
 
-#### Mandatory Properties
+### Mandatory Properties
 
 Autocomplete requires at least `label` and `options` object array with possible option values.
 
@@ -45,18 +45,16 @@ Options array takes in objects with the following signature:
 }
 ```
 
-#### As a required form field
+### Validators and Error Handling
 
-If Autocomplete is a required form field, include `FudisValidators.required()` in the form control validator with message parameter either as a string or as an observable string. E.g. `FudisValidators.required('This is required field')`.
+Fudis form components use Fudis Validators. See the full documentation on [how to use Fudis Validators](/docs/utilities-validators--documentation). 
 
-### Error Handling
+If a custom validation is used, read [how to add Error message](/docs/components-form-error-message--documentation).
 
-- **Required** error is shown if input is required and
-  - if control is touched and
-    - input value is empty or
-    - input value does not match to any option.value
+**Autocomplete validators**
+- required
 
-### Accessibility
+## Accessibility
 
 - Label and guidance are linked to the input via id
 - Input can be disabled
@@ -67,7 +65,7 @@ If Autocomplete is a required form field, include `FudisValidators.required()` i
   - Disabled state is communicated for screen reader
 - **NOTE:** Option list selection can only be made with `enter` and not with `space` since it is considered as a search character
 
-### Related components
+## Related components
 
 [Icon](/docs/components-icon--icon)
 
