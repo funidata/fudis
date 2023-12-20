@@ -102,7 +102,6 @@ import { AlertGroupComponent } from './components/alert/alert-group/alert-group.
 import { FudisAlertService } from './services/alert/alert.service';
 import { FudisBreakpointService } from './services/breakpoint/breakpoint.service';
 import { ErrorMessageComponent } from './components/form/error-message/error-message/error-message.component';
-import { ErrorMessageBaseDirective } from './components/form/error-message/error-message-base/error-message-base.directive';
 
 @NgModule({
 	/*
@@ -141,6 +140,7 @@ import { ErrorMessageBaseDirective } from './components/form/error-message/error
 		DropdownMenuComponent,
 		DropdownMenuItemComponent,
 		ValidatorErrorMessageComponent,
+		ErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,
 		FieldSetBaseDirective,
@@ -174,8 +174,6 @@ import { ErrorMessageBaseDirective } from './components/form/error-message/error
 		TextInputComponent,
 		TextAreaComponent,
 		TooltipDirective,
-		ErrorMessageComponent,
-		ErrorMessageBaseDirective,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
