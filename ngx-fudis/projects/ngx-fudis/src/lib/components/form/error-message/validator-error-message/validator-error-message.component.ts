@@ -13,8 +13,8 @@ import { FudisFormErrorSummaryItem, FudisFormErrorSummaryRemoveItem } from '../.
 export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
 	constructor(
 		private _errorSummaryService: FudisInternalErrorSummaryService,
-		private _translationService: FudisTranslationService,
-		private _idService: FudisIdService
+		private _idService: FudisIdService,
+		private _translationService: FudisTranslationService
 	) {
 		this._id = _idService.getNewId('validator-error-message');
 	}
@@ -73,26 +73,21 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
 	/**
 	 * Has error been created and sent forward
 	 */
-	protected _errorSent: boolean = false;
+	private _errorSent: boolean = false;
 
-	protected _subscribtion: Subscription;
+	private _subscribtion: Subscription;
 
 	ngOnInit(): void {
 		if (this.message && typeof this.message !== 'string') {
 			this._subscribtion = this.message.subscribe((value: string) => {
 				this._currentMessage = value;
-
-				const newError: FudisFormErrorSummaryItem = {
-					id: this.focusId,
-					error: this._currentMessage,
-					label: this.label,
-					type: this.type,
-					controlName: this.controlName,
-					language: this._translationService.getLanguage(),
-				};
-
-				this._createError(newError);
+				this._createError();
 			});
+		}
+
+		if (typeof this.message === 'string') {
+			this._currentMessage = this.message;
+			this._createError();
 		}
 
 		if (this.deprecationWarning) {
@@ -116,26 +111,11 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
 			this._currentMessage = this.message;
 		}
 
-		const newError: FudisFormErrorSummaryItem = {
-			id: this.focusId,
-			error: this._currentMessage,
-			label: this.label,
-			type: this.type,
-			controlName: this.controlName,
-			language: this._translationService.getLanguage(),
-		};
-
-		this._createError(newError);
+		this._createError();
 	}
 
 	ngOnDestroy(): void {
-		if (this._errorSent) {
-			this._errorSummaryService.removeError({
-				id: this.focusId,
-				type: this.type,
-				controlName: this.controlName,
-			});
-		}
+		this._removeError();
 
 		if (this._subscribtion) {
 			this._subscribtion.unsubscribe();
@@ -156,15 +136,35 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
 		}
 	}
 
-	protected _createError(error: FudisFormErrorSummaryItem): void {
-		if (typeof this.message === 'string') {
-			this._currentMessage = this.message;
-		}
+	private _createError(): void {
+		const errorCondition = this.focusId && this._currentMessage && this.label;
 
-		if (error.id && this._currentMessage) {
-			this._errorSummaryService.addNewError(error);
+		if (errorCondition) {
+			const newError: FudisFormErrorSummaryItem = {
+				id: this.focusId,
+				error: this._currentMessage,
+				label: this.label,
+				type: this.type,
+				controlName: this.controlName,
+				language: this._translationService.getLanguage(),
+			};
+
+			this._errorSummaryService.addNewError(newError);
 			this._errorSent = true;
-			this.handleCreateError.emit(error);
+			this.handleCreateError.emit(newError);
+		}
+	}
+
+	private _removeError(): void {
+		if (this._errorSent) {
+			const errorToRemove: FudisFormErrorSummaryRemoveItem = {
+				id: this.focusId,
+				type: this.type,
+				controlName: this.controlName,
+			};
+
+			this._errorSummaryService.removeError(errorToRemove);
+			this.handleRemoveError.emit(errorToRemove);
 		}
 	}
 }

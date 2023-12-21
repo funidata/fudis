@@ -6,9 +6,9 @@ import { Component } from '@angular/core';
 import { FudisValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
 import { By } from '@angular/platform-browser';
 import { MockComponent } from 'ng-mocks';
-// import { FudisFormErrorSummaryItem } from '../../../../types/forms';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { FudisFormErrorSummaryItem } from '../../../../types/forms';
 import { ValidatorErrorMessageComponent } from './validator-error-message.component';
-import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 import { TextInputComponent } from '../../text-input/text-input.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { LabelComponent } from '../../label/label.component';
@@ -21,15 +21,13 @@ import { IconComponent } from '../../../icon/icon.component';
 	`,
 })
 class TextInputWithValidatorErrorMessageComponent {
-	constructor(private _errorSummaryService: FudisInternalErrorSummaryService) {}
-
 	textInputControl: FormControl = new FormControl('', FudisValidators.required('This field is required'));
 }
 
 describe('TextInputWithValidatorErrorMessageComponent', () => {
-	// let component: ValidatorErrorMessageComponent;
+	let component: ValidatorErrorMessageComponent;
 	let textInputComponent: TextInputWithValidatorErrorMessageComponent;
-	// let errorSummaryService: FudisInternalErrorSummaryService;
+
 	let fixture:
 		| ComponentFixture<TextInputWithValidatorErrorMessageComponent>
 		| ComponentFixture<ValidatorErrorMessageComponent>;
@@ -45,7 +43,7 @@ describe('TextInputWithValidatorErrorMessageComponent', () => {
 				MockComponent(IconComponent),
 			],
 			imports: [ReactiveFormsModule],
-			providers: [FudisInternalErrorSummaryService],
+			providers: [],
 		}).compileComponents();
 	});
 
@@ -82,44 +80,103 @@ describe('TextInputWithValidatorErrorMessageComponent', () => {
 		});
 	});
 
-	// describe('send message to error summary service', () => {
-	// 	beforeEach(() => {
-	// 		fixture = TestBed.createComponent(ValidatorErrorMessageComponent);
-	// 		component = fixture.componentInstance;
-	// 		errorSummaryService = TestBed.inject(
-	// 			FudisInternalErrorSummaryService
-	// 		) as jasmine.SpyObj<FudisInternalErrorSummaryService>;
-	// 		spyOn(errorSummaryService, 'addNewError');
+	describe('validator error message', () => {
+		beforeEach(() => {
+			fixture = TestBed.createComponent(ValidatorErrorMessageComponent);
+			component = fixture.componentInstance;
+			component.focusId = 'test-id';
+			component.label = 'Test label';
+			component.type = 'required';
+			component.controlName = undefined;
+			fixture.detectChanges();
+		});
 
-	// 		fixture.detectChanges();
-	// 	});
+		it('should create error with string message when component is initialized', () => {
+			component.message = 'Lisää tämä';
 
-	// 	it('should send error message when component is rendered', () => {
-	// 		component.message = 'Lisää tämä';
-	// 		component.focusId = 'test-id';
-	// 		component.label = 'Test label';
-	// 		component.type = 'required';
-	// 		component.controlName = undefined;
-	// 		fixture.detectChanges();
-	// 		spyOn(component.handleAddError, 'emit');
+			component.controlName = undefined;
+			fixture.detectChanges();
+			spyOn(component.handleCreateError, 'emit');
 
-	// 		const testError: FudisFormErrorSummaryItem = {
-	// 			id: 'test-id',
-	// 			error: 'Lisää tämä',
-	// 			label: 'Test label',
-	// 			type: 'required',
-	// 			controlName: undefined,
-	// 			language: 'en',
-	// 		};
-	// 		errorSummaryService.addNewError(testError);
+			const testError: FudisFormErrorSummaryItem = {
+				id: 'test-id',
+				error: 'Lisää tämä',
+				label: 'Test label',
+				type: 'required',
+				controlName: undefined,
+				language: 'en',
+			};
 
-	// 		component.ngOnInit();
-	// 		fixture.detectChanges();
-	// 		console.log('olAAA', component);
-	// 		// const message = fixture.debugElement.query(By.css('fudis-validator-error-message'));
-	// 		// spyOn(message.attributes['ngOnInit']);
+			component.ngOnInit();
+			fixture.detectChanges();
 
-	// 		expect(component.handleAddError.emit).toHaveBeenCalledWith(testError);
-	// 	});
-	// });
+			expect(component.handleCreateError.emit).toHaveBeenCalledWith(testError);
+		});
+
+		it('should create error message with observable message when component is initialized and update it when observable updates', () => {
+			const messageAsObservable: Subject<string> = new BehaviorSubject<string>('First message from observable');
+
+			component.message = messageAsObservable;
+
+			fixture.detectChanges();
+			spyOn(component.handleCreateError, 'emit');
+
+			const testError: FudisFormErrorSummaryItem = {
+				id: 'test-id',
+				error: 'First message from observable',
+				label: 'Test label',
+				type: 'required',
+				controlName: undefined,
+				language: 'en',
+			};
+
+			component.ngOnInit();
+			fixture.detectChanges();
+
+			expect(component.handleCreateError.emit).toHaveBeenCalledWith(testError);
+
+			messageAsObservable.next('Second message after update');
+
+			const updatedError: FudisFormErrorSummaryItem = {
+				...testError,
+				error: 'Second message after update',
+			};
+
+			expect(component.handleCreateError.emit).toHaveBeenCalledWith(updatedError);
+		});
+
+		it('should update error message when label updates', () => {
+			const messageAsObservable: Subject<string> = new BehaviorSubject<string>('First message from observable');
+
+			component.message = messageAsObservable;
+
+			fixture.detectChanges();
+			spyOn(component.handleCreateError, 'emit');
+
+			const testError: FudisFormErrorSummaryItem = {
+				id: 'test-id',
+				error: 'First message from observable',
+				label: 'Test label',
+				type: 'required',
+				controlName: undefined,
+				language: 'en',
+			};
+
+			component.ngOnInit();
+			fixture.detectChanges();
+
+			expect(component.handleCreateError.emit).toHaveBeenCalledWith(testError);
+
+			component.label = 'New better label';
+
+			const updatedError: FudisFormErrorSummaryItem = {
+				...testError,
+				label: 'New better label',
+			};
+			component.ngOnChanges();
+			fixture.detectChanges();
+
+			expect(component.handleCreateError.emit).toHaveBeenCalledWith(updatedError);
+		});
+	});
 });
