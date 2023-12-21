@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 import { FudisValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
 import { By } from '@angular/platform-browser';
 import { MockComponent } from 'ng-mocks';
-import { FudisFormErrorSummaryItem } from '../../../../types/forms';
+// import { FudisFormErrorSummaryItem } from '../../../../types/forms';
 import { ValidatorErrorMessageComponent } from './validator-error-message.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 import { TextInputComponent } from '../../text-input/text-input.component';
@@ -27,9 +27,9 @@ class TextInputWithValidatorErrorMessageComponent {
 }
 
 describe('TextInputWithValidatorErrorMessageComponent', () => {
-	let component: ValidatorErrorMessageComponent;
+	// let component: ValidatorErrorMessageComponent;
 	let textInputComponent: TextInputWithValidatorErrorMessageComponent;
-	let errorSummaryService: FudisInternalErrorSummaryService;
+	// let errorSummaryService: FudisInternalErrorSummaryService;
 	let fixture:
 		| ComponentFixture<TextInputWithValidatorErrorMessageComponent>
 		| ComponentFixture<ValidatorErrorMessageComponent>;
@@ -94,7 +94,7 @@ describe('TextInputWithValidatorErrorMessageComponent', () => {
 	// 		fixture.detectChanges();
 	// 	});
 
-	// 	fit('should send error message when component is rendered', () => {
+	// 	it('should send error message when component is rendered', () => {
 	// 		component.message = 'Lisää tämä';
 	// 		component.focusId = 'test-id';
 	// 		component.label = 'Test label';
