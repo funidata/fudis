@@ -68,7 +68,7 @@ const AllSelectsTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => 
 			label: 'Multiselect pet',
 			placeholder: 'Multiselect a pet',
 			control: new FormControl(
-				[selectMockData[1]],
+				[defaultOptions[2], selectMockData[1]],
 				FudisValidators.required("It is necessary to choose a pet. It's good for your health!")
 			),
 			helpText: 'All pets are equally important, but for sake of this example please pick one.',

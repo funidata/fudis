@@ -15,7 +15,7 @@
 	(focus)="_focus()"
 	(keydown)="_keyDown($event)"
 	(blur)="_blur($event)"
-	(click)="_clickOption($event)">
+	(click)="!data.disabled && _clickOption($event)">
 	<span class="fudis-select-option__label">
 		{{ data.label }}
 	</span>

@@ -117,9 +117,19 @@ export class SelectAutocompleteComponent {
 	@Output() triggerClearFilterButtonClick = new EventEmitter<void>();
 
 	/**
+	 * Output event for enter press on autocomplete, when there is only one option visible
+	 */
+	@Output() triggerSelectOnlyVisibleOption = new EventEmitter<void>();
+
+	/**
 	 * Used to prevent case when user selects an option from dropdown with Space key, which would add an extra space to filter text and "breaking" the selection.
 	 */
 	public preventSpaceKeypress: boolean = false;
+
+	/**
+	 * Info sent by the parent Select / Multiselect to define if only one option is visible.
+	 */
+	public visibleOptionsLength: number = 0;
 
 	/**
 	 * Input form field focus status
@@ -135,6 +145,11 @@ export class SelectAutocompleteComponent {
 	 * Translated aria-label for autocomplete close icon button which clears the input
 	 */
 	protected _translationClearFilterText: string;
+
+	/**
+	 * Prevent dropdown reopen on focus
+	 */
+	private _preventDropdownReOpen: boolean = false;
 
 	/**
 	 * Blur event function for input form field blur
@@ -180,16 +195,20 @@ export class SelectAutocompleteComponent {
 
 		this.preventSpaceKeypress = false;
 
-		if (key === 'Enter') {
+		if (this.dropdownOpen && this.visibleOptionsLength === 1 && key === 'Enter') {
+			this.triggerSelectOnlyVisibleOption.emit();
+		} else if (!this._preventDropdownReOpen && key === 'Enter') {
 			this.triggerDropdownToggle.emit();
 		} else if (key !== 'ArrowDown' && this.autocompleteClearButton && inputValue === '') {
 			this.triggerDropdownClose.emit();
-		} else if (!this.dropdownOpen && key !== 'Escape' && key !== 'Enter') {
+		} else if (!this._preventDropdownReOpen && !this.dropdownOpen && key !== 'Escape' && key !== 'Enter') {
 			this.triggerDropdownOpen.emit();
 		} else if (key === 'ArrowDown' && this._focused) {
 			event.preventDefault();
 			this.triggerFocusToFirstOption.emit();
 		}
+
+		this._preventDropdownReOpen = false;
 	}
 
 	/**
@@ -197,6 +216,9 @@ export class SelectAutocompleteComponent {
 	 * @param resetControlValue reset or not control value, used with single selects
 	 */
 	protected _clearAutocompleteFilterText(): void {
+		if (this.autocompleteClearButton) {
+			this._preventDropdownReOpen = true;
+		}
 		this.triggerFilterTextUpdate.emit('');
 
 		(this.inputRef.nativeElement as HTMLInputElement).value = '';
@@ -204,6 +226,7 @@ export class SelectAutocompleteComponent {
 		if (!this.multiselect) {
 			this.triggerClearFilterButtonClick.emit();
 		}
+
 		this.inputRef.nativeElement.focus();
 	}
 }

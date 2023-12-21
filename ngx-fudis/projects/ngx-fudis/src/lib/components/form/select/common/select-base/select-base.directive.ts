@@ -210,6 +210,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	 */
 	public setOptionVisibility(value: string, visible: boolean) {
 		this._visibleOptionsValues = setVisibleOptionsList(this._visibleOptionsValues, value, visible);
+
+		this._autocompleteRef.visibleOptionsLength = this._visibleOptionsValues.length;
 	}
 
 	/**
@@ -346,7 +348,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 	 * To focus on first option when dropdown opens
 	 * @param cssFocusSelector CSS class to focus to
 	 */
-	protected _focusToFirstOption(cssFocusSelector: string): void {
+	protected _focusToFirstOption(cssFocusSelector: string, clickFirstOption?: boolean): void {
 		const cssSelector = `.${cssFocusSelector}`;
 
 		const firstOption: HTMLInputElement = this._dropdownRef?.dropdownElement.nativeElement.querySelector(
@@ -356,9 +358,16 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 		if (firstOption) {
 			firstOption.focus();
 
+			if (clickFirstOption) {
+				firstOption.click();
+			}
+
 			if (document.activeElement !== firstOption) {
 				setTimeout(() => {
 					firstOption.focus();
+					if (clickFirstOption) {
+						firstOption.click();
+					}
 				}, 0);
 			}
 		} else if (this._focusTryCounter < 100) {

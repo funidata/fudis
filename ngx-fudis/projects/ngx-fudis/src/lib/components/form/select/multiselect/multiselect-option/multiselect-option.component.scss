@@ -34,6 +34,7 @@
 
 		&__checkbox {
 			@include borders.border('1px', 'solid', 'gray-middle');
+			@include colorMixins.bg-color('white');
 
 			display: flex;
 			position: absolute;
@@ -46,7 +47,7 @@
 			height: spacing.$spacing-sm;
 
 			&__icon {
-				@include colorMixins.bg-color('white');
+				transform: scale(0.85);
 			}
 
 			&__input {
@@ -70,13 +71,6 @@
 		}
 	}
 
-	&--disabled {
-		@include colorMixins.bg-color('gray-extra-light');
-		@include colorMixins.text-color('gray-middle');
-
-		cursor: default;
-	}
-
 	&--checked {
 		@include colorMixins.text-color('white');
 		@include colorMixins.bg-color('primary');
@@ -84,6 +78,13 @@
 		&:hover {
 			@include colorMixins.text-color('gray-dark');
 		}
+	}
+
+	&--disabled {
+		@include colorMixins.bg-color('gray-extra-light');
+		@include colorMixins.text-color('gray-middle');
+
+		cursor: default;
 	}
 
 	&--focused {

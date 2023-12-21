@@ -38,7 +38,7 @@
 			*ngIf="!autocomplete"
 			class="fudis-select__input-wrapper__icon"
 			[icon]="'chevron'"
-			[rotate]="_dropdownOpen ? 'cw-90' : 'ccw-90'" />
+			[rotate]="_dropdownOpen ? 'ccw-90' : 'cw-90'" />
 		<fudis-select-autocomplete
 			*ngIf="autocomplete"
 			#autocompleteRef
@@ -51,6 +51,7 @@
 			[multiselect]="true"
 			(triggerFocusToFirstOption)="_visibleOptionsValues.length !== 0 && _focusToFirstOption(this.focusSelector)"
 			(triggerFilterTextUpdate)="_filterTextUpdate($event)"
+			(triggerSelectOnlyVisibleOption)="_focusToFirstOption(this.focusSelector, true)"
 			(triggerDropdownOpen)="_openDropdown()"
 			(triggerDropdownClose)="closeDropdown()"
 			(triggerDropdownToggle)="_toggleDropdown()"
