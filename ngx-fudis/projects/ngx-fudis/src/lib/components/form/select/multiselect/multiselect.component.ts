@@ -14,9 +14,9 @@ import { FormControl } from '@angular/forms';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisIdService } from '../../../../services/id/id.service';
-import { SelectBaseDirective } from '../select-base/select-base.directive';
+import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
-import { joinInputValues, sortValues } from '../selectUtilities';
+import { joinInputValues, sortValues } from '../common/selectUtilities';
 
 @Component({
 	selector: 'fudis-multiselect',

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { DropdownBaseDirective } from '../../../../directives/form/dropdown-base/dropdown-base.directive';
+import { DropdownBaseDirective } from '../../../../../directives/form/dropdown-base/dropdown-base.directive';
 
 @Component({
 	selector: 'fudis-select-dropdown',

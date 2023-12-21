@@ -102,17 +102,17 @@ import { AlertGroupComponent } from './components/alert/alert-group/alert-group.
 import { FudisAlertService } from './services/alert/alert.service';
 import { FudisBreakpointService } from './services/breakpoint/breakpoint.service';
 import { SelectComponent } from './components/form/select/select/select.component';
-import { SelectOptionComponent } from './components/form/select/select-option/select-option.component';
-import { SelectGroupComponent } from './components/form/select/select-group/select-group.component';
+import { SelectOptionComponent } from './components/form/select/select/select-option/select-option.component';
+import { SelectGroupComponent } from './components/form/select/common/select-group/select-group.component';
 import { DropdownItemBaseDirective } from './directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { DropdownBaseDirective } from './directives/form/dropdown-base/dropdown-base.directive';
-import { SelectDropdownComponent } from './components/form/select/select-dropdown/select-dropdown.component';
-import { MultiselectChipListComponent } from './components/form/select/multiselect-chip-list/multiselect-chip-list.component';
-import { SelectBaseDirective } from './components/form/select/select-base/select-base.directive';
+import { SelectDropdownComponent } from './components/form/select/common/select-dropdown/select-dropdown.component';
+import { MultiselectChipListComponent } from './components/form/select/multiselect/multiselect-chip-list/multiselect-chip-list.component';
+import { SelectBaseDirective } from './components/form/select/common/select-base/select-base.directive';
 import { MultiselectComponent } from './components/form/select/multiselect/multiselect.component';
-import { MultiselectOptionComponent } from './components/form/select/multiselect-option/multiselect-option.component';
-import { SelectAutocompleteComponent } from './components/form/select/autocomplete/autocomplete.component';
-import { SelectOptionBaseDirective } from './components/form/select/select-option-base/select-option-base.directive';
+import { MultiselectOptionComponent } from './components/form/select/multiselect/multiselect-option/multiselect-option.component';
+import { SelectAutocompleteComponent } from './components/form/select/common/autocomplete/autocomplete.component';
+import { SelectOptionBaseDirective } from './components/form/select/common/select-option-base/select-option-base.directive';
 
 @NgModule({
 	/*

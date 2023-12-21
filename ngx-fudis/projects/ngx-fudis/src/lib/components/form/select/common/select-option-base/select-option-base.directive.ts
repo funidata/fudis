@@ -1,10 +1,10 @@
 import { Directive, ElementRef, Host, Inject, Input, Optional, ViewChild, effect } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { DropdownItemBaseDirective } from '../../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
-import { SelectComponent } from '../select/select.component';
+import { DropdownItemBaseDirective } from '../../../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
+import { SelectComponent } from '../../select/select.component';
 import { SelectGroupComponent } from '../select-group/select-group.component';
-import { FudisSelectOption } from '../../../../types/forms';
-import { MultiselectComponent } from '../multiselect/multiselect.component';
+import { FudisSelectOption } from '../../../../../types/forms';
+import { MultiselectComponent } from '../../multiselect/multiselect.component';
 
 @Directive({
 	selector: '[fudisSelectOptionBase]',

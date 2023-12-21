@@ -13,7 +13,7 @@ import { areObjectsDeepEquals } from '../../../../utilities/areObjectsDeepEquals
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisIdService } from '../../../../services/id/id.service';
-import { SelectBaseDirective } from '../select-base/select-base.directive';
+import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
 
 @Component({

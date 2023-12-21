@@ -1,4 +1,4 @@
-import { FudisSelectOption } from '../../../types/forms';
+import { FudisSelectOption } from '../../../../types/forms';
 
 export const defaultOptions: FudisSelectOption[] = [
 	{ value: 'value-1-dog', label: 'Dog' },

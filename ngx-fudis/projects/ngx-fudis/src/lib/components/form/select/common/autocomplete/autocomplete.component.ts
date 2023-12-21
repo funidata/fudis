@@ -11,10 +11,10 @@ import {
 	effect,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FudisSelectOption } from '../../../../types/forms';
+import { FudisSelectOption } from '../../../../../types/forms';
 
-import { FudisTranslationConfig } from '../../../../types/miscellaneous';
-import { FudisTranslationService } from '../../../../services/translation/translation.service';
+import { FudisTranslationConfig } from '../../../../../types/miscellaneous';
+import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 
 @Component({
 	selector: 'fudis-select-autocomplete',

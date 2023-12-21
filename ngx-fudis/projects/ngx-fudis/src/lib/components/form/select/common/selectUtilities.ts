@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/dot-notation */
-import { FudisSelectOption } from '../../../types/forms';
+import { FudisSelectOption } from '../../../../types/forms';
 
 /**
  * Arranges selected options in an order they are present in the DOM

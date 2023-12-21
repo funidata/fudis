@@ -1,8 +1,8 @@
 import { Component, Host, Input, Optional } from '@angular/core';
-import { FudisIdService } from '../../../../services/id/id.service';
-import { SelectComponent } from '../select/select.component';
+import { FudisIdService } from '../../../../../services/id/id.service';
+import { SelectComponent } from '../../select/select.component';
 import { setVisibleOptionsList } from '../selectUtilities';
-import { MultiselectComponent } from '../multiselect/multiselect.component';
+import { MultiselectComponent } from '../../multiselect/multiselect.component';
 
 @Component({
 	selector: 'fudis-select-group, fudis-multiselect-group',

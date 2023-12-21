@@ -1,11 +1,11 @@
 import { Component, Host, Inject, OnInit, Optional, effect } from '@angular/core';
 
 import { DOCUMENT } from '@angular/common';
-import { FudisSelectOption } from '../../../../types/forms';
-import { FudisIdService } from '../../../../services/id/id.service';
-import { SelectGroupComponent } from '../select-group/select-group.component';
-import { MultiselectComponent } from '../multiselect/multiselect.component';
-import { SelectOptionBaseDirective } from '../select-option-base/select-option-base.directive';
+import { FudisSelectOption } from '../../../../../types/forms';
+import { FudisIdService } from '../../../../../services/id/id.service';
+import { SelectGroupComponent } from '../../common/select-group/select-group.component';
+import { MultiselectComponent } from '../multiselect.component';
+import { SelectOptionBaseDirective } from '../../common/select-option-base/select-option-base.directive';
 
 @Component({
 	selector: 'fudis-multiselect-option',

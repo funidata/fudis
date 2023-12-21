@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FudisSelectOption } from '../../../../types/forms';
+import { FudisSelectOption } from '../../../../../types/forms';
 
 @Component({
 	selector: 'fudis-multiselect-chip-list',
