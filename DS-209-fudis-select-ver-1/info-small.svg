@@ -1,4 +1,1 @@
-<svg class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" id="info-small">
-    <circle cx="8" cy="5.5" r="1.5"></circle>
-    <path d="M9 7.5H6v1h1v3H6v1h4v-1H9v-4Z"></path>
-</svg>
+<svg id="info-small" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><g clip-path="url(#a)"><circle cx="8" cy="3.5" r="1.5"/><path d="M9 12.5v-6H6v1h1v5H6v1h4v-1H9Z"/></g><defs><clipPath id="a"><path d="M0 0h16v16H0z"/></clipPath></defs></svg>

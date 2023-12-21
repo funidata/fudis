@@ -1,5 +1,1 @@
-<svg class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="info-circle-fill">
-    <circle cx="15" cy="15" r="9.5" fill="white" stroke="#1076DB"/>
-    <circle cx="15" cy="10.5" r="1.5" fill="#1076DB"/>
-    <path d="M16 19.5V13.5H13V14.5H14V19.5H13V20.5H17V19.5H16Z" fill="#1076DB"/>
-</svg>
+<svg id="info-circle-fill" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"><path fill="#fff" d="M26 16c0 5.523-4.477 10-10 10S6 21.523 6 16 10.477 6 16 6s10 4.477 10 10Z"/><path fill="#1076DB" fill-rule="evenodd" d="M16 25a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 1c5.523 0 10-4.477 10-10S21.523 6 16 6 6 10.477 6 16s4.477 10 10 10Z" clip-rule="evenodd"/><circle cx="16" cy="11.5" r="1.5" fill="#1076DB"/><path fill="#1076DB" d="M17 20.5v-6h-3v1h1v5h-1v1h4v-1h-1Z"/></svg>
