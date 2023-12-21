@@ -1,27 +1,54 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, FormsModule, FormControlOptions } from '@angular/forms';
 import { Component } from '@angular/core';
+
+import { BehaviorSubject, Subject } from 'rxjs';
 import { ErrorMessageComponent } from './error-message.component';
-import { FudisValidators } from '../../../../utilities/form/validators';
 import readme from './readme.mdx';
+import { FudisValidators } from '../../../../utilities/form/validators';
 
 @Component({
 	selector: 'example-text-input-with-error-message',
-	template: ` <form [formGroup]="mainFormGroup">
-		<fudis-text-input [control]="mainFormGroup.controls['required']" [label]="'Required text input'">
-			<fudis-error-message
-				*ngIf="mainFormGroup.controls['required'].touched"
-				[message]="'This is a custom error message that has been added with content projection'"
-				[visible]="mainFormGroup.controls['required'].touched" />
-		</fudis-text-input>
-	</form>`,
+	template: `
+		<fudis-grid [columns]="2" [width]="'xs'">
+			<fudis-text-input fudisGridItem [columns]="'stretch'" [control]="control" [label]="'Required text input'">
+				<fudis-error-message [visible]="_errorExists" [message]="message" />
+			</fudis-text-input>
+			<fudis-button (click)="toggleCustomError()" [label]="'Toggle custom error'" />
+			<fudis-button (click)="switchErrorMessage()" [label]="'Switch message content'" />
+		</fudis-grid>
+	`,
 })
 class TextInputWithErrorMessageComponent {
-	constructor(private _formBuilder: FormBuilder) {}
+	constructor() {
+		this.control = new FormControl('', FudisValidators.required('This field is required.'));
+	}
 
-	mainFormGroup: FormGroup = this._formBuilder.group({
-		required: new FormControl('', FudisValidators.required('This is a regular error message')),
-	});
+	message: Subject<string> = new BehaviorSubject<string>(
+		'This is a custom error message coming from fudis-error-message element'
+	);
+
+	customErrorExists: FormControlOptions;
+
+	originalMessage: boolean = true;
+
+	control: FormControl<string | null>;
+
+	protected _errorExists: boolean = true;
+
+	toggleCustomError(): void {
+		this._errorExists = !this._errorExists;
+	}
+
+	switchErrorMessage(): void {
+		if (this.originalMessage) {
+			this.message.next('Observable value changed, so now this is me!');
+		} else {
+			this.message.next('Custom message can be any string or observable string');
+		}
+
+		this.originalMessage = !this.originalMessage;
+	}
 }
 
 export default {
@@ -46,6 +73,10 @@ export default {
 
 export const ErrorMessageExample: StoryFn = () => ({
 	template: `
-	<example-text-input-with-error-message></example-text-input-with-error-message>
+<!--
+Full code example available in:
+components/form/error-message/error-message/error-message.stories.ts
+-->
+<example-text-input-with-error-message/>
 	`,
 });

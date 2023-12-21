@@ -58,9 +58,9 @@ export class DatepickerComponent extends InputBaseDirective implements OnInit, O
 		});
 	}
 
-	@ContentChild(DateStartErrorDirective) errorStartDate: DateStartErrorDirective;
+	@ContentChild(DateStartErrorDirective) startDateError: DateStartErrorDirective;
 
-	@ContentChild(DateEndErrorDirective) errorEndDate: DateEndErrorDirective;
+	@ContentChild(DateEndErrorDirective) endDateError: DateEndErrorDirective;
 
 	/**
 	 * FormControl for the input.

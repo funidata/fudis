@@ -1,94 +1,167 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
-import { FudisFormErrorSummaryItem } from '../../../../types/forms';
+import { Component, EventEmitter, Host, Input, OnChanges, OnDestroy, OnInit, Optional, Output } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { AbstractControl } from '@angular/forms';
+import { FudisValidationErrors, FudisValidatorFn, FudisValidatorMessage } from '../../../../utilities/form/validators';
+
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
-import { ErrorMessageBaseDirective } from '../error-message-base/error-message-base.directive';
+import { TextInputComponent } from '../../text-input/text-input.component';
+import { TextAreaComponent } from '../../text-area/text-area.component';
+import { DropdownComponent } from '../../dropdown/dropdown.component';
+import { DatepickerComponent } from '../../date/datepicker/datepicker.component';
+import { AutocompleteComponent } from '../../autocomplete/autocomplete.component';
+import { InputWithLanguageOptionsComponent } from '../../input-with-language-options/input-with-language-options.component';
+import { CheckboxGroupComponent } from '../../checkbox-group/checkbox-group.component';
+import { RadioButtonGroupComponent } from '../../radio-button-group/radio-button-group.component';
 
 @Component({
 	selector: 'fudis-error-message',
-	templateUrl: './error-message.component.html',
-	styleUrls: ['./error-message.component.scss'],
+	template: '',
 })
-export class ErrorMessageComponent extends ErrorMessageBaseDirective implements OnInit, OnChanges, OnDestroy {
+export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	constructor(
-		_errorSummaryService: FudisInternalErrorSummaryService,
-		_translationService: FudisTranslationService,
-		_idService: FudisIdService
+		private _errorSummaryService: FudisInternalErrorSummaryService,
+		private _translationService: FudisTranslationService,
+		private _idService: FudisIdService,
+		@Host() @Optional() private _textInput: TextInputComponent,
+		@Host() @Optional() private _textArea: TextAreaComponent,
+		@Host() @Optional() private _dropdown: DropdownComponent,
+		@Host() @Optional() private _datePicker: DatepickerComponent,
+		@Host() @Optional() private _autocomplete: AutocompleteComponent,
+		@Host() @Optional() private _inputWithLanguageOptions: InputWithLanguageOptionsComponent,
+		@Host() @Optional() private _checkboxGroup: CheckboxGroupComponent,
+		@Host() @Optional() private _radioButtonGroup: RadioButtonGroupComponent
 	) {
-		super(_errorSummaryService, _translationService, _idService);
+		if (_textInput) {
+			this._parent = _textInput;
+		} else if (_textArea) {
+			this._parent = _textArea;
+		} else if (_dropdown) {
+			this._parent = _dropdown;
+		} else if (_datePicker) {
+			this._parent = _datePicker;
+		} else if (_autocomplete) {
+			this._parent = _autocomplete;
+		} else if (_radioButtonGroup) {
+			this._parent = _radioButtonGroup;
+		} else if (_inputWithLanguageOptions) {
+			this._parentGroup = _inputWithLanguageOptions;
+		} else if (_checkboxGroup) {
+			this._parentGroup = _checkboxGroup;
+		}
+
 		this._id = _idService.getNewId('error-message');
 	}
 
-	/**
-	 * Manually included parentLabel input for situations when multiple error messages are projected to same form component.
+	/*
+	 * Error message to display
 	 */
-	@Input() parentLabel: string;
+	@Input({ required: true }) message: Observable<string> | string;
+
+	@Input({ required: true }) visible: boolean;
+
+	@Output() handleAddError = new EventEmitter<FudisValidationErrors>();
+
+	@Output() handleRemoveError = new EventEmitter<FudisValidationErrors>();
+
+	private _id: string;
+
+	private _subscribtion: Subscription;
+
+	private _errorAdded: boolean = false;
 
 	/**
-	 * Manually included parentId for linking multiple error messages with parent form component.
+	 * Error message to include in error summary item
 	 */
-	@Input() parentId: string;
+	private _currentMessage: string;
+
+	private _parent:
+		| TextInputComponent
+		| TextAreaComponent
+		| DropdownComponent
+		| AutocompleteComponent
+		| DatepickerComponent
+		| RadioButtonGroupComponent;
+
+	private _parentGroup: InputWithLanguageOptionsComponent | CheckboxGroupComponent;
+
+	private _customValidatorInstance: FudisValidatorFn;
 
 	ngOnInit(): void {
-		if (this.message && typeof this.message !== 'string') {
-			this._subscribtion = this.message.subscribe((value: string) => {
+		if (typeof this.message !== 'string') {
+			this._subscribtion = this.message!.subscribe((value: string) => {
 				this._currentMessage = value;
-
-				this.createCustomError();
 			});
-		} else if (this.message) {
+		} else {
 			this._currentMessage = this.message;
-			this.createCustomError();
+		}
+
+		this._customValidatorInstance = this._customControlValidatorFn(this.message);
+
+		if ((this._parent || this._parentGroup) && this.message) {
+			this._addControlValidator();
 		}
 	}
 
 	ngOnChanges(): void {
-		if (typeof this.message === 'string') {
+		/**
+		 * Update validator message if message is a string and not observable
+		 */
+		if (this.visible && typeof this.message === 'string') {
 			this._currentMessage = this.message;
-			this.createCustomError();
+		}
+		/**
+		 * Always remove error, if visible is false
+		 */
+		if (this.visible) {
+			this._addControlValidator();
+		} else {
+			this._removeValidator();
 		}
 	}
 
 	ngOnDestroy(): void {
-		this.removeCustomError();
 		if (this._subscribtion) {
 			this._subscribtion.unsubscribe();
 		}
+		this._removeValidator();
 	}
 
-	public setParentProperties(id: string, label: string) {
-		this.parentId = id;
+	private _customControlValidatorFn(message: FudisValidatorMessage): FudisValidatorFn {
+		return (control: AbstractControl) => {
+			if (!control) {
+				return null;
+			}
+			return { [this._id]: { message } };
+		};
+	}
 
-		if (label !== this.parentLabel) {
-			this.parentLabel = label;
-			this.createCustomError();
+	private _addControlValidator(): void {
+		if (this._parent && this.visible && this._currentMessage) {
+			this._errorAdded = true;
+			this._parent.control.addValidators(this._customValidatorInstance);
+			this._parent.control.updateValueAndValidity();
+			this.handleAddError.emit({ [this._id]: { message: this.message } });
+		} else if (this._parentGroup && this.visible && this._currentMessage) {
+			this._errorAdded = true;
+			this._parentGroup.formGroup.addValidators(this._customValidatorInstance);
+			this._parentGroup.formGroup.updateValueAndValidity();
+			this.handleAddError.emit({ [this._id]: { message: this.message } });
 		}
 	}
 
-	public createCustomError(): void {
-		if (this._currentMessage && this.parentId && this.parentLabel) {
-			const newError: FudisFormErrorSummaryItem = {
-				id: this.parentId,
-				error: this._currentMessage,
-				label: this.parentLabel,
-				type: this._id,
-				controlName: this.controlName,
-				language: this._translationService.getLanguage(),
-			};
-			this._createError(newError);
-		}
-	}
-
-	public removeCustomError(): void {
-		if (this._errorSent) {
-			this._errorSummaryService.removeError({
-				id: this.parentId,
-				type: this._id,
-				controlName: this.controlName,
-			});
-
-			this._errorSent = false;
+	private _removeValidator(): void {
+		if (this._parent && this._customValidatorInstance && this._errorAdded) {
+			this._errorAdded = false;
+			this._parent.control.removeValidators(this._customValidatorInstance);
+			this._parent.control.updateValueAndValidity();
+			this.handleRemoveError.emit({ [this._id]: { message: this.message } });
+		} else if (this._parentGroup && this._customValidatorInstance && this._errorAdded) {
+			this._errorAdded = false;
+			this._parentGroup.formGroup.removeValidators(this._customValidatorInstance);
+			this._parentGroup.formGroup.updateValueAndValidity();
+			this.handleRemoveError.emit({ [this._id]: { message: this.message } });
 		}
 	}
 }

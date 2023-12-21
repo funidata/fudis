@@ -1,3 +1,1 @@
-<svg class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="increase-indent">
-    <path d="M12.5 15.5h9v-1.001h-9V15.5ZM12.5 17.5h9v-1h-9v1ZM8.5 19.5h13v-1h-13v1ZM12.5 13.5h9v-1h-9v1ZM8.5 11.5h13v-1h-13v1ZM8.5 17l3-2-3-2v4Z"></path>
-</svg>
+<svg id="increase-indent" xmlns="http://www.w3.org/2000/svg" width="32" height="32"><path fill-rule="evenodd" d="M13.333 16.533h9.6v-1.067h-9.6v1.067ZM13.333 18.667h9.6V17.6h-9.6v1.067ZM9.066 20.8h13.867v-1.067H9.066V20.8ZM13.333 14.4h9.6v-1.067h-9.6V14.4ZM9.066 12.267h13.867V11.2H9.066v1.067ZM9.066 18.133l3.2-2.133-3.2-2.133v4.266Z" clip-rule="evenodd"/></svg>

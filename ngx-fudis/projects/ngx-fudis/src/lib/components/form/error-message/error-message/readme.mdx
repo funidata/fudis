@@ -3,57 +3,65 @@ import * as ErrorMessageStories from './error-message.stories';
 
 <Meta title="Components/Form/Error Message" />
 
-# Error message
+# Error Message
 
-Fudis form components can implement two types of error messages. Fudis Validator Error Message is an internal error message used by [Fudis Validators](/docs/utilities-validators--documentation).
-Also, it is possible to add custom error message to Fudis form components through content projection. This requires the use of selector `fudis-error-message` when projecting content to another form component. 
-Both types of error messages share the same design and are always rendered as a part of Guidance Component.
-Read the following documentation on exceptions and on how to use multiple custom error messages at a single form component.
+Fudis form component's errors can be achieved in two ways:
+- Through form control's validators: [Fudis Validators](/docs/utilities-validators--documentation).
+- As a Error Message child component, for cases when using a validator or creating a custom one can be tricky.
+
+This page is documentation for the latter Error Message component, which binds custom error message to Fudis form components through content projection.
+
+This requires the use of selector `fudis-error-message`. Both Error Message and Fudis Validator errors create the same UI result and renders errors under the Guidance Component.
 
 ## Examples
 
 <Canvas of={ErrorMessageStories.ErrorMessageExample}></Canvas>
 
+## Currently Supported Form Components
+
+- [Text Input](/docs/components-form-text-input--documentation)
+- [Text Area](/docs/components-form-text-area--documentation)
+- [Dropdown](/docs/components-form-dropdown--documentation)
+- [Date Picker](/docs/components-form-date-datepicker--documentation)
+- [Date Range](/docs/components-form-date-date-range--documentation)
+- [Autocomplete (single-select)](/docs/components-form-autocomplete-single-select--documentation)
+- [Radio Button Group](/docs/components-form-radio-button-group--documentation)
+- [Checkbox Group](/docs/components-form-checkbox-group--documentation)
+- [Input with Language Options](/docs/components-form-input-with-language-options--documentation)
+
 ## Usage Guidelines
 
 ### Mandatory Properties
 
-The mandatory properties for Error Message are `message` and `visible`. Also, the **NgIf** directive is required so that the Error Message can be passed to Error Summary Component. For the properties, the message parameter can be passed either as a string or as an observable string.
-The property visible is a boolean value that is designed to be used with form control state in determining when an error is shown. Notice that property visible does not have an effect on the form's validity. In order for the error message alert icon to be displayed, 
-the related form control must be in invalid state and passed to Error Message component in visible property.
+The mandatory properties for Error Message are `message` and `visible`. 
+
+When `visible` is true, it will adjust the parent's form control by binding a custom validator to it. This will trigger creation of `FudisValidatorErrorMessage` instance, which also sends error data to the Error Summary. If `visible` is set to false again, this will remove the added validator and also remove error from Error Summary.
+
+Message parameter can be passed either as a string or as an observable string.
 
 ````
-<form [formGroup]="mainFormGroup">
-	<fudis-text-input
-	[control]="mainFormGroup.controls['required']"
+<fudis-text-input
+	[control]="control"
 	[label]="'Required text input'">
 	<fudis-error-message
-		*ngIf="true"
 		[message]="'This is a custom error message has been added with content projection'"
-		[visible]="mainFormGroup.controls['required'].touched" />
+		[visible]="errorExists" />
 </fudis-text-input>
-</form>`
 ````
-### Using multiple Error Messages
-
-**Note!** It is recommended to use only one Error Message at a time. When using multiple error messages it is mandatory to pass related form field id as `parentId` and a form field label as `parentLabel` input. 
-These inputs are used for linking error message content with related input fields and with [Error Summary](/docs/components-form-error-summary--documentation).
-
-### Error Message with Date Range component
+### Error Message with Date Range Component
 
 When it is mandatory to target error message to a single Form Control in Date Range component, use `fudisDateStartError`and `fudisDateEndError` directives for selecting between start and end time inputs.
 
 `````
 <fudis-date-range [startDate]="startDate" [endDate]="endDate">
 	<ng-template fudisDateStartError>
-		<fudis-error-message *ngIf="true" [message]="'Backend threw an error on start date'" [visible]="true" />
+		<fudis-error-message [message]="'Error on the start date'" [visible]="startDateErrorCondition" />
 	</ng-template>
 	<ng-template fudisDateEndError>
-		<fudis-error-message *ngIf="true" [message]="'Backend threw an error on end date'" [visible]="true" />
+		<fudis-error-message [message]="'Error on the end date'" [visible]="endDateErrorCondition" />
 	</ng-template>
 </fudis-date-range>
 `````
-
 
 ## Accessibility
 
@@ -62,5 +70,13 @@ When it is mandatory to target error message to a single Form Control in Date Ra
 
 ## Related Components
 
-- Guidance Component
 - [Error Summary](/docs/components-form-error-summary--documentation)
+- [Text Input](/docs/components-form-text-input--documentation)
+- [Text Area](/docs/components-form-text-area--documentation)
+- [Dropdown](/docs/components-form-dropdown--documentation)
+- [Date Picker](/docs/components-form-date-datepicker--documentation)
+- [Date Range](/docs/components-form-date-date-range--documentation)
+- [Autocomplete (single-select)](/docs/components-form-autocomplete-single-select--documentation)
+- [Radio Button Group](/docs/components-form-radio-button-group--documentation)
+- [Checkbox Group](/docs/components-form-checkbox-group--documentation)
+- [Input with Language Options](/docs/components-form-input-with-language-options--documentation)
