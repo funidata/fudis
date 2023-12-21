@@ -3,11 +3,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
-import { FudisValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
 import { By } from '@angular/platform-browser';
 import { MockComponent } from 'ng-mocks';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { FudisFormErrorSummaryItem } from '../../../../types/forms';
+import { FudisValidators } from '../../../../utilities/form/validators';
+import { FudisFormErrorSummaryItem, FudisFormErrorSummaryRemoveItem } from '../../../../types/forms';
 import { ValidatorErrorMessageComponent } from './validator-error-message.component';
 import { TextInputComponent } from '../../text-input/text-input.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
@@ -92,15 +92,14 @@ describe('TextInputWithValidatorErrorMessageComponent', () => {
 		});
 
 		it('should create error with string message when component is initialized', () => {
-			component.message = 'Lisää tämä';
+			component.message = 'Message for testing';
 
-			component.controlName = undefined;
 			fixture.detectChanges();
 			spyOn(component.handleCreateError, 'emit');
 
 			const testError: FudisFormErrorSummaryItem = {
 				id: 'test-id',
-				error: 'Lisää tämä',
+				error: 'Message for testing',
 				label: 'Test label',
 				type: 'required',
 				controlName: undefined,
@@ -111,6 +110,25 @@ describe('TextInputWithValidatorErrorMessageComponent', () => {
 			fixture.detectChanges();
 
 			expect(component.handleCreateError.emit).toHaveBeenCalledWith(testError);
+		});
+
+		it('should remove error with string message when component is destroyed', () => {
+			spyOn(component.handleRemoveError, 'emit');
+			component.message = 'Error to be removed';
+
+			component.ngOnInit();
+			fixture.detectChanges();
+
+			const errorToRemove: FudisFormErrorSummaryRemoveItem = {
+				id: 'test-id',
+				type: 'required',
+				controlName: undefined,
+			};
+
+			component.ngOnDestroy();
+			fixture.detectChanges();
+
+			expect(component.handleRemoveError.emit).toHaveBeenCalledWith(errorToRemove);
 		});
 
 		it('should create error message with observable message when component is initialized and update it when observable updates', () => {
@@ -143,6 +161,30 @@ describe('TextInputWithValidatorErrorMessageComponent', () => {
 			};
 
 			expect(component.handleCreateError.emit).toHaveBeenCalledWith(updatedError);
+		});
+
+		it('should remove error message with observable message when component is destroyed', () => {
+			spyOn(component.handleRemoveError, 'emit');
+
+			const removedMessageAsObservable: Subject<string> = new BehaviorSubject<string>('Message to be removed');
+			component.message = removedMessageAsObservable;
+			component.focusId = 'test-observable-message-id';
+			component.type = 'required';
+			component.controlName = undefined;
+
+			component.ngOnInit();
+			fixture.detectChanges();
+
+			const errorToRemove: FudisFormErrorSummaryRemoveItem = {
+				id: 'test-observable-message-id',
+				type: 'required',
+				controlName: undefined,
+			};
+
+			component.ngOnDestroy();
+			fixture.detectChanges();
+
+			expect(component.handleRemoveError.emit).toHaveBeenCalledWith(errorToRemove);
 		});
 
 		it('should update error message when label updates', () => {
