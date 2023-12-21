@@ -1,0 +1,83 @@
+import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+
+<Meta title="Utilities/Validators" />
+
+# Validators
+
+Fudis Form components use FudisValidators that have following types: `required`, `email`, `minLength`, `maxLength`,`min`, `max` and `pattern`.
+
+## Usage Guidelines
+
+
+### Required validator
+
+For required form field, include `FudisValidators.required()` in the form control validator with message parameter either as a string or as an observable string.
+
+```
+FudisValidators.required('This is required field')
+```
+#### Error Handling
+
+**required** error is shown if user input is required and
+- if control is touched and
+		- if control value is null
+
+---
+
+### Email validator
+
+Email validator expects that the related form field type is set to `[type]="'email'"`. Validator checks that the given input corresponds to the set email type of the form field. 
+Validator takes a message parameter either as a string or as an observable string.
+
+```
+FudisValidators.email('Input must be an email address.')
+```
+
+---
+
+### MinLength and MaxLength validators
+
+For minLength and maxLength, include `FudisValidators.minLength()` and `FudisValidators.maxLength()` in the form control validator with preferred input length as number and a message parameter as a string or as an observable string.
+When maxLength validation is used, [Text Input](/docs/components-form-text-input--documentation) and [Text Area](/docs/components-form-text-area--documentation) components disable user from inputing more than allowed length of characters and will have additional maxLength indicator.
+When using [Dropdown](/docs/components-form-dropdown--documentation) with maxLength validator, error message is prompted when maximum amount of allowed selected options exceeds.
+
+
+```
+FudisValidators.maxLength(20, 'Too long email.')
+```
+#### Error Handling
+
+**minLength** and/or **maxLength** errors are shown
+- if control is touched and
+	- if control value is not null and
+		- if control value length does not match the given validators length
+
+---
+
+### Min and Max validators
+
+Min and Max validators are used with form field `[type]="'number'"`. Min and Max validator disables inputs that exceed or fall below the allowed values.
+Form components that use Error message is prompt when the user inputs lower or higher value than the allowed value to the input field. 
+Form components that include min/max validation require a validation number and message parameter as a string or as an observable string.
+```
+FudisValidators.max(10, 'Number cannot exceed 10.')
+
+```
+#### Error Handling
+
+**minNumber** and/or **maxNumber** errors are shown
+	- if control is touched and
+		- if control value is not null and
+			- if control value is not respective to given **min** and/or **max** validator values
+
+---
+
+### Pattern validator
+
+Pattern validator receives a Regex pattern and makes input comparison with the given pattern. 
+Validator takes in a pattern as a string or with a type definition of Regex. Error message parameter is given as a string or as an observable string.
+
+```
+FudisValidators.pattern(/^[A-Z \d\W]+$/, 'PLEASE USE ONLY LOW CAPS!')
+
+```

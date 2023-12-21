@@ -4,6 +4,7 @@ import {
 	FudisFormErrorSummaryItem,
 	FudisFormErrorSummarySection,
 	FudisErrorSummaryParent,
+	FudisFormErrorSummaryRemoveItem,
 } from '../../../types/forms';
 
 /**
@@ -121,7 +122,7 @@ export class FudisInternalErrorSummaryService {
 	 * Removes error object from the current errors list if it contains matching error id
 	 * @param error Error object
 	 */
-	public removeError(error: { id: string; controlName: string | undefined; type: string }): void {
+	public removeError(error: FudisFormErrorSummaryRemoveItem): void {
 		const currentErrors = this._currentErrorList;
 
 		const errorId = error.controlName ? `${error.id}_${error.controlName}` : error.id;

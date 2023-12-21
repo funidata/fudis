@@ -55,17 +55,7 @@ import readme from './readme.mdx';
 										[id]="fieldsetId">
 										<ng-template fudisNotifications type="fieldset">
 											<fudis-notification *ngIf="firstLoad || errorSummaryVisible">
-												<fudis-body-text>
-													This is notification for a fieldset. It has one custom error-message which should pop up in
-													the error summary on submit.
-												</fudis-body-text>
-												<fudis-error-message
-													[type]="'fieldset'"
-													[variant]="'body-text'"
-													[visible]="true"
-													[focusId]="fieldsetId"
-													[label]="'Basic info'"
-													[message]="'There might be some errors in the fieldset.'" />
+												This is notification for a fieldset. TODO: Add notifications to error summary if needed.
 											</fudis-notification>
 										</ng-template>
 										<ng-template fudisContent type="fieldset">
@@ -76,7 +66,14 @@ import readme from './readme.mdx';
 													[formGroup]="formExample.controls['name']"
 													[label]="'Course name'"
 													[helpText]="'Some name would be nice. Provide course name in at least one language.'"
-													[groupErrorMsg]="errorName" />
+													[groupErrorMsg]="errorName">
+													<fudis-error-message
+														[visible]="
+															formExample.controls['importantDate'].touched &&
+															formExample.controls['importantDate'].value?.getTime() !== releaseDate
+														"
+														[message]="'Reminder here as well, that you have not set a good start date'" />
+												</fudis-input-with-language-options>
 												<fudis-input-with-language-options
 													[variant]="'text-area'"
 													[id]="'unique-input-2'"
@@ -109,6 +106,9 @@ import readme from './readme.mdx';
 													[helpText]="'You have to start from somewhere'"
 													[errorMsg]="errorImportantDate"
 													[control]="formExample.controls['importantDate']">
+													<fudis-error-message
+														[visible]="formExample.controls['importantDate'].value?.getTime() !== releaseDate"
+														[message]="'Wrong date chosen. 1.5.1991 would be great!'" />
 												</fudis-datepicker>
 											</fudis-grid>
 										</ng-template>
@@ -121,7 +121,8 @@ import readme from './readme.mdx';
 													[id]="'unique-input-3'"
 													[control]="formExample.controls['teacher']"
 													[label]="'Responsible teacher'"
-													[helpText]="'Someone has to be responsible for this.'" />
+													[helpText]="'Someone has to be responsible for this.'">
+												</fudis-text-input>
 												<fudis-text-input
 													[id]="'unique-input-4'"
 													[helpText]="inputHelpText"
@@ -156,6 +157,8 @@ class FormContentExampleComponent implements OnInit {
 		private _translationService: FudisTranslationService,
 		private _focusService: FudisFocusService
 	) {}
+
+	releaseDate: number = new Date('1991-5-1').getTime();
 
 	errorSummaryVisible: boolean = false;
 

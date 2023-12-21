@@ -17,33 +17,26 @@ Text Area can only be resized vertically, horizontal resizing is disabled to avo
 
 ## Usage Guidelines
 
-#### Mandatory Properties
+### Mandatory Properties
 
 Necessary properties for Text Area are `label` and `control`.
 
-#### As a required form field
+### Validators and Error Handling
 
-If Text Area is a **required** form field, include `FudisValidators.required()` in the form control validator with message parameter either as a string or as an observable string. E.g. `FudisValidators.required('This is required field')`.
+Fudis form components use Fudis Validators. See the full documentation on [how to use Fudis Validators](/docs/utilities-validators--documentation). 
 
-#### With minLength and maxLength validators
+If a custom validation is used, read [how to add Error message](/docs/components-form-error-message--documentation).
 
-Text Area can have min and max length validators. 
+**Text Area validators**
+- required
+- minLength and maxLength
 
-For min length, include `FudisValidators.minLength()` in the form control validators.
+#### Text Area `maxLength` Indicator
 
-Max length validator does not prompt any error message but disable user to input more than allowed length of characters to the input field. For max length, include `FudisValidators.maxLength()` in the form control validators and pass wanted maxLength as an Input to the Text Area <code>[maxLength]="maxLength"</code>. This will also activate the maximum character indicator to the bottom right corner of the input.
+[MaxLength](/docs/utilities-validators--documentation&args=#minlength-and-maxlength-validators) validator on Text Area does not prompt any error message but disable user to input more than allowed length of characters to the input field.
+Additionally, when maxLength validation is used, by passing maxLength Input <code>[maxLength]="maxLength"</code> to Text Area, will activate the maximum character indicator to the bottom right corner.
 
-### Error Handling
-
-- **Required** error is shown if text Area is required and
-  - if control is touched and
-			- Text Area value is null
-- **minLength** error is shown
-	- if control is touched and 
-		- if control value is not null and
-			- if control value is not respective to given **minlength** validator value
-
-### Accessibility
+## Accessibility
 
 - Label and guidance are linked to the Text Area via id
 - Screen reader is informed when maximum character length has 5 characters left and when maximum character count is reached

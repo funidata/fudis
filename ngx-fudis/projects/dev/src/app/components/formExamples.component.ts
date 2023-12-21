@@ -36,6 +36,10 @@ export class AppFormExampleComponent implements OnInit {
 
 	showSuccessBodyText: boolean = false;
 
+	customError: boolean = true;
+
+	customError: boolean = true;
+
 	dropdownOptions: FudisSelectOption[] = [
 		{ value: 'value-1-dog', label: 'Dog' },
 		{ value: 'value-2-capybara', label: 'Capybara' },
@@ -148,6 +152,10 @@ export class AppFormExampleComponent implements OnInit {
 			this.errorSummaryVisible = false;
 			this.showSuccessBodyText = true;
 		}
+	}
+
+	toggleCustomError(): void {
+		this.customError = !this.customError;
 	}
 
 	// eslint-disable-next-line class-methods-use-this

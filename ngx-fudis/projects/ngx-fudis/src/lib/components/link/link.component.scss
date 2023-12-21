@@ -11,7 +11,7 @@
 			@include focus.focus-generic;
 		}
 
-		&__primary {
+		&__primary-dark {
 			@include colors.text-color('primary-dark');
 		}
 

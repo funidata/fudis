@@ -30,6 +30,8 @@ import { DateRangeComponent } from './components/form/date/date-range/date-range
 
 import {
 	ContentDirective,
+	DateStartErrorDirective,
+	DateEndErrorDirective,
 	FooterContentLeftDirective,
 	FooterContentRightDirective,
 } from './directives/content-projection/content/content.directive';
@@ -50,9 +52,10 @@ import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.
 import { DropdownMenuItemComponent } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
 
 import { FudisFocusService } from './services/focus/focus.service';
-import { ErrorMessageComponent } from './components/form/error-message/error-message.component';
+import { ValidatorErrorMessageComponent } from './components/form/error-message/validator-error-message/validator-error-message.component';
 import { FudisInternalErrorSummaryService } from './services/form/error-summary/internal-error-summary.service';
 import { FudisErrorSummaryService } from './services/form/error-summary/error-summary.service';
+import { ErrorMessageComponent } from './components/form/error-message/error-message/error-message.component';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
 
@@ -130,9 +133,11 @@ import { SelectOptionBaseDirective } from './components/form/select/select-optio
 		CheckboxComponent,
 		CheckboxGroupComponent,
 		ContentDirective,
+		DateEndErrorDirective,
 		DatepickerComponent,
 		DatepickerCustomHeaderComponent,
 		DateRangeComponent,
+		DateStartErrorDirective,
 		DescriptionListComponent,
 		DescriptionListItemComponent,
 		DescriptionListItemTermComponent,
@@ -147,6 +152,7 @@ import { SelectOptionBaseDirective } from './components/form/select/select-optio
 		DropdownMenuComponent,
 		DropdownItemBaseDirective,
 		DropdownMenuItemComponent,
+		ValidatorErrorMessageComponent,
 		ErrorMessageComponent,
 		ErrorSummaryComponent,
 		ExpandableComponent,
@@ -233,8 +239,11 @@ import { SelectOptionBaseDirective } from './components/form/select/select-optio
 		CheckboxComponent,
 		CheckboxGroupComponent,
 		ContentDirective,
+		ErrorMessageComponent,
+		DateEndErrorDirective,
 		DatepickerComponent,
 		DateRangeComponent,
+		DateStartErrorDirective,
 		DescriptionListComponent,
 		DescriptionListItemComponent,
 		DescriptionListItemTermComponent,
@@ -247,7 +256,7 @@ import { SelectOptionBaseDirective } from './components/form/select/select-optio
 		DropdownComponent,
 		DropdownMenuComponent,
 		DropdownMenuItemComponent,
-		ErrorMessageComponent,
+		ErrorSummaryComponent,
 		ExpandableComponent,
 		FooterComponent,
 		FooterContentLeftDirective,

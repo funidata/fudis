@@ -22,9 +22,14 @@ Datepicker allows user to select a date from valid options.
 
 Datepicker requires at least `label` and `id` properties for accessibility.
 
-### As a required form field
+### Validators and Error Handling
 
-If Datepicker is a **required** form field, include `FudisValidators.required()` in the form control validator with message parameter either as a string or as an observable string. E.g. `FudisValidators.required('This is required field')`.
+Fudis form components use Fudis Validators. See the full documentation on [how to use Fudis Validators](/docs/utilities-validators--documentation). 
+
+If a custom validation is used, read [how to add Error message](/docs/components-form-error-message--documentation).
+
+**Datepicker validators**
+- required
 
 ### Other validation options
 
@@ -45,13 +50,9 @@ For unknown input format provide `matDatepickerParse` value for `errorMsg` prope
 >
 </fudis-datepicker>
 ```
+#### Error Handling
 
-## Error Handling
-
-- **Required** error is shown if input is required and
-  - if control is touched and value is empty or
-  - if date format is not valid
-- **matDatepickerMin** and/or **matDatepickerMax** error is shown
+**matDatepickerMin** and/or **matDatepickerMax** error is shown
   - if written date is outside the range of min and max
 
 ## Localization

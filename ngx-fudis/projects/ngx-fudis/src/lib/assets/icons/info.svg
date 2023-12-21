@@ -1,4 +1,1 @@
-<svg class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="info">
-    <circle cx="15" cy="10.5" r="1.5"></circle>
-    <path d="M16 19.5v-6h-3v1h1v5h-1v1h4v-1h-1Z"></path>
-</svg>
+<svg id="info" xmlns="http://www.w3.org/2000/svg" width="32" height="32"><circle cx="16" cy="11.5" r="1.5"/><path d="M17 20.5v-6h-3v1h1v5h-1v1h4v-1h-1Z"/></svg>

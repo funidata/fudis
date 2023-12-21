@@ -157,7 +157,7 @@ class FieldsetExampleComponent {
 			FudisValidators.minLength(5, 'Email should be at least 5 characters.'),
 		]),
 		startDate: new FormControl('', FudisValidators.required('Start date is missing.')),
-		endDate: new FormControl('', FudisValidators.required('Start date is missing.')),
+		endDate: new FormControl('', FudisValidators.required('End date is missing.')),
 		courseType: new FormControl('', FudisValidators.required('Course type must be selected.')),
 	});
 
