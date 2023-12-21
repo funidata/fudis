@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FudisSelectOption } from '../../../../../types/forms';
 
 @Component({
@@ -7,6 +7,8 @@ import { FudisSelectOption } from '../../../../../types/forms';
 	styleUrls: ['./multiselect-chip-list.component.scss'],
 })
 export class MultiselectChipListComponent {
+	@ViewChild('chipListRef') public chipListRef: ElementRef<HTMLUListElement>;
+
 	/**
 	 * Array of selected chip items
 	 */
@@ -27,13 +29,15 @@ export class MultiselectChipListComponent {
 	 * @param event click event
 	 * @param index clicked index
 	 */
-	protected _clickChip(event: Event, index: number) {
-		const eventTarget = event.target as HTMLButtonElement;
-		if (eventTarget.nextElementSibling) {
-			(eventTarget.nextElementSibling as HTMLButtonElement).focus();
-		} else if (eventTarget.previousElementSibling) {
-			(eventTarget.previousElementSibling as HTMLButtonElement).focus();
-		}
+	protected _clickChip(index: number) {
 		this.handleClick.emit(index);
+
+		setTimeout(() => {
+			if (index === 0 && this.chipListRef.nativeElement.children[0]) {
+				(this.chipListRef.nativeElement.children[0] as HTMLButtonElement).focus();
+			} else if (this.chipListRef.nativeElement.children[index - 1]) {
+				(this.chipListRef.nativeElement.children[index - 1] as HTMLButtonElement).focus();
+			}
+		}, 50);
 	}
 }
