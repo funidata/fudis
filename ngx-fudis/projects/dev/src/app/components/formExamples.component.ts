@@ -38,8 +38,6 @@ export class AppFormExampleComponent implements OnInit {
 
 	customError: boolean = true;
 
-	customError: boolean = true;
-
 	dropdownOptions: FudisSelectOption[] = [
 		{ value: 'value-1-dog', label: 'Dog' },
 		{ value: 'value-2-capybara', label: 'Capybara' },
