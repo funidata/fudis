@@ -39,7 +39,7 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
 	 */
 	@Input() visible: boolean = false;
 
-	/*
+	/**
 	 * Error message to display
 	 */
 	@Input({ required: true }) message: Observable<string> | string;
@@ -59,8 +59,14 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
 	 */
 	@Input() deprecationWarning: boolean = false;
 
+	/**
+	 * Output for handling a state when error is sent to Error Summary
+	 */
 	@Output() handleCreateError = new EventEmitter<FudisFormErrorSummaryItem>();
 
+	/**
+	 * Output for handling a state when error is removed from Error Summary
+	 */
 	@Output() handleRemoveError = new EventEmitter<FudisFormErrorSummaryRemoveItem>();
 
 	/**
@@ -68,6 +74,9 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
 	 */
 	protected _currentMessage: string;
 
+	/**
+	 * Id generated with FudisIdService
+	 */
 	protected _id: string;
 
 	/**
@@ -75,16 +84,24 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
 	 */
 	private _errorSent: boolean = false;
 
+	/**
+	 * Disposable object for preserving message as Observable string
+	 */
 	private _subscribtion: Subscription;
 
 	ngOnInit(): void {
+		/**
+		 * Create validator error message if a message is a observable string
+		 */
 		if (this.message && typeof this.message !== 'string') {
 			this._subscribtion = this.message.subscribe((value: string) => {
 				this._currentMessage = value;
 				this._createError();
 			});
 		}
-
+		/**
+		 * Create validator error message if a message is a string
+		 */
 		if (typeof this.message === 'string') {
 			this._currentMessage = this.message;
 			this._createError();
@@ -107,6 +124,9 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
 	}
 
 	ngOnChanges(): void {
+		/**
+		 * Bind message type string to Input before initialization
+		 */
 		if (typeof this.message === 'string') {
 			this._currentMessage = this.message;
 		}
