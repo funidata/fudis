@@ -24,7 +24,7 @@ class TextInputWithValidatorErrorMessageComponent {
 	textInputControl: FormControl = new FormControl('', FudisValidators.required('This field is required'));
 }
 
-describe('TextInputWithValidatorErrorMessageComponent', () => {
+describe('ValidatorErrorMessageComponent', () => {
 	let component: ValidatorErrorMessageComponent;
 	let textInputComponent: TextInputWithValidatorErrorMessageComponent;
 
@@ -58,21 +58,21 @@ describe('TextInputWithValidatorErrorMessageComponent', () => {
 		showErrorMessage();
 	});
 
-	describe('validator error message parent components', () => {
-		it('should display validator error message, when control is touched', () => {
+	describe('Parent component', () => {
+		it('should display Validator Error Message, when control is touched', () => {
 			const message = fixture.nativeElement.querySelector('fudis-validator-error-message') as HTMLElement;
 
 			expect(message).toBeTruthy();
 		});
 
-		it('should have parent id and label', () => {
+		it('should pass id and label to Validator Error Message', () => {
 			const message = fixture.debugElement.query(By.css('fudis-validator-error-message'));
 
 			expect(message.attributes['ng-reflect-focus-id']).toEqual('test-id');
 			expect(message.attributes['ng-reflect-label']).toEqual('Test Label');
 		});
 
-		it('should have same type and message as in Fudis Validator', () => {
+		it('should pass Fudis Validator type and message to Validator Error Message', () => {
 			const message = fixture.debugElement.query(By.css('fudis-validator-error-message'));
 
 			expect(message.attributes['ng-reflect-type']).toEqual('required');
@@ -80,7 +80,7 @@ describe('TextInputWithValidatorErrorMessageComponent', () => {
 		});
 	});
 
-	describe('validator error message', () => {
+	describe('Validator Error Message', () => {
 		beforeEach(() => {
 			fixture = TestBed.createComponent(ValidatorErrorMessageComponent);
 			component = fixture.componentInstance;

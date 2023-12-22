@@ -125,7 +125,7 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
 
 	ngOnChanges(): void {
 		/**
-		 * Bind message type string to Input before initialization
+		 * Update string message and try to create a new error when changes happen
 		 */
 		if (typeof this.message === 'string') {
 			this._currentMessage = this.message;
