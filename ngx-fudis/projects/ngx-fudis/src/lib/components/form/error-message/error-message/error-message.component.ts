@@ -54,21 +54,39 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 		this._id = _idService.getNewId('error-message');
 	}
 
-	/*
+	/**
 	 * Error message to display
 	 */
 	@Input({ required: true }) message: Observable<string> | string;
 
+	/**
+	 * Required visible boolean for showing the error message
+	 */
 	@Input({ required: true }) visible: boolean;
 
+	/**
+	 * Output for handling a state when error is sent to Error Summary
+	 */
 	@Output() handleAddError = new EventEmitter<FudisValidationErrors>();
 
+	/**
+	 * Output for handling a state when error is removed from Error Summary
+	 */
 	@Output() handleRemoveError = new EventEmitter<FudisValidationErrors>();
 
+	/**
+	 * Id generated with FudisIdService
+	 */
 	private _id: string;
 
+	/**
+	 * Disposable object for preserving message as Observable string
+	 */
 	private _subscribtion: Subscription;
 
+	/**
+	 * Boolean determining if Error Message is added
+	 */
 	private _errorAdded: boolean = false;
 
 	/**
@@ -76,6 +94,9 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	 */
 	private _currentMessage: string;
 
+	/**
+	 * Possible parent components to used with Error Message
+	 */
 	private _parent:
 		| TextInputComponent
 		| TextAreaComponent
@@ -84,8 +105,14 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 		| DatepickerComponent
 		| RadioButtonGroupComponent;
 
+	/**
+	 * Possible parent group components to used with Error Message
+	 */
 	private _parentGroup: InputWithLanguageOptionsComponent | CheckboxGroupComponent;
 
+	/**
+	 * Custom intance of FudisValidator
+	 */
 	private _customValidatorInstance: FudisValidatorFn;
 
 	ngOnInit(): void {
