@@ -16,7 +16,6 @@
 			[id]="id"
 			[class.fudis-form-input--disabled]="disabled"
 			[class.fudis-form-input--invalid]="(control.touched && control.invalid) || (control.touched && invalidState)"
-			[class.fudis-select__input--invalid]="(control.touched && control.invalid) || invalidState"
 			role="combobox"
 			aria-haspopup="listbox"
 			[attr.aria-activedescendant]="control.value?.['htmlId'] ? control.value?.['htmlId'] : null"
