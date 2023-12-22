@@ -111,7 +111,7 @@ describe('DatepickerComponent', () => {
 			datepickerInput.dispatchEvent(new Event('blur'));
 			fixture.detectChanges();
 
-			expect(datepickerInput.className).toContain('fudis-datepicker__input--invalid');
+			expect(datepickerInput.className).toContain('fudis-form-input--invalid');
 		});
 
 		it('should have calendar icon from fudis-icon component', () => {
@@ -120,12 +120,12 @@ describe('DatepickerComponent', () => {
 			expect(datepickerIcon.attributes['ng-reflect-icon']).toEqual('calendar');
 		});
 
-		it('should have fudis-datepicker__input--disabled class if input has been disabled', () => {
+		it('should have proper disabled class if input has been disabled', () => {
 			const datepickerInput = fixture.nativeElement.querySelector('input');
 			component.disabled = true;
 			fixture.detectChanges();
 
-			expect(datepickerInput.className).toContain('fudis-datepicker__input--disabled');
+			expect(datepickerInput.className).toContain('fudis-form-input--disabled');
 		});
 	});
 });

@@ -32,10 +32,10 @@
 			[labelHidden]="true">
 		</fudis-button>
 	</div>
-	<fudis-dropdown-menu *ngIf="_toggleOn" [align]="'center'" [size]="size" [variant]="'multiselect'">
+	<fudis-dropdown-menu *ngIf="_toggleOn" [align]="'center'" [size]="size" [multiselect]="true">
 		<ng-container *ngFor="let item of _results">
 			<fudis-dropdown-menu-item
-				[label]="item.viewValue"
+				[label]="item.label"
 				[close]="false"
 				(handleChecked)="setItemSelection(item)"
 				(handleBlur)="_closeMenuOnListExit($event)"

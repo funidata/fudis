@@ -1,0 +1,29 @@
+<!--
+	Singleselect option
+-->
+<div
+	#optionInputRef
+	class="fudis-select-option"
+	[class.fudis-select-option__focusable]="_optionVisible"
+	[class.fudis-select-option--disabled]="data.disabled"
+	[class.fudis-select-option--selected]="_parentSelect.control.value?.value === data.value"
+	[attr.aria-selected]="_parentSelect.control.value?.value === data.value"
+	role="option"
+	tabindex="-1"
+	[attr.id]="_id"
+	[attr.aria-disabled]="data.disabled ? true : null"
+	(focus)="_focus()"
+	(keydown)="_keyDown($event)"
+	(blur)="_blur($event)"
+	(click)="!data.disabled && _clickOption($event)">
+	<span class="fudis-select-option__label">
+		{{ data.label }}
+	</span>
+	<fudis-icon
+		*ngIf="!data.disabled && _parentSelect.control.value?.value === data.value"
+		[icon]="'check'"
+		[color]="'primary'" />
+	<span *ngIf="data.disabled" class="fudis-select-option__label fudis-select-option__disabled-text"
+		>({{ this._parentSelect.translationOptionDisabledText }})</span
+	>
+</div>

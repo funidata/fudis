@@ -1,0 +1,29 @@
+<div
+	class="fudis-multiselect-option"
+	[attr.id]="_id"
+	[class.fudis-multiselect-option--visible]="_optionVisible"
+	[class.fudis-multiselect-option--checked]="checked"
+	[class.fudis-multiselect-option--focused]="_focused"
+	[class.fudis-multiselect-option--disabled]="data.disabled">
+	<label
+		class="fudis-multiselect-option__label"
+		[class.fudis-multiselect-option__label--focus]="_focused"
+		[class.fudis-multiselect-option__label--checked]="checked">
+		<div class="fudis-multiselect-option__label__checkbox">
+			<input
+				#optionInputRef
+				[class.fudis-multiselect-option__focusable]="_optionVisible"
+				type="checkbox"
+				class="fudis-multiselect-option__label__checkbox__input"
+				role="option"
+				[attr.aria-disabled]="data.disabled ? true : null"
+				(click)="_clickOption($event)"
+				[attr.aria-selected]="checked"
+				(focus)="_focus()"
+				(keydown)="_keyDown($event)"
+				(blur)="_blur($event)" />
+			<fudis-icon class="fudis-multiselect-option__label__checkbox__icon" *ngIf="checked" [icon]="'check'" />
+		</div>
+		<div class="fudis-multiselect-option__label__text">{{ data.label }}</div>
+	</label>
+</div>

@@ -117,6 +117,7 @@ export class LinkComponent implements AfterViewInit {
 	private _focusToLink(): void {
 		if (this.linkRef?.nativeElement) {
 			this.linkRef.nativeElement.focus();
+			this._focusTryCounter = 0;
 		} else if (this._focusTryCounter < 100) {
 			setTimeout(() => {
 				this._focusTryCounter += 1;

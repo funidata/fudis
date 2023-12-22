@@ -8,7 +8,7 @@
 		[attr.id]="_id"
 		(click)="!disabled && buttonClick($event)"
 		[ngClass]="_classList"
-		[attr.aria-expanded]="!asMenuButton ? null : _toggleOn"
+		[attr.aria-expanded]="!asMenuButton ? null : dropdownOpen"
 		fudisTooltip
 		[tooltip]="tooltip"
 		[tooltipPosition]="tooltipPosition"
@@ -36,7 +36,7 @@
 		[attr.id]="_id"
 		(click)="!disabled && buttonClick($event)"
 		[ngClass]="_classList"
-		[attr.aria-expanded]="!asMenuButton ? null : _toggleOn">
+		[attr.aria-expanded]="!asMenuButton ? null : dropdownOpen">
 		<ng-container *ngIf="icon">
 			<div class="fudis-button__icon">
 				<fudis-icon
@@ -50,6 +50,6 @@
 	</button>
 </ng-container>
 
-<ng-container *ngIf="asMenuButton && _toggleOn">
+<ng-container *ngIf="asMenuButton && dropdownOpen">
 	<ng-content></ng-content>
 </ng-container>

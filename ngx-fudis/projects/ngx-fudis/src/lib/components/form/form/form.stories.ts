@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { RouterModule } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { FudisDropdownOption, FudisRadioButtonOption, FudisFormErrors, FudisDateRangeItem } from '../../../types/forms';
+import { FudisSelectOption, FudisRadioButtonOption, FudisFormErrors, FudisDateRangeItem } from '../../../types/forms';
 
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { FudisGroupValidators, FudisValidators } from '../../../utilities/form/validators';
@@ -225,15 +225,15 @@ class FormContentExampleComponent implements OnInit {
 		endDate: new FormControl<Date | null>(null, FudisValidators.required('End date is required.')),
 	});
 
-	languageOptions: FudisDropdownOption[] = [
-		{ value: 'finnish', viewValue: 'FI' },
-		{ value: 'swedish', viewValue: 'SV' },
-		{ value: 'english', viewValue: 'EN' },
+	languageOptions: FudisSelectOption[] = [
+		{ value: 'finnish', label: 'FI' },
+		{ value: 'swedish', label: 'SV' },
+		{ value: 'english', label: 'EN' },
 	];
 
 	courseTypeOptions: FudisRadioButtonOption[] = [
-		{ value: 'basic', viewValue: 'Basic', id: 'courseType-1', name: 'courseType' },
-		{ value: 'advanced', viewValue: 'Advanced', id: 'courseType-2', name: 'courseType' },
+		{ value: 'basic', label: 'Basic', id: 'courseType-1', name: 'courseType' },
+		{ value: 'advanced', label: 'Advanced', id: 'courseType-2', name: 'courseType' },
 	];
 
 	dateRangeStartDate: FudisDateRangeItem = {

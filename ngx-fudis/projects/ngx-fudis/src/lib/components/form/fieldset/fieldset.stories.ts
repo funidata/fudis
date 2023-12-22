@@ -4,7 +4,7 @@ import { ReactiveFormsModule, FormsModule, FormControl, FormGroup } from '@angul
 import { Component, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BehaviorSubject } from 'rxjs';
-import { FudisDropdownOption, FudisRadioButtonOption, FudisFormErrors } from '../../../types/forms';
+import { FudisSelectOption, FudisRadioButtonOption, FudisFormErrors } from '../../../types/forms';
 
 import { FieldSetComponent } from './fieldset.component';
 import { FudisGroupValidators, FudisValidators } from '../../../utilities/form/validators';
@@ -161,16 +161,16 @@ class FieldsetExampleComponent {
 		courseType: new FormControl('', FudisValidators.required('Course type must be selected.')),
 	});
 
-	languageOptions: FudisDropdownOption[] = [
+	languageOptions: FudisSelectOption[] = [
 		// eslint-disable-next-line @typescript-eslint/dot-notation
-		{ value: 'finnish', viewValue: 'FI' },
-		{ value: 'swedish', viewValue: 'SV' },
-		{ value: 'english', viewValue: 'EN' },
+		{ value: 'finnish', label: 'FI' },
+		{ value: 'swedish', label: 'SV' },
+		{ value: 'english', label: 'EN' },
 	];
 
 	courseTypeOptions: FudisRadioButtonOption[] = [
-		{ value: 'basic', viewValue: 'Basic', id: 'courseType-1', name: 'courseType' },
-		{ value: 'advanced', viewValue: 'Advanced', id: 'courseType-2', name: 'courseType' },
+		{ value: 'basic', label: 'Basic', id: 'courseType-1', name: 'courseType' },
+		{ value: 'advanced', label: 'Advanced', id: 'courseType-2', name: 'courseType' },
 	];
 
 	submitForm(): void {

@@ -5,6 +5,6 @@
 		[attr.aria-describedby]="parentId + '-remove-items'"
 		(click)="removeChip($event, index)">
 		<fudis-icon [icon]="'close'" [color]="'white'"></fudis-icon>
-		{{ item.viewValue }}
+		{{ item.label }}
 	</button>
 </ul>

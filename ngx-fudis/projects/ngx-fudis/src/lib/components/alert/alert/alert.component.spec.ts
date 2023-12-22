@@ -16,7 +16,6 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 import { FudisAlert } from '../../../types/miscellaneous';
 import { AlertGroupComponent } from '../alert-group/alert-group.component';
 import { ButtonComponent } from '../../button/button.component';
-import { FudisDropdownMenuItemService } from '../../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 
 const testMessage = 'Test message for alert';
 const testHtmlId = 'test-html-id';
@@ -70,7 +69,7 @@ describe('AlertComponent', () => {
 				LinkComponent,
 			],
 			imports: [MatDialogModule, RouterTestingModule],
-			providers: [FudisDialogService, FudisAlertService, FudisDropdownMenuItemService],
+			providers: [FudisDialogService, FudisAlertService],
 		});
 		fixture = TestBed.createComponent(AlertComponent);
 		component = fixture.componentInstance;

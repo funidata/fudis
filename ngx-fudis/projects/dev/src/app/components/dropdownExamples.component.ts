@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { FudisDropdownOption } from 'dist/ngx-fudis/lib/types/forms';
+import { FudisSelectOption } from 'dist/ngx-fudis/lib/types/forms';
 
 type MyForm = {
-	dropdownFirst: FormControl<FudisDropdownOption[] | null>;
-	dropdownSecond: FormControl<FudisDropdownOption[] | null>;
+	dropdownFirst: FormControl<FudisSelectOption[] | null>;
+	dropdownSecond: FormControl<FudisSelectOption[] | null>;
 };
 
 @Component({
@@ -13,12 +13,12 @@ type MyForm = {
 })
 export class AppDropdownExamplesComponent {
 	testFormGroup = new FormGroup<MyForm>({
-		dropdownFirst: new FormControl<FudisDropdownOption[] | null>(null),
-		dropdownSecond: new FormControl<FudisDropdownOption[] | null>(null),
+		dropdownFirst: new FormControl<FudisSelectOption[] | null>(null),
+		dropdownSecond: new FormControl<FudisSelectOption[] | null>(null),
 	});
 
 	_options = [
-		{ value: '123', viewValue: 'This is really long option, to see what is happening' },
-		{ value: '124', viewValue: 'Shorter option' },
+		{ value: '123', label: 'This is really long option, to see what is happening' },
+		{ value: '124', label: 'Shorter option' },
 	];
 }

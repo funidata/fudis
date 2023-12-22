@@ -1,18 +1,18 @@
 <button
-	*ngIf="!_isMultiselectOption"
+	*ngIf="!_parentComponent.multiselect"
 	#dropdownItem
-	class="fudis-dropdown-menu-item"
+	class="fudis-dropdown-menu-item fudis-dropdown-menu-item__focusable"
 	[attr.role]="'menuitem'"
 	[attr.id]="_id"
 	[attr.aria-disabled]="disabled"
-	(keydown)="handleKeyDown($event)"
-	(blur)="handleButtonBlur($event)"
-	(click)="handleClick.emit($event); closeDropdown()">
+	(keydown)="_handleKeyDown($event)"
+	(blur)="_handleButtonBlur($event)"
+	(click)="_closeDropdown($event)">
 	{{ label }}
 </button>
 
 <div
-	*ngIf="_isMultiselectOption"
+	*ngIf="_parentComponent.multiselect"
 	class="fudis-dropdown-menu-item__checkbox"
 	[attr.id]="_id"
 	[class.fudis-dropdown-menu-item__checkbox--active]="checked">
@@ -22,7 +22,7 @@
 		<div class="fudis-dropdown-menu-item__checkbox__box">
 			<input
 				type="checkbox"
-				class="fudis-dropdown-menu-item__checkbox__input"
+				class="fudis-dropdown-menu-item__checkbox__input fudis-dropdown-menu-item__focusable"
 				[attr.role]="'option'"
 				[attr.aria-checked]="checked"
 				(blur)="handleBlur.emit($event)"

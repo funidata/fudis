@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FudisDropdownOption } from '../../../types/forms';
+import { FudisSelectOption } from '../../../types/forms';
 
 @Component({
 	selector: 'fudis-autocomplete-multi-select-selected-item-chip',
@@ -10,7 +10,7 @@ export class AutocompleteMultiSelectSelectedItemChipComponent {
 	/**
 	 * Array of selected chip items
 	 */
-	@Input() selectedItems: FudisDropdownOption[];
+	@Input() selectedItems: FudisSelectOption[];
 
 	/**
 	 * Parent component id for binding aria attributes

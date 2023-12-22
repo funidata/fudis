@@ -3,26 +3,22 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
-import {
-	FudisCheckboxOption,
-	FudisDropdownOption,
-	FudisRadioButtonOption,
-} from 'projects/ngx-fudis/src/lib/types/forms';
+import { FudisCheckboxOption, FudisSelectOption, FudisRadioButtonOption } from 'projects/ngx-fudis/src/lib/types/forms';
 import { untilDestroyed } from 'projects/ngx-fudis/src/lib/utilities/untilDestroyed';
 import { FudisErrorSummaryService } from 'ngx-fudis';
 import { FudisGroupValidators, FudisValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
 import { FudisDropdownLanguageOption, FudisInputWithLanguageOptionsFormGroup } from 'dist/ngx-fudis/lib/types/forms';
 
 type MyForm = {
-	dropdown: FormControl<FudisDropdownOption | null>;
-	dropdownMulti: FormControl<FudisDropdownOption[] | null>;
+	dropdown: FormControl<FudisSelectOption | null>;
+	dropdownMulti: FormControl<FudisSelectOption[] | null>;
 	textArea: FormControl<string | null>;
 	textInput: FormControl<string | null | number>;
 	truth: FormControl<boolean | null>;
 	checkboxFormGroup: FormGroup;
 	date: FormControl<Date | null>;
-	autocompleteDropdown: FormControl<FudisDropdownOption | null>;
-	autocompleteSearch: FormControl<FudisDropdownOption | null>;
+	autocompleteDropdown: FormControl<FudisSelectOption | null>;
+	autocompleteSearch: FormControl<FudisSelectOption | null>;
 	withLanguages: FormGroup<FudisInputWithLanguageOptionsFormGroup>;
 };
 
@@ -42,25 +38,25 @@ export class AppFormExampleComponent implements OnInit {
 
 	customError: boolean = true;
 
-	dropdownOptions: FudisDropdownOption[] = [
-		{ value: 'value-1-dog', viewValue: 'Dog' },
-		{ value: 'value-2-capybara', viewValue: 'Capybara' },
-		{ value: 'value-3-platypys', viewValue: 'Platypus' },
-		{ value: 'value-4-cat', viewValue: 'Cat, disabled for demo purposes', disabled: true },
-		{ value: 'value-5-armadillo', viewValue: 'Screaming hairy armadillo' },
-		{ value: 'value-6-gecko', viewValue: 'Southern Titiwangsa Bent-Toed Gecko' },
+	dropdownOptions: FudisSelectOption[] = [
+		{ value: 'value-1-dog', label: 'Dog' },
+		{ value: 'value-2-capybara', label: 'Capybara' },
+		{ value: 'value-3-platypys', label: 'Platypus' },
+		{ value: 'value-4-cat', label: 'Really dangerous cat', disabled: true },
+		{ value: 'value-5-armadillo', label: 'Screaming hairy armadillo' },
+		{ value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
 	];
 
 	multipleOptions = Array.from({ length: 1000 }).map((value, i) => {
 		return {
 			value: i,
-			viewValue: `Item number ${i}`,
+			label: `Item number ${i}`,
 		};
 	});
 
 	testFormGroup = new FormGroup<MyForm>({
-		dropdown: new FormControl<FudisDropdownOption | null>(this.dropdownOptions[2]),
-		dropdownMulti: new FormControl<FudisDropdownOption[] | null>([this.dropdownOptions[2], this.dropdownOptions[4]]),
+		dropdown: new FormControl<FudisSelectOption | null>(this.dropdownOptions[2]),
+		dropdownMulti: new FormControl<FudisSelectOption[] | null>([this.dropdownOptions[2], this.dropdownOptions[4]]),
 		textArea: new FormControl<string | null>(
 			null,
 			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
@@ -95,11 +91,11 @@ export class AppFormExampleComponent implements OnInit {
 				}),
 			]
 		),
-		autocompleteDropdown: new FormControl<FudisDropdownOption | null>(
+		autocompleteDropdown: new FormControl<FudisSelectOption | null>(
 			null,
 			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
 		),
-		autocompleteSearch: new FormControl<FudisDropdownOption | null>(
+		autocompleteSearch: new FormControl<FudisSelectOption | null>(
 			null,
 			FudisValidators.required(this._translocoService.selectTranslateObject('form_errors.required'))
 		),
@@ -114,9 +110,9 @@ export class AppFormExampleComponent implements OnInit {
 	});
 
 	_languageOptions: FudisDropdownLanguageOption[] = [
-		{ value: 'finnish', viewValue: 'FI' },
-		{ value: 'swedish', viewValue: 'SV' },
-		{ value: 'english', viewValue: 'EN' },
+		{ value: 'finnish', label: 'FI' },
+		{ value: 'swedish', label: 'SV' },
+		{ value: 'english', label: 'EN' },
 	];
 
 	radioButtonOptions: FudisRadioButtonOption[] = [];
@@ -131,8 +127,8 @@ export class AppFormExampleComponent implements OnInit {
 			.pipe(this._untilDestroyed())
 			.subscribe((value) => {
 				this.radioButtonOptions = [
-					{ value: true, viewValue: value.chooseTruthTrue, id: 'boolean-2', name: 'booleans' },
-					{ value: false, viewValue: value.chooseTruthFalse, id: 'boolean-1', name: 'booleans' },
+					{ value: true, label: value.chooseTruthTrue, id: 'boolean-2', name: 'booleans' },
+					{ value: false, label: value.chooseTruthFalse, id: 'boolean-1', name: 'booleans' },
 				];
 				this.checkboxOptions = [
 					{ controlName: 'blueberry', label: value.blueberry },

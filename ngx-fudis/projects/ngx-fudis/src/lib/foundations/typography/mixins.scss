@@ -144,6 +144,13 @@
 	font-weight: tokens.$font-weight-light;
 }
 
+@mixin select-group-label {
+	line-height: tokens.$text-input-line-height;
+	font-family: tokens.$font-family;
+	font-size: tokens.$body-text-s-font-size;
+	font-weight: tokens.$font-weight-light;
+}
+
 // Badge component
 
 @mixin badge-typography {

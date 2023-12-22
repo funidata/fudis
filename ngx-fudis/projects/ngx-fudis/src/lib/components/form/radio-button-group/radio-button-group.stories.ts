@@ -42,20 +42,20 @@ class RadioButtonGroupExampleComponent {
 	constructor(private _formBuilder: FormBuilder) {}
 
 	fruitOptions: FudisRadioButtonOption[] = [
-		{ value: 'apple', viewValue: 'Apple', id: 'fruit-1', name: 'fruit' },
-		{ value: 'fair-trade-banana', viewValue: 'Fair Trade Banana', id: 'fruit-2', name: 'fruit', checked: true },
-		{ value: 'cherry', viewValue: 'Cherry', id: 'fruit-3', name: 'fruit' },
+		{ value: 'apple', label: 'Apple', id: 'fruit-1', name: 'fruit' },
+		{ value: 'fair-trade-banana', label: 'Fair Trade Banana', id: 'fruit-2', name: 'fruit', checked: true },
+		{ value: 'cherry', label: 'Cherry', id: 'fruit-3', name: 'fruit' },
 	];
 
 	petOptions: FudisRadioButtonOption[] = [
-		{ value: 'platypus', viewValue: 'Platypus' },
-		{ value: 'otter', viewValue: 'Otter', name: 'animal' },
-		{ value: 'capybara', viewValue: 'Capybara' },
+		{ value: 'platypus', label: 'Platypus' },
+		{ value: 'otter', label: 'Otter', name: 'animal' },
+		{ value: 'capybara', label: 'Capybara' },
 	];
 
 	booleanOptions: FudisRadioButtonOption[] = [
-		{ value: false, viewValue: 'False', id: 'boolean-1', name: 'booleans' },
-		{ value: true, viewValue: 'True', id: 'boolean-2', name: 'booleans' },
+		{ value: false, label: 'False', id: 'boolean-1', name: 'booleans' },
+		{ value: true, label: 'True', id: 'boolean-2', name: 'booleans' },
 	];
 
 	mainFormGroup: FormGroup = this._formBuilder.group({

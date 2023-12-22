@@ -44,6 +44,8 @@ export class FudisIdService {
 		'checkbox-group': [],
 		'dropdown-menu': [],
 		'radio-button-group': [],
+		select: [],
+		multiselect: [],
 	};
 
 	/**
@@ -80,15 +82,59 @@ export class FudisIdService {
 	/**
 	 * Generate and get a new child id in family
 	 */
-	public getNewChildId(parentType: FudisIdParent, parentId: string): string {
+	public getNewChildId(parentType: FudisIdParent, parentId: string, group?: boolean): string {
 		let newId = '';
-		this._familyData[parentType].forEach((item) => {
+
+		this._familyData[parentType].forEach((item, index) => {
 			if (item.parent === parentId) {
-				const orderNumber = item.children.length + 1;
-				newId = `${parentId}-item-${orderNumber}`;
-				item.children.push(newId);
+				if (group) {
+					if (!item.childrenGroups) {
+						newId = `${parentId}-group-1`;
+
+						this._familyData[parentType][index] = {
+							...item,
+							childrenGroups: [{ parent: newId, children: [] }],
+						};
+					} else {
+						const orderNumber = item.childrenGroups!.length;
+
+						newId = `${parentId}-group-${orderNumber + 1}`;
+
+						this._familyData[parentType][index].childrenGroups?.push({
+							parent: `${parentId}-group-${orderNumber + 1}`,
+							children: [],
+						});
+					}
+				} else {
+					const orderNumber = item.children.length + 1;
+
+					newId = `${parentId}-item-${orderNumber}`;
+					item.children.push(newId);
+				}
 			}
 		});
+		return newId;
+	}
+
+	/**
+	 * Generate grandchild id. E.g. for select-options under select-group --> fudis-select-4-group-2-item-1
+	 */
+	public getNewGrandChildId(grandParentType: FudisIdParent, grandParentId: string, parentId: string): string {
+		let newId = '';
+
+		this._familyData[grandParentType].forEach((grandParent, index) => {
+			if (grandParent.parent === grandParentId) {
+				this._familyData[grandParentType][index].childrenGroups?.forEach((parent) => {
+					if (parent.parent === parentId) {
+						const orderNumber = parent.children.length + 1;
+
+						newId = `${parentId}-item-${orderNumber}`;
+						parent.children.push(newId);
+					}
+				});
+			}
+		});
+
 		return newId;
 	}
 

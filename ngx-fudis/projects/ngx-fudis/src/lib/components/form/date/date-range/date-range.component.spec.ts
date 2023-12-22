@@ -15,7 +15,6 @@ import { LabelComponent } from '../../label/label.component';
 import { IconComponent } from '../../../icon/icon.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { ButtonComponent } from '../../../button/button.component';
-import { FudisDropdownMenuItemService } from '../../../dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { ValidatorErrorMessageComponent } from '../../error-message/validator-error-message/validator-error-message.component';
 
 describe('DateRangeComponent', () => {
@@ -34,7 +33,7 @@ describe('DateRangeComponent', () => {
 				TooltipDirective,
 				MockComponent(IconComponent),
 			],
-			providers: [FudisIdService, FudisDropdownMenuItemService],
+			providers: [FudisIdService],
 			imports: [
 				ReactiveFormsModule,
 				MatDatepickerModule,
