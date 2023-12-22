@@ -18,10 +18,10 @@ export type FudisLanguageBadgeContent = {
 };
 
 export type FudisLanguageOption =
-	| { value: 'finnish'; viewValue: 'FI' }
-	| { value: 'swedish'; viewValue: 'SV' }
-	| { value: 'english'; viewValue: 'EN' }
-	| { value: string | FudisLanguageAbbr; viewValue: string };
+	| { value: 'finnish'; label: 'FI' }
+	| { value: 'swedish'; label: 'SV' }
+	| { value: 'english'; label: 'EN' }
+	| { value: string | FudisLanguageAbbr; label: string };
 
 export interface FudisLanguageBadgeTranslations {
 	en?: string;
@@ -92,14 +92,17 @@ export interface FudisTranslationConfig {
 		// External link icon aria-label
 		EXTERNAL_LINK: string;
 	};
-	AUTOCOMPLETE: {
-		// Clear filter button label for screen readers
-		CLEAR: string;
+	SELECT: {
+		DISABLED: string;
+		OPEN_DROPDOWN: string;
+		CLOSE_DROPDOWN: string;
 		MULTISELECT: {
-			OPEN_DROPDOWN: string;
-			CLOSE_DROPDOWN: string;
-			NO_RESULTS: string;
 			REMOVE_ITEM: string;
+		};
+		AUTOCOMPLETE: {
+			// Clear filter button label for screen readers
+			CLEAR: string;
+			NO_RESULTS: string;
 		};
 	};
 	IMAGE: {

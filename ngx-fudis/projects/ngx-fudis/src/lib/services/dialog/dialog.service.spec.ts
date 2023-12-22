@@ -13,7 +13,6 @@ import {
 	DialogCloseDirective,
 	DialogContentDirective,
 } from '../../directives/dialog/dialog-directives';
-import { FudisDropdownMenuItemService } from '../../components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { AlertGroupComponent } from '../../components/alert/alert-group/alert-group.component';
 
 @Component({
@@ -75,7 +74,7 @@ describe('DialogService', () => {
 				DialogTestButtonComponent,
 				DialogTestContentComponent,
 			],
-			providers: [FudisDialogService, FudisDropdownMenuItemService],
+			providers: [FudisDialogService],
 		});
 		fixture = TestBed.createComponent(DialogTestButtonComponent);
 		component = fixture.componentInstance;

@@ -1,19 +1,24 @@
-import { OnInit, Component, ElementRef, EventEmitter, Host, Input, Output, ViewChild } from '@angular/core';
-import { FudisDropdownMenuItemService } from './dropdown-menu-item.service';
+import { OnInit, Component, ElementRef, Host, ViewChild, Input, Optional, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { DropdownMenuComponent } from '../dropdown-menu.component';
 import { FudisIdService } from '../../../services/id/id.service';
+import { DropdownItemBaseDirective } from '../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
+import { ButtonComponent } from '../../button/button.component';
 
 @Component({
 	selector: 'fudis-dropdown-menu-item',
 	templateUrl: './dropdown-menu-item.component.html',
 	styleUrls: ['./dropdown-menu-item.component.scss'],
 })
-export class DropdownMenuItemComponent implements OnInit {
+export class DropdownMenuItemComponent extends DropdownItemBaseDirective implements OnInit {
 	constructor(
-		private _clickService: FudisDropdownMenuItemService,
 		private _idService: FudisIdService,
-		@Host() private _parentComponent: DropdownMenuComponent
-	) {}
+		@Host() protected _parentComponent: DropdownMenuComponent,
+		@Inject(DOCUMENT) _document: Document,
+		@Host() @Optional() protected _parentButton: ButtonComponent
+	) {
+		super(_document);
+	}
 
 	@ViewChild('dropdownItem') dropdownItem: ElementRef;
 
@@ -27,86 +32,31 @@ export class DropdownMenuItemComponent implements OnInit {
 	 */
 	@Input() disabled: boolean = false;
 
-	/**
-	 * Option for closing or leaving dropdown open after clicking an item. Closes by default.
-	 */
-	@Input() close: boolean = true;
-
-	/**
-	 * Checked state for dropdown-menu-item with checkbox
-	 */
-	@Input() checked: boolean;
-
-	/**
-	 * Optional click handler
-	 */
-	@Output() handleClick = new EventEmitter<Event>();
-
-	/**
-	 * Output for handling checked state in dropdown-menu-item with checkbox
-	 */
-	@Output() handleChecked = new EventEmitter<boolean>();
-
-	/**
-	 * Output for blur event in dropdown-menu-item with checkbox
-	 */
-	@Output() handleBlur = new EventEmitter<FocusEvent>();
-
-	/**
-	 * Determine whether option is displayed as single-select or multiselect (with checkbox).
-	 * Multiselect is used e.g in autocomplete-multi-select.
-	 */
-	protected _isMultiselectOption: boolean = false;
-
-	/**
-	 * Id generated with FudisIdService
-	 */
-	protected _id: string;
-
 	ngOnInit(): void {
-		// Check parent component's public HostBinding for multiselect usage
-		if (this._parentComponent._isMultiselect) {
-			this._isMultiselectOption = true;
-		}
-
 		this._id = this._idService.getNewChildId('dropdown-menu', this._parentComponent.id);
 	}
 
-	// eslint-disable-next-line class-methods-use-this
-	handleKeyDown(event: KeyboardEvent) {
-		if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
-
-		const focusElement = document.querySelector(':focus');
-		const tabElements = document.querySelectorAll('fudis-dropdown-menu-item button');
-		const tabElementsCount = tabElements.length - 1;
-		event.preventDefault();
-
-		const focusIndex = Array.prototype.indexOf.call(tabElements, focusElement);
-
-		let elementToFocus = this.dropdownItem.nativeElement;
-		if (event.key === 'ArrowUp') {
-			elementToFocus = tabElements[focusIndex > 0 ? focusIndex - 1 : tabElementsCount];
-		}
-		if (event.key === 'ArrowDown') {
-			elementToFocus = tabElements[focusIndex < tabElementsCount ? focusIndex + 1 : 0];
-		}
-		elementToFocus.focus();
+	protected _handleKeyDown(event: KeyboardEvent) {
+		this._baseHandleKeyDown(event, this.dropdownItem, 'fudis-dropdown-menu-item__focusable');
 	}
 
-	handleButtonBlur(event: FocusEvent): void {
-		const menuButton = this.dropdownItem.nativeElement.closest('fudis-button').querySelector('.fudis-button');
+	protected _handleButtonBlur(event: FocusEvent): void {
+		const closeDropdown = this._focusedOutFromComponent(
+			event,
+			this.dropdownItem,
+			'fudis-dropdown-menu-item__focusable'
+		);
 
-		if (
-			!(event.relatedTarget as HTMLElement)?.classList?.contains('fudis-dropdown-menu-item') &&
-			(event.relatedTarget as HTMLElement) !== menuButton
-		) {
-			this._clickService.setMenuStatus(false);
+		if (closeDropdown) {
+			this._parentComponent.open = false;
 		}
 	}
 
-	closeDropdown(): void {
-		if (this.close === true) {
-			this._clickService.setMenuStatus(false);
+	protected _closeDropdown(event: Event): void {
+		if (this._parentButton) {
+			this._parentButton.closeMenu();
 		}
+
+		this.handleClick.emit(event);
 	}
 }

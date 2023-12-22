@@ -9,8 +9,9 @@
 		[tooltipToggle]="tooltipToggle">
 	</fudis-label>
 	<input
-		[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
 		#inputRef
+		class="fudis-text-input__input"
+		[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
 		[attr.aria-label]="ariaLabel"
 		[formControl]="control"
 		[attr.minlength]="minLength"
@@ -20,8 +21,7 @@
 		(blur)="onBlur($event)"
 		[id]="id"
 		[attr.type]="type"
-		[class.fudis-text-input__input--invalid]="(control.touched && control.invalid) || invalidState"
-		class="fudis-text-input__input"
+		[class.fudis-form-input--invalid]="(control.touched && control.invalid) || invalidState"
 		[attr.aria-describedby]="id + '_guidance'"
 		[attr.required]="_required ? true : null" />
 	<fudis-guidance

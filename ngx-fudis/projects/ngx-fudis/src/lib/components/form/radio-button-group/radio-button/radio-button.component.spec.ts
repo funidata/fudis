@@ -28,9 +28,9 @@ class MockContainerComponent {
 	protected _testControl = new FormControl<boolean | null>(null);
 
 	protected _options: FudisRadioButtonOption[] = [
-		{ value: 'platypus', viewValue: 'Platypus', name: 'animal' },
-		{ value: 'otter', viewValue: 'Otter', name: 'animal' },
-		{ value: 'capybara', viewValue: 'Capybara', name: 'animal' },
+		{ value: 'platypus', label: 'Platypus', name: 'animal' },
+		{ value: 'otter', label: 'Otter', name: 'animal' },
+		{ value: 'capybara', label: 'Capybara', name: 'animal' },
 	];
 }
 
@@ -70,7 +70,7 @@ describe('RadioButtonComponent', () => {
 	}
 
 	describe('Contents', () => {
-		it('should have viewValue as label', () => {
+		it('should have label as label', () => {
 			const elem = fixture.debugElement.query(By.css('.fudis-radio-button__label'));
 
 			expect(elem.nativeElement.innerHTML).toEqual('Platypus');

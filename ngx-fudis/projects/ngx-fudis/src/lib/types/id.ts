@@ -26,13 +26,26 @@ export const fudisIdComponents = [
 
 export type FudisIdComponent = (typeof fudisIdComponents)[number];
 
-export const fudisIdParents = ['breadcrumbs', 'checkbox-group', 'dropdown-menu', 'radio-button-group'] as const;
+export const fudisIdParents = [
+	'breadcrumbs',
+	'checkbox-group',
+	'dropdown-menu',
+	'radio-button-group',
+	'select',
+	'multiselect',
+] as const;
 
 export type FudisIdParent = (typeof fudisIdParents)[number];
+
+type FudisIdFamilyBase = {
+	parent: string;
+	children: string[];
+};
 
 export type FudisIdFamily = {
 	parent: string;
 	children: string[];
+	childrenGroups?: FudisIdFamilyBase[];
 };
 
 export type FudisIdFamilyData = {

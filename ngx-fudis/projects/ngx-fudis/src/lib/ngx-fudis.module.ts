@@ -51,11 +51,11 @@ import { DropdownComponent } from './components/form/dropdown/dropdown.component
 import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
 import { DropdownMenuItemComponent } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
 
-import { FudisDropdownMenuItemService } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { FudisFocusService } from './services/focus/focus.service';
 import { ValidatorErrorMessageComponent } from './components/form/error-message/validator-error-message/validator-error-message.component';
 import { FudisInternalErrorSummaryService } from './services/form/error-summary/internal-error-summary.service';
 import { FudisErrorSummaryService } from './services/form/error-summary/error-summary.service';
+import { ErrorMessageComponent } from './components/form/error-message/error-message/error-message.component';
 import { ErrorSummaryComponent } from './components/form/error-summary/error-summary.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
 
@@ -101,7 +101,18 @@ import { AlertComponent } from './components/alert/alert/alert.component';
 import { AlertGroupComponent } from './components/alert/alert-group/alert-group.component';
 import { FudisAlertService } from './services/alert/alert.service';
 import { FudisBreakpointService } from './services/breakpoint/breakpoint.service';
-import { ErrorMessageComponent } from './components/form/error-message/error-message/error-message.component';
+import { SelectComponent } from './components/form/select/select/select.component';
+import { SelectOptionComponent } from './components/form/select/select/select-option/select-option.component';
+import { SelectGroupComponent } from './components/form/select/common/select-group/select-group.component';
+import { DropdownItemBaseDirective } from './directives/form/dropdown-item-base/dropdown-item-base.directive';
+import { DropdownBaseDirective } from './directives/form/dropdown-base/dropdown-base.directive';
+import { SelectDropdownComponent } from './components/form/select/common/select-dropdown/select-dropdown.component';
+import { MultiselectChipListComponent } from './components/form/select/multiselect/multiselect-chip-list/multiselect-chip-list.component';
+import { SelectBaseDirective } from './components/form/select/common/select-base/select-base.directive';
+import { MultiselectComponent } from './components/form/select/multiselect/multiselect.component';
+import { MultiselectOptionComponent } from './components/form/select/multiselect/multiselect-option/multiselect-option.component';
+import { SelectAutocompleteComponent } from './components/form/select/common/autocomplete/autocomplete.component';
+import { SelectOptionBaseDirective } from './components/form/select/common/select-option-base/select-option-base.directive';
 
 @NgModule({
 	/*
@@ -136,8 +147,10 @@ import { ErrorMessageComponent } from './components/form/error-message/error-mes
 		DialogActionsDirective,
 		DialogContentDirective,
 		DialogCloseDirective,
+		DropdownBaseDirective,
 		DropdownComponent,
 		DropdownMenuComponent,
+		DropdownItemBaseDirective,
 		DropdownMenuItemComponent,
 		ValidatorErrorMessageComponent,
 		ErrorMessageComponent,
@@ -164,16 +177,26 @@ import { ErrorMessageComponent } from './components/form/error-message/error-mes
 		LanguageBadgeGroupComponent,
 		LanguageBadgeComponent,
 		LinkComponent,
+		MultiselectComponent,
+		MultiselectChipListComponent,
+		MultiselectOptionComponent,
 		NotificationComponent,
 		NotificationsDirective,
 		RadioButtonComponent,
 		RadioButtonGroupComponent,
 		SectionComponent,
+		SelectAutocompleteComponent,
+		SelectBaseDirective,
+		SelectComponent,
+		SelectDropdownComponent,
+		SelectGroupComponent,
+		SelectOptionComponent,
 		SpacingApiDirective,
 		SpacingDirective,
 		TextInputComponent,
 		TextAreaComponent,
 		TooltipDirective,
+		SelectOptionBaseDirective,
 	],
 	/*
 	 * Include imports outside of Fudis components in 'imports' array below.
@@ -251,10 +274,15 @@ import { ErrorMessageComponent } from './components/form/error-message/error-mes
 		InputWithLanguageOptionsComponent,
 		LanguageBadgeGroupComponent,
 		LinkComponent,
+		MultiselectComponent,
+		MultiselectOptionComponent,
 		NotificationComponent,
 		NotificationsDirective,
 		RadioButtonGroupComponent,
 		SectionComponent,
+		SelectComponent,
+		SelectOptionComponent,
+		SelectGroupComponent,
 		SpacingDirective,
 		TextAreaComponent,
 		TextInputComponent,
@@ -264,7 +292,7 @@ import { ErrorMessageComponent } from './components/form/error-message/error-mes
 		FudisAlertService,
 		FudisBreakpointService,
 		FudisDialogService,
-		FudisDropdownMenuItemService,
+		FudisErrorSummaryService,
 		FudisInternalErrorSummaryService,
 		FudisFocusService,
 		FudisGridService,

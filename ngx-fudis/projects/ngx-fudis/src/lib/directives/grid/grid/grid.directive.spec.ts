@@ -17,9 +17,7 @@ import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { GridApiDirective } from '../grid-api/grid-api.directive';
 import { GridDirective } from './grid.directive';
-import { FudisDropdownMenuItemService } from '../../../components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 import { FudisSpacing } from '../../../types/miscellaneous';
-// import * as utilityFunctions from '../gridUtils';
 
 @Component({
 	selector: 'fudis-mock-grid-directive',
@@ -74,15 +72,7 @@ describe('GridDirective', () => {
 				MockComponent(BodyTextComponent),
 				MockComponent(ButtonComponent),
 			],
-			providers: [
-				FudisGridService,
-				FudisBreakpointService,
-				FudisDropdownMenuItemService,
-				// {
-				// 	provide: utilityFunctions,
-				// 	useValue: jasmine.createSpyObj('utilityFunctions', ['replaceFormInputWidthsToRem']),
-				// },
-			],
+			providers: [FudisGridService, FudisBreakpointService],
 		}).compileComponents();
 	});
 

@@ -12,8 +12,8 @@
 		<input
 			#inputRef
 			class="fudis-autocomplete__input"
-			[class.fudis-autocomplete__input--invalid]="(control.invalid && control.touched) || invalidState"
-			[class.fudis-autocomplete__input--disabled]="disabled"
+			[class.fudis-form-input--invalid]="(control.invalid && control.touched) || invalidState"
+			[class.fudis-form-input--disabled]="disabled"
 			type="text"
 			[id]="id"
 			[matAutocomplete]="autocomplete"
@@ -61,9 +61,9 @@
 		<mat-option
 			class="fudis-autocomplete__option"
 			*ngFor="let option of _filteredOptions | async"
-			[value]="option.viewValue"
+			[value]="option.label"
 			[disabled]="option.disabled">
-			{{ option.viewValue }}
+			{{ option.label }}
 		</mat-option>
 	</mat-autocomplete>
 </div>

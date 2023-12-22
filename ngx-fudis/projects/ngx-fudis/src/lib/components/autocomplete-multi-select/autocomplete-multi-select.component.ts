@@ -12,7 +12,7 @@ import {
 	AfterViewInit,
 } from '@angular/core';
 import { InputBaseDirective } from '../../directives/form/input-base/input-base.directive';
-import { FudisDropdownOption, FudisInputSize } from '../../types/forms';
+import { FudisSelectOption, FudisInputSize } from '../../types/forms';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisFocusService } from '../../services/focus/focus.service';
 import { FudisIdService } from '../../services/id/id.service';
@@ -32,10 +32,10 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 		super(_translationService, _idService);
 
 		effect(() => {
-			this._openAriaLabel = this._translations().AUTOCOMPLETE.MULTISELECT.OPEN_DROPDOWN;
-			this._closeAriaLabel = this._translations().AUTOCOMPLETE.MULTISELECT.CLOSE_DROPDOWN;
-			this._noResultsFound = this._translations().AUTOCOMPLETE.MULTISELECT.NO_RESULTS;
-			this._removeItemText = this._translations().AUTOCOMPLETE.MULTISELECT.REMOVE_ITEM;
+			this._openAriaLabel = this._translations().SELECT.OPEN_DROPDOWN;
+			this._closeAriaLabel = this._translations().SELECT.CLOSE_DROPDOWN;
+			this._noResultsFound = this._translations().SELECT.AUTOCOMPLETE.NO_RESULTS;
+			this._removeItemText = this._translations().SELECT.MULTISELECT.REMOVE_ITEM;
 		});
 	}
 
@@ -46,7 +46,7 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	/**
 	 * Dropdown options to display
 	 */
-	@Input({ required: true }) options: FudisDropdownOption[] = [];
+	@Input({ required: true }) options: FudisSelectOption[] = [];
 
 	/**
 	 * Available sizes for the multi-select - defaults to large.
@@ -56,7 +56,7 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	/**
 	 * Array of selected dropdown options which user is clicking. Can also be used to set preselected options.
 	 */
-	@Input() selectedOptions: FudisDropdownOption[] = [];
+	@Input() selectedOptions: FudisSelectOption[] = [];
 
 	/**
 	 * Placeholder text in input when selection is not yet made
@@ -66,7 +66,7 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	/**
 	 * Output for option click
 	 */
-	@Output() optionChange = new EventEmitter<FudisDropdownOption[]>();
+	@Output() optionChange = new EventEmitter<FudisSelectOption[]>();
 
 	/**
 	 * Internal property for toggle dropdown visibility
@@ -101,7 +101,7 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	/**
 	 * Internal variable for results filtered from options
 	 */
-	protected _results: FudisDropdownOption[] = [];
+	protected _results: FudisSelectOption[] = [];
 
 	ngOnInit(): void {
 		this._setInputId('autocomplete-multi-select');
@@ -118,7 +118,7 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	/**
 	 * Remove / Add item from the list
 	 */
-	public setItemSelection(item: FudisDropdownOption): void {
+	public setItemSelection(item: FudisSelectOption): void {
 		if (this._isChecked(item)) {
 			this.removeItem(item);
 		} else {
@@ -127,8 +127,8 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 		}
 	}
 
-	public removeItem(item: FudisDropdownOption): void {
-		this.selectedOptions = this.selectedOptions.filter((option) => item.viewValue !== option.viewValue);
+	public removeItem(item: FudisSelectOption): void {
+		this.selectedOptions = this.selectedOptions.filter((option) => item.label !== option.label);
 		this.optionChange.emit(this.selectedOptions);
 
 		if (this.selectedOptions.length === 0) {
@@ -136,8 +136,8 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 		}
 	}
 
-	protected _isChecked(item: FudisDropdownOption): boolean {
-		return this.selectedOptions.some((e) => e.viewValue === item.viewValue);
+	protected _isChecked(item: FudisSelectOption): boolean {
+		return this.selectedOptions.some((e) => e.label === item.label);
 	}
 
 	/**
@@ -190,7 +190,7 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 		this._filterText = event.target.value;
 
 		this._results = this.options.filter((option) =>
-			option.viewValue.toLowerCase().includes(this._filterText.toLowerCase())
+			option.label.toLowerCase().includes(this._filterText.toLowerCase())
 		);
 	}
 
@@ -210,13 +210,13 @@ export class AutocompleteMultiSelectComponent extends InputBaseDirective impleme
 	@HostListener('window:keydown.arrowUp', ['$event'])
 	private _handleArrowKeyDown(event: KeyboardEvent) {
 		event.preventDefault();
-		const dropdownMenuElement = this.wrapper.nativeElement.children[2];
+		const dropdownElement = this.wrapper.nativeElement.children[2];
 
 		const wrapperInput = this.wrapper.nativeElement.querySelector(
 			'.fudis-autocomplete-multi-select__input-wrapper__input'
 		);
 
-		const checkboxInput = dropdownMenuElement?.querySelector('.fudis-dropdown-menu-item__checkbox__input');
+		const checkboxInput = dropdownElement?.querySelector('.fudis-dropdown-menu-item__checkbox__input');
 
 		if (wrapperInput === document.activeElement && checkboxInput) {
 			checkboxInput.focus();

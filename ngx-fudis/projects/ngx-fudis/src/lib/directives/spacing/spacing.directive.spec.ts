@@ -5,7 +5,6 @@ import { SpacingDirective } from './spacing.directive';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 import { ButtonComponent } from '../../components/button/button.component';
 import { LabelComponent } from '../../components/form/label/label.component';
-import { FudisDropdownMenuItemService } from '../../components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.service';
 
 @Component({
 	selector: 'fudis-mock-component',
@@ -24,7 +23,7 @@ describe('SpacingDirective', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [SpacingDirective, HostComponent, ButtonComponent, LabelComponent],
-			providers: [FudisBreakpointService, FudisDropdownMenuItemService],
+			providers: [FudisBreakpointService],
 		}).compileComponents();
 	});
 

@@ -16,7 +16,7 @@ import {
 } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
 
-import { FudisDropdownOption, FudisCheckboxOption, FudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
+import { FudisSelectOption, FudisCheckboxOption, FudisRadioButtonOption } from 'dist/ngx-fudis/lib/types/forms';
 
 import { FudisAlert } from 'dist/ngx-fudis/lib/types/miscellaneous';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -61,21 +61,21 @@ export class AppComponent implements OnInit {
 
 	newRemBase: string;
 
-	errorSummaryVisible = false;
-
-	dropdownOptions: FudisDropdownOption[] = [
-		{ value: 'value-1-dog', viewValue: 'Dog' },
-		{ value: 'value-2-capybara', viewValue: 'Capybara' },
-		{ value: 'value-3-platypys', viewValue: 'Platypus' },
-		{ value: 'value-4-cat', viewValue: 'Cat, disabled for demo purposes', disabled: true },
-		{ value: 'value-5-armadillo', viewValue: 'Screaming hairy armadillo' },
-		{ value: 'value-6-gecko', viewValue: 'Southern Titiwangsa Bent-Toed Gecko' },
+	dropdownOptions: FudisSelectOption[] = [
+		{ value: 'value-1-dog', label: 'Dog' },
+		{ value: 'value-2-capybara', label: 'Capybara' },
+		{ value: 'value-3-platypys', label: 'Platypus' },
+		{ value: 'value-4-cat', label: 'Really dangerous cat', disabled: true },
+		{ value: 'value-5-armadillo', label: 'Screaming hairy armadillo' },
+		{ value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
 	];
+
+	errorSummaryVisible = false;
 
 	multipleOptions = Array.from({ length: 1000 }).map((value, i) => {
 		return {
 			value: i,
-			viewValue: `Item number ${i}`,
+			label: `Item number ${i}`,
 		};
 	});
 
@@ -99,8 +99,8 @@ export class AppComponent implements OnInit {
 	];
 
 	radioButtonOptions: FudisRadioButtonOption[] = [
-		{ value: true, viewValue: 'True', id: 'boolean-2', name: 'booleans' },
-		{ value: false, viewValue: 'False', id: 'boolean-1', name: 'booleans' },
+		{ value: true, label: 'True', id: 'boolean-2', name: 'booleans' },
+		{ value: false, label: 'False', id: 'boolean-1', name: 'booleans' },
 	];
 
 	testFormGroup = new FormGroup<MyForm>({

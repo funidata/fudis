@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DropdownMenuComponent } from './dropdown-menu.component';
-import { FudisDropdownMenuItemService } from './dropdown-menu-item/dropdown-menu-item.service';
 
 describe('DropdownMenuComponent', () => {
 	let component: DropdownMenuComponent;
@@ -10,7 +9,7 @@ describe('DropdownMenuComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [DropdownMenuComponent],
-			providers: [FudisDropdownMenuItemService],
+			providers: [],
 		}).compileComponents();
 
 		fixture = TestBed.createComponent(DropdownMenuComponent);

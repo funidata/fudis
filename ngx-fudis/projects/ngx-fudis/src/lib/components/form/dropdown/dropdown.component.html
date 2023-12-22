@@ -17,7 +17,7 @@
 			"
 			class="fudis-dropdown__select"
 			[class.fudis-dropdown__select__xs]="size === 'xs'"
-			[class.fudis-dropdown--invalid]="(control.touched && control.invalid) || invalidState"
+			[class.fudis-form-input--invalid]="(control.touched && control.invalid) || invalidState"
 			[placeholder]="placeholder"
 			floatPlaceholder="never"
 			[multiple]="multipleOption"
@@ -34,7 +34,7 @@
 				*ngFor="let option of options"
 				[value]="option"
 				[disabled]="option.disabled">
-				{{ option.viewValue }}
+				{{ option.label }}
 			</mat-option>
 		</mat-select>
 		<fudis-icon *ngIf="size !== 'xs'" class="fudis-dropdown__input__icon" [icon]="'chevron'" [rotate]="'cw-90'" />

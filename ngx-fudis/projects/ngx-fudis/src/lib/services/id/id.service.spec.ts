@@ -86,6 +86,8 @@ describe('FudisIdServiceService', () => {
 		'checkbox-group': [],
 		'dropdown-menu': [],
 		'radio-button-group': [],
+		select: [],
+		multiselect: [],
 	};
 	const familyDataAfter: FudisIdFamilyData = {
 		breadcrumbs: [
@@ -184,6 +186,38 @@ describe('FudisIdServiceService', () => {
 				],
 			},
 		],
+		multiselect: [
+			{
+				parent: 'fudis-multiselect-1',
+				children: [
+					'fudis-multiselect-1-item-1',
+					'fudis-multiselect-1-item-2',
+					'multiselect-1-custom-child-id',
+					'fudis-multiselect-1-item-4',
+					'fudis-multiselect-1-item-5',
+				],
+			},
+			{
+				parent: 'multiselect-some-custom-id',
+				children: [
+					'multiselect-some-custom-id-item-1',
+					'multiselect-some-custom-id-item-2',
+					'multiselect-2-custom-child-id',
+					'multiselect-some-custom-id-item-4',
+					'multiselect-some-custom-id-item-5',
+				],
+			},
+			{
+				parent: 'fudis-multiselect-3',
+				children: [
+					'fudis-multiselect-3-item-1',
+					'fudis-multiselect-3-item-2',
+					'multiselect-3-custom-child-id',
+					'fudis-multiselect-3-item-4',
+					'fudis-multiselect-3-item-5',
+				],
+			},
+		],
 		'radio-button-group': [
 			{
 				parent: 'fudis-radio-button-group-1',
@@ -213,6 +247,38 @@ describe('FudisIdServiceService', () => {
 					'radio-button-group-3-custom-child-id',
 					'fudis-radio-button-group-3-item-4',
 					'fudis-radio-button-group-3-item-5',
+				],
+			},
+		],
+		select: [
+			{
+				parent: 'fudis-select-1',
+				children: [
+					'fudis-select-1-item-1',
+					'fudis-select-1-item-2',
+					'select-1-custom-child-id',
+					'fudis-select-1-item-4',
+					'fudis-select-1-item-5',
+				],
+			},
+			{
+				parent: 'select-some-custom-id',
+				children: [
+					'select-some-custom-id-item-1',
+					'select-some-custom-id-item-2',
+					'select-2-custom-child-id',
+					'select-some-custom-id-item-4',
+					'select-some-custom-id-item-5',
+				],
+			},
+			{
+				parent: 'fudis-select-3',
+				children: [
+					'fudis-select-3-item-1',
+					'fudis-select-3-item-2',
+					'select-3-custom-child-id',
+					'fudis-select-3-item-4',
+					'fudis-select-3-item-5',
 				],
 			},
 		],

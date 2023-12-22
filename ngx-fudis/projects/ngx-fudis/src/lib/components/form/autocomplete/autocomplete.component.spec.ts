@@ -89,7 +89,7 @@ describe('AutocompleteComponent', () => {
 			component.disabled = true;
 			fixture.detectChanges();
 
-			expect(autocompleteInput.className).toContain('fudis-autocomplete__input--disabled');
+			expect(autocompleteInput.className).toContain('fudis-form-input--disabled');
 		});
 
 		it('should have invalid CSS styling if control is invalid', () => {
@@ -98,7 +98,7 @@ describe('AutocompleteComponent', () => {
 			component.control.markAsTouched();
 			fixture.detectChanges();
 
-			expect(autocompleteInput.className).toContain('fudis-autocomplete__input--invalid');
+			expect(autocompleteInput.className).toContain('fudis-form-input--invalid');
 		});
 	});
 });

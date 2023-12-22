@@ -8,14 +8,14 @@ import { DropdownComponent } from './dropdown.component';
 import { LabelComponent } from '../label/label.component';
 
 import { GuidanceComponent } from '../guidance/guidance.component';
-import { FudisDropdownOption, FudisInputSize } from '../../../types/forms';
+import { FudisSelectOption, FudisInputSize } from '../../../types/forms';
 import { IconComponent } from '../../icon/icon.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 
-const dropdownOptions: FudisDropdownOption[] = [
-	{ value: 1, viewValue: 'Dog' },
-	{ value: 2, viewValue: 'Cat' },
-	{ value: 3, viewValue: 'Parrot' },
+const dropdownOptions: FudisSelectOption[] = [
+	{ value: 1, label: 'Dog' },
+	{ value: 2, label: 'Cat' },
+	{ value: 3, label: 'Parrot' },
 ];
 
 const dropdownControl: FormControl = new FormControl(null);
@@ -91,7 +91,7 @@ describe('DropdownComponent', () => {
 
 	describe('Preselected values', () => {
 		it('should have preselected values according to FormControl initialization', () => {
-			component.control = new FormControl<FudisDropdownOption[] | null>([dropdownOptions[0], dropdownOptions[2]]);
+			component.control = new FormControl<FudisSelectOption[] | null>([dropdownOptions[0], dropdownOptions[2]]);
 
 			expect(component.control.value?.length).toEqual(2);
 			expect(component.control.invalid).toBeFalsy();

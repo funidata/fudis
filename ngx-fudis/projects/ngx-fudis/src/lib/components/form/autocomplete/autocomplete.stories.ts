@@ -33,11 +33,11 @@ AutocompleteSearch.args = {
 		'This is autocomplete input, start writing (e.g mar) and after three letters the input will suggest matching options.',
 	control: new FormControl(null, FudisValidators.required('This selection is required')),
 	options: [
-		{ value: 123, viewValue: 'Mary Rhubarb' },
-		{ value: '456-xx', viewValue: 'Kingsley Kale' },
-		{ value: 789, viewValue: 'Martha Zuccini', disabled: true },
-		{ value: 'very-long-value', viewValue: 'Brian Eggplant with Marinated Pomegranate Seeds' },
-		{ value: 1234, viewValue: 'Martin Seeding' },
+		{ value: 123, label: 'Mary Rhubarb' },
+		{ value: '456-xx', label: 'Kingsley Kale' },
+		{ value: 789, label: 'Martha Zuccini', disabled: true },
+		{ value: 'very-long-value', label: 'Brian Eggplant with Marinated Pomegranate Seeds' },
+		{ value: 1234, label: 'Martin Seeding' },
 	],
 	placeholder: "Try searching for 'Mary'",
 	tooltip: 'Tooltip text for autocomplete',
@@ -48,7 +48,7 @@ AutocompleteSearch.args = {
 const manyOptions = Array.from({ length: 100 }).map((value, i) => {
 	return {
 		value: i,
-		viewValue: `Item number ${i}`,
+		label: `Item number ${i}`,
 	};
 });
 
@@ -74,10 +74,10 @@ Disabled.args = {
 		'This is autocomplete input, start writing (e.g mar) and after three letters the input will suggest matching options.',
 	control: new FormControl(null),
 	options: [
-		{ value: 123, viewValue: 'Mary Rhubarb' },
-		{ value: '456-xx', viewValue: 'Kingsley Kale' },
-		{ value: 789, viewValue: 'Martha Zuccini' },
-		{ value: 'very-long-value', viewValue: 'Brian Eggplant with Marinated Pomegranate Seeds' },
-		{ value: 1234, viewValue: 'Martin Seeding' },
+		{ value: 123, label: 'Mary Rhubarb' },
+		{ value: '456-xx', label: 'Kingsley Kale' },
+		{ value: 789, label: 'Martha Zuccini' },
+		{ value: 'very-long-value', label: 'Brian Eggplant with Marinated Pomegranate Seeds' },
+		{ value: 1234, label: 'Martin Seeding' },
 	],
 };

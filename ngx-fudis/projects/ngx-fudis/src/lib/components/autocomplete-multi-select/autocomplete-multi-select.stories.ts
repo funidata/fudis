@@ -63,7 +63,7 @@ const manyOptions = Array.from({ length: 100 }).map((value, i) => {
 	}
 	return {
 		value: i,
-		viewValue: `Item ${a} ${i}`,
+		label: `Item ${a} ${i}`,
 	};
 });
 

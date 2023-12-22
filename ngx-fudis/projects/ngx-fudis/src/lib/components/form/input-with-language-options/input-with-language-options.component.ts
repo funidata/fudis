@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input, OnChanges, OnInit, effect } from '@ang
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
 	FudisInputWithLanguageOptionsFormGroup,
-	FudisDropdownOption,
+	FudisSelectOption,
 	FudisDropdownLanguageOption,
 	FudisFormGroupErrors,
 	FudisInputSize,
@@ -37,7 +37,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	@Input({ required: true }) formGroup: FormGroup<FudisInputWithLanguageOptionsFormGroup | any>;
 
 	/**
-	 * Option list for language selection Fudis Dropdown. To pair control with corresponding dropdown option Dropdown option "value" must equal to control's name. E.g. "{value: 'english', viewValue: 'EN'}" pairs with "english: New FormControl('')"
+	 * Option list for language selection Fudis Dropdown. To pair control with corresponding dropdown option Dropdown option "value" must equal to control's name. E.g. "{value: 'english', label: 'EN'}" pairs with "english: New FormControl('')"
 	 */
 	@Input({ required: true }) options: FudisDropdownLanguageOption[];
 
@@ -65,7 +65,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	/**
 	 * Control for language option dropdown
 	 */
-	protected _dropdownControl: FormControl<FudisDropdownOption>;
+	protected _dropdownControl: FormControl<FudisSelectOption>;
 
 	/**
 	 * Property to check control values for required language options
@@ -75,7 +75,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	/**
 	 * Updated options list after changes
 	 */
-	protected _updatedOptions: FudisDropdownOption[] = [];
+	protected _updatedOptions: FudisSelectOption[] = [];
 
 	/**
 	 * Fudis translation
@@ -95,7 +95,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	/**
 	 * Language option dropdown value
 	 */
-	private _dropdownValue: FudisDropdownOption;
+	private _dropdownValue: FudisSelectOption;
 
 	/**
 	 * For attribute for dropdown value
@@ -112,7 +112,7 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 	 */
 	private _nonEmptyControls: string[] = [];
 
-	handleLanguageSelect(value: FudisDropdownOption): void {
+	handleLanguageSelect(value: FudisSelectOption): void {
 		this._dropdownValue = value;
 		this._for = `${this.id}_${value.value}`;
 	}
@@ -124,12 +124,12 @@ export class InputWithLanguageOptionsComponent extends InputBaseDirective implem
 		this.isControlRequired((event.target as HTMLInputElement).value, controlKey);
 	}
 
-	updateDropdownList(): FudisDropdownOption[] {
-		const newOptions: FudisDropdownOption[] = [];
+	updateDropdownList(): FudisSelectOption[] {
+		const newOptions: FudisSelectOption[] = [];
 
 		this.options.forEach((option) => {
 			if (this.formGroup.controls[option.value].invalid || !this.formGroup.controls[option.value].value) {
-				const updatedOption = { ...option, viewValue: `${option.viewValue} (${this._missingLanguage})` };
+				const updatedOption = { ...option, label: `${option.label} (${this._missingLanguage})` };
 
 				newOptions.push(updatedOption);
 
