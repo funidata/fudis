@@ -18,11 +18,10 @@ export interface FudisValidatorFn extends ValidatorFn {
 /**
  * Form Control Validators
  */
-
-/**
- * Fudis version of Validators.required
- */
 export module FudisValidators {
+	/**
+	 * Fudis version of Validators.required
+	 */
 	export function required(message: FudisValidatorMessage): FudisValidatorFn {
 		return (control: AbstractControl) => {
 			if (!Validators.required(control)) {
@@ -32,6 +31,9 @@ export module FudisValidators {
 		};
 	}
 
+	/**
+	 * Fudis version of Validators.email
+	 */
 	export function email(message: FudisValidatorMessage): FudisValidatorFn {
 		return (control: AbstractControl) => {
 			if (!Validators.email(control)) {
@@ -41,6 +43,9 @@ export module FudisValidators {
 		};
 	}
 
+	/**
+	 * Fudis version of Validators.maxLength
+	 */
 	export function maxLength(length: number, message: FudisValidatorMessage): FudisValidatorFn {
 		return (control: AbstractControl) => {
 			if (!Validators.maxLength(length)(control) || length < 1) {
@@ -50,6 +55,9 @@ export module FudisValidators {
 		};
 	}
 
+	/**
+	 * Fudis version of Validators.minLength
+	 */
 	export function minLength(length: number, message: FudisValidatorMessage): FudisValidatorFn {
 		return (control: AbstractControl) => {
 			if (!Validators.minLength(length)(control) || length < 1) {
@@ -64,6 +72,9 @@ export module FudisValidators {
 		};
 	}
 
+	/**
+	 * Fudis version of Validators.min
+	 */
 	export function min(minValue: number, message: FudisValidatorMessage): FudisValidatorFn {
 		return (control: AbstractControl) => {
 			if (!Validators.min(minValue)(control)) {
@@ -78,6 +89,9 @@ export module FudisValidators {
 		};
 	}
 
+	/**
+	 * Fudis version of Validators.max
+	 */
 	export function max(maxValue: number, message: FudisValidatorMessage): FudisValidatorFn {
 		return (control: AbstractControl) => {
 			if (!Validators.max(maxValue)(control)) {
@@ -92,6 +106,9 @@ export module FudisValidators {
 		};
 	}
 
+	/**
+	 * Fudis version of Validators.pattern
+	 */
 	export function pattern(regex: string | RegExp, message: FudisValidatorMessage): FudisValidatorFn {
 		return (control: AbstractControl) => {
 			if (!Validators.pattern(regex)(control)) {
@@ -108,9 +125,12 @@ export module FudisValidators {
 }
 
 /**
- * Form Group Validators
+ * Form Group Validators for Checkbox Group and Input With Language Options
  */
 export module FudisGroupValidators {
+	/**
+	 * NOTE: Input has to be set as required when using this validator
+	 */
 	export function atLeastOneRequired(message: Observable<string>): FudisValidatorFn {
 		return (controlGroup: any): FudisValidationErrors | null => {
 			const { controls } = controlGroup;
@@ -134,6 +154,9 @@ export module FudisGroupValidators {
 		};
 	}
 
+	/**
+	 * Minimum selected options of a group
+	 */
 	export function min(settings: FudisGroupValidatorsMinMaxSettings): FudisValidatorFn {
 		return (controlGroup: any): FudisValidationErrors | null => {
 			const { controls } = controlGroup;
@@ -156,6 +179,9 @@ export module FudisGroupValidators {
 		};
 	}
 
+	/**
+	 * Maximum selected options of a group
+	 */
 	export function max(settings: FudisGroupValidatorsMinMaxSettings): FudisValidatorFn {
 		return (controlGroup: any): FudisValidationErrors | null => {
 			const { controls } = controlGroup;

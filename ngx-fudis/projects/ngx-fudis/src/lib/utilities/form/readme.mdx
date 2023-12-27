@@ -1,15 +1,18 @@
-import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
+import { Meta } from '@storybook/blocks';
 
 <Meta title="Utilities/Validators" />
 
 # Validators
 
-Fudis Form components use FudisValidators that have following types: `required`, `email`, `minLength`, `maxLength`,`min`, `max` and `pattern`.
+Fudis Form components use two set of validators; **FudisValidators** and **FudisGroupValidators**.
 
-## Usage Guidelines
+Basic validators (FudisValidators) have the following types: `required`, `email`, `minLength`, `maxLength`,`min`, `max` and `pattern`.
+Group validators (FudisGroupValidators) have the following types: `atLeastOneRequired`, `min` and `max`.
+
+## Usage Guidelines for FudisValidators
 
 
-### Required validator
+### Required Validator
 
 For required form field, include `FudisValidators.required()` in the form control validator with message parameter either as a string or as an observable string.
 
@@ -24,7 +27,7 @@ FudisValidators.required('This is required field')
 
 ---
 
-### Email validator
+### Email Validator
 
 Email validator expects that the related form field type is set to `[type]="'email'"`. Validator checks that the given input corresponds to the set email type of the form field. 
 Validator takes a message parameter either as a string or as an observable string.
@@ -35,7 +38,7 @@ FudisValidators.email('Input must be an email address.')
 
 ---
 
-### MinLength and MaxLength validators
+### MinLength and MaxLength Validators
 
 For minLength and maxLength, include `FudisValidators.minLength()` and `FudisValidators.maxLength()` in the form control validator with preferred input length as number and a message parameter as a string or as an observable string.
 When maxLength validation is used, [Text Input](/docs/components-form-text-input--documentation) and [Text Area](/docs/components-form-text-area--documentation) components disable user from inputing more than allowed length of characters and will have additional maxLength indicator.
@@ -54,7 +57,7 @@ FudisValidators.maxLength(20, 'Too long email.')
 
 ---
 
-### Min and Max validators
+### Min and Max Validators
 
 Min and Max validators are used with form field `[type]="'number'"`. Min and Max validator disables inputs that exceed or fall below the allowed values.
 Form components that use Error message is prompt when the user inputs lower or higher value than the allowed value to the input field. 
@@ -72,12 +75,37 @@ FudisValidators.max(10, 'Number cannot exceed 10.')
 
 ---
 
-### Pattern validator
+### Pattern Validator
 
 Pattern validator receives a Regex pattern and makes input comparison with the given pattern. 
 Validator takes in a pattern as a string or with a type definition of Regex. Error message parameter is given as a string or as an observable string.
 
 ```
 FudisValidators.pattern(/^[A-Z \d\W]+$/, 'PLEASE USE ONLY LOW CAPS!')
+
+```
+
+## Usage Guidelines for FudisGroupValidators
+
+These validators are used with Form Group.
+
+### AtLeastOneRequired Validator
+
+AtLeastOneRequired validator can be used with Checkbox Group and Input With Language Options, cases where at least one option needs to be selected.
+When using this validator, the input has to be set as required. Also, note that the message parameter has to be an observable string.
+
+```
+FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('At least one selection has to be made'))
+
+```
+
+### Min and Max Validators
+
+Min and Max validators can be used with Checkbox Group, cases where it is necessary to limit user selections.
+Validators take in value as a number which corresponds to the wanted min or max value. Error message parameter is given as a string or as an observable string.
+
+```
+FudisGroupValidators.min({ value: 2, message: 'Pick at least two' })
+FudisGroupValidators.max({ value: 4, message: 'Four is the maximun amount of allowed picks' })
 
 ```
