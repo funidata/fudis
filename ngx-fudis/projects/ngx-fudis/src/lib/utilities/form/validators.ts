@@ -2,6 +2,7 @@ import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@ang
 import { Observable } from 'rxjs';
 
 export type FudisValidatorMessage = Observable<string> | string;
+
 export interface FudisValidationErrors extends ValidationErrors {
 	[key: string]: { message: FudisValidatorMessage; value?: any } | null;
 }
