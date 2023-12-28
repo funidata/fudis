@@ -6,9 +6,9 @@ import { Meta } from '@storybook/blocks';
 
 ## Functions
 
-### Reload errors
+### Reload Errors
 
-Reload errors is an error summary service functionality that updates the visible list of errors shown in the Fudis Error Summary component.
+Reload Errors is Error Summary Service functionality that updates the visible list of errors shown in the Fudis Error Summary component.
 
 Import `FudisErrorSummaryService` and add the parameter to constructor:
 
@@ -22,15 +22,15 @@ constructor(
 ) {}
 ```
 
-When calling `reloadErrors` function, you can set an optional timeout delay in milliseconds:
+When calling `reloadErrors` function, you can set an optional timeout in milliseconds:
 
 ```
-this._service.reloadErrors(); // sets timeout to 0ms
+this._service.reloadErrors(); // no timeout
 
 this._service.reloadErrors(100); // sets timeout to 100ms
 ```
 
-Recommended pattern is to call above function when user clicks form's Submit button which also sets Form's error summary as visible.
+Recommended pattern is to call above function when user clicks form's submit button which also sets Error Summary as visible in Fudis Form.
 
 ```
 protected _submitButtonClick():void {

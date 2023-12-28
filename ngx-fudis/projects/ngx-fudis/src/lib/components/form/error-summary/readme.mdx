@@ -8,11 +8,11 @@ This component is internally bundled with Fudis Form.
 
 ## Attributes
 
-Visibility and attributes of this component are set with Fudis Form's `@Input` directives
+Visibility and attributes of this component are set through Fudis Form's `@Input` directives.
 
 ### errorSummaryVisible (boolean)
 
-To set Error Summary is visibility. Usually set `true` on click of form submit button. Should be used with [Reload Errors](/docs/services-error-summary--documentation).
+To set Error Summary visibility. Usually set `true` on click of form submit button. Should be used with [Reload Errors](/docs/services-error-summary--documentation).
 
 ### errorSummaryHelpText (string)
 
@@ -20,9 +20,10 @@ Mandatory help text displayed in Error Summary before listing individual errors.
 
 ### errorSummaryLiveRemove (boolean)
 
-By default ErrorSummary "refreshes" only when calling [Reload Errors](/docs/services-error-summary--documentation). But when this property is set to `true`, Error Summary removes errors dynamically if user corrects invalid fields.
+By default Error Summary list updates only when calling [Reload Errors](/docs/services-error-summary--documentation). 
+If this property is set to `true`, Error Summary removes errors dynamically when user corrects invalid fields.
 
-**Note!** This will NOT dynamically ADD new errors to Error Summary; it only removes those which are listed when reload was called.
+**Note!** This will NOT dynamically add new errors to Error Summary; it only removes those listed when reload was called.
 
 ### errorSummaryLinkType ('router' | 'href')
 
