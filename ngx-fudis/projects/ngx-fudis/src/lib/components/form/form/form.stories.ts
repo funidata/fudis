@@ -1,13 +1,10 @@
 import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/angular';
-
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { Component, OnInit, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { RouterModule } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { FudisSelectOption, FudisRadioButtonOption, FudisFormErrors, FudisDateRangeItem } from '../../../types/forms';
-
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { FudisGroupValidators, FudisValidators } from '../../../utilities/form/validators';
 import { FormComponent } from './form.component';
@@ -125,7 +122,6 @@ import readme from './readme.mdx';
 												</fudis-text-input>
 												<fudis-text-input
 													[id]="'unique-input-4'"
-													[helpText]="inputHelpText"
 													[control]="formExample.controls['email']"
 													[label]="'Contact email'"
 													[helpText]="'So that students can ask for more time on their homework.'"
@@ -296,7 +292,6 @@ class FormContentExampleComponent implements OnInit {
 export default {
 	title: 'Components/Form/Form',
 	component: FormComponent,
-	argTypes: {},
 	decorators: [
 		moduleMetadata({
 			declarations: [FormContentExampleComponent],
@@ -310,16 +305,11 @@ export default {
 		docs: {
 			page: readme,
 		},
-		controls: {
-			exclude: ['control'],
-		},
 	},
 } as Meta;
 
 const html = String.raw;
 
-const Template: StoryFn = () => ({
+export const Example: StoryFn = () => ({
 	template: html` <example-form-content />`,
 });
-
-export const Example = Template.bind({});
