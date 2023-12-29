@@ -4,15 +4,15 @@ import { Meta } from '@storybook/blocks';
 
 # Error Summary
 
-This component is internally bundled with Fudis Form.
+Error Summary is internally bundled with Fudis Form.
+It will appear as Fudis Notification with links in the header section of Fudis Form when invalid form is submitted. 
+All the necessary properties are given through [Fudis From](/docs/components-form-form--documentation) `@Input` directives.
 
-## Attributes
-
-Visibility and attributes of this component are set through Fudis Form's `@Input` directives.
+## Properties
 
 ### errorSummaryVisible (boolean)
 
-To set Error Summary visibility. Usually set `true` on click of form submit button. Should be used with [Reload Errors](/docs/services-error-summary--documentation).
+To set Error Summary visibility. By deafult set to `false` and is meant to set `true` on form submit. Should be used with [Reload Errors](/docs/services-error-summary--documentation).
 
 ### errorSummaryHelpText (string)
 
@@ -20,7 +20,7 @@ Mandatory help text displayed in Error Summary before listing individual errors.
 
 ### errorSummaryLiveRemove (boolean)
 
-By default Error Summary list updates only when calling [Reload Errors](/docs/services-error-summary--documentation). 
+By default set to `false`, meaning Error Summary list updates only when calling [Reload Errors](/docs/services-error-summary--documentation). 
 If this property is set to `true`, Error Summary removes errors dynamically when user corrects invalid fields.
 
 **Note!** This will NOT dynamically add new errors to Error Summary; it only removes those listed when reload was called.
@@ -31,4 +31,10 @@ Type of the clickable error link in Error Summary. Defaults to Angular router li
 
 ## Related Services
 
-[Reload Errors](/docs/services-error-summary--documentation)
+- [Reload Errors](/docs/services-error-summary--documentation)
+
+## Related Components
+
+- [Notification](/docs/components-notification--documentation)
+- [Link](/docs/components-link--documentation)
+- [Form](/docs/components-form-form--documentation)

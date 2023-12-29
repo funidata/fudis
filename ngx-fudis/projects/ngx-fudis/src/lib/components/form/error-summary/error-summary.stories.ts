@@ -7,7 +7,6 @@ import { BehaviorSubject } from 'rxjs';
 import { ErrorSummaryComponent } from './error-summary.component';
 import readme from './readme.mdx';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
-import { FudisFocusService } from '../../../services/focus/focus.service';
 import { FudisRadioButtonOption } from '../../../types/forms';
 import { FudisGroupValidators, FudisValidators } from '../../../utilities/form/validators';
 
@@ -35,26 +34,22 @@ import { FudisGroupValidators, FudisValidators } from '../../../utilities/form/v
 				<ng-template fudisContent type="fieldset">
 					<fudis-grid [columns]="3">
 						<fudis-text-input
-							[initialFocus]="true"
 							[id]="'unique-input-3'"
 							[control]="formExample.controls['teacher']"
 							[label]="'Responsible teacher'"
 							[helpText]="'Someone has to be responsible for this.'" />
 						<fudis-text-input
 							[id]="'unique-input-4'"
-							[helpText]="inputHelpText"
 							[control]="formExample.controls['email']"
 							[label]="'Contact email'"
-							[helpText]="'So that students can ask for more time on their homework.'"
-							[errorMsg]="errorEmail" />
+							[helpText]="'So that students can ask for more time on their homework.'" />
 					</fudis-grid>
 					<fudis-grid [columns]="3">
 						<fudis-radio-button-group
 							[title]="'Course type'"
 							[id]="'radio-button-group-1'"
 							[options]="courseTypeOptions"
-							[control]="formExample.controls['courseType']"
-							[errorMsg]="errorCourseType" />
+							[control]="formExample.controls['courseType']" />
 						<fudis-checkbox-group
 							[formGroup]="formExample.controls.courseBooks"
 							[title]="'Course books'"
@@ -69,7 +64,6 @@ import { FudisGroupValidators, FudisValidators } from '../../../utilities/form/v
 							[id]="'date-picker-1'"
 							[size]="'md'"
 							[helpText]="'You have to start from somewhere'"
-							[errorMsg]="errorImportantDate"
 							[control]="formExample.controls['importantDate']">
 						</fudis-datepicker>
 					</fudis-grid>
@@ -79,10 +73,7 @@ import { FudisGroupValidators, FudisValidators } from '../../../utilities/form/v
 	</fudis-form>`,
 })
 class ErrorSummaryExampleComponent {
-	constructor(
-		private _errorSummaryService: FudisErrorSummaryService,
-		private _focusService: FudisFocusService
-	) {}
+	constructor(private _errorSummaryService: FudisErrorSummaryService) {}
 
 	errorSummaryVisible: boolean = false;
 
