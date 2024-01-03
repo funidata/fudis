@@ -6,14 +6,14 @@ describe('Fudis Validators', () => {
 	describe('Required Validator', () => {
 		const requiredControl = new FormControl('', FudisValidators.required('This is required'));
 
-		it('should return required message if control value is invalid', () => {
+		it('should return required error if control value is null', () => {
 			requiredControl.patchValue(null);
 
 			expect(requiredControl.errors).toEqual({ required: { message: 'This is required' } });
 			expect(requiredControl.valid).toBeFalse();
 		});
 
-		it('should not return required message if control value is valid', () => {
+		it('should not return required error if control value is valid', () => {
 			requiredControl.patchValue('I am enough!');
 
 			expect(requiredControl.errors).toEqual(null);
@@ -31,14 +31,14 @@ describe('Fudis Validators', () => {
 			expect(emailControl.valid).toBeFalse();
 		});
 
-		it('should not return email message if control has email property', () => {
+		it('should not return email error if control value is email format', () => {
 			emailControl.patchValue('test@validemail.com');
 
 			expect(emailControl.errors).toEqual(null);
 			expect(emailControl.valid).toBeTrue();
 		});
 
-		it('should not return email message if control value is empty string', () => {
+		it('should not return email error if control value is empty string', () => {
 			emailControl.patchValue('');
 
 			expect(emailControl.errors).toEqual(null);
@@ -64,7 +64,6 @@ describe('Fudis Validators', () => {
 			maxLenghtControl.patchValue('Ok');
 
 			expect(maxLenghtControl.errors).toEqual(null);
-
 			expect(maxLenghtControl.valid).toBeTrue();
 		});
 
@@ -72,7 +71,6 @@ describe('Fudis Validators', () => {
 			maxLenghtControl.patchValue(null);
 
 			expect(maxLenghtControl.errors).toEqual(null);
-
 			expect(maxLenghtControl.valid).toBeTrue();
 		});
 	});
@@ -81,7 +79,7 @@ describe('Fudis Validators', () => {
 		const minLengthValidator = FudisValidators.minLength(15, 'Text should be at least 15 characters long');
 		const minLenghtControl = new FormControl<string | null>(null, minLengthValidator);
 
-		it('should return minLength error if control has minlength validator', () => {
+		it('should return minlength error if control has minLength validator', () => {
 			minLenghtControl.patchValue('Short value');
 
 			expect(minLenghtControl.errors).toEqual({
@@ -91,59 +89,94 @@ describe('Fudis Validators', () => {
 			expect(minLenghtControl.valid).toBeFalse();
 		});
 
-		it('should not return minLength error if control value is long enough', () => {
+		it('should not return minlength error if control value is long enough', () => {
 			minLenghtControl.patchValue('This is very long text to test as valid content.');
 
 			expect(minLenghtControl.errors).toEqual(null);
-
 			expect(minLenghtControl.valid).toBeTrue();
 		});
 
-		it('should not return minLength error if control value is empty', () => {
+		it('should not return minlength error if control value is empty', () => {
 			minLenghtControl.patchValue('');
 
 			expect(minLenghtControl.errors).toEqual(null);
-
 			expect(minLenghtControl.valid).toBeTrue();
 		});
 	});
 
 	describe('Min Validator', () => {
 		const minValidator = FudisValidators.min(2, 'Chosen value is too small');
-		const minControl = new FormControl('-10');
+		const minControl = new FormControl<string | null>(null, minValidator);
 
-		it('should return min message if control has min property', () => {
-			expect(minValidator(minControl)).toEqual(
-				jasmine.objectContaining({
-					min: { message: 'Chosen value is too small', min: 2 },
-				})
-			);
+		it('should return min error if control has min validator', () => {
+			minControl.patchValue('-10');
+
+			expect(minControl.errors).toEqual({ min: { message: 'Chosen value is too small', min: 2 } });
+			expect(minControl.valid).toBeFalse();
+		});
+
+		it('should not return min error if control value is big enough', () => {
+			minControl.patchValue('3');
+
+			expect(minControl.errors).toEqual(null);
+			expect(minControl.valid).toBeTrue();
+		});
+
+		it('should not return min error if control value is null', () => {
+			minControl.patchValue(null);
+
+			expect(minControl.errors).toEqual(null);
+			expect(minControl.valid).toBeTrue();
 		});
 	});
 
 	describe('Max Validator', () => {
 		const maxValidator = FudisValidators.max(99, 'Chosen value is too big');
-		const maxControl = new FormControl('100');
+		const maxControl = new FormControl<string | null>(null, maxValidator);
 
-		it('should return max message if control has max property', () => {
-			expect(maxValidator(maxControl)).toEqual(
-				jasmine.objectContaining({
-					max: { message: 'Chosen value is too big', max: 99 },
-				})
-			);
+		it('should return max error if control has max validator', () => {
+			maxControl.patchValue('100');
+
+			expect(maxControl.errors).toEqual({ max: { message: 'Chosen value is too big', max: 99 } });
+		});
+
+		it('should not return max error if control value is small enough', () => {
+			maxControl.patchValue('50');
+
+			expect(maxControl.errors).toEqual(null);
+			expect(maxControl.valid).toBeTrue();
+		});
+
+		it('should not return max error if control value is null', () => {
+			maxControl.patchValue(null);
+
+			expect(maxControl.errors).toEqual(null);
+			expect(maxControl.valid).toBeTrue();
 		});
 	});
 
 	describe('Pattern Validator', () => {
 		const patternValidator = FudisValidators.pattern(/[\d]/, 'Text should include at least one digit');
-		const patternControl = new FormControl('Text without digits');
+		const patternControl = new FormControl<string | null>(null, patternValidator);
 
-		it('should return pattern message if control has pattern property', () => {
-			expect(patternValidator(patternControl)).toEqual(
-				jasmine.objectContaining({
-					pattern: { message: 'Text should include at least one digit' },
-				})
-			);
+		it('should return pattern error if control has pattern validator', () => {
+			patternControl.patchValue('Text without digits');
+
+			expect(patternControl.errors).toEqual({ pattern: { message: 'Text should include at least one digit' } });
+		});
+
+		it('should not return pattern error if control value contains wanted pattern', () => {
+			patternControl.patchValue('This is text with number 99');
+
+			expect(patternControl.errors).toEqual(null);
+			expect(patternControl.valid).toBeTrue();
+		});
+
+		it('should not return pattern error if control value is null', () => {
+			patternControl.patchValue(null);
+
+			expect(patternControl.errors).toEqual(null);
+			expect(patternControl.valid).toBeTrue();
 		});
 	});
 
@@ -163,10 +196,16 @@ describe('Fudis Validators', () => {
 				);
 			});
 
-			it('should return atLeastOneRequired message if FormGroup controls have atLeastOneRequired property', () => {
-				formGroup.markAllAsTouched();
-
+			it('should return atLeastOneRequired error if FormGroup has atLeastOneRequired validator', () => {
 				expect(formGroup.errors?.['atLeastOneRequired'].message._value).toEqual(translation.value);
+				expect(formGroup.valid).toBeFalse();
+			});
+
+			it('should not return atLeastOneRequired error if at least one option is selected', () => {
+				formGroup.controls['strawberry'].setValue(true);
+
+				expect(formGroup.errors).toEqual(null);
+				expect(formGroup.valid).toBeTrue();
 			});
 		});
 
@@ -186,10 +225,17 @@ describe('Fudis Validators', () => {
 				);
 			});
 
-			it('should return min group message if FormGroup controls have min property', () => {
-				formGroup.markAllAsTouched();
-
+			it('should return min group error if FormGroup has min validator', () => {
 				expect(formGroup.errors?.['min'].message._value).toEqual(translation.value);
+				expect(formGroup.valid).toBeFalse();
+			});
+
+			it('should not return min group error if enough options are selected', () => {
+				formGroup.controls['strawberry'].setValue(true);
+				formGroup.controls['cloudberry'].setValue(true);
+
+				expect(formGroup.errors).toEqual(null);
+				expect(formGroup.valid).toBeTrue();
 			});
 		});
 
@@ -210,10 +256,16 @@ describe('Fudis Validators', () => {
 				);
 			});
 
-			it('should return max group message if FormGroup controls have max property', () => {
-				formGroup.markAllAsTouched();
-
+			it('should return max group error if FormGroup has max validator', () => {
 				expect(formGroup.errors?.['max'].message._value).toEqual(translation.value);
+				expect(formGroup.valid).toBeFalse();
+			});
+
+			it('should not return max group error if there is not too many options selected', () => {
+				formGroup.controls['strawberry'].setValue(false);
+
+				expect(formGroup.errors).toEqual(null);
+				expect(formGroup.valid).toBeTrue();
 			});
 		});
 	});
