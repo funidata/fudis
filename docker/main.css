@@ -1928,6 +1928,10 @@ html {
 */
 /* stylelint-disable property-disallowed-list */
 /* stylelint-disable unit-disallowed-list */
+/* stylelint-disable declaration-property-value-disallowed-list */
+/* stylelint-disable property-disallowed-list */
+/* stylelint-disable declaration-property-value-disallowed-list */
+/* stylelint-disable property-disallowed-list */
 .fudis-visually-hidden {
   position: absolute;
   left: 0;
@@ -1953,6 +1957,20 @@ html {
   border: 0;
   border-top: 1px solid #727272;
   height: 1px;
+}
+
+/* stylelint-disable-next-line selector-no-qualifying-type */
+input.fudis-form-input {
+  /* stylelint-disable-next-line selector-no-qualifying-type */
+}
+input.fudis-form-input--invalid[aria-invalid=true] {
+  border: 1px solid #b83c2e;
+}
+input.fudis-form-input--disabled {
+  border: 1px dashed #727272;
+  /* stylelint-disable-next-line property-disallowed-list */
+  background-color: #f1f1f1;
+  cursor: default;
 }
 
 .fudis-input-size__xs {
