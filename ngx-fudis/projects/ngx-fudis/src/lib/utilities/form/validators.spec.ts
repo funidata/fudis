@@ -4,47 +4,107 @@ import { FudisGroupValidators, FudisValidators } from './validators';
 
 describe('Fudis Validators', () => {
 	describe('Required Validator', () => {
-		const requiredValidator = FudisValidators.required('This is required');
-		const requiredControl = new FormControl('');
-		requiredControl.markAsTouched();
+		const requiredControl = new FormControl('', FudisValidators.required('This is required'));
 
-		it('should return required message if control has required property', () => {
-			expect(requiredValidator(requiredControl)).toEqual({ required: { message: 'This is required' } });
+		it('should return required message if control value is invalid', () => {
+			requiredControl.patchValue(null);
+
+			expect(requiredControl.errors).toEqual({ required: { message: 'This is required' } });
+			expect(requiredControl.valid).toBeFalse();
+		});
+
+		it('should not return required message if control value is valid', () => {
+			requiredControl.patchValue('I am enough!');
+
+			expect(requiredControl.errors).toEqual(null);
+			expect(requiredControl.valid).toBeTrue();
 		});
 	});
 
 	describe('Email Validator', () => {
-		const emailValidator = FudisValidators.email('This should be email format');
-		const emailControl = new FormControl('invalidemailformat');
+		const emailControl = new FormControl<string | null>(null, FudisValidators.email('This should be email format'));
 
-		it('should return email message if control has email property', () => {
-			expect(emailValidator(emailControl)).toEqual({ email: { message: 'This should be email format' } });
+		it('should return email error if control value is not email', () => {
+			emailControl.patchValue('non-email');
+
+			expect(emailControl.errors).toEqual({ email: { message: 'This should be email format' } });
+			expect(emailControl.valid).toBeFalse();
+		});
+
+		it('should not return email message if control has email property', () => {
+			emailControl.patchValue('test@validemail.com');
+
+			expect(emailControl.errors).toEqual(null);
+			expect(emailControl.valid).toBeTrue();
+		});
+
+		it('should not return email message if control value is empty string', () => {
+			emailControl.patchValue('');
+
+			expect(emailControl.errors).toEqual(null);
+			expect(emailControl.valid).toBeTrue();
 		});
 	});
 
 	describe('MaxLength Validator', () => {
 		const maxLengthValidator = FudisValidators.maxLength(5, 'Text should not exceed 5 characters');
-		const maxLenghtControl = new FormControl('Too long text');
+		const maxLenghtControl = new FormControl<string | null>(null, maxLengthValidator);
 
-		it('should return maxLength message if control has maxlength property', () => {
-			expect(maxLengthValidator(maxLenghtControl)).toEqual(
-				jasmine.objectContaining({
-					maxlength: { message: 'Text should not exceed 5 characters', requiredLength: 5 },
-				})
-			);
+		it('should return maxlength error if control has maxLength validator', () => {
+			maxLenghtControl.patchValue('Too long text');
+
+			expect(maxLenghtControl.errors).toEqual({
+				maxlength: { message: 'Text should not exceed 5 characters', requiredLength: 5 },
+			});
+
+			expect(maxLenghtControl.valid).toBeFalse();
+		});
+
+		it('should not return maxlength error if control value is short enough', () => {
+			maxLenghtControl.patchValue('Ok');
+
+			expect(maxLenghtControl.errors).toEqual(null);
+
+			expect(maxLenghtControl.valid).toBeTrue();
+		});
+
+		it('should not return maxlength error if control value is null', () => {
+			maxLenghtControl.patchValue(null);
+
+			expect(maxLenghtControl.errors).toEqual(null);
+
+			expect(maxLenghtControl.valid).toBeTrue();
 		});
 	});
 
 	describe('MinLength Validator', () => {
 		const minLengthValidator = FudisValidators.minLength(15, 'Text should be at least 15 characters long');
-		const minLenghtControl = new FormControl('Short text');
+		const minLenghtControl = new FormControl<string | null>(null, minLengthValidator);
 
-		it('should return minLength message if control has minlength property', () => {
-			expect(minLengthValidator(minLenghtControl)).toEqual(
-				jasmine.objectContaining({
-					minlength: { message: 'Text should be at least 15 characters long', requiredLength: 15 },
-				})
-			);
+		it('should return minLength error if control has minlength validator', () => {
+			minLenghtControl.patchValue('Short value');
+
+			expect(minLenghtControl.errors).toEqual({
+				minlength: { message: 'Text should be at least 15 characters long', requiredLength: 15 },
+			});
+
+			expect(minLenghtControl.valid).toBeFalse();
+		});
+
+		it('should not return minLength error if control value is long enough', () => {
+			minLenghtControl.patchValue('This is very long text to test as valid content.');
+
+			expect(minLenghtControl.errors).toEqual(null);
+
+			expect(minLenghtControl.valid).toBeTrue();
+		});
+
+		it('should not return minLength error if control value is empty', () => {
+			minLenghtControl.patchValue('');
+
+			expect(minLenghtControl.errors).toEqual(null);
+
+			expect(minLenghtControl.valid).toBeTrue();
 		});
 	});
 
