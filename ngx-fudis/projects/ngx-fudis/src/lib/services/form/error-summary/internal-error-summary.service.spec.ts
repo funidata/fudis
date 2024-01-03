@@ -74,6 +74,8 @@ describe('InternalErrorSummaryService', () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({});
 		service = TestBed.inject(FudisInternalErrorSummaryService);
+
+		spyOn(service, 'reloadErrors');
 	});
 
 	it('should be created', () => {
@@ -115,8 +117,6 @@ describe('InternalErrorSummaryService', () => {
 			language: 'sv',
 		};
 
-		spyOn(service, 'reloadErrors');
-
 		service.addNewError(firstError);
 		service.addNewError(firstErrorWithLangUpdate);
 
@@ -152,11 +152,11 @@ describe('InternalErrorSummaryService', () => {
 	});
 
 	it('should add parent element to errorSummaryParentList array', () => {
-		const mockFrom = document.createElement('form');
+		const mockForm = document.createElement('form');
 
 		const errorSummaryParent: FudisErrorSummaryParent = {
 			formId: 'unique-form-id',
-			parentElement: mockFrom,
+			parentElement: mockForm,
 		};
 
 		service.addErrorSummaryParent(errorSummaryParent);
@@ -165,11 +165,11 @@ describe('InternalErrorSummaryService', () => {
 	});
 
 	it('should remove parent element from errorSummaryParentList array', () => {
-		const mockFrom = document.createElement('form');
+		const mockForm = document.createElement('form');
 
 		const errorSummaryParent: FudisErrorSummaryParent = {
 			formId: 'unique-form-id',
-			parentElement: mockFrom,
+			parentElement: mockForm,
 		};
 
 		service.addErrorSummaryParent(errorSummaryParent);
