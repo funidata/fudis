@@ -92,10 +92,10 @@ These validators are used with Form Group.
 ### AtLeastOneRequired Validator
 
 AtLeastOneRequired validator can be used with Checkbox Group and Input With Language Options, cases where at least one option needs to be selected.
-When using this validator, the input has to be set as required. Also, note that the message parameter has to be an observable string.
+When using this validator, the input has to be set as required. Error message parameter is given as a string or as an observable string
 
 ```
-FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('At least one selection has to be made'))
+FudisGroupValidators.atLeastOneRequired('At least one selection has to be made')
 
 ```
 

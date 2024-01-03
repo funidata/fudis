@@ -9,7 +9,7 @@ export interface FudisValidationErrors extends ValidationErrors {
 
 export interface FudisGroupValidatorsMinMaxSettings {
 	value: number;
-	message: Observable<string> | string;
+	message: FudisValidatorMessage;
 }
 
 export interface FudisValidatorFn extends ValidatorFn {
@@ -132,7 +132,7 @@ export module FudisGroupValidators {
 	/**
 	 * NOTE: Input has to be set as required when using this validator
 	 */
-	export function atLeastOneRequired(message: Observable<string>): FudisValidatorFn {
+	export function atLeastOneRequired(message: FudisValidatorMessage): FudisValidatorFn {
 		return (controlGroup: any): FudisValidationErrors | null => {
 			const { controls } = controlGroup;
 
