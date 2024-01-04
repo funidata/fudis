@@ -2,8 +2,6 @@
   "extends": [
     "stylelint-config-standard-scss",
     "stylelint-config-sass-guidelines",
-    "stylelint-prettier/recommended",
-    "stylelint-config-prettier-scss",
     "stylelint-config-concentric-order"
   ],
   "ignoreFiles": [
