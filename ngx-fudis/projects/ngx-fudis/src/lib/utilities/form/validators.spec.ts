@@ -106,17 +106,17 @@ describe('Fudis Validators', () => {
 
 	describe('Min Validator', () => {
 		const minValidator = FudisValidators.min(2, 'Chosen value is too small');
-		const minControl = new FormControl<string | null>(null, minValidator);
+		const minControl = new FormControl<number | null>(null, minValidator);
 
 		it('should return min error if control has min validator', () => {
-			minControl.patchValue('-10');
+			minControl.patchValue(-10);
 
 			expect(minControl.errors).toEqual({ min: { message: 'Chosen value is too small', min: 2 } });
 			expect(minControl.valid).toBeFalse();
 		});
 
 		it('should not return min error if control value is big enough', () => {
-			minControl.patchValue('3');
+			minControl.patchValue(3);
 
 			expect(minControl.errors).toEqual(null);
 			expect(minControl.valid).toBeTrue();
@@ -132,16 +132,16 @@ describe('Fudis Validators', () => {
 
 	describe('Max Validator', () => {
 		const maxValidator = FudisValidators.max(99, 'Chosen value is too big');
-		const maxControl = new FormControl<string | null>(null, maxValidator);
+		const maxControl = new FormControl<number | null>(null, maxValidator);
 
 		it('should return max error if control has max validator', () => {
-			maxControl.patchValue('100');
+			maxControl.patchValue(100);
 
 			expect(maxControl.errors).toEqual({ max: { message: 'Chosen value is too big', max: 99 } });
 		});
 
 		it('should not return max error if control value is small enough', () => {
-			maxControl.patchValue('50');
+			maxControl.patchValue(50);
 
 			expect(maxControl.errors).toEqual(null);
 			expect(maxControl.valid).toBeTrue();
