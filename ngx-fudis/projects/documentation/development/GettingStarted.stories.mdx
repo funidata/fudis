@@ -1,78 +1,47 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from "@storybook/blocks";
 
 <Meta title="Documentation/Development/Getting Started" />
 
-# Getting Started with Fudis Development
+# Getting Started with Development Environment
 
-This document contains information for installing and running tools needed for Fudis development.
+Setting up your local development environment according to these instructions is highly recommended for a smooth and uniform development experience accross the team (and 3rd parties, too).
 
-## Set up Local Repository
+## Requirements
 
-Clone the upstream repository from [Fudis Design System](https://github.com/funidata/fudis.git):
+- MacOS or Linux.
+- Git.
+- Docker.
+  - Any fairly recent version should work. Originally developed with Docker Engine v24.
+- Node.js and NPM.
+  - For just running Storybook locally, any version will do as the containers will internally use correct versions anyway. If you plan to do anything else, using the version specified in `.nvmrc` is highly recommended (`v18.18.2` at the time of writing this doc).
+  - In general, using [NVM](https://github.com/nvm-sh/nvm) and setting your terminal to automatically switch Node.js versions based on `.nvmrc` files is highly recommended.
+- IDE with robust support for TypeScript.
+  - We prefer VS Code and offer a settings template to get going immediately (see [VS Code setup instructions](?path=/docs/documentation-development-setup-vscode--documentation)).
+
+## Set Up Local Repository
+
+Clone the upstream repository to your machine (requires write access).
 
 ```bash
 git clone https://github.com/funidata/fudis.git
 ```
 
-You can also ignore the `gh-pages` branch to avoid syncing with it continuously (`cd` into your local repo first):
+If you do not have write access and are not working for Funidata, you need to first fork our repository to your own account and use that for development.
+
+## Install NPM Packages
 
 ```bash
-git config --add remote.origin.fetch '^refs/heads/gh-pages'
+npm ci
 ```
 
-## Install Dependencies
+## Run Development Environment
 
-In the root of project, install repository dependencies and Fudis dependencies.
+Make sure Docker daemon is running. First startup takes a while as Docker fetches and builds necessary images. Once complete, Storybook is accessible at [http://localhost:6006](http://localhost:6006).
 
 ```bash
-npm install && cd ngx-fudis && npm install
+npm start
 ```
 
-## Build Application and Watch for Changes
+Once you are done, shutdown the development environment with `npm stop`. You can use `docker ps` to verify all containers are down (and to check their status if something is not working).
 
-All following command should be run from **the root** of the fudis repository.
-
-> Build and watch for changes in Fudis package
-
-```bash
-npm run dev
-```
-
-## Start Storybook
-
-> Start Storybook and open it in browser http://localhost:6600
-
-```bash
-npm run storybook
-```
-
-## Sandbox Application
-
-> Open sandbox in browser http://localhost:4200
-
-```bash
-npm run sandbox
-```
-
-## Run Tests
-
-This command will run unit tests
-
-```bash
-npm run test
-```
-
-## Formatting and Linting
-
-Fudis uses Husky Git hooks to prevent unformatted code being pushed to GitHub.
-To execute linting check separately, run following commands in the root of the repository:
-
-```bash
-npm run lint
-```
-
-and
-
-```bash
-npm run style-lint
-```
+See [development environment documentation](?path=/docs/documentation-development-development-environment--documentation) for more information and complete command reference.
