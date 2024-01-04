@@ -12,6 +12,7 @@
   "stylelint.validate": ["css", "less", "scss"],
   // Use official prettier extension for all files.
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // These ensure that globally set filetype-specific formatter settings do not override "editor.defaultFormatter" set above.
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },

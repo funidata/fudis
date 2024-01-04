@@ -5,6 +5,7 @@
   ],
   "recommendations": [
     "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
     "stylelint.vscode-stylelint",
     "formulahendry.auto-rename-tag",
     "naumovs.color-highlight",
