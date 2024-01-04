@@ -1,5 +1,4 @@
 import { FormControl, FormGroup } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
 import { FudisGroupValidators, FudisValidators } from './validators';
 
 describe('Fudis Validators', () => {
@@ -183,7 +182,7 @@ describe('Fudis Validators', () => {
 	describe('Fudis Group Validators', () => {
 		describe('AtLeastOneRequired Validator', () => {
 			let formGroup: FormGroup;
-			const translation = new BehaviorSubject<string>('Choose at least one option');
+			const translation = 'Choose at least one option';
 
 			beforeEach(() => {
 				formGroup = new FormGroup(
@@ -192,12 +191,12 @@ describe('Fudis Validators', () => {
 						cloudberry: new FormControl<boolean | null | undefined>(null),
 						raspberry: new FormControl<boolean | null | undefined>(null),
 					},
-					FudisGroupValidators.atLeastOneRequired(translation)
+					FudisGroupValidators.atLeastOneRequired('Choose at least one option')
 				);
 			});
 
 			it('should return atLeastOneRequired error if FormGroup has atLeastOneRequired validator', () => {
-				expect(formGroup.errors?.['atLeastOneRequired'].message._value).toEqual(translation.value);
+				expect(formGroup.errors?.['atLeastOneRequired']).toEqual({ message: translation });
 				expect(formGroup.valid).toBeFalse();
 			});
 
@@ -211,8 +210,8 @@ describe('Fudis Validators', () => {
 
 		describe('Min Group Validator', () => {
 			let formGroup: FormGroup;
-			const translation = new BehaviorSubject<string>('Choose at least two options');
-			const settings = { value: 2, message: translation };
+
+			const settings = { value: 2, message: 'Choose at least two options' };
 
 			beforeEach(() => {
 				formGroup = new FormGroup(
@@ -226,7 +225,7 @@ describe('Fudis Validators', () => {
 			});
 
 			it('should return min group error if FormGroup has min validator', () => {
-				expect(formGroup.errors?.['min'].message._value).toEqual(translation.value);
+				expect(formGroup.errors?.['min']).toEqual(settings);
 				expect(formGroup.valid).toBeFalse();
 			});
 
@@ -241,8 +240,8 @@ describe('Fudis Validators', () => {
 
 		describe('Max Group Validator', () => {
 			let formGroup: FormGroup;
-			const translation = new BehaviorSubject<string>('Too many options selected');
-			const settings = { value: 3, message: translation };
+
+			const settings = { value: 3, message: 'Too many options selected' };
 
 			beforeEach(() => {
 				formGroup = new FormGroup(
@@ -257,7 +256,7 @@ describe('Fudis Validators', () => {
 			});
 
 			it('should return max group error if FormGroup has max validator', () => {
-				expect(formGroup.errors?.['max'].message._value).toEqual(translation.value);
+				expect(formGroup.errors?.['max']).toEqual(settings);
 				expect(formGroup.valid).toBeFalse();
 			});
 
