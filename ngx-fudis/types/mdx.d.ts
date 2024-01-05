@@ -1,4 +1,5 @@
 declare module '*.mdx' {
-	const MDXComponent: (props: any) => JSX.Element;
-	export default MDXComponent;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const MDXComponent: (props: any) => JSX.Element;
+  export default MDXComponent;
 }
