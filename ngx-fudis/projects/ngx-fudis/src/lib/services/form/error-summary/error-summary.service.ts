@@ -11,9 +11,8 @@ export class FudisErrorSummaryService {
 
 	/**
 	 * Reloads errors from the internal error summary service
-	 * @param delay Optional Number that sets reload delay in milliseconds, defaults to 0ms
 	 */
-	public reloadErrors(delay: number = 0): void {
-		this._errorSummaryService.reloadErrors(delay);
+	public reloadErrors(): void {
+		this._errorSummaryService.reloadErrors();
 	}
 }

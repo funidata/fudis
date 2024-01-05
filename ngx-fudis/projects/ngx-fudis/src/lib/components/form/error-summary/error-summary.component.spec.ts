@@ -1,35 +1,3 @@
-// /* eslint-disable @typescript-eslint/dot-notation */
-// import { ComponentFixture, TestBed } from '@angular/core/testing';
-// import { Component, ElementRef, ViewChild } from '@angular/core';
-// import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-// import { By } from '@angular/platform-browser';
-// import { getElement } from '../../../../../utilities/tests/utilities';
-// import { ErrorSummaryComponent } from './error-summary.component';
-// import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-// import { NotificationComponent } from '../../notification/notification.component';
-// import { FormComponent } from '../form/form.component';
-// import { FudisValidators } from '../../../utilities/form/validators';
-// import { FudisGridService } from '../../../services/grid/grid.service';
-// import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
-// import { GridDirective } from '../../../directives/grid/grid/grid.directive';
-// import { GridComponent } from '../../grid/grid/grid.component';
-// import { HeadingComponent } from '../../typography/heading/heading.component';
-// import { ButtonComponent } from '../../button/button.component';
-// import { TextInputComponent } from '../text-input/text-input.component';
-// import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
-// import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
-// import { FieldSetComponent } from '../fieldset/fieldset.component';
-// import { LabelComponent } from '../label/label.component';
-// import { IconComponent } from '../../icon/icon.component';
-// import { BodyTextComponent } from '../../typography/body-text/body-text.component';
-// import { LinkComponent } from '../../link/link.component';
-// import { GuidanceComponent } from '../guidance/guidance.component';
-// import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
-// import { FudisTranslationService } from '../../../services/translation/translation.service';
-// import { HeaderDirective } from '../../../directives/content-projection/header/header.directive';
-// import { FudisIdService } from '../../../services/id/id.service';
-// import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
-
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -92,8 +60,6 @@ class MockFormComponent {
 	constructor(private _errorSummaryService: FudisErrorSummaryService) {}
 
 	@ViewChild('formRef') formRef: FormComponent;
-
-	// formElement: HTMLFormElement;
 
 	errorSummaryVisible: boolean = false;
 
@@ -161,40 +127,18 @@ describe('ErrorSummaryComponent', () => {
 			wrapperComponent = wrapperFixture.componentInstance;
 
 			wrapperFixture.detectChanges();
-
-			// component.parentComponent = formElement;
-
-			// console.log(formElement.querySelector('.fudis-form')?.getAttribute('id'));
-			// component.helpText = 'There are some test errors. Please look at them!';
-			// fixture.detectChanges();
 		});
 
 		// TODO: Test error summary ul list and its contents
 		fit('should have list of errors', () => {
 			wrapperComponent.reloadErrors();
-			// const errorSummary = wrapperFixture.nativeElement.querySelector('fudis-error-summary');
-
-			// const errorSummaryComponent = wrapperComponent.formRef.errorSummaryRef;
 
 			component.helpText = 'Yes yes';
 			component.parentComponent = wrapperComponent.formRef.formElement as HTMLFormElement;
 
-			// errorSummaryComponent.getErrors();
-
-			// component.getErrors();
-
 			wrapperFixture.detectChanges();
-			// fixture.componentRef.instance.getErrors();
 			fixture.detectChanges();
-
-			// eslint-disable-next-line @typescript-eslint/dot-notation
-			// console.log(component['_errorSummaryService']['_currentErrorList']['fudis-text-input-1'].errors);
-
 			console.log(fixture.nativeElement);
-
-			// component.getErrors();
-			// console.log(errorSummary);
-			// console.log(wrapperFixture.nativeElement);
 		});
 	});
 });

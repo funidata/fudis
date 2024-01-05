@@ -43,11 +43,6 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 	@ContentChild(ContentDirective) mainContent: ContentDirective;
 
 	/**
-	 * Template reference for ErrorSummary
-	 */
-	@ViewChild('errorSummaryRef') errorSummaryRef: ErrorSummaryComponent;
-
-	/**
 	 * Help text displayed in Error Summary before listing individual errors.
 	 */
 	@Input({ required: true }) errorSummaryHelpText: string;
