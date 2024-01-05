@@ -33,12 +33,10 @@
 								[control]="testFormGroup.controls['textInput']"
 								[tooltip]="'This text-input has multiple validators: required, minlength and maxlength'">
 								<fudis-error-message
-									*ngIf="customError"
-									[visible]="testFormGroup.controls['textInput'].touched && customError"
+									*ngIf="testFormGroup.controls['textInput'].touched && customError"
 									[message]="t('form_errors.customErrorMessage')" />
 								<fudis-error-message
-									*ngIf="customError"
-									[visible]="testFormGroup.controls['textInput'].touched && customError"
+									*ngIf="testFormGroup.controls['textInput'].touched && customError"
 									[message]="'Backend threw an error, it is not totally fault of this component'" />
 							</fudis-text-input>
 							<fudis-radio-button-group

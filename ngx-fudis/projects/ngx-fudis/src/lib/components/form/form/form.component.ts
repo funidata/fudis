@@ -7,7 +7,6 @@ import {
 	Input,
 	OnInit,
 	Optional,
-	ViewChild,
 	ViewEncapsulation,
 } from '@angular/core';
 import { FudisHeadingSize, FudisHeadingLevel } from '../../../types/typography';
@@ -19,7 +18,6 @@ import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.dir
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
 import { FudisFormErrorSummaryLink } from '../../../types/forms';
 import { DialogComponent } from '../../dialog/dialog.component';
-import { ErrorSummaryComponent } from '../error-summary/error-summary.component';
 
 @Component({
 	selector: 'fudis-form',
