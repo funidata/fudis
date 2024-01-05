@@ -6,15 +6,15 @@ import { Directive, Input, TemplateRef } from '@angular/core';
 
 @Directive({ selector: '[fudisActions]' })
 export class ActionsDirective {
-	constructor(public templateRef: TemplateRef<unknown>) {}
+  constructor(public templateRef: TemplateRef<unknown>) {}
 
-	/**
-	 * Component type to protect wrong content projection to nested components
-	 */
-	@Input({ required: true }) type: 'fieldset' | 'expandable' | 'form' | 'dd' | 'section';
+  /**
+   * Component type to protect wrong content projection to nested components
+   */
+  @Input({ required: true }) type: 'fieldset' | 'expandable' | 'form' | 'dd' | 'section';
 
-	/**
-	 * Alignment of actions container, used in Fieldset Component
-	 */
-	@Input() align: 'bottom' | 'end' | 'start' = 'start';
+  /**
+   * Alignment of actions container, used in Fieldset Component
+   */
+  @Input() align: 'bottom' | 'end' | 'start' = 'start';
 }
