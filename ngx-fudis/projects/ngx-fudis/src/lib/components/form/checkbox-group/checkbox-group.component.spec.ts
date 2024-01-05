@@ -102,26 +102,26 @@ describe('CheckboxGroupComponent', () => {
 		});
 
 		it('should have correct title as legend', () => {
-			const legendTitle: string = fixture.nativeElement.querySelector('.fudis-fieldset__legend__title__text').innerText;
+			const legendTitle = fixture.nativeElement.querySelector('.fudis-fieldset__legend__title__text') as HTMLElement;
 
-			expect(legendTitle).toEqual('CHECKBOX GROUP TEST TITLE');
+			expect(legendTitle.textContent).toContain('Checkbox Group test title');
 		});
 
 		it('should have correct helptext in the guidance', () => {
-			const helpText: string = fixture.nativeElement.querySelector('.fudis-guidance__help-text').innerText;
+			const helpText = fixture.nativeElement.querySelector('.fudis-guidance__help-text') as HTMLElement;
 
-			expect(helpText).toEqual('Some help text');
+			expect(helpText.textContent).toContain('Some help text');
 		});
 
 		it('should display required text', () => {
 			component.required = true;
 			fixture.detectChanges();
 
-			const requiredText: string = fixture.nativeElement.querySelector(
+			const requiredText = fixture.nativeElement.querySelector(
 				'.fudis-fieldset__legend__title__text__required'
-			).innerText;
+			) as HTMLElement;
 
-			expect(requiredText).toEqual('(Required)');
+			expect(requiredText.textContent).toContain('(Required)');
 		});
 	});
 
@@ -159,11 +159,11 @@ describe('CheckboxGroupComponent', () => {
 				'fudis-checkbox input[aria-invalid="true"]'
 			);
 
-			const errorMessage: string = fixture.nativeElement.querySelector('fudis-guidance .fudis-error-message').innerText;
+			const errorMessage = fixture.nativeElement.querySelector('fudis-guidance .fudis-error-message') as HTMLElement;
 
 			expect(invalidInputs.length).toEqual(5);
 			expect(invalidStyledCheckboxes.length).toEqual(5);
-			expect(errorMessage).toEqual('Too few selected');
+			expect(errorMessage.textContent).toContain('Too few selected');
 		});
 
 		it('should remove invalid state when checking one checkbox more', () => {
@@ -213,11 +213,11 @@ describe('CheckboxGroupComponent', () => {
 				'fudis-checkbox input[aria-invalid="true"]'
 			);
 
-			const errorMessage = fixture.nativeElement.querySelector('fudis-guidance .fudis-error-message').innerText;
+			const errorMessage = fixture.nativeElement.querySelector('fudis-guidance .fudis-error-message') as HTMLElement;
 
 			expect(invalidInputs.length).toEqual(5);
 			expect(invalidStyledCheckboxes.length).toEqual(5);
-			expect(errorMessage).toEqual('Too many selected');
+			expect(errorMessage.textContent).toContain('Too many selected');
 		});
 	});
 });

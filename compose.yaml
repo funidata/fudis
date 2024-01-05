@@ -1,10 +1,25 @@
 services:
-  fudis:
-    build: ./ngx-fudis/
-    container_name: fudis
+  fudis-storybook:
+    build:
+      context: ./ngx-fudis/
+      target: dev
+    image: fudis
+    container_name: fudis-storybook
     tty: true
     ports:
       - 6006:6006
+    environment:
+      - STORYBOOK_FUDIS_VERSION=${BRANCH_NAME}
     volumes:
       - ./ngx-fudis/projects/ngx-fudis/src:/usr/src/app/projects/ngx-fudis/src
       - ./ngx-fudis/projects/documentation:/usr/src/app/projects/documentation
+
+  fudis-sandbox:
+    image: fudis
+    container_name: fudis-sandbox
+    command: npm start
+    tty: true
+    ports:
+      - 4200:4200
+    volumes:
+      - ./ngx-fudis/projects/dev/src:/usr/src/app/projects/dev/src

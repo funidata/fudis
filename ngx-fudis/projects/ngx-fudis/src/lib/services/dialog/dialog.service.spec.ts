@@ -87,7 +87,7 @@ describe('DialogService', () => {
 	});
 
 	it('should open fudis-dialog', () => {
-		const openDialogSpy = spyOn(service, 'open');
+		const openDialogSpy = jest.spyOn(service, 'open');
 		component.openTestDialog();
 
 		expect(openDialogSpy).toHaveBeenCalledWith(DialogTestContentComponent);
@@ -97,7 +97,7 @@ describe('DialogService', () => {
 		dialogContentFixture = TestBed.createComponent(DialogTestContentComponent);
 		dialogContentComponent = dialogContentFixture.componentInstance;
 
-		const closeDialogSpy = spyOn(service.ngMaterialDialog, 'closeAll');
+		const closeDialogSpy = jest.spyOn(service.ngMaterialDialog, 'closeAll');
 		dialogContentComponent.closeTestDialog();
 
 		expect(closeDialogSpy).toHaveBeenCalledWith();

@@ -57,7 +57,7 @@ describe('AutocompleteMultiSelectComponent', () => {
 		it('options should be assigned to internal _results property', () => {
 			component.ngOnInit();
 			// eslint-disable-next-line @typescript-eslint/dot-notation
-			expect(component['_results']).toEqual(jasmine.objectContaining(component.options));
+			expect(component['_results']).toEqual(expect.objectContaining(component.options));
 		});
 	});
 
@@ -65,7 +65,8 @@ describe('AutocompleteMultiSelectComponent', () => {
 		it('should select an option', () => {
 			component.setItemSelection(multiSelectOptions[1]);
 
-			expect(component.selectedOptions).toEqual(jasmine.arrayWithExactContents(multiSelectOptions));
+			expect(component.selectedOptions).toEqual(expect.arrayContaining(multiSelectOptions));
+			expect(component.selectedOptions).toHaveLength(multiSelectOptions.length);
 		});
 
 		it('should remove an option', () => {

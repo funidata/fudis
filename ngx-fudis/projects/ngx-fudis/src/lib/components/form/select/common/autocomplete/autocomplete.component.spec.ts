@@ -1,21 +1,30 @@
-// import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { SelectAutocompleteComponent } from './autocomplete.component';
+import { SelectAutocompleteComponent } from './autocomplete.component';
+import { FormControl } from '@angular/forms';
+import { ButtonComponent } from '../../../../button/button.component';
+import { IconComponent } from '../../../../icon/icon.component';
 
-// describe('AutocompleteComponent', () => {
-// 	let component: SelectAutocompleteComponent;
-// 	let fixture: ComponentFixture<SelectAutocompleteComponent>;
+describe('AutocompleteComponent', () => {
+  let component: SelectAutocompleteComponent;
+  let fixture: ComponentFixture<SelectAutocompleteComponent>;
 
-// 	beforeEach(() => {
-// 		TestBed.configureTestingModule({
-// 			declarations: [SelectAutocompleteComponent],
-// 		});
-// 		fixture = TestBed.createComponent(SelectAutocompleteComponent);
-// 		component = fixture.componentInstance;
-// 		fixture.detectChanges();
-// 	});
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [SelectAutocompleteComponent, ButtonComponent, IconComponent],
+    });
+    fixture = TestBed.createComponent(SelectAutocompleteComponent);
+    component = fixture.componentInstance;
 
-// 	it('should create', () => {
-// 		expect(component).toBeTruthy();
-// 	});
-// });
+    component.control = new FormControl(null);
+    component.required = true;
+    component.dropdownOpen = false;
+
+    fixture.detectChanges();
+  });
+
+  // TODO: create tests
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
