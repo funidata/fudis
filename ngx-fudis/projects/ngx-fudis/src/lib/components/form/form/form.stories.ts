@@ -65,10 +65,7 @@ import readme from './readme.mdx';
 													[helpText]="'Some name would be nice. Provide course name in at least one language.'"
 													[groupErrorMsg]="errorName">
 													<fudis-error-message
-														[visible]="
-															formExample.controls['importantDate'].touched &&
-															formExample.controls['importantDate'].value?.getTime() !== releaseDate
-														"
+														*ngIf="formExample.controls['importantDate'].value?.getTime() !== releaseDate"
 														[message]="'Reminder here as well, that you have not set a good start date'" />
 												</fudis-input-with-language-options>
 												<fudis-input-with-language-options
@@ -104,7 +101,7 @@ import readme from './readme.mdx';
 													[errorMsg]="errorImportantDate"
 													[control]="formExample.controls['importantDate']">
 													<fudis-error-message
-														[visible]="formExample.controls['importantDate'].value?.getTime() !== releaseDate"
+														*ngIf="formExample.controls['importantDate'].value?.getTime() !== releaseDate"
 														[message]="'Wrong date chosen. 1.5.1991 would be great!'" />
 												</fudis-datepicker>
 											</fudis-grid>
@@ -258,12 +255,12 @@ class FormContentExampleComponent implements OnInit {
 
 	submitForm(): void {
 		this.formExample.markAllAsTouched();
+		this.errorSummaryVisible = true;
 
 		this.firstLoad = false;
 
 		if (this.formExample.invalid) {
 			this._closed = false;
-			this.errorSummaryVisible = true;
 			this._errorSummaryService.reloadErrors();
 		} else {
 			this.errorSummaryVisible = false;

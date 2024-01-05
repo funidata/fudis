@@ -117,28 +117,26 @@ describe('ErrorSummaryComponent', () => {
 			],
 			imports: [ReactiveFormsModule, RouterModule.forRoot([])],
 		}).compileComponents();
+
+		fixture = TestBed.createComponent(ErrorSummaryComponent);
+		component = fixture.componentInstance;
+		wrapperFixture = TestBed.createComponent(MockFormComponent);
+		wrapperComponent = wrapperFixture.componentInstance;
+		wrapperFixture.detectChanges();
+		wrapperComponent.reloadErrors();
 	});
 
 	describe('Contents', () => {
-		beforeEach(() => {
-			fixture = TestBed.createComponent(ErrorSummaryComponent);
-			component = fixture.componentInstance;
-			wrapperFixture = TestBed.createComponent(MockFormComponent);
-			wrapperComponent = wrapperFixture.componentInstance;
-
-			wrapperFixture.detectChanges();
-		});
-
 		// TODO: Test error summary ul list and its contents
-		fit('should have list of errors', () => {
-			wrapperComponent.reloadErrors();
+		fit('input attributes', () => {
+			const helpText = 'Errors belong in a museum';
 
-			component.helpText = 'Yes yes';
+			component.helpText = helpText;
 			component.parentComponent = wrapperComponent.formRef.formElement as HTMLFormElement;
 
-			wrapperFixture.detectChanges();
 			fixture.detectChanges();
-			console.log(fixture.nativeElement);
+
+			// console.log(fixture.nativeElement);
 		});
 	});
 });

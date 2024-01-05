@@ -43,6 +43,25 @@ export class FudisInternalErrorSummaryService {
 	private _currentSections: FudisFormErrorSummarySection[] = [];
 
 	/**
+	 * Info to Error Summary Component if it should move user focus to updated list or not
+	 */
+	private _focusToSummaryList: boolean = false;
+
+	/**
+	 * Getter for _focusToSummaryList
+	 */
+	get focusToSummaryList(): boolean {
+		return this._focusToSummaryList;
+	}
+
+	/**
+	 * Setter for _focusToSummaryList
+	 */
+	set focusToSummaryList(value: boolean) {
+		this._focusToSummaryList = value;
+	}
+
+	/**
 	 * Returns a list of current fieldsets
 	 */
 	getFieldsetList(): FudisFormErrorSummarySection[] {
@@ -114,6 +133,7 @@ export class FudisInternalErrorSummaryService {
 		this._currentErrorList = currentErrors;
 
 		if (langUpdated) {
+			this._focusToSummaryList = false;
 			this.reloadErrors();
 		}
 	}

@@ -33,9 +33,9 @@ This requires the use of selector `fudis-error-message`. Both Error Message and 
 
 ### Mandatory Properties
 
-The mandatory properties for Error Message are `message` and `visible`. 
+The mandatory property for Error Message is `message`. Visibility of the error is handle by Angular `*ngIf` directive.
 
-When `visible` is true, it will adjust the parent's form control by binding a custom validator to it. This will trigger creation of `FudisValidatorErrorMessage` instance, which also sends error data to the Error Summary. If `visible` is set to false again, this will remove the added validator and also remove error from Error Summary.
+When `*ngIf` is true, it will adjust the parent's form control by binding a custom validator to it. This will trigger creation of `FudisValidatorErrorMessage` instance, which also sends error data to the Error Summary. If `*ngIf` is set to false again, this will remove the added validator and also remove error from Error Summary.
 
 Message parameter can be passed either as a string or as an observable string.
 
@@ -44,8 +44,9 @@ Message parameter can be passed either as a string or as an observable string.
 	[control]="control"
 	[label]="'Required text input'">
 	<fudis-error-message
+		*ngIf="errorExistsCondition"
 		[message]="'This is a custom error message has been added with content projection'"
-		[visible]="errorExists" />
+		 />
 </fudis-text-input>
 ````
 ### Error Message with Date Range Component
@@ -55,10 +56,10 @@ When it is mandatory to target error message to a single Form Control in Date Ra
 `````
 <fudis-date-range [startDate]="startDate" [endDate]="endDate">
 	<ng-template fudisDateStartError>
-		<fudis-error-message [message]="'Error on the start date'" [visible]="startDateErrorCondition" />
+		<fudis-error-message [message]="'Error on the start date'" *ngIf="startDateErrorCondition" />
 	</ng-template>
 	<ng-template fudisDateEndError>
-		<fudis-error-message [message]="'Error on the end date'" [visible]="endDateErrorCondition" />
+		<fudis-error-message [message]="'Error on the end date'" *ngIf="endDateErrorCondition" />
 	</ng-template>
 </fudis-date-range>
 `````

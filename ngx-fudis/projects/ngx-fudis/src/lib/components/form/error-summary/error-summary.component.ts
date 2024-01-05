@@ -1,4 +1,5 @@
 import {
+	AfterViewInit,
 	ChangeDetectorRef,
 	Component,
 	ElementRef,
@@ -22,14 +23,14 @@ import {
 	FudisErrorSummaryParent,
 } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FudisLanguageAbbr, FudisTranslationConfig } from '../../../types/miscellaneous';
+import { FudisTranslationConfig } from '../../../types/miscellaneous';
 
 @Component({
 	selector: 'fudis-error-summary',
 	templateUrl: './error-summary.component.html',
 	styleUrls: ['./error-summary.component.scss'],
 })
-export class ErrorSummaryComponent implements OnChanges, OnDestroy {
+export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestroy {
 	constructor(
 		@Inject(DOCUMENT) private _document: Document,
 		private _errorSummaryService: FudisInternalErrorSummaryService,
@@ -38,8 +39,6 @@ export class ErrorSummaryComponent implements OnChanges, OnDestroy {
 	) {
 		effect(() => {
 			this._translations = this._translationService.getTranslations();
-
-			this._previousLanguage = this._currentLanguage;
 
 			this._attentionText = this._translations().ICON.ATTENTION;
 
@@ -83,16 +82,6 @@ export class ErrorSummaryComponent implements OnChanges, OnDestroy {
 	 * Visible errors
 	 */
 	protected _visibleErrorList: FudisFormErrorSummaryList[] = [];
-
-	/**
-	 * Application language toggle property
-	 */
-	private _previousLanguage: FudisLanguageAbbr | undefined = undefined;
-
-	/**
-	 * Application language toggle property
-	 */
-	private _currentLanguage: FudisLanguageAbbr | undefined = undefined;
 
 	/**
 	 * Parent form of this Error Summary
@@ -150,12 +139,7 @@ export class ErrorSummaryComponent implements OnChanges, OnDestroy {
 
 		this._changeDetectorRef.detectChanges();
 
-		this._currentLanguage = this._translationService.getLanguage();
-
-		if (
-			this._document.activeElement?.classList.contains('fudis-button') &&
-			this._previousLanguage === this._currentLanguage
-		) {
+		if (this._errorSummaryService.focusToSummaryList) {
 			this.focusToErrorSummary();
 		}
 	}
@@ -170,6 +154,12 @@ export class ErrorSummaryComponent implements OnChanges, OnDestroy {
 				this.focusToErrorSummary();
 			}, 100);
 		}
+	}
+
+	ngAfterViewInit(): void {
+		setTimeout(() => {
+			this._errorSummaryService.reloadErrors();
+		}, 200);
 	}
 
 	ngOnChanges(): void {

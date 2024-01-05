@@ -195,8 +195,6 @@ export class AppComponent implements OnInit {
 			this._translocoService.setActiveLang('en');
 			this._fudisLanguage.setLanguage('en');
 		}
-
-		this._errorSummaryService.reloadErrors();
 	}
 
 	openDialog(): void {
