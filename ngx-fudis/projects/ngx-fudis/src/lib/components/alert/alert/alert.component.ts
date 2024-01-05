@@ -27,7 +27,8 @@ export class AlertComponent {
   /**
    * Visible message
    */
-  @Input({ required: true }) message: any;
+  // TODO: add observable message
+  @Input({ required: true }) message: string;
 
   /**
    * Id to be set on the whole alert element
