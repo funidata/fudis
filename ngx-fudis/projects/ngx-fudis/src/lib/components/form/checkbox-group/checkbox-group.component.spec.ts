@@ -9,7 +9,7 @@ import { CheckboxGroupComponent } from './checkbox-group.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { FudisCheckboxGroupFormGroup } from '../../../types/forms';
-import { FudisGroupValidators } from '../../../utilities/form/validators';
+import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisGridService } from '../../../services/grid/grid.service';
 import { GridComponent } from '../../grid/grid/grid.component';
@@ -21,203 +21,222 @@ import { GuidanceComponent } from '../guidance/guidance.component';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 
 const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
-	{
-		apple: new FormControl<boolean | null | undefined>(null),
-		fairTradeBanana: new FormControl<boolean | null | undefined>(null),
-		pear: new FormControl<boolean | null | undefined>(null),
-		pineapple: new FormControl<boolean | null | undefined>(null),
-		orange: new FormControl<boolean | null | undefined>(null),
-	},
-	[FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))]
+  {
+    apple: new FormControl<boolean | null | undefined>(null),
+    fairTradeBanana: new FormControl<boolean | null | undefined>(null),
+    pear: new FormControl<boolean | null | undefined>(null),
+    pineapple: new FormControl<boolean | null | undefined>(null),
+    orange: new FormControl<boolean | null | undefined>(null),
+  },
+  [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))],
 );
 
 @Component({
-	selector: 'fudis-mock-component',
-	template: `<fudis-checkbox-group
-		[formGroup]="testFromGroup"
-		[title]="'Choose minimum of one fruit'"
-		[required]="true">
-		<p class="do-not-find-me">This should not be shown</p>
-		<fudis-checkbox *ngFor="let option of options" [controlName]="option.controlName" [label]="option.label" />
-	</fudis-checkbox-group>`,
+  selector: 'fudis-mock-component',
+  template: `<fudis-checkbox-group
+    [formGroup]="testFromGroup"
+    [title]="'Choose minimum of one fruit'"
+    [required]="true"
+  >
+    <p class="do-not-find-me">This should not be shown</p>
+    <fudis-checkbox
+      *ngFor="let option of options"
+      [controlName]="option.controlName"
+      [label]="option.label"
+    />
+  </fudis-checkbox-group>`,
 })
 class MockContainerComponent {
-	public testFromGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
-		{
-			apple: new FormControl<boolean | null | undefined>(null),
-			fairTradeBanana: new FormControl<boolean | null | undefined>(false),
-			orange: new FormControl<boolean | null | undefined>(undefined),
-			pear: new FormControl<boolean | null | undefined>(true),
-			pineapple: new FormControl<boolean | null | undefined>({ value: false, disabled: true }),
-		},
-		[
-			FudisGroupValidators.min({ value: 2, message: new BehaviorSubject('Too few selected') }),
-			FudisGroupValidators.max({ value: 3, message: new BehaviorSubject('Too many selected') }),
-		]
-	);
+  public testFromGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+    {
+      apple: new FormControl<boolean | null | undefined>(null),
+      fairTradeBanana: new FormControl<boolean | null | undefined>(false),
+      orange: new FormControl<boolean | null | undefined>(undefined),
+      pear: new FormControl<boolean | null | undefined>(true),
+      pineapple: new FormControl<boolean | null | undefined>({ value: false, disabled: true }),
+    },
+    [
+      FudisGroupValidators.min({ value: 2, message: new BehaviorSubject('Too few selected') }),
+      FudisGroupValidators.max({ value: 3, message: new BehaviorSubject('Too many selected') }),
+    ],
+  );
 
-	public options = [
-		{ controlName: 'apple', label: 'Apple' },
-		{ controlName: 'fairTradeBanana', label: 'Fair trade banana' },
-		{ controlName: 'pear', label: 'Pear' },
-		{ controlName: 'pineapple', label: 'Pineapple' },
-		{ controlName: 'orange', label: 'Orange' },
-	];
+  public options = [
+    { controlName: 'apple', label: 'Apple' },
+    { controlName: 'fairTradeBanana', label: 'Fair trade banana' },
+    { controlName: 'pear', label: 'Pear' },
+    { controlName: 'pineapple', label: 'Pineapple' },
+    { controlName: 'orange', label: 'Orange' },
+  ];
 }
 
 describe('CheckboxGroupComponent', () => {
-	let component: CheckboxGroupComponent;
+  let component: CheckboxGroupComponent;
 
-	let fixture: ComponentFixture<CheckboxGroupComponent> | ComponentFixture<MockContainerComponent>;
+  let fixture: ComponentFixture<CheckboxGroupComponent> | ComponentFixture<MockContainerComponent>;
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			declarations: [
-				CheckboxComponent,
-				MockContainerComponent,
-				CheckboxGroupComponent,
-				FieldSetComponent,
-				GridComponent,
-				GridApiDirective,
-				GridDirective,
-				ContentDirective,
-				GuidanceComponent,
-				IconComponent,
-				ValidatorErrorMessageComponent,
-			],
-			providers: [FudisBreakpointService, FudisGridService],
-			imports: [ReactiveFormsModule],
-		}).compileComponents();
-	});
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [
+        CheckboxComponent,
+        MockContainerComponent,
+        CheckboxGroupComponent,
+        FieldSetComponent,
+        GridComponent,
+        GridApiDirective,
+        GridDirective,
+        ContentDirective,
+        GuidanceComponent,
+        IconComponent,
+        ValidatorErrorMessageComponent,
+      ],
+      providers: [FudisBreakpointService, FudisGridService],
+      imports: [ReactiveFormsModule],
+    }).compileComponents();
+  });
 
-	describe('Basic inputs', () => {
-		beforeEach(() => {
-			fixture = TestBed.createComponent(CheckboxGroupComponent);
-			component = fixture.componentInstance;
-			component.formGroup = testFormGroup;
-			component.title = 'Checkbox Group test title';
-			component.helpText = 'Some help text';
+  describe('Basic inputs', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(CheckboxGroupComponent);
+      component = fixture.componentInstance;
+      component.formGroup = testFormGroup;
+      component.title = 'Checkbox Group test title';
+      component.helpText = 'Some help text';
 
-			fixture.detectChanges();
-		});
+      fixture.detectChanges();
+    });
 
-		it('should have correct title as legend', () => {
-			const legendTitle = fixture.nativeElement.querySelector('.fudis-fieldset__legend__title__text') as HTMLElement;
+    it('should have correct title as legend', () => {
+      const legendTitle = fixture.nativeElement.querySelector(
+        '.fudis-fieldset__legend__title__text',
+      ) as HTMLElement;
 
-			expect(legendTitle.textContent).toContain('Checkbox Group test title');
-		});
+      expect(legendTitle.textContent).toContain('Checkbox Group test title');
+    });
 
-		it('should have correct helptext in the guidance', () => {
-			const helpText = fixture.nativeElement.querySelector('.fudis-guidance__help-text') as HTMLElement;
+    it('should have correct helptext in the guidance', () => {
+      const helpText = fixture.nativeElement.querySelector(
+        '.fudis-guidance__help-text',
+      ) as HTMLElement;
 
-			expect(helpText.textContent).toContain('Some help text');
-		});
+      expect(helpText.textContent).toContain('Some help text');
+    });
 
-		it('should display required text', () => {
-			component.required = true;
-			fixture.detectChanges();
+    it('should display required text', () => {
+      component.required = true;
+      fixture.detectChanges();
 
-			const requiredText = fixture.nativeElement.querySelector(
-				'.fudis-fieldset__legend__title__text__required'
-			) as HTMLElement;
+      const requiredText = fixture.nativeElement.querySelector(
+        '.fudis-fieldset__legend__title__text__required',
+      ) as HTMLElement;
 
-			expect(requiredText.textContent).toContain('(Required)');
-		});
-	});
+      expect(requiredText.textContent).toContain('(Required)');
+    });
+  });
 
-	describe('Child checkboxes', () => {
-		let mockComponent: MockContainerComponent;
+  describe('Child checkboxes', () => {
+    let mockComponent: MockContainerComponent;
 
-		beforeEach(() => {
-			fixture = TestBed.createComponent(MockContainerComponent);
-			mockComponent = fixture.componentInstance;
-			fixture.detectChanges();
-		});
+    beforeEach(() => {
+      fixture = TestBed.createComponent(MockContainerComponent);
+      mockComponent = fixture.componentInstance;
+      fixture.detectChanges();
+    });
 
-		it('should not render p-tag', () => {
-			const element = fixture.nativeElement.querySelector('.do-not-find-me');
+    it('should not render p-tag', () => {
+      const element = fixture.nativeElement.querySelector('.do-not-find-me');
 
-			expect(element).toBeNull();
-		});
+      expect(element).toBeNull();
+    });
 
-		it('should have correct amount of child components', () => {
-			const element: NodeList = fixture.nativeElement.querySelectorAll('fudis-checkbox');
+    it('should have correct amount of child components', () => {
+      const element: NodeList = fixture.nativeElement.querySelectorAll('fudis-checkbox');
 
-			expect(element.length).toEqual(5);
-		});
+      expect(element.length).toEqual(5);
+    });
 
-		it('should have invalid styled child elements with invalid state, when form group is touched and should display errors', () => {
-			mockComponent.testFromGroup.markAllAsTouched();
+    it('should have invalid styled child elements with invalid state, when form group is touched and should display errors', () => {
+      mockComponent.testFromGroup.markAllAsTouched();
 
-			fixture.detectChanges();
+      fixture.detectChanges();
 
-			const invalidStyledCheckboxes: NodeList = fixture.nativeElement.querySelectorAll(
-				'fudis-checkbox .fudis-checkbox__content__box--invalid'
-			);
+      const invalidStyledCheckboxes: NodeList = fixture.nativeElement.querySelectorAll(
+        'fudis-checkbox .fudis-checkbox__content__box--invalid',
+      );
 
-			const invalidInputs: NodeList = fixture.nativeElement.querySelectorAll(
-				'fudis-checkbox input[aria-invalid="true"]'
-			);
+      const invalidInputs: NodeList = fixture.nativeElement.querySelectorAll(
+        'fudis-checkbox input[aria-invalid="true"]',
+      );
 
-			const errorMessage = fixture.nativeElement.querySelector('fudis-guidance .fudis-error-message') as HTMLElement;
+      const errorMessage = fixture.nativeElement.querySelector(
+        'fudis-guidance .fudis-error-message',
+      ) as HTMLElement;
 
-			expect(invalidInputs.length).toEqual(5);
-			expect(invalidStyledCheckboxes.length).toEqual(5);
-			expect(errorMessage.textContent).toContain('Too few selected');
-		});
+      expect(invalidInputs.length).toEqual(5);
+      expect(invalidStyledCheckboxes.length).toEqual(5);
+      expect(errorMessage.textContent).toContain('Too few selected');
+    });
 
-		it('should remove invalid state when checking one checkbox more', () => {
-			mockComponent.testFromGroup.markAllAsTouched();
+    it('should remove invalid state when checking one checkbox more', () => {
+      mockComponent.testFromGroup.markAllAsTouched();
 
-			fixture.detectChanges();
+      fixture.detectChanges();
 
-			const checkbox = fixture.nativeElement.querySelector('fudis-checkbox');
+      const checkbox = fixture.nativeElement.querySelector('fudis-checkbox');
 
-			checkbox.querySelector('input').click();
+      checkbox.querySelector('input').click();
 
-			fixture.detectChanges();
+      fixture.detectChanges();
 
-			const invalidStyledCheckboxes: NodeList = fixture.nativeElement.querySelectorAll(
-				'fudis-checkbox .fudis-checkbox__content__box--invalid'
-			);
+      const invalidStyledCheckboxes: NodeList = fixture.nativeElement.querySelectorAll(
+        'fudis-checkbox .fudis-checkbox__content__box--invalid',
+      );
 
-			const invalidInputs: NodeList = fixture.nativeElement.querySelectorAll(
-				'fudis-checkbox input[aria-invalid="true"]'
-			);
+      const invalidInputs: NodeList = fixture.nativeElement.querySelectorAll(
+        'fudis-checkbox input[aria-invalid="true"]',
+      );
 
-			const errorMessage = fixture.nativeElement.querySelector('fudis-guidance .fudis-error-message');
+      const errorMessage = fixture.nativeElement.querySelector(
+        'fudis-guidance .fudis-error-message',
+      );
 
-			expect(invalidInputs.length).toEqual(0);
-			expect(invalidStyledCheckboxes.length).toEqual(0);
-			expect(errorMessage).toBeNull();
-		});
+      expect(invalidInputs.length).toEqual(0);
+      expect(invalidStyledCheckboxes.length).toEqual(0);
+      expect(errorMessage).toBeNull();
+    });
 
-		it('should display error, when too many selected', () => {
-			mockComponent.testFromGroup.markAllAsTouched();
-			const appleInput = fixture.nativeElement.querySelector('fudis-checkbox[ng-reflect-control-name="apple"] input');
-			const bananaInput = fixture.nativeElement.querySelector(
-				'fudis-checkbox[ng-reflect-control-name="fairTradeBanana"] input'
-			);
-			const orangeInput = fixture.nativeElement.querySelector('fudis-checkbox[ng-reflect-control-name="orange"] input');
+    it('should display error, when too many selected', () => {
+      mockComponent.testFromGroup.markAllAsTouched();
+      const appleInput = fixture.nativeElement.querySelector(
+        'fudis-checkbox[ng-reflect-control-name="apple"] input',
+      );
+      const bananaInput = fixture.nativeElement.querySelector(
+        'fudis-checkbox[ng-reflect-control-name="fairTradeBanana"] input',
+      );
+      const orangeInput = fixture.nativeElement.querySelector(
+        'fudis-checkbox[ng-reflect-control-name="orange"] input',
+      );
 
-			appleInput.click();
-			bananaInput.click();
-			orangeInput.click();
-			fixture.detectChanges();
+      appleInput.click();
+      bananaInput.click();
+      orangeInput.click();
+      fixture.detectChanges();
 
-			const invalidStyledCheckboxes: NodeList = fixture.nativeElement.querySelectorAll(
-				'fudis-checkbox .fudis-checkbox__content__box--invalid'
-			);
+      const invalidStyledCheckboxes: NodeList = fixture.nativeElement.querySelectorAll(
+        'fudis-checkbox .fudis-checkbox__content__box--invalid',
+      );
 
-			const invalidInputs: NodeList = fixture.nativeElement.querySelectorAll(
-				'fudis-checkbox input[aria-invalid="true"]'
-			);
+      const invalidInputs: NodeList = fixture.nativeElement.querySelectorAll(
+        'fudis-checkbox input[aria-invalid="true"]',
+      );
 
-			const errorMessage = fixture.nativeElement.querySelector('fudis-guidance .fudis-error-message') as HTMLElement;
+      const errorMessage = fixture.nativeElement.querySelector(
+        'fudis-guidance .fudis-error-message',
+      ) as HTMLElement;
 
-			expect(invalidInputs.length).toEqual(5);
-			expect(invalidStyledCheckboxes.length).toEqual(5);
-			expect(errorMessage.textContent).toContain('Too many selected');
-		});
-	});
+      expect(invalidInputs.length).toEqual(5);
+      expect(invalidStyledCheckboxes.length).toEqual(5);
+      expect(errorMessage.textContent).toContain('Too many selected');
+    });
+  });
 });

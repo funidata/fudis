@@ -1,26 +1,24 @@
+import { Observable } from 'rxjs';
+import { FudisValidationErrors, FudisValidatorFn, FudisValidatorMessage } from './validators';
+import { AbstractControl, FormGroup } from '@angular/forms';
+
+export interface FudisGroupValidatorsMinMaxSettings {
+  value: number;
+  message: Observable<string> | string;
+}
+
 /**
- * Form Group Validators for Checkbox Group and Input With Language Options
+ * Form Group Validators
  */
-
-import {
-  FudisGroupValidatorsMinMaxSettings,
-  FudisValidationErrors,
-  FudisValidatorFn,
-  FudisValidatorMessage,
-} from './validators';
-
 export const FudisGroupValidators = {
   atLeastOneRequired,
   min,
   max,
 };
 
-/**
- * NOTE: Input has to be set as required when using this validator
- */
-export function atLeastOneRequired(message: FudisValidatorMessage): FudisValidatorFn {
-  return (controlGroup: any): FudisValidationErrors | null => {
-    const { controls } = controlGroup;
+function atLeastOneRequired(message: FudisValidatorMessage): FudisValidatorFn {
+  return (controlGroup: AbstractControl): FudisValidationErrors | null => {
+    const { controls } = controlGroup as FormGroup;
 
     if (controls) {
       const theOne = Object.keys(controls).find(
@@ -40,13 +38,12 @@ export function atLeastOneRequired(message: FudisValidatorMessage): FudisValidat
     return null;
   };
 }
-
 /**
  * Minimum selected options of a group
  */
-export function min(settings: FudisGroupValidatorsMinMaxSettings): FudisValidatorFn {
-  return (controlGroup: any): FudisValidationErrors | null => {
-    const { controls } = controlGroup;
+function min(settings: FudisGroupValidatorsMinMaxSettings): FudisValidatorFn {
+  return (controlGroup: AbstractControl): FudisValidationErrors | null => {
+    const { controls } = controlGroup as FormGroup;
     let amountOfSelected = 0;
 
     if (controls) {
@@ -69,9 +66,9 @@ export function min(settings: FudisGroupValidatorsMinMaxSettings): FudisValidato
 /**
  * Maximum selected options of a group
  */
-export function max(settings: FudisGroupValidatorsMinMaxSettings): FudisValidatorFn {
-  return (controlGroup: any): FudisValidationErrors | null => {
-    const { controls } = controlGroup;
+function max(settings: FudisGroupValidatorsMinMaxSettings): FudisValidatorFn {
+  return (controlGroup: AbstractControl): FudisValidationErrors | null => {
+    const { controls } = controlGroup as FormGroup;
     let amountOfSelected = 0;
 
     if (controls) {

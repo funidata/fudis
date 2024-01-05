@@ -7,11 +7,6 @@ export interface FudisValidationErrors extends ValidationErrors {
   [key: string]: { message: FudisValidatorMessage; value?: unknown } | null;
 }
 
-export interface FudisGroupValidatorsMinMaxSettings {
-  value: number;
-  message: FudisValidatorMessage;
-}
-
 export interface FudisValidatorFn extends ValidatorFn {
   (control: AbstractControl): FudisValidationErrors | null;
 }
@@ -33,7 +28,7 @@ export const FudisValidators = {
 /**
  * Fudis version of Validators.required
  */
-export function required(message: FudisValidatorMessage): FudisValidatorFn {
+function required(message: FudisValidatorMessage): FudisValidatorFn {
   return (control: AbstractControl) => {
     if (!Validators.required(control)) {
       return null;
@@ -45,7 +40,7 @@ export function required(message: FudisValidatorMessage): FudisValidatorFn {
 /**
  * Fudis version of Validators.email
  */
-export function email(message: FudisValidatorMessage): FudisValidatorFn {
+function email(message: FudisValidatorMessage): FudisValidatorFn {
   return (control: AbstractControl) => {
     if (!Validators.email(control)) {
       return null;
@@ -57,7 +52,7 @@ export function email(message: FudisValidatorMessage): FudisValidatorFn {
 /**
  * Fudis version of Validators.maxLength
  */
-export function maxLength(length: number, message: FudisValidatorMessage): FudisValidatorFn {
+function maxLength(length: number, message: FudisValidatorMessage): FudisValidatorFn {
   return (control: AbstractControl) => {
     if (!Validators.maxLength(length)(control) || length < 1) {
       return null;
@@ -69,7 +64,7 @@ export function maxLength(length: number, message: FudisValidatorMessage): Fudis
 /**
  * Fudis version of Validators.minLength
  */
-export function minLength(length: number, message: FudisValidatorMessage): FudisValidatorFn {
+function minLength(length: number, message: FudisValidatorMessage): FudisValidatorFn {
   return (control: AbstractControl) => {
     if (!Validators.minLength(length)(control) || length < 1) {
       return null;
@@ -86,7 +81,7 @@ export function minLength(length: number, message: FudisValidatorMessage): Fudis
 /**
  * Fudis version of Validators.min
  */
-export function min(minValue: number, message: FudisValidatorMessage): FudisValidatorFn {
+function min(minValue: number, message: FudisValidatorMessage): FudisValidatorFn {
   return (control: AbstractControl) => {
     if (!Validators.min(minValue)(control)) {
       return null;
@@ -103,7 +98,7 @@ export function min(minValue: number, message: FudisValidatorMessage): FudisVali
 /**
  * Fudis version of Validators.max
  */
-export function max(maxValue: number, message: FudisValidatorMessage): FudisValidatorFn {
+function max(maxValue: number, message: FudisValidatorMessage): FudisValidatorFn {
   return (control: AbstractControl) => {
     if (!Validators.max(maxValue)(control)) {
       return null;
@@ -120,7 +115,7 @@ export function max(maxValue: number, message: FudisValidatorMessage): FudisVali
 /**
  * Fudis version of Validators.pattern
  */
-export function pattern(regex: string | RegExp, message: FudisValidatorMessage): FudisValidatorFn {
+function pattern(regex: string | RegExp, message: FudisValidatorMessage): FudisValidatorFn {
   return (control: AbstractControl) => {
     if (!Validators.pattern(regex)(control)) {
       return null;
