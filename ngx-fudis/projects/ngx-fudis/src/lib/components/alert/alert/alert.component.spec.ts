@@ -96,7 +96,7 @@ describe('AlertComponent', () => {
 			expect(element.querySelector('button')?.getAttribute('aria-label')).toEqual(`${testMessage}, Close`);
 
 			// Test @Input() message
-			expect(element.querySelector('p')?.innerText).toEqual(testMessage);
+			expect(element.querySelector('p')?.textContent).toContain(testMessage);
 
 			// Test that link does not exist by default
 			expect(element.querySelector('fudis-link')).toBeFalsy();
@@ -160,8 +160,8 @@ describe('AlertComponent', () => {
 
 	describe('close button interaction', () => {
 		beforeEach(() => {
-			alertService = TestBed.inject(FudisAlertService) as jasmine.SpyObj<FudisAlertService>;
-			spyOn(alertService, 'dismissAlertFromButton');
+			alertService = TestBed.inject(FudisAlertService);
+			jest.spyOn(alertService, 'dismissAlertFromButton').mockImplementation();
 			fixture.detectChanges();
 		});
 
@@ -178,7 +178,7 @@ describe('AlertComponent', () => {
 
 			closeButton.click();
 
-			expect(clicked).withContext('Click event received').toEqual(true);
+			expect(clicked).toEqual(true);
 
 			fixture.detectChanges();
 
@@ -189,12 +189,12 @@ describe('AlertComponent', () => {
 	describe('Focus and blur events', () => {
 		beforeEach(() => {
 			fixture = TestBed.createComponent(MockAlertComponent);
-			focusService = TestBed.inject(FudisFocusService) as jasmine.SpyObj<FudisFocusService>;
-			spyOn(focusService, 'setFocusTarget');
-			spyOn(focusService, 'getFocusTarget');
-			alertService = TestBed.inject(FudisAlertService) as jasmine.SpyObj<FudisAlertService>;
-			spyOn(alertService, 'addAlert');
-			spyOn(alertService, 'updateAlertLinkFocusState');
+			focusService = TestBed.inject(FudisFocusService);
+			jest.spyOn(focusService, 'setFocusTarget').mockImplementation();
+			jest.spyOn(focusService, 'getFocusTarget').mockImplementation();
+			alertService = TestBed.inject(FudisAlertService);
+			jest.spyOn(alertService, 'addAlert').mockImplementation(() => {});
+			jest.spyOn(alertService, 'updateAlertLinkFocusState').mockImplementation();
 			fixture.detectChanges();
 		});
 
@@ -242,7 +242,7 @@ describe('AlertComponent', () => {
 			const firstClose = getElement(fixture, '#fudis-alert-1 .fudis-alert__close');
 			const secondClose = getElement(fixture, '#fudis-alert-2 .fudis-alert__close');
 
-			spyOn(secondClose, 'focus');
+			jest.spyOn(secondClose, 'focus').mockImplementation(() => {});
 
 			firstClose.focus();
 			firstClose.click();

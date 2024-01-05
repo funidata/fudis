@@ -1,131 +1,144 @@
 <div class="fudis-guidance" [id]="_id">
-	<div [id]="for + '_guidance'">
-		<div
-			[id]="_id + '-errors'"
-			[class.fudis-guidance__errors]="
-				(control && control.touched) || (formGroup && formGroup.touched && groupBlurredOut)
-			">
-			<fudis-icon
-				[icon]="'alert-fill'"
-				*ngIf="
-					(control?.invalid && control?.touched) || (formGroup?.invalid && formGroup?.touched && groupBlurredOut)
-				" />
+  <div [id]="for + '_guidance'">
+    <div
+      [id]="_id + '-errors'"
+      [class.fudis-guidance__errors]="
+        (control && control.touched) || (formGroup && formGroup.touched && groupBlurredOut)
+      "
+    >
+      <fudis-icon
+        [icon]="'alert-fill'"
+        *ngIf="
+          (control?.invalid && control?.touched) ||
+          (formGroup?.invalid && formGroup?.touched && groupBlurredOut)
+        "
+      />
 
-			<div [attr.ariaLive]="ariaLive" class="fudis-guidance__errors__list">
-				<ng-container *ngIf="groupBlurredOut">
-					<!-- Check errors for control group of FormGroup e. g. english, finnish, swedish-->
-					<ng-container *ngIf="formGroup?.controls && !control && !formGroup.errors">
-						<ng-container *ngFor="let singleControl of formGroup.controls | keyvalue">
-							<ng-container *ngIf="singleControl.value.errors">
-								<ng-container *ngFor="let error of singleControl.value.errors | keyvalue">
-									<fudis-validator-error-message
-										*ngIf="error.value.message"
-										[focusId]="for"
-										[visible]="singleControl.value.touched"
-										[type]="error.key"
-										[controlName]="singleControl.key"
-										[label]="inputLabel"
-										[message]="error.value.message" />
-									<!-- Todo: remove below deprecated version when Into is misgrated to above  -->
-									<fudis-validator-error-message
-										*ngIf="!error.value.message"
-										[deprecationWarning]="true"
-										[focusId]="for"
-										[visible]="singleControl.value.touched"
-										[type]="error.key"
-										[controlName]="singleControl.key"
-										[label]="inputLabel"
-										[message]="groupErrorMsg?.[singleControl.key]?.[asErrorkey(error?.key)]" />
-								</ng-container>
-							</ng-container>
-						</ng-container>
-					</ng-container>
-					<!-- Check errors for FormGroup e. g. atLeastOneIsRequired -->
-					<ng-container *ngIf="formGroup?.errors && formGroup.invalid">
-						<ng-container *ngFor="let error of formGroup.errors | keyvalue">
-							<fudis-validator-error-message
-								*ngIf="error.value?.message"
-								[visible]="formGroup.touched"
-								[focusId]="for"
-								[type]="error.key"
-								[label]="inputLabel"
-								[message]="error.value?.message" />
-							<!-- Todo: remove below deprecated version when Into is misgrated to above  -->
-							<fudis-validator-error-message
-								*ngIf="!error.value?.message"
-								[visible]="formGroup.touched"
-								[deprecationWarning]="true"
-								[focusId]="for"
-								[type]="error.key"
-								[label]="inputLabel"
-								[message]="groupErrorMsg?.[error.key]" />
-						</ng-container>
-					</ng-container>
-					<!-- Check errors for single FormControl e. g. single text-input with maxlength error -->
-					<ng-container *ngIf="control?.errors && !formGroup">
-						<ng-container *ngFor="let error of control.errors | keyvalue">
-							<fudis-validator-error-message
-								*ngIf="error.value?.message"
-								[visible]="control.touched"
-								[focusId]="for"
-								[type]="error.key"
-								[label]="inputLabel"
-								[message]="error.value?.message" />
-							<!-- Todo: remove below deprecated version when Into is misgrated to above  -->
+      <div [attr.ariaLive]="ariaLive" class="fudis-guidance__errors__list">
+        <ng-container *ngIf="groupBlurredOut">
+          <!-- Check errors for control group of FormGroup e. g. english, finnish, swedish-->
+          <ng-container *ngIf="formGroup?.controls && !control && !formGroup.errors">
+            <ng-container *ngFor="let singleControl of formGroup.controls | keyvalue">
+              <ng-container *ngIf="singleControl.value.errors">
+                <ng-container *ngFor="let error of singleControl.value.errors | keyvalue">
+                  <fudis-validator-error-message
+                    *ngIf="error.value.message"
+                    [focusId]="for"
+                    [visible]="singleControl.value.touched"
+                    [type]="error.key"
+                    [controlName]="singleControl.key"
+                    [label]="inputLabel"
+                    [message]="error.value.message"
+                  />
+                  <!-- Todo: remove below deprecated version when Into is misgrated to above  -->
+                  <fudis-validator-error-message
+                    *ngIf="!error.value.message"
+                    [deprecationWarning]="true"
+                    [focusId]="for"
+                    [visible]="singleControl.value.touched"
+                    [type]="error.key"
+                    [controlName]="singleControl.key"
+                    [label]="inputLabel"
+                    [message]="groupErrorMsg?.[singleControl.key]?.[asErrorkey(error.key)]"
+                  />
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+          <!-- Check errors for FormGroup e. g. atLeastOneIsRequired -->
+          <ng-container *ngIf="formGroup?.errors && formGroup.invalid">
+            <ng-container *ngFor="let error of formGroup.errors | keyvalue">
+              <fudis-validator-error-message
+                *ngIf="error.value?.message"
+                [visible]="formGroup.touched"
+                [focusId]="for"
+                [type]="error.key"
+                [label]="inputLabel"
+                [message]="error.value?.message"
+              />
+              <!-- Todo: remove below deprecated version when Into is misgrated to above  -->
+              <fudis-validator-error-message
+                *ngIf="!error.value?.message"
+                [visible]="formGroup.touched"
+                [deprecationWarning]="true"
+                [focusId]="for"
+                [type]="error.key"
+                [label]="inputLabel"
+                [message]="groupErrorMsg?.[error.key]"
+              />
+            </ng-container>
+          </ng-container>
+          <!-- Check errors for single FormControl e. g. single text-input with maxlength error -->
+          <ng-container *ngIf="control?.errors && !formGroup">
+            <ng-container *ngFor="let error of control.errors | keyvalue">
+              <fudis-validator-error-message
+                *ngIf="error.value?.message"
+                [visible]="control.touched"
+                [focusId]="for"
+                [type]="error.key"
+                [label]="inputLabel"
+                [message]="error.value?.message"
+              />
+              <!-- Todo: remove below deprecated version when Into is misgrated to above  -->
 
-							<fudis-validator-error-message
-								*ngIf="!error.value?.message && errorMsg?.[asErrorkey(error.key)]"
-								[visible]="control.touched"
-								[focusId]="for"
-								[label]="inputLabel"
-								[type]="error.key"
-								[deprecationWarning]="true"
-								[message]="$any(errorMsg?.[asErrorkey(error.key)])" />
-						</ng-container>
-					</ng-container>
-					<ng-content />
-				</ng-container>
-			</div>
-		</div>
+              <fudis-validator-error-message
+                *ngIf="!error.value?.message && errorMsg?.[asErrorkey(error.key)]"
+                [visible]="control.touched"
+                [focusId]="for"
+                [label]="inputLabel"
+                [type]="error.key"
+                [deprecationWarning]="true"
+                [message]="$any(errorMsg?.[asErrorkey(error.key)])"
+              />
+            </ng-container>
+          </ng-container>
+          <ng-content />
+        </ng-container>
+      </div>
+    </div>
 
-		<p *ngIf="helpText" class="fudis-guidance__help-text">{{ helpText }}</p>
-	</div>
-	<ng-container *ngIf="maxLength && control">
-		<small
-			class="fudis-guidance__character-limit-indicator"
-			[class.fudis-guidance__character-limit-indicator__float-right]="!helpText">
-			{{ control.value?.length || 0 }}/{{ maxLength }}
-		</small>
-	</ng-container>
-	<ng-container *ngIf="formGroup?.controls && !control && maxLength">
-		<ng-container *ngFor="let singleControl of formGroup.controls | keyvalue">
-			<small
-				*ngIf="singleControl.key === selectedOption"
-				class="fudis-guidance__character-limit-indicator"
-				[class.fudis-guidance__character-limit-indicator__float-right]="!helpText">
-				{{ singleControl.value.value?.length || 0 }}/{{ maxLength }}
-			</small>
-			<ng-container
-				*ngIf="
-					_maxLengthText &&
-					(singleControl.value.value?.length === _maxLengthAlertThreshold ||
-						singleControl.value.value?.length === maxLength)
-				">
-				<p class="fudis-visually-hidden" role="alert">
-					{{ singleControl.value.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText }}
-				</p>
-			</ng-container>
-		</ng-container>
-	</ng-container>
+    <p *ngIf="helpText" class="fudis-guidance__help-text">{{ helpText }}</p>
+  </div>
+  <ng-container *ngIf="maxLength && control">
+    <small
+      class="fudis-guidance__character-limit-indicator"
+      [class.fudis-guidance__character-limit-indicator__float-right]="!helpText"
+    >
+      {{ control.value?.length || 0 }}/{{ maxLength }}
+    </small>
+  </ng-container>
+  <ng-container *ngIf="formGroup?.controls && !control && maxLength">
+    <ng-container *ngFor="let singleControl of formGroup.controls | keyvalue">
+      <small
+        *ngIf="singleControl.key === selectedOption"
+        class="fudis-guidance__character-limit-indicator"
+        [class.fudis-guidance__character-limit-indicator__float-right]="!helpText"
+      >
+        {{ singleControl.value.value?.length || 0 }}/{{ maxLength }}
+      </small>
+      <ng-container
+        *ngIf="
+          _maxLengthText &&
+          (singleControl.value.value?.length === _maxLengthAlertThreshold ||
+            singleControl.value.value?.length === maxLength)
+        "
+      >
+        <p class="fudis-visually-hidden" role="alert">
+          {{ singleControl.value.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText }}
+        </p>
+      </ng-container>
+    </ng-container>
+  </ng-container>
 </div>
 <ng-container
-	*ngIf="
-		control &&
-		maxLength &&
-		_maxLengthText &&
-		(control.value?.length === _maxLengthAlertThreshold || control.value?.length === maxLength)
-	">
-	<p class="fudis-visually-hidden" role="alert">
-		{{ control.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText }}
-	</p>
+  *ngIf="
+    control &&
+    maxLength &&
+    _maxLengthText &&
+    (control.value?.length === _maxLengthAlertThreshold || control.value?.length === maxLength)
+  "
+>
+  <p class="fudis-visually-hidden" role="alert">
+    {{ control.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText }}
+  </p>
 </ng-container>

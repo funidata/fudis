@@ -25,6 +25,8 @@ jobs:
           node-version: 18.18.2
           # Specifying `registry-url` triggers `setup-node` to setup NPM authentication.
           registry-url: https://registry.npmjs.org/
+      - name: Copy root README.md to library
+        run: cp README.md ngx-fudis/projects/ngx-fudis/README.md
       - name: Build ngx-fudis
         run: npm run build
       - run: npm publish --access public

@@ -12,116 +12,116 @@ import { GuidanceComponent } from '../../guidance/guidance.component';
 import { ValidatorErrorMessageComponent } from '../validator-error-message/validator-error-message.component';
 
 const controlErrors = {
-	required: {
-		message: 'This is required',
-	},
-	'fudis-error-message-1': {
-		message: new BehaviorSubject<string>('Test error message'),
-	},
+  required: {
+    message: 'This is required',
+  },
+  'fudis-error-message-1': {
+    message: new BehaviorSubject<string>('Test error message'),
+  },
 };
 
 const controlOnlyRequiredError = {
-	required: {
-		message: 'This is required',
-	},
+  required: {
+    message: 'This is required',
+  },
 };
 
 const errorReceived: FudisValidationErrors = {
-	'fudis-error-message-1': {
-		message: 'Test error message',
-	},
+  'fudis-error-message-1': {
+    message: 'Test error message',
+  },
 };
 
 const errorToRemove: FudisValidationErrors = {
-	'fudis-error-message-1': {
-		message: 'Test error message',
-	},
+  'fudis-error-message-1': {
+    message: 'Test error message',
+  },
 };
 
 @Component({
-	selector: 'fudis-mock-test-error',
-	template: `
-		<fudis-text-input [control]="control" [label]="'Test label'">
-			<fudis-error-message #testError *ngIf="errorVisible" [message]="'Test error message'" />
-		</fudis-text-input>
-	`,
+  selector: 'fudis-mock-test-error',
+  template: `
+    <fudis-text-input [control]="control" [label]="'Test label'">
+      <fudis-error-message #testError *ngIf="errorVisible" [message]="'Test error message'" />
+    </fudis-text-input>
+  `,
 })
 class MockTestErrorComponent {
-	@ViewChild('testError') testError: ErrorMessageComponent;
+  @ViewChild('testError') testError: ErrorMessageComponent;
 
-	errorVisible: boolean;
+  errorVisible: boolean;
 
-	control: FormControl = new FormControl('', FudisValidators.required('This is required'));
+  control: FormControl = new FormControl('', FudisValidators.required('This is required'));
 }
 
 describe('ErrorMessageComponent', () => {
-	let component: MockTestErrorComponent;
-	let fixture: ComponentFixture<MockTestErrorComponent>;
+  let component: MockTestErrorComponent;
+  let fixture: ComponentFixture<MockTestErrorComponent>;
 
-	beforeEach(() => {
-		TestBed.configureTestingModule({
-			declarations: [
-				ErrorMessageComponent,
-				IconComponent,
-				MockTestErrorComponent,
-				TextInputComponent,
-				ValidatorErrorMessageComponent,
-				MockComponents(LabelComponent, GuidanceComponent),
-			],
-			imports: [ReactiveFormsModule],
-			providers: [],
-		}).compileComponents();
-	});
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        ErrorMessageComponent,
+        IconComponent,
+        MockTestErrorComponent,
+        TextInputComponent,
+        ValidatorErrorMessageComponent,
+        MockComponents(LabelComponent, GuidanceComponent),
+      ],
+      imports: [ReactiveFormsModule],
+      providers: [],
+    }).compileComponents();
+  });
 
-	beforeEach(() => {
-		fixture = TestBed.createComponent(MockTestErrorComponent);
-		component = fixture.componentInstance;
-		component.errorVisible = false;
-		fixture.detectChanges();
-	});
+  beforeEach(() => {
+    fixture = TestBed.createComponent(MockTestErrorComponent);
+    component = fixture.componentInstance;
+    component.errorVisible = false;
+    fixture.detectChanges();
+  });
 
-	describe('set control validators', () => {
-		beforeEach(() => {
-			component.errorVisible = true;
-			fixture.detectChanges();
-		});
+  describe('set control validators', () => {
+    beforeEach(() => {
+      component.errorVisible = true;
+      fixture.detectChanges();
+    });
 
-		it('should emit addError', () => {
-			spyOn(component.testError.handleAddError, 'emit');
-			component.testError.ngOnInit();
-			fixture.detectChanges();
+    it('should emit addError', () => {
+      jest.spyOn(component.testError.handleAddError, 'emit');
+      component.testError.ngOnInit();
+      fixture.detectChanges();
 
-			expect(component.testError.handleAddError.emit).toHaveBeenCalledWith(errorReceived);
-		});
+      expect(component.testError.handleAddError.emit).toHaveBeenCalledWith(errorReceived);
+    });
 
-		it('should have proper errors in control when component is created', () => {
-			expect(component.control.errors).toEqual(controlErrors);
-		});
+    it('should have proper errors in control when component is created', () => {
+      expect(component.control.errors).toEqual(controlErrors);
+    });
 
-		it('should have only required error in control when component is destroyed', () => {
-			component.errorVisible = false;
-			fixture.detectChanges();
+    it('should have only required error in control when component is destroyed', () => {
+      component.errorVisible = false;
+      fixture.detectChanges();
 
-			expect(component.control.errors).toEqual(controlOnlyRequiredError);
-		});
+      expect(component.control.errors).toEqual(controlOnlyRequiredError);
+    });
 
-		it('should emit removeError message when component is destroyed', () => {
-			spyOn(component.testError.handleRemoveError, 'emit');
-			component.testError.ngOnDestroy();
-			fixture.detectChanges();
+    it('should emit removeError message when component is destroyed', () => {
+      jest.spyOn(component.testError.handleRemoveError, 'emit');
+      component.testError.ngOnDestroy();
+      fixture.detectChanges();
 
-			expect(component.testError.handleRemoveError.emit).toHaveBeenCalledWith(errorToRemove);
-		});
+      expect(component.testError.handleRemoveError.emit).toHaveBeenCalledWith(errorToRemove);
+    });
 
-		it('should have first invalid and then valid control when all errors are removed', () => {
-			expect(component.control.invalid).toBe(true);
-			component.control.patchValue('Add value to remove required error');
-			component.errorVisible = false;
+    it('should have first invalid and then valid control when all errors are removed', () => {
+      expect(component.control.invalid).toBe(true);
+      component.control.patchValue('Add value to remove required error');
+      component.errorVisible = false;
 
-			fixture.detectChanges();
+      fixture.detectChanges();
 
-			expect(component.control.errors).toBe(null);
-			expect(component.control.valid).toBe(true);
-		});
-	});
+      expect(component.control.errors).toBe(null);
+      expect(component.control.valid).toBe(true);
+    });
+  });
 });

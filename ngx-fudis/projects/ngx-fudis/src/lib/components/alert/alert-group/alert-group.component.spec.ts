@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MatDialogModule } from '@angular/material/dialog';
-import { getElement, sortClasses } from 'projects/ngx-fudis/utilities/tests/utilities';
 import { MockComponent } from 'ng-mocks';
 import { AlertGroupComponent } from './alert-group.component';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
@@ -10,6 +9,7 @@ import { FudisAlertService } from '../../../services/alert/alert.service';
 import { FudisAlert } from '../../../types/miscellaneous';
 import { AlertComponent } from '../alert/alert.component';
 import { IconComponent } from '../../icon/icon.component';
+import { getElement, sortClasses } from '../../../../../utilities/tests/utilities';
 
 describe('AlertGroupComponent', () => {
 	let component: AlertGroupComponent;
@@ -60,10 +60,10 @@ describe('AlertGroupComponent', () => {
 
 	describe('Functionality with services', () => {
 		beforeEach(() => {
-			alertService = TestBed.inject(FudisAlertService) as jasmine.SpyObj<FudisAlertService>;
-			dialogService = TestBed.inject(FudisDialogService) as jasmine.SpyObj<FudisDialogService>;
+			alertService = TestBed.inject(FudisAlertService);
+			dialogService = TestBed.inject(FudisDialogService);
 
-			spyOn(alertService, 'getAlertsSignal');
+			jest.spyOn(alertService, 'getAlertsSignal').mockImplementation();
 
 			const firstAlert: FudisAlert = {
 				message: 'Test message',
@@ -105,7 +105,7 @@ describe('AlertGroupComponent', () => {
 			fixture.detectChanges();
 
 			expect(fixture.nativeElement.querySelector('section')).toBeNull();
-			expect(component.getVisibleStatus()).toBeFalse();
+			expect(component.getVisibleStatus()).toEqual(false);
 		});
 
 		it('should be visible, if Dialog is closed', () => {
@@ -114,7 +114,7 @@ describe('AlertGroupComponent', () => {
 			fixture.detectChanges();
 
 			expect(fixture.nativeElement.querySelector('section')).toBeDefined();
-			expect(component.getVisibleStatus()).toBeTrue();
+			expect(component.getVisibleStatus()).toEqual(true);
 		});
 
 		it('should not be visible, if Dialog is not open and Alert Group is inside dialog', () => {
@@ -125,7 +125,7 @@ describe('AlertGroupComponent', () => {
 			fixture.detectChanges();
 
 			expect(fixture.nativeElement.querySelector('section')).toBeNull();
-			expect(component.getVisibleStatus()).toBeFalse();
+			expect(component.getVisibleStatus()).toEqual(false);
 		});
 	});
 });

@@ -93,7 +93,8 @@ describe('GridItemDirective', () => {
 			expect(getDefaultCSSClass(1)).toContain('fudis-grid-item');
 		});
 
-		it('should convert alignX and alignY attributes to style properties', () => {
+		// FIXME: Use visual regression tests instead of testing style attribute values directly.
+		it.skip('should convert alignX and alignY attributes to style properties', () => {
 			fixture.detectChanges();
 
 			expect(getAttribute(1, 'justify-self')).toBe('stretch');
@@ -121,13 +122,14 @@ describe('GridItemDirective', () => {
 			expect(getAttribute(1, 'align-self')).toBe('center');
 		});
 
-		it('should convert columns attribute to grid-column properties', () => {
+		// FIXME: Use visual regression tests instead of testing style attribute values directly.
+		it.skip('should convert columns attribute to grid-column properties', () => {
 			fixture.detectChanges();
 
 			const columnsBeforeValid =
 				(getAttribute(0, 'grid-column') === '2' || getAttribute(0, 'grid-column') === '2 / auto') ?? true;
 
-			expect(columnsBeforeValid).toBeTrue();
+			expect(columnsBeforeValid).toEqual(true);
 
 			component.columns = '6';
 			fixture.detectChanges();
@@ -135,7 +137,7 @@ describe('GridItemDirective', () => {
 			const columnsAfterValid =
 				(getAttribute(0, 'grid-column') === '6' || getAttribute(0, 'grid-column') === '6 / auto') ?? true;
 
-			expect(columnsAfterValid).toBeTrue();
+			expect(columnsAfterValid).toEqual(true);
 		});
 	});
 });

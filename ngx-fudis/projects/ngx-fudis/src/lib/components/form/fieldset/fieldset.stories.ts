@@ -5,7 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BehaviorSubject } from 'rxjs';
 import { FudisSelectOption, FudisRadioButtonOption, FudisFormErrors } from '../../../types/forms';
 import { FieldSetComponent } from './fieldset.component';
-import { FudisGroupValidators, FudisValidators } from '../../../utilities/form/validators';
+import { FudisValidators } from '../../../utilities/form/validators';
+import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 
 @Component({
 	selector: 'example-fieldset',

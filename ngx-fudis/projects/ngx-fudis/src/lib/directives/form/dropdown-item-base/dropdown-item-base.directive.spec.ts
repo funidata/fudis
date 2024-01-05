@@ -1,9 +1,10 @@
-// import { DropdownItemBaseDirective } from './dropdown-item-base.directive';
+import { DropdownItemBaseDirective } from './dropdown-item-base.directive';
 
-// describe('DropdownItemBaseDirective', () => {
-// 	it('should create an instance', () => {
-// 		const directive = new DropdownItemBaseDirective();
+describe('DropdownItemBaseDirective', () => {
+  const doc: Document = new Document();
+  it('should create an instance', () => {
+    const directive = new DropdownItemBaseDirective(doc);
 
-// 		expect(directive).toBeTruthy();
-// 	});
-// });
+    expect(directive).toBeTruthy();
+  });
+});

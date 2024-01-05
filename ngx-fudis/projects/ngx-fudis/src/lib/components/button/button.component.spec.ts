@@ -75,7 +75,7 @@ describe('ButtonComponent', () => {
 
 			getButton()?.click();
 
-			expect(clicked).withContext('Click event received').toEqual(true);
+			expect(clicked).toEqual(true);
 		});
 
 		it('should not emit events when the button is disabled', () => {
@@ -90,7 +90,7 @@ describe('ButtonComponent', () => {
 
 			getButton()?.click();
 
-			expect(clicked).withContext('Unexpected click event received').toEqual(false);
+			expect(clicked).toEqual(false);
 		});
 	});
 
@@ -108,7 +108,7 @@ describe('ButtonComponent', () => {
 			expect(getButton().getAttribute('aria-label')).toBeTruthy();
 			expect(getButton().getAttribute('aria-label')).toEqual('Open additional menu It has nice things to click');
 			expect(getButton().getAttribute('type')).toEqual('button');
-			expect(getButton().innerText).toEqual('');
+			expect(getButton().textContent).toEqual('  ');
 		});
 	});
 
@@ -120,7 +120,7 @@ describe('ButtonComponent', () => {
 			fixture.detectChanges();
 
 			expect(getButton().getAttribute('type')).toEqual('submit');
-			expect(getButton().innerText).toEqual('SUBMIT ME!');
+			expect(getButton().textContent).toContain('Submit me!');
 		});
 	});
 });

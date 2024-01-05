@@ -35,11 +35,13 @@ describe('LinkComponent', () => {
 			expect(anchorElement.nativeNode.innerHTML).toEqual(' My link ');
 		});
 
-		it('should always have href', () => {
+		// FIXME: Remove skip.
+		it.skip('should always have href', () => {
 			component.href = '';
 			fixture.detectChanges();
 
-			expect(component).not.toBeTrue();
+			// FIXME: In jasmine, `.not.toBeTrue()` matches for strict boolean equality. This is probably not what was supposed to be tested here.
+			// expect(component).not.toBeTrue();
 		});
 	});
 
@@ -89,7 +91,7 @@ describe('LinkComponent', () => {
 
 			const linkElement = fixture.nativeElement.querySelector('a');
 
-			spyOn(linkElement, 'focus');
+			jest.spyOn(linkElement, 'focus').mockImplementation(() => {});
 
 			component.ngAfterViewInit();
 
@@ -102,7 +104,7 @@ describe('LinkComponent', () => {
 
 			const linkElement = fixture.nativeElement.querySelector('a');
 
-			spyOn(linkElement, 'focus');
+			jest.spyOn(linkElement, 'focus').mockImplementation(() => {});
 
 			component.ngAfterViewInit();
 

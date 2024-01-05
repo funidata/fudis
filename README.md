@@ -2,8 +2,6 @@
 
 Funidata Design System.
 
-> _This project is in early development. Tread with caution._
-
 ## Documentation
 
 [Fudis Storybook](https://funidata.github.io/fudis/main/) - latest documentation (built from `main` branch `HEAD`)

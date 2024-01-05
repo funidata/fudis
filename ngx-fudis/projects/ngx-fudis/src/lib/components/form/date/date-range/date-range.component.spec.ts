@@ -4,11 +4,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FudisIdService } from 'projects/ngx-fudis/src/lib/services/id/id.service';
-import { TooltipDirective } from 'projects/ngx-fudis/src/public-api';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MockComponent } from 'ng-mocks';
-import { FudisValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
 import { DateRangeComponent } from './date-range.component';
 import { DatepickerComponent } from '../datepicker/datepicker.component';
 import { LabelComponent } from '../../label/label.component';
@@ -16,6 +13,8 @@ import { IconComponent } from '../../../icon/icon.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { ButtonComponent } from '../../../button/button.component';
 import { ValidatorErrorMessageComponent } from '../../error-message/validator-error-message/validator-error-message.component';
+import { FudisValidators, TooltipDirective } from '../../../../../public-api';
+import { FudisIdService } from '../../../../services/id/id.service';
 
 describe('DateRangeComponent', () => {
 	let component: DateRangeComponent;

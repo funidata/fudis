@@ -102,13 +102,13 @@ describe('ExpandableComponent', () => {
 	}
 
 	function assertExpandableIsExpanded(): void {
-		expect(getExpandable().getClosedStatus()).withContext('Expected the expandable to be expanded').toEqual(false);
-		expect(isContentVisible()).withContext('Expected the content component to be visible').toEqual(true);
+		expect(getExpandable().getClosedStatus()).toEqual(false);
+		expect(isContentVisible()).toEqual(true);
 	}
 
 	function assertExpandableIsClosed(): void {
-		expect(getExpandable().getClosedStatus()).withContext('Expected the expandable to be closed').toEqual(true);
-		expect(isContentVisible()).withContext('Expected the content component not to be visible').toEqual(false);
+		expect(getExpandable().getClosedStatus()).toEqual(true);
+		expect(isContentVisible()).toEqual(false);
 	}
 
 	function assertExpandableClassHasVariant(variant: FudisExpandableType): void {
@@ -249,9 +249,7 @@ describe('ExpandableComponent', () => {
 
 			expect(
 				fixture.nativeElement.querySelector('fudis-expandable .fudis-expandable__content[hidden] fudis-mock-component')
-			)
-				.withContext('Expected the projected component to remain in the DOM, hidden')
-				.not.toEqual(null);
+			).not.toEqual(null);
 		});
 	});
 
@@ -260,11 +258,9 @@ describe('ExpandableComponent', () => {
 			fixture = TestBed.createComponent(ExpandableComponent);
 			component = fixture.componentInstance;
 			component.title = 'Test title';
-			errorService = TestBed.inject(
-				FudisInternalErrorSummaryService
-			) as jasmine.SpyObj<FudisInternalErrorSummaryService>;
-			spyOn(errorService, 'addSection');
-			spyOn(errorService, 'removeSection');
+			errorService = TestBed.inject(FudisInternalErrorSummaryService);
+			jest.spyOn(errorService, 'addSection').mockImplementation(() => {});
+			jest.spyOn(errorService, 'removeSection').mockImplementation(() => {});
 			fixture.detectChanges();
 		});
 
