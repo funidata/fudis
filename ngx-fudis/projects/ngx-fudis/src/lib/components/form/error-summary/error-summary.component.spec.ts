@@ -30,113 +30,120 @@ import { TextInputComponent } from '../text-input/text-input.component';
 import { SpacingDirective } from '../../../directives/spacing/spacing.directive';
 
 @Component({
-	selector: 'fudis-mock-form-component',
-	template: ` <fudis-form
-		#formRef
-		[titleLevel]="1"
-		[title]="'Example form for error summary'"
-		[id]="'unique-form-example-1'"
-		[errorSummaryLinkType]="'href'"
-		[errorSummaryHelpText]="'There were errors you need to fix'"
-		[errorSummaryLiveRemove]="toggleLive"
-		[errorSummaryVisible]="errorSummaryVisible">
-		<ng-template fudisContent type="form">
-			<fudis-fieldset [title]="'Form information'">
-				<ng-template fudisContent type="fieldset">
-					<fudis-text-input
-						[control]="formGroup.controls.name"
-						[label]="'Name'"
-						[helpText]="'We need to know who you are'" />
-					<fudis-text-input
-						[control]="formGroup.controls.email"
-						[label]="'Contact email'"
-						[helpText]="'So that we can contact you'" />
-				</ng-template>
-			</fudis-fieldset>
-		</ng-template>
-	</fudis-form>`,
+  selector: 'fudis-mock-form-component',
+  template: ` <fudis-form
+    #formRef
+    [titleLevel]="1"
+    [title]="'Example form for error summary'"
+    [id]="'unique-form-example-1'"
+    [errorSummaryLinkType]="'href'"
+    [errorSummaryHelpText]="'There were errors you need to fix'"
+    [errorSummaryLiveRemove]="toggleLive"
+    [errorSummaryVisible]="errorSummaryVisible"
+  >
+    <ng-template fudisContent type="form">
+      <fudis-fieldset [title]="'Form information'">
+        <ng-template fudisContent type="fieldset">
+          <fudis-text-input
+            [control]="formGroup.controls.name"
+            [label]="'Name'"
+            [helpText]="'We need to know who you are'"
+          />
+          <fudis-text-input
+            [control]="formGroup.controls.email"
+            [label]="'Contact email'"
+            [helpText]="'So that we can contact you'"
+          />
+        </ng-template>
+      </fudis-fieldset>
+    </ng-template>
+  </fudis-form>`,
 })
 class MockFormComponent {
-	constructor(private _errorSummaryService: FudisErrorSummaryService) {}
+  constructor(private _errorSummaryService: FudisErrorSummaryService) {}
 
-	@ViewChild('formRef') formRef: FormComponent;
+  @ViewChild('formRef') formRef: FormComponent;
 
-	errorSummaryVisible: boolean = false;
+  errorSummaryVisible: boolean = false;
 
-	toggleLive: boolean = false;
+  toggleLive: boolean = false;
 
-	formGroup = new FormGroup({
-		name: new FormControl(null, FudisValidators.required('Missing your name')),
-		email: new FormControl(null, FudisValidators.required('Missing email contact')),
-	});
+  formGroup = new FormGroup({
+    name: new FormControl(null, FudisValidators.required('Missing your name')),
+    email: new FormControl(null, FudisValidators.required('Missing email contact')),
+  });
 
-	reloadErrors(): void {
-		this.formGroup.markAllAsTouched();
-		this.errorSummaryVisible = true;
-		this._errorSummaryService.reloadErrors();
-	}
+  reloadErrors(): void {
+    this.formGroup.markAllAsTouched();
+    this.errorSummaryVisible = true;
+    this._errorSummaryService.reloadErrors();
+  }
 }
 
 describe('ErrorSummaryComponent', () => {
-	let component: ErrorSummaryComponent;
-	let fixture: ComponentFixture<ErrorSummaryComponent>;
+  let component: ErrorSummaryComponent;
+  let fixture: ComponentFixture<ErrorSummaryComponent>;
 
-	let wrapperComponent: MockFormComponent;
-	let wrapperFixture: ComponentFixture<MockFormComponent>;
+  let wrapperComponent: MockFormComponent;
+  let wrapperFixture: ComponentFixture<MockFormComponent>;
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			declarations: [
-				ActionsDirective,
-				BodyTextComponent,
-				ButtonComponent,
-				ContentDirective,
-				ErrorSummaryComponent,
-				FieldSetComponent,
-				FormComponent,
-				GridDirective,
-				GridComponent,
-				GuidanceComponent,
-				HeaderDirective,
-				HeadingComponent,
-				IconComponent,
-				LabelComponent,
-				LinkComponent,
-				MockFormComponent,
-				NotificationComponent,
-				SpacingDirective,
-				TextInputComponent,
-				ValidatorErrorMessageComponent,
-			],
-			providers: [
-				FudisInternalErrorSummaryService,
-				FudisGridService,
-				FudisIdService,
-				FudisBreakpointService,
-				FudisTranslationService,
-			],
-			imports: [ReactiveFormsModule, RouterModule.forRoot([])],
-		}).compileComponents();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [
+        ActionsDirective,
+        BodyTextComponent,
+        ButtonComponent,
+        ContentDirective,
+        ErrorSummaryComponent,
+        FieldSetComponent,
+        FormComponent,
+        GridDirective,
+        GridComponent,
+        GuidanceComponent,
+        HeaderDirective,
+        HeadingComponent,
+        IconComponent,
+        LabelComponent,
+        LinkComponent,
+        MockFormComponent,
+        NotificationComponent,
+        SpacingDirective,
+        TextInputComponent,
+        ValidatorErrorMessageComponent,
+      ],
+      providers: [
+        FudisInternalErrorSummaryService,
+        FudisGridService,
+        FudisIdService,
+        FudisBreakpointService,
+        FudisTranslationService,
+      ],
+      imports: [ReactiveFormsModule, RouterModule.forRoot([])],
+    }).compileComponents();
 
-		fixture = TestBed.createComponent(ErrorSummaryComponent);
-		component = fixture.componentInstance;
-		wrapperFixture = TestBed.createComponent(MockFormComponent);
-		wrapperComponent = wrapperFixture.componentInstance;
-		wrapperFixture.detectChanges();
-		wrapperComponent.reloadErrors();
-	});
+    fixture = TestBed.createComponent(ErrorSummaryComponent);
+    component = fixture.componentInstance;
+    wrapperFixture = TestBed.createComponent(MockFormComponent);
+    wrapperComponent = wrapperFixture.componentInstance;
+    wrapperFixture.detectChanges();
+    wrapperComponent.reloadErrors();
+  });
 
-	describe('Contents', () => {
-		// TODO: Test error summary ul list and its contents
-		it('input attributes', () => {
-			const helpText = 'Errors belong in a museum';
+  fdescribe('Contents', () => {
+    // TODO: Test error summary ul list and its contents
+    it('input attributes', () => {
+      const helpText = 'Errors belong in a museum';
 
-			component.helpText = helpText;
-			component.parentComponent = wrapperComponent.formRef.formElement as HTMLFormElement;
+      component.helpText = helpText;
+      component.parentComponent = wrapperComponent.formRef.formElement as HTMLFormElement;
 
-			fixture.detectChanges();
+      fixture.detectChanges();
 
-			// console.log(fixture.nativeElement);
-		});
-	});
+      debug(fixture.nativeElement);
+
+      //console.log(fixture.debugElement);
+      // console.log(wrapperFixture.nativeElement);
+      //console.log(fixture.nativeElement.querySelector('p'));
+    });
+  });
 });

@@ -75,7 +75,7 @@ describe('InternalErrorSummaryService', () => {
 		TestBed.configureTestingModule({});
 		service = TestBed.inject(FudisInternalErrorSummaryService);
 
-		spyOn(service, 'reloadErrors');
+		jest.spyOn(service, 'reloadErrors').mockImplementation(() => {});
 	});
 
 	it('should be created', () => {
