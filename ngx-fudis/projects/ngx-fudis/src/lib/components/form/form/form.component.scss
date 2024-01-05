@@ -1,57 +1,56 @@
-@use '../../../foundations/spacing/tokens.scss' as spacing;
-
-@use '../../../foundations/breakpoints/mixins.scss' as breakpoints;
+@use "../../../foundations/spacing/tokens.scss" as spacing;
+@use "../../../foundations/breakpoints/mixins.scss" as breakpoints;
 
 .fudis-form {
-	&__header {
-		&__title {
-			&__badge {
-				margin-left: spacing.$spacing-xs;
-			}
+  &__header {
+    &__title {
+      &__badge {
+        margin-left: spacing.$spacing-xs;
+      }
 
-			&__dialog {
-				max-width: calc(100% - spacing.$spacing-lg);
-			}
-		}
+      &__dialog {
+        max-width: calc(100% - spacing.$spacing-lg);
+      }
+    }
 
-		&__main {
-			&__content {
-				margin-bottom: spacing.$spacing-sm;
-			}
-		}
+    &__main {
+      &__content {
+        margin-bottom: spacing.$spacing-sm;
+      }
+    }
 
-		&__actions {
-			margin-right: spacing.$spacing-xs;
-			margin-bottom: spacing.$spacing-sm;
+    &__actions {
+      margin-right: spacing.$spacing-xs;
+      margin-bottom: spacing.$spacing-sm;
 
-			fudis-button:not(:last-of-type) {
-				margin-right: spacing.$spacing-sm;
-				margin-bottom: spacing.$spacing-xs;
-			}
+      fudis-button:not(:last-of-type) {
+        margin-right: spacing.$spacing-sm;
+        margin-bottom: spacing.$spacing-xs;
+      }
 
-			&__dialog {
-				display: flex;
-				flex-wrap: wrap;
-				justify-content: flex-end;
-				margin-right: spacing.$spacing-xs;
-				margin-bottom: spacing.$spacing-sm;
+      &__dialog {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        margin-right: spacing.$spacing-xs;
+        margin-bottom: spacing.$spacing-sm;
 
-				fudis-button:not(:last-of-type) {
-					margin-right: spacing.$spacing-sm;
-				}
-			}
+        fudis-button:not(:last-of-type) {
+          margin-right: spacing.$spacing-sm;
+        }
+      }
 
-			@include breakpoints.breakpoint('sm') {
-				display: flex;
-				flex-wrap: wrap;
-				justify-content: space-between;
-				justify-content: flex-end;
-				margin-bottom: spacing.$spacing-md;
+      @include breakpoints.breakpoint("sm") {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        justify-content: flex-end;
+        margin-bottom: spacing.$spacing-md;
 
-				fudis-button:not(:first-of-type) {
-					margin-bottom: spacing.$spacing-none;
-				}
-			}
-		}
-	}
+        fudis-button:not(:first-of-type) {
+          margin-bottom: spacing.$spacing-none;
+        }
+      }
+    }
+  }
 }

@@ -1,78 +1,89 @@
 <form
-	fudisGrid
-	[rowGap]="'none'"
-	[id]="id"
-	[attr.aria-describedBy]="id + '_header'"
-	[width]="width"
-	[align]="align"
-	[ignoreDefaults]="true"
-	[alignItemsX]="alignItemsX"
-	[alignItemsY]="alignItemsY"
-	[classes]="['fudis-form']"
-	[columnGap]="columnGap"
-	[rowGap]="'none'"
-	[marginBottom]="marginBottom"
-	[marginTop]="marginTop"
-	[marginSides]="marginSides">
-	<div [id]="id + '_header'" class="fudis-form__header">
-		<div class="fudis-form__header__main">
-			<ng-container *ngIf="title && titleLevel">
-				<div class="fudis-form__header__title">
-					<ng-container *ngIf="_dialogParent">
-						<fudis-heading
-							class="fudis-form__header__title__dialog"
-							fudisDialogTitle
-							[marginBottom]="'xs'"
-							[size]="titleSize"
-							[level]="titleLevel">
-							{{ title }}
-							<ng-container *ngIf="badge && badgeText">
-								<fudis-badge class="fudis-form__header__title__badge" [variant]="badge" [content]="badgeText" />
-							</ng-container>
-						</fudis-heading>
-					</ng-container>
-					<ng-container *ngIf="!_dialogParent">
-						<fudis-heading [marginBottom]="'xs'" [size]="titleSize" [level]="titleLevel">
-							{{ title }}
-							<ng-container *ngIf="badge && badgeText">
-								<fudis-badge class="fudis-form__header__title__badge" [variant]="badge" [content]="badgeText" />
-							</ng-container>
-						</fudis-heading>
-					</ng-container>
-					<ng-container *ngIf="helpText">
-						<fudis-body-text fudisSpacing [marginBottom]="'xs'">{{ helpText }}</fudis-body-text>
-					</ng-container>
-				</div>
-			</ng-container>
-			<ng-container *ngIf="headerContent">
-				<div class="fudis-form__header__main__content">
-					<ng-container *ngTemplateOutlet="headerContent!.templateRef" />
-				</div>
-			</ng-container>
-			<ng-container *ngIf="_formElement !== undefined && errorSummaryVisible">
-				<div class="fudis-form__header__main__content">
-					<fudis-error-summary
-						[linkType]="errorSummaryLinkType"
-						[liveRemove]="errorSummaryLiveRemove"
-						[parentComponent]="_formElement"
-						[helpText]="errorSummaryHelpText" />
-				</div>
-			</ng-container>
-		</div>
-	</div>
-	<ng-container *ngIf="headerActions?.type === 'form' && !_dialogParent">
-		<div class="fudis-form__header__actions">
-			<ng-container *ngTemplateOutlet="headerActions!.templateRef" />
-		</div>
-	</ng-container>
-	<ng-container *ngIf="mainContent?.type === 'form'">
-		<div class="fudis-form__content">
-			<ng-container *ngTemplateOutlet="mainContent!.templateRef" />
-		</div>
-	</ng-container>
-	<ng-container *ngIf="headerActions?.type === 'form' && _dialogParent">
-		<div class="fudis-form__header__actions__dialog">
-			<ng-container *ngTemplateOutlet="headerActions!.templateRef" />
-		</div>
-	</ng-container>
+  fudisGrid
+  [rowGap]="'none'"
+  [id]="id"
+  [attr.aria-describedby]="id + '_header'"
+  [width]="width"
+  [align]="align"
+  [ignoreDefaults]="true"
+  [alignItemsX]="alignItemsX"
+  [alignItemsY]="alignItemsY"
+  [classes]="['fudis-form']"
+  [columnGap]="columnGap"
+  [rowGap]="'none'"
+  [marginBottom]="marginBottom"
+  [marginTop]="marginTop"
+  [marginSides]="marginSides"
+>
+  <div [id]="id + '_header'" class="fudis-form__header">
+    <div class="fudis-form__header__main">
+      <ng-container *ngIf="title && titleLevel">
+        <div class="fudis-form__header__title">
+          <ng-container *ngIf="_dialogParent">
+            <fudis-heading
+              class="fudis-form__header__title__dialog"
+              fudisDialogTitle
+              [marginBottom]="'xs'"
+              [size]="titleSize"
+              [level]="titleLevel"
+            >
+              {{ title }}
+              <ng-container *ngIf="badge && badgeText">
+                <fudis-badge
+                  class="fudis-form__header__title__badge"
+                  [variant]="badge"
+                  [content]="badgeText"
+                />
+              </ng-container>
+            </fudis-heading>
+          </ng-container>
+          <ng-container *ngIf="!_dialogParent">
+            <fudis-heading [marginBottom]="'xs'" [size]="titleSize" [level]="titleLevel">
+              {{ title }}
+              <ng-container *ngIf="badge && badgeText">
+                <fudis-badge
+                  class="fudis-form__header__title__badge"
+                  [variant]="badge"
+                  [content]="badgeText"
+                />
+              </ng-container>
+            </fudis-heading>
+          </ng-container>
+          <ng-container *ngIf="helpText">
+            <fudis-body-text fudisSpacing [marginBottom]="'xs'">{{ helpText }}</fudis-body-text>
+          </ng-container>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="headerContent">
+        <div class="fudis-form__header__main__content">
+          <ng-container *ngTemplateOutlet="headerContent!.templateRef" />
+        </div>
+      </ng-container>
+      <ng-container *ngIf="_formElement !== undefined && errorSummaryVisible">
+        <div class="fudis-form__header__main__content">
+          <fudis-error-summary
+            [linkType]="errorSummaryLinkType"
+            [liveRemove]="errorSummaryLiveRemove"
+            [parentComponent]="_formElement"
+            [helpText]="errorSummaryHelpText"
+          />
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <ng-container *ngIf="headerActions?.type === 'form' && !_dialogParent">
+    <div class="fudis-form__header__actions">
+      <ng-container *ngTemplateOutlet="headerActions!.templateRef" />
+    </div>
+  </ng-container>
+  <ng-container *ngIf="mainContent?.type === 'form'">
+    <div class="fudis-form__content">
+      <ng-container *ngTemplateOutlet="mainContent!.templateRef" />
+    </div>
+  </ng-container>
+  <ng-container *ngIf="headerActions?.type === 'form' && _dialogParent">
+    <div class="fudis-form__header__actions__dialog">
+      <ng-container *ngTemplateOutlet="headerActions!.templateRef" />
+    </div>
+  </ng-container>
 </form>

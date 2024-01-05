@@ -1,5 +1,6 @@
 import { FormControl, FormGroup } from '@angular/forms';
-import { FudisGroupValidators, FudisValidators } from './validators';
+import { FudisGroupValidators } from './groupValidators';
+import { FudisValidators } from './validators';
 
 describe('Fudis Validators', () => {
   describe('Required Validator', () => {

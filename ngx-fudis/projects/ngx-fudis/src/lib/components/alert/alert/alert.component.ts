@@ -27,7 +27,8 @@ export class AlertComponent {
   /**
    * Visible message
    */
-  @Input({ required: true }) message: any;
+  // TODO: add observable message
+  @Input({ required: true }) message: string;
 
   /**
    * Id to be set on the whole alert element
@@ -47,6 +48,7 @@ export class AlertComponent {
   /**
    * Conditional routerLink for Alert. If used, provide also linkTitle.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() routerLinkUrl: string | any[] | null | undefined;
 
   /**

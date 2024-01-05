@@ -1,11 +1,12 @@
 <div
-	#dropdownElement
-	class="fudis-select-dropdown fudis-input-size__{{ size }}"
-	[class.fudis-select-dropdown--open]="open"
-	[class.fudis-select-dropdown__multiselect]="multiselect"
-	[attr.id]="id"
-	[attr.aria-labelledby]="labelId"
-	[attr.aria-multiselectable]="multiselect ? true : null"
-	role="listbox">
-	<ng-content></ng-content>
+  #dropdownElement
+  class="fudis-select-dropdown fudis-input-size__{{ size }}"
+  [class.fudis-select-dropdown--open]="open"
+  [class.fudis-select-dropdown__multiselect]="multiselect"
+  [attr.id]="parentId + '-dropdown'"
+  [attr.aria-labelledby]="parentId + '-label'"
+  [attr.aria-multiselectable]="multiselect ? true : null"
+  role="listbox"
+>
+  <ng-content></ng-content>
 </div>

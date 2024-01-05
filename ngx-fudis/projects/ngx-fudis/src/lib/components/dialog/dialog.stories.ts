@@ -146,6 +146,7 @@ class DialogExampleLauncherComponent implements OnInit {
 		}
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	openDialog<T = any>(dialogToOpen: ComponentType<T> | TemplateRef<T>) {
 		this.dialog.open(dialogToOpen);
 	}

@@ -19,18 +19,18 @@ export { CheckboxGroupComponent } from './lib/components/form/checkbox-group/che
 export { DatepickerComponent } from './lib/components/form/date/datepicker/datepicker.component';
 export { DateRangeComponent } from './lib/components/form/date/date-range/date-range.component';
 export {
-	ContentDirective,
-	DateStartErrorDirective,
-	DateEndErrorDirective,
-	FooterContentLeftDirective,
-	FooterContentRightDirective,
+  ContentDirective,
+  DateStartErrorDirective,
+  DateEndErrorDirective,
+  FooterContentLeftDirective,
+  FooterContentRightDirective,
 } from './lib/directives/content-projection/content/content.directive';
 
 export {
-	DialogActionsDirective,
-	DialogCloseDirective,
-	DialogContentDirective,
-	DialogTitleDirective,
+  DialogActionsDirective,
+  DialogCloseDirective,
+  DialogContentDirective,
+  DialogTitleDirective,
 } from './lib/directives/dialog/dialog-directives';
 export { DialogComponent } from './lib/components/dialog/dialog.component';
 
@@ -75,7 +75,8 @@ export { TextInputComponent } from './lib/components/form/text-input/text-input.
 
 export { TooltipDirective } from './lib/directives/tooltip/tooltip.directive';
 
-export { FudisGroupValidators, FudisValidators } from './lib/utilities/form/validators';
+export { FudisValidators } from './lib/utilities/form/validators';
+export { FudisGroupValidators } from './lib/utilities/form/groupValidators';
 
 export { AlertComponent } from './lib/components/alert/alert/alert.component';
 export { AlertGroupComponent } from './lib/components/alert/alert-group/alert-group.component';
