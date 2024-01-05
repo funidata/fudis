@@ -7,6 +7,7 @@ import {
 	Input,
 	OnInit,
 	Optional,
+	ViewChild,
 	ViewEncapsulation,
 } from '@angular/core';
 import { FudisHeadingSize, FudisHeadingLevel } from '../../../types/typography';
@@ -18,6 +19,7 @@ import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.dir
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
 import { FudisFormErrorSummaryLink } from '../../../types/forms';
 import { DialogComponent } from '../../dialog/dialog.component';
+import { ErrorSummaryComponent } from '../error-summary/error-summary.component';
 
 @Component({
 	selector: 'fudis-form',
@@ -39,6 +41,11 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 	@ContentChild(HeaderDirective) headerContent: HeaderDirective;
 
 	@ContentChild(ContentDirective) mainContent: ContentDirective;
+
+	/**
+	 * Template reference for ErrorSummary
+	 */
+	@ViewChild('errorSummaryRef') errorSummaryRef: ErrorSummaryComponent;
 
 	/**
 	 * Help text displayed in Error Summary before listing individual errors.
@@ -118,5 +125,9 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 		} else {
 			this.id = this._idService.getNewId('form');
 		}
+	}
+
+	public get formElement(): HTMLFormElement | undefined {
+		return this._formElement;
 	}
 }

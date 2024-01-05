@@ -194,13 +194,10 @@ export class FudisInternalErrorSummaryService {
 
 	/**
 	 * Updates the visible and dynamic lists of errors with the current error list
-	 * @param delay Optional Number that sets timeout delay in milliseconds, defaults to 0ms
 	 */
-	public reloadErrors(delay: number = 0): void {
-		setTimeout(() => {
-			this._signalCurrentErrorList.set(this._currentErrorList);
-			this._signalDynamicCurrentErrorList.set(this._currentErrorList);
-		}, delay);
+	public reloadErrors(): void {
+		this._signalCurrentErrorList.set(this._currentErrorList);
+		this._signalDynamicCurrentErrorList.set(this._currentErrorList);
 	}
 
 	/**

@@ -47,7 +47,7 @@ export class ErrorSummaryComponent implements OnChanges, OnDestroy {
 		});
 	}
 
-	@ViewChild('focusTarget') focusTarget: ElementRef;
+	@ViewChild('focusTarget') private _focusTarget: ElementRef;
 
 	/**
 	 * FieldSet parent element of this ErrorSummaryComponent
@@ -104,7 +104,7 @@ export class ErrorSummaryComponent implements OnChanges, OnDestroy {
 	 */
 	private _numberOfFocusTries: number = 0;
 
-	getErrors(): void {
+	public getErrors(): void {
 		const fetchedErrors: Signal<FudisFormErrorSummaryObject> = this.liveRemove
 			? this._errorSummaryService.getDynamicErrors()
 			: this._errorSummaryService.getVisibleErrors();
@@ -161,9 +161,9 @@ export class ErrorSummaryComponent implements OnChanges, OnDestroy {
 	}
 
 	focusToErrorSummary(): void {
-		if (this.focusTarget && this._visibleErrorList.length > 0) {
+		if (this._focusTarget && this._visibleErrorList.length > 0) {
 			this._numberOfFocusTries = 0;
-			(this.focusTarget.nativeElement as HTMLDivElement).focus();
+			(this._focusTarget.nativeElement as HTMLDivElement).focus();
 		} else if (this._numberOfFocusTries < 100) {
 			setTimeout(() => {
 				this._numberOfFocusTries += 1;
@@ -173,15 +173,19 @@ export class ErrorSummaryComponent implements OnChanges, OnDestroy {
 	}
 
 	ngOnChanges(): void {
-		this._errorSummaryParentInfo = {
-			formId: this.parentComponent.querySelector('.fudis-form')?.getAttribute('id'),
-			parentElement: this.parentComponent,
-		};
+		if (this.parentComponent) {
+			this._errorSummaryParentInfo = {
+				formId: this.parentComponent.querySelector('.fudis-form')?.getAttribute('id'),
+				parentElement: this.parentComponent,
+			};
 
-		this._errorSummaryService.addErrorSummaryParent(this._errorSummaryParentInfo);
+			this._errorSummaryService.addErrorSummaryParent(this._errorSummaryParentInfo);
+		}
 	}
 
 	ngOnDestroy(): void {
-		this._errorSummaryService.removeErrorSummaryParent(this._errorSummaryParentInfo);
+		if (this._errorSummaryParentInfo) {
+			this._errorSummaryService.removeErrorSummaryParent(this._errorSummaryParentInfo);
+		}
 	}
 }
