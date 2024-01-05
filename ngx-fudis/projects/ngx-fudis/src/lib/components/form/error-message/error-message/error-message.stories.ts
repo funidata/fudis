@@ -54,6 +54,7 @@ class TextInputWithErrorMessageComponent {
 		}
 
 		this.originalMessage = !this.originalMessage;
+		console.log(this.control);
 	}
 }
 

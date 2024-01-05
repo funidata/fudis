@@ -128,7 +128,7 @@ describe('ErrorSummaryComponent', () => {
 
 	describe('Contents', () => {
 		// TODO: Test error summary ul list and its contents
-		fit('input attributes', () => {
+		it('input attributes', () => {
 			const helpText = 'Errors belong in a museum';
 
 			component.helpText = helpText;

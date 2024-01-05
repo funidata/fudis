@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Host, Input, OnChanges, OnDestroy, OnInit, Optional, Output } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { AbstractControl } from '@angular/forms';
 import { FudisValidationErrors, FudisValidatorFn, FudisValidatorMessage } from '../../../../utilities/form/validators';
 
@@ -75,11 +75,6 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 	private _id: string;
 
 	/**
-	 * Disposable object for preserving message as Observable string
-	 */
-	private _subscribtion: Subscription;
-
-	/**
 	 * Boolean determining if Error Message is added
 	 */
 	private _errorAdded: boolean = false;
@@ -127,16 +122,12 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 		/**
 		 * Update validator message if message is a string and not observable
 		 */
-
 		if (this._messageStringAsObservable && typeof this.message === 'string') {
 			this._messageStringAsObservable.next(this.message);
 		}
 	}
 
 	ngOnDestroy(): void {
-		if (this._subscribtion) {
-			this._subscribtion.unsubscribe();
-		}
 		this._removeValidator();
 	}
 
@@ -154,6 +145,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
 			this._errorAdded = true;
 			this._parent.control.addValidators(this._customValidatorInstance);
 			this._parent.control.updateValueAndValidity();
+
 			this.handleAddError.emit({ [this._id]: { message: this.message } });
 		} else if (this._parentGroup) {
 			this._errorAdded = true;
