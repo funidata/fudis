@@ -1,11 +1,12 @@
-import {  Meta, Canvas } from '@storybook/blocks';
-import * as ErrorMessageStories from './error-message.stories';
+import { Meta, Canvas } from "@storybook/blocks";
+import * as ErrorMessageStories from "./error-message.stories";
 
 <Meta title="Components/Form/Error Message" />
 
 # Error Message
 
 Fudis form component's errors can be achieved in two ways:
+
 - Through form control's validators: [Fudis Validators](/docs/utilities-validators--documentation).
 - As a Error Message child component, for cases when using a validator or creating a custom one can be tricky.
 
@@ -33,13 +34,13 @@ This requires the use of selector `fudis-error-message`. Both Error Message and 
 
 ### Mandatory Properties
 
-The mandatory properties for Error Message are `message` and `visible`. 
+The mandatory properties for Error Message are `message` and `visible`.
 
 When `visible` is true, it will adjust the parent's form control by binding a custom validator to it. This will trigger creation of `FudisValidatorErrorMessage` instance, which also sends error data to the Error Summary. If `visible` is set to false again, this will remove the added validator and also remove error from Error Summary.
 
 Message parameter can be passed either as a string or as an observable string.
 
-````
+```
 <fudis-text-input
 	[control]="control"
 	[label]="'Required text input'">
@@ -47,12 +48,13 @@ Message parameter can be passed either as a string or as an observable string.
 		[message]="'This is a custom error message has been added with content projection'"
 		[visible]="errorExists" />
 </fudis-text-input>
-````
+```
+
 ### Error Message with Date Range Component
 
 When it is mandatory to target error message to a single Form Control in Date Range component, use `fudisDateStartError`and `fudisDateEndError` directives for selecting between start and end time inputs.
 
-`````
+```
 <fudis-date-range [startDate]="startDate" [endDate]="endDate">
 	<ng-template fudisDateStartError>
 		<fudis-error-message [message]="'Error on the start date'" [visible]="startDateErrorCondition" />
@@ -61,7 +63,7 @@ When it is mandatory to target error message to a single Form Control in Date Ra
 		<fudis-error-message [message]="'Error on the end date'" [visible]="endDateErrorCondition" />
 	</ng-template>
 </fudis-date-range>
-`````
+```
 
 ## Accessibility
 

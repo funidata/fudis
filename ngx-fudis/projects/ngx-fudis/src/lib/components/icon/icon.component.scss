@@ -1,75 +1,75 @@
-@use '../../foundations/colors/tokens.scss' as colors;
-@use '../../foundations/spacing/tokens.scss' as spacing;
+@use "../../foundations/colors/tokens.scss" as colors;
+@use "../../foundations/spacing/tokens.scss" as spacing;
 
 .fudis-icon-host {
-	display: inline-flex;
-	position: relative;
-	vertical-align: middle;
+  display: inline-flex;
+  position: relative;
+  vertical-align: middle;
 }
 
 .fudis-icon {
-	box-sizing: border-box;
-	display: inline-flex;
-	align-items: center;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
 
-	&-rotate {
-		&__flip-180 {
-			transform: rotate(180deg);
-			transition: all 0.6s ease;
-		}
+  &-rotate {
+    &__flip-180 {
+      transform: rotate(180deg);
+      transition: all 0.6s ease;
+    }
 
-		&__cw-90 {
-			transform: rotate(90deg);
-			transition: all 0.6s ease;
-		}
+    &__cw-90 {
+      transform: rotate(90deg);
+      transition: all 0.6s ease;
+    }
 
-		&__ccw-90 {
-			transform: rotate(-90deg);
-			transition: all 0.6s ease;
-		}
-	}
+    &__ccw-90 {
+      transform: rotate(-90deg);
+      transition: all 0.6s ease;
+    }
+  }
 
-	&__lg {
-		width: spacing.$spacing-lg;
-		height: spacing.$spacing-lg;
-	}
+  &__lg {
+    width: spacing.$spacing-lg;
+    height: spacing.$spacing-lg;
+  }
 
-	&__sm {
-		width: spacing.$spacing-sm;
-		height: spacing.$spacing-sm;
-	}
+  &__sm {
+    width: spacing.$spacing-sm;
+    height: spacing.$spacing-sm;
+  }
 
-	&-color {
-		&__attention {
-			fill: colors.$color-yellow;
-		}
+  &-color {
+    &__attention {
+      fill: colors.$color-yellow;
+    }
 
-		&__danger {
-			fill: colors.$color-red;
-		}
+    &__danger {
+      fill: colors.$color-red;
+    }
 
-		&__default {
-			fill: colors.$color-gray-dark;
-		}
+    &__default {
+      fill: colors.$color-gray-dark;
+    }
 
-		&__light {
-			fill: colors.$color-gray-light;
-		}
+    &__light {
+      fill: colors.$color-gray-light;
+    }
 
-		&__primary {
-			fill: colors.$color-primary;
-		}
+    &__primary {
+      fill: colors.$color-primary;
+    }
 
-		&__primary-dark {
-			fill: colors.$color-primary-dark;
-		}
+    &__primary-dark {
+      fill: colors.$color-primary-dark;
+    }
 
-		&__success {
-			fill: colors.$color-green;
-		}
+    &__success {
+      fill: colors.$color-green;
+    }
 
-		&__white {
-			fill: colors.$color-white;
-		}
-	}
+    &__white {
+      fill: colors.$color-white;
+    }
+  }
 }

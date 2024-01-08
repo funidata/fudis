@@ -7,17 +7,17 @@ $breakpoint-sm: 36em; // 576px-767px;
 $breakpoint-xs: 0; // 0-575px;
 
 $breakpoints: (
-	'xxl': $breakpoint-xxl,
-	'xl': $breakpoint-xl,
-	'lg': $breakpoint-lg,
-	'md': $breakpoint-md,
-	'sm': $breakpoint-sm,
-	'xs': $breakpoint-xs,
+  "xxl": $breakpoint-xxl,
+  "xl": $breakpoint-xl,
+  "lg": $breakpoint-lg,
+  "md": $breakpoint-md,
+  "sm": $breakpoint-sm,
+  "xs": $breakpoint-xs,
 );
 $max-breakpoints: (
-	'xxl': $breakpoint-xxl,
-	'xl': $breakpoint-xl,
-	'lg': $breakpoint-lg,
-	'md': $breakpoint-md,
-	'sm': $breakpoint-sm,
+  "xxl": $breakpoint-xxl,
+  "xl": $breakpoint-xl,
+  "lg": $breakpoint-lg,
+  "md": $breakpoint-md,
+  "sm": $breakpoint-sm,
 );

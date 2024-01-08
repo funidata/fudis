@@ -1,15 +1,15 @@
-@use '../../../foundations/typography/mixins.scss' as typography;
-@use '../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../foundations/borders/mixins.scss' as border;
+@use "../../../foundations/typography/mixins.scss" as typography;
+@use "../../../foundations/spacing/tokens.scss" as spacing;
+@use "../../../foundations/borders/mixins.scss" as border;
 
 .fudis-text-area {
-	&__input {
-		@include typography.text-field-input;
+  &__input {
+    @include typography.text-field-input;
 
-		box-sizing: border-box;
-		display: block;
-		padding: spacing.$spacing-xxs;
-		width: 100%;
-		resize: vertical; // Enable resizing the textarea only vertically. Can be also 'none' if we want to disable resizing all together
-	}
+    box-sizing: border-box;
+    display: block;
+    padding: spacing.$spacing-xxs;
+    width: 100%;
+    resize: vertical; // Enable resizing the textarea only vertically. Can be also 'none' if we want to disable resizing all together
+  }
 }

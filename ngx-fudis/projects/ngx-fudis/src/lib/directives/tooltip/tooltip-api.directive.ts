@@ -3,22 +3,22 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { FudisTooltipPosition } from '../../types/miscellaneous';
 
 @Directive({
-	selector: '[fudisTooltipApi]',
-	providers: [MatTooltip],
+  selector: '[fudisTooltipApi]',
+  providers: [MatTooltip],
 })
 export class TooltipApiDirective {
-	/**
-	 * Text placed on tooltip
-	 */
-	@Input() tooltip: string | undefined;
+  /**
+   * Text placed on tooltip
+   */
+  @Input() tooltip: string | undefined;
 
-	/**
-	 * tooltipToggle set on true makes tooltip appear when toggled. Default behavior is triggered on focus. TooltipToggle feature is prefered to be used with icons.
-	 */
-	@Input() tooltipToggle = false;
+  /**
+   * tooltipToggle set on true makes tooltip appear when toggled. Default behavior is triggered on focus. TooltipToggle feature is prefered to be used with icons.
+   */
+  @Input() tooltipToggle = false;
 
-	/**
-	 * Sets the position of the tooltip on the parent element. Position options are left, right, above and below the parent element.
-	 */
-	@Input() tooltipPosition: FudisTooltipPosition = 'below';
+  /**
+   * Sets the position of the tooltip on the parent element. Position options are left, right, above and below the parent element.
+   */
+  @Input() tooltipPosition: FudisTooltipPosition = 'below';
 }

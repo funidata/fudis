@@ -9,103 +9,105 @@ import { FudisValidators } from '../../../../utilities/form/validators';
 const html = String.raw;
 
 export default {
-	title: 'Components/Form/Date/Datepicker',
-	component: DatepickerComponent,
-	parameters: {
-		docs: {
-			page: readme,
-		},
-		controls: {
-			exclude: [
-				'_translations',
-				'_id',
-				'_required',
-				'_requiredText',
-				'ngOnChanges',
-				'ngOnInit',
-				'setConfigs',
-				'onBlur',
-			],
-		},
-	},
-	decorators: [
-		moduleMetadata({
-			declarations: [],
-			imports: [ReactiveFormsModule, FormsModule],
-		}),
-		applicationConfig({
-			providers: [importProvidersFrom(BrowserAnimationsModule)],
-		}),
-	],
-	argTypes: {},
+  title: 'Components/Form/Date/Datepicker',
+  component: DatepickerComponent,
+  parameters: {
+    docs: {
+      page: readme,
+    },
+    controls: {
+      exclude: [
+        '_translations',
+        '_id',
+        '_required',
+        '_requiredText',
+        'ngOnChanges',
+        'ngOnInit',
+        'setConfigs',
+        'onBlur',
+      ],
+    },
+  },
+  decorators: [
+    moduleMetadata({
+      declarations: [],
+      imports: [ReactiveFormsModule, FormsModule],
+    }),
+    applicationConfig({
+      providers: [importProvidersFrom(BrowserAnimationsModule)],
+    }),
+  ],
+  argTypes: {},
 } as Meta;
 
 const Template: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
-	props: {
-		...args,
-	},
+  props: {
+    ...args,
+  },
 
-	template: html`
-		<fudis-datepicker
-			[label]="label"
-			[id]="id"
-			[helpText]="helpText"
-			[errorMsg]="errorMsg"
-			[control]="control"
-			[disabled]="disabled"
-			[minDate]="minDate"
-			[maxDate]="maxDate"
-			[tooltip]="tooltip"
-			[tooltipPosition]="tooltipPosition"
-			[tooltipToggle]="tooltipToggle" />
-		<fudis-body-text *ngIf="control.value">The date output is: {{ control.value }}</fudis-body-text>
-		<fudis-body-text *ngIf="control.value"
-			>The date output with Angular date pipe is: {{ control.value | date:'dd.MM.yyyy' }}</fudis-body-text
-		>
-	`,
+  template: html`
+    <fudis-datepicker
+      [label]="label"
+      [id]="id"
+      [helpText]="helpText"
+      [errorMsg]="errorMsg"
+      [control]="control"
+      [disabled]="disabled"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      [tooltip]="tooltip"
+      [tooltipPosition]="tooltipPosition"
+      [tooltipToggle]="tooltipToggle"
+    />
+    <fudis-body-text *ngIf="control.value">The date output is: {{ control.value }}</fudis-body-text>
+    <fudis-body-text *ngIf="control.value"
+      >The date output with Angular date pipe is: {{ control.value | date:'dd.MM.yyyy'
+      }}</fudis-body-text
+    >
+  `,
 });
 
 export const Datepicker = Template.bind({});
 Datepicker.args = {
-	id: 'example-id-for-datepicker-required-validation',
-	label: 'Select a date',
-	helpText: 'Choose your favourite date.',
-	errorMsg: { matDatepickerParse: 'Your date does is not a real date.' },
-	tooltip: 'Is it your birthday?',
-	tooltipPosition: 'left',
-	tooltipToggle: true,
-	control: new FormControl(null, FudisValidators.required('Date is required.')),
+  id: 'example-id-for-datepicker-required-validation',
+  label: 'Select a date',
+  helpText: 'Choose your favourite date.',
+  errorMsg: { matDatepickerParse: 'Your date does is not a real date.' },
+  tooltip: 'Is it your birthday?',
+  tooltipPosition: 'left',
+  tooltipToggle: true,
+  control: new FormControl(null, FudisValidators.required('Date is required.')),
 };
 
 export const DatepickerPreselectedDate = Template.bind({});
 DatepickerPreselectedDate.args = {
-	label: 'Select a date',
-	helpText: 'Choose your favourite date.',
-	errorMsg: { matDatepickerParse: 'Your date does is not a real date.' },
-	tooltip: 'Is it your birthday?',
-	tooltipPosition: 'left',
-	tooltipToggle: true,
-	control: new FormControl(new Date('1977-12-16')),
+  label: 'Select a date',
+  helpText: 'Choose your favourite date.',
+  errorMsg: { matDatepickerParse: 'Your date does is not a real date.' },
+  tooltip: 'Is it your birthday?',
+  tooltipPosition: 'left',
+  tooltipToggle: true,
+  control: new FormControl(new Date('1977-12-16')),
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-	id: 'example-id-for-datepicker-disabled',
-	label: 'Select a date',
-	control: new FormControl(null),
-	disabled: true,
+  id: 'example-id-for-datepicker-disabled',
+  label: 'Select a date',
+  control: new FormControl(null),
+  disabled: true,
 };
 
 export const WithMinMaxValidator = Template.bind({});
 WithMinMaxValidator.args = {
-	id: 'example-id-for-datepicker-min-max-validator',
-	label: 'Select a date',
-	helpText: 'Choose a date between the allowed range.',
-	errorMsg: {
-		matDatepickerMin: 'Date is not inside the allowed range.',
-		matDatepickerMax: 'Date is not inside the allowed range.',
-	},
-	control: new FormControl(null),
-	minDate: new Date(2023, 2, 13),
-	maxDate: new Date(2023, 2, 26),
+  id: 'example-id-for-datepicker-min-max-validator',
+  label: 'Select a date',
+  helpText: 'Choose a date between the allowed range.',
+  errorMsg: {
+    matDatepickerMin: 'Date is not inside the allowed range.',
+    matDatepickerMax: 'Date is not inside the allowed range.',
+  },
+  control: new FormControl(null),
+  minDate: new Date(2023, 2, 13),
+  maxDate: new Date(2023, 2, 26),
 };

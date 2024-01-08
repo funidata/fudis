@@ -1,49 +1,49 @@
-@use './mixins.scss' as mixins;
-@use '../spacing/tokens.scss' as spacing;
-@use '../borders/mixins.scss' as border;
-@use '../colors/mixins.scss' as colors;
+@use "./mixins.scss" as mixins;
+@use "../spacing/tokens.scss" as spacing;
+@use "../borders/mixins.scss" as border;
+@use "../colors/mixins.scss" as colors;
 
 .fudis-visually-hidden {
-	@include mixins.visually-hidden;
+  @include mixins.visually-hidden;
 }
 
 .fudis-box-reset {
-	@include mixins.box-reset;
+  @include mixins.box-reset;
 }
 
 .fudis-hr {
-	@include mixins.horizontal-rule;
+  @include mixins.horizontal-rule;
 }
 
 /* stylelint-disable-next-line selector-no-qualifying-type */
 input.fudis-form-input {
-	/* stylelint-disable-next-line selector-no-qualifying-type */
-	&--invalid[aria-invalid='true'] {
-		@include border.border('1px', 'solid', 'red');
-	}
+  /* stylelint-disable-next-line selector-no-qualifying-type */
+  &--invalid[aria-invalid="true"] {
+    @include border.border("1px", "solid", "red");
+  }
 
-	&--disabled {
-		@include border.border('1px', 'dashed', 'gray-middle');
-		@include colors.bg-color('gray-extra-light');
+  &--disabled {
+    @include border.border("1px", "dashed", "gray-middle");
+    @include colors.bg-color("gray-extra-light");
 
-		cursor: default;
-	}
+    cursor: default;
+  }
 }
 
 .fudis-input-size {
-	&__xs {
-		max-width: spacing.$spacing-input-xs;
-	}
+  &__xs {
+    max-width: spacing.$spacing-input-xs;
+  }
 
-	&__sm {
-		max-width: spacing.$spacing-input-sm;
-	}
+  &__sm {
+    max-width: spacing.$spacing-input-sm;
+  }
 
-	&__md {
-		max-width: spacing.$spacing-input-md;
-	}
+  &__md {
+    max-width: spacing.$spacing-input-md;
+  }
 
-	&__lg {
-		max-width: spacing.$spacing-input-lg;
-	}
+  &__lg {
+    max-width: spacing.$spacing-input-lg;
+  }
 }

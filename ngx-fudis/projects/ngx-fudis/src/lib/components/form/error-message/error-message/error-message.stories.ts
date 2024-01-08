@@ -8,71 +8,76 @@ import readme from './readme.mdx';
 import { FudisValidators } from '../../../../utilities/form/validators';
 
 @Component({
-	selector: 'example-text-input-with-error-message',
-	template: `
-		<fudis-grid [columns]="2" [width]="'xs'">
-			<fudis-text-input fudisGridItem [columns]="'stretch'" [control]="control" [label]="'Required text input'">
-				<fudis-error-message [visible]="_errorExists" [message]="message" />
-			</fudis-text-input>
-			<fudis-button (click)="toggleCustomError()" [label]="'Toggle custom error'" />
-			<fudis-button (click)="switchErrorMessage()" [label]="'Switch message content'" />
-		</fudis-grid>
-	`,
+  selector: 'example-text-input-with-error-message',
+  template: `
+    <fudis-grid [columns]="2" [width]="'xs'">
+      <fudis-text-input
+        fudisGridItem
+        [columns]="'stretch'"
+        [control]="control"
+        [label]="'Required text input'"
+      >
+        <fudis-error-message [visible]="_errorExists" [message]="message" />
+      </fudis-text-input>
+      <fudis-button (click)="toggleCustomError()" [label]="'Toggle custom error'" />
+      <fudis-button (click)="switchErrorMessage()" [label]="'Switch message content'" />
+    </fudis-grid>
+  `,
 })
 class TextInputWithErrorMessageComponent {
-	constructor() {
-		this.control = new FormControl('', FudisValidators.required('This field is required.'));
-	}
+  constructor() {
+    this.control = new FormControl('', FudisValidators.required('This field is required.'));
+  }
 
-	message: Subject<string> = new BehaviorSubject<string>(
-		'This is a custom error message coming from fudis-error-message element'
-	);
+  message: Subject<string> = new BehaviorSubject<string>(
+    'This is a custom error message coming from fudis-error-message element',
+  );
 
-	customErrorExists: FormControlOptions;
+  customErrorExists: FormControlOptions;
 
-	originalMessage: boolean = true;
+  originalMessage: boolean = true;
 
-	control: FormControl<string | null>;
+  control: FormControl<string | null>;
 
-	protected _errorExists: boolean = true;
+  protected _errorExists: boolean = true;
 
-	toggleCustomError(): void {
-		this._errorExists = !this._errorExists;
-	}
+  toggleCustomError(): void {
+    this._errorExists = !this._errorExists;
+  }
 
-	switchErrorMessage(): void {
-		if (this.originalMessage) {
-			this.message.next('Observable value changed, so now this is me!');
-		} else {
-			this.message.next('Custom message can be any string or observable string');
-		}
+  switchErrorMessage(): void {
+    if (this.originalMessage) {
+      this.message.next('Observable value changed, so now this is me!');
+    } else {
+      this.message.next('Custom message can be any string or observable string');
+    }
 
-		this.originalMessage = !this.originalMessage;
-	}
+    this.originalMessage = !this.originalMessage;
+  }
 }
 
 export default {
-	title: 'Components/Form/Error Message',
-	component: ErrorMessageComponent,
-	decorators: [
-		moduleMetadata({
-			declarations: [TextInputWithErrorMessageComponent],
-			imports: [ReactiveFormsModule, FormsModule],
-		}),
-	],
-	parameters: {
-		docs: {
-			page: readme,
-		},
-		controls: {
-			exclude: ['control'],
-		},
-	},
-	argTypes: {},
+  title: 'Components/Form/Error Message',
+  component: ErrorMessageComponent,
+  decorators: [
+    moduleMetadata({
+      declarations: [TextInputWithErrorMessageComponent],
+      imports: [ReactiveFormsModule, FormsModule],
+    }),
+  ],
+  parameters: {
+    docs: {
+      page: readme,
+    },
+    controls: {
+      exclude: ['control'],
+    },
+  },
+  argTypes: {},
 } as Meta;
 
 export const ErrorMessageExample: StoryFn = () => ({
-	template: `
+  template: `
 <!--
 Full code example available in:
 components/form/error-message/error-message/error-message.stories.ts

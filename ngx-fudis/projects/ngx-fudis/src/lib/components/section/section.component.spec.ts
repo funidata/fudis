@@ -11,24 +11,29 @@ import { FudisInternalErrorSummaryService } from '../../services/form/error-summ
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 
 describe('SectionComponent', () => {
-	let component: SectionComponent;
-	let fixture: ComponentFixture<SectionComponent>;
+  let component: SectionComponent;
+  let fixture: ComponentFixture<SectionComponent>;
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			declarations: [SectionComponent, HeadingComponent, GridDirective],
-			providers: [FudisGridService, FudisIdService, FudisInternalErrorSummaryService, FudisBreakpointService],
-		});
-		fixture = TestBed.createComponent(SectionComponent);
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [SectionComponent, HeadingComponent, GridDirective],
+      providers: [
+        FudisGridService,
+        FudisIdService,
+        FudisInternalErrorSummaryService,
+        FudisBreakpointService,
+      ],
+    });
+    fixture = TestBed.createComponent(SectionComponent);
 
-		component = fixture.componentInstance;
-		component.title = 'Mandatory title';
-		component.ngOnInit();
+    component = fixture.componentInstance;
+    component.title = 'Mandatory title';
+    component.ngOnInit();
 
-		fixture.detectChanges();
-	});
+    fixture.detectChanges();
+  });
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
-	});
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

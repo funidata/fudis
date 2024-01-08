@@ -1,71 +1,71 @@
-@use '../../../../foundations/borders/mixins.scss' as borders;
-@use '../../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../../foundations/colors/tokens.scss' as colors;
-@use '../../../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../../../foundations/utilities/mixins.scss' as utilities;
-@use '../../../../foundations/focus/mixins.scss' as focus;
-@use '../../../../foundations/typography/mixins.scss' as typography;
+@use "../../../../foundations/borders/mixins.scss" as borders;
+@use "../../../../foundations/spacing/tokens.scss" as spacing;
+@use "../../../../foundations/colors/tokens.scss" as colors;
+@use "../../../../foundations/colors/mixins.scss" as colorMixins;
+@use "../../../../foundations/utilities/mixins.scss" as utilities;
+@use "../../../../foundations/focus/mixins.scss" as focus;
+@use "../../../../foundations/typography/mixins.scss" as typography;
 
 .fudis-checkbox {
-	@include typography.body-text-md-regular;
-	@include colorMixins.text-color('gray-dark');
+  @include typography.body-text-md-regular;
+  @include colorMixins.text-color("gray-dark");
 
-	display: inline-flex;
-	position: relative;
-	align-items: center;
-	cursor: pointer;
-	width: auto;
-	height: spacing.$spacing-lg;
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  cursor: pointer;
+  width: auto;
+  height: spacing.$spacing-lg;
 
-	&__content {
-		display: inline-flex;
-		align-items: center;
+  &__content {
+    display: inline-flex;
+    align-items: center;
 
-		&__box {
-			@include borders.border('1px', 'solid', 'gray-middle');
+    &__box {
+      @include borders.border("1px", "solid", "gray-middle");
 
-			display: flex;
-			position: absolute;
-			align-items: center;
-			justify-content: center;
-			margin-right: spacing.$spacing-xs;
-			border-radius: 0;
-			width: spacing.$spacing-input-checkbox;
-			height: spacing.$spacing-input-checkbox;
+      display: flex;
+      position: absolute;
+      align-items: center;
+      justify-content: center;
+      margin-right: spacing.$spacing-xs;
+      border-radius: 0;
+      width: spacing.$spacing-input-checkbox;
+      height: spacing.$spacing-input-checkbox;
 
-			&__icon .fudis-icon {
-				fill: colors.$color-gray-middle;
-			}
+      &__icon .fudis-icon {
+        fill: colors.$color-gray-middle;
+      }
 
-			&--focused {
-				@include focus.focus-checkbox;
-			}
+      &--focused {
+        @include focus.focus-checkbox;
+      }
 
-			&--disabled {
-				@include borders.border('1px', 'dashed', 'gray-middle');
-				@include colorMixins.bg-color('gray-extra-light');
+      &--disabled {
+        @include borders.border("1px", "dashed", "gray-middle");
+        @include colorMixins.bg-color("gray-extra-light");
 
-				cursor: default;
-			}
+        cursor: default;
+      }
 
-			&--invalid {
-				@include borders.border('1px', 'solid', 'red');
+      &--invalid {
+        @include borders.border("1px", "solid", "red");
 
-				box-shadow: 0 0 0 spacing.$pixel-3 colors.$color-red-light;
-			}
-		}
+        box-shadow: 0 0 0 spacing.$pixel-3 colors.$color-red-light;
+      }
+    }
 
-		&__label {
-			position: relative;
-			margin-left: spacing.$spacing-xl;
-		}
-	}
+    &__label {
+      position: relative;
+      margin-left: spacing.$spacing-xl;
+    }
+  }
 
-	&__input {
-		@include utilities.box-reset;
+  &__input {
+    @include utilities.box-reset;
 
-		appearance: none;
-		display: grid;
-		place-content: center;
-	}
+    appearance: none;
+    display: grid;
+    place-content: center;
+  }
 }

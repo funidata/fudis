@@ -6,23 +6,23 @@ import { FudisInternalErrorSummaryService } from '../../../services/form/error-s
 import { NotificationComponent } from '../../notification/notification.component';
 
 describe('ErrorSummaryComponent', () => {
-	let component: ErrorSummaryComponent;
-	let fixture: ComponentFixture<ErrorSummaryComponent>;
+  let component: ErrorSummaryComponent;
+  let fixture: ComponentFixture<ErrorSummaryComponent>;
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			declarations: [ErrorSummaryComponent, MockComponent(NotificationComponent)],
-			providers: [FudisInternalErrorSummaryService],
-		}).compileComponents();
-	});
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ErrorSummaryComponent, MockComponent(NotificationComponent)],
+      providers: [FudisInternalErrorSummaryService],
+    }).compileComponents();
+  });
 
-	beforeEach(() => {
-		fixture = TestBed.createComponent(ErrorSummaryComponent);
-		component = fixture.componentInstance;
-		fixture.detectChanges();
-	});
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ErrorSummaryComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
-	});
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

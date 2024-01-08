@@ -1,63 +1,63 @@
-@use '../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../foundations/typography/mixins.scss' as typography;
-@use '../../../foundations/colors/mixins.scss' as colorMixins;
+@use "../../../foundations/spacing/tokens.scss" as spacing;
+@use "../../../foundations/typography/mixins.scss" as typography;
+@use "../../../foundations/colors/mixins.scss" as colorMixins;
 
 .fudis-guidance {
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 
-	&__help-text {
-		@include colorMixins.text-color('gray-dark');
-		@include typography.body-text-sm-regular;
+  &__help-text {
+    @include colorMixins.text-color("gray-dark");
+    @include typography.body-text-sm-regular;
 
-		margin-top: spacing.$spacing-none;
-		margin-bottom: spacing.$spacing-xs;
-	}
+    margin-top: spacing.$spacing-none;
+    margin-bottom: spacing.$spacing-xs;
+  }
 
-	&__errors {
-		display: flex;
-		transform: translateX(calc(-1 * spacing.$spacing-xs));
-		opacity: 0;
-		height: spacing.$spacing-xs;
-		animation-name: delay-appearance;
-		animation-delay: 0.2s;
-		animation-iteration-count: 1;
-		animation-fill-mode: forwards;
+  &__errors {
+    display: flex;
+    transform: translateX(calc(-1 * spacing.$spacing-xs));
+    opacity: 0;
+    height: spacing.$spacing-xs;
+    animation-name: delay-appearance;
+    animation-delay: 0.2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 
-		&--visible {
-			display: flex;
-			transform: translateX(calc(-1 * spacing.$spacing-xs));
-			opacity: 1;
-			height: auto;
-		}
+    &--visible {
+      display: flex;
+      transform: translateX(calc(-1 * spacing.$spacing-xs));
+      opacity: 1;
+      height: auto;
+    }
 
-		&__list {
-			min-height: spacing.$spacing-xs;
-		}
-	}
+    &__list {
+      min-height: spacing.$spacing-xs;
+    }
+  }
 
-	&__character-limit-indicator {
-		@include colorMixins.text-color('gray-dark');
-		@include typography.body-text-sm-regular;
+  &__character-limit-indicator {
+    @include colorMixins.text-color("gray-dark");
+    @include typography.body-text-sm-regular;
 
-		margin-top: spacing.$spacing-xs;
-		margin-left: spacing.$spacing-xs;
+    margin-top: spacing.$spacing-xs;
+    margin-left: spacing.$spacing-xs;
 
-		&__float-right {
-			margin-left: auto;
-		}
-	}
+    &__float-right {
+      margin-left: auto;
+    }
+  }
 }
 
 @keyframes delay-appearance {
-	0% {
-		opacity: 0;
-		height: spacing.$spacing-xs;
-	}
+  0% {
+    opacity: 0;
+    height: spacing.$spacing-xs;
+  }
 
-	100% {
-		opacity: 1;
-		height: auto;
-	}
+  100% {
+    opacity: 1;
+    height: auto;
+  }
 }

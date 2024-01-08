@@ -11,7 +11,7 @@ $z-index-alert: 300;
 * This way the possible top/below priority doesn't need manual refactoring of the z-index values above.
 */
 $layer-names: (
-	'dropdown-menu': $z-index-dropdown-menu,
-	'dialog': $z-index-dialog,
-	'alert': $z-index-alert,
+  "dropdown-menu": $z-index-dropdown-menu,
+  "dialog": $z-index-dialog,
+  "alert": $z-index-alert,
 );

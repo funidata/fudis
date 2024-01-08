@@ -11,41 +11,41 @@ import { GuidanceComponent } from '../guidance/guidance.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 
 const testFormGroup: FormGroup = new FormGroup({
-	finnish: new FormControl('', FudisValidators.required('Required in Finnish')),
-	swedish: new FormControl(''),
-	english: new FormControl('', FudisValidators.required('Required in English')),
+  finnish: new FormControl('', FudisValidators.required('Required in Finnish')),
+  swedish: new FormControl(''),
+  english: new FormControl('', FudisValidators.required('Required in English')),
 });
 
 const languageOptions: FudisSelectOption[] = [
-	{ value: 'finnish', label: 'Fi' },
-	{ value: 'swedish', label: 'Sv' },
-	{ value: 'english', label: 'En' },
+  { value: 'finnish', label: 'Fi' },
+  { value: 'swedish', label: 'Sv' },
+  { value: 'english', label: 'En' },
 ];
 
 describe('InputWithLanguageOptionsComponent', () => {
-	let component: InputWithLanguageOptionsComponent;
-	let fixture: ComponentFixture<InputWithLanguageOptionsComponent>;
+  let component: InputWithLanguageOptionsComponent;
+  let fixture: ComponentFixture<InputWithLanguageOptionsComponent>;
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			declarations: [
-				InputWithLanguageOptionsComponent,
-				MockComponent(FieldSetComponent),
-				MockComponent(DropdownComponent),
-				MockComponent(TextInputComponent),
-				MockComponent(GuidanceComponent),
-			],
-		}).compileComponents();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [
+        InputWithLanguageOptionsComponent,
+        MockComponent(FieldSetComponent),
+        MockComponent(DropdownComponent),
+        MockComponent(TextInputComponent),
+        MockComponent(GuidanceComponent),
+      ],
+    }).compileComponents();
 
-		fixture = TestBed.createComponent(InputWithLanguageOptionsComponent);
-		component = fixture.componentInstance;
-		component.label = 'Label for testing purposes';
-		component.formGroup = testFormGroup;
-		component.options = languageOptions;
-		fixture.detectChanges();
-	});
+    fixture = TestBed.createComponent(InputWithLanguageOptionsComponent);
+    component = fixture.componentInstance;
+    component.label = 'Label for testing purposes';
+    component.formGroup = testFormGroup;
+    component.options = languageOptions;
+    fixture.detectChanges();
+  });
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
-	});
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

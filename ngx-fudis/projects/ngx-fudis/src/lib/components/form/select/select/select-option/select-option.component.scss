@@ -1,69 +1,69 @@
-@use '../../../../../foundations/borders/mixins.scss' as borders;
-@use '../../../../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../../../../foundations/focus/mixins.scss' as focus;
-@use '../../../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../../../foundations/typography/mixins.scss' as typography;
-@use '../../../../../foundations/utilities/mixins.scss' as utilities;
+@use "../../../../../foundations/borders/mixins.scss" as borders;
+@use "../../../../../foundations/colors/mixins.scss" as colorMixins;
+@use "../../../../../foundations/focus/mixins.scss" as focus;
+@use "../../../../../foundations/spacing/tokens.scss" as spacing;
+@use "../../../../../foundations/typography/mixins.scss" as typography;
+@use "../../../../../foundations/utilities/mixins.scss" as utilities;
 
 .fudis-select-option {
-	@include utilities.box-reset;
-	@include typography.body-text-md-light;
-	@include colorMixins.bg-color('transparent');
-	@include borders.border-none;
+  @include utilities.box-reset;
+  @include typography.body-text-md-light;
+  @include colorMixins.bg-color("transparent");
+  @include borders.border-none;
 
-	display: flex;
-	position: relative;
-	align-items: flex-start;
-	justify-content: space-between;
-	cursor: pointer;
-	padding-left: spacing.$spacing-sm;
-	width: 100%;
-	min-height: spacing.$spacing-lg;
-	overflow: hidden;
-	text-align: left;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  justify-content: space-between;
+  cursor: pointer;
+  padding-left: spacing.$spacing-sm;
+  width: 100%;
+  min-height: spacing.$spacing-lg;
+  overflow: hidden;
+  text-align: left;
 
-	/* stylelint-disable-next-line selector-class-pattern */
-	&:not(.fudis-select-option__focusable) {
-		display: none;
-		visibility: none;
-	}
+  /* stylelint-disable-next-line selector-class-pattern */
+  &:not(.fudis-select-option__focusable) {
+    display: none;
+    visibility: none;
+  }
 
-	&:hover {
-		@include colorMixins.bg-color('primary-light');
-		@include colorMixins.text-color('gray-dark');
-	}
+  &:hover {
+    @include colorMixins.bg-color("primary-light");
+    @include colorMixins.text-color("gray-dark");
+  }
 
-	&:focus-visible,
-	&:focus {
-		@include colorMixins.bg-color('primary-light');
-		@include focus.focus-dropdown;
-	}
+  &:focus-visible,
+  &:focus {
+    @include colorMixins.bg-color("primary-light");
+    @include focus.focus-dropdown;
+  }
 
-	&:active {
-		@include colorMixins.bg-color('primary');
-		@include colorMixins.text-color('white');
-	}
+  &:active {
+    @include colorMixins.bg-color("primary");
+    @include colorMixins.text-color("white");
+  }
 
-	&--disabled {
-		@include colorMixins.bg-color('gray-extra-light');
-		@include colorMixins.text-color('gray-middle');
+  &--disabled {
+    @include colorMixins.bg-color("gray-extra-light");
+    @include colorMixins.text-color("gray-middle");
 
-		cursor: default;
-	}
+    cursor: default;
+  }
 
-	&__focusable,
-	&--visible {
-		display: flex;
-		visibility: visible;
-	}
+  &__focusable,
+  &--visible {
+    display: flex;
+    visibility: visible;
+  }
 
-	&__disabled-text {
-		padding-right: spacing.$spacing-xs;
-	}
+  &__disabled-text {
+    padding-right: spacing.$spacing-xs;
+  }
 
-	&__label {
-		margin: spacing.$spacing-xs 0;
-		/* stylelint-disable-next-line property-disallowed-list */
-		line-height: spacing.$spacing-sm;
-	}
+  &__label {
+    margin: spacing.$spacing-xs 0;
+    /* stylelint-disable-next-line property-disallowed-list */
+    line-height: spacing.$spacing-sm;
+  }
 }

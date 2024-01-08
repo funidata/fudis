@@ -1,94 +1,94 @@
-@use '../../../../../foundations/borders/mixins.scss' as borders;
-@use '../../../../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../../../../foundations/focus/mixins.scss' as focus;
-@use '../../../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../../../foundations/typography/mixins.scss' as typography;
-@use '../../../../../foundations/utilities/mixins.scss' as utilities;
+@use "../../../../../foundations/borders/mixins.scss" as borders;
+@use "../../../../../foundations/colors/mixins.scss" as colorMixins;
+@use "../../../../../foundations/focus/mixins.scss" as focus;
+@use "../../../../../foundations/spacing/tokens.scss" as spacing;
+@use "../../../../../foundations/typography/mixins.scss" as typography;
+@use "../../../../../foundations/utilities/mixins.scss" as utilities;
 
 .fudis-multiselect-option {
-	@include colorMixins.text-color('gray-dark');
+  @include colorMixins.text-color("gray-dark");
 
-	width: auto;
+  width: auto;
 
-	/* stylelint-disable-next-line selector-class-pattern */
-	&:not(.fudis-multiselect-option--visible) {
-		display: none;
-		visibility: none;
-	}
+  /* stylelint-disable-next-line selector-class-pattern */
+  &:not(.fudis-multiselect-option--visible) {
+    display: none;
+    visibility: none;
+  }
 
-	&:hover {
-		@include colorMixins.bg-color('primary-light');
-	}
+  &:hover {
+    @include colorMixins.bg-color("primary-light");
+  }
 
-	&__disabled-text {
-		padding-right: spacing.$spacing-xs;
-	}
+  &__disabled-text {
+    padding-right: spacing.$spacing-xs;
+  }
 
-	&__label {
-		@include typography.body-text-md-regular;
+  &__label {
+    @include typography.body-text-md-regular;
 
-		display: flex;
-		align-items: center;
-		margin-bottom: 0;
-		padding: spacing.$spacing-xs spacing.$spacing-xs spacing.$spacing-xs 0;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    padding: spacing.$spacing-xs spacing.$spacing-xs spacing.$spacing-xs 0;
 
-		&__checkbox {
-			@include borders.border('1px', 'solid', 'gray-middle');
-			@include colorMixins.bg-color('white');
+    &__checkbox {
+      @include borders.border("1px", "solid", "gray-middle");
+      @include colorMixins.bg-color("white");
 
-			display: flex;
-			position: absolute;
-			align-items: center;
-			justify-content: center;
-			margin: spacing.$spacing-xs;
-			border-radius: 0;
-			cursor: pointer;
-			width: spacing.$spacing-sm;
-			height: spacing.$spacing-sm;
+      display: flex;
+      position: absolute;
+      align-items: center;
+      justify-content: center;
+      margin: spacing.$spacing-xs;
+      border-radius: 0;
+      cursor: pointer;
+      width: spacing.$spacing-sm;
+      height: spacing.$spacing-sm;
 
-			&__icon {
-				transform: scale(0.85);
-			}
+      &__icon {
+        transform: scale(0.85);
+      }
 
-			&__input {
-				@include utilities.box-reset;
+      &__input {
+        @include utilities.box-reset;
 
-				appearance: none;
-				display: grid;
-				position: absolute;
-				place-content: center;
+        appearance: none;
+        display: grid;
+        position: absolute;
+        place-content: center;
 
-				/* stylelint-disable-next-line max-nesting-depth */
-				&:focus {
-					@include focus.focus-checkbox;
-				}
-			}
-		}
+        /* stylelint-disable-next-line max-nesting-depth */
+        &:focus {
+          @include focus.focus-checkbox;
+        }
+      }
+    }
 
-		&__text {
-			position: relative;
-			margin-left: spacing.$spacing-lg;
-		}
-	}
+    &__text {
+      position: relative;
+      margin-left: spacing.$spacing-lg;
+    }
+  }
 
-	&--checked {
-		@include colorMixins.text-color('white');
-		@include colorMixins.bg-color('primary');
+  &--checked {
+    @include colorMixins.text-color("white");
+    @include colorMixins.bg-color("primary");
 
-		&:hover {
-			@include colorMixins.text-color('gray-dark');
-		}
-	}
+    &:hover {
+      @include colorMixins.text-color("gray-dark");
+    }
+  }
 
-	&--disabled {
-		@include colorMixins.bg-color('gray-extra-light');
-		@include colorMixins.text-color('gray-middle');
+  &--disabled {
+    @include colorMixins.bg-color("gray-extra-light");
+    @include colorMixins.text-color("gray-middle");
 
-		cursor: default;
-	}
+    cursor: default;
+  }
 
-	&--focused {
-		@include colorMixins.bg-color('primary-light');
-		@include colorMixins.text-color('gray-dark');
-	}
+  &--focused {
+    @include colorMixins.bg-color("primary-light");
+    @include colorMixins.text-color("gray-dark");
+  }
 }

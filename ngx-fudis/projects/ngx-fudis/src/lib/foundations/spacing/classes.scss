@@ -1,35 +1,35 @@
-@use './tokens.scss' as spacing;
+@use "./tokens.scss" as spacing;
 
 .fudis-mb {
-	&-none {
-		margin-bottom: spacing.$spacing-none;
-	}
+  &-none {
+    margin-bottom: spacing.$spacing-none;
+  }
 
-	&-xxs {
-		margin-bottom: spacing.$spacing-xxs;
-	}
+  &-xxs {
+    margin-bottom: spacing.$spacing-xxs;
+  }
 
-	&-xs {
-		margin-bottom: spacing.$spacing-xs;
-	}
+  &-xs {
+    margin-bottom: spacing.$spacing-xs;
+  }
 
-	&-sm {
-		margin-bottom: spacing.$spacing-sm;
-	}
+  &-sm {
+    margin-bottom: spacing.$spacing-sm;
+  }
 
-	&-md {
-		margin-bottom: spacing.$spacing-md;
-	}
+  &-md {
+    margin-bottom: spacing.$spacing-md;
+  }
 
-	&-lg {
-		margin-bottom: spacing.$spacing-lg;
-	}
+  &-lg {
+    margin-bottom: spacing.$spacing-lg;
+  }
 
-	&-xl {
-		margin-bottom: spacing.$spacing-xl;
-	}
+  &-xl {
+    margin-bottom: spacing.$spacing-xl;
+  }
 
-	&-xxl {
-		margin-bottom: spacing.$spacing-xxl;
-	}
+  &-xxl {
+    margin-bottom: spacing.$spacing-xxl;
+  }
 }

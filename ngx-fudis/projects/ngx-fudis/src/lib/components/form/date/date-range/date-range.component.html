@@ -1,34 +1,41 @@
 <ng-container *ngIf="startDate && endDate">
-	<div #dateRangeRef class="fudis-daterange" [id]="id" [class.fudis-daterange--visible]="_heightSet">
-		<fudis-datepicker
-			class="fudis-daterange__start-date"
-			[size]="'sm'"
-			[id]="id + '-start-date'"
-			[initialFocus]="initialFocus"
-			[minDate]="startDate.minDate"
-			[maxDate]="startDate.maxDate"
-			[tooltip]="startDate.tooltip"
-			[errorMsg]="startDate.errorMsg"
-			[label]="startDate.label"
-			[control]="startDate.control"
-			[helpText]="startDate.helpText">
-			<ng-container *ngIf="startDateError">
-				<ng-container *ngTemplateOutlet="startDateError!.templateRef" />
-			</ng-container>
-		</fudis-datepicker>
-		<span class="fudis-daterange__gutter"></span>
-		<fudis-datepicker
-			[id]="id + '-end-date'"
-			[size]="'sm'"
-			[minDate]="endDate.minDate"
-			[maxDate]="endDate.maxDate"
-			[errorMsg]="endDate.errorMsg"
-			[label]="endDate.label"
-			[control]="endDate.control"
-			[helpText]="endDate.helpText">
-			<ng-container *ngIf="endDateError">
-				<ng-container *ngTemplateOutlet="endDateError!.templateRef" />
-			</ng-container>
-		</fudis-datepicker>
-	</div>
+  <div
+    #dateRangeRef
+    class="fudis-daterange"
+    [id]="id"
+    [class.fudis-daterange--visible]="_heightSet"
+  >
+    <fudis-datepicker
+      class="fudis-daterange__start-date"
+      [size]="'sm'"
+      [id]="id + '-start-date'"
+      [initialFocus]="initialFocus"
+      [minDate]="startDate.minDate"
+      [maxDate]="startDate.maxDate"
+      [tooltip]="startDate.tooltip"
+      [errorMsg]="startDate.errorMsg"
+      [label]="startDate.label"
+      [control]="startDate.control"
+      [helpText]="startDate.helpText"
+    >
+      <ng-container *ngIf="startDateError">
+        <ng-container *ngTemplateOutlet="startDateError!.templateRef" />
+      </ng-container>
+    </fudis-datepicker>
+    <span class="fudis-daterange__gutter"></span>
+    <fudis-datepicker
+      [id]="id + '-end-date'"
+      [size]="'sm'"
+      [minDate]="endDate.minDate"
+      [maxDate]="endDate.maxDate"
+      [errorMsg]="endDate.errorMsg"
+      [label]="endDate.label"
+      [control]="endDate.control"
+      [helpText]="endDate.helpText"
+    >
+      <ng-container *ngIf="endDateError">
+        <ng-container *ngTemplateOutlet="endDateError!.templateRef" />
+      </ng-container>
+    </fudis-datepicker>
+  </div>
 </ng-container>

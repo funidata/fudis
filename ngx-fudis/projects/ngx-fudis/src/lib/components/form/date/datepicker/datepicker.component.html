@@ -1,47 +1,53 @@
 <div class="fudis-datepicker fudis-input-size__{{ size }}">
-	<fudis-label
-		[id]="'label_' + id"
-		[for]="id"
-		[text]="label"
-		[requiredText]="_required ? _requiredText : undefined"
-		[tooltip]="tooltip"
-		[tooltipPosition]="tooltipPosition"
-		[tooltipToggle]="tooltipToggle"></fudis-label>
-	<div class="fudis-datepicker__input-wrapper">
-		<input
-			#inputRef
-			[id]="id"
-			[formControl]="control"
-			[matDatepicker]="picker"
-			[min]="minDate"
-			[max]="maxDate"
-			[readonly]="disabled"
-			[attr.aria-disabled]="disabled ? true : null"
-			class="fudis-datepicker__input"
-			[class.fudis-form-input--invalid]="(control.invalid && control.touched) || invalidState"
-			[class.fudis-form-input--disabled]="disabled"
-			[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
-			[attr.required]="_required ? true : null"
-			[attr.aria-describedby]="id + '_guidance'" />
-		<mat-datepicker-toggle
-			[disabled]="disabled"
-			matSuffix
-			[for]="picker"
-			[disableRipple]="true"
-			class="fudis-datepicker__toggle">
-			<mat-icon matDatepickerToggleIcon>
-				<fudis-icon [icon]="'calendar'" [color]="'primary'"></fudis-icon>
-			</mat-icon>
-		</mat-datepicker-toggle>
-		<mat-datepicker #picker panelClass="fudis-datepicker__datepicker"></mat-datepicker>
-	</div>
-	<fudis-guidance
-		*ngIf="!disableGuidance"
-		[inputLabel]="label"
-		[helpText]="helpText"
-		[for]="id"
-		[errorMsg]="errorMsg"
-		[control]="control">
-		<ng-content />
-	</fudis-guidance>
+  <fudis-label
+    [id]="'label_' + id"
+    [for]="id"
+    [text]="label"
+    [requiredText]="_required ? _requiredText : undefined"
+    [tooltip]="tooltip"
+    [tooltipPosition]="tooltipPosition"
+    [tooltipToggle]="tooltipToggle"
+  ></fudis-label>
+  <div class="fudis-datepicker__input-wrapper">
+    <input
+      #inputRef
+      [id]="id"
+      [formControl]="control"
+      [matDatepicker]="picker"
+      [min]="minDate"
+      [max]="maxDate"
+      [readonly]="disabled"
+      [attr.aria-disabled]="disabled ? true : null"
+      class="fudis-datepicker__input"
+      [class.fudis-form-input--invalid]="(control.invalid && control.touched) || invalidState"
+      [class.fudis-form-input--disabled]="disabled"
+      [attr.aria-invalid]="
+        (control.touched && control.invalid) || (control.touched && invalidState) ? true : null
+      "
+      [attr.required]="_required ? true : null"
+      [attr.aria-describedby]="id + '_guidance'"
+    />
+    <mat-datepicker-toggle
+      [disabled]="disabled"
+      matSuffix
+      [for]="picker"
+      [disableRipple]="true"
+      class="fudis-datepicker__toggle"
+    >
+      <mat-icon matDatepickerToggleIcon>
+        <fudis-icon [icon]="'calendar'" [color]="'primary'"></fudis-icon>
+      </mat-icon>
+    </mat-datepicker-toggle>
+    <mat-datepicker #picker panelClass="fudis-datepicker__datepicker"></mat-datepicker>
+  </div>
+  <fudis-guidance
+    *ngIf="!disableGuidance"
+    [inputLabel]="label"
+    [helpText]="helpText"
+    [for]="id"
+    [errorMsg]="errorMsg"
+    [control]="control"
+  >
+    <ng-content />
+  </fudis-guidance>
 </div>

@@ -1,16 +1,18 @@
 <section
-	*ngIf="_visible"
-	class="fudis-alert-group fudis-alert-group__{{ position }}"
-	[attr.aria-label]="_alertList().length > 0 ? _alertGroupLabel + ': ' + _alertList().length : null">
-	<ng-container *ngFor="let alert of _alertList()">
-		<fudis-alert
-			[initialFocus]="alert.initialFocus"
-			[variant]="alert.type"
-			[message]="alert.message"
-			[id]="alert.id"
-			[htmlId]="alert.htmlId"
-			[buttonId]="alert.buttonId"
-			[linkTitle]="alert.linkTitle"
-			[routerLinkUrl]="alert.routerLinkUrl" />
-	</ng-container>
+  *ngIf="_visible"
+  class="fudis-alert-group fudis-alert-group__{{ position }}"
+  [attr.aria-label]="_alertList().length > 0 ? _alertGroupLabel + ': ' + _alertList().length : null"
+>
+  <ng-container *ngFor="let alert of _alertList()">
+    <fudis-alert
+      [initialFocus]="alert.initialFocus"
+      [variant]="alert.type"
+      [message]="alert.message"
+      [id]="alert.id"
+      [htmlId]="alert.htmlId"
+      [buttonId]="alert.buttonId"
+      [linkTitle]="alert.linkTitle"
+      [routerLinkUrl]="alert.routerLinkUrl"
+    />
+  </ng-container>
 </section>

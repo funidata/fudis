@@ -1,1 +1,1 @@
-declare module 'cypress-image-diff-js/dist/command';
+declare module "cypress-image-diff-js/dist/command";

@@ -1,4 +1,12 @@
-import { Component, ContentChild, Input, OnChanges, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  ContentChild,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisHeadingSize, FudisHeadingLevel } from '../../types/typography';
 import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
@@ -12,164 +20,164 @@ import { FudisFormErrorSummarySection } from '../../types/forms';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 
 @Component({
-	selector: 'fudis-section',
-	templateUrl: './section.component.html',
-	styleUrls: ['./section.component.scss'],
-	encapsulation: ViewEncapsulation.None,
+  selector: 'fudis-section',
+  templateUrl: './section.component.html',
+  styleUrls: ['./section.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class SectionComponent extends TooltipApiDirective implements OnInit, OnChanges, OnDestroy {
-	constructor(
-		private _idService: FudisIdService,
-		private _errorSummaryService: FudisInternalErrorSummaryService
-	) {
-		super();
-	}
+  constructor(
+    private _idService: FudisIdService,
+    private _errorSummaryService: FudisInternalErrorSummaryService,
+  ) {
+    super();
+  }
 
-	@ContentChild(NotificationsDirective) notifications: NotificationsDirective | null;
+  @ContentChild(NotificationsDirective) notifications: NotificationsDirective | null;
 
-	@ContentChild(ContentDirective) content: ContentDirective | null;
+  @ContentChild(ContentDirective) content: ContentDirective | null;
 
-	@ContentChild(ActionsDirective) headerActions: ActionsDirective | null;
+  @ContentChild(ActionsDirective) headerActions: ActionsDirective | null;
 
-	/**
-	 * Section title
-	 */
-	@Input({ required: true }) title: string;
+  /**
+   * Section title
+   */
+  @Input({ required: true }) title: string;
 
-	/**
-	 * Section id
-	 */
-	@Input() id: string;
+  /**
+   * Section id
+   */
+  @Input() id: string;
 
-	/**
-	 * Heading level for the section title
-	 */
-	@Input() titleLevel: FudisHeadingLevel = 2;
+  /**
+   * Heading level for the section title
+   */
+  @Input() titleLevel: FudisHeadingLevel = 2;
 
-	/**
-	 * Heading size for the section title
-	 */
-	@Input() titleSize: FudisHeadingSize = 'lg';
+  /**
+   * Heading size for the section title
+   */
+  @Input() titleSize: FudisHeadingSize = 'lg';
 
-	/**
-	 * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
-	 * xxl = Default value. Viewports of 1600px and larger
-	 * xl = Viewports smaller than 1600px
-	 * lg = Viewports smaller than 1200px
-	 * md = Viewports smaller than 992px
-	 * sm = Viewports smaller than 768px
-	 * xs = Viewports smaller than 576px
-	 */
-	@Input() width: FudisGridWidth = 'initial';
+  /**
+   * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
+   * xxl = Default value. Viewports of 1600px and larger
+   * xl = Viewports smaller than 1600px
+   * lg = Viewports smaller than 1200px
+   * md = Viewports smaller than 992px
+   * sm = Viewports smaller than 768px
+   * xs = Viewports smaller than 576px
+   */
+  @Input() width: FudisGridWidth = 'initial';
 
-	/**
-	 * Alignment of Grid component inside its parent
-	 */
-	@Input() align: FudisGridAlign = 'center';
+  /**
+   * Alignment of Grid component inside its parent
+   */
+  @Input() align: FudisGridAlign = 'center';
 
-	/**
-	 * Margin top for the Grid
-	 */
-	@Input() marginTop: FudisSpacing = 'none';
+  /**
+   * Margin top for the Grid
+   */
+  @Input() marginTop: FudisSpacing = 'none';
 
-	/**
-	 * Margin bottom for the Grid
-	 */
-	@Input() marginBottom: FudisSpacing = 'none';
+  /**
+   * Margin bottom for the Grid
+   */
+  @Input() marginBottom: FudisSpacing = 'none';
 
-	/**
-	 * Horizontal margins left and right of the grid
-	 */
-	@Input() marginSides: FudisGridMarginSide = 'none';
+  /**
+   * Horizontal margins left and right of the grid
+   */
+  @Input() marginSides: FudisGridMarginSide = 'none';
 
-	/**
-	 * Custom CSS classes for Grid element
-	 */
-	@Input() classes: string[];
+  /**
+   * Custom CSS classes for Grid element
+   */
+  @Input() classes: string[];
 
-	/**
-	 * Is section title shown in error summary breadcrumb
-	 */
-	@Input() errorSummaryBreadcrumb: boolean = false;
+  /**
+   * Is section title shown in error summary breadcrumb
+   */
+  @Input() errorSummaryBreadcrumb: boolean = false;
 
-	/**
-	 * Internal, separate unique heading id
-	 */
-	protected _headingId: string;
+  /**
+   * Internal, separate unique heading id
+   */
+  protected _headingId: string;
 
-	/**
-	 * Section CSS class list
-	 */
-	protected _classList: string[];
+  /**
+   * Section CSS class list
+   */
+  protected _classList: string[];
 
-	/**
-	 * Internal, separate title property to send to error summary service
-	 */
-	protected _title: string;
+  /**
+   * Internal, separate title property to send to error summary service
+   */
+  protected _title: string;
 
-	/**
-	 * Object to send to error summary service
-	 */
-	private _errorSummaryInfo: FudisFormErrorSummarySection;
+  /**
+   * Object to send to error summary service
+   */
+  private _errorSummaryInfo: FudisFormErrorSummarySection;
 
-	/**
-	 * Is info sent to error summary service
-	 */
-	private _errorSummaryInfoSent: boolean = false;
+  /**
+   * Is info sent to error summary service
+   */
+  private _errorSummaryInfoSent: boolean = false;
 
-	ngOnInit(): void {
-		this._setSectionId();
+  ngOnInit(): void {
+    this._setSectionId();
 
-		this._headingId = `${this.id}-heading`;
+    this._headingId = `${this.id}-heading`;
 
-		this._classList = this._getClasses();
-		this._title = this.title;
-		this.addToErrorSummary();
-	}
+    this._classList = this._getClasses();
+    this._title = this.title;
+    this.addToErrorSummary();
+  }
 
-	ngOnChanges(): void {
-		this._classList = this._getClasses();
+  ngOnChanges(): void {
+    this._classList = this._getClasses();
 
-		if (this.title !== this._title && this.id) {
-			this._title = this.title;
-			this.addToErrorSummary();
-		}
-	}
+    if (this.title !== this._title && this.id) {
+      this._title = this.title;
+      this.addToErrorSummary();
+    }
+  }
 
-	ngOnDestroy(): void {
-		this.removeFromErrorSummary();
-	}
+  ngOnDestroy(): void {
+    this.removeFromErrorSummary();
+  }
 
-	addToErrorSummary(): void {
-		if (this.errorSummaryBreadcrumb) {
-			this._errorSummaryInfo = {
-				id: this.id,
-				title: this._title,
-			};
-			this._errorSummaryService.addSection(this._errorSummaryInfo);
-			this._errorSummaryInfoSent = true;
-		}
-	}
+  addToErrorSummary(): void {
+    if (this.errorSummaryBreadcrumb) {
+      this._errorSummaryInfo = {
+        id: this.id,
+        title: this._title,
+      };
+      this._errorSummaryService.addSection(this._errorSummaryInfo);
+      this._errorSummaryInfoSent = true;
+    }
+  }
 
-	removeFromErrorSummary(): void {
-		if (this._errorSummaryInfoSent) {
-			this._errorSummaryService.removeSection(this._errorSummaryInfo);
-		}
-	}
+  removeFromErrorSummary(): void {
+    if (this._errorSummaryInfoSent) {
+      this._errorSummaryService.removeSection(this._errorSummaryInfo);
+    }
+  }
 
-	private _getClasses(): string[] {
-		const cssClasses = this.classes ?? [];
+  private _getClasses(): string[] {
+    const cssClasses = this.classes ?? [];
 
-		cssClasses.push('fudis-section');
+    cssClasses.push('fudis-section');
 
-		return cssClasses;
-	}
+    return cssClasses;
+  }
 
-	private _setSectionId(): void {
-		if (this.id) {
-			this._idService.addNewId('section', this.id);
-		} else {
-			this.id = this._idService.getNewId('section');
-		}
-	}
+  private _setSectionId(): void {
+    if (this.id) {
+      this._idService.addNewId('section', this.id);
+    } else {
+      this.id = this._idService.getNewId('section');
+    }
+  }
 }

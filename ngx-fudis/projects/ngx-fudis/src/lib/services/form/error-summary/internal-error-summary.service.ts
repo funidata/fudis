@@ -1,10 +1,10 @@
 import { Injectable, Signal, signal } from '@angular/core';
 import {
-	FudisFormErrorSummaryObject,
-	FudisFormErrorSummaryItem,
-	FudisFormErrorSummarySection,
-	FudisErrorSummaryParent,
-	FudisFormErrorSummaryRemoveItem,
+  FudisFormErrorSummaryObject,
+  FudisFormErrorSummaryItem,
+  FudisFormErrorSummarySection,
+  FudisErrorSummaryParent,
+  FudisFormErrorSummaryRemoveItem,
 } from '../../../types/forms';
 
 /**
@@ -12,240 +12,241 @@ import {
  */
 @Injectable({ providedIn: 'root' })
 export class FudisInternalErrorSummaryService {
-	/**
-	 * Current errors
-	 */
-	private _currentErrorList: FudisFormErrorSummaryObject = {};
+  /**
+   * Current errors
+   */
+  private _currentErrorList: FudisFormErrorSummaryObject = {};
 
-	/**
-	 * Visible errors
-	 */
-	private _signalCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
+  /**
+   * Visible errors
+   */
+  private _signalCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
 
-	/**
-	 * Dynamic errors
-	 */
-	private _signalDynamicCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
+  /**
+   * Dynamic errors
+   */
+  private _signalDynamicCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
 
-	/**
-	 * List of parent forms of the error summary list
-	 */
-	private _errorSummaryParentList = signal<FudisErrorSummaryParent[]>([]);
+  /**
+   * List of parent forms of the error summary list
+   */
+  private _errorSummaryParentList = signal<FudisErrorSummaryParent[]>([]);
 
-	/**
-	 * Current fieldsets
-	 */
-	private _currentFieldsets: FudisFormErrorSummarySection[] = [];
+  /**
+   * Current fieldsets
+   */
+  private _currentFieldsets: FudisFormErrorSummarySection[] = [];
 
-	/**
-	 * Current sections
-	 */
-	private _currentSections: FudisFormErrorSummarySection[] = [];
+  /**
+   * Current sections
+   */
+  private _currentSections: FudisFormErrorSummarySection[] = [];
 
-	/**
-	 * Returns a list of current fieldsets
-	 */
-	getFieldsetList(): FudisFormErrorSummarySection[] {
-		return this._currentFieldsets;
-	}
+  /**
+   * Returns a list of current fieldsets
+   */
+  getFieldsetList(): FudisFormErrorSummarySection[] {
+    return this._currentFieldsets;
+  }
 
-	/**
-	 * Returns a readonly list of parent forms of the error summary list
-	 */
-	getFormsWithErrorSummary(): Signal<FudisErrorSummaryParent[]> {
-		return this._errorSummaryParentList.asReadonly();
-	}
+  /**
+   * Returns a readonly list of parent forms of the error summary list
+   */
+  getFormsWithErrorSummary(): Signal<FudisErrorSummaryParent[]> {
+    return this._errorSummaryParentList.asReadonly();
+  }
 
-	/**
-	 * Returns a list of current sections
-	 */
-	getSectionList(): FudisFormErrorSummarySection[] {
-		return this._currentSections;
-	}
+  /**
+   * Returns a list of current sections
+   */
+  getSectionList(): FudisFormErrorSummarySection[] {
+    return this._currentSections;
+  }
 
-	/**
-	 * Returns a readonly list of visible errors
-	 */
-	getVisibleErrors(): Signal<FudisFormErrorSummaryObject> {
-		return this._signalCurrentErrorList.asReadonly();
-	}
+  /**
+   * Returns a readonly list of visible errors
+   */
+  getVisibleErrors(): Signal<FudisFormErrorSummaryObject> {
+    return this._signalCurrentErrorList.asReadonly();
+  }
 
-	/**
-	 * Returns a readonly list of dynamic errors
-	 */
-	getDynamicErrors(): Signal<FudisFormErrorSummaryObject> {
-		return this._signalDynamicCurrentErrorList.asReadonly();
-	}
+  /**
+   * Returns a readonly list of dynamic errors
+   */
+  getDynamicErrors(): Signal<FudisFormErrorSummaryObject> {
+    return this._signalDynamicCurrentErrorList.asReadonly();
+  }
 
-	/**
-	 * Adds a new error to the list of current errors
-	 * If new error item has a matching id on the list, new error is tied to that error list object
-	 * @param newError Form error summary item
-	 */
-	public addNewError(newError: FudisFormErrorSummaryItem): void {
-		let currentErrors = this._currentErrorList;
+  /**
+   * Adds a new error to the list of current errors
+   * If new error item has a matching id on the list, new error is tied to that error list object
+   * @param newError Form error summary item
+   */
+  public addNewError(newError: FudisFormErrorSummaryItem): void {
+    let currentErrors = this._currentErrorList;
 
-		const errorId = this._defineErrorId(newError.id, newError.controlName);
+    const errorId = this._defineErrorId(newError.id, newError.controlName);
 
-		const langUpdated = currentErrors[errorId] && currentErrors[errorId]?.language !== newError.language;
+    const langUpdated =
+      currentErrors[errorId] && currentErrors[errorId]?.language !== newError.language;
 
-		if (!currentErrors[errorId]) {
-			currentErrors = {
-				...currentErrors,
-				[errorId]: {
-					id: newError.id,
-					errors: { [newError.type]: newError.error },
-					label: newError.label,
-					language: newError.language,
-				},
-			};
-		} else {
-			currentErrors = {
-				...currentErrors,
-				[errorId]: {
-					id: newError.id,
-					errors: { ...currentErrors[errorId].errors, [newError.type]: newError.error },
-					label: newError.label,
-					language: newError.language,
-				},
-			};
-		}
+    if (!currentErrors[errorId]) {
+      currentErrors = {
+        ...currentErrors,
+        [errorId]: {
+          id: newError.id,
+          errors: { [newError.type]: newError.error },
+          label: newError.label,
+          language: newError.language,
+        },
+      };
+    } else {
+      currentErrors = {
+        ...currentErrors,
+        [errorId]: {
+          id: newError.id,
+          errors: { ...currentErrors[errorId].errors, [newError.type]: newError.error },
+          label: newError.label,
+          language: newError.language,
+        },
+      };
+    }
 
-		this._currentErrorList = currentErrors;
+    this._currentErrorList = currentErrors;
 
-		if (langUpdated) {
-			this.reloadErrors();
-		}
-	}
+    if (langUpdated) {
+      this.reloadErrors();
+    }
+  }
 
-	/**
-	 * Removes error object from the current errors list if it contains matching error id
-	 * @param error Error object
-	 */
-	public removeError(error: FudisFormErrorSummaryRemoveItem): void {
-		const currentErrors = this._currentErrorList;
+  /**
+   * Removes error object from the current errors list if it contains matching error id
+   * @param error Error object
+   */
+  public removeError(error: FudisFormErrorSummaryRemoveItem): void {
+    const currentErrors = this._currentErrorList;
 
-		const errorId = error.controlName ? `${error.id}_${error.controlName}` : error.id;
+    const errorId = error.controlName ? `${error.id}_${error.controlName}` : error.id;
 
-		if (currentErrors?.[errorId]?.errors[error.type]) {
-			delete currentErrors[errorId].errors[error.type];
+    if (currentErrors?.[errorId]?.errors[error.type]) {
+      delete currentErrors[errorId].errors[error.type];
 
-			this._currentErrorList = currentErrors;
+      this._currentErrorList = currentErrors;
 
-			this._signalDynamicCurrentErrorList.set(currentErrors);
-		}
-	}
+      this._signalDynamicCurrentErrorList.set(currentErrors);
+    }
+  }
 
-	/**
-	 * Adds new fieldset to the list of current fieldsets
-	 * If a fieldset with a matching id exists, replace the old fieldset with the new one
-	 * @param fieldset Form error summary section
-	 */
-	public addFieldset(fieldset: FudisFormErrorSummarySection): void {
-		const existingItem = this._currentFieldsets.find((item) => {
-			return item.id === fieldset.id;
-		});
+  /**
+   * Adds new fieldset to the list of current fieldsets
+   * If a fieldset with a matching id exists, replace the old fieldset with the new one
+   * @param fieldset Form error summary section
+   */
+  public addFieldset(fieldset: FudisFormErrorSummarySection): void {
+    const existingItem = this._currentFieldsets.find((item) => {
+      return item.id === fieldset.id;
+    });
 
-		if (existingItem) {
-			const index = this._currentFieldsets.indexOf(existingItem);
-			this._currentFieldsets[index] = fieldset;
-		} else {
-			this._currentFieldsets.push(fieldset);
-		}
-	}
+    if (existingItem) {
+      const index = this._currentFieldsets.indexOf(existingItem);
+      this._currentFieldsets[index] = fieldset;
+    } else {
+      this._currentFieldsets.push(fieldset);
+    }
+  }
 
-	/**
-	 * Removes the fieldset from the current fieldsets
-	 * @param fieldset Form error summary section
-	 */
-	public removeFieldset(fieldset: FudisFormErrorSummarySection): void {
-		const indexToRemove = this._currentFieldsets.indexOf(fieldset);
+  /**
+   * Removes the fieldset from the current fieldsets
+   * @param fieldset Form error summary section
+   */
+  public removeFieldset(fieldset: FudisFormErrorSummarySection): void {
+    const indexToRemove = this._currentFieldsets.indexOf(fieldset);
 
-		this._currentFieldsets.splice(indexToRemove, 1);
-	}
+    this._currentFieldsets.splice(indexToRemove, 1);
+  }
 
-	/**
-	 * Adds new section to the list of current sections
-	 * If a section with a matching id exists, replace the old section with the new one
-	 * @param section Form error summary section
-	 */
-	public addSection(section: FudisFormErrorSummarySection): void {
-		const existingItem = this._currentSections.find((item) => {
-			return item.id === section.id;
-		});
+  /**
+   * Adds new section to the list of current sections
+   * If a section with a matching id exists, replace the old section with the new one
+   * @param section Form error summary section
+   */
+  public addSection(section: FudisFormErrorSummarySection): void {
+    const existingItem = this._currentSections.find((item) => {
+      return item.id === section.id;
+    });
 
-		if (existingItem) {
-			const index = this._currentSections.indexOf(existingItem);
-			this._currentSections[index] = section;
-		} else {
-			this._currentSections.push(section);
-		}
-	}
+    if (existingItem) {
+      const index = this._currentSections.indexOf(existingItem);
+      this._currentSections[index] = section;
+    } else {
+      this._currentSections.push(section);
+    }
+  }
 
-	/**
-	 * Removes the section from the current sections
-	 * @param section Form error summary section
-	 */
-	public removeSection(section: FudisFormErrorSummarySection): void {
-		const indexToRemove = this._currentSections.indexOf(section);
+  /**
+   * Removes the section from the current sections
+   * @param section Form error summary section
+   */
+  public removeSection(section: FudisFormErrorSummarySection): void {
+    const indexToRemove = this._currentSections.indexOf(section);
 
-		this._currentSections.splice(indexToRemove, 1);
-	}
+    this._currentSections.splice(indexToRemove, 1);
+  }
 
-	/**
-	 * Updates the visible and dynamic lists of errors with the current error list
-	 * @param delay Optional Number that sets timeout delay in milliseconds, defaults to 0ms
-	 */
-	public reloadErrors(delay: number = 0): void {
-		setTimeout(() => {
-			this._signalCurrentErrorList.set(this._currentErrorList);
-			this._signalDynamicCurrentErrorList.set(this._currentErrorList);
-		}, delay);
-	}
+  /**
+   * Updates the visible and dynamic lists of errors with the current error list
+   * @param delay Optional Number that sets timeout delay in milliseconds, defaults to 0ms
+   */
+  public reloadErrors(delay: number = 0): void {
+    setTimeout(() => {
+      this._signalCurrentErrorList.set(this._currentErrorList);
+      this._signalDynamicCurrentErrorList.set(this._currentErrorList);
+    }, delay);
+  }
 
-	/**
-	 * Adds a parent form to the error summary parent list
-	 * If a parent with a matching id exists, replace the old parent with the new one
-	 * @param parent Parent form of the error summary list
-	 */
-	public addErrorSummaryParent(parent: FudisErrorSummaryParent): void {
-		const currentParents = this._errorSummaryParentList();
+  /**
+   * Adds a parent form to the error summary parent list
+   * If a parent with a matching id exists, replace the old parent with the new one
+   * @param parent Parent form of the error summary list
+   */
+  public addErrorSummaryParent(parent: FudisErrorSummaryParent): void {
+    const currentParents = this._errorSummaryParentList();
 
-		const existingItem = currentParents.find((item) => {
-			return item.formId === parent.formId;
-		});
+    const existingItem = currentParents.find((item) => {
+      return item.formId === parent.formId;
+    });
 
-		if (existingItem) {
-			const index = currentParents.indexOf(existingItem);
-			currentParents[index] = parent;
-		} else {
-			currentParents.push(parent);
-		}
+    if (existingItem) {
+      const index = currentParents.indexOf(existingItem);
+      currentParents[index] = parent;
+    } else {
+      currentParents.push(parent);
+    }
 
-		this._errorSummaryParentList.set(currentParents);
-	}
+    this._errorSummaryParentList.set(currentParents);
+  }
 
-	/**
-	 * Removes a parent form from the error summary parent list
-	 * @param parent Parent form of the error summary list
-	 */
-	public removeErrorSummaryParent(parent: FudisErrorSummaryParent): void {
-		const currentParents = this._errorSummaryParentList();
+  /**
+   * Removes a parent form from the error summary parent list
+   * @param parent Parent form of the error summary list
+   */
+  public removeErrorSummaryParent(parent: FudisErrorSummaryParent): void {
+    const currentParents = this._errorSummaryParentList();
 
-		const filtered = currentParents.filter((item) => {
-			return item.formId !== parent.formId;
-		});
+    const filtered = currentParents.filter((item) => {
+      return item.formId !== parent.formId;
+    });
 
-		this._errorSummaryParentList.set(filtered);
-	}
+    this._errorSummaryParentList.set(filtered);
+  }
 
-	/**
-	 * Returns an error id including a control name if one is given
-	 * @param id Id of the form error summary item
-	 * @param controlName Optional control name of the form error summary item
-	 */
-	// eslint-disable-next-line class-methods-use-this
-	private _defineErrorId(id: string, controlName: string | undefined): string {
-		return controlName ? `${id}_${controlName}` : id;
-	}
+  /**
+   * Returns an error id including a control name if one is given
+   * @param id Id of the form error summary item
+   * @param controlName Optional control name of the form error summary item
+   */
+  // eslint-disable-next-line class-methods-use-this
+  private _defineErrorId(id: string, controlName: string | undefined): string {
+    return controlName ? `${id}_${controlName}` : id;
+  }
 }

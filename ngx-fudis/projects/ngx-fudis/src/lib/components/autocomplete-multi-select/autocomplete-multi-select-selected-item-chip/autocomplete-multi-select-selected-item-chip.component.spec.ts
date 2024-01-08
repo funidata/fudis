@@ -5,22 +5,25 @@ import { AutocompleteMultiSelectSelectedItemChipComponent } from './autocomplete
 import { IconComponent } from '../../icon/icon.component';
 
 describe('AutocompleteMultiSelectSelectedItemChipComponent', () => {
-	let component: AutocompleteMultiSelectSelectedItemChipComponent;
-	let fixture: ComponentFixture<AutocompleteMultiSelectSelectedItemChipComponent>;
+  let component: AutocompleteMultiSelectSelectedItemChipComponent;
+  let fixture: ComponentFixture<AutocompleteMultiSelectSelectedItemChipComponent>;
 
-	beforeEach(() => {
-		TestBed.configureTestingModule({
-			declarations: [AutocompleteMultiSelectSelectedItemChipComponent, MockComponent(IconComponent)],
-		}).compileComponents();
-	});
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        AutocompleteMultiSelectSelectedItemChipComponent,
+        MockComponent(IconComponent),
+      ],
+    }).compileComponents();
+  });
 
-	beforeEach(() => {
-		fixture = TestBed.createComponent(AutocompleteMultiSelectSelectedItemChipComponent);
-		component = fixture.componentInstance;
-		fixture.detectChanges();
-	});
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AutocompleteMultiSelectSelectedItemChipComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
-	});
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

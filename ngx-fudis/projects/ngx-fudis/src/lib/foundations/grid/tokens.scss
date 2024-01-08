@@ -1,5 +1,7 @@
 /* stylelint-disable unit-disallowed-list */
-$grid-width-xs: calc(34rem / var(--fudis-rem-multiplier)); // 320px-544px. For viewport smaller than 576px.
+$grid-width-xs: calc(
+  34rem / var(--fudis-rem-multiplier)
+); // 320px-544px. For viewport smaller than 576px.
 $grid-width-sm: calc(34rem / var(--fudis-rem-multiplier)); // 544px
 $grid-width-md: calc(45rem / var(--fudis-rem-multiplier)); // 720px
 $grid-width-lg: calc(60rem / var(--fudis-rem-multiplier)); // 960px
@@ -7,10 +9,10 @@ $grid-width-xl: calc(65rem / var(--fudis-rem-multiplier)); // 1040px
 $grid-width-xxl: calc(96.25rem / var(--fudis-rem-multiplier)); // 1540px
 
 $grid-widths: (
-	'xxl': $grid-width-xxl,
-	'xl': $grid-width-xl,
-	'lg': $grid-width-lg,
-	'md': $grid-width-md,
-	'sm': $grid-width-sm,
-	'xs': $grid-width-xs,
+  "xxl": $grid-width-xxl,
+  "xl": $grid-width-xl,
+  "lg": $grid-width-lg,
+  "md": $grid-width-md,
+  "sm": $grid-width-sm,
+  "xs": $grid-width-xs,
 );

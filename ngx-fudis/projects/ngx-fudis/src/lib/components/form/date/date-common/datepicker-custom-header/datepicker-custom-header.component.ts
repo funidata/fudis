@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DateAdapter, MatDateFormats, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatCalendar } from '@angular/material/datepicker';
@@ -12,47 +18,47 @@ import { MatCalendar } from '@angular/material/datepicker';
  */
 
 @Component({
-	selector: 'fudis-datepicker-custom-header',
-	templateUrl: './datepicker-custom-header.component.html',
-	styleUrls: ['./datepicker-custom-header.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'fudis-datepicker-custom-header',
+  templateUrl: './datepicker-custom-header.component.html',
+  styleUrls: ['./datepicker-custom-header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatepickerCustomHeaderComponent<D> implements OnInit {
-	constructor(
-		private _calendar: MatCalendar<D>,
-		private _dateAdapter: DateAdapter<D>,
-		@Inject(MAT_DATE_FORMATS) private _dateFormats: MatDateFormats,
-		cdr: ChangeDetectorRef
-	) {
-		_calendar.stateChanges.pipe(takeUntilDestroyed()).subscribe(() => cdr.markForCheck());
-	}
+  constructor(
+    private _calendar: MatCalendar<D>,
+    private _dateAdapter: DateAdapter<D>,
+    @Inject(MAT_DATE_FORMATS) private _dateFormats: MatDateFormats,
+    cdr: ChangeDetectorRef,
+  ) {
+    _calendar.stateChanges.pipe(takeUntilDestroyed()).subscribe(() => cdr.markForCheck());
+  }
 
-	ngOnInit() {
-		/**
-		 * Change the calendar starting day of the week from default Sunday to Monday
-		 */
-		this._dateAdapter.getFirstDayOfWeek = () => {
-			return 1;
-		};
-	}
+  ngOnInit() {
+    /**
+     * Change the calendar starting day of the week from default Sunday to Monday
+     */
+    this._dateAdapter.getFirstDayOfWeek = () => {
+      return 1;
+    };
+  }
 
-	get periodLabel() {
-		return this._dateAdapter
-			.format(this._calendar.activeDate, this._dateFormats.display.monthYearLabel)
-			.toLocaleUpperCase();
-	}
+  get periodLabel() {
+    return this._dateAdapter
+      .format(this._calendar.activeDate, this._dateFormats.display.monthYearLabel)
+      .toLocaleUpperCase();
+  }
 
-	previousClicked(mode: 'month' | 'year') {
-		this._calendar.activeDate =
-			mode === 'month'
-				? this._dateAdapter.addCalendarMonths(this._calendar.activeDate, -1)
-				: this._dateAdapter.addCalendarYears(this._calendar.activeDate, -1);
-	}
+  previousClicked(mode: 'month' | 'year') {
+    this._calendar.activeDate =
+      mode === 'month'
+        ? this._dateAdapter.addCalendarMonths(this._calendar.activeDate, -1)
+        : this._dateAdapter.addCalendarYears(this._calendar.activeDate, -1);
+  }
 
-	nextClicked(mode: 'month' | 'year') {
-		this._calendar.activeDate =
-			mode === 'month'
-				? this._dateAdapter.addCalendarMonths(this._calendar.activeDate, 1)
-				: this._dateAdapter.addCalendarYears(this._calendar.activeDate, 1);
-	}
+  nextClicked(mode: 'month' | 'year') {
+    this._calendar.activeDate =
+      mode === 'month'
+        ? this._dateAdapter.addCalendarMonths(this._calendar.activeDate, 1)
+        : this._dateAdapter.addCalendarYears(this._calendar.activeDate, 1);
+  }
 }

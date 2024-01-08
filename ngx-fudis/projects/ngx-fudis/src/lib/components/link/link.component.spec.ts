@@ -7,108 +7,116 @@ import { IconComponent } from '../icon/icon.component';
 import { LinkComponent } from './link.component';
 
 describe('LinkComponent', () => {
-	let component: LinkComponent;
-	let fixture: ComponentFixture<LinkComponent>;
+  let component: LinkComponent;
+  let fixture: ComponentFixture<LinkComponent>;
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			declarations: [LinkComponent, MockComponent(IconComponent)],
-			imports: [RouterModule.forRoot([])],
-		})
-			.overrideComponent(LinkComponent, {
-				set: { changeDetection: ChangeDetectionStrategy.Default },
-			})
-			.compileComponents();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [LinkComponent, MockComponent(IconComponent)],
+      imports: [RouterModule.forRoot([])],
+    })
+      .overrideComponent(LinkComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
+      })
+      .compileComponents();
 
-		fixture = TestBed.createComponent(LinkComponent);
-		component = fixture.componentInstance;
-		fixture.detectChanges();
-	});
+    fixture = TestBed.createComponent(LinkComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-	describe('Regular link component', () => {
-		it('should render linkTitle if it is given', () => {
-			component.href = 'www.example.com';
-			component.linkTitle = 'My link';
-			fixture.detectChanges();
-			const anchorElement = fixture.debugElement.query(By.css('.fudis-link__anchor'));
+  describe('Regular link component', () => {
+    it('should render linkTitle if it is given', () => {
+      component.href = 'www.example.com';
+      component.linkTitle = 'My link';
+      fixture.detectChanges();
+      const anchorElement = fixture.debugElement.query(By.css('.fudis-link__anchor'));
 
-			expect(anchorElement.nativeNode.innerHTML).toEqual(' My link ');
-		});
+      expect(anchorElement.nativeNode.innerHTML).toEqual(' My link ');
+    });
 
-		// FIXME: Remove skip.
-		it.skip('should always have href', () => {
-			component.href = '';
-			fixture.detectChanges();
+    // FIXME: Remove skip.
+    it.skip('should always have href', () => {
+      component.href = '';
+      fixture.detectChanges();
 
-			// FIXME: In jasmine, `.not.toBeTrue()` matches for strict boolean equality. This is probably not what was supposed to be tested here.
-			// expect(component).not.toBeTrue();
-		});
-	});
+      // FIXME: In jasmine, `.not.toBeTrue()` matches for strict boolean equality. This is probably not what was supposed to be tested here.
+      // expect(component).not.toBeTrue();
+    });
+  });
 
-	describe('External link component', () => {
-		it('should have new-tab icon', () => {
-			component.isExternalLink = true;
-			fixture.detectChanges();
-			const externalLinkComponent = fixture.debugElement.query(By.css('.fudis-link__anchor__external'));
-			const iconExist = externalLinkComponent.query(By.css('fudis-icon'));
+  describe('External link component', () => {
+    it('should have new-tab icon', () => {
+      component.isExternalLink = true;
+      fixture.detectChanges();
+      const externalLinkComponent = fixture.debugElement.query(
+        By.css('.fudis-link__anchor__external'),
+      );
+      const iconExist = externalLinkComponent.query(By.css('fudis-icon'));
 
-			expect(iconExist).toBeTruthy();
-		});
+      expect(iconExist).toBeTruthy();
+    });
 
-		it('should have assistive aria-label for screen readers', () => {
-			component.href = 'www.example.com';
-			component.isExternalLink = true;
-			fixture.detectChanges();
-			const externalLinkComponent = fixture.debugElement.query(By.css('.fudis-link__anchor__external'));
+    it('should have assistive aria-label for screen readers', () => {
+      component.href = 'www.example.com';
+      component.isExternalLink = true;
+      fixture.detectChanges();
+      const externalLinkComponent = fixture.debugElement.query(
+        By.css('.fudis-link__anchor__external'),
+      );
 
-			expect(externalLinkComponent.nativeElement.getAttribute('aria-label')).toEqual(
-				'www.example.com, (opens in a new tab)'
-			);
-		});
-	});
+      expect(externalLinkComponent.nativeElement.getAttribute('aria-label')).toEqual(
+        'www.example.com, (opens in a new tab)',
+      );
+    });
+  });
 
-	describe('Link with routerUrl component', () => {
-		it('should have router link', () => {
-			component.routerLinkUrl = '/some/routerUrl';
-			fixture.detectChanges();
+  describe('Link with routerUrl component', () => {
+    it('should have router link', () => {
+      component.routerLinkUrl = '/some/routerUrl';
+      fixture.detectChanges();
 
-			expect(fixture.nativeElement.querySelector('a').getAttribute('href')).toEqual('/some/routerUrl');
-		});
+      expect(fixture.nativeElement.querySelector('a').getAttribute('href')).toEqual(
+        '/some/routerUrl',
+      );
+    });
 
-		it('should have fragment link', () => {
-			component.routerLinkUrl = '/some/routerUrl';
-			component.fragmentId = 'test-fragment-id';
-			fixture.detectChanges();
+    it('should have fragment link', () => {
+      component.routerLinkUrl = '/some/routerUrl';
+      component.fragmentId = 'test-fragment-id';
+      fixture.detectChanges();
 
-			expect(fixture.nativeElement.querySelector('a').getAttribute('href')).toEqual('/some/routerUrl#test-fragment-id');
-		});
-	});
+      expect(fixture.nativeElement.querySelector('a').getAttribute('href')).toEqual(
+        '/some/routerUrl#test-fragment-id',
+      );
+    });
+  });
 
-	describe('Link with initial focus', () => {
-		it('should have focus after first load', () => {
-			component.initialFocus = true;
-			fixture.detectChanges();
+  describe('Link with initial focus', () => {
+    it('should have focus after first load', () => {
+      component.initialFocus = true;
+      fixture.detectChanges();
 
-			const linkElement = fixture.nativeElement.querySelector('a');
+      const linkElement = fixture.nativeElement.querySelector('a');
 
-			jest.spyOn(linkElement, 'focus').mockImplementation(() => {});
+      jest.spyOn(linkElement, 'focus').mockImplementation(() => {});
 
-			component.ngAfterViewInit();
+      component.ngAfterViewInit();
 
-			expect(linkElement.focus).toHaveBeenCalledWith();
-		});
+      expect(linkElement.focus).toHaveBeenCalledWith();
+    });
 
-		it('should NOT have focus after first load', () => {
-			component.initialFocus = false;
-			fixture.detectChanges();
+    it('should NOT have focus after first load', () => {
+      component.initialFocus = false;
+      fixture.detectChanges();
 
-			const linkElement = fixture.nativeElement.querySelector('a');
+      const linkElement = fixture.nativeElement.querySelector('a');
 
-			jest.spyOn(linkElement, 'focus').mockImplementation(() => {});
+      jest.spyOn(linkElement, 'focus').mockImplementation(() => {});
 
-			component.ngAfterViewInit();
+      component.ngAfterViewInit();
 
-			expect(linkElement.focus).not.toHaveBeenCalledWith();
-		});
-	});
+      expect(linkElement.focus).not.toHaveBeenCalledWith();
+    });
+  });
 });

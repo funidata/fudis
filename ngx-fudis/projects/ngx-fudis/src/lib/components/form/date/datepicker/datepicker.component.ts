@@ -1,20 +1,20 @@
 import {
-	AfterViewInit,
-	ChangeDetectorRef,
-	Component,
-	ContentChild,
-	Input,
-	OnChanges,
-	OnInit,
-	ViewEncapsulation,
-	effect,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ContentChild,
+  Input,
+  OnChanges,
+  OnInit,
+  ViewEncapsulation,
+  effect,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
 import {
-	DateEndErrorDirective,
-	DateStartErrorDirective,
+  DateEndErrorDirective,
+  DateStartErrorDirective,
 } from '../../../../directives/content-projection/content/content.directive';
 import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
 import { FUDIS_DATE_FORMATS, FudisInputSize } from '../../../../types/forms';
@@ -27,74 +27,80 @@ import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { hasRequiredValidator } from '../../../../utilities/form/getValidators';
 
 @Component({
-	selector: 'fudis-datepicker',
-	templateUrl: './datepicker.component.html',
-	styleUrls: ['./datepicker.component.scss'],
-	encapsulation: ViewEncapsulation.None,
-	providers: [
-		{
-			provide: DateAdapter,
-			useClass: DatepickerCustomDateAdapter,
-			deps: [MAT_DATE_LOCALE],
-		},
-		{ provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
-	],
+  selector: 'fudis-datepicker',
+  templateUrl: './datepicker.component.html',
+  styleUrls: ['./datepicker.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  providers: [
+    {
+      provide: DateAdapter,
+      useClass: DatepickerCustomDateAdapter,
+      deps: [MAT_DATE_LOCALE],
+    },
+    { provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
+  ],
 })
-export class DatepickerComponent extends InputBaseDirective implements OnInit, OnChanges, AfterViewInit {
-	constructor(
-		private _changeDetectorRef: ChangeDetectorRef,
-		private _datePickerConfigService: FudisTranslationService,
-		private _adapter: DateAdapter<Date>,
-		private _datepickerIntl: MatDatepickerIntl,
-		private _focusService: FudisFocusService,
-		_idService: FudisIdService
-	) {
-		super(_datePickerConfigService, _idService);
+export class DatepickerComponent
+  extends InputBaseDirective
+  implements OnInit, OnChanges, AfterViewInit
+{
+  constructor(
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _datePickerConfigService: FudisTranslationService,
+    private _adapter: DateAdapter<Date>,
+    private _datepickerIntl: MatDatepickerIntl,
+    private _focusService: FudisFocusService,
+    _idService: FudisIdService,
+  ) {
+    super(_datePickerConfigService, _idService);
 
-		effect(() => {
-			this._adapter.setLocale(updateLocale(this._translationService.getLanguage()));
+    effect(() => {
+      this._adapter.setLocale(updateLocale(this._translationService.getLanguage()));
 
-			this._datepickerIntl = updateMatDatePickerTranslations(this._translations(), this._datepickerIntl);
-		});
-	}
+      this._datepickerIntl = updateMatDatePickerTranslations(
+        this._translations(),
+        this._datepickerIntl,
+      );
+    });
+  }
 
-	@ContentChild(DateStartErrorDirective) startDateError: DateStartErrorDirective;
+  @ContentChild(DateStartErrorDirective) startDateError: DateStartErrorDirective;
 
-	@ContentChild(DateEndErrorDirective) endDateError: DateEndErrorDirective;
+  @ContentChild(DateEndErrorDirective) endDateError: DateEndErrorDirective;
 
-	/**
-	 * FormControl for the input.
-	 */
-	@Input({ required: true }) control: FormControl<Date | null>;
+  /**
+   * FormControl for the input.
+   */
+  @Input({ required: true }) control: FormControl<Date | null>;
 
-	/**
-	 * Available sizes for the datepicker - defaults to medium.
-	 */
-	@Input() size: FudisInputSize = 'md';
+  /**
+   * Available sizes for the datepicker - defaults to medium.
+   */
+  @Input() size: FudisInputSize = 'md';
 
-	/**
-	 * Allowed range for minimun date
-	 */
-	@Input() minDate: Date | null | undefined;
+  /**
+   * Allowed range for minimun date
+   */
+  @Input() minDate: Date | null | undefined;
 
-	/**
-	 * Allowed range for maximum date
-	 */
-	@Input() maxDate: Date | null | undefined;
+  /**
+   * Allowed range for maximum date
+   */
+  @Input() maxDate: Date | null | undefined;
 
-	ngOnInit(): void {
-		this._setInputId('datepicker');
-	}
+  ngOnInit(): void {
+    this._setInputId('datepicker');
+  }
 
-	ngOnChanges(): void {
-		this._changeDetectorRef.detectChanges();
+  ngOnChanges(): void {
+    this._changeDetectorRef.detectChanges();
 
-		this._required = this.required ?? hasRequiredValidator(this.control);
-	}
+    this._required = this.required ?? hasRequiredValidator(this.control);
+  }
 
-	ngAfterViewInit(): void {
-		if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
-			this.focusToInput();
-		}
-	}
+  ngAfterViewInit(): void {
+    if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
+      this.focusToInput();
+    }
+  }
 }
