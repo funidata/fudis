@@ -20,7 +20,7 @@
     "postversion": "git commit --amend -m \"Bump to version v$npm_package_version\" && git push && git push origin v$npm_package_version",
     "cypress": "cd ngx-fudis && npx cypress run",
     "fudis-release": "scripts/release.sh",
-    "format:check": "prettier --check --require-pragma ."
+    "format:check": "prettier --check ."
   },
   "repository": {
     "type": "git",
