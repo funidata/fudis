@@ -1996,7 +1996,8 @@ html {
 html.cypress-hide-unstyled-elements textarea.fudis-text-area__input {
   resize: none;
 }
-html.cypress-hide-unstyled-elements input, html.cypress-hide-unstyled-elements textarea {
+html.cypress-hide-unstyled-elements input,
+html.cypress-hide-unstyled-elements textarea {
   caret-color: transparent;
 }
 html.cypress-hide-unstyled-elements::-webkit-scrollbar {
