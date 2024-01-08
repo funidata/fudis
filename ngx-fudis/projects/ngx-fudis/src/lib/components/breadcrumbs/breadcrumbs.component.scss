@@ -1,39 +1,39 @@
-@use '../../foundations/typography/mixins.scss' as typography;
+@use "../../foundations/typography/mixins.scss" as typography;
 
 .fudis-breadcrumbs {
-	@include typography.body-text-md-regular;
+  @include typography.body-text-md-regular;
 
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
 
-	/*
+  /*
 	* Following CSS rules targets all child Breadcrumbs Item components and
 	* - From all but last one hide the body text element
 	* - From last one display body text element, and hide link and icon
 	*/
 
-	&-item-host {
-		&:not(:last-of-type) {
-			.fudis-breadcrumbs-item {
-				&__current {
-					display: none;
-				}
-			}
-		}
+  &-item-host {
+    &:not(:last-of-type) {
+      .fudis-breadcrumbs-item {
+        &__current {
+          display: none;
+        }
+      }
+    }
 
-		&:last-of-type {
-			.fudis-breadcrumbs-item {
-				&__current {
-					display: block;
-				}
+    &:last-of-type {
+      .fudis-breadcrumbs-item {
+        &__current {
+          display: block;
+        }
 
-				&__link,
-				&__icon {
-					display: none;
-				}
-			}
-		}
-	}
+        &__link,
+        &__icon {
+          display: none;
+        }
+      }
+    }
+  }
 }

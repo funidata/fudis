@@ -1,11 +1,11 @@
-@use 'sass:map';
-@use './tokens' as tokens;
+@use "sass:map";
+@use "./tokens" as tokens;
 
 @mixin z-index($layer-name) {
-	@if map_has_key(tokens.$layer-names, $layer-name) {
-		/* stylelint-disable-next-line property-disallowed-list */
-		z-index: map.get(tokens.$layer-names, $layer-name);
-	} @else {
-		@error 'Unknown z-index layer name of #{$layer-name}. Accepted names are: "dropdown-menu", "dialog" and "alert".';
-	}
+  @if map_has_key(tokens.$layer-names, $layer-name) {
+    /* stylelint-disable-next-line property-disallowed-list */
+    z-index: map.get(tokens.$layer-names, $layer-name);
+  } @else {
+    @error 'Unknown z-index layer name of #{$layer-name}. Accepted names are: "dropdown-menu", "dialog" and "alert".';
+  }
 }

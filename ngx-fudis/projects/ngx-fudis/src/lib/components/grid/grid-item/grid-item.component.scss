@@ -1,5 +1,5 @@
-@use '../../../foundations/utilities/mixins.scss' as utilities;
+@use "../../../foundations/utilities/mixins.scss" as utilities;
 
 .fudis-grid-item {
-	@include utilities.box-reset;
+  @include utilities.box-reset;
 }

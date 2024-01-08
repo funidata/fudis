@@ -12,120 +12,131 @@ import { IconComponent } from '../../icon/icon.component';
 import { getElement, sortClasses } from '../../../../../utilities/tests/utilities';
 
 describe('AlertGroupComponent', () => {
-	let component: AlertGroupComponent;
-	let fixture: ComponentFixture<AlertGroupComponent>;
-	let alertService: FudisAlertService;
-	let dialogService: FudisDialogService;
+  let component: AlertGroupComponent;
+  let fixture: ComponentFixture<AlertGroupComponent>;
+  let alertService: FudisAlertService;
+  let dialogService: FudisDialogService;
 
-	beforeEach(() => {
-		TestBed.configureTestingModule({
-			imports: [MatDialogModule],
-			declarations: [AlertGroupComponent, BodyTextComponent, AlertComponent, MockComponent(IconComponent)],
-			providers: [FudisDialogService],
-		});
-		fixture = TestBed.createComponent(AlertGroupComponent);
-		component = fixture.componentInstance;
-		fixture.detectChanges();
-	});
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [MatDialogModule],
+      declarations: [
+        AlertGroupComponent,
+        BodyTextComponent,
+        AlertComponent,
+        MockComponent(IconComponent),
+      ],
+      providers: [FudisDialogService],
+    });
+    fixture = TestBed.createComponent(AlertGroupComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
-	});
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-	describe('Basic inputs', () => {
-		it('should have default CSS classes', () => {
-			const element = getElement(fixture, 'section');
+  describe('Basic inputs', () => {
+    it('should have default CSS classes', () => {
+      const element = getElement(fixture, 'section');
 
-			expect(sortClasses(element.className)).toEqual(sortClasses('fudis-alert-group fudis-alert-group__fixed'));
-		});
+      expect(sortClasses(element.className)).toEqual(
+        sortClasses('fudis-alert-group fudis-alert-group__fixed'),
+      );
+    });
 
-		it('should have absolute position', () => {
-			component.position = 'absolute';
-			fixture.detectChanges();
+    it('should have absolute position', () => {
+      component.position = 'absolute';
+      fixture.detectChanges();
 
-			const element = getElement(fixture, 'section');
+      const element = getElement(fixture, 'section');
 
-			expect(sortClasses(element.className)).toEqual(sortClasses('fudis-alert-group fudis-alert-group__absolute'));
-		});
+      expect(sortClasses(element.className)).toEqual(
+        sortClasses('fudis-alert-group fudis-alert-group__absolute'),
+      );
+    });
 
-		it('should have static position', () => {
-			component.position = 'static';
-			fixture.detectChanges();
+    it('should have static position', () => {
+      component.position = 'static';
+      fixture.detectChanges();
 
-			const element = getElement(fixture, 'section');
+      const element = getElement(fixture, 'section');
 
-			expect(sortClasses(element.className)).toEqual(sortClasses('fudis-alert-group fudis-alert-group__static'));
-		});
-	});
+      expect(sortClasses(element.className)).toEqual(
+        sortClasses('fudis-alert-group fudis-alert-group__static'),
+      );
+    });
+  });
 
-	describe('Functionality with services', () => {
-		beforeEach(() => {
-			alertService = TestBed.inject(FudisAlertService);
-			dialogService = TestBed.inject(FudisDialogService);
+  describe('Functionality with services', () => {
+    beforeEach(() => {
+      alertService = TestBed.inject(FudisAlertService);
+      dialogService = TestBed.inject(FudisDialogService);
 
-			jest.spyOn(alertService, 'getAlertsSignal').mockImplementation();
+      jest.spyOn(alertService, 'getAlertsSignal').mockImplementation();
 
-			const firstAlert: FudisAlert = {
-				message: 'Test message',
-				id: 'my-test-id-1',
-				type: 'info',
-			};
+      const firstAlert: FudisAlert = {
+        message: 'Test message',
+        id: 'my-test-id-1',
+        type: 'info',
+      };
 
-			const secondAlert: FudisAlert = {
-				message: 'Second test message',
-				id: 'my-test-id-2',
-				type: 'warning',
-			};
-			alertService.addAlert(firstAlert);
-			alertService.addAlert(secondAlert);
-		});
+      const secondAlert: FudisAlert = {
+        message: 'Second test message',
+        id: 'my-test-id-2',
+        type: 'warning',
+      };
+      alertService.addAlert(firstAlert);
+      alertService.addAlert(secondAlert);
+    });
 
-		it('should have two alerts as children', () => {
-			fixture.detectChanges();
+    it('should have two alerts as children', () => {
+      fixture.detectChanges();
 
-			const childAlerts = fixture.nativeElement.querySelectorAll('fudis-alert');
+      const childAlerts = fixture.nativeElement.querySelectorAll('fudis-alert');
 
-			expect(childAlerts.length).toEqual(2);
-		});
+      expect(childAlerts.length).toEqual(2);
+    });
 
-		it('should have one alert as children after one is dismissed', () => {
-			alertService.dismissAlert('my-test-id-1');
-			fixture.detectChanges();
+    it('should have one alert as children after one is dismissed', () => {
+      alertService.dismissAlert('my-test-id-1');
+      fixture.detectChanges();
 
-			const childAlerts = fixture.nativeElement.querySelectorAll('fudis-alert');
+      const childAlerts = fixture.nativeElement.querySelectorAll('fudis-alert');
 
-			expect(childAlerts.length).toEqual(1);
+      expect(childAlerts.length).toEqual(1);
 
-			expect(childAlerts[0].getAttribute('id')).toEqual('my-test-id-2');
-		});
+      expect(childAlerts[0].getAttribute('id')).toEqual('my-test-id-2');
+    });
 
-		it('should not be visible, if Dialog is open', () => {
-			dialogService.setDialogOpenSignal(true);
+    it('should not be visible, if Dialog is open', () => {
+      dialogService.setDialogOpenSignal(true);
 
-			fixture.detectChanges();
+      fixture.detectChanges();
 
-			expect(fixture.nativeElement.querySelector('section')).toBeNull();
-			expect(component.getVisibleStatus()).toEqual(false);
-		});
+      expect(fixture.nativeElement.querySelector('section')).toBeNull();
+      expect(component.getVisibleStatus()).toEqual(false);
+    });
 
-		it('should be visible, if Dialog is closed', () => {
-			dialogService.setDialogOpenSignal(false);
+    it('should be visible, if Dialog is closed', () => {
+      dialogService.setDialogOpenSignal(false);
 
-			fixture.detectChanges();
+      fixture.detectChanges();
 
-			expect(fixture.nativeElement.querySelector('section')).toBeDefined();
-			expect(component.getVisibleStatus()).toEqual(true);
-		});
+      expect(fixture.nativeElement.querySelector('section')).toBeDefined();
+      expect(component.getVisibleStatus()).toEqual(true);
+    });
 
-		it('should not be visible, if Dialog is not open and Alert Group is inside dialog', () => {
-			component.insideDialog = true;
+    it('should not be visible, if Dialog is not open and Alert Group is inside dialog', () => {
+      component.insideDialog = true;
 
-			component.ngAfterViewInit();
+      component.ngAfterViewInit();
 
-			fixture.detectChanges();
+      fixture.detectChanges();
 
-			expect(fixture.nativeElement.querySelector('section')).toBeNull();
-			expect(component.getVisibleStatus()).toEqual(false);
-		});
-	});
+      expect(fixture.nativeElement.querySelector('section')).toBeNull();
+      expect(component.getVisibleStatus()).toEqual(false);
+    });
+  });
 });

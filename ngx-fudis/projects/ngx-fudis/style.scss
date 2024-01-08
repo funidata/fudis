@@ -1,67 +1,65 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 
 // Fudis theme import
-@import './src/lib/theme/component-themes-to-apply';
+@import "./src/lib/theme/component-themes-to-apply";
 
 // Import font files globally
-@import './src/lib/assets/fonts/fonts';
-@import './src/lib/foundations/utilities/classes';
+@import "./src/lib/assets/fonts/fonts";
+@import "./src/lib/foundations/utilities/classes";
 
 :root {
-	--fudis-rem-multiplier: 1;
+  --fudis-rem-multiplier: 1;
 }
 
 html {
-	font-size: 100%;
+  font-size: 100%;
 
-	&.cypress-hide-unstyled-elements{
+  &.cypress-hide-unstyled-elements {
+    & textarea.fudis-text-area__input {
+      resize: none;
+    }
 
-		& textarea.fudis-text-area__input {
-			resize: none;
-		}
+    & input,
+    textarea {
+      caret-color: transparent;
+    }
 
-		& input, textarea{
-			caret-color: transparent;
-		}
-
-		&::-webkit-scrollbar {
-			scrollbar-width: none;
-			display: none;
-			background: transparent;
-			visibility: hidden;
-			width: 0;
-		}
-		& * {
-			scrollbar-width: none;  /* Firefox */
-			&::-webkit-scrollbar{
-				display: none;
-				visibility: hidden;
-				width: 0;
-				background: transparent;
-			}
-		}
-	}
+    &::-webkit-scrollbar {
+      scrollbar-width: none;
+      display: none;
+      background: transparent;
+      visibility: hidden;
+      width: 0;
+    }
+    & * {
+      scrollbar-width: none; /* Firefox */
+      &::-webkit-scrollbar {
+        display: none;
+        visibility: hidden;
+        width: 0;
+        background: transparent;
+      }
+    }
+  }
 }
 
 body {
-	&.cypress-storybook-box-reset{
-		padding: 0;
-		margin: 0;
-	}
+  &.cypress-storybook-box-reset {
+    padding: 0;
+    margin: 0;
+  }
 }
-
-
 
 /* stylelint-disable color-no-hex */
-[data-theme='into'] {
-	--fudis-color-primary-light: #e0f4fd;
-	--fudis-color-primary: #0a729e;
-	--fudis-color-primary-dark: #0e5d81;
-	--fudis-color-primary-extra-dark: #1b2e36;
+[data-theme="into"] {
+  --fudis-color-primary-light: #e0f4fd;
+  --fudis-color-primary: #0a729e;
+  --fudis-color-primary-dark: #0e5d81;
+  --fudis-color-primary-extra-dark: #1b2e36;
 }
 
-[data-theme='sisu'] {
-	--fudis-color-primary-light: #daedff;
-	--fudis-color-primary: #1076db;
-	--fudis-color-primary-dark: #1d65b8;
+[data-theme="sisu"] {
+  --fudis-color-primary-light: #daedff;
+  --fudis-color-primary: #1076db;
+  --fudis-color-primary-dark: #1d65b8;
 }

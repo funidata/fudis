@@ -17,67 +17,70 @@ import { FudisValidators, TooltipDirective } from '../../../../../public-api';
 import { FudisIdService } from '../../../../services/id/id.service';
 
 describe('DateRangeComponent', () => {
-	let component: DateRangeComponent;
-	let fixture: ComponentFixture<DateRangeComponent>;
+  let component: DateRangeComponent;
+  let fixture: ComponentFixture<DateRangeComponent>;
 
-	beforeEach(() => {
-		TestBed.configureTestingModule({
-			declarations: [
-				DateRangeComponent,
-				DatepickerComponent,
-				LabelComponent,
-				GuidanceComponent,
-				ValidatorErrorMessageComponent,
-				ButtonComponent,
-				TooltipDirective,
-				MockComponent(IconComponent),
-			],
-			providers: [FudisIdService],
-			imports: [
-				ReactiveFormsModule,
-				MatDatepickerModule,
-				MatNativeDateModule,
-				BrowserAnimationsModule,
-				MatTooltipModule,
-			],
-		});
-		fixture = TestBed.createComponent(DateRangeComponent);
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        DateRangeComponent,
+        DatepickerComponent,
+        LabelComponent,
+        GuidanceComponent,
+        ValidatorErrorMessageComponent,
+        ButtonComponent,
+        TooltipDirective,
+        MockComponent(IconComponent),
+      ],
+      providers: [FudisIdService],
+      imports: [
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        BrowserAnimationsModule,
+        MatTooltipModule,
+      ],
+    });
+    fixture = TestBed.createComponent(DateRangeComponent);
 
-		component = fixture.componentInstance;
-		fixture.detectChanges();
-	});
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-	it('should create', () => {
-		component.startDate = {
-			label: 'Start date',
-			helpText: 'Select start date',
-			tooltip: 'Tooltip for first',
-			minDate: new Date('2023-05-01'),
-			maxDate: new Date('2023-05-07'),
-			errorMsg: {
-				matDatepickerParse: 'Start date is not a proper date',
-				matDatepickerMin: 'Start date cannot be earlier than 5.5.2023',
-				matDatepickerMax: 'Start date cannot be later than 22.6.2023',
-				matStartDateInvalid: 'Start date cannot be after end date',
-			},
-			control: new FormControl<Date | null>(null, FudisValidators.required('Start date is required')),
-		};
-		component.endDate = {
-			label: 'End date',
-			helpText: 'Select end date',
-			minDate: new Date('2023-05-15'),
-			maxDate: new Date('2023-05-25'),
-			errorMsg: {
-				matDatepickerParse: 'End date is not a proper date',
-				matDatepickerMin: 'End date cannot be earlier than 5.5.2023',
-				matDatepickerMax: 'End date cannot be later than 22.6.2023',
-				matEndDateInvalid: 'End date cannot be before start date',
-			},
-			control: new FormControl<Date | null>(null, FudisValidators.required('End date is required')),
-		};
-		fixture.detectChanges();
-		component.ngOnInit();
+  it('should create', () => {
+    component.startDate = {
+      label: 'Start date',
+      helpText: 'Select start date',
+      tooltip: 'Tooltip for first',
+      minDate: new Date('2023-05-01'),
+      maxDate: new Date('2023-05-07'),
+      errorMsg: {
+        matDatepickerParse: 'Start date is not a proper date',
+        matDatepickerMin: 'Start date cannot be earlier than 5.5.2023',
+        matDatepickerMax: 'Start date cannot be later than 22.6.2023',
+        matStartDateInvalid: 'Start date cannot be after end date',
+      },
+      control: new FormControl<Date | null>(
+        null,
+        FudisValidators.required('Start date is required'),
+      ),
+    };
+    component.endDate = {
+      label: 'End date',
+      helpText: 'Select end date',
+      minDate: new Date('2023-05-15'),
+      maxDate: new Date('2023-05-25'),
+      errorMsg: {
+        matDatepickerParse: 'End date is not a proper date',
+        matDatepickerMin: 'End date cannot be earlier than 5.5.2023',
+        matDatepickerMax: 'End date cannot be later than 22.6.2023',
+        matEndDateInvalid: 'End date cannot be before start date',
+      },
+      control: new FormControl<Date | null>(null, FudisValidators.required('End date is required')),
+    };
+    fixture.detectChanges();
+    component.ngOnInit();
 
-		expect(component).toBeTruthy();
-	});
+    expect(component).toBeTruthy();
+  });
 });

@@ -7,86 +7,86 @@
 /* stylelint-disable selector-no-qualifying-type */
 /* stylelint-disable scss/selector-no-redundant-nesting-selector */
 
-@use '../../foundations/colors/tokens.scss' as colors;
-@use '../../foundations/borders/mixins.scss' as borders;
-@use '../../foundations/focus/mixins.scss' as focus;
-@use '../../foundations/breakpoints/mixins.scss' as breakpoints;
-@use '../../foundations/utilities/mixins.scss' as utilities;
-@use '../../foundations/spacing/tokens.scss' as spacing;
+@use "../../foundations/colors/tokens.scss" as colors;
+@use "../../foundations/borders/mixins.scss" as borders;
+@use "../../foundations/focus/mixins.scss" as focus;
+@use "../../foundations/breakpoints/mixins.scss" as breakpoints;
+@use "../../foundations/utilities/mixins.scss" as utilities;
+@use "../../foundations/spacing/tokens.scss" as spacing;
 
 .cdk-overlay-container {
-	& .cdk-global-overlay-wrapper {
-		overflow: auto;
-	}
+  & .cdk-global-overlay-wrapper {
+    overflow: auto;
+  }
 }
 
 .fudis-dialog-panel {
-	border-top: 2px solid colors.$color-gray-dark;
-	border-right: none;
-	border-bottom: 2px solid colors.$color-gray-dark;
-	border-left: none;
-	max-width: 100vw !important;
+  border-top: 2px solid colors.$color-gray-dark;
+  border-right: none;
+  border-bottom: 2px solid colors.$color-gray-dark;
+  border-left: none;
+  max-width: 100vw !important;
 
-	& mat-dialog-container.mat-mdc-dialog-container {
-		padding: 0;
+  & mat-dialog-container.mat-mdc-dialog-container {
+    padding: 0;
 
-		& .mat-mdc-dialog-title {
-			margin: spacing.$spacing-xxs 0 spacing.$spacing-sm 0;
-			padding: 0;
-			pointer-events: none;
+    & .mat-mdc-dialog-title {
+      margin: spacing.$spacing-xxs 0 spacing.$spacing-sm 0;
+      padding: 0;
+      pointer-events: none;
 
-			&::before {
-				display: none;
-			}
+      &::before {
+        display: none;
+      }
 
-			&:focus-visible {
-				@include focus.focus-generic;
-			}
+      &:focus-visible {
+        @include focus.focus-generic;
+      }
 
-			&:focus-visible.fudis-form__header__title__dialog {
-				outline-offset: -2px;
-			}
-		}
+      &:focus-visible.fudis-form__header__title__dialog {
+        outline-offset: -2px;
+      }
+    }
 
-		& .mat-mdc-dialog-content {
-			@include utilities.box-reset;
+    & .mat-mdc-dialog-content {
+      @include utilities.box-reset;
 
-			&:focus-visible,
-			&:focus {
-				@include focus.focus-generic;
-			}
+      &:focus-visible,
+      &:focus {
+        @include focus.focus-generic;
+      }
 
-			// Checkbox and radio-button elements need small padding if form is inside dialog
-			// Otherwise focus and invalid styles won't show properly as dialog padding is overlapping them
-			& fudis-checkbox,
-			& fudis-radio-button {
-				padding-left: spacing.$spacing-xxs;
-			}
-		}
+      // Checkbox and radio-button elements need small padding if form is inside dialog
+      // Otherwise focus and invalid styles won't show properly as dialog padding is overlapping them
+      & fudis-checkbox,
+      & fudis-radio-button {
+        padding-left: spacing.$spacing-xxs;
+      }
+    }
 
-		& .mat-mdc-dialog-actions {
-			align-items: flex-end;
-			margin-top: spacing.$spacing-xs;
-			margin-bottom: 0;
-			padding: 0;
-			min-height: initial;
+    & .mat-mdc-dialog-actions {
+      align-items: flex-end;
+      margin-top: spacing.$spacing-xs;
+      margin-bottom: 0;
+      padding: 0;
+      min-height: initial;
 
-			& fudis-button {
-				&:not(:first-of-type) {
-					margin-top: spacing.$spacing-xs;
-					margin-left: spacing.$spacing-xs;
-				}
-			}
-		}
-	}
+      & fudis-button {
+        &:not(:first-of-type) {
+          margin-top: spacing.$spacing-xs;
+          margin-left: spacing.$spacing-xs;
+        }
+      }
+    }
+  }
 
-	@include breakpoints.breakpoint('sm') {
-		@include borders.border('2px', 'solid', 'gray-dark');
+  @include breakpoints.breakpoint("sm") {
+    @include borders.border("2px", "solid", "gray-dark");
 
-		max-width: 90vw !important;
-	}
+    max-width: 90vw !important;
+  }
 
-	@include breakpoints.breakpoint('md') {
-		max-width: 80vw !important;
-	}
+  @include breakpoints.breakpoint("md") {
+    max-width: 80vw !important;
+  }
 }

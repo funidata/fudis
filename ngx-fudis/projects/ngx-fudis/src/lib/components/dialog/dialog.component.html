@@ -1,15 +1,16 @@
 <fudis-alert-group [insideDialog]="true" />
 <div class="fudis-dialog fudis-dialog__size__{{ size }}" [attr.id]="_id">
-	<fudis-button
-		fudisDialogClose
-		class="fudis-dialog__close"
-		[class.fudis-dialog__close__absolute]="closeButtonPositionAbsolute"
-		[attr.id]="_id + '-close'"
-		[label]="_closeLabel"
-		[labelHidden]="true"
-		[size]="'icon-only'"
-		[icon]="'ring-close'"
-		[variant]="'tertiary'">
-	</fudis-button>
-	<ng-content></ng-content>
+  <fudis-button
+    fudisDialogClose
+    class="fudis-dialog__close"
+    [class.fudis-dialog__close__absolute]="closeButtonPositionAbsolute"
+    [attr.id]="_id + '-close'"
+    [label]="_closeLabel"
+    [labelHidden]="true"
+    [size]="'icon-only'"
+    [icon]="'ring-close'"
+    [variant]="'tertiary'"
+  >
+  </fudis-button>
+  <ng-content></ng-content>
 </div>

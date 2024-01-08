@@ -1,37 +1,37 @@
-@use '../../foundations/utilities/mixins.scss' as utilities;
-@use '../../foundations/spacing/tokens.scss' as spacing;
+@use "../../foundations/utilities/mixins.scss" as utilities;
+@use "../../foundations/spacing/tokens.scss" as spacing;
 
 .fudis-section {
-	box-sizing: border-box;
-	padding: 0;
+  box-sizing: border-box;
+  padding: 0;
 
-	&__header {
-		&__heading {
-			display: flex;
-			align-items: center;
+  &__header {
+    &__heading {
+      display: flex;
+      align-items: center;
 
-			&__tooltip {
-				margin-left: spacing.$spacing-xs;
-			}
-		}
+      &__tooltip {
+        margin-left: spacing.$spacing-xs;
+      }
+    }
 
-		&__actions {
-			margin-left: auto;
+    &__actions {
+      margin-left: auto;
 
-			fudis-button:not(:last-of-type) {
-				margin-right: spacing.$spacing-sm;
-			}
-		}
+      fudis-button:not(:last-of-type) {
+        margin-right: spacing.$spacing-sm;
+      }
+    }
 
-		&__container {
-			display: flex;
-			flex-wrap: wrap;
-			align-items: center;
-			margin-bottom: spacing.$spacing-xs;
-		}
-	}
+    &__container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: spacing.$spacing-xs;
+    }
+  }
 
-	&__notifications {
-		margin-bottom: spacing.$spacing-xs;
-	}
+  &__notifications {
+    margin-bottom: spacing.$spacing-xs;
+  }
 }

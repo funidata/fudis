@@ -13,131 +13,133 @@ import { FudisBreakpointStyleResponsive } from '../../../types/breakpoints';
 import { BodyTextComponent } from '../../../components/typography/body-text/body-text.component';
 
 @Component({
-	selector: 'fudis-mock-grid-item-directive',
-	template: `<fudis-grid [columns]="4">
-		<fudis-heading [level]="3">I am test heading</fudis-heading>
-		<fudis-body-text fudisGridItem [columns]="columns">
-			Paragraph text for testing grid item functionalities. This is so much fun!
-		</fudis-body-text>
-		<fudis-button fudisGridItem [alignY]="alignY" [alignX]="alignX" [label]="'Test button'" />
-	</fudis-grid>`,
+  selector: 'fudis-mock-grid-item-directive',
+  template: `<fudis-grid [columns]="4">
+    <fudis-heading [level]="3">I am test heading</fudis-heading>
+    <fudis-body-text fudisGridItem [columns]="columns">
+      Paragraph text for testing grid item functionalities. This is so much fun!
+    </fudis-body-text>
+    <fudis-button fudisGridItem [alignY]="alignY" [alignX]="alignX" [label]="'Test button'" />
+  </fudis-grid>`,
 })
 class HostComponent {
-	columns: string | FudisBreakpointStyleResponsive = '2';
+  columns: string | FudisBreakpointStyleResponsive = '2';
 
-	alignY: FudisGridItemAlignment = 'stretch';
+  alignY: FudisGridItemAlignment = 'stretch';
 
-	alignX: FudisGridItemAlignment = 'stretch';
+  alignX: FudisGridItemAlignment = 'stretch';
 }
 
 describe('GridItemDirective', () => {
-	let component: HostComponent;
-	let fixture: ComponentFixture<HostComponent>;
+  let component: HostComponent;
+  let fixture: ComponentFixture<HostComponent>;
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			declarations: [
-				HostComponent,
-				GridItemDirective,
-				GridComponent,
-				MockComponent(HeadingComponent),
-				MockComponent(BodyTextComponent),
-				MockComponent(ButtonComponent),
-			],
-			providers: [FudisGridService, FudisBreakpointService],
-		}).compileComponents();
-	});
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [
+        HostComponent,
+        GridItemDirective,
+        GridComponent,
+        MockComponent(HeadingComponent),
+        MockComponent(BodyTextComponent),
+        MockComponent(ButtonComponent),
+      ],
+      providers: [FudisGridService, FudisBreakpointService],
+    }).compileComponents();
+  });
 
-	beforeEach(() => {
-		fixture = TestBed.createComponent(HostComponent);
-		component = fixture.componentInstance;
-	});
+  beforeEach(() => {
+    fixture = TestBed.createComponent(HostComponent);
+    component = fixture.componentInstance;
+  });
 
-	function getGridItemDirective() {
-		return getDirective(fixture, GridItemDirective);
-	}
+  function getGridItemDirective() {
+    return getDirective(fixture, GridItemDirective);
+  }
 
-	// eslint-disable-next-line consistent-return
-	function getAttribute(index: number, attr: string) {
-		switch (attr) {
-			case 'justify-self':
-				return getGridItemDirective()[index].nativeElement.style.justifySelf;
-			case 'align-self':
-				return getGridItemDirective()[index].nativeElement.style.alignSelf;
-			case 'grid-column':
-				return getGridItemDirective()[index].nativeElement.style.gridColumn;
-			default:
-				break;
-		}
-	}
+  // eslint-disable-next-line consistent-return
+  function getAttribute(index: number, attr: string) {
+    switch (attr) {
+      case 'justify-self':
+        return getGridItemDirective()[index].nativeElement.style.justifySelf;
+      case 'align-self':
+        return getGridItemDirective()[index].nativeElement.style.alignSelf;
+      case 'grid-column':
+        return getGridItemDirective()[index].nativeElement.style.gridColumn;
+      default:
+        break;
+    }
+  }
 
-	function getDefaultCSSClass(index: number) {
-		return getGridItemDirective()[index].nativeElement.classList;
-	}
+  function getDefaultCSSClass(index: number) {
+    return getGridItemDirective()[index].nativeElement.classList;
+  }
 
-	describe('Component creation', () => {
-		it('should create mock component', () => {
-			expect(component).toBeTruthy();
-		});
-	});
+  describe('Component creation', () => {
+    it('should create mock component', () => {
+      expect(component).toBeTruthy();
+    });
+  });
 
-	describe('GridItem Directive', () => {
-		it('should find elements with fudisGridItem directive', () => {
-			expect(getGridItemDirective().length).toEqual(2);
-		});
+  describe('GridItem Directive', () => {
+    it('should find elements with fudisGridItem directive', () => {
+      expect(getGridItemDirective().length).toEqual(2);
+    });
 
-		it('should have respective grid-item CSS class present', () => {
-			fixture.detectChanges();
+    it('should have respective grid-item CSS class present', () => {
+      fixture.detectChanges();
 
-			expect(getDefaultCSSClass(0)).toContain('fudis-grid-item');
-			expect(getDefaultCSSClass(1)).toContain('fudis-grid-item');
-		});
+      expect(getDefaultCSSClass(0)).toContain('fudis-grid-item');
+      expect(getDefaultCSSClass(1)).toContain('fudis-grid-item');
+    });
 
-		// FIXME: Use visual regression tests instead of testing style attribute values directly.
-		it.skip('should convert alignX and alignY attributes to style properties', () => {
-			fixture.detectChanges();
+    // FIXME: Use visual regression tests instead of testing style attribute values directly.
+    it.skip('should convert alignX and alignY attributes to style properties', () => {
+      fixture.detectChanges();
 
-			expect(getAttribute(1, 'justify-self')).toBe('stretch');
-			expect(getAttribute(1, 'align-self')).toBe('stretch');
+      expect(getAttribute(1, 'justify-self')).toBe('stretch');
+      expect(getAttribute(1, 'align-self')).toBe('stretch');
 
-			component.alignY = 'end';
-			component.alignX = 'end';
-			fixture.detectChanges();
+      component.alignY = 'end';
+      component.alignX = 'end';
+      fixture.detectChanges();
 
-			expect(getAttribute(1, 'justify-self')).toBe('end');
-			expect(getAttribute(1, 'align-self')).toBe('end');
+      expect(getAttribute(1, 'justify-self')).toBe('end');
+      expect(getAttribute(1, 'align-self')).toBe('end');
 
-			component.alignY = 'start';
-			component.alignX = 'start';
-			fixture.detectChanges();
+      component.alignY = 'start';
+      component.alignX = 'start';
+      fixture.detectChanges();
 
-			expect(getAttribute(1, 'justify-self')).toBe('start');
-			expect(getAttribute(1, 'align-self')).toBe('start');
+      expect(getAttribute(1, 'justify-self')).toBe('start');
+      expect(getAttribute(1, 'align-self')).toBe('start');
 
-			component.alignY = 'center';
-			component.alignX = 'center';
-			fixture.detectChanges();
+      component.alignY = 'center';
+      component.alignX = 'center';
+      fixture.detectChanges();
 
-			expect(getAttribute(1, 'justify-self')).toBe('center');
-			expect(getAttribute(1, 'align-self')).toBe('center');
-		});
+      expect(getAttribute(1, 'justify-self')).toBe('center');
+      expect(getAttribute(1, 'align-self')).toBe('center');
+    });
 
-		// FIXME: Use visual regression tests instead of testing style attribute values directly.
-		it.skip('should convert columns attribute to grid-column properties', () => {
-			fixture.detectChanges();
+    // FIXME: Use visual regression tests instead of testing style attribute values directly.
+    it.skip('should convert columns attribute to grid-column properties', () => {
+      fixture.detectChanges();
 
-			const columnsBeforeValid =
-				(getAttribute(0, 'grid-column') === '2' || getAttribute(0, 'grid-column') === '2 / auto') ?? true;
+      const columnsBeforeValid =
+        (getAttribute(0, 'grid-column') === '2' || getAttribute(0, 'grid-column') === '2 / auto') ??
+        true;
 
-			expect(columnsBeforeValid).toEqual(true);
+      expect(columnsBeforeValid).toEqual(true);
 
-			component.columns = '6';
-			fixture.detectChanges();
+      component.columns = '6';
+      fixture.detectChanges();
 
-			const columnsAfterValid =
-				(getAttribute(0, 'grid-column') === '6' || getAttribute(0, 'grid-column') === '6 / auto') ?? true;
+      const columnsAfterValid =
+        (getAttribute(0, 'grid-column') === '6' || getAttribute(0, 'grid-column') === '6 / auto') ??
+        true;
 
-			expect(columnsAfterValid).toEqual(true);
-		});
-	});
+      expect(columnsAfterValid).toEqual(true);
+    });
+  });
 });

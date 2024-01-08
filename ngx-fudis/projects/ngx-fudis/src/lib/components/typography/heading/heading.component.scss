@@ -1,53 +1,53 @@
-@use '../../../foundations/typography/mixins.scss' as typography;
-@use '../../../foundations/colors/mixins.scss' as colorMixins;
+@use "../../../foundations/typography/mixins.scss" as typography;
+@use "../../../foundations/colors/mixins.scss" as colorMixins;
 
 .fudis-heading {
-	@include colorMixins.text-color('gray-dark');
+  @include colorMixins.text-color("gray-dark");
 
-	box-sizing: border-box;
-	margin-top: 0;
+  box-sizing: border-box;
+  margin-top: 0;
 
-	&__size {
-		&__xxs {
-			@include typography.heading-xxs;
-		}
+  &__size {
+    &__xxs {
+      @include typography.heading-xxs;
+    }
 
-		&__xs {
-			@include typography.heading-xs;
-		}
+    &__xs {
+      @include typography.heading-xs;
+    }
 
-		&__sm {
-			@include typography.heading-sm;
-		}
+    &__sm {
+      @include typography.heading-sm;
+    }
 
-		&__md {
-			@include typography.heading-md;
-		}
+    &__md {
+      @include typography.heading-md;
+    }
 
-		&__lg {
-			@include typography.heading-lg;
-		}
+    &__lg {
+      @include typography.heading-lg;
+    }
 
-		&__xl {
-			@include typography.heading-xl;
-		}
+    &__xl {
+      @include typography.heading-xl;
+    }
 
-		&__xxl {
-			@include typography.heading-xxl;
-		}
-	}
+    &__xxl {
+      @include typography.heading-xxl;
+    }
+  }
 
-	&__align {
-		&__left {
-			text-align: left;
-		}
+  &__align {
+    &__left {
+      text-align: left;
+    }
 
-		&__right {
-			text-align: right;
-		}
+    &__right {
+      text-align: right;
+    }
 
-		&__center {
-			text-align: center;
-		}
-	}
+    &__center {
+      text-align: center;
+    }
+  }
 }

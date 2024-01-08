@@ -7,10 +7,10 @@ import { Directive, Input, TemplateRef } from '@angular/core';
 
 @Directive({ selector: '[fudisNotifications]' })
 export class NotificationsDirective {
-	constructor(public templateRef: TemplateRef<unknown>) {}
+  constructor(public templateRef: TemplateRef<unknown>) {}
 
-	/**
-	 * To component type to protect wrong content projection to nested components
-	 */
-	@Input({ required: true }) type: 'fieldset' | 'section';
+  /**
+   * To component type to protect wrong content projection to nested components
+   */
+  @Input({ required: true }) type: 'fieldset' | 'section';
 }

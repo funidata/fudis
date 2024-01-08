@@ -41,24 +41,24 @@ export type FudisGridGap = FudisSpacing | 'responsive';
  * Input object from application to provide responsive settings for different breakpoints for Grid
  */
 export type FudisGridColumnsResponsive = {
-	[key in FudisBreakpointKey]?: string | number;
+  [key in FudisBreakpointKey]?: string | number;
 };
 
 /**
  * Attributes for managing Grid
  */
 export interface FudisGridAttributes {
-	alignItemsY?: FudisGridAlignItems;
-	alignItemsX?: FudisGridAlignItems;
-	columns?: FudisBreakpointValueResponsive;
-	width?: FudisGridWidth;
-	align?: FudisGridAlign;
-	marginTop?: FudisSpacing;
-	marginBottom?: FudisSpacing;
-	rowGap?: FudisGridGap;
-	columnGap?: FudisGridGap;
-	marginSides?: FudisGridMarginSide;
-	classes?: string[];
+  alignItemsY?: FudisGridAlignItems;
+  alignItemsX?: FudisGridAlignItems;
+  columns?: FudisBreakpointValueResponsive;
+  width?: FudisGridWidth;
+  align?: FudisGridAlign;
+  marginTop?: FudisSpacing;
+  marginBottom?: FudisSpacing;
+  rowGap?: FudisGridGap;
+  columnGap?: FudisGridGap;
+  marginSides?: FudisGridMarginSide;
+  classes?: string[];
 }
 
 /**
@@ -81,7 +81,7 @@ export type FudisGridItemAlignment = 'start' | 'end' | 'center' | 'stretch';
  * Alignment of Grid Item inside Grid for varying breakpoints
  */
 export type FudisGridItemAlignResponsive = {
-	[K in FudisBreakpointKey]?: FudisGridItemAlignment;
+  [K in FudisBreakpointKey]?: FudisGridItemAlignment;
 };
 
 /**
@@ -93,7 +93,7 @@ export type FudisGridItemWidth = number | string | 'stretch' | 'auto';
  * Input object from application to provide responsive settings for different breakpoints for Grid Item
  */
 export type FudisGridItemColumnsResponsive = {
-	[K in FudisBreakpointKey]?: FudisGridItemWidth;
+  [K in FudisBreakpointKey]?: FudisGridItemWidth;
 };
 
 export type FudisGridFormInputWidth = 'inputXs' | 'inputSm' | 'inputMd' | 'inputLg';

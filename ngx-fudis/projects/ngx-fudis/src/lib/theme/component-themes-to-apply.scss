@@ -1,12 +1,12 @@
-@use '@angular/material' as mat;
-@use './fudis-theme.scss' as theme;
-@use '../components/form/autocomplete/ngMaterial-theme.scss' as autoComplete;
-@use '../components/form/date/datepicker/ngMaterial-theme.scss' as datePicker;
-@use '../components/dialog/ngMaterial-theme.scss' as dialog;
-@use '../directives/tooltip/ngMaterial-theme.scss' as tooltip;
-@use '../components/grid/grid-item/grid-item.component.scss' as gridItem;
-@use '../components/grid/grid/grid.component.scss' as grid;
-@use '../foundations/spacing/classes.scss' as spacingClasses;
+@use "@angular/material" as mat;
+@use "./fudis-theme.scss" as theme;
+@use "../components/form/autocomplete/ngMaterial-theme.scss" as autoComplete;
+@use "../components/form/date/datepicker/ngMaterial-theme.scss" as datePicker;
+@use "../components/dialog/ngMaterial-theme.scss" as dialog;
+@use "../directives/tooltip/ngMaterial-theme.scss" as tooltip;
+@use "../components/grid/grid-item/grid-item.component.scss" as gridItem;
+@use "../components/grid/grid/grid.component.scss" as grid;
+@use "../foundations/spacing/classes.scss" as spacingClasses;
 
 // Emit theme-dependent styles for common features used across multiple Material components.
 @include mat.core;

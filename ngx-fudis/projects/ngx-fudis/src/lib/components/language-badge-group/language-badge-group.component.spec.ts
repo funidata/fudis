@@ -11,44 +11,48 @@ const providedLanguages: FudisLanguageBadgeContent = { en: 'en', fi: 'fi' };
 const internalLanguageOptions: FudisLanguageBadgeContent = { en: 'en', fi: 'fi', sv: 'sv' };
 
 describe('LanguageBadgeGroupComponent', () => {
-	let component: LanguageBadgeGroupComponent;
-	let fixture: ComponentFixture<LanguageBadgeGroupComponent>;
+  let component: LanguageBadgeGroupComponent;
+  let fixture: ComponentFixture<LanguageBadgeGroupComponent>;
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			declarations: [LanguageBadgeGroupComponent, MockComponent(LanguageBadgeComponent), TooltipApiDirective],
-		}).compileComponents();
-	});
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [
+        LanguageBadgeGroupComponent,
+        MockComponent(LanguageBadgeComponent),
+        TooltipApiDirective,
+      ],
+    }).compileComponents();
+  });
 
-	beforeEach(() => {
-		TestBed.configureTestingModule({
-			declarations: [LanguageBadgeGroupComponent],
-		});
-		fixture = TestBed.createComponent(LanguageBadgeGroupComponent);
-		component = fixture.componentInstance;
-		component.languages = providedLanguages;
-		component.selectedLanguage = 'en';
-		fixture.detectChanges();
-	});
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [LanguageBadgeGroupComponent],
+    });
+    fixture = TestBed.createComponent(LanguageBadgeGroupComponent);
+    component = fixture.componentInstance;
+    component.languages = providedLanguages;
+    component.selectedLanguage = 'en';
+    fixture.detectChanges();
+  });
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
-	});
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-	describe('Contents', () => {
-		it('should contain all three language badges', () => {
-			const parentComponent = fixture.debugElement.query(By.css('.fudis-language-badge-group'));
+  describe('Contents', () => {
+    it('should contain all three language badges', () => {
+      const parentComponent = fixture.debugElement.query(By.css('.fudis-language-badge-group'));
 
-			expect(parentComponent.nativeElement.children.length).toEqual(3);
-		});
+      expect(parentComponent.nativeElement.children.length).toEqual(3);
+    });
 
-		it('should have missing translation for Swedish', () => {
-			const existingTranslation = component.languages;
-			const missingLanguage = Object.keys(internalLanguageOptions).filter(
-				(missing) => !Object.keys(existingTranslation).includes(missing)
-			);
+    it('should have missing translation for Swedish', () => {
+      const existingTranslation = component.languages;
+      const missingLanguage = Object.keys(internalLanguageOptions).filter(
+        (missing) => !Object.keys(existingTranslation).includes(missing),
+      );
 
-			expect(missingLanguage).toContain('sv');
-		});
-	});
+      expect(missingLanguage).toContain('sv');
+    });
+  });
 });

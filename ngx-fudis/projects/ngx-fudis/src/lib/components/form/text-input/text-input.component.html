@@ -1,37 +1,42 @@
 <div class="fudis-text-input fudis-input-size__{{ size }}">
-	<fudis-label
-		[for]="id"
-		[text]="label"
-		[id]="id + '-label'"
-		[requiredText]="_required ? _requiredText : undefined"
-		[tooltip]="tooltip"
-		[tooltipPosition]="tooltipPosition"
-		[tooltipToggle]="tooltipToggle">
-	</fudis-label>
-	<input
-		#inputRef
-		class="fudis-text-input__input"
-		[attr.aria-invalid]="(control.touched && control.invalid) || (control.touched && invalidState) ? true : null"
-		[attr.aria-label]="ariaLabel"
-		[formControl]="control"
-		[attr.minlength]="minLength"
-		[attr.maxlength]="maxLength"
-		[attr.min]="minNumber"
-		[attr.max]="maxNumber"
-		(blur)="onBlur($event)"
-		[id]="id"
-		[attr.type]="type"
-		[class.fudis-form-input--invalid]="(control.touched && control.invalid) || invalidState"
-		[attr.aria-describedby]="id + '_guidance'"
-		[attr.required]="_required ? true : null" />
-	<fudis-guidance
-		*ngIf="!disableGuidance"
-		[inputLabel]="label"
-		[maxLength]="maxLength"
-		[helpText]="helpText"
-		[for]="id"
-		[errorMsg]="errorMsg"
-		[control]="control">
-		<ng-content select="fudis-error-message" />
-	</fudis-guidance>
+  <fudis-label
+    [for]="id"
+    [text]="label"
+    [id]="id + '-label'"
+    [requiredText]="_required ? _requiredText : undefined"
+    [tooltip]="tooltip"
+    [tooltipPosition]="tooltipPosition"
+    [tooltipToggle]="tooltipToggle"
+  >
+  </fudis-label>
+  <input
+    #inputRef
+    class="fudis-text-input__input"
+    [attr.aria-invalid]="
+      (control.touched && control.invalid) || (control.touched && invalidState) ? true : null
+    "
+    [attr.aria-label]="ariaLabel"
+    [formControl]="control"
+    [attr.minlength]="minLength"
+    [attr.maxlength]="maxLength"
+    [attr.min]="minNumber"
+    [attr.max]="maxNumber"
+    (blur)="onBlur($event)"
+    [id]="id"
+    [attr.type]="type"
+    [class.fudis-form-input--invalid]="(control.touched && control.invalid) || invalidState"
+    [attr.aria-describedby]="id + '_guidance'"
+    [attr.required]="_required ? true : null"
+  />
+  <fudis-guidance
+    *ngIf="!disableGuidance"
+    [inputLabel]="label"
+    [maxLength]="maxLength"
+    [helpText]="helpText"
+    [for]="id"
+    [errorMsg]="errorMsg"
+    [control]="control"
+  >
+    <ng-content select="fudis-error-message" />
+  </fudis-guidance>
 </div>

@@ -1,32 +1,33 @@
 <dl
-	fudisGrid
-	[width]="width"
-	[align]="align"
-	[alignItemsX]="alignItemsX"
-	[alignItemsY]="alignItemsY"
-	[classes]="_classList"
-	[ignoreDefaults]="true"
-	[columnGap]="columnGap"
-	[rowGap]="variant === 'compact' ? 'none' : rowGap"
-	[columns]="columns ? columns : 2"
-	[marginBottom]="marginBottom"
-	[marginTop]="marginTop"
-	[marginSides]="marginSides"
-	role="list"
-	*ngIf="!disableGrid">
-	<ng-container *ngTemplateOutlet="content" />
+  fudisGrid
+  [width]="width"
+  [align]="align"
+  [alignItemsX]="alignItemsX"
+  [alignItemsY]="alignItemsY"
+  [classes]="_classList"
+  [ignoreDefaults]="true"
+  [columnGap]="columnGap"
+  [rowGap]="variant === 'compact' ? 'none' : rowGap"
+  [columns]="columns ? columns : 2"
+  [marginBottom]="marginBottom"
+  [marginTop]="marginTop"
+  [marginSides]="marginSides"
+  role="list"
+  *ngIf="!disableGrid"
+>
+  <ng-container *ngTemplateOutlet="content" />
 </dl>
 
 <ng-template #content>
-	<ng-container *ngIf="data">
-		<fudis-dl-item *ngFor="let item of data">
-			<fudis-dt>{{ item.key }}</fudis-dt>
-			<fudis-dd [subHeading]="item.subHeading">{{ item.value }}</fudis-dd>
-		</fudis-dl-item>
-	</ng-container>
-	<ng-content />
+  <ng-container *ngIf="data">
+    <fudis-dl-item *ngFor="let item of data">
+      <fudis-dt>{{ item.key }}</fudis-dt>
+      <fudis-dd [subHeading]="item.subHeading">{{ item.value }}</fudis-dd>
+    </fudis-dl-item>
+  </ng-container>
+  <ng-content />
 </ng-template>
 
 <dl *ngIf="disableGrid" [class]="_classList" role="list">
-	<ng-container *ngTemplateOutlet="content" />
+  <ng-container *ngTemplateOutlet="content" />
 </dl>

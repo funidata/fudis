@@ -1,110 +1,110 @@
-@use '../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../foundations/typography/mixins.scss' as typography;
-@use '../../../foundations/breakpoints/mixins.scss' as breakpoints;
-@use '../../../foundations/typography/tokens.scss' as typographyTokens;
-@use '../../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../../foundations/focus/mixins.scss' as focus;
+@use "../../../foundations/spacing/tokens.scss" as spacing;
+@use "../../../foundations/typography/mixins.scss" as typography;
+@use "../../../foundations/breakpoints/mixins.scss" as breakpoints;
+@use "../../../foundations/typography/tokens.scss" as typographyTokens;
+@use "../../../foundations/colors/mixins.scss" as colorMixins;
+@use "../../../foundations/focus/mixins.scss" as focus;
 
 .fudis-fieldset {
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: column;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 
-	/* stylelint-disable-next-line declaration-property-value-disallowed-list, property-disallowed-list */
-	border: none;
-	padding: 0;
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list, property-disallowed-list */
+  border: none;
+  padding: 0;
 
-	&:focus-visible {
-		@include focus.focus-generic;
-	}
+  &:focus-visible {
+    @include focus.focus-generic;
+  }
 
-	&__legend {
-		display: flex;
-		flex-direction: column;
-		padding: 0;
-		width: 100%;
+  &__legend {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
 
-		&__container {
-			display: flex;
-			align-items: center;
-			min-height: spacing.$spacing-lg;
+    &__container {
+      display: flex;
+      align-items: center;
+      min-height: spacing.$spacing-lg;
 
-			&__row-start {
-				flex-wrap: wrap;
-			}
+      &__row-start {
+        flex-wrap: wrap;
+      }
 
-			&__row-end {
-				flex-wrap: wrap;
-				justify-content: space-between;
-			}
+      &__row-end {
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
 
-			&__column {
-				flex-direction: column;
-			}
-		}
+      &__column {
+        flex-direction: column;
+      }
+    }
 
-		&__title {
-			margin-bottom: spacing.$spacing-xs;
+    &__title {
+      margin-bottom: spacing.$spacing-xs;
 
-			&__with-inputs {
-				margin-bottom: spacing.$spacing-none;
-			}
+      &__with-inputs {
+        margin-bottom: spacing.$spacing-none;
+      }
 
-			&__margin-right {
-				margin-right: spacing.$spacing-xl;
-			}
+      &__margin-right {
+        margin-right: spacing.$spacing-xl;
+      }
 
-			&__main {
-				display: flex;
-				align-items: center;
+      &__main {
+        display: flex;
+        align-items: center;
 
-				&__sm {
-					@include typography.text-field-label;
-				}
+        &__sm {
+          @include typography.text-field-label;
+        }
 
-				&__md {
-					@include typography.heading-xs;
-				}
-			}
+        &__md {
+          @include typography.heading-xs;
+        }
+      }
 
-			&__text {
-				@include colorMixins.text-color('gray-dark');
+      &__text {
+        @include colorMixins.text-color("gray-dark");
 
-				display: inline-block;
-				margin-right: spacing.$spacing-xs;
+        display: inline-block;
+        margin-right: spacing.$spacing-xs;
 
-				&__required {
-					@include colorMixins.text-color('gray-middle');
+        &__required {
+          @include colorMixins.text-color("gray-middle");
 
-					text-transform: initial;
-					/* stylelint-disable-next-line property-disallowed-list */
-					font-size: typographyTokens.$body-text-s-font-size;
-				}
-			}
-		}
+          text-transform: initial;
+          /* stylelint-disable-next-line property-disallowed-list */
+          font-size: typographyTokens.$body-text-s-font-size;
+        }
+      }
+    }
 
-		&__tooltip-button {
-			margin-top: auto;
-		}
+    &__tooltip-button {
+      margin-top: auto;
+    }
 
-		&__notifications {
-			margin-bottom: spacing.$spacing-xs;
-		}
+    &__notifications {
+      margin-bottom: spacing.$spacing-xs;
+    }
 
-		&__help-text {
-			@include colorMixins.text-color('gray-dark');
-			@include typography.body-text-sm-regular;
+    &__help-text {
+      @include colorMixins.text-color("gray-dark");
+      @include typography.body-text-sm-regular;
 
-			display: block;
-		}
+      display: block;
+    }
 
-		&__actions {
-			margin-bottom: spacing.$spacing-xs;
+    &__actions {
+      margin-bottom: spacing.$spacing-xs;
 
-			fudis-button:not(:last-of-type) {
-				margin-right: spacing.$spacing-sm;
-				margin-bottom: spacing.$spacing-xs;
-			}
-		}
-	}
+      fudis-button:not(:last-of-type) {
+        margin-right: spacing.$spacing-sm;
+        margin-bottom: spacing.$spacing-xs;
+      }
+    }
+  }
 }

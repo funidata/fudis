@@ -1,60 +1,60 @@
-@use '../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../foundations/colors/mixins.scss' as colors;
-@use '../../../foundations/colors/tokens.scss' as colorTokens;
-@use '../../../foundations/focus/mixins.scss' as focus;
-@use '../../../foundations/borders/mixins.scss' as borders;
+@use "../../../foundations/spacing/tokens.scss" as spacing;
+@use "../../../foundations/colors/mixins.scss" as colors;
+@use "../../../foundations/colors/tokens.scss" as colorTokens;
+@use "../../../foundations/focus/mixins.scss" as focus;
+@use "../../../foundations/borders/mixins.scss" as borders;
 
 .fudis-alert {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-height: spacing.$spacing-lg;
-	text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: spacing.$spacing-lg;
+  text-align: center;
 
-	&__link {
-		margin-left: spacing.$spacing-xxs;
-	}
+  &__link {
+    margin-left: spacing.$spacing-xxs;
+  }
 
-	&__text {
-		flex-grow: 1;
-	}
+  &__text {
+    flex-grow: 1;
+  }
 
-	&__close {
-		@include borders.border-none;
-		@include colors.bg-color('transparent');
-		@include borders.outline('1px', 'solid', 'white');
+  &__close {
+    @include borders.border-none;
+    @include colors.bg-color("transparent");
+    @include borders.outline("1px", "solid", "white");
 
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin-right: spacing.$spacing-xxs;
-		margin-left: auto;
-		box-shadow: none;
-		width: spacing.$spacing-md;
-		height: spacing.$spacing-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: spacing.$spacing-xxs;
+    margin-left: auto;
+    box-shadow: none;
+    width: spacing.$spacing-md;
+    height: spacing.$spacing-md;
 
-		&:focus {
-			@include focus.focus-generic;
-		}
+    &:focus {
+      @include focus.focus-generic;
+    }
 
-		&__warning {
-			@include borders.outline('1px', 'solid', 'gray-dark');
-		}
-	}
+    &__warning {
+      @include borders.outline("1px", "solid", "gray-dark");
+    }
+  }
 
-	&__info {
-		@include colors.bg-color('primary');
-	}
+  &__info {
+    @include colors.bg-color("primary");
+  }
 
-	&__success {
-		@include colors.bg-color('green');
-	}
+  &__success {
+    @include colors.bg-color("green");
+  }
 
-	&__danger {
-		@include colors.bg-color('red');
-	}
+  &__danger {
+    @include colors.bg-color("red");
+  }
 
-	&__warning {
-		@include colors.bg-color('yellow');
-	}
+  &__warning {
+    @include colors.bg-color("yellow");
+  }
 }

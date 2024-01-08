@@ -3,14 +3,14 @@ import { FudisSpacingResponsive } from '../../../types/spacing';
 import { FudisSpacing } from '../../../types/miscellaneous';
 
 @Directive({
-	selector: '[fudisApiSpacing]',
+  selector: '[fudisApiSpacing]',
 })
 export class SpacingApiDirective {
-	@Input() marginTop: FudisSpacing | FudisSpacingResponsive;
+  @Input() marginTop: FudisSpacing | FudisSpacingResponsive;
 
-	@Input() marginBottom: FudisSpacing | FudisSpacingResponsive;
+  @Input() marginBottom: FudisSpacing | FudisSpacingResponsive;
 
-	@Input() marginRight: FudisSpacing | FudisSpacingResponsive;
+  @Input() marginRight: FudisSpacing | FudisSpacingResponsive;
 
-	@Input() marginLeft: FudisSpacing | FudisSpacingResponsive;
+  @Input() marginLeft: FudisSpacing | FudisSpacingResponsive;
 }

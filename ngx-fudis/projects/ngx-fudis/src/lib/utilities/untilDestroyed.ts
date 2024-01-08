@@ -2,12 +2,12 @@ import { inject, DestroyRef } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 
 export function untilDestroyed() {
-	const subject = new Subject();
+  const subject = new Subject();
 
-	inject(DestroyRef).onDestroy(() => {
-		subject.next(true);
-		subject.complete();
-	});
+  inject(DestroyRef).onDestroy(() => {
+    subject.next(true);
+    subject.complete();
+  });
 
-	return <T>() => takeUntil<T>(subject.asObservable());
+  return <T>() => takeUntil<T>(subject.asObservable());
 }

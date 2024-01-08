@@ -15,24 +15,24 @@ import { AppFormExampleComponent } from './components/formExamples.component';
 import { AppDropdownExamplesComponent } from './components/dropdownExamples.component';
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		DialogTestComponent,
-		DialogTestContentComponent,
-		AppFormExampleComponent,
-		AppDropdownExamplesComponent,
-	],
-	imports: [
-		BrowserModule,
-		BrowserAnimationsModule,
-		FormsModule,
-		NgxFudisModule,
-		ScrollingModule,
-		HttpClientModule,
-		TranslocoRootModule,
-		RouterModule.forRoot([]),
-	],
-	providers: [],
-	bootstrap: [AppComponent],
+  declarations: [
+    AppComponent,
+    DialogTestComponent,
+    DialogTestContentComponent,
+    AppFormExampleComponent,
+    AppDropdownExamplesComponent,
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    NgxFudisModule,
+    ScrollingModule,
+    HttpClientModule,
+    TranslocoRootModule,
+    RouterModule.forRoot([]),
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,14 +1,13 @@
-import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
-import { linkTo } from '@storybook/addon-links';
-import { DatepickerComponent } from './datepicker.component';
-import * as DatepickerStories from './datepicker.stories.ts';
+import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import { linkTo } from "@storybook/addon-links";
+import { DatepickerComponent } from "./datepicker.component";
+import * as DatepickerStories from "./datepicker.stories.ts";
 
 <Meta title="Components/Form/Datepicker" />
 
 # Datepicker
 
-Fudis-datepicker is build using Angular Material Datepicker as a base.
-Datepicker allows user to select a date from valid options.
+Fudis-datepicker is build using Angular Material Datepicker as a base. Datepicker allows user to select a date from valid options.
 
 ## Examples
 
@@ -24,11 +23,12 @@ Datepicker requires at least `label` and `id` properties for accessibility.
 
 ### Validators and Error Handling
 
-Fudis form components use Fudis Validators. See the full documentation on [how to use Fudis Validators](/docs/utilities-validators--documentation). 
+Fudis form components use Fudis Validators. See the full documentation on [how to use Fudis Validators](/docs/utilities-validators--documentation).
 
 If a custom validation is used, read [how to add Error message](/docs/components-form-error-message--documentation).
 
 **Datepicker validators**
+
 - required
 
 ### Other validation options
@@ -50,10 +50,12 @@ For unknown input format provide `matDatepickerParse` value for `errorMsg` prope
 >
 </fudis-datepicker>
 ```
+
 #### Error Handling
 
 **matDatepickerMin** and/or **matDatepickerMax** error is shown
-  - if written date is outside the range of min and max
+
+- if written date is outside the range of min and max
 
 ## Localization
 

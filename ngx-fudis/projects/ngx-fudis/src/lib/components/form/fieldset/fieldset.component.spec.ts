@@ -9,21 +9,26 @@ import { FudisInternalErrorSummaryService } from '../../../services/form/error-s
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 
 describe('FieldSetComponent', () => {
-	let component: FieldSetComponent;
-	let fixture: ComponentFixture<FieldSetComponent>;
+  let component: FieldSetComponent;
+  let fixture: ComponentFixture<FieldSetComponent>;
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			declarations: [FieldSetComponent, MockComponent(GridComponent), GridApiDirective, GridDirective],
-			providers: [FudisGridService, FudisInternalErrorSummaryService, FudisBreakpointService],
-		}).compileComponents();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [
+        FieldSetComponent,
+        MockComponent(GridComponent),
+        GridApiDirective,
+        GridDirective,
+      ],
+      providers: [FudisGridService, FudisInternalErrorSummaryService, FudisBreakpointService],
+    }).compileComponents();
 
-		fixture = TestBed.createComponent(FieldSetComponent);
-		component = fixture.componentInstance;
-		fixture.detectChanges();
-	});
+    fixture = TestBed.createComponent(FieldSetComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
-	});
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

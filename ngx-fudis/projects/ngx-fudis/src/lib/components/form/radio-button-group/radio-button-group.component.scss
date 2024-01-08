@@ -1,12 +1,12 @@
-@use '../../../foundations/borders/mixins.scss' as borders;
-@use '../../../foundations/utilities/mixins.scss' as utilities;
-@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use "../../../foundations/borders/mixins.scss" as borders;
+@use "../../../foundations/utilities/mixins.scss" as utilities;
+@use "../../../foundations/spacing/tokens.scss" as spacing;
 
 .fudis-radio-button-group-host {
-	display: block;
+  display: block;
 }
 
 .fudis-radio-button-group {
-	@include borders.border('1px', 'solid', 'transparent');
-	@include utilities.box-reset;
+  @include borders.border("1px", "solid", "transparent");
+  @include utilities.box-reset;
 }

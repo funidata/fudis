@@ -7,61 +7,61 @@ import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { AlertGroupComponent } from '../alert/alert-group/alert-group.component';
 
 describe('DialogComponent', () => {
-	let component: DialogComponent;
-	let fixture: ComponentFixture<DialogComponent>;
-	let dialogService: FudisDialogService;
+  let component: DialogComponent;
+  let fixture: ComponentFixture<DialogComponent>;
+  let dialogService: FudisDialogService;
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			declarations: [DialogComponent, AlertGroupComponent, MockComponent(ButtonComponent)],
-			imports: [MatDialogModule],
-			providers: [FudisDialogService],
-		}).compileComponents();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [DialogComponent, AlertGroupComponent, MockComponent(ButtonComponent)],
+      imports: [MatDialogModule],
+      providers: [FudisDialogService],
+    }).compileComponents();
 
-		dialogService = TestBed.inject(FudisDialogService);
+    dialogService = TestBed.inject(FudisDialogService);
 
-		fixture = TestBed.createComponent(DialogComponent);
-		component = fixture.componentInstance;
-		fixture.detectChanges();
-	});
+    fixture = TestBed.createComponent(DialogComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-	it('should be created', () => {
-		expect(component).toBeTruthy();
-	});
+  it('should be created', () => {
+    expect(component).toBeTruthy();
+  });
 
-	it('should have correct size attribute', () => {
-		expect(component.size).toBe('md');
+  it('should have correct size attribute', () => {
+    expect(component.size).toBe('md');
 
-		component.size = 'sm';
-		fixture.detectChanges();
-		component.ngOnInit();
+    component.size = 'sm';
+    fixture.detectChanges();
+    component.ngOnInit();
 
-		expect(component.size).toBe('sm');
+    expect(component.size).toBe('sm');
 
-		component.size = 'lg';
-		fixture.detectChanges();
-		component.ngOnInit();
+    component.size = 'lg';
+    fixture.detectChanges();
+    component.ngOnInit();
 
-		expect(component.size).toBe('lg');
+    expect(component.size).toBe('lg');
 
-		component.size = 'initial';
-		fixture.detectChanges();
-		component.ngOnInit();
+    component.size = 'initial';
+    fixture.detectChanges();
+    component.ngOnInit();
 
-		expect(component.size).toBe('initial');
-	});
+    expect(component.size).toBe('initial');
+  });
 
-	it('should call open signal on initialisation', () => {
-		const dialogSpy = jest.spyOn(dialogService, 'setDialogOpenSignal');
-		component.ngOnInit();
+  it('should call open signal on initialisation', () => {
+    const dialogSpy = jest.spyOn(dialogService, 'setDialogOpenSignal');
+    component.ngOnInit();
 
-		expect(dialogSpy).toHaveBeenCalledWith(true);
-	});
+    expect(dialogSpy).toHaveBeenCalledWith(true);
+  });
 
-	it('should call open signal on destroy', () => {
-		const dialogSpy = jest.spyOn(dialogService, 'setDialogOpenSignal');
-		component.ngOnDestroy();
+  it('should call open signal on destroy', () => {
+    const dialogSpy = jest.spyOn(dialogService, 'setDialogOpenSignal');
+    component.ngOnDestroy();
 
-		expect(dialogSpy).toHaveBeenCalledWith(false);
-	});
+    expect(dialogSpy).toHaveBeenCalledWith(false);
+  });
 });

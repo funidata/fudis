@@ -8,58 +8,61 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import {
-	getMaxLengthFromValidator,
-	getMinLengthFromValidator,
-	hasRequiredValidator,
+  getMaxLengthFromValidator,
+  getMinLengthFromValidator,
+  hasRequiredValidator,
 } from '../../../utilities/form/getValidators';
 
 @Component({
-	selector: 'fudis-text-area',
-	templateUrl: './text-area.component.html',
-	styleUrls: ['./text-area.component.scss'],
+  selector: 'fudis-text-area',
+  templateUrl: './text-area.component.html',
+  styleUrls: ['./text-area.component.scss'],
 })
-export class TextAreaComponent extends InputBaseDirective implements OnInit, OnChanges, AfterViewInit {
-	constructor(
-		private _focusService: FudisFocusService,
-		_idService: FudisIdService,
-		_translationService: FudisTranslationService
-	) {
-		super(_translationService, _idService);
-	}
+export class TextAreaComponent
+  extends InputBaseDirective
+  implements OnInit, OnChanges, AfterViewInit
+{
+  constructor(
+    private _focusService: FudisFocusService,
+    _idService: FudisIdService,
+    _translationService: FudisTranslationService,
+  ) {
+    super(_translationService, _idService);
+  }
 
-	/**
-	 * FormControl for text-area
-	 */
-	@Input({ required: true }) control: FormControl<string | null | number>;
+  /**
+   * FormControl for text-area
+   */
+  @Input({ required: true }) control: FormControl<string | null | number>;
 
-	/**
-	 * Minimum length for text area, unset by default
-	 */
-	@Input() minLength: number | undefined = undefined;
+  /**
+   * Minimum length for text area, unset by default
+   */
+  @Input() minLength: number | undefined = undefined;
 
-	/**
-	 * Maximum length for text area, unset by default. When set displays also a character count indicator.
-	 */
-	@Input() maxLength: number | undefined = undefined;
+  /**
+   * Maximum length for text area, unset by default. When set displays also a character count indicator.
+   */
+  @Input() maxLength: number | undefined = undefined;
 
-	/**
-	 * Text-area size option
-	 */
-	@Input() size: FudisInputSize = 'lg';
+  /**
+   * Text-area size option
+   */
+  @Input() size: FudisInputSize = 'lg';
 
-	ngOnInit(): void {
-		this._setInputId('text-area');
-	}
+  ngOnInit(): void {
+    this._setInputId('text-area');
+  }
 
-	ngOnChanges(): void {
-		this._required = this.required ?? hasRequiredValidator(this.control);
-		this.maxLength = this.maxLength ?? getMaxLengthFromValidator(this.control);
-		this.minLength = this.minLength ?? getMinLengthFromValidator(this.control);
-	}
+  ngOnChanges(): void {
+    this._required = this.required ?? hasRequiredValidator(this.control);
+    this.maxLength = this.maxLength ?? getMaxLengthFromValidator(this.control);
+    this.minLength = this.minLength ?? getMinLengthFromValidator(this.control);
+  }
 
-	ngAfterViewInit(): void {
-		if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
-			this.focusToInput();
-		}
-	}
+  ngAfterViewInit(): void {
+    if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
+      this.focusToInput();
+    }
+  }
 }

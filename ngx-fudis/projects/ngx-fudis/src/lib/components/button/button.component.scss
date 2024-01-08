@@ -1,87 +1,87 @@
-@use '../../foundations/colors/mixins.scss' as colors;
-@use '../../foundations/focus/mixins.scss' as focus;
-@use '../../foundations/borders/mixins.scss' as borders;
-@use '../../foundations/typography/mixins.scss' as typography;
-@use '../../foundations/spacing/tokens.scss' as spacing;
-@use '../../foundations/utilities/mixins.scss' as utilities;
+@use "../../foundations/colors/mixins.scss" as colors;
+@use "../../foundations/focus/mixins.scss" as focus;
+@use "../../foundations/borders/mixins.scss" as borders;
+@use "../../foundations/typography/mixins.scss" as typography;
+@use "../../foundations/spacing/tokens.scss" as spacing;
+@use "../../foundations/utilities/mixins.scss" as utilities;
 
 .fudis-button-host {
-	display: inline-block;
-	position: relative;
+  display: inline-block;
+  position: relative;
 }
 
 .fudis-button {
-	@include utilities.box-reset;
-	@include borders.border-radius('2px');
-	@include colors.bg-color('transparent');
-	@include typography.button-typography;
-	@include borders.border('2px', 'solid', 'primary');
+  @include utilities.box-reset;
+  @include borders.border-radius("2px");
+  @include colors.bg-color("transparent");
+  @include typography.button-typography;
+  @include borders.border("2px", "solid", "primary");
 
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-	padding: 0 spacing.$spacing-xs;
-	min-width: spacing.$spacing-xxl;
-	vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0 spacing.$spacing-xs;
+  min-width: spacing.$spacing-xxl;
+  vertical-align: middle;
 
-	&:focus {
-		@include focus.focus-generic;
-	}
+  &:focus {
+    @include focus.focus-generic;
+  }
 
-	&[aria-disabled='true'] {
-		@include colors.text-color('gray-dark');
-		@include colors.bg-color('gray-light');
-		@include borders.border('2px', 'solid', 'transparent');
-		@include borders.outline('1px', 'dashed', 'gray-middle');
+  &[aria-disabled="true"] {
+    @include colors.text-color("gray-dark");
+    @include colors.bg-color("gray-light");
+    @include borders.border("2px", "solid", "transparent");
+    @include borders.outline("1px", "dashed", "gray-middle");
 
-		&:focus {
-			@include focus.focus-generic;
-		}
-	}
+    &:focus {
+      @include focus.focus-generic;
+    }
+  }
 
-	&__primary {
-		@include colors.text-color('white');
-		@include colors.bg-color('primary');
-	}
+  &__primary {
+    @include colors.text-color("white");
+    @include colors.bg-color("primary");
+  }
 
-	&__secondary {
-		@include colors.text-color('primary');
-		@include colors.bg-color('white');
-	}
+  &__secondary {
+    @include colors.text-color("primary");
+    @include colors.bg-color("white");
+  }
 
-	&__tertiary {
-		@include colors.text-color('primary');
-		@include borders.border('2px', 'solid', 'transparent');
-	}
+  &__tertiary {
+    @include colors.text-color("primary");
+    @include borders.border("2px", "solid", "transparent");
+  }
 
-	&__size {
-		&-small {
-			height: spacing.$spacing-md;
-		}
+  &__size {
+    &-small {
+      height: spacing.$spacing-md;
+    }
 
-		&-medium {
-			height: spacing.$spacing-lg;
-		}
+    &-medium {
+      height: spacing.$spacing-lg;
+    }
 
-		&-icon-only {
-			padding: 0;
-			width: spacing.$spacing-lg;
-			min-width: initial;
-			height: spacing.$spacing-lg;
-		}
-	}
+    &-icon-only {
+      padding: 0;
+      width: spacing.$spacing-lg;
+      min-width: initial;
+      height: spacing.$spacing-lg;
+    }
+  }
 
-	&__icon {
-		position: relative;
-		width: spacing.$spacing-lg;
-		height: spacing.$spacing-lg;
+  &__icon {
+    position: relative;
+    width: spacing.$spacing-lg;
+    height: spacing.$spacing-lg;
 
-		&__component {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-		}
-	}
+    &__component {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 }
