@@ -6,5 +6,5 @@ import { Directive, TemplateRef } from '@angular/core';
  */
 @Directive({ selector: '[fudisHeader]' })
 export class HeaderDirective {
-	constructor(public templateRef: TemplateRef<unknown>) {}
+  constructor(public templateRef: TemplateRef<unknown>) {}
 }

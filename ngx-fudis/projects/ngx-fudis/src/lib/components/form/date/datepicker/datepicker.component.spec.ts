@@ -14,116 +14,123 @@ import { DatepickerComponent } from './datepicker.component';
 const datepickerControl: FormControl = new FormControl('');
 
 describe('DatepickerComponent', () => {
-	let component: DatepickerComponent;
-	let fixture: ComponentFixture<DatepickerComponent>;
+  let component: DatepickerComponent;
+  let fixture: ComponentFixture<DatepickerComponent>;
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			declarations: [
-				DatepickerComponent,
-				LabelComponent,
-				MockComponent(IconComponent),
-				MockComponent(GuidanceComponent),
-			],
-			imports: [ReactiveFormsModule, MatDatepickerModule, MatNativeDateModule, BrowserAnimationsModule],
-		}).compileComponents();
-	});
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [
+        DatepickerComponent,
+        LabelComponent,
+        MockComponent(IconComponent),
+        MockComponent(GuidanceComponent),
+      ],
+      imports: [
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        BrowserAnimationsModule,
+      ],
+    }).compileComponents();
+  });
 
-	beforeEach(() => {
-		fixture = TestBed.createComponent(DatepickerComponent);
-		component = fixture.componentInstance;
-		component.control = datepickerControl;
-		component.id = 'fudis-dp-unique-id-3';
-		component.label = 'Select a date';
-		fixture.detectChanges();
-	});
+  beforeEach(() => {
+    fixture = TestBed.createComponent(DatepickerComponent);
+    component = fixture.componentInstance;
+    component.control = datepickerControl;
+    component.id = 'fudis-dp-unique-id-3';
+    component.label = 'Select a date';
+    fixture.detectChanges();
+  });
 
-	function getDatepickerTopWrapperDiv(): HTMLElement {
-		return fixture.nativeElement.querySelector('.fudis-datepicker') as HTMLElement;
-	}
+  function getDatepickerTopWrapperDiv(): HTMLElement {
+    return fixture.nativeElement.querySelector('.fudis-datepicker') as HTMLElement;
+  }
 
-	function assertDatepickerTopWrapperDivHasClasses(...classes: string[]): void {
-		const datepickerTopDivClasses = getDatepickerTopWrapperDiv()?.className ?? '';
+  function assertDatepickerTopWrapperDivHasClasses(...classes: string[]): void {
+    const datepickerTopDivClasses = getDatepickerTopWrapperDiv()?.className ?? '';
 
-		expect(datepickerTopDivClasses.split(' ').sort()).toEqual([...classes].sort());
-	}
+    expect(datepickerTopDivClasses.split(' ').sort()).toEqual([...classes].sort());
+  }
 
-	describe('Top wrapper div', () => {
-		it('should always have default CSS classes: fudis-datepicker and fudis-datepicker__md', () => {
-			assertDatepickerTopWrapperDivHasClasses('fudis-datepicker', 'fudis-input-size__md');
-		});
+  describe('Top wrapper div', () => {
+    it('should always have default CSS classes: fudis-datepicker and fudis-datepicker__md', () => {
+      assertDatepickerTopWrapperDivHasClasses('fudis-datepicker', 'fudis-input-size__md');
+    });
 
-		it('should have respective CSS class indicating the datepicker size of small', () => {
-			component.size = 'sm';
-			fixture.detectChanges();
+    it('should have respective CSS class indicating the datepicker size of small', () => {
+      component.size = 'sm';
+      fixture.detectChanges();
 
-			assertDatepickerTopWrapperDivHasClasses('fudis-datepicker', 'fudis-input-size__sm');
-		});
+      assertDatepickerTopWrapperDivHasClasses('fudis-datepicker', 'fudis-input-size__sm');
+    });
 
-		it('should have respective CSS class indicating the datepicker size of large', () => {
-			component.size = 'lg';
-			fixture.detectChanges();
+    it('should have respective CSS class indicating the datepicker size of large', () => {
+      component.size = 'lg';
+      fixture.detectChanges();
 
-			assertDatepickerTopWrapperDivHasClasses('fudis-datepicker', 'fudis-input-size__lg');
-		});
+      assertDatepickerTopWrapperDivHasClasses('fudis-datepicker', 'fudis-input-size__lg');
+    });
 
-		it('should have fudis-label component present with given id', () => {
-			const childLabelComponent = fixture.debugElement.query(By.css('fudis-label'));
+    it('should have fudis-label component present with given id', () => {
+      const childLabelComponent = fixture.debugElement.query(By.css('fudis-label'));
 
-			expect(childLabelComponent).toBeTruthy();
-			expect(childLabelComponent.attributes['ng-reflect-id']).toEqual('label_fudis-dp-unique-id-3');
-			expect(childLabelComponent.attributes['ng-reflect-for']).toEqual('fudis-dp-unique-id-3');
-		});
+      expect(childLabelComponent).toBeTruthy();
+      expect(childLabelComponent.attributes['ng-reflect-id']).toEqual('label_fudis-dp-unique-id-3');
+      expect(childLabelComponent.attributes['ng-reflect-for']).toEqual('fudis-dp-unique-id-3');
+    });
 
-		it('should have fudis-guidance component present with given id and helpText', () => {
-			const childGuidanceComponent = fixture.debugElement.query(By.css('fudis-guidance'));
+    it('should have fudis-guidance component present with given id and helpText', () => {
+      const childGuidanceComponent = fixture.debugElement.query(By.css('fudis-guidance'));
 
-			expect(childGuidanceComponent).toBeTruthy();
-			expect(childGuidanceComponent.attributes['ng-reflect-for']).toEqual('fudis-dp-unique-id-3');
+      expect(childGuidanceComponent).toBeTruthy();
+      expect(childGuidanceComponent.attributes['ng-reflect-for']).toEqual('fudis-dp-unique-id-3');
 
-			component.helpText = 'Select your favourite date';
-			fixture.detectChanges();
+      component.helpText = 'Select your favourite date';
+      fixture.detectChanges();
 
-			expect(childGuidanceComponent.attributes['ng-reflect-help-text']).toEqual('Select your favourite date');
-		});
-	});
+      expect(childGuidanceComponent.attributes['ng-reflect-help-text']).toEqual(
+        'Select your favourite date',
+      );
+    });
+  });
 
-	describe('Input', () => {
-		it('should have focus when input is focused', () => {
-			const datepickerInput = fixture.nativeElement.querySelector('input');
-			datepickerInput.dispatchEvent(new Event('focus'));
-			fixture.detectChanges();
+  describe('Input', () => {
+    it('should have focus when input is focused', () => {
+      const datepickerInput = fixture.nativeElement.querySelector('input');
+      datepickerInput.dispatchEvent(new Event('focus'));
+      fixture.detectChanges();
 
-			expect(datepickerInput.focus).toBeTruthy();
-		});
+      expect(datepickerInput.focus).toBeTruthy();
+    });
 
-		it('should have invalid class if datepicker is required, input is touched and no date has been chosen', () => {
-			const datepickerInput = fixture.nativeElement.querySelector('input');
-			const requiredControl = new FormControl(null, FudisValidators.required('Date is required'));
-			component.control = requiredControl;
-			fixture.detectChanges();
+    it('should have invalid class if datepicker is required, input is touched and no date has been chosen', () => {
+      const datepickerInput = fixture.nativeElement.querySelector('input');
+      const requiredControl = new FormControl(null, FudisValidators.required('Date is required'));
+      component.control = requiredControl;
+      fixture.detectChanges();
 
-			datepickerInput.dispatchEvent(new Event('focus'));
-			fixture.detectChanges();
+      datepickerInput.dispatchEvent(new Event('focus'));
+      fixture.detectChanges();
 
-			datepickerInput.dispatchEvent(new Event('blur'));
-			fixture.detectChanges();
+      datepickerInput.dispatchEvent(new Event('blur'));
+      fixture.detectChanges();
 
-			expect(datepickerInput.className).toContain('fudis-form-input--invalid');
-		});
+      expect(datepickerInput.className).toContain('fudis-form-input--invalid');
+    });
 
-		it('should have calendar icon from fudis-icon component', () => {
-			const datepickerIcon = fixture.debugElement.query(By.css('fudis-icon'));
+    it('should have calendar icon from fudis-icon component', () => {
+      const datepickerIcon = fixture.debugElement.query(By.css('fudis-icon'));
 
-			expect(datepickerIcon.attributes['ng-reflect-icon']).toEqual('calendar');
-		});
+      expect(datepickerIcon.attributes['ng-reflect-icon']).toEqual('calendar');
+    });
 
-		it('should have proper disabled class if input has been disabled', () => {
-			const datepickerInput = fixture.nativeElement.querySelector('input');
-			component.disabled = true;
-			fixture.detectChanges();
+    it('should have proper disabled class if input has been disabled', () => {
+      const datepickerInput = fixture.nativeElement.querySelector('input');
+      component.disabled = true;
+      fixture.detectChanges();
 
-			expect(datepickerInput.className).toContain('fudis-form-input--disabled');
-		});
-	});
+      expect(datepickerInput.className).toContain('fudis-form-input--disabled');
+    });
+  });
 });

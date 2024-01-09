@@ -2,14 +2,14 @@ import { TestBed } from '@angular/core/testing';
 import { FudisGridService } from './grid.service';
 
 describe('FudisGridService', () => {
-	let service: FudisGridService;
+  let service: FudisGridService;
 
-	beforeEach(() => {
-		TestBed.configureTestingModule({ providers: [FudisGridService] });
-		service = TestBed.inject(FudisGridService);
-	});
+  beforeEach(() => {
+    TestBed.configureTestingModule({ providers: [FudisGridService] });
+    service = TestBed.inject(FudisGridService);
+  });
 
-	it('should be created', () => {
-		expect(service).toBeTruthy();
-	});
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
 });

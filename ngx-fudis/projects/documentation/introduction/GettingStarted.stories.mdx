@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from "@storybook/blocks";
 
 <Meta title="Documentation/Introduction/How to start using Fudis" />
 
@@ -20,9 +20,9 @@ ng add @angular/material
 Choose these options when prompted:
 
 <code>
-	{' '}
-	? Choose a prebuilt theme name, or "custom" for a custom theme: Custom <br /> ? Set up global Angular Material typography
-	styles? No <br /> ? Set up browser animations for Angular Material? Yes
+  {" "}
+  ? Choose a prebuilt theme name, or "custom" for a custom theme: Custom <br /> ? Set up global Angular
+  Material typography styles? No <br /> ? Set up browser animations for Angular Material? Yes
 </code>
 
 <br />
@@ -65,6 +65,7 @@ import { NgxFudisModule } from 'ngx-fudis';
 #### 5. Define Application's Root Styles
 
 ##### Set Primary Colors
+
 ```
 :root {
 	--fudis-color-primary-light: #hex;
@@ -73,16 +74,17 @@ import { NgxFudisModule } from 'ngx-fudis';
 	--fudis-color-primary-extra-dark: #hex;
 }
 ```
+
 ##### Set Rem Base Value
 
-By default Fudis rem values follow 8 pixel base values, when having default browser CSS font-size of 100%, 1 rem equals 2 * 8px = 16px.
-To apply this to your application, add to the root CSS style file:
+By default Fudis rem values follow 8 pixel base values, when having default browser CSS font-size of 100%, 1 rem equals 2 \* 8px = 16px. To apply this to your application, add to the root CSS style file:
 
 ```
 :root {
 	--fudis-rem-multiplier: 1;
 }
 ```
+
 If application uses other rem base value by setting font-size to e. g. 62.5% . Adjust -fudis-rem-multiplier accordingly.
 
 ```

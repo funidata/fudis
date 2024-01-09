@@ -24,269 +24,277 @@ const testLinkTitle = 'Test link title';
 const testRouterLinkUrl = '/test/alert/url';
 
 @Component({
-	selector: 'fudis-mock-component',
-	template: `<div class="mock-container">
-		<fudis-alert-group />
-		<fudis-button [label]="'Test button'" />
-	</div>`,
+  selector: 'fudis-mock-component',
+  template: `<div class="mock-container">
+    <fudis-alert-group />
+    <fudis-button [label]="'Test button'" />
+  </div>`,
 })
 class MockAlertComponent {
-	constructor(private _alertService: FudisAlertService) {
-		const firstAlert: FudisAlert = {
-			message: 'Test message',
-			id: 'my-test-id-1',
-			type: 'info',
-		};
+  constructor(private _alertService: FudisAlertService) {
+    const firstAlert: FudisAlert = {
+      message: 'Test message',
+      id: 'my-test-id-1',
+      type: 'info',
+    };
 
-		_alertService.addAlert(firstAlert);
+    _alertService.addAlert(firstAlert);
 
-		const secondAlert: FudisAlert = {
-			message: 'Second test message',
-			id: 'my-test-id-2',
-			type: 'warning',
-			linkTitle: 'Test link',
-			routerLinkUrl: '/test/url',
-		};
-		this._alertService.addAlert(secondAlert);
-	}
+    const secondAlert: FudisAlert = {
+      message: 'Second test message',
+      id: 'my-test-id-2',
+      type: 'warning',
+      linkTitle: 'Test link',
+      routerLinkUrl: '/test/url',
+    };
+    this._alertService.addAlert(secondAlert);
+  }
 }
 
 describe('AlertComponent', () => {
-	let component: AlertComponent;
-	let fixture: ComponentFixture<AlertComponent> | ComponentFixture<MockAlertComponent>;
-	let alertService: FudisAlertService;
-	let focusService: FudisFocusService;
+  let component: AlertComponent;
+  let fixture: ComponentFixture<AlertComponent> | ComponentFixture<MockAlertComponent>;
+  let alertService: FudisAlertService;
+  let focusService: FudisFocusService;
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			declarations: [
-				AlertComponent,
-				AlertGroupComponent,
-				ButtonComponent,
-				MockAlertComponent,
-				BodyTextComponent,
-				MockComponent(IconComponent),
-				LinkComponent,
-			],
-			imports: [MatDialogModule, RouterTestingModule],
-			providers: [FudisDialogService, FudisAlertService],
-		});
-		fixture = TestBed.createComponent(AlertComponent);
-		component = fixture.componentInstance;
-		component.buttonId = testButtonId;
-		component.htmlId = testHtmlId;
-		component.message = testMessage;
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [
+        AlertComponent,
+        AlertGroupComponent,
+        ButtonComponent,
+        MockAlertComponent,
+        BodyTextComponent,
+        MockComponent(IconComponent),
+        LinkComponent,
+      ],
+      imports: [MatDialogModule, RouterTestingModule],
+      providers: [FudisDialogService, FudisAlertService],
+    });
+    fixture = TestBed.createComponent(AlertComponent);
+    component = fixture.componentInstance;
+    component.buttonId = testButtonId;
+    component.htmlId = testHtmlId;
+    component.message = testMessage;
 
-		fixture.detectChanges();
-	});
+    fixture.detectChanges();
+  });
 
-	describe('basic inputs', () => {
-		it('should create alert with basic inputs', () => {
-			fixture.detectChanges();
+  describe('basic inputs', () => {
+    it('should create alert with basic inputs', () => {
+      fixture.detectChanges();
 
-			const element = getElement(fixture, '.fudis-alert');
+      const element = getElement(fixture, '.fudis-alert');
 
-			// Test @Input() htmlId
-			expect(element.getAttribute('id')).toEqual(testHtmlId);
+      // Test @Input() htmlId
+      expect(element.getAttribute('id')).toEqual(testHtmlId);
 
-			// Test @Input() buttonId
-			expect(element.querySelector('button')?.getAttribute('id')).toEqual(testButtonId);
+      // Test @Input() buttonId
+      expect(element.querySelector('button')?.getAttribute('id')).toEqual(testButtonId);
 
-			// Test @Input() message
-			expect(element.querySelector('button')?.getAttribute('aria-label')).toEqual(`${testMessage}, Close`);
+      // Test @Input() message
+      expect(element.querySelector('button')?.getAttribute('aria-label')).toEqual(
+        `${testMessage}, Close`,
+      );
 
-			// Test @Input() message
-			expect(element.querySelector('p')?.textContent).toContain(testMessage);
+      // Test @Input() message
+      expect(element.querySelector('p')?.textContent).toContain(testMessage);
 
-			// Test that link does not exist by default
-			expect(element.querySelector('fudis-link')).toBeFalsy();
-		});
+      // Test that link does not exist by default
+      expect(element.querySelector('fudis-link')).toBeFalsy();
+    });
 
-		it('should create alert with a link', () => {
-			component.linkTitle = testLinkTitle;
-			component.routerLinkUrl = testRouterLinkUrl;
-			component.initialFocus = true;
+    it('should create alert with a link', () => {
+      component.linkTitle = testLinkTitle;
+      component.routerLinkUrl = testRouterLinkUrl;
+      component.initialFocus = true;
 
-			fixture.detectChanges();
+      fixture.detectChanges();
 
-			const linkElement = getElement(fixture, '.fudis-alert p fudis-link');
+      const linkElement = getElement(fixture, '.fudis-alert p fudis-link');
 
-			// Test that inputs forwarded to Fudis Link are correct
-			expect(linkElement).toBeTruthy();
+      // Test that inputs forwarded to Fudis Link are correct
+      expect(linkElement).toBeTruthy();
 
-			expect(sortClasses(linkElement.className)).toEqual(['fudis-alert__link']);
+      expect(sortClasses(linkElement.className)).toEqual(['fudis-alert__link']);
 
-			expect(linkElement?.getAttribute('aria-label')).toEqual(testMessage);
+      expect(linkElement?.getAttribute('aria-label')).toEqual(testMessage);
 
-			expect(linkElement?.getAttribute('ng-reflect-initial-focus')).toEqual('true');
+      expect(linkElement?.getAttribute('ng-reflect-initial-focus')).toEqual('true');
 
-			expect(linkElement?.getAttribute('ng-reflect-router-link-url')).toEqual(testRouterLinkUrl);
+      expect(linkElement?.getAttribute('ng-reflect-router-link-url')).toEqual(testRouterLinkUrl);
 
-			expect(linkElement?.getAttribute('ng-reflect-link-title')).toEqual(testLinkTitle);
-		});
-	});
+      expect(linkElement?.getAttribute('ng-reflect-link-title')).toEqual(testLinkTitle);
+    });
+  });
 
-	describe('CSS classes', () => {
-		it('should create alert variations with proper CSS classes', () => {
-			const element = getElement(fixture, '.fudis-alert');
+  describe('CSS classes', () => {
+    it('should create alert variations with proper CSS classes', () => {
+      const element = getElement(fixture, '.fudis-alert');
 
-			expect(sortClasses(element.className)).toEqual(sortClasses('fudis-alert fudis-alert__info'));
+      expect(sortClasses(element.className)).toEqual(sortClasses('fudis-alert fudis-alert__info'));
 
-			component.variant = 'danger';
+      component.variant = 'danger';
 
-			fixture.detectChanges();
+      fixture.detectChanges();
 
-			expect(sortClasses(element.className)).toEqual(sortClasses('fudis-alert fudis-alert__danger'));
+      expect(sortClasses(element.className)).toEqual(
+        sortClasses('fudis-alert fudis-alert__danger'),
+      );
 
-			component.variant = 'success';
+      component.variant = 'success';
 
-			fixture.detectChanges();
+      fixture.detectChanges();
 
-			expect(sortClasses(element.className)).toEqual(sortClasses('fudis-alert fudis-alert__success'));
+      expect(sortClasses(element.className)).toEqual(
+        sortClasses('fudis-alert fudis-alert__success'),
+      );
 
-			component.variant = 'warning';
+      component.variant = 'warning';
 
-			fixture.detectChanges();
+      fixture.detectChanges();
 
-			expect(sortClasses(element.className)).toEqual(sortClasses('fudis-alert fudis-alert__warning'));
+      expect(sortClasses(element.className)).toEqual(
+        sortClasses('fudis-alert fudis-alert__warning'),
+      );
 
-			component.variant = 'info';
+      component.variant = 'info';
 
-			fixture.detectChanges();
+      fixture.detectChanges();
 
-			expect(sortClasses(element.className)).toEqual(sortClasses('fudis-alert fudis-alert__info'));
-		});
-	});
+      expect(sortClasses(element.className)).toEqual(sortClasses('fudis-alert fudis-alert__info'));
+    });
+  });
 
-	describe('close button interaction', () => {
-		beforeEach(() => {
-			alertService = TestBed.inject(FudisAlertService);
-			jest.spyOn(alertService, 'dismissAlertFromButton').mockImplementation();
-			fixture.detectChanges();
-		});
+  describe('close button interaction', () => {
+    beforeEach(() => {
+      alertService = TestBed.inject(FudisAlertService);
+      jest.spyOn(alertService, 'dismissAlertFromButton').mockImplementation();
+      fixture.detectChanges();
+    });
 
-		it('should emit events when the close button is clicked', () => {
-			let clicked = false;
+    it('should emit events when the close button is clicked', () => {
+      let clicked = false;
 
-			component.handleClose.subscribe(() => {
-				clicked = true;
-			});
+      component.handleClose.subscribe(() => {
+        clicked = true;
+      });
 
-			fixture.detectChanges();
+      fixture.detectChanges();
 
-			const closeButton = getElement(fixture, '.fudis-alert .fudis-alert__close');
+      const closeButton = getElement(fixture, '.fudis-alert .fudis-alert__close');
 
-			closeButton.click();
+      closeButton.click();
 
-			expect(clicked).toEqual(true);
+      expect(clicked).toEqual(true);
 
-			fixture.detectChanges();
+      fixture.detectChanges();
 
-			expect(alertService.dismissAlertFromButton).toHaveBeenCalledWith(testButtonId);
-		});
-	});
+      expect(alertService.dismissAlertFromButton).toHaveBeenCalledWith(testButtonId);
+    });
+  });
 
-	describe('Focus and blur events', () => {
-		beforeEach(() => {
-			fixture = TestBed.createComponent(MockAlertComponent);
-			focusService = TestBed.inject(FudisFocusService);
-			jest.spyOn(focusService, 'setFocusTarget').mockImplementation();
-			jest.spyOn(focusService, 'getFocusTarget').mockImplementation();
-			alertService = TestBed.inject(FudisAlertService);
-			jest.spyOn(alertService, 'addAlert').mockImplementation(() => {});
-			jest.spyOn(alertService, 'updateAlertLinkFocusState').mockImplementation();
-			fixture.detectChanges();
-		});
+  describe('Focus and blur events', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(MockAlertComponent);
+      focusService = TestBed.inject(FudisFocusService);
+      jest.spyOn(focusService, 'setFocusTarget').mockImplementation();
+      jest.spyOn(focusService, 'getFocusTarget').mockImplementation();
+      alertService = TestBed.inject(FudisAlertService);
+      jest.spyOn(alertService, 'addAlert').mockImplementation(() => {});
+      jest.spyOn(alertService, 'updateAlertLinkFocusState').mockImplementation();
+      fixture.detectChanges();
+    });
 
-		// it('should emit info to focusService when focusing on closeButton', () => {
-		// 	const button = getElement(fixture, '.fudis-button');
+    // it('should emit info to focusService when focusing on closeButton', () => {
+    // 	const button = getElement(fixture, '.fudis-button');
 
-		// 	button.focus();
+    // 	button.focus();
 
-		// 	const closeButton = getElement(fixture, '.fudis-alert .fudis-alert__close');
+    // 	const closeButton = getElement(fixture, '.fudis-alert .fudis-alert__close');
 
-		// 	closeButton.focus();
+    // 	closeButton.focus();
 
-		// 	expect(focusService.setFocusTarget).toHaveBeenCalledWith(button);
-		// });
+    // 	expect(focusService.setFocusTarget).toHaveBeenCalledWith(button);
+    // });
 
-		// it('should emit info to focusService when focusing on link in alert', () => {
-		// 	const button = getElement(fixture, '.fudis-button');
+    // it('should emit info to focusService when focusing on link in alert', () => {
+    // 	const button = getElement(fixture, '.fudis-button');
 
-		// 	button.focus();
+    // 	button.focus();
 
-		// 	const linkInAlert = getElement(fixture, '.fudis-link__anchor');
+    // 	const linkInAlert = getElement(fixture, '.fudis-link__anchor');
 
-		// 	linkInAlert.focus();
+    // 	linkInAlert.focus();
 
-		// 	expect(focusService.setFocusTarget).toHaveBeenCalledWith(button);
-		// });
+    // 	expect(focusService.setFocusTarget).toHaveBeenCalledWith(button);
+    // });
 
-		it('should not emit info to focusService when focusing from link to alert close and vice versa', () => {
-			const linkInAlert = getElement(fixture, '.fudis-link__anchor');
+    it('should not emit info to focusService when focusing from link to alert close and vice versa', () => {
+      const linkInAlert = getElement(fixture, '.fudis-link__anchor');
 
-			linkInAlert.focus();
+      linkInAlert.focus();
 
-			const closeButton = getElement(fixture, '.fudis-alert__close');
+      const closeButton = getElement(fixture, '.fudis-alert__close');
 
-			closeButton.focus();
+      closeButton.focus();
 
-			linkInAlert.focus();
+      linkInAlert.focus();
 
-			expect(focusService.setFocusTarget).not.toHaveBeenCalledWith(closeButton);
+      expect(focusService.setFocusTarget).not.toHaveBeenCalledWith(closeButton);
 
-			expect(focusService.setFocusTarget).not.toHaveBeenCalledWith(linkInAlert);
-		});
+      expect(focusService.setFocusTarget).not.toHaveBeenCalledWith(linkInAlert);
+    });
 
-		it('should set focus to close button, if another close is clicked', () => {
-			const firstClose = getElement(fixture, '#fudis-alert-1 .fudis-alert__close');
-			const secondClose = getElement(fixture, '#fudis-alert-2 .fudis-alert__close');
+    it('should set focus to close button, if another close is clicked', () => {
+      const firstClose = getElement(fixture, '#fudis-alert-1 .fudis-alert__close');
+      const secondClose = getElement(fixture, '#fudis-alert-2 .fudis-alert__close');
 
-			jest.spyOn(secondClose, 'focus').mockImplementation(() => {});
+      jest.spyOn(secondClose, 'focus').mockImplementation(() => {});
 
-			firstClose.focus();
-			firstClose.click();
+      firstClose.focus();
+      firstClose.click();
 
-			expect(secondClose.focus).toHaveBeenCalledWith();
-		});
+      expect(secondClose.focus).toHaveBeenCalledWith();
+    });
 
-		it('should call getFocusTarget, when all alerts are closed', () => {
-			const uiButton = getElement(fixture, '.fudis-button');
+    it('should call getFocusTarget, when all alerts are closed', () => {
+      const uiButton = getElement(fixture, '.fudis-button');
 
-			uiButton.focus();
+      uiButton.focus();
 
-			const firstClose = getElement(fixture, '#fudis-alert-1 .fudis-alert__close');
+      const firstClose = getElement(fixture, '#fudis-alert-1 .fudis-alert__close');
 
-			const secondClose = getElement(fixture, '#fudis-alert-2 .fudis-alert__close');
+      const secondClose = getElement(fixture, '#fudis-alert-2 .fudis-alert__close');
 
-			firstClose.click();
-			secondClose.click();
+      firstClose.click();
+      secondClose.click();
 
-			expect(focusService.getFocusTarget).toHaveBeenCalledWith();
-		});
+      expect(focusService.getFocusTarget).toHaveBeenCalledWith();
+    });
 
-		it('should not call getFocusTarget, if only one is closed', () => {
-			const uiButton = getElement(fixture, '.fudis-button');
+    it('should not call getFocusTarget, if only one is closed', () => {
+      const uiButton = getElement(fixture, '.fudis-button');
 
-			uiButton.focus();
+      uiButton.focus();
 
-			const firstClose = getElement(fixture, '#fudis-alert-1 .fudis-alert__close');
+      const firstClose = getElement(fixture, '#fudis-alert-1 .fudis-alert__close');
 
-			firstClose.click();
+      firstClose.click();
 
-			expect(focusService.getFocusTarget).not.toHaveBeenCalledWith();
-		});
+      expect(focusService.getFocusTarget).not.toHaveBeenCalledWith();
+    });
 
-		// it('should update initialFocus, when blurring from link', () => {
-		// 	const alertLink = getElement(fixture, '#fudis-alert-2 .fudis-link__anchor');
+    // it('should update initialFocus, when blurring from link', () => {
+    // 	const alertLink = getElement(fixture, '#fudis-alert-2 .fudis-link__anchor');
 
-		// 	const secondClose = getElement(fixture, '#fudis-alert-2 .fudis-alert__close');
+    // 	const secondClose = getElement(fixture, '#fudis-alert-2 .fudis-alert__close');
 
-		// 	alertLink.focus();
+    // 	alertLink.focus();
 
-		// 	secondClose.focus();
+    // 	secondClose.focus();
 
-		// 	expect(alertService.updateAlertLinkFocusState).toHaveBeenCalledWith('fudis-alert-2');
-		// });
-	});
+    // 	expect(alertService.updateAlertLinkFocusState).toHaveBeenCalledWith('fudis-alert-2');
+    // });
+  });
 });

@@ -1,20 +1,20 @@
-@use 'sass:map';
-@use './tokens' as colors;
+@use "sass:map";
+@use "./tokens" as colors;
 
 @mixin text-color($color) {
-	@if map_has_key(colors.$colors, $color) {
-		/* stylelint-disable-next-line property-disallowed-list */
-		color: map.get(colors.$colors, $color);
-	} @else {
-		@error 'Unknown palette color of #{$color}. Check colors/tokens.scss file for accepted arguments.';
-	}
+  @if map_has_key(colors.$colors, $color) {
+    /* stylelint-disable-next-line property-disallowed-list */
+    color: map.get(colors.$colors, $color);
+  } @else {
+    @error 'Unknown palette color of #{$color}. Check colors/tokens.scss file for accepted arguments.';
+  }
 }
 
 @mixin bg-color($color) {
-	@if map_has_key(colors.$colors, $color) {
-		/* stylelint-disable-next-line property-disallowed-list */
-		background-color: map.get(colors.$colors, $color);
-	} @else {
-		@error 'Unknown palette background color of #{$color}. Check colors/tokens.scss file for accepted arguments.';
-	}
+  @if map_has_key(colors.$colors, $color) {
+    /* stylelint-disable-next-line property-disallowed-list */
+    background-color: map.get(colors.$colors, $color);
+  } @else {
+    @error 'Unknown palette background color of #{$color}. Check colors/tokens.scss file for accepted arguments.';
+  }
 }

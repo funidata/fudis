@@ -1,93 +1,119 @@
 <ng-container *transloco="let t">
-	<fudis-expandable [title]="'Form with some transloco'" [closed]="false">
-		<ng-template fudisActions type="expandable">
-			<fudis-button [label]="'Submit!'" (handleClick)="clickSubmit()"></fudis-button>
-			<fudis-button [label]="'Custom error status: ' + customError" (handleClick)="toggleCustomError()"></fudis-button>
-		</ng-template>
-		<ng-template fudisContent type="expandable">
-			<fudis-form
-				[errorSummaryLinkType]="'href'"
-				[errorSummaryVisible]="errorSummaryVisible"
-				[title]="'Form title here hello'"
-				[errorSummaryHelpText]="'There were some errors'"
-				[titleLevel]="2">
-				<ng-template fudisContent type="form">
-					<fudis-fieldset [title]="t('fieldsetTitle')">
-						<ng-template fudisContent type="fieldset">
-							<fudis-checkbox-group
-								[title]="t('chooseBerry')"
-								[helpText]="t('chooseBerryHelp')"
-								[required]="true"
-								[tooltip]="t('chooseBerryTooltip')"
-								[formGroup]="testFormGroup.controls['checkboxFormGroup']">
-								<fudis-checkbox
-									*ngFor="let option of checkboxOptions"
-									(handleChange)="handleChange($event)"
-									[controlName]="option.controlName"
-									[label]="option.label" />
-							</fudis-checkbox-group>
-							<fudis-text-input
-								[label]="t('label')"
-								[helpText]="t('helpText')"
-								[maxLength]="20"
-								[control]="testFormGroup.controls['textInput']"
-								[tooltip]="'This text-input has multiple validators: required, minlength and maxlength'">
-								<fudis-error-message *ngIf="customError" [message]="t('form_errors.customErrorMessage')" />
-								<fudis-error-message
-									*ngIf="customError"
-									[message]="'Backend threw an error, it is not totally fault of this component'" />
-							</fudis-text-input>
-							<fudis-radio-button-group
-								[title]="t('chooseTruth')"
-								[helpText]="t('chooseTruthHelp')"
-								[control]="testFormGroup.controls['truth']"
-								[options]="radioButtonOptions" />
-							<fudis-dropdown
-								[id]="'dropdown-id-123'"
-								[label]="'Some dropdown'"
-								[options]="dropdownOptions"
-								[control]="testFormGroup.controls['dropdown']" />
-							<fudis-dropdown
-								[id]="'dropdown-id-multi'"
-								[label]="'Some multiselect dropdown'"
-								[options]="dropdownOptions"
-								[multipleOption]="true"
-								[control]="testFormGroup.controls['dropdownMulti']" />
-							<fudis-datepicker [label]="'Select some date'" [control]="testFormGroup.controls['date']" />
-							<fudis-text-area
-								[label]="'Basic required text-area'"
-								[control]="testFormGroup.controls['textArea']"
-								[maxLength]="20" />
-							<fudis-input-with-language-options
-								[label]="'At least one required'"
-								[formGroup]="testFormGroup.controls['withLanguages']"
-								[options]="_languageOptions" />
-						</ng-template>
-					</fudis-fieldset>
-				</ng-template>
-			</fudis-form>
+  <fudis-expandable [title]="'Form with some transloco'" [closed]="false">
+    <ng-template fudisActions type="expandable">
+      <fudis-button [label]="'Submit!'" (handleClick)="clickSubmit()"></fudis-button>
+      <fudis-button
+        [label]="'Custom error status: ' + customError"
+        (handleClick)="toggleCustomError()"
+      ></fudis-button>
+    </ng-template>
+    <ng-template fudisContent type="expandable">
+      <fudis-form
+        [errorSummaryLinkType]="'href'"
+        [errorSummaryVisible]="errorSummaryVisible"
+        [title]="'Form title here hello'"
+        [errorSummaryHelpText]="'There were some errors'"
+        [titleLevel]="2"
+      >
+        <ng-template fudisContent type="form">
+          <fudis-fieldset [title]="t('fieldsetTitle')">
+            <ng-template fudisContent type="fieldset">
+              <fudis-checkbox-group
+                [title]="t('chooseBerry')"
+                [helpText]="t('chooseBerryHelp')"
+                [required]="true"
+                [tooltip]="t('chooseBerryTooltip')"
+                [formGroup]="testFormGroup.controls['checkboxFormGroup']"
+              >
+                <fudis-checkbox
+                  *ngFor="let option of checkboxOptions"
+                  (handleChange)="handleChange($event)"
+                  [controlName]="option.controlName"
+                  [label]="option.label"
+                />
+              </fudis-checkbox-group>
+              <fudis-text-input
+                [label]="t('label')"
+                [helpText]="t('helpText')"
+                [maxLength]="20"
+                [control]="testFormGroup.controls['textInput']"
+                [tooltip]="
+                  'This text-input has multiple validators: required, minlength and maxlength'
+                "
+              >
+                <fudis-error-message
+                  *ngIf="customError"
+                  [message]="t('form_errors.customErrorMessage')"
+                />
+                <fudis-error-message
+                  *ngIf="customError"
+                  [message]="'Backend threw an error, it is not totally fault of this component'"
+                />
+              </fudis-text-input>
+              <fudis-radio-button-group
+                [title]="t('chooseTruth')"
+                [helpText]="t('chooseTruthHelp')"
+                [control]="testFormGroup.controls['truth']"
+                [options]="radioButtonOptions"
+              />
+              <fudis-dropdown
+                [id]="'dropdown-id-123'"
+                [label]="'Some dropdown'"
+                [options]="dropdownOptions"
+                [control]="testFormGroup.controls['dropdown']"
+              />
+              <fudis-dropdown
+                [id]="'dropdown-id-multi'"
+                [label]="'Some multiselect dropdown'"
+                [options]="dropdownOptions"
+                [multipleOption]="true"
+                [control]="testFormGroup.controls['dropdownMulti']"
+              />
+              <fudis-datepicker
+                [label]="'Select some date'"
+                [control]="testFormGroup.controls['date']"
+              />
+              <fudis-text-area
+                [label]="'Basic required text-area'"
+                [control]="testFormGroup.controls['textArea']"
+                [maxLength]="20"
+              />
+              <fudis-input-with-language-options
+                [label]="'At least one required'"
+                [formGroup]="testFormGroup.controls['withLanguages']"
+                [options]="_languageOptions"
+              />
+            </ng-template>
+          </fudis-fieldset>
+        </ng-template>
+      </fudis-form>
 
-			<fudis-body-text *ngIf="showSuccessBodyText">It seems everything is okay!</fudis-body-text>
-		</ng-template>
-	</fudis-expandable>
-	<fudis-expandable [title]="'Autocomplete examples'">
-		<ng-template fudisContent type="expandable">
-			<fudis-grid [columns]="'inputLg'">
-				<fudis-heading [level]="3" [size]="'md'">Single-select dropdown</fudis-heading>
-				<fudis-autocomplete
-					[label]="'Choose item'"
-					[variant]="'dropdown'"
-					[id]="'dropdown-1234'"
-					[options]="multipleOptions"
-					[control]="testFormGroup.controls['autocompleteDropdown']" />
-				<fudis-heading [level]="3" [size]="'md'">Single-select search</fudis-heading>
-				<fudis-autocomplete
-					[label]="'Search item'"
-					[options]="multipleOptions"
-					[control]="testFormGroup.controls['autocompleteSearch']" />
-				<fudis-heading [level]="3" [size]="'md'">Autocomplete multi-select dropdown</fudis-heading>
-				<fudis-autocomplete-multi-select [label]="'Search and choose items'" [options]="multipleOptions" />
-			</fudis-grid>
-		</ng-template>
-	</fudis-expandable>
+      <fudis-body-text *ngIf="showSuccessBodyText">It seems everything is okay!</fudis-body-text>
+    </ng-template>
+  </fudis-expandable>
+  <fudis-expandable [title]="'Autocomplete examples'">
+    <ng-template fudisContent type="expandable">
+      <fudis-grid [columns]="'inputLg'">
+        <fudis-heading [level]="3" [size]="'md'">Single-select dropdown</fudis-heading>
+        <fudis-autocomplete
+          [label]="'Choose item'"
+          [variant]="'dropdown'"
+          [id]="'dropdown-1234'"
+          [options]="multipleOptions"
+          [control]="testFormGroup.controls['autocompleteDropdown']"
+        />
+        <fudis-heading [level]="3" [size]="'md'">Single-select search</fudis-heading>
+        <fudis-autocomplete
+          [label]="'Search item'"
+          [options]="multipleOptions"
+          [control]="testFormGroup.controls['autocompleteSearch']"
+        />
+        <fudis-heading [level]="3" [size]="'md'">Autocomplete multi-select dropdown</fudis-heading>
+        <fudis-autocomplete-multi-select
+          [label]="'Search and choose items'"
+          [options]="multipleOptions"
+        />
+      </fudis-grid>
+    </ng-template>
+  </fudis-expandable>
 </ng-container>

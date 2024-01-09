@@ -1,34 +1,34 @@
-@use '../../../../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../../../../foundations/typography/mixins.scss' as typography;
-@use '../../../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../../../foundations/borders/mixins.scss' as border;
-@use '../../../../../foundations/focus/mixins.scss' as focus;
-@use '../../../../../foundations/utilities/mixins.scss' as utilities;
+@use "../../../../../foundations/colors/mixins.scss" as colorMixins;
+@use "../../../../../foundations/typography/mixins.scss" as typography;
+@use "../../../../../foundations/spacing/tokens.scss" as spacing;
+@use "../../../../../foundations/borders/mixins.scss" as border;
+@use "../../../../../foundations/focus/mixins.scss" as focus;
+@use "../../../../../foundations/utilities/mixins.scss" as utilities;
 
 .fudis-multiselect-chip-list {
-	@include utilities.box-reset;
+  @include utilities.box-reset;
 
-	display: flex;
-	flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 
-	&__button {
-		@include colorMixins.bg-color('gray-dark');
-		@include colorMixins.text-color('white');
-		@include typography.body-text-md-regular;
-		@include border.border-none;
-		@include utilities.box-reset;
+  &__button {
+    @include colorMixins.bg-color("gray-dark");
+    @include colorMixins.text-color("white");
+    @include typography.body-text-md-regular;
+    @include border.border-none;
+    @include utilities.box-reset;
 
-		display: block;
-		margin-top: spacing.$spacing-xxs;
-		cursor: pointer;
-		padding: 0 spacing.$spacing-xs 0 0;
+    display: block;
+    margin-top: spacing.$spacing-xxs;
+    cursor: pointer;
+    padding: 0 spacing.$spacing-xs 0 0;
 
-		&:not(:last-of-type) {
-			margin-right: spacing.$spacing-xxs;
-		}
+    &:not(:last-of-type) {
+      margin-right: spacing.$spacing-xxs;
+    }
 
-		&:focus {
-			@include focus.focus-generic;
-		}
-	}
+    &:focus {
+      @include focus.focus-generic;
+    }
+  }
 }

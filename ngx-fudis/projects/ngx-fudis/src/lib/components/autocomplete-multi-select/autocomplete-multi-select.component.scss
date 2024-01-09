@@ -1,40 +1,40 @@
-@use '../../foundations/spacing/tokens.scss' as spacing;
-@use '../../foundations/borders/mixins.scss' as borders;
-@use '../../foundations/typography/mixins.scss' as typography;
-@use '../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../foundations/colors/tokens.scss' as colors;
+@use "../../foundations/spacing/tokens.scss" as spacing;
+@use "../../foundations/borders/mixins.scss" as borders;
+@use "../../foundations/typography/mixins.scss" as typography;
+@use "../../foundations/colors/mixins.scss" as colorMixins;
+@use "../../foundations/colors/tokens.scss" as colors;
 
 .fudis-autocomplete-multi-select {
-	width: 100%;
+  width: 100%;
 
-	&__input-wrapper {
-		display: flex;
-		position: relative;
+  &__input-wrapper {
+    display: flex;
+    position: relative;
 
-		&__input {
-			@include borders.border('1px', 'solid', 'gray-dark');
-			@include borders.border-radius('2px');
-			@include typography.text-field-input;
+    &__input {
+      @include borders.border("1px", "solid", "gray-dark");
+      @include borders.border-radius("2px");
+      @include typography.text-field-input;
 
-			box-sizing: border-box;
-			padding: spacing.$spacing-xxs spacing.$spacing-sm;
-			width: 100%;
-			height: spacing.$spacing-xl;
+      box-sizing: border-box;
+      padding: spacing.$spacing-xxs spacing.$spacing-sm;
+      width: 100%;
+      height: spacing.$spacing-xl;
 
-			&::placeholder {
-				@include colorMixins.text-color('gray-middle');
-			}
-		}
+      &::placeholder {
+        @include colorMixins.text-color("gray-middle");
+      }
+    }
 
-		&__icon-button button {
-			position: absolute;
-			top: 50%;
-			right: spacing.$spacing-xxs;
-			transform: translateY(-50%);
+    &__icon-button button {
+      position: absolute;
+      top: 50%;
+      right: spacing.$spacing-xxs;
+      transform: translateY(-50%);
 
-			svg {
-				fill: colors.$color-gray-dark;
-			}
-		}
-	}
+      svg {
+        fill: colors.$color-gray-dark;
+      }
+    }
+  }
 }

@@ -21,77 +21,90 @@ import { ValidatorErrorMessageComponent } from '../../error-message/validator-er
 import { GuidanceComponent } from '../../guidance/guidance.component';
 
 @Component({
-	selector: 'fudis-mock-component',
-	template: `<fudis-radio-button-group [title]="'Choose a pet'" [control]="_testControl" [options]="_options" />`,
+  selector: 'fudis-mock-component',
+  template: `<fudis-radio-button-group
+    [title]="'Choose a pet'"
+    [control]="_testControl"
+    [options]="_options"
+  />`,
 })
 class MockContainerComponent {
-	protected _testControl = new FormControl<boolean | null>(null);
+  protected _testControl = new FormControl<boolean | null>(null);
 
-	protected _options: FudisRadioButtonOption[] = [
-		{ value: 'platypus', label: 'Platypus', name: 'animal' },
-		{ value: 'otter', label: 'Otter', name: 'animal' },
-		{ value: 'capybara', label: 'Capybara', name: 'animal' },
-	];
+  protected _options: FudisRadioButtonOption[] = [
+    { value: 'platypus', label: 'Platypus', name: 'animal' },
+    { value: 'otter', label: 'Otter', name: 'animal' },
+    { value: 'capybara', label: 'Capybara', name: 'animal' },
+  ];
 }
 
 describe('RadioButtonComponent', () => {
-	let fixture: ComponentFixture<MockContainerComponent>;
+  let fixture: ComponentFixture<MockContainerComponent>;
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			declarations: [
-				MockContainerComponent,
-				RadioButtonComponent,
-				RadioButtonGroupComponent,
-				FieldSetComponent,
-				GridComponent,
-				GridApiDirective,
-				GridDirective,
-				ContentDirective,
-				GuidanceComponent,
-				IconComponent,
-				ValidatorErrorMessageComponent,
-			],
-			providers: [FudisIdService, FudisBreakpointService, FudisGridService, FudisTranslationService],
-			imports: [ReactiveFormsModule],
-		}).compileComponents();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [
+        MockContainerComponent,
+        RadioButtonComponent,
+        RadioButtonGroupComponent,
+        FieldSetComponent,
+        GridComponent,
+        GridApiDirective,
+        GridDirective,
+        ContentDirective,
+        GuidanceComponent,
+        IconComponent,
+        ValidatorErrorMessageComponent,
+      ],
+      providers: [
+        FudisIdService,
+        FudisBreakpointService,
+        FudisGridService,
+        FudisTranslationService,
+      ],
+      imports: [ReactiveFormsModule],
+    }).compileComponents();
 
-		fixture = TestBed.createComponent(MockContainerComponent);
+    fixture = TestBed.createComponent(MockContainerComponent);
 
-		fixture.detectChanges();
-	});
+    fixture.detectChanges();
+  });
 
-	function assertRadioButtonHasClasses(classes: string): void {
-		fixture.detectChanges();
-		const element = fixture.nativeElement.querySelector('fudis-radio-button label');
-		const componentClasses = element.className.split(' ').sort();
+  function assertRadioButtonHasClasses(classes: string): void {
+    fixture.detectChanges();
+    const element = fixture.nativeElement.querySelector('fudis-radio-button label');
+    const componentClasses = element.className.split(' ').sort();
 
-		expect(componentClasses).toEqual(classes.split(' ').sort());
-	}
+    expect(componentClasses).toEqual(classes.split(' ').sort());
+  }
 
-	describe('Contents', () => {
-		it('should have label as label', () => {
-			const elem = fixture.debugElement.query(By.css('.fudis-radio-button__label'));
+  describe('Contents', () => {
+    it('should have label as label', () => {
+      const elem = fixture.debugElement.query(By.css('.fudis-radio-button__label'));
 
-			expect(elem.nativeElement.innerHTML).toEqual('Platypus');
-		});
-	});
+      expect(elem.nativeElement.innerHTML).toEqual('Platypus');
+    });
+  });
 
-	describe('CSS classes', () => {
-		it('should always have fudis-radio-button class', () => {
-			assertRadioButtonHasClasses('fudis-radio-button');
-		});
+  describe('CSS classes', () => {
+    it('should always have fudis-radio-button class', () => {
+      assertRadioButtonHasClasses('fudis-radio-button');
+    });
 
-		it('should have indicator class if radio button is checked', () => {
-			const element: HTMLInputElement = fixture.nativeElement.querySelector('fudis-radio-button input');
+    it('should have indicator class if radio button is checked', () => {
+      const element: HTMLInputElement = fixture.nativeElement.querySelector(
+        'fudis-radio-button input',
+      );
 
-			element.click();
+      element.click();
 
-			fixture.detectChanges();
+      fixture.detectChanges();
 
-			const elem = fixture.nativeElement.querySelector('.fudis-radio-button__content__control__indicator');
+      const elem = fixture.nativeElement.querySelector(
+        '.fudis-radio-button__content__control__indicator',
+      );
 
-			expect(elem).toBeTruthy();
-		});
-	});
+      expect(elem).toBeTruthy();
+    });
+  });
 });

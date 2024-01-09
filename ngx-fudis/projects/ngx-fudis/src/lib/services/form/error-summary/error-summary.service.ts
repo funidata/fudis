@@ -7,13 +7,13 @@ import { FudisInternalErrorSummaryService } from './internal-error-summary.servi
  */
 @Injectable({ providedIn: 'root' })
 export class FudisErrorSummaryService {
-	constructor(private _errorSummaryService: FudisInternalErrorSummaryService) {}
+  constructor(private _errorSummaryService: FudisInternalErrorSummaryService) {}
 
-	/**
-	 * Reloads errors from the internal error summary service and tell component to focus to it on error reload
-	 */
-	public reloadErrors(): void {
-		this._errorSummaryService.focusToSummaryList = true;
-		this._errorSummaryService.reloadErrors();
-	}
+  /**
+   * Reloads errors from the internal error summary service and tell component to focus to it on error reload
+   */
+  public reloadErrors(): void {
+    this._errorSummaryService.focusToSummaryList = true;
+    this._errorSummaryService.reloadErrors();
+  }
 }

@@ -139,7 +139,7 @@ describe('ErrorSummaryComponent', () => {
 
       fixture.detectChanges();
 
-      debug(fixture.nativeElement);
+      //debug(fixture.nativeElement);
 
       //console.log(fixture.debugElement);
       // console.log(wrapperFixture.nativeElement);

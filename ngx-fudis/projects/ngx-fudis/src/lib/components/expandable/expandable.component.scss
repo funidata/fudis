@@ -1,99 +1,99 @@
-@use '../../foundations/colors/mixins.scss' as color;
-@use '../../foundations/borders/mixins.scss' as border;
-@use '../../foundations/spacing/tokens.scss' as spacing;
-@use '../../foundations/typography/mixins.scss' as typography;
-@use '../../foundations/focus/mixins.scss' as focus;
-@use '../../foundations/breakpoints/mixins.scss' as breakpoint;
+@use "../../foundations/colors/mixins.scss" as color;
+@use "../../foundations/borders/mixins.scss" as border;
+@use "../../foundations/spacing/tokens.scss" as spacing;
+@use "../../foundations/typography/mixins.scss" as typography;
+@use "../../foundations/focus/mixins.scss" as focus;
+@use "../../foundations/breakpoints/mixins.scss" as breakpoint;
 
 .fudis-expandable {
-	margin-bottom: spacing.$spacing-sm;
-	border-top: 0;
+  margin-bottom: spacing.$spacing-sm;
+  border-top: 0;
 
-	&--closed {
-		border-bottom: 0;
-	}
+  &--closed {
+    border-bottom: 0;
+  }
 
-	&__regular {
-		@include border.border('2px', 'solid', 'gray-extra-light');
-	}
+  &__regular {
+    @include border.border("2px", "solid", "gray-extra-light");
+  }
 
-	&__header {
-		display: block;
-		padding: spacing.$spacing-xs;
+  &__header {
+    display: block;
+    padding: spacing.$spacing-xs;
 
-		&__regular {
-			@include color.bg-color('gray-extra-light');
-		}
+    &__regular {
+      @include color.bg-color("gray-extra-light");
+    }
 
-		&__heading {
-			margin: 0;
-			width: 100%;
+    &__heading {
+      margin: 0;
+      width: 100%;
 
-			&__button {
-				@include border.border-none;
-				@include color.bg-color('transparent');
-				@include typography.expandable-regular-typography;
+      &__button {
+        @include border.border-none;
+        @include color.bg-color("transparent");
+        @include typography.expandable-regular-typography;
 
-				cursor: pointer;
-				width: 100%;
-				text-align: left;
+        cursor: pointer;
+        width: 100%;
+        text-align: left;
 
-				&:focus {
-					@include focus.focus-generic;
-				}
+        &:focus {
+          @include focus.focus-generic;
+        }
 
-				&__icon__regular {
-					margin-right: spacing.$spacing-xs;
-				}
+        &__icon__regular {
+          margin-right: spacing.$spacing-xs;
+        }
 
-				&__sub-heading {
-					@include typography.expandable-sub-title-typography;
+        &__sub-heading {
+          @include typography.expandable-sub-title-typography;
 
-					display: block;
-					margin-left: spacing.$spacing-xl;
-				}
+          display: block;
+          margin-left: spacing.$spacing-xl;
+        }
 
-				&__lite {
-					@include color.text-color('primary');
-					@include typography.text-link-m-typography;
-				}
-			}
-		}
+        &__lite {
+          @include color.text-color("primary");
+          @include typography.text-link-m-typography;
+        }
+      }
+    }
 
-		&__buttons {
-			display: flex;
-			margin-top: spacing.$spacing-xs;
+    &__buttons {
+      display: flex;
+      margin-top: spacing.$spacing-xs;
 
-			fudis-button {
-				margin-left: spacing.$spacing-xs;
-			}
+      fudis-button {
+        margin-left: spacing.$spacing-xs;
+      }
 
-			@include breakpoint.breakpoint('sm') {
-				margin-top: 0;
-				margin-left: 0;
-			}
-		}
+      @include breakpoint.breakpoint("sm") {
+        margin-top: 0;
+        margin-left: 0;
+      }
+    }
 
-		@include breakpoint.breakpoint('sm') {
-			display: flex;
-		}
-	}
+    @include breakpoint.breakpoint("sm") {
+      display: flex;
+    }
+  }
 
-	&__content {
-		&__padding-default {
-			@include breakpoint.breakpoint('md') {
-				padding: spacing.$spacing-md;
-				padding-left: spacing.$spacing-xl;
-			}
+  &__content {
+    &__padding-default {
+      @include breakpoint.breakpoint("md") {
+        padding: spacing.$spacing-md;
+        padding-left: spacing.$spacing-xl;
+      }
 
-			@include breakpoint.breakpoint-max('md') {
-				padding: spacing.$spacing-sm;
-				padding-left: spacing.$spacing-md;
-			}
-		}
+      @include breakpoint.breakpoint-max("md") {
+        padding: spacing.$spacing-sm;
+        padding-left: spacing.$spacing-md;
+      }
+    }
 
-		&__padding-small {
-			padding: spacing.$spacing-sm;
-		}
-	}
+    &__padding-small {
+      padding: spacing.$spacing-sm;
+    }
+  }
 }

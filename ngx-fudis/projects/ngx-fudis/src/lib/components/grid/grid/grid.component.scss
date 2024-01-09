@@ -1,338 +1,338 @@
 /* stylelint-disable order/order */
 
-@use '../../../foundations/breakpoints/mixins.scss' as breakpoints;
-@use '../../../foundations/breakpoints/tokens.scss' as breakpointTokens;
-@use '../../../foundations/grid/mixins.scss' as grid;
-@use '../../../foundations/grid/tokens.scss' as gridTokens;
-@use '../../../foundations/spacing/tokens.scss' as spacing;
+@use "../../../foundations/breakpoints/mixins.scss" as breakpoints;
+@use "../../../foundations/breakpoints/tokens.scss" as breakpointTokens;
+@use "../../../foundations/grid/mixins.scss" as grid;
+@use "../../../foundations/grid/tokens.scss" as gridTokens;
+@use "../../../foundations/spacing/tokens.scss" as spacing;
 
 .fudis-grid {
-	display: grid;
-	grid-template-rows: auto 1fr;
-	grid-template-columns: auto 1fr;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto 1fr;
 
-	> * {
-		min-width: 0;
-	}
+  > * {
+    min-width: 0;
+  }
 
-	@include breakpoints.breakpoint('sm') {
-		width: 100%;
-	}
+  @include breakpoints.breakpoint("sm") {
+    width: 100%;
+  }
 
-	> fudis-heading {
-		grid-column: 1/-1;
-	}
+  > fudis-heading {
+    grid-column: 1/-1;
+  }
 
-	&__align {
-		&__start {
-			margin-right: auto;
-			margin-left: 0;
+  &__align {
+    &__start {
+      margin-right: auto;
+      margin-left: 0;
 
-			@include breakpoints.breakpoint-max('sm') {
-				@include grid.grid-xs-margins;
-			}
-		}
+      @include breakpoints.breakpoint-max("sm") {
+        @include grid.grid-xs-margins;
+      }
+    }
 
-		&__center {
-			margin-right: auto;
-			margin-left: auto;
+    &__center {
+      margin-right: auto;
+      margin-left: auto;
 
-			@include breakpoints.breakpoint-max('sm') {
-				@include grid.grid-xs-margins;
-			}
-		}
+      @include breakpoints.breakpoint-max("sm") {
+        @include grid.grid-xs-margins;
+      }
+    }
 
-		&__end {
-			margin-right: 0;
-			margin-left: auto;
+    &__end {
+      margin-right: 0;
+      margin-left: auto;
 
-			@include breakpoints.breakpoint-max('sm') {
-				@include grid.grid-xs-margins;
-			}
-		}
-	}
+      @include breakpoints.breakpoint-max("sm") {
+        @include grid.grid-xs-margins;
+      }
+    }
+  }
 
-	&__margin {
-		&__top {
-			&__none {
-				margin-top: spacing.$spacing-none;
-			}
+  &__margin {
+    &__top {
+      &__none {
+        margin-top: spacing.$spacing-none;
+      }
 
-			&__xxs {
-				margin-top: spacing.$spacing-xxs;
-			}
+      &__xxs {
+        margin-top: spacing.$spacing-xxs;
+      }
 
-			&__xs {
-				margin-top: spacing.$spacing-xs;
-			}
+      &__xs {
+        margin-top: spacing.$spacing-xs;
+      }
 
-			&__sm {
-				margin-top: spacing.$spacing-sm;
-			}
+      &__sm {
+        margin-top: spacing.$spacing-sm;
+      }
 
-			&__md {
-				margin-top: spacing.$spacing-md;
-			}
+      &__md {
+        margin-top: spacing.$spacing-md;
+      }
 
-			&__lg {
-				margin-top: spacing.$spacing-lg;
-			}
+      &__lg {
+        margin-top: spacing.$spacing-lg;
+      }
 
-			&__xl {
-				margin-top: spacing.$spacing-xl;
-			}
+      &__xl {
+        margin-top: spacing.$spacing-xl;
+      }
 
-			&__xxl {
-				margin-top: spacing.$spacing-xxl;
-			}
-		}
+      &__xxl {
+        margin-top: spacing.$spacing-xxl;
+      }
+    }
 
-		&__bottom {
-			&__none {
-				margin-bottom: spacing.$spacing-none;
-			}
+    &__bottom {
+      &__none {
+        margin-bottom: spacing.$spacing-none;
+      }
 
-			&__xxs {
-				margin-bottom: spacing.$spacing-xxs;
-			}
+      &__xxs {
+        margin-bottom: spacing.$spacing-xxs;
+      }
 
-			&__xs {
-				margin-bottom: spacing.$spacing-xs;
-			}
+      &__xs {
+        margin-bottom: spacing.$spacing-xs;
+      }
 
-			&__sm {
-				margin-bottom: spacing.$spacing-sm;
-			}
+      &__sm {
+        margin-bottom: spacing.$spacing-sm;
+      }
 
-			&__md {
-				margin-bottom: spacing.$spacing-md;
-			}
+      &__md {
+        margin-bottom: spacing.$spacing-md;
+      }
 
-			&__lg {
-				margin-bottom: spacing.$spacing-lg;
-			}
+      &__lg {
+        margin-bottom: spacing.$spacing-lg;
+      }
 
-			&__xl {
-				margin-bottom: spacing.$spacing-xl;
-			}
+      &__xl {
+        margin-bottom: spacing.$spacing-xl;
+      }
 
-			&__xxl {
-				margin-bottom: spacing.$spacing-xxl;
-			}
-		}
+      &__xxl {
+        margin-bottom: spacing.$spacing-xxl;
+      }
+    }
 
-		&__sides {
-			&__none {
-				margin-right: 0;
-				margin-left: 0;
-			}
+    &__sides {
+      &__none {
+        margin-right: 0;
+        margin-left: 0;
+      }
 
-			&__xxs {
-				margin-right: spacing.$spacing-xxs;
-				margin-left: spacing.$spacing-xxs;
-			}
+      &__xxs {
+        margin-right: spacing.$spacing-xxs;
+        margin-left: spacing.$spacing-xxs;
+      }
 
-			&__xs {
-				margin-right: spacing.$spacing-xs;
-				margin-left: spacing.$spacing-xs;
-			}
+      &__xs {
+        margin-right: spacing.$spacing-xs;
+        margin-left: spacing.$spacing-xs;
+      }
 
-			&__sm {
-				margin-right: spacing.$spacing-sm;
-				margin-left: spacing.$spacing-sm;
-			}
+      &__sm {
+        margin-right: spacing.$spacing-sm;
+        margin-left: spacing.$spacing-sm;
+      }
 
-			&__md {
-				margin-right: spacing.$spacing-md;
-				margin-left: spacing.$spacing-md;
-			}
+      &__md {
+        margin-right: spacing.$spacing-md;
+        margin-left: spacing.$spacing-md;
+      }
 
-			&__lg {
-				margin-right: spacing.$spacing-lg;
-				margin-left: spacing.$spacing-lg;
-			}
+      &__lg {
+        margin-right: spacing.$spacing-lg;
+        margin-left: spacing.$spacing-lg;
+      }
 
-			&__xl {
-				margin-right: spacing.$spacing-xl;
-				margin-left: spacing.$spacing-xl;
-			}
+      &__xl {
+        margin-right: spacing.$spacing-xl;
+        margin-left: spacing.$spacing-xl;
+      }
 
-			&__xxl {
-				margin-right: spacing.$spacing-xxl;
-				margin-left: spacing.$spacing-xxl;
-			}
-		}
-	}
+      &__xxl {
+        margin-right: spacing.$spacing-xxl;
+        margin-left: spacing.$spacing-xxl;
+      }
+    }
+  }
 
-	/*
+  /*
 	By default Grid's @Input width is XXL. When viewport gets narrower, it will get corresponding max-widths of each smaller breakpoint from XXL to smallest XS.
 
 	On the other end, if @Input width is the smallest of XS, it gets only one max-width of XS and doesn't need any other breakpoint width logic.
 	*/
 
-	&__xxl {
-		@include breakpoints.breakpoint('xs') {
-			@include grid.grid-max-width('xs');
-		}
+  &__xxl {
+    @include breakpoints.breakpoint("xs") {
+      @include grid.grid-max-width("xs");
+    }
 
-		@include breakpoints.breakpoint('sm') {
-			@include grid.grid-max-width('sm');
-		}
+    @include breakpoints.breakpoint("sm") {
+      @include grid.grid-max-width("sm");
+    }
 
-		@include breakpoints.breakpoint('md') {
-			@include grid.grid-max-width('md');
-		}
+    @include breakpoints.breakpoint("md") {
+      @include grid.grid-max-width("md");
+    }
 
-		@include breakpoints.breakpoint('lg') {
-			@include grid.grid-max-width('lg');
-		}
+    @include breakpoints.breakpoint("lg") {
+      @include grid.grid-max-width("lg");
+    }
 
-		@include breakpoints.breakpoint('xl') {
-			@include grid.grid-max-width('xl');
-		}
+    @include breakpoints.breakpoint("xl") {
+      @include grid.grid-max-width("xl");
+    }
 
-		@include breakpoints.breakpoint('xxl') {
-			@include grid.grid-max-width('xxl');
-		}
-	}
+    @include breakpoints.breakpoint("xxl") {
+      @include grid.grid-max-width("xxl");
+    }
+  }
 
-	&__xl {
-		@include breakpoints.breakpoint('xs') {
-			@include grid.grid-max-width('xs');
-		}
+  &__xl {
+    @include breakpoints.breakpoint("xs") {
+      @include grid.grid-max-width("xs");
+    }
 
-		@include breakpoints.breakpoint('sm') {
-			@include grid.grid-max-width('sm');
-		}
+    @include breakpoints.breakpoint("sm") {
+      @include grid.grid-max-width("sm");
+    }
 
-		@include breakpoints.breakpoint('md') {
-			@include grid.grid-max-width('md');
-		}
+    @include breakpoints.breakpoint("md") {
+      @include grid.grid-max-width("md");
+    }
 
-		@include breakpoints.breakpoint('lg') {
-			@include grid.grid-max-width('lg');
-		}
+    @include breakpoints.breakpoint("lg") {
+      @include grid.grid-max-width("lg");
+    }
 
-		@include breakpoints.breakpoint('xl') {
-			@include grid.grid-max-width('xl');
-		}
-	}
+    @include breakpoints.breakpoint("xl") {
+      @include grid.grid-max-width("xl");
+    }
+  }
 
-	&__lg {
-		@include breakpoints.breakpoint('xs') {
-			@include grid.grid-max-width('xs');
-		}
+  &__lg {
+    @include breakpoints.breakpoint("xs") {
+      @include grid.grid-max-width("xs");
+    }
 
-		@include breakpoints.breakpoint('sm') {
-			@include grid.grid-max-width('sm');
-		}
+    @include breakpoints.breakpoint("sm") {
+      @include grid.grid-max-width("sm");
+    }
 
-		@include breakpoints.breakpoint('md') {
-			@include grid.grid-max-width('md');
-		}
+    @include breakpoints.breakpoint("md") {
+      @include grid.grid-max-width("md");
+    }
 
-		@include breakpoints.breakpoint('lg') {
-			@include grid.grid-max-width('lg');
-		}
-	}
+    @include breakpoints.breakpoint("lg") {
+      @include grid.grid-max-width("lg");
+    }
+  }
 
-	&__md {
-		@include breakpoints.breakpoint('xs') {
-			@include grid.grid-max-width('xs');
-		}
+  &__md {
+    @include breakpoints.breakpoint("xs") {
+      @include grid.grid-max-width("xs");
+    }
 
-		@include breakpoints.breakpoint('sm') {
-			@include grid.grid-max-width('sm');
-		}
+    @include breakpoints.breakpoint("sm") {
+      @include grid.grid-max-width("sm");
+    }
 
-		@include breakpoints.breakpoint('md') {
-			@include grid.grid-max-width('md');
-		}
-	}
+    @include breakpoints.breakpoint("md") {
+      @include grid.grid-max-width("md");
+    }
+  }
 
-	&__sm {
-		@include breakpoints.breakpoint('xs') {
-			@include grid.grid-max-width('xs');
-		}
+  &__sm {
+    @include breakpoints.breakpoint("xs") {
+      @include grid.grid-max-width("xs");
+    }
 
-		@include breakpoints.breakpoint('sm') {
-			@include grid.grid-max-width('sm');
-		}
-	}
+    @include breakpoints.breakpoint("sm") {
+      @include grid.grid-max-width("sm");
+    }
+  }
 
-	&__initial {
-		width: initial;
-	}
+  &__initial {
+    width: initial;
+  }
 
-	&__xs {
-		@include grid.grid-max-width('xs');
-	}
+  &__xs {
+    @include grid.grid-max-width("xs");
+  }
 
-	&__row-gap {
-		&__none {
-			row-gap: spacing.$spacing-none;
-		}
+  &__row-gap {
+    &__none {
+      row-gap: spacing.$spacing-none;
+    }
 
-		&__xxs {
-			row-gap: spacing.$spacing-xxs;
-		}
+    &__xxs {
+      row-gap: spacing.$spacing-xxs;
+    }
 
-		&__xs {
-			row-gap: spacing.$spacing-xs;
-		}
+    &__xs {
+      row-gap: spacing.$spacing-xs;
+    }
 
-		&__sm {
-			row-gap: spacing.$spacing-sm;
-		}
+    &__sm {
+      row-gap: spacing.$spacing-sm;
+    }
 
-		&__md {
-			row-gap: spacing.$spacing-md;
-		}
+    &__md {
+      row-gap: spacing.$spacing-md;
+    }
 
-		&__lg {
-			row-gap: spacing.$spacing-lg;
-		}
+    &__lg {
+      row-gap: spacing.$spacing-lg;
+    }
 
-		&__xl {
-			row-gap: spacing.$spacing-xl;
-		}
+    &__xl {
+      row-gap: spacing.$spacing-xl;
+    }
 
-		&__xxl {
-			row-gap: spacing.$spacing-xxl;
-		}
-	}
+    &__xxl {
+      row-gap: spacing.$spacing-xxl;
+    }
+  }
 
-	&__column-gap {
-		&__none {
-			column-gap: spacing.$spacing-none;
-		}
+  &__column-gap {
+    &__none {
+      column-gap: spacing.$spacing-none;
+    }
 
-		&__xxs {
-			column-gap: spacing.$spacing-xxs;
-		}
+    &__xxs {
+      column-gap: spacing.$spacing-xxs;
+    }
 
-		&__xs {
-			column-gap: spacing.$spacing-xs;
-		}
+    &__xs {
+      column-gap: spacing.$spacing-xs;
+    }
 
-		&__sm {
-			column-gap: spacing.$spacing-sm;
-		}
+    &__sm {
+      column-gap: spacing.$spacing-sm;
+    }
 
-		&__md {
-			column-gap: spacing.$spacing-md;
-		}
+    &__md {
+      column-gap: spacing.$spacing-md;
+    }
 
-		&__lg {
-			column-gap: spacing.$spacing-lg;
-		}
+    &__lg {
+      column-gap: spacing.$spacing-lg;
+    }
 
-		&__xl {
-			column-gap: spacing.$spacing-xl;
-		}
+    &__xl {
+      column-gap: spacing.$spacing-xl;
+    }
 
-		&__xxl {
-			column-gap: spacing.$spacing-xxl;
-		}
-	}
+    &__xxl {
+      column-gap: spacing.$spacing-xxl;
+    }
+  }
 }

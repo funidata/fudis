@@ -1,66 +1,72 @@
 <div class="fudis-input-with-language-options fudis-input-size__{{ size }}">
-	<div class="fudis-input-with-language-options__inputs">
-		<ng-container *ngIf="formGroup.controls">
-			<ng-container *ngTemplateOutlet="variant === 'text-area' ? textArea : textInput"></ng-container>
-			<fudis-guidance
-				[inputLabel]="label"
-				[maxLength]="maxLength"
-				[groupErrorMsg]="groupErrorMsg"
-				[helpText]="helpText"
-				[formGroup]="formGroup"
-				[for]="id"
-				[selectedOption]="_dropdownControl.value.value">
-				<ng-content select="fudis-error-message" />
-			</fudis-guidance>
-		</ng-container>
-	</div>
-	<fudis-dropdown
-		[hideSingleSelectionIndicator]="true"
-		class="fudis-input-with-language-options__dropdown"
-		(selectionUpdate)="handleLanguageSelect($event)"
-		[control]="_dropdownControl"
-		[label]="_languageLabel"
-		[size]="_missingLanguage ? 'xs' : 'lg'"
-		[id]="id + '_language-dropdown'"
-		[options]="_updatedOptions">
-	</fudis-dropdown>
+  <div class="fudis-input-with-language-options__inputs">
+    <ng-container *ngIf="formGroup.controls">
+      <ng-container
+        *ngTemplateOutlet="variant === 'text-area' ? textArea : textInput"
+      ></ng-container>
+      <fudis-guidance
+        [inputLabel]="label"
+        [maxLength]="maxLength"
+        [groupErrorMsg]="groupErrorMsg"
+        [helpText]="helpText"
+        [formGroup]="formGroup"
+        [for]="id"
+        [selectedOption]="_dropdownControl.value.value"
+      >
+        <ng-content select="fudis-error-message" />
+      </fudis-guidance>
+    </ng-container>
+  </div>
+  <fudis-dropdown
+    [hideSingleSelectionIndicator]="true"
+    class="fudis-input-with-language-options__dropdown"
+    (selectionUpdate)="handleLanguageSelect($event)"
+    [control]="_dropdownControl"
+    [label]="_languageLabel"
+    [size]="_missingLanguage ? 'xs' : 'lg'"
+    [id]="id + '_language-dropdown'"
+    [options]="_updatedOptions"
+  >
+  </fudis-dropdown>
 </div>
 
 <ng-template #textInput>
-	<ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
-		<fudis-text-input
-			*ngIf="control.key === _dropdownControl.value.value"
-			class="fudis-input-with-language-options__inputs__item"
-			(handleBlur)="handleInputBlur($event, control.key)"
-			[ariaLabel]="label + ', ' + _dropdownControl.value.label"
-			[size]="'lg'"
-			[label]="label"
-			[id]="id"
-			[maxLength]="maxLength"
-			[initialFocus]="initialFocus && _firstLoad"
-			[required]="_requiredControls[control.key].required"
-			[invalidState]="formGroup.invalid && formGroup.touched"
-			[disableGuidance]="true"
-			[control]="$any(formGroup).controls[control.key]"></fudis-text-input>
-	</ng-container>
+  <ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
+    <fudis-text-input
+      *ngIf="control.key === _dropdownControl.value.value"
+      class="fudis-input-with-language-options__inputs__item"
+      (handleBlur)="handleInputBlur($event, control.key)"
+      [ariaLabel]="label + ', ' + _dropdownControl.value.label"
+      [size]="'lg'"
+      [label]="label"
+      [id]="id"
+      [maxLength]="maxLength"
+      [initialFocus]="initialFocus && _firstLoad"
+      [required]="_requiredControls[control.key].required"
+      [invalidState]="formGroup.invalid && formGroup.touched"
+      [disableGuidance]="true"
+      [control]="$any(formGroup).controls[control.key]"
+    ></fudis-text-input>
+  </ng-container>
 </ng-template>
 
 <ng-template #textArea>
-	<ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
-		<fudis-text-area
-			*ngIf="control.key === _dropdownControl.value.value"
-			(handleBlur)="handleInputBlur($event, control.key)"
-			class="fudis-input-with-language-options__inputs__item"
-			[ariaLabel]="label + ', ' + _dropdownControl.value.label"
-			[size]="'lg'"
-			[label]="label"
-			[id]="id"
-			[maxLength]="maxLength"
-			[invalidState]="formGroup.invalid && formGroup.touched"
-			[initialFocus]="initialFocus && _firstLoad"
-			[required]="_requiredControls[control.key].required"
-			[invalidState]="formGroup.invalid && formGroup.touched"
-			[disableGuidance]="true"
-			[control]="$any(formGroup).controls[control.key]"></fudis-text-area>
-	</ng-container>
+  <ng-container *ngFor="let control of formGroup.controls | keyvalue; let index = index">
+    <fudis-text-area
+      *ngIf="control.key === _dropdownControl.value.value"
+      (handleBlur)="handleInputBlur($event, control.key)"
+      class="fudis-input-with-language-options__inputs__item"
+      [ariaLabel]="label + ', ' + _dropdownControl.value.label"
+      [size]="'lg'"
+      [label]="label"
+      [id]="id"
+      [maxLength]="maxLength"
+      [invalidState]="formGroup.invalid && formGroup.touched"
+      [initialFocus]="initialFocus && _firstLoad"
+      [required]="_requiredControls[control.key].required"
+      [invalidState]="formGroup.invalid && formGroup.touched"
+      [disableGuidance]="true"
+      [control]="$any(formGroup).controls[control.key]"
+    ></fudis-text-area>
+  </ng-container>
 </ng-template>

@@ -9,22 +9,22 @@ import { ValidatorErrorMessageComponent } from '../error-message/validator-error
 const testControl = new FormControl('');
 
 describe('GuidanceComponent', () => {
-	let component: GuidanceComponent;
-	let fixture: ComponentFixture<GuidanceComponent>;
+  let component: GuidanceComponent;
+  let fixture: ComponentFixture<GuidanceComponent>;
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			declarations: [GuidanceComponent, MockComponent(ValidatorErrorMessageComponent)],
-			providers: [FudisInternalErrorSummaryService],
-		}).compileComponents();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [GuidanceComponent, MockComponent(ValidatorErrorMessageComponent)],
+      providers: [FudisInternalErrorSummaryService],
+    }).compileComponents();
 
-		fixture = TestBed.createComponent(GuidanceComponent);
-		component = fixture.componentInstance;
-		component.control = testControl;
-		fixture.detectChanges();
-	});
+    fixture = TestBed.createComponent(GuidanceComponent);
+    component = fixture.componentInstance;
+    component.control = testControl;
+    fixture.detectChanges();
+  });
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
-	});
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

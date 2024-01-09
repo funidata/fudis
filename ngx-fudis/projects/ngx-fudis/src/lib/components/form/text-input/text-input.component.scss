@@ -1,32 +1,32 @@
-@use '../../../foundations/borders/mixins.scss' as borders;
-@use '../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../foundations/typography/mixins.scss' as typography;
-@use '../../../foundations/colors/tokens.scss' as colors;
-@use '../../../foundations/focus/mixins.scss' as focus;
+@use "../../../foundations/borders/mixins.scss" as borders;
+@use "../../../foundations/spacing/tokens.scss" as spacing;
+@use "../../../foundations/typography/mixins.scss" as typography;
+@use "../../../foundations/colors/tokens.scss" as colors;
+@use "../../../foundations/focus/mixins.scss" as focus;
 
 .fudis-text-input {
-	box-sizing: border-box;
-	display: block;
-	width: 100%;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
 
-	&__input {
-		@include borders.border('1px', 'solid', 'gray-middle');
-		@include typography.text-field-input;
-		@include borders.border-radius('2px');
+  &__input {
+    @include borders.border("1px", "solid", "gray-middle");
+    @include typography.text-field-input;
+    @include borders.border-radius("2px");
 
-		box-sizing: border-box;
-		padding: spacing.$spacing-xxs spacing.$spacing-sm;
-		width: 100%;
-		height: spacing.$spacing-xl;
+    box-sizing: border-box;
+    padding: spacing.$spacing-xxs spacing.$spacing-sm;
+    width: 100%;
+    height: spacing.$spacing-xl;
 
-		&:focus {
-			@include focus.focus-form-field;
-		}
-	}
+    &:focus {
+      @include focus.focus-form-field;
+    }
+  }
 
-	// Keep number input arrows visible all the time
-	/* stylelint-disable-next-line selector-no-qualifying-type */
-	input[type='number']::-webkit-inner-spin-button {
-		opacity: 1;
-	}
+  // Keep number input arrows visible all the time
+  /* stylelint-disable-next-line selector-no-qualifying-type */
+  input[type="number"]::-webkit-inner-spin-button {
+    opacity: 1;
+  }
 }

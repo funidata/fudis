@@ -2,102 +2,102 @@
 /* stylelint-disable selector-max-class */
 /* stylelint-disable selector-class-pattern */
 /* stylelint-disable scss/selector-no-redundant-nesting-selector */
-@use '../../../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../../../foundations/colors/tokens.scss' as colors;
-@use '../../../../foundations/borders/mixins.scss' as borders;
-@use '../../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../../foundations/focus/mixins.scss' as focus;
+@use "../../../../foundations/colors/mixins.scss" as colorMixins;
+@use "../../../../foundations/colors/tokens.scss" as colors;
+@use "../../../../foundations/borders/mixins.scss" as borders;
+@use "../../../../foundations/spacing/tokens.scss" as spacing;
+@use "../../../../foundations/focus/mixins.scss" as focus;
 
 .fudis-datepicker {
-	&__toggle {
-		/* Target mat-icon-button */
-		& .mat-mdc-icon-button {
-			@include colorMixins.bg-color('transparent');
+  &__toggle {
+    /* Target mat-icon-button */
+    & .mat-mdc-icon-button {
+      @include colorMixins.bg-color("transparent");
 
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			border-radius: 0;
-			width: spacing.$spacing-lg;
-			height: spacing.$spacing-lg;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0;
+      width: spacing.$spacing-lg;
+      height: spacing.$spacing-lg;
 
-			&:focus {
-				@include focus.focus-generic;
-			}
+      &:focus {
+        @include focus.focus-generic;
+      }
 
-			& svg {
-				width: spacing.$spacing-lg;
-				height: spacing.$spacing-lg;
-			}
+      & svg {
+        width: spacing.$spacing-lg;
+        height: spacing.$spacing-lg;
+      }
 
-			& mat-icon {
-				width: spacing.$spacing-lg;
-				height: spacing.$spacing-lg;
-			}
-		}
-	}
+      & mat-icon {
+        width: spacing.$spacing-lg;
+        height: spacing.$spacing-lg;
+      }
+    }
+  }
 
-	&__datepicker {
-		& .mat-calendar-body-selected {
-			@include colorMixins.bg-color('primary');
-			@include colorMixins.text-color('white');
-			@include borders.border('2px', 'solid', 'primary');
+  &__datepicker {
+    & .mat-calendar-body-selected {
+      @include colorMixins.bg-color("primary");
+      @include colorMixins.text-color("white");
+      @include borders.border("2px", "solid", "primary");
 
-			&:hover {
-				@include colorMixins.text-color('gray-dark');
-				@include colorMixins.bg-color('primary-light');
-				@include borders.border('2px', 'solid', 'primary');
-			}
+      &:hover {
+        @include colorMixins.text-color("gray-dark");
+        @include colorMixins.bg-color("primary-light");
+        @include borders.border("2px", "solid", "primary");
+      }
 
-			&.mat-calendar-body-today {
-				box-shadow: none;
-			}
-		}
+      &.mat-calendar-body-today {
+        box-shadow: none;
+      }
+    }
 
-		& .mat-calendar-controls {
-			& .mat-mdc-button {
-				@include colorMixins.bg-color('transparent');
-			}
+    & .mat-calendar-controls {
+      & .mat-mdc-button {
+        @include colorMixins.bg-color("transparent");
+      }
 
-			& .mat-mdc-icon-button {
-				@include colorMixins.bg-color('transparent');
-			}
-		}
+      & .mat-mdc-icon-button {
+        @include colorMixins.bg-color("transparent");
+      }
+    }
 
-		&
-			.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
-			> .mat-calendar-body-cell-content:not(.mat-calendar-body-comparison-identical) {
-			@include colorMixins.bg-color('primary-light');
-		}
+    &
+      .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
+      > .mat-calendar-body-cell-content:not(.mat-calendar-body-comparison-identical) {
+      @include colorMixins.bg-color("primary-light");
+    }
 
-		& .mat-calendar-body-cell.mat-calendar-body-active .mat-calendar-body-selected {
-			@include colorMixins.text-color('gray-dark');
-			@include colorMixins.bg-color('primary-light');
-		}
+    & .mat-calendar-body-cell.mat-calendar-body-active .mat-calendar-body-selected {
+      @include colorMixins.text-color("gray-dark");
+      @include colorMixins.bg-color("primary-light");
+    }
 
-		& button:focus {
-			@include focus.focus-generic;
+    & button:focus {
+      @include focus.focus-generic;
 
-			/* stylelint-disable-next-line selector-no-qualifying-type */
-			&.mat-calendar-body-cell {
-				border-radius: spacing.$spacing-xxl;
-			}
-		}
+      /* stylelint-disable-next-line selector-no-qualifying-type */
+      &.mat-calendar-body-cell {
+        border-radius: spacing.$spacing-xxl;
+      }
+    }
 
-		& .mat-mdc-button-persistent-ripple.mdc-button__ripple {
-			&::before {
-				opacity: 0 !important;
-			}
-		}
-	}
+    & .mat-mdc-button-persistent-ripple.mdc-button__ripple {
+      &::before {
+        opacity: 0 !important;
+      }
+    }
+  }
 }
 
 .mat-datepicker-close-button {
-	text-transform: uppercase !important;
-	/* stylelint-disable-next-line property-disallowed-list */
-	color: colors.$color-white !important;
+  text-transform: uppercase !important;
+  /* stylelint-disable-next-line property-disallowed-list */
+  color: colors.$color-white !important;
 
-	&:focus {
-		@include focus.focus-generic;
-	}
+  &:focus {
+    @include focus.focus-generic;
+  }
 }

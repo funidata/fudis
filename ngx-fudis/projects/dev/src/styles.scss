@@ -1,32 +1,32 @@
 /* stylelint-disable selector-class-pattern */
 /* stylelint-disable color-no-hex */
 /* stylelint-disable property-disallowed-list */
-@use '@angular/material' as mat;
-@use '../../../dist/ngx-fudis/index' as fudis;
+@use "@angular/material" as mat;
+@use "../../../dist/ngx-fudis/index" as fudis;
 @include mat.core;
 
 * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-	font-size: 100%;
+  font-size: 100%;
 }
 
 :root {
-	--fudis-color-primary-light: #e0f4fd;
-	--fudis-color-primary: #0a729e;
-	--fudis-color-primary-dark: #0e5d81;
-	--fudis-color-primary-extra-dark: #1b2e36;
-	--fudis-rem-multiplier: 1;
+  --fudis-color-primary-light: #e0f4fd;
+  --fudis-color-primary: #0a729e;
+  --fudis-color-primary-dark: #0e5d81;
+  --fudis-color-primary-extra-dark: #1b2e36;
+  --fudis-rem-multiplier: 1;
 }
 
 .root-style {
-	display: flex;
-	position: relative;
-	flex-direction: column;
-	justify-content: space-between;
-	min-height: 100vh;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
 }

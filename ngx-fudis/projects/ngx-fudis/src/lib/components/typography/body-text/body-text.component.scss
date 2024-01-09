@@ -1,57 +1,57 @@
-@use '../../../foundations/typography/mixins.scss' as typography;
-@use '../../../foundations/colors/mixins.scss' as colorMixins;
-@use '../../../foundations/spacing/tokens.scss' as spacing;
-@use '../../../foundations/utilities/mixins.scss' as utilities;
+@use "../../../foundations/typography/mixins.scss" as typography;
+@use "../../../foundations/colors/mixins.scss" as colorMixins;
+@use "../../../foundations/spacing/tokens.scss" as spacing;
+@use "../../../foundations/utilities/mixins.scss" as utilities;
 
 .fudis-body-text-host {
-	display: block;
+  display: block;
 }
 
 .fudis-body-text {
-	@include utilities.box-reset;
+  @include utilities.box-reset;
 
-	&__default {
-		@include colorMixins.text-color('gray-dark');
-	}
+  &__default {
+    @include colorMixins.text-color("gray-dark");
+  }
 
-	&__white {
-		@include colorMixins.text-color('white');
-	}
+  &__white {
+    @include colorMixins.text-color("white");
+  }
 
-	&__sm-regular {
-		@include typography.body-text-sm-regular;
-	}
+  &__sm-regular {
+    @include typography.body-text-sm-regular;
+  }
 
-	&__md-regular {
-		@include typography.body-text-md-regular;
-	}
+  &__md-regular {
+    @include typography.body-text-md-regular;
+  }
 
-	&__lg-regular {
-		@include typography.body-text-lg-regular;
-	}
+  &__lg-regular {
+    @include typography.body-text-lg-regular;
+  }
 
-	&__md-light {
-		@include typography.body-text-md-light;
-	}
+  &__md-light {
+    @include typography.body-text-md-light;
+  }
 
-	&__lg-light {
-		@include typography.body-text-lg-light;
-	}
+  &__lg-light {
+    @include typography.body-text-lg-light;
+  }
 
-	&__left {
-		text-align: left;
-	}
+  &__left {
+    text-align: left;
+  }
 
-	&__right {
-		text-align: right;
-	}
+  &__right {
+    text-align: right;
+  }
 
-	&__center {
-		text-align: center;
-	}
+  &__center {
+    text-align: center;
+  }
 
-	/* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
-	& fudis-link {
-		display: inline-block;
-	}
+  /* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
+  & fudis-link {
+    display: inline-block;
+  }
 }

@@ -1,10 +1,15 @@
 {
-	"extends": "../tsconfig.json",
-	"compilerOptions": {
-		"types": ["node"],
-		"allowSyntheticDefaultImports": true
-	},
-	"exclude": ["../src/test.ts", "../src/**/*.spec.ts", "../projects/**/*.spec.ts", "../projects/dev/**/*"],
-	"include": ["../src/**/*", "../projects/**/*", "../stories/**/*"],
-	"files": ["./typings.d.ts"]
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": [
+    "../src/test.ts",
+    "../src/**/*.spec.ts",
+    "../projects/**/*.spec.ts",
+    "../projects/dev/**/*"
+  ],
+  "include": ["../src/**/*", "../projects/**/*", "../stories/**/*"],
+  "files": ["./typings.d.ts"]
 }

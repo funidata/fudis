@@ -1,61 +1,61 @@
-@use '../../foundations/spacing/tokens.scss' as spacing;
-@use '../../foundations/breakpoints/mixins.scss' as breakpoints;
-@use '../../foundations/grid/tokens.scss' as gridTokens;
+@use "../../foundations/spacing/tokens.scss" as spacing;
+@use "../../foundations/breakpoints/mixins.scss" as breakpoints;
+@use "../../foundations/grid/tokens.scss" as gridTokens;
 
 .fudis-dialog {
-	box-sizing: content-box;
-	position: relative;
-	margin: spacing.$spacing-md spacing.$spacing-sm;
-	max-width: calc(100vw - (2 * spacing.$spacing-sm));
+  box-sizing: content-box;
+  position: relative;
+  margin: spacing.$spacing-md spacing.$spacing-sm;
+  max-width: calc(100vw - (2 * spacing.$spacing-sm));
 
-	&__close {
-		float: right;
+  &__close {
+    float: right;
 
-		&__absolute {
-			position: absolute;
-			top: 0;
-			right: 0;
-			float: initial;
-		}
-	}
+    &__absolute {
+      position: absolute;
+      top: 0;
+      right: 0;
+      float: initial;
+    }
+  }
 
-	&__size {
-		&__initial {
-			width: initial;
-		}
+  &__size {
+    &__initial {
+      width: initial;
+    }
 
-		&__sm {
-			width: calc(gridTokens.$grid-width-sm + 2 * spacing.$spacing-md);
+    &__sm {
+      width: calc(gridTokens.$grid-width-sm + 2 * spacing.$spacing-md);
 
-			@include breakpoints.breakpoint('md') {
-				width: calc(gridTokens.$grid-width-sm + 2 * spacing.$spacing-xl);
-			}
-		}
+      @include breakpoints.breakpoint("md") {
+        width: calc(gridTokens.$grid-width-sm + 2 * spacing.$spacing-xl);
+      }
+    }
 
-		&__md {
-			width: calc(gridTokens.$grid-width-md + 2 * spacing.$spacing-md);
+    &__md {
+      width: calc(gridTokens.$grid-width-md + 2 * spacing.$spacing-md);
 
-			@include breakpoints.breakpoint('md') {
-				width: calc(gridTokens.$grid-width-md + 2 * spacing.$spacing-xl);
-			}
-		}
+      @include breakpoints.breakpoint("md") {
+        width: calc(gridTokens.$grid-width-md + 2 * spacing.$spacing-xl);
+      }
+    }
 
-		&__lg {
-			width: calc(gridTokens.$grid-width-lg + 2 * spacing.$spacing-md);
+    &__lg {
+      width: calc(gridTokens.$grid-width-lg + 2 * spacing.$spacing-md);
 
-			@include breakpoints.breakpoint('md') {
-				width: calc(gridTokens.$grid-width-lg + 2 * spacing.$spacing-xl);
-			}
-		}
-	}
+      @include breakpoints.breakpoint("md") {
+        width: calc(gridTokens.$grid-width-lg + 2 * spacing.$spacing-xl);
+      }
+    }
+  }
 
-	@include breakpoints.breakpoint('sm') {
-		margin: spacing.$spacing-md;
-		max-width: calc(100% - (2 * spacing.$spacing-md));
-	}
+  @include breakpoints.breakpoint("sm") {
+    margin: spacing.$spacing-md;
+    max-width: calc(100% - (2 * spacing.$spacing-md));
+  }
 
-	@include breakpoints.breakpoint('md') {
-		margin: spacing.$spacing-md spacing.$spacing-xl;
-		max-width: calc(100% - (2 * spacing.$spacing-xl));
-	}
+  @include breakpoints.breakpoint("md") {
+    margin: spacing.$spacing-md spacing.$spacing-xl;
+    max-width: calc(100% - (2 * spacing.$spacing-xl));
+  }
 }

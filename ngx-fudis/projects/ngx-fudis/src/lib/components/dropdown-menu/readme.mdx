@@ -1,7 +1,7 @@
-import { ArgTypes, Meta, Canvas } from '@storybook/blocks';
-import { linkTo } from '@storybook/addon-links';
-import { DropdownMenuComponent } from './dropdown-menu.component';
-import * as DropdownMenuStories from './dropdown-menu.stories.ts';
+import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import { linkTo } from "@storybook/addon-links";
+import { DropdownMenuComponent } from "./dropdown-menu.component";
+import * as DropdownMenuStories from "./dropdown-menu.stories.ts";
 
 <Meta title="Components/Dropdown Menu" />
 
@@ -14,9 +14,11 @@ Dropdown menu is assembled with `fudis-button`, `fudis-dropdown-menu` and `fudis
 <Canvas of={DropdownMenuStories.DropdownMenu}></Canvas>
 
 ### Code Example
+
 **NOTE**: All fudis-button properties are given in this example as needed, just modify `label` according to your needs and fill fudis-dropdown-menu with wanted fudis-dropdown-menu-items.
+
 ```
-<fudis-button 
+<fudis-button
 	[label]="'Menu'"
 	[labelHidden]="true"
 	[size]="'small'"
@@ -31,8 +33,8 @@ Dropdown menu is assembled with `fudis-button`, `fudis-dropdown-menu` and `fudis
 ```
 
 #### Useful info
-Dropdown menu button is often designed to be found on the right side of the view. Thus, default behaviour of the menu is to open and align itself on the left side of the button. Optionally menu can be aligned to open on the right side `<fudis-dropdown-menu [align]="'right'"> ... </fudis-dropdown-menu>`
 
+Dropdown menu button is often designed to be found on the right side of the view. Thus, default behaviour of the menu is to open and align itself on the left side of the button. Optionally menu can be aligned to open on the right side `<fudis-dropdown-menu [align]="'right'"> ... </fudis-dropdown-menu>`
 
 ### Accessibility
 
@@ -40,8 +42,8 @@ Dropdown menu button is often designed to be found on the right side of the view
 - Button has visible focus state.
 - Button click can be triggered with mouse as well as keyboard <code>enter</code> and <code>space</code> key.
 - Dropdown menu items can be toggled with <code>arrow down</code> and <code>arrow up</code> keys or <code>tab</code>.
-	- Dropdown menu item click can be triggered with mouse as well as keyboard <code>enter</code> and <code>space</code> key.
-	- Disabled menu items are focusable. State is communicated for screen reader.
+  - Dropdown menu item click can be triggered with mouse as well as keyboard <code>enter</code> and <code>space</code> key.
+  - Disabled menu items are focusable. State is communicated for screen reader.
 
 ### Related components
 

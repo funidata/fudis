@@ -14,27 +14,27 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands';
+import "./commands";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
-import compareSnapshotCommand from 'cypress-image-diff-js/dist/command';
+import compareSnapshotCommand from "cypress-image-diff-js/dist/command";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { RecurseDefaults } from 'cypress-recurse';
+import { RecurseDefaults } from "cypress-recurse";
 
 declare global {
-	namespace Cypress {
-		interface Chainable {
-			compareSnapshot(
-				name: string,
-				testThreshold?: number,
-				retryOptions?: Partial<typeof RecurseDefaults>
-			): Chainable<Element>;
-		}
-	}
+  namespace Cypress {
+    interface Chainable {
+      compareSnapshot(
+        name: string,
+        testThreshold?: number,
+        retryOptions?: Partial<typeof RecurseDefaults>,
+      ): Chainable<Element>;
+    }
+  }
 }
 compareSnapshotCommand();
 
 after(() => {
-	cy.task('generateReport');
+  cy.task("generateReport");
 });
