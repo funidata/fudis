@@ -131,7 +131,7 @@
               },
               {
                 "glob": "*.json",
-                "input": "../ngx-fudis/projects/dev/src/assets/i18n/",
+                "input": "projects/dev/src/assets/i18n/",
                 "output": "./assets/i18n/"
               }
             ],
