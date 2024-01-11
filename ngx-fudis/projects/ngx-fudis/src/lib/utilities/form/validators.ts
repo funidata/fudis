@@ -11,6 +11,11 @@ export interface FudisValidatorFn extends ValidatorFn {
   (control: AbstractControl): FudisValidationErrors | null;
 }
 
+export interface FudisValidatorsDatepickerSettings {
+  value: Date;
+  message: FudisValidatorMessage;
+}
+
 /**
  * Form Control Validators
  */
@@ -23,6 +28,8 @@ export const FudisValidators = {
   max,
   min,
   pattern,
+  datepickerMin,
+  datepickerMax,
 };
 
 /**
@@ -126,5 +133,47 @@ function pattern(regex: string | RegExp, message: FudisValidatorMessage): FudisV
         message,
       },
     };
+  };
+}
+
+/**
+ * Fudis version of matDatepickerMin validator
+ */
+function datepickerMin(settings: FudisValidatorsDatepickerSettings) {
+  return (control: AbstractControl) => {
+    const simplifiedMinDate = settings.value.setHours(0, 0, 0, 0);
+    const simplifiedControlDate = control.value?.setHours(0, 0, 0, 0);
+
+    if (simplifiedMinDate > simplifiedControlDate) {
+      return {
+        datepickerMin: {
+          value: settings.value,
+          message: settings.message,
+        },
+      };
+    }
+
+    return null;
+  };
+}
+
+/**
+ * Fudis version of matDatepickerMax validator
+ */
+function datepickerMax(settings: FudisValidatorsDatepickerSettings) {
+  return (control: AbstractControl) => {
+    const simplifiedMaxDate = settings.value.setHours(0, 0, 0, 0);
+    const simplifiedControlDate = control.value?.setHours(0, 0, 0, 0);
+
+    if (simplifiedMaxDate < simplifiedControlDate) {
+      return {
+        datepickerMax: {
+          value: settings.value,
+          message: settings.message,
+        },
+      };
+    }
+
+    return null;
   };
 }
