@@ -4,7 +4,11 @@ import { ReactiveFormsModule, FormsModule, FormControl, FormGroup } from '@angul
 import { Component, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BehaviorSubject } from 'rxjs';
-import { FudisSelectOption, FudisRadioButtonOption, FudisDateRangeItem } from '../../../types/forms';
+import {
+  FudisSelectOption,
+  FudisRadioButtonOption,
+  FudisDateRangeItem,
+} from '../../../types/forms';
 
 import { FieldSetComponent } from './fieldset.component';
 import { FudisValidators } from '../../../utilities/form/validators';
@@ -145,7 +149,6 @@ class FieldsetExampleComponent {
     control: this.fieldsetExample.controls.endDate,
     label: 'End date',
   };
-
 
   languageOptions: FudisSelectOption[] = [
     // eslint-disable-next-line @typescript-eslint/dot-notation

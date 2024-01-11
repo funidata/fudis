@@ -18,8 +18,8 @@ export const en: FudisTranslationConfig = {
     VALIDATION: {
       START_DATE_INVALID: 'Start date cannot be after end date',
       END_DATE_INVALID: 'End date cannot be before start date',
-      DATE_PARSE: 'Invalid date format'
-    }
+      DATE_PARSE: 'Invalid date format',
+    },
   },
   DIALOG: { CLOSE: 'Close' },
   INPUT_WITH_LANGUAGE_OPTIONS: {
@@ -87,8 +87,8 @@ export const fi: FudisTranslationConfig = {
     VALIDATION: {
       START_DATE_INVALID: 'Alkamispäivän on oltava ennen päättymispäivää',
       END_DATE_INVALID: 'Päättymispäivän on oltava alkamispäivän jälkeen',
-      DATE_PARSE: 'Virheellinen päivämäärä formaatti'
-    }
+      DATE_PARSE: 'Virheellinen päivämäärä formaatti',
+    },
   },
   DIALOG: { CLOSE: 'Sulje' },
   INPUT_WITH_LANGUAGE_OPTIONS: {
@@ -156,8 +156,8 @@ export const sv: FudisTranslationConfig = {
     VALIDATION: {
       START_DATE_INVALID: 'Startdatumet måste vara före slutdatumet',
       END_DATE_INVALID: 'Slutdatumet måste vara efter startdatumet',
-      DATE_PARSE: 'Datumet format är felaktigt'
-    }
+      DATE_PARSE: 'Datumet format är felaktigt',
+    },
   },
   DIALOG: { CLOSE: 'Stäng' },
   INPUT_WITH_LANGUAGE_OPTIONS: {

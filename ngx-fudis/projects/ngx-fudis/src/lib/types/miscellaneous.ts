@@ -78,10 +78,10 @@ export interface FudisTranslationConfig {
     SWITCH_MULTIYEAR_VIEW: string;
     // Error message keys for universal datepicker and date-range validation
     VALIDATION: {
-      START_DATE_INVALID: string,
-      END_DATE_INVALID: string,
-      DATE_PARSE: string,
-    }
+      START_DATE_INVALID: string;
+      END_DATE_INVALID: string;
+      DATE_PARSE: string;
+    };
   };
   DIALOG: {
     // Label for close button

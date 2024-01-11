@@ -34,8 +34,10 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
     private _translationService: FudisTranslationService,
   ) {
     effect(() => {
-      this._startDateInvalid = this._translationService.getTranslations()().DATEPICKER.VALIDATION.START_DATE_INVALID;
-      this._endDateInvalid = this._translationService.getTranslations()().DATEPICKER.VALIDATION.END_DATE_INVALID;
+      this._startDateInvalid =
+        this._translationService.getTranslations()().DATEPICKER.VALIDATION.START_DATE_INVALID;
+      this._endDateInvalid =
+        this._translationService.getTranslations()().DATEPICKER.VALIDATION.END_DATE_INVALID;
     });
   }
 
@@ -166,8 +168,14 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
 
     // Compare only dates, do not take hours into account
     if (startDate && endDate && startDate.setHours(0, 0, 0, 0) > endDate.setHours(0, 0, 0, 0)) {
-      this.startDate.control.setErrors({ ...startDateErrors, datepickerStartDateInvalid: { message: this._startDateInvalid } });
-      this.endDate.control.setErrors({ ...endDateErrors, datepickerEndDateInvalid: { message: this._endDateInvalid } });
+      this.startDate.control.setErrors({
+        ...startDateErrors,
+        datepickerStartDateInvalid: { message: this._startDateInvalid },
+      });
+      this.endDate.control.setErrors({
+        ...endDateErrors,
+        datepickerEndDateInvalid: { message: this._endDateInvalid },
+      });
     } else if (startDateErrors || endDateErrors) {
       if (startDateErrors) {
         delete startDateErrors['datepickerStartDateInvalid'];
