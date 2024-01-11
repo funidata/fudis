@@ -5,7 +5,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockComponent } from 'ng-mocks';
 import { Component } from '@angular/core';
-import { getElement, sortClasses } from '../../../../../utilities/tests/utilities';
+import { getElement, sortClasses } from '../../../utilities/tests/utilities';
 import { AlertComponent } from './alert.component';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';

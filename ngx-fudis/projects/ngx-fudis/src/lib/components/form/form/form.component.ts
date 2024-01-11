@@ -16,7 +16,10 @@ import { ActionsDirective } from '../../../directives/content-projection/actions
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
-import { FudisFormErrorSummaryLink } from '../../../types/forms';
+import {
+  FudisFormErrorSummaryLink,
+  FudisFormErrorSummaryUpdateStrategy,
+} from '../../../types/forms';
 import { DialogComponent } from '../../dialog/dialog.component';
 
 @Component({
@@ -83,7 +86,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   /**
    * Dynamic update of Error Summary
    */
-  @Input() errorSummaryLiveRemove: boolean = false;
+  @Input() errorSummaryLiveUpdate: FudisFormErrorSummaryUpdateStrategy = 'none';
 
   /**
    * If Error Summary is visible. Usually set on click of form submit button.

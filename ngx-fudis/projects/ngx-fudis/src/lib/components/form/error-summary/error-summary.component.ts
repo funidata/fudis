@@ -21,6 +21,7 @@ import {
   FudisFormErrorSummarySection,
   FudisFormErrorSummaryLink,
   FudisErrorSummaryParent,
+  FudisFormErrorSummaryUpdateStrategy,
 } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisTranslationConfig } from '../../../types/miscellaneous';
@@ -42,7 +43,7 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
 
       this._attentionText = this._translations().ICON.ATTENTION;
 
-      this.getErrors();
+      this._fetchErrors();
     });
   }
 
@@ -66,7 +67,7 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
   /**
    * Dynamic update of visible errors in the summary
    */
-  @Input() liveRemove: boolean = false;
+  @Input() liveUpdate: FudisFormErrorSummaryUpdateStrategy = 'none';
 
   /**
    * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.
@@ -93,24 +94,23 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
    */
   private _numberOfFocusTries: number = 0;
 
-  public getErrors(): void {
-    const fetchedErrors: Signal<FudisFormErrorSummaryObject> = this.liveRemove
-      ? this._errorSummaryService.getDynamicErrors()
-      : this._errorSummaryService.getVisibleErrors();
+  private _fetchErrors(): void {
+    this.updateSummaryContent(this._errorSummaryService.getVisibleErrors());
+  }
 
+  public updateSummaryContent(content: Signal<FudisFormErrorSummaryObject>): void {
     this._visibleErrorList = [];
 
     const fieldsets: FudisFormErrorSummarySection[] = this._errorSummaryService.getFieldsetList();
 
     const sections: FudisFormErrorSummarySection[] = this._errorSummaryService.getSectionList();
 
-    Object.keys(fetchedErrors()).forEach((item) => {
-      const errorId = fetchedErrors()[item].id;
+    Object.keys(content()).forEach((item) => {
+      const errorId = content()[item].id;
       if (this.parentComponent?.querySelector(`#${errorId}`)) {
-        const { label } = fetchedErrors()[item];
-        // TODO: fix any typing
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        Object.values(fetchedErrors()[item].errors).forEach((error: any) => {
+        const { label } = content()[item];
+
+        Object.values(content()[item].errors).forEach((error: string) => {
           const parentFieldset = fieldsets.find((fieldset) => {
             if (this.parentComponent?.querySelector(`#${fieldset.id} #${errorId}`)) {
               return fieldset;
@@ -160,6 +160,8 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
 
   ngAfterViewInit(): void {
     setTimeout(() => {
+      this._errorSummaryService.updateStrategy = this.liveUpdate;
+
       this._errorSummaryService.reloadErrors();
     }, 200);
   }
@@ -172,6 +174,8 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
       };
 
       this._errorSummaryService.addErrorSummaryParent(this._errorSummaryParentInfo);
+
+      this._errorSummaryService.updateStrategy = this.liveUpdate;
     }
   }
 

@@ -5,6 +5,7 @@ import {
   FudisFormErrorSummarySection,
   FudisErrorSummaryParent,
   FudisFormErrorSummaryRemoveItem,
+  FudisFormErrorSummaryUpdateStrategy,
 } from '../../../types/forms';
 
 /**
@@ -21,11 +22,6 @@ export class FudisInternalErrorSummaryService {
    * Visible errors
    */
   private _signalCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
-
-  /**
-   * Dynamic errors
-   */
-  private _signalDynamicCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
 
   /**
    * List of parent forms of the error summary list
@@ -46,6 +42,22 @@ export class FudisInternalErrorSummaryService {
    * Info to Error Summary Component if it should move user focus to updated list or not
    */
   private _focusToSummaryList: boolean = false;
+
+  private _updateStrategy: FudisFormErrorSummaryUpdateStrategy = 'none';
+
+  /**
+   * Getter for _updateStrategy
+   */
+  get updateStrategy(): FudisFormErrorSummaryUpdateStrategy {
+    return this._updateStrategy;
+  }
+
+  /**
+   * Setter for _updateStrategy
+   */
+  set updateStrategy(value: FudisFormErrorSummaryUpdateStrategy) {
+    this._updateStrategy = value;
+  }
 
   /**
    * Getter for _focusToSummaryList
@@ -90,13 +102,6 @@ export class FudisInternalErrorSummaryService {
   }
 
   /**
-   * Returns a readonly list of dynamic errors
-   */
-  getDynamicErrors(): Signal<FudisFormErrorSummaryObject> {
-    return this._signalDynamicCurrentErrorList.asReadonly();
-  }
-
-  /**
    * Adds a new error to the list of current errors
    * If new error item has a matching id on the list, new error is tied to that error list object
    * @param newError Form error summary item
@@ -133,7 +138,7 @@ export class FudisInternalErrorSummaryService {
 
     this._currentErrorList = currentErrors;
 
-    if (langUpdated) {
+    if (langUpdated || this._updateStrategy === 'all') {
       this._focusToSummaryList = false;
       this.reloadErrors();
     }
@@ -153,7 +158,10 @@ export class FudisInternalErrorSummaryService {
 
       this._currentErrorList = currentErrors;
 
-      this._signalDynamicCurrentErrorList.set(currentErrors);
+      if (this._updateStrategy === 'all' || this._updateStrategy === 'onRemove') {
+        this._focusToSummaryList = false;
+        this._signalCurrentErrorList.set(this._currentErrorList);
+      }
     }
   }
 
@@ -218,7 +226,6 @@ export class FudisInternalErrorSummaryService {
    */
   public reloadErrors(): void {
     this._signalCurrentErrorList.set(this._currentErrorList);
-    this._signalDynamicCurrentErrorList.set(this._currentErrorList);
   }
 
   /**

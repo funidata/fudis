@@ -28,6 +28,10 @@ import { GuidanceComponent } from '../guidance/guidance.component';
 import { LabelComponent } from '../label/label.component';
 import { TextInputComponent } from '../text-input/text-input.component';
 import { SpacingDirective } from '../../../directives/spacing/spacing.directive';
+import { getTrimmedTextContent } from '../../../utilities/tests/utilities';
+import { SectionComponent } from '../../section/section.component';
+import { ExpandableComponent } from '../../expandable/expandable.component';
+// import { phl } from '@angular-extensions/pretty-html-log';
 
 @Component({
   selector: 'fudis-mock-form-component',
@@ -38,7 +42,7 @@ import { SpacingDirective } from '../../../directives/spacing/spacing.directive'
     [id]="'unique-form-example-1'"
     [errorSummaryLinkType]="'href'"
     [errorSummaryHelpText]="'There were errors you need to fix'"
-    [errorSummaryLiveRemove]="toggleLive"
+    [errorSummaryLiveUpdate]="toggleLive"
     [errorSummaryVisible]="errorSummaryVisible"
   >
     <ng-template fudisContent type="form">
@@ -56,6 +60,23 @@ import { SpacingDirective } from '../../../directives/spacing/spacing.directive'
           />
         </ng-template>
       </fudis-fieldset>
+      <fudis-section [errorSummaryBreadcrumb]="true" [title]="'Section title'">
+        <ng-template fudisContent type="section">
+          <fudis-text-input [control]="formGroup.controls.section" [label]="'Section input'" />
+        </ng-template>
+      </fudis-section>
+      <fudis-expandable
+        [closed]="false"
+        [errorSummaryBreadcrumb]="true"
+        [title]="'Expandable title'"
+      >
+        <ng-template fudisContent type="expandable">
+          <fudis-text-input
+            [control]="formGroup.controls.expandable"
+            [label]="'Expandable input'"
+          />
+        </ng-template>
+      </fudis-expandable>
     </ng-template>
   </fudis-form>`,
 })
@@ -69,8 +90,13 @@ class MockFormComponent {
   toggleLive: boolean = false;
 
   formGroup = new FormGroup({
-    name: new FormControl(null, FudisValidators.required('Missing your name')),
-    email: new FormControl(null, FudisValidators.required('Missing email contact')),
+    name: new FormControl<string | null>(null, FudisValidators.required('Missing your name')),
+    email: new FormControl<string | null>(null, FudisValidators.required('Missing email contact')),
+    section: new FormControl<string | null>(
+      'short',
+      FudisValidators.minLength(10, 'Too short input'),
+    ),
+    expandable: new FormControl<string | null>('test', FudisValidators.email('Not an email')),
   });
 
   reloadErrors(): void {
@@ -94,6 +120,7 @@ describe('ErrorSummaryComponent', () => {
         BodyTextComponent,
         ButtonComponent,
         ContentDirective,
+        ExpandableComponent,
         ErrorSummaryComponent,
         FieldSetComponent,
         FormComponent,
@@ -107,6 +134,7 @@ describe('ErrorSummaryComponent', () => {
         LinkComponent,
         MockFormComponent,
         NotificationComponent,
+        SectionComponent,
         SpacingDirective,
         TextInputComponent,
         ValidatorErrorMessageComponent,
@@ -127,23 +155,90 @@ describe('ErrorSummaryComponent', () => {
     wrapperComponent = wrapperFixture.componentInstance;
     wrapperFixture.detectChanges();
     wrapperComponent.reloadErrors();
+
+    const helpText = 'Errors belong in a museum';
+    component.helpText = helpText;
+    component.parentComponent = wrapperComponent.formRef.formElement as HTMLFormElement;
+    fixture.detectChanges();
   });
 
-  fdescribe('Contents', () => {
-    // TODO: Test error summary ul list and its contents
-    it('input attributes', () => {
-      const helpText = 'Errors belong in a museum';
+  describe('Contents', () => {
+    it('helper texts are displayed properly', () => {
+      const renderedHelpText = getTrimmedTextContent(
+        fixture.nativeElement.querySelector('fudis-body-text p'),
+      );
 
-      component.helpText = helpText;
-      component.parentComponent = wrapperComponent.formRef.formElement as HTMLFormElement;
+      // Hidden icon text + Help Text
+      expect(renderedHelpText).toBe('Attention: Errors belong in a museum');
+    });
 
+    it.only('should remove errors dynamically without reload', () => {
+      wrapperComponent.formRef.errorSummaryLiveUpdate = 'onRemove';
+      wrapperFixture.detectChanges();
+      wrapperComponent.formGroup.controls.name.patchValue('Chewbacca');
+      wrapperFixture.detectChanges();
       fixture.detectChanges();
 
-      //debug(fixture.nativeElement);
+      const errorList = fixture.nativeElement.querySelectorAll(
+        'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
+      );
 
-      //console.log(fixture.debugElement);
-      // console.log(wrapperFixture.nativeElement);
-      //console.log(fixture.nativeElement.querySelector('p'));
+      expect(errorList.length).toEqual(3);
+    });
+
+    it('error list have right amount of list elements', () => {
+      const errorList = fixture.nativeElement.querySelectorAll(
+        'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
+      );
+
+      expect(errorList.length).toEqual(4);
+    });
+    it('error list have right messages', () => {
+      const errorList = fixture.nativeElement.querySelectorAll(
+        'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
+      );
+
+      const firstMessage = getTrimmedTextContent(errorList[0]);
+      const secondMessage = getTrimmedTextContent(errorList[1]);
+      const thirdMessage = getTrimmedTextContent(errorList[2]);
+      const forthMessage = getTrimmedTextContent(errorList[3]);
+
+      expect(firstMessage).toEqual('Form information / Name: Missing your name');
+      expect(secondMessage).toEqual('Form information / Contact email: Missing email contact');
+      expect(thirdMessage).toEqual('Section title / Section input: Too short input');
+      expect(forthMessage).toEqual('Expandable title / Expandable input: Not an email');
+    });
+    it('should update error messages when control is updated and errors loaded', () => {
+      wrapperComponent.formGroup.controls.name.patchValue('Chewbacca');
+      wrapperFixture.detectChanges();
+      wrapperComponent.reloadErrors();
+      fixture.detectChanges();
+
+      const errorList = fixture.nativeElement.querySelectorAll(
+        'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
+      );
+
+      expect(errorList.length).toEqual(3);
+    });
+
+    it('should not update error messages without reload', () => {
+      wrapperComponent.formGroup.controls.name.patchValue('Chewbacca');
+      wrapperFixture.detectChanges();
+      fixture.detectChanges();
+
+      let errorList = fixture.nativeElement.querySelectorAll(
+        'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
+      );
+
+      expect(errorList.length).toEqual(4);
+
+      wrapperComponent.reloadErrors();
+      fixture.detectChanges();
+
+      errorList = fixture.nativeElement.querySelectorAll(
+        'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
+      );
+      expect(errorList.length).toEqual(3);
     });
   });
 });

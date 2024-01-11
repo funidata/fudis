@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ErrorSummaryComponent } from './error-summary.component';
 import readme from './readme.mdx';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
-import { FudisRadioButtonOption } from '../../../types/forms';
+import { FudisFormErrorSummaryUpdateStrategy, FudisRadioButtonOption } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 
@@ -23,12 +23,12 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
     [errorSummaryHelpText]="
       'Toggle live remove button to see errors disappear when input value is corrected'
     "
-    [errorSummaryLiveRemove]="toggleLive"
+    [errorSummaryLiveUpdate]="toggleLive"
     [errorSummaryVisible]="errorSummaryVisible"
   >
     <ng-template fudisActions type="form">
       <fudis-body-text fudisSpacing [marginRight]="'sm'" [marginTop]="'xs'">
-        Live remove is {{ toggleLive ? 'ON' : 'OFF' }}
+        Live remove is "{{ toggleLive }}"
       </fudis-body-text>
       <fudis-button
         [label]="'Toggle live remove'"
@@ -90,7 +90,7 @@ class ErrorSummaryExampleComponent {
 
   errorSummaryVisible: boolean = false;
 
-  toggleLive: boolean = false;
+  toggleLive: FudisFormErrorSummaryUpdateStrategy = 'none';
 
   formExample = new FormGroup({
     courseBooks: new FormGroup(
@@ -133,8 +133,13 @@ class ErrorSummaryExampleComponent {
   }
 
   toggleLiveRemove(): void {
-    this.toggleLive = !this.toggleLive;
-    this._errorSummaryService.reloadErrors();
+    if (this.toggleLive === 'none') {
+      this.toggleLive = 'onRemove';
+    } else if (this.toggleLive === 'onRemove') {
+      this.toggleLive = 'all';
+    } else {
+      this.toggleLive = 'none';
+    }
   }
 }
 
