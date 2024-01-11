@@ -4,7 +4,7 @@ import { ReactiveFormsModule, FormsModule, FormControl, FormGroup } from '@angul
 import { Component, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BehaviorSubject } from 'rxjs';
-import { FudisSelectOption, FudisRadioButtonOption, FudisFormErrors } from '../../../types/forms';
+import { FudisSelectOption, FudisRadioButtonOption, FudisDateRangeItem } from '../../../types/forms';
 
 import { FieldSetComponent } from './fieldset.component';
 import { FudisValidators } from '../../../utilities/form/validators';
@@ -62,7 +62,6 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
             [helpText]="'So that students can ask for more time on their homework.'"
             [errorMsg]="errorEmail"
           />
-
           <fudis-radio-button-group
             [title]="labelCourseType"
             [id]="'radio-button-group-1'"
@@ -70,57 +69,14 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
             [control]="fieldsetExample.controls['courseType']"
             [errorMsg]="errorCourseType"
           />
-          <fudis-grid [columns]="'1fr 1fr'">
-            <fudis-datepicker
-              [label]="labelStartDate"
-              [id]="'date-picker-1'"
-              [size]="'sm'"
-              [helpText]="'You have to start from somewhere'"
-              [errorMsg]="errorStartdate"
-              [control]="fieldsetExample.controls['startDate']"
-              [minDate]="minDate"
-              [maxDate]="
-                fieldsetExample.controls['endDate'].value
-                  ? fieldsetExample.controls['endDate'].value
-                  : maxDate
-              "
-            />
-            <fudis-datepicker
-              [label]="labelEndDate"
-              [id]="'date-picker-2'"
-              [size]="'sm'"
-              [helpText]="'You have to end it to something'"
-              [errorMsg]="errorEnddate"
-              [control]="fieldsetExample.controls['endDate']"
-              [disabled]="
-                !fieldsetExample.controls['startDate'].value &&
-                !fieldsetExample.controls['startDate'].valid
-              "
-              [minDate]="fieldsetExample.controls['startDate'].value"
-            />
-          </fudis-grid>
+          <fudis-date-range [startDate]="startDate" [endDate]="endDate" />
         </fudis-grid>
       </ng-template>
     </fudis-fieldset>
   `,
 })
 class FieldsetExampleComponent {
-  errorStartdate: FudisFormErrors = {
-    matDatepickerMin: 'Start date cannot be earlier than this day.',
-    matDatepickerParse: 'Date should be in dd.mm.yyyy format.',
-    matDatepickerMax: 'Start date cannot be after end date.',
-  };
-
-  errorEnddate: FudisFormErrors = {
-    matDatepickerMin: 'End date cannot be before start date.',
-    matDatepickerParse: 'Date should be in dd.mm.yyyy format.',
-  };
-
   fieldsetId = 'unique-fieldset-id';
-
-  minDate = new Date();
-
-  maxDate = new Date(2023, 31, 5);
 
   title = 'Fill in course information';
 
@@ -172,10 +128,24 @@ class FieldsetExampleComponent {
       FudisValidators.email('Input must be an email address.'),
       FudisValidators.minLength(5, 'Email should be at least 5 characters.'),
     ]),
-    startDate: new FormControl('', FudisValidators.required('Start date is missing.')),
-    endDate: new FormControl('', FudisValidators.required('End date is missing.')),
+    startDate: new FormControl<Date | null>(
+      null,
+      FudisValidators.required('Start date is missing.'),
+    ),
+    endDate: new FormControl<Date | null>(null, FudisValidators.required('End date is missing.')),
     courseType: new FormControl('', FudisValidators.required('Course type must be selected.')),
   });
+
+  startDate: FudisDateRangeItem = {
+    control: this.fieldsetExample.controls.startDate,
+    label: 'Start date',
+  };
+
+  endDate: FudisDateRangeItem = {
+    control: this.fieldsetExample.controls.endDate,
+    label: 'End date',
+  };
+
 
   languageOptions: FudisSelectOption[] = [
     // eslint-disable-next-line @typescript-eslint/dot-notation

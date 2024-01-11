@@ -290,19 +290,11 @@ class FormContentExampleComponent implements OnInit {
   dateRangeStartDate: FudisDateRangeItem = {
     control: this.formExample.controls.startDate,
     label: 'Start date',
-    errorMsg: {
-      matDatepickerParse: 'Start date is not proper date',
-      matStartDateInvalid: 'Start date cannot be after end date',
-    },
   };
 
   dateRangeEndDate: FudisDateRangeItem = {
     control: this.formExample.controls.endDate,
     label: 'End date',
-    errorMsg: {
-      matDatepickerParse: 'End date is not proper date',
-      matEndDateInvalid: 'End date cannot be before start date',
-    },
   };
 
   private _closed: boolean = true;
