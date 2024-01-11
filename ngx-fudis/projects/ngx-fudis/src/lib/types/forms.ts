@@ -125,9 +125,6 @@ export interface FudisDateRangeItem {
   control: FormControl<Date | null>;
   label: string;
   helpText?: string;
-  errorMsg?: FudisFormErrors;
-  minDate?: Date | null;
-  maxDate?: Date | null;
   tooltip?: string;
 }
 
