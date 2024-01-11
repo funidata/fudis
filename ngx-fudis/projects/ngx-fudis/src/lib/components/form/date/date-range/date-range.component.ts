@@ -8,11 +8,13 @@ import {
   OnInit,
   ViewChild,
   ViewEncapsulation,
+  effect,
 } from '@angular/core';
 import { distinctUntilChanged } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 import { untilDestroyed } from '../../../../utilities/untilDestroyed';
 import { FudisIdService } from '../../../../services/id/id.service';
+import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisDateRangeItem } from '../../../../types/forms';
 import {
   DateEndErrorDirective,
@@ -29,7 +31,13 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
   constructor(
     @Inject(DOCUMENT) private _document: Document,
     private _idService: FudisIdService,
-  ) {}
+    private _translationService: FudisTranslationService,
+  ) {
+    effect(() => {
+      this._startDateInvalid = this._translationService.getTranslations()().DATEPICKER.VALIDATION.START_DATE_INVALID;
+      this._endDateInvalid = this._translationService.getTranslations()().DATEPICKER.VALIDATION.END_DATE_INVALID;
+    });
+  }
 
   @ViewChild('dateRangeRef') _dateRangeRef: ElementRef;
 
@@ -67,6 +75,16 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
    * If setting height to equal is completed
    */
   protected _heightSet: boolean = false;
+
+  /**
+   * Fudis translation for invalid start date
+   */
+  protected _startDateInvalid: string;
+
+  /**
+   * Fudis translation for invalid end date
+   */
+  protected _endDateInvalid: string;
 
   /**
    * Counter for number of tries setting equal height to Date Picker
@@ -137,7 +155,7 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
   }
 
   /**
-   * Check and set, if start date is set to after end date.s
+   * Check and set, if start date is set to after end date
    */
   checkDateCrossings(): void {
     const startDateErrors = this.startDate.control?.errors;
@@ -146,18 +164,18 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
     const startDate = this.startDate.control?.value;
     const endDate = this.endDate.control?.value;
 
-    // Compate only dates, do not take hours into account.
+    // Compare only dates, do not take hours into account
     if (startDate && endDate && startDate.setHours(0, 0, 0, 0) > endDate.setHours(0, 0, 0, 0)) {
-      this.startDate.control.setErrors({ ...startDateErrors, matStartDateInvalid: true });
-      this.endDate.control.setErrors({ ...endDateErrors, matEndDateInvalid: true });
+      this.startDate.control.setErrors({ ...startDateErrors, datepickerStartDateInvalid: { message: this._startDateInvalid } });
+      this.endDate.control.setErrors({ ...endDateErrors, datepickerEndDateInvalid: { message: this._endDateInvalid } });
     } else if (startDateErrors || endDateErrors) {
       if (startDateErrors) {
-        delete startDateErrors['matStartDateInvalid'];
+        delete startDateErrors['datepickerStartDateInvalid'];
         this.startDate.control.setErrors({ ...startDateErrors });
         this.startDate.control.updateValueAndValidity();
       }
       if (endDateErrors) {
-        delete endDateErrors['matEndDateInvalid'];
+        delete endDateErrors['datepickerEndDateInvalid'];
         this.endDate.control.setErrors({ ...endDateErrors });
         this.endDate.control.updateValueAndValidity();
       }
