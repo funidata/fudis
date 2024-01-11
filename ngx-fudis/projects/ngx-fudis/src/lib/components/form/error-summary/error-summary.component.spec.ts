@@ -31,6 +31,7 @@ import { SpacingDirective } from '../../../directives/spacing/spacing.directive'
 import { getTrimmedTextContent } from '../../../utilities/tests/utilities';
 import { SectionComponent } from '../../section/section.component';
 import { ExpandableComponent } from '../../expandable/expandable.component';
+
 // import { phl } from '@angular-extensions/pretty-html-log';
 
 @Component({
@@ -106,6 +107,12 @@ class MockFormComponent {
   }
 }
 
+const getErrorList = (fixture: ComponentFixture<ErrorSummaryComponent>): NodeList | null => {
+  return fixture.nativeElement.querySelectorAll(
+    'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
+  );
+};
+
 describe('ErrorSummaryComponent', () => {
   let component: ErrorSummaryComponent;
   let fixture: ComponentFixture<ErrorSummaryComponent>;
@@ -172,26 +179,63 @@ describe('ErrorSummaryComponent', () => {
       expect(renderedHelpText).toBe('Attention: Errors belong in a museum');
     });
 
-    it.only('should remove errors dynamically without reload', () => {
+    it('should have Fudis Link attributes correctly with router link', () => {
+      const linkElementFragment = fixture.nativeElement
+        .querySelector('ul li fudis-link a')
+        .getAttribute('ng-reflect-fragment');
+
+      const linkElementHref = fixture.nativeElement
+        .querySelector('ul li fudis-link a')
+        .getAttribute('href');
+
+      expect(linkElementFragment).toEqual('fudis-text-input-1');
+      expect(linkElementHref).toEqual('/#fudis-text-input-1');
+    });
+
+    it('should have Fudis Link attributes correctly with href link', () => {
+      component.linkType = 'href';
+      fixture.detectChanges();
+
+      const linkElementFragment = fixture.nativeElement
+        .querySelector('ul li fudis-link a')
+        .getAttribute('ng-reflect-fragment');
+
+      const linkElementHref = fixture.nativeElement
+        .querySelector('ul li fudis-link a')
+        .getAttribute('href');
+
+      expect(linkElementFragment).toEqual(null);
+      expect(linkElementHref).toEqual('#fudis-text-input-1');
+    });
+
+    it('should remove errors dynamically without reload', () => {
       wrapperComponent.formRef.errorSummaryLiveUpdate = 'onRemove';
       wrapperFixture.detectChanges();
       wrapperComponent.formGroup.controls.name.patchValue('Chewbacca');
       wrapperFixture.detectChanges();
       fixture.detectChanges();
 
-      const errorList = fixture.nativeElement.querySelectorAll(
-        'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
-      );
+      expect(getErrorList(fixture)?.length).toEqual(3);
+    });
 
-      expect(errorList.length).toEqual(3);
+    it('should add & remove errors dynamically without reload', () => {
+      wrapperComponent.formRef.errorSummaryLiveUpdate = 'all';
+      wrapperFixture.detectChanges();
+      wrapperComponent.formGroup.controls.name.patchValue('Chewbacca');
+      wrapperFixture.detectChanges();
+      fixture.detectChanges();
+
+      expect(getErrorList(fixture)?.length).toEqual(3);
+
+      wrapperComponent.formGroup.controls.name.patchValue(null);
+      fixture.detectChanges();
+      wrapperFixture.detectChanges();
+
+      expect(getErrorList(fixture)?.length).toEqual(4);
     });
 
     it('error list have right amount of list elements', () => {
-      const errorList = fixture.nativeElement.querySelectorAll(
-        'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
-      );
-
-      expect(errorList.length).toEqual(4);
+      expect(getErrorList(fixture)?.length).toEqual(4);
     });
     it('error list have right messages', () => {
       const errorList = fixture.nativeElement.querySelectorAll(
@@ -214,11 +258,7 @@ describe('ErrorSummaryComponent', () => {
       wrapperComponent.reloadErrors();
       fixture.detectChanges();
 
-      const errorList = fixture.nativeElement.querySelectorAll(
-        'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
-      );
-
-      expect(errorList.length).toEqual(3);
+      expect(getErrorList(fixture)?.length).toEqual(3);
     });
 
     it('should not update error messages without reload', () => {
@@ -226,19 +266,12 @@ describe('ErrorSummaryComponent', () => {
       wrapperFixture.detectChanges();
       fixture.detectChanges();
 
-      let errorList = fixture.nativeElement.querySelectorAll(
-        'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
-      );
-
-      expect(errorList.length).toEqual(4);
+      expect(getErrorList(fixture)?.length).toEqual(4);
 
       wrapperComponent.reloadErrors();
       fixture.detectChanges();
 
-      errorList = fixture.nativeElement.querySelectorAll(
-        'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
-      );
-      expect(errorList.length).toEqual(3);
+      expect(getErrorList(fixture)?.length).toEqual(3);
     });
   });
 });
