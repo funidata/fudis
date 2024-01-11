@@ -50,11 +50,8 @@ const Template: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
       [label]="label"
       [id]="id"
       [helpText]="helpText"
-      [errorMsg]="errorMsg"
       [control]="control"
       [disabled]="disabled"
-      [minDate]="minDate"
-      [maxDate]="maxDate"
       [tooltip]="tooltip"
       [tooltipPosition]="tooltipPosition"
       [tooltipToggle]="tooltipToggle"
@@ -72,7 +69,6 @@ Datepicker.args = {
   id: 'example-id-for-datepicker-required-validation',
   label: 'Select a date',
   helpText: 'Choose your favourite date.',
-  errorMsg: { matDatepickerParse: 'Your date does is not a real date.' },
   tooltip: 'Is it your birthday?',
   tooltipPosition: 'left',
   tooltipToggle: true,
@@ -83,7 +79,6 @@ export const DatepickerPreselectedDate = Template.bind({});
 DatepickerPreselectedDate.args = {
   label: 'Select a date',
   helpText: 'Choose your favourite date.',
-  errorMsg: { matDatepickerParse: 'Your date does is not a real date.' },
   tooltip: 'Is it your birthday?',
   tooltipPosition: 'left',
   tooltipToggle: true,
@@ -103,11 +98,14 @@ WithMinMaxValidator.args = {
   id: 'example-id-for-datepicker-min-max-validator',
   label: 'Select a date',
   helpText: 'Choose a date between the allowed range.',
-  errorMsg: {
-    matDatepickerMin: 'Date is not inside the allowed range.',
-    matDatepickerMax: 'Date is not inside the allowed range.',
-  },
-  control: new FormControl(null),
-  minDate: new Date(2023, 2, 13),
-  maxDate: new Date(2023, 2, 26),
+  control: new FormControl<Date | null>(null, [
+    FudisValidators.datepickerMin({
+      value: new Date('2024-01-01'),
+      message: 'Date cannot be before 1.1.2024',
+    }),
+    FudisValidators.datepickerMax({
+      value: new Date('2024-02-01'),
+      message: 'Date cannot be after 1.2.2024',
+    }),
+  ]),
 };
