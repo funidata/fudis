@@ -24,7 +24,11 @@ import { FudisTranslationService } from '../../../../services/translation/transl
 import { DatepickerCustomDateAdapter } from '../date-common/datepicker-custom-date-adapter';
 import { updateLocale, updateMatDatePickerTranslations } from '../date-common/utilities';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
-import { hasRequiredValidator } from '../../../../utilities/form/getValidators';
+import {
+  getMaxDateFromValidator,
+  getMinDateFromValidator,
+  hasRequiredValidator,
+} from '../../../../utilities/form/getValidators';
 
 @Component({
   selector: 'fudis-datepicker',
@@ -56,6 +60,7 @@ export class DatepickerComponent
 
     effect(() => {
       this._adapter.setLocale(updateLocale(this._translationService.getLanguage()));
+      this._dateParseError = this._translations().DATEPICKER.VALIDATION.DATE_PARSE;
 
       this._datepickerIntl = updateMatDatePickerTranslations(
         this._translations(),
@@ -81,12 +86,32 @@ export class DatepickerComponent
   /**
    * Allowed range for minimun date
    */
-  @Input() minDate: Date | null | undefined;
+  protected _minDate: Date | null | undefined;
 
   /**
    * Allowed range for maximum date
    */
-  @Input() maxDate: Date | null | undefined;
+  protected _maxDate: Date | null | undefined;
+
+  /**
+   * Fudis translation for date parse error message
+   */
+  protected _dateParseError: string;
+
+  protected _setInvalidDateErrors(): void {
+    const dateErrors = this.control?.errors;
+
+    if (dateErrors?.['matDatepickerParse']) {
+      this.control.setErrors({
+        ...dateErrors,
+        datepickerDateParse: { message: this._dateParseError },
+      });
+    } else if (dateErrors) {
+      delete dateErrors['datepickerDateParse'];
+      this.control.setErrors({ ...dateErrors });
+      this.control.updateValueAndValidity();
+    }
+  }
 
   ngOnInit(): void {
     this._setInputId('datepicker');
@@ -96,6 +121,8 @@ export class DatepickerComponent
     this._changeDetectorRef.detectChanges();
 
     this._required = this.required ?? hasRequiredValidator(this.control);
+    this._minDate = getMinDateFromValidator(this.control);
+    this._maxDate = getMaxDateFromValidator(this.control);
   }
 
   ngAfterViewInit(): void {
