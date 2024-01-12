@@ -36,7 +36,6 @@ import readme from './readme.mdx';
       [errorSummaryHelpText]="
         'There are errors in this form. Please address these before trying to submit again.'
       "
-      [errorSummaryUpdate]="false"
       [errorSummaryVisible]="errorSummaryVisible"
     >
       <ng-template fudisHeader>
