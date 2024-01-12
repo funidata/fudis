@@ -7,7 +7,8 @@ import * as DatepickerStories from "./datepicker.stories.ts";
 
 # Datepicker
 
-Fudis-datepicker is build using Angular Material Datepicker as a base. Datepicker allows user to select a date from valid options.
+Fudis Datepicker is build using Angular Material Datepicker as a base. 
+Datepicker allows user to select a date either from calendar dropdown or by typing in the input.
 
 ## Examples
 
@@ -15,11 +16,15 @@ Fudis-datepicker is build using Angular Material Datepicker as a base. Datepicke
 
 ## Usage Guidelines
 
-<br />
+### Mandatory Properties
 
-### Mandatory properties
+Datepicker requires `control` and `label` properties.
 
-Datepicker requires at least `label` and `id` properties for accessibility.
+```
+<fudis-datepicker
+	[label]="'Select a date'"
+	[control]="control" />
+```
 
 ### Validators and Error Handling
 
@@ -28,34 +33,11 @@ Fudis form components use Fudis Validators. See the full documentation on [how t
 If a custom validation is used, read [how to add Error message](/docs/components-form-error-message--documentation).
 
 **Datepicker validators**
-
 - required
+- datepickerMin
+- datepickerMax
 
-### Other validation options
-
-If you need minimum / maximum date selection range, add `min` and/or `max` properties to the component.
-
-Also provide `matDatepickerMin` and `matDatepickerMax` error messages for `errorMsg` property.
-
-For unknown input format provide `matDatepickerParse` value for `errorMsg` property.
-
-```
-<fudis-datepicker
-	[min]="minDate"
-	[max]="maxDate"
-	[errorMsg]="{
-		matDatepickerMin: 'Date cannot be earlier than X.X.XXXX',
-		matDatepickerMax: 'Date cannot be later than X.X.XXX'}
-		matDatepickerParse: 'Your input is not a proper date. Please provide it in DD.MM.YYYY format.'"
->
-</fudis-datepicker>
-```
-
-#### Error Handling
-
-**matDatepickerMin** and/or **matDatepickerMax** error is shown
-
-- if written date is outside the range of min and max
+In addition Fudis has internal validator for date format which prompts error message if Fudis is not satisfied with given date's format.
 
 ## Localization
 
