@@ -18,6 +18,7 @@ Fudis Date Range is component combination of two Datepickers.
 ### Mandatory Properties
 
 Date Range needs both `startDate` and `endDate` objects which follows `FudisDateRangeItem` signature:
+
 ```
 control: FormControl<Date | null>;
 label: string;
@@ -26,11 +27,13 @@ tooltip?: string;
 ```
 
 Example HTML template usage:
+
 ```
 <fudis-date-range [startDate]="startDate" [endDate]="endDate" />
 ```
 
 Example Typescript usage:
+
 ```
   startDate: FudisDateRangeItem = {
     label: 'Start date',
@@ -63,7 +66,7 @@ Example Typescript usage:
 
 ### Date Range Validation
 
-Fudis has two internal validations for dates. First, **date format validator** which prompts error message if Fudis is not satisfied with the given date's format. 
+Fudis has two internal validations for dates. First, **date format validator** which prompts error message if Fudis is not satisfied with the given date's format.
 Second, **date comparison validator** which prompts error message if start date is after end date.
 
 For custom Error Message for start and end dates outside validator errors, please refer to documentation on [Fudis Error Message](/docs/components-form-error-message--documentation#error-message-with-date-range-component) page.

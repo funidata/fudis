@@ -6,7 +6,7 @@ import { Meta } from "@storybook/blocks";
 
 Fudis Form components use two set of validators; **FudisValidators** and **FudisGroupValidators**.
 
-Basic validators (FudisValidators) have the following types: `required`, `email`, `minLength`, `maxLength`,`min`, `max`, `pattern`, `datepickerMin` and `datepickerMax`. 
+Basic validators (FudisValidators) have the following types: `required`, `email`, `minLength`, `maxLength`,`min`, `max`, `pattern`, `datepickerMin` and `datepickerMax`.
 
 Group validators (FudisGroupValidators) have the following types: `atLeastOneRequired`, `min` and `max`.
 
@@ -36,7 +36,7 @@ FudisValidators.email('Input must be an email address.')
 
 ### MinLength and MaxLength Validators
 
-For minLength and maxLength, include `FudisValidators.minLength()` and `FudisValidators.maxLength()` in the form control validator with preferred input length as number and a message parameter as a string or as an observable string. When maxLength validation is used, [Text Input](/docs/components-form-text-input--documentation) and [Text Area](/docs/components-form-text-area--documentation) components disable user from inputing more than allowed length of characters and will have additional maxLength indicator. 
+For minLength and maxLength, include `FudisValidators.minLength()` and `FudisValidators.maxLength()` in the form control validator with preferred input length as number and a message parameter as a string or as an observable string. When maxLength validation is used, [Text Input](/docs/components-form-text-input--documentation) and [Text Area](/docs/components-form-text-area--documentation) components disable user from inputing more than allowed length of characters and will have additional maxLength indicator.
 When using [Dropdown](/docs/components-form-dropdown--documentation) with maxLength validator, error message is prompted when maximum amount of allowed selected options exceeds.
 
 ```
@@ -78,7 +78,6 @@ Validators can be used individually or together to validate single date.
 FudisValidators.datepickerMin({ value: new Date('2024-01-01'), message: 'Start date cannot be before 1.1.2024' })
 FudisValidators.datepickerMax({ value: new Date('2024-10-01'), message: 'End date cannot be after 1.10.2024' })
 ```
-
 
 ## Usage Guidelines for FudisGroupValidators
 
