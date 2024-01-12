@@ -6,9 +6,13 @@ import { Meta } from "@storybook/blocks";
 
 Fudis Form components use two set of validators; **FudisValidators** and **FudisGroupValidators**.
 
-Basic validators (FudisValidators) have the following types: `required`, `email`, `minLength`, `maxLength`,`min`, `max`, `pattern`, `datepickerMin` and `datepickerMax`. Group validators (FudisGroupValidators) have the following types: `atLeastOneRequired`, `min` and `max`.
+Basic validators (FudisValidators) have the following types: `required`, `email`, `minLength`, `maxLength`,`min`, `max`, `pattern`, `datepickerMin` and `datepickerMax`. 
+
+Group validators (FudisGroupValidators) have the following types: `atLeastOneRequired`, `min` and `max`.
 
 ## Usage Guidelines for FudisValidators
+
+These validators are used with Form Control.
 
 ### Required Validator
 
@@ -17,12 +21,6 @@ For required form field, include `FudisValidators.required()` in the form contro
 ```
 FudisValidators.required('This is required field')
 ```
-
-#### Error Handling
-
-**required** error is shown if user input is required and
-
-- if control is touched and - if control value is null
 
 ---
 
@@ -38,19 +36,12 @@ FudisValidators.email('Input must be an email address.')
 
 ### MinLength and MaxLength Validators
 
-For minLength and maxLength, include `FudisValidators.minLength()` and `FudisValidators.maxLength()` in the form control validator with preferred input length as number and a message parameter as a string or as an observable string. When maxLength validation is used, [Text Input](/docs/components-form-text-input--documentation) and [Text Area](/docs/components-form-text-area--documentation) components disable user from inputing more than allowed length of characters and will have additional maxLength indicator. When using [Dropdown](/docs/components-form-dropdown--documentation) with maxLength validator, error message is prompted when maximum amount of allowed selected options exceeds.
+For minLength and maxLength, include `FudisValidators.minLength()` and `FudisValidators.maxLength()` in the form control validator with preferred input length as number and a message parameter as a string or as an observable string. When maxLength validation is used, [Text Input](/docs/components-form-text-input--documentation) and [Text Area](/docs/components-form-text-area--documentation) components disable user from inputing more than allowed length of characters and will have additional maxLength indicator. 
+When using [Dropdown](/docs/components-form-dropdown--documentation) with maxLength validator, error message is prompted when maximum amount of allowed selected options exceeds.
 
 ```
 FudisValidators.maxLength(20, 'Too long email.')
 ```
-
-#### Error Handling
-
-**minLength** and/or **maxLength** errors are shown
-
-- if control is touched and
-  - if control value is not null and
-    - if control value length does not match the given validators length
 
 ---
 
@@ -62,10 +53,6 @@ Min and Max validators are used with form field `[type]="'number'"`. Min and Max
 FudisValidators.max(10, 'Number cannot exceed 10.')
 
 ```
-
-#### Error Handling
-
-**minNumber** and/or **maxNumber** errors are shown - if control is touched and - if control value is not null and - if control value is not respective to given **min** and/or **max** validator values
 
 ---
 
@@ -82,17 +69,16 @@ FudisValidators.pattern(/^[A-Z \d\W]+$/, 'PLEASE USE ONLY LOW CAPS!')
 
 ### DatepickerMin and DatepickerMax Validators
 
-DatepickerMin and DatepickerMax validators can be used with Datepicker and Date-range components. These validators disable dates from the calendar dropdown if they fall outside of given date range.
+DatepickerMin and DatepickerMax validators can be used with Datepicker and Date Range components. These validators disable dates from the calendar dropdown if they fall outside of given date range.
 Needed parameters for both validator objects are `value` as a date and `message` as a string or as an observable string.
 
-Validators can be used individually or together to validate single date. In addition to min and max date validation, Fudis will automatically validate date format to accept only valid dates. Date-range has also date comparison validation which prompts if start date is before end date.
+Validators can be used individually or together to validate single date.
 
 ```
 FudisValidators.datepickerMin({ value: new Date('2024-01-01'), message: 'Start date cannot be before 1.1.2024' })
 FudisValidators.datepickerMax({ value: new Date('2024-10-01'), message: 'End date cannot be after 1.10.2024' })
 ```
 
----
 
 ## Usage Guidelines for FudisGroupValidators
 

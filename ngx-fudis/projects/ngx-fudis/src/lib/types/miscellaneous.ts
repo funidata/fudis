@@ -76,7 +76,7 @@ export interface FudisTranslationConfig {
     NEXT_MULTIYEAR: string;
     SWITCH_MONTH_VIEW: string;
     SWITCH_MULTIYEAR_VIEW: string;
-    // Error message keys for universal datepicker and date-range validation
+    // Error message keys for universal Datepicker and Date Range validation
     VALIDATION: {
       START_DATE_INVALID: string;
       END_DATE_INVALID: string;
