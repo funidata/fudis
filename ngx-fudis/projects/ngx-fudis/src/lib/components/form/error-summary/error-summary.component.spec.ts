@@ -43,7 +43,6 @@ import { ExpandableComponent } from '../../expandable/expandable.component';
     [id]="'unique-form-example-1'"
     [errorSummaryLinkType]="'href'"
     [errorSummaryHelpText]="'There were errors you need to fix'"
-    [errorSummaryUpdate]="toggleLive"
     [errorSummaryVisible]="errorSummaryVisible"
   >
     <ng-template fudisContent type="form">
@@ -82,7 +81,7 @@ import { ExpandableComponent } from '../../expandable/expandable.component';
   </fudis-form>`,
 })
 class MockFormComponent {
-  constructor(private _errorSummaryService: FudisErrorSummaryService) {}
+  constructor(public errorSummaryService: FudisErrorSummaryService) {}
 
   @ViewChild('formRef') formRef: FormComponent;
 
@@ -103,7 +102,7 @@ class MockFormComponent {
   reloadErrors(): void {
     this.formGroup.markAllAsTouched();
     this.errorSummaryVisible = true;
-    this._errorSummaryService.reloadErrors();
+    this.errorSummaryService.reloadErrors();
   }
 }
 
@@ -209,7 +208,7 @@ describe('ErrorSummaryComponent', () => {
     });
 
     it('should remove errors dynamically without reload', () => {
-      wrapperComponent.formRef.errorSummaryUpdate = 'onRemove';
+      wrapperComponent.errorSummaryService.setUpdateStrategy('onRemove');
       wrapperFixture.detectChanges();
       wrapperComponent.formGroup.controls.name.patchValue('Chewbacca');
       wrapperFixture.detectChanges();
@@ -219,7 +218,7 @@ describe('ErrorSummaryComponent', () => {
     });
 
     it('should add & remove errors dynamically without reload', () => {
-      wrapperComponent.formRef.errorSummaryUpdate = 'all';
+      wrapperComponent.errorSummaryService.setUpdateStrategy('all');
       wrapperFixture.detectChanges();
       wrapperComponent.formGroup.controls.name.patchValue('Chewbacca');
       wrapperFixture.detectChanges();

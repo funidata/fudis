@@ -23,7 +23,6 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
     [errorSummaryHelpText]="
       'Toggle live remove button to see errors disappear when input value is corrected'
     "
-    [errorSummaryUpdate]="toggleLive"
     [errorSummaryVisible]="errorSummaryVisible"
   >
     <ng-template fudisActions type="form">
@@ -133,12 +132,15 @@ class ErrorSummaryExampleComponent {
   }
 
   toggleLiveRemove(): void {
-    if (this.toggleLive === 'reloadOnly') {
-      this.toggleLive = 'onRemove';
-    } else if (this.toggleLive === 'onRemove') {
-      this.toggleLive = 'all';
+    if (this._errorSummaryService.updateStrategy === 'reloadOnly') {
+      this._errorSummaryService.setUpdateStrategy('onRemove');
+      this.toggleLive = this._errorSummaryService.updateStrategy;
+    } else if (this._errorSummaryService.updateStrategy === 'onRemove') {
+      this._errorSummaryService.setUpdateStrategy('all');
+      this.toggleLive = this._errorSummaryService.updateStrategy;
     } else {
-      this.toggleLive = 'reloadOnly';
+      this._errorSummaryService.setUpdateStrategy('reloadOnly');
+      this.toggleLive = this._errorSummaryService.updateStrategy;
     }
   }
 }

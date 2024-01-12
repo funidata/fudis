@@ -179,4 +179,14 @@ describe('InternalErrorSummaryService', () => {
 
     expect(service['_errorSummaryParentList']()).toEqual([]);
   });
+
+  it('should set and return update strategy', () => {
+    expect(service.updateStrategy).toEqual('reloadOnly');
+    service.updateStrategy = 'all';
+    expect(service.updateStrategy).toEqual('all');
+    service.updateStrategy = 'onRemove';
+    expect(service.updateStrategy).toEqual('onRemove');
+    service.updateStrategy = 'reloadOnly';
+    expect(service.updateStrategy).toEqual('reloadOnly');
+  });
 });

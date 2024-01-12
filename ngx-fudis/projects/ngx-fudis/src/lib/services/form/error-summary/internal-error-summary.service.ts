@@ -13,6 +13,7 @@ import {
  */
 @Injectable({ providedIn: 'root' })
 export class FudisInternalErrorSummaryService {
+  constructor() {}
   /**
    * Current errors
    */
@@ -43,17 +44,20 @@ export class FudisInternalErrorSummaryService {
    */
   private _focusToSummaryList: boolean = false;
 
+  /**
+   * Update strategy of Error Summary
+   */
   private _updateStrategy: FudisFormErrorSummaryUpdateStrategy = 'reloadOnly';
 
   /**
-   * Getter for _updateStrategy
+   * Getter for _updateStrategy. Used by public Error Summary service.
    */
   get updateStrategy(): FudisFormErrorSummaryUpdateStrategy {
     return this._updateStrategy;
   }
 
   /**
-   * Setter for _updateStrategy
+   * Setter for _updateStrategy. Used by public Error Summary service.
    */
   set updateStrategy(value: FudisFormErrorSummaryUpdateStrategy) {
     this._updateStrategy = value;

@@ -21,7 +21,6 @@ import {
   FudisFormErrorSummarySection,
   FudisFormErrorSummaryLink,
   FudisErrorSummaryParent,
-  FudisFormErrorSummaryUpdateStrategy,
 } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisTranslationConfig } from '../../../types/miscellaneous';
@@ -63,11 +62,6 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
    * Type of the clickable error link
    */
   @Input() linkType: FudisFormErrorSummaryLink = 'router';
-
-  /**
-   * Dynamic update of visible errors in the summary
-   */
-  @Input() liveUpdate: FudisFormErrorSummaryUpdateStrategy = 'reloadOnly';
 
   /**
    * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.
@@ -160,8 +154,6 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this._errorSummaryService.updateStrategy = this.liveUpdate;
-
       this._errorSummaryService.reloadErrors();
     }, 200);
   }
@@ -174,8 +166,6 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
       };
 
       this._errorSummaryService.addErrorSummaryParent(this._errorSummaryParentInfo);
-
-      this._errorSummaryService.updateStrategy = this.liveUpdate;
     }
   }
 

@@ -4,7 +4,7 @@ import { Meta } from "@storybook/blocks";
 
 # Error Summary Service
 
-## Functions
+## Features
 
 ### Reload Errors
 
@@ -44,6 +44,20 @@ protected _submitButtonClick():void {
 	}
 }
 
+```
+
+### Update Strategy
+
+By default Error Summary updates only when calling Reload Errors function. All options are:
+
+- `reloadOnly` (default): Error Summary list updates only when calling
+- `onRemove`: Updates Error Summary on reload and removes errors when user corrects one of the visibile errors.
+- `all`: Updates Error Summary dynamically when errors are added, removed or when reload is called
+
+To set Update Strategy, call service's setter function. E. g. to `all` with:
+
+```
+this._service.setUpdateStrategy('all')
 ```
 
 ## Related components

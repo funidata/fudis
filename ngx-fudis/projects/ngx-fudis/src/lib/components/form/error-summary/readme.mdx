@@ -18,17 +18,13 @@ To set Error Summary visibility. By default set to `false` and is meant to set `
 
 Mandatory help text displayed in Error Summary before listing individual errors.
 
-### errorSummaryUpdate
-
-Error Summary has three update strategies:
-
-- `reloadOnly` (default): Error Summary list updates only when calling [Reload Errors](/docs/services-error-summary--documentation).
-- `onRemove`: Updates Error Summary on reload and removes errors when user corrects one of the visibile errors.
-- `all`: Updates Error Summary dynamically when errors are added or removed or reload is called
-
 ### errorSummaryLinkType ('router' | 'href')
 
 Type of the clickable error link in Error Summary. Defaults to Angular router link.
+
+### Update strategies
+
+Error Summary has three update strategies. Check [Error Summary documentation](/docs/services-error-summary--documentation) for more info.
 
 ## Related Services
 

@@ -8,6 +8,7 @@ describe('ErrorSummaryService', () => {
   beforeEach(() => {
     const spy = {
       reloadErrors: jest.fn(),
+      updateStrategy: 'reloadOnly',
     };
 
     TestBed.configureTestingModule({
@@ -17,6 +18,7 @@ describe('ErrorSummaryService', () => {
       ],
     });
     service = TestBed.inject(FudisErrorSummaryService);
+    // internalService = TestBed.inject(FudisInternalErrorSummaryService);
 
     jest.spyOn(service, 'reloadErrors').mockImplementation(() => {});
   });
@@ -29,5 +31,15 @@ describe('ErrorSummaryService', () => {
     service.reloadErrors();
 
     expect(service.reloadErrors).toHaveBeenCalledWith();
+  });
+
+  it('should set and return update strategy', () => {
+    expect(service.updateStrategy).toEqual('reloadOnly');
+    service.setUpdateStrategy('all');
+    expect(service.updateStrategy).toEqual('all');
+    service.setUpdateStrategy('onRemove');
+    expect(service.updateStrategy).toEqual('onRemove');
+    service.setUpdateStrategy('reloadOnly');
+    expect(service.updateStrategy).toEqual('reloadOnly');
   });
 });
