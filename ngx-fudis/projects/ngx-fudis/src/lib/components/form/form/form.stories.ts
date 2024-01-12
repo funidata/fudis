@@ -9,7 +9,6 @@ import { BehaviorSubject } from 'rxjs';
 import {
   FudisSelectOption,
   FudisRadioButtonOption,
-  FudisFormErrors,
   FudisDateRangeItem,
 } from '../../../types/forms';
 
@@ -133,10 +132,7 @@ import readme from './readme.mdx';
                         </fudis-checkbox-group>
                         <fudis-datepicker
                           [label]="'Start date'"
-                          [id]="'date-picker-1'"
-                          [size]="'md'"
                           [helpText]="'You have to start from somewhere'"
-                          [errorMsg]="errorImportantDate"
                           [control]="formExample.controls['importantDate']"
                         >
                           <fudis-error-message
@@ -219,10 +215,6 @@ class FormContentExampleComponent implements OnInit {
     { key: 'Key', value: 'THX-1138' },
     { key: 'Another important person', value: 'Mara Jade' },
   ];
-
-  errorImportantDate: FudisFormErrors = {
-    matDatepickerParse: 'Date should be in dd.mm.yyyy format.',
-  };
 
   formExample = new FormGroup({
     name: new FormGroup(
