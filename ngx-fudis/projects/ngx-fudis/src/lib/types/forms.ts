@@ -100,6 +100,7 @@ export type FudisErrorSummaryParent = {
 export type FudisFormErrorSummaryList = {
   id: string;
   message: string;
+  element: HTMLElement | null;
 };
 
 export type FudisFormErrorSummaryObjectItemErrors = {

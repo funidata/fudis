@@ -92,8 +92,35 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
     this.updateSummaryContent(this._errorSummaryService.getVisibleErrors());
   }
 
+  private test(): string {
+    return 'moi';
+  }
+
+  private _sortErrorOrder(a: FudisFormErrorSummaryList, b: FudisFormErrorSummaryList): 0 | -1 | 1 {
+    if (a.id === b.id) {
+      return 0;
+    }
+
+    if (a.element && b.element) {
+      const position = a.element.compareDocumentPosition(b.element);
+
+      if (
+        position & Node.DOCUMENT_POSITION_FOLLOWING ||
+        position & Node.DOCUMENT_POSITION_CONTAINED_BY
+      ) {
+        return -1;
+      } else if (
+        position & Node.DOCUMENT_POSITION_PRECEDING ||
+        position & Node.DOCUMENT_POSITION_CONTAINS
+      ) {
+        return 1;
+      }
+    }
+    return 0;
+  }
+
   public updateSummaryContent(content: Signal<FudisFormErrorSummaryObject>): void {
-    this._visibleErrorList = [];
+    const newErrorList: FudisFormErrorSummaryList[] = [];
 
     const fieldsets: FudisFormErrorSummarySection[] = this._errorSummaryService.getFieldsetList();
 
@@ -125,18 +152,22 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
 
           const cleanedError = error.replace(/[:!?]$/, '');
 
-          this._visibleErrorList.push({
+          newErrorList.push({
             id: errorId,
             message: `${parentSectionString}${parentFieldsetString}${label}: ${cleanedError}`,
+            element: this._document.getElementById(errorId),
           });
         });
       }
     });
 
-    this._changeDetectorRef.detectChanges();
+    if (this._document) {
+      this._visibleErrorList = newErrorList.sort(this._sortErrorOrder);
+      this._changeDetectorRef.detectChanges();
 
-    if (this._errorSummaryService.focusToSummaryList) {
-      this.focusToErrorSummary();
+      if (this._errorSummaryService.focusToSummaryList) {
+        this.focusToErrorSummary();
+      }
     }
   }
 
