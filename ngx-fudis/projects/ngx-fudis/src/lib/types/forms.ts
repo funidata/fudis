@@ -38,9 +38,6 @@ export type FudisFormErrors = {
   max?: string;
   email?: string;
   pattern?: string;
-  matDatepickerMin?: string;
-  matDatepickerMax?: string;
-  matDatepickerParse?: string;
   [key: string]: string | undefined;
 };
 
