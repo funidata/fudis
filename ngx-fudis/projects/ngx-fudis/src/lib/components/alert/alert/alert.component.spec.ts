@@ -1,4 +1,3 @@
-/* eslint-disable max-classes-per-file */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MatDialogModule } from '@angular/material/dialog';

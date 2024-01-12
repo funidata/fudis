@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { inject, Injectable } from '@angular/core';
 import { Translation, TranslocoLoader } from '@ngneat/transloco';
 import { HttpClient } from '@angular/common/http';

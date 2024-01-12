@@ -324,11 +324,9 @@ class FormContentExampleComponent implements OnInit {
 
     if (currentLang === 'fi') {
       this._translationService.setLanguage('en');
-      // eslint-disable-next-line no-console
       console.log('Fudis internal language is now: EN');
     } else {
       this._translationService.setLanguage('fi');
-      // eslint-disable-next-line no-console
       console.log('Fudis internal language is now: FI');
     }
   }
