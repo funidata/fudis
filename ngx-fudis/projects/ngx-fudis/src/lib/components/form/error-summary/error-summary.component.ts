@@ -67,7 +67,7 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
   /**
    * Dynamic update of visible errors in the summary
    */
-  @Input() liveUpdate: FudisFormErrorSummaryUpdateStrategy = 'none';
+  @Input() liveUpdate: FudisFormErrorSummaryUpdateStrategy = 'reloadOnly';
 
   /**
    * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.

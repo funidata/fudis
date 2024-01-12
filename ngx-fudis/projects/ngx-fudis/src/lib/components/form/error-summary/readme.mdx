@@ -18,12 +18,13 @@ To set Error Summary visibility. By default set to `false` and is meant to set `
 
 Mandatory help text displayed in Error Summary before listing individual errors.
 
-### errorSummaryLiveUpdate (boolean)
+### errorSummaryUpdate
 
-By default set to `false`, meaning Error Summary list updates only when calling [Reload Errors](/docs/services-error-summary--documentation).
-If this property is set to `true`, Error Summary removes errors dynamically when user corrects invalid fields.
+Error Summary has three update strategies:
 
-**Note!** This will NOT dynamically add new errors to Error Summary; it only removes those listed when reload was called.
+- `reloadOnly` (default): Error Summary list updates only when calling [Reload Errors](/docs/services-error-summary--documentation).
+- `onRemove`: Updates Error Summary on reload and removes errors when user corrects one of the visibile errors.
+- `all`: Updates Error Summary dynamically when errors are added or removed or reload is called
 
 ### errorSummaryLinkType ('router' | 'href')
 

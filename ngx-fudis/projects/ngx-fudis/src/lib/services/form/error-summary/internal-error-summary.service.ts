@@ -43,7 +43,7 @@ export class FudisInternalErrorSummaryService {
    */
   private _focusToSummaryList: boolean = false;
 
-  private _updateStrategy: FudisFormErrorSummaryUpdateStrategy = 'none';
+  private _updateStrategy: FudisFormErrorSummaryUpdateStrategy = 'reloadOnly';
 
   /**
    * Getter for _updateStrategy

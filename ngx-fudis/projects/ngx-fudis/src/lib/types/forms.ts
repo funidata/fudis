@@ -149,4 +149,4 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
 
 export type FudisFormErrorSummaryLink = 'router' | 'href';
 
-export type FudisFormErrorSummaryUpdateStrategy = 'none' | 'all' | 'onRemove';
+export type FudisFormErrorSummaryUpdateStrategy = 'reloadOnly' | 'all' | 'onRemove';

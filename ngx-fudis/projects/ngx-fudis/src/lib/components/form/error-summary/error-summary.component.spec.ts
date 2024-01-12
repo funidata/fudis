@@ -39,11 +39,11 @@ import { ExpandableComponent } from '../../expandable/expandable.component';
   template: ` <fudis-form
     #formRef
     [titleLevel]="1"
-    [title]="'Example form for error summary'"
+    [title]="'Example Form with Error Summary'"
     [id]="'unique-form-example-1'"
     [errorSummaryLinkType]="'href'"
     [errorSummaryHelpText]="'There were errors you need to fix'"
-    [errorSummaryLiveUpdate]="toggleLive"
+    [errorSummaryUpdate]="toggleLive"
     [errorSummaryVisible]="errorSummaryVisible"
   >
     <ng-template fudisContent type="form">
@@ -209,7 +209,7 @@ describe('ErrorSummaryComponent', () => {
     });
 
     it('should remove errors dynamically without reload', () => {
-      wrapperComponent.formRef.errorSummaryLiveUpdate = 'onRemove';
+      wrapperComponent.formRef.errorSummaryUpdate = 'onRemove';
       wrapperFixture.detectChanges();
       wrapperComponent.formGroup.controls.name.patchValue('Chewbacca');
       wrapperFixture.detectChanges();
@@ -219,7 +219,7 @@ describe('ErrorSummaryComponent', () => {
     });
 
     it('should add & remove errors dynamically without reload', () => {
-      wrapperComponent.formRef.errorSummaryLiveUpdate = 'all';
+      wrapperComponent.formRef.errorSummaryUpdate = 'all';
       wrapperFixture.detectChanges();
       wrapperComponent.formGroup.controls.name.patchValue('Chewbacca');
       wrapperFixture.detectChanges();

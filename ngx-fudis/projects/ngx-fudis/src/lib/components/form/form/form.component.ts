@@ -86,7 +86,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   /**
    * Dynamic update of Error Summary
    */
-  @Input() errorSummaryLiveUpdate: FudisFormErrorSummaryUpdateStrategy = 'none';
+  @Input() errorSummaryUpdate: FudisFormErrorSummaryUpdateStrategy = 'reloadOnly';
 
   /**
    * If Error Summary is visible. Usually set on click of form submit button.
