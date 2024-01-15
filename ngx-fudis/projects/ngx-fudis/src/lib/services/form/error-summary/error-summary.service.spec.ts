@@ -18,7 +18,6 @@ describe('ErrorSummaryService', () => {
       ],
     });
     service = TestBed.inject(FudisErrorSummaryService);
-    // internalService = TestBed.inject(FudisInternalErrorSummaryService);
 
     jest.spyOn(service, 'reloadErrors').mockImplementation(() => {});
   });

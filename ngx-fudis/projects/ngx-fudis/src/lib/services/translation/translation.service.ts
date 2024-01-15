@@ -16,7 +16,7 @@ export class FudisTranslationService {
   /**
    * Set language of repeated texts Fudis uses for its components. E. g. 'required' text of form components or help texts for screen readers for various buttons.
    *
-   * Also as Error Summary Component reloads it's errors if error's language has changed, here is defined component to NOT focus to the updated list on only language change.
+   * Also as Error Summary Component reloads its errors if error's language has changed, here is defined component to NOT focus to the updated list on only language change.
    */
   setLanguage(language: FudisLanguageAbbr): void {
     this._errorSummaryService.focusToSummaryList = false;

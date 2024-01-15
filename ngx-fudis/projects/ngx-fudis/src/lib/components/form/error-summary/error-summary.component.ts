@@ -92,10 +92,6 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
     this.updateSummaryContent(this._errorSummaryService.getVisibleErrors());
   }
 
-  private test(): string {
-    return 'moi';
-  }
-
   private _sortErrorOrder(a: FudisFormErrorSummaryList, b: FudisFormErrorSummaryList): 0 | -1 | 1 {
     if (a.id === b.id) {
       return 0;

@@ -22,15 +22,7 @@ constructor(
 ) {}
 ```
 
-When calling `reloadErrors` function, you can set an optional timeout in milliseconds:
-
-```
-this._service.reloadErrors(); // no timeout
-
-this._service.reloadErrors(100); // sets timeout to 100ms
-```
-
-Recommended pattern is to call above function when user clicks form's submit button which also sets Error Summary as visible in Fudis Form.
+Recommended pattern is to call `reloadErrors` when user clicks form's submit button which also sets Error Summary as visible in Fudis Form.
 
 ```
 protected _submitButtonClick():void {
@@ -60,6 +52,6 @@ To set Update Strategy, call service's setter function. E. g. to `all` with:
 this._service.setUpdateStrategy('all')
 ```
 
-## Related components
+## Related Components
 
-[ErrorSummary](/docs/components-form-error-summary--documentation)
+[Error Summary](/docs/components-form-error-summary--documentation)

@@ -8,7 +8,7 @@ import * as ErrorMessageStories from "./error-message.stories";
 Fudis form component's errors can be achieved in two ways:
 
 - Through form control's validators: [Fudis Validators](/docs/utilities-validators--documentation).
-- As a Error Message child component, for cases when using a validator or creating a custom one can be tricky.
+- As an Error Message child component, for cases when using a validator or creating a custom one can be tricky.
 
 This page is documentation for the latter Error Message component, which binds custom error message to Fudis form components through content projection.
 
@@ -34,7 +34,7 @@ This requires the use of selector `fudis-error-message`. Both Error Message and 
 
 ### Mandatory Properties
 
-The mandatory property for Error Message is `message`. Visibility of the error is handle by Angular `*ngIf` directive.
+The mandatory property for Error Message is `message`. Visibility of the error is handled by Angular `*ngIf` directive.
 
 When `*ngIf` is true, it will adjust the parent's form control by binding a custom validator to it. This will trigger creation of `FudisValidatorErrorMessage` instance, which also sends error data to the Error Summary. If `*ngIf` is set to false again, this will remove the added validator and also remove error from Error Summary.
 
@@ -46,7 +46,7 @@ Message parameter can be passed either as a string or as an observable string.
 	[label]="'Required text input'">
 	<fudis-error-message
 		*ngIf="errorExistsCondition"
-		[message]="'This is a custom error message has been added with content projection'"
+		[message]="'This is a custom error message which has been added with content projection'"
 		 />
 </fudis-text-input>
 ```

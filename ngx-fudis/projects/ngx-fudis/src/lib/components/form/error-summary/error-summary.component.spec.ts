@@ -32,8 +32,6 @@ import { getTrimmedTextContent } from '../../../utilities/tests/utilities';
 import { SectionComponent } from '../../section/section.component';
 import { ExpandableComponent } from '../../expandable/expandable.component';
 
-// import { phl } from '@angular-extensions/pretty-html-log';
-
 @Component({
   selector: 'fudis-mock-form-component',
   template: ` <fudis-form
@@ -86,8 +84,6 @@ class MockFormComponent {
   @ViewChild('formRef') formRef: FormComponent;
 
   errorSummaryVisible: boolean = false;
-
-  toggleLive: boolean = false;
 
   formGroup = new FormGroup({
     name: new FormControl<string | null>(null, FudisValidators.required('Missing your name')),
@@ -236,6 +232,7 @@ describe('ErrorSummaryComponent', () => {
     it('error list have right amount of list elements', () => {
       expect(getErrorList(fixture)?.length).toEqual(4);
     });
+
     it('error list have right messages', () => {
       const errorList = fixture.nativeElement.querySelectorAll(
         'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
@@ -251,6 +248,7 @@ describe('ErrorSummaryComponent', () => {
       expect(thirdMessage).toEqual('Section title / Section input: Too short input');
       expect(forthMessage).toEqual('Expandable title / Expandable input: Not an email');
     });
+
     it('should update error messages when control is updated and errors loaded', () => {
       wrapperComponent.formGroup.controls.name.patchValue('Chewbacca');
       wrapperFixture.detectChanges();
