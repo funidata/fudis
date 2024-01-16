@@ -147,7 +147,6 @@ function datepickerMin(settings: FudisValidatorsDatepickerSettings) {
     if (simplifiedMinDate > simplifiedControlDate) {
       return {
         datepickerMin: {
-          value: settings.value,
           message: settings.message,
         },
       };
@@ -168,7 +167,6 @@ function datepickerMax(settings: FudisValidatorsDatepickerSettings) {
     if (simplifiedMaxDate < simplifiedControlDate) {
       return {
         datepickerMax: {
-          value: settings.value,
           message: settings.message,
         },
       };
