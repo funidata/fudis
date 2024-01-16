@@ -87,7 +87,7 @@ export const fi: FudisTranslationConfig = {
     VALIDATION: {
       START_DATE_INVALID: 'Alkamispäivän on oltava ennen päättymispäivää',
       END_DATE_INVALID: 'Päättymispäivän on oltava alkamispäivän jälkeen',
-      DATE_PARSE: 'Virheellinen päivämäärä formaatti',
+      DATE_PARSE: 'Virheellinen päivämääräformaatti.',
     },
   },
   DIALOG: { CLOSE: 'Sulje' },
