@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectOptionComponent } from './select-option.component';
 import { SelectGroupComponent } from '../../common/select-group/select-group.component';
 import { SelectComponent } from '../select.component';
-import { SelectOptionBaseDirective } from '../../common/select-option-base/select-option-base.directive';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { defaultOptions } from '../../common/mock_data';
@@ -18,17 +17,18 @@ import { BodyTextComponent } from '../../../../typography/body-text/body-text.co
 import { SelectDropdownComponent } from '../../common/select-dropdown/select-dropdown.component';
 import { FudisSelectOption } from '../../../../../types/forms';
 import { SelectAutocompleteComponent } from '../../common/autocomplete/autocomplete.component';
+import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
 
 @Component({
 	selector: 'fudis-mock-container',
 	template: `<fudis-select #testSelect [label]="'Test Label'" [placeholder]="'Test placeholder'" [control]="control" [size]="'md'">
 	<ng-template fudisContent type="select-options">
-			<fudis-select-option #testOption *ngFor="let option of defaultOptions" [data]="option"></fudis-select-option>
+			<fudis-select-option *ngFor="let option of testOptions" #testOption [data]="option"></fudis-select-option>
 	</ng-template>
 </fudis-select>`,
 })
 class MockContainerComponent {
-	data: FudisSelectOption[] = []; 
+	testOptions: FudisSelectOption[] = defaultOptions; 
 	control: FormControl = new FormControl(null);
 
 	@ViewChild('testOption') testOption: SelectOptionComponent;
@@ -44,14 +44,18 @@ describe('SelectOptionComponent', () => {
   beforeEach(async() => {
     await TestBed.configureTestingModule({
       declarations: [
+				ContentDirective,
 				SelectComponent, 
 				SelectOptionComponent,
 				SelectGroupComponent, 
-				SelectDropdownComponent,
+				SelectDropdownComponent, 
 				MockContainerComponent,
 				SelectAutocompleteComponent,
-				GuidanceComponent, IconComponent, LabelComponent, BodyTextComponent],
-			providers: [FudisIdService, FudisTranslationService, SelectOptionBaseDirective],
+				GuidanceComponent,
+				IconComponent,
+				LabelComponent,
+				BodyTextComponent],
+			providers: [FudisIdService, FudisTranslationService ],
 			imports:[ReactiveFormsModule]
     }).compileComponents();
 
@@ -63,18 +67,15 @@ describe('SelectOptionComponent', () => {
 
 
   // TODO: create tests
-  fit('should create', () => {
-		containerComponent.data = defaultOptions;
+  it('should create', () => {
 		containerComponent.control = new FormControl(defaultOptions[4], FudisValidators.required('For testing purposes, please choose a pet'));
 		fixture.detectChanges();
 		containerComponent.testSelect.ngOnInit();
 		containerComponent.testSelect.ngAfterViewInit();
+		containerComponent.testSelect.openDropdown();
+		
 		fixture.detectChanges();
-		// jest.spyOn(containerComponent.testOption['_clickOption'], 'click');
 
-		// containerComponent.testOption.ngOnInit();
-		containerComponent.control.markAsTouched;
-		console.log(containerComponent.control);
-		// expect(containerComponent.testOption['_clickOption'].click).toHaveBeenCalled();
+		// phl(fixture.nativeElement);
   });
 });
