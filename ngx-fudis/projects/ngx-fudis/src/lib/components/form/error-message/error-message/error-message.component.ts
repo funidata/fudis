@@ -125,7 +125,7 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
   private _parentGroup: InputWithLanguageOptionsComponent | CheckboxGroupComponent;
 
   /**
-   * Custom intance of FudisValidator
+   * Custom instance of FudisValidator
    */
   private _customValidatorInstance: FudisValidatorFn;
 

@@ -107,19 +107,18 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
     /**
      * Subscribe to control value changes, so we can trigger start date and end date comparison
      */
-    if (this.startDate?.control && this.endDate?.control) {
-      this.startDate.control.valueChanges
-        .pipe(distinctUntilChanged(), this._untilDestroyed())
-        .subscribe(() => {
-          this.checkDateCrossings();
-        });
+    this.startDate.control.valueChanges
+      .pipe(distinctUntilChanged(), this._untilDestroyed())
+      .subscribe(() => {
+        this.checkDateCrossings();
+      });
 
-      this.endDate.control.valueChanges
-        .pipe(distinctUntilChanged(), this._untilDestroyed())
-        .subscribe(() => {
-          this.checkDateCrossings();
-        });
-    }
+    this.endDate.control.valueChanges
+      .pipe(distinctUntilChanged(), this._untilDestroyed())
+      .subscribe(() => {
+        this.checkDateCrossings();
+      });
+
     this.setLabelHeight();
   }
 

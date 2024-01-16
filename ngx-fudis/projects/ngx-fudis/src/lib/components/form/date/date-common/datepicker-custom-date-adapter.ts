@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { NativeDateAdapter } from '@angular/material/core';
 import { FudisDateInputFormat } from '../../../../types/forms';
+import { parseDate } from './utilities';
 
 @Injectable()
 export class DatepickerCustomDateAdapter extends NativeDateAdapter {
@@ -12,25 +13,7 @@ export class DatepickerCustomDateAdapter extends NativeDateAdapter {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   override parse(value: any): Date | null {
-    // Split input value by non number values. E. g. 25/5/1977 or 25.5.1977 --> [25,5,1977]
-    const valueAsArray = value.split(/[^\d+]+/).filter(Number);
-
-    // Parse input and return new Date(YYYY-MM-DD)
-    if (valueAsArray.length === 3) {
-      return new Date(`${valueAsArray[2]}-${valueAsArray[1]}-${valueAsArray[0]}`);
-    }
-
-    // If no year is provided, assume it is current year
-    if (valueAsArray.length === 2) {
-      const currentYear = new Date().getFullYear();
-      return new Date(`${valueAsArray[1]}-${valueAsArray[0]}-${currentYear}`);
-    }
-
-    if (typeof valueAsArray[0] === 'number') {
-      return new Date(valueAsArray[0]);
-    }
-
-    return null;
+    return parseDate(value);
   }
 
   override format(date: Date, displayFormat: object): string {

@@ -16,8 +16,6 @@
       [matDatepicker]="picker"
       [min]="_minDate"
       [max]="_maxDate"
-      (keyup)="_setInvalidDateErrors()"
-      (blur)="_setInvalidDateErrors()"
       [readonly]="disabled"
       [attr.aria-disabled]="disabled ? true : null"
       class="fudis-datepicker__input"
