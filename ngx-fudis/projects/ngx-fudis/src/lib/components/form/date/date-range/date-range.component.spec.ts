@@ -16,6 +16,7 @@ import { ValidatorErrorMessageComponent } from '../../error-message/validator-er
 import { FudisValidators, TooltipDirective } from '../../../../../public-api';
 import { FudisIdService } from '../../../../services/id/id.service';
 
+// TODO: write tests
 describe('DateRangeComponent', () => {
   let component: DateRangeComponent;
   let fixture: ComponentFixture<DateRangeComponent>;
@@ -44,7 +45,6 @@ describe('DateRangeComponent', () => {
     fixture = TestBed.createComponent(DateRangeComponent);
 
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

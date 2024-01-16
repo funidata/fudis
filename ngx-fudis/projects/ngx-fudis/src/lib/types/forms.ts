@@ -117,12 +117,13 @@ export type FudisCheckboxControl = FormControl<boolean | null | undefined>;
 export interface FudisCheckboxGroupFormGroup {
   [key: string]: FormControl<boolean | null | undefined>;
 }
-
+// TODO: remove every usage of errorMsg for ver 1.0
 export interface FudisDateRangeItem {
   control: FormControl<Date | null>;
   label: string;
   helpText?: string;
   tooltip?: string;
+  errorMsg?: FudisFormErrors;
 }
 
 export const FudisDateInputFormat = {

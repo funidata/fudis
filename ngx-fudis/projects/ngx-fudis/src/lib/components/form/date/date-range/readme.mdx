@@ -32,36 +32,36 @@ Example HTML template usage:
 <fudis-date-range [startDate]="startDate" [endDate]="endDate" />
 ```
 
-Example Typescript usage:
+Example object in TypeScript:
 
 ```
-  startDate: FudisDateRangeItem = {
-    label: 'Start date',
-    helpText: 'Select start date',
-    tooltip: 'Extra information for start date input inside tooltip',
-    control: new FormControl<Date | null>(null, [
-      FudisValidators.required('Start date is required'),
-      FudisValidators.datepickerMin({
-          value: new Date('2024-01-10'),
-          message: 'Start date cannot be earlier than 10.1.2024',
-      }),
-      FudisValidators.datepickerMax({
-        value: new Date('2024-02-10'),
-        message: 'Start date cannot be later than 10.2.2024',
-      }),
-    ]),
-  };
+startDate: FudisDateRangeItem = {
+  label: 'Start date',
+  helpText: 'Select start date',
+  tooltip: 'Extra information for start date input inside tooltip',
+  control: new FormControl<Date | null>(null, [
+    FudisValidators.required('Start date is required'),
+    FudisValidators.datepickerMin({
+        value: new Date('2024-01-10'),
+        message: 'Start date cannot be earlier than 10.1.2024',
+    }),
+    FudisValidators.datepickerMax({
+      value: new Date('2024-02-10'),
+      message: 'Start date cannot be later than 10.2.2024',
+    }),
+  ]),
+};
 
-  endDate: FudisDateRangeItem = {
-    label: 'End date',
-    control: new FormControl<Date | null>(null, [
-      FudisValidators.required('End date is required'),
-      FudisValidators.datepickerMax({
-        value: new Date('2024-03-25'),
-        message: 'End date cannot be later than 25.3.2024',
-      }),
-    ]),
-  };
+endDate: FudisDateRangeItem = {
+  label: 'End date',
+  control: new FormControl<Date | null>(null, [
+    FudisValidators.required('End date is required'),
+    FudisValidators.datepickerMax({
+      value: new Date('2024-03-25'),
+      message: 'End date cannot be later than 25.3.2024',
+    }),
+  ]),
+};
 ```
 
 ### Date Range Validation

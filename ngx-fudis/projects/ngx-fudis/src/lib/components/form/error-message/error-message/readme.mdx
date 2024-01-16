@@ -10,6 +10,8 @@ Fudis form component's errors can be achieved in two ways:
 - Through form control's validators: [Fudis Validators](/docs/utilities-validators--documentation).
 - As a Error Message child component, for cases when using a validator or creating a custom one can be tricky.
 
+If your error message repeats multiple times across your form or application, it is recommended to create your own validator, which 
+
 This page is documentation for the latter Error Message component, which binds custom error message to Fudis form components through content projection.
 
 This requires the use of selector `fudis-error-message`. Both Error Message and Fudis Validator errors create the same UI result and renders errors under the Guidance Component.

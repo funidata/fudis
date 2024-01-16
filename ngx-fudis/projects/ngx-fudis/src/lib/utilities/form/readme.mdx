@@ -6,11 +6,15 @@ import { Meta } from "@storybook/blocks";
 
 Fudis Form components use two set of validators; **FudisValidators** and **FudisGroupValidators**.
 
+For custom application spesific validator, please check 'Custom Validators' section later on this page.
+
 Basic validators (FudisValidators) have the following types: `required`, `email`, `minLength`, `maxLength`,`min`, `max`, `pattern`, `datepickerMin` and `datepickerMax`.
 
 Group validators (FudisGroupValidators) have the following types: `atLeastOneRequired`, `min` and `max`.
 
-## Usage Guidelines for FudisValidators
+# Usage Guidelines for FudisValidators
+
+## Single Form Control Validators with FudisValidators
 
 These validators are used with Form Control.
 
@@ -40,7 +44,7 @@ For minLength and maxLength, include `FudisValidators.minLength()` and `FudisVal
 When using [Dropdown](/docs/components-form-dropdown--documentation) with maxLength validator, error message is prompted when maximum amount of allowed selected options exceeds.
 
 ```
-FudisValidators.maxLength(20, 'Too long email.')
+FudisValidators.maxLength(20, 'Too long input text.')
 ```
 
 ---
@@ -79,7 +83,7 @@ FudisValidators.datepickerMin({ value: new Date('2024-01-01'), message: 'Start d
 FudisValidators.datepickerMax({ value: new Date('2024-10-01'), message: 'End date cannot be after 1.10.2024' })
 ```
 
-## Usage Guidelines for FudisGroupValidators
+## Form Group Validators with FudisGroupValidators
 
 These validators are used with Form Group.
 
@@ -101,3 +105,46 @@ FudisGroupValidators.min({ value: 2, message: 'Pick at least two' })
 FudisGroupValidators.max({ value: 4, message: 'Four is the maximun amount of allowed picks' })
 
 ```
+
+## Custom Validators and Error Messages
+
+If your form component and form control need some other validation, which is not provided by Fudis. You can either:
+
+- Repeating cases: Create a custom validator function
+- Single uses: [Error Message Component](/docs/components-form-error-message--documentation)
+
+If your custom validator logic repeats multiple times, it is recommended to create your own custom validator. If your need is more like an exception of exception, you can just use [Error Message Component](/docs/components-form-error-message--documentation).
+
+### Custom Validator Guidelines
+
+Here is example code of Fudis Required Validator.
+
+```
+type FudisValidatorMessage = Observable<string> | string;
+
+interface FudisValidationErrors extends ValidationErrors {
+  [key: string]: { message: FudisValidatorMessage } | null;
+}
+
+interface FudisValidatorFn extends ValidatorFn {
+  (control: AbstractControl): FudisValidationErrors | null;
+}
+
+function required(message: FudisValidatorMessage): FudisValidatorFn {
+  return (control: AbstractControl) => {
+    if (!Validators.required(control)) {
+      return null;
+    }
+    // Most important line below!
+    return { required: { message } };
+  };
+}
+```
+
+Main principle of Fudis Validators is, that when validator state is invalid, it returns on object which contains a `message` property.
+
+```
+{yourValidatorKey: {message: 'This is your custom error message as a string.'}}
+```
+
+The value type of message can be either a string or an observable. When 'message' property is provided, internal Fudis components and services reads this and displays it alongside other validator error messages. This `message` property is also sent and updated accordingly by [Error Summary](/docs/components-form-error-summary--documentation) used in [Form](/docs/components-form-form--documentation).

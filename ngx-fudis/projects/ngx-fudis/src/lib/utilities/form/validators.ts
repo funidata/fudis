@@ -137,7 +137,7 @@ function pattern(regex: string | RegExp, message: FudisValidatorMessage): FudisV
 }
 
 /**
- * Fudis version of matDatepickerMin validator
+ * Min date validator for Datepicker
  */
 function datepickerMin(settings: FudisValidatorsDatepickerSettings) {
   return (control: AbstractControl) => {
@@ -158,7 +158,7 @@ function datepickerMin(settings: FudisValidatorsDatepickerSettings) {
 }
 
 /**
- * Fudis version of matDatepickerMax validator
+ * Max date validator for Datepicker
  */
 function datepickerMax(settings: FudisValidatorsDatepickerSettings) {
   return (control: AbstractControl) => {

@@ -14,6 +14,7 @@
       [label]="startDate.label"
       [control]="startDate.control"
       [helpText]="startDate.helpText"
+      [errorMsg]="startDate.errorMsg"
     >
       <ng-container *ngIf="startDateError">
         <ng-container *ngTemplateOutlet="startDateError!.templateRef" />
@@ -26,6 +27,7 @@
       [label]="endDate.label"
       [control]="endDate.control"
       [helpText]="endDate.helpText"
+      [errorMsg]="startDate.errorMsg"
     >
       <ng-container *ngIf="endDateError">
         <ng-container *ngTemplateOutlet="endDateError!.templateRef" />
