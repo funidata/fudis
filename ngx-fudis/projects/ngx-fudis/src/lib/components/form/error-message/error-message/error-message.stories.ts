@@ -17,7 +17,8 @@ import { FudisValidators } from '../../../../utilities/form/validators';
         [control]="control"
         [label]="'Required text input'"
       >
-        <fudis-error-message [visible]="_errorExists" [message]="message" />
+        <fudis-error-message *ngIf="_errorExists" [message]="observableMessage" />
+        <fudis-error-message *ngIf="_errorExists" [message]="stringMessage" />
       </fudis-text-input>
       <fudis-button (click)="toggleCustomError()" [label]="'Toggle custom error'" />
       <fudis-button (click)="switchErrorMessage()" [label]="'Switch message content'" />
@@ -29,9 +30,11 @@ class TextInputWithErrorMessageComponent {
     this.control = new FormControl('', FudisValidators.required('This field is required.'));
   }
 
-  message: Subject<string> = new BehaviorSubject<string>(
-    'This is a custom error message coming from fudis-error-message element',
+  observableMessage: Subject<string> = new BehaviorSubject<string>(
+    'This is a custom error observable message coming from fudis-error-message element',
   );
+
+  stringMessage: string = 'This is custom string message';
 
   customErrorExists: FormControlOptions;
 
@@ -47,9 +50,12 @@ class TextInputWithErrorMessageComponent {
 
   switchErrorMessage(): void {
     if (this.originalMessage) {
-      this.message.next('Observable value changed, so now this is me!');
+      this.observableMessage.next('Observable value changed, so now this is me!');
+
+      this.stringMessage = 'String message value changed to this!';
     } else {
-      this.message.next('Custom message can be any string or observable string');
+      this.observableMessage.next('Custom message can be observable string like this');
+      this.stringMessage = 'Or just a plain string like this one!';
     }
 
     this.originalMessage = !this.originalMessage;

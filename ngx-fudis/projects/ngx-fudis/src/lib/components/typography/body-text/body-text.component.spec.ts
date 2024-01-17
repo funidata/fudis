@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { BodyTextComponent } from './body-text.component';
-import { getElement, sortClasses } from '../../../../../utilities/tests/utilities';
+import { getElement, sortClasses } from '../../../utilities/tests/utilities';
 
 describe('BodyTextComponent', () => {
   let component: BodyTextComponent;

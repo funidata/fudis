@@ -4,30 +4,34 @@ import { Meta } from "@storybook/blocks";
 
 # Error Summary
 
-This component is internally bundled with Fudis Form.
+Error Summary is internally bundled with Fudis Form.
+It will appear as Fudis Notification with links in the header section of Fudis Form when invalid form is submitted.
+All the necessary properties are given through [Fudis From](/docs/components-form-form--documentation) `@Input` directives.
 
-## Attributes
-
-Visibility and attributes of this component are set with Fudis Form's `@Input` directives
+## Properties
 
 ### errorSummaryVisible (boolean)
 
-To set Error Summary is visibility. Usually set `true` on click of form submit button. Should be used with [Reload Errors](/docs/services-error-summary--documentation).
+To set Error Summary visibility. By default set to `false` and is meant to set `true` on form submit. Should be used with [Reload Errors](/docs/services-error-summary--documentation).
 
 ### errorSummaryHelpText (string)
 
 Mandatory help text displayed in Error Summary before listing individual errors.
 
-### errorSummaryLiveRemove (boolean)
-
-By default ErrorSummary "refreshes" only when calling [Reload Errors](/docs/services-error-summary--documentation). But when this property is set to `true`, Error Summary removes errors dynamically if user corrects invalid fields.
-
-**Note!** This will NOT dynamically ADD new errors to Error Summary; it only removes those which are listed when reload was called.
-
 ### errorSummaryLinkType ('router' | 'href')
 
 Type of the clickable error link in Error Summary. Defaults to Angular router link.
 
+## Update Strategies
+
+Error Summary has three update strategies. Check [Error Summary Service documentation](/docs/services-error-summary--documentation) for more info.
+
 ## Related Services
 
-[Reload Errors](/docs/services-error-summary--documentation)
+- [Error Summary Service](/docs/services-error-summary--documentation)
+
+## Related Components
+
+- [Notification](/docs/components-notification--documentation)
+- [Link](/docs/components-link--documentation)
+- [Form](/docs/components-form-form--documentation)

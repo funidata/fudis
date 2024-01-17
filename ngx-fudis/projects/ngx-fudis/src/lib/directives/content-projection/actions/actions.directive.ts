@@ -1,9 +1,8 @@
 import { Directive, Input, TemplateRef } from '@angular/core';
 
 /**
- * A marker directive used to tag action buttons that will be rendered inside the components.
+ * A marker directive used to tag action buttons that will be rendered inside the allowed components.
  */
-
 @Directive({ selector: '[fudisActions]' })
 export class ActionsDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}

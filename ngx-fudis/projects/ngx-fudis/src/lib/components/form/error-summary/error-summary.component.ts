@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -22,14 +23,14 @@ import {
   FudisErrorSummaryParent,
 } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FudisLanguageAbbr, FudisTranslationConfig } from '../../../types/miscellaneous';
+import { FudisTranslationConfig } from '../../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-error-summary',
   templateUrl: './error-summary.component.html',
   styleUrls: ['./error-summary.component.scss'],
 })
-export class ErrorSummaryComponent implements OnChanges, OnDestroy {
+export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestroy {
   constructor(
     @Inject(DOCUMENT) private _document: Document,
     private _errorSummaryService: FudisInternalErrorSummaryService,
@@ -39,15 +40,13 @@ export class ErrorSummaryComponent implements OnChanges, OnDestroy {
     effect(() => {
       this._translations = this._translationService.getTranslations();
 
-      this._previousLanguage = this._currentLanguage;
-
       this._attentionText = this._translations().ICON.ATTENTION;
 
-      this.getErrors();
+      this._fetchErrors();
     });
   }
 
-  @ViewChild('focusTarget') focusTarget: ElementRef;
+  @ViewChild('focusTarget') private _focusTarget: ElementRef;
 
   /**
    * FieldSet parent element of this ErrorSummaryComponent
@@ -65,11 +64,6 @@ export class ErrorSummaryComponent implements OnChanges, OnDestroy {
   @Input() linkType: FudisFormErrorSummaryLink = 'router';
 
   /**
-   * Dynamic update of visible errors in the summary
-   */
-  @Input() liveRemove: boolean = false;
-
-  /**
    * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.
    */
   protected _attentionText: string;
@@ -85,16 +79,6 @@ export class ErrorSummaryComponent implements OnChanges, OnDestroy {
   protected _visibleErrorList: FudisFormErrorSummaryList[] = [];
 
   /**
-   * Application language toggle property
-   */
-  private _previousLanguage: FudisLanguageAbbr | undefined = undefined;
-
-  /**
-   * Application language toggle property
-   */
-  private _currentLanguage: FudisLanguageAbbr | undefined = undefined;
-
-  /**
    * Parent form of this Error Summary
    */
   private _errorSummaryParentInfo: FudisErrorSummaryParent;
@@ -104,24 +88,46 @@ export class ErrorSummaryComponent implements OnChanges, OnDestroy {
    */
   private _numberOfFocusTries: number = 0;
 
-  getErrors(): void {
-    const fetchedErrors: Signal<FudisFormErrorSummaryObject> = this.liveRemove
-      ? this._errorSummaryService.getDynamicErrors()
-      : this._errorSummaryService.getVisibleErrors();
+  private _fetchErrors(): void {
+    this.updateSummaryContent(this._errorSummaryService.getVisibleErrors());
+  }
 
-    this._visibleErrorList = [];
+  private _sortErrorOrder(a: FudisFormErrorSummaryList, b: FudisFormErrorSummaryList): 0 | -1 | 1 {
+    if (a.id === b.id) {
+      return 0;
+    }
+
+    if (a.element && b.element) {
+      const position = a.element.compareDocumentPosition(b.element);
+
+      if (
+        position & Node.DOCUMENT_POSITION_FOLLOWING ||
+        position & Node.DOCUMENT_POSITION_CONTAINED_BY
+      ) {
+        return -1;
+      } else if (
+        position & Node.DOCUMENT_POSITION_PRECEDING ||
+        position & Node.DOCUMENT_POSITION_CONTAINS
+      ) {
+        return 1;
+      }
+    }
+    return 0;
+  }
+
+  public updateSummaryContent(content: Signal<FudisFormErrorSummaryObject>): void {
+    const newErrorList: FudisFormErrorSummaryList[] = [];
 
     const fieldsets: FudisFormErrorSummarySection[] = this._errorSummaryService.getFieldsetList();
 
     const sections: FudisFormErrorSummarySection[] = this._errorSummaryService.getSectionList();
 
-    Object.keys(fetchedErrors()).forEach((item) => {
-      const errorId = fetchedErrors()[item].id;
+    Object.keys(content()).forEach((item) => {
+      const errorId = content()[item].id;
       if (this.parentComponent?.querySelector(`#${errorId}`)) {
-        const { label } = fetchedErrors()[item];
-        // TODO: fix any typing
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        Object.values(fetchedErrors()[item].errors).forEach((error: any) => {
+        const { label } = content()[item];
+
+        Object.values(content()[item].errors).forEach((error: string) => {
           const parentFieldset = fieldsets.find((fieldset) => {
             if (this.parentComponent?.querySelector(`#${fieldset.id} #${errorId}`)) {
               return fieldset;
@@ -142,30 +148,29 @@ export class ErrorSummaryComponent implements OnChanges, OnDestroy {
 
           const cleanedError = error.replace(/[:!?]$/, '');
 
-          this._visibleErrorList.push({
+          newErrorList.push({
             id: errorId,
             message: `${parentSectionString}${parentFieldsetString}${label}: ${cleanedError}`,
+            element: this._document.getElementById(errorId),
           });
         });
       }
     });
 
-    this._changeDetectorRef.detectChanges();
+    if (this._document) {
+      this._visibleErrorList = newErrorList.sort(this._sortErrorOrder);
+      this._changeDetectorRef.detectChanges();
 
-    this._currentLanguage = this._translationService.getLanguage();
-
-    if (
-      this._document.activeElement?.classList.contains('fudis-button') &&
-      this._previousLanguage === this._currentLanguage
-    ) {
-      this.focusToErrorSummary();
+      if (this._errorSummaryService.focusToSummaryList) {
+        this.focusToErrorSummary();
+      }
     }
   }
 
   focusToErrorSummary(): void {
-    if (this.focusTarget && this._visibleErrorList.length > 0) {
+    if (this._focusTarget && this._visibleErrorList.length > 0) {
       this._numberOfFocusTries = 0;
-      (this.focusTarget.nativeElement as HTMLDivElement).focus();
+      (this._focusTarget.nativeElement as HTMLDivElement).focus();
     } else if (this._numberOfFocusTries < 100) {
       setTimeout(() => {
         this._numberOfFocusTries += 1;
@@ -174,16 +179,26 @@ export class ErrorSummaryComponent implements OnChanges, OnDestroy {
     }
   }
 
-  ngOnChanges(): void {
-    this._errorSummaryParentInfo = {
-      formId: this.parentComponent.querySelector('.fudis-form')?.getAttribute('id'),
-      parentElement: this.parentComponent,
-    };
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this._errorSummaryService.reloadErrors();
+    }, 200);
+  }
 
-    this._errorSummaryService.addErrorSummaryParent(this._errorSummaryParentInfo);
+  ngOnChanges(): void {
+    if (this.parentComponent) {
+      this._errorSummaryParentInfo = {
+        formId: this.parentComponent.querySelector('.fudis-form')?.getAttribute('id'),
+        parentElement: this.parentComponent,
+      };
+
+      this._errorSummaryService.addErrorSummaryParent(this._errorSummaryParentInfo);
+    }
   }
 
   ngOnDestroy(): void {
-    this._errorSummaryService.removeErrorSummaryParent(this._errorSummaryParentInfo);
+    if (this._errorSummaryParentInfo) {
+      this._errorSummaryService.removeErrorSummaryParent(this._errorSummaryParentInfo);
+    }
   }
 }

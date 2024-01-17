@@ -9,7 +9,7 @@ import { FudisAlertService } from '../../../services/alert/alert.service';
 import { FudisAlert } from '../../../types/miscellaneous';
 import { AlertComponent } from '../alert/alert.component';
 import { IconComponent } from '../../icon/icon.component';
-import { getElement, sortClasses } from '../../../../../utilities/tests/utilities';
+import { getElement, sortClasses } from '../../../utilities/tests/utilities';
 
 describe('AlertGroupComponent', () => {
   let component: AlertGroupComponent;
