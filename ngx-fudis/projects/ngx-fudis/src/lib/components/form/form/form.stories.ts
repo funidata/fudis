@@ -196,7 +196,7 @@ class FormContentExampleComponent implements OnInit {
     private _focusService: FudisFocusService,
   ) {}
 
-  releaseDate: number = new Date('1991-5-1').getTime();
+  releaseDate: number = new Date(1991, 4, 1).getTime();
 
   errorSummaryVisible: boolean = false;
 

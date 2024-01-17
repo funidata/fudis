@@ -148,6 +148,7 @@ function datepickerMin(settings: FudisValidatorsDatepickerSettings) {
       return {
         datepickerMin: {
           message: settings.message,
+          value: settings.value,
         },
       };
     }
@@ -168,6 +169,7 @@ function datepickerMax(settings: FudisValidatorsDatepickerSettings) {
       return {
         datepickerMax: {
           message: settings.message,
+          value: settings.value,
         },
       };
     }

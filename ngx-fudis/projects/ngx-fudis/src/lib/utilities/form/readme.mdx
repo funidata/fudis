@@ -79,8 +79,8 @@ Needed parameters for both validator objects are `value` as a date and `message`
 Validators can be used individually or together to validate single date.
 
 ```
-FudisValidators.datepickerMin({ value: new Date('2024-01-01'), message: 'Start date cannot be before 1.1.2024' })
-FudisValidators.datepickerMax({ value: new Date('2024-10-01'), message: 'End date cannot be after 1.10.2024' })
+FudisValidators.datepickerMin({ value: new Date(2024,0,1), message: 'Start date cannot be before 1.1.2024' })
+FudisValidators.datepickerMax({ value: new Date(2024,9,1), message: 'End date cannot be after 1.10.2024' })
 ```
 
 ## Form Group Validators with FudisGroupValidators

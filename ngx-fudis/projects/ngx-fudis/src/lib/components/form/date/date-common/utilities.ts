@@ -39,21 +39,22 @@ export const updateMatDatePickerTranslations = (
 // TODO: write test
 export const parseDate = (value: string | null | undefined): Date | null => {
   // Split input value by non number values. E. g. 25/5/1977 or 25.5.1977 --> [25,5,1977]
-  const valueAsArray = value ? value.split(/[^\d+]+/).filter(Number) : null;
+  const numberArray: number[] | null = value
+    ? value
+        .split(/[^\d+]+/)
+        .filter(Number)
+        .map(Number)
+    : null;
 
-  // Parse input and return new Date(YYYY-MM-DD)
-  if (valueAsArray?.length === 3) {
-    return new Date(`${valueAsArray[2]}-${valueAsArray[1]}-${valueAsArray[0]}`);
+  // return new Date(year, monthIndex, day)
+
+  if (numberArray?.length === 3) {
+    return new Date(numberArray[2], numberArray[1] - 1, numberArray[0]);
   }
-
   // If no year is provided, assume it is current year
-  if (valueAsArray?.length === 2) {
-    const currentYear = new Date().getFullYear();
-    return new Date(`${valueAsArray[1]}-${valueAsArray[0]}-${currentYear}`);
-  }
-
-  if (typeof valueAsArray?.[0] === 'number') {
-    return new Date(valueAsArray[0]);
+  if (numberArray?.length === 2) {
+    const currentYear: number = new Date().getFullYear();
+    return new Date(currentYear, numberArray[1] - 1, numberArray[0]);
   }
 
   return null;

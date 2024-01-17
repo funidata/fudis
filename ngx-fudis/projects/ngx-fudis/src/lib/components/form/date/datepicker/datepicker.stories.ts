@@ -100,11 +100,11 @@ WithMinMaxValidator.args = {
   helpText: 'Choose a date between the allowed range.',
   control: new FormControl<Date | null>(null, [
     FudisValidators.datepickerMin({
-      value: new Date('2024-01-01'),
+      value: new Date(2024, 0, 1),
       message: 'Date cannot be before 1.1.2024',
     }),
     FudisValidators.datepickerMax({
-      value: new Date('2024-02-01'),
+      value: new Date(2024, 1, 1),
       message: 'Date cannot be after 1.2.2024',
     }),
   ]),
