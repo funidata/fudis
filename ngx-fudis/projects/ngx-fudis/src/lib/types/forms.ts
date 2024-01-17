@@ -100,6 +100,7 @@ export type FudisErrorSummaryParent = {
 export type FudisFormErrorSummaryList = {
   id: string;
   message: string;
+  element: HTMLElement | null;
 };
 
 export type FudisFormErrorSummaryObjectItemErrors = {
@@ -148,3 +149,5 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
 };
 
 export type FudisFormErrorSummaryLink = 'router' | 'href';
+
+export type FudisFormErrorSummaryUpdateStrategy = 'reloadOnly' | 'all' | 'onRemove';

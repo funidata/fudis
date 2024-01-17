@@ -8,17 +8,20 @@ import { FudisLanguageAbbr } from '../../types/miscellaneous';
 @Component({
   selector: 'example-language-service-change-component',
   template: `
-    <fudis-grid [columns]="3" [width]="'sm'"
-      ><fudis-button
+    <fudis-grid [columns]="3" [width]="'sm'">
+      <fudis-button
         [label]="'Change to: fi, sv'"
-        (handleClick)="changeBadgeLanguages(['fi', 'sv'])" />
+        (handleClick)="changeBadgeLanguages(['fi', 'sv'])"
+      />
       <fudis-button
         [label]="'Change to: sv, en'"
-        (handleClick)="changeBadgeLanguages(['sv', 'en'])" />
+        (handleClick)="changeBadgeLanguages(['sv', 'en'])"
+      />
       <fudis-button
         [label]="'Change to: sv, fi, en'"
         (handleClick)="changeBadgeLanguages(['sv', 'fi', 'en'])"
-    /></fudis-grid>
+      />
+    </fudis-grid>
   `,
 })
 class LanguageChangeComponent {
@@ -104,16 +107,15 @@ const DescriptionListTemplate: StoryFn<DescriptionListComponent> = (
 ) => ({
   props: args,
   template: html`<fudis-description-list
-      [variant]="variant"
-      [marginBottom]="'md'"
-      [disableGrid]="disableGrid"
-    >
-      <fudis-description-list-item *ngFor="let item of data">
-        <fudis-dt>{{item.key}}</fudis-dt>
-        <fudis-dd [subHeading]="item.subHeading">{{item.value}} </fudis-dd>
-      </fudis-description-list-item>
-    </fudis-description-list>
-    <hr class="fudis-hr" />`,
+    [variant]="variant"
+    [marginBottom]="'md'"
+    [disableGrid]="disableGrid"
+  >
+    <fudis-description-list-item *ngFor="let item of data">
+      <fudis-dt>{{item.key}}</fudis-dt>
+      <fudis-dd [subHeading]="item.subHeading">{{item.value}} </fudis-dd>
+    </fudis-description-list-item>
+  </fudis-description-list>`,
 });
 
 export const DescriptionList = DescriptionListTemplate.bind({});
