@@ -43,12 +43,10 @@
               >
                 <fudis-error-message
                   *ngIf="customError"
-                  [visible]="testFormGroup.controls['textInput'].touched && customError"
                   [message]="t('form_errors.customErrorMessage')"
                 />
                 <fudis-error-message
                   *ngIf="customError"
-                  [visible]="testFormGroup.controls['textInput'].touched && customError"
                   [message]="'Backend threw an error, it is not totally fault of this component'"
                 />
               </fudis-text-input>

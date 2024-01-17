@@ -9,7 +9,7 @@ import {
   Optional,
   Output,
 } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { AbstractControl } from '@angular/forms';
 import {
   FudisValidationErrors,
@@ -74,11 +74,6 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
   @Input({ required: true }) message: Observable<string> | string;
 
   /**
-   * Required visible boolean for showing the error message
-   */
-  @Input({ required: true }) visible: boolean;
-
-  /**
    * Output for handling a state when error is sent to Error Summary
    */
   @Output() handleAddError = new EventEmitter<FudisValidationErrors>();
@@ -94,19 +89,14 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
   private _id: string;
 
   /**
-   * Disposable object for preserving message as Observable string
-   */
-  private _subscribtion: Subscription;
-
-  /**
    * Boolean determining if Error Message is added
    */
   private _errorAdded: boolean = false;
 
   /**
-   * Error message to include in error summary item
+   * Convert provided string message to an observable so it updates accordingly in the validator
    */
-  private _currentMessage: string;
+  private _messageStringAsObservable: Subject<string>;
 
   /**
    * Possible parent components to used with Error Message
@@ -130,15 +120,14 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
   private _customValidatorInstance: FudisValidatorFn;
 
   ngOnInit(): void {
-    if (typeof this.message !== 'string') {
-      this._subscribtion = this.message!.subscribe((value: string) => {
-        this._currentMessage = value;
-      });
+    if (typeof this.message === 'string') {
+      this._messageStringAsObservable = new BehaviorSubject<string>(this.message);
+      this._customValidatorInstance = this._customControlValidatorFn(
+        this._messageStringAsObservable,
+      );
     } else {
-      this._currentMessage = this.message;
+      this._customValidatorInstance = this._customControlValidatorFn(this.message);
     }
-
-    this._customValidatorInstance = this._customControlValidatorFn(this.message);
 
     if ((this._parent || this._parentGroup) && this.message) {
       this._addControlValidator();
@@ -149,23 +138,12 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
     /**
      * Update validator message if message is a string and not observable
      */
-    if (this.visible && typeof this.message === 'string') {
-      this._currentMessage = this.message;
-    }
-    /**
-     * Always remove error, if visible is false
-     */
-    if (this.visible) {
-      this._addControlValidator();
-    } else {
-      this._removeValidator();
+    if (this._messageStringAsObservable && typeof this.message === 'string') {
+      this._messageStringAsObservable.next(this.message);
     }
   }
 
   ngOnDestroy(): void {
-    if (this._subscribtion) {
-      this._subscribtion.unsubscribe();
-    }
     this._removeValidator();
   }
 
@@ -179,12 +157,13 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private _addControlValidator(): void {
-    if (this._parent && this.visible && this._currentMessage) {
+    if (this._parent) {
       this._errorAdded = true;
       this._parent.control.addValidators(this._customValidatorInstance);
       this._parent.control.updateValueAndValidity();
+
       this.handleAddError.emit({ [this._id]: { message: this.message } });
-    } else if (this._parentGroup && this.visible && this._currentMessage) {
+    } else if (this._parentGroup) {
       this._errorAdded = true;
       this._parentGroup.formGroup.addValidators(this._customValidatorInstance);
       this._parentGroup.formGroup.updateValueAndValidity();

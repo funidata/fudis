@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import { Injectable } from '@angular/core';
 import { NativeDateAdapter } from '@angular/material/core';
 import { FudisDateInputFormat } from '../../../../types/forms';

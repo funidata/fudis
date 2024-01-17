@@ -65,6 +65,9 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
    */
   @Input() titleSize: FudisHeadingSize = 'xl';
 
+  /**
+   * Help text positioned under form title
+   */
   @Input() helpText: string;
 
   /**
@@ -76,11 +79,6 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
    * Badge text
    */
   @Input() badgeText: string | null;
-
-  /**
-   * Dynamic update of Error Summary
-   */
-  @Input() errorSummaryLiveRemove: boolean = false;
 
   /**
    * If Error Summary is visible. Usually set on click of form submit button.
@@ -115,5 +113,9 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
     } else {
       this.id = this._idService.getNewId('form');
     }
+  }
+
+  public get formElement(): HTMLFormElement | undefined {
+    return this._formElement;
   }
 }
