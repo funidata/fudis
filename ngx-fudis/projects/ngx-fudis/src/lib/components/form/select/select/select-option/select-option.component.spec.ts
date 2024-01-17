@@ -20,118 +20,125 @@ import { ContentDirective } from '../../../../../directives/content-projection/c
 import { By } from '@angular/platform-browser';
 
 @Component({
-	selector: 'fudis-mock-container',
-	template: `<fudis-select #testSelect [label]="'Test Label'" [placeholder]="'Test placeholder'" [control]="control" [size]="'md'">
-	<ng-template fudisContent type="select-options">
-			<fudis-select-option *ngFor="let option of testOptions" #testOption [data]="option"></fudis-select-option>
-	</ng-template>
-</fudis-select>`,
+  selector: 'fudis-mock-container',
+  template: `<fudis-select
+    #testSelect
+    [label]="'Test Label'"
+    [placeholder]="'Test placeholder'"
+    [control]="control"
+    [size]="'md'"
+  >
+    <ng-template fudisContent type="select-options">
+      <fudis-select-option
+        *ngFor="let option of testOptions"
+        #testOption
+        [data]="option"
+      ></fudis-select-option>
+    </ng-template>
+  </fudis-select>`,
 })
 class MockContainerComponent {
-	testOptions: FudisSelectOption[] = defaultOptions; 
-	control: FormControl = new FormControl(null);
+  testOptions: FudisSelectOption[] = defaultOptions;
+  control: FormControl = new FormControl(null);
 
-	@ViewChild('testOption') testOption: SelectOptionComponent;
-	@ViewChild('testSelect') testSelect: SelectComponent;
-
+  @ViewChild('testOption') testOption: SelectOptionComponent;
+  @ViewChild('testSelect') testSelect: SelectComponent;
 }
 
 describe('SelectOptionComponent', () => {
-	let containerComponent: MockContainerComponent;
+  let containerComponent: MockContainerComponent;
   let fixture: ComponentFixture<SelectOptionComponent> | ComponentFixture<MockContainerComponent>;
 
-
-  beforeEach(async() => {
+  beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-				ContentDirective,
-				SelectComponent, 
-				SelectOptionComponent,
-				SelectGroupComponent, 
-				SelectDropdownComponent, 
-				MockContainerComponent,
-				SelectAutocompleteComponent,
-				GuidanceComponent,
-				IconComponent,
-				LabelComponent,
-				BodyTextComponent],
-			providers: [FudisIdService, FudisTranslationService ],
-			imports:[ReactiveFormsModule]
+        ContentDirective,
+        SelectComponent,
+        SelectOptionComponent,
+        SelectGroupComponent,
+        SelectDropdownComponent,
+        MockContainerComponent,
+        SelectAutocompleteComponent,
+        GuidanceComponent,
+        IconComponent,
+        LabelComponent,
+        BodyTextComponent,
+      ],
+      providers: [FudisIdService, FudisTranslationService],
+      imports: [ReactiveFormsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockContainerComponent);
 
     containerComponent = fixture.componentInstance;
-		fixture.detectChanges();
+    fixture.detectChanges();
   });
 
-	function initializeSelect() {
-		containerComponent.testSelect.ngOnInit();
-		containerComponent.testSelect.ngAfterViewInit();
-		containerComponent.testSelect.openDropdown();
-		
-		fixture.detectChanges();
-	}
+  function initializeSelect() {
+    containerComponent.testSelect.ngOnInit();
+    containerComponent.testSelect.ngAfterViewInit();
+    containerComponent.testSelect.openDropdown();
 
-	function initializeFormControl() {
-		containerComponent.control = new FormControl(defaultOptions[4], FudisValidators.required('For testing purposes, please choose a pet'));
-		
-		fixture.detectChanges();
-	}
+    fixture.detectChanges();
+  }
 
-	describe('Parent control', () => {
-		it('should change control value when option is selected', () => {
+  function initializeFormControl() {
+    containerComponent.control = new FormControl(
+      defaultOptions[4],
+      FudisValidators.required('For testing purposes, please choose a pet'),
+    );
 
-			initializeSelect();
-			initializeFormControl();
-	
-			const options = fixture.debugElement.queryAll(By.css('.fudis-select-option'));
-	
-			options[2].nativeElement.click();
-			fixture.detectChanges();
-	
-			expect(containerComponent.testSelect.control.value?.label).toBe('Platypus');
-	
-		})
-	
-		it('should not have selected default value if form control is not initialized', () => {
-	
-			initializeSelect();
-	
-			const iconNotToBeFound = fixture.nativeElement.querySelector('[ng-reflect-icon="check"]');
-			expect(iconNotToBeFound).toBeFalsy();
-	
-			initializeFormControl();
-	
-			const checkIcon = fixture.nativeElement.querySelector('[ng-reflect-icon="check"]');
-	
-			expect(checkIcon).toBeTruthy();
-		});
-	})
+    fixture.detectChanges();
+  }
 
-	describe('Select option', () => {
-		it('should have disabled option', () => {
+  describe('Parent control', () => {
+    it('should change control value when option is selected', () => {
+      initializeSelect();
+      initializeFormControl();
 
-			initializeSelect();
-			initializeFormControl();
-	
-			const options = fixture.debugElement.queryAll(By.css('.fudis-select-option'));
-	
-			options[3].nativeElement.click();
-			fixture.detectChanges();
-	
-			expect(options[3].nativeElement.outerHTML).toContain('fudis-select-option--disabled');
-			expect(options[3].attributes["aria-selected"]).toEqual('false');
-			expect(options[4].nativeElement.outerHTML).toContain('fudis-select-option--selected');
-		});
-	
-		it('should include text `Disabled` when option is disabled', () => {
-	
-			initializeSelect();
-			initializeFormControl();
-	
-			const options = fixture.debugElement.queryAll(By.css('.fudis-select-option'));
-			expect(options[3].nativeElement.innerHTML).toContain('Disabled');
-		})
-	})
+      const options = fixture.debugElement.queryAll(By.css('.fudis-select-option'));
+
+      options[2].nativeElement.click();
+      fixture.detectChanges();
+
+      expect(containerComponent.testSelect.control.value?.label).toBe('Platypus');
+    });
+
+    it('should not have selected default value if form control is not initialized', () => {
+      initializeSelect();
+
+      const iconNotToBeFound = fixture.nativeElement.querySelector('[ng-reflect-icon="check"]');
+      expect(iconNotToBeFound).toBeFalsy();
+
+      initializeFormControl();
+
+      const checkIcon = fixture.nativeElement.querySelector('[ng-reflect-icon="check"]');
+
+      expect(checkIcon).toBeTruthy();
+    });
+  });
+
+  describe('Select option', () => {
+    it('should have disabled option', () => {
+      initializeSelect();
+      initializeFormControl();
+
+      const options = fixture.debugElement.queryAll(By.css('.fudis-select-option'));
+
+      options[3].nativeElement.click();
+      fixture.detectChanges();
+
+      expect(options[3].nativeElement.outerHTML).toContain('fudis-select-option--disabled');
+      expect(options[3].attributes['aria-selected']).toEqual('false');
+      expect(options[4].nativeElement.outerHTML).toContain('fudis-select-option--selected');
+    });
+
+    it('should include text `Disabled` when option is disabled', () => {
+      initializeSelect();
+      initializeFormControl();
+
+      const options = fixture.debugElement.queryAll(By.css('.fudis-select-option'));
+      expect(options[3].nativeElement.innerHTML).toContain('Disabled');
+    });
+  });
 });
