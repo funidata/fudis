@@ -65,17 +65,39 @@ describe('SelectOptionComponent', () => {
 		fixture.detectChanges();
   });
 
-
-  // TODO: create tests
-  it('should create', () => {
-		containerComponent.control = new FormControl(defaultOptions[4], FudisValidators.required('For testing purposes, please choose a pet'));
-		fixture.detectChanges();
+	function initializeSelect() {
 		containerComponent.testSelect.ngOnInit();
 		containerComponent.testSelect.ngAfterViewInit();
 		containerComponent.testSelect.openDropdown();
 		
 		fixture.detectChanges();
+	}
+
+  it('should not have selected option icon if form control is not initialized', () => {
+
+		initializeSelect();
+
+		const iconNotToBeFound = fixture.nativeElement.querySelector('[ng-reflect-icon="check"]');
+		expect(iconNotToBeFound).toBeFalsy();
+
+		containerComponent.control = new FormControl(defaultOptions[4], FudisValidators.required('For testing purposes, please choose a pet'));
+		fixture.detectChanges();
+
+		const checkIcon = fixture.nativeElement.querySelector('[ng-reflect-icon="check"]');
+
+		expect(checkIcon).toBeTruthy();
+	});
+
+	it('should not be able to select disabled option  ', () => {
+
+		initializeSelect();
+
+		containerComponent.control = new FormControl(defaultOptions[3], FudisValidators.required('For testing purposes, please choose a pet'));
+		fixture.detectChanges();
+
+
 
 		// phl(fixture.nativeElement);
-  });
+
+	});
 });
