@@ -42,8 +42,27 @@ describe('SelectComponent', () => {
 		fixture.detectChanges();
   });
 
-	it('component should have `Really dangerous cat` as a placeholder text', () => {
-    const placeholderAnimal = fixture.debugElement.query(By.css('.fudis-select__input__label'));
-    expect(placeholderAnimal.nativeElement.innerHTML).toEqual('Really dangerous cat');
-  });
+	describe('Initialized Select', () => {
+		it('should have respective classes according to given size Input', () => {
+
+			const expectedValue = 'fudis-select fudis-input-size__md';
+			const classes = fixture.nativeElement.childNodes;
+			const componentClasses = classes[0].className.split(' ').sort();
+			
+		expect(componentClasses).toEqual(expectedValue.split(' ').sort());
+
+		})
+		it('should have default form control option set', () => {
+			const placeholderAnimal = fixture.debugElement.query(By.css('.fudis-select__input__label'));
+			expect(placeholderAnimal.nativeElement.innerHTML).toEqual('Really dangerous cat');
+		});
+
+		it('should have placehorder text present when no default option is given', () => {
+			component.control.patchValue(null);
+			fixture.detectChanges();
+
+			const placeholder = fixture.debugElement.query(By.css('.fudis-select__input__placeholder'));
+			expect(placeholder.nativeElement.outerHTML).toContain('Test placeholder');
+		})
+	})
 });
