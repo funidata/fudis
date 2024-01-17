@@ -5,6 +5,7 @@ import {
   FudisFormErrorSummarySection,
   FudisErrorSummaryParent,
   FudisFormErrorSummaryRemoveItem,
+  FudisFormErrorSummaryUpdateStrategy,
 } from '../../../types/forms';
 
 /**
@@ -12,6 +13,7 @@ import {
  */
 @Injectable({ providedIn: 'root' })
 export class FudisInternalErrorSummaryService {
+  constructor() {}
   /**
    * Current errors
    */
@@ -21,11 +23,6 @@ export class FudisInternalErrorSummaryService {
    * Visible errors
    */
   private _signalCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
-
-  /**
-   * Dynamic errors
-   */
-  private _signalDynamicCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
 
   /**
    * List of parent forms of the error summary list
@@ -41,6 +38,44 @@ export class FudisInternalErrorSummaryService {
    * Current sections
    */
   private _currentSections: FudisFormErrorSummarySection[] = [];
+
+  /**
+   * Info to Error Summary Component if it should move user focus to updated list or not
+   */
+  private _focusToSummaryList: boolean = false;
+
+  /**
+   * Update strategy of Error Summary
+   */
+  private _updateStrategy: FudisFormErrorSummaryUpdateStrategy = 'reloadOnly';
+
+  /**
+   * Getter for _updateStrategy. Used by public Error Summary service.
+   */
+  get updateStrategy(): FudisFormErrorSummaryUpdateStrategy {
+    return this._updateStrategy;
+  }
+
+  /**
+   * Setter for _updateStrategy. Used by public Error Summary service.
+   */
+  set updateStrategy(value: FudisFormErrorSummaryUpdateStrategy) {
+    this._updateStrategy = value;
+  }
+
+  /**
+   * Getter for _focusToSummaryList
+   */
+  get focusToSummaryList(): boolean {
+    return this._focusToSummaryList;
+  }
+
+  /**
+   * Setter for _focusToSummaryList
+   */
+  set focusToSummaryList(value: boolean) {
+    this._focusToSummaryList = value;
+  }
 
   /**
    * Returns a list of current fieldsets
@@ -68,13 +103,6 @@ export class FudisInternalErrorSummaryService {
    */
   getVisibleErrors(): Signal<FudisFormErrorSummaryObject> {
     return this._signalCurrentErrorList.asReadonly();
-  }
-
-  /**
-   * Returns a readonly list of dynamic errors
-   */
-  getDynamicErrors(): Signal<FudisFormErrorSummaryObject> {
-    return this._signalDynamicCurrentErrorList.asReadonly();
   }
 
   /**
@@ -114,7 +142,8 @@ export class FudisInternalErrorSummaryService {
 
     this._currentErrorList = currentErrors;
 
-    if (langUpdated) {
+    if (langUpdated || this._updateStrategy === 'all') {
+      this._focusToSummaryList = false;
       this.reloadErrors();
     }
   }
@@ -133,7 +162,10 @@ export class FudisInternalErrorSummaryService {
 
       this._currentErrorList = currentErrors;
 
-      this._signalDynamicCurrentErrorList.set(currentErrors);
+      if (this._updateStrategy === 'all' || this._updateStrategy === 'onRemove') {
+        this._focusToSummaryList = false;
+        this._signalCurrentErrorList.set(this._currentErrorList);
+      }
     }
   }
 
@@ -195,13 +227,9 @@ export class FudisInternalErrorSummaryService {
 
   /**
    * Updates the visible and dynamic lists of errors with the current error list
-   * @param delay Optional Number that sets timeout delay in milliseconds, defaults to 0ms
    */
-  public reloadErrors(delay: number = 0): void {
-    setTimeout(() => {
-      this._signalCurrentErrorList.set(this._currentErrorList);
-      this._signalDynamicCurrentErrorList.set(this._currentErrorList);
-    }, delay);
+  public reloadErrors(): void {
+    this._signalCurrentErrorList.set(this._currentErrorList);
   }
 
   /**

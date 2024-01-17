@@ -1,6 +1,3 @@
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-console */
 import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 import { TranslocoService } from '@ngneat/transloco';
@@ -208,8 +205,6 @@ export class AppComponent implements OnInit {
       this._translocoService.setActiveLang('en');
       this._fudisLanguage.setLanguage('en');
     }
-
-    this._errorSummaryService.reloadErrors();
   }
 
   openDialog(): void {
@@ -233,6 +228,6 @@ export class AppComponent implements OnInit {
   }
 
   doSomething(event: Event) {
-    console.log('eventti mennyt perille', event);
+    console.log('event received!', event);
   }
 }
