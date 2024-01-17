@@ -6,7 +6,6 @@ import { SelectComponent } from '../select.component';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { defaultOptions } from '../../common/mock_data';
-// import { phl } from '@angular-extensions/pretty-html-log';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { FudisValidators } from '../../../../../utilities/form/validators';
 import { Component, ViewChild } from '@angular/core';
@@ -18,6 +17,7 @@ import { SelectDropdownComponent } from '../../common/select-dropdown/select-dro
 import { FudisSelectOption } from '../../../../../types/forms';
 import { SelectAutocompleteComponent } from '../../common/autocomplete/autocomplete.component';
 import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
+import { By } from '@angular/platform-browser';
 
 @Component({
 	selector: 'fudis-mock-container',
@@ -73,6 +73,12 @@ describe('SelectOptionComponent', () => {
 		fixture.detectChanges();
 	}
 
+	function initializeFormControl() {
+		containerComponent.control = new FormControl(defaultOptions[4], FudisValidators.required('For testing purposes, please choose a pet'));
+		
+		fixture.detectChanges();
+	}
+
   it('should not have selected option icon if form control is not initialized', () => {
 
 		initializeSelect();
@@ -80,24 +86,24 @@ describe('SelectOptionComponent', () => {
 		const iconNotToBeFound = fixture.nativeElement.querySelector('[ng-reflect-icon="check"]');
 		expect(iconNotToBeFound).toBeFalsy();
 
-		containerComponent.control = new FormControl(defaultOptions[4], FudisValidators.required('For testing purposes, please choose a pet'));
-		fixture.detectChanges();
+		initializeFormControl();
 
 		const checkIcon = fixture.nativeElement.querySelector('[ng-reflect-icon="check"]');
 
 		expect(checkIcon).toBeTruthy();
 	});
 
-	it('should not be able to select disabled option  ', () => {
+	it('should not be able to select disabled option', () => {
 
 		initializeSelect();
+		initializeFormControl();
 
-		containerComponent.control = new FormControl(defaultOptions[3], FudisValidators.required('For testing purposes, please choose a pet'));
+		const options = fixture.debugElement.queryAll(By.css('.fudis-select-option'));
+
+		options[3].nativeElement.click();
 		fixture.detectChanges();
 
-
-
-		// phl(fixture.nativeElement);
-
+		expect(options[3].nativeElement.outerHTML).toContain('fudis-select-option--disabled');
+		expect(options[4].nativeElement.outerHTML).toContain('fudis-select-option--selected');
 	});
 });
