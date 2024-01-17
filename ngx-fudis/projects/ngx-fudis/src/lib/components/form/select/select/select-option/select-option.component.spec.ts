@@ -79,31 +79,59 @@ describe('SelectOptionComponent', () => {
 		fixture.detectChanges();
 	}
 
-  it('should not have selected option icon if form control is not initialized', () => {
+	describe('Parent control', () => {
+		it('should change control value when option is selected', () => {
 
-		initializeSelect();
+			initializeSelect();
+			initializeFormControl();
+	
+			const options = fixture.debugElement.queryAll(By.css('.fudis-select-option'));
+	
+			options[2].nativeElement.click();
+			fixture.detectChanges();
+	
+			expect(containerComponent.testSelect.control.value?.label).toBe('Platypus');
+	
+		})
+	
+		it('should not have selected default value if form control is not initialized', () => {
+	
+			initializeSelect();
+	
+			const iconNotToBeFound = fixture.nativeElement.querySelector('[ng-reflect-icon="check"]');
+			expect(iconNotToBeFound).toBeFalsy();
+	
+			initializeFormControl();
+	
+			const checkIcon = fixture.nativeElement.querySelector('[ng-reflect-icon="check"]');
+	
+			expect(checkIcon).toBeTruthy();
+		});
+	})
 
-		const iconNotToBeFound = fixture.nativeElement.querySelector('[ng-reflect-icon="check"]');
-		expect(iconNotToBeFound).toBeFalsy();
+	describe('Select option', () => {
+		it('should have disabled option', () => {
 
-		initializeFormControl();
-
-		const checkIcon = fixture.nativeElement.querySelector('[ng-reflect-icon="check"]');
-
-		expect(checkIcon).toBeTruthy();
-	});
-
-	it('should not be able to select disabled option', () => {
-
-		initializeSelect();
-		initializeFormControl();
-
-		const options = fixture.debugElement.queryAll(By.css('.fudis-select-option'));
-
-		options[3].nativeElement.click();
-		fixture.detectChanges();
-
-		expect(options[3].nativeElement.outerHTML).toContain('fudis-select-option--disabled');
-		expect(options[4].nativeElement.outerHTML).toContain('fudis-select-option--selected');
-	});
+			initializeSelect();
+			initializeFormControl();
+	
+			const options = fixture.debugElement.queryAll(By.css('.fudis-select-option'));
+	
+			options[3].nativeElement.click();
+			fixture.detectChanges();
+	
+			expect(options[3].nativeElement.outerHTML).toContain('fudis-select-option--disabled');
+			expect(options[3].attributes["aria-selected"]).toEqual('false');
+			expect(options[4].nativeElement.outerHTML).toContain('fudis-select-option--selected');
+		});
+	
+		it('should include text `Disabled` when option is disabled', () => {
+	
+			initializeSelect();
+			initializeFormControl();
+	
+			const options = fixture.debugElement.queryAll(By.css('.fudis-select-option'));
+			expect(options[3].nativeElement.innerHTML).toContain('Disabled');
+		})
+	})
 });
