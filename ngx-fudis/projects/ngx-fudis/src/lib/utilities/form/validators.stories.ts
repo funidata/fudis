@@ -91,7 +91,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
       label: 'DatepickerMin Validator',
       control: new FormControl<Date | null>(null, [
         FudisValidators.datepickerMin({
-          value: new Date('2024-01-10'),
+          value: new Date(2024,0,10),
           message: 'Start date cannot be earlier than 10.1.2024',
         }),
       ]),
@@ -100,7 +100,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
       label: 'DatepickerMax Validator',
       control: new FormControl<Date | null>(null, [
         FudisValidators.datepickerMax({
-          value: new Date('2024-03-25'),
+          value: new Date(2024,2,25),
           message: 'End date cannot be later than 25.3.2024',
         }),
       ]),

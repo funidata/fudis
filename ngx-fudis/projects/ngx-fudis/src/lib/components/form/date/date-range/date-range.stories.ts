@@ -89,11 +89,11 @@ const TemplateWithMinMax: StoryFn<DateRangeComponent> = (args: DateRangeComponen
       control: new FormControl<Date | null>(null, [
         FudisValidators.required('Start date is required'),
         FudisValidators.datepickerMin({
-          value: new Date('2023-05-15'),
+          value: new Date(2023,4,15),
           message: 'Start date cannot be earlier than 15.5.2023',
         }),
         FudisValidators.datepickerMax({
-          value: new Date('2023-06-20'),
+          value: new Date(2023,5,20),
           message: 'Start date cannot be later than 20.6.2023',
         }),
       ]),
@@ -104,11 +104,11 @@ const TemplateWithMinMax: StoryFn<DateRangeComponent> = (args: DateRangeComponen
       control: new FormControl<Date | null>(null, [
         FudisValidators.required('End date is required'),
         FudisValidators.datepickerMin({
-          value: new Date('2023-06-15'),
+          value: new Date(2023,5,15),
           message: 'End date cannot be earlier than 15.6.2023',
         }),
         FudisValidators.datepickerMax({
-          value: new Date('2023-07-25'),
+          value: new Date(2023,7,25),
           message: 'End date cannot be later than 25.7.2023',
         }),
       ]),
