@@ -9,6 +9,7 @@
       (control.touched && control.invalid) || (control.touched && invalidState)
     "
     role="combobox"
+    [attr.value]="!multiselect && selectedLabel ? selectedLabel : null"
     [attr.aria-controls]="id + '-dropdown'"
     aria-haspopup="listbox"
     (focus)="_inputFocus($event)"
