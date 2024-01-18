@@ -58,9 +58,9 @@ export class SelectAutocompleteComponent {
   @Input({ required: true }) dropdownOpen: boolean = false;
 
   /**
-   * For single select label for input's value
+   * For single select label when control has value on init
    */
-  @Input() selectedLabel: string;
+  @Input() selectedLabel: string | null;
 
   /**
    * Manually set input as invalid

@@ -60,7 +60,7 @@ export class SelectComponent
   /**
    * To pass selection label value for autocomplete
    */
-  protected _autocompleteSelectionLabelValue: string;
+  protected _autocompleteSelectionLabelValue: string | null;
 
   ngOnInit(): void {
     this._setParentId('select');
@@ -101,8 +101,7 @@ export class SelectComponent
 
       if (this.autocomplete) {
         this._autocompleteRef.preventSpaceKeypress = true;
-
-        this._autocompleteSelectionLabelValue = this.control.value!.label;
+        (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value = value.label;
       } else {
         this.dropdownSelectionLabelText = value?.label ? value.label : '';
       }
@@ -122,7 +121,6 @@ export class SelectComponent
       this.controlValueChangedInternally = true;
       this.selectionUpdate.emit(null);
       this.control.patchValue(null);
-      this._autocompleteSelectionLabelValue = '';
     }
   }
 
@@ -151,7 +149,7 @@ export class SelectComponent
       }
     } else {
       this._autocompleteFilterText.set('');
-      this._autocompleteSelectionLabelValue = '';
+      this._autocompleteSelectionLabelValue = null;
       this.dropdownSelectionLabelText = '';
     }
   }
