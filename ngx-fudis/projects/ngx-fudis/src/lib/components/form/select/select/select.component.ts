@@ -1,4 +1,5 @@
 import {
+  AfterContentInit,
   AfterViewInit,
   Component,
   EventEmitter,
@@ -22,7 +23,10 @@ import { FudisSelectOption } from '../../../../types/forms';
   styleUrls: ['./select.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class SelectComponent extends SelectBaseDirective implements OnInit, AfterViewInit {
+export class SelectComponent
+  extends SelectBaseDirective
+  implements OnInit, AfterViewInit, AfterContentInit
+{
   constructor(
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
@@ -53,6 +57,11 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
    */
   public translationOptionDisabledText: string;
 
+  /**
+   * To pass selection label value for autocomplete
+   */
+  protected _autocompleteSelectionLabelValue: string;
+
   ngOnInit(): void {
     this._setParentId('select');
 
@@ -65,13 +74,15 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
     });
   }
 
+  ngAfterContentInit(): void {
+    if (this.control.value) {
+      this._updateSelectionFromControlValue();
+    }
+  }
+
   ngAfterViewInit(): void {
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
-    }
-
-    if (this.control.value) {
-      this._updateSelectionFromControlValue();
     }
   }
 
@@ -91,8 +102,7 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
       if (this.autocomplete) {
         this._autocompleteRef.preventSpaceKeypress = true;
 
-        (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value =
-          this.control.value!.label;
+        this._autocompleteSelectionLabelValue = this.control.value!.label;
       } else {
         this.dropdownSelectionLabelText = value?.label ? value.label : '';
       }
@@ -112,6 +122,7 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
       this.controlValueChangedInternally = true;
       this.selectionUpdate.emit(null);
       this.control.patchValue(null);
+      this._autocompleteSelectionLabelValue = '';
     }
   }
 
@@ -133,14 +144,14 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
       this.dropdownSelectionLabelText = this.control.value.label;
 
       if (this.autocomplete) {
-        (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value =
-          this.control.value!.label;
+        this._autocompleteSelectionLabelValue = this.control.value!.label;
         this._autocompleteFilterText.set(this.control.value.label);
 
         this._visibleOptionsValues = [this.control.value.value];
       }
     } else {
       this._autocompleteFilterText.set('');
+      this._autocompleteSelectionLabelValue = '';
       this.dropdownSelectionLabelText = '';
     }
   }
