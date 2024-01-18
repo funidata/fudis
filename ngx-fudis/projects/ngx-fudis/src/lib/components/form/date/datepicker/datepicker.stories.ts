@@ -82,7 +82,7 @@ DatepickerPreselectedDate.args = {
   tooltip: 'Is it your birthday?',
   tooltipPosition: 'left',
   tooltipToggle: true,
-  control: new FormControl(new Date(1977,11,16)),
+  control: new FormControl(new Date(1977, 11, 16)),
 };
 
 export const Disabled = Template.bind({});

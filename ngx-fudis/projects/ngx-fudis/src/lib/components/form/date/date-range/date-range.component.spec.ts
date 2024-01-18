@@ -55,11 +55,11 @@ describe('DateRangeComponent', () => {
       control: new FormControl<Date | null>(null, [
         FudisValidators.required('Start date is required'),
         FudisValidators.datepickerMin({
-          value: new Date(2023,5,15),
+          value: new Date(2023, 5, 15),
           message: 'Start date cannot be earlier than 15.6.2023',
         }),
         FudisValidators.datepickerMax({
-          value: new Date(2023,6,25),
+          value: new Date(2023, 6, 25),
           message: 'Start date cannot be later than 25.7.2023',
         }),
       ]),
@@ -70,11 +70,11 @@ describe('DateRangeComponent', () => {
       control: new FormControl<Date | null>(null, [
         FudisValidators.required('End date is required'),
         FudisValidators.datepickerMin({
-          value: new Date(2023,6,15),
+          value: new Date(2023, 6, 15),
           message: 'End date cannot be earlier than 15.7.2023',
         }),
         FudisValidators.datepickerMax({
-          value: new Date(2023,7,25),
+          value: new Date(2023, 7, 25),
           message: 'End date cannot be later than 25.8.2023',
         }),
       ]),
