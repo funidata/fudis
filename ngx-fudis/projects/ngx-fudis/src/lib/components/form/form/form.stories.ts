@@ -7,7 +7,6 @@ import { BehaviorSubject } from 'rxjs';
 import {
   FudisSelectOption,
   FudisRadioButtonOption,
-  FudisFormErrors,
   FudisDateRangeItem,
 } from '../../../types/forms';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
@@ -128,10 +127,7 @@ import readme from './readme.mdx';
                         </fudis-checkbox-group>
                         <fudis-datepicker
                           [label]="'Start date'"
-                          [id]="'date-picker-1'"
-                          [size]="'md'"
                           [helpText]="'You have to start from somewhere'"
-                          [errorMsg]="errorImportantDate"
                           [control]="formExample.controls['importantDate']"
                         >
                           <fudis-error-message
@@ -200,7 +196,7 @@ class FormContentExampleComponent implements OnInit {
     private _focusService: FudisFocusService,
   ) {}
 
-  releaseDate: number = new Date('1991-5-1').getTime();
+  releaseDate: number = new Date(1991, 4, 1).getTime();
 
   errorSummaryVisible: boolean = false;
 
@@ -213,10 +209,6 @@ class FormContentExampleComponent implements OnInit {
     { key: 'Key', value: 'THX-1138' },
     { key: 'Another important person', value: 'Mara Jade' },
   ];
-
-  errorImportantDate: FudisFormErrors = {
-    matDatepickerParse: 'Date should be in dd.mm.yyyy format.',
-  };
 
   formExample = new FormGroup({
     name: new FormGroup(
@@ -284,19 +276,11 @@ class FormContentExampleComponent implements OnInit {
   dateRangeStartDate: FudisDateRangeItem = {
     control: this.formExample.controls.startDate,
     label: 'Start date',
-    errorMsg: {
-      matDatepickerParse: 'Start date is not proper date',
-      matStartDateInvalid: 'Start date cannot be after end date',
-    },
   };
 
   dateRangeEndDate: FudisDateRangeItem = {
     control: this.formExample.controls.endDate,
     label: 'End date',
-    errorMsg: {
-      matDatepickerParse: 'End date is not proper date',
-      matEndDateInvalid: 'End date cannot be before start date',
-    },
   };
 
   private _closed: boolean = true;

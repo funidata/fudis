@@ -15,6 +15,11 @@ export const en: FudisTranslationConfig = {
     NEXT_MULTIYEAR: 'Next 24 years',
     SWITCH_MONTH_VIEW: 'Switch to month view',
     SWITCH_MULTIYEAR_VIEW: 'Switch to year view',
+    VALIDATION: {
+      START_DATE_INVALID: 'Start date cannot be after end date',
+      END_DATE_INVALID: 'End date cannot be before start date',
+      DATE_PARSE: 'Invalid date format',
+    },
   },
   DIALOG: { CLOSE: 'Close' },
   INPUT_WITH_LANGUAGE_OPTIONS: {
@@ -79,6 +84,11 @@ export const fi: FudisTranslationConfig = {
     NEXT_MULTIYEAR: 'Seuraavat 24 vuotta',
     SWITCH_MONTH_VIEW: 'Vaihda kuukausinäkymään',
     SWITCH_MULTIYEAR_VIEW: 'Vaihda vuosinäkymään',
+    VALIDATION: {
+      START_DATE_INVALID: 'Alkamispäivän on oltava ennen päättymispäivää',
+      END_DATE_INVALID: 'Päättymispäivän on oltava alkamispäivän jälkeen',
+      DATE_PARSE: 'Virheellinen päivämääräformaatti.',
+    },
   },
   DIALOG: { CLOSE: 'Sulje' },
   INPUT_WITH_LANGUAGE_OPTIONS: {
@@ -143,6 +153,11 @@ export const sv: FudisTranslationConfig = {
     NEXT_MULTIYEAR: 'Nästa 24 år',
     SWITCH_MONTH_VIEW: 'Byta till månadsvy',
     SWITCH_MULTIYEAR_VIEW: 'Byta till årsvy',
+    VALIDATION: {
+      START_DATE_INVALID: 'Startdatumet måste vara före slutdatumet',
+      END_DATE_INVALID: 'Slutdatumet måste vara efter startdatumet',
+      DATE_PARSE: 'Datumet format är felaktigt',
+    },
   },
   DIALOG: { CLOSE: 'Stäng' },
   INPUT_WITH_LANGUAGE_OPTIONS: {

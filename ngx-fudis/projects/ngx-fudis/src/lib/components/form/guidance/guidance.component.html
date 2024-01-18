@@ -30,7 +30,8 @@
                     [label]="inputLabel"
                     [message]="error.value.message"
                   />
-                  <!-- Todo: remove below deprecated version when Into is misgrated to above  -->
+                  <!-- TODO: remove below deprecated version when Into is misgrated to above  -->
+                  <!-- TODO: remove every usage of errorMsg for ver 1.0-->
                   <fudis-validator-error-message
                     *ngIf="!error.value.message"
                     [deprecationWarning]="true"
@@ -56,7 +57,8 @@
                 [label]="inputLabel"
                 [message]="error.value?.message"
               />
-              <!-- Todo: remove below deprecated version when Into is misgrated to above  -->
+              <!-- TODO: remove below deprecated version when Into is misgrated to above -->
+              <!-- TODO: remove every usage of errorMsg for ver 1.0-->
               <fudis-validator-error-message
                 *ngIf="!error.value?.message"
                 [visible]="formGroup.touched"
@@ -79,8 +81,8 @@
                 [label]="inputLabel"
                 [message]="error.value?.message"
               />
-              <!-- Todo: remove below deprecated version when Into is misgrated to above  -->
-
+              <!-- TODO: remove below deprecated version when Into is misgrated to above -->
+              <!-- TODO: remove every usage of errorMsg for ver 1.0-->
               <fudis-validator-error-message
                 *ngIf="!error.value?.message && errorMsg?.[asErrorkey(error.key)]"
                 [visible]="control.touched"
