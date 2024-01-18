@@ -6,9 +6,17 @@ import { Meta } from "@storybook/blocks";
 
 Fudis Form components use two set of validators; **FudisValidators** and **FudisGroupValidators**.
 
-Basic validators (FudisValidators) have the following types: `required`, `email`, `minLength`, `maxLength`,`min`, `max` and `pattern`. Group validators (FudisGroupValidators) have the following types: `atLeastOneRequired`, `min` and `max`.
+For custom application spesific validator, please check 'Custom Validators' section later on this page.
 
-## Usage Guidelines for FudisValidators
+Basic validators (FudisValidators) have the following types: `required`, `email`, `minLength`, `maxLength`,`min`, `max`, `pattern`, `datepickerMin` and `datepickerMax`.
+
+Group validators (FudisGroupValidators) have the following types: `atLeastOneRequired`, `min` and `max`.
+
+# Usage Guidelines for FudisValidators
+
+## Single Form Control Validators with FudisValidators
+
+These validators are used with Form Control.
 
 ### Required Validator
 
@@ -17,12 +25,6 @@ For required form field, include `FudisValidators.required()` in the form contro
 ```
 FudisValidators.required('This is required field')
 ```
-
-#### Error Handling
-
-**required** error is shown if user input is required and
-
-- if control is touched and - if control value is null
 
 ---
 
@@ -38,19 +40,12 @@ FudisValidators.email('Input must be an email address.')
 
 ### MinLength and MaxLength Validators
 
-For minLength and maxLength, include `FudisValidators.minLength()` and `FudisValidators.maxLength()` in the form control validator with preferred input length as number and a message parameter as a string or as an observable string. When maxLength validation is used, [Text Input](/docs/components-form-text-input--documentation) and [Text Area](/docs/components-form-text-area--documentation) components disable user from inputing more than allowed length of characters and will have additional maxLength indicator. When using [Dropdown](/docs/components-form-dropdown--documentation) with maxLength validator, error message is prompted when maximum amount of allowed selected options exceeds.
+For minLength and maxLength, include `FudisValidators.minLength()` and `FudisValidators.maxLength()` in the form control validator with preferred input length as number and a message parameter as a string or as an observable string. When maxLength validation is used, [Text Input](/docs/components-form-text-input--documentation) and [Text Area](/docs/components-form-text-area--documentation) components disable user from inputing more than allowed length of characters and will have additional maxLength indicator.
+When using [Dropdown](/docs/components-form-dropdown--documentation) with maxLength validator, error message is prompted when maximum amount of allowed selected options exceeds.
 
 ```
-FudisValidators.maxLength(20, 'Too long email.')
+FudisValidators.maxLength(20, 'Too long input text.')
 ```
-
-#### Error Handling
-
-**minLength** and/or **maxLength** errors are shown
-
-- if control is touched and
-  - if control value is not null and
-    - if control value length does not match the given validators length
 
 ---
 
@@ -63,10 +58,6 @@ FudisValidators.max(10, 'Number cannot exceed 10.')
 
 ```
 
-#### Error Handling
-
-**minNumber** and/or **maxNumber** errors are shown - if control is touched and - if control value is not null and - if control value is not respective to given **min** and/or **max** validator values
-
 ---
 
 ### Pattern Validator
@@ -78,7 +69,21 @@ FudisValidators.pattern(/^[A-Z \d\W]+$/, 'PLEASE USE ONLY LOW CAPS!')
 
 ```
 
-## Usage Guidelines for FudisGroupValidators
+---
+
+### DatepickerMin and DatepickerMax Validators
+
+DatepickerMin and DatepickerMax validators can be used with Datepicker and Date Range components. These validators disable dates from the calendar dropdown if they fall outside of given date range.
+Needed parameters for both validator objects are `value` as a date and `message` as a string or as an observable string.
+
+Validators can be used individually or together to validate single date.
+
+```
+FudisValidators.datepickerMin({ value: new Date(2024,0,1), message: 'Start date cannot be before 1.1.2024' })
+FudisValidators.datepickerMax({ value: new Date(2024,9,1), message: 'End date cannot be after 1.10.2024' })
+```
+
+## Form Group Validators with FudisGroupValidators
 
 These validators are used with Form Group.
 
@@ -100,3 +105,46 @@ FudisGroupValidators.min({ value: 2, message: 'Pick at least two' })
 FudisGroupValidators.max({ value: 4, message: 'Four is the maximun amount of allowed picks' })
 
 ```
+
+## Custom Validators and Error Messages
+
+If your form component and form control need some other validation, which is not provided by Fudis. You can either:
+
+- Repeating cases: Create a custom validator function
+- Single uses: [Error Message Component](/docs/components-form-error-message--documentation)
+
+If your custom validator logic repeats multiple times, it is recommended to create your own custom validator. If your need is more like an exception of exception, you can just use [Error Message Component](/docs/components-form-error-message--documentation).
+
+### Custom Validator Guidelines
+
+Here is example code of Fudis Required Validator.
+
+```
+type FudisValidatorMessage = Observable<string> | string;
+
+interface FudisValidationErrors extends ValidationErrors {
+  [key: string]: { message: FudisValidatorMessage } | null;
+}
+
+interface FudisValidatorFn extends ValidatorFn {
+  (control: AbstractControl): FudisValidationErrors | null;
+}
+
+function required(message: FudisValidatorMessage): FudisValidatorFn {
+  return (control: AbstractControl) => {
+    if (!Validators.required(control)) {
+      return null;
+    }
+    // Most important line below!
+    return { required: { message } };
+  };
+}
+```
+
+Main principle of Fudis Validators is, that when validator state is invalid, it returns on object which contains a `message` property.
+
+```
+{yourValidatorKey: {message: 'This is your custom error message as a string.'}}
+```
+
+The value type of message can be either a string or an observable. When 'message' property is provided, internal Fudis components and services reads this and displays it alongside other validator error messages. This `message` property is also sent and updated accordingly by [Error Summary](/docs/components-form-error-summary--documentation) used in [Form](/docs/components-form-form--documentation).

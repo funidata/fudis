@@ -191,6 +191,72 @@ describe('Fudis Validators', () => {
     });
   });
 
+  describe('Datepicker Min Validator', () => {
+    const minDateValidator = FudisValidators.datepickerMin({
+      value: new Date(2024, 0, 16),
+      message: 'Date cannot be earlier than 16.1.2024',
+    });
+    const minDateControl = new FormControl<Date | null>(null, minDateValidator);
+
+    it('should return datepickerMin error if control has datepickerMin validator', () => {
+      minDateControl.patchValue(new Date(2024, 0, 15));
+
+      expect(minDateControl.errors).toEqual({
+        datepickerMin: {
+          message: 'Date cannot be earlier than 16.1.2024',
+          value: new Date(2024, 0, 16),
+        },
+      });
+    });
+
+    it('should not return datepickerMin error if control value is correct', () => {
+      minDateControl.patchValue(new Date(2024, 0, 16));
+
+      expect(minDateControl.errors).toEqual(null);
+      expect(minDateControl.valid).toEqual(true);
+    });
+
+    it('should not return datepickerMin error if control value is null', () => {
+      minDateControl.patchValue(null);
+
+      expect(minDateControl.errors).toEqual(null);
+      expect(minDateControl.valid).toEqual(true);
+    });
+  });
+
+  describe('Datepicker Max Validator', () => {
+    const maxDateValidator = FudisValidators.datepickerMax({
+      value: new Date(2024, 0, 16),
+      message: 'Date cannot be later than 16.1.2024',
+    });
+    const maxDateControl = new FormControl<Date | null>(null, maxDateValidator);
+
+    it('should return datepickerMax error if control has datepickerMax validator', () => {
+      maxDateControl.patchValue(new Date(2024, 0, 17));
+
+      expect(maxDateControl.errors).toEqual({
+        datepickerMax: {
+          message: 'Date cannot be later than 16.1.2024',
+          value: new Date(2024, 0, 16),
+        },
+      });
+    });
+
+    it('should not return datepickerMax error if control value is correct', () => {
+      maxDateControl.patchValue(new Date(2024, 0, 16));
+
+      expect(maxDateControl.errors).toEqual(null);
+      expect(maxDateControl.valid).toEqual(true);
+    });
+
+    it('should not return datepickerMax error if control value is null', () => {
+      maxDateControl.patchValue(null);
+
+      expect(maxDateControl.errors).toEqual(null);
+      expect(maxDateControl.valid).toEqual(true);
+    });
+  });
+
   describe('Fudis Group Validators', () => {
     describe('AtLeastOneRequired Validator', () => {
       let formGroup: FormGroup;

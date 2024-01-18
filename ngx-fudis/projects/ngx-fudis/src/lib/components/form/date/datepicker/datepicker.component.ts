@@ -5,11 +5,12 @@ import {
   ContentChild,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   ViewEncapsulation,
   effect,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, AbstractControl } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
 import {
@@ -22,9 +23,14 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 
 import { DatepickerCustomDateAdapter } from '../date-common/datepicker-custom-date-adapter';
-import { updateLocale, updateMatDatePickerTranslations } from '../date-common/utilities';
+import { parseDate, updateLocale, updateMatDatePickerTranslations } from '../date-common/utilities';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
-import { hasRequiredValidator } from '../../../../utilities/form/getValidators';
+import {
+  getMaxDateFromValidator,
+  getMinDateFromValidator,
+  hasRequiredValidator,
+} from '../../../../utilities/form/getValidators';
+import { FudisValidatorFn } from '../../../../utilities/form/validators';
 
 @Component({
   selector: 'fudis-datepicker',
@@ -42,7 +48,7 @@ import { hasRequiredValidator } from '../../../../utilities/form/getValidators';
 })
 export class DatepickerComponent
   extends InputBaseDirective
-  implements OnInit, OnChanges, AfterViewInit
+  implements OnInit, OnChanges, AfterViewInit, OnDestroy
 {
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
@@ -56,6 +62,7 @@ export class DatepickerComponent
 
     effect(() => {
       this._adapter.setLocale(updateLocale(this._translationService.getLanguage()));
+      this._dateParseError = this._translations().DATEPICKER.VALIDATION.DATE_PARSE;
 
       this._datepickerIntl = updateMatDatePickerTranslations(
         this._translations(),
@@ -81,26 +88,67 @@ export class DatepickerComponent
   /**
    * Allowed range for minimun date
    */
-  @Input() minDate: Date | null | undefined;
+  protected _minDate: Date | null | undefined;
 
   /**
    * Allowed range for maximum date
    */
-  @Input() maxDate: Date | null | undefined;
+  protected _maxDate: Date | null | undefined;
+
+  /**
+   * Fudis translation for date parse error message
+   */
+  protected _dateParseError: string;
+
+  /**
+   * Instance of Datepicker Parse validator
+   */
+  private _datepickerParseValidator: FudisValidatorFn;
+
+  // TODO: write test
+  private _datepickerParseValidatorFn(): FudisValidatorFn {
+    return (control: AbstractControl) => {
+      if (!control) {
+        return null;
+      }
+
+      const inputValue = this.inputRef?.nativeElement?.value;
+
+      const isValidDate = inputValue ? parseDate(inputValue)?.getDate() : false;
+
+      if (inputValue !== '' && !isValidDate) {
+        return { datepickerDateParse: { message: this._dateParseError } };
+      }
+
+      return null;
+    };
+  }
 
   ngOnInit(): void {
     this._setInputId('datepicker');
+
+    this._datepickerParseValidator = this._datepickerParseValidatorFn();
+
+    this.control.addValidators(this._datepickerParseValidator);
+    this.control.updateValueAndValidity();
   }
 
   ngOnChanges(): void {
     this._changeDetectorRef.detectChanges();
 
     this._required = this.required ?? hasRequiredValidator(this.control);
+    this._minDate = getMinDateFromValidator(this.control);
+    this._maxDate = getMaxDateFromValidator(this.control);
   }
 
   ngAfterViewInit(): void {
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
     }
+  }
+
+  ngOnDestroy(): void {
+    this.control.removeValidators(this._datepickerParseValidator);
+    this.control.updateValueAndValidity();
   }
 }

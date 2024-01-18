@@ -38,9 +38,6 @@ export type FudisFormErrors = {
   max?: string;
   email?: string;
   pattern?: string;
-  matDatepickerMin?: string;
-  matDatepickerMax?: string;
-  matDatepickerParse?: string;
   [key: string]: string | undefined;
 };
 
@@ -126,9 +123,6 @@ export interface FudisDateRangeItem {
   control: FormControl<Date | null>;
   label: string;
   helpText?: string;
-  errorMsg?: FudisFormErrors;
-  minDate?: Date | null;
-  maxDate?: Date | null;
   tooltip?: string;
 }
 

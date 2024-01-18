@@ -7,7 +7,6 @@ import { FudisTranslationService } from '../../../../../services/translation/tra
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { defaultOptions } from '../../common/mock_data';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { FudisValidators } from '../../../../../utilities/form/validators';
 import { Component, ViewChild } from '@angular/core';
 import { GuidanceComponent } from '../../../guidance/guidance.component';
 import { IconComponent } from '../../../../icon/icon.component';
@@ -18,6 +17,7 @@ import { FudisSelectOption } from '../../../../../types/forms';
 import { SelectAutocompleteComponent } from '../../common/autocomplete/autocomplete.component';
 import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
 import { By } from '@angular/platform-browser';
+import { getTrimmedTextContent } from '../../../../../utilities/tests/utilities';
 
 @Component({
   selector: 'fudis-mock-container',
@@ -47,7 +47,7 @@ class MockContainerComponent {
 
 describe('SelectOptionComponent', () => {
   let containerComponent: MockContainerComponent;
-  let fixture: ComponentFixture<SelectOptionComponent> | ComponentFixture<MockContainerComponent>;
+  let fixture: ComponentFixture<MockContainerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -69,32 +69,29 @@ describe('SelectOptionComponent', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(MockContainerComponent);
-
     containerComponent = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  function initializeSelect() {
-    containerComponent.testSelect.ngOnInit();
-    containerComponent.testSelect.ngAfterViewInit();
+  function setSelectDropdownOpen() {
     containerComponent.testSelect.openDropdown();
-
     fixture.detectChanges();
   }
 
-  function initializeFormControl() {
-    containerComponent.control = new FormControl(
-      defaultOptions[4],
-      FudisValidators.required('For testing purposes, please choose a pet'),
-    );
+  function initializeFormControlWithValue() {
+    containerComponent.control = new FormControl(defaultOptions[4]);
+    containerComponent = fixture.componentInstance;
+    fixture.detectChanges();
+  }
 
+  function updateControlValue() {
+    containerComponent.control.patchValue(defaultOptions[1]);
     fixture.detectChanges();
   }
 
   describe('Parent control', () => {
     it('should change control value when option is selected', () => {
-      initializeSelect();
-      initializeFormControl();
+      setSelectDropdownOpen();
 
       const options = fixture.debugElement.queryAll(By.css('.fudis-select-option'));
 
@@ -104,15 +101,50 @@ describe('SelectOptionComponent', () => {
       expect(containerComponent.testSelect.control.value?.label).toBe('Platypus');
     });
 
-    it('should not have selected default value if form control is not initialized', () => {
-      initializeSelect();
+    it('should not have selected default value if form control has no value on init', () => {
+      setSelectDropdownOpen();
 
       const iconNotToBeFound = fixture.nativeElement.querySelector('[ng-reflect-icon="check"]');
       expect(iconNotToBeFound).toBeFalsy();
 
-      initializeFormControl();
+      updateControlValue();
 
       const checkIcon = fixture.nativeElement.querySelector('[ng-reflect-icon="check"]');
+
+      expect(checkIcon).toBeTruthy();
+    });
+
+    it('should have selected value if form control value is updated from application', () => {
+      setSelectDropdownOpen();
+
+      updateControlValue();
+
+      const checkIcon = fixture.nativeElement.querySelector(
+        '.fudis-select-option--selected [ng-reflect-icon="check"]',
+      );
+
+      const selectedValue = fixture.debugElement.query(
+        By.css('.fudis-select-option--selected'),
+      ).nativeElement;
+
+      expect(getTrimmedTextContent(selectedValue)).toEqual('Capybara');
+
+      expect(checkIcon).toBeTruthy();
+    });
+
+    it('should have preselected value, if control has value on init', () => {
+      initializeFormControlWithValue();
+      setSelectDropdownOpen();
+
+      const checkIcon = fixture.nativeElement.querySelector(
+        '.fudis-select-option--selected [ng-reflect-icon="check"]',
+      );
+
+      const selectedValue = fixture.debugElement.query(
+        By.css('.fudis-select-option--selected'),
+      ).nativeElement;
+
+      expect(getTrimmedTextContent(selectedValue)).toEqual('Screaming hairy armadillo');
 
       expect(checkIcon).toBeTruthy();
     });
@@ -120,8 +152,7 @@ describe('SelectOptionComponent', () => {
 
   describe('Select option', () => {
     it('should have disabled option', () => {
-      initializeSelect();
-      initializeFormControl();
+      setSelectDropdownOpen();
 
       const options = fixture.debugElement.queryAll(By.css('.fudis-select-option'));
 
@@ -130,15 +161,16 @@ describe('SelectOptionComponent', () => {
 
       expect(options[3].nativeElement.outerHTML).toContain('fudis-select-option--disabled');
       expect(options[3].attributes['aria-selected']).toEqual('false');
-      expect(options[4].nativeElement.outerHTML).toContain('fudis-select-option--selected');
     });
 
-    it('should include text `Disabled` when option is disabled', () => {
-      initializeSelect();
-      initializeFormControl();
+    it('should include correct label text with `Disabled` when option is disabled', () => {
+      setSelectDropdownOpen();
 
       const options = fixture.debugElement.queryAll(By.css('.fudis-select-option'));
-      expect(options[3].nativeElement.innerHTML).toContain('Disabled');
+
+      const textContent = getTrimmedTextContent(options[3].nativeElement);
+
+      expect(textContent).toEqual('Really dangerous cat (Disabled)');
     });
   });
 });
