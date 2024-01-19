@@ -25,7 +25,7 @@
   /* stylelint-disable-next-line selector-class-pattern */
   &:not(.fudis-select-option__focusable) {
     display: none;
-    visibility: none;
+    visibility: hidden;
   }
 
   &:hover {
