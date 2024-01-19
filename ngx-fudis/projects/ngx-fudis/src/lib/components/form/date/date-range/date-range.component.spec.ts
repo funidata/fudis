@@ -16,6 +16,7 @@ import { ValidatorErrorMessageComponent } from '../../error-message/validator-er
 import { FudisValidators, TooltipDirective } from '../../../../../public-api';
 import { FudisIdService } from '../../../../services/id/id.service';
 
+// TODO: write tests
 describe('DateRangeComponent', () => {
   let component: DateRangeComponent;
   let fixture: ComponentFixture<DateRangeComponent>;
@@ -44,7 +45,6 @@ describe('DateRangeComponent', () => {
     fixture = TestBed.createComponent(DateRangeComponent);
 
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -55,11 +55,11 @@ describe('DateRangeComponent', () => {
       control: new FormControl<Date | null>(null, [
         FudisValidators.required('Start date is required'),
         FudisValidators.datepickerMin({
-          value: new Date('2023-06-15'),
+          value: new Date(2023, 5, 15),
           message: 'Start date cannot be earlier than 15.6.2023',
         }),
         FudisValidators.datepickerMax({
-          value: new Date('2023-07-25'),
+          value: new Date(2023, 6, 25),
           message: 'Start date cannot be later than 25.7.2023',
         }),
       ]),
@@ -70,11 +70,11 @@ describe('DateRangeComponent', () => {
       control: new FormControl<Date | null>(null, [
         FudisValidators.required('End date is required'),
         FudisValidators.datepickerMin({
-          value: new Date('2023-07-15'),
+          value: new Date(2023, 6, 15),
           message: 'End date cannot be earlier than 15.7.2023',
         }),
         FudisValidators.datepickerMax({
-          value: new Date('2023-08-25'),
+          value: new Date(2023, 7, 25),
           message: 'End date cannot be later than 25.8.2023',
         }),
       ]),

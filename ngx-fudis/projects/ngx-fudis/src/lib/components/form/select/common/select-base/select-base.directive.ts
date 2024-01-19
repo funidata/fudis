@@ -230,7 +230,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
     const openDropdown = !this.autocomplete && !this._preventDropdownReopen && !this._dropdownOpen;
 
     if (openAutocomplete || openDropdown) {
-      this._openDropdown();
+      this.openDropdown();
 
       this._preventClick = true;
       this._preventDropdownReopen = false;
@@ -328,14 +328,14 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
     if (this._dropdownOpen) {
       this.closeDropdown();
     } else {
-      this._openDropdown();
+      this.openDropdown();
     }
   }
 
   /**
    * Open dropdown
    */
-  protected _openDropdown(): void {
+  public openDropdown(): void {
     this._openedOnce = true;
     this._dropdownOpen = true;
   }

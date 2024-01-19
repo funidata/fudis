@@ -1,5 +1,4 @@
 import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/angular';
-
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup } from '@angular/forms';
 import { Component, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,7 +8,6 @@ import {
   FudisRadioButtonOption,
   FudisDateRangeItem,
 } from '../../../types/forms';
-
 import { FieldSetComponent } from './fieldset.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
@@ -28,9 +26,9 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
       <ng-template fudisActions type="fieldset">
         <fudis-button [variant]="'tertiary'" [icon]="'plus'" [label]="'Some action'" />
       </ng-template>
-      <ng-template fudisNotifications type="fieldset"
-        ><fudis-notification>This is notification</fudis-notification></ng-template
-      >
+      <ng-template fudisNotifications type="fieldset">
+        <fudis-notification>This is notification</fudis-notification>
+      </ng-template>
       <ng-template fudisContent type="fieldset">
         <fudis-grid [columns]="{ md: 2 }">
           <fudis-input-with-language-options
@@ -60,7 +58,6 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
           />
           <fudis-text-input
             [id]="'unique-input-4'"
-            [helpText]="inputHelpText"
             [control]="fieldsetExample.controls['email']"
             [label]="labelEmail"
             [helpText]="'So that students can ask for more time on their homework.'"
@@ -151,7 +148,6 @@ class FieldsetExampleComponent {
   };
 
   languageOptions: FudisSelectOption[] = [
-    // eslint-disable-next-line @typescript-eslint/dot-notation
     { value: 'finnish', label: 'FI' },
     { value: 'swedish', label: 'SV' },
     { value: 'english', label: 'EN' },
@@ -170,8 +166,6 @@ class FieldsetExampleComponent {
 export default {
   title: 'Components/Form/Field Set',
   component: FieldSetComponent,
-
-  argTypes: {},
   decorators: [
     moduleMetadata({
       declarations: [FieldsetExampleComponent],
@@ -181,17 +175,10 @@ export default {
       providers: [importProvidersFrom(BrowserAnimationsModule)],
     }),
   ],
-  parameters: {
-    controls: {
-      exclude: ['control'],
-    },
-  },
 } as Meta;
 
-const Template: StoryFn = () => ({
-  template: `
-	<example-fieldset></example-fieldset>
-	`,
-});
+const html = String.raw;
 
-export const Example = Template.bind({});
+export const Example: StoryFn = () => ({
+  template: html` <example-fieldset /> `,
+});

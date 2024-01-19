@@ -1,9 +1,7 @@
 import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/angular';
-
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { Component, OnInit, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { RouterModule } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import {
@@ -11,7 +9,6 @@ import {
   FudisRadioButtonOption,
   FudisDateRangeItem,
 } from '../../../types/forms';
-
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
@@ -38,7 +35,6 @@ import readme from './readme.mdx';
       [errorSummaryHelpText]="
         'There are errors in this form. Please address these before trying to submit again.'
       "
-      [errorSummaryLiveRemove]="false"
       [errorSummaryVisible]="errorSummaryVisible"
     >
       <ng-template fudisHeader>
@@ -93,8 +89,7 @@ import readme from './readme.mdx';
                           [groupErrorMsg]="errorName"
                         >
                           <fudis-error-message
-                            [visible]="
-                              formExample.controls['importantDate'].touched &&
+                            *ngIf="
                               formExample.controls['importantDate'].value?.getTime() !== releaseDate
                             "
                             [message]="
@@ -136,7 +131,7 @@ import readme from './readme.mdx';
                           [control]="formExample.controls['importantDate']"
                         >
                           <fudis-error-message
-                            [visible]="
+                            *ngIf="
                               formExample.controls['importantDate'].value?.getTime() !== releaseDate
                             "
                             [message]="'Wrong date chosen. 1.5.1991 would be great!'"
@@ -161,7 +156,6 @@ import readme from './readme.mdx';
                         </fudis-text-input>
                         <fudis-text-input
                           [id]="'unique-input-4'"
-                          [helpText]="inputHelpText"
                           [control]="formExample.controls['email']"
                           [label]="'Contact email'"
                           [helpText]="'So that students can ask for more time on their homework.'"
@@ -202,7 +196,7 @@ class FormContentExampleComponent implements OnInit {
     private _focusService: FudisFocusService,
   ) {}
 
-  releaseDate: number = new Date('1991-5-1').getTime();
+  releaseDate: number = new Date(1991, 4, 1).getTime();
 
   errorSummaryVisible: boolean = false;
 
@@ -297,12 +291,12 @@ class FormContentExampleComponent implements OnInit {
 
   submitForm(): void {
     this.formExample.markAllAsTouched();
+    this.errorSummaryVisible = true;
 
     this.firstLoad = false;
 
     if (this.formExample.invalid) {
       this._closed = false;
-      this.errorSummaryVisible = true;
       this._errorSummaryService.reloadErrors();
     } else {
       this.errorSummaryVisible = false;
@@ -314,11 +308,9 @@ class FormContentExampleComponent implements OnInit {
 
     if (currentLang === 'fi') {
       this._translationService.setLanguage('en');
-      // eslint-disable-next-line no-console
       console.log('Fudis internal language is now: EN');
     } else {
       this._translationService.setLanguage('fi');
-      // eslint-disable-next-line no-console
       console.log('Fudis internal language is now: FI');
     }
   }
@@ -331,7 +323,6 @@ class FormContentExampleComponent implements OnInit {
 export default {
   title: 'Components/Form/Form',
   component: FormComponent,
-  argTypes: {},
   decorators: [
     moduleMetadata({
       declarations: [FormContentExampleComponent],
@@ -345,16 +336,11 @@ export default {
     docs: {
       page: readme,
     },
-    controls: {
-      exclude: ['control'],
-    },
   },
 } as Meta;
 
 const html = String.raw;
 
-const Template: StoryFn = () => ({
+export const Example: StoryFn = () => ({
   template: html` <example-form-content />`,
 });
-
-export const Example = Template.bind({});

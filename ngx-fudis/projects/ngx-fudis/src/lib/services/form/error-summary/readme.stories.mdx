@@ -4,11 +4,11 @@ import { Meta } from "@storybook/blocks";
 
 # Error Summary Service
 
-## Functions
+## Features
 
-### Reload errors
+### Reload Errors
 
-Reload errors is an error summary service functionality that updates the visible list of errors shown in the Fudis Error Summary component.
+Reload Errors is Error Summary Service functionality that updates the visible list of errors shown in the Fudis Error Summary component.
 
 Import `FudisErrorSummaryService` and add the parameter to constructor:
 
@@ -22,15 +22,7 @@ constructor(
 ) {}
 ```
 
-When calling `reloadErrors` function, you can set an optional timeout delay in milliseconds:
-
-```
-this._service.reloadErrors(); // sets timeout to 0ms
-
-this._service.reloadErrors(100); // sets timeout to 100ms
-```
-
-Recommended pattern is to call above function when user clicks form's Submit button which also sets Form's error summary as visible.
+Recommended pattern is to call `reloadErrors` when user clicks form's submit button which also sets Error Summary as visible in Fudis Form.
 
 ```
 protected _submitButtonClick():void {
@@ -46,6 +38,20 @@ protected _submitButtonClick():void {
 
 ```
 
-## Related components
+### Update Strategy
 
-[ErrorSummary](/docs/components-form-error-summary--documentation)
+By default Error Summary updates only when calling Reload Errors function. All options are:
+
+- `reloadOnly` (default): Error Summary list updates only when calling
+- `onRemove`: Updates Error Summary on reload and removes errors when user corrects one of the visibile errors.
+- `all`: Updates Error Summary dynamically when errors are added, removed or when reload is called
+
+To set Update Strategy, call service's setter function. E. g. to `all` with:
+
+```
+this._service.setUpdateStrategy('all')
+```
+
+## Related Components
+
+[Error Summary](/docs/components-form-error-summary--documentation)

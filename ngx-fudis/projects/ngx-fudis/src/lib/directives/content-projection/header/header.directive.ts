@@ -1,9 +1,9 @@
 import { Directive, TemplateRef } from '@angular/core';
 
 /**
- * A marker directive used to tag the template that will be rendered inside of components. Used in e. g. `ExpandableComponent`.
+ * A marker directive used to tag additional header section that will be rendered inside of components.
+ * Additional header section can contain e.g. compact version of Description List Component
  */
-
 @Directive({ selector: '[fudisHeader]' })
 export class HeaderDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}

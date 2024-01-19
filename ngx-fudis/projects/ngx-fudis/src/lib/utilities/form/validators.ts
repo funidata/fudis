@@ -137,7 +137,7 @@ function pattern(regex: string | RegExp, message: FudisValidatorMessage): FudisV
 }
 
 /**
- * Fudis version of matDatepickerMin validator
+ * Min date validator for Datepicker
  */
 function datepickerMin(settings: FudisValidatorsDatepickerSettings) {
   return (control: AbstractControl) => {
@@ -147,8 +147,8 @@ function datepickerMin(settings: FudisValidatorsDatepickerSettings) {
     if (simplifiedMinDate > simplifiedControlDate) {
       return {
         datepickerMin: {
-          value: settings.value,
           message: settings.message,
+          value: settings.value,
         },
       };
     }
@@ -158,7 +158,7 @@ function datepickerMin(settings: FudisValidatorsDatepickerSettings) {
 }
 
 /**
- * Fudis version of matDatepickerMax validator
+ * Max date validator for Datepicker
  */
 function datepickerMax(settings: FudisValidatorsDatepickerSettings) {
   return (control: AbstractControl) => {
@@ -168,8 +168,8 @@ function datepickerMax(settings: FudisValidatorsDatepickerSettings) {
     if (simplifiedMaxDate < simplifiedControlDate) {
       return {
         datepickerMax: {
-          value: settings.value,
           message: settings.message,
+          value: settings.value,
         },
       };
     }

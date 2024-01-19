@@ -1,5 +1,7 @@
 import { AbstractControl, FormControl, Validators } from '@angular/forms';
 
+// TODO: write tests for all of these
+
 export const hasRequiredValidator = (control: AbstractControl): boolean => {
   const nativeRequired = control.hasValidator(Validators.required);
 
@@ -65,7 +67,7 @@ export const getMinDateFromValidator = (control: AbstractControl): Date | undefi
     return undefined;
   }
 
-  const errors = validatorFn(new FormControl(new Date('1337-01-01')));
+  const errors = validatorFn(new FormControl(new Date(1337, 0, 1)));
   const value = errors?.['datepickerMin']?.value;
 
   if (value) {
@@ -84,7 +86,7 @@ export const getMaxDateFromValidator = (control: AbstractControl): Date | undefi
     return undefined;
   }
 
-  const errors = validatorFn(new FormControl(new Date('4242-01-01')));
+  const errors = validatorFn(new FormControl(new Date(4242, 0, 1)));
   const value = errors?.['datepickerMax']?.value;
 
   if (value) {

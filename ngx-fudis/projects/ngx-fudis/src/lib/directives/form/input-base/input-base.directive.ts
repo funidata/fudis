@@ -8,7 +8,6 @@ import {
   ViewChild,
   ElementRef,
 } from '@angular/core';
-
 import { FudisFormErrors } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -65,7 +64,6 @@ export class InputBaseDirective extends TooltipApiDirective {
   /**
    * Error messages shown when form control validators are invalid
    */
-
   @Input() errorMsg: FudisFormErrors | undefined;
 
   /**
