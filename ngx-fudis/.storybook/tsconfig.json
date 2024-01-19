@@ -2,14 +2,14 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "types": ["node"],
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
   },
   "exclude": [
     "../src/test.ts",
     "../src/**/*.spec.ts",
     "../projects/**/*.spec.ts",
-    "../projects/dev/**/*"
+    "../projects/dev/**/*",
   ],
   "include": ["../src/**/*", "../projects/**/*", "../stories/**/*"],
-  "files": ["./typings.d.ts"]
+  "files": ["./typings.d.ts"],
 }
