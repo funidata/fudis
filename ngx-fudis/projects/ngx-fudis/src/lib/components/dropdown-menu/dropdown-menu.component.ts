@@ -2,13 +2,17 @@ import {
   AfterContentInit,
   ChangeDetectionStrategy,
   Component,
+  Host,
   HostListener,
   Input,
+  OnInit,
+  Optional,
   ViewEncapsulation,
 } from '@angular/core';
 
 import { FudisIdService } from '../../services/id/id.service';
 import { DropdownBaseDirective } from '../../directives/form/dropdown-base/dropdown-base.directive';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'fudis-dropdown-menu',
@@ -17,10 +21,15 @@ import { DropdownBaseDirective } from '../../directives/form/dropdown-base/dropd
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DropdownMenuComponent extends DropdownBaseDirective implements AfterContentInit {
-  constructor(private _idService: FudisIdService) {
+export class DropdownMenuComponent
+  extends DropdownBaseDirective
+  implements OnInit, AfterContentInit
+{
+  constructor(
+    private _idService: FudisIdService,
+    @Host() @Optional() private _button: ButtonComponent,
+  ) {
     super();
-    this.id = _idService.getNewParentId('dropdown-menu');
   }
 
   /**
@@ -40,6 +49,18 @@ export class DropdownMenuComponent extends DropdownBaseDirective implements Afte
       this._maxWidth = `${window.innerWidth - elementInViewX}px`;
     } else {
       this._maxWidth = 'initial';
+    }
+  }
+
+  ngOnInit(): void {
+    if (this.parentId) {
+      this.id = this.parentId + '-dropdown';
+      this._idService.addNewParentId('dropdown-menu', this.id);
+    } else {
+      this.id = this._idService.getNewParentId('dropdown-menu');
+      if (this._button) {
+        this._button.dropdownMenuId = this.id;
+      }
     }
   }
 

@@ -143,7 +143,7 @@ export class FudisIdService {
   }
 
   /**
-   * To add custom id for a parent in family
+   * To add custom id for a parent in a family. E. g. used with DropdownMenu where parent is AutocompleteMultiselect
    */
   public addNewParentId(componentType: FudisIdParent, id: string) {
     const newItem: FudisIdFamily = {
