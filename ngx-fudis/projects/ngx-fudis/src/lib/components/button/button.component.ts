@@ -91,6 +91,11 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
   public dropdownOpen: boolean = false;
 
   /**
+   * Id of child Dropdown Menu. Passed from child to parent Button.
+   */
+  public dropdownMenuId: string;
+
+  /**
    * Automatically sets icon color based on button variant
    */
   protected _iconColor: FudisIconColor = 'white';
@@ -115,26 +120,26 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
     this._ariaLabel = this._getAriaLabel();
   }
 
-  buttonClick(event: Event): void {
+  public buttonClick(event: Event): void {
     if (this.asMenuButton) {
       this.toggleMenu();
     }
     this.handleClick.emit(event);
   }
 
-  toggleMenu(): void {
+  public toggleMenu(): void {
     this.dropdownOpen = !this.dropdownOpen;
   }
 
-  openMenu(): void {
+  public openMenu(): void {
     this.dropdownOpen = true;
   }
 
-  closeMenu(): void {
+  public closeMenu(): void {
     this.dropdownOpen = false;
   }
 
-  handleBlur(event: FocusEvent): void {
+  public handleBlur(event: FocusEvent): void {
     const targetIsDropdownMenuButton = (event.relatedTarget as HTMLElement)?.classList?.contains(
       'fudis-dropdown-menu-item',
     );
