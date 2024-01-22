@@ -60,7 +60,9 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
   }
 
   ngOnDestroy(): void {
-    this._controlValueSubscription.unsubscribe();
+    if (this._controlValueSubscription) {
+      this._controlValueSubscription.unsubscribe();
+    }
   }
 
   /**
