@@ -227,8 +227,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 
     const openAutocomplete =
       this.autocomplete &&
-      this._autocompleteFilterText() !== '' &&
-      !this.autocompleteClearButton &&
+      (!this.autocompleteClearButton ||
+        (this.autocompleteClearButton && this._autocompleteFilterText() !== '')) &&
       !this._preventDropdownReopen &&
       !this._dropdownOpen;
 
