@@ -28,6 +28,8 @@ describe('SelectDropdownComponent', () => {
   let component: SelectDropdownComponent;
   let fixture: ComponentFixture<SelectDropdownComponent>;
   let parentComponent: MockWithParentComponent;
+  let htmlElement: HTMLElement;
+  let htmlWithParentElement: HTMLElement;
   let parentFixture: ComponentFixture<MockWithParentComponent>;
 
   beforeEach(() => {
@@ -41,6 +43,8 @@ describe('SelectDropdownComponent', () => {
     parentFixture = TestBed.createComponent(MockWithParentComponent);
     parentComponent = parentFixture.componentInstance;
     parentFixture.detectChanges();
+    htmlWithParentElement = getElement(parentFixture, '.fudis-select-dropdown');
+    htmlElement = getElement(fixture, '.fudis-select-dropdown');
   });
 
   it('should create', () => {
@@ -49,24 +53,18 @@ describe('SelectDropdownComponent', () => {
 
   describe('Default property values', () => {
     it('should have size lg', () => {
-      const element = getElement(fixture, '.fudis-select-dropdown');
-
       expect(component.size).toEqual('lg');
-      expect(element.classList).toContain('fudis-input-size__lg');
+      expect(htmlElement.classList).toContain('fudis-input-size__lg');
     });
 
     it('should be single-select', () => {
-      const element = getElement(fixture, '.fudis-select-dropdown');
-
       expect(component.multiselect).toEqual(false);
-      expect(element.classList).not.toContain('fudis-select-dropdown__multiselect');
+      expect(htmlElement.classList).not.toContain('fudis-select-dropdown__multiselect');
     });
 
     it('should be closed', () => {
-      const element = getElement(fixture, '.fudis-select-dropdown');
-
       expect(component.open).toEqual(false);
-      expect(element.classList).not.toContain('fudis-select-dropdown--open');
+      expect(htmlElement.classList).not.toContain('fudis-select-dropdown--open');
     });
 
     it('should have CSS host class', () => {
@@ -76,30 +74,22 @@ describe('SelectDropdownComponent', () => {
 
   describe('Passed property values', () => {
     it('should have parent id', () => {
-      const dropdownElement = getElement(parentFixture, '.fudis-select-dropdown');
-
-      expect(dropdownElement.id).toEqual('parent-element-id-dropdown');
+      expect(htmlWithParentElement.id).toEqual('parent-element-id-dropdown');
     });
 
     it('should have respective size value', () => {
-      const dropdownElement = getElement(parentFixture, '.fudis-select-dropdown');
-
       expect(parentComponent.dropdown.size).toEqual('md');
-      expect(dropdownElement.className).toContain('fudis-input-size__md');
+      expect(htmlWithParentElement.className).toContain('fudis-input-size__md');
     });
 
     it('should have respective multiselect value', () => {
-      const dropdownElement = getElement(parentFixture, '.fudis-select-dropdown');
-
       expect(parentComponent.dropdown.multiselect).toEqual(true);
-      expect(dropdownElement.className).toContain('fudis-select-dropdown__multiselect');
+      expect(htmlWithParentElement.className).toContain('fudis-select-dropdown__multiselect');
     });
 
     it('should have respective open value', () => {
-      const dropdownElement = getElement(parentFixture, '.fudis-select-dropdown');
-
       expect(parentComponent.dropdown.open).toEqual(true);
-      expect(dropdownElement.className).toContain('fudis-select-dropdown--open');
+      expect(htmlWithParentElement.className).toContain('fudis-select-dropdown--open');
     });
   });
 });
