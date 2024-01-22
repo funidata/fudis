@@ -35,6 +35,7 @@ import { By } from '@angular/platform-browser';
 		<fudis-select-option
 			*ngFor="let option of testOptions"
 			[data]="option"
+			(handleBlur)="handleOptionBlur($event)"
 		></fudis-select-option>
 	</ng-template>
 </fudis-select>`,
@@ -45,6 +46,12 @@ class MockComponent {
 	control: FormControl = new FormControl(null);
 	
 	@ViewChild('selectElem') selectElem: SelectComponent;
+
+	eventReceived: HTMLElement;
+
+	handleOptionBlur(event: FocusEvent) {
+		this.eventReceived = event.relatedTarget as HTMLElement;
+	}
 }
 
 describe('SelectOptionBaseDirective', () => {
@@ -112,6 +119,7 @@ describe('SelectOptionBaseDirective', () => {
 			expect(options[1].nativeElement.outerHTML).toContain('fudis-select-option__focusable');
 			expect(options[2].nativeElement.outerHTML).toContain('fudis-select-option__focusable');
 		})
+
 		// it('should show message `no result found` when non existent input is given', () => {
 		// 	updateControlValue('ÄÄÄ');
 		// 	setSelectDropdownOpen();
@@ -125,5 +133,22 @@ describe('SelectOptionBaseDirective', () => {
 		// 	expect(element.outerHTML).toContain('fudis-select-dropdown__no-results--visible');
 		// 	phl(element.outerHTML);
 		// })
+
+		it('should trigger blur event when focused elsewhere', () => {
+			updateControlValue('Platypus');
+			setSelectDropdownOpen();
+
+			jest.spyOn(component, 'handleOptionBlur');
+
+			const firstElement = fixture.nativeElement.querySelector('#fudis-select-1-item-2') as HTMLInputElement;
+			const secondElement = fixture.nativeElement.querySelector('#fudis-select-1-item-4') as HTMLInputElement;
+			
+
+			firstElement.focus();
+			secondElement.focus();
+
+			expect(component.eventReceived).toEqual(secondElement);
+			expect(component.handleOptionBlur).toHaveBeenCalled();
+		})
 	})
 });
