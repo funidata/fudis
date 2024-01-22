@@ -17,7 +17,6 @@ import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.compon
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 import { SelectBaseDirective } from '../select-base/select-base.directive';
 import { FudisIdService } from '../../../../../services/id/id.service';
-// import { phl } from '@angular-extensions/pretty-html-log';
 import { getTrimmedTextContent } from '../../../../../utilities/tests/utilities';
 import { By } from '@angular/platform-browser';
 
@@ -82,8 +81,8 @@ describe('SelectOptionBaseDirective', () => {
     fixture.detectChanges();
   }
 
-	function updateControlValue() {
-    component.control.patchValue(defaultOptions[2]);
+	function updateControlValue(givenLabel: string) {
+    component.control.patchValue({label: `${givenLabel}`});
     fixture.detectChanges();
   }
 
@@ -95,7 +94,7 @@ describe('SelectOptionBaseDirective', () => {
 
 	describe.only('Autocomplete functionality', () => {
 		it('should return option focusable class for selected option', () => {
-			updateControlValue();
+			updateControlValue('Platypus');
 			setSelectDropdownOpen();
 
 			const options = fixture.debugElement.queryAll(By.css('fudis-select-option'))
@@ -104,5 +103,27 @@ describe('SelectOptionBaseDirective', () => {
 			expect(options[2].nativeElement.outerHTML).toContain('fudis-select-option__focusable fudis-select-option--selected');
       expect(textContent).toEqual('Platypus');
 		});
+
+		it('should filter correct options for given letter input', () => {
+			updateControlValue('P');
+			setSelectDropdownOpen();
+
+			const options = fixture.debugElement.queryAll(By.css('fudis-select-option'))
+			expect(options[1].nativeElement.outerHTML).toContain('fudis-select-option__focusable');
+			expect(options[2].nativeElement.outerHTML).toContain('fudis-select-option__focusable');
+		})
+		// it('should show message `no result found` when non existent input is given', () => {
+		// 	updateControlValue('ÄÄÄ');
+		// 	setSelectDropdownOpen();
+
+		// 	const element = getElement(fixture, 'fudis-body-text');
+		// 	const textContent = getTrimmedTextContent(element);
+
+    //   expect(textContent).toEqual('No results found');
+
+		// 	console.log(component.selectElem.visibleOptionsValues.length);
+		// 	expect(element.outerHTML).toContain('fudis-select-dropdown__no-results--visible');
+		// 	phl(element.outerHTML);
+		// })
 	})
 });
