@@ -196,7 +196,7 @@ describe('getValidators utility function', () => {
         getMaxDateFromValidator(control) ||
         getMinDateFromValidator(control);
 
-      expect(zeroTrue).toEqual(false);
+      expect(zeroTrue).toBeUndefined();
     });
   });
 });
