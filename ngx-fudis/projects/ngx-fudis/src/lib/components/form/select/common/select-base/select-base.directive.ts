@@ -116,6 +116,11 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
   public focusSelector: string;
 
   /**
+   * With autocomplete always assume that no results are found when control value is updated or when autocomplete filter text is updated. Each option will then check, if control value or filter text value matches its label and sets this false.
+   */
+  public noResultsFound: boolean = true;
+
+  /**
    * For setting dropdown open / closed
    */
   protected _dropdownOpen: boolean = false;
@@ -341,7 +346,10 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
   }
 
   protected _filterTextUpdate(text: string): void {
-    this._autocompleteFilterText.set(text);
+    if (this._autocompleteFilterText() !== text) {
+      this.noResultsFound = true;
+      this._autocompleteFilterText.set(text);
+    }
   }
 
   /**
