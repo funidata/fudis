@@ -1,4 +1,4 @@
-import { Component, Host, Inject, OnInit, Optional, effect } from '@angular/core';
+import { Component, Host, Inject, OnDestroy, OnInit, Optional, effect } from '@angular/core';
 
 import { DOCUMENT } from '@angular/common';
 import { FudisSelectOption } from '../../../../../types/forms';
@@ -6,13 +6,14 @@ import { FudisIdService } from '../../../../../services/id/id.service';
 import { SelectComponent } from '../select.component';
 import { SelectGroupComponent } from '../../common/select-group/select-group.component';
 import { SelectOptionBaseDirective } from '../../common/select-option-base/select-option-base.directive';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'fudis-select-option',
   templateUrl: './select-option.component.html',
   styleUrls: ['./select-option.component.scss'],
 })
-export class SelectOptionComponent extends SelectOptionBaseDirective implements OnInit {
+export class SelectOptionComponent extends SelectOptionBaseDirective implements OnInit, OnDestroy {
   constructor(
     private _idService: FudisIdService,
     @Inject(DOCUMENT) _document: Document,
@@ -40,11 +41,26 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
     });
   }
 
+  /**
+   * Subscription to listen to control's value changes coming from outside Fudis components
+   */
+  protected _controlValueSubscription: Subscription;
+
   ngOnInit(): void {
     if (this._parent.autocomplete) {
       this._isOptionVisible(this._parent.getAutocompleteFilterText()());
       this._isOptionTyped(this._parent.getAutocompleteFilterText()());
+
+      this._updateVisibilityFromControlUpdate();
+
+      this._controlValueSubscription = this._parentSelect.control.valueChanges.subscribe(() => {
+        this._updateVisibilityFromControlUpdate();
+      });
     }
+  }
+
+  ngOnDestroy(): void {
+    this._controlValueSubscription.unsubscribe();
   }
 
   /**
@@ -71,6 +87,12 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
         const selectedOption: FudisSelectOption = { ...this.data, fudisGeneratedHtmlId: this._id };
         this._parentSelect.handleSelectionChange(selectedOption, true);
       }
+    }
+  }
+
+  private _updateVisibilityFromControlUpdate(): void {
+    if (this._parentSelect.control.value?.label === this.data.label) {
+      this._parentSelect.noResultsFound = false;
     }
   }
 }
