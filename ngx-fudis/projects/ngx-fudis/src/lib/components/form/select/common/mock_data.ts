@@ -9,6 +9,13 @@ export const defaultOptions: FudisSelectOption[] = [
   { value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
 ];
 
+export const multiselectChipListMockData: FudisSelectOption[] = [
+  { value: 'hereford', label: 'Hereford' },
+  { value: 'texas-longhorn', label: 'Texas Longhorn' },
+  { value: 'ayrshire', label: 'Ayrshire' },
+  { value: 'wagyu', label: 'Wagyu' },
+];
+
 export const selectMockData: FudisSelectOption[] = [
   {
     value: '4257d865-872c-4ea6-80e6-8bd04ce56ad7',
