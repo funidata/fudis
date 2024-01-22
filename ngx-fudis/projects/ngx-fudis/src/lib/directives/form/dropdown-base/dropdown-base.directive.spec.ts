@@ -27,7 +27,7 @@ describe('DropdownBaseDirective', () => {
     });
 
     it('should have _maxWidth initial', () => {
-      expect(directive['_maxWidth']).toEqual('initial');
+      expect(directive.maxWidth).toEqual('initial');
     });
   });
 });
