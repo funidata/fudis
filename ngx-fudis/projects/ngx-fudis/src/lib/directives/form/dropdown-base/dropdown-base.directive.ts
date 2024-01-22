@@ -41,4 +41,11 @@ export class DropdownBaseDirective {
    * Determine dropdown max-width
    */
   protected _maxWidth: string = 'initial';
+
+  /**
+   * Get defined dropdown css max-width attribute
+   */
+  get maxWidth(): string {
+    return this._maxWidth;
+  }
 }
