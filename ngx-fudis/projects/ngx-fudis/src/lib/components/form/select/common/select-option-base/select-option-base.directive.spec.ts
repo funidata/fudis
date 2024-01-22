@@ -21,49 +21,48 @@ import { getTrimmedTextContent } from '../../../../../utilities/tests/utilities'
 import { By } from '@angular/platform-browser';
 
 @Component({
-	selector: 'fudis-mock-select-option-base-directive',
-	template: `<fudis-select
-		#selectElem
-		[label]="'Test Label'"
-		[autocomplete]="true"
-		[placeholder]="'Test placeholder'"
-		[control]="control"
-		[autocompleteClearButton]="false"
-		[size]="'md'"
->
-	<ng-template fudisContent type="select-options">
-		<fudis-select-option
-			*ngFor="let option of testOptions"
-			[data]="option"
-			(handleBlur)="handleOptionBlur($event)"
-		></fudis-select-option>
-	</ng-template>
-</fudis-select>`,
+  selector: 'fudis-mock-select-option-base-directive',
+  template: `<fudis-select
+    #selectElem
+    [label]="'Test Label'"
+    [autocomplete]="true"
+    [placeholder]="'Test placeholder'"
+    [control]="control"
+    [autocompleteClearButton]="false"
+    [size]="'md'"
+  >
+    <ng-template fudisContent type="select-options">
+      <fudis-select-option
+        *ngFor="let option of testOptions"
+        [data]="option"
+        (handleBlur)="handleOptionBlur($event)"
+      ></fudis-select-option>
+    </ng-template>
+  </fudis-select>`,
 })
-
 class MockComponent {
-	testOptions: FudisSelectOption[] = defaultOptions;
-	control: FormControl = new FormControl(null);
-	
-	@ViewChild('selectElem') selectElem: SelectComponent;
+  testOptions: FudisSelectOption[] = defaultOptions;
+  control: FormControl = new FormControl(null);
 
-	eventReceived: HTMLElement;
+  @ViewChild('selectElem') selectElem: SelectComponent;
 
-	handleOptionBlur(event: FocusEvent) {
-		this.eventReceived = event.relatedTarget as HTMLElement;
-	}
+  eventReceived: FocusEvent;
+
+  handleOptionBlur(event: FocusEvent) {
+    this.eventReceived = event;
+  }
 }
 
 describe('SelectOptionBaseDirective', () => {
-	let component: MockComponent;
-	let fixture: ComponentFixture<MockComponent>;
+  let component: MockComponent;
+  let fixture: ComponentFixture<MockComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-				ContentDirective,
+        ContentDirective,
         SelectComponent,
-				SelectOptionBaseDirective,
+        SelectOptionBaseDirective,
         SelectOptionComponent,
         SelectGroupComponent,
         SelectDropdownComponent,
@@ -73,82 +72,73 @@ describe('SelectOptionBaseDirective', () => {
         IconComponent,
         LabelComponent,
         BodyTextComponent,
-			],
+      ],
       providers: [FudisIdService, FudisTranslationService, SelectBaseDirective],
       imports: [ReactiveFormsModule],
     }).compileComponents();
 
-		fixture = TestBed.createComponent(MockComponent);
-		component = fixture.componentInstance;
-		fixture.detectChanges();
-	})
+    fixture = TestBed.createComponent(MockComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-	function setSelectDropdownOpen() {
+  function setSelectDropdownOpen() {
     component.selectElem.openDropdown();
     fixture.detectChanges();
   }
 
-	function updateControlValue(givenLabel: string) {
-    component.control.patchValue({label: `${givenLabel}`});
+  function updateControlValue(givenLabel: string) {
+    component.control.patchValue({ label: `${givenLabel}` });
     fixture.detectChanges();
   }
 
-	describe('Component creation', () => {
-		it('should create mock component', () => {
-			expect(component).toBeTruthy();
-		});
-	})
+  describe('Component creation', () => {
+    it('should create mock component', () => {
+      expect(component).toBeTruthy();
+    });
+  });
 
-	describe.only('Autocomplete functionality', () => {
-		it('should return option focusable class for selected option', () => {
-			updateControlValue('Platypus');
-			setSelectDropdownOpen();
+  describe.only('Autocomplete functionality', () => {
+    it('should return option focusable class for selected option', () => {
+      updateControlValue('Platypus');
+      setSelectDropdownOpen();
 
-			const options = fixture.debugElement.queryAll(By.css('fudis-select-option'))
-			const textContent = getTrimmedTextContent(options[2].nativeElement);
+      const options = fixture.debugElement.queryAll(By.css('fudis-select-option'));
+      const textContent = getTrimmedTextContent(options[2].nativeElement);
 
-			expect(options[2].nativeElement.outerHTML).toContain('fudis-select-option__focusable fudis-select-option--selected');
+      expect(options[2].nativeElement.outerHTML).toContain(
+        'fudis-select-option__focusable fudis-select-option--selected',
+      );
       expect(textContent).toEqual('Platypus');
-		});
+    });
 
-		it('should filter correct options for given letter input', () => {
-			updateControlValue('P');
-			setSelectDropdownOpen();
+    it('should filter correct options for given letter input', () => {
+      updateControlValue('p');
+      setSelectDropdownOpen();
 
-			const options = fixture.debugElement.queryAll(By.css('fudis-select-option'))
-			expect(options[1].nativeElement.outerHTML).toContain('fudis-select-option__focusable');
-			expect(options[2].nativeElement.outerHTML).toContain('fudis-select-option__focusable');
-		})
+      const options = fixture.debugElement.queryAll(By.css('fudis-select-option'));
+      expect(options[1].nativeElement.outerHTML).toContain('fudis-select-option__focusable');
+      expect(options[2].nativeElement.outerHTML).toContain('fudis-select-option__focusable');
+    });
 
-		// it('should show message `no result found` when non existent input is given', () => {
-		// 	updateControlValue('ÄÄÄ');
-		// 	setSelectDropdownOpen();
+    it('should trigger blur event when focused elsewhere', () => {
+      updateControlValue('Platypus');
+      setSelectDropdownOpen();
 
-		// 	const element = getElement(fixture, 'fudis-body-text');
-		// 	const textContent = getTrimmedTextContent(element);
+      jest.spyOn(component, 'handleOptionBlur');
 
-    //   expect(textContent).toEqual('No results found');
+      const firstElement = fixture.nativeElement.querySelector(
+        '#fudis-select-1-item-2',
+      ) as HTMLInputElement;
+      const secondElement = fixture.nativeElement.querySelector(
+        '#fudis-select-1-item-4',
+      ) as HTMLInputElement;
 
-		// 	console.log(component.selectElem.visibleOptionsValues.length);
-		// 	expect(element.outerHTML).toContain('fudis-select-dropdown__no-results--visible');
-		// 	phl(element.outerHTML);
-		// })
+      firstElement.focus();
+      secondElement.focus();
 
-		it('should trigger blur event when focused elsewhere', () => {
-			updateControlValue('Platypus');
-			setSelectDropdownOpen();
-
-			jest.spyOn(component, 'handleOptionBlur');
-
-			const firstElement = fixture.nativeElement.querySelector('#fudis-select-1-item-2') as HTMLInputElement;
-			const secondElement = fixture.nativeElement.querySelector('#fudis-select-1-item-4') as HTMLInputElement;
-			
-
-			firstElement.focus();
-			secondElement.focus();
-
-			expect(component.eventReceived).toEqual(secondElement);
-			expect(component.handleOptionBlur).toHaveBeenCalled();
-		})
-	})
+      expect(component.eventReceived.target).toEqual(firstElement);
+      expect(component.handleOptionBlur).toHaveBeenCalled();
+    });
+  });
 });
