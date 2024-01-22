@@ -93,7 +93,7 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
   }
 
   private _updateVisibilityFromControlUpdate(): void {
-    if (this._parentSelect.control.value?.label === this.data.label) {
+    if (this._parentSelect.control.value?.value === this.data.value) {
       this._parentSelect.noResultsFound = false;
     }
   }
