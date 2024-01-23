@@ -17,7 +17,7 @@ import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.compon
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 import { SelectBaseDirective } from '../select-base/select-base.directive';
 import { FudisIdService } from '../../../../../services/id/id.service';
-import { getTrimmedTextContent } from '../../../../../utilities/tests/utilities';
+import { getAllElements, getTrimmedTextContent } from '../../../../../utilities/tests/utilities';
 import { By } from '@angular/platform-browser';
 
 @Component({
@@ -42,7 +42,7 @@ import { By } from '@angular/platform-browser';
 })
 class MockComponent {
   testOptions: FudisSelectOption[] = defaultOptions;
-  control: FormControl = new FormControl(null);
+  control: FormControl<FudisSelectOption | null> = new FormControl(null);
 
   @ViewChild('selectElem') selectElem: SelectComponent;
 
@@ -87,8 +87,8 @@ describe('SelectOptionBaseDirective', () => {
     fixture.detectChanges();
   }
 
-  function updateControlValue(givenLabel: string) {
-    component.control.patchValue({ label: `${givenLabel}` });
+  function updateControlValue(option: FudisSelectOption) {
+    component.control.patchValue(option);
     fixture.detectChanges();
   }
 
@@ -100,7 +100,7 @@ describe('SelectOptionBaseDirective', () => {
 
   describe.only('Autocomplete functionality', () => {
     it('should return option focusable class for selected option', () => {
-      updateControlValue('Platypus');
+      updateControlValue(defaultOptions[2]);
       setSelectDropdownOpen();
 
       const options = fixture.debugElement.queryAll(By.css('fudis-select-option'));
@@ -113,16 +113,37 @@ describe('SelectOptionBaseDirective', () => {
     });
 
     it('should filter correct options for given letter input', () => {
-      updateControlValue('p');
+      const input = fixture.debugElement.query(By.css('.fudis-select-autocomplete__input'));
+      const el = input.nativeElement;
+
+      el.value = 'p';
+      el.dispatchEvent(new KeyboardEvent('keyup'));
+      fixture.detectChanges();
+
       setSelectDropdownOpen();
 
-      const options = fixture.debugElement.queryAll(By.css('fudis-select-option'));
-      expect(options[1].nativeElement.outerHTML).toContain('fudis-select-option__focusable');
-      expect(options[2].nativeElement.outerHTML).toContain('fudis-select-option__focusable');
+      fixture.detectChanges();
+
+      const focusableOptions = getAllElements(
+        fixture,
+        '.fudis-select-option__focusable .fudis-select-option__label',
+      );
+
+      expect(focusableOptions.length).toEqual(2);
+
+      const optionsArray: string[] = [];
+
+      focusableOptions.forEach((item) => {
+        const cleanedContent = getTrimmedTextContent(item as HTMLElement);
+
+        optionsArray.push(cleanedContent);
+      });
+
+      expect(optionsArray).toEqual(['Capybara', 'Platypus']);
     });
 
     it('should trigger blur event when focused elsewhere', () => {
-      updateControlValue('Platypus');
+      updateControlValue(defaultOptions[2]);
       setSelectDropdownOpen();
 
       jest.spyOn(component, 'handleOptionBlur');

@@ -9,6 +9,10 @@ export function getElement(fixture: ComponentFixture<unknown>, query: string): H
   return fixture.nativeElement.querySelector(query) as HTMLElement;
 }
 
+export function getAllElements(fixture: ComponentFixture<unknown>, query: string): NodeList {
+  return fixture.nativeElement.querySelectorAll(query);
+}
+
 // TODO: Directive typing
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getDirective(fixture: ComponentFixture<unknown>, directive: any) {
