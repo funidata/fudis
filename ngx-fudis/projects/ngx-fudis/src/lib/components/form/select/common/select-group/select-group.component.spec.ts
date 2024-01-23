@@ -152,6 +152,23 @@ describe('SelectGroupComponent', () => {
 
 			expect(groupLabelsArray).toEqual(['Netherlands', 'Brazil', 'China']);
 		});
+
+		it('should have matching id', () => {
+			setSelectDropdownOpen();
+
+			const correctGroupIds = ['fudis-select-1-group-1','fudis-select-1-group-2','fudis-select-1-group-3'];
+			
+			const groups = getAllElements(fixture, 'fudis-select-group');
+
+			const groupIdsArray: string[] = [];
+
+			groups.forEach((group) => {
+				const groupId = (group as HTMLDivElement).querySelector('.fudis-select-group__label')!.getAttribute('id') as string;
+				groupIdsArray.push(groupId);
+			})
+
+			expect(groupIdsArray).toEqual(correctGroupIds);
+		})
 		
 		it('should return a correct amount of options for group', () => {
 			setSelectDropdownOpen();
