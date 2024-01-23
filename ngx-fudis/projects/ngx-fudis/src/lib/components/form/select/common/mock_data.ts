@@ -1,5 +1,10 @@
 import { FudisSelectOption } from '../../../../types/forms';
 
+interface MockSelectOptionGroupData {
+  country: string;
+  options: FudisSelectOption[];
+}
+
 export const defaultOptions: FudisSelectOption[] = [
   { value: 'value-1-dog', label: 'Dog' },
   { value: 'value-2-capybara', label: 'Capybara' },
@@ -832,7 +837,7 @@ export const selectMockData: FudisSelectOption[] = [
   },
 ];
 
-export const smallGroupedMockDatsa = [
+export const smallGroupedMockData: MockSelectOptionGroupData[] = [
   {
     country: 'Netherlands',
     options: [
@@ -850,7 +855,7 @@ export const smallGroupedMockDatsa = [
   },
 ];
 
-export const groupedMockData = [
+export const groupedMockData: MockSelectOptionGroupData[] = [
   {
     country: 'Netherlands',
     options: [
