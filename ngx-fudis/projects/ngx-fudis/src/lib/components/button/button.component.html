@@ -33,6 +33,7 @@
     #buttonElement
     [type]="type"
     (blur)="handleBlur($event)"
+    [attr.aria-controls]="asMenuButton && dropdownMenuId ? dropdownMenuId : null"
     [attr.aria-disabled]="disabled"
     [attr.aria-label]="_ariaLabel"
     [attr.id]="_id"
