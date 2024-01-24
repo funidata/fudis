@@ -22,7 +22,6 @@ describe('getValidators utility function', () => {
 
     it('should return true with Angular Validators', () => {
       const nativeControl = new FormControl('', Validators.required);
-
       const nativeRequired = hasRequiredValidator(nativeControl);
 
       expect(nativeRequired).toEqual(true);
@@ -38,9 +37,8 @@ describe('getValidators utility function', () => {
       expect(fudisMaxLength).toEqual(42);
     });
 
-    it('should return true with Angular Validators', () => {
+    it('should return correct value with Angular Validators', () => {
       const nativeControl = new FormControl('', Validators.maxLength(42));
-
       const nativeMaxLength = getMaxLengthFromValidator(nativeControl);
 
       expect(nativeMaxLength).toEqual(42);
@@ -48,7 +46,7 @@ describe('getValidators utility function', () => {
   });
 
   describe('getMinLengthFromValidator', () => {
-    const fudisControl = new FormControl('', FudisValidators.minLength(66, 'Execute order 66'));
+    const fudisControl = new FormControl('', FudisValidators.minLength(66, 'Minimum of 66'));
 
     it('should return correct value with Fudis Validator', () => {
       const fudisMinLength = getMinLengthFromValidator(fudisControl);
@@ -56,9 +54,8 @@ describe('getValidators utility function', () => {
       expect(fudisMinLength).toEqual(66);
     });
 
-    it('should return true with Angular Validators', () => {
+    it('should return correct value with Angular Validators', () => {
       const nativeControl = new FormControl('', Validators.minLength(66));
-
       const nativeMinLength = getMinLengthFromValidator(nativeControl);
 
       expect(nativeMinLength).toEqual(66);
@@ -66,7 +63,7 @@ describe('getValidators utility function', () => {
   });
 
   describe('getMaxFromValidator', () => {
-    const fudisControl = new FormControl('', FudisValidators.max(9000, 'Execute order 66'));
+    const fudisControl = new FormControl('', FudisValidators.max(9000, 'Maximum number is 9000'));
 
     it('should return correct value with Fudis Validator', () => {
       const fudisMax = getMaxFromValidator(fudisControl);
@@ -74,9 +71,8 @@ describe('getValidators utility function', () => {
       expect(fudisMax).toEqual(9000);
     });
 
-    it('should return true with Angular Validators', () => {
+    it('should return correct value with Angular Validators', () => {
       const nativeControl = new FormControl('', Validators.max(9000));
-
       const nativeMax = getMaxFromValidator(nativeControl);
 
       expect(nativeMax).toEqual(9000);
@@ -84,7 +80,7 @@ describe('getValidators utility function', () => {
   });
 
   describe('getMinFromValidator', () => {
-    const fudisControl = new FormControl('', FudisValidators.min(5555, 'Execute order 66'));
+    const fudisControl = new FormControl('', FudisValidators.min(5555, 'Minimum number is 5555'));
 
     it('should return correct value with Fudis Validator', () => {
       const fudisMin = getMinFromValidator(fudisControl);
@@ -92,9 +88,8 @@ describe('getValidators utility function', () => {
       expect(fudisMin).toEqual(5555);
     });
 
-    it('should return true with Angular Validators', () => {
+    it('should return correct value with Angular Validators', () => {
       const nativeControl = new FormControl('', Validators.min(5555));
-
       const nativeMin = getMinFromValidator(nativeControl);
 
       expect(nativeMin).toEqual(5555);
@@ -102,7 +97,7 @@ describe('getValidators utility function', () => {
   });
 
   describe('getMaxDateFromValidator', () => {
-    it('should return correct value with string date', () => {
+    it('should return correct value with YYYY-MM-DD format string date', () => {
       const fudisControl = new FormControl(
         null,
         FudisValidators.datepickerMax({
@@ -115,17 +110,17 @@ describe('getValidators utility function', () => {
       expect(fudisDate).toEqual('2024-01-12T00:00:00.000Z');
     });
 
-    it('should return correct value with string date', () => {
+    it('should return correct value with YYYY-M-D format string date', () => {
       const fudisControl = new FormControl(
         null,
         FudisValidators.datepickerMax({
-          value: new Date('2024-1-12'),
-          message: 'Trying date as string 12.1.2024',
+          value: new Date('2024-1-2'),
+          message: 'Trying date as string 2.1.2024',
         }),
       );
       const fudisDate = getMaxDateFromValidator(fudisControl)?.toJSON();
 
-      expect(fudisDate).toEqual('2024-01-12T00:00:00.000Z');
+      expect(fudisDate).toEqual('2024-01-02T00:00:00.000Z');
     });
 
     it('should return correct value with standard date', () => {
@@ -143,7 +138,7 @@ describe('getValidators utility function', () => {
   });
 
   describe('getMinDateFromValidator', () => {
-    it('should return correct value with string date', () => {
+    it('should return correct value with YYYY-MM-DD format string date', () => {
       const fudisControl = new FormControl(
         null,
         FudisValidators.datepickerMin({
@@ -156,17 +151,17 @@ describe('getValidators utility function', () => {
       expect(fudisDate).toEqual('2024-01-12T00:00:00.000Z');
     });
 
-    it('should return correct value with string date', () => {
+    it('should return correct value with YYYY-M-D format string date', () => {
       const fudisControl = new FormControl(
         null,
         FudisValidators.datepickerMin({
-          value: new Date('2024-1-12'),
-          message: 'Trying date as string 12.1.2024',
+          value: new Date('2024-1-2'),
+          message: 'Trying date as string 2.1.2024',
         }),
       );
       const fudisDate = getMinDateFromValidator(fudisControl)?.toJSON();
 
-      expect(fudisDate).toEqual('2024-01-12T00:00:00.000Z');
+      expect(fudisDate).toEqual('2024-01-02T00:00:00.000Z');
     });
 
     it('should return correct value with standard date', () => {
