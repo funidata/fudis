@@ -160,13 +160,45 @@ describe('MultiselectOptionComponent', () => {
       setMultiSelectDropdownOpen();
 
       const options = fixtureMock.debugElement.queryAll(By.css('.fudis-multiselect-option'));
-      options[1].nativeElement.querySelector('input').click();
+      const optionToSelect = options[1].nativeElement.querySelector('input');
+
+      optionToSelect.click();
       fixtureMock.detectChanges();
+
+      const optionAriaAttribute = optionToSelect.getAttribute('aria-selected');
 
       expect(options[1].nativeElement.outerHTML).toContain(
         'fudis-multiselect-option__label--checked',
       );
+      expect(optionAriaAttribute).toEqual('true');
       expect(options[1].nativeElement.outerHTML).toContain('fudis-icon');
+    });
+
+    it('should have focusable CSS class', () => {
+      setMultiSelectDropdownOpen();
+
+      const options = fixtureMock.debugElement.queryAll(By.css('.fudis-multiselect-option'));
+      const expectedInputClasses =
+        'fudis-multiselect-option__label__checkbox__input fudis-multiselect-option__focusable';
+      const inputClassArray: string[] = [];
+
+      options.forEach((option) => {
+        const inputClasses = option.nativeElement.querySelector('input').className;
+        inputClassArray.push(inputClasses);
+
+        expect(inputClassArray).toContain(expectedInputClasses);
+      });
+    });
+
+    it('should have disabled CSS class if option is disabled', () => {
+      setMultiSelectDropdownOpen();
+      
+      const options = fixtureMock.nativeElement.querySelectorAll('.fudis-multiselect-option');
+      const expectedDisabledOptionClasses =
+        'fudis-multiselect-option fudis-multiselect-option--visible fudis-multiselect-option--disabled';
+      const disabledOption = options[3];
+
+      expect(disabledOption.className).toContain(expectedDisabledOptionClasses);
     });
   });
 });
