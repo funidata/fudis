@@ -192,7 +192,7 @@ describe('MultiselectOptionComponent', () => {
 
     it('should have disabled CSS class if option is disabled', () => {
       setMultiSelectDropdownOpen();
-      
+
       const options = fixtureMock.nativeElement.querySelectorAll('.fudis-multiselect-option');
       const expectedDisabledOptionClasses =
         'fudis-multiselect-option fudis-multiselect-option--visible fudis-multiselect-option--disabled';
