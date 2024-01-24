@@ -24,7 +24,7 @@ import { MultiselectOptionComponent } from '../../multiselect/multiselect-option
 export const testGroupedData = [
   {
     country: 'Netherlands',
-		
+
     options: [
       {
         value: '4257d865-872c-4ea6-80e6-8bd04ce56ad7',
@@ -83,41 +83,41 @@ export const testGroupedData = [
       },
     ],
   },
-]
+];
 
 @Component({
   selector: 'fudis-mock-select',
   template: `<fudis-select
-    #singleSelect
-    [label]="'Test Label'"
-    [placeholder]="'Test placeholder'"
-    [control]="control"
-    [size]="'md'"
-  >
-    <ng-template fudisContent type="select-options">
-			<fudis-select-group *ngFor="let group of groupedData" [label]="group.country">
-				<fudis-select-option *ngFor="let groupedOption of group.options" [data]="groupedOption" />
-			</fudis-select-group>
-    </ng-template>
-  </fudis-select>
-	<fudis-multiselect
-    #multiSelect
-    [autocomplete]="true"
-    [label]="'Test Label'"
-    [control]="control"
-  >
-    <ng-template fudisContent type="select-options">
-		<fudis-multiselect-group *ngFor="let group of groupedData" [label]="group.country">
-              <fudis-multiselect-option
-                *ngFor="let groupedOption of group.options"
-                [data]="groupedOption"
-              />
-            </fudis-multiselect-group>
-    </ng-template>
-  </fudis-multiselect>`,
+      #singleSelect
+      [label]="'Test Label'"
+      [placeholder]="'Test placeholder'"
+      [control]="control"
+      [size]="'md'"
+    >
+      <ng-template fudisContent type="select-options">
+        <fudis-select-group *ngFor="let group of groupedData" [label]="group.country">
+          <fudis-select-option *ngFor="let groupedOption of group.options" [data]="groupedOption" />
+        </fudis-select-group>
+      </ng-template>
+    </fudis-select>
+    <fudis-multiselect
+      #multiSelect
+      [autocomplete]="true"
+      [label]="'Test Label'"
+      [control]="control"
+    >
+      <ng-template fudisContent type="select-options">
+        <fudis-multiselect-group *ngFor="let group of groupedData" [label]="group.country">
+          <fudis-multiselect-option
+            *ngFor="let groupedOption of group.options"
+            [data]="groupedOption"
+          />
+        </fudis-multiselect-group>
+      </ng-template>
+    </fudis-multiselect>`,
 })
 class MockSelectComponent {
-	groupedData = testGroupedData;
+  groupedData = testGroupedData;
   control: FormControl = new FormControl<FudisSelectOption | null>(null);
 
   @ViewChild('singleSelect') singleSelect: SelectComponent;
@@ -131,156 +131,163 @@ describe('SelectGroupComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-				ContentDirective,
+        ContentDirective,
         SelectComponent,
-				SelectGroupComponent,
-				SelectDropdownComponent,
-				SelectOptionComponent,
-				GuidanceComponent,
+        SelectGroupComponent,
+        SelectDropdownComponent,
+        SelectOptionComponent,
+        GuidanceComponent,
         IconComponent,
         LabelComponent,
-				MockSelectComponent,
-				MultiselectComponent,
-				MultiselectOptionComponent,
-				SelectAutocompleteComponent,
-				SelectDropdownComponent,
+        MockSelectComponent,
+        MultiselectComponent,
+        MultiselectOptionComponent,
+        SelectAutocompleteComponent,
+        SelectDropdownComponent,
         BodyTextComponent,
-				ButtonComponent,
-			],
-			providers: [
-        FudisIdService,
-        FudisTranslationService],
-			imports: [ReactiveFormsModule],
+        ButtonComponent,
+      ],
+      providers: [FudisIdService, FudisTranslationService],
+      imports: [ReactiveFormsModule],
     }).compileComponents();
   });
 
-	beforeEach(() => {
-		fixture = TestBed.createComponent(MockSelectComponent);
-		component = fixture.componentInstance;
-		fixture.detectChanges();
-	});
+  beforeEach(() => {
+    fixture = TestBed.createComponent(MockSelectComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-	function setSelectDropdownOpen() {
+  function setSelectDropdownOpen() {
     component.singleSelect.openDropdown();
     fixture.detectChanges();
   }
 
-	function setMultiSelectDropdownOpen() {
+  function setMultiSelectDropdownOpen() {
     component.multiSelect.openDropdown();
     fixture.detectChanges();
   }
 
-	function updateMultiSelectValue() {
-		const input = fixture.debugElement.query(By.css('.fudis-select-autocomplete__input'));
-		const el = input.nativeElement;
+  function updateMultiSelectValue() {
+    const input = fixture.debugElement.query(By.css('.fudis-select-autocomplete__input'));
+    const el = input.nativeElement;
 
-		el.value = 'g';
-		el.dispatchEvent(new KeyboardEvent('keyup'));
-		fixture.detectChanges();
-	}
+    el.value = 'g';
+    el.dispatchEvent(new KeyboardEvent('keyup'));
+    fixture.detectChanges();
+  }
 
-	describe('Select Group Component', () => {
-		it('should have group label', () => {
+  describe('Select Group Component', () => {
+    it('should have group label', () => {
       setSelectDropdownOpen();
 
-			const groupLabels = getAllElements(fixture, 'fudis-select-group .fudis-select-group__label');
+      const groupLabels = getAllElements(fixture, 'fudis-select-group .fudis-select-group__label');
 
-			const groupLabelsArray: string[] = [];
+      const groupLabelsArray: string[] = [];
 
-			groupLabels.forEach((label) => {
-				const filteredLabels = getTrimmedTextContent(label as HTMLElement);
-				groupLabelsArray.push(filteredLabels);
-			});
+      groupLabels.forEach((label) => {
+        const filteredLabels = getTrimmedTextContent(label as HTMLElement);
+        groupLabelsArray.push(filteredLabels);
+      });
 
-			expect(groupLabelsArray).toEqual(['Netherlands', 'Brazil', 'China']);
-		});
+      expect(groupLabelsArray).toEqual(['Netherlands', 'Brazil', 'China']);
+    });
 
-		it('should have matching id', () => {
-			setSelectDropdownOpen();
+    it('should have matching id', () => {
+      setSelectDropdownOpen();
 
-			const correctGroupIds = ['fudis-select-1-group-1','fudis-select-1-group-2','fudis-select-1-group-3'];
-			
-			const groups = getAllElements(fixture, 'fudis-select-group');
+      const correctGroupIds = [
+        'fudis-select-1-group-1',
+        'fudis-select-1-group-2',
+        'fudis-select-1-group-3',
+      ];
 
-			const groupIdsArray: string[] = [];
+      const groups = getAllElements(fixture, 'fudis-select-group');
 
-			groups.forEach((group) => {
-				const groupId = (group as HTMLDivElement).querySelector('.fudis-select-group__label')!.getAttribute('id') as string;
-				groupIdsArray.push(groupId);
-			})
+      const groupIdsArray: string[] = [];
 
-			expect(groupIdsArray).toEqual(correctGroupIds);
-		});
-		
-		it('should return a correct amount of options for group', () => {
-			setSelectDropdownOpen();
+      groups.forEach((group) => {
+        const groupId = (group as HTMLDivElement)
+          .querySelector('.fudis-select-group__label')!
+          .getAttribute('id') as string;
+        groupIdsArray.push(groupId);
+      });
 
-			const allGroups = getAllElements(fixture, 'fudis-select-group');
+      expect(groupIdsArray).toEqual(correctGroupIds);
+    });
 
-			expect(allGroups.length).toEqual(3);
+    it('should return a correct amount of options for group', () => {
+      setSelectDropdownOpen();
 
-			const correctLabels = [['Golden jackal', 'Mountain lion', 'Cat, european wild'], ['Small Indian mongoose', 'Falcon, prairie', 'Spotted hyena'],['Salmon pink bird eater tarantula', 'Crane, sandhill', 'Arctic fox']];
+      const allGroups = getAllElements(fixture, 'fudis-select-group');
 
+      expect(allGroups.length).toEqual(3);
 
-			allGroups.forEach((group, index) => {
-				const options = (group as HTMLDivElement).querySelectorAll('.fudis-select-option__label')
-				
-				const singleGroupLabels: string[] = []
+      const correctLabels = [
+        ['Golden jackal', 'Mountain lion', 'Cat, european wild'],
+        ['Small Indian mongoose', 'Falcon, prairie', 'Spotted hyena'],
+        ['Salmon pink bird eater tarantula', 'Crane, sandhill', 'Arctic fox'],
+      ];
 
-				options.forEach(singleOption =>{
-					singleGroupLabels.push(getTrimmedTextContent(singleOption as HTMLElement))
-				})
+      allGroups.forEach((group, index) => {
+        const options = (group as HTMLDivElement).querySelectorAll('.fudis-select-option__label');
 
-				expect(singleGroupLabels.length).toEqual(3)
+        const singleGroupLabels: string[] = [];
 
-        expect(singleGroupLabels).toEqual(correctLabels[index])
-			})
-		});
-	});
+        options.forEach((singleOption) => {
+          singleGroupLabels.push(getTrimmedTextContent(singleOption as HTMLElement));
+        });
 
-	describe('Autocomplete multiselect', () => {
-		it('should respective classes for matching visible group options', () => {
-			updateMultiSelectValue();
-			setMultiSelectDropdownOpen();
-			fixture.detectChanges();
+        expect(singleGroupLabels.length).toEqual(3);
 
-			const visibleOptions = getAllElements(
+        expect(singleGroupLabels).toEqual(correctLabels[index]);
+      });
+    });
+  });
+
+  describe('Autocomplete multiselect', () => {
+    it('should respective classes for matching visible group options', () => {
+      updateMultiSelectValue();
+      setMultiSelectDropdownOpen();
+      fixture.detectChanges();
+
+      const visibleOptions = getAllElements(
         fixture,
         '.fudis-select-group .fudis-multiselect-option--visible .fudis-multiselect-option__label__text',
       );
 
-			expect(visibleOptions.length).toEqual(2);
+      expect(visibleOptions.length).toEqual(2);
 
-			const optionsArray: string[] = [];
+      const optionsArray: string[] = [];
 
-			visibleOptions.forEach((item) => {
-				const filteredContent = getTrimmedTextContent(item as HTMLElement);
-				optionsArray.push(filteredContent);
-			})
+      visibleOptions.forEach((item) => {
+        const filteredContent = getTrimmedTextContent(item as HTMLElement);
+        optionsArray.push(filteredContent);
+      });
 
-			expect(optionsArray).toEqual(['Golden jackal', 'Small Indian mongoose']);
-		});
+      expect(optionsArray).toEqual(['Golden jackal', 'Small Indian mongoose']);
+    });
 
-		it('should have respective classes for groups that are hidden', () => {
-			updateMultiSelectValue();
-			setMultiSelectDropdownOpen();
-			fixture.detectChanges();
+    it('should have respective classes for groups that are hidden', () => {
+      updateMultiSelectValue();
+      setMultiSelectDropdownOpen();
+      fixture.detectChanges();
 
-			const hiddenGroups = getAllElements(
-				fixture,
-				'.fudis-select-group.fudis-select-group--hidden .fudis-select-group__label',
-			);
+      const hiddenGroups = getAllElements(
+        fixture,
+        '.fudis-select-group.fudis-select-group--hidden .fudis-select-group__label',
+      );
 
-			expect(hiddenGroups.length).toEqual(1);
+      expect(hiddenGroups.length).toEqual(1);
 
-			const groupsArray: string[] = [];
+      const groupsArray: string[] = [];
 
-			hiddenGroups.forEach((item) => {
-				const filteredContent = getTrimmedTextContent(item as HTMLElement);
-				groupsArray.push(filteredContent);
-			})
+      hiddenGroups.forEach((item) => {
+        const filteredContent = getTrimmedTextContent(item as HTMLElement);
+        groupsArray.push(filteredContent);
+      });
 
-			expect(groupsArray).toEqual(['China']);
-		})
-	});
+      expect(groupsArray).toEqual(['China']);
+    });
+  });
 });
