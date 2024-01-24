@@ -9,7 +9,7 @@ import readme from './readme.mdx';
 import { selectMockData, groupedMockData, defaultOptions } from '../common/mock_data';
 
 export default {
-  title: 'Components/Form/Select',
+  title: 'Components/Form/Select/Select',
   component: SelectComponent,
   decorators: [
     applicationConfig({
@@ -65,29 +65,11 @@ const AllSelectsTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => 
       ),
       helpText: 'All pets are equally important, but for sake of this example please pick one.',
     },
-    multiselect: {
-      label: 'Multiselect pet',
-      placeholder: 'Multiselect a pet',
-      control: new FormControl(
-        [defaultOptions[2], selectMockData[1]],
-        FudisValidators.required("It is necessary to choose a pet. It's good for your health!"),
-      ),
-      helpText: 'All pets are equally important, but for sake of this example please pick one.',
-    },
     autocomplete: {
       label: 'Autoselect pet',
       placeholder: 'Autoselect a pet',
       control: new FormControl(
         selectMockData[72],
-        FudisValidators.required("It is necessary to choose a pet. It's good for your health!"),
-      ),
-      helpText: 'All pets are equally important, but for sake of this example please pick one.',
-    },
-    autocompleteMultiselect: {
-      label: 'Multiselect autocomplete pet',
-      placeholder: 'Autoselect a pet',
-      control: new FormControl(
-        [selectMockData[1], selectMockData[3], selectMockData[5]],
         FudisValidators.required("It is necessary to choose a pet. It's good for your health!"),
       ),
       helpText: 'All pets are equally important, but for sake of this example please pick one.',
@@ -126,46 +108,6 @@ const AllSelectsTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => 
             <fudis-select-option *ngFor="let option of selectMockData" [data]="option" />
           </ng-template>
         </fudis-select>
-      </div>
-      <div>
-        <fudis-heading [level]="2">Dropdown Multiselect</fudis-heading>
-        <fudis-multiselect
-          [placeholder]="multiselect.placeholder"
-          [control]="multiselect.control"
-          [label]="multiselect.label"
-          [helpText]="multiselect.helpText"
-        >
-          <ng-template fudisContent type="select-options">
-            <fudis-multiselect-option *ngFor="let option of defaultOptions" [data]="option" />
-            <fudis-multiselect-group *ngFor="let group of groupedMockData" [label]="group.country">
-              <fudis-multiselect-option
-                *ngFor="let groupedOption of group.options"
-                [data]="groupedOption"
-              />
-            </fudis-multiselect-group>
-          </ng-template>
-        </fudis-multiselect>
-      </div>
-
-      <div>
-        <fudis-heading [level]="2">Autocomplete Multiselect</fudis-heading>
-        <fudis-multiselect
-          [autocomplete]="true"
-          [placeholder]="autocompleteMultiselect.placeholder"
-          [control]="autocompleteMultiselect.control"
-          [label]="autocompleteMultiselect.label"
-          [helpText]="autocompleteMultiselect.helpText"
-        >
-          <ng-template fudisContent type="select-options">
-            <fudis-multiselect-option *ngFor="let option of defaultOptionsTwo" [data]="option" />
-            <fudis-multiselect-group *ngFor="let group of groupedMockData" [label]="group.country">
-              <fudis-multiselect-option
-                *ngFor="let groupedOption of group.options"
-                [data]="groupedOption"
-              />
-            </fudis-multiselect-group>
-          </ng-template>
-        </fudis-multiselect>
       </div>
     </fudis-grid>
   `,

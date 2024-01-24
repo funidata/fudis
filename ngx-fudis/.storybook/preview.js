@@ -27,7 +27,7 @@ const preview = {
             "Development",
             [
               "Getting Started",
-              "Setup VSCode",
+              "Setup VS Code",
               "Code Linting and Formatting",
               "Project Structure",
               "Ways of Working",
@@ -42,6 +42,7 @@ const preview = {
           ],
           "Foundations",
           "Components",
+          ["Form", ["Select", ["Common", "Select", "Multiselect"]]],
           "Directives",
           "Services",
         ],

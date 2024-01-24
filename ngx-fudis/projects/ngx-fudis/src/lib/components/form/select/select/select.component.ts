@@ -117,7 +117,9 @@ export class SelectComponent
    * @param text filter text value emitted from autocomplete
    */
   protected _checkIfAutocompleteValueNull(text: string): void {
-    if (this.control.value && text.toLowerCase() !== this.control.value?.label.toLowerCase()) {
+    console.log(this.control.value);
+
+    if (this.control.value && text.toLowerCase() !== this.control.value?.label?.toLowerCase()) {
       this.controlValueChangedInternally = true;
       this.selectionUpdate.emit(null);
       this.control.patchValue(null);
