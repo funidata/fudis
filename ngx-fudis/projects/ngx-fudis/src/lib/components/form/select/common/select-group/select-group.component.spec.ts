@@ -13,8 +13,13 @@ import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
 import { SelectOptionComponent } from '../../select/select-option/select-option.component';
-// import { phl } from '@angular-extensions/pretty-html-log';
 import { getAllElements, getTrimmedTextContent } from '../../../../../utilities/tests/utilities';
+import { MultiselectComponent } from '../../multiselect/multiselect.component';
+import { FudisSelectOption } from '../../../../../types/forms';
+import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.component';
+import { ButtonComponent } from '../../../../button/button.component';
+import { By } from '@angular/platform-browser';
+import { MultiselectOptionComponent } from '../../multiselect/multiselect-option/multiselect-option.component';
 
 export const testGroupedData = [
   {
@@ -81,9 +86,9 @@ export const testGroupedData = [
 ]
 
 @Component({
-  selector: 'fudis-mock-container',
+  selector: 'fudis-mock-select',
   template: `<fudis-select
-    #testSelect
+    #singleSelect
     [label]="'Test Label'"
     [placeholder]="'Test placeholder'"
     [control]="control"
@@ -94,17 +99,34 @@ export const testGroupedData = [
 				<fudis-select-option *ngFor="let groupedOption of group.options" [data]="groupedOption" />
 			</fudis-select-group>
     </ng-template>
-  </fudis-select>`,
+  </fudis-select>
+	<fudis-multiselect
+    #multiSelect
+    [autocomplete]="true"
+    [label]="'Test Label'"
+    [control]="control"
+  >
+    <ng-template fudisContent type="select-options">
+		<fudis-multiselect-group *ngFor="let group of groupedData" [label]="group.country">
+              <fudis-multiselect-option
+                *ngFor="let groupedOption of group.options"
+                [data]="groupedOption"
+              />
+            </fudis-multiselect-group>
+    </ng-template>
+  </fudis-multiselect>`,
 })
-class MockContainerComponent {
+class MockSelectComponent {
 	groupedData = testGroupedData;
-  control: FormControl = new FormControl(null);
+  control: FormControl = new FormControl<FudisSelectOption | null>(null);
 
-  @ViewChild('testSelect') testSelect: SelectComponent;
+  @ViewChild('singleSelect') singleSelect: SelectComponent;
+  @ViewChild('multiSelect') multiSelect: MultiselectComponent;
 }
+
 describe('SelectGroupComponent', () => {
-  let component: MockContainerComponent;
-  let fixture: ComponentFixture<MockContainerComponent>;
+  let component: MockSelectComponent;
+  let fixture: ComponentFixture<MockSelectComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -117,25 +139,45 @@ describe('SelectGroupComponent', () => {
 				GuidanceComponent,
         IconComponent,
         LabelComponent,
-				MockContainerComponent,
+				MockSelectComponent,
+				MultiselectComponent,
+				MultiselectOptionComponent,
+				SelectAutocompleteComponent,
 				SelectDropdownComponent,
         BodyTextComponent,
+				ButtonComponent,
 			],
 			providers: [
         FudisIdService,
         FudisTranslationService],
 			imports: [ReactiveFormsModule],
     }).compileComponents();
-
-		fixture = TestBed.createComponent(MockContainerComponent);
-		component = fixture.componentInstance;
-		fixture.detectChanges();
   });
 
+	beforeEach(() => {
+		fixture = TestBed.createComponent(MockSelectComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
+
 	function setSelectDropdownOpen() {
-    component.testSelect.openDropdown();
+    component.singleSelect.openDropdown();
     fixture.detectChanges();
   }
+
+	function setMultiSelectDropdownOpen() {
+    component.multiSelect.openDropdown();
+    fixture.detectChanges();
+  }
+
+	function updateMultiSelectValue() {
+		const input = fixture.debugElement.query(By.css('.fudis-select-autocomplete__input'));
+		const el = input.nativeElement;
+
+		el.value = 'g';
+		el.dispatchEvent(new KeyboardEvent('keyup'));
+		fixture.detectChanges();
+	}
 
 	describe('Select Group Component', () => {
 		it('should have group label', () => {
@@ -168,7 +210,7 @@ describe('SelectGroupComponent', () => {
 			})
 
 			expect(groupIdsArray).toEqual(correctGroupIds);
-		})
+		});
 		
 		it('should return a correct amount of options for group', () => {
 			setSelectDropdownOpen();
@@ -194,5 +236,51 @@ describe('SelectGroupComponent', () => {
         expect(singleGroupLabels).toEqual(correctLabels[index])
 			})
 		});
+	});
+
+	describe('Autocomplete multiselect', () => {
+		it('should respective classes for matching visible group options', () => {
+			updateMultiSelectValue();
+			setMultiSelectDropdownOpen();
+			fixture.detectChanges();
+
+			const visibleOptions = getAllElements(
+        fixture,
+        '.fudis-select-group .fudis-multiselect-option--visible .fudis-multiselect-option__label__text',
+      );
+
+			expect(visibleOptions.length).toEqual(2);
+
+			const optionsArray: string[] = [];
+
+			visibleOptions.forEach((item) => {
+				const filteredContent = getTrimmedTextContent(item as HTMLElement);
+				optionsArray.push(filteredContent);
+			})
+
+			expect(optionsArray).toEqual(['Golden jackal', 'Small Indian mongoose']);
+		});
+
+		it('should have respective classes for groups that are hidden', () => {
+			updateMultiSelectValue();
+			setMultiSelectDropdownOpen();
+			fixture.detectChanges();
+
+			const hiddenGroups = getAllElements(
+				fixture,
+				'.fudis-select-group.fudis-select-group--hidden .fudis-select-group__label',
+			);
+
+			expect(hiddenGroups.length).toEqual(1);
+
+			const groupsArray: string[] = [];
+
+			hiddenGroups.forEach((item) => {
+				const filteredContent = getTrimmedTextContent(item as HTMLElement);
+				groupsArray.push(filteredContent);
+			})
+
+			expect(groupsArray).toEqual(['China']);
+		})
 	});
 });
