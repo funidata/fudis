@@ -69,6 +69,10 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
           ? true
           : !filterText;
 
+      if (this._optionVisible && this._parent.noResultsFound) {
+        this._parent.noResultsFound = false;
+      }
+
       this._parent.setOptionVisibility(this.data.value, this._optionVisible);
 
       if (this._parentGroup) {

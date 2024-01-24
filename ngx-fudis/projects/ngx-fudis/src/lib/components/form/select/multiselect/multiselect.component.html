@@ -59,9 +59,7 @@
       [invalidState]="invalidState"
       [multiselect]="true"
       [autocompleteClearButton]="autocompleteClearButton"
-      (triggerFocusToFirstOption)="
-        _visibleOptionsValues.length !== 0 && _focusToFirstOption(this.focusSelector)
-      "
+      (triggerFocusToFirstOption)="!noResultsFound && _focusToFirstOption(this.focusSelector)"
       (triggerFilterTextUpdate)="_filterTextUpdate($event)"
       (triggerSelectOnlyVisibleOption)="_focusToFirstOption(this.focusSelector, true)"
       (triggerDropdownOpen)="openDropdown()"
@@ -85,7 +83,7 @@
     <fudis-body-text
       *ngIf="autocomplete"
       class="fudis-select-dropdown__no-results"
-      [class.fudis-select-dropdown__no-results--visible]="_visibleOptionsValues.length === 0"
+      [class.fudis-select-dropdown__no-results--visible]="noResultsFound"
       [size]="'md-light'"
       >{{ _translationNoResultsFound }}</fudis-body-text
     >
