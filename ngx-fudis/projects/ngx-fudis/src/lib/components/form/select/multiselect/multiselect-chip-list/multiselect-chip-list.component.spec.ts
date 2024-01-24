@@ -88,7 +88,7 @@ describe('MultiselectChipListComponent', () => {
       const itemToRemove = chipList[2];
       jest.spyOn(component.handleClick, 'emit');
 
-      itemToRemove.dispatchEvent(new Event('click'));
+      itemToRemove.dispatchEvent(new MouseEvent('click'));
       fixture.detectChanges();
 
       expect(component.handleClick.emit).toHaveBeenCalledWith(2);

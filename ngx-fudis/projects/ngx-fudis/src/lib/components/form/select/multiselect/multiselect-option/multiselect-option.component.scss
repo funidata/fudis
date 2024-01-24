@@ -57,7 +57,7 @@
         display: grid;
         position: absolute;
         place-content: center;
-        
+
         &:focus {
           @include focus.focus-checkbox;
         }
