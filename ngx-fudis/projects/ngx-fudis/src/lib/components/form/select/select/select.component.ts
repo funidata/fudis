@@ -95,6 +95,7 @@ export class SelectComponent
     const equalValues = areObjectsDeepEquals(value, this.control.value!);
 
     if (!equalValues) {
+      this.noResultsFound = true;
       this.selectionUpdate.emit(value);
       this.controlValueChangedInternally = true;
       this.control.patchValue(value);
@@ -138,14 +139,14 @@ export class SelectComponent
    * If control value is updated from the Application, update component's state accordingly
    */
   private _updateSelectionFromControlValue(): void {
+    this.noResultsFound = true;
+
     if (this.control.value) {
       this.dropdownSelectionLabelText = this.control.value.label;
 
       if (this.autocomplete) {
         this._autocompleteSelectionLabelValue = this.control.value!.label;
         this._autocompleteFilterText.set(this.control.value.label);
-
-        this._visibleOptionsValues = [this.control.value.value];
       }
     } else {
       this._autocompleteFilterText.set('');
