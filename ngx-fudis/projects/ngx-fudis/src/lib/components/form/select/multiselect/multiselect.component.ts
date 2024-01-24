@@ -162,9 +162,10 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
       if (!this.autocomplete) {
         this.dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
       } else {
-        this._visibleOptionsValues = this.control.value.map((option) => option.value);
+        this.noResultsFound = false;
       }
     } else {
+      this.noResultsFound = true;
       this.dropdownSelectionLabelText = null;
     }
   }
