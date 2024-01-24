@@ -98,7 +98,7 @@ describe('SelectOptionBaseDirective', () => {
     });
   });
 
-  describe.only('Autocomplete functionality', () => {
+  describe('Autocomplete functionality', () => {
     it('should return option focusable class for selected option', () => {
       updateControlValue(defaultOptions[2]);
       setSelectDropdownOpen();
