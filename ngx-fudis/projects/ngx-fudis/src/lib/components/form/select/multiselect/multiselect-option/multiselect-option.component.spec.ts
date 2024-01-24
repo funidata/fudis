@@ -36,7 +36,7 @@ import { defaultOptions } from '../../common/mock_data';
 })
 class MultiselectMockComponent {
   multiOptions: FudisSelectOption[] = defaultOptions;
-  control: FormControl = new FormControl(null);
+  control = new FormControl<FudisSelectOption | FudisSelectOption[] | null>(null);
 
   @ViewChild('multiOption') multiOption: MultiselectOptionComponent;
   @ViewChild('selectEl') selectEl: MultiselectComponent;

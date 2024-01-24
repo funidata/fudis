@@ -104,39 +104,39 @@ describe('SelectComponent', () => {
 
       expect(componentClasses).toEqual(expectedValue.split(' ').sort());
     });
+
     it('should have default form control option set instead of placeholder on init', () => {
       initWithControlValue();
       const placeholderAnimal = fixture.debugElement.query(By.css('.fudis-select__input__label'));
+
       expect(placeholderAnimal.nativeElement.innerHTML).toEqual('Really dangerous cat');
     });
 
-    it('should have placehorder text present when control value is updated to null', () => {
+    it('should have placeholder text present when control value is updated to null', () => {
       initWithControlValue();
       component.control.patchValue(null);
       fixture.detectChanges();
 
       const placeholder = fixture.debugElement.query(By.css('.fudis-select__input__placeholder'));
+
       expect(placeholder.nativeElement.outerHTML).toContain('Test placeholder');
     });
 
-    it('should have placehorder text present when control value is null on init', () => {
+    it('should have placeholder text present when control value is null on init', () => {
       initWithControlNull();
-
       const placeholder = fixture.debugElement.query(By.css('.fudis-select__input__placeholder'));
+
       expect(placeholder.nativeElement.outerHTML).toContain('Test placeholder');
     });
 
     it('should update component state when handleSelectionChange is called', () => {
       initWithControlNull();
-
       component.handleSelectionChange(defaultOptions[5]);
-
       fixture.detectChanges();
 
       const value = getElement(fixture, '.fudis-select__input__label').textContent;
 
       expect(value).toEqual('Southern Titiwangsa Bent-Toed Gecko');
-
       expect(component.control.value).toEqual(defaultOptions[5]);
     });
   });
