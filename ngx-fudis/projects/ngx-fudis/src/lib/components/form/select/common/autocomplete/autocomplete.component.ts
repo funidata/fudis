@@ -195,7 +195,12 @@ export class SelectAutocompleteComponent {
 
     if (this.preventSpaceKeypress && key === ' ' && this.control.value) {
       event.preventDefault();
-    } else {
+    } else if (
+      key !== 'ArrowDown' &&
+      key !== 'ArrowUp' &&
+      key !== 'ArrowLeft' &&
+      key !== 'ArrowRight'
+    ) {
       this.triggerFilterTextUpdate.emit(inputValue);
     }
 
