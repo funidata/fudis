@@ -37,11 +37,6 @@ export const testGroupedData = [
         label: 'Mountain lion',
         scienceName: 'Felis concolor',
       },
-      {
-        value: '0cf7dff9-10e4-400b-b8e0-828b2e0baf30',
-        label: 'Cat, european wild',
-        scienceName: 'Felis silvestris lybica',
-      },
     ],
   },
   {
@@ -56,11 +51,6 @@ export const testGroupedData = [
         value: 'c0cba653-c8eb-410d-bf65-32d2353e1fca',
         label: 'Falcon, prairie',
         scienceName: 'Falco mexicanus',
-      },
-      {
-        value: 'cc5a789e-6a7c-471a-a931-40edd734cbad',
-        label: 'Spotted hyena',
-        scienceName: 'Crocuta crocuta',
       },
     ],
   },
@@ -77,52 +67,34 @@ export const testGroupedData = [
         label: 'Crane, sandhill',
         scienceName: 'Grus canadensis',
       },
-      {
-        value: '967d39b8-f85a-45aa-952e-8d0607dde1f6',
-        label: 'Arctic fox',
-        scienceName: 'Alopex lagopus',
-      },
     ],
   },
 ];
 
 @Component({
   selector: 'fudis-mock-select',
-  template: ` <!-- <fudis-select
-      #singleSelect
-      [label]="'Test Label'"
-      [placeholder]="'Test placeholder'"
-      [control]="control"
-      [size]="'md'"
-    >
-      <ng-template fudisContent type="select-options">
-        <fudis-select-group *ngFor="let group of groupedData" [label]="group.country">
-          <fudis-select-option *ngFor="let groupedOption of group.options" [data]="groupedOption" />
-        </fudis-select-group>
-      </ng-template>
-    </fudis-select> -->
-    <fudis-multiselect
-      #multiSelect
-      [autocomplete]="autocomplete"
-      [label]="'Test Label'"
-      [placeholder]="'Test placeholder'"
-      [control]="control"
-      [size]="'md'"
-      [autocompleteClearButton]="clearButton"
-    >
-      <ng-template fudisContent type="select-options">
-        <fudis-multiselect-group *ngFor="let group of groupedData" [label]="group.country">
-          <fudis-multiselect-option
-            *ngFor="let groupedOption of group.options"
-            [data]="groupedOption"
-          />
-        </fudis-multiselect-group>
-      </ng-template>
-    </fudis-multiselect>`,
+  template: ` <fudis-multiselect
+    #multiSelect
+    [autocomplete]="autocomplete"
+    [label]="'Test Label'"
+    [placeholder]="'Test placeholder'"
+    [control]="control"
+    [size]="'md'"
+    [autocompleteClearButton]="clearButton"
+  >
+    <ng-template fudisContent type="select-options">
+      <fudis-multiselect-group *ngFor="let group of groupedData" [label]="group.country">
+        <fudis-multiselect-option
+          *ngFor="let groupedOption of group.options"
+          [data]="groupedOption"
+        />
+      </fudis-multiselect-group>
+    </ng-template>
+  </fudis-multiselect>`,
 })
 class MockSelectComponent {
   groupedData = testGroupedData;
-  control: FormControl = new FormControl<FudisSelectOption | null>(null);
+  control: FormControl = new FormControl<FudisSelectOption[] | null>(null);
   autocomplete = true;
   clearButton = true;
 
@@ -150,7 +122,6 @@ describe('SelectBaseDirective', () => {
         MultiselectComponent,
         MultiselectOptionComponent,
         SelectAutocompleteComponent,
-        SelectDropdownComponent,
         BodyTextComponent,
         ButtonComponent,
       ],
@@ -164,6 +135,18 @@ describe('SelectBaseDirective', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
+  function setMultiSelectDropdownOpen() {
+    component.multiSelect.openDropdown();
+    fixture.detectChanges();
+  }
+
+  function initWithControlValue() {
+    component.control = new FormControl([testGroupedData[0].options[0]]);
+    component.multiSelect.ngOnInit();
+    component.multiSelect.ngAfterViewInit();
+    fixture.detectChanges();
+  }
 
   describe('Select base directive default input values', () => {
     it('should have size', () => {
@@ -212,6 +195,15 @@ describe('SelectBaseDirective', () => {
         'fudis-select-autocomplete .fudis-select-autocomplete__icon',
       );
       expect(dropdownChervon.getAttribute('ng-reflect-icon')).toEqual('chevron');
+    });
+
+    it('should show selected options as a sorted placeholder text', () => {
+      component.autocomplete = false;
+
+      initWithControlValue();
+      setMultiSelectDropdownOpen();
+
+      // phl(fixture);
     });
   });
 });
