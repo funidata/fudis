@@ -44,6 +44,8 @@ export class MultiselectOptionComponent extends SelectOptionBaseDirective implem
   ngOnInit(): void {
     if (this._parent.autocomplete) {
       this._isOptionVisible(this._parent.getAutocompleteFilterText()());
+    } else {
+      this._updateVisibilityToParents(true);
     }
     this._isOptionChecked(this._parentMultiselect.getSelectedOptions()());
   }

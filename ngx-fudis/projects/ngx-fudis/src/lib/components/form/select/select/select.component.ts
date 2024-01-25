@@ -6,7 +6,7 @@ import {
   Input,
   OnInit,
   Output,
-  ViewEncapsulation,
+  ViewEncapsulation,  
   effect,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
