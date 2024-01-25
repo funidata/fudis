@@ -17,10 +17,11 @@ import { MultiselectComponent } from '../../multiselect/multiselect.component';
 import { FudisSelectOption } from '../../../../../types/forms';
 import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.component';
 import { ButtonComponent } from '../../../../button/button.component';
-// import { phl } from '@angular-extensions/pretty-html-log';
 import { MultiselectOptionComponent } from '../../multiselect/multiselect-option/multiselect-option.component';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
-import { getElement } from '../../../../../utilities/tests/utilities';
+import { getElement, getTrimmedTextContent } from '../../../../../utilities/tests/utilities';
+import { MultiselectChipListComponent } from '../../multiselect/multiselect-chip-list/multiselect-chip-list.component';
+// import { phl } from '@angular-extensions/pretty-html-log';
 
 export const testGroupedData = [
   {
@@ -121,6 +122,7 @@ describe('SelectBaseDirective', () => {
         MockSelectComponent,
         MultiselectComponent,
         MultiselectOptionComponent,
+        MultiselectChipListComponent,
         SelectAutocompleteComponent,
         BodyTextComponent,
         ButtonComponent,
@@ -141,11 +143,8 @@ describe('SelectBaseDirective', () => {
     fixture.detectChanges();
   }
 
-  function initWithControlValue() {
-    component.control = new FormControl([testGroupedData[0].options[0]]);
-    component.multiSelect.ngOnInit();
-    component.multiSelect.ngAfterViewInit();
-    fixture.detectChanges();
+  function patchControlValue() {
+    component.control.patchValue([testGroupedData[0].options[0]]);
   }
 
   describe('Select base directive default input values', () => {
@@ -198,12 +197,25 @@ describe('SelectBaseDirective', () => {
     });
 
     it('should show selected options as a sorted placeholder text', () => {
-      component.autocomplete = false;
+      //component.autocomplete = false;
 
-      initWithControlValue();
+      patchControlValue();
       setMultiSelectDropdownOpen();
+      fixture.detectChanges();
 
-      // phl(fixture);
+      const checkedOption = fixture.nativeElement.querySelectorAll(
+        '.fudis-multiselect-option__label--checked .fudis-multiselect-option__label__text',
+      );
+
+      const trimmedLabel = getTrimmedTextContent(checkedOption[0]);
+
+      expect(trimmedLabel).toEqual('Golden jackal');
+
+      // Ei löydy, koska tämä on näkyvissä vain ei-autocompletella
+      const inputText = fixture.nativeElement.querySelector('.fudis-select__input__label');
+      console.log(inputText);
+
+      console.log(component.multiSelect.dropdownSelectionLabelText);
     });
   });
 });

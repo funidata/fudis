@@ -50,13 +50,15 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
     if (this._parent.autocomplete) {
       this._isOptionVisible(this._parent.getAutocompleteFilterText()());
       this._isOptionTyped(this._parent.getAutocompleteFilterText()());
-
-      this._updateVisibilityFromControlUpdate();
-
-      this._controlValueSubscription = this._parentSelect.control.valueChanges.subscribe(() => {
-        this._updateVisibilityFromControlUpdate();
-      });
+    } else {
+      this._updateVisibilityToParents(true);
     }
+
+    this._updateVisibilityFromControlUpdate();
+
+    this._controlValueSubscription = this._parentSelect.control.valueChanges.subscribe(() => {
+      this._updateVisibilityFromControlUpdate();
+    });
   }
 
   ngOnDestroy(): void {
