@@ -6,4 +6,75 @@ import * as Stories from "./common.stories.ts";
 
 # Common Features of Select & Multiselect
 
-<Canvas of={Stories.SelectWithAutocomplete}></Canvas>
+Select and Multiselect components share multiple common features which are inherited from internal non-public `SelectBaseDirective` and `InputBaseDirective` directives.
+
+Most notable common API feature is choosing if component is either a regular dropdown or an autocomplete component filtering dropdown options according to user text input.
+
+## Basic Form Component Attributes
+
+### Label (Mandatory)
+
+Label string describing selection to be made from the select dropdown options.
+
+### Help Text
+
+Additional help text string to provide additional description or instructions what user is expected to choose from the select's options.
+
+### Size
+
+Width of the component. Value can be string `xl`, `lg`, `sm` or `xs`. By default size is `lg`.
+
+### Placeholder
+
+Placeholder string text shown in the component, when it has no chosen value.
+
+### Usage Example
+
+Example using Select component, but same input attributes for as well with Multiselect Component with `<fudis-multiselect>` selector.
+
+```
+<fudis-select
+  [label]="'Your favorite day of the week'"
+  [helpText]="'Choose one of the seven available options.'"
+  [size]="'md'"
+  [placeholder]="'Your favorite day'"
+>
+...
+</fudis-select>
+```
+
+## Autocomplete related features
+
+### Autocomplete Boolean
+
+When `autocomplete` is set to `true`, the input field of the component changes to a text input, where user can start typing. Dropdown list of options is filtered and only shows visible those options, where filter text is included in option's label.
+
+### Autocomplete Clear Button Boolean
+
+By default `autocompleteClearButton` is set a boolean `true`. When `true`, autocomplete input will display an icon button with a cross. This button is used to clear and empty the filter text string in the input. With Select Component this Clear Button will also set Form Control's value to `null`.
+
+When `autocompleteClearButton` is set to `false`, the select with autocomplete works very similarly as select without autocomplete: dropdown options will instantly open up when user clicks or focuses the input.
+
+### Example Usage
+
+```
+<fudis-select
+  [autocomplete]="true"
+  [autocompleteClearButton]="false"
+  ...
+>
+...
+</fudis-select>
+```
+
+## Example Select with Autocomplete
+
+<Canvas of={Stories.SelectAutocomplete}></Canvas>
+
+## Example Multiselect with Autocomplete
+
+<Canvas of={Stories.MultiselectAutocomplete}></Canvas>
+
+## Example Select with Autocomplete Clear Button set to False
+
+<Canvas of={Stories.SelectAutocompleteClearButtonFalse}></Canvas>

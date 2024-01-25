@@ -2,7 +2,6 @@ import { Meta, applicationConfig, StoryFn } from '@storybook/angular';
 import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
-import { FudisGroupValidators } from '../../../../utilities/form/groupValidators';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { SelectComponent } from './select.component';
 import readme from './readme.mdx';
@@ -117,16 +116,12 @@ const ExampleTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
   props: {
     ...args,
     defaultOptions,
-    control: new FormControl(
-      [defaultOptions[2]],
-      FudisGroupValidators.min({ value: 4, message: 'KÄÄÄK VALITSE NELJÄ' }),
-    ),
+    control: new FormControl(defaultOptions[2]),
     groupedMockData,
   },
   template: html`
     <fudis-select
       [size]="size"
-      [multiselect]="true"
       [placeholder]="placeholder"
       [control]="control"
       [label]="label"
