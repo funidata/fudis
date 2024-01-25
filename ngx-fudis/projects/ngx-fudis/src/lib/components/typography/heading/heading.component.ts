@@ -58,7 +58,7 @@ export class HeadingComponent implements OnInit {
   protected _id: string;
 
   getHeadingMarginBottom(): FudisSpacing {
-    if (this.level === 1 || this.level === 2) {
+    if (this.size === 'xxl' || this.size === 'xl') {
       return 'sm';
     }
     return 'xs';
