@@ -80,13 +80,16 @@ describe('MultiselectComponent', () => {
   });
 
   function initWithControlValue() {
-    component.control = new FormControl([defaultOptions[0], defaultOptions[2]]);
+    component.control = new FormControl<FudisSelectOption[]>([
+      defaultOptions[0],
+      defaultOptions[2],
+    ]);
     component.ngAfterViewInit();
     fixture.detectChanges();
   }
 
   function initWithControlNull() {
-    component.control = new FormControl(null);
+    component.control = new FormControl<FudisSelectOption[] | null>(null);
     component.ngAfterViewInit();
     fixture.detectChanges();
   }
@@ -129,7 +132,7 @@ describe('MultiselectComponent', () => {
       expect(placeholder.outerHTML).toContain('Multiselect placeholder');
     });
 
-    it('should have placeholder text from control value if control value is set on init', () => {
+    it('should have HTML input value from control value if control value is set on init', () => {
       initWithControlValue();
       const expectedValue = 'Dog, Platypus';
       const placeholderItems = getAllElements(fixture, '.fudis-select__input__label');
@@ -203,12 +206,14 @@ describe('MultiselectComponent', () => {
     beforeEach(() => {
       fixtureMock = TestBed.createComponent(MultiselectMockComponent);
       componentMock = fixtureMock.componentInstance;
-      componentMock.control = new FormControl(null);
       fixtureMock.detectChanges();
     });
 
     it('should be visible by default', () => {
-      componentMock.control = new FormControl([defaultOptions[0], defaultOptions[2]]);
+      componentMock.control = new FormControl<FudisSelectOption[]>([
+        defaultOptions[0],
+        defaultOptions[2],
+      ]);
       fixtureMock.detectChanges();
 
       const chipList = getElement(fixtureMock, '.fudis-multiselect-chip-list');
@@ -217,13 +222,25 @@ describe('MultiselectComponent', () => {
     });
 
     it('should not be visible if showSelectionChips is set to false', () => {
-      componentMock.control = new FormControl([defaultOptions[0], defaultOptions[2]]);
+      componentMock.control = new FormControl<FudisSelectOption[]>([
+        defaultOptions[0],
+        defaultOptions[2],
+      ]);
       componentMock.multiselectEl.showSelectionChips = false;
       fixtureMock.detectChanges();
 
       const chipList = getElement(fixtureMock, '.fudis-multiselect-chip-list');
 
       expect(chipList).toBeFalsy();
+    });
+
+    it('should have correct length of buttons', () => {
+      componentMock.control.patchValue([defaultOptions[2], defaultOptions[4], defaultOptions[0]]);
+      fixtureMock.detectChanges();
+
+      const chipListButtons = getAllElements(fixtureMock, '.fudis-multiselect-chip-list__button');
+
+      expect(chipListButtons).toHaveLength(3);
     });
   });
 });
