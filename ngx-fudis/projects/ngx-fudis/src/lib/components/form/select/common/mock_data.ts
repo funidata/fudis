@@ -14,6 +14,70 @@ export const defaultOptions: FudisSelectOption[] = [
   { value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
 ];
 
+export const groupedTestData = [
+  {
+    country: 'Netherlands',
+
+    options: [
+      {
+        value: '4257d865-872c-4ea6-80e6-8bd04ce56ad7',
+        label: 'Golden jackal',
+        scienceName: 'Canis aureus',
+      },
+      {
+        value: 'e2fa6f0a-632a-485f-8ccf-b984311fe3b4',
+        label: 'Mountain lion',
+        scienceName: 'Felis concolor',
+      },
+      {
+        value: '0cf7dff9-10e4-400b-b8e0-828b2e0baf30',
+        label: 'Cat, european wild',
+        scienceName: 'Felis silvestris lybica',
+      },
+    ],
+  },
+  {
+    country: 'Brazil',
+    options: [
+      {
+        value: '4ae756e1-3ace-43a4-8c47-7081328970b1',
+        label: 'Small Indian mongoose',
+        scienceName: 'Herpestes javanicus',
+      },
+      {
+        value: 'c0cba653-c8eb-410d-bf65-32d2353e1fca',
+        label: 'Falcon, prairie',
+        scienceName: 'Falco mexicanus',
+      },
+      {
+        value: 'cc5a789e-6a7c-471a-a931-40edd734cbad',
+        label: 'Spotted hyena',
+        scienceName: 'Crocuta crocuta',
+      },
+    ],
+  },
+  {
+    country: 'China',
+    options: [
+      {
+        value: '4c08f813-45b6-4a32-99de-eee6a80a555a',
+        label: 'Salmon pink bird eater tarantula',
+        scienceName: 'Lasiodora parahybana',
+      },
+      {
+        value: '98bd0882-5bc8-435f-932d-0bf7495b0608',
+        label: 'Crane, sandhill',
+        scienceName: 'Grus canadensis',
+      },
+      {
+        value: '967d39b8-f85a-45aa-952e-8d0607dde1f6',
+        label: 'Arctic fox',
+        scienceName: 'Alopex lagopus',
+      },
+    ],
+  },
+];
+
 export const selectMockData: FudisSelectOption[] = [
   {
     value: '4257d865-872c-4ea6-80e6-8bd04ce56ad7',

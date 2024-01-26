@@ -26,55 +26,7 @@ import {
 } from '../../../../../utilities/tests/utilities';
 import { MultiselectChipListComponent } from '../../multiselect/multiselect-chip-list/multiselect-chip-list.component';
 import { By } from '@angular/platform-browser';
-
-export const testGroupedData = [
-  {
-    country: 'Netherlands',
-
-    options: [
-      {
-        value: '4257d865-872c-4ea6-80e6-8bd04ce56ad7',
-        label: 'Golden jackal',
-        scienceName: 'Canis aureus',
-      },
-      {
-        value: 'e2fa6f0a-632a-485f-8ccf-b984311fe3b4',
-        label: 'Mountain lion',
-        scienceName: 'Felis concolor',
-      },
-    ],
-  },
-  {
-    country: 'Brazil',
-    options: [
-      {
-        value: '4ae756e1-3ace-43a4-8c47-7081328970b1',
-        label: 'Small Indian mongoose',
-        scienceName: 'Herpestes javanicus',
-      },
-      {
-        value: 'c0cba653-c8eb-410d-bf65-32d2353e1fca',
-        label: 'Falcon, prairie',
-        scienceName: 'Falco mexicanus',
-      },
-    ],
-  },
-  {
-    country: 'China',
-    options: [
-      {
-        value: '4c08f813-45b6-4a32-99de-eee6a80a555a',
-        label: 'Salmon pink bird eater tarantula',
-        scienceName: 'Lasiodora parahybana',
-      },
-      {
-        value: '98bd0882-5bc8-435f-932d-0bf7495b0608',
-        label: 'Crane, sandhill',
-        scienceName: 'Grus canadensis',
-      },
-    ],
-  },
-];
+import { groupedTestData } from '../mock_data';
 
 @Component({
   selector: 'fudis-mock-select',
@@ -115,7 +67,7 @@ export const testGroupedData = [
     </fudis-multiselect>`,
 })
 class MockSelectComponent {
-  groupedData = testGroupedData;
+  groupedData = groupedTestData;
   control: FormControl = new FormControl<FudisSelectOption[] | null>(null);
   clearButton: boolean = true;
 
@@ -185,7 +137,7 @@ describe('SelectBaseDirective', () => {
   }
 
   function patchControlValue() {
-    component.control.patchValue([testGroupedData[0].options[0]]);
+    component.control.patchValue([groupedTestData[0].options[0]]);
   }
 
   describe('Multi Select default values', () => {
