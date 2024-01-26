@@ -157,7 +157,7 @@ const AllSelectsTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => 
           [helpText]="autocompleteMultiselect.helpText"
         >
           <ng-template fudisContent type="select-options">
-            <fudis-multiselect-option *ngFor="let option of defaultOptionsTwo" [data]="option" />
+            <fudis-multiselect-option *ngFor="let option of defaultOptions" [data]="option" />
             <fudis-multiselect-group *ngFor="let group of groupedMockData" [label]="group.country">
               <fudis-multiselect-option
                 *ngFor="let groupedOption of group.options"
