@@ -1,4 +1,3 @@
-// eslint-disable-next-line max-classes-per-file
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormControl, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -15,7 +14,7 @@ type TestForm = {
 
 @Component({
   selector: 'example-dialog-content',
-  template: `<fudis-dialog [size]="'lg'">
+  template: `<fudis-dialog [size]="'xl'">
     <fudis-heading fudisDialogTitle [level]="2"
       >Dialog with fudis-grid and scrollable content</fudis-heading
     >

@@ -23,12 +23,14 @@ Fudis Dialog consists of three parts: service, component and directives.
 Fudis Dialog Service provides tools for opening and closing a dialog. Service accepts both Angular components and templates to be passed as an argument.
 
 Dialog is opened with `dialogService.open()` which takes either an Angular component or reference to a template as an argument. Dialog is closed with `dialogService.close()`.
+As a feature, dialog has close icon button on the right corner of the dialog which cannot be removed.
 
 ### Component
 
 Dialog component is a wrapper component taking one parameter: `size`.
 
-Size determines the horizontal size of the dialog. Available options are `sm`, `md`, `lg` and `initial`. If none is given it defaults to `md`.
+Size determines the horizontal size of the dialog. Available options are `sm`, `md`(default), `lg`, `xl` and `initial`.
+`lg` and `xl` are initially the same size but `xl` will hold its width as long as possible and has bigger max-width on small screen widths.
 
 ```
 <fudis-dialog [size]="'sm'">
