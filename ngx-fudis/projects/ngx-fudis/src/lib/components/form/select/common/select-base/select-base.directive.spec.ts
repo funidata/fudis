@@ -137,10 +137,10 @@ describe('SelectBaseDirective', () => {
   }
 
   function patchControlValue() {
-    component.control.patchValue([groupedTestData[0].options[0]]);
+    component.control.patchValue([groupedTestData[0].options[0], groupedTestData[1].options[1]]);
   }
 
-  describe('Multi Select default values', () => {
+  describe('Multiselect default values', () => {
     it('should have size', () => {
       expect(component.multiSelect.size).toEqual('md');
     });
@@ -159,17 +159,21 @@ describe('SelectBaseDirective', () => {
         '.fudis-multiselect-option__label--checked .fudis-multiselect-option__label__text',
       );
 
-      const selectedOptionLabel = getTrimmedTextContent(checkedOption[0] as HTMLElement);
+      const selectedOptionLabelArray: string[] = [];
 
-      expect(selectedOptionLabel).toEqual('Golden jackal');
+      checkedOption.forEach((item) => {
+        selectedOptionLabelArray.push(getTrimmedTextContent(item as HTMLElement));
+      });
+
+      expect(selectedOptionLabelArray).toEqual(['Golden jackal', 'Falcon, prairie']);
 
       const inputText = getElement(fixture, '.fudis-select__input__label');
       const inputValue = getTrimmedTextContent(inputText as HTMLElement);
 
-      expect(inputValue).toEqual(selectedOptionLabel);
+      expect(inputValue).toEqual("Golden jackal, 'Falcon, prairie'");
     });
 
-    it('should open dropdown when Multi Select receives focus', () => {
+    it('should open dropdown when Multiselect receives focus', () => {
       expect(findMultiSelectDropdownElement()).toBeNull();
 
       const dropdownInput = findMultiSelectInputClass() as HTMLInputElement;
@@ -199,7 +203,9 @@ describe('SelectBaseDirective', () => {
 
       expect(findMultiSelectDropdownElement()).toBeNull();
     });
+  });
 
+  describe('keyboard interaction', () => {
     it('on key press `down` should focus on first element in table', () => {
       const dropdownInput = findMultiSelectInputClass() as HTMLInputElement;
       dropdownInput.focus();
@@ -208,16 +214,27 @@ describe('SelectBaseDirective', () => {
       dropdownInput.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
       fixture.detectChanges();
 
-      const options = fixture.debugElement.queryAll(By.css('.fudis-multiselect-option'));
-      expect(options[0].nativeElement.innerHTML).toContain(
-        'fudis-multiselect-option__label--focus',
+      const options = fixture.debugElement.queryAll(By.css('.fudis-multiselect-option__label'));
+
+      const focusedOption = fixture.debugElement.queryAll(
+        By.css('.fudis-multiselect-option .fudis-multiselect-option__label--focus'),
       );
-      expect(options[1].nativeElement.innerHTML).not.toContain(
-        'fudis-multiselect-option__label--focus',
-      );
-      expect(options[2].nativeElement.innerHTML).not.toContain(
-        'fudis-multiselect-option__label--focus',
-      );
+
+      expect(focusedOption.length).toEqual(1);
+
+      expect(options[0]).toEqual(focusedOption[0]);
+    });
+
+    it("on 'Escape' keypress should close dropdown", () => {
+      setMultiSelectDropdownOpen();
+
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+
+      fixture.detectChanges();
+
+      const openDropdownEl = getElement(fixture, '.fudis-select-dropdown--open');
+
+      expect(openDropdownEl).toBeNull();
     });
   });
 
