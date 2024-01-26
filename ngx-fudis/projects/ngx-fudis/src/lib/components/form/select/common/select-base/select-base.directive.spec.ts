@@ -25,7 +25,8 @@ import {
   getTrimmedTextContent,
 } from '../../../../../utilities/tests/utilities';
 import { MultiselectChipListComponent } from '../../multiselect/multiselect-chip-list/multiselect-chip-list.component';
-// import { phl } from '@angular-extensions/pretty-html-log';
+import { phl } from '@angular-extensions/pretty-html-log';
+import { By } from '@angular/platform-browser';
 
 export const testGroupedData = [
   {
@@ -78,8 +79,7 @@ export const testGroupedData = [
 
 @Component({
   selector: 'fudis-mock-select',
-  template: ` <button id="nappi-1">Fovus me!</button>
-    <fudis-multiselect
+  template: `<fudis-multiselect
       #multiSelect
       [autocomplete]="false"
       [label]="'MultiSelect Label'"
@@ -221,7 +221,8 @@ describe('SelectBaseDirective', () => {
     it('should open dropdown when Multi Select receives focus', () => {
       expect(findMultiSelectDropdownElement()).toBeNull();
 
-      findMultiSelectInputClass().dispatchEvent(new Event('focus'));
+      const dropdownInput = findMultiSelectInputClass() as HTMLInputElement;
+      dropdownInput.focus();
       fixture.detectChanges();
 
       expect(findMultiSelectDropdownElement()).toBeTruthy();
@@ -246,6 +247,26 @@ describe('SelectBaseDirective', () => {
       fixture.detectChanges();
 
       expect(findMultiSelectDropdownElement()).toBeNull();
+    });
+
+    it.only('on key press `down` should select first element from table', () => {
+      const dropdownInput = findMultiSelectInputClass() as HTMLInputElement;
+      dropdownInput.focus();
+      fixture.detectChanges();
+
+      dropdownInput.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+      fixture.detectChanges();
+
+      const options = fixture.debugElement.queryAll(By.css('.fudis-multiselect-option'));
+      expect(options[0].nativeElement.innerHTML).toContain(
+        'fudis-multiselect-option__label--focus',
+      );
+      expect(options[1].nativeElement.innerHTML).not.toContain(
+        'fudis-multiselect-option__label--focus',
+      );
+      expect(options[2].nativeElement.innerHTML).not.toContain(
+        'fudis-multiselect-option__label--focus',
+      );
     });
   });
 
