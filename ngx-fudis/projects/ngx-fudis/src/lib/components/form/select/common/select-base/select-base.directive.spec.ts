@@ -25,7 +25,6 @@ import {
   getTrimmedTextContent,
 } from '../../../../../utilities/tests/utilities';
 import { MultiselectChipListComponent } from '../../multiselect/multiselect-chip-list/multiselect-chip-list.component';
-import { phl } from '@angular-extensions/pretty-html-log';
 import { By } from '@angular/platform-browser';
 
 export const testGroupedData = [
@@ -236,7 +235,7 @@ describe('SelectBaseDirective', () => {
       expect(findMultiSelectDropdownElement()).toBeNull();
     });
 
-    it('should close dropdown when focused elsewhere', () => {
+    it('should close dropdown when `blur` is triggered', () => {
       const dropdownInput = findMultiSelectInputClass() as HTMLInputElement;
       dropdownInput.focus();
       fixture.detectChanges();
@@ -249,7 +248,7 @@ describe('SelectBaseDirective', () => {
       expect(findMultiSelectDropdownElement()).toBeNull();
     });
 
-    it.only('on key press `down` should select first element from table', () => {
+    it('on key press `down` should focus on first element in table', () => {
       const dropdownInput = findMultiSelectInputClass() as HTMLInputElement;
       dropdownInput.focus();
       fixture.detectChanges();
@@ -295,6 +294,20 @@ describe('SelectBaseDirective', () => {
         'fudis-select-autocomplete .fudis-select-autocomplete__icon',
       );
       expect(dropdownChervon.getAttribute('ng-reflect-icon')).toEqual('chevron');
+    });
+
+    it('on key press `down` should open autocomplete dropdown', () => {
+      const selectInputElement = fixture.nativeElement.querySelector('input');
+
+      selectInputElement.focus();
+      fixture.detectChanges();
+
+      expect(findMultiSelectDropdownElement()).toBeNull();
+
+      selectInputElement.dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+      fixture.detectChanges();
+
+      expect(findMultiSelectDropdownElement()).toBeTruthy();
     });
   });
 });
