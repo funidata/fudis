@@ -28,16 +28,6 @@ export class SelectGroupComponent {
   @Input({ required: true }) label: string;
 
   /**
-   * Optional value which is stored in control.value as 'groupValue' when an option under this group is selected
-   */
-  @Input() value: string;
-
-  /**
-   * Set group visible or hide it. By default visible.
-   */
-  @Input() visible: boolean = true;
-
-  /**
    * Id for this Select Group. Generated with FudisIdService and used for accessibility attributes.
    */
   public id: string;
