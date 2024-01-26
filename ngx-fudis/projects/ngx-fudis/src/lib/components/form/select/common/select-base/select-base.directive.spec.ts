@@ -19,7 +19,11 @@ import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.compon
 import { ButtonComponent } from '../../../../button/button.component';
 import { MultiselectOptionComponent } from '../../multiselect/multiselect-option/multiselect-option.component';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
-import { getElement, getTrimmedTextContent } from '../../../../../utilities/tests/utilities';
+import {
+  getAllElements,
+  getElement,
+  getTrimmedTextContent,
+} from '../../../../../utilities/tests/utilities';
 import { MultiselectChipListComponent } from '../../multiselect/multiselect-chip-list/multiselect-chip-list.component';
 // import { phl } from '@angular-extensions/pretty-html-log';
 
@@ -74,33 +78,54 @@ export const testGroupedData = [
 
 @Component({
   selector: 'fudis-mock-select',
-  template: ` <fudis-multiselect
-    #multiSelect
-    [autocomplete]="autocomplete"
-    [label]="'Test Label'"
-    [placeholder]="'Test placeholder'"
-    [control]="control"
-    [size]="'md'"
-    [autocompleteClearButton]="clearButton"
-  >
-    <ng-template fudisContent type="select-options">
-      <fudis-multiselect-group *ngFor="let group of groupedData" [label]="group.country">
-        <fudis-multiselect-option
-          *ngFor="let groupedOption of group.options"
-          [data]="groupedOption"
-        />
-      </fudis-multiselect-group>
-    </ng-template>
-  </fudis-multiselect>`,
+  template: `<fudis-multiselect
+      *ngIf="!autoComplete"
+      #multiSelect
+      [autocomplete]="false"
+      [label]="'MultiSelect Label'"
+      [placeholder]="'Test placeholder'"
+      [control]="control"
+      [size]="'md'"
+    >
+      <ng-template fudisContent type="select-options">
+        <fudis-multiselect-group *ngFor="let group of groupedData" [label]="group.country">
+          <fudis-multiselect-option
+            *ngFor="let groupedOption of group.options"
+            [data]="groupedOption"
+          />
+        </fudis-multiselect-group>
+      </ng-template>
+    </fudis-multiselect>
+    <fudis-button *ngIf="!autoComplete" [label]="'Test Button for focus'"></fudis-button>
+    <fudis-multiselect
+      *ngIf="autoComplete"
+      #multiSelectAuto
+      [autocomplete]="true"
+      [label]="'MultiAutoSelect Label'"
+      [placeholder]="'Test placeholder'"
+      [control]="control"
+      [size]="'md'"
+      [autocompleteClearButton]="clearButton"
+    >
+      <ng-template fudisContent type="select-options">
+        <fudis-multiselect-group *ngFor="let group of groupedData" [label]="group.country">
+          <fudis-multiselect-option
+            *ngFor="let groupedOption of group.options"
+            [data]="groupedOption"
+          />
+        </fudis-multiselect-group>
+      </ng-template>
+    </fudis-multiselect>`,
 })
 class MockSelectComponent {
   groupedData = testGroupedData;
   control: FormControl = new FormControl<FudisSelectOption[] | null>(null);
-  autocomplete = true;
-  clearButton = true;
+  // Boolean for switching between multi select and multi select autocomplete component
+  autoComplete: boolean;
+  clearButton: boolean = true;
 
-  // @ViewChild('singleSelect') singleSelect: SelectComponent;
   @ViewChild('multiSelect') multiSelect: MultiselectComponent;
+  @ViewChild('multiSelectAuto') multiSelectAuto: MultiselectComponent;
 }
 
 describe('SelectBaseDirective', () => {
@@ -147,7 +172,17 @@ describe('SelectBaseDirective', () => {
     component.control.patchValue([testGroupedData[0].options[0]]);
   }
 
-  describe('Select base directive default input values', () => {
+  describe('Multi Select default values', () => {
+    beforeEach(() => {
+      component.autoComplete = false;
+      fixture.detectChanges();
+    });
+
+    it('should not render autocomplete when autocomplete is set to false', () => {
+      const elementNotBeFound = getElement(fixture, 'fudis-select-autocomplete');
+      expect(elementNotBeFound).toBeNull();
+    });
+
     it('should have size', () => {
       expect(component.multiSelect.size).toEqual('md');
     });
@@ -156,26 +191,65 @@ describe('SelectBaseDirective', () => {
       expect(component.multiSelect.classes).toEqual('fudis-select-host');
     });
 
+    it('should show sorted selected options as form input value', () => {
+      patchControlValue();
+      setMultiSelectDropdownOpen();
+      fixture.detectChanges();
+
+      const checkedOption = getAllElements(
+        fixture,
+        '.fudis-multiselect-option__label--checked .fudis-multiselect-option__label__text',
+      );
+
+      const selectedOptionLabel = getTrimmedTextContent(checkedOption[0] as HTMLElement);
+
+      expect(selectedOptionLabel).toEqual('Golden jackal');
+
+      const inputText = getElement(fixture, '.fudis-select__input__label');
+      const inputValue = getTrimmedTextContent(inputText as HTMLElement);
+
+      expect(inputValue).toEqual(selectedOptionLabel);
+    });
+
+    it('should open dropdown when Multi Select receives focus', () => {
+      const dropdownClosed = getElement(
+        fixture,
+        '.fudis-select-dropdown.fudis-select-dropdown--open.fudis-select-dropdown__multiselect',
+      );
+      expect(dropdownClosed).toBeNull();
+
+      const selectInput: HTMLElement = getElement(
+        fixture,
+        '.fudis-select__input.fudis-select__input__dropdown',
+      );
+      selectInput.dispatchEvent(new Event('focus'));
+      fixture.detectChanges();
+
+      const dropdownOpen = getElement(
+        fixture,
+        '.fudis-select-dropdown.fudis-select-dropdown--open.fudis-select-dropdown__multiselect',
+      );
+      expect(dropdownOpen).toBeTruthy();
+    });
+  });
+
+  describe('Aucomplete Default values', () => {
+    beforeEach(() => {
+      component.autoComplete = true;
+      fixture.detectChanges();
+    });
+
+    it('should render autocomplete when autocomplete is set to true', () => {
+      const foundAutocomplete = getElement(fixture, 'fudis-select-autocomplete');
+      expect(foundAutocomplete).toBeTruthy();
+    });
+
     it('should have placeholder text', () => {
       const selectElement = getElement(fixture, '.fudis-select');
       const value = selectElement
         .querySelector('.fudis-select-autocomplete__input')
         ?.getAttribute('placeholder');
       expect(value).toContain('Test placeholder');
-    });
-
-    it('should render autocomplete when autocomplete is set to true', () => {
-      component.autocomplete = false;
-      fixture.detectChanges();
-
-      const elementNotBeFound = getElement(fixture, 'fudis-select-autocomplete');
-      expect(elementNotBeFound).toBeNull;
-
-      component.autocomplete = true;
-      fixture.detectChanges();
-
-      const foundAutocomplete = getElement(fixture, 'fudis-select-autocomplete');
-      expect(foundAutocomplete).toBeTruthy;
     });
 
     it('should display clear button when set to true', () => {
@@ -194,28 +268,6 @@ describe('SelectBaseDirective', () => {
         'fudis-select-autocomplete .fudis-select-autocomplete__icon',
       );
       expect(dropdownChervon.getAttribute('ng-reflect-icon')).toEqual('chevron');
-    });
-
-    it('should show selected options as a sorted placeholder text', () => {
-      //component.autocomplete = false;
-
-      patchControlValue();
-      setMultiSelectDropdownOpen();
-      fixture.detectChanges();
-
-      const checkedOption = fixture.nativeElement.querySelectorAll(
-        '.fudis-multiselect-option__label--checked .fudis-multiselect-option__label__text',
-      );
-
-      const trimmedLabel = getTrimmedTextContent(checkedOption[0]);
-
-      expect(trimmedLabel).toEqual('Golden jackal');
-
-      // Ei löydy, koska tämä on näkyvissä vain ei-autocompletella
-      const inputText = fixture.nativeElement.querySelector('.fudis-select__input__label');
-      console.log(inputText);
-
-      console.log(component.multiSelect.dropdownSelectionLabelText);
     });
   });
 });
