@@ -13,7 +13,7 @@
   /* stylelint-disable-next-line selector-class-pattern */
   &:not(.fudis-multiselect-option--visible) {
     display: none;
-    visibility: none;
+    visibility: hidden;
   }
 
   &:hover {

@@ -38,7 +38,7 @@ import { getElement } from '../../../../utilities/tests/utilities';
 })
 class MockAutocompleteComponent {
   testOptions: FudisSelectOption[] = defaultOptions;
-  control: FormControl = new FormControl(null);
+  control: FormControl = new FormControl<FudisSelectOption | null>(null);
 
   @ViewChild('testSelect') testSelect: SelectComponent;
 }
@@ -151,7 +151,7 @@ describe('SelectComponent', () => {
     });
 
     it('should have placeholder on init, when control value is null', () => {
-      mockComponent.control = new FormControl(null);
+      mockComponent.control = new FormControl<FudisSelectOption | null>(null);
       mockFixture.detectChanges();
       const selectElement = getElement(mockFixture, '.fudis-select');
 
