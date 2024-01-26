@@ -196,7 +196,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
   /**
    * Close dropdown
    * @param focusToInput: when dropdown closes, focus or not to the input
-   * @param preventDropdownReopen: For cases, when closing comes from outside and there's no need to reopen the dropdown when focusing back to the input, which usually triggers opening the dropdown.
+   * @param preventDropdownReopen: For cases, when closing command comes from outside eg. clicking an option in the dropdownlist. There's no need to reopen the dropdown when focusing back to the input, which usually triggers opening the dropdown.
    */
   public closeDropdown(focusToInput: boolean = true, preventDropdownReopen: boolean = false): void {
     this._dropdownOpen = false;
@@ -252,16 +252,16 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
    */
   protected _inputBlur(event: FocusEvent): void {
     // Time out used for user mouse click cases
+
     if (!event.relatedTarget) {
       setTimeout(() => {
-        if (!document.activeElement?.classList.contains(this.focusSelector)) {
+        if (!document.activeElement?.classList?.contains(this.focusSelector)) {
           this.closeDropdown(false);
         }
       }, 150);
-    } else if (!(event.relatedTarget as HTMLElement)?.classList.contains(this.focusSelector)) {
+    } else if (!(event.relatedTarget as HTMLElement)?.classList?.contains(this.focusSelector)) {
       this.closeDropdown(false);
     }
-
     this._inputFocused = false;
     this.control.markAsTouched();
   }

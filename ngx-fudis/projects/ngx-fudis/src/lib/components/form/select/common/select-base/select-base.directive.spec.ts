@@ -78,8 +78,8 @@ export const testGroupedData = [
 
 @Component({
   selector: 'fudis-mock-select',
-  template: `<fudis-multiselect
-      *ngIf="!autoComplete"
+  template: ` <button id="nappi-1">Fovus me!</button>
+    <fudis-multiselect
       #multiSelect
       [autocomplete]="false"
       [label]="'MultiSelect Label'"
@@ -96,13 +96,11 @@ export const testGroupedData = [
         </fudis-multiselect-group>
       </ng-template>
     </fudis-multiselect>
-    <fudis-button *ngIf="!autoComplete" [label]="'Test Button for focus'"></fudis-button>
     <fudis-multiselect
-      *ngIf="autoComplete"
       #multiSelectAuto
       [autocomplete]="true"
       [label]="'MultiAutoSelect Label'"
-      [placeholder]="'Test placeholder'"
+      [placeholder]="'Test placeholder for autocomplete'"
       [control]="control"
       [size]="'md'"
       [autocompleteClearButton]="clearButton"
@@ -120,8 +118,6 @@ export const testGroupedData = [
 class MockSelectComponent {
   groupedData = testGroupedData;
   control: FormControl = new FormControl<FudisSelectOption[] | null>(null);
-  // Boolean for switching between multi select and multi select autocomplete component
-  autoComplete: boolean;
   clearButton: boolean = true;
 
   @ViewChild('multiSelect') multiSelect: MultiselectComponent;
@@ -168,21 +164,32 @@ describe('SelectBaseDirective', () => {
     fixture.detectChanges();
   }
 
+  function setMultiSelectDropdownClosed() {
+    component.multiSelect.closeDropdown(true, true);
+    fixture.detectChanges();
+  }
+
+  function findMultiSelectDropdownElement() {
+    const multiSelectDropdown = getElement(
+      fixture,
+      '.fudis-select-dropdown__multiselect.fudis-select-dropdown--open',
+    );
+    return multiSelectDropdown;
+  }
+
+  function findMultiSelectInputClass() {
+    const selectInputElement: HTMLElement = getElement(
+      fixture,
+      '.fudis-select__input.fudis-select__input__dropdown',
+    );
+    return selectInputElement;
+  }
+
   function patchControlValue() {
     component.control.patchValue([testGroupedData[0].options[0]]);
   }
 
   describe('Multi Select default values', () => {
-    beforeEach(() => {
-      component.autoComplete = false;
-      fixture.detectChanges();
-    });
-
-    it('should not render autocomplete when autocomplete is set to false', () => {
-      const elementNotBeFound = getElement(fixture, 'fudis-select-autocomplete');
-      expect(elementNotBeFound).toBeNull();
-    });
-
     it('should have size', () => {
       expect(component.multiSelect.size).toEqual('md');
     });
@@ -212,44 +219,43 @@ describe('SelectBaseDirective', () => {
     });
 
     it('should open dropdown when Multi Select receives focus', () => {
-      const dropdownClosed = getElement(
-        fixture,
-        '.fudis-select-dropdown.fudis-select-dropdown--open.fudis-select-dropdown__multiselect',
-      );
-      expect(dropdownClosed).toBeNull();
+      expect(findMultiSelectDropdownElement()).toBeNull();
 
-      const selectInput: HTMLElement = getElement(
-        fixture,
-        '.fudis-select__input.fudis-select__input__dropdown',
-      );
-      selectInput.dispatchEvent(new Event('focus'));
+      findMultiSelectInputClass().dispatchEvent(new Event('focus'));
       fixture.detectChanges();
 
-      const dropdownOpen = getElement(
-        fixture,
-        '.fudis-select-dropdown.fudis-select-dropdown--open.fudis-select-dropdown__multiselect',
-      );
-      expect(dropdownOpen).toBeTruthy();
+      expect(findMultiSelectDropdownElement()).toBeTruthy();
+    });
+
+    it('should close dropdown', () => {
+      setMultiSelectDropdownOpen();
+      expect(findMultiSelectDropdownElement()).toBeTruthy();
+
+      setMultiSelectDropdownClosed();
+      expect(findMultiSelectDropdownElement()).toBeNull();
+    });
+
+    it('should close dropdown when focused elsewhere', () => {
+      const dropdownInput = findMultiSelectInputClass() as HTMLInputElement;
+      dropdownInput.focus();
+      fixture.detectChanges();
+
+      expect(findMultiSelectDropdownElement()).toBeTruthy();
+
+      dropdownInput.blur();
+      fixture.detectChanges();
+
+      expect(findMultiSelectDropdownElement()).toBeNull();
     });
   });
 
   describe('Aucomplete Default values', () => {
-    beforeEach(() => {
-      component.autoComplete = true;
-      fixture.detectChanges();
-    });
-
-    it('should render autocomplete when autocomplete is set to true', () => {
-      const foundAutocomplete = getElement(fixture, 'fudis-select-autocomplete');
-      expect(foundAutocomplete).toBeTruthy();
-    });
-
     it('should have placeholder text', () => {
-      const selectElement = getElement(fixture, '.fudis-select');
+      const selectElement = getElement(fixture, 'fudis-select-autocomplete');
       const value = selectElement
         .querySelector('.fudis-select-autocomplete__input')
         ?.getAttribute('placeholder');
-      expect(value).toContain('Test placeholder');
+      expect(value).toContain('Test placeholder for autocomplete');
     });
 
     it('should display clear button when set to true', () => {
