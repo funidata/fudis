@@ -58,6 +58,7 @@
       [required]="_required"
       [invalidState]="invalidState"
       [multiselect]="true"
+      [autocompleteClearButton]="autocompleteClearButton"
       (triggerFocusToFirstOption)="!noResultsFound && _focusToFirstOption(this.focusSelector)"
       (triggerFilterTextUpdate)="_filterTextUpdate($event)"
       (triggerSelectOnlyVisibleOption)="_focusToFirstOption(this.focusSelector, true)"
