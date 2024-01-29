@@ -14,9 +14,7 @@ Sandbox application, which uses locally built ngx-fudis package as its dependanc
 
 Self-explaining main location of documentation for product developers and Fudis developers.
 
-<br />
-
-## Under Projects / Ngx-fudis Folder
+## Ngx-fudis
 
 <br />
 
@@ -26,15 +24,19 @@ Static asset files, like fonts, SVG icons and similar are located here.
 
 ### Components
 
-The molecules of Fudis, the components. Each component folder should contain files related to that spesific component like its Storybook stories file and file containing unit tests.
+The molecules of Fudis, the components. Each component folder should contain files related to that spesific component, such as Storybook stories, documentation and unit tests.
 
 ### Directives
 
-Folder contains base directives for Fudis components to extend on and directive classes to help add additional behaviour to Fudis components, such as content projection, tooltip and the almighty grid.
+Folder containing base directives for Fudis components to extend on and directive classes to help add additional behaviour to Fudis components, such as content projection, tooltip and the almighty grid.
 
 ### Foundations
 
-**Foundation** section contains the atoms of Fudis DS. Foundations directory contains all project foundation design tokens and mixins. Including tokens and mixins for e. g. borders, breakpoints, colors, spacing and typography. If there is need for a style variable or mixin, which is used in multiple components, usually it should be defined under Foundations.
+**Foundations** section contains the atoms of Fudis DS. Foundations directory contains all project foundation design tokens and mixins. Including tokens and mixins for e. g. borders, breakpoints, colors, spacing and typography. If there is need for a style variable or mixin, which is used in multiple components, usually it should be defined under Foundations.
+
+### Services
+
+Folder containing all services that Fudis components need. These include e.g. alert, breakpoint, focus and id services. Both internal and exposed services live here.
 
 ### Theme
 
@@ -48,7 +50,7 @@ Folder containing types and interfaces used in various Fudis components.
 
 ### Utilities
 
-Folder containing services that are used throughout the project, e. g. `FudisIdService` and `FudisTranslationService`.
+Folder containing utility functions used throughout the project, e.g. form validator and unit test functions.
 
 <br />
 
@@ -85,6 +87,7 @@ design-system
 │ └───directives
 │ │ │
 │ │ ├──content-projection
+│ │ ├──dialog
 │ │ ├──form
 │ │ ├──grid
 │ │ ├──spacing
@@ -99,13 +102,30 @@ design-system
 │ │ ├──grid
 │ │ ├──spacing
 │ │ ├──typography
-│ │ └──utilities
+│ │ ├──utilities
+│ │ └──z-index
+│ │
+│ └───services
+│ │ │
+│ │ ├──alert
+│ │ ├──breakppoint
+│ │ ├──dialog
+│ │ ├──focus
+│ │ ├──form
+│ │ ├──grid
+│ │ ├──id
+│ │ ├──language-badge-group
+│ │ └──translation
 │ │
 │ └───theme
 │ │
 │ └───types
 │ │
 │ └───utilities
+│ │ │
+│ │ ├──breakpoint
+│ │ ├──form
+│ │ └──tests
 │
 ...
 ```
