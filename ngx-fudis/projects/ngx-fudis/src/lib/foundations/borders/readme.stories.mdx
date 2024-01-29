@@ -2,9 +2,9 @@ import { Meta } from "@storybook/blocks";
 
 <Meta title="Foundations/Borders" />
 
-# Border mixins
+# Border Mixins
 
-Load Fudis mixins and tokens to your file in your SCSS file with:
+Load Fudis mixins and tokens to your SCSS file with:
 
 ```
 @use "@funidata/ngx-fudis" as fudis;
@@ -12,7 +12,7 @@ Load Fudis mixins and tokens to your file in your SCSS file with:
 
 ## Border
 
-Set the border of an element.
+Set border of an element.
 
 ```
 @include fudis.border($width, $style, $color)
@@ -29,25 +29,16 @@ Set the border of an element.
 }
 ```
 
-## Outline
+### Border None
 
-Set the outline of an element.
-
-```
-@include fudis.outline($width, $style, $color)
-```
-
-| $width                                                 | $style                                                 | $color                                          |
-| ------------------------------------------------------ | ------------------------------------------------------ | ----------------------------------------------- |
-| string value from spacing tokens map (_$pixel-tokens_) | string value from border tokens map (_$border-styles_) | string value from colors tokens map (_$colors_) |
+Border none doesn't need any parameters.
 
 ```
-.my-element {
-  @include fudis.outline('1px', 'dashed', 'gray-middle');
-}
+@include fudis.border-none;
+
 ```
 
-## Border radius
+### Border Radius
 
 Set border radius of an element.
 
@@ -65,9 +56,37 @@ Set border radius of an element.
 }
 ```
 
-# Border tokens
+## Outline
 
-| $border-style |
-| ------------- |
-| solid         |
-| dashed        |
+Set outline of an element.
+
+```
+@include fudis.outline($width, $style, $color)
+```
+
+| $width                                                 | $style                                                 | $color                                          |
+| ------------------------------------------------------ | ------------------------------------------------------ | ----------------------------------------------- |
+| string value from spacing tokens map (_$pixel-tokens_) | string value from border tokens map (_$border-styles_) | string value from colors tokens map (_$colors_) |
+
+```
+.my-element {
+  @include fudis.outline('1px', 'dashed', 'gray-middle');
+}
+```
+
+### Outline None
+
+Outline none doesn't need any parameters.
+
+```
+@include fudis.outline-none;
+
+```
+
+# Border Tokens
+
+| $border-styles |
+| -------------- |
+| solid          |
+| dashed         |
+| none           |
