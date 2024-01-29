@@ -18,6 +18,7 @@ export const multiselectChipListMockData: FudisSelectOption[] = [
   { value: 'hereford', label: 'Hereford' },
   { value: 'texas-longhorn', label: 'Texas Longhorn' },
   { value: 'ayrshire', label: 'Ayrshire' },
+  { value: 'wagyu', label: 'Wagyu' },
 ];
 
 export const groupedTestData = [
