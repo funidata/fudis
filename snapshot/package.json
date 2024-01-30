@@ -1,0 +1,14 @@
+{
+  "name": "fudis-snapshot",
+  "version": "0.2.2",
+  "description": "Visual regression tests for Fudis",
+  "scripts": {
+    "start": "cypress open"
+  },
+  "author": "Funidata Ltd",
+  "license": "CC-BY-NC-SA-4.0",
+  "devDependencies": {
+    "cypress": "^13.6.3",
+    "typescript": "^5.3.3"
+  }
+}
