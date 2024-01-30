@@ -1,6 +1,6 @@
 {
   "name": "fudis",
-  "version": "0.1.3",
+  "version": "0.2.2",
   "description": "Funidata Design System",
   "scripts": {
     "postinstall": "cd ngx-fudis && npm ci",

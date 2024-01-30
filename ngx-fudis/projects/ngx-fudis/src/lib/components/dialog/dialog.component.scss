@@ -47,6 +47,10 @@
         width: calc(gridTokens.$grid-width-lg + 2 * spacing.$spacing-xl);
       }
     }
+
+    &__xl {
+      width: gridTokens.$grid-width-xl;
+    }
   }
 
   @include breakpoints.breakpoint("sm") {
