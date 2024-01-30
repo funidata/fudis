@@ -1,4 +1,1 @@
-<svg class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="chevron-ring-fill">
-    <circle cx="16" cy="16" r="13.333" fill="white" stroke="#484848"/>
-    <path d="M13.414 10.133a.619.619 0 0 0-.434.18.61.61 0 0 0 0 .865L17.818 16l-4.838 4.822a.61.61 0 0 0 0 .865.615.615 0 0 0 .868 0l5.102-5.085a.848.848 0 0 0 0-1.204l-5.102-5.085a.617.617 0 0 0-.434-.18Z" fill="#484848"/>
-</svg>
+<svg id="chevron-ring-fill" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"><path fill="#fff" d="M29 16c0 7.18-5.82 13-13 13S3 23.18 3 16 8.82 3 16 3s13 5.82 13 13Z"/><path fill="#484848" fill-rule="evenodd" d="M16 28c6.627 0 12-5.373 12-12S22.627 4 16 4 4 9.373 4 16s5.373 12 12 12Zm0 1c7.18 0 13-5.82 13-13S23.18 3 16 3 3 8.82 3 16s5.82 13 13 13Z" clip-rule="evenodd"/><path fill="#484848" fill-rule="evenodd" d="M13.414 10.133a.61.61 0 0 0-.434 1.044L17.818 16l-4.838 4.822a.61.61 0 0 0 .434 1.045c.157 0 .315-.061.434-.18l5.102-5.085a.848.848 0 0 0 0-1.204l-5.102-5.085a.618.618 0 0 0-.434-.18" clip-rule="evenodd"/></svg>

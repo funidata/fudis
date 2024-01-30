@@ -1,3 +1,1 @@
-<svg class="hidden" preserveAspectRatio="xMidYMin" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" id="minus">
-    <rect x="10" y="15" width="12" height="1"/>
-</svg>
+<svg id="minus" xmlns="http://www.w3.org/2000/svg" width="32" height="32"><path d="M10 15h12v1H10z"/></svg>

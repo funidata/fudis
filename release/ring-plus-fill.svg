@@ -1,5 +1,1 @@
-<svg class="hidden" preserveAspectRatio="xMidYMin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="ring-plus-fill">
-    <circle cx="15" cy="15" r="12.5" fill="white" stroke="#1076DB"/>
-    <path d="M9.49023 15.25H20.5502" stroke="#1076DB"/>
-    <path d="M15.02 20.78V9.72" stroke="#1076DB"/>
-</svg>
+<svg id="ring-plus-fill" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"><path fill="#fff" d="M29 16c0 7.18-5.82 13-13 13S3 23.18 3 16 8.82 3 16 3s13 5.82 13 13Z"/><path fill="#1076DB" fill-rule="evenodd" d="M16 28c6.627 0 12-5.373 12-12S22.627 4 16 4 4 9.373 4 16s5.373 12 12 12Zm0 1c7.18 0 13-5.82 13-13S23.18 3 16 3 3 8.82 3 16s5.82 13 13 13Z" clip-rule="evenodd"/><path fill="#1076DB" d="M16 9h1v13h-1z"/><path fill="#1076DB" d="M10 15h13v1H10z"/></svg>

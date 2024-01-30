@@ -266,6 +266,10 @@
   box-shadow: 0 0 0 calc(0.25rem / var(--fudis-rem-multiplier)) #ffffff;
 }
 
+.fudis-dialog-panel mat-dialog-container.mat-mdc-dialog-container .mat-mdc-dialog-title:focus-visible.fudis-form__header__title__dialog {
+  outline-offset: -2px;
+}
+
 .fudis-dialog-panel mat-dialog-container.mat-mdc-dialog-container .mat-mdc-dialog-content {
   box-sizing: border-box;
   margin: 0;
@@ -276,6 +280,10 @@
   outline: 2px dashed #484848;
   outline-offset: 1px;
   box-shadow: 0 0 0 calc(0.25rem / var(--fudis-rem-multiplier)) #ffffff;
+}
+
+.fudis-dialog-panel mat-dialog-container.mat-mdc-dialog-container .mat-mdc-dialog-content fudis-checkbox, .fudis-dialog-panel mat-dialog-container.mat-mdc-dialog-container .mat-mdc-dialog-content fudis-radio-button {
+  padding-left: calc(0.25rem / var(--fudis-rem-multiplier));
 }
 
 .fudis-dialog-panel mat-dialog-container.mat-mdc-dialog-container .mat-mdc-dialog-actions {
@@ -296,10 +304,16 @@
     border: 2px solid #484848;
     max-width: 90vw !important;
   }
+  .fudis-dialog-panel:has(.fudis-dialog__size__xl) {
+    max-width: 98vw !important;
+  }
 }
 @media screen and (min-width: 48em) {
   .fudis-dialog-panel {
     max-width: 80vw !important;
+  }
+  .fudis-dialog-panel:has(.fudis-dialog__size__xl) {
+    max-width: 98vw !important;
   }
 }
 /* stylelint-disable-next-line selector-class-pattern */
@@ -1920,6 +1934,10 @@ html {
 */
 /* stylelint-disable property-disallowed-list */
 /* stylelint-disable unit-disallowed-list */
+/* stylelint-disable declaration-property-value-disallowed-list */
+/* stylelint-disable property-disallowed-list */
+/* stylelint-disable declaration-property-value-disallowed-list */
+/* stylelint-disable property-disallowed-list */
 .fudis-visually-hidden {
   position: absolute;
   left: 0;
@@ -1947,6 +1965,20 @@ html {
   height: 1px;
 }
 
+/* stylelint-disable-next-line selector-no-qualifying-type */
+input.fudis-form-input {
+  /* stylelint-disable-next-line selector-no-qualifying-type */
+}
+input.fudis-form-input--invalid[aria-invalid=true] {
+  border: 1px solid #b83c2e;
+}
+input.fudis-form-input--disabled {
+  border: 1px dashed #727272;
+  /* stylelint-disable-next-line property-disallowed-list */
+  background-color: #f1f1f1;
+  cursor: default;
+}
+
 .fudis-input-size__xs {
   max-width: calc(4rem / var(--fudis-rem-multiplier));
 }
@@ -1966,6 +1998,34 @@ html {
 
 html {
   font-size: 100%;
+}
+html.cypress-hide-unstyled-elements textarea.fudis-text-area__input {
+  resize: none;
+}
+html.cypress-hide-unstyled-elements input,
+html.cypress-hide-unstyled-elements textarea {
+  caret-color: transparent;
+}
+html.cypress-hide-unstyled-elements::-webkit-scrollbar {
+  scrollbar-width: none;
+  display: none;
+  background: transparent;
+  visibility: hidden;
+  width: 0;
+}
+html.cypress-hide-unstyled-elements * {
+  scrollbar-width: none; /* Firefox */
+}
+html.cypress-hide-unstyled-elements *::-webkit-scrollbar {
+  display: none;
+  visibility: hidden;
+  width: 0;
+  background: transparent;
+}
+
+body.cypress-storybook-box-reset {
+  padding: 0;
+  margin: 0;
 }
 
 /* stylelint-disable color-no-hex */
