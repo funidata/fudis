@@ -23,3 +23,9 @@ services:
       - 4200:4200
     volumes:
       - ./ngx-fudis/projects/dev/src:/usr/src/app/projects/dev/src
+
+  fudis-snapshot:
+    build: ./snapshot
+    container_name: fudis-snapshot
+    environment:
+      - CYPRESS_BASE_URL=http://fudis-storybook:6006
