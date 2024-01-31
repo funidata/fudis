@@ -29,3 +29,6 @@ services:
     container_name: fudis-snapshot
     environment:
       - CYPRESS_BASE_URL=http://fudis-storybook:6006
+    working_dir: /usr/src
+    volumes:
+      - ./snapshot/cypress-image-diff-screenshots:/usr/src/cypress-image-diff-screenshots
