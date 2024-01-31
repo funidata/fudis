@@ -76,18 +76,11 @@ describe('MultiselectOptionComponent', () => {
     fixtureMock.detectChanges();
   }
 
-  function initializeFormControlWithOneValue() {
-    componentMock.control = new FormControl<FudisSelectOption[]>([defaultOptions[4]]);
-    componentMock = fixtureMock.componentInstance;
-    fixtureMock.detectChanges();
-  }
-
   function initializeFormControlWithMultipleValues() {
     componentMock.control = new FormControl<FudisSelectOption[]>([
       defaultOptions[4],
       defaultOptions[0],
     ]);
-    componentMock = fixtureMock.componentInstance;
     fixtureMock.detectChanges();
   }
 
@@ -109,22 +102,6 @@ describe('MultiselectOptionComponent', () => {
 
       expect(selectedOption).toBeTruthy();
       expect(selectedOptionLabel).toEqual('Platypus');
-    });
-
-    // TODO
-    it('should have respective HTML attributes if parent control has preselected value on init', () => {
-      // Issue with multiple form control inits on the component and functions?
-      initializeFormControlWithOneValue();
-      setMultiSelectDropdownOpen();
-
-      // Should work the same as previous test
-      // const selectedOption = getElement(fixtureMock, '.fudis-multiselect-option--checked');
-      // const selectedOptionLabel = selectedOption.querySelector(
-      //   '.fudis-multiselect-option__label__text',
-      // )?.textContent;
-
-      // expect(selectedOption).toBeTruthy();
-      // expect(selectedOptionLabel).toEqual('Screaming hairy armadillo');
     });
 
     it('should add value to control with already existing values when another option is selected', () => {
