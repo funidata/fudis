@@ -61,8 +61,6 @@ jobs:
 
   formatting:
     name: Check formatting
-    needs:
-      - build
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
