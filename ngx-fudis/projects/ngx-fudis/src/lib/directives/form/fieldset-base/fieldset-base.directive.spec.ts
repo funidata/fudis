@@ -122,7 +122,7 @@ describe('FieldSetBaseDirective', () => {
       expect(guidanceElement.id).toEqual('fudis-checkbox-group-1_guidance');
     });
 
-    it('should have correct helptext in the guidance', () => {
+    it('should have correct helpText in guidance', () => {
       const helpText = getElement(fixtureMock, '.fudis-guidance__help-text');
 
       expect(helpText.textContent).toContain('Here are some advices');
