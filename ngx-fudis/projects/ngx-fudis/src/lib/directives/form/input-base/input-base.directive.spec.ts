@@ -146,7 +146,7 @@ describe('InputBaseDirective', () => {
     });
 
     it('should have guidance with correct id', () => {
-      const guidanceElement = getElement(fixtureMock, 'fudis-guidance div div');
+      const guidanceElement = getElement(fixtureMock, 'fudis-guidance .fudis-guidance div');
 
       expect(guidanceElement).toBeTruthy();
       expect(guidanceElement.id).toEqual('fudis-text-input-1_guidance');
