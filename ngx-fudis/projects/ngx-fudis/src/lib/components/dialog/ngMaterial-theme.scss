@@ -84,9 +84,17 @@
     @include borders.border("2px", "solid", "gray-dark");
 
     max-width: 90vw !important;
+
+    &:has(.fudis-dialog__size__xl) {
+      max-width: 98vw !important;
+    }
   }
 
   @include breakpoints.breakpoint("md") {
     max-width: 80vw !important;
+
+    &:has(.fudis-dialog__size__xl) {
+      max-width: 98vw !important;
+    }
   }
 }

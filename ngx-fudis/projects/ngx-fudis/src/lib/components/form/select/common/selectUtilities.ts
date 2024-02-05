@@ -1,5 +1,7 @@
 import { FudisSelectOption } from '../../../../types/forms';
 
+// TODO: write unit tests
+
 /**
  * Arranges selected options in an order they are present in the DOM
  * @param value list of options to be sorted and patched
@@ -38,7 +40,9 @@ export const sortValues = (value: FudisSelectOption[]): FudisSelectOption[] => {
 export const joinInputValues = (values: FudisSelectOption[]): string => {
   const label: string[] = [];
   values.forEach((item: FudisSelectOption) => {
-    label.push(item.label);
+    const labelToPush = item.label.includes(',') ? `'${item.label}'` : item.label;
+
+    label.push(labelToPush);
   });
 
   const joinedValues = label.join(', ');

@@ -3,7 +3,7 @@ import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 
-type DialogSize = 'sm' | 'md' | 'lg' | 'initial';
+type DialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'initial';
 
 @Component({
   selector: 'fudis-dialog',

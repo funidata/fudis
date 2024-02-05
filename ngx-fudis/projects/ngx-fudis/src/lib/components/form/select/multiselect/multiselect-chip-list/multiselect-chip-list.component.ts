@@ -26,7 +26,6 @@ export class MultiselectChipListComponent {
 
   /**
    * Focuses to the sibling and emits clicked index
-   * @param event click event
    * @param index clicked index
    */
   protected _clickChip(index: number) {
