@@ -5,9 +5,9 @@
     "target": "es5",
     "lib": ["es5", "dom"],
     "types": ["cypress", "node"],
-    "sourceMap": false,
+    "sourceMap": false
   },
   "include": ["**/*/*.ts"],
   "exclude": [],
-  "files": ["../cypress-image-diff.config.ts", "../cypress.config.ts"],
+  "files": ["../cypress-image-diff.config.ts", "../cypress.config.ts"]
 }

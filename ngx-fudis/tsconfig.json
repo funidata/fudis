@@ -12,7 +12,7 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "paths": {
-      "ngx-fudis": ["dist/ngx-fudis/ngx-fudis", "dist/ngx-fudis"],
+      "ngx-fudis": ["dist/ngx-fudis/ngx-fudis", "dist/ngx-fudis"]
     },
     "declaration": false,
     "downlevelIteration": true,
@@ -24,14 +24,14 @@
     "lib": ["ES2021", "dom"],
     "strictPropertyInitialization": false,
     "useDefineForClassFields": false,
-    "esModuleInterop": true,
+    "esModuleInterop": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true,
+    "strictTemplates": true
   },
   "include": ["projects", "types", "jest.config.ts"],
-  "exclude": ["./cypress"],
+  "exclude": ["./cypress"]
 }
