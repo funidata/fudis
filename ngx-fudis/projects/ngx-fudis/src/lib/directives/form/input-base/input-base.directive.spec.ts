@@ -155,7 +155,10 @@ describe('InputBaseDirective', () => {
     });
 
     it('should have correct aria-label', () => {
-      const textInputAriaLabel = getElement(fixtureMock, 'fudis-text-input .fudis-text-input__input');
+      const textInputAriaLabel = getElement(
+        fixtureMock,
+        'fudis-text-input .fudis-text-input__input',
+      );
 
       expect(textInputAriaLabel.getAttribute('aria-label')).toEqual('More info in this aria-label');
     });
