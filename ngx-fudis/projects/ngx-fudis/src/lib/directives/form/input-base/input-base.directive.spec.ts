@@ -13,7 +13,6 @@ import { LabelComponent } from '../../../components/form/label/label.component';
 @Component({
   selector: 'fudis-mock-text-input-component',
   template: ` <fudis-text-input
-    #inputRef
     [label]="label"
     [helpText]="helpText"
     [required]="required"
@@ -25,11 +24,6 @@ import { LabelComponent } from '../../../components/form/label/label.component';
   />`,
 })
 class MockTextInputComponent {
-  constructor(
-    private _idService: FudisIdService,
-    private _translationService: FudisTranslationService,
-  ) {}
-
   label = 'This is text-input label';
   helpText = 'Here are some advices';
   required = false;

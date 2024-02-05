@@ -31,11 +31,6 @@ import { getElement } from '../../../utilities/tests/utilities';
   </fudis-checkbox-group>`,
 })
 class MockCheckboxGroupComponent {
-  constructor(
-    private _idService: FudisIdService,
-    private _translationService: FudisTranslationService,
-  ) {}
-
   title = 'This is checkbox group';
   helpText = 'Here are some advices';
 
