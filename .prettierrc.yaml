@@ -1,0 +1,8 @@
+printWidth: 100
+overrides:
+  # Explicitly use JSON parser for TS config files to avoid confusing problems with formatting.
+  # See https://github.com/prettier/prettier/issues/15942
+  - files:
+      - tsconfig.json
+    options:
+      parser: json
