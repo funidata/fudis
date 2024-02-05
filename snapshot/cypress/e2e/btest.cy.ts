@@ -7,6 +7,7 @@ describe("template spec", () => {
     cy.visit("/iframe.html?args=&id=components-form-dropdown--single-select&viewMode=story");
     // cy.contains("Introduction");
     // cy.get("#storybook-docs").should("be.visible");
+    cy.get("fudis-dropdown").should("be.visible");
     cy.compareSnapshot("test");
   });
 });

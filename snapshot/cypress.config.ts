@@ -5,7 +5,7 @@ export default defineConfig({
   e2e: {
     baseUrl: "http://localhost:6006",
     setupNodeEvents(on, config) {
-      return getCompareSnapshotsPlugin(on, config);
+      getCompareSnapshotsPlugin(on, config);
     },
   },
 });
