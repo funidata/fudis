@@ -21,11 +21,13 @@ import { LabelComponent } from '../../../components/form/label/label.component';
     [control]="textInputControl"
     [disableGuidance]="disableGuidance"
     [initialFocus]="initialFocus"
+    [ariaLabel]="ariaLabel"
   />`,
 })
 class MockTextInputComponent {
   label = 'This is text-input label';
   helpText = 'Here are some advices';
+  ariaLabel = 'More info in this aria-label';
   required = false;
   disabled = false;
   invalidState = false;
@@ -150,6 +152,12 @@ describe('InputBaseDirective', () => {
       const helpText = getElement(fixtureMock, '.fudis-guidance__help-text');
 
       expect(helpText.textContent).toContain('Here are some advices');
+    });
+
+    it('should have correct aria-label', () => {
+      const textInputAriaLabel = getElement(fixtureMock, 'fudis-text-input .fudis-text-input__input');
+
+      expect(textInputAriaLabel.getAttribute('aria-label')).toEqual('More info in this aria-label');
     });
 
     it('should not have guidance present if disableGuidance is set', () => {

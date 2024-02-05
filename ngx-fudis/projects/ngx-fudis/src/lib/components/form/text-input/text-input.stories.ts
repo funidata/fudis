@@ -149,7 +149,6 @@ TextInput.args = {
   label: 'Text-input label example',
   control: new FormControl('', FudisValidators.required('This is required field.')),
   helpText: 'Example help text',
-  disabled: true,
 };
 
 export const Examples: StoryFn = () => ({

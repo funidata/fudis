@@ -30,7 +30,7 @@ input.fudis-form-input {
     cursor: default;
   }
 
-  // TODO: Unifiy below and above --disabled styles for inputs to work universally
+  // TODO: Unify below and above --disabled styles for inputs to work universally
   // This is done for text-input, otherwise its own styles overwrite border styles
   /* stylelint-disable-next-line selector-no-qualifying-type */
   &--disabled[aria-disabled="true"] {
