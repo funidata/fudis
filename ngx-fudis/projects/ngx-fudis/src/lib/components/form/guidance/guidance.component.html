@@ -30,18 +30,6 @@
                     [label]="inputLabel"
                     [message]="error.value.message"
                   />
-                  <!-- TODO: remove below deprecated version when Into is misgrated to above  -->
-                  <!-- TODO: remove every usage of errorMsg for ver 1.0-->
-                  <fudis-validator-error-message
-                    *ngIf="!error.value.message"
-                    [deprecationWarning]="true"
-                    [focusId]="for"
-                    [visible]="singleControl.value.touched"
-                    [type]="error.key"
-                    [controlName]="singleControl.key"
-                    [label]="inputLabel"
-                    [message]="groupErrorMsg?.[singleControl.key]?.[asErrorkey(error.key)]"
-                  />
                 </ng-container>
               </ng-container>
             </ng-container>
@@ -57,17 +45,6 @@
                 [label]="inputLabel"
                 [message]="error.value?.message"
               />
-              <!-- TODO: remove below deprecated version when Into is misgrated to above -->
-              <!-- TODO: remove every usage of errorMsg for ver 1.0-->
-              <fudis-validator-error-message
-                *ngIf="!error.value?.message"
-                [visible]="formGroup.touched"
-                [deprecationWarning]="true"
-                [focusId]="for"
-                [type]="error.key"
-                [label]="inputLabel"
-                [message]="groupErrorMsg?.[error.key]"
-              />
             </ng-container>
           </ng-container>
           <!-- Check errors for single FormControl e. g. single text-input with maxlength error -->
@@ -80,17 +57,6 @@
                 [type]="error.key"
                 [label]="inputLabel"
                 [message]="error.value?.message"
-              />
-              <!-- TODO: remove below deprecated version when Into is misgrated to above -->
-              <!-- TODO: remove every usage of errorMsg for ver 1.0-->
-              <fudis-validator-error-message
-                *ngIf="!error.value?.message && errorMsg?.[asErrorkey(error.key)]"
-                [visible]="control.touched"
-                [focusId]="for"
-                [label]="inputLabel"
-                [type]="error.key"
-                [deprecationWarning]="true"
-                [message]="$any(errorMsg?.[asErrorkey(error.key)])"
               />
             </ng-container>
           </ng-container>
