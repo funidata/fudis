@@ -4,6 +4,8 @@ import getCompareSnapshotsPlugin from "cypress-image-diff-js/plugin";
 export default defineConfig({
   e2e: {
     baseUrl: "http://localhost:6006",
+    viewportWidth: 1720,
+    viewportHeight: 1440,
     setupNodeEvents(on, config) {
       getCompareSnapshotsPlugin(on, config);
     },
