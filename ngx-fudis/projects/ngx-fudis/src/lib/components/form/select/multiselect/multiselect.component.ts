@@ -83,8 +83,6 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
         this._updateMultiselectionFromControlValue();
       }
       this.controlValueChangedInternally = false;
-
-      console.log(this.control);
     });
   }
 

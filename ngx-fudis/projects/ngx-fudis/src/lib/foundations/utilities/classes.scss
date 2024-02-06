@@ -16,7 +16,7 @@
 }
 
 /* stylelint-disable-next-line selector-no-qualifying-type */
-input.fudis-form-input {
+.fudis-form-input {
   /* stylelint-disable-next-line selector-no-qualifying-type */
   &--invalid[aria-invalid="true"] {
     @include border.border("1px", "solid", "red");
