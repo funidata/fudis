@@ -4,7 +4,6 @@ import {
   FudisInputWithLanguageOptionsFormGroup,
   FudisSelectOption,
   FudisDropdownLanguageOption,
-  FudisFormGroupErrors,
   FudisInputSize,
 } from '../../../types/forms';
 
@@ -49,12 +48,6 @@ export class InputWithLanguageOptionsComponent
    * Available sizes for the input - defaults to large.
    */
   @Input() size: FudisInputSize = 'lg';
-
-  /*
-   * Object containing error messages for each FormControl and for the FormGroup.
-   * E. g. {finnish:{maxlength: 'Input in Finnish cannot be longer than X charactes.'}}
-   */
-  @Input() groupErrorMsg: FudisFormGroupErrors;
 
   /**
    * Form element to display. Defaults to text-input

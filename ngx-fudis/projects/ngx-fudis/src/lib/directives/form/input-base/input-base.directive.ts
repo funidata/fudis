@@ -8,7 +8,6 @@ import {
   ViewChild,
   ElementRef,
 } from '@angular/core';
-import { FudisFormErrors } from '../../../types/forms';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisTranslationConfig } from '../../../types/miscellaneous';
@@ -60,11 +59,6 @@ export class InputBaseDirective extends TooltipApiDirective {
    * Help text, aligned underneath the input.
    */
   @Input() helpText: string | undefined;
-
-  /**
-   * Error messages shown when form control validators are invalid
-   */
-  @Input() errorMsg: FudisFormErrors | undefined;
 
   /**
    * Set input's visual style and attributes as invalid. Does not override if control.invalid is true.

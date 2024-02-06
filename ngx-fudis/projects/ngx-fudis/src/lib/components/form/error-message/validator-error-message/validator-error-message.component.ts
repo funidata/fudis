@@ -67,11 +67,6 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
   @Input() variant: 'body-text' | 'form-error' = 'form-error';
 
   /**
-   * Temporary warning as Form Error Message is been refactored from 'errorMsg' to be binded with FudisValidators and FudisFormGroupValidators
-   */
-  @Input() deprecationWarning: boolean = false;
-
-  /**
    * Output for handling a state when error is sent to Error Summary
    */
   @Output() handleCreateError = new EventEmitter<FudisFormErrorSummaryItem>();
@@ -117,13 +112,6 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
     if (typeof this.message === 'string') {
       this._currentMessage = this.message;
       this._createError();
-    }
-
-    if (this.deprecationWarning) {
-      // eslint-disable-next-line no-console
-      console.warn(
-        `Component with id of '${this.focusId}' and label of '${this.label}' received form error messages from 'errorMsg' input. This will be removed in version Fudis v1.0.0, as error message logic will be binded straight with FudisValidators and FudisFormGroupValidators.`,
-      );
     }
   }
 

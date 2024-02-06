@@ -86,7 +86,6 @@ import readme from './readme.mdx';
                           [helpText]="
                             'Some name would be nice. Provide course name in at least one language.'
                           "
-                          [groupErrorMsg]="errorName"
                         >
                           <fudis-error-message
                             *ngIf="
@@ -106,14 +105,12 @@ import readme from './readme.mdx';
                           [helpText]="
                             'So that students know what they are getting into. Provide description in all languages.'
                           "
-                          [groupErrorMsg]="errorDescription"
                         />
                         <fudis-radio-button-group
                           [title]="'Course type'"
                           [id]="'radio-button-group-1'"
                           [options]="courseTypeOptions"
                           [control]="formExample.controls['courseType']"
-                          [errorMsg]="errorCourseType"
                         />
                         <fudis-checkbox-group
                           [formGroup]="formExample.controls.courseBooks"
@@ -159,7 +156,6 @@ import readme from './readme.mdx';
                           [control]="formExample.controls['email']"
                           [label]="'Contact email'"
                           [helpText]="'So that students can ask for more time on their homework.'"
-                          [errorMsg]="errorEmail"
                         />
                       </fudis-grid>
                     </ng-template>
