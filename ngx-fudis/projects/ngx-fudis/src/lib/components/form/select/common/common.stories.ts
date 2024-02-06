@@ -7,8 +7,9 @@ import { SelectComponent } from '../select/select.component';
 import { MultiselectComponent } from '../multiselect/multiselect.component';
 import readme from './readme.mdx';
 import { groupedMockData, defaultOptions } from './mock_data';
-import { FudisSelectOption } from 'dist/ngx-fudis/lib/types/forms';
+
 import { action } from '@storybook/addon-actions';
+import { FudisSelectOption } from '../../../../types/forms';
 
 export default {
   title: 'Components/Form/Select/Common Features',
