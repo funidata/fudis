@@ -1,7 +1,7 @@
 describe("alert-group", () => {
   beforeEach(() => {
     cy.visit("/iframe.html?args=&id=components-alert-group--example&viewMode=story");
-    cy.get("fudis-alert-group").should("be.visible");
+    cy.requireElement("fudis-alert-group");
   });
 
   // TODO: Create custom function for setting viewport and naming screenshots.
