@@ -6,6 +6,7 @@ import { FudisValidators } from '../../../../utilities/form/validators';
 import { MultiselectComponent } from './multiselect.component';
 import readme from './readme.mdx';
 import { groupedMockData, defaultOptions } from '../common/mock_data';
+import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Components/Form/Select/Multiselect',
@@ -21,10 +22,6 @@ export default {
     },
     controls: {
       exclude: [
-        'ariaLabel',
-        'disabled',
-        'id',
-        'invalidState',
         '_id',
         '_required',
         '_requiredText',
@@ -40,7 +37,7 @@ export default {
       options: ['sm', 'md', 'lg'],
       control: { type: 'radio' },
     },
-    autocomplete: {
+    showSelectionChips: {
       options: [true, false],
       control: { type: 'radio' },
     },
@@ -53,18 +50,20 @@ const ExampleTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCompone
   props: {
     ...args,
     defaultOptions,
+    selectionUpdate: action('selectionUpdate'),
     control: new FormControl(null, FudisValidators.minLength(2, 'Pick at least two pets')),
     groupedMockData,
   },
   template: html`
     <fudis-multiselect
-      [autocomplete]="true"
-      [autocompleteClearButton]="autocompleteClearButton"
       [size]="size"
       [placeholder]="placeholder"
       [control]="control"
       [label]="label"
       [helpText]="helpText"
+      [disabled]="disabled"
+      (selectionUpdate)="selectionUpdate($event)"
+      [showSelectionChips]="showSelectionChips"
     >
       <ng-template fudisContent type="select-options">
         <fudis-multiselect-option *ngFor="let option of defaultOptions" [data]="option" />
@@ -81,9 +80,10 @@ const ExampleTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCompone
 
 export const Example = ExampleTemplate.bind({});
 Example.args = {
-  autocompleteClearButton: true,
   label: 'Select a pet',
   size: 'lg',
+  disabled: false,
   placeholder: 'Choose a pet',
   helpText: 'All pets are equally important, but for sake of this example please pick atleast two',
+  showSelectionChips: true,
 };

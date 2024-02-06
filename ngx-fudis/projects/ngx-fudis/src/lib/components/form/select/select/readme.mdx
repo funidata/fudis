@@ -1,10 +1,39 @@
-import { ArgTypes, Meta } from "@storybook/blocks";
-import { SelectComponent } from "./select.component";
+import { Meta, Canvas } from "@storybook/blocks";
+import * as Stories from "./select.stories";
 
 <Meta title="Components/Form/Select/Select" />
 
-# Select single-select
+# Select (Single Select)
+
+Select Component is a form component displaying a dropdown list of selectable options to choose a single value.
 
 ## Properties
 
-<ArgTypes of={SelectComponent} />
+### Common Properties and Features
+
+Select Component shares multiple common features with Multiselect Component e. g. text labels, autocompletion and grouping of options.
+
+Therefore please check also [Common Features](/docs/components-form-select-common-features--documentation) documentation.
+
+### Form Control
+
+Select Component requires a Angular Form Control. Type and value of control can be either `null` or `FudisSelectOption`.
+
+```
+// TypeScript
+
+defaultOption: FudisSelectOption = {value: 'default-option-id', label: 'Default Option'}
+
+myControl: new FormControl<null | FudisSelectOption>(defaultOption)
+
+// HTML Template
+
+<fudis-select [control]="myControl">
+  ...
+</fudis-select>
+
+```
+
+## Example
+
+<Canvas of={Stories.Example}></Canvas>

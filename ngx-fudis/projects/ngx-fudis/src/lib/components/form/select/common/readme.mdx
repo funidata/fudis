@@ -8,7 +8,13 @@ import * as Stories from "./common.stories.ts";
 
 Select and Multiselect components share multiple common features which are inherited from internal non-public `SelectBaseDirective` and `InputBaseDirective` directives.
 
-Most notable common API feature is choosing if component is either a regular dropdown or an autocomplete component filtering dropdown options according to user text input.
+Most notable common API feature is grouping options and choosing if component is either a regular dropdown or an autocomplete component filtering dropdown options according to user's text input.
+
+**List of Contents**
+
+- [Basic Form Component Attributes](#basic-form-component-attributes)
+- [Autocomplete Features](#autocomplete-features)
+- [Grouping Options](#grouping-options)
 
 ## Basic Form Component Attributes
 
@@ -28,9 +34,28 @@ Width of the component. Value can be string `xl`, `lg`, `sm` or `xs`. By default
 
 Placeholder string text shown in the component, when it has no chosen value.
 
+### Selection Update
+
+Select and Multiselect Component provides `@Output` event emitter `selectionUpdate` for cases if application needs to do something special if the form control value changes. Output of the event emitter is either `null` or `FudisSelectOption` for Select and `null` or array `FudisSelectOption[]`.
+
+```
+// TypeScript
+
+mySelectionUpdate(option: null | FudisSelectOption):void{
+  console.log(option)
+}
+
+// HTML Template
+
+<fudis-select (selectionUpdate)="mySelectionUpdate($event)">
+  ...
+</fudis-select>
+
+```
+
 ### Usage Example
 
-Example using Select component, but same input attributes for as well with Multiselect Component with `<fudis-multiselect>` selector.
+Example using Select component, but same input attributes work as well with Multiselect Component using `<fudis-multiselect>` selector.
 
 ```
 <fudis-select
@@ -43,7 +68,7 @@ Example using Select component, but same input attributes for as well with Multi
 </fudis-select>
 ```
 
-## Autocomplete related features
+## Autocomplete Features
 
 ### Autocomplete Boolean
 
@@ -67,14 +92,54 @@ When `autocompleteClearButton` is set to `false`, the select with autocomplete w
 </fudis-select>
 ```
 
-## Example Select with Autocomplete
+### Example Select with Autocomplete
 
 <Canvas of={Stories.SelectAutocomplete}></Canvas>
 
-## Example Multiselect with Autocomplete
+### Example Multiselect with Autocomplete
 
 <Canvas of={Stories.MultiselectAutocomplete}></Canvas>
 
-## Example Select with Autocomplete Clear Button set to False
+## Grouping Options
 
-<Canvas of={Stories.SelectAutocompleteClearButtonFalse}></Canvas>
+Sometimes there is need to categorize and group options. Especially if list of options is long and might have options which are nearly identical but are under different sub-category.
+
+To group options, wrap them using `SelectGroupComponent`. It has two possible HTML selectors: `fudis-select-group` and `fudis-multiselect-group`.
+
+Only input attribute Select Group Component requires is `label` string.
+
+```
+<fudis-select>
+  <fudis-select-group [label]="'First Group'">
+    <fudis-select-option/>
+    ... and rest of the options for the First Group
+  </fudis-select-group>
+  <fudis-select-group [label]="'Last Group'">
+    <fudis-select-option/>
+    ... and rest of the options for the Last Group
+  </fudis-select-group>
+</fudis-select>
+```
+
+The exactly same component can be used as well with Multiselect Component. Although the component is exactly the same as with Select Component, we recommend to use `<fudis-multiselect-group>` selector.
+
+```
+<fudis-multiselect>
+  <fudis-multiselect-group [label]="'First Group'">
+    <fudis-multiselect-option/>
+    ... and rest of the options for the First Group
+  </fudis-multiselect-group>
+  <fudis-multiselect-group [label]="'Last Group'">
+    <fudis-multiselect-option/>
+    ... and rest of the options for the Last Group
+  </fudis-multiselect-group>
+</fudis-multiselect>
+```
+
+### Example Select with Grouping
+
+<Canvas of={Stories.SelectWithGroupedOptions}></Canvas>
+
+### Example Multiselect with Grouping
+
+<Canvas of={Stories.MultiselectWithGroupedOptions}></Canvas>

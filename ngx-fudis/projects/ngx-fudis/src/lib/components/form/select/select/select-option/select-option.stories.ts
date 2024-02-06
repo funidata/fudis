@@ -8,13 +8,14 @@ import { defaultOptions } from '../../common/mock_data';
 import { SelectOptionComponent } from './select-option.component';
 
 export default {
-  title: 'Components/Form/Select/Select/Select Option',
+  title: 'Components/Form/Select/Select and Multiselect Option',
   component: SelectOptionComponent,
   decorators: [
     applicationConfig({
       providers: [importProvidersFrom(BrowserAnimationsModule)],
     }),
   ],
+
   parameters: {
     docs: {
       page: readme,
@@ -27,26 +28,23 @@ const html = String.raw;
 const ExampleTemplate: StoryFn<SelectOptionComponent> = (args: SelectOptionComponent) => ({
   props: {
     ...args,
-    handleClick: action('handleClick'),
+    selectionUpdate: action('selectionUpdate'),
     defaultOptions,
     control: new FormControl(defaultOptions[2]),
   },
   template: html`
     <fudis-select
+      (selectionUpdate)="selectionUpdate($event)"
       [control]="control"
       [label]="'Choose a pet'"
       [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
     >
       <ng-template fudisContent type="select-options">
-        <fudis-select-option
-          (handleClick)="handleClick($event)"
-          [data]="data"
-        ></fudis-select-option>
+        <fudis-select-option [data]="data"></fudis-select-option>
         <fudis-select-option
           *ngFor="let option of defaultOptions"
           [data]="option"
-          (handleClick)="handleClick($event)"
-        />
+        ></fudis-select-option>
       </ng-template>
     </fudis-select>
   `,

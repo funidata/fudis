@@ -37,8 +37,8 @@ import readme from './readme.mdx';
       "
       [errorSummaryVisible]="errorSummaryVisible"
     >
-      <ng-template fudisHeader>
-        <fudis-description-list [columns]="1" [variant]="'compact'" [data]="formHeaderDl" />
+    <ng-template fudisHeader>
+    <fudis-description-list [columns]="1" [variant]="'compact'" [data]="formHeaderDl" />
       </ng-template>
       <ng-template fudisActions type="form">
         <fudis-button [label]="'Previous step'" [icon]="'back'" [variant]="'tertiary'" />
