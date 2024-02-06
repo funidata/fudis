@@ -4,14 +4,7 @@ describe("alert-group", () => {
     cy.requireElement("fudis-alert-group");
   });
 
-  // TODO: Create custom function for setting viewport and naming screenshots.
-
-  it("desktop", () => {
-    cy.compareSnapshot("desktop");
-  });
-
-  it("mobile", () => {
-    cy.viewport("iphone-x");
-    cy.compareSnapshot("mobile");
+  it("default", () => {
+    cy.snapshot();
   });
 });
