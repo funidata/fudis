@@ -46,6 +46,8 @@ class MultiselectMockComponent {
   control = new FormControl<FudisSelectOption[] | null>(null);
 }
 
+// TODO: add test for disabled states
+
 describe('MultiselectComponent', () => {
   let component: MultiselectComponent;
   let fixture: ComponentFixture<MultiselectComponent>;
