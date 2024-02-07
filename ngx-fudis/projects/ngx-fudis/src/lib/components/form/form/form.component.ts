@@ -80,7 +80,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   @Input() helpText: string;
 
   /**
-   * Optional badge to append to the form title
+   * Optional badge to include in the form title
    */
   @Input() badge: FudisBadgeVariant | null;
 
@@ -90,7 +90,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   @Input() badgeText: string | null;
 
   /**
-   * Set Error Summary visibility, usually set on click of form submit button
+   * Set Error Summary visibility. Usually set true on form submit.
    */
   @Input() errorSummaryVisible: boolean = false;
 
@@ -117,7 +117,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   }
 
   /**
-   * Create unique id through Fudis Id Service
+   * Add or generate id with IdService
    */
   private _setFormId(): void {
     if (this.id) {
@@ -128,7 +128,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   }
 
   /**
-   * Getter function for FormElement
+   * Getter for FormElement
    */
   public get formElement(): HTMLFormElement | undefined {
     return this._formElement;

@@ -233,7 +233,7 @@ describe('FormComponent', () => {
     it('should not find elements without proper content type', () => {
       const incorrectElement = getElement(fixtureMock, '.test-do-not-find');
 
-      expect(incorrectElement).toBeFalsy();
+      expect(incorrectElement).toBeNull();
     });
   });
 });

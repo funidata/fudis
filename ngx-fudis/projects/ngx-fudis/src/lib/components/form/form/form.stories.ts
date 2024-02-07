@@ -41,17 +41,7 @@ import readme from './readme.mdx';
       </ng-template>
       <ng-template fudisActions [type]="'form'">
         <fudis-button [label]="'Previous step'" [icon]="'back'" [variant]="'tertiary'" />
-        <fudis-button
-          [label]="'Open menu'"
-          [icon]="'three-dots'"
-          [labelHidden]="true"
-          [variant]="'secondary'"
-        />
-        <fudis-button
-          [variant]="'secondary'"
-          (handleClick)="changeLanguage()"
-          [label]="'Change language'"
-        />
+
         <fudis-button [label]="'Submit'" (handleClick)="submitForm()" />
       </ng-template>
       <ng-template fudisContent [type]="'form'">
@@ -298,18 +288,6 @@ class FormContentExampleComponent implements OnInit {
     }
   }
 
-  changeLanguage(): void {
-    const currentLang = this._translationService.getLanguage();
-
-    if (currentLang === 'fi') {
-      this._translationService.setLanguage('en');
-      console.log('Fudis internal language is now: EN');
-    } else {
-      this._translationService.setLanguage('fi');
-      console.log('Fudis internal language is now: FI');
-    }
-  }
-
   handleClosedOutput(value: boolean): void {
     this._closed = value;
   }
@@ -336,6 +314,6 @@ export default {
 
 const html = String.raw;
 
-export const FormExample: StoryFn = () => ({
+export const Example: StoryFn = () => ({
   template: html` <example-form-content />`,
 });
