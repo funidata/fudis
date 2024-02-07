@@ -10,6 +10,7 @@ import { FudisValidators } from '../../../utilities/form/validators';
 import { getElement, getAllElements } from '../../../utilities/tests/utilities';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { MockComponent } from 'ng-mocks';
+import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 
 const testMaxLength = 20;
 
@@ -26,6 +27,15 @@ const testFormGroup: FormGroup = new FormGroup({
     FudisValidators.maxLength(testMaxLength, 'Too long input'),
   ]),
 });
+
+const testFormGroupWithGroupValidator: FormGroup = new FormGroup(
+  {
+    finnish: new FormControl<string | null>(null),
+    swedish: new FormControl<string | null>(null),
+    english: new FormControl<string | null>(null),
+  },
+  FudisGroupValidators.atLeastOneRequired('There must be one value!'),
+);
 
 const testControl = new FormControl(null, [
   FudisValidators.required('This field is required'),
@@ -63,29 +73,55 @@ describe('GuidanceComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Guidance component with single control', () => {
+  describe('common properties', () => {
+    it('should have id for related input with "for" attribute', () => {
+      const element = getElement(fixture, '.fudis-guidance div#related-input-id_guidance');
+      expect(element.getAttribute('id')).toEqual('related-input-id_guidance');
+    });
+
+    it('should show given helptext', () => {
+      const element = getElement(fixture, '.fudis-guidance__help-text');
+      expect(element.innerHTML).toContain('This is describing guidance text');
+    });
+
+    it('should have ariaLive assertive', () => {
+      const element = getElement(fixture, '.fudis-guidance__errors__list');
+      expect(element.getAttribute('arialive')).toEqual('polite');
+    });
+  });
+
+  describe('with single Form Control', () => {
     beforeEach(() => {
       component.control = testControl;
       component.control.markAsUntouched();
       fixture.detectChanges();
     });
 
-    it('should have id for related input', () => {
-      const element = getElement(fixture, '.fudis-guidance div');
-      expect(element.getAttribute('id')).toEqual('related-input-id_guidance');
+    it('should not have errors when control is untouched', () => {
+      const element = getElement(fixture, '.fudis-guidance__errors');
+      const error = getElement(fixture, 'fudis-validator-error-message');
+
+      expect(error.getAttribute('ng-reflect-visible')).toEqual('false');
+      expect(element).toBeNull();
     });
 
-    it('should have related input label text', () => {
+    it('should have errors when control is touched', () => {
+      component.control.markAsTouched();
+      fixture.detectChanges();
+      const element = getElement(fixture, '.fudis-guidance__errors');
+      const error = getElement(fixture, 'fudis-validator-error-message');
+
+      expect(error.getAttribute('ng-reflect-visible')).toEqual('true');
+      expect(element).toBeTruthy();
+    });
+
+    it('should have related input label text passed to Validator Error Message', () => {
       component.control.markAsTouched();
       fixture.detectChanges();
 
       const element = getElement(fixture, 'fudis-validator-error-message');
       expect(element.getAttribute('ng-reflect-label')).toEqual('Test Label');
-    });
-
-    it('should show given helptext', () => {
-      const element = getElement(fixture, '.fudis-guidance__help-text');
-      expect(element.innerHTML).toContain('This is describing guidance text');
+      expect(element.getAttribute('ng-reflect-visible')).toEqual('true');
     });
 
     it('should show maxLength indicator', () => {
@@ -101,57 +137,105 @@ describe('GuidanceComponent', () => {
       expect(lengthIndicator.innerHTML).toContain('64/20');
     });
 
-    it('should have ariaLive assertive', () => {
-      const element = getElement(fixture, '.fudis-guidance__errors__list');
-      expect(element.getAttribute('arialive')).toEqual('polite');
+    it('should display screen reader assistive text correctly', () => {
+      component.control.patchValue('Fifteen chars!!');
+      fixture.detectChanges();
+      const assistiveTextOn = getElement(fixture, '.fudis-visually-hidden');
+
+      expect(assistiveTextOn.innerHTML).toContain('15/20 characters used');
+
+      component.control.patchValue('Sixteen chars!!!');
+      fixture.detectChanges();
+      const assistiveTextOff = getElement(fixture, '.fudis-visually-hidden');
+
+      expect(assistiveTextOff).toBeNull();
+
+      component.control.patchValue('Twenty characters!!!');
+      fixture.detectChanges();
+      const assistiveTextFull = getElement(fixture, '.fudis-visually-hidden');
+
+      expect(assistiveTextFull.innerHTML).toContain('20/20 characters used');
     });
   });
 
-  describe('Guidance component with form group', () => {
+  describe('with Form Group', () => {
     beforeEach(() => {
       component.formGroup = testFormGroup;
       testFormGroup.markAsUntouched();
       fixture.detectChanges();
     });
 
-    it('should have correct number in max Length indicator when selected option is set', () => {
-      component.selectedOption = 'swedish';
+    describe('common tests', () => {
+      it('should have correct number in max length indicator when selected option is set', () => {
+        component.selectedOption = 'swedish';
 
-      fixture.detectChanges();
+        fixture.detectChanges();
 
-      component.formGroup.controls['swedish'].patchValue(
-        'This is a too long input and will not pass max length validation',
-      );
-      fixture.detectChanges();
+        component.formGroup.controls['swedish'].patchValue(
+          'This is a too long input and will not pass max length validation',
+        );
+        fixture.detectChanges();
 
-      const lengthIndicator = getElement(fixture, '.fudis-guidance__character-limit-indicator');
-      expect(lengthIndicator.innerHTML).toContain('64/20');
+        const lengthIndicator = getElement(fixture, '.fudis-guidance__character-limit-indicator');
+        expect(lengthIndicator.innerHTML).toContain('64/20');
+      });
+
+      it('should display screen reader assistive text correctly', () => {});
+
+      it('should show errors when single form control is touched', () => {
+        component.formGroup.controls['finnish'].markAsTouched();
+        const errorList = getAllElements(fixture, 'fudis-validator-error-message');
+        expect(errorList.length).toBe(3);
+      });
+
+      it('should not show errors when groupBlurred out is false', () => {
+        component.groupBlurredOut = false;
+        fixture.detectChanges();
+
+        const errorList = getAllElements(fixture, 'fudis-validator-error-message');
+        expect(errorList.length).toBe(0);
+      });
+
+      it('should show error list when group is marked as touched', () => {
+        const errorsBefore = getElement(fixture, '.fudis-guidance__errors');
+        fixture.detectChanges();
+
+        expect(errorsBefore).toBeFalsy();
+
+        component.formGroup.markAsTouched();
+
+        fixture.detectChanges();
+
+        const errorsAfter = getElement(fixture, '.fudis-guidance__errors');
+
+        expect(errorsAfter).toBeTruthy();
+
+        const errorListAfterTouching = getAllElements(fixture, 'fudis-validator-error-message');
+        expect(errorListAfterTouching.length).toBe(3);
+      });
+
+      it('should have correct amount of errors', () => {
+        const errorListAfterTouching = getAllElements(fixture, 'fudis-validator-error-message');
+        expect(errorListAfterTouching.length).toBe(3);
+      });
     });
 
-    it('should show errors when form control is touched', () => {
-      component.formGroup.controls['finnish'].markAsTouched();
-      const errorList = getAllElements(fixture, 'fudis-validator-error-message');
-      expect(errorList.length).toBe(3);
+    describe('errors for single controls inside group', () => {
+      it('should hide error when required form control value is updated', () => {
+        const errorList = getAllElements(fixture, 'fudis-validator-error-message');
+        expect(errorList.length).toBe(3);
+
+        component.formGroup.controls['finnish'].patchValue('Some text for input');
+        fixture.detectChanges();
+
+        const errorListWithoutFinnish = getAllElements(fixture, 'fudis-validator-error-message');
+
+        expect(errorListWithoutFinnish.length).toBe(2);
+      });
     });
 
-    it('should hide error when required form control value is updated', () => {
-      const errorList = getAllElements(fixture, 'fudis-validator-error-message');
-      expect(errorList.length).toBe(3);
-
-      component.formGroup.controls['finnish'].patchValue('Some text for input');
-      fixture.detectChanges();
-
-      const errorListWithoutFinnish = getAllElements(fixture, 'fudis-validator-error-message');
-
-      expect(errorListWithoutFinnish.length).toBe(2);
-    });
-
-    it('should not show errors when groupBlurred out is set to ', () => {
-      component.groupBlurredOut = false;
-      fixture.detectChanges();
-
-      const errorList = getAllElements(fixture, 'fudis-validator-error-message');
-      expect(errorList.length).toBe(0);
+    describe('group errors', () => {
+      it('should display right amount of errors', () => {});
     });
   });
 });

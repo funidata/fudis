@@ -8,7 +8,6 @@ const inputBaseDirectiveExcludes = [
   'id',
   'ariaLabel',
   'disabled',
-  'errorMsg',
   'invalidState',
   'onBlur',
   'handleBlur',
