@@ -27,7 +27,6 @@ import readme from './readme.mdx';
       [badgeText]="'example'"
       [titleLevel]="1"
       [title]="'Example form heading'"
-      [id]="id"
       [helpText]="
         'Come about ropes end loot hail-shot belaying pin hornswaggle maroon quarter main sheet nipperkin.'
       "
@@ -40,43 +39,33 @@ import readme from './readme.mdx';
       <ng-template fudisHeader>
         <fudis-description-list [columns]="1" [variant]="'compact'" [data]="formHeaderDl" />
       </ng-template>
-      <ng-template fudisActions type="form">
+      <ng-template fudisActions [type]="'form'">
         <fudis-button [label]="'Previous step'" [icon]="'back'" [variant]="'tertiary'" />
-        <fudis-button
-          [label]="'Open menu'"
-          [icon]="'three-dots'"
-          [labelHidden]="true"
-          [variant]="'secondary'"
-        />
-        <fudis-button
-          [variant]="'secondary'"
-          (handleClick)="changeLanguage()"
-          [label]="'Change language'"
-        />
+
         <fudis-button [label]="'Submit'" (handleClick)="submitForm()" />
       </ng-template>
-      <ng-template fudisContent type="form">
+      <ng-template fudisContent [type]="'form'">
         <fudis-section [title]="'Main section'">
-          <ng-template fudisContent type="section">
+          <ng-template fudisContent [type]="'section'">
             <fudis-expandable
               (closedChange)="handleClosedOutput($event)"
               [title]="'Expandable section 1'"
               [closed]="_closed"
             >
-              <ng-template fudisContent type="expandable">
+              <ng-template fudisContent [type]="'expandable'">
                 <fudis-grid>
                   <fudis-fieldset
                     [title]="'Basic info'"
                     [helpText]="'Some generic info about this course'"
                     [id]="fieldsetId"
                   >
-                    <ng-template fudisNotifications type="fieldset">
+                    <ng-template fudisNotifications [type]="'fieldset'">
                       <fudis-notification *ngIf="firstLoad || errorSummaryVisible">
                         This is notification for a fieldset. TODO: Add notifications to error
                         summary if needed.
                       </fudis-notification>
                     </ng-template>
-                    <ng-template fudisContent type="fieldset">
+                    <ng-template fudisContent [type]="'fieldset'">
                       <fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
                         <fudis-input-with-language-options
                           [id]="'unique-input-1'"
@@ -86,7 +75,6 @@ import readme from './readme.mdx';
                           [helpText]="
                             'Some name would be nice. Provide course name in at least one language.'
                           "
-                          [groupErrorMsg]="errorName"
                         >
                           <fudis-error-message
                             *ngIf="
@@ -106,14 +94,12 @@ import readme from './readme.mdx';
                           [helpText]="
                             'So that students know what they are getting into. Provide description in all languages.'
                           "
-                          [groupErrorMsg]="errorDescription"
                         />
                         <fudis-radio-button-group
                           [title]="'Course type'"
                           [id]="'radio-button-group-1'"
                           [options]="courseTypeOptions"
                           [control]="formExample.controls['courseType']"
-                          [errorMsg]="errorCourseType"
                         />
                         <fudis-checkbox-group
                           [formGroup]="formExample.controls.courseBooks"
@@ -144,7 +130,7 @@ import readme from './readme.mdx';
                     [title]="'Tearcher info'"
                     [tooltip]="'Quite many fields are required.'"
                   >
-                    <ng-template fudisContent type="fieldset">
+                    <ng-template fudisContent [type]="'fieldset'">
                       <fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
                         <fudis-text-input
                           [initialFocus]="true"
@@ -159,7 +145,6 @@ import readme from './readme.mdx';
                           [control]="formExample.controls['email']"
                           [label]="'Contact email'"
                           [helpText]="'So that students can ask for more time on their homework.'"
-                          [errorMsg]="errorEmail"
                         />
                       </fudis-grid>
                     </ng-template>
@@ -172,9 +157,9 @@ import readme from './readme.mdx';
               [title]="'Expandable section 2'"
               [errorSummaryBreadcrumb]="true"
             >
-              <ng-template fudisContent type="expandable">
+              <ng-template fudisContent [type]="'expandable'">
                 <fudis-fieldset [title]="'More important dates'">
-                  <ng-template fudisContent type="fieldset">
+                  <ng-template fudisContent [type]="'fieldset'">
                     <fudis-date-range
                       [startDate]="dateRangeStartDate"
                       [endDate]="dateRangeEndDate"
@@ -300,18 +285,6 @@ class FormContentExampleComponent implements OnInit {
       this._errorSummaryService.reloadErrors();
     } else {
       this.errorSummaryVisible = false;
-    }
-  }
-
-  changeLanguage(): void {
-    const currentLang = this._translationService.getLanguage();
-
-    if (currentLang === 'fi') {
-      this._translationService.setLanguage('en');
-      console.log('Fudis internal language is now: EN');
-    } else {
-      this._translationService.setLanguage('fi');
-      console.log('Fudis internal language is now: FI');
     }
   }
 
