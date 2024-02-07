@@ -34,14 +34,23 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
     super();
   }
 
+  /**
+   * Content directive for Fudis Form Actions
+   */
   @ContentChild(ActionsDirective) headerActions: ActionsDirective;
 
+  /**
+   * Content directive for Fudis Form Header
+   */
   @ContentChild(HeaderDirective) headerContent: HeaderDirective;
 
+  /**
+   * Content directive for Fudis Form Content
+   */
   @ContentChild(ContentDirective) mainContent: ContentDirective;
 
   /**
-   * Help text displayed in Error Summary before listing individual errors.
+   * Help text displayed in Error Summary before listing individual errors
    */
   @Input({ required: true }) errorSummaryHelpText: string;
 
@@ -71,7 +80,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   @Input() helpText: string;
 
   /**
-   * Possible badge to append the form title
+   * Optional badge to append to the form title
    */
   @Input() badge: FudisBadgeVariant | null;
 
@@ -81,7 +90,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   @Input() badgeText: string | null;
 
   /**
-   * If Error Summary is visible. Usually set on click of form submit button.
+   * Set Error Summary visibility, usually set on click of form submit button
    */
   @Input() errorSummaryVisible: boolean = false;
 
@@ -107,6 +116,9 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
     this._formElement = this._elementRef.nativeElement as HTMLFormElement;
   }
 
+  /**
+   * Create unique id through Fudis Id Service
+   */
   private _setFormId(): void {
     if (this.id) {
       this._idService.addNewId('form', this.id);
@@ -115,6 +127,9 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
     }
   }
 
+  /**
+   * Getter function for FormElement
+   */
   public get formElement(): HTMLFormElement | undefined {
     return this._formElement;
   }
