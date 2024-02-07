@@ -17,17 +17,24 @@
       </fudis-guidance>
     </ng-container>
   </div>
-  <fudis-dropdown
-    [hideSingleSelectionIndicator]="true"
+  <fudis-select
+    [label]="_languageLabel"
     class="fudis-input-with-language-options__dropdown"
     (selectionUpdate)="handleLanguageSelect($event)"
     [control]="_dropdownControl"
     [label]="_languageLabel"
     [size]="_missingLanguage ? 'xs' : 'lg'"
     [id]="id + '_language-dropdown'"
-    [options]="_updatedOptions"
   >
-  </fudis-dropdown>
+    <ng-template fudisContent type="select-options">
+      <fudis-select-option
+        *ngFor="let option of _updatedOptions"
+        [data]="{ value: option.value, label: option.label, disabled: option.disabled }"
+      />
+    </ng-template>
+  </fudis-select>
+  <!-- <fudis-dropdown [hideSingleSelectionIndicator]="true" [options]="_updatedOptions">
+  </fudis-dropdown> -->
 </div>
 
 <ng-template #textInput>

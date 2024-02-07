@@ -5,7 +5,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { InputWithLanguageOptionsComponent } from './input-with-language-options.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { FudisSelectOption } from '../../../types/forms';
-import { DropdownComponent } from '../dropdown/dropdown.component';
 import { TextInputComponent } from '../text-input/text-input.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { FudisValidators } from '../../../utilities/form/validators';
@@ -31,7 +30,6 @@ describe('InputWithLanguageOptionsComponent', () => {
       declarations: [
         InputWithLanguageOptionsComponent,
         MockComponent(FieldSetComponent),
-        MockComponent(DropdownComponent),
         MockComponent(TextInputComponent),
         MockComponent(GuidanceComponent),
       ],

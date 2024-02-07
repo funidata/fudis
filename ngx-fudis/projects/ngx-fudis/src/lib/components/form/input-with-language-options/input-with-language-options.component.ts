@@ -118,9 +118,11 @@ export class InputWithLanguageOptionsComponent
    */
   private _nonEmptyControls: string[] = [];
 
-  handleLanguageSelect(value: FudisSelectOption): void {
-    this._dropdownValue = value;
-    this._for = `${this.id}_${value.value}`;
+  handleLanguageSelect(value: FudisSelectOption | null): void {
+    if (value) {
+      this._dropdownValue = value;
+      this._for = `${this.id}_${value.value}`;
+    }
   }
 
   handleInputBlur(event: Event, controlKey: string): void {
@@ -254,6 +256,8 @@ export class InputWithLanguageOptionsComponent
     this._for = `${this.id}_${this.options[0].value}`;
 
     this.initialRequiredCheck();
+
+    console.log(this._updatedOptions);
   }
 
   ngOnChanges(): void {
