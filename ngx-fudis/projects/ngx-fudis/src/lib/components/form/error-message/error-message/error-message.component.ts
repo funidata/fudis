@@ -22,9 +22,7 @@ import { FudisTranslationService } from '../../../../services/translation/transl
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 import { TextInputComponent } from '../../text-input/text-input.component';
 import { TextAreaComponent } from '../../text-area/text-area.component';
-import { DropdownComponent } from '../../dropdown/dropdown.component';
 import { DatepickerComponent } from '../../date/datepicker/datepicker.component';
-import { AutocompleteComponent } from '../../autocomplete/autocomplete.component';
 import { InputWithLanguageOptionsComponent } from '../../input-with-language-options/input-with-language-options.component';
 import { CheckboxGroupComponent } from '../../checkbox-group/checkbox-group.component';
 import { RadioButtonGroupComponent } from '../../radio-button-group/radio-button-group.component';
@@ -40,9 +38,9 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
     private _idService: FudisIdService,
     @Host() @Optional() private _textInput: TextInputComponent,
     @Host() @Optional() private _textArea: TextAreaComponent,
-    @Host() @Optional() private _dropdown: DropdownComponent,
+
     @Host() @Optional() private _datePicker: DatepickerComponent,
-    @Host() @Optional() private _autocomplete: AutocompleteComponent,
+
     @Host() @Optional() private _inputWithLanguageOptions: InputWithLanguageOptionsComponent,
     @Host() @Optional() private _checkboxGroup: CheckboxGroupComponent,
     @Host() @Optional() private _radioButtonGroup: RadioButtonGroupComponent,
@@ -51,12 +49,8 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
       this._parent = _textInput;
     } else if (_textArea) {
       this._parent = _textArea;
-    } else if (_dropdown) {
-      this._parent = _dropdown;
     } else if (_datePicker) {
       this._parent = _datePicker;
-    } else if (_autocomplete) {
-      this._parent = _autocomplete;
     } else if (_radioButtonGroup) {
       this._parent = _radioButtonGroup;
     } else if (_inputWithLanguageOptions) {
@@ -104,8 +98,6 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
   private _parent:
     | TextInputComponent
     | TextAreaComponent
-    | DropdownComponent
-    | AutocompleteComponent
     | DatepickerComponent
     | RadioButtonGroupComponent;
 

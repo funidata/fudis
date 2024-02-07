@@ -51,6 +51,11 @@
     cursor: default;
   }
 
+  &__xs {
+    align-items: center;
+    padding: spacing.$spacing-xxs;
+  }
+
   &__focusable,
   &--visible {
     display: flex;
