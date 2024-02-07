@@ -28,7 +28,7 @@ Additional help text string to provide additional description or instructions wh
 
 ### Size
 
-Width of the component. Value can be string `xl`, `lg`, `sm` or `xs`. By default size is `lg`.
+Width of the component. Value can be string `lg`, `md` or `sm`. By default size is `lg`.
 
 ### Placeholder
 
@@ -36,12 +36,12 @@ Placeholder string text shown in the component, when it has no chosen value.
 
 ### Selection Update
 
-Select and Multiselect Component provides `@Output` event emitter `selectionUpdate` for cases if application needs to do something special if the form control value changes. Output of the event emitter is either `null` or `FudisSelectOption` for Select and `null` or array `FudisSelectOption[]`.
+Select and Multiselect Component provides `@Output` event emitter `selectionUpdate` for cases if application needs to do something special if the form control value changes. Output of the event emitter in Select is either `null` or `FudisSelectOption` and for Multiselect `null` or an array `FudisSelectOption[]`.
 
 ```
 // TypeScript
 
-mySelectionUpdate(option: null | FudisSelectOption):void{
+mySelectionUpdate(option: null | FudisSelectOption):void {
   console.log(option)
 }
 
@@ -76,9 +76,9 @@ When `autocomplete` is set to `true`, the input field of the component changes t
 
 ### Autocomplete Clear Button Boolean
 
-By default `autocompleteClearButton` is set a boolean `true`. When `true`, autocomplete input will display an icon button with a cross. This button is used to clear and empty the filter text string in the input. With Select Component this Clear Button will also set Form Control's value to `null`.
+By default `autocompleteClearButton` is set a boolean `true`. When `true`, autocomplete input will display an close icon button. This button is used to clear and empty the filter text string in the input. With Select Component this Clear Button will also set Form Control's value to `null`.
 
-When `autocompleteClearButton` is set to `false`, the select with autocomplete works very similarly as select without autocomplete: dropdown options will instantly open up when user clicks or focuses the input.
+When `autocompleteClearButton` is set to `false`, the select with autocomplete works very similarly as select without autocomplete: dropdown options will instantly open up when user clicks or focuses to the input.
 
 ### Example Usage
 

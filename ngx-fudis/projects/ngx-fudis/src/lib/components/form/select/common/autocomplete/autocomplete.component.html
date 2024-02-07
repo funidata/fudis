@@ -34,12 +34,14 @@
     *ngIf="autocompleteClearButton"
     class="fudis-select-autocomplete__icon"
     [class.fudis-select-autocomplete__icon--hidden]="!inputRef.value"
+    [class.fudis-select-autocomplete__icon--disabled]="control.disabled || disabled"
     (click)="_clearAutocompleteFilterText()"
     [size]="'icon-only'"
     [variant]="'tertiary'"
     [icon]="'close'"
     [label]="_translationClearFilterText"
     [labelHidden]="true"
+    [disabled]="control.disabled || disabled"
   />
   <fudis-icon
     *ngIf="!autocompleteClearButton"
