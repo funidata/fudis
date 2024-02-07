@@ -102,7 +102,7 @@ export class FieldSetComponent
   @Input() initialFocus: boolean = false;
 
   /**
-   * Send information about current Fieldset to Error Summary Service. 
+   * Send information about current Fieldset to Error Summary Service.
    * Error Summary Breadcrumb is the title of the current Fieldset and is visible in the clickable link in Error Summary.
    */
   @Input() errorSummaryBreadcrumb: boolean = true;
