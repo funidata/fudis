@@ -6,8 +6,6 @@
 export * from './lib/ngx-fudis.module';
 
 export { ActionsDirective } from './lib/directives/content-projection/actions/actions.directive';
-export { AutocompleteComponent } from './lib/components/form/autocomplete/autocomplete.component';
-export { AutocompleteMultiSelectComponent } from './lib/components/autocomplete-multi-select/autocomplete-multi-select.component';
 export { BadgeComponent } from './lib/components/badge/badge.component';
 export { BodyTextComponent } from './lib/components/typography/body-text/body-text.component';
 export { BreadcrumbsComponent } from './lib/components/breadcrumbs/breadcrumbs.component';
@@ -40,7 +38,6 @@ export { DescriptionListItemDetailsComponent } from './lib/components/descriptio
 export { DescriptionListItemTermComponent } from './lib/components/description-list/description-list-item/description-list-item-term/description-list-item-term.component';
 export { FudisDialogService } from './lib/services/dialog/dialog.service';
 export { FudisTranslationService } from './lib/services/translation/translation.service';
-export { DropdownComponent } from './lib/components/form/dropdown/dropdown.component';
 export { DropdownMenuComponent } from './lib/components/dropdown-menu/dropdown-menu.component';
 export { DropdownMenuItemComponent } from './lib/components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
 export { ErrorMessageComponent } from './lib/components/form/error-message/error-message/error-message.component';
@@ -66,8 +63,6 @@ export { FudisLanguageBadgeGroupService } from './lib/services/language-badge-gr
 export { LinkComponent } from './lib/components/link/link.component';
 export { NotificationsDirective } from './lib/directives/content-projection/notifications/notifications.directive';
 export { NotificationComponent } from './lib/components/notification/notification.component';
-
-// export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
 export { SpacingDirective } from './lib/directives/spacing/spacing.directive';
 export { SectionComponent } from './lib/components/section/section.component';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';
