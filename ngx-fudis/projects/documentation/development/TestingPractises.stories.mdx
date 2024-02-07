@@ -6,6 +6,12 @@ import { Meta } from "@storybook/blocks";
 
 ## Unit Testing
 
+Every component, directive, service and utility function in Fudis should have relevant unit tests.  
+With this we want to ensure catching component's functionality errors when for example component's API changes.
+
+For unit tests Fudis uses [Jest](https://jestjs.io/) and it is recommended to install [vscode-jest](https://github.com/jest-community/vscode-jest) extension.
+After installed, Jest will run in the background for changed files and output can be found from Terminal tab (Jest).
+
 ## E2E Testing with Screenshot Regression Tests
 
 Cypress is used for E2E testing with Storybook examples of Fudis components, organisms, directives etc.
@@ -14,6 +20,4 @@ Primary reason for Cypress E2E tests are screenshot regression tests. These are 
 
 ### Running tests
 
-- Start Storybook
-- Run all tests with command `npm run cypress`
-- To run a single test, in `ngx-fudis` folder use CLI command of e. g. `npx cypress run --spec 'cypress/e2e/components/button.cy.ts'`
+_Cypress configuration under construction_

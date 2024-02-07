@@ -19,11 +19,11 @@ ng add @angular/material
 
 Choose these options when prompted:
 
-<code>
-  {" "}
-  ? Choose a prebuilt theme name, or "custom" for a custom theme: Custom <br /> ? Set up global Angular
-  Material typography styles? No <br /> ? Set up browser animations for Angular Material? Yes
-</code>
+```
+? Choose a prebuilt theme name, or "custom" for a custom theme: Custom
+? Set up global Angular Material typography styles? No
+? Set up browser animations for Angular Material? Yes
+```
 
 <br />
 
@@ -39,7 +39,8 @@ ng add @funidata/ngx-fudis
 The core styles from Angular Material must be imported in your application for the components to work properly. The easiest way to do this is to have a styles.scss file in project root with the following content:
 
 ```
-@use "@angular/material" as mat; @include mat.core();
+@use "@angular/material" as mat;
+@include mat.core();
 
 ```
 
@@ -123,7 +124,7 @@ In your project's root style file import Fudis foundation package. After that Fu
 ```
 import { ButtonComponent } from './button.component';
 
-<fudis-button label="Eiku"></fudis-button>
+<fudis-button [label]="'Eiku'" />
 ```
 
 or
@@ -133,7 +134,7 @@ import { Component } from '@angular/core';
 
 @Component({
  selector: 'app-root',
- template: ` <fudis-button label="Eiku"></fudis-button> `,
+ template: ` <fudis-button [label]="'Eiku'" /> `,
 })
 export class AppComponent {
  title = 'dev';
