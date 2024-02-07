@@ -304,10 +304,16 @@
     border: 2px solid #484848;
     max-width: 90vw !important;
   }
+  .fudis-dialog-panel:has(.fudis-dialog__size__xl) {
+    max-width: 98vw !important;
+  }
 }
 @media screen and (min-width: 48em) {
   .fudis-dialog-panel {
     max-width: 80vw !important;
+  }
+  .fudis-dialog-panel:has(.fudis-dialog__size__xl) {
+    max-width: 98vw !important;
   }
 }
 /* stylelint-disable-next-line selector-class-pattern */
@@ -1962,11 +1968,29 @@ html {
 /* stylelint-disable-next-line selector-no-qualifying-type */
 input.fudis-form-input {
   /* stylelint-disable-next-line selector-no-qualifying-type */
+  /* stylelint-disable-next-line selector-no-qualifying-type */
 }
 input.fudis-form-input--invalid[aria-invalid=true] {
   border: 1px solid #b83c2e;
 }
 input.fudis-form-input--disabled {
+  border: 1px dashed #727272;
+  /* stylelint-disable-next-line property-disallowed-list */
+  background-color: #f1f1f1;
+  cursor: default;
+}
+input.fudis-form-input--disabled[aria-disabled=true] {
+  border: 1px dashed #727272;
+}
+
+/* stylelint-disable-next-line selector-no-qualifying-type */
+textarea.fudis-form-input {
+  /* stylelint-disable-next-line selector-no-qualifying-type */
+}
+textarea.fudis-form-input--invalid[aria-invalid=true] {
+  border: 1px solid #b83c2e;
+}
+textarea.fudis-form-input--disabled {
   border: 1px dashed #727272;
   /* stylelint-disable-next-line property-disallowed-list */
   background-color: #f1f1f1;
