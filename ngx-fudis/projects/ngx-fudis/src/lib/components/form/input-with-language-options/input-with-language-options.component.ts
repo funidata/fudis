@@ -256,8 +256,6 @@ export class InputWithLanguageOptionsComponent
     this._for = `${this.id}_${this.options[0].value}`;
 
     this.initialRequiredCheck();
-
-    console.log(this._updatedOptions);
   }
 
   ngOnChanges(): void {
