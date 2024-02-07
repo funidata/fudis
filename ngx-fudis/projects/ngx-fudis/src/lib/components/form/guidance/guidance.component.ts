@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, effect } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { FudisFormErrors, FudisFormGroupErrors } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
 
@@ -57,16 +56,6 @@ export class GuidanceComponent implements OnInit {
   @Input() maxLength: number | undefined = undefined;
 
   /**
-   * Used if FormGroup is associated with Guidance.
-   */
-  @Input() groupErrorMsg: FudisFormGroupErrors | null | undefined;
-
-  /**
-   * Used if FormControl is associated with Guidance.
-   */
-  @Input() errorMsg: FudisFormErrors | null | undefined;
-
-  /**
    * Used to match FormControl value for an Input Language Options component so that the component can display the length of the entered input for the connected language option.
    */
   @Input() selectedOption: string;
@@ -89,10 +78,5 @@ export class GuidanceComponent implements OnInit {
     if (this.maxLength) {
       this._maxLengthAlertThreshold = this.maxLength - 5;
     }
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  asErrorkey(errorKey: string): keyof FudisFormErrors {
-    return errorKey;
   }
 }
