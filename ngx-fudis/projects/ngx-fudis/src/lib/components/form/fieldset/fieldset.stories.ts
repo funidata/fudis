@@ -47,28 +47,24 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
             [helpText]="
               'So that students know what they are getting into. Provide description in all languages.'
             "
-            [groupErrorMsg]="errorDescription"
           />
           <fudis-text-input
             [id]="'unique-input-3'"
             [control]="fieldsetExample.controls['teacher']"
             [label]="labelTeacher"
             [helpText]="'Someone has to be responsible for this.'"
-            [errorMsg]="errorTeacher"
           />
           <fudis-text-input
             [id]="'unique-input-4'"
             [control]="fieldsetExample.controls['email']"
             [label]="labelEmail"
             [helpText]="'So that students can ask for more time on their homework.'"
-            [errorMsg]="errorEmail"
           />
           <fudis-radio-button-group
             [title]="labelCourseType"
             [id]="'radio-button-group-1'"
             [options]="courseTypeOptions"
             [control]="fieldsetExample.controls['courseType']"
-            [errorMsg]="errorCourseType"
           />
           <fudis-date-range [startDate]="startDate" [endDate]="endDate" />
         </fudis-grid>

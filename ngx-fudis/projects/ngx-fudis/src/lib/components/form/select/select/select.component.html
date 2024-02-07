@@ -45,7 +45,7 @@
       }}</span>
     </div>
     <fudis-icon
-      *ngIf="!autocomplete"
+      *ngIf="!autocomplete && size !== 'xs'"
       class="fudis-select__input-wrapper__icon"
       [icon]="'chevron'"
       [rotate]="disabled || control.disabled ? 'cw-90' : _dropdownOpen ? 'ccw-90' : 'cw-90'"
@@ -96,7 +96,6 @@
     [inputLabel]="label"
     [helpText]="helpText"
     [for]="id"
-    [errorMsg]="errorMsg"
     [control]="control"
   />
 </div>

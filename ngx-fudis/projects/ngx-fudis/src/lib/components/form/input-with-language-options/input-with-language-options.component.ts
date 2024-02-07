@@ -4,7 +4,6 @@ import {
   FudisInputWithLanguageOptionsFormGroup,
   FudisSelectOption,
   FudisDropdownLanguageOption,
-  FudisFormGroupErrors,
   FudisInputSize,
 } from '../../../types/forms';
 
@@ -49,12 +48,6 @@ export class InputWithLanguageOptionsComponent
    * Available sizes for the input - defaults to large.
    */
   @Input() size: FudisInputSize = 'lg';
-
-  /*
-   * Object containing error messages for each FormControl and for the FormGroup.
-   * E. g. {finnish:{maxlength: 'Input in Finnish cannot be longer than X charactes.'}}
-   */
-  @Input() groupErrorMsg: FudisFormGroupErrors;
 
   /**
    * Form element to display. Defaults to text-input
@@ -118,9 +111,11 @@ export class InputWithLanguageOptionsComponent
    */
   private _nonEmptyControls: string[] = [];
 
-  handleLanguageSelect(value: FudisSelectOption): void {
-    this._dropdownValue = value;
-    this._for = `${this.id}_${value.value}`;
+  handleLanguageSelect(value: FudisSelectOption | null): void {
+    if (value) {
+      this._dropdownValue = value;
+      this._for = `${this.id}_${value.value}`;
+    }
   }
 
   handleInputBlur(event: Event, controlKey: string): void {

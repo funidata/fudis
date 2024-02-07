@@ -1,9 +1,10 @@
 import { Component, HostBinding, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FudisRadioButtonOption, FudisFormErrors, FudisInputSize } from '../../../types/forms';
+import { FudisRadioButtonOption, FudisInputSize } from '../../../types/forms';
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 
+// TODO: Refactor component to work in similar fashion as Checkbox Group, update docs and tests
 @Component({
   selector: 'fudis-radio-button-group',
   templateUrl: './radio-button-group.component.html',
@@ -22,11 +23,6 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
    * Array of options for group of radio buttons
    */
   @Input({ required: true }) options: FudisRadioButtonOption[];
-
-  /**
-   * Error messages shown when form control validators are invalid
-   */
-  @Input() errorMsg: FudisFormErrors;
 
   /**
    * Set Radio Button Group's visual style and ARIA attribute as invalid. Does not override if control.invalid is true.

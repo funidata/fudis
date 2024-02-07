@@ -65,7 +65,6 @@ const TemplateAllRequired: StoryFn = () => ({
       [formGroup]="formGroup"
       [label]="label"
       [helpText]="helpText"
-      [groupErrorMsg]="groupErrorMsg"
       [maxLength]="maxLength"
     />
   `,
@@ -108,7 +107,6 @@ const TemplateOneRequired: StoryFn = () => ({
       [formGroup]="formGroup"
       [label]="label"
       [helpText]="helpText"
-      [groupErrorMsg]="groupErrorMsg"
       [maxLength]="maxLength"
     />
   `,

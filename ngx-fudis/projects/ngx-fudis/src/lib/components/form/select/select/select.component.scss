@@ -81,4 +81,9 @@
       caret-color: transparent;
     }
   }
+
+  /* stylelint-disable-next-line */
+  &.fudis-input-size__xs .fudis-select__input {
+    padding: spacing.$spacing-xxs spacing.$spacing-xs;
+  }
 }

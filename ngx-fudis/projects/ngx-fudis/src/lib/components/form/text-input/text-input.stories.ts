@@ -131,7 +131,6 @@ export default {
         'ariaLabel',
         'disabled',
         'id',
-        'errorMsg',
         'invalidState',
       ],
     },
