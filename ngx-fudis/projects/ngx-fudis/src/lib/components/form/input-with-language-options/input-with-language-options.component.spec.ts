@@ -8,6 +8,7 @@ import { FudisSelectOption } from '../../../types/forms';
 import { TextInputComponent } from '../text-input/text-input.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { FudisValidators } from '../../../utilities/form/validators';
+import { SelectComponent } from '../select/select/select.component';
 
 const testFormGroup: FormGroup = new FormGroup({
   finnish: new FormControl('', FudisValidators.required('Required in Finnish')),
@@ -31,6 +32,7 @@ describe('InputWithLanguageOptionsComponent', () => {
         InputWithLanguageOptionsComponent,
         MockComponent(FieldSetComponent),
         MockComponent(TextInputComponent),
+        MockComponent(SelectComponent),
         MockComponent(GuidanceComponent),
       ],
     }).compileComponents();
