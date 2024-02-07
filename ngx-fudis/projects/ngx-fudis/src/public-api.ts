@@ -54,7 +54,6 @@ export { GridItemComponent } from './lib/components/grid/grid-item/grid-item.com
 export { GridDirective } from './lib/directives/grid/grid/grid.directive';
 export { GridItemDirective } from './lib/directives/grid/grid-item/grid-item.directive';
 export { FudisGridService } from './lib/services/grid/grid.service';
-export { GuidanceComponent } from './lib/components/form/guidance/guidance.component';
 export { HeaderDirective } from './lib/directives/content-projection/header/header.directive';
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
 export { IconComponent } from './lib/components/icon/icon.component';

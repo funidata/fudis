@@ -251,7 +251,6 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     GridDirective,
     GridItemComponent,
     GridItemDirective,
-    GuidanceComponent,
     HeaderDirective,
     HeadingComponent,
     IconComponent,
