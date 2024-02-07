@@ -3,7 +3,6 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -11,13 +10,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatSelectModule } from '@angular/material/select';
-
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ActionsDirective } from './directives/content-projection/actions/actions.directive';
-import { AutocompleteComponent } from './components/form/autocomplete/autocomplete.component';
-import { AutocompleteMultiSelectComponent } from './components/autocomplete-multi-select/autocomplete-multi-select.component';
-import { AutocompleteMultiSelectSelectedItemChipComponent } from './components/autocomplete-multi-select/autocomplete-multi-select-selected-item-chip/autocomplete-multi-select-selected-item-chip.component';
 import { BadgeComponent } from './components/badge/badge.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { BreadcrumbsItemComponent } from './components/breadcrumbs/breadcrumbs-item/breadcrumbs-item.component';
@@ -47,7 +41,7 @@ import {
 } from './directives/dialog/dialog-directives';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { FudisDialogService } from './services/dialog/dialog.service';
-import { DropdownComponent } from './components/form/dropdown/dropdown.component';
+
 import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
 import { DropdownMenuItemComponent } from './components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
 
@@ -122,9 +116,6 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     ActionsDirective,
     AlertComponent,
     AlertGroupComponent,
-    AutocompleteComponent,
-    AutocompleteMultiSelectComponent,
-    AutocompleteMultiSelectSelectedItemChipComponent,
     BadgeComponent,
     BodyTextComponent,
     BreadcrumbsComponent,
@@ -148,7 +139,6 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     DialogContentDirective,
     DialogCloseDirective,
     DropdownBaseDirective,
-    DropdownComponent,
     DropdownMenuComponent,
     DropdownItemBaseDirective,
     DropdownMenuItemComponent,
@@ -206,13 +196,11 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     CommonModule,
     FormsModule,
     LayoutModule,
-    MatAutocompleteModule,
     MatDatepickerModule,
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
-    MatSelectModule,
     MatButtonModule,
     MatTooltipModule,
     ReactiveFormsModule,
@@ -229,8 +217,6 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     ActionsDirective,
     AlertComponent,
     AlertGroupComponent,
-    AutocompleteComponent,
-    AutocompleteMultiSelectComponent,
     BadgeComponent,
     BodyTextComponent,
     BreadcrumbsComponent,
@@ -253,7 +239,6 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     DialogContentDirective,
     DialogCloseDirective,
     DialogActionsDirective,
-    DropdownComponent,
     DropdownMenuComponent,
     DropdownMenuItemComponent,
     ExpandableComponent,
@@ -276,7 +261,7 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     MultiselectOptionComponent,
     NotificationComponent,
     NotificationsDirective,
-    RadioButtonGroupComponent,
+    // RadioButtonGroupComponent,
     SectionComponent,
     SelectComponent,
     SelectOptionComponent,
