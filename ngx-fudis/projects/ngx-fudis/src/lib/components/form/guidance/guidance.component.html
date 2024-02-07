@@ -24,7 +24,7 @@
                   <fudis-validator-error-message
                     *ngIf="error.value.message"
                     [focusId]="for"
-                    [visible]="singleControl.value.touched"
+                    [visible]="singleControl.value.touched || formGroup.touched"
                     [type]="error.key"
                     [controlName]="singleControl.key"
                     [label]="inputLabel"

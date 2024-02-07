@@ -161,11 +161,20 @@ describe('GuidanceComponent', () => {
   describe('with Form Group', () => {
     beforeEach(() => {
       component.formGroup = testFormGroup;
-      testFormGroup.markAsUntouched();
+      component.groupBlurredOut = true;
+      component.formGroup.controls['finnish'].markAsUntouched();
+      component.formGroup.controls['swedish'].markAsUntouched();
+      component.formGroup.controls['english'].markAsUntouched();
+      component.formGroup.markAsUntouched();
       fixture.detectChanges();
     });
 
     describe('common tests', () => {
+      it('should have correct amount of errors', () => {
+        const errorListAfterTouching = getAllElements(fixture, 'fudis-validator-error-message');
+        expect(errorListAfterTouching.length).toBe(2);
+      });
+
       it('should have correct number in max length indicator when selected option is set', () => {
         component.selectedOption = 'swedish';
 
@@ -180,12 +189,42 @@ describe('GuidanceComponent', () => {
         expect(lengthIndicator.innerHTML).toContain('64/20');
       });
 
-      it('should display screen reader assistive text correctly', () => {});
+      it('should display screen reader assistive text correctly', () => {
+        component.formGroup.controls['finnish'].patchValue('Fifteen chars!!');
+        fixture.detectChanges();
+        const assistiveTextOn = getElement(fixture, '.fudis-visually-hidden');
+
+        expect(assistiveTextOn.innerHTML).toContain('15/20 characters used');
+
+        component.formGroup.controls['finnish'].patchValue('Sixteen chars!!!');
+        fixture.detectChanges();
+        const assistiveTextOff = getElement(fixture, '.fudis-visually-hidden');
+
+        expect(assistiveTextOff).toBeNull();
+
+        component.formGroup.controls['finnish'].patchValue('Twenty characters!!!');
+        fixture.detectChanges();
+        const assistiveTextFull = getElement(fixture, '.fudis-visually-hidden');
+
+        expect(assistiveTextFull.innerHTML).toContain('20/20 characters used');
+      });
 
       it('should show errors when single form control is touched', () => {
+        const errorListBefore = getAllElements(
+          fixture,
+          'fudis-validator-error-message[ng-reflect-visible="true"]',
+        );
+
+        expect(errorListBefore.length).toBe(0);
+
         component.formGroup.controls['finnish'].markAsTouched();
-        const errorList = getAllElements(fixture, 'fudis-validator-error-message');
-        expect(errorList.length).toBe(3);
+        fixture.detectChanges();
+
+        const errorList = getAllElements(
+          fixture,
+          'fudis-validator-error-message[ng-reflect-visible="true"]',
+        );
+        expect(errorList.length).toBe(2);
       });
 
       it('should not show errors when groupBlurred out is false', () => {
@@ -198,7 +237,6 @@ describe('GuidanceComponent', () => {
 
       it('should show error list when group is marked as touched', () => {
         const errorsBefore = getElement(fixture, '.fudis-guidance__errors');
-        fixture.detectChanges();
 
         expect(errorsBefore).toBeFalsy();
 
@@ -209,33 +247,38 @@ describe('GuidanceComponent', () => {
         const errorsAfter = getElement(fixture, '.fudis-guidance__errors');
 
         expect(errorsAfter).toBeTruthy();
-
         const errorListAfterTouching = getAllElements(fixture, 'fudis-validator-error-message');
-        expect(errorListAfterTouching.length).toBe(3);
-      });
-
-      it('should have correct amount of errors', () => {
-        const errorListAfterTouching = getAllElements(fixture, 'fudis-validator-error-message');
-        expect(errorListAfterTouching.length).toBe(3);
+        expect(errorListAfterTouching.length).toBe(2);
       });
     });
 
     describe('errors for single controls inside group', () => {
       it('should hide error when required form control value is updated', () => {
         const errorList = getAllElements(fixture, 'fudis-validator-error-message');
-        expect(errorList.length).toBe(3);
+        expect(errorList.length).toBe(2);
+
+        component.formGroup.controls['english'].patchValue('Some text for input');
+        fixture.detectChanges();
+        const errorListWithoutFinnish = getAllElements(fixture, 'fudis-validator-error-message');
+        expect(errorListWithoutFinnish.length).toBe(1);
+      });
+    });
+
+    describe('group errors', () => {
+      beforeEach(() => {
+        component.formGroup = testFormGroupWithGroupValidator;
+        fixture.detectChanges();
+      });
+      it('should display right amount of errors', () => {
+        const errorListBefore = getAllElements(fixture, 'fudis-validator-error-message');
+        expect(errorListBefore.length).toBe(1);
 
         component.formGroup.controls['finnish'].patchValue('Some text for input');
         fixture.detectChanges();
 
         const errorListWithoutFinnish = getAllElements(fixture, 'fudis-validator-error-message');
-
-        expect(errorListWithoutFinnish.length).toBe(2);
+        expect(errorListWithoutFinnish.length).toBe(0);
       });
-    });
-
-    describe('group errors', () => {
-      it('should display right amount of errors', () => {});
     });
   });
 });
