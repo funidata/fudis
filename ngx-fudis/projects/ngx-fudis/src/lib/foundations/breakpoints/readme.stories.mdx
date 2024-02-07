@@ -2,17 +2,17 @@ import { Meta } from "@storybook/blocks";
 
 <Meta title="Foundations/Breakpoints" />
 
-# Breakpoint mixins
+# Breakpoint Mixins
 
-Load Fudis mixins and tokens to your file in your SCSS file with:
+Load Fudis mixins and tokens to your SCSS file with:
 
 ```
 @use "@funidata/ngx-fudis" as fudis;
 ```
 
-## Min-width mixin
+## Min-width
 
-When you are using the mixin `breakpoint('md')`, your styles will be applied from `$breakpoint-md` and up.
+When you are using `breakpoint('md')`, your styles will be applied from `$breakpoint-md` and up.
 
 ```
 @include fudis.breakpoint($breakpoint){}
@@ -24,16 +24,16 @@ When you are using the mixin `breakpoint('md')`, your styles will be applied fro
 
 ```
 .my-element {
-  @include fudis.breakpoint('md'){
+  @include fudis.breakpoint('md') {
     // Rules defined here apply from breakpoint 'md' and up
   };
 }
 
 ```
 
-## Max-width mixin
+## Max-width
 
-When you are using the mixin `breakpoint-max('md')`, your styles will be applied when viewport is smaller than `$breakpoint-md`.
+When you are using `breakpoint-max('md')`, your styles will be applied when viewport is smaller than `$breakpoint-md`.
 
 ```
 @include fudis.breakpoint-max($breakpoint){}
@@ -41,9 +41,9 @@ When you are using the mixin `breakpoint-max('md')`, your styles will be applied
 
 <hr />
 
-# Breakpoint tokens and values they apply
+# Breakpoint Tokens and Values They Apply
 
-Breakpoints are based on Bootstrap's breakpoint system, which Sisu application uses widely.
+Breakpoints are based on Bootstrap's breakpoint system.
 
 | Name            | String value | Value | Default px value | Range it affects |
 | --------------- | ------------ | ----- | ---------------- | ---------------- |

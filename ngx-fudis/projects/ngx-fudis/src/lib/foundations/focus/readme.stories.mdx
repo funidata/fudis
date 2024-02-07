@@ -1,20 +1,20 @@
-import { Meta, ColorPalette, ColorItem } from "@storybook/blocks";
+import { Meta } from "@storybook/blocks";
 
 <Meta title="Foundations/Focus" />
 
-# Focus mixins
+# Focus Mixins
 
 Figma file for focus style examples: [Figma file](https://www.figma.com/file/a6G6ZD6W3tlq0qmUkdvdp1/Fudis-DS-Foundations?node-id=133%3A130&t=Z8j4NL4q9I5h7OMD-0)
 
-Load Fudis mixins and tokens to your file in your SCSS file with:
+Load Fudis mixins and tokens to your SCSS file with:
 
 ```
 @use "@funidata/ngx-fudis" as fudis;
 ```
 
-## Generic focus rectangle
+## Generic Focus Rectangle
 
-Generic focus style for example buttons and tabs
+Generic focus style for e.g. buttons and tabs:
 
 ```
 .my-element {
@@ -22,12 +22,28 @@ Generic focus style for example buttons and tabs
 }
 ```
 
-## Form element focus
+## Form Element Focus
 
-Focus style for form element components such as text-input, radio-button, checkbox and dropdown
+Focus style for form elements such as text-input, select and radio-button:
 
 ```
 .my-element {
   @include fudis.focus-form-field;
+}
+```
+
+Focus style for form checkbox element:
+
+```
+.my-element {
+  @include fudis.focus-checkbox;
+}
+```
+
+Focus style for various dropdown elements:
+
+```
+.my-element {
+  @include fudis.focus-dropdown;
 }
 ```
