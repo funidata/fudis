@@ -10,14 +10,17 @@
       [showSelectionChips]="showSelectionChips"
     >
       <ng-template fudisContent type="select-options">
-        <fudis-multiselect-option *ngFor="let option of defaultOptions" [data]="option" />
+        <fudis-multiselect-option
+          *ngFor="let option of defaultOptions"
+          [data]="option"
+        ></fudis-multiselect-option>
         <fudis-multiselect-group *ngFor="let group of groupedMockData" [label]="group.country">
           <fudis-multiselect-option
             *ngFor="let groupedOption of group.options"
             [data]="groupedOption"
-          />
+          ></fudis-multiselect-option>
         </fudis-multiselect-group>
       </ng-template>
     </fudis-multiselect>
-  `})).bind({});Example.args={label:"Select a pet",size:"lg",disabled:!1,placeholder:"Choose a pet",helpText:"All pets are equally important, but for sake of this example please pick atleast two",showSelectionChips:!0},Example.parameters={...Example.parameters,docs:{...Example.parameters?.docs,source:{originalSource:'(args: MultiselectComponent) => ({\n  props: {\n    ...args,\n    defaultOptions,\n    selectionUpdate: action(\'selectionUpdate\'),\n    control: new FormControl(null, FudisValidators.minLength(2, \'Pick at least two pets\')),\n    groupedMockData\n  },\n  template: html`\n    <fudis-multiselect\n      [size]="size"\n      [placeholder]="placeholder"\n      [control]="control"\n      [label]="label"\n      [helpText]="helpText"\n      [disabled]="disabled"\n      (selectionUpdate)="selectionUpdate($event)"\n      [showSelectionChips]="showSelectionChips"\n    >\n      <ng-template fudisContent type="select-options">\n        <fudis-multiselect-option *ngFor="let option of defaultOptions" [data]="option" />\n        <fudis-multiselect-group *ngFor="let group of groupedMockData" [label]="group.country">\n          <fudis-multiselect-option\n            *ngFor="let groupedOption of group.options"\n            [data]="groupedOption"\n          />\n        </fudis-multiselect-group>\n      </ng-template>\n    </fudis-multiselect>\n  `\n})',...Example.parameters?.docs?.source}}};const __namedExportsOrder=["Example"]}}]);
-//# sourceMappingURL=components-form-select-multiselect-multiselect-stories.df75ad19.iframe.bundle.js.map
+  `})).bind({});Example.args={label:"Select a pet",size:"lg",disabled:!1,placeholder:"Choose a pet",helpText:"All pets are equally important, but for sake of this example please pick atleast two",showSelectionChips:!0},Example.parameters={...Example.parameters,docs:{...Example.parameters?.docs,source:{originalSource:'(args: MultiselectComponent) => ({\n  props: {\n    ...args,\n    defaultOptions,\n    selectionUpdate: action(\'selectionUpdate\'),\n    control: new FormControl(null, FudisValidators.minLength(2, \'Pick at least two pets\')),\n    groupedMockData\n  },\n  template: html`\n    <fudis-multiselect\n      [size]="size"\n      [placeholder]="placeholder"\n      [control]="control"\n      [label]="label"\n      [helpText]="helpText"\n      [disabled]="disabled"\n      (selectionUpdate)="selectionUpdate($event)"\n      [showSelectionChips]="showSelectionChips"\n    >\n      <ng-template fudisContent type="select-options">\n        <fudis-multiselect-option\n          *ngFor="let option of defaultOptions"\n          [data]="option"\n        ></fudis-multiselect-option>\n        <fudis-multiselect-group *ngFor="let group of groupedMockData" [label]="group.country">\n          <fudis-multiselect-option\n            *ngFor="let groupedOption of group.options"\n            [data]="groupedOption"\n          ></fudis-multiselect-option>\n        </fudis-multiselect-group>\n      </ng-template>\n    </fudis-multiselect>\n  `\n})',...Example.parameters?.docs?.source}}};const __namedExportsOrder=["Example"]}}]);
+//# sourceMappingURL=components-form-select-multiselect-multiselect-stories.ee2b9665.iframe.bundle.js.map
