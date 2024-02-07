@@ -6,20 +6,10 @@
 /*
   --- Secondary & Accent Colors ---
 */
-/* stylelint-disable selector-no-qualifying-type */
-/* stylelint-disable max-nesting-depth */
-/* stylelint-disable property-disallowed-list */
-/* stylelint-disable no-descending-specificity */
 /* stylelint-disable declaration-no-important */
-/* stylelint-disable scss/selector-no-redundant-nesting-selector */
 /* stylelint-disable selector-max-class */
 /* stylelint-disable selector-class-pattern */
-/* stylelint-disable property-disallowed-list */
-/* stylelint-disable unit-disallowed-list */
-/* stylelint-disable unit-disallowed-list */
-/* stylelint-disable unit-disallowed-list */
-/* stylelint-disable declaration-property-value-disallowed-list */
-/* stylelint-disable property-disallowed-list */
+/* stylelint-disable scss/selector-no-redundant-nesting-selector */
 /* stylelint-disable color-no-hex */
 /*
   --- Primary Colors are defined in style.scss ---
@@ -29,100 +19,13 @@
 */
 /* stylelint-disable declaration-property-value-disallowed-list */
 /* stylelint-disable property-disallowed-list */
+/* stylelint-disable unit-disallowed-list */
 /* stylelint-disable declaration-property-value-disallowed-list */
 /* stylelint-disable property-disallowed-list */
-/** 
-* Styles which affects to fudis-autocomplete (search and dropdown variants) and fudis-dropdown (single and multiselect variants) components. 
-* If you make changes, check that all of the above componenta and variants still work as wanted
-*/
-.fudis-autocomplete__option-list,
-.fudis-dropdown__option-list {
-  border: 1px solid #727272;
-  background-color: #ffffff !important;
-}
-
-.fudis-autocomplete__option.mat-mdc-option,
-.fudis-dropdown__option.mat-mdc-option {
-  min-height: calc(2rem / var(--fudis-rem-multiplier));
-}
-
-.fudis-autocomplete__option.mat-mdc-option:hover:not(.mdc-list-item--disabled),
-.fudis-dropdown__option.mat-mdc-option:hover:not(.mdc-list-item--disabled) {
-  /* stylelint-disable-next-line property-disallowed-list */
-  background-color: var(--fudis-color-primary-light);
-}
-
-.fudis-autocomplete__option.mat-mdc-option:focus:not(.mdc-list-item--disabled),
-.fudis-dropdown__option.mat-mdc-option:focus:not(.mdc-list-item--disabled) {
-  /* stylelint-disable-next-line property-disallowed-list */
-  background-color: var(--fudis-color-primary-light);
-}
-
-.fudis-autocomplete__option.mat-mdc-option.mat-mdc-option-active,
-.fudis-dropdown__option.mat-mdc-option.mat-mdc-option-active {
-  background-color: var(--fudis-color-primary-light) !important;
-}
-
-.fudis-autocomplete__option.mat-mdc-option.mdc-list-item--selected,
-.fudis-dropdown__option.mat-mdc-option.mdc-list-item--selected {
-  background-color: var(--fudis-color-primary) !important;
-  color: #ffffff;
-}
-
-.fudis-autocomplete__option.mat-mdc-option.mdc-list-item--selected mat-pseudo-checkbox.mat-pseudo-checkbox-minimal::after,
-.fudis-dropdown__option.mat-mdc-option.mdc-list-item--selected mat-pseudo-checkbox.mat-pseudo-checkbox-minimal::after {
-  color: #ffffff;
-}
-
-.fudis-autocomplete__option.mat-mdc-option.mdc-list-item--selected mat-pseudo-checkbox.mat-pseudo-checkbox-full,
-.fudis-dropdown__option.mat-mdc-option.mdc-list-item--selected mat-pseudo-checkbox.mat-pseudo-checkbox-full {
-  background-color: #ffffff;
-}
-
-.fudis-autocomplete__option.mat-mdc-option.mdc-list-item--selected mat-pseudo-checkbox.mat-pseudo-checkbox-full::after,
-.fudis-dropdown__option.mat-mdc-option.mdc-list-item--selected mat-pseudo-checkbox.mat-pseudo-checkbox-full::after {
-  color: #484848;
-}
-
-.fudis-autocomplete__option.mat-mdc-option.mdc-list-item--selected .mdc-list-item__primary-text,
-.fudis-dropdown__option.mat-mdc-option.mdc-list-item--selected .mdc-list-item__primary-text {
-  color: #ffffff !important;
-}
-
-.fudis-autocomplete__option.mat-mdc-option .mdc-list-item__primary-text,
-.fudis-dropdown__option.mat-mdc-option .mdc-list-item__primary-text {
-  text-transform: initial;
-  line-height: calc(1.125rem / var(--fudis-rem-multiplier));
-  font-family: "Fira Sans", sans-serif;
-  font-size: calc(0.875rem / var(--fudis-rem-multiplier));
-  font-weight: 400;
-}
-
-.fudis-dropdown__select .mat-mdc-select-value {
-  line-height: calc(1.5rem / var(--fudis-rem-multiplier));
-  font-family: "Fira Sans", sans-serif;
-  font-size: calc(1rem / var(--fudis-rem-multiplier));
-  font-weight: 300;
-}
-
-.fudis-dropdown__select .mat-mdc-select-placeholder {
-  /* stylelint-disable-next-line property-disallowed-list */
-  color: #727272;
-}
-
-.fudis-dropdown__select .mat-mdc-select-arrow-wrapper {
-  display: none;
-}
-
-.fudis-dropdown__select.mat-mdc-select-disabled {
-  /* stylelint-disable-next-line property-disallowed-list */
-  background-color: #f1f1f1;
-}
-
-/* stylelint-disable declaration-no-important */
-/* stylelint-disable selector-max-class */
-/* stylelint-disable selector-class-pattern */
-/* stylelint-disable scss/selector-no-redundant-nesting-selector */
+/* stylelint-disable declaration-property-value-disallowed-list */
+/* stylelint-disable property-disallowed-list */
+/* stylelint-disable property-disallowed-list */
+/* stylelint-disable declaration-property-value-disallowed-list */
 /* stylelint-disable property-disallowed-list */
 .fudis-datepicker__toggle {
   /* Target mat-icon-button */
@@ -1622,10 +1525,6 @@ html {
   --mat-table-footer-supporting-text-tracking: normal;
 }
 
-html {
-  --mat-autocomplete-background-color: white;
-}
-
 .mat-mdc-button.mat-unthemed {
   --mdc-text-button-label-text-color: #000;
 }
@@ -1934,8 +1833,6 @@ html {
 */
 /* stylelint-disable property-disallowed-list */
 /* stylelint-disable unit-disallowed-list */
-/* stylelint-disable declaration-property-value-disallowed-list */
-/* stylelint-disable property-disallowed-list */
 /* stylelint-disable declaration-property-value-disallowed-list */
 /* stylelint-disable property-disallowed-list */
 .fudis-visually-hidden {
