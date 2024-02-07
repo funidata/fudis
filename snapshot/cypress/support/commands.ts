@@ -19,6 +19,8 @@ Cypress.Commands.add("snapshot", (userOptions?: SnapshotOptions) => {
   }
 
   if (options.mobile) {
+    // FIXME: If desktop test fails, this is skipped leading to comparison and diff screenshots not
+    // FIXME: being taken. As a side effect, mobile screenshots are not displayed in HTML report.
     /**
      * Small caveat: Some UI elements appear slightly differently depending on whether
      * cy.viewport() is called before or after calling cy.visit() and interacting with

@@ -5,5 +5,5 @@
     "types": ["cypress", "node"],
     "esModuleInterop": true
   },
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "cypress-image-diff.config.js"]
 }
