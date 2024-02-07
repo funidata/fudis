@@ -1,6 +1,6 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { RadioButtonGroupComponent } from "./radio-button-group.component";
-import * as RadioButtonGroupStories from "./radio-button-group.stories.ts";
+import * as RadioButtonGroupStories from "./radio-button-group.stories";
 
 <Meta title="Components/Form/Radio Button Group" />
 

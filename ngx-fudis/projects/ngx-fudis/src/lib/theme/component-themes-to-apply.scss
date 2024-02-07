@@ -1,6 +1,5 @@
 @use "@angular/material" as mat;
 @use "./fudis-theme.scss" as theme;
-@use "../components/form/autocomplete/ngMaterial-theme.scss" as autoComplete;
 @use "../components/form/date/datepicker/ngMaterial-theme.scss" as datePicker;
 @use "../components/dialog/ngMaterial-theme.scss" as dialog;
 @use "../directives/tooltip/ngMaterial-theme.scss" as tooltip;
@@ -12,7 +11,6 @@
 @include mat.core;
 @include mat.core-theme(theme.$primary-theme);
 @include mat.all-component-typographies(theme.$typography);
-@include mat.autocomplete-theme(theme.$primary-theme);
 @include mat.button-theme(theme.$button-theme);
 @include mat.datepicker-theme(theme.$datepicker-theme);
 @include mat.dialog-theme(theme.$primary-theme);
