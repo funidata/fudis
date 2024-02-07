@@ -14,6 +14,7 @@ Most notable common API feature is grouping options and choosing if component is
 
 - [Basic Form Component Attributes](#basic-form-component-attributes)
 - [Autocomplete Features](#autocomplete-features)
+- [Adding Options](#adding-options)
 - [Grouping Options](#grouping-options)
 
 ## Basic Form Component Attributes
@@ -100,6 +101,10 @@ When `autocompleteClearButton` is set to `false`, the select with autocomplete w
 
 <Canvas of={Stories.MultiselectAutocomplete}></Canvas>
 
+## Adding Options
+
+Documentation for including selectable options for both Select and Multiselect is found under [Select and Multiselect Option documentation](/docs/components-form-select-select-and-multiselect-option--documentation)
+
 ## Grouping Options
 
 Sometimes there is need to categorize and group options. Especially if list of options is long and might have options which are nearly identical but are under different sub-category.
@@ -110,14 +115,16 @@ Only input attribute Select Group Component requires is `label` string.
 
 ```
 <fudis-select>
-  <fudis-select-group [label]="'First Group'">
-    <fudis-select-option/>
-    ... and rest of the options for the First Group
-  </fudis-select-group>
-  <fudis-select-group [label]="'Last Group'">
-    <fudis-select-option/>
-    ... and rest of the options for the Last Group
-  </fudis-select-group>
+  <ng-template fudisContent type="select-options">
+    <fudis-select-group [label]="'First Group'">
+      <fudis-select-option/>
+      ... and rest of the options for the First Group
+    </fudis-select-group>
+    <fudis-select-group [label]="'Last Group'">
+      <fudis-select-option/>
+      ... and rest of the options for the Last Group
+    </fudis-select-group>
+  </ng-template>
 </fudis-select>
 ```
 
@@ -125,14 +132,16 @@ The exactly same component can be used as well with Multiselect Component. Altho
 
 ```
 <fudis-multiselect>
-  <fudis-multiselect-group [label]="'First Group'">
-    <fudis-multiselect-option/>
-    ... and rest of the options for the First Group
-  </fudis-multiselect-group>
-  <fudis-multiselect-group [label]="'Last Group'">
-    <fudis-multiselect-option/>
-    ... and rest of the options for the Last Group
-  </fudis-multiselect-group>
+  <ng-template fudisContent type="select-options">
+    <fudis-multiselect-group [label]="'First Group'">
+      <fudis-multiselect-option/>
+      ... and rest of the options for the First Group
+    </fudis-multiselect-group>
+    <fudis-multiselect-group [label]="'Last Group'">
+      <fudis-multiselect-option/>
+      ... and rest of the options for the Last Group
+    </fudis-multiselect-group>
+  </ng-template>
 </fudis-multiselect>
 ```
 

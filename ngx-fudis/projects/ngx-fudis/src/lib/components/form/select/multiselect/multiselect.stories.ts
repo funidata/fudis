@@ -66,12 +66,15 @@ const ExampleTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCompone
       [showSelectionChips]="showSelectionChips"
     >
       <ng-template fudisContent type="select-options">
-        <fudis-multiselect-option *ngFor="let option of defaultOptions" [data]="option" />
+        <fudis-multiselect-option
+          *ngFor="let option of defaultOptions"
+          [data]="option"
+        ></fudis-multiselect-option>
         <fudis-multiselect-group *ngFor="let group of groupedMockData" [label]="group.country">
           <fudis-multiselect-option
             *ngFor="let groupedOption of group.options"
             [data]="groupedOption"
-          />
+          ></fudis-multiselect-option>
         </fudis-multiselect-group>
       </ng-template>
     </fudis-multiselect>

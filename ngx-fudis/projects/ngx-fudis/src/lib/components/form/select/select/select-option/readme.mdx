@@ -6,6 +6,20 @@ import { Meta } from "@storybook/blocks";
 
 Select Option and Multiselect Option Components are separate but really similar components used as child component of Select or Multiselect Component to display a selectable option in the dropdown.
 
+## Content Directive Properties
+
+To include Select or Multiselect Options, you need to wrap them with a Fudis Content Directive.
+
+```
+<fudis-select>
+  <ng-template fudisContent type="select-options">
+    ...
+    options here
+    ...
+  </ng-template>
+</fudis-select>
+```
+
 ## Input Attributes
 
 Only required input attribute Select Option and Multiselect Option requires is `data` object which follows `FudisSelectOption` interface. Mandatory entries for data object are Label and Value.
@@ -31,11 +45,13 @@ interface FudisSelectOption {
 
 ```
 <fudis-select>
-  <fudis-select-option
-    [data]=
-      "{value: 'unique-option-value',
-      label: 'Visible Label For the Option'}"
-  />
+  <ng-template fudisContent type="select-options">
+    <fudis-select-option
+      [data]=
+        "{value: 'unique-option-value',
+        label: 'Visible Label For the Option'}"
+    />
+  </ng-template>
 </fudis-select>
 
 ```
@@ -44,10 +60,12 @@ interface FudisSelectOption {
 
 ```
 <fudis-multiselect>
-  <fudis-multiselect-option
-    [data]=
-      "{value: 'unique-option-value',
-      label: 'Visible Label For the Option'}"
-  />
+  <ng-template fudisContent type="select-options">
+    <fudis-multiselect-option
+      [data]=
+        "{value: 'unique-option-value',
+        label: 'Visible Label For the Option'}"
+    />
+  </ng-template>
 </fudis-multiselect>
 ```
