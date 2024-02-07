@@ -17,58 +17,48 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
   template: `
     <fudis-fieldset
       [width]="'md'"
-      [title]="title"
-      [id]="fieldsetId"
-      [helpText]="helpText"
+      [title]="'Fill in course information'"
+      [helpText]="'Please fill in course information.'"
       [marginSides]="'responsive'"
       [tooltip]="'Some additional information'"
     >
-      <ng-template fudisActions type="fieldset">
+      <ng-template fudisActions [type]="'fieldset'">
         <fudis-button [variant]="'tertiary'" [icon]="'plus'" [label]="'Some action'" />
       </ng-template>
-      <ng-template fudisNotifications type="fieldset">
+      <ng-template fudisNotifications [type]="'fieldset'">
         <fudis-notification>This is notification</fudis-notification>
       </ng-template>
-      <ng-template fudisContent type="fieldset">
+      <ng-template fudisContent [type]="'fieldset'">
         <fudis-grid [columns]="{ md: 2 }">
           <fudis-input-with-language-options
-            [id]="'unique-input-1'"
             [options]="languageOptions"
             [formGroup]="fieldsetExample.controls['name']"
-            [label]="labelName"
+            [label]="'Course name'"
             [helpText]="'Some name would be nice. Provide course name in at least one language.'"
           />
           <fudis-input-with-language-options
             [variant]="'text-area'"
-            [id]="'unique-input-2'"
             [options]="languageOptions"
             [formGroup]="fieldsetExample.controls['description']"
-            [label]="labelDescription"
+            [label]="'Course description'"
             [helpText]="
               'So that students know what they are getting into. Provide description in all languages.'
             "
-            [groupErrorMsg]="errorDescription"
           />
           <fudis-text-input
-            [id]="'unique-input-3'"
             [control]="fieldsetExample.controls['teacher']"
-            [label]="labelTeacher"
+            [label]="'Responsible teacher'"
             [helpText]="'Someone has to be responsible for this.'"
-            [errorMsg]="errorTeacher"
           />
           <fudis-text-input
-            [id]="'unique-input-4'"
             [control]="fieldsetExample.controls['email']"
-            [label]="labelEmail"
+            [label]="'Contact email'"
             [helpText]="'So that students can ask for more time on their homework.'"
-            [errorMsg]="errorEmail"
           />
           <fudis-radio-button-group
-            [title]="labelCourseType"
-            [id]="'radio-button-group-1'"
+            [title]="'Course type'"
             [options]="courseTypeOptions"
             [control]="fieldsetExample.controls['courseType']"
-            [errorMsg]="errorCourseType"
           />
           <fudis-date-range [startDate]="startDate" [endDate]="endDate" />
         </fudis-grid>
@@ -77,26 +67,6 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
   `,
 })
 class FieldsetExampleComponent {
-  fieldsetId = 'unique-fieldset-id';
-
-  title = 'Fill in course information';
-
-  helpText = 'Please fill in course information.';
-
-  labelName = 'Course name';
-
-  labelDescription = 'Course description';
-
-  labelTeacher = 'Responsible teacher';
-
-  labelEmail = 'Contact email';
-
-  labelStartDate = 'Start date';
-
-  labelEndDate = 'End date';
-
-  labelCourseType = 'Course type';
-
   fieldsetExample = new FormGroup({
     name: new FormGroup(
       {
