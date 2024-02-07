@@ -24,7 +24,7 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective implements 
       this._languageOptions = this._languageBadgeGroupService.getLanguages();
       this._translations = _translationService.getTranslations();
       this._groupLabel = this._translations().LANGUAGE_BADGE.ARIA_LABEL.TRANSLATIONS;
-      this.setLanguageOptions();
+      this._setLanguageOptions();
     });
   }
 
@@ -69,20 +69,20 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective implements 
   protected _languageLabels: { key: FudisLanguageAbbr; label: string }[] = [];
 
   ngOnInit(): void {
-    this.setLanguageOptions();
+    this._setLanguageOptions();
   }
 
   /**
    * Emits clicked badge lang output on click
    */
-  updateLanguage(value: FudisLanguageAbbr) {
+  protected _updateLanguage(value: FudisLanguageAbbr) {
     this.handleBadgeClick.emit(value);
   }
 
   /**
    * Fetches proper translated label for corresponding language
    */
-  getLabel(language: FudisLanguageAbbr): string {
+  private _getLabel(language: FudisLanguageAbbr): string {
     const keyValue: string = language.toUpperCase();
 
     return this._translations().LANGUAGE_BADGE.ARIA_LABEL[
@@ -93,11 +93,11 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective implements 
   /**
    * Creates an array to loop in template of wanted Language Badges
    */
-  setLanguageOptions(): void {
+  private _setLanguageOptions(): void {
     this._languageLabels = [];
 
     this._languageOptions().forEach((language) => {
-      const newItem = { key: language, label: this.getLabel(language) };
+      const newItem = { key: language, label: this._getLabel(language) };
       this._languageLabels.push(newItem);
     });
   }
