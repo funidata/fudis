@@ -24,14 +24,18 @@ import { FudisValidators } from '../../../utilities/form/validators';
         [tooltip]="'I am here to give you additional guidance'"
         [tooltipPosition]="'right'"
         [tooltipToggle]="false"
-      >
-      </fudis-text-area>
+      />
       <fudis-text-area
         [control]="secondTextAreaControl"
         [label]="'Required Text Area with max and min character length'"
         [helpText]="'This is an example Text Area with multiple validations.'"
-      >
-      </fudis-text-area>
+      />
+      <fudis-text-area
+        [control]="thirdTextAreaControl"
+        [label]="'Disabled text area'"
+        [helpText]="'You should be able to focus on this text-area but not insert any values'"
+        [disabled]="true"
+      />
     </form>
   `,
 })
@@ -56,6 +60,11 @@ class TextAreaWithFormControlExampleComponent {
   ]);
 
   secondTextAreaControl: FormControl = new FormControl('', this.validatorsForSecondTextInput);
+
+  thirdTextAreaControl: FormControl = new FormControl(
+    '',
+    FudisValidators.minLength(20, 'Write at least 20 characters'),
+  );
 
   mainFormGroup: FormGroup = this._formBuilder.group({
     firstTextAreaControl: this.firstTextAreaControl,

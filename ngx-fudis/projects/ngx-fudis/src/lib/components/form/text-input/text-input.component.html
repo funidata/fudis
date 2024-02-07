@@ -25,8 +25,11 @@
     [id]="id"
     [attr.type]="type"
     [class.fudis-form-input--invalid]="(control.touched && control.invalid) || invalidState"
+    [class.fudis-form-input--disabled]="disabled"
     [attr.aria-describedby]="id + '_guidance'"
     [attr.required]="_required ? true : null"
+    [attr.aria-disabled]="disabled"
+    [readonly]="disabled"
   />
   <fudis-guidance
     *ngIf="!disableGuidance"

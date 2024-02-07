@@ -5,6 +5,7 @@ import { ButtonComponent } from '../button/button.component';
 import { DialogComponent } from './dialog.component';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { AlertGroupComponent } from '../alert/alert-group/alert-group.component';
+import { getElement } from '../../utilities/tests/utilities';
 
 describe('DialogComponent', () => {
   let component: DialogComponent;
@@ -29,26 +30,47 @@ describe('DialogComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have correct size attribute', () => {
-    expect(component.size).toBe('md');
+  describe('HTML attributes', () => {
+    it('should have CSS classes according to given size Input', () => {
+      const dialogEl = getElement(fixture, '.fudis-dialog');
+      component.ngOnInit();
 
-    component.size = 'sm';
-    fixture.detectChanges();
-    component.ngOnInit();
+      expect(component.size).toEqual('md');
+      expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__md');
 
-    expect(component.size).toBe('sm');
+      component.size = 'sm';
+      fixture.detectChanges();
+      component.ngOnInit();
 
-    component.size = 'lg';
-    fixture.detectChanges();
-    component.ngOnInit();
+      expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__sm');
 
-    expect(component.size).toBe('lg');
+      component.size = 'lg';
+      fixture.detectChanges();
+      component.ngOnInit();
 
-    component.size = 'initial';
-    fixture.detectChanges();
-    component.ngOnInit();
+      expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__lg');
 
-    expect(component.size).toBe('initial');
+      component.size = 'xl';
+      fixture.detectChanges();
+      component.ngOnInit();
+
+      expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__xl');
+
+      component.size = 'initial';
+      fixture.detectChanges();
+      component.ngOnInit();
+
+      expect(dialogEl.className).toEqual('fudis-dialog fudis-dialog__size__initial');
+    });
+
+    it('should have CSS class for close button', () => {
+      component.closeButtonPositionAbsolute = true;
+      fixture.detectChanges();
+
+      const closeButtonEl = getElement(fixture, '.fudis-dialog fudis-button');
+
+      expect(closeButtonEl.className).toEqual('fudis-dialog__close fudis-dialog__close__absolute');
+    });
   });
 
   it('should call open signal on initialisation', () => {

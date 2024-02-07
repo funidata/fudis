@@ -58,7 +58,6 @@
         position: absolute;
         place-content: center;
 
-        /* stylelint-disable-next-line max-nesting-depth */
         &:focus {
           @include focus.focus-checkbox;
         }

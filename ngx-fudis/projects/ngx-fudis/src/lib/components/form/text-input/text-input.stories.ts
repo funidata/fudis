@@ -54,6 +54,12 @@ import { FudisValidators } from '../../../utilities/form/validators';
         [type]="'number'"
         [size]="'sm'"
       />
+      <fudis-text-input
+        [control]="mainFormGroup.controls['forDisabled']"
+        [label]="'Disabled text-input'"
+        [helpText]="'You should be able to focus on this input but not insert any values'"
+        [disabled]="true"
+      />
     </form>
   `,
 })
@@ -95,6 +101,7 @@ class TextInputWithFormControlExampleComponent {
       null,
       FudisValidators.pattern(/^[A-Z \d\W]+$/, 'YOU USED LOW CAPS! SHAME ON YOU!'),
     ),
+    forDisabled: new FormControl('', [FudisValidators.maxLength(100, 'Too long input')]),
   });
 }
 

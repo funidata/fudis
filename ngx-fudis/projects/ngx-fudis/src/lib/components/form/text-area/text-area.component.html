@@ -15,6 +15,7 @@
     [formControl]="control"
     (blur)="onBlur($event)"
     [class.fudis-form-input--invalid]="(control.touched && control.invalid) || invalidState"
+    [class.fudis-form-input--disabled]="disabled"
     [id]="id"
     [attr.aria-describedby]="id + '_guidance'"
     [attr.aria-invalid]="
@@ -23,6 +24,8 @@
     [attr.minLength]="minLength"
     [attr.maxLength]="maxLength"
     [attr.required]="_required ? true : null"
+    [attr.aria-disabled]="disabled"
+    [readonly]="disabled"
   >
   </textarea>
   <fudis-guidance
