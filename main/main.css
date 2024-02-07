@@ -1863,20 +1863,20 @@ html {
 }
 
 /* stylelint-disable-next-line selector-no-qualifying-type */
-input.fudis-form-input {
+.fudis-form-input {
   /* stylelint-disable-next-line selector-no-qualifying-type */
   /* stylelint-disable-next-line selector-no-qualifying-type */
 }
-input.fudis-form-input--invalid[aria-invalid=true] {
+.fudis-form-input--invalid[aria-invalid=true] {
   border: 1px solid #b83c2e;
 }
-input.fudis-form-input--disabled {
+.fudis-form-input--disabled {
   border: 1px dashed #727272;
   /* stylelint-disable-next-line property-disallowed-list */
   background-color: #f1f1f1;
   cursor: default;
 }
-input.fudis-form-input--disabled[aria-disabled=true] {
+.fudis-form-input--disabled[aria-disabled=true] {
   border: 1px dashed #727272;
 }
 
