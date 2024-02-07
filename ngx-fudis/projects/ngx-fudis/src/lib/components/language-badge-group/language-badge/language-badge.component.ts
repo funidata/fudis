@@ -59,6 +59,9 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnIni
    */
   @Output() handleClick = new EventEmitter<FudisLanguageAbbr>();
 
+  /**
+   * Label string of the badge
+   */
   protected _label: string;
 
   /**
@@ -77,18 +80,24 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnIni
   protected _translations: Signal<FudisTranslationConfig>;
 
   ngOnInit(): void {
-    this.setLabel();
+    this._setLabel();
   }
 
   ngOnChanges(): void {
-    this.setLabel();
+    this._setLabel();
   }
 
-  handleLanguageSelect(): void {
+  /**
+   * Emit badge's language on click
+   */
+  protected _handleLanguageSelect(): void {
     this.handleClick.emit(this.language);
   }
 
-  setLabel(): void {
+  /**
+   * Define correct label for Badge
+   */
+  private _setLabel(): void {
     if (this.selected && this.variant !== 'missing') {
       this._label = `${this.label} ${this._selectedLabel}`;
     } else if (this.selected && this.variant === 'missing') {
