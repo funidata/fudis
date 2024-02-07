@@ -67,7 +67,7 @@ export { LinkComponent } from './lib/components/link/link.component';
 export { NotificationsDirective } from './lib/directives/content-projection/notifications/notifications.directive';
 export { NotificationComponent } from './lib/components/notification/notification.component';
 
-export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
+// export { RadioButtonGroupComponent } from './lib/components/form/radio-button-group/radio-button-group.component';
 export { SpacingDirective } from './lib/directives/spacing/spacing.directive';
 export { SectionComponent } from './lib/components/section/section.component';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';

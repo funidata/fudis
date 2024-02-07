@@ -4,6 +4,7 @@ import { FudisRadioButtonOption, FudisFormErrors, FudisInputSize } from '../../.
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 
+// TODO: Refactor component to work in similar fashion as Checkbox Group, update docs and tests
 @Component({
   selector: 'fudis-radio-button-group',
   templateUrl: './radio-button-group.component.html',
