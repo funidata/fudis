@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/blocks";
 
-<Meta title="Documentation/Development/Creating a Release" />
+<Meta title="Documentation/Development/Creating Release" />
 
 # Creating a Release
 
@@ -37,6 +37,7 @@ Find release notes for the latest [Fudis Version](https://github.com/funidata/fu
   > This will run a release shell script which creates a new branch named `release` and automatically runs `npm version` command with given argument.\
   > `npm version` will increment version number in `package.json` files, commits the changes, tags that commit as the new version, and pushes commits and tags to GitHub.
 - Create Pull Request
+- Merge created Pull Request
 - Go to project's GitHub main page **Releases**
 - Select **Draft a new release**
 - Select **Choose a tag**. Choose the newest generated version tag from a list
@@ -47,7 +48,6 @@ Find release notes for the latest [Fudis Version](https://github.com/funidata/fu
 - Check that **Set as the latest release** checkbox is selected
 - Publish release
 - Check that the npm package has [updated to latest version](https://www.npmjs.com/package/@funidata/ngx-fudis)
-- Merge created Pull Request
 
 ### Note!
 
