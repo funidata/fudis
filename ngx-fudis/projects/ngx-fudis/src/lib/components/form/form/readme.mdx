@@ -4,4 +4,132 @@ import { Meta } from "@storybook/blocks";
 
 # Form
 
-TBD
+Fudis Form is a layout component which enables easy flow for building forms. It constructs from three main sections: header content, header actions and main content.
+
+
+## Directives
+
+### Header Content
+
+Header content is additional information displayed under the actual form heading.
+Header content is assigned through Fudis Header Directive content projection with **fudisHeader** selector.
+There are no restrictions on header content but it is advised to use Fudis Components only.
+
+```
+<ng-template fudisHeader>
+  <your-content-here />
+</ng-template>
+```
+
+### Header Actions
+
+Header actions are buttons positioned on top of the form.
+Header actions are assigned through Fudis Actions Directive content projection with **fudisActions** selector.
+Fudis Actions Directive also needs `type` input which has to be set as '_form_'.
+There are no restrictions on header actions content but it is advised to use Fudis Buttons only.
+
+```
+<ng-template fudisActions [type]="'form'">
+  <your-content-here />
+</ng-template>
+```
+
+### Main Content
+
+Main content is where the form components live.
+Main content is assigned through Fudis Content Directive content projection with **fudisContent** selector.
+Fudis Content Directive also needs `type` input which has to be set as '_form_'.
+There are no restrictions on main content but it is advised to use Fudis Form Components only.
+
+```
+<ng-template fudisContent [type]="'form'">
+  <your-content-here />
+</ng-template>
+```
+
+
+## Form Inputs
+
+Aside from content projection Fudis Form will create heading, badge and error-summary based on given properties.
+
+Fudis Form also extends Fudis Grid Api Directive which allows the modification and usage of all [Grid properties](/docs/foundations-grid--documentation).
+
+### Heading
+
+Fudis Form is not valid without a heading.
+**Mandatory properties** are `title` (title text content) and `titleLevel` (the semantic heading level), additionally it is possible to change the visual size of the heading with `titleSize`, which otherwise defaults to `xl`.
+See possible heading levels and sizes from [Heading Documentation](/docs/components-typography-heading--documentation).
+
+### Badge
+
+Fudis Badge can be attached to form heading by adding `badge` (badge variant) and `badgeText` (badge text content) properties.
+See badge variants from [Badge Documentation](/docs/components-badge--documentation).
+
+### Error Summary
+
+Error Summary visibility can be modified with **mandatory** `errorSummaryVisible` boolean property.
+
+Help text displayed on top of Error Summary should be added with **mandatory** `errorSummaryHelpText` property.
+
+Type of the clickable link redirecting and moving focus to invalid input is set with `errorSummaryLinkType`. Possible values are `href` and `router` (default).
+
+More about [Error Summary](/docs/components-form-error-summary--documentation) and [Error Summary Service](docs/components-form-error-summary--documentation).
+
+
+## Code Example
+
+This is a simple example on how to use `fudis-form`
+
+```
+    <fudis-form
+      [title]="'Example form heading'"
+      [titleLevel]="2"
+      [helpText]="'Here is some more information about this form'"
+      [errorSummaryLinkType]="'href'"
+      [errorSummaryHelpText]="'There are errors in this form.'"
+      [errorSummaryVisible]="errorSummaryVisible"
+    >
+      <ng-template fudisHeader>
+        <fudis-description-list [columns]="1" [variant]="'compact'" [data]="fakeDlData" />
+      </ng-template>
+      <ng-template fudisActions [type]="'form'">
+        <fudis-button [label]="'Submit'" (handleClick)="submitForm()" />
+      </ng-template>
+      <ng-template fudisContent [type]="'form'">
+        <fudis-text-input
+          [label]="'Example text-input'"
+          [control]="formExample.controls['exampleTextInput']"
+        />
+        <fudis-radio-button-group
+          [title]="'Example radio-button-group'"
+          [options]="exampleRadioButtonGroupOptions"
+          [control]="formExample.controls['exampleRadioButtonGroup']"
+        />
+      </ng-template>
+    </fudis-form>
+```
+
+```
+...
+
+  formExample = new FormGroup({
+    exampleTextInput: new FormControl(null, FudisValidators.minLength(5, 'Input requires at least 5 characters.')),
+    exampleRadioButtonGroup: new FormControl(null, FudisValidators.required('This is required field.')),
+  });
+
+  exampleRadioButtonGroupOptions: FudisRadioButtonOption[] = [
+    { value: 'basic', label: 'Basic', id: 'courseType-1', name: 'courseType' },
+    { value: 'advanced', label: 'Advanced', id: 'courseType-2', name: 'courseType' },
+  ];
+
+  submitForm(): void {
+    this.formExample.markAllAsTouched();
+
+    if (this.formExample.invalid) {
+      this.errorSummaryVisible = true;
+      this._errorSummaryService.reloadErrors();
+    } else {
+      this.errorSummaryVisible = false;
+    }
+  }
+```
