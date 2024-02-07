@@ -46,6 +46,8 @@ class MultiselectMockComponent {
   control = new FormControl<FudisSelectOption[] | null>(null);
 }
 
+// TODO: add test for disabled states
+
 describe('MultiselectComponent', () => {
   let component: MultiselectComponent;
   let fixture: ComponentFixture<MultiselectComponent>;
@@ -210,10 +212,7 @@ describe('MultiselectComponent', () => {
     });
 
     it('should be visible by default', () => {
-      componentMock.control = new FormControl<FudisSelectOption[]>([
-        defaultOptions[0],
-        defaultOptions[2],
-      ]);
+      componentMock.control.patchValue([defaultOptions[0], defaultOptions[2]]);
       fixtureMock.detectChanges();
 
       const chipList = getElement(fixtureMock, '.fudis-multiselect-chip-list');

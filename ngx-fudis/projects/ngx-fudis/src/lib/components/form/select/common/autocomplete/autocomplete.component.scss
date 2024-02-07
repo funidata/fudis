@@ -25,6 +25,13 @@
       transform: translateY(-50%);
     }
 
+    &--disabled {
+      .fudis-button[aria-disabled="true"] {
+        @include colorMixins.bg-color("transparent");
+        @include borders.outline("1px", "solid", "transparent");
+      }
+    }
+
     &.fudis-icon-host,
     &.fudis-button-host svg {
       pointer-events: none;

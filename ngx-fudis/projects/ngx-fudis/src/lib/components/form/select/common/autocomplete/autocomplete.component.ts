@@ -78,6 +78,11 @@ export class SelectAutocompleteComponent {
   @Input() placeholder: string;
 
   /**
+   * To disable the input.
+   */
+  @Input() disabled: boolean = false;
+
+  /**
    * Enable / disable autocomplete variant's Clear button. When 'false' autocomplete acts like a dropdown and opens on focus and hides 'Clear' icon button.
    */
   @Input() autocompleteClearButton: boolean = true;
@@ -232,17 +237,19 @@ export class SelectAutocompleteComponent {
    * @param resetControlValue reset or not control value, used with single selects
    */
   protected _clearAutocompleteFilterText(): void {
-    if (this.autocompleteClearButton) {
-      this._preventDropdownReOpen = true;
+    if (!this.disabled && !this.control.disabled) {
+      if (this.autocompleteClearButton) {
+        this._preventDropdownReOpen = true;
+      }
+      this.triggerFilterTextUpdate.emit('');
+
+      (this.inputRef.nativeElement as HTMLInputElement).value = '';
+
+      if (!this.multiselect) {
+        this.triggerClearFilterButtonClick.emit();
+      }
+
+      this.inputRef.nativeElement.focus();
     }
-    this.triggerFilterTextUpdate.emit('');
-
-    (this.inputRef.nativeElement as HTMLInputElement).value = '';
-
-    if (!this.multiselect) {
-      this.triggerClearFilterButtonClick.emit();
-    }
-
-    this.inputRef.nativeElement.focus();
   }
 }
