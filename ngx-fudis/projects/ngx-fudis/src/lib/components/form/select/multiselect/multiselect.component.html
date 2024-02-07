@@ -14,7 +14,7 @@
       #inputRef
       tabindex="0"
       class="fudis-select__input fudis-select__input__dropdown"
-      [class.fudis-form-input--disabled]="disabled"
+      [class.fudis-form-input--disabled]="disabled || control.disabled"
       [class.fudis-form-input--invalid]="
         (control.touched && control.invalid) || (control.touched && invalidState)
       "
@@ -27,7 +27,7 @@
       (keydown)="_dropdownKeypress($event, focusSelector)"
       [attr.aria-autocomplete]="'none'"
       [attr.aria-expanded]="_dropdownOpen"
-      [attr.aria-disabled]="disabled"
+      [attr.aria-disabled]="disabled || control.disabled"
       [attr.required]="_required ? true : null"
       [attr.aria-labelledby]="id + '-label'"
       [attr.aria-describedby]="id + '_guidance'"
@@ -46,7 +46,7 @@
       *ngIf="!autocomplete"
       class="fudis-select__input-wrapper__icon"
       [icon]="'chevron'"
-      [rotate]="_dropdownOpen ? 'ccw-90' : 'cw-90'"
+      [rotate]="disabled || control.disabled ? 'cw-90' : _dropdownOpen ? 'ccw-90' : 'cw-90'"
     />
     <fudis-select-autocomplete
       *ngIf="autocomplete"
@@ -54,6 +54,7 @@
       [id]="id"
       [control]="control"
       [placeholder]="placeholder"
+      [disabled]="disabled"
       [dropdownOpen]="_dropdownOpen"
       [required]="_required"
       [invalidState]="invalidState"
@@ -70,7 +71,7 @@
     />
   </div>
   <fudis-select-dropdown
-    *ngIf="_openedOnce"
+    *ngIf="_openedOnce && !disabled && !control.disabled"
     #dropdownRef
     [open]="_dropdownOpen"
     [multiselect]="true"
@@ -95,7 +96,7 @@
     [for]="id"
     [control]="control"
   />
-  <ng-container *ngIf="control.value && showSelectionChips">
+  <ng-container *ngIf="showSelectionChips && _sortedSelectedOptions.length > 0">
     <span [attr.id]="id + '-remove-items'" class="fudis-visually-hidden">{{
       _translationRemoveItem
     }}</span>
