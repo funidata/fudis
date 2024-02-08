@@ -125,4 +125,6 @@ describe('ButtonComponent', () => {
       expect(getButton().textContent).toContain('Submit me!');
     });
   });
+
+  // TODO: tests for menu button and icon rotate
 });
