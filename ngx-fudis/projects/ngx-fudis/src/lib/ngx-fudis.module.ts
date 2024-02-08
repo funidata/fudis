@@ -216,8 +216,8 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
    */
   exports: [
     ActionsDirective,
-    AlertComponent,
-    AlertGroupComponent,
+    // AlertComponent,
+    // AlertGroupComponent,
     BadgeComponent,
     BodyTextComponent,
     BreadcrumbsComponent,
