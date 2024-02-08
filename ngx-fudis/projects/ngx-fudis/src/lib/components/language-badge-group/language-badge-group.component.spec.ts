@@ -54,5 +54,7 @@ describe('LanguageBadgeGroupComponent', () => {
 
       expect(missingLanguage).toContain('sv');
     });
+
+    // TODO: add test for output emit
   });
 });
