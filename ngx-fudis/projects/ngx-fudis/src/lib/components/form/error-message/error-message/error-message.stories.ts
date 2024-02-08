@@ -15,26 +15,38 @@ import { FudisValidators } from '../../../../utilities/form/validators';
         fudisGridItem
         [columns]="'stretch'"
         [control]="control"
-        [label]="'Required text input'"
+        [label]="'Focus to input'"
       >
         <fudis-error-message *ngIf="_errorExists" [message]="observableMessage" />
         <fudis-error-message *ngIf="_errorExists" [message]="stringMessage" />
       </fudis-text-input>
-      <fudis-button (click)="toggleCustomError()" [label]="'Toggle custom error'" />
-      <fudis-button (click)="switchErrorMessage()" [label]="'Switch message content'" />
+      <fudis-button
+        (click)="toggleCustomError()"
+        [label]="'Toggle custom errors'"
+        [variant]="'secondary'"
+      />
+      <fudis-button
+        (click)="switchErrorMessage()"
+        [label]="'Switch message content'"
+        [variant]="'secondary'"
+      />
     </fudis-grid>
   `,
 })
 class TextInputWithErrorMessageComponent {
   constructor() {
-    this.control = new FormControl('', FudisValidators.required('This field is required.'));
+    this.control = new FormControl(
+      '',
+      FudisValidators.required('This validation message is send by Fudis Validators'),
+    );
   }
 
   observableMessage: Subject<string> = new BehaviorSubject<string>(
-    'This is a custom error observable message coming from fudis-error-message element',
+    'This is a custom observable error message that is placed with content projection',
   );
 
-  stringMessage: string = 'This is custom string message';
+  stringMessage: string =
+    'This is custom string error message that is placed with content projection';
 
   customErrorExists: FormControlOptions;
 
@@ -42,7 +54,7 @@ class TextInputWithErrorMessageComponent {
 
   control: FormControl<string | null>;
 
-  protected _errorExists: boolean = true;
+  protected _errorExists: boolean = false;
 
   toggleCustomError(): void {
     this._errorExists = !this._errorExists;
@@ -50,12 +62,15 @@ class TextInputWithErrorMessageComponent {
 
   switchErrorMessage(): void {
     if (this.originalMessage) {
-      this.observableMessage.next('Observable value changed, so now this is me!');
+      this.observableMessage.next('Observable value has been changed in custom error message');
 
-      this.stringMessage = 'String message value changed to this!';
+      this.stringMessage = 'String message value has been changed in custome error message';
     } else {
-      this.observableMessage.next('Custom message can be observable string like this');
-      this.stringMessage = 'Or just a plain string like this one!';
+      this.observableMessage.next(
+        'This is a custom observable error message that is placed with content projection',
+      );
+      this.stringMessage =
+        'This is custom string error message that is placed with content projection';
     }
 
     this.originalMessage = !this.originalMessage;
@@ -84,10 +99,6 @@ export default {
 
 export const ErrorMessageExample: StoryFn = () => ({
   template: `
-<!--
-Full code example available in:
-components/form/error-message/error-message/error-message.stories.ts
--->
-<example-text-input-with-error-message/>
+<example-text-input-with-error-message></example-text-input-with-error-message>
 	`,
 });

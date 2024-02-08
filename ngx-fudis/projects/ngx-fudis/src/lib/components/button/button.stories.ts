@@ -24,7 +24,7 @@ export default {
       control: { type: 'radio' },
     },
     icon: {
-      control: 'text',
+      control: { type: 'text' },
     },
   },
 } as Meta;

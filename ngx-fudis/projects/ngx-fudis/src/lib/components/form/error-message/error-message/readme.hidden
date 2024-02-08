@@ -26,8 +26,12 @@ The following example demostrates how custom error message can be used along wit
 
 - [Text Input](/docs/components-form-text-input--documentation)
 - [Text Area](/docs/components-form-text-area--documentation)
+- [Date Picker](/docs/components-form-date-datepicker--documentation)
+- [Date Range](/docs/components-form-date-date-range--documentation)
 - [Select](/docs/components-form-select--documentation)
+- [Radio Button Group](/docs/components-form-radio-button-group--documentation)
 - [Checkbox Group](/docs/components-form-checkbox-group--documentation)
+- [Input with Language Options](/docs/components-form-input-with-language-options--documentation)
 
 ## Usage Guidelines
 
@@ -50,6 +54,21 @@ Message parameter can be passed either as a string or as an observable string.
 </fudis-text-input>
 ```
 
+### Error Message with Date Range Component
+
+When it is mandatory to target error message to a single Form Control in Date Range component, use `fudisDateStartError`and `fudisDateEndError` directives for selecting between start and end time inputs.
+
+```
+<fudis-date-range [startDate]="startDate" [endDate]="endDate">
+	<ng-template fudisDateStartError>
+		<fudis-error-message [message]="'Error on the start date'" *ngIf="startDateErrorCondition" />
+	</ng-template>
+	<ng-template fudisDateEndError>
+		<fudis-error-message [message]="'Error on the end date'" *ngIf="endDateErrorCondition" />
+	</ng-template>
+</fudis-date-range>
+```
+
 ## Accessibility
 
 - Related Form field label and id are linked to error message
@@ -60,5 +79,9 @@ Message parameter can be passed either as a string or as an observable string.
 - [Error Summary](/docs/components-form-error-summary--documentation)
 - [Text Input](/docs/components-form-text-input--documentation)
 - [Text Area](/docs/components-form-text-area--documentation)
+- [Date Picker](/docs/components-form-date-datepicker--documentation)
+- [Date Range](/docs/components-form-date-date-range--documentation)
 - [Select](/docs/components-form-select--documentation)
+- [Radio Button Group](/docs/components-form-radio-button-group--documentation)
 - [Checkbox Group](/docs/components-form-checkbox-group--documentation)
+- [Input with Language Options](/docs/components-form-input-with-language-options--documentation)
