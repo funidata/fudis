@@ -11,6 +11,7 @@ import {
 import { FieldSetComponent } from './fieldset.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
+import readme from './readme.mdx';
 
 @Component({
   selector: 'example-fieldset',
@@ -145,6 +146,11 @@ export default {
       providers: [importProvidersFrom(BrowserAnimationsModule)],
     }),
   ],
+  parameters: {
+    docs: {
+      page: readme,
+    },
+  },
 } as Meta;
 
 const html = String.raw;
