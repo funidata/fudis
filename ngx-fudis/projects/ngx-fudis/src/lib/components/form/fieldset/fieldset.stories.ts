@@ -56,11 +56,11 @@ import readme from './readme.mdx';
             [label]="'Contact email'"
             [helpText]="'So that students can ask for more time on their homework.'"
           />
-          <fudis-radio-button-group
+          <!-- <fudis-radio-button-group
             [title]="'Course type'"
             [options]="courseTypeOptions"
             [control]="fieldsetExample.controls['courseType']"
-          />
+          /> -->
           <fudis-date-range [startDate]="startDate" [endDate]="endDate" />
         </fudis-grid>
       </ng-template>
