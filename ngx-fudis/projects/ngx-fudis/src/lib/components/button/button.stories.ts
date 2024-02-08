@@ -15,8 +15,16 @@ export default {
     },
   },
   argTypes: {
+    size: {
+      options: ['medium', 'small', 'icon-only'],
+      control: { type: 'radio' },
+    },
+    variant: {
+      options: ['primary', 'secondary', 'tertiary'],
+      control: { type: 'radio' },
+    },
     icon: {
-      control: { type: 'text' },
+      control: 'text',
     },
   },
 } as Meta;
@@ -31,6 +39,7 @@ export const Button = Template.bind({});
 Button.args = {
   variant: 'primary',
   label: 'Button',
+  size: 'medium',
 };
 
 export const IconButton = Template.bind({});
