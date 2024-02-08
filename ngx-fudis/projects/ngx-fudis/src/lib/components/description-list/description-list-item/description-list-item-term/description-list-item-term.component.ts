@@ -29,12 +29,12 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
     effect(() => {
       this._currentLanguage = _translationService.getLanguage();
       this._languageOptions = this._languageBadgeGroupService.getLanguages();
-      this.setLanguageOptions();
+      this._setLanguageOptions();
     });
   }
 
   /**
-   * Languages input renders a Fudis language badge component for displaying Description List Item Detail values in given languages.
+   * Renders Fudis Language Badge Component for displaying Description List Item Detail values in given languages
    */
   @Input() languages: boolean = false;
 
@@ -54,7 +54,7 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
   protected _selectedLanguage: FudisLanguageAbbr;
 
   /**
-   * Fudis confiq language
+   * Fudis config language
    */
   private _currentLanguage: FudisLanguageAbbr;
 
@@ -69,20 +69,20 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
   private _firstLoadFinished: boolean = false;
 
   ngAfterContentInit(): void {
-    this.setLanguageOptions();
+    this._setLanguageOptions();
   }
 
   /**
    * When Badge button is clicked, adjust host's CSS classes, so in SCSS other languages are set to 'display: none' and selected one is set to 'display: block'
    */
-  setSelectedLanguage(lang: FudisLanguageAbbr): void {
+  protected _setSelectedLanguage(lang: FudisLanguageAbbr): void {
     if (this.languages) {
       this._elementRef.nativeElement.classList.value = `fudis-dt-host fudis-dt-host__${lang}`;
     }
     this._selectedLanguage = lang;
   }
 
-  setLanguageOptions(): void {
+  private _setLanguageOptions(): void {
     /**
      * Get from parent dl-element list of available languages in dd-elements
      */
@@ -104,9 +104,9 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
       this._availableLanguages.includes(this._currentLanguage)
     ) {
       this._firstLoadFinished = true;
-      this.setSelectedLanguage(this._currentLanguage);
+      this._setSelectedLanguage(this._currentLanguage);
     } else if (this.languages && this._availableLanguages.length > 0) {
-      this.setSelectedLanguage(this._availableLanguages[0]);
+      this._setSelectedLanguage(this._availableLanguages[0]);
     }
   }
 }

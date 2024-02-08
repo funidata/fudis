@@ -84,6 +84,6 @@ describe('LanguageBadgeComponent', () => {
       );
     });
 
-    // TODO:
+    // TODO: Add test for output event
   });
 });
