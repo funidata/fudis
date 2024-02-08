@@ -86,6 +86,8 @@ describe('SelectComponent', () => {
     fixture.detectChanges();
   }
 
+  // TODO: add test for disabled states
+
   describe('Dropdown', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(SelectComponent);

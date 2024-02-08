@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { FudisSelectOption } from 'dist/ngx-fudis/lib/types/forms';
+import { FudisSelectOption } from '../../../../ngx-fudis/src/lib/types/forms';
 
 type MyForm = {
   dropdownFirst: FormControl<FudisSelectOption[] | null>;
