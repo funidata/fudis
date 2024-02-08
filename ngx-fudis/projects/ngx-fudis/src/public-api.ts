@@ -31,10 +31,10 @@ export {
   DialogTitleDirective,
 } from './lib/directives/dialog/dialog-directives';
 export { DialogComponent } from './lib/components/dialog/dialog.component';
-export { DescriptionListComponent } from './lib/components/description-list/description-list.component';
-export { DescriptionListItemComponent } from './lib/components/description-list/description-list-item/description-list-item.component';
-export { DescriptionListItemDetailsComponent } from './lib/components/description-list/description-list-item/description-list-item-details/description-list-item-details.component';
-export { DescriptionListItemTermComponent } from './lib/components/description-list/description-list-item/description-list-item-term/description-list-item-term.component';
+// export { DescriptionListComponent } from './lib/components/description-list/description-list.component';
+// export { DescriptionListItemComponent } from './lib/components/description-list/description-list-item/description-list-item.component';
+// export { DescriptionListItemDetailsComponent } from './lib/components/description-list/description-list-item/description-list-item-details/description-list-item-details.component';
+// export { DescriptionListItemTermComponent } from './lib/components/description-list/description-list-item/description-list-item-term/description-list-item-term.component';
 export { FudisAlertService } from './lib/services/alert/alert.service';
 export { FudisBreakpointService } from './lib/services/breakpoint/breakpoint.service';
 export { FudisDialogService } from './lib/services/dialog/dialog.service';
