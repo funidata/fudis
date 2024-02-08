@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { MockComponent } from 'ng-mocks';
+import { MockComponents } from 'ng-mocks';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import {
@@ -16,6 +16,7 @@ import { GuidanceComponent } from '../../guidance/guidance.component';
 import { LabelComponent } from '../../label/label.component';
 import { IconComponent } from '../../../icon/icon.component';
 
+// TODO: write tests for input visible, controlName and variant
 @Component({
   selector: 'fudis-text-input-with-validator-error-message',
   template: `
@@ -48,8 +49,7 @@ describe('ValidatorErrorMessageComponent', () => {
         TextInputWithValidatorErrorMessageComponent,
         TextInputComponent,
         GuidanceComponent,
-        LabelComponent,
-        MockComponent(IconComponent),
+        MockComponents(IconComponent, LabelComponent),
       ],
       imports: [ReactiveFormsModule],
       providers: [],
