@@ -136,7 +136,7 @@ export class FieldSetComponent
     this._setFieldsetId();
 
     this._title = this.title;
-    this.addToErrorSummary();
+    this._addToErrorSummary();
     this._setClasses();
   }
 
@@ -149,19 +149,19 @@ export class FieldSetComponent
   ngOnChanges(): void {
     if (this.title !== this._title && this.id) {
       this._title = this.title;
-      this.addToErrorSummary();
+      this._addToErrorSummary();
     }
     this._setClasses();
   }
 
   ngOnDestroy(): void {
-    this.removeFromErrorSummary();
+    this._removeFromErrorSummary();
   }
 
   /**
    * Add Fieldset title to Error Summary
    */
-  addToErrorSummary(): void {
+  private _addToErrorSummary(): void {
     if (this.errorSummaryBreadcrumb) {
       this._fieldsetInfo = {
         id: this.id,
@@ -177,7 +177,7 @@ export class FieldSetComponent
   /**
    * Remove Fieldset title from Error Summary
    */
-  removeFromErrorSummary(): void {
+  private _removeFromErrorSummary(): void {
     if (this.errorSummaryBreadcrumb && this._fieldsetSent) {
       this._errorSummaryService.removeFieldset(this._fieldsetInfo);
     }
