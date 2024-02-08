@@ -34,7 +34,7 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
   }
 
   /**
-   * Languages input renders a Fudis language badge component for displaying Description List Item Detail values in given languages.
+   * Renders Fudis Language Badge Component for displaying Description List Item Detail values in given languages
    */
   @Input() languages: boolean = false;
 
@@ -54,7 +54,7 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
   protected _selectedLanguage: FudisLanguageAbbr;
 
   /**
-   * Fudis confiq language
+   * Fudis config language
    */
   private _currentLanguage: FudisLanguageAbbr;
 

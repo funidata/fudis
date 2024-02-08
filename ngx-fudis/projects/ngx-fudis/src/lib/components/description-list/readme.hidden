@@ -1,7 +1,7 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { linkTo } from "@storybook/addon-links";
-import { DescriptionListComponent } from "./description-list.component.js";
-import * as DescriptionListStories from "./description-list.stories.js";
+import { DescriptionListComponent } from "./description-list.component.ts";
+import * as DescriptionListStories from "./description-list.stories.ts";
 import { Source } from "@storybook/blocks";
 
 <Meta title="Components/Description List" />
