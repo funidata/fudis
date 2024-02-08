@@ -30,23 +30,6 @@ export interface FudisRadioButtonOption {
   checked?: boolean;
 }
 
-export type FudisFormErrors = {
-  required?: string;
-  minlength?: string;
-  maxlength?: string;
-  min?: string;
-  max?: string;
-  email?: string;
-  pattern?: string;
-  [key: string]: string | undefined;
-};
-
-export type FudisFormGroupErrors = {
-  atLeastOneRequired?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: FudisFormErrors | any;
-};
-
 export interface FudisSelectOption {
   /** Underlying value of the option */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
