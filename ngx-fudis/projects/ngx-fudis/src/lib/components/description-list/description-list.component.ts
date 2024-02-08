@@ -33,14 +33,18 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
   protected _classList: string[] = [];
 
   ngOnInit(): void {
-    this._classList = this._getClasses();
+    this._setClasses();
   }
 
   ngOnChanges(): void {
-    this._classList = this._getClasses();
+    this._setClasses();
   }
 
-  private _getClasses(): string[] {
+  /**
+   *
+   * To define correct CSS classes
+   */
+  private _setClasses(): void {
     const cssClasses = [];
 
     if (this.variant === 'regular') {
@@ -60,6 +64,6 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 
     const combined = this.classes ? cssClasses.concat(this.classes) : cssClasses;
 
-    return combined;
+    this._classList = combined;
   }
 }

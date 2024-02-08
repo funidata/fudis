@@ -77,14 +77,14 @@ describe('DescriptionListComponent', () => {
     expect(descriptionListItemTermClassName).toContain(classes);
   }
 
-  // FIXME: Use visual regression tests instead of testing style attribute values directly.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function assertDdHasClasses(classes: string, display: string) {
     const descriptionListItemDetailsElement = getDescriptionListDd(classes);
     const descriptionListItemDetilsClassName = descriptionListItemDetailsElement.className ?? '';
-    // const descriptionListItemValueDisplayStyle = getComputedStyle(descriptionListItemDetailsElement).display;
+    const descriptionListItemValueDisplayStyle = getComputedStyle(
+      descriptionListItemDetailsElement,
+    ).display;
 
-    // expect(descriptionListItemValueDisplayStyle).toEqual(display);
+    expect(descriptionListItemValueDisplayStyle).toEqual(display);
     expect(descriptionListItemDetilsClassName).toContain(classes);
   }
 
@@ -150,7 +150,7 @@ describe('DescriptionListComponent', () => {
 
     it('should have respective CSS classes and display style in regular list', () => {
       assertDtHasClasses('fudis-dl__item__term');
-      assertDdHasClasses('fudis-dl__item__details', 'flex');
+      assertDdHasClasses('fudis-dl__item__details', 'block');
     });
 
     it('should have respective CSS classes and display style in compact list', () => {
@@ -158,7 +158,9 @@ describe('DescriptionListComponent', () => {
       component.ngOnChanges();
       fixture.detectChanges();
       assertDtHasClasses('fudis-dl-compact__item__term');
-      assertDdHasClasses('fudis-dl-compact__item__details', 'inline-block');
+      assertDdHasClasses('fudis-dl-compact__item__details', 'block');
     });
   });
+
+  // TODO: missing tests for item, item-details, item-term, langauge features
 });

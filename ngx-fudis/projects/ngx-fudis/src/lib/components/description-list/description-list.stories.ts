@@ -137,7 +137,6 @@ const DescriptionListDataLoopTemplate: StoryFn<DescriptionListComponent> = (
       [marginBottom]="'md'"
       [variant]="variant"
       [disableGrid]="disableGrid"
-      [translation]="true"
     />`,
 });
 
