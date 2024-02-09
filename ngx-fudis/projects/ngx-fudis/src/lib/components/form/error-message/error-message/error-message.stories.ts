@@ -64,7 +64,7 @@ class TextInputWithErrorMessageComponent {
     if (this.originalMessage) {
       this.observableMessage.next('Observable value has been changed in custom error message');
 
-      this.stringMessage = 'String message value has been changed in custome error message';
+      this.stringMessage = 'String message value has been changed in custom error message';
     } else {
       this.observableMessage.next(
         'This is a custom observable error message that is placed with content projection',
