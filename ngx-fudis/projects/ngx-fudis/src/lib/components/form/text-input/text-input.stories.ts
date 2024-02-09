@@ -8,25 +8,18 @@ import {
 } from '@angular/forms';
 import { Component } from '@angular/core';
 import { TextInputComponent } from './text-input.component';
-
-import readme from './readme.mdx';
 import { FudisValidators } from '../../../utilities/form/validators';
+import readme from './readme.mdx';
 
 @Component({
   selector: 'example-text-input-with-form-control',
   template: `
     <form [formGroup]="mainFormGroup">
       <fudis-text-input
-        [control]="mainFormGroup.controls['basic']"
-        [label]="'Basic text input'"
-        [helpText]="'I do not have any validators.'"
-      />
-      <fudis-text-input
         [control]="mainFormGroup.controls['required']"
         [label]="'Required text input'"
         [tooltip]="'This is a tooltip text'"
         [tooltipPosition]="'right'"
-        [tooltipToggle]="false"
         [helpText]="'Please add some content.'"
       >
         <fudis-error-message
@@ -69,7 +62,7 @@ class TextInputWithFormControlExampleComponent {
 
   maxLength = 20;
 
-  minNumber = 1;
+  minNumber = 2;
 
   maxNumber = 5;
 
@@ -92,7 +85,6 @@ class TextInputWithFormControlExampleComponent {
   ];
 
   mainFormGroup: FormGroup = this._formBuilder.group({
-    basic: new FormControl(''),
     required: new FormControl('', FudisValidators.required('This is required field.')),
     email: new FormControl('', this.validatorsForEmail),
     number: new FormControl('', this.validatorsForNumber),
@@ -140,16 +132,17 @@ export default {
 
 const Template: StoryFn<TextInputComponent> = (args: TextInputComponent) => ({
   props: args,
+  template: `<fudis-text-input [control]="control" [label]="label" [helpText]="helpText"></fudis-text-input>`
 });
 
-export const TextInput = Template.bind({});
-TextInput.args = {
+export const Example = Template.bind({});
+Example.args = {
   label: 'Text-input label example',
-  control: new FormControl('', FudisValidators.required('This is required field.')),
+  control: new FormControl(null),
   helpText: 'Example help text',
 };
 
-export const Examples: StoryFn = () => ({
+export const ExamplesWithValidators: StoryFn = () => ({
   template: `
 		<example-text-input-with-form-control></example-text-input-with-form-control>
 	`,
