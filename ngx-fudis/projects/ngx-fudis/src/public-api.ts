@@ -56,7 +56,6 @@ export { GridComponent } from './lib/components/grid/grid/grid.component';
 export { GridDirective } from './lib/directives/grid/grid/grid.directive';
 export { GridItemComponent } from './lib/components/grid/grid-item/grid-item.component';
 export { GridItemDirective } from './lib/directives/grid/grid-item/grid-item.directive';
-export { GuidanceComponent } from './lib/components/form/guidance/guidance.component';
 export { HeaderDirective } from './lib/directives/content-projection/header/header.directive';
 export { HeadingComponent } from './lib/components/typography/heading/heading.component';
 export { IconComponent } from './lib/components/icon/icon.component';

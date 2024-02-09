@@ -16,7 +16,6 @@ import {
   FudisValidatorFn,
   FudisValidatorMessage,
 } from '../../../../utilities/form/validators';
-
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
@@ -26,6 +25,14 @@ import { DatepickerComponent } from '../../date/datepicker/datepicker.component'
 import { InputWithLanguageOptionsComponent } from '../../input-with-language-options/input-with-language-options.component';
 import { CheckboxGroupComponent } from '../../checkbox-group/checkbox-group.component';
 import { RadioButtonGroupComponent } from '../../radio-button-group/radio-button-group.component';
+import { SelectComponent } from '../../select/select/select.component';
+import { MultiselectComponent } from '../../select/multiselect/multiselect.component';
+import { DateRangeComponent } from '../../date/date-range/date-range.component';
+import {
+  DateEndErrorDirective,
+  DateStartErrorDirective,
+} from '../../../../directives/content-projection/content/content.directive';
+import { FudisDateRangeItem } from '../../../../types/forms';
 
 @Component({
   selector: 'fudis-error-message',
@@ -38,11 +45,14 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
     private _idService: FudisIdService,
     @Host() @Optional() private _textInput: TextInputComponent,
     @Host() @Optional() private _textArea: TextAreaComponent,
-
     @Host() @Optional() private _datePicker: DatepickerComponent,
-
+    @Host() @Optional() private _dateRange: DateRangeComponent,
+    @Host() @Optional() private _dateStart: DateStartErrorDirective,
+    @Host() @Optional() private _dateEnd: DateEndErrorDirective,
     @Host() @Optional() private _inputWithLanguageOptions: InputWithLanguageOptionsComponent,
     @Host() @Optional() private _checkboxGroup: CheckboxGroupComponent,
+    @Host() @Optional() private _select: SelectComponent,
+    @Host() @Optional() private _multiSelect: MultiselectComponent,
     @Host() @Optional() private _radioButtonGroup: RadioButtonGroupComponent,
   ) {
     if (_textInput) {
@@ -51,12 +61,20 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
       this._parent = _textArea;
     } else if (_datePicker) {
       this._parent = _datePicker;
+    } else if (_dateRange && _dateStart) {
+      this._parent = _dateRange.startDate;
+    } else if (_dateRange && _dateEnd) {
+      this._parent = _dateRange.endDate;
     } else if (_radioButtonGroup) {
       this._parent = _radioButtonGroup;
     } else if (_inputWithLanguageOptions) {
       this._parentGroup = _inputWithLanguageOptions;
     } else if (_checkboxGroup) {
       this._parentGroup = _checkboxGroup;
+    } else if (_select) {
+      this._parent = _select;
+    } else if (_multiSelect) {
+      this._parent = _multiSelect;
     }
 
     this._id = _idService.getNewId('error-message');
@@ -99,7 +117,10 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
     | TextInputComponent
     | TextAreaComponent
     | DatepickerComponent
-    | RadioButtonGroupComponent;
+    | FudisDateRangeItem
+    | RadioButtonGroupComponent
+    | SelectComponent
+    | MultiselectComponent;
 
   /**
    * Possible parent group components to used with Error Message
