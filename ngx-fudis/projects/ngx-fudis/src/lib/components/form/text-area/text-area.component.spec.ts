@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MockComponent } from 'ng-mocks';
-import { By } from '@angular/platform-browser';
 import { TextAreaComponent } from './text-area.component';
 import { LabelComponent } from '../label/label.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
@@ -49,26 +48,8 @@ describe('TextAreaComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Min and max length attributes', () => {
-    it('should set HTML minlength attribute according to given minLength Input', () => {
-      component.minLength = 5;
-      fixture.detectChanges();
-      const elem = fixture.debugElement.query(By.css('textarea'));
-
-      expect(elem.nativeElement.getAttribute('minlength')).toBe('5');
-    });
-
-    it('should set HTML maxlength attribute according to given maxLength Input', () => {
-      component.maxLength = 20;
-      fixture.detectChanges();
-      const elem = fixture.debugElement.query(By.css('textarea'));
-
-      expect(elem.nativeElement.getAttribute('maxlength')).toBe('20');
-    });
-  });
-
   describe('Control', () => {
-    it('should set control as invalid if required text area is touched and empty', () => {
+    it('should set control as invalid if required textarea is touched and empty', () => {
       component.control = new FormControl('', FudisValidators.required('This is required'));
 
       expect(component.control.value).toEqual('');
@@ -76,10 +57,18 @@ describe('TextAreaComponent', () => {
     });
 
     it('should set control as invalid if text is too short according to given minLength validator value', () => {
-      component.control = new FormControl('', [FudisValidators.minLength(10, 'Too short!')]);
+      component.control = new FormControl('', [FudisValidators.minLength(10, 'Too short')]);
       component.control.patchValue('too short');
 
       expect(component.control.value).toEqual('too short');
+      expect(component.control.invalid).toBeTruthy();
+    });
+
+    it('should set control as invalid if text is too long according to given maxLength validator value', () => {
+      component.control = new FormControl('', [FudisValidators.maxLength(10, 'Too long text')]);
+      component.control.patchValue('too longy long text');
+
+      expect(component.control.value).toEqual('too longy long text');
       expect(component.control.invalid).toBeTruthy();
     });
   });
