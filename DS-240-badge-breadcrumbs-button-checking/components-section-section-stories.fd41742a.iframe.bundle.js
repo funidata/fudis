@@ -6,8 +6,8 @@
     [titleLevel]="titleLevel"
   >
     <ng-template fudisActions type="section">
-      <fudis-button [label]="'Some action'" />
-      <fudis-button [label]="'Another action'" />
+      <fudis-button [label]="'Some action'"></fudis-button>
+      <fudis-button [label]="'Another action'"></fudis-button>
     </ng-template>
     <ng-template fudisNotifications type="section">
       <fudis-notification>This is notification</fudis-notification>
@@ -20,5 +20,5 @@
       </fudis-expandable>
       <fudis-body-text>Some text content inside section</fudis-body-text>
     </ng-template>
-  </fudis-section> `})).bind({});Example.parameters={...Example.parameters,docs:{...Example.parameters?.docs,source:{originalSource:'() => ({\n  props: {\n    title: \'This is title of section\',\n    titleLevel: 2,\n    titleSize: \'xl\'\n  },\n  template: html`<fudis-section\n    [id]="\'my-section-id\'"\n    [title]="title"\n    [tooltip]="\'More info about this section\'"\n    [titleSize]="titleSize"\n    [titleLevel]="titleLevel"\n  >\n    <ng-template fudisActions type="section">\n      <fudis-button [label]="\'Some action\'" />\n      <fudis-button [label]="\'Another action\'" />\n    </ng-template>\n    <ng-template fudisNotifications type="section">\n      <fudis-notification>This is notification</fudis-notification>\n    </ng-template>\n    <ng-template fudisContent type="section">\n      <fudis-expandable [title]="\'Expandable inside section\'">\n        <ng-template fudisContent type="expandable">\n          <fudis-body-text fudis-body-text>Some content inside expandable</fudis-body-text>\n        </ng-template>\n      </fudis-expandable>\n      <fudis-body-text>Some text content inside section</fudis-body-text>\n    </ng-template>\n  </fudis-section> `\n})',...Example.parameters?.docs?.source}}};const __namedExportsOrder=["Example"]}}]);
-//# sourceMappingURL=components-section-section-stories.d0d2fbaa.iframe.bundle.js.map
+  </fudis-section> `})).bind({});Example.parameters={...Example.parameters,docs:{...Example.parameters?.docs,source:{originalSource:'() => ({\n  props: {\n    title: \'This is title of section\',\n    titleLevel: 2,\n    titleSize: \'xl\'\n  },\n  template: html`<fudis-section\n    [id]="\'my-section-id\'"\n    [title]="title"\n    [tooltip]="\'More info about this section\'"\n    [titleSize]="titleSize"\n    [titleLevel]="titleLevel"\n  >\n    <ng-template fudisActions type="section">\n      <fudis-button [label]="\'Some action\'"></fudis-button>\n      <fudis-button [label]="\'Another action\'"></fudis-button>\n    </ng-template>\n    <ng-template fudisNotifications type="section">\n      <fudis-notification>This is notification</fudis-notification>\n    </ng-template>\n    <ng-template fudisContent type="section">\n      <fudis-expandable [title]="\'Expandable inside section\'">\n        <ng-template fudisContent type="expandable">\n          <fudis-body-text fudis-body-text>Some content inside expandable</fudis-body-text>\n        </ng-template>\n      </fudis-expandable>\n      <fudis-body-text>Some text content inside section</fudis-body-text>\n    </ng-template>\n  </fudis-section> `\n})',...Example.parameters?.docs?.source}}};const __namedExportsOrder=["Example"]}}]);
+//# sourceMappingURL=components-section-section-stories.fd41742a.iframe.bundle.js.map
