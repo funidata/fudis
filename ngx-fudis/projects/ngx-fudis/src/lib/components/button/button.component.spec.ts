@@ -127,4 +127,5 @@ describe('ButtonComponent', () => {
   });
 
   // TODO: tests for menu button and icon rotate
+  // TODO: test for button host class
 });
