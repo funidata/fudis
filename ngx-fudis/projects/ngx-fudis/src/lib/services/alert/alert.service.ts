@@ -2,6 +2,7 @@ import { Injectable, Signal, signal } from '@angular/core';
 import { FudisIdService } from '../id/id.service';
 import { FudisAlert, FudisAlertElement } from '../../types/miscellaneous';
 
+// TODO: discuss how much this needs to be improved to be usable for client application
 @Injectable({
   providedIn: 'root',
 })

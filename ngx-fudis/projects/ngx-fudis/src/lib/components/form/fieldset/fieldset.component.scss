@@ -1,17 +1,16 @@
 @use "../../../foundations/spacing/tokens.scss" as spacing;
 @use "../../../foundations/typography/mixins.scss" as typography;
-@use "../../../foundations/breakpoints/mixins.scss" as breakpoints;
 @use "../../../foundations/typography/tokens.scss" as typographyTokens;
-@use "../../../foundations/colors/mixins.scss" as colorMixins;
+@use "../../../foundations/colors/mixins.scss" as colors;
 @use "../../../foundations/focus/mixins.scss" as focus;
+@use "../../../foundations/borders/mixins.scss" as borders;
 
 .fudis-fieldset {
+  @include borders.border-none;
+
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-
-  /* stylelint-disable-next-line declaration-property-value-disallowed-list, property-disallowed-list */
-  border: none;
   padding: 0;
 
   &:focus-visible {
@@ -68,13 +67,13 @@
       }
 
       &__text {
-        @include colorMixins.text-color("gray-dark");
+        @include colors.text-color("gray-dark");
 
         display: inline-block;
         margin-right: spacing.$spacing-xs;
 
         &__required {
-          @include colorMixins.text-color("gray-middle");
+          @include colors.text-color("gray-middle");
 
           text-transform: initial;
           /* stylelint-disable-next-line property-disallowed-list */
@@ -92,7 +91,7 @@
     }
 
     &__help-text {
-      @include colorMixins.text-color("gray-dark");
+      @include colors.text-color("gray-dark");
       @include typography.body-text-sm-regular;
 
       display: block;

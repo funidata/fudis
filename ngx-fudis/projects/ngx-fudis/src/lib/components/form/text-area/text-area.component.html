@@ -21,8 +21,8 @@
     [attr.aria-invalid]="
       (control.touched && control.invalid) || (control.touched && invalidState) ? true : null
     "
-    [attr.minLength]="minLength"
-    [attr.maxLength]="maxLength"
+    [attr.minLength]="_minLength"
+    [attr.maxLength]="_maxLength"
     [attr.required]="_required ? true : null"
     [attr.aria-disabled]="disabled"
     [readonly]="disabled"
@@ -31,7 +31,7 @@
   <fudis-guidance
     *ngIf="!disableGuidance"
     [inputLabel]="label"
-    [maxLength]="maxLength"
+    [maxLength]="_maxLength"
     [helpText]="helpText"
     [for]="id"
     [control]="control"

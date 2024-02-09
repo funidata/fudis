@@ -5,13 +5,11 @@ import {
   FormGroup,
   ReactiveFormsModule,
   FormsModule,
-  Validators,
 } from '@angular/forms';
 import { Component } from '@angular/core';
 import { TextAreaComponent } from './text-area.component';
-
-import readme from './readme.mdx';
 import { FudisValidators } from '../../../utilities/form/validators';
+import readme from './readme.mdx';
 
 @Component({
   selector: 'example-text-area-with-form-control',
@@ -19,16 +17,14 @@ import { FudisValidators } from '../../../utilities/form/validators';
     <form [formGroup]="mainFormGroup">
       <fudis-text-area
         [control]="firstTextAreaControl"
-        [label]="'Basic required Text Area'"
-        [helpText]="'Add some text to the Text Area.'"
+        [label]="'Required Text Area'"
+        [helpText]="'Add some text to the textarea'"
         [tooltip]="'I am here to give you additional guidance'"
         [tooltipPosition]="'right'"
-        [tooltipToggle]="false"
       />
       <fudis-text-area
         [control]="secondTextAreaControl"
-        [label]="'Required Text Area with max and min character length'"
-        [helpText]="'This is an example Text Area with multiple validations.'"
+        [label]="'Text Area with max and min character length'"
       />
       <fudis-text-area
         [control]="thirdTextAreaControl"
@@ -43,7 +39,6 @@ class TextAreaWithFormControlExampleComponent {
   constructor(private _formBuilder: FormBuilder) {}
 
   minLength = 5;
-
   maxLength = 20;
 
   validatorsForSecondTextInput = [
@@ -52,7 +47,6 @@ class TextAreaWithFormControlExampleComponent {
       `Too short input. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,
     ),
     FudisValidators.maxLength(this.maxLength, 'Too long input'),
-    FudisValidators.required('This is required field.'),
   ];
 
   firstTextAreaControl: FormControl = new FormControl('', [
@@ -61,14 +55,12 @@ class TextAreaWithFormControlExampleComponent {
 
   secondTextAreaControl: FormControl = new FormControl('', this.validatorsForSecondTextInput);
 
-  thirdTextAreaControl: FormControl = new FormControl(
-    '',
-    FudisValidators.minLength(20, 'Write at least 20 characters'),
-  );
+  thirdTextAreaControl: FormControl = new FormControl('');
 
   mainFormGroup: FormGroup = this._formBuilder.group({
     firstTextAreaControl: this.firstTextAreaControl,
     secondTextareaControl: this.secondTextAreaControl,
+    thirdTextareaControl: this.thirdTextAreaControl,
   });
 }
 
@@ -106,19 +98,17 @@ export default {
 
 const Template: StoryFn<TextAreaComponent> = (args: TextAreaComponent) => ({
   props: args,
+  template: `<fudis-text-area [label]="label" [control]="control" [helpText]="helpText"></fudis-text-area>`,
 });
 
-export const TextArea = Template.bind({});
-TextArea.args = {
+export const Example = Template.bind({});
+Example.args = {
   label: 'Text Area label example',
-  control: new FormControl('', [
-    FudisValidators.minLength(5, 'Give at least 5 characters.'),
-    Validators.maxLength(20),
-  ]),
+  control: new FormControl(null),
   helpText: 'Example help text',
 };
 
-export const Examples: StoryFn = () => ({
+export const ExamplesWithValidators: StoryFn = () => ({
   template: `
 		<example-text-area-with-form-control></example-text-area-with-form-control>
 	`,

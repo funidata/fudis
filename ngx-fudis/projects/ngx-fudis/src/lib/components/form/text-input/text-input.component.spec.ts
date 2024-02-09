@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MockComponent } from 'ng-mocks';
-import { By } from '@angular/platform-browser';
 import { TextInputComponent } from './text-input.component';
 import { LabelComponent } from '../label/label.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
-import { FudisInputSize } from '../../../types/forms';
+import { FudisInputSize, FudisInputType } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
+import { getElement } from '../../../utilities/tests/utilities';
 
 const textInputControl: FormControl = new FormControl('');
 
@@ -45,43 +45,28 @@ describe('TextInputComponent', () => {
     assertTextInputHasClasses(`fudis-text-input fudis-input-size__${size}`);
   }
 
+  function textInputTypeCheck(type: FudisInputType): void {
+    component.type = type;
+    fixture.detectChanges();
+
+    const inputElement = getElement(fixture, 'input');
+    const typeAttribute = inputElement.getAttribute('type');
+
+    expect(typeAttribute).toEqual(type);
+  }
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Min and max length attributes', () => {
-    it('should set HTML minlength attribute according to given minLength Input', () => {
-      component.minLength = 5;
-      fixture.detectChanges();
-      const elem = fixture.debugElement.query(By.css('input'));
-
-      expect(elem.nativeElement.getAttribute('minlength')).toBe('5');
-    });
-
-    it('should set HTML maxlength attribute according to given maxLength Input', () => {
-      component.maxLength = 20;
-      fixture.detectChanges();
-      const elem = fixture.debugElement.query(By.css('input'));
-
-      expect(elem.nativeElement.getAttribute('maxlength')).toBe('20');
-    });
-  });
-
-  describe('Min and max number attributes', () => {
-    it('should set HTML min attribute according to given minNumber Input', () => {
-      component.minNumber = 1;
-      fixture.detectChanges();
-      const elem = fixture.debugElement.query(By.css('input'));
-
-      expect(elem.nativeElement.getAttribute('min')).toBe('1');
-    });
-
-    it('should set HTML max attribute according to given maxNumber Input', () => {
-      component.maxNumber = 99;
-      fixture.detectChanges();
-      const elem = fixture.debugElement.query(By.css('input'));
-
-      expect(elem.nativeElement.getAttribute('max')).toBe('99');
+  describe('HTML attributes', () => {
+    it('should have correct type attribute', () => {
+      textInputTypeCheck('text');
+      textInputTypeCheck('email');
+      textInputTypeCheck('number');
+      textInputTypeCheck('password');
+      textInputTypeCheck('url');
+      textInputTypeCheck('tel');
     });
   });
 
@@ -101,8 +86,16 @@ describe('TextInputComponent', () => {
       expect(component.control.invalid).toBeTruthy();
     });
 
+    it('should set control as invalid if text is too long according to given maxLength validator value', () => {
+      component.control = new FormControl('', [FudisValidators.maxLength(10, 'Too long text')]);
+      component.control.patchValue('too longy long text');
+
+      expect(component.control.value).toEqual('too longy long text');
+      expect(component.control.invalid).toBeTruthy();
+    });
+
     it('should set control as invalid if number is not respective to given min validator value', () => {
-      component.control = new FormControl('', [FudisValidators.min(1, 'Too small!')]);
+      component.control = new FormControl('', [FudisValidators.min(1, 'Too small')]);
       component.control.patchValue('-10');
 
       expect(component.control.value).toEqual('-10');
@@ -110,7 +103,9 @@ describe('TextInputComponent', () => {
     });
 
     it('should set control as invalid if number is not respective to given max validator value', () => {
-      component.control = new FormControl('', [Validators.max(99)]);
+      component.control = new FormControl('', [
+        FudisValidators.max(99, 'The given number is too big'),
+      ]);
       component.control.patchValue('210');
 
       expect(component.control.value).toEqual('210');
@@ -125,4 +120,6 @@ describe('TextInputComponent', () => {
       textInputSizeCheck('lg');
     });
   });
+
+  // TODO: Write tests for id constuction, tooltip, disabled state and other props coming from InputBaseDirective
 });
