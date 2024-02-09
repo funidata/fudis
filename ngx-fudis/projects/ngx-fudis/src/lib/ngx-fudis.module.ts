@@ -33,6 +33,9 @@ import { DatepickerComponent } from './components/form/date/datepicker/datepicke
 
 import { DatepickerCustomHeaderComponent } from './components/form/date/date-common/datepicker-custom-header/datepicker-custom-header.component';
 import { DescriptionListComponent } from './components/description-list/description-list.component';
+import { DescriptionListItemComponent } from './components/description-list/description-list-item/description-list-item.component';
+import { DescriptionListItemTermComponent } from './components/description-list/description-list-item/description-list-item-term/description-list-item-term.component';
+import { DescriptionListItemDetailsComponent } from './components/description-list/description-list-item/description-list-item-details/description-list-item-details.component';
 import {
   DialogCloseDirective,
   DialogContentDirective,
@@ -82,9 +85,7 @@ import { TextInputComponent } from './components/form/text-input/text-input.comp
 
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
-import { DescriptionListItemComponent } from './components/description-list/description-list-item/description-list-item.component';
-import { DescriptionListItemTermComponent } from './components/description-list/description-list-item/description-list-item-term/description-list-item-term.component';
-import { DescriptionListItemDetailsComponent } from './components/description-list/description-list-item/description-list-item-details/description-list-item-details.component';
+
 import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
 import { FooterComponent } from './components/footer/footer.component';
 import { LanguageBadgeGroupComponent } from './components/language-badge-group/language-badge-group.component';
@@ -163,8 +164,8 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     InputBaseDirective,
     InputWithLanguageOptionsComponent,
     LabelComponent,
-    LanguageBadgeGroupComponent,
     LanguageBadgeComponent,
+    LanguageBadgeGroupComponent,
     LinkComponent,
     MultiselectComponent,
     MultiselectChipListComponent,
@@ -230,10 +231,10 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     DatepickerComponent,
     DateRangeComponent,
     DateStartErrorDirective,
-    DescriptionListComponent,
-    DescriptionListItemComponent,
-    DescriptionListItemTermComponent,
-    DescriptionListItemDetailsComponent,
+    // DescriptionListComponent,
+    // DescriptionListItemComponent,
+    // DescriptionListItemTermComponent,
+    // DescriptionListItemDetailsComponent,
     DialogComponent,
     DialogTitleDirective,
     DialogContentDirective,

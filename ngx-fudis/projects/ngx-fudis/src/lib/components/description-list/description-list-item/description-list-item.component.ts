@@ -26,13 +26,13 @@ export class DescriptionListItemComponent implements AfterViewInit {
   @Host() public existingLanguageOptions = signal<FudisLanguageBadgeContent>({});
 
   ngAfterViewInit(): void {
-    this.checkCurrentChildren();
+    this._checkCurrentChildren();
   }
 
   /**
    * Check for what languages are available as item's children dd-elements
    */
-  checkCurrentChildren(): void {
+  private _checkCurrentChildren(): void {
     let temp: FudisLanguageBadgeContent = {};
 
     if (this.ddChildrenElements) {

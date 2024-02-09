@@ -44,7 +44,7 @@ type TestForm = {
           Vestibulum euismod leo ac magna pretium.
         </fudis-body-text>
       </fudis-grid>
-      <fudis-description-list
+      <!-- <fudis-description-list
         [columns]="{ xs: 1, sm: 2, md: 3 }"
         [data]="[
           { key: 'Name', value: 'Mary Rhubarb', subHeading: 'The lady boss' },
@@ -55,7 +55,7 @@ type TestForm = {
             value: 'Pie maker 2023, Mix it up master 2008, Place setting champion 1987'
           }
         ]"
-      ></fudis-description-list>
+      ></fudis-description-list> -->
       <hr />
       <fudis-grid [columns]="{ xs: 1, sm: 2, md: 3 }" [marginTop]="'sm'" [marginBottom]="'sm'">
         <div style="border: 2px solid lightblue">
