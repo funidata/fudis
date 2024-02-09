@@ -81,5 +81,5 @@ describe('TextAreaComponent', () => {
     });
   });
 
-  // TODO: Write tests for id constuction, tooltip, disbaled state and other props coming from InputBaseDirective
+  // TODO: Write tests for id constuction, tooltip, disabled state and other props coming from InputBaseDirective
 });

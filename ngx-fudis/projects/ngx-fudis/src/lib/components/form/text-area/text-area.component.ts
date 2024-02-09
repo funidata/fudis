@@ -34,7 +34,7 @@ export class TextAreaComponent
   @Input({ required: true }) control: FormControl<string | null | number>;
 
   /**
-   * Text-area size
+   * Text Area size
    */
   @Input() size: FudisInputSize = 'lg';
 
