@@ -12,7 +12,8 @@ import { IconComponent } from '../../../icon/icon.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { ButtonComponent } from '../../../button/button.component';
 import { ValidatorErrorMessageComponent } from '../../error-message/validator-error-message/validator-error-message.component';
-import { FudisValidators, TooltipDirective } from '../../../../../public-api';
+import { FudisValidators } from '../../../../utilities/form/validators';
+import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directive';
 import { FudisIdService } from '../../../../services/id/id.service';
 
 // TODO: write tests

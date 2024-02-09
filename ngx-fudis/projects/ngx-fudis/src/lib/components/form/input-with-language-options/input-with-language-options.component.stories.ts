@@ -66,7 +66,7 @@ const TemplateAllRequired: StoryFn = () => ({
       [label]="label"
       [helpText]="helpText"
       [maxLength]="maxLength"
-    />
+    ></fudis-input-with-language-options>
   `,
 });
 
@@ -108,7 +108,7 @@ const TemplateOneRequired: StoryFn = () => ({
       [label]="label"
       [helpText]="helpText"
       [maxLength]="maxLength"
-    />
+    ></fudis-input-with-language-options>
   `,
 });
 

@@ -34,7 +34,10 @@ export class BreadcrumbsComponent implements OnInit {
     this._id = this._idService.getNewParentId('breadcrumbs');
   }
 
-  getId(): string {
+  /**
+   * Getter for id
+   */
+  get id(): string {
     return this._id;
   }
 }
