@@ -120,4 +120,6 @@ describe('TextInputComponent', () => {
       textInputSizeCheck('lg');
     });
   });
+
+  // TODO: Write tests for id constuction, tooltip, disbaled state and other props coming from InputBaseDirective
 });

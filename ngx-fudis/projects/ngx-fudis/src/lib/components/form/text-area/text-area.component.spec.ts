@@ -80,4 +80,6 @@ describe('TextAreaComponent', () => {
       textAreaSizeCheck('lg');
     });
   });
+
+  // TODO: Write tests for id constuction, tooltip, disbaled state and other props coming from InputBaseDirective
 });
