@@ -74,7 +74,10 @@ const TemplateDateRange: StoryFn<DateRangeComponent> = (args: DateRangeComponent
       control: new FormControl<Date | null>(null, FudisValidators.required('End date is required')),
     },
   },
-  template: html`<fudis-date-range [startDate]="startDate" [endDate]="endDate" /> `,
+  template: html`<fudis-date-range
+    [startDate]="startDate"
+    [endDate]="endDate"
+  ></fudis-date-range> `,
 });
 
 export const DateRange = TemplateDateRange.bind({});

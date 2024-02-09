@@ -69,7 +69,7 @@ const Template: StoryFn<SpacingDirective> = (args: SpacingDirective) => ({
         [marginRight]="marginRight"
         [marginLeft]="marginLeft"
         [label]="'Test button'"
-      />
+      ></fudis-button>
     </div>
   `,
   props: args,
