@@ -40,12 +40,24 @@ export class FieldSetComponent
     super(_idService, _translationService);
   }
 
+  /**
+   * Content directive for Fudis Fieldset Actions
+   */
   @ContentChild(ActionsDirective) headerActions: ActionsDirective | null;
 
+  /**
+   * Content directive for Fudis Fieldset Notifications
+   */
   @ContentChild(NotificationsDirective) notifications: NotificationsDirective;
 
+  /**
+   * Content directive for Fudis Fieldset Content
+   */
   @ContentChild(ContentDirective) content: ContentDirective;
 
+  /**
+   * View for native fieldset element
+   */
   @ViewChild('fieldset') fieldset: ElementRef;
 
   /**
@@ -85,34 +97,38 @@ export class FieldSetComponent
   @Input() marginSides: FudisGridMarginSide = 'none';
 
   /**
-   * Set focus to fieldset when it appears first time
+   * Set focus to Fieldset when it appears first time
    */
   @Input() initialFocus: boolean = false;
 
   /**
-   * To disable sending information about this Fieldset to Error Summary service
+   * Send information about current Fieldset to Error Summary Service.
+   * Error Summary Breadcrumb is the title of the current Fieldset and is visible in the clickable link in Error Summary.
    */
   @Input() errorSummaryBreadcrumb: boolean = true;
 
   /**
-   * Display "Required" text next to fieldset main title. By default set to 'undefined'.
+   * Display "Required" text next to Fieldset main title. By default set to 'undefined'.
    */
   @Input() required: boolean | undefined = undefined;
 
   /**
-   * Title property to send to error summary service
+   * Title property to send to Error Summary Service
    */
   protected _title: string;
 
+  /**
+   * CSS classes for the native fieldset
+   */
   protected _classes: string[];
 
   /**
-   * Has fieldset been added to error summary
+   * Has Fieldset been added to Error Summary
    */
   private _fieldsetSent: boolean = false;
 
   /**
-   * Fieldset object to send to error summary
+   * Fieldset object to send to Error Summary
    */
   private _fieldsetInfo: FudisFormErrorSummarySection;
 
@@ -120,7 +136,7 @@ export class FieldSetComponent
     this._setFieldsetId();
 
     this._title = this.title;
-    this.addToErrorSummary();
+    this._addToErrorSummary();
     this._setClasses();
   }
 
@@ -133,12 +149,19 @@ export class FieldSetComponent
   ngOnChanges(): void {
     if (this.title !== this._title && this.id) {
       this._title = this.title;
-      this.addToErrorSummary();
+      this._addToErrorSummary();
     }
     this._setClasses();
   }
 
-  addToErrorSummary(): void {
+  ngOnDestroy(): void {
+    this._removeFromErrorSummary();
+  }
+
+  /**
+   * Add Fieldset title to Error Summary
+   */
+  private _addToErrorSummary(): void {
     if (this.errorSummaryBreadcrumb) {
       this._fieldsetInfo = {
         id: this.id,
@@ -151,16 +174,18 @@ export class FieldSetComponent
     }
   }
 
-  removeFromErrorSummary(): void {
+  /**
+   * Remove Fieldset title from Error Summary
+   */
+  private _removeFromErrorSummary(): void {
     if (this.errorSummaryBreadcrumb && this._fieldsetSent) {
       this._errorSummaryService.removeFieldset(this._fieldsetInfo);
     }
   }
 
-  ngOnDestroy(): void {
-    this.removeFromErrorSummary();
-  }
-
+  /**
+   * Set CSS classes for native fieldset element
+   */
   private _setClasses(): void {
     if (this.inputSize) {
       this._classes = ['fudis-fieldset', `fudis-input-size__${this.inputSize}`];
@@ -169,6 +194,9 @@ export class FieldSetComponent
     }
   }
 
+  /**
+   * Add or generate id with IdService
+   */
   private _setFieldsetId(): void {
     if (this.id) {
       this._idService.addNewId('fieldset', this.id);
