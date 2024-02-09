@@ -132,7 +132,7 @@ export default {
 
 const Template: StoryFn<TextInputComponent> = (args: TextInputComponent) => ({
   props: args,
-  template: `<fudis-text-input [control]="control" [label]="label" [helpText]="helpText"></fudis-text-input>`
+  template: `<fudis-text-input [control]="control" [label]="label" [helpText]="helpText"></fudis-text-input>`,
 });
 
 export const Example = Template.bind({});
