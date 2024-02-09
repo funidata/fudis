@@ -21,6 +21,7 @@ import { ActionsDirective } from '../../../directives/content-projection/actions
 import { NotificationsDirective } from '../../../directives/content-projection/notifications/notifications.directive';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { getElement, getTrimmedTextContent } from '../../../utilities/tests/utilities';
+import { FudisInputSize } from '../../../types/forms';
 
 @Component({
   selector: 'fudis-mock-fieldset-component',
@@ -28,6 +29,8 @@ import { getElement, getTrimmedTextContent } from '../../../utilities/tests/util
     [title]="'Fieldset title'"
     [helpText]="'Fieldset help text'"
     [required]="required"
+    [initialFocus]="initialFocus"
+    [inputSize]="inputSize"
   >
     <ng-template fudisActions [type]="'fieldset'">
       <p class="test-actions-content">This is actions content</p>
@@ -43,6 +46,8 @@ import { getElement, getTrimmedTextContent } from '../../../utilities/tests/util
 })
 class MockFieldSetComponent {
   required = false;
+  initialFocus = false;
+  inputSize: FudisInputSize;
 
   fieldsetExample = new FormGroup({
     exampleTextInput: new FormControl(null, FudisValidators.required('This field is required')),
@@ -82,6 +87,17 @@ describe('FieldSetComponent', () => {
     componentMock = fixtureMock.componentInstance;
     fixtureMock.detectChanges();
   });
+
+  function fieldSetInputSizeCheck(size: FudisInputSize): void {
+    componentMock.inputSize = size;
+    fixtureMock.detectChanges();
+
+    const fieldsetEl = getElement(fixtureMock, 'fieldset') as HTMLFieldSetElement;
+
+    expect(fieldsetEl.className).toContain('fudis-grid__initial');
+    expect(fieldsetEl.className).not.toContain('fudis-grid__xxl');
+    expect(fieldsetEl.className).toContain(`fudis-input-size__${size}`);
+  }
 
   describe('Wrapper fieldset element HTML attributes', () => {
     beforeEach(() => {
@@ -136,6 +152,19 @@ describe('FieldSetComponent', () => {
 
       expect(requiredTextElement).toBeTruthy();
       expect(requiredTextElement?.textContent).toEqual('(Required)');
+    });
+
+    it('should have initial focus', () => {
+      componentMock.initialFocus = true;
+      fixtureMock.detectChanges();
+
+      expect(fieldsetElement.focus).toBeTruthy();
+    });
+
+    it('should override width value and have respective fudis-input-size class if InputSize is given ', () => {
+      fieldSetInputSizeCheck('sm');
+      fieldSetInputSizeCheck('md');
+      fieldSetInputSizeCheck('lg');
     });
   });
 
