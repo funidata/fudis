@@ -46,22 +46,22 @@ export class TextInputComponent
   @Input() type: FudisInputType = 'text';
 
   /**
-   * Max length for aria-attribute and for charachter indicator in guidance
+   * Max length for HTML attribute and for character indicator in guidance
    */
   protected _maxLength: number | undefined = undefined;
 
   /**
-   * Min length for aria-attribute
+   * Min length for HTML attribute
    */
   protected _minLength: number | undefined = undefined;
 
   /**
-   * Max number for number input aria-attribute
+   * Max number for number input HTML attribute
    */
   protected _maxNumber: number | undefined = undefined;
 
   /**
-   * Min number for number input aria-attribute
+   * Min number for number input HTML attribute
    */
   protected _minNumber: number | undefined = undefined;
 

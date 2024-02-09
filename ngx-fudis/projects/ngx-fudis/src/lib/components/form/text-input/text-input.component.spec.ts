@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MockComponent } from 'ng-mocks';
 import { TextInputComponent } from './text-input.component';
 import { LabelComponent } from '../label/label.component';
@@ -86,8 +86,16 @@ describe('TextInputComponent', () => {
       expect(component.control.invalid).toBeTruthy();
     });
 
+    it('should set control as invalid if text is too long according to given maxLength validator value', () => {
+      component.control = new FormControl('', [FudisValidators.maxLength(10, 'Too long text')]);
+      component.control.patchValue('too longy long text');
+
+      expect(component.control.value).toEqual('too longy long text');
+      expect(component.control.invalid).toBeTruthy();
+    });
+
     it('should set control as invalid if number is not respective to given min validator value', () => {
-      component.control = new FormControl('', [FudisValidators.min(1, 'Too small!')]);
+      component.control = new FormControl('', [FudisValidators.min(1, 'Too small')]);
       component.control.patchValue('-10');
 
       expect(component.control.value).toEqual('-10');
@@ -95,7 +103,9 @@ describe('TextInputComponent', () => {
     });
 
     it('should set control as invalid if number is not respective to given max validator value', () => {
-      component.control = new FormControl('', [Validators.max(99)]);
+      component.control = new FormControl('', [
+        FudisValidators.max(99, 'The given number is too big'),
+      ]);
       component.control.patchValue('210');
 
       expect(component.control.value).toEqual('210');
