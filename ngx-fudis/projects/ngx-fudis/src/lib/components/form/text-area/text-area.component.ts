@@ -1,8 +1,6 @@
 import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
-
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
-
 import { FudisInputSize } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -36,19 +34,19 @@ export class TextAreaComponent
   @Input({ required: true }) control: FormControl<string | null | number>;
 
   /**
-   * Minimum length for text area, unset by default
-   */
-  @Input() minLength: number | undefined = undefined;
-
-  /**
-   * Maximum length for text area, unset by default. When set displays also a character count indicator.
-   */
-  @Input() maxLength: number | undefined = undefined;
-
-  /**
-   * Text-area size option
+   * Text-area size
    */
   @Input() size: FudisInputSize = 'lg';
+
+  /**
+   * Min length for HTML attribute
+   */
+  protected _minLength: number | undefined = undefined;
+
+  /**
+   * Max length for HTML attribute and for character indicator in guidance
+   */
+  protected _maxLength: number | undefined = undefined;
 
   ngOnInit(): void {
     this._setInputId('text-area');
@@ -56,8 +54,8 @@ export class TextAreaComponent
 
   ngOnChanges(): void {
     this._required = this.required ?? hasRequiredValidator(this.control);
-    this.maxLength = this.maxLength ?? getMaxLengthFromValidator(this.control);
-    this.minLength = this.minLength ?? getMinLengthFromValidator(this.control);
+    this._maxLength = getMaxLengthFromValidator(this.control);
+    this._minLength = getMinLengthFromValidator(this.control);
   }
 
   ngAfterViewInit(): void {
