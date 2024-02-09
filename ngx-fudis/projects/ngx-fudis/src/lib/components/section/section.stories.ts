@@ -43,8 +43,8 @@ const Template: StoryFn = () => ({
     [titleLevel]="titleLevel"
   >
     <ng-template fudisActions type="section">
-      <fudis-button [label]="'Some action'" />
-      <fudis-button [label]="'Another action'" />
+      <fudis-button [label]="'Some action'"></fudis-button>
+      <fudis-button [label]="'Another action'"></fudis-button>
     </ng-template>
     <ng-template fudisNotifications type="section">
       <fudis-notification>This is notification</fudis-notification>

@@ -38,6 +38,6 @@ export class BreadcrumbsItemComponent implements OnInit {
   protected _id: string;
 
   ngOnInit(): void {
-    this._id = this._idService.getNewChildId('breadcrumbs', this._breadCrumbs.getId());
+    this._id = this._idService.getNewChildId('breadcrumbs', this._breadCrumbs.id);
   }
 }
