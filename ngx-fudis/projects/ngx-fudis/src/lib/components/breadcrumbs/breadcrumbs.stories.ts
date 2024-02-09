@@ -38,7 +38,11 @@ const Template: StoryFn<BreadcrumbsComponent> = (args: BreadcrumbsComponent) => 
   },
   template: html`
     <fudis-breadcrumbs [label]="label">
-      <fudis-breadcrumbs-item *ngFor="let link of links" [label]="link.label" [url]="link.url" />
+      <fudis-breadcrumbs-item
+        *ngFor="let link of links"
+        [label]="link.label"
+        [url]="link.url"
+      ></fudis-breadcrumbs-item>
     </fudis-breadcrumbs>
   `,
 });

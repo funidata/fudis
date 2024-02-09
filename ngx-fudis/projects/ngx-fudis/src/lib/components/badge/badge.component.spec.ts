@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { BadgeComponent } from './badge.component';
 import { FudisBadgeVariant } from '../../types/miscellaneous';
+import { getTrimmedTextContent } from '../../utilities/tests/utilities';
 
 describe('BadgeComponent', () => {
   let component: BadgeComponent;
@@ -53,9 +54,9 @@ describe('BadgeComponent', () => {
       fixture.detectChanges();
       const elem = fixture.debugElement.query(By.css('.fudis-badge'));
 
-      // NOTE: Had to use toContain because there were some unexpected spaces in the HTML element,
-      // caused by Input and ng-content being displayed after one another (with space), hence toEqual did not pass.
-      expect(elem.nativeElement.innerHTML).toContain(component.content);
+      const trimmedText = getTrimmedTextContent(elem.nativeElement);
+
+      expect(trimmedText).toEqual(component.content);
     });
   });
 });

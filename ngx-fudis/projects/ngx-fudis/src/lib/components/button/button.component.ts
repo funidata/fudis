@@ -127,14 +127,23 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
     this.handleClick.emit(event);
   }
 
+  /**
+   * Toggling when Button is used as Menu Button
+   */
   public toggleMenu(): void {
     this.dropdownOpen = !this.dropdownOpen;
   }
 
+  /**
+   * Open when Button is used as Menu Button
+   */
   public openMenu(): void {
     this.dropdownOpen = true;
   }
 
+  /**
+   * Close when Button is used as Menu Button
+   */
   public closeMenu(): void {
     this.dropdownOpen = false;
   }

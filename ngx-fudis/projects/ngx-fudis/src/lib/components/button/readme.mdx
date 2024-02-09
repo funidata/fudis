@@ -1,4 +1,4 @@
-import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import { ArgTypes, Meta, Canvas, Controls } from "@storybook/blocks";
 import { ButtonComponent } from "./button.component";
 import * as ButtonStories from "./button.stories.ts";
 
@@ -6,27 +6,51 @@ import * as ButtonStories from "./button.stories.ts";
 
 # Button
 
-Buttons are categorized based on their importance and functionality, i.e `primary`, `secondary` and `tertiary`. It is important to use the correct variant of the button for the intended action and not to overuse them to avoid overwhelming the user.
+Interactive Button Component can be used whenever there is need for user to perform some clickable action, e. g. to submit a form.
 
-There are three button sizes available: `medium`, `small` and `icon-only`.
+## Commonly used Properties
+
+### Label (mandatory)
+
+Text label is the only required input attribute Button requires. Depending on other input attributes, the label is rendered either as a visually visible text or as visually hidden aria-label attribute.
+
+### Variant
+
+Buttons are categorized based on their importance and functionality. It is important to use the correct variant of the button for the intended action and not to overuse them to avoid overwhelming the user.
+
+Button has three variants: `primary` (default), `secondary` and `tertiary`.
+
+### Size
+
+There are three button sizes available: `medium` (default), `small` and `icon-only`.
+
+### Type
+
+Type has to two possible values: `button` (default) and `submit`.
+
+For HTML semantics, if Button is a form submit button, `submit` attribute value for `type` should be used.
 
 ## Examples
 
 <Canvas of={ButtonStories.AllVariants}></Canvas>
 
-### Button with icon
+### Button with Icon
 
-Button has option for icon. Frequently used icons: <code>search</code>, <code>three-dots</code> and <code>delete</code>. Icon color is automatically set according to which button variant is in use.
+Button has option for displaying Icon component alongside the label. Frequently used icons: <code>search</code>, <code>three-dots</code> and <code>delete</code>. Icon color is automatically set according to which button variant is in use.
 
 Icon is only a visual indicator and is always hidden from screen readers.
 
+Icon can be configured with `icon` and `iconRotate` properties.
+
 <Canvas of={ButtonStories.IconButton}></Canvas>
 
-### Button with icon only
+### Button with Label Hidden
 
 Button can be without a visible label but use this variation sparingly. To hide visible label, provide `labelHidden` property for the button component. When label is hidden, `label` property will be reflected to HTML `aria-label` attribute. This will communicate screen reader users about the button functionality.
 
-If button has no visibile label and both `label` and `ariaLabel` are provided, those values are combined and reflected to `aria-label` HTML attribute.
+If button has no visible label and both `label` and `ariaLabel` are provided, those values are combined and reflected to `aria-label` HTML attribute.
+
+Note! Label is also hidden automatically when size `icon-only` is used.
 
 <Canvas of={ButtonStories.OnlyIconButton}></Canvas>
 
@@ -41,7 +65,7 @@ If button has no visibile label and both `label` and `ariaLabel` are provided, t
 
 ### Related components
 
-[Icon](/docs/components-icon--icon)
+[Icon](/docs/components-icon--documentation)
 
 ## Properties
 
