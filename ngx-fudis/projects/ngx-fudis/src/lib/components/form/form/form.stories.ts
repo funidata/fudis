@@ -95,12 +95,12 @@ import readme from './readme.mdx';
                             'So that students know what they are getting into. Provide description in all languages.'
                           "
                         />
-                        <fudis-radio-button-group
+                        <!-- <fudis-radio-button-group
                           [title]="'Course type'"
                           [id]="'radio-button-group-1'"
                           [options]="courseTypeOptions"
                           [control]="formExample.controls['courseType']"
-                        />
+                        /> -->
                         <fudis-checkbox-group
                           [formGroup]="formExample.controls.courseBooks"
                           [title]="'Course books'"
