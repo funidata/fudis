@@ -4,6 +4,8 @@ import { FudisLanguageAbbr } from './miscellaneous';
 
 export type FudisInputSize = 'sm' | 'md' | 'lg';
 
+export type FudisInputType = 'email' | 'number' | 'password' | 'tel' | 'text' | 'url';
+
 export interface FudisCheckboxOption {
   /** Unique id for single checkbox option */
   id?: string;

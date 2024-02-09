@@ -1,8 +1,7 @@
-import { AfterViewInit, Component, Input, HostBinding, OnInit, OnChanges } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, OnChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
-
-import { FudisInputSize } from '../../../types/forms';
+import { FudisInputSize, FudisInputType } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
@@ -31,8 +30,6 @@ export class TextInputComponent
     super(_translationService, _idService);
   }
 
-  @HostBinding('class') classes = 'fudis-text-input-host';
-
   /**
    * FormControl for text-input
    */
@@ -46,29 +43,27 @@ export class TextInputComponent
   /**
    * Type of the input - defaults to 'text'
    */
-  @Input() type: 'email' | 'number' | 'password' | 'tel' | 'text' | 'url' = 'text';
+  @Input() type: FudisInputType = 'text';
 
   /**
-   * Prefer FudisValidators.minLength over this
-   * Minimium number of characters allowed by minLength.
+   * Max length for aria-attribute and for charachter indicator in guidance
    */
-  @Input() minLength: number | undefined = undefined;
+  protected _maxLength: number | undefined = undefined;
 
   /**
-   * * Prefer FudisValidators.maxLength over this
-   * Maximum number of characters allowed by maxLength
+   * Min length for aria-attribute
    */
-  @Input() maxLength: number | undefined = undefined;
+  protected _minLength: number | undefined = undefined;
 
   /**
-   * Minimum number allowed by number input's minNumber
+   * Max number for number input aria-attribute
    */
-  @Input() minNumber: number;
+  protected _maxNumber: number | undefined = undefined;
 
   /**
-   * Maximum number allowed by number input's maxNumber
+   * Min number for number input aria-attribute
    */
-  @Input() maxNumber: number;
+  protected _minNumber: number | undefined = undefined;
 
   ngOnInit(): void {
     this._setInputId('text-input');
@@ -77,11 +72,11 @@ export class TextInputComponent
   ngOnChanges(): void {
     this._required = this.required ?? hasRequiredValidator(this.control);
     if (this.type === 'number') {
-      this.minNumber = this.minNumber ?? getMinFromValidator(this.control);
-      this.maxNumber = this.maxNumber ?? getMaxFromValidator(this.control);
+      this._minNumber = getMinFromValidator(this.control);
+      this._maxNumber = getMaxFromValidator(this.control);
     } else {
-      this.maxLength = this.maxLength ?? getMaxLengthFromValidator(this.control);
-      this.minLength = this.minLength ?? getMinLengthFromValidator(this.control);
+      this._maxLength = getMaxLengthFromValidator(this.control);
+      this._minLength = getMinLengthFromValidator(this.control);
     }
   }
 
