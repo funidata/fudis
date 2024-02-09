@@ -13,6 +13,8 @@
     "logs": "docker compose logs -f",
     "test": "cd ngx-fudis && npm test",
     "test:watch": "cd ngx-fudis && npm run test:watch",
+    "test:vr": "docker compose up --build fudis-vr",
+    "test:vr-report": "docker compose run --service-ports fudis-vr npx playwright show-report --host 0.0.0.0",
     "build": "docker build -t fudis:latest ./ngx-fudis && docker cp $(docker create fudis:latest):/usr/src/app/dist ./ngx-fudis/dist",
     "lint": "cd ngx-fudis && npm run lint",
     "stylelint": "cd ngx-fudis && npm run stylelint",
