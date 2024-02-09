@@ -67,7 +67,7 @@ describe('BreadcrumbsComponent', () => {
   });
 
   describe('child item components', () => {
-    // FIXME: Use visual regression tests instead of testing style attribute values directly.
+    // TODO: Use visual regression tests instead of testing style attribute values directly.
     it.skip('should have only one body text element visible', () => {
       const items: NodeList = fixture.nativeElement.querySelectorAll(
         'fudis-breadcrumbs-item .fudis-breadcrumbs-item',
@@ -92,7 +92,7 @@ describe('BreadcrumbsComponent', () => {
       expect(currentTexts.join(' ')).toEqual('Documentation');
     });
 
-    // FIXME: Use visual regression tests instead of testing style attribute values directly.
+    // TODO: Use visual regression tests instead of testing style attribute values directly.
     it.skip('should have correct amount of links with correct texts and icons visible', () => {
       const items: NodeList = fixture.nativeElement.querySelectorAll(
         'fudis-breadcrumbs-item .fudis-breadcrumbs-item',
@@ -128,7 +128,7 @@ describe('BreadcrumbsComponent', () => {
       expect(linkTexts.join(' ')).toEqual('Components Breadcrumbs');
     });
 
-    // FIXME: Use visual regression tests instead of testing style attribute values directly.
+    // TODO: Use visual regression tests instead of testing style attribute values directly.
     it.skip('should have correct link hrefs', () => {
       const items: NodeList = fixture.nativeElement.querySelectorAll(
         'fudis-breadcrumbs-item .fudis-breadcrumbs-item',

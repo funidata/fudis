@@ -37,7 +37,12 @@ export default {
       providers: [importProvidersFrom(BrowserAnimationsModule)],
     }),
   ],
-  argTypes: {},
+  argTypes: {
+    tooltipPosition: {
+      options: ['left', 'right', 'above', 'below', 'before', 'after'],
+      control: { type: 'radio' },
+    },
+  },
 } as Meta;
 
 const Template: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
@@ -55,7 +60,7 @@ const Template: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
       [tooltip]="tooltip"
       [tooltipPosition]="tooltipPosition"
       [tooltipToggle]="tooltipToggle"
-    />
+    ></fudis-datepicker>
     <fudis-body-text *ngIf="control.value">The date output is: {{ control.value }}</fudis-body-text>
     <fudis-body-text *ngIf="control.value"
       >The date output with Angular date pipe is: {{ control.value | date:'dd.MM.yyyy'

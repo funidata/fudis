@@ -94,7 +94,7 @@ const ExampleTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupCom
       *ngFor="let option of options"
       [controlName]="option.controlName"
       [label]="option.label"
-    />
+    ></fudis-checkbox>
   </fudis-checkbox-group>`,
 });
 
