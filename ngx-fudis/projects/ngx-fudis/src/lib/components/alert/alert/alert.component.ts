@@ -66,6 +66,8 @@ export class AlertComponent {
    */
   @Output() handleClose = new EventEmitter<Event>();
 
+  // TODO: add output for possible callback event when clicking link in alert
+
   /**
    * Label for close button, fetched from FudisTranslationService
    */
