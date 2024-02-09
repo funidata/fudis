@@ -205,6 +205,8 @@ describe('AlertComponent', () => {
       fixture.detectChanges();
     });
 
+    // TODO: fix tests
+
     // it('should emit info to focusService when focusing on closeButton', () => {
     // 	const button = getElement(fixture, '.fudis-button');
 
