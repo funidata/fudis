@@ -1,4 +1,3 @@
-// eslint-disable-next-line max-classes-per-file
 import { AfterViewInit, Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import {
   MatDialog,
