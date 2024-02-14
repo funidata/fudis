@@ -37,6 +37,9 @@ export class DropdownItemBaseDirective {
    */
   protected _id: string;
 
+  /**
+   * Trigger focus based on keyboard interaction. Used to focus on next / previous dropdown item element
+   */
   // eslint-disable-next-line class-methods-use-this
   protected _baseHandleKeyDown(
     event: KeyboardEvent,
@@ -68,6 +71,9 @@ export class DropdownItemBaseDirective {
     }
   }
 
+  /**
+   * Function which tries to check if UI focus has moved away from the list of dropdown items
+   */
   // eslint-disable-next-line class-methods-use-this
   protected _focusedOutFromComponent(
     event: FocusEvent,
