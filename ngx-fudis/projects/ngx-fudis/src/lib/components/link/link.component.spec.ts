@@ -35,7 +35,7 @@ describe('LinkComponent', () => {
       expect(anchorElement.nativeNode.innerHTML).toEqual(' My link ');
     });
 
-    // FIXME: Remove skip.
+    // TODO: Remove skip.
     it.skip('should always have href', () => {
       component.href = '';
       fixture.detectChanges();

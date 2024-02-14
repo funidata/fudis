@@ -54,12 +54,12 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
             />
           </fudis-grid>
           <fudis-grid [columns]="3">
-            <fudis-radio-button-group
+            <!-- <fudis-radio-button-group
               [title]="'Course type'"
               [id]="'radio-button-group-1'"
               [options]="courseTypeOptions"
               [control]="formExample.controls['courseType']"
-            />
+            /> -->
             <fudis-checkbox-group
               [formGroup]="formExample.controls.courseBooks"
               [title]="'Course books'"
