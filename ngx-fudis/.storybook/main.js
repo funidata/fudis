@@ -9,7 +9,6 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
     "@storybook/addon-a11y",
-    "storybook-version",
     "@storybook/addon-mdx-gfm",
   ],
   framework: {
@@ -49,7 +48,7 @@ module.exports = {
   env: (config) => {
     return {
       ...config,
-      STORYBOOK_FUDIS_VERSION: process.env.STORYBOOK_FUDIS_VERSION,
+      STORYBOOK_FUDIS_VERSION: process.env.STORYBOOK_FUDIS_VERSION || "",
     };
   },
 };
