@@ -11,7 +11,7 @@ import { FudisFormErrorSummaryUpdateStrategy, FudisRadioButtonOption } from '../
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 
-// TODO: Refactor fudis-body-text inline style to Spacing Directive after the directive is exposed again 
+// TODO: Refactor fudis-body-text inline style to Spacing Directive after the directive is exposed again
 // (fudisSpacing [marginRight]="'sm'" [marginTop]="'xs'")
 
 @Component({

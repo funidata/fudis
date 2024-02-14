@@ -56,7 +56,6 @@ OnlyIconButton.args = {
   labelHidden: true,
 };
 
-
 // TODO: Refactor all fudis-heading inline styles to use Spacing Directive after the directive is exposed again
 // (fudisSpacing [marginTop]="'md'")
 export const AllVariants: StoryFn = () => ({
