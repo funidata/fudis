@@ -72,7 +72,7 @@ export class LinkComponent implements AfterViewInit {
   /**
    * Link color
    */
-  @Input() color: 'primary-dark' | 'default' | 'white' = 'primary-dark';
+  @Input() color: 'default' | 'gray' | 'white' = 'default';
 
   /**
    * Set browser focus to link on the first load.
