@@ -7,7 +7,7 @@ import * as DropdownMenuStories from "./dropdown-menu.stories.ts";
 
 # Dropdown Menu
 
-Dropdown menu is assembled with `fudis-button`, `fudis-dropdown-menu` and `fudis-dropdown-menu-item` components and it has certain guidelines to follow in order to work. See code example below.
+Dropdown Menu is assembled with `Button`, `DropdownMenu` and `DropdownMenuItem` components and it has certain guidelines to follow in order to work. See code example below.
 
 ## Examples
 
@@ -15,7 +15,7 @@ Dropdown menu is assembled with `fudis-button`, `fudis-dropdown-menu` and `fudis
 
 ### Code Example
 
-**NOTE**: All fudis-button properties are given in this example as needed, just modify `label` according to your needs and fill fudis-dropdown-menu with wanted fudis-dropdown-menu-items.
+**NOTE**: All Button properties are given in this example as needed, just modify `label` according to your needs.
 
 ```
 <fudis-button
@@ -34,7 +34,7 @@ Dropdown menu is assembled with `fudis-button`, `fudis-dropdown-menu` and `fudis
 
 #### Useful info
 
-Dropdown menu button is often designed to be found on the right side of the view. Thus, default behaviour of the menu is to open and align itself on the left side of the button. Optionally menu can be aligned to open on the right side `<fudis-dropdown-menu [align]="'right'"> ... </fudis-dropdown-menu>`
+Dropdown Menu button is often designed to be found on the right side of the view. Thus, default behaviour of the menu is to open and align itself on the left side of the button. Optionally menu can be aligned to open on the right side `<fudis-dropdown-menu [align]="'right'"> ... </fudis-dropdown-menu>`
 
 ### Accessibility
 
@@ -47,9 +47,8 @@ Dropdown menu button is often designed to be found on the right side of the view
 
 ### Related components
 
-[Button](/docs/components-button--documentation)
-
-[Icon](/docs/components-icon--documentation)
+- [Button](/docs/components-button--documentation)
+- [Icon](/docs/components-icon--documentation)
 
 ## Properties
 
