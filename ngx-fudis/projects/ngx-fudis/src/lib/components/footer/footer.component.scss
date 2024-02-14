@@ -21,6 +21,9 @@
         margin-top: spacing.$spacing-sm;
       }
     }
+    .fudis-link__anchor {
+      display: inline-flex;
+    }
   }
 
   &__content {

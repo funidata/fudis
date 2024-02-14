@@ -52,5 +52,7 @@ describe('LabelComponent', () => {
 
       expect(elem.nativeElement).toBeTruthy();
     });
+
+    // TODO: Should have written tests for id and for attributes.
   });
 });
