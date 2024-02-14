@@ -109,6 +109,8 @@ import { MultiselectOptionComponent } from './components/form/select/multiselect
 import { SelectAutocompleteComponent } from './components/form/select/common/autocomplete/autocomplete.component';
 import { SelectOptionBaseDirective } from './components/form/select/common/select-option-base/select-option-base.directive';
 
+// TODO: sort things better
+
 @NgModule({
   /*
    * Include both internal and external Fudis components in 'declarations' array below.

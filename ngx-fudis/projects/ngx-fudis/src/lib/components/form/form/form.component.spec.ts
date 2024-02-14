@@ -237,3 +237,5 @@ describe('FormComponent', () => {
     });
   });
 });
+
+// TODO: add tests for Form inside dialog
