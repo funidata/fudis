@@ -1,7 +1,4 @@
-// TODO: write tests
-
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { DropdownMenuComponent } from './dropdown-menu.component';
 import { ButtonComponent } from '../button/button.component';
 
