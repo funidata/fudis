@@ -165,6 +165,9 @@ export class FudisIdService {
     });
   }
 
+  /**
+   * To add custom id for a single component
+   */
   public addNewId(componentType: FudisIdComponent, customId: string): void {
     this._componentList[componentType].push(customId);
   }
