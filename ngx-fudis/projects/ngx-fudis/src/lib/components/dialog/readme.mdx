@@ -158,10 +158,10 @@ In `fudisContent` template add form components and in `fudisActions` template ad
 	`,
 })
 class FormDialogComponent {
-	constructor(public dialog: FudisDialogService) {}
+	constructor(private _dialogService: FudisDialogService) {}
 
 	openDialog(dialogToOpen: TemplateRef<any>) {
-		this.dialog.open(dialogToOpen);
+		this._dialogService.open(dialogToOpen);
 	}
 
 	closeDialogWithForm(): void {
