@@ -266,7 +266,7 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     SelectComponent,
     SelectOptionComponent,
     SelectGroupComponent,
-    SpacingDirective,
+    // SpacingDirective,
     TextAreaComponent,
     TextInputComponent,
     TooltipDirective,

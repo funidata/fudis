@@ -19,13 +19,14 @@ export default {
 
 const html = String.raw;
 
+// TODO: Refactor fudis-button inline style to Spacing Directive after the directive is exposed again 
+// (fudisSpacing [marginRight]="'md'")
 export const Example: StoryFn<TooltipDirective> = (args: TooltipDirective) => ({
   template: html`
     <fudis-button
-      fudisSpacing
+      style="margin-right: 2rem;"
       [label]="'Hover me'"
       [tooltip]="'Greetings from regular tooltip, I hope you can see me!'"
-      [marginRight]="'md'"
     >
     </fudis-button>
     <fudis-button
