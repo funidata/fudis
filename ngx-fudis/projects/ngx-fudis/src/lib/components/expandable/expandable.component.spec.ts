@@ -331,3 +331,5 @@ describe('ExpandableComponent', () => {
     });
   });
 });
+
+// TODO: add tests for title existing, heading level, closed input, closedChange output
