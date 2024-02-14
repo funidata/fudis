@@ -67,7 +67,7 @@ export class LinkComponent implements AfterViewInit {
    * Option to create an external link to point a target page on another domain.
    * External link contains external icon and assistive aria-label
    */
-  @Input() isExternalLink: boolean = false;
+  @Input() external: boolean = false;
 
   /**
    * Link color

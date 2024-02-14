@@ -47,7 +47,7 @@ describe('LinkComponent', () => {
 
   describe('External link component', () => {
     it('should have new-tab icon', () => {
-      component.isExternalLink = true;
+      component.external = true;
       fixture.detectChanges();
       const externalLinkComponent = fixture.debugElement.query(
         By.css('.fudis-link__anchor__external'),
@@ -59,7 +59,7 @@ describe('LinkComponent', () => {
 
     it('should have assistive aria-label for screen readers', () => {
       component.href = 'www.example.com';
-      component.isExternalLink = true;
+      component.external = true;
       fixture.detectChanges();
       const externalLinkComponent = fixture.debugElement.query(
         By.css('.fudis-link__anchor__external'),

@@ -27,7 +27,7 @@ Link.args = {
 export const ExternalLink = Template.bind({});
 ExternalLink.args = {
   href: 'https://www.example.com',
-  isExternalLink: true,
+  external: true,
 };
 
 export const LinkWithTitle = Template.bind({});

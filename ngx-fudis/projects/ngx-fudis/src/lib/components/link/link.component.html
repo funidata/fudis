@@ -1,8 +1,8 @@
-<div *ngIf="!isExternalLink" class="fudis-link">
+<div *ngIf="!external" class="fudis-link">
   <ng-container *ngTemplateOutlet="anchorLink"></ng-container>
 </div>
 
-<div *ngIf="isExternalLink" class="fudis-link">
+<div *ngIf="external" class="fudis-link">
   <ng-container *ngTemplateOutlet="externalLink"></ng-container>
 </div>
 

@@ -23,12 +23,12 @@ const Template: StoryFn<FooterComponent> = (args: FooterComponent) => ({
         <fudis-link
           [href]="'example.com'"
           [linkTitle]="'Tietosuojaseloste'"
-          [isExternalLink]="true"
+          [external]="true"
         ></fudis-link>
         <fudis-link
           [href]="'example.com'"
           [linkTitle]="'Saavutettavuusseloste'"
-          [isExternalLink]="true"
+          [external]="true"
         ></fudis-link>
         <fudis-link [href]="'example.com'" [linkTitle]="'Järjestelmätiedot'"></fudis-link>
       </ng-template>
@@ -36,7 +36,7 @@ const Template: StoryFn<FooterComponent> = (args: FooterComponent) => ({
         <fudis-link
           [href]="'example.com'"
           [linkTitle]="'Promo link'"
-          [isExternalLink]="true"
+          [external]="true"
         ></fudis-link>
       </ng-template>
     </fudis-footer>
