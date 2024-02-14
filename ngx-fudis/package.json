@@ -47,7 +47,6 @@
     "@storybook/addon-essentials": "^7.6.15",
     "@storybook/addon-interactions": "^7.6.15",
     "@storybook/addon-links": "^7.6.15",
-    "@storybook/addon-mdx-gfm": "^7.6.15",
     "@storybook/angular": "^7.6.15",
     "@types/jest": "^29.5.12",
     "@types/node": "20.11.17",
