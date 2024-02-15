@@ -32,6 +32,8 @@ services:
     tty: true
     ports:
       - 9323:9323
+    environment:
+      - PLAYWRIGHT_BASE_URL=http://fudis-storybook:6006
     volumes:
       - ./test/visual-regression:/usr/src/app/visual-regression
       - ./test/playwright-report:/usr/src/app/playwright-report
