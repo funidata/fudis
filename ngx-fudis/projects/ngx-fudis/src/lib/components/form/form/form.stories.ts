@@ -45,8 +45,8 @@ import readme from './readme.mdx';
         <fudis-button [label]="'Submit'" (handleClick)="submitForm()" />
       </ng-template>
       <ng-template fudisContent [type]="'form'">
-        <fudis-section [title]="'Main section'">
-          <ng-template fudisContent [type]="'section'">
+        <!-- <fudis-section [title]="'Main section'">
+          <ng-template fudisContent [type]="'section'"> -->
             <fudis-expandable
               (closedChange)="handleClosedOutput($event)"
               [title]="'Expandable section 1'"
@@ -168,8 +168,8 @@ import readme from './readme.mdx';
                 </fudis-fieldset>
               </ng-template>
             </fudis-expandable>
-          </ng-template>
-        </fudis-section>
+          <!-- </ng-template>
+        </fudis-section> -->
       </ng-template>
     </fudis-form>
   `,
