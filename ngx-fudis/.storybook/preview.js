@@ -23,6 +23,9 @@ const preview = {
       argTypes: {
         exclude: excludeRegex(),
       },
+      controls: {
+        exclude: excludeRegex(),
+      },
       story: { inline: true },
     },
     options: {

@@ -30,6 +30,13 @@ export default {
     icon: {
       control: { type: 'text' },
     },
+    tooltip: {
+      control: { type: 'text' },
+    },
+    tooltipPosition: {
+      options: ['left', 'right', 'above', 'below'],
+      control: { type: 'radio' },
+    },
   },
 } as Meta;
 

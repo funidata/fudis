@@ -44,6 +44,8 @@ export interface FudisAlertElement extends FudisAlert {
   initialFocus: boolean;
 }
 
+export type FudisDialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'initial';
+
 export type FudisExpandableType = 'regular' | 'lite';
 
 export type FudisSpacing = 'none' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
