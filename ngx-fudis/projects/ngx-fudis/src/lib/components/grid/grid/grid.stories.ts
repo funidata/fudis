@@ -14,6 +14,10 @@ const commonExclude = [
   'ngOnChanges',
   'setColumns',
   'classes',
+  '_applyGridCss',
+  '_defineColumns',
+  '_setColumns',
+  '_gridDefaults',
 ];
 
 const allButColumnsExclude = [
@@ -63,12 +67,6 @@ export default {
 
 const ExampleTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
   props: args,
-  argTypes: {
-    columns: {
-      options: ['1fr 3fr', '1fr 1fr', '5fr 1fr'],
-      control: { type: 'select' },
-    },
-  },
   template: html`<fudis-grid
     [columns]="columns"
     [align]="align"
@@ -121,6 +119,53 @@ Example.args = {
   width: 'xxl',
   rowGap: 'responsive',
   columnGap: 'responsive',
+};
+
+Example.argTypes = {
+  columns: {
+    options: [1, 2, 3, 4, 5, 6, '1fr 3fr', '1fr 1fr', '5fr 1fr'],
+    control: { type: 'select' },
+  },
+  align: {
+    options: ['start', 'end', 'center'],
+    control: { type: 'select' },
+  },
+  alignItemsX: {
+    options: ['start', 'center', 'end', 'stretch'],
+    control: { type: 'select' },
+  },
+  alignItemsY: {
+    options: ['start', 'center', 'end', 'stretch'],
+    control: { type: 'select' },
+  },
+  width: {
+    options: ['xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'initial'],
+    control: { type: 'select' },
+  },
+  marginTop: {
+    options: ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+    control: { type: 'select' },
+  },
+  marginBottom: {
+    options: ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+    control: { type: 'select' },
+  },
+  rowGap: {
+    options: ['responsive', 'none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+    control: { type: 'select' },
+  },
+  columnGap: {
+    options: ['responsive', 'none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+    control: { type: 'select' },
+  },
+  marginSides: {
+    options: ['responsive', 'none'],
+    control: { type: 'select' },
+  },
+  ignoreDefaults: {
+    options: [true, false],
+    control: { type: 'radio' },
+  },
 };
 
 const EquallyWideColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
