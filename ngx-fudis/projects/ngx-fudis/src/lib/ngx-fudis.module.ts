@@ -257,7 +257,7 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     HeaderDirective,
     HeadingComponent,
     IconComponent,
-    InputWithLanguageOptionsComponent,
+    // InputWithLanguageOptionsComponent,
     LinkComponent,
     MultiselectComponent,
     MultiselectOptionComponent,

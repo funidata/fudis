@@ -51,7 +51,7 @@ export { ExpandableComponent } from './lib/components/expandable/expandable.comp
 export { FieldSetComponent } from './lib/components/form/fieldset/fieldset.component';
 export { FooterComponent } from './lib/components/footer/footer.component';
 export { FormComponent } from './lib/components/form/form/form.component';
-export { InputWithLanguageOptionsComponent } from './lib/components/form/input-with-language-options/input-with-language-options.component';
+// export { InputWithLanguageOptionsComponent } from './lib/components/form/input-with-language-options/input-with-language-options.component';
 export { GridComponent } from './lib/components/grid/grid/grid.component';
 export { GridDirective } from './lib/directives/grid/grid/grid.directive';
 export { GridItemComponent } from './lib/components/grid/grid-item/grid-item.component';
