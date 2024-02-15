@@ -1,8 +1,7 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
-import { linkTo } from "@storybook/addon-links";
 import { FooterComponent } from "./footer.component";
 import * as FooterComponentStories from "./footer.stories.ts";
-import { Source } from "@storybook/blocks";
+import { excludeRegex } from "../../utilities/storybook";
 
 <Meta title="Components/Footer" />
 
@@ -27,4 +26,4 @@ Fudis Footer is static component to be used as application's footer in the botto
 
 ## Properties
 
-<ArgTypes of={FooterComponent} />
+<ArgTypes of={FooterComponent} exclude={excludeRegex} />

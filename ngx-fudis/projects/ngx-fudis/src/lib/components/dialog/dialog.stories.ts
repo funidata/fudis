@@ -7,6 +7,7 @@ import { FudisDialogService } from '../../services/dialog/dialog.service';
 import readme from './readme.mdx';
 import { FudisValidators } from '../../utilities/form/validators';
 import { FudisErrorSummaryService } from '../../services/form/error-summary/error-summary.service';
+import { excludeRegex } from '../../utilities/storybook';
 
 type TestForm = {
   powerAnimal: FormControl<string | null>;
@@ -212,7 +213,7 @@ export default {
       page: readme,
     },
     controls: {
-      exclude: ['chosenPowerAnimal', 'exampleDialogFormGroup', 'closeDialogWithForm'],
+      exclude: excludeRegex,
     },
   },
 } as Meta;

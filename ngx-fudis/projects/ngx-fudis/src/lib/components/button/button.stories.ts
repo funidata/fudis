@@ -2,6 +2,7 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { ButtonComponent } from './button.component';
 import readme from './readme.mdx';
+import { buttonExclude } from '../../utilities/storybook';
 
 export default {
   title: 'Components/Button',
@@ -10,6 +11,9 @@ export default {
     docs: {
       page: readme,
     },
+    controls:{
+      exclude: buttonExclude
+    }
   },
   argTypes: {
     size: {

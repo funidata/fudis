@@ -3,6 +3,7 @@ import { linkTo } from "@storybook/addon-links";
 import { DescriptionListComponent } from "./description-list.component.ts";
 import * as DescriptionListStories from "./description-list.stories.ts";
 import { Source } from "@storybook/blocks";
+import { excludeRegex } from "../../utilities/storybook";
 
 <Meta title="Components/Description List" />
 
@@ -63,4 +64,4 @@ How to use:
 
 ## Properties
 
-<ArgTypes of={DescriptionListComponent} />
+<ArgTypes of={DescriptionListComponent} exclude={excludeRegex}/>

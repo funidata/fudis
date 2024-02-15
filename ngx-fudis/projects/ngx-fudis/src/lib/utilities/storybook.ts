@@ -6,6 +6,41 @@
  * import {excludeReges} from "../../path/to/utilities/storybook";
  * <ArgTypes of={YourComponent} exclude={excludeRegex} />
  *
+ * If you need to append the list, just provide a string[] with list of props to exclude.
  */
 
-export const excludeRegex = /^(?:_|ng)[a-zA-Z0-9]\w+/;
+export const excludeRegex = (array?: string[]): RegExp => {
+  const joined: string | null = array ? array.join('|') : null;
+
+  const joinedWithRegexOr: string = joined ? `|(${joined})` : '';
+
+  const regex = new RegExp(`(^(?:_|ng)[a-zA-Z0-9]\\w+)${joinedWithRegexOr}`);
+
+  console.log(regex);
+
+  return regex;
+};
+
+export const breadcrumbsExclude = excludeRegex(['classes']);
+
+export const buttonExclude = excludeRegex([
+  'classes',
+  'dropdownMenuId',
+  'dropdownOpen',
+  'buttonEl',
+  'handleBlur',
+  'buttonClick',
+  'openMenu',
+  'closeMenu',
+  'toggleMenu',
+]);
+
+export const expandableExclude = excludeRegex([
+  'ref',
+  'setClosedStatus',
+  'content',
+  'headerButtons',
+  'errorSummaryBreadcrumb',
+  'addToErrorSummary',
+  'removeFromErrorSummary',
+]);

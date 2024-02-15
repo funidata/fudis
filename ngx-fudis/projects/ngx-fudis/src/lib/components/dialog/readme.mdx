@@ -1,6 +1,7 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { DialogComponent } from "./dialog.component.ts";
 import * as DialogStories from "./dialog.stories.ts";
+import { excludeRegex } from "../../utilities/storybook";
 
 <Meta title="Components/Dialog" />
 
@@ -197,4 +198,4 @@ class FormDialogComponent {
 
 ## Properties
 
-<ArgTypes of={DialogComponent} />
+<ArgTypes of={DialogComponent} exclude={excludeRegex()} />
