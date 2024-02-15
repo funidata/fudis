@@ -15,9 +15,6 @@ export default {
     docs: {
       page: readme,
     },
-    controls: {
-      exclude: '_breadcrumbsPrefix',
-    },
   },
   argTypes: {},
 } as Meta;

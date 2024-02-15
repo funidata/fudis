@@ -10,9 +10,6 @@ export default {
     docs: {
       page: readme,
     },
-    controls: {
-      exclude: ['_iconColor', '_classList', 'getClasses', 'ngOnChanges', 'getAriaLabel'],
-    },
   },
   argTypes: {
     size: {
