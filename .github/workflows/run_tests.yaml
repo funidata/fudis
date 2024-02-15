@@ -119,9 +119,17 @@ jobs:
         run: docker build -t fudis-pw test/
       - name: Wait for Storybook server to be up
         run: curl --head -X GET --retry 10 --retry-connrefused --retry-delay 5 http://localhost:6006
-      - run: mkdir test/test-results
+      - name: Create test output directories for mounts
+        run: mkdir test/test-results test/playwright-report
       - name: Run visual regression tests
-        run: docker run -t -e CI=true -e PLAYWRIGHT_BASE_URL=http://localhost:6006 --network=host --mount type=bind,source=./test/test-results,target=/usr/src/app/test-results fudis-pw
+        run: |
+          docker run -t \
+            -e CI=true \
+            -e PLAYWRIGHT_BASE_URL=http://localhost:6006 \
+            --network=host \
+            --mount type=bind,source=./test/test-results,target=/usr/src/app/test-results \
+            --mount type=bind,source=./test/playwright-report,target=/usr/src/app/playwright-report \
+            fudis-pw
       - uses: actions/upload-artifact@v3
         if: always()
         with:
