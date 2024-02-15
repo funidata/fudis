@@ -283,7 +283,6 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     FudisGridService,
     FudisIdService,
     FudisLanguageBadgeGroupService,
-    FudisErrorSummaryService,
     FudisTranslationService,
   ],
 })
