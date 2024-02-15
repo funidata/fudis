@@ -14,6 +14,9 @@ export const updateLocale = (value: string): string => {
   }
 };
 
+/**
+ * Assign Fudis translation keys for Datepicker
+ */
 export const updateMatDatePickerTranslations = (
   translations: FudisTranslationConfig,
   datepickerIntl: MatDatepickerIntl,
@@ -36,7 +39,11 @@ export const updateMatDatePickerTranslations = (
   return matDatePickerIntlToReturn;
 };
 
-// TODO: write test
+/**
+ * Parse date input to number array
+ * @returns new Date(year, monthIndex, day)
+ */
+// TODO: Write test
 export const parseDate = (value: string | null | undefined): Date | null => {
   // Split input value by non number values. E. g. 25/5/1977 or 25.5.1977 --> [25,5,1977]
   const numberArray: number[] | null = value
@@ -45,8 +52,6 @@ export const parseDate = (value: string | null | undefined): Date | null => {
         .filter(Number)
         .map(Number)
     : null;
-
-  // return new Date(year, monthIndex, day)
 
   if (numberArray?.length === 3) {
     return new Date(numberArray[2], numberArray[1] - 1, numberArray[0]);
