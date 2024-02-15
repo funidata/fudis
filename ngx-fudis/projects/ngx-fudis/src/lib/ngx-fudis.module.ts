@@ -264,7 +264,7 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     NotificationComponent,
     NotificationsDirective,
     // RadioButtonGroupComponent,
-    SectionComponent,
+    // SectionComponent,
     SelectComponent,
     SelectOptionComponent,
     SelectGroupComponent,
