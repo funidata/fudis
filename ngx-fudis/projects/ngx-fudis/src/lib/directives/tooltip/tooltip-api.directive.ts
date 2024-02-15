@@ -8,17 +8,17 @@ import { FudisTooltipPosition } from '../../types/miscellaneous';
 })
 export class TooltipApiDirective {
   /**
-   * Text placed on tooltip
+   * Text placed inside tooltip
    */
   @Input() tooltip: string | undefined;
 
   /**
-   * tooltipToggle set on true makes tooltip appear when toggled. Default behavior is triggered on focus. TooltipToggle feature is prefered to be used with icons.
+   * Trigger tooltip on click
    */
   @Input() tooltipToggle = false;
 
   /**
-   * Sets the position of the tooltip on the parent element. Position options are left, right, above and below the parent element.
+   * Position of the tooltip on the parent element
    */
   @Input() tooltipPosition: FudisTooltipPosition = 'below';
 }

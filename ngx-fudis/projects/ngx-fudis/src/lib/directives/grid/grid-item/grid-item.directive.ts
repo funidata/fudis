@@ -28,13 +28,13 @@ export class GridItemDirective implements OnInit, OnChanges {
       this._breakpointService.getBreakpointState();
 
       if (typeof this._columns !== 'string') {
-        this.setColumns();
+        this._setColumns();
       }
       if (typeof this._alignX !== 'string') {
-        this.setAlignX();
+        this._setAlignX();
       }
       if (typeof this._alignY !== 'string') {
-        this.setAlignY();
+        this._setAlignY();
       }
     });
   }
@@ -99,42 +99,42 @@ export class GridItemDirective implements OnInit, OnChanges {
     }
   }
 
+  ngOnInit(): void {
+    this._element.classList.add('fudis-grid-item');
+    this._applyGridItemCss();
+  }
+
+  ngOnChanges(): void {
+    this._applyGridItemCss();
+  }
+
   /**
    * Set CSS grid-column attributes for this Grid Item element
    */
-  setColumns(): void {
+  private _setColumns(): void {
     this._breakpointService.setStyleAttributes(this._element, 'grid-column', this._columns);
   }
 
   /**
    * Set CSS justify-self attributes for this Grid Item element
    */
-  setAlignX(): void {
+  private _setAlignX(): void {
     this._breakpointService.setStyleAttributes(this._element, 'justify-self', this._alignX);
   }
 
   /**
    * Set CSS align-self attributes for this Grid Item element
    */
-  setAlignY(): void {
+  private _setAlignY(): void {
     this._breakpointService.setStyleAttributes(this._element, 'align-self', this._alignY);
   }
 
   /**
    * Apply CSS settings from Inputs
    */
-  applyGridItemCss(): void {
-    this.setColumns();
-    this.setAlignX();
-    this.setAlignY();
-  }
-
-  ngOnInit(): void {
-    this._element.classList.add('fudis-grid-item');
-    this.applyGridItemCss();
-  }
-
-  ngOnChanges(): void {
-    this.applyGridItemCss();
+  private _applyGridItemCss(): void {
+    this._setColumns();
+    this._setAlignX();
+    this._setAlignY();
   }
 }
