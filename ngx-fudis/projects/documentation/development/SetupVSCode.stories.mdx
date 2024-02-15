@@ -42,9 +42,40 @@ Recommended settings are specified in `settings/.vscode/settings.json`. They ass
 
 Take a look at the file to see all recommendations and commentary about them. You should really use all of them, but here are some of the most important ones:
 
-| Setting                     | Recommended Value | Description                                                                                                                                                                                   |
-| --------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `eslint.workingDirectories` | `["ngx-fudis"]`   | Enables the ESLint extension to work when VS Code is opened in repository root. Without this setting, interactive linting is available only when VS Code is opened in `ngx-fudis/` directory. |
-| `editor.formatOnSave`       | `true`            | Makes formatting painless as it happens automatically and you never have to think about it.                                                                                                   |
+<table>
+  <thead>
+    <tr>
+      <th>Setting</th>
+      <th>Recommended Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>eslint.workingDirectories</code>
+      </td>
+      <td>
+        <code>[&quot;ngx-fudis&quot;]</code>
+      </td>
+      <td>
+        Enables the ESLint extension to work when VS Code is opened in repository root. Without this
+        setting, interactive linting is available only when VS Code is opened in{" "}
+        <code>ngx-fudis/</code> directory.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <code>editor.formatOnSave</code>
+      </td>
+      <td>
+        <code>true</code>
+      </td>
+      <td>
+        Makes formatting painless as it happens automatically and you never have to think about it.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 Remember that VS Code applies `.vscode/settings.json` contents only to that folder and its subfolders, so your global configuration will not be affected by using these recommendations.

@@ -18,9 +18,18 @@ When you are using `breakpoint('md')`, your styles will be applied from `$breakp
 @include fudis.breakpoint($breakpoint){}
 ```
 
-| $breakpoint                                              |
-| -------------------------------------------------------- |
-| string value from breakpoint tokens map (_$breakpoints_) |
+<table>
+  <thead>
+    <tr>
+      <th>$breakpoint</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>string value from breakpoint tokens map (__$breakpoints__)</td>
+    </tr>
+  </tbody>
+</table>
 
 ```
 .my-element {
@@ -45,11 +54,58 @@ When you are using `breakpoint-max('md')`, your styles will be applied when view
 
 Breakpoints are based on Bootstrap's breakpoint system.
 
-| Name            | String value | Value | Default px value | Range it affects |
-| --------------- | ------------ | ----- | ---------------- | ---------------- |
-| $breakpoint-xxl | xxl          | 100em | 1600px           | +1600px          |
-| $breakpoint-xl  | xl           | 75em  | 1200px           | 1200px-1599px    |
-| $breakpoint-lg  | lg           | 62em  | 992px            | 992px-1199px     |
-| $breakpoint-md  | md           | 48em  | 768px            | 768px-991px      |
-| $breakpoint-sm  | sm           | 36em  | 576px            | 576px-767px      |
-| $breakpoint-xs  | xs           | 0     | 0                | 0-575px          |
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>String value</th>
+      <th>Value</th>
+      <th>Default px value</th>
+      <th>Range it affects</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$breakpoint-xxl</td>
+      <td>xxl</td>
+      <td>100em</td>
+      <td>1600px</td>
+      <td>+1600px</td>
+    </tr>
+    <tr>
+      <td>$breakpoint-xl</td>
+      <td>xl</td>
+      <td>75em</td>
+      <td>1200px</td>
+      <td>1200px-1599px</td>
+    </tr>
+    <tr>
+      <td>$breakpoint-lg</td>
+      <td>lg</td>
+      <td>62em</td>
+      <td>992px</td>
+      <td>992px-1199px</td>
+    </tr>
+    <tr>
+      <td>$breakpoint-md</td>
+      <td>md</td>
+      <td>48em</td>
+      <td>768px</td>
+      <td>768px-991px</td>
+    </tr>
+    <tr>
+      <td>$breakpoint-sm</td>
+      <td>sm</td>
+      <td>36em</td>
+      <td>576px</td>
+      <td>576px-767px</td>
+    </tr>
+    <tr>
+      <td>$breakpoint-xs</td>
+      <td>xs</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0-575px</td>
+    </tr>
+  </tbody>
+</table>
