@@ -114,20 +114,14 @@ jobs:
       - name: Load image
         run: docker load --input /tmp/fudis-test.image.tar
       - name: Start Storybook
-        run: docker run -t -p 6006:6006 -e STORYBOOK_FUDIS_VERSION=snapshot fudis-test npm run storybook
+        run: docker run -d -p 6006:6006 -e STORYBOOK_FUDIS_VERSION=snapshot fudis-test npm run storybook
       - name: Build Playwright image
         run: docker build -t fudis-pw test/
       - name: Wait for Storybook server to be up
         run: curl --head -X GET --retry 10 --retry-connrefused --retry-delay 5 http://localhost:6006
       - run: mkdir test/test-results
-      # - name: Run visual regression tests
-      - run: npm ci
-        working-directory: test
-      - run: npx playwright install --with-deps
-        working-directory: test
-      - run: PLAYWRIGHT_BASE_URL=http://localhost:6006 npx playwright test
-        working-directory: test
-      #   run: docker run -t -e CI=true -e PLAYWRIGHT_BASE_URL=http://localhost:6006 --network=host --mount type=bind,source=./test/test-results,target=/usr/src/app/test-results fudis-pw
+      - name: Run visual regression tests
+        run: docker run -t -e CI=true -e PLAYWRIGHT_BASE_URL=http://localhost:6006 --network=host --mount type=bind,source=./test/test-results,target=/usr/src/app/test-results fudis-pw
       - uses: actions/upload-artifact@v3
         if: always()
         with:
