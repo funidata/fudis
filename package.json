@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "cd ngx-fudis && npm ci",
     "setup:husky": "husky install",
-    "start": "npm run start:storybook && npm run logs",
+    "start": "npm run start:storybook && npm run logs -- fudis-storybook",
     "start:all": "npm run start:storybook && npm run start:sandbox && npm run logs",
     "start:sandbox": "docker compose up --build -d fudis-sandbox",
     "start:storybook": "BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD) docker compose up --build -d fudis-storybook",

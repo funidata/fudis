@@ -27,7 +27,8 @@ services:
   fudis-vr:
     build: ./test
     container_name: fudis-vr
-    command: npx playwright test
+    depends_on:
+      - fudis-storybook
     tty: true
     ports:
       - 9323:9323
