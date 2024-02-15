@@ -70,14 +70,14 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
               <fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
               <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
             </fudis-checkbox-group>
-            <fudis-datepicker
+            <!-- <fudis-datepicker
               [label]="'Start date'"
               [id]="'date-picker-1'"
               [size]="'md'"
               [helpText]="'You have to start from somewhere'"
               [control]="formExample.controls['importantDate']"
             >
-            </fudis-datepicker>
+            </fudis-datepicker> -->
           </fudis-grid>
         </ng-template>
       </fudis-fieldset>
@@ -111,7 +111,8 @@ class ErrorSummaryExampleComponent {
       FudisValidators.required('Missing email contact.'),
       FudisValidators.email('Input must be an email address.'),
     ]),
-    importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
+    // Expose after Datepicker is exposed to public API
+    // importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
     courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
   });
 
