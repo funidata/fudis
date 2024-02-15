@@ -1,11 +1,9 @@
-// eslint-disable-next-line max-classes-per-file
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { MockComponent } from 'ng-mocks';
 import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';
-
 import { ExpandableComponent } from './expandable.component';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
@@ -331,3 +329,5 @@ describe('ExpandableComponent', () => {
     });
   });
 });
+
+// TODO: add tests for title existing, heading level, closed input, closedChange output
