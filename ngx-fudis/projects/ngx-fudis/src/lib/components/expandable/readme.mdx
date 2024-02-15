@@ -1,8 +1,6 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { ExpandableComponent } from "./expandable.component";
 import * as ExpandableStories from "./expandable.stories.ts";
-import { propsToExclude } from "./expandable.stories";
-import { expandableExclude } from "../../utilities/storybook";
 
 <Meta title="Components/Expandable" />
 
@@ -75,4 +73,4 @@ Note: If there is Fudis Form components, such as Fudis Text Input, as expandable
 
 ## Properties
 
-<ArgTypes of={ExpandableComponent} exclude={expandableExclude} />
+<ArgTypes of={ExpandableComponent} />

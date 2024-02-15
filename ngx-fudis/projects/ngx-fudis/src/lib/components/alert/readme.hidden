@@ -106,4 +106,4 @@ Fudis Dialog has a focus trap, so that keyboard are not able to navigate outside
 
 ## Properties
 
-<ArgTypes of={AlertGroupComponent} exclude={excludeRegex}/>
+<ArgTypes of={AlertGroupComponent} />

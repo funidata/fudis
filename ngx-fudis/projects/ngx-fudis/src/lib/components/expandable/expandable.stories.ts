@@ -9,6 +9,9 @@ export default {
   parameters: {
     docs: {
       page: readme,
+      argTypes: {
+        exclude: expandableExclude,
+      },
     },
     controls: {
       exclude: expandableExclude,

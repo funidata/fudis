@@ -1,13 +1,18 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
-import { linkTo } from "@storybook/addon-links";
 import { NotificationComponent } from "./notification.component";
 import * as NotificationStories from "./notification.component.stories.ts";
+import { excludeRegex } from "../../utilities/storybook";
 
 <Meta title="Components/Notification" />
 
 # Notification
 
-Notifications are often informative contextual notifications that cannot be clicked away. The colors currently used are yellow `variant: “warning”`, red `variant: “danger”`, green `variant: “success”` and blue `variant: “info”`. Yellow notification is used in notes. Red notification describes an error situation. Green indicates the possibility or success of some function. Blue, on the other hand, is a neutral guideline.
+Notifications are often informative contextual notifications that cannot be clicked away. Input property `variant` can have following values:
+
+- Yellow `warning` notification is used in notes.
+- Red `danger` notification describes an error situation
+- Green `success` indicates the possibility or success of some function
+- Blue `info`, on the other hand, is a neutral guideline.
 
 ## Examples
 
@@ -27,9 +32,8 @@ Notification component property `link` accepts href address as a string. This li
 
 ### Related components
 
-[Icon](/docs/components-icon--documentation)
-
-[Link](/docs/components-link--documentation)
+- [Icon](/docs/components-icon--documentation)
+- [Link](/docs/components-link--documentation)
 
 ## Properties
 

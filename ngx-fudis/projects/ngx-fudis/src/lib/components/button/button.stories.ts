@@ -9,11 +9,14 @@ export default {
   component: ButtonComponent,
   parameters: {
     docs: {
+      argTypes: {
+        exclude: buttonExclude,
+      },
       page: readme,
     },
-    controls:{
-      exclude: buttonExclude
-    }
+    controls: {
+      exclude: buttonExclude,
+    },
   },
   argTypes: {
     size: {

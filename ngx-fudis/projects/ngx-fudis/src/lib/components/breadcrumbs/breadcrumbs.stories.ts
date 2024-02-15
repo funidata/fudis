@@ -15,6 +15,9 @@ export default {
   parameters: {
     docs: {
       page: readme,
+      argTypes: {
+        exclude: breadcrumbsExclude,
+      },
     },
     controls: {
       exclude: breadcrumbsExclude,

@@ -11,14 +11,20 @@ setCompodocJson(docJson);
 const preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
+
     controls: {
-      exclude: excludeRegex,
+      exclude: excludeRegex(),
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/,
       },
     },
-    docs: { story: { inline: true } },
+    docs: {
+      argTypes: {
+        exclude: excludeRegex(),
+      },
+      story: { inline: true },
+    },
     options: {
       storySort: {
         order: [

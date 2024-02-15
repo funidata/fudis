@@ -16,14 +16,12 @@ export const excludeRegex = (array?: string[]): RegExp => {
 
   const regex = new RegExp(`(^(?:_|ng)[a-zA-Z0-9]\\w+)${joinedWithRegexOr}`);
 
-  console.log(regex);
-
   return regex;
 };
 
-export const breadcrumbsExclude = excludeRegex(['classes']);
+export const breadcrumbsExclude: RegExp = excludeRegex(['classes']);
 
-export const buttonExclude = excludeRegex([
+export const buttonExclude: RegExp = excludeRegex([
   'classes',
   'dropdownMenuId',
   'dropdownOpen',
@@ -35,7 +33,7 @@ export const buttonExclude = excludeRegex([
   'toggleMenu',
 ]);
 
-export const expandableExclude = excludeRegex([
+export const expandableExclude: RegExp = excludeRegex([
   'ref',
   'setClosedStatus',
   'content',

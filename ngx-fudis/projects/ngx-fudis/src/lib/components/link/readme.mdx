@@ -1,6 +1,7 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/blocks";
 import { LinkComponent } from "./link.component";
 import * as LinkStories from "./link.stories.ts";
+import { excludeRegex } from "../../utilities/storybook";
 
 <Meta title="Components/Link" />
 
@@ -14,17 +15,15 @@ Link component is an anchor element.
 
 ## Usage Guidelines
 
-### Properties
-
 Link component requires either `href` or if using Angular Router `routerLinkUrl` with `fragmentId` properties.
 
-Link can be set to open in a new tab with `external` boolean.
+Component can be set to open in a new tab with `external` boolean.
 
 Link URL is set as the link title by default, adding `linkTitle` the visible title can be modified.
 
 Link color can be adjusted between `default`, `gray` and `white`. Application's root primary dark color is for `default` link color. Use `gray` and `white` with caution.
 
-### Accessibility
+## Accessibility
 
 - Screenreader is informed if link will open in a new tab
 - Icon indicates new tab for visible users

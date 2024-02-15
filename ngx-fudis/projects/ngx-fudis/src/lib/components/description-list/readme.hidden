@@ -64,4 +64,4 @@ How to use:
 
 ## Properties
 
-<ArgTypes of={DescriptionListComponent} exclude={excludeRegex}/>
+<ArgTypes of={DescriptionListComponent} />

@@ -9,9 +9,6 @@ export default {
     docs: {
       page: readme,
     },
-    controls: {
-      exclude: ['fragmentId', 'initialFocus'],
-    },
   },
 } as Meta;
 
