@@ -8,6 +8,8 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 
+// TODO: Write tests for all Dialog Directives in this file
+
 @Directive({
   selector: '[fudisDialogTitle]',
   providers: [

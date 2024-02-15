@@ -16,7 +16,7 @@
             "tsConfig": ".storybook/tsconfig.json",
             "styles": ["projects/ngx-fudis/style.scss"],
             "compodoc": true,
-            "compodocArgs": ["-p", "./tsconfig.json", "-e", "json", "-d", "./"]
+            "compodocArgs": ["-p", ".storybook/compodoc.tsconfig.json", "-e", "json", "-d", "./"]
           }
         },
         "start": {
@@ -27,7 +27,7 @@
             "port": 6006,
             "host": "0.0.0.0",
             "compodoc": true,
-            "compodocArgs": ["-p", "./tsconfig.json", "-e", "json", "-d", "./"]
+            "compodocArgs": ["-p", ".storybook/compodoc.tsconfig.json", "-e", "json", "-d", "./"]
           }
         }
       }

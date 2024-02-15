@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
 import { TooltipDirective } from './tooltip.directive';
 
 @Component({
@@ -61,6 +60,7 @@ describe('TooltipDirective', () => {
     expect(button2.tooltip).toEqual('I am toggle button!');
   });
 
+  // TODO: Test all tooltipPosition values
   it('buttons should return correct tooltipPositions', () => {
     const all = getTooltipDirective();
 
