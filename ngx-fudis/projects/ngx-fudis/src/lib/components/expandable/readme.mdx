@@ -1,5 +1,4 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
-import { linkTo } from "@storybook/addon-links";
 import { ExpandableComponent } from "./expandable.component";
 import * as ExpandableStories from "./expandable.stories.ts";
 
@@ -7,9 +6,23 @@ import * as ExpandableStories from "./expandable.stories.ts";
 
 # Expandable
 
-Fudis Expandable has two visual types: `variant: “regular”` and `variant: “lite”`, from which the latter is a lighter, link looking version of the component.
+Fudis Expandable is an accordion component where its content can be expanded or collapsed to create more compact pages.
 
-Expandable is closed initially by default; this can be controlled with the `closed` input property.
+## Properties
+
+### Variant
+
+Fudis Expandable has two variant types: `regular` and `lite`.
+
+### Opening and Closing programatically
+
+Expandable is by default closed; this can be programatically controlled with the `closed` input property.
+
+### Heading Level
+
+To define which h-level element the heading of the expandable is, provide suitable `level` attribute. By default this is number `2` and renders a `h2` tag.
+
+## Content Projection
 
 Expandable's content and additional header buttons are provided via content projection by using `fudisContent` and `fudisAction` directives:
 
@@ -27,7 +40,7 @@ Expandable's content and additional header buttons are provided via content proj
 
 All buttons wrapped in the fudisActions ng-template will appear to the right side of the header bar and on sm-sized screen they move to their own level.
 
-The content of the expandable is only initialized when the expandable is expanded for the first time. This helps to avoid unnecessary requests to the backend (among other expensive operations). Subsequent closing/expanding only hides the content instead of removing it from the DOM, for the same reason.
+The content of the expandable is not initially rendered to the DOM. Content will be initialized when the expandable is expanded for the first time. This helps to avoid unnecessary requests to the backend (among other expensive operations). Subsequent closing/expanding only hides the content instead of removing it from the DOM, for the same reason.
 
 About using lazy initalisation with content projection, see [Angular example of conditional content projection](https://angular.io/guide/content-projection#conditional-content-projection) for more background.
 
@@ -48,15 +61,15 @@ Note: If there is Fudis Form components, such as Fudis Text Input, as expandable
 - Expandable title is a required property.
 - Expandable header buttons and the expandable content are semantically correct and accessible by screen readers.
 - Information about the expandable's closed state is conveyed to screen readers.
+- Expandable is a section HTML element and its title is paired with the wrapping element.
 - Header expanding block and the additional buttons have a visible focus state
 - Header expanding block and the additional buttons' click can be triggered with keyboard <code>enter</code> and <code>space</code> key
 - Support for semantic header aria-level for screen reader users. The expandable semantic level is set to equal `h2` as a default and can be changed via the level input: `level: 2` equals to `h2`, `level: 3` equals to `h3` etc. Changing the level does not affect to the appearance of the component.
 
 ### Related components
 
-[Button](/docs/components-icon--documentation)
-
-[Icon](/docs/components-icon--documentation)
+- [Button](/docs/components-icon--documentation)
+- [Icon](/docs/components-icon--documentation)
 
 ## Properties
 

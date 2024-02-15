@@ -1,4 +1,3 @@
-// eslint-disable-next-line max-classes-per-file
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
