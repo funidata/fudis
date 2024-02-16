@@ -32,7 +32,9 @@ export class BodyTextComponent {
   @Input() color: 'default' | 'white' = 'default';
 
   /**
-   * Align body-text
+   * Align Body Text
    */
   @Input() align: FudisTextAlign = 'left';
+
+  //TODO: Enable Input spacing for marginBottom
 }
