@@ -1,5 +1,6 @@
 import { Directive, Input, TemplateRef } from '@angular/core';
 
+// TODO: Write tests for Actions Directive
 /**
  * A marker directive used to tag action buttons that will be rendered inside the allowed components.
  */
