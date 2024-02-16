@@ -61,7 +61,6 @@ describe('GridItemComponent', () => {
     return fixture.debugElement.queryAll(By.css('fudis-grid-item'));
   }
 
-  // eslint-disable-next-line consistent-return
   function getAttribute(index: number, attr: string) {
     switch (attr) {
       case 'justify-self':
@@ -86,7 +85,7 @@ describe('GridItemComponent', () => {
   });
 
   describe('Style properties', () => {
-    // FIXME: Use visual regression tests instead of testing style attribute values directly.
+    // TODO: Use visual regression tests instead of testing style attribute values directly.
     it.skip('should convert given alingX and alignY attributes to style properties', () => {
       fixture.detectChanges();
 
@@ -115,7 +114,7 @@ describe('GridItemComponent', () => {
       expect(getAttribute(1, 'align-self')).toBe('center');
     });
 
-    // FIXME: Use visual regression tests instead of testing style attribute values directly.
+    // TODO: Use visual regression tests instead of testing style attribute values directly.
     it.skip('should convert columns attribute to grid-column properties', () => {
       fixture.detectChanges();
 

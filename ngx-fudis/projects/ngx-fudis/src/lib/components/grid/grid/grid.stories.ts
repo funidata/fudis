@@ -1,35 +1,9 @@
 import { StoryFn, Meta, componentWrapperDecorator } from '@storybook/angular';
 import { GridComponent } from './grid.component';
+import { excludeAllRegex, gridExclude } from '../../../utilities/storybook';
 import readme from './readme.mdx';
 
 const html = String.raw;
-
-const commonExclude = [
-  '_element',
-  '_gridInputObject',
-  '_columns',
-  '_gridService',
-  'applyGridCss',
-  'ngOnInit',
-  'ngOnChanges',
-  'setColumns',
-  'classes',
-];
-
-const allButColumnsExclude = [
-  'align',
-  'alignItemsX',
-  'alignItemsY',
-  'classes',
-  'columnGap',
-  'marginBottom',
-  'marginSides',
-  'marginTop',
-  'rowGap',
-  'width',
-];
-
-const combinedExclude = commonExclude.concat(allButColumnsExclude);
 
 export default {
   title: 'Components/Grid/Grid',
@@ -55,20 +29,11 @@ export default {
     docs: {
       page: readme,
     },
-    controls: {
-      exclude: commonExclude,
-    },
   },
 } as Meta;
 
 const ExampleTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
   props: args,
-  argTypes: {
-    columns: {
-      options: ['1fr 3fr', '1fr 1fr', '5fr 1fr'],
-      control: { type: 'select' },
-    },
-  },
   template: html`<fudis-grid
     [columns]="columns"
     [align]="align"
@@ -123,6 +88,53 @@ Example.args = {
   columnGap: 'responsive',
 };
 
+Example.argTypes = {
+  columns: {
+    options: [1, 2, 3, 4, 5, 6, '1fr 3fr', '1fr 1fr', '5fr 1fr'],
+    control: { type: 'select' },
+  },
+  align: {
+    options: ['start', 'end', 'center'],
+    control: { type: 'select' },
+  },
+  alignItemsX: {
+    options: ['start', 'center', 'end', 'stretch'],
+    control: { type: 'select' },
+  },
+  alignItemsY: {
+    options: ['start', 'center', 'end', 'stretch'],
+    control: { type: 'select' },
+  },
+  width: {
+    options: ['xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'initial'],
+    control: { type: 'select' },
+  },
+  marginTop: {
+    options: ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+    control: { type: 'select' },
+  },
+  marginBottom: {
+    options: ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+    control: { type: 'select' },
+  },
+  rowGap: {
+    options: ['responsive', 'none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+    control: { type: 'select' },
+  },
+  columnGap: {
+    options: ['responsive', 'none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+    control: { type: 'select' },
+  },
+  marginSides: {
+    options: ['responsive', 'none'],
+    control: { type: 'select' },
+  },
+  ignoreDefaults: {
+    options: [true, false],
+    control: { type: 'radio' },
+  },
+};
+
 const EquallyWideColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
   props: args,
 
@@ -151,7 +163,7 @@ EquallyWideColumns.argTypes = {
 };
 EquallyWideColumns.parameters = {
   controls: {
-    exclude: combinedExclude,
+    exclude: gridExclude,
   },
 };
 
@@ -184,7 +196,7 @@ UnequallyWideColumns.argTypes = {
 };
 UnequallyWideColumns.parameters = {
   controls: {
-    exclude: combinedExclude,
+    exclude: gridExclude,
   },
 };
 
@@ -237,6 +249,6 @@ ResponsiveColumns.args = {
 
 ResponsiveColumns.parameters = {
   controls: {
-    exclude: combinedExclude,
+    exclude: excludeAllRegex,
   },
 };

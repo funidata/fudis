@@ -22,15 +22,15 @@ const Template: StoryFn<FooterComponent> = (args: FooterComponent) => ({
       <ng-template fudisFooterRight>
         <fudis-link
           [href]="'example.com'"
-          [linkTitle]="'Tietosuojaseloste'"
+          [linkTitle]="'Privacy notice'"
           [external]="true"
         ></fudis-link>
         <fudis-link
           [href]="'example.com'"
-          [linkTitle]="'Saavutettavuusseloste'"
+          [linkTitle]="'Accessibility statement'"
           [external]="true"
         ></fudis-link>
-        <fudis-link [href]="'example.com'" [linkTitle]="'Järjestelmätiedot'"></fudis-link>
+        <fudis-link [href]="'example.com'" [linkTitle]="'System information'"></fudis-link>
       </ng-template>
       <ng-template fudisFooterLeft>
         <fudis-link

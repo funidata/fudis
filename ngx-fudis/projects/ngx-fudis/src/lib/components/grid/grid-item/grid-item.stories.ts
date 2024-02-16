@@ -11,18 +11,6 @@ export default {
     docs: {
       page: readme,
     },
-    controls: {
-      exclude: [
-        'ngOnChanges',
-        'ngOnInit',
-        'currentBreakpoints',
-        'setAlign',
-        'setColumns',
-        '_columns',
-        '_currentBreakpoints',
-        '_gridColumnDefault',
-      ],
-    },
   },
   decorators: [
     componentWrapperDecorator(

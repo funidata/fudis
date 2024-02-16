@@ -16,17 +16,17 @@ export class GridApiDirective {
   /**
    * Alignment of Grid component inside its parent
    */
-  @Input() align: FudisGridAlign;
+  @Input() align: FudisGridAlign = 'center';
 
   /**
    * Horizontal alignment of Grid Items in a row
    */
-  @Input() alignItemsX: FudisGridAlignItems;
+  @Input() alignItemsX: FudisGridAlignItems = 'stretch';
 
   /**
    * Vertical alignment of Grid Items in a row
    */
-  @Input() alignItemsY: FudisGridAlignItems;
+  @Input() alignItemsY: FudisGridAlignItems = 'stretch';
 
   /**
    * Custom CSS classes for Grid element
@@ -36,7 +36,7 @@ export class GridApiDirective {
   /**
    * Grid column gap. Using Fudis spacing token values of xxs to xxl and none.
    */
-  @Input() columnGap: FudisGridGap;
+  @Input() columnGap: FudisGridGap = 'responsive';
 
   /**
    * Setting of columns for the grid. Input will be converted to native CSS grid grid-template-columns values
@@ -49,7 +49,7 @@ export class GridApiDirective {
    * After md breakpoint it will have two columns 'repeat(2, 1fr)'
    * And after xl breakpoint 'repeat(3, 1fr)'
    */
-  @Input() columns: string | number | FudisGridColumnsResponsive;
+  @Input() columns: string | number | FudisGridColumnsResponsive = '1fr';
 
   /**
    * To make Grid ignore default values defined by application and FudisGridService
@@ -59,22 +59,22 @@ export class GridApiDirective {
   /**
    * Margin bottom for the Grid
    */
-  @Input() marginBottom: FudisSpacing;
+  @Input() marginBottom: FudisSpacing = 'none';
 
   /**
    * Horizontal margins left and right of the grid
    */
-  @Input() marginSides: FudisGridMarginSide;
+  @Input() marginSides: FudisGridMarginSide = 'none';
 
   /**
    * Margin top for the Grid
    */
-  @Input() marginTop: FudisSpacing;
+  @Input() marginTop: FudisSpacing = 'none';
 
   /**
    * Grid row gap. Using Fudis spacing token values of xxs to xxl and none.
    */
-  @Input() rowGap: FudisGridGap;
+  @Input() rowGap: FudisGridGap = 'responsive';
 
   /**
    * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
@@ -85,5 +85,5 @@ export class GridApiDirective {
    * sm = Viewports smaller than 768px
    * xs = Viewports smaller than 576px
    */
-  @Input() width: FudisGridWidth;
+  @Input() width: FudisGridWidth = 'xxl';
 }

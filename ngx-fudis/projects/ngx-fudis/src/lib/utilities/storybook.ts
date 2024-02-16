@@ -49,6 +49,32 @@ export const expandableExclude: RegExp = excludeRegex([
   'removeFromErrorSummary',
 ]);
 
+// This is for additional Grid example tabs (Equally Wide Columns and Unequally Wide Columns).
+// For some reason the default regex does not affect them.
+export const gridExclude: RegExp = excludeRegex([
+  'align',
+  'alignItemsX',
+  'alignItemsY',
+  'classes',
+  'columnGap',
+  'ignoreDefaults',
+  'marginBottom',
+  'marginSides',
+  'marginTop',
+  'rowGap',
+  'width',
+  '_columns',
+  '_element',
+  '_gridDefaults',
+  '_gridInputObject',
+  '_gridService',
+  '_applyGridCss',
+  '_defineColumns',
+  '_setColumns',
+  'ngOnChanges',
+  'ngOnInit',
+]);
+
 export const headingExclude: RegExp = excludeRegex(['getHeadingMarginBottom', 'getHeadingSize']);
 
 export const iconExclude: RegExp = excludeRegex(['classes']);
