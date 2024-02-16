@@ -67,6 +67,8 @@ class MockContainerComponent {
   ];
 }
 
+//TODO: Should write test for size, id, setGroupBlurredOut.
+
 describe('CheckboxGroupComponent', () => {
   let component: CheckboxGroupComponent;
 

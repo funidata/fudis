@@ -86,6 +86,9 @@ export class CheckboxComponent implements OnInit {
     }
   }
 
+  /**
+   * When Checkbox is focused
+   */
   protected _onFocus(): void {
     this._focused = true;
   }
