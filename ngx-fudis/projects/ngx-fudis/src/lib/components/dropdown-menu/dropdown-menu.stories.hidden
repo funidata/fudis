@@ -11,9 +11,6 @@ export default {
     docs: {
       page: readme,
     },
-    controls: {
-      exclude: ['content', 'alignMenu'],
-    },
   },
   decorators: [
     applicationConfig({

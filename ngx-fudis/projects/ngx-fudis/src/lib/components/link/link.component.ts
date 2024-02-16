@@ -31,7 +31,7 @@ export class LinkComponent implements AfterViewInit {
   /**
    * Template reference for input. Used in e. g. initialFocus
    */
-  @ViewChild('linkRef') linkRef: ElementRef;
+  @ViewChild('linkRef') private _linkRef: ElementRef;
 
   /**
    * Link URL using native href
@@ -63,7 +63,7 @@ export class LinkComponent implements AfterViewInit {
    * Option to create an external link to point a target page on another domain.
    * External link contains external icon and assistive aria-label
    */
-  @Input() isExternalLink: boolean = false;
+  @Input() external: boolean = false;
 
   /**
    * Link color
@@ -112,8 +112,8 @@ export class LinkComponent implements AfterViewInit {
   }
 
   private _focusToLink(): void {
-    if (this.linkRef?.nativeElement) {
-      this.linkRef.nativeElement.focus();
+    if (this._linkRef?.nativeElement) {
+      this._linkRef.nativeElement.focus();
       this._focusTryCounter = 0;
     } else if (this._focusTryCounter < 100) {
       setTimeout(() => {

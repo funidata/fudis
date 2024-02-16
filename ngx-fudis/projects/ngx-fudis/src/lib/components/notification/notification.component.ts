@@ -24,12 +24,14 @@ export class NotificationComponent implements OnChanges, OnInit {
     });
   }
 
-  @ContentChild(ContentDirective) content: ContentDirective | null;
+  @ContentChild(ContentDirective) protected _content: ContentDirective | null;
 
   /**
    * Notification variant options
    */
   @Input() variant: FudisNotification = 'warning';
+
+  // TODO: add support for Angular Router Link
 
   /**
    * Add link href address
