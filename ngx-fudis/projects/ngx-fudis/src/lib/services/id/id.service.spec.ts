@@ -390,6 +390,8 @@ describe('FudisIdServiceService', () => {
     expect(idService.getFamilyIdData()).toEqual(familyDataAfter);
   };
 
+  // TODO: Write tests for getNewGrandChildId
+
   beforeEach(() => {
     TestBed.configureTestingModule({});
     idService = TestBed.inject(FudisIdService);
