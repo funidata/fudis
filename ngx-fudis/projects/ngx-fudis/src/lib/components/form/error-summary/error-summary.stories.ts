@@ -11,6 +11,9 @@ import { FudisFormErrorSummaryUpdateStrategy, FudisRadioButtonOption } from '../
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 
+// TODO: Refactor fudis-body-text inline style to Spacing Directive after the directive is exposed again
+// (fudisSpacing [marginRight]="'sm'" [marginTop]="'xs'")
+
 @Component({
   selector: 'example-error-summary',
   template: ` <fudis-form
@@ -26,7 +29,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
     [errorSummaryVisible]="errorSummaryVisible"
   >
     <ng-template fudisActions type="form">
-      <fudis-body-text fudisSpacing [marginRight]="'sm'" [marginTop]="'xs'">
+      <fudis-body-text style="margin: 0.5rem 1rem 0 0;">
         Live remove is "{{ toggleLive }}"
       </fudis-body-text>
       <fudis-button

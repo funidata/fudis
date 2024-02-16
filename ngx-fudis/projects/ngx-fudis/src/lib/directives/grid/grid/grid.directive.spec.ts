@@ -97,7 +97,6 @@ describe('GridDirective', () => {
     return getDirective(fixture, GridDirective);
   }
 
-  // eslint-disable-next-line consistent-return
   function getAttribute(index: number, attr: string) {
     switch (attr) {
       case 'justify-items':
@@ -133,6 +132,7 @@ describe('GridDirective', () => {
   });
 
   describe('Attributes', () => {
+    // TODO: Use visual regression tests instead of testing style attribute values directly.
     it('should convert align attributes to respective style properties', () => {
       fixture.detectChanges();
 
@@ -161,6 +161,7 @@ describe('GridDirective', () => {
       expect(getAttribute(0, 'justify-items')).toBe('end');
     });
 
+    // TODO: Use visual regression tests instead of testing style attribute values directly.
     it('should convert marginTop and marginBottom attributes to respective CSS classes', () => {
       expect(getClasses(1, 'xxs', 'xxs').value).toContain(
         'fudis-grid__margin__top__xxs fudis-grid__margin__bottom__xxs',

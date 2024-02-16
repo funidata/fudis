@@ -1,5 +1,6 @@
 import { Directive, Input, TemplateRef } from '@angular/core';
 
+// TODO: Write tests for all Content Directives in this file
 /**
  * A marker directive used to tag the template that will be rendered inside the allowed components
  */
