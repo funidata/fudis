@@ -96,4 +96,7 @@ export type FudisGridItemColumnsResponsive = {
   [K in FudisBreakpointKey]?: FudisGridItemWidth;
 };
 
+/**
+ * Grid input widths
+ */
 export type FudisGridFormInputWidth = 'inputXs' | 'inputSm' | 'inputMd' | 'inputLg';
