@@ -6,12 +6,12 @@ import {
   FudisDropdownLanguageOption,
   FudisInputSize,
 } from '../../../types/forms';
-
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 
+// TODO: Write Storybook documentation and add missing internal documentation for the functions (add public/private)
 @Component({
   selector: 'fudis-input-with-language-options',
   templateUrl: './input-with-language-options.component.html',

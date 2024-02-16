@@ -19,6 +19,7 @@ import { FudisInternalErrorSummaryService } from '../../services/form/error-summ
 import { FudisFormErrorSummarySection } from '../../types/forms';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 
+// TODO: Write Stroybook documentation and add missing internal documentation for the functions
 @Component({
   selector: 'fudis-section',
   templateUrl: './section.component.html',
@@ -132,7 +133,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 
     this._classList = this._getClasses();
     this._title = this.title;
-    this.addToErrorSummary();
+    this._addToErrorSummary();
   }
 
   ngOnChanges(): void {
@@ -140,15 +141,15 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 
     if (this.title !== this._title && this.id) {
       this._title = this.title;
-      this.addToErrorSummary();
+      this._addToErrorSummary();
     }
   }
 
   ngOnDestroy(): void {
-    this.removeFromErrorSummary();
+    this._removeFromErrorSummary();
   }
 
-  addToErrorSummary(): void {
+  private _addToErrorSummary(): void {
     if (this.errorSummaryBreadcrumb) {
       this._errorSummaryInfo = {
         id: this.id,
@@ -159,7 +160,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
     }
   }
 
-  removeFromErrorSummary(): void {
+  private _removeFromErrorSummary(): void {
     if (this._errorSummaryInfoSent) {
       this._errorSummaryService.removeSection(this._errorSummaryInfo);
     }

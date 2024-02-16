@@ -45,29 +45,29 @@ import readme from './readme.mdx';
         <fudis-button [label]="'Submit'" (handleClick)="submitForm()" />
       </ng-template>
       <ng-template fudisContent [type]="'form'">
-        <fudis-section [title]="'Main section'">
-          <ng-template fudisContent [type]="'section'">
-            <fudis-expandable
-              (closedChange)="handleClosedOutput($event)"
-              [title]="'Expandable section 1'"
-              [closed]="_closed"
-            >
-              <ng-template fudisContent [type]="'expandable'">
-                <fudis-grid>
-                  <fudis-fieldset
-                    [title]="'Basic info'"
-                    [helpText]="'Some generic info about this course'"
-                    [id]="fieldsetId"
-                  >
-                    <ng-template fudisNotifications [type]="'fieldset'">
-                      <fudis-notification *ngIf="firstLoad || errorSummaryVisible">
-                        This is notification for a fieldset. TODO: Add notifications to error
-                        summary if needed.
-                      </fudis-notification>
-                    </ng-template>
-                    <ng-template fudisContent [type]="'fieldset'">
-                      <fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
-                        <fudis-input-with-language-options
+        <!-- <fudis-section [title]="'Main section'">
+          <ng-template fudisContent [type]="'section'"> -->
+        <fudis-expandable
+          (closedChange)="handleClosedOutput($event)"
+          [title]="'Expandable section 1'"
+          [closed]="_closed"
+        >
+          <ng-template fudisContent [type]="'expandable'">
+            <fudis-grid>
+              <fudis-fieldset
+                [title]="'Basic info'"
+                [helpText]="'Some generic info about this course'"
+                [id]="fieldsetId"
+              >
+                <ng-template fudisNotifications [type]="'fieldset'">
+                  <fudis-notification *ngIf="firstLoad || errorSummaryVisible">
+                    This is notification for a fieldset. TODO: Add notifications to error summary if
+                    needed.
+                  </fudis-notification>
+                </ng-template>
+                <ng-template fudisContent [type]="'fieldset'">
+                  <fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
+                    <!-- <fudis-input-with-language-options
                           [id]="'unique-input-1'"
                           [options]="languageOptions"
                           [formGroup]="formExample.controls['name']"
@@ -84,8 +84,8 @@ import readme from './readme.mdx';
                               'Reminder here as well, that you have not set a good start date'
                             "
                           />
-                        </fudis-input-with-language-options>
-                        <fudis-input-with-language-options
+                        </fudis-input-with-language-options> -->
+                    <!-- <fudis-input-with-language-options
                           [variant]="'text-area'"
                           [id]="'unique-input-2'"
                           [options]="languageOptions"
@@ -94,82 +94,79 @@ import readme from './readme.mdx';
                           [helpText]="
                             'So that students know what they are getting into. Provide description in all languages.'
                           "
-                        />
-                        <!-- <fudis-radio-button-group
+                        /> -->
+                    <!-- <fudis-radio-button-group
                           [title]="'Course type'"
                           [id]="'radio-button-group-1'"
                           [options]="courseTypeOptions"
                           [control]="formExample.controls['courseType']"
                         /> -->
-                        <fudis-checkbox-group
-                          [formGroup]="formExample.controls.courseBooks"
-                          [title]="'Course books'"
-                          [required]="true"
-                          [helpText]="'Select 1-2 coursebooks'"
-                        >
-                          <fudis-checkbox [controlName]="'first'" [label]="'Heir to the Empire'" />
-                          <fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
-                          <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
-                        </fudis-checkbox-group>
-                        <fudis-datepicker
-                          [label]="'Start date'"
-                          [helpText]="'You have to start from somewhere'"
-                          [control]="formExample.controls['importantDate']"
-                        >
-                          <fudis-error-message
-                            *ngIf="
-                              formExample.controls['importantDate'].value?.getTime() !== releaseDate
-                            "
-                            [message]="'Wrong date chosen. 1.5.1991 would be great!'"
-                          />
-                        </fudis-datepicker>
-                      </fudis-grid>
-                    </ng-template>
-                  </fudis-fieldset>
-                  <fudis-fieldset
-                    [title]="'Tearcher info'"
-                    [tooltip]="'Quite many fields are required.'"
-                  >
-                    <ng-template fudisContent [type]="'fieldset'">
-                      <fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
-                        <fudis-text-input
-                          [initialFocus]="true"
-                          [id]="'unique-input-3'"
-                          [control]="formExample.controls['teacher']"
-                          [label]="'Responsible teacher'"
-                          [helpText]="'Someone has to be responsible for this.'"
-                        >
-                        </fudis-text-input>
-                        <fudis-text-input
-                          [id]="'unique-input-4'"
-                          [control]="formExample.controls['email']"
-                          [label]="'Contact email'"
-                          [helpText]="'So that students can ask for more time on their homework.'"
-                        />
-                      </fudis-grid>
-                    </ng-template>
-                  </fudis-fieldset>
-                </fudis-grid>
-              </ng-template>
-            </fudis-expandable>
-            <fudis-expandable
-              [closed]="_closed"
-              [title]="'Expandable section 2'"
-              [errorSummaryBreadcrumb]="true"
-            >
-              <ng-template fudisContent [type]="'expandable'">
-                <fudis-fieldset [title]="'More important dates'">
-                  <ng-template fudisContent [type]="'fieldset'">
-                    <fudis-date-range
-                      [startDate]="dateRangeStartDate"
-                      [endDate]="dateRangeEndDate"
+                    <fudis-checkbox-group
+                      [formGroup]="formExample.controls.courseBooks"
+                      [title]="'Course books'"
+                      [required]="true"
+                      [helpText]="'Select 1-2 coursebooks'"
+                    >
+                      <fudis-checkbox [controlName]="'first'" [label]="'Heir to the Empire'" />
+                      <fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
+                      <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
+                    </fudis-checkbox-group>
+                    <fudis-datepicker
+                      [label]="'Start date'"
+                      [helpText]="'You have to start from somewhere'"
+                      [control]="formExample.controls['importantDate']"
+                    >
+                      <fudis-error-message
+                        *ngIf="
+                          formExample.controls['importantDate'].value?.getTime() !== releaseDate
+                        "
+                        [message]="'Wrong date chosen. 1.5.1991 would be great!'"
+                      />
+                    </fudis-datepicker>
+                  </fudis-grid>
+                </ng-template>
+              </fudis-fieldset>
+              <fudis-fieldset
+                [title]="'Tearcher info'"
+                [tooltip]="'Quite many fields are required.'"
+              >
+                <ng-template fudisContent [type]="'fieldset'">
+                  <fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
+                    <fudis-text-input
+                      [initialFocus]="true"
+                      [id]="'unique-input-3'"
+                      [control]="formExample.controls['teacher']"
+                      [label]="'Responsible teacher'"
+                      [helpText]="'Someone has to be responsible for this.'"
+                    >
+                    </fudis-text-input>
+                    <fudis-text-input
+                      [id]="'unique-input-4'"
+                      [control]="formExample.controls['email']"
+                      [label]="'Contact email'"
+                      [helpText]="'So that students can ask for more time on their homework.'"
                     />
-                  </ng-template>
-                </fudis-fieldset>
-              </ng-template>
-            </fudis-expandable>
+                  </fudis-grid>
+                </ng-template>
+              </fudis-fieldset>
+            </fudis-grid>
           </ng-template>
-        </fudis-section>
+        </fudis-expandable>
+        <fudis-expandable
+          [closed]="_closed"
+          [title]="'Expandable section 2'"
+          [errorSummaryBreadcrumb]="true"
+        >
+          <ng-template fudisContent [type]="'expandable'">
+            <fudis-fieldset [title]="'More important dates'">
+              <ng-template fudisContent [type]="'fieldset'">
+                <fudis-date-range [startDate]="dateRangeStartDate" [endDate]="dateRangeEndDate" />
+              </ng-template>
+            </fudis-fieldset>
+          </ng-template>
+        </fudis-expandable>
+        <!-- </ng-template>
+        </fudis-section> -->
       </ng-template>
     </fudis-form>
   `,
@@ -196,28 +193,29 @@ class FormContentExampleComponent implements OnInit {
   ];
 
   formExample = new FormGroup({
-    name: new FormGroup(
-      {
-        finnish: new FormControl(null),
-        swedish: new FormControl(null),
-        english: new FormControl(null),
-      },
-      [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Course name is missing.'))],
-    ),
-    description: new FormGroup({
-      finnish: new FormControl(null, [
-        FudisValidators.required('Missing description in Finnish.'),
-        FudisValidators.minLength(10, 'Description should at least 10 characters.'),
-      ]),
-      swedish: new FormControl(null, [
-        FudisValidators.required('Missing description in Swedish.'),
-        FudisValidators.minLength(10, 'Description should at least 10 characters.'),
-      ]),
-      english: new FormControl(null, [
-        FudisValidators.required('Missing description in English.'),
-        FudisValidators.minLength(10, 'Description should at least 10 characters.'),
-      ]),
-    }),
+    // Expose when InputWithLanguageOptions is exposed to public API
+    // name: new FormGroup(
+    //   {
+    //     finnish: new FormControl(null),
+    //     swedish: new FormControl(null),
+    //     english: new FormControl(null),
+    //   },
+    //   [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Course name is missing.'))],
+    // ),
+    // description: new FormGroup({
+    //   finnish: new FormControl(null, [
+    //     FudisValidators.required('Missing description in Finnish.'),
+    //     FudisValidators.minLength(10, 'Description should at least 10 characters.'),
+    //   ]),
+    //   swedish: new FormControl(null, [
+    //     FudisValidators.required('Missing description in Swedish.'),
+    //     FudisValidators.minLength(10, 'Description should at least 10 characters.'),
+    //   ]),
+    //   english: new FormControl(null, [
+    //     FudisValidators.required('Missing description in English.'),
+    //     FudisValidators.minLength(10, 'Description should at least 10 characters.'),
+    //   ]),
+    // }),
     courseBooks: new FormGroup(
       {
         first: new FormControl(null),
