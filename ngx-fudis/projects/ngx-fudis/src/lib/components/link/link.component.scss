@@ -11,11 +11,11 @@
       @include focus.focus-generic;
     }
 
-    &__default {
+    &__primary-dark {
       @include colors.text-color("primary-dark");
     }
 
-    &__gray {
+    &__default {
       @include colors.text-color("gray-dark");
     }
 
