@@ -101,17 +101,17 @@ import readme from './readme.mdx';
                           [options]="courseTypeOptions"
                           [control]="formExample.controls['courseType']"
                         /> -->
-                        <fudis-checkbox-group
-                          [formGroup]="formExample.controls.courseBooks"
-                          [title]="'Course books'"
-                          [required]="true"
-                          [helpText]="'Select 1-2 coursebooks'"
-                        >
-                          <fudis-checkbox [controlName]="'first'" [label]="'Heir to the Empire'" />
-                          <fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
-                          <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
-                        </fudis-checkbox-group>
-                        <!-- <fudis-datepicker
+                    <fudis-checkbox-group
+                      [formGroup]="formExample.controls.courseBooks"
+                      [title]="'Course books'"
+                      [required]="true"
+                      [helpText]="'Select 1-2 coursebooks'"
+                    >
+                      <fudis-checkbox [controlName]="'first'" [label]="'Heir to the Empire'" />
+                      <fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
+                      <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
+                    </fudis-checkbox-group>
+                    <!-- <fudis-datepicker
                           [label]="'Start date'"
                           [helpText]="'You have to start from somewhere'"
                           [control]="formExample.controls['importantDate']"
@@ -123,36 +123,36 @@ import readme from './readme.mdx';
                             [message]="'Wrong date chosen. 1.5.1991 would be great!'"
                           />
                         </fudis-datepicker> -->
-                      </fudis-grid>
-                    </ng-template>
-                  </fudis-fieldset>
-                  <fudis-fieldset
-                    [title]="'Tearcher info'"
-                    [tooltip]="'Quite many fields are required.'"
-                  >
-                    <ng-template fudisContent [type]="'fieldset'">
-                      <fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
-                        <fudis-text-input
-                          [initialFocus]="true"
-                          [id]="'unique-input-3'"
-                          [control]="formExample.controls['teacher']"
-                          [label]="'Responsible teacher'"
-                          [helpText]="'Someone has to be responsible for this.'"
-                        >
-                        </fudis-text-input>
-                        <fudis-text-input
-                          [id]="'unique-input-4'"
-                          [control]="formExample.controls['email']"
-                          [label]="'Contact email'"
-                          [helpText]="'So that students can ask for more time on their homework.'"
-                        />
-                      </fudis-grid>
-                    </ng-template>
-                  </fudis-fieldset>
-                </fudis-grid>
-              </ng-template>
-            <!-- </fudis-expandable>
-            <fudis-expandable
+                  </fudis-grid>
+                </ng-template>
+              </fudis-fieldset>
+              <fudis-fieldset
+                [title]="'Tearcher info'"
+                [tooltip]="'Quite many fields are required.'"
+              >
+                <ng-template fudisContent [type]="'fieldset'">
+                  <fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
+                    <fudis-text-input
+                      [initialFocus]="true"
+                      [id]="'unique-input-3'"
+                      [control]="formExample.controls['teacher']"
+                      [label]="'Responsible teacher'"
+                      [helpText]="'Someone has to be responsible for this.'"
+                    >
+                    </fudis-text-input>
+                    <fudis-text-input
+                      [id]="'unique-input-4'"
+                      [control]="formExample.controls['email']"
+                      [label]="'Contact email'"
+                      [helpText]="'So that students can ask for more time on their homework.'"
+                    />
+                  </fudis-grid>
+                </ng-template>
+              </fudis-fieldset>
+            </fudis-grid>
+          </ng-template>
+        </fudis-expandable>
+        <!-- <fudis-expandable
               [closed]="_closed"
               [title]="'Expandable section 2'"
               [errorSummaryBreadcrumb]="true"
@@ -168,7 +168,7 @@ import readme from './readme.mdx';
                 </fudis-fieldset>
               </ng-template>
             </fudis-expandable> -->
-          <!-- </ng-template>
+        <!-- </ng-template>
         </fudis-section> -->
       </ng-template>
     </fudis-form>
