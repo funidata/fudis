@@ -1,8 +1,7 @@
 import { StoryFn, Meta, componentWrapperDecorator } from '@storybook/angular';
-
 import { ButtonComponent } from '../../components/button/button.component';
 import { SpacingDirective } from './spacing.directive';
-import readme from './readme.mdx';
+import readme from './readme.hidden';
 
 export default {
   title: 'Directives/Spacing',

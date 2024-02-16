@@ -57,7 +57,6 @@ describe('GridItemDirective', () => {
     return getDirective(fixture, GridItemDirective);
   }
 
-  // eslint-disable-next-line consistent-return
   function getAttribute(index: number, attr: string) {
     switch (attr) {
       case 'justify-self':
@@ -93,7 +92,7 @@ describe('GridItemDirective', () => {
       expect(getDefaultCSSClass(1)).toContain('fudis-grid-item');
     });
 
-    // FIXME: Use visual regression tests instead of testing style attribute values directly.
+    // TODO: Use visual regression tests instead of testing style attribute values directly.
     it.skip('should convert alignX and alignY attributes to style properties', () => {
       fixture.detectChanges();
 
@@ -122,7 +121,7 @@ describe('GridItemDirective', () => {
       expect(getAttribute(1, 'align-self')).toBe('center');
     });
 
-    // FIXME: Use visual regression tests instead of testing style attribute values directly.
+    // TODO: Use visual regression tests instead of testing style attribute values directly.
     it.skip('should convert columns attribute to grid-column properties', () => {
       fixture.detectChanges();
 
