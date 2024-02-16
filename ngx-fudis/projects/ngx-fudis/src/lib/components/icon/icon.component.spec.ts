@@ -207,4 +207,6 @@ describe('IconComponent', () => {
       });
     });
   });
+
+  //TODO: Should writes test for host class
 });
