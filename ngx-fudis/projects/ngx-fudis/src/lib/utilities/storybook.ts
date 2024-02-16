@@ -21,6 +21,8 @@ export const excludeRegex = (array?: string[]): RegExp => {
 
 export const excludeAllRegex: RegExp = /.*/;
 
+export const bodyTextExclude: RegExp = excludeRegex(['classes']);
+
 export const breadcrumbsExclude: RegExp = excludeRegex(['classes']);
 
 export const buttonExclude: RegExp = excludeRegex([
@@ -46,3 +48,8 @@ export const expandableExclude: RegExp = excludeRegex([
   'addToErrorSummary',
   'removeFromErrorSummary',
 ]);
+
+export const headingExclude: RegExp = excludeRegex(['getHeadingMarginBottom', 'getHeadingSize']);
+
+export const iconExclude: RegExp = excludeRegex(['classes']);
+

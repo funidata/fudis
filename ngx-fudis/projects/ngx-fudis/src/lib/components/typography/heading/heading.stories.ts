@@ -1,6 +1,7 @@
 import { StoryFn, Meta, componentWrapperDecorator } from '@storybook/angular';
 import { HeadingComponent } from './heading.component';
 import readme from './readme.mdx';
+import { headingExclude } from '../../../utilities/storybook';
 
 const html = String.raw;
 
@@ -10,6 +11,9 @@ export default {
   parameters: {
     docs: {
       page: readme,
+    },
+    controls: {
+      exclude: headingExclude,
     },
   },
   argTypes: {

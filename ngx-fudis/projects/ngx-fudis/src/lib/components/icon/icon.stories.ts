@@ -2,6 +2,7 @@ import { StoryFn, Meta } from '@storybook/angular';
 import { IconComponent } from './icon.component';
 import { fudisIconArray } from '../../types/icons';
 import readme from './readme.mdx';
+import { iconExclude } from '../../utilities/storybook';
 
 export default {
   title: 'Components/Icon',
@@ -11,7 +12,7 @@ export default {
       page: readme,
     },
     controls: {
-      exclude: ['_iconSize', 'classes', '_classList', '_getClasses', 'ngOnChanges'],
+      exclude: iconExclude,
     },
   },
   argTypes: {
