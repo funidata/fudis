@@ -35,6 +35,8 @@ export const buttonExclude: RegExp = excludeRegex([
   'toggleMenu',
 ]);
 
+export const linkExclude: RegExp = excludeRegex(['handleBlur', 'handleFocus']);
+
 export const dialogExclude: RegExp = excludeRegex(['closeButtonPositionAbsolute']);
 
 export const expandableExclude: RegExp = excludeRegex([
