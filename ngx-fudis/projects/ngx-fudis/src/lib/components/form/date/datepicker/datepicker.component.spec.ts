@@ -58,6 +58,7 @@ describe('DatepickerComponent', () => {
       assertDatepickerTopWrapperDivHasClasses('fudis-datepicker', 'fudis-input-size__md');
     });
 
+    // TODO: Testing size Input could be improved and compacted to one test
     it('should have respective CSS class indicating the datepicker size of small', () => {
       component.size = 'sm';
       fixture.detectChanges();
@@ -72,6 +73,7 @@ describe('DatepickerComponent', () => {
       assertDatepickerTopWrapperDivHasClasses('fudis-datepicker', 'fudis-input-size__lg');
     });
 
+    // TODO: Change ng-reflect to HTML id and for attributes if possible
     it('should have fudis-label component present with given id', () => {
       const childLabelComponent = fixture.debugElement.query(By.css('fudis-label'));
 
@@ -80,6 +82,7 @@ describe('DatepickerComponent', () => {
       expect(childLabelComponent.attributes['ng-reflect-for']).toEqual('fudis-dp-unique-id-3');
     });
 
+    // TODO: Change ng-reflect to HTML for attribute and guidance element if possible
     it('should have fudis-guidance component present with given id and helpText', () => {
       const childGuidanceComponent = fixture.debugElement.query(By.css('fudis-guidance'));
 
@@ -119,6 +122,7 @@ describe('DatepickerComponent', () => {
       expect(datepickerInput.className).toContain('fudis-form-input--invalid');
     });
 
+    // TODO: Change ng-reflect to HTML element if possible
     it('should have calendar icon from fudis-icon component', () => {
       const datepickerIcon = fixture.debugElement.query(By.css('fudis-icon'));
 
@@ -132,5 +136,7 @@ describe('DatepickerComponent', () => {
 
       expect(datepickerInput.className).toContain('fudis-form-input--disabled');
     });
+
+    // TODO: Test if control is invalid, guidance is present
   });
 });

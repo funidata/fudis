@@ -87,24 +87,28 @@ const ValidatorsTemplate: StoryFn = (args) => ({
         FudisValidators.pattern(/[\d]/, 'Text should include at least one digit'),
       ),
     },
-    startDate: {
-      label: 'DatepickerMin Validator',
-      control: new FormControl<Date | null>(null, [
-        FudisValidators.datepickerMin({
-          value: new Date(2024, 0, 10),
-          message: 'Start date cannot be earlier than 10.1.2024',
-        }),
-      ]),
-    },
-    endDate: {
-      label: 'DatepickerMax Validator',
-      control: new FormControl<Date | null>(null, [
-        FudisValidators.datepickerMax({
-          value: new Date(2024, 2, 25),
-          message: 'End date cannot be later than 25.3.2024',
-        }),
-      ]),
-    },
+    // Expose after DateRange is exposed to public API
+    // Deleted from the template:
+    // <fudis-date-range [startDate]="startDate" [endDate]="endDate" />
+
+    // startDate: {
+    //   label: 'DatepickerMin Validator',
+    //   control: new FormControl<Date | null>(null, [
+    //     FudisValidators.datepickerMin({
+    //       value: new Date(2024, 0, 10),
+    //       message: 'Start date cannot be earlier than 10.1.2024',
+    //     }),
+    //   ]),
+    // },
+    // endDate: {
+    //   label: 'DatepickerMax Validator',
+    //   control: new FormControl<Date | null>(null, [
+    //     FudisValidators.datepickerMax({
+    //       value: new Date(2024, 2, 25),
+    //       message: 'End date cannot be later than 25.3.2024',
+    //     }),
+    //   ]),
+    // },
     checkboxGroupAtLeastOneRequired: {
       formGroup: berryFormGroup,
       options: [
@@ -158,7 +162,6 @@ const ValidatorsTemplate: StoryFn = (args) => ({
         [size]="'md'"
       />
       <fudis-text-input [label]="'Pattern validator'" [control]="patternTextInput.control" />
-      <fudis-date-range [startDate]="startDate" [endDate]="endDate" />
     </fudis-grid>
     <hr class="fudis-hr" />
     <fudis-grid [columns]="2" [marginTop]="'xl'">

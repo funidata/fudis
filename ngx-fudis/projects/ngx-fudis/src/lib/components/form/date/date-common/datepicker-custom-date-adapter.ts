@@ -3,6 +3,7 @@ import { NativeDateAdapter } from '@angular/material/core';
 import { FudisDateInputFormat } from '../../../../types/forms';
 import { parseDate } from './utilities';
 
+// TODO: Write tests and add more internal documentation to this file if necessary
 @Injectable()
 export class DatepickerCustomDateAdapter extends NativeDateAdapter {
   /**
@@ -36,10 +37,8 @@ export class DatepickerCustomDateAdapter extends NativeDateAdapter {
   }
 
   /**
-   * Determines from displayFormat value if the Date value
-   * is coming from the input field or from the date picker calendar.
-   * This ensures, that visible input value is always in Finnish DD.MM.YYYY format,
-   * but calendar uses HTML lang in other context.
+   * Determines from displayFormat value if the Date value is coming from the input field or from the datepicker calendar.
+   * This ensures, that visible input value is always in Finnish DD.MM.YYYY format, but calendar uses HTML lang in other context.
    */
   selectLanguage(displayFormat: object): string {
     if (Object.prototype.valueOf.call(displayFormat) === FudisDateInputFormat) {
