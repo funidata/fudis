@@ -7,6 +7,8 @@ import {
   breakpointsMinWidthToObserve,
 } from '../../types/breakpoints';
 
+// TODO: Write tests and add Storybook documentation under Services
+
 @Injectable()
 export class FudisBreakpointService {
   /**
@@ -21,21 +23,27 @@ export class FudisBreakpointService {
       });
   }
 
-  public _currentScreenSize = signal<BreakpointState | null>(null);
+  /**
+   * Current screen size/breakpoint with true/false state
+   */
+  private _currentScreenSize = signal<BreakpointState | null>(null);
 
+  /**
+   * Readonly value for current screen size and state
+   */
   private _screenSize = this._currentScreenSize.asReadonly();
 
   /**
    * Get current state of Breakpoints
    */
-  getBreakpointState(): BreakpointState | null {
+  public getBreakpointState(): BreakpointState | null {
     return this._screenSize();
   }
 
   /**
-   * Function which applies CSS attributes
+   * Function to apply CSS attributes
    */
-  setStyleAttributes(
+  public setStyleAttributes(
     element: HTMLElement,
     attribute: FudisBreakpointStyle,
     value: string | FudisBreakpointStyleResponsive[],

@@ -22,6 +22,7 @@ const languageOptions: FudisSelectOption[] = [
   { value: 'english', label: 'En' },
 ];
 
+// TODO: Write tests
 describe('InputWithLanguageOptionsComponent', () => {
   let component: InputWithLanguageOptionsComponent;
   let fixture: ComponentFixture<InputWithLanguageOptionsComponent>;

@@ -1,5 +1,13 @@
 import { FudisTranslationConfig } from '../../types/miscellaneous';
 
+/**
+ * This file contains translations for static translation keys used by Fudis components.
+ * These are not supposed to be modified by the using application.
+ */
+
+/**
+ * English translations
+ */
 export const en: FudisTranslationConfig = {
   BREADCRUMBS: { PREFIX: 'Breadcrumbs' },
   REQUIRED: 'Required',
@@ -69,6 +77,9 @@ export const en: FudisTranslationConfig = {
   },
 };
 
+/**
+ * Finnish translations
+ */
 export const fi: FudisTranslationConfig = {
   BREADCRUMBS: { PREFIX: 'Murupolku' },
   REQUIRED: 'Pakollinen',
@@ -138,6 +149,9 @@ export const fi: FudisTranslationConfig = {
   },
 };
 
+/**
+ * Swedish translations
+ */
 export const sv: FudisTranslationConfig = {
   BREADCRUMBS: { PREFIX: 'Länkstig' },
   REQUIRED: 'Obligatorisk',

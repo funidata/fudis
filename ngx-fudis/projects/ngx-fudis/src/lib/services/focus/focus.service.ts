@@ -7,20 +7,35 @@ import { Inject, Injectable } from '@angular/core';
 export class FudisFocusService {
   constructor(@Inject(DOCUMENT) private _document: Document) {}
 
+  /**
+   * List of ignored id's
+   */
   private _ignoreInitialFocusList: string[] = [];
 
+  /**
+   * HTML element to focus
+   */
   private _focusTarget: HTMLElement;
 
+  /**
+   * Get target HTML element to focus
+   */
   public getFocusTarget(): HTMLElement {
     return this._focusTarget;
   }
 
+  /**
+   * Set focus target if it's not alert close button
+   */
   public setFocusTarget(target: HTMLElement): void {
     if (!target.classList.contains('fudis-alert__close')) {
       this._focusTarget = target;
     }
   }
 
+  /**
+   * Focus target element by id
+   */
   public focusToElementById(id: string, tryCounter: number = 100): void {
     setTimeout(() => {
       const element = this._document.getElementById(id);
@@ -34,7 +49,8 @@ export class FudisFocusService {
   }
 
   /**
-   * Add component with given id to ignore list, so that initialFocus is ignored with that. Used in e. g. a form where same component is added multiple times when user clicks 'New item' or similar and focus is wanted to move there except with 'item-id-x'.
+   * Add component with given id to ignore list, so that initialFocus is ignored with that.
+   * Used e.g. in a form where same component is added multiple times when user clicks 'New item' or similar and focus is wanted to move there except with 'item-id-x'.
    */
   public addToIgnoreList(id: string): void {
     if (!this._ignoreInitialFocusList.includes(id)) {
@@ -53,10 +69,16 @@ export class FudisFocusService {
     }
   }
 
+  /**
+   * Get list of ignored id's
+   */
   public getIgnoreList(): string[] {
     return this._ignoreInitialFocusList;
   }
 
+  /**
+   * Check if current id is in the ignored list
+   */
   public isIgnored(id: string): boolean {
     if (this._ignoreInitialFocusList.includes(id)) {
       return true;
