@@ -3,7 +3,8 @@
   "version": "0.2.2",
   "description": "Visual regression tests for Fudis",
   "scripts": {
-    "start": "npx playwright test --ui"
+    "start": "npx playwright test --ui",
+    "postinstall": "npx playwright install --with-deps"
   },
   "keywords": [],
   "author": "Funidata Ltd",
