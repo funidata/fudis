@@ -18,11 +18,11 @@ import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.ser
   selector: 'fudis-mock-footer',
   template: `<fudis-footer>
     <ng-template fudisFooterRight>
-      <fudis-link [href]="'example.com'" [linkTitle]="'Privacy notice'" [isExternalLink]="true" />
+      <fudis-link [href]="'example.com'" [linkTitle]="'Privacy notice'" [external]="true" />
       <fudis-link
         [href]="'example.com'"
         [linkTitle]="'Accessibility statement'"
-        [isExternalLink]="true"
+        [external]="true"
       />
       <fudis-link [href]="'example.com'" [linkTitle]="'System information'" />
     </ng-template>
