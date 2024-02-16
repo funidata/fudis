@@ -35,7 +35,6 @@
               <fudis-text-input
                 [label]="t('label')"
                 [helpText]="t('helpText')"
-                [maxLength]="20"
                 [control]="testFormGroup.controls['textInput']"
                 [tooltip]="
                   'This text-input has multiple validators: required, minlength and maxlength'
@@ -50,13 +49,13 @@
                   [message]="'Backend threw an error, it is not totally fault of this component'"
                 />
               </fudis-text-input>
-              <fudis-radio-button-group
+              <!-- <fudis-radio-button-group
                 [title]="t('chooseTruth')"
                 [helpText]="t('chooseTruthHelp')"
                 [control]="testFormGroup.controls['truth']"
                 [options]="radioButtonOptions"
-              />
-              <fudis-dropdown
+              /> -->
+              <!-- <fudis-dropdown
                 [id]="'dropdown-id-123'"
                 [label]="'Some dropdown'"
                 [options]="dropdownOptions"
@@ -68,7 +67,7 @@
                 [options]="dropdownOptions"
                 [multipleOption]="true"
                 [control]="testFormGroup.controls['dropdownMulti']"
-              />
+              /> -->
               <fudis-datepicker
                 [label]="'Select some date'"
                 [control]="testFormGroup.controls['date']"
@@ -76,7 +75,6 @@
               <fudis-text-area
                 [label]="'Basic required text-area'"
                 [control]="testFormGroup.controls['textArea']"
-                [maxLength]="20"
               />
               <fudis-input-with-language-options
                 [label]="'At least one required'"
@@ -95,24 +93,24 @@
     <ng-template fudisContent type="expandable">
       <fudis-grid [columns]="'inputLg'">
         <fudis-heading [level]="3" [size]="'md'">Single-select dropdown</fudis-heading>
-        <fudis-autocomplete
+        <!-- <fudis-autocomplete
           [label]="'Choose item'"
           [variant]="'dropdown'"
           [id]="'dropdown-1234'"
           [options]="multipleOptions"
           [control]="testFormGroup.controls['autocompleteDropdown']"
-        />
+        /> -->
         <fudis-heading [level]="3" [size]="'md'">Single-select search</fudis-heading>
-        <fudis-autocomplete
+        <!-- <fudis-autocomplete
           [label]="'Search item'"
           [options]="multipleOptions"
           [control]="testFormGroup.controls['autocompleteSearch']"
-        />
+        /> -->
         <fudis-heading [level]="3" [size]="'md'">Autocomplete multi-select dropdown</fudis-heading>
-        <fudis-autocomplete-multi-select
+        <!-- <fudis-autocomplete-multi-select
           [label]="'Search and choose items'"
           [options]="multipleOptions"
-        />
+        /> -->
       </fudis-grid>
     </ng-template>
   </fudis-expandable>

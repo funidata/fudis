@@ -1,6 +1,7 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { ButtonComponent } from './button.component';
 import readme from './readme.mdx';
+import { buttonExclude } from '../../utilities/storybook';
 
 export default {
   title: 'Components/Button',
@@ -10,7 +11,7 @@ export default {
       page: readme,
     },
     controls: {
-      exclude: ['_iconColor', '_classList', 'getClasses', 'ngOnChanges', 'getAriaLabel'],
+      exclude: buttonExclude,
     },
   },
   argTypes: {
@@ -24,6 +25,13 @@ export default {
     },
     icon: {
       control: { type: 'text' },
+    },
+    tooltip: {
+      control: { type: 'text' },
+    },
+    tooltipPosition: {
+      options: ['left', 'right', 'above', 'below'],
+      control: { type: 'radio' },
     },
   },
 } as Meta;

@@ -27,7 +27,7 @@ import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.ser
       <fudis-link [href]="'example.com'" [linkTitle]="'System information'" />
     </ng-template>
     <ng-template fudisFooterLeft>
-      <fudis-link [href]="'example.com'" [linkTitle]="'Promo link'" [isExternalLink]="true" />
+      <fudis-link [href]="'example.com'" [linkTitle]="'Promo link'" [external]="true" />
     </ng-template>
   </fudis-footer>`,
 })

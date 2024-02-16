@@ -1,5 +1,4 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
-
 import { AlertGroupComponent } from "./alert-group/alert-group.component.ts";
 
 <Meta title="Components/Alert Group" />
@@ -103,5 +102,7 @@ Fudis Dialog has a focus trap, so that keyboard are not able to navigate outside
 - Contrast between background colors and text meet accessibility criteria.
 - Alert Group is wrapped inside a `section` element which has an automatic `aria-label` describing its content. E. g. 'Notifications - Number of notifications: 5'
 - Elements used in Alert Group have proper labels as needed for screen reader users.
+
+## Properties
 
 <ArgTypes of={AlertGroupComponent} />

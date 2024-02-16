@@ -84,7 +84,7 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
    * Expandable is initially closed by default but can be controlled by [closed] input property
    */
   @Input() set closed(value: boolean) {
-    this.setClosedStatus(value);
+    this._setClosedStatus(value);
   }
 
   /**
@@ -127,14 +127,11 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
    */
   private _errorSummaryInfoSent: boolean = false;
 
-  public getClosedStatus(): boolean {
+  /**
+   * Getter for closed boolean
+   */
+  get closed(): boolean {
     return this._closed;
-  }
-
-  setClosedStatus(value: boolean): void {
-    this._closed = value ?? this._closed;
-    this._openedOnce = this._openedOnce || !this._closed;
-    this.closedChange.emit(this._closed);
   }
 
   ngOnInit(): void {
@@ -168,5 +165,14 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
     if (this._errorSummaryInfoSent) {
       this._errorSummaryService.removeSection(this._errorSummaryInfo);
     }
+  }
+
+  /**
+   * Setter for closed boolean
+   */
+  protected _setClosedStatus(value: boolean): void {
+    this._closed = value ?? this._closed;
+    this._openedOnce = this._openedOnce || !this._closed;
+    this.closedChange.emit(this._closed);
   }
 }

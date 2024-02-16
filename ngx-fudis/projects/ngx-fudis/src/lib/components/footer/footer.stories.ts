@@ -36,7 +36,7 @@ const Template: StoryFn<FooterComponent> = (args: FooterComponent) => ({
         <fudis-link
           [href]="'example.com'"
           [linkTitle]="'Promo link'"
-          [isExternalLink]="true"
+          [external]="true"
         ></fudis-link>
       </ng-template>
     </fudis-footer>

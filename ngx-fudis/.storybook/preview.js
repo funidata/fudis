@@ -4,6 +4,7 @@ import { moduleMetadata } from "@storybook/angular";
 import { setCompodocJson } from "@storybook/addon-docs/angular";
 import docJson from "../documentation.json";
 import getVersion from "./getVersion";
+import { excludeRegex } from "../projects/ngx-fudis/src/lib/utilities/storybook";
 
 setCompodocJson(docJson);
 
@@ -11,12 +12,21 @@ const preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
+      exclude: excludeRegex(),
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/,
       },
     },
-    docs: { story: { inline: true } },
+    docs: {
+      argTypes: {
+        exclude: excludeRegex(),
+      },
+      controls: {
+        exclude: excludeRegex(),
+      },
+      story: { inline: true },
+    },
     options: {
       storySort: {
         order: [
