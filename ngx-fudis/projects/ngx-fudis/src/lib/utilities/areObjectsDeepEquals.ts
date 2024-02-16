@@ -1,3 +1,4 @@
+// TODO: Write tests and internal documentation to this file why this is needed and for what it is used for.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type GenericObject = { [key: string]: any };
 

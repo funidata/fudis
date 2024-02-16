@@ -1,6 +1,8 @@
 import { ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
+// TODO: Write tests and internal documentation for each function
+
 export function sortClasses(classes: string): string[] {
   return classes.split(' ').sort();
 }
