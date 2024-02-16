@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   FudisSelectOption,
   FudisRadioButtonOption,
-  FudisDateRangeItem,
+  // FudisDateRangeItem,
 } from '../../../types/forms';
 import { FieldSetComponent } from './fieldset.component';
 import { FudisValidators } from '../../../utilities/form/validators';
@@ -61,7 +61,7 @@ import readme from './readme.mdx';
             [options]="courseTypeOptions"
             [control]="fieldsetExample.controls['courseType']"
           /> -->
-          <fudis-date-range [startDate]="startDate" [endDate]="endDate" />
+          <!-- <fudis-date-range [startDate]="startDate" [endDate]="endDate" /> -->
         </fudis-grid>
       </ng-template>
     </fudis-fieldset>
@@ -101,23 +101,24 @@ class FieldsetExampleComponent {
       FudisValidators.email('Input must be an email address.'),
       FudisValidators.minLength(5, 'Email should be at least 5 characters.'),
     ]),
-    startDate: new FormControl<Date | null>(
-      null,
-      FudisValidators.required('Start date is missing.'),
-    ),
-    endDate: new FormControl<Date | null>(null, FudisValidators.required('End date is missing.')),
+    // startDate: new FormControl<Date | null>(
+    //   null,
+    //   FudisValidators.required('Start date is missing.'),
+    // ),
+    // endDate: new FormControl<Date | null>(null, FudisValidators.required('End date is missing.')),
     courseType: new FormControl('', FudisValidators.required('Course type must be selected.')),
   });
 
-  startDate: FudisDateRangeItem = {
-    control: this.fieldsetExample.controls.startDate,
-    label: 'Start date',
-  };
+  // Expose when DateRange is exposed to public API
+  // startDate: FudisDateRangeItem = {
+  //   control: this.fieldsetExample.controls.startDate,
+  //   label: 'Start date',
+  // };
 
-  endDate: FudisDateRangeItem = {
-    control: this.fieldsetExample.controls.endDate,
-    label: 'End date',
-  };
+  // endDate: FudisDateRangeItem = {
+  //   control: this.fieldsetExample.controls.endDate,
+  //   label: 'End date',
+  // };
 
   languageOptions: FudisSelectOption[] = [
     { value: 'finnish', label: 'FI' },

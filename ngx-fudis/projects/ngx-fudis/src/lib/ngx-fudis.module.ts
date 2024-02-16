@@ -31,7 +31,6 @@ import {
 } from './directives/content-projection/content/content.directive';
 import { DatepickerComponent } from './components/form/date/datepicker/datepicker.component';
 
-import { DatepickerCustomHeaderComponent } from './components/form/date/date-common/datepicker-custom-header/datepicker-custom-header.component';
 import { DescriptionListComponent } from './components/description-list/description-list.component';
 import { DescriptionListItemComponent } from './components/description-list/description-list-item/description-list-item.component';
 import { DescriptionListItemTermComponent } from './components/description-list/description-list-item/description-list-item-term/description-list-item-term.component';
@@ -129,7 +128,6 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     ContentDirective,
     DateEndErrorDirective,
     DatepickerComponent,
-    DatepickerCustomHeaderComponent,
     DateRangeComponent,
     DateStartErrorDirective,
     DescriptionListComponent,
@@ -228,10 +226,9 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     CheckboxComponent,
     CheckboxGroupComponent,
     ContentDirective,
-    ErrorMessageComponent,
     DateEndErrorDirective,
-    DatepickerComponent,
-    DateRangeComponent,
+    // DatepickerComponent,
+    // DateRangeComponent,
     DateStartErrorDirective,
     // DescriptionListComponent,
     // DescriptionListItemComponent,
@@ -244,6 +241,7 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     DialogActionsDirective,
     // DropdownMenuComponent,
     // DropdownMenuItemComponent,
+    ErrorMessageComponent,
     ExpandableComponent,
     FooterComponent,
     FooterContentLeftDirective,

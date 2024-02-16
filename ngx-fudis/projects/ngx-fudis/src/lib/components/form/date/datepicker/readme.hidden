@@ -1,7 +1,7 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { linkTo } from "@storybook/addon-links";
 import { DatepickerComponent } from "./datepicker.component";
-import * as DatepickerStories from "./datepicker.stories.ts";
+import * as DatepickerStories from "./datepicker.stories.hidden";
 
 <Meta title="Components/Form/Datepicker" />
 

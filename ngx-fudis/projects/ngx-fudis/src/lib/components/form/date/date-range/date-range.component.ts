@@ -110,22 +110,22 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
     this.startDate.control.valueChanges
       .pipe(distinctUntilChanged(), this._untilDestroyed())
       .subscribe(() => {
-        this.checkDateCrossings();
+        this._checkDateCrossings();
       });
 
     this.endDate.control.valueChanges
       .pipe(distinctUntilChanged(), this._untilDestroyed())
       .subscribe(() => {
-        this.checkDateCrossings();
+        this._checkDateCrossings();
       });
 
-    this.setLabelHeight();
+    this._setLabelHeight();
   }
 
   /**
-   * Height of Date Pickers might vary if other one has tooltip and other one not, or if other one has longer label. This sets their label height equal, so they should remain aligned.
+   * Height of Datepickers might vary if other one has tooltip and other one not, or if other one has longer label. This sets their label height equal, so they should remain aligned.
    */
-  setLabelHeight(): void {
+  private _setLabelHeight(): void {
     const labels = (this._dateRangeRef?.nativeElement as HTMLDivElement)?.querySelectorAll(
       '.fudis-label',
     );
@@ -150,7 +150,7 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
     } else if (this._heightSetTryCounter < 100) {
       setTimeout(() => {
         this._heightSetTryCounter += 1;
-        this.setLabelHeight();
+        this._setLabelHeight();
       }, 100);
     }
   }
@@ -158,7 +158,7 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
   /**
    * Check and set, if start date is set to after end date
    */
-  checkDateCrossings(): void {
+  private _checkDateCrossings(): void {
     const startDateErrors = this.startDate.control?.errors;
     const endDateErrors = this.endDate.control?.errors;
 

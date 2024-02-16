@@ -21,7 +21,6 @@ import { InputBaseDirective } from '../../../../directives/form/input-base/input
 import { FUDIS_DATE_FORMATS, FudisInputSize } from '../../../../types/forms';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
-
 import { DatepickerCustomDateAdapter } from '../date-common/datepicker-custom-date-adapter';
 import { parseDate, updateLocale, updateMatDatePickerTranslations } from '../date-common/utilities';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
@@ -76,12 +75,12 @@ export class DatepickerComponent
   @ContentChild(DateEndErrorDirective) endDateError: DateEndErrorDirective;
 
   /**
-   * FormControl for the input.
+   * FormControl for the input
    */
   @Input({ required: true }) control: FormControl<Date | null>;
 
   /**
-   * Available sizes for the datepicker - defaults to medium.
+   * Available sizes for the datepicker
    */
   @Input() size: FudisInputSize = 'md';
 
