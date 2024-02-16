@@ -1,7 +1,6 @@
 import {
   Component,
   Input,
-  HostBinding,
   ViewEncapsulation,
   ChangeDetectionStrategy,
   OnInit,
@@ -19,8 +18,6 @@ import { FudisSpacing, FudisTextAlign } from '../../../types/miscellaneous';
 })
 export class HeadingComponent implements OnInit {
   constructor(private _idService: FudisIdService) {}
-
-  @HostBinding('class') mainClass = 'fudis-heading-host';
 
   /**
    * Semantic level of heading
@@ -57,14 +54,20 @@ export class HeadingComponent implements OnInit {
    */
   protected _id: string;
 
-  getHeadingMarginBottom(): FudisSpacing {
+  /**
+   * Get default marginBottom size
+   */
+  public getHeadingMarginBottom(): FudisSpacing {
     if (this.size === 'xxl' || this.size === 'xl') {
       return 'sm';
     }
     return 'xs';
   }
 
-  getHeadingSize(): FudisHeadingSize {
+  /**
+   * Get corresponding default size for a heading level
+   */
+  public getHeadingSize(): FudisHeadingSize {
     switch (this.level) {
       case 1:
         return 'xxl';
@@ -95,6 +98,9 @@ export class HeadingComponent implements OnInit {
     this._setClasses();
   }
 
+  /**
+   * Set CSS classes for heading
+   */
   private _setClasses(): void {
     this._classList = [
       `fudis-heading`,

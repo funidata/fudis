@@ -23,7 +23,9 @@ describe('BodyTextComponent', () => {
     fixture.detectChanges();
   });
 
+  //TODO: Write test for host class
   describe('CSS classes', () => {
+    // TODO: Refactor to use helper function to test size input
     it('should change CSS classes according to the given body-text size', () => {
       const element = getElement(fixture, '.fudis-body-text');
 
@@ -70,6 +72,7 @@ describe('BodyTextComponent', () => {
       );
     });
 
+    // TODO: Refactor to use helper function to test color input
     it('should change CSS classes according to given body-text color', () => {
       const element = getElement(fixture, '.fudis-body-text');
       component.color = 'white';
@@ -82,6 +85,7 @@ describe('BodyTextComponent', () => {
       );
     });
 
+    // TODO: Refactor to use helper function to test align input
     it('should change CSS classes according to given body-text align', () => {
       const element = getElement(fixture, '.fudis-body-text');
 

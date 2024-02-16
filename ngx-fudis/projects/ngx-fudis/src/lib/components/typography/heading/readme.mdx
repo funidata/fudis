@@ -1,7 +1,7 @@
 import { Meta, ArgTypes, Canvas } from "@storybook/blocks";
-import { linkTo } from "@storybook/addon-links";
 import { HeadingComponent } from "./heading.component";
 import * as HeadingStories from "./heading.stories.ts";
+import { headingExclude } from "../../../utilities/storybook";
 
 <Meta title="Components/Typography/Heading" />
 
@@ -38,4 +38,4 @@ Size is opted to be modified as wanted with `size` property as follows.
 
 ## Properties
 
-<ArgTypes of={HeadingComponent} />
+<ArgTypes of={HeadingComponent} exclude={headingExclude} />
