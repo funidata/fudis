@@ -1,15 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SectionComponent } from './section.component';
 import { HeadingComponent } from '../typography/heading/heading.component';
-
 import { FudisGridService } from '../../services/grid/grid.service';
-
 import { FudisIdService } from '../../services/id/id.service';
 import { GridDirective } from '../../directives/grid/grid/grid.directive';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 
+// TODO: Write tests
 describe('SectionComponent', () => {
   let component: SectionComponent;
   let fixture: ComponentFixture<SectionComponent>;

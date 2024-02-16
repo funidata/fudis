@@ -1,31 +1,30 @@
 import { Injectable } from '@angular/core';
-
 import { FudisInternalErrorSummaryService } from './internal-error-summary.service';
 import { FudisFormErrorSummaryUpdateStrategy } from '../../../types/forms';
 
 /**
- * This service is for Error Summary service's public methods and tools
+ * Error Summary Service public methods and tools
  */
 @Injectable({ providedIn: 'root' })
 export class FudisErrorSummaryService {
   constructor(private _errorSummaryService: FudisInternalErrorSummaryService) {}
 
   /**
-   * Get current updateStrategy of Error Summaries. By default 'reloadOnly'
+   * Get current updateStrategy of Error Summary. By default 'reloadOnly'.
    */
   public get updateStrategy(): FudisFormErrorSummaryUpdateStrategy {
     return this._errorSummaryService.updateStrategy;
   }
 
   /**
-   * Set updateStrategy of Error Summaries
+   * Set updateStrategy of Error Summary
    */
   public setUpdateStrategy(value: FudisFormErrorSummaryUpdateStrategy) {
     this._errorSummaryService.updateStrategy = value;
   }
 
   /**
-   * Reloads errors from the internal error summary service and tell component to focus to it on error reload
+   * Reloads errors and focus to Error Summary
    */
   public reloadErrors(): void {
     this._errorSummaryService.focusToSummaryList = true;
