@@ -2,6 +2,8 @@ import { FudisGridAttributes } from '../../types/grid';
 import { convertToRemValue } from '../../utilities/rem-converter';
 import * as utils from './gridUtils';
 
+// TODO: Add tests for replaceFormInputWidthsToRem and validateColumnInputArray functions
+
 describe('GridUtils', () => {
   describe('getGridCssValue function', () => {
     it('should return correct value for grid style property', () => {

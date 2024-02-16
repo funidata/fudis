@@ -16,11 +16,11 @@ export class TooltipDirective extends TooltipApiDirective implements OnInit, OnC
   }
 
   ngOnInit(): void {
-    this.setTooltip();
+    this._setTooltip();
   }
 
   ngOnChanges(): void {
-    this.setTooltip();
+    this._setTooltip();
   }
 
   @HostListener('mouseenter') onMouseEnter() {
@@ -62,7 +62,7 @@ export class TooltipDirective extends TooltipApiDirective implements OnInit, OnC
     }
   }
 
-  setTooltip(): void {
+  private _setTooltip(): void {
     if (this.tooltip) {
       this._ngMaterialTooltip.message = this.tooltip;
     }

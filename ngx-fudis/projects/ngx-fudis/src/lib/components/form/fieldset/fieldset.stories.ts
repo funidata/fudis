@@ -2,7 +2,7 @@ import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/ang
 import { ReactiveFormsModule, FormsModule, FormControl, FormGroup } from '@angular/forms';
 import { Component, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BehaviorSubject } from 'rxjs';
+// import { BehaviorSubject } from 'rxjs';
 import {
   FudisSelectOption,
   FudisRadioButtonOption,
@@ -10,7 +10,7 @@ import {
 } from '../../../types/forms';
 import { FieldSetComponent } from './fieldset.component';
 import { FudisValidators } from '../../../utilities/form/validators';
-import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
+// import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import readme from './readme.mdx';
 
 @Component({
@@ -31,7 +31,7 @@ import readme from './readme.mdx';
       </ng-template>
       <ng-template fudisContent [type]="'fieldset'">
         <fudis-grid [columns]="{ md: 2 }">
-          <fudis-input-with-language-options
+          <!-- <fudis-input-with-language-options
             [options]="languageOptions"
             [formGroup]="fieldsetExample.controls['name']"
             [label]="'Course name'"
@@ -45,7 +45,7 @@ import readme from './readme.mdx';
             [helpText]="
               'So that students know what they are getting into. Provide description in all languages.'
             "
-          />
+          /> -->
           <fudis-text-input
             [control]="fieldsetExample.controls['teacher']"
             [label]="'Responsible teacher'"
@@ -69,28 +69,29 @@ import readme from './readme.mdx';
 })
 class FieldsetExampleComponent {
   fieldsetExample = new FormGroup({
-    name: new FormGroup(
-      {
-        finnish: new FormControl(''),
-        swedish: new FormControl(''),
-        english: new FormControl(''),
-      },
-      [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Course name is missing'))],
-    ),
-    description: new FormGroup({
-      finnish: new FormControl('', [
-        FudisValidators.required('Missing description in Finnish.'),
-        FudisValidators.minLength(10, 'Description should at least 10 characters.'),
-      ]),
-      swedish: new FormControl('', [
-        FudisValidators.required('Missing description in Swedish.'),
-        FudisValidators.minLength(10, 'Description should at least 10 characters.'),
-      ]),
-      english: new FormControl('', [
-        FudisValidators.required('Missing description in English.'),
-        FudisValidators.minLength(10, 'Description should at least 10 characters.'),
-      ]),
-    }),
+    // Expose when InputWithLanguageOptions is exposed to public API
+    // name: new FormGroup(
+    //   {
+    //     finnish: new FormControl(''),
+    //     swedish: new FormControl(''),
+    //     english: new FormControl(''),
+    //   },
+    //   [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Course name is missing'))],
+    // ),
+    // description: new FormGroup({
+    //   finnish: new FormControl('', [
+    //     FudisValidators.required('Missing description in Finnish.'),
+    //     FudisValidators.minLength(10, 'Description should at least 10 characters.'),
+    //   ]),
+    //   swedish: new FormControl('', [
+    //     FudisValidators.required('Missing description in Swedish.'),
+    //     FudisValidators.minLength(10, 'Description should at least 10 characters.'),
+    //   ]),
+    //   english: new FormControl('', [
+    //     FudisValidators.required('Missing description in English.'),
+    //     FudisValidators.minLength(10, 'Description should at least 10 characters.'),
+    //   ]),
+    // }),
     teacher: new FormControl(
       '',
       FudisValidators.required("Missing teacher's name who is responsible for this course."),
