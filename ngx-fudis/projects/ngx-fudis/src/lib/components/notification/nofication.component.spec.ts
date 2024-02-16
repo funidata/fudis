@@ -27,6 +27,7 @@ describe('NotificationComponent', () => {
     fixture.detectChanges();
   });
 
+  // TODO: Test for link, externalLink, linkTitle and equivalent variant icon
   function assertNotificationHasClasses(classes: string): void {
     const childSpan = fixture.nativeElement.childNodes;
     const componentClasses = childSpan[0].className.split(' ').sort();

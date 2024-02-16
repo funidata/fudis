@@ -12,7 +12,6 @@ import {
 } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisTranslationConfig } from '../../types/miscellaneous';
-import { FudisFocusService } from '../../services/focus/focus.service';
 
 @Component({
   selector: 'fudis-link',
@@ -21,10 +20,7 @@ import { FudisFocusService } from '../../services/focus/focus.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinkComponent implements AfterViewInit {
-  constructor(
-    private _translationService: FudisTranslationService,
-    private _focusService: FudisFocusService,
-  ) {
+  constructor(private _translationService: FudisTranslationService) {
     effect(() => {
       this._translations = this._translationService.getTranslations();
 
