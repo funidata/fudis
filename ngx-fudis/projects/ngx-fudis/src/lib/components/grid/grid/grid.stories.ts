@@ -1,39 +1,9 @@
 import { StoryFn, Meta, componentWrapperDecorator } from '@storybook/angular';
 import { GridComponent } from './grid.component';
+import { excludeRegex } from '../../../utilities/storybook';
 import readme from './readme.mdx';
 
 const html = String.raw;
-
-const commonExclude = [
-  '_element',
-  '_gridInputObject',
-  '_columns',
-  '_gridService',
-  'applyGridCss',
-  'ngOnInit',
-  'ngOnChanges',
-  'setColumns',
-  'classes',
-  '_applyGridCss',
-  '_defineColumns',
-  '_setColumns',
-  '_gridDefaults',
-];
-
-const allButColumnsExclude = [
-  'align',
-  'alignItemsX',
-  'alignItemsY',
-  'classes',
-  'columnGap',
-  'marginBottom',
-  'marginSides',
-  'marginTop',
-  'rowGap',
-  'width',
-];
-
-const combinedExclude = commonExclude.concat(allButColumnsExclude);
 
 export default {
   title: 'Components/Grid/Grid',
@@ -60,7 +30,7 @@ export default {
       page: readme,
     },
     controls: {
-      exclude: commonExclude,
+      exclude: excludeRegex,
     },
   },
 } as Meta;
@@ -196,7 +166,7 @@ EquallyWideColumns.argTypes = {
 };
 EquallyWideColumns.parameters = {
   controls: {
-    exclude: combinedExclude,
+    exclude: excludeRegex,
   },
 };
 
@@ -229,7 +199,7 @@ UnequallyWideColumns.argTypes = {
 };
 UnequallyWideColumns.parameters = {
   controls: {
-    exclude: combinedExclude,
+    exclude: excludeRegex,
   },
 };
 
@@ -282,6 +252,6 @@ ResponsiveColumns.args = {
 
 ResponsiveColumns.parameters = {
   controls: {
-    exclude: combinedExclude,
+    exclude: excludeRegex,
   },
 };

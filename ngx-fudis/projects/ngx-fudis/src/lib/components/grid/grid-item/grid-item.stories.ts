@@ -1,5 +1,6 @@
 import { StoryFn, Meta, componentWrapperDecorator } from '@storybook/angular';
 import { GridItemComponent } from './grid-item.component';
+import { excludeRegex } from '../../../utilities/storybook';
 import readme from './readme.mdx';
 
 const html = String.raw;
@@ -12,22 +13,7 @@ export default {
       page: readme,
     },
     controls: {
-      exclude: [
-        'ngOnChanges',
-        'ngOnInit',
-        'currentBreakpoints',
-        'setAlign',
-        'setColumns',
-        '_columns',
-        '_currentBreakpoints',
-        '_gridColumnDefault',
-        '_alignX',
-        '_alignY',
-        '_element',
-        'applyGridItemCss',
-        'setAlignX',
-        'setAlignY',
-      ],
+      exclude: excludeRegex,
     },
   },
   decorators: [
