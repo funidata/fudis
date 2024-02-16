@@ -9,6 +9,7 @@ import { FudisGridColumnsResponsive } from '../../types/grid';
 import { FudisSpacing } from '../../types/miscellaneous';
 import { FudisSpacingResponsive, fudisSpacingValues } from '../../types/spacing';
 
+// TODO: Write tests and possible missing/extra internal documentation about these functions
 export const getBreakpointRules = (
   values: FudisSpacingResponsive | FudisGridColumnsResponsive,
   defaultValue: string,

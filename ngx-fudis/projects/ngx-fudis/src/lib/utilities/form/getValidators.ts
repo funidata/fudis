@@ -1,5 +1,7 @@
 import { AbstractControl, FormControl, Validators } from '@angular/forms';
 
+// TODO: Write internal documentation for these functions (individual or univesal description what these do)
+
 export const hasRequiredValidator = (control: AbstractControl): boolean => {
   const nativeRequired = control.hasValidator(Validators.required);
 
