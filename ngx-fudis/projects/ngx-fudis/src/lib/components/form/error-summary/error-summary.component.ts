@@ -11,9 +11,7 @@ import {
   ViewChild,
   effect,
 } from '@angular/core';
-
 import { DOCUMENT } from '@angular/common';
-
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import {
   FudisFormErrorSummaryObject,
@@ -88,10 +86,16 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
    */
   private _numberOfFocusTries: number = 0;
 
+  /**
+   * Fetch current visible errors
+   */
   private _fetchErrors(): void {
-    this.updateSummaryContent(this._errorSummaryService.getVisibleErrors());
+    this._updateSummaryContent(this._errorSummaryService.getVisibleErrors());
   }
 
+  /**
+   * Sort errors the same order they appear in the DOM
+   */
   private _sortErrorOrder(a: FudisFormErrorSummaryList, b: FudisFormErrorSummaryList): 0 | -1 | 1 {
     if (a.id === b.id) {
       return 0;
@@ -115,7 +119,10 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
     return 0;
   }
 
-  public updateSummaryContent(content: Signal<FudisFormErrorSummaryObject>): void {
+  /**
+   * Update Error Summary contents with possible parent Fieldsets and Sections
+   */
+  private _updateSummaryContent(content: Signal<FudisFormErrorSummaryObject>): void {
     const newErrorList: FudisFormErrorSummaryList[] = [];
 
     const fieldsets: FudisFormErrorSummarySection[] = this._errorSummaryService.getFieldsetList();
@@ -162,19 +169,22 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
       this._changeDetectorRef.detectChanges();
 
       if (this._errorSummaryService.focusToSummaryList) {
-        this.focusToErrorSummary();
+        this._focusToErrorSummary();
       }
     }
   }
 
-  focusToErrorSummary(): void {
+  /**
+   * Move focus to Error Summary if errors are visible
+   */
+  private _focusToErrorSummary(): void {
     if (this._focusTarget && this._visibleErrorList.length > 0) {
       this._numberOfFocusTries = 0;
       (this._focusTarget.nativeElement as HTMLDivElement).focus();
     } else if (this._numberOfFocusTries < 100) {
       setTimeout(() => {
         this._numberOfFocusTries += 1;
-        this.focusToErrorSummary();
+        this._focusToErrorSummary();
       }, 100);
     }
   }

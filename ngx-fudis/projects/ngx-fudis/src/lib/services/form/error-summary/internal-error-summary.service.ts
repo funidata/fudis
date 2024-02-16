@@ -9,7 +9,7 @@ import {
 } from '../../../types/forms';
 
 /**
- * Internal ErrorSummary tools not exposed to public
+ * Internal Error Summary tools not exposed to public
  */
 @Injectable({ providedIn: 'root' })
 export class FudisInternalErrorSummaryService {
@@ -80,28 +80,28 @@ export class FudisInternalErrorSummaryService {
   /**
    * Returns a list of current fieldsets
    */
-  getFieldsetList(): FudisFormErrorSummarySection[] {
+  public getFieldsetList(): FudisFormErrorSummarySection[] {
     return this._currentFieldsets;
   }
 
   /**
    * Returns a readonly list of parent forms of the error summary list
    */
-  getFormsWithErrorSummary(): Signal<FudisErrorSummaryParent[]> {
+  public getFormsWithErrorSummary(): Signal<FudisErrorSummaryParent[]> {
     return this._errorSummaryParentList.asReadonly();
   }
 
   /**
    * Returns a list of current sections
    */
-  getSectionList(): FudisFormErrorSummarySection[] {
+  public getSectionList(): FudisFormErrorSummarySection[] {
     return this._currentSections;
   }
 
   /**
    * Returns a readonly list of visible errors
    */
-  getVisibleErrors(): Signal<FudisFormErrorSummaryObject> {
+  public getVisibleErrors(): Signal<FudisFormErrorSummaryObject> {
     return this._signalCurrentErrorList.asReadonly();
   }
 
