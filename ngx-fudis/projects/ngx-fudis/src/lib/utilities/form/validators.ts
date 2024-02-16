@@ -19,7 +19,6 @@ export interface FudisValidatorsDatepickerSettings {
 /**
  * Form Control Validators
  */
-
 export const FudisValidators = {
   required,
   email,

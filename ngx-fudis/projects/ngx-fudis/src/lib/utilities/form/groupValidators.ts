@@ -16,6 +16,9 @@ export const FudisGroupValidators = {
   max,
 };
 
+/**
+ * At least one option must be selected from a group
+ */
 function atLeastOneRequired(message: FudisValidatorMessage): FudisValidatorFn {
   return (controlGroup: AbstractControl): FudisValidationErrors | null => {
     const { controls } = controlGroup as FormGroup;
@@ -38,6 +41,7 @@ function atLeastOneRequired(message: FudisValidatorMessage): FudisValidatorFn {
     return null;
   };
 }
+
 /**
  * Minimum selected options of a group
  */
