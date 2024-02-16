@@ -52,4 +52,3 @@ export const expandableExclude: RegExp = excludeRegex([
 export const headingExclude: RegExp = excludeRegex(['getHeadingMarginBottom', 'getHeadingSize']);
 
 export const iconExclude: RegExp = excludeRegex(['classes']);
-
