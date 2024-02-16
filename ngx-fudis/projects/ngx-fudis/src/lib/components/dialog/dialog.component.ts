@@ -2,8 +2,7 @@ import { Component, Input, OnDestroy, OnInit, effect } from '@angular/core';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisTranslationService } from '../../services/translation/translation.service';
-
-type DialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'initial';
+import { FudisDialogSize } from '../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-dialog',
@@ -25,7 +24,7 @@ export class DialogComponent implements OnInit, OnDestroy {
   /**
    * Dialog size
    */
-  @Input() size: DialogSize = 'md';
+  @Input() size: FudisDialogSize = 'md';
 
   /**
    * Dialog's close button has to have absolute positioning when used inside fudis-form

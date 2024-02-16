@@ -1,6 +1,7 @@
 {
   "extends": "../tsconfig.json",
   "include": [
+    "../projects/ngx-fudis/src/**/*.stories.ts",
     "../projects/ngx-fudis/src/**/*.component.ts",
     "../projects/ngx-fudis/src/**/*.directive.ts",
     "../projects/ngx-fudis/src/**/*.service.ts"

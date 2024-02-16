@@ -33,7 +33,7 @@ import { Component } from '@angular/core';
             hendrerit ante nisl sed quam. Vestibulum euismod leo ac magna pretium.
           </fudis-body-text>
         </fudis-grid>
-        <fudis-description-list
+        <!-- <fudis-description-list
           [columns]="'1fr 1fr 1fr'"
           [data]="[
             { key: 'Name', value: 'Mary Rhubarb', subHeading: 'The lady boss' },
@@ -44,7 +44,7 @@ import { Component } from '@angular/core';
               value: 'Pie maker 2023, Mix it up master 2008, Place setting champion 1987'
             }
           ]"
-        ></fudis-description-list>
+        ></fudis-description-list> -->
         <hr />
         <fudis-grid [columns]="3" [marginTop]="'sm'" [marginBottom]="'sm'">
           <div style="border: 2px solid lightblue">

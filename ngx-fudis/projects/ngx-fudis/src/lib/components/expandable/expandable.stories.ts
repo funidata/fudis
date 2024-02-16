@@ -1,6 +1,7 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { ExpandableComponent } from './expandable.component';
 import readme from './readme.mdx';
+import { expandableExclude } from '../../utilities/storybook';
 
 export default {
   title: 'Components/Expandable',
@@ -8,29 +9,12 @@ export default {
   parameters: {
     docs: {
       page: readme,
+      argTypes: {
+        exclude: expandableExclude,
+      },
     },
     controls: {
-      exclude: [
-        '_closed',
-        '_openedOnce',
-        'ref',
-        'closedChange',
-        'setClosedStatus',
-        'content',
-        'headerButtons',
-        'errorSummaryBreadcrumb',
-        '_errorSummaryInfo',
-        '_errorSummaryInfoSent',
-        '_headingId',
-        '_id',
-        '_title',
-        'addToErrorSummary',
-        'getClosedStatus',
-        'ngOnChanges',
-        'ngOnDestroy',
-        'ngOnInit',
-        'removeFromErrorSummary',
-      ],
+      exclude: expandableExclude,
     },
   },
 } as Meta;
