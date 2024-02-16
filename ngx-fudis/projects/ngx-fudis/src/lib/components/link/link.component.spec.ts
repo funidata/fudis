@@ -5,6 +5,7 @@ import { MockComponent } from 'ng-mocks';
 import { RouterModule } from '@angular/router';
 import { IconComponent } from '../icon/icon.component';
 import { LinkComponent } from './link.component';
+import { getElement, getTrimmedTextContent } from '../../utilities/tests/utilities';
 
 describe('LinkComponent', () => {
   let component: LinkComponent;
@@ -25,6 +26,49 @@ describe('LinkComponent', () => {
     fixture.detectChanges();
   });
 
+  function linkColorCheck(color: 'primary-dark' | 'default' | 'white'): void {
+    component.color = color;
+    fixture.detectChanges();
+
+    const linkEl = getElement(fixture, 'a');
+
+    expect(linkEl.className).toContain(`fudis-link__anchor__${color}`);
+  }
+
+  function linkSizeCheck(size: 'inherit' | 'md' | 'lg'): void {
+    component.size = size;
+    fixture.detectChanges();
+
+    const linkEl = getElement(fixture, 'a');
+
+    expect(linkEl.className).toContain(`fudis-link__anchor__${size}`);
+  }
+
+  describe('CSS classes', () => {
+    it('should have default CSS classes', () => {
+      const wrapperElement = getElement(fixture, '.fudis-link');
+      const linkElement = getElement(fixture, 'a');
+      const linkClasses = linkElement.className;
+
+      expect(linkClasses).toContain(
+        'fudis-link__anchor fudis-link__anchor__inherit fudis-link__anchor__primary-dark',
+      );
+      expect(wrapperElement).toBeTruthy();
+    });
+
+    it('should have respective CSS class for color', () => {
+      linkColorCheck('default');
+      linkColorCheck('primary-dark');
+      linkColorCheck('white');
+    });
+
+    it('should have respective CSS class for size', () => {
+      linkSizeCheck('inherit');
+      linkSizeCheck('md');
+      linkSizeCheck('lg');
+    });
+  });
+
   describe('Regular link component', () => {
     it('should render linkTitle if it is given', () => {
       component.href = 'www.example.com';
@@ -32,23 +76,26 @@ describe('LinkComponent', () => {
       fixture.detectChanges();
       const anchorElement = fixture.debugElement.query(By.css('.fudis-link__anchor'));
 
-      expect(anchorElement.nativeNode.innerHTML).toEqual(' My link ');
-    });
-
-    // TODO: Remove skip.
-    it.skip('should always have href', () => {
-      component.href = '';
-      fixture.detectChanges();
-
-      // FIXME: In jasmine, `.not.toBeTrue()` matches for strict boolean equality. This is probably not what was supposed to be tested here.
-      // expect(component).not.toBeTrue();
+      expect(getTrimmedTextContent(anchorElement.nativeElement)).toEqual('My link');
     });
   });
 
   describe('External link component', () => {
-    it('should have new-tab icon', () => {
+    beforeEach(() => {
       component.external = true;
       fixture.detectChanges();
+    });
+
+    it('should have default CSS classes', () => {
+      const externalLinkElement = getElement(fixture, 'a');
+      const externalLinkClasses = externalLinkElement.className;
+
+      expect(externalLinkClasses).toContain(
+        'fudis-link__anchor fudis-link__anchor__external fudis-link__anchor__inherit fudis-link__anchor__primary-dark',
+      );
+    });
+
+    it('should have new-tab icon', () => {
       const externalLinkComponent = fixture.debugElement.query(
         By.css('.fudis-link__anchor__external'),
       );
@@ -59,7 +106,6 @@ describe('LinkComponent', () => {
 
     it('should have assistive aria-label for screen readers', () => {
       component.href = 'www.example.com';
-      component.external = true;
       fixture.detectChanges();
       const externalLinkComponent = fixture.debugElement.query(
         By.css('.fudis-link__anchor__external'),
