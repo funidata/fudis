@@ -8,6 +8,8 @@
 @use "../../../../foundations/spacing/tokens.scss" as spacing;
 @use "../../../../foundations/focus/mixins.scss" as focus;
 
+// TODO: Would be nice to know for what exact elements each style "hack" is used for
+
 .fudis-datepicker {
   &__toggle {
     /* Target mat-icon-button */

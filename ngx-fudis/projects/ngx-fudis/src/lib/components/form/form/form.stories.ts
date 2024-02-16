@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 import {
   FudisSelectOption,
   FudisRadioButtonOption,
-  FudisDateRangeItem,
+  // FudisDateRangeItem,
 } from '../../../types/forms';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { FudisValidators } from '../../../utilities/form/validators';
@@ -111,18 +111,18 @@ import readme from './readme.mdx';
                       <fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
                       <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
                     </fudis-checkbox-group>
-                    <fudis-datepicker
-                      [label]="'Start date'"
-                      [helpText]="'You have to start from somewhere'"
-                      [control]="formExample.controls['importantDate']"
-                    >
-                      <fudis-error-message
-                        *ngIf="
-                          formExample.controls['importantDate'].value?.getTime() !== releaseDate
-                        "
-                        [message]="'Wrong date chosen. 1.5.1991 would be great!'"
-                      />
-                    </fudis-datepicker>
+                    <!-- <fudis-datepicker
+                          [label]="'Start date'"
+                          [helpText]="'You have to start from somewhere'"
+                          [control]="formExample.controls['importantDate']"
+                        >
+                          <fudis-error-message
+                            *ngIf="
+                              formExample.controls['importantDate'].value?.getTime() !== releaseDate
+                            "
+                            [message]="'Wrong date chosen. 1.5.1991 would be great!'"
+                          />
+                        </fudis-datepicker> -->
                   </fudis-grid>
                 </ng-template>
               </fudis-fieldset>
@@ -152,19 +152,22 @@ import readme from './readme.mdx';
             </fudis-grid>
           </ng-template>
         </fudis-expandable>
-        <fudis-expandable
-          [closed]="_closed"
-          [title]="'Expandable section 2'"
-          [errorSummaryBreadcrumb]="true"
-        >
-          <ng-template fudisContent [type]="'expandable'">
-            <fudis-fieldset [title]="'More important dates'">
-              <ng-template fudisContent [type]="'fieldset'">
-                <fudis-date-range [startDate]="dateRangeStartDate" [endDate]="dateRangeEndDate" />
+        <!-- <fudis-expandable
+              [closed]="_closed"
+              [title]="'Expandable section 2'"
+              [errorSummaryBreadcrumb]="true"
+            >
+              <ng-template fudisContent [type]="'expandable'">
+                <fudis-fieldset [title]="'More important dates'">
+                  <ng-template fudisContent [type]="'fieldset'">
+                    <fudis-date-range
+                      [startDate]="dateRangeStartDate"
+                      [endDate]="dateRangeEndDate"
+                    />
+                  </ng-template>
+                </fudis-fieldset>
               </ng-template>
-            </fudis-fieldset>
-          </ng-template>
-        </fudis-expandable>
+            </fudis-expandable> -->
         <!-- </ng-template>
         </fudis-section> -->
       </ng-template>
@@ -256,15 +259,16 @@ class FormContentExampleComponent implements OnInit {
     { value: 'advanced', label: 'Advanced', id: 'courseType-2', name: 'courseType' },
   ];
 
-  dateRangeStartDate: FudisDateRangeItem = {
-    control: this.formExample.controls.startDate,
-    label: 'Start date',
-  };
+  // Expose when DateRange is exposed to public API
+  // dateRangeStartDate: FudisDateRangeItem = {
+  //   control: this.formExample.controls.startDate,
+  //   label: 'Start date',
+  // };
 
-  dateRangeEndDate: FudisDateRangeItem = {
-    control: this.formExample.controls.endDate,
-    label: 'End date',
-  };
+  // dateRangeEndDate: FudisDateRangeItem = {
+  //   control: this.formExample.controls.endDate,
+  //   label: 'End date',
+  // };
 
   private _closed: boolean = true;
 

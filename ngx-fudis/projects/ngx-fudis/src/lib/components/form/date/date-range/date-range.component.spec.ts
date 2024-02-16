@@ -16,7 +16,7 @@ import { FudisValidators } from '../../../../utilities/form/validators';
 import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directive';
 import { FudisIdService } from '../../../../services/id/id.service';
 
-// TODO: write tests
+// TODO: Write tests
 describe('DateRangeComponent', () => {
   let component: DateRangeComponent;
   let fixture: ComponentFixture<DateRangeComponent>;
