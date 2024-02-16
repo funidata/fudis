@@ -1,6 +1,6 @@
 <ng-container *transloco="let t">
   <div class="root-style">
-    <fudis-alert-group />
+    <!-- <fudis-alert-group /> -->
 
     <fudis-grid [columns]="4" [marginTop]="'lg'">
       <fudis-grid-item [columns]="'3 / 4'" [alignX]="'end'" [alignY]="'end'">
@@ -24,7 +24,7 @@
             <fudis-heading [level]="3" fudisGridItem [columns]="'auto'">
               <fudis-link [href]="'#'" [linkTitle]="'Link inside a heading'"></fudis-link>
             </fudis-heading>
-            <fudis-button [label]="'Trigger alert'" (handleClick)="triggerAlert()" />
+            <!-- <fudis-button [label]="'Trigger alert'" (handleClick)="triggerAlert()" /> -->
             <fudis-button
               [label]="'Open dialog from template with fudis-form'"
               (handleClick)="openDialog()"
@@ -34,7 +34,7 @@
               (handleClick)="openDialogFromComponent()"
             />
             <fudis-button [label]="'Change language'" (handleClick)="changeLanguage()" />
-            <fudis-button
+            <!-- <fudis-button
               [label]="'Menu'"
               [labelHidden]="true"
               [size]="'small'"
@@ -59,7 +59,7 @@
                 <fudis-dropdown-menu-item [label]="'Item 2200250'"></fudis-dropdown-menu-item>
                 <fudis-dropdown-menu-item [label]="'Item 878787878571'"></fudis-dropdown-menu-item>
               </fudis-dropdown-menu>
-            </fudis-button>
+            </fudis-button> -->
           </fudis-grid>
         </ng-template>
       </fudis-expandable>
@@ -140,7 +140,6 @@
               <fudis-text-input
                 [label]="'Is something wrong?'"
                 [helpText]="'I hope everything is OK'"
-                [maxLength]="20"
                 [control]="testFormGroup.controls['textInput']"
                 [tooltip]="
                   'This text-input has multiple validators: required, minlength and maxlength'
