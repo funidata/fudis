@@ -1,6 +1,6 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { linkTo } from "@storybook/addon-links";
-import { DateRangeComponent } from "./date-range.component.js";
+import { DateRangeComponent } from "./date-range.component.ts";
 import * as DateRangeStories from "./date-range.stories.hidden";
 
 <Meta title="Components/Form/Date/Date Range" />
