@@ -210,6 +210,12 @@ export default {
       exclude: dialogExclude,
     },
   },
+  argTypes: {
+    size: {
+      options: ['sm', 'md', 'lg', 'xl', 'initial'],
+      control: { type: 'radio' },
+    },
+  },
 } as Meta;
 
 const html = String.raw;
