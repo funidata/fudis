@@ -16,53 +16,52 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: process.env.PLAYWRIGHT_BASE_URL || "http://localhost:6006",
-
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
   },
-
   /* Configure projects for major browsers */
   projects: [
+    /*
+     * Chrome and Edge are not included here on purpose because they will be installed globally
+     * meaning that if someone installs Playwright browsers on their local machine, their regular
+     * Chrome might be messed up.
+     *
+     * DO NOT enable Chrome or Edge here without consulting with the team first. Chromium should
+     * be enough for now, and if we decide to test against Chrome, it should probably be done only
+     * in containers.
+     *
+     * Note that `devices["Desktop Chrome"]` installs chromium by default which should cover
+     * testing against Chrome and Edge.
+     * See https://playwright.dev/docs/browsers#chromium for more.
+     */
     {
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
     },
-
     {
       name: "firefox",
       use: { ...devices["Desktop Firefox"] },
     },
-
     {
       name: "webkit",
       use: { ...devices["Desktop Safari"] },
     },
-
     /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
+    {
+      name: "Mobile Chrome",
+      use: { ...devices["Pixel 5"] },
+    },
+    {
+      name: "Mobile Safari",
+      use: { ...devices["iPhone 12"] },
+    },
+    {
+      name: "Mobile Safari Big Landscape",
+      use: { ...devices["iPhone 14 Pro Max landscape"] },
+    },
+    {
+      name: "Mobile Chrome Big Landscape",
+      use: { ...devices["Pixel 7 landscape"] },
+    },
   ],
-
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
 });
