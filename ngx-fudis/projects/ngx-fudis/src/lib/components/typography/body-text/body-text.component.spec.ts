@@ -23,6 +23,7 @@ describe('BodyTextComponent', () => {
     fixture.detectChanges();
   });
 
+  //TODO: Write test for host class
   describe('CSS classes', () => {
     it('should change CSS classes according to the given body-text size', () => {
       const element = getElement(fixture, '.fudis-body-text');
