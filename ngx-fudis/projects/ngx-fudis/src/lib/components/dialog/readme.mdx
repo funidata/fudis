@@ -1,6 +1,7 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { DialogComponent } from "./dialog.component.ts";
 import * as DialogStories from "./dialog.stories.ts";
+import { dialogExclude } from "../../utilities/storybook";
 
 <Meta title="Components/Dialog" />
 
@@ -10,7 +11,7 @@ Fudis Dialog is based on Angular Material Dialog. Dialog opens on top of any con
 
 ## Examples
 
-<Canvas of={DialogStories.Dialog}></Canvas>
+<Canvas of={DialogStories.Example}></Canvas>
 
 See [full code examples](#full-code-example).
 
@@ -197,4 +198,4 @@ class FormDialogComponent {
 
 ## Properties
 
-<ArgTypes of={DialogComponent} />
+<ArgTypes of={DialogComponent} exclude={dialogExclude} />

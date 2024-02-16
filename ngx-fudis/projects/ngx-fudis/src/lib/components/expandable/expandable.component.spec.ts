@@ -110,12 +110,12 @@ describe('ExpandableComponent', () => {
   }
 
   function assertExpandableIsExpanded(): void {
-    expect(getExpandable().getClosedStatus()).toEqual(false);
+    expect(getExpandable().closed).toEqual(false);
     expect(isContentVisible()).toEqual(true);
   }
 
   function assertExpandableIsClosed(): void {
-    expect(getExpandable().getClosedStatus()).toEqual(true);
+    expect(getExpandable().closed).toEqual(true);
     expect(isContentVisible()).toEqual(false);
   }
 

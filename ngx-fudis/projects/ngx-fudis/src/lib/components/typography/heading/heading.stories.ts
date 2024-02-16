@@ -11,9 +11,6 @@ export default {
     docs: {
       page: readme,
     },
-    controls: {
-      exclude: ['_classList', '_id', 'mainClass', 'id', 'getHeadingMarginBottom', 'ngOnInit'],
-    },
   },
   argTypes: {
     level: {
