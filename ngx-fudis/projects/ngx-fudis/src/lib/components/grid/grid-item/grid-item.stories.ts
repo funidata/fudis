@@ -1,6 +1,5 @@
 import { StoryFn, Meta, componentWrapperDecorator } from '@storybook/angular';
 import { GridItemComponent } from './grid-item.component';
-import { excludeRegex } from '../../../utilities/storybook';
 import readme from './readme.mdx';
 
 const html = String.raw;
@@ -11,9 +10,6 @@ export default {
   parameters: {
     docs: {
       page: readme,
-    },
-    controls: {
-      exclude: excludeRegex,
     },
   },
   decorators: [

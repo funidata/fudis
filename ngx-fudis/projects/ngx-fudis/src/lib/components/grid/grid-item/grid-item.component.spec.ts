@@ -61,7 +61,6 @@ describe('GridItemComponent', () => {
     return fixture.debugElement.queryAll(By.css('fudis-grid-item'));
   }
 
-  // eslint-disable-next-line consistent-return
   function getAttribute(index: number, attr: string) {
     switch (attr) {
       case 'justify-self':
