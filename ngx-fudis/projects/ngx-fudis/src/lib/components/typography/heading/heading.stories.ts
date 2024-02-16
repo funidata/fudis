@@ -1,6 +1,8 @@
-import { StoryFn, Meta } from '@storybook/angular';
+import { StoryFn, Meta, componentWrapperDecorator } from '@storybook/angular';
 import { HeadingComponent } from './heading.component';
 import readme from './readme.mdx';
+
+const html = String.raw;
 
 export default {
   title: 'Components/Typography/Heading',
@@ -13,6 +15,31 @@ export default {
       exclude: ['_classList', '_id', 'mainClass', 'id', 'getHeadingMarginBottom', 'ngOnInit'],
     },
   },
+  argTypes: {
+    level: {
+      options: [1, 2, 3, 4, 5, 6],
+      control: { type: 'select' },
+    },
+    size: { options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'] },
+    align: { options: ['left', 'right', 'center'] },
+    marginBottom: { options: ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'] },
+  },
+  decorators: [
+    componentWrapperDecorator(
+      (story) => html`
+        <style>
+          .heading-refresh-text {
+            width: 10rem;
+            margin-bottom: 2rem;
+          }
+        </style>
+        <fudis-body-text class="heading-refresh-text" [size]="'sm-regular'">
+          &uarr; Click 'Remount' refresh button from the toolbar to refresh canvas.</fudis-body-text
+        >
+        ${story}
+      `,
+    ),
+  ],
 } as Meta;
 
 const Template: StoryFn = (args) => ({
