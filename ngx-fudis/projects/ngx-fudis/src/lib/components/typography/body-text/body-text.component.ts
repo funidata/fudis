@@ -19,7 +19,7 @@ export class BodyTextComponent {
   /**
    * Class for the parent wrapper element
    */
-  @HostBinding('class') classes = 'fudis-body-text-host';
+  @HostBinding('class') private _classes = 'fudis-body-text-host';
 
   /**
    * Font size for the paragraph

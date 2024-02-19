@@ -44,9 +44,11 @@ const Template: StoryFn = (args) => ({
 
 export const Button = Template.bind({});
 Button.args = {
+  disabled: false,
   variant: 'primary',
   label: 'Button',
   size: 'medium',
+  tooltip: '',
 };
 
 export const IconButton = Template.bind({});
