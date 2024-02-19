@@ -30,7 +30,7 @@ export class IconComponent implements OnChanges {
   /**
    * Icon color
    */
-  @Input() color: FudisIconColor = 'default';
+  @Input() color: FudisIconColor = 'gray-dark';
 
   /**
    * Icon rotation

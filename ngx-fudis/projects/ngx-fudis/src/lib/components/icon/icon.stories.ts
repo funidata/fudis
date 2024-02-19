@@ -18,13 +18,13 @@ export default {
   argTypes: {
     color: {
       options: [
-        'attention',
-        'danger',
-        'default',
-        'light',
+        'yellow',
+        'red',
+        'gray-dark',
+        'gray-light',
         'primary',
         'primary-dark',
-        'success',
+        'green',
         'white',
       ],
       control: { type: 'select' },

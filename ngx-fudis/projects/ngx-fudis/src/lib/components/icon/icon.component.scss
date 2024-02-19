@@ -39,21 +39,20 @@
     height: spacing.$spacing-sm;
   }
 
-  // TODO: These class names could be improved to be more coherent
   &-color {
-    &__attention {
+    &__yellow {
       fill: colors.$color-yellow;
     }
 
-    &__danger {
+    &__red {
       fill: colors.$color-red;
     }
 
-    &__default {
+    &__gray-dark {
       fill: colors.$color-gray-dark;
     }
 
-    &__light {
+    &__gray-light {
       fill: colors.$color-gray-light;
     }
 
@@ -65,7 +64,7 @@
       fill: colors.$color-primary-dark;
     }
 
-    &__success {
+    &__green {
       fill: colors.$color-green;
     }
 
