@@ -11,7 +11,7 @@ import {
   effect,
 } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
-import { FudisTranslationConfig } from '../../types/miscellaneous';
+import { FudisLinkColor, FudisTranslationConfig } from '../../types/miscellaneous';
 import { FudisFocusService } from '../../services/focus/focus.service';
 
 @Component({
@@ -72,7 +72,7 @@ export class LinkComponent implements AfterViewInit {
   /**
    * Link color
    */
-  @Input() color: 'primary-dark' | 'default' | 'white' = 'primary-dark';
+  @Input() color: FudisLinkColor = 'primary-dark';
 
   /**
    * Set browser focus to link on the first load.

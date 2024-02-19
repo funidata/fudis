@@ -58,6 +58,8 @@ export type FudisTextAlign = 'left' | 'right' | 'center';
 
 export type FudisLanguageAbbr = 'fi' | 'sv' | 'en';
 
+export type FudisLinkColor = 'primary-dark' | 'gray-dark' | 'white';
+
 export interface FudisTranslationConfig {
   BREADCRUMBS: {
     // Prefix visible to screen reader
