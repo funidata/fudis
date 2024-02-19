@@ -1,4 +1,5 @@
-import { AbstractControl, FormControl, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FudisCheckboxGroupFormGroup } from '../../types/forms';
 
 // TODO: Write internal documentation for these functions (individual or univesal description what these do)
 
@@ -12,6 +13,27 @@ export const hasRequiredValidator = (control: AbstractControl): boolean => {
     return true;
   }
   return false;
+};
+
+// TODO: write test
+
+export const hasAtLeastOneRequiredOrMinValidator = (group: FormGroup): boolean => {
+  const validatorFn = group.validator;
+
+  if (validatorFn === null) {
+    return false;
+  }
+
+  const errors = validatorFn(
+    new FormGroup<FudisCheckboxGroupFormGroup>({
+      apple: new FormControl<boolean | null | undefined>(null),
+      fairTradeBanana: new FormControl<boolean | null | undefined>(false),
+    }),
+  );
+
+  const hasProperErrors: boolean = !!(errors?.['atLeastOneRequired'] || errors?.['min']);
+
+  return hasProperErrors;
 };
 
 export const getMaxLengthFromValidator = (control: AbstractControl): number | undefined => {

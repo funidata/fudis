@@ -48,11 +48,6 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   protected _requiredText: string;
 
   /**
-   * Set requiredText based on this boolean value
-   */
-  protected _required: boolean = false;
-
-  /**
    * Basic Fudis translation keys
    */
   protected _translations: Signal<FudisTranslationConfig>;

@@ -22,7 +22,6 @@ import { IconComponent } from '../../../icon/icon.component';
   template: `<fudis-checkbox-group
     [formGroup]="_testFromGroup"
     [title]="'Choose minimum of one fruit'"
-    [required]="true"
   >
     <fudis-checkbox
       *ngFor="let option of _options"
