@@ -9,7 +9,7 @@ import { getElement } from '../../../utilities/tests/utilities';
 import { TextInputComponent } from '../../../components/form/text-input/text-input.component';
 import { ValidatorErrorMessageComponent } from '../../../components/form/error-message/validator-error-message/validator-error-message.component';
 import { LabelComponent } from '../../../components/form/label/label.component';
-import { FudisValidators } from 'ngx-fudis';
+import { FudisValidators } from '../../../utilities/form/validators';
 
 @Component({
   selector: 'fudis-mock-text-input-component',
