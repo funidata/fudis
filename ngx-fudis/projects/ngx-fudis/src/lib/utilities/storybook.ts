@@ -49,6 +49,8 @@ export const linkExclude: RegExp = excludeRegex(['handleBlur', 'handleFocus']);
 
 export const dialogExclude: RegExp = excludeRegex(['closeButtonPositionAbsolute']);
 
+export const headingControlsExclude: RegExp = excludeRegex(['id']);
+
 export const expandableExclude: RegExp = excludeRegex([
   'ref',
   'setClosedStatus',
