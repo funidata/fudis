@@ -31,7 +31,19 @@ export const buttonExclude: RegExp = excludeRegex([
   'toggleMenu',
 ]);
 
-export const checkboxGroupExclude: RegExp = excludeRegex(['groupBlurredOut', 'setGroupBlurredOut']);
+export const checkboxGroupExclude: RegExp = excludeRegex([
+  'groupBlurredOut',
+  'setGroupBlurredOut',
+  'titleSize',
+]);
+
+export const checkboxGroupControlsExclude: RegExp = excludeRegex([
+  'groupBlurredOut',
+  'setGroupBlurredOut',
+  'titleSize',
+  'id',
+  'formGroup',
+]);
 
 export const linkExclude: RegExp = excludeRegex(['handleBlur', 'handleFocus']);
 

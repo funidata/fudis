@@ -38,11 +38,6 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   @Input() helpText: string;
 
   /**
-   * Visual size of title legend. Default 'md' and 'sm' is similar to standard input label, used in e. g. RadioButtonGroup.
-   */
-  @Input() titleSize: 'md' | 'sm' = 'md';
-
-  /**
    * Fudis translation key for required text
    */
   protected _requiredText: string;
@@ -52,6 +47,9 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
    */
   protected _translations: Signal<FudisTranslationConfig>;
 
+  /**
+   * Generate id for parent component
+   */
   protected _setParentId(parentType: FudisIdParent): void {
     if (this.id) {
       this._idService.addNewParentId(parentType, this.id);

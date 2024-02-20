@@ -43,7 +43,7 @@ const Template: StoryFn<BreadcrumbsComponent> = (args: BreadcrumbsComponent) => 
   `,
 });
 
-export const Breadcrumbs = Template.bind({});
-Breadcrumbs.args = {
+export const Example = Template.bind({});
+Example.args = {
   label: 'My Lego Collection',
 };

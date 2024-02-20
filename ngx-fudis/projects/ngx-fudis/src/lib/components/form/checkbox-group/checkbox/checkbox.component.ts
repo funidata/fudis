@@ -23,7 +23,7 @@ export class CheckboxComponent implements OnInit {
     @Host() protected _checkboxGroup: CheckboxGroupComponent,
   ) {}
 
-  /*
+  /**
    * Control name for this checkbox from FormGroup
    */
   @Input({ required: true }) controlName: string;
@@ -33,7 +33,7 @@ export class CheckboxComponent implements OnInit {
    */
   @Input({ required: true }) label: string;
 
-  /*
+  /**
    * Id for single checkbox. By default generated.
    */
   @Input() id: string;

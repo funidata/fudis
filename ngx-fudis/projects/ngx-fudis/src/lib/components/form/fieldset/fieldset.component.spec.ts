@@ -29,6 +29,7 @@ import { FudisInputSize } from '../../../types/forms';
     [title]="'Fieldset title'"
     [helpText]="'Fieldset help text'"
     [required]="required"
+    [titleSize]="titleSize"
     [initialFocus]="initialFocus"
     [inputSize]="inputSize"
   >
@@ -47,6 +48,7 @@ import { FudisInputSize } from '../../../types/forms';
 class MockFieldSetComponent {
   required = false;
   initialFocus = false;
+  titleSize = 'md';
   inputSize: FudisInputSize;
 
   fieldsetExample = new FormGroup({
@@ -165,6 +167,16 @@ describe('FieldSetComponent', () => {
       fieldSetInputSizeCheck('sm');
       fieldSetInputSizeCheck('md');
       fieldSetInputSizeCheck('lg');
+    });
+
+    it('should have title size with respective CSS class', () => {
+      const titleSizeClass = getElement(fixtureMock, '.fudis-fieldset__legend__title__main');
+
+      expect(titleSizeClass.className).toContain('fudis-fieldset__legend__title__main__md');
+
+      componentMock.titleSize = 'sm';
+      fixtureMock.detectChanges();
+      expect(titleSizeClass.className).toContain('fudis-fieldset__legend__title__main__sm');
     });
   });
 

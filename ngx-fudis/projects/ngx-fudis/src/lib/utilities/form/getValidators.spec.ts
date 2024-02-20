@@ -80,12 +80,15 @@ describe('getValidators utility function', () => {
       expect(isRequired).toEqual(true);
     });
 
-    it('should return false when min or atLeastOneRequired validator is provided', () => {
-      const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>({
-        apple: new FormControl<boolean | null | undefined>(null),
-        fairTradeBanana: new FormControl<boolean | null | undefined>(false),
-        pear: new FormControl<boolean | null | undefined>(true),
-      });
+    it('should return false when atLeastOneRequired validator is provided or min validator value is 0', () => {
+      const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+        {
+          apple: new FormControl<boolean | null | undefined>(null),
+          fairTradeBanana: new FormControl<boolean | null | undefined>(false),
+          pear: new FormControl<boolean | null | undefined>(true),
+        },
+        [FudisGroupValidators.min({ value: 0, message: 'No need to select any actually' })],
+      );
 
       const isRequired = hasAtLeastOneRequiredOrMinValidator(testFormGroup);
 
