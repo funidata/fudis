@@ -111,7 +111,7 @@ export class DatepickerComponent
         return null;
       }
 
-      const inputValue = this.inputRef?.nativeElement?.value;
+      const inputValue = this._inputRef?.nativeElement?.value;
 
       const isValidDate = inputValue ? parseDate(inputValue)?.getDate() : false;
 

@@ -206,7 +206,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
     if (this.autocomplete && focusToInput) {
       this._autocompleteRef.inputRef.nativeElement.focus();
     } else if (focusToInput) {
-      this.inputRef.nativeElement.focus();
+      this._inputRef.nativeElement.focus();
     }
   }
 
@@ -282,7 +282,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
       this._toggleDropdown();
     }
     this._preventClick = false;
-    this.inputRef.nativeElement.focus();
+    this._inputRef.nativeElement.focus();
   }
 
   /**

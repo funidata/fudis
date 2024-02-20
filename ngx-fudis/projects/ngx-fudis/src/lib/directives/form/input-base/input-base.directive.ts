@@ -33,7 +33,7 @@ export class InputBaseDirective extends TooltipApiDirective {
   /**
    * Template reference for input. Used in e. g. initialFocus
    */
-  @ViewChild('inputRef') inputRef: ElementRef;
+  @ViewChild('inputRef') protected _inputRef: ElementRef;
 
   /**
    * Label for input.
@@ -104,8 +104,8 @@ export class InputBaseDirective extends TooltipApiDirective {
   }
 
   public focusToInput(): void {
-    if (this.inputRef?.nativeElement) {
-      this.inputRef.nativeElement.focus();
+    if (this._inputRef?.nativeElement) {
+      this._inputRef.nativeElement.focus();
       this._focusTryCounter = 0;
     } else if (this._focusTryCounter < 100) {
       setTimeout(() => {
