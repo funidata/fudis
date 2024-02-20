@@ -18,12 +18,12 @@ import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
 })
 export class IconComponent implements OnChanges {
   /**
-   * Binding fudis-icon-host class to component wrapper
+   * Binding host CSS class to component wrapper
    */
-  @HostBinding('class') classes = 'fudis-icon-host';
+  @HostBinding('class') private _classes = 'fudis-icon-host';
 
   /**
-   * Fudis icon
+   * Displayed SVG icon
    */
   @Input({ required: true }) icon: FudisIcon;
 
@@ -38,7 +38,7 @@ export class IconComponent implements OnChanges {
   @Input() rotate: FudisIconRotate = 'none';
 
   /**
-   * Icon CSS class list
+   * CSS class list
    */
   protected _classList: string[] = [];
 
@@ -51,6 +51,9 @@ export class IconComponent implements OnChanges {
     this._classList = this._getClasses();
   }
 
+  /**
+   * Get CSS classes with correct color, rotate and size suffixes
+   */
   private _getClasses(): string[] {
     this._iconSize = this.icon.includes('-small') ? 'sm' : 'lg';
 
