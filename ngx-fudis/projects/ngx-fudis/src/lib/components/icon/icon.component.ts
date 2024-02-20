@@ -59,8 +59,8 @@ export class IconComponent implements OnChanges {
 
     const cssClasses = [
       'fudis-icon',
-      `fudis-icon-color__${this.color}`,
-      `fudis-icon-rotate__${this.rotate}`,
+      `fudis-icon__color__${this.color}`,
+      `fudis-icon__rotate__${this.rotate}`,
       `fudis-icon__${this._iconSize}`,
     ];
 

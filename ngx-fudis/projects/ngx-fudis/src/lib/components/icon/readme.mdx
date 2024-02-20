@@ -6,7 +6,7 @@ import * as IconStories from "./icon.stories.ts";
 
 # Icon
 
-Icon is rendered as <code>svg</code> element.
+Icon Component is a SVG image element.
 
 ## Example
 
@@ -14,7 +14,7 @@ Icon is rendered as <code>svg</code> element.
 
 ## Usage Guidelines
 
-All icons have default size of 32x32px except icons with suffix **-small** (e. g. `alert-small`, `info-small`) which are scaled to 16x16px.
+All icons have default size of 32 x 32 pixels, except icons with suffix **-small** (e. g. `alert-small`, `info-small`) which are scaled to 16x16px.
 
 Icons with suffix **-fill** (e. g. `alert-fill`, `info-circle-fill`) have their default style with white background. These icons **cannot** be colored with the `color` property.
 
@@ -22,7 +22,9 @@ Icons with suffix **-fill** (e. g. `alert-fill`, `info-circle-fill`) have their 
 
 Icon has one **mandatory** property: `icon`. All available icons can be seen in _All Icons_ story page.
 
-Icon color can be changed with `color` property: `primary`, `primary-dark`, `gray-dark`, `gray-light`, `red`, `yellow`, `green` or `white`.
+Icon color can be changed with `color` property.
+
+Available color values are: `primary`, `primary-dark`, `gray-dark`, `gray-light`, `red`, `yellow`, `green` or `white`.
 
 Flip and rotate the icon with `rotate` property: `flip-180`, `cw-90`, or `ccw-90`.
 
