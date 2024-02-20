@@ -2,7 +2,6 @@ import { StoryFn, Meta } from '@storybook/angular';
 import { IconComponent } from './icon.component';
 import { fudisIconArray } from '../../types/icons';
 import readme from './readme.mdx';
-import { iconExclude } from '../../utilities/storybook';
 
 export default {
   title: 'Components/Icon',
@@ -10,9 +9,6 @@ export default {
   parameters: {
     docs: {
       page: readme,
-    },
-    controls: {
-      exclude: iconExclude,
     },
   },
   argTypes: {
@@ -27,7 +23,6 @@ export default {
         'green',
         'white',
       ],
-      control: { type: 'select' },
     },
     icon: {
       options: [
@@ -135,15 +130,17 @@ const Template: StoryFn<IconComponent> = (args: IconComponent) => ({
   props: args,
 });
 
-export const Icon = Template.bind({});
-Icon.args = {
+export const Example = Template.bind({});
+Example.args = {
   icon: 'achievement',
-  color: 'default',
+  color: 'gray-dark',
+  rotate: 'none',
 };
 
-export const AllIcons: StoryFn = () => ({
+export const AllIcons: StoryFn<IconComponent> = (args: IconComponent) => ({
   props: {
     fudisIconArray,
+    ...args,
   },
   template: `
 	<fudis-grid [columns]="{xs:2, md: 3, lg: 4}" [width]="'sm'">
