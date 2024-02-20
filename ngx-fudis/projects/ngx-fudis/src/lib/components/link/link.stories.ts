@@ -14,25 +14,50 @@ export default {
       page: readme,
     },
   },
+  argTypes: {
+    external: {
+      options: [true, false],
+      control: {
+        type: 'radio',
+      },
+    },
+    color: {
+      options: ['primary-dark', 'gray-dark', 'white'],
+      control: {
+        type: 'radio',
+      },
+    },
+  },
 } as Meta;
 
 const Template: StoryFn<LinkComponent> = (args: LinkComponent) => ({
   props: args,
 });
 
-export const Link = Template.bind({});
-Link.args = {
+export const Example = Template.bind({});
+Example.args = {
   href: 'https://www.example.com',
+  color: 'primary-dark',
+  external: false,
+  initialFocus: false,
+  size: 'inherit',
 };
 
-export const ExternalLink = Template.bind({});
-ExternalLink.args = {
+export const ExampleWithExternalLink = Template.bind({});
+ExampleWithExternalLink.args = {
   href: 'https://www.example.com',
+  color: 'primary-dark',
   external: true,
+  initialFocus: false,
+  size: 'inherit',
 };
 
-export const LinkWithTitle = Template.bind({});
-LinkWithTitle.args = {
+export const ExampleWithLinkWithTitle = Template.bind({});
+ExampleWithLinkWithTitle.args = {
   href: 'https://www.example.com',
-  linkTitle: 'Visible title for my link',
+  linkTitle: 'Visible title for the link',
+  color: 'primary-dark',
+  external: false,
+  initialFocus: false,
+  size: 'inherit',
 };
