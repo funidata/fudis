@@ -156,6 +156,9 @@ export class InputWithLanguageOptionsComponent
    */
   initialRequiredCheck(): void {
     this._requiredControls = {};
+
+    // TODO: change this._atLeastOneRequired to be fetched with getValidators
+
     if (this.formGroup.errors?.['atLeastOneRequired']) {
       this._atLeastOneRequired = true;
 
@@ -182,6 +185,8 @@ export class InputWithLanguageOptionsComponent
       });
     }
   }
+
+  // TODO: as Required input property has been removed, an alternative logic needs to be implemented
 
   /**
    * Check onBlur if required is needed to be shown
