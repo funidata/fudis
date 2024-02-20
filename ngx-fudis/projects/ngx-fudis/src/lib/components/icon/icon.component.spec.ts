@@ -143,8 +143,8 @@ describe('IconComponent', () => {
     fixture.detectChanges();
     assertIconHasClasses([
       'fudis-icon',
-      `fudis-icon-color__${color}`,
-      'fudis-icon-rotate__none',
+      `fudis-icon__color__${color}`,
+      'fudis-icon__rotate__none',
       'fudis-icon__lg',
     ]);
   }
@@ -155,8 +155,8 @@ describe('IconComponent', () => {
     fixture.detectChanges();
     assertIconHasClasses([
       'fudis-icon',
-      'fudis-icon-color__default',
-      `fudis-icon-rotate__${rotate}`,
+      'fudis-icon__color__gray-dark',
+      `fudis-icon__rotate__${rotate}`,
       'fudis-icon__lg',
     ]);
   }
@@ -173,8 +173,8 @@ describe('IconComponent', () => {
     it('should have default classes when icon is set', () => {
       assertIconHasClasses([
         'fudis-icon',
-        'fudis-icon-color__default',
-        'fudis-icon-rotate__none',
+        'fudis-icon__color__gray-dark',
+        'fudis-icon__rotate__none',
         'fudis-icon__lg',
       ]);
     });
