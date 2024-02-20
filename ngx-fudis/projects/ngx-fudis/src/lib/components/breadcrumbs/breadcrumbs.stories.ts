@@ -2,7 +2,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
 import { BreadcrumbsComponent } from './breadcrumbs.component';
 import readme from './readme.mdx';
-import { breadcrumbsExclude } from '../../utilities/storybook';
 
 export default {
   title: 'Components/Breadcrumbs',
@@ -15,12 +14,6 @@ export default {
   parameters: {
     docs: {
       page: readme,
-      argTypes: {
-        exclude: breadcrumbsExclude,
-      },
-    },
-    controls: {
-      exclude: breadcrumbsExclude,
     },
   },
 } as Meta;

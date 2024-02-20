@@ -1,7 +1,7 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { BreadcrumbsComponent } from "./breadcrumbs.component";
 import * as BreadcrumbsStories from "./breadcrumbs.stories.ts";
-import { breadcrumbsExclude } from "../../utilities/storybook";
+
 import { BreadcrumbsItemComponent } from "./breadcrumbs-item/breadcrumbs-item.component";
 
 <Meta title="Components/Breadcrumbs" />
@@ -52,4 +52,4 @@ The last Breadcrumbs Item Component is always displayed as non-link and just pla
 
 ## Properties of Breadcrumbs Item
 
-<ArgTypes of={BreadcrumbsItemComponent} exclude={breadcrumbsExclude} />
+<ArgTypes of={BreadcrumbsItemComponent} />

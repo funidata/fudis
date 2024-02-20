@@ -1,4 +1,4 @@
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { FudisValidators } from './validators';
 import {
@@ -9,7 +9,13 @@ import {
   getMinFromValidator,
   getMinLengthFromValidator,
   hasRequiredValidator,
+  hasAtLeastOneRequiredOrMinValidator,
 } from './getValidators';
+import {
+  FudisCheckboxGroupFormGroup,
+  FudisInputWithLanguageOptionsFormGroup,
+} from '../../types/forms';
+import { FudisGroupValidators } from './groupValidators';
 
 describe('getValidators utility function', () => {
   describe('hasRequiredValidator', () => {
@@ -25,6 +31,65 @@ describe('getValidators utility function', () => {
       const nativeRequired = hasRequiredValidator(nativeControl);
 
       expect(nativeRequired).toEqual(true);
+    });
+  });
+
+  describe('hasAtLeastOneRequiredOrMinValidator', () => {
+    it('should return true with atLeastOneRequired validator group with checkbox group', () => {
+      const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+        {
+          apple: new FormControl<boolean | null | undefined>(null),
+          fairTradeBanana: new FormControl<boolean | null | undefined>(false),
+          pear: new FormControl<boolean | null | undefined>(true),
+        },
+        [FudisGroupValidators.atLeastOneRequired('No fruit picked! :(')],
+      );
+
+      const isRequired = hasAtLeastOneRequiredOrMinValidator(testFormGroup);
+
+      expect(isRequired).toEqual(true);
+    });
+
+    it('should return true with atLeastOneRequired validator group with InputWithLanguageOptionsFormGroup', () => {
+      const testFormGroup = new FormGroup<FudisInputWithLanguageOptionsFormGroup>(
+        {
+          finnish: new FormControl<string | null>(null),
+          swedish: new FormControl<string | null>(''),
+          english: new FormControl<string | null>('Hello there!'),
+        },
+        [FudisGroupValidators.atLeastOneRequired('One must have some value!')],
+      );
+
+      const isRequired = hasAtLeastOneRequiredOrMinValidator(testFormGroup);
+
+      expect(isRequired).toEqual(true);
+    });
+
+    it('should return true with min validator group ', () => {
+      const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+        {
+          apple: new FormControl<boolean | null | undefined>(null),
+          fairTradeBanana: new FormControl<boolean | null | undefined>(false),
+          pear: new FormControl<boolean | null | undefined>(true),
+        },
+        [FudisGroupValidators.min({ value: 1, message: 'Pick one!' })],
+      );
+
+      const isRequired = hasAtLeastOneRequiredOrMinValidator(testFormGroup);
+
+      expect(isRequired).toEqual(true);
+    });
+
+    it('should return false when min or atLeastOneRequired validator is provided', () => {
+      const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>({
+        apple: new FormControl<boolean | null | undefined>(null),
+        fairTradeBanana: new FormControl<boolean | null | undefined>(false),
+        pear: new FormControl<boolean | null | undefined>(true),
+      });
+
+      const isRequired = hasAtLeastOneRequiredOrMinValidator(testFormGroup);
+
+      expect(isRequired).toEqual(false);
     });
   });
 

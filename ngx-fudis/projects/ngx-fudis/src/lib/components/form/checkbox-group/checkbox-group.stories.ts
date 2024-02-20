@@ -5,6 +5,7 @@ import { CheckboxGroupComponent } from './checkbox-group.component';
 import { FudisCheckboxGroupFormGroup } from '../../../types/forms';
 import readme from './readme.mdx';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
+import { checkboxGroupExclude } from '../../../utilities/storybook';
 
 export default {
   title: 'Components/Form/Checkbox Group',
@@ -20,10 +21,15 @@ export default {
       page: readme,
     },
     controls: {
-      exclude: /.*/g,
+      exclude: checkboxGroupExclude,
     },
   },
-  argTypes: {},
+  argTypes: {
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: { type: 'radio' },
+    },
+  },
 } as Meta;
 
 const html = String.raw;
@@ -84,8 +90,8 @@ const ExampleTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupCom
     options,
   },
   template: html`<fudis-checkbox-group
+    [size]="size"
     [formGroup]="formGroup"
-    [required]="true"
     [title]="'Choose your preferred fruits'"
     [helpText]="'Pick at least one fruit.'"
     [tooltip]="'Fruit sugar is great in small doces!'"
@@ -99,7 +105,9 @@ const ExampleTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupCom
 });
 
 export const Example = ExampleTemplate.bind({});
-Example.args = {};
+Example.args = {
+  size: 'lg',
+};
 
 const ExampleWithDisabledTemplate: StoryFn<CheckboxGroupComponent> = (
   args: CheckboxGroupComponent,
@@ -110,8 +118,8 @@ const ExampleWithDisabledTemplate: StoryFn<CheckboxGroupComponent> = (
     options,
   },
   template: html`<fudis-checkbox-group
+    [size]="size"
     [formGroup]="formGroup"
-    [required]="true"
     [title]="'Choose your preferred fruits'"
     [helpText]="'Pick at least one fruit.'"
   >
@@ -124,7 +132,9 @@ const ExampleWithDisabledTemplate: StoryFn<CheckboxGroupComponent> = (
 });
 
 export const ExampleWithDisabledOption = ExampleWithDisabledTemplate.bind({});
-ExampleWithDisabledOption.args = {};
+ExampleWithDisabledOption.args = {
+  size: 'lg',
+};
 
 const ExampleWithMinMaxTemplate: StoryFn<CheckboxGroupComponent> = (
   args: CheckboxGroupComponent,
@@ -135,8 +145,8 @@ const ExampleWithMinMaxTemplate: StoryFn<CheckboxGroupComponent> = (
     options,
   },
   template: html`<fudis-checkbox-group
+    [size]="size"
     [formGroup]="formGroup"
-    [required]="true"
     [title]="'Choose your preferred fruits'"
     [helpText]="'Pick from two to three fruits.'"
   >
@@ -149,4 +159,6 @@ const ExampleWithMinMaxTemplate: StoryFn<CheckboxGroupComponent> = (
 });
 
 export const ExampleWithMinMax = ExampleWithMinMaxTemplate.bind({});
-ExampleWithMinMax.args = {};
+ExampleWithMinMax.args = {
+  size: 'lg',
+};

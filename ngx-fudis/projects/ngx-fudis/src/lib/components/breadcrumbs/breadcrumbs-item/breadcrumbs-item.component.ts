@@ -23,7 +23,7 @@ export class BreadcrumbsItemComponent implements OnInit {
     @Host() protected _breadCrumbs: BreadcrumbsComponent,
   ) {}
 
-  @HostBinding('class') classes = 'fudis-breadcrumbs-item-host';
+  @HostBinding('class') private _classes = 'fudis-breadcrumbs-item-host';
 
   /**
    * Visible label

@@ -14,13 +14,13 @@ import { FudisGridService } from '../../../services/grid/grid.service';
 import { GuidanceComponent } from '../../../components/form/guidance/guidance.component';
 import { ContentDirective } from '../../content-projection/content/content.directive';
 import { getElement } from '../../../utilities/tests/utilities';
+import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 
 @Component({
   selector: 'fudis-mock-checkbox-group-component',
   template: ` <fudis-checkbox-group
     [title]="title"
     [helpText]="helpText"
-    [required]="true"
     [formGroup]="_checkboxFormGroup"
   >
     <fudis-checkbox
@@ -39,10 +39,13 @@ class MockCheckboxGroupComponent {
     { controlName: 'cloudberry', label: 'cloudberry' },
   ];
 
-  private _checkboxFormGroup = new FormGroup({
-    blueberry: new FormControl<FudisCheckboxOption | null>(null),
-    cloudberry: new FormControl<FudisCheckboxOption | null>(null),
-  });
+  private _checkboxFormGroup = new FormGroup(
+    {
+      blueberry: new FormControl<FudisCheckboxOption | null>(null),
+      cloudberry: new FormControl<FudisCheckboxOption | null>(null),
+    },
+    FudisGroupValidators.atLeastOneRequired('Choose at least one berry'),
+  );
 }
 
 describe('FieldSetBaseDirective', () => {

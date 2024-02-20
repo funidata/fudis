@@ -33,7 +33,6 @@ const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
   template: `<fudis-checkbox-group
     [formGroup]="testFromGroup"
     [title]="'Choose minimum of one fruit'"
-    [required]="true"
   >
     <p class="do-not-find-me">This should not be shown</p>
     <fudis-checkbox
@@ -66,6 +65,8 @@ class MockContainerComponent {
     { controlName: 'orange', label: 'Orange' },
   ];
 }
+
+//TODO: Should write test for size, id, setGroupBlurredOut.
 
 describe('CheckboxGroupComponent', () => {
   let component: CheckboxGroupComponent;
@@ -120,7 +121,7 @@ describe('CheckboxGroupComponent', () => {
     });
 
     it('should display required text', () => {
-      component.required = true;
+      component.ngOnChanges();
       fixture.detectChanges();
 
       const requiredText = fixture.nativeElement.querySelector(

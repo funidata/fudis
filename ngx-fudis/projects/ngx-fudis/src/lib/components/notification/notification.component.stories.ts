@@ -10,7 +10,12 @@ export default {
       page: readme,
     },
   },
-  argTypes: {},
+  argTypes: {
+    variant: {
+      options: ['warning', 'danger', 'success', 'info'],
+      control: { type: 'radio' },
+    },
+  },
 } as Meta;
 
 const html = String.raw;
