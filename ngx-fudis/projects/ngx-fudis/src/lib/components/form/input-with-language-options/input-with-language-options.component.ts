@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input, OnChanges, OnInit, effect } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import {
   FudisInputWithLanguageOptionsFormGroup,
   FudisSelectOption,
@@ -221,18 +221,13 @@ export class InputWithLanguageOptionsComponent
       if (this._atLeastOneRequired && this._nonEmptyControls.length > 1) {
         this._requiredControls = {};
         Object.keys(this.formGroup.controls).forEach((control) => {
-          const nativeRequired = this.formGroup.controls[control].hasValidator(Validators.required);
-
-          const fudisRequired = !!this.formGroup.controls[control].validator?.(
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            '' as any as AbstractControl,
-          );
+          const isRequired = hasRequiredValidator(this.formGroup.controls[control]);
 
           this._requiredControls = {
             ...this._requiredControls,
             [control]: {
               value: this.formGroup.controls[control].value,
-              required: nativeRequired || fudisRequired ? this.required : undefined,
+              required: isRequired,
             },
           };
         });
