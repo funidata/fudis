@@ -57,7 +57,7 @@ export class HeadingComponent implements OnInit {
   /**
    * Get default marginBottom size
    */
-  public getHeadingMarginBottom(): FudisSpacing {
+  private _getMarginBottom(): FudisSpacing {
     if (this.size === 'xxl' || this.size === 'xl') {
       return 'sm';
     }
@@ -67,7 +67,7 @@ export class HeadingComponent implements OnInit {
   /**
    * Get corresponding default size for a heading level
    */
-  public getHeadingSize(): FudisHeadingSize {
+  private _getSize(): FudisHeadingSize {
     switch (this.level) {
       case 1:
         return 'xxl';
@@ -90,10 +90,10 @@ export class HeadingComponent implements OnInit {
     this._id = this.id ?? this._idService.getNewId('heading');
 
     if (!this.size) {
-      this.size = this.getHeadingSize();
+      this.size = this._getSize();
     }
     if (!this.marginBottom) {
-      this.marginBottom = this.getHeadingMarginBottom();
+      this.marginBottom = this._getMarginBottom();
     }
     this._setClasses();
   }

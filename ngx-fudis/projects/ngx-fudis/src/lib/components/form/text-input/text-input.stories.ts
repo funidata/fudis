@@ -10,6 +10,7 @@ import { Component } from '@angular/core';
 import { TextInputComponent } from './text-input.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import readme from './readme.mdx';
+import { textInputControlsExclude } from '../../../utilities/storybook';
 
 @Component({
   selector: 'example-text-input-with-form-control',
@@ -23,7 +24,7 @@ import readme from './readme.mdx';
         [helpText]="'Please add some content.'"
       >
         <fudis-error-message
-          [message]="'Backend threw an error, it is not totally fault of this component'"
+          [message]="'This is a custom error, it is not totally fault of this component'"
         />
       </fudis-text-input>
       <fudis-text-input
@@ -45,12 +46,6 @@ import readme from './readme.mdx';
         [tooltipToggle]="false"
         [type]="'number'"
         [size]="'sm'"
-      />
-      <fudis-text-input
-        [control]="mainFormGroup.controls['forDisabled']"
-        [label]="'Disabled text-input'"
-        [helpText]="'You should be able to focus on this input but not insert any values'"
-        [disabled]="true"
       />
     </form>
   `,
@@ -92,7 +87,6 @@ class TextInputWithFormControlExampleComponent {
       null,
       FudisValidators.pattern(/^[A-Z \d\W]+$/, 'YOU USED LOW CAPS! SHAME ON YOU!'),
     ),
-    forDisabled: new FormControl('', [FudisValidators.maxLength(100, 'Too long input')]),
   });
 }
 
@@ -109,41 +103,58 @@ export default {
     docs: {
       page: readme,
     },
-    controls: {
-      exclude: [
-        'classes',
-        '_id',
-        '_required',
-        '_requiredText',
-        '_translations',
-        'onBlur',
-        'handleBlur',
-        'ngOnChanges',
-        'ngOnInit',
-        'ariaLabel',
-        'disabled',
-        'id',
-        'invalidState',
-      ],
+    controls: { exclude: textInputControlsExclude },
+  },
+  argTypes: {
+    size: { options: ['sm', 'md', 'lg'] },
+    helpText: { control: 'text' },
+    type: {
+      options: ['email', 'number', 'password', 'tel', 'text', 'url'],
+    },
+    tooltipPosition: {
+      options: ['left', 'right', 'above', 'below'],
+      control: { type: 'radio' },
+    },
+    tooltip: {
+      control: { type: 'text' },
     },
   },
-  argTypes: {},
 } as Meta;
 
 const Template: StoryFn<TextInputComponent> = (args: TextInputComponent) => ({
-  props: args,
-  template: `<fudis-text-input [control]="control" [label]="label" [helpText]="helpText"></fudis-text-input>`,
+  props: { ...args, control: new FormControl(null) },
 });
 
 export const Example = Template.bind({});
 Example.args = {
+  tooltip: '',
+  tooltipToggle: false,
+  size: 'lg',
+  type: 'text',
+  disabled: false,
   label: 'Text-input label example',
-  control: new FormControl(null),
   helpText: 'Example help text',
 };
 
-export const ExamplesWithValidators: StoryFn = () => ({
+export const Disabled = Template.bind({});
+Disabled.args = {
+  size: 'lg',
+  disabled: true,
+  tooltip: '',
+  tooltipToggle: false,
+  label: 'Disabled Text Input',
+  helpText: 'You should be able to focus on this input but not insert any values',
+};
+
+export const WithValidators: StoryFn<TextInputComponent> = (args: TextInputComponent) => ({
+  props: args,
   template: `
 		<example-text-input-with-form-control></example-text-input-with-form-control>
 	`,
 });
+
+WithValidators.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
+};

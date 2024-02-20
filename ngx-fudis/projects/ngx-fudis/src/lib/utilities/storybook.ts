@@ -85,4 +85,15 @@ export const gridExclude: RegExp = excludeRegex([
   'ngOnInit',
 ]);
 
-export const headingExclude: RegExp = excludeRegex(['getHeadingMarginBottom', 'getHeadingSize']);
+export const textInputExclude: RegExp = excludeRegex(['focusToInput', 'onBlur']);
+
+export const textInputControlsExclude: RegExp = excludeRegex([
+  'control',
+  'focusToInput',
+  'handleBlur',
+  'onBlur',
+  'ariaLabel',
+  'disableGuidance',
+  'id',
+  'initialFocus',
+]);
