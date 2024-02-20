@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { IconComponent } from '../icon/icon.component';
 import { LinkComponent } from './link.component';
 import { getElement, getTrimmedTextContent } from '../../utilities/tests/utilities';
+import { FudisLinkColor } from '../../types/miscellaneous';
 
 describe('LinkComponent', () => {
   let component: LinkComponent;
@@ -26,7 +27,7 @@ describe('LinkComponent', () => {
     fixture.detectChanges();
   });
 
-  function linkColorCheck(color: 'primary-dark' | 'default' | 'white'): void {
+  function linkColorCheck(color: FudisLinkColor): void {
     component.color = color;
     fixture.detectChanges();
 
@@ -57,7 +58,7 @@ describe('LinkComponent', () => {
     });
 
     it('should have respective CSS class for color', () => {
-      linkColorCheck('default');
+      linkColorCheck('gray-dark');
       linkColorCheck('primary-dark');
       linkColorCheck('white');
     });

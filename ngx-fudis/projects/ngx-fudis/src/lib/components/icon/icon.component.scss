@@ -11,21 +11,19 @@
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
+  transition: all 0.6s ease;
 
-  &-rotate {
+  &__rotate {
     &__flip-180 {
       transform: rotate(180deg);
-      transition: all 0.6s ease;
     }
 
     &__cw-90 {
       transform: rotate(90deg);
-      transition: all 0.6s ease;
     }
 
     &__ccw-90 {
       transform: rotate(-90deg);
-      transition: all 0.6s ease;
     }
   }
 
@@ -39,21 +37,20 @@
     height: spacing.$spacing-sm;
   }
 
-  // TODO: These class names could be improved to be more coherent
-  &-color {
-    &__attention {
+  &__color {
+    &__yellow {
       fill: colors.$color-yellow;
     }
 
-    &__danger {
+    &__red {
       fill: colors.$color-red;
     }
 
-    &__default {
+    &__gray-dark {
       fill: colors.$color-gray-dark;
     }
 
-    &__light {
+    &__gray-light {
       fill: colors.$color-gray-light;
     }
 
@@ -65,7 +62,7 @@
       fill: colors.$color-primary-dark;
     }
 
-    &__success {
+    &__green {
       fill: colors.$color-green;
     }
 

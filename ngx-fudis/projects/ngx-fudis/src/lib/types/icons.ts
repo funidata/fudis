@@ -96,13 +96,13 @@ export const fudisIconArray: string[] = [
 export type FudisIcon = (typeof fudisIconArray)[number];
 
 export const fudisIconColorArray: string[] = [
-  'attention',
-  'danger',
-  'default',
-  'light',
+  'yellow',
+  'red',
+  'gray-dark',
+  'gray-light',
   'primary',
   'primary-dark',
-  'success',
+  'green',
   'white',
 ];
 
