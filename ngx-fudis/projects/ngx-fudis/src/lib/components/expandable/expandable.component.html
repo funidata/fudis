@@ -36,9 +36,9 @@
         >
       </button>
     </div>
-    <ng-container *ngIf="headerButtons?.type === 'expandable'">
+    <ng-container *ngIf="_headerButtons?.type === 'expandable'">
       <div class="fudis-expandable__header__buttons">
-        <ng-container *ngTemplateOutlet="headerButtons!.templateRef"></ng-container>
+        <ng-container *ngTemplateOutlet="_headerButtons!.templateRef"></ng-container>
       </div>
     </ng-container>
   </div>
@@ -48,8 +48,8 @@
     [attr.aria-hidden]="_closed"
     [hidden]="_closed"
   >
-    <ng-container *ngIf="content?.type === 'expandable'">
-      <ng-container *ngTemplateOutlet="content!.templateRef"></ng-container>
+    <ng-container *ngIf="_content?.type === 'expandable'">
+      <ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>
     </ng-container>
   </div>
 </section>

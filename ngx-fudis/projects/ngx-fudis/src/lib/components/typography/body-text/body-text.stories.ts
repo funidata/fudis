@@ -1,7 +1,6 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { BodyTextComponent } from './body-text.component';
 import readme from './readme.mdx';
-import { bodyTextExclude } from '../../../utilities/storybook';
 
 export default {
   title: 'Components/Typography/Body Text',
@@ -9,9 +8,6 @@ export default {
   parameters: {
     docs: {
       page: readme,
-    },
-    controls: {
-      exclude: bodyTextExclude,
     },
   },
   argTypes: {

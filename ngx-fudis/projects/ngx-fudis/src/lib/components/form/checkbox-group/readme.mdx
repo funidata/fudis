@@ -1,7 +1,7 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
-import { linkTo } from "@storybook/addon-links";
 import { CheckboxGroupComponent } from "./checkbox-group.component";
 import * as CheckboxGroupStories from "./checkbox-group.stories.ts";
+import { checkboxGroupExclude } from "../../../utilities/storybook";
 
 <Meta title="Components/Form/Checkbox Group" />
 
@@ -108,4 +108,4 @@ myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
 
 ## Properties
 
-<ArgTypes of={CheckboxGroupComponent} />
+<ArgTypes of={CheckboxGroupComponent} exclude={checkboxGroupExclude} />

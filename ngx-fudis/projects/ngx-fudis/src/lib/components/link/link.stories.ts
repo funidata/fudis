@@ -1,11 +1,15 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { LinkComponent } from './link.component';
+import { linkExclude } from '../../utilities/storybook';
 import readme from './readme.mdx';
 
 export default {
   title: 'Components/Link',
   component: LinkComponent,
   parameters: {
+    controls: {
+      exclude: linkExclude,
+    },
     docs: {
       page: readme,
     },

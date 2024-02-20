@@ -44,6 +44,11 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
    */
   protected _name: string;
 
+  /**
+   * Set requiredText based on this boolean value
+   */
+  protected _required: boolean = false;
+
   ngOnInit() {
     this._setParentId('radio-button-group');
 
@@ -63,6 +68,6 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
   }
 
   ngOnChanges(): void {
-    this._required = this.required ?? hasRequiredValidator(this.control);
+    this._required = hasRequiredValidator(this.control);
   }
 }

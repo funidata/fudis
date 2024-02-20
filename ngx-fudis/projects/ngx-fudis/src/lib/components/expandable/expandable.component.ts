@@ -46,9 +46,12 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
     this._headingId = `${this._id}-heading`;
   }
 
-  @ContentChild(ContentDirective) content: ContentDirective;
+  /**
+   * TODO: think about documentation
+   */
+  @ContentChild(ContentDirective) protected _content: ContentDirective;
 
-  @ContentChild(ActionsDirective) headerButtons: ActionsDirective | null;
+  @ContentChild(ActionsDirective) protected _headerButtons: ActionsDirective | null;
 
   /**
    * Title of the expandable
@@ -150,6 +153,8 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
     this.removeFromErrorSummary();
   }
 
+  // TODO: add some comments
+
   addToErrorSummary(): void {
     if (this.errorSummaryBreadcrumb) {
       this._errorSummaryInfo = {
@@ -160,6 +165,8 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
       this._errorSummaryInfoSent = true;
     }
   }
+
+  // TODO: add some comments
 
   removeFromErrorSummary(): void {
     if (this._errorSummaryInfoSent) {
