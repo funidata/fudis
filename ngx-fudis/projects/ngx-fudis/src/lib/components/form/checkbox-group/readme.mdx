@@ -1,5 +1,6 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { CheckboxGroupComponent } from "./checkbox-group.component";
+import { CheckboxComponent } from "./checkbox/checkbox.component";
 import * as CheckboxGroupStories from "./checkbox-group.stories.ts";
 import { checkboxGroupExclude } from "../../../utilities/storybook";
 
@@ -15,11 +16,15 @@ Checkbox Group is a form fieldset element constructing from `fieldset` `legend` 
 
 ## Usage Guidelines
 
-#### Mandatory Properties
+### Checkbox Group
 
-Necessary properties for Checkbox Group are `title` and `formGroup`.
+Mandatory properties for Checkbox Group are `title` and `formGroup`.
 
-For child Checkbox elements mandatory properties are `controlName` and `label`. Checkbox's `controlName` must match with the corresponding control in the main `formGroup`.
+### Checkbox Child Component
+
+For child Checkbox components mandatory properties are `controlName` and `label`. Checkbox's `controlName` must match with the corresponding control in the main `formGroup`.
+
+### Usage Example
 
 ```
 // In HTML template
@@ -46,9 +51,9 @@ myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
 );
 ```
 
-#### As a required form field and at least one required selection
+### As a Required Fieldset
 
-To display visible 'required' text with the fieldset group, set `required` input as true to Checkbox Group and include validator `FudisGroupValidators.atLeastOneRequired()` in the validators array of `formGroup`.
+To set Fieldset with Checkbox Group as Required field, include validator `FudisGroupValidators.atLeastOneRequired()` or `FudisGroupValidators.min()` in the validators array of `formGroup`.
 
 ```
 // In HTML template
@@ -56,7 +61,7 @@ To display visible 'required' text with the fieldset group, set `required` input
 <fudis-checkbox-group
 	[formGroup]="myFormGroup"
 	[title]="'Choose at least one'"
-	[required]="true">
+	>
 	<fudis-checkbox
 	[controlName]="'first'"
 	[label]="'You should check this'"/>
@@ -78,9 +83,9 @@ myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
 
 ```
 
-#### Minimum and maximum selection validation
+### Minimum and Maximum Selection Validation
 
-If checkbox-group fieldset has minimum and/or maximum options to be selected, form field include `FudisGroupValidators.min` and/or `FudisGroupValidators.max` in the group validators.
+If Checkbox Group has minimum and/or maximum options to be selected, form field include `FudisGroupValidators.min` and/or `FudisGroupValidators.max` in the group validators.
 
 ```
 // In TypeScript file
@@ -93,19 +98,24 @@ myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
 		forth: new FormControl<boolean | null | undefined>(null),
 	},
 	[
-		FudisGroupValidators.min({value: 2, message: new BehaviorSubject('Too few selected!')}),
-		FudisGroupValidators.max({value: 3, message: new BehaviorSubject('Too many selected!')})
+		FudisGroupValidators.min({value: 2, message: 'Select at least two!'}),
+		FudisGroupValidators.max({value: 3, message: 'Too many selected! Three is maximum.'})
 	]
 );
 ```
 
-### Accessibility
+## Accessibility
 
 - Fieldset has a legend as its first child element
+- When selection is mandatory, it is communicated with 'Required' text using validators
 - Checkbox options are grouped by name attribute
-- Guidance is linked to the checkbox-group via id
+- Guidance is linked to the Checkbox Group via id
 - Possible error messages are displayed after user blurs out from the whole checkbox group
 
-## Properties
+## Properties of Checkbox Group Component
 
 <ArgTypes of={CheckboxGroupComponent} exclude={checkboxGroupExclude} />
+
+## Properties of Checkbox Component
+
+<ArgTypes of={CheckboxComponent} />

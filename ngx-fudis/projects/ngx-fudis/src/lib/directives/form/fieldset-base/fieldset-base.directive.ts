@@ -37,10 +37,7 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
    */
   @Input() helpText: string;
 
-  /**
-   * Visual size of title legend. Default 'md' and 'sm' is similar to standard input label, used in e. g. RadioButtonGroup.
-   */
-  @Input() titleSize: 'md' | 'sm' = 'md';
+  
 
   /**
    * Fudis translation key for required text

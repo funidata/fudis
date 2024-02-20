@@ -113,6 +113,11 @@ export class FieldSetComponent
   @Input() required: boolean | undefined = undefined;
 
   /**
+   * Visual size of title legend. Default 'md' and 'sm' is similar to standard input label, used in e. g. RadioButtonGroup.
+   */
+  @Input() titleSize: 'md' | 'sm' = 'md';
+
+  /**
    * Title property to send to Error Summary Service
    */
   protected _title: string;
