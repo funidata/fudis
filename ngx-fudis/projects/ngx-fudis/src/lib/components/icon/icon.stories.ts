@@ -151,3 +151,9 @@ export const AllIcons: StoryFn<IconComponent> = (args: IconComponent) => ({
 	</fudis-grid>
 	`,
 });
+
+AllIcons.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
+};
