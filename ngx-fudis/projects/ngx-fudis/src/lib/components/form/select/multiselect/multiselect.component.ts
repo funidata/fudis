@@ -182,7 +182,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
       if (currentValue!.length === 0 && this.autocomplete) {
         this._autocompleteRef.inputRef.nativeElement.focus();
       } else if (currentValue!.length === 0) {
-        this.inputRef.nativeElement.focus();
+        this._inputRef.nativeElement.focus();
       }
 
       this.dropdownSelectionLabelText = joinInputValues(currentValue);

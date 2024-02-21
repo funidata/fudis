@@ -25,34 +25,57 @@ export default {
   },
 } as Meta;
 
+const html = String.raw;
+
 const Template: StoryFn = (args) => ({
   props: args,
-  template: `
-	<fudis-grid [width]="'md'" [align]="'start'">
-		<div>
-			<fudis-body-text [size]="size" [color]="color" [align]="align">{{content}}</fudis-body-text>
-			<fudis-body-text [size]="size" [color]="color" [align]="align">{{content}}</fudis-body-text>
-		</div>
-	</fudis-grid>`,
+  template: html` <fudis-grid [width]="'md'" [align]="'start'">
+    <div>
+      <fudis-body-text [size]="size" [color]="color" [align]="align">{{content}}</fudis-body-text>
+      <fudis-body-text [size]="size" [color]="color" [align]="align">{{content}}</fudis-body-text>
+    </div>
+  </fudis-grid>`,
 });
 
-export const BodyText = Template.bind({});
-BodyText.args = {
+export const Example = Template.bind({});
+Example.args = {
   size: 'lg-regular',
   align: 'left',
   color: 'default',
   content:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    'Mutiny Pirate Round execution dock spanker broadside schooner aye reef sails quarter yo-ho-ho.',
 };
 
-export const AllVariants: StoryFn = () => ({
-  template: `
-	<fudis-grid columns="1fr 1fr" [align]="'start'">
-	<fudis-body-text [size]="'lg-regular'">This paragraph has lg-regular font size. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </fudis-body-text>
-	<fudis-body-text [size]="'lg-light'">This paragraph has lg-light font size. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</fudis-body-text>
-	<fudis-body-text [size]="'md-regular'">This paragraph has md-regular font size. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</fudis-body-text>
-	<fudis-body-text [size]="'md-light'">This paragraph has md-light font size. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</fudis-body-text>
-	<fudis-body-text [size]="'sm-regular'">This paragraph has sm-regular font size. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</fudis-body-text>
-	</fudis-grid>
-	`,
+export const AllVariants: StoryFn<BodyTextComponent> = (args: BodyTextComponent) => ({
+  props: args,
+  template: html`
+    <fudis-grid [columns]="{xs: 1, md: 2}" [align]="'start'">
+      <fudis-body-text [size]="'lg-regular'"
+        >This paragraph has <strong>lg-regular</strong> size. Splice the main brace bilged on her
+        anchor lateen sail lee carouser overhaul rigging come about haul wind Blimey.
+      </fudis-body-text>
+      <fudis-body-text [size]="'lg-light'"
+        >This paragraph has <strong>lg-light</strong> size. Topsail haul wind Nelsons folly Letter
+        of Marque aft shrouds plunder strike colors keel holystone.
+      </fudis-body-text>
+      <fudis-body-text [size]="'md-regular'"
+        >This paragraph has <strong>md-regular</strong> size.Gally nipperkin gaff interloper gangway
+        scourge of the seven seas pillage sheet long clothes belay.</fudis-body-text
+      >
+      <fudis-body-text [size]="'md-light'"
+        >This paragraph has <strong>md-light</strong> size. Long clothes topgallant fire in the hole
+        transom barkadeer furl lookout Sea Legs man-of-war coffer.
+      </fudis-body-text>
+      <fudis-body-text [size]="'sm-regular'"
+        >This paragraph has <strong>sm-regular</strong> size. Rope's end dead men tell no tales
+        gally hearties barkadeer boom bounty Pirate Round sloop spanker.
+      </fudis-body-text>
+    </fudis-grid>
+  `,
 });
+
+AllVariants.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
+};

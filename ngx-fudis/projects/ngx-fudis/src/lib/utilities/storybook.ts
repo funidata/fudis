@@ -54,6 +54,8 @@ export const notificationExclude: RegExp = excludeRegex(['link']);
 
 export const dialogExclude: RegExp = excludeRegex(['closeButtonPositionAbsolute']);
 
+export const headingControlsExclude: RegExp = excludeRegex(['id']);
+
 export const expandableExclude: RegExp = excludeRegex([
   'ref',
   'setClosedStatus',
@@ -90,4 +92,15 @@ export const gridExclude: RegExp = excludeRegex([
   'ngOnInit',
 ]);
 
-export const headingExclude: RegExp = excludeRegex(['getHeadingMarginBottom', 'getHeadingSize']);
+export const textInputExclude: RegExp = excludeRegex(['focusToInput', 'onBlur']);
+
+export const textInputControlsExclude: RegExp = excludeRegex([
+  'control',
+  'focusToInput',
+  'handleBlur',
+  'onBlur',
+  'ariaLabel',
+  'disableGuidance',
+  'id',
+  'initialFocus',
+]);

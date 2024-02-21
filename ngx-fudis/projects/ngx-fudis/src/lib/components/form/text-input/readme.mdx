@@ -1,20 +1,15 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { TextInputComponent } from "./text-input.component";
 import * as TextInputStories from "./text-input.stories.ts";
+import { textInputExclude } from "../../../utilities/storybook";
 
 <Meta title="Components/Form/Text-input" />
 
 # Text Input
 
+Text Input is a form field element, which renders HTML element `<input>` with associated label and other guidance texts.
+
 Text Input type options are `text` (default), `email`, `number`, `password`, `tel` and `url`.
-
-## Basic Example
-
-<Canvas of={TextInputStories.Example}></Canvas>
-
-## Examples With Validators
-
-<Canvas of={TextInputStories.ExamplesWithValidators}></Canvas>
 
 ## Usage Guidelines
 
@@ -32,6 +27,14 @@ Text Input uses Fudis Validators. See the full documentation on [how to use Fudi
 
 If a custom validation is needed, read [how to add Error message](/docs/components-form-error-message--documentation).
 
+## Basic Example
+
+<Canvas of={TextInputStories.Example}></Canvas>
+
+## Examples With Validators
+
+<Canvas of={TextInputStories.WithValidators}></Canvas>
+
 ## Accessibility
 
 - Label and guidance are linked to the text-input via id
@@ -43,4 +46,4 @@ If a custom validation is needed, read [how to add Error message](/docs/componen
 
 ## Properties
 
-<ArgTypes of={TextInputComponent} />
+<ArgTypes of={TextInputComponent} exclude={textInputExclude} />
