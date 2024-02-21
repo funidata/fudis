@@ -6,11 +6,9 @@
  */
 
 export const excludeRegex = (array?: string[]): RegExp => {
-  const singleValue = array && array.length === 1;
-
   const joined: string | null = array ? array.join('|') : null;
 
-  const joinedWithRegexOr: string = singleValue ? `|${joined}` : joined ? `|(${joined})` : '';
+  const joinedWithRegexOr: string = `|^(${joined})$`;
 
   const regex = new RegExp(`(^(?:_|ng)[a-zA-Z0-9]\\w+)${joinedWithRegexOr}`);
 
@@ -21,13 +19,11 @@ export const excludeRegex = (array?: string[]): RegExp => {
  * Regex for excluding everything except given strings. E. g. to exclude everything but marginTop and variant properties: excludeEverythingExceptRegex(['marginTop', 'variant'])
  */
 export const excludeEverythingExceptRegex = (array?: string[]): RegExp => {
-  const singleValue = array && array.length === 1;
-
   const joined: string | null = array ? array.join('|') : null;
 
-  const joinedWithRegexOr: string = singleValue ? `|${joined}` : joined ? `|(${joined})` : '';
+  const joinedWithRegexOr: string = `|^(${joined})$`;
 
-  const regex = new RegExp(`^(?!(${joinedWithRegexOr})$).*$`);
+  const regex = new RegExp(`^(?!(^(${joinedWithRegexOr})$)).*$`);
 
   return regex;
 };
