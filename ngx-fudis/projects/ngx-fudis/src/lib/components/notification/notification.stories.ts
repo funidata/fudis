@@ -1,6 +1,7 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { NotificationComponent } from './notification.component';
 import readme from './readme.mdx';
+import { notificationExclude } from '../../utilities/storybook';
 
 export default {
   title: 'Components/Notification',
@@ -9,18 +10,27 @@ export default {
     docs: {
       page: readme,
     },
+    controls: {
+      exclude: notificationExclude,
+    },
   },
   argTypes: {
     variant: {
       options: ['warning', 'danger', 'success', 'info'],
       control: { type: 'radio' },
     },
+    externalLink: {
+      control: { type: 'text' },
+    },
+    linkTitle: {
+      control: { type: 'text' },
+    },
   },
 } as Meta;
 
 const html = String.raw;
 
-const Template: StoryFn = (args) => ({
+const Template: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
   props: args,
   template: html`<fudis-notification
     [variant]="variant"
@@ -31,20 +41,22 @@ const Template: StoryFn = (args) => ({
   >`,
 });
 
-export const Notification = Template.bind({});
-Notification.args = {
+export const Example = Template.bind({});
+Example.args = {
   variant: 'warning',
 };
 
-export const LinkNotification = Template.bind({});
-LinkNotification.args = {
+export const ExampleWithExternalLink = Template.bind({});
+ExampleWithExternalLink.args = {
   variant: 'warning',
   linkTitle: 'This link opens in new tab.',
-  link: 'https://www.example.com',
-  externalLink: true,
+  externalLink: 'https://www.example.com',
 };
 
-export const AllVariants: StoryFn = () => ({
+export const AllVariants: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
+  props: {
+    ...args,
+  },
   template: html`
     <fudis-grid [align]="'start'" [width]="'md'">
       <fudis-notification [variant]="'warning'">
@@ -56,3 +68,9 @@ export const AllVariants: StoryFn = () => ({
     </fudis-grid>
   `,
 });
+
+AllVariants.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
+};

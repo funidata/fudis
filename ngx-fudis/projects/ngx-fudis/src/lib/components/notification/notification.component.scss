@@ -1,8 +1,5 @@
-@use "sass:map";
 @use "../../foundations/colors/mixins.scss" as colors;
-@use "../../foundations/focus/mixins.scss" as focus;
 @use "../../foundations/borders/mixins.scss" as borders;
-@use "../../foundations/typography/mixins.scss" as typography;
 @use "../../foundations/spacing/tokens.scss" as spacing;
 
 .fudis-notification {

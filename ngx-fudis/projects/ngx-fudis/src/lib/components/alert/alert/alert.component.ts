@@ -49,7 +49,7 @@ export class AlertComponent {
    * Conditional routerLink for Alert. If used, provide also linkTitle.
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  @Input() routerLinkUrl: string | any[] | null | undefined;
+  @Input() link: string | any[] | null | undefined;
 
   /**
    * Title of url used with routerLinkUrl
