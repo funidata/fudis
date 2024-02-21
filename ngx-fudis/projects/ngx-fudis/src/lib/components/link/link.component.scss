@@ -3,14 +3,14 @@
 @use "../../foundations/focus/mixins.scss" as focus;
 
 .fudis-link {
-  &__anchor {
-    display: inline-block;
-    text-decoration: underline solid;
+  display: inline-block;
+  text-decoration: underline solid;
 
-    &:focus {
-      @include focus.focus-generic;
-    }
+  &:focus {
+    @include focus.focus-generic;
+  }
 
+  &__color {
     &__primary-dark {
       @include colors.text-color("primary-dark");
     }
@@ -22,12 +22,9 @@
     &__white {
       @include colors.text-color("white");
     }
+  }
 
-    &__external {
-      display: inline-flex;
-      align-items: center;
-    }
-
+  &__size {
     &__inherit {
       @include typography.text-link-inherit-typography;
     }
@@ -39,5 +36,10 @@
     &__lg {
       @include typography.text-link-l-typography;
     }
+  }
+
+  &__external {
+    display: inline-flex;
+    align-items: center;
   }
 }

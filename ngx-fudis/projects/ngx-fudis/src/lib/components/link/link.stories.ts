@@ -15,12 +15,6 @@ export default {
     },
   },
   argTypes: {
-    external: {
-      options: [true, false],
-      control: {
-        type: 'radio',
-      },
-    },
     color: {
       options: ['primary-dark', 'gray-dark', 'white'],
       control: {
@@ -38,26 +32,23 @@ export const Example = Template.bind({});
 Example.args = {
   href: 'https://www.example.com',
   color: 'primary-dark',
-  external: false,
   initialFocus: false,
   size: 'inherit',
 };
 
 export const ExampleWithExternalLink = Template.bind({});
 ExampleWithExternalLink.args = {
-  href: 'https://www.example.com',
+  externalLink: 'https://www.example.com',
   color: 'primary-dark',
-  external: true,
   initialFocus: false,
   size: 'inherit',
 };
 
 export const ExampleWithLinkWithTitle = Template.bind({});
 ExampleWithLinkWithTitle.args = {
-  href: 'https://www.example.com',
+  externalLink: 'https://www.example.com',
   linkTitle: 'Visible title for the link',
   color: 'primary-dark',
-  external: false,
   initialFocus: false,
   size: 'inherit',
 };

@@ -1,51 +1,44 @@
-<div *ngIf="!external" class="fudis-link">
-  <ng-container *ngTemplateOutlet="anchorLink"></ng-container>
-</div>
-
-<div *ngIf="external" class="fudis-link">
-  <ng-container *ngTemplateOutlet="externalLink"></ng-container>
-</div>
-
-<ng-template #anchorLink>
-  <ng-container *ngIf="!routerLinkUrl">
-    <a
-      #linkRef
-      class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__{{ color }}"
-      (focus)="_handleFocus($event)"
-      (blur)="_handleBlur($event)"
-      [href]="href"
-    >
-      {{ linkTitle ? linkTitle : href }}
-    </a>
-  </ng-container>
-  <ng-container *ngIf="routerLinkUrl">
-    <a
-      #linkRef
-      class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__{{ color }}"
-      (focus)="_handleFocus($event)"
-      (blur)="_handleBlur($event)"
-      [routerLink]="routerLinkUrl"
-      [fragment]="fragmentId"
-    >
-      {{ linkTitle ? linkTitle : href }}
-    </a>
-  </ng-container>
-</ng-template>
-
-<ng-template #externalLink>
+<ng-container *ngIf="externalLink">
   <a
     #linkRef
+    class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{
+      color
+    }} fudis-link__external"
     (focus)="_handleFocus($event)"
     (blur)="_handleBlur($event)"
-    attr.aria-label="{{ linkTitle ? linkTitle : href }}, {{ _externalLinkAriaLabel }}"
-    [href]="href ? href : null"
+    attr.aria-label="{{ linkTitle ? linkTitle : externalLink }}, {{ _externalLinkAriaLabel }}"
+    [href]="externalLink"
     target="_blank"
     rel="noopener noreferrer"
-    class="fudis-link__anchor fudis-link__anchor__{{ size }} fudis-link__anchor__{{
-      color
-    }} fudis-link__anchor__external"
   >
-    {{ linkTitle ? linkTitle : href }}
+    {{ linkTitle ? linkTitle : externalLink }}
     <fudis-icon [icon]="'new-tab'" [color]="color"></fudis-icon>
   </a>
-</ng-template>
+</ng-container>
+<ng-container *ngIf="(link || fragmentId) && !externalLink">
+  <a
+    #linkRef
+    class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{
+      color
+    }} fudis-link__router"
+    (focus)="_handleFocus($event)"
+    (blur)="_handleBlur($event)"
+    [routerLink]="link"
+    [fragment]="fragmentId"
+  >
+    {{ linkTitle ? linkTitle : link }}
+  </a>
+</ng-container>
+<ng-container *ngIf="href && !link && !externalLink">
+  <a
+    #linkRef
+    class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{
+      color
+    }} fudis-link__href"
+    (focus)="_handleFocus($event)"
+    (blur)="_handleBlur($event)"
+    [href]="href"
+  >
+    {{ linkTitle ? linkTitle : href }}
+  </a>
+</ng-container>
