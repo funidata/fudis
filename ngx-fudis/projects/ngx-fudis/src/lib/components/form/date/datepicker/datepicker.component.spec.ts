@@ -107,7 +107,7 @@ describe('DatepickerComponent', () => {
       expect(datepickerInput.focus).toBeTruthy();
     });
 
-    it('should have invalid class if datepicker is required, input is touched and no date has been chosen', () => {
+    it('should have invalid attribute if datepicker is required, input is touched and no date has been chosen', () => {
       const datepickerInput = fixture.nativeElement.querySelector('input');
       const requiredControl = new FormControl(null, FudisValidators.required('Date is required'));
       component.control = requiredControl;
@@ -119,7 +119,7 @@ describe('DatepickerComponent', () => {
       datepickerInput.dispatchEvent(new Event('blur'));
       fixture.detectChanges();
 
-      expect(datepickerInput.className).toContain('fudis-form-input--invalid');
+      expect(!!datepickerInput.getAttribute('aria-invalid')).toEqual(true);
     });
 
     // TODO: Change ng-reflect to HTML element if possible
@@ -129,12 +129,12 @@ describe('DatepickerComponent', () => {
       expect(datepickerIcon.attributes['ng-reflect-icon']).toEqual('calendar');
     });
 
-    it('should have proper disabled class if input has been disabled', () => {
+    it('should have proper disabled attribute if input has been disabled', () => {
       const datepickerInput = fixture.nativeElement.querySelector('input');
       component.disabled = true;
       fixture.detectChanges();
 
-      expect(datepickerInput.className).toContain('fudis-form-input--disabled');
+      expect(!!datepickerInput.getAttribute('aria-disabled')).toEqual(true);
     });
 
     // TODO: Test if control is invalid, guidance is present
