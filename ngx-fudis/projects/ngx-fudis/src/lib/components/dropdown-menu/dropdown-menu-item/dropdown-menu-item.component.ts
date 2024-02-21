@@ -62,9 +62,10 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective impleme
   }
 
   protected _closeDropdown(event: Event): void {
-    if (this._parentButton) {
-      this._parentButton.closeMenu();
-    }
+    // TODO: Enable Enable Dropdown Menu Button
+    // if (this._parentButton) {
+    //   this._parentButton.closeMenu();
+    // }
 
     this.handleClick.emit(event);
   }

@@ -1,7 +1,8 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { ButtonComponent } from './button.component';
 import readme from './readme.mdx';
-import { buttonExclude } from '../../utilities/storybook';
+import { buttonControlsExclude, buttonIconOnlyExclude } from '../../utilities/storybook';
+import { fudisIconArray } from '../../types/icons';
 
 export default {
   title: 'Components/Button',
@@ -11,7 +12,7 @@ export default {
       page: readme,
     },
     controls: {
-      exclude: buttonExclude,
+      exclude: buttonControlsExclude,
     },
   },
   argTypes: {
@@ -24,14 +25,22 @@ export default {
       control: { type: 'radio' },
     },
     icon: {
-      control: { type: 'text' },
+      options: fudisIconArray,
+      controls: { type: 'select' },
+    },
+    iconRotate: {
+      options: ['flip-180', 'cw-90', 'ccw-90', 'none'],
+      control: { type: 'select' },
     },
     tooltip: {
       control: { type: 'text' },
     },
     tooltipPosition: {
       options: ['left', 'right', 'above', 'below'],
-      control: { type: 'radio' },
+      control: { type: 'select' },
+    },
+    ariaLabel: {
+      control: { type: 'text' },
     },
   },
 } as Meta;
@@ -42,33 +51,50 @@ const Template: StoryFn = (args) => ({
   props: args,
 });
 
-export const Button = Template.bind({});
-Button.args = {
-  disabled: false,
+export const Example = Template.bind({});
+Example.args = {
   variant: 'primary',
   label: 'Button',
+  ariaLabel: undefined,
   size: 'medium',
-  tooltip: '',
+  icon: undefined,
+  iconRotate: undefined,
+  disabled: false,
 };
 
-export const IconButton = Template.bind({});
-IconButton.args = {
+export const WithIcon = Template.bind({});
+WithIcon.args = {
   variant: 'secondary',
   label: 'Icon Button',
+  ariaLabel: undefined,
+  size: 'medium',
   icon: 'search',
+  iconRotate: undefined,
+  disabled: false,
 };
 
-export const OnlyIconButton = Template.bind({});
-OnlyIconButton.args = {
+export const IconOnly = Template.bind({});
+IconOnly.args = {
   variant: 'secondary',
-  icon: 'search',
   label: 'Search button',
+  ariaLabel: undefined,
+  size: 'medium',
+  icon: 'search',
+  iconRotate: undefined,
   labelHidden: true,
+  disabled: false,
+};
+
+IconOnly.parameters = {
+  controls: {
+    exclude: buttonIconOnlyExclude,
+  },
 };
 
 // TODO: Refactor all fudis-heading inline styles to use Spacing Directive after the directive is exposed again
 // (fudisSpacing [marginTop]="'md'")
-export const AllVariants: StoryFn = () => ({
+export const AllVariants: StoryFn<ButtonComponent> = (args: ButtonComponent) => ({
+  props: args,
   template: html`
     <fudis-grid
       [marginBottom]="'md'"
@@ -201,3 +227,9 @@ export const AllVariants: StoryFn = () => ({
     </fudis-grid>
   `,
 });
+
+AllVariants.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
+};

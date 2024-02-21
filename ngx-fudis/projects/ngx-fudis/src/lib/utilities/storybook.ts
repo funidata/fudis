@@ -19,7 +19,7 @@ export const excludeRegex = (array?: string[]): RegExp => {
 
 export const excludeAllRegex: RegExp = /.*/;
 
-export const buttonExclude: RegExp = excludeRegex([
+const buttonCommonExclude: string[] = [
   'classes',
   'dropdownMenuId',
   'dropdownOpen',
@@ -29,7 +29,17 @@ export const buttonExclude: RegExp = excludeRegex([
   'openMenu',
   'closeMenu',
   'toggleMenu',
+];
+
+export const buttonExclude: RegExp = excludeRegex([...buttonCommonExclude]);
+
+export const buttonControlsExclude: RegExp = excludeRegex([
+  ...buttonCommonExclude,
+  'handleClick',
+  'labelHidden',
 ]);
+
+export const buttonIconOnlyExclude: RegExp = excludeRegex([...buttonCommonExclude, 'handleClick']);
 
 export const checkboxGroupExclude: RegExp = excludeRegex(['groupBlurredOut', 'setGroupBlurredOut']);
 
