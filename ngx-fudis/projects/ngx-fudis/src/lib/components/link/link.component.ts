@@ -96,7 +96,7 @@ export class LinkComponent implements AfterViewInit, OnChanges {
   protected _translations: Signal<FudisTranslationConfig>;
 
   /**
-   * For External links with title. Used to split the last word of the title to be paired with the Icon, so that on line break, the icon sticks with the last word of the title.
+   * Store parsed values of external link's title
    */
   protected _externalLinkTitleParsed: string[];
 
@@ -145,9 +145,8 @@ export class LinkComponent implements AfterViewInit, OnChanges {
   }
 
   /**
-   *
+   * For external links with a title. Used to split the last word of the title to be paired with the Icon, so that on line break, the icon sticks with the last word of the title.
    */
-
   private _parseExternalLinkTitle(): void {
     if (this.title && this.externalLink) {
       const toArray = this.title.split(' ');
