@@ -4,7 +4,6 @@ import {
   Input,
   OnChanges,
   OnInit,
-  SimpleChanges,
   effect,
 } from '@angular/core';
 import { FudisIcon } from '../../types/icons';
@@ -24,25 +23,27 @@ export class NotificationComponent implements OnChanges, OnInit {
     });
   }
 
+  /**
+   * Content projection directive fudisContent for internal use. Error Summary Component is Notification Component with content projection.
+   */
   @ContentChild(ContentDirective) protected _content: ContentDirective | null;
 
   /**
-   * Notification variant options
+   * Notification variant
    */
   @Input() variant: FudisNotification = 'warning';
 
-  // TODO: add support for Angular Router Link
+  /**
+   * Add Angular Router link
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @Input() link: string | any[];
 
   /**
-   * Add link href address
+   * Add an external link as HTML href to point a target page on another domain.
+   * External link contains new-tab icon and assistive aria-label.
    */
-  @Input() link: string;
-
-  /**
-   * Option to create an external link to point a target page on another domain.
-   * External link contains external icon and assistive aria-label
-   */
-  @Input() externalLink: boolean = false;
+  @Input() externalLink: string;
 
   /**
    * Title for the link, if not defined title will be the same as link URL
@@ -60,25 +61,24 @@ export class NotificationComponent implements OnChanges, OnInit {
   protected _attentionText: string;
 
   /**
-   * Initialization
+   * Getter for notification icon
    */
+  get icon(): string {
+    return this._icon;
+  }
+
   ngOnInit(): void {
-    this._getClasses();
+    this._setNotificationIcon();
+  }
+
+  ngOnChanges(): void {
+    this._setNotificationIcon();
   }
 
   /**
-   * Detecting icon changes
+   * Used to set correct icon for each notification variant
    */
-  ngOnChanges(changes: SimpleChanges): void {
-    if (!changes['icon']) {
-      this._getClasses();
-    }
-  }
-
-  /**
-   * Used to initialize notifications variant icons
-   */
-  private _getClasses(): void {
+  private _setNotificationIcon(): void {
     switch (this.variant) {
       case 'warning':
         this._icon = 'exclamation-mark-circle';

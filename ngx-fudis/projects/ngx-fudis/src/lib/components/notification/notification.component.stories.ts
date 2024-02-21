@@ -15,12 +15,22 @@ export default {
       options: ['warning', 'danger', 'success', 'info'],
       control: { type: 'radio' },
     },
+    externalLink: {
+      options: [true, false],
+      control: { type: 'radio' },
+    },
+    link: {
+      control: { type: 'text' },
+    },
+    linkTitle: {
+      control: { type: 'text' },
+    },
   },
 } as Meta;
 
 const html = String.raw;
 
-const Template: StoryFn = (args) => ({
+const Template: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
   props: args,
   template: html`<fudis-notification
     [variant]="variant"
@@ -31,20 +41,22 @@ const Template: StoryFn = (args) => ({
   >`,
 });
 
-export const Notification = Template.bind({});
-Notification.args = {
+export const Example = Template.bind({});
+Example.args = {
   variant: 'warning',
 };
 
-export const LinkNotification = Template.bind({});
-LinkNotification.args = {
+export const ExampleWithExternalLink = Template.bind({});
+ExampleWithExternalLink.args = {
   variant: 'warning',
   linkTitle: 'This link opens in new tab.',
-  link: 'https://www.example.com',
-  externalLink: true,
+  externalLink: 'https://www.example.com',
 };
 
-export const AllVariants: StoryFn = () => ({
+export const AllVariants: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
+  props: {
+    ...args,
+  },
   template: html`
     <fudis-grid [align]="'start'" [width]="'md'">
       <fudis-notification [variant]="'warning'">
@@ -56,3 +68,9 @@ export const AllVariants: StoryFn = () => ({
     </fudis-grid>
   `,
 });
+
+AllVariants.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
+}
