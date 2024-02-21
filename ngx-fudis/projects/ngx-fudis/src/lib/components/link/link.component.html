@@ -32,9 +32,7 @@
 <ng-container *ngIf="href && !link && !externalLink">
   <a
     #linkRef
-    class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{
-      color
-    }} fudis-link__href"
+    class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{ color }} fudis-link__href"
     (focus)="_handleFocus($event)"
     (blur)="_handleBlur($event)"
     [href]="href"

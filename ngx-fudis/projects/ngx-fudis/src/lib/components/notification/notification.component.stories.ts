@@ -16,10 +16,6 @@ export default {
       control: { type: 'radio' },
     },
     externalLink: {
-      options: [true, false],
-      control: { type: 'radio' },
-    },
-    link: {
       control: { type: 'text' },
     },
     linkTitle: {
@@ -73,4 +69,4 @@ AllVariants.parameters = {
   controls: {
     exclude: /.*/g,
   },
-}
+};

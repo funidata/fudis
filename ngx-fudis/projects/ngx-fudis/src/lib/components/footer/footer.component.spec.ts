@@ -19,14 +19,11 @@ import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.ser
   template: `<fudis-footer>
     <ng-template fudisFooterRight>
       <fudis-link [externalLink]="'example.com'" [linkTitle]="'Privacy notice'" />
-      <fudis-link
-        [externalLink]="'example.com'"
-        [linkTitle]="'Accessibility statement'"
-      />
+      <fudis-link [externalLink]="'example.com'" [linkTitle]="'Accessibility statement'" />
       <fudis-link [externalLink]="'example.com'" [linkTitle]="'System information'" />
     </ng-template>
     <ng-template fudisFooterLeft>
-      <fudis-link [externalLink]="'example.com'" [linkTitle]="'Promo link'"/>
+      <fudis-link [externalLink]="'example.com'" [linkTitle]="'Promo link'" />
     </ng-template>
   </fudis-footer>`,
 })

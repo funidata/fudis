@@ -1,11 +1,4 @@
-import {
-  Component,
-  ContentChild,
-  Input,
-  OnChanges,
-  OnInit,
-  effect,
-} from '@angular/core';
+import { Component, ContentChild, Input, OnChanges, OnInit, effect } from '@angular/core';
 import { FudisIcon } from '../../types/icons';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisNotification } from '../../types/miscellaneous';
