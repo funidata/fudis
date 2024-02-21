@@ -57,7 +57,7 @@ export class LinkComponent implements AfterViewInit {
   /**
    * Title for the link, if not defined title will be the same as link URL
    */
-  @Input() linkTitle: string;
+  @Input() title: string;
 
   /**
    * Link size. By default link will inherit its parent's font-size. If link is not inside e.g. <fudis-heading> or <fudis-body-text> its size can be defined either 'md' (14px) or 'lg' (16px).

@@ -72,9 +72,9 @@ describe('LinkComponent', () => {
   });
 
   describe('Regular link component', () => {
-    it('should render linkTitle if it is given', () => {
+    it('should render title if it is given', () => {
       component.externalLink = 'www.example.com';
-      component.linkTitle = 'My link';
+      component.title = 'My link';
       fixture.detectChanges();
       const anchorElement = fixture.debugElement.query(By.css('.fudis-link__external'));
 
