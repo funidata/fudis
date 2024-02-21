@@ -12,7 +12,7 @@
     rel="noopener noreferrer"
   >
     {{ linkTitle ? linkTitle : externalLink }}
-    <fudis-icon [icon]="'new-tab'" [color]="color"></fudis-icon>
+    <fudis-icon [icon]="'new-tab'" [color]="color" class="fudis-link__external__icon"></fudis-icon>
   </a>
 </ng-container>
 <ng-container *ngIf="(link || fragmentId) && !externalLink">
