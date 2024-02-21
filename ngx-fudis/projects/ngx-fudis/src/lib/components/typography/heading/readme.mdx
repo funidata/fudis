@@ -1,19 +1,22 @@
 import { Meta, ArgTypes, Canvas } from "@storybook/blocks";
 import { HeadingComponent } from "./heading.component";
 import * as HeadingStories from "./heading.stories.ts";
-import { headingExclude } from "../../../utilities/storybook";
 
 <Meta title="Components/Typography/Heading" />
 
-# Heading
+# Heading Component
 
-Heading is essentially a header element which inherits Fudis font-family.
+Heading Component is essentially a heading HTML element which inherits Fudis font-family.
 
-There are six header options available from **h1** to **h6** and seven size options from **xxl** to **xxs**. All of the heading levels have default sizes, where heading level **h1** is equivalent to size **xxl**, heading level **h2** is equivalent to size **xl** etc. However, heading sizes are responsive and on mobile devices where screen size is less than [breakpoint('sm')](/docs/foundations-breakpoints--documentation#breakpoint-mixins) all of the headings are converted to a smaller heading sizes.
+## Usage Guidelines
 
-In addition, default margin bottom can be modified if needed. Margin bottom uses Fudis spacing token sizes.
+### Semantic HTML Heading Level and Visible Size
 
-More information about spacing tokens can be found from [Foundations/Spacing](/docs/foundations-spacing--documentation)
+There are six heading options available from `1` to `6` and seven size options from `xxs` to `xxl`.
+
+The `level` input property determines which HTML element component renders. With `level=1` component renders a `h1` element and with `level=2` a `h2` element and so on.
+
+When no `size` input value is provided, all of the heading levels have default sizes, where heading level `1` defaults to size `xxl`, heading level `2` defaults to size `xl` etc. However, heading sizes are responsive and on mobile devices where screen size is less than [breakpoint('sm')](/docs/foundations-breakpoints--documentation#breakpoint-mixins) all of the headings are converted to a smaller heading sizes.
 
 More information about typography can be found from [Foundations/Typography](/docs/foundations-typography--documentation)
 
@@ -32,10 +35,6 @@ Size is opted to be modified as wanted with `size` property as follows.
 - Semantically it is important to use correct heading level respective to the context
   - Header size can be visually modified
 
-### Other typography components
-
-[BodyText](/docs/components-typography-body-text--documentation)
-
 ## Properties
 
-<ArgTypes of={HeadingComponent} exclude={headingExclude} />
+<ArgTypes of={HeadingComponent} />

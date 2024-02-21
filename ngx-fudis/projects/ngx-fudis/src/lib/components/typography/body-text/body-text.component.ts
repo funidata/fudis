@@ -27,14 +27,14 @@ export class BodyTextComponent {
   @Input() size: FudisBodyText = 'md-regular';
 
   /**
-   * Option to change text color if background is not compatible with dark text
+   * Option to change text color if background is not compatible with default dark text
    */
   @Input() color: 'default' | 'white' = 'default';
 
   /**
-   * Align Body Text
+   * Text alignment
    */
   @Input() align: FudisTextAlign = 'left';
 
-  //TODO: Enable Input spacing for marginBottom
+  // TODO: Enable Input spacing for marginBottom
 }

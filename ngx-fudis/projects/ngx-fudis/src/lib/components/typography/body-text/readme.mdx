@@ -4,15 +4,13 @@ import * as BodyTextStories from "./body-text.stories.ts";
 
 <Meta title="Components/Typography/Body Text" />
 
-# Body text
+# Body Text Component
 
-Body text is essentially a paragraph element which inherits Fudis font-family. There are five size options available: `lg-regular`, `lg-light`, `md-regular`, `md-light` and `sm-regular`.
+Body Text Component is essentially a paragraph element which inherits Fudis font-family.
+
+There are five `size` options available: `lg-regular`, `lg-light`, `md-regular`, `md-light` and `sm-regular`.
 
 More information about typography can be found under [Foundations/Typography](/docs/foundations-typography--documentation)
-
-## Examples
-
-<Canvas of={BodyTextStories.AllVariants}></Canvas>
 
 ## Usage Guidelines
 
@@ -24,18 +22,18 @@ In addition to paragraph size, fudis-body-text can be modified through `align` a
 
 ```
 <fudis-body-text
-	[align]="'center'"
-	[color]="'white'" />
+  [align]="'center'"
+  [color]="'white'" />
 ```
+
+## Examples
+
+<Canvas of={BodyTextStories.AllVariants}></Canvas>
 
 ### Accessibility
 
 - Text color `#484848` passes WCAG AAA requirement against white `#FFFFFF` background
   - Contrast ratio 9.1:1
-
-### Other typography components
-
-[Heading](/docs/components-typography-heading--documentation)
 
 ## Properties
 

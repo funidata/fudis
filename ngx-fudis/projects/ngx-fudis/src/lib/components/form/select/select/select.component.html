@@ -13,12 +13,8 @@
       *ngIf="!autocomplete"
       #inputRef
       tabindex="0"
-      class="fudis-select__input fudis-select__input__dropdown"
+      class="fudis-form-input fudis-select__input fudis-select__input__dropdown"
       [id]="id"
-      [class.fudis-form-input--disabled]="disabled || control.disabled"
-      [class.fudis-form-input--invalid]="
-        (control.touched && control.invalid) || (control.touched && invalidState)
-      "
       role="combobox"
       [attr.aria-controls]="id + '-dropdown'"
       aria-haspopup="listbox"

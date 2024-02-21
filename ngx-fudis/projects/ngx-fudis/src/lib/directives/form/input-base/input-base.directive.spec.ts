@@ -9,13 +9,14 @@ import { getElement } from '../../../utilities/tests/utilities';
 import { TextInputComponent } from '../../../components/form/text-input/text-input.component';
 import { ValidatorErrorMessageComponent } from '../../../components/form/error-message/validator-error-message/validator-error-message.component';
 import { LabelComponent } from '../../../components/form/label/label.component';
+import { FudisValidators } from '../../../utilities/form/validators';
+import { IconComponent } from '../../../components/icon/icon.component';
 
 @Component({
   selector: 'fudis-mock-text-input-component',
   template: ` <fudis-text-input
     [label]="label"
     [helpText]="helpText"
-    [required]="required"
     [disabled]="disabled"
     [invalidState]="invalidState"
     [control]="textInputControl"
@@ -28,13 +29,15 @@ class MockTextInputComponent {
   label = 'This is text-input label';
   helpText = 'Here are some advices';
   ariaLabel = 'More info in this aria-label';
-  required = false;
   disabled = false;
   invalidState = false;
   disableGuidance = false;
   initialFocus = false;
 
-  textInputControl = new FormControl<string | null | number>(null);
+  textInputControl = new FormControl<string | null | number>(
+    null,
+    FudisValidators.required('This is required field'),
+  );
 }
 
 describe('InputBaseDirective', () => {
@@ -44,6 +47,7 @@ describe('InputBaseDirective', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
+        IconComponent,
         GuidanceComponent,
         LabelComponent,
         MockTextInputComponent,
@@ -102,7 +106,6 @@ describe('InputBaseDirective', () => {
     });
 
     it('should have label with required indicator', () => {
-      componentMock.required = true;
       fixtureMock.detectChanges();
 
       const labelElement = getElement(fixtureMock, '.fudis-label__content__text');
@@ -125,7 +128,6 @@ describe('InputBaseDirective', () => {
       const disabledInput = getElement(fixtureMock, 'input');
       const inputAriaAttribute = !!disabledInput.getAttribute('aria-disabled');
 
-      expect(disabledInput.className).toContain('fudis-form-input--disabled');
       expect(inputAriaAttribute).toEqual(true);
     });
 
@@ -137,7 +139,6 @@ describe('InputBaseDirective', () => {
       const invalidInput = getElement(fixtureMock, 'input');
       const inputAriaAttribute = !!invalidInput.getAttribute('aria-invalid');
 
-      expect(invalidInput.className).toContain('fudis-form-input--invalid');
       expect(inputAriaAttribute).toEqual(true);
     });
 
