@@ -75,6 +75,7 @@ describe('LinkComponent', () => {
     it('should render title if it is given', () => {
       component.externalLink = 'www.example.com';
       component.title = 'My link';
+      component.ngOnChanges();
       fixture.detectChanges();
       const anchorElement = fixture.debugElement.query(By.css('.fudis-link__external'));
 

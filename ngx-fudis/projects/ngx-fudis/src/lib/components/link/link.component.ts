@@ -149,8 +149,8 @@ export class LinkComponent implements AfterViewInit, OnChanges {
    */
 
   private _parseExternalLinkTitle(): void {
-    if (this.linkTitle && this.externalLink) {
-      const toArray = this.linkTitle.split(' ');
+    if (this.title && this.externalLink) {
+      const toArray = this.title.split(' ');
 
       if (toArray.length > 1) {
         const lastWord: string = toArray[toArray.length - 1];
@@ -158,8 +158,6 @@ export class LinkComponent implements AfterViewInit, OnChanges {
         const titleStart: string = toArray.slice(0, -1).join(' ');
 
         this._externalLinkTitleParsed = [titleStart, lastWord];
-
-        console.log(this._externalLinkTitleParsed);
       } else {
         this._externalLinkTitleParsed = toArray;
       }
