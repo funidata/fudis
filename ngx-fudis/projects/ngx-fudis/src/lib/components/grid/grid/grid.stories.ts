@@ -1,6 +1,6 @@
 import { StoryFn, Meta, componentWrapperDecorator } from '@storybook/angular';
 import { GridComponent } from './grid.component';
-import { excludeAllRegex, gridExclude } from '../../../utilities/storybook';
+import { excludeEverythingExceptRegex, gridExclude } from '../../../utilities/storybook';
 import readme from './readme.mdx';
 
 const html = String.raw;
@@ -129,15 +129,10 @@ Example.argTypes = {
     options: ['responsive', 'none'],
     control: { type: 'select' },
   },
-  ignoreDefaults: {
-    options: [true, false],
-    control: { type: 'radio' },
-  },
 };
 
 const EquallyWideColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
   props: args,
-
   template: html`<fudis-grid [columns]="columns">
     <fudis-heading class="grid-item" [level]="1" [size]="'lg'"
       >Equally wide columns with number values</fudis-heading
@@ -243,12 +238,13 @@ const ResponsiveColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent) 
 });
 
 export const ResponsiveColumns = ResponsiveColumnsTemplate.bind({});
+
 ResponsiveColumns.args = {
   columns: { xs: 1, sm: 2, md: '1fr 2fr', lg: 3, xl: '1fr 2fr 1fr', xxl: 6 },
 };
 
 ResponsiveColumns.parameters = {
   controls: {
-    exclude: excludeAllRegex,
+    exclude: excludeEverythingExceptRegex(['columns']),
   },
 };
