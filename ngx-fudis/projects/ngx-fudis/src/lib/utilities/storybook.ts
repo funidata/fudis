@@ -6,11 +6,9 @@
  */
 
 export const excludeRegex = (array?: string[]): RegExp => {
-  const singleValue = array && array.length === 1;
-
   const joined: string | null = array ? array.join('|') : null;
 
-  const joinedWithRegexOr: string = singleValue ? `|${joined}` : joined ? `|(${joined})` : '';
+  const joinedWithRegexOr: string = `|^(${joined})$`;
 
   const regex = new RegExp(`(^(?:_|ng)[a-zA-Z0-9]\\w+)${joinedWithRegexOr}`);
 
@@ -45,7 +43,9 @@ export const checkboxGroupControlsExclude: RegExp = excludeRegex([
   'formGroup',
 ]);
 
-export const linkExclude: RegExp = excludeRegex(['fragmentId', 'handleBlur', 'handleFocus']);
+export const linkExclude: RegExp = excludeRegex(['fragmentId', 'handleBlur', 'handleFocus', 'link']);
+
+export const notificationExclude: RegExp = excludeRegex(['link']);
 
 export const dialogExclude: RegExp = excludeRegex(['closeButtonPositionAbsolute']);
 
