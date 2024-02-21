@@ -127,7 +127,7 @@ describe('AlertComponent', () => {
 
       expect(anchorElement?.getAttribute('href')).toEqual(testRouterLinkUrl);
 
-      expect(linkElement?.getAttribute('ng-reflect-link-title')).toEqual(testLinkTitle);
+      expect(linkElement?.getAttribute('ng-reflect-title')).toEqual(testLinkTitle);
     });
   });
 
