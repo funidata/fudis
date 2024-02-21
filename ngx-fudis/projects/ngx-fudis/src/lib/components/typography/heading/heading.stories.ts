@@ -34,15 +34,15 @@ const Template: StoryFn = (args) => ({
   `,
 });
 
-export const Heading = Template.bind({});
-Heading.args = {
+export const Example = Template.bind({});
+Example.args = {
   level: 1,
   size: 'lg',
   align: 'left',
   marginBottom: 'xs',
 };
 
-Heading.parameters = {
+Example.parameters = {
   controls: {
     exclude: headingControlsExclude,
   },
