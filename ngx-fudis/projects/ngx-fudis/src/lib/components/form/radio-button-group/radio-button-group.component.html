@@ -11,7 +11,7 @@
       *ngFor="let option of options; let index = index"
       [id]="option.id ? option.id : undefined"
       [groupId]="id"
-      [name]="_name"
+      [name]="name"
       [value]="option.value"
       [label]="option.label"
       [required]="_required ? true : false"

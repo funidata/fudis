@@ -255,8 +255,8 @@ class FormContentExampleComponent implements OnInit {
   ];
 
   courseTypeOptions: FudisRadioButtonOption[] = [
-    { value: 'basic', label: 'Basic', id: 'courseType-1', name: 'courseType' },
-    { value: 'advanced', label: 'Advanced', id: 'courseType-2', name: 'courseType' },
+    { value: 'basic', label: 'Basic', id: 'courseType-1' },
+    { value: 'advanced', label: 'Advanced', id: 'courseType-2' },
   ];
 
   // Expose when DateRange is exposed to public API
