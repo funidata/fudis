@@ -39,7 +39,7 @@
 
     @include breakpoints.breakpoint("lg") {
       flex-direction: row;
-      align-items: baseline;
+      align-items: center;
 
       &__logo {
         margin-right: spacing.$spacing-md;
