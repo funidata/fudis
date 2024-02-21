@@ -9,6 +9,7 @@ import { BodyTextComponent } from '../typography/body-text/body-text.component';
 import { FudisIdService } from '../../services/id/id.service';
 import { BreadcrumbsItemComponent } from './breadcrumbs-item/breadcrumbs-item.component';
 import { FudisTranslationService } from '../../services/translation/translation.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'fudis-mock-component',
@@ -38,7 +39,7 @@ describe('BreadcrumbsComponent', () => {
         BodyTextComponent,
         MockComponent,
       ],
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, RouterModule.forRoot([])],
       providers: [FudisIdService, FudisTranslationService],
     });
 
