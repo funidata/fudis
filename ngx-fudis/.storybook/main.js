@@ -29,7 +29,10 @@ module.exports = {
     autodocs: true,
     defaultName: "Documentation",
   },
-
+  managerHead: (head) => `
+    ${head}
+    <link rel="shortcut icon" href="favicon.ico">
+  `,
   previewHead: (head) => `
     ${head}
     <style>

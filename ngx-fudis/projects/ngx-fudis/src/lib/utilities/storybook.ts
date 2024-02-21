@@ -56,7 +56,14 @@ export const checkboxGroupControlsExclude: RegExp = excludeRegex([
   'formGroup',
 ]);
 
-export const linkExclude: RegExp = excludeRegex(['handleBlur', 'handleFocus']);
+export const linkExclude: RegExp = excludeRegex([
+  'fragmentId',
+  'handleBlur',
+  'handleFocus',
+  'link',
+]);
+
+export const notificationExclude: RegExp = excludeRegex(['link']);
 
 export const dialogExclude: RegExp = excludeRegex(['closeButtonPositionAbsolute']);
 
