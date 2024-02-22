@@ -15,6 +15,7 @@ import { FudisFocusService } from '../../../services/focus/focus.service';
 import { FudisAlert } from '../../../types/miscellaneous';
 import { AlertGroupComponent } from '../alert-group/alert-group.component';
 import { ButtonComponent } from '../../button/button.component';
+import { RouterModule } from '@angular/router';
 
 const testMessage = 'Test message for alert';
 const testHtmlId = 'test-html-id';
@@ -67,7 +68,7 @@ describe('AlertComponent', () => {
         MockComponent(IconComponent),
         LinkComponent,
       ],
-      imports: [MatDialogModule, RouterTestingModule],
+      imports: [MatDialogModule, RouterTestingModule, RouterModule.forRoot([])],
       providers: [FudisDialogService, FudisAlertService],
     });
     fixture = TestBed.createComponent(AlertComponent);
@@ -105,12 +106,13 @@ describe('AlertComponent', () => {
 
     it('should create alert with a link', () => {
       component.linkTitle = testLinkTitle;
-      component.routerLinkUrl = testRouterLinkUrl;
+      component.link = testRouterLinkUrl;
       component.initialFocus = true;
 
       fixture.detectChanges();
 
       const linkElement = getElement(fixture, '.fudis-alert p fudis-link');
+      const anchorElement = linkElement.querySelector('a');
 
       // Test that inputs forwarded to Fudis Link are correct
       expect(linkElement).toBeTruthy();
@@ -121,9 +123,11 @@ describe('AlertComponent', () => {
 
       expect(linkElement?.getAttribute('ng-reflect-initial-focus')).toEqual('true');
 
-      expect(linkElement?.getAttribute('ng-reflect-router-link-url')).toEqual(testRouterLinkUrl);
+      expect(anchorElement?.getAttribute('ng-reflect-router-link')).toEqual(testRouterLinkUrl);
 
-      expect(linkElement?.getAttribute('ng-reflect-link-title')).toEqual(testLinkTitle);
+      expect(anchorElement?.getAttribute('href')).toEqual(testRouterLinkUrl);
+
+      expect(linkElement?.getAttribute('ng-reflect-title')).toEqual(testLinkTitle);
     });
   });
 
@@ -224,7 +228,7 @@ describe('AlertComponent', () => {
 
     // 	button.focus();
 
-    // 	const linkInAlert = getElement(fixture, '.fudis-link__anchor');
+    // 	const linkInAlert = getElement(fixture, '.fudis-link');
 
     // 	linkInAlert.focus();
 
@@ -232,7 +236,7 @@ describe('AlertComponent', () => {
     // });
 
     it('should not emit info to focusService when focusing from link to alert close and vice versa', () => {
-      const linkInAlert = getElement(fixture, '.fudis-link__anchor');
+      const linkInAlert = getElement(fixture, '.fudis-link');
 
       linkInAlert.focus();
 
@@ -287,7 +291,7 @@ describe('AlertComponent', () => {
     });
 
     // it('should update initialFocus, when blurring from link', () => {
-    // 	const alertLink = getElement(fixture, '#fudis-alert-2 .fudis-link__anchor');
+    // 	const alertLink = getElement(fixture, '#fudis-alert-2 .fudis-link');
 
     // 	const secondClose = getElement(fixture, '#fudis-alert-2 .fudis-alert__close');
 

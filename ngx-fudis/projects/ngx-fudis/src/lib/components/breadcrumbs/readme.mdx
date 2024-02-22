@@ -10,22 +10,9 @@ import { BreadcrumbsItemComponent } from "./breadcrumbs-item/breadcrumbs-item.co
 
 Breadcrumbs is essentially a navigation element.
 
-## Example
-
-<Canvas of={BreadcrumbsStories.Breadcrumbs}></Canvas>
-
-```
-<fudis-breadcrumbs [label]="'My Lego Collection'">
-	<fudis-breadcrumbs-item [label]="'My Legos'" [url]="'/'"/>
-	<fudis-breadcrumbs-item [label]="'Genre'" [url]="'/genre'"/>
-	<fudis-breadcrumbs-item [label]="'Star Wars\u{2122}'" [url]="'/genre/star-wars'"/>
-	<fudis-breadcrumbs-item [label]="'UCS Imperial Star Destroyer\u{2122}'" [url]="'/genre/star-wars/set-75252'"/>
-</fudis-breadcrumbs-item>
-```
-
 ## Usage Guidelines
 
-Breadcrumbs organism is built using parent wrapper of Breadcrumbs Component `<fudis-breadcrumbs>` and adding Breadcrumbs Item Components `<fudis-breadcrumbs-item>` as its children.
+Breadcrumbs organism is built using parent wrapper of Breadcrumbs Component and adding Breadcrumbs Item Components as its children.
 
 ### Breadcrumbs - Parent Component
 
@@ -35,9 +22,22 @@ Necessary properties for Breadcrumbs Component is `label`.
 
 ### Breadcrumbs Item - Child Component
 
-Breadcrumbs Item has two mandatory properties: `label` and `url`. Label is the visible label and url is the actual url for the Angular router.
+Breadcrumbs Item has two mandatory properties: string `label` and Angular Router string `url`. Label is the visible label text and url is the actual url for the Angular router.
 
-The last Breadcrumbs Item Component is always displayed as non-link and just plain text. This is achieved through CSS and doesn't require configuration from the app.
+The last Breadcrumbs Item Component is always displayed as non-link and just plain text. This is achieved through CSS and doesn't require configuration from the application.
+
+## Example
+
+<Canvas of={BreadcrumbsStories.Example}></Canvas>
+
+```
+<fudis-breadcrumbs [label]="'My Lego Collection'">
+	<fudis-breadcrumbs-item [label]="'My Legos'" [url]="'/'"/>
+	<fudis-breadcrumbs-item [label]="'Genre'" [url]="'/genre'"/>
+	<fudis-breadcrumbs-item [label]="'Star Wars\u{2122}'" [url]="'/genre/star-wars'"/>
+	<fudis-breadcrumbs-item [label]="'UCS Imperial Star Destroyer\u{2122}'" [url]="'/genre/star-wars/set-75252'"/>
+</fudis-breadcrumbs-item>
+```
 
 ## Accessibility
 

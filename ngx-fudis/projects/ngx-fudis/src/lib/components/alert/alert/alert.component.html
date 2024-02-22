@@ -1,9 +1,9 @@
 <div class="fudis-alert fudis-alert__{{ variant }}" [id]="htmlId">
   <fudis-body-text
     [attr.role]="
-      !routerLinkUrl && !linkTitle && (variant === 'danger' || variant === 'warning')
+      !link && !linkTitle && (variant === 'danger' || variant === 'warning')
         ? 'alert'
-        : !routerLinkUrl && !linkTitle
+        : !link && !linkTitle
           ? 'status'
           : null
     "
@@ -14,15 +14,15 @@
   >
     {{ message }}
     <fudis-link
+      *ngIf="link && linkTitle"
       (handleFocus)="_handleFocus($event)"
       (handleBlur)="_handleBlur($event)"
       [attr.aria-label]="message"
       [initialFocus]="initialFocus"
-      [color]="variant !== 'warning' ? 'white' : 'default'"
+      [color]="variant !== 'warning' ? 'white' : 'gray-dark'"
       class="fudis-alert__link"
-      *ngIf="routerLinkUrl && linkTitle"
-      [routerLinkUrl]="routerLinkUrl"
-      [linkTitle]="linkTitle"
+      [link]="link"
+      [title]="linkTitle"
     />
   </fudis-body-text>
 

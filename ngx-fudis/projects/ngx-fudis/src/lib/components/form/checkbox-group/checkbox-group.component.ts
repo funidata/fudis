@@ -12,12 +12,12 @@ import { hasAtLeastOneRequiredOrMinValidator } from '../../../utilities/form/get
 })
 export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
   /**
-   * FormControl for Checkbox group
+   * FormControl for Checkbox group.
    */
   @Input({ required: true }) formGroup: FormGroup<FudisCheckboxGroupFormGroup>;
 
   /**
-   * Width size of the group - defaults to large.
+   * Width size of the group.
    */
   @Input() size: FudisInputSize = 'lg';
 
@@ -27,12 +27,12 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
   private _groupBlurredOut = false;
 
   /**
-   * Set requiredText based on this boolean value
+   * Set requiredText based on this boolean value.
    */
   protected _required: boolean = false;
 
   /**
-   * Getter for _groupBlurredOut
+   * Getter for _groupBlurredOut.
    */
   get groupBlurredOut(): boolean {
     return this._groupBlurredOut;
@@ -45,7 +45,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
       this._groupBlurredOut = true;
     } else {
       /**
-       * Extend original markAllAsTouched function to change _groupBlurredOut value to 'true', so error messages are loaded when e.g. on Submit touched value is changed programatically
+       * Extend original markAllAsTouched function to change _groupBlurredOut value to 'true', so error messages are loaded when e.g. on Submit touched value is changed programatically.
        */
       const originalMarkAllAsTouched = this.formGroup.markAllAsTouched;
       this.formGroup.markAllAsTouched = () => {

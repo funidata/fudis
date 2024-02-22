@@ -1,33 +1,31 @@
 @use "../../foundations/colors/mixins.scss" as colors;
 @use "../../foundations/typography/mixins.scss" as typography;
 @use "../../foundations/focus/mixins.scss" as focus;
+@use "../../foundations/spacing/tokens.scss" as spacing;
 
 .fudis-link {
-  &__anchor {
-    display: inline-block;
-    text-decoration: underline solid;
+  display: inline-block;
+  text-decoration: underline solid;
 
-    &:focus {
-      @include focus.focus-generic;
-    }
+  &:focus {
+    @include focus.focus-generic;
+  }
 
+  &__color {
     &__primary-dark {
       @include colors.text-color("primary-dark");
     }
 
-    &__default {
+    &__gray-dark {
       @include colors.text-color("gray-dark");
     }
 
     &__white {
       @include colors.text-color("white");
     }
+  }
 
-    &__external {
-      display: inline-flex;
-      align-items: center;
-    }
-
+  &__size {
     &__inherit {
       @include typography.text-link-inherit-typography;
     }
@@ -38,6 +36,24 @@
 
     &__lg {
       @include typography.text-link-l-typography;
+    }
+  }
+
+  &__external {
+    position: relative;
+
+    &__icon-wrapper {
+      display: inline-block;
+      position: relative;
+      padding-right: spacing.$spacing-lg;
+      text-decoration: underline solid;
+    }
+
+    &__icon {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
     }
   }
 }

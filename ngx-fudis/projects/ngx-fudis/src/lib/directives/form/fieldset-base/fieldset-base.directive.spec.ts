@@ -102,12 +102,6 @@ describe('FieldSetBaseDirective', () => {
       expect(titleElement.textContent).toEqual('This is checkbox group (Required)');
     });
 
-    it('should have title size with respective CSS class', () => {
-      const titleSizeClass = getElement(fixtureMock, '.fudis-fieldset__legend__title__main');
-
-      expect(titleSizeClass.className).toContain('fudis-fieldset__legend__title__main__sm');
-    });
-
     it('should have id constructed through Fudis id service', () => {
       const fieldSetElement = getElement(fixtureMock, 'fieldset');
 

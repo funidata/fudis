@@ -29,7 +29,7 @@ export const hasAtLeastOneRequiredOrMinValidator = (group: FormGroup): boolean =
     }),
   );
 
-  const hasProperErrors: boolean = !!(errors?.['atLeastOneRequired'] || errors?.['min']);
+  const hasProperErrors: boolean = !!(errors?.['atLeastOneRequired'] || errors?.['min'].value > 0);
 
   return hasProperErrors;
 };

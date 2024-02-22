@@ -6,11 +6,9 @@
  */
 
 export const excludeRegex = (array?: string[]): RegExp => {
-  const singleValue = array && array.length === 1;
-
   const joined: string | null = array ? array.join('|') : null;
 
-  const joinedWithRegexOr: string = singleValue ? `|${joined}` : joined ? `|(${joined})` : '';
+  const joinedWithRegexOr: string = `|^(${joined})$`;
 
   const regex = new RegExp(`(^(?:_|ng)[a-zA-Z0-9]\\w+)${joinedWithRegexOr}`);
 
@@ -41,13 +39,34 @@ export const buttonControlsExclude: RegExp = excludeRegex([
 
 export const buttonIconOnlyExclude: RegExp = excludeRegex([...buttonCommonExclude, 'handleClick']);
 
-export const checkboxGroupExclude: RegExp = excludeRegex(['groupBlurredOut', 'setGroupBlurredOut']);
+export const checkboxGroupExclude: RegExp = excludeRegex([
+  'groupBlurredOut',
+  'setGroupBlurredOut',
+  'titleSize',
+]);
 
-export const linkExclude: RegExp = excludeRegex(['handleBlur', 'handleFocus']);
+export const checkboxGroupControlsExclude: RegExp = excludeRegex([
+  'groupBlurredOut',
+  'setGroupBlurredOut',
+  'titleSize',
+  'id',
+  'formGroup',
+]);
+
+export const linkExclude: RegExp = excludeRegex([
+  'fragmentId',
+  'handleBlur',
+  'handleFocus',
+  'link',
+]);
+
+export const notificationExclude: RegExp = excludeRegex(['link']);
 
 export const dialogExclude: RegExp = excludeRegex(['closeButtonPositionAbsolute']);
 
-const expandableCommonExclude: string[] = [
+export const headingControlsExclude: RegExp = excludeRegex(['id']);
+
+export const expandableExclude: RegExp = excludeRegex([
   'ref',
   'setClosedStatus',
   'content',
@@ -89,9 +108,20 @@ export const gridExclude: RegExp = excludeRegex([
   'ngOnInit',
 ]);
 
-export const headingExclude: RegExp = excludeRegex(['getHeadingMarginBottom', 'getHeadingSize']);
+export const textInputExclude: RegExp = excludeRegex(['focusToInput', 'onBlur']);
 
 export const iconExclude: RegExp = excludeRegex(['classes']);
+
+export const textInputControlsExclude: RegExp = excludeRegex([
+  'control',
+  'focusToInput',
+  'handleBlur',
+  'onBlur',
+  'ariaLabel',
+  'disableGuidance',
+  'id',
+  'initialFocus',
+]);
 
 export const tooltipExclude: RegExp = excludeRegex([
   'onMouseEnter',

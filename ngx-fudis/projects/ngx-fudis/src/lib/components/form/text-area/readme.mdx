@@ -1,18 +1,13 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { TextAreaComponent } from "./text-area.component";
 import * as TextAreaStories from "./text-area.stories.ts";
+import { textInputExclude } from "../../../utilities/storybook";
 
 <Meta title="Components/Form/Text-area" />
 
 # Text Area
 
-## Basic Example
-
-<Canvas of={TextAreaStories.Example}></Canvas>
-
-## Examples With Validators
-
-<Canvas of={TextAreaStories.ExamplesWithValidators}></Canvas>
+Text Area Component is a form field input element rendering a HTML `textarea` element with associated label and other guidance texts.
 
 ## Usage Guidelines
 
@@ -32,9 +27,17 @@ Text Area uses Fudis Validators. See the full documentation on [how to use Fudis
 
 If a custom validation is needed, read [how to add Error message](/docs/components-form-error-message--documentation).
 
+## Basic Example
+
+<Canvas of={TextAreaStories.Example}></Canvas>
+
+## Examples With Validators
+
+<Canvas of={TextAreaStories.WithValidators}></Canvas>
+
 ## Accessibility
 
-- Label and guidance are linked to the textarea via id
+- Label and guidance are linked to the `textarea` HTML element via id
 - Screen reader is informed when maximum character length has 5 characters left and when maximum character count is reached
 
 ## Related Directives
@@ -43,4 +46,4 @@ If a custom validation is needed, read [how to add Error message](/docs/componen
 
 ## Properties
 
-<ArgTypes of={TextAreaComponent} />
+<ArgTypes of={TextAreaComponent} exclude={textInputExclude} />

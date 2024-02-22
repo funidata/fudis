@@ -33,7 +33,7 @@ export class InputBaseDirective extends TooltipApiDirective {
   /**
    * Template reference for input. Used in e. g. initialFocus
    */
-  @ViewChild('inputRef') inputRef: ElementRef;
+  @ViewChild('inputRef') protected _inputRef: ElementRef;
 
   /**
    * Label for input.
@@ -50,6 +50,8 @@ export class InputBaseDirective extends TooltipApiDirective {
    */
   @Input() id: string;
 
+  // TODO: Disabling should be done straight from the form control. But because form control sets HTML disabled="true" and not only aria-disabled="true", this will be prevent user to focus on input even if it 'disabled'. As long this Angular 'feature' exists, we should 'manually' provide disabling through input, not through formControl.
+
   /**
    * Option for disabling the input.
    */
@@ -64,11 +66,6 @@ export class InputBaseDirective extends TooltipApiDirective {
    * Set input's visual style and attributes as invalid. Does not override if control.invalid is true.
    */
   @Input() invalidState: boolean = false;
-
-  /**
-   * Set form input as required. By default set to 'undefined' and this attribute is determined to true / false depending on if FormControl has Validators.required. This setting will override that.
-   */
-  @Input() required: boolean | undefined = undefined;
 
   /**
    * Set browser focus to input on the first load.
@@ -107,8 +104,8 @@ export class InputBaseDirective extends TooltipApiDirective {
   }
 
   public focusToInput(): void {
-    if (this.inputRef?.nativeElement) {
-      this.inputRef.nativeElement.focus();
+    if (this._inputRef?.nativeElement) {
+      this._inputRef.nativeElement.focus();
       this._focusTryCounter = 0;
     } else if (this._focusTryCounter < 100) {
       setTimeout(() => {

@@ -6,11 +6,17 @@
       <ng-content />
       <fudis-link
         class="fudis-notification__link"
-        *ngIf="link"
-        [linkTitle]="linkTitle"
-        [href]="link"
-        [external]="externalLink"
-        [color]="'default'"
+        *ngIf="!externalLink && link"
+        [title]="linkTitle"
+        [link]="link"
+        [color]="'gray-dark'"
+      />
+      <fudis-link
+        class="fudis-notification__link"
+        *ngIf="externalLink"
+        [title]="linkTitle"
+        [externalLink]="externalLink"
+        [color]="'gray-dark'"
       />
     </fudis-body-text>
   </ng-container>

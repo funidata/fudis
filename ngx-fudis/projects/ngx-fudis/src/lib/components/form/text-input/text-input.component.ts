@@ -36,7 +36,7 @@ export class TextInputComponent
   @Input({ required: true }) control: FormControl<string | null | number>;
 
   /**
-   * Available sizes for the input - defaults to large. Recommended size for number input is 'sm'.
+   * Available sizes for the input. Recommended size for number input is 'sm'.
    */
   @Input() size: FudisInputSize = 'lg';
 
@@ -70,7 +70,7 @@ export class TextInputComponent
   }
 
   ngOnChanges(): void {
-    this._required = this.required ?? hasRequiredValidator(this.control);
+    this._required = hasRequiredValidator(this.control);
     if (this.type === 'number') {
       this._minNumber = getMinFromValidator(this.control);
       this._maxNumber = getMaxFromValidator(this.control);

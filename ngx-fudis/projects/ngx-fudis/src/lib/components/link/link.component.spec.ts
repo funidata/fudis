@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { IconComponent } from '../icon/icon.component';
 import { LinkComponent } from './link.component';
 import { getElement, getTrimmedTextContent } from '../../utilities/tests/utilities';
+import { FudisLinkColor } from '../../types/miscellaneous';
 
 describe('LinkComponent', () => {
   let component: LinkComponent;
@@ -23,16 +24,17 @@ describe('LinkComponent', () => {
 
     fixture = TestBed.createComponent(LinkComponent);
     component = fixture.componentInstance;
+    component.link = '/example-router-link';
     fixture.detectChanges();
   });
 
-  function linkColorCheck(color: 'primary-dark' | 'default' | 'white'): void {
+  function linkColorCheck(color: FudisLinkColor): void {
     component.color = color;
     fixture.detectChanges();
 
     const linkEl = getElement(fixture, 'a');
 
-    expect(linkEl.className).toContain(`fudis-link__anchor__${color}`);
+    expect(linkEl.className).toContain(`fudis-link__color__${color}`);
   }
 
   function linkSizeCheck(size: 'inherit' | 'md' | 'lg'): void {
@@ -41,7 +43,7 @@ describe('LinkComponent', () => {
 
     const linkEl = getElement(fixture, 'a');
 
-    expect(linkEl.className).toContain(`fudis-link__anchor__${size}`);
+    expect(linkEl.className).toContain(`fudis-link__size__${size}`);
   }
 
   describe('CSS classes', () => {
@@ -51,13 +53,13 @@ describe('LinkComponent', () => {
       const linkClasses = linkElement.className;
 
       expect(linkClasses).toContain(
-        'fudis-link__anchor fudis-link__anchor__inherit fudis-link__anchor__primary-dark',
+        'fudis-link fudis-link__color__primary-dark fudis-link__router fudis-link__size__inherit',
       );
       expect(wrapperElement).toBeTruthy();
     });
 
     it('should have respective CSS class for color', () => {
-      linkColorCheck('default');
+      linkColorCheck('gray-dark');
       linkColorCheck('primary-dark');
       linkColorCheck('white');
     });
@@ -70,11 +72,12 @@ describe('LinkComponent', () => {
   });
 
   describe('Regular link component', () => {
-    it('should render linkTitle if it is given', () => {
-      component.href = 'www.example.com';
-      component.linkTitle = 'My link';
+    it('should render title if it is given', () => {
+      component.externalLink = 'www.example.com';
+      component.title = 'My link';
+      component.ngOnChanges();
       fixture.detectChanges();
-      const anchorElement = fixture.debugElement.query(By.css('.fudis-link__anchor'));
+      const anchorElement = fixture.debugElement.query(By.css('.fudis-link__external'));
 
       expect(getTrimmedTextContent(anchorElement.nativeElement)).toEqual('My link');
     });
@@ -82,7 +85,7 @@ describe('LinkComponent', () => {
 
   describe('External link component', () => {
     beforeEach(() => {
-      component.external = true;
+      component.externalLink = 'www.example.com';
       fixture.detectChanges();
     });
 
@@ -91,25 +94,19 @@ describe('LinkComponent', () => {
       const externalLinkClasses = externalLinkElement.className;
 
       expect(externalLinkClasses).toContain(
-        'fudis-link__anchor fudis-link__anchor__external fudis-link__anchor__inherit fudis-link__anchor__primary-dark',
+        'fudis-link fudis-link__color__primary-dark fudis-link__external fudis-link__size__inherit',
       );
     });
 
     it('should have new-tab icon', () => {
-      const externalLinkComponent = fixture.debugElement.query(
-        By.css('.fudis-link__anchor__external'),
-      );
+      const externalLinkComponent = fixture.debugElement.query(By.css('.fudis-link__external'));
       const iconExist = externalLinkComponent.query(By.css('fudis-icon'));
 
       expect(iconExist).toBeTruthy();
     });
 
     it('should have assistive aria-label for screen readers', () => {
-      component.href = 'www.example.com';
-      fixture.detectChanges();
-      const externalLinkComponent = fixture.debugElement.query(
-        By.css('.fudis-link__anchor__external'),
-      );
+      const externalLinkComponent = fixture.debugElement.query(By.css('.fudis-link__external'));
 
       expect(externalLinkComponent.nativeElement.getAttribute('aria-label')).toEqual(
         'www.example.com, (opens in a new tab)',
@@ -119,7 +116,7 @@ describe('LinkComponent', () => {
 
   describe('Link with routerUrl component', () => {
     it('should have router link', () => {
-      component.routerLinkUrl = '/some/routerUrl';
+      component.link = '/some/routerUrl';
       fixture.detectChanges();
 
       expect(fixture.nativeElement.querySelector('a').getAttribute('href')).toEqual(
@@ -128,7 +125,7 @@ describe('LinkComponent', () => {
     });
 
     it('should have fragment link', () => {
-      component.routerLinkUrl = '/some/routerUrl';
+      component.link = '/some/routerUrl';
       component.fragmentId = 'test-fragment-id';
       fixture.detectChanges();
 

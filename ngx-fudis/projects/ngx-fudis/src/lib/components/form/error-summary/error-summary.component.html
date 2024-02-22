@@ -17,16 +17,16 @@
             >
               <ng-container *ngIf="linkType === 'router'">
                 <fudis-link
-                  [routerLinkUrl]="'.'"
+                  [link]="'.'"
                   [fragmentId]="error.id"
-                  [linkTitle]="error.message"
+                  [title]="error.message"
                 ></fudis-link>
               </ng-container>
               <ng-container *ngIf="linkType === 'href'">
                 <fudis-link
                   [size]="'md'"
                   [href]="'#' + error.id"
-                  [linkTitle]="error.message"
+                  [title]="error.message"
                 ></fudis-link>
               </ng-container>
             </li>

@@ -11,7 +11,7 @@
   </fudis-label>
   <input
     #inputRef
-    class="fudis-text-input__input"
+    class="fudis-form-input fudis-text-input__input"
     [attr.aria-invalid]="
       (control.touched && control.invalid) || (control.touched && invalidState) ? true : null
     "
@@ -24,8 +24,6 @@
     (blur)="onBlur($event)"
     [id]="id"
     [attr.type]="type"
-    [class.fudis-form-input--invalid]="(control.touched && control.invalid) || invalidState"
-    [class.fudis-form-input--disabled]="disabled"
     [attr.aria-describedby]="id + '_guidance'"
     [attr.required]="_required ? true : null"
     [attr.aria-disabled]="disabled"

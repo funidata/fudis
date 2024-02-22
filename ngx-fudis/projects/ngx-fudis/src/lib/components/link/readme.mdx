@@ -6,26 +6,27 @@ import * as LinkStories from "./link.stories.ts";
 
 # Link
 
-Link component is an anchor element.
+Link Component is an HTML anchor element.
 
 ## Example
 
-<Canvas of={LinkStories.Link}></Canvas>
+<Canvas of={LinkStories.Example}></Canvas>
 
 ## Usage Guidelines
 
-Link component requires either `href` or if using Angular Router `routerLinkUrl` with `fragmentId` properties.
+Link Component **requires** its link reference.
+Possible values are `href` for regular HTML href or `externalLink` which targets to another domain, this will also add new-tab icon and assistive aria-label for screen readers.
+Or if using Angular Router the required properties are `link` and `fragmentId`.
 
-Component can be set to open in a new tab with `external` boolean.
+Link URL is set as the link title by default. By adding `title` property the visible title can be modified.
 
-Link URL is set as the link title by default, adding `linkTitle` the visible title can be modified.
+Link color can be adjusted between `primary-dark` (default), `gray-dark` and `white`. Use `gray-dark` and `white` with caution.
 
-Link color can be adjusted between `primary-dark`, `default` and `white`. Use `default`(gray) and `white` with caution.
+### Accessibility
 
-## Accessibility
-
+- Link has visible focus
+- Icon indicates new tab for visible users but is hidden from screen readers
 - Screenreader is informed if link will open in a new tab
-- Icon indicates new tab for visible users
 
 ## Properties
 

@@ -23,10 +23,13 @@ export class BreadcrumbsItemComponent implements OnInit {
     @Host() protected _breadCrumbs: BreadcrumbsComponent,
   ) {}
 
+  /**
+   * Binding host CSS class to component wrapper
+   */
   @HostBinding('class') private _classes = 'fudis-breadcrumbs-item-host';
 
   /**
-   * Visible label
+   * Visible label text
    */
   @Input({ required: true }) label: string;
 
@@ -35,6 +38,9 @@ export class BreadcrumbsItemComponent implements OnInit {
    */
   @Input({ required: true }) url: string;
 
+  /**
+   * Id from Id Service
+   */
   protected _id: string;
 
   ngOnInit(): void {

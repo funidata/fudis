@@ -3,11 +3,7 @@
     #inputRef
     type="text"
     aria-required="true"
-    class="fudis-select-autocomplete__input"
-    [class.fudis-form-input--disabled]="control.disabled || disabled"
-    [class.fudis-form-input--invalid]="
-      (control.touched && control.invalid) || (control.touched && invalidState)
-    "
+    class="fudis-form-input fudis-select-autocomplete__input"
     role="combobox"
     [attr.value]="!multiselect && selectedLabel ? selectedLabel : null"
     [attr.aria-controls]="id + '-dropdown'"
