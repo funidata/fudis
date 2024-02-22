@@ -23,35 +23,35 @@ export class TooltipDirective extends TooltipApiDirective implements OnInit, OnC
     this._setTooltip();
   }
 
-  @HostListener('mouseenter') onMouseEnter() {
+  @HostListener('mouseenter') private _onMouseEnter() {
     if (!this.tooltipToggle && this._tooltipElement.nativeElement.hasAttribute('fudisTooltip')) {
       this._ngMaterialTooltip.show();
     }
   }
 
-  @HostListener('mouseleave') onMouseLeave() {
+  @HostListener('mouseleave') private _onMouseLeave() {
     if (!this.tooltipToggle) {
       this._ngMaterialTooltip.hide();
     }
   }
 
-  @HostListener('focus') onFocus() {
+  @HostListener('focus') private _onFocus() {
     if (!this.tooltipToggle) {
       this._ngMaterialTooltip.show();
     }
   }
 
-  @HostListener('blur') onBlur() {
+  @HostListener('blur') private _onBlur() {
     this._ngMaterialTooltip.hide();
   }
 
-  @HostListener('click') onClick() {
+  @HostListener('click') private _onClick() {
     if (this.tooltipToggle && this._tooltipElement.nativeElement.hasAttribute('fudisTooltip')) {
       this._ngMaterialTooltip.toggle();
     }
   }
 
-  @HostListener('keyup', ['$event']) onKeyUp(event: KeyboardEvent) {
+  @HostListener('keyup', ['$event']) private _onKeyUp(event: KeyboardEvent) {
     if (
       this.tooltipToggle &&
       (event.key === 'Enter' || event.key === ' ') &&

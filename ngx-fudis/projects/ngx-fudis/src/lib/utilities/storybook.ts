@@ -92,3 +92,24 @@ export const gridExclude: RegExp = excludeRegex([
 export const headingExclude: RegExp = excludeRegex(['getHeadingMarginBottom', 'getHeadingSize']);
 
 export const iconExclude: RegExp = excludeRegex(['classes']);
+
+export const tooltipExclude: RegExp = excludeRegex([
+  'onMouseEnter',
+  'onMouseLeave',
+  'onFocus',
+  'onBlur',
+  'onClick',
+  'onKeyUp',
+  'handleClick',
+  'handleBlur',
+  'buttonEl',
+  'label',
+  'labelHidden',
+  'ariaLabel',
+  'disabled',
+  'icon',
+  'iconRotate',
+  'size',
+  'type',
+  'variant',
+]);

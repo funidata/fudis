@@ -1,6 +1,7 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { TooltipDirective } from "./tooltip.directive.ts";
 import * as TooltipStories from "./tooltip.stories.ts";
+import { tooltipExclude } from "../../utilities/storybook";
 
 <Meta title="Directives/Tooltip" />
 
@@ -9,16 +10,16 @@ import * as TooltipStories from "./tooltip.stories.ts";
 Tooltip shows contextual help or information about specific elemenet when user hovers, focuses or clicks on it, depending on the given properties.
 Tooltip directive uses Angular Material Tooltip as its base.
 
-## Examples
-
-<Canvas of={TooltipStories.Example}></Canvas>
-
 ## Usage Guideline
 
 Regular tooltip is triggered on mouse hover and on keyboard focus. Tooltip content is forced for keyboard and screen reader users when element receives focus.
 Consider using `tooltipToggle` property with long and alternative text contents which then will be displayed only when clicking and makes tooltip function as clickable pop-over not distracting keyboard or screenreader users.
 
 Tooltip text is added by `tooltip` property. Tooltip position can be adjusted with optional `tooltipPosition` property.
+
+## Examples
+
+<Canvas of={TooltipStories.Example}></Canvas>
 
 ### Related components
 
@@ -37,4 +38,4 @@ Tooltip text is added by `tooltip` property. Tooltip position can be adjusted wi
 
 ## Properties
 
-<ArgTypes of={TooltipDirective} />
+<ArgTypes of={TooltipDirective} exclude={tooltipExclude} />
