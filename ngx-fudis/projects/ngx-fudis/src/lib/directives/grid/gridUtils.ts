@@ -1,12 +1,12 @@
 import { FudisBreakpointStyleResponsive } from '../../types/breakpoints';
-import { FudisGridAttributes, FudisGridFormInputWidth } from '../../types/grid';
+import { FudisGridProperties, FudisGridFormInputWidth } from '../../types/grid';
 import { convertToRemValue } from '../../utilities/rem-converter';
 
 /**
  * Utility function used with GridDirective.
  * Takes in object of Input() attributes and creates CSS classlist out of those to be passed to Grid element.
  */
-export const getGridClasses = (values: FudisGridAttributes): string => {
+export const getGridClasses = (values: FudisGridProperties): string => {
   let classList = [
     'fudis-grid',
     `fudis-grid__${values.width}`,
