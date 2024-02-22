@@ -27,7 +27,7 @@ import {
   EndDateErrorDirective,
   FooterContentLeftDirective,
   FooterContentRightDirective,
-  StartDateErrorDirective
+  StartDateErrorDirective,
 } from './directives/content-projection/content/content.directive';
 import { DatepickerComponent } from './components/form/date/datepicker/datepicker.component';
 
