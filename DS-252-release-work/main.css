@@ -1862,32 +1862,13 @@ html {
   height: 1px;
 }
 
-/* stylelint-disable-next-line selector-no-qualifying-type */
-.fudis-form-input {
-  /* stylelint-disable-next-line selector-no-qualifying-type */
-  /* stylelint-disable-next-line selector-no-qualifying-type */
+.fudis-form-input[aria-disabled=false] {
+  border: 1px solid #727272;
 }
-.fudis-form-input--invalid[aria-invalid=true] {
+.fudis-form-input[aria-invalid=true] {
   border: 1px solid #b83c2e;
 }
-.fudis-form-input--disabled {
-  border: 1px dashed #727272;
-  /* stylelint-disable-next-line property-disallowed-list */
-  background-color: #f1f1f1;
-  cursor: default;
-}
-.fudis-form-input--disabled[aria-disabled=true] {
-  border: 1px dashed #727272;
-}
-
-/* stylelint-disable-next-line selector-no-qualifying-type */
-textarea.fudis-form-input {
-  /* stylelint-disable-next-line selector-no-qualifying-type */
-}
-textarea.fudis-form-input--invalid[aria-invalid=true] {
-  border: 1px solid #b83c2e;
-}
-textarea.fudis-form-input--disabled {
+.fudis-form-input[aria-disabled=true] {
   border: 1px dashed #727272;
   /* stylelint-disable-next-line property-disallowed-list */
   background-color: #f1f1f1;
