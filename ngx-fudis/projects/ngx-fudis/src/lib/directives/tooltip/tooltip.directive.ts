@@ -23,34 +23,52 @@ export class TooltipDirective extends TooltipApiDirective implements OnInit, OnC
     this._setTooltip();
   }
 
+  /**
+   * When user's mouse enters to tooltip HTMLElement
+   */
   @HostListener('mouseenter') private _onMouseEnter() {
     if (!this.tooltipToggle && this._tooltipElement.nativeElement.hasAttribute('fudisTooltip')) {
       this._ngMaterialTooltip.show();
     }
   }
 
+  /**
+   * When user's mouse leaves tooltip HTMLElement
+   */
   @HostListener('mouseleave') private _onMouseLeave() {
     if (!this.tooltipToggle) {
       this._ngMaterialTooltip.hide();
     }
   }
 
+  /**
+   * When tooltip HTMLElement receives focus
+   */
   @HostListener('focus') private _onFocus() {
     if (!this.tooltipToggle) {
       this._ngMaterialTooltip.show();
     }
   }
 
+  /**
+   * When tooltip HTMLElement is blurred out
+   */
   @HostListener('blur') private _onBlur() {
     this._ngMaterialTooltip.hide();
   }
 
+  /**
+   * When user clicks tooltip HTMLElement
+   */
   @HostListener('click') private _onClick() {
     if (this.tooltipToggle && this._tooltipElement.nativeElement.hasAttribute('fudisTooltip')) {
       this._ngMaterialTooltip.toggle();
     }
   }
 
+  /**
+   * When key is pressed on tooltip HTMLElement
+   */
   @HostListener('keyup', ['$event']) private _onKeyUp(event: KeyboardEvent) {
     if (
       this.tooltipToggle &&
@@ -62,6 +80,9 @@ export class TooltipDirective extends TooltipApiDirective implements OnInit, OnC
     }
   }
 
+  /**
+   * Binding tooltip text and position to ngMaterialTooltip
+   */
   private _setTooltip(): void {
     if (this.tooltip) {
       this._ngMaterialTooltip.message = this.tooltip;
