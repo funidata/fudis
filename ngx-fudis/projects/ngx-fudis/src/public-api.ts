@@ -19,10 +19,10 @@ export { CheckboxGroupComponent } from './lib/components/form/checkbox-group/che
 // export { DateRangeComponent } from './lib/components/form/date/date-range/date-range.component';
 export {
   ContentDirective,
-  DateStartErrorDirective,
-  DateEndErrorDirective,
+  EndDateErrorDirective,
   FooterContentLeftDirective,
   FooterContentRightDirective,
+  StartDateErrorDirective,
 } from './lib/directives/content-projection/content/content.directive';
 export {
   DialogActionsDirective,

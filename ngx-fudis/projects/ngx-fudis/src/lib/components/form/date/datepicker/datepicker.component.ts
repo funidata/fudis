@@ -14,8 +14,8 @@ import { FormControl, AbstractControl } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
 import {
-  DateEndErrorDirective,
-  DateStartErrorDirective,
+  EndDateErrorDirective,
+  StartDateErrorDirective,
 } from '../../../../directives/content-projection/content/content.directive';
 import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
 import { FUDIS_DATE_FORMATS, FudisInputSize } from '../../../../types/forms';
@@ -70,9 +70,9 @@ export class DatepickerComponent
     });
   }
 
-  @ContentChild(DateStartErrorDirective) startDateError: DateStartErrorDirective;
+  @ContentChild(StartDateErrorDirective) startDateError: StartDateErrorDirective;
 
-  @ContentChild(DateEndErrorDirective) endDateError: DateEndErrorDirective;
+  @ContentChild(EndDateErrorDirective) endDateError: EndDateErrorDirective;
 
   /**
    * FormControl for the input
