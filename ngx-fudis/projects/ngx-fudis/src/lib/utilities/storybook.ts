@@ -47,7 +47,7 @@ export const linkExclude: RegExp = excludeRegex(['handleBlur', 'handleFocus']);
 
 export const dialogExclude: RegExp = excludeRegex(['closeButtonPositionAbsolute']);
 
-export const expandableExclude: RegExp = excludeRegex([
+const expandableCommonExclude: string[] = [
   'ref',
   'setClosedStatus',
   'content',
@@ -55,6 +55,12 @@ export const expandableExclude: RegExp = excludeRegex([
   'errorSummaryBreadcrumb',
   'addToErrorSummary',
   'removeFromErrorSummary',
+];
+
+export const expandableExclude: RegExp = excludeRegex([...expandableCommonExclude]);
+export const expandableControlExclude: RegExp = excludeRegex([
+  ...expandableCommonExclude,
+  'closedChange',
 ]);
 
 // This is for additional Grid example tabs (Equally Wide Columns and Unequally Wide Columns).

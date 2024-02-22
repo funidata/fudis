@@ -16,21 +16,6 @@ import { FudisIdService } from '../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisFormErrorSummarySection } from '../../types/forms';
 
-/**
- * Example usage:
- *
- * ```
- * <fudis-expandable>
- *  <ng-template fudisActions type="expandable">
- *    <fudis-button />
- *  </ng-template>
- * 	<ng-template fudisContent type="expandable">
- * 		<your-body-template />
- * 	</ng-template>
- * </fudis-expandable>
- * ```
- */
-
 @Component({
   selector: 'fudis-expandable',
   templateUrl: './expandable.component.html',
@@ -47,10 +32,13 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   /**
-   * TODO: think about documentation
+   * Content directive for Fudis Expandable Content
    */
   @ContentChild(ContentDirective) protected _content: ContentDirective;
 
+  /**
+   * Content directive for Fudis Expandable Actions
+   */
   @ContentChild(ActionsDirective) protected _headerButtons: ActionsDirective | null;
 
   /**
@@ -79,7 +67,7 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
   @Input() subTitle: string;
 
   /**
-   * Display Expandable title in the breadcrumb of Form Error Summary
+   * Display Expandable title in the breadcrumb of Error Summary
    */
   @Input() errorSummaryBreadcrumb: boolean = false;
 
@@ -116,17 +104,17 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
   protected _openedOnce: boolean = false;
 
   /**
-   * Internal, separate title property to send to error summary service
+   * Internal, separate title property to send to Error Summary service
    */
   protected _title: string;
 
   /**
-   * Object to send to error summary service
+   * Object to send to Error Summary service
    */
   private _errorSummaryInfo: FudisFormErrorSummarySection;
 
   /**
-   * Is info sent to error summary service
+   * Is info sent to Error Summary service
    */
   private _errorSummaryInfoSent: boolean = false;
 
@@ -139,23 +127,24 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit(): void {
     this._title = this.title;
-    this.addToErrorSummary();
+    this._addToErrorSummary();
   }
 
   ngOnChanges(): void {
     if (this.title !== this._title && this._id) {
       this._title = this.title;
-      this.addToErrorSummary();
+      this._addToErrorSummary();
     }
   }
 
   ngOnDestroy(): void {
-    this.removeFromErrorSummary();
+    this._removeFromErrorSummary();
   }
 
-  // TODO: add some comments
-
-  addToErrorSummary(): void {
+  /**
+   * Send error object to Error Summary service
+   */
+  private _addToErrorSummary(): void {
     if (this.errorSummaryBreadcrumb) {
       this._errorSummaryInfo = {
         id: this._id,
@@ -166,9 +155,10 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  // TODO: add some comments
-
-  removeFromErrorSummary(): void {
+  /**
+   * Remove error object from Error Summary service
+   */
+  private _removeFromErrorSummary(): void {
     if (this._errorSummaryInfoSent) {
       this._errorSummaryService.removeSection(this._errorSummaryInfo);
     }
