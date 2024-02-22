@@ -148,3 +148,13 @@ export interface FudisTranslationLanguageBadgeAriaLabel {
   SELECTED: string;
   MISSING_TRANSLATION: string;
 }
+
+type FudisComponentChange<T, P extends keyof T> = {
+  previousValue: T[P];
+  currentValue: T[P];
+  firstChange: boolean;
+};
+
+export type FudisComponentChanges<T> = {
+  [P in keyof T]?: FudisComponentChange<T, P>;
+};
