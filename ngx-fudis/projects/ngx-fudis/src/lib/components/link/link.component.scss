@@ -40,14 +40,20 @@
   }
 
   &__external {
-    display: inline-flex;
     position: relative;
-    align-items: center;
-    padding-right: spacing.$spacing-lg;
+
+    &__icon-wrapper {
+      display: inline-block;
+      position: relative;
+      padding-right: spacing.$spacing-lg;
+      text-decoration: underline solid;
+    }
 
     &__icon {
       position: absolute;
+      top: 50%;
       right: 0;
+      transform: translateY(-50%);
     }
   }
 }
