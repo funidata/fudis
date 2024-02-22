@@ -11,8 +11,21 @@
     target="_blank"
     rel="noopener noreferrer"
   >
-    {{ title ? title : externalLink }}
-    <fudis-icon [icon]="'new-tab'" [color]="color" class="fudis-link__external__icon"></fudis-icon>
+    <ng-container *ngIf="!title">
+      <span class="fudis-link__external__icon-wrapper">
+        {{ externalLink }}
+        <fudis-icon [icon]="'new-tab'" [color]="color" class="fudis-link__external__icon" />
+      </span>
+    </ng-container>
+    <ng-container *ngIf="title">
+      <ng-container *ngIf="_externalLinkTitleParsed.length > 1">
+        {{ _externalLinkTitleParsed[0] }}
+        <span class="fudis-link__external__icon-wrapper">
+          {{ _externalLinkTitleParsed[1] }}
+          <fudis-icon [icon]="'new-tab'" [color]="color" class="fudis-link__external__icon" />
+        </span>
+      </ng-container>
+    </ng-container>
   </a>
 </ng-container>
 <ng-container *ngIf="(link || fragmentId) && !externalLink">

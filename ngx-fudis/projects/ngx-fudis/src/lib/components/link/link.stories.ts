@@ -21,6 +21,9 @@ export default {
         type: 'radio',
       },
     },
+    initialFocus: {
+      table: { disable: true },
+    },
   },
 } as Meta;
 
