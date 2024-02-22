@@ -66,7 +66,7 @@ export const dialogExclude: RegExp = excludeRegex(['closeButtonPositionAbsolute'
 
 export const headingControlsExclude: RegExp = excludeRegex(['id']);
 
-export const expandableExclude: RegExp = excludeRegex([
+export const expandableCommonExclude: string[] = [
   'ref',
   'setClosedStatus',
   'content',
@@ -77,6 +77,7 @@ export const expandableExclude: RegExp = excludeRegex([
 ];
 
 export const expandableExclude: RegExp = excludeRegex([...expandableCommonExclude]);
+
 export const expandableControlExclude: RegExp = excludeRegex([
   ...expandableCommonExclude,
   'closedChange',
