@@ -13,6 +13,11 @@ import { FudisSpacing } from './miscellaneous';
 export const gridColumnDefault = '1fr';
 
 /**
+ * Grid Columns property accepted input values
+ */
+export type FudisGridColumns = string | number | FudisGridColumnsResponsive;
+
+/**
  * Grid widths
  */
 export type FudisGridWidth = 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs' | 'initial';
@@ -47,18 +52,18 @@ export type FudisGridColumnsResponsive = {
 /**
  * Attributes for managing Grid
  */
-export interface FudisGridAttributes {
+export interface FudisGridProperties {
+  align?: FudisGridAlign;
   alignItemsY?: FudisGridAlignItems;
   alignItemsX?: FudisGridAlignItems;
-  columns?: FudisBreakpointValueResponsive;
-  width?: FudisGridWidth;
-  align?: FudisGridAlign;
-  marginTop?: FudisSpacing;
-  marginBottom?: FudisSpacing;
-  rowGap?: FudisGridGap;
-  columnGap?: FudisGridGap;
-  marginSides?: FudisGridMarginSide;
   classes?: string[];
+  columns?: FudisBreakpointValueResponsive;
+  columnGap?: FudisGridGap;
+  marginBottom?: FudisSpacing;
+  marginSides?: FudisGridMarginSide;
+  marginTop?: FudisSpacing;
+  rowGap?: FudisGridGap;
+  width?: FudisGridWidth;
 }
 
 /**
