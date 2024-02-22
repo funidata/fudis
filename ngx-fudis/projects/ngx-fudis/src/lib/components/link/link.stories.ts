@@ -21,6 +21,9 @@ export default {
         type: 'radio',
       },
     },
+    initialFocus: {
+      table: { disable: true },
+    },
   },
 } as Meta;
 
@@ -47,7 +50,7 @@ ExampleWithExternalLink.args = {
 export const ExampleWithLinkWithTitle = Template.bind({});
 ExampleWithLinkWithTitle.args = {
   externalLink: 'https://www.example.com',
-  linkTitle: 'Visible title for the link',
+  title: 'Visible title for the link',
   color: 'primary-dark',
   initialFocus: false,
   size: 'inherit',

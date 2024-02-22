@@ -5,6 +5,7 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  OnChanges,
   Output,
   Signal,
   ViewChild,
@@ -19,7 +20,7 @@ import { FudisLinkColor, FudisTranslationConfig } from '../../types/miscellaneou
   styleUrls: ['./link.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LinkComponent implements AfterViewInit {
+export class LinkComponent implements AfterViewInit, OnChanges {
   constructor(private _translationService: FudisTranslationService) {
     effect(() => {
       this._translations = this._translationService.getTranslations();
@@ -57,7 +58,7 @@ export class LinkComponent implements AfterViewInit {
   /**
    * Title for the link, if not defined title will be the same as link URL
    */
-  @Input() linkTitle: string;
+  @Input() title: string;
 
   /**
    * Link size. By default link will inherit its parent's font-size. If link is not inside e.g. <fudis-heading> or <fudis-body-text> its size can be defined either 'md' (14px) or 'lg' (16px).
@@ -95,6 +96,11 @@ export class LinkComponent implements AfterViewInit {
   protected _translations: Signal<FudisTranslationConfig>;
 
   /**
+   * Store parsed values of external link's title
+   */
+  protected _externalLinkTitleParsed: string[];
+
+  /**
    * Helper counter for setting link focus
    */
   private _focusTryCounter: number = 0;
@@ -103,6 +109,10 @@ export class LinkComponent implements AfterViewInit {
     if (this.initialFocus) {
       this._focusToLink();
     }
+  }
+
+  ngOnChanges(): void {
+    this._parseExternalLinkTitle();
   }
 
   /**
@@ -131,6 +141,25 @@ export class LinkComponent implements AfterViewInit {
         this._focusTryCounter += 1;
         this._focusToLink();
       }, 100);
+    }
+  }
+
+  /**
+   * For external links with a title. Used to split the last word of the title to be paired with the Icon, so that on line break, the icon sticks with the last word of the title.
+   */
+  private _parseExternalLinkTitle(): void {
+    if (this.title && this.externalLink) {
+      const toArray = this.title.split(' ');
+
+      if (toArray.length > 1) {
+        const lastWord: string = toArray[toArray.length - 1];
+
+        const titleStart: string = toArray.slice(0, -1).join(' ');
+
+        this._externalLinkTitleParsed = [titleStart, lastWord];
+      } else {
+        this._externalLinkTitleParsed = toArray;
+      }
     }
   }
 }

@@ -37,8 +37,8 @@ const Template: StoryFn = (args) => ({
   </fudis-grid>`,
 });
 
-export const BodyText = Template.bind({});
-BodyText.args = {
+export const Example = Template.bind({});
+Example.args = {
   size: 'lg-regular',
   align: 'left',
   color: 'default',

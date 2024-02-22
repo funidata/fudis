@@ -6,13 +6,26 @@
     }} fudis-link__external"
     (focus)="_handleFocus($event)"
     (blur)="_handleBlur($event)"
-    attr.aria-label="{{ linkTitle ? linkTitle : externalLink }}, {{ _externalLinkAriaLabel }}"
+    attr.aria-label="{{ title ? title : externalLink }}, {{ _externalLinkAriaLabel }}"
     [href]="externalLink"
     target="_blank"
     rel="noopener noreferrer"
   >
-    {{ linkTitle ? linkTitle : externalLink }}
-    <fudis-icon [icon]="'new-tab'" [color]="color" class="fudis-link__external__icon"></fudis-icon>
+    <ng-container *ngIf="!title">
+      <span class="fudis-link__external__icon-wrapper">
+        {{ externalLink }}
+        <fudis-icon [icon]="'new-tab'" [color]="color" class="fudis-link__external__icon" />
+      </span>
+    </ng-container>
+    <ng-container *ngIf="title">
+      <ng-container *ngIf="_externalLinkTitleParsed.length > 1">
+        {{ _externalLinkTitleParsed[0] }}
+        <span class="fudis-link__external__icon-wrapper">
+          {{ _externalLinkTitleParsed[1] }}
+          <fudis-icon [icon]="'new-tab'" [color]="color" class="fudis-link__external__icon" />
+        </span>
+      </ng-container>
+    </ng-container>
   </a>
 </ng-container>
 <ng-container *ngIf="(link || fragmentId) && !externalLink">
@@ -26,7 +39,7 @@
     [routerLink]="link"
     [fragment]="fragmentId"
   >
-    {{ linkTitle ? linkTitle : link }}
+    {{ title ? title : link }}
   </a>
 </ng-container>
 <ng-container *ngIf="href && !link && !externalLink">
@@ -37,6 +50,6 @@
     (blur)="_handleBlur($event)"
     [href]="href"
   >
-    {{ linkTitle ? linkTitle : href }}
+    {{ title ? title : href }}
   </a>
 </ng-container>

@@ -16,12 +16,6 @@
 
     min-height: spacing.$spacing-lg;
 
-    /* TODO: Write better class selector */
-    /* stylelint-disable-next-line selector-class-pattern */
-    .fudis-link {
-      display: inline-flex;
-    }
-
     @include breakpoints.breakpoint-max("lg") {
       &:not(:first-of-type) {
         margin-top: spacing.$spacing-sm;
@@ -45,7 +39,7 @@
 
     @include breakpoints.breakpoint("lg") {
       flex-direction: row;
-      align-items: baseline;
+      align-items: center;
 
       &__logo {
         margin-right: spacing.$spacing-md;

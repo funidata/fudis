@@ -10,6 +10,7 @@ import { TextInputComponent } from '../../../components/form/text-input/text-inp
 import { ValidatorErrorMessageComponent } from '../../../components/form/error-message/validator-error-message/validator-error-message.component';
 import { LabelComponent } from '../../../components/form/label/label.component';
 import { FudisValidators } from '../../../utilities/form/validators';
+import { IconComponent } from '../../../components/icon/icon.component';
 
 @Component({
   selector: 'fudis-mock-text-input-component',
@@ -46,6 +47,7 @@ describe('InputBaseDirective', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
+        IconComponent,
         GuidanceComponent,
         LabelComponent,
         MockTextInputComponent,
@@ -126,7 +128,6 @@ describe('InputBaseDirective', () => {
       const disabledInput = getElement(fixtureMock, 'input');
       const inputAriaAttribute = !!disabledInput.getAttribute('aria-disabled');
 
-      expect(disabledInput.className).toContain('fudis-form-input--disabled');
       expect(inputAriaAttribute).toEqual(true);
     });
 
@@ -138,7 +139,6 @@ describe('InputBaseDirective', () => {
       const invalidInput = getElement(fixtureMock, 'input');
       const inputAriaAttribute = !!invalidInput.getAttribute('aria-invalid');
 
-      expect(invalidInput.className).toContain('fudis-form-input--invalid');
       expect(inputAriaAttribute).toEqual(true);
     });
 

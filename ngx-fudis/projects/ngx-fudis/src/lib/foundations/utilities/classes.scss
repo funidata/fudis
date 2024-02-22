@@ -16,37 +16,17 @@
 }
 
 // Invalid and disabled state styles for input elemenets
-/* stylelint-disable-next-line selector-no-qualifying-type */
+
 .fudis-form-input {
-  /* stylelint-disable-next-line selector-no-qualifying-type */
-  &--invalid[aria-invalid="true"] {
+  &[aria-disabled="false"] {
+    @include border.border("1px", "solid", "gray-middle");
+  }
+
+  &[aria-invalid="true"] {
     @include border.border("1px", "solid", "red");
   }
 
-  &--disabled {
-    @include border.border("1px", "dashed", "gray-middle");
-    @include colors.bg-color("gray-extra-light");
-
-    cursor: default;
-  }
-
-  // TODO: Unify below and above --disabled styles for inputs to work universally
-  // This is done for text-input, otherwise its own styles overwrite border styles
-  /* stylelint-disable-next-line selector-no-qualifying-type */
-  &--disabled[aria-disabled="true"] {
-    @include border.border("1px", "dashed", "gray-middle");
-  }
-}
-
-// Invalid and disabled state styles for text-area elements
-/* stylelint-disable-next-line selector-no-qualifying-type */
-textarea.fudis-form-input {
-  /* stylelint-disable-next-line selector-no-qualifying-type */
-  &--invalid[aria-invalid="true"] {
-    @include border.border("1px", "solid", "red");
-  }
-
-  &--disabled {
+  &[aria-disabled="true"] {
     @include border.border("1px", "dashed", "gray-middle");
     @include colors.bg-color("gray-extra-light");
 

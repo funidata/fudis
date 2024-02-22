@@ -11,11 +11,9 @@
   </fudis-label>
   <textarea
     #inputRef
-    class="fudis-text-area__input"
+    class="fudis-form-input fudis-text-area__input"
     [formControl]="control"
     (blur)="onBlur($event)"
-    [class.fudis-form-input--invalid]="(control.touched && control.invalid) || invalidState"
-    [class.fudis-form-input--disabled]="disabled"
     [id]="id"
     [attr.aria-describedby]="id + '_guidance'"
     [attr.aria-invalid]="

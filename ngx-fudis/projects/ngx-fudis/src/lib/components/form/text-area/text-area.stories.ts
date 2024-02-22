@@ -83,6 +83,16 @@ Example.args = {
   helpText: 'Example help text',
 };
 
+export const Disabled = Template.bind({});
+Disabled.args = {
+  tooltip: '',
+  tooltipToggle: false,
+  size: 'lg',
+  disabled: true,
+  label: 'Text Area label example',
+  helpText: 'Example help text',
+};
+
 export const WithValidators: StoryFn<TextAreaComponent> = (args: TextAreaComponent) => ({
   props: args,
   template: `

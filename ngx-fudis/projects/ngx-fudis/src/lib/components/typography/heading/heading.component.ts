@@ -87,15 +87,6 @@ export class HeadingComponent implements OnInit, OnChanges {
     }
   }
 
-  public ngOnInit(): void {
-    this._id = this.id ?? this._idService.getNewId('heading');
-    this._setClasses();
-  }
-
-  public ngOnChanges(): void {
-    this._setClasses();
-  }
-
   /**
    * Set CSS classes for heading
    */
@@ -113,5 +104,14 @@ export class HeadingComponent implements OnInit, OnChanges {
       `fudis-mb-${this.marginBottom}`,
       `fudis-heading__align__${this.align}`,
     ];
+  }
+
+  public ngOnInit(): void {
+    this._id = this.id ?? this._idService.getNewId('heading');
+    this._setClasses();
+  }
+
+  public ngOnChanges(): void {
+    this._setClasses();
   }
 }
