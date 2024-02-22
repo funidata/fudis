@@ -5,20 +5,9 @@ import { FudisGridProperties } from '../../types/grid';
 @Injectable()
 export class FudisGridService {
   /**
-   * Grid values that can be set from application. Columns is not set by default, as that is the most common property to be configured case by case and has more complicated logic overall.
+   * Grid values that can be set from application. By default an empty object.
    */
-  private _defaultGridValues = signal<FudisGridProperties>({
-    alignItemsX: 'stretch',
-    alignItemsY: 'stretch',
-    width: 'xxl',
-    align: 'center',
-    marginTop: 'none',
-    marginBottom: 'none',
-    rowGap: 'responsive',
-    columnGap: 'responsive',
-    marginSides: 'responsive',
-    classes: [],
-  });
+  private _defaultGridValues = signal<FudisGridProperties>({});
 
   /**
    * To set default values for all Grids application uses from application.

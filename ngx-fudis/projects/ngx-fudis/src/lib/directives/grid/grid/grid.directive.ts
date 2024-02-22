@@ -5,6 +5,7 @@ import {
   FudisGridColumnsResponsive,
   gridColumnDefault,
   FudisGridProperties,
+  FudisGridColumns,
 } from '../../../types/grid';
 import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
@@ -21,13 +22,30 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
     private _gridElement: ElementRef,
     private _gridService: FudisGridService,
     private _breakpointService: FudisBreakpointService,
-    gridService: FudisGridService,
   ) {
     super();
-    this._gridService = gridService;
 
     this._element = _gridElement.nativeElement;
-    this._gridDefaults = this._gridService.getGridDefaultValues();
+
+    this._gridDefaults = _gridService.getGridDefaultValues();
+
+    /**
+     * Set properties based on default values declared in GriApiDirective
+     */
+    this._calculateAndSetGridColumnsCss(this.columns);
+
+    this._gridInputProperties = {
+      width: this.width,
+      align: this.align,
+      alignItemsX: this.alignItemsX,
+      alignItemsY: this.alignItemsY,
+      marginTop: this.marginTop,
+      marginBottom: this.marginBottom,
+      marginSides: this.marginSides,
+      rowGap: this.rowGap,
+      columnGap: this.columnGap,
+      classes: this.classes,
+    };
 
     /**
      * When screen is resized check and apply new rules for Grid columns
@@ -39,7 +57,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
         typeof this._calculatedColumns !== 'string' &&
         typeof this._calculatedColumns !== 'number'
       ) {
-        this._setColumnsForBreakpoints();
+        this._setColumnsForBreakpoints(this._calculatedColumns);
       }
     });
   }
@@ -67,118 +85,92 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
   private _initDone: boolean = false;
 
   ngOnInit(): void {
-    const {
-      align,
-      alignItemsX,
-      alignItemsY,
-      marginTop,
-      marginBottom,
-      marginSides,
-      rowGap,
-      columnGap,
-      width,
-    } = this._gridDefaults()!;
-
-    this._gridInputProperties = {
-      width: this.width ?? width,
-      align: this.align ?? align,
-      alignItemsX: this.alignItemsX ?? alignItemsX,
-      alignItemsY: this.alignItemsY ?? alignItemsY,
-      marginTop: this.marginTop ?? marginTop,
-      marginBottom: this.marginBottom ?? marginBottom,
-      marginSides: this.marginSides ?? marginSides,
-      rowGap: this.rowGap ?? rowGap,
-      columnGap: this.columnGap ?? columnGap,
-      classes: this.classes ?? width,
-    };
-
-    this._setGridColumnAttributes();
-    this._applyGridCss(this._gridInputProperties);
-
-    this._initDone = true;
+    if (!this.ignoreDefaults) {
+      this._gridInputProperties = { ...this._gridInputProperties, ...this._gridDefaults() };
+    }
   }
 
   ngOnChanges(changes: FudisComponentChanges<GridDirective>): void {
-    if (this._initDone) {
-      if (changes.columns?.currentValue) {
-        this._setGridColumnAttributes();
-      }
-
-      let valuesToUpdate: FudisGridProperties = {};
-
-      Object.keys(changes).forEach((key) => {
-        if (key !== 'columns') {
-          const keyToUpdate: keyof FudisGridProperties = key as keyof FudisGridProperties;
-          const newValue = changes[keyToUpdate]?.currentValue;
-
-          valuesToUpdate = { ...valuesToUpdate, [keyToUpdate]: newValue };
-        }
-      });
-
-      this._applyGridCss(valuesToUpdate);
+    if (changes.columns?.currentValue) {
+      this._calculateAndSetGridColumnsCss(changes.columns?.currentValue);
     }
+
+    this._setGridInputProperties(changes);
+  }
+
+  private _setGridInputProperties(changes: FudisComponentChanges<GridDirective>): void {
+    let valuesToUpdate: FudisGridProperties = {};
+
+    Object.keys(changes).forEach((key) => {
+      if (key !== 'columns') {
+        const keyToUpdate: keyof FudisGridProperties = key as keyof FudisGridProperties;
+        const newValue = changes[keyToUpdate]?.currentValue;
+
+        valuesToUpdate = { ...valuesToUpdate, [keyToUpdate]: newValue };
+      }
+    });
+
+    this._gridInputProperties = { ...this._gridInputProperties, ...valuesToUpdate };
+
+    this._applyGridCss();
   }
 
   /**
    * Set and config Grid's attributes from provided input properties
    */
-  private _setGridColumnAttributes(): void {
-    this._calculateColumnsCssValue();
-    this._setColumnsForBreakpoints();
+  private _calculateAndSetGridColumnsCss(columnFromInput: FudisGridColumns): void {
+    this._calculatedColumns = this._calculateColumnsCssValue(columnFromInput);
+    this._setColumnsForBreakpoints(this._calculatedColumns);
   }
 
-  private _calculateColumnsCssValue(): void {
-    if (typeof this.columns === 'string') {
-      this._calculatedColumns = replaceFormInputWidthsToRem(this.columns);
+  private _calculateColumnsCssValue(
+    columnFromInput: FudisGridColumns,
+  ): string | FudisBreakpointStyleResponsive[] {
+    if (typeof columnFromInput === 'string') {
+      return replaceFormInputWidthsToRem(columnFromInput);
     }
     // If value is number, convert it to grid-template-column value. E. g. number 6 converts to 'repeat(6,1fr)'
-    else if (typeof this.columns === 'number') {
-      this._calculatedColumns = getGridCssValue(this.columns);
+    else if (typeof columnFromInput === 'number') {
+      return getGridCssValue(columnFromInput);
     }
     // Get breakpoint settings with provided default values and Input values
     else if (!this.ignoreDefaults && this._gridDefaults()?.columns) {
       const combinedValues: FudisGridColumnsResponsive = {
         ...this._gridDefaults()!.columns,
-        ...this.columns,
+        ...columnFromInput,
       };
 
-      this._calculatedColumns = getBreakpointDataArray(combinedValues, gridColumnDefault);
+      return getBreakpointDataArray(combinedValues, gridColumnDefault);
     } else {
-      this._calculatedColumns = getBreakpointDataArray(this.columns, gridColumnDefault);
+      return getBreakpointDataArray(columnFromInput, gridColumnDefault);
     }
   }
 
   /**
    * Set CSS grid-template-column attributes for this Grid element
    */
-  private _setColumnsForBreakpoints(): void {
+  private _setColumnsForBreakpoints(
+    columnsCssValue: string | FudisBreakpointStyleResponsive[],
+  ): void {
     this._breakpointService.setStyleAttributes(
       this._element,
       'grid-template-columns',
-      this._calculatedColumns,
+      columnsCssValue,
     );
   }
 
   /**
    * Apply CSS settings from Inputs
    */
-  private _applyGridCss(values: FudisGridProperties): void {
-    if (values?.alignItemsX) {
-      this._element.style.justifyItems = values.alignItemsX!;
-    }
+  private _applyGridCss(): void {
+    this._element.style.justifyItems = this._gridInputProperties.alignItemsX!;
 
-    if (values?.alignItemsY) {
-      this._element.style.alignItems = values.alignItemsY!;
-    }
-
-    this._gridInputProperties = {
-      ...this._gridInputProperties,
-      ...values,
-    };
+    this._element.style.alignItems = this._gridInputProperties.alignItemsY!;
 
     /**
      * Get and apply list of CSS classes to align and position Grid
      */
+
     this._element.classList.value = getGridClasses(this._gridInputProperties);
   }
 }
