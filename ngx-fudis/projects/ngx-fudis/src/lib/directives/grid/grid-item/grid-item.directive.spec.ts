@@ -21,8 +21,8 @@ import { BodyTextComponent } from '../../../components/typography/body-text/body
     </fudis-body-text>
     <fudis-button
       fudisGridItem
-      [alignSelfY]="alignY"
-      [alignSelfX]="alignX"
+      [alignSelfX]="alignSelfX"
+      [alignSelfY]="alignSelfY"
       [label]="'Test button'"
     />
   </fudis-grid>`,
