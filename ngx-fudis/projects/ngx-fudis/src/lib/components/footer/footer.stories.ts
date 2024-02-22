@@ -12,7 +12,6 @@ export default {
       page: readme,
     },
   },
-  argTypes: {},
 } as Meta;
 
 const Template: StoryFn<FooterComponent> = (args: FooterComponent) => ({
@@ -32,3 +31,9 @@ const Template: StoryFn<FooterComponent> = (args: FooterComponent) => ({
 });
 
 export const Example = Template.bind({});
+
+Example.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
+};
