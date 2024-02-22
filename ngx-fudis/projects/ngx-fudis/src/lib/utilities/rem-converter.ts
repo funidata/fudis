@@ -1,4 +1,7 @@
 // TODO: Write tests
+
+// TODO: Although this works, maybe we should consider creating a service, where multiplier can be defined.
+
 /**
  * Utility function to convert values to rem values used by application.
  * Function takes a number and returns value as string with 'rem' abbreviation.
