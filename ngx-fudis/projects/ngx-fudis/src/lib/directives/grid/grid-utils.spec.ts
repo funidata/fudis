@@ -1,4 +1,4 @@
-import { FudisGridAttributes } from '../../types/grid';
+import { FudisGridProperties } from '../../types/grid';
 import { convertToRemValue } from '../../utilities/rem-converter';
 import * as utils from './gridUtils';
 
@@ -53,7 +53,7 @@ describe('GridUtils', () => {
 
   describe('getGridClasses function', () => {
     it('should return one big string out of given grid attributes', () => {
-      const values: FudisGridAttributes = {
+      const values: FudisGridProperties = {
         width: 'xxl',
         align: 'end',
         marginTop: 'md',
@@ -69,7 +69,7 @@ describe('GridUtils', () => {
     });
 
     it('should add custom classes to grid class if given', () => {
-      const values: FudisGridAttributes = {
+      const values: FudisGridProperties = {
         width: 'xxl',
         align: 'end',
         marginTop: 'md',

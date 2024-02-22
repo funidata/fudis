@@ -59,8 +59,8 @@ const Template: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
     >
     <fudis-grid-item
       class="grid-item-highlight"
-      [alignX]="alignX"
-      [alignY]="alignY"
+      [alignSelfX]="alignX"
+      [alignSelfY]="alignY"
       [columns]="columns"
     >
       <fudis-body-text>Adjustable grid item</fudis-body-text>
@@ -81,16 +81,16 @@ const Template: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
 
 export const Example = Template.bind({});
 Example.args = {
-  alignX: 'stretch',
-  alignY: 'stretch',
+  alignSelfX: 'stretch',
+  alignSelfY: 'stretch',
   columns: 'auto',
 };
 Example.argTypes = {
-  alignX: {
+  alignSelfX: {
     options: ['stretch', 'start', 'end', 'center'],
     control: { type: 'radio' },
   },
-  alignY: {
+  alignSelfY: {
     options: ['stretch', 'start', 'end', 'center'],
     control: { type: 'radio' },
   },
@@ -112,20 +112,23 @@ export const AlignX: StoryFn<GridItemComponent> = (args: GridItemComponent) => (
 
     <fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
     <fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
-    <fudis-grid-item [alignX]="'start'" class="grid-item-highlight"
+    <fudis-grid-item [alignSelfX]="'start'" class="grid-item-highlight"
       ><fudis-body-text>alignX = 'start'</fudis-body-text></fudis-grid-item
     >
-    <fudis-grid-item class="grid-item-highlight" [alignX]="'end'"
+    <fudis-grid-item class="grid-item-highlight" [alignSelfX]="'end'"
       ><fudis-body-text>alignX = 'end'</fudis-body-text></fudis-grid-item
     >
     <fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
 
-    <fudis-grid-item class="grid-item-highlight" [alignX]="'center'">
+    <fudis-grid-item class="grid-item-highlight" [alignSelfX]="'center'">
       <fudis-body-text>alignX = 'center' </fudis-body-text></fudis-grid-item
     >
     <fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
     <fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
-    <fudis-grid-item class="grid-item-highlight" [alignX]="{sm: 'start', md: 'end', lg: 'center'}">
+    <fudis-grid-item
+      class="grid-item-highlight"
+      [alignSelfX]="{sm: 'start', md: 'end', lg: 'center'}"
+    >
       <fudis-body-text>Responsive alignX =</fudis-body-text>
       <fudis-body-text>"{{responsiveAlignX}}"</fudis-body-text>
     </fudis-grid-item>
@@ -136,7 +139,7 @@ export const AlignY: StoryFn<GridItemComponent> = (args: GridItemComponent) => (
   props: args,
   template: html`<fudis-grid [columns]="2" [width]="'sm'">
     <fudis-heading [level]="1" [size]="'lg'"
-      >This grid demonstrates attribute of 'alignY'</fudis-heading
+      >This grid demonstrates attribute of 'alignSelfY'</fudis-heading
     >
     <fudis-grid-item class="grid-item-highlight">
       <fudis-body-text>alignY = 'stretch' (default)</fudis-body-text>
@@ -154,7 +157,7 @@ export const AlignY: StoryFn<GridItemComponent> = (args: GridItemComponent) => (
       ></fudis-grid-item
     >
 
-    <fudis-grid-item class="grid-item-highlight" [alignY]="'start'"
+    <fudis-grid-item class="grid-item-highlight" [alignSelfY]="'start'"
       ><fudis-body-text>alignY = 'start'</fudis-body-text></fudis-grid-item
     >
     <fudis-grid-item class="grid-item">
@@ -169,7 +172,7 @@ export const AlignY: StoryFn<GridItemComponent> = (args: GridItemComponent) => (
         conduct chase wench spike lateen sail bilge boom.</fudis-body-text
       ></fudis-grid-item
     >
-    <fudis-grid-item class="grid-item-highlight" [alignY]="'end'"
+    <fudis-grid-item class="grid-item-highlight" [alignSelfY]="'end'"
       ><fudis-body-text>alignY = 'end'</fudis-body-text></fudis-grid-item
     ><fudis-grid-item class="grid-item">
       <fudis-body-text style="margin-bottom: 1rem;"
@@ -183,7 +186,7 @@ export const AlignY: StoryFn<GridItemComponent> = (args: GridItemComponent) => (
         conduct chase wench spike lateen sail bilge boom.</fudis-body-text
       ></fudis-grid-item
     >
-    <fudis-grid-item class="grid-item-highlight" [alignY]="'center'"
+    <fudis-grid-item class="grid-item-highlight" [alignSelfY]="'center'"
       ><fudis-body-text>alignY = 'center'</fudis-body-text></fudis-grid-item
     ><fudis-grid-item class="grid-item">
       <fudis-body-text style="margin-bottom: 1rem;"
@@ -199,7 +202,7 @@ export const AlignY: StoryFn<GridItemComponent> = (args: GridItemComponent) => (
     >
     <fudis-grid-item
       class="grid-item-highlight"
-      [alignY]="{xs: 'end', sm: 'stretch', md: 'start', lg: 'center'}"
+      [alignSelfY]="{xs: 'end', sm: 'stretch', md: 'start', lg: 'center'}"
       ><fudis-body-text>alignY = 'responsive'</fudis-body-text></fudis-grid-item
     ><fudis-grid-item class="grid-item">
       <fudis-body-text style="margin-bottom: 1rem;"
@@ -229,20 +232,20 @@ export const alignXAndY: StoryFn<GridItemComponent> = (args: GridItemComponent) 
       >Normal grid item. With more content so effects of adjusting a single element can be seen
       better.</fudis-body-text
     >
-    <fudis-grid-item class="grid-item-highlight" [alignX]="'start'" [alignY]="'start'"
+    <fudis-grid-item class="grid-item-highlight" [alignSelfX]="'start'" [alignSelfY]="'start'"
       ><fudis-body-text>align = 'start' & alignY = 'start'</fudis-body-text></fudis-grid-item
     >
     <fudis-body-text class="grid-item"
       >Normal grid item. With more content so effects of adjusting a single element can be seen
       better.</fudis-body-text
     >
-    <fudis-grid-item class="grid-item-highlight" [alignX]="'end'" [alignY]="'end'"
+    <fudis-grid-item class="grid-item-highlight" [alignSelfX]="'end'" [alignSelfY]="'end'"
       ><fudis-body-text>alignX = 'end' & alignY = 'end'</fudis-body-text></fudis-grid-item
     ><fudis-body-text class="grid-item"
       >Normal grid item. With more content so effects of adjusting a single element can be seen
       better.</fudis-body-text
     >
-    <fudis-grid-item class="grid-item-highlight" [alignX]="'center'" [alignY]="'center'"
+    <fudis-grid-item class="grid-item-highlight" [alignSelfX]="'center'" [alignSelfY]="'center'"
       ><fudis-body-text>alignX = 'center' & alignY = 'center'</fudis-body-text></fudis-grid-item
     >
     <fudis-body-text class="grid-item"

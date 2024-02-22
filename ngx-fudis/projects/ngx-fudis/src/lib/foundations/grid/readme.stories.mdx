@@ -118,20 +118,20 @@ Just like grid itself, grid-item can be adjusted with `columns` attribute. You c
 
 #### AlignX
 
-Align single grid-item element horizontally `start`, `center`, `end` or `stretch`, e.g `[alignX]="'start'"`.
+Align single grid-item element horizontally `start`, `center`, `end` or `stretch`, e.g `[alignSelfX]="'start'"`.
 
 #### AlignY
 
-Align single grid-item element vertically `start`, `center`, `end` or `stretch`, e.g `[alignY]="'center'"`.
+Align single grid-item element vertically `start`, `center`, `end` or `stretch`, e.g `[alignSelfY]="'center'"`.
 
 ### Example of grid-item directive
 
 ```
 <fudis-grid [columns]="2">
-	<fudis-body-text fudisGridItem [alignX]="'end'"></fudis-body-text>
+	<fudis-body-text fudisGridItem [alignSelfX]="'end'"></fudis-body-text>
 	<fudis-body-text fudisGridItem [columns]="2"></fudis-body-text>
 	<fudis-body-text></fudis-body-text>
-	<fudis-body-text fudisGridItem [alignY]="'center'"></fudis-body-text>
+	<fudis-body-text fudisGridItem [alignSelfY]="'center'"></fudis-body-text>
 </fudis-grid>
 ```
 
@@ -139,14 +139,14 @@ Align single grid-item element vertically `start`, `center`, `end` or `stretch`,
 
 ```
 <fudis-grid [columns]="2">
-	<fudis-grid-item [alignX]="'end'">
+	<fudis-grid-item [alignSelfX]="'end'">
 		<fudis-body-text></fudis-body-text>
 	</fudis-grid-item>
 	<fudis-grid-item [columns]="2">
 		<fudis-body-text></fudis-body-text>
 	</fudis-grid-item>
 	<fudis-body-text></fudis-body-text>
-	<fudis-grid-item [alignY]="'center'">
+	<fudis-grid-item [alignSelfY]="'center'">
 		<fudis-body-text></fudis-body-text>
 	</fudis-grid-item>
 </fudis-grid>

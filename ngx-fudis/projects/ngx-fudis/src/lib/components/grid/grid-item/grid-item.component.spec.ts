@@ -21,7 +21,7 @@ import { ButtonComponent } from '../../button/button.component';
         Paragraph text for testing grid item functionalities. This is so much fun!
       </fudis-body-text>
     </fudis-grid-item>
-    <fudis-grid-item [alignY]="alignY" [alignX]="alignX">
+    <fudis-grid-item [alignSelfY]="alignY" [alignSelfX]="alignX">
       <fudis-button [label]="'Test button'" />
     </fudis-grid-item>
   </fudis-grid>`,
@@ -29,9 +29,9 @@ import { ButtonComponent } from '../../button/button.component';
 class HostComponent {
   columns: string | FudisBreakpointStyleResponsive = '1';
 
-  alignY: FudisGridItemAlignment = 'stretch';
+  alignSelfX: FudisGridItemAlignment = 'stretch';
 
-  alignX: FudisGridItemAlignment = 'stretch';
+  alignSelfY: FudisGridItemAlignment = 'stretch';
 }
 
 describe('GridItemComponent', () => {
@@ -92,22 +92,22 @@ describe('GridItemComponent', () => {
       expect(getAttribute(1, 'justify-self')).toBe('stretch');
       expect(getAttribute(1, 'align-self')).toBe('stretch');
 
-      component.alignY = 'end';
-      component.alignX = 'end';
+      component.alignSelfY = 'end';
+      component.alignSelfX = 'end';
       fixture.detectChanges();
 
       expect(getAttribute(1, 'justify-self')).toBe('end');
       expect(getAttribute(1, 'align-self')).toBe('end');
 
-      component.alignY = 'start';
-      component.alignX = 'start';
+      component.alignSelfY = 'start';
+      component.alignSelfX = 'start';
       fixture.detectChanges();
 
       expect(getAttribute(1, 'justify-self')).toBe('start');
       expect(getAttribute(1, 'align-self')).toBe('start');
 
-      component.alignY = 'center';
-      component.alignX = 'center';
+      component.alignSelfY = 'center';
+      component.alignSelfX = 'center';
       fixture.detectChanges();
 
       expect(getAttribute(1, 'justify-self')).toBe('center');
