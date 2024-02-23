@@ -8,11 +8,15 @@ Fudis Form components use two set of validators; **FudisValidators** and **Fudis
 
 For custom application spesific validator, please check 'Custom Validators' section later on this page.
 
-Basic validators (FudisValidators) have the following types: `required`, `email`, `minLength`, `maxLength`,`min`, `max`, `pattern`, `datepickerMin` and `datepickerMax`.
+Basic validators (FudisValidators) have the following types: `required`, `email`, `minLength`, `maxLength`,`min`, `max` and `pattern`.
+{/* prettier-ignore */}
+{/* TODO: Expose when Datepicker is exposed to public API
+
+`datepickerMin` and `datepickerMax`. \*/}
 
 Group validators (FudisGroupValidators) have the following types: `atLeastOneRequired`, `min` and `max`.
 
-# Usage Guidelines for FudisValidators
+# Usage Guidelines
 
 ## Single Form Control Validators with FudisValidators
 
@@ -50,10 +54,12 @@ FudisValidators.maxLength(20, 'Too long input text.')
 
 ### Min and Max Validators
 
-Min and Max validators are used with form field `[type]="'number'"`. Min and Max validator disables inputs that exceed or fall below the allowed values. Form components that use Error message is prompt when the user inputs lower or higher value than the allowed value to the input field. Form components that include min/max validation require a validation number and message parameter as a string or as an observable string.
+Min and Max validators are used with Text Input `[type]="'number'"` and with Multiselect Component. Error message is prompt when user inputs lower or higher value than the allowed value.
+Form components that include min/max validation require a validation number and message parameter as a string or as an observable string.
 
 ```
 FudisValidators.max(10, 'Number cannot exceed 10.')
+FudisValidators.min(3, 'Choose at least 3 options.')
 
 ```
 
@@ -70,6 +76,9 @@ FudisValidators.pattern(/^[A-Z \d\W]+$/, 'PLEASE USE ONLY LOW CAPS!')
 
 ---
 
+{/* prettier-ignore */}
+{/* TODO: Expose when Datepicker is exposed to public API
+
 ### DatepickerMin and DatepickerMax Validators
 
 DatepickerMin and DatepickerMax validators can be used with Datepicker and Date Range components. These validators disable dates from the calendar dropdown if they fall outside of given date range.
@@ -77,10 +86,10 @@ Needed parameters for both validator objects are `value` as a date and `message`
 
 Validators can be used individually or together to validate single date.
 
-```
+````
 FudisValidators.datepickerMin({ value: new Date(2024,0,1), message: 'Start date cannot be before 1.1.2024' })
 FudisValidators.datepickerMax({ value: new Date(2024,9,1), message: 'End date cannot be after 1.10.2024' })
-```
+``` */}
 
 ## Form Group Validators with FudisGroupValidators
 
