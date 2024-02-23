@@ -1,0 +1,16 @@
+{
+  "name": "fudis-vr",
+  "version": "0.2.2",
+  "description": "Visual regression tests for Fudis",
+  "scripts": {
+    "start": "npx playwright test --ui",
+    "postinstall": "npx playwright install --with-deps"
+  },
+  "keywords": [],
+  "author": "Funidata Ltd",
+  "license": "CC-BY-NC-SA-4.0",
+  "devDependencies": {
+    "@playwright/test": "^1.41.2",
+    "@types/node": "^20.11.16"
+  }
+}
