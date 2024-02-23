@@ -10,7 +10,12 @@ export default {
       page: readme,
     },
   },
-  argTypes: {},
+  argTypes: {
+    variant: {
+      options: ['accent', 'danger', 'primary', 'secondary', 'success'],
+      control: { type: 'radio' },
+    },
+  },
 } as Meta;
 
 const Template: StoryFn<BadgeComponent> = (args: BadgeComponent) => ({
@@ -19,13 +24,14 @@ const Template: StoryFn<BadgeComponent> = (args: BadgeComponent) => ({
 
 const html = String.raw;
 
-export const Badge = Template.bind({});
-Badge.args = {
+export const Example = Template.bind({});
+Example.args = {
   variant: 'primary',
-  content: 'Badge',
+  content: 'Badge text',
 };
 
-export const AllVariants: StoryFn = () => ({
+export const AllVariants: StoryFn<BadgeComponent> = (args: BadgeComponent) => ({
+  ...args,
   template: html`
     <fudis-grid rowGap="sm">
       <fudis-badge [variant]="'accent'" [content]="'accent'"></fudis-badge>
@@ -36,3 +42,9 @@ export const AllVariants: StoryFn = () => ({
     </fudis-grid>
   `,
 });
+
+AllVariants.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
+};
