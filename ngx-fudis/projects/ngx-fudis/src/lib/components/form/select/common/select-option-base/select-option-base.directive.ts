@@ -35,10 +35,12 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
   /**
    * Reference of input or option element
    */
-  @ViewChild('optionInputRef') public optionInputRef: ElementRef<HTMLOptionElement | HTMLInputElement>;
+  @ViewChild('optionInputRef') public optionInputRef: ElementRef<
+    HTMLOptionElement | HTMLInputElement
+  >;
 
   /**
-   * Select option data 
+   * Select option data
    */
   @Input({ required: true }) data: FudisSelectOption;
 
