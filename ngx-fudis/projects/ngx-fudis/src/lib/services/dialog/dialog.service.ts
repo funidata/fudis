@@ -34,14 +34,23 @@ export class FudisDialogService {
     return dialogRef;
   }
 
+  /**
+   * Close dialog
+   */
   public close(): void {
     this.ngMaterialDialog.closeAll();
   }
 
+  /**
+   * Get dialog open status
+   */
   public getDialogOpenSignal(): Signal<boolean> {
     return this._dialogOpen.asReadonly();
   }
 
+  /**
+   * Set dialog open
+   */
   public setDialogOpenSignal(value: boolean): void {
     this._dialogOpen.set(value);
   }

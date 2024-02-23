@@ -68,7 +68,7 @@ export class DialogContentDirective extends MatDialogContent implements AfterVie
   /**
    * From: https://phuoc.ng/collection/html-dom/check-if-an-element-is-scrollable/
    */
-  isDialogScrollable(): boolean {
+  private isDialogScrollable(): boolean {
     // Compare the height to see if the element has scrollable content
     const hasScrollableContent =
       this._elRef.nativeElement.scrollHeight > this._elRef.nativeElement.clientHeight;

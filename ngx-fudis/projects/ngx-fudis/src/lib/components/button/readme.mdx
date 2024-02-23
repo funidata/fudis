@@ -21,10 +21,6 @@ Buttons are categorized based on their importance and functionality. It is **imp
 
 Button has three variants: `primary` (default), `secondary` and `tertiary`.
 
-### Size
-
-There are three button sizes available: `medium` (default), `small` and `icon-only`.
-
 ### Type
 
 Type has to two possible values: `button` (default) and `submit`.
@@ -43,7 +39,7 @@ Icon is only a visual indicator and is always hidden from screen readers.
 
 Icon can be configured with `icon` and `iconRotate` properties.
 
-<Canvas of={ButtonStories.IconButton}></Canvas>
+<Canvas of={ButtonStories.WithIcon}></Canvas>
 
 ### Button with Label Hidden
 
@@ -53,7 +49,7 @@ If button has no visible label and both `label` and `ariaLabel` are provided, th
 
 Note! Label is also hidden automatically when size `icon-only` is used.
 
-<Canvas of={ButtonStories.OnlyIconButton}></Canvas>
+<Canvas of={ButtonStories.IconOnly}></Canvas>
 
 ### Accessibility
 

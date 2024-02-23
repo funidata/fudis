@@ -1,6 +1,7 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { TooltipDirective } from "./tooltip.directive.ts";
 import * as TooltipStories from "./tooltip.stories.ts";
+import { tooltipExclude } from "../../utilities/storybook";
 
 <Meta title="Directives/Tooltip" />
 
@@ -9,10 +10,6 @@ import * as TooltipStories from "./tooltip.stories.ts";
 Tooltip shows contextual help or information about specific elemenet when user hovers, focuses or clicks on it, depending on the given properties.
 Tooltip directive uses Angular Material Tooltip as its base.
 
-## Examples
-
-<Canvas of={TooltipStories.Example}></Canvas>
-
 ## Usage Guideline
 
 Regular tooltip is triggered on mouse hover and on keyboard focus. Tooltip content is forced for keyboard and screen reader users when element receives focus.
@@ -20,13 +17,28 @@ Consider using `tooltipToggle` property with long and alternative text contents 
 
 Tooltip text is added by `tooltip` property. Tooltip position can be adjusted with optional `tooltipPosition` property.
 
-### Related components
+## Examples
 
-- [Angular Material Tooltip](https://material.angular.io/components/tooltip/overview)
+<Canvas of={TooltipStories.Example}></Canvas>
+
+### Supported components
+
+- [Checkbox Group](/docs/components-form-checkbox-group--documentation)
+- [FieldSet](/docs/components-form-field-set--documentation)
 - [Text Input](/docs/components-form-text-input--documentation)
 - [Text Area](/docs/components-form-text-area--documentation)
-- [FieldSet](/docs/components-form-field-set--documentation)
-- [Section](/docs/components-section--documentation)
+- [Select](/docs/components-form-select-select--documentation)
+- [MultiSelect](/docs/components-form-select-multiselect--documentation)
+  {/* prettier-ignore */}
+  {/* TODO: Enable when section component is published */}
+  {/* - [Section](/docs/components-section--documentation) */}
+  {/* - [Datepicker] **link** */}
+  {/* - [DateRange] **link** */}
+  {/* - [Language Badge Group] **link** */}
+
+### Related components
+
+- [Angular Material Tooltip](https://material.angular.io/components/tooltip/overview) (opens in new tab)
 
 ### Accessibility
 
@@ -37,4 +49,4 @@ Tooltip text is added by `tooltip` property. Tooltip position can be adjusted wi
 
 ## Properties
 
-<ArgTypes of={TooltipDirective} />
+<ArgTypes of={TooltipDirective} exclude={tooltipExclude} />

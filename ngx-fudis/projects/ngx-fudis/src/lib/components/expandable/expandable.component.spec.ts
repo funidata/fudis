@@ -317,9 +317,8 @@ describe('ExpandableComponent', () => {
       expect(errorService.removeSection).not.toHaveBeenCalled();
 
       component.errorSummaryBreadcrumb = true;
+      component.ngOnInit();
       fixture.detectChanges();
-      component.addToErrorSummary();
-
       component.ngOnDestroy();
 
       expect(errorService.removeSection).toHaveBeenCalledWith({
