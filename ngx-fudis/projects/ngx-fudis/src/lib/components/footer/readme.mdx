@@ -6,22 +6,26 @@ import * as FooterComponentStories from "./footer.stories.ts";
 
 # Footer
 
-Fudis Footer is static component to be used as application's footer in the bottom of the page. It is designed to use [Fudis Link](/docs/components-link--documentation) components as its content. Through content projection it's easier for developers to change related links depending on the application. By using directives `fudisFooterRight` and/or `fudisFooterLeft`, developers can determine which side of the footer links are displayed. The only fixed element in Fudis Footer is Funidata logo with a link to Funidata's homepage and translated alt text for screen readers.
+Footer is a static component to be used as application's footer in the bottom of the page.
+
+## Usage Guidelines
+
+Footer is designed to be used with [Link Components](/docs/components-link--documentation).
+By using directives `fudisFooterContentRight` and/or `fudisFooterContentLeft` it determines which side of the footer links are displayed.
+The only fixed element is Funidata logo with a link to Funidata's homepage and translated alternative text for screen readers.
+
+## Example
 
 <Canvas of={FooterComponentStories.Example} />
 
-### Accessibility
+## Accessibility
 
-- Fudis footer contains native footer element
-- All links to external source have `external` set to true.
-- All links to external source have descriptive aria-label
-- Funidata logo has descriptive alt-text
+- Footer contains native HTML footer element
+- Funidata logo has descriptive alt text
 
-### Related components
+## Related components
 
-[Link](/docs/components-link--documentation)
-
-[Grid](/docs/components-grid-grid--documentation)
+- [Link](/docs/components-link--documentation)
 
 ## Properties
 

@@ -172,7 +172,7 @@ export class FudisInternalErrorSummaryService {
   /**
    * Adds new fieldset to the list of current fieldsets
    * If a fieldset with a matching id exists, replace the old fieldset with the new one
-   * @param fieldset Form error summary section
+   * @param fieldset Form error summary fieldset
    */
   public addFieldset(fieldset: FudisFormErrorSummarySection): void {
     const existingItem = this._currentFieldsets.find((item) => {
@@ -189,7 +189,7 @@ export class FudisInternalErrorSummaryService {
 
   /**
    * Removes the fieldset from the current fieldsets
-   * @param fieldset Form error summary section
+   * @param fieldset Form error summary fieldset
    */
   public removeFieldset(fieldset: FudisFormErrorSummarySection): void {
     const indexToRemove = this._currentFieldsets.indexOf(fieldset);
@@ -271,7 +271,7 @@ export class FudisInternalErrorSummaryService {
   /**
    * Returns an error id including a control name if one is given
    * @param id Id of the form error summary item
-   * @param controlName Optional control name of the form error summary item
+   * @param controlName Control name of the form error summary item
    */
   // eslint-disable-next-line class-methods-use-this
   private _defineErrorId(id: string, controlName: string | undefined): string {

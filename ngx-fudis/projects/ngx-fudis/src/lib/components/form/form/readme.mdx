@@ -1,4 +1,5 @@
-import { Meta } from "@storybook/blocks";
+import { Meta, ArgTypes } from "@storybook/blocks";
+import { FormComponent } from "./form.component";
 
 <Meta title="Components/Form/Form" />
 
@@ -51,6 +52,7 @@ There are no restrictions on main content but it is advised to use Fudis Form Co
 Aside from content projection Fudis Form will create heading, badge and error-summary based on given properties.
 
 Fudis Form also extends Fudis Grid Api Directive which allows the modification and usage of most of the [Grid properties](/docs/foundations-grid--documentation). Non-working Grid properties are `columns` and `rowGap`.
+The complete list of allowed properties can be found from Properties table at the bottom of this page.
 
 ### Heading
 
@@ -71,7 +73,7 @@ Help text displayed on top of Error Summary should be added with **mandatory** `
 
 Type of the clickable link redirecting and moving focus to invalid input is set with `errorSummaryLinkType`. Possible values are `href` and `router` (default).
 
-More about [Error Summary](/docs/components-form-error-summary--documentation) and [Error Summary Service](docs/components-form-error-summary--documentation).
+More about [Error Summary](/docs/components-form-error-summary--documentation) and [Error Summary Service](/docs/services-error-summary--documentation).
 
 ## Code Example
 
@@ -134,3 +136,7 @@ submitForm(): void {
   }
 }
 ```
+
+## Properties
+
+<ArgTypes of={FormComponent} />

@@ -1,6 +1,7 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { ExpandableComponent } from "./expandable.component";
 import * as ExpandableStories from "./expandable.stories.ts";
+import { expandableExclude } from "../../utilities/storybook";
 
 <Meta title="Components/Expandable" />
 
@@ -8,13 +9,13 @@ import * as ExpandableStories from "./expandable.stories.ts";
 
 Fudis Expandable is an accordion component where its content can be expanded or collapsed to create more compact pages.
 
-## Properties
+## Commonly Used Properties
 
 ### Variant
 
 Fudis Expandable has two variant types: `regular` and `lite`.
 
-### Opening and Closing programatically
+### Opening and Closing Programatically
 
 Expandable is by default closed; this can be programatically controlled with the `closed` input property.
 
@@ -28,12 +29,12 @@ Expandable's content and additional header buttons are provided via content proj
 
 ```
 <fudis-expandable>
-  <ng-template fudisActions type="expandable">
-    <fudis-button/>
+  <ng-template fudisActions [type]="'expandable'">
+    <fudis-button />
   </ng-template>
 
-  <ng-template fudisContent type="expandable">
-    <your-body-template/>
+  <ng-template fudisContent [type]="'expandable'">
+    <your-body-template />
   </ng-template>
 </fudis-expandable>
 ```
@@ -48,9 +49,9 @@ About using lazy initalisation with content projection, see [Angular example of 
 
 <Canvas of={ExpandableStories.AllVariants}></Canvas>
 
-### Expandable and Fudis Form Error Summary
+### Expandable and Fudis Error Summary
 
-Input `errorSummaryBreadcrumb` is a boolean that determines whether the expandable title is shown in the breadcrumb of Form Error Summary. This can be useful if Form structure is nested where there is a validatable forms in the contents of the expandable.
+Input `errorSummaryBreadcrumb` is a boolean that determines whether the expandable title is shown in the breadcrumb of Error Summary. This can be useful if Form structure is nested where there is a validatable forms in the contents of the expandable.
 
 Note: If there is Fudis Form components, such as Fudis Text Input, as expandable's content, the expandable must be first opened (and loaded to the DOM) before Error Summary gets information about invalid Form components.
 
@@ -73,4 +74,4 @@ Note: If there is Fudis Form components, such as Fudis Text Input, as expandable
 
 ## Properties
 
-<ArgTypes of={ExpandableComponent} />
+<ArgTypes of={ExpandableComponent} exclude={expandableExclude} />

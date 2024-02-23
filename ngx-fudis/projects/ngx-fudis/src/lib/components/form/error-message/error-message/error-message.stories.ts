@@ -6,6 +6,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { ErrorMessageComponent } from './error-message.component';
 import readme from './readme.mdx';
 import { FudisValidators } from '../../../../utilities/form/validators';
+import { excludeAllRegex } from '../../../../utilities/storybook';
 
 @Component({
   selector: 'example-text-input-with-error-message',
@@ -97,8 +98,15 @@ export default {
   argTypes: {},
 } as Meta;
 
-export const ErrorMessageExample: StoryFn = () => ({
+export const Example: StoryFn<ErrorMessageComponent> = (args: ErrorMessageComponent) => ({
+  ...args,
   template: `
 <example-text-input-with-error-message></example-text-input-with-error-message>
 	`,
 });
+
+Example.parameters = {
+  controls: {
+    exclude: excludeAllRegex,
+  },
+};
