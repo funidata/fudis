@@ -21,7 +21,7 @@ import { ButtonComponent } from '../../button/button.component';
         Paragraph text for testing grid item functionalities. This is so much fun!
       </fudis-body-text>
     </fudis-grid-item>
-    <fudis-grid-item [alignSelfY]="alignY" [alignSelfX]="alignX">
+    <fudis-grid-item [alignSelfY]="alignSelfY" [alignSelfX]="alignSelfX">
       <fudis-button [label]="'Test button'" />
     </fudis-grid-item>
   </fudis-grid>`,

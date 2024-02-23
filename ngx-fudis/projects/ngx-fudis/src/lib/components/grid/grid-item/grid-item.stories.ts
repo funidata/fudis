@@ -59,8 +59,8 @@ const Template: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
     >
     <fudis-grid-item
       class="grid-item-highlight"
-      [alignSelfX]="alignX"
-      [alignSelfY]="alignY"
+      [alignSelfX]="alignSelfX"
+      [alignSelfY]="alignSelfY"
       [columns]="columns"
     >
       <fudis-body-text>Adjustable grid item</fudis-body-text>

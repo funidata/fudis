@@ -80,6 +80,7 @@ const preview = {
             ],
             "Footer",
             "Grid",
+            ["Grid", "Grid Item"],
             "Icon",
             "Link",
             "Notification",
