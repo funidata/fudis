@@ -1,4 +1,5 @@
 import { Meta, applicationConfig, StoryFn } from '@storybook/angular';
+import { action } from '@storybook/addon-actions';
 import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
@@ -7,9 +8,8 @@ import { SelectComponent } from '../select/select.component';
 import { MultiselectComponent } from '../multiselect/multiselect.component';
 import readme from './readme.mdx';
 import { groupedMockData, defaultOptions } from './mock_data';
-
-import { action } from '@storybook/addon-actions';
 import { FudisSelectOption } from '../../../../types/forms';
+import { selectExclude } from '../../../../utilities/storybook';
 
 export default {
   title: 'Components/Form/Select/Common Features',
@@ -24,7 +24,7 @@ export default {
       page: readme,
     },
     controls: {
-      exclude: [],
+      exclude: selectExclude,
     },
   },
   argTypes: {
@@ -32,15 +32,18 @@ export default {
       options: ['sm', 'md', 'lg'],
       control: { type: 'radio' },
     },
+    helpText: {
+      control: { type: 'text' },
+    },
   },
 } as Meta;
 
 const html = String.raw;
 
 const commonArgs = {
-  disabled: false,
   label: 'Select a pet',
   size: 'lg',
+  disabled: false,
   placeholder: 'Choose a pet',
   helpText: 'All pets are equally important, but for sake of this example please pick one.',
 };
@@ -87,10 +90,7 @@ const MultiselectAutocompleteTemplate: StoryFn<MultiselectComponent> = (
     ...args,
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<FudisSelectOption[] | null>(
-      [defaultOptions[2]],
-      FudisGroupValidators.min({ value: 4, message: 'KÄÄÄK VALITSE NELJÄ' }),
-    ),
+    control: new FormControl<FudisSelectOption[] | null>([defaultOptions[2]]),
     groupedMockData,
   },
   template: html`
@@ -131,7 +131,7 @@ const SelectWithGroupedOptionsTemplate: StoryFn<SelectComponent> = (args: Select
       [size]="size"
       [placeholder]="placeholder"
       [control]="control"
-      [label]="'label'"
+      [label]="label"
       [helpText]="helpText"
       [disabled]="disabled"
       (selectionUpdate)="selectionUpdate($event)"

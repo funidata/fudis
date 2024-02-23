@@ -1,5 +1,4 @@
 import { Meta, Canvas } from "@storybook/blocks";
-
 import * as Stories from "./common.stories.ts";
 
 <Meta title="Components/Form/Select/Common Features" />
@@ -83,7 +82,7 @@ When `autocomplete` is set to `true`, the input field of the component changes t
 
 ### Autocomplete Clear Button Boolean
 
-By default `autocompleteClearButton` is set a boolean `true`. When `true`, autocomplete input will display an close icon button. This button is used to clear and empty the filter text string in the input. With Select Component this Clear Button will also set Form Control's value to `null`.
+By default `autocompleteClearButton` is set to boolean `true`. When `true`, autocomplete input will display a close icon button. This button is used to clear and empty the filter text string in the input. With Select Component this clear button will also set Form Control's value to `null`.
 
 When `autocompleteClearButton` is set to `false`, the select with autocomplete works very similarly as select without autocomplete: dropdown options will instantly open up when user clicks or focuses to the input.
 
@@ -109,7 +108,7 @@ When `autocompleteClearButton` is set to `false`, the select with autocomplete w
 
 ## Adding Options
 
-Documentation for including selectable options for both Select and Multiselect is found under [Select and Multiselect Option documentation](/docs/components-form-select-select-and-multiselect-option--documentation)
+Documentation for including selectable options for both Select and Multiselect can be found from [Select and Multiselect Option documentation](/docs/components-form-select-select-and-multiselect-option--documentation).
 
 ## Grouping Options
 
@@ -117,17 +116,17 @@ Sometimes there is need to categorize and group options. Especially if list of o
 
 To group options, wrap them using `SelectGroupComponent`. It has two possible HTML selectors: `fudis-select-group` and `fudis-multiselect-group`.
 
-Only input attribute Select Group Component requires is `label` string.
+Select Group Component **requires** `label` string property.
 
 ```
 <fudis-select>
-  <ng-template fudisContent type="select-options">
+  <ng-template fudisContent [type]="'select-options'">
     <fudis-select-group [label]="'First Group'">
-      <fudis-select-option/>
+      <fudis-select-option />
       ... and rest of the options for the First Group
     </fudis-select-group>
     <fudis-select-group [label]="'Last Group'">
-      <fudis-select-option/>
+      <fudis-select-option />
       ... and rest of the options for the Last Group
     </fudis-select-group>
   </ng-template>
@@ -138,7 +137,7 @@ The exactly same component can be used as well with Multiselect Component. Altho
 
 ```
 <fudis-multiselect>
-  <ng-template fudisContent type="select-options">
+  <ng-template fudisContent [type]="'select-options'">
     <fudis-multiselect-group [label]="'First Group'">
       <fudis-multiselect-option/>
       ... and rest of the options for the First Group

@@ -53,7 +53,7 @@ export class SelectComponent
     new EventEmitter<FudisSelectOption | null>();
 
   /**
-   * Internal translated text for disabled select option
+   * Internal translated text for disabled select option, used in Select Option
    */
   public translationOptionDisabledText: string;
 

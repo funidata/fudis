@@ -32,8 +32,14 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
     });
   }
 
-  @ViewChild('optionInputRef') optionInputRef: ElementRef<HTMLOptionElement | HTMLInputElement>;
+  /**
+   * Reference of input or option element
+   */
+  @ViewChild('optionInputRef') public optionInputRef: ElementRef<HTMLOptionElement | HTMLInputElement>;
 
+  /**
+   * Select option data 
+   */
   @Input({ required: true }) data: FudisSelectOption;
 
   /**
@@ -77,6 +83,9 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
     }
   }
 
+  /**
+   * Update option visibility to parent component
+   */
   protected _updateVisibilityToParents(visible: boolean): void {
     this._parent.setOptionVisibility(this.data.value, visible);
 
