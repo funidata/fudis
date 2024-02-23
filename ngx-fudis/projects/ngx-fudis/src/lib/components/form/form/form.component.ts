@@ -35,19 +35,19 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   }
 
   /**
-   * Content directive for Fudis Form Actions
+   * Content directive for Form Header Actions
    */
-  @ContentChild(ActionsDirective) headerActions: ActionsDirective;
+  @ContentChild(ActionsDirective) protected _headerActions: ActionsDirective;
 
   /**
-   * Content directive for Fudis Form Header
+   * Content directive for Form Header Content
    */
-  @ContentChild(HeaderDirective) headerContent: HeaderDirective;
+  @ContentChild(HeaderDirective) protected _headerContent: HeaderDirective;
 
   /**
-   * Content directive for Fudis Form Content
+   * Content directive for Form Main Content
    */
-  @ContentChild(ContentDirective) mainContent: ContentDirective;
+  @ContentChild(ContentDirective) protected _mainContent: ContentDirective;
 
   /**
    * Help text displayed in Error Summary before listing individual errors
@@ -55,7 +55,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   @Input({ required: true }) errorSummaryHelpText: string;
 
   /**
-   * Form id
+   * Form id. If not given, id will be generated with IdService
    */
   @Input() id: string;
 
@@ -80,7 +80,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   @Input() helpText: string;
 
   /**
-   * Optional badge to include in the form title
+   * Add badge to the form title
    */
   @Input() badge: FudisBadgeVariant | null;
 

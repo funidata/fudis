@@ -315,6 +315,13 @@ export default {
 
 const html = String.raw;
 
-export const Example: StoryFn = () => ({
+export const Example: StoryFn<FormComponent> = (args: FormComponent) => ({
+  ...args,
   template: html` <example-form-content />`,
 });
+
+Example.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
+};

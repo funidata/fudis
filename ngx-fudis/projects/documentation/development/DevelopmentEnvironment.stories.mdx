@@ -8,81 +8,9 @@ The development environment for Fudis is implemented with Docker and NPM (Node.j
 
 Running the development environment does not require installing NPM packages locally. However, your IDE tooling most likely does (Simply run `npm ci` in repository root.)
 
-## Command Reference
+`npm start` spins up Storybook and `npm stop` shuts it down. See [Command Reference](/docs/documentation-development-command-reference--documentation) for more.
 
-Run commands in repository root unless otherwise specified.
-
-This reference includes the commands meant to be commonly used in development work. The `package.json` files include many others, too.
-
-### Development Environment Controls
-
-#### Start Development Environment
-
-Starts Storybook with hot-reload for both library code and Storybook markup. Access at [http://localhost:6006](http://localhost:6006).
-
-After starting, the terminal is attached to log output. You can detach (CTRL+C) from the logs and the application will keep running in the background. Re-attach with `npm run logs`.
-
-```bash
-npm start
-```
-
-#### Start Sandbox Application
-
-Starts the sandbox application with hot-reload. Access at [http://localhost:4200](http://localhost:4200).
-
-After starting, the terminal is attached to log output. You can detach (CTRL+C) from the logs and the application will keep running in the background. Re-attach with `npm run logs`.
-
-```bash
-npm run start:sandbox
-```
-
-#### Stop Development Environment
-
-```bash
-npm stop
-```
-
-#### Install Dependencies Locally
-
-```bash
-npm ci
-```
-
-#### View Logs
-
-Attaches terminal to Docker's interactive log output. Use this to see the logs again after detaching.
-
-```bash
-npm run logs
-```
-
-### Testing Commands
-
-#### Run Component Tests
-
-```bash
-npm test
-```
-
-#### Lint Code
-
-Lints `.js`, `.ts` and `.html` files.
-
-```bash
-npm run lint
-```
-
-#### Lint SCSS
-
-Runs `stylelint` on SCSS files.
-
-```bash
-npm run stylelint
-```
-
-### Miscellaneous
-
-#### Create New Fudis Version
+## Manual Release
 
 Read how to create new release with automated script from [Creating a Release](/docs/documentation-development-creating-release--documentation) documentation.
 
@@ -92,7 +20,7 @@ This is not advised, but if you need to create the release manually
 2. Create a version tag
 3. Push changes to GitHub
 
-Basically `npm version` modified to run in sub-directories.
+Basically `npm version` modified to run in sub-directories:
 
 ```bash
 npm version <major|minor|patch>
