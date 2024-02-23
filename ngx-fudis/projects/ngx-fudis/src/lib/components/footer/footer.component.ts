@@ -23,14 +23,14 @@ export class FooterComponent {
   }
 
   /**
-   * Content projection directive fudisFooterLeft is used for binding correct Footer content on the left side of the component.
+   * Content projection directive fudisFooterContentLeft is used for binding correct Footer content on the left side of the component.
    */
-  @ContentChild(FooterContentLeftDirective) contentLeft: FooterContentLeftDirective;
+  @ContentChild(FooterContentLeftDirective) footerContentLeft: FooterContentLeftDirective;
 
   /**
-   * Content projection directive fudisFooterRight is used for binding correct Footer content on the right side of the component.
+   * Content projection directive fudisFooterContentRight is used for binding correct Footer content on the right side of the component.
    */
-  @ContentChild(FooterContentRightDirective) contentRight: FooterContentRightDirective;
+  @ContentChild(FooterContentRightDirective) footerContentRight: FooterContentRightDirective;
 
   /**
    * Used to apply grid columns breakpoint values for the Footer

@@ -12,14 +12,14 @@
       <a href="https://www.funidata.fi/" class="fudis-footer__item__logo"
         ><img src="fd-logo.svg" alt="{{ _funidataLogoAltText }}"
       /></a>
-      <ng-container *ngIf="contentLeft">
-        <ng-container *ngTemplateOutlet="contentLeft!.templateRef" />
+      <ng-container *ngIf="footerContentLeft">
+        <ng-container *ngTemplateOutlet="footerContentLeft!.templateRef" />
       </ng-container>
     </fudis-grid-item>
 
-    <ng-container *ngIf="contentRight">
+    <ng-container *ngIf="footerContentRight">
       <fudis-grid-item [alignX]="{ xs: 'center', sm: 'end' }" class="fudis-footer__item">
-        <ng-container *ngTemplateOutlet="contentRight!.templateRef" />
+        <ng-container *ngTemplateOutlet="footerContentRight!.templateRef" />
       </fudis-grid-item>
     </ng-container>
   </fudis-grid>

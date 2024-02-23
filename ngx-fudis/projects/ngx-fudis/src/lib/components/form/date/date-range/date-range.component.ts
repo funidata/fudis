@@ -17,8 +17,8 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisDateRangeItem } from '../../../../types/forms';
 import {
-  DateEndErrorDirective,
-  DateStartErrorDirective,
+  EndDateErrorDirective,
+  StartDateErrorDirective,
 } from '../../../../directives/content-projection/content/content.directive';
 
 @Component({
@@ -44,14 +44,14 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
   @ViewChild('dateRangeRef') _dateRangeRef: ElementRef;
 
   /**
-   * Content projection directive fudisDateStartError is used when there's a need to bind custom ErrorMessage to Date Range's start date
+   * Content projection directive fudisStartDateError is used when there's a need to bind custom ErrorMessage to Date Range's start date
    */
-  @ContentChild(DateStartErrorDirective) startDateError: DateStartErrorDirective;
+  @ContentChild(StartDateErrorDirective) startDateError: StartDateErrorDirective;
 
   /**
-   * Content projection directive fudisDateEndError is used when there's a need to bind custom ErrorMessage to Date Range's end date
+   * Content projection directive fudisEndDateError is used when there's a need to bind custom ErrorMessage to Date Range's end date
    */
-  @ContentChild(DateEndErrorDirective) endDateError: DateEndErrorDirective;
+  @ContentChild(EndDateErrorDirective) endDateError: EndDateErrorDirective;
 
   /**
    * Settings for start date

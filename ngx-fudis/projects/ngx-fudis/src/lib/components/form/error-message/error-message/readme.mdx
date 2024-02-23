@@ -46,14 +46,14 @@ The following example demostrates how custom error message can be used along wit
 {/* prettier-ignore */}
 {/* ### Error Message with Date Range Component
 
-When it is mandatory to target error message to a single Form Control in Date Range component, use `fudisDateStartError`and `fudisDateEndError` directives for selecting between start and end time inputs.
+When it is mandatory to target error message to a single Form Control in Date Range component, use `fudisStartDateError`and `fudisEndDateError` directives for selecting between start and end time inputs.
 
 ````
 <fudis-date-range [startDate]="startDate" [endDate]="endDate">
-	<ng-template fudisDateStartError>
+	<ng-template fudisStartDateError>
 		<fudis-error-message [message]="'Error on the start date'" *ngIf="startDateErrorCondition" />
 	</ng-template>
-	<ng-template fudisDateEndError>
+	<ng-template fudisEndDateError>
 		<fudis-error-message [message]="'Error on the end date'" *ngIf="endDateErrorCondition" />
 	</ng-template>
 </fudis-date-range>

@@ -29,8 +29,8 @@ import { SelectComponent } from '../../select/select/select.component';
 import { MultiselectComponent } from '../../select/multiselect/multiselect.component';
 import { DateRangeComponent } from '../../date/date-range/date-range.component';
 import {
-  DateEndErrorDirective,
-  DateStartErrorDirective,
+  EndDateErrorDirective,
+  StartDateErrorDirective,
 } from '../../../../directives/content-projection/content/content.directive';
 import { FudisDateRangeItem } from '../../../../types/forms';
 
@@ -47,8 +47,8 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
     @Host() @Optional() private _textArea: TextAreaComponent,
     @Host() @Optional() private _datePicker: DatepickerComponent,
     @Host() @Optional() private _dateRange: DateRangeComponent,
-    @Host() @Optional() private _dateStart: DateStartErrorDirective,
-    @Host() @Optional() private _dateEnd: DateEndErrorDirective,
+    @Host() @Optional() private _dateStart: StartDateErrorDirective,
+    @Host() @Optional() private _dateEnd: EndDateErrorDirective,
     @Host() @Optional() private _inputWithLanguageOptions: InputWithLanguageOptionsComponent,
     @Host() @Optional() private _checkboxGroup: CheckboxGroupComponent,
     @Host() @Optional() private _select: SelectComponent,

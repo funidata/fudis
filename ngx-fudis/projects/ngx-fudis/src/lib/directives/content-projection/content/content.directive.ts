@@ -8,6 +8,9 @@ import { Directive, Input, TemplateRef } from '@angular/core';
 export class ContentDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}
 
+  /**
+   * Component type to protect wrong content projection to nested components
+   */
   @Input({ required: true }) type:
     | 'expandable'
     | 'notification'
@@ -18,27 +21,27 @@ export class ContentDirective {
 }
 
 /**
- * Fudis Footer directives
+ * Footer directives
  */
-@Directive({ selector: '[fudisFooterLeft]' })
+@Directive({ selector: '[fudisFooterContentLeft]' })
 export class FooterContentLeftDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}
 }
 
-@Directive({ selector: '[fudisFooterRight]' })
+@Directive({ selector: '[fudisFooterContentRight]' })
 export class FooterContentRightDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}
 }
 
 /**
- * Fudis Error Message directives for a use of Fudis Date Range Component
+ * Error Message directives for Date Range Component
  */
-@Directive({ selector: '[fudisDateStartError]' })
-export class DateStartErrorDirective {
+@Directive({ selector: '[fudisStartDateError]' })
+export class StartDateErrorDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}
 }
 
-@Directive({ selector: '[fudisDateEndError]' })
-export class DateEndErrorDirective {
+@Directive({ selector: '[fudisEndDateError]' })
+export class EndDateErrorDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}
 }
