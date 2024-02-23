@@ -1,5 +1,4 @@
 import { Component, Host, Inject, OnInit, Optional, effect } from '@angular/core';
-
 import { DOCUMENT } from '@angular/common';
 import { FudisSelectOption } from '../../../../../types/forms';
 import { FudisIdService } from '../../../../../services/id/id.service';

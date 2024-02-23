@@ -114,6 +114,61 @@ export const gridExclude: RegExp = excludeRegex([]);
 //   'width',
 // ]);
 
+export const selectCommonExclude: RegExp = excludeRegex([
+  'control',
+  'autocomplete',
+  'autocompleteClearButton',
+  'ariaLabel',
+  'disableGuidance',
+  'id',
+  'initialFocus',
+  'invalidState',
+  'tooltip',
+  'tooltipPosition',
+  'tooltipToggle',
+  'classes',
+  'controlValueChangedInternally',
+  'dropdownSelectionLabelText',
+  'focusSelector',
+  'noResultsFound',
+  'selectionUpdate',
+  'handleBlur',
+  'getSelectedOptions',
+  'handleCheckedSort',
+  'handleMultiSelectionChange',
+  'closeDropdown',
+  'getAutocompleteFilterText',
+  'openDropdown',
+  'setOptionVisibility',
+  'focusToInput',
+  'onBlur',
+  'translationOptionDisabledText',
+  'handleSelectionChange',
+  'handleChecked',
+  'handleClick',
+  'optionInputRef',
+  'checked',
+  'close',
+]);
+
+export const selectAndMultiselectExclude: RegExp = excludeRegex([
+  'translationOptionDisabledText',
+  'controlValueChangedInternally',
+  'dropdownSelectionLabelText',
+  'focusSelector',
+  'noResultsFound',
+  'handleSelectionChange',
+  'closeDropdown',
+  'getAutocompleteFilterText',
+  'openDropdown',
+  'setOptionVisibility',
+  'focusToInput',
+  'onBlur',
+  'getSelectedOptions',
+  'handleCheckedSort',
+  'handleMultiSelectionChange',
+]);
+
 export const textInputExclude: RegExp = excludeRegex(['focusToInput', 'onBlur']);
 
 export const textInputControlsExclude: RegExp = excludeRegex([

@@ -94,6 +94,9 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
     }
   }
 
+  /**
+   * Update select option visibility
+   */
   private _updateVisibilityFromControlUpdate(): void {
     if (this._parentSelect.control.value?.value === this.data.value) {
       this._parentSelect.noResultsFound = false;
