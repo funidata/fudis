@@ -1,5 +1,10 @@
+import { GridComponent } from '../../components/grid/grid/grid.component';
 import { FudisBreakpointStyleResponsive } from '../../types/breakpoints';
-import { FudisGridProperties, FudisGridFormInputWidth } from '../../types/grid';
+import {
+  FudisGridProperties,
+  FudisGridFormInputWidth,
+  gridInputPropertyDefaults,
+} from '../../types/grid';
 import { convertToRemValue } from '../../utilities/rem-converter';
 
 /**
@@ -100,4 +105,62 @@ export const getGridCssValue = (value: number | string, isGridItem?: boolean): s
     return '1/-1';
   }
   return replaceFormInputWidthsToRem(value);
+};
+
+/**
+ * Determine Grid Input Properties based on if Service defaults should be ignored or if application has provided values
+ */
+
+export const getGridInputPropertyObject = (
+  gridComponent: GridComponent,
+  serviceDefaults: FudisGridProperties,
+): FudisGridProperties => {
+  if (gridComponent.ignoreDefaults) {
+    /**
+     * Set values from Inputs, if not provided, use default values. Ignore default values from FudisGridService
+     */
+    return {
+      width: gridComponent.width ?? gridInputPropertyDefaults.width,
+      align: gridComponent.align ?? gridInputPropertyDefaults.align,
+      alignItemsX: gridComponent.alignItemsX ?? gridInputPropertyDefaults.alignItemsX,
+      alignItemsY: gridComponent.alignItemsY ?? gridInputPropertyDefaults.alignItemsY,
+      marginTop: gridComponent.marginTop ?? gridInputPropertyDefaults.marginTop,
+      marginBottom: gridComponent.marginBottom ?? gridInputPropertyDefaults.marginBottom,
+      marginSides: gridComponent.marginSides ?? gridInputPropertyDefaults.marginSides,
+      rowGap: gridComponent.rowGap ?? gridInputPropertyDefaults.rowGap,
+      columnGap: gridComponent.columnGap ?? gridInputPropertyDefaults.columnGap,
+      classes: gridComponent.classes ?? gridInputPropertyDefaults.classes,
+    };
+  } else {
+    /**
+     * Set values from Inputs, if not provided, check if FudisGridService has defaults, if not, use defaults.
+     */
+    return {
+      width: gridComponent.width ?? serviceDefaults.width ?? gridInputPropertyDefaults.width,
+      align: gridComponent.align ?? serviceDefaults.align ?? gridInputPropertyDefaults.align,
+      alignItemsX:
+        gridComponent.alignItemsX ??
+        serviceDefaults.alignItemsX ??
+        gridInputPropertyDefaults.alignItemsX,
+      alignItemsY:
+        gridComponent.alignItemsY ??
+        serviceDefaults.alignItemsY ??
+        gridInputPropertyDefaults.alignItemsY,
+      marginTop:
+        gridComponent.marginTop ?? serviceDefaults.marginTop ?? gridInputPropertyDefaults.marginTop,
+      marginBottom:
+        gridComponent.marginBottom ??
+        serviceDefaults.marginBottom ??
+        gridInputPropertyDefaults.marginBottom,
+      marginSides:
+        gridComponent.marginSides ??
+        serviceDefaults.marginSides ??
+        gridInputPropertyDefaults.marginSides,
+      rowGap: gridComponent.rowGap ?? serviceDefaults.rowGap ?? gridInputPropertyDefaults.rowGap,
+      columnGap:
+        gridComponent.columnGap ?? serviceDefaults.columnGap ?? gridInputPropertyDefaults.columnGap,
+      classes:
+        gridComponent.classes ?? serviceDefaults.classes ?? gridInputPropertyDefaults.classes,
+    };
+  }
 };

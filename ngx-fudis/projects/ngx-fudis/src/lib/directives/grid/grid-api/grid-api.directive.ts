@@ -14,19 +14,23 @@ import { FudisSpacing } from '../../../types/miscellaneous';
 })
 export class GridApiDirective {
   /**
-   * Alignment of Grid component inside its parent.
+   * Alignment of Grid component inside its parent. After initialisation defaults to: 'center'
    */
-  @Input() align: FudisGridAlign = 'center';
+  @Input() align: FudisGridAlign;
 
   /**
    * Horizontal alignment of Grid Items in a row.
+   *
+   * After initialisation defaults to: 'stretch'
    */
-  @Input() alignItemsX: FudisGridAlignItems = 'stretch';
+  @Input() alignItemsX: FudisGridAlignItems;
 
   /**
    * Vertical alignment of Grid Items in a row.
+   *
+   * After initialisation defaults to: 'stretch'
    */
-  @Input() alignItemsY: FudisGridAlignItems = 'stretch';
+  @Input() alignItemsY: FudisGridAlignItems;
 
   /**
    * Custom CSS classes for Grid element.
@@ -35,8 +39,10 @@ export class GridApiDirective {
 
   /**
    * Grid column gap. Using Fudis spacing token values of xxs to xxl and none.
+   *
+   * After initialisation defaults to: 'responsive'
    */
-  @Input() columnGap: FudisGridGap = 'responsive';
+  @Input() columnGap: FudisGridGap;
 
   /**
    * Setting of columns for the grid. Input will be converted to native CSS grid grid-template-columns values.
@@ -48,8 +54,11 @@ export class GridApiDirective {
    * Before md breakpoint Grid has default of '1fr' columns.
    * After md breakpoint it will have two columns 'repeat(2, 1fr)'
    * And after xl breakpoint 'repeat(3, 1fr)'
+   *
+   * After initialisation defaults to: '1fr'
+   *
    */
-  @Input() columns: FudisGridColumns = '1fr';
+  @Input() columns: FudisGridColumns;
 
   /**
    * To make Grid ignore default values defined by application and FudisGridService
@@ -58,23 +67,31 @@ export class GridApiDirective {
 
   /**
    * Margin bottom for the Grid.
+   *
+   * After initialisation defaults to: 'none'
    */
-  @Input() marginBottom: FudisSpacing = 'none';
+  @Input() marginBottom: FudisSpacing;
 
   /**
    * Horizontal margins left and right of the grid.
+   *
+   * After initialisation defaults to: 'none'
    */
-  @Input() marginSides: FudisGridMarginSide = 'none';
+  @Input() marginSides: FudisGridMarginSide;
 
   /**
    * Margin top for the Grid.
+   *
+   * After initialisation defaults to: 'none'
    */
-  @Input() marginTop: FudisSpacing = 'none';
+  @Input() marginTop: FudisSpacing;
 
   /**
    * Grid row gap. Using Fudis spacing token values of xxs to xxl and none.
+   *
+   * After initialisation defaults to: 'responsive'
    */
-  @Input() rowGap: FudisGridGap = 'responsive';
+  @Input() rowGap: FudisGridGap;
 
   /**
    * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
@@ -85,6 +102,7 @@ export class GridApiDirective {
    * sm = Viewports smaller than 768px
    * xs = Viewports smaller than 576px
    *
+   * After initialisation defaults to: 'xxl'
    */
-  @Input() width: FudisGridWidth = 'xxl';
+  @Input() width: FudisGridWidth;
 }

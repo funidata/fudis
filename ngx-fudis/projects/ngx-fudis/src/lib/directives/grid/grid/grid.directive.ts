@@ -1,5 +1,10 @@
 import { Directive, ElementRef, OnChanges, OnInit, Signal, effect } from '@angular/core';
-import { getGridClasses, getGridCssValue, replaceFormInputWidthsToRem } from '../gridUtils';
+import {
+  getGridClasses,
+  getGridCssValue,
+  getGridInputPropertyObject,
+  replaceFormInputWidthsToRem,
+} from '../gridUtils';
 import { GridApiDirective } from '../grid-api/grid-api.directive';
 import {
   FudisGridColumnsResponsive,
@@ -27,31 +32,16 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 
     this._element = _gridElement.nativeElement;
 
-    this._gridDefaults = _gridService.getGridDefaultValues();
-
     /**
-     * Set properties based on default values declared in GriApiDirective
+     * Calculate CSS Column attribute using default values
      */
-    this._calculateAndSetGridColumnsCss(this.columns);
-
-    this._gridInputProperties = {
-      width: this.width,
-      align: this.align,
-      alignItemsX: this.alignItemsX,
-      alignItemsY: this.alignItemsY,
-      marginTop: this.marginTop,
-      marginBottom: this.marginBottom,
-      marginSides: this.marginSides,
-      rowGap: this.rowGap,
-      columnGap: this.columnGap,
-      classes: this.classes,
-    };
+    this._calculateAndSetGridColumnsCss();
 
     /**
      * When screen is resized check and apply new rules for Grid columns
      */
     effect(() => {
-      this._breakpointService.getBreakpointState();
+      _breakpointService.getBreakpointState();
 
       if (
         typeof this._calculatedColumns !== 'string' &&
@@ -59,6 +49,16 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
       ) {
         this._setColumnsForBreakpoints(this._calculatedColumns);
       }
+    });
+
+    effect(() => {
+      /** Fetch defaulfs from service */
+      this._gridDefaults = _gridService.getGridDefaultValues();
+
+      /**
+       * Update properties if Grid defaults update
+       */
+      this._setAllProperties();
     });
   }
 
@@ -80,45 +80,39 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
   /**
    * Grid default values, setting will apply to all grid elements
    */
-  private _gridDefaults: Signal<FudisGridProperties | null>;
-
-  private _initDone: boolean = false;
+  private _gridDefaults: Signal<FudisGridProperties>;
 
   ngOnInit(): void {
-    if (!this.ignoreDefaults) {
-      this._gridInputProperties = { ...this._gridInputProperties, ...this._gridDefaults() };
-    }
+    this._setAllProperties();
   }
 
   ngOnChanges(changes: FudisComponentChanges<GridDirective>): void {
-    if (changes.columns?.currentValue) {
+    /**
+     * Calculate new grid-column-template values if this.columns or this.ignoreDefaults changes
+     */
+    if (changes.columns?.currentValue || changes.ignoreDefaults?.currentValue) {
       this._calculateAndSetGridColumnsCss(changes.columns?.currentValue);
+    } else {
+      /**
+       * Else changes are something which required re-calculation of CSS classes
+       */
+      this._updateChangedProperties(changes);
     }
-
-    this._setGridInputProperties(changes);
   }
 
-  private _setGridInputProperties(changes: FudisComponentChanges<GridDirective>): void {
-    let valuesToUpdate: FudisGridProperties = {};
-
-    Object.keys(changes).forEach((key) => {
-      if (key !== 'columns') {
-        const keyToUpdate: keyof FudisGridProperties = key as keyof FudisGridProperties;
-        const newValue = changes[keyToUpdate]?.currentValue;
-
-        valuesToUpdate = { ...valuesToUpdate, [keyToUpdate]: newValue };
-      }
-    });
-
-    this._gridInputProperties = { ...this._gridInputProperties, ...valuesToUpdate };
-
-    this._applyGridCss();
-  }
+  /* ---------------------------------------------
+   *
+   * Class functions for defining Grid's 'grid-template-columns' CSS value
+   *
+   * ---------------------------------------------
+   */
 
   /**
    * Set and config Grid's attributes from provided input properties
    */
-  private _calculateAndSetGridColumnsCss(columnFromInput: FudisGridColumns): void {
+  private _calculateAndSetGridColumnsCss(
+    columnFromInput: FudisGridColumns = gridColumnDefault,
+  ): void {
     this._calculatedColumns = this._calculateColumnsCssValue(columnFromInput);
     this._setColumnsForBreakpoints(this._calculatedColumns);
   }
@@ -159,6 +153,45 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
     );
   }
 
+  /* ---------------------------------------------
+   *
+   * Class functions for defining Grid's other than 'grid-template-columns' CSS values
+   *
+   * ---------------------------------------------
+   */
+
+  private _setAllProperties(): void {
+    this._gridInputProperties = getGridInputPropertyObject(this, this._gridDefaults());
+
+    this._applyGridCss();
+  }
+
+  /**
+   * Append changed properties to existing properties and update CSS
+   */
+  private _updateChangedProperties(changes: FudisComponentChanges<GridDirective>): void {
+    let valuesToUpdate: FudisGridProperties = {};
+
+    let updateCss = false;
+
+    Object.keys(changes).forEach((key) => {
+      const keyToUpdate: keyof FudisGridProperties = key as keyof FudisGridProperties;
+      if (changes[keyToUpdate]?.firstChange === false) {
+        const newValue = changes[keyToUpdate]?.currentValue;
+
+        valuesToUpdate = { ...valuesToUpdate, [keyToUpdate]: newValue };
+
+        updateCss = true;
+      }
+    });
+
+    if (updateCss) {
+      this._gridInputProperties = { ...this._gridInputProperties, ...valuesToUpdate };
+
+      this._applyGridCss();
+    }
+  }
+
   /**
    * Apply CSS settings from Inputs
    */
@@ -166,10 +199,6 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
     this._element.style.justifyItems = this._gridInputProperties.alignItemsX!;
 
     this._element.style.alignItems = this._gridInputProperties.alignItemsY!;
-
-    /**
-     * Get and apply list of CSS classes to align and position Grid
-     */
 
     this._element.classList.value = getGridClasses(this._gridInputProperties);
   }

@@ -12,6 +12,19 @@ import { FudisSpacing } from './miscellaneous';
  */
 export const gridColumnDefault = '1fr';
 
+export const gridInputPropertyDefaults: FudisGridProperties = {
+  align: 'center',
+  alignItemsX: 'stretch',
+  alignItemsY: 'stretch',
+  classes: [],
+  columnGap: 'responsive',
+  marginTop: 'none',
+  marginBottom: 'none',
+  marginSides: 'none',
+  rowGap: 'responsive',
+  width: 'xxl',
+};
+
 /**
  * Grid Columns property accepted input values
  */

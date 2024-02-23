@@ -28,13 +28,15 @@ export class FudisGridService {
       }
     });
 
-    this._defaultGridValues.set({ ...this._defaultGridValues, ...checkedNewValues });
+    this._defaultGridValues.set({ ...this._defaultGridValues(), ...checkedNewValues });
+
+    console.log(this._defaultGridValues());
   }
 
   /**
    * Get application's default values for Grid
    */
-  public getGridDefaultValues(): Signal<FudisGridProperties | null> {
+  public getGridDefaultValues(): Signal<FudisGridProperties> {
     return this._defaultGridValues.asReadonly();
   }
 }

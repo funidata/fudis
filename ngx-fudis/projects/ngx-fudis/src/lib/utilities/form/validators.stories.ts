@@ -170,7 +170,6 @@ const ValidatorsTemplate: StoryFn = (args) => ({
         <fudis-checkbox-group
           [title]="'At Least One Required Group Validator'"
           [formGroup]="checkboxGroupAtLeastOneRequired.formGroup"
-          [required]="true"
         >
           <fudis-checkbox
             *ngFor="let option of checkboxGroupAtLeastOneRequired.options"

@@ -75,14 +75,40 @@
 
       <fudis-expandable [title]="'Grid stuff'">
         <ng-template fudisContent type="expandable">
-          <fudis-heading [level]="3" [size]="'xl'">Väliotsikko</fudis-heading>
-          <fudis-grid>
-            <fudis-body-text>Showcase of grid items</fudis-body-text>
-            <fudis-body-text>Showcase of grid items</fudis-body-text>
-            <fudis-body-text>Showcase of grid items</fudis-body-text>
-            <fudis-body-text>Showcase of grid items</fudis-body-text>
-            <fudis-body-text>Showcase of grid items</fudis-body-text>
-            <fudis-body-text>Showcase of grid items</fudis-body-text>
+          <fudis-grid [columns]="1" [rowGap]="'xxl'">
+            <fudis-grid [columns]="2">
+              <fudis-heading [level]="3" [size]="'xl'">Grid stuff!</fudis-heading>
+              <fudis-button
+                [label]="'Update Grid Service defaults'"
+                (handleClick)="updateGridServiceDefaults()"
+              />
+              <fudis-button
+                [label]="'Update Grid [alignItemsX] value'"
+                (handleClick)="updateGridAlignValue()"
+              />
+            </fudis-grid>
+
+            <fudis-grid [alignItemsX]="_gridAlignValue">
+              <fudis-body-text
+                >This Grid has [alignItemsX]="'{{ _gridAlignValue }}'"</fudis-body-text
+              >
+              <fudis-body-text
+                >Even if Service values are updated, this should not affect
+                alignment</fudis-body-text
+              >
+            </fudis-grid>
+            <fudis-grid>
+              <fudis-body-text>This Grid has no set alignItemsX value</fudis-body-text>
+              <fudis-body-text>It should listen to Service updates!</fudis-body-text>
+            </fudis-grid>
+
+            <fudis-grid [ignoreDefaults]="true">
+              <fudis-body-text
+                >This Grid has no set alignItemsX value, but it is ignoring defaults from
+                Service!</fudis-body-text
+              >
+              <fudis-body-text>It should NOT listen to Service updates!</fudis-body-text>
+            </fudis-grid>
           </fudis-grid>
         </ng-template>
       </fudis-expandable>
@@ -123,7 +149,6 @@
               <fudis-checkbox-group
                 [title]="'Choose berry'"
                 [helpText]="'Berries are yummy'"
-                [required]="true"
                 [tooltip]="'We want to know!'"
                 [formGroup]="testFormGroup.controls['checkboxFormGroup']"
               >

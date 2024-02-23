@@ -26,7 +26,6 @@ import { ValidatorErrorMessageComponent } from '../../../error-message/validator
     [control]="control"
     [id]="id"
     [dropdownOpen]="dropdownOpen"
-    [required]="true"
   />`,
 })
 class MockSelecAutocompleteComponent {

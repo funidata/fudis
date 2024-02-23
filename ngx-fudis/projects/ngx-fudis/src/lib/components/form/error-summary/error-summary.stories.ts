@@ -66,7 +66,6 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
             <fudis-checkbox-group
               [formGroup]="formExample.controls.courseBooks"
               [title]="'Course books'"
-              [required]="true"
               [helpText]="'Select 1-2 coursebooks'"
             >
               <fudis-checkbox [controlName]="'first'" [label]="'Heir to the Empire'" />
