@@ -23,3 +23,17 @@ services:
       - 4200:4200
     volumes:
       - ./ngx-fudis/projects/dev/src:/usr/src/app/projects/dev/src
+
+  fudis-vr:
+    build: ./test
+    container_name: fudis-vr
+    tty: true
+    ports:
+      - 9323:9323
+    environment:
+      - PLAYWRIGHT_BASE_URL=http://fudis-storybook:6006
+      - CONTAINER=true
+    volumes:
+      - ./test/visual-regression:/usr/src/app/visual-regression
+      - ./test/playwright-report:/usr/src/app/playwright-report
+      - ./test/test-results:/usr/src/app/test-results

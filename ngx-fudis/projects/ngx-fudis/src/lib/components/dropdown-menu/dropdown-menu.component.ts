@@ -58,9 +58,10 @@ export class DropdownMenuComponent
       this._idService.addNewParentId('dropdown-menu', this.id);
     } else {
       this.id = this._idService.getNewParentId('dropdown-menu');
-      if (this._button) {
-        this._button.dropdownMenuId = this.id;
-      }
+      // TODO: Enable when Dropdown Menu is re-enabled
+      // if (this._button) {
+      //   this._button.dropdownMenuId = this.id;
+      // }
     }
   }
 
