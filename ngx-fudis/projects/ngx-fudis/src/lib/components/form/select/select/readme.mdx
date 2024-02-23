@@ -1,5 +1,7 @@
-import { Meta, Canvas } from "@storybook/blocks";
+import { Meta, Canvas, ArgTypes } from "@storybook/blocks";
+import { SelectComponent } from "./select.component";
 import * as Stories from "./select.stories";
+import { selectAndMultiselectExclude } from "../../../../utilities/storybook";
 
 <Meta title="Components/Form/Select/Select" />
 
@@ -17,7 +19,7 @@ Therefore please check also [Common Features](/docs/components-form-select-commo
 
 ### Form Control
 
-Select Component requires a Angular Form Control. Type and value of control can be either `null` or `FudisSelectOption`.
+Select Component requires Angular Form Control. Type and value of control can be either `null` or `FudisSelectOption`.
 
 ```
 // TypeScript
@@ -37,3 +39,7 @@ myControl: new FormControl<null | FudisSelectOption>(defaultOption)
 ## Example
 
 <Canvas of={Stories.Example}></Canvas>
+
+## Properties
+
+<ArgTypes of={SelectComponent} exclude={selectAndMultiselectExclude} />

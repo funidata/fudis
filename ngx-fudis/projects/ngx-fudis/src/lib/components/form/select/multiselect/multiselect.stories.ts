@@ -1,4 +1,5 @@
 import { Meta, applicationConfig, StoryFn } from '@storybook/angular';
+import { action } from '@storybook/addon-actions';
 import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
@@ -6,7 +7,7 @@ import { FudisValidators } from '../../../../utilities/form/validators';
 import { MultiselectComponent } from './multiselect.component';
 import readme from './readme.mdx';
 import { groupedMockData, defaultOptions } from '../common/mock_data';
-import { action } from '@storybook/addon-actions';
+import { selectCommonExclude } from '../../../../utilities/storybook';
 
 export default {
   title: 'Components/Form/Select/Multiselect',
@@ -21,15 +22,7 @@ export default {
       page: readme,
     },
     controls: {
-      exclude: [
-        '_id',
-        '_required',
-        '_requiredText',
-        '_translations',
-        'ngOnInit',
-        'ngOnChanges',
-        'onBlur',
-      ],
+      exclude: selectCommonExclude,
     },
   },
   argTypes: {
@@ -40,6 +33,9 @@ export default {
     showSelectionChips: {
       options: [true, false],
       control: { type: 'radio' },
+    },
+    helpText: {
+      control: { type: 'text' },
     },
   },
 } as Meta;

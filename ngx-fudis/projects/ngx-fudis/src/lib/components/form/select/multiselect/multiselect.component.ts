@@ -154,7 +154,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
   /**
    * Update internal states when Application updates control value
    */
-  protected _updateMultiselectionFromControlValue(): void {
+  private _updateMultiselectionFromControlValue(): void {
     if (this.control.value) {
       this._sortedSelectedOptions = sortValues(this.control.value);
       this._sortedSelectedOptionsSignal.set(this._sortedSelectedOptions);

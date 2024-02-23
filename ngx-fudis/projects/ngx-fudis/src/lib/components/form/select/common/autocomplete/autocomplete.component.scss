@@ -3,7 +3,6 @@
 @use "../../../../../foundations/typography/mixins.scss" as typography;
 @use "../../../../../foundations/colors/mixins.scss" as colorMixins;
 @use "../../../../../foundations/focus/mixins.scss" as focus;
-@use "../../../../../foundations/colors/tokens.scss" as colors;
 
 .fudis-select-autocomplete-host {
   display: block;

@@ -3,7 +3,6 @@
 @use "../../../../foundations/typography/mixins.scss" as typography;
 @use "../../../../foundations/colors/mixins.scss" as colorMixins;
 @use "../../../../foundations/focus/mixins.scss" as focus;
-@use "../../../../foundations/colors/tokens.scss" as colors;
 
 .fudis-select-host {
   display: block;
@@ -39,7 +38,6 @@
 
   &__input {
     @include typography.text-field-input;
-    @include borders.border("1px", "solid", "gray-dark");
     @include borders.border-radius("2px");
 
     box-sizing: border-box;
