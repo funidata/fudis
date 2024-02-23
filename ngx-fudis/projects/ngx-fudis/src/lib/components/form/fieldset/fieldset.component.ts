@@ -41,24 +41,24 @@ export class FieldSetComponent
   }
 
   /**
-   * Content directive for Fudis Fieldset Actions
+   * Content directive for Fieldset Actions
    */
-  @ContentChild(ActionsDirective) headerActions: ActionsDirective | null;
+  @ContentChild(ActionsDirective) protected _headerActions: ActionsDirective | null;
 
   /**
-   * Content directive for Fudis Fieldset Notifications
+   * Content directive for Fieldset Notifications
    */
-  @ContentChild(NotificationsDirective) notifications: NotificationsDirective;
+  @ContentChild(NotificationsDirective) protected _notifications: NotificationsDirective;
 
   /**
-   * Content directive for Fudis Fieldset Content
+   * Content directive for Fieldset Content
    */
-  @ContentChild(ContentDirective) content: ContentDirective;
+  @ContentChild(ContentDirective) protected _content: ContentDirective;
 
   /**
    * View for native fieldset element
    */
-  @ViewChild('fieldset') fieldset: ElementRef;
+  @ViewChild('fieldset') private _fieldset: ElementRef;
 
   /**
    * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
@@ -147,7 +147,7 @@ export class FieldSetComponent
 
   ngAfterViewInit(): void {
     if (this.initialFocus) {
-      this.fieldset.nativeElement.focus();
+      this._fieldset.nativeElement.focus();
     }
   }
 
