@@ -88,9 +88,9 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
 
   ngOnChanges(changes: FudisComponentChanges<GridDirective>): void {
     /**
-     * Calculate new grid-column-template values if this.columns or this.ignoreDefaults changes
+     * Calculate new grid-column-template values if this.columns or this.serviceDefaults changes
      */
-    if (changes.columns?.currentValue || changes.ignoreDefaults?.currentValue) {
+    if (changes.columns?.currentValue || changes.serviceDefaults?.currentValue) {
       this._calculateAndSetGridColumnsCss(changes.columns?.currentValue);
     } else {
       /**
@@ -128,7 +128,7 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
       return getGridCssValue(columnFromInput);
     }
     // Get breakpoint settings with provided default values and Input values
-    else if (!this.ignoreDefaults && this._gridDefaults()?.columns) {
+    else if (this.serviceDefaults && this._gridDefaults()?.columns) {
       const combinedValues: FudisGridColumnsResponsive = {
         ...this._gridDefaults()!.columns,
         ...columnFromInput,

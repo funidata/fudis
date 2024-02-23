@@ -115,7 +115,7 @@ export const getGridInputPropertyObject = (
   gridComponent: GridComponent,
   serviceDefaults: FudisGridProperties,
 ): FudisGridProperties => {
-  if (gridComponent.ignoreDefaults) {
+  if (!gridComponent.serviceDefaults) {
     /**
      * Set values from Inputs, if not provided, use default values. Ignore default values from FudisGridService
      */

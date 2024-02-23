@@ -57,7 +57,7 @@ class HostComponent {
 
   classes: string[] = [];
 
-  ignoreDefaults: boolean = false;
+  serviceDefaults: boolean = true;
 
   marginBottom: FudisSpacing = 'none';
 

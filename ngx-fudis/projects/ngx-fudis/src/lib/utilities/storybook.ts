@@ -106,7 +106,7 @@ export const gridExclude: RegExp = excludeRegex([]);
 //   'alignItemsY',
 //   'classes',
 //   'columnGap',
-//   'ignoreDefaults',
+//   'serviceDefaults',
 //   'marginBottom',
 //   'marginSides',
 //   'marginTop',

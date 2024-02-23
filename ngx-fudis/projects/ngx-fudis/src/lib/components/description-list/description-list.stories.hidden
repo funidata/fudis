@@ -48,7 +48,7 @@
 //   'classes',
 //   'columnGap',
 //   'columns',
-//   'ignoreDefaults',
+//   'serviceDefaults',
 //   'marginBottom',
 //   'marginSides',
 //   'marginTop',
