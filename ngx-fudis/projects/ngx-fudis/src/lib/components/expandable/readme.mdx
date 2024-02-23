@@ -9,13 +9,13 @@ import { expandableExclude } from "../../utilities/storybook";
 
 Fudis Expandable is an accordion component where its content can be expanded or collapsed to create more compact pages.
 
-## Commonly used Properties
+## Commonly Used Properties
 
 ### Variant
 
 Fudis Expandable has two variant types: `regular` and `lite`.
 
-### Opening and Closing programatically
+### Opening and Closing Programatically
 
 Expandable is by default closed; this can be programatically controlled with the `closed` input property.
 
@@ -29,12 +29,12 @@ Expandable's content and additional header buttons are provided via content proj
 
 ```
 <fudis-expandable>
-  <ng-template fudisActions type="expandable">
-    <fudis-button/>
+  <ng-template fudisActions [type]="'expandable'">
+    <fudis-button />
   </ng-template>
 
-  <ng-template fudisContent type="expandable">
-    <your-body-template/>
+  <ng-template fudisContent [type]="'expandable'">
+    <your-body-template />
   </ng-template>
 </fudis-expandable>
 ```

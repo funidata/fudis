@@ -174,6 +174,9 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
     // }
   }
 
+  /**
+   * Add aria-label for buttons without visible label
+   */
   private _getAriaLabel(): string {
     if (this.labelHidden || this.size === 'icon-only') {
       return this.ariaLabel ? `${this.label} ${this.ariaLabel}` : this.label;
@@ -181,6 +184,9 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
     return this.ariaLabel;
   }
 
+  /**
+   * Determine icon color based on button variant. Return CSS classes with size and variant
+   */
   private _getClasses(): string[] {
     if (this.disabled) {
       this._iconColor = 'default';

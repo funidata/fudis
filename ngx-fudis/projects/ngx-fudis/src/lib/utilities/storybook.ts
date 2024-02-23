@@ -66,12 +66,11 @@ export const dialogExclude: RegExp = excludeRegex(['closeButtonPositionAbsolute'
 
 export const headingControlsExclude: RegExp = excludeRegex(['id']);
 
-export const expandableCommonExclude: string[] = [
+const expandableCommonExclude: string[] = [
   'ref',
   'setClosedStatus',
   'content',
   'headerButtons',
-  'errorSummaryBreadcrumb',
   'addToErrorSummary',
   'removeFromErrorSummary',
 ];
@@ -81,6 +80,7 @@ export const expandableExclude: RegExp = excludeRegex([...expandableCommonExclud
 export const expandableControlExclude: RegExp = excludeRegex([
   ...expandableCommonExclude,
   'closedChange',
+  'errorSummaryBreadcrumb',
 ]);
 
 // This is for additional Grid example tabs (Equally Wide Columns and Unequally Wide Columns).
@@ -111,8 +111,6 @@ export const gridExclude: RegExp = excludeRegex([
 
 export const textInputExclude: RegExp = excludeRegex(['focusToInput', 'onBlur']);
 
-export const iconExclude: RegExp = excludeRegex(['classes']);
-
 export const textInputControlsExclude: RegExp = excludeRegex([
   'control',
   'focusToInput',
@@ -125,12 +123,6 @@ export const textInputControlsExclude: RegExp = excludeRegex([
 ]);
 
 export const tooltipExclude: RegExp = excludeRegex([
-  'onMouseEnter',
-  'onMouseLeave',
-  'onFocus',
-  'onBlur',
-  'onClick',
-  'onKeyUp',
   'handleClick',
   'handleBlur',
   'buttonEl',
@@ -143,4 +135,5 @@ export const tooltipExclude: RegExp = excludeRegex([
   'size',
   'type',
   'variant',
+  'buttonClick',
 ]);

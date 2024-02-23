@@ -109,12 +109,12 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
   protected _title: string;
 
   /**
-   * Object to send to Error Summary service
+   * Object to send to Error Summary Service
    */
   private _errorSummaryInfo: FudisFormErrorSummarySection;
 
   /**
-   * Is info sent to Error Summary service
+   * Is info sent to Error Summary Service
    */
   private _errorSummaryInfoSent: boolean = false;
 
@@ -142,7 +142,7 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   /**
-   * Send error object to Error Summary service
+   * Send error object to Error Summary Service
    */
   private _addToErrorSummary(): void {
     if (this.errorSummaryBreadcrumb) {
@@ -156,7 +156,7 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   /**
-   * Remove error object from Error Summary service
+   * Remove error object from Error Summary Service
    */
   private _removeFromErrorSummary(): void {
     if (this._errorSummaryInfoSent) {

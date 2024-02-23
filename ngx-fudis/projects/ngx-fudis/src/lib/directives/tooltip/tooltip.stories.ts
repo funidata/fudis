@@ -38,7 +38,7 @@ export const Example: StoryFn<TooltipDirective> = (args: TooltipDirective) => ({
       style="margin-right: 2rem;"
       [label]="'Hover me'"
       [tooltip]="tooltip"
-      [tooltipPosition]="false"
+      [tooltipPosition]="tooltipPosition"
     >
     </fudis-button>
     <fudis-button
