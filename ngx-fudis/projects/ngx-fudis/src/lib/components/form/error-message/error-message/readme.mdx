@@ -5,34 +5,16 @@ import * as ErrorMessageStories from "./error-message.stories";
 
 # Error Message
 
-Fudis form component's errors can be achieved in two ways:
+Form component's errors can be achieved in two ways:
 
 - Through form control's validators: [Fudis Validators](/docs/utilities-validators--documentation).
 - As an Error Message child component, for cases when using a validator or creating a custom one can be tricky.
 
 If your error message repeats multiple times across your form or application, it is recommended to create your own [Fudis Validator](/docs/utilities-validators--documentation).
 
-This page is documentation for the latter Error Message component, which binds custom error message to Fudis form components through content projection.
+This page is documentation for the latter Error Message Component, which binds custom error message to Fudis Form components through content projection.
 
 This requires the use of selector `fudis-error-message`. Both Error Message and Fudis Validator errors create the same UI result and renders errors under the Guidance Component.
-
-## Examples
-
-The following example demostrates how custom error message can be used along with Fudis Validator error messages. By toggling 'Switch Message Content' button will dynamically update error message content.
-
-<Canvas of={ErrorMessageStories.ErrorMessageExample}></Canvas>
-
-## Currently Supported Form Components
-
-- [Text Input](/docs/components-form-text-input--documentation)
-- [Text Area](/docs/components-form-text-area--documentation)
-- [Select](/docs/components-form-select--documentation)
-- [Checkbox Group](/docs/components-form-checkbox-group--documentation)
-  {/* prettier-ignore */}
-{/* - [Date Picker](/docs/components-form-date-datepicker--documentation)
-- [Date Range](/docs/components-form-date-date-range--documentation)
-- [Radio Button Group](/docs/components-form-radio-button-group--documentation)
-- [Input with Language Options](/docs/components-form-input-with-language-options--documentation) \*/}
 
 ## Usage Guidelines
 
@@ -55,17 +37,23 @@ Message parameter can be passed either as a string or as an observable string.
 </fudis-text-input>
 ```
 
+## Example
+
+The following example demostrates how custom error message can be used along with Fudis Validator error messages. By toggling 'Switch Message Content' button will dynamically update error message content.
+
+<Canvas of={ErrorMessageStories.Example}></Canvas>
+
 {/* prettier-ignore */}
 {/* ### Error Message with Date Range Component
 
-When it is mandatory to target error message to a single Form Control in Date Range component, use `fudisDateStartError`and `fudisDateEndError` directives for selecting between start and end time inputs.
+When it is mandatory to target error message to a single Form Control in Date Range component, use `fudisStartDateError`and `fudisEndDateError` directives for selecting between start and end time inputs.
 
 ````
 <fudis-date-range [startDate]="startDate" [endDate]="endDate">
-	<ng-template fudisDateStartError>
+	<ng-template fudisStartDateError>
 		<fudis-error-message [message]="'Error on the start date'" *ngIf="startDateErrorCondition" />
 	</ng-template>
-	<ng-template fudisDateEndError>
+	<ng-template fudisEndDateError>
 		<fudis-error-message [message]="'Error on the end date'" *ngIf="endDateErrorCondition" />
 	</ng-template>
 </fudis-date-range>
@@ -73,12 +61,11 @@ When it is mandatory to target error message to a single Form Control in Date Ra
 
 ## Accessibility
 
-- Related Form field label and id are linked to error message
-- Error Message is correctly passed to [Error Summary](/docs/components-form-error-summary--documentation).
+- Related form field label and id are linked to error message
+- Error Message is correctly passed to [Error Summary](/docs/components-form-error-summary--documentation)
 
-## Related Components
+## Currently Supported Form Components
 
-- [Error Summary](/docs/components-form-error-summary--documentation)
 - [Text Input](/docs/components-form-text-input--documentation)
 - [Text Area](/docs/components-form-text-area--documentation)
 - [Select](/docs/components-form-select--documentation)
@@ -88,4 +75,8 @@ When it is mandatory to target error message to a single Form Control in Date Ra
 - [Date Range](/docs/components-form-date-date-range--documentation)
 - [Radio Button Group](/docs/components-form-radio-button-group--documentation)
 - [Input with Language Options](/docs/components-form-input-with-language-options--documentation) \*/}
+
+## Related Components
+
+- [Error Summary](/docs/components-form-error-summary--documentation)
 ````

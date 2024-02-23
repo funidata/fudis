@@ -53,9 +53,9 @@
           </ng-container>
         </div>
       </ng-container>
-      <ng-container *ngIf="headerContent">
+      <ng-container *ngIf="_headerContent">
         <div class="fudis-form__header__main__content">
-          <ng-container *ngTemplateOutlet="headerContent!.templateRef" />
+          <ng-container *ngTemplateOutlet="_headerContent!.templateRef" />
         </div>
       </ng-container>
       <ng-container *ngIf="_formElement !== undefined && errorSummaryVisible">
@@ -69,19 +69,19 @@
       </ng-container>
     </div>
   </div>
-  <ng-container *ngIf="headerActions?.type === 'form' && !_dialogParent">
+  <ng-container *ngIf="_headerActions?.type === 'form' && !_dialogParent">
     <div class="fudis-form__header__actions">
-      <ng-container *ngTemplateOutlet="headerActions!.templateRef" />
+      <ng-container *ngTemplateOutlet="_headerActions!.templateRef" />
     </div>
   </ng-container>
-  <ng-container *ngIf="mainContent?.type === 'form'">
+  <ng-container *ngIf="_mainContent?.type === 'form'">
     <div class="fudis-form__content">
-      <ng-container *ngTemplateOutlet="mainContent!.templateRef" />
+      <ng-container *ngTemplateOutlet="_mainContent!.templateRef" />
     </div>
   </ng-container>
-  <ng-container *ngIf="headerActions?.type === 'form' && _dialogParent">
+  <ng-container *ngIf="_headerActions?.type === 'form' && _dialogParent">
     <div class="fudis-form__header__actions__dialog">
-      <ng-container *ngTemplateOutlet="headerActions!.templateRef" />
+      <ng-container *ngTemplateOutlet="_headerActions!.templateRef" />
     </div>
   </ng-container>
 </form>

@@ -213,7 +213,7 @@ export default {
   argTypes: {
     size: {
       options: ['sm', 'md', 'lg', 'xl', 'initial'],
-      control: { type: 'radio' },
+      control: { type: 'select' },
     },
   },
 } as Meta;

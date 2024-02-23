@@ -1,7 +1,7 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { ExpandableComponent } from './expandable.component';
 import readme from './readme.mdx';
-import { expandableExclude } from '../../utilities/storybook';
+import { expandableExclude, expandableControlExclude } from '../../utilities/storybook';
 
 export default {
   title: 'Components/Expandable',
@@ -14,7 +14,17 @@ export default {
       },
     },
     controls: {
-      exclude: expandableExclude,
+      exclude: expandableControlExclude,
+    },
+  },
+  argTypes: {
+    variant: {
+      options: ['regular', 'lite'],
+      control: { type: 'radio' },
+    },
+    level: {
+      options: [1, 2, 3, 4, 5, 6],
+      control: { type: 'select' },
     },
   },
 } as Meta;
@@ -60,44 +70,48 @@ const ActionTemplate: StoryFn<ExpandableComponent> = (args: ExpandableComponent)
   `,
 });
 
-export const Expandable = Template.bind({});
-Expandable.args = {
+export const Example = Template.bind({});
+Example.args = {
   variant: 'regular',
-  title: 'Regular expandable',
-  closed: true,
   level: 2,
+  title: 'Regular expandable',
+  subTitle: undefined,
+  closed: true,
   padding: 'default',
 };
 
-export const ExpandableWithSubTitle = Template.bind({});
-ExpandableWithSubTitle.args = {
+export const ExampleWithSubTitle = Template.bind({});
+ExampleWithSubTitle.args = {
   variant: 'regular',
+  level: 2,
   title: 'Regular expandable with a sub title',
   subTitle: 'Use me for an additional information',
   closed: true,
-  level: 2,
   padding: 'default',
 };
 
-export const ExpandableWithActionButton = ActionTemplate.bind({});
-ExpandableWithActionButton.args = {
+export const ExampleWithActionButton = ActionTemplate.bind({});
+ExampleWithActionButton.args = {
   variant: 'regular',
+  level: 2,
   title: 'Regular expandable with an action button',
+  subTitle: undefined,
   closed: true,
-  level: 2,
   padding: 'default',
 };
 
-export const ExpandableLite = Template.bind({});
-ExpandableLite.args = {
+export const ExampleLite = Template.bind({});
+ExampleLite.args = {
   variant: 'lite',
-  title: 'Lite expandable',
-  closed: true,
   level: 2,
+  title: 'Lite expandable',
+  subTitle: undefined,
+  closed: true,
   padding: 'default',
 };
 
-export const AllVariants: StoryFn = () => ({
+export const AllVariants: StoryFn<ExpandableComponent> = (args: ExpandableComponent) => ({
+  props: args,
   template: html`
     <fudis-grid [align]="'start'" [width]="'xl'">
       <fudis-expandable [title]="'Regular expandable'">
@@ -129,3 +143,9 @@ export const AllVariants: StoryFn = () => ({
     </fudis-grid>
   `,
 });
+
+AllVariants.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
+};

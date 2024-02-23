@@ -1,0 +1,89 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Documentation/Development/Command Reference" />
+
+# Command Reference
+
+Run commands in repository root unless otherwise specified.
+
+This reference includes the commands meant to be commonly used in development work. The `package.json` files include many others, too.
+
+#### Start Development Environment
+
+Starts Storybook with hot-reload for both library code and Storybook markup. Access at [http://localhost:6006](http://localhost:6006).
+
+After starting, the terminal is attached to log output. You can detach (CTRL+C) from the logs and the application will keep running in the background. Re-attach with `npm run logs`.
+
+```bash
+npm start
+```
+
+#### Start Sandbox Application
+
+Starts the sandbox application with hot-reload. Access at [http://localhost:4200](http://localhost:4200).
+
+After starting, the terminal is attached to log output. You can detach (CTRL+C) from the logs and the application will keep running in the background. Re-attach with `npm run logs`.
+
+```bash
+npm run start:sandbox
+```
+
+#### Stop Development Environment
+
+```bash
+npm stop
+```
+
+#### Install Dependencies Locally
+
+```bash
+npm ci
+```
+
+#### View Logs
+
+Attaches terminal to Docker's interactive log output. Use this to see the logs again after detaching.
+
+```bash
+npm run logs
+```
+
+## Testing Commands
+
+#### Run Component Tests
+
+```bash
+npm test
+```
+
+#### Run Visual Regression Tests
+
+```bash
+npm run test:vr
+```
+
+Filenames (full or partial) can be appended to this command with NPM's "`--`" syntax to run tests for matching files only, e.g. `npm run test:vr -- badge`.
+
+#### Launch Playwright UI
+
+Opens in a new Chromium instance.
+
+```bash
+npm run test:ui
+```
+
+#### Lint Code
+
+Lints `.js`, `.ts` and `.html` files.
+
+```bash
+npm run lint
+```
+
+#### Lint SCSS
+
+Runs `stylelint` on SCSS files.
+
+```bash
+npm run stylelint
+```

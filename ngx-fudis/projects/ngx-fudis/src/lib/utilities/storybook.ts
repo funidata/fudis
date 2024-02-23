@@ -17,7 +17,7 @@ export const excludeRegex = (array?: string[]): RegExp => {
 
 export const excludeAllRegex: RegExp = /.*/;
 
-export const buttonExclude: RegExp = excludeRegex([
+const buttonCommonExclude: string[] = [
   'classes',
   'dropdownMenuId',
   'dropdownOpen',
@@ -27,7 +27,17 @@ export const buttonExclude: RegExp = excludeRegex([
   'openMenu',
   'closeMenu',
   'toggleMenu',
+];
+
+export const buttonExclude: RegExp = excludeRegex([...buttonCommonExclude]);
+
+export const buttonControlsExclude: RegExp = excludeRegex([
+  ...buttonCommonExclude,
+  'handleClick',
+  'labelHidden',
 ]);
+
+export const buttonIconOnlyExclude: RegExp = excludeRegex([...buttonCommonExclude, 'handleClick']);
 
 export const checkboxGroupExclude: RegExp = excludeRegex([
   'groupBlurredOut',
@@ -56,14 +66,21 @@ export const dialogExclude: RegExp = excludeRegex(['closeButtonPositionAbsolute'
 
 export const headingControlsExclude: RegExp = excludeRegex(['id']);
 
-export const expandableExclude: RegExp = excludeRegex([
+const expandableCommonExclude: string[] = [
   'ref',
   'setClosedStatus',
   'content',
   'headerButtons',
-  'errorSummaryBreadcrumb',
   'addToErrorSummary',
   'removeFromErrorSummary',
+];
+
+export const expandableExclude: RegExp = excludeRegex([...expandableCommonExclude]);
+
+export const expandableControlExclude: RegExp = excludeRegex([
+  ...expandableCommonExclude,
+  'closedChange',
+  'errorSummaryBreadcrumb',
 ]);
 
 // This is for additional Grid example tabs (Equally Wide Columns and Unequally Wide Columns).
@@ -140,4 +157,20 @@ export const textInputControlsExclude: RegExp = excludeRegex([
   'disableGuidance',
   'id',
   'initialFocus',
+]);
+
+export const tooltipExclude: RegExp = excludeRegex([
+  'handleClick',
+  'handleBlur',
+  'buttonEl',
+  'label',
+  'labelHidden',
+  'ariaLabel',
+  'disabled',
+  'icon',
+  'iconRotate',
+  'size',
+  'type',
+  'variant',
+  'buttonClick',
 ]);

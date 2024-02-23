@@ -8,6 +8,62 @@
     [attr.id]="_id"
     (click)="!disabled && buttonClick($event)"
     [ngClass]="_classList"
+    fudisTooltip
+    [tooltip]="tooltip"
+    [tooltipPosition]="tooltipPosition"
+    [tooltipToggle]="tooltipToggle"
+  >
+    <ng-container *ngIf="icon">
+      <div class="fudis-button__icon">
+        <fudis-icon
+          class="fudis-button__icon__component"
+          [color]="_iconColor"
+          [icon]="icon"
+          [rotate]="iconRotate"
+        ></fudis-icon>
+      </div>
+    </ng-container>
+    {{ labelHidden || size === "icon-only" ? "" : label }}
+  </button>
+</ng-container>
+
+<ng-container *ngIf="!tooltip">
+  <button
+    #buttonElement
+    [type]="type"
+    (blur)="handleBlur($event)"
+    [attr.aria-disabled]="disabled"
+    [attr.aria-label]="_ariaLabel"
+    [attr.id]="_id"
+    (click)="!disabled && buttonClick($event)"
+    [ngClass]="_classList"
+  >
+    <ng-container *ngIf="icon">
+      <div class="fudis-button__icon">
+        <fudis-icon
+          class="fudis-button__icon__component"
+          [color]="_iconColor"
+          [icon]="icon"
+          [rotate]="iconRotate"
+        ></fudis-icon>
+      </div>
+    </ng-container>
+    {{ labelHidden || size === "icon-only" ? "" : label }}
+  </button>
+</ng-container>
+
+<!-- TODO: Enable when Dropdown Menu is re-enabled -->
+<!-- 
+<ng-container *ngIf="tooltip">
+  <button
+    #buttonElement
+    [type]="type"
+    (blur)="handleBlur($event)"
+    [attr.aria-disabled]="disabled"
+    [attr.aria-label]="_ariaLabel"
+    [attr.id]="_id"
+    (click)="!disabled && buttonClick($event)"
+    [ngClass]="_classList"
     [attr.aria-expanded]="!asMenuButton ? null : dropdownOpen"
     fudisTooltip
     [tooltip]="tooltip"
@@ -57,4 +113,4 @@
 
 <ng-container *ngIf="asMenuButton && dropdownOpen">
   <ng-content></ng-content>
-</ng-container>
+</ng-container> -->

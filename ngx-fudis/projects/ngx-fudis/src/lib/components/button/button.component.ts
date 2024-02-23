@@ -26,9 +26,15 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
     this._id = _idService.getNewId('button');
   }
 
-  @HostBinding('class') classes = 'fudis-button-host';
+  /**
+   * Binding host CSS class to component wrapper
+   */
+  @HostBinding('class') private _classes = 'fudis-button-host';
 
-  @ViewChild('buttonElement') buttonEl: ElementRef<HTMLButtonElement>;
+  /**
+   * Reference to native button element
+   */
+  @ViewChild('buttonElement') public buttonEl: ElementRef<HTMLButtonElement>;
 
   /**
    * Text content of the button
@@ -76,9 +82,10 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
   @Input() iconRotate: FudisIconRotate = 'none';
 
   /**
+   * TODO: Enable when Dropdown Menu is re-enabled
    * Assign button as menu button with dropdown
+   * @Input() asMenuButton: boolean = false;
    */
-  @Input() asMenuButton: boolean = false;
 
   /**
    * Optional click handler
@@ -87,13 +94,14 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
 
   /**
    * Toggle menu button
+   *   public dropdownOpen: boolean = false;
    */
-  public dropdownOpen: boolean = false;
 
   /**
    * Id of child Dropdown Menu. Passed from child to parent Button.
+   *
+   *   public dropdownMenuId: string;
    */
-  public dropdownMenuId: string;
 
   /**
    * Automatically sets icon color based on button variant
@@ -120,44 +128,55 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
     this._ariaLabel = this._getAriaLabel();
   }
 
+  /**
+   * Button click event
+   */
   public buttonClick(event: Event): void {
-    if (this.asMenuButton) {
-      this.toggleMenu();
-    }
+    // if (this.asMenuButton) {
+    //   this.toggleMenu();
+    // }
     this.handleClick.emit(event);
   }
 
   /**
    * Toggling when Button is used as Menu Button
+   * public toggleMenu(): void {
+   *  this.dropdownOpen = !this.dropdownOpen;
+   * }
+   *
    */
-  public toggleMenu(): void {
-    this.dropdownOpen = !this.dropdownOpen;
-  }
 
   /**
    * Open when Button is used as Menu Button
+   * public openMenu(): void {
+   *  this.dropdownOpen = true;
+   * }
    */
-  public openMenu(): void {
-    this.dropdownOpen = true;
-  }
 
   /**
    * Close when Button is used as Menu Button
+   * public closeMenu(): void {
+   *  this.dropdownOpen = false;
+   * }
    */
-  public closeMenu(): void {
-    this.dropdownOpen = false;
-  }
 
+  /**
+   * Handler for blurring out and closing Menu Button dropdown
+   */
   public handleBlur(event: FocusEvent): void {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const targetIsDropdownMenuButton = (event.relatedTarget as HTMLElement)?.classList?.contains(
       'fudis-dropdown-menu-item',
     );
 
-    if (this.asMenuButton && !targetIsDropdownMenuButton) {
-      this.dropdownOpen = false;
-    }
+    // if (this.asMenuButton && !targetIsDropdownMenuButton) {
+    //   this.dropdownOpen = false;
+    // }
   }
 
+  /**
+   * Add aria-label for buttons without visible label
+   */
   private _getAriaLabel(): string {
     if (this.labelHidden || this.size === 'icon-only') {
       return this.ariaLabel ? `${this.label} ${this.ariaLabel}` : this.label;
@@ -165,6 +184,9 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
     return this.ariaLabel;
   }
 
+  /**
+   * Determine icon color based on button variant. Return CSS classes with size and variant
+   */
   private _getClasses(): string[] {
     if (this.disabled) {
       this._iconColor = 'default';
