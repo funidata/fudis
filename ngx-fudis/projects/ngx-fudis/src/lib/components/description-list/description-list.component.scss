@@ -50,7 +50,6 @@
       display: flex;
       flex-direction: column;
       margin-left: 0;
-      white-space: pre-wrap;
 
       &__fi,
       &__sv,
@@ -131,7 +130,6 @@
       display: inline-block;
       margin-left: 0;
       padding-left: spacing.$spacing-xxs;
-      white-space: pre-wrap;
 
       &__content {
         display: inline;
