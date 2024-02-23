@@ -1,5 +1,6 @@
 import { Meta, ArgTypes } from "@storybook/blocks";
 import { FormComponent } from "./form.component";
+import { formArgTypesExclude } from "../../../utilities/storybook";
 
 <Meta title="Components/Form/Form" />
 
@@ -51,7 +52,7 @@ There are no restrictions on main content but it is advised to use Fudis Form Co
 
 Aside from content projection Fudis Form will create heading, badge and error-summary based on given properties.
 
-Fudis Form also extends Fudis Grid Api Directive which allows the modification and usage of most of the [Grid properties](/docs/foundations-grid--documentation). Non-working Grid properties are `columns` and `rowGap`.
+Fudis Form also extends Fudis Grid Api Directive which allows the modification and usage of most of the [Grid properties](/docs/foundations-grid--documentation).
 The complete list of allowed properties can be found from Properties table at the bottom of this page.
 
 ### Heading
@@ -139,4 +140,4 @@ submitForm(): void {
 
 ## Properties
 
-<ArgTypes of={FormComponent} />
+<ArgTypes of={FormComponent} exclude={formArgTypesExclude} />
