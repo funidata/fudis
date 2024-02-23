@@ -4,8 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { action } from '@storybook/addon-actions';
 import readme from './readme.mdx';
-import { defaultOptions } from '../../common/mock_data';
 import { SelectOptionComponent } from './select-option.component';
+import { selectExclude } from '../../../../../utilities/storybook';
 
 export default {
   title: 'Components/Form/Select/Select and Multiselect Option',
@@ -15,10 +15,12 @@ export default {
       providers: [importProvidersFrom(BrowserAnimationsModule)],
     }),
   ],
-
   parameters: {
     docs: {
       page: readme,
+    },
+    controls: {
+      exclude: selectExclude,
     },
   },
 } as Meta;
@@ -29,22 +31,18 @@ const ExampleTemplate: StoryFn<SelectOptionComponent> = (args: SelectOptionCompo
   props: {
     ...args,
     selectionUpdate: action('selectionUpdate'),
-    defaultOptions,
-    control: new FormControl(defaultOptions[2]),
+    control: new FormControl(null),
   },
   template: html`
     <fudis-select
       (selectionUpdate)="selectionUpdate($event)"
       [control]="control"
-      [label]="'Choose a pet'"
-      [helpText]="'All pets are equally important, but for sake of this example please pick one.'"
+      [label]="'Example label'"
+      [helpText]="'Example help text'"
+      [placeholder]="'Example placeholder text'"
     >
       <ng-template fudisContent type="select-options">
         <fudis-select-option [data]="data"></fudis-select-option>
-        <fudis-select-option
-          *ngFor="let option of defaultOptions"
-          [data]="option"
-        ></fudis-select-option>
       </ng-template>
     </fudis-select>
   `,

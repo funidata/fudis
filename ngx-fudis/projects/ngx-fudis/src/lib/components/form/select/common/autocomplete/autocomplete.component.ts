@@ -33,9 +33,12 @@ export class SelectAutocompleteComponent {
   /**
    * Template reference for input. Used in e. g. initialFocus
    */
-  @ViewChild('inputRef') inputRef: ElementRef;
+  @ViewChild('inputRef') public inputRef: ElementRef;
 
-  @HostBinding('class') classes = 'fudis-select-autocomplete-host';
+  /**
+   * Binding CSS class for component wrapper
+   */
+  @HostBinding('class') private _classes = 'fudis-select-autocomplete-host';
 
   /**
    * Form control used mostly to define HTML attributes and CSS styles
@@ -118,7 +121,7 @@ export class SelectAutocompleteComponent {
   @Output() triggerFilterTextUpdate = new EventEmitter<string>();
 
   /**
-   * Output event for updating parent's filter text signal
+   * Output event for updating parent's focus to first option signal
    */
   @Output() triggerFocusToFirstOption = new EventEmitter<void>();
 
@@ -172,7 +175,7 @@ export class SelectAutocompleteComponent {
   }
 
   /**
-   * Blur event function for input form field blur
+   * Focus event function for input form field focus
    * @param event FocusEvent
    */
   protected _inputFocus(event: FocusEvent): void {
@@ -234,7 +237,6 @@ export class SelectAutocompleteComponent {
 
   /**
    * Clear any written or selected value in the autocomplete field
-   * @param resetControlValue reset or not control value, used with single selects
    */
   protected _clearAutocompleteFilterText(): void {
     if (!this.disabled && !this.control.disabled) {

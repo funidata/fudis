@@ -71,9 +71,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
   @ContentChild(ContentDirective) protected _content: ContentDirective;
 
   /**
-   * Adds CSS class to host
+   * Binding CSS class for component wrapper
    */
-  @HostBinding('class') classes = 'fudis-select-host';
+  @HostBinding('class') protected _classes = 'fudis-select-host';
 
   /**
    * Set dropdown size (should follow the given input element size)
@@ -186,7 +186,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
   }
 
   /**
-   *
    * @returns signal value of autocomplete filter text
    */
   public getAutocompleteFilterText(): Signal<string> {
@@ -247,7 +246,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
   }
 
   /**
-   * Handler for input field blur
+   * To handle input field blur events
    * @param event FocusEvent
    */
   protected _inputBlur(event: FocusEvent): void {
@@ -349,6 +348,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
     this._dropdownOpen = true;
   }
 
+  /**
+   * Update input filter
+   */
   protected _filterTextUpdate(text: string): void {
     if (this._autocompleteFilterText() !== text) {
       this.noResultsFound = true;

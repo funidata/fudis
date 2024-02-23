@@ -1,6 +1,6 @@
 import { FudisSelectOption } from '../../../../types/forms';
 
-// TODO: write unit tests
+// TODO: write unit tests and internal documentation
 
 /**
  * Arranges selected options in an order they are present in the DOM
