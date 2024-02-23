@@ -1,11 +1,12 @@
 import { Meta, applicationConfig, StoryFn } from '@storybook/angular';
+import { action } from '@storybook/addon-actions';
 import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { SelectComponent } from './select.component';
 import readme from './readme.mdx';
 import { groupedMockData, defaultOptions } from '../common/mock_data';
-import { action } from '@storybook/addon-actions';
+import { selectCommonExclude } from '../../../../utilities/storybook';
 
 export default {
   title: 'Components/Form/Select/Select',
@@ -20,21 +21,16 @@ export default {
       page: readme,
     },
     controls: {
-      exclude: [
-        '_id',
-        '_required',
-        '_requiredText',
-        '_translations',
-        'ngOnInit',
-        'ngOnChanges',
-        'onBlur',
-      ],
+      exclude: selectCommonExclude,
     },
   },
   argTypes: {
     size: {
       options: ['sm', 'md', 'lg'],
       control: { type: 'radio' },
+    },
+    helpText: {
+      control: { type: 'text' },
     },
   },
 } as Meta;
@@ -77,9 +73,9 @@ const ExampleTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
 
 export const Example = ExampleTemplate.bind({});
 Example.args = {
-  disabled: false,
   label: 'Select a pet',
   size: 'lg',
+  disabled: false,
   placeholder: 'Choose a pet',
   helpText: 'All pets are equally important, but for sake of this example please pick one.',
 };
