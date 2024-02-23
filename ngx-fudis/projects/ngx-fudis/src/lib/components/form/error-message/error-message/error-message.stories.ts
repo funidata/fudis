@@ -105,9 +105,16 @@ export default {
 const Template: StoryFn<ErrorMessageComponent> = (args: ErrorMessageComponent) => ({
   props: {
     ...args,
-    control: new FormControl(),
+    control: new FormControl(
+      '',
+      FudisValidators.required('This validation message is send by Fudis Validators'),
+    ),
   },
   template: `
+  <fudis-body-text class="grid-refresh-text" [size]="'sm-regular'" style="width: 12rem;
+  margin-bottom: 2rem;">  &uarr; Click 'Remount' refresh button from the toolbar to refresh canvas
+  error message.</fudis-body-text
+>
   <fudis-text-input
   [columns]="'stretch'"
   [control]="control"
