@@ -9,6 +9,7 @@
 projects=(
   "ngx-fudis"
   "ngx-fudis/projects/ngx-fudis"
+  "test"
 )
 
 new_version=$1
