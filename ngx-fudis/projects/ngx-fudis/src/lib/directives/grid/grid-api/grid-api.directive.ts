@@ -14,27 +14,27 @@ import { FudisSpacing } from '../../../types/miscellaneous';
 })
 export class GridApiDirective {
   /**
-   * Alignment of Grid component inside its parent. Default value from GridService: 'center'
+   * Alignment of Grid component inside its parent.
    */
   @Input() align: FudisGridAlign = 'center';
 
   /**
-   * Horizontal alignment of Grid Items in a row. Default value from GridService: 'stretch'
+   * Horizontal alignment of Grid Items in a row.
    */
   @Input() alignItemsX: FudisGridAlignItems = 'stretch';
 
   /**
-   * Vertical alignment of Grid Items in a row. Default value from GridService: 'stretch'
+   * Vertical alignment of Grid Items in a row.
    */
   @Input() alignItemsY: FudisGridAlignItems = 'stretch';
 
   /**
-   * Custom CSS classes for Grid element. Default value from GridService: []
+   * Custom CSS classes for Grid element.
    */
   @Input() classes: string[];
 
   /**
-   * Grid column gap. Using Fudis spacing token values of xxs to xxl and none.Default value from GridService: 'responsive'
+   * Grid column gap. Using Fudis spacing token values of xxs to xxl and none.
    */
   @Input() columnGap: FudisGridGap = 'responsive';
 
@@ -47,7 +47,7 @@ export class GridApiDirective {
    * E. g. [columns]="{md: 2, xl: 3}".
    * Before md breakpoint Grid has default of '1fr' columns.
    * After md breakpoint it will have two columns 'repeat(2, 1fr)'
-   * And after xl breakpoint 'repeat(3, 1fr)
+   * And after xl breakpoint 'repeat(3, 1fr)'
    */
   @Input() columns: FudisGridColumns = '1fr';
 
@@ -57,22 +57,22 @@ export class GridApiDirective {
   @Input() ignoreDefaults: boolean = false;
 
   /**
-   * Margin bottom for the Grid. Default value from GridService: 'none'
+   * Margin bottom for the Grid.
    */
   @Input() marginBottom: FudisSpacing = 'none';
 
   /**
-   * Horizontal margins left and right of the grid. Default value from GridService: 'none'
+   * Horizontal margins left and right of the grid.
    */
   @Input() marginSides: FudisGridMarginSide = 'none';
 
   /**
-   * Margin top for the Grid. Default value from GridService: 'none'
+   * Margin top for the Grid.
    */
   @Input() marginTop: FudisSpacing = 'none';
 
   /**
-   * Grid row gap. Using Fudis spacing token values of xxs to xxl and none. Default value from GridService: 'responsive'
+   * Grid row gap. Using Fudis spacing token values of xxs to xxl and none.
    */
   @Input() rowGap: FudisGridGap = 'responsive';
 
@@ -85,7 +85,6 @@ export class GridApiDirective {
    * sm = Viewports smaller than 768px
    * xs = Viewports smaller than 576px
    *
-   * Default value from GridService: 'xxl'
    */
   @Input() width: FudisGridWidth = 'xxl';
 }
