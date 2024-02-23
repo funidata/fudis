@@ -7,7 +7,7 @@ import { FudisValidators } from '../../../../utilities/form/validators';
 import { MultiselectComponent } from './multiselect.component';
 import readme from './readme.mdx';
 import { groupedMockData, defaultOptions } from '../common/mock_data';
-import { selectExclude } from '../../../../utilities/storybook';
+import { selectCommonExclude } from '../../../../utilities/storybook';
 
 export default {
   title: 'Components/Form/Select/Multiselect',
@@ -22,7 +22,7 @@ export default {
       page: readme,
     },
     controls: {
-      exclude: selectExclude,
+      exclude: selectCommonExclude,
     },
   },
   argTypes: {

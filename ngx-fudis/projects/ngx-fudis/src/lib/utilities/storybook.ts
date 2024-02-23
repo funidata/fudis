@@ -109,7 +109,7 @@ export const gridExclude: RegExp = excludeRegex([
   'ngOnInit',
 ]);
 
-export const selectExclude: RegExp = excludeRegex([
+export const selectCommonExclude: RegExp = excludeRegex([
   'control',
   'autocomplete',
   'autocompleteClearButton',
@@ -144,6 +144,24 @@ export const selectExclude: RegExp = excludeRegex([
   'optionInputRef',
   'checked',
   'close',
+]);
+
+export const selectAndMultiselectExclude: RegExp = excludeRegex([
+  'translationOptionDisabledText',
+  'controlValueChangedInternally',
+  'dropdownSelectionLabelText',
+  'focusSelector',
+  'noResultsFound',
+  'handleSelectionChange',
+  'closeDropdown',
+  'getAutocompleteFilterText',
+  'openDropdown',
+  'setOptionVisibility',
+  'focusToInput',
+  'onBlur',
+  'getSelectedOptions',
+  'handleCheckedSort',
+  'handleMultiSelectionChange',
 ]);
 
 export const textInputExclude: RegExp = excludeRegex(['focusToInput', 'onBlur']);

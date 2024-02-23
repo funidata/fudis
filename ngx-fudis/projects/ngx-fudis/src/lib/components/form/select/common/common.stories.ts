@@ -8,7 +8,7 @@ import { MultiselectComponent } from '../multiselect/multiselect.component';
 import readme from './readme.mdx';
 import { groupedMockData, defaultOptions } from './mock_data';
 import { FudisSelectOption } from '../../../../types/forms';
-import { selectExclude } from '../../../../utilities/storybook';
+import { selectCommonExclude } from '../../../../utilities/storybook';
 
 export default {
   title: 'Components/Form/Select/Common Features',
@@ -23,7 +23,7 @@ export default {
       page: readme,
     },
     controls: {
-      exclude: selectExclude,
+      exclude: selectCommonExclude,
     },
   },
   argTypes: {

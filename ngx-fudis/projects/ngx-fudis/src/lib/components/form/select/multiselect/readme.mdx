@@ -1,5 +1,7 @@
-import { Meta, Canvas } from "@storybook/blocks";
+import { Meta, Canvas, ArgTypes } from "@storybook/blocks";
+import { MultiselectComponent } from "./multiselect.component";
 import * as Stories from "./multiselect.stories.ts";
+import { selectAndMultiselectExclude } from "../../../../utilities/storybook";
 
 <Meta title="Components/Form/Select/Multiselect" />
 
@@ -41,3 +43,7 @@ By default, Multiselect Component displays a list of selected options as chip bu
 ## Example
 
 <Canvas of={Stories.Example}></Canvas>
+
+## Properties
+
+<ArgTypes of={MultiselectComponent} exclude={selectAndMultiselectExclude} />

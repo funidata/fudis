@@ -6,7 +6,7 @@ import { importProvidersFrom } from '@angular/core';
 import { SelectComponent } from './select.component';
 import readme from './readme.mdx';
 import { groupedMockData, defaultOptions } from '../common/mock_data';
-import { selectExclude } from '../../../../utilities/storybook';
+import { selectCommonExclude } from '../../../../utilities/storybook';
 
 export default {
   title: 'Components/Form/Select/Select',
@@ -21,7 +21,7 @@ export default {
       page: readme,
     },
     controls: {
-      exclude: selectExclude,
+      exclude: selectCommonExclude,
     },
   },
   argTypes: {
