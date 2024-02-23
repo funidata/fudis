@@ -160,6 +160,9 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
     this._removeValidator();
   }
 
+  /**
+   * Create custom validator with error message
+   */
   private _customControlValidatorFn(message: FudisValidatorMessage): FudisValidatorFn {
     return (control: AbstractControl) => {
       if (!control) {
@@ -169,12 +172,14 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
     };
   }
 
+  /**
+   * Add created validator to the parent component control
+   */
   private _addControlValidator(): void {
     if (this._parent) {
       this._errorAdded = true;
       this._parent.control.addValidators(this._customValidatorInstance);
       this._parent.control.updateValueAndValidity();
-
       this.handleAddError.emit({ [this._id]: { message: this.message } });
     } else if (this._parentGroup) {
       this._errorAdded = true;
@@ -184,6 +189,9 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  /**
+   * Remove created validator from parent component control
+   */
   private _removeValidator(): void {
     if (this._parent && this._customValidatorInstance && this._errorAdded) {
       this._errorAdded = false;
