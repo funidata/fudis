@@ -217,8 +217,8 @@ const ResponsiveColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent) 
         and 'md' rule is on until hitting 'xxl' breakpoint.</fudis-body-text
       >
       <fudis-body-text class="text-margin"
-        >Using FudisGridService's 'setGridDefaultValues()' you can define default values applied to
-        all your Grids.</fudis-body-text
+        >Using FudisGridService's 'setDefaultValues()' you can define default values applied to all
+        your Grids.</fudis-body-text
       >
       <fudis-body-text class="text-margin"
         >If you set default values and provide values for single Grid, values are combined.

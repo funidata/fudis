@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
     private _errorSummaryService: FudisErrorSummaryService,
     private _breakpointService: FudisBreakpointService,
   ) {
-    _gridService.setGridDefaultValues({
+    _gridService.setDefaultValues({
       columns: { xs: 1, md: 2 },
       marginSides: 'responsive',
     });
@@ -245,23 +245,23 @@ export class AppComponent implements OnInit {
 
   updateGridServiceDefaults(): void {
     console.log('Current GridService defaults are:');
-    console.log(this._gridService.getGridDefaultValues()());
+    console.log(this._gridService.getDefaultValues()());
 
     const updateValue =
-      this._gridService.getGridDefaultValues()()?.alignItemsX === 'end' ? 'stretch' : 'end';
+      this._gridService.getDefaultValues()()?.alignItemsX === 'end' ? 'stretch' : 'end';
 
     const updateColumnsValue =
-      JSON.stringify(this._gridService.getGridDefaultValues()()?.columns) === '{"xs":1,"md":2}'
+      JSON.stringify(this._gridService.getDefaultValues()()?.columns) === '{"xs":1,"md":2}'
         ? { xs: 1, md: 3 }
         : { xs: 1, md: 2 };
 
-    console.log(JSON.stringify(this._gridService.getGridDefaultValues()()?.columns));
+    console.log(JSON.stringify(this._gridService.getDefaultValues()()?.columns));
 
-    this._gridService.setGridDefaultValues({
+    this._gridService.setDefaultValues({
       alignItemsX: updateValue,
       columns: updateColumnsValue,
     });
     console.log('Updated GridService defaults are:');
-    console.log(this._gridService.getGridDefaultValues()());
+    console.log(this._gridService.getDefaultValues()());
   }
 }

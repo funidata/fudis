@@ -27,7 +27,7 @@ The default behaviour makes your content to stretch in one grid-column and adds 
 ```
 export class AppComponent {
  constructor(private _gridService: FudisGridService) {
-	_gridService.setGridDefaultValues({
+	_gridService.setDefaultValues({
 	  columns: { xs: 1, lg: 2 },
 	  marginSides: 'responsive',
 	});

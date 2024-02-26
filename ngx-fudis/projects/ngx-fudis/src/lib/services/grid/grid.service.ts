@@ -1,7 +1,7 @@
 import { Injectable, Signal, signal } from '@angular/core';
 import { FudisGridProperties } from '../../types/grid';
 
-// TODO: Write Storybook documentation under Services. Note that there is already documentation of setGridDefaultValues in Documentation/Grid.
+// TODO: Write Storybook documentation under Services. Note that there is already documentation of setDefaultValues in Documentation/Grid.
 @Injectable()
 export class FudisGridService {
   /**
@@ -12,7 +12,7 @@ export class FudisGridService {
   /**
    * To set default values for all Grids application uses from application.
    */
-  public setGridDefaultValues(newDefaultValues: FudisGridProperties): void | never {
+  public setDefaultValues(newDefaultValues: FudisGridProperties): void | never {
     let checkedNewValues: FudisGridProperties = {};
 
     Object.keys(newDefaultValues).forEach((key) => {
@@ -23,7 +23,7 @@ export class FudisGridService {
         checkedNewValues = { ...checkedNewValues, [keyName]: newValue };
       } else {
         throw new Error(
-          `FudisGridService.setGridDefaultValues() received on object with key of: '${keyName}' and value of: '${newValue}'. This value was not applied to default values.`,
+          `FudisGridService.setDefaultValues() received on object with key of: '${keyName}' and value of: '${newValue}'. This value was not applied to default values.`,
         );
       }
     });
@@ -34,7 +34,7 @@ export class FudisGridService {
   /**
    * Get application's default values for Grid
    */
-  public getGridDefaultValues(): Signal<FudisGridProperties> {
+  public getDefaultValues(): Signal<FudisGridProperties> {
     return this._defaultGridValues.asReadonly();
   }
 }
