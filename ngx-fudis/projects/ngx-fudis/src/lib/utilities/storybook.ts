@@ -53,6 +53,29 @@ export const checkboxGroupControlsExclude: RegExp = excludeRegex([
   'formGroup',
 ]);
 
+export const formExclude: RegExp = excludeRegex([
+  'id',
+  'align',
+  'alignItemsX',
+  'alignItemsY',
+  'classes',
+  'columnGap',
+  'columns',
+  'ignoreDefaults',
+  'marginBottom',
+  'marginSides',
+  'marginTop',
+  'rowGap',
+  'width',
+]);
+
+export const formArgTypesExclude: RegExp = excludeRegex([
+  'rowGap',
+  'columns',
+  'ignoreDefaults',
+  'classes',
+]);
+
 export const linkExclude: RegExp = excludeRegex([
   'fragmentId',
   'handleBlur',
@@ -65,6 +88,8 @@ export const notificationExclude: RegExp = excludeRegex(['link']);
 export const dialogExclude: RegExp = excludeRegex(['closeButtonPositionAbsolute']);
 
 export const headingControlsExclude: RegExp = excludeRegex(['id']);
+
+export const errorMessageExclude: RegExp = excludeRegex(['handleAddError', 'handleRemoveError']);
 
 const expandableCommonExclude: string[] = [
   'ref',
@@ -107,6 +132,61 @@ export const gridExclude: RegExp = excludeRegex([
   '_setColumns',
   'ngOnChanges',
   'ngOnInit',
+]);
+
+export const selectCommonExclude: RegExp = excludeRegex([
+  'control',
+  'autocomplete',
+  'autocompleteClearButton',
+  'ariaLabel',
+  'disableGuidance',
+  'id',
+  'initialFocus',
+  'invalidState',
+  'tooltip',
+  'tooltipPosition',
+  'tooltipToggle',
+  'classes',
+  'controlValueChangedInternally',
+  'dropdownSelectionLabelText',
+  'focusSelector',
+  'noResultsFound',
+  'selectionUpdate',
+  'handleBlur',
+  'getSelectedOptions',
+  'handleCheckedSort',
+  'handleMultiSelectionChange',
+  'closeDropdown',
+  'getAutocompleteFilterText',
+  'openDropdown',
+  'setOptionVisibility',
+  'focusToInput',
+  'onBlur',
+  'translationOptionDisabledText',
+  'handleSelectionChange',
+  'handleChecked',
+  'handleClick',
+  'optionInputRef',
+  'checked',
+  'close',
+]);
+
+export const selectAndMultiselectExclude: RegExp = excludeRegex([
+  'translationOptionDisabledText',
+  'controlValueChangedInternally',
+  'dropdownSelectionLabelText',
+  'focusSelector',
+  'noResultsFound',
+  'handleSelectionChange',
+  'closeDropdown',
+  'getAutocompleteFilterText',
+  'openDropdown',
+  'setOptionVisibility',
+  'focusToInput',
+  'onBlur',
+  'getSelectedOptions',
+  'handleCheckedSort',
+  'handleMultiSelectionChange',
 ]);
 
 export const textInputExclude: RegExp = excludeRegex(['focusToInput', 'onBlur']);

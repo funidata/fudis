@@ -1,5 +1,6 @@
 import { Meta, ArgTypes } from "@storybook/blocks";
 import { FormComponent } from "./form.component";
+import { formArgTypesExclude } from "../../../utilities/storybook";
 
 <Meta title="Components/Form/Form" />
 
@@ -51,7 +52,7 @@ There are no restrictions on main content but it is advised to use Fudis Form Co
 
 Aside from content projection Fudis Form will create heading, badge and error-summary based on given properties.
 
-Fudis Form also extends Fudis Grid Api Directive which allows the modification and usage of most of the [Grid properties](/docs/foundations-grid--documentation). Non-working Grid properties are `columns` and `rowGap`.
+Fudis Form also extends Fudis Grid Api Directive which allows the modification and usage of most of the [Grid properties](/docs/foundations-grid--documentation).
 The complete list of allowed properties can be found from Properties table at the bottom of this page.
 
 ### Heading
@@ -99,13 +100,15 @@ This is a simple example on how to use `fudis-form`
   <ng-template fudisContent [type]="'form'">
     <fudis-text-input
       [label]="'Example text-input'"
-      [control]="formExample.controls['exampleTextInput']"
+      [control]="formExample.controls.exampleTextInput"
     />
-    <fudis-radio-button-group
-      [title]="'Example radio-button-group'"
-      [options]="exampleRadioButtonGroupOptions"
-      [control]="formExample.controls['exampleRadioButtonGroup']"
-    />
+    <fudis-checkbox-group
+      [formGroup]="formExample.controls.exampleCheckboxGroup"
+      [title]="'Example CheckboxGroup'"
+    >
+      <fudis-checkbox [controlName]="'first'" [label]="'Choose option 1'" />
+      <fudis-checkbox [controlName]="'second'" [label]="'Choose option 2'" />
+    </fudis-checkbox-group>
   </ng-template>
 </fudis-form>
 
@@ -117,13 +120,14 @@ errorSummaryVisible: boolean = false;
 
 formExample = new FormGroup({
   exampleTextInput: new FormControl(null, FudisValidators.minLength(5, 'Input requires at least 5 characters.')),
-  exampleRadioButtonGroup: new FormControl(null, FudisValidators.required('This is required field.')),
+  exampleCheckboxGroup: new FormGroup(
+    {
+      first: new FormControl(null),
+      second: new FormControl(null),
+    },
+    [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Select at least one checkbox!'))],
+  ),
 });
-
-exampleRadioButtonGroupOptions: FudisRadioButtonOption[] = [
-  { value: 'basic', label: 'Basic', id: 'courseType-1', name: 'courseType' },
-  { value: 'advanced', label: 'Advanced', id: 'courseType-2', name: 'courseType' },
-];
 
 submitForm(): void {
   this.formExample.markAllAsTouched();
@@ -139,4 +143,4 @@ submitForm(): void {
 
 ## Properties
 
-<ArgTypes of={FormComponent} />
+<ArgTypes of={FormComponent} exclude={formArgTypesExclude} />

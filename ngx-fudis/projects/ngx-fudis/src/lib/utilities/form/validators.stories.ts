@@ -1,12 +1,12 @@
 import { StoryFn, Meta, applicationConfig } from '@storybook/angular';
 import { FormControl, FormGroup } from '@angular/forms';
+import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BehaviorSubject } from 'rxjs';
 import { FudisValidators } from './validators';
 import { FudisGroupValidators } from './groupValidators';
 import readme from './readme.mdx';
 import { FudisCheckboxGroupFormGroup } from '../../types/forms';
-import { importProvidersFrom } from '@angular/core';
 
 export default {
   title: 'Utilities/Validators',
@@ -203,5 +203,5 @@ const ValidatorsTemplate: StoryFn = (args) => ({
   `,
 });
 
-export const ValidatorsExample = ValidatorsTemplate.bind({});
-ValidatorsExample.args = {};
+export const Example = ValidatorsTemplate.bind({});
+Example.args = {};

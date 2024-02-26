@@ -1,5 +1,7 @@
-import { Meta, Canvas } from "@storybook/blocks";
+import { Meta, Canvas, ArgTypes } from "@storybook/blocks";
+import { MultiselectComponent } from "./multiselect.component";
 import * as Stories from "./multiselect.stories.ts";
+import { selectAndMultiselectExclude } from "../../../../utilities/storybook";
 
 <Meta title="Components/Form/Select/Multiselect" />
 
@@ -17,7 +19,7 @@ Therefore please check also [Common Features](/docs/components-form-select-commo
 
 ### Form Control
 
-Multiselect Component requires a Angular Form Control. Type and value of control can be either `null` or `FudisSelectOption[]` array consisting of options.
+Multiselect Component requires Angular Form Control. Type and value of control can be either `null` or `FudisSelectOption[]` array consisting of options.
 
 ```
 // TypeScript
@@ -36,8 +38,12 @@ myControl: new FormControl<null | FudisSelectOption[]>(defaultOption)
 
 ### Show Selection Chips
 
-By default, Multiselect Component displays a list ofof selected options as chip buttons under the form field input. This feature is controlled by boolean `showSelectionChips`. Setting it `false` hides the chip buttons.
+By default, Multiselect Component displays a list of selected options as chip buttons under the form field input. This feature is controlled by boolean `showSelectionChips`. Setting it to `false` hides the chip buttons.
 
 ## Example
 
 <Canvas of={Stories.Example}></Canvas>
+
+## Properties
+
+<ArgTypes of={MultiselectComponent} exclude={selectAndMultiselectExclude} />

@@ -7,7 +7,10 @@ import { FudisSelectOption } from '../../../../../types/forms';
   styleUrls: ['./multiselect-chip-list.component.scss'],
 })
 export class MultiselectChipListComponent {
-  @ViewChild('chipListRef') public chipListRef: ElementRef<HTMLUListElement>;
+  /**
+   * Reference for the chip list ul element
+   */
+  @ViewChild('chipListRef') protected _chipListRef: ElementRef<HTMLUListElement>;
 
   /**
    * Array of selected chip items
@@ -32,10 +35,10 @@ export class MultiselectChipListComponent {
     this.handleClick.emit(index);
 
     setTimeout(() => {
-      if (index === 0 && this.chipListRef.nativeElement.children[0]) {
-        (this.chipListRef.nativeElement.children[0] as HTMLButtonElement).focus();
-      } else if (this.chipListRef.nativeElement.children[index - 1]) {
-        (this.chipListRef.nativeElement.children[index - 1] as HTMLButtonElement).focus();
+      if (index === 0 && this._chipListRef.nativeElement.children[0]) {
+        (this._chipListRef.nativeElement.children[0] as HTMLButtonElement).focus();
+      } else if (this._chipListRef.nativeElement.children[index - 1]) {
+        (this._chipListRef.nativeElement.children[index - 1] as HTMLButtonElement).focus();
       }
     }, 50);
   }

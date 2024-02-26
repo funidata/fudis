@@ -70,8 +70,14 @@ export class GuidanceComponent implements OnInit {
    */
   protected _maxLengthText: string;
 
+  /**
+   * Number of characters left when screen reader is alerted about input max length
+   */
   protected _maxLengthAlertThreshold: number;
 
+  /**
+   * Id from IdService
+   */
   protected _id: string;
 
   ngOnInit(): void {
