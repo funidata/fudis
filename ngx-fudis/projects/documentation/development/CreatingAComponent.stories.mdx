@@ -23,7 +23,9 @@ ng generate --project=ngx-fudis component components/form/new-form-component
 
 ## Component Folder Structure
 
-General directory structure is documented in [Project structure](?path=/docs/documentation-development-project-structure--documentation) page.
+General directory structure can be found in [Project Structure Documentation](?path=/docs/documentation-development-project-structure--documentation).
+
+If component has multiple sub components, they are stored in parent component directory.
 
 ```
 ├── components
@@ -36,11 +38,3 @@ General directory structure is documented in [Project structure](?path=/docs/doc
 │   	└── readme.mdx			# Storybook readme file
 └── ...
 ```
-
-### Component Folder Contains
-
-- Component stories and documentation
-- Component unit tests
-- Component styles
-- Sub components are stored in parent component directory
-- Components of same category are grouped in their own subfolder. e.g. Form components

@@ -4,24 +4,8 @@ import { Meta } from "@storybook/blocks";
 
 # Development Environment
 
-The development environment for Fudis is implemented with Docker and NPM (Node.js). Any fairly recent version should work. However, it is recommended to use the Node.js version specified in the `.nvmrc` file in repository root. Correct Node.js version is important, e.g., when installing or updating NPM packages.
+The development environment for Fudis is implemented with Docker and NPM (Node.js). Any fairly recent version should work. However, it is recommended to use the Node.js version specified in the `.nvmrc` file in repository root. Correct Node.js version is important, e.g. when installing or updating NPM packages.
 
-Running the development environment does not require installing NPM packages locally. However, your IDE tooling most likely does (Simply run `npm ci` in repository root.)
+Running the development environment does not require installing NPM packages locally. However, your IDE tooling most likely does (simply run `npm ci` in repository root).
 
 `npm start` spins up Storybook and `npm stop` shuts it down. See [Command Reference](/docs/documentation-development-command-reference--documentation) for more.
-
-## Manual Release
-
-Read how to create new release with automated script from [Creating a Release](/docs/documentation-development-creating-release--documentation) documentation.
-
-This is not advised, but if you need to create the release manually
-
-1. Bump versions in all `package.json` files
-2. Create a version tag
-3. Push changes to GitHub
-
-Basically `npm version` modified to run in sub-directories:
-
-```bash
-npm version <major|minor|patch>
-```

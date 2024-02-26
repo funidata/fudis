@@ -6,18 +6,16 @@ import { Meta } from "@storybook/blocks";
 
 <br />
 
-## 1. Component Is Imported And Exported Correctly
+## 1. Component is Imported and Exported Correctly
 
-- #### Ngx-fudis.module.ts
+- #### ngx-fudis.module.ts
 
   `fudis/ngx-fudis/projects/ngx-fudis/src/lib/ngx-fudis.module.ts` **→ Import, Declaration, Export**
 
-- #### Public-api.ts
+- #### public-api.ts
 
   `fudis/ngx-fudis/projects/ngx-fudis/src/public-api.ts` **→ Export**
 
-- #### Sandbox's app.module.ts
-  For Angular Material component module Dev import. `fudis/ngx-fudis/projects/dev/src/app/app.module.ts` **→ Import**
 - #### .stories.ts
 
   **Import** each component in their own `.stories.ts` file.
@@ -56,21 +54,21 @@ Check [Naming Conventions](/docs/documentation-development-naming-conventions--d
 ## 5. Component Has Written Stories
 
 - Story should include the basic version of the component.
-- Component variants such as primary, secondary etc. should be documented. These variants should be accessed and controllable through Storybook controls.
+- Component variants such as primary, secondary etc. should be documented. These variants should be accessed and controllable through Storybook Controls.
 - If needed, create own story for clearly "other/different version" of the component, e.g. Button vs. Button with Icon
 - Component all variants, can be documented as story by using Storybook template prop.
-  > _Note! This prevents component control throught ArgTypes. Template prop should be used mainly for a story spesific readme.mdx documentation._
+  > _Note! This prevents component control through Controls. Template prop should be used mainly for a story spesific readme.mdx documentation._
 - Component has ArgTypes.
 - Component has its @Inputs and @Outputs listed with description and accepted values.
 - Components with event handlers have working actions.
-- Disabled and invalid states should be able to switch on from ArgTypes.
+- Disabled and invalid states should be able to switch on from Storybook Controls.
 - Form components have functioning formControls for Storybook testing and demo purposes.
 
 ## 6. Component Has Readme File
 
 - All component variants and states are documented
 - Related accessibility requirements are listed
-- Related and subcomponents are listed
+- Related and sub components are listed
 - All Angular Material based components have link to Angular documentation
 - ArgTypes are visible
 

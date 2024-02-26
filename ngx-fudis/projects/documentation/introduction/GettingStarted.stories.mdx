@@ -8,7 +8,7 @@ import { Meta } from "@storybook/blocks";
 
 ## Installation
 
-You can find package information at NPM https://www.npmjs.com/package/@funidata/ngx-fudis
+You can find package information at [NPM](https://www.npmjs.com/package/@funidata/ngx-fudis)
 
 #### 1. Install Angular Material Peer Dependency:
 
@@ -25,9 +25,7 @@ Choose these options when prompted:
 ? Set up browser animations for Angular Material? Yes
 ```
 
-<br />
-
-#### 2. Then Install Fudis:
+#### 2. Install Fudis:
 
 ```
 ng add @funidata/ngx-fudis
@@ -36,7 +34,7 @@ ng add @funidata/ngx-fudis
 
 #### 3. Import Core Styles
 
-The core styles from Angular Material must be imported in your application for the components to work properly. The easiest way to do this is to have a styles.scss file in project root with the following content:
+The core styles from Angular Material must be imported in your application for the components to work properly. The easiest way to do this is to have a `styles.scss` file in project root with the following content:
 
 ```
 @use "@angular/material" as mat;
@@ -78,7 +76,7 @@ import { NgxFudisModule } from 'ngx-fudis';
 
 ##### Set Rem Base Value
 
-By default Fudis rem values follow 8 pixel base values, when having default browser CSS font-size of 100%, 1 rem equals 2 \* 8px = 16px. To apply this to your application, add to the root CSS style file:
+By default Fudis rem values follow 8px base values. When having default browser CSS font-size of 100%, 1 rem equals 2 \* 8px = 16px. To apply this to your application, add to the root CSS style file:
 
 ```
 :root {
@@ -86,7 +84,7 @@ By default Fudis rem values follow 8 pixel base values, when having default brow
 }
 ```
 
-If application uses other rem base value by setting font-size to e. g. 62.5% . Adjust -fudis-rem-multiplier accordingly.
+If application uses other rem base value by setting font-size to e. g. 62.5% . Adjust `--fudis-rem-multiplier` accordingly.
 
 ```
 html {
@@ -98,7 +96,7 @@ html {
 }
 ```
 
-#### 6. Include Fudis Foundation SCSS-field
+#### 6. Include Fudis Foundation SCSS
 
 In your project's root style file import Fudis foundation package. After that Fudis fonts should be loaded in Fudis components. If you want to use Foundation tokens and mixins in your own component styles, use them like in example below and check out documentation pages for Foundations.
 

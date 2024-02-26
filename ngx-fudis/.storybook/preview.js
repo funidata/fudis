@@ -39,6 +39,7 @@ const preview = {
               "Getting Started",
               "Setup VS Code",
               "Development Environment",
+              "Command Reference",
               "Code Linting and Formatting",
               "Project Structure",
               "Ways of Working",

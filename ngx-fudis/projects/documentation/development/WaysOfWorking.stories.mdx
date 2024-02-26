@@ -12,13 +12,13 @@ Reusing components, styles and other bits and pieces of code is encouraged. If i
 
 ## Naming Conventions
 
-Currently documented conventions for naming components, CSS classes etc. can be found in [Naming Conventions page](/docs/documentation-development-naming-conventions--documentation)
+Currently documented conventions for naming components, CSS classes etc. can be found in [Naming Conventions Documentation](/docs/documentation-development-naming-conventions--documentation).
 
 ## Styles
 
 Fudis uses SCSS as its tool for defining styles. In addition various linting rules are forced through Stylelint. Stylelint quite aggressively will throw errors if there are unallowed values or attributes such as `px` values or if there are unnecessary white space or similar syntax inconsistecy.
 
-Quite many of the formatting errors can be automatically fixed on save if you have setupped your VSCode or other IDE correctly.
+Quite many of the formatting errors can be automatically fixed on save if you have setupped your VSCode or other IDE correctly, see [VSCode Setup Documentation](/docs/documentation-development-setup-vs-code--documentation).
 
 ### Some Principles for Writing Styles
 
@@ -63,11 +63,10 @@ If needed, you can create additional themes for the component and include that t
 
 #### Custom styling outside ngMaterial theming API
 
-**It's recommended Not to override or modify Angular Material's CSS or DOM!** This will make upstream minor and patch changes potentially breaking changes for Fudis.
+**It's recommended not to override or modify Angular Material's CSS or DOM.** This will make upstream minor and patch changes potentially breaking changes for Fudis.
 
 But if ngMaterial based Fudis component requires additional tweaking in styles, create a file with rest of the component files. E. g. to `components/form/datepicker` a file `ngMaterial-theme.scss`. Also import this file with `@use` to root `style.scss` file to make it available to application and ngMaterial.
 
 ```
-@use "./src/lib/components/form/autocomplete/ngMaterial-theme.scss" as autocomplete;
 @use "./src/lib/components/form/date/datepicker/ngMaterial-theme.scss" as datepicker;
 ```
