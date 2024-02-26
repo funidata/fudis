@@ -6,7 +6,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { ErrorMessageComponent } from './error-message.component';
 import readme from './readme.mdx';
 import { FudisValidators } from '../../../../utilities/form/validators';
-import { excludeAllRegex } from '../../../../utilities/storybook';
+import { excludeAllRegex, errorMessageExclude } from '../../../../utilities/storybook';
 
 @Component({
   selector: 'example-text-input-with-error-message',
@@ -92,20 +92,54 @@ export default {
       page: readme,
     },
     controls: {
-      exclude: ['control'],
+      exclude: errorMessageExclude,
     },
   },
-  argTypes: {},
+  argTypes: {
+    message: {
+      control: { type: 'text' },
+    },
+  },
 } as Meta;
 
-export const Example: StoryFn<ErrorMessageComponent> = (args: ErrorMessageComponent) => ({
+const Template: StoryFn<ErrorMessageComponent> = (args: ErrorMessageComponent) => ({
+  props: {
+    ...args,
+    control: new FormControl(
+      '',
+      FudisValidators.required('This validation message is send by Fudis Validators'),
+    ),
+  },
+  template: `
+  <fudis-body-text class="grid-refresh-text" [size]="'sm-regular'" style="width: 12rem;
+  margin-bottom: 2rem;">  &uarr; Click 'Remount' refresh button from the toolbar to refresh canvas
+  error message.</fudis-body-text
+>
+  <fudis-text-input
+  [columns]="'stretch'"
+  [control]="control"
+  [label]="'Focus to input'"
+>
+  <fudis-error-message [message]="message" />
+</fudis-text-input>
+  `,
+});
+
+export const Example = Template.bind({});
+Example.args = {
+  message: 'This is custom string error message that is placed with content projection',
+};
+
+export const ExampleWithObservableError: StoryFn<ErrorMessageComponent> = (
+  args: ErrorMessageComponent,
+) => ({
   ...args,
   template: `
 <example-text-input-with-error-message></example-text-input-with-error-message>
 	`,
 });
 
-Example.parameters = {
+ExampleWithObservableError.parameters = {
   controls: {
     exclude: excludeAllRegex,
   },
