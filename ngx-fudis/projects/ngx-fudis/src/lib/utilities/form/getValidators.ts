@@ -1,6 +1,9 @@
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
-// TODO: Write internal documentation for these functions (individual or univesal description what these do)
+/**
+ * All of these functions are used to check if component's control has different validators.
+ * The return value of these functions is usually assigned for internal variable to sort out wanted logic.
+ */
 
 export const hasRequiredValidator = (control: AbstractControl): boolean => {
   const nativeRequired = control.hasValidator(Validators.required);
