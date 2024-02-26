@@ -29,8 +29,6 @@ export class FudisGridService {
     });
 
     this._defaultGridValues.set({ ...this._defaultGridValues(), ...checkedNewValues });
-
-    console.log(this._defaultGridValues());
   }
 
   /**

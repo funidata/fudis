@@ -1,9 +1,8 @@
-import { GridComponent } from '../../components/grid/grid/grid.component';
 import { FudisBreakpointStyleResponsive } from '../../types/breakpoints';
 import {
   FudisGridProperties,
   FudisGridFormInputWidth,
-  gridInputPropertyDefaults,
+  FudisGridPropertyCollection,
 } from '../../types/grid';
 import { convertToRemValue } from '../../utilities/rem-converter';
 
@@ -111,56 +110,44 @@ export const getGridCssValue = (value: number | string, isGridItem?: boolean): s
  * Determine Grid Input Properties based on if Service defaults should be ignored or if application has provided values
  */
 
-export const getGridInputPropertyObject = (
-  gridComponent: GridComponent,
-  serviceDefaults: FudisGridProperties,
+export const getValuesForCSSClasses = (
+  properties: FudisGridPropertyCollection,
+  serviceDefaults: boolean,
 ): FudisGridProperties => {
-  if (!gridComponent.serviceDefaults) {
+  const { defaultValues, serviceValues, appValues } = properties;
+
+  if (!serviceDefaults) {
     /**
      * Set values from Inputs, if not provided, use default values. Ignore default values from FudisGridService
      */
     return {
-      width: gridComponent.width ?? gridInputPropertyDefaults.width,
-      align: gridComponent.align ?? gridInputPropertyDefaults.align,
-      alignItemsX: gridComponent.alignItemsX ?? gridInputPropertyDefaults.alignItemsX,
-      alignItemsY: gridComponent.alignItemsY ?? gridInputPropertyDefaults.alignItemsY,
-      marginTop: gridComponent.marginTop ?? gridInputPropertyDefaults.marginTop,
-      marginBottom: gridComponent.marginBottom ?? gridInputPropertyDefaults.marginBottom,
-      marginSides: gridComponent.marginSides ?? gridInputPropertyDefaults.marginSides,
-      rowGap: gridComponent.rowGap ?? gridInputPropertyDefaults.rowGap,
-      columnGap: gridComponent.columnGap ?? gridInputPropertyDefaults.columnGap,
-      classes: gridComponent.classes ?? gridInputPropertyDefaults.classes,
+      width: appValues.width ?? defaultValues.width,
+      align: appValues.align ?? defaultValues.align,
+      alignItemsX: appValues.alignItemsX ?? defaultValues.alignItemsX,
+      alignItemsY: appValues.alignItemsY ?? defaultValues.alignItemsY,
+      marginTop: appValues.marginTop ?? defaultValues.marginTop,
+      marginBottom: appValues.marginBottom ?? defaultValues.marginBottom,
+      marginSides: appValues.marginSides ?? defaultValues.marginSides,
+      rowGap: appValues.rowGap ?? defaultValues.rowGap,
+      columnGap: appValues.columnGap ?? defaultValues.columnGap,
+      classes: appValues.classes ?? defaultValues.classes,
     };
   } else {
     /**
      * Set values from Inputs, if not provided, check if FudisGridService has defaults, if not, use defaults.
      */
     return {
-      width: gridComponent.width ?? serviceDefaults.width ?? gridInputPropertyDefaults.width,
-      align: gridComponent.align ?? serviceDefaults.align ?? gridInputPropertyDefaults.align,
-      alignItemsX:
-        gridComponent.alignItemsX ??
-        serviceDefaults.alignItemsX ??
-        gridInputPropertyDefaults.alignItemsX,
-      alignItemsY:
-        gridComponent.alignItemsY ??
-        serviceDefaults.alignItemsY ??
-        gridInputPropertyDefaults.alignItemsY,
-      marginTop:
-        gridComponent.marginTop ?? serviceDefaults.marginTop ?? gridInputPropertyDefaults.marginTop,
+      width: appValues.width ?? serviceValues.width ?? defaultValues.width,
+      align: appValues.align ?? serviceValues.align ?? defaultValues.align,
+      alignItemsX: appValues.alignItemsX ?? serviceValues.alignItemsX ?? defaultValues.alignItemsX,
+      alignItemsY: appValues.alignItemsY ?? serviceValues.alignItemsY ?? defaultValues.alignItemsY,
+      marginTop: appValues.marginTop ?? serviceValues.marginTop ?? defaultValues.marginTop,
       marginBottom:
-        gridComponent.marginBottom ??
-        serviceDefaults.marginBottom ??
-        gridInputPropertyDefaults.marginBottom,
-      marginSides:
-        gridComponent.marginSides ??
-        serviceDefaults.marginSides ??
-        gridInputPropertyDefaults.marginSides,
-      rowGap: gridComponent.rowGap ?? serviceDefaults.rowGap ?? gridInputPropertyDefaults.rowGap,
-      columnGap:
-        gridComponent.columnGap ?? serviceDefaults.columnGap ?? gridInputPropertyDefaults.columnGap,
-      classes:
-        gridComponent.classes ?? serviceDefaults.classes ?? gridInputPropertyDefaults.classes,
+        appValues.marginBottom ?? serviceValues.marginBottom ?? defaultValues.marginBottom,
+      marginSides: appValues.marginSides ?? serviceValues.marginSides ?? defaultValues.marginSides,
+      rowGap: appValues.rowGap ?? serviceValues.rowGap ?? defaultValues.rowGap,
+      columnGap: appValues.columnGap ?? serviceValues.columnGap ?? defaultValues.columnGap,
+      classes: appValues.classes ?? serviceValues.classes ?? defaultValues.classes,
     };
   }
 };

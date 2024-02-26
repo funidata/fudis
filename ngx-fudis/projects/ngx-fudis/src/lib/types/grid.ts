@@ -79,6 +79,12 @@ export interface FudisGridProperties {
   width?: FudisGridWidth;
 }
 
+export interface FudisGridPropertyCollection {
+  appValues: FudisGridProperties;
+  defaultValues: FudisGridProperties;
+  serviceValues: FudisGridProperties;
+}
+
 /**
  * -------------------------------------------
  * Grid Item related types
