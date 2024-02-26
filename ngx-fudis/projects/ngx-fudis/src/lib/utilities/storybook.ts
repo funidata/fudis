@@ -89,6 +89,8 @@ export const dialogExclude: RegExp = excludeRegex(['closeButtonPositionAbsolute'
 
 export const headingControlsExclude: RegExp = excludeRegex(['id']);
 
+export const errorMessageExclude: RegExp = excludeRegex(['handleAddError', 'handleRemoveError']);
+
 const expandableCommonExclude: string[] = [
   'ref',
   'setClosedStatus',
