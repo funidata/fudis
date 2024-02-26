@@ -4,6 +4,40 @@ import { Meta } from "@storybook/blocks";
 
 # Translation Service
 
-{/* prettier-ignore */}
-{/* TODO: Write documentation */}
-_Coming soon_
+Several Fudis component has static text associated with the component logic. Most common example is form components' required indicator which is visible text next to the form field label.
+Also, some of the helper texts for screen readers are set automatically.
+All the translation keys for static texts come from Fudis translations and it is not possible to modify them from the application side.
+
+Currently supported languages in Fudis components are English, Finnish and Swedish. Default language of Fudis components is English.
+
+## Features
+
+Use Translation Service by importing and adding it to constructor.
+
+```
+import { FudisTranslationService } from 'ngx-fudis';
+
+  constructor(
+    private _translationService: FudisTranslationService,
+  ) {}
+```
+
+### Set Language
+
+`setLanguage` sets the language of above-mentioned repeated texts of Fudis components. Function takes language argument ('en', 'fi', 'sv').
+
+```
+this._translationService.setLanguage('fi');
+```
+
+### Get Language
+
+Get current language of Fudis configuration with `getLanguage`.
+
+```
+this._currentLanguage = this._translationService.getLanguage();
+```
+
+### Get Translations
+
+`getTranslations` is invoked in each component's effect that uses Fudis translations and will fetch translation keys according to the application language.
