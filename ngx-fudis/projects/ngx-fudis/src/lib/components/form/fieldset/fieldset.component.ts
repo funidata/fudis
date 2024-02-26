@@ -41,24 +41,24 @@ export class FieldSetComponent
   }
 
   /**
-   * Content directive for Fudis Fieldset Actions
+   * Content directive for Field Set Actions
    */
-  @ContentChild(ActionsDirective) headerActions: ActionsDirective | null;
+  @ContentChild(ActionsDirective) protected _headerActions: ActionsDirective | null;
 
   /**
-   * Content directive for Fudis Fieldset Notifications
+   * Content directive for Field Set Notifications
    */
-  @ContentChild(NotificationsDirective) notifications: NotificationsDirective;
+  @ContentChild(NotificationsDirective) protected _notifications: NotificationsDirective;
 
   /**
-   * Content directive for Fudis Fieldset Content
+   * Content directive for Field Set Content
    */
-  @ContentChild(ContentDirective) content: ContentDirective;
+  @ContentChild(ContentDirective) protected _content: ContentDirective;
 
   /**
-   * View for native fieldset element
+   * View for native fieldset HTMLelement
    */
-  @ViewChild('fieldset') fieldset: ElementRef;
+  @ViewChild('fieldset') private _fieldset: ElementRef;
 
   /**
    * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
@@ -97,18 +97,18 @@ export class FieldSetComponent
   @Input() marginSides: FudisGridMarginSide = 'none';
 
   /**
-   * Set focus to Fieldset when it appears first time
+   * Set focus to Field Set when it appears first time
    */
   @Input() initialFocus: boolean = false;
 
   /**
-   * Send information about current Fieldset to Error Summary Service.
-   * Error Summary Breadcrumb is the title of the current Fieldset and is visible in the clickable link in Error Summary.
+   * Send information about current Field Set to Error Summary Service.
+   * Error Summary Breadcrumb is the title of the current Field Set and is visible in the clickable link in Error Summary.
    */
   @Input() errorSummaryBreadcrumb: boolean = true;
 
   /**
-   * Display "Required" text next to Fieldset main title. By default set to 'undefined'.
+   * Display "Required" text next to Field Set main title. By default set to 'undefined'.
    */
   @Input() required: boolean | undefined = undefined;
 
@@ -123,17 +123,17 @@ export class FieldSetComponent
   protected _title: string;
 
   /**
-   * CSS classes for the native fieldset
+   * CSS classes for the native fieldset HTMLelement
    */
   protected _classes: string[];
 
   /**
-   * Has Fieldset been added to Error Summary
+   * Has Field Set been added to Error Summary
    */
   private _fieldsetSent: boolean = false;
 
   /**
-   * Fieldset object to send to Error Summary
+   * Field Set object to send to Error Summary
    */
   private _fieldsetInfo: FudisFormErrorSummarySection;
 
@@ -147,7 +147,7 @@ export class FieldSetComponent
 
   ngAfterViewInit(): void {
     if (this.initialFocus) {
-      this.fieldset.nativeElement.focus();
+      this._fieldset.nativeElement.focus();
     }
   }
 
@@ -164,7 +164,7 @@ export class FieldSetComponent
   }
 
   /**
-   * Add Fieldset title to Error Summary
+   * Add Field Set title to Error Summary
    */
   private _addToErrorSummary(): void {
     if (this.errorSummaryBreadcrumb) {
@@ -180,7 +180,7 @@ export class FieldSetComponent
   }
 
   /**
-   * Remove Fieldset title from Error Summary
+   * Remove Field Set title from Error Summary
    */
   private _removeFromErrorSummary(): void {
     if (this.errorSummaryBreadcrumb && this._fieldsetSent) {
@@ -189,7 +189,7 @@ export class FieldSetComponent
   }
 
   /**
-   * Set CSS classes for native fieldset element
+   * Set CSS classes for native fieldset HTMLelement
    */
   private _setClasses(): void {
     if (this.inputSize) {
