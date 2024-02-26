@@ -27,7 +27,10 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnIni
     this._missingTranslation = this._translations().LANGUAGE_BADGE.ARIA_LABEL.MISSING_TRANSLATION;
   }
 
-  @HostBinding('class') classes = 'fudis-language-badge-host';
+  /**
+   * Binding host CSS class to component wrapper
+   */
+  @HostBinding('class') private _classes = 'fudis-language-badge-host';
 
   /*
    * Language abbreviation for Language Badge

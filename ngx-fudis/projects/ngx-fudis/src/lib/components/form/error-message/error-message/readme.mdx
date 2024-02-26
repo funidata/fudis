@@ -1,5 +1,6 @@
-import { Meta, Canvas } from "@storybook/blocks";
+import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import * as ErrorMessageStories from "./error-message.stories";
+import { ErrorMessageComponent } from "./error-message.component";
 
 <Meta title="Components/Form/Error Message" />
 
@@ -79,4 +80,6 @@ When it is mandatory to target error message to a single Form Control in Date Ra
 ## Related Components
 
 - [Error Summary](/docs/components-form-error-summary--documentation)
+
+<ArgTypes of={ErrorMessageComponent} />
 ````

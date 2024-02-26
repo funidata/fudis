@@ -1,16 +1,17 @@
-import { Meta } from "@storybook/blocks";
+import { Meta, ArgTypes } from "@storybook/blocks";
+import { FieldSetComponent } from "./fieldset.component";
 
 <Meta title="Components/Form/Field Set" />
 
 # Field Set
 
-Fudis FieldSet is a grouping tool for Fudis Form Components. There are three directives to project content: header actions, notifications and main content.
+Field Set is a grouping tool for Fudis Form Components. There are three directives to project content: header actions, notifications and main content.
 
 ## Directives
 
 ### Header Actions
 
-Header actions are buttons positioned next to the FieldSet title.
+Header actions are buttons positioned next to the Field Set title.
 Header actions are assigned through Fudis Actions Directive content projection with **fudisActions** selector.
 Fudis Actions Directive also needs `type` input which has to be set as '_fieldset_'.
 There are no restrictions on header actions content but it is advised to use Fudis Buttons only.
@@ -23,7 +24,7 @@ There are no restrictions on header actions content but it is advised to use Fud
 
 ### Notifications
 
-Notifications are Fudis Notifications positioned under the FieldSet title.
+Notifications are Fudis Notifications positioned under the Field Set title.
 Notifications are assigned through Fudis Notifications Directive content projection with **fudisNotifications** selector.
 Fudis Notifications Directive also needs a `type` input which has to be set as '_fieldset_'.
 There are no restrictions on header actions content but it is advised to use Fudis Notifications only.
@@ -48,32 +49,32 @@ There are no restrictions on main content but it is advised to use Fudis Form Co
 
 ## Field Set Inputs
 
-Aside from content projection Fudis FieldSet will create a legend with optional tooltip and help text based on given properties.
+Aside from content projection Field Set will create a legend with optional tooltip and help text based on given properties.
 
 ### Legend
 
-Fudis FieldSet is not valid without a **mandatory** `title` property which is semantically legend element for the fieldset.
+Field Set is not valid without a **mandatory** `title` property which is semantically legend element for the HTML fieldset.
 
 ### Required
 
-If the whole fieldset is required, it can be set through `required` boolean property which will add '_(Required)_' text after the legend.
-Note that this has no other logic and is not concerned about validation of the components used inside the fieldset.
+If the whole Field Set is required, it can be set through `required` boolean property which will add '_(Required)_' text after the legend.
+Note that this has no other logic and is not concerned about validation of the components used inside the Field Set.
 
 ### Help Text
 
-Fieldset help text is displayed under legend and can be added through `helpText` property.
+Field Set help text is displayed under legend and can be added through `helpText` property.
 
 ### Tooltip
 
-Fudis Tooltip can be included in legend with properties from [Tooltip Directive](/docs/directives-tooltip--documentation).
+Tooltip can be included in legend with properties from [Tooltip Directive](/docs/directives-tooltip--documentation).
 
 ### Error Summary Breadcrumb
 
-Boolean property `errorSummaryBreadcrumb` adds fieldset title to the clickable link in Error Symmary when used inside Fudis Form with visible Error Summary. Set `false` by default.
+Boolean property `errorSummaryBreadcrumb` adds Field Set title to the clickable link in Error Symmary when used inside Fudis Form with visible Error Summary. Set `false` by default.
 
 ### Grid Properties
 
-Fudis FieldSet can use some of the Fudis [Grid properties](/docs/foundations-grid--documentation), including `width`, `align`, `marginSides`, `marginBottom` and `marginTop`.
+Field Set can use some of the Fudis [Grid properties](/docs/foundations-grid--documentation), including `width`, `align`, `marginSides`, `marginBottom` and `marginTop`.
 
 {/* prettier-ignore */}
 {/* TODO: Expose this when Radio Button Group and Checkbox Group components are exposed
@@ -116,3 +117,7 @@ HTML Template
       </ng-template>
     </fudis-fieldset>
 ```
+
+## Properties
+
+<ArgTypes of={FieldSetComponent} />

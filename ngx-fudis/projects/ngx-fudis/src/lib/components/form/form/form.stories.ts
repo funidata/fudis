@@ -1,12 +1,13 @@
 import { StoryFn, Meta, moduleMetadata, applicationConfig } from '@storybook/angular';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
-import { Component, OnInit, importProvidersFrom } from '@angular/core';
+import { Component, Input, OnInit, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import {
   FudisSelectOption,
   FudisRadioButtonOption,
+  FudisFormErrorSummaryLink,
   // FudisDateRangeItem,
 } from '../../../types/forms';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
@@ -16,6 +17,9 @@ import { FormComponent } from './form.component';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import readme from './readme.mdx';
+import { FudisBadgeVariant } from '../../../types/miscellaneous';
+import { FudisHeadingLevel, FudisHeadingSize } from '../../../types/typography';
+import { formExclude } from '../../../utilities/storybook';
 
 @Component({
   selector: 'example-form-content',
@@ -23,17 +27,14 @@ import readme from './readme.mdx';
     <fudis-form
       [marginSides]="'responsive'"
       [marginTop]="'xl'"
-      [badge]="'primary'"
-      [badgeText]="'example'"
-      [titleLevel]="1"
-      [title]="'Example form heading'"
-      [helpText]="
-        'Come about ropes end loot hail-shot belaying pin hornswaggle maroon quarter main sheet nipperkin.'
-      "
-      [errorSummaryLinkType]="'href'"
-      [errorSummaryHelpText]="
-        'There are errors in this form. Please address these before trying to submit again.'
-      "
+      [badge]="badge"
+      [badgeText]="badgeText"
+      [titleLevel]="titleLevel"
+      [title]="title"
+      [titleSize]="titleSize"
+      [helpText]="helpText"
+      [errorSummaryLinkType]="errorSummaryLinkType"
+      [errorSummaryHelpText]="errorSummaryHelpText"
       [errorSummaryVisible]="errorSummaryVisible"
     >
       <!-- <ng-template fudisHeader>
@@ -180,12 +181,18 @@ class FormContentExampleComponent implements OnInit {
     private _focusService: FudisFocusService,
   ) {}
 
+  @Input() title: string;
+  @Input() titleLevel: FudisHeadingLevel;
+  @Input() titleSize: FudisHeadingSize;
+  @Input() helpText: string;
+  @Input() badge: FudisBadgeVariant;
+  @Input() badgeText: string;
+  @Input() errorSummaryHelpText: string;
+  @Input() errorSummaryLinkType: FudisFormErrorSummaryLink;
+  @Input() errorSummaryVisible: boolean;
+
   releaseDate: number = new Date(1991, 4, 1).getTime();
-
-  errorSummaryVisible: boolean = false;
-
   firstLoad: boolean = true;
-
   fieldsetId = 'first-fieldset-id';
 
   formHeaderDl = [
@@ -311,17 +318,71 @@ export default {
       page: readme,
     },
   },
+  argTypes: {
+    badge: {
+      options: ['accent', 'danger', 'primary', 'secondary', 'success'],
+      control: {
+        type: 'select',
+      },
+    },
+    badgeText: {
+      control: {
+        type: 'text',
+      },
+    },
+    titleSize: {
+      options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+      control: {
+        type: 'select',
+      },
+    },
+    titleLevel: {
+      options: [1, 2, 3, 4, 5, 6],
+      control: {
+        type: 'select',
+      },
+    },
+    errorSummaryLinkType: {
+      options: ['href', 'router'],
+      control: {
+        type: 'select',
+      },
+    },
+  },
 } as Meta;
 
 const html = String.raw;
 
 export const Example: StoryFn<FormComponent> = (args: FormComponent) => ({
-  ...args,
-  template: html` <example-form-content />`,
+  props: args,
+  template: html` <example-form-content
+    [title]="title"
+    [titleLevel]="titleLevel"
+    [titleSize]="titleSize"
+    [helpText]="helpText"
+    [badge]="badge"
+    [badgeText]="badgeText"
+    [errorSummaryHelpText]="errorSummaryHelpText"
+    [errorSummaryLinkType]="errorSummaryLinkType"
+    [errorSummaryVisible]="errorSummaryVisible"
+  />`,
 });
+
+Example.args = {
+  title: 'Example Form Heading',
+  titleLevel: 1,
+  titleSize: 'xl',
+  helpText: 'This is an additional help text to give user more information about the form',
+  badge: 'primary',
+  badgeText: 'Example',
+  errorSummaryHelpText:
+    'There are errors in this form. Please address these before trying to submit again.',
+  errorSummaryLinkType: 'href',
+  errorSummaryVisible: false,
+};
 
 Example.parameters = {
   controls: {
-    exclude: /.*/g,
+    exclude: formExclude,
   },
 };

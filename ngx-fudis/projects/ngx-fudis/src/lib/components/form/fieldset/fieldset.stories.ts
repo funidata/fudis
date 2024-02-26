@@ -18,10 +18,10 @@ import readme from './readme.mdx';
   template: `
     <fudis-fieldset
       [width]="'md'"
-      [title]="'Fill in course information'"
-      [helpText]="'Please fill in course information.'"
+      [title]="'Example Field Set Title'"
+      [helpText]="'Helptext for the fieldset'"
       [marginSides]="'responsive'"
-      [tooltip]="'Some additional information'"
+      [tooltip]="'Some additional information about this fieldset'"
     >
       <ng-template fudisActions [type]="'fieldset'">
         <fudis-button [variant]="'tertiary'" [icon]="'plus'" [label]="'Some action'" />
@@ -157,6 +157,13 @@ export default {
 
 const html = String.raw;
 
-export const Example: StoryFn = () => ({
+export const Example: StoryFn<FieldSetComponent> = (args: FieldSetComponent) => ({
+  props: args,
   template: html` <example-fieldset /> `,
 });
+
+Example.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
+};

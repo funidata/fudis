@@ -10,6 +10,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
 import { FudisFormErrorSummaryUpdateStrategy, FudisRadioButtonOption } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
+import { excludeAllRegex } from '../../../utilities/storybook';
 
 // TODO: Refactor fudis-body-text inline style to Spacing Directive after the directive is exposed again
 // (fudisSpacing [marginRight]="'sm'" [marginTop]="'xs'")
@@ -168,6 +169,13 @@ export default {
 } as Meta;
 const html = String.raw;
 
-export const Example: StoryFn = () => ({
+export const Example: StoryFn<ErrorSummaryComponent> = (args: ErrorSummaryComponent) => ({
+  props: args,
   template: html` <example-error-summary />`,
 });
+
+Example.parameters = {
+  controls: {
+    exclude: excludeAllRegex,
+  },
+};

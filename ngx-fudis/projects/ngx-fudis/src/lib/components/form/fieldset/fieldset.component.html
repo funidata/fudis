@@ -15,14 +15,14 @@
   <legend class="fudis-fieldset__legend">
     <div
       class="fudis-fieldset__legend__container"
-      [class.fudis-fieldset__legend__container__row-end]="headerActions?.align === 'end'"
-      [class.fudis-fieldset__legend__container__column]="headerActions?.align === 'bottom'"
-      [class.fudis-fieldset__legend__container__row-start]="headerActions?.align === 'start'"
+      [class.fudis-fieldset__legend__container__row-end]="_headerActions?.align === 'end'"
+      [class.fudis-fieldset__legend__container__column]="_headerActions?.align === 'bottom'"
+      [class.fudis-fieldset__legend__container__row-start]="_headerActions?.align === 'start'"
     >
       <div
         class="fudis-fieldset__legend__title"
         [class.fudis-fieldset__legend__title__with-inputs]="inputSize"
-        [class.fudis-fieldset__legend__title__margin-right]="headerActions?.type === 'fieldset'"
+        [class.fudis-fieldset__legend__title__margin-right]="_headerActions?.type === 'fieldset'"
       >
         <div
           class="fudis-fieldset__legend__title__main fudis-fieldset__legend__title__main__{{
@@ -53,19 +53,19 @@
           <span class="fudis-fieldset__legend__help-text">{{ helpText }}</span>
         </ng-container>
       </div>
-      <ng-container *ngIf="headerActions && headerActions?.type === 'fieldset'">
+      <ng-container *ngIf="_headerActions && _headerActions?.type === 'fieldset'">
         <div class="fudis-fieldset__legend__actions">
-          <ng-container *ngTemplateOutlet="headerActions!.templateRef" />
+          <ng-container *ngTemplateOutlet="_headerActions!.templateRef" />
         </div>
       </ng-container>
     </div>
-    <ng-container *ngIf="notifications && notifications?.type === 'fieldset'">
+    <ng-container *ngIf="_notifications && _notifications?.type === 'fieldset'">
       <div class="fudis-fieldset__legend__notifications">
-        <ng-container *ngTemplateOutlet="notifications!.templateRef" />
+        <ng-container *ngTemplateOutlet="_notifications!.templateRef" />
       </div>
     </ng-container>
   </legend>
-  <ng-container *ngIf="content && content?.type === 'fieldset'">
-    <ng-container *ngTemplateOutlet="content!.templateRef" />
+  <ng-container *ngIf="_content && _content?.type === 'fieldset'">
+    <ng-container *ngTemplateOutlet="_content!.templateRef" />
   </ng-container>
 </fieldset>
