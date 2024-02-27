@@ -1,0 +1,25 @@
+import { Meta, ArgTypes } from "@storybook/blocks";
+import { FudisGridService } from "./grid.service.ts";
+import { FudisGridProperties } from "../../types/grid.ts";
+
+<Meta title="Services/Grid" />
+
+# Fudis Grid Service
+
+Fudis Grid Service provides tools to apply default property values to all Grid Components and Grid Directive elements application has.
+
+## How To Use
+
+Fudis Grid Service has getter and setter functions for default Grid properties.
+
+### getDefaultValues()
+
+`FudisGridService.getDefaultValues()` returns a signal function. So when these default values change, there is an option to trigger Angular's `effect()` hook.
+
+### setDefaultValues()
+
+`FudisGridService.setDefaultValues()` required an object paremeter of type `FudisGridProperties`.
+
+## Properties
+
+<ArgTypes of={FudisGridService} />
