@@ -4,7 +4,6 @@
   "description": "Funidata Design System",
   "scripts": {
     "postinstall": "cd ngx-fudis && npm ci && cd ../test && npm ci",
-    "setup:husky": "husky install",
     "start": "npm run start:storybook && npm run logs -- fudis-storybook",
     "start:all": "npm run start:storybook && npm run start:sandbox && npm run logs",
     "start:sandbox": "docker compose up --build -d fudis-sandbox",
@@ -36,7 +35,6 @@
   },
   "homepage": "https://funidata.github.io/fudis/main/",
   "devDependencies": {
-    "husky": "^8.0.3",
     "prettier": "^3.2.5"
   }
 }
