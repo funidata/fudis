@@ -1,0 +1,44 @@
+import { Meta, ArgTypes } from "@storybook/blocks";
+import { GridItemDirective } from "./grid-item.directive.ts";
+
+<Meta title="Directives/Grid/Grid Item" />
+
+# Grid Item Directive
+
+Grid Item Directive enables to selected element different layout properties for native CSS Grid and alignment properties.
+
+Together with a parent element implementing [Grid Directive](/docs/directives-grid-grid-directive--documentation) responsive layouts can be tailored.
+
+## Examples and Usage guidelines
+
+More throughout examples and guidelines can be found in documentation of [Grid Item Component](/docs/components-grid-grid-item--documentation)
+
+## How To Use
+
+### With Fudis Grid Component
+
+For readibility it is recommended to use [Fudis Grid Item Component](/docs/components-grid-grid-item--documentation), which already implements Grid Item Directive.
+
+```
+<fudis-grid>
+  <fudis-grid-item>
+    // item content here
+  </fudis-grid-item>
+</fudis-grid-item>
+```
+
+### With Any Other Element or Component
+
+Add `fudisGridItem` directive selector to your element to enable Grid Item Directive API features.
+
+```
+<fudis-grid>
+  <div fudisGridItem>
+    // item content here
+  </div>
+</fudis-grid>
+```
+
+## Properties
+
+<ArgTypes of={GridItemDirective} />

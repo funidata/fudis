@@ -101,7 +101,7 @@ const preview = {
             "Typography",
           ],
           "Directives",
-          ["Introduction", "Grid", "Tooltip"],
+          ["Introduction", "Grid", ["Introduction"], "Tooltip"],
           "Services",
           ["Introduction", "Error Summary", "Grid", "Translation"],
           "Utilities",
