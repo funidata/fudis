@@ -14,21 +14,17 @@ import { FudisSpacing } from '../../../types/miscellaneous';
 })
 export class GridApiDirective {
   /**
-   * Alignment of Grid component inside its parent. After initialisation defaults to: 'center'
+   * Alignment of Grid component inside its parent.
    */
   @Input() align: FudisGridAlign = 'center';
 
   /**
    * Horizontal alignment of Grid Items in a row.
-   *
-   * After initialisation defaults to: 'stretch'
    */
   @Input() alignItemsX: FudisGridAlignItems = 'stretch';
 
   /**
    * Vertical alignment of Grid Items in a row.
-   *
-   * After initialisation defaults to: 'stretch'
    */
   @Input() alignItemsY: FudisGridAlignItems = 'stretch';
 
@@ -39,8 +35,6 @@ export class GridApiDirective {
 
   /**
    * Grid column gap. Using Fudis spacing token values of xxs to xxl and none.
-   *
-   * After initialisation defaults to: 'responsive'
    */
   @Input() columnGap: FudisGridGap = 'responsive';
 
@@ -54,9 +48,6 @@ export class GridApiDirective {
    * Before md breakpoint Grid has default of '1fr' columns.
    * After md breakpoint it will have two columns 'repeat(2, 1fr)'
    * And after xl breakpoint 'repeat(3, 1fr)'
-   *
-   * After initialisation defaults to: '1fr'
-   *
    */
   @Input() columns: FudisGridColumns = '1fr';
 
@@ -67,29 +58,21 @@ export class GridApiDirective {
 
   /**
    * Margin bottom for the Grid.
-   *
-   * After initialisation defaults to: 'none'
    */
   @Input() marginBottom: FudisSpacing = 'none';
 
   /**
    * Horizontal margins left and right of the grid.
-   *
-   * After initialisation defaults to: 'none'
    */
   @Input() marginSides: FudisGridMarginSide = 'none';
 
   /**
    * Margin top for the Grid.
-   *
-   * After initialisation defaults to: 'none'
    */
   @Input() marginTop: FudisSpacing = 'none';
 
   /**
    * Grid row gap. Using Fudis spacing token values of xxs to xxl and none.
-   *
-   * After initialisation defaults to: 'responsive'
    */
   @Input() rowGap: FudisGridGap = 'none';
 
@@ -101,8 +84,6 @@ export class GridApiDirective {
    * md = Viewports smaller than 992px
    * sm = Viewports smaller than 768px
    * xs = Viewports smaller than 576px
-   *
-   * After initialisation defaults to: 'xxl'
    */
   @Input() width: FudisGridWidth = 'xxl';
 }

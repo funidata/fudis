@@ -255,8 +255,6 @@ export class AppComponent implements OnInit {
         ? { xs: 1, md: 3 }
         : { xs: 1, md: 2 };
 
-    console.log(JSON.stringify(this._gridService.getDefaultValues()()?.columns));
-
     this._gridService.setDefaultValues({
       alignItemsX: updateValue,
       columns: updateColumnsValue,
