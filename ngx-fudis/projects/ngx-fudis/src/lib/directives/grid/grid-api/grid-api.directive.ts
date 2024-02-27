@@ -15,7 +15,7 @@ export class GridApiDirective {
   /**
    * Alignment of Grid component inside its parent. Defines margins for the Grid element
    */
-  @Input() align: FudisGridAlign = 'center';
+  @Input() align: FudisGridAlign = 'start';
 
   /**
    * Horizontal alignment of Grid Items in a row.

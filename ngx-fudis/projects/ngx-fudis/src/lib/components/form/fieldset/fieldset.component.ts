@@ -79,7 +79,7 @@ export class FieldSetComponent
   /**
    * Alignment of Grid component inside its parent
    */
-  @Input() align: FudisGridAlign = 'center';
+  @Input() align: FudisGridAlign = 'start';
 
   /**
    * Margin top for the Grid
