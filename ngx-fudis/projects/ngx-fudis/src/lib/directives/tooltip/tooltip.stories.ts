@@ -29,29 +29,41 @@ export default {
 
 const html = String.raw;
 
-// TODO: Refactor fudis-button inline style to Spacing Directive after the directive is exposed again
-// (fudisSpacing [marginRight]="'md'")
-export const Example: StoryFn<TooltipDirective> = (args: TooltipDirective) => ({
+export const ExampleWithNativeButton: StoryFn<TooltipDirective> = (args: TooltipDirective) => ({
+  props: args,
+  template: html`
+    <button
+      fudisTooltip
+      [tooltip]="tooltip"
+      [tooltipPosition]="tooltipPosition"
+      [tooltipToggle]="tooltipToggle"
+    >
+      Tooltip will display on: {{tooltipToggle ? 'click' : 'hover'}}
+    </button>
+  `,
+});
+
+ExampleWithNativeButton.args = {
+  tooltip: 'Greetings from toggle tooltip, I hope you can see me!',
+  tooltipPosition: 'right',
+  tooltipToggle: false,
+};
+
+export const ExampleWithFudisButton: StoryFn<TooltipDirective> = (args: TooltipDirective) => ({
   props: args,
   template: html`
     <fudis-button
-      style="margin-right: 2rem;"
-      [label]="'Hover me'"
+      [label]="tooltipToggle ? 'Tooltip will display on: click' : 'Tooltip will display on: hover'"
       [tooltip]="tooltip"
       [tooltipPosition]="tooltipPosition"
-    >
-    </fudis-button>
-    <fudis-button
-      [label]="'Click me'"
-      [tooltip]="tooltip"
-      [tooltipPosition]="tooltipPosition"
-      [tooltipToggle]="true"
+      [tooltipToggle]="tooltipToggle"
     >
     </fudis-button>
   `,
 });
 
-Example.args = {
+ExampleWithFudisButton.args = {
   tooltip: 'Greetings from toggle tooltip, I hope you can see me!',
   tooltipPosition: 'right',
+  tooltipToggle: false,
 };
