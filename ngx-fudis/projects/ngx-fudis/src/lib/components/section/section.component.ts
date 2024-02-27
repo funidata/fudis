@@ -11,7 +11,7 @@ import { FudisIdService } from '../../services/id/id.service';
 import { FudisHeadingSize, FudisHeadingLevel } from '../../types/typography';
 import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
-import { FudisGridWidth, FudisGridAlign, FudisGridMarginSide } from '../../types/grid';
+import { FudisGridWidth, FudisGridAlign } from '../../types/grid';
 
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisSpacing } from '../../types/miscellaneous';
@@ -85,11 +85,6 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
    * Margin bottom for the Grid
    */
   @Input() marginBottom: FudisSpacing = 'none';
-
-  /**
-   * Horizontal margins left and right of the grid
-   */
-  @Input() marginSides: FudisGridMarginSide = 'none';
 
   /**
    * Custom CSS classes for Grid element

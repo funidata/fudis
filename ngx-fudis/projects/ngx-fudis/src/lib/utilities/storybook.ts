@@ -76,7 +76,6 @@ export const formExclude: RegExp = excludeRegex([
   'columns',
   'ignoreDefaults',
   'marginBottom',
-  'marginSides',
   'marginTop',
   'rowGap',
   'width',
@@ -120,6 +119,8 @@ export const expandableControlExclude: RegExp = excludeRegex([
   'closedChange',
   'errorSummaryBreadcrumb',
 ]);
+
+export const gridExampleExclude: RegExp = excludeRegex(['classes', 'serviceDefaults']);
 
 export const selectCommonExclude: RegExp = excludeRegex([
   'control',

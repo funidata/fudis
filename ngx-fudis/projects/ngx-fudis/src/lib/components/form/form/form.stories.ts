@@ -25,7 +25,6 @@ import { formExclude } from '../../../utilities/storybook';
   selector: 'example-form-content',
   template: `
     <fudis-form
-      [marginSides]="'responsive'"
       [marginTop]="'xl'"
       [badge]="badge"
       [badgeText]="badgeText"

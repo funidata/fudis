@@ -18,7 +18,6 @@ export const getGridClasses = (values: FudisGridProperties): string => {
     `fudis-grid__margin__bottom__${values.marginBottom}`,
     values.rowGap === 'responsive' ? '' : `fudis-grid__row-gap__${values.rowGap}`,
     values.columnGap === 'responsive' ? '' : `fudis-grid__column-gap__${values.columnGap}`,
-    values.marginSides === 'responsive' ? '' : `fudis-grid__margin__sides__${values.marginSides}`,
   ];
 
   if (values.classes) {
@@ -84,7 +83,6 @@ export const getValuesForCSSClasses = (
       alignItemsY: appValues.alignItemsY ?? defaultValues.alignItemsY,
       marginTop: appValues.marginTop ?? defaultValues.marginTop,
       marginBottom: appValues.marginBottom ?? defaultValues.marginBottom,
-      marginSides: appValues.marginSides ?? defaultValues.marginSides,
       rowGap: appValues.rowGap ?? defaultValues.rowGap,
       columnGap: appValues.columnGap ?? defaultValues.columnGap,
       classes: appValues.classes ?? defaultValues.classes,
@@ -101,7 +99,6 @@ export const getValuesForCSSClasses = (
       marginTop: appValues.marginTop ?? serviceValues.marginTop ?? defaultValues.marginTop,
       marginBottom:
         appValues.marginBottom ?? serviceValues.marginBottom ?? defaultValues.marginBottom,
-      marginSides: appValues.marginSides ?? serviceValues.marginSides ?? defaultValues.marginSides,
       rowGap: appValues.rowGap ?? serviceValues.rowGap ?? defaultValues.rowGap,
       columnGap: appValues.columnGap ?? serviceValues.columnGap ?? defaultValues.columnGap,
       classes: appValues.classes ?? serviceValues.classes ?? defaultValues.classes,

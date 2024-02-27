@@ -60,11 +60,10 @@ describe('GridUtils', () => {
         marginBottom: 'xl',
         rowGap: 'sm',
         columnGap: 'lg',
-        marginSides: 'none',
       };
 
       expect(utils.getGridClasses(values)).toBe(
-        'fudis-grid fudis-grid__xxl fudis-grid__align__end fudis-grid__margin__top__md fudis-grid__margin__bottom__xl fudis-grid__row-gap__sm fudis-grid__column-gap__lg fudis-grid__margin__sides__none',
+        'fudis-grid fudis-grid__xxl fudis-grid__align__end fudis-grid__margin__top__md fudis-grid__margin__bottom__xl fudis-grid__row-gap__sm fudis-grid__column-gap__lg',
       );
     });
 
@@ -76,7 +75,6 @@ describe('GridUtils', () => {
         marginBottom: 'xl',
         rowGap: 'responsive',
         columnGap: 'responsive',
-        marginSides: 'responsive',
         classes: ['my-custom-class', 'my-other-custom-class'],
       };
 

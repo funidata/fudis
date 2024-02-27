@@ -7,7 +7,6 @@ import {
   FudisGridAlignItems,
   FudisGridColumnsResponsive,
   FudisGridGap,
-  FudisGridMarginSide,
   FudisGridWidth,
 } from '../../../types/grid';
 import { HeadingComponent } from '../../../components/typography/heading/heading.component';
@@ -32,13 +31,7 @@ import { FudisSpacing } from '../../../types/miscellaneous';
       <fudis-body-text>Paragraph text for testing grid directive.</fudis-body-text>
       <fudis-button [label]="'Test button'" />
     </div>
-    <div
-      fudisGrid
-      [columns]="2"
-      [marginBottom]="marginBottom"
-      [marginTop]="marginTop"
-      [marginSides]="marginSides"
-    >
+    <div fudisGrid [columns]="2" [marginBottom]="marginBottom" [marginTop]="marginTop">
       <fudis-heading [level]="4">I am test heading number two</fudis-heading>
       <fudis-body-text>Paragraph text for testing grid directive.</fudis-body-text>
       <fudis-button [label]="'Test button number two'" />
@@ -62,8 +55,6 @@ class HostComponent {
   marginBottom: FudisSpacing = 'none';
 
   marginTop: FudisSpacing = 'none';
-
-  marginSides: FudisGridMarginSide = 'none';
 
   rowGap: FudisGridGap = 'responsive';
 

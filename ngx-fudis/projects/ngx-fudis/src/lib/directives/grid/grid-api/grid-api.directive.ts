@@ -1,7 +1,6 @@
 import { Directive, Input } from '@angular/core';
 import {
   FudisGridWidth,
-  FudisGridMarginSide,
   FudisGridGap,
   FudisGridAlign,
   FudisGridAlignItems,
@@ -14,7 +13,7 @@ import { FudisSpacing } from '../../../types/miscellaneous';
 })
 export class GridApiDirective {
   /**
-   * Alignment of Grid component inside its parent.
+   * Alignment of Grid component inside its parent. Defines margins for the Grid element
    */
   @Input() align: FudisGridAlign = 'center';
 
@@ -62,11 +61,6 @@ export class GridApiDirective {
    * Margin bottom for the Grid.
    */
   @Input() marginBottom: FudisSpacing = 'none';
-
-  /**
-   * Horizontal margins left and right of the grid.
-   */
-  @Input() marginSides: FudisGridMarginSide = 'none';
 
   /**
    * Margin top for the Grid.

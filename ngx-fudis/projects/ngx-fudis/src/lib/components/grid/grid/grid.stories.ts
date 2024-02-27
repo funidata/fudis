@@ -1,6 +1,6 @@
 import { StoryFn, Meta, componentWrapperDecorator } from '@storybook/angular';
 import { GridComponent } from './grid.component';
-import { excludeEverythingExceptRegex } from '../../../utilities/storybook';
+import { excludeEverythingExceptRegex, gridExampleExclude } from '../../../utilities/storybook';
 import readme from './grid.component.mdx';
 
 const html = String.raw;
@@ -31,7 +31,6 @@ const ExampleTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
     [alignItemsY]="alignItemsY"
     [marginTop]="marginTop"
     [marginBottom]="marginBottom"
-    [marginSides]="marginSides"
     [width]="width"
     [columnGap]="columnGap"
     [rowGap]="rowGap"
@@ -64,7 +63,6 @@ Example.args = {
   alignItemsY: 'stretch',
   marginTop: 'none',
   marginBottom: 'none',
-  marginSides: 'responsive',
   width: 'xxl',
   rowGap: 'responsive',
   columnGap: 'responsive',
@@ -107,15 +105,21 @@ Example.argTypes = {
     options: ['responsive', 'none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
     control: { type: 'select' },
   },
-  marginSides: {
-    options: ['responsive', 'none'],
-    control: { type: 'select' },
+};
+
+Example.parameters = {
+  controls: {
+    exclude: gridExampleExclude,
   },
 };
 
 const EquallyWideColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
   props: args,
-  template: html`<fudis-grid [columns]="columns">
+  template: html`<fudis-grid
+    [columns]="columns"
+    [align]="'center'"
+    [classes]="['storybook__wrapper-border']"
+  >
     <fudis-body-text class="storybook__item-highlight"
       >Grid item. Current value of columns is: {{columns}}</fudis-body-text
     >
@@ -156,11 +160,11 @@ EquallyWideColumns.parameters = {
 const UnequallyWideColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
   props: args,
 
-  template: html`<fudis-grid [columns]="columns">
-    <fudis-heading class="storybook__item-highlight" [level]="1" [size]="'lg'"
-      >To apply unequally proportioned colums, use native CSS grid-template-column 'fr'
-      values.</fudis-heading
-    >
+  template: html`<fudis-grid
+    [columns]="columns"
+    [align]="'center'"
+    [classes]="['storybook__wrapper-border']"
+  >
     <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
     <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
     <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
@@ -194,27 +198,11 @@ const ResponsiveColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent) 
     columnObjectTwo: '{sm: 2, md: 3}',
     combinedObject: '{xs: 1, sm: 2, md: 3, xl: 4}',
   },
-  template: html`<fudis-grid [columns]="columns">
-    <fudis-grid-item class="storybook__item-highlight" [columns]="'stretch'">
-      <fudis-body-text class="text-margin">
-        You don't need to provide value for all breakpoints.</fudis-body-text
-      >
-      <fudis-body-text class="text-margin">
-        E. g. with {{columnObjectOne}} Grid will have default value of '1fr' until 'md' breakpoint
-        and 'md' rule is on until hitting 'xxl' breakpoint.</fudis-body-text
-      >
-      <fudis-body-text class="text-margin"
-        >Using FudisGridService's 'setDefaultValues()' you can define default values applied to all
-        your Grids.</fudis-body-text
-      >
-      <fudis-body-text class="text-margin"
-        >If you set default values and provide values for single Grid, values are combined.
-      </fudis-body-text>
-      <fudis-body-text>
-        E. g. with default values of {{defaultObject}} and provided Grid values of
-        {{columnObjectTwo}} applied values will be: {{combinedObject}}
-      </fudis-body-text>
-    </fudis-grid-item>
+  template: html`<fudis-grid
+    [columns]="columns"
+    [align]="'center'"
+    [classes]="['storybook__wrapper-border']"
+  >
     <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
     <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
     <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
@@ -227,7 +215,7 @@ const ResponsiveColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent) 
 export const ResponsiveColumns = ResponsiveColumnsTemplate.bind({});
 
 ResponsiveColumns.args = {
-  columns: { xs: 1, sm: 2, md: '1fr 2fr', lg: 3, xl: '1fr 2fr 1fr', xxl: 6 },
+  columns: { sm: 2, md: '1fr 2fr', lg: 3, xl: '1fr 2fr 1fr', xxl: 6 },
 };
 
 ResponsiveColumns.parameters = {

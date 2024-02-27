@@ -24,35 +24,6 @@
     grid-column: 1/-1;
   }
 
-  &__align {
-    &__start {
-      margin-right: auto;
-      margin-left: 0;
-
-      @include breakpoints.breakpoint-max("sm") {
-        @include grid.grid-xs-margins;
-      }
-    }
-
-    &__center {
-      margin-right: auto;
-      margin-left: auto;
-
-      @include breakpoints.breakpoint-max("sm") {
-        @include grid.grid-xs-margins;
-      }
-    }
-
-    &__end {
-      margin-right: 0;
-      margin-left: auto;
-
-      @include breakpoints.breakpoint-max("sm") {
-        @include grid.grid-xs-margins;
-      }
-    }
-  }
-
   &__margin {
     &__top {
       &__none {
@@ -122,45 +93,61 @@
       }
     }
 
-    &__sides {
-      &__none {
-        margin-right: 0;
+    &__align {
+      &__start {
+        margin-right: auto;
         margin-left: 0;
+
+        @include breakpoints.breakpoint-max("sm") {
+          @include grid.grid-xs-margins;
+        }
       }
 
-      &__xxs {
-        margin-right: spacing.$spacing-xxs;
-        margin-left: spacing.$spacing-xxs;
+      &__center {
+        margin-right: auto;
+        margin-left: auto;
+
+        @include breakpoints.breakpoint-max("sm") {
+          @include grid.grid-xs-margins;
+        }
       }
 
-      &__xs {
-        margin-right: spacing.$spacing-xs;
-        margin-left: spacing.$spacing-xs;
-      }
+      &__end {
+        margin-right: 0;
+        margin-left: auto;
 
-      &__sm {
-        margin-right: spacing.$spacing-sm;
-        margin-left: spacing.$spacing-sm;
+        @include breakpoints.breakpoint-max("sm") {
+          @include grid.grid-xs-margins;
+        }
       }
+    }
+  }
 
-      &__md {
-        margin-right: spacing.$spacing-md;
-        margin-left: spacing.$spacing-md;
+  &__align {
+    &__start {
+      margin-right: auto;
+      margin-left: 0;
+
+      @include breakpoints.breakpoint-max("sm") {
+        @include grid.grid-xs-margins;
       }
+    }
 
-      &__lg {
-        margin-right: spacing.$spacing-lg;
-        margin-left: spacing.$spacing-lg;
+    &__center {
+      margin-right: auto;
+      margin-left: auto;
+
+      @include breakpoints.breakpoint-max("sm") {
+        @include grid.grid-xs-margins;
       }
+    }
 
-      &__xl {
-        margin-right: spacing.$spacing-xl;
-        margin-left: spacing.$spacing-xl;
-      }
+    &__end {
+      margin-right: 0;
+      margin-left: auto;
 
-      &__xxl {
-        margin-right: spacing.$spacing-xxl;
-        margin-left: spacing.$spacing-xxl;
+      @include breakpoints.breakpoint-max("sm") {
+        @include grid.grid-xs-margins;
       }
     }
   }

@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
   ) {
     _gridService.setDefaultValues({
       columns: { xs: 1, md: 2 },
-      marginSides: 'responsive',
+      align: 'center',
     });
   }
 
