@@ -1,0 +1,115 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/blocks";
+
+<Meta title="Components/Grid" />
+
+# Introduction to Grid
+
+Fudis provides an extensive Grid layout component with many possibilities to adjust its attributes to cater most layout cases. Here are some best practices and suggestions how to get the best out of Fudis Grid. More illustrative and hands-on examples can be found under Components section, in [Grid](/docs/components-grid-grid--documentation) and [GridItem](/docs/components-grid-grid-item--documentation).
+
+Grid uses now widely supported native CSS Grid properties as its base and implementes CSS properties like `grid-template-columns`, `column-gap` and `row-gap` through its API.
+
+## How to Start
+
+Start using the grid by simply surrounding wanted content with grid tags:
+
+```
+<fudis-grid>
+ <your-content-here />
+</fudis-grid>
+```
+
+The default behaviour makes your content to stretch in one grid-column and adds few other default styling/alignment but you probably want to make more adjustments.
+
+## Next Steps
+
+### Set Universal Default Grid Values
+
+`FudisGridService` provides a method to set default values for all the grids that the application uses. These default values can be overwritten or totally ignore for each grid if needed.
+
+```
+export class AppComponent {
+ constructor(private _gridService: FudisGridService) {
+	_gridService.setDefaultValues({
+	  columns: { xs: 1, lg: 2 },
+	  marginSides: 'responsive',
+	});
+ }
+...
+}
+```
+
+In the example above, all the application grids have default columns and marginSides set. If you now take a look at your plain `<fudis-grid> <your-content-here /> </fudis-grid>` it should have responsive margins on both sides and the content should change from one grid-colum to two grid-colums when hitting 'lg' [breakpoint](/docs/foundations-breakpoints--documentation#breakpoint-tokens-and-values-they-apply).
+
+### Defining Responsive Columns
+
+As we already saw from the previous example the grid-columns makes the content flow responsively through different breakpoints. If you need more column variations for one of your grids, simply add `[columns]` object to it.
+
+```
+<fudis-grid [columns]="{ md: 3, xl: 4 }">
+ <your-content-here />
+</fudis-grid>
+```
+
+The default values will be combied with the new values, so now your grid will basicly have `{ xs: 1, md: 3, lg: 2, xl: 4 }`. Single grid values will overwrite the default ones if same breakpoint has been provided in both places.
+
+### Ignore default grid values
+
+There is possibility to ignore the application default settings for single grids as well.
+
+```
+<fudis-grid
+	 [columns]="{ md: 3, xl: 4 }"
+	 [serviceDefaults]="false">
+ <your-content-here />
+</fudis-grid>
+```
+
+Now the grid will only have responsive columns set as `{ md: 3, xl: 4 }`, without combining the default values.
+
+<hr />
+
+# Grid Item
+
+Grid can have grid-items as its children. With grid-item you can target certain rules to specific element. There are two ways to use grid-item, through `fudisGridItem` directive or `<fudis-grid-item>` tag. Following properties are available:
+
+#### Columns
+
+Just like grid itself, grid-item can be adjusted with `columns` attribute. You can pass string, number or object to it, e.g `[columns]="{ sm: 2, md: 4, xxl: 6 }"`.
+
+#### AlignX
+
+Align single grid-item element horizontally `start`, `center`, `end` or `stretch`, e.g `[alignSelfX]="'start'"`.
+
+#### AlignY
+
+Align single grid-item element vertically `start`, `center`, `end` or `stretch`, e.g `[alignSelfY]="'center'"`.
+
+### Example of grid-item directive
+
+```
+<fudis-grid [columns]="2">
+	<fudis-body-text fudisGridItem [alignSelfX]="'end'"></fudis-body-text>
+	<fudis-body-text fudisGridItem [columns]="2"></fudis-body-text>
+	<fudis-body-text></fudis-body-text>
+	<fudis-body-text fudisGridItem [alignSelfY]="'center'"></fudis-body-text>
+</fudis-grid>
+```
+
+### Example of grid-item tag
+
+```
+<fudis-grid [columns]="2">
+	<fudis-grid-item [alignSelfX]="'end'">
+		<fudis-body-text></fudis-body-text>
+	</fudis-grid-item>
+	<fudis-grid-item [columns]="2">
+		<fudis-body-text></fudis-body-text>
+	</fudis-grid-item>
+	<fudis-body-text></fudis-body-text>
+	<fudis-grid-item [alignSelfY]="'center'">
+		<fudis-body-text></fudis-body-text>
+	</fudis-grid-item>
+</fudis-grid>
+```
+
+These two example results are identical. First body-text is aligned horizontally to the right (end), second body-text is taking up two columns, third gets its rules from the parent grid and fourth body-text is aligned vertically to the center.

@@ -34,7 +34,7 @@ export class GridApiDirective {
   @Input() classes: string[] = [];
 
   /**
-   * Grid column gap. Using Fudis spacing token values of xxs to xxl and none.
+   * Gutter gap between columns. Using Fudis spacing token values of xxs to xxl, none and responsive.
    */
   @Input() columnGap: FudisGridGap = 'responsive';
 
@@ -47,7 +47,9 @@ export class GridApiDirective {
    * E. g. [columns]="{md: 2, xl: 3}".
    * Before md breakpoint Grid has default of '1fr' columns.
    * After md breakpoint it will have two columns 'repeat(2, 1fr)'
-   * And after xl breakpoint 'repeat(3, 1fr)'
+   * And after xl breakpoint 'repeat(3, 1fr)'.
+   *
+   * If your layout consists of Fudis Form components, e. g. TextInput, Datepicker etc. You can set your columns to width of those components by using columns values of "inputXs", "inputSm", "inputMd" or "inputLg". These can be used in responsive columns as well.
    */
   @Input() columns: FudisGridColumns = '1fr';
 

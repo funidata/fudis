@@ -3,11 +3,11 @@
     <!-- <fudis-alert-group /> -->
 
     <fudis-grid [columns]="4" [marginTop]="'lg'">
-      <fudis-grid-item [columns]="'3 / 4'" [alignX]="'end'" [alignY]="'end'">
+      <fudis-grid-item [columns]="'3 / 4'" [alignSelfX]="'end'" [alignSelfY]="'end'">
         <fudis-body-text>1 rem = {{ visibleRemValue }}px</fudis-body-text>
         <fudis-body-text>Font size is {{ fontSize }}</fudis-body-text>
       </fudis-grid-item>
-      <fudis-grid-item [columns]="'4 / -1'" [alignX]="'end'">
+      <fudis-grid-item [columns]="'4 / -1'" [alignSelfX]="'end'">
         <fudis-button [label]="'Change REM base'" (handleClick)="changeRemBase()"></fudis-button>
       </fudis-grid-item>
     </fudis-grid>
@@ -160,7 +160,6 @@
               <fudis-checkbox-group
                 [title]="'Choose berry'"
                 [helpText]="'Berries are yummy'"
-                [required]="true"
                 [tooltip]="'We want to know!'"
                 [formGroup]="testFormGroup.controls['checkboxFormGroup']"
               >

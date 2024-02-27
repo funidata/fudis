@@ -52,6 +52,18 @@ const preview = {
             ],
           ],
           "Foundations",
+          [
+            "Introduction",
+            "Breakpoints",
+            "Borders",
+            "Colors",
+            "Focus",
+            "Grid",
+            "Layers",
+            "Spacing",
+            "Typography",
+            "Utilities",
+          ],
           "Components",
           [
             "Alert Group",
