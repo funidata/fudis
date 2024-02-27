@@ -36,21 +36,21 @@ const ExampleTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
     [rowGap]="rowGap"
   >
     <fudis-body-text class="storybook__item-highlight"
-      >Current value of grid-template-columns: {{columns}}</fudis-body-text
+      >Current value of columns: {{columns}}</fudis-body-text
     ><fudis-body-text class="storybook__item-highlight"
-      >Current value of grid-template-columns: {{columns}}</fudis-body-text
+      >Current value of columns: {{columns}}</fudis-body-text
     >
     <fudis-body-text class="storybook__item-highlight"
-      >Current value of grid-template-columns: {{columns}}</fudis-body-text
+      >Current value of columns: {{columns}}</fudis-body-text
     >
     <fudis-body-text class="storybook__item-highlight"
-      >Current value of grid-template-columns: {{columns}}</fudis-body-text
+      >Current value of columns: {{columns}}</fudis-body-text
     >
     <fudis-body-text class="storybook__item-highlight"
-      >Current value of grid-template-columns: {{columns}}</fudis-body-text
+      >Current value of columns: {{columns}}</fudis-body-text
     >
     <fudis-body-text class="storybook__item-highlight"
-      >Current value of grid-template-columns: {{columns}}</fudis-body-text
+      >Current value of columns: {{columns}}</fudis-body-text
     >
   </fudis-grid>`,
 });
@@ -70,7 +70,20 @@ Example.args = {
 
 Example.argTypes = {
   columns: {
-    options: [1, 2, 3, 4, 5, 6, '1fr 3fr', '1fr 1fr', '5fr 1fr'],
+    options: [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      '1fr 3fr',
+      '1fr 1fr',
+      '5fr 1fr',
+      '1fr max-content 1fr',
+      '1fr 1fr min-content auto',
+      '1fr auto min-content 1fr',
+    ],
     control: { type: 'select' },
   },
   align: {
@@ -113,7 +126,7 @@ Example.parameters = {
   },
 };
 
-const EquallyWideColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
+const EqualColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
   props: args,
   template: html`<fudis-grid
     [columns]="columns"
@@ -121,43 +134,43 @@ const EquallyWideColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent)
     [classes]="['storybook__wrapper-border']"
   >
     <fudis-body-text class="storybook__item-highlight"
-      >Grid item. Current value of columns is: {{columns}}</fudis-body-text
+      >Current value of columns is: {{columns}}</fudis-body-text
     >
     <fudis-body-text class="storybook__item-highlight"
-      >Grid item. Current value of columns is: {{columns}}</fudis-body-text
+      >Current value of columns is: {{columns}}</fudis-body-text
     >
     <fudis-body-text class="storybook__item-highlight"
-      >Grid item. Current value of columns is: {{columns}}</fudis-body-text
+      >Current value of columns is: {{columns}}</fudis-body-text
     >
     <fudis-body-text class="storybook__item-highlight"
-      >Grid item. Current value of columns is: {{columns}}</fudis-body-text
+      >Current value of columns is: {{columns}}</fudis-body-text
     >
     <fudis-body-text class="storybook__item-highlight"
-      >Grid item. Current value of columns is: {{columns}}</fudis-body-text
+      >Current value of columns is: {{columns}}</fudis-body-text
     >
     <fudis-body-text class="storybook__item-highlight"
-      >Grid item. Current value of columns is: {{columns}}</fudis-body-text
+      >Current value of columns is: {{columns}}</fudis-body-text
     >
   </fudis-grid>`,
 });
 
-export const EquallyWideColumns = EquallyWideColumnsTemplate.bind({});
-EquallyWideColumns.args = {
+export const EqualColumns = EqualColumnsTemplate.bind({});
+EqualColumns.args = {
   columns: 3,
 };
-EquallyWideColumns.argTypes = {
+EqualColumns.argTypes = {
   columns: {
     options: [1, 2, 3, 4, 6],
     control: { type: 'radio' },
   },
 };
-EquallyWideColumns.parameters = {
+EqualColumns.parameters = {
   controls: {
     exclude: excludeEverythingExceptRegex(['columns']),
   },
 };
 
-const UnequallyWideColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
+const ExampleWithFrUnitsTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
   props: args,
 
   template: html`<fudis-grid
@@ -165,26 +178,38 @@ const UnequallyWideColumnsTemplate: StoryFn<GridComponent> = (args: GridComponen
     [align]="'center'"
     [classes]="['storybook__wrapper-border']"
   >
-    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
-    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
-    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
-    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
-    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
-    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
+    <fudis-body-text class="storybook__item-highlight"
+      >Current value of columns: {{columns}}</fudis-body-text
+    >
+    <fudis-body-text class="storybook__item-highlight"
+      >Current value of columns: {{columns}}</fudis-body-text
+    >
+    <fudis-body-text class="storybook__item-highlight"
+      >Current value of columns: {{columns}}</fudis-body-text
+    >
+    <fudis-body-text class="storybook__item-highlight"
+      >Current value of columns: {{columns}}</fudis-body-text
+    >
+    <fudis-body-text class="storybook__item-highlight"
+      >Current value of columns: {{columns}}</fudis-body-text
+    >
+    <fudis-body-text class="storybook__item-highlight"
+      >Current value of columns: {{columns}}</fudis-body-text
+    >
   </fudis-grid>`,
 });
 
-export const UnequallyWideColumns = UnequallyWideColumnsTemplate.bind({});
-UnequallyWideColumns.args = {
+export const ExampleWithFrUnits = ExampleWithFrUnitsTemplate.bind({});
+ExampleWithFrUnits.args = {
   columns: '3fr 1fr',
 };
-UnequallyWideColumns.argTypes = {
+ExampleWithFrUnits.argTypes = {
   columns: {
     options: ['3fr 1fr', '1fr 2fr', '1fr 2fr 1fr', '3fr 1fr 2fr'],
     control: { type: 'radio' },
   },
 };
-UnequallyWideColumns.parameters = {
+ExampleWithFrUnits.parameters = {
   controls: {
     exclude: excludeEverythingExceptRegex(['columns']),
   },
