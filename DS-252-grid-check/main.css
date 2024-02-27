@@ -233,6 +233,7 @@ mat-tooltip-component .mat-tooltip-handset {
 /* stylelint-disable order/order */
 /* stylelint-disable unit-disallowed-list */
 .fudis-grid {
+  box-sizing: border-box;
   display: grid;
   grid-template-rows: auto 1fr;
   grid-template-columns: auto 1fr;
@@ -1922,6 +1923,14 @@ html.cypress-hide-unstyled-elements *::-webkit-scrollbar {
 body.cypress-storybook-box-reset {
   padding: 0;
   margin: 0;
+}
+
+.storybook__wrapper-border {
+  border: 2px solid var(--fudis-color-primary);
+}
+.storybook__item-highlight {
+  padding: 0.5rem;
+  background-color: #f1f1f1;
 }
 
 /* stylelint-disable color-no-hex */
