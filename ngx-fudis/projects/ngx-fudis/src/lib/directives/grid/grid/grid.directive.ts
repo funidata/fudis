@@ -19,7 +19,6 @@ import {
   FudisBreakpointValueResponsive,
 } from '../../../types/breakpoints';
 import { getBreakpointDataArray } from '../../../utilities/breakpoint/breakpoint-utils';
-
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 
 @Directive({

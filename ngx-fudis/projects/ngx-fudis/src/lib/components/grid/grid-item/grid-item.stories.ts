@@ -25,15 +25,7 @@ export default {
             padding: 0.5rem;
             background-color: #f1f1f1;
           }
-
-          .grid-refresh-text {
-            width: 10rem;
-            margin-bottom: 2rem;
-          }
         </style>
-        <fudis-body-text class="grid-refresh-text" [size]="'sm-regular'">
-          &uarr; Click 'Remount' refresh button from the toolbar to refresh canvas.</fudis-body-text
-        >
         ${story}
       `,
     ),
@@ -49,7 +41,7 @@ const Template: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
         >This grid demonstrates adjusting a single item in a grid.</fudis-heading
       >
       <fudis-body-text
-        >Too see alignX and alignY clearly, make sure the preview canvas is wide
+        >Too see alignSelfX and alignSelfY clearly, make sure the preview canvas is wide
         enough.</fudis-body-text
       >
       <fudis-body-text
@@ -104,24 +96,24 @@ export const AlignX: StoryFn<GridItemComponent> = (args: GridItemComponent) => (
   props: { ...args, responsiveAlignX: "{ sm: 'start', md: 'end', lg: 'center' }" },
   template: html`<fudis-grid [columns]="2">
     <fudis-heading [level]="1" [size]="'lg'"
-      >This grid demonstrates attribute of 'alignX'</fudis-heading
+      >This grid demonstrates attribute of 'alignSelfX'</fudis-heading
     >
     <fudis-grid-item class="grid-item-highlight">
-      <fudis-body-text>alignX = 'stretch' (default)</fudis-body-text>
+      <fudis-body-text>alignSelfX = 'stretch' (default)</fudis-body-text>
     </fudis-grid-item>
 
     <fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
     <fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
     <fudis-grid-item [alignSelfX]="'start'" class="grid-item-highlight"
-      ><fudis-body-text>alignX = 'start'</fudis-body-text></fudis-grid-item
+      ><fudis-body-text>alignSelfX = 'start'</fudis-body-text></fudis-grid-item
     >
     <fudis-grid-item class="grid-item-highlight" [alignSelfX]="'end'"
-      ><fudis-body-text>alignX = 'end'</fudis-body-text></fudis-grid-item
+      ><fudis-body-text>alignSelfX = 'end'</fudis-body-text></fudis-grid-item
     >
     <fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
 
     <fudis-grid-item class="grid-item-highlight" [alignSelfX]="'center'">
-      <fudis-body-text>alignX = 'center' </fudis-body-text></fudis-grid-item
+      <fudis-body-text>alignSelfX = 'center' </fudis-body-text></fudis-grid-item
     >
     <fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
     <fudis-body-text class="grid-item">Normal grid item</fudis-body-text>
@@ -129,7 +121,7 @@ export const AlignX: StoryFn<GridItemComponent> = (args: GridItemComponent) => (
       class="grid-item-highlight"
       [alignSelfX]="{sm: 'start', md: 'end', lg: 'center'}"
     >
-      <fudis-body-text>Responsive alignX =</fudis-body-text>
+      <fudis-body-text>Responsive alignSelfX =</fudis-body-text>
       <fudis-body-text>"{{responsiveAlignX}}"</fudis-body-text>
     </fudis-grid-item>
   </fudis-grid>`,
@@ -142,7 +134,7 @@ export const AlignY: StoryFn<GridItemComponent> = (args: GridItemComponent) => (
       >This grid demonstrates attribute of 'alignSelfY'</fudis-heading
     >
     <fudis-grid-item class="grid-item-highlight">
-      <fudis-body-text>alignY = 'stretch' (default)</fudis-body-text>
+      <fudis-body-text>alignSelfY = 'stretch' (default)</fudis-body-text>
     </fudis-grid-item>
     <fudis-grid-item class="grid-item">
       <fudis-body-text style="margin-bottom: 1rem;"
@@ -158,7 +150,7 @@ export const AlignY: StoryFn<GridItemComponent> = (args: GridItemComponent) => (
     >
 
     <fudis-grid-item class="grid-item-highlight" [alignSelfY]="'start'"
-      ><fudis-body-text>alignY = 'start'</fudis-body-text></fudis-grid-item
+      ><fudis-body-text>alignSelfY = 'start'</fudis-body-text></fudis-grid-item
     >
     <fudis-grid-item class="grid-item">
       <fudis-body-text style="margin-bottom: 1rem;"
@@ -173,7 +165,7 @@ export const AlignY: StoryFn<GridItemComponent> = (args: GridItemComponent) => (
       ></fudis-grid-item
     >
     <fudis-grid-item class="grid-item-highlight" [alignSelfY]="'end'"
-      ><fudis-body-text>alignY = 'end'</fudis-body-text></fudis-grid-item
+      ><fudis-body-text>alignSelfY = 'end'</fudis-body-text></fudis-grid-item
     ><fudis-grid-item class="grid-item">
       <fudis-body-text style="margin-bottom: 1rem;"
         >Normal grid item. With more content so effects of adjusting a single element can be seen
@@ -187,7 +179,7 @@ export const AlignY: StoryFn<GridItemComponent> = (args: GridItemComponent) => (
       ></fudis-grid-item
     >
     <fudis-grid-item class="grid-item-highlight" [alignSelfY]="'center'"
-      ><fudis-body-text>alignY = 'center'</fudis-body-text></fudis-grid-item
+      ><fudis-body-text>alignSelfY = 'center'</fudis-body-text></fudis-grid-item
     ><fudis-grid-item class="grid-item">
       <fudis-body-text style="margin-bottom: 1rem;"
         >Normal grid item. With more content so effects of adjusting a single element can be seen
@@ -203,7 +195,7 @@ export const AlignY: StoryFn<GridItemComponent> = (args: GridItemComponent) => (
     <fudis-grid-item
       class="grid-item-highlight"
       [alignSelfY]="{xs: 'end', sm: 'stretch', md: 'start', lg: 'center'}"
-      ><fudis-body-text>alignY = 'responsive'</fudis-body-text></fudis-grid-item
+      ><fudis-body-text>alignSelfY = 'responsive'</fudis-body-text></fudis-grid-item
     ><fudis-grid-item class="grid-item">
       <fudis-body-text style="margin-bottom: 1rem;"
         >Normal grid item. With more content so effects of adjusting a single element can be seen
@@ -223,30 +215,32 @@ export const alignXAndY: StoryFn<GridItemComponent> = (args: GridItemComponent) 
   props: args,
   template: html`<fudis-grid [columns]="2" [width]="'sm'">
     <fudis-heading [level]="1" [size]="'lg'"
-      >This grid demonstrates combination of 'alignX' and 'alignY'</fudis-heading
+      >This grid demonstrates combination of 'alignSelfX' and 'alignSelfY'</fudis-heading
     >
     <fudis-grid-item class="grid-item-highlight">
-      <fudis-body-text>alignX = 'stretch' & alignY = 'stretch' (default)</fudis-body-text>
+      <fudis-body-text>alignSelfX = 'stretch' & alignSelfY = 'stretch' (default)</fudis-body-text>
     </fudis-grid-item>
     <fudis-body-text class="grid-item"
       >Normal grid item. With more content so effects of adjusting a single element can be seen
       better.</fudis-body-text
     >
     <fudis-grid-item class="grid-item-highlight" [alignSelfX]="'start'" [alignSelfY]="'start'"
-      ><fudis-body-text>align = 'start' & alignY = 'start'</fudis-body-text></fudis-grid-item
+      ><fudis-body-text>align = 'start' & alignSelfY = 'start'</fudis-body-text></fudis-grid-item
     >
     <fudis-body-text class="grid-item"
       >Normal grid item. With more content so effects of adjusting a single element can be seen
       better.</fudis-body-text
     >
     <fudis-grid-item class="grid-item-highlight" [alignSelfX]="'end'" [alignSelfY]="'end'"
-      ><fudis-body-text>alignX = 'end' & alignY = 'end'</fudis-body-text></fudis-grid-item
+      ><fudis-body-text>alignSelfX = 'end' & alignSelfY = 'end'</fudis-body-text></fudis-grid-item
     ><fudis-body-text class="grid-item"
       >Normal grid item. With more content so effects of adjusting a single element can be seen
       better.</fudis-body-text
     >
     <fudis-grid-item class="grid-item-highlight" [alignSelfX]="'center'" [alignSelfY]="'center'"
-      ><fudis-body-text>alignX = 'center' & alignY = 'center'</fudis-body-text></fudis-grid-item
+      ><fudis-body-text
+        >alignSelfX = 'center' & alignSelfY = 'center'</fudis-body-text
+      ></fudis-grid-item
     >
     <fudis-body-text class="grid-item"
       >Normal grid item. With more content so effects of adjusting a single element can be seen

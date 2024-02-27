@@ -12,7 +12,10 @@ import { hasRequiredValidator } from '../../../utilities/form/getValidators';
   encapsulation: ViewEncapsulation.None,
 })
 export class RadioButtonGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
-  @HostBinding('class') classes = 'fudis-radio-button-group-host';
+  /**
+   * Binding host CSS class to component wrapper
+   */
+  @HostBinding('class') private _classes = 'fudis-radio-button-group-host';
 
   /*
    * FormControl for Radio Button group

@@ -121,24 +121,6 @@ export const expandableControlExclude: RegExp = excludeRegex([
   'errorSummaryBreadcrumb',
 ]);
 
-export const gridExclude: RegExp = excludeRegex([]);
-
-// // This is for additional Grid example tabs (Equally Wide Columns and Unequally Wide Columns).
-// // For some reason the default regex does not affect them.
-// export const gridExclude: RegExp = excludeRegex([
-//   'align',
-//   'alignItemsX',
-//   'alignItemsY',
-//   'classes',
-//   'columnGap',
-//   'serviceDefaults',
-//   'marginBottom',
-//   'marginSides',
-//   'marginTop',
-//   'rowGap',
-//   'width',
-// ]);
-
 export const selectCommonExclude: RegExp = excludeRegex([
   'control',
   'autocomplete',

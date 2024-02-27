@@ -86,7 +86,7 @@ describe('GridItemComponent', () => {
 
   describe('Style properties', () => {
     // TODO: Use visual regression tests instead of testing style attribute values directly.
-    it.skip('should convert given alingX and alignY attributes to style properties', () => {
+    it.skip('should convert given alingX and alignSelfY attributes to style properties', () => {
       fixture.detectChanges();
 
       expect(getAttribute(1, 'justify-self')).toBe('stretch');

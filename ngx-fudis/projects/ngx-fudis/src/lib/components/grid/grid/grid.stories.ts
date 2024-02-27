@@ -1,6 +1,6 @@
 import { StoryFn, Meta, componentWrapperDecorator } from '@storybook/angular';
 import { GridComponent } from './grid.component';
-import { excludeEverythingExceptRegex, gridExclude } from '../../../utilities/storybook';
+import { excludeEverythingExceptRegex } from '../../../utilities/storybook';
 import readme from './readme.mdx';
 
 const html = String.raw;
@@ -158,7 +158,7 @@ EquallyWideColumns.argTypes = {
 };
 EquallyWideColumns.parameters = {
   controls: {
-    exclude: gridExclude,
+    exclude: excludeEverythingExceptRegex(['columns']),
   },
 };
 
@@ -191,7 +191,7 @@ UnequallyWideColumns.argTypes = {
 };
 UnequallyWideColumns.parameters = {
   controls: {
-    exclude: gridExclude,
+    exclude: excludeEverythingExceptRegex(['columns']),
   },
 };
 
