@@ -50,6 +50,17 @@ body {
   }
 }
 
+.storybook {
+  &__wrapper-border {
+    border: 2px solid var(--fudis-color-primary);
+  }
+
+  &__item-highlight {
+    padding: 0.5rem;
+    background-color: #f1f1f1;
+  }
+}
+
 /* stylelint-disable color-no-hex */
 [data-theme="into"] {
   --fudis-color-primary-light: #e0f4fd;

@@ -1,0 +1,243 @@
+import { Meta, Canvas, ArgTypes, Source } from "@storybook/blocks";
+import { GridComponent } from "./grid.component";
+import * as GridStories from "./grid.stories.ts";
+
+<Meta title="Components/Grid/Grid" />
+
+# Grid Component
+
+Grid Component is a wrapper element, which implements all the features spesified in [Grid Directive](/docs/directives-grid-grid--documentation)
+
+Essentially it is an HTML element which has CSS property `display` set to `grid`.
+
+## Basic Usage
+
+The HTML selector of Grid Component is `fudis-grid`.
+
+Grid Component has multiple properties to define how itself or its content should be aligned. Rules that affect child elements are applied to every first level children Grid Component has.
+
+```
+<fudis-grid [alignItemsX]="'center'">
+  <fudis-grid-item>
+    This will be centered
+  </fudis-grid-item>
+  <fudis-grid-item>
+    This will be centered
+  </fudis-grid-item>
+  <fudis-grid-item>
+    This will be centered
+    <p>But this will not be affected, as this p-element is not first level child element</>
+  </fudis-grid-item>
+</fudis-grid>
+```
+
+### Heading Components Inside Grid
+
+By default, if Heading Component is first level child of the Grid Component, the Heading will spread take 100% width. This can be disabled with the use of [Grid Item Directive](/docs/components-grid-grid-item--documentation).
+
+## Defining Columns
+
+Most notable property of Grid Component is `columns` property. This defines in how many columns the children elements should be split. Underneath `columns` attribute transforms to CSS property `grid-template-columns`.
+
+The property `columns` accept three different types of values.
+
+### Number
+
+When just a number is provided for `columns`, Grid Component will be split to equally wide columns. E. g. `<fudis-grid [columns]="3">` will set child elements in three equally wide columns.
+
+<Canvas of={GridStories.Example} />
+
+### String
+
+When provided a string value, it gives lots of flexibility in proportions each column will take in width.
+
+### CSS Grid native units
+
+Grid Component columns can use any native CSS Grid units. One of the most useful is `fr` units. This enables an easy way to define columns which are not equally wide. Take a loot at the examples below.
+
+<Canvas of={GridStories.UnequallyWideColumns} />
+
+#### Example 1: 4 columns with 1/4 and 3/4 ratio
+
+```
+<fudis-grid [columns]="'1fr 3fr'">
+  <fudis-grid-item>
+    This is 1fr wide, so it takes 1/4 of whole width
+  </fudis-grid-item>
+  <fudis-grid-item>
+    This is 3fr wide, so it takes 3/4 of whole width
+  </fudis-grid-item>
+</fudis-grid-item>
+```
+
+#### Example 2: 6 columns with 3/6, 1/6 and 2/6 ratio
+
+```
+<fudis-grid [columns]="'3fr 1fr 2fr'">
+  <fudis-grid-item>
+    This is 3fr wide, so it takes 3/6 of whole width
+  </fudis-grid-item>
+  <fudis-grid-item>
+    This is 1fr wide, so it takes 1/6 of whole width
+  </fudis-grid-item>
+  <fudis-grid-item>
+    This is 2fr wide, so it takes 2/6 of whole width
+  </fudis-grid-item>
+</fudis-grid-item>
+```
+
+For more examples and documentation on how to apply other combinations or values to be transformed native CSS `grid-template-columns` property, look at these articles:
+
+- [An Introduction to the `fr` CSS unit](https://css-tricks.com/introduction-fr-css-unit/)
+- [grid-template-columns in MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns)
+
+#### Using Form Input Width Strings
+
+If your Grid consists of Fudis Form components, e. g. Text Input or Datepicker, it might make sense to set your Grid column width to follow width of these form components. Substrings which will be converted to actual CSS values are: `inputSm`, `inputMd` and `inputLg`.
+
+```
+<fudis-grid [columns]="'inputSm inputMd'">
+  <fudis-text-input [label]="'This is now width of small'"/>
+  <fudis-text-input [label]="'This is now width of medium'"/>
+</fudis-grid-item>
+```
+
+### Responsive Colums For Different Breakpoints
+
+Previously introduced `columns` values stay static and unchanged in all browser viewport widths. Most of the time it is necessary to define different column rules for different breakpoints. This can be achieved providing an settings object to `columns` property.
+
+#### Example 1: Equally Wide Columns in Different Breakpoints
+
+With `[columns]="{sm: 2, lg: 3, xl: 4}"` In following example:
+
+- Before `sm`: Before screen size of `sm` (there is `xs` before `sm`), Grid will have the default of 1 column.
+- `sm` to `lg`: Through `sm`, `md` and before hitting `lg` breakpoint, Grid will be in 2 equally wide columns
+- `lg` to `xl`: From `lg` and before hitting `xl`, Grid has 3 equal columns
+- `xl` and up: Grid has 4 columns
+
+```
+<fudis-grid [columns]="{sm: 2, lg: 3, xl: 4}">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  ...
+  <div>Item n-1</div>
+  <div>Item n</div>
+</fudis-grid-item>
+```
+
+#### Example 2: Combining Values
+
+With `[columns]="{xs: 2, sm: '1fr 2fr', md: '1fr 2fr 1fr', lg: 4}"` In following example:
+
+- From `xs` to `sm`: Before hitting `sm`, Grid has 2 equally wide columns.
+- From `sm` to `md`: From `sm` before hitting `md`, Grid has 2 columns, where 1st takes 1/3 of width and 2nd 2/3 of whole width.
+- From `md` to `lg`: From `md` before hitting `lg`, Grid has 3 columns, where 1st column takes 1/4, 2nd 2/4 and 3rd column again 1/4 of whole width.
+- From `lg` and up: When hitting breakpoint `lg`, Grid will have 4 equally wide columns.
+
+```
+<fudis-grid [columns]="{xs: 2, sm: '1fr 2fr', md: '1fr 2fr 1fr', lg: 4}">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  ...
+  <div>Item n-1</div>
+  <div>Item n</div>
+</fudis-grid-item>
+```
+
+## Universal Configuration of All Grid Components
+
+To apply default values to all of applications Grid Components and elements with Grid Directive, use [Fudis Grid Service to set default configurations.](/docs/services-grid--documentation)
+
+## Properties
+
+<ArgTypes of={GridComponent} />
+
+Here are some best practices and suggestions how to get the best out of Fudis Grid and Grid Item using wrapper components Fudis provides.
+
+## How to Start
+
+Start using the grid by simply surrounding wanted content with grid tags:
+
+```
+<fudis-grid>
+ <your-content-here />
+</fudis-grid>
+```
+
+The default behaviour makes your content to stretch in one grid-column and adds few other default styling/alignment but you probably want to make more adjustments.
+
+## Next Steps
+
+### Defining Responsive Columns
+
+As we already saw from the previous example the grid-columns makes the content flow responsively through different breakpoints. If you need more column variations for one of your grids, simply add `[columns]` object to it.
+
+```
+<fudis-grid [columns]="{ md: 3, xl: 4 }">
+ <your-content-here />
+</fudis-grid>
+```
+
+The default values will be combied with the new values, so now your grid will basicly have `{ xs: 1, md: 3, lg: 2, xl: 4 }`. Single grid values will overwrite the default ones if same breakpoint has been provided in both places.
+
+### Ignore default grid values
+
+There is possibility to ignore the application default settings for single grids as well.
+
+```
+<fudis-grid
+	 [columns]="{ md: 3, xl: 4 }"
+	 [serviceDefaults]="false">
+ <your-content-here />
+</fudis-grid>
+```
+
+Now the grid will only have responsive columns set as `{ md: 3, xl: 4 }`, without combining the default values.
+
+<hr />
+
+# Grid Item
+
+Grid can have grid-items as its children. With grid-item you can target certain rules to specific element. There are two ways to use grid-item, through `fudisGridItem` directive or `<fudis-grid-item>` tag. Following properties are available:
+
+#### Columns
+
+Just like grid itself, grid-item can be adjusted with `columns` attribute. You can pass string, number or object to it, e.g `[columns]="{ sm: 2, md: 4, xxl: 6 }"`.
+
+#### AlignX
+
+Align single grid-item element horizontally `start`, `center`, `end` or `stretch`, e.g `[alignSelfX]="'start'"`.
+
+#### AlignY
+
+Align single grid-item element vertically `start`, `center`, `end` or `stretch`, e.g `[alignSelfY]="'center'"`.
+
+### Example of grid-item directive
+
+```
+<fudis-grid [columns]="2">
+	<fudis-body-text fudisGridItem [alignSelfX]="'end'"></fudis-body-text>
+	<fudis-body-text fudisGridItem [columns]="2"></fudis-body-text>
+	<fudis-body-text></fudis-body-text>
+	<fudis-body-text fudisGridItem [alignSelfY]="'center'"></fudis-body-text>
+</fudis-grid>
+```
+
+### Example of grid-item tag
+
+```
+<fudis-grid [columns]="2">
+	<fudis-grid-item [alignSelfX]="'end'">
+		<fudis-body-text></fudis-body-text>
+	</fudis-grid-item>
+	<fudis-grid-item [columns]="2">
+		<fudis-body-text></fudis-body-text>
+	</fudis-grid-item>
+	<fudis-body-text></fudis-body-text>
+	<fudis-grid-item [alignSelfY]="'center'">
+		<fudis-body-text></fudis-body-text>
+	</fudis-grid-item>
+</fudis-grid>
+```
+
+These two example results are identical. First body-text is aligned horizontally to the right (end), second body-text is taking up two columns, third gets its rules from the parent grid and fourth body-text is aligned vertically to the center.

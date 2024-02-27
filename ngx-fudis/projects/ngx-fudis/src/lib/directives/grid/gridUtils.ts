@@ -1,4 +1,3 @@
-import { FudisBreakpointStyleResponsive } from '../../types/breakpoints';
 import {
   FudisGridProperties,
   FudisGridFormInputWidth,
@@ -33,48 +32,6 @@ export const getGridClasses = (values: FudisGridProperties): string => {
     .join(' ');
 
   return arrayToString;
-};
-
-/*
- * Basic validation, so that given column @Inputs are usable and valid grid-column-template values.
- */
-export const validateColumnInputArray = (inputs: Array<FudisBreakpointStyleResponsive>) => {
-  inputs.forEach((item) => {
-    if (item.value.trim() === '') {
-      throw new Error(
-        `Your column input "${item.name}" looks empty. Either remove it or add some proper CSS grid-template-columns values.`,
-      );
-    }
-
-    if (item.value.includes('px')) {
-      throw new Error(
-        `Your fudis-grid column input of "${item.name}" should not contain px values.`,
-      );
-    }
-
-    /*
-     * Check if sum of fr values is larger than 12.
-     */
-    const inputStringToArray = item.value.split(' ');
-
-    let sumOfFrValues = 0;
-
-    // RegEx for finding fr values from strings.
-    const valueWithFr = /^[\d+]*(fr)$/;
-
-    inputStringToArray.forEach((el) => {
-      if (el.match(valueWithFr)) {
-        const numberValue = Number(el.slice(0, -2));
-        sumOfFrValues += numberValue;
-      }
-    });
-
-    if (sumOfFrValues > 12) {
-      throw new Error(
-        `Your fudis-grid's sum of fr values for column input of "${item.name}" is over 12. Our grid is designed to be used only with maximum sum of 12 fr columns.`,
-      );
-    }
-  });
 };
 
 export const replaceFormInputWidthsToRem = (value: string): string => {

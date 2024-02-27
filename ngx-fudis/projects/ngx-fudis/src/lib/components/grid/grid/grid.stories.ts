@@ -1,7 +1,7 @@
 import { StoryFn, Meta, componentWrapperDecorator } from '@storybook/angular';
 import { GridComponent } from './grid.component';
 import { excludeEverythingExceptRegex } from '../../../utilities/storybook';
-import readme from './readme.mdx';
+import readme from './grid.component.mdx';
 
 const html = String.raw;
 
@@ -10,18 +10,7 @@ export default {
   component: GridComponent,
   decorators: [
     componentWrapperDecorator(
-      (story) =>
-        html` <style>
-            .grid-item {
-              padding: 0.5rem;
-              background-color: #f1f1f1;
-            }
-
-            .text-margin {
-              margin-bottom: 1rem;
-            }
-          </style>
-          <div style="border: 3px solid #fdefb4">${story}</div>`,
+      (story) => html`<div style="border: 3px solid #b83c2e">${story}</div>`,
     ),
   ],
 
@@ -35,6 +24,7 @@ export default {
 const ExampleTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
   props: args,
   template: html`<fudis-grid
+    [classes]="['storybook__wrapper-border']"
     [columns]="columns"
     [align]="align"
     [alignItemsX]="alignItemsX"
@@ -46,29 +36,21 @@ const ExampleTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
     [columnGap]="columnGap"
     [rowGap]="rowGap"
   >
-    <fudis-heading class="grid-item" [level]="1" [size]="'lg'"
-      >Fudis-headings will always take 100% width if they are direct child of Fudis grid
-      component</fudis-heading
-    >
-
-    <div class="grid-item">
-      <fudis-heading [level]="3" [size]="'sm'">This is fudis-heading inside a div</fudis-heading>
-      <fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
-    </div>
-    <div class="grid-item">
-      <fudis-heading [level]="3" [size]="'sm'">This is fudis-heading inside a div</fudis-heading>
-      <fudis-body-text>Current value of grid-template-columns: {{columns}}</fudis-body-text>
-    </div>
-    <fudis-body-text class="grid-item"
+    <fudis-body-text class="storybook__item-highlight"
+      >Current value of grid-template-columns: {{columns}}</fudis-body-text
+    ><fudis-body-text class="storybook__item-highlight"
       >Current value of grid-template-columns: {{columns}}</fudis-body-text
     >
-    <fudis-body-text class="grid-item"
+    <fudis-body-text class="storybook__item-highlight"
       >Current value of grid-template-columns: {{columns}}</fudis-body-text
     >
-    <fudis-body-text class="grid-item"
+    <fudis-body-text class="storybook__item-highlight"
       >Current value of grid-template-columns: {{columns}}</fudis-body-text
     >
-    <fudis-body-text class="grid-item"
+    <fudis-body-text class="storybook__item-highlight"
+      >Current value of grid-template-columns: {{columns}}</fudis-body-text
+    >
+    <fudis-body-text class="storybook__item-highlight"
       >Current value of grid-template-columns: {{columns}}</fudis-body-text
     >
   </fudis-grid>`,
@@ -134,15 +116,24 @@ Example.argTypes = {
 const EquallyWideColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
   props: args,
   template: html`<fudis-grid [columns]="columns">
-    <fudis-heading class="grid-item" [level]="1" [size]="'lg'"
-      >Equally wide columns with number values</fudis-heading
+    <fudis-body-text class="storybook__item-highlight"
+      >Grid item. Current value of columns is: {{columns}}</fudis-body-text
     >
-    <fudis-body-text class="grid-item">Grid item</fudis-body-text>
-    <fudis-body-text class="grid-item">Grid item</fudis-body-text>
-    <fudis-body-text class="grid-item">Grid item</fudis-body-text>
-    <fudis-body-text class="grid-item">Grid item</fudis-body-text>
-    <fudis-body-text class="grid-item">Grid item</fudis-body-text>
-    <fudis-body-text class="grid-item">Grid item</fudis-body-text>
+    <fudis-body-text class="storybook__item-highlight"
+      >Grid item. Current value of columns is: {{columns}}</fudis-body-text
+    >
+    <fudis-body-text class="storybook__item-highlight"
+      >Grid item. Current value of columns is: {{columns}}</fudis-body-text
+    >
+    <fudis-body-text class="storybook__item-highlight"
+      >Grid item. Current value of columns is: {{columns}}</fudis-body-text
+    >
+    <fudis-body-text class="storybook__item-highlight"
+      >Grid item. Current value of columns is: {{columns}}</fudis-body-text
+    >
+    <fudis-body-text class="storybook__item-highlight"
+      >Grid item. Current value of columns is: {{columns}}</fudis-body-text
+    >
   </fudis-grid>`,
 });
 
@@ -166,16 +157,16 @@ const UnequallyWideColumnsTemplate: StoryFn<GridComponent> = (args: GridComponen
   props: args,
 
   template: html`<fudis-grid [columns]="columns">
-    <fudis-heading class="grid-item" [level]="1" [size]="'lg'"
+    <fudis-heading class="storybook__item-highlight" [level]="1" [size]="'lg'"
       >To apply unequally proportioned colums, use native CSS grid-template-column 'fr'
       values.</fudis-heading
     >
-    <fudis-body-text class="grid-item">Grid item</fudis-body-text>
-    <fudis-body-text class="grid-item">Grid item</fudis-body-text>
-    <fudis-body-text class="grid-item">Grid item</fudis-body-text>
-    <fudis-body-text class="grid-item">Grid item</fudis-body-text>
-    <fudis-body-text class="grid-item">Grid item</fudis-body-text>
-    <fudis-body-text class="grid-item">Grid item</fudis-body-text>
+    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
+    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
+    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
+    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
+    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
+    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
   </fudis-grid>`,
 });
 
@@ -204,11 +195,7 @@ const ResponsiveColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent) 
     combinedObject: '{xs: 1, sm: 2, md: 3, xl: 4}',
   },
   template: html`<fudis-grid [columns]="columns">
-    <fudis-grid-item class="grid-item" [columns]="'stretch'">
-      <fudis-heading [level]="1" [size]="'lg'"
-        >Provide settings object to 'columns' attribute to make Grid columns behave differently on
-        different breakpoints
-      </fudis-heading>
+    <fudis-grid-item class="storybook__item-highlight" [columns]="'stretch'">
       <fudis-body-text class="text-margin">
         You don't need to provide value for all breakpoints.</fudis-body-text
       >
@@ -228,12 +215,12 @@ const ResponsiveColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent) 
         {{columnObjectTwo}} applied values will be: {{combinedObject}}
       </fudis-body-text>
     </fudis-grid-item>
-    <fudis-body-text class="grid-item">Grid item</fudis-body-text>
-    <fudis-body-text class="grid-item">Grid item</fudis-body-text>
-    <fudis-body-text class="grid-item">Grid item</fudis-body-text>
-    <fudis-body-text class="grid-item">Grid item</fudis-body-text>
-    <fudis-body-text class="grid-item">Grid item</fudis-body-text>
-    <fudis-body-text class="grid-item">Grid item</fudis-body-text>
+    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
+    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
+    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
+    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
+    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
+    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
   </fudis-grid>`,
 });
 

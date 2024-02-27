@@ -1,4 +1,4 @@
-import { Meta } from "@storybook/blocks";
+import { Meta, Source } from "@storybook/blocks";
 
 <Meta title="Documentation/Development/Code Linting and Formatting" />
 
@@ -24,11 +24,13 @@ If you create a new Angular workspace use `ng g @angular-eslint/schematics:add-e
 
 **NOTE: Once this project is updated to Angular 14 it is possible to add:**
 
-```
-"cli": {
+<Source
+  code={`
+  "cli": {
 "schematicCollections": ["@angular-eslint/schematics"]
 }
-```
+  `}
+/>
 
 **This will automatically execute the custom schematics provided by `@angular/eslint` when creating a new app or lib.**
 
