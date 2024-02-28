@@ -152,7 +152,7 @@ FrUnits.args = {
 };
 FrUnits.argTypes = {
   columns: {
-    options: ['3fr 1fr', '1fr 2fr', '1fr 2fr 1fr', '3fr 1fr 2fr'],
+    options: ['3fr 1fr', '1fr 2fr', '1fr 2fr 1fr', '3fr 1fr 2fr', '50fr 25fr 25fr'],
     control: { type: 'radio' },
   },
 };

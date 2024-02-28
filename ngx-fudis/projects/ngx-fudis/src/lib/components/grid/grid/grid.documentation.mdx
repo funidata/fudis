@@ -109,6 +109,8 @@ One of the most useful native CSS Grid units are `fr` units. The `fr` stands for
 </fudis-grid-item>
 ```
 
+Fraction units transform easily to percentages as well if needed. If we want to set a Grid with four columns with ratio of 50%, 10%, 20% and 20% wide columns, we can just set `[colums]="'50fr 10fr 20fr 20fr'"`. When reduced it is equal to `[colums]="'5fr 1fr 2fr 2fr'"`.
+
 #### Auto and MinMax with Auto-Fill and Auto-Fit
 
 Native Grid CSS `grid-columns-template` values of `auto`, `auto-fill` and `auto-fit` as their name describes tries to automatically define the width of each column.
