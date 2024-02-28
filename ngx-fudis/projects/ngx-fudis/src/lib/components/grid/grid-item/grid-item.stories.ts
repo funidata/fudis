@@ -1,6 +1,6 @@
 import { StoryFn, Meta, componentWrapperDecorator } from '@storybook/angular';
 import { GridItemComponent } from './grid-item.component';
-import readme from './readme.mdx';
+import readme from './grid-item.documentation.mdx';
 
 const html = String.raw;
 

@@ -1,0 +1,65 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/blocks";
+import { GridItemComponent } from "./grid-item.component";
+import * as GridItemStories from "./grid-item.stories.ts";
+
+<Meta title="Components/Grid/Grid Item" />
+
+# Grid Item
+
+Grid item has two possible ways to be implemented in the application code, either through directive or component tags.
+
+Read and learn more about Grid Item usage guidelines from the [Foundations Grid documentation](/docs/foundations-grid--documentation#grid-item).
+
+## Example of responsive columns
+
+<Canvas of={GridItemStories.responsiveColumns}></Canvas>
+
+## Properties
+
+<ArgTypes of={GridItemComponent} />
+
+# Grid Item
+
+Grid can have grid-items as its children. With grid-item you can target certain rules to specific element. There are two ways to use grid-item, through `fudisGridItem` directive or `<fudis-grid-item>` tag. Following properties are available:
+
+#### Columns
+
+Just like grid itself, grid-item can be adjusted with `columns` attribute. You can pass string, number or object to it, e.g `[columns]="{ sm: 2, md: 4, xxl: 6 }"`.
+
+#### AlignX
+
+Align single grid-item element horizontally `start`, `center`, `end` or `stretch`, e.g `[alignSelfX]="'start'"`.
+
+#### AlignY
+
+Align single grid-item element vertically `start`, `center`, `end` or `stretch`, e.g `[alignSelfY]="'center'"`.
+
+### Example of grid-item directive
+
+```
+<fudis-grid [columns]="2">
+	<fudis-body-text fudisGridItem [alignSelfX]="'end'"></fudis-body-text>
+	<fudis-body-text fudisGridItem [columns]="2"></fudis-body-text>
+	<fudis-body-text></fudis-body-text>
+	<fudis-body-text fudisGridItem [alignSelfY]="'center'"></fudis-body-text>
+</fudis-grid>
+```
+
+### Example of grid-item tag
+
+```
+<fudis-grid [columns]="2">
+	<fudis-grid-item [alignSelfX]="'end'">
+		<fudis-body-text></fudis-body-text>
+	</fudis-grid-item>
+	<fudis-grid-item [columns]="2">
+		<fudis-body-text></fudis-body-text>
+	</fudis-grid-item>
+	<fudis-body-text></fudis-body-text>
+	<fudis-grid-item [alignSelfY]="'center'">
+		<fudis-body-text></fudis-body-text>
+	</fudis-grid-item>
+</fudis-grid>
+```
+
+These two example results are identical. First body-text is aligned horizontally to the right (end), second body-text is taking up two columns, third gets its rules from the parent grid and fourth body-text is aligned vertically to the center.
