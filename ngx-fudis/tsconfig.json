@@ -33,5 +33,4 @@
     "strictTemplates": true
   },
   "include": ["projects", "types", "jest.config.ts"],
-  "exclude": ["./cypress"]
 }
