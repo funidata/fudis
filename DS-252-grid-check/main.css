@@ -359,12 +359,6 @@ mat-tooltip-component .mat-tooltip-handset {
   margin-left: 0;
 }
 
-@media screen and (max-width: 35.99em) {
-  .fudis-grid__align__start {
-    margin-right: calc(1rem / var(--fudis-rem-multiplier));
-    margin-left: calc(1rem / var(--fudis-rem-multiplier));
-  }
-}
 .fudis-grid__align__center {
   margin-right: auto;
   margin-left: auto;
@@ -381,12 +375,6 @@ mat-tooltip-component .mat-tooltip-handset {
   margin-left: auto;
 }
 
-@media screen and (max-width: 35.99em) {
-  .fudis-grid__align__end {
-    margin-right: calc(1rem / var(--fudis-rem-multiplier));
-    margin-left: calc(1rem / var(--fudis-rem-multiplier));
-  }
-}
 @media screen and (min-width: 0) {
   .fudis-grid__xxl {
     max-width: calc(34rem / var(--fudis-rem-multiplier));
