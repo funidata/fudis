@@ -13,7 +13,7 @@ import { FudisSpacing } from './miscellaneous';
 export const gridColumnDefault = '1fr';
 
 export const gridInputPropertyDefaults: FudisGridProperties = {
-  align: 'center',
+  align: 'start',
   alignItemsX: 'stretch',
   alignItemsY: 'stretch',
   classes: [],

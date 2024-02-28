@@ -127,10 +127,6 @@
     &__start {
       margin-right: auto;
       margin-left: 0;
-
-      @include breakpoints.breakpoint-max("sm") {
-        @include grid.grid-xs-margins;
-      }
     }
 
     &__center {
@@ -145,10 +141,6 @@
     &__end {
       margin-right: 0;
       margin-left: auto;
-
-      @include breakpoints.breakpoint-max("sm") {
-        @include grid.grid-xs-margins;
-      }
     }
   }
 
