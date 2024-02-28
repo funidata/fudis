@@ -1,7 +1,7 @@
 import { StoryFn, Meta, componentWrapperDecorator } from '@storybook/angular';
 import { GridComponent } from './grid.component';
 import { excludeEverythingExceptRegex, gridExampleExclude } from '../../../utilities/storybook';
-import readme from './grid.component.mdx';
+import readme from './grid.documentation.mdx';
 
 const html = String.raw;
 
@@ -21,38 +21,46 @@ export default {
   },
 } as Meta;
 
+const columnsToString = (columns: string | number | object): string => {
+  if (typeof columns === 'string') {
+    return `'${columns}'`;
+  }
+  if (typeof columns === 'number') {
+    return `'${columns.toString()}'`;
+  }
+
+  return JSON.stringify(columns);
+};
+
 const ExampleTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
-  props: args,
-  template: html`<fudis-grid
-    [classes]="['storybook__wrapper-border']"
-    [columns]="columns"
-    [align]="align"
-    [alignItemsX]="alignItemsX"
-    [alignItemsY]="alignItemsY"
-    [marginTop]="marginTop"
-    [marginBottom]="marginBottom"
-    [width]="width"
-    [columnGap]="columnGap"
-    [rowGap]="rowGap"
-  >
-    <fudis-body-text class="storybook__item-highlight"
-      >Current value of columns: {{columns}}</fudis-body-text
-    ><fudis-body-text class="storybook__item-highlight"
-      >Current value of columns: {{columns}}</fudis-body-text
+  props: { ...args, transformedColumns: columnsToString(args.columns) },
+  template: html`<fudis-body-text style="margin: 1rem 0;" [size]="'lg-regular'" [align]="'center'"
+      >Current value of <code>columns</code> is:
+      <code>{{transformedColumns}}</code></fudis-body-text
     >
-    <fudis-body-text class="storybook__item-highlight"
-      >Current value of columns: {{columns}}</fudis-body-text
+    <fudis-grid
+      [classes]="['storybook__wrapper-border']"
+      [columns]="columns"
+      [align]="align"
+      [alignItemsX]="alignItemsX"
+      [alignItemsY]="alignItemsY"
+      [marginTop]="marginTop"
+      [marginBottom]="marginBottom"
+      [width]="width"
+      [columnGap]="columnGap"
+      [rowGap]="rowGap"
     >
-    <fudis-body-text class="storybook__item-highlight"
-      >Current value of columns: {{columns}}</fudis-body-text
-    >
-    <fudis-body-text class="storybook__item-highlight"
-      >Current value of columns: {{columns}}</fudis-body-text
-    >
-    <fudis-body-text class="storybook__item-highlight"
-      >Current value of columns: {{columns}}</fudis-body-text
-    >
-  </fudis-grid>`,
+      <fudis-body-text class="storybook__item-highlight"
+        >Grid child element which has more content than most of the child elements</fudis-body-text
+      >
+      <fudis-body-text class="storybook__item-highlight">Grid child element</fudis-body-text>
+      <fudis-body-text class="storybook__item-highlight">Grid child element</fudis-body-text>
+      <fudis-body-text class="storybook__item-highlight"
+        >Grid child element which has more content than most of the child elements</fudis-body-text
+      >
+      <fudis-body-text class="storybook__item-highlight">Grid child element</fudis-body-text>
+      <fudis-body-text class="storybook__item-highlight">Grid child element</fudis-body-text>
+    </fudis-grid>`,
 });
 
 export const Example = ExampleTemplate.bind({});
@@ -72,17 +80,13 @@ Example.argTypes = {
   columns: {
     options: [
       1,
-      2,
       3,
-      4,
       5,
-      6,
       '1fr 3fr',
       '1fr 1fr',
       '5fr 1fr',
-      '1fr max-content 1fr',
-      '1fr 1fr min-content auto',
-      '1fr auto min-content 1fr',
+      'auto max-content auto',
+      'auto min-content auto',
     ],
     control: { type: 'select' },
   },
@@ -126,35 +130,7 @@ Example.parameters = {
   },
 };
 
-const EqualColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
-  props: args,
-  template: html`<fudis-grid
-    [columns]="columns"
-    [align]="'center'"
-    [classes]="['storybook__wrapper-border']"
-  >
-    <fudis-body-text class="storybook__item-highlight"
-      >Current value of columns is: {{columns}}</fudis-body-text
-    >
-    <fudis-body-text class="storybook__item-highlight"
-      >Current value of columns is: {{columns}}</fudis-body-text
-    >
-    <fudis-body-text class="storybook__item-highlight"
-      >Current value of columns is: {{columns}}</fudis-body-text
-    >
-    <fudis-body-text class="storybook__item-highlight"
-      >Current value of columns is: {{columns}}</fudis-body-text
-    >
-    <fudis-body-text class="storybook__item-highlight"
-      >Current value of columns is: {{columns}}</fudis-body-text
-    >
-    <fudis-body-text class="storybook__item-highlight"
-      >Current value of columns is: {{columns}}</fudis-body-text
-    >
-  </fudis-grid>`,
-});
-
-export const EqualColumns = EqualColumnsTemplate.bind({});
+export const EqualColumns = ExampleTemplate.bind({});
 EqualColumns.args = {
   columns: 3,
 };
@@ -170,79 +146,88 @@ EqualColumns.parameters = {
   },
 };
 
-const ExampleWithFrUnitsTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
-  props: args,
-
-  template: html`<fudis-grid
-    [columns]="columns"
-    [align]="'center'"
-    [classes]="['storybook__wrapper-border']"
-  >
-    <fudis-body-text class="storybook__item-highlight"
-      >Current value of columns: {{columns}}</fudis-body-text
-    >
-    <fudis-body-text class="storybook__item-highlight"
-      >Current value of columns: {{columns}}</fudis-body-text
-    >
-    <fudis-body-text class="storybook__item-highlight"
-      >Current value of columns: {{columns}}</fudis-body-text
-    >
-    <fudis-body-text class="storybook__item-highlight"
-      >Current value of columns: {{columns}}</fudis-body-text
-    >
-    <fudis-body-text class="storybook__item-highlight"
-      >Current value of columns: {{columns}}</fudis-body-text
-    >
-    <fudis-body-text class="storybook__item-highlight"
-      >Current value of columns: {{columns}}</fudis-body-text
-    >
-  </fudis-grid>`,
-});
-
-export const ExampleWithFrUnits = ExampleWithFrUnitsTemplate.bind({});
-ExampleWithFrUnits.args = {
+export const FrUnits = ExampleTemplate.bind({});
+FrUnits.args = {
   columns: '3fr 1fr',
 };
-ExampleWithFrUnits.argTypes = {
+FrUnits.argTypes = {
   columns: {
     options: ['3fr 1fr', '1fr 2fr', '1fr 2fr 1fr', '3fr 1fr 2fr'],
     control: { type: 'radio' },
   },
 };
-ExampleWithFrUnits.parameters = {
+FrUnits.parameters = {
   controls: {
     exclude: excludeEverythingExceptRegex(['columns']),
   },
 };
 
-const ResponsiveColumnsTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
-  props: {
-    ...args,
-    columnObjectOne: '{md: 2, xxl: 4}',
-    defaultObject: '{xs: 1, md: 2, xl: 4}',
-    columnObjectTwo: '{sm: 2, md: 3}',
-    combinedObject: '{xs: 1, sm: 2, md: 3, xl: 4}',
+export const MinContent = ExampleTemplate.bind({});
+MinContent.args = {
+  columns: 'auto min-content auto',
+};
+MinContent.argTypes = {
+  columns: {
+    options: ['auto min-content auto', '1fr 1fr auto min-content', 'min-content auto min-content'],
+    control: { type: 'radio' },
   },
-  template: html`<fudis-grid
-    [columns]="columns"
-    [align]="'center'"
-    [classes]="['storybook__wrapper-border']"
-  >
-    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
-    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
-    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
-    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
-    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
-    <fudis-body-text class="storybook__item-highlight">Grid item</fudis-body-text>
-  </fudis-grid>`,
-});
+};
+MinContent.parameters = {
+  controls: {
+    exclude: excludeEverythingExceptRegex(['columns']),
+  },
+};
 
-export const ResponsiveColumns = ResponsiveColumnsTemplate.bind({});
+export const MaxContent = ExampleTemplate.bind({});
+MaxContent.args = {
+  columns: 'max-content 1fr 1fr',
+};
+MaxContent.argTypes = {
+  columns: {
+    options: [
+      'max-content 1fr 1fr',
+      'max-content auto',
+      '1fr max-content 1fr',
+      'max-content min-content',
+    ],
+    control: { type: 'radio' },
+  },
+};
+MaxContent.parameters = {
+  controls: {
+    exclude: excludeEverythingExceptRegex(['columns']),
+  },
+};
 
+export const Auto = ExampleTemplate.bind({});
+Auto.args = {
+  columns: 'repeat(auto-fit, minmax(10rem, 1fr))',
+};
+Auto.argTypes = {
+  columns: {
+    options: [
+      'repeat(auto-fit, minmax(10rem, 1fr))',
+      'repeat(auto-fit, minmax(5rem, 1fr))',
+      'repeat(auto-fit, minmax(5rem, 1fr))',
+      'repeat(auto-fill, minmax(5rem, 1fr))',
+      'auto 1fr',
+      'auto 1fr 1fr',
+      '1fr auto 1fr',
+      '2fr 1fr auto',
+    ],
+    control: { type: 'radio' },
+  },
+};
+Auto.parameters = {
+  controls: {
+    exclude: excludeEverythingExceptRegex(['columns']),
+  },
+};
+
+export const ResponsiveColumns = ExampleTemplate.bind({});
 ResponsiveColumns.args = {
   columns: { sm: 2, md: '1fr 2fr', lg: 3, xl: '1fr 2fr 1fr', xxl: 6 },
 };
-
 ResponsiveColumns.parameters = {
   controls: {
     exclude: excludeEverythingExceptRegex(['columns']),

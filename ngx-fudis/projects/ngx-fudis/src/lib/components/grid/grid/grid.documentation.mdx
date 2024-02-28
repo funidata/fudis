@@ -39,40 +39,54 @@ By default, if Heading Component is first level child of the Grid Component, the
 
 Most notable property of Grid Component is `columns` property. This defines in how many columns the children elements should be split. Underneath `columns` attribute transforms to CSS property `grid-template-columns`.
 
-The property `columns` accept three different types of values.
+The property `columns` accept three different types of values: number, strings and objects.
 
-### Number
+- [Equally Wide Columns with Numbers](#equally-wide-columns-with-numbers)
+- [Form Input Widths](#form-input-widths)
+- [Native CSS Grid Units](#native-css-grid-units)
+- [Responsive Colums For Different Breakpoints](#responsive-columns-for-different-breakpoints)
+
+### Equally Wide Columns with Numbers
 
 When just a number is provided for `columns`, Grid Component will be split to equally wide columns. E. g. `<fudis-grid [columns]="3">` will set child elements in three equally wide columns.
 
 <Canvas of={GridStories.Example} />
 
-### String
+### Form Input Widths
 
-When provided a string value, it gives lots of flexibility in proportions each column will take in width.
-
-### CSS Grid native units
-
-Grid Component columns can use any native CSS Grid units. One of the most useful is `fr` units. The `fr` stands for 'fraction' unit represeting the leftover space in the grid container. This enables an easy way to define columns which are not equally wide. Take a loot at the examples below.
-
-Other useful CSS Grid column values are ''
-
-<Canvas of={GridStories.UnequallyWideColumns} />
-
-#### Example 1: 4 columns with 1/4 and 3/4 ratio
+If your Grid consists of Fudis Form components, e. g. Text Input or Datepicker, it might make sense to set your Grid column width to follow width of these form components. Substrings which will be converted to actual CSS values are: `inputSm`, `inputMd` and `inputLg`.
 
 ```
-<fudis-grid [columns]="'1fr 3fr'">
-  <fudis-grid-item>
-    This is 1fr wide, so it takes 1/4 of whole width
-  </fudis-grid-item>
-  <fudis-grid-item>
-    This is 3fr wide, so it takes 3/4 of whole width
-  </fudis-grid-item>
+<fudis-grid [columns]="'inputSm inputMd'">
+  <fudis-text-input [label]="'This is now width of small'"/>
+  <fudis-text-input [label]="'This is now width of medium'"/>
 </fudis-grid-item>
 ```
 
-#### Example 2: 6 columns with 3/6, 1/6 and 2/6 ratio
+### Native CSS Grid Units
+
+As Grid's `columns` property is eventually added to Grid HTML element as CSS property `grid-template-columns`, it accepts all native CSS values. This gives lots of flexibility in proportions each column will take in width.
+
+Common grid-template-columns keyword values we introduce here are:
+
+- [FR Fraction Units](#fr-fraction-units)
+- [Auto, Auto-Fill and Auto-Fit](#auto-auto-fill-and-auto-fit)
+- [Min-Content](#min-content)
+- [Max-Content](#max-content)
+
+For more examples and documentation on how to apply other combinations or values to be transformed native CSS `grid-template-columns` property, look at these articles:
+
+- [An Introduction to the `fr` CSS unit](https://css-tricks.com/introduction-fr-css-unit/)
+- [Understanding min-content, max-content, and fit-content in CSS](https://blog.logrocket.com/understanding-min-content-max-content-fit-content-css/)
+- [grid-template-columns in MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns)
+
+#### FR Fraction Units
+
+One of the most useful native CSS Grid units are `fr` units. The `fr` stands for 'fraction' unit represeting the leftover space in the grid container. This enables an easy way to define columns which are not equally wide. Take a loot at the examples below.
+
+<Canvas of={GridStories.FrUnits} />
+
+##### Example: 6 columns with 3/6, 1/6 and 2/6 ratio
 
 ```
 <fudis-grid [columns]="'3fr 1fr 2fr'">
@@ -88,25 +102,57 @@ Other useful CSS Grid column values are ''
 </fudis-grid-item>
 ```
 
-For more examples and documentation on how to apply other combinations or values to be transformed native CSS `grid-template-columns` property, look at these articles:
+#### Auto and MinMax with Auto-Fill and Auto-Fit
 
-- [An Introduction to the `fr` CSS unit](https://css-tricks.com/introduction-fr-css-unit/)
-- [grid-template-columns in MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns)
+Native Grid CSS `grid-columns-template` values of `auto`, `auto-fill` and `auto-fit` as their name describes tries to automatically define the width of each column.
 
-#### Using Form Input Width Strings
+##### Auto
 
-If your Grid consists of Fudis Form components, e. g. Text Input or Datepicker, it might make sense to set your Grid column width to follow width of these form components. Substrings which will be converted to actual CSS values are: `inputSm`, `inputMd` and `inputLg`.
+Value `auto` can be useful, when you have items which do not take too much space in your Grid: it will shrink itself "as small as possible". But if your child element is really wide, value `auto` can break the layout as it takes the minimum width it has, which can be really wide.
 
-```
-<fudis-grid [columns]="'inputSm inputMd'">
-  <fudis-text-input [label]="'This is now width of small'"/>
-  <fudis-text-input [label]="'This is now width of medium'"/>
-</fudis-grid-item>
-```
+##### MinMax with Auto-Fill and Auto-Fit
+
+Quoting from blog post of [Auto-Sizing Columns in CSS Grid](https://css-tricks.com/auto-sizing-columns-css-grid-auto-fill-vs-auto-fit/):
+
+> `auto-fill` FILLS the row with as many columns as it can fit. So it creates implicit columns whenever a new column can fit, because it's trying to FILL the row with as many columns as it can. The newly added columns can and may be empty, but they will still occupy a designated space in the row.
+
+> `auto-fit` FITS the CURRENTLY AVAILABLE columns into the space by expanding them so that they take up any available space. The browser does that after FILLING that extra space with extra columns (as with auto-fill ) and then collapsing the empty ones.
+
+So if you do not have many Grid child elements, this might lead to that `auto-fit` stretches grid items to be really wide.
+
+To enable auto-filling or auto-fitting your Grid's content, you must use `repeat()` function as value with `minmax`.
+
+To read more about using `repeat()`, check this blog post: [How to Use the CSS Grid repeat() Function](https://www.sitepoint.com/css-grid-repeat-function)
+
+Especially the part with `minmax` explained might be useful: [Using the minmax() Function with repeat()](https://www.sitepoint.com/css-grid-repeat-function#usingtheminmaxfunctionwithrepeat)
+
+<Canvas of={GridStories.Auto} />
+
+#### Min-Content
+
+The `min-content` is **the smallest** size a box can take without overflowing its content.
+
+This might be useful in cases, where we want to avoid the column to expand wider than it actually needs to be.
+
+When combined with fr units, the fr columns occupy the rest of the available space after min-content columns have taken their space.
+
+<Canvas of={GridStories.MinContent} />
+
+#### Max Content
+
+Not too surprisingly when compared to previous, `max-content` is **the largest** size a box can take without overflowing its content.
+
+This might be useful in cases, where we want to enable expansion of the column to be as wide as its content allows.
+
+When combined with fr units, the fr columns occupy the rest of the available space after min-content columns have taken their space.
+
+<Canvas of={GridStories.MaxContent} />
 
 ### Responsive Colums For Different Breakpoints
 
 Previously introduced `columns` values stay static and unchanged in all browser viewport widths. Most of the time it is necessary to define different column rules for different breakpoints. This can be achieved providing an settings object to `columns` property.
+
+**Note!** All previously introduced value types can be used to define each breakpoint, so it is not just restricted to numbers of `fr` units!
 
 #### Example 1: Equally Wide Columns in Different Breakpoints
 
