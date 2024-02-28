@@ -13,41 +13,6 @@
 
 html {
   font-size: 100%;
-
-  &.cypress-hide-unstyled-elements {
-    & textarea.fudis-text-area__input {
-      resize: none;
-    }
-
-    & input,
-    textarea {
-      caret-color: transparent;
-    }
-
-    &::-webkit-scrollbar {
-      scrollbar-width: none;
-      display: none;
-      background: transparent;
-      visibility: hidden;
-      width: 0;
-    }
-    & * {
-      scrollbar-width: none; /* Firefox */
-      &::-webkit-scrollbar {
-        display: none;
-        visibility: hidden;
-        width: 0;
-        background: transparent;
-      }
-    }
-  }
-}
-
-body {
-  &.cypress-storybook-box-reset {
-    padding: 0;
-    margin: 0;
-  }
 }
 
 .storybook {

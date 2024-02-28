@@ -8,11 +8,6 @@
 **/.storybook/target
 /ngx-fudis/static
 
-# Cypress
-/ngx-fudis/cypress/cypress-visual-screenshots/comparison
-/ngx-fudis/cypress/cypress-visual-screenshots/diff
-/ngx-fudis/cypress/screenshots
-
 
 # Node
 node_modules

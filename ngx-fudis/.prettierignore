@@ -7,9 +7,6 @@
 /bazel-out
 /static
 
-# Cypress report
-/cypress/cypress-visual-report
-
 # Node
 node_modules
 npm-debug.log
