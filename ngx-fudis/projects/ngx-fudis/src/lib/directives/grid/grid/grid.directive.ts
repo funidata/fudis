@@ -159,6 +159,9 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
     this._setColumnsForBreakpoints(this._calculatedColumns);
   }
 
+  /**
+   * Function which converts application's input or service values to CSS values which will applied to Grid element.
+   */
   private _calculateColumnsCssValue(): string | FudisBreakpointStyleResponsive[] {
     const columnsToApply = this._gridInputProperties.appValues?.columns;
     const columnsFromService =
