@@ -20,9 +20,14 @@ html {
     border: 2px solid var(--fudis-color-primary);
   }
 
-  &__item-highlight {
+  &__item {
     padding: 0.5rem;
     background-color: #f1f1f1;
+  }
+
+  &__item-highlight {
+    padding: 0.5rem;
+    background-color: #fdefb4;
   }
 }
 

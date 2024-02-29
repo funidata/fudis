@@ -50,16 +50,16 @@ const ExampleTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
       [columnGap]="columnGap"
       [rowGap]="rowGap"
     >
-      <fudis-body-text class="storybook__item-highlight"
+      <fudis-body-text class="storybook__item"
         >Grid child element which has more content than most of the child elements</fudis-body-text
       >
-      <fudis-body-text class="storybook__item-highlight">Grid child element</fudis-body-text>
-      <fudis-body-text class="storybook__item-highlight">Grid child element</fudis-body-text>
-      <fudis-body-text class="storybook__item-highlight"
+      <fudis-body-text class="storybook__item">Grid child element</fudis-body-text>
+      <fudis-body-text class="storybook__item">Grid child element</fudis-body-text>
+      <fudis-body-text class="storybook__item"
         >Grid child element which has more content than most of the child elements</fudis-body-text
       >
-      <fudis-body-text class="storybook__item-highlight">Grid child element</fudis-body-text>
-      <fudis-body-text class="storybook__item-highlight">Grid child element</fudis-body-text>
+      <fudis-body-text class="storybook__item">Grid child element</fudis-body-text>
+      <fudis-body-text class="storybook__item">Grid child element</fudis-body-text>
     </fudis-grid>`,
 });
 

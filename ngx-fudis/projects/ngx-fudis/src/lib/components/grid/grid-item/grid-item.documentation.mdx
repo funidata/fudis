@@ -6,9 +6,34 @@ import * as GridItemStories from "./grid-item.stories.ts";
 
 # Grid Item
 
-Grid item has two possible ways to be implemented in the application code, either through directive or component tags.
+Grid Item Component is a wrapper component which implements automatically the features of the [Grid Item Directive](/docs/directives-grid-grid-item--documentation).
 
-Read and learn more about Grid Item usage guidelines from the [Foundations Grid documentation](/docs/foundations-grid--documentation#grid-item).
+Grid Item is meant to be used as first level child component under [Grid Component](/docs/components-grid-grid--documentation).
+
+By default, all first level child Grid Items behave exactly in a way their parent has been configured.
+
+Using this Grid Item Component or Diretive, you can define individual alignment behavior for each Grid Item.
+
+## Horizontal and Vertical alignment
+
+Grid Item has properties of `alignSelfX` for horizontal and `alignSelfY` vertical alignment for which makes the Grid Item aling itself inside its container boundaries.
+
+```
+<fudis-grid [alignItemsX]="'center'">
+  <fudis-grid-item>This item is centered by its parent</fudis-grid-item>
+  <fudis-grid-item>This item is centered by its parent</fudis-grid-item>
+  <fudis-grid-item [alignSelfX]="'end'">This item overrides parent's configs
+  and aligns itself differently</fudis-grid-item>
+<fudis-grid>
+```
+
+### Example of `alignSelfX`
+
+<Canvas of={GridItemStories.responsiveColumns}></Canvas>
+
+### Example of `alignSelfY`
+
+
 
 ## Example of responsive columns
 
