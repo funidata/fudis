@@ -67,8 +67,8 @@ Example.argTypes = {
   },
 };
 
-export const AlignX: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
-  props: { ...args, responsiveAlignX: "{ sm: 'start', md: 'end', lg: 'center' }" },
+export const AlignSelfX: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
+  props: { ...args, responsiveAlignSelfX: "{ sm: 'start', md: 'end', lg: 'center' }" },
   template: html`<fudis-grid [columns]="2">
     <fudis-grid-item class="storybook__item-highlight">
       <fudis-body-text>alignSelfX = 'stretch' (default)</fudis-body-text>
@@ -94,12 +94,12 @@ export const AlignX: StoryFn<GridItemComponent> = (args: GridItemComponent) => (
       [alignSelfX]="{sm: 'start', md: 'end', lg: 'center'}"
     >
       <fudis-body-text>Responsive alignSelfX =</fudis-body-text>
-      <fudis-body-text>"{{responsiveAlignX}}"</fudis-body-text>
+      <fudis-body-text>"{{responsiveAlignSelfX}}"</fudis-body-text>
     </fudis-grid-item>
   </fudis-grid>`,
 });
 
-export const AlignY: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
+export const AlignSelfY: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
   props: args,
   template: html`<fudis-grid [columns]="2" [width]="'sm'">
     <fudis-grid-item class="storybook__item-highlight">
@@ -180,7 +180,7 @@ export const AlignY: StoryFn<GridItemComponent> = (args: GridItemComponent) => (
   </fudis-grid>`,
 });
 
-export const alignXAndY: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
+export const AlignSelfXAndY: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
   props: args,
   template: html`<fudis-grid [columns]="2" [width]="'sm'">
     <fudis-grid-item class="storybook__item-highlight">
@@ -218,7 +218,7 @@ export const alignXAndY: StoryFn<GridItemComponent> = (args: GridItemComponent) 
   </fudis-grid>`,
 });
 
-export const columns: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
+export const Columns: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
   props: args,
   template: html`<fudis-grid [columns]="6">
     <fudis-grid-item class="storybook__item-highlight" [columns]="'stretch'">
@@ -256,7 +256,7 @@ export const columns: StoryFn<GridItemComponent> = (args: GridItemComponent) => 
   </fudis-grid>`,
 });
 
-export const responsiveColumns: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
+export const ResponsiveColumns: StoryFn<GridItemComponent> = (args: GridItemComponent) => ({
   props: {
     ...args,
     exampleOne: { xs: 'stretch', md: 3, lg: 1 },
@@ -293,22 +293,22 @@ export const responsiveColumns: StoryFn<GridItemComponent> = (args: GridItemComp
 });
 
 // NOTE: If you set controls: { disable: true } it causes console warning because Controls tab will be hidden and the tab count does not match
-AlignX.parameters = {
+AlignSelfX.parameters = {
   controls: { exclude: /.*/g },
 };
 
-AlignY.parameters = {
+AlignSelfY.parameters = {
   controls: { exclude: /.*/g },
 };
 
-alignXAndY.parameters = {
+AlignSelfXAndY.parameters = {
   controls: { exclude: /.*/g },
 };
 
-columns.parameters = {
+Columns.parameters = {
   controls: { exclude: /.*/g },
 };
 
-responsiveColumns.parameters = {
+ResponsiveColumns.parameters = {
   controls: { exclude: /.*/g },
 };

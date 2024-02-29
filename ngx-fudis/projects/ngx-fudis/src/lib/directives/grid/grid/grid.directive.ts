@@ -218,8 +218,6 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
       this.serviceDefaults,
     );
 
-    console.log(this._gridInputProperties);
-
     this._element.style.justifyItems = this._valuesForCssClasses.alignItemsX!;
 
     this._element.style.alignItems = this._valuesForCssClasses.alignItemsY!;

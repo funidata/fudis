@@ -14,7 +14,7 @@ By default, all first level child Grid Items behave exactly in a way their paren
 
 Using this Grid Item Component or Diretive, you can define individual alignment behavior for each Grid Item.
 
-## Horizontal and Vertical alignment
+## Horizontal and Vertical Alignment
 
 Grid Item has properties of `alignSelfX` for horizontal and `alignSelfY` vertical alignment for which makes the Grid Item aling itself inside its container boundaries.
 
@@ -29,62 +29,49 @@ Grid Item has properties of `alignSelfX` for horizontal and `alignSelfY` vertica
 
 ### Example of `alignSelfX`
 
-<Canvas of={GridItemStories.responsiveColumns}></Canvas>
+<Canvas of={GridItemStories.AlignSelfX}></Canvas>
 
 ### Example of `alignSelfY`
 
+<Canvas of={GridItemStories.AlignSelfY}></Canvas>
 
+## Defining Columns Expansion and Position
 
-## Example of responsive columns
+When defining the parent Grid Component's `columns` property, by default all Grid Items follow that spesified rule. The same `columns` property is available to a single Grid Item, which will override parent's rules. The given value is converted or used as it is to a native CSS Grid `grid-columns` attribute.
 
-<Canvas of={GridItemStories.responsiveColumns}></Canvas>
+- [Setting Grid Item To Stretch Whole Width](#setting-grid-item-to-stretch-whole-width)
+- [Using A Number Value For Columns](#using-a-number-value-for-columns)
+- [Native CSS Grid Column Values](#native-css-grid-column-values)
+- [Responsive Columns For Each Breakpoint](#responsive-columns-for-each-breakpoint)
+
+### Setting Grid Item To Stretch Whole Width
+
+Fudis Grid Item has a shorthand `[columns]="'stretch'"`for making a Grid Item stretch the whole horizontal width of Grid container.
+
+### Using A Number Value For Columns
+
+When `columns` value is a number, e. g. `[columns]="2`, it will be converted to CSS `grid-columns` attribute value of string `span 2` meaning Grid Item will span across two columns from the point it starts.
+
+### Native CSS Grid Column Values
+
+The values Grid Item's `columns` can be the same as native CSS Grid item's `grid-column` property. By default the value is `auto`.
+
+Quoting from [MDN's grid-column page](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column):
+
+> The `grid-column` CSS shorthand property specifies a grid item's size and location within a grid column by contributing a line, a span, or nothing (automatic) to its grid placement, thereby specifying the inline-start and inline-end edge of its grid area.
+
+### Example of Columns
+
+<Canvas of={GridItemStories.Columns}></Canvas>
+
+### Responsive Columns For Each Breakpoint
+
+As with Grid Component, Grid Item's `columns` value can be an object, where behavior in each breakpoint can be defined.
+
+### Example of Responsive Columns
+
+<Canvas of={GridItemStories.ResponsiveColumns}></Canvas>
 
 ## Properties
 
 <ArgTypes of={GridItemComponent} />
-
-# Grid Item
-
-Grid can have grid-items as its children. With grid-item you can target certain rules to specific element. There are two ways to use grid-item, through `fudisGridItem` directive or `<fudis-grid-item>` tag. Following properties are available:
-
-#### Columns
-
-Just like grid itself, grid-item can be adjusted with `columns` attribute. You can pass string, number or object to it, e.g `[columns]="{ sm: 2, md: 4, xxl: 6 }"`.
-
-#### AlignX
-
-Align single grid-item element horizontally `start`, `center`, `end` or `stretch`, e.g `[alignSelfX]="'start'"`.
-
-#### AlignY
-
-Align single grid-item element vertically `start`, `center`, `end` or `stretch`, e.g `[alignSelfY]="'center'"`.
-
-### Example of grid-item directive
-
-```
-<fudis-grid [columns]="2">
-	<fudis-body-text fudisGridItem [alignSelfX]="'end'"></fudis-body-text>
-	<fudis-body-text fudisGridItem [columns]="2"></fudis-body-text>
-	<fudis-body-text></fudis-body-text>
-	<fudis-body-text fudisGridItem [alignSelfY]="'center'"></fudis-body-text>
-</fudis-grid>
-```
-
-### Example of grid-item tag
-
-```
-<fudis-grid [columns]="2">
-	<fudis-grid-item [alignSelfX]="'end'">
-		<fudis-body-text></fudis-body-text>
-	</fudis-grid-item>
-	<fudis-grid-item [columns]="2">
-		<fudis-body-text></fudis-body-text>
-	</fudis-grid-item>
-	<fudis-body-text></fudis-body-text>
-	<fudis-grid-item [alignSelfY]="'center'">
-		<fudis-body-text></fudis-body-text>
-	</fudis-grid-item>
-</fudis-grid>
-```
-
-These two example results are identical. First body-text is aligned horizontally to the right (end), second body-text is taking up two columns, third gets its rules from the parent grid and fourth body-text is aligned vertically to the center.

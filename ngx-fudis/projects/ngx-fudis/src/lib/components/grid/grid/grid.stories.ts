@@ -1,7 +1,128 @@
-import { StoryFn, Meta, componentWrapperDecorator } from '@storybook/angular';
+import { StoryFn, Meta, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
 import { GridComponent } from './grid.component';
 import { excludeEverythingExceptRegex, gridExampleExclude } from '../../../utilities/storybook';
 import readme from './grid.documentation.mdx';
+import { FudisGridService } from '../../../services/grid/grid.service';
+import { Component } from '@angular/core';
+import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
+
+@Component({
+  selector: 'example-grid-with-service',
+  template: `
+    <fudis-grid
+      [columns]="1"
+      [rowGap]="'sm'"
+      [align]="'center'"
+      [marginTop]="'md'"
+      [marginBottom]="'md'"
+    >
+      <fudis-grid [columns]="2" [alignItemsX]="'center'" [rowGap]="'sm'" [alignItemsY]="'center'">
+        <fudis-button
+          [label]="'Update Grid Service defaults'"
+          (handleClick)="updateGridServiceDefaults()"
+        />
+        <fudis-button
+          [label]="'Update Grid [alignItemsX] value'"
+          (handleClick)="updateGridAlignValue()"
+        />
+        <fudis-body-text
+          fudisGridItem
+          [columns]="'stretch'"
+          [alignSelfX]="'center'"
+          [size]="'lg-regular'"
+          ><code>{{ _currentServiceConfigs }}</code>
+        </fudis-body-text>
+      </fudis-grid>
+
+      <fudis-grid
+        [alignItemsX]="_gridAlignValue"
+        [rowGap]="'sm'"
+        [classes]="['storybook__wrapper-border']"
+      >
+        <fudis-heading [level]="3" [size]="'md'"
+          >Listen to Service Columns but not AlignItemsX</fudis-heading
+        >
+        <fudis-body-text class="storybook__item"
+          >This Grid has [alignItemsX]="'{{ _gridAlignValue }}'"</fudis-body-text
+        >
+        <fudis-body-text class="storybook__item"
+          >Even if Service values are updated, this should not affect alignment</fudis-body-text
+        >
+        <fudis-body-text class="storybook__item"
+          >But this Grid columns layout should change as well from 2 to 3 cols in sm
+          screen!</fudis-body-text
+        >
+      </fudis-grid>
+      <fudis-grid [columns]="2" [classes]="['storybook__wrapper-border']">
+        <fudis-heading [level]="3" [size]="'md'"
+          >Listen to Service's AlignItemsX but not Columns</fudis-heading
+        >
+        <fudis-body-text class="storybook__item"
+          >This Grid has no set alignItemsX value</fudis-body-text
+        >
+        <fudis-body-text class="storybook__item"
+          >It should listen to Service updates on alignItemsX</fudis-body-text
+        >
+        <fudis-body-text class="storybook__item"
+          >But it has columns="2" and it should not listen to Service's columns</fudis-body-text
+        >
+      </fudis-grid>
+
+      <fudis-grid [serviceDefaults]="false" [classes]="['storybook__wrapper-border']">
+        <fudis-heading [level]="3" [size]="'md'">Service Defaults are turned of</fudis-heading>
+        <fudis-body-text class="storybook__item"
+          >This Grid has no set alignItemsX value, and it is ignoring defaults from
+          Service!</fudis-body-text
+        >
+        <fudis-body-text class="storybook__item"
+          >It should NOT listen to Service updates!</fudis-body-text
+        >
+      </fudis-grid>
+    </fudis-grid>
+  `,
+})
+class GridWithServiceExampleComponent {
+  constructor(private _gridService: FudisGridService) {
+    const defaultValue: FudisGridProperties = {
+      columns: { xs: 1, sm: 2 },
+      alignItemsX: 'end',
+    };
+
+    _gridService.setDefaultValues(defaultValue);
+
+    this._currentServiceConfigs = JSON.stringify(_gridService.getDefaultValues()());
+  }
+
+  protected _gridAlignValue: FudisGridAlign = 'end';
+
+  protected _currentServiceConfigs: string;
+
+  updateGridAlignValue(): void {
+    this._gridAlignValue =
+      this._gridAlignValue === 'center'
+        ? 'end'
+        : this._gridAlignValue === 'end'
+          ? 'start'
+          : 'center';
+  }
+
+  updateGridServiceDefaults(): void {
+    const updateValue =
+      this._gridService.getDefaultValues()()?.alignItemsX === 'end' ? 'stretch' : 'end';
+
+    const updateColumnsValue =
+      JSON.stringify(this._gridService.getDefaultValues()()?.columns) === '{"xs":1,"sm":2}'
+        ? { xs: 1, sm: 3 }
+        : { xs: 1, sm: 2 };
+
+    this._gridService.setDefaultValues({
+      alignItemsX: updateValue,
+      columns: updateColumnsValue,
+    });
+
+    this._currentServiceConfigs = JSON.stringify(this._gridService.getDefaultValues()());
+  }
+}
 
 const html = String.raw;
 
@@ -9,6 +130,9 @@ export default {
   title: 'Components/Grid/Grid',
   component: GridComponent,
   decorators: [
+    moduleMetadata({
+      declarations: [GridWithServiceExampleComponent],
+    }),
     componentWrapperDecorator(
       (story) => html`<div style="border: 3px solid #b83c2e">${story}</div>`,
     ),
@@ -233,3 +357,10 @@ ResponsiveColumns.parameters = {
     exclude: excludeEverythingExceptRegex(['columns']),
   },
 };
+
+const ExampleWithServiceTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
+  props: { ...args },
+  template: html` <example-grid-with-service></example-grid-with-service>`,
+});
+
+export const ExampleWithService = ExampleWithServiceTemplate.bind({});
