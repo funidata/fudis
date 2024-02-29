@@ -1881,9 +1881,13 @@ html {
 .storybook__wrapper-border {
   border: 2px solid var(--fudis-color-primary);
 }
-.storybook__item-highlight {
+.storybook__item {
   padding: 0.5rem;
   background-color: #f1f1f1;
+}
+.storybook__item-highlight {
+  padding: 0.5rem;
+  background-color: #fdefb4;
 }
 
 /* stylelint-disable color-no-hex */
