@@ -364,3 +364,9 @@ const ExampleWithServiceTemplate: StoryFn<GridComponent> = (args: GridComponent)
 });
 
 export const ExampleWithService = ExampleWithServiceTemplate.bind({});
+
+ExampleWithService.parameters = {
+  controls: {
+    exclude: /.*/g,
+  },
+};
