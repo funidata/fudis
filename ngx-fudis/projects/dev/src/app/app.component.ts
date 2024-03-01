@@ -22,6 +22,7 @@ import {
 // import { FudisAlert } from 'dist/ngx-fudis/lib/types/miscellaneous';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
+import { FudisGridAlign } from 'projects/ngx-fudis/src/lib/types/grid';
 
 type MyForm = {
   textInput: FormControl<string | null | number>;
@@ -44,9 +45,9 @@ export class AppComponent implements OnInit {
     private _errorSummaryService: FudisErrorSummaryService,
     private _breakpointService: FudisBreakpointService,
   ) {
-    _gridService.setGridDefaultValues({
-      columns: { xs: 1, lg: 2 },
-      marginSides: 'responsive',
+    _gridService.setDefaultValues({
+      columns: { xs: 1, md: 2 },
+      align: 'center',
     });
   }
 
@@ -100,8 +101,8 @@ export class AppComponent implements OnInit {
   ];
 
   radioButtonOptions: FudisRadioButtonOption[] = [
-    { value: true, label: 'True', id: 'boolean-2', name: 'booleans' },
-    { value: false, label: 'False', id: 'boolean-1', name: 'booleans' },
+    { value: true, label: 'True', id: 'boolean-2' },
+    { value: false, label: 'False', id: 'boolean-1' },
   ];
 
   testFormGroup = new FormGroup<MyForm>({
@@ -139,6 +140,8 @@ export class AppComponent implements OnInit {
       ),
     ),
   });
+
+  protected _gridAlignValue: FudisGridAlign = 'end';
 
   ngOnInit(): void {
     this._translocoService.setActiveLang('fi');
@@ -229,5 +232,34 @@ export class AppComponent implements OnInit {
 
   doSomething(event: Event) {
     console.log('event received!', event);
+  }
+
+  updateGridAlignValue(): void {
+    this._gridAlignValue =
+      this._gridAlignValue === 'center'
+        ? 'end'
+        : this._gridAlignValue === 'end'
+          ? 'start'
+          : 'center';
+  }
+
+  updateGridServiceDefaults(): void {
+    console.log('Current GridService defaults are:');
+    console.log(this._gridService.getDefaultValues()());
+
+    const updateValue =
+      this._gridService.getDefaultValues()()?.alignItemsX === 'end' ? 'stretch' : 'end';
+
+    const updateColumnsValue =
+      JSON.stringify(this._gridService.getDefaultValues()()?.columns) === '{"xs":1,"md":2}'
+        ? { xs: 1, md: 3 }
+        : { xs: 1, md: 2 };
+
+    this._gridService.setDefaultValues({
+      alignItemsX: updateValue,
+      columns: updateColumnsValue,
+    });
+    console.log('Updated GridService defaults are:');
+    console.log(this._gridService.getDefaultValues()());
   }
 }

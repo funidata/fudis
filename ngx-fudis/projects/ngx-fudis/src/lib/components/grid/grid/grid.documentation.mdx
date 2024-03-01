@@ -1,0 +1,214 @@
+import { Meta, Canvas, ArgTypes, Source } from "@storybook/blocks";
+import { GridComponent } from "./grid.component";
+import * as GridStories from "./grid.stories.ts";
+
+<Meta title="Components/Grid/Grid" />
+
+# Grid Component
+
+Grid Component is a wrapper element, which implements all the features spesified in [Grid Directive](/docs/directives-grid-grid--documentation)
+
+Essentially it is an HTML element which has CSS property `display` set to `grid`.
+
+This page contains documentation on how to align and set **all** first level child elements inside one Grid element. If you are interested in customising each child element individually, please look at documentation of [Grid Item Directive](/docs/directives-grid-grid-item--documentation) or [Grid Item Component](/docs/components-grid-grid-item--documentation).
+
+**Table of Contents:**
+
+- [Basic Usage](#basic-usage)
+- [Defining Columns](#defining-columns)
+- [Universal Configuration of All Grid Components](#universal-configuration-of-all-grid-components)
+- [Properties Table](#properties)
+
+## Basic Usage
+
+The HTML selector of Grid Component is `fudis-grid`.
+
+Grid Component has multiple properties to define how itself or its content should be aligned. Rules that affect child elements are applied to every first level children Grid Component has.
+
+```
+<fudis-grid [alignItemsX]="'center'">
+  <fudis-grid-item>
+    This will be centered
+  </fudis-grid-item>
+  <fudis-grid-item>
+    This will be centered
+  </fudis-grid-item>
+  <fudis-grid-item>
+    This will be centered
+    <p>But this will not be affected, as this p-element is not first level child element</p>
+  </fudis-grid-item>
+</fudis-grid>
+```
+
+### Heading Components Inside Grid
+
+By default, if Heading Component is first level child of the Grid Component, the Heading will spread and take 100% width. This can be disabled with the use of [Grid Item Directive](/docs/directives-grid-grid-item--documentation).
+
+## Defining Columns
+
+Most notable property of Grid Component is `columns` property. This defines in how many columns the children elements should be split. Underneath `columns` attribute transforms to CSS property `grid-template-columns`.
+
+The property `columns` accept three different types of values: number, strings and objects.
+
+**Examples of different ways how to use `columns`:**
+
+- [Equally Wide Columns with Numbers](#equally-wide-columns-with-numbers)
+- [Form Input Widths](#form-input-widths)
+- [Native CSS Grid Units](#native-css-grid-units)
+- [Responsive Colums For Different Breakpoints](#responsive-columns-for-different-breakpoints)
+
+### Equally Wide Columns with Numbers
+
+When just a number is provided for `columns`, Grid Component will be split to equally wide columns. E. g. `<fudis-grid [columns]="3">` will set child elements in three equally wide columns.
+
+<Canvas of={GridStories.Example} />
+
+### Form Input Widths
+
+If your Grid consists of Fudis Form components, e. g. Text Input or Datepicker, it might make sense to set your Grid column width to follow width of these form components. Substrings which will be converted to actual CSS values are: `inputSm`, `inputMd` and `inputLg`.
+
+```
+<fudis-grid [columns]="'inputSm inputMd'">
+  <fudis-text-input [label]="'This is now width of small'"/>
+  <fudis-text-input [label]="'This is now width of medium'"/>
+</fudis-grid-item>
+```
+
+### Native CSS Grid Units
+
+As Grid's `columns` property is eventually added to Grid HTML element as CSS property `grid-template-columns`, it accepts all native CSS values. This gives lots of flexibility in proportions each column will take in width.
+
+Common grid-template-columns keyword values we introduce here are:
+
+- [FR Fraction Units](#fr-fraction-units)
+- [Auto, Auto-Fill and Auto-Fit](#auto-auto-fill-and-auto-fit)
+- [Min-Content](#min-content)
+- [Max-Content](#max-content)
+
+For more examples and documentation on how to apply other combinations or values to be transformed native CSS `grid-template-columns` property, look at these articles:
+
+- [An Introduction to the `fr` CSS unit](https://css-tricks.com/introduction-fr-css-unit/)
+- [Understanding min-content, max-content, and fit-content in CSS](https://blog.logrocket.com/understanding-min-content-max-content-fit-content-css/)
+- [grid-template-columns in MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns)
+
+#### FR Fraction Units
+
+One of the most useful native CSS Grid units are `fr` units. The `fr` stands for 'fraction' unit represeting the leftover space in the grid container. This enables an easy way to define columns which are not equally wide. Take a loot at the examples below.
+
+<Canvas of={GridStories.FrUnits} />
+
+##### Example: 6 columns with 3/6, 1/6 and 2/6 ratio
+
+```
+<fudis-grid [columns]="'3fr 1fr 2fr'">
+  <fudis-grid-item>
+    This is 3fr wide, so it takes 3/6 of whole width
+  </fudis-grid-item>
+  <fudis-grid-item>
+    This is 1fr wide, so it takes 1/6 of whole width
+  </fudis-grid-item>
+  <fudis-grid-item>
+    This is 2fr wide, so it takes 2/6 of whole width
+  </fudis-grid-item>
+</fudis-grid-item>
+```
+
+Fraction units transform easily to percentages as well if needed. If we want to set a Grid with four columns with ratio of 50%, 10%, 20% and 20% wide columns, we can just set `[colums]="'50fr 10fr 20fr 20fr'"`. When reduced it is equal to `[colums]="'5fr 1fr 2fr 2fr'"`.
+
+#### Auto and MinMax with Auto-Fill and Auto-Fit
+
+Native Grid CSS `grid-columns-template` values of `auto`, `auto-fill` and `auto-fit` as their name describes tries to automatically define the width of each column.
+
+##### Auto
+
+Value `auto` can be useful, when you have items which do not take too much space in your Grid: it will shrink itself "as small as possible". But if your child element is really wide, value `auto` can break the layout as it takes the minimum width it has, which can be really wide.
+
+##### MinMax with Auto-Fill and Auto-Fit
+
+Quoting from blog post of [Auto-Sizing Columns in CSS Grid](https://css-tricks.com/auto-sizing-columns-css-grid-auto-fill-vs-auto-fit/):
+
+> `auto-fill` FILLS the row with as many columns as it can fit. So it creates implicit columns whenever a new column can fit, because it's trying to FILL the row with as many columns as it can. The newly added columns can and may be empty, but they will still occupy a designated space in the row.
+
+> `auto-fit` FITS the CURRENTLY AVAILABLE columns into the space by expanding them so that they take up any available space. The browser does that after FILLING that extra space with extra columns (as with auto-fill ) and then collapsing the empty ones.
+
+So if you do not have many Grid child elements, this might lead to that `auto-fit` stretches grid items to be really wide.
+
+To enable auto-filling or auto-fitting your Grid's content, you must use `repeat()` function as value with `minmax`.
+
+To read more about using `repeat()`, check this blog post: [How to Use the CSS Grid repeat() Function](https://www.sitepoint.com/css-grid-repeat-function)
+
+Especially the part with `minmax` explained might be useful: [Using the minmax() Function with repeat()](https://www.sitepoint.com/css-grid-repeat-function#usingtheminmaxfunctionwithrepeat)
+
+<Canvas of={GridStories.Auto} />
+
+#### Min-Content
+
+The `min-content` is **the smallest** size a box can take without overflowing its content.
+
+This might be useful in cases, where we want to avoid the column to expand wider than it actually needs to be.
+
+When combined with fr units, the fr columns occupy the rest of the available space after min-content columns have taken their space.
+
+<Canvas of={GridStories.MinContent} />
+
+#### Max Content
+
+Not too surprisingly when compared to previous, `max-content` is **the largest** size a box can take without overflowing its content.
+
+This might be useful in cases, where we want to enable expansion of the column to be as wide as its content allows.
+
+When combined with fr units, the fr columns occupy the rest of the available space after max-content columns have taken their space.
+
+<Canvas of={GridStories.MaxContent} />
+
+### Responsive Colums For Different Breakpoints
+
+Previously introduced `columns` values stay static and unchanged in all browser viewport widths. Most of the time it is necessary to define different column rules for different breakpoints. This can be achieved providing a settings object to `columns` property.
+
+**Note!** All previously introduced value types can be used to define each breakpoint, so it is not just restricted to numbers of `fr` units.
+
+#### Example 1: Equally Wide Columns in Different Breakpoints
+
+With `[columns]="{sm: 2, lg: 3, xl: 4}"` In following example:
+
+- Before `sm`: Before screen size of `sm` (there is `xs` before `sm`), Grid will have the default of 1 column.
+- `sm` to `lg`: Through `sm`, `md` and before hitting `lg` breakpoint, Grid will be in 2 equally wide columns
+- `lg` to `xl`: From `lg` and before hitting `xl`, Grid has 3 equal columns
+- `xl` and up: Grid has 4 columns
+
+```
+<fudis-grid [columns]="{sm: 2, lg: 3, xl: 4}">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  ...
+  <div>Item n-1</div>
+  <div>Item n</div>
+</fudis-grid-item>
+```
+
+#### Example 2: Combining Values
+
+With `[columns]="{xs: 2, sm: '1fr 2fr', md: '1fr 2fr 1fr', lg: 4}"` In following example:
+
+- From `xs` to `sm`: Before hitting `sm`, Grid has 2 equally wide columns.
+- From `sm` to `md`: From `sm` before hitting `md`, Grid has 2 columns, where 1st takes 1/3 of width and 2nd 2/3 of whole width.
+- From `md` to `lg`: From `md` before hitting `lg`, Grid has 3 columns, where 1st column takes 1/4, 2nd 2/4 and 3rd column again 1/4 of whole width.
+- From `lg` and up: When hitting breakpoint `lg`, Grid will have 4 equally wide columns.
+
+```
+<fudis-grid [columns]="{xs: 2, sm: '1fr 2fr', md: '1fr 2fr 1fr', lg: 4}">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  ...
+  <div>Item n-1</div>
+  <div>Item n</div>
+</fudis-grid-item>
+```
+
+## Universal Configuration of All Grid Components
+
+To apply default values to all of applications Grid Components and elements with Grid Directive, use [Grid Service to set default configurations.](/docs/services-grid--documentation)
+
+## Properties
+
+<ArgTypes of={GridComponent} />

@@ -1,11 +1,15 @@
 @use "../../foundations/typography/mixins.scss" as typography;
+@use "../../foundations/spacing/tokens.scss" as spacing;
+@use "../../foundations/utilities/mixins.scss" as utilities;
 
 .fudis-breadcrumbs {
   @include typography.body-text-md-regular;
+  @include utilities.box-reset;
 
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  margin-bottom: spacing.$spacing-md;
   list-style: none;
 
   /*

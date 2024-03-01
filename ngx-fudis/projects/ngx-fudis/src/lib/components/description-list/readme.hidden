@@ -25,7 +25,7 @@ interface FudisDescriptionListItem {
 
 ## Examples
 
-Description List has two different variants, default 'regular' list and 'compact'. **Description List extends Grid API so it can take all same inputs as Fudis Grid. E. g. `width`, `columns` and `marginSides`.** Fudis Grid can be disabled in Description List by setting `disableGrid` as true.
+Description List has two different variants, default 'regular' list and 'compact'. **Description List extends Grid API so it can take all same inputs as Fudis Grid. E. g. `width`, `columns` and `align`.** Fudis Grid can be disabled in Description List by setting `disableGrid` as true.
 
 ### Description List Compact Variant
 

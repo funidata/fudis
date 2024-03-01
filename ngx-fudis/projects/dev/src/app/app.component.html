@@ -3,11 +3,11 @@
     <!-- <fudis-alert-group /> -->
 
     <fudis-grid [columns]="4" [marginTop]="'lg'">
-      <fudis-grid-item [columns]="'3 / 4'" [alignX]="'end'" [alignY]="'end'">
+      <fudis-grid-item [columns]="'3 / 4'" [alignSelfX]="'end'" [alignSelfY]="'end'">
         <fudis-body-text>1 rem = {{ visibleRemValue }}px</fudis-body-text>
         <fudis-body-text>Font size is {{ fontSize }}</fudis-body-text>
       </fudis-grid-item>
-      <fudis-grid-item [columns]="'4 / -1'" [alignX]="'end'">
+      <fudis-grid-item [columns]="'4 / -1'" [alignSelfX]="'end'">
         <fudis-button [label]="'Change REM base'" (handleClick)="changeRemBase()"></fudis-button>
       </fudis-grid-item>
     </fudis-grid>
@@ -75,14 +75,51 @@
 
       <fudis-expandable [title]="'Grid stuff'">
         <ng-template fudisContent type="expandable">
-          <fudis-heading [level]="3" [size]="'xl'">Väliotsikko</fudis-heading>
-          <fudis-grid>
-            <fudis-body-text>Showcase of grid items</fudis-body-text>
-            <fudis-body-text>Showcase of grid items</fudis-body-text>
-            <fudis-body-text>Showcase of grid items</fudis-body-text>
-            <fudis-body-text>Showcase of grid items</fudis-body-text>
-            <fudis-body-text>Showcase of grid items</fudis-body-text>
-            <fudis-body-text>Showcase of grid items</fudis-body-text>
+          <fudis-grid [columns]="1" [rowGap]="'xxl'">
+            <fudis-grid [columns]="2">
+              <fudis-heading [level]="3" [size]="'xl'">Grid stuff!</fudis-heading>
+              <fudis-button
+                [label]="'Update Grid Service defaults'"
+                (handleClick)="updateGridServiceDefaults()"
+              />
+              <fudis-button
+                [label]="'Update Grid [alignItemsX] value'"
+                (handleClick)="updateGridAlignValue()"
+              />
+            </fudis-grid>
+
+            <fudis-grid [alignItemsX]="_gridAlignValue" [rowGap]="'sm'">
+              <fudis-heading [level]="3">Listen to Columns but not AlignItemsX</fudis-heading>
+              <fudis-body-text
+                >This Grid has [alignItemsX]="'{{ _gridAlignValue }}'"</fudis-body-text
+              >
+              <fudis-body-text
+                >Even if Service values are updated, this should not affect
+                alignment</fudis-body-text
+              >
+              <fudis-body-text
+                >But this Grid columns layout should change as well from 2 to 3 cols in lg
+                screen!</fudis-body-text
+              >
+            </fudis-grid>
+            <fudis-grid [columns]="2">
+              <fudis-heading [level]="3">Listen to AlignItemsX but not Columns</fudis-heading>
+              <fudis-body-text>This Grid has no set alignItemsX value</fudis-body-text>
+              <fudis-body-text>It should listen to Service updates on alignItemsX</fudis-body-text>
+              <fudis-body-text
+                >But it has columns="2" and it should not listen to Service's
+                columns</fudis-body-text
+              >
+            </fudis-grid>
+
+            <fudis-grid [serviceDefaults]="false">
+              <fudis-heading [level]="3">Service Defaults are turned of</fudis-heading>
+              <fudis-body-text
+                >This Grid has no set alignItemsX value, but it is ignoring defaults from
+                Service!</fudis-body-text
+              >
+              <fudis-body-text>It should NOT listen to Service updates!</fudis-body-text>
+            </fudis-grid>
           </fudis-grid>
         </ng-template>
       </fudis-expandable>
@@ -123,7 +160,6 @@
               <fudis-checkbox-group
                 [title]="'Choose berry'"
                 [helpText]="'Berries are yummy'"
-                [required]="true"
                 [tooltip]="'We want to know!'"
                 [formGroup]="testFormGroup.controls['checkboxFormGroup']"
               >

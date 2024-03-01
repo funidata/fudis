@@ -93,8 +93,8 @@ describe('DescriptionListComponent', () => {
       const classList = [
         'fudis-dl',
         'fudis-grid',
-        'fudis-grid__margin__sides__none',
-        'fudis-grid__align__center',
+        'fudis-grid__align__start',
+        'fudis-grid__row-gap__none',
         'fudis-grid__margin__bottom__none',
         'fudis-grid__margin__top__none',
         'fudis-grid__xxl',
@@ -109,8 +109,7 @@ describe('DescriptionListComponent', () => {
       const classList = [
         'fudis-dl-compact',
         'fudis-grid',
-        'fudis-grid__align__center',
-        'fudis-grid__margin__sides__none',
+        'fudis-grid__align__start',
         'fudis-grid__margin__bottom__none',
         'fudis-grid__margin__top__none',
         'fudis-grid__row-gap__none',

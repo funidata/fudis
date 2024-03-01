@@ -12,6 +12,23 @@ import { FudisSpacing } from './miscellaneous';
  */
 export const gridColumnDefault = '1fr';
 
+export const gridInputPropertyDefaults: FudisGridProperties = {
+  align: 'start',
+  alignItemsX: 'stretch',
+  alignItemsY: 'stretch',
+  classes: [],
+  columnGap: 'responsive',
+  marginTop: 'none',
+  marginBottom: 'none',
+  rowGap: 'responsive',
+  width: 'xxl',
+};
+
+/**
+ * Grid Columns property accepted input values
+ */
+export type FudisGridColumns = string | number | FudisGridColumnsResponsive;
+
 /**
  * Grid widths
  */
@@ -28,11 +45,6 @@ export type FudisGridAlign = 'start' | 'end' | 'center';
 export type FudisGridAlignItems = 'start' | 'center' | 'end' | 'stretch';
 
 /**
- * Margins on left and right side of the grid
- */
-export type FudisGridMarginSide = 'responsive' | 'none';
-
-/**
  * Spacing between columns and rows inside Grid
  */
 export type FudisGridGap = FudisSpacing | 'responsive';
@@ -47,18 +59,23 @@ export type FudisGridColumnsResponsive = {
 /**
  * Attributes for managing Grid
  */
-export interface FudisGridAttributes {
+export interface FudisGridProperties {
+  align?: FudisGridAlign;
   alignItemsY?: FudisGridAlignItems;
   alignItemsX?: FudisGridAlignItems;
-  columns?: FudisBreakpointValueResponsive;
-  width?: FudisGridWidth;
-  align?: FudisGridAlign;
-  marginTop?: FudisSpacing;
-  marginBottom?: FudisSpacing;
-  rowGap?: FudisGridGap;
-  columnGap?: FudisGridGap;
-  marginSides?: FudisGridMarginSide;
   classes?: string[];
+  columns?: FudisBreakpointValueResponsive;
+  columnGap?: FudisGridGap;
+  marginBottom?: FudisSpacing;
+  marginTop?: FudisSpacing;
+  rowGap?: FudisGridGap;
+  width?: FudisGridWidth;
+}
+
+export interface FudisGridPropertyCollection {
+  appValues: FudisGridProperties;
+  defaultValues: FudisGridProperties;
+  serviceValues: FudisGridProperties;
 }
 
 /**

@@ -1,3 +1,7 @@
+/*
+* This file is for Storybook
+*/
+
 @use "@angular/material" as mat;
 
 // Fudis theme import
@@ -13,6 +17,27 @@
 
 html {
   font-size: 100%;
+}
+
+a.sbdocs {
+  color: var(--fudis-color-primary);
+  font-weight: 600;
+}
+
+.storybook {
+  &__wrapper-border {
+    border: 2px solid var(--fudis-color-primary);
+  }
+
+  &__item {
+    padding: 0.5rem;
+    background-color: #f1f1f1;
+  }
+
+  &__item-highlight {
+    padding: 0.5rem;
+    background-color: #fdefb4;
+  }
 }
 
 /* stylelint-disable color-no-hex */

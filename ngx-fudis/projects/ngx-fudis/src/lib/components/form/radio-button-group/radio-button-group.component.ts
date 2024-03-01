@@ -12,7 +12,10 @@ import { hasRequiredValidator } from '../../../utilities/form/getValidators';
   encapsulation: ViewEncapsulation.None,
 })
 export class RadioButtonGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
-  @HostBinding('class') classes = 'fudis-radio-button-group-host';
+  /**
+   * Binding host CSS class to component wrapper
+   */
+  @HostBinding('class') private _classes = 'fudis-radio-button-group-host';
 
   /*
    * FormControl for Radio Button group
@@ -40,9 +43,9 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
   @Input() required: boolean | undefined = undefined;
 
   /**
-   * If options array items don't all have same 'name', use generated one
+   * Name of the group. If not provided, use id for the name.
    */
-  protected _name: string;
+  @Input() name: string;
 
   /**
    * Set requiredText based on this boolean value
@@ -58,16 +61,16 @@ export class RadioButtonGroupComponent extends FieldSetBaseDirective implements 
       );
     }
 
-    const nameMismatch = this.options.filter((optionName) =>
-      this.options.some((item) => optionName.name !== item.name),
-    );
-
-    if (nameMismatch.length > 0) {
-      this._name = this.id;
+    if (!this.name) {
+      this.name = this.id;
     }
   }
 
   ngOnChanges(): void {
     this._required = hasRequiredValidator(this.control);
+
+    if (!this.name) {
+      this.name = this.id;
+    }
   }
 }

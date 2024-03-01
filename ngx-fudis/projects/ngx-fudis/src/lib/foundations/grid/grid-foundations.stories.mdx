@@ -1,0 +1,65 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Foundations/Grid" />
+
+# Grid Foundations
+
+Fudis provides extensive tools for defining grid-like layouts. This page documents usage of SCSS style foundations. For Grid Component and Directive documentation, check their designated documentation.
+
+- [Grid Components](/docs/components-grid--documentation)
+- [Grid Directives](/docs/directives-grid-introduction--documentation)
+- [Grid Service](/docs/services-grid--documentation)
+
+## SCSS Tokens
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>String value</th>
+      <th>Px value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$grid-width-xxl</td>
+      <td>xxl</td>
+      <td>1540 px</td>
+    </tr>
+    <tr>
+      <td>$grid-width-xl</td>
+      <td>xl</td>
+      <td>1040 px</td>
+    </tr>
+    <tr>
+      <td>$grid-width-xxl</td>
+      <td>lg</td>
+      <td>960 px</td>
+    </tr>
+    <tr>
+      <td>$grid-width-md</td>
+      <td>mdx</td>
+      <td>720 px</td>
+    </tr>
+    <tr>
+      <td>$grid-width-sm</td>
+      <td>sm</td>
+      <td>544 px</td>
+    </tr>
+    <tr>
+      <td>$grid-width-xs</td>
+      <td>xs</td>
+      <td>544 px</td>
+    </tr>
+  </tbody>
+</table>
+
+## Grid Max Width Mixin
+
+Mixin will set selected element's CSS max-width to given Grid token width
+
+```
+.my-element {
+  @include fudis.grid-max-width('lg');
+}
+```

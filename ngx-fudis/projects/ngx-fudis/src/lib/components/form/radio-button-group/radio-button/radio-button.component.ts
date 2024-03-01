@@ -20,7 +20,10 @@ import { FudisIdService } from '../../../../services/id/id.service';
 export class RadioButtonComponent implements OnInit {
   constructor(private _idService: FudisIdService) {}
 
-  @HostBinding('class') classes = 'fudis-radio-button-host';
+  /**
+   * Binding host CSS class to component wrapper
+   */
+  @HostBinding('class') private _classes = 'fudis-radio-button-host';
 
   /*
    * FormControl for single Radio Button

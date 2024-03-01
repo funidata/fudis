@@ -148,3 +148,19 @@ export interface FudisTranslationLanguageBadgeAriaLabel {
   SELECTED: string;
   MISSING_TRANSLATION: string;
 }
+
+/**
+ * Types for extending ngOnChanges SimpleChanges type
+ * T = any FudisComponent which have @Input() properties
+ * P = property of component. E. g. for Grid columns and rowGap or for Heading level and size.
+ * So T[P] translates to e.g. HeadingComponent['level'] --> HeadingComponent.level --> values from 1-6
+ */
+type FudisComponentChange<T, P extends keyof T> = {
+  previousValue: T[P];
+  currentValue: T[P];
+  firstChange: boolean;
+};
+
+export type FudisComponentChanges<T> = {
+  [P in keyof T]?: FudisComponentChange<T, P>;
+};
