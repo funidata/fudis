@@ -80,11 +80,7 @@ export const formExclude: RegExp = excludeRegex([
   'width',
 ]);
 
-export const formArgTypesExclude: RegExp = excludeRegex([
-  'rowGap',
-  'columns',
-  'classes',
-]);
+export const formArgTypesExclude: RegExp = excludeRegex(['rowGap', 'columns', 'classes']);
 
 export const linkExclude: RegExp = excludeRegex([
   'fragmentId',
