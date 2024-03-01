@@ -10,7 +10,7 @@ Grid Component is a wrapper element, which implements all the features spesified
 
 Essentially it is an HTML element which has CSS property `display` set to `grid`.
 
-This page contains documentation on how to align and set **all** first level child elements inside one Grid element. If you are interested in customising each child element individually, please look at documentation of [Grid Item Directive](/docs/directives-grid-grid-item--documentation) or [Grid Item Component](/docs/components-grid-grid-item--documentation)
+This page contains documentation on how to align and set **all** first level child elements inside one Grid element. If you are interested in customising each child element individually, please look at documentation of [Grid Item Directive](/docs/directives-grid-grid-item--documentation) or [Grid Item Component](/docs/components-grid-grid-item--documentation).
 
 **Table of Contents:**
 
@@ -35,14 +35,14 @@ Grid Component has multiple properties to define how itself or its content shoul
   </fudis-grid-item>
   <fudis-grid-item>
     This will be centered
-    <p>But this will not be affected, as this p-element is not first level child element</>
+    <p>But this will not be affected, as this p-element is not first level child element</p>
   </fudis-grid-item>
 </fudis-grid>
 ```
 
 ### Heading Components Inside Grid
 
-By default, if Heading Component is first level child of the Grid Component, the Heading will spread take 100% width. This can be disabled with the use of [Grid Item Directive](/docs/components-grid-grid-item--documentation).
+By default, if Heading Component is first level child of the Grid Component, the Heading will spread and take 100% width. This can be disabled with the use of [Grid Item Directive](/docs/directives-grid-grid-item--documentation).
 
 ## Defining Columns
 
@@ -50,6 +50,7 @@ Most notable property of Grid Component is `columns` property. This defines in h
 
 The property `columns` accept three different types of values: number, strings and objects.
 
+**Examples of different ways how to use `columns`:**
 - [Equally Wide Columns with Numbers](#equally-wide-columns-with-numbers)
 - [Form Input Widths](#form-input-widths)
 - [Native CSS Grid Units](#native-css-grid-units)
@@ -155,15 +156,15 @@ Not too surprisingly when compared to previous, `max-content` is **the largest**
 
 This might be useful in cases, where we want to enable expansion of the column to be as wide as its content allows.
 
-When combined with fr units, the fr columns occupy the rest of the available space after min-content columns have taken their space.
+When combined with fr units, the fr columns occupy the rest of the available space after max-content columns have taken their space.
 
 <Canvas of={GridStories.MaxContent} />
 
 ### Responsive Colums For Different Breakpoints
 
-Previously introduced `columns` values stay static and unchanged in all browser viewport widths. Most of the time it is necessary to define different column rules for different breakpoints. This can be achieved providing an settings object to `columns` property.
+Previously introduced `columns` values stay static and unchanged in all browser viewport widths. Most of the time it is necessary to define different column rules for different breakpoints. This can be achieved providing a settings object to `columns` property.
 
-**Note!** All previously introduced value types can be used to define each breakpoint, so it is not just restricted to numbers of `fr` units!
+**Note!** All previously introduced value types can be used to define each breakpoint, so it is not just restricted to numbers of `fr` units.
 
 #### Example 1: Equally Wide Columns in Different Breakpoints
 
@@ -205,7 +206,7 @@ With `[columns]="{xs: 2, sm: '1fr 2fr', md: '1fr 2fr 1fr', lg: 4}"` In following
 
 ## Universal Configuration of All Grid Components
 
-To apply default values to all of applications Grid Components and elements with Grid Directive, use [Fudis Grid Service to set default configurations.](/docs/services-grid--documentation)
+To apply default values to all of applications Grid Components and elements with Grid Directive, use [Grid Service to set default configurations.](/docs/services-grid--documentation)
 
 ## Properties
 

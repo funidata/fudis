@@ -1,7 +1,6 @@
 import { Injectable, Signal, signal } from '@angular/core';
 import { FudisGridProperties } from '../../types/grid';
 
-// TODO: Write Storybook documentation under Services. Note that there is already documentation of setDefaultValues in Documentation/Grid.
 @Injectable()
 export class FudisGridService {
   /**

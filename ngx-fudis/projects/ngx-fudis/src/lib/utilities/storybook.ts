@@ -74,7 +74,6 @@ export const formExclude: RegExp = excludeRegex([
   'classes',
   'columnGap',
   'columns',
-  'ignoreDefaults',
   'marginBottom',
   'marginTop',
   'rowGap',
@@ -84,7 +83,6 @@ export const formExclude: RegExp = excludeRegex([
 export const formArgTypesExclude: RegExp = excludeRegex([
   'rowGap',
   'columns',
-  'ignoreDefaults',
   'classes',
 ]);
 

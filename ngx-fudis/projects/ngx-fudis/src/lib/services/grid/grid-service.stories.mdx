@@ -3,13 +3,13 @@ import { FudisGridService } from "./grid.service.ts";
 
 <Meta title="Services/Grid" />
 
-# Fudis Grid Service
+# Grid Service
 
-Fudis Grid Service provides tools to apply default property values to all Grid Components and Grid Directive elements application has. These default values can be overwritten or totally ignore for each grid if needed.
+Grid Service provides tools to apply default property values to all Grid Components and Grid Directive elements application has. These default values can be overwritten or totally ignored for each grid if needed.
 
 ## How To Use
 
-Fudis Grid Service has getter and setter functions for default Grid properties.
+Grid Service has getter and setter functions for default Grid properties.
 
 ### getDefaultValues()
 
@@ -19,7 +19,7 @@ Fudis Grid Service has getter and setter functions for default Grid properties.
 
 #### Function and its Typing
 
-`FudisGridService.setDefaultValues()` required an object paremeter of type `FudisGridProperties`.
+`FudisGridService.setDefaultValues()` requires an object paremeter of type `FudisGridProperties`.
 
 <Source
   code={`
@@ -42,7 +42,7 @@ Fudis Grid Service has getter and setter functions for default Grid properties.
 
 If Grid Component has an individually specified properties, these Grid Service's defaults **will not** be applied.
 
-Only exceptions is `columns` property. Just like the Grid Component, Service's column attribute accepts an object where `grid-template-columns` rule can be defined per each breakpoint.
+Only exceptions is `columns` property. Just like the Grid Component, Grid Service's column attribute accepts an object where `grid-template-columns` rule can be defined per each breakpoint.
 
 Actually applied `columns` is a combination from both Grid Service and Grid Component.
 

@@ -1,9 +1,7 @@
 /* stylelint-disable order/order */
 
 @use "../../../foundations/breakpoints/mixins.scss" as breakpoints;
-@use "../../../foundations/breakpoints/tokens.scss" as breakpointTokens;
 @use "../../../foundations/grid/mixins.scss" as grid;
-@use "../../../foundations/grid/tokens.scss" as gridTokens;
 @use "../../../foundations/spacing/tokens.scss" as spacing;
 
 .fudis-grid {
@@ -90,35 +88,6 @@
 
       &__xxl {
         margin-bottom: spacing.$spacing-xxl;
-      }
-    }
-
-    &__align {
-      &__start {
-        margin-right: auto;
-        margin-left: 0;
-
-        @include breakpoints.breakpoint-max("sm") {
-          @include grid.grid-xs-margins;
-        }
-      }
-
-      &__center {
-        margin-right: auto;
-        margin-left: auto;
-
-        @include breakpoints.breakpoint-max("sm") {
-          @include grid.grid-xs-margins;
-        }
-      }
-
-      &__end {
-        margin-right: 0;
-        margin-left: auto;
-
-        @include breakpoints.breakpoint-max("sm") {
-          @include grid.grid-xs-margins;
-        }
       }
     }
   }

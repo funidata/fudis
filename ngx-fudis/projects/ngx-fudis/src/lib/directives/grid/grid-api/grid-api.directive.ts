@@ -38,7 +38,7 @@ export class GridApiDirective {
   @Input() columnGap: FudisGridGap = 'responsive';
 
   /**
-   * Setting of columns for the grid. Input will be converted to native CSS grid grid-template-columns values.
+   * Setting of columns for the Grid. Input will be converted to native CSS grid grid-template-columns values.
    */
   @Input() columns: FudisGridColumns = '1fr';
 

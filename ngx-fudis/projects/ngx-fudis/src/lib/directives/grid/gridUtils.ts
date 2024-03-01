@@ -65,7 +65,6 @@ export const getGridCssValue = (value: number | string, isGridItem?: boolean): s
 /**
  * Determine Grid Input Properties based on if Service defaults should be ignored or if application has provided values
  */
-
 export const getValuesForCSSClasses = (
   properties: FudisGridPropertyCollection,
   serviceDefaults: boolean,
