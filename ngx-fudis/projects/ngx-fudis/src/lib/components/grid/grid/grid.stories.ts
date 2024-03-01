@@ -30,7 +30,7 @@ import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
           [columns]="'stretch'"
           [alignSelfX]="'center'"
           [size]="'lg-regular'"
-          ><code>{{ _currentServiceConfigs }}</code>
+          >Current Grid Service values: <code>{{ _currentServiceConfigs }}</code>
         </fudis-body-text>
       </fudis-grid>
 
