@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, SimpleChange } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { MockComponent } from 'ng-mocks';
@@ -279,14 +279,15 @@ describe('ExpandableComponent', () => {
     });
 
     it('onInit, should add section to error summary if errorSummaryBreadcrumb is true', () => {
-      component.ngOnInit();
-
       expect(errorService.addSection).not.toHaveBeenCalled();
 
       component.errorSummaryBreadcrumb = true;
-      fixture.detectChanges();
 
-      component.ngOnInit();
+      component.ngOnChanges({
+        errorSummaryBreadcrumb: new SimpleChange(null, component.errorSummaryBreadcrumb, true),
+      });
+
+      fixture.detectChanges();
 
       expect(errorService.addSection).toHaveBeenCalledWith({
         id: 'fudis-expandable-2',
@@ -295,19 +296,50 @@ describe('ExpandableComponent', () => {
     });
 
     it('onChanges, should add section to error summary if errorSummaryBreadcrumb is true and title is updated', () => {
-      component.ngOnChanges();
-
       expect(errorService.addSection).not.toHaveBeenCalled();
 
       component.errorSummaryBreadcrumb = true;
       component.title = 'New test title';
-      fixture.detectChanges();
 
-      component.ngOnChanges();
+      component.ngOnChanges({
+        errorSummaryBreadcrumb: new SimpleChange(null, component.errorSummaryBreadcrumb, true),
+      });
+
+      fixture.detectChanges();
 
       expect(errorService.addSection).toHaveBeenCalledWith({
         id: 'fudis-expandable-2',
         title: 'New test title',
+      });
+    });
+
+    it('onChanges, should remove section to error summary if errorSummaryBreadcrumb is false', () => {
+      expect(errorService.addSection).not.toHaveBeenCalled();
+
+      component.errorSummaryBreadcrumb = true;
+
+      component.ngOnChanges({
+        errorSummaryBreadcrumb: new SimpleChange(null, component.errorSummaryBreadcrumb, true),
+      });
+
+      fixture.detectChanges();
+
+      expect(errorService.addSection).toHaveBeenCalledWith({
+        id: 'fudis-expandable-2',
+        title: 'Test title',
+      });
+
+      component.errorSummaryBreadcrumb = false;
+
+      component.ngOnChanges({
+        errorSummaryBreadcrumb: new SimpleChange(null, component.errorSummaryBreadcrumb, false),
+      });
+
+      fixture.detectChanges();
+
+      expect(errorService.removeSection).toHaveBeenCalledWith({
+        id: 'fudis-expandable-2',
+        title: 'Test title',
       });
     });
 
@@ -317,8 +349,13 @@ describe('ExpandableComponent', () => {
       expect(errorService.removeSection).not.toHaveBeenCalled();
 
       component.errorSummaryBreadcrumb = true;
-      component.ngOnInit();
+
+      component.ngOnChanges({
+        errorSummaryBreadcrumb: new SimpleChange(null, component.errorSummaryBreadcrumb, true),
+      });
+
       fixture.detectChanges();
+
       component.ngOnDestroy();
 
       expect(errorService.removeSection).toHaveBeenCalledWith({
