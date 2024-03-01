@@ -125,6 +125,9 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
    */
   protected _id: string;
 
+  /**
+   * To prevent ngOnChanges running before initial ngOnInit
+   */
   private _initFinished: boolean = false;
 
   ngOnInit() {
