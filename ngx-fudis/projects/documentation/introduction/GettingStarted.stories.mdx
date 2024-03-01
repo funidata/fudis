@@ -1,16 +1,12 @@
 import { Meta } from "@storybook/blocks";
 
-<Meta title="Documentation/Introduction/How to start using Fudis" />
+<Meta title="Documentation/Introduction/How to Start Using Fudis" />
 
 # How to Start Using Fudis in Your Application
 
-<br />
+Fudis is available as [NPM package](https://www.npmjs.com/package/@funidata/ngx-fudis)
 
-## Installation
-
-You can find package information at [NPM](https://www.npmjs.com/package/@funidata/ngx-fudis)
-
-#### 1. Install Angular Material Peer Dependency:
+## 1. Install Angular Material Peer Dependency:
 
 ```
 ng add @angular/material
@@ -96,48 +92,5 @@ html {
 
 :root {
  	--fudis-rem-multiplier: 0.625;
-}
-```
-
-#### 6. Include Fudis Foundation SCSS
-
-In your project's root style file import Fudis foundation package. After that Fudis fonts should be loaded in Fudis components. If you want to use Foundation tokens and mixins in your own component styles, use them like in example below and check out documentation pages for Foundations.
-
-```
-@use '@funidata/ngx-fudis' as fudis;
-
-.my-amazing-component{
-	@include fudis.text-color('white');
-	@include fudis.bg-color('primary');
-	@include fudis.body-text-lg-regular;
-	margin: fudis.spacing-md fudis.spacing-xs;
-
-	&:focus{
-		@include fudis.focus-generic;
-	}
-
-}
-
-```
-
-#### 7. Use Fudis Components in Your Project
-
-```
-import { ButtonComponent } from './button.component';
-
-<fudis-button [label]="'Eiku'" />
-```
-
-or
-
-```
-import { Component } from '@angular/core';
-
-@Component({
- selector: 'app-root',
- template: ` <fudis-button [label]="'Eiku'" /> `,
-})
-export class AppComponent {
- title = 'dev';
 }
 ```
