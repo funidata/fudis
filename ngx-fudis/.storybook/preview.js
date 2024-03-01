@@ -40,7 +40,6 @@ const preview = {
               [
                 "Setup VS Code",
                 "Command Reference",
-                "Docker and NPM (Node.js)",
                 "Git and GitHub Conventions",
                 "Creating Release",
               ],
