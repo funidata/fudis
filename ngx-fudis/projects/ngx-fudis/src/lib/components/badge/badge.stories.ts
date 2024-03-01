@@ -33,7 +33,7 @@ Example.args = {
 export const AllVariants: StoryFn<BadgeComponent> = (args: BadgeComponent) => ({
   ...args,
   template: html`
-    <fudis-grid rowGap="sm">
+    <fudis-grid [rowGap]="'sm'">
       <fudis-badge [variant]="'accent'" [content]="'accent'"></fudis-badge>
       <fudis-badge [variant]="'danger'" [content]="'danger'"></fudis-badge>
       <fudis-badge [variant]="'primary'" [content]="'primary'"></fudis-badge>

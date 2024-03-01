@@ -25,7 +25,6 @@ import { formExclude } from '../../../utilities/storybook';
   selector: 'example-form-content',
   template: `
     <fudis-form
-      [marginSides]="'responsive'"
       [marginTop]="'xl'"
       [badge]="badge"
       [badgeText]="badgeText"
@@ -261,8 +260,8 @@ class FormContentExampleComponent implements OnInit {
   ];
 
   courseTypeOptions: FudisRadioButtonOption[] = [
-    { value: 'basic', label: 'Basic', id: 'courseType-1', name: 'courseType' },
-    { value: 'advanced', label: 'Advanced', id: 'courseType-2', name: 'courseType' },
+    { value: 'basic', label: 'Basic', id: 'courseType-1' },
+    { value: 'advanced', label: 'Advanced', id: 'courseType-2' },
   ];
 
   // Expose when DateRange is exposed to public API

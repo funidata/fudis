@@ -18,7 +18,7 @@ import { excludeAllRegex } from '../../../utilities/storybook';
 @Component({
   selector: 'example-error-summary',
   template: ` <fudis-form
-    [marginSides]="'responsive'"
+    [align]="'center'"
     [marginTop]="'xl'"
     [titleLevel]="1"
     [title]="'Example form for error summary'"
@@ -67,7 +67,6 @@ import { excludeAllRegex } from '../../../utilities/storybook';
             <fudis-checkbox-group
               [formGroup]="formExample.controls.courseBooks"
               [title]="'Course books'"
-              [required]="true"
               [helpText]="'Select 1-2 coursebooks'"
             >
               <fudis-checkbox [controlName]="'first'" [label]="'Heir to the Empire'" />
@@ -121,8 +120,8 @@ class ErrorSummaryExampleComponent {
   });
 
   courseTypeOptions: FudisRadioButtonOption[] = [
-    { value: 'basic', label: 'Basic', id: 'courseType-1', name: 'courseType' },
-    { value: 'advanced', label: 'Advanced', id: 'courseType-2', name: 'courseType' },
+    { value: 'basic', label: 'Basic', id: 'courseType-1' },
+    { value: 'advanced', label: 'Advanced', id: 'courseType-2' },
   ];
 
   submitForm(): void {

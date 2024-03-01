@@ -19,15 +19,20 @@ import { BodyTextComponent } from '../../../components/typography/body-text/body
     <fudis-body-text fudisGridItem [columns]="columns">
       Paragraph text for testing grid item functionalities. This is so much fun!
     </fudis-body-text>
-    <fudis-button fudisGridItem [alignY]="alignY" [alignX]="alignX" [label]="'Test button'" />
+    <fudis-button
+      fudisGridItem
+      [alignSelfX]="alignSelfX"
+      [alignSelfY]="alignSelfY"
+      [label]="'Test button'"
+    />
   </fudis-grid>`,
 })
 class HostComponent {
   columns: string | FudisBreakpointStyleResponsive = '2';
 
-  alignY: FudisGridItemAlignment = 'stretch';
+  alignSelfX: FudisGridItemAlignment = 'stretch';
 
-  alignX: FudisGridItemAlignment = 'stretch';
+  alignSelfY: FudisGridItemAlignment = 'stretch';
 }
 
 describe('GridItemDirective', () => {
@@ -93,28 +98,28 @@ describe('GridItemDirective', () => {
     });
 
     // TODO: Use visual regression tests instead of testing style attribute values directly.
-    it.skip('should convert alignX and alignY attributes to style properties', () => {
+    it.skip('should convert alignSelfX and alignSelfY attributes to style properties', () => {
       fixture.detectChanges();
 
       expect(getAttribute(1, 'justify-self')).toBe('stretch');
       expect(getAttribute(1, 'align-self')).toBe('stretch');
 
-      component.alignY = 'end';
-      component.alignX = 'end';
+      component.alignSelfY = 'end';
+      component.alignSelfX = 'end';
       fixture.detectChanges();
 
       expect(getAttribute(1, 'justify-self')).toBe('end');
       expect(getAttribute(1, 'align-self')).toBe('end');
 
-      component.alignY = 'start';
-      component.alignX = 'start';
+      component.alignSelfY = 'start';
+      component.alignSelfX = 'start';
       fixture.detectChanges();
 
       expect(getAttribute(1, 'justify-self')).toBe('start');
       expect(getAttribute(1, 'align-self')).toBe('start');
 
-      component.alignY = 'center';
-      component.alignX = 'center';
+      component.alignSelfY = 'center';
+      component.alignSelfX = 'center';
       fixture.detectChanges();
 
       expect(getAttribute(1, 'justify-self')).toBe('center');

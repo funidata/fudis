@@ -27,13 +27,13 @@ export class GridItemDirective implements OnInit, OnChanges {
     effect(() => {
       this._breakpointService.getBreakpointState();
 
-      if (typeof this._columns !== 'string') {
+      if (typeof this._calculatedColumns !== 'string') {
         this._setColumns();
       }
-      if (typeof this._alignX !== 'string') {
+      if (typeof this._calculatedAlignX !== 'string') {
         this._setAlignX();
       }
-      if (typeof this._alignY !== 'string') {
+      if (typeof this._calculatedAlignY !== 'string') {
         this._setAlignY();
       }
     });
@@ -42,17 +42,17 @@ export class GridItemDirective implements OnInit, OnChanges {
   /**
    * Apply CSS grid-column values for the Grid Item
    */
-  private _columns: string | FudisBreakpointStyleResponsive[] = gridItemDefault;
+  private _calculatedColumns: string | FudisBreakpointStyleResponsive[] = gridItemDefault;
 
   /**
    * Apply horizontal CSS values for the Grid Item
    */
-  private _alignX: FudisGridItemAlignment | FudisBreakpointStyleResponsive[] = 'stretch';
+  private _calculatedAlignX: FudisGridItemAlignment | FudisBreakpointStyleResponsive[] = 'stretch';
 
   /**
    * Apply vertical CSS values for the Grid Item
    */
-  private _alignY: FudisGridItemAlignment | FudisBreakpointStyleResponsive[] = 'stretch';
+  private _calculatedAlignY: FudisGridItemAlignment | FudisBreakpointStyleResponsive[] = 'stretch';
 
   /**
    * Internal reference for the Grid Item element
@@ -65,37 +65,37 @@ export class GridItemDirective implements OnInit, OnChanges {
   @Input() set columns(value: FudisGridItemWidth | FudisGridItemColumnsResponsive) {
     // Convert given string value to proper CSS grid-column value
     if (typeof value === 'string') {
-      this._columns = getGridCssValue(value, true);
+      this._calculatedColumns = getGridCssValue(value, true);
     }
     // Convert given number value to proper CSS grid-column value. E.g. number 6 converts to 'span 6'.
     else if (typeof value === 'number') {
-      this._columns = getGridCssValue(value, true);
+      this._calculatedColumns = getGridCssValue(value, true);
     }
     // Get breakpoint settings with provided values
     else {
-      this._columns = getBreakpointDataArray(value, gridItemDefault, true);
+      this._calculatedColumns = getBreakpointDataArray(value, gridItemDefault, true);
     }
   }
 
   /**
    * Align Grid Item horizontally
    */
-  @Input() set alignX(value: FudisGridItemAlignment | FudisGridItemAlignResponsive) {
+  @Input() set alignSelfX(value: FudisGridItemAlignment | FudisGridItemAlignResponsive) {
     if (typeof value === 'string') {
-      this._alignX = value;
+      this._calculatedAlignX = value;
     } else {
-      this._alignX = getBreakpointDataArray(value, 'stretch');
+      this._calculatedAlignX = getBreakpointDataArray(value, 'stretch');
     }
   }
 
   /**
    * Align Grid Item vertically
    */
-  @Input() set alignY(value: FudisGridItemAlignment | FudisGridItemAlignResponsive) {
+  @Input() set alignSelfY(value: FudisGridItemAlignment | FudisGridItemAlignResponsive) {
     if (typeof value === 'string') {
-      this._alignY = value;
+      this._calculatedAlignY = value;
     } else {
-      this._alignY = getBreakpointDataArray(value, 'stretch');
+      this._calculatedAlignY = getBreakpointDataArray(value, 'stretch');
     }
   }
 
@@ -112,21 +112,29 @@ export class GridItemDirective implements OnInit, OnChanges {
    * Set CSS grid-column attributes for this Grid Item element
    */
   private _setColumns(): void {
-    this._breakpointService.setStyleAttributes(this._element, 'grid-column', this._columns);
+    this._breakpointService.setStyleAttributes(
+      this._element,
+      'grid-column',
+      this._calculatedColumns,
+    );
   }
 
   /**
    * Set CSS justify-self attributes for this Grid Item element
    */
   private _setAlignX(): void {
-    this._breakpointService.setStyleAttributes(this._element, 'justify-self', this._alignX);
+    this._breakpointService.setStyleAttributes(
+      this._element,
+      'justify-self',
+      this._calculatedAlignX,
+    );
   }
 
   /**
    * Set CSS align-self attributes for this Grid Item element
    */
   private _setAlignY(): void {
-    this._breakpointService.setStyleAttributes(this._element, 'align-self', this._alignY);
+    this._breakpointService.setStyleAttributes(this._element, 'align-self', this._calculatedAlignY);
   }
 
   /**

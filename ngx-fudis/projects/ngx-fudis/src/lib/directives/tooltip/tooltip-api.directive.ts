@@ -10,6 +10,9 @@ export class TooltipApiDirective {
   /**
    * Text placed inside tooltip
    */
+
+  // TODO: should this be renamed to tooltipText? also get rid off undefined type
+
   @Input() tooltip: string | undefined;
 
   /**

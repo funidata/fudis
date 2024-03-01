@@ -14,7 +14,7 @@ import {
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
 import { NotificationsDirective } from '../../../directives/content-projection/notifications/notifications.directive';
-import { FudisGridWidth, FudisGridAlign, FudisGridMarginSide } from '../../../types/grid';
+import { FudisGridWidth, FudisGridAlign } from '../../../types/grid';
 import { FudisSpacing } from '../../../types/miscellaneous';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -79,7 +79,7 @@ export class FieldSetComponent
   /**
    * Alignment of Grid component inside its parent
    */
-  @Input() align: FudisGridAlign = 'center';
+  @Input() align: FudisGridAlign = 'start';
 
   /**
    * Margin top for the Grid
@@ -90,11 +90,6 @@ export class FieldSetComponent
    * Margin bottom for the Grid
    */
   @Input() marginBottom: FudisSpacing = 'none';
-
-  /**
-   * Horizontal margins left and right of the grid
-   */
-  @Input() marginSides: FudisGridMarginSide = 'none';
 
   /**
    * Set focus to Field Set when it appears first time

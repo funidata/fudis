@@ -1,15 +1,25 @@
-import { Directive, ElementRef, OnChanges, OnInit, Signal, effect } from '@angular/core';
-import { getGridClasses, getGridCssValue, replaceFormInputWidthsToRem } from '../gridUtils';
+import { Directive, ElementRef, OnChanges, OnInit, effect } from '@angular/core';
+import {
+  getGridClasses,
+  getGridCssValue,
+  getValuesForCSSClasses,
+  replaceFormInputWidthsToRem,
+} from '../gridUtils';
 import { GridApiDirective } from '../grid-api/grid-api.directive';
 import {
-  FudisGridColumnsResponsive,
   gridColumnDefault,
-  FudisGridAttributes,
+  FudisGridProperties,
+  FudisGridPropertyCollection,
+  gridInputPropertyDefaults,
 } from '../../../types/grid';
 import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
-import { FudisBreakpointStyleResponsive } from '../../../types/breakpoints';
+import {
+  FudisBreakpointStyleResponsive,
+  FudisBreakpointValueResponsive,
+} from '../../../types/breakpoints';
 import { getBreakpointDataArray } from '../../../utilities/breakpoint/breakpoint-utils';
+import { FudisComponentChanges } from '../../../types/miscellaneous';
 
 @Directive({
   selector: '[fudisGrid]',
@@ -17,30 +27,55 @@ import { getBreakpointDataArray } from '../../../utilities/breakpoint/breakpoint
 export class GridDirective extends GridApiDirective implements OnInit, OnChanges {
   constructor(
     private _gridElement: ElementRef,
+    private _gridService: FudisGridService,
     private _breakpointService: FudisBreakpointService,
-    gridService: FudisGridService,
   ) {
     super();
-    this._gridService = gridService;
+
     this._element = _gridElement.nativeElement;
-    this._gridDefaults = this._gridService.getGridDefaultValues();
 
     /**
-     * When screen is resized check and apply new rules for Grid columns
+     * Set default values to property collection object
+     */
+    this._setDefaultValuesToPropertyObject();
+
+    /**
+     * When screen is resized, check and apply new rules for Grid columns
      */
     effect(() => {
-      this._breakpointService.getBreakpointState();
+      _breakpointService.getBreakpointState();
 
-      if (typeof this._columns !== 'string' && typeof this._columns !== 'number') {
-        this._setColumns();
+      if (
+        typeof this._calculatedColumns !== 'string' &&
+        typeof this._calculatedColumns !== 'number'
+      ) {
+        this._setColumnsForBreakpoints(this._calculatedColumns);
+      }
+    });
+
+    /**
+     * Update columns and CSS classes, if GridService values update
+     */
+    effect(() => {
+      /**
+       * Get GridServices values
+       */
+      this._gridInputProperties.serviceValues = _gridService.getDefaultValues()();
+
+      /**
+       * Re-run Columns and CSS class calculations if GridService's values udpate
+       */
+      if (this._firstLoadFinished) {
+        this._calculateAndSetGridColumnsCss();
+        this._setAllProperties();
       }
     });
   }
 
   /**
-   * Used to apply grid-template-columns values for the Grid
+   * Used to apply grid-template-columns CSS values for the Grid
    */
-  protected _columns: string | FudisBreakpointStyleResponsive[] = gridColumnDefault;
+  protected _calculatedColumns: string | FudisBreakpointStyleResponsive[] = gridColumnDefault;
 
   /**
    * Internal reference for the this Grid element
@@ -48,114 +83,148 @@ export class GridDirective extends GridApiDirective implements OnInit, OnChanges
   private _element: HTMLElement;
 
   /**
-   * Object to define
+   * Collection of properties collected from Input props and GridService defaults to be applied as CSS values for the Grid
    */
-  private _gridInputObject: FudisGridAttributes;
+  private _valuesForCssClasses: FudisGridProperties;
 
   /**
-   * Grid service to run utilities
+   * Object to store various values from defaults, GridService and Inputs from application
    */
-  private _gridService: FudisGridService;
+  private _gridInputProperties: FudisGridPropertyCollection = {
+    appValues: {},
+    defaultValues: {},
+    serviceValues: {},
+  };
 
-  /**
-   * Grid default values, setting will apply to all grid elements
-   */
-  private _gridDefaults: Signal<FudisGridAttributes | null>;
+  private _firstLoadFinished: boolean = false;
 
   ngOnInit(): void {
-    if (this.columns) {
-      this._defineColumns();
-    } else if (!this.ignoreDefaults && this._gridDefaults()?.columns) {
-      this._columns = getBreakpointDataArray(this._gridDefaults()!.columns!, gridColumnDefault);
-    }
-    this._applyGridCss();
+    this._firstLoadFinished = true;
+    this._calculateAndSetGridColumnsCss();
+    this._setAllProperties();
   }
 
-  ngOnChanges(): void {
-    if (this.columns) {
-      this._defineColumns();
-    } else if (!this.ignoreDefaults && this._gridDefaults()?.columns) {
-      this._columns = getBreakpointDataArray(this._gridDefaults()!.columns!, gridColumnDefault);
+  ngOnChanges(changes: FudisComponentChanges<GridDirective>): void {
+    /**
+     * From changed values, update property object
+     */
+    this._setAppInputValuesToPropertyObject(changes);
+
+    if (this._firstLoadFinished) {
+      if (changes.columns?.currentValue) {
+        this._calculateAndSetGridColumnsCss();
+      }
+      this._setAllProperties();
     }
-    this._applyGridCss();
   }
 
-  private _defineColumns(): void {
-    if (typeof this.columns === 'string') {
-      this._columns = replaceFormInputWidthsToRem(this.columns);
+  /**
+   * Add or update values from application. This does not apply any values for CSS.
+   */
+  private _setAppInputValuesToPropertyObject(changes: FudisComponentChanges<GridDirective>): void {
+    const keysToDismiss = ['serviceDefaults', 'ngOnInit', 'ngOnChanges'];
+
+    Object.keys(changes).forEach((key) => {
+      if (!keysToDismiss.includes(key)) {
+        const keyToUse = key as keyof FudisGridProperties;
+        const newValue = changes[keyToUse]!.currentValue;
+
+        this._gridInputProperties.appValues = {
+          ...this._gridInputProperties.appValues,
+          [keyToUse]: newValue,
+        };
+      }
+    });
+  }
+
+  /**
+   * Set default values. These are used as back up, if application does not provide any input properties.
+   */
+  private _setDefaultValuesToPropertyObject(): void {
+    this._gridInputProperties.defaultValues = gridInputPropertyDefaults;
+  }
+
+  /* ---------------------------------------------
+   *
+   * Class functions for defining Grid's 'grid-template-columns' CSS value
+   *
+   * ---------------------------------------------
+   */
+
+  /**
+   * Set and config Grid's attributes from provided input properties
+   */
+  private _calculateAndSetGridColumnsCss(): void {
+    this._calculatedColumns = this._calculateColumnsCssValue();
+    this._setColumnsForBreakpoints(this._calculatedColumns);
+  }
+
+  /**
+   * Function which converts application's input or service values to CSS values which will applied to Grid element.
+   */
+  private _calculateColumnsCssValue(): string | FudisBreakpointStyleResponsive[] {
+    const columnsToApply = this._gridInputProperties.appValues?.columns;
+    const columnsFromService =
+      this.serviceDefaults && this._gridInputProperties.serviceValues?.columns
+        ? this._gridInputProperties.serviceValues?.columns
+        : undefined;
+
+    if (typeof columnsToApply === 'string') {
+      return replaceFormInputWidthsToRem(columnsToApply);
     }
     // If value is number, convert it to grid-template-column value. E. g. number 6 converts to 'repeat(6,1fr)'
-    else if (typeof this.columns === 'number') {
-      this._columns = getGridCssValue(this.columns);
+    if (typeof columnsToApply === 'number') {
+      return getGridCssValue(columnsToApply);
     }
-    // Get breakpoint settings with provided default values and Input values
-    else if (!this.ignoreDefaults && this._gridDefaults()?.columns !== null) {
-      const combinedValues: FudisGridColumnsResponsive = {
-        ...this._gridDefaults()!.columns,
-        ...this.columns,
-      };
 
-      this._columns = getBreakpointDataArray(combinedValues, gridColumnDefault);
-    } else {
-      this._columns = getBreakpointDataArray(this.columns, gridColumnDefault);
+    let combinedValues: FudisBreakpointValueResponsive | undefined;
+
+    if (columnsFromService && columnsToApply) {
+      combinedValues = { ...columnsFromService, ...columnsToApply };
+      return getBreakpointDataArray(combinedValues, gridColumnDefault);
     }
+
+    if (columnsToApply) {
+      return getBreakpointDataArray(columnsToApply, gridColumnDefault);
+    }
+
+    if (columnsFromService) {
+      return getBreakpointDataArray(columnsFromService, gridColumnDefault);
+    }
+
+    return gridColumnDefault;
   }
 
   /**
    * Set CSS grid-template-column attributes for this Grid element
    */
-  private _setColumns(): void {
+  private _setColumnsForBreakpoints(
+    columnsCssValue: string | FudisBreakpointStyleResponsive[],
+  ): void {
     this._breakpointService.setStyleAttributes(
       this._element,
       'grid-template-columns',
-      this._columns,
+      columnsCssValue,
     );
   }
 
-  /**
-   * Apply CSS settings from Inputs
+  /* ---------------------------------------------
+   *
+   * Class functions for defining Grid's other than 'grid-template-columns' CSS values
+   *
+   * ---------------------------------------------
    */
-  private _applyGridCss(): void {
-    this._setColumns();
 
-    /**
-     * Collection of Grid attributes from Inputs() updated with possible default values provided from application
-     * TODO: This could be improved
-     */
-    if (this.ignoreDefaults) {
-      this._gridInputObject = {
-        width: this.width ?? 'xxl',
-        align: this.align ?? 'center',
-        alignItemsX: this.alignItemsX ?? 'stretch',
-        alignItemsY: this.alignItemsY ?? 'stretch',
-        marginTop: this.marginTop ?? 'none',
-        marginBottom: this.marginBottom ?? 'none',
-        marginSides: this.marginSides ?? 'none',
-        rowGap: this.rowGap ?? 'responsive',
-        columnGap: this.columnGap ?? 'responsive',
-        classes: this.classes,
-      };
-    } else {
-      this._gridInputObject = {
-        width: this.width ?? this._gridDefaults()?.width ?? 'xxl',
-        align: this.align ?? this._gridDefaults()?.align ?? 'center',
-        alignItemsX: this.alignItemsX ?? this._gridDefaults()?.alignItemsX ?? 'stretch',
-        alignItemsY: this.alignItemsY ?? this._gridDefaults()?.alignItemsY ?? 'stretch',
-        marginTop: this.marginTop ?? this._gridDefaults()?.marginTop ?? 'none',
-        marginBottom: this.marginBottom ?? this._gridDefaults()?.marginBottom ?? 'none',
-        marginSides: this.marginSides ?? this._gridDefaults()?.marginSides ?? 'none',
-        rowGap: this.rowGap ?? this._gridDefaults()?.rowGap ?? 'responsive',
-        columnGap: this.columnGap ?? this._gridDefaults()?.columnGap ?? 'responsive',
-        classes: this.classes ?? this._gridDefaults()?.classes,
-      };
-    }
+  private _setAllProperties(): void {
+    this._valuesForCssClasses = getValuesForCSSClasses(
+      this._gridInputProperties,
+      this.serviceDefaults,
+    );
 
-    this._element.style.justifyItems = this._gridInputObject.alignItemsX!;
-    this._element.style.alignItems = this._gridInputObject.alignItemsY!;
+    this._element.style.justifyItems = this._valuesForCssClasses.alignItemsX!;
 
-    /**
-     * Get and apply list of CSS classes to align and position Grid
-     */
-    this._element.classList.value = getGridClasses(this._gridInputObject);
+    this._element.style.alignItems = this._valuesForCssClasses.alignItemsY!;
+
+    this._element.classList.value = getGridClasses(this._valuesForCssClasses);
   }
 }

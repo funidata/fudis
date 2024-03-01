@@ -1,8 +1,8 @@
-import { FudisGridAttributes } from '../../types/grid';
+import { FudisGridProperties } from '../../types/grid';
 import { convertToRemValue } from '../../utilities/rem-converter';
 import * as utils from './gridUtils';
 
-// TODO: Add tests for replaceFormInputWidthsToRem and validateColumnInputArray functions
+// TODO: Add tests for replaceFormInputWidthsToRem, getGridInputPropertyObject functions. Check if other tests are missing.
 
 describe('GridUtils', () => {
   describe('getGridCssValue function', () => {
@@ -53,30 +53,28 @@ describe('GridUtils', () => {
 
   describe('getGridClasses function', () => {
     it('should return one big string out of given grid attributes', () => {
-      const values: FudisGridAttributes = {
+      const values: FudisGridProperties = {
         width: 'xxl',
         align: 'end',
         marginTop: 'md',
         marginBottom: 'xl',
         rowGap: 'sm',
         columnGap: 'lg',
-        marginSides: 'none',
       };
 
       expect(utils.getGridClasses(values)).toBe(
-        'fudis-grid fudis-grid__xxl fudis-grid__align__end fudis-grid__margin__top__md fudis-grid__margin__bottom__xl fudis-grid__row-gap__sm fudis-grid__column-gap__lg fudis-grid__margin__sides__none',
+        'fudis-grid fudis-grid__xxl fudis-grid__align__end fudis-grid__margin__top__md fudis-grid__margin__bottom__xl fudis-grid__row-gap__sm fudis-grid__column-gap__lg',
       );
     });
 
     it('should add custom classes to grid class if given', () => {
-      const values: FudisGridAttributes = {
+      const values: FudisGridProperties = {
         width: 'xxl',
         align: 'end',
         marginTop: 'md',
         marginBottom: 'xl',
         rowGap: 'responsive',
         columnGap: 'responsive',
-        marginSides: 'responsive',
         classes: ['my-custom-class', 'my-other-custom-class'],
       };
 

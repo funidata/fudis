@@ -32,9 +32,9 @@ class MockContainerComponent {
   protected _testControl = new FormControl<boolean | null>(null);
 
   protected _options: FudisRadioButtonOption[] = [
-    { value: 'platypus', label: 'Platypus', name: 'animal' },
-    { value: 'otter', label: 'Otter', name: 'animal' },
-    { value: 'capybara', label: 'Capybara', name: 'animal' },
+    { value: 'platypus', label: 'Platypus' },
+    { value: 'otter', label: 'Otter' },
+    { value: 'capybara', label: 'Capybara' },
   ];
 }
 

@@ -155,8 +155,8 @@ export class AppFormExampleComponent implements OnInit {
       .pipe(this._untilDestroyed())
       .subscribe((value) => {
         this.radioButtonOptions = [
-          { value: true, label: value.chooseTruthTrue, id: 'boolean-2', name: 'booleans' },
-          { value: false, label: value.chooseTruthFalse, id: 'boolean-1', name: 'booleans' },
+          { value: true, label: value.chooseTruthTrue, id: 'boolean-2' },
+          { value: false, label: value.chooseTruthFalse, id: 'boolean-1' },
         ];
         this.checkboxOptions = [
           { controlName: 'blueberry', label: value.blueberry },

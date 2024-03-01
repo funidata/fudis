@@ -17,6 +17,7 @@ import { GuidanceComponent } from '../../../guidance/guidance.component';
 import { LabelComponent } from '../../../label/label.component';
 import { By } from '@angular/platform-browser';
 import { ValidatorErrorMessageComponent } from '../../../error-message/validator-error-message/validator-error-message.component';
+import { FudisValidators } from '../../../../../utilities/form/validators';
 
 @Component({
   selector: 'fudis-mock-select-autocomplete',
@@ -25,8 +26,8 @@ import { ValidatorErrorMessageComponent } from '../../../error-message/validator
     [placeholder]="placeholder"
     [control]="control"
     [id]="id"
-    [dropdownOpen]="dropdownOpen"
     [required]="true"
+    [dropdownOpen]="dropdownOpen"
   />`,
 })
 class MockSelecAutocompleteComponent {
@@ -35,7 +36,10 @@ class MockSelecAutocompleteComponent {
   id: string = 'select-id';
   placeholder: string = 'Test placeholder';
   dropdownOpen: boolean = false;
-  control: FormControl = new FormControl<FudisSelectOption | FudisSelectOption[] | null>(null);
+  control: FormControl = new FormControl<FudisSelectOption | FudisSelectOption[] | null>(
+    null,
+    FudisValidators.required('This is required input'),
+  );
 }
 
 describe('AutocompleteComponent', () => {

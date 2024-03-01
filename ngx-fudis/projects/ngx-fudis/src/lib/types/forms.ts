@@ -22,8 +22,6 @@ export interface FudisCheckboxOption {
 export interface FudisRadioButtonOption {
   /** Unique id for single radio button option */
   id?: string;
-  /** Name for the group of radio buttons */
-  name?: string;
   /** Underlying value of the option */
   value: string | boolean | null;
   /** Value that is shown in the UI */

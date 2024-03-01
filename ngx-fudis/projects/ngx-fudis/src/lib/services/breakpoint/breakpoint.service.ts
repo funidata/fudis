@@ -2,7 +2,7 @@ import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Injectable, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
-  FudisBreakpointStyle,
+  FudisBreakpointStyleProperty,
   FudisBreakpointStyleResponsive,
   breakpointsMinWidthToObserve,
 } from '../../types/breakpoints';
@@ -41,11 +41,11 @@ export class FudisBreakpointService {
   }
 
   /**
-   * Function to apply CSS attributes
+   * Function to apply CSS properties
    */
   public setStyleAttributes(
     element: HTMLElement,
-    attribute: FudisBreakpointStyle,
+    property: FudisBreakpointStyleProperty,
     value: string | FudisBreakpointStyleResponsive[],
   ): void {
     const elementToModify = element;
@@ -55,14 +55,14 @@ export class FudisBreakpointService {
     if (typeof value === 'string') {
       elementToModify.style.cssText = `
 					${previousStyles};
-					${attribute}: ${value === 'none' ? '0' : value};
+					${property}: ${value === 'none' ? '0' : value};
 					`;
     } else {
       value?.forEach((item) => {
         if (this._screenSize()?.breakpoints[item.breakpoint]) {
           elementToModify.style.cssText = `
 					${previousStyles};
-					${attribute}: ${item.value === 'none' ? '0' : item.value};
+					${property}: ${item.value === 'none' ? '0' : item.value};
 					`;
         }
       });

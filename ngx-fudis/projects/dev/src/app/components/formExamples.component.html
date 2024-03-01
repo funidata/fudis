@@ -21,7 +21,6 @@
               <fudis-checkbox-group
                 [title]="t('chooseBerry')"
                 [helpText]="t('chooseBerryHelp')"
-                [required]="true"
                 [tooltip]="t('chooseBerryTooltip')"
                 [formGroup]="testFormGroup.controls['checkboxFormGroup']"
               >
@@ -68,19 +67,19 @@
                 [multipleOption]="true"
                 [control]="testFormGroup.controls['dropdownMulti']"
               /> -->
-              <fudis-datepicker
+              <!-- <fudis-datepicker
                 [label]="'Select some date'"
                 [control]="testFormGroup.controls['date']"
-              />
+              /> -->
               <fudis-text-area
                 [label]="'Basic required text-area'"
                 [control]="testFormGroup.controls['textArea']"
               />
-              <fudis-input-with-language-options
+              <!-- <fudis-input-with-language-options
                 [label]="'At least one required'"
                 [formGroup]="testFormGroup.controls['withLanguages']"
                 [options]="_languageOptions"
-              />
+              /> -->
             </ng-template>
           </fudis-fieldset>
         </ng-template>

@@ -1,7 +1,7 @@
+// TODO: is $grid-width-xs actually needed? Check from designers was there a reasoning for it
+
 /* stylelint-disable unit-disallowed-list */
-$grid-width-xs: calc(
-  34rem / var(--fudis-rem-multiplier)
-); // 320px-544px. For viewport smaller than 576px.
+$grid-width-xs: calc(34rem / var(--fudis-rem-multiplier)); // 320px-544px
 $grid-width-sm: calc(34rem / var(--fudis-rem-multiplier)); // 544px
 $grid-width-md: calc(45rem / var(--fudis-rem-multiplier)); // 720px
 $grid-width-lg: calc(60rem / var(--fudis-rem-multiplier)); // 960px

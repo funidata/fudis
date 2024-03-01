@@ -20,7 +20,7 @@ import readme from './readme.mdx';
       [width]="'md'"
       [title]="'Example Field Set Title'"
       [helpText]="'Helptext for the fieldset'"
-      [marginSides]="'responsive'"
+      [align]="'center'"
       [tooltip]="'Some additional information about this fieldset'"
     >
       <ng-template fudisActions [type]="'fieldset'">
@@ -127,8 +127,8 @@ class FieldsetExampleComponent {
   ];
 
   courseTypeOptions: FudisRadioButtonOption[] = [
-    { value: 'basic', label: 'Basic', id: 'courseType-1', name: 'courseType' },
-    { value: 'advanced', label: 'Advanced', id: 'courseType-2', name: 'courseType' },
+    { value: 'basic', label: 'Basic', id: 'courseType-1' },
+    { value: 'advanced', label: 'Advanced', id: 'courseType-2' },
   ];
 
   submitForm(): void {

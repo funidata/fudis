@@ -23,7 +23,7 @@
         ></fudis-icon>
       </div>
     </ng-container>
-    {{ labelHidden || size === "icon-only" ? "" : label }}
+    {{ labelHidden || (size === "icon-only" && icon) ? "" : label }}
   </button>
 </ng-container>
 
@@ -48,7 +48,7 @@
         ></fudis-icon>
       </div>
     </ng-container>
-    {{ labelHidden || size === "icon-only" ? "" : label }}
+    {{ labelHidden || (size === "icon-only" && icon) ? "" : label }}
   </button>
 </ng-container>
 

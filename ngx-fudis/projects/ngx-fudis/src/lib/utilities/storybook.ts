@@ -15,6 +15,19 @@ export const excludeRegex = (array?: string[]): RegExp => {
   return regex;
 };
 
+/**
+ * Regex for excluding everything except given strings. E. g. to exclude everything but marginTop and variant properties: excludeEverythingExceptRegex(['marginTop', 'variant'])
+ */
+export const excludeEverythingExceptRegex = (array?: string[]): RegExp => {
+  const joined: string | null = array ? array.join('|') : null;
+
+  const joinedWithRegexOr: string = `|^(${joined})$`;
+
+  const regex = new RegExp(`^(?!(^(${joinedWithRegexOr})$)).*$`);
+
+  return regex;
+};
+
 export const excludeAllRegex: RegExp = /.*/;
 
 const buttonCommonExclude: string[] = [
@@ -61,20 +74,13 @@ export const formExclude: RegExp = excludeRegex([
   'classes',
   'columnGap',
   'columns',
-  'ignoreDefaults',
   'marginBottom',
-  'marginSides',
   'marginTop',
   'rowGap',
   'width',
 ]);
 
-export const formArgTypesExclude: RegExp = excludeRegex([
-  'rowGap',
-  'columns',
-  'ignoreDefaults',
-  'classes',
-]);
+export const formArgTypesExclude: RegExp = excludeRegex(['rowGap', 'columns', 'classes']);
 
 export const linkExclude: RegExp = excludeRegex([
   'fragmentId',
@@ -108,31 +114,7 @@ export const expandableControlExclude: RegExp = excludeRegex([
   'errorSummaryBreadcrumb',
 ]);
 
-// This is for additional Grid example tabs (Equally Wide Columns and Unequally Wide Columns).
-// For some reason the default regex does not affect them.
-export const gridExclude: RegExp = excludeRegex([
-  'align',
-  'alignItemsX',
-  'alignItemsY',
-  'classes',
-  'columnGap',
-  'ignoreDefaults',
-  'marginBottom',
-  'marginSides',
-  'marginTop',
-  'rowGap',
-  'width',
-  '_columns',
-  '_element',
-  '_gridDefaults',
-  '_gridInputObject',
-  '_gridService',
-  '_applyGridCss',
-  '_defineColumns',
-  '_setColumns',
-  'ngOnChanges',
-  'ngOnInit',
-]);
+export const gridExampleExclude: RegExp = excludeRegex(['classes', 'serviceDefaults']);
 
 export const selectCommonExclude: RegExp = excludeRegex([
   'control',

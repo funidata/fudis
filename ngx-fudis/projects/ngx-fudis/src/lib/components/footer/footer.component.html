@@ -1,14 +1,14 @@
 <footer class="fudis-footer">
   <fudis-grid
-    [ignoreDefaults]="true"
+    [serviceDefaults]="false"
     [columns]="_columns"
     [rowGap]="'md'"
     [classes]="['fudis-footer__content']"
-    [marginSides]="'responsive'"
+    [align]="'center'"
     [width]="'xxl'"
     [marginTop]="'xxl'"
   >
-    <fudis-grid-item [alignX]="{ xs: 'center', sm: 'start' }" class="fudis-footer__item">
+    <fudis-grid-item [alignSelfX]="{ xs: 'center', sm: 'start' }" class="fudis-footer__item">
       <a href="https://www.funidata.fi/" class="fudis-footer__item__logo"
         ><img src="fd-logo.svg" alt="{{ _funidataLogoAltText }}"
       /></a>
@@ -18,7 +18,7 @@
     </fudis-grid-item>
 
     <ng-container *ngIf="footerContentRight">
-      <fudis-grid-item [alignX]="{ xs: 'center', sm: 'end' }" class="fudis-footer__item">
+      <fudis-grid-item [alignSelfX]="{ xs: 'center', sm: 'end' }" class="fudis-footer__item">
         <ng-container *ngTemplateOutlet="footerContentRight!.templateRef" />
       </fudis-grid-item>
     </ng-container>

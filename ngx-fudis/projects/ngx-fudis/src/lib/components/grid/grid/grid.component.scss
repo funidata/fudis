@@ -1,12 +1,11 @@
 /* stylelint-disable order/order */
 
 @use "../../../foundations/breakpoints/mixins.scss" as breakpoints;
-@use "../../../foundations/breakpoints/tokens.scss" as breakpointTokens;
 @use "../../../foundations/grid/mixins.scss" as grid;
-@use "../../../foundations/grid/tokens.scss" as gridTokens;
 @use "../../../foundations/spacing/tokens.scss" as spacing;
 
 .fudis-grid {
+  box-sizing: border-box;
   display: grid;
   grid-template-rows: auto 1fr;
   grid-template-columns: auto 1fr;
@@ -21,35 +20,6 @@
 
   > fudis-heading {
     grid-column: 1/-1;
-  }
-
-  &__align {
-    &__start {
-      margin-right: auto;
-      margin-left: 0;
-
-      @include breakpoints.breakpoint-max("sm") {
-        @include grid.grid-xs-margins;
-      }
-    }
-
-    &__center {
-      margin-right: auto;
-      margin-left: auto;
-
-      @include breakpoints.breakpoint-max("sm") {
-        @include grid.grid-xs-margins;
-      }
-    }
-
-    &__end {
-      margin-right: 0;
-      margin-left: auto;
-
-      @include breakpoints.breakpoint-max("sm") {
-        @include grid.grid-xs-margins;
-      }
-    }
   }
 
   &__margin {
@@ -120,47 +90,26 @@
         margin-bottom: spacing.$spacing-xxl;
       }
     }
+  }
 
-    &__sides {
-      &__none {
-        margin-right: 0;
-        margin-left: 0;
-      }
+  &__align {
+    &__start {
+      margin-right: auto;
+      margin-left: 0;
+    }
 
-      &__xxs {
-        margin-right: spacing.$spacing-xxs;
-        margin-left: spacing.$spacing-xxs;
-      }
+    &__center {
+      margin-right: auto;
+      margin-left: auto;
 
-      &__xs {
-        margin-right: spacing.$spacing-xs;
-        margin-left: spacing.$spacing-xs;
+      @include breakpoints.breakpoint-max("sm") {
+        @include grid.grid-xs-margins;
       }
+    }
 
-      &__sm {
-        margin-right: spacing.$spacing-sm;
-        margin-left: spacing.$spacing-sm;
-      }
-
-      &__md {
-        margin-right: spacing.$spacing-md;
-        margin-left: spacing.$spacing-md;
-      }
-
-      &__lg {
-        margin-right: spacing.$spacing-lg;
-        margin-left: spacing.$spacing-lg;
-      }
-
-      &__xl {
-        margin-right: spacing.$spacing-xl;
-        margin-left: spacing.$spacing-xl;
-      }
-
-      &__xxl {
-        margin-right: spacing.$spacing-xxl;
-        margin-left: spacing.$spacing-xxl;
-      }
+    &__end {
+      margin-right: 0;
+      margin-left: auto;
     }
   }
 

@@ -53,26 +53,26 @@
 //   constructor(private _formBuilder: FormBuilder) {}
 
 //   fruitOptions: FudisRadioButtonOption[] = [
-//     { value: 'apple', label: 'Apple', id: 'fruit-1', name: 'fruit' },
+//     { value: 'apple', label: 'Apple', id: 'fruit-1' },
 //     {
 //       value: 'fair-trade-banana',
 //       label: 'Fair Trade Banana',
 //       id: 'fruit-2',
-//       name: 'fruit',
+
 //       checked: true,
 //     },
-//     { value: 'cherry', label: 'Cherry', id: 'fruit-3', name: 'fruit' },
+//     { value: 'cherry', label: 'Cherry', id: 'fruit-3' },
 //   ];
 
 //   petOptions: FudisRadioButtonOption[] = [
 //     { value: 'platypus', label: 'Platypus' },
-//     { value: 'otter', label: 'Otter', name: 'animal' },
+//     { value: 'otter', label: 'Otter' },
 //     { value: 'capybara', label: 'Capybara' },
 //   ];
 
 //   booleanOptions: FudisRadioButtonOption[] = [
-//     { value: false, label: 'False', id: 'boolean-1', name: 'booleans' },
-//     { value: true, label: 'True', id: 'boolean-2', name: 'booleans' },
+//     { value: false, label: 'False', id: 'boolean-1' },
+//     { value: true, label: 'True', id: 'boolean-2' },
 //   ];
 
 //   mainFormGroup: FormGroup = this._formBuilder.group({

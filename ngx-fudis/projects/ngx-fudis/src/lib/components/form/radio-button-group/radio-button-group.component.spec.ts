@@ -11,14 +11,12 @@ import { FudisIdService } from '../../../services/id/id.service';
 const testFormControl: FormControl = new FormControl('capybara');
 
 const petOptions: FudisRadioButtonOption[] = [
-  { value: 'platypus', label: 'Platypus', id: 'test-1', name: 'animal' },
-  { value: 'otter', label: 'Otter', id: 'test-2', name: 'animal' },
-  { value: 'capybara', label: 'Capybara', id: 'test-3', name: 'animal' },
+  { value: 'platypus', label: 'Platypus', id: 'test-1' },
+  { value: 'otter', label: 'Otter', id: 'test-2' },
+  { value: 'capybara', label: 'Capybara', id: 'test-3' },
 ];
 
-const truthOption: FudisRadioButtonOption[] = [
-  { value: true, label: 'true', id: 'test-truth', name: 'truth' },
-];
+const truthOption: FudisRadioButtonOption[] = [{ value: true, label: 'true', id: 'test-truth' }];
 
 describe('RadioButtonGroupComponent', () => {
   let component: RadioButtonGroupComponent;
