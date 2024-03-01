@@ -1895,34 +1895,6 @@ html {
 html {
   font-size: 100%;
 }
-html.cypress-hide-unstyled-elements textarea.fudis-text-area__input {
-  resize: none;
-}
-html.cypress-hide-unstyled-elements input,
-html.cypress-hide-unstyled-elements textarea {
-  caret-color: transparent;
-}
-html.cypress-hide-unstyled-elements::-webkit-scrollbar {
-  scrollbar-width: none;
-  display: none;
-  background: transparent;
-  visibility: hidden;
-  width: 0;
-}
-html.cypress-hide-unstyled-elements * {
-  scrollbar-width: none; /* Firefox */
-}
-html.cypress-hide-unstyled-elements *::-webkit-scrollbar {
-  display: none;
-  visibility: hidden;
-  width: 0;
-  background: transparent;
-}
-
-body.cypress-storybook-box-reset {
-  padding: 0;
-  margin: 0;
-}
 
 /* stylelint-disable color-no-hex */
 [data-theme=into] {
