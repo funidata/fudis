@@ -119,8 +119,8 @@ export class ExpandableComponent implements OnDestroy, OnChanges {
     return this._closed;
   }
 
-  ngOnChanges(changes?: FudisComponentChanges<ExpandableComponent>): void {
-    if (changes?.title?.currentValue || !!changes?.errorSummaryBreadcrumb?.currentValue) {
+  ngOnChanges(changes: FudisComponentChanges<ExpandableComponent>): void {
+    if (changes.title || changes.errorSummaryBreadcrumb?.currentValue === true) {
       this._addToErrorSummary(this.title);
     }
 
