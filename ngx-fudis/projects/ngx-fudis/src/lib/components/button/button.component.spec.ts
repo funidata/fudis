@@ -22,7 +22,7 @@ describe('ButtonComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ButtonComponent);
     component = fixture.componentInstance;
-    component.ngOnChanges();
+    component.ngOnInit();
     fixture.detectChanges();
   });
 
@@ -45,21 +45,21 @@ describe('ButtonComponent', () => {
       component.size = 'small';
       component.variant = 'secondary';
       component.label = 'Testing css classes';
-      component.ngOnChanges();
+      component.ngOnInit();
       fixture.detectChanges();
       assertButtonHasClasses('fudis-button fudis-button__size-small fudis-button__secondary');
 
       component.size = 'medium';
       component.variant = 'tertiary';
       component.label = 'Testing css classes';
-      component.ngOnChanges();
+      component.ngOnInit();
       fixture.detectChanges();
       assertButtonHasClasses('fudis-button fudis-button__size-medium fudis-button__tertiary');
 
       component.size = 'icon-only';
       component.variant = 'secondary';
       component.label = 'Testing css classes';
-      component.ngOnChanges();
+      component.ngOnInit();
       fixture.detectChanges();
       assertButtonHasClasses('fudis-button fudis-button__size-icon-only fudis-button__secondary');
     });
@@ -101,7 +101,7 @@ describe('ButtonComponent', () => {
       component.labelHidden = true;
       component.ariaLabel = 'It has nice things to click';
       component.type = 'button';
-      component.ngOnChanges();
+      component.ngOnInit();
       fixture.detectChanges();
 
       expect(IconComponent).toBeTruthy();
@@ -118,7 +118,7 @@ describe('ButtonComponent', () => {
     it('should show uppercase context', () => {
       component.label = 'Submit me!';
       component.type = 'submit';
-      component.ngOnChanges();
+      component.ngOnInit();
       fixture.detectChanges();
 
       expect(getButton().getAttribute('type')).toEqual('submit');

@@ -123,6 +123,7 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
     }, 1000);
   }
 
+  // TODO: Use FudisComponentChanges
   ngOnChanges(): void {
     /**
      * Update string message and try to create a new error when changes happen

@@ -5,11 +5,10 @@ import {
   Output,
   EventEmitter,
   ViewEncapsulation,
-  OnInit,
   OnDestroy,
   OnChanges,
 } from '@angular/core';
-import { FudisExpandableType } from '../../types/miscellaneous';
+import { FudisComponentChanges, FudisExpandableType } from '../../types/miscellaneous';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { FudisIdService } from '../../services/id/id.service';
@@ -22,7 +21,7 @@ import { FudisFormErrorSummarySection } from '../../types/forms';
   styleUrls: ['./expandable.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
+export class ExpandableComponent implements OnDestroy, OnChanges {
   constructor(
     private _idService: FudisIdService,
     private _errorSummaryService: FudisInternalErrorSummaryService,
@@ -104,11 +103,6 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
   protected _openedOnce: boolean = false;
 
   /**
-   * Internal, separate title property to send to Error Summary service
-   */
-  protected _title: string;
-
-  /**
    * Object to send to Error Summary Service
    */
   private _errorSummaryInfo: FudisFormErrorSummarySection;
@@ -125,15 +119,13 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
     return this._closed;
   }
 
-  ngOnInit(): void {
-    this._title = this.title;
-    this._addToErrorSummary();
-  }
+  ngOnChanges(changes: FudisComponentChanges<ExpandableComponent>): void {
+    if (changes.title || changes.errorSummaryBreadcrumb?.currentValue === true) {
+      this._addToErrorSummary(this.title);
+    }
 
-  ngOnChanges(): void {
-    if (this.title !== this._title && this._id) {
-      this._title = this.title;
-      this._addToErrorSummary();
+    if (changes?.errorSummaryBreadcrumb?.currentValue === false) {
+      this._removeFromErrorSummary();
     }
   }
 
@@ -144,11 +136,11 @@ export class ExpandableComponent implements OnInit, OnDestroy, OnChanges {
   /**
    * Send error object to Error Summary Service
    */
-  private _addToErrorSummary(): void {
+  private _addToErrorSummary(title: string): void {
     if (this.errorSummaryBreadcrumb) {
       this._errorSummaryInfo = {
         id: this._id,
-        title: this._title,
+        title: title,
       };
       this._errorSummaryService.addSection(this._errorSummaryInfo);
       this._errorSummaryInfoSent = true;
