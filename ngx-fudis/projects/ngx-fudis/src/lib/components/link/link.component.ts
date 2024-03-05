@@ -12,7 +12,11 @@ import {
   effect,
 } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
-import { FudisLinkColor, FudisTranslationConfig } from '../../types/miscellaneous';
+import {
+  FudisComponentChanges,
+  FudisLinkColor,
+  FudisTranslationConfig,
+} from '../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-link',
@@ -111,8 +115,10 @@ export class LinkComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  ngOnChanges(): void {
-    this._parseExternalLinkTitle();
+  ngOnChanges(changes: FudisComponentChanges<LinkComponent>): void {
+    if (changes.externalLink || changes.title) {
+      this._parseExternalLinkTitle();
+    }
   }
 
   /**

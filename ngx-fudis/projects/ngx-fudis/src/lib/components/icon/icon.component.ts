@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 
 import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
+import { FudisComponentChanges } from '../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-icon',
@@ -47,8 +48,10 @@ export class IconComponent implements OnChanges {
    */
   private _iconSize: string;
 
-  ngOnChanges(): void {
-    this._classList = this._getClasses();
+  ngOnChanges(changes: FudisComponentChanges<IconComponent>): void {
+    if (changes.icon || changes.color || changes.rotate) {
+      this._classList = this._getClasses();
+    }
   }
 
   /**
