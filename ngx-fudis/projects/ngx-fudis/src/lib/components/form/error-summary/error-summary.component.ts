@@ -194,6 +194,10 @@ export class ErrorSummaryComponent implements AfterViewInit, OnDestroy {
     };
 
     this._errorSummaryService.addErrorSummaryParent(this._errorSummaryParentInfo);
+
+    setTimeout(() => {
+      this._errorSummaryService.reloadErrors();
+    }, 200);
   }
 
   ngOnDestroy(): void {

@@ -10,7 +10,6 @@ import {
   FudisFormErrorSummaryLink,
   // FudisDateRangeItem,
 } from '../../../types/forms';
-import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FormComponent } from './form.component';
@@ -42,7 +41,7 @@ import { formExclude } from '../../../utilities/storybook';
       <ng-template fudisActions [type]="'form'">
         <fudis-button [label]="'Previous step'" [icon]="'back'" [variant]="'tertiary'" />
 
-        <fudis-button [label]="'Submit'" (handleClick)="submitForm()" />
+        <fudis-button [label]="'Submit'" [type]="'submit'" (handleClick)="submitForm()" />
       </ng-template>
       <ng-template fudisContent [type]="'form'">
         <!-- <fudis-section [title]="'Main section'">
@@ -175,7 +174,6 @@ import { formExclude } from '../../../utilities/storybook';
 })
 class FormContentExampleComponent implements OnInit {
   constructor(
-    private _errorSummaryService: FudisErrorSummaryService,
     private _translationService: FudisTranslationService,
     private _focusService: FudisFocusService,
   ) {}
@@ -283,14 +281,10 @@ class FormContentExampleComponent implements OnInit {
 
   submitForm(): void {
     this.formExample.markAllAsTouched();
-    this.errorSummaryVisible = true;
 
     this.firstLoad = false;
 
-    if (this.formExample.invalid) {
-      this._closed = false;
-      this._errorSummaryService.reloadErrors();
-    } else {
+    if (!this.formExample.invalid) {
       this.errorSummaryVisible = false;
     }
   }

@@ -192,7 +192,7 @@ describe('FormComponent', () => {
 
       const errorSummaryElement = getElement(
         fixtureMock,
-        '.fudis-form__header__main__content fudis-error-summary fudis-notification',
+        '.fudis-form__header__main__content fudis-error-summary',
       );
 
       expect(errorSummaryElement).toBeTruthy();

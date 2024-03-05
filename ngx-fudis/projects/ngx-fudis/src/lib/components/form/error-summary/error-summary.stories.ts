@@ -21,7 +21,7 @@ import { excludeAllRegex } from '../../../utilities/storybook';
     [align]="'center'"
     [marginTop]="'xl'"
     [titleLevel]="1"
-    [title]="'Example form for error summary'"
+    [title]="'Example Form with Error Summary'"
     [id]="id"
     [errorSummaryLinkType]="'href'"
     [errorSummaryHelpText]="
@@ -38,7 +38,7 @@ import { excludeAllRegex } from '../../../utilities/storybook';
         [variant]="'secondary'"
         (handleClick)="toggleLiveRemove()"
       />
-      <fudis-button [label]="'Submit'" (handleClick)="submitForm()" />
+      <fudis-button [label]="'Submit'" [type]="'submit'" (handleClick)="submitForm()" />
     </ng-template>
     <ng-template fudisContent type="form">
       <fudis-fieldset [title]="'Form information'">
@@ -127,10 +127,7 @@ class ErrorSummaryExampleComponent {
   submitForm(): void {
     this.formExample.markAllAsTouched();
 
-    if (this.formExample.invalid) {
-      this.errorSummaryVisible = true;
-      this._errorSummaryService.reloadErrors();
-    } else {
+    if (!this.formExample.invalid) {
       this.errorSummaryVisible = false;
     }
   }
