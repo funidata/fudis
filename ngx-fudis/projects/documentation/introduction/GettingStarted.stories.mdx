@@ -1,33 +1,29 @@
 import { Meta } from "@storybook/blocks";
 
-<Meta title="Documentation/Introduction/How to start using Fudis" />
+<Meta title="Documentation/Introduction/How to Start Using Fudis" />
 
 # How to Start Using Fudis in Your Application
 
-<br />
+Fudis is available as [NPM package](https://www.npmjs.com/package/@funidata/ngx-fudis)
 
-## Installation
-
-You can find package information at NPM https://www.npmjs.com/package/@funidata/ngx-fudis
-
-#### 1. Install Angular Material Peer Dependency:
+## 1. Install Angular Material Peer Dependency:
 
 ```
 ng add @angular/material
 
 ```
 
+> This command will also include Angular CDK, which is mandatory for Angular Material to work properly.
+
 Choose these options when prompted:
 
 ```
 ? Choose a prebuilt theme name, or "custom" for a custom theme: Custom
 ? Set up global Angular Material typography styles? No
-? Set up browser animations for Angular Material? Yes
+? Include the Angular animations module? Include and enable animations
 ```
 
-<br />
-
-#### 2. Then Install Fudis:
+#### 2. Install Fudis:
 
 ```
 ng add @funidata/ngx-fudis
@@ -36,10 +32,11 @@ ng add @funidata/ngx-fudis
 
 #### 3. Import Core Styles
 
-The core styles from Angular Material must be imported in your application for the components to work properly. The easiest way to do this is to have a styles.scss file in project root with the following content:
+The core styles from Angular Material must be imported in your application for the components to work properly. The easiest way to do this is to have a `styles.scss` file in project root with the following content:
 
 ```
-@use "@angular/material" as mat;
+@use '@funidata/ngx-fudis' as fudis;
+@use '@angular/material' as mat;
 @include mat.core();
 
 ```
@@ -51,7 +48,7 @@ The core styles from Angular Material must be imported in your application for t
 Check your application's `app.module.ts` file that Fudis is imported correctly.
 
 ```
-import { NgxFudisModule } from 'ngx-fudis';
+import { NgxFudisModule } from '@funidata/ngx-fudis';
 
 @NgModule({
 	...
@@ -78,7 +75,7 @@ import { NgxFudisModule } from 'ngx-fudis';
 
 ##### Set Rem Base Value
 
-By default Fudis rem values follow 8 pixel base values, when having default browser CSS font-size of 100%, 1 rem equals 2 \* 8px = 16px. To apply this to your application, add to the root CSS style file:
+By default Fudis rem values follow 8px base values. When having default browser CSS font-size of 100%, 1 rem equals 2 \* 8px = 16px. To apply this to your application, add to the root CSS style file:
 
 ```
 :root {
@@ -86,7 +83,7 @@ By default Fudis rem values follow 8 pixel base values, when having default brow
 }
 ```
 
-If application uses other rem base value by setting font-size to e. g. 62.5% . Adjust -fudis-rem-multiplier accordingly.
+If application uses other rem base value by setting font-size to e. g. 62.5% . Adjust `--fudis-rem-multiplier` accordingly.
 
 ```
 html {
@@ -95,48 +92,5 @@ html {
 
 :root {
  	--fudis-rem-multiplier: 0.625;
-}
-```
-
-#### 6. Include Fudis Foundation SCSS-field
-
-In your project's root style file import Fudis foundation package. After that Fudis fonts should be loaded in Fudis components. If you want to use Foundation tokens and mixins in your own component styles, use them like in example below and check out documentation pages for Foundations.
-
-```
-@use '@funidata/ngx-fudis' as fudis;
-
-.my-amazing-component{
-	@include fudis.text-color('white');
-	@include fudis.bg-color('primary');
-	@include fudis.body-text-lg-regular;
-	margin: fudis.spacing-md fudis.spacing-xs;
-
-	&:focus{
-		@include fudis.focus-generic;
-	}
-
-}
-
-```
-
-#### 7. Use Fudis Components in Your Project
-
-```
-import { ButtonComponent } from './button.component';
-
-<fudis-button [label]="'Eiku'" />
-```
-
-or
-
-```
-import { Component } from '@angular/core';
-
-@Component({
- selector: 'app-root',
- template: ` <fudis-button [label]="'Eiku'" /> `,
-})
-export class AppComponent {
- title = 'dev';
 }
 ```

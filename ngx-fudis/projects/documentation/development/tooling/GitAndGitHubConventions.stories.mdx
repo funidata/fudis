@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/blocks";
 
-<Meta title="Documentation/Development/Git and GitHub Conventions" />
+<Meta title="Documentation/Development/Tooling/Git and GitHub Conventions" />
 
 # Git and GitHub Conventions
 
@@ -17,8 +17,8 @@ import { Meta } from "@storybook/blocks";
 ## Commit Messages
 
 - Always aim commit to have a descriptive commit message
-- If your work IS part of Jira ticket, include ticket number as prefix
-- If your work IS NOT part of Jira ticket, add descriptive abbreviation 'label' prefix
+- If your work is part of Jira ticket, include ticket number as prefix
+- If your work is not part of Jira ticket, add descriptive abbreviation 'label' prefix
   - E. g. feat, deps, fix, docs, impr etc.
 - Examples
   - DS-1337: Create boilerplate for NavigationComponent
@@ -30,7 +30,7 @@ import { Meta } from "@storybook/blocks";
 
 ## PR Labels
 
-- Always add some label to PR!
+- Always add label to PR
   - Label is used in Release Notes generation to categorise PRs related to latest release
 - If you add more than one label, the one with higher priority will be used with release notes
   - Priority list can be seen in 'release.yml' file. where e. g. 'Breaking change' label is the highest priority and 'Dependencies' is the lowest.
@@ -50,7 +50,7 @@ import { Meta } from "@storybook/blocks";
 
 ## PR Description
 
-- If PR is part of work for a Jira ticket, ALWAYS include URL to Jira ticket
+- If PR is part of work for a Jira ticket, always include URL to Jira ticket
 - Aim to describe main points of work done in the PR
-- If PR has a breaking change, try to describe what part of code is the breaking change one
-  - Don't forget to add 'Breaking change' label as well!
+- If PR has a breaking change, describe what part of code is the breaking change one
+  - Don't forget to add 'Breaking change' label as well

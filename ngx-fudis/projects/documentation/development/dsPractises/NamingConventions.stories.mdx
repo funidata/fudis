@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/blocks";
 
-<Meta title="Documentation/Development/Naming Conventions" />
+<Meta title="Documentation/Development/DS Practises/Naming Conventions" />
 
 # Naming Conventions
 
@@ -34,7 +34,7 @@ Fudis core team has decided that component name's should be intuitive, easy to u
 
 ### Component's Input / Output attributes
 
-When defining component's e. g. @Input directives, try to name these consistently between components. E. g. many components have `variant`, `size` and `control` Input, so if you need similar feature to your component, avoid naming these differently to something as `variation`, `magnitude` and `controlToFormElement`.
+When defining e.g. component's @Input directives, try to name these consistently between components. E. g. many components have `variant`, `size` and `control` Input, so if you need similar feature to your component, **avoid** naming these differently to something as `variation`, `magnitude` and `controlToFormElement`.
 
 It helps Fudis developers and product developers using Fudis if naming of similar features are consistent, simple and intuitive between components.
 
@@ -82,6 +82,6 @@ Naming of these follow the **kebab-case** pattern from least spesific to most sp
 
 ## TypeScript Interfaces and Types
 
-Currently types and interfaces live in `types` folder. Interfaces and types follow **camel case**.
+Currently types and interfaces live in `types` folder. Interfaces and types follow **CamelCase**.
 
 E. g. `DescriptionListItem` and `RadioButtonOption`
