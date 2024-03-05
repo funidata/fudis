@@ -58,6 +58,7 @@ import { ExpandableComponent } from './components/expandable/expandable.componen
 import { FieldSetBaseDirective } from './directives/form/fieldset-base/fieldset-base.directive';
 import { FieldSetComponent } from './components/form/fieldset/fieldset.component';
 import { FormComponent } from './components/form/form/form.component';
+
 import { GridComponent } from './components/grid/grid/grid.component';
 import { GridApiDirective } from './directives/grid/grid-api/grid-api.directive';
 import { GridDirective } from './directives/grid/grid/grid.directive';
@@ -107,6 +108,7 @@ import { MultiselectComponent } from './components/form/select/multiselect/multi
 import { MultiselectOptionComponent } from './components/form/select/multiselect/multiselect-option/multiselect-option.component';
 import { SelectAutocompleteComponent } from './components/form/select/common/autocomplete/autocomplete.component';
 import { SelectOptionBaseDirective } from './components/form/select/common/select-option-base/select-option-base.directive';
+import { FormSubmitDirective } from './directives/form/form-actions.directive';
 
 // TODO: sort things better
 
@@ -151,6 +153,7 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     FooterContentLeftDirective,
     FooterContentRightDirective,
     FormComponent,
+    FormSubmitDirective,
     GridComponent,
     GridApiDirective,
     GridDirective,
@@ -247,6 +250,7 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     FooterContentRightDirective,
     FieldSetComponent,
     FormComponent,
+    FormSubmitDirective,
     GridComponent,
     GridDirective,
     GridItemComponent,

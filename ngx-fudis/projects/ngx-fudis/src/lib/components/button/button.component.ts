@@ -9,15 +9,11 @@ import {
   ElementRef,
   OnChanges,
   OnInit,
-  Optional,
-  Host,
 } from '@angular/core';
 import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisComponentChanges } from '../../types/miscellaneous';
-import { FormComponent } from '../form/form/form.component';
-import { FudisErrorSummaryService } from '../../services/form/error-summary/error-summary.service';
 
 @Component({
   selector: 'fudis-button',
@@ -26,11 +22,7 @@ import { FudisErrorSummaryService } from '../../services/form/error-summary/erro
   encapsulation: ViewEncapsulation.None,
 })
 export class ButtonComponent extends TooltipApiDirective implements OnChanges, OnInit {
-  constructor(
-    @Host() @Optional() private _parentForm: FormComponent,
-    private _idService: FudisIdService,
-    private _errorSummaryService: FudisErrorSummaryService,
-  ) {
+  constructor(private _idService: FudisIdService) {
     super();
 
     this._id = _idService.getNewId('button');
@@ -165,12 +157,6 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
     //   this.toggleMenu();
     // }
     this.handleClick.emit(event);
-
-    // TODO: write test for this
-    if (this._parentForm && this.type === 'submit') {
-      this._parentForm.errorSummaryVisible = true;
-      this._errorSummaryService.reloadErrors();
-    }
   }
 
   /**
