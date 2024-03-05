@@ -48,6 +48,11 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   protected _translations: Signal<FudisTranslationConfig>;
 
   /**
+   * To prevent ngOnChanges running before initial ngOnInit
+   */
+  protected _initFinished: boolean = false;
+
+  /**
    * Generate id for parent component
    */
   protected _setParentId(parentType: FudisIdParent): void {
