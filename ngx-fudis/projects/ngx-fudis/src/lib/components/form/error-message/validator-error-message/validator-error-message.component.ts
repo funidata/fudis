@@ -96,6 +96,11 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
    */
   private _subscribtion: Subscription;
 
+  /**
+   * To prevent ngOnChanges running before initial ngOnInit
+   */
+  private _initFinished: boolean = false;
+
   ngOnInit(): void {
     /**
      * Create validator error message if a message is a observable string
@@ -113,6 +118,8 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
       this._currentMessage = this.message;
       this._createError();
     }
+
+    this._initFinished = true;
   }
 
   ngAfterViewInit(): void {
@@ -123,16 +130,17 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
     }, 1000);
   }
 
-  // TODO: Use FudisComponentChanges
   ngOnChanges(): void {
-    /**
-     * Update string message and try to create a new error when changes happen
-     */
-    if (typeof this.message === 'string') {
-      this._currentMessage = this.message;
-    }
+    if (this._initFinished) {
+      /**
+       * Update string message and try to create a new error when changes happen
+       */
+      if (typeof this.message === 'string') {
+        this._currentMessage = this.message;
+      }
 
-    this._createError();
+      this._createError();
+    }
   }
 
   ngOnDestroy(): void {
