@@ -12,7 +12,9 @@
   },
   "peerDependencies": {
     "@angular/common": "^16.2.12",
-    "@angular/core": "^16.2.12"
+    "@angular/core": "^16.2.12",
+    "@angular/material": "^16.2.14",
+    "@angular/cdk": "^16.2.14"
   },
   "devDependencies": {
     "tslib": "^2.5.3",

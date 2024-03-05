@@ -27,8 +27,6 @@ export const fudisIconArray: string[] = [
   'decrease-indent',
   'delete',
   'dot',
-  'double-chevron-left',
-  'double-chevron-right',
   'edit',
   'editor',
   'exclamation-mark-circle',
