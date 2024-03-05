@@ -8,15 +8,15 @@ Setting up your local development environment according to these instructions is
 
 ## Requirements
 
-- MacOS or Linux.
-- Git.
-- Docker.
+- MacOS or Linux
+- Git
+- Docker
   - Any fairly recent version should work. Originally developed with Docker Engine v24.
-- Node.js and NPM.
+- Node.js and NPM
   - For just running Storybook locally, any version will do as the containers will internally use correct versions anyway. If you plan to do anything else, using the version specified in `.nvmrc` is highly recommended (`v18.18.2` at the time of writing this doc).
   - In general, using [NVM](https://github.com/nvm-sh/nvm) and setting your terminal to automatically switch Node.js versions based on `.nvmrc` files is highly recommended.
-- IDE with robust support for TypeScript.
-  - We prefer VS Code and offer a settings template to get going immediately (see [VS Code setup instructions](?path=/docs/documentation-development-setup-vs-code--documentation)).
+- IDE with robust support for TypeScript
+  - We prefer VS Code and offer a settings template to get going immediately (see [VS Code Setup Instructions](/docs/documentation-development-tooling-setup-vs-code--documentation)).
 
 ## Set Up Local Repository
 
@@ -44,4 +44,4 @@ npm start
 
 Once you are done, shutdown the development environment with `npm stop`. You can use `docker ps` to verify all containers are down (and to check their status if something is not working).
 
-See [development environment documentation](?path=/docs/documentation-development-development-environment--documentation) for more information and complete command reference.
+See [Command Reference Documentation](/docs/documentation-development-tooling-command-reference--documentation) for more information and complete command reference.
