@@ -57,8 +57,11 @@
           <ng-container *ngTemplateOutlet="_headerContent!.templateRef" />
         </div>
       </ng-container>
-      <ng-container *ngIf="_formElement !== undefined && errorSummaryVisible">
-        <div class="fudis-form__header__main__content">
+      <ng-container *ngIf="_formElement !== undefined">
+        <div
+          class="fudis-form__header__main__content"
+          [class.fudis-form__header__main__content--hidden]="!errorSummaryVisible"
+        >
           <fudis-error-summary
             [linkType]="errorSummaryLinkType"
             [parentComponent]="_formElement"

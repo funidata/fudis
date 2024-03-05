@@ -71,6 +71,13 @@ export class FudisInternalErrorSummaryService {
   }
 
   /**
+   * Getter for _errorSummaryParentList
+   */
+  get errorSummaryParentList(): Signal<FudisErrorSummaryParent[]> {
+    return this._errorSummaryParentList.asReadonly();
+  }
+
+  /**
    * Setter for _focusToSummaryList
    */
   set focusToSummaryList(value: boolean) {
@@ -82,13 +89,6 @@ export class FudisInternalErrorSummaryService {
    */
   public getFieldsetList(): FudisFormErrorSummarySection[] {
     return this._currentFieldsets;
-  }
-
-  /**
-   * Returns a readonly list of parent forms of the error summary list
-   */
-  public getFormsWithErrorSummary(): Signal<FudisErrorSummaryParent[]> {
-    return this._errorSummaryParentList.asReadonly();
   }
 
   /**

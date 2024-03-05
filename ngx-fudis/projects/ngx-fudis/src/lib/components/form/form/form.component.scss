@@ -15,7 +15,14 @@
 
     &__main {
       &__content {
+        display: block;
+        visibility: visible;
         margin-bottom: spacing.$spacing-sm;
+
+        &--hidden {
+          display: none;
+          visibility: hidden;
+        }
       }
     }
 
