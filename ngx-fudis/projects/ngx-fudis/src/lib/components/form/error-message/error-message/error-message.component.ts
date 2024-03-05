@@ -33,6 +33,7 @@ import {
   StartDateErrorDirective,
 } from '../../../../directives/content-projection/content/content.directive';
 import { FudisDateRangeItem } from '../../../../types/forms';
+import { FudisComponentChanges } from '../../../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-error-message',
@@ -132,6 +133,11 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
    */
   private _customValidatorInstance: FudisValidatorFn;
 
+  /**
+   * To prevent ngOnChanges running before initial ngOnInit
+   */
+  private _initFinished: boolean = false;
+
   ngOnInit(): void {
     if (typeof this.message === 'string') {
       this._messageStringAsObservable = new BehaviorSubject<string>(this.message);
@@ -145,14 +151,18 @@ export class ErrorMessageComponent implements OnInit, OnChanges, OnDestroy {
     if ((this._parent || this._parentGroup) && this.message) {
       this._addControlValidator();
     }
+
+    this._initFinished = true;
   }
 
-  ngOnChanges(): void {
-    /**
-     * Update validator message if message is a string and not observable
-     */
-    if (this._messageStringAsObservable && typeof this.message === 'string') {
-      this._messageStringAsObservable.next(this.message);
+  ngOnChanges(changes: FudisComponentChanges<ErrorMessageComponent>): void {
+    if (this._initFinished && changes.message?.currentValue) {
+      /**
+       * Update validator message if message is a string and not observable
+       */
+      if (this._messageStringAsObservable && typeof this.message === 'string') {
+        this._messageStringAsObservable.next(this.message);
+      }
     }
   }
 

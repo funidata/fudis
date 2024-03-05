@@ -8,10 +8,12 @@ import {
   ViewChild,
   ElementRef,
   OnChanges,
+  OnInit,
 } from '@angular/core';
 import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisIdService } from '../../services/id/id.service';
+import { FudisComponentChanges } from '../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-button',
@@ -19,7 +21,7 @@ import { FudisIdService } from '../../services/id/id.service';
   styleUrls: ['./button.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ButtonComponent extends TooltipApiDirective implements OnChanges {
+export class ButtonComponent extends TooltipApiDirective implements OnChanges, OnInit {
   constructor(private _idService: FudisIdService) {
     super();
 
@@ -123,9 +125,28 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
    */
   protected _id: string;
 
-  ngOnChanges(): void {
+  /**
+   * To prevent ngOnChanges running before initial ngOnInit
+   */
+  private _initFinished: boolean = false;
+
+  ngOnInit() {
     this._classList = this._getClasses();
     this._ariaLabel = this._getAriaLabel();
+
+    this._initFinished = true;
+  }
+
+  ngOnChanges(changes: FudisComponentChanges<ButtonComponent>): void {
+    if (this._initFinished) {
+      if (changes.variant || changes.disabled || changes.size || changes.disabled) {
+        this._classList = this._getClasses();
+      }
+
+      if (changes.size || changes.labelHidden || changes.label) {
+        this._ariaLabel = this._getAriaLabel();
+      }
+    }
   }
 
   /**
@@ -195,6 +216,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges {
     } else if (this.variant === 'secondary' || this.variant === 'tertiary') {
       this._iconColor = 'primary';
     }
+
     return ['fudis-button', `fudis-button__size-${this.size}`, `fudis-button__${this.variant}`];
   }
 }
