@@ -53,3 +53,17 @@
     {{ title ? title : href }}
   </a>
 </ng-container>
+
+<ng-container *ngIf="uiRouterSref && !link && !externalLink">
+  <a
+    #linkRef
+    class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{ color }} fudis-link__href"
+    (focus)="_handleFocus($event)"
+    (blur)="_handleBlur($event)"
+    [uiSref]="uiRouterSref"
+    [uiParams]="uiRouterParams"
+    [uiOptions]="uiRouterOptions"
+  >
+    {{ title ? title : uiRouterSref }}
+  </a>
+</ng-container>
