@@ -34,15 +34,18 @@ export class ErrorSummaryComponent implements AfterViewInit, OnDestroy {
     private readonly _changeDetectorRef: ChangeDetectorRef,
     private _translationService: FudisTranslationService,
   ) {
+    /**
+     * Update translations on language change
+     */
     effect(() => {
       this._translations = this._translationService.getTranslations();
 
       this._attentionText = this._translations().ICON.ATTENTION;
     });
+    /**
+     * Fetch and update current visible errors when reloadErrors() is called
+     */
     effect(() => {
-      /**
-       * Fetch and update current visible errors
-       */
       const errors = this._errorSummaryService.getVisibleErrors();
 
       this._updateSummaryContent(errors);
@@ -195,6 +198,10 @@ export class ErrorSummaryComponent implements AfterViewInit, OnDestroy {
 
     this._errorSummaryService.addErrorSummaryParent(this._errorSummaryParentInfo);
 
+    // TODO: this is not optimal solution to make sure that all DOM fieldsets are loaded, e.g. with lazy loaded Expandable content
+    // --> add to all form components (text-input etc) "command" that if they are childs of Form, which has ErrorSummaryVisible true
+    // --> when loaded first time to DOM, ask ErrorSummary to reload again
+    // Timothy McTextyTextInput: "It seems that I was loaded first time and my parent Form's error summary is true, maybe it should so my erros as well... let's ask error summary to do that!"
     setTimeout(() => {
       this._errorSummaryService.reloadErrors();
     }, 200);

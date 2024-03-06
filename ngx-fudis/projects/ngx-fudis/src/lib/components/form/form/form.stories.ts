@@ -64,7 +64,7 @@ import { formExclude } from '../../../utilities/storybook';
                 [id]="fieldsetId"
               >
                 <ng-template fudisNotifications [type]="'fieldset'">
-                  <fudis-notification *ngIf="firstLoad || errorSummaryVisible">
+                  <fudis-notification *ngIf="errorSummaryVisible">
                     This is notification for a fieldset. TODO: Add notifications to error summary if
                     needed.
                   </fudis-notification>
@@ -287,9 +287,7 @@ class FormContentExampleComponent implements OnInit {
   submitForm(): void {
     this.formExample.markAllAsTouched();
 
-    this.firstLoad = false;
-
-    if (!this.formExample.invalid) {
+    if (this.formExample.valid) {
       this.errorSummaryVisible = false;
     }
   }

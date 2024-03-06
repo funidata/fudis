@@ -83,6 +83,7 @@ export class ExpandableComponent implements OnDestroy, OnChanges {
    */
   @Input() errorSummaryBreadcrumb: boolean = false;
 
+  // TODO: write test
   /**
    * If Expandable is used inside Form component, by default it will open itself when ReloadErrors is called in Error Summary Service. To disable this behavior, set this to false.
    */

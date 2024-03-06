@@ -132,7 +132,7 @@ class ErrorSummaryExampleComponent {
   submitForm(): void {
     this.formExample.markAllAsTouched();
 
-    if (!this.formExample.invalid) {
+    if (this.formExample.valid) {
       this.errorSummaryVisible = false;
     }
   }

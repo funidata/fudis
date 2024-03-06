@@ -2,9 +2,9 @@ import { Directive, Host, HostListener, Optional } from '@angular/core';
 import { FormComponent } from '../../components/form/form/form.component';
 import { FudisErrorSummaryService } from '../../services/form/error-summary/error-summary.service';
 
-// TODO: Write tests for Actions Directive
+// TODO: Write tests
 /**
- * A marker directive used to tag action buttons that will be rendered inside the allowed components.
+ * A marker directive to set any element, mostly Button Component to work as submit button, which will trigger Error Summary on click
  */
 @Directive({ selector: '[fudisFormSubmit]' })
 export class FormSubmitDirective {
@@ -16,7 +16,6 @@ export class FormSubmitDirective {
    * Set parent Form's Error Summary Visible true and reload errors
    */
   @HostListener('click') private _onClick() {
-    // TODO: write test for this
     if (this._parentForm) {
       this._parentForm.errorSummaryVisible = true;
       this._errorSummaryService.reloadErrors();
