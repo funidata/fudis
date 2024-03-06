@@ -41,12 +41,7 @@ import { formExclude } from '../../../utilities/storybook';
       <ng-template fudisActions [type]="'form'">
         <fudis-button [label]="'Previous step'" [icon]="'back'" [variant]="'tertiary'" />
 
-        <fudis-button
-          fudisFormSubmit
-          [label]="'Submit'"
-          [type]="'submit'"
-          (handleClick)="submitForm()"
-        />
+        <fudis-button fudisFormSubmit [label]="'Submit'" (handleClick)="submitForm()" />
       </ng-template>
       <ng-template fudisContent [type]="'form'">
         <!-- <fudis-section [title]="'Main section'">

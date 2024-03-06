@@ -38,12 +38,7 @@ import { excludeAllRegex } from '../../../utilities/storybook';
         [variant]="'secondary'"
         (handleClick)="toggleLiveRemove()"
       />
-      <fudis-button
-        fudisFormSubmit
-        [label]="'Submit'"
-        [type]="'submit'"
-        (handleClick)="submitForm()"
-      />
+      <fudis-button fudisFormSubmit [label]="'Submit'" (handleClick)="submitForm()" />
     </ng-template>
     <ng-template fudisContent type="form">
       <fudis-fieldset [title]="'Form information'">
