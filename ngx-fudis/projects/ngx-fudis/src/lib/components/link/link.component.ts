@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisLinkColor, FudisTranslationConfig } from '../../types/miscellaneous';
+import { TransitionOptions } from '@uirouter/core';
 
 @Component({
   selector: 'fudis-link',
@@ -54,6 +55,21 @@ export class LinkComponent implements AfterViewInit, OnChanges {
    * Fragment ID for Angular Router
    */
   @Input() fragmentId: string;
+
+  /**
+   * uiSref state reference for UI Router
+   */
+  @Input() uiRouterSref: string;
+
+  /**
+   * uiParams object containing any uiRouterSref target state parameter values
+   */
+  @Input() uiRouterParams: { uiRouterSrefId: string };
+
+  /**
+   * UI Router transition object
+   */
+  @Input() uiRouterOptions: TransitionOptions;
 
   /**
    * Title for the link, if not defined title will be the same as link URL
