@@ -15,7 +15,7 @@ import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FormComponent } from './form.component';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
-import readme from './readme.mdx';
+import docs from './form.docs.mdx';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
 import { FudisHeadingLevel, FudisHeadingSize } from '../../../types/typography';
 import { formExclude } from '../../../utilities/storybook';
@@ -306,7 +306,7 @@ export default {
   ],
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
   },
   argTypes: {

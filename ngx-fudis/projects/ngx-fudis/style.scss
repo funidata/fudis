@@ -13,10 +13,27 @@
 
 :root {
   --fudis-rem-multiplier: 1;
+  --fudis-color-primary-light: #daedff;
+  --fudis-color-primary: #1076db;
+  --fudis-color-primary-dark: #1d65b8;
 }
 
 html {
   font-size: 100%;
+}
+
+/* stylelint-disable color-no-hex */
+[data-theme="into"] {
+  --fudis-color-primary-light: #e0f4fd;
+  --fudis-color-primary: #0a729e;
+  --fudis-color-primary-dark: #0e5d81;
+  --fudis-color-primary-extra-dark: #1b2e36;
+}
+
+[data-theme="sisu"] {
+  --fudis-color-primary-light: #daedff;
+  --fudis-color-primary: #1076db;
+  --fudis-color-primary-dark: #1d65b8;
 }
 
 a.sbdocs {
@@ -38,18 +55,4 @@ a.sbdocs {
     padding: 0.5rem;
     background-color: #fdefb4;
   }
-}
-
-/* stylelint-disable color-no-hex */
-[data-theme="into"] {
-  --fudis-color-primary-light: #e0f4fd;
-  --fudis-color-primary: #0a729e;
-  --fudis-color-primary-dark: #0e5d81;
-  --fudis-color-primary-extra-dark: #1b2e36;
-}
-
-[data-theme="sisu"] {
-  --fudis-color-primary-light: #daedff;
-  --fudis-color-primary: #1076db;
-  --fudis-color-primary-dark: #1d65b8;
 }

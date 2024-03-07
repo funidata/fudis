@@ -4,9 +4,13 @@ import { Meta } from "@storybook/blocks";
 
 # Error Summary Service
 
+Error Summary Service provides tools to load and display validation errors for [Form](/docs/components-form-form--documentation) and its [Error Summary Component](/docs/components-form-error-summary--documentation).
+
 ## Features
 
 ### Reload Errors
+
+**Note!** Similar feature described here can be achieved with [Button binded with Form Submit directive](/docs/directives-form-actions--documentation#form-submit-with-button).
 
 Reload Errors is Error Summary Service functionality that updates the visible list of errors shown in the Fudis Error Summary component.
 
@@ -32,7 +36,8 @@ protected _submitButtonClick():void {
 		// Reload errors for the FudisForm
 		this._service.reloadErrors();
 	} else {
-		// Success and profit!
+		this._errorSummaryVisible = false;
+		// Other success and profit!
 	}
 }
 

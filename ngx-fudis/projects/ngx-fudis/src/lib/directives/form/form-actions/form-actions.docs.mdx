@@ -10,7 +10,11 @@ When using Form component, it should always have a Button which submits the form
 
 When you want to bind a spesific Button to be Form's submit button, you can use `fudisFormSubmit` directive to it.
 
-You should also bind property `formValid` to the Button. E.g. `<fudis-button fudisFormSubmit [formValid]="myForm.valid">`
+You should also bind boolean property `formValid` to the Button.
+
+```
+<fudis-button fudisFormSubmit [formValid]="myForm.valid" [label]="'Submit form'" (handleClick)="myFormSubmit()"/>
+```
 
 This will then:
 
@@ -27,7 +31,7 @@ What it DOES NOT do:
 
 ```
 // HTML Template
-<fudis-form [errorSummaryVisible]="errorSummaryVisible" ...other properties>
+<fudis-form ...form properties>
   <ng-template fudisActions type="form">
     <fudis-button fudisFormSubmit [label]="'Submit Form'" [formValid]="myForm.valid" (handleClick)="myFormSubmit()"/>
   </ng-template>
