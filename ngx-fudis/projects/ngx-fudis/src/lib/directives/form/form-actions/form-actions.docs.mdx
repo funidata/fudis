@@ -1,0 +1,50 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Directives/Form/Actions" />
+
+# Form Actions
+
+## Form Submit with Button
+
+When using Form component, it should always have a Button which submits the form. For accessibility reasons, the submit Button should be a child component of Form component.
+
+When you want to bind a spesific Button to be Form's submit button, you can use `fudisFormSubmit` directive to it.
+
+You should also bind property `formValid` to the Button. E.g. `<fudis-button fudisFormSubmit [formValid]="myForm.valid">`
+
+This will then:
+
+- Add HTML attribute `type='submit'` to the button element
+- If `formValid` is false
+  - Sets parent Form's `errorSummaryVisible` to `true`
+  - Calls Error Summary Service to reload erros for the Form
+- If `formValid` is true
+  - Sets parent Form's `errorSummaryVisible` to `false`
+
+What it DOES NOT do:
+
+- It does not set your form's groups and controls as touched
+
+```
+// HTML Template
+<fudis-form [errorSummaryVisible]="errorSummaryVisible" ...other properties>
+  <ng-template fudisActions type="form">
+    <fudis-button fudisFormSubmit [label]="'Submit Form'" [formValid]="myForm.valid" (handleClick)="myFormSubmit()"/>
+  </ng-template>
+  ...other Form content
+</fudis-form>
+
+// TypeScript
+
+myFormSubmit():void {
+  // On submit set all your Form Groups and Controls as touched
+  this.myFormGroup.markAllAsTouched();
+}
+```
+
+Related Components and Services
+
+- [Button](/docs/components-button--documentation)
+- [Form](/docs/components-form-form--documentation)
+- [Error Summary Component](/docs/components-form-error-summary--documentation)
+- [Error Summary Service](/docs/services-error-summary--documentation)

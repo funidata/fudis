@@ -40,8 +40,12 @@ import { formExclude } from '../../../utilities/storybook';
       </ng-template> -->
       <ng-template fudisActions [type]="'form'">
         <fudis-button [label]="'Previous step'" [icon]="'back'" [variant]="'tertiary'" />
-
-        <fudis-button fudisFormSubmit [label]="'Submit'" (handleClick)="submitForm()" />
+        <fudis-button
+          fudisFormSubmit
+          [formValid]="formExample.valid"
+          [label]="'Submit'"
+          (handleClick)="submitForm()"
+        />
       </ng-template>
       <ng-template fudisContent [type]="'form'">
         <!-- <fudis-section [title]="'Main section'">
@@ -242,13 +246,13 @@ class FormContentExampleComponent implements OnInit {
       FudisValidators.email('Input must be an email address.'),
       FudisValidators.minLength(5, 'Email should be at least 5 characters.'),
     ]),
-    importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
-    courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
-    startDate: new FormControl<Date | null>(
-      null,
-      FudisValidators.required('Start date is required.'),
-    ),
-    endDate: new FormControl<Date | null>(null, FudisValidators.required('End date is required.')),
+    // importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
+    // courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
+    // startDate: new FormControl<Date | null>(
+    //   null,
+    //   FudisValidators.required('Start date is required.'),
+    // ),
+    // endDate: new FormControl<Date | null>(null, FudisValidators.required('End date is required.')),
   });
 
   languageOptions: FudisSelectOption[] = [
@@ -281,10 +285,6 @@ class FormContentExampleComponent implements OnInit {
 
   submitForm(): void {
     this.formExample.markAllAsTouched();
-
-    if (this.formExample.valid) {
-      this.errorSummaryVisible = false;
-    }
   }
 
   handleClosedOutput(value: boolean): void {

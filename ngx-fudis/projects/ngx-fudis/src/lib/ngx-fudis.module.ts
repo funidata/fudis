@@ -108,7 +108,7 @@ import { MultiselectComponent } from './components/form/select/multiselect/multi
 import { MultiselectOptionComponent } from './components/form/select/multiselect/multiselect-option/multiselect-option.component';
 import { SelectAutocompleteComponent } from './components/form/select/common/autocomplete/autocomplete.component';
 import { SelectOptionBaseDirective } from './components/form/select/common/select-option-base/select-option-base.directive';
-import { FormSubmitDirective } from './directives/form/form-actions.directive';
+import { FormSubmitDirective } from './directives/form/form-actions/form-actions.directive';
 
 // TODO: sort things better
 

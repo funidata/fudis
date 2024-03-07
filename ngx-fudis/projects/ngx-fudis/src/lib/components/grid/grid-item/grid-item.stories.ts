@@ -1,6 +1,6 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { GridItemComponent } from './grid-item.component';
-import readme from './grid-item.documentation.mdx';
+import docs from './grid-item.docs.mdx';
 
 const html = String.raw;
 
@@ -9,7 +9,7 @@ export default {
   component: GridItemComponent,
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
   },
 } as Meta;

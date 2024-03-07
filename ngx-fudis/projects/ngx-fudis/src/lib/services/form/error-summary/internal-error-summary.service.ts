@@ -105,6 +105,8 @@ export class FudisInternalErrorSummaryService {
     return this._signalCurrentErrorList.asReadonly();
   }
 
+  // TODO: Currently all errors are just one big blob and each added error do not have information about the Form it is actually related to. This is currently checked in Form, which loops through all the errors and checks if #error-id exists as a child. It would be better if added errors are categorised by their Form parent.
+
   /**
    * Adds a new error to the list of current errors
    * If new error item has a matching id on the list, new error is tied to that error list object

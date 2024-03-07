@@ -38,7 +38,12 @@ import { excludeAllRegex } from '../../../utilities/storybook';
         [variant]="'secondary'"
         (handleClick)="toggleLiveRemove()"
       />
-      <fudis-button fudisFormSubmit [label]="'Submit'" (handleClick)="submitForm()" />
+      <fudis-button
+        fudisFormSubmit
+        [formValid]="formExample.valid"
+        [label]="'Submit'"
+        (handleClick)="submitForm()"
+      />
     </ng-template>
     <ng-template fudisContent type="form">
       <fudis-fieldset [title]="'Form information'">
@@ -116,7 +121,7 @@ class ErrorSummaryExampleComponent {
     ]),
     // Expose after Datepicker is exposed to public API
     // importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
-    courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
+    // courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
   });
 
   courseTypeOptions: FudisRadioButtonOption[] = [
@@ -126,10 +131,6 @@ class ErrorSummaryExampleComponent {
 
   submitForm(): void {
     this.formExample.markAllAsTouched();
-
-    if (this.formExample.valid) {
-      this.errorSummaryVisible = false;
-    }
   }
 
   toggleLiveRemove(): void {
