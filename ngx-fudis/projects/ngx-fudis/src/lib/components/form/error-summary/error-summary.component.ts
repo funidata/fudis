@@ -3,9 +3,9 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  Host,
   Inject,
   Input,
-  OnDestroy,
   Signal,
   ViewChild,
   effect,
@@ -21,14 +21,16 @@ import {
 } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisTranslationConfig } from '../../../types/miscellaneous';
+import { FormComponent } from '../form/form.component';
 
 @Component({
   selector: 'fudis-error-summary',
   templateUrl: './error-summary.component.html',
   styleUrls: ['./error-summary.component.scss'],
 })
-export class ErrorSummaryComponent implements AfterViewInit, OnDestroy {
+export class ErrorSummaryComponent implements AfterViewInit {
   constructor(
+    @Host() private _parentForm: FormComponent,
     @Inject(DOCUMENT) private _document: Document,
     private _errorSummaryService: FudisInternalErrorSummaryService,
     private readonly _changeDetectorRef: ChangeDetectorRef,
@@ -46,7 +48,7 @@ export class ErrorSummaryComponent implements AfterViewInit, OnDestroy {
      * Fetch and update current visible errors when reloadErrors() is called
      */
     effect(() => {
-      const errors = this._errorSummaryService.getVisibleErrors();
+      const errors = this._errorSummaryService.getFormErrorsById(_parentForm.id);
 
       this._updateSummaryContent(errors);
     });
@@ -63,6 +65,11 @@ export class ErrorSummaryComponent implements AfterViewInit, OnDestroy {
    * Help text displayed in Error Summary before listing individual errors
    */
   @Input({ required: true }) helpText: string;
+
+  /**
+   * Id of parent Form component
+   */
+  @Input({ required: true }) formId: string;
 
   /**
    * Type of the clickable error link
@@ -191,19 +198,6 @@ export class ErrorSummaryComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this._errorSummaryParentInfo = {
-      formId: this.parentComponent.querySelector('.fudis-form')?.getAttribute('id'),
-      parentElement: this.parentComponent,
-    };
-
-    this._errorSummaryService.addErrorSummaryParent(this._errorSummaryParentInfo);
-
-    this._errorSummaryService.reloadErrors();
-  }
-
-  ngOnDestroy(): void {
-    if (this._errorSummaryParentInfo) {
-      this._errorSummaryService.removeErrorSummaryParent(this._errorSummaryParentInfo);
-    }
+    this._errorSummaryService.reloadErrorsByFormId(this.formId);
   }
 }

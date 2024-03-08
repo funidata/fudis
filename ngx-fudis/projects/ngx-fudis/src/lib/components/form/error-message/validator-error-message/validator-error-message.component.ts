@@ -16,7 +16,7 @@ import {
   FudisFormErrorSummaryItem,
   FudisFormErrorSummaryRemoveItem,
 } from '../../../../types/forms';
-import { FudisComponentChanges } from 'dist/ngx-fudis/lib/types/miscellaneous';
+import { FudisComponentChanges } from '../../../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-validator-error-message',
@@ -70,7 +70,7 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
   /**
    * Id of parent Form component
    */
-  @Input() formId: string | null;
+  @Input() formId: string = 'unknownFormId';
 
   /**
    * Output for handling a state when error is sent to Error Summary
@@ -114,8 +114,6 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
     if (this.message && typeof this.message !== 'string') {
       this._subscribtion = this.message.subscribe((value: string) => {
         this._currentMessage = value;
-        console.log('init 1');
-        console.log(this.focusId);
         this._createError();
       });
     }
@@ -188,8 +186,8 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
     if (errorCondition) {
       const newError: FudisFormErrorSummaryItem = {
         id: this.focusId,
-        formId: this.formId ? this.formId : null,
         error: this._currentMessage,
+        formId: this.formId,
         label: this.label,
         type: this.type,
         controlName: this.controlName,
@@ -206,11 +204,12 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
     if (this._errorSent) {
       const errorToRemove: FudisFormErrorSummaryRemoveItem = {
         id: this.focusId,
+        formId: this.formId,
         type: this.type,
         controlName: this.controlName,
       };
 
-      this._errorSummaryService.removeError(errorToRemove);
+      this._errorSummaryService.removeError(errorToRemove, this.formId);
       this.handleRemoveError.emit(errorToRemove);
     }
   }

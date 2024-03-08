@@ -68,7 +68,7 @@ export class GuidanceComponent implements OnInit {
   /**
    * Id of parent Form component
    */
-  @Input() formId: string | null;
+  @Input() formId: string;
 
   /**
    * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where "characters used" is "maxLengthText".

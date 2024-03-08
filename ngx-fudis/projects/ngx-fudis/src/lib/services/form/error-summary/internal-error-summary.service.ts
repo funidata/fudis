@@ -1,4 +1,4 @@
-import { Injectable, Signal, signal } from '@angular/core';
+import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
 import {
   FudisFormErrorSummaryObject,
   FudisFormErrorSummaryItem,
@@ -6,6 +6,7 @@ import {
   FudisErrorSummaryParent,
   FudisFormErrorSummaryRemoveItem,
   FudisFormErrorSummaryUpdateStrategy,
+  FudisFormErrorSummaryFormsAndErrors,
 } from '../../../types/forms';
 
 /**
@@ -18,6 +19,15 @@ export class FudisInternalErrorSummaryService {
    * Current errors
    */
   private _currentErrorList: FudisFormErrorSummaryObject = {};
+
+  private _newCurrentErrorList: FudisFormErrorSummaryFormsAndErrors = { unknownFormId: {} };
+
+  /**
+   * Collection of errors as a Signal categorised by parent Form id
+   */
+  private _signalErrorsByFormId: {
+    [key: string]: WritableSignal<FudisFormErrorSummaryObject>;
+  } = { unknownFormId: signal<FudisFormErrorSummaryObject>({}) };
 
   /**
    * Visible errors
@@ -101,8 +111,29 @@ export class FudisInternalErrorSummaryService {
   /**
    * Returns a readonly list of visible errors
    */
-  public getVisibleErrors(): Signal<FudisFormErrorSummaryObject> {
-    return this._signalCurrentErrorList.asReadonly();
+  public getAllFormErrors(): Signal<FudisFormErrorSummaryObject> {
+    return this._signalCurrentErrorList;
+  }
+
+  /**
+   * Returns a readonly list of visible errors
+   */
+  public getFormErrorsById(formId: string): Signal<FudisFormErrorSummaryObject> {
+    return this._signalErrorsByFormId[formId].asReadonly();
+  }
+
+  public addNewFormToCollection(formId: string): void {
+    this._newCurrentErrorList[formId] = {};
+    this._signalErrorsByFormId[formId] = signal<FudisFormErrorSummaryObject>({});
+  }
+
+  public removeFormFromCollection(formId: string): void {
+    if (this._newCurrentErrorList[formId]) {
+      delete this._newCurrentErrorList[formId];
+    }
+    if (this._signalErrorsByFormId[formId]) {
+      delete this._signalErrorsByFormId[formId];
+    }
   }
 
   // TODO: Currently all errors are just one big blob and each added error do not have information about the Form it is actually related to. This is currently checked in Form, which loops through all the errors and checks if #error-id exists as a child. It would be better if added errors are categorised by their Form parent.
@@ -113,8 +144,28 @@ export class FudisInternalErrorSummaryService {
    * @param newError Form error summary item
    */
   public addNewError(newError: FudisFormErrorSummaryItem): void {
-    let currentErrors = this._currentErrorList;
+    let currentErrors = this._newCurrentErrorList;
 
+    if (!currentErrors[newError.formId]) {
+      currentErrors = { ...currentErrors, [newError.formId]: {} };
+    }
+    currentErrors = {
+      ...currentErrors,
+      [newError.formId]: this.getUpdatedErrorsByFormId(
+        newError,
+        currentErrors[newError.formId],
+        newError.formId,
+      ),
+    };
+
+    this._newCurrentErrorList = currentErrors;
+  }
+
+  private getUpdatedErrorsByFormId(
+    newError: FudisFormErrorSummaryItem,
+    currentErrors: FudisFormErrorSummaryObject,
+    formId: string,
+  ): FudisFormErrorSummaryObject {
     const errorId = this._defineErrorId(newError.id, newError.controlName);
 
     const langUpdated =
@@ -142,31 +193,37 @@ export class FudisInternalErrorSummaryService {
       };
     }
 
-    this._currentErrorList = currentErrors;
-
     if (langUpdated || this._updateStrategy === 'all') {
       this._focusToSummaryList = false;
-      this.reloadErrors();
+      this.reloadErrorsByFormId(formId);
     }
+
+    return currentErrors;
   }
 
   /**
    * Removes error object from the current errors list if it contains matching error id
    * @param error Error object
    */
-  public removeError(error: FudisFormErrorSummaryRemoveItem): void {
-    const currentErrors = this._currentErrorList;
+  public removeError(error: FudisFormErrorSummaryRemoveItem, formId: string): void {
+    const currentErrorsOfForm = this._newCurrentErrorList[formId];
 
     const errorId = error.controlName ? `${error.id}_${error.controlName}` : error.id;
 
-    if (currentErrors?.[errorId]?.errors[error.type]) {
-      delete currentErrors[errorId].errors[error.type];
+    if (currentErrorsOfForm[errorId]?.errors[error.type]) {
+      delete currentErrorsOfForm[errorId].errors[error.type];
 
-      this._currentErrorList = currentErrors;
+      this._newCurrentErrorList[formId] = currentErrorsOfForm;
 
       if (this._updateStrategy === 'all' || this._updateStrategy === 'onRemove') {
         this._focusToSummaryList = false;
-        this._signalCurrentErrorList.set(this._currentErrorList);
+
+        if (this._signalErrorsByFormId[formId]) {
+          this._signalErrorsByFormId[formId].set(currentErrorsOfForm);
+        } else {
+          this._signalErrorsByFormId[formId] =
+            signal<FudisFormErrorSummaryObject>(currentErrorsOfForm);
+        }
       }
     }
   }
@@ -228,46 +285,16 @@ export class FudisInternalErrorSummaryService {
   }
 
   /**
-   * Updates the visible and dynamic lists of errors with the current error list
+   * Updates the visible and dynamic lists of all form and errors with the current error list
    */
   public reloadErrors(): void {
-    this._signalCurrentErrorList.set(this._currentErrorList);
+    Object.keys(this._newCurrentErrorList).forEach((key) => {
+      this.reloadErrorsByFormId(key);
+    });
   }
 
-  /**
-   * Adds a parent form to the error summary parent list
-   * If a parent with a matching id exists, replace the old parent with the new one
-   * @param parent Parent form of the error summary list
-   */
-  public addErrorSummaryParent(parent: FudisErrorSummaryParent): void {
-    const currentParents = this._errorSummaryParentList();
-
-    const existingItem = currentParents.find((item) => {
-      return item.formId === parent.formId;
-    });
-
-    if (existingItem) {
-      const index = currentParents.indexOf(existingItem);
-      currentParents[index] = parent;
-    } else {
-      currentParents.push(parent);
-    }
-
-    this._errorSummaryParentList.set(currentParents);
-  }
-
-  /**
-   * Removes a parent form from the error summary parent list
-   * @param parent Parent form of the error summary list
-   */
-  public removeErrorSummaryParent(parent: FudisErrorSummaryParent): void {
-    const currentParents = this._errorSummaryParentList();
-
-    const filtered = currentParents.filter((item) => {
-      return item.formId !== parent.formId;
-    });
-
-    this._errorSummaryParentList.set(filtered);
+  public reloadErrorsByFormId(formId: string): void {
+    this._signalErrorsByFormId[formId].set(this._newCurrentErrorList[formId]);
   }
 
   /**

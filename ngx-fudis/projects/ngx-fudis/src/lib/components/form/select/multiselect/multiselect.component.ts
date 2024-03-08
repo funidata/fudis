@@ -105,7 +105,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
     }
 
     if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
-      this.reloadErrorSummary(this.control);
+      this.reloadErrorSummary(this.control, this._parentForm.id);
     }
   }
 

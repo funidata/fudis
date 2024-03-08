@@ -31,7 +31,7 @@
   />
   <fudis-guidance
     *ngIf="!disableGuidance"
-    [formId]="_parentForm ? _parentForm.id : null"
+    [formId]="_parentForm.id"
     [inputLabel]="label"
     [maxLength]="_maxLength"
     [helpText]="helpText"

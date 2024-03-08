@@ -95,6 +95,7 @@ describe('ValidatorErrorMessageComponent', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(ValidatorErrorMessageComponent);
       component = fixture.componentInstance;
+      component.formId = 'test-form-id';
       component.focusId = 'test-id';
       component.label = 'Test label';
       component.type = 'required';
@@ -111,8 +112,8 @@ describe('ValidatorErrorMessageComponent', () => {
       const testError: FudisFormErrorSummaryItem = {
         id: 'test-id',
         error: 'Message for testing',
+        formId: 'test-form-id',
         label: 'Test label',
-        formId: null,
         type: 'required',
         controlName: undefined,
         language: 'en',
@@ -133,6 +134,7 @@ describe('ValidatorErrorMessageComponent', () => {
 
       const errorToRemove: FudisFormErrorSummaryRemoveItem = {
         id: 'test-id',
+        formId: 'test-form-id',
         type: 'required',
         controlName: undefined,
       };
@@ -155,7 +157,7 @@ describe('ValidatorErrorMessageComponent', () => {
 
       const testError: FudisFormErrorSummaryItem = {
         id: 'test-id',
-        formId: null,
+        formId: 'test-form-id',
         error: 'First message from observable',
         label: 'Test label',
         type: 'required',
@@ -194,6 +196,7 @@ describe('ValidatorErrorMessageComponent', () => {
 
       const errorToRemove: FudisFormErrorSummaryRemoveItem = {
         id: 'test-observable-message-id',
+        formId: 'test-form-id',
         type: 'required',
         controlName: undefined,
       };
@@ -216,7 +219,7 @@ describe('ValidatorErrorMessageComponent', () => {
 
       const testError: FudisFormErrorSummaryItem = {
         id: 'test-id',
-        formId: null,
+        formId: 'test-form-id',
         error: 'First message from observable',
         label: 'Test label',
         type: 'required',

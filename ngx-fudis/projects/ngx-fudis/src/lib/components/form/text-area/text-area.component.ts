@@ -81,7 +81,7 @@ export class TextAreaComponent
     }
 
     if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
-      this.reloadErrorSummary(this.control);
+      this.reloadErrorSummary(this.control, this._parentForm.id);
     }
   }
 }

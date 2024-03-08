@@ -104,7 +104,7 @@ export class TextInputComponent
     }
 
     if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
-      this.reloadErrorSummary(this.control);
+      this.reloadErrorSummary(this.control, this._parentForm.id);
     }
   }
 }
