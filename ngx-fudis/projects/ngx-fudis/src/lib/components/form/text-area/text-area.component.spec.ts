@@ -6,6 +6,7 @@ import { LabelComponent } from '../label/label.component';
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { FudisInputSize } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
+import { FormComponent } from '../form/form.component';
 
 const textAreaControl: FormControl = new FormControl('');
 
@@ -20,6 +21,7 @@ describe('TextAreaComponent', () => {
         MockComponent(LabelComponent),
         MockComponent(GuidanceComponent),
       ],
+      providers: [FormComponent],
       imports: [ReactiveFormsModule],
     }).compileComponents();
   });

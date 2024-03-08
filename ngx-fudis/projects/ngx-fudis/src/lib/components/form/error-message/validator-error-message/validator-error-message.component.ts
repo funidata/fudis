@@ -67,6 +67,11 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
   @Input() variant: 'body-text' | 'form-error' = 'form-error';
 
   /**
+   * Id of parent Form component
+   */
+  @Input() formId: string | null;
+
+  /**
    * Output for handling a state when error is sent to Error Summary
    */
   @Output() handleCreateError = new EventEmitter<FudisFormErrorSummaryItem>();

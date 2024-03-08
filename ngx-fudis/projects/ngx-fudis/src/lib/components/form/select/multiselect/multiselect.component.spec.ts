@@ -24,6 +24,7 @@ import {
   getTrimmedTextContent,
 } from '../../../../utilities/tests/utilities';
 import { defaultOptions } from '../common/mock_data';
+import { FormComponent } from '../../form/form.component';
 
 @Component({
   selector: 'fudis-multiselect-mock',
@@ -76,6 +77,7 @@ describe('MultiselectComponent', () => {
         TooltipDirective,
         SelectBaseDirective,
         InputBaseDirective,
+        FormComponent,
       ],
       imports: [ReactiveFormsModule],
     }).compileComponents();

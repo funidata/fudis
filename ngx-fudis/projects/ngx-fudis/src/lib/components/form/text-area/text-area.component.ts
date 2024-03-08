@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Host, Input, OnChanges, OnInit, Optional } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisInputSize } from '../../../types/forms';
@@ -11,6 +11,8 @@ import {
   hasRequiredValidator,
 } from '../../../utilities/form/getValidators';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
+import { FormComponent } from '../form/form.component';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
   selector: 'fudis-text-area',
@@ -22,6 +24,8 @@ export class TextAreaComponent
   implements OnInit, OnChanges, AfterViewInit
 {
   constructor(
+    @Host() @Optional() _parentForm: FormComponent,
+    private _errorSummaryService: FudisInternalErrorSummaryService,
     private _focusService: FudisFocusService,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,

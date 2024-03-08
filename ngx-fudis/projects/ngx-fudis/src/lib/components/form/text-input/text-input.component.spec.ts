@@ -7,6 +7,7 @@ import { GuidanceComponent } from '../guidance/guidance.component';
 import { FudisInputSize, FudisInputType } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { getElement } from '../../../utilities/tests/utilities';
+import { FormComponent } from '../form/form.component';
 
 const textInputControl: FormControl = new FormControl('');
 
@@ -21,6 +22,7 @@ describe('TextInputComponent', () => {
         MockComponent(LabelComponent),
         MockComponent(GuidanceComponent),
       ],
+      providers: [FormComponent],
       imports: [ReactiveFormsModule],
     }).compileComponents();
   });

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, OnChanges } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, OnChanges, Optional, Host } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisInputSize, FudisInputType } from '../../../types/forms';
@@ -13,6 +13,8 @@ import {
   hasRequiredValidator,
 } from '../../../utilities/form/getValidators';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
+import { FormComponent } from '../form/form.component';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
   selector: 'fudis-text-input',
@@ -24,7 +26,9 @@ export class TextInputComponent
   implements OnInit, OnChanges, AfterViewInit
 {
   constructor(
+    @Host() @Optional() private _parentForm: FormComponent,
     private _focusService: FudisFocusService,
+    private _errorSummaryService: FudisInternalErrorSummaryService,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
   ) {
@@ -87,6 +91,10 @@ export class TextInputComponent
   ngAfterViewInit(): void {
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
+    }
+
+    if (this._parentForm?.errorSummaryVisible) {
+      console.log('moi');
     }
   }
 }

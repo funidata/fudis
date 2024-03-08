@@ -2,8 +2,10 @@ import {
   AfterViewInit,
   Component,
   EventEmitter,
+  Host,
   Input,
   OnInit,
+  Optional,
   Output,
   Signal,
   WritableSignal,
@@ -17,6 +19,8 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
 import { joinInputValues, sortValues } from '../common/selectUtilities';
+import { FormComponent } from '../../form/form.component';
+import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
   selector: 'fudis-multiselect',
@@ -25,6 +29,8 @@ import { joinInputValues, sortValues } from '../common/selectUtilities';
 })
 export class MultiselectComponent extends SelectBaseDirective implements OnInit, AfterViewInit {
   constructor(
+    @Host() @Optional() private _parentForm: FormComponent,
+    private _errorSummaryService: FudisInternalErrorSummaryService,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
