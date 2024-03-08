@@ -20,7 +20,6 @@ import { Component, ViewChild } from '@angular/core';
 import { FudisSelectOption } from '../../../../types/forms';
 import { ButtonComponent } from '../../../button/button.component';
 import { getElement } from '../../../../utilities/tests/utilities';
-import { FormComponent } from '../../form/form.component';
 
 @Component({
   selector: 'fudis-mock-container',
@@ -70,7 +69,6 @@ describe('SelectComponent', () => {
         TooltipDirective,
         SelectBaseDirective,
         InputBaseDirective,
-        FormComponent,
       ],
       imports: [ReactiveFormsModule],
     }).compileComponents();
