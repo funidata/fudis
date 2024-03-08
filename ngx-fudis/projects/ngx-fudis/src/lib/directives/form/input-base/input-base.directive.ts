@@ -115,9 +115,11 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
    * TODO: write test
    */
   protected reloadErrorSummary(control: FormControl): void {
-    control.markAllAsTouched();
-    this._errorSummaryService.focusToSummaryList = false;
-    this._errorSummaryService.reloadErrors();
+    if (control.errors) {
+      control.markAllAsTouched();
+      this._errorSummaryService.focusToSummaryList = false;
+      this._errorSummaryService.reloadErrors();
+    }
   }
 
   public onBlur(event: FocusEvent): void {
