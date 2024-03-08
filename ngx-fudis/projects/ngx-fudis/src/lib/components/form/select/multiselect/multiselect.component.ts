@@ -2,8 +2,10 @@ import {
   AfterViewInit,
   Component,
   EventEmitter,
+  Host,
   Input,
   OnInit,
+  Optional,
   Output,
   Signal,
   WritableSignal,
@@ -17,6 +19,9 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
 import { joinInputValues, sortValues } from '../common/selectUtilities';
+import { FormComponent } from '../../form/form.component';
+import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'fudis-multiselect',
@@ -25,11 +30,13 @@ import { joinInputValues, sortValues } from '../common/selectUtilities';
 })
 export class MultiselectComponent extends SelectBaseDirective implements OnInit, AfterViewInit {
   constructor(
+    @Host() @Optional() private _parentForm: FormComponent,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
+    _errorSummaryService: FudisInternalErrorSummaryService,
   ) {
-    super(_focusService, _translationService, _idService);
+    super(_focusService, _translationService, _idService, _errorSummaryService);
 
     this.focusSelector = 'fudis-multiselect-option__focusable';
 
@@ -78,7 +85,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
   ngOnInit(): void {
     this._setParentId('multiselect');
 
-    this._controlValueSubscription = this.control.valueChanges.subscribe(() => {
+    this.control.valueChanges.pipe(takeUntil(this._destroyed)).subscribe(() => {
       if (!this.controlValueChangedInternally) {
         this._updateMultiselectionFromControlValue();
       }
@@ -95,6 +102,10 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
     }
     if (this.control.value) {
       this._updateMultiselectionFromControlValue();
+    }
+
+    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
+      this.reloadErrorSummary(this.control);
     }
   }
 

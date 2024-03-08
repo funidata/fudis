@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Host, Input, OnChanges, OnInit, Optional } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisInputSize } from '../../../types/forms';
@@ -11,6 +11,9 @@ import {
   hasRequiredValidator,
 } from '../../../utilities/form/getValidators';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
+import { FormComponent } from '../form/form.component';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'fudis-text-area',
@@ -22,11 +25,13 @@ export class TextAreaComponent
   implements OnInit, OnChanges, AfterViewInit
 {
   constructor(
+    @Host() @Optional() protected _parentForm: FormComponent,
+    _errorSummaryService: FudisInternalErrorSummaryService,
     private _focusService: FudisFocusService,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
   ) {
-    super(_translationService, _idService);
+    super(_translationService, _idService, _errorSummaryService);
   }
 
   /**
@@ -51,6 +56,15 @@ export class TextAreaComponent
 
   ngOnInit(): void {
     this._setInputId('text-area');
+
+    /**
+     * TODO: write test
+     */
+    this.control.valueChanges.pipe(takeUntil(this._destroyed)).subscribe((value) => {
+      if (typeof value === 'string' && value.trim() === '') {
+        this.control.setValue(null);
+      }
+    });
   }
 
   ngOnChanges(changes: FudisComponentChanges<TextAreaComponent>): void {
@@ -64,6 +78,10 @@ export class TextAreaComponent
   ngAfterViewInit(): void {
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
+    }
+
+    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
+      this.reloadErrorSummary(this.control);
     }
   }
 }

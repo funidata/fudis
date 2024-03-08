@@ -11,6 +11,7 @@ import { ValidatorErrorMessageComponent } from '../../../components/form/error-m
 import { LabelComponent } from '../../../components/form/label/label.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { IconComponent } from '../../../components/icon/icon.component';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
   selector: 'fudis-mock-text-input-component',
@@ -43,6 +44,7 @@ class MockTextInputComponent {
 describe('InputBaseDirective', () => {
   let idService: FudisIdService;
   let translationService: FudisTranslationService;
+  let errorSummaryService: FudisInternalErrorSummaryService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -60,12 +62,17 @@ describe('InputBaseDirective', () => {
 
     idService = TestBed.inject(FudisIdService);
     translationService = TestBed.inject(FudisTranslationService);
+    errorSummaryService = TestBed.inject(FudisInternalErrorSummaryService);
   });
 
   describe('Directive', () => {
     it('should create an instance', () => {
       TestBed.runInInjectionContext(() => {
-        const directive: InputBaseDirective = new InputBaseDirective(translationService, idService);
+        const directive: InputBaseDirective = new InputBaseDirective(
+          translationService,
+          idService,
+          errorSummaryService,
+        );
 
         expect(directive).toBeTruthy();
       });
@@ -73,7 +80,11 @@ describe('InputBaseDirective', () => {
 
     it('should emit blur event', () => {
       TestBed.runInInjectionContext(() => {
-        const directive: InputBaseDirective = new InputBaseDirective(translationService, idService);
+        const directive: InputBaseDirective = new InputBaseDirective(
+          translationService,
+          idService,
+          errorSummaryService,
+        );
         const event = new FocusEvent('blur');
 
         jest.spyOn(directive.handleBlur, 'emit');
@@ -85,7 +96,11 @@ describe('InputBaseDirective', () => {
 
     it('should call focusToInput', () => {
       TestBed.runInInjectionContext(() => {
-        const directive: InputBaseDirective = new InputBaseDirective(translationService, idService);
+        const directive: InputBaseDirective = new InputBaseDirective(
+          translationService,
+          idService,
+          errorSummaryService,
+        );
 
         jest.spyOn(directive, 'focusToInput').mockImplementation(() => {});
         directive.focusToInput();
