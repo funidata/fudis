@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, SimpleChange } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { IconComponent } from './icon.component';
 import {
@@ -123,7 +123,11 @@ describe('IconComponent', () => {
     fixture = TestBed.createComponent(IconComponent);
     component = fixture.componentInstance;
     component.icon = 'clock';
-    component.ngOnChanges();
+
+    component.ngOnChanges({
+      icon: new SimpleChange(null, component.icon, true),
+    });
+
     fixture.detectChanges();
   });
 
@@ -137,7 +141,10 @@ describe('IconComponent', () => {
 
   function iconColorCheck(color: FudisIconColor): void {
     component.color = color;
-    component.ngOnChanges();
+    component.ngOnChanges({
+      color: new SimpleChange(null, color, false),
+    });
+
     fixture.detectChanges();
     assertIconHasClasses([
       'fudis-icon',
@@ -149,7 +156,9 @@ describe('IconComponent', () => {
 
   function iconRotateCheck(rotate: FudisIconRotate): void {
     component.rotate = rotate;
-    component.ngOnChanges();
+    component.ngOnChanges({
+      rotate: new SimpleChange(null, rotate, false),
+    });
     fixture.detectChanges();
     assertIconHasClasses([
       'fudis-icon',
@@ -195,7 +204,6 @@ describe('IconComponent', () => {
     it('should be displayed according to given icon Input value', () => {
       fudisIconArray.forEach((iconName) => {
         component.icon = iconName;
-        component.ngOnChanges();
         fixture.detectChanges();
         const svgElem = fixture.debugElement.query(By.css('svg'));
         const useElem = svgElem.nativeElement.querySelector('use');

@@ -162,7 +162,7 @@ describe('InternalErrorSummaryService', () => {
 
     service.addErrorSummaryParent(errorSummaryParent);
 
-    expect(service['_errorSummaryParentList']()).toEqual([errorSummaryParent]);
+    expect(service.errorSummaryParentList()).toEqual([errorSummaryParent]);
   });
 
   it('should remove parent element from errorSummaryParentList array', () => {
@@ -176,7 +176,7 @@ describe('InternalErrorSummaryService', () => {
     service.addErrorSummaryParent(errorSummaryParent);
     service.removeErrorSummaryParent(errorSummaryParent);
 
-    expect(service['_errorSummaryParentList']()).toEqual([]);
+    expect(service.errorSummaryParentList()).toEqual([]);
   });
 
   it('should set and return update strategy', () => {

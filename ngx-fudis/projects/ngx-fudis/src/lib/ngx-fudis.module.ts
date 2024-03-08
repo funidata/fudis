@@ -58,6 +58,7 @@ import { ExpandableComponent } from './components/expandable/expandable.componen
 import { FieldSetBaseDirective } from './directives/form/fieldset-base/fieldset-base.directive';
 import { FieldSetComponent } from './components/form/fieldset/fieldset.component';
 import { FormComponent } from './components/form/form/form.component';
+import { FormSubmitDirective } from './directives/form/form-actions/form-actions.directive';
 import { GridComponent } from './components/grid/grid/grid.component';
 import { GridApiDirective } from './directives/grid/grid-api/grid-api.directive';
 import { GridDirective } from './directives/grid/grid/grid.directive';
@@ -107,6 +108,7 @@ import { MultiselectComponent } from './components/form/select/multiselect/multi
 import { MultiselectOptionComponent } from './components/form/select/multiselect/multiselect-option/multiselect-option.component';
 import { SelectAutocompleteComponent } from './components/form/select/common/autocomplete/autocomplete.component';
 import { SelectOptionBaseDirective } from './components/form/select/common/select-option-base/select-option-base.directive';
+
 import { UIRouterModule } from '@uirouter/angular';
 
 // TODO: sort things better
@@ -152,6 +154,7 @@ import { UIRouterModule } from '@uirouter/angular';
     FooterContentLeftDirective,
     FooterContentRightDirective,
     FormComponent,
+    FormSubmitDirective,
     GridComponent,
     GridApiDirective,
     GridDirective,
@@ -249,6 +252,7 @@ import { UIRouterModule } from '@uirouter/angular';
     FooterContentRightDirective,
     FieldSetComponent,
     FormComponent,
+    FormSubmitDirective,
     GridComponent,
     GridDirective,
     GridItemComponent,

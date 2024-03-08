@@ -5,7 +5,6 @@ import {
   ElementRef,
   Inject,
   Input,
-  OnChanges,
   OnDestroy,
   Signal,
   ViewChild,
@@ -28,19 +27,28 @@ import { FudisTranslationConfig } from '../../../types/miscellaneous';
   templateUrl: './error-summary.component.html',
   styleUrls: ['./error-summary.component.scss'],
 })
-export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestroy {
+export class ErrorSummaryComponent implements AfterViewInit, OnDestroy {
   constructor(
     @Inject(DOCUMENT) private _document: Document,
     private _errorSummaryService: FudisInternalErrorSummaryService,
     private readonly _changeDetectorRef: ChangeDetectorRef,
     private _translationService: FudisTranslationService,
   ) {
+    /**
+     * Update translations on language change
+     */
     effect(() => {
       this._translations = this._translationService.getTranslations();
 
       this._attentionText = this._translations().ICON.ATTENTION;
+    });
+    /**
+     * Fetch and update current visible errors when reloadErrors() is called
+     */
+    effect(() => {
+      const errors = this._errorSummaryService.getVisibleErrors();
 
-      this._fetchErrors();
+      this._updateSummaryContent(errors);
     });
   }
 
@@ -87,13 +95,6 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
   private _numberOfFocusTries: number = 0;
 
   /**
-   * Fetch current visible errors
-   */
-  private _fetchErrors(): void {
-    this._updateSummaryContent(this._errorSummaryService.getVisibleErrors());
-  }
-
-  /**
    * Sort errors the same order they appear in the DOM
    */
   private _sortErrorOrder(a: FudisFormErrorSummaryList, b: FudisFormErrorSummaryList): 0 | -1 | 1 {
@@ -120,7 +121,7 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
   }
 
   /**
-   * Update Error Summary contents with possible parent Fieldsets and Sections
+   * Update Error Summary content with possible parent Fieldsets, Sections and Expandabled (Sections)
    */
   private _updateSummaryContent(content: Signal<FudisFormErrorSummaryObject>): void {
     const newErrorList: FudisFormErrorSummaryList[] = [];
@@ -190,20 +191,14 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      this._errorSummaryService.reloadErrors();
-    }, 200);
-  }
+    this._errorSummaryParentInfo = {
+      formId: this.parentComponent.querySelector('.fudis-form')?.getAttribute('id'),
+      parentElement: this.parentComponent,
+    };
 
-  ngOnChanges(): void {
-    if (this.parentComponent) {
-      this._errorSummaryParentInfo = {
-        formId: this.parentComponent.querySelector('.fudis-form')?.getAttribute('id'),
-        parentElement: this.parentComponent,
-      };
+    this._errorSummaryService.addErrorSummaryParent(this._errorSummaryParentInfo);
 
-      this._errorSummaryService.addErrorSummaryParent(this._errorSummaryParentInfo);
-    }
+    this._errorSummaryService.reloadErrors();
   }
 
   ngOnDestroy(): void {

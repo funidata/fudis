@@ -66,6 +66,11 @@ export class GuidanceComponent implements OnInit {
   @Input() groupBlurredOut: boolean = true;
 
   /**
+   * Id of parent Form component
+   */
+  @Input() formId: string | null;
+
+  /**
    * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where "characters used" is "maxLengthText".
    */
   protected _maxLengthText: string;
