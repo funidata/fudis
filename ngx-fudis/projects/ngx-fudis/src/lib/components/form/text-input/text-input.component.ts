@@ -28,11 +28,11 @@ export class TextInputComponent
   constructor(
     @Host() @Optional() private _parentForm: FormComponent,
     private _focusService: FudisFocusService,
-    private _errorSummaryService: FudisInternalErrorSummaryService,
+    _errorSummaryService: FudisInternalErrorSummaryService,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
   ) {
-    super(_translationService, _idService);
+    super(_translationService, _idService, _errorSummaryService);
   }
 
   /**
@@ -93,8 +93,8 @@ export class TextInputComponent
       this.focusToInput();
     }
 
-    if (this._parentForm?.errorSummaryVisible) {
-      console.log('moi');
+    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
+      this.reloadErrorSummary(this.control);
     }
   }
 }

@@ -30,6 +30,7 @@ import {
   hasRequiredValidator,
 } from '../../../../utilities/form/getValidators';
 import { FudisValidatorFn } from '../../../../utilities/form/validators';
+import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
   selector: 'fudis-datepicker',
@@ -55,9 +56,10 @@ export class DatepickerComponent
     private _adapter: DateAdapter<Date>,
     private _datepickerIntl: MatDatepickerIntl,
     private _focusService: FudisFocusService,
+    _errorSummaryService: FudisInternalErrorSummaryService,
     _idService: FudisIdService,
   ) {
-    super(_datePickerConfigService, _idService);
+    super(_datePickerConfigService, _idService, _errorSummaryService);
 
     effect(() => {
       this._adapter.setLocale(updateLocale(this._translationService.getLanguage()));

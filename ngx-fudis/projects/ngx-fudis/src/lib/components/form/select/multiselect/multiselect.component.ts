@@ -30,12 +30,12 @@ import { FudisInternalErrorSummaryService } from '../../../../services/form/erro
 export class MultiselectComponent extends SelectBaseDirective implements OnInit, AfterViewInit {
   constructor(
     @Host() @Optional() private _parentForm: FormComponent,
-    private _errorSummaryService: FudisInternalErrorSummaryService,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
+    _errorSummaryService: FudisInternalErrorSummaryService,
   ) {
-    super(_focusService, _translationService, _idService);
+    super(_focusService, _translationService, _idService, _errorSummaryService);
 
     this.focusSelector = 'fudis-multiselect-option__focusable';
 
@@ -101,6 +101,10 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
     }
     if (this.control.value) {
       this._updateMultiselectionFromControlValue();
+    }
+
+    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
+      this.reloadErrorSummary(this.control);
     }
   }
 

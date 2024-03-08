@@ -24,13 +24,13 @@ export class TextAreaComponent
   implements OnInit, OnChanges, AfterViewInit
 {
   constructor(
-    @Host() @Optional() _parentForm: FormComponent,
-    private _errorSummaryService: FudisInternalErrorSummaryService,
+    @Host() @Optional() private _parentForm: FormComponent,
+    _errorSummaryService: FudisInternalErrorSummaryService,
     private _focusService: FudisFocusService,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
   ) {
-    super(_translationService, _idService);
+    super(_translationService, _idService, _errorSummaryService);
   }
 
   /**
@@ -68,6 +68,10 @@ export class TextAreaComponent
   ngAfterViewInit(): void {
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
+    }
+
+    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
+      this.reloadErrorSummary(this.control);
     }
   }
 }

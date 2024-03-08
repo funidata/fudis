@@ -33,12 +33,12 @@ export class SelectComponent
 {
   constructor(
     @Host() @Optional() private _parentForm: FormComponent,
-    private _errorSummaryService: FudisInternalErrorSummaryService,
+    _errorSummaryService: FudisInternalErrorSummaryService,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
   ) {
-    super(_focusService, _translationService, _idService);
+    super(_focusService, _translationService, _idService, _errorSummaryService);
 
     this.focusSelector = 'fudis-select-option__focusable';
 
@@ -89,6 +89,10 @@ export class SelectComponent
   ngAfterViewInit(): void {
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
+    }
+
+    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
+      this.reloadErrorSummary(this.control);
     }
   }
 

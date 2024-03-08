@@ -13,6 +13,8 @@ import { FudisTranslationService } from '../../../services/translation/translati
 import { FudisTranslationConfig } from '../../../types/miscellaneous';
 import { FudisIdComponent } from '../../../types/id';
 import { FudisIdService } from '../../../services/id/id.service';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
+import { FormControl } from '@angular/forms';
 
 @Directive({
   selector: '[fudisInputBase]',
@@ -21,6 +23,7 @@ export class InputBaseDirective extends TooltipApiDirective {
   constructor(
     protected _translationService: FudisTranslationService,
     protected _idService: FudisIdService,
+    protected _errorSummaryService: FudisInternalErrorSummaryService,
   ) {
     super();
 
@@ -50,7 +53,12 @@ export class InputBaseDirective extends TooltipApiDirective {
    */
   @Input() id: string;
 
-  // TODO: Disabling should be done straight from the form control. But because form control sets HTML disabled="true" and not only aria-disabled="true", this will be prevent user to focus on input even if it 'disabled'. As long this Angular 'feature' exists, we should 'manually' provide disabling through input, not through formControl.
+  /**
+   * If component is a child of Form component, Form's Error Summary is visible,this component's control has errors and when this component is loaded for the first time, it will by default call Error Summary to reload itself again and mark control as touched. This is because if component is lazy loaded to the DOM after the initial reload errors call was made, errors of this component might not appear on the list. To disable this feature, set this to false.
+   */
+  @Input() errorSummaryReloadOnInit: boolean = true;
+
+  // TODO: Disabling should be done straight from the form control. But because form control sets HTML disabled="true" and not only aria-disabled="true", this will be prevent user to focus on input even if it 'disabled'. As long this Angular 'feature' exists, we should 'manually' provide disabling through input as well.
 
   /**
    * Option for disabling the input.
@@ -98,6 +106,15 @@ export class InputBaseDirective extends TooltipApiDirective {
   protected _required: boolean = false;
 
   protected _focusTryCounter: number = 0;
+
+  /**
+   * TODO: write test
+   */
+  protected reloadErrorSummary(control: FormControl): void {
+    control.markAllAsTouched();
+    this._errorSummaryService.focusToSummaryList = false;
+    this._errorSummaryService.reloadErrors();
+  }
 
   public onBlur(event: FocusEvent): void {
     this.handleBlur.emit(event);
