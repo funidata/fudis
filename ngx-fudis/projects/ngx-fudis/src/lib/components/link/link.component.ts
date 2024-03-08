@@ -1,23 +1,6 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-  Signal,
-  ViewChild,
-  effect,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, effect } from '@angular/core';
+import { LinkDirective } from '../../directives/link/link.directive';
 import { FudisTranslationService } from '../../services/translation/translation.service';
-import {
-  FudisComponentChanges,
-  FudisLinkColor,
-  FudisTranslationConfig,
-} from '../../types/miscellaneous';
-import { TransitionOptions } from '@uirouter/core';
 
 @Component({
   selector: 'fudis-link',
@@ -26,18 +9,17 @@ import { TransitionOptions } from '@uirouter/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinkComponent extends LinkDirective implements AfterViewInit, OnChanges {
-  constructor(private _translationService: FudisTranslationService) {
+  constructor(
+    private _translationService: FudisTranslationService,
+    _linkElement: ElementRef,
+  ) {
+    super(_linkElement);
     effect(() => {
       this._translations = this._translationService.getTranslations();
 
       this._externalLinkAriaLabel = this._translations().LINK.EXTERNAL_LINK;
     });
   }
-
-  /**
-   * Template reference for input. Used in e. g. initialFocus
-   */
-  @ViewChild('linkRef') private _linkRef: ElementRef;
 
   /**
    * External link URL
@@ -49,6 +31,10 @@ export class LinkComponent extends LinkDirective implements AfterViewInit, OnCha
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() link: string | any[];
+  /**
+   * Title for the link, if not defined title will be the same as link URL
+   */
+  @Input() title: string;
 
   /**
    * Regular HTML href
@@ -61,49 +47,14 @@ export class LinkComponent extends LinkDirective implements AfterViewInit, OnCha
   @Input() fragmentId: string;
 
   /**
-   * uiSref state reference for UI Router
-   */
-  @Input() uiRouterSref: string;
-
-  /**
-   * uiParams object containing any uiRouterSref target state parameter values
-   */
-  @Input() uiRouterParams: { uiRouterSrefId: string };
-
-  /**
-   * UI Router transition object
-   */
-  @Input() uiRouterOptions: TransitionOptions;
-
-  /**
    * Title for the link, if not defined title will be the same as link URL
    */
   @Input() title: string;
 
-  /**
-   * Link size. By default link will inherit its parent's font-size. If link is not inside e.g. <fudis-heading> or <fudis-body-text> its size can be defined either 'md' (14px) or 'lg' (16px).
+  /*
+   * External link URL
    */
-  @Input() size: 'inherit' | 'md' | 'lg' = 'inherit';
-
-  /**
-   * Link color
-   */
-  @Input() color: FudisLinkColor = 'primary-dark';
-
-  /**
-   * Set browser focus to link on the first load.
-   */
-  @Input() initialFocus: boolean = false;
-
-  /**
-   * Focus event output
-   */
-  @Output() handleFocus = new EventEmitter<FocusEvent>();
-
-  /**
-   * Blur event output
-   */
-  @Output() handleBlur = new EventEmitter<FocusEvent>();
+  @Input() externalLink: string;
 
   /**
    * Aria-label for the external link
@@ -120,49 +71,9 @@ export class LinkComponent extends LinkDirective implements AfterViewInit, OnCha
    */
   protected _externalLinkTitleParsed: string[];
 
-  /**
-   * Helper counter for setting link focus
-   */
-  private _focusTryCounter: number = 0;
-
-  ngAfterViewInit(): void {
-    if (this.initialFocus) {
-      this._focusToLink();
-    }
-  }
-
   ngOnChanges(changes: FudisComponentChanges<LinkComponent>): void {
     if (changes.externalLink || changes.title) {
       this._parseExternalLinkTitle();
-    }
-  }
-
-  /**
-   * Handle Link Component focus event
-   */
-  protected _handleFocus(event: FocusEvent): void {
-    this.handleFocus.emit(event);
-  }
-
-  /**
-   * Handle Link Component blur event
-   */
-  protected _handleBlur(event: FocusEvent): void {
-    this.handleBlur.emit(event);
-  }
-
-  /**
-   * Set visible focus to the link
-   */
-  private _focusToLink(): void {
-    if (this._linkRef?.nativeElement) {
-      this._linkRef.nativeElement.focus();
-      this._focusTryCounter = 0;
-    } else if (this._focusTryCounter < 100) {
-      setTimeout(() => {
-        this._focusTryCounter += 1;
-        this._focusToLink();
-      }, 100);
     }
   }
 
