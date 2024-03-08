@@ -4,7 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, FormsModule } from '@angul
 import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentType } from '@angular/cdk/portal';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
-import readme from './readme.mdx';
+import docs from './dialog.docs.mdx';
 import { FudisValidators } from '../../utilities/form/validators';
 import { FudisErrorSummaryService } from '../../services/form/error-summary/error-summary.service';
 import { dialogExclude } from '../../utilities/storybook';
@@ -204,7 +204,7 @@ export default {
   ],
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
     controls: {
       exclude: dialogExclude,
