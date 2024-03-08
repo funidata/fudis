@@ -1,6 +1,7 @@
 <ng-container *ngIf="externalLink">
   <a
     #linkRef
+    fudisLink
     class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{
       color
     }} fudis-link__external"
@@ -28,42 +29,15 @@
     </ng-container>
   </a>
 </ng-container>
-<ng-container *ngIf="(link || fragmentId) && !externalLink">
+<ng-container *ngIf="!externalLink">
   <a
     #linkRef
-    class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{
-      color
-    }} fudis-link__router"
-    (focus)="_handleFocus($event)"
-    (blur)="_handleBlur($event)"
-    [routerLink]="link"
-    [fragment]="fragmentId"
-  >
-    {{ title ? title : link }}
-  </a>
-</ng-container>
-<ng-container *ngIf="href && !link && !externalLink">
-  <a
-    #linkRef
+    fudisLink
     class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{ color }} fudis-link__href"
     (focus)="_handleFocus($event)"
     (blur)="_handleBlur($event)"
     [href]="href"
   >
     {{ title ? title : href }}
-  </a>
-</ng-container>
-
-<ng-container *ngIf="uiRouterSref && !link && !externalLink">
-  <a
-    #linkRef
-    class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{ color }} fudis-link__href"
-    (focus)="_handleFocus($event)"
-    (blur)="_handleBlur($event)"
-    [uiSref]="uiRouterSref"
-    [uiParams]="uiRouterParams"
-    [uiOptions]="uiRouterOptions"
-  >
-    {{ title ? title : uiRouterSref }}
   </a>
 </ng-container>
