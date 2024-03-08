@@ -16,6 +16,7 @@ import {
   FudisFormErrorSummaryItem,
   FudisFormErrorSummaryRemoveItem,
 } from '../../../../types/forms';
+import { FudisComponentChanges } from 'dist/ngx-fudis/lib/types/miscellaneous';
 
 @Component({
   selector: 'fudis-validator-error-message',
@@ -113,6 +114,8 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
     if (this.message && typeof this.message !== 'string') {
       this._subscribtion = this.message.subscribe((value: string) => {
         this._currentMessage = value;
+        console.log('init 1');
+        console.log(this.focusId);
         this._createError();
       });
     }
@@ -135,16 +138,25 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
     }, 1000);
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: FudisComponentChanges<ValidatorErrorMessageComponent>): void {
     if (this._initFinished) {
-      /**
-       * Update string message and try to create a new error when changes happen
-       */
-      if (typeof this.message === 'string') {
-        this._currentMessage = this.message;
-      }
+      if (
+        changes.focusId ||
+        changes.message ||
+        changes.label ||
+        changes.type ||
+        changes.controlName ||
+        changes.formId
+      ) {
+        /**
+         * Update string message and try to create a new error when changes happen
+         */
+        if (typeof this.message === 'string') {
+          this._currentMessage = this.message;
+        }
 
-      this._createError();
+        this._createError();
+      }
     }
   }
 
@@ -176,6 +188,7 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
     if (errorCondition) {
       const newError: FudisFormErrorSummaryItem = {
         id: this.focusId,
+        formId: this.formId ? this.formId : null,
         error: this._currentMessage,
         label: this.label,
         type: this.type,

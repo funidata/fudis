@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, SimpleChange } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { MockComponents } from 'ng-mocks';
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -112,6 +112,7 @@ describe('ValidatorErrorMessageComponent', () => {
         id: 'test-id',
         error: 'Message for testing',
         label: 'Test label',
+        formId: null,
         type: 'required',
         controlName: undefined,
         language: 'en',
@@ -154,6 +155,7 @@ describe('ValidatorErrorMessageComponent', () => {
 
       const testError: FudisFormErrorSummaryItem = {
         id: 'test-id',
+        formId: null,
         error: 'First message from observable',
         label: 'Test label',
         type: 'required',
@@ -214,6 +216,7 @@ describe('ValidatorErrorMessageComponent', () => {
 
       const testError: FudisFormErrorSummaryItem = {
         id: 'test-id',
+        formId: null,
         error: 'First message from observable',
         label: 'Test label',
         type: 'required',
@@ -232,7 +235,9 @@ describe('ValidatorErrorMessageComponent', () => {
         ...testError,
         label: 'New better label',
       };
-      component.ngOnChanges();
+      component.ngOnChanges({
+        message: new SimpleChange(null, updatedError.label, false),
+      });
       fixture.detectChanges();
 
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(updatedError);

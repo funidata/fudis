@@ -1,9 +1,12 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Host, Input, OnChanges, OnInit, Optional } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FudisCheckboxGroupFormGroup, FudisInputSize } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 import { hasAtLeastOneRequiredOrMinValidator } from '../../../utilities/form/getValidators';
+import { FormComponent } from '../form/form.component';
+import { FudisIdService } from '../../../services/id/id.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 @Component({
   selector: 'fudis-checkbox-group',
@@ -11,6 +14,13 @@ import { hasAtLeastOneRequiredOrMinValidator } from '../../../utilities/form/get
   styleUrls: ['./checkbox-group.component.scss'],
 })
 export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
+  constructor(
+    @Host() @Optional() protected _parentForm: FormComponent,
+    _idService: FudisIdService,
+    _translationService: FudisTranslationService,
+  ) {
+    super(_idService, _translationService);
+  }
   /**
    * FormControl for Checkbox group.
    */

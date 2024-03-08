@@ -15,6 +15,7 @@ describe('InternalErrorSummaryService', () => {
   const firstError: FudisFormErrorSummaryItem = {
     id: 'first-error',
     label: 'Test label',
+    formId: null,
     error: 'There is something wrong',
     type: 'required',
     controlName: undefined,
@@ -30,6 +31,7 @@ describe('InternalErrorSummaryService', () => {
   const secondError: FudisFormErrorSummaryItem = {
     id: 'second-error',
     label: 'Test label',
+    formId: null,
     error: 'You need to fix also this',
     type: 'required',
     controlName: undefined,

@@ -45,6 +45,7 @@ export interface FudisSelectOption {
 
 export type FudisFormErrorSummaryItem = {
   id: string;
+  formId: string | null;
   label: string;
   error: string;
   type: string;

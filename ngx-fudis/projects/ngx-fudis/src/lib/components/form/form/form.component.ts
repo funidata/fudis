@@ -55,7 +55,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   @Input({ required: true }) errorSummaryHelpText: string;
 
   /**
-   * Form id. If not given, id will be generated with IdService
+   * Form id. If not given, id will be generated with IdService. Set only in component initialisation.
    */
   @Input() id: string;
 
