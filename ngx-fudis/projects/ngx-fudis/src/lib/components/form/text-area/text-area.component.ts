@@ -10,6 +10,7 @@ import {
   getMinLengthFromValidator,
   hasRequiredValidator,
 } from '../../../utilities/form/getValidators';
+import { FudisComponentChanges } from '../../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-text-area',
@@ -52,10 +53,12 @@ export class TextAreaComponent
     this._setInputId('text-area');
   }
 
-  ngOnChanges(): void {
-    this._required = hasRequiredValidator(this.control);
-    this._maxLength = getMaxLengthFromValidator(this.control);
-    this._minLength = getMinLengthFromValidator(this.control);
+  ngOnChanges(changes: FudisComponentChanges<TextAreaComponent>): void {
+    if (changes.control) {
+      this._required = hasRequiredValidator(this.control);
+      this._maxLength = getMaxLengthFromValidator(this.control);
+      this._minLength = getMinLengthFromValidator(this.control);
+    }
   }
 
   ngAfterViewInit(): void {

@@ -71,6 +71,13 @@ export class FudisInternalErrorSummaryService {
   }
 
   /**
+   * Getter for _errorSummaryParentList
+   */
+  get errorSummaryParentList(): Signal<FudisErrorSummaryParent[]> {
+    return this._errorSummaryParentList.asReadonly();
+  }
+
+  /**
    * Setter for _focusToSummaryList
    */
   set focusToSummaryList(value: boolean) {
@@ -82,13 +89,6 @@ export class FudisInternalErrorSummaryService {
    */
   public getFieldsetList(): FudisFormErrorSummarySection[] {
     return this._currentFieldsets;
-  }
-
-  /**
-   * Returns a readonly list of parent forms of the error summary list
-   */
-  public getFormsWithErrorSummary(): Signal<FudisErrorSummaryParent[]> {
-    return this._errorSummaryParentList.asReadonly();
   }
 
   /**
@@ -104,6 +104,8 @@ export class FudisInternalErrorSummaryService {
   public getVisibleErrors(): Signal<FudisFormErrorSummaryObject> {
     return this._signalCurrentErrorList.asReadonly();
   }
+
+  // TODO: Currently all errors are just one big blob and each added error do not have information about the Form it is actually related to. This is currently checked in Form, which loops through all the errors and checks if #error-id exists as a child. It would be better if added errors are categorised by their Form parent.
 
   /**
    * Adds a new error to the list of current errors

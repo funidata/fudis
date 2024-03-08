@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BehaviorSubject } from 'rxjs';
 import { ErrorSummaryComponent } from './error-summary.component';
-import readme from './readme.mdx';
+import docs from './error-summary-component.docs.mdx';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { FudisFormErrorSummaryUpdateStrategy, FudisRadioButtonOption } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
@@ -21,7 +21,7 @@ import { excludeAllRegex } from '../../../utilities/storybook';
     [align]="'center'"
     [marginTop]="'xl'"
     [titleLevel]="1"
-    [title]="'Example form for error summary'"
+    [title]="'Example Form with Error Summary'"
     [id]="id"
     [errorSummaryLinkType]="'href'"
     [errorSummaryHelpText]="
@@ -38,7 +38,12 @@ import { excludeAllRegex } from '../../../utilities/storybook';
         [variant]="'secondary'"
         (handleClick)="toggleLiveRemove()"
       />
-      <fudis-button [label]="'Submit'" (handleClick)="submitForm()" />
+      <fudis-button
+        fudisFormSubmit
+        [formValid]="formExample.valid"
+        [label]="'Submit'"
+        (handleClick)="submitForm()"
+      />
     </ng-template>
     <ng-template fudisContent type="form">
       <fudis-fieldset [title]="'Form information'">
@@ -116,7 +121,7 @@ class ErrorSummaryExampleComponent {
     ]),
     // Expose after Datepicker is exposed to public API
     // importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
-    courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
+    // courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
   });
 
   courseTypeOptions: FudisRadioButtonOption[] = [
@@ -126,13 +131,6 @@ class ErrorSummaryExampleComponent {
 
   submitForm(): void {
     this.formExample.markAllAsTouched();
-
-    if (this.formExample.invalid) {
-      this.errorSummaryVisible = true;
-      this._errorSummaryService.reloadErrors();
-    } else {
-      this.errorSummaryVisible = false;
-    }
   }
 
   toggleLiveRemove(): void {
@@ -163,7 +161,7 @@ export default {
   ],
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
   },
 } as Meta;

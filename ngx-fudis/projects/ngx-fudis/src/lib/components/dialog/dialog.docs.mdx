@@ -80,6 +80,14 @@ Directives written with `kebab-case` are meant to be used as HTML element.
 </fudis-dialog>
 ```
 
+### Passing Data to Component Inside Dialog
+
+`dialogService.open()` can be called with optional `config` parameter (in addition to component or tempalte reference) which is extension from `MatDialogConfig`. It can be used to alter some Dialog configs but most importantly config's property `data` can be used to inject properties for the component to be opened.
+
+```
+dialogService.open(MyComponentInsideDialog, { data: { someObject } });
+```
+
 ## Examples
 
 <Canvas of={DialogStories.Example}></Canvas>
@@ -115,7 +123,7 @@ class SimpleDialogComponent {
 
 ## Fudis Form inside Dialog
 
-When using fudis-form inside fudis-dialog wrap the form inside `fudis-dialog-content` and use it normally. Meaning, add all the necessary error-summary properties, such as `errorSummaryVisible`, `errorSummaryLinkType` and `errorSummaryHelpText`. Also add `title` and `titleLevel`, this title will be the title of the dialog and have initial focus when dialog is opened with keyboard.
+When using Form inside Dialog, wrap the Form inside `fudis-dialog-content` and use it normally. Meaning, add all the necessary Error Summary properties, such as `errorSummaryLinkType` and `errorSummaryHelpText`. Also add `title` and `titleLevel`, this title will be the title of the dialog and have initial focus when dialog is opened with keyboard.
 
 In `fudisContent` template add form components and in `fudisActions` template add action button(s). Unlike normal form, where buttons are positioned on top of the form, **these action buttons will be positioned at the bottom** after the form content, in order to follow dialog look and feel.
 
@@ -132,7 +140,6 @@ In `fudisContent` template add form components and in `fudisActions` template ad
 					<fudis-form>
 						[title]="'Dialog with fudis-form'"
 						[titleLevel]="2"
-						[errorSummaryVisible]="errorSummaryVisible"
 						[errorSummaryLinkType]="'href'"
 						[errorSummaryHelpText]="'You need to fill up the information.'">
 						<ng-template fudisContent [type]="'form'">
@@ -147,12 +154,12 @@ In `fudisContent` template add form components and in `fudisActions` template ad
 							</fudis-fieldset>
 						</ng-template>
 						<ng-template fudisActions type="form">
-							<fudis-button (handleClick)="closeDialogWithForm()" [label]="'Submit'"></fudis-button>
-							<fudis-button fudisDialogClose [label]="'Cancel'"></fudis-button>
+							<fudis-button fudisFormSubmit [formValid]="exampleDialogFormGroup.valid" (handleClick)="closeDialogWithForm()" [label]="'Submit'" />
+							<fudis-button fudisDialogClose [label]="'Cancel'" />
 						</ng-template>
 					</fudis-form>
 				</fudis-dialog-content>
-			</fudis-dialog-content>
+			</fudis-dialog>
 		</ng-template>
 	`,
 })
@@ -166,13 +173,10 @@ class FormDialogComponent {
 	closeDialogWithForm(): void {
 		this.exampleDialogFormGroup.markAllAsTouched();
 
-		if (this.exampleDialogFormGroup.invalid) {
-			this.errorSummaryVisible = true;
-			this._errorSummaryService.reloadErrors();
-		} else {
-			this.errorSummaryVisible = false;
+		if (this.exampleDialogFormGroup.valid) {
 			this.dialog.close();
 		}
+
 	}
 }
 ```

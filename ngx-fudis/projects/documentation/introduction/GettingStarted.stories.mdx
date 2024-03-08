@@ -23,27 +23,14 @@ Choose these options when prompted:
 ? Include the Angular animations module? Include and enable animations
 ```
 
-#### 2. Install Fudis:
+## 2. Install Fudis:
 
 ```
 ng add @funidata/ngx-fudis
 
 ```
 
-#### 3. Import Core Styles
-
-The core styles from Angular Material must be imported in your application for the components to work properly. The easiest way to do this is to have a `styles.scss` file in project root with the following content:
-
-```
-@use '@funidata/ngx-fudis' as fudis;
-@use '@angular/material' as mat;
-@include mat.core();
-
-```
-
-> Fudis does not include the Material core styles for you because **they should be included exactly once** in your application.
-
-#### 4. Check Fudis Import in `app.module.ts`
+## 3. Import Fudis in Applications's `app.module.ts`
 
 Check your application's `app.module.ts` file that Fudis is imported correctly.
 
@@ -60,9 +47,24 @@ import { NgxFudisModule } from '@funidata/ngx-fudis';
 })
 ```
 
-#### 5. Define Application's Root Styles
+## 4. Import Core Styles
 
-##### Set Primary Colors
+The core styles from Angular Material and Fudis must be imported to your application's styles for components to work properly.
+
+The recommended way is to add following lines your project's root SCSS style file, which is often named `styles.scss` or `index.scss` or similar:
+
+```
+@use '@funidata/ngx-fudis' as fudis;
+@use '@angular/material' as mat;
+@include mat.core();
+
+```
+
+## 5. Define Application's Root Styles
+
+Fudis uses CSS variables to define "theming" of your application. Setting following variables define your Application's primary colors and `rem` base value, which Fudis then refers to in component styling.
+
+### Set Primary Colors
 
 ```
 :root {
@@ -73,7 +75,7 @@ import { NgxFudisModule } from '@funidata/ngx-fudis';
 }
 ```
 
-##### Set Rem Base Value
+### Set Rem Base Value
 
 By default Fudis rem values follow 8px base values. When having default browser CSS font-size of 100%, 1 rem equals 2 \* 8px = 16px. To apply this to your application, add to the root CSS style file:
 

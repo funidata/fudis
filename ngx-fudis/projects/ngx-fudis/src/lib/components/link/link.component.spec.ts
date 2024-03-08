@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, SimpleChange } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { MockComponent } from 'ng-mocks';
@@ -75,7 +75,12 @@ describe('LinkComponent', () => {
     it('should render title if it is given', () => {
       component.externalLink = 'www.example.com';
       component.title = 'My link';
-      component.ngOnChanges();
+
+      component.ngOnChanges({
+        externalLink: new SimpleChange(null, component.externalLink, true),
+        title: new SimpleChange(null, component.title, true),
+      });
+
       fixture.detectChanges();
       const anchorElement = fixture.debugElement.query(By.css('.fudis-link__external'));
 

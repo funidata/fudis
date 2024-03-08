@@ -10,13 +10,12 @@ import {
   FudisFormErrorSummaryLink,
   // FudisDateRangeItem,
 } from '../../../types/forms';
-import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FormComponent } from './form.component';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
-import readme from './readme.mdx';
+import docs from './form.docs.mdx';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
 import { FudisHeadingLevel, FudisHeadingSize } from '../../../types/typography';
 import { formExclude } from '../../../utilities/storybook';
@@ -41,8 +40,12 @@ import { formExclude } from '../../../utilities/storybook';
       </ng-template> -->
       <ng-template fudisActions [type]="'form'">
         <fudis-button [label]="'Previous step'" [icon]="'back'" [variant]="'tertiary'" />
-
-        <fudis-button [label]="'Submit'" (handleClick)="submitForm()" />
+        <fudis-button
+          fudisFormSubmit
+          [formValid]="formExample.valid"
+          [label]="'Submit'"
+          (handleClick)="submitForm()"
+        />
       </ng-template>
       <ng-template fudisContent [type]="'form'">
         <!-- <fudis-section [title]="'Main section'">
@@ -60,7 +63,7 @@ import { formExclude } from '../../../utilities/storybook';
                 [id]="fieldsetId"
               >
                 <ng-template fudisNotifications [type]="'fieldset'">
-                  <fudis-notification *ngIf="firstLoad || errorSummaryVisible">
+                  <fudis-notification *ngIf="errorSummaryVisible">
                     This is notification for a fieldset. TODO: Add notifications to error summary if
                     needed.
                   </fudis-notification>
@@ -175,7 +178,6 @@ import { formExclude } from '../../../utilities/storybook';
 })
 class FormContentExampleComponent implements OnInit {
   constructor(
-    private _errorSummaryService: FudisErrorSummaryService,
     private _translationService: FudisTranslationService,
     private _focusService: FudisFocusService,
   ) {}
@@ -244,13 +246,13 @@ class FormContentExampleComponent implements OnInit {
       FudisValidators.email('Input must be an email address.'),
       FudisValidators.minLength(5, 'Email should be at least 5 characters.'),
     ]),
-    importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
-    courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
-    startDate: new FormControl<Date | null>(
-      null,
-      FudisValidators.required('Start date is required.'),
-    ),
-    endDate: new FormControl<Date | null>(null, FudisValidators.required('End date is required.')),
+    // importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
+    // courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
+    // startDate: new FormControl<Date | null>(
+    //   null,
+    //   FudisValidators.required('Start date is required.'),
+    // ),
+    // endDate: new FormControl<Date | null>(null, FudisValidators.required('End date is required.')),
   });
 
   languageOptions: FudisSelectOption[] = [
@@ -283,16 +285,6 @@ class FormContentExampleComponent implements OnInit {
 
   submitForm(): void {
     this.formExample.markAllAsTouched();
-    this.errorSummaryVisible = true;
-
-    this.firstLoad = false;
-
-    if (this.formExample.invalid) {
-      this._closed = false;
-      this._errorSummaryService.reloadErrors();
-    } else {
-      this.errorSummaryVisible = false;
-    }
   }
 
   handleClosedOutput(value: boolean): void {
@@ -314,7 +306,7 @@ export default {
   ],
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
   },
   argTypes: {

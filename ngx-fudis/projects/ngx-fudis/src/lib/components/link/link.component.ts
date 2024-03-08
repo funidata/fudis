@@ -12,7 +12,11 @@ import {
   effect,
 } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
-import { FudisLinkColor, FudisTranslationConfig } from '../../types/miscellaneous';
+import {
+  FudisComponentChanges,
+  FudisLinkColor,
+  FudisTranslationConfig,
+} from '../../types/miscellaneous';
 import { TransitionOptions } from '@uirouter/core';
 
 @Component({
@@ -127,8 +131,10 @@ export class LinkComponent implements AfterViewInit, OnChanges {
     }
   }
 
-  ngOnChanges(): void {
-    this._parseExternalLinkTitle();
+  ngOnChanges(changes: FudisComponentChanges<LinkComponent>): void {
+    if (changes.externalLink || changes.title) {
+      this._parseExternalLinkTitle();
+    }
   }
 
   /**
@@ -164,17 +170,21 @@ export class LinkComponent implements AfterViewInit, OnChanges {
    * For external links with a title. Used to split the last word of the title to be paired with the Icon, so that on line break, the icon sticks with the last word of the title.
    */
   private _parseExternalLinkTitle(): void {
-    if (this.title && this.externalLink) {
-      const toArray = this.title.split(' ');
+    if (this.externalLink) {
+      if (this.title) {
+        const toArray = this.title.split(' ');
 
-      if (toArray.length > 1) {
-        const lastWord: string = toArray[toArray.length - 1];
+        if (toArray.length > 1) {
+          const lastWord: string = toArray[toArray.length - 1];
 
-        const titleStart: string = toArray.slice(0, -1).join(' ');
+          const titleStart: string = toArray.slice(0, -1).join(' ');
 
-        this._externalLinkTitleParsed = [titleStart, lastWord];
+          this._externalLinkTitleParsed = [titleStart, lastWord];
+        } else {
+          this._externalLinkTitleParsed = toArray;
+        }
       } else {
-        this._externalLinkTitleParsed = toArray;
+        this._externalLinkTitleParsed = [this.externalLink];
       }
     }
   }

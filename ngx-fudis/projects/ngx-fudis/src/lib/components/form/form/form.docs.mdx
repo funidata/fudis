@@ -27,11 +27,13 @@ There are no restrictions on header content but it is advised to use Fudis Compo
 Header actions are buttons positioned on top of the form.
 Header actions are assigned through Fudis Actions Directive content projection with **fudisActions** selector.
 Fudis Actions Directive also needs `type` input which has to be set as '_form_'.
-There are no restrictions on header actions content but it is advised to use Fudis Buttons only.
+
+There are no restrictions on Header Actions content but it is advised to use Fudis Buttons only. Pairing Button with [Form Submit directive](/docs/directives-form-actions--documentation#form-submit-with-button) makes it easier to control visibility of Form's Error Summary.
 
 ```
 <ng-template fudisActions [type]="'form'">
-  <your-content-here />
+  <fudis-button fudisFormSubmit [formValid]="myForm.valid" [label]="'Submit form'" (handleClick)="myFormSubmit()" />
+  ...other content
 </ng-template>
 ```
 
@@ -68,7 +70,7 @@ See badge variants from [Badge Documentation](/docs/components-badge--documentat
 
 ### Error Summary
 
-Error Summary visibility can be modified with **mandatory** `errorSummaryVisible` boolean property.
+Error Summary visibility can be modified with `errorSummaryVisible` boolean property.
 
 Help text displayed on top of Error Summary should be added with **mandatory** `errorSummaryHelpText` property.
 
@@ -89,13 +91,12 @@ This is a simple example on how to use Form Component.
   [titleLevel]="2"
   [helpText]="'Here is some more information about this form'"
   [errorSummaryHelpText]="'There are errors in this form.'"
-  [errorSummaryVisible]="errorSummaryVisible"
 >
   <ng-template fudisHeader>
     <fudis-body-text>Additional form information</fudis-body-text>
   </ng-template>
   <ng-template fudisActions [type]="'form'">
-    <fudis-button [label]="'Submit'" (handleClick)="submitForm()" />
+    <fudis-button fudisFormSubmit [formValid]="formExample.valid" [label]="'Submit'" (handleClick)="submitForm()" />
   </ng-template>
   <ng-template fudisContent [type]="'form'">
     <fudis-text-input
@@ -114,10 +115,6 @@ This is a simple example on how to use Form Component.
 
 // TypeScript
 
-constructor(private _errorSummaryService: FudisErrorSummaryService){}
-
-errorSummaryVisible: boolean = false;
-
 formExample = new FormGroup({
   exampleTextInput: new FormControl(null, FudisValidators.minLength(5, 'Input requires at least 5 characters.')),
   exampleCheckboxGroup: new FormGroup(
@@ -131,13 +128,6 @@ formExample = new FormGroup({
 
 submitForm(): void {
   this.formExample.markAllAsTouched();
-
-  if (this.formExample.invalid) {
-    this.errorSummaryVisible = true;
-    this._errorSummaryService.reloadErrors();
-  } else {
-    this.errorSummaryVisible = false;
-  }
 }
 ```
 

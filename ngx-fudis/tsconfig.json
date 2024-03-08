@@ -24,7 +24,8 @@
     "lib": ["ES2021", "dom"],
     "strictPropertyInitialization": false,
     "useDefineForClassFields": false,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "jsx": "react"
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -12,6 +12,7 @@ import {
   getMinLengthFromValidator,
   hasRequiredValidator,
 } from '../../../utilities/form/getValidators';
+import { FudisComponentChanges } from '../../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-text-input',
@@ -69,12 +70,15 @@ export class TextInputComponent
     this._setInputId('text-input');
   }
 
-  ngOnChanges(): void {
-    this._required = hasRequiredValidator(this.control);
-    if (this.type === 'number') {
+  ngOnChanges(changes: FudisComponentChanges<TextInputComponent>): void {
+    if (changes.control) {
+      this._required = hasRequiredValidator(this.control);
+    }
+
+    if (changes.type?.currentValue === 'number') {
       this._minNumber = getMinFromValidator(this.control);
       this._maxNumber = getMaxFromValidator(this.control);
-    } else {
+    } else if (changes.type) {
       this._maxLength = getMaxLengthFromValidator(this.control);
       this._minLength = getMinLengthFromValidator(this.control);
     }

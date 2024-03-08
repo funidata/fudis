@@ -15,7 +15,7 @@ import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fi
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
 import { NotificationsDirective } from '../../../directives/content-projection/notifications/notifications.directive';
 import { FudisGridWidth, FudisGridAlign } from '../../../types/grid';
-import { FudisSpacing } from '../../../types/miscellaneous';
+import { FudisComponentChanges, FudisSpacing } from '../../../types/miscellaneous';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
@@ -113,11 +113,6 @@ export class FieldSetComponent
   @Input() titleSize: 'md' | 'sm' = 'md';
 
   /**
-   * Title property to send to Error Summary Service
-   */
-  protected _title: string;
-
-  /**
    * CSS classes for the native fieldset HTMLelement
    */
   protected _classes: string[];
@@ -134,10 +129,10 @@ export class FieldSetComponent
 
   ngOnInit(): void {
     this._setFieldsetId();
-
-    this._title = this.title;
-    this._addToErrorSummary();
+    this._addToErrorSummary(this.title);
     this._setClasses();
+
+    this._initFinished = true;
   }
 
   ngAfterViewInit(): void {
@@ -146,12 +141,16 @@ export class FieldSetComponent
     }
   }
 
-  ngOnChanges(): void {
-    if (this.title !== this._title && this.id) {
-      this._title = this.title;
-      this._addToErrorSummary();
+  ngOnChanges(changes: FudisComponentChanges<FieldSetComponent>): void {
+    if (this._initFinished) {
+      if (changes.title?.currentValue) {
+        this._addToErrorSummary(changes.title?.currentValue);
+      }
+
+      if (changes.inputSize) {
+        this._setClasses();
+      }
     }
-    this._setClasses();
   }
 
   ngOnDestroy(): void {
@@ -161,11 +160,11 @@ export class FieldSetComponent
   /**
    * Add Field Set title to Error Summary
    */
-  private _addToErrorSummary(): void {
+  private _addToErrorSummary(title: string): void {
     if (this.errorSummaryBreadcrumb) {
       this._fieldsetInfo = {
         id: this.id,
-        title: this._title,
+        title: title,
       };
 
       this._errorSummaryService.addFieldset(this._fieldsetInfo);

@@ -1,6 +1,6 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { ButtonComponent } from './button.component';
-import readme from './readme.mdx';
+import docs from './button.docs.mdx';
 import { buttonControlsExclude, buttonIconOnlyExclude } from '../../utilities/storybook';
 import { fudisIconArray } from '../../types/icons';
 
@@ -9,7 +9,7 @@ export default {
   component: ButtonComponent,
   parameters: {
     docs: {
-      page: readme,
+      page: docs,
     },
     controls: {
       exclude: buttonControlsExclude,

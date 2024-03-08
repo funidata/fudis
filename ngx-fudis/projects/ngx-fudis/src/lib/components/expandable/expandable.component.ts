@@ -7,6 +7,9 @@ import {
   ViewEncapsulation,
   OnDestroy,
   OnChanges,
+  effect,
+  Optional,
+  Host,
 } from '@angular/core';
 import { FudisComponentChanges, FudisExpandableType } from '../../types/miscellaneous';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
@@ -14,6 +17,7 @@ import { ActionsDirective } from '../../directives/content-projection/actions/ac
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisFormErrorSummarySection } from '../../types/forms';
+import { FormComponent } from '../form/form/form.component';
 
 @Component({
   selector: 'fudis-expandable',
@@ -23,11 +27,20 @@ import { FudisFormErrorSummarySection } from '../../types/forms';
 })
 export class ExpandableComponent implements OnDestroy, OnChanges {
   constructor(
+    @Host() @Optional() private _parentForm: FormComponent,
     private _idService: FudisIdService,
     private _errorSummaryService: FudisInternalErrorSummaryService,
   ) {
     this._id = this._idService.getNewId('expandable');
     this._headingId = `${this._id}-heading`;
+
+    // TODO: write test
+    effect(() => {
+      _errorSummaryService.getVisibleErrors()();
+      if (_parentForm?.errorSummaryVisible && this.openOnErrorSummaryReload && this.closed) {
+        this._setClosedStatus(false);
+      }
+    });
   }
 
   /**
@@ -69,6 +82,12 @@ export class ExpandableComponent implements OnDestroy, OnChanges {
    * Display Expandable title in the breadcrumb of Error Summary
    */
   @Input() errorSummaryBreadcrumb: boolean = false;
+
+  // TODO: write test
+  /**
+   * If Expandable is used inside Form component, by default it will open itself when ReloadErrors is called in Error Summary Service. To disable this behavior, set this to false.
+   */
+  @Input() openOnErrorSummaryReload: boolean = true;
 
   /**
    * Expandable is initially closed by default but can be controlled by [closed] input property

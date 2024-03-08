@@ -2,7 +2,9 @@ module.exports = {
   stories: [
     "../projects/ngx-fudis/src/lib/**/*.stories.ts",
     "../projects/ngx-fudis/src/lib/**/*.stories.mdx",
+    "../projects/ngx-fudis/src/lib/**/*.docs.mdx",
     "../projects/documentation/**/*.stories.mdx",
+    "../projects/documentation/**/*.docs.mdx",
   ],
   addons: [
     "@storybook/addon-links",

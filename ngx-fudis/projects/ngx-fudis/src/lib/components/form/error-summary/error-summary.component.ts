@@ -5,7 +5,6 @@ import {
   ElementRef,
   Inject,
   Input,
-  OnChanges,
   OnDestroy,
   Signal,
   ViewChild,
@@ -28,19 +27,28 @@ import { FudisTranslationConfig } from '../../../types/miscellaneous';
   templateUrl: './error-summary.component.html',
   styleUrls: ['./error-summary.component.scss'],
 })
-export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestroy {
+export class ErrorSummaryComponent implements AfterViewInit, OnDestroy {
   constructor(
     @Inject(DOCUMENT) private _document: Document,
     private _errorSummaryService: FudisInternalErrorSummaryService,
     private readonly _changeDetectorRef: ChangeDetectorRef,
     private _translationService: FudisTranslationService,
   ) {
+    /**
+     * Update translations on language change
+     */
     effect(() => {
       this._translations = this._translationService.getTranslations();
 
       this._attentionText = this._translations().ICON.ATTENTION;
+    });
+    /**
+     * Fetch and update current visible errors when reloadErrors() is called
+     */
+    effect(() => {
+      const errors = this._errorSummaryService.getVisibleErrors();
 
-      this._fetchErrors();
+      this._updateSummaryContent(errors);
     });
   }
 
@@ -87,13 +95,6 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
   private _numberOfFocusTries: number = 0;
 
   /**
-   * Fetch current visible errors
-   */
-  private _fetchErrors(): void {
-    this._updateSummaryContent(this._errorSummaryService.getVisibleErrors());
-  }
-
-  /**
    * Sort errors the same order they appear in the DOM
    */
   private _sortErrorOrder(a: FudisFormErrorSummaryList, b: FudisFormErrorSummaryList): 0 | -1 | 1 {
@@ -120,7 +121,7 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
   }
 
   /**
-   * Update Error Summary contents with possible parent Fieldsets and Sections
+   * Update Error Summary content with possible parent Fieldsets, Sections and Expandabled (Sections)
    */
   private _updateSummaryContent(content: Signal<FudisFormErrorSummaryObject>): void {
     const newErrorList: FudisFormErrorSummaryList[] = [];
@@ -190,20 +191,20 @@ export class ErrorSummaryComponent implements AfterViewInit, OnChanges, OnDestro
   }
 
   ngAfterViewInit(): void {
+    this._errorSummaryParentInfo = {
+      formId: this.parentComponent.querySelector('.fudis-form')?.getAttribute('id'),
+      parentElement: this.parentComponent,
+    };
+
+    this._errorSummaryService.addErrorSummaryParent(this._errorSummaryParentInfo);
+
+    // TODO: this is not optimal solution to make sure that all DOM fieldsets are loaded, e.g. with lazy loaded Expandable content
+    // --> add to all form components (text-input etc) "command" that if they are childs of Form, which has ErrorSummaryVisible true
+    // --> when loaded first time to DOM, ask ErrorSummary to reload again
+    // Timothy McTextyTextInput: "It seems that I was loaded first time and my parent Form's error summary is true, maybe it should so my erros as well... let's ask error summary to do that!"
     setTimeout(() => {
       this._errorSummaryService.reloadErrors();
     }, 200);
-  }
-
-  ngOnChanges(): void {
-    if (this.parentComponent) {
-      this._errorSummaryParentInfo = {
-        formId: this.parentComponent.querySelector('.fudis-form')?.getAttribute('id'),
-        parentElement: this.parentComponent,
-      };
-
-      this._errorSummaryService.addErrorSummaryParent(this._errorSummaryParentInfo);
-    }
   }
 
   ngOnDestroy(): void {
