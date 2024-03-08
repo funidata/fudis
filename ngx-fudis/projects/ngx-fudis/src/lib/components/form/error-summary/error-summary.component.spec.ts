@@ -31,6 +31,7 @@ import { SpacingDirective } from '../../../directives/spacing/spacing.directive'
 import { getTrimmedTextContent } from '../../../utilities/tests/utilities';
 import { SectionComponent } from '../../section/section.component';
 import { ExpandableComponent } from '../../expandable/expandable.component';
+import { LinkDirective } from '../../../directives/link/link.directive';
 
 @Component({
   selector: 'fudis-mock-form-component',
@@ -134,6 +135,7 @@ describe('ErrorSummaryComponent', () => {
         IconComponent,
         LabelComponent,
         LinkComponent,
+        LinkDirective,
         MockFormComponent,
         NotificationComponent,
         SectionComponent,

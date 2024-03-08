@@ -73,6 +73,8 @@ import { FudisIdService } from './services/id/id.service';
 import { InputBaseDirective } from './directives/form/input-base/input-base.directive';
 import { InputWithLanguageOptionsComponent } from './components/form/input-with-language-options/input-with-language-options.component';
 import { LabelComponent } from './components/form/label/label.component';
+import { LinkApiDirective } from './directives/link/link-api.directive';
+import { LinkDirective } from './directives/link/link.directive';
 import { LinkComponent } from './components/link/link.component';
 import { NotificationComponent } from './components/notification/notification.component';
 
@@ -108,8 +110,6 @@ import { MultiselectComponent } from './components/form/select/multiselect/multi
 import { MultiselectOptionComponent } from './components/form/select/multiselect/multiselect-option/multiselect-option.component';
 import { SelectAutocompleteComponent } from './components/form/select/common/autocomplete/autocomplete.component';
 import { SelectOptionBaseDirective } from './components/form/select/common/select-option-base/select-option-base.directive';
-
-import { UIRouterModule } from '@uirouter/angular';
 
 // TODO: sort things better
 
@@ -169,7 +169,9 @@ import { UIRouterModule } from '@uirouter/angular';
     LabelComponent,
     LanguageBadgeComponent,
     LanguageBadgeGroupComponent,
+    LinkApiDirective,
     LinkComponent,
+    LinkDirective,
     MultiselectComponent,
     MultiselectChipListComponent,
     MultiselectOptionComponent,
@@ -211,7 +213,6 @@ import { UIRouterModule } from '@uirouter/angular';
     ReactiveFormsModule,
     RouterModule,
     ScrollingModule,
-    UIRouterModule,
   ],
 
   /*
@@ -262,6 +263,7 @@ import { UIRouterModule } from '@uirouter/angular';
     IconComponent,
     // InputWithLanguageOptionsComponent,
     LinkComponent,
+    LinkDirective,
     MultiselectComponent,
     MultiselectOptionComponent,
     NotificationComponent,

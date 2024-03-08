@@ -1,6 +1,5 @@
 <ng-container *ngIf="externalLink">
   <a
-    #linkRef
     fudisLink
     class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{
       color
@@ -9,6 +8,7 @@
     (blur)="_handleBlur($event)"
     attr.aria-label="{{ title ? title : externalLink }}, {{ _externalLinkAriaLabel }}"
     [href]="externalLink"
+    [initialFocus]="initialFocus"
     target="_blank"
     rel="noopener noreferrer"
   >
@@ -29,14 +29,29 @@
     </ng-container>
   </a>
 </ng-container>
-<ng-container *ngIf="!externalLink">
+<ng-container *ngIf="(link || fragmentId) && !externalLink">
   <a
-    #linkRef
+    fudisLink
+    class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{
+      color
+    }} fudis-link__router"
+    (focus)="_handleFocus($event)"
+    (blur)="_handleBlur($event)"
+    [routerLink]="link"
+    [fragment]="fragmentId"
+    [initialFocus]="initialFocus"
+  >
+    {{ title ? title : link }}
+  </a>
+</ng-container>
+<ng-container *ngIf="href && !link && !externalLink">
+  <a
     fudisLink
     class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{ color }} fudis-link__href"
     (focus)="_handleFocus($event)"
     (blur)="_handleBlur($event)"
     [href]="href"
+    [initialFocus]="initialFocus"
   >
     {{ title ? title : href }}
   </a>

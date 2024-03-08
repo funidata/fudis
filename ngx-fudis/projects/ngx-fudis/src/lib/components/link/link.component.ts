@@ -1,6 +1,14 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, effect } from '@angular/core';
-import { LinkDirective } from '../../directives/link/link.directive';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  Signal,
+  effect,
+} from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
+import { FudisComponentChanges, FudisTranslationConfig } from '../../types/miscellaneous';
+import { LinkApiDirective } from '../../directives/link/link-api.directive';
 
 @Component({
   selector: 'fudis-link',
@@ -8,12 +16,9 @@ import { FudisTranslationService } from '../../services/translation/translation.
   styleUrls: ['./link.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LinkComponent extends LinkDirective implements AfterViewInit, OnChanges {
-  constructor(
-    private _translationService: FudisTranslationService,
-    _linkElement: ElementRef,
-  ) {
-    super(_linkElement);
+export class LinkComponent extends LinkApiDirective implements OnChanges {
+  constructor(private _translationService: FudisTranslationService) {
+    super();
     effect(() => {
       this._translations = this._translationService.getTranslations();
 
@@ -45,16 +50,6 @@ export class LinkComponent extends LinkDirective implements AfterViewInit, OnCha
    * Fragment ID for Angular Router
    */
   @Input() fragmentId: string;
-
-  /**
-   * Title for the link, if not defined title will be the same as link URL
-   */
-  @Input() title: string;
-
-  /*
-   * External link URL
-   */
-  @Input() externalLink: string;
 
   /**
    * Aria-label for the external link
