@@ -7,6 +7,7 @@ import {
   effect,
   ViewChild,
   ElementRef,
+  OnDestroy,
 } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -15,11 +16,12 @@ import { FudisIdComponent } from '../../../types/id';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FormControl } from '@angular/forms';
+import { Subject } from 'rxjs';
 
 @Directive({
   selector: '[fudisInputBase]',
 })
-export class InputBaseDirective extends TooltipApiDirective {
+export class InputBaseDirective extends TooltipApiDirective implements OnDestroy {
   constructor(
     protected _translationService: FudisTranslationService,
     protected _idService: FudisIdService,
@@ -107,6 +109,8 @@ export class InputBaseDirective extends TooltipApiDirective {
 
   protected _focusTryCounter: number = 0;
 
+  protected _destroyed = new Subject<void>();
+
   /**
    * TODO: write test
    */
@@ -138,5 +142,9 @@ export class InputBaseDirective extends TooltipApiDirective {
     } else {
       this.id = this._idService.getNewId(componentType);
     }
+  }
+
+  ngOnDestroy(): void {
+    this._destroyed.next();
   }
 }

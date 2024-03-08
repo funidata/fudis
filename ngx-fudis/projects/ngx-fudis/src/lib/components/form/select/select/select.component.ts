@@ -20,6 +20,7 @@ import { SelectBaseDirective } from '../common/select-base/select-base.directive
 import { FudisSelectOption } from '../../../../types/forms';
 import { FormComponent } from '../../form/form.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'fudis-select',
@@ -71,7 +72,7 @@ export class SelectComponent
   ngOnInit(): void {
     this._setParentId('select');
 
-    this._controlValueSubscription = this.control.valueChanges.subscribe(() => {
+    this.control.valueChanges.pipe(takeUntil(this._destroyed)).subscribe(() => {
       if (!this.controlValueChangedInternally) {
         this._updateSelectionFromControlValue();
       }

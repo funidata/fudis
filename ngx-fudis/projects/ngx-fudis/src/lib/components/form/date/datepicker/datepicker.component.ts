@@ -148,7 +148,7 @@ export class DatepickerComponent
     }
   }
 
-  ngOnDestroy(): void {
+  override ngOnDestroy(): void {
     this.control.removeValidators(this._datepickerParseValidator);
     this.control.updateValueAndValidity();
   }

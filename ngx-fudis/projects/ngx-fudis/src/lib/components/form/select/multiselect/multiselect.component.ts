@@ -21,6 +21,7 @@ import { FudisSelectOption } from '../../../../types/forms';
 import { joinInputValues, sortValues } from '../common/selectUtilities';
 import { FormComponent } from '../../form/form.component';
 import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'fudis-multiselect',
@@ -84,7 +85,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
   ngOnInit(): void {
     this._setParentId('multiselect');
 
-    this._controlValueSubscription = this.control.valueChanges.subscribe(() => {
+    this.control.valueChanges.pipe(takeUntil(this._destroyed)).subscribe(() => {
       if (!this.controlValueChangedInternally) {
         this._updateMultiselectionFromControlValue();
       }

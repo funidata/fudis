@@ -13,6 +13,7 @@ import {
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { FormComponent } from '../form/form.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'fudis-text-area',
@@ -55,6 +56,15 @@ export class TextAreaComponent
 
   ngOnInit(): void {
     this._setInputId('text-area');
+
+    /**
+     * TODO: write test
+     */
+    this.control.valueChanges.pipe(takeUntil(this._destroyed)).subscribe((value) => {
+      if (typeof value === 'string' && value.trim() === '') {
+        this.control.setValue(null);
+      }
+    });
   }
 
   ngOnChanges(changes: FudisComponentChanges<TextAreaComponent>): void {

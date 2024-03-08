@@ -14,7 +14,6 @@ import {
   signal,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { hasRequiredValidator } from '../../../../../utilities/form/getValidators';
@@ -172,19 +171,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
    */
   protected _preventClick: boolean = false;
 
-  /**
-   * Subscription to listen to control's value changes coming from outside Fudis components
-   */
-  protected _controlValueSubscription: Subscription;
-
   ngOnChanges(): void {
     this._required = hasRequiredValidator(this.control);
-  }
-
-  ngOnDestroy(): void {
-    if (this._controlValueSubscription) {
-      this._controlValueSubscription.unsubscribe();
-    }
   }
 
   /**
