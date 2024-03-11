@@ -122,7 +122,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   }
 
   ngOnDestroy(): void {
-    this._errorSummaryService.removeFormFromCollection(this.id);
+    this._errorSummaryService.removeFormId(this.id);
   }
 
   /**

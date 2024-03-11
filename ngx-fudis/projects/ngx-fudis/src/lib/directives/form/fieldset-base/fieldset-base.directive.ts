@@ -66,7 +66,7 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
     }
   }
 
-  // TODO: write tests and move to inputbase
+  // TODO: write tests
   protected reloadErrorSummary(group: FormGroup, formId: string): void {
     if (group.errors) {
       group.markAllAsTouched();

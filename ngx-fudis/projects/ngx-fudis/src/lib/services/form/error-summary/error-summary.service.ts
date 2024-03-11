@@ -1,7 +1,10 @@
 import { Injectable, Signal } from '@angular/core';
 import { FudisInternalErrorSummaryService } from './internal-error-summary.service';
 
-import { FudisErrorSummaryParent, FudisFormErrorSummaryUpdateStrategy } from '../../../types/forms';
+import {
+  FudisFormErrorSummaryFormsAndErrors,
+  FudisFormErrorSummaryUpdateStrategy,
+} from '../../../types/forms';
 
 /**
  * Error Summary Service public methods and tools
@@ -27,7 +30,7 @@ export class FudisErrorSummaryService {
   /**
    * Reloads all Forms with Error Summary
    */
-  public reloadErrors(): void {
+  public reloadAllErrors(): void {
     this._errorSummaryService.focusToFormOnReload = null;
     this._errorSummaryService.reloadErrors();
   }
@@ -42,9 +45,9 @@ export class FudisErrorSummaryService {
   }
 
   /**
-   * Returns a readonly list of parent forms of the error summary list
+   * Returns a readonly signal of all errors sent to Error Summary
    */
-  public getFormsWithErrorSummary(): Signal<FudisErrorSummaryParent[]> {
-    return this._errorSummaryService.errorSummaryParentList;
+  public getErrorsOnReload(): Signal<FudisFormErrorSummaryFormsAndErrors> {
+    return this._errorSummaryService.getErrorsOnReload();
   }
 }

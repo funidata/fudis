@@ -47,7 +47,6 @@ export class ErrorSummaryComponent implements AfterViewInit {
       const errors = _errorSummaryService.getErrorsOnReload()()[this.formId];
 
       if (this.formId) {
-        this._currentErrors = errors;
         this._updateSummaryContent(errors);
       }
     });
@@ -94,11 +93,6 @@ export class ErrorSummaryComponent implements AfterViewInit {
    * Focus counter to hit the correct focus field
    */
   private _numberOfFocusTries: number = 0;
-
-  /**
-   * Currently fetched errors from Error Summary Service
-   */
-  private _currentErrors: FudisFormErrorSummaryObject;
 
   /**
    * Sort errors the same order they appear in the DOM

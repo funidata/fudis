@@ -30,6 +30,7 @@ import { LinkComponent } from '../../link/link.component';
 @Component({
   selector: 'fudis-mock-form-component',
   template: `<fudis-form
+    [id]="'my-own-id'"
     [titleLevel]="1"
     [titleSize]="'md'"
     [title]="'Example Form'"
@@ -70,7 +71,7 @@ class MockFormComponent {
   public reloadErrorsMock(): void {
     this.formGroup.markAllAsTouched();
     this.errorSummaryVisible = true;
-    this.errorSummaryService.reloadErrors();
+    this.errorSummaryService.reloadFormErrors('my-own-id');
   }
 }
 
@@ -125,11 +126,11 @@ describe('FormComponent', () => {
     });
 
     it('should have id constructed through Fudis id service', () => {
-      expect(formElement.id).toEqual('fudis-form-1');
+      expect(formElement.id).toEqual('my-own-id');
     });
 
     it('should have aria-describedby constructed with form id', () => {
-      expect(formElement.getAttribute('aria-describedby')).toEqual('fudis-form-1_header');
+      expect(formElement.getAttribute('aria-describedby')).toEqual('my-own-id_header');
     });
 
     it('should have default CSS class for fudis-form', () => {

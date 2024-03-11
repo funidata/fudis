@@ -3,7 +3,6 @@ import {
   FudisFormErrorSummaryObject,
   FudisFormErrorSummaryItem,
   FudisFormErrorSummarySection,
-  FudisErrorSummaryParent,
   FudisFormErrorSummaryRemoveItem,
   FudisFormErrorSummaryUpdateStrategy,
   FudisFormErrorSummaryFormsAndErrors,
@@ -15,22 +14,17 @@ import {
 @Injectable({ providedIn: 'root' })
 export class FudisInternalErrorSummaryService {
   constructor() {}
+
   /**
    * Current errors
    */
-
-  private _newCurrentErrorList: FudisFormErrorSummaryFormsAndErrors = { unknownFormId: {} };
+  private _allFormErrors: FudisFormErrorSummaryFormsAndErrors = { unknownFormId: {} };
 
   /**
    * Collection of errors as a Signal categorised by parent Form id
    */
 
-  private _signalFormErrors = signal<FudisFormErrorSummaryFormsAndErrors>({ unknownFormId: {} });
-
-  /**
-   * List of parent forms of the error summary list
-   */
-  private _errorSummaryParentList = signal<FudisErrorSummaryParent[]>([]);
+  private _signalAllFormErrors = signal<FudisFormErrorSummaryFormsAndErrors>({ unknownFormId: {} });
 
   /**
    * Current fieldsets
@@ -74,13 +68,6 @@ export class FudisInternalErrorSummaryService {
   }
 
   /**
-   * Getter for _errorSummaryParentList
-   */
-  get errorSummaryParentList(): Signal<FudisErrorSummaryParent[]> {
-    return this._errorSummaryParentList.asReadonly();
-  }
-
-  /**
    * Setter for _focusToFormOnReload
    */
   set focusToFormOnReload(value: string | null) {
@@ -105,27 +92,27 @@ export class FudisInternalErrorSummaryService {
    * Returns a signal of readonly list of all errors
    */
   public getErrorsOnReload(): Signal<FudisFormErrorSummaryFormsAndErrors> {
-    return this._signalFormErrors;
+    return this._signalAllFormErrors.asReadonly();
   }
 
   public getErrors(): FudisFormErrorSummaryFormsAndErrors {
-    return this._newCurrentErrorList;
+    return this._allFormErrors;
   }
 
   /**
    * Returns a readonly list of visible errors
    */
   public getFormErrorsById(formId: string): FudisFormErrorSummaryObject {
-    return this._newCurrentErrorList[formId];
+    return this._allFormErrors[formId];
   }
 
   public addNewFormId(formId: string): void {
-    this._newCurrentErrorList[formId] = {};
+    this._allFormErrors[formId] = {};
   }
 
-  public removeFormFromCollection(formId: string): void {
-    if (this._newCurrentErrorList[formId]) {
-      delete this._newCurrentErrorList[formId];
+  public removeFormId(formId: string): void {
+    if (this._allFormErrors[formId]) {
+      delete this._allFormErrors[formId];
     }
   }
 
@@ -137,11 +124,11 @@ export class FudisInternalErrorSummaryService {
    * @param newError Form error summary item
    */
   public addNewError(newError: FudisFormErrorSummaryItem): void {
-    if (!this._newCurrentErrorList[newError.formId]) {
+    if (!this._allFormErrors[newError.formId]) {
       this.addNewFormId(newError.formId);
     }
 
-    let currentErrors = this._newCurrentErrorList;
+    let currentErrors = this._allFormErrors;
 
     const langUpdated =
       currentErrors?.[newError.formId]?.[newError.id]?.language !== newError.language;
@@ -151,7 +138,7 @@ export class FudisInternalErrorSummaryService {
       [newError.formId]: this.getUpdatedErrorsByFormId(newError, currentErrors[newError.formId]),
     };
 
-    this._newCurrentErrorList = currentErrors;
+    this._allFormErrors = currentErrors;
 
     if (langUpdated || this._updateStrategy === 'all') {
       this._focusToFormOnReload = null;
@@ -195,7 +182,7 @@ export class FudisInternalErrorSummaryService {
    * @param error Error object
    */
   public removeError(error: FudisFormErrorSummaryRemoveItem, formId: string): void {
-    const currentErrorsOfForm = this._newCurrentErrorList[formId];
+    const currentErrorsOfForm = this._allFormErrors[formId];
 
     const errorId = error.controlName ? `${error.id}_${error.controlName}` : error.id;
 
@@ -208,7 +195,7 @@ export class FudisInternalErrorSummaryService {
         delete currentErrorsOfForm[errorId];
       }
 
-      this._newCurrentErrorList[formId] = currentErrorsOfForm;
+      this._allFormErrors[formId] = currentErrorsOfForm;
 
       if (this._updateStrategy === 'all' || this._updateStrategy === 'onRemove') {
         this._focusToFormOnReload = null;
@@ -278,7 +265,7 @@ export class FudisInternalErrorSummaryService {
    * Updates the visible and dynamic lists of all form and errors with the current error list
    */
   public reloadErrors(): void {
-    Object.keys(this._newCurrentErrorList).forEach((key) => {
+    Object.keys(this._allFormErrors).forEach((key) => {
       this.reloadErrorsByFormId(key);
     });
   }
@@ -288,9 +275,9 @@ export class FudisInternalErrorSummaryService {
       this._focusToFormOnReload = formId;
     }
 
-    this._signalFormErrors.set({
-      ...this._signalFormErrors(),
-      [formId]: this._newCurrentErrorList[formId],
+    this._signalAllFormErrors.set({
+      ...this._signalAllFormErrors(),
+      [formId]: this._allFormErrors[formId],
     });
   }
 
