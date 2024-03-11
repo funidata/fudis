@@ -122,12 +122,13 @@ export class FudisInternalErrorSummaryService {
     return this._signalErrorsByFormId[formId].asReadonly();
   }
 
-  public addNewFormToCollection(formId: string): void {
+  private addNewFormToCollection(formId: string): void {
+    console.log('adding: ' + formId);
     this._newCurrentErrorList[formId] = {};
     this._signalErrorsByFormId[formId] = signal<FudisFormErrorSummaryObject>({});
   }
 
-  public removeFormFromCollection(formId: string): void {
+  private removeFormFromCollection(formId: string): void {
     if (this._newCurrentErrorList[formId]) {
       delete this._newCurrentErrorList[formId];
     }
@@ -144,32 +145,33 @@ export class FudisInternalErrorSummaryService {
    * @param newError Form error summary item
    */
   public addNewError(newError: FudisFormErrorSummaryItem): void {
+    if (!this._newCurrentErrorList[newError.formId]) {
+      this.addNewFormToCollection(newError.formId);
+    }
+
     let currentErrors = this._newCurrentErrorList;
 
-    if (!currentErrors[newError.formId]) {
-      currentErrors = { ...currentErrors, [newError.formId]: {} };
-    }
     currentErrors = {
       ...currentErrors,
-      [newError.formId]: this.getUpdatedErrorsByFormId(
-        newError,
-        currentErrors[newError.formId],
-        newError.formId,
-      ),
+      [newError.formId]: this.getUpdatedErrorsByFormId(newError, currentErrors[newError.formId]),
     };
 
+    const langUpdated =
+      currentErrors?.[newError.formId]?.[newError.id]?.language !== newError.language;
+
     this._newCurrentErrorList = currentErrors;
+
+    if (langUpdated || this._updateStrategy === 'all') {
+      this._focusToSummaryList = false;
+      this.reloadErrorsByFormId(newError.formId);
+    }
   }
 
   private getUpdatedErrorsByFormId(
     newError: FudisFormErrorSummaryItem,
     currentErrors: FudisFormErrorSummaryObject,
-    formId: string,
   ): FudisFormErrorSummaryObject {
     const errorId = this._defineErrorId(newError.id, newError.controlName);
-
-    const langUpdated =
-      currentErrors[errorId] && currentErrors[errorId]?.language !== newError.language;
 
     if (!currentErrors[errorId]) {
       currentErrors = {
@@ -193,11 +195,6 @@ export class FudisInternalErrorSummaryService {
       };
     }
 
-    if (langUpdated || this._updateStrategy === 'all') {
-      this._focusToSummaryList = false;
-      this.reloadErrorsByFormId(formId);
-    }
-
     return currentErrors;
   }
 
@@ -212,6 +209,12 @@ export class FudisInternalErrorSummaryService {
 
     if (currentErrorsOfForm[errorId]?.errors[error.type]) {
       delete currentErrorsOfForm[errorId].errors[error.type];
+
+      const otherErrors = Object.keys(currentErrorsOfForm[errorId].errors).length;
+
+      if (otherErrors === 0) {
+        delete currentErrorsOfForm[errorId];
+      }
 
       this._newCurrentErrorList[formId] = currentErrorsOfForm;
 
@@ -294,6 +297,8 @@ export class FudisInternalErrorSummaryService {
   }
 
   public reloadErrorsByFormId(formId: string): void {
+    console.log('setting by id ' + formId);
+
     this._signalErrorsByFormId[formId].set(this._newCurrentErrorList[formId]);
   }
 

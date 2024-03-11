@@ -19,7 +19,6 @@ import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.dir
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
 import { FudisFormErrorSummaryLink } from '../../../types/forms';
 import { DialogComponent } from '../../dialog/dialog.component';
-import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
   selector: 'fudis-form',
@@ -27,11 +26,10 @@ import { FudisInternalErrorSummaryService } from '../../../services/form/error-s
   styleUrls: ['./form.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class FormComponent extends GridApiDirective implements OnInit, AfterContentInit, OnDestroy {
+export class FormComponent extends GridApiDirective implements OnInit, AfterContentInit {
   constructor(
     private _idService: FudisIdService,
     private _elementRef: ElementRef,
-    private _errorSummaryService: FudisInternalErrorSummaryService,
     @Host() @Optional() protected _dialogParent: DialogComponent,
   ) {
     super();
@@ -109,7 +107,6 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 
   ngOnInit(): void {
     this._setFormId();
-    this._errorSummaryService.addNewFormToCollection(this.id);
 
     if (this._dialogParent) {
       this._dialogParent.closeButtonPositionAbsolute = true;
@@ -118,10 +115,6 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 
   ngAfterContentInit(): void {
     this._formElement = this._elementRef.nativeElement as HTMLFormElement;
-  }
-
-  ngOnDestroy(): void {
-    this._errorSummaryService.removeFormFromCollection(this.id);
   }
 
   /**

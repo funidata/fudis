@@ -3,7 +3,6 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  Host,
   Inject,
   Input,
   Signal,
@@ -17,11 +16,9 @@ import {
   FudisFormErrorSummaryList,
   FudisFormErrorSummarySection,
   FudisFormErrorSummaryLink,
-  FudisErrorSummaryParent,
 } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisTranslationConfig } from '../../../types/miscellaneous';
-import { FormComponent } from '../form/form.component';
 
 @Component({
   selector: 'fudis-error-summary',
@@ -30,7 +27,6 @@ import { FormComponent } from '../form/form.component';
 })
 export class ErrorSummaryComponent implements AfterViewInit {
   constructor(
-    @Host() private _parentForm: FormComponent,
     @Inject(DOCUMENT) private _document: Document,
     private _errorSummaryService: FudisInternalErrorSummaryService,
     private readonly _changeDetectorRef: ChangeDetectorRef,
@@ -40,7 +36,7 @@ export class ErrorSummaryComponent implements AfterViewInit {
      * Update translations on language change
      */
     effect(() => {
-      this._translations = this._translationService.getTranslations();
+      this._translations = _translationService.getTranslations();
 
       this._attentionText = this._translations().ICON.ATTENTION;
     });
@@ -48,9 +44,12 @@ export class ErrorSummaryComponent implements AfterViewInit {
      * Fetch and update current visible errors when reloadErrors() is called
      */
     effect(() => {
-      const errors = this._errorSummaryService.getFormErrorsById(_parentForm.id);
+      if (this.formId) {
+        console.log('effect');
+        const errors = _errorSummaryService.getFormErrorsById(this.formId)();
 
-      this._updateSummaryContent(errors);
+        this._updateSummaryContent(errors);
+      }
     });
   }
 
@@ -92,11 +91,6 @@ export class ErrorSummaryComponent implements AfterViewInit {
   protected _visibleErrorList: FudisFormErrorSummaryList[] = [];
 
   /**
-   * Parent form of this Error Summary
-   */
-  private _errorSummaryParentInfo: FudisErrorSummaryParent;
-
-  /**
    * Focus counter to hit the correct focus field
    */
   private _numberOfFocusTries: number = 0;
@@ -130,19 +124,19 @@ export class ErrorSummaryComponent implements AfterViewInit {
   /**
    * Update Error Summary content with possible parent Fieldsets, Sections and Expandabled (Sections)
    */
-  private _updateSummaryContent(content: Signal<FudisFormErrorSummaryObject>): void {
+  private _updateSummaryContent(content: FudisFormErrorSummaryObject): void {
     const newErrorList: FudisFormErrorSummaryList[] = [];
 
     const fieldsets: FudisFormErrorSummarySection[] = this._errorSummaryService.getFieldsetList();
 
     const sections: FudisFormErrorSummarySection[] = this._errorSummaryService.getSectionList();
 
-    Object.keys(content()).forEach((item) => {
-      const errorId = content()[item].id;
+    Object.keys(content).forEach((item) => {
+      const errorId = content[item].id;
       if (this.parentComponent?.querySelector(`#${errorId}`)) {
-        const { label } = content()[item];
+        const { label } = content[item];
 
-        Object.values(content()[item].errors).forEach((error: string) => {
+        Object.values(content[item].errors).forEach((error: string) => {
           const parentFieldset = fieldsets.find((fieldset) => {
             if (this.parentComponent?.querySelector(`#${fieldset.id} #${errorId}`)) {
               return fieldset;
@@ -199,5 +193,9 @@ export class ErrorSummaryComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this._errorSummaryService.reloadErrorsByFormId(this.formId);
+
+    const errors = this._errorSummaryService.getFormErrorsById(this.formId)();
+
+    this._updateSummaryContent(errors);
   }
 }
