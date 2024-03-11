@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
   OnChanges,
+  Output,
   Signal,
   effect,
 } from '@angular/core';
@@ -52,6 +54,22 @@ export class LinkComponent extends LinkApiDirective implements OnChanges {
   @Input() fragmentId: string;
 
   /**
+   * Focus event output
+   */
+  @Output() handleFocus = new EventEmitter<FocusEvent>();
+
+  /**
+   * Blur event output
+   */
+  @Output() handleBlur = new EventEmitter<FocusEvent>();
+
+  // TODO: write test
+  /**
+   * Click event output
+   */
+  @Output() handleClick = new EventEmitter<Event>();
+
+  /**
    * Aria-label for the external link
    */
   protected _externalLinkAriaLabel: string;
@@ -93,5 +111,26 @@ export class LinkComponent extends LinkApiDirective implements OnChanges {
         this._externalLinkTitleParsed = [this.externalLink];
       }
     }
+  }
+
+  /**
+   * Handle Link Component focus event
+   */
+  protected _handleFocus(event: FocusEvent): void {
+    this.handleFocus.emit(event);
+  }
+
+  /**
+   * Handle Link Component blur event
+   */
+  protected _handleBlur(event: FocusEvent): void {
+    this.handleBlur.emit(event);
+  }
+
+  /**
+   * Handle Link Component blur event
+   */
+  protected _handleClick(event: Event): void {
+    this.handleClick.emit(event);
   }
 }

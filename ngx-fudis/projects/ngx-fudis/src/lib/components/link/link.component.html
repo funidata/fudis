@@ -6,6 +6,7 @@
     }} fudis-link__external"
     (focus)="_handleFocus($event)"
     (blur)="_handleBlur($event)"
+    (click)="_handleClick($event)"
     attr.aria-label="{{ title ? title : externalLink }}, {{ _externalLinkAriaLabel }}"
     [href]="externalLink"
     [initialFocus]="initialFocus"
@@ -37,6 +38,7 @@
     }} fudis-link__router"
     (focus)="_handleFocus($event)"
     (blur)="_handleBlur($event)"
+    (click)="_handleClick($event)"
     [routerLink]="link"
     [fragment]="fragmentId"
     [initialFocus]="initialFocus"
@@ -50,6 +52,7 @@
     class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{ color }} fudis-link__href"
     (focus)="_handleFocus($event)"
     (blur)="_handleBlur($event)"
+    (click)="_handleClick($event)"
     [href]="href"
     [initialFocus]="initialFocus"
   >

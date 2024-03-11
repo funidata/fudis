@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, Input, Output } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 import { FudisLinkColor } from '../../types/miscellaneous';
 
 @Directive({
@@ -19,28 +19,4 @@ export class LinkApiDirective {
    * Set browser focus to link on the first load.
    */
   @Input() initialFocus: boolean = true;
-
-  /**
-   * Focus event output
-   */
-  @Output() handleFocus = new EventEmitter<FocusEvent>();
-
-  /**
-   * Blur event output
-   */
-  @Output() handleBlur = new EventEmitter<FocusEvent>();
-
-  /**
-   * Handle Link Component focus event
-   */
-  protected _handleFocus(event: FocusEvent): void {
-    this.handleFocus.emit(event);
-  }
-
-  /**
-   * Handle Link Component blur event
-   */
-  protected _handleBlur(event: FocusEvent): void {
-    this.handleBlur.emit(event);
-  }
 }
