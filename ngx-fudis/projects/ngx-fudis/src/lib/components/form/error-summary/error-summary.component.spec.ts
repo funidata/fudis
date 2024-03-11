@@ -98,7 +98,7 @@ class MockFormComponent {
   reloadErrors(): void {
     this.formGroup.markAllAsTouched();
     this.errorSummaryVisible = true;
-    this.errorSummaryService.reloadErrors();
+    this.errorSummaryService.reloadFormErrors('unique-form-example-1');
   }
 }
 
@@ -156,11 +156,9 @@ describe('ErrorSummaryComponent', () => {
     wrapperFixture = TestBed.createComponent(MockFormComponent);
     wrapperComponent = wrapperFixture.componentInstance;
     wrapperFixture.detectChanges();
-    wrapperComponent.reloadErrors();
-
-    const helpText = 'Errors belong in a museum';
-    component.helpText = helpText;
+    component.helpText = 'Errors belong in a museum';
     component.parentComponent = wrapperComponent.formRef.formElement as HTMLFormElement;
+    wrapperComponent.reloadErrors();
     fixture.detectChanges();
   });
 

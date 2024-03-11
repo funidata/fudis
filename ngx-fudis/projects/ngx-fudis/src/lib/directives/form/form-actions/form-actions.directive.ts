@@ -31,7 +31,7 @@ export class FormSubmitDirective implements OnInit {
   @HostListener('click') private _onClick() {
     if (this._parentForm && !this.formValid) {
       this._parentForm.errorSummaryVisible = true;
-      this._errorSummaryService.reloadErrorsByFormId(this._parentForm.id);
+      this._errorSummaryService.reloadErrorsByFormId(this._parentForm.id, true);
     } else if (this._parentForm) {
       this._parentForm.errorSummaryVisible = false;
     }

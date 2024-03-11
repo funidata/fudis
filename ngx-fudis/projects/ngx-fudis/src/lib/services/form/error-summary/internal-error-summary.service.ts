@@ -1,4 +1,4 @@
-import { Injectable, Signal, WritableSignal, signal } from '@angular/core';
+import { Injectable, Signal, signal } from '@angular/core';
 import {
   FudisFormErrorSummaryObject,
   FudisFormErrorSummaryItem,
@@ -18,21 +18,14 @@ export class FudisInternalErrorSummaryService {
   /**
    * Current errors
    */
-  private _currentErrorList: FudisFormErrorSummaryObject = {};
 
   private _newCurrentErrorList: FudisFormErrorSummaryFormsAndErrors = { unknownFormId: {} };
 
   /**
    * Collection of errors as a Signal categorised by parent Form id
    */
-  private _signalErrorsByFormId: {
-    [key: string]: WritableSignal<FudisFormErrorSummaryObject>;
-  } = { unknownFormId: signal<FudisFormErrorSummaryObject>({}) };
 
-  /**
-   * Visible errors
-   */
-  private _signalCurrentErrorList = signal<FudisFormErrorSummaryObject>({});
+  private _signalFormErrors = signal<FudisFormErrorSummaryFormsAndErrors>({ unknownFormId: {} });
 
   /**
    * List of parent forms of the error summary list
@@ -52,7 +45,7 @@ export class FudisInternalErrorSummaryService {
   /**
    * Info to Error Summary Component if it should move user focus to updated list or not
    */
-  private _focusToSummaryList: boolean = false;
+  private _focusToFormOnReload: string | null = null;
 
   /**
    * Update strategy of Error Summary
@@ -74,10 +67,10 @@ export class FudisInternalErrorSummaryService {
   }
 
   /**
-   * Getter for _focusToSummaryList
+   * Getter for _focusToFormOnReload
    */
-  get focusToSummaryList(): boolean {
-    return this._focusToSummaryList;
+  get focusToFormOnReload(): string | null {
+    return this._focusToFormOnReload;
   }
 
   /**
@@ -88,10 +81,10 @@ export class FudisInternalErrorSummaryService {
   }
 
   /**
-   * Setter for _focusToSummaryList
+   * Setter for _focusToFormOnReload
    */
-  set focusToSummaryList(value: boolean) {
-    this._focusToSummaryList = value;
+  set focusToFormOnReload(value: string | null) {
+    this._focusToFormOnReload = value;
   }
 
   /**
@@ -109,31 +102,30 @@ export class FudisInternalErrorSummaryService {
   }
 
   /**
-   * Returns a readonly list of visible errors
+   * Returns a signal of readonly list of all errors
    */
-  public getAllFormErrors(): Signal<FudisFormErrorSummaryObject> {
-    return this._signalCurrentErrorList;
+  public getErrorsOnReload(): Signal<FudisFormErrorSummaryFormsAndErrors> {
+    return this._signalFormErrors;
+  }
+
+  public getErrors(): FudisFormErrorSummaryFormsAndErrors {
+    return this._newCurrentErrorList;
   }
 
   /**
    * Returns a readonly list of visible errors
    */
-  public getFormErrorsById(formId: string): Signal<FudisFormErrorSummaryObject> {
-    return this._signalErrorsByFormId[formId].asReadonly();
+  public getFormErrorsById(formId: string): FudisFormErrorSummaryObject {
+    return this._newCurrentErrorList[formId];
   }
 
-  private addNewFormToCollection(formId: string): void {
-    console.log('adding: ' + formId);
+  public addNewFormId(formId: string): void {
     this._newCurrentErrorList[formId] = {};
-    this._signalErrorsByFormId[formId] = signal<FudisFormErrorSummaryObject>({});
   }
 
-  private removeFormFromCollection(formId: string): void {
+  public removeFormFromCollection(formId: string): void {
     if (this._newCurrentErrorList[formId]) {
       delete this._newCurrentErrorList[formId];
-    }
-    if (this._signalErrorsByFormId[formId]) {
-      delete this._signalErrorsByFormId[formId];
     }
   }
 
@@ -146,23 +138,23 @@ export class FudisInternalErrorSummaryService {
    */
   public addNewError(newError: FudisFormErrorSummaryItem): void {
     if (!this._newCurrentErrorList[newError.formId]) {
-      this.addNewFormToCollection(newError.formId);
+      this.addNewFormId(newError.formId);
     }
 
     let currentErrors = this._newCurrentErrorList;
+
+    const langUpdated =
+      currentErrors?.[newError.formId]?.[newError.id]?.language !== newError.language;
 
     currentErrors = {
       ...currentErrors,
       [newError.formId]: this.getUpdatedErrorsByFormId(newError, currentErrors[newError.formId]),
     };
 
-    const langUpdated =
-      currentErrors?.[newError.formId]?.[newError.id]?.language !== newError.language;
-
     this._newCurrentErrorList = currentErrors;
 
     if (langUpdated || this._updateStrategy === 'all') {
-      this._focusToSummaryList = false;
+      this._focusToFormOnReload = null;
       this.reloadErrorsByFormId(newError.formId);
     }
   }
@@ -219,14 +211,9 @@ export class FudisInternalErrorSummaryService {
       this._newCurrentErrorList[formId] = currentErrorsOfForm;
 
       if (this._updateStrategy === 'all' || this._updateStrategy === 'onRemove') {
-        this._focusToSummaryList = false;
+        this._focusToFormOnReload = null;
 
-        if (this._signalErrorsByFormId[formId]) {
-          this._signalErrorsByFormId[formId].set(currentErrorsOfForm);
-        } else {
-          this._signalErrorsByFormId[formId] =
-            signal<FudisFormErrorSummaryObject>(currentErrorsOfForm);
-        }
+        this.reloadErrorsByFormId(formId);
       }
     }
   }
@@ -296,10 +283,15 @@ export class FudisInternalErrorSummaryService {
     });
   }
 
-  public reloadErrorsByFormId(formId: string): void {
-    console.log('setting by id ' + formId);
+  public reloadErrorsByFormId(formId: string, focus?: boolean): void {
+    if (focus) {
+      this._focusToFormOnReload = formId;
+    }
 
-    this._signalErrorsByFormId[formId].set(this._newCurrentErrorList[formId]);
+    this._signalFormErrors.set({
+      ...this._signalFormErrors(),
+      [formId]: this._newCurrentErrorList[formId],
+    });
   }
 
   /**

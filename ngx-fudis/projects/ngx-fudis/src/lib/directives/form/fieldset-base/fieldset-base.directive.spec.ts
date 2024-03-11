@@ -15,6 +15,7 @@ import { GuidanceComponent } from '../../../components/form/guidance/guidance.co
 import { ContentDirective } from '../../content-projection/content/content.directive';
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
   selector: 'fudis-mock-checkbox-group-component',
@@ -51,6 +52,7 @@ class MockCheckboxGroupComponent {
 describe('FieldSetBaseDirective', () => {
   let idService: FudisIdService;
   let translationService: FudisTranslationService;
+  let errorSummaryService: FudisInternalErrorSummaryService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -75,6 +77,7 @@ describe('FieldSetBaseDirective', () => {
 
     idService = TestBed.inject(FudisIdService);
     translationService = TestBed.inject(FudisTranslationService);
+    errorSummaryService = TestBed.inject(FudisInternalErrorSummaryService);
   });
 
   it('should create an instance', () => {
@@ -82,6 +85,7 @@ describe('FieldSetBaseDirective', () => {
       const directive: FieldSetBaseDirective = new FieldSetBaseDirective(
         idService,
         translationService,
+        errorSummaryService,
       );
 
       expect(directive).toBeTruthy();

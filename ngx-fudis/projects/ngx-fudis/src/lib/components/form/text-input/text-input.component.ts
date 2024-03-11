@@ -27,7 +27,7 @@ export class TextInputComponent
   implements OnInit, OnChanges, AfterViewInit
 {
   constructor(
-    @Host() @Optional() protected _parentForm: FormComponent,
+    @Host() @Optional() protected _parentForm: FormComponent | null,
     private _focusService: FudisFocusService,
     _errorSummaryService: FudisInternalErrorSummaryService,
     _idService: FudisIdService,

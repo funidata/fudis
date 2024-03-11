@@ -44,10 +44,10 @@ export class ErrorSummaryComponent implements AfterViewInit {
      * Fetch and update current visible errors when reloadErrors() is called
      */
     effect(() => {
-      if (this.formId) {
-        console.log('effect');
-        const errors = _errorSummaryService.getFormErrorsById(this.formId)();
+      const errors = _errorSummaryService.getErrorsOnReload()()[this.formId];
 
+      if (this.formId) {
+        this._currentErrors = errors;
         this._updateSummaryContent(errors);
       }
     });
@@ -94,6 +94,11 @@ export class ErrorSummaryComponent implements AfterViewInit {
    * Focus counter to hit the correct focus field
    */
   private _numberOfFocusTries: number = 0;
+
+  /**
+   * Currently fetched errors from Error Summary Service
+   */
+  private _currentErrors: FudisFormErrorSummaryObject;
 
   /**
    * Sort errors the same order they appear in the DOM
@@ -170,7 +175,7 @@ export class ErrorSummaryComponent implements AfterViewInit {
       this._visibleErrorList = newErrorList.sort(this._sortErrorOrder);
       this._changeDetectorRef.detectChanges();
 
-      if (this._errorSummaryService.focusToSummaryList) {
+      if (this._errorSummaryService.focusToFormOnReload === this.formId) {
         this._focusToErrorSummary();
       }
     }
@@ -192,10 +197,6 @@ export class ErrorSummaryComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this._errorSummaryService.reloadErrorsByFormId(this.formId);
-
-    const errors = this._errorSummaryService.getFormErrorsById(this.formId)();
-
-    this._updateSummaryContent(errors);
+    this._errorSummaryService.reloadErrorsByFormId(this.formId, true);
   }
 }

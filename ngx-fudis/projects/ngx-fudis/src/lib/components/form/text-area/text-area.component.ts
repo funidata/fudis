@@ -25,7 +25,7 @@ export class TextAreaComponent
   implements OnInit, OnChanges, AfterViewInit
 {
   constructor(
-    @Host() @Optional() protected _parentForm: FormComponent,
+    @Host() @Optional() protected _parentForm: FormComponent | null,
     _errorSummaryService: FudisInternalErrorSummaryService,
     private _focusService: FudisFocusService,
     _idService: FudisIdService,

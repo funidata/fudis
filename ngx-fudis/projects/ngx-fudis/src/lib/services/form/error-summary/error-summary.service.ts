@@ -25,11 +25,20 @@ export class FudisErrorSummaryService {
   }
 
   /**
-   * Reloads errors and focus to Error Summary
+   * Reloads all Forms with Error Summary
    */
   public reloadErrors(): void {
-    this._errorSummaryService.focusToSummaryList = true;
+    this._errorSummaryService.focusToFormOnReload = null;
     this._errorSummaryService.reloadErrors();
+  }
+
+  /**
+   * Reload a spesific Form Id
+   * @param id Form Id
+   * @param focus focus to Error Summary
+   */
+  public reloadFormErrors(id: string, focus: boolean = true) {
+    this._errorSummaryService.reloadErrorsByFormId(id, focus);
   }
 
   /**

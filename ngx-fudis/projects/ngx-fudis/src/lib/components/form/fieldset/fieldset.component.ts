@@ -35,9 +35,9 @@ export class FieldSetComponent
   constructor(
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
-    private _errorSummaryService: FudisInternalErrorSummaryService,
+    _errorSummaryService: FudisInternalErrorSummaryService,
   ) {
-    super(_idService, _translationService);
+    super(_idService, _translationService, _errorSummaryService);
   }
 
   /**

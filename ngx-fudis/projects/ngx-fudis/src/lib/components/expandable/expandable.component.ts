@@ -37,9 +37,9 @@ export class ExpandableComponent implements OnDestroy, OnChanges {
     // TODO: write test
     effect(() => {
       if (this.closed && this.openOnErrorSummaryReload && _parentForm) {
-        _errorSummaryService.getFormErrorsById(_parentForm.id)();
+        const errors = _errorSummaryService.getErrorsOnReload()()?.[_parentForm.id];
 
-        if (_parentForm.errorSummaryVisible) {
+        if (errors && _parentForm.errorSummaryVisible) {
           this._setClosedStatus(false);
         }
       }

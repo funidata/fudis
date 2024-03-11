@@ -12,7 +12,7 @@
   <ng-template fudisContent type="fieldset">
     <ng-content select="fudis-checkbox" />
     <fudis-guidance
-      [formId]="_parentForm.id"
+      [formId]="_parentForm?.id || 'unknownFormId'"
       [inputLabel]="title"
       [helpText]="helpText"
       [for]="id"

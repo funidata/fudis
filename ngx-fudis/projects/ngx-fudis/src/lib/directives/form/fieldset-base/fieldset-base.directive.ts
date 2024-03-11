@@ -4,6 +4,8 @@ import { FudisTranslationConfig } from '../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisIdParent } from '../../../types/id';
+import { FormGroup } from '@angular/forms';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
 @Directive({
   selector: '[fudisFieldSetBase]',
@@ -12,6 +14,7 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   constructor(
     protected _idService: FudisIdService,
     protected _translationService: FudisTranslationService,
+    protected _errorSummaryService: FudisInternalErrorSummaryService,
   ) {
     super();
 
@@ -60,6 +63,16 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
       this._idService.addNewParentId(parentType, this.id);
     } else {
       this.id = this._idService.getNewParentId(parentType);
+    }
+  }
+
+  // TODO: write tests and move to inputbase
+  protected reloadErrorSummary(group: FormGroup, formId: string): void {
+    if (group.errors) {
+      group.markAllAsTouched();
+
+      this._errorSummaryService.focusToFormOnReload = null;
+      this._errorSummaryService.reloadErrorsByFormId(formId);
     }
   }
 }

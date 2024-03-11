@@ -63,6 +63,7 @@ describe('GuidanceComponent', () => {
     component = fixture.componentInstance;
     component.inputLabel = 'Test Label';
     component.for = 'related-input-id';
+    component.formId = 'test-form-id';
     component.helpText = 'This is describing guidance text';
     component.maxLength = testMaxLength;
     component.ariaLive = 'polite';

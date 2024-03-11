@@ -118,7 +118,7 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
     if (control.errors) {
       control.markAsTouched();
 
-      this._errorSummaryService.focusToSummaryList = false;
+      this._errorSummaryService.focusToFormOnReload = null;
       this._errorSummaryService.reloadErrorsByFormId(formId);
     }
   }
