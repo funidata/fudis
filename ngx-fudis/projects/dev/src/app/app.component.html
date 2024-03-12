@@ -191,6 +191,7 @@
         <ng-template fudisActions [type]="'form'">
           <fudis-button
             fudisFormSubmit
+            [formValid]="testFormGroup.valid"
             (handleClick)="submitDialogForm()"
             [label]="'Submit'"
           ></fudis-button>
