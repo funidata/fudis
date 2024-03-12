@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisComponentChanges, FudisTranslationConfig } from '../../types/miscellaneous';
-import { LinkApiDirective } from '../../directives/link/link-api.directive';
+import { LinkApiDirective } from '../../directives/link/link-api/link-api.directive';
 
 @Component({
   selector: 'fudis-link',

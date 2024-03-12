@@ -84,9 +84,11 @@ export const formArgTypesExclude: RegExp = excludeRegex(['rowGap', 'columns', 'c
 
 export const linkExclude: RegExp = excludeRegex([
   'fragmentId',
+  'handleClick',
   'handleBlur',
   'handleFocus',
   'link',
+  'classes',
 ]);
 
 export const notificationExclude: RegExp = excludeRegex(['link']);

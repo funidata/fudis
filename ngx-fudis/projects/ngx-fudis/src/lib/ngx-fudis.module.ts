@@ -73,7 +73,7 @@ import { FudisIdService } from './services/id/id.service';
 import { InputBaseDirective } from './directives/form/input-base/input-base.directive';
 import { InputWithLanguageOptionsComponent } from './components/form/input-with-language-options/input-with-language-options.component';
 import { LabelComponent } from './components/form/label/label.component';
-import { LinkApiDirective } from './directives/link/link-api.directive';
+import { LinkApiDirective } from './directives/link/link-api/link-api.directive';
 import { LinkDirective } from './directives/link/link.directive';
 import { LinkComponent } from './components/link/link.component';
 import { NotificationComponent } from './components/notification/notification.component';

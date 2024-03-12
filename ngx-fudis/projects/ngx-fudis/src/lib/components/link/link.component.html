@@ -1,9 +1,9 @@
 <ng-container *ngIf="externalLink">
   <a
     fudisLink
-    class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{
-      color
-    }} fudis-link__external"
+    [color]="color"
+    [size]="size"
+    [classes]="['fudis-link__external']"
     (focus)="_handleFocus($event)"
     (blur)="_handleBlur($event)"
     (click)="_handleClick($event)"
@@ -33,9 +33,9 @@
 <ng-container *ngIf="(link || fragmentId) && !externalLink">
   <a
     fudisLink
-    class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{
-      color
-    }} fudis-link__router"
+    [color]="color"
+    [size]="size"
+    [classes]="['fudis-link__router']"
     (focus)="_handleFocus($event)"
     (blur)="_handleBlur($event)"
     (click)="_handleClick($event)"
@@ -49,7 +49,9 @@
 <ng-container *ngIf="href && !link && !externalLink">
   <a
     fudisLink
-    class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{ color }} fudis-link__href"
+    [color]="color"
+    [size]="size"
+    [classes]="['fudis-link__href']"
     (focus)="_handleFocus($event)"
     (blur)="_handleBlur($event)"
     (click)="_handleClick($event)"

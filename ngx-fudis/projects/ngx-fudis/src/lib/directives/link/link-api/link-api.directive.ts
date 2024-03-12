@@ -1,5 +1,5 @@
 import { Directive, Input } from '@angular/core';
-import { FudisLinkColor } from '../../types/miscellaneous';
+import { FudisLinkColor } from '../../../types/miscellaneous';
 
 @Directive({
   selector: '[fudisLinkApi]',
