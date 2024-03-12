@@ -278,16 +278,24 @@ export class FudisInternalErrorSummaryService {
    * Updates the visible and dynamic lists of all form and errors with the current error list
    */
   public reloadAllErrors(): void {
+    this._formIdToUpdate = 'all';
+
     Object.keys(this._allFormErrors).forEach((key) => {
-      this.reloadErrorsByFormId(key);
+      this.reloadErrorsByFormId(key, false, true);
     });
   }
 
-  public reloadErrorsByFormId(formId: string, focus?: boolean): void {
+  public reloadErrorsByFormId(formId: string, focus?: boolean, allErrorsReloaded?: boolean): void {
     if (focus) {
       this._focusToFormOnReload = formId;
+    } else {
+      this._focusToFormOnReload = null;
     }
-    this._formIdToUpdate = formId;
+
+    if (!allErrorsReloaded) {
+      this._formIdToUpdate = formId;
+    }
+
     this._signalAllFormErrors.set(this._allFormErrors);
   }
 
