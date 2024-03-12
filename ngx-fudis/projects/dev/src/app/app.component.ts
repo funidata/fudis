@@ -222,7 +222,6 @@ export class AppComponent implements OnInit {
     this.testFormGroup.markAllAsTouched();
 
     if (this.testFormGroup.valid) {
-      this.errorSummaryVisible = false;
       this._dialog.close();
     }
   }
