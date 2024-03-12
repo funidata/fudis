@@ -46,10 +46,7 @@ export class ErrorSummaryComponent implements AfterViewInit {
     effect(() => {
       const errors = _errorSummaryService.getErrorsOnReload()()[this.formId];
 
-      console.log('effect from:' + this.formId);
-
-      if (this.formId) {
-        console.log('updating!');
+      if (this.formId && _errorSummaryService.formIdToUpdate === this.formId) {
         this._updateSummaryContent(errors);
       }
     });

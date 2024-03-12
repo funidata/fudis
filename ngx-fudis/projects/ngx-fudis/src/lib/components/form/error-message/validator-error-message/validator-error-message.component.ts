@@ -73,11 +73,6 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
   @Input() formId: string = 'unknownFormId';
 
   /**
-   * To trigger Error Summary reload when Error Message is initialised. This is used in cases when parent component (e. g. Text Input) is lazy loaded to DOM after initial Error Summary reload was called before this Error Message existed.
-   */
-  @Input() reloadErrorSummary: boolean = false;
-
-  /**
    * Output for handling a state when error is sent to Error Summary
    */
   @Output() handleCreateError = new EventEmitter<FudisFormErrorSummaryItem>();
@@ -86,11 +81,6 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
    * Output for handling a state when error is removed from Error Summary
    */
   @Output() handleRemoveError = new EventEmitter<FudisFormErrorSummaryRemoveItem>();
-
-  /**
-   * Output for handling first init of component
-   */
-  @Output() handleInitFinished = new EventEmitter<void>();
 
   /**
    * Error message to include in error summary item
@@ -135,11 +125,6 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
       this._createError();
     }
 
-    if (this.reloadErrorSummary) {
-      this._errorSummaryService.focusToFormOnReload = null;
-      this._errorSummaryService.reloadErrorsByFormId(this.formId);
-    }
-
     this._initFinished = true;
   }
 
@@ -149,8 +134,6 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
         this.throwError();
       }
     }, 1000);
-
-    this.handleInitFinished.emit();
   }
 
   ngOnChanges(changes: FudisComponentChanges<ValidatorErrorMessageComponent>): void {

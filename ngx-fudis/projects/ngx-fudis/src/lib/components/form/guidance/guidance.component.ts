@@ -2,6 +2,7 @@ import { Component, Input, OnInit, effect } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
   selector: 'fudis-guidance',
@@ -12,6 +13,7 @@ export class GuidanceComponent implements OnInit {
   constructor(
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
+    private _errorSummaryService: FudisInternalErrorSummaryService,
   ) {
     this._id = _idService.getNewId('guidance');
 
@@ -90,7 +92,7 @@ export class GuidanceComponent implements OnInit {
    */
   protected _id: string;
 
-  protected _disableErrorSummaryReload: boolean = false;
+  protected _firstReloadFinished: boolean = false;
 
   ngOnInit(): void {
     if (this.maxLength) {
@@ -99,6 +101,10 @@ export class GuidanceComponent implements OnInit {
   }
 
   protected _disableReload(): void {
-    this.reloadErrorSummary = false;
+    if (this.reloadErrorSummary && !this._firstReloadFinished) {
+      this._firstReloadFinished = true;
+      this._errorSummaryService.focusToFormOnReload = null;
+      this._errorSummaryService.reloadErrorsByFormId(this.formId);
+    }
   }
 }

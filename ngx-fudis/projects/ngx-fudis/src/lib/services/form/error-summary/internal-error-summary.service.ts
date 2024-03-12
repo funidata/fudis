@@ -47,6 +47,18 @@ export class FudisInternalErrorSummaryService {
   private _updateStrategy: FudisFormErrorSummaryUpdateStrategy = 'reloadOnly';
 
   /**
+   * To control that only form with spesific ID is reloaded in corresponding ErrorSummaryComponent effect() when signal is updated.
+   */
+  private _formIdToUpdate: string;
+
+  /**
+   * Getter for _formIdToUpdate. Used in ErrorSummaryComponent.
+   */
+  get formIdToUpdate(): string {
+    return this._formIdToUpdate;
+  }
+
+  /**
    * Getter for _updateStrategy. Used by public Error Summary service.
    */
   get updateStrategy(): FudisFormErrorSummaryUpdateStrategy {
@@ -272,18 +284,11 @@ export class FudisInternalErrorSummaryService {
   }
 
   public reloadErrorsByFormId(formId: string, focus?: boolean): void {
-    console.log('reload was called: ' + formId);
-
     if (focus) {
       this._focusToFormOnReload = formId;
     }
-
-    const currentSignalErrors = this._signalAllFormErrors();
-
-    this._signalAllFormErrors.set({
-      ...currentSignalErrors,
-      [formId]: this._allFormErrors[formId],
-    });
+    this._formIdToUpdate = formId;
+    this._signalAllFormErrors.set(this._allFormErrors);
   }
 
   /**
