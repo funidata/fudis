@@ -3,13 +3,12 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  Inject,
   Input,
   Signal,
   ViewChild,
   effect,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import {
   FudisFormErrorSummaryObject,
@@ -27,7 +26,6 @@ import { FudisTranslationConfig } from '../../../types/miscellaneous';
 })
 export class ErrorSummaryComponent implements AfterViewInit {
   constructor(
-    @Inject(DOCUMENT) private _document: Document,
     private _errorSummaryService: FudisInternalErrorSummaryService,
     private readonly _changeDetectorRef: ChangeDetectorRef,
     private _translationService: FudisTranslationService,
@@ -59,7 +57,7 @@ export class ErrorSummaryComponent implements AfterViewInit {
   @ViewChild('focusTarget') private _focusTarget: ElementRef;
 
   /**
-   * FieldSet parent element of this ErrorSummaryComponent
+   * Form parent element of this ErrorSummaryComponent
    */
   @Input({ required: true }) parentComponent: HTMLFormElement;
 
@@ -136,46 +134,43 @@ export class ErrorSummaryComponent implements AfterViewInit {
 
     Object.keys(content).forEach((item) => {
       const errorId = content[item].id;
-      if (this.parentComponent?.querySelector(`#${errorId}`)) {
-        const { label } = content[item];
 
-        Object.values(content[item].errors).forEach((error: string) => {
-          const parentFieldset = fieldsets.find((fieldset) => {
-            if (this.parentComponent?.querySelector(`#${fieldset.id} #${errorId}`)) {
-              return fieldset;
-            }
-            return null;
-          });
+      const { label } = content[item];
 
-          const parentSection = sections.find((section) => {
-            if (this.parentComponent?.querySelector(`#${section.id} #${errorId}`)) {
-              return section;
-            }
-            return null;
-          });
-
-          const parentSectionString = parentSection ? `${parentSection.title} / ` : '';
-
-          const parentFieldsetString = parentFieldset ? `${parentFieldset.title} / ` : '';
-
-          const cleanedError = error.replace(/[:!?]$/, '');
-
-          newErrorList.push({
-            id: errorId,
-            message: `${parentSectionString}${parentFieldsetString}${label}: ${cleanedError}`,
-            element: this._document.getElementById(errorId),
-          });
+      Object.values(content[item].errors).forEach((error: string) => {
+        const parentFieldset = fieldsets.find((fieldset) => {
+          if (this.parentComponent?.querySelector(`#${fieldset.id} #${errorId}`)) {
+            return fieldset;
+          }
+          return null;
         });
-      }
+
+        const parentSection = sections.find((section) => {
+          if (this.parentComponent?.querySelector(`#${section.id} #${errorId}`)) {
+            return section;
+          }
+          return null;
+        });
+
+        const parentSectionString = parentSection ? `${parentSection.title} / ` : '';
+
+        const parentFieldsetString = parentFieldset ? `${parentFieldset.title} / ` : '';
+
+        const cleanedError = error.replace(/[:!?]$/, '');
+
+        newErrorList.push({
+          id: errorId,
+          message: `${parentSectionString}${parentFieldsetString}${label}: ${cleanedError}`,
+          element: this.parentComponent.querySelector(`#${errorId}`),
+        });
+      });
     });
 
-    if (this._document) {
-      this._visibleErrorList = newErrorList.sort(this._sortErrorOrder);
-      this._changeDetectorRef.detectChanges();
+    this._visibleErrorList = newErrorList.sort(this._sortErrorOrder);
+    this._changeDetectorRef.detectChanges();
 
-      if (this._errorSummaryService.focusToFormOnReload === this.formId) {
-        this._focusToErrorSummary();
-      }
+    if (this._errorSummaryService.focusToFormOnReload === this.formId) {
+      this._focusToErrorSummary();
     }
   }
 

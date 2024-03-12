@@ -110,8 +110,6 @@ const getErrorList = (fixture: ComponentFixture<MockFormComponent>): NodeList | 
     'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
   );
 
-  console.log(fixture.nativeElement.querySelector('ul.fudis-error-summary__error-list'));
-
   return errors;
 };
 

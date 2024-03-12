@@ -171,6 +171,7 @@ export class AppFormExampleComponent implements OnInit {
     this.testFormGroup.markAllAsTouched();
 
     if (this.testFormGroup.valid) {
+      this.errorSummaryVisible = false;
       this.showSuccessBodyText = true;
     }
   }

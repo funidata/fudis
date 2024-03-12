@@ -21,7 +21,11 @@ export class FudisInternalErrorSummaryService {
   private _allFormErrors: FudisFormErrorSummaryFormsAndErrors = { unknownFormId: {} };
 
   /**
-   * Collection of errors as a Signal categorised by parent Form id
+   * Collection of errors as a Signal categorised by parent Form id.
+   *
+   * Ideally this should be an object consisting of sub-signals, but unfortunately effect() hook in ErrorSummaryComponent couldn't detect a change, if a nested signal inside this object was updated.
+   *  
+   So now although effect() hooks in all Error Summary Components trigger if one of them is reloaded, there is safeguard logic that only the targeted one will update visible errors even if the whole signal is updated.
    */
 
   private _signalAllFormErrors = signal<FudisFormErrorSummaryFormsAndErrors>({ unknownFormId: {} });
