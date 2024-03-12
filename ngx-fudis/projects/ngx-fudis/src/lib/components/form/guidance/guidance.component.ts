@@ -71,6 +71,11 @@ export class GuidanceComponent implements OnInit {
   @Input() formId: string;
 
   /**
+   * To trigger Error Summary reload when this Guidance's Validator Error Messages are initialised. This is used in cases when parent component (e. g. Text Input) is lazy loaded to DOM after initial Error Summary reload was called before these Validator Error Messages existed.
+   */
+  @Input() reloadErrorSummary: boolean = false;
+
+  /**
    * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where "characters used" is "maxLengthText".
    */
   protected _maxLengthText: string;
@@ -85,9 +90,15 @@ export class GuidanceComponent implements OnInit {
    */
   protected _id: string;
 
+  protected _disableErrorSummaryReload: boolean = false;
+
   ngOnInit(): void {
     if (this.maxLength) {
       this._maxLengthAlertThreshold = this.maxLength - 5;
     }
+  }
+
+  protected _disableReload(): void {
+    this.reloadErrorSummary = false;
   }
 }

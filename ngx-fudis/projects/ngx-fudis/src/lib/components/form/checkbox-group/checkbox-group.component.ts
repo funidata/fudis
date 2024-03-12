@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Host, Input, OnChanges, OnInit, Optional } from '@angular/core';
+import { Component, Host, Input, OnChanges, OnInit, Optional } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FudisCheckboxGroupFormGroup, FudisInputSize } from '../../../types/forms';
 
@@ -7,24 +7,19 @@ import { hasAtLeastOneRequiredOrMinValidator } from '../../../utilities/form/get
 import { FormComponent } from '../form/form.component';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
   selector: 'fudis-checkbox-group',
   templateUrl: './checkbox-group.component.html',
   styleUrls: ['./checkbox-group.component.scss'],
 })
-export class CheckboxGroupComponent
-  extends FieldSetBaseDirective
-  implements OnInit, OnChanges, AfterViewInit
-{
+export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
-    _errorSummaryService: FudisInternalErrorSummaryService,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
   ) {
-    super(_idService, _translationService, _errorSummaryService);
+    super(_idService, _translationService);
   }
   /**
    * FormControl for Checkbox group.
@@ -73,16 +68,14 @@ export class CheckboxGroupComponent
         this._groupBlurredOut = true;
       };
     }
+
+    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
+      this.reloadErrorSummary(this.formGroup);
+    }
   }
 
   public ngOnChanges(): void {
     this._required = hasAtLeastOneRequiredOrMinValidator(this.formGroup);
-  }
-
-  public ngAfterViewInit(): void {
-    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
-      this.reloadErrorSummary(this.formGroup, this._parentForm.id);
-    }
   }
 
   /**

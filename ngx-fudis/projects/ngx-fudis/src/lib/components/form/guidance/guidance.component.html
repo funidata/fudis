@@ -23,7 +23,9 @@
                 <ng-container *ngFor="let error of singleControl.value.errors | keyvalue">
                   <fudis-validator-error-message
                     *ngIf="error.value.message"
+                    (handleInitFinished)="_disableReload()"
                     [formId]="formId"
+                    [reloadErrorSummary]="reloadErrorSummary"
                     [focusId]="for"
                     [visible]="singleControl.value.touched || formGroup.touched"
                     [type]="error.key"
@@ -40,7 +42,9 @@
             <ng-container *ngFor="let error of formGroup.errors | keyvalue">
               <fudis-validator-error-message
                 *ngIf="error.value?.message"
+                (handleInitFinished)="_disableReload()"
                 [formId]="formId"
+                [reloadErrorSummary]="reloadErrorSummary"
                 [visible]="formGroup.touched"
                 [focusId]="for"
                 [type]="error.key"
@@ -54,7 +58,9 @@
             <ng-container *ngFor="let error of control.errors | keyvalue">
               <fudis-validator-error-message
                 *ngIf="error.value?.message"
+                (handleInitFinished)="_disableReload()"
                 [formId]="formId"
+                [reloadErrorSummary]="reloadErrorSummary"
                 [visible]="control.touched"
                 [focusId]="for"
                 [type]="error.key"

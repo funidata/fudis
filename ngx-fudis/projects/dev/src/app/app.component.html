@@ -189,7 +189,11 @@
           </fudis-fieldset>
         </ng-template>
         <ng-template fudisActions [type]="'form'">
-          <fudis-button (handleClick)="submitDialogForm()" [label]="'Submit'"></fudis-button>
+          <fudis-button
+            fudisFormSubmit
+            (handleClick)="submitDialogForm()"
+            [label]="'Submit'"
+          ></fudis-button>
           <fudis-button fudisDialogClose [label]="'Cancel'"></fudis-button>
         </ng-template>
       </fudis-form>

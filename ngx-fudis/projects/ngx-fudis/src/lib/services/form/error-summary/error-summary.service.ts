@@ -32,7 +32,7 @@ export class FudisErrorSummaryService {
    */
   public reloadAllErrors(): void {
     this._errorSummaryService.focusToFormOnReload = null;
-    this._errorSummaryService.reloadErrors();
+    this._errorSummaryService.reloadAllErrors();
   }
 
   /**

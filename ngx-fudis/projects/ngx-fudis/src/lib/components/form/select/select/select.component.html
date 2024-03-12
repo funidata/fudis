@@ -89,6 +89,8 @@
   </fudis-select-dropdown>
   <fudis-guidance
     *ngIf="!disableGuidance"
+    [formId]="_parentForm?.id || 'unknownFormId'"
+    [reloadErrorSummary]="_reloadErrorSummary"
     [inputLabel]="label"
     [helpText]="helpText"
     [for]="id"

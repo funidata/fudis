@@ -10,7 +10,6 @@ import { InputBaseDirective } from '../../../directives/form/input-base/input-ba
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { hasRequiredValidator } from '../../../utilities/form/getValidators';
-import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
 // TODO: Write Storybook documentation and add missing internal documentation for the functions (add public/private)
 @Component({
@@ -22,12 +21,8 @@ export class InputWithLanguageOptionsComponent
   extends InputBaseDirective
   implements OnInit, OnChanges, AfterViewInit
 {
-  constructor(
-    _idService: FudisIdService,
-    _translationService: FudisTranslationService,
-    _errorSummaryService: FudisInternalErrorSummaryService,
-  ) {
-    super(_translationService, _idService, _errorSummaryService);
+  constructor(_idService: FudisIdService, _translationService: FudisTranslationService) {
+    super(_translationService, _idService);
 
     effect(() => {
       this._languageLabel = this._translations().INPUT_WITH_LANGUAGE_OPTIONS.LANGUAGE;

@@ -25,7 +25,6 @@ import { ButtonComponent } from '../../../../button/button.component';
 import { setVisibleOptionsList } from '../selectUtilities';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.component';
-import { FudisInternalErrorSummaryService } from '../../../../../services/form/error-summary/internal-error-summary.service';
 
 @Directive({
   selector: '[fudisSelectBase]',
@@ -35,9 +34,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
     protected _focusService: FudisFocusService,
     _translationService: FudisTranslationService,
     _idService: FudisIdService,
-    _errorSummaryService: FudisInternalErrorSummaryService,
   ) {
-    super(_translationService, _idService, _errorSummaryService);
+    super(_translationService, _idService);
 
     effect(() => {
       this._translationOpenAriaLabel = this._translations().SELECT.OPEN_DROPDOWN;

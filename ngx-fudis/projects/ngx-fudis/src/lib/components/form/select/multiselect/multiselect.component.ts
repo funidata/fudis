@@ -1,4 +1,5 @@
 import {
+  AfterContentInit,
   AfterViewInit,
   Component,
   EventEmitter,
@@ -20,7 +21,6 @@ import { SelectBaseDirective } from '../common/select-base/select-base.directive
 import { FudisSelectOption } from '../../../../types/forms';
 import { joinInputValues, sortValues } from '../common/selectUtilities';
 import { FormComponent } from '../../form/form.component';
-import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 import { takeUntil } from 'rxjs';
 
 @Component({
@@ -28,15 +28,17 @@ import { takeUntil } from 'rxjs';
   templateUrl: './multiselect.component.html',
   styleUrls: ['../select/select.component.scss'],
 })
-export class MultiselectComponent extends SelectBaseDirective implements OnInit, AfterViewInit {
+export class MultiselectComponent
+  extends SelectBaseDirective
+  implements OnInit, AfterContentInit, AfterViewInit
+{
   constructor(
-    @Host() @Optional() private _parentForm: FormComponent,
+    @Host() @Optional() protected _parentForm: FormComponent | null,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
-    _errorSummaryService: FudisInternalErrorSummaryService,
   ) {
-    super(_focusService, _translationService, _idService, _errorSummaryService);
+    super(_focusService, _translationService, _idService);
 
     this.focusSelector = 'fudis-multiselect-option__focusable';
 
@@ -91,6 +93,17 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
       }
       this.controlValueChangedInternally = false;
     });
+
+    // TODO: write test
+    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
+      this.reloadErrorSummary(this.control);
+    }
+  }
+
+  ngAfterContentInit(): void {
+    if (this.control.value) {
+      this._updateMultiselectionFromControlValue();
+    }
   }
 
   /**
@@ -99,13 +112,6 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
   ngAfterViewInit(): void {
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
-    }
-    if (this.control.value) {
-      this._updateMultiselectionFromControlValue();
-    }
-
-    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
-      this.reloadErrorSummary(this.control, this._parentForm.id);
     }
   }
 

@@ -5,7 +5,6 @@ import { FudisTranslationService } from '../../../services/translation/translati
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisIdParent } from '../../../types/id';
 import { FormGroup } from '@angular/forms';
-import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
 @Directive({
   selector: '[fudisFieldSetBase]',
@@ -14,7 +13,6 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   constructor(
     protected _idService: FudisIdService,
     protected _translationService: FudisTranslationService,
-    protected _errorSummaryService: FudisInternalErrorSummaryService,
   ) {
     super();
 
@@ -56,6 +54,11 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   protected _initFinished: boolean = false;
 
   /**
+   * To trigger Error Summary reload when this component's children Validator Error Messages are initialised. This is used in cases when this parent component is lazy loaded to DOM after initial Error Summary reload was called before children Validator Error Messages existed.
+   */
+  protected _reloadErrorSummary = false;
+
+  /**
    * Generate id for parent component
    */
   protected _setParentId(parentType: FudisIdParent): void {
@@ -67,12 +70,10 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   }
 
   // TODO: write tests
-  protected reloadErrorSummary(group: FormGroup, formId: string): void {
+  protected reloadErrorSummary(group: FormGroup): void {
     if (group.errors) {
+      this._reloadErrorSummary = true;
       group.markAllAsTouched();
-
-      this._errorSummaryService.focusToFormOnReload = null;
-      this._errorSummaryService.reloadErrorsByFormId(formId);
     }
   }
 }

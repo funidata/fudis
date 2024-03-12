@@ -8,6 +8,7 @@ import {
   FudisSelectOption,
   FudisRadioButtonOption,
   FudisFormErrorSummaryLink,
+  FudisCheckboxGroupFormGroup,
   // FudisDateRangeItem,
 } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
@@ -19,6 +20,137 @@ import docs from './form.docs.mdx';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
 import { FudisHeadingLevel, FudisHeadingSize } from '../../../types/typography';
 import { formExclude } from '../../../utilities/storybook';
+import { defaultOptions } from '../select/common/mock_data';
+
+@Component({
+  selector: 'example-with-multiple-forms',
+  template: `
+    <fudis-form
+      [titleLevel]="2"
+      [title]="'Form with Text Input'"
+      [errorSummaryLinkType]="'href'"
+      [errorSummaryHelpText]="errorSummaryHelpText"
+    >
+      <ng-template fudisActions [type]="'form'">
+        <fudis-button fudisFormSubmit [formValid]="formOne.valid" [label]="'Submit'" />
+      </ng-template>
+      <ng-template fudisContent [type]="'form'">
+        <fudis-expandable [title]="'Expandable with Text Input'">
+          <ng-template fudisContent [type]="'expandable'">
+            <fudis-text-input [label]="'Name'" [control]="formOne.controls.name" />
+          </ng-template>
+        </fudis-expandable>
+      </ng-template>
+    </fudis-form>
+    <fudis-form
+      [titleLevel]="2"
+      [title]="'Form with Text Area'"
+      [errorSummaryLinkType]="'href'"
+      [errorSummaryHelpText]="errorSummaryHelpText"
+    >
+      <ng-template fudisActions [type]="'form'">
+        <fudis-button fudisFormSubmit [formValid]="formTwo.valid" [label]="'Submit'" />
+      </ng-template>
+      <ng-template fudisContent [type]="'form'">
+        <fudis-expandable [title]="'Expandable with Text Area'">
+          <ng-template fudisContent [type]="'expandable'">
+            <fudis-text-area [label]="'Description'" [control]="formTwo.controls.description" />
+          </ng-template>
+        </fudis-expandable>
+      </ng-template>
+    </fudis-form>
+    <fudis-form
+      [titleLevel]="2"
+      [title]="'Form with Checkbox Group'"
+      [errorSummaryLinkType]="'href'"
+      [errorSummaryHelpText]="errorSummaryHelpText"
+    >
+      <ng-template fudisActions [type]="'form'">
+        <fudis-button fudisFormSubmit [formValid]="formThree.valid" [label]="'Submit'" />
+      </ng-template>
+      <ng-template fudisContent [type]="'form'">
+        <fudis-expandable [title]="'Expandable with Text Area'">
+          <ng-template fudisContent [type]="'expandable'">
+            <fudis-checkbox-group [title]="'Pick a fruit'" [formGroup]="formThree">
+              <fudis-checkbox
+                *ngFor="let control of formThree.controls | keyvalue"
+                [controlName]="control.key"
+                [label]="control.key"
+              />
+            </fudis-checkbox-group>
+          </ng-template>
+        </fudis-expandable>
+      </ng-template>
+    </fudis-form>
+    <fudis-form
+      [titleLevel]="2"
+      [title]="'Form with Select and Multiselect'"
+      [errorSummaryLinkType]="'href'"
+      [errorSummaryHelpText]="errorSummaryHelpText"
+    >
+      <ng-template fudisActions [type]="'form'">
+        <fudis-button fudisFormSubmit [formValid]="formFour.valid" [label]="'Submit'" />
+      </ng-template>
+      <ng-template fudisContent [type]="'form'">
+        <fudis-expandable [title]="'Expandable with Select and Multiselect'">
+          <ng-template fudisContent [type]="'expandable'">
+            <fudis-select [label]="'Pick a pet'" [control]="formFour.controls.select">
+              <ng-template fudisContent type="select-options">
+                <fudis-select-option *ngFor="let option of selectOptions" [data]="option" />
+              </ng-template>
+            </fudis-select>
+            <fudis-multiselect
+              [label]="'Pick multiple pets'"
+              [control]="formFour.controls.multiselect"
+            >
+              <ng-template fudisContent type="select-options">
+                <fudis-multiselect-option *ngFor="let option of selectOptions" [data]="option" />
+              </ng-template>
+            </fudis-multiselect>
+          </ng-template>
+        </fudis-expandable>
+      </ng-template>
+    </fudis-form>
+  `,
+})
+class ExampleWithMultipleFormsComponent {
+  errorSummaryHelpText = 'There are incorrect form fields.';
+
+  selectOptions = defaultOptions;
+
+  formOne = new FormGroup({
+    name: new FormControl<string | null>(null, FudisValidators.required('You must choose a name')),
+  });
+
+  formTwo = new FormGroup({
+    description: new FormControl<string | null>('initial value', [
+      FudisValidators.minLength(15, 'Min length is 10 chars'),
+      FudisValidators.maxLength(20, 'Max length is 20 chars'),
+    ]),
+  });
+
+  formThree = new FormGroup<FudisCheckboxGroupFormGroup>(
+    {
+      apple: new FormControl<boolean | null>(null),
+      fairTradeBanana: new FormControl<boolean | null>(null),
+      pear: new FormControl<boolean | null>(null),
+      pineapple: new FormControl<boolean | null>(null),
+      orange: new FormControl<boolean | null | undefined>(null),
+    },
+    [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))],
+  );
+
+  formFour = new FormGroup({
+    select: new FormControl<FudisSelectOption | null>(
+      null,
+      FudisValidators.required('You must pick one'),
+    ),
+    multiselect: new FormControl<FudisSelectOption[] | null>(null, [
+      FudisValidators.required('Selection is missing'),
+      FudisValidators.minLength(2, 'Choose at least 2'),
+    ]),
+  });
+}
 
 @Component({
   selector: 'example-form-content',
@@ -297,7 +429,7 @@ export default {
   component: FormComponent,
   decorators: [
     moduleMetadata({
-      declarations: [FormContentExampleComponent],
+      declarations: [FormContentExampleComponent, ExampleWithMultipleFormsComponent],
       imports: [ReactiveFormsModule, RouterModule],
     }),
     applicationConfig({
@@ -375,5 +507,16 @@ Example.args = {
 Example.parameters = {
   controls: {
     exclude: formExclude,
+  },
+};
+
+export const ExampleWithMultipleForms: StoryFn<FormComponent> = (args: FormComponent) => ({
+  props: args,
+  template: html` <example-with-multiple-forms />`,
+});
+
+ExampleWithMultipleForms.parameters = {
+  controls: {
+    exclude: /.*/g,
   },
 };

@@ -12,7 +12,6 @@ import {
 } from '../../../utilities/form/getValidators';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { FormComponent } from '../form/form.component';
-import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { takeUntil } from 'rxjs';
 
 @Component({
@@ -26,12 +25,11 @@ export class TextAreaComponent
 {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
-    _errorSummaryService: FudisInternalErrorSummaryService,
     private _focusService: FudisFocusService,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
   ) {
-    super(_translationService, _idService, _errorSummaryService);
+    super(_translationService, _idService);
   }
 
   /**
@@ -65,6 +63,11 @@ export class TextAreaComponent
         this.control.setValue(null);
       }
     });
+
+    // TODO: write test
+    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
+      this.reloadErrorSummary(this.control);
+    }
   }
 
   ngOnChanges(changes: FudisComponentChanges<TextAreaComponent>): void {
@@ -78,10 +81,6 @@ export class TextAreaComponent
   ngAfterViewInit(): void {
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
-    }
-
-    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
-      this.reloadErrorSummary(this.control, this._parentForm.id);
     }
   }
 }

@@ -29,6 +29,7 @@
   <fudis-guidance
     *ngIf="!disableGuidance"
     [formId]="_parentForm?.id || 'unknownFormId'"
+    [reloadErrorSummary]="_reloadErrorSummary"
     [inputLabel]="label"
     [maxLength]="_maxLength"
     [helpText]="helpText"

@@ -33,11 +33,11 @@ export class FieldSetComponent
   implements AfterViewInit, OnInit, OnDestroy, OnChanges
 {
   constructor(
+    private _errorSummaryService: FudisInternalErrorSummaryService,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
-    _errorSummaryService: FudisInternalErrorSummaryService,
   ) {
-    super(_idService, _translationService, _errorSummaryService);
+    super(_idService, _translationService);
   }
 
   /**

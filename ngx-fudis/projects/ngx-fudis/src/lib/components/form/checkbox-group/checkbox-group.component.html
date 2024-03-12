@@ -13,6 +13,7 @@
     <ng-content select="fudis-checkbox" />
     <fudis-guidance
       [formId]="_parentForm?.id || 'unknownFormId'"
+      [reloadErrorSummary]="_reloadErrorSummary"
       [inputLabel]="title"
       [helpText]="helpText"
       [for]="id"

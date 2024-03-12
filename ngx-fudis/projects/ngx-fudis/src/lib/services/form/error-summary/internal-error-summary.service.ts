@@ -131,6 +131,7 @@ export class FudisInternalErrorSummaryService {
     let currentErrors = this._allFormErrors;
 
     const langUpdated =
+      currentErrors?.[newError.formId]?.[newError.id] &&
       currentErrors?.[newError.formId]?.[newError.id]?.language !== newError.language;
 
     currentErrors = {
@@ -264,19 +265,23 @@ export class FudisInternalErrorSummaryService {
   /**
    * Updates the visible and dynamic lists of all form and errors with the current error list
    */
-  public reloadErrors(): void {
+  public reloadAllErrors(): void {
     Object.keys(this._allFormErrors).forEach((key) => {
       this.reloadErrorsByFormId(key);
     });
   }
 
   public reloadErrorsByFormId(formId: string, focus?: boolean): void {
+    console.log('reload was called: ' + formId);
+
     if (focus) {
       this._focusToFormOnReload = formId;
     }
 
+    const currentSignalErrors = this._signalAllFormErrors();
+
     this._signalAllFormErrors.set({
-      ...this._signalAllFormErrors(),
+      ...currentSignalErrors,
       [formId]: this._allFormErrors[formId],
     });
   }

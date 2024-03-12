@@ -6,7 +6,6 @@ import { ComponentType } from '@angular/cdk/portal';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 import docs from './dialog.docs.mdx';
 import { FudisValidators } from '../../utilities/form/validators';
-import { FudisErrorSummaryService } from '../../services/form/error-summary/error-summary.service';
 import { dialogExclude } from '../../utilities/storybook';
 import { DialogComponent } from './dialog.component';
 import { FudisDialogSize } from '../../types/miscellaneous';
@@ -57,7 +56,11 @@ type TestForm = {
               </fudis-fieldset>
             </ng-template>
             <ng-template fudisActions type="form">
-              <fudis-button (handleClick)="closeDialogWithForm()" [label]="'Submit'"></fudis-button>
+              <fudis-button
+                (handleClick)="closeDialogWithForm()"
+                fudisFormSubmit
+                [label]="'Submit'"
+              ></fudis-button>
               <fudis-button fudisDialogClose [label]="'Cancel'"></fudis-button>
             </ng-template>
           </fudis-form>
@@ -155,10 +158,7 @@ type TestForm = {
   `,
 })
 class DialogExampleLauncherComponent {
-  constructor(
-    public dialog: FudisDialogService,
-    private _errorSummaryService: FudisErrorSummaryService,
-  ) {}
+  constructor(public dialog: FudisDialogService) {}
 
   @Input() size: FudisDialogSize = 'md';
 
@@ -176,10 +176,7 @@ class DialogExampleLauncherComponent {
   closeDialogWithForm() {
     this.exampleDialogFormGroup.markAllAsTouched();
 
-    if (this.exampleDialogFormGroup.invalid) {
-      this.errorSummaryVisible = true;
-      this._errorSummaryService.reloadErrors();
-    } else {
+    if (this.exampleDialogFormGroup.valid) {
       this.errorSummaryVisible = false;
       this.chosenPowerAnimal = this.exampleDialogFormGroup.controls.powerAnimal.value;
       this.dialog.close();
