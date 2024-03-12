@@ -15,6 +15,7 @@ import { GuidanceComponent } from '../../../components/form/guidance/guidance.co
 import { ContentDirective } from '../../content-projection/content/content.directive';
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
+import { ValidatorErrorMessageComponent } from '../../../components/form/error-message/validator-error-message/validator-error-message.component';
 
 @Component({
   selector: 'fudis-mock-checkbox-group-component',
@@ -61,6 +62,7 @@ describe('FieldSetBaseDirective', () => {
         FieldSetBaseDirective,
         FieldSetComponent,
         GuidanceComponent,
+        ValidatorErrorMessageComponent,
         GridDirective,
         MockCheckboxGroupComponent,
       ],

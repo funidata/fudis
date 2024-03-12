@@ -161,6 +161,7 @@ describe('GuidanceComponent', () => {
 
   describe('with Form Group', () => {
     beforeEach(() => {
+      component.formId = 'some-test-id';
       component.formGroup = testFormGroup;
       component.groupBlurredOut = true;
       component.formGroup.controls['finnish'].markAsUntouched();
@@ -232,7 +233,10 @@ describe('GuidanceComponent', () => {
         component.groupBlurredOut = false;
         fixture.detectChanges();
 
-        const errorList = getAllElements(fixture, 'fudis-validator-error-message');
+        const errorList = getAllElements(
+          fixture,
+          'fudis-validator-error-message[ng-reflect-visible="true"]',
+        );
         expect(errorList.length).toBe(0);
       });
 

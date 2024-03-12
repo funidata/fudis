@@ -24,7 +24,7 @@
                   (handleCreateError)="_disableReload()"
                   [formId]="formId"
                   [focusId]="for"
-                  [visible]="singleControl.value.touched || formGroup.touched || groupBlurredOut"
+                  [visible]="(singleControl.value.touched || formGroup.touched) && groupBlurredOut"
                   [type]="error.key"
                   [controlName]="singleControl.key"
                   [label]="inputLabel"

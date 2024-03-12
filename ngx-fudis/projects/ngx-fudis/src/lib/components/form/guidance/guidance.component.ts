@@ -26,7 +26,7 @@ export class GuidanceComponent implements OnInit {
 
       if (
         this.formId &&
-        errors[this.formId][this.for] &&
+        errors[this.formId]?.[this.for] &&
         (_errorSummaryService.formIdToUpdate === this.formId ||
           _errorSummaryService.formIdToUpdate === 'all')
       ) {
