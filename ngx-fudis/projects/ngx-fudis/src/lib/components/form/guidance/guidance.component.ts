@@ -20,6 +20,23 @@ export class GuidanceComponent implements OnInit {
     effect(() => {
       this._maxLengthText = _translationService.getTranslations()().TEXTINPUT.MAX_LENGTH;
     });
+
+    effect(() => {
+      const errors = _errorSummaryService.getErrorsOnReload()();
+
+      if (
+        this.formId &&
+        errors[this.formId][this.for] &&
+        (_errorSummaryService.formIdToUpdate === this.formId ||
+          _errorSummaryService.formIdToUpdate === 'all')
+      ) {
+        if (this.control) {
+          this.control.markAsTouched();
+        } else if (this.formGroup) {
+          this.formGroup.markAllAsTouched();
+        }
+      }
+    });
   }
 
   /**
@@ -70,7 +87,7 @@ export class GuidanceComponent implements OnInit {
   /**
    * Id of parent Form component
    */
-  @Input() formId: string;
+  @Input() formId: string | null;
 
   /**
    * To trigger Error Summary reload when this Guidance's Validator Error Messages are initialised. This is used in cases when parent component (e. g. Text Input) is lazy loaded to DOM after initial Error Summary reload was called before these Validator Error Messages existed.
@@ -101,7 +118,7 @@ export class GuidanceComponent implements OnInit {
   }
 
   protected _disableReload(): void {
-    if (this.reloadErrorSummary && !this._firstReloadFinished) {
+    if (this.formId && this.reloadErrorSummary && !this._firstReloadFinished) {
       this._firstReloadFinished = true;
       this._errorSummaryService.focusToFormOnReload = null;
       this._errorSummaryService.reloadErrorsByFormId(this.formId);

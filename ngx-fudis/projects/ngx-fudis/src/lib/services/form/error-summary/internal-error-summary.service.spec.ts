@@ -10,7 +10,7 @@ import { FudisInternalErrorSummaryService } from './internal-error-summary.servi
 
 describe('InternalErrorSummaryService', () => {
   let service: FudisInternalErrorSummaryService;
-  let currentErrors: FudisFormErrorSummaryFormsAndErrors = { unknownFormId: {} };
+  let currentErrors: FudisFormErrorSummaryFormsAndErrors;
 
   const firstError: FudisFormErrorSummaryItem = {
     id: 'first-error',
@@ -65,11 +65,13 @@ describe('InternalErrorSummaryService', () => {
 
   const fieldSetForErrorSummary: FudisFormErrorSummarySection = {
     id: 'unique-fieldset-id',
+    formId: 'test-form-id-1',
     title: 'Fill all the information',
   };
 
   const sectionForErrorSummary: FudisFormErrorSummarySection = {
     id: 'unique-section-id',
+    formId: 'test-form-id-1',
     title: 'Main section',
   };
 
@@ -91,7 +93,7 @@ describe('InternalErrorSummaryService', () => {
   it('should initially return an empty object', () => {
     const errors = service.getErrorsOnReload()();
 
-    const initial = { unknownFormId: {} };
+    const initial = {};
 
     expect(errors).toEqual(initial);
   });
@@ -104,7 +106,6 @@ describe('InternalErrorSummaryService', () => {
     currentErrors = {
       'test-form-id-1': firstErrorFromService,
       'test-form-id-2': secondErrorFromService,
-      unknownFormId: {},
     };
 
     service.reloadErrorsByFormId('test-form-id-1');
@@ -147,27 +148,34 @@ describe('InternalErrorSummaryService', () => {
   it('should add fieldset information to currentFieldsets array', () => {
     service.addFieldset(fieldSetForErrorSummary);
 
-    expect(service['_currentFieldsets']).toEqual([fieldSetForErrorSummary]);
+    const fieldset = { 'test-form-id-1': [fieldSetForErrorSummary], 'test-form-id-2': [] };
+
+    expect(service.fieldsets).toEqual(fieldset);
   });
 
   it('should remove fieldset information from currentFieldsets array', () => {
     service.addFieldset(fieldSetForErrorSummary);
     service.removeFieldset(fieldSetForErrorSummary);
 
-    expect(service['_currentFieldsets']).toEqual([]);
+    expect(service.fieldsets).toEqual({ 'test-form-id-1': [], 'test-form-id-2': [] });
   });
 
   it('should add section information to currentSections array', () => {
     service.addSection(sectionForErrorSummary);
 
-    expect(service['_currentSections']).toEqual([sectionForErrorSummary]);
+    const sections = { 'test-form-id-1': [sectionForErrorSummary], 'test-form-id-2': [] };
+
+    expect(service.sections).toEqual(sections);
   });
 
   it('should remove section information from currentSections array', () => {
     service.addSection(sectionForErrorSummary);
+
     service.removeSection(sectionForErrorSummary);
 
-    expect(service['_currentSections']).toEqual([]);
+    const sections = { 'test-form-id-1': [], 'test-form-id-2': [] };
+
+    expect(service.sections).toEqual(sections);
   });
 
   it('should set and return update strategy', () => {

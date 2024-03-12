@@ -6,6 +6,7 @@ import {
   FudisFormErrorSummaryRemoveItem,
   FudisFormErrorSummaryUpdateStrategy,
   FudisFormErrorSummaryFormsAndErrors,
+  FudisFormErrorSummarySectionObject,
 } from '../../../types/forms';
 
 /**
@@ -18,7 +19,7 @@ export class FudisInternalErrorSummaryService {
   /**
    * Current errors
    */
-  private _allFormErrors: FudisFormErrorSummaryFormsAndErrors = { unknownFormId: {} };
+  private _allFormErrors: FudisFormErrorSummaryFormsAndErrors = {};
 
   /**
    * Collection of errors as a Signal categorised by parent Form id.
@@ -28,17 +29,17 @@ export class FudisInternalErrorSummaryService {
    So now although effect() hooks in all Error Summary Components trigger if one of them is reloaded, there is safeguard logic that only the targeted one will update visible errors even if the whole signal is updated.
    */
 
-  private _signalAllFormErrors = signal<FudisFormErrorSummaryFormsAndErrors>({ unknownFormId: {} });
+  private _signalAllFormErrors = signal<FudisFormErrorSummaryFormsAndErrors>({});
 
   /**
    * Current fieldsets
    */
-  private _currentFieldsets: FudisFormErrorSummarySection[] = [];
+  private _fieldsets: FudisFormErrorSummarySectionObject = {};
 
   /**
    * Current sections
    */
-  private _currentSections: FudisFormErrorSummarySection[] = [];
+  private _sections: FudisFormErrorSummarySectionObject = {};
 
   /**
    * Info to Error Summary Component if it should move user focus to updated list or not
@@ -93,15 +94,15 @@ export class FudisInternalErrorSummaryService {
   /**
    * Returns a list of current fieldsets
    */
-  public getFieldsetList(): FudisFormErrorSummarySection[] {
-    return this._currentFieldsets;
+  public get fieldsets(): FudisFormErrorSummarySectionObject {
+    return this._fieldsets;
   }
 
   /**
    * Returns a list of current sections
    */
-  public getSectionList(): FudisFormErrorSummarySection[] {
-    return this._currentSections;
+  public get sections(): FudisFormErrorSummarySectionObject {
+    return this._sections;
   }
 
   /**
@@ -124,11 +125,23 @@ export class FudisInternalErrorSummaryService {
 
   public addNewFormId(formId: string): void {
     this._allFormErrors[formId] = {};
+
+    this._sections[formId] = [];
+
+    this._fieldsets[formId] = [];
   }
 
   public removeFormId(formId: string): void {
     if (this._allFormErrors[formId]) {
       delete this._allFormErrors[formId];
+    }
+
+    if (this._sections[formId]) {
+      delete this._sections[formId];
+    }
+
+    if (this._fieldsets[formId]) {
+      delete this._fieldsets[formId];
     }
   }
 
@@ -228,16 +241,7 @@ export class FudisInternalErrorSummaryService {
    * @param fieldset Form error summary fieldset
    */
   public addFieldset(fieldset: FudisFormErrorSummarySection): void {
-    const existingItem = this._currentFieldsets.find((item) => {
-      return item.id === fieldset.id;
-    });
-
-    if (existingItem) {
-      const index = this._currentFieldsets.indexOf(existingItem);
-      this._currentFieldsets[index] = fieldset;
-    } else {
-      this._currentFieldsets.push(fieldset);
-    }
+    this._fieldsets = this.updateSectionsOrFieldsets(this._fieldsets, fieldset);
   }
 
   /**
@@ -245,9 +249,9 @@ export class FudisInternalErrorSummaryService {
    * @param fieldset Form error summary fieldset
    */
   public removeFieldset(fieldset: FudisFormErrorSummarySection): void {
-    const indexToRemove = this._currentFieldsets.indexOf(fieldset);
+    const indexToRemove = this._fieldsets[fieldset.formId].indexOf(fieldset);
 
-    this._currentFieldsets.splice(indexToRemove, 1);
+    this._fieldsets[fieldset.formId].splice(indexToRemove, 1);
   }
 
   /**
@@ -256,16 +260,27 @@ export class FudisInternalErrorSummaryService {
    * @param section Form error summary section
    */
   public addSection(section: FudisFormErrorSummarySection): void {
-    const existingItem = this._currentSections.find((item) => {
-      return item.id === section.id;
+    this._sections = this.updateSectionsOrFieldsets(this._sections, section);
+  }
+
+  private updateSectionsOrFieldsets(
+    previousValues: FudisFormErrorSummarySectionObject,
+    newValue: FudisFormErrorSummarySection,
+  ): FudisFormErrorSummarySectionObject {
+    const valuesToReturn = previousValues;
+
+    const existingItem = valuesToReturn[newValue.formId]?.find((item) => {
+      return item.id === newValue.id;
     });
 
     if (existingItem) {
-      const index = this._currentSections.indexOf(existingItem);
-      this._currentSections[index] = section;
+      const index = valuesToReturn[newValue.formId].indexOf(existingItem);
+      valuesToReturn[newValue.formId][index] = newValue;
     } else {
-      this._currentSections.push(section);
+      valuesToReturn[newValue.formId].push(newValue);
     }
+
+    return valuesToReturn;
   }
 
   /**
@@ -273,9 +288,9 @@ export class FudisInternalErrorSummaryService {
    * @param section Form error summary section
    */
   public removeSection(section: FudisFormErrorSummarySection): void {
-    const indexToRemove = this._currentSections.indexOf(section);
+    const indexToRemove = this._sections[section.formId].indexOf(section);
 
-    this._currentSections.splice(indexToRemove, 1);
+    this._sections[section.formId].splice(indexToRemove, 1);
   }
 
   /**

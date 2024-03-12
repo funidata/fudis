@@ -174,8 +174,6 @@ class DialogExampleLauncherComponent {
   });
 
   closeDialogWithForm() {
-    this.exampleDialogFormGroup.markAllAsTouched();
-
     if (this.exampleDialogFormGroup.valid) {
       this.errorSummaryVisible = false;
       this.chosenPowerAnimal = this.exampleDialogFormGroup.controls.powerAnimal.value;

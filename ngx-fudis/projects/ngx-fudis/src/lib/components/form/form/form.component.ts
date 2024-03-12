@@ -135,11 +135,4 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
       this.id = this._idService.getNewId('form');
     }
   }
-
-  /**
-   * Getter for FormElement
-   */
-  public get formElement(): HTMLFormElement | undefined {
-    return this._formElement;
-  }
 }

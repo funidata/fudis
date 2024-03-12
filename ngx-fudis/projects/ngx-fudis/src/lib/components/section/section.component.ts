@@ -1,10 +1,12 @@
 import {
   Component,
   ContentChild,
+  Host,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
+  Optional,
   ViewEncapsulation,
 } from '@angular/core';
 import { FudisIdService } from '../../services/id/id.service';
@@ -18,6 +20,7 @@ import { FudisSpacing } from '../../types/miscellaneous';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisFormErrorSummarySection } from '../../types/forms';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
+import { FormComponent } from '../form/form/form.component';
 
 // TODO: Write Stroybook documentation and add missing internal documentation for the functions
 @Component({
@@ -28,6 +31,7 @@ import { ActionsDirective } from '../../directives/content-projection/actions/ac
 })
 export class SectionComponent extends TooltipApiDirective implements OnInit, OnChanges, OnDestroy {
   constructor(
+    @Host() @Optional() private _parentForm: FormComponent | null,
     private _idService: FudisIdService,
     private _errorSummaryService: FudisInternalErrorSummaryService,
   ) {
@@ -145,9 +149,10 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   }
 
   private _addToErrorSummary(): void {
-    if (this.errorSummaryBreadcrumb) {
+    if (this.errorSummaryBreadcrumb && this._parentForm) {
       this._errorSummaryInfo = {
         id: this.id,
+        formId: this._parentForm.id,
         title: this._title,
       };
       this._errorSummaryService.addSection(this._errorSummaryInfo);

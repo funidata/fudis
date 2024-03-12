@@ -70,7 +70,7 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
   /**
    * Id of parent Form component
    */
-  @Input() formId: string = 'unknownFormId';
+  @Input() formId: string | null;
 
   /**
    * Output for handling a state when error is sent to Error Summary
@@ -181,9 +181,7 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
   }
 
   private _createError(): void {
-    const errorCondition = this.focusId && this._currentMessage && this.label;
-
-    if (errorCondition) {
+    if (this.formId && this.focusId && this._currentMessage && this.label) {
       const newError: FudisFormErrorSummaryItem = {
         id: this.focusId,
         error: this._currentMessage,
@@ -201,7 +199,7 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
   }
 
   private _removeError(): void {
-    if (this._errorSent) {
+    if (this._errorSent && this.formId) {
       const errorToRemove: FudisFormErrorSummaryRemoveItem = {
         id: this.focusId,
         formId: this.formId,

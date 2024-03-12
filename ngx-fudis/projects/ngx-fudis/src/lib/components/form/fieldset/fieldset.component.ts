@@ -3,10 +3,12 @@ import {
   Component,
   ContentChild,
   ElementRef,
+  Host,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
+  Optional,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -21,6 +23,7 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FudisFormErrorSummarySection, FudisInputSize } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { FormComponent } from '../form/form.component';
 
 @Component({
   selector: 'fudis-fieldset',
@@ -33,6 +36,7 @@ export class FieldSetComponent
   implements AfterViewInit, OnInit, OnDestroy, OnChanges
 {
   constructor(
+    @Host() @Optional() private _parentForm: FormComponent | null,
     private _errorSummaryService: FudisInternalErrorSummaryService,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
@@ -161,9 +165,10 @@ export class FieldSetComponent
    * Add Field Set title to Error Summary
    */
   private _addToErrorSummary(title: string): void {
-    if (this.errorSummaryBreadcrumb) {
+    if (this.errorSummaryBreadcrumb && this._parentForm) {
       this._fieldsetInfo = {
         id: this.id,
+        formId: this._parentForm.id,
         title: title,
       };
 

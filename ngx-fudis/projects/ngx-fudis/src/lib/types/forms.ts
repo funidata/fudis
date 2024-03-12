@@ -61,7 +61,6 @@ export type FudisFormErrorSummaryRemoveItem = {
 };
 
 export type FudisFormErrorSummaryFormsAndErrors = {
-  unknownFormId: FudisFormErrorSummaryObject;
   [id: string]: FudisFormErrorSummaryObject;
 };
 
@@ -83,7 +82,12 @@ export type FudisFormErrorSummaryObject = {
 
 export type FudisFormErrorSummarySection = {
   id: string;
+  formId: string;
   title: string;
+};
+
+export type FudisFormErrorSummarySectionObject = {
+  [formId: string]: FudisFormErrorSummarySection[];
 };
 
 export type FudisFormErrorSummaryList = {

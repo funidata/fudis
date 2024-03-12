@@ -130,10 +130,6 @@ class FieldsetExampleComponent {
     { value: 'basic', label: 'Basic', id: 'courseType-1' },
     { value: 'advanced', label: 'Advanced', id: 'courseType-2' },
   ];
-
-  submitForm(): void {
-    this.fieldsetExample.markAllAsTouched();
-  }
 }
 
 export default {

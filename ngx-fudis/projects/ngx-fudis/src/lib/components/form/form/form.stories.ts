@@ -49,7 +49,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
           />
         </ng-template>
         <ng-template fudisContent [type]="'form'">
-          <fudis-expandable [title]="'Expandable with Text Input'">
+          <fudis-expandable [title]="'Expandable with Text Input'" [errorSummaryBreadcrumb]="true">
             <ng-template fudisContent [type]="'expandable'">
               <fudis-text-input
                 [label]="'Name'"
@@ -74,7 +74,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
           />
         </ng-template>
         <ng-template fudisContent [type]="'form'">
-          <fudis-expandable [title]="'Expandable with Text Area'">
+          <fudis-expandable [title]="'Expandable with Text Area'" [errorSummaryBreadcrumb]="true">
             <ng-template fudisContent [type]="'expandable'">
               <fudis-text-area
                 [label]="'Description'"
@@ -99,7 +99,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
           />
         </ng-template>
         <ng-template fudisContent [type]="'form'">
-          <fudis-expandable [title]="'Expandable with Text Area'">
+          <fudis-expandable [title]="'Expandable with Text Area'" [errorSummaryBreadcrumb]="true">
             <ng-template fudisContent [type]="'expandable'">
               <fudis-checkbox-group
                 [title]="'Pick a fruit'"
@@ -130,24 +130,34 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
           />
         </ng-template>
         <ng-template fudisContent [type]="'form'">
-          <fudis-expandable [title]="'Expandable with Select and Multiselect'">
+          <fudis-expandable
+            [title]="'Expandable with Select and Multiselect'"
+            [errorSummaryBreadcrumb]="true"
+          >
             <ng-template fudisContent [type]="'expandable'">
-              <fudis-select
-                [label]="'Pick a pet'"
-                [control]="allForms.controls.formFour.controls.select"
-              >
-                <ng-template fudisContent type="select-options">
-                  <fudis-select-option *ngFor="let option of selectOptions" [data]="option" />
+              <fudis-fieldset [title]="'Select and Multiselect'" [errorSummaryBreadcrumb]="true">
+                <ng-template fudisContent type="fieldset">
+                  <fudis-select
+                    [label]="'Pick a pet'"
+                    [control]="allForms.controls.formFour.controls.select"
+                  >
+                    <ng-template fudisContent type="select-options">
+                      <fudis-select-option *ngFor="let option of selectOptions" [data]="option" />
+                    </ng-template>
+                  </fudis-select>
+                  <fudis-multiselect
+                    [label]="'Pick multiple pets'"
+                    [control]="allForms.controls.formFour.controls.multiselect"
+                  >
+                    <ng-template fudisContent type="select-options">
+                      <fudis-multiselect-option
+                        *ngFor="let option of selectOptions"
+                        [data]="option"
+                      />
+                    </ng-template>
+                  </fudis-multiselect>
                 </ng-template>
-              </fudis-select>
-              <fudis-multiselect
-                [label]="'Pick multiple pets'"
-                [control]="allForms.controls.formFour.controls.multiselect"
-              >
-                <ng-template fudisContent type="select-options">
-                  <fudis-multiselect-option *ngFor="let option of selectOptions" [data]="option" />
-                </ng-template>
-              </fudis-multiselect>
+              </fudis-fieldset>
             </ng-template>
           </fudis-expandable>
         </ng-template>
@@ -473,7 +483,9 @@ class FormContentExampleComponent implements OnInit {
   }
 
   submitForm(): void {
-    this.formExample.markAllAsTouched();
+    if (this.formExample.valid) {
+      //this.errorSummaryVisible = false;
+    }
   }
 
   handleClosedOutput(value: boolean): void {

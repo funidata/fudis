@@ -168,8 +168,6 @@ export class AppFormExampleComponent implements OnInit {
   }
 
   clickSubmit(): void {
-    this.testFormGroup.markAllAsTouched();
-
     if (this.testFormGroup.valid) {
       this.showSuccessBodyText = true;
     }

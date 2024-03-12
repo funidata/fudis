@@ -73,7 +73,6 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   protected reloadErrorSummary(group: FormGroup): void {
     if (group.errors) {
       this._reloadErrorSummary = true;
-      group.markAllAsTouched();
     }
   }
 }

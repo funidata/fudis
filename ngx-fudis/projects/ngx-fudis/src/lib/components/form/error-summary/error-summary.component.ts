@@ -45,6 +45,7 @@ export class ErrorSummaryComponent implements AfterViewInit {
       const errors = _errorSummaryService.getErrorsOnReload()()[this.formId];
 
       if (
+        this.parentComponent &&
         this.formId &&
         (_errorSummaryService.formIdToUpdate === this.formId ||
           _errorSummaryService.formIdToUpdate === 'all')
@@ -128,9 +129,11 @@ export class ErrorSummaryComponent implements AfterViewInit {
   private _updateSummaryContent(content: FudisFormErrorSummaryObject): void {
     const newErrorList: FudisFormErrorSummaryList[] = [];
 
-    const fieldsets: FudisFormErrorSummarySection[] = this._errorSummaryService.getFieldsetList();
+    const fieldsets: FudisFormErrorSummarySection[] =
+      this._errorSummaryService.fieldsets[this.formId];
 
-    const sections: FudisFormErrorSummarySection[] = this._errorSummaryService.getSectionList();
+    const sections: FudisFormErrorSummarySection[] =
+      this._errorSummaryService.sections[this.formId];
 
     Object.keys(content).forEach((item) => {
       const errorId = content[item].id;
