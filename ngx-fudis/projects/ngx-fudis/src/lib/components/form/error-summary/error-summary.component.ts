@@ -98,6 +98,22 @@ export class ErrorSummaryComponent implements AfterViewInit {
   private _numberOfFocusTries: number = 0;
 
   /**
+   * To enable clicking Error Summary links and then moving focus to corresponding form field. This was needed, as not all Fudis applications use Angular Router, so alternative approach was needed.
+   *
+   * @param event Original click event
+   * @param clickedId Id of clicked link in Error Summary
+   */
+  protected handleErrorClick(event: Event, clickedId: string): void {
+    event.preventDefault();
+
+    const linkToFocus = this.parentComponent.querySelector(`#${clickedId}`) as HTMLInputElement;
+
+    if (linkToFocus) {
+      linkToFocus.focus();
+    }
+  }
+
+  /**
    * Sort errors the same order they appear in the DOM
    */
   private _sortErrorOrder(a: FudisFormErrorSummaryList, b: FudisFormErrorSummaryList): 0 | -1 | 1 {

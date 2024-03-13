@@ -37,7 +37,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
       <fudis-form
         [titleLevel]="2"
         [title]="'Form with Text Input'"
-        [errorSummaryLinkType]="'href'"
+        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -62,7 +62,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
       <fudis-form
         [titleLevel]="2"
         [title]="'Form with Text Area'"
-        [errorSummaryLinkType]="'href'"
+        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -87,7 +87,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
       <fudis-form
         [titleLevel]="2"
         [title]="'Form with Checkbox Group'"
-        [errorSummaryLinkType]="'href'"
+        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -118,7 +118,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
       <fudis-form
         [titleLevel]="2"
         [title]="'Form with Select and Multiselect'"
-        [errorSummaryLinkType]="'href'"
+        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >

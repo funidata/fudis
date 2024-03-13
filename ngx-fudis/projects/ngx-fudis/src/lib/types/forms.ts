@@ -138,6 +138,6 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
   },
 };
 
-export type FudisFormErrorSummaryLink = 'router' | 'href';
+export type FudisFormErrorSummaryLink = 'router' | 'href' | 'onClick';
 
 export type FudisFormErrorSummaryUpdateStrategy = 'reloadOnly' | 'all' | 'onRemove';
