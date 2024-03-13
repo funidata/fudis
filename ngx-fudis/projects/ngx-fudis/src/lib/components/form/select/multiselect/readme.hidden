@@ -1,6 +1,6 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/blocks";
 import { MultiselectComponent } from "./multiselect.component";
-import * as Stories from "./multiselect.stories.ts";
+import * as Stories from "./multiselect.stories";
 import { selectAndMultiselectExclude } from "../../../../utilities/storybook";
 
 <Meta title="Components/Form/Select/Multiselect" />

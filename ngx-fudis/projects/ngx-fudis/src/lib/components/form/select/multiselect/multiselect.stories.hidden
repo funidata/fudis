@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { MultiselectComponent } from './multiselect.component';
-import readme from './readme.mdx';
+import readme from './readme.hidden';
 import { groupedMockData, defaultOptions } from '../common/mock_data';
 import { selectCommonExclude } from '../../../../utilities/storybook';
 
