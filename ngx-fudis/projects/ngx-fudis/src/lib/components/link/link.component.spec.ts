@@ -5,6 +5,7 @@ import { MockComponent } from 'ng-mocks';
 import { RouterModule } from '@angular/router';
 import { IconComponent } from '../icon/icon.component';
 import { LinkComponent } from './link.component';
+import { LinkDirective } from '../../directives/link/link.directive';
 import { getElement, getTrimmedTextContent } from '../../utilities/tests/utilities';
 import { FudisLinkColor } from '../../types/miscellaneous';
 
@@ -14,7 +15,7 @@ describe('LinkComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LinkComponent, MockComponent(IconComponent)],
+      declarations: [LinkComponent, LinkDirective, MockComponent(IconComponent)],
       imports: [RouterModule.forRoot([])],
     })
       .overrideComponent(LinkComponent, {
@@ -146,12 +147,7 @@ describe('LinkComponent', () => {
       fixture.detectChanges();
 
       const linkElement = fixture.nativeElement.querySelector('a');
-
-      jest.spyOn(linkElement, 'focus').mockImplementation(() => {});
-
-      component.ngAfterViewInit();
-
-      expect(linkElement.focus).toHaveBeenCalledWith();
+      expect(linkElement?.getAttribute('ng-reflect-initial-focus')).toEqual('true');
     });
 
     it('should NOT have focus after first load', () => {
@@ -159,12 +155,7 @@ describe('LinkComponent', () => {
       fixture.detectChanges();
 
       const linkElement = fixture.nativeElement.querySelector('a');
-
-      jest.spyOn(linkElement, 'focus').mockImplementation(() => {});
-
-      component.ngAfterViewInit();
-
-      expect(linkElement.focus).not.toHaveBeenCalledWith();
+      expect(linkElement?.getAttribute('ng-reflect-initial-focus')).toEqual('false');
     });
   });
 });

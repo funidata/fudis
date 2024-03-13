@@ -1,0 +1,25 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import { LinkDirective } from "./link.directive.ts";
+import * as LinkDirectiveStories from "./link.directive.stories.ts";
+import { linkExclude } from "../../utilities/storybook";
+
+<Meta title="Directives/Link" />
+
+# Link Directive
+
+It is recommended to use [Link Component](/docs/components-link--documentation), which uses Link Directive under it's hood.
+Link Component's API currently supports href and Angular Router.
+When alternative routing method is required e. g. UIRouter, it is recommended to use `fudisLink` with HTML anchor element. This will apply Link Component's `color` and `size` properties to native HTML anchor element.
+Link Directive doesn't support the use of `externalLink` property.
+
+## Examples
+
+<Canvas of={LinkDirectiveStories.Example}></Canvas>
+
+```
+    <a fudisLink href="#example" [color]="color" [size]="size">https://www.example.com</a>
+```
+
+## Properties
+
+<ArgTypes of={LinkDirective} exclude={linkExclude} />
