@@ -102,7 +102,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
           <fudis-expandable [title]="'Expandable with Text Area'" [errorSummaryBreadcrumb]="true">
             <ng-template fudisContent [type]="'expandable'">
               <fudis-checkbox-group
-                [title]="'Pick a fruit'"
+                [label]="'Pick a fruit'"
                 [formGroup]="allForms.controls.formThree"
               >
                 <fudis-checkbox
@@ -135,7 +135,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
             [errorSummaryBreadcrumb]="true"
           >
             <ng-template fudisContent [type]="'expandable'">
-              <fudis-fieldset [title]="'Select and Multiselect'" [errorSummaryBreadcrumb]="true">
+              <fudis-fieldset [label]="'Select and Multiselect'" [errorSummaryBreadcrumb]="true">
                 <ng-template fudisContent type="fieldset">
                   <fudis-select
                     [label]="'Pick a pet'"
@@ -257,7 +257,7 @@ class ExampleWithMultipleFormsComponent {
           <ng-template fudisContent [type]="'expandable'">
             <fudis-grid>
               <fudis-fieldset
-                [title]="'Basic info'"
+                [label]="'Basic info'"
                 [helpText]="'Some generic info about this course'"
                 [id]="fieldsetId"
               >
@@ -298,14 +298,14 @@ class ExampleWithMultipleFormsComponent {
                           "
                         /> -->
                     <!-- <fudis-radio-button-group
-                          [title]="'Course type'"
+                          [label]="'Course type'"
                           [id]="'radio-button-group-1'"
                           [options]="courseTypeOptions"
                           [control]="formExample.controls['courseType']"
                         /> -->
                     <fudis-checkbox-group
                       [formGroup]="formExample.controls.courseBooks"
-                      [title]="'Course books'"
+                      [label]="'Course books'"
                       [helpText]="'Select 1-2 coursebooks'"
                     >
                       <fudis-checkbox [controlName]="'first'" [label]="'Heir to the Empire'" />
@@ -328,7 +328,7 @@ class ExampleWithMultipleFormsComponent {
                 </ng-template>
               </fudis-fieldset>
               <fudis-fieldset
-                [title]="'Tearcher info'"
+                [label]="'Tearcher info'"
                 [tooltip]="'Quite many fields are required.'"
               >
                 <ng-template fudisContent [type]="'fieldset'">
@@ -359,7 +359,7 @@ class ExampleWithMultipleFormsComponent {
               [errorSummaryBreadcrumb]="true"
             >
               <ng-template fudisContent [type]="'expandable'">
-                <fudis-fieldset [title]="'More important dates'">
+                <fudis-fieldset [label]="'More important dates'">
                   <ng-template fudisContent [type]="'fieldset'">
                     <fudis-date-range
                       [startDate]="dateRangeStartDate"

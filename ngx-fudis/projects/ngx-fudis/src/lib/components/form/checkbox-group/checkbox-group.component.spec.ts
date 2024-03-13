@@ -32,7 +32,7 @@ const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
   selector: 'fudis-mock-component',
   template: `<fudis-checkbox-group
     [formGroup]="testFromGroup"
-    [title]="'Choose minimum of one fruit'"
+    [label]="'Choose minimum of one fruit'"
   >
     <p class="do-not-find-me">This should not be shown</p>
     <fudis-checkbox
@@ -98,18 +98,18 @@ describe('CheckboxGroupComponent', () => {
       fixture = TestBed.createComponent(CheckboxGroupComponent);
       component = fixture.componentInstance;
       component.formGroup = testFormGroup;
-      component.title = 'Checkbox Group test title';
+      component.label = 'Checkbox Group test title';
       component.helpText = 'Some help text';
 
       fixture.detectChanges();
     });
 
-    it('should have correct title as legend', () => {
-      const legendTitle = fixture.nativeElement.querySelector(
+    it('should have correct label as legend', () => {
+      const legendLabel = fixture.nativeElement.querySelector(
         '.fudis-fieldset__legend__title__text',
       ) as HTMLElement;
 
-      expect(legendTitle.textContent).toContain('Checkbox Group test title');
+      expect(legendLabel.textContent).toContain('Checkbox Group test title');
     });
 
     it('should have correct helptext in the guidance', () => {

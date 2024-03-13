@@ -46,7 +46,7 @@ import { LinkDirective } from '../../../directives/link/link.directive';
     [errorSummaryVisible]="errorSummaryVisible"
   >
     <ng-template fudisContent type="form">
-      <fudis-fieldset [title]="'Form information'">
+      <fudis-fieldset [label]="'Form information'">
         <ng-template fudisContent type="fieldset">
           <fudis-text-input
             [control]="formGroup.controls.name"

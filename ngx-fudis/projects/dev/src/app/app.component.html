@@ -155,10 +155,10 @@
         [titleLevel]="2"
       >
         <ng-template fudisContent [type]="'form'">
-          <fudis-fieldset [title]="'We need some information'">
+          <fudis-fieldset [label]="'We need some information'">
             <ng-template fudisContent [type]="'fieldset'">
               <fudis-checkbox-group
-                [title]="'Choose berry'"
+                [label]="'Choose berry'"
                 [helpText]="'Berries are yummy'"
                 [tooltip]="'We want to know!'"
                 [formGroup]="testFormGroup.controls['checkboxFormGroup']"
@@ -178,7 +178,7 @@
                 "
               />
               <!-- <fudis-radio-button-group
-                [title]="'Choose the truth'"
+                [label]="'Choose the truth'"
                 [control]="testFormGroup.controls['truth']"
                 [options]="radioButtonOptions"
               /> -->

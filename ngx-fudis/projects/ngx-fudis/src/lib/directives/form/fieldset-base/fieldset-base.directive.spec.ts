@@ -20,7 +20,7 @@ import { ValidatorErrorMessageComponent } from '../../../components/form/error-m
 @Component({
   selector: 'fudis-mock-checkbox-group-component',
   template: ` <fudis-checkbox-group
-    [title]="title"
+    [label]="label"
     [helpText]="helpText"
     [formGroup]="_checkboxFormGroup"
   >
@@ -32,7 +32,7 @@ import { ValidatorErrorMessageComponent } from '../../../components/form/error-m
   </fudis-checkbox-group>`,
 })
 class MockCheckboxGroupComponent {
-  title = 'This is checkbox group';
+  label = 'This is checkbox group';
   helpText = 'Here are some advices';
 
   private _checkboxOptions: FudisCheckboxOption[] = [
@@ -102,10 +102,10 @@ describe('FieldSetBaseDirective', () => {
       fixtureMock.detectChanges();
     });
 
-    it('should have title', () => {
-      const titleElement = getElement(fixtureMock, '.fudis-fieldset__legend__title__text');
+    it('should have label', () => {
+      const labelElement = getElement(fixtureMock, '.fudis-fieldset__legend__title__text');
 
-      expect(titleElement.textContent).toEqual('This is checkbox group (Required)');
+      expect(labelElement.textContent).toEqual('This is checkbox group (Required)');
     });
 
     it('should have id constructed through Fudis id service', () => {

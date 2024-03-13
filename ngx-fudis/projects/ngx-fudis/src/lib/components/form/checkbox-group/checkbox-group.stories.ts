@@ -67,7 +67,7 @@ const ExampleTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupCom
   template: html`<fudis-checkbox-group
     [size]="size"
     [formGroup]="formGroup"
-    [title]="title"
+    [label]="label"
     [helpText]="helpText"
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
@@ -83,7 +83,7 @@ const ExampleTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupCom
 
 export const Example = ExampleTemplate.bind({});
 Example.args = {
-  title: 'Choose your preferred fruits',
+  label: 'Choose your preferred fruits',
   helpText: 'Pick at least one fruit.',
   size: 'lg',
   tooltip: 'Fruit sugar is great in small doces!',
@@ -113,7 +113,7 @@ const ExampleWithDisabledTemplate: StoryFn<CheckboxGroupComponent> = (
   template: html`<fudis-checkbox-group
     [size]="size"
     [formGroup]="formGroup"
-    [title]="title"
+    [label]="label"
     [helpText]="helpText"
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
@@ -129,7 +129,7 @@ const ExampleWithDisabledTemplate: StoryFn<CheckboxGroupComponent> = (
 
 export const ExampleWithDisabledOption = ExampleWithDisabledTemplate.bind({});
 ExampleWithDisabledOption.args = {
-  title: 'Choose your preferred fruits',
+  label: 'Choose your preferred fruits',
   helpText: 'Some options are disabled and cannot be toggled.',
   size: 'lg',
   tooltip: 'Fruit sugar is great in small doces!',
@@ -168,7 +168,7 @@ const ExampleWithMinMaxTemplate: StoryFn<CheckboxGroupComponent> = (
   template: html`<fudis-checkbox-group
     [size]="size"
     [formGroup]="formGroup"
-    [title]="title"
+    [label]="label"
     [helpText]="helpText"
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
@@ -184,7 +184,7 @@ const ExampleWithMinMaxTemplate: StoryFn<CheckboxGroupComponent> = (
 
 export const ExampleWithMinMax = ExampleWithMinMaxTemplate.bind({});
 ExampleWithMinMax.args = {
-  title: 'Choose your preferred fruits',
+  label: 'Choose your preferred fruits',
   helpText: 'Pick two to three fruits.',
   size: 'lg',
   tooltip: 'Fruit sugar is great in small doces!',

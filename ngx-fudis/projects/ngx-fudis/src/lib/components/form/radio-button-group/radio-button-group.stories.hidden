@@ -25,7 +25,7 @@
 //       <fudis-radio-button-group
 //         *ngIf="mainFormGroup"
 //         style="margin-bottom: 1rem;"
-//         [title]="'Choose your preferred fruit'"
+//         [label]="'Choose your preferred fruit'"
 //         [helpText]="'Fruits are important for your health.'"
 //         [control]="mainFormGroup.controls['first']"
 //         [options]="fruitOptions"
@@ -33,7 +33,7 @@
 //       <fudis-radio-button-group
 //         *ngIf="mainFormGroup"
 //         style="margin-top: 2rem; margin-bottom: 1rem;"
-//         [title]="'Choose a pet'"
+//         [label]="'Choose a pet'"
 //         [helpText]="'We all should have a pet.'"
 //         [control]="mainFormGroup.controls['second']"
 //         [options]="petOptions"
@@ -41,7 +41,7 @@
 //       <fudis-radio-button-group
 //         *ngIf="mainFormGroup"
 //         style="margin-top: 2rem; margin-bottom: 1rem;"
-//         [title]="'Choose a truth'"
+//         [label]="'Choose a truth'"
 //         [helpText]="'We all perceive truth individually.'"
 //         [control]="mainFormGroup.controls['third']"
 //         [options]="booleanOptions"

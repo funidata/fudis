@@ -21,10 +21,10 @@
         [titleLevel]="2"
       >
         <ng-template fudisContent type="form">
-          <fudis-fieldset [title]="t('fieldsetTitle')">
+          <fudis-fieldset [label]="t('fieldsetTitle')">
             <ng-template fudisContent type="fieldset">
               <fudis-checkbox-group
-                [title]="t('chooseBerry')"
+                [label]="t('chooseBerry')"
                 [helpText]="t('chooseBerryHelp')"
                 [tooltip]="t('chooseBerryTooltip')"
                 [formGroup]="testFormGroup.controls['checkboxFormGroup']"
@@ -54,7 +54,7 @@
                 />
               </fudis-text-input>
               <!-- <fudis-radio-button-group
-                [title]="t('chooseTruth')"
+                [label]="t('chooseTruth')"
                 [helpText]="t('chooseTruthHelp')"
                 [control]="testFormGroup.controls['truth']"
                 [options]="radioButtonOptions"

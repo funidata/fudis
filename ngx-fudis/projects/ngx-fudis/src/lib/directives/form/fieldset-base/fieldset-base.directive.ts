@@ -25,9 +25,9 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   }
 
   /**
-   * Title legend for fieldset
+   * Label legend for fieldset
    */
-  @Input({ required: true }) title: string;
+  @Input({ required: true }) label: string;
 
   /**
    * Unique id for fieldset
@@ -35,7 +35,7 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   @Input() id: string;
 
   /**
-   * Additional guidance text, aligned underneath the main title legend text
+   * Additional guidance text, aligned underneath the main label legend text
    */
   @Input() helpText: string;
 

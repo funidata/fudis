@@ -44,7 +44,7 @@ type TestForm = {
             [errorSummaryHelpText]="'You need to fill up the information.'"
           >
             <ng-template fudisContent [type]="'form'">
-              <fudis-fieldset [title]="'Question about your power animal'">
+              <fudis-fieldset [label]="'Question about your power animal'">
                 <ng-template fudisContent [type]="'fieldset'">
                   <fudis-text-input
                     [id]="'example-input-power-animal'"
