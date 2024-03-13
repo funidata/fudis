@@ -1,4 +1,13 @@
-import { AfterViewInit, Component, Host, Input, OnChanges, OnInit, Optional } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  Host,
+  Input,
+  OnChanges,
+  OnInit,
+  Optional,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisInputSize } from '../../../types/forms';
@@ -12,7 +21,6 @@ import {
 } from '../../../utilities/form/getValidators';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { FormComponent } from '../form/form.component';
-import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { takeUntil } from 'rxjs';
 
 @Component({
@@ -25,13 +33,13 @@ export class TextAreaComponent
   implements OnInit, OnChanges, AfterViewInit
 {
   constructor(
-    @Host() @Optional() protected _parentForm: FormComponent,
-    _errorSummaryService: FudisInternalErrorSummaryService,
+    @Host() @Optional() protected _parentForm: FormComponent | null,
     private _focusService: FudisFocusService,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
+    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_translationService, _idService, _errorSummaryService);
+    super(_translationService, _idService, _changeDetectorRef);
   }
 
   /**
@@ -65,6 +73,11 @@ export class TextAreaComponent
         this.control.setValue(null);
       }
     });
+
+    // TODO: write test
+    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
+      this.reloadErrorSummary(this.control);
+    }
   }
 
   ngOnChanges(changes: FudisComponentChanges<TextAreaComponent>): void {
@@ -78,10 +91,6 @@ export class TextAreaComponent
   ngAfterViewInit(): void {
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
-    }
-
-    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
-      this.reloadErrorSummary(this.control);
     }
   }
 }

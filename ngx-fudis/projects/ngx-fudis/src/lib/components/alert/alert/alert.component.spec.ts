@@ -16,6 +16,7 @@ import { FudisAlert } from '../../../types/miscellaneous';
 import { AlertGroupComponent } from '../alert-group/alert-group.component';
 import { ButtonComponent } from '../../button/button.component';
 import { RouterModule } from '@angular/router';
+import { LinkDirective } from '../../../directives/link/link.directive';
 
 const testMessage = 'Test message for alert';
 const testHtmlId = 'test-html-id';
@@ -67,6 +68,7 @@ describe('AlertComponent', () => {
         BodyTextComponent,
         MockComponent(IconComponent),
         LinkComponent,
+        LinkDirective,
       ],
       imports: [MatDialogModule, RouterTestingModule, RouterModule.forRoot([])],
       providers: [

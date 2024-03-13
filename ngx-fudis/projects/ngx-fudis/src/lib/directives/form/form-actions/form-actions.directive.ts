@@ -1,7 +1,7 @@
 import { Directive, Host, HostListener, Input, OnInit, Optional } from '@angular/core';
 import { FormComponent } from '../../../components/form/form/form.component';
-import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
 import { ButtonComponent } from '../../../components/button/button.component';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
 // TODO: Write tests
 /**
@@ -12,7 +12,7 @@ export class FormSubmitDirective implements OnInit {
   constructor(
     @Host() @Optional() private _parentForm: FormComponent,
     @Host() private _button: ButtonComponent,
-    private _errorSummaryService: FudisErrorSummaryService,
+    private _errorSummaryService: FudisInternalErrorSummaryService,
   ) {}
 
   /**
@@ -31,7 +31,7 @@ export class FormSubmitDirective implements OnInit {
   @HostListener('click') private _onClick() {
     if (this._parentForm && !this.formValid) {
       this._parentForm.errorSummaryVisible = true;
-      this._errorSummaryService.reloadErrors();
+      this._errorSummaryService.reloadErrorsByFormId(this._parentForm.id, true);
     } else if (this._parentForm) {
       this._parentForm.errorSummaryVisible = false;
     }

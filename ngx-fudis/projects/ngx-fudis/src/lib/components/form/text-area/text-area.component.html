@@ -28,7 +28,8 @@
   </textarea>
   <fudis-guidance
     *ngIf="!disableGuidance"
-    [formId]="_parentForm ? _parentForm.id : null"
+    [formId]="_parentForm?.id || null"
+    [reloadErrorSummary]="_reloadErrorSummary"
     [inputLabel]="label"
     [maxLength]="_maxLength"
     [helpText]="helpText"

@@ -63,6 +63,7 @@ describe('GuidanceComponent', () => {
     component = fixture.componentInstance;
     component.inputLabel = 'Test Label';
     component.for = 'related-input-id';
+    component.formId = 'test-form-id';
     component.helpText = 'This is describing guidance text';
     component.maxLength = testMaxLength;
     component.ariaLive = 'polite';
@@ -160,6 +161,7 @@ describe('GuidanceComponent', () => {
 
   describe('with Form Group', () => {
     beforeEach(() => {
+      component.formId = 'some-test-id';
       component.formGroup = testFormGroup;
       component.groupBlurredOut = true;
       component.formGroup.controls['finnish'].markAsUntouched();
@@ -231,7 +233,10 @@ describe('GuidanceComponent', () => {
         component.groupBlurredOut = false;
         fixture.detectChanges();
 
-        const errorList = getAllElements(fixture, 'fudis-validator-error-message');
+        const errorList = getAllElements(
+          fixture,
+          'fudis-validator-error-message[ng-reflect-visible="true"]',
+        );
         expect(errorList.length).toBe(0);
       });
 

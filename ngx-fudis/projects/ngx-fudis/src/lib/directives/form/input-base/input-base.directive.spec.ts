@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { InputBaseDirective } from './input-base.directive';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { GuidanceComponent } from '../../../components/form/guidance/guidance.component';
 import { getElement } from '../../../utilities/tests/utilities';
@@ -11,7 +11,6 @@ import { ValidatorErrorMessageComponent } from '../../../components/form/error-m
 import { LabelComponent } from '../../../components/form/label/label.component';
 import { FudisValidators } from '../../../utilities/form/validators';
 import { IconComponent } from '../../../components/icon/icon.component';
-import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
   selector: 'fudis-mock-text-input-component',
@@ -44,7 +43,7 @@ class MockTextInputComponent {
 describe('InputBaseDirective', () => {
   let idService: FudisIdService;
   let translationService: FudisTranslationService;
-  let errorSummaryService: FudisInternalErrorSummaryService;
+  let changeDetectorRef: ChangeDetectorRef;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -56,13 +55,13 @@ describe('InputBaseDirective', () => {
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],
-      providers: [FudisIdService, FudisTranslationService],
+      providers: [FudisIdService, FudisTranslationService, ChangeDetectorRef],
       imports: [ReactiveFormsModule],
     });
 
     idService = TestBed.inject(FudisIdService);
     translationService = TestBed.inject(FudisTranslationService);
-    errorSummaryService = TestBed.inject(FudisInternalErrorSummaryService);
+    changeDetectorRef = TestBed.inject(ChangeDetectorRef);
   });
 
   describe('Directive', () => {
@@ -71,7 +70,7 @@ describe('InputBaseDirective', () => {
         const directive: InputBaseDirective = new InputBaseDirective(
           translationService,
           idService,
-          errorSummaryService,
+          changeDetectorRef,
         );
 
         expect(directive).toBeTruthy();
@@ -83,7 +82,7 @@ describe('InputBaseDirective', () => {
         const directive: InputBaseDirective = new InputBaseDirective(
           translationService,
           idService,
-          errorSummaryService,
+          changeDetectorRef,
         );
         const event = new FocusEvent('blur');
 
@@ -99,7 +98,7 @@ describe('InputBaseDirective', () => {
         const directive: InputBaseDirective = new InputBaseDirective(
           translationService,
           idService,
-          errorSummaryService,
+          changeDetectorRef,
         );
 
         jest.spyOn(directive, 'focusToInput').mockImplementation(() => {});

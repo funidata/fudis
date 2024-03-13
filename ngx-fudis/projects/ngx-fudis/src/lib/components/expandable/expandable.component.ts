@@ -27,7 +27,7 @@ import { FormComponent } from '../form/form/form.component';
 })
 export class ExpandableComponent implements OnDestroy, OnChanges {
   constructor(
-    @Host() @Optional() private _parentForm: FormComponent,
+    @Host() @Optional() private _parentForm: FormComponent | null,
     private _idService: FudisIdService,
     private _errorSummaryService: FudisInternalErrorSummaryService,
   ) {
@@ -36,9 +36,12 @@ export class ExpandableComponent implements OnDestroy, OnChanges {
 
     // TODO: write test
     effect(() => {
-      _errorSummaryService.getVisibleErrors()();
-      if (_parentForm?.errorSummaryVisible && this.openOnErrorSummaryReload && this.closed) {
-        this._setClosedStatus(false);
+      if (this.closed && this.openOnErrorSummaryReload && _parentForm) {
+        const errors = _errorSummaryService.getErrorsOnReload()()?.[_parentForm.id];
+
+        if (errors && _parentForm.errorSummaryVisible) {
+          this._setClosedStatus(false);
+        }
       }
     });
   }
@@ -156,9 +159,10 @@ export class ExpandableComponent implements OnDestroy, OnChanges {
    * Send error object to Error Summary Service
    */
   private _addToErrorSummary(title: string): void {
-    if (this.errorSummaryBreadcrumb) {
+    if (this.errorSummaryBreadcrumb && this._parentForm) {
       this._errorSummaryInfo = {
         id: this._id,
+        formId: this._parentForm.id,
         title: title,
       };
       this._errorSummaryService.addSection(this._errorSummaryInfo);

@@ -19,17 +19,24 @@ describe('ErrorSummaryService', () => {
     });
     service = TestBed.inject(FudisErrorSummaryService);
 
-    jest.spyOn(service, 'reloadErrors').mockImplementation(() => {});
+    jest.spyOn(service, 'reloadAllErrors').mockImplementation(() => {});
+    jest.spyOn(service, 'reloadFormErrors').mockImplementation(() => {});
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should call reloadErrors', () => {
-    service.reloadErrors();
+  it('should call reloadAllErrors', () => {
+    service.reloadAllErrors();
 
-    expect(service.reloadErrors).toHaveBeenCalledWith();
+    expect(service.reloadAllErrors).toHaveBeenCalledWith();
+  });
+
+  it('should call reloadFormErrors', () => {
+    service.reloadFormErrors('my-test-id', false);
+
+    expect(service.reloadFormErrors).toHaveBeenCalledWith('my-test-id', false);
   });
 
   it('should set and return update strategy', () => {

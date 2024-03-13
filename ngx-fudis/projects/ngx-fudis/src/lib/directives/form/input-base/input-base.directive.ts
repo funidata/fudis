@@ -8,13 +8,13 @@ import {
   ViewChild,
   ElementRef,
   OnDestroy,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisTranslationConfig } from '../../../types/miscellaneous';
 import { FudisIdComponent } from '../../../types/id';
 import { FudisIdService } from '../../../services/id/id.service';
-import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FormControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 
@@ -25,7 +25,7 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
   constructor(
     protected _translationService: FudisTranslationService,
     protected _idService: FudisIdService,
-    protected _errorSummaryService: FudisInternalErrorSummaryService,
+    protected _changeDetectorRef: ChangeDetectorRef,
   ) {
     super();
 
@@ -112,14 +112,17 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
   protected _destroyed = new Subject<void>();
 
   /**
+   * To trigger Error Summary reload when this component's children Validator Error Messages are initialised. This is used in cases when this parent component is lazy loaded to DOM after initial Error Summary reload was called before children Validator Error Messages existed.
+   */
+  protected _reloadErrorSummary = false;
+
+  /**
    * TODO: write test
    */
   protected reloadErrorSummary(control: FormControl): void {
     if (control.errors) {
-      control.markAsTouched();
-
-      this._errorSummaryService.focusToSummaryList = false;
-      this._errorSummaryService.reloadErrors();
+      this._reloadErrorSummary = true;
+      this._changeDetectorRef.detectChanges();
     }
   }
 

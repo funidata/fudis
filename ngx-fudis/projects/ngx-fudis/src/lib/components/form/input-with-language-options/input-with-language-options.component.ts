@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit, effect } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  effect,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import {
   FudisInputWithLanguageOptionsFormGroup,
@@ -10,7 +18,6 @@ import { InputBaseDirective } from '../../../directives/form/input-base/input-ba
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { hasRequiredValidator } from '../../../utilities/form/getValidators';
-import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
 // TODO: Write Storybook documentation and add missing internal documentation for the functions (add public/private)
 @Component({
@@ -25,9 +32,9 @@ export class InputWithLanguageOptionsComponent
   constructor(
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
-    _errorSummaryService: FudisInternalErrorSummaryService,
+    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_translationService, _idService, _errorSummaryService);
+    super(_translationService, _idService, _changeDetectorRef);
 
     effect(() => {
       this._languageLabel = this._translations().INPUT_WITH_LANGUAGE_OPTIONS.LANGUAGE;

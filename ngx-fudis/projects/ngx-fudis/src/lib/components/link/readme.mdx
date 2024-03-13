@@ -6,7 +6,7 @@ import * as LinkStories from "./link.stories.ts";
 
 # Link
 
-Link Component is an HTML anchor element.
+Link Component is an HTML anchor element that uses [Link Directive](/docs/directives-link--documentation).
 
 ## Example
 
@@ -16,7 +16,7 @@ Link Component is an HTML anchor element.
 
 Link Component **requires** its link reference.
 Possible values are `href` for regular HTML href or `externalLink` which targets to another domain, this will also add new-tab icon and assistive aria-label for screen readers.
-Or if using Angular Router the required properties are `link` and `fragmentId`.
+Or if using [Angular Router](https://angular.io/api/router) the required properties are `link` and `fragmentId`.
 
 Link URL is set as the link title by default. By adding `title` property the visible title can be modified.
 
@@ -27,6 +27,10 @@ Link color can be adjusted between `primary-dark` (default), `gray-dark` and `wh
 - Link has visible focus
 - Icon indicates new tab for visible users but is hidden from screen readers
 - Screenreader is informed if link will open in a new tab
+
+### Related Directives
+
+- [Link Directive](/docs/directives-link--documentation)
 
 ## Properties
 

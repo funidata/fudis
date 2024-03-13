@@ -7,6 +7,7 @@ import { NotificationComponent } from './notification.component';
 import { FudisNotification } from '../../types/miscellaneous';
 import { getElement, getTrimmedTextContent } from '../../utilities/tests/utilities';
 import { RouterModule } from '@angular/router';
+import { LinkDirective } from '../../directives/link/link.directive';
 
 describe('NotificationComponent', () => {
   let component: NotificationComponent;
@@ -19,6 +20,7 @@ describe('NotificationComponent', () => {
         IconComponent,
         MockComponent(BodyTextComponent),
         LinkComponent,
+        LinkDirective,
       ],
       imports: [RouterModule.forRoot([])],
     }).compileComponents();

@@ -1,9 +1,20 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Host,
+  Input,
+  OnChanges,
+  OnInit,
+  Optional,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FudisCheckboxGroupFormGroup, FudisInputSize } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 import { hasAtLeastOneRequiredOrMinValidator } from '../../../utilities/form/getValidators';
+import { FormComponent } from '../form/form.component';
+import { FudisIdService } from '../../../services/id/id.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 @Component({
   selector: 'fudis-checkbox-group',
@@ -11,6 +22,14 @@ import { hasAtLeastOneRequiredOrMinValidator } from '../../../utilities/form/get
   styleUrls: ['./checkbox-group.component.scss'],
 })
 export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
+  constructor(
+    @Host() @Optional() protected _parentForm: FormComponent | null,
+    _idService: FudisIdService,
+    _translationService: FudisTranslationService,
+    _changeDetectorRef: ChangeDetectorRef,
+  ) {
+    super(_idService, _translationService, _changeDetectorRef);
+  }
   /**
    * FormControl for Checkbox group.
    */
@@ -20,6 +39,11 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
    * Width size of the group.
    */
   @Input() size: FudisInputSize = 'lg';
+
+  /**
+   * If component is a child of Form component, Form's Error Summary is visible,this component's control has errors and when this component is loaded for the first time, it will by default call Error Summary to reload itself again and mark control as touched. This is because if component is lazy loaded to the DOM after the initial reload errors call was made, errors of this component might not appear on the list. To disable this feature, set this to false.
+   */
+  @Input() errorSummaryReloadOnInit: boolean = true;
 
   /**
    * To determine if focus has been moved out from the whole checkbox group, so possible errors will not show before that.
@@ -52,6 +76,10 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
         originalMarkAllAsTouched.apply(this.formGroup);
         this._groupBlurredOut = true;
       };
+    }
+
+    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
+      this.reloadErrorSummary(this.formGroup);
     }
   }
 

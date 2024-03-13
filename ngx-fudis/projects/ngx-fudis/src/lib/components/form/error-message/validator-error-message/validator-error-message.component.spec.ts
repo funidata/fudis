@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, SimpleChange } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { MockComponents } from 'ng-mocks';
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -95,6 +95,7 @@ describe('ValidatorErrorMessageComponent', () => {
     beforeEach(() => {
       fixture = TestBed.createComponent(ValidatorErrorMessageComponent);
       component = fixture.componentInstance;
+      component.formId = 'test-form-id';
       component.focusId = 'test-id';
       component.label = 'Test label';
       component.type = 'required';
@@ -111,6 +112,7 @@ describe('ValidatorErrorMessageComponent', () => {
       const testError: FudisFormErrorSummaryItem = {
         id: 'test-id',
         error: 'Message for testing',
+        formId: 'test-form-id',
         label: 'Test label',
         type: 'required',
         controlName: undefined,
@@ -132,6 +134,7 @@ describe('ValidatorErrorMessageComponent', () => {
 
       const errorToRemove: FudisFormErrorSummaryRemoveItem = {
         id: 'test-id',
+        formId: 'test-form-id',
         type: 'required',
         controlName: undefined,
       };
@@ -154,6 +157,7 @@ describe('ValidatorErrorMessageComponent', () => {
 
       const testError: FudisFormErrorSummaryItem = {
         id: 'test-id',
+        formId: 'test-form-id',
         error: 'First message from observable',
         label: 'Test label',
         type: 'required',
@@ -192,6 +196,7 @@ describe('ValidatorErrorMessageComponent', () => {
 
       const errorToRemove: FudisFormErrorSummaryRemoveItem = {
         id: 'test-observable-message-id',
+        formId: 'test-form-id',
         type: 'required',
         controlName: undefined,
       };
@@ -214,6 +219,7 @@ describe('ValidatorErrorMessageComponent', () => {
 
       const testError: FudisFormErrorSummaryItem = {
         id: 'test-id',
+        formId: 'test-form-id',
         error: 'First message from observable',
         label: 'Test label',
         type: 'required',
@@ -232,7 +238,9 @@ describe('ValidatorErrorMessageComponent', () => {
         ...testError,
         label: 'New better label',
       };
-      component.ngOnChanges();
+      component.ngOnChanges({
+        message: new SimpleChange(null, updatedError.label, false),
+      });
       fixture.detectChanges();
 
       expect(component.handleCreateError.emit).toHaveBeenCalledWith(updatedError);

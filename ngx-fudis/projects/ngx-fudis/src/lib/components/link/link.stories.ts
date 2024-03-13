@@ -35,7 +35,7 @@ export const Example = Template.bind({});
 Example.args = {
   href: 'https://www.example.com',
   color: 'primary-dark',
-  initialFocus: false,
+  initialFocus: true,
   size: 'inherit',
 };
 
@@ -43,7 +43,7 @@ export const ExampleWithExternalLink = Template.bind({});
 ExampleWithExternalLink.args = {
   externalLink: 'https://www.example.com',
   color: 'primary-dark',
-  initialFocus: false,
+  initialFocus: true,
   size: 'inherit',
 };
 
@@ -52,6 +52,6 @@ ExampleWithLinkWithTitle.args = {
   externalLink: 'https://www.example.com',
   title: 'Visible title for the link',
   color: 'primary-dark',
-  initialFocus: false,
+  initialFocus: true,
   size: 'inherit',
 };
