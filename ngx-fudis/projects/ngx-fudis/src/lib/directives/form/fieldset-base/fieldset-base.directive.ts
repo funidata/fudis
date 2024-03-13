@@ -1,4 +1,4 @@
-import { Directive, Input, Signal, effect } from '@angular/core';
+import { ChangeDetectorRef, Directive, Input, Signal, effect } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisTranslationConfig } from '../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -13,6 +13,7 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   constructor(
     protected _idService: FudisIdService,
     protected _translationService: FudisTranslationService,
+    protected _changeDetectorRef: ChangeDetectorRef,
   ) {
     super();
 
@@ -73,6 +74,7 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   protected reloadErrorSummary(group: FormGroup): void {
     if (group.errors) {
       this._reloadErrorSummary = true;
+      this._changeDetectorRef.detectChanges();
     }
   }
 }

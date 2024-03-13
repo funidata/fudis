@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit, effect } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  effect,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import {
   FudisInputWithLanguageOptionsFormGroup,
@@ -21,8 +29,12 @@ export class InputWithLanguageOptionsComponent
   extends InputBaseDirective
   implements OnInit, OnChanges, AfterViewInit
 {
-  constructor(_idService: FudisIdService, _translationService: FudisTranslationService) {
-    super(_translationService, _idService);
+  constructor(
+    _idService: FudisIdService,
+    _translationService: FudisTranslationService,
+    _changeDetectorRef: ChangeDetectorRef,
+  ) {
+    super(_translationService, _idService, _changeDetectorRef);
 
     effect(() => {
       this._languageLabel = this._translations().INPUT_WITH_LANGUAGE_OPTIONS.LANGUAGE;

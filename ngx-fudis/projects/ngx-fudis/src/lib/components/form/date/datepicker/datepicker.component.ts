@@ -50,14 +50,14 @@ export class DatepickerComponent
   implements OnInit, OnChanges, AfterViewInit, OnDestroy
 {
   constructor(
-    private _changeDetectorRef: ChangeDetectorRef,
     private _datePickerConfigService: FudisTranslationService,
     private _adapter: DateAdapter<Date>,
     private _datepickerIntl: MatDatepickerIntl,
     private _focusService: FudisFocusService,
+    _changeDetectorRef: ChangeDetectorRef,
     _idService: FudisIdService,
   ) {
-    super(_datePickerConfigService, _idService);
+    super(_datePickerConfigService, _idService, _changeDetectorRef);
 
     effect(() => {
       this._adapter.setLocale(updateLocale(this._translationService.getLanguage()));

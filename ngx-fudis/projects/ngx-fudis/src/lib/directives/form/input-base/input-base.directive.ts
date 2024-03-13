@@ -8,6 +8,7 @@ import {
   ViewChild,
   ElementRef,
   OnDestroy,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -24,6 +25,7 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
   constructor(
     protected _translationService: FudisTranslationService,
     protected _idService: FudisIdService,
+    protected _changeDetectorRef: ChangeDetectorRef,
   ) {
     super();
 
@@ -120,6 +122,7 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
   protected reloadErrorSummary(control: FormControl): void {
     if (control.errors) {
       this._reloadErrorSummary = true;
+      this._changeDetectorRef.detectChanges();
     }
   }
 

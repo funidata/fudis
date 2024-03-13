@@ -1,4 +1,13 @@
-import { AfterViewInit, Component, Host, Input, OnChanges, OnInit, Optional } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  Host,
+  Input,
+  OnChanges,
+  OnInit,
+  Optional,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisInputSize } from '../../../types/forms';
@@ -28,8 +37,9 @@ export class TextAreaComponent
     private _focusService: FudisFocusService,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
+    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_translationService, _idService);
+    super(_translationService, _idService, _changeDetectorRef);
   }
 
   /**

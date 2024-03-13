@@ -1,6 +1,7 @@
 import {
   AfterContentInit,
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Host,
@@ -37,8 +38,9 @@ export class MultiselectComponent
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
+    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_focusService, _translationService, _idService);
+    super(_focusService, _translationService, _idService, _changeDetectorRef);
 
     this.focusSelector = 'fudis-multiselect-option__focusable';
 

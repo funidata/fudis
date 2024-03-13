@@ -1,4 +1,12 @@
-import { Component, Host, Input, OnChanges, OnInit, Optional } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Host,
+  Input,
+  OnChanges,
+  OnInit,
+  Optional,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FudisCheckboxGroupFormGroup, FudisInputSize } from '../../../types/forms';
 
@@ -18,8 +26,9 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
     @Host() @Optional() protected _parentForm: FormComponent | null,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
+    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService, _translationService);
+    super(_idService, _translationService, _changeDetectorRef);
   }
   /**
    * FormControl for Checkbox group.

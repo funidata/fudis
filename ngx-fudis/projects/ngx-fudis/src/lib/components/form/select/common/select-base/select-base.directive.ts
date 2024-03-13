@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   ContentChild,
   Directive,
   ElementRef,
@@ -34,8 +35,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
     protected _focusService: FudisFocusService,
     _translationService: FudisTranslationService,
     _idService: FudisIdService,
+    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_translationService, _idService);
+    super(_translationService, _idService, _changeDetectorRef);
 
     effect(() => {
       this._translationOpenAriaLabel = this._translations().SELECT.OPEN_DROPDOWN;

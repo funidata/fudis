@@ -1,4 +1,13 @@
-import { AfterViewInit, Component, Input, OnInit, OnChanges, Optional, Host } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  Optional,
+  Host,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisInputSize, FudisInputType } from '../../../types/forms';
@@ -28,10 +37,11 @@ export class TextInputComponent
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
     private _focusService: FudisFocusService,
+    _changeDetectorRef: ChangeDetectorRef,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
   ) {
-    super(_translationService, _idService);
+    super(_translationService, _idService, _changeDetectorRef);
   }
 
   /**
