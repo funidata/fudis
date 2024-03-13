@@ -2,7 +2,12 @@ import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FudisCheckboxOption } from 'dist/ngx-fudis/lib/types/forms';
-import { FudisDialogService, FudisErrorSummaryService, FudisGroupValidators, FudisValidators } from 'ngx-fudis';
+import {
+  FudisDialogService,
+  FudisErrorSummaryService,
+  FudisGroupValidators,
+  FudisValidators,
+} from 'ngx-fudis';
 
 type MyForm = {
   textInput: FormControl<string | null | number>;
@@ -44,7 +49,7 @@ type MyForm = {
             </fudis-fieldset>
           </ng-template>
           <ng-template fudisActions [type]="'form'">
-          <button (click)="submitDialogForm()">Natiivi button</button>
+            <button (click)="submitDialogForm()">Natiivi button</button>
             <fudis-button (handleClick)="submitDialogForm()" [label]="'Submit'"></fudis-button>
             <fudis-button fudisDialogClose [label]="'Cancel'"></fudis-button>
           </ng-template>
@@ -58,7 +63,6 @@ export class DialogTestFormComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { size: string },
     private _dialogService: FudisDialogService,
-    private _errorSummaryService: FudisErrorSummaryService,
   ) {}
 
   errorSummaryVisible = false;
@@ -72,9 +76,7 @@ export class DialogTestFormComponent {
 
   testFormGroup = new FormGroup<MyForm>({
     textInput: new FormControl<string | null | number>(null, [
-      FudisValidators.required(
-        'This is required',
-      ),
+      FudisValidators.required('This is required'),
     ]),
     checkboxFormGroup: new FormGroup(
       {
@@ -99,12 +101,7 @@ export class DialogTestFormComponent {
   submitDialogForm(): void {
     this.testFormGroup.markAllAsTouched();
 
-    if (this.testFormGroup.invalid) {
-      this.errorSummaryVisible = true;
-      this._errorSummaryService.reloadErrors();
-    } else {
-      console.log(this.data);
-      this.errorSummaryVisible = false;
+    if (this.testFormGroup.valid) {
       this._dialogService.close(this.data);
     }
   }
