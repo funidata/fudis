@@ -8,8 +8,8 @@ import {
   FudisTranslationService,
   FudisBreakpointService,
   FudisErrorSummaryService,
-  FudisValidators,
-  FudisGroupValidators,
+  // FudisValidators,
+  // FudisGroupValidators,
 } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
 
@@ -20,15 +20,17 @@ import {
 } from 'dist/ngx-fudis/lib/types/forms';
 
 // import { FudisAlert } from 'dist/ngx-fudis/lib/types/miscellaneous';
-import { FormControl, FormGroup } from '@angular/forms';
+// import { FormControl, FormGroup } from '@angular/forms';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 import { FudisGridAlign } from 'projects/ngx-fudis/src/lib/types/grid';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogTestFormComponent } from './dialog-test/dialog-test-content/dialog-test-form.component';
 
-type MyForm = {
-  textInput: FormControl<string | null | number>;
-  checkboxFormGroup: FormGroup;
-  truth: FormControl<boolean | null>;
-};
+// type MyForm = {
+//   textInput: FormControl<string | null | number>;
+//   checkboxFormGroup: FormGroup;
+//   truth: FormControl<boolean | null>;
+// };
 
 @Component({
   selector: 'app-root',
@@ -36,8 +38,9 @@ type MyForm = {
 })
 export class AppComponent implements OnInit {
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: { res: string },
     @Inject(DOCUMENT) private _document: Document,
-    private _dialog: FudisDialogService,
+    private _dialogService: FudisDialogService,
     private _translocoService: TranslocoService,
     private _gridService: FudisGridService,
     private _fudisLanguage: FudisTranslationService,
@@ -105,41 +108,41 @@ export class AppComponent implements OnInit {
     { value: false, label: 'False', id: 'boolean-1' },
   ];
 
-  testFormGroup = new FormGroup<MyForm>({
-    textInput: new FormControl<string | null | number>(null, [
-      FudisValidators.required(
-        this._translocoService.selectTranslateObject('form_errors.required'),
-      ),
-      FudisValidators.minLength(
-        5,
-        this._translocoService.selectTranslateObject('form_errors.notEnoughCharacters'),
-      ),
-    ]),
-    checkboxFormGroup: new FormGroup(
-      {
-        blueberry: new FormControl<FudisCheckboxOption | null>(null),
-        cloudberry: new FormControl<FudisCheckboxOption | null>(null),
-        raspberry: new FormControl<FudisCheckboxOption | null>(null),
-        strawberry: new FormControl<FudisCheckboxOption | null>(null),
-      },
-      [
-        FudisGroupValidators.min({
-          value: 2,
-          message: this._translocoService.selectTranslate('chooseBerryErrorMin'),
-        }),
-        FudisGroupValidators.max({
-          value: 3,
-          message: this._translocoService.selectTranslate('chooseBerryErrorMax'),
-        }),
-      ],
-    ),
-    truth: new FormControl<boolean | null>(
-      null,
-      FudisValidators.required(
-        this._translocoService.selectTranslateObject('form_errors.required'),
-      ),
-    ),
-  });
+  // testFormGroup = new FormGroup<MyForm>({
+  //   textInput: new FormControl<string | null | number>(null, [
+  //     FudisValidators.required(
+  //       this._translocoService.selectTranslateObject('form_errors.required'),
+  //     ),
+  //     FudisValidators.minLength(
+  //       5,
+  //       this._translocoService.selectTranslateObject('form_errors.notEnoughCharacters'),
+  //     ),
+  //   ]),
+  //   checkboxFormGroup: new FormGroup(
+  //     {
+  //       blueberry: new FormControl<FudisCheckboxOption | null>(null),
+  //       cloudberry: new FormControl<FudisCheckboxOption | null>(null),
+  //       raspberry: new FormControl<FudisCheckboxOption | null>(null),
+  //       strawberry: new FormControl<FudisCheckboxOption | null>(null),
+  //     },
+  //     [
+  //       FudisGroupValidators.min({
+  //         value: 2,
+  //         message: this._translocoService.selectTranslate('chooseBerryErrorMin'),
+  //       }),
+  //       FudisGroupValidators.max({
+  //         value: 3,
+  //         message: this._translocoService.selectTranslate('chooseBerryErrorMax'),
+  //       }),
+  //     ],
+  //   ),
+  //   truth: new FormControl<boolean | null>(
+  //     null,
+  //     FudisValidators.required(
+  //       this._translocoService.selectTranslateObject('form_errors.required'),
+  //     ),
+  //   ),
+  // });
 
   protected _gridAlignValue: FudisGridAlign = 'end';
 
@@ -211,24 +214,26 @@ export class AppComponent implements OnInit {
   }
 
   openDialog(): void {
-    this._dialog.open(this.templateRef);
+    // this._dialogService.open(this.templateRef);
+    const dialogRef = this._dialogService.open(DialogTestFormComponent, { data: { size: 'sm' } });
+    dialogRef.afterClosed().subscribe(result => { console.log(result); this.data.res = result});
   }
 
   openDialogFromComponent(): void {
-    this._dialog.open(DialogTestContentComponent);
+    this._dialogService.open(DialogTestContentComponent);
   }
 
-  submitDialogForm(): void {
-    this.testFormGroup.markAllAsTouched();
+  // submitDialogForm(): void {
+  //   this.testFormGroup.markAllAsTouched();
 
-    if (this.testFormGroup.invalid) {
-      this.errorSummaryVisible = true;
-      this._errorSummaryService.reloadErrors();
-    } else {
-      this.errorSummaryVisible = false;
-      this._dialog.close();
-    }
-  }
+  //   if (this.testFormGroup.invalid) {
+  //     this.errorSummaryVisible = true;
+  //     this._errorSummaryService.reloadErrors();
+  //   } else {
+  //     this.errorSummaryVisible = false;
+  //     this._dialogService.close(this.data.size);
+  //   }
+  // }
 
   doSomething(event: Event) {
     console.log('event received!', event);

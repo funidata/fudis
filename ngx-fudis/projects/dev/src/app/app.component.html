@@ -29,9 +29,10 @@
             </fudis-heading>
             <!-- <fudis-button [label]="'Trigger alert'" (handleClick)="triggerAlert()" /> -->
             <fudis-button
-              [label]="'Open dialog from template with fudis-form'"
+              [label]="'Open dialog with form'"
               (handleClick)="openDialog()"
             />
+            <p>this.data.res: {{ this.data.res }}</p>
             <fudis-button
               [label]="'Open dialog from component'"
               (handleClick)="openDialogFromComponent()"
@@ -147,7 +148,7 @@
   </div>
 </ng-container>
 
-<ng-template #exampleDialogTemplate>
+<!-- <ng-template #exampleDialogTemplate>
   <fudis-dialog [size]="'sm'">
     <fudis-dialog-content>
       <fudis-form
@@ -180,11 +181,11 @@
                   'This text-input has multiple validators: required, minlength and maxlength'
                 "
               />
-              <!-- <fudis-radio-button-group
+              <fudis-radio-button-group
                 [title]="'Choose the truth'"
                 [control]="testFormGroup.controls['truth']"
                 [options]="radioButtonOptions"
-              /> -->
+              />
             </ng-template>
           </fudis-fieldset>
         </ng-template>
@@ -195,4 +196,4 @@
       </fudis-form>
     </fudis-dialog-content>
   </fudis-dialog>
-</ng-template>
+</ng-template> -->
