@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FieldSetBaseDirective } from './fieldset-base.directive';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FudisCheckboxOption } from '../../../types/forms';
 import { CheckboxComponent } from '../../../components/form/checkbox-group/checkbox/checkbox.component';
@@ -52,6 +52,7 @@ class MockCheckboxGroupComponent {
 describe('FieldSetBaseDirective', () => {
   let idService: FudisIdService;
   let translationService: FudisTranslationService;
+  let changeDetectorRef: ChangeDetectorRef;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -71,12 +72,14 @@ describe('FieldSetBaseDirective', () => {
         FudisTranslationService,
         FudisBreakpointService,
         FudisGridService,
+        ChangeDetectorRef,
       ],
       imports: [ReactiveFormsModule],
     });
 
     idService = TestBed.inject(FudisIdService);
     translationService = TestBed.inject(FudisTranslationService);
+    changeDetectorRef = TestBed.inject(ChangeDetectorRef);
   });
 
   it('should create an instance', () => {
@@ -84,6 +87,7 @@ describe('FieldSetBaseDirective', () => {
       const directive: FieldSetBaseDirective = new FieldSetBaseDirective(
         idService,
         translationService,
+        changeDetectorRef,
       );
 
       expect(directive).toBeTruthy();
