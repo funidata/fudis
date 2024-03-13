@@ -2,12 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FudisCheckboxOption } from 'dist/ngx-fudis/lib/types/forms';
-import {
-  FudisDialogService,
-  FudisErrorSummaryService,
-  FudisGroupValidators,
-  FudisValidators,
-} from 'ngx-fudis';
+import { FudisDialogService, FudisGroupValidators, FudisValidators } from 'ngx-fudis';
 
 type MyForm = {
   textInput: FormControl<string | null | number>;
