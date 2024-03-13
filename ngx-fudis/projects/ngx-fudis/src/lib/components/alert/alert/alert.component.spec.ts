@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockComponent } from 'ng-mocks';
 import { Component } from '@angular/core';
@@ -69,7 +69,18 @@ describe('AlertComponent', () => {
         LinkComponent,
       ],
       imports: [MatDialogModule, RouterTestingModule, RouterModule.forRoot([])],
-      providers: [FudisDialogService, FudisAlertService],
+      providers: [
+        FudisDialogService,
+        FudisAlertService,
+        {
+          provide: MatDialogRef,
+          useValue: {},
+        },
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: [],
+        },
+      ],
     });
     fixture = TestBed.createComponent(AlertComponent);
     component = fixture.componentInstance;

@@ -1,4 +1,9 @@
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { MockComponents } from 'ng-mocks';
@@ -76,7 +81,17 @@ describe('DialogService', () => {
         DialogTestButtonComponent,
         DialogTestContentComponent,
       ],
-      providers: [FudisDialogService],
+      providers: [
+        FudisDialogService,
+        {
+          provide: MatDialogRef,
+          useValue: {},
+        },
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: [],
+        },
+      ],
     });
     fixture = TestBed.createComponent(DialogTestButtonComponent);
     component = fixture.componentInstance;

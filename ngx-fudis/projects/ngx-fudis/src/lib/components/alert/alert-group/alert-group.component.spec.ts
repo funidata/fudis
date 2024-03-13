@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MockComponent } from 'ng-mocks';
 import { AlertGroupComponent } from './alert-group.component';
 import { FudisDialogService } from '../../../services/dialog/dialog.service';
@@ -26,7 +26,17 @@ describe('AlertGroupComponent', () => {
         AlertComponent,
         MockComponent(IconComponent),
       ],
-      providers: [FudisDialogService],
+      providers: [
+        FudisDialogService,
+        {
+          provide: MatDialogRef,
+          useValue: {},
+        },
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: [],
+        },
+      ],
     });
     fixture = TestBed.createComponent(AlertGroupComponent);
     component = fixture.componentInstance;
