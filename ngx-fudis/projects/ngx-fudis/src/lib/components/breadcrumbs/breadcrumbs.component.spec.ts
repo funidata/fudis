@@ -10,6 +10,7 @@ import { FudisIdService } from '../../services/id/id.service';
 import { BreadcrumbsItemComponent } from './breadcrumbs-item/breadcrumbs-item.component';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { RouterModule } from '@angular/router';
+import { LinkDirective } from '../../directives/link/link.directive';
 
 @Component({
   selector: 'fudis-mock-component',
@@ -35,6 +36,7 @@ describe('BreadcrumbsComponent', () => {
         BreadcrumbsComponent,
         BreadcrumbsItemComponent,
         LinkComponent,
+        LinkDirective,
         IconComponent,
         BodyTextComponent,
         MockComponent,

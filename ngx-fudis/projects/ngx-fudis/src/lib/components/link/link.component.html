@@ -1,13 +1,15 @@
 <ng-container *ngIf="externalLink">
   <a
-    #linkRef
-    class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{
-      color
-    }} fudis-link__external"
+    fudisLink
+    [color]="color"
+    [size]="size"
+    [classes]="['fudis-link__external']"
     (focus)="_handleFocus($event)"
     (blur)="_handleBlur($event)"
+    (click)="_handleClick($event)"
     attr.aria-label="{{ title ? title : externalLink }}, {{ _externalLinkAriaLabel }}"
     [href]="externalLink"
+    [initialFocus]="initialFocus"
     target="_blank"
     rel="noopener noreferrer"
   >
@@ -30,40 +32,32 @@
 </ng-container>
 <ng-container *ngIf="(link || fragmentId) && !externalLink">
   <a
-    #linkRef
-    class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{
-      color
-    }} fudis-link__router"
+    fudisLink
+    [color]="color"
+    [size]="size"
+    [classes]="['fudis-link__router']"
     (focus)="_handleFocus($event)"
     (blur)="_handleBlur($event)"
+    (click)="_handleClick($event)"
     [routerLink]="link"
     [fragment]="fragmentId"
+    [initialFocus]="initialFocus"
   >
     {{ title ? title : link }}
   </a>
 </ng-container>
 <ng-container *ngIf="href && !link && !externalLink">
   <a
-    #linkRef
-    class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{ color }} fudis-link__href"
+    fudisLink
+    [color]="color"
+    [size]="size"
+    [classes]="['fudis-link__href']"
     (focus)="_handleFocus($event)"
     (blur)="_handleBlur($event)"
+    (click)="_handleClick($event)"
     [href]="href"
+    [initialFocus]="initialFocus"
   >
     {{ title ? title : href }}
-  </a>
-</ng-container>
-
-<ng-container *ngIf="uiRouterSref && !link && !externalLink">
-  <a
-    #linkRef
-    class="fudis-link fudis-link__size__{{ size }} fudis-link__color__{{ color }} fudis-link__href"
-    (focus)="_handleFocus($event)"
-    (blur)="_handleBlur($event)"
-    [uiSref]="uiRouterSref"
-    [uiParams]="uiRouterParams"
-    [uiOptions]="uiRouterOptions"
-  >
-    {{ title ? title : uiRouterSref }}
   </a>
 </ng-container>

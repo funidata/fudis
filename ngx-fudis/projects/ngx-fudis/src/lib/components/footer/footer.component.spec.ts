@@ -13,6 +13,7 @@ import { GridItemComponent } from '../grid/grid-item/grid-item.component';
 import { LinkComponent } from '../link/link.component';
 import { IconComponent } from '../icon/icon.component';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
+import { LinkDirective } from '../../directives/link/link.directive';
 
 @Component({
   selector: 'fudis-mock-footer',
@@ -40,6 +41,7 @@ describe('FooterComponent', () => {
         GridComponent,
         GridItemComponent,
         LinkComponent,
+        LinkDirective,
         FooterContentLeftDirective,
         FooterContentRightDirective,
         MockFooterComponent,
