@@ -45,6 +45,7 @@ export interface FudisSelectOption {
 
 export type FudisFormErrorSummaryItem = {
   id: string;
+  formId: string;
   label: string;
   error: string;
   type: string;
@@ -54,8 +55,20 @@ export type FudisFormErrorSummaryItem = {
 
 export type FudisFormErrorSummaryRemoveItem = {
   id: string;
+  formId: string | null;
   controlName: string | undefined;
   type: string;
+};
+
+export type FudisFormErrorSummaryFormsAndErrors = {
+  [id: string]: FudisFormErrorSummaryObject;
+};
+
+export type FudisFormErrorSummaryError = {
+  id: string;
+  errors: FudisFormErrorSummaryObjectItemErrors;
+  label: string;
+  language: FudisLanguageAbbr;
 };
 
 export type FudisFormErrorSummaryObject = {
@@ -69,12 +82,12 @@ export type FudisFormErrorSummaryObject = {
 
 export type FudisFormErrorSummarySection = {
   id: string;
+  formId: string;
   title: string;
 };
 
-export type FudisErrorSummaryParent = {
-  formId: string | null | undefined;
-  parentElement: HTMLFormElement;
+export type FudisFormErrorSummarySectionObject = {
+  [formId: string]: FudisFormErrorSummarySection[];
 };
 
 export type FudisFormErrorSummaryList = {

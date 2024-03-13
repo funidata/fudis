@@ -31,6 +31,7 @@ import { SpacingDirective } from '../../../directives/spacing/spacing.directive'
 import { getTrimmedTextContent } from '../../../utilities/tests/utilities';
 import { SectionComponent } from '../../section/section.component';
 import { ExpandableComponent } from '../../expandable/expandable.component';
+import { FudisFormErrorSummaryLink } from '../../../types/forms';
 import { LinkDirective } from '../../../directives/link/link.directive';
 
 @Component({
@@ -40,7 +41,7 @@ import { LinkDirective } from '../../../directives/link/link.directive';
     [titleLevel]="1"
     [title]="'Example Form with Error Summary'"
     [id]="'unique-form-example-1'"
-    [errorSummaryLinkType]="'href'"
+    [errorSummaryLinkType]="errorSummaryLinkType"
     [errorSummaryHelpText]="'There were errors you need to fix'"
     [errorSummaryVisible]="errorSummaryVisible"
   >
@@ -84,6 +85,8 @@ class MockFormComponent {
 
   @ViewChild('formRef') formRef: FormComponent;
 
+  errorSummaryLinkType: FudisFormErrorSummaryLink;
+
   errorSummaryVisible: boolean = false;
 
   formGroup = new FormGroup({
@@ -99,20 +102,19 @@ class MockFormComponent {
   reloadErrors(): void {
     this.formGroup.markAllAsTouched();
     this.errorSummaryVisible = true;
-    this.errorSummaryService.reloadErrors();
+    this.errorSummaryService.reloadFormErrors('unique-form-example-1');
   }
 }
 
-const getErrorList = (fixture: ComponentFixture<ErrorSummaryComponent>): NodeList | null => {
-  return fixture.nativeElement.querySelectorAll(
+const getErrorList = (fixture: ComponentFixture<MockFormComponent>): NodeList | null => {
+  const errors: NodeList = fixture.nativeElement.querySelectorAll(
     'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
   );
+
+  return errors;
 };
 
 describe('ErrorSummaryComponent', () => {
-  let component: ErrorSummaryComponent;
-  let fixture: ComponentFixture<ErrorSummaryComponent>;
-
   let wrapperComponent: MockFormComponent;
   let wrapperFixture: ComponentFixture<MockFormComponent>;
 
@@ -153,35 +155,31 @@ describe('ErrorSummaryComponent', () => {
       imports: [ReactiveFormsModule, RouterModule.forRoot([])],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ErrorSummaryComponent);
-    component = fixture.componentInstance;
     wrapperFixture = TestBed.createComponent(MockFormComponent);
     wrapperComponent = wrapperFixture.componentInstance;
+    wrapperComponent.errorSummaryLinkType = 'router';
+    wrapperComponent.errorSummaryService.setUpdateStrategy('reloadOnly');
     wrapperFixture.detectChanges();
     wrapperComponent.reloadErrors();
-
-    const helpText = 'Errors belong in a museum';
-    component.helpText = helpText;
-    component.parentComponent = wrapperComponent.formRef.formElement as HTMLFormElement;
-    fixture.detectChanges();
+    wrapperFixture.detectChanges();
   });
 
   describe('Contents', () => {
     it('helper texts are displayed properly', () => {
       const renderedHelpText = getTrimmedTextContent(
-        fixture.nativeElement.querySelector('fudis-body-text p'),
+        wrapperFixture.nativeElement.querySelector('fudis-body-text p'),
       );
 
       // Hidden icon text + Help Text
-      expect(renderedHelpText).toBe('Attention: Errors belong in a museum');
+      expect(renderedHelpText).toBe('Attention: There were errors you need to fix');
     });
 
     it('should have Fudis Link attributes correctly with router link', () => {
-      const linkElementFragment = fixture.nativeElement
+      const linkElementFragment = wrapperFixture.nativeElement
         .querySelector('ul li fudis-link a')
         .getAttribute('ng-reflect-fragment');
 
-      const linkElementHref = fixture.nativeElement
+      const linkElementHref = wrapperFixture.nativeElement
         .querySelector('ul li fudis-link a')
         .getAttribute('href');
 
@@ -190,14 +188,14 @@ describe('ErrorSummaryComponent', () => {
     });
 
     it('should have Fudis Link attributes correctly with href link', () => {
-      component.linkType = 'href';
-      fixture.detectChanges();
+      wrapperComponent.errorSummaryLinkType = 'href';
+      wrapperFixture.detectChanges();
 
-      const linkElementFragment = fixture.nativeElement
+      const linkElementFragment = wrapperFixture.nativeElement
         .querySelector('ul li fudis-link a')
         .getAttribute('ng-reflect-fragment');
 
-      const linkElementHref = fixture.nativeElement
+      const linkElementHref = wrapperFixture.nativeElement
         .querySelector('ul li fudis-link a')
         .getAttribute('href');
 
@@ -210,9 +208,8 @@ describe('ErrorSummaryComponent', () => {
       wrapperFixture.detectChanges();
       wrapperComponent.formGroup.controls.name.patchValue('Chewbacca');
       wrapperFixture.detectChanges();
-      fixture.detectChanges();
 
-      expect(getErrorList(fixture)?.length).toEqual(3);
+      expect(getErrorList(wrapperFixture)?.length).toEqual(3);
     });
 
     it('should add & remove errors dynamically without reload', () => {
@@ -220,23 +217,21 @@ describe('ErrorSummaryComponent', () => {
       wrapperFixture.detectChanges();
       wrapperComponent.formGroup.controls.name.patchValue('Chewbacca');
       wrapperFixture.detectChanges();
-      fixture.detectChanges();
 
-      expect(getErrorList(fixture)?.length).toEqual(3);
+      expect(getErrorList(wrapperFixture)?.length).toEqual(3);
 
       wrapperComponent.formGroup.controls.name.patchValue(null);
-      fixture.detectChanges();
       wrapperFixture.detectChanges();
 
-      expect(getErrorList(fixture)?.length).toEqual(4);
+      expect(getErrorList(wrapperFixture)?.length).toEqual(4);
     });
 
     it('error list have right amount of list elements', () => {
-      expect(getErrorList(fixture)?.length).toEqual(4);
+      expect(getErrorList(wrapperFixture)?.length).toEqual(4);
     });
 
     it('error list have right messages', () => {
-      const errorList = fixture.nativeElement.querySelectorAll(
+      const errorList = wrapperFixture.nativeElement.querySelectorAll(
         'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
       );
 
@@ -252,25 +247,24 @@ describe('ErrorSummaryComponent', () => {
     });
 
     it('should update error messages when control is updated and errors loaded', () => {
-      wrapperComponent.formGroup.controls.name.patchValue('Chewbacca');
+      wrapperComponent.formGroup.controls.name.patchValue('Chewbacca!');
       wrapperFixture.detectChanges();
       wrapperComponent.reloadErrors();
-      fixture.detectChanges();
+      wrapperFixture.detectChanges();
 
-      expect(getErrorList(fixture)?.length).toEqual(3);
+      expect(getErrorList(wrapperFixture)?.length).toEqual(3);
     });
 
     it('should not update error messages without reload', () => {
       wrapperComponent.formGroup.controls.name.patchValue('Chewbacca');
       wrapperFixture.detectChanges();
-      fixture.detectChanges();
 
-      expect(getErrorList(fixture)?.length).toEqual(4);
+      expect(getErrorList(wrapperFixture)?.length).toEqual(4);
 
       wrapperComponent.reloadErrors();
-      fixture.detectChanges();
+      wrapperFixture.detectChanges();
 
-      expect(getErrorList(fixture)?.length).toEqual(3);
+      expect(getErrorList(wrapperFixture)?.length).toEqual(3);
     });
   });
 });

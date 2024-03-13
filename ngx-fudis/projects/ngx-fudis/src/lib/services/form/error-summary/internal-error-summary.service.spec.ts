@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import {
-  FudisErrorSummaryParent,
+  FudisFormErrorSummaryFormsAndErrors,
   FudisFormErrorSummaryItem,
   FudisFormErrorSummaryObject,
   FudisFormErrorSummaryRemoveItem,
@@ -10,10 +10,11 @@ import { FudisInternalErrorSummaryService } from './internal-error-summary.servi
 
 describe('InternalErrorSummaryService', () => {
   let service: FudisInternalErrorSummaryService;
-  let currentErrors: FudisFormErrorSummaryObject = {};
+  let currentErrors: FudisFormErrorSummaryFormsAndErrors;
 
   const firstError: FudisFormErrorSummaryItem = {
     id: 'first-error',
+    formId: 'test-form-id-1',
     label: 'Test label',
     error: 'There is something wrong',
     type: 'required',
@@ -29,6 +30,7 @@ describe('InternalErrorSummaryService', () => {
 
   const secondError: FudisFormErrorSummaryItem = {
     id: 'second-error',
+    formId: 'test-form-id-2',
     label: 'Test label',
     error: 'You need to fix also this',
     type: 'required',
@@ -56,25 +58,32 @@ describe('InternalErrorSummaryService', () => {
 
   const firstErrorRemoveItem: FudisFormErrorSummaryRemoveItem = {
     id: 'first-error',
+    formId: 'test-form-id-1',
     controlName: undefined,
     type: 'required',
   };
 
   const fieldSetForErrorSummary: FudisFormErrorSummarySection = {
     id: 'unique-fieldset-id',
+    formId: 'test-form-id-1',
     title: 'Fill all the information',
   };
 
   const sectionForErrorSummary: FudisFormErrorSummarySection = {
     id: 'unique-section-id',
+    formId: 'test-form-id-1',
     title: 'Main section',
   };
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
+
     service = TestBed.inject(FudisInternalErrorSummaryService);
 
-    jest.spyOn(service, 'reloadErrors').mockImplementation(() => {});
+    service.addNewFormId('test-form-id-1');
+    service.addNewFormId('test-form-id-2');
+
+    jest.spyOn(service, 'reloadErrorsByFormId').mockImplementation(() => {});
   });
 
   it('should be created', () => {
@@ -82,9 +91,11 @@ describe('InternalErrorSummaryService', () => {
   });
 
   it('should initially return an empty object', () => {
-    const errors = service.getVisibleErrors()();
+    const errors = service.getErrorsOnReload()();
 
-    expect(errors).toEqual({});
+    const initial = {};
+
+    expect(errors).toEqual(initial);
   });
 
   it('should return currentErrorList object containing given errors', () => {
@@ -92,9 +103,16 @@ describe('InternalErrorSummaryService', () => {
     service.addNewError(secondError);
     service.addNewError(firstErrorAnotherErrorType);
 
-    currentErrors = { ...firstErrorFromService, ...secondErrorFromService };
+    currentErrors = {
+      'test-form-id-1': firstErrorFromService,
+      'test-form-id-2': secondErrorFromService,
+    };
 
-    expect(service['_currentErrorList']).toEqual(currentErrors);
+    service.reloadErrorsByFormId('test-form-id-1');
+
+    const errors = service.getErrors();
+
+    expect(errors).toEqual(currentErrors);
   });
 
   it('should remove object error for respective type', () => {
@@ -105,9 +123,9 @@ describe('InternalErrorSummaryService', () => {
     service.addNewError(firstErrorAnotherErrorType);
 
     // Remove only 'required' error message
-    service.removeError(firstErrorRemoveItem);
+    service.removeError(firstErrorRemoveItem, 'test-form-id-1');
 
-    expect(service['_currentErrorList']['first-error'].errors).toEqual({
+    expect(service.getErrors()['test-form-id-1']['first-error'].errors).toEqual({
       email: 'Email is not valid',
     });
   });
@@ -119,64 +137,45 @@ describe('InternalErrorSummaryService', () => {
     };
 
     service.addNewError(firstError);
+
+    expect(service.getErrors()['test-form-id-1']['first-error'].language).toEqual('en');
     service.addNewError(firstErrorWithLangUpdate);
+    expect(service.getErrors()['test-form-id-1']['first-error'].language).toEqual('sv');
 
-    expect(service.reloadErrors).toHaveBeenCalledWith();
-
-    expect(service['_currentErrorList']['first-error'].language).toEqual('sv');
+    expect(service.reloadErrorsByFormId).toHaveBeenCalledWith('test-form-id-1');
   });
 
   it('should add fieldset information to currentFieldsets array', () => {
     service.addFieldset(fieldSetForErrorSummary);
 
-    expect(service['_currentFieldsets']).toEqual([fieldSetForErrorSummary]);
+    const fieldset = { 'test-form-id-1': [fieldSetForErrorSummary], 'test-form-id-2': [] };
+
+    expect(service.fieldsets).toEqual(fieldset);
   });
 
   it('should remove fieldset information from currentFieldsets array', () => {
     service.addFieldset(fieldSetForErrorSummary);
     service.removeFieldset(fieldSetForErrorSummary);
 
-    expect(service['_currentFieldsets']).toEqual([]);
+    expect(service.fieldsets).toEqual({ 'test-form-id-1': [], 'test-form-id-2': [] });
   });
 
   it('should add section information to currentSections array', () => {
     service.addSection(sectionForErrorSummary);
 
-    expect(service['_currentSections']).toEqual([sectionForErrorSummary]);
+    const sections = { 'test-form-id-1': [sectionForErrorSummary], 'test-form-id-2': [] };
+
+    expect(service.sections).toEqual(sections);
   });
 
   it('should remove section information from currentSections array', () => {
     service.addSection(sectionForErrorSummary);
+
     service.removeSection(sectionForErrorSummary);
 
-    expect(service['_currentSections']).toEqual([]);
-  });
+    const sections = { 'test-form-id-1': [], 'test-form-id-2': [] };
 
-  it('should add parent element to errorSummaryParentList array', () => {
-    const mockForm = document.createElement('form');
-
-    const errorSummaryParent: FudisErrorSummaryParent = {
-      formId: 'unique-form-id',
-      parentElement: mockForm,
-    };
-
-    service.addErrorSummaryParent(errorSummaryParent);
-
-    expect(service.errorSummaryParentList()).toEqual([errorSummaryParent]);
-  });
-
-  it('should remove parent element from errorSummaryParentList array', () => {
-    const mockForm = document.createElement('form');
-
-    const errorSummaryParent: FudisErrorSummaryParent = {
-      formId: 'unique-form-id',
-      parentElement: mockForm,
-    };
-
-    service.addErrorSummaryParent(errorSummaryParent);
-    service.removeErrorSummaryParent(errorSummaryParent);
-
-    expect(service.errorSummaryParentList()).toEqual([]);
+    expect(service.sections).toEqual(sections);
   });
 
   it('should set and return update strategy', () => {

@@ -5,6 +5,7 @@ import {
   ElementRef,
   Host,
   Input,
+  OnDestroy,
   OnInit,
   Optional,
   ViewEncapsulation,
@@ -18,6 +19,7 @@ import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.dir
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
 import { FudisFormErrorSummaryLink } from '../../../types/forms';
 import { DialogComponent } from '../../dialog/dialog.component';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
   selector: 'fudis-form',
@@ -25,10 +27,11 @@ import { DialogComponent } from '../../dialog/dialog.component';
   styleUrls: ['./form.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class FormComponent extends GridApiDirective implements OnInit, AfterContentInit {
+export class FormComponent extends GridApiDirective implements OnInit, AfterContentInit, OnDestroy {
   constructor(
     private _idService: FudisIdService,
     private _elementRef: ElementRef,
+    private _errorSummaryService: FudisInternalErrorSummaryService,
     @Host() @Optional() protected _dialogParent: DialogComponent,
   ) {
     super();
@@ -55,7 +58,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   @Input({ required: true }) errorSummaryHelpText: string;
 
   /**
-   * Form id. If not given, id will be generated with IdService
+   * Form id. If not given, id will be generated with IdService. Set only in component initialisation.
    */
   @Input() id: string;
 
@@ -107,6 +110,8 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   ngOnInit(): void {
     this._setFormId();
 
+    this._errorSummaryService.addNewFormId(this.id);
+
     if (this._dialogParent) {
       this._dialogParent.closeButtonPositionAbsolute = true;
     }
@@ -114,6 +119,10 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
 
   ngAfterContentInit(): void {
     this._formElement = this._elementRef.nativeElement as HTMLFormElement;
+  }
+
+  ngOnDestroy(): void {
+    this._errorSummaryService.removeFormId(this.id);
   }
 
   /**
@@ -125,12 +134,5 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
     } else {
       this.id = this._idService.getNewId('form');
     }
-  }
-
-  /**
-   * Getter for FormElement
-   */
-  public get formElement(): HTMLFormElement | undefined {
-    return this._formElement;
   }
 }

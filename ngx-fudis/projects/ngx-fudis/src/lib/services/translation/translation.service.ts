@@ -24,7 +24,7 @@ export class FudisTranslationService {
    * Also as Error Summary Component reloads its errors if error's language has changed, here is defined component to NOT focus to the updated list on only language change.
    */
   public setLanguage(language: FudisLanguageAbbr): void {
-    this._errorSummaryService.focusToSummaryList = false;
+    this._errorSummaryService.focusToFormOnReload = null;
     this._language.set(language);
     if (language === 'en') {
       this._translations.set(en);

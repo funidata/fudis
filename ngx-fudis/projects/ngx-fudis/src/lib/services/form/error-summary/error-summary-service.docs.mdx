@@ -8,11 +8,13 @@ Error Summary Service provides tools to load and display validation errors for [
 
 ## Features
 
-### Reload Errors
+### reloadFormErrors()
 
-**Note!** Similar feature described here can be achieved with [Button binded with Form Submit directive](/docs/directives-form-actions--documentation#form-submit-with-button).
+When given parameter of Form's id, function reloads Error Summary list of this Form.
 
-Reload Errors is Error Summary Service functionality that updates the visible list of errors shown in the Fudis Error Summary component.
+**Recommendation!** Similar feature described here can be achieved with [Button binded with Form Submit directive](/docs/directives-form-actions--documentation#form-submit-with-button).
+
+If the mentioned Form Submit directive does not fit your needs, you can achieve this manually calling Error Summary Service.
 
 Import `FudisErrorSummaryService` and add the parameter to constructor:
 
@@ -26,15 +28,15 @@ constructor(
 ) {}
 ```
 
-Recommended pattern is to call `reloadErrors` when user clicks form's submit button which also sets Error Summary as visible in Fudis Form.
+Call `reloadFormErrors` when user clicks form's submit button which also sets Error Summary as visible in Fudis Form.
 
 ```
 protected _submitButtonClick():void {
 	if(this.form.invalid){
-		// @Input property of FudisForm
+		// @Input property of Form
 		this._errorSummaryVisible = true;
-		// Reload errors for the FudisForm
-		this._service.reloadErrors();
+		// Reload errors of the spesific Form
+		this._service.reloadFormErrors("id-of-my-form");
 	} else {
 		this._errorSummaryVisible = false;
 		// Other success and profit!
@@ -42,6 +44,10 @@ protected _submitButtonClick():void {
 }
 
 ```
+
+### reloadAllErrors()
+
+TODO: write rest
 
 ### Update Strategy
 

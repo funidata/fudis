@@ -171,7 +171,6 @@ class FormDialogComponent {
 	}
 
 	closeDialogWithForm(): void {
-		this.exampleDialogFormGroup.markAllAsTouched();
 
 		if (this.exampleDialogFormGroup.valid) {
 			this.dialog.close();

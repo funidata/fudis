@@ -16,6 +16,7 @@ import {
   FudisFormErrorSummaryItem,
   FudisFormErrorSummaryRemoveItem,
 } from '../../../../types/forms';
+import { FudisComponentChanges } from '../../../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-validator-error-message',
@@ -135,16 +136,25 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
     }, 1000);
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: FudisComponentChanges<ValidatorErrorMessageComponent>): void {
     if (this._initFinished) {
-      /**
-       * Update string message and try to create a new error when changes happen
-       */
-      if (typeof this.message === 'string') {
-        this._currentMessage = this.message;
-      }
+      if (
+        changes.focusId ||
+        changes.message ||
+        changes.label ||
+        changes.type ||
+        changes.controlName ||
+        changes.formId
+      ) {
+        /**
+         * Update string message and try to create a new error when changes happen
+         */
+        if (typeof this.message === 'string') {
+          this._currentMessage = this.message;
+        }
 
-      this._createError();
+        this._createError();
+      }
     }
   }
 
@@ -171,12 +181,11 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
   }
 
   private _createError(): void {
-    const errorCondition = this.focusId && this._currentMessage && this.label;
-
-    if (errorCondition) {
+    if (this.formId && this.focusId && this._currentMessage && this.label) {
       const newError: FudisFormErrorSummaryItem = {
         id: this.focusId,
         error: this._currentMessage,
+        formId: this.formId,
         label: this.label,
         type: this.type,
         controlName: this.controlName,
@@ -190,14 +199,15 @@ export class ValidatorErrorMessageComponent implements OnInit, OnChanges, OnDest
   }
 
   private _removeError(): void {
-    if (this._errorSent) {
+    if (this._errorSent && this.formId) {
       const errorToRemove: FudisFormErrorSummaryRemoveItem = {
         id: this.focusId,
+        formId: this.formId,
         type: this.type,
         controlName: this.controlName,
       };
 
-      this._errorSummaryService.removeError(errorToRemove);
+      this._errorSummaryService.removeError(errorToRemove, this.formId);
       this.handleRemoveError.emit(errorToRemove);
     }
   }

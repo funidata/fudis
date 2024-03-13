@@ -1,4 +1,13 @@
-import { AfterViewInit, Component, Input, OnInit, OnChanges, Optional, Host } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  Optional,
+  Host,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisInputSize, FudisInputType } from '../../../types/forms';
@@ -14,7 +23,6 @@ import {
 } from '../../../utilities/form/getValidators';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { FormComponent } from '../form/form.component';
-import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { takeUntil } from 'rxjs';
 
 @Component({
@@ -27,13 +35,13 @@ export class TextInputComponent
   implements OnInit, OnChanges, AfterViewInit
 {
   constructor(
-    @Host() @Optional() protected _parentForm: FormComponent,
+    @Host() @Optional() protected _parentForm: FormComponent | null,
     private _focusService: FudisFocusService,
-    _errorSummaryService: FudisInternalErrorSummaryService,
+    _changeDetectorRef: ChangeDetectorRef,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
   ) {
-    super(_translationService, _idService, _errorSummaryService);
+    super(_translationService, _idService, _changeDetectorRef);
   }
 
   /**
@@ -82,6 +90,10 @@ export class TextInputComponent
         this.control.setValue(null);
       }
     });
+
+    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
+      this.reloadErrorSummary(this.control);
+    }
   }
 
   ngOnChanges(changes: FudisComponentChanges<TextInputComponent>): void {
@@ -101,10 +113,6 @@ export class TextInputComponent
   ngAfterViewInit(): void {
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
-    }
-
-    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
-      this.reloadErrorSummary(this.control);
     }
   }
 }

@@ -1,9 +1,10 @@
-import { Directive, Input, Signal, effect } from '@angular/core';
+import { ChangeDetectorRef, Directive, Input, Signal, effect } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisTranslationConfig } from '../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisIdParent } from '../../../types/id';
+import { FormGroup } from '@angular/forms';
 
 @Directive({
   selector: '[fudisFieldSetBase]',
@@ -12,6 +13,7 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   constructor(
     protected _idService: FudisIdService,
     protected _translationService: FudisTranslationService,
+    protected _changeDetectorRef: ChangeDetectorRef,
   ) {
     super();
 
@@ -53,6 +55,11 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   protected _initFinished: boolean = false;
 
   /**
+   * To trigger Error Summary reload when this component's children Validator Error Messages are initialised. This is used in cases when this parent component is lazy loaded to DOM after initial Error Summary reload was called before children Validator Error Messages existed.
+   */
+  protected _reloadErrorSummary = false;
+
+  /**
    * Generate id for parent component
    */
   protected _setParentId(parentType: FudisIdParent): void {
@@ -60,6 +67,14 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
       this._idService.addNewParentId(parentType, this.id);
     } else {
       this.id = this._idService.getNewParentId(parentType);
+    }
+  }
+
+  // TODO: write tests
+  protected reloadErrorSummary(group: FormGroup): void {
+    if (group.errors) {
+      this._reloadErrorSummary = true;
+      this._changeDetectorRef.detectChanges();
     }
   }
 }

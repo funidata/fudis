@@ -219,13 +219,7 @@ export class AppComponent implements OnInit {
   }
 
   submitDialogForm(): void {
-    this.testFormGroup.markAllAsTouched();
-
-    if (this.testFormGroup.invalid) {
-      this.errorSummaryVisible = true;
-      this._errorSummaryService.reloadErrors();
-    } else {
-      this.errorSummaryVisible = false;
+    if (this.testFormGroup.valid) {
       this._dialog.close();
     }
   }

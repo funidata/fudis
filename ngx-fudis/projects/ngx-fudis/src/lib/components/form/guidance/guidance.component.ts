@@ -2,6 +2,7 @@ import { Component, Input, OnInit, effect } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
+import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
 @Component({
   selector: 'fudis-guidance',
@@ -12,11 +13,29 @@ export class GuidanceComponent implements OnInit {
   constructor(
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
+    private _errorSummaryService: FudisInternalErrorSummaryService,
   ) {
     this._id = _idService.getNewId('guidance');
 
     effect(() => {
       this._maxLengthText = _translationService.getTranslations()().TEXTINPUT.MAX_LENGTH;
+    });
+
+    effect(() => {
+      const errors = _errorSummaryService.getErrorsOnReload()();
+
+      if (
+        this.formId &&
+        errors[this.formId]?.[this.for] &&
+        (_errorSummaryService.formIdToUpdate === this.formId ||
+          _errorSummaryService.formIdToUpdate === 'all')
+      ) {
+        if (this.control) {
+          this.control.markAsTouched();
+        } else if (this.formGroup) {
+          this.formGroup.markAllAsTouched();
+        }
+      }
     });
   }
 
@@ -71,6 +90,11 @@ export class GuidanceComponent implements OnInit {
   @Input() formId: string | null;
 
   /**
+   * To trigger Error Summary reload when this Guidance's Validator Error Messages are initialised. This is used in cases when parent component (e. g. Text Input) is lazy loaded to DOM after initial Error Summary reload was called before these Validator Error Messages existed.
+   */
+  @Input() reloadErrorSummary: boolean = false;
+
+  /**
    * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where "characters used" is "maxLengthText".
    */
   protected _maxLengthText: string;
@@ -85,9 +109,19 @@ export class GuidanceComponent implements OnInit {
    */
   protected _id: string;
 
+  protected _firstReloadFinished: boolean = false;
+
   ngOnInit(): void {
     if (this.maxLength) {
       this._maxLengthAlertThreshold = this.maxLength - 5;
+    }
+  }
+
+  protected _disableReload(): void {
+    if (this.formId && this.reloadErrorSummary && !this._firstReloadFinished) {
+      this._firstReloadFinished = true;
+      this._errorSummaryService.focusToFormOnReload = null;
+      this._errorSummaryService.reloadErrorsByFormId(this.formId);
     }
   }
 }

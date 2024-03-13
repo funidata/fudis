@@ -38,12 +38,7 @@ import { excludeAllRegex } from '../../../utilities/storybook';
         [variant]="'secondary'"
         (handleClick)="toggleLiveRemove()"
       />
-      <fudis-button
-        fudisFormSubmit
-        [formValid]="formExample.valid"
-        [label]="'Submit'"
-        (handleClick)="submitForm()"
-      />
+      <fudis-button fudisFormSubmit [formValid]="formExample.valid" [label]="'Submit'" />
     </ng-template>
     <ng-template fudisContent type="form">
       <fudis-fieldset [title]="'Form information'">
@@ -128,10 +123,6 @@ class ErrorSummaryExampleComponent {
     { value: 'basic', label: 'Basic', id: 'courseType-1' },
     { value: 'advanced', label: 'Advanced', id: 'courseType-2' },
   ];
-
-  submitForm(): void {
-    this.formExample.markAllAsTouched();
-  }
 
   toggleLiveRemove(): void {
     if (this._errorSummaryService.updateStrategy === 'reloadOnly') {

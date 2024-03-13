@@ -1,6 +1,7 @@
 import {
   AfterContentInit,
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Host,
@@ -19,7 +20,6 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
 import { FormComponent } from '../../form/form.component';
-import { FudisInternalErrorSummaryService } from '../../../../services/form/error-summary/internal-error-summary.service';
 import { takeUntil } from 'rxjs';
 
 @Component({
@@ -33,13 +33,13 @@ export class SelectComponent
   implements OnInit, AfterViewInit, AfterContentInit
 {
   constructor(
-    @Host() @Optional() private _parentForm: FormComponent,
-    _errorSummaryService: FudisInternalErrorSummaryService,
+    @Host() @Optional() protected _parentForm: FormComponent | null,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
+    _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_focusService, _translationService, _idService, _errorSummaryService);
+    super(_focusService, _translationService, _idService, _changeDetectorRef);
 
     this.focusSelector = 'fudis-select-option__focusable';
 
@@ -79,6 +79,11 @@ export class SelectComponent
 
       this.controlValueChangedInternally = false;
     });
+
+    // TODO: write test
+    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
+      this.reloadErrorSummary(this.control);
+    }
   }
 
   ngAfterContentInit(): void {
@@ -90,10 +95,6 @@ export class SelectComponent
   ngAfterViewInit(): void {
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
-    }
-
-    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
-      this.reloadErrorSummary(this.control);
     }
   }
 

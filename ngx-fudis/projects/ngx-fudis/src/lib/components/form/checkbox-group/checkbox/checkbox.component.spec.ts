@@ -16,6 +16,7 @@ import { GridComponent } from '../../../grid/grid/grid.component';
 import { GridApiDirective } from '../../../../directives/grid/grid-api/grid-api.directive';
 import { GridDirective } from '../../../../directives/grid/grid/grid.directive';
 import { IconComponent } from '../../../icon/icon.component';
+import { ValidatorErrorMessageComponent } from '../../error-message/validator-error-message/validator-error-message.component';
 
 @Component({
   selector: 'fudis-mock-container',
@@ -61,6 +62,7 @@ describe('CheckboxComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         CheckboxComponent,
+        ValidatorErrorMessageComponent,
         MockContainerComponent,
         CheckboxGroupComponent,
         FieldSetComponent,

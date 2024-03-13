@@ -33,7 +33,7 @@ What it DOES NOT do:
 // HTML Template
 <fudis-form ...form properties>
   <ng-template fudisActions type="form">
-    <fudis-button fudisFormSubmit [label]="'Submit Form'" [formValid]="myForm.valid" (handleClick)="myFormSubmit()"/>
+    <fudis-button fudisFormSubmit [formValid]="myForm.valid" [label]="'Submit Form'" (handleClick)="myFormSubmit()"/>
   </ng-template>
   ...other Form content
 </fudis-form>
