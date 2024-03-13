@@ -110,6 +110,8 @@ describe('DialogService', () => {
     expect(openDialogSpy).toHaveBeenCalledWith(DialogTestContentComponent);
   });
 
+  // TODO: add tests for closing and passing data between components
+
   it('should close fudis-dialog', () => {
     dialogContentFixture = TestBed.createComponent(DialogTestContentComponent);
     dialogContentComponent = dialogContentFixture.componentInstance;

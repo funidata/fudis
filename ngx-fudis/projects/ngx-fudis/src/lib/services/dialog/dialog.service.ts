@@ -5,7 +5,7 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dial
 
 @Injectable()
 export class FudisDialogService {
-  constructor(private _ngMaterialDialog: MatDialog) {}
+  constructor(public ngMaterialDialog: MatDialog) {}
 
   private _dialogOpen = signal<boolean>(false);
 
@@ -22,7 +22,7 @@ export class FudisDialogService {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     config?: MatDialogConfig<any>,
   ): MatDialogRef<T, R> {
-    this._dialogRef = this._ngMaterialDialog.open(
+    this._dialogRef = this.ngMaterialDialog.open(
       component,
       FudisDialogService._createConfig(config),
     );
@@ -49,7 +49,7 @@ export class FudisDialogService {
    */
   public closeAll(): void {
     this._dialogRef.close();
-    this._ngMaterialDialog.closeAll();
+    this.ngMaterialDialog.closeAll();
   }
 
   /**
