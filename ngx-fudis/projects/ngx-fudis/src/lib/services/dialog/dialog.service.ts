@@ -1,10 +1,14 @@
 import { ComponentType } from '@angular/cdk/portal';
-import { Injectable, Signal, TemplateRef, signal } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { Inject, Injectable, Optional, Signal, TemplateRef, signal } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 
 @Injectable()
 export class FudisDialogService {
-  constructor(public ngMaterialDialog: MatDialog) {}
+  constructor(
+    public ngMaterialDialog: MatDialog, 
+    @Optional() public ngMaterialDialogRef: MatDialogRef<unknown>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: unknown
+    ) {}
 
   private _dialogOpen = signal<boolean>(false);
 
@@ -35,9 +39,21 @@ export class FudisDialogService {
   }
 
   /**
-   * Close dialog
+   * Close current dialog with optional result parameter.
    */
-  public close(): void {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public close(dialogResult?: any): void {
+    console.log('dialogResult: ', dialogResult);
+    this.ngMaterialDialogRef.close(dialogResult);
+    // this.ngMaterialDialogRef.afterClosed().subscribe(result => {
+    //   this.ngMaterialDialogRef.close(result);
+    // })
+  }
+
+  /**
+   * Close all instances of Dialogs
+   */
+  public closeAll(): void {
     this.ngMaterialDialog.closeAll();
   }
 
