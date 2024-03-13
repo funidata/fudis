@@ -66,6 +66,8 @@ export class AppComponent implements OnInit {
 
   newRemBase: string;
 
+  protected _message: string;
+
   dropdownOptions: FudisSelectOption[] = [
     { value: 'value-1-dog', label: 'Dog' },
     { value: 'value-2-capybara', label: 'Capybara' },
@@ -214,11 +216,12 @@ export class AppComponent implements OnInit {
   }
 
   openDialog(): void {
-    // this._dialogService.open(this.templateRef);
-    const dialogRef = this._dialogService.open(DialogTestFormComponent, { data: { size: 'sm' } });
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
-      this.data.res = result;
+    const dialogRef = this._dialogService.open(DialogTestFormComponent, {
+      data: { size: 'sm', greeting: 'Hello from component which opened this dialog' },
+    });
+
+    dialogRef.afterClosed().subscribe((response: string) => {
+      this._message = response;
     });
   }
 

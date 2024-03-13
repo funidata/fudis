@@ -1,16 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentType } from '@angular/cdk/portal';
-import { Inject, Injectable, Optional, Signal, TemplateRef, signal } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { Injectable, Signal, TemplateRef, signal } from '@angular/core';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 
 @Injectable()
 export class FudisDialogService {
-  constructor(
-    public ngMaterialDialog: MatDialog, 
-    @Optional() public ngMaterialDialogRef: MatDialogRef<unknown>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: unknown
-    ) {}
+  constructor(private _ngMaterialDialog: MatDialog) {}
 
   private _dialogOpen = signal<boolean>(false);
+
+  private _dialogRef: MatDialogRef<any, any>;
 
   /**
    * Open new dialog.
@@ -18,43 +17,39 @@ export class FudisDialogService {
    * @param config Optional configuration object. Use the `data` field to inject data into `component`.
    * @returns Reference to the dialog that was opened.
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public open<T, R = any>(
     component: ComponentType<T> | TemplateRef<T>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     config?: MatDialogConfig<any>,
   ): MatDialogRef<T, R> {
-    const dialogRef = this.ngMaterialDialog.open(
+    this._dialogRef = this._ngMaterialDialog.open(
       component,
       FudisDialogService._createConfig(config),
     );
 
-    dialogRef.keydownEvents().subscribe((event) => {
+    this._dialogRef.keydownEvents().subscribe((event) => {
       if (event.key === 'Escape') {
         this.close();
       }
     });
 
-    return dialogRef;
+    return this._dialogRef;
   }
 
   /**
-   * Close current dialog with optional result parameter.
+   * Close opened Dialog
+   * @param dialogResult Data sent to Component which opened this dialog.
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public close(dialogResult?: any): void {
-    console.log('dialogResult: ', dialogResult);
-    this.ngMaterialDialogRef.close(dialogResult);
-    // this.ngMaterialDialogRef.afterClosed().subscribe(result => {
-    //   this.ngMaterialDialogRef.close(result);
-    // })
+    this._dialogRef.close(dialogResult);
   }
 
   /**
    * Close all instances of Dialogs
    */
   public closeAll(): void {
-    this.ngMaterialDialog.closeAll();
+    this._dialogRef.close();
+    this._ngMaterialDialog.closeAll();
   }
 
   /**
@@ -74,7 +69,6 @@ export class FudisDialogService {
   /**
    * Merge consumer's config with ours.
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private static _createConfig(userConfig: MatDialogConfig<any> = {}): MatDialogConfig<any> {
     const overridableOptions = { hasBackdrop: true, disableClose: true, autoFocus: false };
     const forcedOptions = { enterAnimationDuration: 0, panelClass: 'fudis-dialog-panel' };

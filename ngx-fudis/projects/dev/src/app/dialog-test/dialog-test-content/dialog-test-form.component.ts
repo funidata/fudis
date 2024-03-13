@@ -16,13 +16,12 @@ type MyForm = {
       <fudis-dialog-content>
         <fudis-form
           [errorSummaryLinkType]="'href'"
-          [errorSummaryVisible]="errorSummaryVisible"
           [title]="'Dialog with fudis-form'"
           [errorSummaryHelpText]="'You did not fill all the required information'"
           [titleLevel]="2"
         >
           <ng-template fudisContent [type]="'form'">
-            <fudis-fieldset [title]="'We need some information'">
+            <fudis-fieldset [title]="'We need some information'" [helpText]="_greetingFromOpener">
               <ng-template fudisContent [type]="'fieldset'">
                 <fudis-checkbox-group
                   [title]="'Choose berry'"
@@ -44,8 +43,12 @@ type MyForm = {
             </fudis-fieldset>
           </ng-template>
           <ng-template fudisActions [type]="'form'">
-            <button (click)="submitDialogForm()">Natiivi button</button>
-            <fudis-button (handleClick)="submitDialogForm()" [label]="'Submit'"></fudis-button>
+            <fudis-button
+              fudisFormSubmit
+              [formValid]="testFormGroup.valid"
+              (handleClick)="submitDialogForm()"
+              [label]="'Submit'"
+            ></fudis-button>
             <fudis-button fudisDialogClose [label]="'Cancel'"></fudis-button>
           </ng-template>
         </fudis-form>
@@ -56,11 +59,13 @@ type MyForm = {
 })
 export class DialogTestFormComponent {
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { size: string },
+    @Inject(MAT_DIALOG_DATA) public data: { greeting: string },
     private _dialogService: FudisDialogService,
-  ) {}
+  ) {
+    this._greetingFromOpener = this.data.greeting;
+  }
 
-  errorSummaryVisible = false;
+  protected _greetingFromOpener: string;
 
   checkboxOptions: FudisCheckboxOption[] = [
     { controlName: 'blueberry', label: 'blueberry' },
@@ -94,10 +99,8 @@ export class DialogTestFormComponent {
   });
 
   submitDialogForm(): void {
-    this.testFormGroup.markAllAsTouched();
-
     if (this.testFormGroup.valid) {
-      this._dialogService.close(this.data);
+      this._dialogService.close(this.testFormGroup.controls.textInput.value);
     }
   }
 }

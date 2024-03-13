@@ -25,11 +25,8 @@
               <fudis-link [href]="'#'" [title]="'Link inside a heading'"></fudis-link>
             </fudis-heading>
             <!-- <fudis-button [label]="'Trigger alert'" (handleClick)="triggerAlert()" /> -->
-            <fudis-button
-              [label]="'Open dialog with form'"
-              (handleClick)="openDialog()"
-            />
-            <p>this.data.res: {{ this.data.res }}</p>
+            <fudis-button [label]="'Open dialog with form'" (handleClick)="openDialog()" />
+            <p *ngIf="this._message">{{ this._message }}</p>
             <fudis-button
               [label]="'Open dialog from component'"
               (handleClick)="openDialogFromComponent()"
