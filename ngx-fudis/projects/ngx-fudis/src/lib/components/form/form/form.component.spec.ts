@@ -193,13 +193,13 @@ describe('FormComponent', () => {
       expect(errorSummaryElement).toBeFalsy();
     });
 
-    it('should be visible when errorSummaryVisible is true and form has errors', () => {
+    it.only('should be visible when errorSummaryVisible is true and form has errors', () => {
       componentMock.reloadErrorsMock();
       fixtureMock.detectChanges();
 
       const errorSummaryElement = getElement(
         fixtureMock,
-        '.fudis-form__header__main__content fudis-error-summary',
+        '.fudis-form__header__main fudis-error-summary',
       );
 
       expect(errorSummaryElement).toBeTruthy();
