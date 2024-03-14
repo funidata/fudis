@@ -1,4 +1,12 @@
-import { Component, ContentChild, Input, OnChanges, OnInit, effect } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  Input,
+  OnChanges,
+  OnInit,
+  effect,
+} from '@angular/core';
 import { FudisIcon } from '../../types/icons';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisNotification } from '../../types/miscellaneous';
@@ -8,6 +16,7 @@ import { FudisTranslationService } from '../../services/translation/translation.
   selector: 'fudis-notification',
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotificationComponent implements OnChanges, OnInit {
   constructor(private _translateService: FudisTranslationService) {

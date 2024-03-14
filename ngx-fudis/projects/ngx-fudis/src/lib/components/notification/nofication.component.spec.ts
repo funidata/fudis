@@ -8,6 +8,7 @@ import { FudisNotification } from '../../types/miscellaneous';
 import { getElement, getTrimmedTextContent } from '../../utilities/tests/utilities';
 import { RouterModule } from '@angular/router';
 import { LinkDirective } from '../../directives/link/link.directive';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 describe('NotificationComponent', () => {
   let component: NotificationComponent;
@@ -23,7 +24,11 @@ describe('NotificationComponent', () => {
         LinkDirective,
       ],
       imports: [RouterModule.forRoot([])],
-    }).compileComponents();
+    })
+      .overrideComponent(NotificationComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.Default },
+      })
+      .compileComponents();
   });
 
   beforeEach(() => {
