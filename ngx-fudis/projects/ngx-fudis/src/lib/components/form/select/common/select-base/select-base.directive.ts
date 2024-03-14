@@ -188,8 +188,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
    * @param preventDropdownReopen: For cases, when closing command comes from outside eg. clicking an option in the dropdownlist. There's no need to reopen the dropdown when focusing back to the input, which usually triggers opening the dropdown.
    */
   public closeDropdown(focusToInput: boolean = true, preventDropdownReopen: boolean = false): void {
-    console.log('kukkuu');
-
     this._dropdownOpen = false;
 
     this._preventDropdownReopen = preventDropdownReopen;
