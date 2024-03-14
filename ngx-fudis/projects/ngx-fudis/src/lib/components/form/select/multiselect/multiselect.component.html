@@ -20,7 +20,7 @@
       aria-haspopup="listbox"
       (click)="_clickInput($event)"
       (focus)="_inputFocus()"
-      (blur)="_inputBlur($event)"
+      (blur)="_inputBlur()"
       (keydown)="_dropdownKeypress($event, focusSelector)"
       [attr.aria-autocomplete]="'none'"
       [attr.aria-expanded]="_dropdownOpen"
@@ -64,7 +64,7 @@
       (triggerDropdownClose)="closeDropdown()"
       (triggerDropdownToggle)="_toggleDropdown()"
       (triggerFocus)="_inputFocus()"
-      (triggerBlur)="_inputBlur($event)"
+      (triggerBlur)="_inputBlur()"
     />
   </div>
   <fudis-select-dropdown

@@ -188,6 +188,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
    * @param preventDropdownReopen: For cases, when closing command comes from outside eg. clicking an option in the dropdownlist. There's no need to reopen the dropdown when focusing back to the input, which usually triggers opening the dropdown.
    */
   public closeDropdown(focusToInput: boolean = true, preventDropdownReopen: boolean = false): void {
+    console.log('kukkuu');
+
     this._dropdownOpen = false;
 
     this._preventDropdownReopen = preventDropdownReopen;
@@ -239,18 +241,13 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
    * To handle input field blur events
    * @param event FocusEvent
    */
-  protected _inputBlur(event: FocusEvent): void {
+  protected _inputBlur(): void {
     // Time out used for user mouse click cases
-
-    if (!event.relatedTarget) {
-      setTimeout(() => {
-        if (!document.activeElement?.classList?.contains(this.focusSelector)) {
-          this.closeDropdown(false);
-        }
-      }, 150);
-    } else if (!(event.relatedTarget as HTMLElement)?.classList?.contains(this.focusSelector)) {
-      this.closeDropdown(false);
-    }
+    setTimeout(() => {
+      if (!document.activeElement?.classList?.contains(this.focusSelector)) {
+        this.closeDropdown(false);
+      }
+    }, 150);
     this._inputFocused = false;
     this.control.markAsTouched();
   }
