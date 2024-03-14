@@ -9,6 +9,7 @@ import {
   ElementRef,
   OnChanges,
   OnInit,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
@@ -20,6 +21,7 @@ import { FudisComponentChanges } from '../../types/miscellaneous';
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent extends TooltipApiDirective implements OnChanges, OnInit {
   constructor(private _idService: FudisIdService) {
