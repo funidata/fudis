@@ -36,7 +36,7 @@ describe('getValidators utility function', () => {
 
   describe('hasAtLeastOneRequiredOrMinValidator', () => {
     it('should return true with atLeastOneRequired validator group with checkbox group', () => {
-      const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+      const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
         {
           apple: new FormControl<boolean | null | undefined>(null),
           fairTradeBanana: new FormControl<boolean | null | undefined>(false),
@@ -66,7 +66,7 @@ describe('getValidators utility function', () => {
     });
 
     it('should return true with min validator group ', () => {
-      const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+      const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
         {
           apple: new FormControl<boolean | null | undefined>(null),
           fairTradeBanana: new FormControl<boolean | null | undefined>(false),
@@ -81,7 +81,7 @@ describe('getValidators utility function', () => {
     });
 
     it('should return false when atLeastOneRequired validator is provided or min validator value is 0', () => {
-      const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+      const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
         {
           apple: new FormControl<boolean | null | undefined>(null),
           fairTradeBanana: new FormControl<boolean | null | undefined>(false),

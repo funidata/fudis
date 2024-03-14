@@ -2,26 +2,49 @@ import { FudisSelectOption } from '../../../../types/forms';
 
 interface MockSelectOptionGroupData {
   country: string;
-  options: FudisSelectOption[];
+  options: FudisSelectOption<object>[];
 }
 
-export const defaultOptions: FudisSelectOption[] = [
-  { value: 'value-1-dog', label: 'Dog' },
-  { value: 'value-2-capybara', label: 'Capybara' },
-  { value: 'value-3-platypys', label: 'Platypus' },
-  { value: 'value-4-cat', label: 'Really dangerous cat', disabled: true },
-  { value: 'value-5-armadillo', label: 'Screaming hairy armadillo' },
-  { value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
+export type TestAnimalSound = {
+  value: string;
+  label: string;
+  sound: string;
+};
+
+export const defaultOptions: FudisSelectOption<TestAnimalSound>[] = [
+  { value: 'value-1-dog', label: 'Dog', sound: 'Wuf!' },
+  { value: 'value-2-capybara', label: 'Capybara', sound: 'Squek!' },
+  { value: 'value-3-platypys', label: 'Platypus', sound: 'Plat plat!' },
+  { value: 'value-4-cat', label: 'Really dangerous cat', disabled: true, sound: 'PurrROAR!' },
+  {
+    value: 'value-5-armadillo',
+    label: 'Screaming hairy armadillo',
+    sound: "Rollin' rollin' rollin'!",
+  },
+  { value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko', sound: 'Gec-koooo!' },
 ];
 
-export const multiselectChipListMockData: FudisSelectOption[] = [
+export const multiselectChipListMockData: FudisSelectOption<object>[] = [
   { value: 'hereford', label: 'Hereford' },
   { value: 'texas-longhorn', label: 'Texas Longhorn' },
   { value: 'ayrshire', label: 'Ayrshire' },
   { value: 'wagyu', label: 'Wagyu' },
 ];
 
-export const groupedTestData = [
+export type TestAnimalScience = {
+  value: string;
+  label: string;
+  scienceName: string;
+};
+
+type CountryData = {
+  country: string;
+  options: TestAnimalScience[];
+};
+
+type CountryDataArray = CountryData[];
+
+export const groupedTestData: CountryDataArray = [
   {
     country: 'Netherlands',
 
@@ -85,7 +108,7 @@ export const groupedTestData = [
   },
 ];
 
-export const selectMockData: FudisSelectOption[] = [
+export const selectMockData: FudisSelectOption<object>[] = [
   {
     value: '4257d865-872c-4ea6-80e6-8bd04ce56ad7',
     label: 'Golden jackal',

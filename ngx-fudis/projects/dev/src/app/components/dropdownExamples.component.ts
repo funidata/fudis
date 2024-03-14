@@ -3,8 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { FudisSelectOption } from '../../../../ngx-fudis/src/lib/types/forms';
 
 type MyForm = {
-  dropdownFirst: FormControl<FudisSelectOption[] | null>;
-  dropdownSecond: FormControl<FudisSelectOption[] | null>;
+  dropdownFirst: FormControl<FudisSelectOption<object>[] | null>;
+  dropdownSecond: FormControl<FudisSelectOption<object>[] | null>;
 };
 
 @Component({
@@ -13,8 +13,8 @@ type MyForm = {
 })
 export class AppDropdownExamplesComponent {
   testFormGroup = new FormGroup<MyForm>({
-    dropdownFirst: new FormControl<FudisSelectOption[] | null>(null),
-    dropdownSecond: new FormControl<FudisSelectOption[] | null>(null),
+    dropdownFirst: new FormControl<FudisSelectOption<object>[] | null>(null),
+    dropdownSecond: new FormControl<FudisSelectOption<object>[] | null>(null),
   });
 
   _options = [

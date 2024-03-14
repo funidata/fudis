@@ -41,8 +41,8 @@ import { By } from '@angular/platform-browser';
   </fudis-select>`,
 })
 class MockComponent {
-  testOptions: FudisSelectOption[] = defaultOptions;
-  control: FormControl<FudisSelectOption | null> = new FormControl(null);
+  testOptions: FudisSelectOption<object>[] = defaultOptions;
+  control: FormControl<FudisSelectOption<object> | null> = new FormControl(null);
 
   @ViewChild('selectElem') selectElem: SelectComponent;
 
@@ -87,7 +87,7 @@ describe('SelectOptionBaseDirective', () => {
     fixture.detectChanges();
   }
 
-  function updateControlValue(option: FudisSelectOption) {
+  function updateControlValue(option: FudisSelectOption<object>) {
     component.control.patchValue(option);
     fixture.detectChanges();
   }

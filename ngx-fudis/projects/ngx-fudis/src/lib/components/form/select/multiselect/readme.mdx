@@ -19,14 +19,14 @@ Therefore please check also [Common Features](/docs/components-form-select-commo
 
 ### Form Control
 
-Multiselect Component requires Angular Form Control. Type and value of control can be either `null` or `FudisSelectOption[]` array consisting of options.
+Multiselect Component requires Angular Form Control. Type and value of control can be either `null` or `FudisSelectOption<object>[]` array consisting of options.
 
 ```
 // TypeScript
 
-defaultOptions: FudisSelectOption[] = [{value: 'default-option-id', label: 'Default Option'}]
+defaultOptions: FudisSelectOption<object>[] = [{value: 'default-option-id', label: 'Default Option'}]
 
-myControl: new FormControl<null | FudisSelectOption[]>(defaultOption)
+myControl: new FormControl<null | FudisSelectOption<object>[]>(defaultOption)
 
 // HTML Template
 

@@ -45,7 +45,7 @@ For child Checkbox components mandatory properties are `controlName` and `label`
 
 // In TypeScript file
 
-myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
 	{
 		firstControlName: new FormControl<boolean | null | undefined>(null),
 		secondControlName: new FormControl<boolean | null | undefined>(null),
@@ -74,7 +74,7 @@ To set Fieldset with Checkbox Group as Required field, include validator `FudisG
 
 // In TypeScript file
 
-myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
 	{
 	first: new FormControl<boolean | null | undefined>(null),
 	second: new FormControl<boolean | null | undefined>(null),
@@ -92,7 +92,7 @@ If Checkbox Group has minimum and/or maximum options to be selected, form field 
 ```
 // In TypeScript file
 
-myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
 	{
 		first: new FormControl<boolean | null | undefined>(null),
 		second: new FormControl<boolean | null | undefined>(null),

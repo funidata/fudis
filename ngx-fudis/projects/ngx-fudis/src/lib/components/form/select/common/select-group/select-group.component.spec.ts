@@ -55,7 +55,7 @@ import { groupedTestData } from '../mock_data';
 })
 class MockSelectComponent {
   groupedData = groupedTestData;
-  control: FormControl = new FormControl<FudisSelectOption | null>(null);
+  control: FormControl = new FormControl<FudisSelectOption<object> | null>(null);
 
   @ViewChild('singleSelect') singleSelect: SelectComponent;
   @ViewChild('multiSelect') multiSelect: MultiselectComponent;

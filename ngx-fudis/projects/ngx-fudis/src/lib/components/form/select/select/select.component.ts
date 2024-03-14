@@ -51,13 +51,13 @@ export class SelectComponent
   /*
    * FormControl for single select
    */
-  @Input({ required: true }) override control: FormControl<FudisSelectOption | null>;
+  @Input({ required: true }) override control: FormControl<FudisSelectOption<object> | null>;
 
   /**
    * Value output event on selection change
    */
-  @Output() selectionUpdate: EventEmitter<FudisSelectOption | null> =
-    new EventEmitter<FudisSelectOption | null>();
+  @Output() selectionUpdate: EventEmitter<FudisSelectOption<object> | null> =
+    new EventEmitter<FudisSelectOption<object> | null>();
 
   /**
    * Internal translated text for disabled select option, used in Select Option
@@ -103,7 +103,10 @@ export class SelectComponent
    * @param value option to be selected
    * @param disableSignalEmit disable signal update to reduce unneeded state updates
    */
-  public handleSelectionChange(value: FudisSelectOption, disableSignalEmit?: boolean): void {
+  public handleSelectionChange(
+    value: FudisSelectOption<object>,
+    disableSignalEmit?: boolean,
+  ): void {
     const equalValues = areObjectsDeepEquals(value, this.control.value!);
 
     if (!equalValues) {
@@ -141,7 +144,7 @@ export class SelectComponent
    * Function to patch internally control's value
    * @param value Option value to patch
    */
-  protected _patchControlValue(value: FudisSelectOption | null) {
+  protected _patchControlValue(value: FudisSelectOption<object> | null) {
     this.controlValueChangedInternally = true;
     this._preventDropdownReopen = true;
     this.control.patchValue(value);

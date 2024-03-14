@@ -15,7 +15,7 @@ export class MultiselectChipListComponent {
   /**
    * Array of selected chip items
    */
-  @Input() selectedItems: FudisSelectOption[];
+  @Input() selectedItems: FudisSelectOption<object>[];
 
   /**
    * Parent component id for binding aria attributes

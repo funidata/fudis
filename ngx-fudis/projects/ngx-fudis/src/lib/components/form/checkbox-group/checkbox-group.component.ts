@@ -33,7 +33,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
   /**
    * FormControl for Checkbox group.
    */
-  @Input({ required: true }) formGroup: FormGroup<FudisCheckboxGroupFormGroup>;
+  @Input({ required: true }) formGroup: FormGroup<FudisCheckboxGroupFormGroup<object>>;
 
   /**
    * Width size of the group.

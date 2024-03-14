@@ -30,7 +30,7 @@ export interface FudisRadioButtonOption {
   checked?: boolean;
 }
 
-export interface FudisSelectOption {
+export type FudisSelectOption<T extends object> = T & {
   /** Underlying value of the option */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value: any;
@@ -41,7 +41,7 @@ export interface FudisSelectOption {
   /** To store additional data */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
-}
+};
 
 export type FudisFormErrorSummaryItem = {
   id: string;
@@ -110,10 +110,9 @@ export interface FudisInputWithLanguageOptionsFormGroup {
   [language: string]: FormControl<string | null>;
 }
 
-export type FudisCheckboxControl = FormControl<boolean | null | undefined>;
-export interface FudisCheckboxGroupFormGroup {
+export type FudisCheckboxGroupFormGroup<T extends object> = T & {
   [key: string]: FormControl<boolean | null | undefined>;
-}
+};
 
 export interface FudisDateRangeItem {
   control: FormControl<Date | null>;

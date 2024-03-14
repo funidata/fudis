@@ -52,7 +52,7 @@ export class MultiselectComponent
   /**
    * Array type control for selected FudisSelectOptions
    */
-  @Input({ required: true }) override control: FormControl<FudisSelectOption[] | null>;
+  @Input({ required: true }) override control: FormControl<FudisSelectOption<object>[] | null>;
 
   /**
    * Hide or show selection chips rendered below input
@@ -62,8 +62,8 @@ export class MultiselectComponent
   /**
    * Value output event on selection change
    */
-  @Output() selectionUpdate: EventEmitter<FudisSelectOption[] | null> = new EventEmitter<
-    FudisSelectOption[] | null
+  @Output() selectionUpdate: EventEmitter<FudisSelectOption<object>[] | null> = new EventEmitter<
+    FudisSelectOption<object>[] | null
   >();
 
   /**
@@ -74,13 +74,13 @@ export class MultiselectComponent
   /**
    * When selecting / deselecting options, variable for storing them in the order of their id's (usually the DOM order)
    */
-  protected _sortedSelectedOptions: FudisSelectOption[] = [];
+  protected _sortedSelectedOptions: FudisSelectOption<object>[] = [];
 
   /**
    * Signal for dropdown options to listen when either Application updates its control value or user clicks (removes) selection chip
    */
-  private _sortedSelectedOptionsSignal: WritableSignal<FudisSelectOption[]> = signal<
-    FudisSelectOption[]
+  private _sortedSelectedOptionsSignal: WritableSignal<FudisSelectOption<object>[]> = signal<
+    FudisSelectOption<object>[]
   >([]);
 
   /**
@@ -121,7 +121,7 @@ export class MultiselectComponent
    * Getter used in multiselect options
    * @returns Signal array of sorted selected options
    */
-  public getSelectedOptions(): Signal<FudisSelectOption[]> {
+  public getSelectedOptions(): Signal<FudisSelectOption<object>[]> {
     return this._sortedSelectedOptionsSignal.asReadonly();
   }
 
@@ -130,11 +130,14 @@ export class MultiselectComponent
    * @param option FudisSelectOption to handle
    * @param type add or remove multiselect option
    */
-  public handleMultiSelectionChange(option: FudisSelectOption, type: 'add' | 'remove'): void {
+  public handleMultiSelectionChange(
+    option: FudisSelectOption<object>,
+    type: 'add' | 'remove',
+  ): void {
     let updatedValue = this.control.value;
 
     if (type === 'remove' && updatedValue) {
-      updatedValue = updatedValue.filter((item: FudisSelectOption) => {
+      updatedValue = updatedValue.filter((item: FudisSelectOption<object>) => {
         return item.value !== option.value;
       });
     } else if (!updatedValue) {
@@ -156,7 +159,7 @@ export class MultiselectComponent
    * Function called by multiselect option if they are checked
    * @param checkedOption FudisSelectOption to handle
    */
-  public handleCheckedSort(checkedOption: FudisSelectOption): void {
+  public handleCheckedSort(checkedOption: FudisSelectOption<object>): void {
     const foundIndex: number = this._sortedSelectedOptions.findIndex((option) => {
       return option.value === checkedOption.value && option.label === checkedOption.label;
     });
