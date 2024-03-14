@@ -36,10 +36,9 @@ class MockSelecAutocompleteComponent {
   id: string = 'select-id';
   placeholder: string = 'Test placeholder';
   dropdownOpen: boolean = false;
-  control: FormControl = new FormControl<FudisSelectOption | FudisSelectOption[] | null>(
-    null,
-    FudisValidators.required('This is required input'),
-  );
+  control: FormControl = new FormControl<
+    FudisSelectOption<object> | FudisSelectOption<object>[] | null
+  >(null, FudisValidators.required('This is required input'));
 }
 
 describe('AutocompleteComponent', () => {
@@ -115,7 +114,9 @@ describe('AutocompleteComponent', () => {
       component.id = 'select-autocomplete-id';
       component.placeholder = 'Test placeholder';
       component.dropdownOpen = false;
-      component.control = new FormControl<FudisSelectOption | FudisSelectOption[] | null>(null);
+      component.control = new FormControl<
+        FudisSelectOption<object> | FudisSelectOption<object>[] | null
+      >(null);
       fixture.detectChanges();
     });
 

@@ -68,7 +68,7 @@ import { groupedTestData } from '../mock_data';
 })
 class MockSelectComponent {
   groupedData = groupedTestData;
-  control: FormControl = new FormControl<FudisSelectOption[] | null>(null);
+  control: FormControl = new FormControl<FudisSelectOption<object>[] | null>(null);
   clearButton: boolean = true;
 
   @ViewChild('multiSelect') multiSelect: MultiselectComponent;

@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
   errorSummaryVisible = false;
   protected _message: string;
 
-  dropdownOptions: FudisSelectOption[] = [
+  dropdownOptions: FudisSelectOption<object>[] = [
     { value: 'value-1-dog', label: 'Dog' },
     { value: 'value-2-capybara', label: 'Capybara' },
     { value: 'value-3-platypys', label: 'Platypus' },

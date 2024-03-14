@@ -52,7 +52,7 @@ const SelectAutocompleteTemplate: StoryFn<SelectComponent> = (args: SelectCompon
     ...args,
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<FudisSelectOption | null>(defaultOptions[2]),
+    control: new FormControl<FudisSelectOption<object> | null>(defaultOptions[2]),
   },
   template: html`
     <fudis-select
@@ -89,7 +89,7 @@ const MultiselectAutocompleteTemplate: StoryFn<MultiselectComponent> = (
     ...args,
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<FudisSelectOption[] | null>([defaultOptions[2]]),
+    control: new FormControl<FudisSelectOption<object>[] | null>([defaultOptions[2]]),
     groupedMockData,
   },
   template: html`
@@ -122,7 +122,7 @@ const SelectWithGroupedOptionsTemplate: StoryFn<SelectComponent> = (args: Select
   props: {
     ...args,
     selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<FudisSelectOption | null>(null),
+    control: new FormControl<FudisSelectOption<object> | null>(null),
     groupedMockData,
   },
   template: html`
@@ -158,7 +158,7 @@ const MultiselectWithGroupedOptionsTemplate: StoryFn<MultiselectComponent> = (
   props: {
     ...args,
     selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<FudisSelectOption | null>(null),
+    control: new FormControl<FudisSelectOption<object> | null>(null),
     groupedMockData,
   },
   template: html`

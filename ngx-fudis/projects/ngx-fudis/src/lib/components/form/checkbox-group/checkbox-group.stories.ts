@@ -47,7 +47,7 @@ const options = [
   { controlName: 'orange', label: 'Orange' },
 ];
 
-const basicFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+const basicFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
   {
     apple: new FormControl<boolean | null | undefined>(null),
     fairTradeBanana: new FormControl<boolean | null | undefined>(null),
@@ -91,7 +91,7 @@ Example.args = {
   tooltipPosition: 'right',
 };
 
-const withDisabledFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup>(
+const withDisabledFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
   {
     apple: new FormControl<boolean | null | undefined>({ value: true, disabled: true }),
     fairTradeBanana: new FormControl<boolean | null | undefined | null>(null),
@@ -137,7 +137,7 @@ ExampleWithDisabledOption.args = {
   tooltipPosition: 'right',
 };
 
-const withMinMaxFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup>(
+const withMinMaxFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
   {
     apple: new FormControl<boolean | null | undefined>(null),
     fairTradeBanana: new FormControl<boolean | null | undefined | null>(null),

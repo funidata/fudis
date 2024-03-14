@@ -23,7 +23,7 @@ import {
   getElement,
   getTrimmedTextContent,
 } from '../../../../utilities/tests/utilities';
-import { defaultOptions } from '../common/mock_data';
+import { TestAnimalSound, defaultOptions } from '../common/mock_data';
 
 @Component({
   selector: 'fudis-multiselect-mock',
@@ -42,8 +42,10 @@ import { defaultOptions } from '../common/mock_data';
 class MultiselectMockComponent {
   @ViewChild('multiselectEl') multiselectEl: MultiselectComponent;
 
-  options: FudisSelectOption[] = defaultOptions;
-  control = new FormControl<FudisSelectOption[] | null>(null);
+  options: FudisSelectOption<object>[] = defaultOptions;
+  control: FormControl<FudisSelectOption<TestAnimalSound>[] | null> = new FormControl<
+    TestAnimalSound[] | null
+  >(null);
 }
 
 // TODO: add test for disabled states
@@ -82,7 +84,7 @@ describe('MultiselectComponent', () => {
   });
 
   function initWithControlValue() {
-    component.control = new FormControl<FudisSelectOption[]>([
+    component.control = new FormControl<FudisSelectOption<object>[]>([
       defaultOptions[0],
       defaultOptions[2],
     ]);
@@ -91,7 +93,7 @@ describe('MultiselectComponent', () => {
   }
 
   function initWithControlNull() {
-    component.control = new FormControl<FudisSelectOption[] | null>(null);
+    component.control = new FormControl<FudisSelectOption<object>[] | null>(null);
     component.ngAfterViewInit();
     fixture.detectChanges();
   }
@@ -221,7 +223,7 @@ describe('MultiselectComponent', () => {
     });
 
     it('should not be visible if showSelectionChips is set to false', () => {
-      componentMock.control = new FormControl<FudisSelectOption[]>([
+      componentMock.control = new FormControl<TestAnimalSound[]>([
         defaultOptions[0],
         defaultOptions[2],
       ]);

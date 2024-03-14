@@ -38,7 +38,7 @@ import { getTrimmedTextContent } from '../../../../../utilities/tests/utilities'
   </fudis-select>`,
 })
 class MockContainerComponent {
-  testOptions: FudisSelectOption[] = defaultOptions;
+  testOptions: FudisSelectOption<object>[] = defaultOptions;
   control: FormControl = new FormControl(null);
 
   @ViewChild('testOption') testOption: SelectOptionComponent;
