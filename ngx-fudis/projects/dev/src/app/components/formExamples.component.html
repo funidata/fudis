@@ -1,12 +1,7 @@
 <ng-container *transloco="let t">
   <fudis-expandable [title]="'Form with some transloco'" [closed]="false">
     <ng-template fudisActions type="expandable">
-      <fudis-button
-        fudisFormSubmit
-        [formValid]="testFormGroup.valid"
-        [label]="'Submit!'"
-        (handleClick)="clickSubmit()"
-      ></fudis-button>
+      <fudis-button [label]="'Submit!'" (handleClick)="clickSubmit()"></fudis-button>
       <fudis-button
         [label]="'Custom error status: ' + customError"
         (handleClick)="toggleCustomError()"
@@ -14,7 +9,7 @@
     </ng-template>
     <ng-template fudisContent type="expandable">
       <fudis-form
-        [errorSummaryLinkType]="'href'"
+        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [title]="'Form title here hello'"
         [errorSummaryHelpText]="'There were some errors'"

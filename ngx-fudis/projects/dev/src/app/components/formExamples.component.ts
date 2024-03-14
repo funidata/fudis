@@ -168,7 +168,14 @@ export class AppFormExampleComponent implements OnInit {
   }
 
   clickSubmit(): void {
-    if (this.testFormGroup.valid) {
+    this.testFormGroup.markAllAsTouched();
+
+    if (this.testFormGroup.invalid) {
+      this.errorSummaryVisible = true;
+      this.showSuccessBodyText = false;
+      this._errorSummaryService.reloadAllErrors();
+    } else {
+      this.errorSummaryVisible = false;
       this.showSuccessBodyText = true;
     }
   }
