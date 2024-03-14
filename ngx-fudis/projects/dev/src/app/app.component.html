@@ -26,7 +26,10 @@
             </fudis-heading>
             <!-- <fudis-button [label]="'Trigger alert'" (handleClick)="triggerAlert()" /> -->
             <fudis-button [label]="'Open dialog with form'" (handleClick)="openDialog()" />
-            <p *ngIf="this._message">{{ this._message }}</p>
+            <fudis-body-text *ngIf="this._message"
+              >This value comes from the closed dialog input:
+              <strong>{{ this._message }}</strong></fudis-body-text
+            >
             <fudis-button
               [label]="'Open dialog from component'"
               (handleClick)="openDialogFromComponent()"
@@ -141,58 +144,3 @@
     </fudis-footer>
   </div>
 </ng-container>
-
-<!-- <ng-template #exampleDialogTemplate>
-  <fudis-dialog [size]="'sm'">
-    <fudis-dialog-content>
-      <fudis-form
-        [errorSummaryLinkType]="'onClick'"
-        [errorSummaryVisible]="errorSummaryVisible"
-        [title]="'Dialog with fudis-form'"
-        [errorSummaryHelpText]="'You did not fill all the required information'"
-        [titleLevel]="2"
-      >
-        <ng-template fudisContent [type]="'form'">
-          <fudis-fieldset [title]="'We need some information'">
-            <ng-template fudisContent [type]="'fieldset'">
-              <fudis-checkbox-group
-                [title]="'Choose berry'"
-                [helpText]="'Berries are yummy'"
-                [tooltip]="'We want to know!'"
-                [formGroup]="testFormGroup.controls['checkboxFormGroup']"
-              >
-                <fudis-checkbox
-                  *ngFor="let option of checkboxOptions"
-                  [controlName]="option.controlName"
-                  [label]="option.label"
-                />
-              </fudis-checkbox-group>
-              <fudis-text-input
-                [label]="'Is something wrong?'"
-                [helpText]="'I hope everything is OK'"
-                [control]="testFormGroup.controls['textInput']"
-                [tooltip]="
-                  'This text-input has multiple validators: required, minlength and maxlength'
-                "
-              />
-              <fudis-radio-button-group
-                [title]="'Choose the truth'"
-                [control]="testFormGroup.controls['truth']"
-                [options]="radioButtonOptions"
-              />
-            </ng-template>
-          </fudis-fieldset>
-        </ng-template>
-        <ng-template fudisActions [type]="'form'">
-          <fudis-button
-            fudisFormSubmit
-            [formValid]="testFormGroup.valid"
-            (handleClick)="submitDialogForm()"
-            [label]="'Submit'"
-          ></fudis-button>
-          <fudis-button fudisDialogClose [label]="'Cancel'"></fudis-button>
-        </ng-template>
-      </fudis-form>
-    </fudis-dialog-content>
-  </fudis-dialog>
-</ng-template> -->

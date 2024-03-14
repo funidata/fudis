@@ -7,6 +7,7 @@ import { FudisDialogService, FudisGroupValidators, FudisValidators } from 'ngx-f
 type MyForm = {
   textInput: FormControl<string | null | number>;
   checkboxFormGroup: FormGroup;
+  // truth: FormControl<boolean | null>;
 };
 
 @Component({
@@ -15,7 +16,7 @@ type MyForm = {
     <fudis-dialog [size]="'sm'">
       <fudis-dialog-content>
         <fudis-form
-          [errorSummaryLinkType]="'href'"
+          [errorSummaryLinkType]="'onClick'"
           [title]="'Dialog with fudis-form'"
           [errorSummaryHelpText]="'You did not fill all the required information'"
           [titleLevel]="2"
@@ -39,6 +40,11 @@ type MyForm = {
                   [helpText]="'I hope everything is OK'"
                   [control]="testFormGroup.controls['textInput']"
                 />
+                <!-- <fudis-radio-button-group
+                [title]="'Choose the truth'"
+                [control]="testFormGroup.controls['truth']"
+                [options]="radioButtonOptions"
+              /> -->
               </ng-template>
             </fudis-fieldset>
           </ng-template>
@@ -74,6 +80,11 @@ export class DialogTestFormComponent {
     { controlName: 'strawberry', label: 'strawberry' },
   ];
 
+  // radioButtonOptions: FudisRadioButtonOption[] = [
+  //   { value: true, label: 'True', id: 'boolean-2' },
+  //   { value: false, label: 'False', id: 'boolean-1' },
+  // ];
+
   testFormGroup = new FormGroup<MyForm>({
     textInput: new FormControl<string | null | number>(null, [
       FudisValidators.required('This is required'),
@@ -96,6 +107,11 @@ export class DialogTestFormComponent {
         }),
       ],
     ),
+    //   truth: new FormControl<boolean | null>(
+    //     null,
+    //     FudisValidators.required(
+    //       this._translocoService.selectTranslateObject('form_errors.required'),
+    //    ),
   });
 
   submitDialogForm(): void {

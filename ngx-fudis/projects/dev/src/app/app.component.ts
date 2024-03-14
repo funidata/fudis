@@ -1,5 +1,4 @@
-import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
-
+import { Component, Inject, OnInit } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import {
   // FudisAlertService,
@@ -8,29 +7,14 @@ import {
   FudisTranslationService,
   FudisBreakpointService,
   FudisErrorSummaryService,
-  // FudisValidators,
-  // FudisGroupValidators,
 } from 'ngx-fudis';
 import { DOCUMENT } from '@angular/common';
-
-import {
-  FudisSelectOption,
-  FudisCheckboxOption,
-  FudisRadioButtonOption,
-} from 'dist/ngx-fudis/lib/types/forms';
-
+import { FudisSelectOption, FudisCheckboxOption } from 'dist/ngx-fudis/lib/types/forms';
 // import { FudisAlert } from 'dist/ngx-fudis/lib/types/miscellaneous';
-// import { FormControl, FormGroup } from '@angular/forms';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
 import { FudisGridAlign } from 'projects/ngx-fudis/src/lib/types/grid';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogTestFormComponent } from './dialog-test/dialog-test-content/dialog-test-form.component';
-
-// type MyForm = {
-//   textInput: FormControl<string | null | number>;
-//   checkboxFormGroup: FormGroup;
-//   truth: FormControl<boolean | null>;
-// };
 
 @Component({
   selector: 'app-root',
@@ -54,18 +38,12 @@ export class AppComponent implements OnInit {
     });
   }
 
-  @ViewChild('exampleDialogTemplate', { static: true }) templateRef: TemplateRef<unknown>;
-
   title = 'dev';
-
   visibleRemValue: number;
-
   fontSize: string;
-
   multiplier: number;
-
   newRemBase: string;
-
+  errorSummaryVisible = false;
   protected _message: string;
 
   dropdownOptions: FudisSelectOption[] = [
@@ -76,8 +54,6 @@ export class AppComponent implements OnInit {
     { value: 'value-5-armadillo', label: 'Screaming hairy armadillo' },
     { value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko' },
   ];
-
-  errorSummaryVisible = false;
 
   multipleOptions = Array.from({ length: 1000 }).map((value, i) => {
     return {
@@ -104,47 +80,6 @@ export class AppComponent implements OnInit {
     { controlName: 'raspberry', label: 'raspberry' },
     { controlName: 'strawberry', label: 'strawberry' },
   ];
-
-  radioButtonOptions: FudisRadioButtonOption[] = [
-    { value: true, label: 'True', id: 'boolean-2' },
-    { value: false, label: 'False', id: 'boolean-1' },
-  ];
-
-  // testFormGroup = new FormGroup<MyForm>({
-  //   textInput: new FormControl<string | null | number>(null, [
-  //     FudisValidators.required(
-  //       this._translocoService.selectTranslateObject('form_errors.required'),
-  //     ),
-  //     FudisValidators.minLength(
-  //       5,
-  //       this._translocoService.selectTranslateObject('form_errors.notEnoughCharacters'),
-  //     ),
-  //   ]),
-  //   checkboxFormGroup: new FormGroup(
-  //     {
-  //       blueberry: new FormControl<FudisCheckboxOption | null>(null),
-  //       cloudberry: new FormControl<FudisCheckboxOption | null>(null),
-  //       raspberry: new FormControl<FudisCheckboxOption | null>(null),
-  //       strawberry: new FormControl<FudisCheckboxOption | null>(null),
-  //     },
-  //     [
-  //       FudisGroupValidators.min({
-  //         value: 2,
-  //         message: this._translocoService.selectTranslate('chooseBerryErrorMin'),
-  //       }),
-  //       FudisGroupValidators.max({
-  //         value: 3,
-  //         message: this._translocoService.selectTranslate('chooseBerryErrorMax'),
-  //       }),
-  //     ],
-  //   ),
-  //   truth: new FormControl<boolean | null>(
-  //     null,
-  //     FudisValidators.required(
-  //       this._translocoService.selectTranslateObject('form_errors.required'),
-  //     ),
-  //   ),
-  // });
 
   protected _gridAlignValue: FudisGridAlign = 'end';
 
@@ -221,29 +156,13 @@ export class AppComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((response: string) => {
+      console.log(response);
       this._message = response;
     });
   }
 
   openDialogFromComponent(): void {
     this._dialogService.open(DialogTestContentComponent);
-  }
-
-  // submitDialogForm(): void {
-  //   this.testFormGroup.markAllAsTouched();
-
-  //   if (this.testFormGroup.invalid) {
-  //     this.errorSummaryVisible = true;
-  //     this._errorSummaryService.reloadErrors();
-  //   } else {
-  //     this.errorSummaryVisible = false;
-  //     this._dialogService.close(this.data.size);
-  //   }
-  // }
-  submitDialogForm(): void {
-    // if (this.testFormGroup.valid) {
-    //   this._dialog.close();
-    // }
   }
 
   doSomething(event: Event) {
