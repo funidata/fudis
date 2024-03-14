@@ -72,6 +72,8 @@ export class DropdownItemBaseDirective {
   }
 
   /**
+   * TODO: this spaghetti should be rethought
+   *
    * Function which tries to check if UI focus has moved away from the list of dropdown items
    */
   // eslint-disable-next-line class-methods-use-this
@@ -116,14 +118,20 @@ export class DropdownItemBaseDirective {
         '.fudis-select__input-wrapper__icon-button button',
       );
 
-      if (
-        !(event.relatedTarget as HTMLElement)?.classList?.contains(selector) &&
-        (event.relatedTarget as HTMLElement) !== selectInput &&
-        (event.relatedTarget as HTMLElement) !== menuButton &&
-        (event.relatedTarget as HTMLElement) !== autocompleteChevronButton
-      ) {
-        return true;
-      }
+      setTimeout(() => {
+        const optionAsActiveElement = document.activeElement?.classList.contains(selector);
+        if (
+          !optionAsActiveElement &&
+          !(event.relatedTarget as HTMLElement)?.classList?.contains(selector) &&
+          (event.relatedTarget as HTMLElement) !== selectInput &&
+          (event.relatedTarget as HTMLElement) !== menuButton &&
+          (event.relatedTarget as HTMLElement) !== autocompleteChevronButton
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      }, 150);
     }
 
     return false;
