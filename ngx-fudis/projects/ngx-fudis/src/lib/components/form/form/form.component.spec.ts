@@ -193,7 +193,7 @@ describe('FormComponent', () => {
       expect(errorSummaryElement).toBeFalsy();
     });
 
-    it.only('should be visible when errorSummaryVisible is true and form has errors', () => {
+    it('should be visible when errorSummaryVisible is true and form has errors', () => {
       componentMock.reloadErrorsMock();
       fixtureMock.detectChanges();
 
