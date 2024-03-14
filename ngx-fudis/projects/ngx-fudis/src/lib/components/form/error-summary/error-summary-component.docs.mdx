@@ -5,31 +5,24 @@ import { ErrorSummaryComponent } from "./error-summary.component";
 
 # Error Summary
 
-Error Summary is internally bundled with Fudis Form.
-It will appear as Fudis Notification with links in the header section of Fudis Form when invalid form is submitted.
+Error Summary is a list of all validation errors it has received from child form field components, e. g. from Text Input. Error Summary is internally bundled with Fudis Form. It will appear as Notification with links in the header section of Fudis Form when invalid form is submitted.
+
+## Triggering Error Summary on Form Submit
+
+[Using Form Submit Directive with Button](/docs/directives-form-actions--documentation)
+
+## Properties Through Form Component
+
 All the necessary properties are given through [Fudis Form](/docs/components-form-form--documentation#error-summary) `@Input` directives.
 
-## Properties
+## Service
 
-### errorSummaryVisible (boolean)
+Configuration and triggering Error Summary reload are managed with [Error Summary Service](/docs/services-error-summary--documentation).
 
-To set Error Summary visibility. By default set to `false` and is meant to set `true` on form submit. Should be used with [Button binded with Form Submit directive](/docs/directives-form-actions--documentation#form-submit-with-button) or [Reload Errors](/docs/services-error-summary--documentation).
-
-### errorSummaryHelpText (string)
-
-Mandatory help text displayed in Error Summary before listing individual errors.
-
-### errorSummaryLinkType ('router' | 'href')
-
-Type of the clickable error link in Error Summary. Defaults to Angular router link.
-
-## Update Strategies
-
-Error Summary has three update strategies. Check [Error Summary Service documentation](/docs/services-error-summary--documentation) for more info.
-
-## Related Services
+## Related Services and Directives
 
 - [Error Summary Service](/docs/services-error-summary--documentation)
+- [Form Submit Action](/docs/directives-form-actions--documentation#form-submit-with-button)
 
 ## Related Components
 

@@ -1,46 +1,48 @@
 <ng-container *ngIf="_visibleErrorList.length > 0">
-  <fudis-notification [variant]="'danger'">
-    <ng-template fudisContent type="notification">
-      <div class="fudis-error-summary" #focusTarget tabindex="-1">
-        <fudis-icon class="fudis-error-summary__icon" [icon]="'alert'"></fudis-icon>
-        <div class="fudis-error-summary__errors">
-          <ng-container *ngIf="helpText">
-            <fudis-body-text fudisSpacing [marginTop]="'xs'">
-              <span class="fudis-visually-hidden">{{ _attentionText }}:&nbsp;</span>
-              {{ helpText }}
-            </fudis-body-text>
-          </ng-container>
-          <ul class="fudis-error-summary__error-list">
-            <li
-              class="fudis-error-summary__error-list__item"
-              *ngFor="let error of _visibleErrorList"
-            >
-              <ng-container *ngIf="linkType === 'router'">
-                <fudis-link
-                  [link]="'.'"
-                  [fragmentId]="error.id"
-                  [title]="error.message"
-                ></fudis-link>
-              </ng-container>
-              <ng-container *ngIf="linkType === 'href'">
-                <fudis-link
-                  [size]="'md'"
-                  [href]="'#' + error.id"
-                  [title]="error.message"
-                ></fudis-link>
-              </ng-container>
-              <ng-container *ngIf="linkType === 'onClick'">
-                <fudis-link
-                  (handleClick)="handleErrorClick($event, error.id)"
-                  [size]="'md'"
-                  [href]="'#'"
-                  [title]="error.message"
-                ></fudis-link>
-              </ng-container>
-            </li>
-          </ul>
+  <div class="fudis-error-summary__main-container">
+    <fudis-notification [variant]="'danger'">
+      <ng-template fudisContent type="notification">
+        <div class="fudis-error-summary" #focusTarget tabindex="-1">
+          <fudis-icon class="fudis-error-summary__icon" [icon]="'alert'"></fudis-icon>
+          <div class="fudis-error-summary__errors">
+            <ng-container *ngIf="helpText">
+              <fudis-body-text fudisSpacing [marginTop]="'xs'">
+                <span class="fudis-visually-hidden">{{ _attentionText }}:&nbsp;</span>
+                {{ helpText }}
+              </fudis-body-text>
+            </ng-container>
+            <ul class="fudis-error-summary__error-list">
+              <li
+                class="fudis-error-summary__error-list__item"
+                *ngFor="let error of _visibleErrorList"
+              >
+                <ng-container *ngIf="linkType === 'router'">
+                  <fudis-link
+                    [link]="'.'"
+                    [fragmentId]="error.id"
+                    [title]="error.message"
+                  ></fudis-link>
+                </ng-container>
+                <ng-container *ngIf="linkType === 'href'">
+                  <fudis-link
+                    [size]="'md'"
+                    [href]="'#' + error.id"
+                    [title]="error.message"
+                  ></fudis-link>
+                </ng-container>
+                <ng-container *ngIf="linkType === 'onClick'">
+                  <fudis-link
+                    (handleClick)="handleErrorClick($event, error.id)"
+                    [size]="'md'"
+                    [href]="'#'"
+                    [title]="error.message"
+                  ></fudis-link>
+                </ng-container>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </ng-template>
-  </fudis-notification>
+      </ng-template>
+    </fudis-notification>
+  </div>
 </ng-container>

@@ -78,8 +78,8 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
       };
     }
 
-    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
-      this.reloadErrorSummary(this.formGroup);
+    if (this.errorSummaryReloadOnInit) {
+      this._reloadErrorSummaryOnLazyLoad(this._parentForm?.errorSummaryVisible, this.formGroup);
     }
   }
 

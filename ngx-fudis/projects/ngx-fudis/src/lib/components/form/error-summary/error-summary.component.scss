@@ -16,6 +16,10 @@
     display: none;
   }
 
+  &__main-container {
+    margin-bottom: spacing.$spacing-sm;
+  }
+
   &__icon {
     margin-top: spacing.$spacing-xs;
   }

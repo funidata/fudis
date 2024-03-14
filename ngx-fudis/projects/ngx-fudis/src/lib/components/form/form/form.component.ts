@@ -93,12 +93,12 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   @Input() badgeText: string | null;
 
   /**
-   * Set Error Summary visibility. Usually set true on form submit.
+   * Set Error Summary visibility manually. Usually set true on form submit with Button binded with 'fudisFormSubmit' directive.
    */
   @Input() errorSummaryVisible: boolean = false;
 
   /**
-   * Type of the clickable error link in Error Summary
+   * Type of the clickable error link in Error Summary. If your App uses Angular Router, use default value 'router'. Otherwise use 'onClick'.
    */
   @Input() errorSummaryLinkType: FudisFormErrorSummaryLink = 'router';
 
