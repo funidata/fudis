@@ -535,7 +535,7 @@ export default {
       },
     },
     errorSummaryLinkType: {
-      options: ['href', 'router'],
+      options: ['href', 'router', 'onClick'],
       control: {
         type: 'select',
       },
@@ -569,7 +569,7 @@ Example.args = {
   badgeText: 'Example',
   errorSummaryHelpText:
     'There are errors in this form. Please address these before trying to submit again.',
-  errorSummaryLinkType: 'href',
+  errorSummaryLinkType: 'onClick',
   errorSummaryVisible: false,
 };
 

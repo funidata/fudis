@@ -2,8 +2,6 @@
   <fudis-expandable [title]="'Form with some transloco'" [closed]="false">
     <ng-template fudisActions type="expandable">
       <fudis-button
-        fudisFormSubmit
-        [formValid]="testFormGroup.valid"
         [label]="'Submit!'"
         (handleClick)="clickSubmit()"
       ></fudis-button>
