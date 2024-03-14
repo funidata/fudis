@@ -40,7 +40,7 @@ type TestForm = {
             [errorSummaryVisible]="errorSummaryVisible"
             [title]="'Dialog with fudis-form'"
             [titleLevel]="2"
-            [errorSummaryLinkType]="'href'"
+            [errorSummaryLinkType]="'onClick'"
             [errorSummaryHelpText]="'You need to fill up the information.'"
           >
             <ng-template fudisContent [type]="'form'">
