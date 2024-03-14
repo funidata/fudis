@@ -43,7 +43,9 @@ class MultiselectMockComponent {
   @ViewChild('multiselectEl') multiselectEl: MultiselectComponent;
 
   options: FudisSelectOption<object>[] = defaultOptions;
-  control = new FormControl<TestAnimalSound[] | null>(null);
+  control: FormControl<FudisSelectOption<TestAnimalSound>[] | null> = new FormControl<
+    TestAnimalSound[] | null
+  >(null);
 }
 
 // TODO: add test for disabled states

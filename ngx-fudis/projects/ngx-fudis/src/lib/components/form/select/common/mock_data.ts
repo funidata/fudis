@@ -2,7 +2,7 @@ import { FudisSelectOption } from '../../../../types/forms';
 
 interface MockSelectOptionGroupData {
   country: string;
-  options: FudisSelectOption<object>[];
+  options: FudisSelectOption<TestAnimalScience>[];
 }
 
 export type TestAnimalSound = {
@@ -108,7 +108,7 @@ export const groupedTestData: CountryDataArray = [
   },
 ];
 
-export const selectMockData: FudisSelectOption<object>[] = [
+export const selectMockData: FudisSelectOption<TestAnimalScience>[] = [
   {
     value: '4257d865-872c-4ea6-80e6-8bd04ce56ad7',
     label: 'Golden jackal',
