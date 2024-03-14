@@ -96,10 +96,7 @@ export class MultiselectComponent
       this.controlValueChangedInternally = false;
     });
 
-    // TODO: write test
-    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
-      this.reloadErrorSummary(this.control);
-    }
+    this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
   }
 
   ngAfterContentInit(): void {

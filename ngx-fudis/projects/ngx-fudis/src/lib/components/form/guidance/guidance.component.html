@@ -21,7 +21,7 @@
               <ng-container *ngFor="let error of singleControl.value.errors | keyvalue">
                 <fudis-validator-error-message
                   *ngIf="error.value.message"
-                  (handleCreateError)="_disableReload()"
+                  (handleCreateError)="_reloadErrorSummaryOnLazyLoad($event)"
                   [formId]="formId"
                   [focusId]="for"
                   [visible]="(singleControl.value.touched || formGroup.touched) && groupBlurredOut"
@@ -39,7 +39,7 @@
           <ng-container *ngFor="let error of formGroup.errors | keyvalue">
             <fudis-validator-error-message
               *ngIf="error.value?.message"
-              (handleCreateError)="_disableReload()"
+              (handleCreateError)="_reloadErrorSummaryOnLazyLoad($event)"
               [formId]="formId"
               [visible]="formGroup.touched"
               [focusId]="for"
@@ -54,7 +54,7 @@
           <ng-container *ngFor="let error of control.errors | keyvalue">
             <fudis-validator-error-message
               *ngIf="error.value?.message"
-              (handleCreateError)="_disableReload()"
+              (handleCreateError)="_reloadErrorSummaryOnLazyLoad($event)"
               [formId]="formId"
               [visible]="control.touched"
               [focusId]="for"

@@ -112,15 +112,20 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
   protected _destroyed = new Subject<void>();
 
   /**
-   * To trigger Error Summary reload when this component's children Validator Error Messages are initialised. This is used in cases when this parent component is lazy loaded to DOM after initial Error Summary reload was called before children Validator Error Messages existed.
+   * To trigger Error Summary reload when this component's children Validator Error Messages are initialised. This is used in cases when this component is lazy loaded to DOM after initial Error Summary reload was called before children Validator Error Messages existed. E. g. if component is inside lazy loaded expandable.
    */
   protected _reloadErrorSummary = false;
 
   /**
    * TODO: write test
+   *
+   * Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
    */
-  protected reloadErrorSummary(control: FormControl): void {
-    if (control.errors) {
+  protected _reloadErrorSummaryOnInit(
+    parentFormErrorSummaryVisible: boolean | undefined,
+    control: FormControl,
+  ): void {
+    if (this.errorSummaryReloadOnInit && parentFormErrorSummaryVisible && control.errors) {
       this._reloadErrorSummary = true;
       this._changeDetectorRef.detectChanges();
     }

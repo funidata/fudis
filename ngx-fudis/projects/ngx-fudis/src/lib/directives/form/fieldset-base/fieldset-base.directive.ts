@@ -70,9 +70,13 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
     }
   }
 
-  // TODO: write tests
-  protected reloadErrorSummary(group: FormGroup): void {
-    if (group.errors) {
+  /**
+   * TODO: write test
+   *
+   * Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
+   */
+  protected _reloadErrorSummaryOnLazyLoad(parentForm: boolean | undefined, group: FormGroup): void {
+    if (parentForm && group.errors) {
       this._reloadErrorSummary = true;
       this._changeDetectorRef.detectChanges();
     }

@@ -199,7 +199,7 @@ describe('FormComponent', () => {
 
       const errorSummaryElement = getElement(
         fixtureMock,
-        '.fudis-form__header__main__content fudis-error-summary',
+        '.fudis-form__header__main fudis-error-summary',
       );
 
       expect(errorSummaryElement).toBeTruthy();
