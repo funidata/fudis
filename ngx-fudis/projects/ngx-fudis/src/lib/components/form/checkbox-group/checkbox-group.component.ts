@@ -61,9 +61,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
    */
   protected _required: boolean = false;
 
-  private _hasGroup: boolean = false;
-
-  private _hasArray: boolean = false;
+  protected _internalFormGroup: boolean = false;
 
   /**
    * Getter for _groupBlurredOut.
@@ -72,17 +70,20 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
     return this._groupBlurredOut;
   }
 
+  get internalFormGroup(): boolean {
+    return this._internalFormGroup;
+  }
+
   public ngOnInit() {
-    this._hasGroup = this.formGroup && !this.formArray;
-
-    this._hasArray = this.formArray && !this.formGroup;
-
     this._setParentId('checkbox-group');
 
-    if (this._hasGroup) {
+    if (this.formGroup && !this.formArray) {
       this._initialCheck(this.formGroup);
-    } else if (this._hasArray) {
+    } else if (this.formArray && !this.formGroup) {
       this._initialCheck(this.formArray);
+    } else if (!this.formGroup) {
+      this._internalFormGroup = true;
+      this.formGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>({});
     }
   }
 
@@ -93,6 +94,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
       /**
        * Extend original markAllAsTouched function to change _groupBlurredOut value to 'true', so error messages are loaded when e.g. on Submit touched value is changed programatically.
        */
+
       const originalMarkAllAsTouched = groupOrArray.markAllAsTouched;
       groupOrArray.markAllAsTouched = () => {
         originalMarkAllAsTouched.apply(groupOrArray);
@@ -128,7 +130,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
    * Getter for if component has FormGroup, FormArray or neither as its control.
    */
   public getFormType(): 'group' | 'array' {
-    if (this._hasGroup) {
+    if (this.formGroup && !this.formArray) {
       return 'group';
     }
 
