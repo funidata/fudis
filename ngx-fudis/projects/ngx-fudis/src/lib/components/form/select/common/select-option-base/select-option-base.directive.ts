@@ -42,7 +42,7 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
   /**
    * Select option data
    */
-  @Input({ required: true }) data: FudisSelectOption;
+  @Input({ required: true }) data: FudisSelectOption<object>;
 
   /**
    * State of option visibility

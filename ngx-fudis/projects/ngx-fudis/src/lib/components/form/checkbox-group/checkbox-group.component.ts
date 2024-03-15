@@ -33,7 +33,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
   /**
    * FormControl for Checkbox group.
    */
-  @Input({ required: true }) formGroup: FormGroup<FudisCheckboxGroupFormGroup>;
+  @Input({ required: true }) formGroup: FormGroup<FudisCheckboxGroupFormGroup<object>>;
 
   /**
    * Width size of the group.
@@ -78,8 +78,8 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
       };
     }
 
-    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
-      this.reloadErrorSummary(this.formGroup);
+    if (this.errorSummaryReloadOnInit) {
+      this._reloadErrorSummaryOnLazyLoad(this._parentForm?.errorSummaryVisible, this.formGroup);
     }
   }
 

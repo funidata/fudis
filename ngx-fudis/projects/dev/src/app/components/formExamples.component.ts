@@ -16,15 +16,15 @@ import {
 } from 'dist/ngx-fudis/lib/types/forms';
 
 type MyForm = {
-  dropdown: FormControl<FudisSelectOption | null>;
-  dropdownMulti: FormControl<FudisSelectOption[] | null>;
+  dropdown: FormControl<FudisSelectOption<object> | null>;
+  dropdownMulti: FormControl<FudisSelectOption<object>[] | null>;
   textArea: FormControl<string | null>;
   textInput: FormControl<string | null | number>;
   truth: FormControl<boolean | null>;
   checkboxFormGroup: FormGroup;
   date: FormControl<Date | null>;
-  autocompleteDropdown: FormControl<FudisSelectOption | null>;
-  autocompleteSearch: FormControl<FudisSelectOption | null>;
+  autocompleteDropdown: FormControl<FudisSelectOption<object> | null>;
+  autocompleteSearch: FormControl<FudisSelectOption<object> | null>;
   withLanguages: FormGroup<FudisInputWithLanguageOptionsFormGroup>;
 };
 
@@ -44,7 +44,7 @@ export class AppFormExampleComponent implements OnInit {
 
   customError: boolean = true;
 
-  dropdownOptions: FudisSelectOption[] = [
+  dropdownOptions: FudisSelectOption<object>[] = [
     { value: 'value-1-dog', label: 'Dog' },
     { value: 'value-2-capybara', label: 'Capybara' },
     { value: 'value-3-platypys', label: 'Platypus' },
@@ -61,8 +61,8 @@ export class AppFormExampleComponent implements OnInit {
   });
 
   testFormGroup = new FormGroup<MyForm>({
-    dropdown: new FormControl<FudisSelectOption | null>(this.dropdownOptions[2]),
-    dropdownMulti: new FormControl<FudisSelectOption[] | null>([
+    dropdown: new FormControl<FudisSelectOption<object> | null>(this.dropdownOptions[2]),
+    dropdownMulti: new FormControl<FudisSelectOption<object>[] | null>([
       this.dropdownOptions[2],
       this.dropdownOptions[4],
     ]),
@@ -111,13 +111,13 @@ export class AppFormExampleComponent implements OnInit {
         }),
       ],
     ),
-    autocompleteDropdown: new FormControl<FudisSelectOption | null>(
+    autocompleteDropdown: new FormControl<FudisSelectOption<object> | null>(
       null,
       FudisValidators.required(
         this._translocoService.selectTranslateObject('form_errors.required'),
       ),
     ),
-    autocompleteSearch: new FormControl<FudisSelectOption | null>(
+    autocompleteSearch: new FormControl<FudisSelectOption<object> | null>(
       null,
       FudisValidators.required(
         this._translocoService.selectTranslateObject('form_errors.required'),

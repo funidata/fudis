@@ -6,7 +6,7 @@ import { Meta } from "@storybook/blocks";
 
 ## Form Submit with Button
 
-When using Form component, it should always have a Button which submits the form. For accessibility reasons, the submit Button should be a child component of Form component.
+When using Form component, it should always have a Button which submits the form. For proper accessibility, the submit Button **must be** a child component of Form component.
 
 When you want to bind a spesific Button to be Form's submit button, you can use `fudisFormSubmit` directive to it.
 
@@ -27,7 +27,7 @@ This will then:
 
 What it DOES NOT do:
 
-- It does not set your form's groups and controls as touched
+- Work at all, if Button with `fudisFormSubmit` is not used as child component of Form component.
 
 ```
 // HTML Template
@@ -41,14 +41,13 @@ What it DOES NOT do:
 // TypeScript
 
 myFormSubmit():void {
-  // On submit set all your Form Groups and Controls as touched
-  this.myFormGroup.markAllAsTouched();
+  // Other logic you need to do on submit
 }
 ```
 
 Related Components and Services
 
-- [Button](/docs/components-button--documentation)
-- [Form](/docs/components-form-form--documentation)
+- [Button Component](/docs/components-button--documentation)
+- [Form Component](/docs/components-form-form--documentation)
 - [Error Summary Component](/docs/components-form-error-summary--documentation)
 - [Error Summary Service](/docs/services-error-summary--documentation)

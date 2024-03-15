@@ -7,7 +7,7 @@ import { GuidanceComponent } from '../../guidance/guidance.component';
 import { IconComponent } from '../../../icon/icon.component';
 import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directive';
 import { LabelComponent } from '../../label/label.component';
-import { defaultOptions } from '../common/mock_data';
+import { TestAnimalSound, defaultOptions } from '../common/mock_data';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
@@ -37,8 +37,9 @@ import { getElement } from '../../../../utilities/tests/utilities';
   </fudis-select>`,
 })
 class MockAutocompleteComponent {
-  testOptions: FudisSelectOption[] = defaultOptions;
-  control: FormControl = new FormControl<FudisSelectOption | null>(null);
+  testOptions: TestAnimalSound[] = defaultOptions;
+  control: FormControl<FudisSelectOption<TestAnimalSound> | null> =
+    new FormControl<TestAnimalSound | null>(null);
 
   @ViewChild('testSelect') testSelect: SelectComponent;
 }
@@ -153,7 +154,7 @@ describe('SelectComponent', () => {
     });
 
     it('should have placeholder on init, when control value is null', () => {
-      mockComponent.control = new FormControl<FudisSelectOption | null>(null);
+      mockComponent.control = new FormControl<FudisSelectOption<TestAnimalSound> | null>(null);
       mockFixture.detectChanges();
       const selectElement = getElement(mockFixture, '.fudis-select');
 

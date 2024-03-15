@@ -56,7 +56,10 @@ export class MultiselectOptionComponent extends SelectOptionBaseDirective implem
   protected override _clickOption(event: Event): void {
     if (!this.data.disabled) {
       this.checked = !this.checked;
-      const selectedOption: FudisSelectOption = { ...this.data, fudisGeneratedHtmlId: this._id };
+      const selectedOption: FudisSelectOption<object> = {
+        ...this.data,
+        fudisGeneratedHtmlId: this._id,
+      };
 
       if (this.checked) {
         this._parentMultiselect.handleMultiSelectionChange(selectedOption, 'add');
@@ -73,7 +76,7 @@ export class MultiselectOptionComponent extends SelectOptionBaseDirective implem
    * Checks if this option is checked or not and updates parents state accordingly
    * @param options currently selected options
    */
-  private _isOptionChecked(options: FudisSelectOption[]): void {
+  private _isOptionChecked(options: FudisSelectOption<object>[]): void {
     if (this.data) {
       const result = options.find(
         (option) => option.label === this.data.label && option.value === this.data.value,

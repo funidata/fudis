@@ -74,7 +74,7 @@ export class InputWithLanguageOptionsComponent
   /**
    * Control for language option dropdown
    */
-  protected _dropdownControl: FormControl<FudisSelectOption>;
+  protected _dropdownControl: FormControl<FudisSelectOption<object>>;
 
   /**
    * Property to check control values for required language options
@@ -86,7 +86,7 @@ export class InputWithLanguageOptionsComponent
   /**
    * Updated options list after changes
    */
-  protected _updatedOptions: FudisSelectOption[] = [];
+  protected _updatedOptions: FudisSelectOption<object>[] = [];
 
   /**
    * Fudis translation
@@ -106,7 +106,7 @@ export class InputWithLanguageOptionsComponent
   /**
    * Language option dropdown value
    */
-  private _dropdownValue: FudisSelectOption;
+  private _dropdownValue: FudisSelectOption<object>;
 
   /**
    * For attribute for dropdown value
@@ -123,7 +123,7 @@ export class InputWithLanguageOptionsComponent
    */
   private _nonEmptyControls: string[] = [];
 
-  handleLanguageSelect(value: FudisSelectOption | null): void {
+  handleLanguageSelect(value: FudisSelectOption<object> | null): void {
     if (value) {
       this._dropdownValue = value;
       this._for = `${this.id}_${value.value}`;
@@ -137,8 +137,8 @@ export class InputWithLanguageOptionsComponent
     this.isControlRequired((event.target as HTMLInputElement).value, controlKey);
   }
 
-  updateDropdownList(): FudisSelectOption[] {
-    const newOptions: FudisSelectOption[] = [];
+  updateDropdownList(): FudisSelectOption<object>[] {
+    const newOptions: FudisSelectOption<object>[] = [];
 
     this.options.forEach((option) => {
       if (

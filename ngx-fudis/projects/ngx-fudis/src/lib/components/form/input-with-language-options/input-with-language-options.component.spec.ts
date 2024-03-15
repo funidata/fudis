@@ -16,7 +16,7 @@ const testFormGroup: FormGroup = new FormGroup({
   english: new FormControl('', FudisValidators.required('Required in English')),
 });
 
-const languageOptions: FudisSelectOption[] = [
+const languageOptions: FudisSelectOption<object>[] = [
   { value: 'finnish', label: 'Fi' },
   { value: 'swedish', label: 'Sv' },
   { value: 'english', label: 'En' },

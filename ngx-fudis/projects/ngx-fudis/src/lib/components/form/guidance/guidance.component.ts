@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
+import { FudisFormErrorSummaryItem } from '../../../types/forms';
 
 @Component({
   selector: 'fudis-guidance',
@@ -21,6 +22,9 @@ export class GuidanceComponent implements OnInit {
       this._maxLengthText = _translationService.getTranslations()().TEXTINPUT.MAX_LENGTH;
     });
 
+    /**
+     * If there's a function call of errorSummaryService.reloadFormErrors('id-of-this-form'), and this Guidance's parent Form id is that 'id-for-this-form', this effect() check will trigger and set this Guidance's control / group as touched, so possible errors are set as visible.
+     */
     effect(() => {
       const errors = _errorSummaryService.getErrorsOnReload()();
 
@@ -30,9 +34,9 @@ export class GuidanceComponent implements OnInit {
         (_errorSummaryService.formIdToUpdate === this.formId ||
           _errorSummaryService.formIdToUpdate === 'all')
       ) {
-        if (this.control) {
+        if (this.control?.errors) {
           this.control.markAsTouched();
-        } else if (this.formGroup) {
+        } else if (this.formGroup?.errors) {
           this.formGroup.markAllAsTouched();
         }
       }
@@ -109,7 +113,10 @@ export class GuidanceComponent implements OnInit {
    */
   protected _id: string;
 
-  protected _firstReloadFinished: boolean = false;
+  /**
+   * Collection of validation errors
+   */
+  protected _lazyLoadedErrors: string[] = [];
 
   ngOnInit(): void {
     if (this.maxLength) {
@@ -117,9 +124,12 @@ export class GuidanceComponent implements OnInit {
     }
   }
 
-  protected _disableReload(): void {
-    if (this.formId && this.reloadErrorSummary && !this._firstReloadFinished) {
-      this._firstReloadFinished = true;
+  /**
+   * This function is triggered, if this component is loaded to the DOM after Error Summary has been loaded and there are new validation errors which didn't exist at the time original reload errors call was made.
+   */
+  protected _reloadErrorSummaryOnLazyLoad(error: FudisFormErrorSummaryItem): void {
+    if (this.formId && this.reloadErrorSummary && !this._lazyLoadedErrors.includes(error.type)) {
+      this._lazyLoadedErrors.push(error.type);
       this._errorSummaryService.focusToFormOnReload = null;
       this._errorSummaryService.reloadErrorsByFormId(this.formId);
     }
