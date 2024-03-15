@@ -3,14 +3,42 @@
     type="checkbox"
     class="fudis-checkbox__input"
     [id]="id"
-    [formControl]="_checkboxGroup.formGroup.controls[controlName]"
-    [value]="_checkboxGroup.formGroup.controls[controlName].value"
+    [formControl]="
+      _checkboxGroup.formGroup
+        ? _checkboxGroup.formGroup.controls[controlName]
+        : _checkboxGroup.formArray.controls[controlIndex]
+    "
+    [value]="
+      _checkboxGroup.formGroup
+        ? _checkboxGroup.formGroup.controls[controlName].value
+        : _checkboxGroup.formArray.controls[controlIndex].value
+    "
     [name]="this._checkboxGroup.id"
     [attr.aria-describedby]="_checkboxGroup.id + '_guidance'"
-    [attr.aria-disabled]="_checkboxGroup.formGroup.controls[controlName].disabled ? true : null"
-    [attr.checked]="_checkboxGroup.formGroup.controls[controlName].value ? true : null"
+    [attr.aria-disabled]="
+      _checkboxGroup.formGroup && _checkboxGroup.formGroup.controls[controlName].disabled
+        ? true
+        : _checkboxGroup.formArray && _checkboxGroup.formArray.controls[controlIndex].disabled
+          ? true
+          : null
+    "
+    [attr.checked]="
+      _checkboxGroup.formGroup && _checkboxGroup.formGroup.controls[controlName].value
+        ? true
+        : _checkboxGroup.formArray && _checkboxGroup.formArray.controls[controlIndex].disabled
+          ? true
+          : null
+    "
     [attr.aria-invalid]="
-      _checkboxGroup.formGroup.touched && _checkboxGroup.formGroup.invalid ? true : null
+      _checkboxGroup.formGroup &&
+      _checkboxGroup.formGroup.touched &&
+      _checkboxGroup.formGroup.invalid
+        ? true
+        : _checkboxGroup.formArray &&
+            _checkboxGroup.formArray.touched &&
+            _checkboxGroup.formArray.invalid
+          ? true
+          : null
     "
     (change)="_onChange()"
     (blur)="_onBlur($event)"
@@ -21,14 +49,20 @@
       class="fudis-checkbox__content__box"
       [class.fudis-checkbox__content__box--focused]="_focused"
       [class.fudis-checkbox__content__box--invalid]="
-        _checkboxGroup.formGroup.invalid && _checkboxGroup.groupBlurredOut
+        ((_checkboxGroup.formGroup && _checkboxGroup.formGroup.invalid) ||
+          (_checkboxGroup.formArray && _checkboxGroup.formArray.invalid)) &&
+        _checkboxGroup.groupBlurredOut
       "
       [class.fudis-checkbox__content__box--disabled]="
-        _checkboxGroup.formGroup.controls[controlName].disabled
+        (_checkboxGroup.formGroup && _checkboxGroup.formGroup.controls[controlName].disabled) ||
+        (_checkboxGroup.formArray && _checkboxGroup.formArray.controls[controlIndex].disabled)
       "
     >
       <fudis-icon
-        *ngIf="_checkboxGroup.formGroup.controls[controlName].value"
+        *ngIf="
+          (_checkboxGroup.formGroup && _checkboxGroup.formGroup.controls[controlName].value) ||
+          (_checkboxGroup.formArray && _checkboxGroup.formArray.controls[controlIndex].value)
+        "
         [icon]="'check'"
         class="fudis-checkbox__content__box__icon"
       />

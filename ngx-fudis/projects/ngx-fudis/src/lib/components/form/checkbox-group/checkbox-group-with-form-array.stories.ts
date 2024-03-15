@@ -1,14 +1,12 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
-import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormControl, FormArray } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
-import { FudisCheckboxGroupFormGroup } from '../../../types/forms';
-import readme from './readme.mdx';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { checkboxGroupControlsExclude } from '../../../utilities/storybook';
 
 export default {
-  title: 'Components/Form/Checkbox Group',
+  title: 'Components/Form/Checkbox Group/With Form Array',
   component: CheckboxGroupComponent,
   decorators: [
     moduleMetadata({
@@ -18,7 +16,7 @@ export default {
   ],
   parameters: {
     docs: {
-      page: readme,
+      autodocs: false,
     },
     controls: { exclude: checkboxGroupControlsExclude },
   },
@@ -47,26 +45,27 @@ const options = [
   { controlName: 'orange', label: 'Orange' },
 ];
 
-const basicFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
-  {
-    apple: new FormControl<boolean | null | undefined>(null),
-    fairTradeBanana: new FormControl<boolean | null | undefined>(null),
-    pear: new FormControl<boolean | null | undefined>(null),
-    pineapple: new FormControl<boolean | null | undefined>(null),
-    orange: new FormControl<boolean | null | undefined>(null),
-  },
+const basicFormArray = new FormArray<FormControl<boolean | null | undefined>>(
+  [
+    new FormControl<boolean | null | undefined>(null),
+    new FormControl<boolean | null | undefined>(null),
+    new FormControl<boolean | null | undefined>(null),
+    new FormControl<boolean | null | undefined>(null),
+    new FormControl<boolean | null | undefined>(null),
+  ],
+
   [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))],
 );
 
 const ExampleTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupComponent) => ({
   props: {
     ...args,
-    formGroup: basicFormGroup,
+    formArray: basicFormArray,
     options,
   },
   template: html`<fudis-checkbox-group
     [size]="size"
-    [formGroup]="formGroup"
+    [formArray]="formArray"
     [title]="title"
     [helpText]="helpText"
     [tooltip]="tooltip"
@@ -74,8 +73,8 @@ const ExampleTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupCom
     [tooltipPosition]="tooltipPosition"
   >
     <fudis-checkbox
-      *ngFor="let option of options"
-      [controlName]="option.controlName"
+      *ngFor="let option of options; index as i"
+      [controlIndex]="i"
       [label]="option.label"
     ></fudis-checkbox>
   </fudis-checkbox-group>`,
@@ -91,14 +90,14 @@ Example.args = {
   tooltipPosition: 'right',
 };
 
-const withDisabledFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
-  {
-    apple: new FormControl<boolean | null | undefined>({ value: true, disabled: true }),
-    fairTradeBanana: new FormControl<boolean | null | undefined | null>(null),
-    pear: new FormControl<boolean | null | undefined | null>({ value: false, disabled: true }),
-    pineapple: new FormControl<boolean | null | undefined | null>(null),
-    orange: new FormControl<boolean | null | undefined | null>({ value: null, disabled: true }),
-  },
+const withDisabledFormArrayOptions = new FormArray<FormControl<boolean | null | undefined>>(
+  [
+    new FormControl<boolean | null | undefined>({ value: true, disabled: true }),
+    new FormControl<boolean | null | undefined | null>(null),
+    new FormControl<boolean | null | undefined | null>({ value: false, disabled: true }),
+    new FormControl<boolean | null | undefined | null>(null),
+    new FormControl<boolean | null | undefined | null>({ value: null, disabled: true }),
+  ],
   [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Please pick one! :('))],
 );
 
@@ -107,12 +106,12 @@ const ExampleWithDisabledTemplate: StoryFn<CheckboxGroupComponent> = (
 ) => ({
   props: {
     ...args,
-    formGroup: withDisabledFormGroupOptions,
+    formArray: withDisabledFormArrayOptions,
     options,
   },
   template: html`<fudis-checkbox-group
     [size]="size"
-    [formGroup]="formGroup"
+    [formArray]="formArray"
     [title]="title"
     [helpText]="helpText"
     [tooltip]="tooltip"
@@ -120,8 +119,8 @@ const ExampleWithDisabledTemplate: StoryFn<CheckboxGroupComponent> = (
     [tooltipPosition]="tooltipPosition"
   >
     <fudis-checkbox
-      *ngFor="let option of options"
-      [controlName]="option.controlName"
+      *ngFor="let option of options; index as i"
+      [controlIndex]="i"
       [label]="option.label"
     />
   </fudis-checkbox-group>`,
@@ -137,14 +136,14 @@ ExampleWithDisabledOption.args = {
   tooltipPosition: 'right',
 };
 
-const withMinMaxFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
-  {
-    apple: new FormControl<boolean | null | undefined>(null),
-    fairTradeBanana: new FormControl<boolean | null | undefined | null>(null),
-    pear: new FormControl<boolean | null | undefined | null>(null),
-    pineapple: new FormControl<boolean | null | undefined | null>(null),
-    orange: new FormControl<boolean | null | undefined | null>(null),
-  },
+const withMinMaxFormArrayOptions = new FormArray<FormControl<boolean | null | undefined>>(
+  [
+    new FormControl<boolean | null | undefined>(null),
+    new FormControl<boolean | null | undefined | null>(null),
+    new FormControl<boolean | null | undefined | null>(null),
+    new FormControl<boolean | null | undefined | null>(null),
+    new FormControl<boolean | null | undefined | null>(null),
+  ],
   [
     FudisGroupValidators.min({
       value: 2,
@@ -162,12 +161,12 @@ const ExampleWithMinMaxTemplate: StoryFn<CheckboxGroupComponent> = (
 ) => ({
   props: {
     ...args,
-    formGroup: withMinMaxFormGroupOptions,
+    formArray: withMinMaxFormArrayOptions,
     options,
   },
   template: html`<fudis-checkbox-group
     [size]="size"
-    [formGroup]="formGroup"
+    [formArray]="formArray"
     [title]="title"
     [helpText]="helpText"
     [tooltip]="tooltip"
@@ -175,8 +174,8 @@ const ExampleWithMinMaxTemplate: StoryFn<CheckboxGroupComponent> = (
     [tooltipPosition]="tooltipPosition"
   >
     <fudis-checkbox
-      *ngFor="let option of options"
-      [controlName]="option.controlName"
+      *ngFor="let option of options; index as i"
+      [controlIndex]="i"
       [label]="option.label"
     />
   </fudis-checkbox-group>`,
