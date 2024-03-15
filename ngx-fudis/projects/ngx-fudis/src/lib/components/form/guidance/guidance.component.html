@@ -3,20 +3,25 @@
     <div
       [id]="_id + '-errors'"
       [class.fudis-guidance__errors]="
-        (control && control.touched) || (formGroup && formGroup.touched && groupBlurredOut)
+        (control && control.touched) ||
+        (formGroup && formGroup.touched && groupBlurredOut) ||
+        (formArray && formArray.touched && groupBlurredOut)
       "
     >
       <fudis-icon
         [icon]="'alert-fill'"
         *ngIf="
           (control?.invalid && control?.touched) ||
-          (formGroup?.invalid && formGroup?.touched && groupBlurredOut)
+          (formGroup?.invalid && formGroup?.touched && groupBlurredOut) ||
+          (formArray?.invalid && formArray?.touched && groupBlurredOut)
         "
       />
       <div [attr.ariaLive]="ariaLive" class="fudis-guidance__errors__list">
-        <!-- Check errors for control group of FormGroup e. g. english, finnish, swedish-->
-        <ng-container *ngIf="formGroup?.controls && !control && !formGroup.errors">
-          <ng-container *ngFor="let singleControl of formGroup.controls | keyvalue">
+        <!--
+          Check errors for each control FormGroup e. g. english, finnish, swedish
+        -->
+        <ng-container *ngIf="formGroup?.controls && !control && !formGroup?.errors">
+          <ng-container *ngFor="let singleControl of formGroup?.controls | keyvalue">
             <ng-container *ngIf="singleControl.value.errors">
               <ng-container *ngFor="let error of singleControl.value.errors | keyvalue">
                 <fudis-validator-error-message
@@ -24,7 +29,9 @@
                   (handleCreateError)="_reloadErrorSummaryOnLazyLoad($event)"
                   [formId]="formId"
                   [focusId]="for"
-                  [visible]="(singleControl.value.touched || formGroup.touched) && groupBlurredOut"
+                  [visible]="
+                    !!((singleControl.value.touched || formGroup.touched) && groupBlurredOut)
+                  "
                   [type]="error.key"
                   [controlName]="singleControl.key"
                   [label]="inputLabel"
@@ -34,14 +41,17 @@
             </ng-container>
           </ng-container>
         </ng-container>
-        <!-- Check errors for FormGroup e. g. atLeastOneIsRequired -->
-        <ng-container *ngIf="formGroup?.errors && formGroup.invalid">
-          <ng-container *ngFor="let error of formGroup.errors | keyvalue">
+
+        <!--
+          Check parent level errors of FormGroup e. g. atLeastOneIsRequired
+        -->
+        <ng-container *ngIf="formGroup?.errors && formGroup?.invalid">
+          <ng-container *ngFor="let error of formGroup?.errors | keyvalue">
             <fudis-validator-error-message
               *ngIf="error.value?.message"
               (handleCreateError)="_reloadErrorSummaryOnLazyLoad($event)"
               [formId]="formId"
-              [visible]="formGroup.touched"
+              [visible]="!!(formGroup.touched && groupBlurredOut)"
               [focusId]="for"
               [type]="error.key"
               [label]="inputLabel"
@@ -49,8 +59,55 @@
             />
           </ng-container>
         </ng-container>
-        <!-- Check errors for single FormControl e. g. single text-input with maxlength error -->
-        <ng-container *ngIf="control?.errors && !formGroup">
+
+        <!--
+          Check errors for each control FormArray e. g. list of Checkboxes 
+        -->
+        <ng-container *ngIf="formArray?.controls && !control && !formArray?.errors">
+          <ng-container *ngFor="let singleControl of formArray?.controls; index as i">
+            <ng-container *ngIf="singleControl.value?.errors">
+              <ng-container *ngFor="let error of singleControl.errors | keyvalue">
+                <fudis-validator-error-message
+                  *ngIf="error.value.message"
+                  (handleCreateError)="_reloadErrorSummaryOnLazyLoad($event)"
+                  [formId]="formId"
+                  [focusId]="for"
+                  [visible]="
+                    (singleControl.value.touched || formGroup.touched || formArray.touched) &&
+                    groupBlurredOut
+                  "
+                  [type]="error.key"
+                  [controlName]="for + '_' + i"
+                  [label]="inputLabel"
+                  [message]="error.value.message"
+                />
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+
+        <!--
+          Check parent level errors of FormArray e. g. CheckboxGroup with FormArray
+        -->
+        <ng-container *ngIf="formArray?.errors && formArray?.invalid">
+          <ng-container *ngFor="let error of formArray?.errors | keyvalue">
+            <fudis-validator-error-message
+              *ngIf="error.value?.message"
+              (handleCreateError)="_reloadErrorSummaryOnLazyLoad($event)"
+              [formId]="formId"
+              [visible]="!!(formArray.touched && groupBlurredOut)"
+              [focusId]="for"
+              [type]="error.key"
+              [label]="inputLabel"
+              [message]="error.value?.message"
+            />
+          </ng-container>
+        </ng-container>
+
+        <!--
+          Check errors for single FormControl e. g. single text-input with maxlength error
+        -->
+        <ng-container *ngIf="control?.errors && !formGroup && !formArray">
           <ng-container *ngFor="let error of control.errors | keyvalue">
             <fudis-validator-error-message
               *ngIf="error.value?.message"
@@ -79,7 +136,7 @@
     </small>
   </ng-container>
   <ng-container *ngIf="formGroup?.controls && !control && maxLength">
-    <ng-container *ngFor="let singleControl of formGroup.controls | keyvalue">
+    <ng-container *ngFor="let singleControl of formGroup?.controls | keyvalue">
       <small
         *ngIf="singleControl.key === selectedOption"
         class="fudis-guidance__character-limit-indicator"

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, SimpleChange } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
@@ -130,7 +130,9 @@ describe('CheckboxGroupComponent', () => {
     });
 
     it('should display required text', () => {
-      component.ngOnChanges();
+      component.ngOnChanges({
+        formGroup: new SimpleChange(null, testFormGroup, true),
+      });
       fixture.detectChanges();
 
       const requiredText = fixture.nativeElement.querySelector(
