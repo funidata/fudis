@@ -35,6 +35,11 @@ export class CheckboxComponent implements OnInit {
   @Input() controlIndex: number;
 
   /**
+   * If not providing FormGroup or FormArray for the parent Checkbox Group
+   */
+  @Input() control: FormControl<boolean | null | undefined>;
+
+  /**
    * Visible label of checkbox
    */
   @Input({ required: true }) label: string;
@@ -63,6 +68,12 @@ export class CheckboxComponent implements OnInit {
       this._idService.addNewChildId('checkbox-group', this._checkboxGroup.id, this.id);
     } else {
       this.id = this._idService.getNewChildId('checkbox-group', this._checkboxGroup.id);
+    }
+
+    if (!this.control && this._checkboxGroup.formGroup && this.controlName) {
+      this.control = this._checkboxGroup.formGroup.controls[this.controlName];
+    } else if (!this.control && this._checkboxGroup.formArray && this.controlIndex) {
+      this.control = this._checkboxGroup.formArray.controls[this.controlIndex];
     }
   }
 
