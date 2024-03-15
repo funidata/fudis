@@ -11,9 +11,9 @@ export interface FudisCheckboxOption {
   id?: string;
   /** Name for the group of checkboxes */
   groupName?: string;
-  /** If using FormGroup, name of of the option */
+  /** If using FormGroup, name of the option */
   controlName?: string;
-  /** If using FormArray, index of of the option */
+  /** If using FormArray, index of the option */
   controlIndex?: number;
   /** Visible label that is shown in the UI */
   label: string;
