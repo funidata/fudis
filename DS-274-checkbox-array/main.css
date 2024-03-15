@@ -1039,16 +1039,16 @@ html {
 
 html {
   --mat-option-label-text-font: Fira Sans;
-  --mat-option-label-text-line-height: 1.125rem;
-  --mat-option-label-text-size: 1.125rem;
+  --mat-option-label-text-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
+  --mat-option-label-text-size: cacl(1.125rem/var(--fudis-rem-multiplier));
   --mat-option-label-text-tracking: normal;
   --mat-option-label-text-weight: 500;
 }
 
 html {
   --mat-optgroup-label-text-font: Fira Sans;
-  --mat-optgroup-label-text-line-height: 1.125rem;
-  --mat-optgroup-label-text-size: 1.125rem;
+  --mat-optgroup-label-text-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
+  --mat-optgroup-label-text-size: cacl(1.125rem/var(--fudis-rem-multiplier));
   --mat-optgroup-label-text-tracking: normal;
   --mat-optgroup-label-text-weight: 500;
 }
@@ -1066,9 +1066,9 @@ html {
 .mat-typography .mat-h1,
 .mat-typography .mat-headline-5,
 .mat-typography h1 {
-  font-size: 1.75rem;
+  font-size: calc(1.75rem / var(--fudis-rem-multiplier));
   font-weight: 500;
-  line-height: 2rem;
+  line-height: calc(2rem / var(--fudis-rem-multiplier));
   font-family: Fira Sans;
   letter-spacing: normal;
   margin: 0 0 16px;
@@ -1079,9 +1079,9 @@ html {
 .mat-typography .mat-h2,
 .mat-typography .mat-headline-6,
 .mat-typography h2 {
-  font-size: 1.5rem;
+  font-size: calc(1.5rem / var(--fudis-rem-multiplier));
   font-weight: 500;
-  line-height: 1.75rem;
+  line-height: calc(1.75rem / var(--fudis-rem-multiplier));
   font-family: Fira Sans;
   letter-spacing: normal;
   margin: 0 0 16px;
@@ -1092,9 +1092,9 @@ html {
 .mat-typography .mat-h3,
 .mat-typography .mat-subtitle-1,
 .mat-typography h3 {
-  font-size: 1.25rem;
+  font-size: calc(1.25rem / var(--fudis-rem-multiplier));
   font-weight: 500;
-  line-height: 1.75rem;
+  line-height: calc(1.75rem / var(--fudis-rem-multiplier));
   font-family: Fira Sans;
   letter-spacing: normal;
   margin: 0 0 16px;
@@ -1105,9 +1105,9 @@ html {
 .mat-typography .mat-h4,
 .mat-typography .mat-body-1,
 .mat-typography h4 {
-  font-size: 1.125rem;
+  font-size: cacl(1.125rem/var(--fudis-rem-multiplier));
   font-weight: 500;
-  line-height: 1.125rem;
+  line-height: calc(1.125rem / var(--fudis-rem-multiplier));
   font-family: Fira Sans;
   letter-spacing: normal;
   margin: 0 0 16px;
@@ -1116,14 +1116,14 @@ html {
 .mat-h5,
 .mat-typography .mat-h5,
 .mat-typography h5 {
-  font: 400 calc(1rem * 0.83) / 1.25rem Fira Sans;
+  font: 400 calc(calc(1rem / var(--fudis-rem-multiplier)) * 0.83) / calc(1.25rem / var(--fudis-rem-multiplier)) Fira Sans;
   margin: 0 0 12px;
 }
 
 .mat-h6,
 .mat-typography .mat-h6,
 .mat-typography h6 {
-  font: 400 calc(1rem * 0.67) / 1.25rem Fira Sans;
+  font: 400 calc(calc(1rem / var(--fudis-rem-multiplier)) * 0.67) / calc(1.25rem / var(--fudis-rem-multiplier)) Fira Sans;
   margin: 0 0 12px;
 }
 
@@ -1131,9 +1131,9 @@ html {
 .mat-subtitle-2,
 .mat-typography .mat-body-strong,
 .mat-typography .mat-subtitle-2 {
-  font-size: 0.875rem;
+  font-size: calc(0.875rem / var(--fudis-rem-multiplier));
   font-weight: 400;
-  line-height: 1.125rem;
+  line-height: calc(1.125rem / var(--fudis-rem-multiplier));
   font-family: Fira Sans;
   letter-spacing: normal;
 }
@@ -1143,9 +1143,9 @@ html {
 .mat-typography .mat-body,
 .mat-typography .mat-body-2,
 .mat-typography {
-  font-size: 1rem;
+  font-size: calc(1rem / var(--fudis-rem-multiplier));
   font-weight: 400;
-  line-height: 1.25rem;
+  line-height: calc(1.25rem / var(--fudis-rem-multiplier));
   font-family: Fira Sans;
   letter-spacing: normal;
 }
@@ -1161,9 +1161,9 @@ html {
 .mat-caption,
 .mat-typography .mat-small,
 .mat-typography .mat-caption {
-  font-size: 0.75rem;
+  font-size: calc(0.75rem / var(--fudis-rem-multiplier));
   font-weight: 400;
-  line-height: 1rem;
+  line-height: calc(1rem / var(--fudis-rem-multiplier));
   font-family: Fira Sans;
   letter-spacing: normal;
 }
@@ -1200,9 +1200,9 @@ html {
 
 .mat-headline-4,
 .mat-typography .mat-headline-4 {
-  font-size: 2.25rem;
+  font-size: calc(2.25rem / var(--fudis-rem-multiplier));
   font-weight: 500;
-  line-height: 2.5rem;
+  line-height: calc(2.5rem / var(--fudis-rem-multiplier));
   font-family: Fira Sans;
   letter-spacing: normal;
   margin: 0 0 64px;
@@ -1210,8 +1210,8 @@ html {
 
 html {
   --mat-bottom-sheet-container-text-font: Fira Sans;
-  --mat-bottom-sheet-container-text-line-height: 1.25rem;
-  --mat-bottom-sheet-container-text-size: 1rem;
+  --mat-bottom-sheet-container-text-line-height: calc(1.25rem / var(--fudis-rem-multiplier));
+  --mat-bottom-sheet-container-text-size: calc(1rem / var(--fudis-rem-multiplier));
   --mat-bottom-sheet-container-text-tracking: normal;
   --mat-bottom-sheet-container-text-weight: 400;
 }
@@ -1224,9 +1224,9 @@ html {
 html {
   --mat-datepicker-calendar-text-font: Fira Sans;
   --mat-datepicker-calendar-text-size: 13px;
-  --mat-datepicker-calendar-body-label-text-size: 0.875rem;
+  --mat-datepicker-calendar-body-label-text-size: calc(0.875rem / var(--fudis-rem-multiplier));
   --mat-datepicker-calendar-body-label-text-weight: 500;
-  --mat-datepicker-calendar-period-button-text-size: 0.875rem;
+  --mat-datepicker-calendar-period-button-text-size: calc(0.875rem / var(--fudis-rem-multiplier));
   --mat-datepicker-calendar-period-button-text-weight: 500;
   --mat-datepicker-calendar-header-text-size: 11px;
   --mat-datepicker-calendar-header-text-weight: 400;
@@ -1234,38 +1234,38 @@ html {
 
 html {
   --mat-expansion-header-text-font: Fira Sans;
-  --mat-expansion-header-text-size: 0.875rem;
+  --mat-expansion-header-text-size: calc(0.875rem / var(--fudis-rem-multiplier));
   --mat-expansion-header-text-weight: 400;
   --mat-expansion-header-text-line-height: inherit;
   --mat-expansion-header-text-tracking: inherit;
   --mat-expansion-container-text-font: Fira Sans;
-  --mat-expansion-container-text-line-height: 1.25rem;
-  --mat-expansion-container-text-size: 1rem;
+  --mat-expansion-container-text-line-height: calc(1.25rem / var(--fudis-rem-multiplier));
+  --mat-expansion-container-text-size: calc(1rem / var(--fudis-rem-multiplier));
   --mat-expansion-container-text-tracking: normal;
   --mat-expansion-container-text-weight: 400;
 }
 
 html {
-  --mat-grid-list-tile-header-primary-text-size: 1rem;
-  --mat-grid-list-tile-header-secondary-text-size: 0.75rem;
-  --mat-grid-list-tile-footer-primary-text-size: 1rem;
-  --mat-grid-list-tile-footer-secondary-text-size: 0.75rem;
+  --mat-grid-list-tile-header-primary-text-size: calc(1rem / var(--fudis-rem-multiplier));
+  --mat-grid-list-tile-header-secondary-text-size: calc(0.75rem / var(--fudis-rem-multiplier));
+  --mat-grid-list-tile-footer-primary-text-size: calc(1rem / var(--fudis-rem-multiplier));
+  --mat-grid-list-tile-footer-secondary-text-size: calc(0.75rem / var(--fudis-rem-multiplier));
 }
 
 html {
   --mat-stepper-container-text-font: Fira Sans;
   --mat-stepper-header-label-text-font: Fira Sans;
-  --mat-stepper-header-label-text-size: 1rem;
+  --mat-stepper-header-label-text-size: calc(1rem / var(--fudis-rem-multiplier));
   --mat-stepper-header-label-text-weight: 400;
-  --mat-stepper-header-error-state-label-text-size: 1.125rem;
-  --mat-stepper-header-selected-state-label-text-size: 1.125rem;
+  --mat-stepper-header-error-state-label-text-size: cacl(1.125rem/var(--fudis-rem-multiplier));
+  --mat-stepper-header-selected-state-label-text-size: cacl(1.125rem/var(--fudis-rem-multiplier));
   --mat-stepper-header-selected-state-label-text-weight: 500;
 }
 
 html {
   --mat-toolbar-title-text-font: Fira Sans;
-  --mat-toolbar-title-text-line-height: 1.75rem;
-  --mat-toolbar-title-text-size: 1.5rem;
+  --mat-toolbar-title-text-line-height: calc(1.75rem / var(--fudis-rem-multiplier));
+  --mat-toolbar-title-text-size: calc(1.5rem / var(--fudis-rem-multiplier));
   --mat-toolbar-title-text-tracking: normal;
   --mat-toolbar-title-text-weight: 500;
 }
@@ -1277,101 +1277,101 @@ html {
 .mat-tree-node,
 .mat-nested-tree-node {
   font-weight: 400;
-  font-size: 1rem;
+  font-size: calc(1rem / var(--fudis-rem-multiplier));
 }
 
 html {
   --mat-option-label-text-font: Fira Sans;
-  --mat-option-label-text-line-height: 1.125rem;
-  --mat-option-label-text-size: 1.125rem;
+  --mat-option-label-text-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
+  --mat-option-label-text-size: cacl(1.125rem/var(--fudis-rem-multiplier));
   --mat-option-label-text-tracking: normal;
   --mat-option-label-text-weight: 500;
 }
 
 html {
   --mat-optgroup-label-text-font: Fira Sans;
-  --mat-optgroup-label-text-line-height: 1.125rem;
-  --mat-optgroup-label-text-size: 1.125rem;
+  --mat-optgroup-label-text-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
+  --mat-optgroup-label-text-size: cacl(1.125rem/var(--fudis-rem-multiplier));
   --mat-optgroup-label-text-tracking: normal;
   --mat-optgroup-label-text-weight: 500;
 }
 
 .mat-mdc-card {
   --mat-card-title-text-font: Fira Sans;
-  --mat-card-title-text-line-height: 1.75rem;
-  --mat-card-title-text-size: 1.5rem;
+  --mat-card-title-text-line-height: calc(1.75rem / var(--fudis-rem-multiplier));
+  --mat-card-title-text-size: calc(1.5rem / var(--fudis-rem-multiplier));
   --mat-card-title-text-tracking: normal;
   --mat-card-title-text-weight: 500;
   --mat-card-subtitle-text-font: Fira Sans;
-  --mat-card-subtitle-text-line-height: 1.125rem;
-  --mat-card-subtitle-text-size: 0.875rem;
+  --mat-card-subtitle-text-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
+  --mat-card-subtitle-text-size: calc(0.875rem / var(--fudis-rem-multiplier));
   --mat-card-subtitle-text-tracking: normal;
   --mat-card-subtitle-text-weight: 400;
 }
 
 .mat-mdc-tooltip {
   --mdc-plain-tooltip-supporting-text-font: Fira Sans;
-  --mdc-plain-tooltip-supporting-text-size: 0.75rem;
+  --mdc-plain-tooltip-supporting-text-size: calc(0.75rem / var(--fudis-rem-multiplier));
   --mdc-plain-tooltip-supporting-text-weight: 400;
   --mdc-plain-tooltip-supporting-text-tracking: normal;
 }
 
 html {
   --mdc-filled-text-field-label-text-font: Fira Sans;
-  --mdc-filled-text-field-label-text-size: 1.125rem;
+  --mdc-filled-text-field-label-text-size: cacl(1.125rem/var(--fudis-rem-multiplier));
   --mdc-filled-text-field-label-text-tracking: normal;
   --mdc-filled-text-field-label-text-weight: 500;
   --mdc-outlined-text-field-label-text-font: Fira Sans;
-  --mdc-outlined-text-field-label-text-size: 1.125rem;
+  --mdc-outlined-text-field-label-text-size: cacl(1.125rem/var(--fudis-rem-multiplier));
   --mdc-outlined-text-field-label-text-tracking: normal;
   --mdc-outlined-text-field-label-text-weight: 500;
   --mat-form-field-container-text-font: Fira Sans;
-  --mat-form-field-container-text-line-height: 1.125rem;
-  --mat-form-field-container-text-size: 1.125rem;
+  --mat-form-field-container-text-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
+  --mat-form-field-container-text-size: cacl(1.125rem/var(--fudis-rem-multiplier));
   --mat-form-field-container-text-tracking: normal;
   --mat-form-field-container-text-weight: 500;
-  --mat-form-field-outlined-label-text-populated-size: 1.125rem;
+  --mat-form-field-outlined-label-text-populated-size: cacl(1.125rem/var(--fudis-rem-multiplier));
   --mat-form-field-subscript-text-font: Fira Sans;
-  --mat-form-field-subscript-text-line-height: 1rem;
-  --mat-form-field-subscript-text-size: 0.75rem;
+  --mat-form-field-subscript-text-line-height: calc(1rem / var(--fudis-rem-multiplier));
+  --mat-form-field-subscript-text-size: calc(0.75rem / var(--fudis-rem-multiplier));
   --mat-form-field-subscript-text-tracking: normal;
   --mat-form-field-subscript-text-weight: 400;
 }
 
 html {
   --mat-select-trigger-text-font: Fira Sans;
-  --mat-select-trigger-text-line-height: 1.125rem;
-  --mat-select-trigger-text-size: 1.125rem;
+  --mat-select-trigger-text-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
+  --mat-select-trigger-text-size: cacl(1.125rem/var(--fudis-rem-multiplier));
   --mat-select-trigger-text-tracking: normal;
   --mat-select-trigger-text-weight: 500;
 }
 
 .mat-mdc-dialog-container {
   --mdc-dialog-subhead-font: Fira Sans;
-  --mdc-dialog-subhead-line-height: 1.75rem;
-  --mdc-dialog-subhead-size: 1.5rem;
+  --mdc-dialog-subhead-line-height: calc(1.75rem / var(--fudis-rem-multiplier));
+  --mdc-dialog-subhead-size: calc(1.5rem / var(--fudis-rem-multiplier));
   --mdc-dialog-subhead-weight: 500;
   --mdc-dialog-subhead-tracking: normal;
   --mdc-dialog-supporting-text-font: Fira Sans;
-  --mdc-dialog-supporting-text-line-height: 1.125rem;
-  --mdc-dialog-supporting-text-size: 1.125rem;
+  --mdc-dialog-supporting-text-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
+  --mdc-dialog-supporting-text-size: cacl(1.125rem/var(--fudis-rem-multiplier));
   --mdc-dialog-supporting-text-weight: 500;
   --mdc-dialog-supporting-text-tracking: normal;
 }
 
 .mat-mdc-standard-chip {
   --mdc-chip-label-text-font: Fira Sans;
-  --mdc-chip-label-text-line-height: 1.25rem;
-  --mdc-chip-label-text-size: 1rem;
+  --mdc-chip-label-text-line-height: calc(1.25rem / var(--fudis-rem-multiplier));
+  --mdc-chip-label-text-size: calc(1rem / var(--fudis-rem-multiplier));
   --mdc-chip-label-text-tracking: normal;
   --mdc-chip-label-text-weight: 400;
 }
 
 .mat-mdc-slide-toggle {
   --mat-slide-toggle-label-text-font: Fira Sans;
-  --mat-slide-toggle-label-text-size: 1rem;
+  --mat-slide-toggle-label-text-size: calc(1rem / var(--fudis-rem-multiplier));
   --mat-slide-toggle-label-text-tracking: normal;
-  --mat-slide-toggle-label-text-line-height: 1.25rem;
+  --mat-slide-toggle-label-text-line-height: calc(1.25rem / var(--fudis-rem-multiplier));
   --mat-slide-toggle-label-text-weight: 400;
 }
 .mat-mdc-slide-toggle .mdc-form-field {
@@ -1405,8 +1405,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-family: var(--mdc-typography-body2-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-body2-font-size, 1rem);
-  line-height: var(--mdc-typography-body2-line-height, 1.25rem);
+  font-size: var(--mdc-typography-body2-font-size, calc(1rem / var(--fudis-rem-multiplier)));
+  line-height: var(--mdc-typography-body2-line-height, calc(1.25rem / var(--fudis-rem-multiplier)));
   font-weight: var(--mdc-typography-body2-font-weight, 400);
   letter-spacing: var(--mdc-typography-body2-letter-spacing, normal);
   -webkit-text-decoration: var(--mdc-typography-body2-text-decoration, inherit);
@@ -1416,60 +1416,60 @@ html {
 
 .mat-mdc-slider {
   --mdc-slider-label-label-text-font: Fira Sans;
-  --mdc-slider-label-label-text-size: 0.875rem;
-  --mdc-slider-label-label-text-line-height: 1.125rem;
+  --mdc-slider-label-label-text-size: calc(0.875rem / var(--fudis-rem-multiplier));
+  --mdc-slider-label-label-text-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
   --mdc-slider-label-label-text-tracking: normal;
   --mdc-slider-label-label-text-weight: 400;
 }
 
 html {
   --mat-menu-item-label-text-font: Fira Sans;
-  --mat-menu-item-label-text-size: 1.125rem;
+  --mat-menu-item-label-text-size: cacl(1.125rem/var(--fudis-rem-multiplier));
   --mat-menu-item-label-text-tracking: normal;
-  --mat-menu-item-label-text-line-height: 1.125rem;
+  --mat-menu-item-label-text-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
   --mat-menu-item-label-text-weight: 500;
 }
 
 .mat-mdc-list-base {
   --mdc-list-list-item-label-text-font: Fira Sans;
-  --mdc-list-list-item-label-text-line-height: 1.125rem;
-  --mdc-list-list-item-label-text-size: 1.125rem;
+  --mdc-list-list-item-label-text-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
+  --mdc-list-list-item-label-text-size: cacl(1.125rem/var(--fudis-rem-multiplier));
   --mdc-list-list-item-label-text-tracking: normal;
   --mdc-list-list-item-label-text-weight: 500;
   --mdc-list-list-item-supporting-text-font: Fira Sans;
-  --mdc-list-list-item-supporting-text-line-height: 1.25rem;
-  --mdc-list-list-item-supporting-text-size: 1rem;
+  --mdc-list-list-item-supporting-text-line-height: calc(1.25rem / var(--fudis-rem-multiplier));
+  --mdc-list-list-item-supporting-text-size: calc(1rem / var(--fudis-rem-multiplier));
   --mdc-list-list-item-supporting-text-tracking: normal;
   --mdc-list-list-item-supporting-text-weight: 400;
   --mdc-list-list-item-trailing-supporting-text-font: Fira Sans;
-  --mdc-list-list-item-trailing-supporting-text-line-height: 1rem;
-  --mdc-list-list-item-trailing-supporting-text-size: 0.75rem;
+  --mdc-list-list-item-trailing-supporting-text-line-height: calc(1rem / var(--fudis-rem-multiplier));
+  --mdc-list-list-item-trailing-supporting-text-size: calc(0.75rem / var(--fudis-rem-multiplier));
   --mdc-list-list-item-trailing-supporting-text-tracking: normal;
   --mdc-list-list-item-trailing-supporting-text-weight: 400;
 }
 
 .mdc-list-group__subheader {
-  font-size: 1.25rem;
+  font-size: calc(1.25rem / var(--fudis-rem-multiplier));
   font-weight: 500;
-  line-height: 1.75rem;
+  line-height: calc(1.75rem / var(--fudis-rem-multiplier));
   font-family: Fira Sans;
   letter-spacing: normal;
 }
 
 html {
   --mat-paginator-container-text-font: Fira Sans;
-  --mat-paginator-container-text-line-height: 1rem;
-  --mat-paginator-container-text-size: 0.75rem;
+  --mat-paginator-container-text-line-height: calc(1rem / var(--fudis-rem-multiplier));
+  --mat-paginator-container-text-size: calc(0.75rem / var(--fudis-rem-multiplier));
   --mat-paginator-container-text-tracking: normal;
   --mat-paginator-container-text-weight: 400;
-  --mat-paginator-select-trigger-text-size: 0.75rem;
+  --mat-paginator-select-trigger-text-size: calc(0.75rem / var(--fudis-rem-multiplier));
 }
 
 .mat-mdc-tab-header {
   --mat-tab-header-label-text-font: Fira Sans;
-  --mat-tab-header-label-text-size: 0.875rem;
+  --mat-tab-header-label-text-size: calc(0.875rem / var(--fudis-rem-multiplier));
   --mat-tab-header-label-text-tracking: normal;
-  --mat-tab-header-label-text-line-height: 1rem;
+  --mat-tab-header-label-text-line-height: calc(1rem / var(--fudis-rem-multiplier));
   --mat-tab-header-label-text-weight: 500;
 }
 
@@ -1477,8 +1477,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-family: var(--mdc-typography-body2-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-body2-font-size, 1rem);
-  line-height: var(--mdc-typography-body2-line-height, 1.25rem);
+  font-size: var(--mdc-typography-body2-font-size, calc(1rem / var(--fudis-rem-multiplier)));
+  line-height: var(--mdc-typography-body2-line-height, calc(1.25rem / var(--fudis-rem-multiplier)));
   font-weight: var(--mdc-typography-body2-font-weight, 400);
   letter-spacing: var(--mdc-typography-body2-letter-spacing, normal);
   -webkit-text-decoration: var(--mdc-typography-body2-text-decoration, inherit);
@@ -1490,8 +1490,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-family: var(--mdc-typography-button-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-button-font-size, 0.875rem);
-  line-height: var(--mdc-typography-button-line-height, 1rem);
+  font-size: var(--mdc-typography-button-font-size, calc(0.875rem / var(--fudis-rem-multiplier)));
+  line-height: var(--mdc-typography-button-line-height, calc(1rem / var(--fudis-rem-multiplier)));
   font-weight: var(--mdc-typography-button-font-weight, 500);
   letter-spacing: var(--mdc-typography-button-letter-spacing, normal);
   -webkit-text-decoration: var(--mdc-typography-button-text-decoration, none);
@@ -1503,8 +1503,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-family: var(--mdc-typography-button-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-button-font-size, 0.875rem);
-  line-height: var(--mdc-typography-button-line-height, 1rem);
+  font-size: var(--mdc-typography-button-font-size, calc(0.875rem / var(--fudis-rem-multiplier)));
+  line-height: var(--mdc-typography-button-line-height, calc(1rem / var(--fudis-rem-multiplier)));
   font-weight: var(--mdc-typography-button-font-weight, 500);
   letter-spacing: var(--mdc-typography-button-letter-spacing, normal);
   -webkit-text-decoration: var(--mdc-typography-button-text-decoration, none);
@@ -1513,32 +1513,32 @@ html {
 }
 .mat-mdc-extended-fab {
   --mdc-extended-fab-label-text-font: Fira Sans;
-  --mdc-extended-fab-label-text-size: 0.875rem;
+  --mdc-extended-fab-label-text-size: calc(0.875rem / var(--fudis-rem-multiplier));
   --mdc-extended-fab-label-text-tracking: normal;
   --mdc-extended-fab-label-text-weight: 500;
 }
 
 .mat-mdc-snack-bar-container {
   --mdc-snackbar-supporting-text-font: Fira Sans;
-  --mdc-snackbar-supporting-text-line-height: 1.25rem;
-  --mdc-snackbar-supporting-text-size: 1rem;
+  --mdc-snackbar-supporting-text-line-height: calc(1.25rem / var(--fudis-rem-multiplier));
+  --mdc-snackbar-supporting-text-size: calc(1rem / var(--fudis-rem-multiplier));
   --mdc-snackbar-supporting-text-weight: 400;
 }
 
 html {
   --mat-table-header-headline-font: Fira Sans;
-  --mat-table-header-headline-line-height: 1.125rem;
-  --mat-table-header-headline-size: 0.875rem;
+  --mat-table-header-headline-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
+  --mat-table-header-headline-size: calc(0.875rem / var(--fudis-rem-multiplier));
   --mat-table-header-headline-weight: 400;
   --mat-table-header-headline-tracking: normal;
   --mat-table-row-item-label-text-font: Fira Sans;
-  --mat-table-row-item-label-text-line-height: 1.25rem;
-  --mat-table-row-item-label-text-size: 1rem;
+  --mat-table-row-item-label-text-line-height: calc(1.25rem / var(--fudis-rem-multiplier));
+  --mat-table-row-item-label-text-size: calc(1rem / var(--fudis-rem-multiplier));
   --mat-table-row-item-label-text-weight: 400;
   --mat-table-row-item-label-text-tracking: normal;
   --mat-table-footer-supporting-text-font: Fira Sans;
-  --mat-table-footer-supporting-text-line-height: 1.25rem;
-  --mat-table-footer-supporting-text-size: 1rem;
+  --mat-table-footer-supporting-text-line-height: calc(1.25rem / var(--fudis-rem-multiplier));
+  --mat-table-footer-supporting-text-size: calc(1rem / var(--fudis-rem-multiplier));
   --mat-table-footer-supporting-text-weight: 400;
   --mat-table-footer-supporting-text-tracking: normal;
 }
@@ -1692,8 +1692,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-family: var(--mdc-typography-button-font-family, var(--mdc-typography-font-family, Fira Sans));
-  font-size: var(--mdc-typography-button-font-size, 0.875rem);
-  line-height: var(--mdc-typography-button-line-height, 1rem);
+  font-size: var(--mdc-typography-button-font-size, calc(0.875rem / var(--fudis-rem-multiplier)));
+  line-height: var(--mdc-typography-button-line-height, calc(1rem / var(--fudis-rem-multiplier)));
   font-weight: var(--mdc-typography-button-font-weight, 500);
   letter-spacing: var(--mdc-typography-button-letter-spacing, normal);
   -webkit-text-decoration: var(--mdc-typography-button-text-decoration, none);
@@ -1777,9 +1777,9 @@ html {
 html {
   --mat-datepicker-calendar-text-font: Fira Sans;
   --mat-datepicker-calendar-text-size: 13px;
-  --mat-datepicker-calendar-body-label-text-size: 0.875rem;
+  --mat-datepicker-calendar-body-label-text-size: calc(0.875rem / var(--fudis-rem-multiplier));
   --mat-datepicker-calendar-body-label-text-weight: 500;
-  --mat-datepicker-calendar-period-button-text-size: 0.875rem;
+  --mat-datepicker-calendar-period-button-text-size: calc(0.875rem / var(--fudis-rem-multiplier));
   --mat-datepicker-calendar-period-button-text-weight: 500;
   --mat-datepicker-calendar-header-text-size: 11px;
   --mat-datepicker-calendar-header-text-weight: 400;
@@ -1793,13 +1793,13 @@ html {
 
 .mat-mdc-dialog-container {
   --mdc-dialog-subhead-font: Fira Sans;
-  --mdc-dialog-subhead-line-height: 1.75rem;
-  --mdc-dialog-subhead-size: 1.5rem;
+  --mdc-dialog-subhead-line-height: calc(1.75rem / var(--fudis-rem-multiplier));
+  --mdc-dialog-subhead-size: calc(1.5rem / var(--fudis-rem-multiplier));
   --mdc-dialog-subhead-weight: 500;
   --mdc-dialog-subhead-tracking: normal;
   --mdc-dialog-supporting-text-font: Fira Sans;
-  --mdc-dialog-supporting-text-line-height: 1.125rem;
-  --mdc-dialog-supporting-text-size: 1.125rem;
+  --mdc-dialog-supporting-text-line-height: calc(1.125rem / var(--fudis-rem-multiplier));
+  --mdc-dialog-supporting-text-size: cacl(1.125rem/var(--fudis-rem-multiplier));
   --mdc-dialog-supporting-text-weight: 500;
   --mdc-dialog-supporting-text-tracking: normal;
 }
@@ -1811,7 +1811,7 @@ html {
 
 .mat-mdc-tooltip {
   --mdc-plain-tooltip-supporting-text-font: Fira Sans;
-  --mdc-plain-tooltip-supporting-text-size: 0.75rem;
+  --mdc-plain-tooltip-supporting-text-size: calc(0.75rem / var(--fudis-rem-multiplier));
   --mdc-plain-tooltip-supporting-text-weight: 400;
   --mdc-plain-tooltip-supporting-text-tracking: normal;
 }
