@@ -76,12 +76,9 @@ export class CheckboxComponent implements OnInit, OnDestroy {
     // Set
     if (!this.control && this._checkboxGroup.formGroup && this.controlName) {
       this.control = this._checkboxGroup.formGroup.controls[this.controlName];
-      console.log('parent formgroup');
     } else if (!this.control && this._checkboxGroup.formArray && this.controlIndex) {
-      console.log('parent array');
       this.control = this._checkboxGroup.formArray.controls[this.controlIndex];
     } else if (this.control && this.controlName && this._checkboxGroup.internalFormGroup) {
-      console.log('generoidaan!');
       this._checkboxGroup.formGroup.addControl(this.controlName, this.control);
       this._controlAddedToParent = true;
     }
