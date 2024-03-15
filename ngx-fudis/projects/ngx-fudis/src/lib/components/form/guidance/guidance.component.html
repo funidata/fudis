@@ -30,10 +30,7 @@
                   [formId]="formId"
                   [focusId]="for"
                   [visible]="
-                    !!(
-                      (singleControl.value.touched || formGroup.touched || formArray.touched) &&
-                      groupBlurredOut
-                    )
+                    !!((singleControl.value.touched || formGroup.touched) && groupBlurredOut)
                   "
                   [type]="error.key"
                   [controlName]="singleControl.key"
