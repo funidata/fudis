@@ -239,18 +239,13 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
    * To handle input field blur events
    * @param event FocusEvent
    */
-  protected _inputBlur(event: FocusEvent): void {
+  protected _inputBlur(): void {
     // Time out used for user mouse click cases
-
-    if (!event.relatedTarget) {
-      setTimeout(() => {
-        if (!document.activeElement?.classList?.contains(this.focusSelector)) {
-          this.closeDropdown(false);
-        }
-      }, 150);
-    } else if (!(event.relatedTarget as HTMLElement)?.classList?.contains(this.focusSelector)) {
-      this.closeDropdown(false);
-    }
+    setTimeout(() => {
+      if (!document.activeElement?.classList?.contains(this.focusSelector)) {
+        this.closeDropdown(false);
+      }
+    }, 150);
     this._inputFocused = false;
     this.control.markAsTouched();
   }
