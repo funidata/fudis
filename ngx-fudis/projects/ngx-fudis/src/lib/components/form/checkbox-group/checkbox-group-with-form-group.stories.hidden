@@ -190,3 +190,66 @@ ExampleWithMinMax.args = {
   tooltipToggle: false,
   tooltipPosition: 'right',
 };
+
+const optionsWithControls = [
+  {
+    controlName: 'apple',
+    label: 'Apple',
+    control: new FormControl<boolean | null | undefined>(null),
+  },
+  {
+    controlName: 'fairTradeBanana',
+    label: 'Fair trade banana',
+    control: new FormControl<boolean | null | undefined>(null),
+  },
+  {
+    controlName: 'pear',
+    label: 'Pear',
+    control: new FormControl<boolean | null | undefined>(null),
+  },
+  {
+    controlName: 'pineapple',
+    label: 'Pineapple',
+    control: new FormControl<boolean | null | undefined>(null),
+  },
+  {
+    controlName: 'orange',
+    label: 'Orange',
+    control: new FormControl<boolean | null | undefined>(null),
+  },
+];
+
+const ExampleWithoutFormGroupTemplate: StoryFn<CheckboxGroupComponent> = (
+  args: CheckboxGroupComponent,
+) => ({
+  props: {
+    ...args,
+    optionsWithControls,
+  },
+  template: html`<fudis-checkbox-group
+    [size]="size"
+    [title]="title"
+    [helpText]="helpText"
+    [tooltip]="tooltip"
+    [tooltipToggle]="tooltipToggle"
+    [tooltipPosition]="tooltipPosition"
+  >
+    <fudis-checkbox
+      *ngFor="let option of optionsWithControls; index as i"
+      [controlName]="option.controlName"
+      [control]="option.control"
+      [label]="option.label"
+    ></fudis-checkbox>
+  </fudis-checkbox-group>`,
+});
+
+export const ExampleWithoutFormGroup = ExampleWithoutFormGroupTemplate.bind({});
+
+ExampleWithoutFormGroup.args = {
+  title: 'Choose your preferred fruits',
+  helpText: 'Pick at least one fruit.',
+  size: 'lg',
+  tooltip: 'Fruit sugar is great in small doces!',
+  tooltipToggle: false,
+  tooltipPosition: 'right',
+};
