@@ -6,7 +6,7 @@ import { importProvidersFrom } from '@angular/core';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { MultiselectComponent } from './multiselect.component';
 import readme from './readme.hidden';
-import { groupedMockData, defaultOptions } from '../common/mock_data';
+import { groupedMockData, defaultOptions, TestAnimalSound } from '../common/mock_data';
 import { selectCommonExclude } from '../../../../utilities/storybook';
 
 export default {

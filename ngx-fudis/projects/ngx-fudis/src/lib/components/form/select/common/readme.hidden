@@ -157,4 +157,3 @@ The exactly same component can be used as well with Multiselect Component. Altho
 ### Example Multiselect with Grouping
 
 <Canvas of={Stories.MultiselectWithGroupedOptions}></Canvas>
-./common.stories.hidden
