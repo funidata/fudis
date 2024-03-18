@@ -8,7 +8,7 @@ import {
   FudisSelectOption,
   FudisRadioButtonOption,
   FudisFormErrorSummaryLink,
-  FudisCheckboxGroupFormGroup,
+  // FudisCheckboxGroupFormGroup,
   // FudisDateRangeItem,
 } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
