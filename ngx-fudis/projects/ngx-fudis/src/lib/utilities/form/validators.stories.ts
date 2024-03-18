@@ -163,7 +163,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
       />
       <fudis-text-input [label]="'Pattern validator'" [control]="patternTextInput.control" />
     </fudis-grid>
-    <!--  <hr class="fudis-hr" />
+    <hr class="fudis-hr" />
     <fudis-grid [columns]="2" [marginTop]="'xl'">
       <fudis-heading [level]="3">Fudis Group Validators</fudis-heading>
       <fudis-grid-item [columns]="2">
@@ -198,7 +198,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
           [label]="option.label"
         />
       </fudis-checkbox-group>
-    </fudis-grid> -->
+    </fudis-grid>
   `,
 });
 

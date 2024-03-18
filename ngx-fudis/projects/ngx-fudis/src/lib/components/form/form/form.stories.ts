@@ -84,7 +84,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
           </fudis-expandable>
         </ng-template>
       </fudis-form>
-      <!-- <fudis-form
+      <fudis-form
         [titleLevel]="2"
         [title]="'Form with Checkbox Group'"
         [errorSummaryLinkType]="'onClick'"
@@ -114,7 +114,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
             </ng-template>
           </fudis-expandable>
         </ng-template>
-      </fudis-form> -->
+      </fudis-form>
       <!-- <fudis-form
         [titleLevel]="2"
         [title]="'Form with Select and Multiselect'"
