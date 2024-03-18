@@ -1,7 +1,7 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { CheckboxGroupComponent } from "./checkbox-group.component";
 import { CheckboxComponent } from "./checkbox/checkbox.component";
-import * as CheckboxGroupStories from "./checkbox-group.stories.ts";
+import * as CheckboxGroupFormGroupStories from "./checkbox-group-with-form-group.stories";
 import { checkboxGroupExclude } from "../../../utilities/storybook";
 
 <Meta title="Components/Form/Checkbox Group" />
@@ -12,7 +12,7 @@ Checkbox Group is a form fieldset element constructing from `fieldset` `legend` 
 
 ## Example
 
-<Canvas of={CheckboxGroupStories.Example}></Canvas>
+<Canvas of={CheckboxGroupFormGroupStories.Example}></Canvas>
 
 ## Usage Guidelines
 
@@ -45,7 +45,7 @@ For child Checkbox components mandatory properties are `controlName` and `label`
 
 // In TypeScript file
 
-myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
 	{
 		firstControlName: new FormControl<boolean | null | undefined>(null),
 		secondControlName: new FormControl<boolean | null | undefined>(null),
@@ -74,7 +74,7 @@ To set Fieldset with Checkbox Group as Required field, include validator `FudisG
 
 // In TypeScript file
 
-myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
 	{
 	first: new FormControl<boolean | null | undefined>(null),
 	second: new FormControl<boolean | null | undefined>(null),
@@ -92,7 +92,7 @@ If Checkbox Group has minimum and/or maximum options to be selected, form field 
 ```
 // In TypeScript file
 
-myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
 	{
 		first: new FormControl<boolean | null | undefined>(null),
 		second: new FormControl<boolean | null | undefined>(null),
@@ -121,3 +121,4 @@ myFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
 ## Properties of Checkbox Component
 
 <ArgTypes of={CheckboxComponent} />
+./checkbox-group-with-form-group.stories

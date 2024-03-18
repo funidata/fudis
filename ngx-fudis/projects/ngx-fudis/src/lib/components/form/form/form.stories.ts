@@ -37,7 +37,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
       <fudis-form
         [titleLevel]="2"
         [title]="'Form with Text Input'"
-        [errorSummaryLinkType]="'href'"
+        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -62,7 +62,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
       <fudis-form
         [titleLevel]="2"
         [title]="'Form with Text Area'"
-        [errorSummaryLinkType]="'href'"
+        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -87,7 +87,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
       <fudis-form
         [titleLevel]="2"
         [title]="'Form with Checkbox Group'"
-        [errorSummaryLinkType]="'href'"
+        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -118,7 +118,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
       <fudis-form
         [titleLevel]="2"
         [title]="'Form with Select and Multiselect'"
-        [errorSummaryLinkType]="'href'"
+        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -196,7 +196,7 @@ class ExampleWithMultipleFormsComponent {
         FudisValidators.maxLength(20, 'Max length is 20 chars'),
       ]),
     }),
-    formThree: new FormGroup<FudisCheckboxGroupFormGroup>(
+    formThree: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
       {
         apple: new FormControl<boolean | null>(null),
         fairTradeBanana: new FormControl<boolean | null>(null),
@@ -207,11 +207,11 @@ class ExampleWithMultipleFormsComponent {
       [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))],
     ),
     formFour: new FormGroup({
-      select: new FormControl<FudisSelectOption | null>(
+      select: new FormControl<FudisSelectOption<object> | null>(
         null,
         FudisValidators.required('You must pick one'),
       ),
-      multiselect: new FormControl<FudisSelectOption[] | null>(null, [
+      multiselect: new FormControl<FudisSelectOption<object>[] | null>(null, [
         FudisValidators.required('Selection is missing'),
         FudisValidators.minLength(2, 'Choose at least 2'),
       ]),
@@ -454,7 +454,7 @@ class FormContentExampleComponent implements OnInit {
     // endDate: new FormControl<Date | null>(null, FudisValidators.required('End date is required.')),
   });
 
-  languageOptions: FudisSelectOption[] = [
+  languageOptions: FudisSelectOption<object>[] = [
     { value: 'finnish', label: 'FI' },
     { value: 'swedish', label: 'SV' },
     { value: 'english', label: 'EN' },
@@ -535,7 +535,7 @@ export default {
       },
     },
     errorSummaryLinkType: {
-      options: ['href', 'router'],
+      options: ['href', 'router', 'onClick'],
       control: {
         type: 'select',
       },
@@ -569,7 +569,7 @@ Example.args = {
   badgeText: 'Example',
   errorSummaryHelpText:
     'There are errors in this form. Please address these before trying to submit again.',
-  errorSummaryLinkType: 'href',
+  errorSummaryLinkType: 'onClick',
   errorSummaryVisible: false,
 };
 

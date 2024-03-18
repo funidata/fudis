@@ -43,7 +43,9 @@ export class SelectAutocompleteComponent {
   /**
    * Form control used mostly to define HTML attributes and CSS styles
    */
-  @Input({ required: true }) control: FormControl<FudisSelectOption | FudisSelectOption[] | null>;
+  @Input({ required: true }) control: FormControl<
+    FudisSelectOption<object> | FudisSelectOption<object>[] | null
+  >;
 
   /**
    * Set input fields required attribute

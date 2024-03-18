@@ -23,7 +23,7 @@ export default {
 } as Meta;
 const html = String.raw;
 
-const berryFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+const berryFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
   {
     strawberry: new FormControl<boolean | null | undefined>(null),
     cloudberry: new FormControl<boolean | null | undefined>(null),
@@ -32,7 +32,7 @@ const berryFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
   [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Pick at least one berry'))],
 );
 
-const fruitMinFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+const fruitMinFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
   {
     apple: new FormControl<boolean | null | undefined>(null),
     banana: new FormControl<boolean | null | undefined>(null),
@@ -43,7 +43,7 @@ const fruitMinFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
   [FudisGroupValidators.min({ value: 2, message: 'Pick at least two fruits' })],
 );
 
-const fruitMaxFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+const fruitMaxFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
   {
     apple: new FormControl<boolean | null | undefined>(null),
     banana: new FormControl<boolean | null | undefined>(null),

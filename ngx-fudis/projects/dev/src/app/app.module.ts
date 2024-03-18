@@ -13,12 +13,15 @@ import { DialogTestContentComponent } from './dialog-test/dialog-test-content/di
 import { TranslocoRootModule } from './transloco-root.module';
 import { AppFormExampleComponent } from './components/formExamples.component';
 import { AppDropdownExamplesComponent } from './components/dropdownExamples.component';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DialogTestFormComponent } from './dialog-test/dialog-test-content/dialog-test-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DialogTestComponent,
     DialogTestContentComponent,
+    DialogTestFormComponent,
     AppFormExampleComponent,
     AppDropdownExamplesComponent,
   ],
@@ -32,7 +35,16 @@ import { AppDropdownExamplesComponent } from './components/dropdownExamples.comp
     TranslocoRootModule,
     RouterModule.forRoot([]),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MatDialogRef,
+      useValue: {},
+    },
+    {
+      provide: MAT_DIALOG_DATA,
+      useValue: [],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

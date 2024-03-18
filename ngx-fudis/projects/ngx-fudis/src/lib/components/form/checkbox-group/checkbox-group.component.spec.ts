@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, SimpleChange } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
@@ -17,7 +17,7 @@ import { ContentDirective } from '../../../directives/content-projection/content
 import { GuidanceComponent } from '../guidance/guidance.component';
 import { ValidatorErrorMessageComponent } from '../error-message/validator-error-message/validator-error-message.component';
 
-const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
   {
     apple: new FormControl<boolean | null | undefined>(null),
     fairTradeBanana: new FormControl<boolean | null | undefined>(null),
@@ -27,6 +27,15 @@ const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
   },
   [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))],
 );
+
+type TestOption = {
+  controlName: string;
+  label: string;
+};
+
+type TestFormGroup = {
+  [key: string]: FormControl<boolean | null | undefined>;
+};
 
 @Component({
   selector: 'fudis-mock-component',
@@ -43,7 +52,7 @@ const testFormGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
   </fudis-checkbox-group>`,
 })
 class MockContainerComponent {
-  public testFromGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+  public testFromGroup = new FormGroup<TestFormGroup>(
     {
       apple: new FormControl<boolean | null | undefined>(null),
       fairTradeBanana: new FormControl<boolean | null | undefined>(false),
@@ -57,7 +66,7 @@ class MockContainerComponent {
     ],
   );
 
-  public options = [
+  public options: TestOption[] = [
     { controlName: 'apple', label: 'Apple' },
     { controlName: 'fairTradeBanana', label: 'Fair trade banana' },
     { controlName: 'pear', label: 'Pear' },
@@ -121,7 +130,9 @@ describe('CheckboxGroupComponent', () => {
     });
 
     it('should display required text', () => {
-      component.ngOnChanges();
+      component.ngOnChanges({
+        formGroup: new SimpleChange(null, testFormGroup, true),
+      });
       fixture.detectChanges();
 
       const requiredText = fixture.nativeElement.querySelector(

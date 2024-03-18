@@ -5,7 +5,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { SelectComponent } from './select.component';
 import readme from './readme.mdx';
-import { groupedMockData, defaultOptions } from '../common/mock_data';
+import {
+  groupedMockData,
+  defaultOptions,
+  TestAnimalSound,
+  TestAnimalScience,
+} from '../common/mock_data';
 import { selectCommonExclude } from '../../../../utilities/storybook';
 
 export default {
@@ -42,7 +47,7 @@ const ExampleTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
     ...args,
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
-    control: new FormControl(defaultOptions[2]),
+    control: new FormControl<TestAnimalSound | TestAnimalScience | null>(defaultOptions[2]),
     groupedMockData,
   },
   template: html`

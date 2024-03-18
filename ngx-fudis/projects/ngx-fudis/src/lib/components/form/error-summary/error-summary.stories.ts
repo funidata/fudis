@@ -23,7 +23,7 @@ import { excludeAllRegex } from '../../../utilities/storybook';
     [titleLevel]="1"
     [title]="'Example Form with Error Summary'"
     [id]="id"
-    [errorSummaryLinkType]="'href'"
+    [errorSummaryLinkType]="'onClick'"
     [errorSummaryHelpText]="
       'Toggle live remove button to see errors disappear when input value is corrected'
     "

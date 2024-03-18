@@ -36,8 +36,8 @@ import { defaultOptions } from '../../common/mock_data';
   </fudis-multiselect>`,
 })
 class MultiselectMockComponent {
-  multiOptions: FudisSelectOption[] = defaultOptions;
-  control = new FormControl<FudisSelectOption[] | null>(null);
+  multiOptions: FudisSelectOption<object>[] = defaultOptions;
+  control = new FormControl<FudisSelectOption<object>[] | null>(null);
 
   @ViewChild('multiOption') multiOption: MultiselectOptionComponent;
   @ViewChild('selectEl') selectEl: MultiselectComponent;
@@ -77,7 +77,7 @@ describe('MultiselectOptionComponent', () => {
   }
 
   function initializeFormControlWithMultipleValues() {
-    componentMock.control = new FormControl<FudisSelectOption[]>([
+    componentMock.control = new FormControl<FudisSelectOption<object>[]>([
       defaultOptions[4],
       defaultOptions[0],
     ]);

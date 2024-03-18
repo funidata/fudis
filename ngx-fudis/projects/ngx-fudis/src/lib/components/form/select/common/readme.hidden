@@ -36,7 +36,7 @@ Placeholder string text shown in the component, when it has no chosen value.
 
 ### Selection Update
 
-Select and Multiselect Component provides `@Output` event emitter `selectionUpdate` for cases if application needs to do something special if the form control value changes. Output of the event emitter in Select is either `null` or `FudisSelectOption` and for Multiselect `null` or an array `FudisSelectOption[]`.
+Select and Multiselect Component provides `@Output` event emitter `selectionUpdate` for cases if application needs to do something special if the form control value changes. Output of the event emitter in Select is either `null` or `FudisSelectOption` and for Multiselect `null` or an array `FudisSelectOption<object>[]`.
 
 ```
 // TypeScript

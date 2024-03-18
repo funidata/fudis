@@ -32,7 +32,7 @@ import { ValidatorErrorMessageComponent } from '../../error-message/validator-er
   </fudis-checkbox-group>`,
 })
 class MockContainerComponent {
-  protected _testFromGroup = new FormGroup<FudisCheckboxGroupFormGroup>(
+  protected _testFromGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
     {
       apple: new FormControl<boolean | null | undefined>(null),
       fairTradeBanana: new FormControl<boolean | null | undefined>(false),

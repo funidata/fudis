@@ -70,11 +70,11 @@ See badge variants from [Badge Documentation](/docs/components-badge--documentat
 
 ### Error Summary
 
-Error Summary visibility can be modified with `errorSummaryVisible` boolean property. This is automatically controlled if your Form has Button with `fudisFormSubmit` directive with boolean property `formValid`. Further documentation of [Form Submit Directive](/docs/directives-form-actions--documentation).
+`errorSummaryVisible`: Boolean property controlling the visibility of the Error Summary. This is automatically managed if your Form has Button with `fudisFormSubmit` directive with boolean property `formValid`. Further documentation of [Form Submit Directive](/docs/directives-form-actions--documentation).
 
-Help text displayed on top of Error Summary should be added with **mandatory** `errorSummaryHelpText` property.
+`errorSummaryHelpText`: Mandatory helper text displayed as describing guidance text for the Error Summary.
 
-Type of the clickable link redirecting and moving focus to invalid input is set with `errorSummaryLinkType`. Possible values are `href` and `router` (default).
+`errorSummaryLinkType`: Type of the clickable links redirecting and moving focus to invalid form field. Default value `router` is for applications using Angular Router. If application does not use Angular Router, `onClick` or `href` values can be used.
 
 More about [Error Summary](/docs/components-form-error-summary--documentation) and [Error Summary Service](/docs/services-error-summary--documentation).
 
@@ -127,7 +127,7 @@ formExample = new FormGroup({
 });
 
 submitForm(): void {
-  this.formExample.markAllAsTouched();
+ // Other logic you need to do on submit
 }
 ```
 

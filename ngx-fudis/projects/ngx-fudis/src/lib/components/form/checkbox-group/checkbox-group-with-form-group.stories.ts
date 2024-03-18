@@ -1,3 +1,4 @@
+<<<<<<<< HEAD:ngx-fudis/projects/ngx-fudis/src/lib/components/form/checkbox-group/checkbox-group.stories.hidden
 import { StoryFn, Meta, moduleMetadata } from "@storybook/angular";
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from "@angular/forms";
 import { BehaviorSubject } from "rxjs";
@@ -8,8 +9,19 @@ import { FudisGroupValidators } from "../../../utilities/form/groupValidators";
 import { checkboxGroupControlsExclude } from "../../../utilities/storybook";
 
 export default {
+  title: "Components/Form/Checkbox Group",
+========
+import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
+import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
+import { CheckboxGroupComponent } from './checkbox-group.component';
+import { FudisCheckboxGroupFormGroup } from '../../../types/forms';
+import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
+import { checkboxGroupControlsExclude } from '../../../utilities/storybook';
+
+export default {
   title: 'Components/Form/Checkbox Group/With Form Group',
-checkbox-group/checkbox-group-with-form-group.stories.ts
+>>>>>>>> main:ngx-fudis/projects/ngx-fudis/src/lib/components/form/checkbox-group/checkbox-group-with-form-group.stories.ts
   component: CheckboxGroupComponent,
   decorators: [
     moduleMetadata({

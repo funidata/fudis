@@ -9,18 +9,67 @@ import { dialogExclude } from "../../utilities/storybook";
 
 Fudis Dialog is based on Angular Material Dialog. Dialog opens on top of any content with a backdrop.
 
-## Usage Guidelines
+Fudis Dialog consists of three parts: Service, Component and Directives.
 
-Fudis Dialog consists of three parts: service, component and directives.
+## Service
 
-### Service
-
-Fudis Dialog Service provides tools for opening and closing a dialog. Service accepts both Angular components and templates to be passed as an argument.
+Dialog Service provides tools for opening and closing a dialog. Service accepts both Angular components and templates to be passed as an argument.
 
 Dialog is opened with `dialogService.open()` which takes either an Angular component or reference to a template as an argument. Dialog is closed with `dialogService.close()`.
 As a feature, dialog has close icon button on the right corner of the dialog which cannot be removed.
 
-### Component
+Sending and receiving data between opened Dialog and Component which opened it, is achieved using Dialog Service.
+
+### Passing Data Between Components
+
+#### From Component to Dialog
+
+`dialogService.open()` can be called with optional `config` parameter (in addition to component or template reference) which is extension from `MatDialogConfig`. It can be used to alter some Dialog configs but most importantly config's property `data` can be used to inject properties for the component to be opened.
+
+```
+dialogService.open(ComponentOpenedAsDialog, { data: { greeting: 'Hello from the opening component!' } });
+```
+
+The component which this `data` is sent to, needs to inject `MAT_DIALOG_DATA` to itself in the constructor.
+
+```
+export class ComponentOpenedAsDialog {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private data: { greeting: string }
+  ) {
+    this.greetingFromOpeningComponent = this.data.greeting;
+    // Now this class variable has the value of 'Hello from the opening component!'
+  }
+  greetingFromOpeningComponent: string;
+}
+
+```
+
+#### From Dialog Back to the Component
+
+First in the component, when opening the Dialog, we need to subscribe to an Observable, which is triggered after Dialog is closed. There is no need to any unsubscribing, as the Observable completes itself when Dialog is closed.
+
+```
+this.dialogService.open(ComponentOpenedAsDialog)
+  .afterClosed()
+  .subscribe((response: string) => {
+  // Logic here what to do with the response!
+  console.log(response)
+  });
+
+```
+
+Then in the Dialog Component, when closing the Dialog, we can pass an optional parameter which is sent back to the component through `afterClosed()` Observable.
+
+```
+closeDialog(): void {
+  const dataSentBack = "Excelsior!"
+  this.dialogService.close(dataSentBack)
+}
+
+```
+
+## Component
 
 Dialog component is a wrapper component taking one parameter: `size`.
 
@@ -29,11 +78,11 @@ Size determines the horizontal size of the dialog. Available options are `sm`, `
 
 ```
 <fudis-dialog [size]="'sm'">
-	...
+  ...
 </fudis-dialog>
 ```
 
-### Directives
+## Directives
 
 Directives written with `camelCase` are meant to be used as inline attribute directives.
 
@@ -43,9 +92,9 @@ Directives written with `kebab-case` are meant to be used as HTML element.
 
 ```
 <fudis-dialog>
-	<fudis-heading [level]="2" fudisDialogTitle>
-		Heading for a dialog
-	</fudis-heading>
+  <fudis-heading [level]="2" fudisDialogTitle>
+    Heading for a dialog
+  </fudis-heading>
 </fudis-dialog>
 ```
 
@@ -53,9 +102,9 @@ Directives written with `kebab-case` are meant to be used as HTML element.
 
 ```
 <fudis-dialog>
-	<fudis-dialog-content>
-		...
-	</fudis-dialog-content>
+  <fudis-dialog-content>
+    ...
+  </fudis-dialog-content>
 </fudis-dialog>
 ```
 
@@ -63,10 +112,10 @@ Directives written with `kebab-case` are meant to be used as HTML element.
 
 ```
 <fudis-dialog>
-	<fudis-dialog-actions>
-		<fudis-button></fudis-button>
-		<fudis-button></fudis-button>
-	</fudis-dialog-actions>
+  <fudis-dialog-actions>
+    <fudis-button></fudis-button>
+    <fudis-button></fudis-button>
+  </fudis-dialog-actions>
 </fudis-dialog>
 ```
 
@@ -74,18 +123,10 @@ Directives written with `kebab-case` are meant to be used as HTML element.
 
 ```
 <fudis-dialog>
-	<fudis-dialog-actions>
-		<fudis-button fudisDialogClose [label]="'Cancel'"></fudis-button>
-	</fudis-dialog-actions>
+  <fudis-dialog-actions>
+    <fudis-button fudisDialogClose [label]="'Cancel'"></fudis-button>
+  </fudis-dialog-actions>
 </fudis-dialog>
-```
-
-### Passing Data to Component Inside Dialog
-
-`dialogService.open()` can be called with optional `config` parameter (in addition to component or tempalte reference) which is extension from `MatDialogConfig`. It can be used to alter some Dialog configs but most importantly config's property `data` can be used to inject properties for the component to be opened.
-
-```
-dialogService.open(MyComponentInsideDialog, { data: { someObject } });
 ```
 
 ## Examples
@@ -96,28 +137,28 @@ dialogService.open(MyComponentInsideDialog, { data: { someObject } });
 
 ```
 @Component({
-	selector: 'simple-dialog',
-	template: `
-		<fudis-button (handleClick)="openDialog(dialogFromTemplate)" [label]="'Open dialog'" />
-		<ng-template #dialogFromTemplate>
-			<fudis-dialog>
-				<fudis-heading [level]="2" fudisDialogTitle>This is Dialog Heading</fudis-heading>
-				<fudis-dialog-content>
-					<fudis-body-text>Some content for Dialog</fudis-body-text>
-				</fudis-dialog-content>
-				<fudis-dialog-actions>
-					<fudis-button fudisDialogClose [label]="'Close'" />
-				</fudis-dialog-actions>
-			</fudis-dialog>
-		</ng-template>
-	`,
+  selector: 'simple-dialog',
+  template: `
+    <fudis-button (handleClick)="openDialog(dialogFromTemplate)" [label]="'Open dialog'" />
+    <ng-template #dialogFromTemplate>
+      <fudis-dialog>
+        <fudis-heading [level]="2" fudisDialogTitle>This is Dialog Heading</fudis-heading>
+        <fudis-dialog-content>
+          <fudis-body-text>Some content for Dialog</fudis-body-text>
+        </fudis-dialog-content>
+        <fudis-dialog-actions>
+          <fudis-button fudisDialogClose [label]="'Close'" />
+        </fudis-dialog-actions>
+      </fudis-dialog>
+    </ng-template>
+  `,
 })
 class SimpleDialogComponent {
-	constructor(private _dialogService: FudisDialogService) {}
+  constructor(private _dialogService: FudisDialogService) {}
 
-	openDialog(dialogToOpen: TemplateRef<any>) {
-		this._dialogService.open(dialogToOpen);
-	}
+  openDialog(dialogToOpen: TemplateRef<any>) {
+    this._dialogService.open(dialogToOpen);
+  }
 }
 ```
 
@@ -164,23 +205,21 @@ In `fudisContent` template add form components and in `fudisActions` template ad
 	`,
 })
 class FormDialogComponent {
-	constructor(private _dialogService: FudisDialogService) {}
+  constructor(private _dialogService: FudisDialogService) {}
 
-	openDialog(dialogToOpen: TemplateRef<any>) {
-		this._dialogService.open(dialogToOpen);
-	}
+  openDialog(dialogToOpen: TemplateRef<any>) {
+    this._dialogService.open(dialogToOpen);
+  }
 
-	closeDialogWithForm(): void {
-
-		if (this.exampleDialogFormGroup.valid) {
-			this.dialog.close();
-		}
-
-	}
+  closeDialogWithForm(): void {
+    if (this.exampleDialogFormGroup.valid) {
+      this.dialog.close();
+    }
+  }
 }
 ```
 
-### Accessibility
+## Accessibility
 
 - Focus is trapped inside the dialog
 - Initial focus is set to heading defined with `fudisDialogTitle` directive, when using keyboard
@@ -189,7 +228,7 @@ class FormDialogComponent {
 - Dialog content is scrollable with keyboard and mouse
 - Dialog heading (with fudisDialogTitle directive) and dialog buttons (with fudis-dialog-actions directive) are always visible even if content is scrollable (excl. dialog with form)
 
-### Related components
+## Related components
 
 - [Angular Material Dialog](https://material.angular.io/components/dialog/overview) (opens in new tab)
 - [Icon](/docs/components-icon--documentation)

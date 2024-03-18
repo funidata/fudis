@@ -7,10 +7,10 @@ import { FudisSelectOption } from '../../../../types/forms';
  * @param value list of options to be sorted and patched
  * @param sort used if there more than one option selected
  */
-export const sortValues = (value: FudisSelectOption[]): FudisSelectOption[] => {
-  let valueToSort: FudisSelectOption[] = value;
+export const sortValues = (value: FudisSelectOption<object>[]): FudisSelectOption<object>[] => {
+  let valueToSort: FudisSelectOption<object>[] = value;
 
-  valueToSort = value.sort((a: FudisSelectOption, b: FudisSelectOption) => {
+  valueToSort = value.sort((a: FudisSelectOption<object>, b: FudisSelectOption<object>) => {
     if (
       a['fudisGeneratedHtmlId']?.includes('-group-') &&
       !b['fudisGeneratedHtmlId']?.includes('-group-')
@@ -37,9 +37,9 @@ export const sortValues = (value: FudisSelectOption[]): FudisSelectOption[] => {
   return valueToSort;
 };
 
-export const joinInputValues = (values: FudisSelectOption[]): string => {
+export const joinInputValues = (values: FudisSelectOption<object>[]): string => {
   const label: string[] = [];
-  values.forEach((item: FudisSelectOption) => {
+  values.forEach((item: FudisSelectOption<object>) => {
     const labelToPush = item.label.includes(',') ? `'${item.label}'` : item.label;
 
     label.push(labelToPush);

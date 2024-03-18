@@ -182,7 +182,7 @@ describe('GuidanceComponent', () => {
 
         fixture.detectChanges();
 
-        component.formGroup.controls['swedish'].patchValue(
+        component.formGroup!.controls['swedish'].patchValue(
           'This is a too long input and will not pass max length validation',
         );
         fixture.detectChanges();
@@ -192,19 +192,19 @@ describe('GuidanceComponent', () => {
       });
 
       it('should display screen reader assistive text correctly', () => {
-        component.formGroup.controls['finnish'].patchValue('Fifteen chars!!');
+        component.formGroup!.controls['finnish'].patchValue('Fifteen chars!!');
         fixture.detectChanges();
         const assistiveTextOn = getElement(fixture, '.fudis-visually-hidden');
 
         expect(assistiveTextOn.innerHTML).toContain('15/20 characters used');
 
-        component.formGroup.controls['finnish'].patchValue('Sixteen chars!!!');
+        component.formGroup!.controls['finnish'].patchValue('Sixteen chars!!!');
         fixture.detectChanges();
         const assistiveTextOff = getElement(fixture, '.fudis-visually-hidden');
 
         expect(assistiveTextOff).toBeNull();
 
-        component.formGroup.controls['finnish'].patchValue('Twenty characters!!!');
+        component.formGroup!.controls['finnish'].patchValue('Twenty characters!!!');
         fixture.detectChanges();
         const assistiveTextFull = getElement(fixture, '.fudis-visually-hidden');
 
@@ -219,7 +219,7 @@ describe('GuidanceComponent', () => {
 
         expect(errorListBefore.length).toBe(0);
 
-        component.formGroup.controls['finnish'].markAsTouched();
+        component.formGroup!.controls['finnish'].markAsTouched();
         fixture.detectChanges();
 
         const errorList = getAllElements(
@@ -245,7 +245,7 @@ describe('GuidanceComponent', () => {
 
         expect(errorsBefore).toBeFalsy();
 
-        component.formGroup.markAsTouched();
+        component.formGroup!.markAsTouched();
 
         fixture.detectChanges();
 
@@ -262,7 +262,7 @@ describe('GuidanceComponent', () => {
         const errorList = getAllElements(fixture, 'fudis-validator-error-message');
         expect(errorList.length).toBe(2);
 
-        component.formGroup.controls['english'].patchValue('Some text for input');
+        component.formGroup!.controls['english'].patchValue('Some text for input');
         fixture.detectChanges();
         const errorListWithoutFinnish = getAllElements(fixture, 'fudis-validator-error-message');
         expect(errorListWithoutFinnish.length).toBe(1);
@@ -278,7 +278,7 @@ describe('GuidanceComponent', () => {
         const errorListBefore = getAllElements(fixture, 'fudis-validator-error-message');
         expect(errorListBefore.length).toBe(1);
 
-        component.formGroup.controls['finnish'].patchValue('Some text for input');
+        component.formGroup!.controls['finnish'].patchValue('Some text for input');
         fixture.detectChanges();
 
         const errorListWithoutFinnish = getAllElements(fixture, 'fudis-validator-error-message');

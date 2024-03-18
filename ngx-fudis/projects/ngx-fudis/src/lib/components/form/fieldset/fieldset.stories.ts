@@ -120,7 +120,7 @@ class FieldsetExampleComponent {
   //   label: 'End date',
   // };
 
-  languageOptions: FudisSelectOption[] = [
+  languageOptions: FudisSelectOption<object>[] = [
     { value: 'finnish', label: 'FI' },
     { value: 'swedish', label: 'SV' },
     { value: 'english', label: 'EN' },

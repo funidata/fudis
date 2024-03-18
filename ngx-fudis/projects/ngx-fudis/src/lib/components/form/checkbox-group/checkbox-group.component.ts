@@ -7,7 +7,7 @@ import {
   OnInit,
   Optional,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { FudisCheckboxGroupFormGroup, FudisInputSize } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
@@ -15,6 +15,7 @@ import { hasAtLeastOneRequiredOrMinValidator } from '../../../utilities/form/get
 import { FormComponent } from '../form/form.component';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { FudisComponentChanges } from '../../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-checkbox-group',
@@ -31,9 +32,14 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
     super(_idService, _translationService, _changeDetectorRef);
   }
   /**
-   * FormControl for Checkbox group.
+   * FormGroup or FormArray for Checkbox group.
    */
-  @Input({ required: true }) formGroup: FormGroup<FudisCheckboxGroupFormGroup>;
+  @Input() formGroup: FormGroup<FudisCheckboxGroupFormGroup<object>>;
+
+  /**
+   * FormArray for Checkbox group.
+   */
+  @Input() formArray: FormArray<FormControl<boolean | null | undefined>>;
 
   /**
    * Width size of the group.
@@ -55,6 +61,10 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
    */
   protected _required: boolean = false;
 
+  private _hasGroup: boolean = false;
+
+  private _hasArray: boolean = false;
+
   /**
    * Getter for _groupBlurredOut.
    */
@@ -63,28 +73,44 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
   }
 
   public ngOnInit() {
+    this._hasGroup = this.formGroup && !this.formArray;
+
+    this._hasArray = this.formArray && !this.formGroup;
+
     this._setParentId('checkbox-group');
 
-    if (this.formGroup.touched) {
+    if (this._hasGroup) {
+      this._initialCheck(this.formGroup);
+    } else if (this._hasArray) {
+      this._initialCheck(this.formArray);
+    }
+  }
+
+  private _initialCheck(groupOrArray: FormGroup | FormArray): void {
+    if (groupOrArray.touched) {
       this._groupBlurredOut = true;
     } else {
       /**
        * Extend original markAllAsTouched function to change _groupBlurredOut value to 'true', so error messages are loaded when e.g. on Submit touched value is changed programatically.
        */
-      const originalMarkAllAsTouched = this.formGroup.markAllAsTouched;
-      this.formGroup.markAllAsTouched = () => {
-        originalMarkAllAsTouched.apply(this.formGroup);
+      const originalMarkAllAsTouched = groupOrArray.markAllAsTouched;
+      groupOrArray.markAllAsTouched = () => {
+        originalMarkAllAsTouched.apply(groupOrArray);
         this._groupBlurredOut = true;
       };
     }
 
-    if (this._parentForm?.errorSummaryVisible && this.errorSummaryReloadOnInit) {
-      this.reloadErrorSummary(this.formGroup);
+    if (this.errorSummaryReloadOnInit) {
+      this._reloadErrorSummaryOnLazyLoad(this._parentForm?.errorSummaryVisible, groupOrArray);
     }
   }
 
-  public ngOnChanges(): void {
-    this._required = hasAtLeastOneRequiredOrMinValidator(this.formGroup);
+  public ngOnChanges(changes: FudisComponentChanges<CheckboxGroupComponent>): void {
+    if (changes.formGroup) {
+      this._required = hasAtLeastOneRequiredOrMinValidator(this.formGroup);
+    } else if (changes.formArray) {
+      this._required = hasAtLeastOneRequiredOrMinValidator(this.formArray);
+    }
   }
 
   /**
@@ -96,5 +122,16 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
     } else {
       this._groupBlurredOut = false;
     }
+  }
+
+  /**
+   * Getter for if component has FormGroup, FormArray or neither as its control.
+   */
+  public getFormType(): 'group' | 'array' {
+    if (this._hasGroup) {
+      return 'group';
+    }
+
+    return 'array';
   }
 }

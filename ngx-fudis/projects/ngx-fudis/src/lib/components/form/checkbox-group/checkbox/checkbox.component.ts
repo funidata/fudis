@@ -9,7 +9,8 @@ import {
 } from '@angular/core';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { CheckboxGroupComponent } from '../checkbox-group.component';
-import { FudisCheckboxOption } from '../../../../types/forms';
+import { FudisCheckboxGroupFormGroup, FudisCheckboxOption } from '../../../../types/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'fudis-checkbox',
@@ -26,7 +27,12 @@ export class CheckboxComponent implements OnInit {
   /**
    * Control name for this checkbox from FormGroup
    */
-  @Input({ required: true }) controlName: string;
+  @Input() controlName: string;
+
+  /**
+   * Control name for this checkbox from FormGroup
+   */
+  @Input() controlIndex: number;
 
   /**
    * Visible label of checkbox
@@ -48,6 +54,10 @@ export class CheckboxComponent implements OnInit {
    */
   protected _focused = false;
 
+  protected _parentControl:
+    | FormArray<FormControl<boolean | null | undefined>>
+    | FormGroup<FudisCheckboxGroupFormGroup<object>>;
+
   ngOnInit(): void {
     if (this.id) {
       this._idService.addNewChildId('checkbox-group', this._checkboxGroup.id, this.id);
@@ -60,15 +70,29 @@ export class CheckboxComponent implements OnInit {
    * For toggling checkbox
    */
   protected _onChange(): void {
-    const optionToEmit: FudisCheckboxOption = {
-      id: this.id,
-      groupName: this._checkboxGroup.id,
-      controlName: this.controlName,
-      label: this.label,
-      value: this._checkboxGroup.formGroup.controls[this.controlName].value,
-    };
+    const parentType = this._checkboxGroup.getFormType();
 
-    this.handleChange.emit(optionToEmit);
+    if (parentType === 'group' && this.controlName) {
+      const optionToEmit: FudisCheckboxOption = {
+        id: this.id,
+        groupName: this._checkboxGroup.id,
+        controlName: this.controlName,
+        label: this.label,
+        value: this._checkboxGroup.formGroup.controls[this.controlName].value,
+      };
+
+      this.handleChange.emit(optionToEmit);
+    } else if (parentType === 'array' && this.controlIndex) {
+      const optionToEmit: FudisCheckboxOption = {
+        id: this.id,
+        groupName: this._checkboxGroup.id,
+        controlIndex: this.controlIndex,
+        label: this.label,
+        value: this._checkboxGroup.formArray.controls[this.controlIndex].value,
+      };
+
+      this.handleChange.emit(optionToEmit);
+    }
   }
 
   /**

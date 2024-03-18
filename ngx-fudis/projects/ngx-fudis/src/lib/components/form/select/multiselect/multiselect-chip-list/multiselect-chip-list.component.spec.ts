@@ -16,7 +16,7 @@ import { getElement } from '../../../../../utilities/tests/utilities';
   </div>`,
 })
 class MockWithParentComponent {
-  items: FudisSelectOption[] = multiselectChipListMockData;
+  items: FudisSelectOption<object>[] = multiselectChipListMockData;
   id = 'parent-of-chip-list';
 }
 

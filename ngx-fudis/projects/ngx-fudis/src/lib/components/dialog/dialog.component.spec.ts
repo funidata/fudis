@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockComponent } from 'ng-mocks';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ButtonComponent } from '../button/button.component';
 import { DialogComponent } from './dialog.component';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
@@ -16,7 +16,17 @@ describe('DialogComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [DialogComponent, AlertGroupComponent, MockComponent(ButtonComponent)],
       imports: [MatDialogModule],
-      providers: [FudisDialogService],
+      providers: [
+        FudisDialogService,
+        {
+          provide: MatDialogRef,
+          useValue: {},
+        },
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: [],
+        },
+      ],
     }).compileComponents();
 
     dialogService = TestBed.inject(FudisDialogService);

@@ -4,7 +4,7 @@ import { FudisTranslationConfig } from '../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisIdParent } from '../../../types/id';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
 
 @Directive({
   selector: '[fudisFieldSetBase]',
@@ -70,9 +70,16 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
     }
   }
 
-  // TODO: write tests
-  protected reloadErrorSummary(group: FormGroup): void {
-    if (group.errors) {
+  /**
+   * TODO: write test
+   *
+   * Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
+   */
+  protected _reloadErrorSummaryOnLazyLoad(
+    parentForm: boolean | undefined,
+    groupOrArray: FormGroup | FormArray,
+  ): void {
+    if (parentForm && groupOrArray.errors) {
       this._reloadErrorSummary = true;
       this._changeDetectorRef.detectChanges();
     }
