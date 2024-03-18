@@ -156,7 +156,6 @@ export class AppComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((response: string) => {
-      console.log(response);
       this._message = response;
     });
   }

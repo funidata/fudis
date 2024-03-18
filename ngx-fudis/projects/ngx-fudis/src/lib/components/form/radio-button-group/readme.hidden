@@ -16,7 +16,7 @@ Radio-button-group is essentially a fieldset with legend and radio inputs.
 
 ### Mandatory Properties
 
-Necessary properties for radio-button-group are `title`, `control` and `options`. Radio-button-group has to have **at least** two radio options and should **not be used** with only one option available. Otherwise it will throw an error.
+Necessary properties for radio-button-group are `label`, `control` and `options`. Radio-button-group has to have **at least** two radio options and should **not be used** with only one option available. Otherwise it will throw an error.
 
 Options array takes in objects with the following signature:
 

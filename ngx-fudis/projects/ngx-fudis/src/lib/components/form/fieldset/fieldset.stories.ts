@@ -18,7 +18,7 @@ import readme from './readme.mdx';
   template: `
     <fudis-fieldset
       [width]="'md'"
-      [title]="'Example Field Set Title'"
+      [label]="'Example Field Set Title'"
       [helpText]="'Helptext for the fieldset'"
       [align]="'center'"
       [tooltip]="'Some additional information about this fieldset'"
@@ -57,7 +57,7 @@ import readme from './readme.mdx';
             [helpText]="'So that students can ask for more time on their homework.'"
           />
           <!-- <fudis-radio-button-group
-            [title]="'Course type'"
+            [label]="'Course type'"
             [options]="courseTypeOptions"
             [control]="fieldsetExample.controls['courseType']"
           /> -->

@@ -172,37 +172,37 @@ In `fudisContent` template add form components and in `fudisActions` template ad
 
 ```
 @Component({
-  selector: 'form-dialog',
-  template: `
-    <fudis-button (handleClick)="openDialog(dialogFromTemplate)" [label]="'Open form dialog'" />
-    <ng-template #dialogFromTemplate>
-      <fudis-dialog>
-        <fudis-dialog-content>
-          <fudis-form>
-            [title]="'Dialog with fudis-form'"
-            [titleLevel]="2"
-            [errorSummaryLinkType]="'href'"
-            [errorSummaryHelpText]="'You need to fill up the information.'">
-            <ng-template fudisContent [type]="'form'">
-              <fudis-fieldset [title]="'Question about your power animal'">
-                <ng-template fudisContent [type]="'fieldset'">
-                  <fudis-text-input
-                    [id]="'example-input-power-animal'"
-                    [label]="'What is your power animal?'"
-                    [control]="exampleDialogFormGroup.controls['powerAnimal']"
-                    [helpText]="'Please add some values'" />
-                </ng-template>
-              </fudis-fieldset>
-            </ng-template>
-            <ng-template fudisActions type="form">
-              <fudis-button fudisFormSubmit [formValid]="exampleDialogFormGroup.valid" (handleClick)="closeDialogWithForm()" [label]="'Submit'" />
-              <fudis-button fudisDialogClose [label]="'Cancel'" />
-            </ng-template>
-          </fudis-form>
-        </fudis-dialog-content>
-      </fudis-dialog>
-    </ng-template>
-  `,
+	selector: 'form-dialog',
+	template: `
+		<fudis-button (handleClick)="openDialog(dialogFromTemplate)" [label]="'Open form dialog'" />
+		<ng-template #dialogFromTemplate>
+			<fudis-dialog>
+				<fudis-dialog-content>
+					<fudis-form>
+						[title]="'Dialog with fudis-form'"
+						[titleLevel]="2"
+						[errorSummaryLinkType]="'href'"
+						[errorSummaryHelpText]="'You need to fill up the information.'">
+						<ng-template fudisContent [type]="'form'">
+							<fudis-fieldset [label]="'Question about your power animal'">
+								<ng-template fudisContent [type]="'fieldset'">
+									<fudis-text-input
+										[id]="'example-input-power-animal'"
+										[label]="'What is your power animal?'"
+										[control]="exampleDialogFormGroup.controls['powerAnimal']"
+										[helpText]="'Please add some values'" />
+								</ng-template>
+							</fudis-fieldset>
+						</ng-template>
+						<ng-template fudisActions type="form">
+							<fudis-button fudisFormSubmit [formValid]="exampleDialogFormGroup.valid" (handleClick)="closeDialogWithForm()" [label]="'Submit'" />
+							<fudis-button fudisDialogClose [label]="'Cancel'" />
+						</ng-template>
+					</fudis-form>
+				</fudis-dialog-content>
+			</fudis-dialog>
+		</ng-template>
+	`,
 })
 class FormDialogComponent {
   constructor(private _dialogService: FudisDialogService) {}

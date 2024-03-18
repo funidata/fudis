@@ -41,7 +41,7 @@ import { excludeAllRegex } from '../../../utilities/storybook';
       <fudis-button fudisFormSubmit [formValid]="formExample.valid" [label]="'Submit'" />
     </ng-template>
     <ng-template fudisContent type="form">
-      <fudis-fieldset [title]="'Form information'">
+      <fudis-fieldset [label]="'Form information'">
         <ng-template fudisContent type="fieldset">
           <fudis-grid [columns]="3">
             <fudis-text-input
@@ -59,14 +59,14 @@ import { excludeAllRegex } from '../../../utilities/storybook';
           </fudis-grid>
           <fudis-grid [columns]="3">
             <!-- <fudis-radio-button-group
-              [title]="'Course type'"
+              [label]="'Course type'"
               [id]="'radio-button-group-1'"
               [options]="courseTypeOptions"
               [control]="formExample.controls['courseType']"
             /> -->
             <fudis-checkbox-group
               [formGroup]="formExample.controls.courseBooks"
-              [title]="'Course books'"
+              [label]="'Course books'"
               [helpText]="'Select 1-2 coursebooks'"
             >
               <fudis-checkbox [controlName]="'first'" [label]="'Heir to the Empire'" />

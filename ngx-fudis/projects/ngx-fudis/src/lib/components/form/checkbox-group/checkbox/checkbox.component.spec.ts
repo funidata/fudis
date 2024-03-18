@@ -22,7 +22,7 @@ import { ValidatorErrorMessageComponent } from '../../error-message/validator-er
   selector: 'fudis-mock-container',
   template: `<fudis-checkbox-group
     [formGroup]="_testFromGroup"
-    [title]="'Choose minimum of one fruit'"
+    [label]="'Choose minimum of one fruit'"
   >
     <fudis-checkbox
       *ngFor="let option of _options"

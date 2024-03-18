@@ -28,7 +28,7 @@ type TestForm = {
         >
           <ng-template fudisContent [type]="'form'">
             <fudis-fieldset
-              [title]="'Question about your power animal'"
+              [label]="'Question about your power animal'"
               [helpText]="_greetingFromOpeningComponent"
             >
               <ng-template fudisContent [type]="'fieldset'">

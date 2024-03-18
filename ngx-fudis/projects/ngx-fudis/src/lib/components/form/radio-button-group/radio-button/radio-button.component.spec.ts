@@ -23,7 +23,7 @@ import { GuidanceComponent } from '../../guidance/guidance.component';
 @Component({
   selector: 'fudis-mock-component',
   template: `<fudis-radio-button-group
-    [title]="'Choose a pet'"
+    [label]="'Choose a pet'"
     [control]="_testControl"
     [options]="_options"
   />`,

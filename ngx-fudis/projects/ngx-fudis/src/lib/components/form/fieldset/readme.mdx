@@ -11,7 +11,7 @@ Field Set is a grouping tool for Fudis Form Components. There are three directiv
 
 ### Header Actions
 
-Header actions are buttons positioned next to the Field Set title.
+Header actions are buttons positioned next to the Field Set label.
 Header actions are assigned through Fudis Actions Directive content projection with **fudisActions** selector.
 Fudis Actions Directive also needs `type` input which has to be set as '_fieldset_'.
 There are no restrictions on header actions content but it is advised to use Fudis Buttons only.
@@ -24,7 +24,7 @@ There are no restrictions on header actions content but it is advised to use Fud
 
 ### Notifications
 
-Notifications are Fudis Notifications positioned under the Field Set title.
+Notifications are Fudis Notifications positioned under the Field Set label.
 Notifications are assigned through Fudis Notifications Directive content projection with **fudisNotifications** selector.
 Fudis Notifications Directive also needs a `type` input which has to be set as '_fieldset_'.
 There are no restrictions on header actions content but it is advised to use Fudis Notifications only.
@@ -53,7 +53,7 @@ Aside from content projection Field Set will create a legend with optional toolt
 
 ### Legend
 
-Field Set is not valid without a **mandatory** `title` property which is semantically legend element for the HTML fieldset.
+Field Set is not valid without a **mandatory** `label` property which is semantically legend element for the HTML fieldset.
 
 ### Required
 
@@ -70,7 +70,7 @@ Tooltip can be included in legend with properties from [Tooltip Directive](/docs
 
 ### Error Summary Breadcrumb
 
-Boolean property `errorSummaryBreadcrumb` adds Field Set title to the clickable link in Error Symmary when used inside Fudis Form with visible Error Summary. Set `false` by default.
+Boolean property `errorSummaryBreadcrumb` adds Field Set label to the clickable link in Error Symmary when used inside Fudis Form with visible Error Summary. Set `false` by default.
 
 ### Grid Properties
 
@@ -95,7 +95,7 @@ This is a simple example on how to use `fudis-fieldset`
 HTML Template
 
     <fudis-fieldset
-      [title]="'Fieldset legend title'"
+      [label]="'Fieldset legend label'"
       [helpText]="'Some help text for the fieldset'"
     >
       <ng-template fudisActions [type]="'fieldset'">

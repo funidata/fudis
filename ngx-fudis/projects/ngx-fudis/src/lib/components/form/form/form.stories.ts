@@ -8,7 +8,7 @@ import {
   FudisSelectOption,
   FudisRadioButtonOption,
   FudisFormErrorSummaryLink,
-  FudisCheckboxGroupFormGroup,
+  // FudisCheckboxGroupFormGroup,
   // FudisDateRangeItem,
 } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
@@ -84,7 +84,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
           </fudis-expandable>
         </ng-template>
       </fudis-form>
-      <fudis-form
+      <!-- <fudis-form
         [titleLevel]="2"
         [title]="'Form with Checkbox Group'"
         [errorSummaryLinkType]="'onClick'"
@@ -102,7 +102,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
           <fudis-expandable [title]="'Expandable with Text Area'" [errorSummaryBreadcrumb]="true">
             <ng-template fudisContent [type]="'expandable'">
               <fudis-checkbox-group
-                [title]="'Pick a fruit'"
+                [label]="'Pick a fruit'"
                 [formGroup]="allForms.controls.formThree"
               >
                 <fudis-checkbox
@@ -114,8 +114,8 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
             </ng-template>
           </fudis-expandable>
         </ng-template>
-      </fudis-form>
-      <fudis-form
+      </fudis-form> -->
+      <!-- <fudis-form
         [titleLevel]="2"
         [title]="'Form with Select and Multiselect'"
         [errorSummaryLinkType]="'onClick'"
@@ -135,7 +135,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
             [errorSummaryBreadcrumb]="true"
           >
             <ng-template fudisContent [type]="'expandable'">
-              <fudis-fieldset [title]="'Select and Multiselect'" [errorSummaryBreadcrumb]="true">
+              <fudis-fieldset [label]="'Select and Multiselect'" [errorSummaryBreadcrumb]="true">
                 <ng-template fudisContent type="fieldset">
                   <fudis-select
                     [label]="'Pick a pet'"
@@ -161,7 +161,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
             </ng-template>
           </fudis-expandable>
         </ng-template>
-      </fudis-form>
+      </fudis-form> -->
     </fudis-grid>
   `,
 })
@@ -196,26 +196,26 @@ class ExampleWithMultipleFormsComponent {
         FudisValidators.maxLength(20, 'Max length is 20 chars'),
       ]),
     }),
-    formThree: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
-      {
-        apple: new FormControl<boolean | null>(null),
-        fairTradeBanana: new FormControl<boolean | null>(null),
-        pear: new FormControl<boolean | null>(null),
-        pineapple: new FormControl<boolean | null>(null),
-        orange: new FormControl<boolean | null | undefined>(null),
-      },
-      [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))],
-    ),
-    formFour: new FormGroup({
-      select: new FormControl<FudisSelectOption<object> | null>(
-        null,
-        FudisValidators.required('You must pick one'),
-      ),
-      multiselect: new FormControl<FudisSelectOption<object>[] | null>(null, [
-        FudisValidators.required('Selection is missing'),
-        FudisValidators.minLength(2, 'Choose at least 2'),
-      ]),
-    }),
+    // formThree: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+    //   {
+    //     apple: new FormControl<boolean | null>(null),
+    //     fairTradeBanana: new FormControl<boolean | null>(null),
+    //     pear: new FormControl<boolean | null>(null),
+    //     pineapple: new FormControl<boolean | null>(null),
+    //     orange: new FormControl<boolean | null | undefined>(null),
+    //   },
+    //   [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))],
+    // ),
+    // formFour: new FormGroup({
+    //   select: new FormControl<FudisSelectOption<object> | null>(
+    //     null,
+    //     FudisValidators.required('You must pick one'),
+    //   ),
+    //   multiselect: new FormControl<FudisSelectOption<object>[] | null>(null, [
+    //     FudisValidators.required('Selection is missing'),
+    //     FudisValidators.minLength(2, 'Choose at least 2'),
+    //   ]),
+    // }),
   });
 }
 
@@ -256,8 +256,8 @@ class ExampleWithMultipleFormsComponent {
         >
           <ng-template fudisContent [type]="'expandable'">
             <fudis-grid>
-              <fudis-fieldset
-                [title]="'Basic info'"
+              <!-- <fudis-fieldset
+                [label]="'Basic info'"
                 [helpText]="'Some generic info about this course'"
                 [id]="fieldsetId"
               >
@@ -268,8 +268,8 @@ class ExampleWithMultipleFormsComponent {
                   </fudis-notification>
                 </ng-template>
                 <ng-template fudisContent [type]="'fieldset'">
-                  <fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
-                    <!-- <fudis-input-with-language-options
+                  <fudis-grid [columns]="{ lg: 'inputLg inputLg' }"> -->
+              <!-- <fudis-input-with-language-options
                           [id]="'unique-input-1'"
                           [options]="languageOptions"
                           [formGroup]="formExample.controls['name']"
@@ -287,7 +287,7 @@ class ExampleWithMultipleFormsComponent {
                             "
                           />
                         </fudis-input-with-language-options> -->
-                    <!-- <fudis-input-with-language-options
+              <!-- <fudis-input-with-language-options
                           [variant]="'text-area'"
                           [id]="'unique-input-2'"
                           [options]="languageOptions"
@@ -297,22 +297,22 @@ class ExampleWithMultipleFormsComponent {
                             'So that students know what they are getting into. Provide description in all languages.'
                           "
                         /> -->
-                    <!-- <fudis-radio-button-group
-                          [title]="'Course type'"
+              <!-- <fudis-radio-button-group
+                          [label]="'Course type'"
                           [id]="'radio-button-group-1'"
                           [options]="courseTypeOptions"
                           [control]="formExample.controls['courseType']"
                         /> -->
-                    <fudis-checkbox-group
+              <!-- <fudis-checkbox-group
                       [formGroup]="formExample.controls.courseBooks"
-                      [title]="'Course books'"
+                      [label]="'Course books'"
                       [helpText]="'Select 1-2 coursebooks'"
                     >
                       <fudis-checkbox [controlName]="'first'" [label]="'Heir to the Empire'" />
                       <fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
                       <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
-                    </fudis-checkbox-group>
-                    <!-- <fudis-datepicker
+                    </fudis-checkbox-group> -->
+              <!-- <fudis-datepicker
                           [label]="'Start date'"
                           [helpText]="'You have to start from somewhere'"
                           [control]="formExample.controls['importantDate']"
@@ -324,11 +324,11 @@ class ExampleWithMultipleFormsComponent {
                             [message]="'Wrong date chosen. 1.5.1991 would be great!'"
                           />
                         </fudis-datepicker> -->
-                  </fudis-grid>
+              <!-- </fudis-grid>
                 </ng-template>
-              </fudis-fieldset>
+              </fudis-fieldset> -->
               <fudis-fieldset
-                [title]="'Tearcher info'"
+                [label]="'Tearcher info'"
                 [tooltip]="'Quite many fields are required.'"
               >
                 <ng-template fudisContent [type]="'fieldset'">
@@ -359,7 +359,7 @@ class ExampleWithMultipleFormsComponent {
               [errorSummaryBreadcrumb]="true"
             >
               <ng-template fudisContent [type]="'expandable'">
-                <fudis-fieldset [title]="'More important dates'">
+                <fudis-fieldset [label]="'More important dates'">
                   <ng-template fudisContent [type]="'fieldset'">
                     <fudis-date-range
                       [startDate]="dateRangeStartDate"

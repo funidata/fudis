@@ -26,10 +26,10 @@ import { FudisInputSize } from '../../../types/forms';
 @Component({
   selector: 'fudis-mock-fieldset-component',
   template: ` <fudis-fieldset
-    [title]="'Fieldset title'"
+    [label]="'Fieldset label'"
     [helpText]="'Fieldset help text'"
     [required]="required"
-    [titleSize]="titleSize"
+    [labelSize]="labelSize"
     [initialFocus]="initialFocus"
     [inputSize]="inputSize"
   >
@@ -48,7 +48,7 @@ import { FudisInputSize } from '../../../types/forms';
 class MockFieldSetComponent {
   required = false;
   initialFocus = false;
-  titleSize = 'md';
+  labelSize = 'md';
   inputSize: FudisInputSize;
 
   fieldsetExample = new FormGroup({
@@ -131,10 +131,10 @@ describe('FieldSetComponent', () => {
   });
 
   describe('Component inputs', () => {
-    it('should have fieldset title as given', () => {
-      const fieldsetTitle = getElement(fixtureMock, '.fudis-fieldset__legend__title__text');
+    it('should have Fieldset label as given', () => {
+      const fieldsetLabel = getElement(fixtureMock, '.fudis-fieldset__legend__title__text');
 
-      expect(getTrimmedTextContent(fieldsetTitle as HTMLElement)).toEqual('Fieldset title');
+      expect(getTrimmedTextContent(fieldsetLabel as HTMLElement)).toEqual('Fieldset label');
     });
 
     it('should have fieldset helpText as given', () => {
@@ -169,14 +169,14 @@ describe('FieldSetComponent', () => {
       fieldSetInputSizeCheck('lg');
     });
 
-    it('should have title size with respective CSS class', () => {
-      const titleSizeClass = getElement(fixtureMock, '.fudis-fieldset__legend__title__main');
+    it('should have label size with respective CSS class', () => {
+      const labelSizeClass = getElement(fixtureMock, '.fudis-fieldset__legend__title__main');
 
-      expect(titleSizeClass.className).toContain('fudis-fieldset__legend__title__main__md');
+      expect(labelSizeClass.className).toContain('fudis-fieldset__legend__title__main__md');
 
-      componentMock.titleSize = 'sm';
+      componentMock.labelSize = 'sm';
       fixtureMock.detectChanges();
-      expect(titleSizeClass.className).toContain('fudis-fieldset__legend__title__main__sm');
+      expect(labelSizeClass.className).toContain('fudis-fieldset__legend__title__main__sm');
     });
   });
 

@@ -20,7 +20,7 @@ Checkbox Group organism is built using parent wrapper of Checkbox Group Componen
 
 ### Checkbox Group
 
-Mandatory properties for Checkbox Group are `title` and `formGroup`.
+Mandatory properties for Checkbox Group are `label` and `formGroup`.
 
 ### Checkbox Child Component
 
@@ -33,7 +33,7 @@ For child Checkbox components mandatory properties are `controlName` and `label`
 
 	<fudis-checkbox-group
 	[formGroup]="myFormGroup"
-	[title]="'Example checkbox group'">
+	[label]="'Example checkbox group'">
 		<fudis-checkbox
 		[controlName]="'firstControlName'"
 		[label]="'First checkbox'"/>
@@ -62,7 +62,7 @@ To set Fieldset with Checkbox Group as Required field, include validator `FudisG
 
 <fudis-checkbox-group
 	[formGroup]="myFormGroup"
-	[title]="'Choose at least one'"
+	[label]="'Choose at least one'"
 	>
 	<fudis-checkbox
 	[controlName]="'first'"

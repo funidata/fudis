@@ -1,7 +1,7 @@
 <fudis-fieldset
   [id]="id"
-  [titleSize]="'sm'"
-  [title]="title"
+  [labelSize]="'sm'"
+  [label]="label"
   [inputSize]="size"
   [required]="_required ? _required : undefined"
   [errorSummaryBreadcrumb]="false"
@@ -18,7 +18,7 @@
       [checked]="control.value === option.value ? true : false"
       [control]="control"
     />
-    <fudis-guidance [inputLabel]="title" [helpText]="helpText" [for]="id" [control]="control">
+    <fudis-guidance [inputLabel]="label" [helpText]="helpText" [for]="id" [control]="control">
       <ng-content select="fudis-error-message" />
     </fudis-guidance>
   </ng-template>

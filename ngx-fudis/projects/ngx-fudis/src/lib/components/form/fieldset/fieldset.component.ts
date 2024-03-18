@@ -104,19 +104,19 @@ export class FieldSetComponent
 
   /**
    * Send information about current Field Set to Error Summary Service.
-   * Error Summary Breadcrumb is the title of the current Field Set and is visible in the clickable link in Error Summary.
+   * Error Summary Breadcrumb is the label of the current Field Set and is visible in the clickable link in Error Summary.
    */
   @Input() errorSummaryBreadcrumb: boolean = true;
 
   /**
-   * Display "Required" text next to Field Set main title. By default set to 'undefined'.
+   * Display "Required" text next to Field Set main label. By default set to 'undefined'.
    */
   @Input() required: boolean | undefined = undefined;
 
   /**
-   * Visual size of title legend. Default 'md' and 'sm' is similar to standard input label, used in e. g. RadioButtonGroup.
+   * Visual size of label legend. Default 'md' and 'sm' is similar to standard input label, used in e. g. RadioButtonGroup.
    */
-  @Input() titleSize: 'md' | 'sm' = 'md';
+  @Input() labelSize: 'md' | 'sm' = 'md';
 
   /**
    * CSS classes for the native fieldset HTMLelement
@@ -135,7 +135,7 @@ export class FieldSetComponent
 
   ngOnInit(): void {
     this._setFieldsetId();
-    this._addToErrorSummary(this.title);
+    this._addToErrorSummary(this.label);
     this._setClasses();
 
     this._initFinished = true;
@@ -149,8 +149,8 @@ export class FieldSetComponent
 
   ngOnChanges(changes: FudisComponentChanges<FieldSetComponent>): void {
     if (this._initFinished) {
-      if (changes.title?.currentValue) {
-        this._addToErrorSummary(changes.title?.currentValue);
+      if (changes.label?.currentValue) {
+        this._addToErrorSummary(changes.label?.currentValue);
       }
 
       if (changes.inputSize) {
@@ -164,14 +164,14 @@ export class FieldSetComponent
   }
 
   /**
-   * Add Field Set title to Error Summary
+   * Add Field Set label to Error Summary
    */
-  private _addToErrorSummary(title: string): void {
+  private _addToErrorSummary(label: string): void {
     if (this.errorSummaryBreadcrumb && this._parentForm) {
       this._fieldsetInfo = {
         id: this.id,
         formId: this._parentForm.id,
-        title: title,
+        title: label,
       };
 
       this._errorSummaryService.addFieldset(this._fieldsetInfo);
@@ -181,7 +181,7 @@ export class FieldSetComponent
   }
 
   /**
-   * Remove Field Set title from Error Summary
+   * Remove Field Set label from Error Summary
    */
   private _removeFromErrorSummary(): void {
     if (this.errorSummaryBreadcrumb && this._fieldsetSent) {
