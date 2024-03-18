@@ -22,9 +22,9 @@ type MyForm = {
           [titleLevel]="2"
         >
           <ng-template fudisContent [type]="'form'">
-            <fudis-fieldset [title]="'We need some information'" [helpText]="_greetingFromOpener">
+            <fudis-fieldset [label]="'We need some information'" [helpText]="_greetingFromOpener">
               <ng-template fudisContent [type]="'fieldset'">
-                <fudis-checkbox-group
+                <!-- <fudis-checkbox-group
                   [title]="'Choose berry'"
                   [helpText]="'Berries are yummy'"
                   [formGroup]="testFormGroup.controls['checkboxFormGroup']"
@@ -34,7 +34,7 @@ type MyForm = {
                     [controlName]="option.controlName"
                     [label]="option.label"
                   />
-                </fudis-checkbox-group>
+                </fudis-checkbox-group> -->
                 <fudis-text-input
                   [label]="'Is something wrong?'"
                   [helpText]="'I hope everything is OK'"
@@ -91,10 +91,10 @@ export class DialogTestFormComponent {
     ]),
     checkboxFormGroup: new FormGroup(
       {
-        blueberry: new FormControl<FudisCheckboxOption | null>(null),
-        cloudberry: new FormControl<FudisCheckboxOption | null>(null),
-        raspberry: new FormControl<FudisCheckboxOption | null>(null),
-        strawberry: new FormControl<FudisCheckboxOption | null>(null),
+        blueberry: new FormControl<boolean | undefined | null>(true),
+        cloudberry: new FormControl<boolean | undefined | null>(true),
+        raspberry: new FormControl<boolean | undefined | null>(true),
+        strawberry: new FormControl<boolean | undefined | null>(null),
       },
       [
         FudisGroupValidators.min({
