@@ -148,7 +148,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
         [type]="'email'"
       />
       <fudis-text-input [label]="'MinLength validator'" [control]="minLengthTextInput.control" />
-      <fudis-text-input [label]="'MaxLength validator'" [control]="maxLengthTextInput.control" [maxLength]="'20'" />
+      <fudis-text-input [label]="'MaxLength validator'" [control]="maxLengthTextInput.control" />
       <fudis-text-input
         [label]="'Min number validator'"
         [control]="minNumberInput.control"
@@ -163,7 +163,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
       />
       <fudis-text-input [label]="'Pattern validator'" [control]="patternTextInput.control" />
     </fudis-grid>
-  <!--  <hr class="fudis-hr" />
+    <!--  <hr class="fudis-hr" />
     <fudis-grid [columns]="2" [marginTop]="'xl'">
       <fudis-heading [level]="3">Fudis Group Validators</fudis-heading>
       <fudis-grid-item [columns]="2">
