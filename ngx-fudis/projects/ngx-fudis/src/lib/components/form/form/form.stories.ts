@@ -256,7 +256,7 @@ class ExampleWithMultipleFormsComponent {
         >
           <ng-template fudisContent [type]="'expandable'">
             <fudis-grid>
-              <fudis-fieldset
+              <!-- <fudis-fieldset
                 [label]="'Basic info'"
                 [helpText]="'Some generic info about this course'"
                 [id]="fieldsetId"
@@ -268,8 +268,8 @@ class ExampleWithMultipleFormsComponent {
                   </fudis-notification>
                 </ng-template>
                 <ng-template fudisContent [type]="'fieldset'">
-                  <fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
-                    <!-- <fudis-input-with-language-options
+                  <fudis-grid [columns]="{ lg: 'inputLg inputLg' }"> -->
+              <!-- <fudis-input-with-language-options
                           [id]="'unique-input-1'"
                           [options]="languageOptions"
                           [formGroup]="formExample.controls['name']"
@@ -287,7 +287,7 @@ class ExampleWithMultipleFormsComponent {
                             "
                           />
                         </fudis-input-with-language-options> -->
-                    <!-- <fudis-input-with-language-options
+              <!-- <fudis-input-with-language-options
                           [variant]="'text-area'"
                           [id]="'unique-input-2'"
                           [options]="languageOptions"
@@ -297,13 +297,13 @@ class ExampleWithMultipleFormsComponent {
                             'So that students know what they are getting into. Provide description in all languages.'
                           "
                         /> -->
-                    <!-- <fudis-radio-button-group
+              <!-- <fudis-radio-button-group
                           [label]="'Course type'"
                           [id]="'radio-button-group-1'"
                           [options]="courseTypeOptions"
                           [control]="formExample.controls['courseType']"
                         /> -->
-                    <!-- <fudis-checkbox-group
+              <!-- <fudis-checkbox-group
                       [formGroup]="formExample.controls.courseBooks"
                       [label]="'Course books'"
                       [helpText]="'Select 1-2 coursebooks'"
@@ -312,7 +312,7 @@ class ExampleWithMultipleFormsComponent {
                       <fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
                       <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
                     </fudis-checkbox-group> -->
-                    <!-- <fudis-datepicker
+              <!-- <fudis-datepicker
                           [label]="'Start date'"
                           [helpText]="'You have to start from somewhere'"
                           [control]="formExample.controls['importantDate']"
@@ -324,9 +324,9 @@ class ExampleWithMultipleFormsComponent {
                             [message]="'Wrong date chosen. 1.5.1991 would be great!'"
                           />
                         </fudis-datepicker> -->
-                  </fudis-grid>
+              <!-- </fudis-grid>
                 </ng-template>
-              </fudis-fieldset>
+              </fudis-fieldset> -->
               <fudis-fieldset
                 [label]="'Tearcher info'"
                 [tooltip]="'Quite many fields are required.'"
