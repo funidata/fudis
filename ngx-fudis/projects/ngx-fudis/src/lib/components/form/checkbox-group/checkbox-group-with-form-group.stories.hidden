@@ -1,16 +1,3 @@
-<<<<<<<< HEAD:ngx-fudis/projects/ngx-fudis/src/lib/components/form/checkbox-group/checkbox-group.stories.hidden
-import { StoryFn, Meta, moduleMetadata } from "@storybook/angular";
-import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from "@angular/forms";
-import { BehaviorSubject } from "rxjs";
-import { CheckboxGroupComponent } from "./checkbox-group.component";
-import { FudisCheckboxGroupFormGroup } from "../../../types/forms";
-import readme from "./readme.hidden";
-import { FudisGroupValidators } from "../../../utilities/form/groupValidators";
-import { checkboxGroupControlsExclude } from "../../../utilities/storybook";
-
-export default {
-  title: "Components/Form/Checkbox Group",
-========
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
@@ -21,7 +8,6 @@ import { checkboxGroupControlsExclude } from '../../../utilities/storybook';
 
 export default {
   title: 'Components/Form/Checkbox Group/With Form Group',
->>>>>>>> main:ngx-fudis/projects/ngx-fudis/src/lib/components/form/checkbox-group/checkbox-group-with-form-group.stories.ts
   component: CheckboxGroupComponent,
   decorators: [
     moduleMetadata({
@@ -37,15 +23,15 @@ export default {
   },
   argTypes: {
     size: {
-      options: ["sm", "md", "lg"],
-      control: { type: "radio" },
+      options: ['sm', 'md', 'lg'],
+      control: { type: 'radio' },
     },
     tooltipPosition: {
-      options: ["left", "right", "above", "below"],
-      control: { type: "radio" },
+      options: ['left', 'right', 'above', 'below'],
+      control: { type: 'radio' },
     },
     tooltip: {
-      control: { type: "text" },
+      control: { type: 'text' },
     },
   },
 } as Meta;
@@ -53,11 +39,11 @@ export default {
 const html = String.raw;
 
 const options = [
-  { controlName: "apple", label: "Apple" },
-  { controlName: "fairTradeBanana", label: "Fair trade banana" },
-  { controlName: "pear", label: "Pear" },
-  { controlName: "pineapple", label: "Pineapple" },
-  { controlName: "orange", label: "Orange" },
+  { controlName: 'apple', label: 'Apple' },
+  { controlName: 'fairTradeBanana', label: 'Fair trade banana' },
+  { controlName: 'pear', label: 'Pear' },
+  { controlName: 'pineapple', label: 'Pineapple' },
+  { controlName: 'orange', label: 'Orange' },
 ];
 
 const basicFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
@@ -68,7 +54,7 @@ const basicFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
     pineapple: new FormControl<boolean | null | undefined>(null),
     orange: new FormControl<boolean | null | undefined>(null),
   },
-  [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject("No fruit picked! :("))],
+  [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))],
 );
 
 const ExampleTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupComponent) => ({
@@ -96,12 +82,12 @@ const ExampleTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupCom
 
 export const Example = ExampleTemplate.bind({});
 Example.args = {
-  label: "Choose your preferred fruits",
-  helpText: "Pick at least one fruit.",
-  size: "lg",
-  tooltip: "Fruit sugar is great in small doces!",
+  label: 'Choose your preferred fruits',
+  helpText: 'Pick at least one fruit.',
+  size: 'lg',
+  tooltip: 'Fruit sugar is great in small doces!',
   tooltipToggle: false,
-  tooltipPosition: "right",
+  tooltipPosition: 'right',
 };
 
 const withDisabledFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
@@ -112,7 +98,7 @@ const withDisabledFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup<o
     pineapple: new FormControl<boolean | null | undefined | null>(null),
     orange: new FormControl<boolean | null | undefined | null>({ value: null, disabled: true }),
   },
-  [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject("Please pick one! :("))],
+  [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Please pick one! :('))],
 );
 
 const ExampleWithDisabledTemplate: StoryFn<CheckboxGroupComponent> = (
@@ -142,12 +128,12 @@ const ExampleWithDisabledTemplate: StoryFn<CheckboxGroupComponent> = (
 
 export const ExampleWithDisabledOption = ExampleWithDisabledTemplate.bind({});
 ExampleWithDisabledOption.args = {
-  label: "Choose your preferred fruits",
-  helpText: "Some options are disabled and cannot be toggled.",
-  size: "lg",
-  tooltip: "Fruit sugar is great in small doces!",
+  label: 'Choose your preferred fruits',
+  helpText: 'Some options are disabled and cannot be toggled.',
+  size: 'lg',
+  tooltip: 'Fruit sugar is great in small doces!',
   tooltipToggle: false,
-  tooltipPosition: "right",
+  tooltipPosition: 'right',
 };
 
 const withMinMaxFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
@@ -161,11 +147,11 @@ const withMinMaxFormGroupOptions = new FormGroup<FudisCheckboxGroupFormGroup<obj
   [
     FudisGroupValidators.min({
       value: 2,
-      message: new BehaviorSubject("Not enough fruits picked"),
+      message: new BehaviorSubject('Not enough fruits picked'),
     }),
     FudisGroupValidators.max({
       value: 3,
-      message: new BehaviorSubject("Too many fruits selected!"),
+      message: new BehaviorSubject('Too many fruits selected!'),
     }),
   ],
 );
@@ -197,10 +183,10 @@ const ExampleWithMinMaxTemplate: StoryFn<CheckboxGroupComponent> = (
 
 export const ExampleWithMinMax = ExampleWithMinMaxTemplate.bind({});
 ExampleWithMinMax.args = {
-  label: "Choose your preferred fruits",
-  helpText: "Pick two to three fruits.",
-  size: "lg",
-  tooltip: "Fruit sugar is great in small doces!",
+  label: 'Choose your preferred fruits',
+  helpText: 'Pick two to three fruits.',
+  size: 'lg',
+  tooltip: 'Fruit sugar is great in small doces!',
   tooltipToggle: false,
-  tooltipPosition: "right",
+  tooltipPosition: 'right',
 };

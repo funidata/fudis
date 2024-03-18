@@ -84,7 +84,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
           </fudis-expandable>
         </ng-template>
       </fudis-form>
-      <fudis-form
+      <!-- <fudis-form
         [titleLevel]="2"
         [title]="'Form with Checkbox Group'"
         [errorSummaryLinkType]="'onClick'"
@@ -114,8 +114,8 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
             </ng-template>
           </fudis-expandable>
         </ng-template>
-      </fudis-form>
-      <fudis-form
+      </fudis-form> -->
+      <!-- <fudis-form
         [titleLevel]="2"
         [title]="'Form with Select and Multiselect'"
         [errorSummaryLinkType]="'onClick'"
@@ -161,7 +161,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
             </ng-template>
           </fudis-expandable>
         </ng-template>
-      </fudis-form>
+      </fudis-form> -->
     </fudis-grid>
   `,
 })
@@ -196,26 +196,26 @@ class ExampleWithMultipleFormsComponent {
         FudisValidators.maxLength(20, 'Max length is 20 chars'),
       ]),
     }),
-    formThree: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
-      {
-        apple: new FormControl<boolean | null>(null),
-        fairTradeBanana: new FormControl<boolean | null>(null),
-        pear: new FormControl<boolean | null>(null),
-        pineapple: new FormControl<boolean | null>(null),
-        orange: new FormControl<boolean | null | undefined>(null),
-      },
-      [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))],
-    ),
-    formFour: new FormGroup({
-      select: new FormControl<FudisSelectOption<object> | null>(
-        null,
-        FudisValidators.required('You must pick one'),
-      ),
-      multiselect: new FormControl<FudisSelectOption<object>[] | null>(null, [
-        FudisValidators.required('Selection is missing'),
-        FudisValidators.minLength(2, 'Choose at least 2'),
-      ]),
-    }),
+    // formThree: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+    //   {
+    //     apple: new FormControl<boolean | null>(null),
+    //     fairTradeBanana: new FormControl<boolean | null>(null),
+    //     pear: new FormControl<boolean | null>(null),
+    //     pineapple: new FormControl<boolean | null>(null),
+    //     orange: new FormControl<boolean | null | undefined>(null),
+    //   },
+    //   [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))],
+    // ),
+    // formFour: new FormGroup({
+    //   select: new FormControl<FudisSelectOption<object> | null>(
+    //     null,
+    //     FudisValidators.required('You must pick one'),
+    //   ),
+    //   multiselect: new FormControl<FudisSelectOption<object>[] | null>(null, [
+    //     FudisValidators.required('Selection is missing'),
+    //     FudisValidators.minLength(2, 'Choose at least 2'),
+    //   ]),
+    // }),
   });
 }
 
@@ -303,7 +303,7 @@ class ExampleWithMultipleFormsComponent {
                           [options]="courseTypeOptions"
                           [control]="formExample.controls['courseType']"
                         /> -->
-                    <fudis-checkbox-group
+                    <!-- <fudis-checkbox-group
                       [formGroup]="formExample.controls.courseBooks"
                       [label]="'Course books'"
                       [helpText]="'Select 1-2 coursebooks'"
@@ -311,7 +311,7 @@ class ExampleWithMultipleFormsComponent {
                       <fudis-checkbox [controlName]="'first'" [label]="'Heir to the Empire'" />
                       <fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
                       <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
-                    </fudis-checkbox-group>
+                    </fudis-checkbox-group> -->
                     <!-- <fudis-datepicker
                           [label]="'Start date'"
                           [helpText]="'You have to start from somewhere'"
