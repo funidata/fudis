@@ -138,7 +138,7 @@ export class GuidanceComponent implements OnInit {
     if (this.formId && this.reloadErrorSummary && !this._lazyLoadedErrors.includes(error.type)) {
       this._lazyLoadedErrors.push(error.type);
       this._errorSummaryService.focusToFormOnReload = null;
-      this._errorSummaryService.reloadErrorsByFormId(this.formId);
+      this._errorSummaryService.reloadErrorsByFormId(this.formId, false);
     }
   }
 }

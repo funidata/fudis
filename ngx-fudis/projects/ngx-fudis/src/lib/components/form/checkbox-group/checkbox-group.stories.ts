@@ -3,11 +3,12 @@ import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angul
 import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
 import { FudisCheckboxGroupFormGroup } from '../../../types/forms';
+import docs from './checkbox-group.docs.mdx';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { checkboxGroupControlsExclude } from '../../../utilities/storybook';
 
 export default {
-  title: 'Components/Form/Checkbox Group/With Form Group',
+  title: 'Components/Form/Checkbox Group',
   component: CheckboxGroupComponent,
   decorators: [
     moduleMetadata({
@@ -17,7 +18,7 @@ export default {
   ],
   parameters: {
     docs: {
-      autodocs: false,
+      page: docs,
     },
     controls: { exclude: checkboxGroupControlsExclude },
   },
@@ -185,69 +186,6 @@ export const ExampleWithMinMax = ExampleWithMinMaxTemplate.bind({});
 ExampleWithMinMax.args = {
   label: 'Choose your preferred fruits',
   helpText: 'Pick two to three fruits.',
-  size: 'lg',
-  tooltip: 'Fruit sugar is great in small doces!',
-  tooltipToggle: false,
-  tooltipPosition: 'right',
-};
-
-const optionsWithControls = [
-  {
-    controlName: 'apple',
-    label: 'Apple',
-    control: new FormControl<boolean | null | undefined>(null),
-  },
-  {
-    controlName: 'fairTradeBanana',
-    label: 'Fair trade banana',
-    control: new FormControl<boolean | null | undefined>(null),
-  },
-  {
-    controlName: 'pear',
-    label: 'Pear',
-    control: new FormControl<boolean | null | undefined>(null),
-  },
-  {
-    controlName: 'pineapple',
-    label: 'Pineapple',
-    control: new FormControl<boolean | null | undefined>(null),
-  },
-  {
-    controlName: 'orange',
-    label: 'Orange',
-    control: new FormControl<boolean | null | undefined>(null),
-  },
-];
-
-const ExampleWithoutFormGroupTemplate: StoryFn<CheckboxGroupComponent> = (
-  args: CheckboxGroupComponent,
-) => ({
-  props: {
-    ...args,
-    optionsWithControls,
-  },
-  template: html`<fudis-checkbox-group
-    [size]="size"
-    [title]="title"
-    [helpText]="helpText"
-    [tooltip]="tooltip"
-    [tooltipToggle]="tooltipToggle"
-    [tooltipPosition]="tooltipPosition"
-  >
-    <fudis-checkbox
-      *ngFor="let option of optionsWithControls; index as i"
-      [controlName]="option.controlName"
-      [control]="option.control"
-      [label]="option.label"
-    ></fudis-checkbox>
-  </fudis-checkbox-group>`,
-});
-
-export const ExampleWithoutFormGroup = ExampleWithoutFormGroupTemplate.bind({});
-
-ExampleWithoutFormGroup.args = {
-  title: 'Choose your preferred fruits',
-  helpText: 'Pick at least one fruit.',
   size: 'lg',
   tooltip: 'Fruit sugar is great in small doces!',
   tooltipToggle: false,
