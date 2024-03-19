@@ -116,6 +116,10 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
       this._dialogParent.closeButtonPositionAbsolute = true;
       this._dialogParent.formTitle = this.title;
       this._dialogParent.formTitleLevel = this.titleLevel;
+      if (this.badge && this.badgeText) {
+        this._dialogParent.formBadge = this.badge;
+        this._dialogParent.formBadgeText = this.badgeText;
+      }
     }
   }
 

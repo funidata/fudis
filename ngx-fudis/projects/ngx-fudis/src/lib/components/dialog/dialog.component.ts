@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit, effect } from '@angular/core';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisTranslationService } from '../../services/translation/translation.service';
-import { FudisDialogSize } from '../../types/miscellaneous';
+import { FudisBadgeVariant, FudisDialogSize } from '../../types/miscellaneous';
 import { FudisHeadingLevel } from '../../types/typography';
 
 @Component({
@@ -45,6 +45,10 @@ export class DialogComponent implements OnInit, OnDestroy {
   public formTitleLevel: FudisHeadingLevel;
 
   public formTitle: string;
+
+  public formBadge: FudisBadgeVariant | null;
+
+  public formBadgeText: string | null;
 
   ngOnInit(): void {
     this._dialogService.setDialogOpenSignal(true);
