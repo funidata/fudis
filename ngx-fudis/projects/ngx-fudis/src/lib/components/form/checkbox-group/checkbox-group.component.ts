@@ -85,6 +85,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
     if (!this.formGroup) {
       this._internalFormGroup = true;
       this.formGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>({});
+      this._initialCheck(this.formGroup);
     }
   }
 

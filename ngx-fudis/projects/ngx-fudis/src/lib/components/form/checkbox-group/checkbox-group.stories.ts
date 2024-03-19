@@ -41,11 +41,31 @@ export default {
 const html = String.raw;
 
 const options = [
-  { controlName: 'apple', label: 'Apple' },
-  { controlName: 'fairTradeBanana', label: 'Fair trade banana' },
-  { controlName: 'pear', label: 'Pear' },
-  { controlName: 'pineapple', label: 'Pineapple' },
-  { controlName: 'orange', label: 'Orange' },
+  {
+    controlName: 'apple',
+    label: 'Apple',
+    control: new FormControl<boolean | null | undefined>(null),
+  },
+  {
+    controlName: 'fairTradeBanana',
+    label: 'Fair trade banana',
+    control: new FormControl<boolean | null | undefined>(null),
+  },
+  {
+    controlName: 'pear',
+    label: 'Pear',
+    control: new FormControl<boolean | null | undefined>(null),
+  },
+  {
+    controlName: 'pineapple',
+    label: 'Pineapple',
+    control: new FormControl<boolean | null | undefined>(null),
+  },
+  {
+    controlName: 'orange',
+    label: 'Orange',
+    control: new FormControl<boolean | null | undefined>(null),
+  },
 ];
 
 const basicFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
@@ -113,6 +133,8 @@ const ExampleWithDisabledTemplate: StoryFn<CheckboxGroupComponent> = (
   props: {
     ...args,
     formGroup: withDisabledFormGroupOptions,
+    checkboxChange: action('checkboxChange'),
+    groupChange: action('groupChange'),
     options,
   },
   template: html`<fudis-checkbox-group
@@ -123,9 +145,11 @@ const ExampleWithDisabledTemplate: StoryFn<CheckboxGroupComponent> = (
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
+    (handleChange)="groupChange($event)"
   >
     <fudis-checkbox
       *ngFor="let option of options"
+      (handleChange)="checkboxChange($event)"
       [controlName]="option.controlName"
       [label]="option.label"
     />
@@ -168,6 +192,8 @@ const ExampleWithMinMaxTemplate: StoryFn<CheckboxGroupComponent> = (
   props: {
     ...args,
     formGroup: withMinMaxFormGroupOptions,
+    checkboxChange: action('checkboxChange'),
+    groupChange: action('groupChange'),
     options,
   },
   template: html`<fudis-checkbox-group
@@ -178,9 +204,11 @@ const ExampleWithMinMaxTemplate: StoryFn<CheckboxGroupComponent> = (
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
+    (handleChange)="groupChange($event)"
   >
     <fudis-checkbox
       *ngFor="let option of options"
+      (handleChange)="checkboxChange($event)"
       [controlName]="option.controlName"
       [label]="option.label"
     />
@@ -191,6 +219,43 @@ export const ExampleWithMinMax = ExampleWithMinMaxTemplate.bind({});
 ExampleWithMinMax.args = {
   label: 'Choose your preferred fruits',
   helpText: 'Pick two to three fruits.',
+  size: 'lg',
+  tooltip: 'Fruit sugar is great in small doces!',
+  tooltipToggle: false,
+  tooltipPosition: 'right',
+};
+
+const ExampleWithoutFormGroupTemplate: StoryFn<CheckboxGroupComponent> = (
+  args: CheckboxGroupComponent,
+) => ({
+  props: {
+    ...args,
+    checkboxChange: action('checkboxChange'),
+    groupChange: action('groupChange'),
+    options,
+  },
+  template: html`<fudis-checkbox-group
+    [size]="size"
+    [label]="label"
+    [helpText]="helpText"
+    [tooltip]="tooltip"
+    [tooltipToggle]="tooltipToggle"
+    [tooltipPosition]="tooltipPosition"
+    (handleChange)="groupChange($event)"
+  >
+    <fudis-checkbox
+      *ngFor="let option of options"
+      (handleChange)="checkboxChange($event)"
+      [control]="option.control"
+      [label]="option.label"
+    />
+  </fudis-checkbox-group>`,
+});
+
+export const ExampleWithoutFormGroup = ExampleWithoutFormGroupTemplate.bind({});
+ExampleWithoutFormGroup.args = {
+  label: 'Choose your preferred fruits',
+  helpText: 'This Checkbox Group has no App provided FormGroup.',
   size: 'lg',
   tooltip: 'Fruit sugar is great in small doces!',
   tooltipToggle: false,
