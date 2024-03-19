@@ -213,7 +213,7 @@ describe('CheckboxComponent', () => {
         By.directive(CheckboxComponent),
       ).componentInstance;
 
-      const optionToMatch: FudisCheckboxOption = {
+      const optionToMatch: FudisCheckboxOption<object> = {
         id: 'fudis-checkbox-group-1-item-1',
         groupName: 'fudis-checkbox-group-1',
         controlName: 'apple',
@@ -223,7 +223,7 @@ describe('CheckboxComponent', () => {
 
       let correctOptionReceived = 'optionToMatch was not same!';
 
-      checkboxComponentToSpy.handleChange.subscribe((value: FudisCheckboxOption) => {
+      checkboxComponentToSpy.handleChange.subscribe((value: FudisCheckboxOption<object>) => {
         if (JSON.stringify(optionToMatch) === JSON.stringify(value)) {
           correctOptionReceived = 'all is fine';
         }

@@ -1,8 +1,12 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FudisCheckboxOption } from 'dist/ngx-fudis/lib/types/forms';
 import { FudisDialogService, FudisGroupValidators, FudisValidators } from 'ngx-fudis';
+
+type MyCheckboxType = {
+  controlName: string;
+  label: string;
+};
 
 type MyForm = {
   textInput: FormControl<string | null | number>;
@@ -73,7 +77,7 @@ export class DialogTestFormComponent {
 
   protected _greetingFromOpener: string;
 
-  checkboxOptions: FudisCheckboxOption[] = [
+  checkboxOptions: MyCheckboxType[] = [
     { controlName: 'blueberry', label: 'blueberry' },
     { controlName: 'cloudberry', label: 'cloudberry' },
     { controlName: 'raspberry', label: 'raspberry' },

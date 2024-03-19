@@ -6,7 +6,7 @@ export type FudisInputSize = 'sm' | 'md' | 'lg';
 
 export type FudisInputType = 'email' | 'number' | 'password' | 'tel' | 'text' | 'url';
 
-export interface FudisCheckboxOption {
+export type FudisCheckboxOption<T extends object> = T & {
   /** Unique id for single checkbox option */
   id?: string;
   /** Name for the group of checkboxes */
@@ -19,7 +19,9 @@ export interface FudisCheckboxOption {
   label: string;
   /** Is option selected */
   value?: boolean | null | undefined;
-}
+  /** To store additional data */
+  [key: string]: unknown;
+};
 
 export interface FudisRadioButtonOption {
   /** Unique id for single radio button option */
@@ -40,9 +42,11 @@ export type FudisSelectOption<T extends object> = T & {
   label: string;
   /** Is option disabled in the dropdown */
   disabled?: boolean;
+  /** */
+  fudisGeneratedHtmlId?: string;
   /** To store additional data */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 export type FudisFormErrorSummaryItem = {
