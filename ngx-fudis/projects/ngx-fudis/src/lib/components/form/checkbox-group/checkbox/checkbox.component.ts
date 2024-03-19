@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { CheckboxGroupComponent } from '../checkbox-group.component';
-import { FudisCheckboxOption } from '../../../../types/forms';
+import { FudisCheckboxChangeEvent, FudisCheckboxOption } from '../../../../types/forms';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -48,10 +48,7 @@ export class CheckboxComponent implements OnInit, OnDestroy {
   /**
    * Emits changed Checkbox and its control.
    */
-  @Output() handleChange = new EventEmitter<{
-    checkbox: FudisCheckboxOption<object>;
-    control: FormControl<boolean | null | undefined>;
-  }>();
+  @Output() handleChange = new EventEmitter<FudisCheckboxChangeEvent>();
 
   /**
    * If checkbox has focus

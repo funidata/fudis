@@ -10,7 +10,11 @@ import {
   Output,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FudisCheckboxGroupFormGroup, FudisInputSize } from '../../../types/forms';
+import {
+  FudisCheckboxGroupChangeEvent,
+  FudisCheckboxGroupFormGroup,
+  FudisInputSize,
+} from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 import { hasAtLeastOneRequiredOrMinValidator } from '../../../utilities/form/getValidators';
@@ -51,10 +55,7 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
   /**
    * Emit changed control's name and whole FormGroup when one Checkbox is clicked.
    */
-  @Output() handleChange = new EventEmitter<{
-    changedControlName: string;
-    formGroup: FormGroup<FudisCheckboxGroupFormGroup<object>>;
-  }>();
+  @Output() handleChange = new EventEmitter<FudisCheckboxGroupChangeEvent>();
 
   /**
    * To determine if focus has been moved out from the whole checkbox group, so possible errors will not show before that.

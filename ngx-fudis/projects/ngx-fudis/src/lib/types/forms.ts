@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDateFormats, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
 import { FudisLanguageAbbr } from './miscellaneous';
 
@@ -116,6 +116,16 @@ export interface FudisInputWithLanguageOptionsFormGroup {
 
 export type FudisCheckboxGroupFormGroup<T extends object> = T & {
   [key: string]: FormControl<boolean | null | undefined>;
+};
+
+export type FudisCheckboxChangeEvent = {
+  checkbox: FudisCheckboxOption<object>;
+  control: FormControl<boolean | null | undefined>;
+};
+
+export type FudisCheckboxGroupChangeEvent = {
+  changedControlName: string;
+  formGroup: FormGroup<FudisCheckboxGroupFormGroup<object>>;
 };
 
 export interface FudisDateRangeItem {

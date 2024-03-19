@@ -6,7 +6,11 @@ import { By } from '@angular/platform-browser';
 import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoint.service';
 import { FudisGridService } from '../../../../services/grid/grid.service';
 import { ContentDirective } from '../../../../directives/content-projection/content/content.directive';
-import { FudisCheckboxGroupFormGroup, FudisCheckboxOption } from '../../../../types/forms';
+import {
+  FudisCheckboxChangeEvent,
+  FudisCheckboxGroupFormGroup,
+  FudisCheckboxOption,
+} from '../../../../types/forms';
 import { FudisGroupValidators } from '../../../../utilities/form/groupValidators';
 import { CheckboxGroupComponent } from '../checkbox-group.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
@@ -21,18 +25,27 @@ import { ValidatorErrorMessageComponent } from '../../error-message/validator-er
 @Component({
   selector: 'fudis-mock-container',
   template: `<fudis-checkbox-group
-    [formGroup]="_testFromGroup"
-    [label]="'Choose minimum of one fruit'"
-  >
-    <fudis-checkbox
-      *ngFor="let option of _options"
-      [controlName]="option.controlName"
-      [label]="option.label"
-    />
-  </fudis-checkbox-group>`,
+      [formGroup]="testFromGroup"
+      [label]="'With Group. Choose minimum of one fruit'"
+    >
+      <fudis-checkbox
+        *ngFor="let option of _options"
+        [controlName]="option.controlName"
+        [label]="option.label"
+      />
+    </fudis-checkbox-group>
+    <fudis-checkbox-group [label]="'Without Group. Choose minimum of one fruit'">
+      <fudis-checkbox
+        [id]="'second-group'"
+        *ngFor="let option of optionsWithControls"
+        [controlName]="option.controlName"
+        [control]="option.control"
+        [label]="option.label"
+      />
+    </fudis-checkbox-group> `,
 })
 class MockContainerComponent {
-  protected _testFromGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+  public testFromGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
     {
       apple: new FormControl<boolean | null | undefined>(null),
       fairTradeBanana: new FormControl<boolean | null | undefined>(false),
@@ -52,6 +65,14 @@ class MockContainerComponent {
     { controlName: 'pear', label: 'Pear' },
     { controlName: 'pineapple', label: 'Pineapple' },
     { controlName: 'orange', label: 'Orange' },
+  ];
+
+  public optionsWithControls = [
+    { label: 'Apple', control: new FormControl(null) },
+    { controlName: 'fairTradeBanana', label: 'Fair trade banana', control: new FormControl(null) },
+    { controlName: 'pear', label: 'Pear', control: new FormControl(true) },
+    { label: 'Pineapple', control: new FormControl(true) },
+    { label: 'Orange', control: new FormControl(null) },
   ];
 }
 
@@ -86,7 +107,9 @@ describe('CheckboxComponent', () => {
 
   describe('Determine checked status from formControl value', () => {
     it('should create as unchecked, when control is null', () => {
-      const nullCheckbox = fixture.nativeElement.querySelector('[ng-reflect-control-name="apple"]');
+      const nullCheckbox = fixture.nativeElement.querySelector(
+        '#fudis-checkbox-group-1 [ng-reflect-control-name="apple"]',
+      );
       const input = nullCheckbox.querySelector('input');
       const inputValue: string | null | undefined = input.getAttribute('value');
       const checkedIcon = nullCheckbox.querySelector('fudis-icon');
@@ -102,7 +125,7 @@ describe('CheckboxComponent', () => {
 
     it('should create as unchecked, when control is false', () => {
       const falseCheckbox = fixture.nativeElement.querySelector(
-        '[ng-reflect-control-name="fairTradeBanana"]',
+        '#fudis-checkbox-group-1 [ng-reflect-control-name="fairTradeBanana"]',
       );
 
       const inputValue: string | null | undefined = falseCheckbox
@@ -117,7 +140,7 @@ describe('CheckboxComponent', () => {
 
     it('should create unchecked, when control value is undefined', () => {
       const undefinedCheckbox = fixture.nativeElement.querySelector(
-        '[ng-reflect-control-name="orange"]',
+        '#fudis-checkbox-group-1 [ng-reflect-control-name="orange"]',
       );
 
       const inputValue: string | null | undefined = undefinedCheckbox
@@ -132,7 +155,7 @@ describe('CheckboxComponent', () => {
 
     it('should create as checked, when control value is true', () => {
       const checkedCheckbox = fixture.nativeElement.querySelector(
-        '[ng-reflect-control-name="pear"]',
+        '#fudis-checkbox-group-1 [ng-reflect-control-name="pear"]',
       );
 
       const checkedIcon = checkedCheckbox.querySelector('fudis-icon[ng-reflect-icon="check"]');
@@ -147,7 +170,7 @@ describe('CheckboxComponent', () => {
 
     it('should create with disabled status, if control is set as disabled', () => {
       const checkedCheckbox = fixture.nativeElement.querySelector(
-        '[ng-reflect-control-name="pineapple"]',
+        '#fudis-checkbox-group-1 [ng-reflect-control-name="pineapple"]',
       );
 
       const checkedIcon = checkedCheckbox.querySelector(
@@ -172,7 +195,7 @@ describe('CheckboxComponent', () => {
   describe('Basic inputs and styles', () => {
     it('should create with correct label', () => {
       const checkedCheckbox = fixture.nativeElement.querySelector(
-        '[ng-reflect-control-name="fairTradeBanana"]',
+        '#fudis-checkbox-group-1 [ng-reflect-control-name="fairTradeBanana"]',
       );
 
       const label = checkedCheckbox.querySelector('.fudis-checkbox__content__label') as HTMLElement;
@@ -182,7 +205,7 @@ describe('CheckboxComponent', () => {
 
     it('should have proper CSS classes before, during and after when input focused', () => {
       const checkboxComponent = fixture.nativeElement.querySelector(
-        '[ng-reflect-control-name="fairTradeBanana"] .fudis-checkbox',
+        '#fudis-checkbox-group-1 [ng-reflect-control-name="fairTradeBanana"] .fudis-checkbox',
       );
 
       const labelBox: HTMLSpanElement = checkboxComponent.querySelector(
@@ -221,16 +244,16 @@ describe('CheckboxComponent', () => {
         value: true,
       };
 
-      let correctOptionReceived = 'optionToMatch was not same!';
+      checkboxComponentToSpy.handleChange.subscribe((value: FudisCheckboxChangeEvent) => {
+        if (value) {
+          expect(value.checkbox).toEqual(optionToMatch);
 
-      checkboxComponentToSpy.handleChange.subscribe((value: FudisCheckboxOption<object>) => {
-        if (JSON.stringify(optionToMatch) === JSON.stringify(value)) {
-          correctOptionReceived = 'all is fine';
+          expect(value.control.value).toEqual(true);
         }
       });
 
       const input: HTMLInputElement = fixture.debugElement.nativeElement.querySelector(
-        'input#fudis-checkbox-group-1-item-1',
+        '#fudis-checkbox-group-1 input#fudis-checkbox-group-1-item-1',
       );
 
       input.dispatchEvent(new MouseEvent('click'));
@@ -241,7 +264,6 @@ describe('CheckboxComponent', () => {
       );
       const inputValue = input.getAttribute('value');
 
-      expect(correctOptionReceived).toEqual('all is fine');
       expect(inputValue).toEqual('true');
       expect(icon).not.toBeNull();
     }));
