@@ -1,13 +1,15 @@
 import {
   ChangeDetectorRef,
   Component,
+  EventEmitter,
   Host,
   Input,
   OnChanges,
   OnInit,
   Optional,
+  Output,
 } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { FudisCheckboxGroupFormGroup, FudisInputSize } from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
@@ -32,14 +34,9 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
     super(_idService, _translationService, _changeDetectorRef);
   }
   /**
-   * FormGroup or FormArray for Checkbox group.
+   * FormGroup for Checkbox group. If provided, provide also `controlName` for each Checkbox children.
    */
   @Input() formGroup: FormGroup<FudisCheckboxGroupFormGroup<object>>;
-
-  /**
-   * FormArray for Checkbox group.
-   */
-  @Input() formArray: FormArray<FormControl<boolean | null | undefined>>;
 
   /**
    * Width size of the group.
@@ -50,6 +47,14 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
    * If component is a child of Form component, Form's Error Summary is visible,this component's control has errors and when this component is loaded for the first time, it will by default call Error Summary to reload itself again and mark control as touched. This is because if component is lazy loaded to the DOM after the initial reload errors call was made, errors of this component might not appear on the list. To disable this feature, set this to false.
    */
   @Input() errorSummaryReloadOnInit: boolean = true;
+
+  /**
+   * Emit changed control's name and whole FormGroup when one Checkbox is clicked.
+   */
+  @Output() handleChange = new EventEmitter<{
+    changedControlName: string;
+    formGroup: FormGroup<FudisCheckboxGroupFormGroup<object>>;
+  }>();
 
   /**
    * To determine if focus has been moved out from the whole checkbox group, so possible errors will not show before that.
@@ -77,41 +82,35 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
   public ngOnInit() {
     this._setParentId('checkbox-group');
 
-    if (this.formGroup && !this.formArray) {
-      this._initialCheck(this.formGroup);
-    } else if (this.formArray && !this.formGroup) {
-      this._initialCheck(this.formArray);
-    } else if (!this.formGroup) {
+    if (!this.formGroup) {
       this._internalFormGroup = true;
       this.formGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>({});
     }
   }
 
-  private _initialCheck(groupOrArray: FormGroup | FormArray): void {
-    if (groupOrArray.touched) {
+  private _initialCheck(group: FormGroup): void {
+    if (group.touched) {
       this._groupBlurredOut = true;
     } else {
       /**
        * Extend original markAllAsTouched function to change _groupBlurredOut value to 'true', so error messages are loaded when e.g. on Submit touched value is changed programatically.
        */
-
-      const originalMarkAllAsTouched = groupOrArray.markAllAsTouched;
-      groupOrArray.markAllAsTouched = () => {
-        originalMarkAllAsTouched.apply(groupOrArray);
+      const originalMarkAllAsTouched = group.markAllAsTouched;
+      group.markAllAsTouched = () => {
+        originalMarkAllAsTouched.apply(group);
         this._groupBlurredOut = true;
       };
     }
 
     if (this.errorSummaryReloadOnInit) {
-      this._reloadErrorSummaryOnLazyLoad(this._parentForm?.errorSummaryVisible, groupOrArray);
+      this._reloadErrorSummaryOnLazyLoad(this._parentForm?.errorSummaryVisible, group);
     }
   }
 
   public ngOnChanges(changes: FudisComponentChanges<CheckboxGroupComponent>): void {
-    if (changes.formGroup) {
+    if (changes.formGroup?.currentValue) {
       this._required = hasAtLeastOneRequiredOrMinValidator(this.formGroup);
-    } else if (changes.formArray) {
-      this._required = hasAtLeastOneRequiredOrMinValidator(this.formArray);
+      this._initialCheck(this.formGroup);
     }
   }
 
@@ -126,14 +125,10 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
     }
   }
 
-  /**
-   * Getter for if component has FormGroup, FormArray or neither as its control.
-   */
-  public getFormType(): 'group' | 'array' {
-    if (this.formGroup && !this.formArray) {
-      return 'group';
-    }
-
-    return 'array';
+  public triggerEmit(changedControl: string): void {
+    this.handleChange.emit({
+      changedControlName: changedControl,
+      formGroup: this.formGroup,
+    });
   }
 }

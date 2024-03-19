@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, effect } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
@@ -38,8 +38,6 @@ export class GuidanceComponent implements OnInit {
           this.control.markAsTouched();
         } else if (this.formGroup?.errors) {
           this.formGroup.markAllAsTouched();
-        } else if (this.formArray?.errors) {
-          this.formArray.markAllAsTouched();
         }
       }
     });
@@ -64,11 +62,6 @@ export class GuidanceComponent implements OnInit {
    * FormGroup of related FormGroup. E.g. InputWithLanguageOptions with FormGroup
    */
   @Input() formGroup: FormGroup;
-
-  /**
-   * FormArray of related FormArray. E. g. CheckboxGroup with FormArray.
-   */
-  @Input() formArray: FormArray;
 
   /**
    * Text displayed as guidance help text.

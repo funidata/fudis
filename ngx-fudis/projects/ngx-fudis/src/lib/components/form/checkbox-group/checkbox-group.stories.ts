@@ -1,5 +1,6 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import { action } from '@storybook/addon-actions';
 import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
 import { FudisCheckboxGroupFormGroup } from '../../../types/forms';
@@ -62,6 +63,8 @@ const ExampleTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupCom
   props: {
     ...args,
     formGroup: basicFormGroup,
+    checkboxChange: action('checkboxChange'),
+    groupChange: action('groupChange'),
     options,
   },
   template: html`<fudis-checkbox-group
@@ -72,9 +75,11 @@ const ExampleTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupCom
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
+    (handleChange)="groupChange($event)"
   >
     <fudis-checkbox
       *ngFor="let option of options"
+      (handleChange)="checkboxChange($event)"
       [controlName]="option.controlName"
       [label]="option.label"
     ></fudis-checkbox>
