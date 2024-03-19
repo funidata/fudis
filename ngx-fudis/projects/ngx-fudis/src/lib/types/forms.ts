@@ -13,8 +13,6 @@ export type FudisCheckboxOption<T extends object> = T & {
   groupName?: string;
   /** If using FormGroup, name of the option */
   controlName?: string;
-  /** If using FormArray, index of the option */
-  controlIndex?: number;
   /** Visible label that is shown in the UI */
   label: string;
   /** Is option selected */
