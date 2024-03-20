@@ -18,22 +18,24 @@
       <ng-container *ngIf="title && titleLevel">
         <div class="fudis-form__header__title">
           <ng-container *ngIf="_dialogParent">
-            <fudis-heading
-              class="fudis-form__header__title__dialog"
-              fudisDialogTitle
-              [marginBottom]="'xs'"
-              [size]="titleSize"
-              [level]="titleLevel"
-            >
-              {{ title }}
-              <ng-container *ngIf="badge && badgeText">
-                <fudis-badge
-                  class="fudis-form__header__title__badge"
-                  [variant]="badge"
-                  [content]="badgeText"
-                />
-              </ng-container>
-            </fudis-heading>
+            <div class="fudis-visually-hidden">
+              <fudis-heading
+                class="fudis-form__header__title__dialog"
+                fudisDialogTitle
+                [marginBottom]="'xs'"
+                [size]="titleSize"
+                [level]="titleLevel"
+              >
+                {{ title }}
+                <ng-container *ngIf="badge && badgeText">
+                  <fudis-badge
+                    class="fudis-form__header__title__badge"
+                    [variant]="badge"
+                    [content]="badgeText"
+                  />
+                </ng-container>
+              </fudis-heading>
+            </div>
           </ng-container>
           <ng-container *ngIf="!_dialogParent">
             <fudis-heading [marginBottom]="'xs'" [size]="titleSize" [level]="titleLevel">
@@ -47,11 +49,15 @@
               </ng-container>
             </fudis-heading>
           </ng-container>
+
           <ng-container *ngIf="helpText">
-            <fudis-body-text fudisSpacing [marginBottom]="'xs'">{{ helpText }}</fudis-body-text>
+            <div [class.fudis-visually-hidden]="_dialogParent">
+              <fudis-body-text fudisSpacing [marginBottom]="'xs'">{{ helpText }}</fudis-body-text>
+            </div>
           </ng-container>
         </div>
       </ng-container>
+
       <ng-container *ngIf="_headerContent">
         <div class="fudis-form__header__main__content">
           <ng-container *ngTemplateOutlet="_headerContent!.templateRef" />
@@ -66,20 +72,20 @@
         />
       </ng-container>
     </div>
+    <ng-container *ngIf="_headerActions?.type === 'form' && !_dialogParent">
+      <div class="fudis-form__header__actions">
+        <ng-container *ngTemplateOutlet="_headerActions!.templateRef" />
+      </div>
+    </ng-container>
+    <ng-container *ngIf="_mainContent?.type === 'form'">
+      <div class="fudis-form__content">
+        <ng-container *ngTemplateOutlet="_mainContent!.templateRef" />
+      </div>
+    </ng-container>
+    <ng-container *ngIf="_headerActions?.type === 'form' && _dialogParent">
+      <div class="fudis-form__header__actions__dialog">
+        <ng-container *ngTemplateOutlet="_headerActions!.templateRef" />
+      </div>
+    </ng-container>
   </div>
-  <ng-container *ngIf="_headerActions?.type === 'form' && !_dialogParent">
-    <div class="fudis-form__header__actions">
-      <ng-container *ngTemplateOutlet="_headerActions!.templateRef" />
-    </div>
-  </ng-container>
-  <ng-container *ngIf="_mainContent?.type === 'form'">
-    <div class="fudis-form__content">
-      <ng-container *ngTemplateOutlet="_mainContent!.templateRef" />
-    </div>
-  </ng-container>
-  <ng-container *ngIf="_headerActions?.type === 'form' && _dialogParent">
-    <div class="fudis-form__header__actions__dialog">
-      <ng-container *ngTemplateOutlet="_headerActions!.templateRef" />
-    </div>
-  </ng-container>
 </form>

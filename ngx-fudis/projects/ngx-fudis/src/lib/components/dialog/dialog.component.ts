@@ -42,13 +42,15 @@ export class DialogComponent implements OnInit, OnDestroy {
    */
   protected _closeLabel: string;
 
-  public formTitleLevel: FudisHeadingLevel;
+  public dialogFormTitleLevel: FudisHeadingLevel;
 
-  public formTitle: string;
+  public dialogFormTitle: string;
 
-  public formBadge: FudisBadgeVariant | null;
+  public dialogFormBadge: FudisBadgeVariant | null;
 
-  public formBadgeText: string | null;
+  public dialogFormBadgeText: string | null;
+
+  public dialogHelpText: string;
 
   ngOnInit(): void {
     this._dialogService.setDialogOpenSignal(true);

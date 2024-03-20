@@ -77,7 +77,7 @@ describe('DialogComponent', () => {
       component.closeButtonPositionAbsolute = true;
       fixture.detectChanges();
 
-      const closeButtonEl = getElement(fixture, '.fudis-dialog fudis-button');
+      const closeButtonEl = getElement(fixture, '.fudis-dialog__close');
 
       expect(closeButtonEl.className).toEqual('fudis-dialog__close fudis-dialog__close__absolute');
     });
