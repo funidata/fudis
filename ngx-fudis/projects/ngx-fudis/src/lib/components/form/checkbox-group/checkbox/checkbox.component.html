@@ -1,6 +1,8 @@
 <ng-container *ngIf="control">
   <label class="fudis-checkbox" [attr.for]="id" [id]="id + '-label'">
     <input
+      #inputRef
+      (click)="_checkboxClick($event)"
       type="checkbox"
       class="fudis-checkbox__input"
       [id]="id"

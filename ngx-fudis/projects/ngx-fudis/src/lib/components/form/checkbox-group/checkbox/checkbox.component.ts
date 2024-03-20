@@ -7,6 +7,9 @@ import {
   OnInit,
   ViewEncapsulation,
   OnDestroy,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { CheckboxGroupComponent } from '../checkbox-group.component';
@@ -19,11 +22,13 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./checkbox.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CheckboxComponent implements OnInit, OnDestroy {
+export class CheckboxComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private _idService: FudisIdService,
     @Host() protected _checkboxGroup: CheckboxGroupComponent,
   ) {}
+
+  @ViewChild('inputRef') private _inputRef: ElementRef<HTMLInputElement>;
 
   /**
    * Control name for this checkbox from FormGroup. Required if FormGroup is given to the parent. Used to link each Checkbox with their Checkbox Group parent's FormGroup.
@@ -85,6 +90,15 @@ export class CheckboxComponent implements OnInit, OnDestroy {
     }
   }
 
+  ngAfterViewInit(): void {
+    /**
+     * If Angular FormControl has 'disabled' property, it will bind this as HTML attribute as well. This prevents user to focus to it. This removes that attribute making checkbox again focusable. The binded click function _checkboxClick will then prevent toggling the checkbox, if control is disabled.
+     */
+    if (this.control.disabled) {
+      this._inputRef.nativeElement.removeAttribute('disabled');
+    }
+  }
+
   ngOnDestroy(): void {
     if (this._controlAddedToParent && this.controlName) {
       if (this._checkboxGroup.formGroup.controls[this.controlName]) {
@@ -129,5 +143,14 @@ export class CheckboxComponent implements OnInit, OnDestroy {
    */
   protected _onFocus(): void {
     this._focused = true;
+  }
+
+  /**
+   * If control is disabled, prevent toggling it.
+   */
+  _checkboxClick(event: Event) {
+    if (this.control.disabled) {
+      event.preventDefault();
+    }
   }
 }
