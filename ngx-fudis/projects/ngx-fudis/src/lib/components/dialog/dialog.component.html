@@ -12,27 +12,23 @@
 >
 </fudis-button>
 <div class="fudis-dialog fudis-dialog__size__{{ size }}" [attr.id]="_id">
-  <div
-    *ngIf="dialogFormTitle && dialogFormTitleLevel"
-    class="fudis-dialog__form__header"
-    aria-hidden="true"
-  >
+  <div *ngIf="title && titleLevel" class="fudis-dialog__form__header" aria-hidden="true">
     <fudis-heading
       fudisDialogTitle
-      [level]="dialogFormTitleLevel"
+      [level]="titleLevel"
       [marginBottom]="'xs'"
       class="fudis-dialog__form__header__title"
-      >{{ dialogFormTitle }}
-      <ng-container *ngIf="dialogFormBadge && dialogFormBadgeText">
+      >{{ title }}
+      <ng-container *ngIf="badge && badgeText">
         <fudis-badge
           class="fudis-dialog__form__header__title__badge"
-          [variant]="dialogFormBadge"
-          [content]="dialogFormBadgeText"
+          [variant]="badge"
+          [content]="badgeText"
         />
       </ng-container>
     </fudis-heading>
-    <ng-container *ngIf="dialogHelpText">
-      <fudis-body-text fudisSpacing [marginBottom]="'xs'">{{ dialogHelpText }}</fudis-body-text>
+    <ng-container *ngIf="helpText">
+      <fudis-body-text fudisSpacing [marginBottom]="'xs'">{{ helpText }}</fudis-body-text>
     </ng-container>
   </div>
   <ng-content></ng-content>

@@ -49,7 +49,6 @@
               </ng-container>
             </fudis-heading>
           </ng-container>
-
           <ng-container *ngIf="helpText">
             <div [class.fudis-visually-hidden]="_dialogParent">
               <fudis-body-text fudisSpacing [marginBottom]="'xs'">{{ helpText }}</fudis-body-text>
@@ -57,7 +56,6 @@
           </ng-container>
         </div>
       </ng-container>
-
       <ng-container *ngIf="_headerContent">
         <div class="fudis-form__header__main__content">
           <ng-container *ngTemplateOutlet="_headerContent!.templateRef" />
