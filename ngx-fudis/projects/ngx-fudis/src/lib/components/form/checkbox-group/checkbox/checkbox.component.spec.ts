@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
@@ -25,6 +25,7 @@ import { ValidatorErrorMessageComponent } from '../../error-message/validator-er
 @Component({
   selector: 'fudis-mock-container',
   template: `<fudis-checkbox-group
+      #firstGroup
       [formGroup]="testFromGroup"
       [label]="'With Group. Choose minimum of one fruit'"
     >
@@ -34,10 +35,10 @@ import { ValidatorErrorMessageComponent } from '../../error-message/validator-er
         [label]="option.label"
       />
     </fudis-checkbox-group>
-    <fudis-checkbox-group [label]="'Without Group. Choose minimum of one fruit'">
+    <fudis-checkbox-group #secondGroup [label]="'Without Group. Choose minimum of one fruit'">
       <fudis-checkbox
-        [id]="'second-group'"
         *ngFor="let option of optionsWithControls"
+        [id]="option.id"
         [controlName]="option.controlName"
         [control]="option.control"
         [label]="option.label"
@@ -45,6 +46,9 @@ import { ValidatorErrorMessageComponent } from '../../error-message/validator-er
     </fudis-checkbox-group> `,
 })
 class MockContainerComponent {
+  @ViewChild('firstGroup') firstGroup: CheckboxGroupComponent;
+  @ViewChild('secondGroup') secondGroup: CheckboxGroupComponent;
+
   public testFromGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
     {
       apple: new FormControl<boolean | null | undefined>(null),
@@ -72,12 +76,14 @@ class MockContainerComponent {
     { controlName: 'fairTradeBanana', label: 'Fair trade banana', control: new FormControl(null) },
     { controlName: 'pear', label: 'Pear', control: new FormControl(true) },
     { label: 'Pineapple', control: new FormControl(true) },
-    { label: 'Orange', control: new FormControl(null) },
+    { label: 'Orange', control: new FormControl(null), id: 'checkbox-with-orange-id' },
   ];
 }
 
 describe('CheckboxComponent', () => {
   let fixture: ComponentFixture<MockContainerComponent> | ComponentFixture<CheckboxComponent>;
+
+  let mockComponent: MockContainerComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -101,6 +107,7 @@ describe('CheckboxComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MockContainerComponent);
+    mockComponent = fixture.componentInstance;
 
     fixture.detectChanges();
   });
@@ -267,5 +274,27 @@ describe('CheckboxComponent', () => {
       expect(inputValue).toEqual('true');
       expect(icon).not.toBeNull();
     }));
+  });
+
+  describe('With FormControl provided', () => {
+    it('should have updated FormGroup in the parent correctly', () => {
+      const mockComponentFormGroupControls = mockComponent.secondGroup.formGroup.controls;
+
+      const expectedKeys = [
+        'fudis-checkbox-group-2-item-1',
+        'fairTradeBanana',
+        'pear',
+        'fudis-checkbox-group-2-item-4',
+        'checkbox-with-orange-id',
+      ];
+
+      const receivedKeys: string[] = [];
+
+      Object.keys(mockComponentFormGroupControls).forEach((key) => {
+        receivedKeys.push(key);
+      });
+
+      expect(expectedKeys).toEqual(receivedKeys);
+    });
   });
 });

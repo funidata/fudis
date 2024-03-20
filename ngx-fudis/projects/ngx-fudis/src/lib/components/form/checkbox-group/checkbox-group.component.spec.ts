@@ -5,7 +5,11 @@ import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
 import { FieldSetComponent } from '../fieldset/fieldset.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
-import { FudisCheckboxGroupChangeEvent, FudisCheckboxGroupFormGroup } from '../../../types/forms';
+import {
+  FudisCheckboxGroupChangeEvent,
+  FudisCheckboxGroupFormGroup,
+  FudisInputSize,
+} from '../../../types/forms';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { FudisGridService } from '../../../services/grid/grid.service';
@@ -41,6 +45,7 @@ type TestFormGroup = {
 @Component({
   selector: 'fudis-mock-component',
   template: ` <fudis-checkbox-group
+      #firstGroup
       [id]="'first-group'"
       [formGroup]="testFromGroup"
       [label]="'With Form Group. Choose minimum of one fruit'"
@@ -68,6 +73,7 @@ type TestFormGroup = {
     </fudis-checkbox-group>`,
 })
 class MockContainerComponent {
+  @ViewChild('firstGroup') firstGroup: CheckboxGroupComponent;
   @ViewChild('secondGroup') secondGroup: CheckboxGroupComponent;
 
   public testFromGroup = new FormGroup<TestFormGroup>(
@@ -106,8 +112,6 @@ class MockContainerComponent {
     this.eventReceived = event;
   }
 }
-
-//TODO: Should write test for size, id, setGroupBlurredOut.
 
 describe('CheckboxGroupComponent', () => {
   let component: CheckboxGroupComponent;
@@ -172,6 +176,39 @@ describe('CheckboxGroupComponent', () => {
       ) as HTMLElement;
 
       expect(requiredText.textContent).toContain('(Required)');
+    });
+
+    it('should pass correct size values to the Fieldset', () => {
+      const sizes: FudisInputSize[] = ['sm', 'md', 'lg'];
+
+      sizes.forEach((size) => {
+        component.size = size;
+        fixture.detectChanges();
+
+        const fieldsetElement = fixture.nativeElement.querySelector(
+          'fudis-fieldset .fudis-fieldset',
+        ) as HTMLFieldSetElement;
+        expect(fieldsetElement.classList).toContain(`fudis-input-size__${size}`);
+      });
+    });
+
+    it('should pass correct id', () => {
+      component.id = 'my-custom-checkbox-group';
+      fixture.detectChanges();
+
+      const fieldsetElement = fixture.nativeElement.querySelector(
+        'fudis-fieldset .fudis-fieldset',
+      ) as HTMLFieldSetElement;
+
+      expect(fieldsetElement.getAttribute('id')).toEqual('my-custom-checkbox-group');
+    });
+
+    it('should generate correct id', () => {
+      const fieldsetElement = fixture.nativeElement.querySelector(
+        'fudis-fieldset .fudis-fieldset',
+      ) as HTMLFieldSetElement;
+
+      expect(fieldsetElement.getAttribute('id')).toEqual('fudis-checkbox-group-1');
     });
   });
 
