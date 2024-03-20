@@ -3,6 +3,7 @@ import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisDialogSize } from '../../types/miscellaneous';
+import { FudisHeadingLevel } from '../../types/typography';
 
 @Component({
   selector: 'fudis-dialog',
@@ -40,6 +41,10 @@ export class DialogComponent implements OnInit, OnDestroy {
    * Internal translated aria-label for top right close button
    */
   protected _closeLabel: string;
+
+  public formTitleLevel: FudisHeadingLevel;
+
+  public formTitle: string;
 
   ngOnInit(): void {
     this._dialogService.setDialogOpenSignal(true);

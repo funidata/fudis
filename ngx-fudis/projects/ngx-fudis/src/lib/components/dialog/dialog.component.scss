@@ -10,11 +10,11 @@
 
   &__close {
     float: right;
+    top: spacing.$spacing-sm;
+    right: spacing.$spacing-sm;
 
     &__absolute {
       position: absolute;
-      top: 0;
-      right: 0;
       float: initial;
     }
   }
