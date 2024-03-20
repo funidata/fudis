@@ -9,9 +9,9 @@
   max-width: calc(100vw - (2 * spacing.$spacing-sm));
 
   &__close {
-    float: right;
     top: spacing.$spacing-sm;
     right: spacing.$spacing-sm;
+    float: right;
 
     &__absolute {
       position: absolute;
