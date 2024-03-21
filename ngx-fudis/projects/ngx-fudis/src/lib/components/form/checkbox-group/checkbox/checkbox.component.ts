@@ -28,6 +28,9 @@ export class CheckboxComponent implements OnInit, OnDestroy, AfterViewInit {
     @Host() protected _checkboxGroup: CheckboxGroupComponent,
   ) {}
 
+  /**
+   * HTML input element of checkbox
+   */
   @ViewChild('inputRef') private _inputRef: ElementRef<HTMLInputElement>;
 
   /**
@@ -60,6 +63,9 @@ export class CheckboxComponent implements OnInit, OnDestroy, AfterViewInit {
    */
   protected _focused = false;
 
+  /**
+   * Boolean for syncing, if this Checkbox had 'control' property provided and parent had no 'formGroup' provided.
+   */
   private _controlAddedToParent: boolean = false;
 
   ngOnInit(): void {
@@ -80,11 +86,15 @@ export class CheckboxComponent implements OnInit, OnDestroy, AfterViewInit {
       this.control = this._checkboxGroup.formGroup.controls[this.controlName];
     } else if (this.control && this._checkboxGroup.internalFormGroup) {
       /**
-       * If parent has no FormGroup provided, add this control to internally created FormGroup.
+       * If no name was provided, use id instead.
        */
       if (!this.controlName) {
         this.controlName = this.id;
       }
+
+      /**
+       * If parent has no FormGroup provided, add this control to internally created FormGroup.
+       */
       this._checkboxGroup.formGroup.addControl(this.controlName, this.control);
       this._controlAddedToParent = true;
     }
@@ -119,12 +129,19 @@ export class CheckboxComponent implements OnInit, OnDestroy, AfterViewInit {
       value: this._checkboxGroup.formGroup.controls[this.controlName].value,
     };
 
+    /**
+     * This Checkbox's emit
+     */
     this.handleChange.emit({ checkbox: optionToEmit, control: this.control });
+
+    /**
+     * Call parent's function, which trigger's Checkbox Group's emit
+     */
     this._checkboxGroup.triggerEmit(this.controlName);
   }
 
   /**
-   * When focusing out from checkbox, determine if next focus target is outside of the same checkbox group. If yes, then tell parent Checkbox Group, that focus has moved outside.
+   * When focusing out from checkbox, determine if next focus target is outside of the same checkbox group. If yes, then tell parent Checkbox Group, that focus has moved outside. --> If there are validation errors, those should become visible.
    */
   protected _onBlur(event: FocusEvent): void {
     this._focused = false;

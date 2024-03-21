@@ -4,7 +4,6 @@ import {
   EventEmitter,
   Host,
   Input,
-  OnChanges,
   OnInit,
   Optional,
   Output,
@@ -21,14 +20,13 @@ import { hasAtLeastOneRequiredOrMinValidator } from '../../../utilities/form/get
 import { FormComponent } from '../form/form.component';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FudisComponentChanges } from '../../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-checkbox-group',
   templateUrl: './checkbox-group.component.html',
   styleUrls: ['./checkbox-group.component.scss'],
 })
-export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
+export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnInit {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
     _idService: FudisIdService,
@@ -67,15 +65,21 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
    */
   protected _required: boolean = false;
 
+  /**
+   * Boolean to sync parent Checkbox Group and child Checkboxes if component uses internally created FormGroup or one provided from the App.
+   */
   protected _internalFormGroup: boolean = false;
 
   /**
-   * Getter for _groupBlurredOut.
+   * Getter for _groupBlurredOut boolean.
    */
   get groupBlurredOut(): boolean {
     return this._groupBlurredOut;
   }
 
+  /**
+   * Getter for _internalFormGroup boolean
+   */
   get internalFormGroup(): boolean {
     return this._internalFormGroup;
   }
@@ -83,11 +87,20 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
   public ngOnInit() {
     this._setParentId('checkbox-group');
 
+    /**
+     * If there's no formGroup provided when component is initialised, create one internally.
+     */
     if (!this.formGroup) {
       this._internalFormGroup = true;
       this.formGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>({});
-      this._initialCheck(this.formGroup);
+    } else {
+      /**
+       * Validation check can be currently be done only for App provided formGroup
+       */
+      this._required = hasAtLeastOneRequiredOrMinValidator(this.formGroup);
     }
+
+    this._initialCheck(this.formGroup);
   }
 
   private _initialCheck(group: FormGroup): void {
@@ -109,13 +122,6 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
     }
   }
 
-  public ngOnChanges(changes: FudisComponentChanges<CheckboxGroupComponent>): void {
-    if (changes.formGroup?.currentValue) {
-      this._required = hasAtLeastOneRequiredOrMinValidator(this.formGroup);
-      this._initialCheck(this.formGroup);
-    }
-  }
-
   /**
    * Used to display possible error messages only when focus has moved out from all the group's checkboxes.
    */
@@ -127,9 +133,13 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
     }
   }
 
-  public triggerEmit(changedControl: string): void {
+  /**
+   * When child Checkbox component is clicked, it calls this parent's function, which will then trigger Output emit.
+   * @param changedControlName name of the clicked control
+   */
+  public triggerEmit(changedControlName: string): void {
     this.handleChange.emit({
-      changedControlName: changedControl,
+      changedControlName: changedControlName,
       formGroup: this.formGroup,
     });
   }
