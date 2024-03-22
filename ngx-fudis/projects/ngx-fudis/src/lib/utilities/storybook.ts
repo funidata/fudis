@@ -66,6 +66,22 @@ export const checkboxGroupControlsExclude: RegExp = excludeRegex([
   'formGroup',
 ]);
 
+const descriptionListCommonExclude: string[] = [
+  'align',
+  'alignItemsX',
+  'alignItemsY',
+  'classes',
+  'columnGap',
+  'columns',
+  'serviceDefaults',
+  'marginBottom',
+  'marginTop',
+  'rowGap',
+  'width',
+];
+
+export const descriptionListExclude: RegExp = excludeRegex([...descriptionListCommonExclude]);
+
 export const formExclude: RegExp = excludeRegex([
   'id',
   'align',
