@@ -18,5 +18,5 @@ export class LinkApiDirective {
   /**
    * Set browser focus to link on the first load.
    */
-  @Input() initialFocus: boolean = true;
+  @Input() initialFocus: boolean = false;
 }
