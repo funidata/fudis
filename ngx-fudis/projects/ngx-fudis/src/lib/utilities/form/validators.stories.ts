@@ -1,11 +1,12 @@
 import { StoryFn, Meta, applicationConfig } from '@storybook/angular';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { BehaviorSubject } from 'rxjs';
 import { FudisValidators } from './validators';
 // import { FudisGroupValidators } from './groupValidators';
 import readme from './readme.mdx';
+import { FudisGroupValidators } from './groupValidators';
 // import { FudisCheckboxGroupFormGroup } from '../../types/forms';
 
 export default {
@@ -23,36 +24,36 @@ export default {
 } as Meta;
 const html = String.raw;
 
-// const berryFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
-//   {
-//     strawberry: new FormControl<boolean | null | undefined>(null),
-//     cloudberry: new FormControl<boolean | null | undefined>(null),
-//     raspberry: new FormControl<boolean | null | undefined>(null),
-//   },
-//   [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Pick at least one berry'))],
-// );
+const berryFormGroup = new FormGroup(
+  {
+    strawberry: new FormControl<boolean | null | undefined>(null),
+    cloudberry: new FormControl<boolean | null | undefined>(null),
+    raspberry: new FormControl<boolean | null | undefined>(null),
+  },
+  [FudisGroupValidators.atLeastOneRequired('Pick at least one berry')],
+);
 
-// const fruitMinFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
-//   {
-//     apple: new FormControl<boolean | null | undefined>(null),
-//     banana: new FormControl<boolean | null | undefined>(null),
-//     orange: new FormControl<boolean | null | undefined>(null),
-//     grapefruit: new FormControl<boolean | null | undefined>(null),
-//     pineapple: new FormControl<boolean | null | undefined>(null),
-//   },
-//   [FudisGroupValidators.min({ value: 2, message: 'Pick at least two fruits' })],
-// );
+const fruitMinFormGroup = new FormGroup(
+  {
+    apple: new FormControl<boolean | null | undefined>(null),
+    banana: new FormControl<boolean | null | undefined>(null),
+    orange: new FormControl<boolean | null | undefined>(null),
+    grapefruit: new FormControl<boolean | null | undefined>(null),
+    pineapple: new FormControl<boolean | null | undefined>(null),
+  },
+  [FudisGroupValidators.min({ value: 2, message: 'Pick at least two fruits' })],
+);
 
-// const fruitMaxFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
-//   {
-//     apple: new FormControl<boolean | null | undefined>(null),
-//     banana: new FormControl<boolean | null | undefined>(null),
-//     orange: new FormControl<boolean | null | undefined>(null),
-//     grapefruit: new FormControl<boolean | null | undefined>(null),
-//     pineapple: new FormControl<boolean | null | undefined>(null),
-//   },
-//   [FudisGroupValidators.max({ value: 3, message: 'Three is the maximum amount of fruits' })],
-// );
+const fruitMaxFormGroup = new FormGroup(
+  {
+    apple: new FormControl<boolean | null | undefined>(null),
+    banana: new FormControl<boolean | null | undefined>(null),
+    orange: new FormControl<boolean | null | undefined>(null),
+    grapefruit: new FormControl<boolean | null | undefined>(null),
+    pineapple: new FormControl<boolean | null | undefined>(null),
+  },
+  [FudisGroupValidators.max({ value: 3, message: 'Three is the maximum amount of fruits' })],
+);
 
 const ValidatorsTemplate: StoryFn = (args) => ({
   props: {
@@ -71,7 +72,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
     },
     maxLengthTextInput: {
       control: new FormControl(
-        '',
+        'Focus and blur me! This control was initialised with a really long string, so error would trigger. User cannot normally type over defined maxLength of characters.',
         FudisValidators.maxLength(20, 'Input should not be over 20 characters'),
       ),
     },
@@ -109,34 +110,34 @@ const ValidatorsTemplate: StoryFn = (args) => ({
     //     }),
     //   ]),
     // },
-    // checkboxGroupAtLeastOneRequired: {
-    //   formGroup: berryFormGroup,
-    //   options: [
-    //     { controlName: 'strawberry', label: 'Strawberry' },
-    //     { controlName: 'cloudberry', label: 'Cloudberry' },
-    //     { controlName: 'raspberry', label: 'Raspberry' },
-    //   ],
-    // },
-    // checkboxGroupMin: {
-    //   formGroup: fruitMinFormGroup,
-    //   options: [
-    //     { controlName: 'apple', label: 'Apple' },
-    //     { controlName: 'banana', label: 'Banana' },
-    //     { controlName: 'orange', label: 'Orange' },
-    //     { controlName: 'grapefruit', label: 'Grapefruit' },
-    //     { controlName: 'pineapple', label: 'Pineapple' },
-    //   ],
-    // },
-    // checkboxGroupMax: {
-    //   formGroup: fruitMaxFormGroup,
-    //   options: [
-    //     { controlName: 'apple', label: 'Apple' },
-    //     { controlName: 'banana', label: 'Banana' },
-    //     { controlName: 'orange', label: 'Orange' },
-    //     { controlName: 'grapefruit', label: 'Grapefruit' },
-    //     { controlName: 'pineapple', label: 'Pineapple' },
-    //   ],
-    // },
+    checkboxGroupAtLeastOneRequired: {
+      formGroup: berryFormGroup,
+      options: [
+        { controlName: 'strawberry', label: 'Strawberry' },
+        { controlName: 'cloudberry', label: 'Cloudberry' },
+        { controlName: 'raspberry', label: 'Raspberry' },
+      ],
+    },
+    checkboxGroupMin: {
+      formGroup: fruitMinFormGroup,
+      options: [
+        { controlName: 'apple', label: 'Apple' },
+        { controlName: 'banana', label: 'Banana' },
+        { controlName: 'orange', label: 'Orange' },
+        { controlName: 'grapefruit', label: 'Grapefruit' },
+        { controlName: 'pineapple', label: 'Pineapple' },
+      ],
+    },
+    checkboxGroupMax: {
+      formGroup: fruitMaxFormGroup,
+      options: [
+        { controlName: 'apple', label: 'Apple' },
+        { controlName: 'banana', label: 'Banana' },
+        { controlName: 'orange', label: 'Orange' },
+        { controlName: 'grapefruit', label: 'Grapefruit' },
+        { controlName: 'pineapple', label: 'Pineapple' },
+      ],
+    },
   },
   template: html`
     <fudis-grid [columns]="2" [marginBottom]="'xl'">
@@ -163,12 +164,12 @@ const ValidatorsTemplate: StoryFn = (args) => ({
       />
       <fudis-text-input [label]="'Pattern validator'" [control]="patternTextInput.control" />
     </fudis-grid>
-    <!--  <hr class="fudis-hr" />
+    <hr class="fudis-hr" />
     <fudis-grid [columns]="2" [marginTop]="'xl'">
       <fudis-heading [level]="3">Fudis Group Validators</fudis-heading>
       <fudis-grid-item [columns]="2">
         <fudis-checkbox-group
-          [title]="'At Least One Required Group Validator'"
+          [label]="'At Least One Required Group Validator'"
           [formGroup]="checkboxGroupAtLeastOneRequired.formGroup"
         >
           <fudis-checkbox
@@ -179,7 +180,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
         </fudis-checkbox-group>
       </fudis-grid-item>
       <fudis-checkbox-group
-        [title]="'Min Group Validator'"
+        [label]="'Min Group Validator'"
         [formGroup]="checkboxGroupMin.formGroup"
       >
         <fudis-checkbox
@@ -189,7 +190,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
         />
       </fudis-checkbox-group>
       <fudis-checkbox-group
-        [title]="'Max Group Validator'"
+        [label]="'Max Group Validator'"
         [formGroup]="checkboxGroupMax.formGroup"
       >
         <fudis-checkbox
@@ -198,7 +199,7 @@ const ValidatorsTemplate: StoryFn = (args) => ({
           [label]="option.label"
         />
       </fudis-checkbox-group>
-    </fudis-grid> -->
+    </fudis-grid>
   `,
 });
 

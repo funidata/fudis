@@ -1,13 +1,15 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import { action } from '@storybook/addon-actions';
 import { BehaviorSubject } from 'rxjs';
 import { CheckboxGroupComponent } from './checkbox-group.component';
 import { FudisCheckboxGroupFormGroup } from '../../../types/forms';
+import docs from './checkbox-group.docs.mdx';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { checkboxGroupControlsExclude } from '../../../utilities/storybook';
 
 export default {
-  title: 'Components/Form/Checkbox Group/With Form Group',
+  title: 'Components/Form/Checkbox Group',
   component: CheckboxGroupComponent,
   decorators: [
     moduleMetadata({
@@ -17,7 +19,7 @@ export default {
   ],
   parameters: {
     docs: {
-      autodocs: false,
+      page: docs,
     },
     controls: { exclude: checkboxGroupControlsExclude },
   },
@@ -39,11 +41,31 @@ export default {
 const html = String.raw;
 
 const options = [
-  { controlName: 'apple', label: 'Apple' },
-  { controlName: 'fairTradeBanana', label: 'Fair trade banana' },
-  { controlName: 'pear', label: 'Pear' },
-  { controlName: 'pineapple', label: 'Pineapple' },
-  { controlName: 'orange', label: 'Orange' },
+  {
+    controlName: 'apple',
+    label: 'Apple',
+    control: new FormControl<boolean | null | undefined>(null),
+  },
+  {
+    controlName: 'fairTradeBanana',
+    label: 'Fair trade banana',
+    control: new FormControl<boolean | null | undefined>(null),
+  },
+  {
+    controlName: 'pear',
+    label: 'Pear',
+    control: new FormControl<boolean | null | undefined>(null),
+  },
+  {
+    controlName: 'pineapple',
+    label: 'Pineapple',
+    control: new FormControl<boolean | null | undefined>(null),
+  },
+  {
+    controlName: 'orange',
+    label: 'Orange',
+    control: new FormControl<boolean | null | undefined>(null),
+  },
 ];
 
 const basicFormGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>(
@@ -61,6 +83,8 @@ const ExampleTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupCom
   props: {
     ...args,
     formGroup: basicFormGroup,
+    checkboxChange: action('checkboxChange'),
+    groupChange: action('groupChange'),
     options,
   },
   template: html`<fudis-checkbox-group
@@ -71,9 +95,11 @@ const ExampleTemplate: StoryFn<CheckboxGroupComponent> = (args: CheckboxGroupCom
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
+    (handleChange)="groupChange($event)"
   >
     <fudis-checkbox
       *ngFor="let option of options"
+      (handleChange)="checkboxChange($event)"
       [controlName]="option.controlName"
       [label]="option.label"
     ></fudis-checkbox>
@@ -107,6 +133,8 @@ const ExampleWithDisabledTemplate: StoryFn<CheckboxGroupComponent> = (
   props: {
     ...args,
     formGroup: withDisabledFormGroupOptions,
+    checkboxChange: action('checkboxChange'),
+    groupChange: action('groupChange'),
     options,
   },
   template: html`<fudis-checkbox-group
@@ -117,9 +145,11 @@ const ExampleWithDisabledTemplate: StoryFn<CheckboxGroupComponent> = (
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
+    (handleChange)="groupChange($event)"
   >
     <fudis-checkbox
       *ngFor="let option of options"
+      (handleChange)="checkboxChange($event)"
       [controlName]="option.controlName"
       [label]="option.label"
     />
@@ -162,6 +192,8 @@ const ExampleWithMinMaxTemplate: StoryFn<CheckboxGroupComponent> = (
   props: {
     ...args,
     formGroup: withMinMaxFormGroupOptions,
+    checkboxChange: action('checkboxChange'),
+    groupChange: action('groupChange'),
     options,
   },
   template: html`<fudis-checkbox-group
@@ -172,9 +204,11 @@ const ExampleWithMinMaxTemplate: StoryFn<CheckboxGroupComponent> = (
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
+    (handleChange)="groupChange($event)"
   >
     <fudis-checkbox
       *ngFor="let option of options"
+      (handleChange)="checkboxChange($event)"
       [controlName]="option.controlName"
       [label]="option.label"
     />
@@ -191,63 +225,37 @@ ExampleWithMinMax.args = {
   tooltipPosition: 'right',
 };
 
-const optionsWithControls = [
-  {
-    controlName: 'apple',
-    label: 'Apple',
-    control: new FormControl<boolean | null | undefined>(null),
-  },
-  {
-    controlName: 'fairTradeBanana',
-    label: 'Fair trade banana',
-    control: new FormControl<boolean | null | undefined>(null),
-  },
-  {
-    controlName: 'pear',
-    label: 'Pear',
-    control: new FormControl<boolean | null | undefined>(null),
-  },
-  {
-    controlName: 'pineapple',
-    label: 'Pineapple',
-    control: new FormControl<boolean | null | undefined>(null),
-  },
-  {
-    controlName: 'orange',
-    label: 'Orange',
-    control: new FormControl<boolean | null | undefined>(null),
-  },
-];
-
 const ExampleWithoutFormGroupTemplate: StoryFn<CheckboxGroupComponent> = (
   args: CheckboxGroupComponent,
 ) => ({
   props: {
     ...args,
-    optionsWithControls,
+    checkboxChange: action('checkboxChange'),
+    groupChange: action('groupChange'),
+    options,
   },
   template: html`<fudis-checkbox-group
     [size]="size"
-    [title]="title"
+    [label]="label"
     [helpText]="helpText"
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
+    (handleChange)="groupChange($event)"
   >
     <fudis-checkbox
-      *ngFor="let option of optionsWithControls; index as i"
-      [controlName]="option.controlName"
+      *ngFor="let option of options"
+      (handleChange)="checkboxChange($event)"
       [control]="option.control"
       [label]="option.label"
-    ></fudis-checkbox>
+    />
   </fudis-checkbox-group>`,
 });
 
 export const ExampleWithoutFormGroup = ExampleWithoutFormGroupTemplate.bind({});
-
 ExampleWithoutFormGroup.args = {
-  title: 'Choose your preferred fruits',
-  helpText: 'Pick at least one fruit.',
+  label: 'Choose your preferred fruits',
+  helpText: 'This Checkbox Group has no App provided FormGroup.',
   size: 'lg',
   tooltip: 'Fruit sugar is great in small doces!',
   tooltipToggle: false,

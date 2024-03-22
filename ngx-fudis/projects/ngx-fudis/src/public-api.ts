@@ -13,8 +13,8 @@ export { BodyTextComponent } from './lib/components/typography/body-text/body-te
 export { BreadcrumbsComponent } from './lib/components/breadcrumbs/breadcrumbs.component';
 export { BreadcrumbsItemComponent } from './lib/components/breadcrumbs/breadcrumbs-item/breadcrumbs-item.component';
 export { ButtonComponent } from './lib/components/button/button.component';
-// export { CheckboxComponent } from './lib/components/form/checkbox-group/checkbox/checkbox.component';
-// export { CheckboxGroupComponent } from './lib/components/form/checkbox-group/checkbox-group.component';
+export { CheckboxComponent } from './lib/components/form/checkbox-group/checkbox/checkbox.component';
+export { CheckboxGroupComponent } from './lib/components/form/checkbox-group/checkbox-group.component';
 // export { DatepickerComponent } from './lib/components/form/date/datepicker/datepicker.component';
 // export { DateRangeComponent } from './lib/components/form/date/date-range/date-range.component';
 export {

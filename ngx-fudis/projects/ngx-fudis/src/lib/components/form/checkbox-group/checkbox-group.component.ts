@@ -1,28 +1,32 @@
 import {
   ChangeDetectorRef,
   Component,
+  EventEmitter,
   Host,
   Input,
-  OnChanges,
   OnInit,
   Optional,
+  Output,
 } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { FudisCheckboxGroupFormGroup, FudisInputSize } from '../../../types/forms';
+import { FormGroup } from '@angular/forms';
+import {
+  FudisCheckboxGroupChangeEvent,
+  FudisCheckboxGroupFormGroup,
+  FudisInputSize,
+} from '../../../types/forms';
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 import { hasAtLeastOneRequiredOrMinValidator } from '../../../utilities/form/getValidators';
 import { FormComponent } from '../form/form.component';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FudisComponentChanges } from '../../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-checkbox-group',
   templateUrl: './checkbox-group.component.html',
   styleUrls: ['./checkbox-group.component.scss'],
 })
-export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnInit, OnChanges {
+export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnInit {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
     _idService: FudisIdService,
@@ -32,14 +36,9 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
     super(_idService, _translationService, _changeDetectorRef);
   }
   /**
-   * FormGroup or FormArray for Checkbox group.
+   * FormGroup for Checkbox group. If provided, provide also `controlName` for each Checkbox children.
    */
   @Input() formGroup: FormGroup<FudisCheckboxGroupFormGroup<object>>;
-
-  /**
-   * FormArray for Checkbox group.
-   */
-  @Input() formArray: FormArray<FormControl<boolean | null | undefined>>;
 
   /**
    * Width size of the group.
@@ -52,6 +51,11 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
   @Input() errorSummaryReloadOnInit: boolean = true;
 
   /**
+   * Emit changed control's name and whole FormGroup when one Checkbox is clicked.
+   */
+  @Output() handleChange = new EventEmitter<FudisCheckboxGroupChangeEvent>();
+
+  /**
    * To determine if focus has been moved out from the whole checkbox group, so possible errors will not show before that.
    */
   private _groupBlurredOut = false;
@@ -61,15 +65,21 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
    */
   protected _required: boolean = false;
 
+  /**
+   * Boolean to sync parent Checkbox Group and child Checkboxes if component uses internally created FormGroup or one provided from the App.
+   */
   protected _internalFormGroup: boolean = false;
 
   /**
-   * Getter for _groupBlurredOut.
+   * Getter for _groupBlurredOut boolean.
    */
   get groupBlurredOut(): boolean {
     return this._groupBlurredOut;
   }
 
+  /**
+   * Getter for _internalFormGroup boolean
+   */
   get internalFormGroup(): boolean {
     return this._internalFormGroup;
   }
@@ -77,41 +87,38 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
   public ngOnInit() {
     this._setParentId('checkbox-group');
 
-    if (this.formGroup && !this.formArray) {
-      this._initialCheck(this.formGroup);
-    } else if (this.formArray && !this.formGroup) {
-      this._initialCheck(this.formArray);
-    } else if (!this.formGroup) {
+    /**
+     * If there's no formGroup provided when component is initialised, create one internally.
+     */
+    if (!this.formGroup) {
       this._internalFormGroup = true;
       this.formGroup = new FormGroup<FudisCheckboxGroupFormGroup<object>>({});
+    } else {
+      /**
+       * Validation check can be currently be done only for App provided formGroup
+       */
+      this._required = hasAtLeastOneRequiredOrMinValidator(this.formGroup);
     }
+
+    this._initialCheck(this.formGroup);
   }
 
-  private _initialCheck(groupOrArray: FormGroup | FormArray): void {
-    if (groupOrArray.touched) {
+  private _initialCheck(group: FormGroup): void {
+    if (group.touched) {
       this._groupBlurredOut = true;
     } else {
       /**
        * Extend original markAllAsTouched function to change _groupBlurredOut value to 'true', so error messages are loaded when e.g. on Submit touched value is changed programatically.
        */
-
-      const originalMarkAllAsTouched = groupOrArray.markAllAsTouched;
-      groupOrArray.markAllAsTouched = () => {
-        originalMarkAllAsTouched.apply(groupOrArray);
+      const originalMarkAllAsTouched = group.markAllAsTouched;
+      group.markAllAsTouched = () => {
+        originalMarkAllAsTouched.apply(group);
         this._groupBlurredOut = true;
       };
     }
 
     if (this.errorSummaryReloadOnInit) {
-      this._reloadErrorSummaryOnLazyLoad(this._parentForm?.errorSummaryVisible, groupOrArray);
-    }
-  }
-
-  public ngOnChanges(changes: FudisComponentChanges<CheckboxGroupComponent>): void {
-    if (changes.formGroup) {
-      this._required = hasAtLeastOneRequiredOrMinValidator(this.formGroup);
-    } else if (changes.formArray) {
-      this._required = hasAtLeastOneRequiredOrMinValidator(this.formArray);
+      this._reloadErrorSummaryOnLazyLoad(this._parentForm?.errorSummaryVisible, group);
     }
   }
 
@@ -127,13 +134,13 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
   }
 
   /**
-   * Getter for if component has FormGroup, FormArray or neither as its control.
+   * When child Checkbox component is clicked, it calls this parent's function, which will then trigger Output emit.
+   * @param changedControlName name of the clicked control
    */
-  public getFormType(): 'group' | 'array' {
-    if (this.formGroup && !this.formArray) {
-      return 'group';
-    }
-
-    return 'array';
+  public triggerEmit(changedControlName: string): void {
+    this.handleChange.emit({
+      changedControlName: changedControlName,
+      formGroup: this.formGroup,
+    });
   }
 }
