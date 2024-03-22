@@ -9,7 +9,6 @@ import {
   FudisRadioButtonOption,
   FudisFormErrorSummaryLink,
   FudisCheckboxGroupFormGroup,
-  // FudisCheckboxGroupFormGroup,
   // FudisDateRangeItem,
 } from '../../../types/forms';
 import { FudisValidators } from '../../../utilities/form/validators';
@@ -100,7 +99,10 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
           />
         </ng-template>
         <ng-template fudisContent [type]="'form'">
-          <fudis-expandable [title]="'Expandable with Text Area'" [errorSummaryBreadcrumb]="true">
+          <fudis-expandable
+            [title]="'Expandable with Checkbox Group'"
+            [errorSummaryBreadcrumb]="true"
+          >
             <ng-template fudisContent [type]="'expandable'">
               <fudis-checkbox-group
                 [label]="'Pick a fruit'"
