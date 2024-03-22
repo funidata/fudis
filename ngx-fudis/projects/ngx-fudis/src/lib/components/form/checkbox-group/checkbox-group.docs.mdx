@@ -83,7 +83,9 @@ Property `control` is Angular `FormControl<boolean | null | undefined>` typed ob
 // In TypeScript file
 
 myOptionsWithControls = [
-  // Note! Provided controlName property is optional this way.
+
+  // Note! Provided controlName property is optional this way. If it is not given, Fudis will use the id of the checkbox as controlName.
+
   {label: 'Apple', controlName: 'apple', control: new FormControl<boolean | null | undefined>(null)},
   {label: 'Fair Trade Banana', controlName: 'fairTradeBanana', new FormControl<boolean | null | undefined>(true)},
   {label: 'Pear', controlName: 'pear', new FormControl<boolean | null | undefined>(null)},
@@ -93,8 +95,8 @@ myOptionsWithControls = [
 
 <fudis-checkbox-group
   [label]="'Select Fruits'">
-  <fudis-checkbox *ngFor="let option of myOptions"
-    [control]="options.control"
+  <fudis-checkbox *ngFor="let option of myOptionsWithControls"
+    [control]="option.control"
     [controlName]="option.controlName
     [label]="option.label" />
 </fudis-checkbox-group>

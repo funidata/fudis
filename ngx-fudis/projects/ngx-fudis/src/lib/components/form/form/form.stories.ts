@@ -8,6 +8,7 @@ import {
   FudisSelectOption,
   FudisRadioButtonOption,
   FudisFormErrorSummaryLink,
+  FudisCheckboxGroupFormGroup,
   // FudisCheckboxGroupFormGroup,
   // FudisDateRangeItem,
 } from '../../../types/forms';
@@ -196,16 +197,16 @@ class ExampleWithMultipleFormsComponent {
         FudisValidators.maxLength(20, 'Max length is 20 chars'),
       ]),
     }),
-    // formThree: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
-    //   {
-    //     apple: new FormControl<boolean | null>(null),
-    //     fairTradeBanana: new FormControl<boolean | null>(null),
-    //     pear: new FormControl<boolean | null>(null),
-    //     pineapple: new FormControl<boolean | null>(null),
-    //     orange: new FormControl<boolean | null | undefined>(null),
-    //   },
-    //   [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))],
-    // ),
+    formThree: new FormGroup<FudisCheckboxGroupFormGroup<object>>(
+      {
+        apple: new FormControl<boolean | null>(null),
+        fairTradeBanana: new FormControl<boolean | null>(null),
+        pear: new FormControl<boolean | null>(null),
+        pineapple: new FormControl<boolean | null>(null),
+        orange: new FormControl<boolean | null | undefined>(null),
+      },
+      [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('No fruit picked! :('))],
+    ),
     // formFour: new FormGroup({
     //   select: new FormControl<FudisSelectOption<object> | null>(
     //     null,
@@ -303,15 +304,15 @@ class ExampleWithMultipleFormsComponent {
                           [options]="courseTypeOptions"
                           [control]="formExample.controls['courseType']"
                         /> -->
-              <!-- <fudis-checkbox-group
-                      [formGroup]="formExample.controls.courseBooks"
-                      [label]="'Course books'"
-                      [helpText]="'Select 1-2 coursebooks'"
-                    >
-                      <fudis-checkbox [controlName]="'first'" [label]="'Heir to the Empire'" />
-                      <fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
-                      <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
-                    </fudis-checkbox-group> -->
+              <fudis-checkbox-group
+                [formGroup]="formExample.controls.courseBooks"
+                [label]="'Course books'"
+                [helpText]="'Select 1-2 coursebooks'"
+              >
+                <fudis-checkbox [controlName]="'first'" [label]="'Heir to the Empire'" />
+                <fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
+                <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
+              </fudis-checkbox-group>
               <!-- <fudis-datepicker
                           [label]="'Start date'"
                           [helpText]="'You have to start from somewhere'"

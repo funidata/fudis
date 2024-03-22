@@ -40,7 +40,7 @@ export type FudisSelectOption<T extends object> = T & {
   label: string;
   /** Is option disabled in the dropdown */
   disabled?: boolean;
-  /** */
+  /** Fudis generates an id for each SelectOption. This is used in internal logic. */
   fudisGeneratedHtmlId?: string;
   /** To store additional data */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

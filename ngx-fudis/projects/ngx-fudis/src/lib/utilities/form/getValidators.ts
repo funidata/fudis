@@ -17,8 +17,8 @@ export const hasRequiredValidator = (control: AbstractControl): boolean => {
   return false;
 };
 
-export const hasAtLeastOneRequiredOrMinValidator = (groupOrArray: FormGroup): boolean => {
-  const validatorFn = groupOrArray.validator;
+export const hasAtLeastOneRequiredOrMinValidator = (group: FormGroup): boolean => {
+  const validatorFn = group.validator;
 
   if (validatorFn === null) {
     return false;
