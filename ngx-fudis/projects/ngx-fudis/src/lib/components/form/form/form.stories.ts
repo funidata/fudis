@@ -26,7 +26,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
 @Component({
   selector: 'example-with-multiple-forms',
   template: `
-    <fudis-grid [align]="'center'" [columns]="2" [width]="'lg'">
+    <fudis-grid [align]="'center'" [columns]="{ xs: 1, sm: 2 }" [width]="'lg'">
       <fudis-button
         fudisGridItem
         [columns]="'stretch'"
