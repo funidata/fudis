@@ -5,12 +5,12 @@ test("button default", async ({ page }) => {
   await expect(page.getByTestId("fudis-button-1")).toBeVisible();
   await expect(page).toHaveScreenshot("all-variants.png");
 
-  page.getByTestId("fudis-button-1").focus();
+  await page.getByTestId("fudis-button-1").focus();
   await expect(page).toHaveScreenshot("focus-primary.png");
-  page.getByTestId("fudis-button-2").focus();
+  await page.getByTestId("fudis-button-2").focus();
   await expect(page).toHaveScreenshot("focus-secondary.png");
-  page.getByTestId("fudis-button-3").focus();
+  await page.getByTestId("fudis-button-3").focus();
   await expect(page).toHaveScreenshot("focus-tertiary.png");
-  page.getByTestId("fudis-button-4").focus();
+  await page.getByTestId("fudis-button-4").focus();
   await expect(page).toHaveScreenshot("focus-disabled.png");
 });
