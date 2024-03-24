@@ -73,7 +73,8 @@ export class TooltipDirective extends TooltipApiDirective implements OnInit, OnC
     if (
       this.tooltipToggle &&
       (event.key === 'Enter' || event.key === ' ') &&
-      this._tooltipElement.nativeElement.hasAttribute('fudisTooltip')
+      this._tooltipElement.nativeElement.hasAttribute('fudisTooltip') &&
+      !this.tooltipToggle
     ) {
       event.preventDefault();
       this._ngMaterialTooltip.toggle();
