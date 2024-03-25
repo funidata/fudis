@@ -101,6 +101,8 @@ export default {
   },
 } as Meta;
 
+const html = String.raw;
+
 const Template: StoryFn<ErrorMessageComponent> = (args: ErrorMessageComponent) => ({
   props: {
     ...args,
@@ -109,18 +111,19 @@ const Template: StoryFn<ErrorMessageComponent> = (args: ErrorMessageComponent) =
       FudisValidators.required('This validation message is send by Fudis Validators'),
     ),
   },
-  template: `
-  <fudis-body-text class="grid-refresh-text" [size]="'sm-regular'" style="width: 12rem;
-  margin-bottom: 2rem;">  &uarr; Click 'Remount' refresh button from the toolbar to refresh canvas
-  error message.</fudis-body-text
->
-  <fudis-text-input
-  [columns]="'stretch'"
-  [control]="control"
-  [label]="'Focus to input'"
->
-  <fudis-error-message [message]="message" />
-</fudis-text-input>
+  template: html`
+    <fudis-body-text
+      class="grid-refresh-text"
+      [size]="'sm-regular'"
+      style="width: 12rem;
+  margin-bottom: 2rem;"
+    >
+      &uarr; Click 'Remount' refresh button from the toolbar to refresh canvas error
+      message.</fudis-body-text
+    >
+    <fudis-text-input [control]="control" [label]="'Focus to input'">
+      <fudis-error-message [message]="message" />
+    </fudis-text-input>
   `,
 });
 

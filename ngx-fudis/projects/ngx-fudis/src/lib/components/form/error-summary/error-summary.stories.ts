@@ -43,7 +43,7 @@ import { excludeAllRegex } from '../../../utilities/storybook';
     <ng-template fudisContent type="form">
       <fudis-fieldset [label]="'Form information'">
         <ng-template fudisContent type="fieldset">
-          <fudis-grid [columns]="3">
+          <fudis-grid [columns]="{ xs: 1, md: 2 }">
             <fudis-text-input
               [id]="'unique-input-3'"
               [control]="formExample.controls['teacher']"
