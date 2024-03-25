@@ -27,7 +27,7 @@
     }
   }
 
-  & &__item {
+  &__item {
     @include utilities.box-reset;
 
     display: inline-block;

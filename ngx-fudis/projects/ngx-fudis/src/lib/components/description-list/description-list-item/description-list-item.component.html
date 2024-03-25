@@ -1,3 +1,19 @@
-<div class="fudis-dl__item fudis-dl-compact__item" role="listitem">
-  <ng-content></ng-content>
-</div>
+<ng-container *ngIf="this.descriptionListItems.length === 1">
+  <ng-container *ngTemplateOutlet="singleItem" />
+</ng-container>
+
+<ng-container *ngIf="this.descriptionListItems.length > 1">
+  <ng-container *ngTemplateOutlet="multipleItems" />
+</ng-container>
+
+<ng-template #multipleItems>
+  <div [id]="_id" class="fudis-dl__item fudis-dl-compact__item" role="listitem">
+    <ng-content />
+  </div>
+</ng-template>
+
+<ng-template #singleItem>
+  <div [id]="_id" class="fudis-dl__item fudis-dl-compact__item fudis-dl__item__single">
+    <ng-content />
+  </div>
+</ng-template>

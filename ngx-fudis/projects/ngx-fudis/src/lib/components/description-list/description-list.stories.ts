@@ -39,7 +39,14 @@ class LanguageChangeComponent {
   selector: 'example-dl-with-multiple-dd',
   template: `
     <fudis-heading>DT element with multiple DD elements</fudis-heading>
-    <fudis-description-list [marginBottom]="'md'" [variant]="'regular'" [columns]="'1fr 1fr'">
+    <fudis-description-list
+      [marginBottom]="'md'"
+      [marginTop]="'md'"
+      [variant]="'regular'"
+      [columns]="'1fr 1fr'"
+      [rowGap]="'sm'"
+      [disableGrid]="'false'"
+    >
       <fudis-description-list-item>
         <fudis-dt>Example DT</fudis-dt>
         <fudis-dd *ngFor="let item of _ddData">{{ item.value }}</fudis-dd>
@@ -58,24 +65,6 @@ class DlWithMultipleDdComponent {
   ];
 }
 
-@Component({
-  selector: 'example-dl-component',
-  template: ``,
-})
-class ExampleDlComponent {
-  protected testData = [
-    { key: 'First Name', value: 'Rex' },
-    { key: 'Last Name', value: 'Dangerwest' },
-    { key: 'Alias', value: 'Radical Emmet Xtreme' },
-    { key: 'Voice actor', value: 'Chris Pratt' },
-    { key: 'Favorite animal', value: 'Velociraptor', subHeading: 'Dinosaurus' },
-    { key: 'Real name', value: 'Emmet Joseph Brickowski' },
-    { key: 'Species', value: 'Lego' },
-    { key: 'Enemy', value: 'Emmet Brickowski' },
-    { key: 'Enemy', value: 'Lucy' },
-  ];
-}
-
 const html = String.raw;
 
 export default {
@@ -83,7 +72,7 @@ export default {
   component: DescriptionListComponent,
   decorators: [
     moduleMetadata({
-      declarations: [LanguageChangeComponent, DlWithMultipleDdComponent, ExampleDlComponent],
+      declarations: [LanguageChangeComponent, DlWithMultipleDdComponent],
     }),
   ],
   parameters: {
@@ -101,7 +90,7 @@ const DescriptionListTemplate: StoryFn<DescriptionListComponent> = (
 ) => ({
   props: args,
   template: html` <fudis-heading>Basic Description list</fudis-heading>
-    <fudis-description-list
+    <fudis-dl
       [marginBottom]="'md'"
       [marginTop]="'md'"
       [variant]="variant"
@@ -109,33 +98,34 @@ const DescriptionListTemplate: StoryFn<DescriptionListComponent> = (
       [rowGap]="rowGap"
       [disableGrid]="disableGrid"
     >
-      <fudis-description-list-item>
+      <fudis-dl-item>
         <fudis-dt>First Name</fudis-dt>
         <fudis-dd>Rex</fudis-dd>
-      </fudis-description-list-item>
-      <fudis-description-list-item>
+      </fudis-dl-item>
+      <fudis-dl-item>
         <fudis-dt>Last Name</fudis-dt>
         <fudis-dd>Dangerwest</fudis-dd>
-      </fudis-description-list-item>
-      <fudis-description-list-item>
+      </fudis-dl-item>
+      <fudis-dl-item>
         <fudis-dt>Alias</fudis-dt>
         <fudis-dd>Radical Emmet Xtreme</fudis-dd>
-      </fudis-description-list-item>
-      <fudis-description-list-item>
+      </fudis-dl-item>
+      <fudis-dl-item>
         <fudis-dt>Voice Actor</fudis-dt>
         <fudis-dd>Chris Pratt</fudis-dd>
-      </fudis-description-list-item>
-      <fudis-description-list-item>
+      </fudis-dl-item>
+      <fudis-dl-item>
         <fudis-dt>Enemy</fudis-dt>
         <fudis-dd [subHeading]="'Archenemy'">Emmet Brickowski</fudis-dd>
-      </fudis-description-list-item>
-    </fudis-description-list>`,
+      </fudis-dl-item>
+    </fudis-dl>`,
 });
 
 export const DescriptionList = DescriptionListTemplate.bind({});
 DescriptionList.args = {
   variant: 'compact',
   rowGap: 'sm',
+  disableGrid: false,
 };
 
 const DescriptionListItemInsideGridTemplate: StoryFn = () => ({
@@ -214,6 +204,7 @@ DescriptionListWithSubComponents.args = {
   variant: 'regular',
   columns: { xs: 1, sm: 2 },
   rowGap: 'md',
+  disableGrid: false,
 };
 
 const DescriptionListWithLanguagesTemplate: StoryFn<DescriptionListComponent> = (
@@ -252,6 +243,7 @@ DescriptionListWithLanguages.args = {
   variant: 'regular',
   serviceDefaults: false,
   columns: '1fr 1fr',
+  disableGrid: false,
 };
 
 const MultipleDdElementsTemplate: StoryFn<DescriptionListComponent> = (

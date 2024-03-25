@@ -67,6 +67,7 @@ export const checkboxGroupControlsExclude: RegExp = excludeRegex([
 ]);
 
 const descriptionListCommonExclude: string[] = [
+  'addChildId',
   'align',
   'alignItemsX',
   'alignItemsY',
@@ -76,6 +77,7 @@ const descriptionListCommonExclude: string[] = [
   'serviceDefaults',
   'marginBottom',
   'marginTop',
+  'removeChildId',
   'rowGap',
   'width',
 ];

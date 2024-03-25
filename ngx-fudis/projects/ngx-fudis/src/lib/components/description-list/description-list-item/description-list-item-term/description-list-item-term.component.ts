@@ -4,6 +4,7 @@ import {
   ElementRef,
   Host,
   Input,
+  OnInit,
   Signal,
   ViewEncapsulation,
   effect,
@@ -19,7 +20,7 @@ import { FudisLanguageBadgeGroupService } from '../../../../services/language-ba
   styleUrls: ['./description-list-item-term.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class DescriptionListItemTermComponent implements AfterContentInit {
+export class DescriptionListItemTermComponent implements OnInit, AfterContentInit {
   constructor(
     private _elementRef: ElementRef,
     private _translationService: FudisTranslationService,
@@ -54,6 +55,11 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
   protected _selectedLanguage: FudisLanguageAbbr;
 
   /**
+   * Helper to check DL Item length
+   */
+  protected _parentItems: string[];
+
+  /**
    * Fudis config language
    */
   private _currentLanguage: FudisLanguageAbbr;
@@ -67,6 +73,10 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
    * Used in check to determine which Language Badge is selected by default on first load
    */
   private _firstLoadFinished: boolean = false;
+
+  ngOnInit(): void {
+    this._parentItems = this._parentDlItem.descriptionListItems;
+  }
 
   ngAfterContentInit(): void {
     this._setLanguageOptions();
