@@ -74,7 +74,7 @@ export class AppComponent implements OnInit {
     { key: 'Enemy', value: 'Lucy', subHeading: 'Second Archenemy' },
   ];
 
-  checkboxOptions: FudisCheckboxOption[] = [
+  checkboxOptions: FudisCheckboxOption<object>[] = [
     { controlName: 'blueberry', label: 'blueberry' },
     { controlName: 'cloudberry', label: 'cloudberry' },
     { controlName: 'raspberry', label: 'raspberry' },

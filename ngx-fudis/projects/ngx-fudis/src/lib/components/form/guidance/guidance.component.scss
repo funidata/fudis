@@ -17,7 +17,8 @@
 
   &__errors {
     display: flex;
-    transform: translateX(calc(-1 * spacing.$spacing-xs));
+    /* stylelint-disable-next-line */
+    transform: translateX(calc(-1 * 0.4rem));
     opacity: 0;
     height: spacing.$spacing-xs;
     animation-name: delay-appearance;
