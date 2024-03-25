@@ -1,4 +1,4 @@
-import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 /**
  * All of these functions are used to check if component's control has different validators.
@@ -17,10 +17,8 @@ export const hasRequiredValidator = (control: AbstractControl): boolean => {
   return false;
 };
 
-export const hasAtLeastOneRequiredOrMinValidator = (
-  groupOrArray: FormGroup | FormArray,
-): boolean => {
-  const validatorFn = groupOrArray.validator;
+export const hasAtLeastOneRequiredOrMinValidator = (group: FormGroup): boolean => {
+  const validatorFn = group.validator;
 
   if (validatorFn === null) {
     return false;

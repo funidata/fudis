@@ -25,12 +25,15 @@ export const sortValues = (value: FudisSelectOption<object>[]): FudisSelectOptio
       return -1;
     }
 
-    if (a['fudisGeneratedHtmlId'] < b['fudisGeneratedHtmlId']) {
-      return -1;
+    if (a['fudisGeneratedHtmlId'] && b['fudisGeneratedHtmlId']) {
+      if (a['fudisGeneratedHtmlId'] < b['fudisGeneratedHtmlId']) {
+        return -1;
+      }
+      if (a['fudisGeneratedHtmlId'] > b['fudisGeneratedHtmlId']) {
+        return 1;
+      }
     }
-    if (a['fudisGeneratedHtmlId'] > b['fudisGeneratedHtmlId']) {
-      return 1;
-    }
+
     return 0;
   });
 

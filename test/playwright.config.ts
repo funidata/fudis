@@ -12,12 +12,16 @@ export default defineConfig({
   workers: process.env.CI || process.env.CONTAINER ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [["html", { host: "0.0.0.0" }]],
+  /* Threshold to wait action to complete */
+  timeout: 10000,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: process.env.PLAYWRIGHT_BASE_URL || "http://localhost:6006",
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
+    /* Use native html ID attribute in getByTestId */
+    testIdAttribute: "id",
   },
   /* Configure projects for major browsers */
   projects: [
