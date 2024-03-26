@@ -35,15 +35,15 @@ class MockCheckboxGroupComponent {
   label = 'This is checkbox group';
   helpText = 'Here are some advices';
 
-  private _checkboxOptions: FudisCheckboxOption[] = [
+  private _checkboxOptions: FudisCheckboxOption<object>[] = [
     { controlName: 'blueberry', label: 'blueberry' },
     { controlName: 'cloudberry', label: 'cloudberry' },
   ];
 
   private _checkboxFormGroup = new FormGroup(
     {
-      blueberry: new FormControl<FudisCheckboxOption | null>(null),
-      cloudberry: new FormControl<FudisCheckboxOption | null>(null),
+      blueberry: new FormControl<FudisCheckboxOption<object> | null>(null),
+      cloudberry: new FormControl<FudisCheckboxOption<object> | null>(null),
     },
     FudisGroupValidators.atLeastOneRequired('Choose at least one berry'),
   );

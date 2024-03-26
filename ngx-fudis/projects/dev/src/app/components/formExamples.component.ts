@@ -5,6 +5,7 @@ import {
   FudisCheckboxOption,
   FudisSelectOption,
   FudisRadioButtonOption,
+  FudisCheckboxChangeEvent,
 } from 'projects/ngx-fudis/src/lib/types/forms';
 import { untilDestroyed } from 'projects/ngx-fudis/src/lib/utilities/untilDestroyed';
 import { FudisErrorSummaryService } from 'ngx-fudis';
@@ -95,10 +96,10 @@ export class AppFormExampleComponent implements OnInit {
     ),
     checkboxFormGroup: new FormGroup(
       {
-        blueberry: new FormControl<FudisCheckboxOption | null>(null),
-        cloudberry: new FormControl<FudisCheckboxOption | null>(null),
-        raspberry: new FormControl<FudisCheckboxOption | null>(null),
-        strawberry: new FormControl<FudisCheckboxOption | null>(null),
+        blueberry: new FormControl<boolean | null | undefined>(null),
+        cloudberry: new FormControl<boolean | null | undefined>(null),
+        raspberry: new FormControl<boolean | null | undefined>(null),
+        strawberry: new FormControl<boolean | null | undefined>(null),
       },
       [
         FudisGroupValidators.min({
@@ -145,7 +146,7 @@ export class AppFormExampleComponent implements OnInit {
 
   radioButtonOptions: FudisRadioButtonOption[] = [];
 
-  checkboxOptions: FudisCheckboxOption[] = [];
+  checkboxOptions: FudisCheckboxOption<object>[] = [];
 
   private _untilDestroyed = untilDestroyed();
 
@@ -185,7 +186,7 @@ export class AppFormExampleComponent implements OnInit {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  handleChange(updatedOptions: FudisCheckboxOption): void {
+  handleChange(updatedOptions: FudisCheckboxChangeEvent): void {
     // eslint-disable-next-line no-console
     console.log(updatedOptions);
   }

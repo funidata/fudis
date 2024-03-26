@@ -56,6 +56,7 @@ export const checkboxGroupExclude: RegExp = excludeRegex([
   'groupBlurredOut',
   'setGroupBlurredOut',
   'titleSize',
+  'triggerEmit',
 ]);
 
 export const checkboxGroupControlsExclude: RegExp = excludeRegex([
@@ -64,6 +65,8 @@ export const checkboxGroupControlsExclude: RegExp = excludeRegex([
   'titleSize',
   'id',
   'formGroup',
+  'triggerEmit',
+  'errorSummaryReloadOnInit',
 ]);
 
 const descriptionListCommonExclude: string[] = [

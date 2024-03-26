@@ -11,12 +11,14 @@ import { LabelComponent } from '../../label/label.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { ValidatorErrorMessageComponent } from '../validator-error-message/validator-error-message.component';
 
+const observableMessage = new BehaviorSubject<string>('Test error message');
+
 const controlErrors = {
   required: {
     message: 'This is required',
   },
   'fudis-error-message-1': {
-    message: new BehaviorSubject<string>('Test error message'),
+    message: observableMessage,
   },
 };
 
@@ -42,12 +44,14 @@ const errorToRemove: FudisValidationErrors = {
   selector: 'fudis-mock-test-error',
   template: `
     <fudis-text-input [control]="control" [label]="'Test label'">
-      <fudis-error-message #testError *ngIf="errorVisible" [message]="'Test error message'" />
+      <fudis-error-message #testError *ngIf="errorVisible" [message]="message" />
     </fudis-text-input>
   `,
 })
 class MockTestErrorComponent {
   @ViewChild('testError') testError: ErrorMessageComponent;
+
+  message = 'Test error message';
 
   errorVisible: boolean;
 
@@ -122,6 +126,16 @@ describe('ErrorMessageComponent', () => {
 
       expect(component.control.errors).toBe(null);
       expect(component.control.valid).toBe(true);
+    });
+
+    it('should update string message', () => {
+      const newError = 'Error message updated';
+
+      observableMessage.next(newError);
+      component.message = newError;
+      fixture.detectChanges();
+
+      expect(component.control.errors).toEqual(controlErrors);
     });
   });
 });

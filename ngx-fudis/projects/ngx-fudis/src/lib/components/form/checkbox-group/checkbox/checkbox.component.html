@@ -1,6 +1,8 @@
 <ng-container *ngIf="control">
   <label class="fudis-checkbox" [attr.for]="id" [id]="id + '-label'">
     <input
+      #inputRef
+      (click)="_checkboxClick($event)"
       type="checkbox"
       class="fudis-checkbox__input"
       [id]="id"
@@ -15,11 +17,7 @@
         _checkboxGroup.formGroup.touched &&
         _checkboxGroup.formGroup.invalid
           ? true
-          : _checkboxGroup.formArray &&
-              _checkboxGroup.formArray.touched &&
-              _checkboxGroup.formArray.invalid
-            ? true
-            : null
+          : null
       "
       (change)="_onChange()"
       (blur)="_onBlur($event)"
@@ -30,12 +28,9 @@
         class="fudis-checkbox__content__box"
         [class.fudis-checkbox__content__box--focused]="_focused"
         [class.fudis-checkbox__content__box--invalid]="
-          ((_checkboxGroup.formGroup &&
-            _checkboxGroup.formGroup.touched &&
-            _checkboxGroup.formGroup.invalid) ||
-            (_checkboxGroup.formArray &&
-              _checkboxGroup.formArray.touched &&
-              _checkboxGroup.formArray.invalid)) &&
+          _checkboxGroup.formGroup &&
+          _checkboxGroup.formGroup.touched &&
+          _checkboxGroup.formGroup.invalid &&
           _checkboxGroup.groupBlurredOut
         "
         [class.fudis-checkbox__content__box--disabled]="control.disabled"

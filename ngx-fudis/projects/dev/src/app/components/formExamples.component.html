@@ -18,7 +18,7 @@
         <ng-template fudisContent type="form">
           <fudis-fieldset [label]="t('fieldsetTitle')">
             <ng-template fudisContent type="fieldset">
-              <!-- <fudis-checkbox-group
+              <fudis-checkbox-group
                 [label]="t('chooseBerry')"
                 [helpText]="t('chooseBerryHelp')"
                 [tooltip]="t('chooseBerryTooltip')"
@@ -27,10 +27,10 @@
                 <fudis-checkbox
                   *ngFor="let option of checkboxOptions"
                   (handleChange)="handleChange($event)"
-                  [controlName]="option.controlName"
+                  [controlName]="option.controlName!"
                   [label]="option.label"
                 />
-              </fudis-checkbox-group> -->
+              </fudis-checkbox-group>
               <fudis-text-input
                 [label]="t('label')"
                 [helpText]="t('helpText')"
