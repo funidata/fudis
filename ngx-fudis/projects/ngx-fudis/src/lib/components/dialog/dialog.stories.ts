@@ -182,7 +182,7 @@ class DialogExampleWithFormComponent {
               <fudis-body-text>Showcase of grid items</fudis-body-text>
             </div>
             <div style="border: 2px solid lightblue">
-              <fudis-body-text>Showcase of grid items</fudis-body-text>
+              <fudis-body-text>I am last item of the grid</fudis-body-text>
             </div>
           </fudis-grid>
         </fudis-dialog-content>

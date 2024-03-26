@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDateFormats, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
 import { FudisLanguageAbbr } from './miscellaneous';
 
@@ -6,20 +6,20 @@ export type FudisInputSize = 'sm' | 'md' | 'lg';
 
 export type FudisInputType = 'email' | 'number' | 'password' | 'tel' | 'text' | 'url';
 
-export interface FudisCheckboxOption {
+export type FudisCheckboxOption<T extends object> = T & {
   /** Unique id for single checkbox option */
   id?: string;
   /** Name for the group of checkboxes */
   groupName?: string;
   /** If using FormGroup, name of the option */
   controlName?: string;
-  /** If using FormArray, index of the option */
-  controlIndex?: number;
   /** Visible label that is shown in the UI */
   label: string;
   /** Is option selected */
   value?: boolean | null | undefined;
-}
+  /** To store additional data */
+  [key: string]: unknown;
+};
 
 export interface FudisRadioButtonOption {
   /** Unique id for single radio button option */
@@ -40,9 +40,11 @@ export type FudisSelectOption<T extends object> = T & {
   label: string;
   /** Is option disabled in the dropdown */
   disabled?: boolean;
+  /** Fudis generates an id for each SelectOption. This is used in internal logic. */
+  fudisGeneratedHtmlId?: string;
   /** To store additional data */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 export type FudisFormErrorSummaryItem = {
@@ -114,6 +116,16 @@ export interface FudisInputWithLanguageOptionsFormGroup {
 
 export type FudisCheckboxGroupFormGroup<T extends object> = T & {
   [key: string]: FormControl<boolean | null | undefined>;
+};
+
+export type FudisCheckboxChangeEvent = {
+  checkbox: FudisCheckboxOption<object>;
+  control: FormControl<boolean | null | undefined>;
+};
+
+export type FudisCheckboxGroupChangeEvent = {
+  changedControlName: string;
+  formGroup: FormGroup<FudisCheckboxGroupFormGroup<object>>;
 };
 
 export interface FudisDateRangeItem {
