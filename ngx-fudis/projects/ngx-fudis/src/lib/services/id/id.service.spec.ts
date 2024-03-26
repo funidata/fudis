@@ -19,6 +19,8 @@ describe('FudisIdServiceService', () => {
     'autocomplete-multi-select': [],
     datepicker: [],
     daterange: [],
+    'description-list': [],
+    'description-list-item': [],
     dialog: [],
     dropdown: [],
     'error-message': [],
@@ -60,6 +62,18 @@ describe('FudisIdServiceService', () => {
       'fudis-daterange-2',
       'custom-id-for-daterange',
       'fudis-daterange-4',
+    ],
+    'description-list': [
+      'fudis-description-list-1',
+      'fudis-description-list-2',
+      'custom-id-for-description-list',
+      'fudis-description-list-4',
+    ],
+    'description-list-item': [
+      'fudis-description-list-item-1',
+      'fudis-description-list-item-2',
+      'custom-id-for-description-list-item',
+      'fudis-description-list-item-4',
     ],
     dialog: ['fudis-dialog-1', 'fudis-dialog-2', 'custom-id-for-dialog', 'fudis-dialog-4'],
     dropdown: [

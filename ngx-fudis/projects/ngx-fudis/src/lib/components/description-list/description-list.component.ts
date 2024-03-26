@@ -1,8 +1,7 @@
-import { Component, Input, OnInit, OnChanges, ViewEncapsulation } from '@angular/core';
-
+import { Component, Input, OnInit, OnChanges, ViewEncapsulation, AfterViewInit } from '@angular/core';
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
-
-import { FudisDescriptionListItem, FudisDescriptionListVariant } from '../../types/miscellaneous';
+import { FudisDescriptionListVariant } from '../../types/miscellaneous';
+import { FudisIdService } from '../../services/id/id.service';
 
 @Component({
   selector: 'fudis-dl, fudis-description-list',
@@ -10,12 +9,10 @@ import { FudisDescriptionListItem, FudisDescriptionListVariant } from '../../typ
   styleUrls: ['./description-list.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class DescriptionListComponent extends GridApiDirective implements OnInit, OnChanges {
-  /**
-   * Item array to form description list data.
-   * Contains mandatory key and value, and optional subHeading.
-   */
-  @Input() data: FudisDescriptionListItem[] | null = null;
+export class DescriptionListComponent extends GridApiDirective implements OnInit, OnChanges, AfterViewInit {
+  constructor(private _idService: FudisIdService) {
+    super();
+  }
 
   /**
    * Disable Fudis Grid behavior for Description List.
@@ -32,8 +29,31 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
    */
   protected _classList: string[] = [];
 
+  /**
+   * Internal id for DL
+   */
+  protected _id: string;
+
+  /**
+   * Description List Item id array.
+   * If only one DL Item is present, description list should be rendered as plain body-text
+   */
+  protected _childItemIds: string[] = [];
+
+  /**
+   * Getter for child DL Item array
+   */
+  get childIds(): string[] {
+    return this._childItemIds;
+  }
+
   ngOnInit(): void {
     this._setClasses();
+    this._id = this._idService.getNewId('description-list');
+  }
+
+  ngAfterViewInit(): void {
+    console.log('DL parent length: ', this._childItemIds.length);
   }
 
   ngOnChanges(): void {
@@ -41,7 +61,24 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
   }
 
   /**
-   *
+   * Add Description List Item to the child id array
+   */
+  public addChildId(id: string): void {
+    this._childItemIds.push(id);
+  }
+
+  /**
+   * Remove Description List Item from the child id array
+   */
+  public removeChildId(id: string): void {
+    const idToRemove = this._childItemIds.indexOf(id);
+
+    if (idToRemove > -1) {
+      this._childItemIds.splice(idToRemove, 1);
+    }
+  }
+
+  /**
    * To define correct CSS classes
    */
   private _setClasses(): void {
