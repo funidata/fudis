@@ -1,10 +1,10 @@
 import {
   Component,
   Input,
-  ViewEncapsulation,
   ChangeDetectionStrategy,
   OnInit,
   OnChanges,
+  ElementRef,
 } from '@angular/core';
 import { FudisHeadingLevel, FudisHeadingSize } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -14,11 +14,18 @@ import { FudisSpacing, FudisTextAlign } from '../../../types/miscellaneous';
   selector: 'fudis-heading',
   templateUrl: './heading.component.html',
   styleUrls: ['./heading.component.scss'],
-  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeadingComponent implements OnInit, OnChanges {
-  constructor(private _idService: FudisIdService) {}
+  constructor(
+    private _idService: FudisIdService,
+    private _headingElement: ElementRef,
+  ) {
+    /**
+     * Set Heading wrapper to be "full width" if used inside Grid
+     */
+    (_headingElement.nativeElement as HTMLHeadingElement).style.gridColumn = '1/-1';
+  }
 
   /**
    * Semantic level of heading
