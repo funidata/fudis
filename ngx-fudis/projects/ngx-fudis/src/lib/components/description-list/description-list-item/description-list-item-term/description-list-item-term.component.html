@@ -8,7 +8,7 @@
 
 <ng-template #multipleItems>
   <dt class="fudis-dl__item__term fudis-dl-compact__item__term">
-    <ng-content></ng-content><span class="fudis-dl__item__term__colon">:</span>
+    <ng-container *ngTemplateOutlet="dtContent"></ng-container><span class="fudis-dl__item__term__colon">:</span>
     <ng-container *ngIf="_selectedLanguage && _parentLanguageOptions">
       <fudis-language-badge-group
         [selectedLanguage]="_selectedLanguage"
@@ -21,7 +21,7 @@
 
 <ng-template #singleItem>
   <fudis-body-text class="fudis-dl__item__term fudis-dl-compact__item__term">
-    <ng-content></ng-content><span class="fudis-dl__item__term__colon">:</span>
+    <ng-container *ngTemplateOutlet="dtContent"></ng-container><span class="fudis-dl__item__term__colon">:</span>
 
     <ng-container *ngIf="_selectedLanguage && _parentLanguageOptions">
       <fudis-language-badge-group
@@ -31,4 +31,8 @@
       />
     </ng-container>
   </fudis-body-text>
+</ng-template>
+
+<ng-template #dtContent>
+  <ng-content></ng-content>
 </ng-template>

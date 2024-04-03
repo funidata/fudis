@@ -10,6 +10,18 @@
   <ng-container *ngTemplateOutlet="disabledGrid" />
 </ng-container>
 
+<ng-template #disabledGrid>
+  <dl [id]="_id" [class]="_classList" role="list">
+    <ng-container *ngTemplateOutlet="dlContent"></ng-container>
+  </dl>
+</ng-template>
+
+<ng-template #singleItem>
+  <div [id]="_id" class="fudis-description-list-one-item">
+    <ng-container *ngTemplateOutlet="dlContent"></ng-container>
+  </div>
+</ng-template>
+
 <ng-template #multipleItems>
   <dl
     fudisGrid
@@ -27,18 +39,10 @@
     [marginTop]="marginTop"
     role="list"
   >
-    <ng-content></ng-content>
+    <ng-container *ngTemplateOutlet="dlContent"></ng-container>
   </dl>
 </ng-template>
 
-<ng-template #disabledGrid>
-  <dl [id]="_id" [class]="_classList" role="list">
-    <ng-content />
-  </dl>
-</ng-template>
-
-<ng-template #singleItem>
-  <div [id]="_id" class="fudis-description-list-one-item">
-    <ng-content />
-  </div>
+<ng-template #dlContent>
+  <ng-content></ng-content>
 </ng-template>

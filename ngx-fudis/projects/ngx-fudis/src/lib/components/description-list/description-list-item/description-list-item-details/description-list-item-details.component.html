@@ -24,7 +24,8 @@
         class="fudis-dl__item__details__parenthesis fudis-dl-compact__item__details__parenthesis"
         *ngIf="subHeading"
         >&nbsp;&#40;</span
-      ><ng-content /><span
+      ><ng-container *ngTemplateOutlet="ddContent"></ng-container>
+      <span
         class="fudis-dl__item__details__parenthesis fudis-dl-compact__item__details__parenthesis"
         *ngIf="subHeading"
         >&#41;</span
@@ -58,7 +59,8 @@
         class="fudis-dl__item__details__parenthesis fudis-dl-compact__item__details__parenthesis"
         *ngIf="subHeading"
         >&nbsp;&#40;</span
-      ><ng-content /><span
+      ><ng-container *ngTemplateOutlet="ddContent"></ng-container>
+      <span
         class="fudis-dl__item__details__parenthesis fudis-dl-compact__item__details__parenthesis"
         *ngIf="subHeading"
         >&#41;</span
@@ -72,4 +74,8 @@
       </ng-container>
     </div>
   </fudis-body-text>
+</ng-template>
+
+<ng-template #ddContent>
+  <ng-content></ng-content>
 </ng-template>
