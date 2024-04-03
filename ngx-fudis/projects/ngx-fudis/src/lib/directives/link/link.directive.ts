@@ -11,7 +11,7 @@ export class LinkDirective extends LinkApiDirective implements OnInit, OnChanges
   }
 
   /**
-   * CSS classes for link element
+   * Additional CSS classes for the Link anchor element
    */
   @Input() classes: string[] = [];
 
