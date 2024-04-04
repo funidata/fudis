@@ -51,7 +51,6 @@ export class DescriptionListItemComponent implements OnInit, AfterViewInit, OnDe
     this._id = this._idService.getNewId('description-list-item');
     this._parentDescriptionList.addChildId(this._id);
     this.descriptionListItems = this._parentDescriptionList.childIds;
-    console.log('DL Item length: ', this.descriptionListItems.length);
   }
 
   ngOnDestroy(): void {
@@ -67,7 +66,7 @@ export class DescriptionListItemComponent implements OnInit, AfterViewInit, OnDe
     if (this.ddChildrenElements) {
       this.ddChildrenElements.forEach((item) => {
         const htmlContent = (this._element.nativeElement as HTMLElement).querySelector(
-          `.fudis-dl__item__details__${item.lang} .fudis-dl__item__details__content`,
+          `.fudis-dl__item__details__${item.lang} .fudis-dl__item__details__content, .fudis-dl__item__details__single-item__${item.lang} .fudis-dl__item__details__content__single-item`,
         )?.textContent;
 
         const textContent =

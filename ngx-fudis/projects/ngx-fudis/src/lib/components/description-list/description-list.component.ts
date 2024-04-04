@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, ViewEncapsulation, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ViewEncapsulation } from '@angular/core';
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
 import { FudisDescriptionListVariant } from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
@@ -9,7 +9,7 @@ import { FudisIdService } from '../../services/id/id.service';
   styleUrls: ['./description-list.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class DescriptionListComponent extends GridApiDirective implements OnInit, OnChanges, AfterViewInit {
+export class DescriptionListComponent extends GridApiDirective implements OnInit, OnChanges {
   constructor(private _idService: FudisIdService) {
     super();
   }
@@ -50,10 +50,6 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
   ngOnInit(): void {
     this._setClasses();
     this._id = this._idService.getNewId('description-list');
-  }
-
-  ngAfterViewInit(): void {
-    console.log('DL parent length: ', this._childItemIds.length);
   }
 
   ngOnChanges(): void {

@@ -99,11 +99,11 @@ const DescriptionListTemplate: StoryFn<DescriptionListComponent> = (
       [disableGrid]="disableGrid"
     >
       <fudis-dl-item>
-        <fudis-dt>First Name</fudis-dt>
+        <fudis-dt>First name</fudis-dt>
         <fudis-dd>Rex</fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt>Last Name</fudis-dt>
+        <fudis-dt>Last name</fudis-dt>
         <fudis-dd>Dangerwest</fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
@@ -111,7 +111,7 @@ const DescriptionListTemplate: StoryFn<DescriptionListComponent> = (
         <fudis-dd>Radical Emmet Xtreme</fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt>Voice Actor</fudis-dt>
+        <fudis-dt>Voice actor</fudis-dt>
         <fudis-dd>Chris Pratt</fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
@@ -166,11 +166,11 @@ const DescriptionListWithSubComponentsTemplate: StoryFn<DescriptionListComponent
       [rowGap]="rowGap"
     >
       <fudis-description-list-item>
-        <fudis-dt>First Name</fudis-dt>
+        <fudis-dt>First name</fudis-dt>
         <fudis-dd>Rex</fudis-dd>
       </fudis-description-list-item>
       <fudis-description-list-item>
-        <fudis-dt>Last Name</fudis-dt>
+        <fudis-dt>Last name</fudis-dt>
         <fudis-dd>Dangerwest</fudis-dd>
       </fudis-description-list-item>
       <fudis-description-list-item>

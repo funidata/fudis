@@ -43,23 +43,26 @@
 
 <ng-template #singleItem>
   <fudis-body-text
-    class="fudis-dl__item__details fudis-dl-compact__item__details"
-    [class.fudis-dl__item__details__fi]="lang === 'fi'"
-    [class.fudis-dl__item__details__en]="lang === 'en'"
-    [class.fudis-dl__item__details__sv]="lang === 'sv'"
+    class="fudis-dl__item__details__single-item fudis-dl-compact__item__details__single-item"
+    [class.fudis-dl__item__details__single-item__fi]="lang === 'fi'"
+    [class.fudis-dl__item__details__single-item__en]="lang === 'en'"
+    [class.fudis-dl__item__details__single-item__sv]="lang === 'sv'"
   >
     <span
-      class="fudis-dl__item__details__sub-heading fudis-dl-compact__item__details__sub-heading"
+      class="fudis-dl__item__details__sub-heading__single-item fudis-dl-compact__item__details__sub-heading__single-item"
       *ngIf="subHeading"
     >
       {{ subHeading }}
     </span>
-    <div class="fudis-dl__item__details__content fudis-dl-compact__item__details__content">
+    <div
+      class="fudis-dl__item__details__content__single-item fudis-dl-compact__item__details__content__single-item"
+    >
       <span
         class="fudis-dl__item__details__parenthesis fudis-dl-compact__item__details__parenthesis"
         *ngIf="subHeading"
         >&nbsp;&#40;</span
-      ><ng-container *ngTemplateOutlet="ddContent"></ng-container>
+      >
+      <ng-container *ngTemplateOutlet="ddContent"></ng-container>
       <span
         class="fudis-dl__item__details__parenthesis fudis-dl-compact__item__details__parenthesis"
         *ngIf="subHeading"

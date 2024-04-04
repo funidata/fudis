@@ -4,10 +4,12 @@
   &__fi {
     ~ fudis-dd,
     ~ fudis-description-list-details {
-      .fudis-dl__item__details__fi {
+      .fudis-dl__item__details__fi,
+      .fudis-dl__item__details__single-item__fi {
         display: block;
 
-        &.fudis-dl-compact__item__details {
+        &.fudis-dl-compact__item__details,
+        &.fudis-dl-compact__item__details__single-item {
           display: inline-block;
         }
       }
@@ -17,10 +19,12 @@
   &__en {
     ~ fudis-dd,
     ~ fudis-description-list-details {
-      .fudis-dl__item__details__en {
+      .fudis-dl__item__details__en,
+      .fudis-dl__item__details__single-item__en {
         display: block;
 
-        &.fudis-dl-compact__item__details {
+        &.fudis-dl-compact__item__details,
+        &.fudis-dl-compact__item__details__single-item {
           display: inline-block;
         }
       }
@@ -30,10 +34,12 @@
   &__sv {
     ~ fudis-dd,
     ~ fudis-description-list-details {
-      .fudis-dl__item__details__sv {
+      .fudis-dl__item__details__sv,
+      .fudis-dl__item__details__single-item__sv {
         display: block;
 
-        &.fudis-dl-compact__item__details {
+        &.fudis-dl-compact__item__details,
+        &.fudis-dl-compact__item__details__single-item {
           display: inline-block;
         }
       }

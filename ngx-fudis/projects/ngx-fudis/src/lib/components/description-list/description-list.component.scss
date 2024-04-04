@@ -41,6 +41,13 @@
       &__colon {
         display: none;
       }
+
+      &__single-item p {
+        @include typography.description-list-key-typography;
+        @include colorMixins.text-color("gray-dark");
+
+        margin-bottom: spacing.$spacing-xs;
+      }
     }
 
     &__details {
@@ -50,6 +57,17 @@
       display: flex;
       flex-direction: column;
       margin-left: 0;
+
+      &__single-item {
+        &__fi,
+        &__sv,
+        &__en {
+          /* stylelint-disable-next-line max-nesting-depth */
+          &.fudis-body-text-host {
+            display: none;
+          }
+        }
+      }
 
       &__fi,
       &__sv,
@@ -64,6 +82,10 @@
         &__actions {
           margin-top: spacing.$spacing-xs;
         }
+
+        &__single-item {
+          @include typography.description-list-value-typography;
+        }
       }
 
       &__parenthesis {
@@ -76,6 +98,12 @@
         margin-top: 0;
         margin-bottom: spacing.$spacing-xxs;
         font-weight: typographyTokens.$font-weight-regular;
+
+        &__single-item {
+          @include typography.description-list-value-typography;
+
+          font-weight: typographyTokens.$font-weight-regular;
+        }
       }
     }
   }
@@ -120,6 +148,10 @@
         width: spacing.$pixel-1;
         height: 80%;
         content: "";
+      }
+
+      &__colon {
+        display: inline-block;
       }
     }
 
