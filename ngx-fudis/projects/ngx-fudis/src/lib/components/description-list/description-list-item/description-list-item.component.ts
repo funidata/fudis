@@ -12,12 +12,17 @@ import {
   signal,
 } from '@angular/core';
 import { DescriptionListItemDetailsComponent } from './description-list-item-details/description-list-item-details.component';
-import { FudisDescriptionListVariant, FudisLanguageBadgeContent } from '../../../types/miscellaneous';
+import {
+  FudisDescriptionListVariant,
+  FudisLanguageAbbr,
+  FudisLanguageBadgeContent,
+} from '../../../types/miscellaneous';
 import { FudisIdService } from '../../../services/id/id.service';
 import { DescriptionListComponent } from '../description-list.component';
 
 @Component({
   selector: 'fudis-dl-item, fudis-description-list-item',
+  styleUrls: ['./description-list-item.component.scss'],
   templateUrl: './description-list-item.component.html',
 })
 export class DescriptionListItemComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -29,10 +34,10 @@ export class DescriptionListItemComponent implements OnInit, AfterViewInit, OnDe
     effect(() => {
       this._parentDlVariant = this._parentDescriptionList.getVariant();
 
-      if(this._parentDlVariant() === 'regular') {
-        this._classes = 'fudis-dl__item';
+      if (this._parentDlVariant() === 'regular') {
+        this._classes = 'fudis-dl-item__regular';
       } else {
-        this._classes = 'fudis-dl-compact__item';
+        this._classes = 'fudis-dl-item__compact';
       }
     });
   }
@@ -62,6 +67,8 @@ export class DescriptionListItemComponent implements OnInit, AfterViewInit, OnDe
    */
   public descriptionListItems: string[];
 
+  public selectedLanguage: FudisLanguageAbbr;
+
   ngAfterViewInit(): void {
     this._checkCurrentChildren();
   }
@@ -85,7 +92,7 @@ export class DescriptionListItemComponent implements OnInit, AfterViewInit, OnDe
     if (this.ddChildrenElements) {
       this.ddChildrenElements.forEach((item) => {
         const htmlContent = (this._element.nativeElement as HTMLElement).querySelector(
-          `.fudis-dl__item__details__${item.lang} .fudis-dl__item__details__content, .fudis-dl__item__details__single-item__${item.lang} .fudis-dl__item__details__content__single-item`,
+          `.fudis-dl__item__details__${item.lang} .fudis-dl__item__details__content`,
         )?.textContent;
 
         const textContent =

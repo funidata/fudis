@@ -26,73 +26,6 @@
       columns: 2;
     }
   }
-
-  &__item {
-    @include utilities.box-reset;
-
-    display: inline-block;
-
-    &__term {
-      @include typography.description-list-key-typography;
-      @include colorMixins.text-color("gray-dark");
-
-      margin: 0 0 spacing.$spacing-xs 0;
-
-      &__colon {
-        display: none;
-      }
-    }
-
-    &__details {
-      @include typography.description-list-value-typography;
-      @include colorMixins.text-color("gray-dark");
-
-      display: flex;
-      flex-direction: column;
-      margin: 0;
-
-      &__single-item {
-        &__fi,
-        &__sv,
-        &__en {
-          /* stylelint-disable-next-line max-nesting-depth */
-          &.fudis-body-text-host {
-            display: none;
-          }
-        }
-      }
-
-      &__fi,
-      &__sv,
-      &__en {
-        display: none;
-      }
-
-      &__content {
-        @include typography.description-list-value-typography;
-
-        display: flex;
-        flex-direction: column;
-
-        &__actions {
-          margin-top: spacing.$spacing-xs;
-        }
-      }
-
-      &__parenthesis {
-        display: none;
-      }
-
-      &__sub-heading {
-        @include colorMixins.text-color("gray-dark");
-        @include typography.description-list-value-typography;
-
-        margin-top: 0;
-        margin-bottom: spacing.$spacing-xxs;
-        font-weight: typographyTokens.$font-weight-regular;
-      }
-    }
-  }
 }
 
 .fudis-dl-compact {
@@ -105,61 +38,6 @@
 
     @include breakpoint.breakpoint("md") {
       columns: 2;
-    }
-  }
-
-  & &__item {
-    min-height: spacing.$spacing-md;
-
-    /* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector, selector-max-class */
-    & .fudis-language-badge-group {
-      display: none;
-    }
-
-    &__term {
-      @include typography.description-list-compact-key-typography;
-      @include colorMixins.text-color("gray-dark");
-
-      display: inline-block;
-      position: relative;
-      padding-left: spacing.$spacing-xs;
-
-      &::before {
-        @include colorMixins.bg-color("gray-middle");
-
-        display: inline-block;
-        position: absolute;
-        top: spacing.$pixel-2;
-        left: 0;
-        width: spacing.$pixel-1;
-        height: 80%;
-        content: "";
-      }
-
-      &__colon {
-        display: inline-block;
-      }
-    }
-
-    &__details {
-      @include typography.description-list-compact-value-typography;
-      @include colorMixins.text-color("gray-dark");
-
-      display: inline-block;
-      margin-left: 0;
-      padding-left: spacing.$spacing-xxs;
-
-      &__content {
-        display: inline;
-      }
-
-      &__parenthesis {
-        display: initial;
-      }
-
-      &__sub-heading {
-        @include utilities.box-reset;
-      }
     }
   }
 }

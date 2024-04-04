@@ -1,12 +1,4 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  OnChanges,
-  ViewEncapsulation,
-  Signal,
-  signal,
-} from '@angular/core';
+import { Component, Input, OnInit, OnChanges, Signal, signal } from '@angular/core';
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
 import { FudisComponentChanges, FudisDescriptionListVariant } from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
@@ -15,7 +7,6 @@ import { FudisIdService } from '../../services/id/id.service';
   selector: 'fudis-dl, fudis-description-list',
   templateUrl: './description-list.component.html',
   styleUrls: ['./description-list.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class DescriptionListComponent extends GridApiDirective implements OnInit, OnChanges {
   constructor(private _idService: FudisIdService) {
@@ -64,7 +55,6 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
     this._setClasses();
     this._id = this._idService.getNewId('description-list');
   }
-
 
   ngOnChanges(changes: FudisComponentChanges<DescriptionListComponent>): void {
     if (changes.variant?.currentValue) {

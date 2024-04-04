@@ -6,7 +6,6 @@ import {
   Input,
   OnInit,
   Signal,
-  ViewEncapsulation,
   effect,
 } from '@angular/core';
 import { FudisLanguageAbbr, FudisLanguageBadgeContent } from '../../../../types/miscellaneous';
@@ -19,7 +18,6 @@ import { DescriptionListComponent } from '../../description-list.component';
   selector: 'fudis-dt, fudis-description-list-term',
   templateUrl: './description-list-item-term.component.html',
   styleUrls: ['./description-list-item-term.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class DescriptionListItemTermComponent implements OnInit, AfterContentInit {
   constructor(
@@ -38,10 +36,10 @@ export class DescriptionListItemTermComponent implements OnInit, AfterContentIni
     effect(() => {
       const parentVariant = _parentDl.getVariant();
 
-      if(parentVariant() === 'regular') {
-        this._mainCssClass = 'fudis-dl__item__term';
+      if (parentVariant() === 'regular') {
+        this._mainCssClass = 'fudis-dl-item-term__regular';
       } else {
-        this._mainCssClass = 'fudis-dl-compact__item__term';
+        this._mainCssClass = 'fudis-dl-item-term__compact';
       }
     });
   }
@@ -101,9 +99,10 @@ export class DescriptionListItemTermComponent implements OnInit, AfterContentIni
    */
   protected _setSelectedLanguage(lang: FudisLanguageAbbr): void {
     if (this.languages) {
-      this._elementRef.nativeElement.classList.value = `fudis-dt-host fudis-dt-host__${lang}`;
+      this._parentDlItem.selectedLanguage = lang;
+      // this._elementRef.nativeElement.classList.value = `fudis-dt-host fudis-dt-host__${lang}`;
     }
-    this._selectedLanguage = lang;
+    // this._selectedLanguage = lang;
   }
 
   private _setLanguageOptions(): void {

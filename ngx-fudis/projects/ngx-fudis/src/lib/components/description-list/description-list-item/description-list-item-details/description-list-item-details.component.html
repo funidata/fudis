@@ -7,33 +7,16 @@
 </ng-container>
 
 <ng-template #multipleItems>
-  <dd
-    [class]="_mainCssClass"
-    [class.fudis-dl__item__details__fi]="lang === 'fi'"
-    [class.fudis-dl__item__details__en]="lang === 'en'"
-    [class.fudis-dl__item__details__sv]="lang === 'sv'"
-  >
-    <span
-      [class]="_mainCssClass + '__sub-heading'"
-      *ngIf="subHeading"
-    >
+  <dd *ngIf="!lang || (lang && _parentDlItem.selectedLanguage === lang)" [class]="_mainCssClass">
+    <span [class]="_mainCssClass + '__sub-heading'" *ngIf="subHeading">
       {{ subHeading }}
     </span>
     <div [class]="_mainCssClass + '__content'">
-      <span
-        [class]="_mainCssClass + '__parenthesis'"
-        *ngIf="subHeading"
-        >&nbsp;&#40;</span
+      <span [class]="_mainCssClass + '__parenthesis'" *ngIf="subHeading">&nbsp;&#40;</span
       ><ng-container *ngTemplateOutlet="ddContent"></ng-container>
-      <span
-        [class]="_mainCssClass + '__parenthesis'"
-        *ngIf="subHeading"
-        >&#41;</span
-      >
+      <span [class]="_mainCssClass + '__parenthesis'" *ngIf="subHeading">&#41;</span>
       <ng-container *ngIf="actions?.type === 'dd'">
-        <span
-          [class]="_mainCssClass + '__content__actions'"
-        >
+        <span [class]="_mainCssClass + '__content__actions'">
           <ng-container *ngTemplateOutlet="actions!.templateRef" />
         </span>
       </ng-container>
@@ -42,36 +25,16 @@
 </ng-template>
 
 <ng-template #singleItem>
-  <p
-    [class]="_mainCssClass"
-    [class.fudis-dl__item__details__single-item__fi]="lang === 'fi'"
-    [class.fudis-dl__item__details__single-item__en]="lang === 'en'"
-    [class.fudis-dl__item__details__single-item__sv]="lang === 'sv'"
-  >
-    <span
-      [class]="_mainCssClass + '__sub-heading'"
-      *ngIf="subHeading"
-    >
+  <p *ngIf="!lang || (lang && _parentDlItem.selectedLanguage === lang)" [class]="_mainCssClass">
+    <span [class]="_mainCssClass + '__sub-heading'" *ngIf="subHeading">
       {{ subHeading }}
     </span>
-    <span
-      [class]="_mainCssClass + '__content'"
-    >
-      <span
-        [class]="_mainCssClass + '__parenthesis'"
-        *ngIf="subHeading"
-        >&nbsp;&#40;</span
-      >
+    <span [class]="_mainCssClass + '__content'">
+      <span [class]="_mainCssClass + '__parenthesis'" *ngIf="subHeading">&nbsp;&#40;</span>
       <ng-container *ngTemplateOutlet="ddContent"></ng-container>
-      <span
-        [class]="_mainCssClass + '__parenthesis'"
-        *ngIf="subHeading"
-        >&#41;</span
-      >
+      <span [class]="_mainCssClass + '__parenthesis'" *ngIf="subHeading">&#41;</span>
       <ng-container *ngIf="actions?.type === 'dd'">
-        <span
-          [class]="_mainCssClass + '__content__actions'"
-        >
+        <span [class]="_mainCssClass + '__content__actions'">
           <ng-container *ngTemplateOutlet="actions!.templateRef" />
         </span>
       </ng-container>
