@@ -1,12 +1,12 @@
-<ng-container *ngIf="this._childItemIds.length === 1">
+<ng-container *ngIf="this.childDlItems.length === 1">
   <ng-container *ngTemplateOutlet="singleItem" />
 </ng-container>
 
-<ng-container *ngIf="this._childItemIds.length > 1 && !disableGrid">
+<ng-container *ngIf="this.childDlItems.length > 1 && !disableGrid">
   <ng-container *ngTemplateOutlet="multipleItems" />
 </ng-container>
 
-<ng-container *ngIf="this._childItemIds.length > 1 && disableGrid">
+<ng-container *ngIf="this.childDlItems.length > 1 && disableGrid">
   <ng-container *ngTemplateOutlet="disabledGrid" />
 </ng-container>
 

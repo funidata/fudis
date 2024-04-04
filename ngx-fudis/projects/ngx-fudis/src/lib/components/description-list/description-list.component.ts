@@ -37,19 +37,12 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
    * Description List Item id array.
    * If only one DL Item is present, description list should be rendered as plain body-text
    */
-  protected _childItemIds: string[] = [];
+  public childDlItems: string[] = [];
 
   /**
    * Variant signal for child components to listen
    */
   private _dlVariant = signal<FudisDescriptionListVariant>('regular');
-
-  /**
-   * Getter for child DL Item array
-   */
-  get childIds(): string[] {
-    return this._childItemIds;
-  }
 
   ngOnInit(): void {
     this._setClasses();
@@ -70,17 +63,17 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
    * Add Description List Item to the child id array
    */
   public addChildId(id: string): void {
-    this._childItemIds.push(id);
+    this.childDlItems.push(id);
   }
 
   /**
    * Remove Description List Item from the child id array
    */
   public removeChildId(id: string): void {
-    const idToRemove = this._childItemIds.indexOf(id);
+    const idToRemove = this.childDlItems.indexOf(id);
 
     if (idToRemove > -1) {
-      this._childItemIds.splice(idToRemove, 1);
+      this.childDlItems.splice(idToRemove, 1);
     }
   }
 

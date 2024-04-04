@@ -1,8 +1,8 @@
-<ng-container *ngIf="this._parentItems.length > 1">
+<ng-container *ngIf="_parentDl.childDlItems.length > 1">
   <ng-container *ngTemplateOutlet="multipleItems" />
 </ng-container>
 
-<ng-container *ngIf="this._parentItems.length === 1">
+<ng-container *ngIf="_parentDl.childDlItems.length === 1">
   <ng-container *ngTemplateOutlet="singleItem" />
 </ng-container>
 
@@ -21,7 +21,7 @@
 </ng-template>
 
 <ng-template #singleItem>
-  <p [class]="_mainCssClass">
+  <span [class]="_mainCssClass">
     <ng-container *ngTemplateOutlet="dtContent"></ng-container
     ><span [class]="_mainCssClass + '__colon'">:</span>
 
@@ -32,7 +32,7 @@
         (handleBadgeClick)="_setSelectedLanguage($event)"
       />
     </ng-container>
-  </p>
+  </span>
 </ng-template>
 
 <ng-template #dtContent>

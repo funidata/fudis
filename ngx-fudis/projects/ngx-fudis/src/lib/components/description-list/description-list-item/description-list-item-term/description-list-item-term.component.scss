@@ -11,6 +11,7 @@
     @include typography.description-list-key-typography;
     @include colorMixins.text-color("gray-dark");
 
+    display: block;
     margin: 0 0 spacing.$spacing-xs 0;
 
     &__colon {

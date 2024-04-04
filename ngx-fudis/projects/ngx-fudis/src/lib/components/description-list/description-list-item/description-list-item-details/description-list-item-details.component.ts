@@ -1,4 +1,14 @@
-import { Component, ContentChild, Host, Input, OnInit, effect } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ContentChild,
+  ElementRef,
+  Host,
+  Input,
+  OnDestroy,
+  ViewChild,
+  effect,
+} from '@angular/core';
 import { FudisLanguageAbbr } from '../../../../types/miscellaneous';
 import { ActionsDirective } from '../../../../directives/content-projection/actions/actions.directive';
 import { DescriptionListItemComponent } from '../description-list-item.component';
@@ -9,10 +19,10 @@ import { DescriptionListComponent } from '../../description-list.component';
   styleUrls: ['./description-list-item-details.component.scss'],
   templateUrl: './description-list-item-details.component.html',
 })
-export class DescriptionListItemDetailsComponent implements OnInit {
+export class DescriptionListItemDetailsComponent implements AfterViewInit, OnDestroy {
   constructor(
     @Host() protected _parentDlItem: DescriptionListItemComponent,
-    @Host() private _parentDl: DescriptionListComponent,
+    @Host() protected _parentDl: DescriptionListComponent,
   ) {
     effect(() => {
       const parentVariant = _parentDl.getVariant();
@@ -26,15 +36,43 @@ export class DescriptionListItemDetailsComponent implements OnInit {
   }
   @ContentChild(ActionsDirective) actions: ActionsDirective;
 
+  @ViewChild('ddTextContent') content: ElementRef;
+
   @Input() lang: FudisLanguageAbbr;
 
   @Input() subHeading: string | undefined;
 
-  protected _items: string[];
-
   protected _mainCssClass: string;
 
-  ngOnInit(): void {
-    this._items = this._parentDlItem.descriptionListItems;
+  protected _languageLoadFinished: boolean = false;
+
+  ngAfterViewInit(): void {
+    if (this.lang) {
+      this._addNewLanguageToParent();
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this._languageLoadFinished && this.lang) {
+      const currentLanguageOptions = this._parentDlItem.detailsLanguageOptions();
+
+      if (currentLanguageOptions?.[this.lang]) {
+        delete currentLanguageOptions[this.lang];
+      }
+    }
+  }
+
+  private _addNewLanguageToParent(): void {
+    if (this.content?.nativeElement) {
+      const textContent = this.content.nativeElement.textContent;
+      const parsedTextContent =
+        textContent && textContent.replace(/\s/g, '') !== '' ? textContent : null;
+
+      this._parentDlItem.detailsLanguageOptions.set({
+        ...this._parentDlItem.detailsLanguageOptions(),
+        [this.lang]: parsedTextContent,
+      });
+      this._languageLoadFinished = true;
+    }
   }
 }

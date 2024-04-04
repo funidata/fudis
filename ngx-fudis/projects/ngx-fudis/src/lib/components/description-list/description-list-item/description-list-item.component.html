@@ -1,8 +1,8 @@
-<ng-container *ngIf="this.descriptionListItems.length === 1">
+<ng-container *ngIf="_parentDl.childDlItems.length === 1">
   <ng-container *ngTemplateOutlet="singleItem" />
 </ng-container>
 
-<ng-container *ngIf="this.descriptionListItems.length > 1">
+<ng-container *ngIf="_parentDl.childDlItems.length > 1">
   <ng-container *ngTemplateOutlet="multipleItems" />
 </ng-container>
 
@@ -13,9 +13,9 @@
 </ng-template>
 
 <ng-template #singleItem>
-  <div [id]="_id" [class]="_classes">
+  <p [id]="_id" [class]="_classes">
     <ng-container *ngTemplateOutlet="dlItemContent"></ng-container>
-  </div>
+  </p>
 </ng-template>
 
 <ng-template #dlItemContent>

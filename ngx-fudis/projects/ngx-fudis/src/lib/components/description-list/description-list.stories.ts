@@ -211,7 +211,7 @@ const DescriptionListWithLanguagesTemplate: StoryFn<DescriptionListComponent> = 
   args: DescriptionListComponent,
 ) => ({
   props: args,
-  template: html`<fudis-heading [tag]="'h2'" [size]="'md'"
+  template: html`<fudis-heading [level]="2" [size]="'md'"
       >Description List with Language Badges</fudis-heading
     >
     <fudis-description-list

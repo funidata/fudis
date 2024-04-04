@@ -1,47 +1,33 @@
-<ng-container *ngIf="this._items.length === 1">
-  <ng-container *ngTemplateOutlet="singleItem" />
+<ng-container *ngIf="_parentDl.childDlItems.length === 1">
+  <span
+    *ngIf="!lang || (lang && _parentDlItem.selectedLanguage === lang) || !_languageLoadFinished"
+    [class]="_mainCssClass"
+  >
+    <ng-container *ngTemplateOutlet="ddContent"></ng-container>
+  </span>
 </ng-container>
 
-<ng-container *ngIf="this._items.length > 1">
-  <ng-container *ngTemplateOutlet="multipleItems" />
-</ng-container>
-
-<ng-template #multipleItems>
-  <dd *ngIf="!lang || (lang && _parentDlItem.selectedLanguage === lang)" [class]="_mainCssClass">
-    <span [class]="_mainCssClass + '__sub-heading'" *ngIf="subHeading">
-      {{ subHeading }}
-    </span>
-    <div [class]="_mainCssClass + '__content'">
-      <span [class]="_mainCssClass + '__parenthesis'" *ngIf="subHeading">&nbsp;&#40;</span
-      ><ng-container *ngTemplateOutlet="ddContent"></ng-container>
-      <span [class]="_mainCssClass + '__parenthesis'" *ngIf="subHeading">&#41;</span>
-      <ng-container *ngIf="actions?.type === 'dd'">
-        <span [class]="_mainCssClass + '__content__actions'">
-          <ng-container *ngTemplateOutlet="actions!.templateRef" />
-        </span>
-      </ng-container>
-    </div>
+<ng-container *ngIf="_parentDl.childDlItems.length > 1">
+  <dd
+    *ngIf="!lang || (lang && _parentDlItem.selectedLanguage === lang) || !_languageLoadFinished"
+    [class]="_mainCssClass"
+  >
+    <ng-container *ngTemplateOutlet="ddContent"></ng-container>
   </dd>
-</ng-template>
-
-<ng-template #singleItem>
-  <p *ngIf="!lang || (lang && _parentDlItem.selectedLanguage === lang)" [class]="_mainCssClass">
-    <span [class]="_mainCssClass + '__sub-heading'" *ngIf="subHeading">
-      {{ subHeading }}
-    </span>
-    <span [class]="_mainCssClass + '__content'">
-      <span [class]="_mainCssClass + '__parenthesis'" *ngIf="subHeading">&nbsp;&#40;</span>
-      <ng-container *ngTemplateOutlet="ddContent"></ng-container>
-      <span [class]="_mainCssClass + '__parenthesis'" *ngIf="subHeading">&#41;</span>
-      <ng-container *ngIf="actions?.type === 'dd'">
-        <span [class]="_mainCssClass + '__content__actions'">
-          <ng-container *ngTemplateOutlet="actions!.templateRef" />
-        </span>
-      </ng-container>
-    </span>
-  </p>
-</ng-template>
+</ng-container>
 
 <ng-template #ddContent>
-  <ng-content></ng-content>
+  <span [class]="_mainCssClass + '__sub-heading'" *ngIf="subHeading">
+    {{ subHeading }}
+  </span>
+  <span #ddTextContent [class]="_mainCssClass + '__content'">
+    <span *ngIf="subHeading" [class]="_mainCssClass + '__parenthesis'">&nbsp;&#40;</span>
+    <ng-content></ng-content>
+    <span *ngIf="subHeading" [class]="_mainCssClass + '__parenthesis'">&#41;</span>
+    <ng-container *ngIf="actions?.type === 'dd'">
+      <span [class]="_mainCssClass + '__content__actions'">
+        <ng-container *ngTemplateOutlet="actions!.templateRef" />
+      </span>
+    </ng-container>
+  </span>
 </ng-template>

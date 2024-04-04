@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   ContentChildren,
   ElementRef,
@@ -25,14 +24,14 @@ import { DescriptionListComponent } from '../description-list.component';
   styleUrls: ['./description-list-item.component.scss'],
   templateUrl: './description-list-item.component.html',
 })
-export class DescriptionListItemComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DescriptionListItemComponent implements OnInit, OnDestroy {
   constructor(
     private _element: ElementRef,
     private _idService: FudisIdService,
-    @Host() private _parentDescriptionList: DescriptionListComponent,
+    @Host() protected _parentDl: DescriptionListComponent,
   ) {
     effect(() => {
-      this._parentDlVariant = this._parentDescriptionList.getVariant();
+      this._parentDlVariant = _parentDl.getVariant();
 
       if (this._parentDlVariant() === 'regular') {
         this._classes = 'fudis-dl-item__regular';
@@ -48,60 +47,28 @@ export class DescriptionListItemComponent implements OnInit, AfterViewInit, OnDe
   /**
    * Storing list of available languages in dd-elements
    */
-  @Host() public existingLanguageOptions = signal<FudisLanguageBadgeContent>({});
+  @Host() public detailsLanguageOptions = signal<FudisLanguageBadgeContent>({});
 
   /**
    * Internal id for DL Item
    */
   protected _id: string;
 
-  /**
-   * Parent Description List variant
-   */
-  protected _parentDlVariant: Signal<FudisDescriptionListVariant>;
-
   protected _classes: string;
 
   /**
-   * Description List Item length helper
+   * Parent Description List variant
    */
-  public descriptionListItems: string[];
+  private _parentDlVariant: Signal<FudisDescriptionListVariant>;
 
   public selectedLanguage: FudisLanguageAbbr;
 
-  ngAfterViewInit(): void {
-    this._checkCurrentChildren();
-  }
-
   ngOnInit(): void {
     this._id = this._idService.getNewId('description-list-item');
-    this._parentDescriptionList.addChildId(this._id);
-    this.descriptionListItems = this._parentDescriptionList.childIds;
+    this._parentDl.addChildId(this._id);
   }
 
   ngOnDestroy(): void {
-    this._parentDescriptionList.removeChildId(this._id);
-  }
-
-  /**
-   * Check for what languages are available as item's children dd-elements
-   */
-  private _checkCurrentChildren(): void {
-    let temp: FudisLanguageBadgeContent = {};
-
-    if (this.ddChildrenElements) {
-      this.ddChildrenElements.forEach((item) => {
-        const htmlContent = (this._element.nativeElement as HTMLElement).querySelector(
-          `.fudis-dl__item__details__${item.lang} .fudis-dl__item__details__content`,
-        )?.textContent;
-
-        const textContent =
-          htmlContent && htmlContent.replace(/\s/g, '') !== '' ? htmlContent : null;
-
-        temp = { ...temp, [item.lang]: textContent };
-      });
-    }
-
-    this.existingLanguageOptions.set(temp);
+    this._parentDl.removeChildId(this._id);
   }
 }

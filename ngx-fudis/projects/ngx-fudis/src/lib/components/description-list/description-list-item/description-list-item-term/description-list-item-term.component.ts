@@ -4,7 +4,6 @@ import {
   ElementRef,
   Host,
   Input,
-  OnInit,
   Signal,
   effect,
 } from '@angular/core';
@@ -19,13 +18,13 @@ import { DescriptionListComponent } from '../../description-list.component';
   templateUrl: './description-list-item-term.component.html',
   styleUrls: ['./description-list-item-term.component.scss'],
 })
-export class DescriptionListItemTermComponent implements OnInit, AfterContentInit {
+export class DescriptionListItemTermComponent implements AfterContentInit {
   constructor(
     private _elementRef: ElementRef,
     private _translationService: FudisTranslationService,
     private _languageBadgeGroupService: FudisLanguageBadgeGroupService,
     @Host() private _parentDlItem: DescriptionListItemComponent,
-    @Host() private _parentDl: DescriptionListComponent,
+    @Host() protected _parentDl: DescriptionListComponent,
   ) {
     effect(() => {
       this._currentLanguage = _translationService.getLanguage();
@@ -64,11 +63,6 @@ export class DescriptionListItemTermComponent implements OnInit, AfterContentIni
    */
   protected _selectedLanguage: FudisLanguageAbbr;
 
-  /**
-   * Helper to check DL Item length
-   */
-  protected _parentItems: string[];
-
   protected _mainCssClass: string;
 
   /**
@@ -86,10 +80,6 @@ export class DescriptionListItemTermComponent implements OnInit, AfterContentIni
    */
   private _firstLoadFinished: boolean = false;
 
-  ngOnInit(): void {
-    this._parentItems = this._parentDlItem.descriptionListItems;
-  }
-
   ngAfterContentInit(): void {
     this._setLanguageOptions();
   }
@@ -100,16 +90,15 @@ export class DescriptionListItemTermComponent implements OnInit, AfterContentIni
   protected _setSelectedLanguage(lang: FudisLanguageAbbr): void {
     if (this.languages) {
       this._parentDlItem.selectedLanguage = lang;
-      // this._elementRef.nativeElement.classList.value = `fudis-dt-host fudis-dt-host__${lang}`;
     }
-    // this._selectedLanguage = lang;
+    this._selectedLanguage = lang;
   }
 
   private _setLanguageOptions(): void {
     /**
      * Get from parent dl-element list of available languages in dd-elements
      */
-    this._parentLanguageOptions = this._parentDlItem.existingLanguageOptions();
+    this._parentLanguageOptions = this._parentDlItem.detailsLanguageOptions();
 
     /**
      * Compare config lang array with available DOM elements
