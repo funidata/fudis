@@ -13,6 +13,9 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
     super();
   }
 
+  public disabledGridSignal = signal<boolean>(false);
+
+
   /**
    * Disable Fudis Grid behavior for Description List.
    */
@@ -56,6 +59,11 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 
     if (changes.variant || changes.disableGrid) {
       this._setClasses();
+
+      if (changes.disableGrid) {
+        const disableGrid = !!changes.disableGrid.currentValue;
+        this.disabledGridSignal.set(disableGrid);
+      }
     }
   }
 

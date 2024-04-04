@@ -6,16 +6,11 @@ import {
   OnDestroy,
   OnInit,
   QueryList,
-  Signal,
   effect,
   signal,
 } from '@angular/core';
 import { DescriptionListItemDetailsComponent } from './description-list-item-details/description-list-item-details.component';
-import {
-  FudisDescriptionListVariant,
-  FudisLanguageAbbr,
-  FudisLanguageBadgeContent,
-} from '../../../types/miscellaneous';
+import { FudisLanguageAbbr, FudisLanguageBadgeContent } from '../../../types/miscellaneous';
 import { FudisIdService } from '../../../services/id/id.service';
 import { DescriptionListComponent } from '../description-list.component';
 
@@ -31,13 +26,9 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
     effect(() => {
-      this._parentDlVariant = _parentDl.getVariant();
+      _parentDl.disabledGridSignal();
 
-      if (this._parentDlVariant() === 'regular') {
-        this._classes = 'fudis-dl-item__regular';
-      } else {
-        this._classes = 'fudis-dl-item__compact';
-      }
+      this._setClasses();
     });
   }
 
@@ -47,19 +38,14 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
   /**
    * Storing list of available languages in dd-elements
    */
-  @Host() public detailsLanguageOptions = signal<FudisLanguageBadgeContent>({});
+  public detailsLanguageOptions = signal<FudisLanguageBadgeContent>({});
 
   /**
    * Internal id for DL Item
    */
   protected _id: string;
 
-  protected _classes: string;
-
-  /**
-   * Parent Description List variant
-   */
-  private _parentDlVariant: Signal<FudisDescriptionListVariant>;
+  protected _mainCssClass: string;
 
   public selectedLanguage: FudisLanguageAbbr;
 
@@ -70,5 +56,13 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._parentDl.removeChildId(this._id);
+  }
+
+  private _setClasses(): void {
+    if (this._parentDl.disableGrid && this._parentDl.variant !== 'compact') {
+      this._mainCssClass = 'fudis-dl-item__disabled-grid';
+    } else {
+      this._mainCssClass = 'fudis-dl-item';
+    }
   }
 }
