@@ -31,7 +31,6 @@ export const excludeEverythingExceptRegex = (array?: string[]): RegExp => {
 export const excludeAllRegex: RegExp = /.*/;
 
 const buttonCommonExclude: string[] = [
-  'classes',
   'dropdownMenuId',
   'dropdownOpen',
   'buttonEl',
@@ -109,7 +108,6 @@ export const linkExclude: RegExp = excludeRegex([
   'handleBlur',
   'handleFocus',
   'link',
-  'classes',
 ]);
 
 export const notificationExclude: RegExp = excludeRegex(['link']);
