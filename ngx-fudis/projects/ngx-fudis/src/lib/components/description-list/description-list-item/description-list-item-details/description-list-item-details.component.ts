@@ -34,16 +34,35 @@ export class DescriptionListItemDetailsComponent implements AfterViewInit, OnDes
       }
     });
   }
+
+  /**
+   * Possible action buttons for Details element
+   */
   @ContentChild(ActionsDirective) actions: ActionsDirective;
 
+  /**
+   * ViewChild for Details element content
+   */
   @ViewChild('ddTextContent') content: ElementRef;
 
+  /**
+   * Details element language, possible values 'fi', 'sv' and 'en'.
+   */
   @Input() lang: FudisLanguageAbbr;
 
+  /**
+   * Sub heading in between Term and Details elements
+   */
   @Input() subHeading: string | undefined;
 
+  /**
+   * Main CSS class
+   */
   protected _mainCssClass: string;
 
+  /**
+   * Detect if Details' text content has been loaded for current language
+   */
   protected _languageLoadFinished: boolean = false;
 
   ngAfterViewInit(): void {
@@ -62,6 +81,9 @@ export class DescriptionListItemDetailsComponent implements AfterViewInit, OnDes
     }
   }
 
+  /**
+   * Parse Details text content and set parent Description List Item languages
+   */
   private _addNewLanguageToParent(): void {
     if (this.content?.nativeElement) {
       const textContent = this.content.nativeElement.textContent;

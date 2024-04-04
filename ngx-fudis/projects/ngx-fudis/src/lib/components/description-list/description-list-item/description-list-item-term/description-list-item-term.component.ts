@@ -63,6 +63,9 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
    */
   protected _selectedLanguage: FudisLanguageAbbr;
 
+  /**
+   * Main CSS class
+   */
   protected _mainCssClass: string;
 
   /**
@@ -85,7 +88,7 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
   }
 
   /**
-   * When Badge button is clicked, adjust host's CSS classes, so in SCSS other languages are set to 'display: none' and selected one is set to 'display: block'
+   * Set selected language, also in parent Description List Item
    */
   protected _setSelectedLanguage(lang: FudisLanguageAbbr): void {
     if (this.languages) {

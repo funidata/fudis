@@ -165,15 +165,15 @@ const DescriptionListWithSubComponentsTemplate: StoryFn<DescriptionListComponent
       [columns]="columns"
       [rowGap]="rowGap"
     >
-      <fudis-description-list-item>
+      <fudis-dl-item>
         <fudis-dt>First name</fudis-dt>
         <fudis-dd>Rex</fudis-dd>
-      </fudis-description-list-item>
-      <fudis-description-list-item>
+      </fudis-dl-item>
+      <fudis-dl-item>
         <fudis-dt>Last name</fudis-dt>
         <fudis-dd>Dangerwest</fudis-dd>
-      </fudis-description-list-item>
-      <fudis-description-list-item>
+      </fudis-dl-item>
+      <fudis-dl-item>
         <fudis-dt>Alias</fudis-dt>
         <fudis-dd
           >Radical Emmet Xtreme
@@ -186,8 +186,8 @@ const DescriptionListWithSubComponentsTemplate: StoryFn<DescriptionListComponent
             />
           </ng-template>
         </fudis-dd>
-      </fudis-description-list-item>
-      <fudis-description-list-item>
+      </fudis-dl-item>
+      <fudis-dl-item>
         <fudis-dt>Enemy</fudis-dt>
         <fudis-dd [subHeading]="'Archenemy'"
           >Emmet Brickowski
@@ -195,7 +195,7 @@ const DescriptionListWithSubComponentsTemplate: StoryFn<DescriptionListComponent
             <fudis-button [label]="'Read more'" [variant]="'secondary'" [size]="'small'" />
           </ng-template>
         </fudis-dd>
-      </fudis-description-list-item>
+      </fudis-dl-item>
     </fudis-description-list> `,
 });
 

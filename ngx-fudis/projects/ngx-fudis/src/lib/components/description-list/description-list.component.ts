@@ -13,18 +13,26 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
     super();
   }
 
-  public disabledGridSignal = signal<boolean>(false);
-
-
   /**
-   * Disable Fudis Grid behavior for Description List.
+   * Disable Fudis Grid behavior for Description List
    */
   @Input() disableGrid: boolean = false;
 
   /**
-   * Variant for description list structure and layout
+   * Variant for Description List structure and layout
    */
   @Input() variant: FudisDescriptionListVariant = 'regular';
+
+  /**
+   * Signal for listening disableGrid Input
+   */
+  public disabledGridSignal = signal<boolean>(false);
+
+  /**
+   * Child Description List Item array.
+   * If only one DL Item is present, Description List is rendered as paragraph element
+   */
+  public childDlItems: string[] = [];
 
   /**
    * CSS class list
@@ -32,18 +40,12 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
   protected _classList: string[] = [];
 
   /**
-   * Internal id for DL
+   * Internal id
    */
   protected _id: string;
 
   /**
-   * Description List Item id array.
-   * If only one DL Item is present, description list should be rendered as plain body-text
-   */
-  public childDlItems: string[] = [];
-
-  /**
-   * Variant signal for child components to listen
+   * Signal for listening variant Input
    */
   private _dlVariant = signal<FudisDescriptionListVariant>('regular');
 
@@ -68,14 +70,14 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
   }
 
   /**
-   * Add Description List Item to the child id array
+   * Add to the child DL Item array
    */
   public addChildId(id: string): void {
     this.childDlItems.push(id);
   }
 
   /**
-   * Remove Description List Item from the child id array
+   * Remove from the child DL Items array
    */
   public removeChildId(id: string): void {
     const idToRemove = this.childDlItems.indexOf(id);
@@ -85,12 +87,15 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
     }
   }
 
+  /**
+   * Read only signal for Description List variant
+   */
   public getVariant(): Signal<FudisDescriptionListVariant> {
     return this._dlVariant.asReadonly();
   }
 
   /**
-   * To define correct CSS classes
+   * Define correct CSS classes for both variants
    */
   private _setClasses(): void {
     const cssClasses = [];
