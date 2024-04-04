@@ -13,6 +13,7 @@ import { FudisLanguageAbbr, FudisLanguageBadgeContent } from '../../../../types/
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { FudisLanguageBadgeGroupService } from '../../../../services/language-badge-group/language-badge-group.service';
+import { DescriptionListComponent } from '../../description-list.component';
 
 @Component({
   selector: 'fudis-dt, fudis-description-list-term',
@@ -26,11 +27,22 @@ export class DescriptionListItemTermComponent implements OnInit, AfterContentIni
     private _translationService: FudisTranslationService,
     private _languageBadgeGroupService: FudisLanguageBadgeGroupService,
     @Host() private _parentDlItem: DescriptionListItemComponent,
+    @Host() private _parentDl: DescriptionListComponent,
   ) {
     effect(() => {
       this._currentLanguage = _translationService.getLanguage();
       this._languageOptions = this._languageBadgeGroupService.getLanguages();
       this._setLanguageOptions();
+    });
+
+    effect(() => {
+      const parentVariant = _parentDl.getVariant();
+
+      if(parentVariant() === 'regular') {
+        this._mainCssClass = 'fudis-dl__item__term';
+      } else {
+        this._mainCssClass = 'fudis-dl-compact__item__term';
+      }
     });
   }
 
@@ -58,6 +70,8 @@ export class DescriptionListItemTermComponent implements OnInit, AfterContentIni
    * Helper to check DL Item length
    */
   protected _parentItems: string[];
+
+  protected _mainCssClass: string;
 
   /**
    * Fudis config language

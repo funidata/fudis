@@ -36,17 +36,10 @@
       @include typography.description-list-key-typography;
       @include colorMixins.text-color("gray-dark");
 
-      margin-bottom: spacing.$spacing-xs;
+      margin: 0 0 spacing.$spacing-xs 0;
 
       &__colon {
         display: none;
-      }
-
-      &__single-item p {
-        @include typography.description-list-key-typography;
-        @include colorMixins.text-color("gray-dark");
-
-        margin-bottom: spacing.$spacing-xs;
       }
     }
 
@@ -56,7 +49,7 @@
 
       display: flex;
       flex-direction: column;
-      margin-left: 0;
+      margin: 0;
 
       &__single-item {
         &__fi,
@@ -76,15 +69,13 @@
       }
 
       &__content {
+        @include typography.description-list-value-typography;
+
         display: flex;
         flex-direction: column;
 
         &__actions {
           margin-top: spacing.$spacing-xs;
-        }
-
-        &__single-item {
-          @include typography.description-list-value-typography;
         }
       }
 
@@ -94,16 +85,11 @@
 
       &__sub-heading {
         @include colorMixins.text-color("gray-dark");
+        @include typography.description-list-value-typography;
 
         margin-top: 0;
         margin-bottom: spacing.$spacing-xxs;
         font-weight: typographyTokens.$font-weight-regular;
-
-        &__single-item {
-          @include typography.description-list-value-typography;
-
-          font-weight: typographyTokens.$font-weight-regular;
-        }
       }
     }
   }

@@ -7,10 +7,12 @@ import {
   OnDestroy,
   OnInit,
   QueryList,
+  Signal,
+  effect,
   signal,
 } from '@angular/core';
 import { DescriptionListItemDetailsComponent } from './description-list-item-details/description-list-item-details.component';
-import { FudisLanguageBadgeContent } from '../../../types/miscellaneous';
+import { FudisDescriptionListVariant, FudisLanguageBadgeContent } from '../../../types/miscellaneous';
 import { FudisIdService } from '../../../services/id/id.service';
 import { DescriptionListComponent } from '../description-list.component';
 
@@ -23,7 +25,17 @@ export class DescriptionListItemComponent implements OnInit, AfterViewInit, OnDe
     private _element: ElementRef,
     private _idService: FudisIdService,
     @Host() private _parentDescriptionList: DescriptionListComponent,
-  ) {}
+  ) {
+    effect(() => {
+      this._parentDlVariant = this._parentDescriptionList.getVariant();
+
+      if(this._parentDlVariant() === 'regular') {
+        this._classes = 'fudis-dl__item';
+      } else {
+        this._classes = 'fudis-dl-compact__item';
+      }
+    });
+  }
 
   @ContentChildren(DescriptionListItemDetailsComponent)
   ddChildrenElements!: QueryList<DescriptionListItemDetailsComponent>;
@@ -37,6 +49,13 @@ export class DescriptionListItemComponent implements OnInit, AfterViewInit, OnDe
    * Internal id for DL Item
    */
   protected _id: string;
+
+  /**
+   * Parent Description List variant
+   */
+  protected _parentDlVariant: Signal<FudisDescriptionListVariant>;
+
+  protected _classes: string;
 
   /**
    * Description List Item length helper

@@ -1,6 +1,14 @@
-import { Component, Input, OnInit, OnChanges, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  ViewEncapsulation,
+  Signal,
+  signal,
+} from '@angular/core';
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
-import { FudisDescriptionListVariant } from '../../types/miscellaneous';
+import { FudisComponentChanges, FudisDescriptionListVariant } from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
 
 @Component({
@@ -41,6 +49,11 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
   protected _childItemIds: string[] = [];
 
   /**
+   * Variant signal for child components to listen
+   */
+  private _dlVariant = signal<FudisDescriptionListVariant>('regular');
+
+  /**
    * Getter for child DL Item array
    */
   get childIds(): string[] {
@@ -52,8 +65,15 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
     this._id = this._idService.getNewId('description-list');
   }
 
-  ngOnChanges(): void {
-    this._setClasses();
+
+  ngOnChanges(changes: FudisComponentChanges<DescriptionListComponent>): void {
+    if (changes.variant?.currentValue) {
+      this._dlVariant.set(changes.variant.currentValue);
+    }
+
+    if (changes.variant || changes.disableGrid) {
+      this._setClasses();
+    }
   }
 
   /**
@@ -72,6 +92,10 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
     if (idToRemove > -1) {
       this._childItemIds.splice(idToRemove, 1);
     }
+  }
+
+  public getVariant(): Signal<FudisDescriptionListVariant> {
+    return this._dlVariant.asReadonly();
   }
 
   /**
