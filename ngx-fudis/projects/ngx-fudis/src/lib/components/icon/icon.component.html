@@ -1,3 +1,272 @@
 <svg [ngClass]="_classList" aria-hidden="true">
   <use [attr.href]="icon + '.svg#' + icon"></use>
 </svg>
+
+<ng-container *ngIf="icon === 'achievement'">
+  <svg id="achievement" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+    <path
+      d="M24.373 12.384c-.277.894-.664 1.75-1.152 2.55a7.743 7.743 0 0 1-1.067-2.251 29.695 29.695 0 0 1 1.152-3.616 21.15 21.15 0 0 1 1.067 3.317ZM22.209 15.67a8.063 8.063 0 0 1-1.067 2.186 6.729 6.729 0 0 1-1.067-2.133 8.66 8.66 0 0 1 1.067-2.422c.49.722.85 1.523 1.067 2.368Z"
+    />
+    <path
+      d="M24.064 17.888a10.932 10.932 0 0 1-2.9-.47 9.271 9.271 0 0 1 2.132-1.813c.984.023 1.96.177 2.902.459a9.526 9.526 0 0 1-2.134 1.824ZM22.73 20.267a9.804 9.804 0 0 1-2.634 1.066 9.826 9.826 0 0 1-2.496-1.365 9.802 9.802 0 0 1 2.634-1.067c.892.336 1.732.796 2.496 1.366ZM18.826 15.403c.347.778.549 1.613.598 2.464-.181.576-2.027 2.133-2.027 2.133a7.06 7.06 0 0 1-.597-2.475c.192-.608 2.026-2.122 2.026-2.122Z"
+    />
+    <path
+      d="m18.112 19.339 3.307-1.664-2.496 2.282-4.587 2.592.416-1.216 3.36-1.994ZM7.66 12.576c.255.84.613 1.647 1.066 2.4.47-.648.83-1.369 1.067-2.133a29.196 29.196 0 0 0-1.067-3.467 21.546 21.546 0 0 0-1.067 3.2ZM9.792 15.67a8.064 8.064 0 0 0 1.067 2.186 6.73 6.73 0 0 0 1.066-2.133A8.663 8.663 0 0 0 10.86 13.3a7.56 7.56 0 0 0-1.067 2.368Z"
+    />
+    <path
+      d="M7.936 17.888c.984-.025 1.96-.183 2.901-.47a9.27 9.27 0 0 0-2.133-1.813c-.983.023-1.959.177-2.901.459a9.525 9.525 0 0 0 2.133 1.824ZM11.904 21.333a9.825 9.825 0 0 0 2.496-1.365 9.802 9.802 0 0 0-2.635-1.067c-.891.336-1.732.796-2.495 1.366.821.481 1.709.84 2.634 1.066ZM13.174 15.403a7.062 7.062 0 0 0-.598 2.464c.181.576 2.027 2.133 2.027 2.133.347-.782.55-1.62.597-2.475-.192-.608-2.026-2.122-2.026-2.122Z"
+    />
+    <path d="m13.888 19.339-3.307-1.664 2.496 2.282 4.587 2.592-.406-1.216-3.37-1.994Z" />
+  </svg>
+</ng-container>
+
+<ng-container *ngIf="icon === 'achievement-small'"
+  ><svg id="achievement-small" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+    <path
+      d="M14.569 5.603a8.87 8.87 0 0 1-.904 2 6.079 6.079 0 0 1-.837-1.766c.24-.964.543-1.912.904-2.837.35.843.63 1.713.837 2.603ZM12.87 8.18c-.19.61-.473 1.19-.837 1.715a5.282 5.282 0 0 1-.837-1.673c.18-.673.463-1.313.837-1.9.384.566.667 1.195.837 1.858Z"
+    />
+    <path
+      d="M14.327 9.92a8.577 8.577 0 0 1-2.276-.368 7.271 7.271 0 0 1 1.673-1.422 8.636 8.636 0 0 1 2.277.36 7.473 7.473 0 0 1-1.674 1.43ZM13.28 11.787a7.689 7.689 0 0 1-2.067.836 7.708 7.708 0 0 1-1.958-1.07 7.688 7.688 0 0 1 2.067-.838c.7.264 1.359.624 1.958 1.072ZM10.217 7.97c.271.612.43 1.266.468 1.934-.142.452-1.59 1.673-1.59 1.673a5.54 5.54 0 0 1-.468-1.941c.15-.477 1.59-1.665 1.59-1.665Z"
+    />
+    <path
+      d="m9.657 11.059 2.594-1.306-1.958 1.79-3.599 2.034.327-.954 2.636-1.564ZM1.456 5.753c.2.66.481 1.292.837 1.883a5.749 5.749 0 0 0 .837-1.674 22.903 22.903 0 0 0-.837-2.72 16.904 16.904 0 0 0-.837 2.511ZM3.13 8.18c.19.61.473 1.19.837 1.715a5.28 5.28 0 0 0 .837-1.673 6.795 6.795 0 0 0-.837-1.9A5.933 5.933 0 0 0 3.13 8.18Z"
+    />
+    <path
+      d="M1.674 9.92a8.577 8.577 0 0 0 2.276-.368A7.272 7.272 0 0 0 2.276 8.13 8.636 8.636 0 0 0 0 8.49a7.473 7.473 0 0 0 1.674 1.43ZM4.787 12.623a7.708 7.708 0 0 0 1.958-1.07 7.688 7.688 0 0 0-2.067-.838 7.97 7.97 0 0 0-1.958 1.072c.644.377 1.34.66 2.067.836ZM5.782 7.97a5.54 5.54 0 0 0-.469 1.934c.143.452 1.59 1.673 1.59 1.673a5.54 5.54 0 0 0 .47-1.941c-.152-.477-1.59-1.665-1.59-1.665Z"
+    />
+    <path d="M6.343 11.059 3.75 9.753l1.958 1.79 3.599 2.034-.318-.954-2.645-1.564Z" />
+  </svg>
+</ng-container>
+
+<ng-container *ngIf="icon === 'alert'"
+  ><svg id="alert" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+    <path
+      fill-rule="evenodd"
+      d="M15.634 8.5a1 1 0 0 1 1.73 0l7.5 13a1 1 0 0 1-.86 1.5h-15a1 1 0 0 1-.87-1.5l7.5-13Zm8.37 13.5-7.5-13-7.5 13h15Z"
+      clip-rule="evenodd"
+    />
+    <circle cx="16.504" cy="19.75" r=".75" />
+    <path
+      d="M16.504 17.75a.75.75 0 0 1-.75-.75v-3a.75.75 0 0 1 1.5 0v3a.76.76 0 0 1-.75.75Z"
+    /></svg
+></ng-container>
+
+<ng-container *ngIf="icon === 'alert-fill'"
+  ><svg id="alert-fill" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+    <path fill="#fff" fill-rule="evenodd" d="m16.5 9.5 8 14h-16l8-14Z" clip-rule="evenodd" />
+    <path
+      fill="#B83C2E"
+      fill-rule="evenodd"
+      d="M15.634 9.5a1 1 0 0 1 1.73 0l7.5 13a1 1 0 0 1-.86 1.5h-15a1 1 0 0 1-.87-1.5l7.5-13Zm8.37 13.5-7.5-13-7.5 13h15Z"
+      clip-rule="evenodd"
+    />
+    <circle fill="#B83C2E" cx="16.504" cy="20.75" r=".75" />
+    <path
+      fill="#B83C2E"
+      d="M16.504 18.75a.75.75 0 0 1-.75-.75v-3a.75.75 0 0 1 1.5 0v3a.76.76 0 0 1-.75.75Z"
+    /></svg
+></ng-container>
+
+<ng-container *ngIf="icon === 'alert-small'"
+  ><svg id="alert-small" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+    <path
+      fill-rule="evenodd"
+      d="M7.186 1.47a.941.941 0 0 1 1.628 0l7.06 12.237a.942.942 0 0 1-.81 1.412H.945a.941.941 0 0 1-.819-1.412l7.06-12.236Zm7.879 12.708L8.005 1.941.945 14.178h14.12Z"
+      clip-rule="evenodd"
+    />
+    <circle cx="8.005" cy="12.06" r=".706" />
+    <path
+      d="M8.005 10.178a.706.706 0 0 1-.706-.706V6.648a.706.706 0 1 1 1.412 0v2.824a.715.715 0 0 1-.706.706Z"
+    /></svg
+></ng-container>
+
+<ng-container *ngIf="icon === 'archive'"
+  ><svg id="archive" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+    <path
+      d="M25.429 11.83a.533.533 0 0 0-.533.533v10.304a1.6 1.6 0 0 1-1.6 1.6H9.78a1.6 1.6 0 0 1-1.6-1.6V12.363a.533.533 0 1 0-1.067 0v10.304a2.667 2.667 0 0 0 2.667 2.666h13.515a2.677 2.677 0 0 0 2.666-2.666V12.363a.533.533 0 0 0-.533-.534Z"
+    />
+    <path
+      fill-rule="evenodd"
+      d="M8 6.4h17.066a2.667 2.667 0 0 1 2.667 2.667v1.962h-22.4V9.067A2.667 2.667 0 0 1 8 6.4ZM6.4 9.963h20.266v-.896a1.6 1.6 0 0 0-1.6-1.6H8a1.61 1.61 0 0 0-1.6 1.6v.896ZM20.267 17.248c0 .784-.636 1.419-1.42 1.419H14.23a1.419 1.419 0 0 1-1.43-1.419v-.352c0-.79.64-1.43 1.43-1.43h4.619a1.43 1.43 0 0 1 1.419 1.43v.352Zm-6.4-.352v.352a.363.363 0 0 0 .362.352h4.619a.352.352 0 0 0 .352-.352v-.352a.363.363 0 0 0-.352-.363h-4.62a.363.363 0 0 0-.362.363Z"
+      clip-rule="evenodd"
+    /></svg
+></ng-container>
+
+<ng-container *ngIf="icon === 'arrow-big'"
+  ><svg id="arrow-big" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+    <path
+      fill-rule="evenodd"
+      d="M15.925 24.534a1.6 1.6 0 0 1-1.6-1.6v-9.93l-3.06 3.064a1.596 1.596 0 0 1-2.259.005 1.598 1.598 0 0 1-.011-2.258l5.792-5.87c.315-.322.75-.495 1.174-.478.39-.016.858.161 1.166.47l5.861 5.87a1.6 1.6 0 1 1-2.264 2.26l-3.2-3.202v10.07a1.6 1.6 0 0 1-1.6 1.6L36.267 16"
+      clip-rule="evenodd"
+    /></svg
+></ng-container>
+
+<ng-container *ngIf="icon === 'arrow-dashed'"
+  ><svg id="arrow-dashed" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
+    <path d="M23.466 17.067H16v-2.134h7.466v2.134Zm-10.666 0H5.333v-2.134H12.8v2.134Z" />
+    <path d="m26.506 16-6.016 4.267v-8.534L26.506 16Z" /></svg
+></ng-container>
+
+<ng-container *ngIf="icon === 'arrow-solid'"></ng-container>
+
+<ng-container *ngIf="icon === 'back'"></ng-container>
+
+<ng-container *ngIf="icon === 'brochure'"></ng-container>
+
+<ng-container *ngIf="icon === 'bullets'"></ng-container>
+
+<ng-container *ngIf="icon === 'calendar'"></ng-container>
+
+<ng-container *ngIf="icon === 'change-log'"></ng-container>
+
+<ng-container *ngIf="icon === 'check'"></ng-container>
+
+<ng-container *ngIf="icon === 'check-indeterminate-small'"></ng-container>
+
+<ng-container *ngIf="icon === 'check-small'"></ng-container>
+
+<ng-container *ngIf="icon === 'checkmark-circle'"></ng-container>
+
+<ng-container *ngIf="icon === 'chevron'"></ng-container>
+
+<ng-container *ngIf="icon === 'chevron-ring'"></ng-container>
+
+<ng-container *ngIf="icon === 'chevron-ring-fill'"></ng-container>
+
+<ng-container *ngIf="icon === 'clock'"></ng-container>
+
+<ng-container *ngIf="icon === 'close'"></ng-container>
+
+<ng-container *ngIf="icon === 'close-big'"></ng-container>
+
+<ng-container *ngIf="icon === 'code'"></ng-container>
+
+<ng-container *ngIf="icon === 'decrease-indent'"></ng-container>
+
+<ng-container *ngIf="icon === 'delete'"></ng-container>
+
+<ng-container *ngIf="icon === 'dot'"></ng-container>
+
+<ng-container *ngIf="icon === 'edit'"></ng-container>
+
+<ng-container *ngIf="icon === 'editor'"></ng-container>
+
+<ng-container *ngIf="icon === 'exclamation-mark-circle'"></ng-container>
+
+<ng-container *ngIf="icon === 'exclamation-mark-circle-fill'"></ng-container>
+
+<ng-container *ngIf="icon === 'exclamation-mark-small'"></ng-container>
+
+<ng-container *ngIf="icon === 'eye'"></ng-container>
+
+<ng-container *ngIf="icon === 'eye-blind'"></ng-container>
+
+<ng-container *ngIf="icon === 'fail'"></ng-container>
+
+<ng-container *ngIf="icon === 'hourglass'"></ng-container>
+
+<ng-container *ngIf="icon === 'increase-indent'"></ng-container>
+
+<ng-container *ngIf="icon === 'info'"></ng-container>
+
+<ng-container *ngIf="icon === 'info-circle'"></ng-container>
+
+<ng-container *ngIf="icon === 'info-circle-fill'"></ng-container>
+
+<ng-container *ngIf="icon === 'info-small'"></ng-container>
+
+<ng-container *ngIf="icon === 'junction'"></ng-container>
+
+<ng-container *ngIf="icon === 'link'"></ng-container>
+
+<ng-container *ngIf="icon === 'list-add'"></ng-container>
+
+<ng-container *ngIf="icon === 'list-minus'"></ng-container>
+
+<ng-container *ngIf="icon === 'lock'"></ng-container>
+
+<ng-container *ngIf="icon === 'lock-open'"></ng-container>
+
+<ng-container *ngIf="icon === 'magic-wand'"></ng-container>
+
+<ng-container *ngIf="icon === 'mail'"></ng-container>
+
+<ng-container *ngIf="icon === 'menu'"></ng-container>
+
+<ng-container *ngIf="icon === 'message'"></ng-container>
+
+<ng-container *ngIf="icon === 'minus'"></ng-container>
+
+<ng-container *ngIf="icon === 'minus-ring-fill'"></ng-container>
+
+<ng-container *ngIf="icon === 'new-tab'"></ng-container>
+
+<ng-container *ngIf="icon === 'notebook'"></ng-container>
+
+<ng-container *ngIf="icon === 'notification'"></ng-container>
+
+<ng-container *ngIf="icon === 'numbering'"></ng-container>
+
+<ng-container *ngIf="icon === 'pdf'"></ng-container>
+
+<ng-container *ngIf="icon === 'people'"></ng-container>
+
+<ng-container *ngIf="icon === 'person'"></ng-container>
+
+<ng-container *ngIf="icon === 'person-small'"></ng-container>
+
+<ng-container *ngIf="icon === 'picker'"></ng-container>
+
+<ng-container *ngIf="icon === 'pin-small'"></ng-container>
+
+<ng-container *ngIf="icon === 'place'"></ng-container>
+
+<ng-container *ngIf="icon === 'place-ring-fill'"></ng-container>
+
+<ng-container *ngIf="icon === 'plus'"></ng-container>
+
+<ng-container *ngIf="icon === 'print'"></ng-container>
+
+<ng-container *ngIf="icon === 'question-mark'"></ng-container>
+
+<ng-container *ngIf="icon === 'question-mark-small'"></ng-container>
+
+<ng-container *ngIf="icon === 'required'"></ng-container>
+
+<ng-container *ngIf="icon === 'ring-close'"></ng-container>
+
+<ng-container *ngIf="icon === 'ring-close-fill'"></ng-container>
+
+<ng-container *ngIf="icon === 'ring-plus'"></ng-container>
+
+<ng-container *ngIf="icon === 'ring-plus-fill'"></ng-container>
+
+<ng-container *ngIf="icon === 'rosette'"></ng-container>
+
+<ng-container *ngIf="icon === 'rule'"></ng-container>
+
+<ng-container *ngIf="icon === 'search'"></ng-container>
+
+<ng-container *ngIf="icon === 'seats'"></ng-container>
+
+<ng-container *ngIf="icon === 'settings'"></ng-container>
+
+<ng-container *ngIf="icon === 'shopping-cart'"></ng-container>
+
+<ng-container *ngIf="icon === 'sorter'"></ng-container>
+
+<ng-container *ngIf="icon === 'star'"></ng-container>
+
+<ng-container *ngIf="icon === 'switch'"></ng-container>
+
+<ng-container *ngIf="icon === 'three-dots'"></ng-container>
+
+<ng-container *ngIf="icon === 'three-dots-small'"></ng-container>
+
+<ng-container *ngIf="icon === 'waiting-approval'"></ng-container>
+
+<ng-container *ngIf="icon === 'waiting-decline'"></ng-container>
+
+<ng-container *ngIf="icon === 'zoom-in'"></ng-container>
+
+<ng-container *ngIf="icon === 'zoom-out'"></ng-container>
