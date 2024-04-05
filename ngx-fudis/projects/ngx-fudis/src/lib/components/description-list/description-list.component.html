@@ -17,7 +17,7 @@
 </ng-template>
 
 <ng-template #singleItem>
-  <div [id]="_id" class="fudis-description-list-one-item">
+  <div [id]="_id" [class]="_classList">
     <ng-container *ngTemplateOutlet="dlContent"></ng-container>
   </div>
 </ng-template>

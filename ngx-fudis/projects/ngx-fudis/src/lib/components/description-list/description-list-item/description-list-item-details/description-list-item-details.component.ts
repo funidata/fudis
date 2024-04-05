@@ -4,6 +4,7 @@ import {
   ContentChild,
   ElementRef,
   Host,
+  HostBinding,
   Input,
   OnDestroy,
   ViewChild,
@@ -21,6 +22,7 @@ import { DescriptionListComponent } from '../../description-list.component';
 })
 export class DescriptionListItemDetailsComponent implements AfterViewInit, OnDestroy {
   constructor(
+    private _elementRef: ElementRef,
     @Host() protected _parentDlItem: DescriptionListItemComponent,
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
@@ -34,6 +36,11 @@ export class DescriptionListItemDetailsComponent implements AfterViewInit, OnDes
       }
     });
   }
+
+  /**
+   * Binding host CSS class to component wrapper
+   */
+  @HostBinding('class') private _hostClass = 'fudis-dl-item-details-host';
 
   /**
    * Possible action buttons for Details element

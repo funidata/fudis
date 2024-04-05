@@ -1,5 +1,9 @@
 import { Component, ElementRef, Host, OnDestroy, OnInit, effect, signal } from '@angular/core';
-import { FudisLanguageAbbr, FudisLanguageBadgeContent } from '../../../types/miscellaneous';
+import {
+  FudisDescriptionListVariant,
+  FudisLanguageAbbr,
+  FudisLanguageBadgeContent,
+} from '../../../types/miscellaneous';
 import { FudisIdService } from '../../../services/id/id.service';
 import { DescriptionListComponent } from '../description-list.component';
 
@@ -15,8 +19,10 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
     effect(() => {
-      _parentDl.disabledGridSignal();
-      this._setClasses();
+      /**
+       * Listens to parent's changes and updates CSS classes.
+       */
+      this._setClasses(_parentDl.getDisabledGridStatus()(), _parentDl.getVariant()());
     });
   }
 
@@ -42,18 +48,21 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._id = this._idService.getNewId('description-list-item');
+
+    /** Registers itself to the parent */
     this._parentDl.addChildId(this._id);
   }
 
   ngOnDestroy(): void {
+    /** Removes itself from the parent */
     this._parentDl.removeChildId(this._id);
   }
 
   /**
    * DL Item has combined styles for both regular and compact versions but some styles only apply to regular version if parent's disableGrid is true.
    */
-  private _setClasses(): void {
-    if (this._parentDl.disableGrid && this._parentDl.variant !== 'compact') {
+  private _setClasses(disabledGrid: boolean, parentVariant: FudisDescriptionListVariant): void {
+    if (disabledGrid && parentVariant !== 'compact') {
       this._mainCssClass = 'fudis-dl-item__disabled-grid';
     } else {
       this._mainCssClass = 'fudis-dl-item';

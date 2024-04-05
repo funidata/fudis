@@ -4,7 +4,7 @@ import { DescriptionListComponent } from './description-list.component';
 import docs from './docs.mdx';
 import { FudisLanguageBadgeGroupService } from '../../services/language-badge-group/language-badge-group.service';
 import { FudisLanguageAbbr } from '../../types/miscellaneous';
-import { descriptionListExclude, excludeAllRegex } from '../../utilities/storybook';
+import { descriptionListExclude } from '../../utilities/storybook';
 
 @Component({
   selector: 'example-language-service-change-component',
@@ -35,36 +35,6 @@ class LanguageChangeComponent {
   }
 }
 
-@Component({
-  selector: 'example-dl-with-multiple-dd',
-  template: `
-    <fudis-heading>DT element with multiple DD elements</fudis-heading>
-    <fudis-description-list
-      [marginBottom]="'md'"
-      [marginTop]="'md'"
-      [variant]="'regular'"
-      [columns]="'1fr 1fr'"
-      [rowGap]="'sm'"
-      [disableGrid]="'false'"
-    >
-      <fudis-description-list-item>
-        <fudis-dt>Example DT</fudis-dt>
-        <fudis-dd *ngFor="let item of _ddData">{{ item.value }}</fudis-dd>
-      </fudis-description-list-item>
-    </fudis-description-list>
-  `,
-})
-class DlWithMultipleDdComponent {
-  protected _ddData = [
-    { value: 'First DD' },
-    { value: 'Second DD' },
-    { value: 'Third DD' },
-    { value: 'Fourth DD' },
-    { value: 'Fifth DD' },
-    { value: 'Sixth DD' },
-  ];
-}
-
 const html = String.raw;
 
 export default {
@@ -72,7 +42,7 @@ export default {
   component: DescriptionListComponent,
   decorators: [
     moduleMetadata({
-      declarations: [LanguageChangeComponent, DlWithMultipleDdComponent],
+      declarations: [LanguageChangeComponent],
     }),
   ],
   parameters: {
@@ -128,28 +98,37 @@ DescriptionList.args = {
   disableGrid: false,
 };
 
-const DescriptionListItemInsideGridTemplate: StoryFn = () => ({
-  template: html`<fudis-grid [columns]="columns" [rowGap]="'xs'">
+const DescriptionListItemInsideGridTemplate: StoryFn<DescriptionListComponent> = (
+  args: DescriptionListComponent,
+) => ({
+  props: args,
+  template: html`<fudis-grid [columns]="'2'" [rowGap]="'xs'">
     <fudis-heading [level]="2" [size]="'md'"
-      >This is Fudis Grid where DL is used as child component</fudis-heading
+      >Grid where DL is used as child component</fudis-heading
     >
-    <fudis-dl [disableGrid]="true">
+    <fudis-dl [disableGrid]="disableGrid" [variant]="variant">
       <fudis-dl-item>
-        <fudis-dt>Vastuuopettajan sähköposti</fudis-dt>
-        <fudis-dd [subHeading]="'Olli Opettaja'">olli@ope.com</fudis-dd>
+        <fudis-dt>Teacher email</fudis-dt>
+        <fudis-dd [subHeading]="'Severus Snape'">snape@hogwarts.wiz</fudis-dd>
+      </fudis-dl-item>
+      <fudis-dl-item>
+        <fudis-dt>Course name</fudis-dt>
+        <fudis-dd>Defense Against the Dark Arts</fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
     <fudis-body-text
-      >Item next to this Body Text is a lonely Description List component with only one list item.
-      This and DL item are both inside a Fudis Grid.</fudis-body-text
+      >This is Body Text. Both this and the DL next to it are Grid Items inside
+      Grid.</fudis-body-text
     >
   </fudis-grid>`,
-  props: {
-    columns: '1fr 1fr',
-  },
 });
 
 export const DescriptionListItemInsideGrid = DescriptionListItemInsideGridTemplate.bind({});
+
+DescriptionListItemInsideGrid.args = {
+  variant: 'regular',
+  disableGrid: true,
+};
 
 const DescriptionListWithSubComponentsTemplate: StoryFn<DescriptionListComponent> = (
   args: DescriptionListComponent,
@@ -190,8 +169,7 @@ const DescriptionListWithSubComponentsTemplate: StoryFn<DescriptionListComponent
       <fudis-dl-item>
         <fudis-dt>Enemy</fudis-dt>
         <fudis-dd [subHeading]="'Archenemy'"
-          >Emmet Brickowski
-          <ng-template fudisActions [type]="'dd'">
+          >Emmet Brickowski<ng-template fudisActions [type]="'dd'">
             <fudis-button [label]="'Read more'" [variant]="'secondary'" [size]="'small'" />
           </ng-template>
         </fudis-dd>
@@ -246,21 +224,86 @@ DescriptionListWithLanguages.args = {
   disableGrid: false,
 };
 
-const MultipleDdElementsTemplate: StoryFn<DescriptionListComponent> = (
+const multipleDDData = [
+  { value: 'Anakin Skywalker' },
+  { value: 'Obi-Wan Kenobi' },
+  { value: 'Shaak Ti' },
+  { value: 'Stass Allie' },
+  { value: 'Agen Kolar' },
+  { value: 'Depa Billaba' },
+  { value: 'Coleman Kcaj' },
+  { value: 'Saesee Tiin' },
+  { value: 'Oppo Rancisis' },
+  { value: 'Kit Fisto' },
+  { value: 'Plo Koon' },
+  { value: 'Luminara Unduli' },
+  { value: 'Ki-Adi-Mundi' },
+  { value: 'Mace Windu' },
+  { subHeading: 'Grand Master', value: 'Yoda' },
+];
+
+const DescriptionListWithMultipleDdElementsTemplate: StoryFn<DescriptionListComponent> = (
   args: DescriptionListComponent,
 ) => ({
-  props: args,
-  template: html`<example-dl-with-multiple-dd> </example-dl-with-multiple-dd> `,
+  props: { ...args, data: multipleDDData },
+  template: html`
+    <fudis-heading>DT element with multiple DD elements</fudis-heading>
+    <fudis-description-list
+      [marginBottom]="'md'"
+      [marginTop]="'md'"
+      [variant]="'regular'"
+      [columns]="'1fr 1fr'"
+      [rowGap]="'sm'"
+      [disableGrid]="disableGrid"
+      [variant]="variant"
+    >
+      <fudis-description-list-item>
+        <fudis-dt>Members of Jedi High Council</fudis-dt>
+        <fudis-dd [subHeading]="item.subHeading" *ngFor="let item of data"
+          >{{ item.value }}</fudis-dd
+        >
+      </fudis-description-list-item>
+      <fudis-description-list-item>
+        <fudis-dt>Non-Jedi Master Members</fudis-dt>
+        <fudis-dd>Anakin Skywalker</fudis-dd>
+      </fudis-description-list-item>
+    </fudis-description-list>
+  `,
 });
 
-export const DescriptionListWithMultipleDdElements = MultipleDdElementsTemplate.bind({});
+export const DescriptionListWithMultipleDdElements =
+  DescriptionListWithMultipleDdElementsTemplate.bind({});
 DescriptionListWithMultipleDdElements.args = {
   variant: 'regular',
   disableGrid: false,
   serviceDefaults: false,
 };
-DescriptionListWithMultipleDdElements.parameters = {
-  controls: {
-    exclude: excludeAllRegex,
-  },
+
+const DescriptionListWithSingleItemTemplate: StoryFn<DescriptionListComponent> = (
+  args: DescriptionListComponent,
+) => ({
+  props: args,
+  template: html`
+    <fudis-heading>Description List with Single Item</fudis-heading>
+    <fudis-description-list
+      [marginBottom]="'md'"
+      [marginTop]="'md'"
+      [variant]="'regular'"
+      [columns]="'1fr 1fr'"
+      [rowGap]="'sm'"
+      [disableGrid]="disableGrid"
+      [variant]="variant"
+    >
+      <fudis-description-list-item>
+        <fudis-dt>Address</fudis-dt>
+        <fudis-dd [subHeading]="'4 Privet Drive'">Under the stairs</fudis-dd>
+      </fudis-description-list-item>
+    </fudis-description-list>
+  `,
+});
+
+export const DescriptionListWithSingleItem = DescriptionListWithSingleItemTemplate.bind({});
+DescriptionListWithSingleItem.args = {
+  variant: 'regular',
+  disableGrid: false,
 };

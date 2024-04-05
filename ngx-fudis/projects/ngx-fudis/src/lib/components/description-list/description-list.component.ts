@@ -14,7 +14,7 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
   }
 
   /**
-   * Disable Fudis Grid behavior for Description List
+   * Disable Grid behavior for Description List
    */
   @Input() disableGrid: boolean = false;
 
@@ -24,13 +24,8 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
   @Input() variant: FudisDescriptionListVariant = 'regular';
 
   /**
-   * Signal for listening disableGrid Input
-   */
-  public disabledGridSignal = signal<boolean>(false);
-
-  /**
    * Child Description List Item array.
-   * If only one DL Item is present, Description List is rendered as paragraph element
+   * If only one DL Item is present, Description List is rendered as paragraph element.
    */
   public childDlItems: string[] = [];
 
@@ -49,6 +44,11 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
    */
   private _dlVariant = signal<FudisDescriptionListVariant>('regular');
 
+  /**
+   * Signal for listening disableGrid Input, used in DL Item.
+   */
+  private _disabledGridSignal = signal<boolean>(false);
+
   ngOnInit(): void {
     this._setClasses();
     this._id = this._idService.getNewId('description-list');
@@ -64,7 +64,7 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 
       if (changes.disableGrid) {
         const disableGrid = !!changes.disableGrid.currentValue;
-        this.disabledGridSignal.set(disableGrid);
+        this._disabledGridSignal.set(disableGrid);
       }
     }
   }
@@ -88,10 +88,17 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
   }
 
   /**
-   * Read only signal for Description List variant
+   * Read only signal for variant
    */
   public getVariant(): Signal<FudisDescriptionListVariant> {
     return this._dlVariant.asReadonly();
+  }
+
+  /**
+   * Read only signal for disabledGrid value
+   */
+  public getDisabledGridStatus(): Signal<boolean> {
+    return this._disabledGridSignal.asReadonly();
   }
 
   /**
@@ -102,7 +109,6 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 
     if (this.variant === 'regular') {
       cssClasses.push('fudis-dl');
-
       if (this.disableGrid) {
         cssClasses.push('fudis-dl__disabled-grid');
       }

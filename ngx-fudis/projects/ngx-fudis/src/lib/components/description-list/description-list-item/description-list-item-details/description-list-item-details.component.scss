@@ -36,6 +36,10 @@
       margin-bottom: spacing.$spacing-xxs;
       font-weight: typographyTokens.$font-weight-regular;
     }
+
+    &__comma {
+      display: none;
+    }
   }
 
   &__compact {
@@ -56,6 +60,10 @@
 
     &__sub-heading {
       @include utilities.box-reset;
+    }
+
+    &__comma {
+      display: none;
     }
   }
 }
