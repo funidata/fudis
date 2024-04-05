@@ -47,7 +47,7 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
   protected _mainCssClass: string;
 
   ngOnInit(): void {
-    this.id = this._idService.getNewChildId('description-list', this._parentDl.id, true, true);
+    this.id = this._idService.getNewChildId('description-list', this._parentDl.id, 'item');
 
     /** Registers itself to the parent */
     this._parentDl.addChildId(this.id);

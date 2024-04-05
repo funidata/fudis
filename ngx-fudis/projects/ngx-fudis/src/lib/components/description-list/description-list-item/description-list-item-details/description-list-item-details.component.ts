@@ -85,8 +85,7 @@ export class DescriptionListItemDetailsComponent implements OnInit, AfterViewIni
       'description-list',
       this._parentDl.id,
       this._parentDlItem.id,
-      false,
-      true,
+      'details',
     );
   }
 

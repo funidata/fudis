@@ -96,7 +96,7 @@ export class DescriptionListItemTermComponent implements OnInit, AfterContentIni
       'description-list',
       this._parentDl.id,
       this._parentDlItem.id,
-      true,
+      'term',
     );
   }
 
