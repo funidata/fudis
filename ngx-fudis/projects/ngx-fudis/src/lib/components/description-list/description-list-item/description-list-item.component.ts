@@ -37,9 +37,9 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
   public selectedLanguage: FudisLanguageAbbr;
 
   /**
-   * Internal id to pass to parent DL
+   * Id generated with Id Service
    */
-  protected _id: string;
+  public id: string;
 
   /**
    * Main CSS class
@@ -47,15 +47,15 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
   protected _mainCssClass: string;
 
   ngOnInit(): void {
-    this._id = this._idService.getNewId('description-list-item');
+    this.id = this._idService.getNewChildId('description-list', this._parentDl.id, true, true);
 
     /** Registers itself to the parent */
-    this._parentDl.addChildId(this._id);
+    this._parentDl.addChildId(this.id);
   }
 
   ngOnDestroy(): void {
     /** Removes itself from the parent */
-    this._parentDl.removeChildId(this._id);
+    this._parentDl.removeChildId(this.id);
   }
 
   /**

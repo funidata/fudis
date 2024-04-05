@@ -11,13 +11,13 @@
 </ng-container>
 
 <ng-template #disabledGrid>
-  <dl [id]="_id" [class]="_classList" role="list">
+  <dl [id]="id" [class]="_classList" role="list">
     <ng-container *ngTemplateOutlet="dlContent"></ng-container>
   </dl>
 </ng-template>
 
 <ng-template #singleItem>
-  <div [id]="_id" [class]="_classList">
+  <div [id]="id" [class]="_classList">
     <ng-container *ngTemplateOutlet="dlContent"></ng-container>
   </div>
 </ng-template>
@@ -25,7 +25,7 @@
 <ng-template #multipleItems>
   <dl
     fudisGrid
-    [id]="_id"
+    [id]="id"
     [width]="width"
     [align]="align"
     [alignItemsX]="alignItemsX"

@@ -7,14 +7,14 @@
 </ng-container>
 
 <ng-template #multipleItems>
-  <dt [class]="_mainCssClass">
+  <dt [id]="_id" [class]="_mainCssClass">
     <ng-container *ngTemplateOutlet="dtContent"></ng-container
     ><ng-container *ngTemplateOutlet="commonContent"></ng-container>
   </dt>
 </ng-template>
 
 <ng-template #singleItem>
-  <span [class]="_mainCssClass">
+  <span [id]="_id" [class]="_mainCssClass">
     <ng-container *ngTemplateOutlet="dtContent"></ng-container>
     <ng-container *ngTemplateOutlet="commonContent"></ng-container>
   </span>

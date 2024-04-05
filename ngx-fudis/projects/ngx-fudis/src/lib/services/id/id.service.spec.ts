@@ -19,8 +19,6 @@ describe('FudisIdServiceService', () => {
     'autocomplete-multi-select': [],
     datepicker: [],
     daterange: [],
-    'description-list': [],
-    'description-list-item': [],
     dialog: [],
     dropdown: [],
     'error-message': [],
@@ -62,18 +60,6 @@ describe('FudisIdServiceService', () => {
       'fudis-daterange-2',
       'custom-id-for-daterange',
       'fudis-daterange-4',
-    ],
-    'description-list': [
-      'fudis-description-list-1',
-      'fudis-description-list-2',
-      'custom-id-for-description-list',
-      'fudis-description-list-4',
-    ],
-    'description-list-item': [
-      'fudis-description-list-item-1',
-      'fudis-description-list-item-2',
-      'custom-id-for-description-list-item',
-      'fudis-description-list-item-4',
     ],
     dialog: ['fudis-dialog-1', 'fudis-dialog-2', 'custom-id-for-dialog', 'fudis-dialog-4'],
     dropdown: [
@@ -138,6 +124,7 @@ describe('FudisIdServiceService', () => {
   const familyDataBefore: FudisIdFamilyData = {
     breadcrumbs: [],
     'checkbox-group': [],
+    'description-list': [],
     'dropdown-menu': [],
     'radio-button-group': [],
     select: [],
@@ -205,6 +192,38 @@ describe('FudisIdServiceService', () => {
           'checkbox-group-3-custom-child-id',
           'fudis-checkbox-group-3-item-4',
           'fudis-checkbox-group-3-item-5',
+        ],
+      },
+    ],
+    'description-list': [
+      {
+        parent: 'fudis-description-list-1',
+        children: [
+          'fudis-description-list-1-item-1',
+          'fudis-description-list-1-item-2',
+          'description-list-1-custom-child-id',
+          'fudis-description-list-1-item-4',
+          'fudis-description-list-1-item-5',
+        ],
+      },
+      {
+        parent: 'description-list-some-custom-id',
+        children: [
+          'description-list-some-custom-id-item-1',
+          'description-list-some-custom-id-item-2',
+          'description-list-2-custom-child-id',
+          'description-list-some-custom-id-item-4',
+          'description-list-some-custom-id-item-5',
+        ],
+      },
+      {
+        parent: 'fudis-description-list-3',
+        children: [
+          'fudis-description-list-3-item-1',
+          'fudis-description-list-3-item-2',
+          'description-list-3-custom-child-id',
+          'fudis-description-list-3-item-4',
+          'fudis-description-list-3-item-5',
         ],
       },
     ],

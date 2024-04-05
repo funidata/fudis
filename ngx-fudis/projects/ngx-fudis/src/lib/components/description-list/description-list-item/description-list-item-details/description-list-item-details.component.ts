@@ -7,6 +7,7 @@ import {
   HostBinding,
   Input,
   OnDestroy,
+  OnInit,
   ViewChild,
   effect,
 } from '@angular/core';
@@ -14,15 +15,17 @@ import { FudisLanguageAbbr } from '../../../../types/miscellaneous';
 import { ActionsDirective } from '../../../../directives/content-projection/actions/actions.directive';
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { DescriptionListComponent } from '../../description-list.component';
+import { FudisIdService } from '../../../../services/id/id.service';
 
 @Component({
   selector: 'fudis-dd, fudis-description-list-details',
   styleUrls: ['./description-list-item-details.component.scss'],
   templateUrl: './description-list-item-details.component.html',
 })
-export class DescriptionListItemDetailsComponent implements AfterViewInit, OnDestroy {
+export class DescriptionListItemDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private _elementRef: ElementRef,
+    private _idService: FudisIdService,
     @Host() protected _parentDlItem: DescriptionListItemComponent,
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
@@ -63,6 +66,11 @@ export class DescriptionListItemDetailsComponent implements AfterViewInit, OnDes
   @Input() subHeading: string | undefined;
 
   /**
+   * Id generated with Id Service
+   */
+  protected _id: string;
+
+  /**
    * Main CSS class
    */
   protected _mainCssClass: string;
@@ -71,6 +79,16 @@ export class DescriptionListItemDetailsComponent implements AfterViewInit, OnDes
    * Detect if Details' text content has been loaded for current language
    */
   protected _languageLoadFinished: boolean = false;
+
+  ngOnInit(): void {
+    this._id = this._idService.getNewGrandChildId(
+      'description-list',
+      this._parentDl.id,
+      this._parentDlItem.id,
+      false,
+      true,
+    );
+  }
 
   ngAfterViewInit(): void {
     if (this.lang) {

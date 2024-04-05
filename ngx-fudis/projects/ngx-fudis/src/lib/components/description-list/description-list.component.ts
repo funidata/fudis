@@ -30,14 +30,14 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
   public childDlItems: string[] = [];
 
   /**
+   * Id generated with Id Service
+   */
+  public id: string;
+
+  /**
    * CSS class list
    */
   protected _classList: string[] = [];
-
-  /**
-   * Internal id
-   */
-  protected _id: string;
 
   /**
    * Signal for listening variant Input
@@ -51,7 +51,7 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 
   ngOnInit(): void {
     this._setClasses();
-    this._id = this._idService.getNewId('description-list');
+    this.id = this._idService.getNewParentId('description-list');
   }
 
   ngOnChanges(changes: FudisComponentChanges<DescriptionListComponent>): void {

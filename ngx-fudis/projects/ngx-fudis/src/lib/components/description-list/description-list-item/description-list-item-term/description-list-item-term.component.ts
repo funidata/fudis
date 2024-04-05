@@ -4,6 +4,7 @@ import {
   ElementRef,
   Host,
   Input,
+  OnInit,
   Signal,
   effect,
 } from '@angular/core';
@@ -12,17 +13,19 @@ import { FudisTranslationService } from '../../../../services/translation/transl
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { FudisLanguageBadgeGroupService } from '../../../../services/language-badge-group/language-badge-group.service';
 import { DescriptionListComponent } from '../../description-list.component';
+import { FudisIdService } from '../../../../services/id/id.service';
 
 @Component({
   selector: 'fudis-dt, fudis-description-list-term',
   templateUrl: './description-list-item-term.component.html',
   styleUrls: ['./description-list-item-term.component.scss'],
 })
-export class DescriptionListItemTermComponent implements AfterContentInit {
+export class DescriptionListItemTermComponent implements OnInit, AfterContentInit {
   constructor(
     private _elementRef: ElementRef,
     private _translationService: FudisTranslationService,
     private _languageBadgeGroupService: FudisLanguageBadgeGroupService,
+    private _idService: FudisIdService,
     @Host() private _parentDlItem: DescriptionListItemComponent,
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
@@ -69,6 +72,11 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
   protected _mainCssClass: string;
 
   /**
+   * Id generated with Id Service
+   */
+  protected _id: string;
+
+  /**
    * Fudis config language
    */
   private _currentLanguage: FudisLanguageAbbr;
@@ -82,6 +90,15 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
    * Used in check to determine which Language Badge is selected by default on first load
    */
   private _firstLoadFinished: boolean = false;
+
+  ngOnInit(): void {
+    this._id = this._idService.getNewGrandChildId(
+      'description-list',
+      this._parentDl.id,
+      this._parentDlItem.id,
+      true,
+    );
+  }
 
   ngAfterContentInit(): void {
     this._setLanguageOptions();

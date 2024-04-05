@@ -21,8 +21,6 @@ export class FudisIdService {
     'autocomplete-multi-select': [],
     datepicker: [],
     daterange: [],
-    'description-list': [],
-    'description-list-item': [],
     dialog: [],
     dropdown: [],
     'error-message': [],
@@ -44,6 +42,7 @@ export class FudisIdService {
   private _familyData: FudisIdFamilyData = {
     breadcrumbs: [],
     'checkbox-group': [],
+    'description-list': [],
     'dropdown-menu': [],
     'radio-button-group': [],
     select: [],
@@ -84,12 +83,17 @@ export class FudisIdService {
   /**
    * Generate and get a new child id in family
    */
-  public getNewChildId(parentType: FudisIdParent, parentId: string, group?: boolean): string {
+  public getNewChildId(
+    parentType: FudisIdParent,
+    parentId: string,
+    group?: boolean,
+    isDlElement?: boolean,
+  ): string {
     let newId = '';
 
     this._familyData[parentType].forEach((item, index) => {
       if (item.parent === parentId) {
-        if (group) {
+        if (group && !isDlElement) {
           if (!item.childrenGroups) {
             newId = `${parentId}-group-1`;
 
@@ -104,6 +108,24 @@ export class FudisIdService {
 
             this._familyData[parentType][index].childrenGroups?.push({
               parent: `${parentId}-group-${orderNumber + 1}`,
+              children: [],
+            });
+          }
+        } else if (group && isDlElement) {
+          if (!item.childrenGroups) {
+            newId = `${parentId}-item-1`;
+
+            this._familyData[parentType][index] = {
+              ...item,
+              childrenGroups: [{ parent: newId, children: [] }],
+            };
+          } else {
+            const orderNumber = item.childrenGroups!.length;
+
+            newId = `${parentId}-item-${orderNumber + 1}`;
+
+            this._familyData[parentType][index].childrenGroups?.push({
+              parent: `${parentId}-item-${orderNumber + 1}`,
               children: [],
             });
           }
@@ -125,16 +147,25 @@ export class FudisIdService {
     grandParentType: FudisIdParent,
     grandParentId: string,
     parentId: string,
+    isTermElement?: boolean,
+    isDetailsElement?: boolean,
   ): string {
     let newId = '';
 
     this._familyData[grandParentType].forEach((grandParent, index) => {
       if (grandParent.parent === grandParentId) {
         this._familyData[grandParentType][index].childrenGroups?.forEach((parent) => {
-          if (parent.parent === parentId) {
+          if (parent.parent === parentId && !isTermElement && !isDetailsElement) {
             const orderNumber = parent.children.length + 1;
 
             newId = `${parentId}-item-${orderNumber}`;
+            parent.children.push(newId);
+          } else if (parent.parent === parentId && isTermElement && !isDetailsElement) {
+            newId = `${parentId}-term`;
+          } else if (parent.parent === parentId && !isTermElement && isDetailsElement) {
+            const orderNumber = parent.children.length + 1;
+
+            newId = `${parentId}-details-${orderNumber}`;
             parent.children.push(newId);
           }
         });

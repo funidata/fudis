@@ -9,8 +9,6 @@ export const fudisIdComponents = [
   'autocomplete-multi-select',
   'datepicker',
   'daterange',
-  'description-list',
-  'description-list-item',
   'dialog',
   'dropdown',
   'error-message',
@@ -31,6 +29,7 @@ export type FudisIdComponent = (typeof fudisIdComponents)[number];
 export const fudisIdParents = [
   'breadcrumbs',
   'checkbox-group',
+  'description-list',
   'dropdown-menu',
   'radio-button-group',
   'select',
