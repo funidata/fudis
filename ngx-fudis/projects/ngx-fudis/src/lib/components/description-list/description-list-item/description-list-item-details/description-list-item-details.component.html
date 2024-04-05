@@ -10,7 +10,6 @@
 
 <ng-container *ngIf="_parentDl.childDlItems.length > 1">
   <dd
-    #ddElement
     *ngIf="!lang || (lang && _parentDlItem.selectedLanguage === lang) || !_languageLoadFinished"
     [id]="_id"
     [class]="_mainCssClass"
