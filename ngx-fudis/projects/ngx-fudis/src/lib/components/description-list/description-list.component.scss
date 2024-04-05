@@ -2,22 +2,6 @@
 @use "../../foundations/utilities/mixins.scss" as utilities;
 
 .fudis-dl {
-  box-sizing: border-box;
-
-  &__disabled-grid {
-    @include utilities.box-reset;
-
-    columns: 1;
-
-    @include breakpoint.breakpoint("md") {
-      columns: 2;
-    }
-  }
-}
-
-.fudis-dl-compact {
-  box-sizing: border-box;
-
   &__disabled-grid {
     @include utilities.box-reset;
 

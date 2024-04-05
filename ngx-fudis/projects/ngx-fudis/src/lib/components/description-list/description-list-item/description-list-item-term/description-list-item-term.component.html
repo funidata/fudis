@@ -9,32 +9,28 @@
 <ng-template #multipleItems>
   <dt [class]="_mainCssClass">
     <ng-container *ngTemplateOutlet="dtContent"></ng-container
-    ><span [class]="_mainCssClass + '__colon'">:</span>
-    <ng-container *ngIf="_selectedLanguage && _parentLanguageOptions">
-      <fudis-language-badge-group
-        [selectedLanguage]="_selectedLanguage"
-        [languages]="_parentLanguageOptions"
-        (handleBadgeClick)="_setSelectedLanguage($event)"
-      />
-    </ng-container>
+    ><ng-container *ngTemplateOutlet="commonContent"></ng-container>
   </dt>
 </ng-template>
 
 <ng-template #singleItem>
   <span [class]="_mainCssClass">
-    <ng-container *ngTemplateOutlet="dtContent"></ng-container
-    ><span [class]="_mainCssClass + '__colon'">:</span>
-
-    <ng-container *ngIf="_selectedLanguage && _parentLanguageOptions">
-      <fudis-language-badge-group
-        [selectedLanguage]="_selectedLanguage"
-        [languages]="_parentLanguageOptions"
-        (handleBadgeClick)="_setSelectedLanguage($event)"
-      />
-    </ng-container>
+    <ng-container *ngTemplateOutlet="dtContent"></ng-container>
+    <ng-container *ngTemplateOutlet="commonContent"></ng-container>
   </span>
 </ng-template>
 
 <ng-template #dtContent>
   <ng-content></ng-content>
+</ng-template>
+
+<ng-template #commonContent>
+  <span [class]="_mainCssClass + '__colon'">&colon;</span>
+  <ng-container *ngIf="_selectedLanguage && _parentLanguageOptions">
+    <fudis-language-badge-group
+      [selectedLanguage]="_selectedLanguage"
+      [languages]="_parentLanguageOptions"
+      (handleBadgeClick)="_setSelectedLanguage($event)"
+    />
+  </ng-container>
 </ng-template>

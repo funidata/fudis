@@ -59,7 +59,7 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
       this._dlVariant.set(changes.variant.currentValue);
     }
 
-    if (changes.variant || changes.disableGrid) {
+    if (changes.disableGrid) {
       this._setClasses();
 
       if (changes.disableGrid) {
@@ -107,18 +107,10 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
   private _setClasses(): void {
     const cssClasses = [];
 
-    if (this.variant === 'regular') {
-      cssClasses.push('fudis-dl');
-      if (this.disableGrid) {
-        cssClasses.push('fudis-dl__disabled-grid');
-      }
-    }
+    cssClasses.push('fudis-dl');
 
-    if (this.variant === 'compact') {
-      cssClasses.push('fudis-dl-compact');
-      if (this.disableGrid) {
-        cssClasses.push('fudis-dl-compact__disabled-grid');
-      }
+    if (this.disableGrid) {
+      cssClasses.push('fudis-dl__disabled-grid');
     }
 
     const combined = this.classes ? cssClasses.concat(this.classes) : cssClasses;
