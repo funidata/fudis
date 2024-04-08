@@ -4,32 +4,45 @@ import {
   ElementRef,
   Host,
   Input,
+  OnInit,
   Signal,
-  ViewEncapsulation,
   effect,
 } from '@angular/core';
 import { FudisLanguageAbbr, FudisLanguageBadgeContent } from '../../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { FudisLanguageBadgeGroupService } from '../../../../services/language-badge-group/language-badge-group.service';
+import { DescriptionListComponent } from '../../description-list.component';
+import { FudisIdService } from '../../../../services/id/id.service';
 
 @Component({
   selector: 'fudis-dt, fudis-description-list-term',
   templateUrl: './description-list-item-term.component.html',
   styleUrls: ['./description-list-item-term.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
-export class DescriptionListItemTermComponent implements AfterContentInit {
+export class DescriptionListItemTermComponent implements OnInit, AfterContentInit {
   constructor(
     private _elementRef: ElementRef,
     private _translationService: FudisTranslationService,
     private _languageBadgeGroupService: FudisLanguageBadgeGroupService,
+    private _idService: FudisIdService,
     @Host() private _parentDlItem: DescriptionListItemComponent,
+    @Host() protected _parentDl: DescriptionListComponent,
   ) {
     effect(() => {
       this._currentLanguage = _translationService.getLanguage();
       this._languageOptions = this._languageBadgeGroupService.getLanguages();
       this._setLanguageOptions();
+    });
+
+    effect(() => {
+      const parentVariant = _parentDl.getVariant();
+
+      if (parentVariant() === 'regular') {
+        this._mainCssClass = 'fudis-dl-item-term__regular';
+      } else {
+        this._mainCssClass = 'fudis-dl-item-term__compact';
+      }
     });
   }
 
@@ -54,6 +67,16 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
   protected _selectedLanguage: FudisLanguageAbbr;
 
   /**
+   * Main CSS class
+   */
+  protected _mainCssClass: string;
+
+  /**
+   * Id generated with Id Service
+   */
+  protected _id: string;
+
+  /**
    * Fudis config language
    */
   private _currentLanguage: FudisLanguageAbbr;
@@ -68,16 +91,25 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
    */
   private _firstLoadFinished: boolean = false;
 
+  ngOnInit(): void {
+    this._id = this._idService.getNewGrandChildId(
+      'description-list',
+      this._parentDl.id,
+      this._parentDlItem.id,
+      'term',
+    );
+  }
+
   ngAfterContentInit(): void {
     this._setLanguageOptions();
   }
 
   /**
-   * When Badge button is clicked, adjust host's CSS classes, so in SCSS other languages are set to 'display: none' and selected one is set to 'display: block'
+   * Set selected language, also in parent Description List Item
    */
   protected _setSelectedLanguage(lang: FudisLanguageAbbr): void {
     if (this.languages) {
-      this._elementRef.nativeElement.classList.value = `fudis-dt-host fudis-dt-host__${lang}`;
+      this._parentDlItem.selectedLanguage = lang;
     }
     this._selectedLanguage = lang;
   }
@@ -86,7 +118,7 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
     /**
      * Get from parent dl-element list of available languages in dd-elements
      */
-    this._parentLanguageOptions = this._parentDlItem.existingLanguageOptions();
+    this._parentLanguageOptions = this._parentDlItem.detailsLanguageOptions();
 
     /**
      * Compare config lang array with available DOM elements

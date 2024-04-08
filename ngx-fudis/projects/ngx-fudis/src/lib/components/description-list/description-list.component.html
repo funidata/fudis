@@ -1,32 +1,48 @@
-<dl
-  fudisGrid
-  [width]="width"
-  [align]="align"
-  [alignItemsX]="alignItemsX"
-  [alignItemsY]="alignItemsY"
-  [classes]="_classList"
-  [serviceDefaults]="false"
-  [columnGap]="columnGap"
-  [rowGap]="variant === 'compact' ? 'none' : rowGap"
-  [columns]="columns ? columns : 2"
-  [marginBottom]="marginBottom"
-  [marginTop]="marginTop"
-  role="list"
-  *ngIf="!disableGrid"
->
-  <ng-container *ngTemplateOutlet="content" />
-</dl>
+<ng-container *ngIf="this.childDlItems.length === 1">
+  <ng-container *ngTemplateOutlet="singleItem" />
+</ng-container>
 
-<ng-template #content>
-  <ng-container *ngIf="data">
-    <fudis-dl-item *ngFor="let item of data">
-      <fudis-dt>{{ item.key }}</fudis-dt>
-      <fudis-dd [subHeading]="item.subHeading">{{ item.value }}</fudis-dd>
-    </fudis-dl-item>
-  </ng-container>
-  <ng-content />
+<ng-container *ngIf="this.childDlItems.length > 1 && !disableGrid">
+  <ng-container *ngTemplateOutlet="multipleItems" />
+</ng-container>
+
+<ng-container *ngIf="this.childDlItems.length > 1 && disableGrid">
+  <ng-container *ngTemplateOutlet="disabledGrid" />
+</ng-container>
+
+<ng-template #disabledGrid>
+  <dl [id]="id" [class]="_classList" role="list">
+    <ng-container *ngTemplateOutlet="dlContent"></ng-container>
+  </dl>
 </ng-template>
 
-<dl *ngIf="disableGrid" [class]="_classList" role="list">
-  <ng-container *ngTemplateOutlet="content" />
-</dl>
+<ng-template #singleItem>
+  <div [id]="id" [class]="_classList">
+    <ng-container *ngTemplateOutlet="dlContent"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #multipleItems>
+  <dl
+    fudisGrid
+    [id]="id"
+    [width]="width"
+    [align]="align"
+    [alignItemsX]="alignItemsX"
+    [alignItemsY]="alignItemsY"
+    [classes]="_classList"
+    [serviceDefaults]="false"
+    [columnGap]="columnGap"
+    [rowGap]="variant === 'compact' ? 'none' : rowGap"
+    [columns]="columns ? columns : 2"
+    [marginBottom]="marginBottom"
+    [marginTop]="marginTop"
+    role="list"
+  >
+    <ng-container *ngTemplateOutlet="dlContent"></ng-container>
+  </dl>
+</ng-template>
+
+<ng-template #dlContent>
+  <ng-content></ng-content>
+</ng-template>

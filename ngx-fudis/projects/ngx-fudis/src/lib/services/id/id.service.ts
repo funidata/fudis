@@ -42,6 +42,7 @@ export class FudisIdService {
   private _familyData: FudisIdFamilyData = {
     breadcrumbs: [],
     'checkbox-group': [],
+    'description-list': [],
     'dropdown-menu': [],
     'radio-button-group': [],
     select: [],
@@ -82,14 +83,17 @@ export class FudisIdService {
   /**
    * Generate and get a new child id in family
    */
-  public getNewChildId(parentType: FudisIdParent, parentId: string, group?: boolean): string {
+  public getNewChildId(
+    parentType: FudisIdParent,
+    parentId: string,
+    groupType?: 'group' | 'item' | null,
+  ): string {
     let newId = '';
-
     this._familyData[parentType].forEach((item, index) => {
       if (item.parent === parentId) {
-        if (group) {
+        if (groupType) {
           if (!item.childrenGroups) {
-            newId = `${parentId}-group-1`;
+            newId = `${parentId}-${groupType}-1`;
 
             this._familyData[parentType][index] = {
               ...item,
@@ -98,10 +102,10 @@ export class FudisIdService {
           } else {
             const orderNumber = item.childrenGroups!.length;
 
-            newId = `${parentId}-group-${orderNumber + 1}`;
+            newId = `${parentId}-${groupType}-${orderNumber + 1}`;
 
             this._familyData[parentType][index].childrenGroups?.push({
-              parent: `${parentId}-group-${orderNumber + 1}`,
+              parent: `${parentId}-${groupType}-${orderNumber + 1}`,
               children: [],
             });
           }
@@ -117,22 +121,30 @@ export class FudisIdService {
   }
 
   /**
-   * Generate grandchild id. E.g. for select-options under select-group --> fudis-select-4-group-2-item-1
+   * Generate grandchild id. E.g. for select-options under select-group --> fudis-select-4-group-2-option-1
    */
   public getNewGrandChildId(
     grandParentType: FudisIdParent,
     grandParentId: string,
     parentId: string,
+    grandchildName: 'option' | 'term' | 'details',
   ): string {
     let newId = '';
 
-    this._familyData[grandParentType].forEach((grandParent, index) => {
+    this._familyData[grandParentType].findIndex((grandParent, index) => {
       if (grandParent.parent === grandParentId) {
         this._familyData[grandParentType][index].childrenGroups?.forEach((parent) => {
           if (parent.parent === parentId) {
             const orderNumber = parent.children.length + 1;
 
-            newId = `${parentId}-item-${orderNumber}`;
+            if (grandchildName === 'term') {
+              newId = `${parentId}-${grandchildName}`;
+            } else if (grandchildName === 'details') {
+              newId = `${parentId}-${grandchildName}-${orderNumber - 1}`;
+            } else {
+              newId = `${parentId}-${grandchildName}-${orderNumber}`;
+            }
+
             parent.children.push(newId);
           }
         });

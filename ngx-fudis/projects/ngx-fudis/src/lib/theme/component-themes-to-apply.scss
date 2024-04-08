@@ -7,6 +7,8 @@
 @use "../components/grid/grid/grid.component.scss" as grid;
 @use "../foundations/spacing/classes.scss" as spacingClasses;
 @use "../components/link/link.component.scss" as link;
+@use "../components/description-list/description-list-item/description-list-item-details/description-list-item-details-theme.scss"
+  as dd;
 
 // Emit theme-dependent styles for common features used across multiple Material components.
 @include mat.core;

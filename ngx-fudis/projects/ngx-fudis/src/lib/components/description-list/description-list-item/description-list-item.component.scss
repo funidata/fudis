@@ -1,0 +1,17 @@
+@use "../../../foundations/spacing/tokens.scss" as spacing;
+@use "../../../foundations/utilities/mixins.scss" as utilities;
+
+.fudis-dl-item {
+  @include utilities.box-reset;
+
+  display: block;
+  min-height: spacing.$spacing-md;
+
+  &__disabled-grid {
+    @include utilities.box-reset;
+
+    display: block;
+    break-inside: avoid-column;
+    margin-bottom: spacing.$spacing-md;
+  }
+}

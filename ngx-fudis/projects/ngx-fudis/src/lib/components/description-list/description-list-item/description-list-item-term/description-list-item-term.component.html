@@ -1,5 +1,31 @@
-<dt class="fudis-dl__item__term fudis-dl-compact__item__term">
-  <ng-content></ng-content><span class="fudis-dl__item__term__colon">:</span>
+<ng-container *ngIf="_parentDl.childDlItems.length > 1">
+  <ng-container *ngTemplateOutlet="multipleItems" />
+</ng-container>
+
+<ng-container *ngIf="_parentDl.childDlItems.length === 1">
+  <ng-container *ngTemplateOutlet="singleItem" />
+</ng-container>
+
+<ng-template #multipleItems>
+  <dt [id]="_id" [class]="_mainCssClass">
+    <ng-container *ngTemplateOutlet="dtContent"></ng-container
+    ><ng-container *ngTemplateOutlet="commonContent"></ng-container>
+  </dt>
+</ng-template>
+
+<ng-template #singleItem>
+  <span [id]="_id" [class]="_mainCssClass">
+    <ng-container *ngTemplateOutlet="dtContent"></ng-container>
+    <ng-container *ngTemplateOutlet="commonContent"></ng-container>
+  </span>
+</ng-template>
+
+<ng-template #dtContent>
+  <ng-content></ng-content>
+</ng-template>
+
+<ng-template #commonContent>
+  <span [class]="_mainCssClass + '__colon'">&colon;</span>
   <ng-container *ngIf="_selectedLanguage && _parentLanguageOptions">
     <fudis-language-badge-group
       [selectedLanguage]="_selectedLanguage"
@@ -7,4 +33,4 @@
       (handleBadgeClick)="_setSelectedLanguage($event)"
     />
   </ng-container>
-</dt>
+</ng-template>
