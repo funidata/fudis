@@ -4,7 +4,6 @@ import {
   ElementRef,
   Host,
   Input,
-  OnInit,
   Signal,
   effect,
 } from '@angular/core';
@@ -20,7 +19,7 @@ import { FudisIdService } from '../../../../services/id/id.service';
   templateUrl: './description-list-item-term.component.html',
   styleUrls: ['./description-list-item-term.component.scss'],
 })
-export class DescriptionListItemTermComponent implements OnInit, AfterContentInit {
+export class DescriptionListItemTermComponent implements AfterContentInit {
   constructor(
     private _elementRef: ElementRef,
     private _translationService: FudisTranslationService,
@@ -29,6 +28,12 @@ export class DescriptionListItemTermComponent implements OnInit, AfterContentIni
     @Host() private _parentDlItem: DescriptionListItemComponent,
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
+    this._id = this._idService.getNewDlGrandChilId(
+      'term',
+      this._parentDl.id,
+      this._parentDlItem.id,
+    );
+
     effect(() => {
       this._currentLanguage = _translationService.getLanguage();
       this._languageOptions = this._languageBadgeGroupService.getLanguages();
@@ -90,15 +95,6 @@ export class DescriptionListItemTermComponent implements OnInit, AfterContentIni
    * Used in check to determine which Language Badge is selected by default on first load
    */
   private _firstLoadFinished: boolean = false;
-
-  ngOnInit(): void {
-    this._id = this._idService.getNewGrandChildId(
-      'description-list',
-      this._parentDl.id,
-      this._parentDlItem.id,
-      'term',
-    );
-  }
 
   ngAfterContentInit(): void {
     this._setLanguageOptions();

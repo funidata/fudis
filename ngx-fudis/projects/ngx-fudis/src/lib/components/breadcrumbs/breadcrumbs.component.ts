@@ -2,7 +2,6 @@ import {
   Component,
   Input,
   effect,
-  OnInit,
   ViewEncapsulation,
   ChangeDetectionStrategy,
 } from '@angular/core';
@@ -16,11 +15,13 @@ import { FudisIdService } from '../../services/id/id.service';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BreadcrumbsComponent implements OnInit {
+export class BreadcrumbsComponent {
   constructor(
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
   ) {
+    this._id = this._idService.getNewParentId('breadcrumbs');
+
     effect(() => {
       this._breadcrumbsPrefix = this._translationService.getTranslations()().BREADCRUMBS.PREFIX;
     });
@@ -37,10 +38,6 @@ export class BreadcrumbsComponent implements OnInit {
   protected _breadcrumbsPrefix: string;
 
   protected _id: string;
-
-  ngOnInit(): void {
-    this._id = this._idService.getNewParentId('breadcrumbs');
-  }
 
   /**
    * Getter for id

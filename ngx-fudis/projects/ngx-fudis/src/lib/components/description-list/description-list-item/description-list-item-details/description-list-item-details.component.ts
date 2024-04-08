@@ -7,7 +7,6 @@ import {
   HostBinding,
   Input,
   OnDestroy,
-  OnInit,
   ViewChild,
   effect,
 } from '@angular/core';
@@ -22,13 +21,19 @@ import { FudisIdService } from '../../../../services/id/id.service';
   styleUrls: ['./description-list-item-details.component.scss'],
   templateUrl: './description-list-item-details.component.html',
 })
-export class DescriptionListItemDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DescriptionListItemDetailsComponent implements AfterViewInit, OnDestroy {
   constructor(
     private _elementRef: ElementRef,
     private _idService: FudisIdService,
     @Host() protected _parentDlItem: DescriptionListItemComponent,
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
+    this._id = this._idService.getNewDlGrandChilId(
+      'details',
+      this._parentDl.id,
+      this._parentDlItem.id,
+    );
+
     effect(() => {
       const parentVariant = _parentDl.getVariant();
 
@@ -79,15 +84,6 @@ export class DescriptionListItemDetailsComponent implements OnInit, AfterViewIni
    * Detect if Details' text content has been loaded for current language
    */
   protected _languageLoadFinished: boolean = false;
-
-  ngOnInit(): void {
-    this._id = this._idService.getNewGrandChildId(
-      'description-list',
-      this._parentDl.id,
-      this._parentDlItem.id,
-      'details',
-    );
-  }
 
   ngAfterViewInit(): void {
     if (this.lang) {
