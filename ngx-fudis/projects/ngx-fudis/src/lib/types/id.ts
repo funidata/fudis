@@ -31,13 +31,7 @@ export const fudisIdParents = [
   'radio-button-group',
 ] as const;
 
-export const fudisIdGrandParents = ['description-list', 'select', 'multiselect'];
-
-export const fudisIdGrandParentsFirstChild = [
-  'description-list-item',
-  'select-group',
-  'multiselect-group',
-];
+export const fudisIdGrandParents = ['description-list', 'select', 'multiselect'] as const;
 
 export type FudisIdComponent = (typeof fudisIdComponents)[number];
 
@@ -45,47 +39,56 @@ export type FudisIdParent = (typeof fudisIdParents)[number];
 
 export type FudisIdGrandParent = (typeof fudisIdGrandParents)[number];
 
-export type FudisIdGrandParentsFirstChild = (typeof fudisIdGrandParentsFirstChild)[number];
-
+/**
+ * Select and Multiselect component ids and its grouped and non-grouped options
+ */
 export type FudisIdSelectFamily = {
   id: string;
   nonGroupedOptions: string[];
-  groups: FudisIdFamily[];
-};
-
-export type FudisIdDlItem = {
-  // DL item id
-  id: string;
-  children: {
-    // DL term id
-    term: string | null;
-    // DL details ids
-    details: string[];
+  groups: {
+    [groupId: string]: string[];
   };
 };
 
+/**
+ * Description List Item component id and its child term and details ids
+ */
+export type FudisIdDlItem = {
+  term: string | null;
+  details: string[];
+};
+
+/**
+ * Description List component id and its child items
+ */
 export type FudisIdDlFamily = {
-  // Main DL id
   id: string;
-  // DL items
-  children: FudisIdDlItem[];
+  items: {
+    [itemId: string]: FudisIdDlItem;
+  };
 };
 
-export type FudisIdFamily = {
-  id: string;
-  children: string[];
-};
-
+/**
+ * Collection of all ids
+ */
 export type FudisIdData = {
   components: {
     [key in FudisIdComponent]: string[];
   };
   parents: {
-    [key in FudisIdParent]: FudisIdFamily[];
+    [key in FudisIdParent]: {
+      [parentId: string]: string[];
+    };
   };
   grandParents: {
-    'description-list': FudisIdDlFamily[];
-    select: FudisIdSelectFamily[];
-    multiselect: FudisIdSelectFamily[];
+    'description-list': {
+      [parentId: string]: FudisIdDlFamily;
+    };
+    select: {
+      [parentId: string]: FudisIdSelectFamily;
+    };
+    multiselect: {
+      [parentId: string]: FudisIdSelectFamily;
+    };
   };
 };

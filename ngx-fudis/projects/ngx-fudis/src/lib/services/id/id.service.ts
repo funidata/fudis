@@ -3,8 +3,7 @@ import {
   FudisIdComponent,
   FudisIdData,
   FudisIdDlFamily,
-  FudisIdDlItem,
-  FudisIdFamily,
+  FudisIdGrandParent,
   FudisIdParent,
   FudisIdSelectFamily,
 } from '../../types/id';
@@ -36,15 +35,15 @@ export class FudisIdService {
       'validator-error-message': [],
     },
     parents: {
-      breadcrumbs: [],
-      'checkbox-group': [],
-      'dropdown-menu': [],
-      'radio-button-group': [],
+      breadcrumbs: {},
+      'checkbox-group': {},
+      'dropdown-menu': {},
+      'radio-button-group': {},
     },
     grandParents: {
-      'description-list': [],
-      select: [],
-      multiselect: [],
+      'description-list': {},
+      select: {},
+      multiselect: {},
     },
   };
 
@@ -61,23 +60,23 @@ export class FudisIdService {
    * /
 
   /**
-   * Generate and get a new id for a single component. E.g. 'fudis-button-1'
+   * Get an id and add it to collection for a single component. E.g. 'fudis-button-1'
    */
   public getNewId(componentType: FudisIdComponent): string {
     const orderNumber = this._idData.components[componentType].length + 1;
 
     const newId = `fudis-${componentType}-${orderNumber}`;
 
-    this._idData.components[componentType].push(newId);
+    this.addNewId(componentType, newId);
 
     return newId;
   }
 
   /**
-   * To add custom id for a single component
+   * Add an id to collection of single components
    */
-  public addCustomId(componentType: FudisIdComponent, customId: string): void {
-    this._idData.components[componentType].push(customId);
+  public addNewId(componentType: FudisIdComponent, newId: string): void {
+    this._idData.components[componentType].push(newId);
   }
 
   /* ------------------
@@ -86,58 +85,48 @@ export class FudisIdService {
    */
 
   /**
-   * Generate and get a new parent id in family. E.g. 'fudis-breadcrumbs-1'
+   * Get an id and add it to collection for a parent component. E.g. 'fudis-breadcrumbs-1'
    */
   public getNewParentId(componentType: FudisIdParent): string {
-    const orderNumber = this._idData.parents[componentType].length + 1;
+    const orderNumber = Object.keys(this._idData.parents[componentType]).length + 1;
 
     const newId = `fudis-${componentType}-${orderNumber}`;
 
-    this.addCustomParentId(componentType, newId);
+    this.addNewParentId(componentType, newId);
 
     return newId;
   }
 
   /**
-   * To add custom id for a parent which has child components
+   * Add id to collection of parents
    */
-  public addCustomParentId(componentType: FudisIdParent, id: string) {
-    const newItem: FudisIdFamily = {
-      id: id,
-      children: [],
-    };
-
-    this._idData.parents[componentType].push(newItem);
+  public addNewParentId(componentType: FudisIdParent, newId: string): void {
+    this._idData.parents[componentType][newId] = [];
   }
 
   /**
-   * Generate and get a new child id in family. E.g. 'fudis-breadcrumbs-1-item-1'
+   * Get an id and add it to collection for a child component. E.g. 'fudis-breadcrumbs-1-item-1'
    */
   public getNewChildId(parentType: FudisIdParent, parentId: string): string {
     let newId = '';
 
-    for (const parent of this._idData.parents[parentType]) {
-      if (parent.id === parentId) {
-        const orderNumber = parent.children.length + 1;
-        newId = `${parentId}-item-${orderNumber}`;
-        parent.children.push(newId);
-        break;
-      }
+    const orderNumber = Object.keys(this._idData.parents[parentType]?.[parentId]).length + 1;
+
+    if (orderNumber) {
+      newId = `${parentId}-item-${orderNumber}`;
+
+      this._idData.parents[parentType][parentId].push(newId);
     }
 
     return newId;
   }
 
   /**
-   * To add custom id for a child with a parent
+   * Add id to collection of parents children
    */
-  public addCustomChildId(parentType: FudisIdParent, parentId: string, newId: string) {
-    for (const parent of this._idData.parents[parentType]) {
-      if (parent.id === parentId) {
-        parent.children.push(newId);
-        break;
-      }
-    }
+
+  public addNewChildId(parentType: FudisIdParent, parentId: string, customId: string): void {
+    this._idData.parents[parentType]?.[parentId].push(customId);
   }
 
   /* ------------------
@@ -146,80 +135,68 @@ export class FudisIdService {
    */
 
   /**
-   * Gets a new ID for grand parent type components
+   * Get an id and add it to collection for a grand parent type components
    */
-  public getNewGrandParentId(componentType: 'select' | 'multiselect' | 'description-list'): string {
+  public getNewGrandParentId(componentType: FudisIdGrandParent): string {
     let newId = '';
 
-    const orderNumber = this._idData.grandParents[componentType].length + 1;
+    const orderNumber = Object.keys(this._idData.grandParents[componentType]).length + 1;
 
     newId = `fudis-${componentType}-${orderNumber}`;
 
-    this.addCustomGrandParentId(componentType, newId);
+    this.addNewGrandParentId(componentType, newId);
 
     return newId;
   }
 
   /**
-   * Add custom grand parent id
+   * Add grand parent id to data collection
    */
-  public addCustomGrandParentId(
+  public addNewGrandParentId(
     componentType: 'select' | 'multiselect' | 'description-list',
     newId: string,
   ): void {
     if (componentType === 'description-list') {
       const newGrandParent: FudisIdDlFamily = {
         id: newId,
-        children: [],
+        items: {},
       };
-      this._idData.grandParents[componentType].push(newGrandParent);
+      this._idData.grandParents[componentType][newId] = newGrandParent;
     } else {
       const newGrandParent: FudisIdSelectFamily = {
         id: newId,
-        groups: [],
+        groups: {},
         nonGroupedOptions: [],
       };
-      this._idData.grandParents[componentType].push(newGrandParent);
+      this._idData.grandParents[componentType][newId] = newGrandParent;
     }
   }
 
-  /* ------------------
-   * Ids' for three leveled components. E. g. Select, SelectGroup and Select Option and DL, DL Item, DL Term & Details
-   * ------------------
+  /**
+   * Get an id and add it to collection for first child of grandparent. E.g. Select Group or Description List Item
    */
-
   public getNewGroupId(
-    parentId: string,
     componentType: 'select' | 'multiselect' | 'description-list',
+    parentId: string,
   ): string {
     let newId = '';
 
-    for (const parent of this._idData.grandParents[componentType]) {
-      if (parent.id === parentId) {
-        if (componentType === 'description-list') {
-          const orderNumber = (parent as FudisIdDlFamily).children.length + 1;
-          newId = `${parentId}-item-${orderNumber}`;
-          const newDlItem: FudisIdDlItem = {
-            id: newId,
-            children: {
-              term: null,
-              details: [],
-            },
-          };
-          (parent as FudisIdDlFamily).children.push(newDlItem);
-        } else {
-          const orderNumber = (parent as FudisIdSelectFamily).groups.length + 1;
+    if (this._idData.grandParents[componentType]?.[parentId]) {
+      if (componentType === 'description-list') {
+        const orderNumber =
+          Object.keys(this._idData.grandParents[componentType][parentId].items).length + 1;
 
-          newId = `${parentId}-group-${orderNumber}`;
+        newId = `${parentId}-item-${orderNumber}`;
+        this._idData.grandParents[componentType][parentId].items[newId] = {
+          term: null,
+          details: [],
+        };
+      } else {
+        const orderNumber =
+          Object.keys(this._idData.grandParents[componentType][parentId].groups).length + 1;
 
-          const newGroup: FudisIdFamily = {
-            id: newId,
-            children: [],
-          };
-
-          (parent as FudisIdSelectFamily).groups.push(newGroup);
-        }
-        break;
+        newId = `${parentId}-group-${orderNumber}`;
+        this._idData.grandParents[componentType][parentId].groups[newId] = [];
       }
     }
 
@@ -227,7 +204,27 @@ export class FudisIdService {
   }
 
   /**
-   * Generate id for select options --> fudis-select-4-group-2-option-1
+   * Add group id of grand parent to data collection
+   */
+  public addNewGroupId(
+    componentType: 'select' | 'multiselect' | 'description-list',
+    parentId: string,
+    newId: string,
+  ): void {
+    if (this._idData.grandParents[componentType]?.[parentId]) {
+      if (componentType === 'description-list') {
+        this._idData.grandParents[componentType][parentId].items[newId] = {
+          term: null,
+          details: [],
+        };
+      } else {
+        this._idData.grandParents[componentType][parentId].groups[newId] = [];
+      }
+    }
+  }
+
+  /**
+   * Get an id and add it to collection for Select Options --> fudis-select-4-group-2-option-1
    */
   public getNewSelectOptionid(
     selectType: 'select' | 'multiselect',
@@ -236,58 +233,53 @@ export class FudisIdService {
   ): string {
     let newId = '';
 
-    for (const parent of this._idData.grandParents[selectType]) {
-      if (parent.id === selectParentId) {
-        if (groupParentId) {
-          for (const groupParent of parent.groups) {
-            if (groupParent.id === groupParentId) {
-              const orderNumber = groupParent.children.length + 1;
+    if (groupParentId) {
+      const orderNumber =
+        this._idData.grandParents[selectType][selectParentId].groups[groupParentId].length + 1;
 
-              newId = `${selectParentId}-${groupParentId}-option-${orderNumber}`;
-              break;
-            }
-          }
-        } else {
-          const orderNumber = parent.nonGroupedOptions.length;
-          newId = `${selectParentId}-option-${orderNumber}`;
-        }
-        break;
-      }
+      newId = `${groupParentId}-option-${orderNumber}`;
+
+      this._idData.grandParents[selectType][selectParentId].groups[groupParentId].push(newId);
+    } else {
+      const orderNumber =
+        this._idData.grandParents[selectType][selectParentId].nonGroupedOptions.length + 1;
+      newId = `${selectParentId}-option-${orderNumber}`;
+
+      this._idData.grandParents[selectType][selectParentId].nonGroupedOptions.push(newId);
     }
     return newId;
   }
 
+  /**
+   * Get an id and add it to collection for Descrition List Term & Details --> fudis-description-list-1-item-1-term & fudis-description-list-1-item-1-details-1
+   */
   public getNewDlGrandChilId(
     childType: 'term' | 'details',
     parentDlId: string,
     parentItemId: string,
   ): string {
     let newId = '';
-    for (const parentDl of this._idData.grandParents['description-list']) {
-      if (parentDl.id === parentDlId) {
-        for (const parentDlItem of parentDl.children) {
-          if (parentDlItem.id === parentItemId) {
-            if (childType === 'term') {
-              if (parentDlItem.children.term) {
-                throw new Error(
-                  `Description List component with id: '${parentDlId}' has an item with id:'${parentDlItem}' and it has multiple term components! Description List Item component can have only one Term component!`,
-                );
-              }
 
-              newId = `${parentItemId}-term`;
-
-              parentDlItem.children.term = newId;
-            } else {
-              const orderNumber = parentDlItem.children.details.length + 1;
-
-              newId = `${parentItemId}-details-${orderNumber}`;
-
-              parentDlItem.children.details.push(newId);
-            }
-            break;
-          }
+    if (this._idData.grandParents['description-list']?.[parentDlId]?.items[parentItemId]) {
+      if (childType === 'term') {
+        if (this._idData.grandParents['description-list'][parentDlId].items[parentItemId].term) {
+          throw new Error(
+            `Description List component with id: '${parentDlId}' has an item with id:'${parentItemId}' and it has multiple term components! Description List Item component can have only one Term component!`,
+          );
         }
-        break;
+        newId = `${parentItemId}-term`;
+
+        this._idData.grandParents['description-list'][parentDlId].items[parentItemId].term = newId;
+      } else {
+        const orderNumber =
+          this._idData.grandParents['description-list'][parentDlId].items[parentItemId].details
+            .length + 1;
+
+        newId = `${parentItemId}-details-${orderNumber}`;
+
+        this._idData.grandParents['description-list'][parentDlId].items[parentItemId].details.push(
+          newId,
+        );
       }
     }
 
