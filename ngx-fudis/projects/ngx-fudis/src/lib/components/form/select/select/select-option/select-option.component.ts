@@ -29,6 +29,7 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
         'select',
         this._parent.id,
         this._parentGroup.id,
+        'option',
       );
     } else {
       this._id = this._idService.getNewChildId('select', this._parent.id);

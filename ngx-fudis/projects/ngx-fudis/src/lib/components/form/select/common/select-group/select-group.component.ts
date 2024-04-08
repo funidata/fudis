@@ -16,9 +16,9 @@ export class SelectGroupComponent {
     @Host() @Optional() private _parentMultiselect: MultiselectComponent,
   ) {
     if (_parentSelect) {
-      this.id = this._idService.getNewChildId('select', this._parentSelect.id, true);
+      this.id = this._idService.getNewChildId('select', this._parentSelect.id, 'group');
     } else if (_parentMultiselect) {
-      this.id = this._idService.getNewChildId('multiselect', this._parentMultiselect.id, true);
+      this.id = this._idService.getNewChildId('multiselect', this._parentMultiselect.id, 'group');
     }
   }
 

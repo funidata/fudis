@@ -1,0 +1,12 @@
+/* stylelint-disable scss/selector-no-redundant-nesting-selector */
+/* stylelint-disable selector-class-pattern */
+
+// Enable comma in compact variant for DD elements if there are more than one DDs.
+
+.fudis-dl-item-details-host {
+  &:not(:last-of-type) {
+    & .fudis-dl-item-details__compact__comma {
+      display: initial;
+    }
+  }
+}

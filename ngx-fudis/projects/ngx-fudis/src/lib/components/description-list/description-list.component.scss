@@ -1,89 +1,7 @@
-@use "../../foundations/typography/mixins.scss" as typography;
-@use "../../foundations/typography/tokens.scss" as typographyTokens;
-@use "../../foundations/colors/mixins.scss" as colorMixins;
-@use "../../foundations/colors/tokens.scss" as color;
-@use "../../foundations/spacing/tokens.scss" as spacing;
 @use "../../foundations/breakpoints/mixins.scss" as breakpoint;
 @use "../../foundations/utilities/mixins.scss" as utilities;
 
 .fudis-dl {
-  box-sizing: border-box;
-
-  &__disabled-grid {
-    @include utilities.box-reset;
-
-    columns: 1;
-
-    &__item {
-      break-inside: avoid-column;
-
-      &:not(:last-of-type) {
-        margin-bottom: spacing.$spacing-md;
-      }
-    }
-
-    @include breakpoint.breakpoint("md") {
-      columns: 2;
-    }
-  }
-
-  & &__item {
-    @include utilities.box-reset;
-
-    display: inline-block;
-
-    &__term {
-      @include typography.description-list-key-typography;
-      @include colorMixins.text-color("gray-dark");
-
-      margin-bottom: spacing.$spacing-xs;
-
-      &__colon {
-        display: none;
-      }
-    }
-
-    &__details {
-      @include typography.description-list-value-typography;
-      @include colorMixins.text-color("gray-dark");
-
-      display: flex;
-      flex-direction: column;
-      margin-left: 0;
-
-      &__fi,
-      &__sv,
-      &__en {
-        display: none;
-      }
-
-      &__content {
-        display: flex;
-        flex-direction: column;
-
-        &__actions {
-          margin-top: spacing.$spacing-xs;
-        }
-      }
-
-      &__parenthesis {
-        display: none;
-      }
-
-      &__sub-heading {
-        @include colorMixins.text-color("gray-dark");
-
-        margin-top: 0;
-        margin-bottom: spacing.$spacing-xxs;
-        font-weight: typographyTokens.$font-weight-regular;
-      }
-    }
-  }
-}
-
-.fudis-dl-compact {
-  box-sizing: border-box;
-
   &__disabled-grid {
     @include utilities.box-reset;
 
@@ -91,57 +9,6 @@
 
     @include breakpoint.breakpoint("md") {
       columns: 2;
-    }
-  }
-
-  & &__item {
-    min-height: spacing.$spacing-md;
-
-    /* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector, selector-max-class */
-    & .fudis-language-badge-group {
-      display: none;
-    }
-
-    &__term {
-      @include typography.description-list-compact-key-typography;
-      @include colorMixins.text-color("gray-dark");
-
-      display: inline-block;
-      position: relative;
-      padding-left: spacing.$spacing-xs;
-
-      &::before {
-        @include colorMixins.bg-color("gray-middle");
-
-        display: inline-block;
-        position: absolute;
-        top: spacing.$pixel-2;
-        left: 0;
-        width: spacing.$pixel-1;
-        height: 80%;
-        content: "";
-      }
-    }
-
-    &__details {
-      @include typography.description-list-compact-value-typography;
-      @include colorMixins.text-color("gray-dark");
-
-      display: inline-block;
-      margin-left: 0;
-      padding-left: spacing.$spacing-xxs;
-
-      &__content {
-        display: inline;
-      }
-
-      &__parenthesis {
-        display: initial;
-      }
-
-      &__sub-heading {
-        @include utilities.box-reset;
-      }
     }
   }
 }

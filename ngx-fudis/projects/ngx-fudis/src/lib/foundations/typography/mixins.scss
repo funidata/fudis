@@ -175,6 +175,7 @@
 }
 
 @mixin description-list-compact-key-typography {
+  text-transform: none;
   line-height: tokens.$body-text-l-line-height;
   font-family: tokens.$font-family;
   font-size: tokens.$body-text-m-font-size;

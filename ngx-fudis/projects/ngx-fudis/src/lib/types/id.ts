@@ -29,6 +29,7 @@ export type FudisIdComponent = (typeof fudisIdComponents)[number];
 export const fudisIdParents = [
   'breadcrumbs',
   'checkbox-group',
+  'description-list',
   'dropdown-menu',
   'radio-button-group',
   'select',
