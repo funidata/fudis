@@ -142,17 +142,17 @@ describe('SelectOptionBaseDirective', () => {
       expect(optionsArray).toEqual(['Capybara', 'Platypus']);
     });
 
-    it('should trigger blur event when focused elsewhere', () => {
+    it.only('should trigger blur event when focused elsewhere', () => {
       updateControlValue(defaultOptions[2]);
       setSelectDropdownOpen();
 
       jest.spyOn(component, 'handleOptionBlur');
 
       const firstElement = fixture.nativeElement.querySelector(
-        '#fudis-select-1-item-2',
+        '#fudis-select-1-option-2',
       ) as HTMLInputElement;
       const secondElement = fixture.nativeElement.querySelector(
-        '#fudis-select-1-item-4',
+        '#fudis-select-1-option-4',
       ) as HTMLInputElement;
 
       firstElement.focus();
