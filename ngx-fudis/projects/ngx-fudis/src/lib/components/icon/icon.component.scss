@@ -1,12 +1,6 @@
 @use "../../foundations/colors/tokens.scss" as colors;
 @use "../../foundations/spacing/tokens.scss" as spacing;
 
-.fudis-icon-host {
-  display: inline-flex;
-  position: relative;
-  vertical-align: middle;
-}
-
 .fudis-icon {
   box-sizing: border-box;
   display: inline-flex;

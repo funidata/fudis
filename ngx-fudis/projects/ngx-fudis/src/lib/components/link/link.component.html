@@ -16,7 +16,9 @@
     <ng-container *ngIf="!title">
       <span class="fudis-link__external__icon-wrapper">
         {{ externalLink }}
-        <fudis-icon [icon]="'new-tab'" [color]="color" class="fudis-link__external__icon" />
+        <span class="fudis-link__external__icon">
+          <fudis-icon [icon]="'new-tab'" [color]="color" />
+        </span>
       </span>
     </ng-container>
     <ng-container *ngIf="title">
@@ -24,13 +26,17 @@
         {{ _externalLinkTitleParsed[0] }}
         <span class="fudis-link__external__icon-wrapper">
           {{ _externalLinkTitleParsed[1] }}
-          <fudis-icon [icon]="'new-tab'" [color]="color" class="fudis-link__external__icon" />
+          <span class="fudis-link__external__icon">
+            <fudis-icon [icon]="'new-tab'" [color]="color" />
+          </span>
         </span>
       </ng-container>
       <ng-container *ngIf="_externalLinkTitleParsed.length === 1">
         <span class="fudis-link__external__icon-wrapper">
           {{ _externalLinkTitleParsed[0] }}
-          <fudis-icon [icon]="'new-tab'" [color]="color" class="fudis-link__external__icon" />
+          <span class="fudis-link__external__icon">
+            <fudis-icon [icon]="'new-tab'" [color]="color" />
+          </span>
         </span>
       </ng-container>
     </ng-container>
