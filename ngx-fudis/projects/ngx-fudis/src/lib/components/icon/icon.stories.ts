@@ -1,7 +1,10 @@
 import { StoryFn, Meta } from '@storybook/angular';
 import { IconComponent } from './icon.component';
 import { fudisIconArray } from '../../types/icons';
+import { excludeEverythingExceptRegex } from '../../utilities/storybook';
 import readme from './readme.mdx';
+
+const html = String.raw;
 
 export default {
   title: 'Components/Icon',
@@ -49,18 +52,27 @@ export const AllIcons: StoryFn<IconComponent> = (args: IconComponent) => ({
     fudisIconArray,
     ...args,
   },
-  template: `
-	<fudis-grid [columns]="{xs:2, md: 3, lg: 4}" [width]="'sm'">
-		<div class="storybook-flex" style="margin: 0.25rem; justify-content: space-between;" *ngFor="let icon of fudisIconArray;">
-		<fudis-body-text>{{icon}}</fudis-body-text>
-		<fudis-icon [icon]="icon"></fudis-icon>
-		</div>
-	</fudis-grid>
-	`,
+  template: html`
+    <fudis-grid [columns]="{xs:2, md: 3, lg: 4}" [width]="'sm'">
+      <div
+        class="storybook-flex"
+        style="margin: 0.25rem; justify-content: space-between;"
+        *ngFor="let icon of fudisIconArray;"
+      >
+        <fudis-body-text>{{icon}}</fudis-body-text>
+        <fudis-icon [color]="color" [rotate]="rotate" [icon]="icon"></fudis-icon>
+      </div>
+    </fudis-grid>
+  `,
 });
+
+AllIcons.args = {
+  color: 'gray-dark',
+  rotate: 'none',
+};
 
 AllIcons.parameters = {
   controls: {
-    exclude: /.*/g,
+    exclude: excludeEverythingExceptRegex(['color', 'rotate']),
   },
 };

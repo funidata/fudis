@@ -68,11 +68,10 @@ describe('NotificationComponent', () => {
         break;
     }
 
-    const iconElement = getElement(fixture, 'fudis-icon');
-    const iconHref = iconElement.querySelector('use')?.getAttribute('href');
+    const iconElement = getElement(fixture, `.fudis-icon#${icon}`);
 
     expect(component.icon).toEqual(icon);
-    expect(iconHref).toEqual(`${icon}.svg#${icon}`);
+    expect(iconElement).toBeTruthy();
   }
 
   function notificationVariants(variant: FudisNotification): void {

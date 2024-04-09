@@ -4,7 +4,7 @@ import {
   HostBinding,
   Input,
   OnChanges,
-  ViewEncapsulation,
+  ElementRef,
 } from '@angular/core';
 
 import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
@@ -14,10 +14,17 @@ import { FudisComponentChanges } from '../../types/miscellaneous';
   selector: 'fudis-icon',
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss'],
-  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconComponent implements OnChanges {
+  constructor(private _elementRef: ElementRef) {
+    (_elementRef.nativeElement as SVGElement).style.cssText = `
+display: inline-flex;
+position: relative;
+vertical-align: middle;
+`;
+  }
+
   /**
    * Binding host CSS class to component wrapper
    */

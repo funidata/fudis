@@ -1,6 +1,8 @@
 <li class="fudis-breadcrumbs-item" [attr.id]="_id">
   <fudis-link class="fudis-breadcrumbs-item__link" [link]="url" [title]="label" />
-  <fudis-icon class="fudis-breadcrumbs-item__icon" [icon]="'chevron'" />
+  <span class="fudis-breadcrumbs-item__icon">
+    <fudis-icon [icon]="'chevron'" />
+  </span>
   <fudis-body-text class="fudis-breadcrumbs-item__current" [attr.aria-current]="'page'">{{
     label
   }}</fudis-body-text>
