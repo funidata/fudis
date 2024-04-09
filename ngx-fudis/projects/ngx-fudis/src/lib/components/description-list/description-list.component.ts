@@ -102,7 +102,7 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
   }
 
   /**
-   * Define correct CSS classes for both variants
+   * Define correct CSS classes
    */
   private _setClasses(): void {
     const cssClasses = [];
