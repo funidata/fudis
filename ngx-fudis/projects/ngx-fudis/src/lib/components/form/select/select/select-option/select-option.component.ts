@@ -30,8 +30,6 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
       this._parentGroup?.id,
     );
 
-    console.log(this._id);
-
     effect(() => {
       if (this._parent.autocomplete) {
         this._isOptionTyped(this._parent.getAutocompleteFilterText()());

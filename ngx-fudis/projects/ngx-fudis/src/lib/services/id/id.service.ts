@@ -188,7 +188,7 @@ export class FudisIdService {
 
         newId = `${parentId}-item-${orderNumber}`;
         this._idData.grandParents[componentType][parentId].items[newId] = {
-          term: null,
+          term: [],
           details: [],
         };
       } else {
@@ -214,7 +214,7 @@ export class FudisIdService {
     if (this._idData.grandParents[componentType]?.[parentId]) {
       if (componentType === 'description-list') {
         this._idData.grandParents[componentType][parentId].items[newId] = {
-          term: null,
+          term: [],
           details: [],
         };
       } else {
@@ -261,26 +261,15 @@ export class FudisIdService {
     let newId = '';
 
     if (this._idData.grandParents['description-list']?.[parentDlId]?.items[parentItemId]) {
-      if (childType === 'term') {
-        if (this._idData.grandParents['description-list'][parentDlId].items[parentItemId].term) {
-          throw new Error(
-            `Description List component with id: '${parentDlId}' has an item with id:'${parentItemId}' and it has multiple term components! Description List Item component can have only one Term component!`,
-          );
-        }
-        newId = `${parentItemId}-term`;
+      const orderNumber =
+        this._idData.grandParents['description-list'][parentDlId].items[parentItemId][childType]
+          .length + 1;
 
-        this._idData.grandParents['description-list'][parentDlId].items[parentItemId].term = newId;
-      } else {
-        const orderNumber =
-          this._idData.grandParents['description-list'][parentDlId].items[parentItemId].details
-            .length + 1;
+      newId = `${parentItemId}-${childType}-${orderNumber}`;
 
-        newId = `${parentItemId}-details-${orderNumber}`;
-
-        this._idData.grandParents['description-list'][parentDlId].items[parentItemId].details.push(
-          newId,
-        );
-      }
+      this._idData.grandParents['description-list'][parentDlId].items[parentItemId][childType].push(
+        newId,
+      );
     }
 
     return newId;

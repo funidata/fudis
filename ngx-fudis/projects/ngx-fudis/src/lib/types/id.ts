@@ -54,7 +54,7 @@ export type FudisIdSelectFamily = {
  * Description List Item component id and its child term and details ids
  */
 export type FudisIdDlItem = {
-  term: string | null;
+  term: string[];
   details: string[];
 };
 

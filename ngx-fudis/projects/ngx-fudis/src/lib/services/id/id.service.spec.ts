@@ -86,7 +86,7 @@ describe('FudisIdServiceService', () => {
         if (index === 1) {
           const termId = idService.getNewDlGrandChilId('term', parentId, groupId);
 
-          expect(termId).toEqual(`${groupId}-term`);
+          expect(termId).toEqual(`${groupId}-term-1`);
         }
 
         const detailsId = idService.getNewDlGrandChilId('details', parentId, groupId);
@@ -117,7 +117,7 @@ describe('FudisIdServiceService', () => {
 
         createGrandChildrenIds(parentType, parentId, groupId);
       } else {
-        const customGroupId = `${parentType}-${parentIndex}-custom-child-id`;
+        const customGroupId = `fudis-${parentType}-${parentIndex}-custom-child-id`;
 
         idService.addNewGroupId(parentType, parentId, customGroupId);
         createGrandChildrenIds(parentType, parentId, customGroupId);
