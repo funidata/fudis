@@ -150,11 +150,18 @@ test("description list regular with languages", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=variant:regular&id=components-description-list--description-list-with-languages&viewMode=story",
   );
-  await expect(page).toHaveScreenshot("fi-sv-en.png");
+  await expect(page).toHaveScreenshot("1-initial.png");
   await page.getByTestId("lang-btn-1").click();
-  await expect(page).toHaveScreenshot("fi-sv.png");
+  await expect(page).toHaveScreenshot("2-clicked-fi-sv.png");
   await page.getByTestId("lang-btn-2").click();
-  await expect(page).toHaveScreenshot("sv-en.png");
+  await expect(page).toHaveScreenshot("3-clicked-sv-en.png");
   await page.getByTestId("lang-btn-3").click();
-  await expect(page).toHaveScreenshot("sv-fi-en.png");
+  await expect(page).toHaveScreenshot("4-clicked-sv-fi-en.png");
+
+  await page.getByTestId("fudis-language-badge-group-2-item-9").click();
+  await expect(page).toHaveScreenshot("5-clicked-fi-badge.png");
+  await page.getByTestId("fudis-language-badge-group-2-item-10").click();
+  await expect(page).toHaveScreenshot("5-clicked-en-badge.png");
+  await page.getByTestId("fudis-language-badge-group-2-item-8").click();
+  await expect(page).toHaveScreenshot("5-clicked-sv-badge.png");
 });

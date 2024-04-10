@@ -39,6 +39,7 @@ export class FudisIdService {
       breadcrumbs: {},
       'checkbox-group': {},
       'dropdown-menu': {},
+      'language-badge-group': {},
       'radio-button-group': {},
     },
     grandParents: {

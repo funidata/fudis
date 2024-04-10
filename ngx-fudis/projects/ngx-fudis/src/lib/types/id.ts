@@ -29,6 +29,7 @@ export const fudisIdParents = [
   'breadcrumbs',
   'checkbox-group',
   'dropdown-menu',
+  'language-badge-group',
   'radio-button-group',
 ] as const;
 

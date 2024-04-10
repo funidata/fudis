@@ -12,6 +12,7 @@ import {
 import { FudisLanguageAbbr, FudisTranslationConfig } from '../../../types/miscellaneous';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { FudisIdService } from '../../../services/id/id.service';
 
 @Component({
   selector: 'fudis-language-badge',
@@ -20,7 +21,10 @@ import { FudisTranslationService } from '../../../services/translation/translati
   encapsulation: ViewEncapsulation.None,
 })
 export class LanguageBadgeComponent extends TooltipApiDirective implements OnInit, OnChanges {
-  constructor(private _translationService: FudisTranslationService) {
+  constructor(
+    private _translationService: FudisTranslationService,
+    private _idService: FudisIdService,
+  ) {
     super();
     this._translations = this._translationService.getTranslations();
     this._selectedLabel = this._translations().LANGUAGE_BADGE.ARIA_LABEL.SELECTED;
@@ -38,6 +42,16 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnIni
   @Input({ required: true }) language: FudisLanguageAbbr;
 
   /*
+   * Mandatory Language Badge label
+   */
+  @Input({ required: true }) label: string;
+
+  /*
+   * Parent group's id
+   */
+  @Input({ required: true }) parentId: string;
+
+  /*
    * Selected state of a Language Badge
    */
   @Input() selected: boolean;
@@ -46,11 +60,6 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnIni
    * Language Badge variant
    */
   @Input() variant: 'standard' | 'missing' = 'standard';
-
-  /*
-   * Mandatory Language Badge label
-   */
-  @Input({ required: true }) label: string;
 
   /*
    * Assistive aria-label
@@ -78,12 +87,18 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnIni
   protected _missingTranslation: string;
 
   /**
+   * Generated HTML id
+   */
+  protected _id: string;
+
+  /**
    * Fudis translations
    */
   protected _translations: Signal<FudisTranslationConfig>;
 
   ngOnInit(): void {
     this._setLabel();
+    this._id = this._idService.getNewChildId('language-badge-group', this.parentId);
   }
 
   ngOnChanges(): void {
