@@ -61,19 +61,6 @@ describe('GridItemComponent', () => {
     return fixture.debugElement.queryAll(By.css('fudis-grid-item'));
   }
 
-  function getAttribute(index: number, attr: string) {
-    switch (attr) {
-      case 'justify-self':
-        return getGridItemComponent()[index].nativeElement.style.justifySelf;
-      case 'align-self':
-        return getGridItemComponent()[index].nativeElement.style.alignSelf;
-      case 'grid-column':
-        return getGridItemComponent()[index].nativeElement.style.gridColumn;
-      default:
-        break;
-    }
-  }
-
   describe('Component creation', () => {
     it('should create mock component', () => {
       expect(component).toBeTruthy();
@@ -84,54 +71,5 @@ describe('GridItemComponent', () => {
     });
   });
 
-  describe('Style properties', () => {
-    // TODO: Use visual regression tests instead of testing style attribute values directly.
-    it.skip('should convert given alingX and alignSelfY attributes to style properties', () => {
-      fixture.detectChanges();
-
-      expect(getAttribute(1, 'justify-self')).toBe('stretch');
-      expect(getAttribute(1, 'align-self')).toBe('stretch');
-
-      component.alignSelfY = 'end';
-      component.alignSelfX = 'end';
-      fixture.detectChanges();
-
-      expect(getAttribute(1, 'justify-self')).toBe('end');
-      expect(getAttribute(1, 'align-self')).toBe('end');
-
-      component.alignSelfY = 'start';
-      component.alignSelfX = 'start';
-      fixture.detectChanges();
-
-      expect(getAttribute(1, 'justify-self')).toBe('start');
-      expect(getAttribute(1, 'align-self')).toBe('start');
-
-      component.alignSelfY = 'center';
-      component.alignSelfX = 'center';
-      fixture.detectChanges();
-
-      expect(getAttribute(1, 'justify-self')).toBe('center');
-      expect(getAttribute(1, 'align-self')).toBe('center');
-    });
-
-    // TODO: Use visual regression tests instead of testing style attribute values directly.
-    it.skip('should convert columns attribute to grid-column properties', () => {
-      fixture.detectChanges();
-
-      const columnsBeforeValid =
-        (getAttribute(0, 'grid-column') === '1' || getAttribute(0, 'grid-column') === '1 / auto') ??
-        true;
-
-      expect(columnsBeforeValid).toEqual(true);
-
-      component.columns = '3';
-      fixture.detectChanges();
-
-      const columnsAfterValid =
-        (getAttribute(0, 'grid-column') === '3' || getAttribute(0, 'grid-column') === '3 / auto') ??
-        true;
-
-      expect(columnsAfterValid).toEqual(true);
-    });
-  });
+  // NOTE: as most of components functionality is visual and it adds inline style properties testing these with Jest is not feasible. Visual Regression tests should be sufficient to cover testing these.
 });

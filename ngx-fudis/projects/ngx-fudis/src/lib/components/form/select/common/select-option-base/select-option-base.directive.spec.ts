@@ -142,7 +142,7 @@ describe('SelectOptionBaseDirective', () => {
       expect(optionsArray).toEqual(['Capybara', 'Platypus']);
     });
 
-    it.only('should trigger blur event when focused elsewhere', () => {
+    it('should trigger blur event when focused elsewhere', () => {
       updateControlValue(defaultOptions[2]);
       setSelectDropdownOpen();
 
