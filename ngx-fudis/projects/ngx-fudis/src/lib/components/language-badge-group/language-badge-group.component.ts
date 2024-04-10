@@ -14,10 +14,7 @@ import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.direct
   styleUrls: ['./language-badge-group.component.scss'],
 })
 export class LanguageBadgeGroupComponent extends TooltipApiDirective implements OnInit {
-  constructor(
-    private _translationService: FudisTranslationService,
-    
-  ) {
+  constructor(private _translationService: FudisTranslationService) {
     super();
     effect(() => {
       this._languageOptions = _translationService.getBadgeGroupLanguages();

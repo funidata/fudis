@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FudisFocusService } from './focus.service';
 import { Component } from '@angular/core';
-// import { getElement } from '../../utilities/tests/utilities';
 import { ButtonComponent } from '../../components/button/button.component';
 import { LinkComponent } from '../../components/link/link.component';
 import { IconComponent } from '../../components/icon/icon.component';
@@ -29,7 +28,6 @@ class MockFocusComponent {
   focusedId: string;
 
   handleFocus(id: string) {
-    console.log('hellou!!!!!!!!');
     this.focusedId = id;
   }
 }

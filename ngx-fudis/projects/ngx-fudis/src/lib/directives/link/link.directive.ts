@@ -35,6 +35,8 @@ export class LinkDirective extends LinkApiDirective implements OnInit, OnChanges
     } else {
       this.id = this._idService.getNewId('link');
     }
+
+    this._bindedElement.nativeElement.setAttribute('id', this.id);
   }
 
   ngOnChanges(changes: FudisComponentChanges<LinkDirective>): void {

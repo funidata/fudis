@@ -5,7 +5,6 @@ import { FudisTranslationService } from '../../../services/translation/translati
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisIdParent } from '../../../types/id';
 import { FormGroup } from '@angular/forms';
-import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Directive({
   selector: '[fudisFieldSetBase]',
@@ -14,7 +13,6 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   constructor(
     protected _idService: FudisIdService,
     protected _translationService: FudisTranslationService,
-    protected _focusService: FudisFocusService,
     protected _changeDetectorRef: ChangeDetectorRef,
   ) {
     super();
