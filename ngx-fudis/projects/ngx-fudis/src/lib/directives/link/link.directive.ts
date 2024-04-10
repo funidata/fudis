@@ -1,12 +1,18 @@
 import { OnInit, AfterViewInit, Directive, ElementRef, OnChanges, Input } from '@angular/core';
 import { LinkApiDirective } from './link-api/link-api.directive';
 import { FudisComponentChanges } from '../../types/miscellaneous';
+import { FudisFocusService } from '../../services/focus/focus.service';
+import { FudisIdService } from '../../services/id/id.service';
 
 @Directive({
   selector: '[fudisLink]',
 })
 export class LinkDirective extends LinkApiDirective implements OnInit, OnChanges, AfterViewInit {
-  constructor(protected _bindedElement: ElementRef<HTMLAnchorElement>) {
+  constructor(
+    protected _bindedElement: ElementRef<HTMLAnchorElement>,
+    private _focusService: FudisFocusService,
+    private _idService: FudisIdService,
+  ) {
     super();
   }
 
@@ -15,39 +21,25 @@ export class LinkDirective extends LinkApiDirective implements OnInit, OnChanges
    */
   @Input() classes: string[] = [];
 
-  /**
-   * Helper counter for setting link focus
-   */
-  private _focusTryCounter: number = 0;
-
   ngAfterViewInit(): void {
     if (this.initialFocus) {
-      this._focusToLink();
+      this._focusToAnchorElement();
     }
   }
 
   ngOnInit(): void {
     this._setCssClasses();
+
+    if (this.id) {
+      this._idService.addNewId('link', this.id);
+    } else {
+      this.id = this._idService.getNewId('link');
+    }
   }
 
   ngOnChanges(changes: FudisComponentChanges<LinkDirective>): void {
     if (changes.color || changes.size || changes.classes) {
       this._setCssClasses();
-    }
-  }
-
-  /**
-   * Set visible focus to the link
-   */
-  protected _focusToLink(): void {
-    if (this._bindedElement?.nativeElement) {
-      (this._bindedElement.nativeElement as HTMLAnchorElement).focus();
-      this._focusTryCounter = 0;
-    } else if (this._focusTryCounter < 100) {
-      setTimeout(() => {
-        this._focusTryCounter += 1;
-        this._focusToLink();
-      }, 100);
     }
   }
 
@@ -70,5 +62,11 @@ export class LinkDirective extends LinkApiDirective implements OnInit, OnChanges
       .join(' ');
 
     (this._bindedElement.nativeElement as HTMLElement).classList.value = arrayToString;
+  }
+
+  private _focusToAnchorElement(): void {
+    if (this._bindedElement?.nativeElement && !this._focusService.isIgnored(this.id)) {
+      (this._bindedElement.nativeElement as HTMLAnchorElement).focus();
+    }
   }
 }
