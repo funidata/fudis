@@ -149,10 +149,10 @@ describe('SelectOptionBaseDirective', () => {
       jest.spyOn(component, 'handleOptionBlur');
 
       const firstElement = fixture.nativeElement.querySelector(
-        '#fudis-select-1-item-2',
+        '#fudis-select-1-option-2',
       ) as HTMLInputElement;
       const secondElement = fixture.nativeElement.querySelector(
-        '#fudis-select-1-item-4',
+        '#fudis-select-1-option-4',
       ) as HTMLInputElement;
 
       firstElement.focus();

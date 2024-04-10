@@ -24,16 +24,11 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
 
     this._parent = _parentSelect;
 
-    if (this._parentGroup) {
-      this._id = this._idService.getNewGrandChildId(
-        'select',
-        this._parent.id,
-        this._parentGroup.id,
-        'option',
-      );
-    } else {
-      this._id = this._idService.getNewChildId('select', this._parent.id);
-    }
+    this._id = this._idService.getNewSelectOptionid(
+      'select',
+      this._parent.id,
+      this._parentGroup?.id,
+    );
 
     effect(() => {
       if (this._parent.autocomplete) {

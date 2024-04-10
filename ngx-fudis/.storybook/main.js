@@ -24,7 +24,6 @@ module.exports = {
   },
   staticDirs: [
     "./../projects/ngx-fudis/src/lib/assets/fonts/fira/woff2",
-    "./../projects/ngx-fudis/src/lib/assets/icons",
     "./../projects/ngx-fudis/src/lib/assets/images",
   ],
   docs: {

@@ -45,17 +45,4 @@ describe('SpacingDirective', () => {
     expect(elems.length).toBe(3);
     expect(elemsWithNoDirective.length).toBe(1);
   });
-
-  // TODO: Use visual regression tests instead of testing style attribute values directly. Find a better way to test this directive.
-  it.skip('should convert given margin inputs to margin shorthand', () => {
-    // Karma doesn't seem to detect breakpoint changes so only non-responsive margin attributes are tested
-    const elems = getSpacingDirective();
-    const first = elems[0].nativeElement.style.margin;
-    const second = elems[1].nativeElement.style.margin;
-    const third = elems[2].nativeElement.style.margin;
-
-    expect(first).toBe('6.4rem 0px 0px');
-    expect(second).toBe('0px 0px 0.4rem');
-    expect(third).toBe('0px 3.2rem 0px 0.8rem');
-  });
 });

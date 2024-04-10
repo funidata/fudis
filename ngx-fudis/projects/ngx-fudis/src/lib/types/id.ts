@@ -24,35 +24,71 @@ export const fudisIdComponents = [
   'validator-error-message',
 ] as const;
 
-export type FudisIdComponent = (typeof fudisIdComponents)[number];
-
 export const fudisIdParents = [
   'breadcrumbs',
   'checkbox-group',
-  'description-list',
   'dropdown-menu',
   'radio-button-group',
-  'select',
-  'multiselect',
 ] as const;
+
+export const fudisIdGrandParents = ['description-list', 'select', 'multiselect'] as const;
+
+export type FudisIdComponent = (typeof fudisIdComponents)[number];
 
 export type FudisIdParent = (typeof fudisIdParents)[number];
 
-type FudisIdFamilyBase = {
-  parent: string;
-  children: string[];
+export type FudisIdGrandParent = (typeof fudisIdGrandParents)[number];
+
+/**
+ * Select and Multiselect component ids and its grouped and non-grouped options
+ */
+export type FudisIdSelectFamily = {
+  id: string;
+  nonGroupedOptions: string[];
+  groups: {
+    [groupId: string]: string[];
+  };
 };
 
-export type FudisIdFamily = {
-  parent: string;
-  children: string[];
-  childrenGroups?: FudisIdFamilyBase[];
+/**
+ * Description List Item component id and its child term and details ids
+ */
+export type FudisIdDlItem = {
+  term: string[];
+  details: string[];
 };
 
-export type FudisIdFamilyData = {
-  [key in FudisIdParent]: FudisIdFamily[];
+/**
+ * Description List component id and its child items
+ */
+export type FudisIdDlFamily = {
+  id: string;
+  items: {
+    [itemId: string]: FudisIdDlItem;
+  };
 };
 
-export type FudisIdComponentData = {
-  [key in FudisIdComponent]: string[];
+/**
+ * Collection of all ids
+ */
+export type FudisIdData = {
+  components: {
+    [key in FudisIdComponent]: string[];
+  };
+  parents: {
+    [key in FudisIdParent]: {
+      [parentId: string]: string[];
+    };
+  };
+  grandParents: {
+    'description-list': {
+      [parentId: string]: FudisIdDlFamily;
+    };
+    select: {
+      [parentId: string]: FudisIdSelectFamily;
+    };
+    multiselect: {
+      [parentId: string]: FudisIdSelectFamily;
+    };
+  };
 };

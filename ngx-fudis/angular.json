@@ -116,11 +116,6 @@
               "projects/dev/src/favicon.ico",
               {
                 "glob": "*.svg",
-                "input": "../ngx-fudis/projects/ngx-fudis/src/lib/assets/icons",
-                "output": "./"
-              },
-              {
-                "glob": "*.svg",
                 "input": "../ngx-fudis/projects/ngx-fudis/src/lib/assets/images",
                 "output": "./"
               },
@@ -140,13 +135,6 @@
           },
           "configurations": {
             "production": {
-              "assets": [
-                {
-                  "glob": "*.svg",
-                  "input": "../ngx-fudis/projects/ngx-fudis/src/lib/assets/icons",
-                  "output": "./"
-                }
-              ],
               "budgets": [
                 {
                   "type": "initial",

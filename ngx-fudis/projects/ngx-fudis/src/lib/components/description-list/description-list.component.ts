@@ -11,6 +11,7 @@ import { FudisIdService } from '../../services/id/id.service';
 export class DescriptionListComponent extends GridApiDirective implements OnInit, OnChanges {
   constructor(private _idService: FudisIdService) {
     super();
+    this.id = this._idService.getNewGrandParentId('description-list');
   }
 
   /**
@@ -51,7 +52,6 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 
   ngOnInit(): void {
     this._setClasses();
-    this.id = this._idService.getNewParentId('description-list');
   }
 
   ngOnChanges(changes: FudisComponentChanges<DescriptionListComponent>): void {

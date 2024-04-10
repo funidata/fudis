@@ -8,6 +8,7 @@ import {
   fudisIconColorArray,
   fudisIconArray,
 } from '../../types/icons';
+import { getElement } from '../../utilities/tests/utilities';
 
 /**
  * To be used as benchmark so that the list in types folder keeps in sync with ones in the tests
@@ -205,14 +206,11 @@ describe('IconComponent', () => {
       fudisIconArray.forEach((iconName) => {
         component.icon = iconName;
         fixture.detectChanges();
-        const svgElem = fixture.debugElement.query(By.css('svg'));
-        const useElem = svgElem.nativeElement.querySelector('use');
 
-        expect(useElem.getAttribute('href')).toBeTruthy();
-        expect(useElem.getAttribute('href')).toEqual(`${iconName}.svg#${iconName}`);
+        const svgElement = getElement(fixture, '.fudis-icon');
+
+        expect(svgElement.getAttribute('id')).toEqual(iconName);
       });
     });
   });
-
-  //TODO: Should writes test for host class
 });
