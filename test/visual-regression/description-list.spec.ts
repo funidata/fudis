@@ -62,3 +62,24 @@ test("description list compact with multiple dd elements and grid disabled", asy
   await page.goto("/iframe.html?args=variant:compact;disableGrid:!true&id=components-description-list--description-list-with-multiple-dd-elements&viewMode=story");
   await expect(page).toHaveScreenshot();
 });
+
+// Description List With Single Item
+test("description list regular with single item", async ({ page }) => {
+  await page.goto("/iframe.html?args=variant:regular&id=components-description-list--description-list-with-single-item&viewMode=story");
+  await expect(page).toHaveScreenshot();
+});
+
+test("description list regular with single item and grid disabled", async ({ page }) => {
+  await page.goto("/iframe.html?args=variant:regular;disableGrid:!true&id=components-description-list--description-list-with-single-item&viewMode=story");
+  await expect(page).toHaveScreenshot();
+});
+
+test("description list compact with single item", async ({ page }) => {
+  await page.goto("/iframe.html?args=variant:compact&id=components-description-list--description-list-with-single-item&viewMode=story");
+  await expect(page).toHaveScreenshot();
+});
+
+test("description list compact with single item and grid disabled", async ({ page }) => {
+  await page.goto("/iframe.html?args=variant:compact;disableGrid:!true&id=components-description-list--description-list-with-single-item&viewMode=story");
+  await expect(page).toHaveScreenshot();
+});
