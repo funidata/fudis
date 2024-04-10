@@ -98,11 +98,11 @@ DescriptionList.args = {
   disableGrid: false,
 };
 
-const DescriptionListItemInsideGridTemplate: StoryFn<DescriptionListComponent> = (
+const DescriptionListInsideGridTemplate: StoryFn<DescriptionListComponent> = (
   args: DescriptionListComponent,
 ) => ({
   props: args,
-  template: html`<fudis-grid [columns]="'2'" [rowGap]="'xs'">
+  template: html`<fudis-grid [columns]="{sm: 1, md: 2}" [rowGap]="'xs'">
     <fudis-heading [level]="2" [size]="'md'"
       >Grid where DL is used as child component</fudis-heading
     >
@@ -123,9 +123,9 @@ const DescriptionListItemInsideGridTemplate: StoryFn<DescriptionListComponent> =
   </fudis-grid>`,
 });
 
-export const DescriptionListItemInsideGrid = DescriptionListItemInsideGridTemplate.bind({});
+export const DescriptionListInsideGrid = DescriptionListInsideGridTemplate.bind({});
 
-DescriptionListItemInsideGrid.args = {
+DescriptionListInsideGrid.args = {
   variant: 'regular',
   disableGrid: true,
 };
