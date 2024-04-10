@@ -25,7 +25,7 @@ describe('TranslationService', () => {
     });
 
     it('should return fi, sv, en array', () => {
-      expect(service.getBadgeGroupLanguages()()).toEqual(['fi', 'sv', 'en']);
+      expect(service.getSelectableLanguages()()).toEqual(['fi', 'sv', 'en']);
     });
   });
 
@@ -48,11 +48,11 @@ describe('TranslationService', () => {
     });
   });
 
-  it('setBadgeGroupLanguages should update badge languages properly ', () => {
-    service.setBadgeGroupLanguages(['fi', 'sv']);
-    expect(service.getBadgeGroupLanguages()()).toEqual(['fi', 'sv']);
+  it('setSelectableLanguages should update badge languages properly ', () => {
+    service.setSelectableLanguages(['fi', 'sv']);
+    expect(service.getSelectableLanguages()()).toEqual(['fi', 'sv']);
 
-    service.setBadgeGroupLanguages(['en', 'fi']);
-    expect(service.getBadgeGroupLanguages()()).toEqual(['en', 'fi']);
+    service.setSelectableLanguages(['en', 'fi']);
+    expect(service.getSelectableLanguages()()).toEqual(['en', 'fi']);
   });
 });

@@ -52,19 +52,19 @@ export class FudisTranslationService {
   /**
    * Currently available languages in Fudis are Finnish, Swedish and English
    */
-  private _languages = signal<FudisLanguageAbbr[]>(['fi', 'sv', 'en']);
+  private _selectableLanguages = signal<FudisLanguageAbbr[]>(['fi', 'sv', 'en']);
 
   /**
    * Set which languages are visible in Language Badges
    */
-  public setBadgeGroupLanguages(languages: FudisLanguageAbbr[]): void {
-    this._languages.set(languages);
+  public setSelectableLanguages(languages: FudisLanguageAbbr[]): void {
+    this._selectableLanguages.set(languages);
   }
 
   /**
    * Get visible languages of Language Badges
    */
-  public getBadgeGroupLanguages(): Signal<FudisLanguageAbbr[]> {
-    return this._languages.asReadonly();
+  public getSelectableLanguages(): Signal<FudisLanguageAbbr[]> {
+    return this._selectableLanguages.asReadonly();
   }
 }

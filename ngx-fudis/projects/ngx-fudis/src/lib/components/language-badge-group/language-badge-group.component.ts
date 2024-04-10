@@ -17,7 +17,7 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective implements 
   constructor(private _translationService: FudisTranslationService) {
     super();
     effect(() => {
-      this._languageOptions = _translationService.getBadgeGroupLanguages();
+      this._languageOptions = _translationService.getSelectableLanguages();
       this._translations = _translationService.getTranslations();
       this._groupLabel = this._translations().LANGUAGE_BADGE.ARIA_LABEL.TRANSLATIONS;
       this._setLanguageOptions();
