@@ -85,39 +85,42 @@ describe('DescriptionListComponent', () => {
     mockFixture.detectChanges();
   });
 
+  function getDlElement(type: string): HTMLElement {
+    const dlElement = getElement(mockFixture, `fudis-dl ${type}`);
+    return dlElement;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function getDlFromArrayIndex(index: number): any {
+    const dlElements = mockFixture.debugElement.queryAll(By.css('fudis-dl'));
+    const itemArray = [...dlElements];
+
+    return itemArray[index];
+  }
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
   describe('Wrapper element', () => {
-    it('should have respective wrapper element depending on description list type', () => {
-      const dlElements = mockFixture.debugElement.queryAll(By.css('fudis-dl'));
+    it('should have respective wrapper element depending on description list type, i.e multiple items, single item or disabled grid', () => {
+      expect(getDlFromArrayIndex(0).query(By.css('dl'))).toBeTruthy();
+      expect(getDlFromArrayIndex(2).query(By.css('dl'))).toBeTruthy();
+      expect(getDlFromArrayIndex(1).query(By.css('dl'))).toBeFalsy();
 
-      const dlWithMultipleItems = dlElements[0];
-      const dlWithSingleItem = dlElements[1];
-      const dlWithDisabledGrid = dlElements[2];
-
-      expect(dlWithMultipleItems.query(By.css('dl'))).toBeTruthy();
-      expect(dlWithDisabledGrid.query(By.css('dl'))).toBeTruthy();
-      expect(dlWithSingleItem.query(By.css('dl'))).toBeFalsy();
-
-      expect(dlWithSingleItem.query(By.css('div.fudis-dl'))).toBeTruthy();
-      expect(dlWithMultipleItems.query(By.css('div.fudis-dl'))).toBeFalsy();
-      expect(dlWithDisabledGrid.query(By.css('div.fudis-dl'))).toBeFalsy();
+      expect(getDlFromArrayIndex(1).query(By.css('div.fudis-dl'))).toBeTruthy();
+      expect(getDlFromArrayIndex(0).query(By.css('div.fudis-dl'))).toBeFalsy();
+      expect(getDlFromArrayIndex(2).query(By.css('div.fudis-dl'))).toBeFalsy();
     });
   });
 
   describe('CSS classes', () => {
     it('should have main CSS class', () => {
-      const dlElement = getElement(mockFixture, 'fudis-dl dl');
-
-      expect(dlElement.classList).toContain('fudis-dl');
+      expect(getDlElement('dl').classList).toContain('fudis-dl');
     });
 
     it('should have grid classes if grid is enabled', () => {
-      const dlElement = getElement(mockFixture, 'fudis-dl dl');
-
-      expect(sortClasses(dlElement.className)).toEqual(
+      expect(sortClasses(getDlElement('dl').className)).toEqual(
         sortClasses(
           'fudis-dl fudis-grid fudis-grid__xxl fudis-grid__align__start fudis-grid__margin__top__none fudis-grid__margin__bottom__none fudis-grid__row-gap__none',
         ),
@@ -128,9 +131,7 @@ describe('DescriptionListComponent', () => {
       mockComponent.disableGrid = true;
       mockFixture.detectChanges();
 
-      const dlElement = getElement(mockFixture, 'fudis-dl dl');
-
-      expect(sortClasses(dlElement.className)).toEqual(
+      expect(sortClasses(getDlElement('dl').className)).toEqual(
         sortClasses('fudis-dl fudis-dl__disabled-grid'),
       );
     });
@@ -138,20 +139,16 @@ describe('DescriptionListComponent', () => {
 
   describe('Component id', () => {
     it('should have generated id from Id Service', () => {
-      const dlElements = mockFixture.nativeElement.querySelectorAll('fudis-dl');
-
-      const dlWithMultipleItems = dlElements[0];
-      const dlWithSingleItem = dlElements[1];
-      const dlWithDisabledGrid = dlElements[2];
-
-      // Id's start from 2 since the "real" component has been rendered with list-1, maybe?
-      expect(dlWithMultipleItems.querySelector('dl').getAttribute('id')).toEqual(
+      // Id's start from 2 since the "real" DL component has been rendered first.
+      expect(getDlFromArrayIndex(0).query(By.css('dl')).nativeElement.getAttribute('id')).toEqual(
         'fudis-description-list-2',
       );
-      expect(dlWithSingleItem.querySelector('div.fudis-dl').getAttribute('id')).toEqual(
-        'fudis-description-list-3',
-      );
-      expect(dlWithDisabledGrid.querySelector('dl').getAttribute('id')).toEqual(
+
+      expect(
+        getDlFromArrayIndex(1).query(By.css('div.fudis-dl')).nativeElement.getAttribute('id'),
+      ).toEqual('fudis-description-list-3');
+
+      expect(getDlFromArrayIndex(2).query(By.css('dl')).nativeElement.getAttribute('id')).toEqual(
         'fudis-description-list-4',
       );
     });
