@@ -2,9 +2,9 @@ import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { Component } from '@angular/core';
 import { DescriptionListComponent } from './description-list.component';
 import docs from './docs.mdx';
-import { FudisLanguageBadgeGroupService } from '../../services/language-badge-group/language-badge-group.service';
 import { FudisLanguageAbbr } from '../../types/miscellaneous';
 import { descriptionListExclude } from '../../utilities/storybook';
+import { FudisTranslationService } from '../../services/translation/translation.service';
 
 @Component({
   selector: 'example-language-service-change-component',
@@ -26,12 +26,12 @@ import { descriptionListExclude } from '../../utilities/storybook';
   `,
 })
 class LanguageChangeComponent {
-  constructor(private _languageService: FudisLanguageBadgeGroupService) {
-    this._languageService.setLanguages(['fi', 'sv', 'en']);
+  constructor(private _languageService: FudisTranslationService) {
+    this._languageService.setBadgeGroupLanguages(['fi', 'sv', 'en']);
   }
 
   changeBadgeLanguages(languages: FudisLanguageAbbr[]): void {
-    this._languageService.setLanguages(languages);
+    this._languageService.setBadgeGroupLanguages(languages);
   }
 }
 
