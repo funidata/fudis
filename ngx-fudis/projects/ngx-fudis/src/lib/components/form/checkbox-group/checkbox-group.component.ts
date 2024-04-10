@@ -20,6 +20,7 @@ import { hasAtLeastOneRequiredOrMinValidator } from '../../../utilities/form/get
 import { FormComponent } from '../form/form.component';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Component({
   selector: 'fudis-checkbox-group',
@@ -31,9 +32,10 @@ export class CheckboxGroupComponent extends FieldSetBaseDirective implements OnI
     @Host() @Optional() protected _parentForm: FormComponent | null,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
+    _focusService: FudisFocusService,
     _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService, _translationService, _changeDetectorRef);
+    super(_idService, _translationService, _focusService, _changeDetectorRef);
   }
   /**
    * FormGroup for Checkbox group. If provided, provide also `controlName` for each Checkbox children.
