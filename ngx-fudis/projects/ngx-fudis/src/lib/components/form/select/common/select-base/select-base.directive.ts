@@ -121,6 +121,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
    */
   public noResultsFound: boolean = true;
 
+  private _focusTryCounter: number = 0;
+
   /**
    * For setting dropdown open / closed
    */
@@ -352,6 +354,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
    * To focus on first option when dropdown opens
    * @param cssFocusSelector CSS class to focus to
    */
+
+  // TODO: check if this could be achieved more elegantly
   protected _focusToFirstOption(cssFocusSelector: string, clickFirstOption?: boolean): void {
     const cssSelector = `.${cssFocusSelector}`;
 

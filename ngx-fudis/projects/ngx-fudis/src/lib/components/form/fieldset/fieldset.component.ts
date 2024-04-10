@@ -25,6 +25,7 @@ import { FudisInternalErrorSummaryService } from '../../../services/form/error-s
 import { FudisFormErrorSummarySection, FudisInputSize } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FormComponent } from '../form/form.component';
+import { FudisFocusService } from '../../../services/focus/focus.service';
 
 @Component({
   selector: 'fudis-fieldset',
@@ -39,6 +40,7 @@ export class FieldSetComponent
   constructor(
     @Host() @Optional() private _parentForm: FormComponent | null,
     private _errorSummaryService: FudisInternalErrorSummaryService,
+    private _focusService: FudisFocusService,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
     _changeDetectorRef: ChangeDetectorRef,
@@ -62,9 +64,9 @@ export class FieldSetComponent
   @ContentChild(ContentDirective) protected _content: ContentDirective;
 
   /**
-   * View for native fieldset HTMLelement
+   * Legend elementRef to trigger initialFocus
    */
-  @ViewChild('fieldset') private _fieldset: ElementRef;
+  @ViewChild('fieldsetLegend') private _fieldsetLegend: ElementRef;
 
   /**
    * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
@@ -142,8 +144,8 @@ export class FieldSetComponent
   }
 
   ngAfterViewInit(): void {
-    if (this.initialFocus) {
-      this._fieldset.nativeElement.focus();
+    if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
+      this._fieldsetLegend.nativeElement.focus();
     }
   }
 

@@ -107,8 +107,6 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
    */
   protected _required: boolean = false;
 
-  protected _focusTryCounter: number = 0;
-
   protected _destroyed = new Subject<void>();
 
   /**
@@ -138,12 +136,6 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
   public focusToInput(): void {
     if (this._inputRef?.nativeElement) {
       this._inputRef.nativeElement.focus();
-      this._focusTryCounter = 0;
-    } else if (this._focusTryCounter < 100) {
-      setTimeout(() => {
-        this._focusTryCounter += 1;
-        this.focusToInput();
-      }, 100);
     }
   }
 
