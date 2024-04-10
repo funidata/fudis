@@ -309,13 +309,13 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
    */
   protected _setParentId(type: 'multiselect' | 'select'): void {
     if (this.id && type === 'select') {
-      this._idService.addNewParentId('select', this.id);
+      this._idService.addNewGrandParentId('select', this.id);
     } else if (type === 'select') {
-      this.id = this._idService.getNewParentId('select');
+      this.id = this._idService.getNewGrandParentId('select');
     } else if (this.id && type === 'multiselect') {
-      this._idService.addNewParentId('multiselect', this.id);
+      this._idService.addNewGrandParentId('multiselect', this.id);
     } else {
-      this.id = this._idService.getNewParentId('multiselect');
+      this.id = this._idService.getNewGrandParentId('multiselect');
     }
   }
 

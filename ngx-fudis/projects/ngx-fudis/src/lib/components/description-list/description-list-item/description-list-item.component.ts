@@ -19,6 +19,8 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
     effect(() => {
+      this.id = this._idService.getNewGroupId('description-list', this._parentDl.id);
+
       /**
        * Listens to parent's changes and updates CSS classes.
        */
@@ -47,8 +49,6 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
   protected _mainCssClass: string;
 
   ngOnInit(): void {
-    this.id = this._idService.getNewChildId('description-list', this._parentDl.id, 'item');
-
     /** Registers itself to the parent */
     this._parentDl.addChildId(this.id);
   }

@@ -62,19 +62,6 @@ describe('GridItemDirective', () => {
     return getDirective(fixture, GridItemDirective);
   }
 
-  function getAttribute(index: number, attr: string) {
-    switch (attr) {
-      case 'justify-self':
-        return getGridItemDirective()[index].nativeElement.style.justifySelf;
-      case 'align-self':
-        return getGridItemDirective()[index].nativeElement.style.alignSelf;
-      case 'grid-column':
-        return getGridItemDirective()[index].nativeElement.style.gridColumn;
-      default:
-        break;
-    }
-  }
-
   function getDefaultCSSClass(index: number) {
     return getGridItemDirective()[index].nativeElement.classList;
   }
@@ -95,55 +82,6 @@ describe('GridItemDirective', () => {
 
       expect(getDefaultCSSClass(0)).toContain('fudis-grid-item');
       expect(getDefaultCSSClass(1)).toContain('fudis-grid-item');
-    });
-
-    // TODO: Use visual regression tests instead of testing style attribute values directly.
-    it.skip('should convert alignSelfX and alignSelfY attributes to style properties', () => {
-      fixture.detectChanges();
-
-      expect(getAttribute(1, 'justify-self')).toBe('stretch');
-      expect(getAttribute(1, 'align-self')).toBe('stretch');
-
-      component.alignSelfY = 'end';
-      component.alignSelfX = 'end';
-      fixture.detectChanges();
-
-      expect(getAttribute(1, 'justify-self')).toBe('end');
-      expect(getAttribute(1, 'align-self')).toBe('end');
-
-      component.alignSelfY = 'start';
-      component.alignSelfX = 'start';
-      fixture.detectChanges();
-
-      expect(getAttribute(1, 'justify-self')).toBe('start');
-      expect(getAttribute(1, 'align-self')).toBe('start');
-
-      component.alignSelfY = 'center';
-      component.alignSelfX = 'center';
-      fixture.detectChanges();
-
-      expect(getAttribute(1, 'justify-self')).toBe('center');
-      expect(getAttribute(1, 'align-self')).toBe('center');
-    });
-
-    // TODO: Use visual regression tests instead of testing style attribute values directly.
-    it.skip('should convert columns attribute to grid-column properties', () => {
-      fixture.detectChanges();
-
-      const columnsBeforeValid =
-        (getAttribute(0, 'grid-column') === '2' || getAttribute(0, 'grid-column') === '2 / auto') ??
-        true;
-
-      expect(columnsBeforeValid).toEqual(true);
-
-      component.columns = '6';
-      fixture.detectChanges();
-
-      const columnsAfterValid =
-        (getAttribute(0, 'grid-column') === '6' || getAttribute(0, 'grid-column') === '6 / auto') ??
-        true;
-
-      expect(columnsAfterValid).toEqual(true);
     });
   });
 });

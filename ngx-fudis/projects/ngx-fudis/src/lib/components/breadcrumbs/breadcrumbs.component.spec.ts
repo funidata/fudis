@@ -70,85 +70,23 @@ describe('BreadcrumbsComponent', () => {
   });
 
   describe('child item components', () => {
-    // TODO: Use visual regression tests instead of testing style attribute values directly.
-    it.skip('should have only one body text element visible', () => {
-      const items: NodeList = fixture.nativeElement.querySelectorAll(
-        'fudis-breadcrumbs-item .fudis-breadcrumbs-item',
-      );
-
-      const currentTexts: (string | null | undefined)[] = [];
-
-      const foundIndexes: (number | null | undefined)[] = [];
-
-      items.forEach((item, index) => {
-        const currentElement: Element | null = (item as Element)!.querySelector(
-          '.fudis-breadcrumbs-item__current',
-        );
-        if (currentElement && getComputedStyle(currentElement).display === 'block') {
-          foundIndexes.push(index);
-          currentTexts.push(currentElement.querySelector('p')!.innerHTML);
-        }
-      });
-
-      expect(items.length).toEqual(3);
-      expect(foundIndexes).toEqual([2]);
-      expect(currentTexts.join(' ')).toEqual('Documentation');
-    });
-
-    // TODO: Use visual regression tests instead of testing style attribute values directly.
-    it.skip('should have correct amount of links with correct texts and icons visible', () => {
-      const items: NodeList = fixture.nativeElement.querySelectorAll(
-        'fudis-breadcrumbs-item .fudis-breadcrumbs-item',
-      );
-
-      const linkTexts: (string | null | undefined)[] = [];
-
-      const foundIconIndexes: (number | null | undefined)[] = [];
-
-      const foundLinkIndexes: (number | null | undefined)[] = [];
-
-      items.forEach((item, index) => {
-        const iconElement: HTMLElement | null = (item as HTMLElement).querySelector(
-          '.fudis-breadcrumbs-item__icon',
-        );
-
-        if (iconElement && getComputedStyle(iconElement).display === 'flex') {
-          foundIconIndexes.push(index);
-        }
-
-        const linkElement: Element | null = (item as Element)!.querySelector(
-          '.fudis-breadcrumbs-item__link',
-        );
-        if (linkElement && getComputedStyle(linkElement).display === 'block') {
-          foundLinkIndexes.push(index);
-
-          linkTexts.push(linkElement.querySelector('a')!.innerHTML.trim());
-        }
-      });
-
-      expect(foundIconIndexes).toEqual([0, 1]);
-      expect(foundLinkIndexes).toEqual([0, 1]);
-      expect(linkTexts.join(' ')).toEqual('Components Breadcrumbs');
-    });
-
-    // TODO: Use visual regression tests instead of testing style attribute values directly.
-    it.skip('should have correct link hrefs', () => {
-      const items: NodeList = fixture.nativeElement.querySelectorAll(
-        'fudis-breadcrumbs-item .fudis-breadcrumbs-item',
-      );
+    it('should have correct link hrefs', () => {
+      const items: NodeList = fixture.nativeElement.querySelectorAll('fudis-breadcrumbs-item');
 
       const linkHrefs: (string | null | undefined)[] = [];
 
       items.forEach((item) => {
         const linkElement: Element | null = (item as Element)!.querySelector(
-          '.fudis-breadcrumbs-item__link',
+          '.fudis-breadcrumbs-item__link a',
         );
-        if (linkElement && getComputedStyle(linkElement).display === 'block') {
-          linkHrefs.push(linkElement.querySelector('a')?.getAttribute('href'));
+        if (linkElement) {
+          linkHrefs.push(linkElement.getAttribute('href'));
         }
       });
 
-      expect(linkHrefs.join(' ')).toEqual('/components /components/breadcrumbs');
+      expect(linkHrefs.join(' ')).toEqual(
+        '/components /components/breadcrumbs /components/breadcrumbs/documentation',
+      );
     });
 
     it('should have correct id attributes', () => {
