@@ -1,6 +1,7 @@
 <ng-container *ngIf="externalLink">
   <a
     fudisLink
+    [id]="id"
     [color]="color"
     [size]="size"
     [classes]="['fudis-link__external']"
@@ -45,6 +46,7 @@
 <ng-container *ngIf="(link || fragmentId) && !externalLink">
   <a
     fudisLink
+    [id]="id"
     [color]="color"
     [size]="size"
     [classes]="['fudis-link__router']"
@@ -61,6 +63,7 @@
 <ng-container *ngIf="href && !link && !externalLink">
   <a
     fudisLink
+    [id]="id"
     [color]="color"
     [size]="size"
     [classes]="['fudis-link__href']"

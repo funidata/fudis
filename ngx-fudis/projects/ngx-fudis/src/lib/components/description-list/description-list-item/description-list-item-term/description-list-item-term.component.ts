@@ -10,7 +10,6 @@ import {
 import { FudisLanguageAbbr, FudisLanguageBadgeContent } from '../../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { DescriptionListItemComponent } from '../description-list-item.component';
-import { FudisLanguageBadgeGroupService } from '../../../../services/language-badge-group/language-badge-group.service';
 import { DescriptionListComponent } from '../../description-list.component';
 import { FudisIdService } from '../../../../services/id/id.service';
 
@@ -23,7 +22,6 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
   constructor(
     private _elementRef: ElementRef,
     private _translationService: FudisTranslationService,
-    private _languageBadgeGroupService: FudisLanguageBadgeGroupService,
     private _idService: FudisIdService,
     @Host() private _parentDlItem: DescriptionListItemComponent,
     @Host() protected _parentDl: DescriptionListComponent,
@@ -36,7 +34,7 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
 
     effect(() => {
       this._currentLanguage = _translationService.getLanguage();
-      this._languageOptions = this._languageBadgeGroupService.getLanguages();
+      this._languageOptions = _translationService.getBadgeGroupLanguages();
       this._setLanguageOptions();
     });
 
@@ -62,7 +60,7 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
   protected _parentLanguageOptions: FudisLanguageBadgeContent;
 
   /**
-   * Filtered array, where DOM is compared with Language config set in FudisLanguageBadgeGroupService
+   * Filtered array, where DOM is compared with Language config set in FudisTranslationService
    */
   protected _availableLanguages: FudisLanguageAbbr[];
 
@@ -87,7 +85,7 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
   private _currentLanguage: FudisLanguageAbbr;
 
   /**
-   * Config array from FudisLanguageBadgeGroupService
+   * Config array from FudisTranslationService
    */
   private _languageOptions: Signal<FudisLanguageAbbr[]>;
 

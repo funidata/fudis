@@ -7,7 +7,6 @@ import {
 } from '../../types/miscellaneous';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
-import { FudisLanguageBadgeGroupService } from '../../services/language-badge-group/language-badge-group.service';
 
 @Component({
   selector: 'fudis-language-badge-group',
@@ -15,13 +14,10 @@ import { FudisLanguageBadgeGroupService } from '../../services/language-badge-gr
   styleUrls: ['./language-badge-group.component.scss'],
 })
 export class LanguageBadgeGroupComponent extends TooltipApiDirective implements OnInit {
-  constructor(
-    private _translationService: FudisTranslationService,
-    private _languageBadgeGroupService: FudisLanguageBadgeGroupService,
-  ) {
+  constructor(private _translationService: FudisTranslationService) {
     super();
     effect(() => {
-      this._languageOptions = this._languageBadgeGroupService.getLanguages();
+      this._languageOptions = _translationService.getBadgeGroupLanguages();
       this._translations = _translationService.getTranslations();
       this._groupLabel = this._translations().LANGUAGE_BADGE.ARIA_LABEL.TRANSLATIONS;
       this._setLanguageOptions();

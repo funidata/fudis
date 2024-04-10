@@ -18,6 +18,7 @@ export const fudisIdComponents = [
   'guidance',
   'heading',
   'input-with-language-options',
+  'link',
   'section',
   'text-area',
   'text-input',

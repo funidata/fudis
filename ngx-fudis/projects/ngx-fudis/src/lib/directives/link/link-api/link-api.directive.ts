@@ -19,4 +19,9 @@ export class LinkApiDirective {
    * Set browser focus to link on the first load.
    */
   @Input() initialFocus: boolean = false;
+
+  /**
+   * Id for the anchor element. By default generated with FudisIdService
+   */
+  @Input() id: string;
 }

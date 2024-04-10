@@ -1,8 +1,6 @@
 <fieldset
   fudisGrid
-  #fieldset
   [attr.id]="id"
-  [tabIndex]="-1"
   [classes]="_classes"
   [align]="align"
   [width]="inputSize ? 'initial' : width"
@@ -11,7 +9,7 @@
   [marginBottom]="marginBottom"
   [marginTop]="marginTop"
 >
-  <legend class="fudis-fieldset__legend">
+  <legend #fieldsetLegend class="fudis-fieldset__legend" [attr.id]="id + '-legend'" [tabIndex]="-1">
     <div
       class="fudis-fieldset__legend__container"
       [class.fudis-fieldset__legend__container__row-end]="_headerActions?.align === 'end'"

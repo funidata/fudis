@@ -10,14 +10,14 @@ export class FudisTranslationService {
   constructor(private _errorSummaryService: FudisInternalErrorSummaryService) {}
 
   /**
-   * Translation config, default language for translations is English
+   * Application's translation texts, default language for translations is English
    */
-  private _translations = signal<FudisTranslationConfig>(en);
+  private _appTranslations = signal<FudisTranslationConfig>(en);
 
   /**
-   * Single component or application language, default language is English
+   * Application language, default language is English
    */
-  private _language = signal<FudisLanguageAbbr>('en');
+  private _appLanguage = signal<FudisLanguageAbbr>('en');
 
   /**
    * Set language of repeated texts Fudis uses for its components. E. g. 'required' text of form components or help texts for screen readers for various buttons.
@@ -25,13 +25,13 @@ export class FudisTranslationService {
    */
   public setLanguage(language: FudisLanguageAbbr): void {
     this._errorSummaryService.focusToFormOnReload = null;
-    this._language.set(language);
+    this._appLanguage.set(language);
     if (language === 'en') {
-      this._translations.set(en);
+      this._appTranslations.set(en);
     } else if (language === 'fi') {
-      this._translations.set(fi);
+      this._appTranslations.set(fi);
     } else {
-      this._translations.set(sv);
+      this._appTranslations.set(sv);
     }
   }
 
@@ -39,13 +39,32 @@ export class FudisTranslationService {
    * Get current language of Fudis configs
    */
   public getLanguage(): FudisLanguageAbbr {
-    return this._language();
+    return this._appLanguage();
   }
 
   /**
    * Get application's translation config values
    */
   public getTranslations(): Signal<FudisTranslationConfig> {
-    return this._translations.asReadonly();
+    return this._appTranslations.asReadonly();
+  }
+
+  /**
+   * Currently available languages in Fudis are Finnish, Swedish and English
+   */
+  private _languages = signal<FudisLanguageAbbr[]>(['fi', 'sv', 'en']);
+
+  /**
+   * Set which languages are visible in Language Badges
+   */
+  public setBadgeGroupLanguages(languages: FudisLanguageAbbr[]): void {
+    this._languages.set(languages);
+  }
+
+  /**
+   * Get visible languages of Language Badges
+   */
+  public getBadgeGroupLanguages(): Signal<FudisLanguageAbbr[]> {
+    return this._languages.asReadonly();
   }
 }
