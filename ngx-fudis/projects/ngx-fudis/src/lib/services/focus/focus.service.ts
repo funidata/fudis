@@ -34,16 +34,18 @@ export class FudisFocusService {
   }
 
   /**
-   * Focus target element by id
+   * Focus target element by id. If focusable element is not available when function is called, it will repeatively call itself until try counter is full.
+   * @param id target to focus
+   * @param tryCounter how many times function should try to focus to given id
    */
-  public focusToElementById(id: string, tryCounter: number = 100): void {
+  public focusToElementById(id: string, numberOfTries: number = 100): void {
     setTimeout(() => {
       const element = this._document.getElementById(id);
 
       if (element) {
         element.focus();
-      } else if (tryCounter > 0) {
-        this.focusToElementById(id, tryCounter - 1);
+      } else if (numberOfTries > 0) {
+        this.focusToElementById(id, numberOfTries - 1);
       }
     }, 50);
   }
