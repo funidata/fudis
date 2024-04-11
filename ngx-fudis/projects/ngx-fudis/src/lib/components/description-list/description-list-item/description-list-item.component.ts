@@ -18,9 +18,9 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
     private _idService: FudisIdService,
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
-    effect(() => {
-      this.id = this._idService.getNewGroupId('description-list', this._parentDl.id);
+    this.id = _idService.getNewGroupId('description-list', this._parentDl.id);
 
+    effect(() => {
       /**
        * Listens to parent's changes and updates CSS classes.
        */

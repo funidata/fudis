@@ -109,7 +109,7 @@ describe('DescriptionListItemComponent', () => {
     });
   });
 
-  describe('Component id', () => {
+  describe('HTML id', () => {
     it('should have generated id from Id Service', () => {
       expect(
         getDlItemFromArrayIndex(0)

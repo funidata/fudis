@@ -137,7 +137,7 @@ describe('DescriptionListComponent', () => {
     });
   });
 
-  describe('Component id', () => {
+  describe('HTML id', () => {
     it('should have generated id from Id Service', () => {
       // Id's start from 2 since the "real" DL component has been rendered first.
       expect(getDlFromArrayIndex(0).query(By.css('dl')).nativeElement.getAttribute('id')).toEqual(
