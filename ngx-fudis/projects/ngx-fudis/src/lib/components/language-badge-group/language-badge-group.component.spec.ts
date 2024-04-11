@@ -1,10 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MockComponent } from 'ng-mocks';
 import { By } from '@angular/platform-browser';
 import { FudisLanguageBadgeContent } from '../../types/miscellaneous';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { LanguageBadgeGroupComponent } from './language-badge-group.component';
 import { LanguageBadgeComponent } from './language-badge/language-badge.component';
+import { getElement } from '../../utilities/tests/utilities';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TooltipDirective } from '../../directives/tooltip/tooltip.directive';
 
 const providedLanguages: FudisLanguageBadgeContent = { en: 'en', fi: 'fi' };
 
@@ -18,9 +20,11 @@ describe('LanguageBadgeGroupComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         LanguageBadgeGroupComponent,
-        MockComponent(LanguageBadgeComponent),
+        LanguageBadgeComponent,
         TooltipApiDirective,
+        TooltipDirective,
       ],
+      imports: [MatTooltipModule],
     }).compileComponents();
   });
 
@@ -54,7 +58,21 @@ describe('LanguageBadgeGroupComponent', () => {
 
       expect(missingLanguage).toContain('sv');
     });
+  });
 
-    // TODO: add test for output emit
+  describe('Interaction', () => {
+    it('should update language and emit output when clicked', () => {
+      jest.spyOn(component.handleBadgeClick, 'emit');
+
+      const fiButton = getElement(fixture, '.fudis-language-badge') as HTMLButtonElement;
+
+      fiButton.click();
+
+      expect(component.handleBadgeClick.emit).toHaveBeenCalledWith('fi');
+
+      fixture.detectChanges();
+
+      expect(component.selectedLanguage).toEqual('fi');
+    });
   });
 });

@@ -1,13 +1,14 @@
 @use "../../../foundations/colors/mixins.scss" as colors;
 @use "../../../foundations/typography/mixins.scss" as typography;
 @use "../../../foundations/focus/mixins.scss" as focus;
-@use "../../../foundations/colors/mixins.scss" as colorMixin;
 @use "../../../foundations/borders/mixins.scss" as border;
 @use "../../../foundations/utilities/mixins.scss" as utilities;
 @use "../../../foundations/spacing/tokens.scss" as spacing;
 
-.fudis-language-badge-host {
+.fudis-language-badge {
   @include colors.bg-color("transparent");
+  @include border.border-none;
+  @include utilities.box-reset;
 
   display: inline-flex;
   align-items: center;
@@ -18,23 +19,21 @@
   &:focus-within {
     @include focus.focus-generic;
   }
-}
 
-.fudis-language-badge {
-  @include typography.body-text-sm-regular;
-  @include colorMixin.bg-color("white");
-  @include border.border("1px", "solid", "gray-dark");
-  @include utilities.box-reset;
+  &__content {
+    @include typography.body-text-sm-regular;
+    @include colors.bg-color("white");
+    @include border.border("1px", "solid", "gray-dark");
 
-  border-radius: 50%;
-  width: spacing.$spacing-md;
-  height: spacing.$spacing-md;
-  text-align: center;
-  /* stylelint-disable-next-line unit-disallowed-list */
-  letter-spacing: 0.02rem;
-
-  &:focus-visible {
-    @include border.outline-none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    min-width: spacing.$spacing-md;
+    min-height: spacing.$spacing-md;
+    text-align: center;
+    /* stylelint-disable-next-line unit-disallowed-list */
+    letter-spacing: calc(0.02rem / var(--fudis-rem-multiplier));
   }
 
   &__missing {
