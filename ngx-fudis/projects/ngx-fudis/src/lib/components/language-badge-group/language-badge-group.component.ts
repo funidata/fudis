@@ -79,9 +79,10 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective implements 
   }
 
   /**
-   * Emits clicked badge lang output on click
+   * Set selected language and emits clicked language
    */
   protected _updateLanguage(value: FudisLanguageAbbr) {
+    this.selectedLanguage = value;
     this.handleBadgeClick.emit(value);
   }
 

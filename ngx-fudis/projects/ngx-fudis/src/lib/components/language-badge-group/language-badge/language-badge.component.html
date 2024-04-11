@@ -1,8 +1,7 @@
 <button
   type="button"
   fudisTooltip
-  class="fudis-language-badge fudis-language-badge__{{ variant }}"
-  [class.fudis-language-badge--selected]="selected"
+  class="fudis-language-badge"
   [tooltip]="_label"
   [tooltipPosition]="tooltipPosition"
   [tooltipToggle]="tooltipToggle"
@@ -10,5 +9,9 @@
   [attr.id]="_id"
   (click)="_handleLanguageSelect()"
 >
-  {{ language }}
+  <span
+    [class.fudis-language-badge--selected]="selected"
+    class="fudis-language-badge__content fudis-language-badge__{{ variant }}"
+    >{{ language }}</span
+  >
 </button>

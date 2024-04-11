@@ -1,15 +1,9 @@
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, Signal, effect } from '@angular/core';
 import {
-  Component,
-  EventEmitter,
-  HostBinding,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  Signal,
-  ViewEncapsulation,
-} from '@angular/core';
-import { FudisLanguageAbbr, FudisTranslationConfig } from '../../../types/miscellaneous';
+  FudisComponentChanges,
+  FudisLanguageAbbr,
+  FudisTranslationConfig,
+} from '../../../types/miscellaneous';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -18,23 +12,17 @@ import { FudisIdService } from '../../../services/id/id.service';
   selector: 'fudis-language-badge',
   styleUrls: ['./language-badge.component.scss'],
   templateUrl: './language-badge.component.html',
-  encapsulation: ViewEncapsulation.None,
 })
-export class LanguageBadgeComponent extends TooltipApiDirective implements OnInit, OnChanges {
-  constructor(
-    private _translationService: FudisTranslationService,
-    private _idService: FudisIdService,
-  ) {
+export class LanguageBadgeComponent extends TooltipApiDirective implements OnChanges, OnInit {
+  constructor(private _translationService: FudisTranslationService, private _idService: FudisIdService) {
     super();
-    this._translations = this._translationService.getTranslations();
-    this._selectedLabel = this._translations().LANGUAGE_BADGE.ARIA_LABEL.SELECTED;
-    this._missingTranslation = this._translations().LANGUAGE_BADGE.ARIA_LABEL.MISSING_TRANSLATION;
-  }
 
-  /**
-   * Binding host CSS class to component wrapper
-   */
-  @HostBinding('class') private _classes = 'fudis-language-badge-host';
+    effect(() => {
+      this._translations = this._translationService.getTranslations();
+      this._selectedLabel = this._translations().LANGUAGE_BADGE.ARIA_LABEL.SELECTED;
+      this._missingTranslation = this._translations().LANGUAGE_BADGE.ARIA_LABEL.MISSING_TRANSLATION;
+    });
+  }
 
   /*
    * Language abbreviation for Language Badge
@@ -97,12 +85,13 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnIni
   protected _translations: Signal<FudisTranslationConfig>;
 
   ngOnInit(): void {
-    this._setLabel();
     this._id = this._idService.getNewChildId('language-badge-group', this.parentId);
   }
 
-  ngOnChanges(): void {
-    this._setLabel();
+  ngOnChanges(changes: FudisComponentChanges<LanguageBadgeComponent>): void {
+    if (changes.selected || changes.variant || changes.label) {
+      this._setLabel();
+    }
   }
 
   /**
