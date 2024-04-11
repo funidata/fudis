@@ -34,7 +34,7 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
 
     effect(() => {
       this._currentLanguage = _translationService.getLanguage();
-      this._languageOptions = _translationService.getBadgeGroupLanguages();
+      this._languageOptions = _translationService.getSelectableLanguages();
       this._setLanguageOptions();
     });
 

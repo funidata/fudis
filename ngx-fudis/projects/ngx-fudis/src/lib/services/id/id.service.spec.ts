@@ -93,7 +93,7 @@ describe('FudisIdServiceService', () => {
 
         expect(detailsId).toEqual(`${groupId}-details-${index}`);
       } else {
-        const optionId = idService.getNewSelectOptionid(parentType, parentId, groupId);
+        const optionId = idService.getNewSelectOptionId(parentType, parentId, groupId);
 
         expect(optionId).toEqual(`${groupId}-option-${index}`);
       }
@@ -146,14 +146,13 @@ describe('FudisIdServiceService', () => {
 
         if (grandParentType !== 'description-list') {
           for (let index = 1; index <= 3; index += 1) {
-            const nonGroupedOptionId = idService.getNewSelectOptionid(grandParentType, newId);
+            const nonGroupedOptionId = idService.getNewSelectOptionId(grandParentType, newId);
             expect(nonGroupedOptionId).toEqual(`${newId}-option-${index}`);
           }
         }
       }
     });
   };
-  // TODO: Write tests for getNewGrandChildId
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
