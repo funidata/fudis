@@ -50,6 +50,11 @@ export class DescriptionListItemTermComponent {
   @Input() languages: boolean = false;
 
   /**
+   * Visible text content for details
+   */
+  @Input() textContent: string;
+
+  /**
    * Available languages of sibling dt elements fetched from the parent dl-item element
    */
   protected _parentLanguageOptions: FudisLanguageBadgeContent;
@@ -94,6 +99,8 @@ export class DescriptionListItemTermComponent {
       }
     }
 
-    this._parentDlItem.selectedLanguage = this._selectedLanguage;
+    if (this._selectedLanguage) {
+      this._parentDlItem.selectedLanguage = this._selectedLanguage;
+    }
   }
 }

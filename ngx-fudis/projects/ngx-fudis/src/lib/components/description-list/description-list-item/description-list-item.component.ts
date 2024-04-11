@@ -89,9 +89,7 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
   public addDetailsLanguage(lang: FudisLanguageAbbr, text: string | null): void {
     this._tempLanguages = { ...this._tempLanguages, [lang]: text };
 
-    if (Object.keys(this._tempLanguages).length === this.ddChildren.length) {
-      this._detailsLanguageOptions.set(this._tempLanguages);
-    }
+    this._detailsLanguageOptions.set(this._tempLanguages);
   }
 
   public getDetailsLanguageOptions(): Signal<FudisLanguageBadgeContent> {

@@ -203,16 +203,16 @@ const DescriptionListWithLanguagesTemplate: StoryFn<DescriptionListComponent> = 
       [columns]="columns"
     >
       <fudis-description-list-item>
-        <fudis-dt [languages]="true">Example paragraph</fudis-dt>
-        <fudis-dd [lang]="'sv'">Och den här är på Svenska</fudis-dd>
-        <fudis-dd [lang]="'en'">This is in English</fudis-dd>
-        <fudis-dd [lang]="'fi'">Tämä on suomeksi</fudis-dd>
+        <fudis-dt [languages]="true" [textContent]="'Example paragraph'"></fudis-dt>
+        <fudis-dd [lang]="'sv'" [textContent]="'Och den här är på Svenska'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [textContent]="'This is in English'"></fudis-dd>
+        <fudis-dd [lang]="'fi'" [textContent]="'Tämä on suomeksi'"></fudis-dd>
       </fudis-description-list-item>
       <fudis-description-list-item>
-        <fudis-dt [languages]="true">Example without one language</fudis-dt>
-        <fudis-dd [lang]="'fi'">Tähtien sota</fudis-dd>
-        <fudis-dd [lang]="'en'"></fudis-dd>
-        <fudis-dd [lang]="'sv'">Stjärnornas krig </fudis-dd>
+        <fudis-dt [languages]="true" [textContent]="'Example without one language'"></fudis-dt>
+        <fudis-dd [lang]="'fi'" [textContent]="'Tähtien sota'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [textContent]="''"></fudis-dd>
+        <fudis-dd [lang]="'sv'" [textContent]="'Stjärnornas krig'"></fudis-dd>
       </fudis-description-list-item>
     </fudis-description-list>
 

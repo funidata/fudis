@@ -1,6 +1,6 @@
 <ng-container *ngIf="_parentDl.childDlItems.length === 1">
   <span
-    *ngIf="!lang || (lang && _parentDlItem.selectedLanguage === lang) || !_languageLoadFinished"
+    *ngIf="!this.lang || (this.lang && this._parentDlItem.selectedLanguage === this.lang)"
     [id]="_id"
     [class]="_mainCssClass"
   >
@@ -10,7 +10,7 @@
 
 <ng-container *ngIf="_parentDl.childDlItems.length > 1">
   <dd
-    *ngIf="!lang || (lang && _parentDlItem.selectedLanguage === lang) || !_languageLoadFinished"
+    *ngIf="!this.lang || (this.lang && this._parentDlItem.selectedLanguage === this.lang)"
     [id]="_id"
     [class]="_mainCssClass"
   >
@@ -24,7 +24,7 @@
   </span>
   <span #ddTextContent [class]="_mainCssClass + '__content'">
     <span *ngIf="subHeading" [class]="_mainCssClass + '__parenthesis'">&nbsp;&#40;</span>
-    <ng-content></ng-content>
+    {{ textContent }}
     <span *ngIf="subHeading" [class]="_mainCssClass + '__parenthesis'">&#41;</span>
     <ng-container *ngIf="actions?.type === 'dd'">
       <span [class]="_mainCssClass + '__content__actions'">

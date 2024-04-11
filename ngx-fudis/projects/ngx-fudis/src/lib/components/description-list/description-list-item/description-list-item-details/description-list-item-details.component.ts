@@ -1,15 +1,15 @@
 import {
-  AfterViewInit,
   Component,
   ContentChild,
   ElementRef,
   Host,
   HostBinding,
   Input,
+  OnChanges,
   ViewChild,
   effect,
 } from '@angular/core';
-import { FudisLanguageAbbr } from '../../../../types/miscellaneous';
+import { FudisComponentChanges, FudisLanguageAbbr } from '../../../../types/miscellaneous';
 import { ActionsDirective } from '../../../../directives/content-projection/actions/actions.directive';
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { DescriptionListComponent } from '../../description-list.component';
@@ -20,7 +20,7 @@ import { FudisIdService } from '../../../../services/id/id.service';
   styleUrls: ['./description-list-item-details.component.scss'],
   templateUrl: './description-list-item-details.component.html',
 })
-export class DescriptionListItemDetailsComponent implements AfterViewInit {
+export class DescriptionListItemDetailsComponent implements OnChanges {
   constructor(
     private _elementRef: ElementRef,
     private _idService: FudisIdService,
@@ -57,12 +57,17 @@ export class DescriptionListItemDetailsComponent implements AfterViewInit {
   /**
    * ViewChild for Details element content
    */
-  @ViewChild('ddTextContent') content: ElementRef;
+  @ViewChild('ddTextContent') private _content: ElementRef;
 
   /**
    * Details element language, possible values 'fi', 'sv' and 'en'.
    */
   @Input() lang: FudisLanguageAbbr;
+
+  /**
+   * Visible text content for details
+   */
+  @Input() textContent: string;
 
   /**
    * Sub heading in between Term and Details elements
@@ -84,9 +89,16 @@ export class DescriptionListItemDetailsComponent implements AfterViewInit {
    */
   protected _languageLoadFinished: boolean = false;
 
-  ngAfterViewInit(): void {
-    if (this.lang) {
-      this._addNewLanguageToParent();
+  ngOnChanges(changes: FudisComponentChanges<DescriptionListItemDetailsComponent>): void {
+    /**
+     * Parse Details text content and set parent Description List Item languages
+     */
+    if (changes.textContent?.currentValue && this.lang) {
+      const text = changes.textContent.currentValue;
+
+      const parsedTextContent = text && text.replace(/\s/g, '') !== '' ? text : null;
+
+      this._parentDlItem.addDetailsLanguage(this.lang, parsedTextContent);
     }
   }
 
@@ -100,18 +112,4 @@ export class DescriptionListItemDetailsComponent implements AfterViewInit {
   //     }
   //   }
   // }
-
-  /**
-   * Parse Details text content and set parent Description List Item languages
-   */
-  private _addNewLanguageToParent(): void {
-    if (this.content?.nativeElement) {
-      const textContent = this.content.nativeElement.textContent;
-      const parsedTextContent =
-        textContent && textContent.replace(/\s/g, '') !== '' ? textContent : null;
-
-      this._parentDlItem.addDetailsLanguage(this.lang, parsedTextContent);
-      this._languageLoadFinished = true;
-    }
-  }
 }
