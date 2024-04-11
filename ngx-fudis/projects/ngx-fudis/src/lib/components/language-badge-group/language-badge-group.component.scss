@@ -2,5 +2,7 @@
 
 .fudis-language-badge-group {
   display: inline-flex;
+  align-items: center;
   margin-left: spacing.$spacing-xxs;
+  height: spacing.$spacing-md;
 }
