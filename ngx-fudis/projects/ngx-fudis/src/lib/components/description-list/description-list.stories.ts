@@ -30,11 +30,11 @@ import { FudisTranslationService } from '../../services/translation/translation.
 })
 class LanguageChangeComponent {
   constructor(private _languageService: FudisTranslationService) {
-    this._languageService.setBadgeGroupLanguages(['fi', 'sv', 'en']);
+    this._languageService.setSelectableLanguages(['fi', 'sv', 'en']);
   }
 
   changeBadgeLanguages(languages: FudisLanguageAbbr[]): void {
-    this._languageService.setBadgeGroupLanguages(languages);
+    this._languageService.setSelectableLanguages(languages);
   }
 }
 

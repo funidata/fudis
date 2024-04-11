@@ -22,7 +22,7 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective implements 
     super();
     this._id = _idService.getNewParentId('language-badge-group');
     effect(() => {
-      this._languageOptions = _translationService.getBadgeGroupLanguages();
+      this._languageOptions = _translationService.getSelectableLanguages();
       this._translations = _translationService.getTranslations();
       this._groupLabel = this._translations().LANGUAGE_BADGE.ARIA_LABEL.TRANSLATIONS;
       this._setLanguageOptions();

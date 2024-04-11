@@ -228,7 +228,7 @@ export class FudisIdService {
   /**
    * Get an id and add it to collection for Select Options --> fudis-select-4-group-2-option-1
    */
-  public getNewSelectOptionid(
+  public getNewSelectOptionId(
     selectType: 'select' | 'multiselect',
     selectParentId: string,
     groupParentId?: string,
