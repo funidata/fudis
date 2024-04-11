@@ -20,6 +20,11 @@ export class FudisTranslationService {
   private _appLanguage = signal<FudisLanguageAbbr>('en');
 
   /**
+   * Currently available languages in Fudis are Finnish, Swedish and English
+   */
+  private _selectableLanguages = signal<FudisLanguageAbbr[]>(['fi', 'sv', 'en']);
+
+  /**
    * Set language of repeated texts Fudis uses for its components. E. g. 'required' text of form components or help texts for screen readers for various buttons.
    * Also as Error Summary Component reloads its errors if error's language has changed, here is defined component to NOT focus to the updated list on only language change.
    */
@@ -48,11 +53,6 @@ export class FudisTranslationService {
   public getTranslations(): Signal<FudisTranslationConfig> {
     return this._appTranslations.asReadonly();
   }
-
-  /**
-   * Currently available languages in Fudis are Finnish, Swedish and English
-   */
-  private _selectableLanguages = signal<FudisLanguageAbbr[]>(['fi', 'sv', 'en']);
 
   /**
    * Set which languages are visible in Language Badges
