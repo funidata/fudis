@@ -1,4 +1,15 @@
-import { Component, ElementRef, Host, OnDestroy, OnInit, effect, signal } from '@angular/core';
+import {
+  Component,
+  ContentChildren,
+  ElementRef,
+  Host,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  Signal,
+  effect,
+  signal,
+} from '@angular/core';
 import {
   FudisDescriptionListVariant,
   FudisLanguageAbbr,
@@ -6,6 +17,7 @@ import {
 } from '../../../types/miscellaneous';
 import { FudisIdService } from '../../../services/id/id.service';
 import { DescriptionListComponent } from '../description-list.component';
+import { DescriptionListItemDetailsComponent } from './description-list-item-details/description-list-item-details.component';
 
 @Component({
   selector: 'fudis-dl-item, fudis-description-list-item',
@@ -28,10 +40,13 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
     });
   }
 
+  @ContentChildren(DescriptionListItemDetailsComponent)
+  ddChildren: QueryList<DescriptionListItemDetailsComponent>;
+
   /**
    * Storing list of available languages in Details elements
    */
-  public detailsLanguageOptions = signal<FudisLanguageBadgeContent>({});
+  private _detailsLanguageOptions = signal<FudisLanguageBadgeContent>({});
 
   /**
    * Selected language to pass to child components
@@ -47,6 +62,8 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
    * Main CSS class
    */
   protected _mainCssClass: string;
+
+  private _tempLanguages: FudisLanguageBadgeContent;
 
   ngOnInit(): void {
     /** Registers itself to the parent */
@@ -67,5 +84,17 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
     } else {
       this._mainCssClass = 'fudis-dl-item';
     }
+  }
+
+  public addDetailsLanguage(lang: FudisLanguageAbbr, text: string | null): void {
+    this._tempLanguages = { ...this._tempLanguages, [lang]: text };
+
+    if (Object.keys(this._tempLanguages).length === this.ddChildren.length) {
+      this._detailsLanguageOptions.set(this._tempLanguages);
+    }
+  }
+
+  public getDetailsLanguageOptions(): Signal<FudisLanguageBadgeContent> {
+    return this._detailsLanguageOptions.asReadonly();
   }
 }

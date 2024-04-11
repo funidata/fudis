@@ -1,12 +1,4 @@
-import {
-  AfterContentInit,
-  Component,
-  ElementRef,
-  Host,
-  Input,
-  Signal,
-  effect,
-} from '@angular/core';
+import { Component, ElementRef, Host, Input, effect } from '@angular/core';
 import { FudisLanguageAbbr, FudisLanguageBadgeContent } from '../../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { DescriptionListItemComponent } from '../description-list-item.component';
@@ -18,11 +10,12 @@ import { FudisIdService } from '../../../../services/id/id.service';
   templateUrl: './description-list-item-term.component.html',
   styleUrls: ['./description-list-item-term.component.scss'],
 })
-export class DescriptionListItemTermComponent implements AfterContentInit {
+export class DescriptionListItemTermComponent {
   constructor(
     private _elementRef: ElementRef,
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
+
     @Host() private _parentDlItem: DescriptionListItemComponent,
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
@@ -34,8 +27,10 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
 
     effect(() => {
       this._currentLanguage = _translationService.getLanguage();
-      this._languageOptions = _translationService.getSelectableLanguages();
-      this._setLanguageOptions();
+
+      this._parentLanguageOptions = this._parentDlItem.getDetailsLanguageOptions()();
+
+      this._determineSelectedBadge();
     });
 
     effect(() => {
@@ -60,11 +55,6 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
   protected _parentLanguageOptions: FudisLanguageBadgeContent;
 
   /**
-   * Filtered array, where DOM is compared with Language config set in FudisTranslationService
-   */
-  protected _availableLanguages: FudisLanguageAbbr[];
-
-  /**
    * Selected language
    */
   protected _selectedLanguage: FudisLanguageAbbr;
@@ -84,23 +74,6 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
    */
   private _currentLanguage: FudisLanguageAbbr;
 
-  /**
-   * Config array from FudisTranslationService
-   */
-  private _languageOptions: Signal<FudisLanguageAbbr[]>;
-
-  /**
-   * Used in check to determine which Language Badge is selected by default on first load
-   */
-  private _firstLoadFinished: boolean = false;
-
-  ngAfterContentInit(): void {
-    this._setLanguageOptions();
-  }
-
-  /**
-   * Set selected language, also in parent Description List Item
-   */
   protected _setSelectedLanguage(lang: FudisLanguageAbbr): void {
     if (this.languages) {
       this._parentDlItem.selectedLanguage = lang;
@@ -108,31 +81,19 @@ export class DescriptionListItemTermComponent implements AfterContentInit {
     this._selectedLanguage = lang;
   }
 
-  private _setLanguageOptions(): void {
-    /**
-     * Get from parent dl-element list of available languages in dd-elements
-     */
-    this._parentLanguageOptions = this._parentDlItem.detailsLanguageOptions();
+  private _determineSelectedBadge(): void {
+    if (this._parentLanguageOptions[this._currentLanguage]) {
+      this._selectedLanguage = this._currentLanguage;
+    } else {
+      const firstAvailable = Object.keys(this._parentLanguageOptions).find((key) => {
+        return this._parentLanguageOptions[key as keyof FudisLanguageBadgeContent] !== null;
+      });
 
-    /**
-     * Compare config lang array with available DOM elements
-     */
-    this._availableLanguages = this._languageOptions().filter(
-      (item) => this._parentLanguageOptions[item],
-    );
-
-    /**
-     * On first load, set current language as selected, else just select first available language as selected.
-     */
-    if (
-      !this._firstLoadFinished &&
-      this.languages &&
-      this._availableLanguages.includes(this._currentLanguage)
-    ) {
-      this._firstLoadFinished = true;
-      this._setSelectedLanguage(this._currentLanguage);
-    } else if (this.languages && this._availableLanguages.length > 0) {
-      this._setSelectedLanguage(this._availableLanguages[0]);
+      if (firstAvailable) {
+        this._selectedLanguage = firstAvailable as FudisLanguageAbbr;
+      }
     }
+
+    this._parentDlItem.selectedLanguage = this._selectedLanguage;
   }
 }

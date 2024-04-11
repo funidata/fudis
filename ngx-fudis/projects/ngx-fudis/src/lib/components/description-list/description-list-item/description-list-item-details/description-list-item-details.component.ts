@@ -6,7 +6,6 @@ import {
   Host,
   HostBinding,
   Input,
-  OnDestroy,
   ViewChild,
   effect,
 } from '@angular/core';
@@ -21,7 +20,7 @@ import { FudisIdService } from '../../../../services/id/id.service';
   styleUrls: ['./description-list-item-details.component.scss'],
   templateUrl: './description-list-item-details.component.html',
 })
-export class DescriptionListItemDetailsComponent implements AfterViewInit, OnDestroy {
+export class DescriptionListItemDetailsComponent implements AfterViewInit {
   constructor(
     private _elementRef: ElementRef,
     private _idService: FudisIdService,
@@ -91,15 +90,16 @@ export class DescriptionListItemDetailsComponent implements AfterViewInit, OnDes
     }
   }
 
-  ngOnDestroy(): void {
-    if (this._languageLoadFinished && this.lang) {
-      const currentLanguageOptions = this._parentDlItem.detailsLanguageOptions();
+  // TODO: rethink this
+  // ngOnDestroy(): void {
+  //   if (this._languageLoadFinished && this.lang) {
+  //     const currentLanguageOptions = this._parentDlItem.detailsLanguageOptions();
 
-      if (currentLanguageOptions?.[this.lang]) {
-        delete currentLanguageOptions[this.lang];
-      }
-    }
-  }
+  //     if (currentLanguageOptions?.[this.lang]) {
+  //       delete currentLanguageOptions[this.lang];
+  //     }
+  //   }
+  // }
 
   /**
    * Parse Details text content and set parent Description List Item languages
@@ -110,10 +110,7 @@ export class DescriptionListItemDetailsComponent implements AfterViewInit, OnDes
       const parsedTextContent =
         textContent && textContent.replace(/\s/g, '') !== '' ? textContent : null;
 
-      this._parentDlItem.detailsLanguageOptions.set({
-        ...this._parentDlItem.detailsLanguageOptions(),
-        [this.lang]: parsedTextContent,
-      });
+      this._parentDlItem.addDetailsLanguage(this.lang, parsedTextContent);
       this._languageLoadFinished = true;
     }
   }

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+//import { By } from '@angular/platform-browser';
 import { GridComponent } from '../../../grid/grid/grid.component';
 import { GridDirective } from '../../../../directives/grid/grid/grid.directive';
 import { DescriptionListComponent } from '../../description-list.component';
@@ -15,9 +15,11 @@ import { Component } from '@angular/core';
 import { FudisDescriptionListVariant } from '../../../../types/miscellaneous';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { TooltipApiDirective } from '../../../../directives/tooltip/tooltip-api.directive';
+import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directive';
 
-import { phl } from '@angular-extensions/pretty-html-log';
 import { LanguageBadgeComponent } from '../../../language-badge-group/language-badge/language-badge.component';
+
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'fudis-mock-dl',
@@ -77,6 +79,7 @@ describe('DescriptionListItemTermComponent', () => {
         DescriptionListItemDetailsComponent,
         LanguageBadgeGroupComponent,
         LanguageBadgeComponent,
+        TooltipDirective,
         TooltipApiDirective,
         MockDlComponent,
       ],
@@ -86,6 +89,7 @@ describe('DescriptionListItemTermComponent', () => {
         FudisBreakpointService,
         FudisTranslationService,
       ],
+      imports: [MatTooltipModule],
     }).compileComponents();
   });
 
@@ -110,12 +114,12 @@ describe('DescriptionListItemTermComponent', () => {
     return dlItemElement;
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function getDlItemTermFromArrayIndex(index: number): any {
-    const dlItemTermElements = mockFixture.debugElement.queryAll(By.css('fudis-dt'));
-    const itemArray = [...dlItemTermElements];
+  // function getDlItemTermFromArrayIndex(index: number): any {
+  //   const dlItemTermElements = mockFixture.debugElement.queryAll(By.css('fudis-dt'));
+  //   const itemArray = [...dlItemTermElements];
 
-    return itemArray[index];
-  }
+  //   return itemArray[index];
+  // }
 
   it('should create', () => {
     expect(mockComponent).toBeTruthy();
@@ -180,7 +184,7 @@ describe('DescriptionListItemTermComponent', () => {
 
   describe('With languages', () => {
     it('should have visible language badges', () => {
-      phl(mockFixture);
+      //phl(mockFixture);
     });
   });
 });
