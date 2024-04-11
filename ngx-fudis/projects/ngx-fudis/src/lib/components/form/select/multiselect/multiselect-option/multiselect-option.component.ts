@@ -22,7 +22,7 @@ export class MultiselectOptionComponent extends SelectOptionBaseDirective implem
 
     this._parent = this._parentMultiselect;
 
-    this._id = this._idService.getNewSelectOptionid(
+    this._id = this._idService.getNewSelectOptionId(
       'multiselect',
       this._parent.id,
       this._parentGroup?.id,

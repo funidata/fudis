@@ -2,7 +2,6 @@ import { TestBed } from '@angular/core/testing';
 import { FudisTranslationService } from './translation.service';
 import { en, fi, sv } from './translationKeys';
 
-// TODO: Write tests
 describe('TranslationService', () => {
   let service: FudisTranslationService;
 
