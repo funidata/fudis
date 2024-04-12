@@ -25,7 +25,25 @@ Description List is built using child components as follows:
 </fudis-dl>`}
 />
 
-Description Term (fudis-dt) has `subHeading` input to add optional sub-heading between Description Term and Details elements. Single Description List Item can have multiple Description Details (fudis-dd) element if necessary.
+Term and Details content is passed through `textContent` Input property.
+
+<Source
+  code={`
+<fudis-dt [textContent]="'This is Term element text'" />
+<fudis-dd [textContent]="'Here is the Details element text'" />`}
+/>
+
+Term element has also `subHeading` Input for adding optional sub-heading between Term and Details elements. Single Description List Item can have multiple Details elements if necessary.
+
+<Source
+  code={`
+<fudis-dl-item>
+  <fudis-dt [subHeading]="'I am Term sub heading'" [textContent]="'I am the main Term text content'" />
+  <fudis-dd [textContent]="'I am first Details element'" />
+  <fudis-dd [textContent]="'I am second Details element'" />
+  <fudis-dd [textContent]="'I am third Details element'" />
+</fudis-dl-item>`}
+/>
 
 ## Examples
 
@@ -35,18 +53,18 @@ Description Term (fudis-dt) has `subHeading` input to add optional sub-heading b
 
 ### Including Interactive Sub-Components
 
-It is possible to incluce buttons or other interactive elements in Description List Item Detail (`<fudis-dd>`) by using `ng-template` with `fudisActions [type]="'dd'"`. This following example displays, how Fudis Button is used inside the Description List.
+It is possible to incluce buttons or other interactive elements inside Description List Item Details (`<fudis-dd>`) by using `ng-template` with `fudisActions [type]="'dd'"`. This following example displays, how Fudis Button is used inside the Description List.
 
 <Canvas of={DescriptionListStories.DescriptionListWithSubComponents}></Canvas>
 
 ### With Language Badge Group
 
-Description List with Language Badge Group displays list details with translations. It's good to note that Description List with Language Badge Group is designed to be used only with Description List **regular** variant.
+Description List with Language Badge Group displays Details elements with translations. It's good to note that Description List with Language Badge Group is designed to be used only with Description List **regular** variant.
 
 How to use:
 
-1. Description List Item Term (fudis-dt) -element takes a boolean value `languages`. By setting languages as `true`, Description List will render a Language Badge Group next to description list key label.
-2. In order to link Language Badge with selected translation, Description List Item Detail (fudis-dd) takes a `lang` input, which will specify the language used in fudis-dd content. `lang` input uses `FudisLanguageAbbr` type, that have predefined languages of English, Finnish and Swedish. When language option is used, all of the fudis-dd elements need a suited lang input. If any of the three predefined `lang` inputs are missing, Fudis Language Badge Group will display this translation as missing.
+1. Description List Item Term (fudis-dt) element takes a boolean value `languages` and by setting it to `true`, Description List will render Language Badge Group next to the Term element.
+2. In order to link Language Badge with selected translation, Description List Item Detail (fudis-dd) has `lang` input, which will specify the language used in Details element content. `lang` input uses `FudisLanguageAbbr` type, which has predefined languages of English, Finnish and Swedish. When language option is used, all of the fudis-dd elements need a suited lang input. If any of the three predefined `lang` inputs are missing, Fudis Language Badge Group will display this translation as missing.
 
 <Canvas of={DescriptionListStories.DescriptionListWithLanguages}></Canvas>
 
@@ -54,8 +72,8 @@ How to use:
 
 - Description List component wraps list content into `dl` element
 - Each description term is contained within a `dt` element
-- Each description detail is contained in one or more `dd` element
-- Description detail elements `dd` are placed directly after description term `dt` element
+- Each description details is contained in one or more `dd` element
+- `dd` elements are placed directly after `dt` element
 - If only one description list item is present, it is converted to paragraph element
 
 ### Related components / directives
