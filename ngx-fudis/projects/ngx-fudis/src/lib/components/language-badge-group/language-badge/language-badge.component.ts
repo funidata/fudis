@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, Signal, effect } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  Signal,
+  effect,
+} from '@angular/core';
 import {
   FudisComponentChanges,
   FudisLanguageAbbr,
@@ -14,7 +23,10 @@ import { FudisIdService } from '../../../services/id/id.service';
   templateUrl: './language-badge.component.html',
 })
 export class LanguageBadgeComponent extends TooltipApiDirective implements OnChanges, OnInit {
-  constructor(private _translationService: FudisTranslationService, private _idService: FudisIdService) {
+  constructor(
+    private _translationService: FudisTranslationService,
+    private _idService: FudisIdService,
+  ) {
     super();
 
     effect(() => {

@@ -12,7 +12,6 @@ describe('LanguageBadgeComponent', () => {
   let fixture: ComponentFixture<LanguageBadgeComponent>;
   let service: FudisIdService;
 
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LanguageBadgeComponent, TooltipDirective],

@@ -72,24 +72,24 @@ const DescriptionListTemplate: StoryFn<DescriptionListComponent> = (
       [disableGrid]="disableGrid"
     >
       <fudis-dl-item>
-        <fudis-dt>First name</fudis-dt>
-        <fudis-dd>Rex</fudis-dd>
+        <fudis-dt [textContent]="'First name'"></fudis-dt>
+        <fudis-dd [textContent]="'Rex'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt>Last name</fudis-dt>
-        <fudis-dd>Dangerwest</fudis-dd>
+        <fudis-dt [textContent]="'Last name'"></fudis-dt>
+        <fudis-dd [textContent]="'Dangerwest'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt>Alias</fudis-dt>
-        <fudis-dd>Radical Emmet Xtreme</fudis-dd>
+        <fudis-dt [textContent]="'Alias'"></fudis-dt>
+        <fudis-dd [textContent]="'Radical Emmet Xtreme'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt>Voice actor</fudis-dt>
-        <fudis-dd>Chris Pratt</fudis-dd>
+        <fudis-dt [textContent]="'Voice actor'"></fudis-dt>
+        <fudis-dd [textContent]="'Chris Pratt'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt>Enemy</fudis-dt>
-        <fudis-dd [subHeading]="'Archenemy'">Emmet Brickowski</fudis-dd>
+        <fudis-dt [textContent]="'Enemy'"></fudis-dt>
+        <fudis-dd [textContent]="'Emmet Brickowski'" [subHeading]="'Archenemy'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>`,
 });
@@ -111,12 +111,12 @@ const DescriptionListInsideGridTemplate: StoryFn<DescriptionListComponent> = (
     >
     <fudis-dl [disableGrid]="disableGrid" [variant]="variant">
       <fudis-dl-item>
-        <fudis-dt>Teacher email</fudis-dt>
-        <fudis-dd [subHeading]="'Severus Snape'">snape@hogwarts.wiz</fudis-dd>
+        <fudis-dt [textContent]="'Teacher email'"></fudis-dt>
+        <fudis-dd [textContent]="'snape@hogwarts.wiz'" [subHeading]="'Severus Snape'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt>Course name</fudis-dt>
-        <fudis-dd>Defense Against the Dark Arts</fudis-dd>
+        <fudis-dt [textContent]="'Course name'"></fudis-dt>
+        <fudis-dd [textContent]="'Defense Against the Dark Arts'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
     <fudis-body-text
@@ -148,17 +148,16 @@ const DescriptionListWithSubComponentsTemplate: StoryFn<DescriptionListComponent
       [rowGap]="rowGap"
     >
       <fudis-dl-item>
-        <fudis-dt>First name</fudis-dt>
-        <fudis-dd>Rex</fudis-dd>
+        <fudis-dt [textContent]="'First name'"></fudis-dt>
+        <fudis-dd [textContent]="'Rex'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt>Last name</fudis-dt>
-        <fudis-dd>Dangerwest</fudis-dd>
+        <fudis-dt [textContent]="'Last name'"></fudis-dt>
+        <fudis-dd [textContent]="'Dangerwest'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt>Alias</fudis-dt>
-        <fudis-dd
-          >Radical Emmet Xtreme
+        <fudis-dt [textContent]="'Alias'"></fudis-dt>
+        <fudis-dd [textContent]="'Radical Emmet Xtreme'">
           <ng-template fudisActions [type]="'dd'">
             <fudis-button
               [label]="'Edit'"
@@ -170,9 +169,9 @@ const DescriptionListWithSubComponentsTemplate: StoryFn<DescriptionListComponent
         </fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt>Enemy</fudis-dt>
-        <fudis-dd [subHeading]="'Archenemy'"
-          >Emmet Brickowski<ng-template fudisActions [type]="'dd'">
+        <fudis-dt [textContent]="'Enemy'">Enemy</fudis-dt>
+        <fudis-dd [textContent]="'Emmet Brickowski'" [subHeading]="'Archenemy'"
+          ><ng-template fudisActions [type]="'dd'">
             <fudis-button [label]="'Read more'" [variant]="'secondary'" [size]="'small'" />
           </ng-template>
         </fudis-dd>
@@ -261,14 +260,16 @@ const DescriptionListWithMultipleDdElementsTemplate: StoryFn<DescriptionListComp
       [variant]="variant"
     >
       <fudis-description-list-item>
-        <fudis-dt>Members of Jedi High Council</fudis-dt>
-        <fudis-dd [subHeading]="item.subHeading" *ngFor="let item of data"
-          >{{ item.value }}</fudis-dd
-        >
+        <fudis-dt [textContent]="'Members of Jedi High Council'"></fudis-dt>
+        <fudis-dd
+          [textContent]="item.value"
+          [subHeading]="item.subHeading"
+          *ngFor="let item of data"
+        ></fudis-dd>
       </fudis-description-list-item>
       <fudis-description-list-item>
-        <fudis-dt>Non-Jedi Master Members</fudis-dt>
-        <fudis-dd>Anakin Skywalker</fudis-dd>
+        <fudis-dt [textContent]="'Non-Jedi Master Members'"></fudis-dt>
+        <fudis-dd [textContent]="'Anakin Skywalker'"></fudis-dd>
       </fudis-description-list-item>
     </fudis-description-list>
   `,
@@ -298,8 +299,8 @@ const DescriptionListWithSingleItemTemplate: StoryFn<DescriptionListComponent> =
       [variant]="variant"
     >
       <fudis-description-list-item>
-        <fudis-dt>Address</fudis-dt>
-        <fudis-dd [subHeading]="'4 Privet Drive'">Under the stairs</fudis-dd>
+        <fudis-dt [textContent]="'Address'"></fudis-dt>
+        <fudis-dd [textContent]="'Under the stairs'" [subHeading]="'4 Privet Drive'"></fudis-dd>
       </fudis-description-list-item>
     </fudis-description-list>
   `,
