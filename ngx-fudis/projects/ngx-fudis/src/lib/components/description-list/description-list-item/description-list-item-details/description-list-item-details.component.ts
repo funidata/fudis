@@ -6,7 +6,6 @@ import {
   HostBinding,
   Input,
   OnChanges,
-  ViewChild,
   effect,
 } from '@angular/core';
 import { FudisComponentChanges, FudisLanguageAbbr } from '../../../../types/miscellaneous';
@@ -52,12 +51,7 @@ export class DescriptionListItemDetailsComponent implements OnChanges {
   /**
    * Possible action buttons for Details element
    */
-  @ContentChild(ActionsDirective) actions: ActionsDirective;
-
-  /**
-   * ViewChild for Details element content
-   */
-  @ViewChild('ddTextContent') private _content: ElementRef;
+  @ContentChild(ActionsDirective) protected _actions: ActionsDirective;
 
   /**
    * Details element language, possible values 'fi', 'sv' and 'en'.

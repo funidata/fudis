@@ -19,16 +19,16 @@
 </ng-container>
 
 <ng-template #ddContent>
-  <span [class]="_mainCssClass + '__sub-heading'" *ngIf="subHeading">
+  <span *ngIf="subHeading" [class]="_mainCssClass + '__sub-heading'">
     {{ subHeading }}
   </span>
-  <span #ddTextContent [class]="_mainCssClass + '__content'">
-    <span *ngIf="subHeading" [class]="_mainCssClass + '__parenthesis'">&nbsp;&#40;</span>
-    {{ textContent }}
-    <span *ngIf="subHeading" [class]="_mainCssClass + '__parenthesis'">&#41;</span>
-    <ng-container *ngIf="actions?.type === 'dd'">
+  <span [class]="_mainCssClass + '__content'">
+    <span *ngIf="subHeading" [class]="_mainCssClass + '__parenthesis'">&nbsp;&#40;</span
+    >{{ textContent
+    }}<span *ngIf="subHeading" [class]="_mainCssClass + '__parenthesis'">&#41;</span>
+    <ng-container *ngIf="_actions?.type === 'dd'">
       <span [class]="_mainCssClass + '__content__actions'">
-        <ng-container *ngTemplateOutlet="actions!.templateRef" />
+        <ng-container *ngTemplateOutlet="_actions!.templateRef" />
       </span>
     </ng-container>
   </span>
