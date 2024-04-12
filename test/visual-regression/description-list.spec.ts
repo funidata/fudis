@@ -32,28 +32,28 @@ test("description list default compact and grid disabled", async ({ page }) => {
 // Description List Inside Grid
 test("description list regular inside Grid", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=variant:regular&id=components-description-list--description-list-item-inside-grid&viewMode=story",
+    "/iframe.html?args=variant:regular&id=components-description-list--description-list-inside-grid&viewMode=story",
   );
   await expect(page).toHaveScreenshot();
 });
 
 test("description list compact inside Grid", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=variant:compact&id=components-description-list--description-list-item-inside-grid&viewMode=story",
+    "/iframe.html?args=variant:compact&id=components-description-list--description-list-inside-grid&viewMode=story",
   );
   await expect(page).toHaveScreenshot();
 });
 
 test("description list regular inside Grid and DL grid enabled", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=variant:regular;disableGrid:!false&id=components-description-list--description-list-item-inside-grid&viewMode=story",
+    "/iframe.html?args=variant:regular;disableGrid:!false&id=components-description-list--description-list-inside-grid&viewMode=story",
   );
   await expect(page).toHaveScreenshot();
 });
 
 test("description list compact inside Grid and DL grid enabled", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=variant:regular;disableGrid:!false&id=components-description-list--description-list-item-inside-grid&viewMode=story",
+    "/iframe.html?args=variant:regular;disableGrid:!false&id=components-description-list--description-list-inside-grid&viewMode=story",
   );
   await expect(page).toHaveScreenshot();
 });
