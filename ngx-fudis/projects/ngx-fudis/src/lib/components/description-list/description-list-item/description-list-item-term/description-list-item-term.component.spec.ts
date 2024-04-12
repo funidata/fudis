@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-//import { By } from '@angular/platform-browser';
+import { By } from '@angular/platform-browser';
+import { Component } from '@angular/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { GridComponent } from '../../../grid/grid/grid.component';
 import { GridDirective } from '../../../../directives/grid/grid/grid.directive';
 import { DescriptionListComponent } from '../../description-list.component';
@@ -8,52 +10,42 @@ import { DescriptionListItemComponent } from '../description-list-item.component
 import { DescriptionListItemTermComponent } from './description-list-item-term.component';
 import { DescriptionListItemDetailsComponent } from '../description-list-item-details/description-list-item-details.component';
 import { LanguageBadgeGroupComponent } from '../../../language-badge-group/language-badge-group.component';
+import { LanguageBadgeComponent } from '../../../language-badge-group/language-badge/language-badge.component';
 import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoint.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { getElement } from '../../../../utilities/tests/utilities';
-import { Component } from '@angular/core';
 import { FudisDescriptionListVariant } from '../../../../types/miscellaneous';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { TooltipApiDirective } from '../../../../directives/tooltip/tooltip-api.directive';
 import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directive';
-
-import { LanguageBadgeComponent } from '../../../language-badge-group/language-badge/language-badge.component';
-
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'fudis-mock-dl',
   template: `
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
       <fudis-dl-item>
-        <fudis-dt>First DT</fudis-dt>
-        <fudis-dd>This is my DD</fudis-dd>
+        <fudis-dt [textContent]="'First DT'"></fudis-dt>
+        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt>Second DT</fudis-dt>
-        <fudis-dd>This is my DD</fudis-dd>
-      </fudis-dl-item>
-    </fudis-dl>
-
-    <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
-      <fudis-dl-item>
-        <fudis-dt>Single DT</fudis-dt>
-        <fudis-dd>This is my DD</fudis-dd>
+        <fudis-dt [textContent]="'Second DT'"></fudis-dt>
+        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
 
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
       <fudis-dl-item>
-        <fudis-dt [languages]="true">DT With Languages 1</fudis-dt>
-        <fudis-dd [lang]="'en'">This is in English</fudis-dd>
-        <fudis-dd [lang]="'fi'">Tämä on suomeksi</fudis-dd>
-        <fudis-dd [lang]="'sv'"></fudis-dd>
+        <fudis-dt [textContent]="'Single DT'"></fudis-dt>
+        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
       </fudis-dl-item>
+    </fudis-dl>
+
+    <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
       <fudis-dl-item>
-        <fudis-dt [languages]="true">DT With Languages 2</fudis-dt>
-        <!-- <fudis-dd [lang]="'en'">This is in English</fudis-dd>
-        <fudis-dd [lang]="'fi'">Tämä on suomeksi</fudis-dd>
-        <fudis-dd [lang]="'sv'"></fudis-dd> -->
+        <fudis-dt [textContent]="'DT With Languages 1'" [languages]="true"></fudis-dt>
+        <fudis-dd [textContent]="'This is in English'" [lang]="'en'"></fudis-dd>
+        <fudis-dd [textContent]="'Tämä on suomeksi'" [lang]="'fi'"></fudis-dd>
+        <fudis-dd [textContent]="''" [lang]="'sv'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
   `,
@@ -114,34 +106,34 @@ describe('DescriptionListItemTermComponent', () => {
     return dlItemElement;
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // function getDlItemTermFromArrayIndex(index: number): any {
-  //   const dlItemTermElements = mockFixture.debugElement.queryAll(By.css('fudis-dt'));
-  //   const itemArray = [...dlItemTermElements];
+  function getDlItemTermFromArrayIndex(index: number): any {
+    const dlItemTermElements = mockFixture.debugElement.queryAll(By.css('fudis-dt'));
+    const itemArray = [...dlItemTermElements];
 
-  //   return itemArray[index];
-  // }
+    return itemArray[index];
+  }
 
   it('should create', () => {
     expect(mockComponent).toBeTruthy();
   });
 
-  // describe('Wrapper element', () => {
-  //   it('should render respective wrapper element for multiple and single item templates', () => {
-  //     expect(
-  //       getDlItemTermFromArrayIndex(0).query(By.css('dt.fudis-dl-item-term__regular')),
-  //     ).toBeTruthy();
-  //     expect(
-  //       getDlItemTermFromArrayIndex(2).query(By.css('dt.fudis-dl-item-term__regular')),
-  //     ).toBeFalsy();
+  describe('Wrapper element', () => {
+    it('should render respective wrapper element for multiple and single item templates', () => {
+      expect(
+        getDlItemTermFromArrayIndex(0).query(By.css('dt.fudis-dl-item-term__regular')),
+      ).toBeTruthy();
+      expect(
+        getDlItemTermFromArrayIndex(2).query(By.css('dt.fudis-dl-item-term__regular')),
+      ).toBeFalsy();
 
-  //     expect(
-  //       getDlItemTermFromArrayIndex(2).query(By.css('span.fudis-dl-item-term__regular')),
-  //     ).toBeTruthy();
-  //     expect(
-  //       getDlItemTermFromArrayIndex(0).query(By.css('span.fudis-dl-item-term__regular')),
-  //     ).toBeFalsy();
-  //   });
-  // });
+      expect(
+        getDlItemTermFromArrayIndex(2).query(By.css('span.fudis-dl-item-term__regular')),
+      ).toBeTruthy();
+      expect(
+        getDlItemTermFromArrayIndex(0).query(By.css('span.fudis-dl-item-term__regular')),
+      ).toBeFalsy();
+    });
+  });
 
   describe('CSS classes', () => {
     it('should have main CSS class', () => {
@@ -160,31 +152,36 @@ describe('DescriptionListItemTermComponent', () => {
     });
   });
 
-  // describe('HTML id', () => {
-  //   it('should have generated id from Id Service', () => {
-  //     expect(
-  //       getDlItemTermFromArrayIndex(0)
-  //         .query(By.css('dt.fudis-dl-item-term__regular'))
-  //         .nativeElement.getAttribute('id'),
-  //     ).toEqual('fudis-description-list-1-item-1-term-1');
+  describe('HTML id', () => {
+    it('should have generated id from Id Service', () => {
+      expect(
+        getDlItemTermFromArrayIndex(0)
+          .query(By.css('dt.fudis-dl-item-term__regular'))
+          .nativeElement.getAttribute('id'),
+      ).toEqual('fudis-description-list-1-item-1-term-1');
 
-  //     expect(
-  //       getDlItemTermFromArrayIndex(1)
-  //         .query(By.css('dt.fudis-dl-item-term__regular'))
-  //         .nativeElement.getAttribute('id'),
-  //     ).toEqual('fudis-description-list-1-item-2-term-1');
+      expect(
+        getDlItemTermFromArrayIndex(1)
+          .query(By.css('dt.fudis-dl-item-term__regular'))
+          .nativeElement.getAttribute('id'),
+      ).toEqual('fudis-description-list-1-item-2-term-1');
 
-  //     expect(
-  //       getDlItemTermFromArrayIndex(2)
-  //         .query(By.css('span.fudis-dl-item-term__regular'))
-  //         .nativeElement.getAttribute('id'),
-  //     ).toEqual('fudis-description-list-2-item-1-term-1');
-  //   });
-  // });
+      expect(
+        getDlItemTermFromArrayIndex(2)
+          .query(By.css('span.fudis-dl-item-term__regular'))
+          .nativeElement.getAttribute('id'),
+      ).toEqual('fudis-description-list-2-item-1-term-1');
+    });
+  });
 
   describe('With languages', () => {
-    it('should have visible language badges', () => {
-      //phl(mockFixture);
+    it('should have Language Badge Group visible', () => {
+      const dlWithLanguages = mockFixture.debugElement.queryAll(By.css('fudis-dl'))[2];
+      const languageBadgeGroup = dlWithLanguages.query(By.directive(LanguageBadgeGroupComponent));
+      const languageBadges = languageBadgeGroup.queryAll(By.directive(LanguageBadgeComponent));
+
+      expect(languageBadgeGroup).toBeTruthy();
+      expect(languageBadges.length).toEqual(3);
     });
   });
 });

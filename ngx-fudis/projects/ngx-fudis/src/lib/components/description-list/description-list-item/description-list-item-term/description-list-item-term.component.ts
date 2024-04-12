@@ -45,12 +45,12 @@ export class DescriptionListItemTermComponent {
   }
 
   /**
-   * Renders Fudis Language Badge Component for displaying Description List Item Detail values in given languages
+   * Renders Fudis Language Badge Group Component for displaying Description List Item Detail values in given languages
    */
   @Input() languages: boolean = false;
 
   /**
-   * Visible text content for details
+   * Visible text content for term
    */
   @Input() textContent: string;
 
