@@ -11,6 +11,8 @@ import { DescriptionListItemTermComponent } from '../description-list-item-term/
 import { DescriptionListItemDetailsComponent } from './description-list-item-details.component';
 import { LanguageBadgeGroupComponent } from '../../../language-badge-group/language-badge-group.component';
 import { LanguageBadgeComponent } from '../../../language-badge-group/language-badge/language-badge.component';
+import { ButtonComponent } from '../../../button/button.component';
+import { IconComponent } from '../../../icon/icon.component';
 import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoint.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { getElement, getTrimmedTextContent } from '../../../../utilities/tests/utilities';
@@ -18,6 +20,7 @@ import { FudisDescriptionListVariant } from '../../../../types/miscellaneous';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { TooltipApiDirective } from '../../../../directives/tooltip/tooltip-api.directive';
 import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directive';
+import { ActionsDirective } from '../../../../directives/content-projection/actions/actions.directive';
 
 @Component({
   selector: 'fudis-mock-dl',
@@ -29,7 +32,16 @@ import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directi
       </fudis-dl-item>
       <fudis-dl-item>
         <fudis-dt [textContent]="'Second DT'"></fudis-dt>
-        <fudis-dd [textContent]="'This is my DD'" [subHeading]="'Here is sub heading'"></fudis-dd>
+        <fudis-dd [textContent]="'This is my DD'" [subHeading]="'Here is sub heading'">
+          <ng-template fudisActions [type]="'dd'">
+            <fudis-button
+              [label]="'Edit'"
+              [variant]="'tertiary'"
+              [size]="'small'"
+              [icon]="'edit'"
+            />
+          </ng-template>
+        </fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
 
@@ -64,12 +76,15 @@ describe('DescriptionListItemDetailsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
+        ActionsDirective,
+        ButtonComponent,
         GridDirective,
         GridComponent,
         DescriptionListComponent,
         DescriptionListItemComponent,
         DescriptionListItemTermComponent,
         DescriptionListItemDetailsComponent,
+        IconComponent,
         LanguageBadgeGroupComponent,
         LanguageBadgeComponent,
         TooltipDirective,
@@ -215,6 +230,20 @@ describe('DescriptionListItemDetailsComponent', () => {
       );
 
       expect(changedLanguage.textContent).toEqual('Tämä on suomeksi');
+    });
+  });
+
+  describe('Actions', () => {
+    it('should render given action button', () => {
+      const actionsWrapper = mockFixture.debugElement.query(
+        By.css('.fudis-dl-item-details__regular__content__actions'),
+      );
+
+      expect(actionsWrapper).toBeTruthy();
+
+      const actionButton = actionsWrapper.query(By.directive(ButtonComponent));
+
+      expect(actionButton).toBeTruthy();
     });
   });
 });
