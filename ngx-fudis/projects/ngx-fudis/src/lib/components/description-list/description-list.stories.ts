@@ -11,17 +11,14 @@ import { FudisTranslationService } from '../../services/translation/translation.
   template: `
     <fudis-grid [columns]="3" [width]="'sm'">
       <fudis-button
-        [id]="'lang-btn-1'"
         [label]="'Change to: fi, sv'"
         (handleClick)="changeBadgeLanguages(['fi', 'sv'])"
       />
       <fudis-button
-        [id]="'lang-btn-2'"
         [label]="'Change to: sv, en'"
         (handleClick)="changeBadgeLanguages(['sv', 'en'])"
       />
       <fudis-button
-        [id]="'lang-btn-3'"
         [label]="'Change to: sv, fi, en'"
         (handleClick)="changeBadgeLanguages(['sv', 'fi', 'en'])"
       />
