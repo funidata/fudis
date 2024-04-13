@@ -68,7 +68,6 @@ const DescriptionListTemplate: StoryFn<DescriptionListComponent> = (
       [marginTop]="'md'"
       [variant]="variant"
       [columns]="'1fr 1fr'"
-      [rowGap]="rowGap"
       [disableGrid]="disableGrid"
     >
       <fudis-dl-item>
@@ -97,7 +96,6 @@ const DescriptionListTemplate: StoryFn<DescriptionListComponent> = (
 export const DescriptionList = DescriptionListTemplate.bind({});
 DescriptionList.args = {
   variant: 'compact',
-  rowGap: 'sm',
   disableGrid: false,
 };
 
@@ -145,7 +143,6 @@ const DescriptionListWithSubComponentsTemplate: StoryFn<DescriptionListComponent
       [disableGrid]="disableGrid"
       [variant]="variant"
       [columns]="columns"
-      [rowGap]="rowGap"
     >
       <fudis-dl-item>
         <fudis-dt [textContent]="'First name'"></fudis-dt>
@@ -183,7 +180,6 @@ export const DescriptionListWithSubComponents = DescriptionListWithSubComponents
 DescriptionListWithSubComponents.args = {
   variant: 'regular',
   columns: { xs: 1, sm: 2 },
-  rowGap: 'md',
   disableGrid: false,
 };
 
@@ -200,7 +196,6 @@ const DescriptionListWithLanguagesTemplate: StoryFn<DescriptionListComponent> = 
       [variant]="variant"
       [serviceDefaults]="serviceDefaults"
       [columns]="columns"
-      [rowGap]="'sm'"
     >
       <fudis-description-list-item>
         <fudis-dt [languages]="true" [textContent]="'Example paragraph'"></fudis-dt>
@@ -269,7 +264,6 @@ const DescriptionListWithMultipleDdElementsTemplate: StoryFn<DescriptionListComp
       [marginTop]="'md'"
       [variant]="'regular'"
       [columns]="'1fr 1fr'"
-      [rowGap]="'sm'"
       [disableGrid]="disableGrid"
       [variant]="variant"
     >
@@ -308,7 +302,6 @@ const DescriptionListWithSingleItemTemplate: StoryFn<DescriptionListComponent> =
       [marginTop]="'md'"
       [variant]="'regular'"
       [columns]="'1fr 1fr'"
-      [rowGap]="'sm'"
       [disableGrid]="disableGrid"
       [variant]="variant"
     >
