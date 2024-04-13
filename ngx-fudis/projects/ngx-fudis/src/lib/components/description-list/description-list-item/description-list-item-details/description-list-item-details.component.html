@@ -21,8 +21,7 @@
 <ng-template #ddContent>
   <span *ngIf="subHeading" [class]="_mainCssClass + '__sub-heading'">{{ subHeading }}</span
   ><span [class]="_mainCssClass + '__content'">
-    <span *ngIf="subHeading" [class]="_mainCssClass + '__parenthesis'">&nbsp;&#40;</span
-    >{{ textContent
+    <span *ngIf="subHeading" [class]="_mainCssClass + '__parenthesis'"> &#40;</span>{{ textContent
     }}<span *ngIf="subHeading" [class]="_mainCssClass + '__parenthesis'">&#41;</span>
     <ng-container *ngIf="_actions?.type === 'dd'">
       <span [class]="_mainCssClass + '__content__actions'">
