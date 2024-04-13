@@ -146,7 +146,7 @@ test("description list compact with single item and grid disabled", async ({ pag
 });
 
 // Description List With Languages
-test.only("description list regular with languages", async ({ page }) => {
+test("description list regular with languages", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=variant:regular&id=components-description-list--description-list-with-languages&viewMode=story",
   );
@@ -172,7 +172,7 @@ test.only("description list regular with languages", async ({ page }) => {
   await expect(page).toHaveScreenshot("languages-regular-7-clicked-sv-badge.png");
 });
 
-test.only("description list compact with languages", async ({ page }) => {
+test("description list compact with languages", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=variant:compact&id=components-description-list--description-list-with-languages&viewMode=story",
   );
