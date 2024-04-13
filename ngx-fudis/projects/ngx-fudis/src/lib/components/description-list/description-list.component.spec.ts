@@ -122,7 +122,7 @@ describe('DescriptionListComponent', () => {
     it('should have grid classes if grid is enabled', () => {
       expect(sortClasses(getDlElement('dl').className)).toEqual(
         sortClasses(
-          'fudis-dl fudis-grid fudis-grid__xxl fudis-grid__align__start fudis-grid__margin__top__none fudis-grid__margin__bottom__none fudis-grid__row-gap__none',
+          'fudis-dl fudis-grid fudis-grid__xxl fudis-grid__align__start fudis-grid__margin__top__none fudis-grid__margin__bottom__none fudis-grid__row-gap__sm',
         ),
       );
     });

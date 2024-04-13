@@ -1,10 +1,31 @@
+/* stylelint-disable no-descending-specificity */
 /* stylelint-disable scss/selector-no-redundant-nesting-selector */
 /* stylelint-disable selector-class-pattern */
 
 // Enable comma in compact variant for DD elements if there are more than one DDs.
 
 .fudis-dl-item-details-host {
-  &:not(:last-of-type) {
+  &:not(&--fi, &--sv, &--en) {
+    &:has(~ .fudis-dl-item-details-host) {
+      & .fudis-dl-item-details__compact__comma {
+        display: initial;
+      }
+    }
+  }
+
+  &--fi:has(~ .fudis-dl-item-details-host--fi) {
+    & .fudis-dl-item-details__compact__comma {
+      display: initial;
+    }
+  }
+
+  &--sv:has(~ .fudis-dl-item-details-host--sv) {
+    & .fudis-dl-item-details__compact__comma {
+      display: initial;
+    }
+  }
+
+  &--en:has(~ .fudis-dl-item-details-host--en) {
     & .fudis-dl-item-details__compact__comma {
       display: initial;
     }

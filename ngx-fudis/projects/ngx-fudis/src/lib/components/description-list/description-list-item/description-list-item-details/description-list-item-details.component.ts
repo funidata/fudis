@@ -87,10 +87,13 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
       this.textContent && this.textContent.replace(/\s/g, '') !== '' ? this.textContent : null;
 
     this._parentDlItem.addDetailsLanguage(this.lang, parsedTextContent, this._id);
+
+    this._hostClass = `fudis-dl-item-details-host fudis-dl-item-details-host--${this.lang}`;
   }
 
   private _removeDetailsFromParent(): void {
     this._parentDlItem.removeDetailsLanguage(this.lang, this._id);
+    this._hostClass = `fudis-dl-item-details-host`;
   }
 
   ngOnChanges(changes: FudisComponentChanges<DescriptionListItemDetailsComponent>): void {

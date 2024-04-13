@@ -4,11 +4,13 @@
 
 .fudis-dl-item-term {
   &__regular {
-    @include typography.description-list-key-typography;
-    @include colorMixins.text-color("gray-dark");
-
     display: block;
     margin: 0 0 spacing.$spacing-xs 0;
+
+    &__text-content {
+      @include typography.description-list-key-typography;
+      @include colorMixins.text-color("gray-dark");
+    }
 
     &__colon {
       display: none;
@@ -16,9 +18,6 @@
   }
 
   &__compact {
-    @include typography.description-list-compact-key-typography;
-    @include colorMixins.text-color("gray-dark");
-
     display: inline-block;
     position: relative;
     padding-left: spacing.$spacing-xs;
@@ -33,6 +32,11 @@
       width: spacing.$pixel-1;
       height: 80%;
       content: "";
+    }
+
+    &__text-content {
+      @include typography.description-list-compact-key-typography;
+      @include colorMixins.text-color("gray-dark");
     }
 
     &__colon {
