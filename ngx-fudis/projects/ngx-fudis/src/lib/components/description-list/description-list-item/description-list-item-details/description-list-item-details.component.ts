@@ -6,6 +6,7 @@ import {
   HostBinding,
   Input,
   OnChanges,
+  OnDestroy,
   effect,
 } from '@angular/core';
 import { FudisComponentChanges, FudisLanguageAbbr } from '../../../../types/miscellaneous';
@@ -19,7 +20,7 @@ import { FudisIdService } from '../../../../services/id/id.service';
   styleUrls: ['./description-list-item-details.component.scss'],
   templateUrl: './description-list-item-details.component.html',
 })
-export class DescriptionListItemDetailsComponent implements OnChanges {
+export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy {
   constructor(
     private _elementRef: ElementRef,
     private _idService: FudisIdService,
@@ -79,31 +80,31 @@ export class DescriptionListItemDetailsComponent implements OnChanges {
   protected _mainCssClass: string;
 
   /**
-   * Detect if Details' text content has been loaded for current language
+   * Parse Details text content and set parent Description List Item languages
    */
-  protected _languageLoadFinished: boolean = false;
+  private _sendDetailsLanguageToParent(): void {
+    const parsedTextContent =
+      this.textContent && this.textContent.replace(/\s/g, '') !== '' ? this.textContent : null;
+
+    this._parentDlItem.addDetailsLanguage(this.lang, parsedTextContent, this._id);
+  }
+
+  private _removeDetailsFromParent(): void {
+    this._parentDlItem.removeDetailsLanguage(this.lang, this._id);
+  }
 
   ngOnChanges(changes: FudisComponentChanges<DescriptionListItemDetailsComponent>): void {
-    /**
-     * Parse Details text content and set parent Description List Item languages
-     */
+    if (!changes.lang?.firstChange && this.lang) {
+      this._removeDetailsFromParent();
+      this._sendDetailsLanguageToParent();
+    }
+
     if (changes.textContent?.currentValue && this.lang) {
-      const text = changes.textContent.currentValue;
-
-      const parsedTextContent = text && text.replace(/\s/g, '') !== '' ? text : null;
-
-      this._parentDlItem.addDetailsLanguage(this.lang, parsedTextContent);
+      this._sendDetailsLanguageToParent();
     }
   }
 
-  // TODO: rethink this
-  // ngOnDestroy(): void {
-  //   if (this._languageLoadFinished && this.lang) {
-  //     const currentLanguageOptions = this._parentDlItem.detailsLanguageOptions();
-
-  //     if (currentLanguageOptions?.[this.lang]) {
-  //       delete currentLanguageOptions[this.lang];
-  //     }
-  //   }
-  // }
+  ngOnDestroy(): void {
+    this._removeDetailsFromParent();
+  }
 }

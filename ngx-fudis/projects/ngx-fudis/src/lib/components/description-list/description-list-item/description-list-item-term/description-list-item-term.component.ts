@@ -91,7 +91,17 @@ export class DescriptionListItemTermComponent {
       this._selectedLanguage = this._currentLanguage;
     } else {
       const firstAvailable = Object.keys(this._parentLanguageOptions).find((key) => {
-        return this._parentLanguageOptions[key as keyof FudisLanguageBadgeContent] !== null;
+        const possibleOption = this._parentLanguageOptions[key as keyof FudisLanguageBadgeContent];
+
+        let idWithContent;
+
+        if (possibleOption) {
+          idWithContent = Object.keys(possibleOption).some((itemId) => {
+            return possibleOption[itemId] !== null;
+          });
+        }
+
+        return idWithContent;
       });
 
       if (firstAvailable) {

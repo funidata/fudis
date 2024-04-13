@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { FudisLanguageBadgeContent } from '../../types/miscellaneous';
+import { FudisLanguageAbbr, FudisLanguageBadgeContent } from '../../types/miscellaneous';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { LanguageBadgeGroupComponent } from './language-badge-group.component';
 import { LanguageBadgeComponent } from './language-badge/language-badge.component';
@@ -8,9 +8,12 @@ import { getElement } from '../../utilities/tests/utilities';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TooltipDirective } from '../../directives/tooltip/tooltip.directive';
 
-const providedLanguages: FudisLanguageBadgeContent = { en: 'en', fi: 'fi' };
+const providedLanguages: FudisLanguageBadgeContent = {
+  en: [{ id: 'test-en-id', content: 'English' }],
+  fi: [{ id: 'test-fi-id', content: 'Finnish' }],
+};
 
-const internalLanguageOptions: FudisLanguageBadgeContent = { en: 'en', fi: 'fi', sv: 'sv' };
+const internalLanguageOptions: FudisLanguageAbbr[] = ['en', 'sv', 'fi'];
 
 describe('LanguageBadgeGroupComponent', () => {
   let component: LanguageBadgeGroupComponent;

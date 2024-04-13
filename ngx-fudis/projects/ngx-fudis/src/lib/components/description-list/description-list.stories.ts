@@ -200,6 +200,7 @@ const DescriptionListWithLanguagesTemplate: StoryFn<DescriptionListComponent> = 
       [variant]="variant"
       [serviceDefaults]="serviceDefaults"
       [columns]="columns"
+      [rowGap]="'sm'"
     >
       <fudis-description-list-item>
         <fudis-dt [languages]="true" [textContent]="'Example paragraph'"></fudis-dt>
@@ -212,6 +213,19 @@ const DescriptionListWithLanguagesTemplate: StoryFn<DescriptionListComponent> = 
         <fudis-dd [lang]="'fi'" [textContent]="'Tähtien sota'"></fudis-dd>
         <fudis-dd [lang]="'en'" [textContent]="''"></fudis-dd>
         <fudis-dd [lang]="'sv'" [textContent]="'Stjärnornas krig'"></fudis-dd>
+      </fudis-description-list-item>
+      <fudis-description-list-item>
+        <fudis-dt
+          [languages]="true"
+          [textContent]="'Example which has multiple Details in different languages'"
+        ></fudis-dt>
+        <fudis-dd [lang]="'fi'" [textContent]="'Uusi toivo'"></fudis-dd>
+        <fudis-dd [lang]="'fi'" [textContent]="'Imperiumin vastaisku'"></fudis-dd>
+        <fudis-dd [lang]="'fi'" [textContent]="'Jedin paluu'"></fudis-dd>
+
+        <fudis-dd [lang]="'en'" [textContent]="'New Hope'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [textContent]="'Empire Strikes Back'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [textContent]="'Return of the Jedi'"></fudis-dd>
       </fudis-description-list-item>
     </fudis-description-list>
 

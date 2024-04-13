@@ -63,8 +63,6 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
    */
   protected _mainCssClass: string;
 
-  private _tempLanguages: FudisLanguageBadgeContent;
-
   ngOnInit(): void {
     /** Registers itself to the parent */
     this._parentDl.addChildId(this.id);
@@ -86,10 +84,26 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
     }
   }
 
-  public addDetailsLanguage(lang: FudisLanguageAbbr, text: string | null): void {
-    this._tempLanguages = { ...this._tempLanguages, [lang]: text };
+  public addDetailsLanguage(lang: FudisLanguageAbbr, text: string | null, id: string): void {
+    const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions();
 
-    this._detailsLanguageOptions.set(this._tempLanguages);
+    if (!currentContent[lang]) {
+      currentContent[lang] = {};
+    }
+
+    currentContent[lang]![id] = text;
+
+    this._detailsLanguageOptions.set(currentContent);
+  }
+
+  public removeDetailsLanguage(lang: FudisLanguageAbbr, id: string): void {
+    const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions();
+
+    if (currentContent?.[lang]?.[id]) {
+      delete currentContent[lang]![id];
+    }
+
+    this._detailsLanguageOptions.set(currentContent);
   }
 
   public getDetailsLanguageOptions(): Signal<FudisLanguageBadgeContent> {
