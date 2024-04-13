@@ -1,19 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { FudisLanguageAbbr, FudisLanguageBadgeContent } from '../../types/miscellaneous';
+import { FudisLanguageBadgeContent } from '../../types/miscellaneous';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { LanguageBadgeGroupComponent } from './language-badge-group.component';
 import { LanguageBadgeComponent } from './language-badge/language-badge.component';
-import { getElement } from '../../utilities/tests/utilities';
+import { getAllElements, getElement } from '../../utilities/tests/utilities';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TooltipDirective } from '../../directives/tooltip/tooltip.directive';
 
 const providedLanguages: FudisLanguageBadgeContent = {
-  en: [{ id: 'test-en-id', content: 'English' }],
-  fi: [{ id: 'test-fi-id', content: 'Finnish' }],
+  en: { 'test-en-id': 'English' },
+  fi: { 'test-fi-id': 'Finnish' },
 };
-
-const internalLanguageOptions: FudisLanguageAbbr[] = ['en', 'sv', 'fi'];
 
 describe('LanguageBadgeGroupComponent', () => {
   let component: LanguageBadgeGroupComponent;
@@ -54,12 +52,11 @@ describe('LanguageBadgeGroupComponent', () => {
     });
 
     it('should have missing translation for Swedish', () => {
-      const existingTranslation = component.languages;
-      const missingLanguage = Object.keys(internalLanguageOptions).filter(
-        (missing) => !Object.keys(existingTranslation).includes(missing),
-      );
+      const missingLanguages = getAllElements(fixture, '.fudis-language-badge__missing');
 
-      expect(missingLanguage).toContain('sv');
+      expect(missingLanguages.length).toEqual(1);
+
+      expect(missingLanguages[0].textContent).toEqual('sv');
     });
   });
 
