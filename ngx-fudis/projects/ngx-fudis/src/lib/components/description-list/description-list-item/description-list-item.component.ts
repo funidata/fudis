@@ -99,8 +99,12 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
   public removeDetailsLanguage(lang: FudisLanguageAbbr, id: string): void {
     const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions();
 
-    if (currentContent?.[lang]?.[id]) {
+    if (currentContent[lang as FudisLanguageAbbr]?.[id]) {
       delete currentContent[lang]![id];
+    }
+
+    if (currentContent[lang] && Object.keys(currentContent[lang]!).length === 0) {
+      delete currentContent[lang];
     }
 
     this._detailsLanguageOptions.set(currentContent);

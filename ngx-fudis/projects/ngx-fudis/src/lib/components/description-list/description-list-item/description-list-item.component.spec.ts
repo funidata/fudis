@@ -10,28 +10,41 @@ import { DescriptionListItemDetailsComponent } from './description-list-item-det
 import { LanguageBadgeGroupComponent } from '../../language-badge-group/language-badge-group.component';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { getElement } from '../../../utilities/tests/utilities';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FudisDescriptionListVariant } from '../../../types/miscellaneous';
 import { FudisIdService } from '../../../services/id/id.service';
+import { LanguageBadgeComponent } from '../../language-badge-group/language-badge/language-badge.component';
+import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
+import { TooltipDirective } from '../../../directives/tooltip/tooltip.directive';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'fudis-mock-dl',
   template: `
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
       <fudis-dl-item>
-        <fudis-dt>First DT</fudis-dt>
-        <fudis-dd>This is my DD</fudis-dd>
+        <fudis-dt [textContent]="'First DT'">First DT</fudis-dt>
+        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt>Second DT</fudis-dt>
-        <fudis-dd>This is my DD</fudis-dd>
+        <fudis-dt [textContent]="'Second DT'"></fudis-dt>
+        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
 
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
       <fudis-dl-item>
-        <fudis-dt>Single DT</fudis-dt>
-        <fudis-dd>This is my DD</fudis-dd>
+        <fudis-dt [textContent]="'Single DT'"></fudis-dt>
+        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
+      </fudis-dl-item>
+    </fudis-dl>
+
+    <fudis-dl>
+      <fudis-dl-item #langDlItem>
+        <fudis-dt [textContent]="'Single DT'"></fudis-dt>
+        <fudis-dd *ngIf="firstLang" [lang]="'en'" [textContent]="'First English DD'"></fudis-dd>
+        <fudis-dd *ngIf="secondLang" [lang]="'en'" [textContent]="'Another English DD'"></fudis-dd>
+        <fudis-dd *ngIf="thirdLang" [lang]="'fi'" [textContent]="'Finnish DD'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
   `,
@@ -39,6 +52,12 @@ import { FudisIdService } from '../../../services/id/id.service';
 class MockDlComponent {
   variant: FudisDescriptionListVariant = 'regular';
   disableGrid: boolean = false;
+
+  firstLang = true;
+  secondLang = true;
+  thirdLang = true;
+
+  @ViewChild('langDlItem') langDlItem: DescriptionListItemComponent;
 }
 
 describe('DescriptionListItemComponent', () => {
@@ -55,8 +74,12 @@ describe('DescriptionListItemComponent', () => {
         DescriptionListItemTermComponent,
         DescriptionListItemDetailsComponent,
         LanguageBadgeGroupComponent,
+        LanguageBadgeComponent,
+        TooltipApiDirective,
+        TooltipDirective,
         MockDlComponent,
       ],
+      imports: [MatTooltipModule],
       providers: [FudisGridService, FudisIdService, FudisBreakpointService],
     }).compileComponents();
   });
@@ -128,6 +151,59 @@ describe('DescriptionListItemComponent', () => {
           .query(By.css('p.fudis-dl-item'))
           .nativeElement.getAttribute('id'),
       ).toEqual('fudis-description-list-2-item-1');
+    });
+  });
+
+  describe('With Language children', () => {
+    it('should have correct initial selectable languages object', () => {
+      const initialState = {
+        en: {
+          'fudis-description-list-3-item-1-details-1': 'First English DD',
+          'fudis-description-list-3-item-1-details-2': 'Another English DD',
+        },
+        fi: {
+          'fudis-description-list-3-item-1-details-3': 'Finnish DD',
+        },
+      };
+
+      mockFixture.detectChanges();
+
+      expect(mockComponent.langDlItem.getDetailsLanguageOptions()()).toEqual(initialState);
+    });
+
+    it('should update selectable languages when childs are destroyed', () => {
+      const firstRemoved = {
+        en: {
+          'fudis-description-list-3-item-1-details-2': 'Another English DD',
+        },
+        fi: {
+          'fudis-description-list-3-item-1-details-3': 'Finnish DD',
+        },
+      };
+
+      mockComponent.firstLang = false;
+
+      mockFixture.detectChanges();
+
+      expect(mockComponent.langDlItem.getDetailsLanguageOptions()()).toEqual(firstRemoved);
+
+      const secondRemoved = {
+        fi: {
+          'fudis-description-list-3-item-1-details-3': 'Finnish DD',
+        },
+      };
+
+      mockComponent.secondLang = false;
+
+      mockFixture.detectChanges();
+
+      expect(mockComponent.langDlItem.getDetailsLanguageOptions()()).toEqual(secondRemoved);
+
+      mockComponent.thirdLang = false;
+
+      mockFixture.detectChanges();
+
+      expect(mockComponent.langDlItem.getDetailsLanguageOptions()()).toEqual({});
     });
   });
 });

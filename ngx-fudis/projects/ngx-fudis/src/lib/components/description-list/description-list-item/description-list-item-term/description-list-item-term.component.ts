@@ -49,7 +49,7 @@ export class DescriptionListItemTermComponent {
   /**
    * Renders Fudis Language Badge Group Component for displaying Description List Item Detail values in given languages
    */
-  @Input() languages: boolean = false;
+  @Input() languages: boolean = true;
 
   /**
    * Visible text content for term
@@ -64,7 +64,7 @@ export class DescriptionListItemTermComponent {
   /**
    * Selected language
    */
-  protected _selectedLanguage: FudisLanguageAbbr;
+  protected _selectedLanguage: FudisLanguageAbbr | null;
 
   /**
    * Main CSS class
@@ -117,6 +117,8 @@ export class DescriptionListItemTermComponent {
 
       if (firstAvailable) {
         this._selectedLanguage = firstAvailable as FudisLanguageAbbr;
+      } else {
+        this._selectedLanguage = null;
       }
     }
 

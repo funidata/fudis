@@ -21,7 +21,7 @@
 <ng-template #commonContent>
   <span [class]="_mainCssClass + '__text-content'">{{ textContent }}</span
   ><span [class]="_mainCssClass + '__colon'">&colon;</span>
-  <ng-container *ngIf="_selectedLanguage && _parentLanguageOptions">
+  <ng-container *ngIf="languages && _selectedLanguage">
     <fudis-language-badge-group
       [selectedLanguage]="_selectedLanguage"
       [languages]="_parentLanguageOptions"

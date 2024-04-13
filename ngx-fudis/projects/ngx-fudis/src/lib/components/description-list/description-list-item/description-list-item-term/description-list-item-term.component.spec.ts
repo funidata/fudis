@@ -42,7 +42,7 @@ import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directi
 
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
       <fudis-dl-item>
-        <fudis-dt [textContent]="'DT With Languages 1'" [languages]="true"></fudis-dt>
+        <fudis-dt [textContent]="'DT With Languages 1'"></fudis-dt>
         <fudis-dd [textContent]="'This is in English'" [lang]="'en'"></fudis-dd>
         <fudis-dd [textContent]="'Tämä on suomeksi'" [lang]="'fi'"></fudis-dd>
         <fudis-dd [textContent]="''" [lang]="'sv'"></fudis-dd>
