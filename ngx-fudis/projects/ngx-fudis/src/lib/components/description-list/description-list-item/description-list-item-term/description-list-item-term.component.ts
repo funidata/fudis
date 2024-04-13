@@ -26,6 +26,8 @@ export class DescriptionListItemTermComponent {
     );
 
     effect(() => {
+      this._selectableLanguages = _translationService.getSelectableLanguages()();
+
       this._currentLanguage = _translationService.getLanguage();
 
       this._parentLanguageOptions = this._parentDlItem.getDetailsLanguageOptions()();
@@ -79,6 +81,11 @@ export class DescriptionListItemTermComponent {
    */
   private _currentLanguage: FudisLanguageAbbr;
 
+  /**
+   * Selectable Badge Languages from the service
+   */
+  private _selectableLanguages: FudisLanguageAbbr[];
+
   protected _setSelectedLanguage(lang: FudisLanguageAbbr): void {
     if (this.languages) {
       this._parentDlItem.selectedLanguage = lang;
@@ -87,11 +94,15 @@ export class DescriptionListItemTermComponent {
   }
 
   private _determineSelectedBadge(): void {
-    if (this._parentLanguageOptions[this._currentLanguage]) {
+    if (
+      this._parentLanguageOptions[this._currentLanguage] &&
+      Object.keys(this._parentLanguageOptions[this._currentLanguage]!).length !== 0 &&
+      this._selectableLanguages.includes(this._currentLanguage)
+    ) {
       this._selectedLanguage = this._currentLanguage;
     } else {
-      const firstAvailable = Object.keys(this._parentLanguageOptions).find((key) => {
-        const possibleOption = this._parentLanguageOptions[key as keyof FudisLanguageBadgeContent];
+      const firstAvailable = this._selectableLanguages.find((lang) => {
+        const possibleOption = this._parentLanguageOptions[lang];
 
         let idWithContent;
 
