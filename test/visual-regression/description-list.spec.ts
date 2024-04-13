@@ -146,7 +146,7 @@ test("description list compact with single item and grid disabled", async ({ pag
 });
 
 // Description List With Languages
-test("description list regular with languages", async ({ page }) => {
+test.only("description list regular with languages", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=variant:regular&id=components-description-list--description-list-with-languages&viewMode=story",
   );
@@ -160,12 +160,15 @@ test("description list regular with languages", async ({ page }) => {
 
   await page.getByTestId("fudis-language-badge-group-2-item-9").click();
   await page.getByTestId("fudis-language-badge-group-3-item-9").click();
+  await page.getByTestId("lang-btn-1").focus();
   await expect(page).toHaveScreenshot("languages-regular-5-clicked-fi-badge.png");
   await page.getByTestId("fudis-language-badge-group-2-item-10").click();
   await page.getByTestId("fudis-language-badge-group-3-item-10").click();
+  await page.getByTestId("lang-btn-1").focus();
   await expect(page).toHaveScreenshot("languages-regular-5-clicked-en-badge.png");
   await page.getByTestId("fudis-language-badge-group-2-item-8").click();
   await page.getByTestId("fudis-language-badge-group-3-item-8").click();
+  await page.getByTestId("lang-btn-1").focus();
   await expect(page).toHaveScreenshot("languages-regular-5-clicked-sv-badge.png");
 });
 
