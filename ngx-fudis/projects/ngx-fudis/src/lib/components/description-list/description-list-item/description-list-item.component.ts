@@ -51,7 +51,7 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
   /**
    * Selected language to pass to child components
    */
-  public selectedLanguage: FudisLanguageAbbr;
+  public selectedLanguage: FudisLanguageAbbr | null;
 
   /**
    * Id generated with Id Service

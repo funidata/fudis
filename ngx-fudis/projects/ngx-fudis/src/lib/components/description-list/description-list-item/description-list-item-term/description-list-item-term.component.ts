@@ -117,8 +117,6 @@ export class DescriptionListItemTermComponent {
       }
     }
 
-    if (this._selectedLanguage) {
-      this._parentDlItem.selectedLanguage = this._selectedLanguage;
-    }
+    this._parentDlItem.selectedLanguage = this._selectedLanguage;
   }
 }
