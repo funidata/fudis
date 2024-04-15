@@ -1,6 +1,6 @@
 <ng-container *ngIf="_parentDl.childDlItems.length === 1">
   <span
-    *ngIf="!this.lang || (this.lang && this._parentDlItem.selectedLanguage === this.lang)"
+    *ngIf="!lang || (lang && _parentDlItem.selectedLanguage === lang)"
     [id]="_id"
     [class]="_mainCssClass"
   >
@@ -10,7 +10,7 @@
 
 <ng-container *ngIf="_parentDl.childDlItems.length > 1">
   <dd
-    *ngIf="!this.lang || (this.lang && this._parentDlItem.selectedLanguage === this.lang)"
+    *ngIf="!lang || (lang && _parentDlItem.selectedLanguage === lang)"
     [id]="_id"
     [class]="_mainCssClass"
   >

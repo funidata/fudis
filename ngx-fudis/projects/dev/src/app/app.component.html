@@ -26,9 +26,9 @@
             </fudis-heading>
             <!-- <fudis-button [label]="'Trigger alert'" (handleClick)="triggerAlert()" /> -->
             <fudis-button [label]="'Open dialog with form'" (handleClick)="openDialog()" />
-            <fudis-body-text *ngIf="this._message"
+            <fudis-body-text *ngIf="_message"
               >This value comes from the closed dialog input:
-              <strong>{{ this._message }}</strong></fudis-body-text
+              <strong>{{ _message }}</strong></fudis-body-text
             >
             <fudis-button
               [label]="'Open dialog from component'"
