@@ -10,7 +10,7 @@ import { DescriptionListItemDetailsComponent } from './description-list-item-det
 import { LanguageBadgeGroupComponent } from '../../language-badge-group/language-badge-group.component';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { getElement } from '../../../utilities/tests/utilities';
-import { Component, ViewChild } from '@angular/core';
+import { Component, DebugElement, ViewChild } from '@angular/core';
 import { FudisDescriptionListVariant } from '../../../types/miscellaneous';
 import { FudisIdService } from '../../../services/id/id.service';
 import { LanguageBadgeComponent } from '../../language-badge-group/language-badge/language-badge.component';
@@ -95,8 +95,7 @@ describe('DescriptionListItemComponent', () => {
     return dlItemElement;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function getDlItemFromArrayIndex(index: number): any {
+  function getDlItemFromArrayIndex(index: number): DebugElement {
     const dlItemElements = mockFixture.debugElement.queryAll(By.css('fudis-dl-item'));
     const itemArray = [...dlItemElements];
 

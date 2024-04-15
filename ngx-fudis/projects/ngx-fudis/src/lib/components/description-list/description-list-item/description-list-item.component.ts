@@ -40,9 +40,6 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
     });
   }
 
-  @ContentChildren(DescriptionListItemDetailsComponent)
-  ddChildren: QueryList<DescriptionListItemDetailsComponent>;
-
   /**
    * Storing list of available languages in Details elements
    */
@@ -84,6 +81,9 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Called from child Details, if it has a language property
+   */
   public addDetailsLanguage(lang: FudisLanguageAbbr, text: string | null, id: string): void {
     const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions();
 
@@ -96,6 +96,9 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
     this._detailsLanguageOptions.set(currentContent);
   }
 
+  /**
+   * Called from child Details, if its language property is removed (or updated)
+   */
   public removeDetailsLanguage(lang: FudisLanguageAbbr, id: string): void {
     const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions();
 
