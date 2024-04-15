@@ -2,24 +2,25 @@
 /* stylelint-disable scss/selector-no-redundant-nesting-selector */
 /* stylelint-disable selector-class-pattern */
 
-// Enable comma in compact variant for DD elements if there are more than one DDs.
-
 @use "../../../../foundations/spacing/tokens.scss" as spacing;
 
 .fudis-dl-item-details-host {
   &:not(&--fi, &--sv, &--en) {
     &:has(~ .fudis-dl-item-details-host) {
+      // Enable comma in compact variant for DD elements if there are more than one DDs.
       & .fudis-dl-item-details__compact__comma {
         display: initial;
       }
     }
   }
 
+  // Add small margin before details with sub heading when there are multiple details
   &:has(+ .fudis-dl-item-details-host .fudis-dl-item-details__regular__sub-heading)
     .fudis-dl-item-details__regular {
     margin-bottom: spacing.$spacing-xs;
   }
 
+  // Set comma visible if languages have sibling with same language later in the DOM
   &--fi:has(~ .fudis-dl-item-details-host--fi) {
     & .fudis-dl-item-details__compact__comma {
       display: initial;
