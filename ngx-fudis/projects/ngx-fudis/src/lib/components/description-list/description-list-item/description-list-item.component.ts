@@ -1,11 +1,9 @@
 import {
   Component,
-  ContentChildren,
   ElementRef,
   Host,
   OnDestroy,
   OnInit,
-  QueryList,
   Signal,
   effect,
   signal,
@@ -17,7 +15,6 @@ import {
 } from '../../../types/miscellaneous';
 import { FudisIdService } from '../../../services/id/id.service';
 import { DescriptionListComponent } from '../description-list.component';
-import { DescriptionListItemDetailsComponent } from './description-list-item-details/description-list-item-details.component';
 
 @Component({
   selector: 'fudis-dl-item, fudis-description-list-item',
