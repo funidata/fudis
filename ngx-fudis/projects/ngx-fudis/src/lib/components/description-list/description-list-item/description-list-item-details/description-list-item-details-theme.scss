@@ -4,6 +4,8 @@
 
 // Enable comma in compact variant for DD elements if there are more than one DDs.
 
+@use "../../../../foundations/spacing/tokens.scss" as spacing;
+
 .fudis-dl-item-details-host {
   &:not(&--fi, &--sv, &--en) {
     &:has(~ .fudis-dl-item-details-host) {
@@ -11,6 +13,11 @@
         display: initial;
       }
     }
+  }
+
+  &:has(+ .fudis-dl-item-details-host .fudis-dl-item-details__regular__sub-heading)
+    .fudis-dl-item-details__regular {
+    margin-bottom: spacing.$spacing-xs;
   }
 
   &--fi:has(~ .fudis-dl-item-details-host--fi) {

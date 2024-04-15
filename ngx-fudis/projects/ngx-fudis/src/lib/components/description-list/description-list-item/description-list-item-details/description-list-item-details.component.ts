@@ -97,11 +97,15 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
   }
 
   ngOnChanges(changes: FudisComponentChanges<DescriptionListItemDetailsComponent>): void {
+    // If language changes, update it to parent. If language changes to undefined, remove it from parent.
     if (!changes.lang?.firstChange && this.lang) {
       this._removeDetailsFromParent();
       this._sendDetailsLanguageToParent();
+    } else if (!changes.lang?.currentValue) {
+      this._removeDetailsFromParent();
     }
 
+    // If text content changes, update it to parent
     if (changes.textContent?.currentValue && this.lang) {
       this._sendDetailsLanguageToParent();
     }

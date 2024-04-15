@@ -64,7 +64,7 @@ const DescriptionListTemplate: StoryFn<DescriptionListComponent> = (
       [marginBottom]="'md'"
       [marginTop]="'md'"
       [variant]="variant"
-      [columns]="'1fr 1fr'"
+      [columns]="2"
       [disableGrid]="disableGrid"
     >
       <fudis-dl-item>

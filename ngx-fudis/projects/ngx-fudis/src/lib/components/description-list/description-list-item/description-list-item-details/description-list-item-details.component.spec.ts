@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Component } from '@angular/core';
+import { Component, DebugElement } from '@angular/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { GridComponent } from '../../../grid/grid/grid.component';
 import { GridDirective } from '../../../../directives/grid/grid/grid.directive';
@@ -122,8 +122,7 @@ describe('DescriptionListItemDetailsComponent', () => {
     return dlItemDetailsElement;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function getDlItemDetailsFromArrayIndex(index: number): any {
+  function getDlItemDetailsFromArrayIndex(index: number): DebugElement {
     const dlItemDetailsElements = mockFixture.debugElement.queryAll(By.css('fudis-dd'));
     const itemArray = [...dlItemDetailsElements];
 
