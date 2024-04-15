@@ -59,14 +59,10 @@ const DescriptionListTemplate: StoryFn<DescriptionListComponent> = (
   args: DescriptionListComponent,
 ) => ({
   props: args,
-  template: html` <fudis-heading>Basic Description List variant '{{variant}}'</fudis-heading>
-    <fudis-dl
-      [marginBottom]="'md'"
-      [marginTop]="'md'"
-      [variant]="variant"
-      [columns]="2"
-      [disableGrid]="disableGrid"
+  template: html` <fudis-heading [level]="2" [size]="'md'"
+      >{{variant==='regular' ? 'Regular' : 'Compact'}} Description List</fudis-heading
     >
+    <fudis-dl [marginTop]="'sm'" [variant]="variant" [columns]="2" [disableGrid]="disableGrid">
       <fudis-dl-item>
         <fudis-dt [textContent]="'First name'"></fudis-dt>
         <fudis-dd [textContent]="'Rex'"></fudis-dd>
@@ -108,9 +104,9 @@ const DescriptionListInsideGridTemplate: StoryFn<DescriptionListComponent> = (
   props: args,
   template: html`<fudis-grid [columns]="{sm: 1, md: 2}" [rowGap]="'xs'">
     <fudis-heading [level]="2" [size]="'md'"
-      >Grid where DL is used as child component</fudis-heading
+      >Description List as Grid's Child Component</fudis-heading
     >
-    <fudis-dl [disableGrid]="disableGrid" [variant]="variant">
+    <fudis-dl [marginTop]="'sm'" [disableGrid]="disableGrid" [variant]="variant">
       <fudis-dl-item>
         <fudis-dt [textContent]="'Teacher email'"></fudis-dt>
         <fudis-dd [textContent]="'snape@hogwarts.wiz'" [subHeading]="'Severus Snape'"></fudis-dd>
@@ -142,7 +138,7 @@ const DescriptionListWithSubComponentsTemplate: StoryFn<DescriptionListComponent
       >Description List With Sub Components</fudis-heading
     >
     <fudis-description-list
-      [marginBottom]="'md'"
+      [marginTop]="'sm'"
       [disableGrid]="disableGrid"
       [variant]="variant"
       [columns]="columns"
@@ -191,10 +187,10 @@ const DescriptionListWithLanguagesTemplate: StoryFn<DescriptionListComponent> = 
 ) => ({
   props: args,
   template: html`<fudis-heading [level]="2" [size]="'md'"
-      >Description List with Language Badges</fudis-heading
+      >Description List With Language Badges</fudis-heading
     >
     <fudis-description-list
-      [marginBottom]="'md'"
+      [marginTop]="'sm'"
       [disableGrid]="disableGrid"
       [variant]="variant"
       [serviceDefaults]="serviceDefaults"
@@ -260,10 +256,11 @@ const DescriptionListWithMultipleDdElementsTemplate: StoryFn<DescriptionListComp
 ) => ({
   props: { ...args, data: multipleDDData },
   template: html`
-    <fudis-heading>DT element with multiple DD elements</fudis-heading>
+    <fudis-heading [level]="2" [size]="'md'"
+      >Description List Item With Multiple Details</fudis-heading
+    >
     <fudis-description-list
-      [marginBottom]="'md'"
-      [marginTop]="'md'"
+      [marginTop]="'sm'"
       [variant]="'regular'"
       [columns]="'1fr 1fr'"
       [disableGrid]="disableGrid"
@@ -298,10 +295,9 @@ const DescriptionListWithSingleItemTemplate: StoryFn<DescriptionListComponent> =
 ) => ({
   props: args,
   template: html`
-    <fudis-heading>Description List with Single Item</fudis-heading>
+    <fudis-heading [level]="2" [size]="'md'">Description List with Single Item</fudis-heading>
     <fudis-description-list
-      [marginBottom]="'md'"
-      [marginTop]="'md'"
+      [marginTop]="'sm'"
       [variant]="'regular'"
       [columns]="'1fr 1fr'"
       [disableGrid]="disableGrid"
