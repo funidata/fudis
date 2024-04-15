@@ -9,7 +9,6 @@ import { Source } from "@storybook/blocks";
 # Description List Component
 
 Description List displays a list of key value pairs and has two different list variants: `regular` and `compact`.
-Description List extends Grid API and can take all the same inputs as Fudis Grid, see [Properties](#properties) table. Fudis Grid can be disabled in Description List by setting `disableGrid` as true.
 
 ## Usage Guidelines
 
@@ -45,15 +44,23 @@ Term element has also `subHeading` Input for adding optional sub-heading between
 </fudis-dl-item>`}
 />
 
+## Managing Layout
+
+By default Description List uses Grid Directive under the hood and the component accepts multiple inputs from Grid API. For full list see [Properties](#properties) table. Grid can be disabled in Description List by setting `disableGrid` as true.
+
 ## Examples
 
-### Description List Compact Variant
+### Regular Variant
 
 <Canvas of={DescriptionListStories.DescriptionList}></Canvas>
 
+### Compact Variant
+
+<Canvas of={DescriptionListStories.DescriptionListCompact}></Canvas>
+
 ### Including Interactive Sub-Components
 
-It is possible to incluce buttons or other interactive elements inside Description List Item Details (`<fudis-dd>`) by using `ng-template` with `fudisActions [type]="'dd'"`. This following example displays, how Fudis Button is used inside the Description List.
+It is possible to incluce e.g. Button component or other interactive elements inside Description List Item Details (`<fudis-dd>`) by using `ng-template` with `fudisActions [type]="'dd'"`. This following example displays, how Button is used inside the Description List.
 
 <Canvas of={DescriptionListStories.DescriptionListWithSubComponents}></Canvas>
 

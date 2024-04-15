@@ -1,7 +1,7 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { Component } from '@angular/core';
 import { DescriptionListComponent } from './description-list.component';
-import docs from './docs.mdx';
+import docs from './description-list-docs.mdx';
 import { FudisLanguageAbbr } from '../../types/miscellaneous';
 import { descriptionListExclude } from '../../utilities/storybook';
 import { FudisTranslationService } from '../../services/translation/translation.service';
@@ -59,7 +59,7 @@ const DescriptionListTemplate: StoryFn<DescriptionListComponent> = (
   args: DescriptionListComponent,
 ) => ({
   props: args,
-  template: html` <fudis-heading>Basic Description list</fudis-heading>
+  template: html` <fudis-heading>Basic Description List variant '{{variant}}'</fudis-heading>
     <fudis-dl
       [marginBottom]="'md'"
       [marginTop]="'md'"
@@ -92,6 +92,12 @@ const DescriptionListTemplate: StoryFn<DescriptionListComponent> = (
 
 export const DescriptionList = DescriptionListTemplate.bind({});
 DescriptionList.args = {
+  variant: 'regular',
+  disableGrid: false,
+};
+
+export const DescriptionListCompact = DescriptionListTemplate.bind({});
+DescriptionListCompact.args = {
   variant: 'compact',
   disableGrid: false,
 };
@@ -133,7 +139,7 @@ const DescriptionListWithSubComponentsTemplate: StoryFn<DescriptionListComponent
 ) => ({
   props: args,
   template: html`<fudis-heading [level]="2" [size]="'md'"
-      >Description list with example sub components</fudis-heading
+      >Description List With Sub Components</fudis-heading
     >
     <fudis-description-list
       [marginBottom]="'md'"
