@@ -106,7 +106,7 @@ const DescriptionListInsideGridTemplate: StoryFn<DescriptionListComponent> = (
     <fudis-heading [level]="2" [size]="'md'"
       >Description List as Grid's Child Component</fudis-heading
     >
-    <fudis-dl [marginTop]="'sm'" [disableGrid]="disableGrid" [variant]="variant">
+    <fudis-dl [disableGrid]="disableGrid" [variant]="variant">
       <fudis-dl-item>
         <fudis-dt [textContent]="'Teacher email'"></fudis-dt>
         <fudis-dd [textContent]="'snape@hogwarts.wiz'" [subHeading]="'Severus Snape'"></fudis-dd>
