@@ -40,6 +40,12 @@ npm stop
 npm ci
 ```
 
+**Note!** This does not install Playwright locally. If your OS is supported by Playwright and want to run Playwright with their UI tool run:
+
+```bash
+cd test && npm ci && cd ..
+```
+
 ## View Logs
 
 Attaches terminal to Docker's interactive log output. Use this to see the logs again after detaching.
