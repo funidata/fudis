@@ -27,18 +27,21 @@ export class FooterComponent {
       this._translations = this._translationService.getTranslations();
 
       this._funidataLogoAltText = this._translations().IMAGE.FUNIDATA_LOGO;
+      this._externalLinkHelpText = this._translations().LINK.EXTERNAL_LINK;
     });
   }
 
   /**
    * Content projection directive fudisFooterContentLeft is used for binding correct Footer content on the left side of the component.
    */
-  @ContentChild(FooterContentLeftDirective) footerContentLeft: FooterContentLeftDirective;
+  @ContentChild(FooterContentLeftDirective)
+  protected _footerContentLeft: FooterContentLeftDirective;
 
   /**
    * Content projection directive fudisFooterContentRight is used for binding correct Footer content on the right side of the component.
    */
-  @ContentChild(FooterContentRightDirective) footerContentRight: FooterContentRightDirective;
+  @ContentChild(FooterContentRightDirective)
+  protected _footerContentRight: FooterContentRightDirective;
 
   /**
    * Used to apply grid columns breakpoint values for the Footer
@@ -49,6 +52,11 @@ export class FooterComponent {
    * Alternative text for the Funidata logo
    */
   protected _funidataLogoAltText: string;
+
+  /**
+   * External link text for Funidata logo
+   */
+  protected _externalLinkHelpText: string;
 
   /**
    * Fudis translations

@@ -126,6 +126,11 @@ export class FieldSetComponent
   protected _classes: string[];
 
   /**
+   * Used to set visible focus on if focus event comes from Error Summary link.
+   */
+  protected _legendFocusVisible: boolean = false;
+
+  /**
    * Has Field Set been added to Error Summary
    */
   private _fieldsetSent: boolean = false;
@@ -163,6 +168,22 @@ export class FieldSetComponent
 
   ngOnDestroy(): void {
     this._removeFromErrorSummary();
+  }
+
+  protected _handleLegendFocus(event: FocusEvent): void {
+    if (event.relatedTarget) {
+      const elementHasLinkClass = (event.relatedTarget as HTMLElement).classList.contains(
+        'fudis-link',
+      );
+
+      if (elementHasLinkClass) {
+        this._legendFocusVisible = true;
+      }
+    }
+  }
+
+  protected _handleLegendBlur(): void {
+    this._legendFocusVisible = false;
   }
 
   /**

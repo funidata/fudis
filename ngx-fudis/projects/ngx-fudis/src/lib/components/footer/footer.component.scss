@@ -35,6 +35,8 @@
 
     &__logo {
       margin-bottom: spacing.$spacing-sm;
+      /* stylelint-disable-next-line property-disallowed-list, color-no-hex */
+      color: #000000;
     }
 
     @include breakpoints.breakpoint("lg") {
