@@ -88,6 +88,16 @@ const descriptionListCommonExclude: string[] = [
   'width',
 ];
 
+export const descriptionListArgsTypesExclude: RegExp = excludeRegex([
+  'id',
+  'getVariant',
+  'addChildId',
+  'childDlItems',
+  'getDisabledGridStatus',
+  'removeChildId',
+  'serviceDefaults',
+]);
+
 export const descriptionListExclude: RegExp = excludeRegex([...descriptionListCommonExclude]);
 
 export const formExclude: RegExp = excludeRegex([

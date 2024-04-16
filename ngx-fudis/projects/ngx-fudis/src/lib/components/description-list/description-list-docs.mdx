@@ -3,6 +3,7 @@ import { linkTo } from "@storybook/addon-links";
 import { DescriptionListComponent } from "./description-list.component.ts";
 import * as DescriptionListStories from "./description-list.stories.ts";
 import { Source } from "@storybook/blocks";
+import { descriptionListArgsTypesExclude } from "../../utilities/storybook.ts";
 
 <Meta title="Components/Description List" />
 
@@ -36,12 +37,14 @@ Term element has also `subHeading` Input for adding optional sub-heading between
 
 <Source
   code={`
-<fudis-dl-item>
+<fudis-dl>
+  <fudis-dl-item>
   <fudis-dt [subHeading]="'I am Term sub heading'" [textContent]="'I am the main Term text content'" />
   <fudis-dd [textContent]="'I am first Details element'" />
   <fudis-dd [textContent]="'I am second Details element'" />
   <fudis-dd [textContent]="'I am third Details element'" />
-</fudis-dl-item>`}
+</fudis-dl-item>
+</fudis-dl>`}
 />
 
 ## Managing Layout
@@ -68,10 +71,31 @@ It is possible to incluce e.g. Button component or other interactive elements in
 
 Description List with Language Badge Group displays Term element with clickable Language Badges. Clicking a Badge sets those Details visible, which have corresponding language set. It's good to note that Description List with Language Badge Group is designed to be used only with Description List **regular** variant.
 
-How to use:
+By default Language Badge Group always display Badges for Finnish, English, Swedish in this order. To define different config to Application's Language Badges, use `FudisTranslationService` function `setSelectableLanguages()` to define a new config.
 
-1. Description List Item Term (fudis-dt) element takes a boolean value `languages` and by setting it to `true`, Description List will render Language Badge Group next to the Term element.
-2. In order to link Language Badge with selected translation, Description List Item Detail (fudis-dd) has `lang` input, which will specify the language used in Details element content. `lang` input uses `FudisLanguageAbbr` type, which has predefined languages of English, Finnish and Swedish. When language option is used, all of the fudis-dd elements need a suited lang input. If any of the three predefined `lang` inputs are missing, Fudis Language Badge Group will display this translation as missing.
+<Source
+  code={`
+  constructor(translationService: FudisTranslationService) {
+    // Set only English and Swedish badges visible, in that order
+    languageService.setSelectableLanguages(['en', 'sv']);
+}`}
+/>
+
+Set in your `fudis-dd` element `lang` attribute to tell which translation it represents.
+
+<Source
+  code={`
+<fudis-dl>
+  <fudis-dl-item>
+    <fudis-dt [subHeading]="'I am Term sub heading'" [textContent]="'Example Languages'" />
+    <fudis-dd [lang]="'en'" [textContent]="'This is in English'" />
+    <fudis-dd [lang]="'fi'" [textContent]="'Tämä on suomeksi'" />
+    <fudis-dd [lang]="'sv'" [textContent]="'Den här är på Svenska'" />
+  </fudis-dl-item>
+</fudis-dl>`}
+/>
+
+Description List components communicate with each other and define automatically to set Language Badges visible and theme it properly if you have provided or not a Details component for each of languages set with `setSelectableLanguages()`.
 
 <Canvas of={DescriptionListStories.DescriptionListWithLanguages}></Canvas>
 
@@ -91,4 +115,4 @@ How to use:
 
 ## Properties
 
-<ArgTypes of={DescriptionListComponent} />
+<ArgTypes of={DescriptionListComponent} exclude={descriptionListArgsTypesExclude} />
