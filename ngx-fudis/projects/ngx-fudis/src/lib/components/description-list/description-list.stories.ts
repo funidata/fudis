@@ -195,6 +195,7 @@ const DescriptionListWithLanguagesTemplate: StoryFn<DescriptionListComponent> = 
       [variant]="variant"
       [serviceDefaults]="serviceDefaults"
       [columns]="columns"
+      [marginBottom]="'sm'"
     >
       <fudis-description-list-item>
         <fudis-dt [textContent]="'Example paragraph'"></fudis-dt>
