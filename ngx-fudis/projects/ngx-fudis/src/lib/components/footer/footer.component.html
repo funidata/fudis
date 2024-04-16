@@ -9,17 +9,35 @@
     [marginTop]="'xxl'"
   >
     <fudis-grid-item [alignSelfX]="{ xs: 'center', sm: 'start' }" class="fudis-footer__item">
-      <a href="https://www.funidata.fi/" class="fudis-footer__item__logo"
-        ><img src="fd-logo.svg" alt="{{ _funidataLogoAltText }}"
-      /></a>
-      <ng-container *ngIf="footerContentLeft">
-        <ng-container *ngTemplateOutlet="footerContentLeft!.templateRef" />
+      <a
+        href="https://www.funidata.fi/"
+        class="fudis-footer__item__logo"
+        target="_blank"
+        rel="noopener noreferrer"
+        [attr.aria-label]="_funidataLogoAltText + ' ' + _externalLinkHelpText"
+        ><svg
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          width="127"
+          height="24"
+          viewBox="0 0 127 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <title>Funidata logo</title>
+          <path
+            d="M10.5893 4.93128H3.64757V9.71953H10.3425V12.5456H3.64757V22.0295H0.642578V2.1114H10.5893V4.93128ZM16.4203 2.1114V14.1067C16.4203 15.8159 16.698 17.0685 17.2595 17.8583C18.0925 18.9998 19.2649 19.5737 20.7828 19.5737C22.3008 19.5737 23.4855 18.9998 24.3185 17.8583C24.88 17.0932 25.1577 15.8406 25.1577 14.1067V2.1114H28.1627V14.9335C28.1627 17.0315 27.5086 18.7592 26.2005 20.1229C24.7319 21.6346 22.924 22.3936 20.7828 22.3936C18.6417 22.3936 16.8399 21.6346 15.3775 20.1229C14.0694 18.7654 13.4154 17.0376 13.4154 14.9335V2.1114H16.4203V2.1114ZM32.6239 22.0357V0.753906L47.149 15.9517V2.1114H50.154V23.2451L35.635 8.08437V22.0295H32.63L32.6239 22.0357ZM57.6943 2.1114V22.0295H54.6893V2.1114H57.6943ZM74.5519 4.67829C73.5399 3.74656 72.4046 3.0925 71.1582 2.70376C69.9981 2.30885 68.4123 2.1114 66.4069 2.1114H62.2234V15.8714H65.2284V4.93128H66.5859C69.1466 4.93128 71.0903 5.53598 72.4046 6.75156C73.867 8.10905 74.5951 9.87996 74.5951 12.0643C74.5951 14.2486 73.8546 15.9887 72.3737 17.34C71.6518 17.9941 70.8435 18.4692 69.9487 18.7715C69.054 19.0554 67.931 19.1973 66.5797 19.1973H62.2172V22.0233H66.3452C68.3691 22.0233 69.9241 21.8382 71.0286 21.468C72.2071 21.0978 73.3363 20.4376 74.41 19.4935C76.5511 17.5992 77.6248 15.1248 77.6248 12.0643C77.6248 9.00376 76.5943 6.54793 74.5395 4.67212L74.5519 4.67829ZM91.7982 17.1919H83.2707L81.0493 22.0295H77.8099L87.6702 0.858803L97.1788 22.0295H93.89L91.7982 17.1919V17.1919ZM90.5703 14.3659L87.6147 7.59073L84.5171 14.3659H90.5703ZM103.726 4.93128V22.0295H100.721V4.93128H96.1422V2.1114H108.298V4.93128H103.732H103.726ZM121.256 17.1857H112.728L110.507 22.0233H107.267L117.134 0.858803L126.643 22.0295H123.354L121.262 17.1919L121.256 17.1857ZM120.028 14.3597L117.072 7.58456L113.975 14.3597H120.028Z"
+            fill="currentColor"
+          ></path>
+        </svg>
+      </a>
+      <ng-container *ngIf="_footerContentLeft">
+        <ng-container *ngTemplateOutlet="_footerContentLeft!.templateRef" />
       </ng-container>
     </fudis-grid-item>
 
-    <ng-container *ngIf="footerContentRight">
+    <ng-container *ngIf="_footerContentRight">
       <fudis-grid-item [alignSelfX]="{ xs: 'center', sm: 'end' }" class="fudis-footer__item">
-        <ng-container *ngTemplateOutlet="footerContentRight!.templateRef" />
+        <ng-container *ngTemplateOutlet="_footerContentRight!.templateRef" />
       </fudis-grid-item>
     </ng-container>
   </fudis-grid>

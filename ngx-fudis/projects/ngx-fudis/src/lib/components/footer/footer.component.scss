@@ -34,6 +34,8 @@
     flex-direction: column;
 
     &__logo {
+      @include colorMixins.text-color("gray-dark");
+
       margin-bottom: spacing.$spacing-sm;
     }
 
