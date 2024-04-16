@@ -33,14 +33,14 @@ Term and Details content is passed through `textContent` Input property.
 <fudis-dd [textContent]="'Here is the Details element text'" />`}
 />
 
-Term element has also `subHeading` Input for adding optional sub-heading between Term and Details elements. Single Description List Item can have multiple Details elements if necessary.
+Details element has also `subHeading` Input for adding optional sub-heading between Term and Details elements. Single Description List Item can have multiple Details elements if necessary.
 
 <Source
   code={`
 <fudis-dl>
   <fudis-dl-item>
-  <fudis-dt [subHeading]="'I am Term sub heading'" [textContent]="'I am the main Term text content'" />
-  <fudis-dd [textContent]="'I am first Details element'" />
+  <fudis-dt [textContent]="'I am the main Term text content'" />
+  <fudis-dd [subHeading]="'I am Details Sub heading'" [textContent]="'I am first Details element'" />
   <fudis-dd [textContent]="'I am second Details element'" />
   <fudis-dd [textContent]="'I am third Details element'" />
 </fudis-dl-item>
@@ -87,7 +87,7 @@ Set in your `fudis-dd` element `lang` attribute to tell which translation it rep
   code={`
 <fudis-dl>
   <fudis-dl-item>
-    <fudis-dt [subHeading]="'I am Term sub heading'" [textContent]="'Example Languages'" />
+    <fudis-dt [textContent]="'Example Languages'" />
     <fudis-dd [lang]="'en'" [textContent]="'This is in English'" />
     <fudis-dd [lang]="'fi'" [textContent]="'Tämä on suomeksi'" />
     <fudis-dd [lang]="'sv'" [textContent]="'Den här är på Svenska'" />
