@@ -117,7 +117,7 @@ describe('FieldSetBaseDirective', () => {
     it('should have guidance with correct id', () => {
       const guidanceElement = getElement(fixtureMock, 'fudis-guidance .fudis-guidance div');
 
-      expect(guidanceElement.id).toEqual('fudis-checkbox-group-1_guidance');
+      expect(guidanceElement.id).toEqual('fudis-checkbox-group-1-legend_guidance');
     });
 
     it('should have correct helpText in guidance', () => {

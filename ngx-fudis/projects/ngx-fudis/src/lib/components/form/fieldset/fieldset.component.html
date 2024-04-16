@@ -9,7 +9,15 @@
   [marginBottom]="marginBottom"
   [marginTop]="marginTop"
 >
-  <legend #fieldsetLegend class="fudis-fieldset__legend" [attr.id]="id + '-legend'" [tabIndex]="-1">
+  <legend
+    #fieldsetLegend
+    class="fudis-fieldset__legend"
+    [class.fudis-fieldset__legend--focused]="_legendFocusVisible"
+    [attr.id]="id + '-legend'"
+    [tabIndex]="-1"
+    (focus)="_handleLegendFocus($event)"
+    (blur)="_handleLegendBlur()"
+  >
     <div
       class="fudis-fieldset__legend__container"
       [class.fudis-fieldset__legend__container__row-end]="_headerActions?.align === 'end'"

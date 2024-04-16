@@ -13,15 +13,19 @@
   flex-direction: column;
   padding: 0;
 
-  &:focus-visible {
-    @include focus.focus-generic;
-  }
-
   &__legend {
     display: flex;
     flex-direction: column;
     padding: 0;
     width: 100%;
+
+    &:focus-visible {
+      @include focus.focus-generic;
+    }
+
+    &--focused {
+      @include focus.focus-generic;
+    }
 
     &__container {
       display: flex;

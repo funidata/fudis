@@ -97,8 +97,15 @@ describe('FooterComponent', () => {
         const firstGridItemElem = getFooterGridElem().nativeElement.children[0];
         const anchorElem = firstGridItemElem.querySelector('.fudis-footer__item__logo');
 
+        const svgElementTitle = firstGridItemElem.querySelector(
+          '.fudis-footer__item__logo svg title',
+        ) as HTMLTitleElement;
+
+        expect(svgElementTitle.innerHTML).toEqual('Funidata logo');
         expect(anchorElem.children.length).toEqual(1);
-        expect(anchorElem.children[0].getAttribute('alt')).toEqual('Link to Funidata homepage');
+        expect(anchorElem.getAttribute('aria-label')).toEqual(
+          'Funidata homepage (opens in a new tab)',
+        );
       });
     });
   });

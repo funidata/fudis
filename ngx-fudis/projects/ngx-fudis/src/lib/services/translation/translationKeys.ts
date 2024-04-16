@@ -51,7 +51,7 @@ export const en: FudisTranslationConfig = {
     },
   },
   IMAGE: {
-    FUNIDATA_LOGO: 'Link to Funidata homepage',
+    FUNIDATA_LOGO: 'Funidata homepage',
   },
   ICON: {
     ATTENTION: 'Attention',
@@ -123,7 +123,7 @@ export const fi: FudisTranslationConfig = {
     },
   },
   IMAGE: {
-    FUNIDATA_LOGO: 'Linkki Funidatan kotisivuille',
+    FUNIDATA_LOGO: 'Funidatan kotisivut',
   },
   ICON: {
     ATTENTION: 'Huomio',
@@ -192,7 +192,7 @@ export const sv: FudisTranslationConfig = {
     },
   },
   IMAGE: {
-    FUNIDATA_LOGO: 'Länk till Funidatas hemsida',
+    FUNIDATA_LOGO: 'Funidatas hemsida',
   },
   LINK: {
     EXTERNAL_LINK: '(öppnas i en ny flik)',
