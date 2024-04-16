@@ -104,7 +104,7 @@ describe('FooterComponent', () => {
         expect(svgElementTitle.innerHTML).toEqual('Funidata logo');
         expect(anchorElem.children.length).toEqual(1);
         expect(anchorElem.getAttribute('aria-label')).toEqual(
-          'Link to Funidata homepage (opens in a new tab)',
+          'Funidata homepage (opens in a new tab)',
         );
       });
     });
