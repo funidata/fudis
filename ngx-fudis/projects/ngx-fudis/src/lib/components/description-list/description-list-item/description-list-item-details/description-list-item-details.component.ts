@@ -1,16 +1,15 @@
 import {
-  AfterViewInit,
   Component,
   ContentChild,
   ElementRef,
   Host,
   HostBinding,
   Input,
+  OnChanges,
   OnDestroy,
-  ViewChild,
   effect,
 } from '@angular/core';
-import { FudisLanguageAbbr } from '../../../../types/miscellaneous';
+import { FudisComponentChanges, FudisLanguageAbbr } from '../../../../types/miscellaneous';
 import { ActionsDirective } from '../../../../directives/content-projection/actions/actions.directive';
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { DescriptionListComponent } from '../../description-list.component';
@@ -21,7 +20,7 @@ import { FudisIdService } from '../../../../services/id/id.service';
   styleUrls: ['./description-list-item-details.component.scss'],
   templateUrl: './description-list-item-details.component.html',
 })
-export class DescriptionListItemDetailsComponent implements AfterViewInit, OnDestroy {
+export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy {
   constructor(
     private _elementRef: ElementRef,
     private _idService: FudisIdService,
@@ -53,17 +52,17 @@ export class DescriptionListItemDetailsComponent implements AfterViewInit, OnDes
   /**
    * Possible action buttons for Details element
    */
-  @ContentChild(ActionsDirective) actions: ActionsDirective;
-
-  /**
-   * ViewChild for Details element content
-   */
-  @ViewChild('ddTextContent') content: ElementRef;
+  @ContentChild(ActionsDirective) protected _actions: ActionsDirective;
 
   /**
    * Details element language, possible values 'fi', 'sv' and 'en'.
    */
   @Input() lang: FudisLanguageAbbr;
+
+  /**
+   * Visible text content for details
+   */
+  @Input() textContent: string;
 
   /**
    * Sub heading in between Term and Details elements
@@ -81,40 +80,38 @@ export class DescriptionListItemDetailsComponent implements AfterViewInit, OnDes
   protected _mainCssClass: string;
 
   /**
-   * Detect if Details' text content has been loaded for current language
+   * Parse Details text content and set parent Description List Item languages
    */
-  protected _languageLoadFinished: boolean = false;
+  private _sendDetailsLanguageToParent(): void {
+    const parsedTextContent =
+      this.textContent && this.textContent.replace(/\s/g, '') !== '' ? this.textContent : null;
 
-  ngAfterViewInit(): void {
-    if (this.lang) {
-      this._addNewLanguageToParent();
+    this._parentDlItem.addDetailsLanguage(this.lang, parsedTextContent, this._id);
+
+    this._hostClass = `fudis-dl-item-details-host fudis-dl-item-details-host--${this.lang}`;
+  }
+
+  private _removeDetailsFromParent(): void {
+    this._parentDlItem.removeDetailsLanguage(this.lang, this._id);
+    this._hostClass = `fudis-dl-item-details-host`;
+  }
+
+  ngOnChanges(changes: FudisComponentChanges<DescriptionListItemDetailsComponent>): void {
+    // If language changes, update it to parent. If language changes to undefined, remove it from parent.
+    if (!changes.lang?.firstChange && this.lang) {
+      this._removeDetailsFromParent();
+      this._sendDetailsLanguageToParent();
+    } else if (!changes.lang?.currentValue) {
+      this._removeDetailsFromParent();
+    }
+
+    // If text content changes, update it to parent
+    if (changes.textContent?.currentValue && this.lang) {
+      this._sendDetailsLanguageToParent();
     }
   }
 
   ngOnDestroy(): void {
-    if (this._languageLoadFinished && this.lang) {
-      const currentLanguageOptions = this._parentDlItem.detailsLanguageOptions();
-
-      if (currentLanguageOptions?.[this.lang]) {
-        delete currentLanguageOptions[this.lang];
-      }
-    }
-  }
-
-  /**
-   * Parse Details text content and set parent Description List Item languages
-   */
-  private _addNewLanguageToParent(): void {
-    if (this.content?.nativeElement) {
-      const textContent = this.content.nativeElement.textContent;
-      const parsedTextContent =
-        textContent && textContent.replace(/\s/g, '') !== '' ? textContent : null;
-
-      this._parentDlItem.detailsLanguageOptions.set({
-        ...this._parentDlItem.detailsLanguageOptions(),
-        [this.lang]: parsedTextContent,
-      });
-      this._languageLoadFinished = true;
-    }
+    this._removeDetailsFromParent();
   }
 }

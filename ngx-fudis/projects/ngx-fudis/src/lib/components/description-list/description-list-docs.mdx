@@ -1,0 +1,118 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import { linkTo } from "@storybook/addon-links";
+import { DescriptionListComponent } from "./description-list.component.ts";
+import * as DescriptionListStories from "./description-list.stories.ts";
+import { Source } from "@storybook/blocks";
+import { descriptionListArgsTypesExclude } from "../../utilities/storybook.ts";
+
+<Meta title="Components/Description List" />
+
+# Description List Component
+
+Description List displays a list of key value pairs and has two different list variants: `regular` and `compact`.
+
+## Usage Guidelines
+
+Description List is built using child components as follows:
+
+<Source
+  code={`
+<fudis-dl>
+  <fudis-dl-item>
+    <fudis-dt></fudis-dt>
+    <fudis-dd></fudis-dd>
+  </fudis-dl-item>
+</fudis-dl>`}
+/>
+
+Term and Details content is passed through `textContent` Input property.
+
+<Source
+  code={`
+<fudis-dt [textContent]="'This is Term element text'" />
+<fudis-dd [textContent]="'Here is the Details element text'" />`}
+/>
+
+Term element has also `subHeading` Input for adding optional sub-heading between Term and Details elements. Single Description List Item can have multiple Details elements if necessary.
+
+<Source
+  code={`
+<fudis-dl>
+  <fudis-dl-item>
+  <fudis-dt [subHeading]="'I am Term sub heading'" [textContent]="'I am the main Term text content'" />
+  <fudis-dd [textContent]="'I am first Details element'" />
+  <fudis-dd [textContent]="'I am second Details element'" />
+  <fudis-dd [textContent]="'I am third Details element'" />
+</fudis-dl-item>
+</fudis-dl>`}
+/>
+
+## Managing Layout
+
+By default Description List uses Grid Directive under the hood and the component accepts multiple inputs from Grid API. For full list see [Properties](#properties) table. Grid can be disabled in Description List by setting `disableGrid` as true.
+
+## Examples
+
+### Regular Variant
+
+<Canvas of={DescriptionListStories.DescriptionList}></Canvas>
+
+### Compact Variant
+
+<Canvas of={DescriptionListStories.DescriptionListCompact}></Canvas>
+
+### Including Interactive Sub-Components
+
+It is possible to incluce e.g. Button component or other interactive elements inside Description List Item Details (`<fudis-dd>`) by using `ng-template` with `fudisActions [type]="'dd'"`. This following example displays, how Button is used inside the Description List.
+
+<Canvas of={DescriptionListStories.DescriptionListWithSubComponents}></Canvas>
+
+### With Language Badge Group
+
+Description List with Language Badge Group displays Term element with clickable Language Badges. Clicking a Badge sets those Details visible, which have corresponding language set. It's good to note that Description List with Language Badge Group is designed to be used only with Description List **regular** variant.
+
+By default Language Badge Group always display Badges for Finnish, English, Swedish in this order. To define different config to Application's Language Badges, use `FudisTranslationService` function `setSelectableLanguages()` to define a new config.
+
+<Source
+  code={`
+  constructor(translationService: FudisTranslationService) {
+    // Set only English and Swedish badges visible, in that order
+    languageService.setSelectableLanguages(['en', 'sv']);
+}`}
+/>
+
+Set in your `fudis-dd` element `lang` attribute to tell which translation it represents.
+
+<Source
+  code={`
+<fudis-dl>
+  <fudis-dl-item>
+    <fudis-dt [subHeading]="'I am Term sub heading'" [textContent]="'Example Languages'" />
+    <fudis-dd [lang]="'en'" [textContent]="'This is in English'" />
+    <fudis-dd [lang]="'fi'" [textContent]="'Tämä on suomeksi'" />
+    <fudis-dd [lang]="'sv'" [textContent]="'Den här är på Svenska'" />
+  </fudis-dl-item>
+</fudis-dl>`}
+/>
+
+Description List components communicate with each other and define automatically to set Language Badges visible and theme it properly if you have provided or not a Details component for each of languages set with `setSelectableLanguages()`.
+
+<Canvas of={DescriptionListStories.DescriptionListWithLanguages}></Canvas>
+
+### Accessibility
+
+- Description List component wraps list content into `dl` element
+- Each description term is contained within a `dt` element
+- Each description details is contained in one or more `dd` element
+- `dd` elements are placed directly after `dt` element
+- If only one description list item is present, it is converted to paragraph element
+
+### Related components / directives
+
+- [Grid](/docs/components-grid-grid--example)
+- [Icon](/docs/components-icon--icon)
+- [Button](/docs/components-button--button)
+
+## Properties
+
+<ArgTypes of={DescriptionListComponent} exclude={descriptionListArgsTypesExclude} />

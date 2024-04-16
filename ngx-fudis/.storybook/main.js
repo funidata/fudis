@@ -30,22 +30,23 @@ module.exports = {
     autodocs: true,
     defaultName: "Documentation",
   },
+
+  // To inject custom rules for <head> element. E.g. hide one Story from sidebar, so it can be still used in component's Docs page
   managerHead: (head) => `
     ${head}
     <link rel="shortcut icon" href="favicon.ico">
+    <style>
+      #components-description-list--description-list-compact { display: none;}
+    </style>
   `,
+  // Rules for rendered canvas. E. g. if you need custom CSS classes in your Story's html
   previewHead: (head) => `
     ${head}
     <style>
-            .storybook-flex {
-                display: flex;
-                align-items: center;
-            }
-            .storybook-flex-column {
-                display: flex;
-                align-items: center;
-                flex-direction: column;
-            }
+      .storybook-flex {
+          display: flex;
+          align-items: center;
+      }
     </style>
   `,
   env: (config) => {

@@ -2,6 +2,7 @@ import { Component, Input, OnInit, OnChanges, Signal, signal } from '@angular/co
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
 import { FudisComponentChanges, FudisDescriptionListVariant } from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
+import { FudisGridGap } from '../../types/grid';
 
 @Component({
   selector: 'fudis-dl, fudis-description-list',
@@ -23,6 +24,11 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
    * Variant for Description List structure and layout
    */
   @Input() variant: FudisDescriptionListVariant = 'regular';
+
+  /**
+   * Grid row gap. Using Fudis spacing token values of xxs to xxl and none.
+   */
+  @Input() override rowGap: FudisGridGap = 'sm';
 
   /**
    * Child Description List Item array.
@@ -102,7 +108,7 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
   }
 
   /**
-   * Define correct CSS classes for both variants
+   * Define correct CSS classes
    */
   private _setClasses(): void {
     const cssClasses = [];

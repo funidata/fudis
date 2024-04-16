@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, OnChanges, Output, Signal, effect } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  Signal,
+  effect,
+} from '@angular/core';
 import {
   FudisComponentChanges,
   FudisLanguageAbbr,
@@ -6,14 +15,18 @@ import {
 } from '../../../types/miscellaneous';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { FudisIdService } from '../../../services/id/id.service';
 
 @Component({
   selector: 'fudis-language-badge',
   styleUrls: ['./language-badge.component.scss'],
   templateUrl: './language-badge.component.html',
 })
-export class LanguageBadgeComponent extends TooltipApiDirective implements OnChanges {
-  constructor(private _translationService: FudisTranslationService) {
+export class LanguageBadgeComponent extends TooltipApiDirective implements OnChanges, OnInit {
+  constructor(
+    private _translationService: FudisTranslationService,
+    private _idService: FudisIdService,
+  ) {
     super();
 
     effect(() => {
@@ -29,6 +42,16 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
   @Input({ required: true }) language: FudisLanguageAbbr;
 
   /*
+   * Mandatory Language Badge label
+   */
+  @Input({ required: true }) label: string;
+
+  /*
+   * Parent group's id
+   */
+  @Input({ required: true }) parentId: string;
+
+  /*
    * Selected state of a Language Badge
    */
   @Input() selected: boolean;
@@ -37,11 +60,6 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
    * Language Badge variant
    */
   @Input() variant: 'standard' | 'missing' = 'standard';
-
-  /*
-   * Mandatory Language Badge label
-   */
-  @Input({ required: true }) label: string;
 
   /*
    * Assistive aria-label
@@ -69,9 +87,18 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
   protected _missingTranslation: string;
 
   /**
+   * Generated HTML id
+   */
+  protected _id: string;
+
+  /**
    * Fudis translations
    */
   protected _translations: Signal<FudisTranslationConfig>;
+
+  ngOnInit(): void {
+    this._id = this._idService.getNewChildId('language-badge-group', this.parentId);
+  }
 
   ngOnChanges(changes: FudisComponentChanges<LanguageBadgeComponent>): void {
     if (changes.selected || changes.variant || changes.label) {

@@ -24,6 +24,7 @@
     @include typography.body-text-sm-regular;
     @include colors.bg-color("white");
     @include border.border("1px", "solid", "gray-dark");
+    @include utilities.box-reset;
 
     display: flex;
     align-items: center;

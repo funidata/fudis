@@ -1,7 +1,7 @@
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { Component } from '@angular/core';
 import { DescriptionListComponent } from './description-list.component';
-import docs from './docs.mdx';
+import docs from './description-list-docs.mdx';
 import { FudisLanguageAbbr } from '../../types/miscellaneous';
 import { descriptionListExclude } from '../../utilities/storybook';
 import { FudisTranslationService } from '../../services/translation/translation.service';
@@ -59,61 +59,61 @@ const DescriptionListTemplate: StoryFn<DescriptionListComponent> = (
   args: DescriptionListComponent,
 ) => ({
   props: args,
-  template: html` <fudis-heading>Basic Description list</fudis-heading>
-    <fudis-dl
-      [marginBottom]="'md'"
-      [marginTop]="'md'"
-      [variant]="variant"
-      [columns]="'1fr 1fr'"
-      [rowGap]="rowGap"
-      [disableGrid]="disableGrid"
+  template: html` <fudis-heading [level]="2" [size]="'md'"
+      >{{variant==='regular' ? 'Regular' : 'Compact'}} Description List</fudis-heading
     >
+    <fudis-dl [marginTop]="'sm'" [variant]="variant" [columns]="2" [disableGrid]="disableGrid">
       <fudis-dl-item>
-        <fudis-dt>First name</fudis-dt>
-        <fudis-dd>Rex</fudis-dd>
+        <fudis-dt [textContent]="'First name'"></fudis-dt>
+        <fudis-dd [textContent]="'Rex'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt>Last name</fudis-dt>
-        <fudis-dd>Dangerwest</fudis-dd>
+        <fudis-dt [textContent]="'Last name'"></fudis-dt>
+        <fudis-dd [textContent]="'Dangerwest'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt>Alias</fudis-dt>
-        <fudis-dd>Radical Emmet Xtreme</fudis-dd>
+        <fudis-dt [textContent]="'Alias'"></fudis-dt>
+        <fudis-dd [textContent]="'Radical Emmet Xtreme'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt>Voice actor</fudis-dt>
-        <fudis-dd>Chris Pratt</fudis-dd>
+        <fudis-dt [textContent]="'Voice actor'"></fudis-dt>
+        <fudis-dd [textContent]="'Chris Pratt'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt>Enemy</fudis-dt>
-        <fudis-dd [subHeading]="'Archenemy'">Emmet Brickowski</fudis-dd>
+        <fudis-dt [textContent]="'Enemy'"></fudis-dt>
+        <fudis-dd [textContent]="'Emmet Brickowski'" [subHeading]="'Archenemy'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>`,
 });
 
 export const DescriptionList = DescriptionListTemplate.bind({});
 DescriptionList.args = {
-  variant: 'compact',
-  rowGap: 'sm',
+  variant: 'regular',
   disableGrid: false,
 };
 
-const DescriptionListItemInsideGridTemplate: StoryFn<DescriptionListComponent> = (
+export const DescriptionListCompact = DescriptionListTemplate.bind({});
+DescriptionListCompact.args = {
+  variant: 'compact',
+  disableGrid: false,
+};
+
+const DescriptionListInsideGridTemplate: StoryFn<DescriptionListComponent> = (
   args: DescriptionListComponent,
 ) => ({
   props: args,
-  template: html`<fudis-grid [columns]="'2'" [rowGap]="'xs'">
+  template: html`<fudis-grid [columns]="{sm: 1, md: 2}" [rowGap]="'xs'">
     <fudis-heading [level]="2" [size]="'md'"
-      >Grid where DL is used as child component</fudis-heading
+      >Description List as Grid's Child Component</fudis-heading
     >
     <fudis-dl [disableGrid]="disableGrid" [variant]="variant">
       <fudis-dl-item>
-        <fudis-dt>Teacher email</fudis-dt>
-        <fudis-dd [subHeading]="'Severus Snape'">snape@hogwarts.wiz</fudis-dd>
+        <fudis-dt [textContent]="'Teacher email'"></fudis-dt>
+        <fudis-dd [textContent]="'snape@hogwarts.wiz'" [subHeading]="'Severus Snape'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt>Course name</fudis-dt>
-        <fudis-dd>Defense Against the Dark Arts</fudis-dd>
+        <fudis-dt [textContent]="'Course name'"></fudis-dt>
+        <fudis-dd [textContent]="'Defense Against the Dark Arts'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
     <fudis-body-text
@@ -123,9 +123,9 @@ const DescriptionListItemInsideGridTemplate: StoryFn<DescriptionListComponent> =
   </fudis-grid>`,
 });
 
-export const DescriptionListItemInsideGrid = DescriptionListItemInsideGridTemplate.bind({});
+export const DescriptionListInsideGrid = DescriptionListInsideGridTemplate.bind({});
 
-DescriptionListItemInsideGrid.args = {
+DescriptionListInsideGrid.args = {
   variant: 'regular',
   disableGrid: true,
 };
@@ -135,27 +135,25 @@ const DescriptionListWithSubComponentsTemplate: StoryFn<DescriptionListComponent
 ) => ({
   props: args,
   template: html`<fudis-heading [level]="2" [size]="'md'"
-      >Description list with example sub components</fudis-heading
+      >Description List With Sub Components</fudis-heading
     >
     <fudis-description-list
-      [marginBottom]="'md'"
+      [marginTop]="'sm'"
       [disableGrid]="disableGrid"
       [variant]="variant"
       [columns]="columns"
-      [rowGap]="rowGap"
     >
       <fudis-dl-item>
-        <fudis-dt>First name</fudis-dt>
-        <fudis-dd>Rex</fudis-dd>
+        <fudis-dt [textContent]="'First name'"></fudis-dt>
+        <fudis-dd [textContent]="'Rex'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt>Last name</fudis-dt>
-        <fudis-dd>Dangerwest</fudis-dd>
+        <fudis-dt [textContent]="'Last name'"></fudis-dt>
+        <fudis-dd [textContent]="'Dangerwest'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt>Alias</fudis-dt>
-        <fudis-dd
-          >Radical Emmet Xtreme
+        <fudis-dt [textContent]="'Alias'"></fudis-dt>
+        <fudis-dd [textContent]="'Radical Emmet Xtreme'">
           <ng-template fudisActions [type]="'dd'">
             <fudis-button
               [label]="'Edit'"
@@ -167,9 +165,9 @@ const DescriptionListWithSubComponentsTemplate: StoryFn<DescriptionListComponent
         </fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt>Enemy</fudis-dt>
-        <fudis-dd [subHeading]="'Archenemy'"
-          >Emmet Brickowski<ng-template fudisActions [type]="'dd'">
+        <fudis-dt [textContent]="'Enemy'">Enemy</fudis-dt>
+        <fudis-dd [textContent]="'Emmet Brickowski'" [subHeading]="'Archenemy'"
+          ><ng-template fudisActions [type]="'dd'">
             <fudis-button [label]="'Read more'" [variant]="'secondary'" [size]="'small'" />
           </ng-template>
         </fudis-dd>
@@ -181,7 +179,6 @@ export const DescriptionListWithSubComponents = DescriptionListWithSubComponents
 DescriptionListWithSubComponents.args = {
   variant: 'regular',
   columns: { xs: 1, sm: 2 },
-  rowGap: 'md',
   disableGrid: false,
 };
 
@@ -190,26 +187,39 @@ const DescriptionListWithLanguagesTemplate: StoryFn<DescriptionListComponent> = 
 ) => ({
   props: args,
   template: html`<fudis-heading [level]="2" [size]="'md'"
-      >Description List with Language Badges</fudis-heading
+      >Description List With Language Badges</fudis-heading
     >
     <fudis-description-list
-      [marginBottom]="'md'"
+      [marginTop]="'sm'"
       [disableGrid]="disableGrid"
       [variant]="variant"
       [serviceDefaults]="serviceDefaults"
       [columns]="columns"
+      [marginBottom]="'sm'"
     >
       <fudis-description-list-item>
-        <fudis-dt [languages]="true">Example paragraph</fudis-dt>
-        <fudis-dd [lang]="'sv'">Och den här är på Svenska</fudis-dd>
-        <fudis-dd [lang]="'en'">This is in English</fudis-dd>
-        <fudis-dd [lang]="'fi'">Tämä on suomeksi</fudis-dd>
+        <fudis-dt [textContent]="'Example paragraph'"></fudis-dt>
+        <fudis-dd [lang]="'sv'" [textContent]="'Och den här är på Svenska'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [textContent]="'This is in English'"></fudis-dd>
+        <fudis-dd [lang]="'fi'" [textContent]="'Tämä on suomeksi'"></fudis-dd>
       </fudis-description-list-item>
       <fudis-description-list-item>
-        <fudis-dt [languages]="true">Example without one language</fudis-dt>
-        <fudis-dd [lang]="'fi'">Tähtien sota</fudis-dd>
-        <fudis-dd [lang]="'en'"></fudis-dd>
-        <fudis-dd [lang]="'sv'">Stjärnornas krig </fudis-dd>
+        <fudis-dt [textContent]="'Example without one language'"></fudis-dt>
+        <fudis-dd [lang]="'fi'" [textContent]="'Tähtien sota'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [textContent]="''"></fudis-dd>
+        <fudis-dd [lang]="'sv'" [textContent]="'Stjärnornas krig'"></fudis-dd>
+      </fudis-description-list-item>
+      <fudis-description-list-item>
+        <fudis-dt
+          [textContent]="'Example which has multiple Details in different languages'"
+        ></fudis-dt>
+        <fudis-dd [lang]="'fi'" [textContent]="'Uusi toivo'"></fudis-dd>
+        <fudis-dd [lang]="'fi'" [textContent]="'Imperiumin vastaisku'"></fudis-dd>
+        <fudis-dd [lang]="'fi'" [textContent]="'Jedin paluu'"></fudis-dd>
+
+        <fudis-dd [lang]="'en'" [textContent]="'New Hope'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [textContent]="'Empire Strikes Back'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [textContent]="'Return of the Jedi'"></fudis-dd>
       </fudis-description-list-item>
     </fudis-description-list>
 
@@ -247,25 +257,27 @@ const DescriptionListWithMultipleDdElementsTemplate: StoryFn<DescriptionListComp
 ) => ({
   props: { ...args, data: multipleDDData },
   template: html`
-    <fudis-heading>DT element with multiple DD elements</fudis-heading>
+    <fudis-heading [level]="2" [size]="'md'"
+      >Description List Item With Multiple Details</fudis-heading
+    >
     <fudis-description-list
-      [marginBottom]="'md'"
-      [marginTop]="'md'"
+      [marginTop]="'sm'"
       [variant]="'regular'"
       [columns]="'1fr 1fr'"
-      [rowGap]="'sm'"
       [disableGrid]="disableGrid"
       [variant]="variant"
     >
       <fudis-description-list-item>
-        <fudis-dt>Members of Jedi High Council</fudis-dt>
-        <fudis-dd [subHeading]="item.subHeading" *ngFor="let item of data"
-          >{{ item.value }}</fudis-dd
-        >
+        <fudis-dt [textContent]="'Members of Jedi High Council'"></fudis-dt>
+        <fudis-dd
+          [textContent]="item.value"
+          [subHeading]="item.subHeading"
+          *ngFor="let item of data"
+        ></fudis-dd>
       </fudis-description-list-item>
       <fudis-description-list-item>
-        <fudis-dt>Non-Jedi Master Members</fudis-dt>
-        <fudis-dd>Anakin Skywalker</fudis-dd>
+        <fudis-dt [textContent]="'Non-Jedi Master Members'"></fudis-dt>
+        <fudis-dd [textContent]="'Anakin Skywalker'"></fudis-dd>
       </fudis-description-list-item>
     </fudis-description-list>
   `,
@@ -284,19 +296,17 @@ const DescriptionListWithSingleItemTemplate: StoryFn<DescriptionListComponent> =
 ) => ({
   props: args,
   template: html`
-    <fudis-heading>Description List with Single Item</fudis-heading>
+    <fudis-heading [level]="2" [size]="'md'">Description List with Single Item</fudis-heading>
     <fudis-description-list
-      [marginBottom]="'md'"
-      [marginTop]="'md'"
+      [marginTop]="'sm'"
       [variant]="'regular'"
       [columns]="'1fr 1fr'"
-      [rowGap]="'sm'"
       [disableGrid]="disableGrid"
       [variant]="variant"
     >
       <fudis-description-list-item>
-        <fudis-dt>Address</fudis-dt>
-        <fudis-dd [subHeading]="'4 Privet Drive'">Under the stairs</fudis-dd>
+        <fudis-dt [textContent]="'Address'"></fudis-dt>
+        <fudis-dd [textContent]="'Under the stairs'" [subHeading]="'4 Privet Drive'"></fudis-dd>
       </fudis-description-list-item>
     </fudis-description-list>
   `,

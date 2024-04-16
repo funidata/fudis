@@ -79,6 +79,7 @@ const descriptionListCommonExclude: string[] = [
   'classes',
   'columnGap',
   'columns',
+  'id',
   'serviceDefaults',
   'marginBottom',
   'marginTop',
@@ -86,6 +87,16 @@ const descriptionListCommonExclude: string[] = [
   'rowGap',
   'width',
 ];
+
+export const descriptionListArgsTypesExclude: RegExp = excludeRegex([
+  'id',
+  'getVariant',
+  'addChildId',
+  'childDlItems',
+  'getDisabledGridStatus',
+  'removeChildId',
+  'serviceDefaults',
+]);
 
 export const descriptionListExclude: RegExp = excludeRegex([...descriptionListCommonExclude]);
 

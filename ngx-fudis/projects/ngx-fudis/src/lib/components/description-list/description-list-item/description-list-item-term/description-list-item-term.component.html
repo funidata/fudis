@@ -8,25 +8,20 @@
 
 <ng-template #multipleItems>
   <dt [id]="_id" [class]="_mainCssClass">
-    <ng-container *ngTemplateOutlet="dtContent"></ng-container
-    ><ng-container *ngTemplateOutlet="commonContent"></ng-container>
+    <ng-container *ngTemplateOutlet="commonContent"></ng-container>
   </dt>
 </ng-template>
 
 <ng-template #singleItem>
   <span [id]="_id" [class]="_mainCssClass">
-    <ng-container *ngTemplateOutlet="dtContent"></ng-container>
     <ng-container *ngTemplateOutlet="commonContent"></ng-container>
   </span>
 </ng-template>
 
-<ng-template #dtContent>
-  <ng-content></ng-content>
-</ng-template>
-
 <ng-template #commonContent>
-  <span [class]="_mainCssClass + '__colon'">&colon;</span>
-  <ng-container *ngIf="_selectedLanguage && _parentLanguageOptions">
+  <span [class]="_mainCssClass + '__text-content'">{{ textContent }}</span
+  ><span [class]="_mainCssClass + '__colon'">&colon;</span>
+  <ng-container *ngIf="languages && _selectedLanguage">
     <fudis-language-badge-group
       [selectedLanguage]="_selectedLanguage"
       [languages]="_parentLanguageOptions"

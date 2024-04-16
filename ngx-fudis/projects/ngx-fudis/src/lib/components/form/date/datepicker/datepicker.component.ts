@@ -60,13 +60,10 @@ export class DatepickerComponent
     super(_datePickerConfigService, _idService, _changeDetectorRef);
 
     effect(() => {
-      this._adapter.setLocale(updateLocale(this._translationService.getLanguage()));
+      _adapter.setLocale(updateLocale(this._translationService.getLanguageSignal()()));
       this._dateParseError = this._translations().DATEPICKER.VALIDATION.DATE_PARSE;
 
-      this._datepickerIntl = updateMatDatePickerTranslations(
-        this._translations(),
-        this._datepickerIntl,
-      );
+      _datepickerIntl = updateMatDatePickerTranslations(this._translations(), _datepickerIntl);
     });
   }
 

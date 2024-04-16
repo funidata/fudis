@@ -1,4 +1,13 @@
-import { Component, ElementRef, Host, OnDestroy, OnInit, effect, signal } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Host,
+  OnDestroy,
+  OnInit,
+  Signal,
+  effect,
+  signal,
+} from '@angular/core';
 import {
   FudisDescriptionListVariant,
   FudisLanguageAbbr,
@@ -18,9 +27,9 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
     private _idService: FudisIdService,
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
-    effect(() => {
-      this.id = this._idService.getNewGroupId('description-list', this._parentDl.id);
+    this.id = _idService.getNewGroupId('description-list', this._parentDl.id);
 
+    effect(() => {
       /**
        * Listens to parent's changes and updates CSS classes.
        */
@@ -31,12 +40,12 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
   /**
    * Storing list of available languages in Details elements
    */
-  public detailsLanguageOptions = signal<FudisLanguageBadgeContent>({});
+  private _detailsLanguageOptions = signal<FudisLanguageBadgeContent>({});
 
   /**
    * Selected language to pass to child components
    */
-  public selectedLanguage: FudisLanguageAbbr;
+  public selectedLanguage: FudisLanguageAbbr | null;
 
   /**
    * Id generated with Id Service
@@ -67,5 +76,41 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
     } else {
       this._mainCssClass = 'fudis-dl-item';
     }
+  }
+
+  /**
+   * Called from child Details, if it has a language property
+   */
+  public addDetailsLanguage(lang: FudisLanguageAbbr, text: string | null, id: string): void {
+    const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions();
+
+    if (!currentContent[lang]) {
+      currentContent[lang] = {};
+    }
+
+    currentContent[lang]![id] = text;
+
+    this._detailsLanguageOptions.set(currentContent);
+  }
+
+  /**
+   * Called from child Details, if its language property is removed (or updated)
+   */
+  public removeDetailsLanguage(lang: FudisLanguageAbbr, id: string): void {
+    const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions();
+
+    if (currentContent[lang as FudisLanguageAbbr]?.[id]) {
+      delete currentContent[lang]![id];
+    }
+
+    if (currentContent[lang] && Object.keys(currentContent[lang]!).length === 0) {
+      delete currentContent[lang];
+    }
+
+    this._detailsLanguageOptions.set(currentContent);
+  }
+
+  public getDetailsLanguageOptions(): Signal<FudisLanguageBadgeContent> {
+    return this._detailsLanguageOptions.asReadonly();
   }
 }

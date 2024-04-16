@@ -1,22 +1,63 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-// import { By } from '@angular/platform-browser';
-import { MockComponent } from 'ng-mocks';
-
+import { By } from '@angular/platform-browser';
 import { GridComponent } from '../grid/grid/grid.component';
 import { GridDirective } from '../../directives/grid/grid/grid.directive';
-
 import { DescriptionListComponent } from './description-list.component';
 import { FudisGridService } from '../../services/grid/grid.service';
 import { DescriptionListItemComponent } from './description-list-item/description-list-item.component';
 import { DescriptionListItemTermComponent } from './description-list-item/description-list-item-term/description-list-item-term.component';
 import { DescriptionListItemDetailsComponent } from './description-list-item/description-list-item-details/description-list-item-details.component';
-
 import { LanguageBadgeGroupComponent } from '../language-badge-group/language-badge-group.component';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
+import { getElement, sortClasses } from '../../utilities/tests/utilities';
+import { Component, DebugElement, SimpleChange } from '@angular/core';
+import { FudisDescriptionListVariant } from '../../types/miscellaneous';
+import { FudisIdService } from '../../services/id/id.service';
+
+@Component({
+  selector: 'fudis-mock-dl',
+  template: `
+    <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
+      <fudis-dl-item>
+        <fudis-dt [textContent]="'First DT'"></fudis-dt>
+        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
+      </fudis-dl-item>
+      <fudis-dl-item>
+        <fudis-dt [textContent]="'Second DT'"></fudis-dt>
+        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
+      </fudis-dl-item>
+    </fudis-dl>
+
+    <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
+      <fudis-dl-item>
+        <fudis-dt [textContent]="'Single DT'"></fudis-dt>
+        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
+      </fudis-dl-item>
+    </fudis-dl>
+
+    <fudis-dl [variant]="variant" [disableGrid]="true">
+      <fudis-dl-item>
+        <fudis-dt [textContent]="'Disabled Grid DT'"></fudis-dt>
+        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
+      </fudis-dl-item>
+      <fudis-dl-item>
+        <fudis-dt [textContent]="'Disabled Grid DT'"></fudis-dt>
+        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
+      </fudis-dl-item>
+    </fudis-dl>
+  `,
+})
+class MockDlComponent {
+  variant: FudisDescriptionListVariant = 'regular';
+  disableGrid: boolean = false;
+}
 
 describe('DescriptionListComponent', () => {
   let component: DescriptionListComponent;
   let fixture: ComponentFixture<DescriptionListComponent>;
+
+  let mockComponent: MockDlComponent;
+  let mockFixture: ComponentFixture<MockDlComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -27,139 +68,135 @@ describe('DescriptionListComponent', () => {
         DescriptionListItemComponent,
         DescriptionListItemTermComponent,
         DescriptionListItemDetailsComponent,
-        MockComponent(LanguageBadgeGroupComponent),
+        LanguageBadgeGroupComponent,
+        MockDlComponent,
       ],
-      providers: [FudisGridService, FudisBreakpointService],
+      providers: [FudisGridService, FudisIdService, FudisBreakpointService],
     }).compileComponents();
   });
 
-  beforeEach(async () => {
+  beforeEach(() => {
     fixture = TestBed.createComponent(DescriptionListComponent);
     component = fixture.componentInstance;
-
     fixture.detectChanges();
+
+    mockFixture = TestBed.createComponent(MockDlComponent);
+    mockComponent = mockFixture.componentInstance;
+    mockFixture.detectChanges();
   });
+
+  function getDlElement(type: string): HTMLElement {
+    const dlElement = getElement(mockFixture, `fudis-dl ${type}`);
+    return dlElement;
+  }
+
+  function getDlFromArrayIndex(index: number): DebugElement {
+    const dlElements = mockFixture.debugElement.queryAll(By.css('fudis-dl'));
+    const itemArray = [...dlElements];
+
+    return itemArray[index];
+  }
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  // TODO: These test were commented out to get functionality tickets through, fix test in the coming DS-259
+  describe('Wrapper element', () => {
+    it('should have respective wrapper element depending on description list type, i.e multiple items, single item or disabled grid', () => {
+      expect(getDlFromArrayIndex(0).query(By.css('dl'))).toBeTruthy();
+      expect(getDlFromArrayIndex(2).query(By.css('dl'))).toBeTruthy();
+      expect(getDlFromArrayIndex(1).query(By.css('dl'))).toBeFalsy();
 
-  // function getDescriptionList(): HTMLElement {
-  //   const descriptionListElement = fixture.nativeElement.querySelector('dl') as HTMLElement;
-  //   return descriptionListElement;
-  // }
+      expect(getDlFromArrayIndex(1).query(By.css('div.fudis-dl'))).toBeTruthy();
+      expect(getDlFromArrayIndex(0).query(By.css('div.fudis-dl'))).toBeFalsy();
+      expect(getDlFromArrayIndex(2).query(By.css('div.fudis-dl'))).toBeFalsy();
+    });
+  });
 
-  // function getDescriptionListDt(classes: string): HTMLElement {
-  //   const descriptionListItemTermElement = fixture.debugElement.query(
-  //     By.css(`fudis-dt .${classes}`),
-  //   );
-  //   return descriptionListItemTermElement.nativeElement;
-  // }
+  describe('CSS classes', () => {
+    it('should have main CSS class', () => {
+      expect(getDlElement('dl').classList).toContain('fudis-dl');
+    });
 
-  // function getDescriptionListDd(classes: string): HTMLElement {
-  //   const descriptionListItemDetailsElement = fixture.debugElement.query(
-  //     By.css(`fudis-dd .${classes}`),
-  //   );
-  //   return descriptionListItemDetailsElement.nativeElement;
-  // }
+    it('should have grid classes if grid is enabled', () => {
+      expect(sortClasses(getDlElement('dl').className)).toEqual(
+        sortClasses(
+          'fudis-dl fudis-grid fudis-grid__xxl fudis-grid__align__start fudis-grid__margin__top__none fudis-grid__margin__bottom__none fudis-grid__row-gap__sm',
+        ),
+      );
+    });
 
-  // function assertDescriptionListHasClasses(classes: string[]): void {
-  //   const descriptionListClassName = getDescriptionList()?.className ?? '';
+    it('should not have grid classes if grid is disabled', () => {
+      mockComponent.disableGrid = true;
+      mockFixture.detectChanges();
 
-  //   expect(descriptionListClassName.split(' ').sort()).toEqual(classes.sort());
-  // }
+      expect(sortClasses(getDlElement('dl').className)).toEqual(
+        sortClasses('fudis-dl fudis-dl__disabled-grid'),
+      );
+    });
+  });
 
-  // function assertDtHasClasses(classes: string): void {
-  //   const descriptionListItemTermClassName = getDescriptionListDt(classes).className ?? '';
+  describe('HTML id', () => {
+    it('should have generated id from Id Service', () => {
+      // Id's start from 2 since the "real" DL component has been rendered first.
+      expect(getDlFromArrayIndex(0).query(By.css('dl')).nativeElement.getAttribute('id')).toEqual(
+        'fudis-description-list-2',
+      );
 
-  //   expect(descriptionListItemTermClassName).toContain(classes);
-  // }
+      expect(
+        getDlFromArrayIndex(1).query(By.css('div.fudis-dl')).nativeElement.getAttribute('id'),
+      ).toEqual('fudis-description-list-3');
 
-  // function assertDdHasClasses(classes: string, display: string) {
-  //   const descriptionListItemDetailsElement = getDescriptionListDd(classes);
-  //   const descriptionListItemDetilsClassName = descriptionListItemDetailsElement.className ?? '';
-  //   const descriptionListItemValueDisplayStyle = getComputedStyle(
-  //     descriptionListItemDetailsElement,
-  //   ).display;
+      expect(getDlFromArrayIndex(2).query(By.css('dl')).nativeElement.getAttribute('id')).toEqual(
+        'fudis-description-list-4',
+      );
+    });
+  });
 
-  //   expect(descriptionListItemValueDisplayStyle).toEqual(display);
-  //   expect(descriptionListItemDetilsClassName).toContain(classes);
-  // }
+  describe('Signals', () => {
+    it('should return correct variant from signal', () => {
+      const variantBefore = component.getVariant()();
 
-  // describe('Parent CSS class', () => {
-  //   it('should have fudis-dl and fudis-grid classes if regular list', () => {
-  //     const classList = [
-  //       'fudis-dl',
-  //       'fudis-grid',
-  //       'fudis-grid__align__start',
-  //       'fudis-grid__row-gap__none',
-  //       'fudis-grid__margin__bottom__none',
-  //       'fudis-grid__margin__top__none',
-  //       'fudis-grid__xxl',
-  //     ];
-  //     assertDescriptionListHasClasses(classList);
-  //   });
+      expect(variantBefore).toEqual('regular');
 
-  //   it('should have fudis-dl-compact and fudis-grid classes if compact list', () => {
-  //     component.variant = 'compact';
-  //     component.ngOnChanges();
-  //     fixture.detectChanges();
-  //     const classList = [
-  //       'fudis-dl-compact',
-  //       'fudis-grid',
-  //       'fudis-grid__align__start',
-  //       'fudis-grid__margin__bottom__none',
-  //       'fudis-grid__margin__top__none',
-  //       'fudis-grid__row-gap__none',
-  //       'fudis-grid__xxl',
-  //     ];
-  //     assertDescriptionListHasClasses(classList);
-  //   });
+      component.variant = 'compact';
+      component.ngOnChanges({
+        variant: new SimpleChange('regular', component.variant, true),
+      });
 
-  //   it('should not have fudis-grid classes if grid directive is disabled if regular list', () => {
-  //     component.disableGrid = true;
-  //     component.ngOnChanges();
-  //     fixture.detectChanges();
-  //     const classList = ['fudis-dl', 'fudis-dl__disabled-grid'];
-  //     assertDescriptionListHasClasses(classList);
-  //   });
+      const variantAfter = component.getVariant()();
 
-  //   it('should not have fudis-grid classes if grid directive is disabled if compact list', () => {
-  //     component.variant = 'compact';
-  //     component.disableGrid = true;
-  //     component.ngOnChanges();
-  //     fixture.detectChanges();
-  //     const classList = ['fudis-dl-compact', 'fudis-dl-compact__disabled-grid'];
-  //     assertDescriptionListHasClasses(classList);
-  //   });
-  // });
+      expect(variantAfter).toEqual('compact');
+    });
 
-  // describe('description list item, term and detail components', () => {
-  //   it('should be present', () => {
-  //     const descriptionListItem = fixture.debugElement.query(By.css('fudis-dl-item'));
-  //     const descriptionListItemTerm = descriptionListItem.nativeElement.querySelector('fudis-dt');
-  //     const descriptionListItemDetails =
-  //       descriptionListItem.nativeElement.querySelector('fudis-dd');
+    it('should return correct disabled grid status from signal', () => {
+      const statusBefore = component.getDisabledGridStatus()();
 
-  //     expect(descriptionListItemTerm).toBeTruthy();
-  //     expect(descriptionListItemDetails).toBeTruthy();
-  //   });
+      expect(statusBefore).toEqual(false);
 
-  //   it('should have respective CSS classes and display style in regular list', () => {
-  //     assertDtHasClasses('fudis-dl__item__term');
-  //     assertDdHasClasses('fudis-dl__item__details', 'block');
-  //   });
+      component.disableGrid = true;
+      component.ngOnChanges({
+        disableGrid: new SimpleChange(false, component.disableGrid, true),
+      });
 
-  //   it('should have respective CSS classes and display style in compact list', () => {
-  //     component.variant = 'compact';
-  //     component.ngOnChanges();
-  //     fixture.detectChanges();
-  //     assertDtHasClasses('fudis-dl-compact__item__term');
-  //     assertDdHasClasses('fudis-dl-compact__item__details', 'block');
-  //   });
-  // });
+      const statusAfter = component.getDisabledGridStatus()();
 
-  // TODO: missing tests for item, item-details, item-term, langauge features
+      expect(statusAfter).toEqual(true);
+    });
+  });
+
+  describe('Child DL item array', () => {
+    it('should update when adding or removing items', () => {
+      expect(component.childDlItems.length).toEqual(0);
+
+      component.addChildId('description-list-1-item-1');
+      component.addChildId('description-list-1-item-2');
+
+      expect(component.childDlItems.length).toEqual(2);
+
+      component.removeChildId('description-list-1-item-1');
+
+      expect(component.childDlItems.length).toEqual(1);
+    });
+  });
 });

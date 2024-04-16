@@ -8,7 +8,7 @@ export type FudisDescriptionListItemDetailInfo = {
 };
 
 export type FudisLanguageBadgeContent = {
-  [key in FudisLanguageAbbr]?: string | null | undefined;
+  [lang in FudisLanguageAbbr]?: { [id: string]: string | null | undefined };
 };
 
 export type FudisLanguageOption =

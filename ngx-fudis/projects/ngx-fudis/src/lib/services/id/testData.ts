@@ -27,6 +27,7 @@ export const testDataBefore: FudisIdData = {
     breadcrumbs: {},
     'checkbox-group': {},
     'dropdown-menu': {},
+    'language-badge-group': {},
     'radio-button-group': {},
   },
   grandParents: {
@@ -128,6 +129,7 @@ export const testComponentDataAfter: FudisIdData = {
     breadcrumbs: {},
     'checkbox-group': {},
     'dropdown-menu': {},
+    'language-badge-group': {},
     'radio-button-group': {},
   },
   grandParents: {
@@ -230,6 +232,29 @@ export const testParentDataAfter: FudisIdData = {
         'fudis-dropdown-menu-3-item-5',
       ],
     },
+    'language-badge-group': {
+      'fudis-language-badge-group-1': [
+        'fudis-language-badge-group-1-item-1',
+        'fudis-language-badge-group-1-item-2',
+        'language-badge-group-1-custom-child-id',
+        'fudis-language-badge-group-1-item-4',
+        'fudis-language-badge-group-1-item-5',
+      ],
+      'language-badge-group-some-custom-id': [
+        'language-badge-group-some-custom-id-item-1',
+        'language-badge-group-some-custom-id-item-2',
+        'language-badge-group-2-custom-child-id',
+        'language-badge-group-some-custom-id-item-4',
+        'language-badge-group-some-custom-id-item-5',
+      ],
+      'fudis-language-badge-group-3': [
+        'fudis-language-badge-group-3-item-1',
+        'fudis-language-badge-group-3-item-2',
+        'language-badge-group-3-custom-child-id',
+        'fudis-language-badge-group-3-item-4',
+        'fudis-language-badge-group-3-item-5',
+      ],
+    },
     'radio-button-group': {
       'fudis-radio-button-group-1': [
         'fudis-radio-button-group-1-item-1',
@@ -288,6 +313,7 @@ export const testGrandParentDataAfter: FudisIdData = {
     breadcrumbs: {},
     'checkbox-group': {},
     'dropdown-menu': {},
+    'language-badge-group': {},
     'radio-button-group': {},
   },
   grandParents: {

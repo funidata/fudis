@@ -48,6 +48,13 @@ export class FudisTranslationService {
   }
 
   /**
+   * Get current language as Signal
+   */
+  public getLanguageSignal(): Signal<FudisLanguageAbbr> {
+    return this._appLanguage.asReadonly();
+  }
+
+  /**
    * Get application's translation config values
    */
   public getTranslations(): Signal<FudisTranslationConfig> {

@@ -3,24 +3,31 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { By } from '@angular/platform-browser';
 import { LanguageBadgeComponent } from './language-badge.component';
 import { TooltipDirective } from '../../../directives/tooltip/tooltip.directive';
+import { FudisIdService } from '../../../services/id/id.service';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { getElement } from '../../../utilities/tests/utilities';
 
 describe('LanguageBadgeComponent', () => {
   let component: LanguageBadgeComponent;
   let fixture: ComponentFixture<LanguageBadgeComponent>;
+  let service: FudisIdService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LanguageBadgeComponent, TooltipDirective],
       imports: [MatTooltipModule],
+      providers: [FudisIdService, FudisTranslationService],
     }).compileComponents();
   });
 
   beforeEach(() => {
+    service = TestBed.inject(FudisIdService);
+    service.addNewParentId('language-badge-group', 'fudis-language-badge-group-1');
     fixture = TestBed.createComponent(LanguageBadgeComponent);
     component = fixture.componentInstance;
     component.language = 'en';
     component.variant = 'standard';
+    component.parentId = 'fudis-language-badge-group-1';
     component.label = 'This is test label';
     component.ngOnChanges({
       label: { firstChange: true, currentValue: 'This is test label', previousValue: '' },
