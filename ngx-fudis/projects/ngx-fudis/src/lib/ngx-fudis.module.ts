@@ -231,7 +231,7 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     CheckboxComponent,
     CheckboxGroupComponent,
     ContentDirective,
-    // DatepickerComponent,
+    DatepickerComponent,
     // DateRangeComponent,
     DescriptionListComponent,
     DescriptionListItemComponent,

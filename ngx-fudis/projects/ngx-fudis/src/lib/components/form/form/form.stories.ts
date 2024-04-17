@@ -259,20 +259,17 @@ class ExampleWithMultipleFormsComponent {
         >
           <ng-template fudisContent [type]="'expandable'">
             <fudis-grid>
-              <!-- <fudis-fieldset
+              <fudis-fieldset
                 [label]="'Basic info'"
                 [helpText]="'Some generic info about this course'"
                 [id]="fieldsetId"
               >
                 <ng-template fudisNotifications [type]="'fieldset'">
-                  <fudis-notification *ngIf="errorSummaryVisible">
-                    This is notification for a fieldset. TODO: Add notifications to error summary if
-                    needed.
-                  </fudis-notification>
+                  <fudis-notification> This is notification for a fieldset. </fudis-notification>
                 </ng-template>
                 <ng-template fudisContent [type]="'fieldset'">
-                  <fudis-grid [columns]="{ lg: 'inputLg inputLg' }"> -->
-              <!-- <fudis-input-with-language-options
+                  <fudis-grid [columns]="{ lg: 'inputMd inputSm' }">
+                    <!-- <fudis-input-with-language-options
                           [id]="'unique-input-1'"
                           [options]="languageOptions"
                           [formGroup]="formExample.controls['name']"
@@ -290,7 +287,7 @@ class ExampleWithMultipleFormsComponent {
                             "
                           />
                         </fudis-input-with-language-options> -->
-              <!-- <fudis-input-with-language-options
+                    <!-- <fudis-input-with-language-options
                           [variant]="'text-area'"
                           [id]="'unique-input-2'"
                           [options]="languageOptions"
@@ -300,42 +297,42 @@ class ExampleWithMultipleFormsComponent {
                             'So that students know what they are getting into. Provide description in all languages.'
                           "
                         /> -->
-              <!-- <fudis-radio-button-group
+                    <!-- <fudis-radio-button-group
                           [label]="'Course type'"
                           [id]="'radio-button-group-1'"
                           [options]="courseTypeOptions"
                           [control]="formExample.controls['courseType']"
                         /> -->
-              <fudis-checkbox-group
-                [formGroup]="formExample.controls.courseBooks"
-                [label]="'Course books'"
-                [helpText]="'Select 1-2 coursebooks'"
-              >
-                <fudis-checkbox [controlName]="'first'" [label]="'Heir to the Empire'" />
-                <fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
-                <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
-              </fudis-checkbox-group>
-              <!-- <fudis-datepicker
-                          [label]="'Start date'"
-                          [helpText]="'You have to start from somewhere'"
-                          [control]="formExample.controls['importantDate']"
-                        >
-                          <fudis-error-message
-                            *ngIf="
-                              formExample.controls['importantDate'].value?.getTime() !== releaseDate
-                            "
-                            [message]="'Wrong date chosen. 1.5.1991 would be great!'"
-                          />
-                        </fudis-datepicker> -->
-              <!-- </fudis-grid>
+                    <fudis-checkbox-group
+                      [formGroup]="formExample.controls.courseBooks"
+                      [label]="'Course books'"
+                      [helpText]="'Select 1-2 coursebooks'"
+                    >
+                      <fudis-checkbox [controlName]="'first'" [label]="'Heir to the Empire'" />
+                      <fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
+                      <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
+                    </fudis-checkbox-group>
+                    <fudis-datepicker
+                      [label]="'Start date'"
+                      [helpText]="'You have to start from somewhere'"
+                      [control]="formExample.controls['importantDate']"
+                    >
+                      <fudis-error-message
+                        *ngIf="
+                          formExample.controls['importantDate'].value?.getTime() !== releaseDate
+                        "
+                        [message]="'Wrong date chosen. 1.5.1991 would be great!'"
+                      />
+                    </fudis-datepicker>
+                  </fudis-grid>
                 </ng-template>
-              </fudis-fieldset> -->
+              </fudis-fieldset>
               <fudis-fieldset
                 [label]="'Tearcher info'"
                 [tooltip]="'Quite many fields are required.'"
               >
                 <ng-template fudisContent [type]="'fieldset'">
-                  <fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
+                  <fudis-grid [columns]="{ lg: 'inputMd inputMd' }">
                     <fudis-text-input
                       [initialFocus]="true"
                       [id]="'unique-input-3'"
@@ -448,7 +445,7 @@ class FormContentExampleComponent implements OnInit {
       FudisValidators.email('Input must be an email address.'),
       FudisValidators.minLength(5, 'Email should be at least 5 characters.'),
     ]),
-    // importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
+    importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
     // courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
     // startDate: new FormControl<Date | null>(
     //   null,

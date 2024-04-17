@@ -3,10 +3,12 @@ import {
   ChangeDetectorRef,
   Component,
   ContentChild,
+  Host,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
+  Optional,
   ViewEncapsulation,
   effect,
 } from '@angular/core';
@@ -30,6 +32,7 @@ import {
   hasRequiredValidator,
 } from '../../../../utilities/form/getValidators';
 import { FudisValidatorFn } from '../../../../utilities/form/validators';
+import { FormComponent } from '../../form/form.component';
 
 @Component({
   selector: 'fudis-datepicker',
@@ -50,6 +53,7 @@ export class DatepickerComponent
   implements OnInit, OnChanges, AfterViewInit, OnDestroy
 {
   constructor(
+    @Host() @Optional() protected _parentForm: FormComponent | null,
     private _datePickerConfigService: FudisTranslationService,
     private _adapter: DateAdapter<Date>,
     private _datepickerIntl: MatDatepickerIntl,
