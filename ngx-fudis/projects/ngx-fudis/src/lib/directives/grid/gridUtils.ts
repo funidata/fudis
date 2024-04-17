@@ -1,8 +1,4 @@
-import {
-  FudisGridProperties,
-  FudisGridFormInputWidth,
-  FudisGridPropertyCollection,
-} from '../../types/grid';
+import { FudisGridProperties, FudisGridPropertyCollection } from '../../types/grid';
 import { convertToRemValue } from '../../utilities/rem-converter';
 
 /**
@@ -34,16 +30,20 @@ export const getGridClasses = (values: FudisGridProperties): string => {
 };
 
 export const replaceFormInputWidthsToRem = (value: string): string => {
-  const inputXs: FudisGridFormInputWidth = 'inputXs';
-  const inputSm: FudisGridFormInputWidth = 'inputSm';
-  const inputMd: FudisGridFormInputWidth = 'inputMd';
-  const inputLg: FudisGridFormInputWidth = 'inputLg';
+  const convertMap: { [key: string]: string } = {
+    inputXs: convertToRemValue(4),
+    inputSm: convertToRemValue(10),
+    inputMd: convertToRemValue(14),
+    inputLg: convertToRemValue(23),
+  };
 
-  return value
-    .replaceAll(inputXs, convertToRemValue(4))
-    .replaceAll(inputSm, convertToRemValue(10))
-    .replaceAll(inputMd, convertToRemValue(14))
-    .replaceAll(inputLg, convertToRemValue(23));
+  const valueArray = value.split(' ');
+
+  valueArray.forEach((value, index) => {
+    valueArray[index] = convertMap?.[value] ? convertMap[value] : value;
+  });
+
+  return valueArray.join(' ');
 };
 
 /**
@@ -59,7 +59,18 @@ export const getGridCssValue = (value: number | string, isGridItem?: boolean): s
   if (value === 'stretch' && isGridItem) {
     return '1/-1';
   }
-  return replaceFormInputWidthsToRem(value);
+
+  if (
+    typeof value === 'string' &&
+    value !== 'start' &&
+    value !== 'stretch' &&
+    value !== 'end' &&
+    value !== 'center'
+  ) {
+    return replaceFormInputWidthsToRem(value);
+  }
+
+  return value;
 };
 
 /**
