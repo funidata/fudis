@@ -135,7 +135,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 
   ngOnInit(): void {
     this._setSectionId();
-    
+
     this._headingId = `${this.id}-heading`;
     this._classList = this._getClasses();
     this._title = this.title;
