@@ -99,7 +99,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   @Input() marginBottom: FudisSpacing = 'none';
 
   /**
-   * Custom CSS classes for Grid element
+   * Custom CSS classes
    */
   @Input() classes: string[];
 
@@ -156,6 +156,9 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
     this._removeFromErrorSummary();
   }
 
+  /**
+   * Send error object to Error Summary Service
+   */
   private _addToErrorSummary(): void {
     if (this.errorSummaryBreadcrumb && this._parentForm) {
       this._errorSummaryInfo = {
@@ -168,12 +171,18 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
     }
   }
 
+  /**
+   * Remove error object from Error Summary Service
+   */
   private _removeFromErrorSummary(): void {
     if (this._errorSummaryInfoSent) {
       this._errorSummaryService.removeSection(this._errorSummaryInfo);
     }
   }
 
+  /**
+   * Set main CSS class with possible custom classes
+   */
   private _getClasses(): string[] {
     const cssClasses = this.classes ?? [];
 
@@ -182,6 +191,9 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
     return cssClasses;
   }
 
+  /**
+   * Generate id with Id Service
+   */
   private _setSectionId(): void {
     if (this.id) {
       this._idService.addNewId('section', this.id);
