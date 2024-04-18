@@ -59,7 +59,7 @@ import { excludeAllRegex } from '../../../utilities/storybook';
                   [helpText]="'So that students can ask for more time on their homework.'"
                 />
               </fudis-grid>
-              <fudis-grid [columns]="3">
+              <fudis-grid [columns]="{ xs: 1, md: 3 }">
                 <!-- <fudis-radio-button-group
               [label]="'Course type'"
               [id]="'radio-button-group-1'"
