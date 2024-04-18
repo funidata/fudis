@@ -1,0 +1,29 @@
+import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import { SectionComponent } from "./section.component.ts";
+import * as SectionStories from "./section.stories.ts";
+import { sectionExclude } from "../../utilities/storybook.ts";
+
+<Meta title="Components/Section" />
+
+# Section
+
+Section is a semantic wrapper component for dividing elements into sections.
+
+## Usage Guidelines
+
+
+
+## Example
+
+<Canvas of={SectionStories.Example}></Canvas>
+
+## Accessibility
+
+## Related components
+
+- [Button](/docs/components-button--documentation)
+- [Heading](/docs/components-typography-heading--documentation)
+
+## Properties
+
+<ArgTypes of={SectionComponent} />
