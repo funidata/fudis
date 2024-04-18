@@ -41,39 +41,41 @@ import { excludeAllRegex } from '../../../utilities/storybook';
       <fudis-button fudisFormSubmit [formValid]="formExample.valid" [label]="'Submit'" />
     </ng-template>
     <ng-template fudisContent type="form">
-      <fudis-fieldset [label]="'Form information'">
-        <ng-template fudisContent type="fieldset">
-          <fudis-grid [columns]="{ xs: 1, md: 2 }">
-            <fudis-text-input
-              [id]="'unique-input-3'"
-              [control]="formExample.controls['teacher']"
-              [label]="'Responsible teacher'"
-              [helpText]="'Someone has to be responsible for this.'"
-            />
-            <fudis-text-input
-              [id]="'unique-input-4'"
-              [control]="formExample.controls['email']"
-              [label]="'Contact email'"
-              [helpText]="'So that students can ask for more time on their homework.'"
-            />
-          </fudis-grid>
-          <fudis-grid [columns]="3">
-            <!-- <fudis-radio-button-group
+      <fudis-section [title]="'Section title'" [errorSummaryBreadcrumb]="true">
+        <ng-template fudisContent [type]="'section'">
+          <fudis-fieldset [label]="'Fieldset legend'">
+            <ng-template fudisContent type="fieldset">
+              <fudis-grid [columns]="{ xs: 1, md: 2 }">
+                <fudis-text-input
+                  [id]="'unique-input-3'"
+                  [control]="formExample.controls['teacher']"
+                  [label]="'Responsible teacher'"
+                  [helpText]="'Someone has to be responsible for this.'"
+                />
+                <fudis-text-input
+                  [id]="'unique-input-4'"
+                  [control]="formExample.controls['email']"
+                  [label]="'Contact email'"
+                  [helpText]="'So that students can ask for more time on their homework.'"
+                />
+              </fudis-grid>
+              <fudis-grid [columns]="3">
+                <!-- <fudis-radio-button-group
               [label]="'Course type'"
               [id]="'radio-button-group-1'"
               [options]="courseTypeOptions"
               [control]="formExample.controls['courseType']"
             /> -->
-            <fudis-checkbox-group
-              [formGroup]="formExample.controls.courseBooks"
-              [label]="'Course books'"
-              [helpText]="'Select 1-2 coursebooks'"
-            >
-              <fudis-checkbox [controlName]="'first'" [label]="'Heir to the Empire'" />
-              <fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
-              <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
-            </fudis-checkbox-group>
-            <!-- <fudis-datepicker
+                <fudis-checkbox-group
+                  [formGroup]="formExample.controls.courseBooks"
+                  [label]="'Course books'"
+                  [helpText]="'Select 1-2 coursebooks'"
+                >
+                  <fudis-checkbox [controlName]="'first'" [label]="'Heir to the Empire'" />
+                  <fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
+                  <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
+                </fudis-checkbox-group>
+                <!-- <fudis-datepicker
               [label]="'Start date'"
               [id]="'date-picker-1'"
               [size]="'md'"
@@ -81,9 +83,11 @@ import { excludeAllRegex } from '../../../utilities/storybook';
               [control]="formExample.controls['importantDate']"
             >
             </fudis-datepicker> -->
-          </fudis-grid>
+              </fudis-grid>
+            </ng-template>
+          </fudis-fieldset>
         </ng-template>
-      </fudis-fieldset>
+      </fudis-section>
     </ng-template>
   </fudis-form>`,
 })
