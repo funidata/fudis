@@ -16,7 +16,7 @@ import { ContentDirective } from '../../directives/content-projection/content/co
 import { FudisGridWidth, FudisGridAlign } from '../../types/grid';
 
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
-import { FudisSpacing } from '../../types/miscellaneous';
+import { FudisComponentChanges, FudisSpacing } from '../../types/miscellaneous';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisFormErrorSummarySection } from '../../types/forms';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
@@ -135,20 +135,23 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 
   ngOnInit(): void {
     this._setSectionId();
-
+    
     this._headingId = `${this.id}-heading`;
-
     this._classList = this._getClasses();
     this._title = this.title;
     this._addToErrorSummary();
   }
 
-  ngOnChanges(): void {
-    this._classList = this._getClasses();
+  ngOnChanges(changes: FudisComponentChanges<SectionComponent>): void {
+    if (changes.classes?.currentValue) {
+      this._classList = this._getClasses();
+    }
 
-    if (this.title !== this._title && this.id) {
-      this._title = this.title;
-      this._addToErrorSummary();
+    if (changes.title?.currentValue) {
+      if (this.title !== this._title && this.id) {
+        this._title = this.title;
+        this._addToErrorSummary();
+      }
     }
   }
 
