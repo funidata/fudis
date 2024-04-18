@@ -22,7 +22,6 @@ import { FudisFormErrorSummarySection } from '../../types/forms';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { FormComponent } from '../form/form/form.component';
 
-// TODO: Write Stroybook documentation and add missing internal documentation for the functions
 @Component({
   selector: 'fudis-section',
   templateUrl: './section.component.html',
@@ -38,10 +37,19 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
     super();
   }
 
+  /**
+   * Content projection for notifications inside Section
+   */
   @ContentChild(NotificationsDirective) notifications: NotificationsDirective | null;
 
+  /**
+   * Content projection for Section content
+   */
   @ContentChild(ContentDirective) content: ContentDirective | null;
 
+  /**
+   * Content projection for Section heading
+   */
   @ContentChild(ActionsDirective) headerActions: ActionsDirective | null;
 
   /**
