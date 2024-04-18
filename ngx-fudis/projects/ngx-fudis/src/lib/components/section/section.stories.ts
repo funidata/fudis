@@ -39,17 +39,17 @@ const Template: StoryFn<SectionComponent> = (args: SectionComponent) => ({
     [marginBottom]="marginBottom"
     [width]="width"
   >
-    <ng-template fudisActions type="section">
+    <ng-template fudisActions [type]="'section'">
       <fudis-button [label]="'Some action'"></fudis-button>
       <fudis-button [label]="'Another action'"></fudis-button>
     </ng-template>
-    <ng-template fudisNotifications type="section">
+    <ng-template fudisNotifications [type]="'section'">
       <fudis-notification>This is notification</fudis-notification>
     </ng-template>
-    <ng-template fudisContent type="section">
+    <ng-template fudisContent [type]="'section'">
       <fudis-expandable [title]="'Expandable inside section'">
         <ng-template fudisContent type="expandable">
-          <fudis-body-text fudis-body-text>Some content inside expandable</fudis-body-text>
+          <fudis-body-text>Some content inside expandable</fudis-body-text>
         </ng-template>
       </fudis-expandable>
       <fudis-body-text>More text content inside section</fudis-body-text>

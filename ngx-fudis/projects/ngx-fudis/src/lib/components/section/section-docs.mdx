@@ -1,4 +1,4 @@
-import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
+import { ArgTypes, Meta, Canvas, Source } from "@storybook/blocks";
 import { SectionComponent } from "./section.component.ts";
 import * as SectionStories from "./section.stories.ts";
 import { sectionExclude } from "../../utilities/storybook.ts";
@@ -7,11 +7,43 @@ import { sectionExclude } from "../../utilities/storybook.ts";
 
 # Section
 
-Section is a semantic wrapper component for dividing elements into sections.
+Section is a semantic wrapper component for grouping elements. Everything within one Section should be related.
 
 ## Usage Guidelines
 
+Section has two main areas: header and content. Inside header, addition to heading there can be notifications and buttons.
 
+### Header
+
+Each Section should be identified, therefore `title` is mandatory property which can be modified with `titleSize` and `titleLevel` properties. As in [Heading Component](/docs/components-typography-heading--documentation), size is visual and level is semantic adjustment.
+Heading can also include `tooltip` with all the [Tooltip](/docs/directives-tooltip--documentation) Inputs available.
+
+#### Notifications and Actions
+
+Notifications and buttons are added through `fudisNotifications` and `fudisActions` directives. Both notifications and buttons have fixed positions and cannot be altered.
+
+<Source
+  code={`<ng-template fudisActions [type]="'section'">
+  <fudis-button [label]="'Some action'"></fudis-button>
+</ng-template>
+<ng-template fudisNotifications [type]="'section'">
+  <fudis-notification>This is notification</fudis-notification>
+</ng-template>`}
+/>
+
+### Content
+
+The main content of the Section is added through `fudisContent` directive
+
+<Source
+  code={`<ng-template fudisContent [type]="'section'">
+  <fudis-body-text>Main content of the section</fudis-body-text>
+</ng-template>`}
+/>
+
+### Using With Form and Error Summary
+
+When using Section inside [Form](/docs/components-form-form--documentation) with [Error Summary](/docs/components-form-error-summary--documentation), set Section title to be visible in the Error Summary by setting `errorSummaryBreadcrumb` to `true`.
 
 ## Example
 
@@ -19,10 +51,15 @@ Section is a semantic wrapper component for dividing elements into sections.
 
 ## Accessibility
 
+- Section Component uses native `<section>` element
+- Section is linked to its content by aria-describedby
+
 ## Related components
 
 - [Button](/docs/components-button--documentation)
+- [Notification](/docs/components-notification--documentation)
 - [Heading](/docs/components-typography-heading--documentation)
+- [Tooltip](/docs/directives-tooltip--documentation)
 
 ## Properties
 
