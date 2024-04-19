@@ -151,14 +151,7 @@ export const expandableControlExclude: RegExp = excludeRegex([
 
 export const gridExampleExclude: RegExp = excludeRegex(['classes', 'serviceDefaults']);
 
-export const sectionExclude: RegExp = excludeRegex([
-  'content',
-  'headerActions',
-  'notifications',
-  'classes',
-  'errorSummaryBreadcrumb',
-  'id',
-]);
+export const sectionExclude: RegExp = excludeRegex(['classes', 'errorSummaryBreadcrumb', 'id']);
 
 export const selectCommonExclude: RegExp = excludeRegex([
   'control',

@@ -40,17 +40,17 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   /**
    * Content projection for notifications inside Section
    */
-  @ContentChild(NotificationsDirective) notifications: NotificationsDirective | null;
+  @ContentChild(NotificationsDirective) protected _notifications: NotificationsDirective | null;
 
   /**
    * Content projection for Section content
    */
-  @ContentChild(ContentDirective) content: ContentDirective | null;
+  @ContentChild(ContentDirective) protected _content: ContentDirective | null;
 
   /**
    * Content projection for Section heading
    */
-  @ContentChild(ActionsDirective) headerActions: ActionsDirective | null;
+  @ContentChild(ActionsDirective) protected _headerActions: ActionsDirective | null;
 
   /**
    * Section title
@@ -143,11 +143,11 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   }
 
   ngOnChanges(changes: FudisComponentChanges<SectionComponent>): void {
-    if (changes.classes?.currentValue) {
+    if (changes.classes?.currentValue !== changes.classes?.previousValue) {
       this._classList = this._getClasses();
     }
 
-    if (changes.title?.currentValue) {
+    if (changes.title?.currentValue !== changes.title?.previousValue) {
       if (this.title !== this._title && this.id) {
         this._title = this.title;
         this._addToErrorSummary();
