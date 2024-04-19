@@ -62,11 +62,7 @@ const Template: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
       [tooltipToggle]="tooltipToggle"
     ></fudis-datepicker>
     <fudis-body-text *ngIf="control.value"
-      >The date output as ISO string is: {{ control.value.toISOString() }}</fudis-body-text
-    >
-    <fudis-body-text *ngIf="control.value"
-      >The date output with Angular date pipe is: {{ control.value | date:'dd.MM.yyyy'
-      }}</fudis-body-text
+      >The date output as ISO string is: {{ control.value }}</fudis-body-text
     >
   `,
 });

@@ -38,7 +38,7 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
   /**
    * Template reference for input. Used in e. g. initialFocus
    */
-  @ViewChild('inputRef') protected _inputRef: ElementRef;
+  @ViewChild('inputRef') protected _inputRef: ElementRef<HTMLInputElement>;
 
   /**
    * Label for input.

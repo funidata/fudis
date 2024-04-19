@@ -12,9 +12,10 @@
     <input
       #inputRef
       [id]="id"
-      [formControl]="control"
       [matDatepicker]="picker"
-      (dateChange)="_calendarDateChanges()"
+      (blur)="_handleInputBlur()"
+      (keyup)="_handleKeyUp()"
+      (dateChange)="_calendarDateChanges($event.value)"
       [min]="_minDate"
       [max]="_maxDate"
       [readonly]="disabled"

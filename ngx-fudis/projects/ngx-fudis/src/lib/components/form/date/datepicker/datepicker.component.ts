@@ -138,8 +138,28 @@ export class DatepickerComponent
   /**
    * When clicking date in Calendar, it updates control's value, but do not refresh its validity automatically.
    */
-  protected _calendarDateChanges(): void {
+  protected _calendarDateChanges(date: Date): void {
+    this.control.patchValue(date);
+
     this.control.updateValueAndValidity();
+  }
+
+  protected _handleKeyUp(): void {
+    const currentInputValue = this._inputRef.nativeElement.value;
+
+    const parsedDate: Date | null = parseDate(currentInputValue);
+
+    if (parsedDate) {
+      console.log(parsedDate.toISOString());
+    }
+
+    this.control.patchValue(parsedDate);
+    this.control.updateValueAndValidity();
+  }
+
+  protected _handleInputBlur(): void {
+    this.control.markAsTouched();
+    this.handleBlur.emit();
   }
 
   ngOnInit(): void {
