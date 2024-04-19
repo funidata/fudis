@@ -3,7 +3,7 @@ import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SectionComponent } from './section.component';
 import docs from './section-docs.mdx';
-import { sectionExclude } from '../../utilities/storybook';
+import { excludeAllRegex, sectionExclude } from '../../utilities/storybook';
 
 export default {
   title: 'Components/Section',
@@ -25,7 +25,7 @@ export default {
 
 const html = String.raw;
 
-const Template: StoryFn<SectionComponent> = (args: SectionComponent) => ({
+const ExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent) => ({
   props: args,
   template: html`<fudis-section
     [title]="title"
@@ -47,7 +47,7 @@ const Template: StoryFn<SectionComponent> = (args: SectionComponent) => ({
       <fudis-notification>This is notification</fudis-notification>
     </ng-template>
     <ng-template fudisContent [type]="'section'">
-      <fudis-expandable [title]="'Expandable inside section'">
+      <fudis-expandable [title]="'Expandable inside section'" [closed]="false">
         <ng-template fudisContent type="expandable">
           <fudis-body-text>Some content inside expandable</fudis-body-text>
         </ng-template>
@@ -57,7 +57,7 @@ const Template: StoryFn<SectionComponent> = (args: SectionComponent) => ({
   </fudis-section> `,
 });
 
-export const Example = Template.bind({});
+export const Example = ExampleTemplate.bind({});
 Example.args = {
   title: 'This is title of section',
   titleLevel: 2,
@@ -74,5 +74,47 @@ Example.args = {
 Example.parameters = {
   controls: {
     exclude: sectionExclude,
+  },
+};
+
+const NestedExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent) => ({
+  props: args,
+  template: html`<fudis-section
+    [title]="'Parent Section'"
+    [titleSize]="'lg'"
+    [titleLevel]="2"
+    [width]="'md'"
+  >
+    // Empty Actions template, so that nested Actions will not be rendered to the parent!
+    <ng-template fudisActions [type]="'section'"></ng-template>
+    <ng-template fudisContent [type]="'section'">
+      <fudis-body-text>Parent Section content</fudis-body-text>
+      <fudis-body-text
+        >This Section has an empty fudisActions template tag to make sure that nested Section's
+        Actions is not rendered there.</fudis-body-text
+      >
+
+      <fudis-section
+        [title]="'Nested Section'"
+        [marginTop]="'sm'"
+        [titleSize]="'md'"
+        [titleLevel]="3"
+      >
+        <ng-template fudisActions [type]="'section'">
+          <fudis-button [label]="'Nested Action button'" />
+        </ng-template>
+        <ng-template fudisContent [type]="'section'">
+          <fudis-body-text>Nested Section content</fudis-body-text>
+        </ng-template>
+      </fudis-section>
+    </ng-template>
+  </fudis-section>`,
+});
+
+export const NestedExample = NestedExampleTemplate.bind({});
+
+NestedExample.parameters = {
+  controls: {
+    exclude: excludeAllRegex,
   },
 };
