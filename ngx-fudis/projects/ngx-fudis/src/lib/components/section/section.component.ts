@@ -16,13 +16,12 @@ import { ContentDirective } from '../../directives/content-projection/content/co
 import { FudisGridWidth, FudisGridAlign } from '../../types/grid';
 
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
-import { FudisSpacing } from '../../types/miscellaneous';
+import { FudisComponentChanges, FudisSpacing } from '../../types/miscellaneous';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisFormErrorSummarySection } from '../../types/forms';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { FormComponent } from '../form/form/form.component';
 
-// TODO: Write Stroybook documentation and add missing internal documentation for the functions
 @Component({
   selector: 'fudis-section',
   templateUrl: './section.component.html',
@@ -38,11 +37,20 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
     super();
   }
 
-  @ContentChild(NotificationsDirective) notifications: NotificationsDirective | null;
+  /**
+   * Content projection for notifications inside Section
+   */
+  @ContentChild(NotificationsDirective) protected _notifications: NotificationsDirective | null;
 
-  @ContentChild(ContentDirective) content: ContentDirective | null;
+  /**
+   * Content projection for Section content
+   */
+  @ContentChild(ContentDirective) protected _content: ContentDirective | null;
 
-  @ContentChild(ActionsDirective) headerActions: ActionsDirective | null;
+  /**
+   * Content projection for Section heading
+   */
+  @ContentChild(ActionsDirective) protected _headerActions: ActionsDirective | null;
 
   /**
    * Section title
@@ -91,7 +99,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   @Input() marginBottom: FudisSpacing = 'none';
 
   /**
-   * Custom CSS classes for Grid element
+   * Custom CSS classes
    */
   @Input() classes: string[];
 
@@ -111,11 +119,6 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   protected _classList: string[];
 
   /**
-   * Internal, separate title property to send to error summary service
-   */
-  protected _title: string;
-
-  /**
    * Object to send to error summary service
    */
   private _errorSummaryInfo: FudisFormErrorSummarySection;
@@ -129,17 +132,16 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
     this._setSectionId();
 
     this._headingId = `${this.id}-heading`;
-
     this._classList = this._getClasses();
-    this._title = this.title;
     this._addToErrorSummary();
   }
 
-  ngOnChanges(): void {
-    this._classList = this._getClasses();
+  ngOnChanges(changes: FudisComponentChanges<SectionComponent>): void {
+    if (changes.classes?.currentValue !== changes.classes?.previousValue) {
+      this._classList = this._getClasses();
+    }
 
-    if (this.title !== this._title && this.id) {
-      this._title = this.title;
+    if (changes.title?.currentValue !== changes.title?.previousValue && this.id) {
       this._addToErrorSummary();
     }
   }
@@ -148,24 +150,33 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
     this._removeFromErrorSummary();
   }
 
+  /**
+   * Send error object to Error Summary Service
+   */
   private _addToErrorSummary(): void {
     if (this.errorSummaryBreadcrumb && this._parentForm) {
       this._errorSummaryInfo = {
         id: this.id,
         formId: this._parentForm.id,
-        title: this._title,
+        title: this.title,
       };
       this._errorSummaryService.addSection(this._errorSummaryInfo);
       this._errorSummaryInfoSent = true;
     }
   }
 
+  /**
+   * Remove error object from Error Summary Service
+   */
   private _removeFromErrorSummary(): void {
     if (this._errorSummaryInfoSent) {
       this._errorSummaryService.removeSection(this._errorSummaryInfo);
     }
   }
 
+  /**
+   * Set main CSS class with possible custom classes
+   */
   private _getClasses(): string[] {
     const cssClasses = this.classes ?? [];
 
@@ -174,6 +185,9 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
     return cssClasses;
   }
 
+  /**
+   * Generate id with Id Service
+   */
   private _setSectionId(): void {
     if (this.id) {
       this._idService.addNewId('section', this.id);

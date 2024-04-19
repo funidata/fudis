@@ -237,9 +237,22 @@ class ExampleWithMultipleFormsComponent {
       [errorSummaryHelpText]="errorSummaryHelpText"
       [errorSummaryVisible]="errorSummaryVisible"
     >
-      <!-- <ng-template fudisHeader>
-        <fudis-description-list [columns]="1" [variant]="'compact'" [data]="formHeaderDl" />
-      </ng-template> -->
+      <ng-template fudisHeader>
+        <fudis-dl [columns]="1" [variant]="'compact'">
+          <fudis-dl-item>
+            <fudis-dt [textContent]="'Importatnt person'" />
+            <fudis-dd [textContent]="'Admiral Thrawn'" />
+          </fudis-dl-item>
+          <fudis-dl-item>
+            <fudis-dt [textContent]="'Key'" />
+            <fudis-dd [textContent]="'THX-1138'" />
+          </fudis-dl-item>
+          <fudis-dl-item>
+            <fudis-dt [textContent]="'Another important person'" />
+            <fudis-dd [textContent]="'Mara Jase'" />
+          </fudis-dl-item>
+        </fudis-dl>
+      </ng-template>
       <ng-template fudisActions [type]="'form'">
         <fudis-button [label]="'Previous step'" [icon]="'back'" [variant]="'tertiary'" />
         <fudis-button
@@ -250,16 +263,19 @@ class ExampleWithMultipleFormsComponent {
         />
       </ng-template>
       <ng-template fudisContent [type]="'form'">
-        <!-- <fudis-section [title]="'Main section'">
-          <ng-template fudisContent [type]="'section'"> -->
-        <fudis-expandable
-          (closedChange)="handleClosedOutput($event)"
-          [title]="'Expandable section 1'"
-          [closed]="_closed"
-        >
-          <ng-template fudisContent [type]="'expandable'">
-            <fudis-grid>
-              <fudis-fieldset
+        <fudis-section [title]="'Main section'" [errorSummaryBreadcrumb]="true">
+          <ng-template fudisNotifications [type]="'section'">
+            <fudis-notification>This is notification for the section</fudis-notification>
+          </ng-template>
+          <ng-template fudisContent [type]="'section'">
+            <fudis-expandable
+              (closedChange)="handleClosedOutput($event)"
+              [title]="'Expandable section 1'"
+              [closed]="_closed"
+            >
+              <ng-template fudisContent [type]="'expandable'">
+                <fudis-grid>
+                  <!-- <fudis-fieldset
                 [label]="'Basic info'"
                 [helpText]="'Some generic info about this course'"
                 [id]="fieldsetId"
@@ -268,8 +284,8 @@ class ExampleWithMultipleFormsComponent {
                   <fudis-notification> This is notification for a fieldset. </fudis-notification>
                 </ng-template>
                 <ng-template fudisContent [type]="'fieldset'">
-                  <fudis-grid [columns]="{ lg: 'inputMd inputSm' }">
-                    <!-- <fudis-input-with-language-options
+                  <fudis-grid [columns]="{ lg: 'inputLg inputLg' }"> -->
+                  <!-- <fudis-input-with-language-options
                           [id]="'unique-input-1'"
                           [options]="languageOptions"
                           [formGroup]="formExample.controls['name']"
@@ -287,7 +303,7 @@ class ExampleWithMultipleFormsComponent {
                             "
                           />
                         </fudis-input-with-language-options> -->
-                    <!-- <fudis-input-with-language-options
+                  <!-- <fudis-input-with-language-options
                           [variant]="'text-area'"
                           [id]="'unique-input-2'"
                           [options]="languageOptions"
@@ -297,63 +313,61 @@ class ExampleWithMultipleFormsComponent {
                             'So that students know what they are getting into. Provide description in all languages.'
                           "
                         /> -->
-                    <!-- <fudis-radio-button-group
+                  <!-- <fudis-radio-button-group
                           [label]="'Course type'"
                           [id]="'radio-button-group-1'"
                           [options]="courseTypeOptions"
                           [control]="formExample.controls['courseType']"
                         /> -->
-                    <fudis-checkbox-group
-                      [formGroup]="formExample.controls.courseBooks"
-                      [label]="'Course books'"
-                      [helpText]="'Select 1-2 coursebooks'"
-                    >
-                      <fudis-checkbox [controlName]="'first'" [label]="'Heir to the Empire'" />
-                      <fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
-                      <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
-                    </fudis-checkbox-group>
-                    <fudis-datepicker
-                      [label]="'Start date'"
-                      [helpText]="'You have to start from somewhere'"
-                      [control]="formExample.controls['importantDate']"
-                    >
-                      <fudis-error-message
-                        *ngIf="
-                          formExample.controls['importantDate'].value?.getTime() !== releaseDate
-                        "
-                        [message]="'Wrong date chosen. 1.5.1991 would be great!'"
-                      />
-                    </fudis-datepicker>
-                  </fudis-grid>
-                </ng-template>
-              </fudis-fieldset>
-              <fudis-fieldset
-                [label]="'Tearcher info'"
-                [tooltip]="'Quite many fields are required.'"
-              >
-                <ng-template fudisContent [type]="'fieldset'">
-                  <fudis-grid [columns]="{ lg: 'inputMd inputMd' }">
-                    <fudis-text-input
-                      [initialFocus]="true"
-                      [id]="'unique-input-3'"
-                      [control]="formExample.controls['teacher']"
-                      [label]="'Responsible teacher'"
-                      [helpText]="'Someone has to be responsible for this.'"
-                    >
-                    </fudis-text-input>
-                    <fudis-text-input
-                      [id]="'unique-input-4'"
-                      [control]="formExample.controls['email']"
-                      [label]="'Contact email'"
-                      [helpText]="'So that students can ask for more time on their homework.'"
+                  <fudis-checkbox-group
+                    [formGroup]="formExample.controls.courseBooks"
+                    [label]="'Course books'"
+                    [helpText]="'Select 1-2 coursebooks'"
+                  >
+                    <fudis-checkbox [controlName]="'first'" [label]="'Heir to the Empire'" />
+                    <fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
+                    <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
+                  </fudis-checkbox-group>
+                  <fudis-datepicker
+                    [label]="'Start date'"
+                    [helpText]="'You have to start from somewhere'"
+                    [control]="formExample.controls['importantDate']"
+                  >
+                    <fudis-error-message
+                      *ngIf="formExample.controls['importantDate'].value?.getTime() !== releaseDate"
+                      [message]="'Wrong date chosen. 1.5.1991 would be great!'"
                     />
-                  </fudis-grid>
+                  </fudis-datepicker>
+                  <!-- </fudis-grid>
                 </ng-template>
-              </fudis-fieldset>
-            </fudis-grid>
-          </ng-template>
-        </fudis-expandable>
-        <!-- <fudis-expandable
+              </fudis-fieldset> -->
+                  <fudis-fieldset
+                    [label]="'Tearcher info'"
+                    [tooltip]="'Quite many fields are required.'"
+                  >
+                    <ng-template fudisContent [type]="'fieldset'">
+                      <fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
+                        <fudis-text-input
+                          [initialFocus]="true"
+                          [id]="'unique-input-3'"
+                          [control]="formExample.controls['teacher']"
+                          [label]="'Responsible teacher'"
+                          [helpText]="'Someone has to be responsible for this.'"
+                        >
+                        </fudis-text-input>
+                        <fudis-text-input
+                          [id]="'unique-input-4'"
+                          [control]="formExample.controls['email']"
+                          [label]="'Contact email'"
+                          [helpText]="'So that students can ask for more time on their homework.'"
+                        />
+                      </fudis-grid>
+                    </ng-template>
+                  </fudis-fieldset>
+                </fudis-grid>
+              </ng-template>
+            </fudis-expandable>
+            <!-- <fudis-expandable
               [closed]="_closed"
               [title]="'Expandable section 2'"
               [errorSummaryBreadcrumb]="true"
@@ -369,8 +383,8 @@ class ExampleWithMultipleFormsComponent {
                 </fudis-fieldset>
               </ng-template>
             </fudis-expandable> -->
-        <!-- </ng-template>
-        </fudis-section> -->
+          </ng-template>
+        </fudis-section>
       </ng-template>
     </fudis-form>
   `,
@@ -394,12 +408,6 @@ class FormContentExampleComponent implements OnInit {
   releaseDate: number = new Date(1991, 4, 1).getTime();
   firstLoad: boolean = true;
   fieldsetId = 'first-fieldset-id';
-
-  formHeaderDl = [
-    { key: 'Important person', value: 'Admiral Thrawn' },
-    { key: 'Key', value: 'THX-1138' },
-    { key: 'Another important person', value: 'Mara Jade' },
-  ];
 
   formExample = new FormGroup({
     // Expose when InputWithLanguageOptions is exposed to public API

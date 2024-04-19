@@ -212,7 +212,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
    */
   private _getClasses(): string[] {
     if (this.disabled) {
-      this._iconColor = 'default';
+      this._iconColor = 'gray-dark';
     } else if (this.variant === 'primary') {
       this._iconColor = 'white';
     } else if (this.variant === 'secondary' || this.variant === 'tertiary') {

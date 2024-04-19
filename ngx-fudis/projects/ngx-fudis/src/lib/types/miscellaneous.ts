@@ -42,13 +42,17 @@ export type FudisDialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'initial';
 
 export type FudisExpandableType = 'regular' | 'lite';
 
-export type FudisSpacing = 'none' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+export const fudisSpacingArray = ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
+
+export type FudisSpacing = (typeof fudisSpacingArray)[number];
 
 export type FudisNotification = 'warning' | 'danger' | 'success' | 'info';
 
 export type FudisTooltipPosition = 'left' | 'right' | 'above' | 'below';
 
-export type FudisTextAlign = 'left' | 'right' | 'center';
+export const fudisTextAlignArray = ['left', 'right', 'center'] as const;
+
+export type FudisTextAlign = (typeof fudisTextAlignArray)[number];
 
 export type FudisLanguageAbbr = 'fi' | 'sv' | 'en';
 
@@ -150,8 +154,8 @@ export interface FudisTranslationLanguageBadgeAriaLabel {
  * So T[P] translates to e.g. HeadingComponent['level'] --> HeadingComponent.level --> values from 1-6
  */
 type FudisComponentChange<T, P extends keyof T> = {
-  previousValue: T[P];
-  currentValue: T[P];
+  previousValue: T[P] | undefined;
+  currentValue: T[P] | undefined;
   firstChange: boolean;
 };
 

@@ -58,19 +58,19 @@
           <span class="fudis-fieldset__legend__help-text">{{ helpText }}</span>
         </ng-container>
       </div>
-      <ng-container *ngIf="_headerActions && _headerActions?.type === 'fieldset'">
+      <ng-container *ngIf="_headerActions?.type === 'fieldset'">
         <div class="fudis-fieldset__legend__actions">
           <ng-container *ngTemplateOutlet="_headerActions!.templateRef" />
         </div>
       </ng-container>
     </div>
-    <ng-container *ngIf="_notifications && _notifications?.type === 'fieldset'">
+    <ng-container *ngIf="_notifications?.type === 'fieldset'">
       <div class="fudis-fieldset__legend__notifications">
         <ng-container *ngTemplateOutlet="_notifications!.templateRef" />
       </div>
     </ng-container>
   </legend>
-  <ng-container *ngIf="_content && _content?.type === 'fieldset'">
+  <ng-container *ngIf="_content?.type === 'fieldset'">
     <ng-container *ngTemplateOutlet="_content!.templateRef" />
   </ng-container>
 </fieldset>

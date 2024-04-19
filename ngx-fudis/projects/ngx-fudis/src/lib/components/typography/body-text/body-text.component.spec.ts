@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { BodyTextComponent } from './body-text.component';
 import { getElement, sortClasses } from '../../../utilities/tests/utilities';
+import { fudisBodyTextArray } from '../../../types/typography';
 
 describe('BodyTextComponent', () => {
   let component: BodyTextComponent;
@@ -25,51 +26,19 @@ describe('BodyTextComponent', () => {
 
   //TODO: Write test for host class
   describe('CSS classes', () => {
-    // TODO: Refactor to use helper function to test size input
     it('should change CSS classes according to the given body-text size', () => {
-      const element = getElement(fixture, '.fudis-body-text');
+      fudisBodyTextArray.forEach((size) => {
+        component.size = size;
+        fixture.detectChanges();
 
-      expect(sortClasses(element.className)).toEqual(
-        sortClasses(
-          'fudis-body-text fudis-body-text__default fudis-body-text__left fudis-body-text__md-regular',
-        ),
-      );
+        const element = getElement(fixture, '.fudis-body-text');
 
-      component.size = 'lg-light';
-      fixture.detectChanges();
-
-      expect(sortClasses(element.className)).toEqual(
-        sortClasses(
-          'fudis-body-text fudis-body-text__default fudis-body-text__left fudis-body-text__lg-light',
-        ),
-      );
-
-      component.size = 'lg-regular';
-      fixture.detectChanges();
-
-      expect(sortClasses(element.className)).toEqual(
-        sortClasses(
-          'fudis-body-text fudis-body-text__default fudis-body-text__left fudis-body-text__lg-regular',
-        ),
-      );
-
-      component.size = 'md-light';
-      fixture.detectChanges();
-
-      expect(sortClasses(element.className)).toEqual(
-        sortClasses(
-          'fudis-body-text fudis-body-text__default fudis-body-text__left fudis-body-text__md-light',
-        ),
-      );
-
-      component.size = 'sm-regular';
-      fixture.detectChanges();
-
-      expect(sortClasses(element.className)).toEqual(
-        sortClasses(
-          'fudis-body-text fudis-body-text__default fudis-body-text__left fudis-body-text__sm-regular',
-        ),
-      );
+        expect(sortClasses(element.className)).toEqual(
+          sortClasses(
+            `fudis-body-text fudis-body-text__default fudis-body-text__left fudis-body-text__${size}`,
+          ),
+        );
+      });
     });
 
     // TODO: Refactor to use helper function to test color input
