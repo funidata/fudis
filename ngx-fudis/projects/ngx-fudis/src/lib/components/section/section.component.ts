@@ -119,11 +119,6 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   protected _classList: string[];
 
   /**
-   * Internal, separate title property to send to error summary service
-   */
-  protected _title: string;
-
-  /**
    * Object to send to error summary service
    */
   private _errorSummaryInfo: FudisFormErrorSummarySection;
@@ -138,7 +133,6 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 
     this._headingId = `${this.id}-heading`;
     this._classList = this._getClasses();
-    this._title = this.title;
     this._addToErrorSummary();
   }
 
@@ -147,11 +141,8 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
       this._classList = this._getClasses();
     }
 
-    if (changes.title?.currentValue !== changes.title?.previousValue) {
-      if (this.title !== this._title && this.id) {
-        this._title = this.title;
-        this._addToErrorSummary();
-      }
+    if (changes.title?.currentValue !== changes.title?.previousValue && this.id) {
+      this._addToErrorSummary();
     }
   }
 
@@ -167,7 +158,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
       this._errorSummaryInfo = {
         id: this.id,
         formId: this._parentForm.id,
-        title: this._title,
+        title: this.title,
       };
       this._errorSummaryService.addSection(this._errorSummaryInfo);
       this._errorSummaryInfoSent = true;
