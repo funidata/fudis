@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SectionComponent } from './section.component';
 import docs from './section-docs.mdx';
 import { excludeAllRegex, sectionExclude } from '../../utilities/storybook';
+import { fudisHeadingLevelArray, fudisHeadingSizeArray } from '../../types/typography';
 
 export default {
   title: 'Components/Section',
@@ -19,6 +20,16 @@ export default {
     },
     controls: {
       sectionExclude,
+    },
+  },
+  argTypes: {
+    titleLevel: {
+      options: fudisHeadingLevelArray,
+      control: { type: 'select' },
+    },
+    titleSize: {
+      options: fudisHeadingSizeArray,
+      control: { type: 'select' },
     },
   },
 } as Meta;
@@ -97,7 +108,7 @@ const NestedExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent
       <fudis-section
         [title]="'Nested Section'"
         [marginTop]="'sm'"
-        [titleSize]="'md'"
+        [titleSize]="'sm'"
         [titleLevel]="3"
       >
         <ng-template fudisActions [type]="'section'">
