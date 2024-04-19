@@ -3,8 +3,7 @@ import test, { expect } from "@playwright/test";
 test("button default", async ({ page }) => {
   await page.goto("/iframe.html?args=&id=components-button--all-variants&viewMode=story");
   await expect(page.getByTestId("fudis-button-1")).toBeVisible();
-  await expect(page).toHaveScreenshot("all-variants.png");
-
+  await expect(page).toHaveScreenshot({ fullPage: true });
   await page.getByTestId("fudis-button-1").focus();
   await expect(page).toHaveScreenshot("focus-primary.png");
   await page.getByTestId("fudis-button-2").focus();
