@@ -1,4 +1,4 @@
-export const fudisIconArray: string[] = [
+export const fudisIconArray = [
   'achievement',
   'achievement-small',
   'alert',
@@ -89,11 +89,12 @@ export const fudisIconArray: string[] = [
   'waiting-decline',
   'zoom-in',
   'zoom-out',
-];
+] as const;
 
 export type FudisIcon = (typeof fudisIconArray)[number];
 
-export const fudisIconColorArray: string[] = [
+export const fudisIconColorArray = [
+  'default',
   'yellow',
   'red',
   'gray-dark',
@@ -102,7 +103,7 @@ export const fudisIconColorArray: string[] = [
   'primary-dark',
   'green',
   'white',
-];
+] as const;
 
 export type FudisIconColor = (typeof fudisIconColorArray)[number];
 

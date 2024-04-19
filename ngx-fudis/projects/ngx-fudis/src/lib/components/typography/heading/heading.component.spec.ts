@@ -1,8 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { HeadingComponent } from './heading.component';
-import { FudisHeadingSize, FudisHeadingLevel } from '../../../types/typography';
-import { FudisTextAlign, FudisSpacing } from '../../../types/miscellaneous';
+import {
+  FudisHeadingSize,
+  FudisHeadingLevel,
+  fudisHeadingLevelArray,
+  fudisHeadingSizeArray,
+} from '../../../types/typography';
+import {
+  FudisTextAlign,
+  FudisSpacing,
+  fudisSpacingArray,
+  fudisTextAlignArray,
+} from '../../../types/miscellaneous';
 
 describe('HeadingComponent', () => {
   let component: HeadingComponent;
@@ -21,11 +31,11 @@ describe('HeadingComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HeadingComponent);
     component = fixture.componentInstance;
+    component.level = 1;
     fixture.detectChanges();
   });
 
   function getHeading(level: FudisHeadingLevel): HTMLElement {
-    fixture.detectChanges();
     return fixture.debugElement.nativeElement.querySelector(`h${level}`) as HTMLElement;
   }
 
@@ -41,11 +51,41 @@ describe('HeadingComponent', () => {
     marginBottom: FudisSpacing,
     level: FudisHeadingLevel,
   ): void {
+    const sizeBefore = component.size;
+    const marginBefore = component.marginBottom;
+    const levelBefore = component.level;
+    const alignBefore = component.align;
+
     component.size = size;
     component.marginBottom = marginBottom;
     component.level = level;
     component.align = align;
-    component.ngOnInit();
+
+    component.ngOnChanges({
+      size: {
+        previousValue: sizeBefore,
+        currentValue: size,
+        firstChange: false,
+      },
+      marginBottom: {
+        previousValue: marginBefore,
+        currentValue: marginBottom,
+        firstChange: false,
+      },
+      level: {
+        previousValue: levelBefore,
+        currentValue: level,
+        firstChange: false,
+      },
+      align: {
+        previousValue: alignBefore,
+        currentValue: align,
+        firstChange: false,
+      },
+    });
+
+    fixture.detectChanges();
+
     assertHeadingHasClasses(
       `fudis-heading fudis-heading__align__${align} fudis-heading__size__${size} fudis-mb-${marginBottom}`,
       level,
@@ -58,21 +98,62 @@ describe('HeadingComponent', () => {
 
   describe('CSS classes', () => {
     it('should have respective size, margin bottom and level values according to given Inputs', () => {
-      headingCheck('xxl', 'center', 'xxl', 1);
-      headingCheck('xl', 'right', 'xl', 2);
-      headingCheck('lg', 'left', 'lg', 3);
-      headingCheck('md', 'center', 'md', 4);
-      headingCheck('sm', 'right', 'sm', 5);
-      headingCheck('xs', 'left', 'xs', 5);
-      headingCheck('xxs', 'center', 'xxs', 6);
-      headingCheck('xxs', 'right', 'none', 6);
+      fudisHeadingLevelArray.forEach((level) => {
+        fudisHeadingSizeArray.forEach((size) => {
+          fudisTextAlignArray.forEach((alignment) => {
+            fudisSpacingArray.forEach((spacing) => {
+              headingCheck(size, alignment, spacing, level);
+            });
+          });
+        });
+      });
     });
-  });
 
-  it('should have default classes', () => {
-    assertHeadingHasClasses(
-      'fudis-heading fudis-heading__align__left fudis-heading__size__lg fudis-mb-xs',
-      6,
-    );
+    it('should have respective default size and margin bottom defined by the level', () => {
+      fudisHeadingLevelArray.forEach((level) => {
+        const levelBefore = component.level;
+
+        component.level = level;
+
+        component.ngOnChanges({
+          level: {
+            currentValue: level,
+            previousValue: levelBefore,
+            firstChange: false,
+          },
+        });
+
+        fixture.detectChanges();
+
+        let sizeClass = '';
+
+        let marginBottom = '';
+
+        if (level == 1) {
+          sizeClass = 'xxl';
+        } else if (level == 2) {
+          sizeClass = 'xl';
+        } else if (level == 3) {
+          sizeClass = 'lg';
+        } else if (level == 4) {
+          sizeClass = 'md';
+        } else if (level == 5) {
+          sizeClass = 'sm';
+        } else if (level == 6) {
+          sizeClass = 'xs';
+        }
+
+        if (sizeClass === 'xxl' || sizeClass === 'xl') {
+          marginBottom = 'sm';
+        } else {
+          marginBottom = 'xs';
+        }
+
+        assertHeadingHasClasses(
+          `fudis-heading fudis-heading__align__left fudis-heading__size__${sizeClass} fudis-mb-${marginBottom}`,
+          level,
+        );
+      });
+    });
   });
 });

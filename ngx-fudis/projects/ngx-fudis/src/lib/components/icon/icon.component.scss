@@ -40,7 +40,8 @@
       fill: colors.$color-red;
     }
 
-    &__gray-dark {
+    &__gray-dark,
+    &__default {
       fill: colors.$color-gray-dark;
     }
 

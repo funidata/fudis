@@ -18,7 +18,12 @@ import { NotificationsDirective } from '../../directives/content-projection/noti
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { TooltipDirective } from '../../directives/tooltip/tooltip.directive';
 import { FudisTooltipPosition } from '../../types/miscellaneous';
-import { FudisHeadingLevel, FudisHeadingSize } from '../../types/typography';
+import {
+  FudisHeadingLevel,
+  FudisHeadingSize,
+  fudisHeadingLevelArray,
+  fudisHeadingSizeArray,
+} from '../../types/typography';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
 
 @Component({
@@ -88,7 +93,7 @@ describe('SectionComponent', () => {
   });
 
   function getSectionElement() {
-    const sectionEl = getElement(mockFixture, 'section') as HTMLElement;
+    const sectionEl = getElement(mockFixture, 'section') as HTMLDivElement;
     return sectionEl;
   }
 
@@ -96,7 +101,7 @@ describe('SectionComponent', () => {
     mockComponent.titleSize = size;
     mockFixture.detectChanges();
 
-    const sectionHeadingEl = getElement(mockFixture, '.fudis-heading') as HTMLElement;
+    const sectionHeadingEl = getElement(mockFixture, '.fudis-heading') as HTMLHeadingElement;
 
     expect(sectionHeadingEl.className).toContain(`fudis-heading__size__${size}`);
   }
@@ -154,22 +159,15 @@ describe('SectionComponent', () => {
     });
 
     it('should return correct title size', () => {
-      sectionTitleSizeCheck('xxs');
-      sectionTitleSizeCheck('xs');
-      sectionTitleSizeCheck('sm');
-      sectionTitleSizeCheck('md');
-      sectionTitleSizeCheck('lg');
-      sectionTitleSizeCheck('xl');
-      sectionTitleSizeCheck('xxl');
+      fudisHeadingSizeArray.forEach((size) => {
+        sectionTitleSizeCheck(size);
+      });
     });
 
     it('should return correct title level', () => {
-      sectionTitleLevelCheck(1);
-      sectionTitleLevelCheck(2);
-      sectionTitleLevelCheck(3);
-      sectionTitleLevelCheck(4);
-      sectionTitleLevelCheck(5);
-      sectionTitleLevelCheck(6);
+      fudisHeadingLevelArray.forEach((level) => {
+        sectionTitleLevelCheck(level);
+      });
     });
   });
 
