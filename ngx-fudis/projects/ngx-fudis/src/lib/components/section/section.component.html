@@ -31,7 +31,7 @@
           ></fudis-button>
         </ng-container>
       </div>
-      <ng-container *ngIf="_headerActions && _headerActions?.type === 'section'">
+      <ng-container *ngIf="_headerActions?.type === 'section'">
         <div class="fudis-section__header__actions">
           <ng-container *ngTemplateOutlet="_headerActions!.templateRef" />
         </div>
