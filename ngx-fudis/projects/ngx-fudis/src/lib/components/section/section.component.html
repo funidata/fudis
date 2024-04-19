@@ -1,8 +1,8 @@
 <section
-  [tabIndex]="-1"
-  [id]="id"
-  [attr.aria-describedby]="_headingId"
   fudisGrid
+  [id]="id"
+  [tabIndex]="-1"
+  [attr.aria-describedby]="_headingId"
   [align]="align"
   [width]="width"
   [classes]="_classList"
@@ -15,7 +15,7 @@
     <div class="fudis-section__header__container">
       <div class="fudis-section__header__heading">
         <fudis-heading [marginBottom]="'none'" [level]="titleLevel" [size]="titleSize">{{
-          _title
+          title
         }}</fudis-heading>
         <ng-container *ngIf="tooltip">
           <fudis-button
@@ -31,21 +31,21 @@
           ></fudis-button>
         </ng-container>
       </div>
-      <ng-container *ngIf="headerActions && headerActions?.type === 'section'">
+      <ng-container *ngIf="_headerActions?.type === 'section'">
         <div class="fudis-section__header__actions">
-          <ng-container *ngTemplateOutlet="headerActions!.templateRef" />
+          <ng-container *ngTemplateOutlet="_headerActions!.templateRef" />
         </div>
       </ng-container>
     </div>
-    <ng-container *ngIf="notifications?.type === 'section'">
+    <ng-container *ngIf="_notifications?.type === 'section'">
       <div class="fudis-section__notifications">
-        <ng-container *ngTemplateOutlet="notifications!.templateRef" />
+        <ng-container *ngTemplateOutlet="_notifications!.templateRef" />
       </div>
     </ng-container>
   </div>
   <div class="fudis-section__content">
-    <ng-container *ngIf="content?.type === 'section'">
-      <ng-container *ngTemplateOutlet="content!.templateRef" />
+    <ng-container *ngIf="_content?.type === 'section'">
+      <ng-container *ngTemplateOutlet="_content!.templateRef" />
     </ng-container>
   </div>
 </section>

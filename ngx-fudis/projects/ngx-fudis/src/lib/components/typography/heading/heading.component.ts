@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { FudisHeadingLevel, FudisHeadingSize } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
-import { FudisSpacing, FudisTextAlign } from '../../../types/miscellaneous';
+import { FudisComponentChanges, FudisSpacing, FudisTextAlign } from '../../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-heading',
@@ -65,8 +65,8 @@ export class HeadingComponent implements OnInit, OnChanges {
   /**
    * Get default marginBottom size
    */
-  private _getMarginBottom(): FudisSpacing {
-    if (this.size === 'xxl' || this.size === 'xl') {
+  private _getMarginBottom(size: FudisHeadingSize): FudisSpacing {
+    if (size === 'xxl' || size === 'xl') {
       return 'sm';
     }
     return 'xs';
@@ -98,27 +98,32 @@ export class HeadingComponent implements OnInit, OnChanges {
    * Set CSS classes for heading
    */
   private _setClasses(): void {
-    if (!this.size) {
-      this.size = this._getSize();
-    }
-    if (!this.marginBottom) {
-      this.marginBottom = this._getMarginBottom();
-    }
+    const calcSize = this.size || this._getSize();
+
+    const calcMarginBottom = this.marginBottom || this._getMarginBottom(calcSize);
 
     this._classList = [
       `fudis-heading`,
-      `fudis-heading__size__${this.size}`,
-      `fudis-mb-${this.marginBottom}`,
+      `fudis-heading__size__${calcSize}`,
+      `fudis-mb-${calcMarginBottom}`,
       `fudis-heading__align__${this.align}`,
     ];
   }
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this._id = this.id ?? this._idService.getNewId('heading');
+
     this._setClasses();
   }
 
-  public ngOnChanges(): void {
-    this._setClasses();
+  ngOnChanges(changes: FudisComponentChanges<HeadingComponent>): void {
+    if (
+      changes.align?.currentValue !== changes.align?.previousValue ||
+      changes.size?.currentValue !== changes.size?.previousValue ||
+      changes.marginBottom?.currentValue !== changes.marginBottom?.previousValue ||
+      changes.level?.currentValue !== changes.level?.previousValue
+    ) {
+      this._setClasses();
+    }
   }
 }
