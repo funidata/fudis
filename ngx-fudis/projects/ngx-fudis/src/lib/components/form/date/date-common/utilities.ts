@@ -54,12 +54,31 @@ export const parseDate = (value: string | null | undefined): Date | null => {
     : null;
 
   if (numberArray?.length === 3) {
-    return new Date(numberArray[2], numberArray[1] - 1, numberArray[0]);
+    const newDate = new Date(numberArray[2], numberArray[1] - 1, numberArray[0]);
+
+    const dayUnchanged = newDate.getDate() === numberArray[0];
+    const monthUnchanged = newDate.getMonth() + 1 === numberArray[1];
+
+    if (dayUnchanged && monthUnchanged) {
+      return newDate;
+    } else {
+      return null;
+    }
   }
   // If no year is provided, assume it is current year
   if (numberArray?.length === 2) {
     const currentYear: number = new Date().getFullYear();
-    return new Date(currentYear, numberArray[1] - 1, numberArray[0]);
+
+    const newDate = new Date(currentYear, numberArray[1] - 1, numberArray[0]);
+
+    const dayUnchanged = newDate.getDate() === numberArray[0];
+    const monthUnchanged = newDate.getMonth() + 1 === numberArray[1];
+
+    if (dayUnchanged && monthUnchanged) {
+      return newDate;
+    } else {
+      return null;
+    }
   }
 
   return null;
