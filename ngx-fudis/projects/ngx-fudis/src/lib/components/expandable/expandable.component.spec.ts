@@ -138,7 +138,7 @@ describe('ExpandableComponent', () => {
 
     if (variant === 'regular') {
       expect(elem.getAttribute('ng-reflect-icon')).toEqual('chevron-ring-fill');
-      expect(elem.getAttribute('ng-reflect-color')).toEqual('default');
+      expect(elem.getAttribute('ng-reflect-color')).toEqual('gray-dark');
     }
 
     if (variant === 'lite') {

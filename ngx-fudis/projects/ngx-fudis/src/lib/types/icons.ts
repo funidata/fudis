@@ -94,7 +94,6 @@ export const fudisIconArray = [
 export type FudisIcon = (typeof fudisIconArray)[number];
 
 export const fudisIconColorArray = [
-  'default',
   'yellow',
   'red',
   'gray-dark',
