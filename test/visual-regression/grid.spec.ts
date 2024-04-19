@@ -2,7 +2,7 @@ import test, { expect } from "@playwright/test";
 
 test("grid basic with tweaked aligns", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=columns:1fr%201fr;align:end;alignItemsX:center;alignItemsY:center;marginTop:xl;marginBottom:sm&id=components-grid-grid--example&viewMode=story",
+    "/iframe.html?args=columns:1fr%201fr;align:end;alignItemsX:center;alignItemsY:center;&id=components-grid-grid--example&viewMode=story",
   );
   await expect(page).toHaveScreenshot("grid-basic.png");
 });
