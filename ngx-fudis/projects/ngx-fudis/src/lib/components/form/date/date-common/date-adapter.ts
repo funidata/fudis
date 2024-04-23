@@ -5,7 +5,7 @@ import { parseDate } from './utilities';
 
 // TODO: Write tests and add more internal documentation to this file if necessary
 @Injectable()
-export class DatepickerCustomDateAdapter extends NativeDateAdapter {
+export class FudisDateAdapter extends NativeDateAdapter {
   /**
    * Original file:
    * https://github.com/angular/components/blob/main/src/material/core/datetime/native-date-adapter.ts

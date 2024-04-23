@@ -14,7 +14,7 @@
       [id]="id"
       [matDatepicker]="picker"
       (blur)="_handleInputBlur()"
-      (keyup)="_handleKeyUp()"
+      [formControl]="control"
       (dateChange)="_calendarDateChanges($event.value)"
       [min]="_minDate"
       [max]="_maxDate"
@@ -38,7 +38,11 @@
         <fudis-icon [icon]="'calendar'" [color]="'primary'"></fudis-icon>
       </mat-icon>
     </mat-datepicker-toggle>
-    <mat-datepicker #picker panelClass="fudis-datepicker__datepicker"></mat-datepicker>
+    <mat-datepicker
+      (closed)="_handleCalendarClose()"
+      #picker
+      panelClass="fudis-datepicker__datepicker"
+    ></mat-datepicker>
   </div>
   <fudis-guidance
     *ngIf="!disableGuidance"

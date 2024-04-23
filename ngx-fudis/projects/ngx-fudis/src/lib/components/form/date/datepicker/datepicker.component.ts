@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   Host,
+  Inject,
   Input,
   OnChanges,
   OnDestroy,
@@ -18,7 +19,6 @@ import { InputBaseDirective } from '../../../../directives/form/input-base/input
 import { FUDIS_DATE_FORMATS, FudisInputSize } from '../../../../types/forms';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
-import { DatepickerCustomDateAdapter } from '../date-common/datepicker-custom-date-adapter';
 import { parseDate, updateLocale, updateMatDatePickerTranslations } from '../date-common/utilities';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 import {
@@ -29,6 +29,7 @@ import {
 import { FudisValidatorFn } from '../../../../utilities/form/validators';
 import { FormComponent } from '../../form/form.component';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
+import { FudisDateAdapter } from '../date-common/date-adapter';
 
 @Component({
   selector: 'fudis-datepicker',
@@ -38,10 +39,21 @@ import { FudisComponentChanges } from '../../../../types/miscellaneous';
   providers: [
     {
       provide: DateAdapter,
-      useClass: DatepickerCustomDateAdapter,
+      useClass: FudisDateAdapter,
       deps: [MAT_DATE_LOCALE],
     },
     { provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
+
+    // // {
+    // //   provide: DateAdapter,
+    // //   useClass: DateFns,
+    // //   deps: [MAT_DATE_LOCALE],
+    // // },
+    // { provide: MAT_DATE_FORMATS, useValue: FUDIS_FNS_FORMATS },
+    // {
+    //   provide: MAT_DATE_LOCALE,
+    //   useValue: es,
+    // },
   ],
 })
 export class DatepickerComponent
@@ -49,9 +61,10 @@ export class DatepickerComponent
   implements OnInit, OnChanges, AfterViewInit, OnDestroy
 {
   constructor(
+    // @Inject('FUDIS_CONFIG') private config: FudisConfig,
+    @Inject(DateAdapter) private _adapter: DateAdapter<Date>,
     @Host() @Optional() protected _parentForm: FormComponent | null,
     private _datePickerConfigService: FudisTranslationService,
-    private _adapter: DateAdapter<Date>,
     private _datepickerIntl: MatDatepickerIntl,
     private _focusService: FudisFocusService,
     _changeDetectorRef: ChangeDetectorRef,
@@ -70,7 +83,7 @@ export class DatepickerComponent
   /**
    * FormControl for the input
    */
-  @Input({ required: true }) control: FormControl<Date | null>;
+  @Input({ required: true }) control: FormControl<Date | string | null>;
 
   /**
    * Available sizes for the datepicker
@@ -111,7 +124,13 @@ export class DatepickerComponent
 
       const inputValue = this._inputRef?.nativeElement?.value;
 
-      const isValidDate = inputValue ? parseDate(inputValue)?.getDate() : false;
+      //      console.log('control value: ' + control.value);
+
+      const isValidDate = inputValue ? parseDate(inputValue) : false;
+
+      //      console.log('value from input: ' + inputValue);
+
+      //console.log('isValidDate: ' + isValidDate);
 
       if (inputValue !== '' && !isValidDate) {
         return { datepickerDateParse: { message: this._dateParseError } };
@@ -139,27 +158,34 @@ export class DatepickerComponent
    * When clicking date in Calendar, it updates control's value, but do not refresh its validity automatically.
    */
   protected _calendarDateChanges(date: Date): void {
-    this.control.patchValue(date);
+    console.log('Click from calendar: ' + date);
+    // this.control.patchValue(date);
 
     this.control.updateValueAndValidity();
   }
 
-  protected _handleKeyUp(): void {
-    const currentInputValue = this._inputRef.nativeElement.value;
+  // protected _handleKeyUp(): void {
+  //   const currentInputValue = this._inputRef.nativeElement.value;
 
-    const parsedDate: Date | null = parseDate(currentInputValue);
+  //   console.log('haloo');
 
-    if (parsedDate) {
-      console.log(parsedDate.toISOString());
-    }
+  //   const parsedDate: Date | null = parseDate(currentInputValue);
 
-    this.control.patchValue(parsedDate);
-    this.control.updateValueAndValidity();
-  }
+  //   if (parsedDate) {
+  //     console.log(parsedDate.toISOString());
+  //   }
+
+  //   this.control.patchValue(parsedDate);
+  //   this.control.updateValueAndValidity();
+  // }
 
   protected _handleInputBlur(): void {
-    this.control.markAsTouched();
+    //this.control.markAsTouched();
     this.handleBlur.emit();
+  }
+
+  protected _handleCalendarClose(): void {
+    this.control.updateValueAndValidity();
   }
 
   ngOnInit(): void {
@@ -179,13 +205,8 @@ export class DatepickerComponent
       this._minDate = getMinDateFromValidator(this.control);
       this._maxDate = getMaxDateFromValidator(this.control);
 
-      this.control.valueChanges.subscribe((value) => {
-        this._myDate = value;
-        console.log(this._myDate);
-      });
-
       // If control changes and these checks are on, add parseValidator
-      if (this._parseValidatorInstance && this.parseDateValidator) {
+      if (!this._parseValidatorInstance && this.parseDateValidator) {
         this._addParseValidator();
       }
     }

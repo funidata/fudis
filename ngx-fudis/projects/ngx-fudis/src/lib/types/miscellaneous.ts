@@ -32,6 +32,10 @@ export interface FudisAlert {
   id: string;
 }
 
+export interface FudisConfig {
+  remBase: '10px' | '16px';
+}
+
 export interface FudisAlertElement extends FudisAlert {
   htmlId: string;
   buttonId: string;
