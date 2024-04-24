@@ -5,6 +5,7 @@ import { importProvidersFrom } from '@angular/core';
 import { DatepickerComponent } from './datepicker.component';
 import docs from './datepicker-docs.mdx';
 import { FudisValidators } from '../../../../utilities/form/validators';
+import { datepickerControlsExclude } from 'projects/ngx-fudis/src/lib/utilities/storybook';
 
 const html = String.raw;
 
@@ -16,16 +17,7 @@ export default {
       page: docs,
     },
     controls: {
-      exclude: [
-        '_translations',
-        '_id',
-        '_required',
-        '_requiredText',
-        'ngOnChanges',
-        'ngOnInit',
-        'setConfigs',
-        'onBlur',
-      ],
+      exclude: datepickerControlsExclude,
     },
   },
   decorators: [
@@ -42,14 +34,33 @@ export default {
       options: ['left', 'right', 'above', 'below', 'before', 'after'],
       control: { type: 'radio' },
     },
+    label: {
+      control: { type: 'text' },
+    },
+    helpText: {
+      control: { type: 'text' },
+    },
+    tooltip: {
+      control: { type: 'text' },
+    },
   },
 } as Meta;
 
-const Template: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
+const commonArgs: Partial<DatepickerComponent> = {
+  label: 'Select a date',
+  helpText: 'Choose your favourite date.',
+  size: 'sm',
+  disabled: false,
+  tooltip: 'Is it your birthday?',
+  tooltipPosition: 'left',
+  tooltipToggle: true,
+};
+
+const ExampleTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
   props: {
     ...args,
+    control: new FormControl(null, FudisValidators.required('Date is required.')),
   },
-
   template: html`
     <fudis-datepicker
       [label]="label"
@@ -67,48 +78,101 @@ const Template: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
   `,
 });
 
-export const Datepicker = Template.bind({});
+export const Datepicker = ExampleTemplate.bind({});
 Datepicker.args = {
-  id: 'example-id-for-datepicker-required-validation',
-  label: 'Select a date',
-  helpText: 'Choose your favourite date.',
-  tooltip: 'Is it your birthday?',
-  tooltipPosition: 'left',
-  tooltipToggle: true,
-  control: new FormControl(null, FudisValidators.required('Date is required.')),
+  ...commonArgs,
 };
 
-export const DatepickerPreselectedDate = Template.bind({});
-DatepickerPreselectedDate.args = {
-  label: 'Select a date',
-  helpText: 'Choose your favourite date.',
-  tooltip: 'Is it your birthday?',
-  tooltipPosition: 'left',
-  tooltipToggle: true,
-  control: new FormControl(new Date(1977, 11, 16)),
+Datepicker.parameters = {};
+
+const PreselectedTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
+  props: {
+    ...args,
+    control: new FormControl(new Date(1977, 11, 16)),
+  },
+  template: html`
+    <fudis-datepicker
+      [label]="label"
+      [id]="id"
+      [helpText]="helpText"
+      [control]="control"
+      [disabled]="disabled"
+      [tooltip]="tooltip"
+      [tooltipPosition]="tooltipPosition"
+      [tooltipToggle]="tooltipToggle"
+    ></fudis-datepicker>
+    <fudis-body-text *ngIf="control.value"
+      >The date output as ISO string is: {{ control.value }}</fudis-body-text
+    >
+  `,
+});
+
+export const PreselectedDate = PreselectedTemplate.bind({});
+PreselectedDate.args = {
+  ...commonArgs,
 };
 
-export const Disabled = Template.bind({});
+const DisabledTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
+  props: {
+    ...args,
+    control: new FormControl(null),
+  },
+  template: html`
+    <fudis-datepicker
+      [label]="label"
+      [id]="id"
+      [helpText]="helpText"
+      [control]="control"
+      [disabled]="disabled"
+      [tooltip]="tooltip"
+      [tooltipPosition]="tooltipPosition"
+      [tooltipToggle]="tooltipToggle"
+    ></fudis-datepicker>
+    <fudis-body-text *ngIf="control.value"
+      >The date output as ISO string is: {{ control.value }}</fudis-body-text
+    >
+  `,
+});
+
+export const Disabled = DisabledTemplate.bind({});
 Disabled.args = {
-  id: 'example-id-for-datepicker-disabled',
-  label: 'Select a date',
-  control: new FormControl(null),
+  ...commonArgs,
   disabled: true,
 };
 
-export const WithMinMaxValidator = Template.bind({});
+const MinMaxTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
+  props: {
+    ...args,
+    control: new FormControl<Date | null>(null, [
+      FudisValidators.datepickerMin({
+        value: new Date(2024, 0, 10),
+        message: 'Date cannot be before 10.1.2024',
+      }),
+      FudisValidators.datepickerMax({
+        value: new Date(2024, 1, 15),
+        message: 'Date cannot be after 15.2.2024',
+      }),
+    ]),
+  },
+  template: html`
+    <fudis-datepicker
+      [label]="label"
+      [id]="id"
+      [helpText]="helpText"
+      [control]="control"
+      [disabled]="disabled"
+      [tooltip]="tooltip"
+      [tooltipPosition]="tooltipPosition"
+      [tooltipToggle]="tooltipToggle"
+    ></fudis-datepicker>
+    <fudis-body-text *ngIf="control.value"
+      >The date output as ISO string is: {{ control.value }}</fudis-body-text
+    >
+  `,
+});
+
+export const WithMinMaxValidator = MinMaxTemplate.bind({});
 WithMinMaxValidator.args = {
-  id: 'example-id-for-datepicker-min-max-validator',
-  label: 'Select a date',
+  ...commonArgs,
   helpText: 'Choose a date between the allowed range.',
-  control: new FormControl<Date | null>(null, [
-    FudisValidators.datepickerMin({
-      value: new Date(2024, 0, 1),
-      message: 'Date cannot be before 1.1.2024',
-    }),
-    FudisValidators.datepickerMax({
-      value: new Date(2024, 1, 1),
-      message: 'Date cannot be after 1.2.2024',
-    }),
-  ]),
 };

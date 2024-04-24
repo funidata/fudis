@@ -68,6 +68,22 @@ export const checkboxGroupControlsExclude: RegExp = excludeRegex([
   'errorSummaryReloadOnInit',
 ]);
 
+export const datepickerArgsExclude: RegExp = excludeRegex([]);
+
+export const datepickerControlsExclude: RegExp = excludeRegex([
+  'control',
+  'ariaLabel',
+  'disableGuidance',
+  'initialFocus',
+  'invalidState',
+  'id',
+  'errorSummaryReloadOnInit',
+  'focusToInput',
+  'onBlur',
+  'handleBlur',
+  'parseDateValidator',
+]);
+
 const descriptionListCommonExclude: string[] = [
   'addChildId',
   'align',

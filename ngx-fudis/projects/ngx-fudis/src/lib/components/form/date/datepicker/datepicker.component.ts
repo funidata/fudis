@@ -109,19 +109,12 @@ export class DatepickerComponent
         return null;
       }
 
-      const inputEl = this._inputRef?.nativeElement;
+      // const inputElValue = this._inputRef?.nativeElement?.value;
+      const inputElValue = false;
 
-      const inputValue = inputEl?.value;
+      const isValidDate = inputElValue ? parseDate(inputElValue) : false;
 
-      //      console.log('control value: ' + control.value);
-
-      const isValidDate = inputValue ? parseDate(inputValue) : false;
-
-      //      console.log('value from input: ' + inputValue);
-
-      //console.log('isValidDate: ' + isValidDate);
-
-      if (inputEl && inputValue && !isValidDate) {
+      if (!!inputElValue && !isValidDate) {
         return { datepickerDateParse: { message: this._dateParseError } };
       }
 
@@ -146,30 +139,11 @@ export class DatepickerComponent
   /**
    * When clicking date in Calendar, it updates control's value, but do not refresh its validity automatically.
    */
-  protected _calendarDateChanges(date: Date): void {
-    console.log('Click from calendar: ' + date);
-    // this.control.patchValue(date);
-
+  protected _calendarDateChanges(): void {
     this.control.updateValueAndValidity();
   }
 
-  // protected _handleKeyUp(): void {
-  //   const currentInputValue = this._inputRef.nativeElement.value;
-
-  //   console.log('haloo');
-
-  //   const parsedDate: Date | null = parseDate(currentInputValue);
-
-  //   if (parsedDate) {
-  //     console.log(parsedDate.toISOString());
-  //   }
-
-  //   this.control.patchValue(parsedDate);
-  //   this.control.updateValueAndValidity();
-  // }
-
   protected _handleInputBlur(): void {
-    this.control.markAsTouched();
     this.handleBlur.emit();
   }
 
@@ -185,9 +159,16 @@ export class DatepickerComponent
     }
   }
 
-  _myDate: Date | null;
-
   ngOnChanges(changes: FudisComponentChanges<DatepickerComponent>): void {
+    // If prop parseDateValidator value changes, add or remove validator accordingly
+    if (changes.parseDateValidator?.currentValue !== changes.parseDateValidator?.previousValue) {
+      if (changes.parseDateValidator?.currentValue && !this._parseValidatorInstance) {
+        this._addParseValidator();
+      } else if (!changes.parseDateValidator?.currentValue && this._parseValidatorInstance) {
+        this._removeParseValidator();
+      }
+    }
+
     // Do checks for the control to define attributes used in e.g. HTML
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._required = hasRequiredValidator(this.control);
@@ -197,15 +178,6 @@ export class DatepickerComponent
       // If control changes and these checks are on, add parseValidator
       if (!this._parseValidatorInstance && this.parseDateValidator) {
         this._addParseValidator();
-      }
-    }
-
-    // If prop parseDateValidator value changes, add or remove validator accordingly
-    if (changes.parseDateValidator?.currentValue !== changes.parseDateValidator?.previousValue) {
-      if (changes.parseDateValidator?.currentValue && !this._parseValidatorInstance) {
-        this._addParseValidator();
-      } else if (!changes.parseDateValidator?.currentValue && this._parseValidatorInstance) {
-        this._removeParseValidator();
       }
     }
   }
