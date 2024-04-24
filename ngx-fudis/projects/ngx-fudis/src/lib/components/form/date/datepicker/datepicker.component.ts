@@ -3,7 +3,6 @@ import {
   ChangeDetectorRef,
   Component,
   Host,
-  Inject,
   Input,
   OnChanges,
   OnDestroy,
@@ -43,17 +42,6 @@ import { FudisDateAdapter } from '../date-common/date-adapter';
       deps: [MAT_DATE_LOCALE],
     },
     { provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
-
-    // // {
-    // //   provide: DateAdapter,
-    // //   useClass: DateFns,
-    // //   deps: [MAT_DATE_LOCALE],
-    // // },
-    // { provide: MAT_DATE_FORMATS, useValue: FUDIS_FNS_FORMATS },
-    // {
-    //   provide: MAT_DATE_LOCALE,
-    //   useValue: es,
-    // },
   ],
 })
 export class DatepickerComponent
@@ -61,9 +49,8 @@ export class DatepickerComponent
   implements OnInit, OnChanges, AfterViewInit, OnDestroy
 {
   constructor(
-    // @Inject('FUDIS_CONFIG') private config: FudisConfig,
-    @Inject(DateAdapter) private _adapter: DateAdapter<Date>,
     @Host() @Optional() protected _parentForm: FormComponent | null,
+    private _adapter: DateAdapter<Date>,
     private _datePickerConfigService: FudisTranslationService,
     private _datepickerIntl: MatDatepickerIntl,
     private _focusService: FudisFocusService,
@@ -91,7 +78,7 @@ export class DatepickerComponent
   @Input() size: FudisInputSize = 'md';
 
   /**
-   * Available sizes for the datepicker
+   *
    */
   @Input() parseDateValidator: boolean = true;
 
@@ -122,7 +109,9 @@ export class DatepickerComponent
         return null;
       }
 
-      const inputValue = this._inputRef?.nativeElement?.value;
+      const inputEl = this._inputRef?.nativeElement;
+
+      const inputValue = inputEl?.value;
 
       //      console.log('control value: ' + control.value);
 
@@ -132,7 +121,7 @@ export class DatepickerComponent
 
       //console.log('isValidDate: ' + isValidDate);
 
-      if (inputValue !== '' && !isValidDate) {
+      if (inputEl && inputValue && !isValidDate) {
         return { datepickerDateParse: { message: this._dateParseError } };
       }
 
@@ -180,7 +169,7 @@ export class DatepickerComponent
   // }
 
   protected _handleInputBlur(): void {
-    //this.control.markAsTouched();
+    this.control.markAsTouched();
     this.handleBlur.emit();
   }
 

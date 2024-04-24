@@ -5,10 +5,6 @@ import { setCompodocJson } from "@storybook/addon-docs/angular";
 import docJson from "../documentation.json";
 import getVersion from "./getVersion";
 import { excludeRegex } from "../projects/ngx-fudis/src/lib/utilities/storybook";
-import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from "@angular/material/core";
-import { FudisDateAdapter } from "../projects/ngx-fudis/src/lib/components/form/date/date-common/date-adapter";
-import { FUDIS_DATE_FORMATS } from "../projects/ngx-fudis/src/lib/types/forms";
-
 
 setCompodocJson(docJson);
 
@@ -150,23 +146,6 @@ export const decorators = [
   useTheme,
   moduleMetadata({
     imports: [NgxFudisModule],
-    providers: [
-			{
-				provide: DateAdapter,
-				useClass: FudisDateAdapter,
-				deps: [MAT_DATE_LOCALE],
-			},
-			{ provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
-      // {
-      //   provide: DateAdapter,
-      //   useClass: DateFnsAdapter,
-      //   deps: [MAT_DATE_LOCALE],
-      // },
-      // { provide: "FUDIS_CONFIG", useValue: { remBase: "16px" } },
-      // { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-      // { provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
-      // { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { strict: true } },
-    ],
   }),
 ];
 

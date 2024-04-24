@@ -1,7 +1,6 @@
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDateFormats, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
 import { FudisLanguageAbbr } from './miscellaneous';
-import { MAT_DATE_FNS_FORMATS } from '@angular/material-date-fns-adapter';
 
 export type FudisInputSize = 'sm' | 'md' | 'lg';
 
@@ -149,18 +148,6 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
   display: {
     ...MAT_NATIVE_DATE_FORMATS.display,
     dateInput: FudisDateInputFormat as Intl.DateTimeFormatOptions,
-  },
-};
-
-export const FUDIS_FNS_FORMATS: MatDateFormats = {
-  ...MAT_DATE_FNS_FORMATS,
-  parse: {
-    dateInput: 'dd.MM.yyyy',
-  },
-  display: {
-    ...MAT_DATE_FNS_FORMATS.display,
-    dateInput: 'dd.MM.yyyy',
-    monthYearLabel: 'MMM yyyy',
   },
 };
 
