@@ -109,8 +109,7 @@ export class DatepickerComponent
         return null;
       }
 
-      // const inputElValue = this._inputRef?.nativeElement?.value;
-      const inputElValue = false;
+      const inputElValue = this._inputRef?.nativeElement?.value;
 
       const isValidDate = inputElValue ? parseDate(inputElValue) : false;
 
@@ -185,6 +184,13 @@ export class DatepickerComponent
   ngAfterViewInit(): void {
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
+    }
+
+    /**
+     * If Angular FormControl has 'disabled' property, it will bind this as HTML attribute as well. This prevents user to focus to it. This check removes that attribute making input focusable again.
+     */
+    if (this.control.disabled) {
+      this._inputRef.nativeElement.removeAttribute('disabled');
     }
   }
 

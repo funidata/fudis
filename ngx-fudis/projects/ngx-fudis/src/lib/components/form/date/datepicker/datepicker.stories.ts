@@ -31,7 +31,7 @@ export default {
   ],
   argTypes: {
     tooltipPosition: {
-      options: ['left', 'right', 'above', 'below', 'before', 'after'],
+      options: ['left', 'right', 'above', 'below'],
       control: { type: 'radio' },
     },
     label: {
@@ -53,7 +53,7 @@ const commonArgs: Partial<DatepickerComponent> = {
   disabled: false,
   tooltip: 'Is it your birthday?',
   tooltipPosition: 'left',
-  tooltipToggle: true,
+  tooltipToggle: false,
 };
 
 const ExampleTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
@@ -115,7 +115,7 @@ PreselectedDate.args = {
 const DisabledTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
   props: {
     ...args,
-    control: new FormControl(null),
+    control: new FormControl({ value: null, disabled: true }),
   },
   template: html`
     <fudis-datepicker
@@ -137,7 +137,7 @@ const DisabledTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponen
 export const Disabled = DisabledTemplate.bind({});
 Disabled.args = {
   ...commonArgs,
-  disabled: true,
+  disabled: false,
 };
 
 const MinMaxTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({

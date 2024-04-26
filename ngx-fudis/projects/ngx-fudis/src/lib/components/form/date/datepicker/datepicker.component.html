@@ -15,11 +15,10 @@
       [matDatepicker]="picker"
       (blur)="_handleInputBlur()"
       [formControl]="control"
-      (dateChange)="_calendarDateChanges()"
       [min]="_minDate"
       [max]="_maxDate"
-      [readonly]="disabled"
-      [attr.aria-disabled]="disabled ? true : null"
+      [readonly]="control.disabled || disabled"
+      [attr.aria-disabled]="control.disabled || disabled ? true : null"
       class="fudis-form-input fudis-datepicker__input"
       [attr.aria-invalid]="
         (control.touched && control.invalid) || (control.touched && invalidState) ? true : null
@@ -28,7 +27,7 @@
       [attr.aria-describedby]="id + '_guidance'"
     />
     <mat-datepicker-toggle
-      [disabled]="disabled"
+      [disabled]="disabled || control.disabled"
       matSuffix
       [for]="picker"
       [disableRipple]="true"
