@@ -102,7 +102,7 @@ export class DatepickerComponent
    */
   private _parseValidatorInstance: FudisValidatorFn | null;
 
-  // TODO: write test
+  // Validator reads html input field and checks if it can be converted to valid Date object
   private _datepickerParseValidatorFn(): FudisValidatorFn {
     return (control: AbstractControl) => {
       if (!control) {

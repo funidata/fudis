@@ -4,14 +4,13 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MockComponent } from 'ng-mocks';
 import { FudisValidators } from '../../../../utilities/form/validators';
 import { IconComponent } from '../../../icon/icon.component';
 import { GuidanceComponent } from '../../guidance/guidance.component';
 import { LabelComponent } from '../../label/label.component';
 import { DatepickerComponent } from './datepicker.component';
-
-const datepickerControl: FormControl = new FormControl('');
+import { ValidatorErrorMessageComponent } from '../../error-message/validator-error-message/validator-error-message.component';
+import { getElement } from 'projects/ngx-fudis/src/lib/utilities/tests/utilities';
 
 describe('DatepickerComponent', () => {
   let component: DatepickerComponent;
@@ -22,8 +21,9 @@ describe('DatepickerComponent', () => {
       declarations: [
         DatepickerComponent,
         LabelComponent,
-        MockComponent(IconComponent),
-        MockComponent(GuidanceComponent),
+        IconComponent,
+        GuidanceComponent,
+        ValidatorErrorMessageComponent,
       ],
       imports: [
         ReactiveFormsModule,
@@ -37,7 +37,7 @@ describe('DatepickerComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DatepickerComponent);
     component = fixture.componentInstance;
-    component.control = datepickerControl;
+    component.control = new FormControl(null);
     component.id = 'fudis-dp-unique-id-3';
     component.label = 'Select a date';
     fixture.detectChanges();
@@ -75,38 +75,34 @@ describe('DatepickerComponent', () => {
 
     // TODO: Change ng-reflect to HTML id and for attributes if possible
     it('should have fudis-label component present with given id', () => {
-      const childLabelComponent = fixture.debugElement.query(By.css('fudis-label'));
+      const childLabelComponent = fixture.debugElement.query(
+        By.css('fudis-label label.fudis-label'),
+      );
 
       expect(childLabelComponent).toBeTruthy();
-      expect(childLabelComponent.attributes['ng-reflect-id']).toEqual('label_fudis-dp-unique-id-3');
-      expect(childLabelComponent.attributes['ng-reflect-for']).toEqual('fudis-dp-unique-id-3');
+      expect(childLabelComponent.attributes['id']).toEqual('label_fudis-dp-unique-id-3');
+      expect(childLabelComponent.attributes['for']).toEqual('fudis-dp-unique-id-3');
     });
 
-    // TODO: Change ng-reflect to HTML for attribute and guidance element if possible
     it('should have fudis-guidance component present with given id and helpText', () => {
-      const childGuidanceComponent = fixture.debugElement.query(By.css('fudis-guidance'));
+      const childGuidanceComponent = fixture.debugElement.query(
+        By.css('fudis-guidance .fudis-guidance #fudis-dp-unique-id-3_guidance'),
+      );
 
       expect(childGuidanceComponent).toBeTruthy();
-      expect(childGuidanceComponent.attributes['ng-reflect-for']).toEqual('fudis-dp-unique-id-3');
 
       component.helpText = 'Select your favourite date';
       fixture.detectChanges();
 
-      expect(childGuidanceComponent.attributes['ng-reflect-help-text']).toEqual(
-        'Select your favourite date',
-      );
+      const guidanceHelpText = fixture.debugElement.nativeElement.querySelector(
+        '.fudis-guidance__help-text',
+      ) as HTMLParagraphElement;
+
+      expect(guidanceHelpText.textContent).toEqual('Select your favourite date');
     });
   });
 
   describe('Input', () => {
-    it('should have focus when input is focused', () => {
-      const datepickerInput = fixture.nativeElement.querySelector('input');
-      datepickerInput.dispatchEvent(new Event('focus'));
-      fixture.detectChanges();
-
-      expect(datepickerInput.focus).toBeTruthy();
-    });
-
     it('should have invalid attribute if datepicker is required, input is touched and no date has been chosen', () => {
       const datepickerInput = fixture.nativeElement.querySelector('input');
       const requiredControl = new FormControl(null, FudisValidators.required('Date is required'));
@@ -122,7 +118,6 @@ describe('DatepickerComponent', () => {
       expect(!!datepickerInput.getAttribute('aria-invalid')).toEqual(true);
     });
 
-    // TODO: Change ng-reflect to HTML element if possible
     it('should have calendar icon from fudis-icon component', () => {
       const datepickerIcon = fixture.debugElement.query(By.css('fudis-icon'));
 
@@ -136,7 +131,22 @@ describe('DatepickerComponent', () => {
 
       expect(!!datepickerInput.getAttribute('aria-disabled')).toEqual(true);
     });
+  });
 
-    // TODO: Test if control is invalid, guidance is present
+  describe('Control updates', () => {
+    beforeEach(() => {
+      fixture = TestBed.createComponent(DatepickerComponent);
+      component = fixture.componentInstance;
+      component.label = 'Select a date';
+    });
+
+    it('should have no value selected', () => {
+      component.control = new FormControl(null);
+      fixture.detectChanges();
+
+      const inputEl = getElement(fixture, 'input') as HTMLInputElement;
+
+      expect(inputEl.value).toEqual('');
+    });
   });
 });
