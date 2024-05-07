@@ -30,11 +30,13 @@ export class FormSubmitDirective implements OnInit {
   /**
    * Set parent Form's Error Summary Visible true and reload errors
    */
-  @HostListener('click') private _onClick() {
+  @HostListener('click', ['$event.target']) private _onClick(targetElement: HTMLElement) {
     /**
      * Make sure that click event is from this submit Button and not any parent Form element
      */
-    const submitButton = this._document.activeElement === this._button.buttonEl.nativeElement;
+    const submitButton =
+      this._document.activeElement === this._button.buttonEl.nativeElement ||
+      targetElement === this._button.buttonEl.nativeElement;
 
     if (submitButton) {
       if (this._parentForm && !this.formValid) {
