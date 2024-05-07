@@ -4,19 +4,20 @@
 @use "../../../foundations/colors/mixins.scss" as colors;
 @use "../../../foundations/focus/mixins.scss" as focus;
 @use "../../../foundations/borders/mixins.scss" as borders;
+@use "../../../foundations/utilities/mixins.scss" as utilities;
 
 .fudis-fieldset {
+  @include utilities.box-reset;
   @include borders.border-none;
 
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  padding: 0;
 
   &__legend {
+    @include utilities.box-reset;
+
     display: flex;
     flex-direction: column;
-    padding: 0;
     width: 100%;
 
     &:focus-visible {
