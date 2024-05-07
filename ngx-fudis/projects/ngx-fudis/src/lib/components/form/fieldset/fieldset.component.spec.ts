@@ -96,9 +96,7 @@ describe('FieldSetComponent', () => {
 
     const fieldsetEl = getElement(fixtureMock, 'fieldset') as HTMLFieldSetElement;
 
-    expect(fieldsetEl.className).toContain('fudis-grid__initial');
-    expect(fieldsetEl.className).not.toContain('fudis-grid__xxl');
-    expect(fieldsetEl.className).toContain(`fudis-input-size__${size}`);
+    expect(fieldsetEl.className).toContain(`fudis-fieldset fudis-input-size__${size}`);
   }
 
   describe('Wrapper fieldset element HTML attributes', () => {
@@ -126,7 +124,7 @@ describe('FieldSetComponent', () => {
       const classesFromGrid =
         'fudis-grid fudis-grid__xxl fudis-grid__align__start fudis-grid__margin__top__none fudis-grid__margin__bottom__none fudis-grid__row-gap__none';
 
-      expect(fieldsetElement.className).toContain(classesFromGrid);
+      expect(fieldsetElement.parentElement?.className).toContain(classesFromGrid);
     });
   });
 
