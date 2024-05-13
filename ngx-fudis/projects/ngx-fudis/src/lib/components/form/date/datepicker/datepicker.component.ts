@@ -70,7 +70,7 @@ export class DatepickerComponent
   /**
    * FormControl for the input
    */
-  @Input({ required: true }) control: FormControl<Date | string | null>;
+  @Input({ required: true }) control: FormControl<Date | null>;
 
   /**
    * Available sizes for the datepicker
@@ -148,6 +148,11 @@ export class DatepickerComponent
 
   protected _handleCalendarClose(): void {
     this.control.updateValueAndValidity();
+  }
+
+  // TODO: Add output for keyup event
+  protected _handleKeyUp(event: KeyboardEvent): void {
+    console.log(event);
   }
 
   ngOnInit(): void {

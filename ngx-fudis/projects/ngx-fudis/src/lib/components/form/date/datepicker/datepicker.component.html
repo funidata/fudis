@@ -15,6 +15,7 @@
       [matDatepicker]="picker"
       (blur)="_handleInputBlur()"
       [formControl]="control"
+      (keyup)="_handleKeyUp($event)"
       [min]="_minDate"
       [max]="_maxDate"
       [readonly]="control.disabled || disabled"
