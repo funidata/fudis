@@ -110,7 +110,7 @@ describe('ButtonComponent', () => {
         'Open additional menu It has nice things to click',
       );
       expect(getButton().getAttribute('type')).toEqual('button');
-      expect(getButton().textContent).toEqual('  ');
+      expect(getButton().textContent).toEqual('');
     });
   });
 
