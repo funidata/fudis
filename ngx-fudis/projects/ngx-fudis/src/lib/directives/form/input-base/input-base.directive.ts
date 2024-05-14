@@ -93,6 +93,11 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
   @Output() handleBlur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
   /**
+   * To listen for input's key up event.
+   */
+  @Output() handleKeyUp: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
+
+  /**
    * Basic Fudis translation keys
    */
   protected _translations: Signal<FudisTranslationConfig>;

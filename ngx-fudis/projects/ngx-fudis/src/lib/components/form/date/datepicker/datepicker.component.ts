@@ -78,7 +78,7 @@ export class DatepickerComponent
   @Input() size: FudisInputSize = 'md';
 
   /**
-   *
+   * Show internal date parsing validator message. By setting to false date parsing is not executed.
    */
   @Input() parseDateValidator: boolean = true;
 
@@ -102,7 +102,9 @@ export class DatepickerComponent
    */
   private _parseValidatorInstance: FudisValidatorFn | null;
 
-  // Validator reads html input field and checks if it can be converted to valid Date object
+  /**
+   * Validator reads html input field and checks if it can be converted to valid Date object
+   */ 
   private _datepickerParseValidatorFn(): FudisValidatorFn {
     return (control: AbstractControl) => {
       if (!control) {
@@ -136,23 +138,31 @@ export class DatepickerComponent
   }
 
   /**
-   * When clicking date in Calendar, it updates control's value, but do not refresh its validity automatically.
+   * Handle date change from calendar pop-up or input
    */
   protected _calendarDateChanges(): void {
     this.control.updateValueAndValidity();
   }
 
-  protected _handleInputBlur(): void {
-    this.handleBlur.emit();
-  }
-
+  /**
+   * Handle calendar close
+   */
   protected _handleCalendarClose(): void {
     this.control.updateValueAndValidity();
   }
 
-  // TODO: Add output for keyup event
+  /**
+   * Handle input blur
+   */
+  protected _handleInputBlur(event: FocusEvent): void {
+    this.handleBlur.emit(event);
+  }
+
+  /**
+   * Handle input key up
+   */
   protected _handleKeyUp(event: KeyboardEvent): void {
-    console.log(event);
+    this.handleKeyUp.emit(event);
   }
 
   ngOnInit(): void {
