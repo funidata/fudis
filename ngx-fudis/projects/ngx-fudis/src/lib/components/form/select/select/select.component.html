@@ -33,11 +33,11 @@
         (control.touched && control.invalid) || (control.touched && invalidState) ? true : null
       "
     >
-      <span *ngIf="!dropdownSelectionLabelText" class="fudis-select__input__placeholder">{{
+      <span *ngIf="!_dropdownSelectionLabelText" class="fudis-select__input__placeholder">{{
         placeholder
       }}</span>
-      <span *ngIf="dropdownSelectionLabelText" class="fudis-select__input__label">{{
-        dropdownSelectionLabelText
+      <span *ngIf="_dropdownSelectionLabelText" class="fudis-select__input__label">{{
+        _dropdownSelectionLabelText
       }}</span>
     </div>
     <fudis-icon

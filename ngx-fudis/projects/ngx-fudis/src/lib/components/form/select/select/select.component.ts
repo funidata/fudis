@@ -1,5 +1,4 @@
 import {
-  AfterContentInit,
   AfterViewInit,
   ChangeDetectorRef,
   Component,
@@ -20,7 +19,6 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
 import { FormComponent } from '../../form/form.component';
-import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'fudis-select',
@@ -28,10 +26,7 @@ import { takeUntil } from 'rxjs';
   styleUrls: ['./select.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class SelectComponent
-  extends SelectBaseDirective
-  implements OnInit, AfterViewInit, AfterContentInit
-{
+export class SelectComponent extends SelectBaseDirective implements OnInit, AfterViewInit {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
     _idService: FudisIdService,
@@ -72,21 +67,7 @@ export class SelectComponent
   ngOnInit(): void {
     this._setParentId('select');
 
-    this.control.valueChanges.pipe(takeUntil(this._destroyed)).subscribe(() => {
-      if (!this.controlValueChangedInternally) {
-        this._updateSelectionFromControlValue();
-      }
-
-      this.controlValueChangedInternally = false;
-    });
-
     this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
-  }
-
-  ngAfterContentInit(): void {
-    if (this.control.value) {
-      this._updateSelectionFromControlValue();
-    }
   }
 
   ngAfterViewInit(): void {
@@ -109,14 +90,14 @@ export class SelectComponent
     if (!equalValues) {
       this.noResultsFound = true;
       this.selectionUpdate.emit(value);
-      this.controlValueChangedInternally = true;
+      this._controlValueChangedInternally = true;
       this.control.patchValue(value);
 
       if (this.autocomplete) {
         this._autocompleteRef.preventSpaceKeypress = true;
         (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value = value.label;
       } else {
-        this.dropdownSelectionLabelText = value?.label ? value.label : '';
+        this._dropdownSelectionLabelText = value?.label ? value.label : '';
       }
 
       if (value && this.autocomplete && !disableSignalEmit) {
@@ -131,7 +112,7 @@ export class SelectComponent
    */
   protected _checkIfAutocompleteValueNull(text: string): void {
     if (this.control.value && text.toLowerCase() !== this.control.value?.label?.toLowerCase()) {
-      this.controlValueChangedInternally = true;
+      this._controlValueChangedInternally = true;
       this.selectionUpdate.emit(null);
       this.control.patchValue(null);
     }
@@ -142,7 +123,7 @@ export class SelectComponent
    * @param value Option value to patch
    */
   protected _patchControlValue(value: FudisSelectOption<object> | null) {
-    this.controlValueChangedInternally = true;
+    this._controlValueChangedInternally = true;
     this._preventDropdownReopen = true;
     this.control.patchValue(value);
   }
@@ -150,11 +131,11 @@ export class SelectComponent
   /**
    * If control value is updated from the Application, update component's state accordingly
    */
-  private _updateSelectionFromControlValue(): void {
+  protected override _updateSelectionFromControlValue(): void {
     this.noResultsFound = true;
 
     if (this.control.value) {
-      this.dropdownSelectionLabelText = this.control.value.label;
+      this._dropdownSelectionLabelText = this.control.value.label;
 
       if (this.autocomplete) {
         this._autocompleteSelectionLabelValue = this.control.value!.label;
@@ -163,7 +144,7 @@ export class SelectComponent
     } else {
       this._autocompleteFilterText.set('');
       this._autocompleteSelectionLabelValue = null;
-      this.dropdownSelectionLabelText = '';
+      this._dropdownSelectionLabelText = '';
     }
   }
 }

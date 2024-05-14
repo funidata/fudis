@@ -60,18 +60,19 @@
       @include focus.focus-form-field;
     }
 
-    &__label {
+    &__label,
+    &__placeholder {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      &--hidden {
+        display: none;
+      }
     }
 
     &__placeholder {
       @include colorMixins.text-color("gray-middle");
-
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
     }
 
     &__dropdown {

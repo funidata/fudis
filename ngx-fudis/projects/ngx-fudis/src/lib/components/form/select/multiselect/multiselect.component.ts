@@ -1,5 +1,4 @@
 import {
-  AfterContentInit,
   AfterViewInit,
   ChangeDetectorRef,
   Component,
@@ -22,19 +21,16 @@ import { SelectBaseDirective } from '../common/select-base/select-base.directive
 import { FudisSelectOption } from '../../../../types/forms';
 import { joinInputValues, sortValues } from '../common/selectUtilities';
 import { FormComponent } from '../../form/form.component';
-import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'fudis-multiselect',
   templateUrl: './multiselect.component.html',
   styleUrls: ['../select/select.component.scss'],
 })
-export class MultiselectComponent
-  extends SelectBaseDirective
-  implements OnInit, AfterContentInit, AfterViewInit
-{
+export class MultiselectComponent extends SelectBaseDirective implements OnInit, AfterViewInit {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
+    private _cdr: ChangeDetectorRef,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
@@ -79,9 +75,11 @@ export class MultiselectComponent
   /**
    * Signal for dropdown options to listen when either Application updates its control value or user clicks (removes) selection chip
    */
-  private _sortedSelectedOptionsSignal: WritableSignal<FudisSelectOption<object>[]> = signal<
+  private _selectedOptionsSignal: WritableSignal<FudisSelectOption<object>[]> = signal<
     FudisSelectOption<object>[]
   >([]);
+
+  private _registeredOptions: FudisSelectOption<object>[] = [];
 
   /**
    * Set component's id and subscribe to value changes for form control coming from application
@@ -89,20 +87,7 @@ export class MultiselectComponent
   ngOnInit(): void {
     this._setParentId('multiselect');
 
-    this.control.valueChanges.pipe(takeUntil(this._destroyed)).subscribe(() => {
-      if (!this.controlValueChangedInternally) {
-        this._updateMultiselectionFromControlValue();
-      }
-      this.controlValueChangedInternally = false;
-    });
-
     this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
-  }
-
-  ngAfterContentInit(): void {
-    if (this.control.value) {
-      this._updateMultiselectionFromControlValue();
-    }
   }
 
   /**
@@ -119,7 +104,7 @@ export class MultiselectComponent
    * @returns Signal array of sorted selected options
    */
   public getSelectedOptions(): Signal<FudisSelectOption<object>[]> {
-    return this._sortedSelectedOptionsSignal.asReadonly();
+    return this._selectedOptionsSignal.asReadonly();
   }
 
   /**
@@ -143,49 +128,55 @@ export class MultiselectComponent
       updatedValue.push(option);
     }
 
-    this._sortedSelectedOptions = sortValues(updatedValue);
-
-    this.dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
-
-    this.controlValueChangedInternally = true;
-    this.selectionUpdate.emit(this._sortedSelectedOptions);
-    this.control.patchValue(this._sortedSelectedOptions);
+    this._controlValueChangedInternally = true;
+    this.selectionUpdate.emit(updatedValue);
+    this.control.patchValue(updatedValue);
+    this.handleCheckedSort(option, type);
   }
 
   /**
    * Function called by multiselect option if they are checked
    * @param checkedOption FudisSelectOption to handle
    */
-  public handleCheckedSort(checkedOption: FudisSelectOption<object>): void {
-    const foundIndex: number = this._sortedSelectedOptions.findIndex((option) => {
+  public handleCheckedSort(
+    checkedOption: FudisSelectOption<object>,
+    type: 'add' | 'remove' = 'add',
+  ): void {
+    const foundIndex: number = this._registeredOptions.findIndex((option) => {
       return option.value === checkedOption.value && option.label === checkedOption.label;
     });
 
-    if (foundIndex !== -1) {
-      this._sortedSelectedOptions[foundIndex] = checkedOption;
+    if (foundIndex !== -1 && type === 'remove') {
+      this._registeredOptions = this._registeredOptions.filter((_item, index) => {
+        return foundIndex !== index;
+      });
+    } else {
+      this._registeredOptions.push(checkedOption);
+    }
 
-      this._sortedSelectedOptions = sortValues(this._sortedSelectedOptions);
-
-      this.dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
+    if (this._registeredOptions.length === this.control.value?.length) {
+      this._sortedSelectedOptions = sortValues(this._registeredOptions);
+      this._dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
+      this._cdr.detectChanges();
+    } else {
+      this._dropdownSelectionLabelText = null;
     }
   }
 
   /**
    * Update internal states when Application updates control value
    */
-  private _updateMultiselectionFromControlValue(): void {
+  protected override _updateSelectionFromControlValue(): void {
     if (this.control.value) {
-      this._sortedSelectedOptions = sortValues(this.control.value);
-      this._sortedSelectedOptionsSignal.set(this._sortedSelectedOptions);
+      this._selectedOptionsSignal.set(this.control.value);
+      this._openedOnce = true;
 
-      if (!this.autocomplete) {
-        this.dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
-      } else {
+      if (this.autocomplete) {
         this.noResultsFound = false;
       }
     } else {
       this.noResultsFound = true;
-      this.dropdownSelectionLabelText = null;
+      this._dropdownSelectionLabelText = null;
     }
   }
 
@@ -204,9 +195,9 @@ export class MultiselectComponent
         this._inputRef.nativeElement.focus();
       }
 
-      this.dropdownSelectionLabelText = joinInputValues(currentValue);
-      this._sortedSelectedOptionsSignal.set(currentValue);
-      this.controlValueChangedInternally = true;
+      this._dropdownSelectionLabelText = joinInputValues(currentValue);
+      this._selectedOptionsSignal.set(currentValue);
+      this._controlValueChangedInternally = true;
       this.control.patchValue(currentValue);
     }
   }

@@ -17,7 +17,6 @@ import {
 import { FormControl } from '@angular/forms';
 import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
-import { hasRequiredValidator } from '../../../../../utilities/form/getValidators';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
 import { InputBaseDirective } from '../../../../../directives/form/input-base/input-base.directive';
@@ -26,6 +25,11 @@ import { ButtonComponent } from '../../../../button/button.component';
 import { setVisibleOptionsList } from '../selectUtilities';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.component';
+import { FudisComponentChanges } from 'projects/ngx-fudis/src/lib/types/miscellaneous';
+import { SelectComponent } from '../../select/select.component';
+import { MultiselectComponent } from '../../multiselect/multiselect.component';
+import { hasRequiredValidator } from '../../../../../utilities/form/getValidators';
+import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 
 @Directive({
   selector: '[fudisSelectBase]',
@@ -104,12 +108,19 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
   /**
    * Selected option or options label for non-autocomplete dropdowns
    */
-  public dropdownSelectionLabelText: string | null = null;
+  protected _dropdownSelectionLabelText: string | null = null;
+
+  /**
+   * Getter for visible value in input field
+   */
+  get dropdownSelectionLabelText(): string | null {
+    return this._dropdownSelectionLabelText;
+  }
 
   /**
    * Used in control.valueChanges subscription to not run update functions unless valueChange comes from application
    */
-  public controlValueChangedInternally: boolean = false;
+  protected _controlValueChangedInternally: boolean = false;
 
   /**
    * CSS selector for querying focus states
@@ -149,7 +160,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
   protected _autocompleteFilterText: WritableSignal<string> = signal<string>('');
 
   /**
-   *  Lazy loading check for expanding content
+   *  Lazy loading check for expanding content, unless component control gets values from application, then set to true automatically
    */
   protected _openedOnce: boolean = false;
 
@@ -173,9 +184,27 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
    */
   protected _preventClick: boolean = false;
 
-  ngOnChanges(): void {
-    this._required = hasRequiredValidator(this.control);
+  ngOnChanges(changes: FudisComponentChanges<SelectComponent | MultiselectComponent>): void {
+    if (changes.control?.currentValue !== changes.control?.previousValue) {
+      this._required = hasRequiredValidator(this.control);
+
+      if (changes.control?.currentValue?.value) {
+        this._updateSelectionFromControlValue();
+      }
+
+      this.control.valueChanges.pipe(takeUntil(this._destroyed)).subscribe(() => {
+        if (!this._controlValueChangedInternally) {
+          this._updateSelectionFromControlValue();
+        }
+
+        this._controlValueChangedInternally = false;
+      });
+    }
   }
+
+  // ngOnChanges(): void {
+  //   this._required = hasRequiredValidator(this.control);
+  // }
 
   /**
    * @returns signal value of autocomplete filter text
@@ -352,12 +381,12 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 
   /**
    * To focus on first option when dropdown opens
-   * @param cssFocusSelector CSS class to focus to
+   * @param cssfocusSelector CSS class to focus to
    */
 
   // TODO: check if this could be achieved more elegantly
-  protected _focusToFirstOption(cssFocusSelector: string, clickFirstOption?: boolean): void {
-    const cssSelector = `.${cssFocusSelector}`;
+  protected _focusToFirstOption(cssfocusSelector: string, clickFirstOption?: boolean): void {
+    const cssSelector = `.${cssfocusSelector}`;
 
     const firstOption: HTMLInputElement =
       this._dropdownRef?.dropdownElement.nativeElement.querySelector(
@@ -386,6 +415,11 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
       }, 100);
     }
   }
+
+  /**
+   * Function declaration overridden and implemented by Select and Multiselect
+   */
+  protected _updateSelectionFromControlValue(): void {}
 
   /**
    * When user clicks somewhere else than DropdownMenu or input element area, close dropdown

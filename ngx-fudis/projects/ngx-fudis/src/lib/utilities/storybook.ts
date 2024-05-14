@@ -166,8 +166,8 @@ export const selectCommonExclude: RegExp = excludeRegex([
   'tooltipPosition',
   'tooltipToggle',
   'classes',
-  'controlValueChangedInternally',
-  'dropdownSelectionLabelText',
+  '_controlValueChangedInternally',
+  '_dropdownSelectionLabelText',
   'focusSelector',
   'noResultsFound',
   'selectionUpdate',
@@ -192,8 +192,8 @@ export const selectCommonExclude: RegExp = excludeRegex([
 
 export const selectAndMultiselectExclude: RegExp = excludeRegex([
   'translationOptionDisabledText',
-  'controlValueChangedInternally',
-  'dropdownSelectionLabelText',
+  '_controlValueChangedInternally',
+  '_dropdownSelectionLabelText',
   'focusSelector',
   'noResultsFound',
   'handleSelectionChange',

@@ -77,13 +77,23 @@ describe('SelectComponent', () => {
 
   function initWithControlValue() {
     component.control = new FormControl(defaultOptions[3]);
-    component.ngAfterViewInit();
+    component.ngOnChanges({
+      control: {
+        currentValue: new FormControl(defaultOptions[3]),
+        previousValue: undefined,
+        firstChange: true,
+      },
+    });
     fixture.detectChanges();
   }
 
   function initWithControlNull() {
     component.control = new FormControl(null);
-    component.ngAfterViewInit();
+
+    component.ngOnChanges({
+      control: { currentValue: new FormControl(null), previousValue: undefined, firstChange: true },
+    });
+
     fixture.detectChanges();
   }
 
@@ -110,6 +120,7 @@ describe('SelectComponent', () => {
 
     it('should have default form control option set instead of placeholder on init', () => {
       initWithControlValue();
+
       const placeholderAnimal = fixture.debugElement.query(By.css('.fudis-select__input__label'));
 
       expect(placeholderAnimal.nativeElement.innerHTML).toEqual('Really dangerous cat');
@@ -117,7 +128,7 @@ describe('SelectComponent', () => {
 
     it('should have placeholder text present when control value is updated to null', () => {
       initWithControlValue();
-      component.control.patchValue(null);
+      component.control.setValue(null);
       fixture.detectChanges();
 
       const placeholder = fixture.debugElement.query(By.css('.fudis-select__input__placeholder'));
