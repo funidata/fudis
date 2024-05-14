@@ -40,6 +40,10 @@ export default {
     helpText: {
       control: { type: 'text' },
     },
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: { type: 'radio' },
+    },
     tooltip: {
       control: { type: 'text' },
     },
@@ -49,7 +53,7 @@ export default {
 const commonArgs: Partial<DatepickerComponent> = {
   label: 'Select a date',
   helpText: 'Choose your favourite date.',
-  size: 'sm',
+  size: 'md',
   disabled: false,
   tooltip: 'Is it your birthday?',
   tooltipPosition: 'left',
@@ -65,6 +69,7 @@ const ExampleTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent
     <fudis-datepicker
       [label]="label"
       [id]="id"
+      [size]="size"
       [helpText]="helpText"
       [control]="control"
       [disabled]="disabled"
@@ -94,6 +99,7 @@ const PreselectedTemplate: StoryFn<DatepickerComponent> = (args: DatepickerCompo
     <fudis-datepicker
       [label]="label"
       [id]="id"
+      [size]="size"
       [helpText]="helpText"
       [control]="control"
       [disabled]="disabled"
@@ -121,6 +127,7 @@ const DisabledTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponen
     <fudis-datepicker
       [label]="label"
       [id]="id"
+      [size]="size"
       [helpText]="helpText"
       [control]="control"
       [disabled]="disabled"
@@ -158,6 +165,7 @@ const MinMaxTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent)
     <fudis-datepicker
       [label]="label"
       [id]="id"
+      [size]="size"
       [helpText]="helpText"
       [control]="control"
       [disabled]="disabled"

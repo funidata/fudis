@@ -2,6 +2,7 @@ import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { linkTo } from "@storybook/addon-links";
 import { DatepickerComponent } from "./datepicker.component";
 import * as DatepickerStories from "./datepicker.stories.ts";
+import { datepickerExclude } from "../../../../utilities/storybook";
 
 <Meta title="Components/Form/Datepicker" />
 
@@ -39,7 +40,7 @@ If a custom validation is used, read [how to add Error message](/docs/components
 - datepickerMin
 - datepickerMax
 
-In addition Fudis has internal validator for date format which prompts error message if Fudis is not satisfied with given date's format.
+In addition Fudis has internal validator for date format which prompts error message if Fudis is not satisfied with given date's format. This validator can be turned off by setting `parseDateValidator` to `false`.
 
 ## Localization
 
@@ -75,4 +76,4 @@ Current list of languages supported are:
 
 ## Properties
 
-<ArgTypes of={DatepickerComponent} />
+<ArgTypes of={DatepickerComponent} exclude={datepickerExclude} />
