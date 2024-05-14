@@ -3,15 +3,19 @@ import { action } from '@storybook/addon-actions';
 import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
-import { FudisValidators } from '../../../../utilities/form/validators';
-import { MultiselectComponent } from './multiselect.component';
-import readme from './readme.hidden';
-import { groupedMockData, defaultOptions, TestAnimalSound } from '../common/mock_data';
+import { SelectComponent } from './select.component';
+import readme from './select.mdx';
+import {
+  groupedMockData,
+  defaultOptions,
+  TestAnimalSound,
+  TestAnimalScience,
+} from '../common/mock_data';
 import { selectCommonExclude } from '../../../../utilities/storybook';
 
 export default {
-  title: 'Components/Form/Select/Multiselect',
-  component: MultiselectComponent,
+  title: 'Components/Form/Select/Select',
+  component: SelectComponent,
   decorators: [
     applicationConfig({
       providers: [importProvidersFrom(BrowserAnimationsModule)],
@@ -30,10 +34,6 @@ export default {
       options: ['sm', 'md', 'lg'],
       control: { type: 'radio' },
     },
-    showSelectionChips: {
-      options: [true, false],
-      control: { type: 'radio' },
-    },
     helpText: {
       control: { type: 'text' },
     },
@@ -42,41 +42,37 @@ export default {
 
 const html = String.raw;
 
-const ExampleTemplate: StoryFn<MultiselectComponent> = (args: MultiselectComponent) => ({
+const ExampleTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
   props: {
     ...args,
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<TestAnimalSound | null>(
-      null,
-      FudisValidators.minLength(2, 'Pick at least two pets'),
-    ),
+    control: new FormControl<TestAnimalSound | TestAnimalScience | null>(defaultOptions[2]),
     groupedMockData,
   },
   template: html`
-    <fudis-multiselect
+    <fudis-select
       [size]="size"
       [placeholder]="placeholder"
       [control]="control"
       [label]="label"
-      [helpText]="helpText"
       [disabled]="disabled"
+      [helpText]="helpText"
       (selectionUpdate)="selectionUpdate($event)"
-      [showSelectionChips]="showSelectionChips"
     >
       <ng-template fudisContent type="select-options">
-        <fudis-multiselect-option
+        <fudis-select-option
           *ngFor="let option of defaultOptions"
           [data]="option"
-        ></fudis-multiselect-option>
-        <fudis-multiselect-group *ngFor="let group of groupedMockData" [label]="group.country">
-          <fudis-multiselect-option
+        ></fudis-select-option>
+        <fudis-select-group *ngFor="let group of groupedMockData" [label]="group.country">
+          <fudis-select-option
             *ngFor="let groupedOption of group.options"
             [data]="groupedOption"
-          ></fudis-multiselect-option>
-        </fudis-multiselect-group>
+          ></fudis-select-option>
+        </fudis-select-group>
       </ng-template>
-    </fudis-multiselect>
+    </fudis-select>
   `,
 });
 
@@ -86,6 +82,5 @@ Example.args = {
   size: 'lg',
   disabled: false,
   placeholder: 'Choose a pet',
-  helpText: 'All pets are equally important, but for sake of this example please pick atleast two',
-  showSelectionChips: true,
+  helpText: 'All pets are equally important, but for sake of this example please pick one.',
 };

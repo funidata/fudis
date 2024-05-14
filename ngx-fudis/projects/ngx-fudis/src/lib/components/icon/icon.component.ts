@@ -19,10 +19,9 @@ import { FudisComponentChanges } from '../../types/miscellaneous';
 export class IconComponent implements OnChanges {
   constructor(private _elementRef: ElementRef) {
     (_elementRef.nativeElement as SVGElement).style.cssText = `
-display: inline-flex;
-position: relative;
-vertical-align: middle;
-`;
+      display: inline-flex;
+      vertical-align: middle;
+    `;
   }
 
   /**
