@@ -104,7 +104,7 @@ export class DatepickerComponent
 
   /**
    * Validator reads html input field and checks if it can be converted to valid Date object
-   */ 
+   */
   private _datepickerParseValidatorFn(): FudisValidatorFn {
     return (control: AbstractControl) => {
       if (!control) {
@@ -171,6 +171,8 @@ export class DatepickerComponent
     if (!this._parseValidatorInstance && this.parseDateValidator) {
       this._addParseValidator();
     }
+
+    this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
   }
 
   ngOnChanges(changes: FudisComponentChanges<DatepickerComponent>): void {
