@@ -1,13 +1,13 @@
 import { ArgTypes, Meta, Canvas } from "@storybook/blocks";
 import { linkTo } from "@storybook/addon-links";
 import { DateRangeComponent } from "./date-range.component.ts";
-import * as DateRangeStories from "./date-range.stories.hidden";
+import * as DateRangeStories from "./date-range.stories.ts";
 
 <Meta title="Components/Form/Date/Date Range" />
 
 # Date Range
 
-Fudis Date Range is component combination of two Datepickers.
+Fudis Date Range is component combination of two [Datepickers](/docs/components-form-date-datepicker--documentation).
 
 ## Examples
 
@@ -64,7 +64,7 @@ endDate: FudisDateRangeItem = {
 };
 ```
 
-### Date Range Validation
+### Validation
 
 Fudis has two internal validations for dates. First, **date format validator** which prompts error message if Fudis is not satisfied with the given date's format.
 Second, **date comparison validator** which prompts error message if start date is after end date.

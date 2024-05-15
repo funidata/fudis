@@ -100,6 +100,13 @@ export const datepickerControlsExclude: RegExp = excludeRegex([
 
 export const datepickerExclude: RegExp = excludeRegex(['focusToInput', 'onBlur']);
 
+export const daterangeExclude: RegExp = excludeRegex([
+  'endDate',
+  'startDate',
+  'id',
+  'initialFocus',
+]);
+
 /**
  * Description List
  */
