@@ -131,7 +131,7 @@ describe('SelectOptionBaseDirective', () => {
 
       expect(focusableOptions.length).toEqual(2);
 
-      const optionsArray: (string|null)[] = [];
+      const optionsArray: (string | null)[] = [];
 
       focusableOptions.forEach((item) => {
         optionsArray.push(item.textContent);

@@ -18,10 +18,7 @@ import { FudisTranslationService } from '../../../../services/translation/transl
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisSelectOption } from '../../../../types/forms';
-import {
-  getAllElements,
-  getElement,
-} from '../../../../utilities/tests/utilities';
+import { getAllElements, getElement } from '../../../../utilities/tests/utilities';
 import { TestAnimalSound, defaultOptions } from '../common/mock_data';
 
 @Component({
@@ -139,7 +136,7 @@ describe('MultiselectComponent', () => {
       initWithControlValue();
       const expectedValue = 'Dog, Platypus';
       const placeholderItems = getAllElements(fixture, '.fudis-select__input__label');
-      const placeholerItemsArray: (string|null)[] = [];
+      const placeholerItemsArray: (string | null)[] = [];
 
       placeholderItems.forEach((item) => {
         placeholerItemsArray.push(item.textContent);

@@ -120,9 +120,9 @@ describe('SelectGroupComponent', () => {
 
       const groupLabels = getAllElements(fixture, 'fudis-select-group .fudis-select-group__label');
 
-      const groupLabelsArray: (string|null)[] = [];
+      const groupLabelsArray: (string | null)[] = [];
 
-      groupLabels.forEach((label) => {;
+      groupLabels.forEach((label) => {
         groupLabelsArray.push(label.textContent);
       });
 
@@ -168,7 +168,7 @@ describe('SelectGroupComponent', () => {
       allGroups.forEach((group, index) => {
         const options = (group as HTMLDivElement).querySelectorAll('.fudis-select-option__label');
 
-        const singleGroupLabels: (string|null)[] = [];
+        const singleGroupLabels: (string | null)[] = [];
 
         options.forEach((singleOption) => {
           singleGroupLabels.push(singleOption.textContent);
@@ -194,7 +194,7 @@ describe('SelectGroupComponent', () => {
 
       expect(visibleOptions.length).toEqual(2);
 
-      const optionsArray: (string|null)[] = [];
+      const optionsArray: (string | null)[] = [];
 
       visibleOptions.forEach((item) => {
         optionsArray.push(item.textContent);
@@ -215,7 +215,7 @@ describe('SelectGroupComponent', () => {
 
       expect(hiddenGroups.length).toEqual(1);
 
-      const groupsArray: (string|null)[] = [];
+      const groupsArray: (string | null)[] = [];
 
       hiddenGroups.forEach((item) => {
         groupsArray.push(item.textContent);

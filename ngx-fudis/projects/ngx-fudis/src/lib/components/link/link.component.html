@@ -15,21 +15,27 @@
     rel="noopener noreferrer"
   >
     <ng-container *ngIf="!title">
-      <span class="fudis-link__external__icon-wrapper">{{ externalLink }}<span class="fudis-link__external__icon">
+      <span class="fudis-link__external__icon-wrapper"
+        >{{ externalLink
+        }}<span class="fudis-link__external__icon">
           <fudis-icon [icon]="'new-tab'" [color]="color" />
         </span>
       </span>
     </ng-container>
     <ng-container *ngIf="title">
       <ng-container *ngIf="_externalLinkTitleParsed.length > 1"
-        >{{ _externalLinkTitleParsed[0] }} <span class="fudis-link__external__icon-wrapper"
-        >{{ _externalLinkTitleParsed[1] }}<span class="fudis-link__external__icon">
+        >{{ _externalLinkTitleParsed[0] }}
+        <span class="fudis-link__external__icon-wrapper"
+          >{{ _externalLinkTitleParsed[1]
+          }}<span class="fudis-link__external__icon">
             <fudis-icon [icon]="'new-tab'" [color]="color" />
           </span>
         </span>
       </ng-container>
       <ng-container *ngIf="_externalLinkTitleParsed.length === 1">
-        <span class="fudis-link__external__icon-wrapper">{{ _externalLinkTitleParsed[0] }}<span class="fudis-link__external__icon">
+        <span class="fudis-link__external__icon-wrapper"
+          >{{ _externalLinkTitleParsed[0]
+          }}<span class="fudis-link__external__icon">
             <fudis-icon [icon]="'new-tab'" [color]="color" />
           </span>
         </span>
@@ -50,7 +56,8 @@
     [routerLink]="link"
     [fragment]="fragmentId"
     [initialFocus]="initialFocus"
-  >{{ title ? title : link }}</a>
+    >{{ title ? title : link }}</a
+  >
 </ng-container>
 <ng-container *ngIf="href && !link && !externalLink">
   <a
@@ -64,5 +71,6 @@
     (click)="_handleClick($event)"
     [href]="href"
     [initialFocus]="initialFocus"
-  >{{ title ? title : href }}</a>
+    >{{ title ? title : href }}</a
+  >
 </ng-container>

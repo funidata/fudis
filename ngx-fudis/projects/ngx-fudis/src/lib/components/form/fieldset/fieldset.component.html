@@ -33,7 +33,11 @@
               labelSize
             }}"
           >
-            <span class="fudis-fieldset__legend__title__text">{{ label }}<span *ngIf="required" class="fudis-fieldset__legend__title__text__required"> ({{ _requiredText }})</span>
+            <span class="fudis-fieldset__legend__title__text"
+              >{{ label
+              }}<span *ngIf="required" class="fudis-fieldset__legend__title__text__required">
+                ({{ _requiredText }})</span
+              >
             </span>
             <ng-container *ngIf="tooltip">
               <fudis-button

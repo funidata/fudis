@@ -28,7 +28,9 @@
           [color]="variant === 'lite' ? 'primary' : 'gray-dark'"
           [rotate]="_closed ? 'none' : 'cw-90'"
         ></fudis-icon
-        >{{ title }}<span *ngIf="variant !== 'lite' && subTitle"
+        >{{ title
+        }}<span
+          *ngIf="variant !== 'lite' && subTitle"
           class="fudis-expandable__header__heading__button__sub-heading"
           >{{ subTitle }}</span
         >
