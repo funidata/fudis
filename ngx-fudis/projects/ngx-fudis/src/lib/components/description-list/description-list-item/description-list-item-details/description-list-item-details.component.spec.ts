@@ -15,7 +15,7 @@ import { ButtonComponent } from '../../../button/button.component';
 import { IconComponent } from '../../../icon/icon.component';
 import { FudisBreakpointService } from '../../../../services/breakpoint/breakpoint.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
-import { getElement, getTrimmedTextContent } from '../../../../utilities/tests/utilities';
+import { getElement } from '../../../../utilities/tests/utilities';
 import { FudisDescriptionListVariant } from '../../../../types/miscellaneous';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { TooltipApiDirective } from '../../../../directives/tooltip/tooltip-api.directive';
@@ -207,7 +207,7 @@ describe('DescriptionListItemDetailsComponent', () => {
         '.fudis-dl-item-details__regular__parenthesis',
       );
 
-      expect(getTrimmedTextContent(subHeadingElement)).toEqual('Here is sub heading');
+      expect(subHeadingElement.textContent).toEqual('Here is sub heading');
       expect(parenthesisClass).toBeTruthy();
     });
   });

@@ -32,12 +32,8 @@
         (control.touched && control.invalid) || (control.touched && invalidState) ? true : null
       "
     >
-      <span *ngIf="!dropdownSelectionLabelText" class="fudis-select__input__placeholder">{{
-        placeholder
-      }}</span>
-      <span *ngIf="dropdownSelectionLabelText" class="fudis-select__input__label">{{
-        dropdownSelectionLabelText
-      }}</span>
+      <span *ngIf="!dropdownSelectionLabelText" class="fudis-select__input__placeholder">{{placeholder}}</span>
+      <span *ngIf="dropdownSelectionLabelText" class="fudis-select__input__label">{{dropdownSelectionLabelText}}</span>
     </div>
     <fudis-icon
       *ngIf="!autocomplete"
@@ -96,9 +92,7 @@
     [control]="control"
   />
   <ng-container *ngIf="showSelectionChips && _sortedSelectedOptions.length > 0">
-    <span [attr.id]="id + '-remove-items'" class="fudis-visually-hidden">{{
-      _translationRemoveItem
-    }}</span>
+    <span [attr.id]="id + '-remove-items'" class="fudis-visually-hidden">{{_translationRemoveItem}}</span>
     <fudis-multiselect-chip-list
       [selectedItems]="_sortedSelectedOptions"
       [parentId]="id"
