@@ -88,8 +88,6 @@ Datepicker.args = {
   ...commonArgs,
 };
 
-Datepicker.parameters = {};
-
 const PreselectedTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent) => ({
   props: {
     ...args,

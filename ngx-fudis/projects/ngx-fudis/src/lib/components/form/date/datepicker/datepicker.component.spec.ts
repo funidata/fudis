@@ -135,7 +135,7 @@ describe('DatepickerComponent', () => {
 
       expect(component.handleBlur.emit).toHaveBeenCalled();
 
-      datepickerInput.dispatchEvent(new KeyboardEvent('keyup', { 'keyCode': 65}));
+      datepickerInput.dispatchEvent(new KeyboardEvent('keyup', { keyCode: 65 }));
       fixture.detectChanges();
 
       expect(component.handleKeyUp.emit).toHaveBeenCalled();
