@@ -18,11 +18,7 @@ import { FudisTranslationService } from '../../../../services/translation/transl
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisSelectOption } from '../../../../types/forms';
-import {
-  getAllElements,
-  getElement,
-  getTrimmedTextContent,
-} from '../../../../utilities/tests/utilities';
+import { getAllElements, getElement } from '../../../../utilities/tests/utilities';
 import { TestAnimalSound, defaultOptions } from '../common/mock_data';
 import { ContentDirective } from '../../../../directives/content-projection/content/content.directive';
 
@@ -94,21 +90,11 @@ describe('MultiselectComponent', () => {
     componentMock.control = control;
 
     fixtureMock.detectChanges();
-
-    // componentMock.multiselectEl.ngOnChanges({
-    //   control: { currentValue: control, previousValue: undefined, firstChange: true },
-    // });
-
-    // fixtureMock.detectChanges();
   }
 
   function initWithControlNull() {
     const control = new FormControl<FudisSelectOption<TestAnimalSound>[] | null>(null);
     componentMock.control = control;
-
-    // component.ngOnChanges({
-    //   control: { currentValue: control, previousValue: undefined, firstChange: true },
-    // });
 
     fixtureMock.detectChanges();
   }
@@ -145,22 +131,23 @@ describe('MultiselectComponent', () => {
       initWithControlNull();
       const placeholder = getElement(fixtureMock, '.fudis-select__input__placeholder');
 
+      const labelText = getElement(fixtureMock, '.fudis-select__input__label');
+
+      expect(labelText).toBeFalsy();
       expect(placeholder.outerHTML).toContain('Multiselect placeholder');
     });
 
     it('should have HTML input value from control value if control value is set on init', () => {
       initWithControlValue();
+
       const expectedValue = 'Dog, Platypus';
 
-      const placeholderItems = getAllElements(fixtureMock, '.fudis-select__input__label');
-      const placeholerItemsArray: string[] = [];
+      const labelText = getElement(fixtureMock, '.fudis-select__input__label');
 
-      placeholderItems.forEach((item) => {
-        const cleanedItem = getTrimmedTextContent(item as HTMLElement);
-        placeholerItemsArray.push(cleanedItem);
-      });
+      const placeholder = getElement(fixtureMock, '.fudis-select__input__placeholder');
 
-      expect(placeholerItemsArray).toEqual([expectedValue]);
+      expect(labelText.textContent).toEqual(expectedValue);
+      expect(placeholder).toBeFalsy();
     });
 
     it('should have placehorder text present when control value is updated to null', () => {
@@ -170,7 +157,10 @@ describe('MultiselectComponent', () => {
 
       const placeholder = getElement(fixtureMock, '.fudis-select__input__placeholder');
 
+      const labelText = getElement(fixtureMock, '.fudis-select__input__label');
+
       expect(placeholder.outerHTML).toContain('Multiselect placeholder');
+      expect(labelText).toBeFalsy();
     });
   });
 
@@ -182,6 +172,8 @@ describe('MultiselectComponent', () => {
 
     it('should update component and control state when handleMultiSelectionChange is called with type "add" and control value is null', () => {
       initWithControlNull();
+
+      componentMock.multiselectEl.openDropdown();
 
       componentMock.multiselectEl.handleMultiSelectionChange(defaultOptions[5], 'add');
       fixtureMock.detectChanges();
@@ -197,8 +189,6 @@ describe('MultiselectComponent', () => {
 
       componentMock.multiselectEl.handleMultiSelectionChange(defaultOptions[5], 'add');
       fixtureMock.detectChanges();
-
-      console.log(componentMock.multiselectEl.dropdownSelectionLabelText);
 
       const value = getElement(fixtureMock, '.fudis-select__input__label').textContent;
 

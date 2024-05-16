@@ -68,7 +68,7 @@
     />
   </div>
   <fudis-select-dropdown
-    *ngIf="_openedOnce && !disabled && !control.disabled"
+    *ngIf="_optionsLoadedOnce && !disabled && !control.disabled"
     #dropdownRef
     [open]="_dropdownOpen"
     [multiselect]="true"

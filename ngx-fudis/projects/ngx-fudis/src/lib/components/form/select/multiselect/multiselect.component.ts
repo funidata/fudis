@@ -129,36 +129,64 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
     }
 
     this._controlValueChangedInternally = true;
-    this.selectionUpdate.emit(updatedValue);
-    this.control.patchValue(updatedValue);
-    this.handleCheckedSort(option, type);
+
+    if (updatedValue?.length === 0) {
+      this.selectionUpdate.emit(null);
+      this.control.patchValue(null);
+    } else {
+      this.selectionUpdate.emit(updatedValue);
+      this.control.patchValue(updatedValue);
+    }
   }
 
   /**
    * Function called by multiselect option if they are checked
    * @param checkedOption FudisSelectOption to handle
+   * @param type add or remove option from sorting
    */
-  public handleCheckedSort(
-    checkedOption: FudisSelectOption<object>,
-    type: 'add' | 'remove' = 'add',
-  ): void {
+  public handleCheckedSort(checkedOption: FudisSelectOption<object>, type: 'add' | 'remove'): void {
+    // Check if checkedOption exists in registeredOptions
     const foundIndex: number = this._registeredOptions.findIndex((option) => {
-      return option.value === checkedOption.value && option.label === checkedOption.label;
+      return option.value === checkedOption.value;
     });
 
+    // If found, remove it
     if (foundIndex !== -1 && type === 'remove') {
       this._registeredOptions = this._registeredOptions.filter((_item, index) => {
         return foundIndex !== index;
       });
-    } else {
+      // If not found, add it
+    } else if (foundIndex === -1 && type === 'add') {
       this._registeredOptions.push(checkedOption);
+    } else if (foundIndex && type === 'add') {
+      this._registeredOptions[foundIndex] = checkedOption;
     }
 
-    if (this._registeredOptions.length === this.control.value?.length) {
+    // Compare control value with registered options, if it matches, then sort options for the visible input field label text and for the chips
+
+    let valuesInSync = true;
+
+    if (this.control.value && this._registeredOptions.length === this.control.value.length) {
+      this._registeredOptions.forEach((registeredOption) => {
+        const matchFound = this.control.value?.find((controlOption) => {
+          return (
+            registeredOption.value === controlOption.value &&
+            registeredOption.label === controlOption.label
+          );
+        });
+
+        if (!matchFound) {
+          valuesInSync = false;
+        }
+      });
+    }
+
+    if (valuesInSync && this.control.value) {
       this._sortedSelectedOptions = sortValues(this._registeredOptions);
       this._dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
       this._cdr.detectChanges();
     } else {
+      this._sortedSelectedOptions = [];
       this._dropdownSelectionLabelText = null;
     }
   }
@@ -167,13 +195,10 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
    * Update internal states when Application updates control value
    */
   protected override _updateSelectionFromControlValue(): void {
-    if (this.control.value) {
-      this._selectedOptionsSignal.set(this.control.value);
-      this._openedOnce = true;
+    this._optionsLoadedOnce = true;
 
-      if (this.autocomplete) {
-        this.noResultsFound = false;
-      }
+    if (this.control.value && this.autocomplete) {
+      this.noResultsFound = false;
     } else {
       this.noResultsFound = true;
       this._dropdownSelectionLabelText = null;
@@ -181,24 +206,18 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
   }
 
   /**
-   * Handle chip item remove by index. If there are no selections done, focus back to input on last item removal.
-   * @param index index to remove
+   * Handle chip remove. If there are no selections done, focus back to input on last item removal.
+   * @param option removed option
    */
-  protected _handleRemoveChip(index: number): void {
-    const currentValue = this.control.value;
+  protected _handleRemoveChip(option: FudisSelectOption<object>): void {
+    this.handleMultiSelectionChange(option, 'remove');
 
-    if (currentValue) {
-      currentValue.splice(index, 1);
-      if (currentValue!.length === 0 && this.autocomplete) {
+    if (!this.control.value) {
+      if (this.autocomplete) {
         this._autocompleteRef.inputRef.nativeElement.focus();
-      } else if (currentValue!.length === 0) {
+      } else {
         this._inputRef.nativeElement.focus();
       }
-
-      this._dropdownSelectionLabelText = joinInputValues(currentValue);
-      this._selectedOptionsSignal.set(currentValue);
-      this._controlValueChangedInternally = true;
-      this.control.patchValue(currentValue);
     }
   }
 }

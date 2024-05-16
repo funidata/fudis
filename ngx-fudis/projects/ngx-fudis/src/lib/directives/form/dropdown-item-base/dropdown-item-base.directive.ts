@@ -15,7 +15,7 @@ export class DropdownItemBaseDirective {
   /**
    * Checked state for dropdown-menu-item with checkbox
    */
-  @Input() checked: boolean;
+  @Input() checked: boolean = false;
 
   /**
    * Optional click handler

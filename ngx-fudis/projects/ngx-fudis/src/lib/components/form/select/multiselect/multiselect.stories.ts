@@ -42,6 +42,15 @@ export default {
 
 const html = String.raw;
 
+const commonProps: Partial<MultiselectComponent> = {
+  label: 'Select a pet',
+  size: 'lg',
+  disabled: false,
+  placeholder: 'Choose a pet',
+  helpText: 'All pets are equally important, but for sake of this example please pick atleast two',
+  showSelectionChips: true,
+};
+
 const ExampleTemplate: StoryFn<MultiselectComponent> = (args: MultiselectComponent) => ({
   props: {
     ...args,
@@ -82,12 +91,7 @@ const ExampleTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCompone
 
 export const Example = ExampleTemplate.bind({});
 Example.args = {
-  label: 'Select a pet',
-  size: 'lg',
-  disabled: false,
-  placeholder: 'Choose a pet',
-  helpText: 'All pets are equally important, but for sake of this example please pick atleast two',
-  showSelectionChips: true,
+  ...commonProps,
 };
 
 const PreSelectedTemplate: StoryFn<MultiselectComponent> = (args: MultiselectComponent) => ({
@@ -96,7 +100,83 @@ const PreSelectedTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCom
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
     control: new FormControl<TestAnimalSound[] | null>(
-      [defaultOptions[1], defaultOptions[0]],
+      [defaultOptions[2], defaultOptions[0]],
+      FudisValidators.minLength(2, 'Pick at least two pets'),
+    ),
+    groupedMockData,
+  },
+  template: html`
+    <fudis-notification [variant]="'danger'">
+      <fudis-body-text [size]="'regular-md'"
+        >joo elikkäs lorem sdasdas dasd as dasdas dsa dasd asd asdasdas das sdad sadas sad asd
+        asdsad asd asd asd asdasdas dsa dsad asd adasdsa dasd asd asd asd
+      </fudis-body-text>
+      <fudis-body-text [size]="'regular-md'">kukkuu</fudis-body-text>
+    </fudis-notification>
+    <fudis-multiselect
+      [size]="size"
+      [placeholder]="placeholder"
+      [control]="control"
+      [label]="label"
+      [helpText]="helpText"
+      [disabled]="disabled"
+      (selectionUpdate)="selectionUpdate($event)"
+      [showSelectionChips]="showSelectionChips"
+    >
+      <ng-template fudisContent type="select-options">
+        <fudis-multiselect-option
+          *ngFor="let option of defaultOptions"
+          [data]="option"
+        ></fudis-multiselect-option>
+        <!--
+        <fudis-multiselect-group *ngFor="let group of groupedMockData" [label]="group.country">
+          <fudis-multiselect-option
+            *ngFor="let groupedOption of group.options"
+            [data]="groupedOption"
+          ></fudis-multiselect-option>
+        </fudis-multiselect-group>
+        -->
+      </ng-template>
+    </fudis-multiselect>
+    <!--
+    <fudis-body-text *ngIf="!control.value || control.value.length === 0"
+      >Control value is null or an empty array
+    </fudis-body-text>
+
+    <ng-container *ngIf="control.value && control.value.length > 0">
+      <fudis-section [title]="'Selected options'" [titleLevel]="2">
+        <ng-template fudisContent type="section">
+          <ng-container *ngFor="let option of control.value; let i = index">
+            <fudis-heading [level]="3" [size]="'md'">Option {{i + 1}} </fudis-heading>
+            <fudis-dl [variant]="'compact'">
+              <fudis-dl-item *ngFor="let row of option | keyvalue">
+                <fudis-dt [textContent]="row.key"></fudis-dt>
+                <fudis-dd [textContent]="row.value"></fudis-dd>
+              </fudis-dl-item>
+            </fudis-dl>
+          </ng-container>
+        </ng-template>
+      </fudis-section>
+    </ng-container>
+    -->
+  `,
+});
+
+export const PreSelected = PreSelectedTemplate.bind({});
+PreSelected.args = {
+  ...commonProps,
+};
+
+const DisabledTemplate: StoryFn<MultiselectComponent> = (args: MultiselectComponent) => ({
+  props: {
+    ...args,
+    defaultOptions,
+    selectionUpdate: action('selectionUpdate'),
+    control: new FormControl<TestAnimalSound[] | null>(
+      {
+        value: [defaultOptions[1], defaultOptions[0]],
+        disabled: true,
+      },
       FudisValidators.minLength(2, 'Pick at least two pets'),
     ),
     groupedMockData,
@@ -128,12 +208,7 @@ const PreSelectedTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCom
   `,
 });
 
-export const PreSelected = PreSelectedTemplate.bind({});
-PreSelected.args = {
-  label: 'Select a pet',
-  size: 'lg',
-  disabled: false,
-  placeholder: 'Choose a pet',
-  helpText: 'All pets are equally important, but for sake of this example please pick atleast two',
-  showSelectionChips: true,
+export const Disabled = DisabledTemplate.bind({});
+Disabled.args = {
+  ...commonProps,
 };

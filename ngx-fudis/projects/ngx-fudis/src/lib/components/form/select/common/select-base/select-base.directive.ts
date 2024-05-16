@@ -160,9 +160,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
   protected _autocompleteFilterText: WritableSignal<string> = signal<string>('');
 
   /**
-   *  Lazy loading check for expanding content, unless component control gets values from application, then set to true automatically
+   *  Lazy loading check for expanding content, unless component control gets values from application, then set to true automatically, so that comparing available options match given control value.
    */
-  protected _openedOnce: boolean = false;
+  protected _optionsLoadedOnce: boolean = false;
 
   /**
    * Used when filtering autocomplete results to check if 'No results found' text is visible
@@ -365,7 +365,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
    * Open dropdown
    */
   public openDropdown(): void {
-    this._openedOnce = true;
+    this._optionsLoadedOnce = true;
     this._dropdownOpen = true;
   }
 

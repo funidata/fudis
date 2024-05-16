@@ -98,14 +98,12 @@ describe('MultiselectOptionComponent', () => {
 
     it('should add value to control with already existing values when another option is selected', () => {
       let inputLabelText = componentMock.selectEl.dropdownSelectionLabelText;
-      console.log(inputLabelText);
+
       componentMock.control.patchValue([defaultOptions[4], defaultOptions[0]]);
 
       fixtureMock.detectChanges();
 
       inputLabelText = componentMock.selectEl.dropdownSelectionLabelText;
-
-      console.log(inputLabelText);
 
       //setMultiSelectDropdownOpen();
 
