@@ -106,13 +106,6 @@ const PreSelectedTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCom
     groupedMockData,
   },
   template: html`
-    <fudis-notification [variant]="'danger'">
-      <fudis-body-text [size]="'regular-md'"
-        >joo elikkäs lorem sdasdas dasd as dasdas dsa dasd asd asdasdas das sdad sadas sad asd
-        asdsad asd asd asd asdasdas dsa dsad asd adasdsa dasd asd asd asd
-      </fudis-body-text>
-      <fudis-body-text [size]="'regular-md'">kukkuu</fudis-body-text>
-    </fudis-notification>
     <fudis-multiselect
       [size]="size"
       [placeholder]="placeholder"
@@ -128,14 +121,13 @@ const PreSelectedTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCom
           *ngFor="let option of defaultOptions"
           [data]="option"
         ></fudis-multiselect-option>
-        <!--
+
         <fudis-multiselect-group *ngFor="let group of groupedMockData" [label]="group.country">
           <fudis-multiselect-option
             *ngFor="let groupedOption of group.options"
             [data]="groupedOption"
           ></fudis-multiselect-option>
         </fudis-multiselect-group>
-        -->
       </ng-template>
     </fudis-multiselect>
     <!--

@@ -26,8 +26,10 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
     super(_document);
 
     effect(() => {
-      if (this._parent.autocomplete) {
-        this._isOptionVisible(this._parent.getAutocompleteFilterText()());
+      const filterText = this._parent.getAutocompleteFilterText()();
+
+      if (this._parent.autocomplete && filterText.length >= 3) {
+        this._isOptionVisible(filterText);
       }
     });
   }
@@ -77,10 +79,6 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
           ? true
           : !filterText;
 
-      if (this._optionVisible && this._parent.noResultsFound) {
-        this._parent.noResultsFound = false;
-      }
-
       this._updateVisibilityToParents(this._optionVisible);
     }
   }
@@ -89,10 +87,10 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
    * Update option visibility to parent component
    */
   protected _updateVisibilityToParents(visible: boolean): void {
-    this._parent.setOptionVisibility(this.data.value, visible);
+    this._parent.setOptionVisibility(this._id, visible);
 
     if (this._parentGroup) {
-      this._parentGroup.setOptionVisibility(this.data.value, visible);
+      this._parentGroup.setOptionVisibility(this._id, visible);
     }
   }
 

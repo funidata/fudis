@@ -197,12 +197,9 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
   protected override _updateSelectionFromControlValue(): void {
     this._optionsLoadedOnce = true;
 
-    if (this.control.value && this.autocomplete) {
-      this.noResultsFound = false;
-    } else {
-      this.noResultsFound = true;
+    if (!this.control.value || this.control.value.length === 0) {
       this._dropdownSelectionLabelText = null;
-    }
+    } 
   }
 
   /**

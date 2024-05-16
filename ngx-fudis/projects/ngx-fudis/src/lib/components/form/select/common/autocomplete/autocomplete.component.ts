@@ -92,6 +92,8 @@ export class SelectAutocompleteComponent {
    */
   @Input() autocompleteClearButton: boolean = true;
 
+  @Input() visibleOptions: string[];
+
   /**
    * Output event for input field blur
    */
@@ -141,11 +143,6 @@ export class SelectAutocompleteComponent {
    * Used to prevent case when user selects an option from dropdown with Space key, which would add an extra space to filter text and "breaking" the selection.
    */
   public preventSpaceKeypress: boolean = false;
-
-  /**
-   * Info sent by the parent Select / Multiselect to define if only one option is visible.
-   */
-  public visibleOptionsLength: number = 0;
 
   /**
    * Input form field focus status
@@ -216,17 +213,18 @@ export class SelectAutocompleteComponent {
 
     this.preventSpaceKeypress = false;
 
-    if (this.dropdownOpen && this.visibleOptionsLength === 1 && key === 'Enter') {
+    if (this.dropdownOpen && this.visibleOptions?.length === 1 && key === 'Enter') {
       this.triggerSelectOnlyVisibleOption.emit();
     } else if (!this._preventDropdownReOpen && key === 'Enter') {
       this.triggerDropdownToggle.emit();
-    } else if (key !== 'ArrowDown' && this.autocompleteClearButton && inputValue === '') {
+    } else if (key !== 'ArrowDown' && this.autocompleteClearButton && inputValue.length < 3) {
       this.triggerDropdownClose.emit();
     } else if (
       !this._preventDropdownReOpen &&
       !this.dropdownOpen &&
       key !== 'Escape' &&
-      key !== 'Enter'
+      key !== 'Enter' &&
+      inputValue.length >= 3
     ) {
       this.triggerDropdownOpen.emit();
     } else if (key === 'ArrowDown' && this._focused) {

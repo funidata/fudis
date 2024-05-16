@@ -49,12 +49,6 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
     } else {
       this._updateVisibilityToParents(true);
     }
-
-    this._updateVisibilityFromControlUpdate();
-
-    this._controlValueSubscription = this._parentSelect.control.valueChanges.subscribe(() => {
-      this._updateVisibilityFromControlUpdate();
-    });
   }
 
   ngOnDestroy(): void {
@@ -93,15 +87,6 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
         };
         this._parentSelect.handleSelectionChange(selectedOption, true);
       }
-    }
-  }
-
-  /**
-   * Update select option visibility
-   */
-  private _updateVisibilityFromControlUpdate(): void {
-    if (this._parentSelect.control.value?.value === this.data.value) {
-      this._parentSelect.noResultsFound = false;
     }
   }
 }

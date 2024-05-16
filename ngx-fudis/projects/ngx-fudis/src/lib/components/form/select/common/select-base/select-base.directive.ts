@@ -127,11 +127,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
    */
   public focusSelector: string;
 
-  /**
-   * With autocomplete always assume that no results are found when control value is updated or when autocomplete filter text is updated. Each option will then check, if control value or filter text value matches its label and sets this false.
-   */
-  public noResultsFound: boolean = true;
-
   private _focusTryCounter: number = 0;
 
   /**
@@ -167,7 +162,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
   /**
    * Used when filtering autocomplete results to check if 'No results found' text is visible
    */
-  protected _visibleOptionsValues: string[] = [];
+  protected _visibleOptions: string[] = [];
 
   /**
    * Status of input focus
@@ -236,11 +231,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
    * @param visible is this option visible or not
    */
   public setOptionVisibility(value: string, visible: boolean) {
-    this._visibleOptionsValues = setVisibleOptionsList(this._visibleOptionsValues, value, visible);
-
-    if (this.autocomplete) {
-      this._autocompleteRef.visibleOptionsLength = this._visibleOptionsValues.length;
-    }
+    this._visibleOptions = setVisibleOptionsList(this._visibleOptions, value, visible);
   }
 
   /**
@@ -310,7 +301,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
    * @param event KeyboardEvent
    * @param focusSelector CSS selector to focus to on ArrowDown event
    */
-  protected _dropdownKeypress(event: KeyboardEvent, focusSelector: string): void {
+  protected _dropdownKeypress(event: KeyboardEvent): void {
     const { key } = event;
 
     switch (key) {
@@ -325,7 +316,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
           this._toggleDropdown();
         }
         if (this._inputFocused) {
-          this._focusToFirstOption(focusSelector);
+          this._focusToFirstOption();
         }
         break;
       case 'Tab':
@@ -365,17 +356,20 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
    * Open dropdown
    */
   public openDropdown(): void {
-    this._optionsLoadedOnce = true;
-    this._dropdownOpen = true;
+    if (!this.disabled && !this.control.disabled) {
+      this._optionsLoadedOnce = true;
+      this._dropdownOpen = true;
+    }
   }
 
   /**
    * Update input filter
    */
   protected _filterTextUpdate(text: string): void {
-    if (this._autocompleteFilterText() !== text) {
-      this.noResultsFound = true;
+    if (this._autocompleteFilterText() !== text && text.length >= 3) {
       this._autocompleteFilterText.set(text);
+    } else if (text.length < 3 && this._autocompleteFilterText() !== '') {
+      this._autocompleteFilterText.set('');
     }
   }
 
@@ -385,13 +379,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
    */
 
   // TODO: check if this could be achieved more elegantly
-  protected _focusToFirstOption(cssfocusSelector: string, clickFirstOption?: boolean): void {
-    const cssSelector = `.${cssfocusSelector}`;
-
-    const firstOption: HTMLInputElement =
-      this._dropdownRef?.dropdownElement.nativeElement.querySelector(
-        cssSelector,
-      ) as HTMLInputElement;
+  protected _focusToFirstOption(clickFirstOption?: boolean): void {
+    const firstOption: HTMLInputElement | null =
+      this._dropdownRef?.dropdownElement.nativeElement.querySelector(`#${this._visibleOptions[0]}`);
 
     if (firstOption) {
       firstOption.focus();
@@ -411,7 +401,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
     } else if (this._focusTryCounter < 100) {
       setTimeout(() => {
         this._focusTryCounter += 1;
-        this._focusToFirstOption(cssSelector);
+        this._focusToFirstOption();
       }, 100);
     }
   }
