@@ -3,7 +3,6 @@ import { NativeDateAdapter } from '@angular/material/core';
 import { FudisDateInputFormat } from '../../../../types/forms';
 import { parseDate } from './utilities';
 
-// TODO: Write tests and add more internal documentation to this file if necessary
 @Injectable()
 export class FudisDateAdapter extends NativeDateAdapter {
   /**
@@ -18,10 +17,10 @@ export class FudisDateAdapter extends NativeDateAdapter {
 
   override format(date: Date, displayFormat: object): string {
     if (!this.isValid(date)) {
-      throw Error('NativeDateAdapter: Cannot format invalid date.');
+      throw Error('FudisDateAdapter: Cannot format invalid date.');
     }
 
-    const dtf = new Intl.DateTimeFormat(this.selectLanguage(displayFormat), {
+    const dtf = new Intl.DateTimeFormat(this._selectLanguage(displayFormat), {
       ...displayFormat,
       timeZone: 'utc',
     });
@@ -40,13 +39,18 @@ export class FudisDateAdapter extends NativeDateAdapter {
    * Determines from displayFormat value if the Date value is coming from the input field or from the datepicker calendar.
    * This ensures, that visible input value is always in Finnish DD.MM.YYYY format, but calendar uses HTML lang in other context.
    */
-  selectLanguage(displayFormat: object): string {
+  protected _selectLanguage(displayFormat: object): string {
     if (Object.prototype.valueOf.call(displayFormat) === FudisDateInputFormat) {
       return 'fi-FI';
     }
     return this.locale;
   }
 
+  /**
+   * @param dtf Intl.DateTimeFormat object, containing the desired string format. It must have timeZone set to 'utc' to work fine
+   * @param date Date from which we want to get the string representation according to dtf
+   * @returns A Date object with its UTC representation based on the passed date info
+   */
   private _formatInputToDate(dtf: Intl.DateTimeFormat, date: Date) {
     // Passing the year to the constructor causes year numbers <100 to be converted to 19xx.
     // To work around this we use `setUTCFullYear` and `setUTCHours` instead.
