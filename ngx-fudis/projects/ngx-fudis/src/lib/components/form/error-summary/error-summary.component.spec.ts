@@ -168,7 +168,9 @@ describe('ErrorSummaryComponent', () => {
       const renderedHelpText = wrapperFixture.nativeElement.querySelector('fudis-body-text p');
 
       // Hidden icon text + Help Text
-      expect(renderedHelpText.textContent).toBe('Attention: There were errors you need to fix');
+      expect(renderedHelpText.textContent).toBe(
+        'Attention:\u00A0There were errors you need to fix',
+      );
     });
 
     it('should have Fudis Link attributes correctly with router link', () => {
