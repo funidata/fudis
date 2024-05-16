@@ -21,3 +21,15 @@ test("datepicker open calendar pop-up", async ({ page }) => {
   await expect(page).toHaveScreenshot({ fullPage: true });
 });
 
+test("datepicker disabled", async ({ page }) => {
+  await page.goto("/iframe.html?args=&id=components-form-date-datepicker--disabled&viewMode=story");
+  await expect(page).toHaveScreenshot();
+});
+
+test("datepicker min and max", async ({ page }) => {
+  await page.goto("/iframe.html?args=&id=components-form-date-datepicker--with-min-max-validator&viewMode=story");
+  await page.getByTestId("fudis-datepicker-calendar-icon-toggle").click();
+  await expect(page).toHaveScreenshot({ fullPage: true });
+});
+
+

@@ -150,12 +150,12 @@ const MinMaxTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent)
     ...args,
     control: new FormControl<Date | null>(null, [
       FudisValidators.datepickerMin({
-        value: new Date(2024, 0, 10),
-        message: 'Date cannot be before 10.1.2024',
+        value: new Date(2024, 1, 4),
+        message: 'Date cannot be before 4.2.2024',
       }),
       FudisValidators.datepickerMax({
-        value: new Date(2024, 1, 15),
-        message: 'Date cannot be after 15.2.2024',
+        value: new Date(2024, 1, 20),
+        message: 'Date cannot be after 20.2.2024',
       }),
     ]),
   },
