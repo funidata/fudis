@@ -20,7 +20,7 @@ import { IconComponent } from '../../icon/icon.component';
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
 import { NotificationsDirective } from '../../../directives/content-projection/notifications/notifications.directive';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
-import { getElement, getTrimmedTextContent } from '../../../utilities/tests/utilities';
+import { getElement } from '../../../utilities/tests/utilities';
 import { FudisInputSize } from '../../../types/forms';
 
 @Component({
@@ -132,13 +132,13 @@ describe('FieldSetComponent', () => {
     it('should have Fieldset label as given', () => {
       const fieldsetLabel = getElement(fixtureMock, '.fudis-fieldset__legend__title__text');
 
-      expect(getTrimmedTextContent(fieldsetLabel as HTMLElement)).toEqual('Fieldset label');
+      expect(fieldsetLabel.textContent).toEqual('Fieldset label');
     });
 
     it('should have fieldset helpText as given', () => {
       const fieldsetHelpText = getElement(fixtureMock, '.fudis-fieldset__legend__help-text');
 
-      expect(getTrimmedTextContent(fieldsetHelpText as HTMLElement)).toEqual('Fieldset help text');
+      expect(fieldsetHelpText?.textContent).toEqual('Fieldset help text');
     });
 
     it('should have required text if given', () => {
@@ -151,7 +151,7 @@ describe('FieldSetComponent', () => {
       );
 
       expect(requiredTextElement).toBeTruthy();
-      expect(requiredTextElement?.textContent).toEqual('(Required)');
+      expect(requiredTextElement?.textContent).toEqual(' (Required)');
     });
 
     it('should have initial focus', () => {
