@@ -21,7 +21,7 @@ import { GuidanceComponent } from '../guidance/guidance.component';
 import { LabelComponent } from '../label/label.component';
 import { TextInputComponent } from '../text-input/text-input.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
-import { getElement, getTrimmedTextContent } from '../../../utilities/tests/utilities';
+import { getElement } from '../../../utilities/tests/utilities';
 import { BadgeComponent } from '../../badge/badge.component';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
 import { LinkDirective } from '../../../directives/link/link.directive';
@@ -161,7 +161,7 @@ describe('FormComponent', () => {
 
       expect(headingElement).toBeTruthy();
       expect(headingContent).toBeTruthy();
-      expect(getTrimmedTextContent(headingContent as HTMLElement)).toEqual('Example Form');
+      expect(headingContent?.textContent).toEqual('Example Form');
       expect(headingContent?.className).toContain('fudis-heading__size__md');
     });
 
@@ -177,7 +177,7 @@ describe('FormComponent', () => {
       );
 
       expect(badgeElement).toBeTruthy();
-      expect(getTrimmedTextContent(badgeContent as HTMLSpanElement)).toEqual('Form badge');
+      expect(badgeContent.textContent).toEqual('Form badge');
     });
   });
 

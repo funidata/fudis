@@ -5,7 +5,7 @@ import { BodyTextComponent } from '../typography/body-text/body-text.component';
 import { LinkComponent } from '../link/link.component';
 import { NotificationComponent } from './notification.component';
 import { FudisNotification } from '../../types/miscellaneous';
-import { getElement, getTrimmedTextContent } from '../../utilities/tests/utilities';
+import { getElement } from '../../utilities/tests/utilities';
 import { RouterModule } from '@angular/router';
 import { LinkDirective } from '../../directives/link/link.directive';
 import { ChangeDetectionStrategy } from '@angular/core';
@@ -123,7 +123,7 @@ describe('NotificationComponent', () => {
 
       const anchorElement = getElement(fixture, 'a');
 
-      expect(getTrimmedTextContent(anchorElement)).toEqual('New link title');
+      expect(anchorElement.textContent).toEqual('New link title');
     });
 
     it('should replace router link with external link', () => {

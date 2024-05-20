@@ -17,7 +17,6 @@ import { FudisSelectOption } from '../../../../../types/forms';
 import { SelectAutocompleteComponent } from '../../common/autocomplete/autocomplete.component';
 import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
 import { By } from '@angular/platform-browser';
-import { getTrimmedTextContent } from '../../../../../utilities/tests/utilities';
 
 @Component({
   selector: 'fudis-mock-container',
@@ -127,7 +126,7 @@ describe('SelectOptionComponent', () => {
         By.css('.fudis-select-option--selected'),
       ).nativeElement;
 
-      expect(getTrimmedTextContent(selectedValue)).toEqual('Capybara');
+      expect(selectedValue.textContent).toEqual('Capybara');
 
       expect(checkIcon).toBeTruthy();
     });
@@ -144,7 +143,7 @@ describe('SelectOptionComponent', () => {
         By.css('.fudis-select-option--selected'),
       ).nativeElement;
 
-      expect(getTrimmedTextContent(selectedValue)).toEqual('Screaming hairy armadillo');
+      expect(selectedValue.textContent).toEqual('Screaming hairy armadillo');
 
       expect(checkIcon).toBeTruthy();
     });
@@ -168,7 +167,7 @@ describe('SelectOptionComponent', () => {
 
       const options = fixture.debugElement.queryAll(By.css('.fudis-select-option'));
 
-      const textContent = getTrimmedTextContent(options[3].nativeElement);
+      const textContent = options[3].nativeElement.textContent;
 
       expect(textContent).toEqual('Really dangerous cat (Disabled)');
     });

@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { BadgeComponent } from './badge.component';
 import { FudisBadgeVariant } from '../../types/miscellaneous';
-import { getTrimmedTextContent } from '../../utilities/tests/utilities';
 
 describe('BadgeComponent', () => {
   let component: BadgeComponent;
@@ -54,9 +53,9 @@ describe('BadgeComponent', () => {
       fixture.detectChanges();
       const elem = fixture.debugElement.query(By.css('.fudis-badge'));
 
-      const trimmedText = getTrimmedTextContent(elem.nativeElement);
+      const badgeContent = elem.nativeElement;
 
-      expect(trimmedText).toEqual(component.content);
+      expect(badgeContent.textContent).toEqual(component.content);
     });
   });
 });
