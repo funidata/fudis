@@ -6,7 +6,7 @@ import { NgxFudisModule } from 'ngx-fudis';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { DialogTestComponent } from './dialog-test/dialog-test.component';
 import { DialogTestContentComponent } from './dialog-test/dialog-test-content/dialog-test-content.component';
@@ -15,10 +15,20 @@ import { AppFormExampleComponent } from './components/formExamples.component';
 import { AppDropdownExamplesComponent } from './components/dropdownExamples.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogTestFormComponent } from './dialog-test/dialog-test-content/dialog-test-form.component';
+import { ExerciseComponent } from './exercise/exercise.component';
+import { SandboxComponent } from './sandbox/sandbox.component';
+
+const appRoutes: Routes = [
+  { path: '', component: AppComponent},
+  { path: 'exercise', component: ExerciseComponent},
+  { path: 'sandbox', component: SandboxComponent},
+]
 
 @NgModule({
   declarations: [
     AppComponent,
+    ExerciseComponent,
+    SandboxComponent,
     DialogTestComponent,
     DialogTestContentComponent,
     DialogTestFormComponent,
@@ -33,7 +43,7 @@ import { DialogTestFormComponent } from './dialog-test/dialog-test-content/dialo
     ScrollingModule,
     HttpClientModule,
     TranslocoRootModule,
-    RouterModule.forRoot([]),
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [
     {
