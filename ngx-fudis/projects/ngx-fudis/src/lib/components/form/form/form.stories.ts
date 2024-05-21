@@ -240,7 +240,7 @@ class ExampleWithMultipleFormsComponent {
       <ng-template fudisHeader>
         <fudis-dl [columns]="1" [variant]="'compact'">
           <fudis-dl-item>
-            <fudis-dt [textContent]="'Importatnt person'" />
+            <fudis-dt [textContent]="'Important person'" />
             <fudis-dd [textContent]="'Admiral Thrawn'" />
           </fudis-dl-item>
           <fudis-dl-item>
