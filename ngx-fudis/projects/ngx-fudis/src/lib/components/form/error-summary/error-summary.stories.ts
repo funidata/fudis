@@ -45,7 +45,7 @@ import { excludeAllRegex } from '../../../utilities/storybook';
         <ng-template fudisContent [type]="'section'">
           <fudis-fieldset [label]="'Fieldset legend'">
             <ng-template fudisContent type="fieldset">
-              <fudis-grid [columns]="{ xs: 1, sm: 2, lg: 'inputMd inputMd' }">
+              <fudis-grid [columns]="{ xs: 1, sm: 2 }">
                 <fudis-text-input
                   [id]="'unique-input-3'"
                   [control]="formExample.controls['teacher']"
@@ -59,7 +59,7 @@ import { excludeAllRegex } from '../../../utilities/storybook';
                   [helpText]="'So that students can ask for more time on their homework.'"
                 />
               </fudis-grid>
-              <fudis-grid [columns]="{ xs: 1, md: 3 }">
+              <fudis-grid [columns]="{ xs: 1, sm: 2 }">
                 <!-- <fudis-radio-button-group
               [label]="'Course type'"
               [id]="'radio-button-group-1'"
