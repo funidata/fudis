@@ -30,7 +30,7 @@ import { excludeAllRegex } from '../../../utilities/storybook';
     [errorSummaryVisible]="errorSummaryVisible"
   >
     <ng-template fudisActions type="form">
-      <fudis-body-text class="margin: 0.5rem 1rem 0 0;">
+      <fudis-body-text style="margin: 0.5rem 1rem 0 0;">
         Live remove is "{{ toggleLive }}"
       </fudis-body-text>
       <fudis-button

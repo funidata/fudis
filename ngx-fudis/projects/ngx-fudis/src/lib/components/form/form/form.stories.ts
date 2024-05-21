@@ -255,12 +255,7 @@ class ExampleWithMultipleFormsComponent {
       </ng-template>
       <ng-template fudisActions [type]="'form'">
         <fudis-button [label]="'Previous step'" [icon]="'back'" [variant]="'tertiary'" />
-        <fudis-button
-          fudisFormSubmit
-          [formValid]="formExample.valid"
-          [label]="'Submit'"
-          (handleClick)="submitForm()"
-        />
+        <fudis-button fudisFormSubmit [formValid]="formExample.valid" [label]="'Submit'" />
       </ng-template>
       <ng-template fudisContent [type]="'form'">
         <fudis-section [title]="'Main section'" [errorSummaryBreadcrumb]="true">
@@ -459,7 +454,20 @@ class FormContentExampleComponent implements OnInit {
     //   null,
     //   FudisValidators.required('Start date is required.'),
     // ),
-    // endDate: new FormControl<Date | null>(null, FudisValidators.required('End date is required.')),
+    // dateRangeStartDate: new FormControl<Date | null>(null, [
+    //   FudisValidators.required('Choose start date'),
+    //   FudisValidators.datepickerMax({
+    //     value: new Date(2023, 5, 20),
+    //     message: 'Start date cannot be later than 20.6.2023',
+    //   }),
+    // ]),
+    // dateRangeEndDate: new FormControl<Date | null>(null, [
+    //   FudisValidators.required('Choose end date'),
+    //   FudisValidators.datepickerMin({
+    //     value: new Date(2023, 5, 19),
+    //     message: 'Start date cannot be earliner than 19.6.2023',
+    //   }),
+    // ]),
   });
 
   languageOptions: FudisSelectOption<object>[] = [
@@ -475,12 +483,12 @@ class FormContentExampleComponent implements OnInit {
 
   // Expose when DateRange is exposed to public API
   // dateRangeStartDate: FudisDateRangeItem = {
-  //   control: this.formExample.controls.startDate,
+  //   control: this.formExample.controls.dateRangeStartDate,
   //   label: 'Start date',
   // };
 
   // dateRangeEndDate: FudisDateRangeItem = {
-  //   control: this.formExample.controls.endDate,
+  //   control: this.formExample.controls.dateRangeEndDate,
   //   label: 'End date',
   // };
 
@@ -488,12 +496,6 @@ class FormContentExampleComponent implements OnInit {
 
   ngOnInit(): void {
     this._focusService.addToIgnoreList('unique-input-3');
-  }
-
-  submitForm(): void {
-    if (this.formExample.valid) {
-      //this.errorSummaryVisible = false;
-    }
   }
 
   handleClosedOutput(value: boolean): void {
