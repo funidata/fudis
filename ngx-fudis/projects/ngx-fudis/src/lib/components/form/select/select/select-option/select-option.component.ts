@@ -31,7 +31,7 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
     );
 
     effect(() => {
-      if (this._parent.autocomplete) {
+      if (this._parent.variant !== 'dropdown') {
         this._isOptionTyped(this._parent.getAutocompleteFilterText()());
       }
     });
@@ -43,7 +43,7 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
   protected _controlValueSubscription: Subscription;
 
   ngOnInit(): void {
-    if (this._parent.autocomplete) {
+    if (this._parent.variant !== 'dropdown') {
       this._isOptionVisible(this._parent.getAutocompleteFilterText()());
       this._isOptionTyped(this._parent.getAutocompleteFilterText()());
     } else {

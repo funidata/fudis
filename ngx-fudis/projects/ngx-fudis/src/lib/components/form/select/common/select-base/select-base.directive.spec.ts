@@ -32,7 +32,7 @@ import { groupedTestData } from '../mock_data';
   selector: 'fudis-mock-select',
   template: `<fudis-multiselect
       #multiSelect
-      [autocomplete]="false"
+      [variant]="'dropdown'"
       [label]="'MultiSelect Label'"
       [placeholder]="'Test placeholder'"
       [control]="control"
@@ -49,12 +49,12 @@ import { groupedTestData } from '../mock_data';
     </fudis-multiselect>
     <fudis-multiselect
       #multiSelectAuto
-      [autocomplete]="true"
+      [variant]="'autocompleteType'"
       [label]="'MultiAutoSelect Label'"
       [placeholder]="'Test placeholder for autocomplete'"
       [control]="control"
       [size]="'md'"
-      [autocompleteClearButton]="clearButton"
+      [selectionClearButton]="clearButton"
     >
       <ng-template fudisContent type="select-options">
         <fudis-multiselect-group *ngFor="let group of groupedData" [label]="group.country">

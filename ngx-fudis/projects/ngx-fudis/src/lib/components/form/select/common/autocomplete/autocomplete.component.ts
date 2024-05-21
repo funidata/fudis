@@ -2,7 +2,6 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  HostBinding,
   Input,
   Output,
   Signal,
@@ -34,11 +33,6 @@ export class SelectAutocompleteComponent {
    * Template reference for input. Used in e. g. initialFocus
    */
   @ViewChild('inputRef') public inputRef: ElementRef;
-
-  /**
-   * Binding CSS class for component wrapper
-   */
-  @HostBinding('class') private _classes = 'fudis-select-autocomplete-host';
 
   /**
    * Form control used mostly to define HTML attributes and CSS styles
@@ -90,7 +84,12 @@ export class SelectAutocompleteComponent {
   /**
    * Enable / disable autocomplete variant's Clear button. When 'false' autocomplete acts like a dropdown and opens on focus and hides 'Clear' icon button.
    */
-  @Input() autocompleteClearButton: boolean = true;
+  @Input() selectionClearButton: boolean = true;
+
+  /**
+   * Determine how many characters must be typed for autocomplete to open available options
+   */
+  @Input({ required: true }) typeThreshold: 0 | 3;
 
   @Input() visibleOptions: string[];
 
@@ -128,11 +127,6 @@ export class SelectAutocompleteComponent {
    * Output event for updating parent's focus to first option signal
    */
   @Output() triggerFocusToFirstOption = new EventEmitter<void>();
-
-  /**
-   * Output event for clicking clear button
-   */
-  @Output() triggerClearFilterButtonClick = new EventEmitter<void>();
 
   /**
    * Output event for enter press on autocomplete, when there is only one option visible
@@ -180,6 +174,11 @@ export class SelectAutocompleteComponent {
   protected _inputFocus(event: FocusEvent): void {
     this._focused = true;
     this.triggerFocus.emit(event);
+    const inputValue = (event.target as HTMLInputElement).value;
+
+    if (inputValue.length >= this.typeThreshold) {
+      this.triggerFilterTextUpdate.emit(inputValue);
+    }
   }
 
   /**
@@ -208,23 +207,32 @@ export class SelectAutocompleteComponent {
       key !== 'ArrowLeft' &&
       key !== 'ArrowRight'
     ) {
-      this.triggerFilterTextUpdate.emit(inputValue);
+      if (inputValue.length >= this.typeThreshold) {
+        this.triggerFilterTextUpdate.emit(inputValue);
+      } else {
+        this.triggerFilterTextUpdate.emit('');
+      }
     }
 
     this.preventSpaceKeypress = false;
 
+    // TODO: check this through
     if (this.dropdownOpen && this.visibleOptions?.length === 1 && key === 'Enter') {
       this.triggerSelectOnlyVisibleOption.emit();
     } else if (!this._preventDropdownReOpen && key === 'Enter') {
       this.triggerDropdownToggle.emit();
-    } else if (key !== 'ArrowDown' && this.autocompleteClearButton && inputValue.length < 3) {
+    } else if (
+      key !== 'ArrowDown' &&
+      this.selectionClearButton &&
+      inputValue.length < this.typeThreshold
+    ) {
       this.triggerDropdownClose.emit();
     } else if (
       !this._preventDropdownReOpen &&
       !this.dropdownOpen &&
       key !== 'Escape' &&
       key !== 'Enter' &&
-      inputValue.length >= 3
+      inputValue.length >= this.typeThreshold
     ) {
       this.triggerDropdownOpen.emit();
     } else if (key === 'ArrowDown' && this._focused) {
@@ -233,25 +241,5 @@ export class SelectAutocompleteComponent {
     }
 
     this._preventDropdownReOpen = false;
-  }
-
-  /**
-   * Clear any written or selected value in the autocomplete field
-   */
-  protected _clearAutocompleteFilterText(): void {
-    if (!this.disabled && !this.control.disabled) {
-      if (this.autocompleteClearButton) {
-        this._preventDropdownReOpen = true;
-      }
-      this.triggerFilterTextUpdate.emit('');
-
-      (this.inputRef.nativeElement as HTMLInputElement).value = '';
-
-      if (!this.multiselect) {
-        this.triggerClearFilterButtonClick.emit();
-      }
-
-      this.inputRef.nativeElement.focus();
-    }
   }
 }

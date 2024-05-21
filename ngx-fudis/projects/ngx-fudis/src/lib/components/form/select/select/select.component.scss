@@ -13,27 +13,33 @@
   width: 100%;
 
   &__input-wrapper {
-    display: flex;
     position: relative;
 
-    &__icon {
-      &.fudis-icon-host,
-      &.fudis-button-host {
-        position: absolute;
-        top: 50%;
-        right: spacing.$spacing-xxs;
-        transform: translateY(-50%);
-      }
-
-      &.fudis-icon-host,
-      &.fudis-button-host svg {
-        pointer-events: none;
-      }
-
-      &--hidden.fudis-button-host {
-        display: none;
-      }
+    &__icons {
+      position: absolute;
+      top: 50%;
+      right: spacing.$spacing-xxs;
+      transform: translateY(-50%);
     }
+
+    // &__icon {
+    //   &.fudis-icon-host,
+    //   &.fudis-button-host {
+    //     position: absolute;
+    //     top: 50%;
+    //     right: spacing.$spacing-xxs;
+    //     transform: translateY(-50%);
+    //   }
+
+    //   &.fudis-icon-host,
+    //   &.fudis-button-host svg {
+    //     pointer-events: none;
+    //   }
+
+    //   &--hidden.fudis-button-host {
+    //     display: none;
+    //   }
+    // }
   }
 
   &__input {

@@ -93,14 +93,14 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
       this.control.patchValue(value);
       this.selectionUpdate.emit(value);
 
-      if (this.autocomplete) {
+      if (this.variant !== 'dropdown') {
         this._autocompleteRef.preventSpaceKeypress = true;
         (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value = value.label;
       } else {
         this._dropdownSelectionLabelText = value?.label ? value.label : '';
       }
 
-      if (value && this.autocomplete && !disableSignalEmit) {
+      if (value && this.variant !== 'dropdown' && !disableSignalEmit) {
         this._autocompleteFilterText.set(value.label);
       }
     }
@@ -119,25 +119,15 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
   }
 
   /**
-   * Function to patch internally control's value
-   * @param value Option value to patch
-   */
-  protected _patchControlValue(value: FudisSelectOption<object> | null) {
-    this._controlValueChangedInternally = true;
-    this._preventDropdownReopen = true;
-    this.control.patchValue(value);
-  }
-
-  /**
    * If control value is updated from the Application, update component's state accordingly
    */
   protected override _updateSelectionFromControlValue(): void {
     if (this.control.value) {
       this._dropdownSelectionLabelText = this.control.value.label;
-
-      if (this.autocomplete) {
+      if (this.variant !== 'dropdown') {
         this._autocompleteSelectionLabelValue = this.control.value!.label;
-        this._autocompleteFilterText.set(this.control.value.label);
+        //this._autocompleteFilterText.set(this.control.value.label);
+        this._changeDetectorRef.detectChanges();
       }
     } else {
       this._autocompleteFilterText.set('');

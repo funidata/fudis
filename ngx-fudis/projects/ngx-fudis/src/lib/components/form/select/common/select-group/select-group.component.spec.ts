@@ -39,7 +39,7 @@ import { groupedTestData } from '../mock_data';
     </fudis-select>
     <fudis-multiselect
       #multiSelect
-      [autocomplete]="true"
+      [variant]="'autocompleteType'"
       [label]="'Test Label'"
       [control]="control"
     >

@@ -20,12 +20,12 @@ import { FudisTranslationService } from '../../../../../services/translation/tra
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
 import { InputBaseDirective } from '../../../../../directives/form/input-base/input-base.directive';
-import { FudisInputSize } from '../../../../../types/forms';
+import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
 import { ButtonComponent } from '../../../../button/button.component';
 import { setVisibleOptionsList } from '../selectUtilities';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.component';
-import { FudisComponentChanges } from 'projects/ngx-fudis/src/lib/types/miscellaneous';
+import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { SelectComponent } from '../../select/select.component';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
 import { hasRequiredValidator } from '../../../../../utilities/form/getValidators';
@@ -96,14 +96,18 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
   @Input() placeholder: string;
 
   /**
-   * Determine is Select is dropdown (default / false) or autocomplete input (true)
+   * Determine if Select has autocompletion filter for user typed text
+   * When set to:
+   * "dropdown": default, normal select dropdown
+   * "autocompleteDropdown": dropdown with autocomplete input field
+   * "autocompleteType": autocomplete but user must type 3 letters before any results are displayed
    */
-  @Input() autocomplete: boolean = false;
+  @Input() variant: FudisSelectVariant = 'dropdown';
 
   /**
-   * Enable / disable autocomplete variant's Clear button. When 'false' autocomplete acts like a dropdown and opens on focus and hides 'Clear' icon button.
+   * Enable / disable button, which clears user selectionw when there is a selected value
    */
-  @Input() autocompleteClearButton: boolean = true;
+  @Input() selectionClearButton: boolean = true;
 
   /**
    * Selected option or options label for non-autocomplete dropdowns
@@ -179,6 +183,32 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
    */
   protected _preventClick: boolean = false;
 
+  protected _clearButtonClick(): void {
+    if (!this.disabled && !this.control.disabled) {
+      if (this.selectionClearButton) {
+        //this._preventDropdownReOpen = true;
+      }
+
+      if (this.control.value) {
+        this._controlValueChangedInternally = true;
+        this._preventDropdownReopen = true;
+        this.control.patchValue(null);
+      }
+
+      this._filterTextUpdate('');
+      if (this.variant !== 'dropdown') {
+        (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value = '';
+        this._autocompleteRef.inputRef.nativeElement.focus();
+      } else {
+        this._inputRef.nativeElement.focus();
+      }
+
+      // if (!this.multiselect) {
+      //   this.triggerClearFilterButtonClick.emit();
+      // }
+    }
+  }
+
   ngOnChanges(changes: FudisComponentChanges<SelectComponent | MultiselectComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._required = hasRequiredValidator(this.control);
@@ -218,7 +248,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 
     this._preventDropdownReopen = preventDropdownReopen;
 
-    if (this.autocomplete && focusToInput) {
+    if (this.variant !== 'dropdown' && focusToInput) {
       this._autocompleteRef.inputRef.nativeElement.focus();
     } else if (focusToInput) {
       this._inputRef.nativeElement.focus();
@@ -240,16 +270,12 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
   protected _inputFocus(): void {
     this._inputFocused = true;
 
-    const openAutocomplete =
-      this.autocomplete &&
-      (!this.autocompleteClearButton ||
-        (this.autocompleteClearButton && this._autocompleteFilterText() !== '')) &&
-      !this._preventDropdownReopen &&
-      !this._dropdownOpen;
+    const openDropdown =
+      this.variant === 'dropdown' ||
+      this.variant === 'autocompleteDropdown' ||
+      (this.variant === 'autocompleteType' && this._autocompleteFilterText() !== '');
 
-    const openDropdown = !this.autocomplete && !this._preventDropdownReopen && !this._dropdownOpen;
-
-    if (openAutocomplete || openDropdown) {
+    if (!this._preventDropdownReopen && !this._dropdownOpen && openDropdown) {
       this.openDropdown();
 
       this._preventClick = true;
@@ -366,10 +392,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
    * Update input filter
    */
   protected _filterTextUpdate(text: string): void {
-    if (this._autocompleteFilterText() !== text && text.length >= 3) {
+    if (this._autocompleteFilterText() !== text) {
       this._autocompleteFilterText.set(text);
-    } else if (text.length < 3 && this._autocompleteFilterText() !== '') {
-      this._autocompleteFilterText.set('');
     }
   }
 

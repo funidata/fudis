@@ -25,10 +25,10 @@ import { By } from '@angular/platform-browser';
   template: `<fudis-select
     #selectElem
     [label]="'Test Label'"
-    [autocomplete]="true"
+    [variant]="'autocompleteType'"
     [placeholder]="'Test placeholder'"
     [control]="control"
-    [autocompleteClearButton]="false"
+    [selectionClearButton]="false"
     [size]="'md'"
   >
     <ng-template fudisContent type="select-options">

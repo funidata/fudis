@@ -156,7 +156,7 @@ export const sectionExclude: RegExp = excludeRegex(['classes', 'errorSummaryBrea
 export const selectCommonExclude: RegExp = excludeRegex([
   'control',
   'autocomplete',
-  //'autocompleteClearButton',
+  //'selectionClearButton',
   'ariaLabel',
   'disableGuidance',
   'id',

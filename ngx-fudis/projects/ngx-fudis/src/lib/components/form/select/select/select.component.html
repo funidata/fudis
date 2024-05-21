@@ -8,9 +8,9 @@
     [tooltipToggle]="tooltipToggle"
   >
   </fudis-label>
-  <div #inputWrapperRef class="fudis-select__input-wrapper">
+  <div #inputWrapperRef class="fudis-select__input-wrapper fudis-input-size__{{ size }}">
     <div
-      *ngIf="!autocomplete"
+      *ngIf="variant === 'dropdown'"
       #inputRef
       tabindex="0"
       class="fudis-form-input fudis-select__input fudis-select__input__dropdown"
@@ -40,14 +40,8 @@
         _dropdownSelectionLabelText
       }}</span>
     </div>
-    <fudis-icon
-      *ngIf="!autocomplete && size !== 'xs'"
-      class="fudis-select__input-wrapper__icon"
-      [icon]="'chevron'"
-      [rotate]="disabled || control.disabled ? 'cw-90' : _dropdownOpen ? 'ccw-90' : 'cw-90'"
-    />
     <fudis-select-autocomplete
-      *ngIf="autocomplete"
+      *ngIf="variant !== 'dropdown'"
       #autocompleteRef
       [id]="id"
       [placeholder]="placeholder"
@@ -55,20 +49,32 @@
       [disabled]="disabled"
       [dropdownOpen]="_dropdownOpen"
       [required]="_required"
+      [typeThreshold]="variant === 'autocompleteType' ? 3 : 0"
       [selectedLabel]="_autocompleteSelectionLabelValue"
       [visibleOptions]="_visibleOptions"
       [invalidState]="invalidState"
-      [autocompleteClearButton]="autocompleteClearButton"
+      [selectionClearButton]="selectionClearButton"
       (triggerFocusToFirstOption)="_focusToFirstOption()"
       (triggerFilterTextUpdate)="_filterTextUpdate($event); _checkIfAutocompleteValueNull($event)"
       (triggerSelectOnlyVisibleOption)="_focusToFirstOption(true)"
-      (triggerClearFilterButtonClick)="_patchControlValue(null)"
       (triggerDropdownOpen)="openDropdown()"
       (triggerDropdownClose)="closeDropdown()"
       (triggerDropdownToggle)="_toggleDropdown()"
       (triggerFocus)="_inputFocus()"
       (triggerBlur)="_inputBlur($event)"
     />
+    <div class="fudis-select__input-wrapper__icons">
+      <fudis-select-icons
+        *ngIf="size !== 'xs'"
+        [filterText]="!!_autocompleteFilterText()"
+        [parentControl]="control"
+        [parentVariant]="variant"
+        [dropdownOpen]="_dropdownOpen"
+        (handleClearButtonClick)="_clearButtonClick()"
+        [clearButton]="selectionClearButton"
+        [disabled]="control.disabled || disabled"
+      />
+    </div>
   </div>
   <fudis-select-dropdown
     *ngIf="_optionsLoadedOnce && !disabled && !control.disabled"
@@ -81,7 +87,7 @@
       <ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>
     </ng-container>
     <fudis-body-text
-      *ngIf="autocomplete"
+      *ngIf="variant !== 'dropdown'"
       class="fudis-select-dropdown__no-results"
       [class.fudis-select-dropdown__no-results--visible]="_visibleOptions.length === 0"
       [size]="'md-light'"

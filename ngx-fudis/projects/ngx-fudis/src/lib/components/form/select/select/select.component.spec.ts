@@ -25,7 +25,7 @@ import { getElement } from '../../../../utilities/tests/utilities';
   selector: 'fudis-mock-container',
   template: `<fudis-select
     #testSelect
-    [autocomplete]="true"
+    [variant]="'autocompleteType'"
     [label]="'Test Label'"
     [placeholder]="'Autocomplete test placeholder'"
     [control]="control"

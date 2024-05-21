@@ -34,17 +34,19 @@ export default {
     helpText: {
       control: { type: 'text' },
     },
+    autocomplete: { options: ['type', 'dropdown'], control: { type: 'radio' } },
   },
 } as Meta;
 
 const html = String.raw;
 
-const commonArgs = {
+const commonArgs: Partial<SelectComponent> = {
   label: 'Select a pet',
   size: 'lg',
   disabled: false,
   placeholder: 'Choose a pet',
   helpText: 'All pets are equally important, but for sake of this example please pick one.',
+  selectionClearButton: true,
 };
 
 const SelectAutocompleteTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
@@ -57,13 +59,13 @@ const SelectAutocompleteTemplate: StoryFn<SelectComponent> = (args: SelectCompon
   template: html`
     <fudis-select
       [size]="size"
+      [variant]="'autocompleteDropdown'"
       [placeholder]="placeholder"
       [control]="control"
       [label]="label"
       [helpText]="helpText"
-      [autocomplete]="true"
       [disabled]="disabled"
-      [autocompleteClearButton]="autocompleteClearButton"
+      [selectionClearButton]="selectionClearButton"
       (selectionUpdate)="selectionUpdate($event)"
     >
       <ng-template fudisContent type="select-options">
@@ -78,8 +80,7 @@ const SelectAutocompleteTemplate: StoryFn<SelectComponent> = (args: SelectCompon
 
 export const SelectAutocomplete = SelectAutocompleteTemplate.bind({});
 SelectAutocomplete.args = {
-  ...(commonArgs as Partial<SelectComponent>),
-  autocompleteClearButton: true,
+  ...commonArgs,
 };
 
 const MultiselectAutocompleteTemplate: StoryFn<MultiselectComponent> = (
@@ -95,7 +96,7 @@ const MultiselectAutocompleteTemplate: StoryFn<MultiselectComponent> = (
   template: html`
     <fudis-multiselect
       [size]="size"
-      [autocomplete]="true"
+      [variant]="autocompleteType"
       [placeholder]="placeholder"
       [control]="control"
       [label]="label"
