@@ -78,7 +78,17 @@
       </div>
     </div>
 
-    <p *ngIf="helpText" class="fudis-guidance__help-text">{{ helpText }}</p>
+    <p
+      *ngIf="helpText || (control && maxLength && _maxLengthText)"
+      class="fudis-guidance__help-text"
+    >
+      <ng-container *ngIf="helpText">{{ helpText }}</ng-container>
+      <ng-container *ngIf="control && maxLength && _maxLengthText">
+        <span class="fudis-visually-hidden">
+          {{ control.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText }}
+        </span>
+      </ng-container>
+    </p>
   </div>
   <ng-container *ngIf="maxLength && control">
     <small

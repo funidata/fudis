@@ -23,7 +23,6 @@ export class SelectIconsComponent implements OnChanges {
     private _changeDetectionRef: ChangeDetectorRef,
   ) {
     effect(() => {
-      // TODO: check proper translation
       this._translationClearFilterText =
         _translationService.getTranslations()().SELECT.AUTOCOMPLETE.CLEAR;
     });
@@ -47,20 +46,14 @@ export class SelectIconsComponent implements OnChanges {
 
   @Output() handleClearButtonClick: EventEmitter<Event> = new EventEmitter<Event>();
 
+  @Output() handleClearButtonFocusState: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   ngOnChanges(changes: FudisComponentChanges<SelectIconsComponent>): void {
-    // if (
-    //   changes.chevron?.currentValue !== changes.chevron?.previousValue ||
-    //   changes.parentVariant?.currentValue !== changes.parentVariant?.previousValue ||
-    //   changes.filterText?.currentValue !== changes.filterText?.previousValue
-    // ) {
-    //   this._chevronVisible = this.chevron && this.parentVariant !== 'autocompleteType';
-
-    //   this._searchVisible = !!this.filterText
-    // }
-
     if (changes.parentControl?.currentValue !== changes.parentControl?.previousValue) {
+      this._controlValue = this.parentControl.value;
+
       this.parentControl.valueChanges.subscribe((value) => {
-        this._controlValue = value;
+        this._controlValue = !!value;
         this._changeDetectionRef.detectChanges();
       });
     }
@@ -81,5 +74,9 @@ export class SelectIconsComponent implements OnChanges {
 
   protected _clearButtonClick(event: Event): void {
     this.handleClearButtonClick.emit(event);
+  }
+
+  protected _handleClearButtonFocusState(value: boolean): void {
+    this.handleClearButtonFocusState.emit(value);
   }
 }

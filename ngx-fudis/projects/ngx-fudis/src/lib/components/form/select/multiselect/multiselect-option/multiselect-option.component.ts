@@ -38,11 +38,11 @@ export class MultiselectOptionComponent extends SelectOptionBaseDirective implem
    * On init check if option is visible or checked
    */
   ngOnInit(): void {
-    // if (this._parent.variant !== 'dropdown') {
-    //   this._isOptionVisible(this._parent.getAutocompleteFilterText()());
-    // } else {
-    //   this._updateVisibilityToParents(true);
-    // }
+    if (this._parent.variant !== 'dropdown') {
+      this._isOptionVisible(this._parent.getAutocompleteFilterText()());
+    } else {
+      this._updateVisibilityToParents(true);
+    }
 
     const parentControlValue = this._parentMultiselect.control.value;
 

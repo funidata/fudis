@@ -47,13 +47,11 @@ export class DropdownItemBaseDirective {
     cssClassSelector: string,
   ) {
     if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-      const cssClass = `.${cssClassSelector}`;
-
       const focusElement = this._document.querySelector(':focus');
 
       const siblingElements = element.nativeElement
         .closest('.fudis-select-dropdown')
-        .querySelectorAll(cssClass);
+        .querySelectorAll(cssClassSelector);
 
       const siblingElementsCount = siblingElements.length - 1;
       event.preventDefault();

@@ -92,9 +92,21 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
    */
 
   /**
-   * Optional click handler
+   * Click handler
    */
   @Output() handleClick = new EventEmitter<Event>();
+
+  // TODO: write test
+  /**
+   * Focus handler
+   */
+  @Output() handleFocus = new EventEmitter<FocusEvent>();
+
+  // TODO: write test
+  /**
+   * Blur handler
+   */
+  @Output() handleBlur = new EventEmitter<FocusEvent>();
 
   /**
    * Toggle menu button
@@ -186,7 +198,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
   /**
    * Handler for blurring out and closing Menu Button dropdown
    */
-  public handleBlur(event: FocusEvent): void {
+  protected _handleButtonBlur(event: FocusEvent): void {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const targetIsDropdownMenuButton = (event.relatedTarget as HTMLElement)?.classList?.contains(
       'fudis-dropdown-menu-item',
@@ -195,6 +207,12 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
     // if (this.asMenuButton && !targetIsDropdownMenuButton) {
     //   this.dropdownOpen = false;
     // }
+
+    this.handleBlur.emit(event);
+  }
+
+  protected _handleButtonFocus(event: FocusEvent): void {
+    this.handleFocus.emit(event);
   }
 
   /**

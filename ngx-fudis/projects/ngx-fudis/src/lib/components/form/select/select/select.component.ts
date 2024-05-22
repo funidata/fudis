@@ -4,6 +4,7 @@ import {
   Component,
   EventEmitter,
   Host,
+  Inject,
   Input,
   OnInit,
   Optional,
@@ -19,6 +20,7 @@ import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
 import { FormComponent } from '../../form/form.component';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'fudis-select',
@@ -29,14 +31,13 @@ import { FormComponent } from '../../form/form.component';
 export class SelectComponent extends SelectBaseDirective implements OnInit, AfterViewInit {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
+    @Inject(DOCUMENT) _document: Document,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
     _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_focusService, _translationService, _idService, _changeDetectorRef);
-
-    this.focusSelector = 'fudis-select-option__focusable';
+    super(_document, _focusService, _translationService, _idService, _changeDetectorRef);
 
     effect(() => {
       this.translationOptionDisabledText = this._translations().SELECT.DISABLED;
@@ -51,7 +52,7 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
   /**
    * Value output event on selection change
    */
-  @Output() selectionUpdate: EventEmitter<FudisSelectOption<object> | null> =
+  @Output() override selectionUpdate: EventEmitter<FudisSelectOption<object> | null> =
     new EventEmitter<FudisSelectOption<object> | null>();
 
   /**
@@ -82,7 +83,7 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
    * @param disableSignalEmit disable signal update to reduce unneeded state updates
    */
   public handleSelectionChange(
-    value: FudisSelectOption<object>,
+    value: FudisSelectOption<object> | null,
     disableSignalEmit?: boolean,
   ): void {
     // Check if option clicked is not the same as already selected one. If they are different, then trigger state changes in component and control values
@@ -95,13 +96,14 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 
       if (this.variant !== 'dropdown') {
         this._autocompleteRef.preventSpaceKeypress = true;
-        (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value = value.label;
+        (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value =
+          value?.label || '';
       } else {
         this._dropdownSelectionLabelText = value?.label ? value.label : '';
       }
 
       if (value && this.variant !== 'dropdown' && !disableSignalEmit) {
-        this._autocompleteFilterText.set(value.label);
+        this._filterTextUpdate(value.label);
       }
     }
   }
@@ -122,17 +124,29 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
    * If control value is updated from the Application, update component's state accordingly
    */
   protected override _updateSelectionFromControlValue(): void {
-    if (this.control.value) {
-      this._dropdownSelectionLabelText = this.control.value.label;
-      if (this.variant !== 'dropdown') {
-        this._autocompleteSelectionLabelValue = this.control.value!.label;
-        //this._autocompleteFilterText.set(this.control.value.label);
-        this._changeDetectorRef.detectChanges();
-      }
+    const currentLabel = this.control.value?.label;
+
+    if (this.variant === 'dropdown') {
+      this._dropdownSelectionLabelText = currentLabel || '';
     } else {
-      this._autocompleteFilterText.set('');
-      this._autocompleteSelectionLabelValue = null;
-      this._dropdownSelectionLabelText = '';
+      if (this._autocompleteRef) {
+        (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value =
+          currentLabel || '';
+      } else {
+        this._autocompleteSelectionLabelValue = currentLabel || '';
+      }
     }
+    this._changeDetectorRef.detectChanges();
+
+    // if (this.control.value) {
+    //   if (this.variant !== 'dropdown') {
+    //     this._changeDetectorRef.detectChanges();
+    //   }
+    // } else {
+    //   this._filterTextUpdate('');
+    //   this._autocompleteFilterText.set('');
+    //   this._autocompleteSelectionLabelValue = null;
+    //   this._dropdownSelectionLabelText = '';
+    // }
   }
 }

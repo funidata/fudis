@@ -4,6 +4,7 @@ import {
   Component,
   EventEmitter,
   Host,
+  Inject,
   Input,
   OnInit,
   Optional,
@@ -21,6 +22,7 @@ import { SelectBaseDirective } from '../common/select-base/select-base.directive
 import { FudisSelectOption } from '../../../../types/forms';
 import { joinInputValues, sortValues } from '../common/selectUtilities';
 import { FormComponent } from '../../form/form.component';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'fudis-multiselect',
@@ -30,15 +32,14 @@ import { FormComponent } from '../../form/form.component';
 export class MultiselectComponent extends SelectBaseDirective implements OnInit, AfterViewInit {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
+    @Inject(DOCUMENT) _document: Document,
     private _cdr: ChangeDetectorRef,
     _idService: FudisIdService,
     _translationService: FudisTranslationService,
     _focusService: FudisFocusService,
     _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_focusService, _translationService, _idService, _changeDetectorRef);
-
-    this.focusSelector = 'fudis-multiselect-option__focusable';
+    super(_document, _focusService, _translationService, _idService, _changeDetectorRef);
 
     effect(() => {
       this._translationRemoveItem = this._translations().SELECT.MULTISELECT.REMOVE_ITEM;
@@ -58,9 +59,8 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
   /**
    * Value output event on selection change
    */
-  @Output() selectionUpdate: EventEmitter<FudisSelectOption<object>[] | null> = new EventEmitter<
-    FudisSelectOption<object>[] | null
-  >();
+  @Output() override selectionUpdate: EventEmitter<FudisSelectOption<object>[] | null> =
+    new EventEmitter<FudisSelectOption<object>[] | null>();
 
   /**
    * Internal translated text to indicate deleting item chip aria-label

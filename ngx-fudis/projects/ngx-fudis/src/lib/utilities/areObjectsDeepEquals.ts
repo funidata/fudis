@@ -2,7 +2,7 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type GenericObject = { [key: string]: any };
 
-export const areObjectsDeepEquals = (x: GenericObject, y: GenericObject): boolean => {
+export const areObjectsDeepEquals = (x: GenericObject | null, y: GenericObject | null): boolean => {
   const ok = Object.keys;
   const tx = typeof x;
   const ty = typeof y;
