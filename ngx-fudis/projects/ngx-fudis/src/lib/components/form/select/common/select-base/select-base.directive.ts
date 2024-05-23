@@ -416,9 +416,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
   // TODO: check if this could be achieved more elegantly
   protected _focusToFirstOption(clickFirstOption?: boolean): void {
     const firstOption: HTMLInputElement | null =
-      this._dropdownRef?.dropdownElement.nativeElement.querySelector(
-        `#${this._visibleOptions[0]} ${this.focusSelector}`,
-      );
+      this._dropdownRef?.dropdownElement.nativeElement.querySelector(this.focusSelector);
 
     if (firstOption) {
       firstOption.focus();
