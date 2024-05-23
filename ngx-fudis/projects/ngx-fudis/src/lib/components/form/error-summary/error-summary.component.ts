@@ -140,7 +140,7 @@ export class ErrorSummaryComponent implements AfterViewInit {
   }
 
   /**
-   * Update Error Summary content with possible parent Fieldsets, Sections and Expandabled (Sections)
+   * Update Error Summary content with possible parent Fieldsets, Sections and Expandables (Sections)
    */
   private _updateSummaryContent(content: FudisFormErrorSummaryObject): void {
     const newErrorList: FudisFormErrorSummaryList[] = [];
