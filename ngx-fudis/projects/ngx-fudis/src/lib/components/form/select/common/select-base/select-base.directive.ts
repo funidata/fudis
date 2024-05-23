@@ -287,8 +287,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
    * To handle input field blur events
    * @param event FocusEvent
    */
-  protected _inputBlur(): void {
-    this.componentFocused().then((value) => {
+  protected _inputBlur(event: FocusEvent): void {
+    this.componentFocused(event).then((value) => {
       if (!value) {
         this.closeDropdown(false);
       }
@@ -300,16 +300,25 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 
   /**
    * To handle click events for input
-   * @param event click event
    */
   protected _clickInput(): void {
     this._preventDropdownReopen = true;
-    if (this._inputFocused && !this._preventClick) {
+    if (
+      this._inputFocused &&
+      !this._preventClick &&
+      (this.variant !== 'autocompleteType' ||
+        (this.variant === 'autocompleteType' && this._autocompleteFilterText().length >= 3))
+    ) {
       this._toggleDropdown();
     }
 
     this._preventClick = false;
-    this._inputRef.nativeElement.focus();
+
+    if (this.variant === 'dropdown') {
+      this._inputRef.nativeElement.focus();
+    } else {
+      this._autocompleteRef.inputRef.nativeElement.focus();
+    }
   }
 
   /**
@@ -378,11 +387,11 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
     }
   }
 
-  protected _setClearButtonFocusState(state: boolean): void {
+  protected _setClearButtonFocusState(event: FocusEvent, state: boolean): void {
     this._clearButtonFocused = state;
 
     if (!state) {
-      this.componentFocused().then((value) => {
+      this.componentFocused(event).then((value) => {
         if (!value) {
           this.closeDropdown(false);
         }
@@ -450,16 +459,23 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
     }
   }
 
-  public componentFocused(): Promise<boolean> {
+  public componentFocused(event: FocusEvent): Promise<boolean> {
     return new Promise((resolve) => {
       let counter = 0;
 
-      const focusCheckInterval = setInterval(() => {
-        const focusStatus = !!this._selectRef.nativeElement.contains(this._document.activeElement);
+      const nextTarget = event?.relatedTarget as HTMLElement;
 
-        if (focusStatus) {
+      const focusCheckInterval = setInterval(() => {
+        const focused =
+          !!this._selectRef.nativeElement.contains(this._document.activeElement) ||
+          !!this._selectRef.nativeElement.contains(nextTarget);
+
+        if (focused) {
           clearInterval(focusCheckInterval);
-          resolve(!!this._focusedOption || this._inputFocused || this._clearButtonFocused);
+          resolve(true);
+        } else if (!nextTarget) {
+          clearInterval(focusCheckInterval);
+          resolve(false);
         } else if (counter <= 200) {
           counter = counter + 50;
         } else {

@@ -117,7 +117,7 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
     this._parent.setFocusedOption(this._id, 'remove');
     this.handleBlur.emit(event);
 
-    this._parent.componentFocused().then((value) => {
+    this._parent.componentFocused(event).then((value) => {
       if (!value) {
         this._parent.closeDropdown(false, true);
       }

@@ -9,6 +9,7 @@
   aria-haspopup="listbox"
   (focus)="_inputFocus($event)"
   (blur)="_inputBlur($event)"
+  (click)="_inputClick($event)"
   (keyup)="!disabled && !control.disabled && _keyUp($event)"
   (keypress)="!disabled && !control.disabled && _keyPress($event)"
   [attr.id]="id"

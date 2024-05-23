@@ -46,7 +46,9 @@ export class SelectIconsComponent implements OnChanges {
 
   @Output() handleClearButtonClick: EventEmitter<Event> = new EventEmitter<Event>();
 
-  @Output() handleClearButtonFocusState: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() handleClearButtonFocus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+
+  @Output() handleClearButtonBlur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
   ngOnChanges(changes: FudisComponentChanges<SelectIconsComponent>): void {
     if (changes.parentControl?.currentValue !== changes.parentControl?.previousValue) {
@@ -76,7 +78,11 @@ export class SelectIconsComponent implements OnChanges {
     this.handleClearButtonClick.emit(event);
   }
 
-  protected _handleClearButtonFocusState(value: boolean): void {
-    this.handleClearButtonFocusState.emit(value);
+  protected _handleClearButtonFocus(event: FocusEvent): void {
+    this.handleClearButtonFocus.emit(event);
+  }
+
+  protected _handleClearButtonBlur(event: FocusEvent): void {
+    this.handleClearButtonBlur.emit(event);
   }
 }

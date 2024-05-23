@@ -22,7 +22,7 @@
         [attr.aria-activedescendant]="control.value?.['htmlId'] ? control.value?.['htmlId'] : null"
         (click)="_clickInput()"
         (focus)="_inputFocus()"
-        (blur)="_inputBlur()"
+        (blur)="_inputBlur($event)"
         (keydown)="_dropdownKeypress($event)"
         [attr.aria-autocomplete]="'none'"
         [attr.aria-expanded]="_dropdownOpen"
@@ -55,6 +55,7 @@
         [visibleOptions]="_visibleOptions"
         [invalidState]="invalidState"
         [selectionClearButton]="selectionClearButton"
+        (triggerInputClick)="_clickInput()"
         (triggerFocusToFirstOption)="_focusToFirstOption()"
         (triggerFilterTextUpdate)="_filterTextUpdate($event); _checkIfAutocompleteValueNull($event)"
         (triggerSelectOnlyVisibleOption)="_focusToFirstOption(true)"
@@ -62,7 +63,7 @@
         (triggerDropdownClose)="closeDropdown()"
         (triggerDropdownToggle)="_toggleDropdown()"
         (triggerFocus)="_inputFocus()"
-        (triggerBlur)="_inputBlur()"
+        (triggerBlur)="_inputBlur($event)"
       />
       <div class="fudis-select__input-wrapper__icons">
         <fudis-select-icons
@@ -72,7 +73,8 @@
           [parentVariant]="variant"
           [dropdownOpen]="_dropdownOpen"
           (handleClearButtonClick)="_clearButtonClick()"
-          (handleClearButtonFocusState)="_setClearButtonFocusState($event)"
+          (handleClearButtonFocus)="_setClearButtonFocusState($event, true)"
+          (handleClearButtonBlur)="_setClearButtonFocusState($event, false)"
           [clearButton]="selectionClearButton"
           [disabled]="control.disabled || disabled"
         />

@@ -32,7 +32,7 @@ export class SelectAutocompleteComponent {
   /**
    * Template reference for input. Used in e. g. initialFocus
    */
-  @ViewChild('inputRef') public inputRef: ElementRef;
+  @ViewChild('inputRef') public inputRef: ElementRef<HTMLInputElement>;
 
   /**
    * Form control used mostly to define HTML attributes and CSS styles
@@ -102,6 +102,11 @@ export class SelectAutocompleteComponent {
    * Output event for input field focus
    */
   @Output() triggerFocus = new EventEmitter<FocusEvent>();
+
+  /**
+   * Output event for enter press on autocomplete, when there is only one option visible
+   */
+  @Output() triggerInputClick = new EventEmitter<Event>();
 
   /**
    * Output event for toggling parent dropdown
@@ -179,6 +184,14 @@ export class SelectAutocompleteComponent {
     if (inputValue.length >= this.typeThreshold) {
       this.triggerFilterTextUpdate.emit(inputValue);
     }
+  }
+
+  /**
+   * To handle click events for input
+   * @param event click event
+   */
+  protected _inputClick(event: Event): void {
+    this.triggerInputClick.emit(event);
   }
 
   /**
