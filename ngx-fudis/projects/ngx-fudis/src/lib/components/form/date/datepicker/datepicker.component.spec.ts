@@ -153,7 +153,7 @@ describe('DatepickerComponent', () => {
       expect(component.control.valid).toBe(true);
     });
 
-    it('should update control validity according to given min validator and value', () => {
+    it('should update control validity and visible input value according to given min validator and value', () => {
       component.control = new FormControl(
         null,
         FudisValidators.datepickerMin({
@@ -161,16 +161,30 @@ describe('DatepickerComponent', () => {
           message: 'Date is not inside allowed range',
         }),
       );
+      component.control.markAsTouched();
       fixture.detectChanges();
 
       component.control.patchValue(new Date('2024-01-10'));
       fixture.detectChanges();
 
+      const falseInputValue = (getElement(fixture, '.fudis-datepicker__input') as HTMLInputElement)
+        .value;
+
+      const errorMessage = (getElement(fixture, '.fudis-error-message') as HTMLParagraphElement)
+        .innerHTML;
+
+      expect(errorMessage).toEqual('Date is not inside allowed range');
+      expect(falseInputValue).toEqual('10.1.2024');
       expect(component.control.valid).toBe(false);
 
       component.control.patchValue(new Date('2024-01-13'));
       fixture.detectChanges();
 
+      const validInputValue = (getElement(fixture, '.fudis-datepicker__input') as HTMLInputElement)
+        .value;
+
+      expect(getElement(fixture, '.fudis-error-message')).toBeFalsy();
+      expect(validInputValue).toEqual('13.1.2024');
       expect(component.control.valid).toBe(true);
     });
 
