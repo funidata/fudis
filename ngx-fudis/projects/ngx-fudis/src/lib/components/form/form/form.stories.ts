@@ -240,7 +240,7 @@ class ExampleWithMultipleFormsComponent {
       <ng-template fudisHeader>
         <fudis-dl [columns]="1" [variant]="'compact'">
           <fudis-dl-item>
-            <fudis-dt [textContent]="'Importatnt person'" />
+            <fudis-dt [textContent]="'Important person'" />
             <fudis-dd [textContent]="'Admiral Thrawn'" />
           </fudis-dl-item>
           <fudis-dl-item>
@@ -255,12 +255,7 @@ class ExampleWithMultipleFormsComponent {
       </ng-template>
       <ng-template fudisActions [type]="'form'">
         <fudis-button [label]="'Previous step'" [icon]="'back'" [variant]="'tertiary'" />
-        <fudis-button
-          fudisFormSubmit
-          [formValid]="formExample.valid"
-          [label]="'Submit'"
-          (handleClick)="submitForm()"
-        />
+        <fudis-button fudisFormSubmit [formValid]="formExample.valid" [label]="'Submit'" />
       </ng-template>
       <ng-template fudisContent [type]="'form'">
         <fudis-section [title]="'Main section'" [errorSummaryBreadcrumb]="true">
@@ -281,10 +276,7 @@ class ExampleWithMultipleFormsComponent {
                 [id]="fieldsetId"
               >
                 <ng-template fudisNotifications [type]="'fieldset'">
-                  <fudis-notification *ngIf="errorSummaryVisible">
-                    This is notification for a fieldset. TODO: Add notifications to error summary if
-                    needed.
-                  </fudis-notification>
+                  <fudis-notification> This is notification for a fieldset. </fudis-notification>
                 </ng-template>
                 <ng-template fudisContent [type]="'fieldset'">
                   <fudis-grid [columns]="{ lg: 'inputLg inputLg' }"> -->
@@ -331,18 +323,16 @@ class ExampleWithMultipleFormsComponent {
                     <fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
                     <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
                   </fudis-checkbox-group>
-                  <!-- <fudis-datepicker
-                          [label]="'Start date'"
-                          [helpText]="'You have to start from somewhere'"
-                          [control]="formExample.controls['importantDate']"
-                        >
-                          <fudis-error-message
-                            *ngIf="
-                              formExample.controls['importantDate'].value?.getTime() !== releaseDate
-                            "
-                            [message]="'Wrong date chosen. 1.5.1991 would be great!'"
-                          />
-                        </fudis-datepicker> -->
+                  <fudis-datepicker
+                    [label]="'Start date'"
+                    [helpText]="'You have to start from somewhere'"
+                    [control]="formExample.controls['importantDate']"
+                  >
+                    <fudis-error-message
+                      *ngIf="formExample.controls['importantDate'].value?.getTime() !== releaseDate"
+                      [message]="'Wrong date chosen. 1.5.1991 would be great!'"
+                    />
+                  </fudis-datepicker>
                   <!-- </fudis-grid>
                 </ng-template>
               </fudis-fieldset> -->
@@ -458,13 +448,26 @@ class FormContentExampleComponent implements OnInit {
       FudisValidators.email('Input must be an email address.'),
       FudisValidators.minLength(5, 'Email should be at least 5 characters.'),
     ]),
-    // importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
+    importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
     // courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
     // startDate: new FormControl<Date | null>(
     //   null,
     //   FudisValidators.required('Start date is required.'),
     // ),
-    // endDate: new FormControl<Date | null>(null, FudisValidators.required('End date is required.')),
+    // dateRangeStartDate: new FormControl<Date | null>(null, [
+    //   FudisValidators.required('Choose start date'),
+    //   FudisValidators.datepickerMax({
+    //     value: new Date(2023, 5, 20),
+    //     message: 'Start date cannot be later than 20.6.2023',
+    //   }),
+    // ]),
+    // dateRangeEndDate: new FormControl<Date | null>(null, [
+    //   FudisValidators.required('Choose end date'),
+    //   FudisValidators.datepickerMin({
+    //     value: new Date(2023, 5, 19),
+    //     message: 'Start date cannot be earliner than 19.6.2023',
+    //   }),
+    // ]),
   });
 
   languageOptions: FudisSelectOption<object>[] = [
@@ -480,12 +483,12 @@ class FormContentExampleComponent implements OnInit {
 
   // Expose when DateRange is exposed to public API
   // dateRangeStartDate: FudisDateRangeItem = {
-  //   control: this.formExample.controls.startDate,
+  //   control: this.formExample.controls.dateRangeStartDate,
   //   label: 'Start date',
   // };
 
   // dateRangeEndDate: FudisDateRangeItem = {
-  //   control: this.formExample.controls.endDate,
+  //   control: this.formExample.controls.dateRangeEndDate,
   //   label: 'End date',
   // };
 
@@ -493,12 +496,6 @@ class FormContentExampleComponent implements OnInit {
 
   ngOnInit(): void {
     this._focusService.addToIgnoreList('unique-input-3');
-  }
-
-  submitForm(): void {
-    if (this.formExample.valid) {
-      //this.errorSummaryVisible = false;
-    }
   }
 
   handleClosedOutput(value: boolean): void {
