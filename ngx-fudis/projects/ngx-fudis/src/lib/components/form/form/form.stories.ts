@@ -260,7 +260,11 @@ class ExampleWithMultipleFormsComponent {
       <ng-template fudisContent [type]="'form'">
         <fudis-section [title]="'Main section'" [errorSummaryBreadcrumb]="true">
           <ng-template fudisNotifications [type]="'section'">
-            <fudis-notification>This is notification for the section</fudis-notification>
+            <fudis-notification
+              ><fudis-body-text [size]="'lg-regular'"
+                >This is notification for the section</fudis-body-text
+              ></fudis-notification
+            >
           </ng-template>
           <ng-template fudisContent [type]="'section'">
             <fudis-expandable

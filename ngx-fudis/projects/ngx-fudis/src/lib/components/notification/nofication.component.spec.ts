@@ -14,12 +14,7 @@ describe('NotificationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        NotificationComponent,
-        IconComponent,
-        LinkComponent,
-        LinkDirective,
-      ],
+      declarations: [NotificationComponent, IconComponent, LinkComponent, LinkDirective],
       imports: [RouterModule.forRoot([])],
     })
       .overrideComponent(NotificationComponent, {
@@ -43,7 +38,7 @@ describe('NotificationComponent', () => {
 
   function notificationIconCheck(variant: FudisNotification): void {
     component.variant = variant;
-    component.ngOnChanges();
+
     fixture.detectChanges();
 
     let icon: string = '';
@@ -65,15 +60,14 @@ describe('NotificationComponent', () => {
         break;
     }
 
-    const iconElement = getElement(fixture, `.fudis-icon#${icon}`);
-
-    expect(component.icon).toEqual(icon);
-    expect(iconElement).toBeTruthy();
+    const iconVariant = getElement(fixture, 'fudis-icon').getAttribute('ng-reflect-icon');
+    expect(iconVariant).toEqual(icon);
   }
 
   function notificationVariants(variant: FudisNotification): void {
     component.variant = variant;
     fixture.detectChanges();
+
     assertNotificationHasClasses(`fudis-notification fudis-notification__${variant}`);
   }
 
@@ -92,47 +86,6 @@ describe('NotificationComponent', () => {
       notificationIconCheck('danger');
       notificationIconCheck('success');
       notificationIconCheck('info');
-    });
-  });
-
-  describe('Link inside Notification', () => {
-    beforeEach(() => {
-      component.link = ['/test-url'];
-      fixture.detectChanges();
-    });
-    it('should have default CSS class', () => {
-      const linkElement = getElement(fixture, 'fudis-link');
-
-      expect(linkElement).toBeTruthy();
-      expect(linkElement.className).toContain('fudis-notification__link');
-    });
-
-    it('should have router link element', () => {
-      const anchorElement = getElement(fixture, 'a');
-
-      expect(anchorElement).toBeTruthy();
-      expect(anchorElement.getAttribute('href')).toEqual('/test-url');
-    });
-
-    it('should replace router link with linkTitle if given', () => {
-      component.linkTitle = 'New link title';
-      fixture.detectChanges();
-
-      const anchorElement = getElement(fixture, 'a');
-
-      expect(anchorElement.textContent).toEqual('New link title');
-    });
-
-    it('should replace router link with external link', () => {
-      component.externalLink = 'www.example.com';
-      fixture.detectChanges();
-
-      const anchorElement = getElement(fixture, 'a');
-
-      expect(anchorElement.getAttribute('href')).toEqual('www.example.com');
-      expect(anchorElement.getAttribute('aria-label')).toEqual(
-        'www.example.com, (opens in a new tab)',
-      );
     });
   });
 });

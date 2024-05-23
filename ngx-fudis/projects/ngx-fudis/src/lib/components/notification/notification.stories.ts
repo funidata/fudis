@@ -32,21 +32,33 @@ const html = String.raw;
 
 const Template: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
   props: args,
-  template: html`<fudis-notification
-    [variant]="variant"
-    [link]="link"
-    [linkTitle]="linkTitle"
-    [externalLink]="externalLink"
-  ><fudis-body-text [size]="'lg-regular'">This is notification.</fudis-body-text></fudis-notification
+  template: html`<fudis-notification [variant]="variant"
+    ><fudis-body-text [size]="'lg-regular'"
+      >This is notification.</fudis-body-text
+    ></fudis-notification
   >`,
+});
+
+const LinkTemplate: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
+  props: args,
+  template: html`<fudis-notification [variant]="variant">
+    <fudis-link
+      [externalLink]="'https://www.example.com'"
+      [title]="'This link opens in new tab.'"
+    ></fudis-link>
+  </fudis-notification>`,
 });
 
 const MultiChildTemplate: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
   props: args,
-  template: html`<fudis-notification
-    [variant]="variant">
+  template: html`<fudis-notification [variant]="variant">
     <fudis-body-text [size]="'lg-regular'">Note! Please don't do this, okey?</fudis-body-text>
-    <fudis-body-text [size]="'lg-regular'">If you must do it anyway, please see the documentation for more info.</fudis-body-text>
+    <fudis-body-text [size]="'lg-regular'"
+      >If you must do it anyway, please see the documentation for more info.</fudis-body-text
+    >
+    <fudis-body-text [size]="'lg-regular'"
+      >Also remember to breathe. Everything is going to be okay!</fudis-body-text
+    >
   </fudis-notification>`,
 });
 
@@ -55,11 +67,9 @@ Example.args = {
   variant: 'warning',
 };
 
-export const ExampleWithExternalLink = Template.bind({});
+export const ExampleWithExternalLink = LinkTemplate.bind({});
 ExampleWithExternalLink.args = {
   variant: 'warning',
-  linkTitle: 'This link opens in new tab.',
-  externalLink: 'https://www.example.com',
 };
 
 export const ExampleWithMultipleChildComponents = MultiChildTemplate.bind({});

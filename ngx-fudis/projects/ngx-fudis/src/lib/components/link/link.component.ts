@@ -85,7 +85,10 @@ export class LinkComponent extends LinkApiDirective implements OnChanges {
   protected _externalLinkTitleParsed: string[];
 
   ngOnChanges(changes: FudisComponentChanges<LinkComponent>): void {
-    if (changes.externalLink || changes.title) {
+    if (
+      changes.externalLink?.currentValue !== changes.externalLink?.previousValue ||
+      changes.title?.currentValue !== changes.title?.previousValue
+    ) {
       this._parseExternalLinkTitle();
     }
   }

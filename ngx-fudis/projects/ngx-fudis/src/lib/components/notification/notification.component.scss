@@ -7,22 +7,15 @@
 
   box-sizing: border-box;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   padding: 0 spacing.$spacing-sm 0 spacing.$spacing-xxs;
   width: 100%;
   min-height: spacing.$spacing-md;
 
-  &__link {
-    margin-left: spacing.$spacing-xxs;
-    display: inline-block;
-  }
-
-  &__body-text {
-    padding: spacing.$spacing-xxs 0;
-  }
-
   &__content {
     display: inline-block;
+    align-self: center;
+    margin: calc(spacing.$spacing-xxs + spacing.$pixel-2) 0;
   }
 
   &__warning {
