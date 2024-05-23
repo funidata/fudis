@@ -32,22 +32,25 @@ test("datepicker default change calendar language", async ({ page }) => {
     "/iframe.html?args=&id=components-form-date-datepicker--datepicker&viewMode=story",
   );
   await page.getByTestId("fudis-button-1").click();
+  await expect(page.getByText("Current language: fi")).toBeVisible();
   await page.getByTestId("fudis-datepicker-1-calendar-icon-toggle").click();
-  await expect(page).toHaveScreenshot({ path:"to-finnish.png", fullPage: true });
-  await page.waitForText("Touko 2024").toBeVisible();
+  await page.waitForSelector(".mdc-button__label");
+  await expect(page).toHaveScreenshot("to-finnish.png", { fullPage: true });
+  await page.keyboard.press("Escape");
+
+  await page.getByTestId("fudis-button-1").click();
+  await expect(page.getByText("Current language: sv")).toBeVisible();
   await page.getByTestId("fudis-datepicker-1-calendar-icon-toggle").click();
 
-  await page.waitForSelector(".fudis-button").toBeVisible();
-  await page.getByTestId("fudis-button-1").click();
-  await page.getByTestId("fudis-datepicker-1-calendar-icon-toggle").click();
-  await expect(page).toHaveScreenshot({ path: "to-swedish.png", fullPage: true });
-  await page.waitForText("Maj 2024").toBeVisible();
-  await page.getByTestId("fudis-datepicker-1-calendar-icon-toggle").click();
+  await page.waitForSelector(".mdc-button__label");
+  await expect(page).toHaveScreenshot("to-swedish.png", { fullPage: true });
+  await page.keyboard.press("Escape");
 
-  await page.waitForSelector(".fudis-button").toBeVisible();
   await page.getByTestId("fudis-button-1").click();
+  await expect(page.getByText("Current language: en")).toBeVisible();
   await page.getByTestId("fudis-datepicker-1-calendar-icon-toggle").click();
-  await expect(page).toHaveScreenshot({ path: "to-english.png", fullPage: true });
+  await page.waitForSelector(".mdc-button__label");
+  await expect(page).toHaveScreenshot("to-english.png", { fullPage: true });
 });
 
 test("datepicker disabled", async ({ page }) => {
