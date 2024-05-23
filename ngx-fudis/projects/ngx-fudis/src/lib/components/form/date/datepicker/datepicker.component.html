@@ -1,6 +1,6 @@
 <div class="fudis-datepicker fudis-input-size__{{ size }}">
   <fudis-label
-    [id]="'label_' + id"
+    [id]="id + '-label'"
     [for]="id"
     [text]="label"
     [requiredText]="_required ? _requiredText : undefined"
@@ -11,14 +11,16 @@
   <div class="fudis-datepicker__input-wrapper">
     <input
       #inputRef
+      class="fudis-form-input fudis-datepicker__input"
       [id]="id"
-      [formControl]="control"
       [matDatepicker]="picker"
+      [formControl]="control"
+      (blur)="_handleInputBlur($event)"
+      (keyup)="_handleKeyUp($event)"
       [min]="_minDate"
       [max]="_maxDate"
-      [readonly]="disabled"
-      [attr.aria-disabled]="disabled ? true : null"
-      class="fudis-form-input fudis-datepicker__input"
+      [readonly]="control.disabled || disabled"
+      [attr.aria-disabled]="control.disabled || disabled ? true : null"
       [attr.aria-invalid]="
         (control.touched && control.invalid) || (control.touched && invalidState) ? true : null
       "
@@ -26,20 +28,26 @@
       [attr.aria-describedby]="id + '_guidance'"
     />
     <mat-datepicker-toggle
-      [disabled]="disabled"
       matSuffix
-      [for]="picker"
-      [disableRipple]="true"
       class="fudis-datepicker__toggle"
+      [id]="id + '-calendar-icon-toggle'"
+      [for]="picker"
+      [disabled]="disabled || control.disabled"
+      [disableRipple]="true"
     >
       <mat-icon matDatepickerToggleIcon>
         <fudis-icon [icon]="'calendar'" [color]="'primary'"></fudis-icon>
       </mat-icon>
     </mat-datepicker-toggle>
-    <mat-datepicker #picker panelClass="fudis-datepicker__datepicker"></mat-datepicker>
+    <mat-datepicker
+      #picker
+      panelClass="fudis-datepicker__datepicker"
+      (closed)="_handleCalendarClose()"
+    ></mat-datepicker>
   </div>
   <fudis-guidance
     *ngIf="!disableGuidance"
+    [formId]="_parentForm?.id || null"
     [inputLabel]="label"
     [reloadErrorSummary]="_reloadErrorSummary"
     [helpText]="helpText"
