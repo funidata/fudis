@@ -143,6 +143,12 @@ describe('MultiselectComponent', () => {
       const expectedValue = 'Dog, Platypus';
 
       const labelText = getElement(fixtureMock, '.fudis-select__input__label');
+      const placeholderItems = getAllElements(fixtureMock, '.fudis-select__input__label');
+      const placeholerItemsArray: (string | null)[] = [];
+
+      placeholderItems.forEach((item) => {
+        placeholerItemsArray.push(item.textContent);
+      });
 
       const placeholder = getElement(fixtureMock, '.fudis-select__input__placeholder');
 

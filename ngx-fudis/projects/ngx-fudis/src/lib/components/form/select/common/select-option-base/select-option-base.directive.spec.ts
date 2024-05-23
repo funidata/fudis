@@ -17,7 +17,7 @@ import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.compon
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 import { SelectBaseDirective } from '../select-base/select-base.directive';
 import { FudisIdService } from '../../../../../services/id/id.service';
-import { getAllElements, getTrimmedTextContent } from '../../../../../utilities/tests/utilities';
+import { getAllElements } from '../../../../../utilities/tests/utilities';
 import { By } from '@angular/platform-browser';
 
 @Component({
@@ -104,7 +104,7 @@ describe('SelectOptionBaseDirective', () => {
       setSelectDropdownOpen();
 
       const options = fixture.debugElement.queryAll(By.css('fudis-select-option'));
-      const textContent = getTrimmedTextContent(options[2].nativeElement);
+      const textContent = options[2].nativeElement.textContent;
 
       expect(options[2].nativeElement.outerHTML).toContain(
         'fudis-select-option__focusable fudis-select-option--selected',
@@ -131,12 +131,10 @@ describe('SelectOptionBaseDirective', () => {
 
       expect(focusableOptions.length).toEqual(2);
 
-      const optionsArray: string[] = [];
+      const optionsArray: (string | null)[] = [];
 
       focusableOptions.forEach((item) => {
-        const cleanedContent = getTrimmedTextContent(item as HTMLElement);
-
-        optionsArray.push(cleanedContent);
+        optionsArray.push(item.textContent);
       });
 
       expect(optionsArray).toEqual(['Capybara', 'Platypus']);

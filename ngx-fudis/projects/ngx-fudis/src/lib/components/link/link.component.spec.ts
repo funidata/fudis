@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { IconComponent } from '../icon/icon.component';
 import { LinkComponent } from './link.component';
 import { LinkDirective } from '../../directives/link/link.directive';
-import { getElement, getTrimmedTextContent } from '../../utilities/tests/utilities';
+import { getElement } from '../../utilities/tests/utilities';
 import { FudisLinkColor } from '../../types/miscellaneous';
 
 describe('LinkComponent', () => {
@@ -85,7 +85,7 @@ describe('LinkComponent', () => {
       fixture.detectChanges();
       const anchorElement = fixture.debugElement.query(By.css('.fudis-link__external'));
 
-      expect(getTrimmedTextContent(anchorElement.nativeElement)).toEqual('My link');
+      expect(anchorElement.nativeElement.textContent).toEqual('My link');
     });
   });
 

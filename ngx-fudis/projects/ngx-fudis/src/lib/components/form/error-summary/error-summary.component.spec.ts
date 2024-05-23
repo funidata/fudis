@@ -28,7 +28,6 @@ import { GuidanceComponent } from '../guidance/guidance.component';
 import { LabelComponent } from '../label/label.component';
 import { TextInputComponent } from '../text-input/text-input.component';
 import { SpacingDirective } from '../../../directives/spacing/spacing.directive';
-import { getTrimmedTextContent } from '../../../utilities/tests/utilities';
 import { SectionComponent } from '../../section/section.component';
 import { ExpandableComponent } from '../../expandable/expandable.component';
 import { FudisFormErrorSummaryLink } from '../../../types/forms';
@@ -166,12 +165,12 @@ describe('ErrorSummaryComponent', () => {
 
   describe('Contents', () => {
     it('helper texts are displayed properly', () => {
-      const renderedHelpText = getTrimmedTextContent(
-        wrapperFixture.nativeElement.querySelector('fudis-body-text p'),
-      );
+      const renderedHelpText = wrapperFixture.nativeElement.querySelector('fudis-body-text p');
 
       // Hidden icon text + Help Text
-      expect(renderedHelpText).toBe('Attention: There were errors you need to fix');
+      expect(renderedHelpText.textContent).toBe(
+        'Attention:\u00A0There were errors you need to fix',
+      );
     });
 
     it('should have Fudis Link attributes correctly with router link', () => {
@@ -235,10 +234,10 @@ describe('ErrorSummaryComponent', () => {
         'ul.fudis-error-summary__error-list li.fudis-error-summary__error-list__item',
       );
 
-      const firstMessage = getTrimmedTextContent(errorList[0]);
-      const secondMessage = getTrimmedTextContent(errorList[1]);
-      const thirdMessage = getTrimmedTextContent(errorList[2]);
-      const forthMessage = getTrimmedTextContent(errorList[3]);
+      const firstMessage = errorList[0].textContent;
+      const secondMessage = errorList[1].textContent;
+      const thirdMessage = errorList[2].textContent;
+      const forthMessage = errorList[3].textContent;
 
       expect(firstMessage).toEqual('Form information / Name: Missing your name');
       expect(secondMessage).toEqual('Form information / Contact email: Missing email contact');

@@ -20,15 +20,3 @@ export function getAllElements(fixture: ComponentFixture<unknown>, query: string
 export function getDirective(fixture: ComponentFixture<unknown>, directive: any) {
   return fixture.debugElement.queryAll(By.directive(directive));
 }
-
-/**
- * As Angular html adds some weird extra spaces, this function tries to tidy them.
- * @param element HTMLElement
- * @returns string with cleaned whitespace
- */
-export function getTrimmedTextContent(element: HTMLElement): string {
-  if (element.textContent) {
-    return element.textContent!.replaceAll(/\s+/g, ' ').trim();
-  }
-  return '';
-}

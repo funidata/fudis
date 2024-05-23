@@ -19,11 +19,7 @@ import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.compon
 import { ButtonComponent } from '../../../../button/button.component';
 import { MultiselectOptionComponent } from '../../multiselect/multiselect-option/multiselect-option.component';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
-import {
-  getAllElements,
-  getElement,
-  getTrimmedTextContent,
-} from '../../../../../utilities/tests/utilities';
+import { getAllElements, getElement } from '../../../../../utilities/tests/utilities';
 import { MultiselectChipListComponent } from '../../multiselect/multiselect-chip-list/multiselect-chip-list.component';
 import { By } from '@angular/platform-browser';
 import { groupedTestData } from '../mock_data';
@@ -160,16 +156,16 @@ describe('SelectBaseDirective', () => {
         '.fudis-multiselect-option__label--checked .fudis-multiselect-option__label__text',
       );
 
-      const selectedOptionLabelArray: string[] = [];
+      const selectedOptionLabelArray: (string | null)[] = [];
 
       checkedOption.forEach((item) => {
-        selectedOptionLabelArray.push(getTrimmedTextContent(item as HTMLElement));
+        selectedOptionLabelArray.push(item.textContent);
       });
 
       expect(selectedOptionLabelArray).toEqual(['Golden jackal', 'Falcon, prairie']);
 
       const inputText = getElement(fixture, '.fudis-select__input__label');
-      const inputValue = getTrimmedTextContent(inputText as HTMLElement);
+      const inputValue = inputText.textContent;
 
       expect(inputValue).toEqual("Golden jackal, 'Falcon, prairie'");
     });
