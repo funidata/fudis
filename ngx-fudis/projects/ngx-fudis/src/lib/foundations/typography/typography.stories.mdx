@@ -36,6 +36,8 @@ export const body = {
   },
 };
 
+export const table_caption_text = "Fudis table caption text";
+
 export const text_xxl = "Fudis heading XXL (2.25rem) 500";
 export const text_xl = "Fudis heading XL (1.75rem) 500";
 export const text_lg = "Fudis heading LG (1.5rem) 500";
@@ -45,9 +47,9 @@ export const text_xs = "Fudis heading XS (1rem) 600";
 export const text_xxs = "Fudis heading XXS (0.857rem) 600";
 
 export const body_sm =
-  'Fudis body-text smd-regular (0.75rem) 400: "The quick brown fox jumps over the lazy dog."';
+  'Fudis body-text sm-regular (0.75rem) 400: "The quick brown fox jumps over the lazy dog."';
 export const body_sm_light =
-  'Fudis body-text smd-light (0.75rem) 300: "The quick brown fox jumps over the lazy dog."';
+  'Fudis body-text sm-light (0.75rem) 300: "The quick brown fox jumps over the lazy dog."';
 export const body_md =
   'Fudis body-text md-regular (0.875rem) 400: "The quick brown fox jumps over the lazy dog."';
 export const body_md_light =
@@ -161,3 +163,33 @@ export const body_lg_light =
   sampleText={body_sm_light}
   fontFamily={body.type.primary}
 />
+
+## Table Caption
+
+<table>
+  <th>Mixin</th>
+  <th>Styles</th>
+  <th>Example</th>
+  <tbody>
+    <tr>
+      <td>table-caption</td>
+      <td>
+          <fudis-body-text>Size: 14px / 0.875rem</fudis-body-text><br />
+          <fudis-body-text>Weight: 400 / Regular</fudis-body-text><br />
+          <fudis-body-text>Transform: Uppercase</fudis-body-text>
+      </td>
+      <td>
+        <fudis-body-text
+          style={{
+            fontFamily: "Fira Sans",
+            fontSize: "0.875rem",
+            fontWeight: "400",
+            textTransform: "uppercase",
+          }}
+        >
+          {table_caption_text}
+        </fudis-body-text>
+      </td>
+    </tr>
+  </tbody>
+</table>
