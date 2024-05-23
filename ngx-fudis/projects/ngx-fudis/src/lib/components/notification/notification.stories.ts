@@ -33,32 +33,31 @@ const html = String.raw;
 const Template: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
   props: args,
   template: html`<fudis-notification [variant]="variant"
-    ><fudis-body-text [size]="'lg-regular'"
-      >This is notification.</fudis-body-text
-    ></fudis-notification
+    ><fudis-body-text>This is notification.</fudis-body-text></fudis-notification
   >`,
 });
 
 const LinkTemplate: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
   props: args,
   template: html`<fudis-notification [variant]="variant">
-    <fudis-link
-      [externalLink]="'https://www.example.com'"
-      [title]="'This link opens in new tab.'"
-    ></fudis-link>
+    <fudis-body-text
+      >This is Notification with Link.
+      <fudis-link
+        [externalLink]="'https://www.example.com'"
+        [title]="'This link opens in new tab.'"
+      ></fudis-link
+    ></fudis-body-text>
   </fudis-notification>`,
 });
 
 const MultiChildTemplate: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
   props: args,
   template: html`<fudis-notification [variant]="variant">
-    <fudis-body-text [size]="'lg-regular'">Note! Please don't do this, okey?</fudis-body-text>
-    <fudis-body-text [size]="'lg-regular'"
+    <fudis-body-text>Note! Please don't do this, okey?</fudis-body-text>
+    <fudis-body-text
       >If you must do it anyway, please see the documentation for more info.</fudis-body-text
     >
-    <fudis-body-text [size]="'lg-regular'"
-      >Also remember to breathe. Everything is going to be okay!</fudis-body-text
-    >
+    <fudis-body-text>Also remember to breathe. Everything is going to be okay!</fudis-body-text>
   </fudis-notification>`,
 });
 
@@ -84,16 +83,16 @@ export const AllVariants: StoryFn<NotificationComponent> = (args: NotificationCo
   template: html`
     <fudis-grid [align]="'start'" [width]="'md'">
       <fudis-notification [variant]="'warning'">
-        <fudis-body-text [size]="'lg-regular'">Note! Please don't do this, okey?</fudis-body-text>
+        <fudis-body-text>Note! Please don't do this, okey?</fudis-body-text>
       </fudis-notification>
       <fudis-notification [variant]="'danger'">
-        <fudis-body-text [size]="'lg-regular'">Whoops! Some error happened.</fudis-body-text>
+        <fudis-body-text>Whoops! Some error happened.</fudis-body-text>
       </fudis-notification>
       <fudis-notification [variant]="'success'">
-        <fudis-body-text [size]="'lg-regular'">You succeeded!</fudis-body-text>
+        <fudis-body-text>You succeeded!</fudis-body-text>
       </fudis-notification>
       <fudis-notification [variant]="'info'">
-        <fudis-body-text [size]="'lg-regular'">This is a totally neutral message</fudis-body-text>
+        <fudis-body-text>This is a totally neutral message</fudis-body-text>
       </fudis-notification>
     </fudis-grid>
   `,

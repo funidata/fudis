@@ -28,9 +28,7 @@ import readme from './readme.mdx';
       </ng-template>
       <ng-template fudisNotifications [type]="'fieldset'">
         <fudis-notification
-          ><fudis-body-text [size]="'lg-regular'"
-            >This is notification</fudis-body-text
-          ></fudis-notification
+          ><fudis-body-text>This is notification</fudis-body-text></fudis-notification
         >
       </ng-template>
       <ng-template fudisContent [type]="'fieldset'">

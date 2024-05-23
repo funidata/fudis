@@ -4,9 +4,12 @@ import {
   HostBinding,
   ViewEncapsulation,
   ChangeDetectionStrategy,
+  Optional,
+  Host,
 } from '@angular/core';
 import { FudisBodyText } from '../../../types/typography';
 import { FudisTextAlign } from '../../../types/miscellaneous';
+import { NotificationComponent } from '../../notification/notification.component';
 
 @Component({
   selector: 'fudis-body-text',
@@ -16,6 +19,12 @@ import { FudisTextAlign } from '../../../types/miscellaneous';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BodyTextComponent {
+  constructor(@Host() @Optional() private _parentNotification: NotificationComponent) {
+    if (_parentNotification) {
+      this.size = 'lg-regular';
+    }
+  }
+
   /**
    * Class for the parent wrapper element
    */
