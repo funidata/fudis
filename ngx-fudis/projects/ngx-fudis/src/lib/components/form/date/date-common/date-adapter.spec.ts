@@ -29,7 +29,6 @@ describe('FudisDateAdapter', () => {
     expect(adapter.format(new Date('2024-05-20'), {})).toEqual('5/20/2024');
   });
 
-
   it('should throw error when attempting to format invalid date', () => {
     expect(() => adapter.format(new Date(NaN), {})).toThrow(
       'FudisDateAdapter: Cannot format invalid date.',
@@ -73,7 +72,7 @@ describe('FudisDateAdapter', () => {
     });
 
     it('should not accept overflown dates and return null', () => {
-      const nonLeapYearDate = '29.2.2023'
+      const nonLeapYearDate = '29.2.2023';
       const leapYearDate = '29.2.2024';
       const nonValidDay = '32.1.2024';
 

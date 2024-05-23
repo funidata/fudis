@@ -10,8 +10,7 @@ import { FudisTranslationService } from '../../../../services/translation/transl
 
 @Component({
   selector: 'example-language-change-component',
-  template: `
-  <fudis-grid [marginTop]="'sm'" [rowGap]="'xs'">
+  template: ` <fudis-grid [marginTop]="'sm'" [rowGap]="'xs'">
     <fudis-button [label]="_label" (handleClick)="changeLanguage()" />
     <fudis-body-text>Current language: {{ _translationService.getLanguage() }}</fudis-body-text>
   </fudis-grid>`,
