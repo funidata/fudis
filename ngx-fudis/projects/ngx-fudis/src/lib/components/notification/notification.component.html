@@ -1,9 +1,8 @@
 <div class="fudis-notification fudis-notification__{{ variant }}">
   <ng-container *ngIf="!_content">
     <fudis-icon [icon]="_icon" />
-    <fudis-body-text class="fudis-notification__body-text" [size]="'lg-regular'">
-      <span class="fudis-visually-hidden">{{ _attentionText }}:&nbsp;</span>
-      <ng-content />
+    <span class="fudis-visually-hidden">{{ _attentionText }}:&nbsp;</span>
+    <span class="fudis-notification__body-text"><span class="fudis-notification__content"><ng-content /></span>
       <fudis-link
         class="fudis-notification__link"
         *ngIf="!externalLink && link"
@@ -11,14 +10,15 @@
         [link]="link"
         [color]="'gray-dark'"
       />
-      <fudis-link
-        class="fudis-notification__link"
-        *ngIf="externalLink"
-        [title]="linkTitle"
-        [externalLink]="externalLink"
-        [color]="'gray-dark'"
-      />
-    </fudis-body-text>
+    <fudis-link
+      class="fudis-notification__link"
+      *ngIf="externalLink"
+      [title]="linkTitle"
+      [externalLink]="externalLink"
+      [color]="'gray-dark'"
+    />
+    </span>
+
   </ng-container>
   <ng-container *ngIf="_content?.type === 'notification'">
     <ng-container *ngTemplateOutlet="_content!.templateRef" />

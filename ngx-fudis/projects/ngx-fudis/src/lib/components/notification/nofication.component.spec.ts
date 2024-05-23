@@ -1,7 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MockComponent } from 'ng-mocks';
 import { IconComponent } from '../icon/icon.component';
-import { BodyTextComponent } from '../typography/body-text/body-text.component';
 import { LinkComponent } from '../link/link.component';
 import { NotificationComponent } from './notification.component';
 import { FudisNotification } from '../../types/miscellaneous';
@@ -19,7 +17,6 @@ describe('NotificationComponent', () => {
       declarations: [
         NotificationComponent,
         IconComponent,
-        MockComponent(BodyTextComponent),
         LinkComponent,
         LinkDirective,
       ],

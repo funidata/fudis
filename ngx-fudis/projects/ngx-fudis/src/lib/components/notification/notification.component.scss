@@ -14,10 +14,15 @@
 
   &__link {
     margin-left: spacing.$spacing-xxs;
+    display: inline-block;
   }
 
   &__body-text {
-    white-space: pre-wrap;
+    padding: spacing.$spacing-xxs 0;
+  }
+
+  &__content {
+    display: inline-block;
   }
 
   &__warning {

@@ -37,8 +37,17 @@ const Template: StoryFn<NotificationComponent> = (args: NotificationComponent) =
     [link]="link"
     [linkTitle]="linkTitle"
     [externalLink]="externalLink"
-    >This is notification.</fudis-notification
+  ><fudis-body-text [size]="'lg-regular'">This is notification.</fudis-body-text></fudis-notification
   >`,
+});
+
+const MultiChildTemplate: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
+  props: args,
+  template: html`<fudis-notification
+    [variant]="variant">
+    <fudis-body-text [size]="'lg-regular'">Note! Please don't do this, okey?</fudis-body-text>
+    <fudis-body-text [size]="'lg-regular'">If you must do it anyway, please see the documentation for more info.</fudis-body-text>
+  </fudis-notification>`,
 });
 
 export const Example = Template.bind({});
@@ -53,6 +62,11 @@ ExampleWithExternalLink.args = {
   externalLink: 'https://www.example.com',
 };
 
+export const ExampleWithMultipleChildComponents = MultiChildTemplate.bind({});
+ExampleWithMultipleChildComponents.args = {
+  variant: 'warning',
+};
+
 export const AllVariants: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
   props: {
     ...args,
@@ -60,11 +74,17 @@ export const AllVariants: StoryFn<NotificationComponent> = (args: NotificationCo
   template: html`
     <fudis-grid [align]="'start'" [width]="'md'">
       <fudis-notification [variant]="'warning'">
-        Note! Please don't do this, okey?
+        <fudis-body-text [size]="'lg-regular'">Note! Please don't do this, okey?</fudis-body-text>
       </fudis-notification>
-      <fudis-notification [variant]="'danger'"> Whoops! Some error happened. </fudis-notification>
-      <fudis-notification [variant]="'success'">You succeeded!</fudis-notification>
-      <fudis-notification [variant]="'info'">This is a totally neutral message</fudis-notification>
+      <fudis-notification [variant]="'danger'">
+        <fudis-body-text [size]="'lg-regular'">Whoops! Some error happened.</fudis-body-text>
+      </fudis-notification>
+      <fudis-notification [variant]="'success'">
+        <fudis-body-text [size]="'lg-regular'">You succeeded!</fudis-body-text>
+      </fudis-notification>
+      <fudis-notification [variant]="'info'">
+        <fudis-body-text [size]="'lg-regular'">This is a totally neutral message</fudis-body-text>
+      </fudis-notification>
     </fudis-grid>
   `,
 });

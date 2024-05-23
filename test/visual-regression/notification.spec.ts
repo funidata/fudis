@@ -11,3 +11,10 @@ test("with external link", async ({ page }) => {
   );
   await expect(page).toHaveScreenshot();
 });
+
+test("with multiple child components", async ({ page }) => {
+  await page.goto(
+    "/iframe.html?args=&id=components-notification--example-with-multiple-child-components&viewMode=story",
+  );
+  await expect(page).toHaveScreenshot();
+});
