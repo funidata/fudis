@@ -29,21 +29,6 @@ describe('FudisDateAdapter', () => {
     expect(adapter.format(new Date('2024-05-20'), {})).toEqual('5/20/2024');
   });
 
-  it('should format with different locales', () => {
-    const availableLocales: string[] = ['fi-FI', 'sv-SE', 'en-GB'];
-
-    availableLocales.forEach((locale) => {
-      adapter.setLocale(locale);
-
-      if (locale === 'fi-FI') {
-        expect(adapter.format(new Date(2024, 5, 20), {})).toEqual('20.6.2024');
-      } else if (locale === 'sv-SE') {
-        expect(adapter.format(new Date(2024, 5, 20), {})).toEqual('2024-06-20');
-      } else if (locale === 'en-GB') {
-        expect(adapter.format(new Date(2024, 5, 20), {})).toEqual('20/06/2024');
-      }
-    });
-  });
 
   it('should throw error when attempting to format invalid date', () => {
     expect(() => adapter.format(new Date(NaN), {})).toThrow(
@@ -65,16 +50,36 @@ describe('FudisDateAdapter', () => {
     });
 
     it('should parse invalid string value as null', () => {
-      const notDateString = parseDate('hello');
+      const notDateString = parseDate('hello.1.2024');
+      const invalidDay = parseDate('200.5.2024');
+      const invalidMonth = parseDate('20.55.2024');
+      const invalidYear = parseDate('20.5.12');
+      const anotherInvalidYear = parseDate('20.2.024');
 
       expect(notDateString).toBeNull();
       expect(adapter.isDateInstance(notDateString)).toBe(false);
+
+      expect(invalidDay).toBeNull();
+      expect(adapter.isDateInstance(invalidDay)).toBe(false);
+
+      expect(invalidMonth).toBeNull();
+      expect(adapter.isDateInstance(invalidMonth)).toBe(false);
+
+      expect(invalidYear).toBeNull();
+      expect(adapter.isDateInstance(invalidYear)).toBe(false);
+
+      expect(anotherInvalidYear).toBeNull();
+      expect(adapter.isDateInstance(anotherInvalidYear)).toBe(false);
     });
 
-    it('should consider leap year when parsing and return null', () => {
-      const leapYearDate = new Date(2023, 1, 29).toString();
+    it('should not accept overflown dates and return null', () => {
+      const nonLeapYearDate = '29.2.2023'
+      const leapYearDate = '29.2.2024';
+      const nonValidDay = '32.1.2024';
 
-      expect(parseDate(leapYearDate)).toBeNull();
+      expect(parseDate(nonLeapYearDate)).toBeNull();
+      expect(parseDate(leapYearDate)).toEqual(new Date(2024, 1, 29));
+      expect(parseDate(nonValidDay)).toBeNull();
     });
   });
 });

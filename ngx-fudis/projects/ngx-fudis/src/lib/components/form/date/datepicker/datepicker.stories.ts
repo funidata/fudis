@@ -1,11 +1,38 @@
 import { StoryFn, Meta, applicationConfig, moduleMetadata } from '@storybook/angular';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { importProvidersFrom } from '@angular/core';
+import { Component, importProvidersFrom } from '@angular/core';
 import { DatepickerComponent } from './datepicker.component';
 import docs from './datepicker-docs.mdx';
 import { FudisValidators } from '../../../../utilities/form/validators';
-import { datepickerControlsExclude } from 'projects/ngx-fudis/src/lib/utilities/storybook';
+import { datepickerControlsExclude } from '../../../../utilities/storybook';
+import { FudisTranslationService } from '../../../../services/translation/translation.service';
+
+@Component({
+  selector: 'example-language-change-component',
+  template: `
+  <fudis-grid [marginTop]="'sm'" [rowGap]="'xs'">
+    <fudis-button [label]="_label" (handleClick)="changeLanguage()" />
+    <fudis-body-text>Current language: {{ _translationService.getLanguage() }}</fudis-body-text>
+  </fudis-grid>`,
+})
+class LanguageChangeComponent {
+  constructor(private _translationService: FudisTranslationService) {
+    this._translationService.setLanguage('en');
+  }
+
+  protected _label = 'Change calendar language';
+
+  changeLanguage(): void {
+    if (this._translationService.getLanguage() === 'en') {
+      this._translationService.setLanguage('fi');
+    } else if (this._translationService.getLanguage() === 'fi') {
+      this._translationService.setLanguage('sv');
+    } else {
+      this._translationService.setLanguage('en');
+    }
+  }
+}
 
 const html = String.raw;
 
@@ -22,7 +49,7 @@ export default {
   },
   decorators: [
     moduleMetadata({
-      declarations: [],
+      declarations: [LanguageChangeComponent],
       imports: [ReactiveFormsModule, FormsModule],
     }),
     applicationConfig({
@@ -80,6 +107,7 @@ const ExampleTemplate: StoryFn<DatepickerComponent> = (args: DatepickerComponent
     <fudis-body-text *ngIf="control.value"
       >The date output as ISO string is: {{ control.value }}</fudis-body-text
     >
+    <example-language-change-component />
   `,
 });
 

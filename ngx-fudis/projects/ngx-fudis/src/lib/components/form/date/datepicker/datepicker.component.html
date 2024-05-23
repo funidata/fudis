@@ -17,7 +17,6 @@
       [formControl]="control"
       (blur)="_handleInputBlur($event)"
       (keyup)="_handleKeyUp($event)"
-      (dateChange)="_calendarDateChanges()"
       [min]="_minDate"
       [max]="_maxDate"
       [readonly]="control.disabled || disabled"
@@ -31,7 +30,7 @@
     <mat-datepicker-toggle
       matSuffix
       class="fudis-datepicker__toggle"
-      id="fudis-datepicker-calendar-icon-toggle"
+      [id]="id + '-calendar-icon-toggle'"
       [for]="picker"
       [disabled]="disabled || control.disabled"
       [disableRipple]="true"

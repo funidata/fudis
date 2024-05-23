@@ -63,8 +63,9 @@ export const parseDate = (value: string | null | undefined): Date | null => {
 
     const dayUnchanged = newDate.getDate() === numberArray[0];
     const monthUnchanged = newDate.getMonth() + 1 === numberArray[1];
+    const yearUnChanged = newDate.getFullYear() === numberArray[2];
 
-    if (dayUnchanged && monthUnchanged) {
+    if (dayUnchanged && monthUnchanged && yearUnChanged) {
       return newDate;
     } else {
       return null;

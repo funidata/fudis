@@ -67,6 +67,11 @@ export class DatepickerComponent
     });
   }
 
+  // TODO: Check these when enabling Date Range
+  // @ContentChild(StartDateErrorDirective) startDateError: StartDateErrorDirective;
+
+  // @ContentChild(EndDateErrorDirective) endDateError: EndDateErrorDirective;
+
   /**
    * FormControl for the input
    */
@@ -135,13 +140,6 @@ export class DatepickerComponent
       this._parseValidatorInstance = null;
       this.control.updateValueAndValidity();
     }
-  }
-
-  /**
-   * Handle date change from calendar pop-up or input
-   */
-  protected _calendarDateChanges(): void {
-    this.control.updateValueAndValidity();
   }
 
   /**
