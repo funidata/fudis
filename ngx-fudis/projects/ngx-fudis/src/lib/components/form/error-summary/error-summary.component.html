@@ -21,6 +21,7 @@
                     [link]="'.'"
                     [fragmentId]="error.id"
                     [title]="error.message"
+                    [color]="'primary-dark'"
                   ></fudis-link>
                 </ng-container>
                 <ng-container *ngIf="linkType === 'href'">
@@ -28,6 +29,7 @@
                     [size]="'md'"
                     [href]="'#' + error.id"
                     [title]="error.message"
+                    [color]="'primary-dark'"
                   ></fudis-link>
                 </ng-container>
                 <ng-container *ngIf="linkType === 'onClick'">
@@ -36,6 +38,7 @@
                     [size]="'md'"
                     [href]="'#'"
                     [title]="error.message"
+                    [color]="'primary-dark'"
                   ></fudis-link>
                 </ng-container>
               </li>
