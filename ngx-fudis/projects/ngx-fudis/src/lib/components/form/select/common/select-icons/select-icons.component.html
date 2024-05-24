@@ -23,6 +23,7 @@
     "
     [class.fudis-select-icons__icon--disabled]="disabled"
     (click)="_clearButtonClick($event)"
+    (handleDestroy)="handleClearButtonDestroy.emit()"
     (handleFocus)="_handleClearButtonFocus($event)"
     (handleBlur)="_handleClearButtonBlur($event)"
     [size]="'icon-only'"

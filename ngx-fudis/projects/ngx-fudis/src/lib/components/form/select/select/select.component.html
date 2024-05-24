@@ -75,6 +75,7 @@
           (handleClearButtonClick)="_clearButtonClick()"
           (handleClearButtonFocus)="_setClearButtonFocusState($event, true)"
           (handleClearButtonBlur)="_setClearButtonFocusState($event, false)"
+          (handleClearButtonDestroy)="_setClearButtonStateToNull()"
           [clearButton]="selectionClearButton"
           [disabled]="control.disabled || disabled"
         />

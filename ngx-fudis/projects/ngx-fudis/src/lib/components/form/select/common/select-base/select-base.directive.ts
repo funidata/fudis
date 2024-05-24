@@ -387,6 +387,10 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
     }
   }
 
+  protected _setClearButtonStateToNull(): void {
+    this._clearButtonFocused = false;
+  }
+
   protected _setClearButtonFocusState(event: FocusEvent, state: boolean): void {
     this._clearButtonFocused = state;
 
@@ -468,15 +472,20 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
           !!this._selectRef.nativeElement.contains(this._document.activeElement) ||
           !!this._selectRef.nativeElement.contains(nextTarget);
 
+        // If focus has moved another element inside Select
         if (focused) {
           clearInterval(focusCheckInterval);
           resolve(true);
+          // If focus target is null
         } else if (!nextTarget) {
           clearInterval(focusCheckInterval);
           resolve(false);
-        } else if (counter <= 200) {
+
+          // Encrease counter, and try again. This is needed usually with click events as between previous element blur and next element focus click event is "somewhere else"
+        } else if (counter <= 100) {
           counter = counter + 50;
         } else {
+          // Else resolve boolean check after two tries, if any relevant element is focused
           clearInterval(focusCheckInterval);
           resolve(!!this._focusedOption || this._inputFocused || this._clearButtonFocused);
         }

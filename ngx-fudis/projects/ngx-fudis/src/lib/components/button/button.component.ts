@@ -10,6 +10,7 @@ import {
   OnChanges,
   OnInit,
   ChangeDetectionStrategy,
+  OnDestroy,
 } from '@angular/core';
 import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
@@ -23,7 +24,7 @@ import { FudisComponentChanges } from '../../types/miscellaneous';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ButtonComponent extends TooltipApiDirective implements OnChanges, OnInit {
+export class ButtonComponent extends TooltipApiDirective implements OnChanges, OnInit, OnDestroy {
   constructor(private _idService: FudisIdService) {
     super();
 
@@ -108,6 +109,12 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
    */
   @Output() handleBlur = new EventEmitter<FocusEvent>();
 
+  // TODO: write test
+  /**
+   * onDestroy handler emit
+   */
+  @Output() handleDestroy = new EventEmitter<void>();
+
   /**
    * Toggle menu button
    *   public dropdownOpen: boolean = false;
@@ -161,6 +168,10 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
         this._ariaLabel = this._getAriaLabel();
       }
     }
+  }
+
+  ngOnDestroy(): void {
+    this.handleDestroy.emit();
   }
 
   /**
