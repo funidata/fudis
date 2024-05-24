@@ -49,6 +49,7 @@ export class LinkComponent extends LinkApiDirective implements OnChanges {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() link: string | any[];
+
   /**
    * Title for the link, if not defined title will be the same as link URL
    */

@@ -215,7 +215,7 @@ export const linkExclude: RegExp = excludeRegex([
 /**
  * Notification
  */
-export const notificationExclude: RegExp = excludeRegex(['link']);
+export const notificationExclude: RegExp = excludeRegex(['link', 'linkTitle', 'externalLink']);
 
 /**
  * Section

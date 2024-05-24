@@ -19,12 +19,6 @@ export default {
       options: ['warning', 'danger', 'success', 'info'],
       control: { type: 'radio' },
     },
-    externalLink: {
-      control: { type: 'text' },
-    },
-    linkTitle: {
-      control: { type: 'text' },
-    },
   },
 } as Meta;
 
