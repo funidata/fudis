@@ -17,20 +17,21 @@ Notifications are often informative contextual notifications that cannot be clic
 
 <Canvas of={NotificationStories.AllVariants}></Canvas>
 
-### Notification with Link
-
-Notification Component's link can be either external link or Angular router link, use `externalLink` or `link` property.
-Given link is shown as default link title which can be modified with `linkTitle` property.
-
-<Canvas of={NotificationStories.ExampleWithExternalLink}></Canvas>
-
 ### Content Guidelines
 
-Notification Component doesn't strict what content is contained or interfere the content styling. It is recommended to use Body Text Components. The size Body Texts are set default to `lg-regular`. This can be overriden if needed.
+Notification Component doesn't strict what content is contained.
+
+It is recommended to use Body Text Components. The size Body Texts are set default to `lg-regular`. This can be overriden if needed.
+
+If using Link Component or Link Directive, for proper color contrast color of the links are set to `gray-dark`.
+
+Otherwise Notification does not interfere with the content styling.
 
 Please see code examples for recommended usage patterns.
 
 <Canvas of={NotificationStories.ExampleWithMultipleChildComponents}></Canvas>
+
+<Canvas of={NotificationStories.ExampleWithExternalLink}></Canvas>
 
 ### Accessibility
 

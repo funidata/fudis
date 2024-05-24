@@ -2,8 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  Host,
   Input,
   OnChanges,
+  Optional,
   Output,
   Signal,
   effect,
@@ -11,6 +13,7 @@ import {
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisComponentChanges, FudisTranslationConfig } from '../../types/miscellaneous';
 import { LinkApiDirective } from '../../directives/link/link-api/link-api.directive';
+import { NotificationComponent } from '../notification/notification.component';
 
 @Component({
   selector: 'fudis-link',
@@ -19,8 +22,16 @@ import { LinkApiDirective } from '../../directives/link/link-api/link-api.direct
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinkComponent extends LinkApiDirective implements OnChanges {
-  constructor(private _translationService: FudisTranslationService) {
+  constructor(
+    @Host() @Optional() private _parentNotification: NotificationComponent,
+    private _translationService: FudisTranslationService,
+  ) {
     super();
+
+    if (_parentNotification) {
+      this.color = 'gray-dark';
+    }
+
     effect(() => {
       this._translations = this._translationService.getTranslations();
 

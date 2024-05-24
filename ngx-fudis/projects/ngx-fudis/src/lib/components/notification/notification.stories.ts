@@ -68,7 +68,7 @@ Example.args = {
 
 export const ExampleWithExternalLink = LinkTemplate.bind({});
 ExampleWithExternalLink.args = {
-  variant: 'warning',
+  variant: 'info',
 };
 
 export const ExampleWithMultipleChildComponents = MultiChildTemplate.bind({});
