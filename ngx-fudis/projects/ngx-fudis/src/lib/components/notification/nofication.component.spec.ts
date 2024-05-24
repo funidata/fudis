@@ -60,7 +60,7 @@ describe('NotificationComponent', () => {
         break;
     }
 
-    const iconVariant = getElement(fixture, 'fudis-icon').getAttribute('ng-reflect-icon');
+    const iconVariant = getElement(fixture, 'fudis-icon svg').getAttribute('id');
     expect(iconVariant).toEqual(icon);
   }
 

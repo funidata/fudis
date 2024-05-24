@@ -26,10 +26,6 @@ export class NotificationComponent {
    * Notification variant
    */
   @Input() variant: FudisNotification = 'warning';
-  /**
-   * Icon for notification
-   */
-  protected _icon: FudisIcon;
 
   /**
    * Screen reader text for icon
