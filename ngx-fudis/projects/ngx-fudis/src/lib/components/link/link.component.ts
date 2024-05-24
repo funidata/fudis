@@ -14,6 +14,7 @@ import { FudisTranslationService } from '../../services/translation/translation.
 import { FudisComponentChanges, FudisTranslationConfig } from '../../types/miscellaneous';
 import { LinkApiDirective } from '../../directives/link/link-api/link-api.directive';
 import { NotificationComponent } from '../notification/notification.component';
+import { ErrorSummaryComponent } from '../form/error-summary/error-summary.component';
 
 @Component({
   selector: 'fudis-link',
@@ -24,11 +25,12 @@ import { NotificationComponent } from '../notification/notification.component';
 export class LinkComponent extends LinkApiDirective implements OnChanges {
   constructor(
     @Host() @Optional() private _parentNotification: NotificationComponent,
+    @Host() @Optional() private _parentErrorSummary: ErrorSummaryComponent,
     private _translationService: FudisTranslationService,
   ) {
     super();
 
-    if (_parentNotification) {
+    if (_parentNotification && !_parentErrorSummary) {
       this.color = 'gray-dark';
     }
 
