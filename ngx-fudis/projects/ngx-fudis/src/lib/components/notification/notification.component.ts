@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, ContentChild, Input, effect } from '@angular/core';
-import { FudisIcon } from '../../types/icons';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisNotification } from '../../types/miscellaneous';
 import { FudisTranslationService } from '../../services/translation/translation.service';
