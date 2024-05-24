@@ -2,10 +2,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { HeadingComponent } from './heading.component';
 import {
-  FudisHeadingSize,
+  FudisHeadingVariant,
   FudisHeadingLevel,
   fudisHeadingLevelArray,
-  fudisHeadingSizeArray,
+  fudisHeadingVariantArray,
 } from '../../../types/typography';
 import {
   FudisTextAlign,
@@ -46,7 +46,7 @@ describe('HeadingComponent', () => {
   }
 
   function headingCheck(
-    size: FudisHeadingSize,
+    size: FudisHeadingVariant,
     align: FudisTextAlign,
     marginBottom: FudisSpacing,
     level: FudisHeadingLevel,
@@ -99,7 +99,7 @@ describe('HeadingComponent', () => {
   describe('CSS classes', () => {
     it('should have respective size, margin bottom and level values according to given Inputs', () => {
       fudisHeadingLevelArray.forEach((level) => {
-        fudisHeadingSizeArray.forEach((size) => {
+        fudisHeadingVariantArray.forEach((size) => {
           fudisTextAlignArray.forEach((alignment) => {
             fudisSpacingArray.forEach((spacing) => {
               headingCheck(size, alignment, spacing, level);

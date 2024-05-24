@@ -2,7 +2,7 @@ import { StoryFn, Meta } from '@storybook/angular';
 import { HeadingComponent } from './heading.component';
 import readme from './readme.mdx';
 import { headingControlsExclude } from '../../../utilities/storybook';
-import { fudisHeadingLevelArray, fudisHeadingSizeArray } from '../../../types/typography';
+import { fudisHeadingLevelArray, fudisHeadingVariantArray } from '../../../types/typography';
 import { fudisSpacingArray } from '../../../types/spacing';
 
 const html = String.raw;
@@ -20,7 +20,7 @@ export default {
       options: fudisHeadingLevelArray,
       control: { type: 'select' },
     },
-    size: { options: fudisHeadingSizeArray },
+    size: { options: fudisHeadingVariantArray },
     align: { options: ['left', 'right', 'center'] },
     marginBottom: { options: fudisSpacingArray },
   },

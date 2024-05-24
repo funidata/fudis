@@ -10,7 +10,7 @@ import {
   Optional,
   ViewEncapsulation,
 } from '@angular/core';
-import { FudisHeadingSize, FudisHeadingLevel } from '../../../types/typography';
+import { FudisHeadingVariant, FudisHeadingLevel } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
 import { HeaderDirective } from '../../../directives/content-projection/header/header.directive';
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
@@ -75,7 +75,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   /**
    * Heading size for the form title
    */
-  @Input() titleSize: FudisHeadingSize = 'xl';
+  @Input() titleSize: FudisHeadingVariant = 'xl';
 
   /**
    * Help text positioned under form title

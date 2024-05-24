@@ -18,7 +18,7 @@ import { FudisTranslationService } from '../../../services/translation/translati
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import docs from './form.docs.mdx';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
-import { FudisHeadingLevel, FudisHeadingSize } from '../../../types/typography';
+import { FudisHeadingLevel, FudisHeadingVariant } from '../../../types/typography';
 import { formExclude } from '../../../utilities/storybook';
 import { defaultOptions } from '../select/common/mock_data';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
@@ -392,7 +392,7 @@ class FormContentExampleComponent implements OnInit {
 
   @Input() title: string;
   @Input() titleLevel: FudisHeadingLevel;
-  @Input() titleSize: FudisHeadingSize;
+  @Input() titleSize: FudisHeadingVariant;
   @Input() helpText: string;
   @Input() badge: FudisBadgeVariant;
   @Input() badgeText: string;

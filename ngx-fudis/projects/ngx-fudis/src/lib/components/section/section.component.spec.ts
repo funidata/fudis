@@ -20,9 +20,9 @@ import { TooltipDirective } from '../../directives/tooltip/tooltip.directive';
 import { FudisTooltipPosition } from '../../types/miscellaneous';
 import {
   FudisHeadingLevel,
-  FudisHeadingSize,
+  FudisHeadingVariant,
   fudisHeadingLevelArray,
-  fudisHeadingSizeArray,
+  fudisHeadingVariantArray,
 } from '../../types/typography';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
 
@@ -50,7 +50,7 @@ import { getElement, sortClasses } from '../../utilities/tests/utilities';
 })
 class MockFudisSectionComponent {
   title: string = 'This is section title';
-  titleSize: FudisHeadingSize = 'lg';
+  titleSize: FudisHeadingVariant = 'lg';
   titleLevel: FudisHeadingLevel = 2;
   classes: string[];
   tooltip: string = 'This is tooltip in section';
@@ -97,7 +97,7 @@ describe('SectionComponent', () => {
     return sectionEl;
   }
 
-  function sectionTitleSizeCheck(size: FudisHeadingSize): void {
+  function sectionTitleSizeCheck(size: FudisHeadingVariant): void {
     mockComponent.titleSize = size;
     mockFixture.detectChanges();
 
@@ -159,7 +159,7 @@ describe('SectionComponent', () => {
     });
 
     it('should return correct title size', () => {
-      fudisHeadingSizeArray.forEach((size) => {
+      fudisHeadingVariantArray.forEach((size) => {
         sectionTitleSizeCheck(size);
       });
     });

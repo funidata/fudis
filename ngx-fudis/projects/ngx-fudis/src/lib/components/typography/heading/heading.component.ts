@@ -6,7 +6,7 @@ import {
   OnChanges,
   ElementRef,
 } from '@angular/core';
-import { FudisHeadingLevel, FudisHeadingSize } from '../../../types/typography';
+import { FudisHeadingLevel, FudisHeadingVariant } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { FudisTextAlign } from '../../../types/typography';
@@ -37,7 +37,7 @@ export class HeadingComponent implements OnInit, OnChanges {
   /**
    * Heading size
    */
-  @Input() size: FudisHeadingSize;
+  @Input() size: FudisHeadingVariant;
 
   /**
    * Margin bottom for heading
@@ -67,7 +67,7 @@ export class HeadingComponent implements OnInit, OnChanges {
   /**
    * Get default marginBottom size
    */
-  private _getMarginBottom(size: FudisHeadingSize): FudisSpacing {
+  private _getMarginBottom(size: FudisHeadingVariant): FudisSpacing {
     if (size === 'xxl' || size === 'xl') {
       return 'sm';
     }
@@ -77,7 +77,7 @@ export class HeadingComponent implements OnInit, OnChanges {
   /**
    * Get corresponding default size for a heading level
    */
-  private _getSize(): FudisHeadingSize {
+  private _getSize(): FudisHeadingVariant {
     switch (this.level) {
       case 1:
         return 'xxl';

@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SectionComponent } from './section.component';
 import docs from './section-docs.mdx';
 import { excludeAllRegex, sectionExclude } from '../../utilities/storybook';
-import { fudisHeadingLevelArray, fudisHeadingSizeArray } from '../../types/typography';
+import { fudisHeadingLevelArray, fudisHeadingVariantArray } from '../../types/typography';
 
 export default {
   title: 'Components/Section',
@@ -28,7 +28,7 @@ export default {
       control: { type: 'select' },
     },
     titleSize: {
-      options: fudisHeadingSizeArray,
+      options: fudisHeadingVariantArray,
       control: { type: 'select' },
     },
   },

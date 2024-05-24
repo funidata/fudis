@@ -10,7 +10,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FudisIdService } from '../../services/id/id.service';
-import { FudisHeadingSize, FudisHeadingLevel } from '../../types/typography';
+import { FudisHeadingVariant, FudisHeadingLevel } from '../../types/typography';
 import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisGridWidth, FudisGridAlign } from '../../types/grid';
@@ -71,7 +71,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   /**
    * Heading size for the section title
    */
-  @Input() titleSize: FudisHeadingSize = 'lg';
+  @Input() titleSize: FudisHeadingVariant = 'lg';
 
   /**
    * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.

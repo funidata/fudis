@@ -2,9 +2,18 @@ export const fudisHeadingLevelArray = [1, 2, 3, 4, 5, 6] as const;
 
 export type FudisHeadingLevel = (typeof fudisHeadingLevelArray)[number];
 
-export const fudisHeadingSizeArray = ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'label'] as const;
+export const fudisHeadingVariantArray = [
+  'xxs',
+  'xs',
+  'sm',
+  'md',
+  'lg',
+  'xl',
+  'xxl',
+  'label',
+] as const;
 
-export type FudisHeadingSize = (typeof fudisHeadingSizeArray)[number];
+export type FudisHeadingVariant = (typeof fudisHeadingVariantArray)[number];
 
 export const fudisBodyTextArray = [
   'lg-regular',
