@@ -1,7 +1,57 @@
 <ng-container *transloco="let t">
   <div class="root-style">
-    <fudis-grid [columns]="4" [marginTop]="'lg'" [align]="'center'">
-      
-    </fudis-grid>
+    <div class="workshop-layout">
+      <h1>Opiskeluoikeudet</h1>
+        <h2>Tutkintokoulutus</h2>
+        <fudis-button [label]="'Muodosta Opiskelutodistus'"></fudis-button>
+        <div>
+          <h2>Arkkitehtuurin koulutus</h2>
+          <h3>Perustiedot</h3>
+          <div>
+            <h4>Voimassaoloaika</h4>
+            <p>2.1.2015 alkaen</p>
+            <h4>Organisaatio</h4>
+            <p>Test University</p>
+            <h4>Koulusivistyskieli</h4>
+            <p></p>
+          </div>
+          <div fudisSpacing [marginTop]="'sm'">
+            <h3>Lisätiedot</h3>
+            <h4>Rajauslaki</h4>
+            <p>Ikuinen Opiskeluoikeus</p>
+            <h4>Tutkintoasetus</h4>
+            <p>Laki (324/2015) yliopistolain 39 ja 41 §:n muuttamisesta</p>
+            <h4>Myöntämispäivä</h4>
+            <p>24.12.2014</p>
+            <h4>Opintojen aloituspäivä</h4>
+            <p>1.1.2015</p>
+          </div>
+        </div>
+        <div fudisSpacing [marginTop]="'sm'">
+          <h4>Opiskeluoikeudentila</h4>
+          <p>Passiivinen</p>
+        </div>
+        <div>
+          <h4>Opintojen eteneminen</h4>
+          <h5>Valmistuneet tutkinnot</h5>
+          <p>Ei valmistuneita tutkintoja</p>
+        </div>
+        <div>
+          <h4>Läsnäolo</h4>
+          <div>
+            <h5>2024-2025</h5>
+            <div>
+              <h6>Syksy</h6>
+              <p>Lukuvuosi-ilmoittautuminen:</p><span>Puuttuu</span>
+              <p>Ilmoittautumispäivä:</p>
+            </div>
+            <div fudisSpacing [marginTop]="'sm'">
+              <h6>Syksy</h6>
+              <p>Lukuvuosi-ilmoittautuminen:</p><span>Puuttuu</span>
+              <p>Ilmoittautumispäivä:</p>
+            </div>
+          </div>
+        </div>
+    </div>
   </div>
 </ng-container>
