@@ -67,10 +67,15 @@ export class HeadingComponent implements OnInit, OnChanges {
   /**
    * Get default marginBottom size
    */
-  private _getMarginBottom(size: FudisHeadingVariant): FudisSpacing {
-    if (size === 'xxl' || size === 'xl') {
+  private _getMarginBottom(variant: FudisHeadingVariant): FudisSpacing {
+    if (variant === 'xxl' || variant === 'xl') {
       return 'sm';
     }
+
+    if (variant === 'label') {
+      return 'xxs';
+    }
+
     return 'xs';
   }
 

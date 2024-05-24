@@ -1,5 +1,6 @@
 @use "../../../foundations/typography/mixins.scss" as typography;
 @use "../../../foundations/colors/mixins.scss" as colorMixins;
+@use "../../../foundations/spacing/tokens.scss" as spacing;
 
 .fudis-heading {
   @include colorMixins.text-color("gray-dark");
@@ -7,7 +8,7 @@
   box-sizing: border-box;
   margin-top: 0;
 
-  &__size {
+  &__variant {
     &__xxs {
       @include typography.heading-xxs;
     }
@@ -37,7 +38,9 @@
     }
 
     &__label {
-      @include typography.select-group-label;
+      @include typography.text-field-label;
+
+      margin-top: spacing.$spacing-xxs;
     }
   }
 
