@@ -3,6 +3,7 @@
 */
 
 @use "@angular/material" as mat;
+@use "./src/lib/foundations/typography/mixins.scss" as typography;
 
 // Fudis theme import
 @import "./src/lib/theme/component-themes-to-apply";
@@ -39,6 +40,10 @@ html {
 a.sbdocs {
   color: var(--fudis-color-primary);
   font-weight: 600;
+}
+
+tr td p.fudis-table-caption {
+  @include typography.table-caption();
 }
 
 .storybook {
