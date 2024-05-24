@@ -59,7 +59,7 @@ const DescriptionListTemplate: StoryFn<DescriptionListComponent> = (
   args: DescriptionListComponent,
 ) => ({
   props: args,
-  template: html` <fudis-heading [level]="2" [size]="'md'"
+  template: html` <fudis-heading [level]="2" [variant]="'md'"
       >{{variant==='regular' ? 'Regular' : 'Compact'}} Description List</fudis-heading
     >
     <fudis-dl [marginTop]="'sm'" [variant]="variant" [columns]="2" [disableGrid]="disableGrid">
@@ -103,7 +103,7 @@ const DescriptionListInsideGridTemplate: StoryFn<DescriptionListComponent> = (
 ) => ({
   props: args,
   template: html`<fudis-grid [columns]="{sm: 1, md: 2}" [rowGap]="'xs'">
-    <fudis-heading [level]="2" [size]="'md'"
+    <fudis-heading [level]="2" [variant]="'md'"
       >Description List as Grid's Child Component</fudis-heading
     >
     <fudis-dl [disableGrid]="disableGrid" [variant]="variant">
@@ -134,7 +134,7 @@ const DescriptionListWithSubComponentsTemplate: StoryFn<DescriptionListComponent
   args: DescriptionListComponent,
 ) => ({
   props: args,
-  template: html`<fudis-heading [level]="2" [size]="'md'"
+  template: html`<fudis-heading [level]="2" [variant]="'md'"
       >Description List With Sub Components</fudis-heading
     >
     <fudis-description-list
@@ -186,7 +186,7 @@ const DescriptionListWithLanguagesTemplate: StoryFn<DescriptionListComponent> = 
   args: DescriptionListComponent,
 ) => ({
   props: args,
-  template: html`<fudis-heading [level]="2" [size]="'md'"
+  template: html`<fudis-heading [level]="2" [variant]="'md'"
       >Description List With Language Badges</fudis-heading
     >
     <fudis-description-list
@@ -257,7 +257,7 @@ const DescriptionListWithMultipleDdElementsTemplate: StoryFn<DescriptionListComp
 ) => ({
   props: { ...args, data: multipleDDData },
   template: html`
-    <fudis-heading [level]="2" [size]="'md'"
+    <fudis-heading [level]="2" [variant]="'md'"
       >Description List Item With Multiple Details</fudis-heading
     >
     <fudis-description-list
@@ -296,7 +296,7 @@ const DescriptionListWithSingleItemTemplate: StoryFn<DescriptionListComponent> =
 ) => ({
   props: args,
   template: html`
-    <fudis-heading [level]="2" [size]="'md'">Description List with Single Item</fudis-heading>
+    <fudis-heading [level]="2" [variant]="'md'">Description List with Single Item</fudis-heading>
     <fudis-description-list
       [marginTop]="'sm'"
       [variant]="'regular'"

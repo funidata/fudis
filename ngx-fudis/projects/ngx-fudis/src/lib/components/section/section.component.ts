@@ -71,7 +71,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   /**
    * Heading size for the section title
    */
-  @Input() titleSize: FudisHeadingVariant = 'lg';
+  @Input() titleVariant: FudisHeadingVariant = 'lg';
 
   /**
    * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.

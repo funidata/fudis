@@ -103,13 +103,13 @@ export const AllVariants: StoryFn<ButtonComponent> = (args: ButtonComponent) => 
       [rowGap]="'xs'"
       [marginBottom]="'md'"
     >
-      <fudis-heading [level]="4" [size]="'sm'">Medium size buttons</fudis-heading>
+      <fudis-heading [level]="4" [variant]="'sm'">Medium size buttons</fudis-heading>
       <fudis-button variant="primary" label="Primary"></fudis-button>
       <fudis-button variant="secondary" label="Secondary"></fudis-button>
       <fudis-button variant="tertiary" label="Tertiary"></fudis-button>
       <fudis-button label="Disabled" [disabled]="true"></fudis-button>
 
-      <fudis-heading style="margin-top: 2rem;" [level]="4" [size]="'sm'"
+      <fudis-heading style="margin-top: 2rem;" [level]="4" [variant]="'sm'"
         >Medium size buttons with icon</fudis-heading
       >
       <fudis-button variant="primary" icon="search" label="Primary"></fudis-button>
@@ -117,7 +117,7 @@ export const AllVariants: StoryFn<ButtonComponent> = (args: ButtonComponent) => 
       <fudis-button variant="tertiary" icon="search" label="Tertiary"></fudis-button>
       <fudis-button label="Disabled" icon="search" [disabled]="true"></fudis-button>
 
-      <fudis-heading style="margin-top: 2rem;" [level]="4" [size]="'sm'"
+      <fudis-heading style="margin-top: 2rem;" [level]="4" [variant]="'sm'"
         >Small size buttons</fudis-heading
       >
       <fudis-button variant="primary" label="Primary" size="small"></fudis-button>
@@ -125,7 +125,7 @@ export const AllVariants: StoryFn<ButtonComponent> = (args: ButtonComponent) => 
       <fudis-button variant="tertiary" label="Tertiary" size="small"></fudis-button>
       <fudis-button label="Disabled" [disabled]="true" size="small"></fudis-button>
 
-      <fudis-heading style="margin-top: 2rem;" [level]="4" [size]="'sm'"
+      <fudis-heading style="margin-top: 2rem;" [level]="4" [variant]="'sm'"
         >Small size buttons with icons</fudis-heading
       >
       <fudis-button variant="primary" icon="search" label="Primary" size="small"></fudis-button>
@@ -133,7 +133,7 @@ export const AllVariants: StoryFn<ButtonComponent> = (args: ButtonComponent) => 
       <fudis-button variant="tertiary" icon="search" label="Tertiary" size="small"></fudis-button>
       <fudis-button label="Disabled" icon="search" [disabled]="true" size="small"></fudis-button>
 
-      <fudis-heading style="margin-top: 2rem;" [level]="4" [size]="'sm'"
+      <fudis-heading style="margin-top: 2rem;" [level]="4" [variant]="'sm'"
         >Medium sized buttons with label hidden</fudis-heading
       >
       <fudis-button
@@ -161,7 +161,7 @@ export const AllVariants: StoryFn<ButtonComponent> = (args: ButtonComponent) => 
         [disabled]="true"
       ></fudis-button>
 
-      <fudis-heading style="margin-top: 2rem;" [level]="4" [size]="'sm'"
+      <fudis-heading style="margin-top: 2rem;" [level]="4" [variant]="'sm'"
         >Small sized buttons with label hidden</fudis-heading
       >
       <fudis-button
@@ -193,7 +193,7 @@ export const AllVariants: StoryFn<ButtonComponent> = (args: ButtonComponent) => 
         size="small"
       ></fudis-button>
 
-      <fudis-heading style="margin-top: 2rem;" [level]="4" [size]="'sm'"
+      <fudis-heading style="margin-top: 2rem;" [level]="4" [variant]="'sm'"
         >Icon only sized buttons with label hidden</fudis-heading
       >
       <fudis-button

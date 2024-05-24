@@ -110,7 +110,7 @@ class DialogExampleWithFormComponent {
         >
         <fudis-dialog-content>
           <fudis-grid [marginTop]="'md'" [marginBottom]="'md'">
-            <fudis-heading [level]="3" [size]="'sm'">
+            <fudis-heading [level]="3" [variant]="'sm'">
               I am fudis-heading inside the grid taking the whole width
             </fudis-heading>
             <fudis-body-text>

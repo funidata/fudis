@@ -15,7 +15,7 @@ Section has two main areas: header and content. Inside header, addition to headi
 
 ### Header
 
-Each Section should be identified, therefore `title` is mandatory property which can be modified with `titleSize` and `titleLevel` properties. As in [Heading Component](/docs/components-typography-heading--documentation), size is visual and level is semantic adjustment.
+Each Section should be identified, therefore `title` is mandatory property which can be modified with `titleVariant` and `titleLevel` properties. As in [Heading Component](/docs/components-typography-heading--documentation), size is visual and level is semantic adjustment.
 Heading can also include `tooltip` with all the [Tooltip](/docs/directives-tooltip--documentation) Inputs available.
 
 #### Notifications and Actions
@@ -58,7 +58,7 @@ If you have Section inside Section, and the nested one has Actions-content but p
   code={`
 <fudis-section
   [title]="'Parent Section'"
-  [titleSize]="'lg'"
+  [titleVariant]="'lg'"
   [titleLevel]="2"
   >
   // Empty Actions template, so that nested Actions will not be rendered to the parent!
@@ -66,7 +66,7 @@ If you have Section inside Section, and the nested one has Actions-content but p
   <ng-template fudisContent [type]="'section'">
     <fudis-section
       [title]="'Nested Section'"
-      [titleSize]="'md'"
+      [titleVariant]="'md'"
       [titleLevel]="3" >
       <ng-template fudisActions [type]="'section'">
         <fudis-button [label]="'Nested Action button'"/>

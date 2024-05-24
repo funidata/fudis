@@ -27,7 +27,7 @@ export default {
       options: fudisHeadingLevelArray,
       control: { type: 'select' },
     },
-    titleSize: {
+    titleVariant: {
       options: fudisHeadingVariantArray,
       control: { type: 'select' },
     },
@@ -40,7 +40,7 @@ const ExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent) => (
   props: args,
   template: html`<fudis-section
     [title]="title"
-    [titleSize]="titleSize"
+    [titleVariant]="titleVariant"
     [titleLevel]="titleLevel"
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
@@ -72,7 +72,7 @@ export const Example = ExampleTemplate.bind({});
 Example.args = {
   title: 'This is title of section',
   titleLevel: 2,
-  titleSize: 'xl',
+  titleVariant: 'xl',
   tooltip: 'More info about this section',
   tooltipToggle: false,
   tooltipPosition: 'below',
@@ -92,7 +92,7 @@ const NestedExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent
   props: args,
   template: html`<fudis-section
     [title]="'Parent Section'"
-    [titleSize]="'lg'"
+    [titleVariant]="'lg'"
     [titleLevel]="2"
     [width]="'md'"
   >
@@ -108,7 +108,7 @@ const NestedExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent
       <fudis-section
         [title]="'Nested Section'"
         [marginTop]="'sm'"
-        [titleSize]="'sm'"
+        [titleVariant]="'sm'"
         [titleLevel]="3"
       >
         <ng-template fudisActions [type]="'section'">

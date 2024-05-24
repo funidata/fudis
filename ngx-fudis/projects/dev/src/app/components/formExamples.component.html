@@ -91,7 +91,7 @@
   <fudis-expandable [title]="'Autocomplete examples'">
     <ng-template fudisContent type="expandable">
       <fudis-grid [columns]="'inputLg'">
-        <fudis-heading [level]="3" [size]="'md'">Single-select dropdown</fudis-heading>
+        <fudis-heading [level]="3" [variant]="'md'">Single-select dropdown</fudis-heading>
         <!-- <fudis-autocomplete
           [label]="'Choose item'"
           [variant]="'dropdown'"
@@ -99,13 +99,15 @@
           [options]="multipleOptions"
           [control]="testFormGroup.controls['autocompleteDropdown']"
         /> -->
-        <fudis-heading [level]="3" [size]="'md'">Single-select search</fudis-heading>
+        <fudis-heading [level]="3" [variant]="'md'">Single-select search</fudis-heading>
         <!-- <fudis-autocomplete
           [label]="'Search item'"
           [options]="multipleOptions"
           [control]="testFormGroup.controls['autocompleteSearch']"
         /> -->
-        <fudis-heading [level]="3" [size]="'md'">Autocomplete multi-select dropdown</fudis-heading>
+        <fudis-heading [level]="3" [variant]="'md'"
+          >Autocomplete multi-select dropdown</fudis-heading
+        >
         <!-- <fudis-autocomplete-multi-select
           [label]="'Search and choose items'"
           [options]="multipleOptions"

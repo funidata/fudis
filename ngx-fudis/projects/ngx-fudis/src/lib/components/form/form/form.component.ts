@@ -75,7 +75,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   /**
    * Heading size for the form title
    */
-  @Input() titleSize: FudisHeadingVariant = 'xl';
+  @Input() titleVariant: FudisHeadingVariant = 'xl';
 
   /**
    * Help text positioned under form title

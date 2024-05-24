@@ -60,7 +60,8 @@ export const AllVariants: StoryFn<HeadingComponent> = (args: HeadingComponent) =
       <fudis-heading [level]="4">This is Fudis heading: md</fudis-heading>
       <fudis-heading [level]="5">This is Fudis heading: sm</fudis-heading>
       <fudis-heading [level]="6">This is Fudis heading: xs</fudis-heading>
-      <fudis-heading [level]="6" [size]="'xxs'">This is Fudis heading: xxs</fudis-heading>
+      <fudis-heading [level]="6" [variant]="'xxs'">This is Fudis heading: xxs</fudis-heading>
+      <fudis-heading [level]="6" [variant]="'label'">This is Fudis heading: label</fudis-heading>
     </fudis-grid>
   `,
 });
