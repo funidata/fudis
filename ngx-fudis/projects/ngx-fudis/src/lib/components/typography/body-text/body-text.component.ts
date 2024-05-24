@@ -5,8 +5,7 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { FudisBodyText } from '../../../types/typography';
-import { FudisTextAlign } from '../../../types/miscellaneous';
+import { FudisBodyText, FudisTextAlign } from '../../../types/typography';
 
 @Component({
   selector: 'fudis-body-text',

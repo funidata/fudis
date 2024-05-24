@@ -35,6 +35,10 @@
     &__xxl {
       @include typography.heading-xxl;
     }
+
+    &__label {
+      @include typography.select-group-label;
+    }
   }
 
   &__align {

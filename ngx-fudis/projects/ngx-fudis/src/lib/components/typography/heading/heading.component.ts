@@ -8,7 +8,9 @@ import {
 } from '@angular/core';
 import { FudisHeadingLevel, FudisHeadingSize } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
-import { FudisComponentChanges, FudisSpacing, FudisTextAlign } from '../../../types/miscellaneous';
+import { FudisComponentChanges } from '../../../types/miscellaneous';
+import { FudisTextAlign } from '../../../types/typography';
+import { FudisSpacing } from '../../../types/spacing';
 
 @Component({
   selector: 'fudis-heading',

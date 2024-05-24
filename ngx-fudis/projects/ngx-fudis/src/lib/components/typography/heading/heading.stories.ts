@@ -2,6 +2,8 @@ import { StoryFn, Meta } from '@storybook/angular';
 import { HeadingComponent } from './heading.component';
 import readme from './readme.mdx';
 import { headingControlsExclude } from '../../../utilities/storybook';
+import { fudisHeadingLevelArray, fudisHeadingSizeArray } from '../../../types/typography';
+import { fudisSpacingArray } from '../../../types/spacing';
 
 const html = String.raw;
 
@@ -15,12 +17,12 @@ export default {
   },
   argTypes: {
     level: {
-      options: [1, 2, 3, 4, 5, 6],
+      options: fudisHeadingLevelArray,
       control: { type: 'select' },
     },
-    size: { options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'] },
+    size: { options: fudisHeadingSizeArray },
     align: { options: ['left', 'right', 'center'] },
-    marginBottom: { options: ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'] },
+    marginBottom: { options: fudisSpacingArray },
   },
 } as Meta;
 

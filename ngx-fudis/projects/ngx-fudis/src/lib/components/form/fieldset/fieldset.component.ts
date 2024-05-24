@@ -18,7 +18,8 @@ import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fi
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
 import { NotificationsDirective } from '../../../directives/content-projection/notifications/notifications.directive';
 import { FudisGridWidth, FudisGridAlign } from '../../../types/grid';
-import { FudisComponentChanges, FudisSpacing } from '../../../types/miscellaneous';
+import { FudisComponentChanges } from '../../../types/miscellaneous';
+import { FudisSpacing } from '../../../types/spacing';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';

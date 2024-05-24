@@ -42,17 +42,9 @@ export type FudisDialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'initial';
 
 export type FudisExpandableType = 'regular' | 'lite';
 
-export const fudisSpacingArray = ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
-
-export type FudisSpacing = (typeof fudisSpacingArray)[number];
-
 export type FudisNotification = 'warning' | 'danger' | 'success' | 'info';
 
 export type FudisTooltipPosition = 'left' | 'right' | 'above' | 'below';
-
-export const fudisTextAlignArray = ['left', 'right', 'center'] as const;
-
-export type FudisTextAlign = (typeof fudisTextAlignArray)[number];
 
 export type FudisLanguageAbbr = 'fi' | 'sv' | 'en';
 

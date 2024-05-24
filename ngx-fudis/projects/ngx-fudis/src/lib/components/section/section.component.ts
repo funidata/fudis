@@ -16,7 +16,8 @@ import { ContentDirective } from '../../directives/content-projection/content/co
 import { FudisGridWidth, FudisGridAlign } from '../../types/grid';
 
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
-import { FudisComponentChanges, FudisSpacing } from '../../types/miscellaneous';
+import { FudisComponentChanges } from '../../types/miscellaneous';
+import { FudisSpacing } from '../../types/spacing';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisFormErrorSummarySection } from '../../types/forms';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
