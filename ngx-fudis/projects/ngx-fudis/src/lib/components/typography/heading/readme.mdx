@@ -10,21 +10,21 @@ Heading Component is essentially a heading HTML element which inherits Fudis fon
 
 ## Usage Guidelines
 
-### Semantic HTML Heading Level and Visible Size
+### Semantic HTML Heading Level and Visible Variant
 
-There are six heading options available from `1` to `6` and seven size options from `xxs` to `xxl`.
+There are six heading options available from `1` to `6` and eight variant options from `xxs` to `xxl` and `label`.
 
 The `level` input property determines which HTML element component renders. With `level=1` component renders a `h1` element and with `level=2` a `h2` element and so on.
 
-When no `size` input value is provided, all of the heading levels have default sizes, where heading level `1` defaults to size `xxl`, heading level `2` defaults to size `xl` etc. However, heading sizes are responsive and on mobile devices where screen size is less than [breakpoint('sm')](/docs/foundations-breakpoints--documentation#breakpoint-mixins) all of the headings are converted to a smaller heading sizes.
+When no `variant` input value is provided, all of the heading levels have default variants, where heading level `1` defaults to variant `xxl`, heading level `2` defaults to variant `xl` etc. However, heading variants are responsive and on mobile devices where screen size is less than [breakpoint('sm')](/docs/foundations-breakpoints--documentation#breakpoint-mixins) all of the headings are converted to a smaller heading variant.
 
 More information about typography can be found from [Foundations/Typography](/docs/foundations-typography--documentation)
 
 ## Examples
 
-Note! When heading `size` is set, heading `level` does not have any effect to the size property, i.e `level` is only essential for screen readers and other assistive technologies.
+Note! When heading `variant` is set, heading `level` does not have any effect to the variant property, i.e `level` is only essential for screen readers and other assistive technologies.
 
-Size is opted to be modified as wanted with `size` property as follows.
+Variant is opted to be modified as wanted with `variant` property as follows.
 
 <Canvas of={HeadingStories.AllVariants}></Canvas>
 
@@ -33,7 +33,7 @@ Size is opted to be modified as wanted with `size` property as follows.
 - Heading color `#484848` passes WCAG AAA requirement against white `#FFFFFF` background
   - Contrast ratio 9.1:1
 - Semantically it is important to use correct heading level respective to the context
-  - Header size can be visually modified
+  - Header variant can be visually modified
 
 ## Properties
 
