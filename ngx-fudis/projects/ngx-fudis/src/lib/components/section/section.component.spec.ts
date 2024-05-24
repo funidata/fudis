@@ -41,7 +41,9 @@ import { getElement, sortClasses } from '../../utilities/tests/utilities';
       <fudis-button [label]="'Some action'"></fudis-button>
     </ng-template>
     <ng-template fudisNotifications type="section">
-      <fudis-notification>This is notification</fudis-notification>
+      <fudis-notification
+        ><fudis-body-text>This is notification</fudis-body-text></fudis-notification
+      >
     </ng-template>
     <ng-template fudisContent type="section">
       <fudis-body-text>Some text content inside section</fudis-body-text>

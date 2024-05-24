@@ -1,24 +1,13 @@
 <div class="fudis-notification fudis-notification__{{ variant }}">
   <ng-container *ngIf="!_content">
-    <fudis-icon [icon]="_icon" />
-    <fudis-body-text class="fudis-notification__body-text" [size]="'lg-regular'">
+    <fudis-icon *ngIf="variant === 'warning'" [icon]="'exclamation-mark-circle'" />
+    <fudis-icon *ngIf="variant === 'danger'" [icon]="'alert'" />
+    <fudis-icon *ngIf="variant === 'success'" [icon]="'checkmark-circle'" />
+    <fudis-icon *ngIf="variant === 'info'" [icon]="'info-circle'" />
+    <div class="fudis-notification__content">
       <span class="fudis-visually-hidden">{{ _attentionText }}:&nbsp;</span>
       <ng-content />
-      <fudis-link
-        class="fudis-notification__link"
-        *ngIf="!externalLink && link"
-        [title]="linkTitle"
-        [link]="link"
-        [color]="'gray-dark'"
-      />
-      <fudis-link
-        class="fudis-notification__link"
-        *ngIf="externalLink"
-        [title]="linkTitle"
-        [externalLink]="externalLink"
-        [color]="'gray-dark'"
-      />
-    </fudis-body-text>
+    </div>
   </ng-container>
   <ng-container *ngIf="_content?.type === 'notification'">
     <ng-container *ngTemplateOutlet="_content!.templateRef" />
