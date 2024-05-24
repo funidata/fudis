@@ -125,6 +125,16 @@
   font-weight: tokens.$font-weight-bold;
 }
 
+// Table caption
+
+@mixin table-caption {
+  text-transform: uppercase;
+  line-height: tokens.$text-input-line-height;
+  font-family: tokens.$font-family;
+  font-size: tokens.$body-text-m-font-size;
+  font-weight: tokens.$font-weight-regular;
+}
+
 // Other UI styles
 
 // Text-input, text-area, dropdown, legend components
