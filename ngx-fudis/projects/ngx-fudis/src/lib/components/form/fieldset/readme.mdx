@@ -102,7 +102,9 @@ HTML Template
         <fudis-button [variant]="'tertiary'" [icon]="'plus'" [label]="'Some action'" />
       </ng-template>
       <ng-template fudisNotifications [type]="'fieldset'">
-        <fudis-notification>This is notification inside fieldset</fudis-notification>
+        <fudis-notification>
+          <fudis-body-text>This is notification inside fieldset</fudis-body-text>
+        </fudis-notification>
       </ng-template>
       <ng-template fudisContent [type]="'fieldset'">
           <fudis-text-input
