@@ -56,8 +56,8 @@ const ExampleTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCompone
     ...args,
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<TestAnimalSound | null>(
-      null,
+    control: new FormControl<TestAnimalSound[] | null>(
+      [defaultOptions[2], defaultOptions[0]],
       FudisValidators.minLength(2, 'Pick at least two pets'),
     ),
     groupedMockData,

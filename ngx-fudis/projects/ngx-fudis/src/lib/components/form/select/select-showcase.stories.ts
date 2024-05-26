@@ -227,6 +227,7 @@ const MultiselectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectCompo
       defaultOptions[4],
       defaultOptions[1],
     ]),
+    //control: new FormControl<FudisSelectOption<object>[] | null>(null),
     groupedMockData,
   },
   template: html`

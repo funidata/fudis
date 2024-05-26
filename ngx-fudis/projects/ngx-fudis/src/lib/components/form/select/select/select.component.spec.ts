@@ -20,12 +20,13 @@ import { Component, ViewChild } from '@angular/core';
 import { FudisSelectOption } from '../../../../types/forms';
 import { ButtonComponent } from '../../../button/button.component';
 import { getElement } from '../../../../utilities/tests/utilities';
+import { SelectIconsComponent } from '../common/select-icons/select-icons.component';
 
 @Component({
   selector: 'fudis-mock-container',
   template: `<fudis-select
     #testSelect
-    [variant]="'autocompleteType'"
+    [variant]="'autocompleteDropdown'"
     [label]="'Test Label'"
     [placeholder]="'Autocomplete test placeholder'"
     [control]="control"
@@ -61,6 +62,7 @@ describe('SelectComponent', () => {
         MockAutocompleteComponent,
         SelectAutocompleteComponent,
         SelectDropdownComponent,
+        SelectIconsComponent,
         BodyTextComponent,
       ],
       providers: [
@@ -82,6 +84,9 @@ describe('SelectComponent', () => {
         currentValue: new FormControl(defaultOptions[3]),
         previousValue: undefined,
         firstChange: true,
+        isFirstChange: () => {
+          return true;
+        },
       },
     });
     fixture.detectChanges();
@@ -91,7 +96,14 @@ describe('SelectComponent', () => {
     component.control = new FormControl(null);
 
     component.ngOnChanges({
-      control: { currentValue: new FormControl(null), previousValue: undefined, firstChange: true },
+      control: {
+        currentValue: new FormControl(null),
+        previousValue: undefined,
+        firstChange: true,
+        isFirstChange: () => {
+          return true;
+        },
+      },
     });
 
     fixture.detectChanges();
@@ -170,7 +182,7 @@ describe('SelectComponent', () => {
       const selectElement = getElement(mockFixture, '.fudis-select');
 
       const placeholder = selectElement
-        .querySelector('.fudis-select-autocomplete__input')
+        .querySelector('.fudis-select-autocomplete')
         ?.getAttribute('placeholder');
 
       expect(placeholder).toContain('Autocomplete test placeholder');
@@ -183,22 +195,22 @@ describe('SelectComponent', () => {
       const selectElement = getElement(mockFixture, '.fudis-select');
 
       const value = selectElement
-        .querySelector('.fudis-select-autocomplete__input')
+        .querySelector('.fudis-select-autocomplete')
         ?.getAttribute('value');
 
       expect(value).toContain('Platypus');
     });
 
     it('should update input value, when control value updates', () => {
-      mockComponent.control = new FormControl(defaultOptions[2]);
+      mockComponent.control = new FormControl(defaultOptions[2]); // Platypus
       mockFixture.detectChanges();
-      mockComponent.control.patchValue(defaultOptions[1]);
+      mockComponent.control.patchValue(defaultOptions[1]); // Capybara
       mockFixture.detectChanges();
 
       const selectElement = getElement(mockFixture, '.fudis-select');
 
       const value = selectElement
-        .querySelector('.fudis-select-autocomplete__input')
+        .querySelector('.fudis-select-autocomplete')
         ?.getAttribute('value');
 
       expect(value).toContain('Capybara');
@@ -211,7 +223,7 @@ describe('SelectComponent', () => {
       const selectElement = getElement(mockFixture, '.fudis-select');
 
       const value = selectElement
-        .querySelector('.fudis-select-autocomplete__input')
+        .querySelector('.fudis-select-autocomplete')
         ?.getAttribute('value');
 
       expect(value).toBeNull();
@@ -226,10 +238,10 @@ describe('SelectComponent', () => {
       const selectElement = getElement(mockFixture, '.fudis-select');
 
       const value = selectElement
-        .querySelector('.fudis-select-autocomplete__input')
+        .querySelector('.fudis-select-autocomplete')
         ?.getAttribute('value');
 
-      expect(value).toBeNull();
+      expect(value).toEqual('');
     });
   });
 });

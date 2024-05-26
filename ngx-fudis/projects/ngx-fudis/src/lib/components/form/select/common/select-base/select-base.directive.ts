@@ -194,12 +194,17 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 
   protected _clickTargetInside: boolean = false;
 
+  protected _mouseDownTargetInsideComponent: boolean;
+
   protected _clearButtonClick(): void {
     if (!this.disabled && !this.control.disabled) {
       this._setControlNull();
 
       if (this.variant !== 'dropdown') {
-        (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value = '';
+        (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).setAttribute(
+          'value',
+          '',
+        );
         this._autocompleteRef.inputRef.nativeElement.focus();
       } else {
         this._inputRef.nativeElement.focus();
@@ -384,6 +389,13 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
     if (!this.disabled && !this.control.disabled) {
       this._optionsLoadedOnce = true;
       this._dropdownOpen = true;
+      // console.log('opening!');
+
+      // console.log(
+      //   document.querySelectorAll(
+      //     '.fudis-multiselect-option__label--checked .fudis-multiselect-option__label__text',
+      //   ),
+      // );
     }
   }
 
@@ -473,18 +485,22 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
           !!this._selectRef.nativeElement.contains(nextTarget);
 
         // If focus has moved another element inside Select
-        if (focused) {
+        if (focused || this._mouseDownTargetInsideComponent) {
+          console.log('eka if');
           clearInterval(focusCheckInterval);
           resolve(true);
           // If focus target is null
         } else if (!nextTarget) {
+          console.log('toka if');
           clearInterval(focusCheckInterval);
           resolve(false);
 
           // Encrease counter, and try again. This is needed usually with click events as between previous element blur and next element focus click event is "somewhere else"
         } else if (counter <= 100) {
+          console.log('kolmas if');
           counter = counter + 50;
         } else {
+          console.log('neljäs if');
           // Else resolve boolean check after two tries, if any relevant element is focused
           clearInterval(focusCheckInterval);
           resolve(!!this._focusedOption || this._inputFocused || this._clearButtonFocused);
@@ -514,5 +530,11 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
     if (this._dropdownOpen && !this._selectRef.nativeElement.contains(targetElement)) {
       this.closeDropdown(false, true);
     }
+  }
+
+  @HostListener('mousedown', ['$event.target'])
+  private _handleMouseDown(targetElement: HTMLElement) {
+    this._mouseDownTargetInsideComponent =
+      targetElement && !!this._selectRef.nativeElement.contains(targetElement);
   }
 }

@@ -21,6 +21,8 @@ import { FudisSelectOption } from '../../../../types/forms';
 import { getAllElements, getElement } from '../../../../utilities/tests/utilities';
 import { TestAnimalSound, defaultOptions } from '../common/mock_data';
 import { ContentDirective } from '../../../../directives/content-projection/content/content.directive';
+import { SelectIconsComponent } from '../common/select-icons/select-icons.component';
+import { ButtonComponent } from '../../../button/button.component';
 
 @Component({
   selector: 'fudis-multiselect-mock',
@@ -63,6 +65,8 @@ describe('MultiselectComponent', () => {
         SelectAutocompleteComponent,
         SelectDropdownComponent,
         SelectGroupComponent,
+        SelectIconsComponent,
+        ButtonComponent,
         BodyTextComponent,
         GuidanceComponent,
         IconComponent,

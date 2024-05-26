@@ -30,7 +30,14 @@ describe('LanguageBadgeComponent', () => {
     component.parentId = 'fudis-language-badge-group-1';
     component.label = 'This is test label';
     component.ngOnChanges({
-      label: { firstChange: true, currentValue: 'This is test label', previousValue: '' },
+      label: {
+        firstChange: true,
+        currentValue: 'This is test label',
+        previousValue: '',
+        isFirstChange: () => {
+          return true;
+        },
+      },
     });
     fixture.detectChanges();
   });
@@ -43,7 +50,14 @@ describe('LanguageBadgeComponent', () => {
     it('should always have class name missing if language badge variant is a type missing', () => {
       component.variant = 'missing';
       component.ngOnChanges({
-        variant: { firstChange: false, currentValue: 'missing', previousValue: 'standard' },
+        variant: {
+          firstChange: false,
+          currentValue: 'missing',
+          previousValue: 'standard',
+          isFirstChange: () => {
+            return false;
+          },
+        },
       });
       fixture.detectChanges();
 
@@ -55,7 +69,14 @@ describe('LanguageBadgeComponent', () => {
     it('should always have class name selected if language badge is selected', () => {
       component.selected = true;
       component.ngOnChanges({
-        selected: { firstChange: false, currentValue: true, previousValue: false },
+        selected: {
+          firstChange: false,
+          isFirstChange: () => {
+            return false;
+          },
+          currentValue: true,
+          previousValue: false,
+        },
       });
       fixture.detectChanges();
 
@@ -76,7 +97,14 @@ describe('LanguageBadgeComponent', () => {
     it('should have given label and selected text matching to aria-label', () => {
       component.selected = true;
       component.ngOnChanges({
-        selected: { firstChange: false, currentValue: true, previousValue: false },
+        selected: {
+          firstChange: false,
+          isFirstChange: () => {
+            return false;
+          },
+          currentValue: true,
+          previousValue: false,
+        },
       });
       fixture.detectChanges();
       const LanguageBadgeLabel = fixture.debugElement.query(By.css('.fudis-language-badge'));
@@ -89,7 +117,14 @@ describe('LanguageBadgeComponent', () => {
     it('should have given label and missing text matching to aria-label', () => {
       component.variant = 'missing';
       component.ngOnChanges({
-        variant: { firstChange: false, currentValue: 'missing', previousValue: 'standard' },
+        variant: {
+          firstChange: false,
+          currentValue: 'missing',
+          previousValue: 'standard',
+          isFirstChange: () => {
+            return false;
+          },
+        },
       });
       fixture.detectChanges();
       const LanguageBadgeLabel = fixture.debugElement.query(By.css('.fudis-language-badge'));

@@ -96,8 +96,10 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
 
       if (this.variant !== 'dropdown') {
         this._autocompleteRef.preventSpaceKeypress = true;
-        (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value =
-          value?.label || '';
+        (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).setAttribute(
+          'value',
+          value?.label || '',
+        );
       } else {
         this._dropdownSelectionLabelText = value?.label ? value.label : '';
       }
@@ -130,8 +132,10 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
       this._dropdownSelectionLabelText = currentLabel || '';
     } else {
       if (this._autocompleteRef) {
-        (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value =
-          currentLabel || '';
+        (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).setAttribute(
+          'value',
+          currentLabel || '',
+        );
       } else {
         this._autocompleteSelectionLabelValue = currentLabel || '';
       }

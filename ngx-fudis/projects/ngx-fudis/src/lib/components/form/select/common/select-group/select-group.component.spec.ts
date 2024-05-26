@@ -21,6 +21,7 @@ import { ButtonComponent } from '../../../../button/button.component';
 import { By } from '@angular/platform-browser';
 import { MultiselectOptionComponent } from '../../multiselect/multiselect-option/multiselect-option.component';
 import { groupedTestData } from '../mock_data';
+import { SelectIconsComponent } from '../select-icons/select-icons.component';
 
 @Component({
   selector: 'fudis-mock-select',
@@ -39,7 +40,7 @@ import { groupedTestData } from '../mock_data';
     </fudis-select>
     <fudis-multiselect
       #multiSelect
-      [variant]="'autocompleteType'"
+      [variant]="'autocompleteDropdown'"
       [label]="'Test Label'"
       [control]="control"
     >
@@ -73,6 +74,7 @@ describe('SelectGroupComponent', () => {
         SelectGroupComponent,
         SelectDropdownComponent,
         SelectOptionComponent,
+        SelectIconsComponent,
         GuidanceComponent,
         IconComponent,
         LabelComponent,
@@ -106,7 +108,7 @@ describe('SelectGroupComponent', () => {
   }
 
   function updateMultiSelectValue() {
-    const input = fixture.debugElement.query(By.css('.fudis-select-autocomplete__input'));
+    const input = fixture.debugElement.query(By.css('.fudis-select-autocomplete'));
     const el = input.nativeElement;
 
     el.value = 'g';
