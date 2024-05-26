@@ -102,27 +102,23 @@ describe('MultiselectOptionComponent', () => {
     });
 
     it('should add value to control with already existing values when another option is selected', () => {
-      let inputLabelText = componentMock.selectEl.dropdownSelectionLabelText;
-
       componentMock.control.patchValue([defaultOptions[4], defaultOptions[0]]);
 
       fixtureMock.detectChanges();
 
-      inputLabelText = componentMock.selectEl.dropdownSelectionLabelText;
+      setMultiSelectDropdownOpen();
 
-      //setMultiSelectDropdownOpen();
+      const options = fixtureMock.debugElement.queryAll(By.css('fudis-multiselect-option'));
+      options[2].nativeElement.querySelector('input').click();
+      fixtureMock.detectChanges();
 
-      // const options = fixtureMock.debugElement.queryAll(By.css('fudis-multiselect-option'));
-      // options[2].nativeElement.querySelector('input').click();
-      // fixtureMock.detectChanges();
+      const controlValueArray = componentMock.selectEl.control.value;
 
-      // const controlValueArray = componentMock.selectEl.control.value;
-
-      // expect(controlValueArray).toMatchObject([
-      //   { label: 'Screaming hairy armadillo' },
-      //   { label: 'Dog' },
-      //   { label: 'Platypus' },
-      // ]);
+      expect(controlValueArray).toMatchObject([
+        { label: 'Screaming hairy armadillo' },
+        { label: 'Dog' },
+        { label: 'Platypus' },
+      ]);
     });
 
     it('should remove value from control when already selected option is clicked', () => {
