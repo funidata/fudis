@@ -6,6 +6,7 @@ ignorePatterns:
   - "static"
 extends:
   - "eslint:recommended"
+  - "plugin:storybook/recommended"
 overrides:
   - files: "**/*.ts"
     parser: "@typescript-eslint/parser"
