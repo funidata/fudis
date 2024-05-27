@@ -1,4 +1,12 @@
-import { Component, OnInit, EventEmitter, Output, Input, Signal, effect } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  Input,
+  Signal,
+  effect,
+  ChangeDetectorRef,
+} from '@angular/core';
 import {
   FudisLanguageAbbr,
   FudisLanguageBadgeContent,
@@ -14,18 +22,21 @@ import { FudisIdService } from '../../services/id/id.service';
   templateUrl: './language-badge-group.component.html',
   styleUrls: ['./language-badge-group.component.scss'],
 })
-export class LanguageBadgeGroupComponent extends TooltipApiDirective implements OnInit {
+export class LanguageBadgeGroupComponent extends TooltipApiDirective {
   constructor(
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
+    private _cdr: ChangeDetectorRef,
   ) {
     super();
     this._id = _idService.getNewParentId('language-badge-group');
     effect(() => {
       this._languageOptions = _translationService.getSelectableLanguages();
+
       this._translations = _translationService.getTranslations();
       this._groupLabel = this._translations().LANGUAGE_BADGE.ARIA_LABEL.TRANSLATIONS;
       this._setLanguageOptions();
+      _cdr.markForCheck();
     });
   }
 
@@ -73,10 +84,6 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective implements 
    * Internal variable for matching languages and label texts
    */
   protected _languageLabels: { key: FudisLanguageAbbr; label: string }[] = [];
-
-  ngOnInit(): void {
-    this._setLanguageOptions();
-  }
 
   /**
    * Set selected language and emits clicked language

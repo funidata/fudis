@@ -1,4 +1,12 @@
-import { Component, ElementRef, Host, Input, effect } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Host,
+  Input,
+  effect,
+} from '@angular/core';
 import { FudisLanguageAbbr, FudisLanguageBadgeContent } from '../../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { DescriptionListItemComponent } from '../description-list-item.component';
@@ -9,13 +17,14 @@ import { FudisIdService } from '../../../../services/id/id.service';
   selector: 'fudis-dt, fudis-description-list-term',
   templateUrl: './description-list-item-term.component.html',
   styleUrls: ['./description-list-item-term.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DescriptionListItemTermComponent {
   constructor(
     private _elementRef: ElementRef,
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
-
+    private _cdr: ChangeDetectorRef,
     @Host() private _parentDlItem: DescriptionListItemComponent,
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
@@ -31,6 +40,8 @@ export class DescriptionListItemTermComponent {
       this._parentLanguageOptions = this._parentDlItem.getDetailsLanguageOptions()();
 
       this._determineSelectedBadge();
+
+      _cdr.detectChanges();
     });
 
     effect(() => {
@@ -41,6 +52,7 @@ export class DescriptionListItemTermComponent {
       } else {
         this._mainCssClass = 'fudis-dl-item-term__compact';
       }
+      _cdr.detectChanges();
     });
   }
 
@@ -81,7 +93,7 @@ export class DescriptionListItemTermComponent {
 
   protected _setSelectedLanguage(lang: FudisLanguageAbbr): void {
     if (this.languages) {
-      this._parentDlItem.selectedLanguage = lang;
+      this._parentDlItem.setSelectedLanguage(lang);
     }
     this._selectedLanguage = lang;
   }
@@ -117,6 +129,6 @@ export class DescriptionListItemTermComponent {
       }
     }
 
-    this._parentDlItem.selectedLanguage = this._selectedLanguage;
+    this._parentDlItem.setSelectedLanguage(this._selectedLanguage);
   }
 }

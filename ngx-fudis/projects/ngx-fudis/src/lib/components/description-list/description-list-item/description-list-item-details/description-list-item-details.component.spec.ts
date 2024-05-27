@@ -157,6 +157,7 @@ describe('DescriptionListItemDetailsComponent', () => {
       expect(getDlItemDetailsElement('span').className).toEqual('fudis-dl-item-details__regular');
 
       mockComponent.variant = 'compact';
+
       mockFixture.detectChanges();
 
       expect(getDlItemDetailsElement('dd', 'compact').className).toEqual(

@@ -315,7 +315,7 @@ export class FudisInternalErrorSummaryService {
       this._formIdToUpdate = formId;
     }
 
-    this._signalAllFormErrors.set(this._allFormErrors);
+    this._signalAllFormErrors.set({ ...this._allFormErrors });
   }
 
   /**
