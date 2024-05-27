@@ -18,6 +18,7 @@ import {
 } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisTranslationConfig } from '../../../types/miscellaneous';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-error-summary',
@@ -37,12 +38,14 @@ export class ErrorSummaryComponent implements AfterViewInit {
       this._translations = _translationService.getTranslations();
 
       this._attentionText = this._translations().ICON.ATTENTION;
+      this._changeDetectorRef.detectChanges();
     });
+
     /**
      * Fetch and update current visible errors when reloadErrors() is called
      */
-    effect(() => {
-      const errors = _errorSummaryService.getErrorsOnReload()()[this.formId];
+    _errorSummaryService.allFormErrorsObservable.pipe(takeUntilDestroyed()).subscribe((value) => {
+      const errors = value?.[this.formId];
 
       if (
         this.parentComponent &&
@@ -200,7 +203,7 @@ export class ErrorSummaryComponent implements AfterViewInit {
     if (this._focusTarget && this._visibleErrorList.length > 0) {
       this._numberOfFocusTries = 0;
       (this._focusTarget.nativeElement as HTMLDivElement).focus();
-    } else if (this._numberOfFocusTries < 100) {
+    } else if (this._numberOfFocusTries < 20) {
       setTimeout(() => {
         this._numberOfFocusTries += 1;
         this._focusToErrorSummary();
