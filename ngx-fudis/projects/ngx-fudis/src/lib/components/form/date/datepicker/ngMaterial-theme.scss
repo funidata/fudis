@@ -10,6 +10,16 @@
 @use "../../../../foundations/spacing/tokens.scss" as spacing;
 @use "../../../../foundations/focus/mixins.scss" as focus;
 
+// When navigating calendar pop-up with Tab key, close button appears at the very end. Button does not appear when using mouse.
+.mat-datepicker-close-button {
+  text-transform: uppercase !important;
+  color: colors.$color-white !important;
+
+  &:focus {
+    @include focus.focus-generic;
+  }
+}
+
 .fudis-datepicker {
   &__toggle {
     // Target datepicker pop-up toggle button (i.e. calendar icon)
@@ -100,15 +110,5 @@
         border-radius: spacing.$spacing-xxl;
       }
     }
-  }
-}
-
-// When navigating calendar pop-up with Tab key, close button appears at the very end. Button does not appear when using mouse.
-.mat-datepicker-close-button {
-  text-transform: uppercase !important;
-  color: colors.$color-white !important;
-
-  &:focus {
-    @include focus.focus-generic;
   }
 }
