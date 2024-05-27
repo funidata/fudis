@@ -94,15 +94,7 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
       this.control.patchValue(value);
       this.selectionUpdate.emit(value);
 
-      if (this.variant !== 'dropdown') {
-        this._autocompleteRef.preventSpaceKeypress = true;
-        (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).setAttribute(
-          'value',
-          value?.label || '',
-        );
-      } else {
-        this._dropdownSelectionLabelText = value?.label ? value.label : '';
-      }
+      this._updateInputValueTexts(value?.label || '');
 
       if (value && this.variant !== 'dropdown' && !disableSignalEmit) {
         this._filterTextUpdate(value.label);
@@ -136,6 +128,8 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
           'value',
           currentLabel || '',
         );
+        (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value =
+          currentLabel || '';
       } else {
         this._autocompleteSelectionLabelValue = currentLabel || '';
       }
