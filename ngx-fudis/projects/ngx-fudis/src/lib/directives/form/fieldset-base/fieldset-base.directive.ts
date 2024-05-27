@@ -21,6 +21,7 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
       this._translations = this._translationService.getTranslations();
 
       this._requiredText = this._translations().REQUIRED;
+      _changeDetectorRef.detectChanges();
     });
   }
 

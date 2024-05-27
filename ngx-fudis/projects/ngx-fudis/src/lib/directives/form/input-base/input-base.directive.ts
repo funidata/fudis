@@ -32,6 +32,7 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
     effect(() => {
       this._translations = _translationService.getTranslations();
       this._requiredText = this._translations().REQUIRED;
+      _changeDetectorRef.detectChanges();
     });
   }
 
