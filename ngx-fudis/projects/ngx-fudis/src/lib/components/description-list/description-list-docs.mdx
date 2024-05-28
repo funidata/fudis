@@ -13,17 +13,21 @@ Description List displays a list of key value pairs and has two different list v
 
 ## Usage Guidelines
 
+### Basic Structure
+
 Description List is built using child components as follows:
 
 <Source
   code={`
 <fudis-dl>
   <fudis-dl-item>
-    <fudis-dt></fudis-dt>
-    <fudis-dd></fudis-dd>
+    <fudis-dt/>
+    <fudis-dd/>
   </fudis-dl-item>
 </fudis-dl>`}
 />
+
+### Text Content
 
 Term and Details content is passed through `textContent` Input property.
 
@@ -32,6 +36,8 @@ Term and Details content is passed through `textContent` Input property.
 <fudis-dt [textContent]="'This is Term element text'" />
 <fudis-dd [textContent]="'Here is the Details element text'" />`}
 />
+
+### Details Subheading
 
 Details element has also `subHeading` Input for adding optional sub-heading between Term and Details elements. Single Description List Item can have multiple Details elements if necessary.
 
@@ -44,6 +50,20 @@ Details element has also `subHeading` Input for adding optional sub-heading betw
   <fudis-dd [textContent]="'I am second Details element'" />
   <fudis-dd [textContent]="'I am third Details element'" />
 </fudis-dl-item>
+</fudis-dl>`}
+/>
+
+### Tag Selection
+
+By default Description List Component, as its name suggests, renders a `<dl>` tag with child `<dt>` and `<dd>` tags. If you have only one item in your list, it is adviced to change `tag` property to `p`. When set, the component will instead of list element render a paragraph element.
+
+<Source
+  code={`
+<fudis-dl [tag]="'p'">
+  <fudis-dl-item>
+    <fudis-dt [textContent]="'Single Item Key'"/>
+    <fudis-dd [textContent]="'And value for that'"/>
+  </fudis-dl-item>
 </fudis-dl>`}
 />
 

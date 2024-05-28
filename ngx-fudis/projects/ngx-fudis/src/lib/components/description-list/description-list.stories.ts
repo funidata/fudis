@@ -303,7 +303,7 @@ const DescriptionListWithSingleItemTemplate: StoryFn<DescriptionListComponent> =
       [columns]="'1fr 1fr'"
       [disableGrid]="disableGrid"
       [variant]="variant"
-      [tag]="tag"
+      [tag]="'p'"
     >
       <fudis-description-list-item>
         <fudis-dt [textContent]="'Address'"></fudis-dt>
@@ -317,5 +317,4 @@ export const DescriptionListWithSingleItem = DescriptionListWithSingleItemTempla
 DescriptionListWithSingleItem.args = {
   variant: 'regular',
   disableGrid: false,
-  tag: 'p',
 };
