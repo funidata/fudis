@@ -134,7 +134,5 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
     } else {
       this._label = this.label;
     }
-
-    this._cdr.markForCheck();
   }
 }

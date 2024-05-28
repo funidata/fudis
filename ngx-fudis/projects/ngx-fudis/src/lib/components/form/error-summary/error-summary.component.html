@@ -1,5 +1,5 @@
-<ng-container *ngIf="_visibleErrorList.length > 0">
-  <div class="fudis-error-summary__main-container">
+<ng-container *ngIf="_visibleErrorList | async as errors">
+  <div *ngIf="errors.length > 0" class="fudis-error-summary__main-container">
     <fudis-notification [variant]="'danger'">
       <ng-template fudisContent type="notification">
         <div class="fudis-error-summary" #focusTarget tabindex="-1">
@@ -7,15 +7,15 @@
           <div class="fudis-error-summary__errors">
             <ng-container *ngIf="helpText">
               <fudis-body-text fudisSpacing [size]="'md-regular'" [marginTop]="'xs'">
-                <span class="fudis-visually-hidden">{{ _attentionText }}:&nbsp;</span
+                <span
+                  *ngIf="_translationService.getTranslationsObservable() | async as translations"
+                  class="fudis-visually-hidden"
+                  >{{ translations.ICON.ATTENTION }}:&nbsp;</span
                 >{{ helpText }}</fudis-body-text
               >
             </ng-container>
             <ul class="fudis-error-summary__error-list">
-              <li
-                class="fudis-error-summary__error-list__item"
-                *ngFor="let error of _visibleErrorList"
-              >
+              <li class="fudis-error-summary__error-list__item" *ngFor="let error of errors">
                 <ng-container *ngIf="linkType === 'router'">
                   <fudis-link
                     [link]="'.'"

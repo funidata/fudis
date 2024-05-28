@@ -1,12 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Output,
-  Input,
-  Signal,
-  effect,
-  ChangeDetectorRef,
-} from '@angular/core';
+import { Component, EventEmitter, Output, Input, ChangeDetectorRef, effect } from '@angular/core';
 import {
   FudisLanguageAbbr,
   FudisLanguageBadgeContent,
@@ -17,6 +9,9 @@ import { FudisTranslationService } from '../../services/translation/translation.
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisIdService } from '../../services/id/id.service';
 
+import { BehaviorSubject } from 'rxjs';
+
+type LanguageLabelArray = { key: FudisLanguageAbbr; label: string }[];
 @Component({
   selector: 'fudis-language-badge-group',
   templateUrl: './language-badge-group.component.html',
@@ -30,13 +25,12 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective {
   ) {
     super();
     this._id = _idService.getNewParentId('language-badge-group');
-    effect(() => {
-      this._languageOptions = _translationService.getSelectableLanguages();
 
-      this._translations = _translationService.getTranslations();
-      this._groupLabel = this._translations().LANGUAGE_BADGE.ARIA_LABEL.TRANSLATIONS;
+    effect(() => {
+      this._languageOptions = _translationService.getSelectableLanguages()();
+      this._translations = _translationService.getTranslations()();
+      this._groupLabel = this._translations.LANGUAGE_BADGE.ARIA_LABEL.TRANSLATIONS;
       this._setLanguageOptions();
-      _cdr.markForCheck();
     });
   }
 
@@ -56,14 +50,14 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective {
   @Output() handleBadgeClick = new EventEmitter<FudisLanguageAbbr>();
 
   /**
-   * Config Signal to determine which Language Badges are wanted to show. By default ['fi','sv','ev'].
+   * Determine hich Language Badges are wanted to show. By default ['fi','sv','ev'].
    */
-  protected _languageOptions: Signal<FudisLanguageAbbr[]>;
+  protected _languageOptions: FudisLanguageAbbr[] = ['fi', 'sv', 'en'];
 
   /**
    * Fudis translations
    */
-  protected _translations: Signal<FudisTranslationConfig>;
+  protected _translations: FudisTranslationConfig;
 
   /**
    * Aria-label for Language Badge Group
@@ -83,7 +77,8 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective {
   /**
    * Internal variable for matching languages and label texts
    */
-  protected _languageLabels: { key: FudisLanguageAbbr; label: string }[] = [];
+  protected _languageLabels: BehaviorSubject<LanguageLabelArray> =
+    new BehaviorSubject<LanguageLabelArray>([]);
 
   /**
    * Set selected language and emits clicked language
@@ -99,7 +94,7 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective {
   private _getLabel(language: FudisLanguageAbbr): string {
     const keyValue: string = language.toUpperCase();
 
-    return this._translations().LANGUAGE_BADGE.ARIA_LABEL[
+    return this._translations.LANGUAGE_BADGE.ARIA_LABEL[
       keyValue as keyof FudisTranslationLanguageBadgeAriaLabel
     ];
   }
@@ -108,11 +103,13 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective {
    * Creates an array to loop in template of wanted Language Badges
    */
   private _setLanguageOptions(): void {
-    this._languageLabels = [];
+    const tempLangLabels: LanguageLabelArray = [];
 
-    this._languageOptions().forEach((language) => {
+    this._languageOptions.forEach((language) => {
       const newItem = { key: language, label: this._getLabel(language) };
-      this._languageLabels.push(newItem);
+      tempLangLabels.push(newItem);
     });
+
+    this._languageLabels.next(tempLangLabels);
   }
 }

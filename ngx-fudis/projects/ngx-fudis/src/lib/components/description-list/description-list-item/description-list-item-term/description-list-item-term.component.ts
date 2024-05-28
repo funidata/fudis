@@ -37,9 +37,11 @@ export class DescriptionListItemTermComponent {
     );
 
     effect(() => {
-      this._selectableLanguages = _translationService.getSelectableLanguages()();
-      this._determineSelectedBadge();
-      _cdr.detectChanges();
+      if (this._parentLanguageOptions) {
+        const updatedSelectableLanguages = _translationService.getSelectableLanguages()();
+
+        this._determineSelectedBadge(this._parentLanguageOptions, updatedSelectableLanguages);
+      }
     });
 
     _parentDlItem
@@ -47,6 +49,11 @@ export class DescriptionListItemTermComponent {
       .pipe(takeUntilDestroyed())
       .subscribe((value) => {
         this._parentLanguageOptions = value;
+
+        this._determineSelectedBadge(
+          this._parentLanguageOptions,
+          _translationService.getSelectableLanguages()(),
+        );
       });
 
     _parentDl
@@ -88,31 +95,29 @@ export class DescriptionListItemTermComponent {
    */
   protected _id: string;
 
-  /**
-   * Selectable Badge Languages from the service
-   */
-  private _selectableLanguages: FudisLanguageAbbr[];
-
   protected _setSelectedLanguage(lang: FudisLanguageAbbr): void {
     if (this.languages) {
       this._parentDlItem.setSelectedLanguage(lang);
     }
   }
 
-  private _determineSelectedBadge(): void {
+  private _determineSelectedBadge(
+    parentOptions: FudisLanguageBadgeContent,
+    selectableLanguages: FudisLanguageAbbr[],
+  ): void {
     const currentLang = this._translationService.getLanguage();
 
     let determinedLanguage: FudisLanguageAbbr | null;
 
     if (
-      this._parentLanguageOptions[currentLang] &&
-      Object.keys(this._parentLanguageOptions[currentLang]!).length !== 0 &&
-      this._selectableLanguages.includes(currentLang)
+      parentOptions[currentLang] &&
+      Object.keys(parentOptions[currentLang]!).length !== 0 &&
+      selectableLanguages.includes(currentLang)
     ) {
       determinedLanguage = currentLang;
     } else {
-      const firstAvailable = this._selectableLanguages.find((lang) => {
-        const possibleOption = this._parentLanguageOptions[lang];
+      const firstAvailable = selectableLanguages.find((lang) => {
+        const possibleOption = parentOptions[lang];
 
         let idWithContent;
 
