@@ -19,7 +19,7 @@ import { ExerciseComponent } from './exercise/exercise.component';
 import { SandboxComponent } from './sandbox/sandbox.component';
 
 const appRoutes: Routes = [
-  { path: '', component: AppComponent},
+  { path: '', component: ExerciseComponent},
   { path: 'exercise', component: ExerciseComponent},
   { path: 'sandbox', component: SandboxComponent},
 ]
