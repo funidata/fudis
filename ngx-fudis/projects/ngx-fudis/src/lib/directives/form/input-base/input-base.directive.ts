@@ -32,7 +32,6 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
     effect(() => {
       this._translations = _translationService.getTranslations();
       this._requiredText = this._translations().REQUIRED;
-      _changeDetectorRef.detectChanges();
     });
   }
 
@@ -121,7 +120,7 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
   protected _reloadErrorSummary = false;
 
   /**
-   * TODO: write test
+   * TODO: write test check cdr logic
    *
    * Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
    */

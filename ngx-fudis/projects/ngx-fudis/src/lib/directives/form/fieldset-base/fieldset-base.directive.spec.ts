@@ -101,7 +101,7 @@ describe('FieldSetBaseDirective', () => {
 
     beforeEach(() => {
       fixtureMock = TestBed.createComponent(MockCheckboxGroupComponent);
-      fixtureMock.detectChanges();
+      fixtureMock.autoDetectChanges();
     });
 
     it('should have label', () => {
