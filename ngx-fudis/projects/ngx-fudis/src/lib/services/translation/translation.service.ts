@@ -2,6 +2,7 @@ import { Injectable, Signal, signal } from '@angular/core';
 import { FudisTranslationConfig, FudisLanguageAbbr } from '../../types/miscellaneous';
 import { fi, sv, en } from './translationKeys';
 import { FudisInternalErrorSummaryService } from '../form/error-summary/internal-error-summary.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,9 +11,14 @@ export class FudisTranslationService {
   constructor(private _errorSummaryService: FudisInternalErrorSummaryService) {}
 
   /**
-   * Application's translation texts, default language for translations is English
+   * Signal for Application's translation texts, default language for translations is English
    */
-  private _appTranslations = signal<FudisTranslationConfig>(en);
+  private _appTranslationsSignal = signal<FudisTranslationConfig>(en);
+
+  /**
+   * Observable for Application's translation texts, default language for translations is English
+   */
+  private _appTranslationsObservable = new BehaviorSubject<FudisTranslationConfig>(en);
 
   /**
    * Application language, default language is English
@@ -32,11 +38,14 @@ export class FudisTranslationService {
     this._errorSummaryService.focusToFormOnReload = null;
     this._appLanguage.set(language);
     if (language === 'en') {
-      this._appTranslations.set({ ...en });
+      this._appTranslationsSignal.set({ ...en });
+      this._appTranslationsObservable.next({ ...en });
     } else if (language === 'fi') {
-      this._appTranslations.set({ ...fi });
+      this._appTranslationsSignal.set({ ...fi });
+      this._appTranslationsObservable.next({ ...fi });
     } else {
-      this._appTranslations.set({ ...sv });
+      this._appTranslationsSignal.set({ ...sv });
+      this._appTranslationsObservable.next({ ...sv });
     }
   }
 
@@ -55,10 +64,17 @@ export class FudisTranslationService {
   }
 
   /**
-   * Get application's translation config values
+   * Get application's translation config values Signal
    */
   public getTranslations(): Signal<FudisTranslationConfig> {
-    return this._appTranslations.asReadonly();
+    return this._appTranslationsSignal.asReadonly();
+  }
+
+  /**
+   * Get application's translation config values Observable
+   */
+  public getTranslationsObservable(): BehaviorSubject<FudisTranslationConfig> {
+    return this._appTranslationsObservable;
   }
 
   /**
