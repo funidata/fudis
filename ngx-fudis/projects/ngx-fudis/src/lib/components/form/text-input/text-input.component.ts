@@ -95,7 +95,7 @@ export class TextInputComponent
   }
 
   ngOnChanges(changes: FudisComponentChanges<TextInputComponent>): void {
-    if (changes.control) {
+    if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._required = hasRequiredValidator(this.control);
       this._maxLength = getMaxLengthFromValidator(this.control);
     }
@@ -103,7 +103,7 @@ export class TextInputComponent
     if (changes.type?.currentValue === 'number') {
       this._minNumber = getMinFromValidator(this.control);
       this._maxNumber = getMaxFromValidator(this.control);
-    } else if (changes.type) {
+    } else if (changes.type?.currentValue !== changes.type?.previousValue) {
       this._minLength = getMinLengthFromValidator(this.control);
     }
   }

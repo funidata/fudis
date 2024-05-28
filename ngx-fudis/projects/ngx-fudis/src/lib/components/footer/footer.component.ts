@@ -5,6 +5,7 @@ import {
   Signal,
   effect,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { FudisGridColumnsResponsive } from '../../types/grid';
 import { FudisTranslationService } from '../../services/translation/translation.service';
@@ -22,12 +23,16 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
-  constructor(private _translationService: FudisTranslationService) {
+  constructor(
+    private _translationService: FudisTranslationService,
+    private _cdr: ChangeDetectorRef,
+  ) {
     effect(() => {
       this._translations = this._translationService.getTranslations();
 
       this._funidataLogoAltText = this._translations().IMAGE.FUNIDATA_LOGO;
       this._externalLinkHelpText = this._translations().LINK.EXTERNAL_LINK;
+      _cdr.detectChanges();
     });
   }
 

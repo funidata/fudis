@@ -32,11 +32,11 @@ export class FudisTranslationService {
     this._errorSummaryService.focusToFormOnReload = null;
     this._appLanguage.set(language);
     if (language === 'en') {
-      this._appTranslations.set(en);
+      this._appTranslations.set({ ...en });
     } else if (language === 'fi') {
-      this._appTranslations.set(fi);
+      this._appTranslations.set({ ...fi });
     } else {
-      this._appTranslations.set(sv);
+      this._appTranslations.set({ ...sv });
     }
   }
 
@@ -65,7 +65,7 @@ export class FudisTranslationService {
    * Set which languages are visible in Language Badges
    */
   public setSelectableLanguages(languages: FudisLanguageAbbr[]): void {
-    this._selectableLanguages.set(languages);
+    this._selectableLanguages.set([...languages]);
   }
 
   /**

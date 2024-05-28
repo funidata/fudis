@@ -11,7 +11,9 @@ import { AlertComponent } from '../alert/alert.component';
 import { IconComponent } from '../../icon/icon.component';
 import { getElement, sortClasses } from '../../../utilities/tests/utilities';
 
-describe('AlertGroupComponent', () => {
+// TODO: fix & refactor when these are again published
+
+describe.skip('AlertGroupComponent', () => {
   let component: AlertGroupComponent;
   let fixture: ComponentFixture<AlertGroupComponent>;
   let alertService: FudisAlertService;

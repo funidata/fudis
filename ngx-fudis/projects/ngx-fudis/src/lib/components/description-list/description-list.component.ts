@@ -1,4 +1,12 @@
-import { Component, Input, OnInit, OnChanges, Signal, signal } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  Signal,
+  signal,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
 import { FudisComponentChanges, FudisDescriptionListVariant } from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
@@ -8,6 +16,7 @@ import { FudisGridGap } from '../../types/grid';
   selector: 'fudis-dl, fudis-description-list',
   templateUrl: './description-list.component.html',
   styleUrls: ['./description-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DescriptionListComponent extends GridApiDirective implements OnInit, OnChanges {
   constructor(private _idService: FudisIdService) {
@@ -61,17 +70,18 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
   }
 
   ngOnChanges(changes: FudisComponentChanges<DescriptionListComponent>): void {
-    if (changes.variant?.currentValue) {
+    if (
+      changes.variant?.currentValue &&
+      changes.variant?.currentValue !== changes.variant?.previousValue
+    ) {
       this._dlVariant.set(changes.variant.currentValue);
     }
 
-    if (changes.disableGrid) {
+    if (changes.disableGrid?.currentValue !== changes.disableGrid?.previousValue) {
       this._setClasses();
 
-      if (changes.disableGrid) {
-        const disableGrid = !!changes.disableGrid.currentValue;
-        this._disabledGridSignal.set(disableGrid);
-      }
+      const disableGrid = !!changes.disableGrid?.currentValue;
+      this._disabledGridSignal.set(disableGrid);
     }
   }
 
