@@ -4,8 +4,6 @@ import {
   Component,
   ElementRef,
   Host,
-  OnDestroy,
-  OnInit,
   Signal,
   effect,
   signal,
@@ -25,7 +23,7 @@ import { Subject } from 'rxjs';
   templateUrl: './description-list-item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DescriptionListItemComponent implements OnInit, OnDestroy {
+export class DescriptionListItemComponent {
   constructor(
     private _element: ElementRef,
     private _idService: FudisIdService,
@@ -61,16 +59,6 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
    * Main CSS class
    */
   protected _mainCssClass: string;
-
-  ngOnInit(): void {
-    /** Registers itself to the parent */
-    this._parentDl.addChildId(this.id);
-  }
-
-  ngOnDestroy(): void {
-    /** Removes itself from the parent */
-    this._parentDl.removeChildId(this.id);
-  }
 
   /**
    * DL Item has combined styles for both regular and compact versions but some styles only apply to regular version if parent's disableGrid is true.

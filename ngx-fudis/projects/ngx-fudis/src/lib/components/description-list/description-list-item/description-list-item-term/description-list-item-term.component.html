@@ -1,8 +1,8 @@
-<ng-container *ngIf="_parentDl.childDlItems.length > 1">
+<ng-container *ngIf="_parentDl.tag === 'dl'">
   <ng-container *ngTemplateOutlet="multipleItems" />
 </ng-container>
 
-<ng-container *ngIf="_parentDl.childDlItems.length === 1">
+<ng-container *ngIf="_parentDl.tag === 'p'">
   <ng-container *ngTemplateOutlet="singleItem" />
 </ng-container>
 

@@ -1,4 +1,4 @@
-<ng-container *ngIf="_parentDl.childDlItems.length === 1">
+<ng-container *ngIf="_parentDl.tag === 'p'">
   <span
     *ngIf="!lang || (lang && _parentItemSelectedLanguage === lang)"
     [id]="_id"
@@ -8,7 +8,7 @@
   </span>
 </ng-container>
 
-<ng-container *ngIf="_parentDl.childDlItems.length > 1">
+<ng-container *ngIf="_parentDl.tag === 'dl'">
   <dd
     *ngIf="!lang || (lang && _parentItemSelectedLanguage === lang)"
     [id]="_id"

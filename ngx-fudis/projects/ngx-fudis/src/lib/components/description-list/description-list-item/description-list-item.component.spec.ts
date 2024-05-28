@@ -32,7 +32,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
       </fudis-dl-item>
     </fudis-dl>
 
-    <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
+    <fudis-dl [variant]="variant" [disableGrid]="disableGrid" [tag]="'p'">
       <fudis-dl-item>
         <fudis-dt [textContent]="'Single DT'"></fudis-dt>
         <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
