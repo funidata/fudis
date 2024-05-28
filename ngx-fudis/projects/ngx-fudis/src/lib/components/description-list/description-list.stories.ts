@@ -9,18 +9,52 @@ import { FudisTranslationService } from '../../services/translation/translation.
 @Component({
   selector: 'example-language-service-change-component',
   template: `
+    <fudis-description-list
+      *ngIf="allItems"
+      [marginTop]="'sm'"
+      [disableGrid]="disableGrid"
+      [variant]="variant"
+      [serviceDefaults]="serviceDefaults"
+      [columns]="columns"
+      [marginBottom]="'sm'"
+    >
+      <fudis-description-list-item *ngIf="firstItem">
+        <fudis-dt [textContent]="'Example paragraph'"></fudis-dt>
+        <fudis-dd [lang]="'sv'" [textContent]="'Och den här är på Svenska'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [textContent]="'This is in English'"></fudis-dd>
+        <fudis-dd [lang]="'fi'" [textContent]="'Tämä on suomeksi'"></fudis-dd>
+      </fudis-description-list-item>
+      <fudis-description-list-item>
+        <fudis-dt [textContent]="'Example without one language'"></fudis-dt>
+        <fudis-dd [lang]="'fi'" [textContent]="'Tähtien sota'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [textContent]="''"></fudis-dd>
+        <fudis-dd [lang]="'sv'" [textContent]="'Stjärnornas krig'"></fudis-dd>
+      </fudis-description-list-item>
+      <fudis-description-list-item *ngIf="secondItem">
+        <fudis-dt
+          [textContent]="'Example which has multiple Details in different languages'"
+        ></fudis-dt>
+        <fudis-dd [lang]="'fi'" [textContent]="'Uusi toivo'"></fudis-dd>
+        <fudis-dd [lang]="'fi'" [textContent]="'Imperiumin vastaisku'"></fudis-dd>
+        <fudis-dd [lang]="'fi'" [textContent]="'Jedin paluu'"></fudis-dd>
+
+        <fudis-dd [lang]="'en'" [textContent]="'New Hope'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [textContent]="'Empire Strikes Back'"></fudis-dd>
+        <fudis-dd [lang]="'en'" [textContent]="'Return of the Jedi'"></fudis-dd>
+      </fudis-description-list-item>
+    </fudis-description-list>
     <fudis-grid [columns]="3" [width]="'sm'">
       <fudis-button
         [label]="'Change to: fi, sv'"
-        (handleClick)="changeBadgeLanguages(['fi', 'sv'])"
+        (handleClick)="changeBadgeLanguages(['fi', 'sv']); changeVisibility(1)"
       />
       <fudis-button
         [label]="'Change to: sv, en'"
-        (handleClick)="changeBadgeLanguages(['sv', 'en'])"
+        (handleClick)="changeBadgeLanguages(['sv', 'en']); changeVisibility(2)"
       />
       <fudis-button
         [label]="'Change to: sv, fi, en'"
-        (handleClick)="changeBadgeLanguages(['sv', 'fi', 'en'])"
+        (handleClick)="changeBadgeLanguages(['sv', 'fi', 'en']); changeVisibility(2)"
       />
     </fudis-grid>
   `,
@@ -28,6 +62,20 @@ import { FudisTranslationService } from '../../services/translation/translation.
 class LanguageChangeComponent {
   constructor(private _languageService: FudisTranslationService) {
     this._languageService.setSelectableLanguages(['fi', 'sv', 'en']);
+  }
+
+  allItems: boolean = true;
+  firstItem = true;
+  secondItem = true;
+
+  changeVisibility(target: number) {
+    if (target === 1) {
+      this.allItems = !this.allItems;
+    } else if (target === 2) {
+      this.firstItem = !this.firstItem;
+    } else {
+      this.secondItem = !this.secondItem;
+    }
   }
 
   changeBadgeLanguages(languages: FudisLanguageAbbr[]): void {
@@ -186,7 +234,9 @@ const DescriptionListWithLanguagesTemplate: StoryFn<DescriptionListComponent> = 
   args: DescriptionListComponent,
 ) => ({
   props: args,
-  template: html`<fudis-heading [level]="2" [size]="'md'"
+  template: html`
+    <!--
+  <fudis-heading [level]="2" [size]="'md'"
       >Description List With Language Badges</fudis-heading
     >
     <fudis-description-list
@@ -222,8 +272,9 @@ const DescriptionListWithLanguagesTemplate: StoryFn<DescriptionListComponent> = 
         <fudis-dd [lang]="'en'" [textContent]="'Return of the Jedi'"></fudis-dd>
       </fudis-description-list-item>
     </fudis-description-list>
-
-    <example-language-service-change-component /> `,
+-->
+    <example-language-service-change-component />
+  `,
 });
 
 export const DescriptionListWithLanguages = DescriptionListWithLanguagesTemplate.bind({});

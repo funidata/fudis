@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Host } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Host, OnDestroy } from '@angular/core';
 import {
   FudisDescriptionListVariant,
   FudisLanguageAbbr,
@@ -15,7 +15,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './description-list-item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DescriptionListItemComponent {
+export class DescriptionListItemComponent implements OnDestroy {
   constructor(
     private _element: ElementRef,
     private _idService: FudisIdService,
@@ -111,5 +111,10 @@ export class DescriptionListItemComponent {
 
   public setSelectedLanguage(lang: FudisLanguageAbbr | null): void {
     this.selectedLanguage.next(lang);
+  }
+
+  ngOnDestroy(): void {
+    this._detailsLanguageOptions.complete();
+    this.selectedLanguage.complete();
   }
 }

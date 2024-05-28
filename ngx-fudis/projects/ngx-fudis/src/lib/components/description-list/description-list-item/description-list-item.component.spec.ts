@@ -167,7 +167,7 @@ describe('DescriptionListItemComponent', () => {
 
       mockFixture.detectChanges();
 
-      expect(mockComponent.langDlItem.getDetailsLanguageOptions()()).toEqual(initialState);
+      expect(mockComponent.langDlItem.getDetailsLanguageOptions().value).toEqual(initialState);
     });
 
     it('should update selectable languages when childs are destroyed', () => {
@@ -184,7 +184,7 @@ describe('DescriptionListItemComponent', () => {
 
       mockFixture.detectChanges();
 
-      expect(mockComponent.langDlItem.getDetailsLanguageOptions()()).toEqual(firstRemoved);
+      expect(mockComponent.langDlItem.getDetailsLanguageOptions().value).toEqual(firstRemoved);
 
       const secondRemoved = {
         fi: {
@@ -196,13 +196,13 @@ describe('DescriptionListItemComponent', () => {
 
       mockFixture.detectChanges();
 
-      expect(mockComponent.langDlItem.getDetailsLanguageOptions()()).toEqual(secondRemoved);
+      expect(mockComponent.langDlItem.getDetailsLanguageOptions().value).toEqual(secondRemoved);
 
       mockComponent.thirdLang = false;
 
       mockFixture.detectChanges();
 
-      expect(mockComponent.langDlItem.getDetailsLanguageOptions()()).toEqual({});
+      expect(mockComponent.langDlItem.getDetailsLanguageOptions().value).toEqual({});
     });
   });
 });

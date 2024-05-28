@@ -55,7 +55,7 @@ export class DescriptionListComponent
   /**
    * CSS class list
    */
-  protected _classList: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  protected _classList = new BehaviorSubject<string[]>([]);
 
   /**
    * Observable for variant
@@ -119,7 +119,6 @@ export class DescriptionListComponent
   }
 
   ngOnDestroy(): void {
-    this._classList.complete();
     this._dlVariant.complete();
     this._disabledGrid.complete();
   }
