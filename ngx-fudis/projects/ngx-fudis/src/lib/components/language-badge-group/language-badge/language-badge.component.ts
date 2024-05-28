@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -26,6 +27,7 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
   constructor(
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
+    private _cdr: ChangeDetectorRef,
   ) {
     super();
 
@@ -33,6 +35,8 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
       this._translations = this._translationService.getTranslations();
       this._selectedLabel = this._translations().LANGUAGE_BADGE.ARIA_LABEL.SELECTED;
       this._missingTranslation = this._translations().LANGUAGE_BADGE.ARIA_LABEL.MISSING_TRANSLATION;
+
+      this._setLabel();
     });
   }
 
@@ -101,7 +105,11 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
   }
 
   ngOnChanges(changes: FudisComponentChanges<LanguageBadgeComponent>): void {
-    if (changes.selected || changes.variant || changes.label) {
+    if (
+      changes.selected?.currentValue !== changes.selected?.previousValue ||
+      changes.variant?.currentValue !== changes.variant?.previousValue ||
+      changes.label?.currentValue !== changes.label?.previousValue
+    ) {
       this._setLabel();
     }
   }
@@ -126,5 +134,7 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
     } else {
       this._label = this.label;
     }
+
+    this._cdr.markForCheck();
   }
 }

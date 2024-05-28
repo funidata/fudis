@@ -1,4 +1,6 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   Host,
@@ -15,16 +17,19 @@ import {
 } from '../../../types/miscellaneous';
 import { FudisIdService } from '../../../services/id/id.service';
 import { DescriptionListComponent } from '../description-list.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'fudis-dl-item, fudis-description-list-item',
   styleUrls: ['./description-list-item.component.scss'],
   templateUrl: './description-list-item.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DescriptionListItemComponent implements OnInit, OnDestroy {
   constructor(
     private _element: ElementRef,
     private _idService: FudisIdService,
+    private _cdr: ChangeDetectorRef,
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
     this.id = _idService.getNewGroupId('description-list', this._parentDl.id);
@@ -45,7 +50,7 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
   /**
    * Selected language to pass to child components
    */
-  public selectedLanguage: FudisLanguageAbbr | null;
+  public selectedLanguage: Subject<FudisLanguageAbbr | null> = new Subject();
 
   /**
    * Id generated with Id Service
@@ -76,6 +81,7 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
     } else {
       this._mainCssClass = 'fudis-dl-item';
     }
+    this._cdr.detectChanges();
   }
 
   /**
@@ -90,7 +96,7 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
 
     currentContent[lang]![id] = text;
 
-    this._detailsLanguageOptions.set(currentContent);
+    this._detailsLanguageOptions.set({ ...currentContent });
   }
 
   /**
@@ -107,10 +113,14 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
       delete currentContent[lang];
     }
 
-    this._detailsLanguageOptions.set(currentContent);
+    this._detailsLanguageOptions.set({ ...currentContent });
   }
 
   public getDetailsLanguageOptions(): Signal<FudisLanguageBadgeContent> {
     return this._detailsLanguageOptions.asReadonly();
+  }
+
+  public setSelectedLanguage(lang: FudisLanguageAbbr | null): void {
+    this.selectedLanguage.next(lang);
   }
 }

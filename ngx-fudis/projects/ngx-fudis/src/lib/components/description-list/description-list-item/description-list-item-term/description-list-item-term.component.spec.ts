@@ -96,7 +96,8 @@ describe('DescriptionListItemTermComponent', () => {
     mockFixture = TestBed.createComponent(MockDlComponent);
     mockComponent = mockFixture.componentInstance;
     mockComponent.langVisible = false;
-    mockFixture.detectChanges();
+
+    mockFixture.autoDetectChanges();
   });
 
   function getDlItemTermElement(
@@ -179,7 +180,16 @@ describe('DescriptionListItemTermComponent', () => {
   });
 
   describe('With languages', () => {
+    beforeEach(() => {
+      mockComponent.langVisible = true;
+
+      mockFixture.autoDetectChanges();
+    });
+
     it('should have Language Badge Group visible', () => {
+      mockComponent.langVisible = false;
+
+      mockFixture.autoDetectChanges();
       const allLanguageBadgeGroups = mockFixture.debugElement.queryAll(
         By.directive(LanguageBadgeGroupComponent),
       );
@@ -194,9 +204,6 @@ describe('DescriptionListItemTermComponent', () => {
     });
 
     it('should have Language Badge Group visible if one details has lang property', () => {
-      mockComponent.langVisible = true;
-      mockFixture.detectChanges();
-
       const allLanguageBadgeGroups = mockFixture.debugElement.queryAll(
         By.directive(LanguageBadgeGroupComponent),
       );
@@ -211,9 +218,6 @@ describe('DescriptionListItemTermComponent', () => {
     });
 
     it('should remove Language badge group if dd elements with lang do not exists', () => {
-      mockComponent.langVisible = true;
-      mockFixture.detectChanges();
-
       const allLanguageBadgeGroupsBefore = mockFixture.debugElement.queryAll(
         By.directive(LanguageBadgeGroupComponent),
       );
@@ -221,7 +225,7 @@ describe('DescriptionListItemTermComponent', () => {
       expect(allLanguageBadgeGroupsBefore.length).toEqual(2);
 
       mockComponent.langVisible = false;
-      mockFixture.detectChanges();
+      mockFixture.autoDetectChanges();
 
       const allLanguageBadgeGroupsAfter = mockFixture.debugElement.queryAll(
         By.directive(LanguageBadgeGroupComponent),

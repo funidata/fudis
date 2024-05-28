@@ -1,4 +1,6 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
@@ -19,11 +21,13 @@ import { FudisIdService } from '../../../../services/id/id.service';
   selector: 'fudis-dd, fudis-description-list-details',
   styleUrls: ['./description-list-item-details.component.scss'],
   templateUrl: './description-list-item-details.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy {
   constructor(
     private _elementRef: ElementRef,
     private _idService: FudisIdService,
+    private _cdr: ChangeDetectorRef,
     @Host() protected _parentDlItem: DescriptionListItemComponent,
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
@@ -33,6 +37,11 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
       this._parentDlItem.id,
     );
 
+    _parentDlItem.selectedLanguage.subscribe((value) => {
+      this._parentItemSelectedLanguage = value;
+      _cdr.detectChanges();
+    });
+
     effect(() => {
       const parentVariant = _parentDl.getVariant();
 
@@ -41,6 +50,7 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
       } else {
         this._mainCssClass = 'fudis-dl-item-details__compact';
       }
+      _cdr.detectChanges();
     });
   }
 
@@ -79,6 +89,8 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
    */
   protected _mainCssClass: string;
 
+  protected _parentItemSelectedLanguage: FudisLanguageAbbr | null;
+
   /**
    * Parse Details text content and set parent Description List Item languages
    */
@@ -86,9 +98,11 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
     const parsedTextContent =
       this.textContent && this.textContent.replace(/\s/g, '') !== '' ? this.textContent : null;
 
-    this._parentDlItem.addDetailsLanguage(this.lang, parsedTextContent, this._id);
+    if (parsedTextContent) {
+      this._parentDlItem.addDetailsLanguage(this.lang, parsedTextContent, this._id);
 
-    this._hostClass = `fudis-dl-item-details-host fudis-dl-item-details-host--${this.lang}`;
+      this._hostClass = `fudis-dl-item-details-host fudis-dl-item-details-host--${this.lang}`;
+    }
   }
 
   private _removeDetailsFromParent(): void {
@@ -106,7 +120,7 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
     }
 
     // If text content changes, update it to parent
-    if (changes.textContent?.currentValue && this.lang) {
+    if (changes.textContent?.currentValue !== changes.textContent?.previousValue && this.lang) {
       this._sendDetailsLanguageToParent();
     }
   }
