@@ -27,7 +27,7 @@ export class DescriptionListItemTermComponent {
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
     private _cdr: ChangeDetectorRef,
-    @Host() private _parentDlItem: DescriptionListItemComponent,
+    @Host() protected _parentDlItem: DescriptionListItemComponent,
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
     this._id = this._idService.getNewDlGrandChilId(
@@ -38,13 +38,16 @@ export class DescriptionListItemTermComponent {
 
     effect(() => {
       this._selectableLanguages = _translationService.getSelectableLanguages()();
-
-      this._parentLanguageOptions = this._parentDlItem.getDetailsLanguageOptions()();
-
       this._determineSelectedBadge();
-
       _cdr.detectChanges();
     });
+
+    _parentDlItem
+      .getDetailsLanguageOptions()
+      .pipe(takeUntilDestroyed())
+      .subscribe((value) => {
+        this._parentLanguageOptions = value;
+      });
 
     _parentDl
       .getVariant()
@@ -74,11 +77,6 @@ export class DescriptionListItemTermComponent {
   protected _parentLanguageOptions: FudisLanguageBadgeContent;
 
   /**
-   * Selected language
-   */
-  protected _selectedLanguage: FudisLanguageAbbr | null;
-
-  /**
    * Main CSS class
    */
   protected _mainCssClass: BehaviorSubject<string> = new BehaviorSubject<string>(
@@ -99,18 +97,19 @@ export class DescriptionListItemTermComponent {
     if (this.languages) {
       this._parentDlItem.setSelectedLanguage(lang);
     }
-    this._selectedLanguage = lang;
   }
 
   private _determineSelectedBadge(): void {
     const currentLang = this._translationService.getLanguage();
+
+    let determinedLanguage: FudisLanguageAbbr | null;
 
     if (
       this._parentLanguageOptions[currentLang] &&
       Object.keys(this._parentLanguageOptions[currentLang]!).length !== 0 &&
       this._selectableLanguages.includes(currentLang)
     ) {
-      this._selectedLanguage = currentLang;
+      determinedLanguage = currentLang;
     } else {
       const firstAvailable = this._selectableLanguages.find((lang) => {
         const possibleOption = this._parentLanguageOptions[lang];
@@ -127,12 +126,12 @@ export class DescriptionListItemTermComponent {
       });
 
       if (firstAvailable) {
-        this._selectedLanguage = firstAvailable as FudisLanguageAbbr;
+        determinedLanguage = firstAvailable as FudisLanguageAbbr;
       } else {
-        this._selectedLanguage = null;
+        determinedLanguage = null;
       }
     }
 
-    this._parentDlItem.setSelectedLanguage(this._selectedLanguage);
+    this._parentDlItem.setSelectedLanguage(determinedLanguage);
   }
 }

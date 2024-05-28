@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, OnChanges, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  ChangeDetectionStrategy,
+  OnDestroy,
+} from '@angular/core';
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
 import { FudisComponentChanges, FudisDescriptionListVariant } from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
@@ -11,7 +18,10 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./description-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DescriptionListComponent extends GridApiDirective implements OnInit, OnChanges {
+export class DescriptionListComponent
+  extends GridApiDirective
+  implements OnInit, OnChanges, OnDestroy
+{
   constructor(private _idService: FudisIdService) {
     super();
     this.id = this._idService.getNewGrandParentId('description-list');
@@ -106,5 +116,11 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
     const combined = this.classes ? cssClasses.concat(this.classes) : cssClasses;
 
     this._classList.next(combined);
+  }
+
+  ngOnDestroy(): void {
+    this._classList.complete();
+    this._dlVariant.complete();
+    this._disabledGrid.complete();
   }
 }
