@@ -1,11 +1,4 @@
-import {
-  Component,
-  Input,
-  effect,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-} from '@angular/core';
+import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisIdService } from '../../services/id/id.service';
 
@@ -18,16 +11,10 @@ import { FudisIdService } from '../../services/id/id.service';
 })
 export class BreadcrumbsComponent {
   constructor(
-    private _translationService: FudisTranslationService,
+    protected _translationService: FudisTranslationService,
     private _idService: FudisIdService,
-    private _cdr: ChangeDetectorRef,
   ) {
     this._id = this._idService.getNewParentId('breadcrumbs');
-
-    effect(() => {
-      this._breadcrumbsPrefix = this._translationService.getTranslations()().BREADCRUMBS.PREFIX;
-      _cdr.markForCheck();
-    });
   }
 
   /**

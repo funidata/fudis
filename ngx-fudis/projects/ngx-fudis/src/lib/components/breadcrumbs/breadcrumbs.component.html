@@ -1,4 +1,8 @@
-<nav [attr.aria-label]="_breadcrumbsPrefix + ': ' + label" [attr.id]="_id">
+<nav
+  *ngIf="_translationService.getTranslationsObservable() | async as translations"
+  [attr.aria-label]="translations.BREADCRUMBS.PREFIX + ': ' + label"
+  [attr.id]="_id"
+>
   <ul class="fudis-breadcrumbs">
     <ng-content select="fudis-breadcrumbs-item" />
   </ul>

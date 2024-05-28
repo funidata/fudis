@@ -77,6 +77,5 @@ export class AlertGroupComponent implements AfterViewInit {
     } else {
       this._visible = false;
     }
-    this._changeDetectorRef.detectChanges();
   }
 }
