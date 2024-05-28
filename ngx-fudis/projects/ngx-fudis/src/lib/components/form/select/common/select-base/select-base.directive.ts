@@ -424,6 +424,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
         value,
       );
       (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value = value;
+      this._autocompleteFilterText.set('');
     } else {
       this._dropdownSelectionLabelText = value;
     }
