@@ -7,13 +7,13 @@
 </ng-container>
 
 <ng-template #multipleItems>
-  <div [id]="id" [class]="_mainCssClass" role="listitem">
+  <div [id]="id" [class]="_mainCssClass | async" role="listitem">
     <ng-container *ngTemplateOutlet="dlItemContent"></ng-container>
   </div>
 </ng-template>
 
 <ng-template #singleItem>
-  <p [id]="id" [class]="_mainCssClass">
+  <p [id]="id" [class]="_mainCssClass | async">
     <ng-container *ngTemplateOutlet="dlItemContent"></ng-container>
   </p>
 </ng-template>

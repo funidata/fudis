@@ -1,12 +1,4 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  OnChanges,
-  Signal,
-  signal,
-  ChangeDetectionStrategy,
-} from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
 import { FudisComponentChanges, FudisDescriptionListVariant } from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
@@ -56,14 +48,14 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
   protected _classList: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
   /**
-   * Signal for listening variant Input
+   * Observable for variant
    */
-  private _dlVariant = signal<FudisDescriptionListVariant>('regular');
+  private _dlVariant = new BehaviorSubject<FudisDescriptionListVariant>('regular');
 
   /**
-   * Signal for listening disableGrid Input, used in DL Item.
+   * Observable for listening disableGrid Input, used in DL Item.
    */
-  private _disabledGridSignal = signal<boolean>(false);
+  private _disabledGrid = new BehaviorSubject<boolean>(false);
 
   ngOnInit(): void {
     this._setClasses();
@@ -74,29 +66,29 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
       changes.variant?.currentValue &&
       changes.variant?.currentValue !== changes.variant?.previousValue
     ) {
-      this._dlVariant.set(changes.variant.currentValue);
+      this._dlVariant.next(changes.variant.currentValue);
     }
 
     if (changes.disableGrid?.currentValue !== changes.disableGrid?.previousValue) {
       this._setClasses();
 
       const disableGrid = !!changes.disableGrid?.currentValue;
-      this._disabledGridSignal.set(disableGrid);
+      this._disabledGrid.next(disableGrid);
     }
   }
 
   /**
-   * Read only signal for variant
+   * Observable for disabledGrid value
    */
-  public getVariant(): Signal<FudisDescriptionListVariant> {
-    return this._dlVariant.asReadonly();
+  public getDisabledGridStatus(): BehaviorSubject<boolean> {
+    return this._disabledGrid;
   }
 
   /**
-   * Read only signal for disabledGrid value
+   * Observable for variant
    */
-  public getDisabledGridStatus(): Signal<boolean> {
-    return this._disabledGridSignal.asReadonly();
+  public getVariant(): BehaviorSubject<FudisDescriptionListVariant> {
+    return this._dlVariant;
   }
 
   /**

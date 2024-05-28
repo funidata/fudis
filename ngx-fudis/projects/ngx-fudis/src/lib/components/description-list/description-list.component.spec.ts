@@ -155,7 +155,7 @@ describe('DescriptionListComponent', () => {
 
   describe('Signals', () => {
     it('should return correct variant from signal', () => {
-      const variantBefore = component.getVariant()();
+      const variantBefore = component.getVariant().value;
 
       expect(variantBefore).toEqual('regular');
 
@@ -164,13 +164,13 @@ describe('DescriptionListComponent', () => {
         variant: new SimpleChange('regular', component.variant, true),
       });
 
-      const variantAfter = component.getVariant()();
+      const variantAfter = component.getVariant().value;
 
       expect(variantAfter).toEqual('compact');
     });
 
     it('should return correct disabled grid status from signal', () => {
-      const statusBefore = component.getDisabledGridStatus()();
+      const statusBefore = component.getDisabledGridStatus().value;
 
       expect(statusBefore).toEqual(false);
 
@@ -179,7 +179,7 @@ describe('DescriptionListComponent', () => {
         disableGrid: new SimpleChange(false, component.disableGrid, true),
       });
 
-      const statusAfter = component.getDisabledGridStatus()();
+      const statusAfter = component.getDisabledGridStatus().value;
 
       expect(statusAfter).toEqual(true);
     });

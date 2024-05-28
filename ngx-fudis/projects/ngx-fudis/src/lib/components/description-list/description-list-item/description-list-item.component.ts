@@ -1,11 +1,9 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ElementRef,
   Host,
   Signal,
-  effect,
   signal,
 } from '@angular/core';
 import {
@@ -15,7 +13,8 @@ import {
 } from '../../../types/miscellaneous';
 import { FudisIdService } from '../../../services/id/id.service';
 import { DescriptionListComponent } from '../description-list.component';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-dl-item, fudis-description-list-item',
@@ -27,17 +26,26 @@ export class DescriptionListItemComponent {
   constructor(
     private _element: ElementRef,
     private _idService: FudisIdService,
-    private _cdr: ChangeDetectorRef,
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
     this.id = _idService.getNewGroupId('description-list', this._parentDl.id);
 
-    effect(() => {
-      /**
-       * Listens to parent's changes and updates CSS classes.
-       */
-      this._setClasses(_parentDl.getDisabledGridStatus()(), _parentDl.getVariant()());
-    });
+    /**
+     * Listens to parent's changes and updates CSS classes.
+     */
+    this._parentDl
+      .getVariant()
+      .pipe(takeUntilDestroyed())
+      .subscribe((value) => {
+        this._setClasses(_parentDl.getDisabledGridStatus().value, value);
+      });
+
+    this._parentDl
+      .getDisabledGridStatus()
+      .pipe(takeUntilDestroyed())
+      .subscribe((value) => {
+        this._setClasses(value, _parentDl.getVariant().value);
+      });
   }
 
   /**
@@ -58,18 +66,17 @@ export class DescriptionListItemComponent {
   /**
    * Main CSS class
    */
-  protected _mainCssClass: string;
+  protected _mainCssClass: BehaviorSubject<string> = new BehaviorSubject<string>('fudis-dl-item');
 
   /**
    * DL Item has combined styles for both regular and compact versions but some styles only apply to regular version if parent's disableGrid is true.
    */
   private _setClasses(disabledGrid: boolean, parentVariant: FudisDescriptionListVariant): void {
     if (disabledGrid && parentVariant !== 'compact') {
-      this._mainCssClass = 'fudis-dl-item__disabled-grid';
+      this._mainCssClass.next('fudis-dl-item__disabled-grid');
     } else {
-      this._mainCssClass = 'fudis-dl-item';
+      this._mainCssClass.next('fudis-dl-item');
     }
-    this._cdr.detectChanges();
   }
 
   /**

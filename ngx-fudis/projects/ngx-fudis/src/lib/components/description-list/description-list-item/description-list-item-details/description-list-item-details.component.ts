@@ -1,6 +1,5 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
@@ -9,13 +8,14 @@ import {
   Input,
   OnChanges,
   OnDestroy,
-  effect,
 } from '@angular/core';
 import { FudisComponentChanges, FudisLanguageAbbr } from '../../../../types/miscellaneous';
 import { ActionsDirective } from '../../../../directives/content-projection/actions/actions.directive';
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { DescriptionListComponent } from '../../description-list.component';
 import { FudisIdService } from '../../../../services/id/id.service';
+import { BehaviorSubject } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-dd, fudis-description-list-details',
@@ -27,7 +27,6 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
   constructor(
     private _elementRef: ElementRef,
     private _idService: FudisIdService,
-    private _cdr: ChangeDetectorRef,
     @Host() protected _parentDlItem: DescriptionListItemComponent,
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
@@ -37,21 +36,16 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
       this._parentDlItem.id,
     );
 
-    _parentDlItem.selectedLanguage.subscribe((value) => {
-      this._parentItemSelectedLanguage = value;
-      _cdr.detectChanges();
-    });
-
-    effect(() => {
-      const parentVariant = _parentDl.getVariant();
-
-      if (parentVariant() === 'regular') {
-        this._mainCssClass = 'fudis-dl-item-details__regular';
-      } else {
-        this._mainCssClass = 'fudis-dl-item-details__compact';
-      }
-      _cdr.detectChanges();
-    });
+    _parentDl
+      .getVariant()
+      .pipe(takeUntilDestroyed())
+      .subscribe((variant) => {
+        if (variant === 'regular') {
+          this._mainCssClass.next('fudis-dl-item-details__regular');
+        } else {
+          this._mainCssClass.next('fudis-dl-item-details__compact');
+        }
+      });
   }
 
   /**
@@ -87,9 +81,9 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
   /**
    * Main CSS class
    */
-  protected _mainCssClass: string;
-
-  protected _parentItemSelectedLanguage: FudisLanguageAbbr | null;
+  protected _mainCssClass: BehaviorSubject<string> = new BehaviorSubject<string>(
+    'fudis-dl-item-details__regular',
+  );
 
   /**
    * Parse Details text content and set parent Description List Item languages
