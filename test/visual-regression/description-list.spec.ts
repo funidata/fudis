@@ -180,7 +180,7 @@ test("description list regular with languages", async ({ page }) => {
   await expect(page).toHaveScreenshot("languages-regular-11-lang-focus-en.png");
 });
 
-test.only("description list compact with languages", async ({ page }) => {
+test("description list compact with languages", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=variant:compact&id=components-description-list--description-list-with-languages&viewMode=story",
   );
