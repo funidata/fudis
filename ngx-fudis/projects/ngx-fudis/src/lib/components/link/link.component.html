@@ -1,5 +1,6 @@
 <ng-container *ngIf="externalLink">
   <a
+    *ngIf="_translationService.getTranslationsObservable() | async as translations"
     fudisLink
     [id]="id"
     [color]="color"
@@ -8,7 +9,7 @@
     (focus)="_handleFocus($event)"
     (blur)="_handleBlur($event)"
     (click)="_handleClick($event)"
-    attr.aria-label="{{ title ? title : externalLink }}, {{ _externalLinkAriaLabel }}"
+    attr.aria-label="{{ title ? title : externalLink }}, {{ translations.LINK.EXTERNAL_LINK }}"
     [href]="externalLink"
     [initialFocus]="initialFocus"
     target="_blank"
@@ -22,23 +23,26 @@
         </span>
       </span>
     </ng-container>
-    <ng-container *ngIf="title">
-      <ng-container *ngIf="_externalLinkTitleParsed.length > 1"
-        >{{ _externalLinkTitleParsed[0] }}
-        <span class="fudis-link__external__icon-wrapper"
-          >{{ _externalLinkTitleParsed[1]
-          }}<span class="fudis-link__external__icon">
-            <fudis-icon [icon]="'new-tab'" [color]="color" />
+    <ng-container *ngIf="_externalLinkTitleParsed | async as parsedTitle"
+      >ng-container>
+      <ng-container *ngIf="title">
+        <ng-container *ngIf="parsedTitle.length > 1"
+          >{{ parsedTitle[0] }}
+          <span class="fudis-link__external__icon-wrapper"
+            >{{ parsedTitle[1]
+            }}<span class="fudis-link__external__icon">
+              <fudis-icon [icon]="'new-tab'" [color]="color" />
+            </span>
           </span>
-        </span>
-      </ng-container>
-      <ng-container *ngIf="_externalLinkTitleParsed.length === 1">
-        <span class="fudis-link__external__icon-wrapper"
-          >{{ _externalLinkTitleParsed[0]
-          }}<span class="fudis-link__external__icon">
-            <fudis-icon [icon]="'new-tab'" [color]="color" />
+        </ng-container>
+        <ng-container *ngIf="parsedTitle.length === 1">
+          <span class="fudis-link__external__icon-wrapper"
+            >{{ parsedTitle[0]
+            }}<span class="fudis-link__external__icon">
+              <fudis-icon [icon]="'new-tab'" [color]="color" />
+            </span>
           </span>
-        </span>
+        </ng-container>
       </ng-container>
     </ng-container>
   </a>

@@ -9,6 +9,7 @@ import {
 
 import { FudisIcon, FudisIconColor, FudisIconRotate } from '../../types/icons';
 import { FudisComponentChanges } from '../../types/miscellaneous';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-icon',
@@ -48,7 +49,7 @@ vertical-align: middle;
   /**
    * CSS class list
    */
-  protected _classList: string[] = [];
+  protected _classList = new BehaviorSubject<string[]>([]);
 
   /**
    * Determines icon size by its name. If icon name has suffix "-small", iconSize is set to sm, otherwise lg.
@@ -56,8 +57,12 @@ vertical-align: middle;
   private _iconSize: string;
 
   ngOnChanges(changes: FudisComponentChanges<IconComponent>): void {
-    if (changes.icon || changes.color || changes.rotate) {
-      this._classList = this._getClasses();
+    if (
+      changes.icon?.currentValue !== changes.icon?.previousValue ||
+      changes.color?.currentValue !== changes.color?.previousValue ||
+      changes.rotate?.currentValue !== changes.rotate?.previousValue
+    ) {
+      this._classList.next(this._getClasses());
     }
   }
 

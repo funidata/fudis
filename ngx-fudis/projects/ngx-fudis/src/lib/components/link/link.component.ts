@@ -8,12 +8,12 @@ import {
   Optional,
   Output,
   Signal,
-  effect,
 } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisComponentChanges, FudisTranslationConfig } from '../../types/miscellaneous';
 import { LinkApiDirective } from '../../directives/link/link-api/link-api.directive';
 import { NotificationComponent } from '../notification/notification.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'fudis-link',
@@ -24,19 +24,13 @@ import { NotificationComponent } from '../notification/notification.component';
 export class LinkComponent extends LinkApiDirective implements OnChanges {
   constructor(
     @Host() @Optional() private _parentNotification: NotificationComponent,
-    private _translationService: FudisTranslationService,
+    protected _translationService: FudisTranslationService,
   ) {
     super();
 
     if (_parentNotification) {
       this.color = 'gray-dark';
     }
-
-    effect(() => {
-      this._translations = this._translationService.getTranslations();
-
-      this._externalLinkAriaLabel = this._translations().LINK.EXTERNAL_LINK;
-    });
   }
 
   /**
@@ -82,11 +76,6 @@ export class LinkComponent extends LinkApiDirective implements OnChanges {
   @Output() handleClick = new EventEmitter<Event>();
 
   /**
-   * Aria-label for the external link
-   */
-  protected _externalLinkAriaLabel: string;
-
-  /**
    * Fudis translations
    */
   protected _translations: Signal<FudisTranslationConfig>;
@@ -94,7 +83,7 @@ export class LinkComponent extends LinkApiDirective implements OnChanges {
   /**
    * Store parsed values of external link's title
    */
-  protected _externalLinkTitleParsed: string[];
+  protected _externalLinkTitleParsed = new Subject<string[]>();
 
   ngOnChanges(changes: FudisComponentChanges<LinkComponent>): void {
     if (
@@ -118,12 +107,12 @@ export class LinkComponent extends LinkApiDirective implements OnChanges {
 
           const titleStart: string = toArray.slice(0, -1).join(' ');
 
-          this._externalLinkTitleParsed = [titleStart, lastWord];
+          this._externalLinkTitleParsed.next([titleStart, lastWord]);
         } else {
-          this._externalLinkTitleParsed = toArray;
+          this._externalLinkTitleParsed.next(toArray);
         }
       } else {
-        this._externalLinkTitleParsed = [this.externalLink];
+        this._externalLinkTitleParsed.next([this.externalLink]);
       }
     }
   }

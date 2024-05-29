@@ -1,10 +1,4 @@
-import {
-  Component,
-  ContentChild,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-} from '@angular/core';
+import { Component, ContentChild, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { FudisGridColumnsResponsive } from '../../types/grid';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 
@@ -21,10 +15,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
-  constructor(
-    protected _translationService: FudisTranslationService,
-    private _cdr: ChangeDetectorRef,
-  ) {}
+  constructor(protected _translationService: FudisTranslationService) {}
 
   /**
    * Content projection directive fudisFooterContentLeft is used for binding correct Footer content on the left side of the component.
