@@ -13,7 +13,7 @@ import { FudisTranslationService } from '../../services/translation/translation.
 import { FudisComponentChanges, FudisTranslationConfig } from '../../types/miscellaneous';
 import { LinkApiDirective } from '../../directives/link/link-api/link-api.directive';
 import { NotificationComponent } from '../notification/notification.component';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-link',
@@ -83,7 +83,7 @@ export class LinkComponent extends LinkApiDirective implements OnChanges {
   /**
    * Store parsed values of external link's title
    */
-  protected _externalLinkTitleParsed = new Subject<string[]>();
+  protected _externalLinkTitleParsed = new BehaviorSubject<string[]>([]);
 
   ngOnChanges(changes: FudisComponentChanges<LinkComponent>): void {
     if (

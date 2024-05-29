@@ -9,7 +9,7 @@ import {
 import { FudisHeadingLevel, FudisHeadingSize } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisComponentChanges, FudisSpacing, FudisTextAlign } from '../../../types/miscellaneous';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-heading',
@@ -56,7 +56,7 @@ export class HeadingComponent implements OnInit, OnChanges {
   /**
    * Heading CSS class list
    */
-  protected _classList = new Subject<string[]>();
+  protected _classList = new BehaviorSubject<string[]>([]);
 
   /**
    * Internal id to generate unique id

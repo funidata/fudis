@@ -23,8 +23,7 @@
         </span>
       </span>
     </ng-container>
-    <ng-container *ngIf="_externalLinkTitleParsed | async as parsedTitle"
-      >ng-container>
+    <ng-container *ngIf="_externalLinkTitleParsed | async as parsedTitle">
       <ng-container *ngIf="title">
         <ng-container *ngIf="parsedTitle.length > 1"
           >{{ parsedTitle[0] }}

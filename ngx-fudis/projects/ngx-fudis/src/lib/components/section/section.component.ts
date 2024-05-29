@@ -21,7 +21,7 @@ import { FudisInternalErrorSummaryService } from '../../services/form/error-summ
 import { FudisFormErrorSummarySection } from '../../types/forms';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { FormComponent } from '../form/form/form.component';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-section',
@@ -117,7 +117,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   /**
    * Section CSS class list
    */
-  protected _classList = new Subject<string[]>();
+  protected _classList = new BehaviorSubject<string[]>([]);
 
   /**
    * Object to send to error summary service
