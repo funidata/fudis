@@ -20,28 +20,28 @@
 
   &__warning {
     @include colors.bg-color("yellow-light");
-    @include borders.border("2px", "solid", "yellow");
+    @include borders.border("1px", "solid", "yellow");
 
     border-left-width: spacing.$spacing-xs;
   }
 
   &__danger {
     @include colors.bg-color("red-light");
-    @include borders.border("2px", "solid", "red");
+    @include borders.border("1px", "solid", "red");
 
     border-left-width: spacing.$spacing-xs;
   }
 
   &__success {
     @include colors.bg-color("green-light");
-    @include borders.border("2px", "solid", "green");
+    @include borders.border("1px", "solid", "green");
 
     border-left-width: spacing.$spacing-xs;
   }
 
   &__info {
     @include colors.bg-color("primary-light");
-    @include borders.border("2px", "solid", "primary-dark");
+    @include borders.border("1px", "solid", "primary-dark");
 
     border-left-width: spacing.$spacing-xs;
   }
