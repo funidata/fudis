@@ -24,14 +24,14 @@
 
 <ng-template #multipleItems>
   <dl
-    *ngIf="_classList | async"
+    *ngIf="_classList | async as classes"
     fudisGrid
     [id]="id"
     [width]="width"
     [align]="align"
     [alignItemsX]="alignItemsX"
     [alignItemsY]="alignItemsY"
-    [classes]="_classList.value"
+    [classes]="classes"
     [serviceDefaults]="false"
     [columnGap]="columnGap"
     [rowGap]="variant === 'compact' ? 'none' : rowGap"

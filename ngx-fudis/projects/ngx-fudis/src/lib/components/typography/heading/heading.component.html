@@ -16,37 +16,37 @@
 
 <!-- From level @Input choose which h-tag to render -->
 <ng-template #h1>
-  <h1 [id]="_id" [class]="_classList">
+  <h1 [id]="_id" [class]="_classList | async">
     <ng-container *ngTemplateOutlet="headingContent"></ng-container>
   </h1>
 </ng-template>
 
 <ng-template #h2>
-  <h2 [id]="_id" [class]="_classList">
+  <h2 [id]="_id" [class]="_classList | async">
     <ng-container *ngTemplateOutlet="headingContent"></ng-container>
   </h2>
 </ng-template>
 
 <ng-template #h3>
-  <h3 [id]="_id" [class]="_classList">
+  <h3 [id]="_id" [class]="_classList | async">
     <ng-container *ngTemplateOutlet="headingContent"></ng-container>
   </h3>
 </ng-template>
 
 <ng-template #h4>
-  <h4 [id]="_id" [class]="_classList">
+  <h4 [id]="_id" [class]="_classList | async">
     <ng-container *ngTemplateOutlet="headingContent"></ng-container>
   </h4>
 </ng-template>
 
 <ng-template #h5>
-  <h5 [id]="_id" [class]="_classList">
+  <h5 [id]="_id" [class]="_classList | async">
     <ng-container *ngTemplateOutlet="headingContent"></ng-container>
   </h5>
 </ng-template>
 
 <ng-template #h6>
-  <h6 [id]="_id" [class]="_classList">
+  <h6 [id]="_id" [class]="_classList | async">
     <ng-container *ngTemplateOutlet="headingContent"></ng-container>
   </h6>
 </ng-template>

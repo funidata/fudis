@@ -21,6 +21,7 @@ import { FudisInternalErrorSummaryService } from '../../services/form/error-summ
 import { FudisFormErrorSummarySection } from '../../types/forms';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { FormComponent } from '../form/form/form.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'fudis-section',
@@ -116,7 +117,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   /**
    * Section CSS class list
    */
-  protected _classList: string[];
+  protected _classList = new Subject<string[]>();
 
   /**
    * Object to send to error summary service
@@ -132,13 +133,13 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
     this._setSectionId();
 
     this._headingId = `${this.id}-heading`;
-    this._classList = this._getClasses();
+    this._classList.next(this._getClasses());
     this._addToErrorSummary();
   }
 
   ngOnChanges(changes: FudisComponentChanges<SectionComponent>): void {
     if (changes.classes?.currentValue !== changes.classes?.previousValue) {
-      this._classList = this._getClasses();
+      this._classList.next(this._getClasses());
     }
 
     if (changes.title?.currentValue !== changes.title?.previousValue && this.id) {

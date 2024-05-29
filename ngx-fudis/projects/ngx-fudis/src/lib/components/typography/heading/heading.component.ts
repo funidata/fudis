@@ -9,6 +9,7 @@ import {
 import { FudisHeadingLevel, FudisHeadingSize } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisComponentChanges, FudisSpacing, FudisTextAlign } from '../../../types/miscellaneous';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'fudis-heading',
@@ -55,7 +56,7 @@ export class HeadingComponent implements OnInit, OnChanges {
   /**
    * Heading CSS class list
    */
-  protected _classList: string[];
+  protected _classList = new Subject<string[]>();
 
   /**
    * Internal id to generate unique id
@@ -102,12 +103,14 @@ export class HeadingComponent implements OnInit, OnChanges {
 
     const calcMarginBottom = this.marginBottom || this._getMarginBottom(calcSize);
 
-    this._classList = [
+    const newClasses = [
       `fudis-heading`,
       `fudis-heading__size__${calcSize}`,
       `fudis-mb-${calcMarginBottom}`,
       `fudis-heading__align__${this.align}`,
     ];
+
+    this._classList.next(newClasses);
   }
 
   ngOnInit(): void {
