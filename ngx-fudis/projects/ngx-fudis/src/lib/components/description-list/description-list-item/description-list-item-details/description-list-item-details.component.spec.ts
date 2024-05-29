@@ -33,14 +33,7 @@ import { ActionsDirective } from '../../../../directives/content-projection/acti
       <fudis-dl-item>
         <fudis-dt [textContent]="'Second DT'"></fudis-dt>
         <fudis-dd [textContent]="'This is my DD'" [subHeading]="'Here is sub heading'">
-          <ng-template fudisActions [type]="'dd'">
-            <fudis-button
-              [label]="'Edit'"
-              [variant]="'tertiary'"
-              [size]="'small'"
-              [icon]="'edit'"
-            />
-          </ng-template>
+          <fudis-button [label]="'Edit'" [variant]="'tertiary'" [size]="'small'" [icon]="'edit'" />
         </fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
@@ -233,17 +226,13 @@ describe('DescriptionListItemDetailsComponent', () => {
     });
   });
 
-  describe('Actions', () => {
-    it('should render given action button', () => {
-      const actionsWrapper = mockFixture.debugElement.query(
-        By.css('.fudis-dl-item-details__regular__content__actions'),
+  describe('Nested content', () => {
+    it('should render button', () => {
+      const buttonComponent = mockFixture.debugElement.query(
+        By.css('.fudis-dl-item-details__regular__content fudis-button'),
       );
 
-      expect(actionsWrapper).toBeTruthy();
-
-      const actionButton = actionsWrapper.query(By.directive(ButtonComponent));
-
-      expect(actionButton).toBeTruthy();
+      expect(buttonComponent).toBeTruthy();
     });
   });
 });

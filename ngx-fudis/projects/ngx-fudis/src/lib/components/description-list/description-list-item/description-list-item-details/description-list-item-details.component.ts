@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ContentChild,
   ElementRef,
   Host,
   HostBinding,
@@ -10,7 +9,6 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { FudisComponentChanges, FudisLanguageAbbr } from '../../../../types/miscellaneous';
-import { ActionsDirective } from '../../../../directives/content-projection/actions/actions.directive';
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { DescriptionListComponent } from '../../description-list.component';
 import { FudisIdService } from '../../../../services/id/id.service';
@@ -52,11 +50,6 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
    * Binding host CSS class to component wrapper
    */
   @HostBinding('class') private _hostClass = 'fudis-dl-item-details-host';
-
-  /**
-   * Possible action buttons for Details element
-   */
-  @ContentChild(ActionsDirective) protected _actions: ActionsDirective;
 
   /**
    * Details element language, possible values 'fi', 'sv' and 'en'.

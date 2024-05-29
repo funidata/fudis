@@ -25,12 +25,8 @@
   ><span [class]="(_mainCssClass | async) + '__content'">
     <span *ngIf="subHeading" [class]="(_mainCssClass | async) + '__parenthesis'"> &#40;</span
     >{{ textContent
-    }}<span *ngIf="subHeading" [class]="(_mainCssClass | async) + '__parenthesis'">&#41;</span>
-    <ng-container *ngIf="_actions?.type === 'dd'">
-      <span [class]="(_mainCssClass | async) + '__content__actions'">
-        <ng-container *ngTemplateOutlet="_actions!.templateRef" />
-      </span>
-    </ng-container>
-  </span>
+    }}<span *ngIf="subHeading" [class]="(_mainCssClass | async) + '__parenthesis'">&#41;</span
+    ><ng-content
+  /></span>
   <span aria-hidden="true" [class]="(_mainCssClass | async) + '__comma'">&comma;</span>
 </ng-template>

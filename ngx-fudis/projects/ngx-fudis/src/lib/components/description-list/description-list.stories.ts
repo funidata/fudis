@@ -104,6 +104,126 @@ DescriptionListCompact.args = {
   disableGrid: false,
 };
 
+const NestedDescriptionListsTemplate: StoryFn<DescriptionListComponent> = (
+  args: DescriptionListComponent,
+) => ({
+  props: {
+    ...args,
+    quoteOne: "It's not the years, honey, it's the mileage.",
+    quoteTwo: "Archimedes didn't know about continental drift!",
+  },
+  template: html`
+    <fudis-heading [level]="2" [size]="'md'"
+      >Nested Description Lists with Indiana Jones Movies</fudis-heading
+    >
+    <fudis-dl [marginTop]="'sm'" [disableGrid]="disableGrid">
+      <fudis-dl-item>
+        <fudis-dt [textContent]="'Raiders of the Lost Ark'"></fudis-dt>
+        <fudis-dd>
+          <fudis-dl [variant]="variant">
+            <fudis-dl-item>
+              <fudis-dt [textContent]="'Release Year'"></fudis-dt>
+              <fudis-dd [textContent]="'1981'"></fudis-dd>
+            </fudis-dl-item>
+            <fudis-dl-item>
+              <fudis-dt [textContent]="'IMDB Rating'"></fudis-dt>
+              <fudis-dd [textContent]="'8.4 / 10'"></fudis-dd>
+            </fudis-dl-item>
+            <fudis-dl-item>
+              <fudis-dt [textContent]="'Famous Quote'"></fudis-dt>
+              <fudis-dd [textContent]="quoteOne"></fudis-dd>
+            </fudis-dl-item>
+          </fudis-dl>
+        </fudis-dd>
+      </fudis-dl-item>
+      <fudis-dl-item>
+        <fudis-dt [textContent]="'The Temple of Doom'"></fudis-dt>
+        <fudis-dd>
+          <fudis-dl [variant]="variant">
+            <fudis-dl-item>
+              <fudis-dt [textContent]="'Release Year'"></fudis-dt>
+              <fudis-dd [textContent]="'1984'"></fudis-dd>
+            </fudis-dl-item>
+            <fudis-dl-item>
+              <fudis-dt [textContent]="'IMDB Rating'"></fudis-dt>
+              <fudis-dd [textContent]="'7.5 / 10'"></fudis-dd>
+            </fudis-dl-item>
+            <fudis-dl-item>
+              <fudis-dt [textContent]="'Famous Quote'"></fudis-dt>
+              <fudis-dd [textContent]="'Ah, dessert! Chilled monkey brains.'"></fudis-dd>
+            </fudis-dl-item>
+          </fudis-dl>
+        </fudis-dd>
+      </fudis-dl-item>
+      <fudis-dl-item>
+        <fudis-dt [textContent]="'The Last Crusade'"></fudis-dt>
+        <fudis-dd>
+          <fudis-dl [variant]="variant">
+            <fudis-dl-item>
+              <fudis-dt [textContent]="'Release Year'"></fudis-dt>
+              <fudis-dd [textContent]="'1989'"></fudis-dd>
+            </fudis-dl-item>
+            <fudis-dl-item>
+              <fudis-dt [textContent]="'IMDB Rating'"></fudis-dt>
+              <fudis-dd [textContent]="'8.2 / 10'"></fudis-dd>
+            </fudis-dl-item>
+            <fudis-dl-item>
+              <fudis-dt [textContent]="'Famous Quote'"></fudis-dt>
+              <fudis-dd
+                [textContent]="'I suddenly remembered my Charlemagne. Let my armies be the rocks and the trees and the birds in the sky...'"
+              ></fudis-dd>
+            </fudis-dl-item>
+          </fudis-dl>
+        </fudis-dd>
+      </fudis-dl-item>
+      <fudis-dl-item>
+        <fudis-dt [textContent]="'The Kingdom of Crystal Skull'"></fudis-dt>
+        <fudis-dd>
+          <fudis-dl [variant]="variant">
+            <fudis-dl-item>
+              <fudis-dt [textContent]="'Release Year'"></fudis-dt>
+              <fudis-dd [textContent]="'2008'"></fudis-dd>
+            </fudis-dl-item>
+            <fudis-dl-item>
+              <fudis-dt [textContent]="'IMDB Rating'"></fudis-dt>
+              <fudis-dd [textContent]="'6.2 / 10'"></fudis-dd>
+            </fudis-dl-item>
+            <fudis-dl-item>
+              <fudis-dt [textContent]="'Famous Quote'"></fudis-dt>
+              <fudis-dd [textContent]="'How much of human life is lost in waiting?'"></fudis-dd>
+            </fudis-dl-item>
+          </fudis-dl>
+        </fudis-dd>
+      </fudis-dl-item>
+      <fudis-dl-item>
+        <fudis-dt [textContent]="'The Dial of Destiny'"></fudis-dt>
+        <fudis-dd>
+          <fudis-dl [variant]="variant">
+            <fudis-dl-item>
+              <fudis-dt [textContent]="'Release Year'"></fudis-dt>
+              <fudis-dd [textContent]="'2023'"></fudis-dd>
+            </fudis-dl-item>
+            <fudis-dl-item>
+              <fudis-dt [textContent]="'IMDB Rating'"></fudis-dt>
+              <fudis-dd [textContent]="'6.5 / 10'"></fudis-dd>
+            </fudis-dl-item>
+            <fudis-dl-item>
+              <fudis-dt [textContent]="'Famous Quote'"></fudis-dt>
+              <fudis-dd [textContent]="quoteTwo"></fudis-dd>
+            </fudis-dl-item>
+          </fudis-dl>
+        </fudis-dd>
+      </fudis-dl-item>
+    </fudis-dl>
+  `,
+});
+
+export const NestedDescriptionLists = NestedDescriptionListsTemplate.bind({});
+NestedDescriptionLists.args = {
+  variant: 'compact',
+  disableGrid: false,
+};
+
 const DescriptionListInsideGridTemplate: StoryFn<DescriptionListComponent> = (
   args: DescriptionListComponent,
 ) => ({
@@ -136,7 +256,7 @@ DescriptionListInsideGrid.args = {
   disableGrid: true,
 };
 
-const DescriptionListWithSubComponentsTemplate: StoryFn<DescriptionListComponent> = (
+const NestedSubComponentsTemplate: StoryFn<DescriptionListComponent> = (
   args: DescriptionListComponent,
 ) => ({
   props: args,
@@ -160,35 +280,26 @@ const DescriptionListWithSubComponentsTemplate: StoryFn<DescriptionListComponent
       <fudis-dl-item>
         <fudis-dt [textContent]="'Alias'"></fudis-dt>
         <fudis-dd [textContent]="'Radical Emmet Xtreme'">
-          <ng-template fudisActions [type]="'dd'">
-            <fudis-button
-              [label]="'Edit'"
-              [variant]="'tertiary'"
-              [size]="'small'"
-              [icon]="'edit'"
-            />
-          </ng-template>
+          <fudis-button [label]="'Edit'" [variant]="'tertiary'" [size]="'small'" [icon]="'edit'" />
         </fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
         <fudis-dt [textContent]="'Enemy'">Enemy</fudis-dt>
-        <fudis-dd [textContent]="'Emmet Brickowski'" [subHeading]="'Archenemy'"
-          ><ng-template fudisActions [type]="'dd'">
-            <fudis-button [label]="'Read more'" [variant]="'secondary'" [size]="'small'" />
-          </ng-template>
+        <fudis-dd [textContent]="'Emmet Brickowski'" [subHeading]="'Archenemy'">
+          <fudis-button [label]="'Read more'" [variant]="'secondary'" [size]="'small'" />
         </fudis-dd>
       </fudis-dl-item>
     </fudis-description-list> `,
 });
 
-export const DescriptionListWithSubComponents = DescriptionListWithSubComponentsTemplate.bind({});
-DescriptionListWithSubComponents.args = {
+export const NestedSubComponents = NestedSubComponentsTemplate.bind({});
+NestedSubComponents.args = {
   variant: 'regular',
   columns: { xs: 1, sm: 2 },
   disableGrid: false,
 };
 
-const DescriptionListWithLanguagesTemplate: StoryFn<DescriptionListComponent> = (
+const WithLanguageBadgesTemplate: StoryFn<DescriptionListComponent> = (
   args: DescriptionListComponent,
 ) => ({
   props: args,
@@ -231,8 +342,8 @@ const DescriptionListWithLanguagesTemplate: StoryFn<DescriptionListComponent> = 
   `,
 });
 
-export const DescriptionListWithLanguages = DescriptionListWithLanguagesTemplate.bind({});
-DescriptionListWithLanguages.args = {
+export const WithLanguageBadges = WithLanguageBadgesTemplate.bind({});
+WithLanguageBadges.args = {
   variant: 'regular',
   serviceDefaults: false,
   columns: '1fr 1fr',
@@ -257,7 +368,7 @@ const multipleDDData = [
   { subHeading: 'Grand Master', value: 'Yoda' },
 ];
 
-const DescriptionListWithMultipleDdElementsTemplate: StoryFn<DescriptionListComponent> = (
+const ItemWithMultipleDdElementsTemplate: StoryFn<DescriptionListComponent> = (
   args: DescriptionListComponent,
 ) => ({
   props: { ...args, data: multipleDDData },
@@ -288,15 +399,14 @@ const DescriptionListWithMultipleDdElementsTemplate: StoryFn<DescriptionListComp
   `,
 });
 
-export const DescriptionListWithMultipleDdElements =
-  DescriptionListWithMultipleDdElementsTemplate.bind({});
-DescriptionListWithMultipleDdElements.args = {
+export const ItemWithMultipleDdElements = ItemWithMultipleDdElementsTemplate.bind({});
+ItemWithMultipleDdElements.args = {
   variant: 'regular',
   disableGrid: false,
   serviceDefaults: false,
 };
 
-const DescriptionListWithSingleItemTemplate: StoryFn<DescriptionListComponent> = (
+const SingleListItemTemplate: StoryFn<DescriptionListComponent> = (
   args: DescriptionListComponent,
 ) => ({
   props: args,
@@ -318,8 +428,8 @@ const DescriptionListWithSingleItemTemplate: StoryFn<DescriptionListComponent> =
   `,
 });
 
-export const DescriptionListWithSingleItem = DescriptionListWithSingleItemTemplate.bind({});
-DescriptionListWithSingleItem.args = {
+export const SingleListItem = SingleListItemTemplate.bind({});
+SingleListItem.args = {
   variant: 'regular',
   disableGrid: false,
 };
