@@ -35,8 +35,11 @@
           >
             <span class="fudis-fieldset__legend__title__text"
               >{{ label
-              }}<span *ngIf="required" class="fudis-fieldset__legend__title__text__required">
-                ({{ _requiredText }})</span
+              }}<ng-container
+                *ngIf="_translationService.getTranslationsObservable() | async as translations"
+                ><span *ngIf="required" class="fudis-fieldset__legend__title__text__required">
+                  ({{ translations.REQUIRED }})</span
+                ></ng-container
               >
             </span>
             <ng-container *ngIf="tooltip">

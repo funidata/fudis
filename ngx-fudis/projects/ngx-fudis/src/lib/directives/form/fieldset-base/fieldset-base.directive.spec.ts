@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FudisIdService } from '../../../services/id/id.service';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FieldSetBaseDirective } from './fieldset-base.directive';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -51,7 +50,6 @@ class MockCheckboxGroupComponent {
 
 describe('FieldSetBaseDirective', () => {
   let idService: FudisIdService;
-  let translationService: FudisTranslationService;
   let changeDetectorRef: ChangeDetectorRef;
 
   beforeEach(() => {
@@ -67,18 +65,11 @@ describe('FieldSetBaseDirective', () => {
         GridDirective,
         MockCheckboxGroupComponent,
       ],
-      providers: [
-        FudisIdService,
-        FudisTranslationService,
-        FudisBreakpointService,
-        FudisGridService,
-        ChangeDetectorRef,
-      ],
+      providers: [FudisIdService, FudisBreakpointService, FudisGridService, ChangeDetectorRef],
       imports: [ReactiveFormsModule],
     });
 
     idService = TestBed.inject(FudisIdService);
-    translationService = TestBed.inject(FudisTranslationService);
     changeDetectorRef = TestBed.inject(ChangeDetectorRef);
   });
 
@@ -88,7 +79,6 @@ describe('FieldSetBaseDirective', () => {
     TestBed.runInInjectionContext(() => {
       const directive: FieldSetBaseDirective = new FieldSetBaseDirective(
         idService,
-        translationService,
         changeDetectorRef,
       );
 

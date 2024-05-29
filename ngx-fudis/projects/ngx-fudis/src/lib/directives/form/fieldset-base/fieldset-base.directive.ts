@@ -1,7 +1,5 @@
-import { ChangeDetectorRef, Directive, Input, Signal, effect } from '@angular/core';
+import { ChangeDetectorRef, Directive, Input } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
-import { FudisTranslationConfig } from '../../../types/miscellaneous';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisIdParent } from '../../../types/id';
 import { FormGroup } from '@angular/forms';
@@ -12,16 +10,9 @@ import { FormGroup } from '@angular/forms';
 export class FieldSetBaseDirective extends TooltipApiDirective {
   constructor(
     protected _idService: FudisIdService,
-    protected _translationService: FudisTranslationService,
     protected _changeDetectorRef: ChangeDetectorRef,
   ) {
     super();
-
-    effect(() => {
-      this._translations = this._translationService.getTranslations();
-
-      this._requiredText = this._translations().REQUIRED;
-    });
   }
 
   /**
@@ -38,16 +29,6 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
    * Additional guidance text, aligned underneath the main label legend text
    */
   @Input() helpText: string;
-
-  /**
-   * Fudis translation key for required text
-   */
-  protected _requiredText: string;
-
-  /**
-   * Basic Fudis translation keys
-   */
-  protected _translations: Signal<FudisTranslationConfig>;
 
   /**
    * To prevent ngOnChanges running before initial ngOnInit
@@ -78,7 +59,7 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   protected _reloadErrorSummaryOnLazyLoad(parentForm: boolean | undefined, group: FormGroup): void {
     if (parentForm && group.errors) {
       this._reloadErrorSummary = true;
-      this._changeDetectorRef.detectChanges();
+      //this._changeDetectorRef.detectChanges();
     }
   }
 }

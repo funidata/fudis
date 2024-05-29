@@ -41,11 +41,11 @@ export class FieldSetComponent
     @Host() @Optional() private _parentForm: FormComponent | null,
     private _errorSummaryService: FudisInternalErrorSummaryService,
     private _focusService: FudisFocusService,
+    protected _translationService: FudisTranslationService,
     _idService: FudisIdService,
-    _translationService: FudisTranslationService,
     _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_idService, _translationService, _changeDetectorRef);
+    super(_idService, _changeDetectorRef);
   }
 
   /**
