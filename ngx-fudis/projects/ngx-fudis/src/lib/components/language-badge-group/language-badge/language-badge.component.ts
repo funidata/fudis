@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   EventEmitter,
@@ -17,11 +18,13 @@ import {
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-language-badge',
   styleUrls: ['./language-badge.component.scss'],
   templateUrl: './language-badge.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LanguageBadgeComponent extends TooltipApiDirective implements OnChanges, OnInit {
   constructor(
@@ -78,7 +81,7 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
   /**
    * Label string of the badge
    */
-  protected _label: string;
+  protected _badgeLabel = new BehaviorSubject<string>('');
 
   /**
    * Internal variable for selected translation aria-label
@@ -125,14 +128,18 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
    * Define correct label for Badge
    */
   private _setLabel(): void {
+    let newLabel;
+
     if (this.selected && this.variant !== 'missing') {
-      this._label = `${this.label} ${this._selectedLabel}`;
+      newLabel = `${this.label} ${this._selectedLabel}`;
     } else if (this.selected && this.variant === 'missing') {
-      this._label = `${this.label} ${this._missingTranslation} ${this._selectedLabel}`;
+      newLabel = `${this.label} ${this._missingTranslation} ${this._selectedLabel}`;
     } else if (!this.selected && this.variant === 'missing') {
-      this._label = `${this.label} ${this._missingTranslation}`;
+      newLabel = `${this.label} ${this._missingTranslation}`;
     } else {
-      this._label = this.label;
+      newLabel = this.label;
     }
+
+    this._badgeLabel.next(newLabel);
   }
 }

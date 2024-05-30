@@ -1,15 +1,21 @@
-<section [attr.id]="_id" [attr.aria-label]="_groupLabel" class="fudis-language-badge-group">
-  <ng-container *ngFor="let _language of _languageLabels | async; let index = index">
-    <fudis-language-badge
-      [parentId]="_id"
-      [label]="_language.label"
-      (handleClick)="_updateLanguage($event)"
-      [selected]="selectedLanguage === _language.key"
-      [tooltip]="_language.label"
-      [tooltipPosition]="tooltipPosition"
-      [tooltipToggle]="tooltipToggle"
-      [language]="_language.key"
-      [variant]="languages[_language.key] ? 'standard' : 'missing'"
-    />
-  </ng-container>
-</section>
+<ng-container *ngIf="_translationService.getTranslationsObservable() | async as translations">
+  <section
+    [attr.id]="_id"
+    [attr.aria-label]="translations.LANGUAGE_BADGE.ARIA_LABEL.TRANSLATIONS"
+    class="fudis-language-badge-group"
+  >
+    <ng-container *ngFor="let _language of _languageLabels | async; let index = index">
+      <fudis-language-badge
+        [parentId]="_id"
+        [label]="_language.label"
+        (handleClick)="_updateLanguage($event)"
+        [selected]="_selectedLanguage === _language.key"
+        [tooltip]="_language.label"
+        [tooltipPosition]="tooltipPosition"
+        [tooltipToggle]="tooltipToggle"
+        [language]="_language.key"
+        [variant]="_language.variant"
+      />
+    </ng-container>
+  </section>
+</ng-container>

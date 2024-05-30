@@ -72,6 +72,11 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
   protected _id: string;
 
   /**
+   * If component has language and has sent info to parent
+   */
+  private _detailsSent: boolean;
+
+  /**
    * Main CSS class
    */
   protected _mainCssClass: BehaviorSubject<string> = new BehaviorSubject<string>(
@@ -85,21 +90,26 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
     const parsedTextContent =
       this.textContent && this.textContent.replace(/\s/g, '') !== '' ? this.textContent : null;
 
-    if (parsedTextContent) {
+    if (parsedTextContent && !this._detailsSent) {
       this._parentDlItem.addDetailsLanguage(this.lang, parsedTextContent, this._id);
+
+      this._detailsSent = true;
 
       this._hostClass = `fudis-dl-item-details-host fudis-dl-item-details-host--${this.lang}`;
     }
   }
 
   private _removeDetailsFromParent(): void {
-    this._parentDlItem.removeDetailsLanguage(this.lang, this._id);
-    this._hostClass = `fudis-dl-item-details-host`;
+    if (this._detailsSent) {
+      this._parentDlItem.removeDetailsLanguage(this.lang, this._id);
+      this._detailsSent = false;
+      this._hostClass = `fudis-dl-item-details-host`;
+    }
   }
 
   ngOnChanges(changes: FudisComponentChanges<DescriptionListItemDetailsComponent>): void {
     // If language changes, update it to parent. If language changes to undefined, remove it from parent.
-    if (!changes.lang?.firstChange && this.lang) {
+    if (!changes.lang?.firstChange && !!changes.lang?.currentValue) {
       this._removeDetailsFromParent();
       this._sendDetailsLanguageToParent();
     } else if (!changes.lang?.currentValue) {

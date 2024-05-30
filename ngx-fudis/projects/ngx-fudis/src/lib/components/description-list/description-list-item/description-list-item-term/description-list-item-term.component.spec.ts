@@ -183,13 +183,13 @@ describe('DescriptionListItemTermComponent', () => {
     beforeEach(() => {
       mockComponent.langVisible = true;
 
-      mockFixture.autoDetectChanges();
+      mockFixture.detectChanges();
     });
 
     it('should have Language Badge Group visible', () => {
       mockComponent.langVisible = false;
 
-      mockFixture.autoDetectChanges();
+      mockFixture.detectChanges();
       const allLanguageBadgeGroups = mockFixture.debugElement.queryAll(
         By.directive(LanguageBadgeGroupComponent),
       );

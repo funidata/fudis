@@ -21,10 +21,10 @@
 <ng-template #commonContent>
   <span [class]="(_mainCssClass | async) + '__text-content'">{{ textContent }}</span
   ><span [class]="(_mainCssClass | async) + '__colon'">&colon;</span>
-  <ng-container *ngIf="languages && (_parentDlItem.selectedLanguage | async)">
+  <ng-container *ngIf="_parentDlItem.getDetailsLanguageOptions() | async as options">
     <fudis-language-badge-group
-      [selectedLanguage]="(_parentDlItem.selectedLanguage | async) || 'en'"
-      [languages]="_parentLanguageOptions"
+      *ngIf="languages"
+      [options]="options"
       (handleBadgeClick)="_setSelectedLanguage($event)"
     />
   </ng-container>

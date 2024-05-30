@@ -44,7 +44,7 @@ export class DescriptionListItemComponent implements OnDestroy {
   /**
    * Storing list of available languages in Details elements
    */
-  private _detailsLanguageOptions = new BehaviorSubject<FudisLanguageBadgeContent>({});
+  private _detailsLanguageOptions = new BehaviorSubject<FudisLanguageBadgeContent | null>(null);
 
   /**
    * Selected language to pass to child components
@@ -77,7 +77,7 @@ export class DescriptionListItemComponent implements OnDestroy {
    * Called from child Details, if it has a language property
    */
   public addDetailsLanguage(lang: FudisLanguageAbbr, text: string | null, id: string): void {
-    const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions.value;
+    const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions.value || {};
 
     if (!currentContent[lang]) {
       currentContent[lang] = {};
@@ -92,7 +92,7 @@ export class DescriptionListItemComponent implements OnDestroy {
    * Called from child Details, if its language property is removed (or updated)
    */
   public removeDetailsLanguage(lang: FudisLanguageAbbr, id: string): void {
-    const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions.value;
+    const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions.value || {};
 
     if (currentContent[lang as FudisLanguageAbbr]?.[id]) {
       delete currentContent[lang]![id];
@@ -102,10 +102,14 @@ export class DescriptionListItemComponent implements OnDestroy {
       delete currentContent[lang];
     }
 
-    this._detailsLanguageOptions.next({ ...currentContent });
+    if (Object.keys(currentContent).length !== 0) {
+      this._detailsLanguageOptions.next({ ...currentContent });
+    } else {
+      this._detailsLanguageOptions.next(null);
+    }
   }
 
-  public getDetailsLanguageOptions(): BehaviorSubject<FudisLanguageBadgeContent> {
+  public getDetailsLanguageOptions(): BehaviorSubject<FudisLanguageBadgeContent | null> {
     return this._detailsLanguageOptions;
   }
 
