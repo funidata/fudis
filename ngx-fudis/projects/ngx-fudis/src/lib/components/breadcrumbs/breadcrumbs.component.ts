@@ -22,11 +22,6 @@ export class BreadcrumbsComponent {
    */
   @Input({ required: true }) label: string;
 
-  /**
-   * Prefix for aria-label from Fudis translation keys
-   */
-  protected _breadcrumbsPrefix: string;
-
   protected _id: string;
 
   /**
