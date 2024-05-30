@@ -5,11 +5,7 @@
     <fudis-icon *ngIf="variant === 'success'" [icon]="'checkmark-circle'" />
     <fudis-icon *ngIf="variant === 'info'" [icon]="'info-circle'" />
     <div class="fudis-notification__content">
-      <span
-        *ngIf="_translateService.getTranslationsObservable() | async as translations"
-        class="fudis-visually-hidden"
-        >{{ translations.ICON.ATTENTION }}:&nbsp;</span
-      >
+      <span class="fudis-visually-hidden">{{ _attentionText | async }}:&nbsp;</span>
       <ng-content />
     </div>
   </ng-container>

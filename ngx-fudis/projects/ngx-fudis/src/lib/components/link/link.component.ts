@@ -7,10 +7,10 @@ import {
   OnChanges,
   Optional,
   Output,
-  Signal,
+  effect,
 } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
-import { FudisComponentChanges, FudisTranslationConfig } from '../../types/miscellaneous';
+import { FudisComponentChanges } from '../../types/miscellaneous';
 import { LinkApiDirective } from '../../directives/link/link-api/link-api.directive';
 import { NotificationComponent } from '../notification/notification.component';
 import { BehaviorSubject } from 'rxjs';
@@ -24,13 +24,19 @@ import { BehaviorSubject } from 'rxjs';
 export class LinkComponent extends LinkApiDirective implements OnChanges {
   constructor(
     @Host() @Optional() private _parentNotification: NotificationComponent,
-    protected _translationService: FudisTranslationService,
+    private _translationService: FudisTranslationService,
   ) {
     super();
 
     if (_parentNotification) {
       this.color = 'gray-dark';
     }
+
+    effect(() => {
+      this._externalLinkAriaLabel.next(
+        this._translationService.getTranslations()().LINK.EXTERNAL_LINK,
+      );
+    });
   }
 
   /**
@@ -76,9 +82,9 @@ export class LinkComponent extends LinkApiDirective implements OnChanges {
   @Output() handleClick = new EventEmitter<Event>();
 
   /**
-   * Fudis translations
+   * Aria-label for the external link
    */
-  protected _translations: Signal<FudisTranslationConfig>;
+  protected _externalLinkAriaLabel = new BehaviorSubject<string>('');
 
   /**
    * Store parsed values of external link's title

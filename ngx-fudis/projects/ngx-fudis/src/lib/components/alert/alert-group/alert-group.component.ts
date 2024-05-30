@@ -19,6 +19,7 @@ export class AlertGroupComponent implements AfterViewInit {
   ) {
     effect(() => {
       this._alertList = this._alertService.getAlertsSignal();
+      // TODO: To Observable
       this._alertGroupLabel = this._translationService.getTranslations()().ALERT.HEADING_LABEL;
 
       this._dialogStatus = this._dialogService.getDialogOpenSignal()();

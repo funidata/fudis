@@ -1,8 +1,10 @@
-import { ChangeDetectorRef, Directive, Input } from '@angular/core';
+import { ChangeDetectorRef, Directive, Input, effect } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisIdParent } from '../../../types/id';
 import { FormGroup } from '@angular/forms';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Directive({
   selector: '[fudisFieldSetBase]',
@@ -10,9 +12,14 @@ import { FormGroup } from '@angular/forms';
 export class FieldSetBaseDirective extends TooltipApiDirective {
   constructor(
     protected _idService: FudisIdService,
+    protected _translationService: FudisTranslationService,
     protected _changeDetectorRef: ChangeDetectorRef,
   ) {
     super();
+
+    effect(() => {
+      this._requiredText.next(_translationService.getTranslations()().REQUIRED);
+    });
   }
 
   /**
@@ -29,6 +36,11 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
    * Additional guidance text, aligned underneath the main label legend text
    */
   @Input() helpText: string;
+
+  /**
+   * Fudis translation key for required text
+   */
+  protected _requiredText = new BehaviorSubject<string>('');
 
   /**
    * To prevent ngOnChanges running before initial ngOnInit

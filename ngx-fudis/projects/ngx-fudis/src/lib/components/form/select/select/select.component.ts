@@ -44,7 +44,7 @@ export class SelectComponent
     this.focusSelector = 'fudis-select-option__focusable';
 
     effect(() => {
-      this.translationOptionDisabledText = this._translations().SELECT.DISABLED;
+      this.translationOptionDisabledText = _translationService.getTranslations()().SELECT.DISABLED;
     });
   }
 

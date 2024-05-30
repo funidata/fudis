@@ -20,6 +20,7 @@ export class AlertComponent {
     private _dialogService: FudisDialogService,
   ) {
     effect(() => {
+      // TODO: To Observable
       this._closeLabel = this._translateService.getTranslations()().DIALOG.CLOSE;
     });
   }

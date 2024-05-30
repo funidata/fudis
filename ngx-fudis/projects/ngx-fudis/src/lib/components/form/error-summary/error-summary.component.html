@@ -7,10 +7,7 @@
           <div class="fudis-error-summary__errors">
             <ng-container *ngIf="helpText">
               <fudis-body-text fudisSpacing [size]="'md-regular'" [marginTop]="'xs'">
-                <span
-                  *ngIf="_translationService.getTranslationsObservable() | async as translations"
-                  class="fudis-visually-hidden"
-                  >{{ translations.ICON.ATTENTION }}:&nbsp;</span
+                <span class="fudis-visually-hidden">{{ _attentionText | async }}:&nbsp;</span
                 >{{ helpText }}</fudis-body-text
               >
             </ng-container>

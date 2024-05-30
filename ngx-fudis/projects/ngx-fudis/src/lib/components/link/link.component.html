@@ -1,6 +1,5 @@
 <ng-container *ngIf="externalLink">
   <a
-    *ngIf="_translationService.getTranslationsObservable() | async as translations"
     fudisLink
     [id]="id"
     [color]="color"
@@ -9,7 +8,7 @@
     (focus)="_handleFocus($event)"
     (blur)="_handleBlur($event)"
     (click)="_handleClick($event)"
-    attr.aria-label="{{ title ? title : externalLink }}, {{ translations.LINK.EXTERNAL_LINK }}"
+    attr.aria-label="{{ title ? title : externalLink }}, {{ _externalLinkAriaLabel | async }}"
     [href]="externalLink"
     [initialFocus]="initialFocus"
     target="_blank"

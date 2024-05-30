@@ -15,6 +15,7 @@ import { ContentDirective } from '../../content-projection/content/content.direc
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { ValidatorErrorMessageComponent } from '../../../components/form/error-message/validator-error-message/validator-error-message.component';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 @Component({
   selector: 'fudis-mock-checkbox-group-component',
@@ -50,6 +51,7 @@ class MockCheckboxGroupComponent {
 
 describe('FieldSetBaseDirective', () => {
   let idService: FudisIdService;
+  let translationService: FudisTranslationService;
   let changeDetectorRef: ChangeDetectorRef;
 
   beforeEach(() => {
@@ -65,11 +67,18 @@ describe('FieldSetBaseDirective', () => {
         GridDirective,
         MockCheckboxGroupComponent,
       ],
-      providers: [FudisIdService, FudisBreakpointService, FudisGridService, ChangeDetectorRef],
+      providers: [
+        FudisIdService,
+        FudisTranslationService,
+        FudisBreakpointService,
+        FudisGridService,
+        ChangeDetectorRef,
+      ],
       imports: [ReactiveFormsModule],
     });
 
     idService = TestBed.inject(FudisIdService);
+    translationService = TestBed.inject(FudisTranslationService);
     changeDetectorRef = TestBed.inject(ChangeDetectorRef);
   });
 
@@ -79,6 +88,7 @@ describe('FieldSetBaseDirective', () => {
     TestBed.runInInjectionContext(() => {
       const directive: FieldSetBaseDirective = new FieldSetBaseDirective(
         idService,
+        translationService,
         changeDetectorRef,
       );
 

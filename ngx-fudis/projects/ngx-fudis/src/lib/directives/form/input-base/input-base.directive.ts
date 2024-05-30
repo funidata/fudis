@@ -3,16 +3,12 @@ import {
   Input,
   EventEmitter,
   Output,
-  Signal,
-  effect,
   ViewChild,
   ElementRef,
   OnDestroy,
   ChangeDetectorRef,
 } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FudisTranslationConfig } from '../../../types/miscellaneous';
 import { FudisIdComponent } from '../../../types/id';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FormControl } from '@angular/forms';
@@ -23,16 +19,10 @@ import { Subject } from 'rxjs';
 })
 export class InputBaseDirective extends TooltipApiDirective implements OnDestroy {
   constructor(
-    protected _translationService: FudisTranslationService,
     protected _idService: FudisIdService,
     protected _changeDetectorRef: ChangeDetectorRef,
   ) {
     super();
-
-    effect(() => {
-      this._translations = _translationService.getTranslations();
-      this._requiredText = this._translations().REQUIRED;
-    });
   }
 
   /**
@@ -96,11 +86,6 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
    * To listen for input's key up event.
    */
   @Output() handleKeyUp: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
-
-  /**
-   * Basic Fudis translation keys
-   */
-  protected _translations: Signal<FudisTranslationConfig>;
 
   /**
    * Fudis translation key for required text

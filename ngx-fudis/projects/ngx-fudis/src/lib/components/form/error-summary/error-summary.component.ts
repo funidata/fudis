@@ -5,6 +5,7 @@ import {
   ElementRef,
   Input,
   ViewChild,
+  effect,
 } from '@angular/core';
 
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
@@ -16,7 +17,7 @@ import {
 } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Component({
   selector: 'fudis-error-summary',
@@ -27,7 +28,7 @@ export class ErrorSummaryComponent implements AfterViewInit {
   constructor(
     private _errorSummaryService: FudisInternalErrorSummaryService,
     private readonly _changeDetectorRef: ChangeDetectorRef,
-    protected _translationService: FudisTranslationService,
+    private _translationService: FudisTranslationService,
   ) {
     /**
      * Fetch and update current visible errors when reloadErrors() is called
@@ -43,6 +44,13 @@ export class ErrorSummaryComponent implements AfterViewInit {
       ) {
         this._updateSummaryContent(errors);
       }
+    });
+
+    /**
+     * Update translations on language change
+     */
+    effect(() => {
+      this._attentionText.next(_translationService.getTranslations()().ICON.ATTENTION);
     });
   }
 
@@ -67,6 +75,11 @@ export class ErrorSummaryComponent implements AfterViewInit {
    * Type of the clickable error link
    */
   @Input() linkType: FudisFormErrorSummaryLink = 'router';
+
+  /**
+   * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.
+   */
+  protected _attentionText = new Subject<string>();
 
   /**
    * Visible errors

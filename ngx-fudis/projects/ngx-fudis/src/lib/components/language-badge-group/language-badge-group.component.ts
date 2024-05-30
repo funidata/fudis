@@ -37,6 +37,9 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective {
 
     effect(() => {
       this._translations = _translationService.getTranslations()();
+    });
+
+    effect(() => {
       this._selectableAppLanguages = _translationService.getSelectableLanguages()();
       this._currentAppLang = _translationService.getLanguageSignal()();
 

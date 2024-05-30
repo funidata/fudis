@@ -42,7 +42,6 @@ class MockTextInputComponent {
 
 describe('InputBaseDirective', () => {
   let idService: FudisIdService;
-  let translationService: FudisTranslationService;
   let changeDetectorRef: ChangeDetectorRef;
 
   beforeEach(() => {
@@ -60,7 +59,6 @@ describe('InputBaseDirective', () => {
     });
 
     idService = TestBed.inject(FudisIdService);
-    translationService = TestBed.inject(FudisTranslationService);
     changeDetectorRef = TestBed.inject(ChangeDetectorRef);
   });
 
@@ -68,11 +66,7 @@ describe('InputBaseDirective', () => {
   describe('Directive', () => {
     it.skip('should create an instance', () => {
       TestBed.runInInjectionContext(() => {
-        const directive: InputBaseDirective = new InputBaseDirective(
-          translationService,
-          idService,
-          changeDetectorRef,
-        );
+        const directive: InputBaseDirective = new InputBaseDirective(idService, changeDetectorRef);
 
         expect(directive).toBeTruthy();
       });
@@ -81,11 +75,7 @@ describe('InputBaseDirective', () => {
     // TODO: fix this
     it.skip('should emit blur event', () => {
       TestBed.runInInjectionContext(() => {
-        const directive: InputBaseDirective = new InputBaseDirective(
-          translationService,
-          idService,
-          changeDetectorRef,
-        );
+        const directive: InputBaseDirective = new InputBaseDirective(idService, changeDetectorRef);
         const event = new FocusEvent('blur');
 
         jest.spyOn(directive.handleBlur, 'emit');
@@ -98,11 +88,7 @@ describe('InputBaseDirective', () => {
     // TODO: fix this
     it.skip('should call focusToInput', () => {
       TestBed.runInInjectionContext(() => {
-        const directive: InputBaseDirective = new InputBaseDirective(
-          translationService,
-          idService,
-          changeDetectorRef,
-        );
+        const directive: InputBaseDirective = new InputBaseDirective(idService, changeDetectorRef);
 
         jest.spyOn(directive, 'focusToInput').mockImplementation(() => {});
         directive.focusToInput();
