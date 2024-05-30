@@ -32,6 +32,10 @@ export class DescriptionListItemTermComponent {
         this._mainCssClass.next('fudis-dl-item-term__compact');
       }
     });
+
+    effect(() => {
+      this._parentLanguageOptions = _parentDlItem.getDetailsLanguageOptions()();
+    });
   }
 
   /**
@@ -47,7 +51,7 @@ export class DescriptionListItemTermComponent {
   /**
    * Available languages of sibling dt elements fetched from the parent dl-item element
    */
-  protected _parentLanguageOptions: FudisLanguageBadgeContent;
+  protected _parentLanguageOptions: FudisLanguageBadgeContent | null;
 
   /**
    * Main CSS class

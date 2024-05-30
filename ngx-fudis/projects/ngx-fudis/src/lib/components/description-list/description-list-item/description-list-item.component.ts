@@ -3,8 +3,9 @@ import {
   Component,
   ElementRef,
   Host,
-  OnDestroy,
+  Signal,
   effect,
+  signal,
 } from '@angular/core';
 import {
   FudisDescriptionListVariant,
@@ -21,7 +22,7 @@ import { BehaviorSubject } from 'rxjs';
   templateUrl: './description-list-item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DescriptionListItemComponent implements OnDestroy {
+export class DescriptionListItemComponent {
   constructor(
     private _element: ElementRef,
     private _idService: FudisIdService,
@@ -44,13 +45,12 @@ export class DescriptionListItemComponent implements OnDestroy {
   /**
    * Storing list of available languages in Details elements
    */
-  private _detailsLanguageOptions = new BehaviorSubject<FudisLanguageBadgeContent | null>(null);
+  private _detailsLanguageOptions = signal<FudisLanguageBadgeContent | null>(null);
 
   /**
    * Selected language to pass to child components
    */
-  public selectedLanguage: BehaviorSubject<FudisLanguageAbbr | null> =
-    new BehaviorSubject<FudisLanguageAbbr | null>('en');
+  private _selectedLanguage = signal<FudisLanguageAbbr | null>(null);
 
   /**
    * Id generated with Id Service
@@ -77,7 +77,7 @@ export class DescriptionListItemComponent implements OnDestroy {
    * Called from child Details, if it has a language property
    */
   public addDetailsLanguage(lang: FudisLanguageAbbr, text: string | null, id: string): void {
-    const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions.value || {};
+    const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions() || {};
 
     if (!currentContent[lang]) {
       currentContent[lang] = {};
@@ -85,14 +85,14 @@ export class DescriptionListItemComponent implements OnDestroy {
 
     currentContent[lang]![id] = text;
 
-    this._detailsLanguageOptions.next({ ...currentContent });
+    this._detailsLanguageOptions.set({ ...currentContent });
   }
 
   /**
    * Called from child Details, if its language property is removed (or updated)
    */
   public removeDetailsLanguage(lang: FudisLanguageAbbr, id: string): void {
-    const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions.value || {};
+    const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions() || {};
 
     if (currentContent[lang as FudisLanguageAbbr]?.[id]) {
       delete currentContent[lang]![id];
@@ -103,22 +103,21 @@ export class DescriptionListItemComponent implements OnDestroy {
     }
 
     if (Object.keys(currentContent).length !== 0) {
-      this._detailsLanguageOptions.next({ ...currentContent });
+      this._detailsLanguageOptions.set({ ...currentContent });
     } else {
-      this._detailsLanguageOptions.next(null);
+      this._detailsLanguageOptions.set(null);
     }
   }
 
-  public getDetailsLanguageOptions(): BehaviorSubject<FudisLanguageBadgeContent | null> {
-    return this._detailsLanguageOptions;
+  public getDetailsLanguageOptions(): Signal<FudisLanguageBadgeContent | null> {
+    return this._detailsLanguageOptions.asReadonly();
   }
 
   public setSelectedLanguage(lang: FudisLanguageAbbr | null): void {
-    this.selectedLanguage.next(lang);
+    this._selectedLanguage.set(lang);
   }
 
-  ngOnDestroy(): void {
-    this._detailsLanguageOptions.complete();
-    this.selectedLanguage.complete();
+  public getSelectedLanguage(): Signal<FudisLanguageAbbr | null> {
+    return this._selectedLanguage.asReadonly();
   }
 }

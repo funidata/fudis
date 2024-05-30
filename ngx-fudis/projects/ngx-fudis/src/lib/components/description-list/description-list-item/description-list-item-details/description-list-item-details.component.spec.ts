@@ -210,21 +210,27 @@ describe('DescriptionListItemDetailsComponent', () => {
 
   describe('Language content', () => {
     it('should have selected language visible', () => {
-      const dlWithLanguages = mockFixture.debugElement.queryAll(By.css('fudis-dl'))[2];
-      const currentLanguage = dlWithLanguages.nativeElement.querySelector(
-        '.fudis-dl-item-details__regular .fudis-dl-item-details__regular__content',
-      );
+      let dlWithLanguages: DebugElement;
 
-      expect(currentLanguage.textContent).toEqual('This is in English');
+      mockFixture.whenRenderingDone().then(() => {
+        dlWithLanguages = mockFixture.debugElement.queryAll(By.css('fudis-dl'))[2];
+        const currentLanguage = dlWithLanguages.nativeElement.querySelector(
+          '.fudis-dl-item-details__regular .fudis-dl-item-details__regular__content',
+        );
+
+        expect(currentLanguage.textContent).toEqual('This is in English');
+      });
 
       service.setLanguage('fi');
       mockFixture.detectChanges();
 
-      const changedLanguage = dlWithLanguages.nativeElement.querySelector(
-        '.fudis-dl-item-details__regular .fudis-dl-item-details__regular__content',
-      );
+      mockFixture.whenRenderingDone().then(() => {
+        const changedLanguage = dlWithLanguages.nativeElement.querySelector(
+          '.fudis-dl-item-details__regular .fudis-dl-item-details__regular__content',
+        );
 
-      expect(changedLanguage.textContent).toEqual('Tämä on suomeksi');
+        expect(changedLanguage.textContent).toEqual('Tämä on suomeksi');
+      });
     });
   });
 

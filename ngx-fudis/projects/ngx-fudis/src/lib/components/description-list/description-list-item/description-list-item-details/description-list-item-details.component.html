@@ -1,21 +1,15 @@
-<ng-container *ngIf="_parentDl.tag === 'p'">
-  <span
-    *ngIf="!lang || (lang && (_parentDlItem.selectedLanguage | async) === lang)"
-    [id]="_id"
-    [class]="_mainCssClass | async"
-  >
-    <ng-container *ngTemplateOutlet="ddContent"></ng-container>
-  </span>
-</ng-container>
+<ng-container *ngIf="!lang || (_langSelected | async)">
+  <ng-container *ngIf="_parentDl.tag === 'p'">
+    <span [id]="_id" [class]="_mainCssClass | async">
+      <ng-container *ngTemplateOutlet="ddContent"></ng-container>
+    </span>
+  </ng-container>
 
-<ng-container *ngIf="_parentDl.tag === 'dl'">
-  <dd
-    *ngIf="!lang || (lang && (_parentDlItem.selectedLanguage | async) === lang)"
-    [id]="_id"
-    [class]="_mainCssClass | async"
-  >
-    <ng-container *ngTemplateOutlet="ddContent"></ng-container>
-  </dd>
+  <ng-container *ngIf="_parentDl.tag === 'dl'">
+    <dd [id]="_id" [class]="_mainCssClass | async">
+      <ng-container *ngTemplateOutlet="ddContent"></ng-container>
+    </dd>
+  </ng-container>
 </ng-container>
 
 <ng-template #ddContent>

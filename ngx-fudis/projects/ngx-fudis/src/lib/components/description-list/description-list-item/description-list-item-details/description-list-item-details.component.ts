@@ -41,6 +41,10 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
         this._mainCssClass.next('fudis-dl-item-details__compact');
       }
     });
+
+    effect(() => {
+      this._langSelected.next(!!(this.lang && _parentDlItem.getSelectedLanguage()() === this.lang));
+    });
   }
 
   /**
@@ -67,6 +71,8 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
    * Id generated with Id Service
    */
   protected _id: string;
+
+  protected _langSelected = new BehaviorSubject<boolean>(false);
 
   /**
    * If component has language and has sent info to parent

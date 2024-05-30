@@ -206,28 +206,32 @@ describe('DescriptionListItemTermComponent', () => {
     });
 
     it('should have Language Badge Group visible if one details has lang property', () => {
-      const allLanguageBadgeGroups = mockFixture.debugElement.queryAll(
-        By.directive(LanguageBadgeGroupComponent),
-      );
+      mockFixture.whenRenderingDone().then(() => {
+        const allLanguageBadgeGroups = mockFixture.debugElement.queryAll(
+          By.directive(LanguageBadgeGroupComponent),
+        );
 
-      const allLanguageBadges = mockFixture.debugElement.queryAll(
-        By.directive(LanguageBadgeComponent),
-      );
+        const allLanguageBadges = mockFixture.debugElement.queryAll(
+          By.directive(LanguageBadgeComponent),
+        );
 
-      expect(allLanguageBadgeGroups.length).toEqual(2);
-      expect(allLanguageBadgeGroups).toBeTruthy();
-      expect(allLanguageBadges.length).toEqual(6);
+        expect(allLanguageBadgeGroups.length).toEqual(2);
+        expect(allLanguageBadgeGroups).toBeTruthy();
+        expect(allLanguageBadges.length).toEqual(6);
+      });
     });
 
     it('should remove Language badge group if dd elements with lang do not exists', () => {
-      const allLanguageBadgeGroupsBefore = mockFixture.debugElement.queryAll(
-        By.directive(LanguageBadgeGroupComponent),
-      );
+      mockFixture.whenRenderingDone().then(() => {
+        const allLanguageBadgeGroupsBefore = mockFixture.debugElement.queryAll(
+          By.directive(LanguageBadgeGroupComponent),
+        );
 
-      expect(allLanguageBadgeGroupsBefore.length).toEqual(2);
+        expect(allLanguageBadgeGroupsBefore.length).toEqual(2);
+      });
 
       mockComponent.langVisible = false;
-      mockFixture.autoDetectChanges();
+      mockFixture.detectChanges();
 
       const allLanguageBadgeGroupsAfter = mockFixture.debugElement.queryAll(
         By.directive(LanguageBadgeGroupComponent),
