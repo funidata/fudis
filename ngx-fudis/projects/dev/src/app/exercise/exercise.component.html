@@ -1,16 +1,18 @@
 <ng-container *transloco="let t">
   <div class="root-style">
     <fudis-grid [columns]="1" [marginTop]="'md'" [align]="'center'">
-      <fudis-section fudisGridItem [columns]="'1 /4'" [alignSelfX]="'stretch'" [title]="'Opiskeluoikeudet'">
+      <fudis-section [title]="'Opiskeluoikeudet'" [titleLevel]="2">
+        <ng-template fudisNotifications [type]="'section'">
+          <fudis-heading [level]="3" [size]="'lg'">Tutkintokoulutus</fudis-heading>
+        </ng-template>
       <ng-template fudisActions [type]="'section'">
-        <fudis-heading [title]="'Tutkintokoulutus'" [level]="2"></fudis-heading>
         <fudis-button [label]="'Muodosta Opiskelutodistus'" [variant]="'secondary'"></fudis-button>
       </ng-template>
       <ng-template fudisContent [type]="'section'">
         <fudis-expandable [title]="'Arkkitehtuurin koulutus'" [level]="3">
         <ng-template fudisContent [type]="'expandable'">
-          <fudis-grid [columns]="{xs: 1, md: 4}" [alignItemsY]="'start'">
-            <fudis-section fudisGridItem [title]="'Perustiedot'" [titleLevel]="4" [columns]="2" [titleSize]="'md'">
+          <fudis-grid [columns]="{ md: 'inputMd inputLg'}" [alignItemsY]="'start'">
+            <fudis-section fudisGridItem [title]="'Perustiedot'" [titleLevel]="4" [titleSize]="'md'">
               <ng-template fudisContent [type]="'section'">
               <fudis-dl>
                   <fudis-dl-item>
@@ -50,11 +52,11 @@
               </fudis-expandable>
               </ng-template>
             </fudis-section>
-            <fudis-grid-item [columns]="2">
+            <fudis-grid-item>
               <fudis-section [title]="'Opiskeluoikeudentila'" [titleLevel]="4" [titleSize]="'md'">
                 <ng-template fudisContent [type]="'section'">
                   <fudis-body-text>Passiivinen</fudis-body-text>
-                  <fudis-expandable [variant]="'lite'" [level]="3" [title]="'Näytä kaikki opiskeluoikeuden tilat'">
+                  <fudis-expandable [variant]="'lite'" [level]="5" [title]="'Näytä kaikki opiskeluoikeuden tilat'">
                     <ng-template fudisContent [type]="'expandable'">
                     <fudis-body-text>"Tässä on taulukko"</fudis-body-text>
                     </ng-template>
@@ -71,7 +73,7 @@
                   </fudis-dl>
                 </ng-template>
               </fudis-section>
-              <fudis-section fudisSpacing [marginTop]="'lg'" [title]="'Läsnäolo'" [titleLevel]="4" [titleSize]="'md'">
+              <fudis-section [marginTop]="'lg'" [title]="'Läsnäolo'" [titleLevel]="4" [titleSize]="'md'">
                 <ng-template fudisContent [type]="'section'">
                   <fudis-section [title]="'2024 - 2025'" [titleLevel]="5" [titleSize]="'sm'">
                     <ng-template fudisContent [type]="'section'">
