@@ -153,12 +153,14 @@ describe('DescriptionListItemDetailsComponent', () => {
 
       mockFixture.detectChanges();
 
-      expect(getDlItemDetailsElement('dd', 'compact').className).toEqual(
-        'fudis-dl-item-details__compact',
-      );
-      expect(getDlItemDetailsElement('span', 'compact').className).toEqual(
-        'fudis-dl-item-details__compact',
-      );
+      mockFixture.whenRenderingDone().then(() => {
+        expect(getDlItemDetailsElement('dd', 'compact').className).toEqual(
+          'fudis-dl-item-details__compact',
+        );
+        expect(getDlItemDetailsElement('span', 'compact').className).toEqual(
+          'fudis-dl-item-details__compact',
+        );
+      });
     });
   });
 

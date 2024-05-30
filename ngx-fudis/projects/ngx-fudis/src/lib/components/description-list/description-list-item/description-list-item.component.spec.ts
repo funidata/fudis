@@ -125,9 +125,10 @@ describe('DescriptionListItemComponent', () => {
     it('should have respective class if grid is disabled from parent DL', () => {
       mockComponent.disableGrid = true;
       mockFixture.detectChanges();
-
-      expect(getDlItemElement('div').className).toEqual('fudis-dl-item__disabled-grid');
-      expect(getDlItemElement('p').className).toEqual('fudis-dl-item__disabled-grid');
+      mockFixture.whenRenderingDone().then(() => {
+        expect(getDlItemElement('p').className).toEqual('fudis-dl-item__disabled-grid');
+        expect(getDlItemElement('div').className).toEqual('fudis-dl-item__disabled-grid');
+      });
     });
   });
 

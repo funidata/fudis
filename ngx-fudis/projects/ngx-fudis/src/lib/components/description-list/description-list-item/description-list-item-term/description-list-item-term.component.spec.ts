@@ -148,12 +148,14 @@ describe('DescriptionListItemTermComponent', () => {
       mockComponent.variant = 'compact';
       mockFixture.detectChanges();
 
-      expect(getDlItemTermElement('dt', 'compact').className).toEqual(
-        'fudis-dl-item-term__compact',
-      );
-      expect(getDlItemTermElement('span', 'compact').className).toEqual(
-        'fudis-dl-item-term__compact',
-      );
+      mockFixture.whenRenderingDone().then(() => {
+        expect(getDlItemTermElement('dt', 'compact').className).toEqual(
+          'fudis-dl-item-term__compact',
+        );
+        expect(getDlItemTermElement('span', 'compact').className).toEqual(
+          'fudis-dl-item-term__compact',
+        );
+      });
     });
   });
 

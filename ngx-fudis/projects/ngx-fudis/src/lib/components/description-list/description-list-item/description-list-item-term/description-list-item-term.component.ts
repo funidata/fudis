@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, Host, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Host, Input, effect } from '@angular/core';
 import { FudisLanguageAbbr, FudisLanguageBadgeContent } from '../../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { DescriptionListComponent } from '../../description-list.component';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-dt, fudis-description-list-term',
@@ -26,16 +25,13 @@ export class DescriptionListItemTermComponent {
       this._parentDlItem.id,
     );
 
-    _parentDl
-      .getVariant()
-      .pipe(takeUntilDestroyed())
-      .subscribe((variant) => {
-        if (variant === 'regular') {
-          this._mainCssClass.next('fudis-dl-item-term__regular');
-        } else {
-          this._mainCssClass.next('fudis-dl-item-term__compact');
-        }
-      });
+    effect(() => {
+      if (_parentDl.getVariant()() === 'regular') {
+        this._mainCssClass.next('fudis-dl-item-term__regular');
+      } else {
+        this._mainCssClass.next('fudis-dl-item-term__compact');
+      }
+    });
   }
 
   /**

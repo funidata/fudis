@@ -4,7 +4,8 @@ import {
   OnInit,
   OnChanges,
   ChangeDetectionStrategy,
-  OnDestroy,
+  signal,
+  Signal,
 } from '@angular/core';
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
 import { FudisComponentChanges, FudisDescriptionListVariant } from '../../types/miscellaneous';
@@ -18,10 +19,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./description-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DescriptionListComponent
-  extends GridApiDirective
-  implements OnInit, OnChanges, OnDestroy
-{
+export class DescriptionListComponent extends GridApiDirective implements OnInit, OnChanges {
   constructor(private _idService: FudisIdService) {
     super();
     this.id = this._idService.getNewGrandParentId('description-list');
@@ -58,14 +56,14 @@ export class DescriptionListComponent
   protected _classList = new BehaviorSubject<string[]>([]);
 
   /**
-   * Observable for variant
+   * Signal for variant
    */
-  private _dlVariant = new BehaviorSubject<FudisDescriptionListVariant>('regular');
+  private _dlVariant = signal<FudisDescriptionListVariant>('regular');
 
   /**
-   * Observable for listening disableGrid Input, used in DL Item.
+   * Signal for listening disableGrid Input, used in DL Item.
    */
-  private _disabledGrid = new BehaviorSubject<boolean>(false);
+  private _disabledGrid = signal<boolean>(false);
 
   ngOnInit(): void {
     this._setClasses();
@@ -76,29 +74,28 @@ export class DescriptionListComponent
       changes.variant?.currentValue &&
       changes.variant?.currentValue !== changes.variant?.previousValue
     ) {
-      this._dlVariant.next(changes.variant.currentValue);
+      this._dlVariant.set(changes.variant.currentValue);
     }
 
     if (changes.disableGrid?.currentValue !== changes.disableGrid?.previousValue) {
       this._setClasses();
-
       const disableGrid = !!changes.disableGrid?.currentValue;
-      this._disabledGrid.next(disableGrid);
+      this._disabledGrid.set(disableGrid);
     }
   }
 
   /**
-   * Observable for disabledGrid value
+   * Read only signal for variant
    */
-  public getDisabledGridStatus(): BehaviorSubject<boolean> {
-    return this._disabledGrid;
+  public getVariant(): Signal<FudisDescriptionListVariant> {
+    return this._dlVariant.asReadonly();
   }
 
   /**
-   * Observable for variant
+   * Read only signal for disabledGrid value
    */
-  public getVariant(): BehaviorSubject<FudisDescriptionListVariant> {
-    return this._dlVariant;
+  public getDisabledGridStatus(): Signal<boolean> {
+    return this._disabledGrid.asReadonly();
   }
 
   /**
@@ -116,10 +113,5 @@ export class DescriptionListComponent
     const combined = this.classes ? cssClasses.concat(this.classes) : cssClasses;
 
     this._classList.next(combined);
-  }
-
-  ngOnDestroy(): void {
-    this._dlVariant.complete();
-    this._disabledGrid.complete();
   }
 }

@@ -7,13 +7,13 @@ import {
   Input,
   OnChanges,
   OnDestroy,
+  effect,
 } from '@angular/core';
 import { FudisComponentChanges, FudisLanguageAbbr } from '../../../../types/miscellaneous';
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { DescriptionListComponent } from '../../description-list.component';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { BehaviorSubject } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-dd, fudis-description-list-details',
@@ -34,16 +34,13 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
       this._parentDlItem.id,
     );
 
-    _parentDl
-      .getVariant()
-      .pipe(takeUntilDestroyed())
-      .subscribe((variant) => {
-        if (variant === 'regular') {
-          this._mainCssClass.next('fudis-dl-item-details__regular');
-        } else {
-          this._mainCssClass.next('fudis-dl-item-details__compact');
-        }
-      });
+    effect(() => {
+      if (_parentDl.getVariant()() === 'regular') {
+        this._mainCssClass.next('fudis-dl-item-details__regular');
+      } else {
+        this._mainCssClass.next('fudis-dl-item-details__compact');
+      }
+    });
   }
 
   /**

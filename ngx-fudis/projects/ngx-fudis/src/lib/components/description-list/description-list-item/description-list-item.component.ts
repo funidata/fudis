@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Host, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Host,
+  OnDestroy,
+  effect,
+} from '@angular/core';
 import {
   FudisDescriptionListVariant,
   FudisLanguageAbbr,
@@ -7,7 +14,6 @@ import {
 import { FudisIdService } from '../../../services/id/id.service';
 import { DescriptionListComponent } from '../description-list.component';
 import { BehaviorSubject } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-dl-item, fudis-description-list-item',
@@ -26,19 +32,13 @@ export class DescriptionListItemComponent implements OnDestroy {
     /**
      * Listens to parent's changes and updates CSS classes.
      */
-    this._parentDl
-      .getVariant()
-      .pipe(takeUntilDestroyed())
-      .subscribe((value) => {
-        this._setClasses(_parentDl.getDisabledGridStatus().value, value);
-      });
 
-    this._parentDl
-      .getDisabledGridStatus()
-      .pipe(takeUntilDestroyed())
-      .subscribe((value) => {
-        this._setClasses(value, _parentDl.getVariant().value);
-      });
+    effect(() => {
+      const variant = _parentDl.getVariant()();
+      const disabled = _parentDl.getDisabledGridStatus()();
+
+      this._setClasses(disabled, variant);
+    });
   }
 
   /**
