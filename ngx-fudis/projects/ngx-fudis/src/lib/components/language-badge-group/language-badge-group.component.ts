@@ -9,6 +9,7 @@ import {
 import {
   FudisLanguageAbbr,
   FudisLanguageBadgeContent,
+  FudisTranslationConfig,
   FudisTranslationLanguageBadgeAriaLabel,
 } from '../../types/miscellaneous';
 import { FudisTranslationService } from '../../services/translation/translation.service';
@@ -35,8 +36,9 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective {
     this._id = _idService.getNewParentId('language-badge-group');
 
     effect(() => {
-      this._selectableAppLanguages = this._translationService.getSelectableLanguages()();
-      this._currentAppLang = this._translationService.getLanguageSignal()();
+      this._translations = _translationService.getTranslations()();
+      this._selectableAppLanguages = _translationService.getSelectableLanguages()();
+      this._currentAppLang = _translationService.getLanguageSignal()();
 
       if (this._languageOptions) {
         this._setLanguageOptions(this._languageOptions);
@@ -83,6 +85,11 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective {
   protected _id: string;
 
   /**
+   * Translation object from service
+   */
+  protected _translations: FudisTranslationConfig;
+
+  /**
    * Internal variable for matching languages and label texts
    */
   protected _languageLabels: BehaviorSubject<LanguageLabelArray> =
@@ -104,7 +111,7 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective {
   private _getLabel(language: FudisLanguageAbbr): string {
     const keyValue: string = language.toUpperCase();
 
-    const ariaLabels = this._translationService.getTranslations()().LANGUAGE_BADGE.ARIA_LABEL;
+    const ariaLabels = this._translations.LANGUAGE_BADGE.ARIA_LABEL;
 
     return ariaLabels[keyValue as keyof FudisTranslationLanguageBadgeAriaLabel];
   }

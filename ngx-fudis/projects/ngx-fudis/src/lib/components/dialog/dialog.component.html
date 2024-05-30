@@ -1,12 +1,11 @@
 <!-- <fudis-alert-group [insideDialog]="true" /> -->
 <div class="fudis-dialog fudis-dialog__size__{{ size }}" [attr.id]="_id">
   <fudis-button
-    *ngIf="_translateService.getTranslationsObservable() | async as translations"
     fudisDialogClose
     class="fudis-dialog__close"
     [class.fudis-dialog__close__absolute]="closeButtonPositionAbsolute"
     [attr.id]="_id + '-close'"
-    [label]="translations.DIALOG.CLOSE"
+    [label]="_closeLabel"
     [labelHidden]="true"
     [size]="'icon-only'"
     [icon]="'ring-close-fill'"
