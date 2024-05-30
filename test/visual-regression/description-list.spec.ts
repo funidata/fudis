@@ -175,7 +175,7 @@ test("description list compact with single item and grid disabled", async ({ pag
 });
 
 // Description List With Languages
-test.only("description list regular with languages", async ({ page }) => {
+test("description list regular with languages", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=variant:regular&id=components-description-list--with-language-badges&viewMode=story",
   );

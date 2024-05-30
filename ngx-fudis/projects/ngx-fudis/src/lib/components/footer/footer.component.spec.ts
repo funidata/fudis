@@ -112,7 +112,7 @@ describe('FooterComponent', () => {
       });
     });
     describe('Footer after lang update', () => {
-      it.only('should have updated language', () => {
+      it('should have updated language', () => {
         component.translationService.setLanguage('fi');
         fixture.detectChanges();
 
