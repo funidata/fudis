@@ -1,7 +1,4 @@
-<footer
-  class="fudis-footer"
-  *ngIf="_translationService.getTranslationsObservable() | async as translations"
->
+<footer class="fudis-footer">
   <fudis-grid
     [serviceDefaults]="false"
     [columns]="_columns"
@@ -17,7 +14,7 @@
         class="fudis-footer__item__logo"
         target="_blank"
         rel="noopener noreferrer"
-        [attr.aria-label]="translations.IMAGE.FUNIDATA_LOGO + ' ' + translations.LINK.EXTERNAL_LINK"
+        [attr.aria-label]="(_funidataLogoAltText | async) + ' ' + (_externalLinkHelpText | async)"
         ><svg
           xmlns:xlink="http://www.w3.org/1999/xlink"
           width="127"

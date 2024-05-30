@@ -14,6 +14,7 @@ import { LinkComponent } from '../link/link.component';
 import { IconComponent } from '../icon/icon.component';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 import { LinkDirective } from '../../directives/link/link.directive';
+import { FudisTranslationService } from '../../services/translation/translation.service';
 
 @Component({
   selector: 'fudis-mock-footer',
@@ -28,7 +29,9 @@ import { LinkDirective } from '../../directives/link/link.directive';
     </ng-template>
   </fudis-footer>`,
 })
-class MockFooterComponent {}
+class MockFooterComponent {
+  constructor(public translationService: FudisTranslationService) {}
+}
 
 describe('FooterComponent', () => {
   let component: MockFooterComponent;
@@ -47,14 +50,14 @@ describe('FooterComponent', () => {
         MockFooterComponent,
         MockComponent(IconComponent),
       ],
-      providers: [FudisGridService, FudisBreakpointService],
+      providers: [FudisGridService, FudisBreakpointService, FudisTranslationService],
     }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MockFooterComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixture.autoDetectChanges();
   });
 
   function getFooterGridElem() {
@@ -105,6 +108,19 @@ describe('FooterComponent', () => {
         expect(anchorElem.children.length).toEqual(1);
         expect(anchorElem.getAttribute('aria-label')).toEqual(
           'Funidata homepage (opens in a new tab)',
+        );
+      });
+    });
+    describe('Footer after lang update', () => {
+      it.only('should have updated language', () => {
+        component.translationService.setLanguage('fi');
+        fixture.detectChanges();
+
+        const firstGridItemElem = getFooterGridElem().nativeElement.children[0];
+        const anchorElem = firstGridItemElem.querySelector('.fudis-footer__item__logo');
+
+        expect(anchorElem.getAttribute('aria-label')).toEqual(
+          'Funidatan kotisivut (aukeaa uuteen välilehteen)',
         );
       });
     });

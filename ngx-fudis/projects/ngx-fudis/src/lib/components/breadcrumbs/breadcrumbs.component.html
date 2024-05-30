@@ -1,6 +1,6 @@
 <nav
-  *ngIf="_translationService.getTranslationsObservable() | async as translations"
-  [attr.aria-label]="translations.BREADCRUMBS.PREFIX + ': ' + label"
+  *ngIf="_breadcrumbsPrefix"
+  [attr.aria-label]="(_breadcrumbsPrefix | async) + ': ' + label"
   [attr.id]="_id"
 >
   <ul class="fudis-breadcrumbs">
