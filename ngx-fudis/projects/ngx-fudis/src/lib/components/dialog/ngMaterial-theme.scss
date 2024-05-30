@@ -1,6 +1,7 @@
 /* stylelint-disable selector-max-compound-selectors */
 /* stylelint-disable declaration-no-important */
 /* stylelint-disable declaration-property-value-disallowed-list */
+/* stylelint-disable max-nesting-depth */
 /* stylelint-disable unit-disallowed-list */
 /* stylelint-disable selector-max-class */
 /* stylelint-disable selector-class-pattern */
@@ -8,6 +9,7 @@
 /* stylelint-disable scss/selector-no-redundant-nesting-selector */
 
 @use "../../foundations/colors/tokens.scss" as colors;
+@use "../../foundations/colors/mixins.scss" as colorMixins;
 @use "../../foundations/borders/mixins.scss" as borders;
 @use "../../foundations/focus/mixins.scss" as focus;
 @use "../../foundations/breakpoints/mixins.scss" as breakpoints;
@@ -30,58 +32,63 @@
   & mat-dialog-container.mat-mdc-dialog-container {
     padding: 0;
 
-    & .mat-mdc-dialog-title {
-      margin: spacing.$spacing-xxs 0 spacing.$spacing-sm 0;
-      padding: 0;
-      pointer-events: none;
+    & .mat-mdc-dialog-surface {
+      border-radius: 0;
+      box-shadow: none;
 
-      &::before {
-        display: none;
+      & .mat-mdc-dialog-title {
+        margin: spacing.$spacing-xxs 0 spacing.$spacing-sm 0;
+        padding: 0;
+        pointer-events: none;
+
+        &::before {
+          display: none;
+        }
+
+        &:focus-visible {
+          @include focus.focus-generic;
+        }
+
+        &:focus-visible.fudis-form__header__title__dialog {
+          outline-offset: -2px;
+        }
       }
 
-      &:focus-visible {
-        @include focus.focus-generic;
+      & .mat-mdc-dialog-content {
+        @include utilities.box-reset;
+
+        &:focus-visible,
+        &:focus {
+          @include focus.focus-generic;
+        }
+
+        // Checkbox and radio-button elements need small padding if form is inside dialog
+        // Otherwise focus and invalid styles won't show properly as dialog padding is overlapping them
+        & fudis-checkbox,
+        & fudis-radio-button {
+          padding-left: spacing.$spacing-xxs;
+        }
       }
 
-      &:focus-visible.fudis-form__header__title__dialog {
-        outline-offset: -2px;
-      }
-    }
+      & .mat-mdc-dialog-actions {
+        align-items: flex-end;
+        margin-top: spacing.$spacing-xs;
+        margin-bottom: 0;
+        padding: 0;
+        min-height: initial;
 
-    & .mat-mdc-dialog-content {
-      @include utilities.box-reset;
-
-      &:focus-visible,
-      &:focus {
-        @include focus.focus-generic;
-      }
-
-      // Checkbox and radio-button elements need small padding if form is inside dialog
-      // Otherwise focus and invalid styles won't show properly as dialog padding is overlapping them
-      & fudis-checkbox,
-      & fudis-radio-button {
-        padding-left: spacing.$spacing-xxs;
-      }
-    }
-
-    & .mat-mdc-dialog-actions {
-      align-items: flex-end;
-      margin-top: spacing.$spacing-xs;
-      margin-bottom: 0;
-      padding: 0;
-      min-height: initial;
-
-      & fudis-button {
-        &:not(:first-of-type) {
-          margin-top: spacing.$spacing-xs;
-          margin-left: spacing.$spacing-xs;
+        & fudis-button {
+          &:not(:first-of-type) {
+            margin-top: spacing.$spacing-xs;
+            margin-left: spacing.$spacing-xs;
+          }
         }
       }
     }
   }
 
   @include breakpoints.breakpoint("sm") {
-    @include borders.border("2px", "solid", "gray-dark");
+    @include borders.border("1px", "solid", "gray-dark");
 
     max-width: 90vw !important;
 
@@ -96,5 +103,13 @@
     &:has(.fudis-dialog__size__xl) {
       max-width: 98vw !important;
     }
+  }
+}
+
+.fudis-dialog-backdrop {
+  @include colorMixins.bg-color("white");
+
+  &.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+    opacity: 0.95 !important;
   }
 }
