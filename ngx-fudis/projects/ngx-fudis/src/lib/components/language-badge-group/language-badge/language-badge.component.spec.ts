@@ -28,10 +28,6 @@ describe('LanguageBadgeComponent', () => {
     component.language = 'en';
     component.variant = 'standard';
     component.parentId = 'fudis-language-badge-group-1';
-    component.label = 'This is test label';
-    component.ngOnChanges({
-      label: { firstChange: true, currentValue: 'This is test label', previousValue: '' },
-    });
     fixture.detectChanges();
   });
 
@@ -70,7 +66,9 @@ describe('LanguageBadgeComponent', () => {
       fixture.detectChanges();
       const label = fixture.debugElement.query(By.css('.fudis-language-badge'));
 
-      expect(label.nativeElement.getAttribute('aria-label')).toEqual('This is test label');
+      expect(label.nativeElement.getAttribute('aria-label')).toEqual(
+        'Change translation to English',
+      );
     });
 
     it('should have given label and selected text matching to aria-label', () => {
@@ -82,7 +80,7 @@ describe('LanguageBadgeComponent', () => {
       const LanguageBadgeLabel = fixture.debugElement.query(By.css('.fudis-language-badge'));
 
       expect(LanguageBadgeLabel.nativeElement.getAttribute('aria-label')).toEqual(
-        'This is test label (Selected)',
+        'Change translation to English (Selected)',
       );
     });
 
@@ -95,13 +93,14 @@ describe('LanguageBadgeComponent', () => {
       const LanguageBadgeLabel = fixture.debugElement.query(By.css('.fudis-language-badge'));
 
       expect(LanguageBadgeLabel.nativeElement.getAttribute('aria-label')).toEqual(
-        'This is test label (Missing translation)',
+        'Change translation to English (Missing translation)',
       );
     });
   });
 
   describe('Interaction', () => {
     it('should emit output when clicked', () => {
+      fixture.detectChanges();
       jest.spyOn(component.handleClick, 'emit');
 
       const button = getElement(fixture, '.fudis-language-badge') as HTMLButtonElement;

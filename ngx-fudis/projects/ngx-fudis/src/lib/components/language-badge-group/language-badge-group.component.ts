@@ -10,7 +10,6 @@ import {
   FudisLanguageAbbr,
   FudisLanguageBadgeContent,
   FudisTranslationConfig,
-  FudisTranslationLanguageBadgeAriaLabel,
 } from '../../types/miscellaneous';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
@@ -18,7 +17,7 @@ import { FudisIdService } from '../../services/id/id.service';
 
 import { BehaviorSubject } from 'rxjs';
 
-type LanguageLabel = { key: FudisLanguageAbbr; label: string; variant: 'standard' | 'missing' };
+type LanguageLabel = { key: FudisLanguageAbbr; variant: 'standard' | 'missing' };
 
 type LanguageLabelArray = LanguageLabel[];
 @Component({
@@ -109,17 +108,6 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective {
   }
 
   /**
-   * Fetches proper translated label for corresponding language
-   */
-  private _getLabel(language: FudisLanguageAbbr): string {
-    const keyValue: string = language.toUpperCase();
-
-    const ariaLabels = this._translations.LANGUAGE_BADGE.ARIA_LABEL;
-
-    return ariaLabels[keyValue as keyof FudisTranslationLanguageBadgeAriaLabel];
-  }
-
-  /**
    * Creates an array to loop in template of wanted Language Badges
    */
   private _setLanguageOptions(availableContent: FudisLanguageBadgeContent): void {
@@ -130,7 +118,6 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective {
 
       const newItem: LanguageLabel = {
         key: language,
-        label: this._getLabel(language),
         variant: variant,
       };
       tempLangLabels.push(newItem);

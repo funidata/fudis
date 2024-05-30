@@ -6,10 +6,8 @@
   <ng-container *ngFor="let _language of _languageLabels | async; let index = index">
     <fudis-language-badge
       [parentId]="_id"
-      [label]="_language.label"
       (handleClick)="_updateLanguage($event)"
       [selected]="_selectedLanguage === _language.key"
-      [tooltip]="_language.label"
       [tooltipPosition]="tooltipPosition"
       [tooltipToggle]="tooltipToggle"
       [language]="_language.key"

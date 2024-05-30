@@ -9,7 +9,11 @@ import {
   Output,
   effect,
 } from '@angular/core';
-import { FudisComponentChanges, FudisLanguageAbbr } from '../../../types/miscellaneous';
+import {
+  FudisComponentChanges,
+  FudisLanguageAbbr,
+  FudisTranslationLanguageBadgeAriaLabel,
+} from '../../../types/miscellaneous';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
@@ -32,8 +36,9 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
     effect(() => {
       const translations = this._translationService.getTranslations()();
 
-      this._selectedLabel = translations.LANGUAGE_BADGE.ARIA_LABEL.SELECTED;
+      this._selectedTranslation = translations.LANGUAGE_BADGE.ARIA_LABEL.SELECTED;
       this._missingTranslation = translations.LANGUAGE_BADGE.ARIA_LABEL.MISSING_TRANSLATION;
+      this._labelTranslations = translations.LANGUAGE_BADGE.ARIA_LABEL;
 
       this._setLabel();
     });
@@ -43,11 +48,6 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
    * Language abbreviation for Language Badge
    */
   @Input({ required: true }) language: FudisLanguageAbbr;
-
-  /*
-   * Mandatory Language Badge label
-   */
-  @Input({ required: true }) label: string;
 
   /*
    * Parent group's id
@@ -82,12 +82,14 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
   /**
    * Internal variable for selected translation aria-label
    */
-  protected _selectedLabel: string;
+  protected _selectedTranslation: string;
 
   /**
    * Internal variable for missing translation aria-label
    */
   protected _missingTranslation: string;
+
+  protected _labelTranslations: FudisTranslationLanguageBadgeAriaLabel;
 
   /**
    * Generated HTML id
@@ -102,9 +104,11 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
     if (
       changes.selected?.currentValue !== changes.selected?.previousValue ||
       changes.variant?.currentValue !== changes.variant?.previousValue ||
-      changes.label?.currentValue !== changes.label?.previousValue
+      changes.language?.currentValue !== changes.language?.previousValue
     ) {
-      this._setLabel();
+      if (this._labelTranslations && this._selectedTranslation && this._missingTranslation) {
+        this._setLabel();
+      }
     }
   }
 
@@ -121,14 +125,18 @@ export class LanguageBadgeComponent extends TooltipApiDirective implements OnCha
   private _setLabel(): void {
     let newLabel;
 
+    const keyValue: string = this.language.toUpperCase();
+
+    const label = this._labelTranslations[keyValue as keyof FudisTranslationLanguageBadgeAriaLabel];
+
     if (this.selected && this.variant !== 'missing') {
-      newLabel = `${this.label} ${this._selectedLabel}`;
+      newLabel = `${label} ${this._selectedTranslation}`;
     } else if (this.selected && this.variant === 'missing') {
-      newLabel = `${this.label} ${this._missingTranslation} ${this._selectedLabel}`;
+      newLabel = `${label} ${this._missingTranslation} ${this._selectedTranslation}`;
     } else if (!this.selected && this.variant === 'missing') {
-      newLabel = `${this.label} ${this._missingTranslation}`;
+      newLabel = `${label} ${this._missingTranslation}`;
     } else {
-      newLabel = this.label;
+      newLabel = label;
     }
 
     this._badgeLabel.next(newLabel);
