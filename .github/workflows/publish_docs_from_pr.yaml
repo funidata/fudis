@@ -11,11 +11,26 @@ jobs:
   publish:
     name: Publish docs to AWS
     runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: ngx-fudis
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: eu-north-1
+      - name: Install dependencies
+        run: npm ci
+      - name: Build docs
+        run: npm run build -- storybook
+      - name: Copy docs to S3 bucket
+        run: aws s3 sync static s3://${{ secrets.AWS_S3_BUCKET_NAME }}/test
