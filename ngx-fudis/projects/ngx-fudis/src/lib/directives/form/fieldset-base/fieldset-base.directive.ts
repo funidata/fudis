@@ -71,7 +71,7 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   protected _reloadErrorSummaryOnLazyLoad(parentForm: boolean | undefined, group: FormGroup): void {
     if (parentForm && group.errors) {
       this._reloadErrorSummary = true;
-      //this._changeDetectorRef.detectChanges();
+      this._changeDetectorRef.detectChanges();
     }
   }
 }
