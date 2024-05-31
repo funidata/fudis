@@ -31,7 +31,7 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
     );
 
     effect(() => {
-      if (this._parent.autocomplete) {
+      if (this._parent.variant !== 'dropdown') {
         this._isOptionTyped(this._parent.getAutocompleteFilterText()());
       }
     });
@@ -43,18 +43,12 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
   protected _controlValueSubscription: Subscription;
 
   ngOnInit(): void {
-    if (this._parent.autocomplete) {
+    if (this._parent.variant !== 'dropdown') {
       this._isOptionVisible(this._parent.getAutocompleteFilterText()());
       this._isOptionTyped(this._parent.getAutocompleteFilterText()());
     } else {
       this._updateVisibilityToParents(true);
     }
-
-    this._updateVisibilityFromControlUpdate();
-
-    this._controlValueSubscription = this._parentSelect.control.valueChanges.subscribe(() => {
-      this._updateVisibilityFromControlUpdate();
-    });
   }
 
   ngOnDestroy(): void {
@@ -93,15 +87,6 @@ export class SelectOptionComponent extends SelectOptionBaseDirective implements 
         };
         this._parentSelect.handleSelectionChange(selectedOption, true);
       }
-    }
-  }
-
-  /**
-   * Update select option visibility
-   */
-  private _updateVisibilityFromControlUpdate(): void {
-    if (this._parentSelect.control.value?.value === this.data.value) {
-      this._parentSelect.noResultsFound = false;
     }
   }
 }

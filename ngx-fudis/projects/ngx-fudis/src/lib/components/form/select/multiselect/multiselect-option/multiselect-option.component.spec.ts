@@ -17,6 +17,8 @@ import { FudisIdService } from '../../../../../services/id/id.service';
 import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
 import { getElement } from '../../../../../utilities/tests/utilities';
 import { defaultOptions } from '../../common/mock_data';
+import { SelectIconsComponent } from '../../common/select-icons/select-icons.component';
+import { ButtonComponent } from '../../../../button/button.component';
 
 @Component({
   selector: 'fudis-multiselect-mock',
@@ -57,6 +59,9 @@ describe('MultiselectOptionComponent', () => {
         SelectOptionComponent,
         SelectGroupComponent,
         SelectDropdownComponent,
+        SelectIconsComponent,
+        IconComponent,
+        ButtonComponent,
         ContentDirective,
         GuidanceComponent,
         IconComponent,
@@ -73,14 +78,6 @@ describe('MultiselectOptionComponent', () => {
 
   function setMultiSelectDropdownOpen() {
     componentMock.selectEl.openDropdown();
-    fixtureMock.detectChanges();
-  }
-
-  function initializeFormControlWithMultipleValues() {
-    componentMock.control = new FormControl<FudisSelectOption<object>[]>([
-      defaultOptions[4],
-      defaultOptions[0],
-    ]);
     fixtureMock.detectChanges();
   }
 
@@ -105,7 +102,10 @@ describe('MultiselectOptionComponent', () => {
     });
 
     it('should add value to control with already existing values when another option is selected', () => {
-      initializeFormControlWithMultipleValues();
+      componentMock.control.patchValue([defaultOptions[4], defaultOptions[0]]);
+
+      fixtureMock.detectChanges();
+
       setMultiSelectDropdownOpen();
 
       const options = fixtureMock.debugElement.queryAll(By.css('fudis-multiselect-option'));
@@ -174,7 +174,7 @@ describe('MultiselectOptionComponent', () => {
 
       const options = fixtureMock.debugElement.queryAll(By.css('.fudis-multiselect-option'));
       const expectedInputClasses =
-        'fudis-multiselect-option__label__checkbox__input fudis-multiselect-option__focusable';
+        'fudis-multiselect-option__label__checkbox__input fudis-select-option__focusable';
       const inputClassArray: string[] = [];
 
       options.forEach((option) => {

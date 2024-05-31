@@ -12,7 +12,7 @@ Most notable common API feature is grouping options and choosing if component is
 **List of Contents**
 
 - [Basic Form Component Attributes](#basic-form-component-attributes)
-- [Autocomplete Features](#autocomplete-features)
+- [Variants with Autocomplete Features](#variants-with-autocomplete-features)
 - [Adding Options](#adding-options)
 - [Grouping Options](#grouping-options)
 
@@ -74,24 +74,35 @@ It is recommended to use Fudis Validators with Fudis form components. See the fu
 
 If a custom validation is required, read [how to add Error message](/docs/components-form-error-message--documentation).
 
-## Autocomplete Features
+## Variants with Autocomplete Features
 
-### Autocomplete Boolean
+Both Select and Multiselect have three variants:
 
-When `autocomplete` is set to `true`, the input field of the component changes to a text input, where user can start typing. Dropdown list of options is filtered and only shows visible those options, where filter text is included in option's label.
+- dropdown:
+  - Default basic select dropdown
+  - Opens on focus
+  - Chevron icon is visible
+- autocompleteDropdown:
+  - The input field of the component changes to a text input, where user can type to filter selectable results by their visible label
+  - Opens on focus
+  - Chevron icon is visible
+- autocompleteType
+  - Similar to autocompleteDropdown
+  - User must type 3 letters before any selectable results are shown
+  - Initially a search icon is visible and after typing 3 letters, it changes to a button which can be used to clear the typed text
 
-### Autocomplete Clear Button Boolean
+### Selection Clear Button Boolean
 
-By default `autocompleteClearButton` is set to boolean `true`. When `true`, autocomplete input will display a close icon button. This button is used to clear and empty the filter text string in the input. With Select Component this clear button will also set Form Control's value to `null`.
+By default `selectionClearButton` is set to boolean `true`. Whenever user has made a valid selection from the options, the Clear button can be clicked to clear the selection. This will set the component's `FormControl` to `null`.
 
-When `autocompleteClearButton` is set to `false`, the select with autocomplete works very similarly as select without autocomplete: dropdown options will instantly open up when user clicks or focuses to the input.
+When `selectionClearButton` is set to `false`, the clear button is not visible.
 
 ### Example Usage
 
 ```
 <fudis-select
-  [autocomplete]="true"
-  [autocompleteClearButton]="false"
+  [variant]="autocompleteDropdown"
+  [selectionClearButton]="false"
   ...
 >
 ...

@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { action } from '@storybook/addon-actions';
-import readme from './readme.mdx';
+import readme from './select-option.mdx';
 import { SelectOptionComponent } from './select-option.component';
 import { selectCommonExclude } from '../../../../../utilities/storybook';
 

@@ -19,16 +19,18 @@ import { SelectBaseDirective } from '../select-base/select-base.directive';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { getAllElements } from '../../../../../utilities/tests/utilities';
 import { By } from '@angular/platform-browser';
+import { SelectIconsComponent } from '../select-icons/select-icons.component';
+import { ButtonComponent } from '../../../../button/button.component';
 
 @Component({
   selector: 'fudis-mock-select-option-base-directive',
   template: `<fudis-select
     #selectElem
     [label]="'Test Label'"
-    [autocomplete]="true"
+    [variant]="'autocompleteDropdown'"
     [placeholder]="'Test placeholder'"
     [control]="control"
-    [autocompleteClearButton]="false"
+    [selectionClearButton]="false"
     [size]="'md'"
   >
     <ng-template fudisContent type="select-options">
@@ -66,6 +68,8 @@ describe('SelectOptionBaseDirective', () => {
         SelectOptionComponent,
         SelectGroupComponent,
         SelectDropdownComponent,
+        SelectIconsComponent,
+        ButtonComponent,
         MockComponent,
         SelectAutocompleteComponent,
         GuidanceComponent,
@@ -113,7 +117,7 @@ describe('SelectOptionBaseDirective', () => {
     });
 
     it('should filter correct options for given letter input', () => {
-      const input = fixture.debugElement.query(By.css('.fudis-select-autocomplete__input'));
+      const input = fixture.debugElement.query(By.css('.fudis-select-autocomplete'));
       const el = input.nativeElement;
 
       el.value = 'p';

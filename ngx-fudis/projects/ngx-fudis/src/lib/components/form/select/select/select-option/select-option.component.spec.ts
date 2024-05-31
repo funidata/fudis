@@ -17,6 +17,8 @@ import { FudisSelectOption } from '../../../../../types/forms';
 import { SelectAutocompleteComponent } from '../../common/autocomplete/autocomplete.component';
 import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
 import { By } from '@angular/platform-browser';
+import { SelectIconsComponent } from '../../common/select-icons/select-icons.component';
+import { ButtonComponent } from '../../../../button/button.component';
 
 @Component({
   selector: 'fudis-mock-container',
@@ -59,6 +61,8 @@ describe('SelectOptionComponent', () => {
         MockContainerComponent,
         SelectAutocompleteComponent,
         GuidanceComponent,
+        SelectIconsComponent,
+        ButtonComponent,
         IconComponent,
         LabelComponent,
         BodyTextComponent,

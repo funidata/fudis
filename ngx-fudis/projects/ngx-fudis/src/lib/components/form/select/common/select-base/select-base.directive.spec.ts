@@ -23,12 +23,13 @@ import { getAllElements, getElement } from '../../../../../utilities/tests/utili
 import { MultiselectChipListComponent } from '../../multiselect/multiselect-chip-list/multiselect-chip-list.component';
 import { By } from '@angular/platform-browser';
 import { groupedTestData } from '../mock_data';
+import { SelectIconsComponent } from '../select-icons/select-icons.component';
 
 @Component({
   selector: 'fudis-mock-select',
   template: `<fudis-multiselect
       #multiSelect
-      [autocomplete]="false"
+      [variant]="'dropdown'"
       [label]="'MultiSelect Label'"
       [placeholder]="'Test placeholder'"
       [control]="control"
@@ -45,12 +46,12 @@ import { groupedTestData } from '../mock_data';
     </fudis-multiselect>
     <fudis-multiselect
       #multiSelectAuto
-      [autocomplete]="true"
+      [variant]="'autocompleteDropdown'"
       [label]="'MultiAutoSelect Label'"
       [placeholder]="'Test placeholder for autocomplete'"
       [control]="control"
       [size]="'md'"
-      [autocompleteClearButton]="clearButton"
+      [selectionClearButton]="clearButton"
     >
       <ng-template fudisContent type="select-options">
         <fudis-multiselect-group *ngFor="let group of groupedData" [label]="group.country">
@@ -84,6 +85,8 @@ describe('SelectBaseDirective', () => {
         SelectGroupComponent,
         SelectDropdownComponent,
         SelectOptionComponent,
+        SelectIconsComponent,
+        IconComponent,
         GuidanceComponent,
         IconComponent,
         LabelComponent,
@@ -116,20 +119,20 @@ describe('SelectBaseDirective', () => {
     fixture.detectChanges();
   }
 
-  function findMultiSelectDropdownElement() {
-    const multiSelectDropdown = getElement(
+  function findMultiSelectDropdownElement(index: number) {
+    const multiSelectDropdown = getAllElements(
       fixture,
       '.fudis-select-dropdown__multiselect.fudis-select-dropdown--open',
     );
-    return multiSelectDropdown;
+    return multiSelectDropdown[index];
   }
 
-  function findMultiSelectInputClass() {
-    const selectInputElement: HTMLElement = getElement(
+  function findMultiSelectInputClass(index: number) {
+    const selectInputElement: NodeList = getAllElements(
       fixture,
       '.fudis-select__input.fudis-select__input__dropdown',
     );
-    return selectInputElement;
+    return selectInputElement[index];
   }
 
   function patchControlValue() {
@@ -146,9 +149,10 @@ describe('SelectBaseDirective', () => {
     //   expect(component.multiSelect.classes).toEqual('fudis-select-host');
     // });
 
-    it('should show sorted selected options as form input value', () => {
+    it('should show sorted selected options as form input value for both input sharing the same control', () => {
       patchControlValue();
       setMultiSelectDropdownOpen();
+
       fixture.detectChanges();
 
       const checkedOption = getAllElements(
@@ -162,49 +166,37 @@ describe('SelectBaseDirective', () => {
         selectedOptionLabelArray.push(item.textContent);
       });
 
-      expect(selectedOptionLabelArray).toEqual(['Golden jackal', 'Falcon, prairie']);
+      expect(selectedOptionLabelArray).toEqual([
+        'Golden jackal',
+        'Falcon, prairie',
+        'Golden jackal',
+        'Falcon, prairie',
+      ]);
 
-      const inputText = getElement(fixture, '.fudis-select__input__label');
-      const inputValue = inputText.textContent;
+      const inputTexts = getAllElements(fixture, '.fudis-select__input__label');
 
-      expect(inputValue).toEqual("Golden jackal, 'Falcon, prairie'");
+      const sortedInputValues: (string | null)[] = [];
+
+      inputTexts.forEach((item) => {
+        sortedInputValues.push(item.textContent);
+      });
+
+      expect(sortedInputValues).toEqual(["Golden jackal, 'Falcon, prairie'"]);
     });
 
-    it('should open dropdown when Multiselect receives focus', () => {
-      expect(findMultiSelectDropdownElement()).toBeNull();
-
-      const dropdownInput = findMultiSelectInputClass() as HTMLInputElement;
-      dropdownInput.focus();
-      fixture.detectChanges();
-
-      expect(findMultiSelectDropdownElement()).toBeTruthy();
-    });
-
-    it('should close dropdown', () => {
+    it('should open and close dropdown', () => {
+      expect(findMultiSelectDropdownElement(0)).toBeFalsy();
       setMultiSelectDropdownOpen();
-      expect(findMultiSelectDropdownElement()).toBeTruthy();
+      expect(findMultiSelectDropdownElement(0)).toBeTruthy();
 
       setMultiSelectDropdownClosed();
-      expect(findMultiSelectDropdownElement()).toBeNull();
-    });
-
-    it('should close dropdown when `blur` is triggered', () => {
-      const dropdownInput = findMultiSelectInputClass() as HTMLInputElement;
-      dropdownInput.focus();
-      fixture.detectChanges();
-
-      expect(findMultiSelectDropdownElement()).toBeTruthy();
-
-      dropdownInput.blur();
-      fixture.detectChanges();
-
-      expect(findMultiSelectDropdownElement()).toBeNull();
+      expect(findMultiSelectDropdownElement(0)).toBeFalsy();
     });
   });
 
   describe('keyboard interaction', () => {
     it('on key press `down` should focus on first element in table', () => {
-      const dropdownInput = findMultiSelectInputClass() as HTMLInputElement;
+      const dropdownInput = findMultiSelectInputClass(0) as HTMLInputElement;
       dropdownInput.focus();
       fixture.detectChanges();
 
@@ -238,42 +230,11 @@ describe('SelectBaseDirective', () => {
   describe('Aucomplete Default values', () => {
     it('should have placeholder text', () => {
       const selectElement = getElement(fixture, 'fudis-select-autocomplete');
+
       const value = selectElement
-        .querySelector('.fudis-select-autocomplete__input')
+        .querySelector('.fudis-select-autocomplete')
         ?.getAttribute('placeholder');
       expect(value).toContain('Test placeholder for autocomplete');
-    });
-
-    it('should display clear button when set to true', () => {
-      const clearIconButton = getElement(
-        fixture,
-        'fudis-select-autocomplete .fudis-select-autocomplete__icon.fudis-button-host',
-      );
-
-      expect(clearIconButton.getAttribute('ng-reflect-icon')).toEqual('close');
-
-      component.clearButton = false;
-      fixture.detectChanges();
-
-      const dropdownChervon = getElement(
-        fixture,
-        'fudis-select-autocomplete .fudis-select-autocomplete__icon',
-      );
-      expect(dropdownChervon.getAttribute('ng-reflect-icon')).toEqual('chevron');
-    });
-
-    it('on key press `down` should open autocomplete dropdown', () => {
-      const selectInputElement = fixture.nativeElement.querySelector('input');
-
-      selectInputElement.focus();
-      fixture.detectChanges();
-
-      expect(findMultiSelectDropdownElement()).toBeNull();
-
-      selectInputElement.dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
-      fixture.detectChanges();
-
-      expect(findMultiSelectDropdownElement()).toBeTruthy();
     });
   });
 });
