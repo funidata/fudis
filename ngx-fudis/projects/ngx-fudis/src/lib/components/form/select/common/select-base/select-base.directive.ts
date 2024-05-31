@@ -9,7 +9,6 @@ import {
   Inject,
   Input,
   OnChanges,
-  OnDestroy,
   Output,
   Signal,
   ViewChild,
@@ -31,13 +30,13 @@ import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { SelectComponent } from '../../select/select.component';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
 import { hasRequiredValidator } from '../../../../../utilities/form/getValidators';
-import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 import { DOCUMENT } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive({
   selector: '[fudisSelectBase]',
 })
-export class SelectBaseDirective extends InputBaseDirective implements OnDestroy, OnChanges {
+export class SelectBaseDirective extends InputBaseDirective implements OnChanges {
   constructor(
     @Inject(DOCUMENT) protected _document: Document,
     protected _focusService: FudisFocusService,
@@ -226,7 +225,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
         this._updateSelectionFromControlValue();
       }
 
-      this.control.valueChanges.pipe(takeUntil(this._destroyed)).subscribe(() => {
+      this.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
         if (!this._controlValueChangedInternally) {
           this._updateSelectionFromControlValue();
         }
@@ -426,7 +425,10 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
         value,
       );
       (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value = value;
-      this._autocompleteFilterText.set('');
+
+      // TODO: check if below is needed, if yes, change it observable.
+
+      //this._autocompleteFilterText.set('');
     } else {
       this._dropdownSelectionLabelText = value;
     }
