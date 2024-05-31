@@ -1,11 +1,12 @@
 name: Publish documentation from PR
 
 on:
-  pull_request:
-    types:
-      - opened
-      - reopened
-      - synchronize
+  # Must be run for pushes to associate deployment with PR. Otherise docs link is not shown.
+  push:
+    # Required to avoid triggering on automatic release tags.
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onpushbranchestagsbranches-ignoretags-ignore
+    branches-ignore:
+      - main
 
 jobs:
   publish:
@@ -20,7 +21,7 @@ jobs:
         id: deployment
         with:
           step: start
-          env: pr-${{ github.event.number }}
+          env: Documentation for branch ${{ github.ref_name }}
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Set up Node.js
@@ -38,7 +39,7 @@ jobs:
       - name: Build docs
         run: npm run build -- storybook
       - name: Copy docs to S3 bucket
-        run: aws s3 sync static s3://${{ secrets.AWS_S3_BUCKET_NAME }}/pr/${{ github.event.number }}
+        run: aws s3 sync static s3://${{ secrets.AWS_S3_BUCKET_NAME }}/branch/${{ github.ref_name }}
       - name: Finish Deployment
         uses: bobheadxi/deployments@v1
         if: always()
@@ -46,5 +47,5 @@ jobs:
           step: finish
           status: ${{ job.status }}
           env: ${{ steps.deployment.outputs.env }}
-          env_url: https://fudis.funidata.fi/pr/${{ github.event.number }}/index.html
+          env_url: https://fudis.funidata.fi/branch/${{ github.ref_name }}/index.html
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
