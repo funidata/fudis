@@ -25,14 +25,14 @@ export class MultiselectChipListComponent {
   /**
    * Output for removed chip index in selectedItems
    */
-  @Output() handleClick = new EventEmitter<number>();
+  @Output() handleClick = new EventEmitter<FudisSelectOption<object>>();
 
   /**
    * Focuses to the sibling and emits clicked index
    * @param index clicked index
    */
-  protected _clickChip(index: number) {
-    this.handleClick.emit(index);
+  protected _clickChip(clickedOption: FudisSelectOption<object>, index: number) {
+    this.handleClick.emit(clickedOption);
 
     setTimeout(() => {
       if (index === 0 && this._chipListRef.nativeElement.children[0]) {

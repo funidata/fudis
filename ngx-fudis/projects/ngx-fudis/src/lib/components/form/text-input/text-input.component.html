@@ -3,7 +3,7 @@
     [for]="id"
     [text]="label"
     [id]="id + '-label'"
-    [requiredText]="_required ? _requiredText : undefined"
+    [required]="_required"
     [tooltip]="tooltip"
     [tooltipPosition]="tooltipPosition"
     [tooltipToggle]="tooltipToggle"
@@ -26,8 +26,8 @@
     [attr.type]="type"
     [attr.aria-describedby]="id + '_guidance'"
     [attr.required]="_required ? true : null"
-    [attr.aria-disabled]="disabled"
-    [readonly]="disabled"
+    [attr.aria-disabled]="control.disabled || disabled"
+    [readonly]="control.disabled || disabled"
   />
   <fudis-guidance
     *ngIf="!disableGuidance"

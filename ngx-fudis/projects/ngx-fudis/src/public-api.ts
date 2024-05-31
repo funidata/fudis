@@ -15,7 +15,7 @@ export { BreadcrumbsItemComponent } from './lib/components/breadcrumbs/breadcrum
 export { ButtonComponent } from './lib/components/button/button.component';
 export { CheckboxComponent } from './lib/components/form/checkbox-group/checkbox/checkbox.component';
 export { CheckboxGroupComponent } from './lib/components/form/checkbox-group/checkbox-group.component';
-// export { DatepickerComponent } from './lib/components/form/date/datepicker/datepicker.component';
+export { DatepickerComponent } from './lib/components/form/date/datepicker/datepicker.component';
 // export { DateRangeComponent } from './lib/components/form/date/date-range/date-range.component';
 export {
   ContentDirective,
@@ -61,14 +61,14 @@ export { HeadingComponent } from './lib/components/typography/heading/heading.co
 export { IconComponent } from './lib/components/icon/icon.component';
 export { LinkComponent } from './lib/components/link/link.component';
 export { LinkDirective } from './lib/directives/link/link.directive';
-// export { MultiselectComponent } from './lib/components/form/select/multiselect/multiselect.component';
-// export { MultiselectOptionComponent } from './lib/components/form/select/multiselect/multiselect-option/multiselect-option.component';
+export { MultiselectComponent } from './lib/components/form/select/multiselect/multiselect.component';
+export { MultiselectOptionComponent } from './lib/components/form/select/multiselect/multiselect-option/multiselect-option.component';
 export { NotificationsDirective } from './lib/directives/content-projection/notifications/notifications.directive';
 export { NotificationComponent } from './lib/components/notification/notification.component';
 export { SectionComponent } from './lib/components/section/section.component';
-// export { SelectComponent } from './lib/components/form/select/select/select.component';
-// export { SelectGroupComponent } from './lib/components/form/select/common/select-group/select-group.component';
-// export { SelectOptionComponent } from './lib/components/form/select/select/select-option/select-option.component';
+export { SelectComponent } from './lib/components/form/select/select/select.component';
+export { SelectGroupComponent } from './lib/components/form/select/common/select-group/select-group.component';
+export { SelectOptionComponent } from './lib/components/form/select/select/select-option/select-option.component';
 export { SpacingDirective } from './lib/directives/spacing/spacing.directive';
 export { TextAreaComponent } from './lib/components/form/text-area/text-area.component';
 export { TextInputComponent } from './lib/components/form/text-input/text-input.component';

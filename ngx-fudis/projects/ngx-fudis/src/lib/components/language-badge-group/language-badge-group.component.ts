@@ -1,68 +1,85 @@
-import { Component, OnInit, EventEmitter, Output, Input, Signal, effect } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  Input,
+  effect,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import {
   FudisLanguageAbbr,
   FudisLanguageBadgeContent,
   FudisTranslationConfig,
-  FudisTranslationLanguageBadgeAriaLabel,
 } from '../../types/miscellaneous';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisIdService } from '../../services/id/id.service';
 
+import { BehaviorSubject } from 'rxjs';
+
+type LanguageLabel = { key: FudisLanguageAbbr; variant: 'standard' | 'missing' };
+
+type LanguageLabelArray = LanguageLabel[];
 @Component({
   selector: 'fudis-language-badge-group',
   templateUrl: './language-badge-group.component.html',
   styleUrls: ['./language-badge-group.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LanguageBadgeGroupComponent extends TooltipApiDirective implements OnInit {
+export class LanguageBadgeGroupComponent extends TooltipApiDirective {
   constructor(
-    private _translationService: FudisTranslationService,
+    protected _translationService: FudisTranslationService,
     private _idService: FudisIdService,
   ) {
     super();
     this._id = _idService.getNewParentId('language-badge-group');
+
     effect(() => {
-      this._languageOptions = _translationService.getSelectableLanguages();
-      this._translations = _translationService.getTranslations();
-      this._groupLabel = this._translations().LANGUAGE_BADGE.ARIA_LABEL.TRANSLATIONS;
-      this._setLanguageOptions();
+      this._translations = _translationService.getTranslations()();
+    });
+
+    effect(() => {
+      this._selectableAppLanguages = _translationService.getSelectableLanguages()();
+      this._currentAppLang = _translationService.getLanguageSignal()();
+
+      if (this._languageOptions) {
+        this._setLanguageOptions(this._languageOptions);
+        this._determineSelectedBadge(this._languageOptions);
+      }
     });
   }
 
   /**
-   * Selected language
-   */
-  @Input({ required: true }) selectedLanguage: FudisLanguageAbbr;
-
-  /**
    * Required language options for Language Badge Group
    */
-  @Input({ required: true }) languages: FudisLanguageBadgeContent;
+  @Input({ required: true }) set options(value: FudisLanguageBadgeContent) {
+    this._languageOptions = value;
+
+    if (this._selectableAppLanguages && this._currentAppLang) {
+      this._setLanguageOptions(value);
+      this._determineSelectedBadge(value);
+    }
+  }
 
   /**
    * Output Language abbreviation of clicked Badge
    */
-  @Output() handleBadgeClick = new EventEmitter<FudisLanguageAbbr>();
+  @Output() handleBadgeClick = new EventEmitter<FudisLanguageAbbr | null>();
 
   /**
-   * Config Signal to determine which Language Badges are wanted to show. By default ['fi','sv','ev'].
+   * App language from service
    */
-  protected _languageOptions: Signal<FudisLanguageAbbr[]>;
+  private _currentAppLang: FudisLanguageAbbr;
 
   /**
-   * Fudis translations
+   * App configured selectable languages from service
    */
-  protected _translations: Signal<FudisTranslationConfig>;
+  private _selectableAppLanguages: FudisLanguageAbbr[];
 
   /**
-   * Aria-label for Language Badge Group
+   * Available languages and content
    */
-  protected _groupLabel: string;
-
-  /**
-   * Label of language badge
-   */
-  protected _label: string;
+  protected _languageOptions: FudisLanguageBadgeContent;
 
   /**
    * Generated HTML id for the group
@@ -70,42 +87,79 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective implements 
   protected _id: string;
 
   /**
+   * Translation object from service
+   */
+  protected _translations: FudisTranslationConfig;
+
+  /**
    * Internal variable for matching languages and label texts
    */
-  protected _languageLabels: { key: FudisLanguageAbbr; label: string }[] = [];
+  protected _languageLabels: BehaviorSubject<LanguageLabelArray> =
+    new BehaviorSubject<LanguageLabelArray>([]);
 
-  ngOnInit(): void {
-    this._setLanguageOptions();
-  }
+  protected _selectedLanguage: FudisLanguageAbbr | null = null;
 
   /**
    * Set selected language and emits clicked language
    */
-  protected _updateLanguage(value: FudisLanguageAbbr) {
-    this.selectedLanguage = value;
+  protected _updateLanguage(value: FudisLanguageAbbr | null) {
+    this._selectedLanguage = value;
     this.handleBadgeClick.emit(value);
-  }
-
-  /**
-   * Fetches proper translated label for corresponding language
-   */
-  private _getLabel(language: FudisLanguageAbbr): string {
-    const keyValue: string = language.toUpperCase();
-
-    return this._translations().LANGUAGE_BADGE.ARIA_LABEL[
-      keyValue as keyof FudisTranslationLanguageBadgeAriaLabel
-    ];
   }
 
   /**
    * Creates an array to loop in template of wanted Language Badges
    */
-  private _setLanguageOptions(): void {
-    this._languageLabels = [];
+  private _setLanguageOptions(availableContent: FudisLanguageBadgeContent): void {
+    const tempLangLabels: LanguageLabelArray = [];
 
-    this._languageOptions().forEach((language) => {
-      const newItem = { key: language, label: this._getLabel(language) };
-      this._languageLabels.push(newItem);
+    this._selectableAppLanguages.forEach((language) => {
+      const variant = availableContent[language] ? 'standard' : 'missing';
+
+      const newItem: LanguageLabel = {
+        key: language,
+        variant: variant,
+      };
+      tempLangLabels.push(newItem);
     });
+
+    this._languageLabels.next(tempLangLabels);
+  }
+
+  /**
+   *
+   */
+  private _determineSelectedBadge(options: FudisLanguageBadgeContent): void {
+    let determinedLanguage: FudisLanguageAbbr | null;
+
+    if (
+      options[this._currentAppLang] &&
+      Object.keys(options[this._currentAppLang]!).length !== 0 &&
+      this._selectableAppLanguages.includes(this._currentAppLang)
+    ) {
+      determinedLanguage = this._currentAppLang;
+    } else {
+      const firstAvailable = this._selectableAppLanguages.find((lang) => {
+        const possibleOption = options[lang];
+
+        let idWithContent;
+
+        if (possibleOption) {
+          idWithContent = Object.keys(possibleOption).some((itemId) => {
+            return possibleOption[itemId] !== null;
+          });
+        }
+
+        return idWithContent;
+      });
+
+      if (firstAvailable) {
+        determinedLanguage = firstAvailable as FudisLanguageAbbr;
+      } else {
+        determinedLanguage = null;
+      }
+    }
+
+    this._updateLanguage(determinedLanguage);
   }
 }

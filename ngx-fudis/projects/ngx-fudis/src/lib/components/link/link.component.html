@@ -8,37 +8,39 @@
     (focus)="_handleFocus($event)"
     (blur)="_handleBlur($event)"
     (click)="_handleClick($event)"
-    attr.aria-label="{{ title ? title : externalLink }}, {{ _externalLinkAriaLabel }}"
+    attr.aria-label="{{ title ? title : externalLink }}, {{ _externalLinkAriaLabel | async }}"
     [href]="externalLink"
     [initialFocus]="initialFocus"
     target="_blank"
     rel="noopener noreferrer"
   >
     <ng-container *ngIf="!title">
-      <span class="fudis-link__external__icon-wrapper">
-        {{ externalLink }}
-        <span class="fudis-link__external__icon">
+      <span class="fudis-link__external__icon-wrapper"
+        >{{ externalLink
+        }}<span class="fudis-link__external__icon">
           <fudis-icon [icon]="'new-tab'" [color]="color" />
         </span>
       </span>
     </ng-container>
-    <ng-container *ngIf="title">
-      <ng-container *ngIf="_externalLinkTitleParsed.length > 1">
-        {{ _externalLinkTitleParsed[0] }}
-        <span class="fudis-link__external__icon-wrapper">
-          {{ _externalLinkTitleParsed[1] }}
-          <span class="fudis-link__external__icon">
-            <fudis-icon [icon]="'new-tab'" [color]="color" />
+    <ng-container *ngIf="_externalLinkTitleParsed | async as parsedTitle">
+      <ng-container *ngIf="title">
+        <ng-container *ngIf="parsedTitle.length > 1"
+          >{{ parsedTitle[0] }}
+          <span class="fudis-link__external__icon-wrapper"
+            >{{ parsedTitle[1]
+            }}<span class="fudis-link__external__icon">
+              <fudis-icon [icon]="'new-tab'" [color]="color" />
+            </span>
           </span>
-        </span>
-      </ng-container>
-      <ng-container *ngIf="_externalLinkTitleParsed.length === 1">
-        <span class="fudis-link__external__icon-wrapper">
-          {{ _externalLinkTitleParsed[0] }}
-          <span class="fudis-link__external__icon">
-            <fudis-icon [icon]="'new-tab'" [color]="color" />
+        </ng-container>
+        <ng-container *ngIf="parsedTitle.length === 1">
+          <span class="fudis-link__external__icon-wrapper"
+            >{{ parsedTitle[0]
+            }}<span class="fudis-link__external__icon">
+              <fudis-icon [icon]="'new-tab'" [color]="color" />
+            </span>
           </span>
-        </span>
+        </ng-container>
       </ng-container>
     </ng-container>
   </a>
@@ -56,9 +58,8 @@
     [routerLink]="link"
     [fragment]="fragmentId"
     [initialFocus]="initialFocus"
+    >{{ title ? title : link }}</a
   >
-    {{ title ? title : link }}
-  </a>
 </ng-container>
 <ng-container *ngIf="href && !link && !externalLink">
   <a
@@ -72,7 +73,6 @@
     (click)="_handleClick($event)"
     [href]="href"
     [initialFocus]="initialFocus"
+    >{{ title ? title : href }}</a
   >
-    {{ title ? title : href }}
-  </a>
 </ng-container>

@@ -13,7 +13,7 @@ import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
 import { SelectOptionComponent } from '../../select/select-option/select-option.component';
-import { getAllElements, getTrimmedTextContent } from '../../../../../utilities/tests/utilities';
+import { getAllElements } from '../../../../../utilities/tests/utilities';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
 import { FudisSelectOption } from '../../../../../types/forms';
 import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.component';
@@ -21,6 +21,7 @@ import { ButtonComponent } from '../../../../button/button.component';
 import { By } from '@angular/platform-browser';
 import { MultiselectOptionComponent } from '../../multiselect/multiselect-option/multiselect-option.component';
 import { groupedTestData } from '../mock_data';
+import { SelectIconsComponent } from '../select-icons/select-icons.component';
 
 @Component({
   selector: 'fudis-mock-select',
@@ -39,7 +40,7 @@ import { groupedTestData } from '../mock_data';
     </fudis-select>
     <fudis-multiselect
       #multiSelect
-      [autocomplete]="true"
+      [variant]="'autocompleteDropdown'"
       [label]="'Test Label'"
       [control]="control"
     >
@@ -73,6 +74,7 @@ describe('SelectGroupComponent', () => {
         SelectGroupComponent,
         SelectDropdownComponent,
         SelectOptionComponent,
+        SelectIconsComponent,
         GuidanceComponent,
         IconComponent,
         LabelComponent,
@@ -106,7 +108,7 @@ describe('SelectGroupComponent', () => {
   }
 
   function updateMultiSelectValue() {
-    const input = fixture.debugElement.query(By.css('.fudis-select-autocomplete__input'));
+    const input = fixture.debugElement.query(By.css('.fudis-select-autocomplete'));
     const el = input.nativeElement;
 
     el.value = 'g';
@@ -120,11 +122,10 @@ describe('SelectGroupComponent', () => {
 
       const groupLabels = getAllElements(fixture, 'fudis-select-group .fudis-select-group__label');
 
-      const groupLabelsArray: string[] = [];
+      const groupLabelsArray: (string | null)[] = [];
 
       groupLabels.forEach((label) => {
-        const filteredLabels = getTrimmedTextContent(label as HTMLElement);
-        groupLabelsArray.push(filteredLabels);
+        groupLabelsArray.push(label.textContent);
       });
 
       expect(groupLabelsArray).toEqual(['Netherlands', 'Brazil', 'China']);
@@ -169,10 +170,10 @@ describe('SelectGroupComponent', () => {
       allGroups.forEach((group, index) => {
         const options = (group as HTMLDivElement).querySelectorAll('.fudis-select-option__label');
 
-        const singleGroupLabels: string[] = [];
+        const singleGroupLabels: (string | null)[] = [];
 
         options.forEach((singleOption) => {
-          singleGroupLabels.push(getTrimmedTextContent(singleOption as HTMLElement));
+          singleGroupLabels.push(singleOption.textContent);
         });
 
         expect(singleGroupLabels.length).toEqual(3);
@@ -195,11 +196,10 @@ describe('SelectGroupComponent', () => {
 
       expect(visibleOptions.length).toEqual(2);
 
-      const optionsArray: string[] = [];
+      const optionsArray: (string | null)[] = [];
 
       visibleOptions.forEach((item) => {
-        const filteredContent = getTrimmedTextContent(item as HTMLElement);
-        optionsArray.push(filteredContent);
+        optionsArray.push(item.textContent);
       });
 
       expect(optionsArray).toEqual(['Golden jackal', 'Small Indian mongoose']);
@@ -217,11 +217,10 @@ describe('SelectGroupComponent', () => {
 
       expect(hiddenGroups.length).toEqual(1);
 
-      const groupsArray: string[] = [];
+      const groupsArray: (string | null)[] = [];
 
       hiddenGroups.forEach((item) => {
-        const filteredContent = getTrimmedTextContent(item as HTMLElement);
-        groupsArray.push(filteredContent);
+        groupsArray.push(item.textContent);
       });
 
       expect(groupsArray).toEqual(['China']);

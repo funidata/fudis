@@ -1,10 +1,10 @@
 import {
-  AfterContentInit,
   AfterViewInit,
   ChangeDetectorRef,
   Component,
   EventEmitter,
   Host,
+  Inject,
   Input,
   OnInit,
   Optional,
@@ -22,30 +22,28 @@ import { SelectBaseDirective } from '../common/select-base/select-base.directive
 import { FudisSelectOption } from '../../../../types/forms';
 import { joinInputValues, sortValues } from '../common/selectUtilities';
 import { FormComponent } from '../../form/form.component';
-import { takeUntil } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'fudis-multiselect',
   templateUrl: './multiselect.component.html',
   styleUrls: ['../select/select.component.scss'],
 })
-export class MultiselectComponent
-  extends SelectBaseDirective
-  implements OnInit, AfterContentInit, AfterViewInit
-{
+export class MultiselectComponent extends SelectBaseDirective implements OnInit, AfterViewInit {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
-    _idService: FudisIdService,
+    @Inject(DOCUMENT) _document: Document,
+    private _cdr: ChangeDetectorRef,
     _translationService: FudisTranslationService,
+    _idService: FudisIdService,
     _focusService: FudisFocusService,
     _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_focusService, _translationService, _idService, _changeDetectorRef);
-
-    this.focusSelector = 'fudis-multiselect-option__focusable';
+    super(_document, _focusService, _translationService, _idService, _changeDetectorRef);
 
     effect(() => {
-      this._translationRemoveItem = this._translations().SELECT.MULTISELECT.REMOVE_ITEM;
+      this._translationRemoveItem =
+        _translationService.getTranslations()().SELECT.MULTISELECT.REMOVE_ITEM;
     });
   }
 
@@ -62,9 +60,8 @@ export class MultiselectComponent
   /**
    * Value output event on selection change
    */
-  @Output() selectionUpdate: EventEmitter<FudisSelectOption<object>[] | null> = new EventEmitter<
-    FudisSelectOption<object>[] | null
-  >();
+  @Output() override selectionUpdate: EventEmitter<FudisSelectOption<object>[] | null> =
+    new EventEmitter<FudisSelectOption<object>[] | null>();
 
   /**
    * Internal translated text to indicate deleting item chip aria-label
@@ -79,9 +76,11 @@ export class MultiselectComponent
   /**
    * Signal for dropdown options to listen when either Application updates its control value or user clicks (removes) selection chip
    */
-  private _sortedSelectedOptionsSignal: WritableSignal<FudisSelectOption<object>[]> = signal<
+  private _selectedOptionsSignal: WritableSignal<FudisSelectOption<object>[]> = signal<
     FudisSelectOption<object>[]
   >([]);
+
+  private _registeredOptions: FudisSelectOption<object>[] = [];
 
   /**
    * Set component's id and subscribe to value changes for form control coming from application
@@ -89,20 +88,7 @@ export class MultiselectComponent
   ngOnInit(): void {
     this._setParentId('multiselect');
 
-    this.control.valueChanges.pipe(takeUntil(this._destroyed)).subscribe(() => {
-      if (!this.controlValueChangedInternally) {
-        this._updateMultiselectionFromControlValue();
-      }
-      this.controlValueChangedInternally = false;
-    });
-
     this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
-  }
-
-  ngAfterContentInit(): void {
-    if (this.control.value) {
-      this._updateMultiselectionFromControlValue();
-    }
   }
 
   /**
@@ -119,7 +105,7 @@ export class MultiselectComponent
    * @returns Signal array of sorted selected options
    */
   public getSelectedOptions(): Signal<FudisSelectOption<object>[]> {
-    return this._sortedSelectedOptionsSignal.asReadonly();
+    return this._selectedOptionsSignal.asReadonly();
   }
 
   /**
@@ -143,71 +129,93 @@ export class MultiselectComponent
       updatedValue.push(option);
     }
 
-    this._sortedSelectedOptions = sortValues(updatedValue);
+    this._controlValueChangedInternally = true;
 
-    this.dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
-
-    this.controlValueChangedInternally = true;
-    this.selectionUpdate.emit(this._sortedSelectedOptions);
-    this.control.patchValue(this._sortedSelectedOptions);
+    if (updatedValue?.length === 0) {
+      this.selectionUpdate.emit(null);
+      this.control.patchValue(null);
+    } else {
+      this.selectionUpdate.emit(updatedValue);
+      this.control.patchValue(updatedValue);
+    }
   }
 
   /**
    * Function called by multiselect option if they are checked
    * @param checkedOption FudisSelectOption to handle
+   * @param type add or remove option from sorting
    */
-  public handleCheckedSort(checkedOption: FudisSelectOption<object>): void {
-    const foundIndex: number = this._sortedSelectedOptions.findIndex((option) => {
-      return option.value === checkedOption.value && option.label === checkedOption.label;
+  public handleCheckedSort(checkedOption: FudisSelectOption<object>, type: 'add' | 'remove'): void {
+    // Check if checkedOption exists in registeredOptions
+    const foundIndex: number = this._registeredOptions.findIndex((option) => {
+      return option.value === checkedOption.value;
     });
 
-    if (foundIndex !== -1) {
-      this._sortedSelectedOptions[foundIndex] = checkedOption;
+    // If found, remove it
+    if (foundIndex !== -1 && type === 'remove') {
+      this._registeredOptions = this._registeredOptions.filter((_item, index) => {
+        return foundIndex !== index;
+      });
+      // If not found, add it
+    } else if (foundIndex === -1 && type === 'add') {
+      this._registeredOptions.push(checkedOption);
+    } else if (foundIndex && type === 'add') {
+      this._registeredOptions[foundIndex] = checkedOption;
+    }
 
-      this._sortedSelectedOptions = sortValues(this._sortedSelectedOptions);
+    // Compare control value with registered options, if it matches, then sort options for the visible input field label text and for the chips
 
-      this.dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
+    let valuesInSync = true;
+
+    if (this.control.value && this._registeredOptions.length === this.control.value.length) {
+      this._registeredOptions.forEach((registeredOption) => {
+        const matchFound = this.control.value?.find((controlOption) => {
+          return (
+            registeredOption.value === controlOption.value &&
+            registeredOption.label === controlOption.label
+          );
+        });
+
+        if (!matchFound) {
+          valuesInSync = false;
+        }
+      });
+    }
+
+    if (valuesInSync && this.control.value) {
+      this._sortedSelectedOptions = sortValues(this._registeredOptions);
+      this._dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
+      this._cdr.detectChanges();
+    } else {
+      this._sortedSelectedOptions = [];
+      this._dropdownSelectionLabelText = null;
     }
   }
 
   /**
    * Update internal states when Application updates control value
    */
-  private _updateMultiselectionFromControlValue(): void {
-    if (this.control.value) {
-      this._sortedSelectedOptions = sortValues(this.control.value);
-      this._sortedSelectedOptionsSignal.set(this._sortedSelectedOptions);
+  protected override _updateSelectionFromControlValue(): void {
+    this._optionsLoadedOnce = true;
 
-      if (!this.autocomplete) {
-        this.dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
-      } else {
-        this.noResultsFound = false;
-      }
-    } else {
-      this.noResultsFound = true;
-      this.dropdownSelectionLabelText = null;
+    if (!this.control.value || this.control.value.length === 0) {
+      this._dropdownSelectionLabelText = null;
     }
   }
 
   /**
-   * Handle chip item remove by index. If there are no selections done, focus back to input on last item removal.
-   * @param index index to remove
+   * Handle chip remove. If there are no selections done, focus back to input on last item removal.
+   * @param option removed option
    */
-  protected _handleRemoveChip(index: number): void {
-    const currentValue = this.control.value;
+  protected _handleRemoveChip(option: FudisSelectOption<object>): void {
+    this.handleMultiSelectionChange(option, 'remove');
 
-    if (currentValue) {
-      currentValue.splice(index, 1);
-      if (currentValue!.length === 0 && this.autocomplete) {
+    if (!this.control.value) {
+      if (this.variant !== 'dropdown') {
         this._autocompleteRef.inputRef.nativeElement.focus();
-      } else if (currentValue!.length === 0) {
+      } else {
         this._inputRef.nativeElement.focus();
       }
-
-      this.dropdownSelectionLabelText = joinInputValues(currentValue);
-      this._sortedSelectedOptionsSignal.set(currentValue);
-      this.controlValueChangedInternally = true;
-      this.control.patchValue(currentValue);
     }
   }
 }

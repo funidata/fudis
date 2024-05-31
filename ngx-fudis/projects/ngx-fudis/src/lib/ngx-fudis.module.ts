@@ -19,7 +19,7 @@ import { BodyTextComponent } from './components/typography/body-text/body-text.c
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/form/checkbox-group/checkbox/checkbox.component';
 import { CheckboxGroupComponent } from './components/form/checkbox-group/checkbox-group.component';
-
+import { DatepickerComponent } from './components/form/date/datepicker/datepicker.component';
 import { DateRangeComponent } from './components/form/date/date-range/date-range.component';
 
 import {
@@ -29,8 +29,6 @@ import {
   FooterContentRightDirective,
   StartDateErrorDirective,
 } from './directives/content-projection/content/content.directive';
-import { DatepickerComponent } from './components/form/date/datepicker/datepicker.component';
-
 import { DescriptionListComponent } from './components/description-list/description-list.component';
 import { DescriptionListItemComponent } from './components/description-list/description-list-item/description-list-item.component';
 import { DescriptionListItemTermComponent } from './components/description-list/description-list-item/description-list-item-term/description-list-item-term.component';
@@ -109,6 +107,7 @@ import { MultiselectComponent } from './components/form/select/multiselect/multi
 import { MultiselectOptionComponent } from './components/form/select/multiselect/multiselect-option/multiselect-option.component';
 import { SelectAutocompleteComponent } from './components/form/select/common/autocomplete/autocomplete.component';
 import { SelectOptionBaseDirective } from './components/form/select/common/select-option-base/select-option-base.directive';
+import { SelectIconsComponent } from './components/form/select/common/select-icons/select-icons.component';
 
 // TODO: sort things better
 
@@ -193,6 +192,7 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     TextAreaComponent,
     TooltipDirective,
     ValidatorErrorMessageComponent,
+    SelectIconsComponent,
   ],
   /*
    * Include imports outside of Fudis components in 'imports' array below.
@@ -231,7 +231,7 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     CheckboxComponent,
     CheckboxGroupComponent,
     ContentDirective,
-    // DatepickerComponent,
+    DatepickerComponent,
     // DateRangeComponent,
     DescriptionListComponent,
     DescriptionListItemComponent,
@@ -263,15 +263,15 @@ import { SelectOptionBaseDirective } from './components/form/select/common/selec
     // InputWithLanguageOptionsComponent,
     LinkComponent,
     LinkDirective,
-    // MultiselectComponent,
-    // MultiselectOptionComponent,
+    MultiselectComponent,
+    MultiselectOptionComponent,
     NotificationComponent,
     NotificationsDirective,
     // RadioButtonGroupComponent,
     SectionComponent,
-    // SelectComponent,
-    // SelectOptionComponent,
-    // SelectGroupComponent,
+    SelectComponent,
+    SelectOptionComponent,
+    SelectGroupComponent,
     SpacingDirective,
     StartDateErrorDirective,
     TextAreaComponent,

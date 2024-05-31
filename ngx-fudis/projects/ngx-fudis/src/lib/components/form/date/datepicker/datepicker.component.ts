@@ -2,26 +2,22 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  ContentChild,
+  Host,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
+  Optional,
   ViewEncapsulation,
   effect,
 } from '@angular/core';
 import { FormControl, AbstractControl } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
-import {
-  EndDateErrorDirective,
-  StartDateErrorDirective,
-} from '../../../../directives/content-projection/content/content.directive';
 import { InputBaseDirective } from '../../../../directives/form/input-base/input-base.directive';
 import { FUDIS_DATE_FORMATS, FudisInputSize } from '../../../../types/forms';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
-import { DatepickerCustomDateAdapter } from '../date-common/datepicker-custom-date-adapter';
 import { parseDate, updateLocale, updateMatDatePickerTranslations } from '../date-common/utilities';
 import { FudisFocusService } from '../../../../services/focus/focus.service';
 import {
@@ -30,6 +26,9 @@ import {
   hasRequiredValidator,
 } from '../../../../utilities/form/getValidators';
 import { FudisValidatorFn } from '../../../../utilities/form/validators';
+import { FormComponent } from '../../form/form.component';
+import { FudisComponentChanges } from '../../../../types/miscellaneous';
+import { FudisDateAdapter } from '../date-common/date-adapter';
 
 @Component({
   selector: 'fudis-datepicker',
@@ -39,7 +38,7 @@ import { FudisValidatorFn } from '../../../../utilities/form/validators';
   providers: [
     {
       provide: DateAdapter,
-      useClass: DatepickerCustomDateAdapter,
+      useClass: FudisDateAdapter,
       deps: [MAT_DATE_LOCALE],
     },
     { provide: MAT_DATE_FORMATS, useValue: FUDIS_DATE_FORMATS },
@@ -50,26 +49,32 @@ export class DatepickerComponent
   implements OnInit, OnChanges, AfterViewInit, OnDestroy
 {
   constructor(
-    private _datePickerConfigService: FudisTranslationService,
+    @Host() @Optional() protected _parentForm: FormComponent | null,
     private _adapter: DateAdapter<Date>,
+    private _datePickerConfigService: FudisTranslationService,
     private _datepickerIntl: MatDatepickerIntl,
     private _focusService: FudisFocusService,
+    private _translationService: FudisTranslationService,
     _changeDetectorRef: ChangeDetectorRef,
     _idService: FudisIdService,
   ) {
-    super(_datePickerConfigService, _idService, _changeDetectorRef);
+    super(_idService, _changeDetectorRef);
 
     effect(() => {
-      _adapter.setLocale(updateLocale(this._translationService.getLanguageSignal()()));
-      this._dateParseError = this._translations().DATEPICKER.VALIDATION.DATE_PARSE;
+      _adapter.setLocale(updateLocale(_translationService.getLanguageSignal()()));
 
-      _datepickerIntl = updateMatDatePickerTranslations(this._translations(), _datepickerIntl);
+      const translations = _translationService.getTranslations()();
+
+      this._dateParseError = translations.DATEPICKER.VALIDATION.DATE_PARSE;
+
+      _datepickerIntl = updateMatDatePickerTranslations(translations, _datepickerIntl);
     });
   }
 
-  @ContentChild(StartDateErrorDirective) startDateError: StartDateErrorDirective;
+  // TODO: Check these when enabling Date Range
+  // @ContentChild(StartDateErrorDirective) startDateError: StartDateErrorDirective;
 
-  @ContentChild(EndDateErrorDirective) endDateError: EndDateErrorDirective;
+  // @ContentChild(EndDateErrorDirective) endDateError: EndDateErrorDirective;
 
   /**
    * FormControl for the input
@@ -80,6 +85,11 @@ export class DatepickerComponent
    * Available sizes for the datepicker
    */
   @Input() size: FudisInputSize = 'md';
+
+  /**
+   * Show internal date parsing validator message. By setting to false date parsing is not executed.
+   */
+  @Input() parseDateValidator: boolean = true;
 
   /**
    * Allowed range for minimun date
@@ -99,20 +109,22 @@ export class DatepickerComponent
   /**
    * Instance of Datepicker Parse validator
    */
-  private _datepickerParseValidator: FudisValidatorFn;
+  private _parseValidatorInstance: FudisValidatorFn | null;
 
-  // TODO: write test
+  /**
+   * Validator reads html input field and checks if it can be converted to valid Date object
+   */
   private _datepickerParseValidatorFn(): FudisValidatorFn {
     return (control: AbstractControl) => {
       if (!control) {
         return null;
       }
 
-      const inputValue = this._inputRef?.nativeElement?.value;
+      const inputElValue = this._inputRef?.nativeElement?.value;
 
-      const isValidDate = inputValue ? parseDate(inputValue)?.getDate() : false;
+      const isValidDate = inputElValue ? parseDate(inputElValue) : false;
 
-      if (inputValue !== '' && !isValidDate) {
+      if (!!inputElValue && !isValidDate) {
         return { datepickerDateParse: { message: this._dateParseError } };
       }
 
@@ -120,31 +132,88 @@ export class DatepickerComponent
     };
   }
 
-  ngOnInit(): void {
-    this._setInputId('datepicker');
-
-    this._datepickerParseValidator = this._datepickerParseValidatorFn();
-
-    this.control.addValidators(this._datepickerParseValidator);
+  private _addParseValidator(): void {
+    this._parseValidatorInstance = this._datepickerParseValidatorFn();
+    this.control.addValidators(this._parseValidatorInstance);
     this.control.updateValueAndValidity();
   }
 
-  ngOnChanges(): void {
-    this._changeDetectorRef.detectChanges();
+  private _removeParseValidator(): void {
+    if (this._parseValidatorInstance) {
+      this.control.removeValidators(this._parseValidatorInstance);
+      this._parseValidatorInstance = null;
+      this.control.updateValueAndValidity();
+    }
+  }
 
-    this._required = hasRequiredValidator(this.control);
-    this._minDate = getMinDateFromValidator(this.control);
-    this._maxDate = getMaxDateFromValidator(this.control);
+  /**
+   * Handle calendar close
+   */
+  protected _handleCalendarClose(): void {
+    this.control.updateValueAndValidity();
+  }
+
+  /**
+   * Handle input blur
+   */
+  protected _handleInputBlur(event: FocusEvent): void {
+    this.handleBlur.emit(event);
+  }
+
+  /**
+   * Handle input key up
+   */
+  protected _handleKeyUp(event: KeyboardEvent): void {
+    this.handleKeyUp.emit(event);
+  }
+
+  ngOnInit(): void {
+    this._setInputId('datepicker');
+
+    if (!this._parseValidatorInstance && this.parseDateValidator) {
+      this._addParseValidator();
+    }
+
+    this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
+  }
+
+  ngOnChanges(changes: FudisComponentChanges<DatepickerComponent>): void {
+    // If prop parseDateValidator value changes, add or remove validator accordingly
+    if (changes.parseDateValidator?.currentValue !== changes.parseDateValidator?.previousValue) {
+      if (changes.parseDateValidator?.currentValue && !this._parseValidatorInstance) {
+        this._addParseValidator();
+      } else if (!changes.parseDateValidator?.currentValue && this._parseValidatorInstance) {
+        this._removeParseValidator();
+      }
+    }
+
+    // Do checks for the control to define attributes used in e.g. HTML
+    if (changes.control?.currentValue !== changes.control?.previousValue) {
+      this._required = hasRequiredValidator(this.control);
+      this._minDate = getMinDateFromValidator(this.control);
+      this._maxDate = getMaxDateFromValidator(this.control);
+
+      // If control changes and these checks are on, add parseValidator
+      if (!this._parseValidatorInstance && this.parseDateValidator) {
+        this._addParseValidator();
+      }
+    }
   }
 
   ngAfterViewInit(): void {
     if (this.initialFocus && !this._focusService.isIgnored(this.id)) {
       this.focusToInput();
     }
+
+    /**
+     * If Angular FormControl has 'disabled' property, it will bind this as HTML attribute as well. This prevents user to focus to it. This check removes that attribute making input focusable again.
+     */
+    if (this.control.disabled) {
+      this._inputRef.nativeElement.removeAttribute('disabled');
+    }
   }
 
   override ngOnDestroy(): void {
-    this.control.removeValidators(this._datepickerParseValidator);
-    this.control.updateValueAndValidity();
+    this._removeParseValidator();
   }
 }
