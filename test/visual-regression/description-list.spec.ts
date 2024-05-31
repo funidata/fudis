@@ -58,31 +58,60 @@ test("description list compact inside Grid and DL grid enabled", async ({ page }
   await expect(page).toHaveScreenshot({ fullPage: true });
 });
 
+// Nested Lists
+test("nested description list compact and grid enabled", async ({ page }) => {
+  await page.goto(
+    "/iframe.html?args=&id=components-description-list--nested-description-lists&viewMode=story",
+  );
+  await expect(page).toHaveScreenshot({ fullPage: true });
+});
+
+test("nested description list regular and grid enabled", async ({ page }) => {
+  await page.goto(
+    "/iframe.html?args=variant:regular&id=components-description-list--nested-description-lists&viewMode=story",
+  );
+  await expect(page).toHaveScreenshot({ fullPage: true });
+});
+
+test("nested description list compact and grid disabled", async ({ page }) => {
+  await page.goto(
+    "/iframe.html?args=disableGrid:!true&id=components-description-list--nested-description-lists&viewMode=story",
+  );
+  await expect(page).toHaveScreenshot({ fullPage: true });
+});
+
+test("nested description list regular and grid disabled", async ({ page }) => {
+  await page.goto(
+    "/iframe.html?args=variant:regular;disableGrid:!true&id=components-description-list--nested-description-lists&viewMode=story",
+  );
+  await expect(page).toHaveScreenshot({ fullPage: true });
+});
+
 // Description List With Sub Components
 test("description list regular with sub components", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=variant:regular&id=components-description-list--description-list-with-sub-components&viewMode=story",
+    "/iframe.html?args=variant:regular&id=components-description-list--nested-sub-components&viewMode=story",
   );
   await expect(page).toHaveScreenshot({ fullPage: true });
 });
 
 test("description list regular with sub components and grid disabled", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=variant:regular;disableGrid:!true&id=components-description-list--description-list-with-sub-components&viewMode=story",
+    "/iframe.html?args=variant:regular;disableGrid:!true&id=components-description-list--nested-sub-components&viewMode=story",
   );
   await expect(page).toHaveScreenshot({ fullPage: true });
 });
 
 test("description list compact with sub components", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=variant:compact&id=components-description-list--description-list-with-sub-components&viewMode=story",
+    "/iframe.html?args=variant:compact&id=components-description-list--nested-sub-components&viewMode=story",
   );
   await expect(page).toHaveScreenshot({ fullPage: true });
 });
 
 test("description list compact with sub components and grid disabled", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=variant:compact;disableGrid:!true&id=components-description-list--description-list-with-sub-components&viewMode=story",
+    "/iframe.html?args=variant:compact;disableGrid:!true&id=components-description-list--nested-sub-components&viewMode=story",
   );
   await expect(page).toHaveScreenshot({ fullPage: true });
 });
@@ -90,28 +119,28 @@ test("description list compact with sub components and grid disabled", async ({ 
 // Description List With Multiple Dd Elements
 test("description list regular with multiple dd elements", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=variant:regular&id=components-description-list--description-list-with-multiple-dd-elements&viewMode=story",
+    "/iframe.html?args=variant:regular&id=components-description-list--item-with-multiple-dd-elements&viewMode=story",
   );
   await expect(page).toHaveScreenshot({ fullPage: true });
 });
 
 test("description list regular with multiple dd elements and grid disabled", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=variant:regular;disableGrid:!true&id=components-description-list--description-list-with-multiple-dd-elements&viewMode=story",
+    "/iframe.html?args=variant:regular;disableGrid:!true&id=components-description-list--item-with-multiple-dd-elements&viewMode=story",
   );
   await expect(page).toHaveScreenshot({ fullPage: true });
 });
 
 test("description list compact with multiple dd elements", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=variant:compact&id=components-description-list--description-list-with-multiple-dd-elements&viewMode=story",
+    "/iframe.html?args=variant:compact&id=components-description-list--item-with-multiple-dd-elements&viewMode=story",
   );
   await expect(page).toHaveScreenshot({ fullPage: true });
 });
 
 test("description list compact with multiple dd elements and grid disabled", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=variant:compact;disableGrid:!true&id=components-description-list--description-list-with-multiple-dd-elements&viewMode=story",
+    "/iframe.html?args=variant:compact;disableGrid:!true&id=components-description-list--item-with-multiple-dd-elements&viewMode=story",
   );
   await expect(page).toHaveScreenshot({ fullPage: true });
 });
@@ -119,28 +148,28 @@ test("description list compact with multiple dd elements and grid disabled", asy
 // Description List With Single Item
 test("description list regular with single item", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=variant:regular&id=components-description-list--description-list-with-single-item&viewMode=story",
+    "/iframe.html?args=variant:regular&id=components-description-list--single-list-item&viewMode=story",
   );
   await expect(page).toHaveScreenshot({ fullPage: true });
 });
 
 test("description list regular with single item and grid disabled", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=variant:regular;disableGrid:!true&id=components-description-list--description-list-with-single-item&viewMode=story",
+    "/iframe.html?args=variant:regular;disableGrid:!true&id=components-description-list--single-list-item&viewMode=story",
   );
   await expect(page).toHaveScreenshot({ fullPage: true });
 });
 
 test("description list compact with single item", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=variant:compact&id=components-description-list--description-list-with-single-item&viewMode=story",
+    "/iframe.html?args=variant:compact&id=components-description-list--single-list-item&viewMode=story",
   );
   await expect(page).toHaveScreenshot({ fullPage: true });
 });
 
 test("description list compact with single item and grid disabled", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=variant:compact;disableGrid:!true&id=components-description-list--description-list-with-single-item&viewMode=story",
+    "/iframe.html?args=variant:compact;disableGrid:!true&id=components-description-list--single-list-item&viewMode=story",
   );
   await expect(page).toHaveScreenshot({ fullPage: true });
 });
@@ -148,7 +177,7 @@ test("description list compact with single item and grid disabled", async ({ pag
 // Description List With Languages
 test("description list regular with languages", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=variant:regular&id=components-description-list--description-list-with-languages&viewMode=story",
+    "/iframe.html?args=variant:regular&id=components-description-list--with-language-badges&viewMode=story",
   );
   await expect(page).toHaveScreenshot("languages-regular-1-initial.png");
   await page.getByTestId("fudis-button-1").click();
@@ -170,11 +199,19 @@ test("description list regular with languages", async ({ page }) => {
   await page.getByTestId("fudis-language-badge-group-3-item-8").click();
   await page.getByTestId("fudis-button-1").focus();
   await expect(page).toHaveScreenshot("languages-regular-7-clicked-sv-badge.png");
+  await page.getByTestId("fudis-button-5").click();
+  await expect(page).toHaveScreenshot("languages-regular-8-lang-changed-to-fi.png");
+  await page.getByTestId("fudis-language-badge-group-2-item-11").focus();
+  await expect(page).toHaveScreenshot("languages-regular-9-lang-focus-sv.png");
+  await page.getByTestId("fudis-language-badge-group-2-item-12").focus();
+  await expect(page).toHaveScreenshot("languages-regular-10-lang-focus-fi.png");
+  await page.getByTestId("fudis-language-badge-group-2-item-13").focus();
+  await expect(page).toHaveScreenshot("languages-regular-11-lang-focus-en.png");
 });
 
 test("description list compact with languages", async ({ page }) => {
   await page.goto(
-    "/iframe.html?args=variant:compact&id=components-description-list--description-list-with-languages&viewMode=story",
+    "/iframe.html?args=variant:compact&id=components-description-list--with-language-badges&viewMode=story",
   );
   await expect(page).toHaveScreenshot("languages-compact-1-initial.png");
   await page.getByTestId("fudis-button-1").click();
@@ -196,4 +233,12 @@ test("description list compact with languages", async ({ page }) => {
   await page.getByTestId("fudis-language-badge-group-3-item-8").click();
   await page.getByTestId("fudis-button-1").focus();
   await expect(page).toHaveScreenshot("languages-compact-7-clicked-sv-badge.png");
+  await page.getByTestId("fudis-button-5").click();
+  await expect(page).toHaveScreenshot("languages-compact-8-lang-changed-to-fi.png");
+  await page.getByTestId("fudis-language-badge-group-2-item-11").focus();
+  await expect(page).toHaveScreenshot("languages-compact-9-lang-focus-sv.png");
+  await page.getByTestId("fudis-language-badge-group-2-item-12").focus();
+  await expect(page).toHaveScreenshot("languages-compact-10-lang-focus-fi.png");
+  await page.getByTestId("fudis-language-badge-group-2-item-13").focus();
+  await expect(page).toHaveScreenshot("languages-compact-11-lang-focus-en.png");
 });

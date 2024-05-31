@@ -3,14 +3,15 @@ import {
   Input,
   OnInit,
   OnChanges,
-  Signal,
-  signal,
   ChangeDetectionStrategy,
+  signal,
+  Signal,
 } from '@angular/core';
 import { GridApiDirective } from '../../directives/grid/grid-api/grid-api.directive';
 import { FudisComponentChanges, FudisDescriptionListVariant } from '../../types/miscellaneous';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisGridGap } from '../../types/grid';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-dl, fudis-description-list',
@@ -40,10 +41,9 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
   @Input() override rowGap: FudisGridGap = 'sm';
 
   /**
-   * Child Description List Item array.
-   * If only one DL Item is present, Description List is rendered as paragraph element.
+   * HTML element to render. If your Description List has only one item, use 'p', otherwise 'dl'.
    */
-  public childDlItems: string[] = [];
+  @Input() tag: 'dl' | 'p' = 'dl';
 
   /**
    * Id generated with Id Service
@@ -53,17 +53,17 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
   /**
    * CSS class list
    */
-  protected _classList: string[] = [];
+  protected _classList = new BehaviorSubject<string[]>([]);
 
   /**
-   * Signal for listening variant Input
+   * Signal for variant
    */
   private _dlVariant = signal<FudisDescriptionListVariant>('regular');
 
   /**
    * Signal for listening disableGrid Input, used in DL Item.
    */
-  private _disabledGridSignal = signal<boolean>(false);
+  private _disabledGrid = signal<boolean>(false);
 
   ngOnInit(): void {
     this._setClasses();
@@ -79,27 +79,8 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 
     if (changes.disableGrid?.currentValue !== changes.disableGrid?.previousValue) {
       this._setClasses();
-
       const disableGrid = !!changes.disableGrid?.currentValue;
-      this._disabledGridSignal.set(disableGrid);
-    }
-  }
-
-  /**
-   * Add to the child DL Item array
-   */
-  public addChildId(id: string): void {
-    this.childDlItems.push(id);
-  }
-
-  /**
-   * Remove from the child DL Items array
-   */
-  public removeChildId(id: string): void {
-    const idToRemove = this.childDlItems.indexOf(id);
-
-    if (idToRemove > -1) {
-      this.childDlItems.splice(idToRemove, 1);
+      this._disabledGrid.set(disableGrid);
     }
   }
 
@@ -114,7 +95,7 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
    * Read only signal for disabledGrid value
    */
   public getDisabledGridStatus(): Signal<boolean> {
-    return this._disabledGridSignal.asReadonly();
+    return this._disabledGrid.asReadonly();
   }
 
   /**
@@ -131,6 +112,6 @@ export class DescriptionListComponent extends GridApiDirective implements OnInit
 
     const combined = this.classes ? cssClasses.concat(this.classes) : cssClasses;
 
-    this._classList = combined;
+    this._classList.next(combined);
   }
 }

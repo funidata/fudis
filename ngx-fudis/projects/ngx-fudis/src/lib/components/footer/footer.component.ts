@@ -2,18 +2,19 @@ import {
   Component,
   ContentChild,
   ViewEncapsulation,
+  ChangeDetectionStrategy,
   Signal,
   effect,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
 } from '@angular/core';
 import { FudisGridColumnsResponsive } from '../../types/grid';
 import { FudisTranslationService } from '../../services/translation/translation.service';
-import { FudisTranslationConfig } from '../../types/miscellaneous';
+
 import {
   FooterContentLeftDirective,
   FooterContentRightDirective,
 } from '../../directives/content-projection/content/content.directive';
+import { FudisTranslationConfig } from '../../types/miscellaneous';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'fudis-footer',
@@ -23,16 +24,12 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
-  constructor(
-    private _translationService: FudisTranslationService,
-    private _cdr: ChangeDetectorRef,
-  ) {
+  constructor(private _translationService: FudisTranslationService) {
     effect(() => {
-      this._translations = this._translationService.getTranslations();
+      const translations = this._translationService.getTranslations()();
 
-      this._funidataLogoAltText = this._translations().IMAGE.FUNIDATA_LOGO;
-      this._externalLinkHelpText = this._translations().LINK.EXTERNAL_LINK;
-      _cdr.detectChanges();
+      this._funidataLogoAltText.next(translations.IMAGE.FUNIDATA_LOGO);
+      this._externalLinkHelpText.next(translations.LINK.EXTERNAL_LINK);
     });
   }
 
@@ -49,6 +46,11 @@ export class FooterComponent {
   protected _footerContentRight: FooterContentRightDirective;
 
   /**
+   * Fudis translations
+   */
+  protected _translations: Signal<FudisTranslationConfig>;
+
+  /**
    * Used to apply grid columns breakpoint values for the Footer
    */
   protected _columns: FudisGridColumnsResponsive = { sm: 2 };
@@ -56,15 +58,10 @@ export class FooterComponent {
   /**
    * Alternative text for the Funidata logo
    */
-  protected _funidataLogoAltText: string;
+  protected _funidataLogoAltText = new Subject<string>();
 
   /**
    * External link text for Funidata logo
    */
-  protected _externalLinkHelpText: string;
-
-  /**
-   * Fudis translations
-   */
-  protected _translations: Signal<FudisTranslationConfig>;
+  protected _externalLinkHelpText = new Subject<string>();
 }

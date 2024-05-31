@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FudisIdService } from '../../../services/id/id.service';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FieldSetBaseDirective } from './fieldset-base.directive';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -16,6 +15,7 @@ import { ContentDirective } from '../../content-projection/content/content.direc
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { ValidatorErrorMessageComponent } from '../../../components/form/error-message/validator-error-message/validator-error-message.component';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
 
 @Component({
   selector: 'fudis-mock-checkbox-group-component',
@@ -101,7 +101,7 @@ describe('FieldSetBaseDirective', () => {
 
     beforeEach(() => {
       fixtureMock = TestBed.createComponent(MockCheckboxGroupComponent);
-      fixtureMock.detectChanges();
+      fixtureMock.autoDetectChanges();
     });
 
     it('should have label', () => {

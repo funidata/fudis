@@ -10,9 +10,9 @@ export class FudisTranslationService {
   constructor(private _errorSummaryService: FudisInternalErrorSummaryService) {}
 
   /**
-   * Application's translation texts, default language for translations is English
+   * Signal for Application's translation texts, default language for translations is English
    */
-  private _appTranslations = signal<FudisTranslationConfig>(en);
+  private _appTranslationsSignal = signal<FudisTranslationConfig>(en);
 
   /**
    * Application language, default language is English
@@ -32,11 +32,11 @@ export class FudisTranslationService {
     this._errorSummaryService.focusToFormOnReload = null;
     this._appLanguage.set(language);
     if (language === 'en') {
-      this._appTranslations.set({ ...en });
+      this._appTranslationsSignal.set({ ...en });
     } else if (language === 'fi') {
-      this._appTranslations.set({ ...fi });
+      this._appTranslationsSignal.set({ ...fi });
     } else {
-      this._appTranslations.set({ ...sv });
+      this._appTranslationsSignal.set({ ...sv });
     }
   }
 
@@ -55,10 +55,10 @@ export class FudisTranslationService {
   }
 
   /**
-   * Get application's translation config values
+   * Get application's translation config values Signal
    */
   public getTranslations(): Signal<FudisTranslationConfig> {
-    return this._appTranslations.asReadonly();
+    return this._appTranslationsSignal.asReadonly();
   }
 
   /**

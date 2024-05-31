@@ -35,8 +35,8 @@ export class MultiselectComponent
 {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
-    _idService: FudisIdService,
     _translationService: FudisTranslationService,
+    _idService: FudisIdService,
     _focusService: FudisFocusService,
     _changeDetectorRef: ChangeDetectorRef,
   ) {
@@ -45,7 +45,8 @@ export class MultiselectComponent
     this.focusSelector = 'fudis-multiselect-option__focusable';
 
     effect(() => {
-      this._translationRemoveItem = this._translations().SELECT.MULTISELECT.REMOVE_ITEM;
+      this._translationRemoveItem =
+        _translationService.getTranslations()().SELECT.MULTISELECT.REMOVE_ITEM;
     });
   }
 

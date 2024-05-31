@@ -1,11 +1,12 @@
 <section
+  *ngIf="_classList | async as classes"
   fudisGrid
   [id]="id"
   [tabIndex]="-1"
   [attr.aria-describedby]="_headingId"
   [align]="align"
   [width]="width"
-  [classes]="_classList"
+  [classes]="classes"
   [rowGap]="'none'"
   [serviceDefaults]="false"
   [marginBottom]="marginBottom"

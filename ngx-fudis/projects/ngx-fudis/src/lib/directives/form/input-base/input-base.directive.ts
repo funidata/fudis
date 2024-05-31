@@ -3,16 +3,12 @@ import {
   Input,
   EventEmitter,
   Output,
-  Signal,
-  effect,
   ViewChild,
   ElementRef,
   OnDestroy,
   ChangeDetectorRef,
 } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FudisTranslationConfig } from '../../../types/miscellaneous';
 import { FudisIdComponent } from '../../../types/id';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FormControl } from '@angular/forms';
@@ -23,17 +19,10 @@ import { Subject } from 'rxjs';
 })
 export class InputBaseDirective extends TooltipApiDirective implements OnDestroy {
   constructor(
-    protected _translationService: FudisTranslationService,
     protected _idService: FudisIdService,
     protected _changeDetectorRef: ChangeDetectorRef,
   ) {
     super();
-
-    effect(() => {
-      this._translations = _translationService.getTranslations();
-      this._requiredText = this._translations().REQUIRED;
-      _changeDetectorRef.detectChanges();
-    });
   }
 
   /**
@@ -99,11 +88,6 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
   @Output() handleKeyUp: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
   /**
-   * Basic Fudis translation keys
-   */
-  protected _translations: Signal<FudisTranslationConfig>;
-
-  /**
    * Fudis translation key for required text
    */
   protected _requiredText: string;
@@ -121,7 +105,7 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
   protected _reloadErrorSummary = false;
 
   /**
-   * TODO: write test
+   * TODO: write test check cdr logic
    *
    * Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
    */

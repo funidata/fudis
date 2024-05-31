@@ -207,7 +207,7 @@ export const sv: FudisTranslationConfig = {
       EN: 'Ändra översättning till Engelska',
       TRANSLATIONS: 'Översättningar',
       SELECTED: 'Vald',
-      MISSING_TRANSLATION: 'Saknad översättning',
+      MISSING_TRANSLATION: '(Saknad översättning)',
     },
   },
   TEXTAREA: {

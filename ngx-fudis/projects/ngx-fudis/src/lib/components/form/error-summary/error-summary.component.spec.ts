@@ -158,9 +158,8 @@ describe('ErrorSummaryComponent', () => {
     wrapperComponent = wrapperFixture.componentInstance;
     wrapperComponent.errorSummaryLinkType = 'router';
     wrapperComponent.errorSummaryService.setUpdateStrategy('reloadOnly');
-    wrapperFixture.detectChanges();
+    wrapperFixture.autoDetectChanges();
     wrapperComponent.reloadErrors();
-    wrapperFixture.detectChanges();
   });
 
   describe('Contents', () => {
