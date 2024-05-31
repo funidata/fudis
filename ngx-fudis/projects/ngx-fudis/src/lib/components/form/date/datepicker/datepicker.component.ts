@@ -54,16 +54,20 @@ export class DatepickerComponent
     private _datePickerConfigService: FudisTranslationService,
     private _datepickerIntl: MatDatepickerIntl,
     private _focusService: FudisFocusService,
+    private _translationService: FudisTranslationService,
     _changeDetectorRef: ChangeDetectorRef,
     _idService: FudisIdService,
   ) {
-    super(_datePickerConfigService, _idService, _changeDetectorRef);
+    super(_idService, _changeDetectorRef);
 
     effect(() => {
-      _adapter.setLocale(updateLocale(this._translationService.getLanguageSignal()()));
-      this._dateParseError = this._translations().DATEPICKER.VALIDATION.DATE_PARSE;
+      _adapter.setLocale(updateLocale(_translationService.getLanguageSignal()()));
 
-      _datepickerIntl = updateMatDatePickerTranslations(this._translations(), _datepickerIntl);
+      const translations = _translationService.getTranslations()();
+
+      this._dateParseError = translations.DATEPICKER.VALIDATION.DATE_PARSE;
+
+      _datepickerIntl = updateMatDatePickerTranslations(translations, _datepickerIntl);
     });
   }
 

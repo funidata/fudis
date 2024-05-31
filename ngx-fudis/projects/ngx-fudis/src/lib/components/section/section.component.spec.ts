@@ -91,7 +91,7 @@ describe('SectionComponent', () => {
 
     mockFixture = TestBed.createComponent(MockFudisSectionComponent);
     mockComponent = mockFixture.componentInstance;
-    mockFixture.detectChanges();
+    mockFixture.autoDetectChanges();
   });
 
   function getSectionElement() {
@@ -132,7 +132,7 @@ describe('SectionComponent', () => {
 
     it('should add custom CSS classes if given', () => {
       mockComponent.classes = ['my-custom-class other-custom-class'];
-      mockFixture.detectChanges();
+      mockFixture.autoDetectChanges();
 
       expect(sortClasses(getSectionElement().className)).toEqual(
         sortClasses(

@@ -34,15 +34,16 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
     @Host() @Optional() protected _parentForm: FormComponent | null,
     @Inject(DOCUMENT) _document: Document,
     private _cdr: ChangeDetectorRef,
-    _idService: FudisIdService,
     _translationService: FudisTranslationService,
+    _idService: FudisIdService,
     _focusService: FudisFocusService,
     _changeDetectorRef: ChangeDetectorRef,
   ) {
     super(_document, _focusService, _translationService, _idService, _changeDetectorRef);
 
     effect(() => {
-      this._translationRemoveItem = this._translations().SELECT.MULTISELECT.REMOVE_ITEM;
+      this._translationRemoveItem =
+        _translationService.getTranslations()().SELECT.MULTISELECT.REMOVE_ITEM;
     });
   }
 

@@ -41,16 +41,18 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
   constructor(
     @Inject(DOCUMENT) protected _document: Document,
     protected _focusService: FudisFocusService,
-    _translationService: FudisTranslationService,
+    private _translationService: FudisTranslationService,
     _idService: FudisIdService,
     _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_translationService, _idService, _changeDetectorRef);
+    super(_idService, _changeDetectorRef);
 
     effect(() => {
-      this._translationOpenAriaLabel = this._translations().SELECT.OPEN_DROPDOWN;
-      this._translationCloseAriaLabel = this._translations().SELECT.CLOSE_DROPDOWN;
-      this._translationNoResultsFound = this._translations().SELECT.AUTOCOMPLETE.NO_RESULTS;
+      const translations = _translationService.getTranslations()();
+
+      this._translationOpenAriaLabel = translations.SELECT.OPEN_DROPDOWN;
+      this._translationCloseAriaLabel = translations.SELECT.CLOSE_DROPDOWN;
+      this._translationNoResultsFound = translations.SELECT.AUTOCOMPLETE.NO_RESULTS;
     });
   }
 

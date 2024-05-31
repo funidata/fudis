@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import {
   FudisFormErrorSummaryObject,
   FudisFormErrorSummaryItem,
@@ -14,7 +14,7 @@ import { BehaviorSubject } from 'rxjs';
  * Internal Error Summary tools not exposed to public
  */
 @Injectable({ providedIn: 'root' })
-export class FudisInternalErrorSummaryService {
+export class FudisInternalErrorSummaryService implements OnDestroy {
   constructor() {}
 
   /**
@@ -310,6 +310,10 @@ export class FudisInternalErrorSummaryService {
     }
 
     this._allFormErrorsObservable.next({ ...this._allFormErrors });
+  }
+
+  ngOnDestroy(): void {
+    this._allFormErrorsObservable.complete();
   }
 
   /**

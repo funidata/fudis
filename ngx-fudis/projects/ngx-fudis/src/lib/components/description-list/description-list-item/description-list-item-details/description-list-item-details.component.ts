@@ -1,8 +1,6 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
-  ContentChild,
   ElementRef,
   Host,
   HostBinding,
@@ -12,10 +10,10 @@ import {
   effect,
 } from '@angular/core';
 import { FudisComponentChanges, FudisLanguageAbbr } from '../../../../types/miscellaneous';
-import { ActionsDirective } from '../../../../directives/content-projection/actions/actions.directive';
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { DescriptionListComponent } from '../../description-list.component';
 import { FudisIdService } from '../../../../services/id/id.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-dd, fudis-description-list-details',
@@ -27,7 +25,6 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
   constructor(
     private _elementRef: ElementRef,
     private _idService: FudisIdService,
-    private _cdr: ChangeDetectorRef,
     @Host() protected _parentDlItem: DescriptionListItemComponent,
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
@@ -37,20 +34,16 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
       this._parentDlItem.id,
     );
 
-    _parentDlItem.selectedLanguage.subscribe((value) => {
-      this._parentItemSelectedLanguage = value;
-      _cdr.detectChanges();
+    effect(() => {
+      if (_parentDl.getVariant()() === 'regular') {
+        this._mainCssClass.next('fudis-dl-item-details__regular');
+      } else {
+        this._mainCssClass.next('fudis-dl-item-details__compact');
+      }
     });
 
     effect(() => {
-      const parentVariant = _parentDl.getVariant();
-
-      if (parentVariant() === 'regular') {
-        this._mainCssClass = 'fudis-dl-item-details__regular';
-      } else {
-        this._mainCssClass = 'fudis-dl-item-details__compact';
-      }
-      _cdr.detectChanges();
+      this._langSelected.next(!!(this.lang && _parentDlItem.getSelectedLanguage()() === this.lang));
     });
   }
 
@@ -58,11 +51,6 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
    * Binding host CSS class to component wrapper
    */
   @HostBinding('class') private _hostClass = 'fudis-dl-item-details-host';
-
-  /**
-   * Possible action buttons for Details element
-   */
-  @ContentChild(ActionsDirective) protected _actions: ActionsDirective;
 
   /**
    * Details element language, possible values 'fi', 'sv' and 'en'.
@@ -84,12 +72,19 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
    */
   protected _id: string;
 
+  protected _langSelected = new BehaviorSubject<boolean>(false);
+
+  /**
+   * If component has language and has sent info to parent
+   */
+  private _detailsSent: boolean;
+
   /**
    * Main CSS class
    */
-  protected _mainCssClass: string;
-
-  protected _parentItemSelectedLanguage: FudisLanguageAbbr | null;
+  protected _mainCssClass: BehaviorSubject<string> = new BehaviorSubject<string>(
+    'fudis-dl-item-details__regular',
+  );
 
   /**
    * Parse Details text content and set parent Description List Item languages
@@ -98,21 +93,26 @@ export class DescriptionListItemDetailsComponent implements OnChanges, OnDestroy
     const parsedTextContent =
       this.textContent && this.textContent.replace(/\s/g, '') !== '' ? this.textContent : null;
 
-    if (parsedTextContent) {
+    if (parsedTextContent && !this._detailsSent) {
       this._parentDlItem.addDetailsLanguage(this.lang, parsedTextContent, this._id);
+
+      this._detailsSent = true;
 
       this._hostClass = `fudis-dl-item-details-host fudis-dl-item-details-host--${this.lang}`;
     }
   }
 
   private _removeDetailsFromParent(): void {
-    this._parentDlItem.removeDetailsLanguage(this.lang, this._id);
-    this._hostClass = `fudis-dl-item-details-host`;
+    if (this._detailsSent) {
+      this._parentDlItem.removeDetailsLanguage(this.lang, this._id);
+      this._detailsSent = false;
+      this._hostClass = `fudis-dl-item-details-host`;
+    }
   }
 
   ngOnChanges(changes: FudisComponentChanges<DescriptionListItemDetailsComponent>): void {
     // If language changes, update it to parent. If language changes to undefined, remove it from parent.
-    if (!changes.lang?.firstChange && this.lang) {
+    if (!changes.lang?.firstChange && !!changes.lang?.currentValue) {
       this._removeDetailsFromParent();
       this._sendDetailsLanguageToParent();
     } else if (!changes.lang?.currentValue) {

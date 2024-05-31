@@ -127,6 +127,7 @@ const descriptionListCommonExclude: string[] = [
   'marginTop',
   'removeChildId',
   'rowGap',
+  'tag',
   'width',
 ];
 

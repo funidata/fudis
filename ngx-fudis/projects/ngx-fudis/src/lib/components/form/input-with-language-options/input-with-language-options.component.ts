@@ -30,15 +30,17 @@ export class InputWithLanguageOptionsComponent
   implements OnInit, OnChanges, AfterViewInit
 {
   constructor(
+    private _translationService: FudisTranslationService,
     _idService: FudisIdService,
-    _translationService: FudisTranslationService,
     _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_translationService, _idService, _changeDetectorRef);
+    super(_idService, _changeDetectorRef);
 
     effect(() => {
-      this._languageLabel = this._translations().INPUT_WITH_LANGUAGE_OPTIONS.LANGUAGE;
-      this._missingLanguage = this._translations().INPUT_WITH_LANGUAGE_OPTIONS.MISSING;
+      const translations = _translationService.getTranslations()();
+
+      this._languageLabel = translations.INPUT_WITH_LANGUAGE_OPTIONS.LANGUAGE;
+      this._missingLanguage = translations.INPUT_WITH_LANGUAGE_OPTIONS.MISSING;
       if (this.options) {
         this._updatedOptions = this.updateDropdownList();
       }

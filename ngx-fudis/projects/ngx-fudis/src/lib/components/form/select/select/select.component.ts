@@ -40,7 +40,7 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
     super(_document, _focusService, _translationService, _idService, _changeDetectorRef);
 
     effect(() => {
-      this.translationOptionDisabledText = this._translations().SELECT.DISABLED;
+      this.translationOptionDisabledText = _translationService.getTranslations()().SELECT.DISABLED;
     });
   }
 

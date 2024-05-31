@@ -1,33 +1,26 @@
-<ng-container *ngIf="_parentDl.childDlItems.length === 1">
-  <span
-    *ngIf="!lang || (lang && _parentItemSelectedLanguage === lang)"
-    [id]="_id"
-    [class]="_mainCssClass"
-  >
-    <ng-container *ngTemplateOutlet="ddContent"></ng-container>
-  </span>
-</ng-container>
+<ng-container *ngIf="!lang || (_langSelected | async)">
+  <ng-container *ngIf="_parentDl.tag === 'p'">
+    <span [id]="_id" [class]="_mainCssClass | async">
+      <ng-container *ngTemplateOutlet="ddContent"></ng-container>
+    </span>
+  </ng-container>
 
-<ng-container *ngIf="_parentDl.childDlItems.length > 1">
-  <dd
-    *ngIf="!lang || (lang && _parentItemSelectedLanguage === lang)"
-    [id]="_id"
-    [class]="_mainCssClass"
-  >
-    <ng-container *ngTemplateOutlet="ddContent"></ng-container>
-  </dd>
+  <ng-container *ngIf="_parentDl.tag === 'dl'">
+    <dd [id]="_id" [class]="_mainCssClass | async">
+      <ng-container *ngTemplateOutlet="ddContent"></ng-container>
+    </dd>
+  </ng-container>
 </ng-container>
 
 <ng-template #ddContent>
-  <span *ngIf="subHeading" [class]="_mainCssClass + '__sub-heading'">{{ subHeading }}</span
-  ><span [class]="_mainCssClass + '__content'">
-    <span *ngIf="subHeading" [class]="_mainCssClass + '__parenthesis'"> &#40;</span>{{ textContent
-    }}<span *ngIf="subHeading" [class]="_mainCssClass + '__parenthesis'">&#41;</span>
-    <ng-container *ngIf="_actions?.type === 'dd'">
-      <span [class]="_mainCssClass + '__content__actions'">
-        <ng-container *ngTemplateOutlet="_actions!.templateRef" />
-      </span>
-    </ng-container>
-  </span>
-  <span aria-hidden="true" [class]="_mainCssClass + '__comma'">&comma;</span>
+  <span *ngIf="subHeading" [class]="(_mainCssClass | async) + '__sub-heading'">{{
+    subHeading
+  }}</span
+  ><span [class]="(_mainCssClass | async) + '__content'">
+    <span *ngIf="subHeading" [class]="(_mainCssClass | async) + '__parenthesis'"> &#40;</span
+    >{{ textContent
+    }}<span *ngIf="subHeading" [class]="(_mainCssClass | async) + '__parenthesis'">&#41;</span
+    ><ng-content
+  /></span>
+  <span aria-hidden="true" [class]="(_mainCssClass | async) + '__comma'">&comma;</span>
 </ng-template>

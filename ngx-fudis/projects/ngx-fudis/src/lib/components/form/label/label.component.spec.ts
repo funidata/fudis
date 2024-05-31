@@ -37,7 +37,7 @@ describe('LabelComponent', () => {
     });
 
     it('should have required text visible if it is given', () => {
-      component.requiredText = 'Required';
+      component.required = true;
       fixture.detectChanges();
       const elem = fixture.debugElement.query(By.css('.fudis-label__content__required'));
 

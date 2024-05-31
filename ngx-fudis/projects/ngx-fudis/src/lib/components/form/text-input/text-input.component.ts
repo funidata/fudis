@@ -12,7 +12,6 @@ import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisInputSize, FudisInputType } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import {
   getMaxFromValidator,
@@ -39,9 +38,8 @@ export class TextInputComponent
     private _focusService: FudisFocusService,
     _changeDetectorRef: ChangeDetectorRef,
     _idService: FudisIdService,
-    _translationService: FudisTranslationService,
   ) {
-    super(_translationService, _idService, _changeDetectorRef);
+    super(_idService, _changeDetectorRef);
   }
 
   /**
