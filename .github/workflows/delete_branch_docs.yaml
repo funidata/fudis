@@ -1,0 +1,28 @@
+name: Delete branch documentation
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  remove:
+    name: Remove
+    runs-on: ubuntu-22.04
+    permissions:
+      deployments: write
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Delete docs from S3 bucket
+        run: aws s3 rm s3://${{ secrets.AWS_S3_BUCKET_NAME }}/branch/${{ github.ref_name }} --recursive
+      - name: mark environment as deactivated
+        uses: bobheadxi/deployments@v1
+        with:
+          step: deactivate-env
+          env: Documentation for branch ${{ github.ref_name }}
+          desc: Environment was pruned
