@@ -1,4 +1,4 @@
-import { Component, DestroyRef, Inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import {
@@ -149,7 +149,7 @@ export class AppFormExampleComponent implements OnInit {
 
   checkboxOptions: FudisCheckboxOption<object>[] = [];
 
-  private _destroyRef = Inject(DestroyRef);
+  private _destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
     this._translocoService
