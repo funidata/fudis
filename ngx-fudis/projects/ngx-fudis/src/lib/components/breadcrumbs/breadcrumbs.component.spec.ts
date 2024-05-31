@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { BreadcrumbsComponent } from './breadcrumbs.component';
@@ -41,12 +40,13 @@ describe('BreadcrumbsComponent', () => {
         BodyTextComponent,
         MockComponent,
       ],
-      imports: [RouterTestingModule, RouterModule.forRoot([])],
+      imports: [RouterModule.forRoot([])],
       providers: [FudisIdService, FudisTranslationService],
     });
 
     fixture = TestBed.createComponent(MockComponent);
-    fixture.detectChanges();
+
+    fixture.autoDetectChanges();
   });
 
   it('should render the correct number of breadcrumb items', () => {

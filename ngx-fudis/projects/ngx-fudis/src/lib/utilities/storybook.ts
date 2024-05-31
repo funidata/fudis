@@ -127,6 +127,7 @@ const descriptionListCommonExclude: string[] = [
   'marginTop',
   'removeChildId',
   'rowGap',
+  'tag',
   'width',
 ];
 
@@ -228,7 +229,7 @@ export const sectionExclude: RegExp = excludeRegex(['classes', 'errorSummaryBrea
 export const selectCommonExclude: RegExp = excludeRegex([
   'control',
   'autocomplete',
-  'autocompleteClearButton',
+  //'selectionClearButton',
   'ariaLabel',
   'disableGuidance',
   'id',
@@ -238,10 +239,9 @@ export const selectCommonExclude: RegExp = excludeRegex([
   'tooltipPosition',
   'tooltipToggle',
   'classes',
-  'controlValueChangedInternally',
-  'dropdownSelectionLabelText',
+  '_controlValueChangedInternally',
+  '_dropdownSelectionLabelText',
   'focusSelector',
-  'noResultsFound',
   'selectionUpdate',
   'handleBlur',
   'getSelectedOptions',
@@ -264,10 +264,9 @@ export const selectCommonExclude: RegExp = excludeRegex([
 
 export const selectAndMultiselectExclude: RegExp = excludeRegex([
   'translationOptionDisabledText',
-  'controlValueChangedInternally',
-  'dropdownSelectionLabelText',
+  '_controlValueChangedInternally',
+  '_dropdownSelectionLabelText',
   'focusSelector',
-  'noResultsFound',
   'handleSelectionChange',
   'closeDropdown',
   'getAutocompleteFilterText',

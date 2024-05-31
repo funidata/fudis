@@ -83,14 +83,11 @@ describe('AutocompleteComponent', () => {
     return inputElement;
   }
 
-  function getComponentWrapper() {
-    const wrapperElement = getElement(mockFixture, 'fudis-select-autocomplete');
-    return wrapperElement;
-  }
-
   describe('Select Autocomplete default values', () => {
     it('should have respective classes', () => {
-      expect(getComponentWrapper().className).toEqual('fudis-select-autocomplete-host');
+      const inputElement = getElement(mockFixture, 'fudis-select-autocomplete input');
+
+      expect(inputElement.className).toEqual('fudis-form-input fudis-select-autocomplete');
     });
 
     it('should have required attribute', () => {
@@ -114,6 +111,7 @@ describe('AutocompleteComponent', () => {
       component.id = 'select-autocomplete-id';
       component.placeholder = 'Test placeholder';
       component.dropdownOpen = false;
+      component.typeThreshold = 0;
       component.control = new FormControl<
         FudisSelectOption<object> | FudisSelectOption<object>[] | null
       >(null);
@@ -142,14 +140,6 @@ describe('AutocompleteComponent', () => {
       expect(component.triggerDropdownToggle.emit).toHaveBeenCalled();
     });
 
-    it('should trigger dropdown close event', () => {
-      jest.spyOn(component.triggerDropdownClose, 'emit');
-
-      getInputElement().dispatchEvent(new KeyboardEvent('keyup', { key: 'Escape' }));
-
-      expect(component.triggerDropdownClose.emit).toHaveBeenCalled();
-    });
-
     it('should trigger dropdown open event', () => {
       jest.spyOn(component.triggerDropdownOpen, 'emit');
 
@@ -161,22 +151,17 @@ describe('AutocompleteComponent', () => {
     it('should trigger filter text update event', () => {
       jest.spyOn(component.triggerFilterTextUpdate, 'emit');
 
-      const input = fixture.debugElement.query(By.css('.fudis-select-autocomplete__input'));
+      const input = fixture.debugElement.query(By.css('.fudis-select-autocomplete'));
       const el = input.nativeElement;
 
       el.value = '';
       el.dispatchEvent(new KeyboardEvent('keyup'));
 
-      expect(component.triggerFilterTextUpdate.emit).toHaveBeenCalled();
-    });
+      expect(component.triggerFilterTextUpdate.emit).toHaveBeenCalledWith('');
 
-    it('should trigger clear filter button click event', () => {
-      jest.spyOn(component.triggerClearFilterButtonClick, 'emit');
-
-      const clearButton = getElement(fixture, 'fudis-button');
-      clearButton.click();
-
-      expect(component.triggerClearFilterButtonClick.emit).toHaveBeenCalled();
+      el.value = 'hey';
+      el.dispatchEvent(new KeyboardEvent('keyup'));
+      expect(component.triggerFilterTextUpdate.emit).toHaveBeenCalledWith('hey');
     });
   });
 });

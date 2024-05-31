@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, ContentChild, Input, effect } from 
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisNotification } from '../../types/miscellaneous';
 import { FudisTranslationService } from '../../services/translation/translation.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'fudis-notification',
@@ -12,7 +13,7 @@ import { FudisTranslationService } from '../../services/translation/translation.
 export class NotificationComponent {
   constructor(private _translateService: FudisTranslationService) {
     effect(() => {
-      this._attentionText = this._translateService.getTranslations()().ICON.ATTENTION;
+      this._attentionText.next(this._translateService.getTranslations()().ICON.ATTENTION);
     });
   }
 
@@ -29,5 +30,5 @@ export class NotificationComponent {
   /**
    * Screen reader text for icon
    */
-  protected _attentionText: string;
+  protected _attentionText = new Subject<string>();
 }

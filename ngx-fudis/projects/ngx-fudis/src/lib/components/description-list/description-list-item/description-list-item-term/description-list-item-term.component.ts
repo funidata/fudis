@@ -1,22 +1,22 @@
-import { Component, ElementRef, Host, Input, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Host, Input, effect } from '@angular/core';
 import { FudisLanguageAbbr, FudisLanguageBadgeContent } from '../../../../types/miscellaneous';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { DescriptionListItemComponent } from '../description-list-item.component';
 import { DescriptionListComponent } from '../../description-list.component';
 import { FudisIdService } from '../../../../services/id/id.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-dt, fudis-description-list-term',
   templateUrl: './description-list-item-term.component.html',
   styleUrls: ['./description-list-item-term.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DescriptionListItemTermComponent {
   constructor(
-    private _elementRef: ElementRef,
     private _translationService: FudisTranslationService,
     private _idService: FudisIdService,
-
-    @Host() private _parentDlItem: DescriptionListItemComponent,
+    @Host() protected _parentDlItem: DescriptionListItemComponent,
     @Host() protected _parentDl: DescriptionListComponent,
   ) {
     this._id = this._idService.getNewDlGrandChilId(
@@ -26,21 +26,15 @@ export class DescriptionListItemTermComponent {
     );
 
     effect(() => {
-      this._selectableLanguages = _translationService.getSelectableLanguages()();
-
-      this._parentLanguageOptions = this._parentDlItem.getDetailsLanguageOptions()();
-
-      this._determineSelectedBadge();
+      if (_parentDl.getVariant()() === 'regular') {
+        this._mainCssClass.next('fudis-dl-item-term__regular');
+      } else {
+        this._mainCssClass.next('fudis-dl-item-term__compact');
+      }
     });
 
     effect(() => {
-      const parentVariant = _parentDl.getVariant();
-
-      if (parentVariant() === 'regular') {
-        this._mainCssClass = 'fudis-dl-item-term__regular';
-      } else {
-        this._mainCssClass = 'fudis-dl-item-term__compact';
-      }
+      this._parentLanguageOptions = _parentDlItem.getDetailsLanguageOptions()();
     });
   }
 
@@ -57,17 +51,14 @@ export class DescriptionListItemTermComponent {
   /**
    * Available languages of sibling dt elements fetched from the parent dl-item element
    */
-  protected _parentLanguageOptions: FudisLanguageBadgeContent;
-
-  /**
-   * Selected language
-   */
-  protected _selectedLanguage: FudisLanguageAbbr | null;
+  protected _parentLanguageOptions: FudisLanguageBadgeContent | null;
 
   /**
    * Main CSS class
    */
-  protected _mainCssClass: string;
+  protected _mainCssClass: BehaviorSubject<string> = new BehaviorSubject<string>(
+    'fudis-dl-item-term__regular',
+  );
 
   /**
    * Id generated with Id Service
@@ -75,48 +66,12 @@ export class DescriptionListItemTermComponent {
   protected _id: string;
 
   /**
-   * Selectable Badge Languages from the service
+   * When Language Badge is clicked, update clicked language to parent item
+   * @param lang FudisLanguageAbbr
    */
-  private _selectableLanguages: FudisLanguageAbbr[];
-
-  protected _setSelectedLanguage(lang: FudisLanguageAbbr): void {
+  protected _setSelectedLanguage(lang: FudisLanguageAbbr | null): void {
     if (this.languages) {
-      this._parentDlItem.selectedLanguage = lang;
+      this._parentDlItem.setSelectedLanguage(lang);
     }
-    this._selectedLanguage = lang;
-  }
-
-  private _determineSelectedBadge(): void {
-    const currentLang = this._translationService.getLanguage();
-
-    if (
-      this._parentLanguageOptions[currentLang] &&
-      Object.keys(this._parentLanguageOptions[currentLang]!).length !== 0 &&
-      this._selectableLanguages.includes(currentLang)
-    ) {
-      this._selectedLanguage = currentLang;
-    } else {
-      const firstAvailable = this._selectableLanguages.find((lang) => {
-        const possibleOption = this._parentLanguageOptions[lang];
-
-        let idWithContent;
-
-        if (possibleOption) {
-          idWithContent = Object.keys(possibleOption).some((itemId) => {
-            return possibleOption[itemId] !== null;
-          });
-        }
-
-        return idWithContent;
-      });
-
-      if (firstAvailable) {
-        this._selectedLanguage = firstAvailable as FudisLanguageAbbr;
-      } else {
-        this._selectedLanguage = null;
-      }
-    }
-
-    this._parentDlItem.selectedLanguage = this._selectedLanguage;
   }
 }

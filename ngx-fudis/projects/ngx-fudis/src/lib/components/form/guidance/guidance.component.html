@@ -78,7 +78,17 @@
       </div>
     </div>
 
-    <p *ngIf="helpText" class="fudis-guidance__help-text">{{ helpText }}</p>
+    <p
+      *ngIf="helpText || (control && maxLength && _maxLengthText)"
+      class="fudis-guidance__help-text"
+    >
+      <ng-container *ngIf="helpText">{{ helpText }}</ng-container>
+      <ng-container *ngIf="control && maxLength && _maxLengthText">
+        <span class="fudis-visually-hidden"
+          >{{ control.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText }}</span
+        >
+      </ng-container>
+    </p>
   </div>
   <ng-container *ngIf="maxLength && control">
     <small
@@ -104,9 +114,11 @@
             singleControl.value.value?.length === maxLength)
         "
       >
-        <p class="fudis-visually-hidden" role="alert">
-          {{ singleControl.value.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText }}
-        </p>
+        <p
+          class="fudis-guidance__character-limit-indicator__alert fudis-visually-hidden"
+          role="alert"
+          >{{ singleControl.value.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText }}</p
+        >
       </ng-container>
     </ng-container>
   </ng-container>
@@ -119,7 +131,7 @@
     (control.value?.length === _maxLengthAlertThreshold || control.value?.length === maxLength)
   "
 >
-  <p class="fudis-visually-hidden" role="alert">
-    {{ control.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText }}
-  </p>
+  <p class="fudis-guidance__character-limit-indicator__alert fudis-visually-hidden" role="alert"
+    >{{ control.value?.length || 0 }}/{{ maxLength }} {{ _maxLengthText }}</p
+  >
 </ng-container>

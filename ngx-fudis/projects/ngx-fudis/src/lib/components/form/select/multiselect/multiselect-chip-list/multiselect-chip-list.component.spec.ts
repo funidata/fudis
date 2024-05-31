@@ -91,7 +91,7 @@ describe('MultiselectChipListComponent', () => {
       itemToRemove.dispatchEvent(new MouseEvent('click'));
       fixture.detectChanges();
 
-      expect(component.handleClick.emit).toHaveBeenCalledWith(2);
+      expect(component.handleClick.emit).toHaveBeenCalledWith(multiselectChipListMockData[2]);
     });
   });
 });

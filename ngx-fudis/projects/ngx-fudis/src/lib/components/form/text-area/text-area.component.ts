@@ -12,7 +12,6 @@ import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
 import { FudisInputSize } from '../../../types/forms';
 import { FudisIdService } from '../../../services/id/id.service';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import {
   getMaxLengthFromValidator,
@@ -36,10 +35,9 @@ export class TextAreaComponent
     @Host() @Optional() protected _parentForm: FormComponent | null,
     private _focusService: FudisFocusService,
     _idService: FudisIdService,
-    _translationService: FudisTranslationService,
     _changeDetectorRef: ChangeDetectorRef,
   ) {
-    super(_translationService, _idService, _changeDetectorRef);
+    super(_idService, _changeDetectorRef);
   }
 
   /**

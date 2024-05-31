@@ -1,9 +1,8 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   Host,
-  OnDestroy,
-  OnInit,
   Signal,
   effect,
   signal,
@@ -15,13 +14,15 @@ import {
 } from '../../../types/miscellaneous';
 import { FudisIdService } from '../../../services/id/id.service';
 import { DescriptionListComponent } from '../description-list.component';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-dl-item, fudis-description-list-item',
   styleUrls: ['./description-list-item.component.scss'],
   templateUrl: './description-list-item.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DescriptionListItemComponent implements OnInit, OnDestroy {
+export class DescriptionListItemComponent {
   constructor(
     private _element: ElementRef,
     private _idService: FudisIdService,
@@ -29,23 +30,27 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
   ) {
     this.id = _idService.getNewGroupId('description-list', this._parentDl.id);
 
+    /**
+     * Listens to parent's changes and updates CSS classes.
+     */
+
     effect(() => {
-      /**
-       * Listens to parent's changes and updates CSS classes.
-       */
-      this._setClasses(_parentDl.getDisabledGridStatus()(), _parentDl.getVariant()());
+      const variant = _parentDl.getVariant()();
+      const disabled = _parentDl.getDisabledGridStatus()();
+
+      this._setClasses(disabled, variant);
     });
   }
 
   /**
    * Storing list of available languages in Details elements
    */
-  private _detailsLanguageOptions = signal<FudisLanguageBadgeContent>({});
+  private _detailsLanguageOptions = signal<FudisLanguageBadgeContent | null>(null);
 
   /**
    * Selected language to pass to child components
    */
-  public selectedLanguage: FudisLanguageAbbr | null;
+  private _selectedLanguage = signal<FudisLanguageAbbr | null>(null);
 
   /**
    * Id generated with Id Service
@@ -55,26 +60,16 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
   /**
    * Main CSS class
    */
-  protected _mainCssClass: string;
-
-  ngOnInit(): void {
-    /** Registers itself to the parent */
-    this._parentDl.addChildId(this.id);
-  }
-
-  ngOnDestroy(): void {
-    /** Removes itself from the parent */
-    this._parentDl.removeChildId(this.id);
-  }
+  protected _mainCssClass: BehaviorSubject<string> = new BehaviorSubject<string>('fudis-dl-item');
 
   /**
    * DL Item has combined styles for both regular and compact versions but some styles only apply to regular version if parent's disableGrid is true.
    */
   private _setClasses(disabledGrid: boolean, parentVariant: FudisDescriptionListVariant): void {
     if (disabledGrid && parentVariant !== 'compact') {
-      this._mainCssClass = 'fudis-dl-item__disabled-grid';
+      this._mainCssClass.next('fudis-dl-item__disabled-grid');
     } else {
-      this._mainCssClass = 'fudis-dl-item';
+      this._mainCssClass.next('fudis-dl-item');
     }
   }
 
@@ -82,7 +77,7 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
    * Called from child Details, if it has a language property
    */
   public addDetailsLanguage(lang: FudisLanguageAbbr, text: string | null, id: string): void {
-    const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions();
+    const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions() || {};
 
     if (!currentContent[lang]) {
       currentContent[lang] = {};
@@ -90,14 +85,14 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
 
     currentContent[lang]![id] = text;
 
-    this._detailsLanguageOptions.set(currentContent);
+    this._detailsLanguageOptions.set({ ...currentContent });
   }
 
   /**
    * Called from child Details, if its language property is removed (or updated)
    */
   public removeDetailsLanguage(lang: FudisLanguageAbbr, id: string): void {
-    const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions();
+    const currentContent: FudisLanguageBadgeContent = this._detailsLanguageOptions() || {};
 
     if (currentContent[lang as FudisLanguageAbbr]?.[id]) {
       delete currentContent[lang]![id];
@@ -107,10 +102,22 @@ export class DescriptionListItemComponent implements OnInit, OnDestroy {
       delete currentContent[lang];
     }
 
-    this._detailsLanguageOptions.set(currentContent);
+    if (Object.keys(currentContent).length !== 0) {
+      this._detailsLanguageOptions.set({ ...currentContent });
+    } else {
+      this._detailsLanguageOptions.set(null);
+    }
   }
 
-  public getDetailsLanguageOptions(): Signal<FudisLanguageBadgeContent> {
+  public getDetailsLanguageOptions(): Signal<FudisLanguageBadgeContent | null> {
     return this._detailsLanguageOptions.asReadonly();
+  }
+
+  public setSelectedLanguage(lang: FudisLanguageAbbr | null): void {
+    this._selectedLanguage.set(lang);
+  }
+
+  public getSelectedLanguage(): Signal<FudisLanguageAbbr | null> {
+    return this._selectedLanguage.asReadonly();
   }
 }

@@ -35,7 +35,7 @@ export class SelectGroupComponent {
   /**
    * Used when filtering autocomplete results to check if 'No results found' text is visible
    */
-  protected _visibleOptionsValues: string[] = [];
+  protected _visibleOptions: string[] = [];
 
   /**
    * Called from SelectOption and MultiselectOption to set if the option is visible or not
@@ -43,6 +43,6 @@ export class SelectGroupComponent {
    * @param visible state of option's visibility
    */
   public setOptionVisibility(value: string, visible: boolean) {
-    this._visibleOptionsValues = setVisibleOptionsList(this._visibleOptionsValues, value, visible);
+    this._visibleOptions = setVisibleOptionsList(this._visibleOptions, value, visible);
   }
 }

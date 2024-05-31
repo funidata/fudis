@@ -1,10 +1,10 @@
-import { ChangeDetectorRef, Directive, Input, Signal, effect } from '@angular/core';
+import { ChangeDetectorRef, Directive, Input, effect } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
-import { FudisTranslationConfig } from '../../../types/miscellaneous';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisIdParent } from '../../../types/id';
 import { FormGroup } from '@angular/forms';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Directive({
   selector: '[fudisFieldSetBase]',
@@ -18,9 +18,7 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
     super();
 
     effect(() => {
-      this._translations = this._translationService.getTranslations();
-
-      this._requiredText = this._translations().REQUIRED;
+      this._requiredText.next(_translationService.getTranslations()().REQUIRED);
     });
   }
 
@@ -42,12 +40,7 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   /**
    * Fudis translation key for required text
    */
-  protected _requiredText: string;
-
-  /**
-   * Basic Fudis translation keys
-   */
-  protected _translations: Signal<FudisTranslationConfig>;
+  protected _requiredText = new BehaviorSubject<string>('');
 
   /**
    * To prevent ngOnChanges running before initial ngOnInit
@@ -71,7 +64,7 @@ export class FieldSetBaseDirective extends TooltipApiDirective {
   }
 
   /**
-   * TODO: write test
+   * TODO: write test and check cdr logic
    *
    * Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
    */

@@ -66,21 +66,33 @@ describe('HeadingComponent', () => {
         previousValue: sizeBefore,
         currentValue: size,
         firstChange: false,
+        isFirstChange: () => {
+          return false;
+        },
       },
       marginBottom: {
         previousValue: marginBefore,
         currentValue: marginBottom,
         firstChange: false,
+        isFirstChange: () => {
+          return false;
+        },
       },
       level: {
         previousValue: levelBefore,
         currentValue: level,
         firstChange: false,
+        isFirstChange: () => {
+          return false;
+        },
       },
       align: {
         previousValue: alignBefore,
         currentValue: align,
         firstChange: false,
+        isFirstChange: () => {
+          return false;
+        },
       },
     });
 
@@ -120,6 +132,9 @@ describe('HeadingComponent', () => {
             currentValue: level,
             previousValue: levelBefore,
             firstChange: false,
+            isFirstChange: () => {
+              return false;
+            },
           },
         });
 

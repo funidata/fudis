@@ -3,7 +3,7 @@
     *ngFor="let item of selectedItems; let index = index"
     class="fudis-multiselect-chip-list__button"
     [attr.aria-describedby]="parentId + '-remove-items'"
-    (click)="_clickChip(index)"
+    (click)="_clickChip(item, index)"
   >
     <fudis-icon [icon]="'close'" [color]="'white'"></fudis-icon>
     {{ item.label }}
