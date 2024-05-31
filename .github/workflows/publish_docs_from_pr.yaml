@@ -16,7 +16,7 @@ jobs:
       run:
         working-directory: ngx-fudis
     steps:
-      - name: Start Deployment
+      - name: Start deployment
         uses: bobheadxi/deployments@v1
         id: deployment
         with:
@@ -28,7 +28,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
-      - name: Configure AWS Credentials
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ${{ secrets.AWS_REGION }}
@@ -40,7 +40,7 @@ jobs:
         run: npm run build -- storybook
       - name: Copy docs to S3 bucket
         run: aws s3 sync static s3://${{ secrets.AWS_S3_BUCKET_NAME }}/branch/${{ github.ref_name }}
-      - name: Finish Deployment
+      - name: Finish deployment
         uses: bobheadxi/deployments@v1
         if: always()
         with:
