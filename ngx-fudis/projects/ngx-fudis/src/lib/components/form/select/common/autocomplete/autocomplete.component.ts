@@ -7,13 +7,11 @@ import {
   Signal,
   ViewChild,
   ViewEncapsulation,
-  effect,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisSelectOption } from '../../../../../types/forms';
 
 import { FudisTranslationConfig } from '../../../../../types/miscellaneous';
-import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 
 @Component({
   selector: 'fudis-select-autocomplete',
@@ -22,13 +20,6 @@ import { FudisTranslationService } from '../../../../../services/translation/tra
   encapsulation: ViewEncapsulation.None,
 })
 export class SelectAutocompleteComponent {
-  constructor(protected _translationService: FudisTranslationService) {
-    effect(() => {
-      this._translationClearFilterText =
-        _translationService.getTranslations()().SELECT.AUTOCOMPLETE.CLEAR;
-    });
-  }
-
   /**
    * Template reference for input. Used in e. g. initialFocus
    */
@@ -152,11 +143,6 @@ export class SelectAutocompleteComponent {
    * Basic Fudis translation keys
    */
   protected _translations: Signal<FudisTranslationConfig>;
-
-  /**
-   * Translated aria-label for autocomplete close icon button which clears the input
-   */
-  protected _translationClearFilterText: string;
 
   /**
    * Prevent dropdown reopen on focus

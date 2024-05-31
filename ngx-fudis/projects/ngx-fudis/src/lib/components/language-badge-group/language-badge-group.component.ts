@@ -6,11 +6,7 @@ import {
   effect,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import {
-  FudisLanguageAbbr,
-  FudisLanguageBadgeContent,
-  FudisTranslationConfig,
-} from '../../types/miscellaneous';
+import { FudisLanguageAbbr, FudisLanguageBadgeContent } from '../../types/miscellaneous';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
 import { FudisIdService } from '../../services/id/id.service';
@@ -35,7 +31,9 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective {
     this._id = _idService.getNewParentId('language-badge-group');
 
     effect(() => {
-      this._translations = _translationService.getTranslations()();
+      this._groupAriaLabel.next(
+        _translationService.getTranslations()().LANGUAGE_BADGE.ARIA_LABEL.TRANSLATIONS,
+      );
     });
 
     effect(() => {
@@ -87,9 +85,9 @@ export class LanguageBadgeGroupComponent extends TooltipApiDirective {
   protected _id: string;
 
   /**
-   * Translation object from service
+   * Translation for aria-label
    */
-  protected _translations: FudisTranslationConfig;
+  protected _groupAriaLabel = new BehaviorSubject<string>('');
 
   /**
    * Internal variable for matching languages and label texts

@@ -110,7 +110,7 @@
   />
   <ng-container *ngIf="showSelectionChips && _sortedSelectedOptions.length > 0">
     <span [attr.id]="id + '-remove-items'" class="fudis-visually-hidden">{{
-      _translationRemoveItem
+      _translationRemoveItem | async
     }}</span>
     <fudis-multiselect-chip-list
       [selectedItems]="_sortedSelectedOptions"
