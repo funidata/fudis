@@ -3,6 +3,7 @@ import { FudisDialogService } from '../../services/dialog/dialog.service';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisDialogSize } from '../../types/miscellaneous';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-dialog',
@@ -16,7 +17,7 @@ export class DialogComponent implements OnInit, OnDestroy {
     private _translateService: FudisTranslationService,
   ) {
     effect(() => {
-      this._closeLabel = this._translateService.getTranslations()().DIALOG.CLOSE;
+      this._closeLabel.next(this._translateService.getTranslations()().DIALOG.CLOSE);
     });
     this._id = _idService.getNewId('dialog');
   }
@@ -39,7 +40,7 @@ export class DialogComponent implements OnInit, OnDestroy {
   /**
    * Internal translated aria-label for top right close button
    */
-  protected _closeLabel: string;
+  protected _closeLabel = new BehaviorSubject<string>('');
 
   ngOnInit(): void {
     this._dialogService.setDialogOpenSignal(true);

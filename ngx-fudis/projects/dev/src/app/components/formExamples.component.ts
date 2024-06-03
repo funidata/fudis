@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import {
@@ -7,7 +7,7 @@ import {
   FudisRadioButtonOption,
   FudisCheckboxChangeEvent,
 } from 'projects/ngx-fudis/src/lib/types/forms';
-import { untilDestroyed } from 'projects/ngx-fudis/src/lib/utilities/untilDestroyed';
+
 import { FudisErrorSummaryService } from 'ngx-fudis';
 import { FudisGroupValidators } from 'projects/ngx-fudis/src/lib/utilities/form/groupValidators';
 import { FudisValidators } from 'projects/ngx-fudis/src/lib/utilities/form/validators';
@@ -15,6 +15,7 @@ import {
   FudisDropdownLanguageOption,
   FudisInputWithLanguageOptionsFormGroup,
 } from 'dist/ngx-fudis/lib/types/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 type MyForm = {
   dropdown: FormControl<FudisSelectOption<object> | null>;
@@ -148,12 +149,12 @@ export class AppFormExampleComponent implements OnInit {
 
   checkboxOptions: FudisCheckboxOption<object>[] = [];
 
-  private _untilDestroyed = untilDestroyed();
+  private _destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
     this._translocoService
       .selectTranslateObject('options')
-      .pipe(this._untilDestroyed())
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((value) => {
         this.radioButtonOptions = [
           { value: true, label: value.chooseTruthTrue, id: 'boolean-2' },

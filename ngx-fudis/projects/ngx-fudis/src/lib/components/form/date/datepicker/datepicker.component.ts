@@ -29,6 +29,7 @@ import { FudisValidatorFn } from '../../../../utilities/form/validators';
 import { FormComponent } from '../../form/form.component';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
 import { FudisDateAdapter } from '../date-common/date-adapter';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-datepicker',
@@ -65,7 +66,7 @@ export class DatepickerComponent
 
       const translations = _translationService.getTranslations()();
 
-      this._dateParseError = translations.DATEPICKER.VALIDATION.DATE_PARSE;
+      this._dateParseError.next(translations.DATEPICKER.VALIDATION.DATE_PARSE);
 
       _datepickerIntl = updateMatDatePickerTranslations(translations, _datepickerIntl);
     });
@@ -104,7 +105,7 @@ export class DatepickerComponent
   /**
    * Fudis translation for date parse error message
    */
-  protected _dateParseError: string;
+  protected _dateParseError = new BehaviorSubject<string>('');
 
   /**
    * Instance of Datepicker Parse validator
@@ -213,7 +214,7 @@ export class DatepickerComponent
     }
   }
 
-  override ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this._removeParseValidator();
   }
 }
