@@ -13,17 +13,17 @@ jobs:
 
   publish:
     name: Publish library to NPM
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs:
       - test
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
       # Recent Node.js is included in `ubuntu-latest` but `setup-node` is still required to setup NPM auth via token.
-      - name: Setup Node
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18.18.2
+          node-version-file: .nvmrc
           # Specifying `registry-url` triggers `setup-node` to setup NPM authentication.
           registry-url: https://registry.npmjs.org/
       - name: Copy root README.md to library
@@ -34,3 +34,36 @@ jobs:
         working-directory: ngx-fudis/dist/ngx-fudis
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-docs:
+    name: Publish docs to AWS
+    runs-on: ubuntu-22.04
+    needs:
+      - test
+      - publish
+    defaults:
+      run:
+        working-directory: ngx-fudis
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Parse library version number
+        run: echo "VERSION=$(npm pkg get version | tr -d '\"')" >> "$GITHUB_ENV"
+      - name: Install dependencies
+        run: npm ci
+      - name: Build docs
+        run: npm run build -- storybook
+      - name: Copy docs to S3 bucket
+        run: aws s3 sync static s3://${{ secrets.AWS_S3_BUCKET_NAME }}/v/$VERSION
+# TODO: Add link to release notes.
+# TODO: Replace root index.html's redirect URL with this version if this is an acual latest release (not RC etc.).
