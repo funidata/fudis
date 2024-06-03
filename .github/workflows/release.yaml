@@ -75,4 +75,18 @@ jobs:
           id: ${{ github.event.release.id }}
           files: release_notes_annex
           spacing: 2
-# TODO: Replace root index.html's redirect URL with this version if this is an acual latest release (not RC etc.).
+      - name: Check semver
+        id: check-semver
+        run: |
+          if [[ $VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "set-as-latest=true" >> $GITHUB_OUTPUT
+          fi
+      - name: Update root redirect to this version
+        if: steps.check-semver.outputs.set-as-latest == 'true'
+        run: |
+          echo "<html>
+          <head>
+          <meta http-equiv='refresh' content='0; url=https://fudis.funidata.fi/v/$VERSION/index.html' />
+          </head>
+          </html>" > /tmp/index.html
+          aws s3 cp /tmp/index.html s3://${{ secrets.AWS_S3_BUCKET_NAME }}
