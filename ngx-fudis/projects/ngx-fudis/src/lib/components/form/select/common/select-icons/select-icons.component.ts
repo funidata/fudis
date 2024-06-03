@@ -11,6 +11,7 @@ import { FudisTranslationService } from '../../../../../services/translation/tra
 import { FudisSelectVariant } from '../../../../../types/forms';
 import { FormControl } from '@angular/forms';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-select-icons',
@@ -23,8 +24,9 @@ export class SelectIconsComponent implements OnChanges {
     private _changeDetectionRef: ChangeDetectorRef,
   ) {
     effect(() => {
-      this._translationClearFilterText =
-        _translationService.getTranslations()().SELECT.AUTOCOMPLETE.CLEAR;
+      this._translationClearFilterText.next(
+        _translationService.getTranslations()().SELECT.AUTOCOMPLETE.CLEAR,
+      );
     });
   }
 
@@ -66,7 +68,7 @@ export class SelectIconsComponent implements OnChanges {
   /**
    * Translated aria-label for autocomplete close icon button which clears the input
    */
-  protected _translationClearFilterText: string;
+  protected _translationClearFilterText = new BehaviorSubject<string>('');
 
   protected _chevronVisible: boolean;
 

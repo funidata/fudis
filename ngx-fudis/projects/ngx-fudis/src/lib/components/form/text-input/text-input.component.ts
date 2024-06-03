@@ -22,7 +22,7 @@ import {
 } from '../../../utilities/form/getValidators';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { FormComponent } from '../form/form.component';
-import { takeUntil } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-text-input',
@@ -83,7 +83,7 @@ export class TextInputComponent
     /**
      * TODO: write test
      */
-    this.control.valueChanges.pipe(takeUntil(this._destroyed)).subscribe((value) => {
+    this.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((value) => {
       if (typeof value === 'string' && value.trim() === '') {
         this.control.setValue(null);
       }

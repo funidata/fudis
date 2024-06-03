@@ -5,19 +5,19 @@ import {
   Output,
   ViewChild,
   ElementRef,
-  OnDestroy,
   ChangeDetectorRef,
+  inject,
+  DestroyRef,
 } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisIdComponent } from '../../../types/id';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FormControl } from '@angular/forms';
-import { Subject } from 'rxjs';
 
 @Directive({
   selector: '[fudisInputBase]',
 })
-export class InputBaseDirective extends TooltipApiDirective implements OnDestroy {
+export class InputBaseDirective extends TooltipApiDirective {
   constructor(
     protected _idService: FudisIdService,
     protected _changeDetectorRef: ChangeDetectorRef,
@@ -97,7 +97,7 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
    */
   protected _required: boolean = false;
 
-  protected _destroyed = new Subject<void>();
+  protected _destroyRef = inject(DestroyRef);
 
   /**
    * To trigger Error Summary reload when this component's children Validator Error Messages are initialised. This is used in cases when this component is lazy loaded to DOM after initial Error Summary reload was called before children Validator Error Messages existed. E. g. if component is inside lazy loaded expandable.
@@ -144,9 +144,5 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
     } else {
       this.id = this._idService.getNewId(componentType);
     }
-  }
-
-  ngOnDestroy(): void {
-    this._destroyed.next();
   }
 }

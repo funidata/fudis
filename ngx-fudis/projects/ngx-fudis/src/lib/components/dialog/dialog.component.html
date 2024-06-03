@@ -1,11 +1,12 @@
 <!-- <fudis-alert-group [insideDialog]="true" /> -->
 <div class="fudis-dialog fudis-dialog__size__{{ size }}" [attr.id]="_id">
   <fudis-button
+    *ngIf="_closeLabel | async as closeLabel"
     fudisDialogClose
     class="fudis-dialog__close"
     [class.fudis-dialog__close__absolute]="closeButtonPositionAbsolute"
     [attr.id]="_id + '-close'"
-    [label]="_closeLabel"
+    [label]="closeLabel"
     [labelHidden]="true"
     [size]="'icon-only'"
     [icon]="'ring-close-fill'"
