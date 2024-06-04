@@ -36,7 +36,10 @@
       [disableRipple]="true"
     >
       <mat-icon matDatepickerToggleIcon>
-        <fudis-icon [icon]="'calendar'" [color]="'primary'"></fudis-icon>
+        <fudis-icon
+          [icon]="'calendar'"
+          [color]="control.disabled || disabled ? 'gray-dark' : 'primary'"
+        ></fudis-icon>
       </mat-icon>
     </mat-datepicker-toggle>
     <mat-datepicker
