@@ -177,7 +177,11 @@ export class SelectAutocompleteComponent {
    * @param event click event
    */
   protected _inputClick(event: Event): void {
-    this.triggerInputClick.emit(event);
+    const inputValue = (event.target as HTMLInputElement).value;
+
+    if (inputValue.length >= this.typeThreshold) {
+      this.triggerInputClick.emit(event);
+    }
   }
 
   /**
@@ -216,9 +220,13 @@ export class SelectAutocompleteComponent {
     this.preventSpaceKeypress = false;
 
     // TODO: check this through
-    if (this.dropdownOpen && this.visibleOptions?.length === 1 && key === 'Enter') {
+    if (this.dropdownOpen && this.visibleOptions?.length === 1 && key === 'Enter' && !!inputValue) {
       this.triggerSelectOnlyVisibleOption.emit();
-    } else if (!this._preventDropdownReOpen && key === 'Enter') {
+    } else if (
+      !this._preventDropdownReOpen &&
+      key === 'Enter' &&
+      inputValue.length >= this.typeThreshold
+    ) {
       this.triggerDropdownToggle.emit();
     } else if (
       key !== 'ArrowDown' &&

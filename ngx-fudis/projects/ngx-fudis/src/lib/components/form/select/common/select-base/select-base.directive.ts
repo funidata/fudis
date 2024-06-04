@@ -32,6 +32,7 @@ import { MultiselectComponent } from '../../multiselect/multiselect.component';
 import { hasRequiredValidator } from '../../../../../utilities/form/getValidators';
 import { DOCUMENT } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BehaviorSubject } from 'rxjs';
 
 @Directive({
   selector: '[fudisSelectBase]',
@@ -49,9 +50,11 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     effect(() => {
       const translations = _translationService.getTranslations()();
 
-      this._translationOpenAriaLabel = translations.SELECT.OPEN_DROPDOWN;
-      this._translationCloseAriaLabel = translations.SELECT.CLOSE_DROPDOWN;
-      this._translationNoResultsFound = translations.SELECT.AUTOCOMPLETE.NO_RESULTS;
+      this._translationNoResultsFound.next(translations.SELECT.AUTOCOMPLETE.NO_RESULTS);
+
+      // TODO: after a11y audit, check if these can be removed
+      this._translationOpenAriaLabel.next(translations.SELECT.OPEN_DROPDOWN);
+      this._translationCloseAriaLabel.next(translations.SELECT.CLOSE_DROPDOWN);
     });
   }
 
@@ -147,17 +150,17 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   /**
    * Internal translated text for icon-only button aria-label when opening dropdown
    */
-  protected _translationOpenAriaLabel: string;
+  protected _translationOpenAriaLabel = new BehaviorSubject<string>('');
 
   /**
    * Internal translated text for icon-only button aria-label when closing dropdown
    */
-  protected _translationCloseAriaLabel: string;
+  protected _translationCloseAriaLabel = new BehaviorSubject<string>('');
 
   /**
    * Internal translated label for situations where no results with current filters were found
    */
-  protected _translationNoResultsFound: string;
+  protected _translationNoResultsFound = new BehaviorSubject<string>('');
 
   /**
    * Signal to Select & MultiselectOption for listening autocomplete filter text changes
@@ -185,17 +188,29 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   protected _preventDropdownReopen: boolean | undefined = false;
 
   /**
-   * Used to handle exceptions when mouse click event fires before / after focus event
+   * Currently focused option
    */
-  protected _preventClick: boolean = false;
+  private _focusedOption: string | null = null;
 
-  protected _focusedOption: string | null = null;
+  /**
+   * If clear button is focused
+   */
+  private _clearButtonFocused: boolean = false;
 
-  protected _clearButtonFocused: boolean = false;
+  /**
+   * If click event happens either in input field or in the options
+   */
+  private _mouseDownTargetInsideComponent: boolean;
 
-  protected _clickTargetInside: boolean = false;
+  /**
+   * Used to prevent event triggering before mouseUp happens
+   */
+  private _mouseDown: boolean = false;
 
-  protected _mouseDownTargetInsideComponent: boolean;
+  /**
+   * If click event's target is Select's input field
+   */
+  private _mouseUpOnInput: boolean = false;
 
   protected _clearButtonClick(): void {
     if (!this.disabled && !this.control.disabled) {
@@ -279,10 +294,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
       this.variant === 'autocompleteDropdown' ||
       (this.variant === 'autocompleteType' && this._autocompleteFilterText() !== '');
 
-    if (!this._preventDropdownReopen && !this._dropdownOpen && openDropdown) {
+    if (!this._preventDropdownReopen && !this._dropdownOpen && openDropdown && !this._mouseDown) {
       this.openDropdown();
 
-      this._preventClick = true;
       this._preventDropdownReopen = false;
     }
   }
@@ -307,16 +321,10 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    */
   protected _clickInput(): void {
     this._preventDropdownReopen = true;
-    if (
-      this._inputFocused &&
-      !this._preventClick &&
-      (this.variant !== 'autocompleteType' ||
-        (this.variant === 'autocompleteType' && this._autocompleteFilterText().length >= 3))
-    ) {
+
+    if (this._inputFocused || this._mouseUpOnInput) {
       this._toggleDropdown();
     }
-
-    this._preventClick = false;
 
     if (this.variant === 'dropdown') {
       this._inputRef.nativeElement.focus();
@@ -391,10 +399,18 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     }
   }
 
-  protected _setClearButtonStateToNull(): void {
+  /**
+   * Set Clear button's focus state to false
+   */
+  protected _setClearButtonFocusFalse(): void {
     this._clearButtonFocused = false;
   }
 
+  /**
+   * Set focus state of Clear Button and determine if Dropdown should be closed when this function is called
+   * @param event FocusEvent
+   * @param state
+   */
   protected _setClearButtonFocusState(event: FocusEvent, state: boolean): void {
     this._clearButtonFocused = state;
 
@@ -541,7 +557,18 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
 
   @HostListener('mousedown', ['$event.target'])
   private _handleMouseDown(targetElement: HTMLElement) {
+    this._mouseDown = true;
+
     this._mouseDownTargetInsideComponent =
       targetElement && !!this._selectRef.nativeElement.contains(targetElement);
+  }
+
+  @HostListener('mouseUp', ['$event.target'])
+  private _handleMouseUp(targetElement: HTMLElement) {
+    this._mouseDown = false;
+    this._mouseUpOnInput =
+      targetElement &&
+      (!!this._inputRef.nativeElement.contains(targetElement) ||
+        !!this._autocompleteRef?.inputRef?.nativeElement.contains(targetElement));
   }
 }
