@@ -28,7 +28,7 @@ To define which h-level element the heading of the Expandable is, provide suitab
 Expandable's content and additional header buttons are provided via content projection by using `fudisContent` and `fudisAction` directives:
 
 ```
-<fudis-expandable>
+<fudis-expandable [title]="'Some title'">
   <ng-template fudisActions [type]="'expandable'">
     <fudis-button />
   </ng-template>
