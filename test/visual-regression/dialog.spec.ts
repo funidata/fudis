@@ -14,7 +14,6 @@ test("dialog with form", async ({ page }) => {
   await expect(page).toHaveScreenshot("form-4-after-submit.png");
 });
 
-
 test("dialog with grid", async ({ page }) => {
   await page.goto("/iframe.html?args=&id=components-dialog--example-with-grid&viewMode=story");
   await page.getByTestId("fudis-button-1").click();
