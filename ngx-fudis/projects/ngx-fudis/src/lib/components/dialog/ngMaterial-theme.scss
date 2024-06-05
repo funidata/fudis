@@ -87,6 +87,13 @@
     }
   }
 
+  /* Keep dialog borders visible and as wide as possible until sm breakpoint */
+  @include breakpoints.breakpoint-max("sm") {
+    @include borders.border("1px", "solid", "gray-dark");
+
+    max-width: 98vw !important;
+  }
+
   @include breakpoints.breakpoint("sm") {
     @include borders.border("1px", "solid", "gray-dark");
 
