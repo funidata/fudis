@@ -66,7 +66,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   /**
    * Heading level for the section title
    */
-  @Input() titleLevel: FudisHeadingLevel = 2;
+  @Input() level: FudisHeadingLevel = 2;
 
   /**
    * Heading size for the section title

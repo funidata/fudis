@@ -23,7 +23,7 @@ export default {
     },
   },
   argTypes: {
-    titleLevel: {
+    level: {
       options: fudisHeadingLevelArray,
       control: { type: 'select' },
     },
@@ -41,7 +41,7 @@ const ExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent) => (
   template: html`<fudis-section
     [title]="title"
     [titleSize]="titleSize"
-    [titleLevel]="titleLevel"
+    [level]="level"
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
@@ -73,7 +73,7 @@ const ExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent) => (
 export const Example = ExampleTemplate.bind({});
 Example.args = {
   title: 'This is title of section',
-  titleLevel: 2,
+  level: 2,
   titleSize: 'xl',
   tooltip: 'More info about this section',
   tooltipToggle: false,
@@ -95,7 +95,7 @@ const NestedExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent
   template: html`<fudis-section
     [title]="'Parent Section'"
     [titleSize]="'lg'"
-    [titleLevel]="2"
+    [level]="2"
     [width]="'md'"
   >
     // Empty Actions template, so that nested Actions will not be rendered to the parent!
@@ -111,7 +111,7 @@ const NestedExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent
         [title]="'Nested Section'"
         [marginTop]="'sm'"
         [titleSize]="'sm'"
-        [titleLevel]="3"
+        [level]="3"
       >
         <ng-template fudisActions [type]="'section'">
           <fudis-button [label]="'Nested Action button'" />
