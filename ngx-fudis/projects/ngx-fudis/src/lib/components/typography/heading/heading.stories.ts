@@ -20,7 +20,7 @@ export default {
       options: fudisHeadingLevelArray,
       control: { type: 'select' },
     },
-    variant: { options: fudisHeadingVariantArray },
+    variant: { options: fudisHeadingVariantArray, control: { type: 'select' } },
     align: { options: ['left', 'right', 'center'] },
     marginBottom: { options: fudisSpacingArray },
   },
@@ -61,7 +61,6 @@ export const AllVariants: StoryFn<HeadingComponent> = (args: HeadingComponent) =
       <fudis-heading [level]="5">This is Fudis heading: sm</fudis-heading>
       <fudis-heading [level]="6">This is Fudis heading: xs</fudis-heading>
       <fudis-heading [level]="6" [variant]="'xxs'">This is Fudis heading: xxs</fudis-heading>
-      <fudis-heading [level]="6" [variant]="'label'">This is Fudis heading: label</fudis-heading>
     </fudis-grid>
   `,
 });

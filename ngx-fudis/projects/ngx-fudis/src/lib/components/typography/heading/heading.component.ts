@@ -72,10 +72,6 @@ export class HeadingComponent implements OnInit, OnChanges {
       return 'sm';
     }
 
-    if (variant === 'label') {
-      return 'xxs';
-    }
-
     return 'xs';
   }
 
