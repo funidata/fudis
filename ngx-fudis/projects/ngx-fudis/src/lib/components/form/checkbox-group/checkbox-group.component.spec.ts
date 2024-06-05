@@ -146,7 +146,7 @@ describe('CheckboxGroupComponent', () => {
       component.label = 'Checkbox Group test title';
       component.helpText = 'Some help text';
 
-      fixture.detectChanges();
+      fixture.autoDetectChanges();
     });
 
     it('should have correct label as legend', () => {

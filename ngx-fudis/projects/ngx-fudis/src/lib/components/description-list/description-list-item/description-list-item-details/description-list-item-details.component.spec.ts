@@ -33,19 +33,12 @@ import { ActionsDirective } from '../../../../directives/content-projection/acti
       <fudis-dl-item>
         <fudis-dt [textContent]="'Second DT'"></fudis-dt>
         <fudis-dd [textContent]="'This is my DD'" [subHeading]="'Here is sub heading'">
-          <ng-template fudisActions [type]="'dd'">
-            <fudis-button
-              [label]="'Edit'"
-              [variant]="'tertiary'"
-              [size]="'small'"
-              [icon]="'edit'"
-            />
-          </ng-template>
+          <fudis-button [label]="'Edit'" [variant]="'tertiary'" [size]="'small'" [icon]="'edit'" />
         </fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
 
-    <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
+    <fudis-dl [variant]="variant" [disableGrid]="disableGrid" [tag]="'p'">
       <fudis-dl-item>
         <fudis-dt [textContent]="'Single DT'"></fudis-dt>
         <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
@@ -157,14 +150,17 @@ describe('DescriptionListItemDetailsComponent', () => {
       expect(getDlItemDetailsElement('span').className).toEqual('fudis-dl-item-details__regular');
 
       mockComponent.variant = 'compact';
+
       mockFixture.detectChanges();
 
-      expect(getDlItemDetailsElement('dd', 'compact').className).toEqual(
-        'fudis-dl-item-details__compact',
-      );
-      expect(getDlItemDetailsElement('span', 'compact').className).toEqual(
-        'fudis-dl-item-details__compact',
-      );
+      mockFixture.whenRenderingDone().then(() => {
+        expect(getDlItemDetailsElement('dd', 'compact').className).toEqual(
+          'fudis-dl-item-details__compact',
+        );
+        expect(getDlItemDetailsElement('span', 'compact').className).toEqual(
+          'fudis-dl-item-details__compact',
+        );
+      });
     });
   });
 
@@ -214,35 +210,37 @@ describe('DescriptionListItemDetailsComponent', () => {
 
   describe('Language content', () => {
     it('should have selected language visible', () => {
-      const dlWithLanguages = mockFixture.debugElement.queryAll(By.css('fudis-dl'))[2];
-      const currentLanguage = dlWithLanguages.nativeElement.querySelector(
-        '.fudis-dl-item-details__regular .fudis-dl-item-details__regular__content',
-      );
+      let dlWithLanguages: DebugElement;
 
-      expect(currentLanguage.textContent).toEqual('This is in English');
+      mockFixture.whenRenderingDone().then(() => {
+        dlWithLanguages = mockFixture.debugElement.queryAll(By.css('fudis-dl'))[2];
+        const currentLanguage = dlWithLanguages.nativeElement.querySelector(
+          '.fudis-dl-item-details__regular .fudis-dl-item-details__regular__content',
+        );
+
+        expect(currentLanguage.textContent).toEqual('This is in English');
+      });
 
       service.setLanguage('fi');
       mockFixture.detectChanges();
 
-      const changedLanguage = dlWithLanguages.nativeElement.querySelector(
-        '.fudis-dl-item-details__regular .fudis-dl-item-details__regular__content',
-      );
+      mockFixture.whenRenderingDone().then(() => {
+        const changedLanguage = dlWithLanguages.nativeElement.querySelector(
+          '.fudis-dl-item-details__regular .fudis-dl-item-details__regular__content',
+        );
 
-      expect(changedLanguage.textContent).toEqual('Tämä on suomeksi');
+        expect(changedLanguage.textContent).toEqual('Tämä on suomeksi');
+      });
     });
   });
 
-  describe('Actions', () => {
-    it('should render given action button', () => {
-      const actionsWrapper = mockFixture.debugElement.query(
-        By.css('.fudis-dl-item-details__regular__content__actions'),
+  describe('Nested content', () => {
+    it('should render button', () => {
+      const buttonComponent = mockFixture.debugElement.query(
+        By.css('.fudis-dl-item-details__regular__content fudis-button'),
       );
 
-      expect(actionsWrapper).toBeTruthy();
-
-      const actionButton = actionsWrapper.query(By.directive(ButtonComponent));
-
-      expect(actionButton).toBeTruthy();
+      expect(buttonComponent).toBeTruthy();
     });
   });
 });

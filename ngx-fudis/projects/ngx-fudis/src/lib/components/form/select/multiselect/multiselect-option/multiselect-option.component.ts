@@ -1,10 +1,11 @@
-import { Component, Host, Inject, OnInit, Optional, effect } from '@angular/core';
+import { Component, Host, Inject, OnInit, Optional } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FudisSelectOption } from '../../../../../types/forms';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { SelectGroupComponent } from '../../common/select-group/select-group.component';
 import { MultiselectComponent } from '../multiselect.component';
 import { SelectOptionBaseDirective } from '../../common/select-option-base/select-option-base.directive';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-multiselect-option',
@@ -28,8 +29,8 @@ export class MultiselectOptionComponent extends SelectOptionBaseDirective implem
       this._parentGroup?.id,
     );
 
-    effect(() => {
-      this._isOptionChecked(this._parentMultiselect.getSelectedOptions()());
+    _parentMultiselect.control.valueChanges.pipe(takeUntilDestroyed()).subscribe((newValue) => {
+      this._isOptionChecked(newValue);
     });
   }
 
@@ -37,12 +38,19 @@ export class MultiselectOptionComponent extends SelectOptionBaseDirective implem
    * On init check if option is visible or checked
    */
   ngOnInit(): void {
-    if (this._parent.autocomplete) {
+    if (this._parent.variant !== 'dropdown') {
       this._isOptionVisible(this._parent.getAutocompleteFilterText()());
     } else {
       this._updateVisibilityToParents(true);
     }
-    this._isOptionChecked(this._parentMultiselect.getSelectedOptions()());
+
+    const parentControlValue = this._parentMultiselect.control.value;
+
+    if (parentControlValue && parentControlValue.length !== 0) {
+      this._isOptionChecked(parentControlValue);
+    } else {
+      this.checked = false;
+    }
   }
 
   /**
@@ -51,16 +59,10 @@ export class MultiselectOptionComponent extends SelectOptionBaseDirective implem
    */
   protected override _clickOption(event: Event): void {
     if (!this.data.disabled) {
-      this.checked = !this.checked;
-      const selectedOption: FudisSelectOption<object> = {
-        ...this.data,
-        fudisGeneratedHtmlId: this._id,
-      };
-
-      if (this.checked) {
-        this._parentMultiselect.handleMultiSelectionChange(selectedOption, 'add');
+      if (!this.checked) {
+        this._parentMultiselect.handleMultiSelectionChange(this.data, 'add');
       } else {
-        this._parentMultiselect.handleMultiSelectionChange(selectedOption, 'remove');
+        this._parentMultiselect.handleMultiSelectionChange(this.data, 'remove');
       }
 
       this.handleClick.emit(event);
@@ -72,17 +74,18 @@ export class MultiselectOptionComponent extends SelectOptionBaseDirective implem
    * Checks if this option is checked or not and updates parents state accordingly
    * @param options currently selected options
    */
-  private _isOptionChecked(options: FudisSelectOption<object>[]): void {
+  private _isOptionChecked(options: FudisSelectOption<object>[] | null): void {
     if (this.data) {
-      const result = options.find(
-        (option) => option.label === this.data.label && option.value === this.data.value,
-      );
+      const result = options?.find((option) => option.value === this.data.value);
+
+      if (this.checked !== !!result) {
+        this._parentMultiselect.handleCheckedSort(
+          { ...this.data, fudisGeneratedHtmlId: this._id },
+          result ? 'add' : 'remove',
+        );
+      }
 
       this.checked = !!result;
-
-      if (this.checked) {
-        this._parentMultiselect.handleCheckedSort({ ...this.data, fudisGeneratedHtmlId: this._id });
-      }
     }
   }
 }

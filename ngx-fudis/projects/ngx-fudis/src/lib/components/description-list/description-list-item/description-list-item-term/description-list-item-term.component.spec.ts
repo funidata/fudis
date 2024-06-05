@@ -34,7 +34,7 @@ import { TooltipDirective } from '../../../../directives/tooltip/tooltip.directi
       </fudis-dl-item>
     </fudis-dl>
 
-    <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
+    <fudis-dl [variant]="variant" [disableGrid]="disableGrid" [tag]="'p'">
       <fudis-dl-item>
         <fudis-dt [textContent]="'Single DT'" />
         <fudis-dd [textContent]="'This is my DD'" />
@@ -96,7 +96,8 @@ describe('DescriptionListItemTermComponent', () => {
     mockFixture = TestBed.createComponent(MockDlComponent);
     mockComponent = mockFixture.componentInstance;
     mockComponent.langVisible = false;
-    mockFixture.detectChanges();
+
+    mockFixture.autoDetectChanges();
   });
 
   function getDlItemTermElement(
@@ -147,12 +148,14 @@ describe('DescriptionListItemTermComponent', () => {
       mockComponent.variant = 'compact';
       mockFixture.detectChanges();
 
-      expect(getDlItemTermElement('dt', 'compact').className).toEqual(
-        'fudis-dl-item-term__compact',
-      );
-      expect(getDlItemTermElement('span', 'compact').className).toEqual(
-        'fudis-dl-item-term__compact',
-      );
+      mockFixture.whenRenderingDone().then(() => {
+        expect(getDlItemTermElement('dt', 'compact').className).toEqual(
+          'fudis-dl-item-term__compact',
+        );
+        expect(getDlItemTermElement('span', 'compact').className).toEqual(
+          'fudis-dl-item-term__compact',
+        );
+      });
     });
   });
 
@@ -179,7 +182,16 @@ describe('DescriptionListItemTermComponent', () => {
   });
 
   describe('With languages', () => {
+    beforeEach(() => {
+      mockComponent.langVisible = true;
+
+      mockFixture.detectChanges();
+    });
+
     it('should have Language Badge Group visible', () => {
+      mockComponent.langVisible = false;
+
+      mockFixture.detectChanges();
       const allLanguageBadgeGroups = mockFixture.debugElement.queryAll(
         By.directive(LanguageBadgeGroupComponent),
       );
@@ -194,31 +206,29 @@ describe('DescriptionListItemTermComponent', () => {
     });
 
     it('should have Language Badge Group visible if one details has lang property', () => {
-      mockComponent.langVisible = true;
-      mockFixture.detectChanges();
+      mockFixture.whenRenderingDone().then(() => {
+        const allLanguageBadgeGroups = mockFixture.debugElement.queryAll(
+          By.directive(LanguageBadgeGroupComponent),
+        );
 
-      const allLanguageBadgeGroups = mockFixture.debugElement.queryAll(
-        By.directive(LanguageBadgeGroupComponent),
-      );
+        const allLanguageBadges = mockFixture.debugElement.queryAll(
+          By.directive(LanguageBadgeComponent),
+        );
 
-      const allLanguageBadges = mockFixture.debugElement.queryAll(
-        By.directive(LanguageBadgeComponent),
-      );
-
-      expect(allLanguageBadgeGroups.length).toEqual(2);
-      expect(allLanguageBadgeGroups).toBeTruthy();
-      expect(allLanguageBadges.length).toEqual(6);
+        expect(allLanguageBadgeGroups.length).toEqual(2);
+        expect(allLanguageBadgeGroups).toBeTruthy();
+        expect(allLanguageBadges.length).toEqual(6);
+      });
     });
 
     it('should remove Language badge group if dd elements with lang do not exists', () => {
-      mockComponent.langVisible = true;
-      mockFixture.detectChanges();
+      mockFixture.whenRenderingDone().then(() => {
+        const allLanguageBadgeGroupsBefore = mockFixture.debugElement.queryAll(
+          By.directive(LanguageBadgeGroupComponent),
+        );
 
-      const allLanguageBadgeGroupsBefore = mockFixture.debugElement.queryAll(
-        By.directive(LanguageBadgeGroupComponent),
-      );
-
-      expect(allLanguageBadgeGroupsBefore.length).toEqual(2);
+        expect(allLanguageBadgeGroupsBefore.length).toEqual(2);
+      });
 
       mockComponent.langVisible = false;
       mockFixture.detectChanges();

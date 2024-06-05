@@ -3,36 +3,26 @@ import {
   Input,
   EventEmitter,
   Output,
-  Signal,
-  effect,
   ViewChild,
   ElementRef,
-  OnDestroy,
   ChangeDetectorRef,
+  inject,
+  DestroyRef,
 } from '@angular/core';
 import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
-import { FudisTranslationService } from '../../../services/translation/translation.service';
-import { FudisTranslationConfig } from '../../../types/miscellaneous';
 import { FudisIdComponent } from '../../../types/id';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FormControl } from '@angular/forms';
-import { Subject } from 'rxjs';
 
 @Directive({
   selector: '[fudisInputBase]',
 })
-export class InputBaseDirective extends TooltipApiDirective implements OnDestroy {
+export class InputBaseDirective extends TooltipApiDirective {
   constructor(
-    protected _translationService: FudisTranslationService,
     protected _idService: FudisIdService,
     protected _changeDetectorRef: ChangeDetectorRef,
   ) {
     super();
-
-    effect(() => {
-      this._translations = _translationService.getTranslations();
-      this._requiredText = this._translations().REQUIRED;
-    });
   }
 
   /**
@@ -98,11 +88,6 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
   @Output() handleKeyUp: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
   /**
-   * Basic Fudis translation keys
-   */
-  protected _translations: Signal<FudisTranslationConfig>;
-
-  /**
    * Fudis translation key for required text
    */
   protected _requiredText: string;
@@ -112,7 +97,7 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
    */
   protected _required: boolean = false;
 
-  protected _destroyed = new Subject<void>();
+  protected _destroyRef = inject(DestroyRef);
 
   /**
    * To trigger Error Summary reload when this component's children Validator Error Messages are initialised. This is used in cases when this component is lazy loaded to DOM after initial Error Summary reload was called before children Validator Error Messages existed. E. g. if component is inside lazy loaded expandable.
@@ -120,7 +105,7 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
   protected _reloadErrorSummary = false;
 
   /**
-   * TODO: write test
+   * TODO: write test check cdr logic
    *
    * Tell Guidance, that this component has errors which were not loaded to Error Summary, if component was initialised after parent's Error Summary was set to visible.
    */
@@ -159,9 +144,5 @@ export class InputBaseDirective extends TooltipApiDirective implements OnDestroy
     } else {
       this.id = this._idService.getNewId(componentType);
     }
-  }
-
-  ngOnDestroy(): void {
-    this._destroyed.next();
   }
 }

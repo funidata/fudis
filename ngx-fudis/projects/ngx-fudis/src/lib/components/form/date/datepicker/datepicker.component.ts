@@ -29,6 +29,7 @@ import { FudisValidatorFn } from '../../../../utilities/form/validators';
 import { FormComponent } from '../../form/form.component';
 import { FudisComponentChanges } from '../../../../types/miscellaneous';
 import { FudisDateAdapter } from '../date-common/date-adapter';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-datepicker',
@@ -54,16 +55,20 @@ export class DatepickerComponent
     private _datePickerConfigService: FudisTranslationService,
     private _datepickerIntl: MatDatepickerIntl,
     private _focusService: FudisFocusService,
+    private _translationService: FudisTranslationService,
     _changeDetectorRef: ChangeDetectorRef,
     _idService: FudisIdService,
   ) {
-    super(_datePickerConfigService, _idService, _changeDetectorRef);
+    super(_idService, _changeDetectorRef);
 
     effect(() => {
-      _adapter.setLocale(updateLocale(this._translationService.getLanguageSignal()()));
-      this._dateParseError = this._translations().DATEPICKER.VALIDATION.DATE_PARSE;
+      _adapter.setLocale(updateLocale(_translationService.getLanguageSignal()()));
 
-      _datepickerIntl = updateMatDatePickerTranslations(this._translations(), _datepickerIntl);
+      const translations = _translationService.getTranslations()();
+
+      this._dateParseError.next(translations.DATEPICKER.VALIDATION.DATE_PARSE);
+
+      _datepickerIntl = updateMatDatePickerTranslations(translations, _datepickerIntl);
     });
   }
 
@@ -100,7 +105,7 @@ export class DatepickerComponent
   /**
    * Fudis translation for date parse error message
    */
-  protected _dateParseError: string;
+  protected _dateParseError = new BehaviorSubject<string>('');
 
   /**
    * Instance of Datepicker Parse validator
@@ -209,7 +214,7 @@ export class DatepickerComponent
     }
   }
 
-  override ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this._removeParseValidator();
   }
 }

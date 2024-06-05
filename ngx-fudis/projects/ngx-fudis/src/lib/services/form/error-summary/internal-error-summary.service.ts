@@ -1,4 +1,4 @@
-import { Injectable, Signal, signal } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import {
   FudisFormErrorSummaryObject,
   FudisFormErrorSummaryItem,
@@ -8,12 +8,13 @@ import {
   FudisFormErrorSummaryFormsAndErrors,
   FudisFormErrorSummarySectionObject,
 } from '../../../types/forms';
+import { BehaviorSubject } from 'rxjs';
 
 /**
  * Internal Error Summary tools not exposed to public
  */
 @Injectable({ providedIn: 'root' })
-export class FudisInternalErrorSummaryService {
+export class FudisInternalErrorSummaryService implements OnDestroy {
   constructor() {}
 
   /**
@@ -22,14 +23,10 @@ export class FudisInternalErrorSummaryService {
   private _allFormErrors: FudisFormErrorSummaryFormsAndErrors = {};
 
   /**
-   * Collection of errors as a Signal categorised by parent Form id.
-   *
-   * Ideally this should be an object consisting of sub-signals, but unfortunately effect() hook in ErrorSummaryComponent couldn't detect a change, if a nested signal inside this object was updated.
-   *  
-   So now although effect() hooks in all Error Summary Components trigger if one of them is reloaded, there is safeguard logic that only the targeted one will update visible errors even if the whole signal is updated.
+   * Collection of errors categorised by parent Form id.
    */
 
-  private _signalAllFormErrors = signal<FudisFormErrorSummaryFormsAndErrors>({});
+  private _allFormErrorsObservable = new BehaviorSubject<FudisFormErrorSummaryFormsAndErrors>({});
 
   /**
    * Current fieldsets
@@ -55,6 +52,10 @@ export class FudisInternalErrorSummaryService {
    * To control that only form with spesific ID is reloaded in corresponding ErrorSummaryComponent effect() when signal is updated.
    */
   private _formIdToUpdate: string;
+
+  get allFormErrorsObservable(): BehaviorSubject<FudisFormErrorSummaryFormsAndErrors> {
+    return this._allFormErrorsObservable;
+  }
 
   /**
    * Getter for _formIdToUpdate. Used in ErrorSummaryComponent.
@@ -103,13 +104,6 @@ export class FudisInternalErrorSummaryService {
    */
   public get sections(): FudisFormErrorSummarySectionObject {
     return this._sections;
-  }
-
-  /**
-   * Returns a signal of readonly list of all errors
-   */
-  public getErrorsOnReload(): Signal<FudisFormErrorSummaryFormsAndErrors> {
-    return this._signalAllFormErrors.asReadonly();
   }
 
   public getErrors(): FudisFormErrorSummaryFormsAndErrors {
@@ -315,7 +309,11 @@ export class FudisInternalErrorSummaryService {
       this._formIdToUpdate = formId;
     }
 
-    this._signalAllFormErrors.set(this._allFormErrors);
+    this._allFormErrorsObservable.next({ ...this._allFormErrors });
+  }
+
+  ngOnDestroy(): void {
+    this._allFormErrorsObservable.complete();
   }
 
   /**

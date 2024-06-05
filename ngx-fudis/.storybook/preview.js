@@ -1,10 +1,9 @@
-import { NgxFudisModule } from "../projects/ngx-fudis/src/lib/ngx-fudis.module";
-import { useTheme } from "./useTheme";
-import { moduleMetadata } from "@storybook/angular";
 import { setCompodocJson } from "@storybook/addon-docs/angular";
+import { moduleMetadata } from "@storybook/angular";
 import docJson from "../documentation.json";
-import getVersion from "./getVersion";
+import { NgxFudisModule } from "../projects/ngx-fudis/src/lib/ngx-fudis.module";
 import { excludeRegex } from "../projects/ngx-fudis/src/lib/utilities/storybook";
+import { useTheme } from "./useTheme";
 
 setCompodocJson(docJson);
 
@@ -110,16 +109,6 @@ const preview = {
           "Utilities",
           ["Introduction"],
         ],
-      },
-    },
-    version: {
-      ...getVersion(),
-      style: {
-        color: "#1ea7fd",
-        border: "1px solid #f2f9ff",
-        "background-color": "#f2f9ff",
-        "font-size": "12px",
-        "text-transform": "none",
       },
     },
   },

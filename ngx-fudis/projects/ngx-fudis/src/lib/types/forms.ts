@@ -34,6 +34,8 @@ export interface FudisRadioButtonOption {
   checked?: boolean;
 }
 
+export type FudisSelectVariant = 'dropdown' | 'autocompleteDropdown' | 'autocompleteType';
+
 export type FudisSelectOption<T extends object> = T & {
   /** Underlying value of the option */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

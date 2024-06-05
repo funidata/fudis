@@ -141,19 +141,28 @@ describe('GuidanceComponent', () => {
     it('should display screen reader assistive text correctly', () => {
       component.control.patchValue('Fifteen chars!!');
       fixture.detectChanges();
-      const assistiveTextOn = getElement(fixture, '.fudis-visually-hidden');
+      const assistiveTextOn = getElement(
+        fixture,
+        '.fudis-guidance__character-limit-indicator__alert.fudis-visually-hidden',
+      );
 
       expect(assistiveTextOn.innerHTML).toContain('15/20 characters used');
 
       component.control.patchValue('Sixteen chars!!!');
       fixture.detectChanges();
-      const assistiveTextOff = getElement(fixture, '.fudis-visually-hidden');
+      const assistiveTextOff = getElement(
+        fixture,
+        '.fudis-guidance__character-limit-indicator__alert.fudis-visually-hidden',
+      );
 
       expect(assistiveTextOff).toBeNull();
 
       component.control.patchValue('Twenty characters!!!');
       fixture.detectChanges();
-      const assistiveTextFull = getElement(fixture, '.fudis-visually-hidden');
+      const assistiveTextFull = getElement(
+        fixture,
+        '.fudis-guidance__character-limit-indicator__alert.fudis-visually-hidden',
+      );
 
       expect(assistiveTextFull.innerHTML).toContain('20/20 characters used');
     });

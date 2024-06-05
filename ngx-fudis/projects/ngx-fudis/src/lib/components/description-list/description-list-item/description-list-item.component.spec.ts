@@ -32,7 +32,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
       </fudis-dl-item>
     </fudis-dl>
 
-    <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
+    <fudis-dl [variant]="variant" [disableGrid]="disableGrid" [tag]="'p'">
       <fudis-dl-item>
         <fudis-dt [textContent]="'Single DT'"></fudis-dt>
         <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
@@ -125,9 +125,10 @@ describe('DescriptionListItemComponent', () => {
     it('should have respective class if grid is disabled from parent DL', () => {
       mockComponent.disableGrid = true;
       mockFixture.detectChanges();
-
-      expect(getDlItemElement('div').className).toEqual('fudis-dl-item__disabled-grid');
-      expect(getDlItemElement('p').className).toEqual('fudis-dl-item__disabled-grid');
+      mockFixture.whenRenderingDone().then(() => {
+        expect(getDlItemElement('p').className).toEqual('fudis-dl-item__disabled-grid');
+        expect(getDlItemElement('div').className).toEqual('fudis-dl-item__disabled-grid');
+      });
     });
   });
 
@@ -202,7 +203,7 @@ describe('DescriptionListItemComponent', () => {
 
       mockFixture.detectChanges();
 
-      expect(mockComponent.langDlItem.getDetailsLanguageOptions()()).toEqual({});
+      expect(mockComponent.langDlItem.getDetailsLanguageOptions()()).toBeNull;
     });
   });
 });

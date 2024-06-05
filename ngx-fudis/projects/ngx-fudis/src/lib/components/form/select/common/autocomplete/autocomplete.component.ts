@@ -2,19 +2,16 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  HostBinding,
   Input,
   Output,
   Signal,
   ViewChild,
   ViewEncapsulation,
-  effect,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisSelectOption } from '../../../../../types/forms';
 
 import { FudisTranslationConfig } from '../../../../../types/miscellaneous';
-import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 
 @Component({
   selector: 'fudis-select-autocomplete',
@@ -23,22 +20,10 @@ import { FudisTranslationService } from '../../../../../services/translation/tra
   encapsulation: ViewEncapsulation.None,
 })
 export class SelectAutocompleteComponent {
-  constructor(protected _translationService: FudisTranslationService) {
-    effect(() => {
-      this._translationClearFilterText =
-        _translationService.getTranslations()().SELECT.AUTOCOMPLETE.CLEAR;
-    });
-  }
-
   /**
    * Template reference for input. Used in e. g. initialFocus
    */
-  @ViewChild('inputRef') public inputRef: ElementRef;
-
-  /**
-   * Binding CSS class for component wrapper
-   */
-  @HostBinding('class') private _classes = 'fudis-select-autocomplete-host';
+  @ViewChild('inputRef') public inputRef: ElementRef<HTMLInputElement>;
 
   /**
    * Form control used mostly to define HTML attributes and CSS styles
@@ -90,7 +75,14 @@ export class SelectAutocompleteComponent {
   /**
    * Enable / disable autocomplete variant's Clear button. When 'false' autocomplete acts like a dropdown and opens on focus and hides 'Clear' icon button.
    */
-  @Input() autocompleteClearButton: boolean = true;
+  @Input() selectionClearButton: boolean = true;
+
+  /**
+   * Determine how many characters must be typed for autocomplete to open available options
+   */
+  @Input({ required: true }) typeThreshold: 0 | 3;
+
+  @Input() visibleOptions: string[];
 
   /**
    * Output event for input field blur
@@ -101,6 +93,11 @@ export class SelectAutocompleteComponent {
    * Output event for input field focus
    */
   @Output() triggerFocus = new EventEmitter<FocusEvent>();
+
+  /**
+   * Output event for enter press on autocomplete, when there is only one option visible
+   */
+  @Output() triggerInputClick = new EventEmitter<Event>();
 
   /**
    * Output event for toggling parent dropdown
@@ -128,11 +125,6 @@ export class SelectAutocompleteComponent {
   @Output() triggerFocusToFirstOption = new EventEmitter<void>();
 
   /**
-   * Output event for clicking clear button
-   */
-  @Output() triggerClearFilterButtonClick = new EventEmitter<void>();
-
-  /**
    * Output event for enter press on autocomplete, when there is only one option visible
    */
   @Output() triggerSelectOnlyVisibleOption = new EventEmitter<void>();
@@ -143,11 +135,6 @@ export class SelectAutocompleteComponent {
   public preventSpaceKeypress: boolean = false;
 
   /**
-   * Info sent by the parent Select / Multiselect to define if only one option is visible.
-   */
-  public visibleOptionsLength: number = 0;
-
-  /**
    * Input form field focus status
    */
   protected _focused: boolean = false;
@@ -156,11 +143,6 @@ export class SelectAutocompleteComponent {
    * Basic Fudis translation keys
    */
   protected _translations: Signal<FudisTranslationConfig>;
-
-  /**
-   * Translated aria-label for autocomplete close icon button which clears the input
-   */
-  protected _translationClearFilterText: string;
 
   /**
    * Prevent dropdown reopen on focus
@@ -183,6 +165,19 @@ export class SelectAutocompleteComponent {
   protected _inputFocus(event: FocusEvent): void {
     this._focused = true;
     this.triggerFocus.emit(event);
+    const inputValue = (event.target as HTMLInputElement).value;
+
+    if (inputValue.length >= this.typeThreshold) {
+      this.triggerFilterTextUpdate.emit(inputValue);
+    }
+  }
+
+  /**
+   * To handle click events for input
+   * @param event click event
+   */
+  protected _inputClick(event: Event): void {
+    this.triggerInputClick.emit(event);
   }
 
   /**
@@ -211,22 +206,32 @@ export class SelectAutocompleteComponent {
       key !== 'ArrowLeft' &&
       key !== 'ArrowRight'
     ) {
-      this.triggerFilterTextUpdate.emit(inputValue);
+      if (inputValue.length >= this.typeThreshold) {
+        this.triggerFilterTextUpdate.emit(inputValue);
+      } else {
+        this.triggerFilterTextUpdate.emit('');
+      }
     }
 
     this.preventSpaceKeypress = false;
 
-    if (this.dropdownOpen && this.visibleOptionsLength === 1 && key === 'Enter') {
+    // TODO: check this through
+    if (this.dropdownOpen && this.visibleOptions?.length === 1 && key === 'Enter') {
       this.triggerSelectOnlyVisibleOption.emit();
     } else if (!this._preventDropdownReOpen && key === 'Enter') {
       this.triggerDropdownToggle.emit();
-    } else if (key !== 'ArrowDown' && this.autocompleteClearButton && inputValue === '') {
+    } else if (
+      key !== 'ArrowDown' &&
+      this.selectionClearButton &&
+      inputValue.length < this.typeThreshold
+    ) {
       this.triggerDropdownClose.emit();
     } else if (
       !this._preventDropdownReOpen &&
       !this.dropdownOpen &&
       key !== 'Escape' &&
-      key !== 'Enter'
+      key !== 'Enter' &&
+      inputValue.length >= this.typeThreshold
     ) {
       this.triggerDropdownOpen.emit();
     } else if (key === 'ArrowDown' && this._focused) {
@@ -235,25 +240,5 @@ export class SelectAutocompleteComponent {
     }
 
     this._preventDropdownReOpen = false;
-  }
-
-  /**
-   * Clear any written or selected value in the autocomplete field
-   */
-  protected _clearAutocompleteFilterText(): void {
-    if (!this.disabled && !this.control.disabled) {
-      if (this.autocompleteClearButton) {
-        this._preventDropdownReOpen = true;
-      }
-      this.triggerFilterTextUpdate.emit('');
-
-      (this.inputRef.nativeElement as HTMLInputElement).value = '';
-
-      if (!this.multiselect) {
-        this.triggerClearFilterButtonClick.emit();
-      }
-
-      this.inputRef.nativeElement.focus();
-    }
   }
 }

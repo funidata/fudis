@@ -1,0 +1,51 @@
+name: Publish documentation from PR
+
+on:
+  # Must be run for pushes to associate deployment with PR. Otherwise docs link is not shown.
+  push:
+    # Required to avoid triggering on automatic release tags.
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onpushbranchestagsbranches-ignoretags-ignore
+    branches-ignore:
+      - main
+
+jobs:
+  publish:
+    name: Publish docs to AWS
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: ngx-fudis
+    steps:
+      - name: Start deployment
+        uses: bobheadxi/deployments@v1
+        id: deployment
+        with:
+          step: start
+          env: Documentation for branch ${{ github.ref_name }}
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Install dependencies
+        run: npm ci
+      - name: Build docs
+        run: npm run build -- storybook
+      - name: Copy docs to S3 bucket
+        run: aws s3 sync static s3://${{ secrets.AWS_S3_BUCKET_NAME }}/branch/${{ github.ref_name }}
+      - name: Finish deployment
+        uses: bobheadxi/deployments@v1
+        if: always()
+        with:
+          step: finish
+          status: ${{ job.status }}
+          env: ${{ steps.deployment.outputs.env }}
+          env_url: https://fudis.funidata.fi/branch/${{ github.ref_name }}/index.html
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}

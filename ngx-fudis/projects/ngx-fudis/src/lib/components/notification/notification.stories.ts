@@ -19,12 +19,6 @@ export default {
       options: ['warning', 'danger', 'success', 'info'],
       control: { type: 'radio' },
     },
-    externalLink: {
-      control: { type: 'text' },
-    },
-    linkTitle: {
-      control: { type: 'text' },
-    },
   },
 } as Meta;
 
@@ -32,13 +26,33 @@ const html = String.raw;
 
 const Template: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
   props: args,
-  template: html`<fudis-notification
-    [variant]="variant"
-    [link]="link"
-    [linkTitle]="linkTitle"
-    [externalLink]="externalLink"
-    >This is notification.</fudis-notification
+  template: html`<fudis-notification [variant]="variant"
+    ><fudis-body-text>This is notification.</fudis-body-text></fudis-notification
   >`,
+});
+
+const LinkTemplate: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
+  props: args,
+  template: html`<fudis-notification [variant]="variant">
+    <fudis-body-text
+      >This is Notification with Link.
+      <fudis-link
+        [externalLink]="'https://www.example.com'"
+        [title]="'This link opens in new tab.'"
+      ></fudis-link
+    ></fudis-body-text>
+  </fudis-notification>`,
+});
+
+const MultiChildTemplate: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
+  props: args,
+  template: html`<fudis-notification [variant]="variant">
+    <fudis-body-text>Note! Please don't do this, okey?</fudis-body-text>
+    <fudis-body-text
+      >If you must do it anyway, please see the documentation for more info.</fudis-body-text
+    >
+    <fudis-body-text>Also remember to breathe. Everything is going to be okay!</fudis-body-text>
+  </fudis-notification>`,
 });
 
 export const Example = Template.bind({});
@@ -46,11 +60,14 @@ Example.args = {
   variant: 'warning',
 };
 
-export const ExampleWithExternalLink = Template.bind({});
+export const ExampleWithExternalLink = LinkTemplate.bind({});
 ExampleWithExternalLink.args = {
+  variant: 'info',
+};
+
+export const ExampleWithMultipleChildComponents = MultiChildTemplate.bind({});
+ExampleWithMultipleChildComponents.args = {
   variant: 'warning',
-  linkTitle: 'This link opens in new tab.',
-  externalLink: 'https://www.example.com',
 };
 
 export const AllVariants: StoryFn<NotificationComponent> = (args: NotificationComponent) => ({
@@ -60,11 +77,17 @@ export const AllVariants: StoryFn<NotificationComponent> = (args: NotificationCo
   template: html`
     <fudis-grid [align]="'start'" [width]="'md'">
       <fudis-notification [variant]="'warning'">
-        Note! Please don't do this, okey?
+        <fudis-body-text>Note! Please don't do this, okey?</fudis-body-text>
       </fudis-notification>
-      <fudis-notification [variant]="'danger'"> Whoops! Some error happened. </fudis-notification>
-      <fudis-notification [variant]="'success'">You succeeded!</fudis-notification>
-      <fudis-notification [variant]="'info'">This is a totally neutral message</fudis-notification>
+      <fudis-notification [variant]="'danger'">
+        <fudis-body-text>Whoops! Some error happened.</fudis-body-text>
+      </fudis-notification>
+      <fudis-notification [variant]="'success'">
+        <fudis-body-text>You succeeded!</fudis-body-text>
+      </fudis-notification>
+      <fudis-notification [variant]="'info'">
+        <fudis-body-text>This is a totally neutral message</fudis-body-text>
+      </fudis-notification>
     </fudis-grid>
   `,
 });

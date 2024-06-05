@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, effect } from '@angular/core';
 import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.directive';
+import { FudisTranslationService } from '../../../services/translation/translation.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-label',
@@ -8,6 +10,14 @@ import { TooltipApiDirective } from '../../../directives/tooltip/tooltip-api.dir
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LabelComponent extends TooltipApiDirective {
+  constructor(private _translationService: FudisTranslationService) {
+    super();
+
+    effect(() => {
+      this._requiredText.next(_translationService.getTranslations()().REQUIRED);
+    });
+  }
+
   /**
    * Id for label, e. g. used in Dropdown to link ngMaterial mat-select with 'aria-labelledby' to fudis-label
    */
@@ -24,7 +34,12 @@ export class LabelComponent extends TooltipApiDirective {
   @Input() for: string;
 
   /**
-   * Text indicating if form element associated with the label is required or not
+   * Show text indicating if form element associated with the label is required or not
    */
-  @Input() requiredText: string | undefined = undefined;
+  @Input() required: boolean;
+
+  /**
+   * Fudis translation key for required text
+   */
+  protected _requiredText = new BehaviorSubject<string>('');
 }

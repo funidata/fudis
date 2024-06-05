@@ -2,15 +2,18 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  Host,
   Input,
   OnChanges,
+  Optional,
   Output,
-  Signal,
   effect,
 } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
-import { FudisComponentChanges, FudisTranslationConfig } from '../../types/miscellaneous';
+import { FudisComponentChanges } from '../../types/miscellaneous';
 import { LinkApiDirective } from '../../directives/link/link-api/link-api.directive';
+import { NotificationComponent } from '../notification/notification.component';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-link',
@@ -19,12 +22,20 @@ import { LinkApiDirective } from '../../directives/link/link-api/link-api.direct
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinkComponent extends LinkApiDirective implements OnChanges {
-  constructor(private _translationService: FudisTranslationService) {
+  constructor(
+    @Host() @Optional() private _parentNotification: NotificationComponent,
+    private _translationService: FudisTranslationService,
+  ) {
     super();
-    effect(() => {
-      this._translations = this._translationService.getTranslations();
 
-      this._externalLinkAriaLabel = this._translations().LINK.EXTERNAL_LINK;
+    if (_parentNotification) {
+      this.color = 'gray-dark';
+    }
+
+    effect(() => {
+      this._externalLinkAriaLabel.next(
+        this._translationService.getTranslations()().LINK.EXTERNAL_LINK,
+      );
     });
   }
 
@@ -38,6 +49,7 @@ export class LinkComponent extends LinkApiDirective implements OnChanges {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() link: string | any[];
+
   /**
    * Title for the link, if not defined title will be the same as link URL
    */
@@ -72,20 +84,18 @@ export class LinkComponent extends LinkApiDirective implements OnChanges {
   /**
    * Aria-label for the external link
    */
-  protected _externalLinkAriaLabel: string;
-
-  /**
-   * Fudis translations
-   */
-  protected _translations: Signal<FudisTranslationConfig>;
+  protected _externalLinkAriaLabel = new BehaviorSubject<string>('');
 
   /**
    * Store parsed values of external link's title
    */
-  protected _externalLinkTitleParsed: string[];
+  protected _externalLinkTitleParsed = new BehaviorSubject<string[]>([]);
 
   ngOnChanges(changes: FudisComponentChanges<LinkComponent>): void {
-    if (changes.externalLink || changes.title) {
+    if (
+      changes.externalLink?.currentValue !== changes.externalLink?.previousValue ||
+      changes.title?.currentValue !== changes.title?.previousValue
+    ) {
       this._parseExternalLinkTitle();
     }
   }
@@ -103,12 +113,12 @@ export class LinkComponent extends LinkApiDirective implements OnChanges {
 
           const titleStart: string = toArray.slice(0, -1).join(' ');
 
-          this._externalLinkTitleParsed = [titleStart, lastWord];
+          this._externalLinkTitleParsed.next([titleStart, lastWord]);
         } else {
-          this._externalLinkTitleParsed = toArray;
+          this._externalLinkTitleParsed.next(toArray);
         }
       } else {
-        this._externalLinkTitleParsed = [this.externalLink];
+        this._externalLinkTitleParsed.next([this.externalLink]);
       }
     }
   }

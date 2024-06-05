@@ -91,7 +91,7 @@ describe('InternalErrorSummaryService', () => {
   });
 
   it('should initially return an empty object', () => {
-    const errors = service.getErrorsOnReload()();
+    const errors = service.allFormErrorsObservable.value;
 
     const initial = {};
 

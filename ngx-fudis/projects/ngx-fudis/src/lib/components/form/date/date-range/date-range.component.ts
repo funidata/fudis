@@ -2,6 +2,7 @@ import {
   AfterContentInit,
   Component,
   ContentChild,
+  DestroyRef,
   ElementRef,
   Inject,
   Input,
@@ -9,10 +10,10 @@ import {
   ViewChild,
   ViewEncapsulation,
   effect,
+  inject,
 } from '@angular/core';
 import { distinctUntilChanged } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
-import { untilDestroyed } from '../../../../utilities/untilDestroyed';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../services/translation/translation.service';
 import { FudisDateRangeItem } from '../../../../types/forms';
@@ -20,6 +21,7 @@ import {
   EndDateErrorDirective,
   StartDateErrorDirective,
 } from '../../../../directives/content-projection/content/content.directive';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-date-range',
@@ -93,7 +95,7 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
    */
   private _heightSetTryCounter: number = 0;
 
-  private _untilDestroyed = untilDestroyed();
+  private _destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
     if (this.id) {
@@ -108,13 +110,13 @@ export class DateRangeComponent implements OnInit, AfterContentInit {
      * Subscribe to control value changes, so we can trigger start date and end date comparison
      */
     this.startDate.control.valueChanges
-      .pipe(distinctUntilChanged(), this._untilDestroyed())
+      .pipe(distinctUntilChanged(), takeUntilDestroyed(this._destroyRef))
       .subscribe(() => {
         this._checkDateCrossings();
       });
 
     this.endDate.control.valueChanges
-      .pipe(distinctUntilChanged(), this._untilDestroyed())
+      .pipe(distinctUntilChanged(), takeUntilDestroyed(this._destroyRef))
       .subscribe(() => {
         this._checkDateCrossings();
       });

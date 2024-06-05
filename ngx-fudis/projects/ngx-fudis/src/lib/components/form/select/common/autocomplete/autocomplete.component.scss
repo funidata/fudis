@@ -4,66 +4,28 @@
 @use "../../../../../foundations/colors/mixins.scss" as colorMixins;
 @use "../../../../../foundations/focus/mixins.scss" as focus;
 
-.fudis-select-autocomplete-host {
-  display: block;
-  position: relative;
-  width: 100%;
-}
-
 .fudis-select-autocomplete {
+  @include typography.text-field-input;
+  @include borders.border("1px", "solid", "gray-dark");
+  @include borders.border-radius("2px");
+
+  box-sizing: border-box;
   display: flex;
-  position: relative;
+  align-items: baseline;
+  justify-content: flex-start;
+  padding: spacing.$spacing-xxs spacing.$spacing-lg spacing.$spacing-xxs spacing.$spacing-sm;
   width: 100%;
+  height: spacing.$spacing-xl;
+  max-height: spacing.$spacing-xl;
+  /* stylelint-disable-next-line property-disallowed-list */
+  line-height: spacing.$spacing-lg;
 
-  &__icon {
-    &.fudis-icon-host,
-    &.fudis-button-host {
-      position: absolute;
-      top: 50%;
-      right: spacing.$spacing-xxs;
-      transform: translateY(-50%);
-    }
-
-    &--disabled {
-      .fudis-button[aria-disabled="true"] {
-        @include colorMixins.bg-color("transparent");
-        @include borders.outline("1px", "solid", "transparent");
-      }
-    }
-
-    &.fudis-icon-host,
-    &.fudis-button-host svg {
-      pointer-events: none;
-    }
-
-    &--hidden.fudis-button-host {
-      display: none;
-    }
+  &::placeholder {
+    @include colorMixins.text-color("gray-middle");
   }
 
-  &__input {
-    @include typography.text-field-input;
-    @include borders.border("1px", "solid", "gray-dark");
-    @include borders.border-radius("2px");
-
-    box-sizing: border-box;
-    display: flex;
-    align-items: baseline;
-    justify-content: flex-start;
-    padding: spacing.$spacing-xxs spacing.$spacing-lg spacing.$spacing-xxs spacing.$spacing-sm;
-    width: 100%;
-    height: spacing.$spacing-xl;
-    max-height: spacing.$spacing-xl;
-    /* stylelint-disable-next-line property-disallowed-list */
-    line-height: spacing.$spacing-lg;
-
-    &::placeholder {
-      @include colorMixins.text-color("gray-middle");
-    }
-
-    &:focus,
-    &:focus-visible {
-      @include focus.focus-form-field;
-    }
+  &:focus,
+  &:focus-visible {
+    @include focus.focus-form-field;
   }
 }

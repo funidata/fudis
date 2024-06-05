@@ -1,0 +1,9 @@
+.fudis-select-icons {
+  &__icon {
+    pointer-events: none;
+
+    &--disabled {
+      pointer-events: none;
+    }
+  }
+}
