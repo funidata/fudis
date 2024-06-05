@@ -34,6 +34,7 @@ test.only("Dropdown with Clear Button and dropdown keyboard interactions", async
   await expect(page).toHaveScreenshot("A-6-hover-gecko.png", {
     fullPage: true,
   });
+  await page.getByTestId("fudis-heading-1").hover();
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
   await expect(page).toHaveScreenshot("A-7-select-mountain-lion.png", {
@@ -81,6 +82,7 @@ test.only("Dropdown with Clear Button and dropdown keyboard interactions", async
     .then(() => {
       page.getByText("Striped hyena").click();
     });
+  await page.getByTestId("fudis-heading-1").hover();
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
   await expect(page).toHaveScreenshot("A-13-click-select-hyena.png", {
     fullPage: true,
@@ -113,10 +115,9 @@ test("Dropdowns and Autocompletes", async ({ page }) => {
     fullPage: true,
   });
   await page.getByTestId("fudis-select-2").click();
-  await expect(
-    page.getByTestId("fudis-select-2-dropdown").getByText("Golden jackal"),
-  ).not.toBeVisible();
+  await expect(page.getByTestId("fudis-select-2-dropdown")).not.toBeVisible();
   await page.getByTestId("fudis-select-2").click();
+  await expect(page.getByTestId("fudis-select-2-dropdown")).toBeVisible();
   await page
     .getByTestId("fudis-select-2-dropdown")
     .getByText("Ostrich")
@@ -124,6 +125,8 @@ test("Dropdowns and Autocompletes", async ({ page }) => {
     .then(() => {
       page.getByTestId("fudis-select-2-dropdown").getByText("Ostrich").click();
     });
+  await page.getByTestId("fudis-heading-1").hover();
+  await expect(page.getByTestId("fudis-select-2-dropdown")).not.toBeVisible();
   await expect(page).toHaveScreenshot("B-2-ostrich-selected.png", {
     fullPage: true,
   });
@@ -133,16 +136,14 @@ test("Dropdowns and Autocompletes", async ({ page }) => {
    * Autocomplete dropdown with clear button
    */
 
-  await expect(page).toHaveScreenshot("C-1-autocomplete-dropdown-with-clear-button-focused.png", {
-    fullPage: true,
-  });
+  await expect(page.getByTestId("fudis-select-3-dropdown")).toBeVisible();
   await page.keyboard.press("Backspace");
-  await expect(page).toHaveScreenshot("C-2-autocomplete-dropdown-backspace.png", {
+  await expect(page).toHaveScreenshot("C-1-autocomplete-dropdown-backspace.png", {
     fullPage: true,
   });
   await page.keyboard.press("KeyI");
   await page.keyboard.press("KeyN");
-  await expect(page).toHaveScreenshot("C-3-autocomplete-dropdown-in-typed.png", {
+  await expect(page).toHaveScreenshot("C-2-autocomplete-dropdown-in-typed.png", {
     fullPage: true,
   });
   await page.keyboard.press("Tab");

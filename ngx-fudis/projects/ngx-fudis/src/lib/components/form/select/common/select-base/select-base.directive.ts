@@ -267,7 +267,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     this._dropdownOpen = false;
 
     this._preventDropdownReopen = preventDropdownReopen;
-
     this._focusToSelectInput(focusToInput);
   }
 
@@ -321,7 +320,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     if (this._inputFocused || this._mouseUpOnInput) {
       this._toggleDropdown();
     }
-
     this._focusToSelectInput();
   }
 
@@ -583,6 +581,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   @HostListener('mouseup', ['$event.target'])
   private _handleMouseUp(targetElement: HTMLElement) {
     this._mouseDown = false;
+    this._mouseDownTargetInsideComponent = false;
     this._mouseUpOnInput =
       targetElement &&
       (!!this._inputRef?.nativeElement.contains(targetElement) ||

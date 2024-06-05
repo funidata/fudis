@@ -175,8 +175,9 @@ export class SelectAutocompleteComponent implements OnInit {
     }
 
     if (
-      (!newValue && this.typeThreshold !== 0) ||
-      (newValue && newValue?.length < this.typeThreshold)
+      this.dropdownOpen &&
+      ((!newValue && this.typeThreshold !== 0) ||
+        (newValue && newValue?.length < this.typeThreshold))
     ) {
       this.triggerDropdownClose.emit();
     }
