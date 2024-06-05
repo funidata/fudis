@@ -32,7 +32,7 @@ import { LinkComponent } from '../../link/link.component';
   selector: 'fudis-mock-form-component',
   template: `<fudis-form
     [id]="'my-own-id'"
-    [titleLevel]="1"
+    [level]="1"
     [titleSize]="'md'"
     [title]="'Example Form'"
     [helpText]="'Some help for the form'"

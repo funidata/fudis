@@ -136,7 +136,7 @@ const PreSelectedTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCom
     </fudis-body-text>
 
     <ng-container *ngIf="control.value && control.value.length > 0">
-      <fudis-section [title]="'Selected options'" [titleLevel]="2">
+      <fudis-section [title]="'Selected options'" [level]="2">
         <ng-template fudisContent type="section">
           <ng-container *ngFor="let option of control.value; let i = index">
             <fudis-heading [level]="3" [size]="'md'">Option {{i + 1}} </fudis-heading>

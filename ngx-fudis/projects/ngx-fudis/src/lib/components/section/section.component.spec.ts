@@ -31,7 +31,7 @@ import { getElement, sortClasses } from '../../utilities/tests/utilities';
   template: `<fudis-section
     [title]="title"
     [titleSize]="titleSize"
-    [titleLevel]="titleLevel"
+    [level]="level"
     [classes]="classes"
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
@@ -53,7 +53,7 @@ import { getElement, sortClasses } from '../../utilities/tests/utilities';
 class MockFudisSectionComponent {
   title: string = 'This is section title';
   titleSize: FudisHeadingSize = 'lg';
-  titleLevel: FudisHeadingLevel = 2;
+  level: FudisHeadingLevel = 2;
   classes: string[];
   tooltip: string = 'This is tooltip in section';
   tooltipToggle: boolean = false;
@@ -109,7 +109,7 @@ describe('SectionComponent', () => {
   }
 
   function sectionTitleLevelCheck(level: FudisHeadingLevel): void {
-    mockComponent.titleLevel = level;
+    mockComponent.level = level;
     mockFixture.detectChanges();
 
     const headingElement = mockFixture.nativeElement.querySelector('fudis-heading');

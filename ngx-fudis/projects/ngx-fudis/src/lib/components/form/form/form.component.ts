@@ -70,7 +70,7 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   /**
    * Heading level for the form title
    */
-  @Input() titleLevel: FudisHeadingLevel;
+  @Input() level: FudisHeadingLevel;
 
   /**
    * Heading size for the form title
