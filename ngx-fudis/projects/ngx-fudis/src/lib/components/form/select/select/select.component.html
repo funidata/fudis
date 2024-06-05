@@ -65,7 +65,7 @@
         (triggerFocus)="_inputFocus()"
         (triggerBlur)="_inputBlur($event)"
       />
-      <div class="fudis-select__input-wrapper__icons">
+      <div #selectIconsRef class="fudis-select__input-wrapper__icons">
         <fudis-select-icons
           *ngIf="size !== 'xs'"
           [filterText]="!!_autocompleteFilterText()"
@@ -87,6 +87,8 @@
       [open]="_dropdownOpen"
       [size]="size"
       [parentId]="id"
+      (handleBlur)="_dropdownBlur($event)"
+      (handleFocus)="_dropdownFocus($event)"
     >
       <ng-container *ngIf="_content?.type === 'select-options'">
         <ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>

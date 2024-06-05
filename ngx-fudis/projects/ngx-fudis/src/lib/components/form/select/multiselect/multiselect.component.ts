@@ -213,11 +213,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
     this.handleMultiSelectionChange(option, 'remove');
 
     if (!this.control.value) {
-      if (this.variant !== 'dropdown') {
-        this._autocompleteRef.inputRef.nativeElement.focus();
-      } else {
-        this._inputRef.nativeElement.focus();
-      }
+      this._focusToSelectInput();
     }
   }
 }

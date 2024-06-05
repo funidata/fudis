@@ -38,7 +38,12 @@ const SelectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectComponent)
     groupedMockData,
   },
   template: html`
-    <fudis-section [title]="'Select showcase'" [titleLevel]="1" [width]="'md'">
+    <fudis-section
+      [title]="'Select showcase'"
+      [titleLevel]="1"
+      [width]="'md'"
+      [marginBottom]="'xxl'"
+    >
       <ng-template fudisNotifications type="section">
         <fudis-body-text
           >Following Select components share all same Form Control. When you change value in one,
@@ -204,7 +209,24 @@ const SelectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectComponent)
                     *ngFor="let groupedOption of group.options"
                     [data]="groupedOption"
                   ></fudis-select-option>
-                </fudis-select-group> </ng-template></fudis-select></fudis-grid-item></fudis-grid
+                </fudis-select-group> </ng-template></fudis-select
+          ></fudis-grid-item>
+
+          <fudis-grid-item [columns]="'stretch'">
+            <fudis-heading [level]="3" [size]="'md'">Current control value</fudis-heading>
+            <fudis-body-text *ngIf="!control.value" [size]="'lg-regular'"
+              >Control value: null.</fudis-body-text
+            >
+            <fudis-dl *ngIf="control.value" [variant]="'compact'">
+              <fudis-dl-item>
+                <fudis-dt [textContent]="'Value'"></fudis-dt>
+                <fudis-dd [textContent]="control.value.value"></fudis-dd>
+              </fudis-dl-item>
+              <fudis-dl-item>
+                <fudis-dt [textContent]="'Label'"></fudis-dt>
+                <fudis-dd [textContent]="control.value.label"></fudis-dd>
+              </fudis-dl-item>
+            </fudis-dl> </fudis-grid-item></fudis-grid
       ></ng-template>
     </fudis-section>
   `,

@@ -74,6 +74,11 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   @ViewChild('autocompleteRef') protected _autocompleteRef: SelectAutocompleteComponent;
 
   /**
+   * Reference to autocomplete element, used to focus to it
+   */
+  @ViewChild('selectIconsRef') protected _selectIconsRef: ElementRef<HTMLDivElement>;
+
+  /**
    * To lazy load options on first open
    */
   @ContentChild(ContentDirective) protected _content: ContentDirective;
@@ -216,11 +221,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     if (!this.disabled && !this.control.disabled) {
       this._setControlNull();
 
-      if (this.variant !== 'dropdown') {
-        this._autocompleteRef.inputRef.nativeElement.focus();
-      } else {
-        this._inputRef.nativeElement.focus();
-      }
+      this._focusToSelectInput();
     }
   }
 
@@ -267,11 +268,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
 
     this._preventDropdownReopen = preventDropdownReopen;
 
-    if (this.variant !== 'dropdown' && focusToInput) {
-      this._autocompleteRef.inputRef.nativeElement.focus();
-    } else if (focusToInput) {
-      this._inputRef.nativeElement.focus();
-    }
+    this._focusToSelectInput(focusToInput);
   }
 
   /**
@@ -326,11 +323,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
       this._toggleDropdown();
     }
 
-    if (this.variant === 'dropdown') {
-      this._inputRef.nativeElement.focus();
-    } else {
-      this._autocompleteRef.inputRef.nativeElement.focus();
-    }
+    this._focusToSelectInput();
   }
 
   /**
@@ -483,6 +476,35 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     }
   }
 
+  protected _dropdownBlur(event: FocusEvent): void {
+    this.componentFocused(event).then((value) => {
+      if (!value) {
+        this.closeDropdown(false);
+      }
+    });
+  }
+
+  protected _dropdownFocus(event: FocusEvent): void {
+    const focusFromInputOrClearButton =
+      event.relatedTarget === this._inputRef?.nativeElement ||
+      event.relatedTarget === this._autocompleteRef?.inputRef.nativeElement ||
+      this._selectIconsRef.nativeElement.contains(event.relatedTarget as HTMLElement);
+
+    if (focusFromInputOrClearButton) {
+      this._focusToFirstOption();
+    } else {
+      this._focusToSelectInput();
+    }
+  }
+
+  protected _focusToSelectInput(condition: boolean = true) {
+    if (this.variant !== 'dropdown' && condition) {
+      this._autocompleteRef.inputRef.nativeElement.focus();
+    } else if (condition) {
+      this._inputRef.nativeElement.focus();
+    }
+  }
+
   /**
    * Function declaration overridden and implemented by Select and Multiselect
    */
@@ -563,12 +585,12 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
       targetElement && !!this._selectRef.nativeElement.contains(targetElement);
   }
 
-  @HostListener('mouseUp', ['$event.target'])
+  @HostListener('mouseup', ['$event.target'])
   private _handleMouseUp(targetElement: HTMLElement) {
     this._mouseDown = false;
     this._mouseUpOnInput =
       targetElement &&
-      (!!this._inputRef.nativeElement.contains(targetElement) ||
+      (!!this._inputRef?.nativeElement.contains(targetElement) ||
         !!this._autocompleteRef?.inputRef?.nativeElement.contains(targetElement));
   }
 }

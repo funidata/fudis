@@ -169,6 +169,8 @@ export class SelectAutocompleteComponent {
 
     if (inputValue.length >= this.typeThreshold) {
       this.triggerFilterTextUpdate.emit(inputValue);
+    } else {
+      this.triggerFilterTextUpdate.emit('');
     }
   }
 
@@ -228,11 +230,7 @@ export class SelectAutocompleteComponent {
       inputValue.length >= this.typeThreshold
     ) {
       this.triggerDropdownToggle.emit();
-    } else if (
-      key !== 'ArrowDown' &&
-      this.selectionClearButton &&
-      inputValue.length < this.typeThreshold
-    ) {
+    } else if (key !== 'ArrowDown' && inputValue.length < this.typeThreshold) {
       this.triggerDropdownClose.emit();
     } else if (
       !this._preventDropdownReOpen &&
