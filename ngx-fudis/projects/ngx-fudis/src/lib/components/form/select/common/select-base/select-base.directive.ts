@@ -291,11 +291,10 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
       this.variant === 'autocompleteDropdown' ||
       (this.variant === 'autocompleteType' && this._autocompleteFilterText() !== '');
 
-    if (!this._preventDropdownReopen && !this._dropdownOpen && openDropdown && !this._mouseDown) {
+    if (!this._preventDropdownReopen && openDropdown && !this._mouseDown) {
       this.openDropdown();
-
-      this._preventDropdownReopen = false;
     }
+    this._preventDropdownReopen = false;
   }
 
   /**
@@ -429,11 +428,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     if (this.variant !== 'dropdown') {
       this._autocompleteRef.preventSpaceKeypress = true;
 
-      (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).setAttribute(
-        'value',
-        value,
-      );
-      (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value = value;
+      this._autocompleteRef.updateInputValue(value);
 
       // TODO: check if below is needed, if yes, change it observable.
 
@@ -570,7 +565,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    * When user clicks, set status is click inside or outside
    * @param targetElement
    */
-  @HostListener('document:click', ['$event.target'])
+  @HostListener('document:mouseup', ['$event.target'])
   private _handleWindowClick(targetElement: HTMLElement) {
     if (this._dropdownOpen && !this._selectRef.nativeElement.contains(targetElement)) {
       this.closeDropdown(false, true);
@@ -592,5 +587,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
       targetElement &&
       (!!this._inputRef?.nativeElement.contains(targetElement) ||
         !!this._autocompleteRef?.inputRef?.nativeElement.contains(targetElement));
+
+    if (this._dropdownOpen && !this._selectRef.nativeElement.contains(targetElement)) {
+      this.closeDropdown(false, true);
+    }
   }
 }

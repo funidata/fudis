@@ -214,8 +214,10 @@ const SelectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectComponent)
 
           <fudis-grid-item [columns]="'stretch'">
             <fudis-heading [level]="3" [size]="'md'">Current control value</fudis-heading>
-            <fudis-body-text *ngIf="!control.value" [size]="'lg-regular'"
-              >Control value: null.</fudis-body-text
+            <ng-container *ngIf="!control.value">
+              <fudis-body-text [size]="'lg-regular'"
+                >Control value: null.</fudis-body-text
+              ></ng-container
             >
             <fudis-dl *ngIf="control.value" [variant]="'compact'">
               <fudis-dl-item>

@@ -127,27 +127,11 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
       this._dropdownSelectionLabelText = currentLabel || '';
     } else {
       if (this._autocompleteRef) {
-        (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).setAttribute(
-          'value',
-          currentLabel || '',
-        );
-        (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value =
-          currentLabel || '';
+        this._autocompleteRef.updateInputValue(currentLabel || '');
       } else {
         this._autocompleteSelectionLabelValue = currentLabel || '';
       }
     }
     this._changeDetectorRef.detectChanges();
-
-    // if (this.control.value) {
-    //   if (this.variant !== 'dropdown') {
-    //     this._changeDetectorRef.detectChanges();
-    //   }
-    // } else {
-    //   this._filterTextUpdate('');
-    //   this._autocompleteFilterText.set('');
-    //   this._autocompleteSelectionLabelValue = null;
-    //   this._dropdownSelectionLabelText = '';
-    // }
   }
 }
