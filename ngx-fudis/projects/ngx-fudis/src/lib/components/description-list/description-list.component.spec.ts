@@ -28,7 +28,7 @@ import { FudisIdService } from '../../services/id/id.service';
       </fudis-dl-item>
     </fudis-dl>
 
-    <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
+    <fudis-dl [variant]="variant" [disableGrid]="disableGrid" [tag]="'p'">
       <fudis-dl-item>
         <fudis-dt [textContent]="'Single DT'"></fudis-dt>
         <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
@@ -182,21 +182,6 @@ describe('DescriptionListComponent', () => {
       const statusAfter = component.getDisabledGridStatus()();
 
       expect(statusAfter).toEqual(true);
-    });
-  });
-
-  describe('Child DL item array', () => {
-    it('should update when adding or removing items', () => {
-      expect(component.childDlItems.length).toEqual(0);
-
-      component.addChildId('description-list-1-item-1');
-      component.addChildId('description-list-1-item-2');
-
-      expect(component.childDlItems.length).toEqual(2);
-
-      component.removeChildId('description-list-1-item-1');
-
-      expect(component.childDlItems.length).toEqual(1);
     });
   });
 });

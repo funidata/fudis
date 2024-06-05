@@ -1,12 +1,13 @@
 import {
   Component,
   Input,
-  effect,
   ViewEncapsulation,
   ChangeDetectionStrategy,
+  effect,
 } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisIdService } from '../../services/id/id.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'fudis-breadcrumbs',
@@ -23,7 +24,7 @@ export class BreadcrumbsComponent {
     this._id = this._idService.getNewParentId('breadcrumbs');
 
     effect(() => {
-      this._breadcrumbsPrefix = this._translationService.getTranslations()().BREADCRUMBS.PREFIX;
+      this._breadcrumbsPrefix.next(this._translationService.getTranslations()().BREADCRUMBS.PREFIX);
     });
   }
 
@@ -35,7 +36,7 @@ export class BreadcrumbsComponent {
   /**
    * Prefix for aria-label from Fudis translation keys
    */
-  protected _breadcrumbsPrefix: string;
+  protected _breadcrumbsPrefix = new Subject<string>();
 
   protected _id: string;
 

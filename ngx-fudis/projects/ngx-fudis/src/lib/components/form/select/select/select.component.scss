@@ -10,30 +10,37 @@
 }
 
 .fudis-select {
+  position: relative;
   width: 100%;
 
   &__input-wrapper {
-    display: flex;
     position: relative;
 
-    &__icon {
-      &.fudis-icon-host,
-      &.fudis-button-host {
-        position: absolute;
-        top: 50%;
-        right: spacing.$spacing-xxs;
-        transform: translateY(-50%);
-      }
-
-      &.fudis-icon-host,
-      &.fudis-button-host svg {
-        pointer-events: none;
-      }
-
-      &--hidden.fudis-button-host {
-        display: none;
-      }
+    &__icons {
+      position: absolute;
+      top: 50%;
+      right: spacing.$spacing-xxs;
+      transform: translateY(-50%);
     }
+
+    // &__icon {
+    //   &.fudis-icon-host,
+    //   &.fudis-button-host {
+    //     position: absolute;
+    //     top: 50%;
+    //     right: spacing.$spacing-xxs;
+    //     transform: translateY(-50%);
+    //   }
+
+    //   &.fudis-icon-host,
+    //   &.fudis-button-host svg {
+    //     pointer-events: none;
+    //   }
+
+    //   &--hidden.fudis-button-host {
+    //     display: none;
+    //   }
+    // }
   }
 
   &__input {
@@ -60,18 +67,19 @@
       @include focus.focus-form-field;
     }
 
-    &__label {
+    &__label,
+    &__placeholder {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      &--hidden {
+        display: none;
+      }
     }
 
     &__placeholder {
       @include colorMixins.text-color("gray-middle");
-
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
     }
 
     &__dropdown {

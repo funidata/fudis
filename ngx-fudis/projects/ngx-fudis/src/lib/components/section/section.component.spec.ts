@@ -41,7 +41,9 @@ import { getElement, sortClasses } from '../../utilities/tests/utilities';
       <fudis-button [label]="'Some action'"></fudis-button>
     </ng-template>
     <ng-template fudisNotifications type="section">
-      <fudis-notification>This is notification</fudis-notification>
+      <fudis-notification
+        ><fudis-body-text>This is notification</fudis-body-text></fudis-notification
+      >
     </ng-template>
     <ng-template fudisContent type="section">
       <fudis-body-text>Some text content inside section</fudis-body-text>
@@ -89,7 +91,7 @@ describe('SectionComponent', () => {
 
     mockFixture = TestBed.createComponent(MockFudisSectionComponent);
     mockComponent = mockFixture.componentInstance;
-    mockFixture.detectChanges();
+    mockFixture.autoDetectChanges();
   });
 
   function getSectionElement() {
@@ -130,7 +132,7 @@ describe('SectionComponent', () => {
 
     it('should add custom CSS classes if given', () => {
       mockComponent.classes = ['my-custom-class other-custom-class'];
-      mockFixture.detectChanges();
+      mockFixture.autoDetectChanges();
 
       expect(sortClasses(getSectionElement().className)).toEqual(
         sortClasses(

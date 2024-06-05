@@ -11,13 +11,13 @@
     }
   },
   "peerDependencies": {
-    "@angular/common": "^16.2.12",
-    "@angular/core": "^16.2.12",
-    "@angular/material": "^16.2.14",
-    "@angular/cdk": "^16.2.14"
+    "@angular/common": "^17.3.10",
+    "@angular/core": "^17.3.10",
+    "@angular/material": "^17.3.10",
+    "@angular/cdk": "^17.3.10"
   },
   "devDependencies": {
     "tslib": "^2.5.3",
-    "typescript": "5.1.6"
+    "typescript": "5.2.2"
   }
 }

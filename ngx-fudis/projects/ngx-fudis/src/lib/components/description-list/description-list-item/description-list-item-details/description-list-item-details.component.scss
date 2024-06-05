@@ -18,10 +18,6 @@
 
       display: flex;
       flex-direction: column;
-
-      &__actions {
-        margin-top: spacing.$spacing-xs;
-      }
     }
 
     &__parenthesis {

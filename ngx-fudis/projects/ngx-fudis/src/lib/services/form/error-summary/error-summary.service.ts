@@ -1,10 +1,11 @@
-import { Injectable, Signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { FudisInternalErrorSummaryService } from './internal-error-summary.service';
 
 import {
   FudisFormErrorSummaryFormsAndErrors,
   FudisFormErrorSummaryUpdateStrategy,
 } from '../../../types/forms';
+import { BehaviorSubject } from 'rxjs';
 
 /**
  * Error Summary Service public methods and tools
@@ -45,9 +46,9 @@ export class FudisErrorSummaryService {
   }
 
   /**
-   * Returns a readonly signal of all errors sent to Error Summary
+   * Returns an observable of all errors sent to Error Summary
    */
-  public getErrorsOnReload(): Signal<FudisFormErrorSummaryFormsAndErrors> {
-    return this._errorSummaryService.getErrorsOnReload();
+  public getErrorsObservable(): BehaviorSubject<FudisFormErrorSummaryFormsAndErrors> {
+    return this._errorSummaryService.allFormErrorsObservable;
   }
 }

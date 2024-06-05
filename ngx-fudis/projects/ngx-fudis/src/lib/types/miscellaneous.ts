@@ -1,3 +1,5 @@
+import { SimpleChange } from '@angular/core';
+
 export type FudisBadgeVariant = 'accent' | 'danger' | 'primary' | 'secondary' | 'success';
 
 export type FudisDescriptionListVariant = 'regular' | 'compact';
@@ -145,11 +147,11 @@ export interface FudisTranslationLanguageBadgeAriaLabel {
  * P = property of component. E. g. for Grid columns and rowGap or for Heading level and size.
  * So T[P] translates to e.g. HeadingComponent['level'] --> HeadingComponent.level --> values from 1-6
  */
-type FudisComponentChange<T, P extends keyof T> = {
+interface FudisComponentChange<T, P extends keyof T> extends SimpleChange {
   previousValue: T[P] | undefined;
   currentValue: T[P] | undefined;
   firstChange: boolean;
-};
+}
 
 export type FudisComponentChanges<T> = {
   [P in keyof T]?: FudisComponentChange<T, P>;
