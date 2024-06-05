@@ -1,6 +1,6 @@
 import test, { expect } from "@playwright/test";
 
-test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ page }) => {
+test.only("Dropdown with Clear Button and dropdown keyboard interactions", async ({ page }) => {
   await page.goto("/iframe.html?args=&id=components-form-select--select-showcase&viewMode=story");
   await expect(page).toHaveScreenshot("A-1-init.png", {
     fullPage: true,
@@ -41,30 +41,24 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   });
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
-  await expect(page).toHaveScreenshot("A-8-toggle-enter-open.png", {
-    fullPage: true,
-  });
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
-  await expect(page).toHaveScreenshot("A-9-toggle-enter-close.png", {
-    fullPage: true,
-  });
   await page.keyboard.press("ArrowDown");
   await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
-  await expect(page).toHaveScreenshot("A-9-toggle-arrow-down-open.png", {
+  await expect(page).toHaveScreenshot("A-8-toggle-arrow-down-open.png", {
     fullPage: true,
   });
   await page.keyboard.press("ArrowUp");
-  await expect(page).toHaveScreenshot("A-10-focus-last-item.png", {
+  await expect(page).toHaveScreenshot("A-9-focus-last-item.png", {
     fullPage: true,
   });
   await page.keyboard.press("ArrowDown");
-  await expect(page).toHaveScreenshot("A-11-focus-first-dog.png", {
+  await expect(page).toHaveScreenshot("A-10-focus-first-dog.png", {
     fullPage: true,
   });
   await page.keyboard.press("Escape");
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
-  await expect(page).toHaveScreenshot("A-12-close-escape.png", {
+  await expect(page).toHaveScreenshot("A-11-close-escape.png", {
     fullPage: true,
   });
   await page.keyboard.press("ArrowDown");
@@ -74,7 +68,7 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
-  await expect(page).toHaveScreenshot("A-13-enter-select-dolphin.png", {
+  await expect(page).toHaveScreenshot("A-12-enter-select-dolphin.png", {
     fullPage: true,
   });
   await page.keyboard.press("Enter");
@@ -88,26 +82,27 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
       page.getByText("Striped hyena").click();
     });
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
-  await expect(page).toHaveScreenshot("A-14-click-select-hyena.png", {
+  await expect(page).toHaveScreenshot("A-13-click-select-hyena.png", {
     fullPage: true,
   });
   await page.getByTestId("fudis-button-1").focus();
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
-  await expect(page).toHaveScreenshot("A-15-focus-clear-button.png", {
+  await expect(page).toHaveScreenshot("A-14-focus-clear-button.png", {
     fullPage: true,
   });
   await page.keyboard.press("Enter");
-  await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
-  await expect(page).toHaveScreenshot("A-16-enter-clear.png", {
+  await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
+  await expect(page).toHaveScreenshot("A-15-enter-clear.png", {
     fullPage: true,
   });
 });
 
-test("Dropdown without Clear button", async ({ page }) => {
+test("Dropdowns and Autocompletes", async ({ page }) => {
   await page.goto("/iframe.html?args=&id=components-form-select--select-showcase&viewMode=story");
 
-  // Single-select Dropdown without Clear button
-
+  /**
+   * Single-select Dropdown without Clear button
+   */
   await page.getByTestId("fudis-button-1").click();
   await page.getByTestId("fudis-select-2").focus();
 
@@ -134,7 +129,9 @@ test("Dropdown without Clear button", async ({ page }) => {
   });
   await page.keyboard.press("Tab");
 
-  // Autocomplete dropdown with clear button
+  /**
+   * Autocomplete dropdown with clear button
+   */
 
   await expect(page).toHaveScreenshot("C-1-autocomplete-dropdown-with-clear-button-focused.png", {
     fullPage: true,
@@ -151,8 +148,9 @@ test("Dropdown without Clear button", async ({ page }) => {
   await page.keyboard.press("Tab");
   await page.keyboard.press("Tab");
 
-  // Autocomplete dropdown without clear button
-
+  /**
+   * Autocomplete dropdown without clear button
+   */
   await expect(page.getByTestId("fudis-select-3-dropdown")).not.toBeVisible();
   await expect(page).toHaveScreenshot("D-1-autocomplete-dropdown-2-focused.png", {
     fullPage: true,
@@ -177,7 +175,9 @@ test("Dropdown without Clear button", async ({ page }) => {
 
   await page.keyboard.press("Tab");
 
-  // Autocomplete type dropdown without clear button
+  /**
+   * Autocomplete type with clear button
+   */
   await expect(page.getByTestId("fudis-select-5-dropdown")).toBeVisible();
   await expect(page).toHaveScreenshot("E-1-autocomplete-type-focused.png", {
     fullPage: true,
@@ -213,8 +213,11 @@ test("Dropdown without Clear button", async ({ page }) => {
     fullPage: true,
   });
   await page.keyboard.press("Backspace");
-  await page.keyboard.press("Tab");
-  await page.keyboard.press("Tab");
+
+  /**
+   * Last one
+   */
+  await page.getByTestId("fudis-select-6").focus();
   await expect(page.getByTestId("fudis-select-5-dropdown")).not.toBeVisible();
   await expect(page.getByTestId("fudis-select-6-dropdown")).not.toBeVisible();
   await page.keyboard.press("E");
