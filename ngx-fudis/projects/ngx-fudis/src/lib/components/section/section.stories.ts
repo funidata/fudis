@@ -23,6 +23,17 @@ export default {
     },
   },
   argTypes: {
+    badge: {
+      options: ['accent', 'danger', 'primary', 'secondary', 'success'],
+      control: {
+        type: 'select',
+      },
+    },
+    badgeText: {
+      control: {
+        type: 'text',
+      },
+    },
     level: {
       options: fudisHeadingLevelArray,
       control: { type: 'select' },
@@ -42,6 +53,8 @@ const ExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent) => (
     [title]="title"
     [titleSize]="titleSize"
     [level]="level"
+    [badge]="badge"
+    [badgeText]="badgeText"
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
@@ -78,6 +91,8 @@ Example.args = {
   tooltip: 'More info about this section',
   tooltipToggle: false,
   tooltipPosition: 'below',
+  badge: 'primary',
+  badgeText: 'Example',
   align: 'start',
   marginTop: 'none',
   marginBottom: 'none',
