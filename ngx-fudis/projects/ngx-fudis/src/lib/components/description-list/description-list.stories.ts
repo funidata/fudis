@@ -339,8 +339,7 @@ const WithLanguageBadgesTemplate: StoryFn<DescriptionListComponent> = (
         <fudis-dd [lang]="'en'" [textContent]="'Return of the Jedi'"></fudis-dd>
       </fudis-description-list-item>
     </fudis-description-list>
-    <example-language-service-change-component />
-  `,
+    <example-language-service-change-component /> `,
 });
 
 export const WithLanguageBadges = WithLanguageBadgesTemplate.bind({});
