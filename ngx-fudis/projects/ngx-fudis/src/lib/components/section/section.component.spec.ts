@@ -37,15 +37,15 @@ import { getElement, sortClasses } from '../../utilities/tests/utilities';
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
   >
-    <ng-template fudisActions type="section">
+    <ng-template fudisActions [type]="'section'">
       <fudis-button [label]="'Some action'"></fudis-button>
     </ng-template>
-    <ng-template fudisHeader type="section">
+    <ng-template fudisHeader [type]="'section'">
       <fudis-notification
         ><fudis-body-text>This is notification</fudis-body-text></fudis-notification
       >
     </ng-template>
-    <ng-template fudisContent type="section">
+    <ng-template fudisContent [type]="'section'">
       <fudis-body-text>Some text content inside section</fudis-body-text>
     </ng-template>
   </fudis-section>`,
@@ -174,9 +174,9 @@ describe('SectionComponent', () => {
   });
 
   describe('Content projection', () => {
-    it('should render notification inside header if given', () => {
+    it('should render notification inside header content if given', () => {
       const notifications = mockFixture.nativeElement.querySelector(
-        '.fudis-section__notifications',
+        '.fudis-section__header__content',
       );
       const notificationComponent = mockFixture.debugElement.query(
         By.directive(NotificationComponent),

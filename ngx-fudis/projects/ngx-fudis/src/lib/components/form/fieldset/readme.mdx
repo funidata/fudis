@@ -12,8 +12,8 @@ Field Set is a grouping tool for Fudis Form Components. There are three directiv
 ### Header Actions
 
 Header actions are buttons positioned next to the Field Set label.
-Header actions are assigned through Fudis Actions Directive content projection with **fudisActions** selector.
-Fudis Actions Directive also needs `type` input which has to be set as '_fieldset_'.
+Header actions are assigned through Actions Directive content projection with **fudisActions** selector.
+Actions Directive also needs `type` input which has to be set as '_fieldset_'.
 There are no restrictions on header actions content but it is advised to use Fudis Buttons only.
 
 ```
@@ -22,23 +22,23 @@ There are no restrictions on header actions content but it is advised to use Fud
 </ng-template>
 ```
 
-### Notifications
+### Additional Header Content 
 
-Notifications are Fudis Notifications positioned under the Field Set label.
-Notifications are assigned through Fudis Notifications Directive content projection with **fudisNotifications** selector.
-Fudis Notifications Directive also needs a `type` input which has to be set as '_fieldset_'.
-There are no restrictions on header actions content but it is advised to use Fudis Notifications only.
+Additional Header content is used for adding Notifications and other components to Field Set header section.
+Additional content is positioned under the Field Set label and it is assigned through Header Directive content projection with **fudisHeader** selector.
+Header Directive also needs a `type` input which has to be set as '_fieldset_'.
 
 ```
-<ng-template fudisNotifications [type]="'fieldset'">
-  <your-content-here />
+<ng-template fudisHeader [type]="'fieldset'">
+  <fudis-notification>This is notification</fudis-notification>
+  ...other content
 </ng-template>
 ```
 
 ### Main Content
 
 Main content is where the form components live. Main content is assigned through Fudis Content Directive content projection with **fudisContent** selector.
-Fudis Content Directive also needs `type` input which has to be set as '_fieldset_'.
+Content Directive also needs `type` input which has to be set as '_fieldset_'.
 There are no restrictions on main content but it is advised to use Fudis Form Components only.
 
 ```
@@ -101,7 +101,7 @@ HTML Template
       <ng-template fudisActions [type]="'fieldset'">
         <fudis-button [variant]="'tertiary'" [icon]="'plus'" [label]="'Some action'" />
       </ng-template>
-      <ng-template fudisNotifications [type]="'fieldset'">
+      <ng-template fudisHeader [type]="'fieldset'">
         <fudis-notification>
           <fudis-body-text>This is notification inside fieldset</fudis-body-text>
         </fudis-notification>

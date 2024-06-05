@@ -187,10 +187,10 @@ describe('FieldSetComponent', () => {
       expect(actionsContent.textContent).toEqual('This is actions content');
     });
 
-    it('should have fieldset notifications content', () => {
+    it('should have fieldset additional header content', () => {
       const headerContentDiv = getElement(
         fixtureMock,
-        '.fudis-fieldset__legend__notifications',
+        '.fudis-fieldset__legend__content',
       );
       const notificationsContent = getElement(fixtureMock, '.test-notifications-content');
 
