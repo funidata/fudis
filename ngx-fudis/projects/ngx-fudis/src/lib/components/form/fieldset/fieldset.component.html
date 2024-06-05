@@ -63,9 +63,9 @@
           </div>
         </ng-container>
       </div>
-      <ng-container *ngIf="_notifications?.type === 'fieldset'">
+      <ng-container *ngIf="_headerContent?.type === 'fieldset'">
         <div class="fudis-fieldset__legend__notifications">
-          <ng-container *ngTemplateOutlet="_notifications!.templateRef" />
+          <ng-container *ngTemplateOutlet="_headerContent!.templateRef" />
         </div>
       </ng-container>
     </legend>

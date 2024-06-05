@@ -16,7 +16,7 @@ import {
 
 import { FieldSetBaseDirective } from '../../../directives/form/fieldset-base/fieldset-base.directive';
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
-import { NotificationsDirective } from '../../../directives/content-projection/notifications/notifications.directive';
+import { HeaderDirective } from '../../../directives/content-projection/header/header.directive';
 import { FudisGridWidth, FudisGridAlign } from '../../../types/grid';
 import { FudisComponentChanges, FudisSpacing } from '../../../types/miscellaneous';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
@@ -56,7 +56,7 @@ export class FieldSetComponent
   /**
    * Content directive for Field Set Notifications
    */
-  @ContentChild(NotificationsDirective) protected _notifications: NotificationsDirective;
+  @ContentChild(HeaderDirective) protected _headerContent: HeaderDirective;
 
   /**
    * Content directive for Field Set Content

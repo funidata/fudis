@@ -237,7 +237,7 @@ class ExampleWithMultipleFormsComponent {
       [errorSummaryHelpText]="errorSummaryHelpText"
       [errorSummaryVisible]="errorSummaryVisible"
     >
-      <ng-template fudisHeader>
+      <ng-template fudisHeader [type]="'form'">
         <fudis-dl [columns]="1" [variant]="'compact'">
           <fudis-dl-item>
             <fudis-dt [textContent]="'Important person'" />
@@ -259,12 +259,9 @@ class ExampleWithMultipleFormsComponent {
       </ng-template>
       <ng-template fudisContent [type]="'form'">
         <fudis-section [title]="'Main section'" [errorSummaryBreadcrumb]="true">
-          <ng-template fudisNotifications [type]="'section'">
-            <fudis-notification
-              ><fudis-body-text
+          <ng-template fudisHeader [type]="'section'"><fudis-body-text
                 >This is notification for the section</fudis-body-text
-              ></fudis-notification
-            >
+              >
           </ng-template>
           <ng-template fudisContent [type]="'section'">
             <fudis-expandable
@@ -279,7 +276,7 @@ class ExampleWithMultipleFormsComponent {
                 [helpText]="'Some generic info about this course'"
                 [id]="fieldsetId"
               >
-                <ng-template fudisNotifications [type]="'fieldset'">
+                <ng-template fudisHeader [type]="'fieldset'">
                   <fudis-notification> This is notification for a fieldset. </fudis-notification>
                 </ng-template>
                 <ng-template fudisContent [type]="'fieldset'">

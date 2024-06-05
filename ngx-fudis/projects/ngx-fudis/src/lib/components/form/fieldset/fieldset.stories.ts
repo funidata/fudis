@@ -26,7 +26,7 @@ import readme from './readme.mdx';
       <ng-template fudisActions [type]="'fieldset'">
         <fudis-button [variant]="'tertiary'" [icon]="'plus'" [label]="'Some action'" />
       </ng-template>
-      <ng-template fudisNotifications [type]="'fieldset'">
+      <ng-template fudisHeader [type]="'fieldset'">
         <fudis-notification
           ><fudis-body-text>This is notification</fudis-body-text></fudis-notification
         >

@@ -63,7 +63,6 @@ export { LinkComponent } from './lib/components/link/link.component';
 export { LinkDirective } from './lib/directives/link/link.directive';
 export { MultiselectComponent } from './lib/components/form/select/multiselect/multiselect.component';
 export { MultiselectOptionComponent } from './lib/components/form/select/multiselect/multiselect-option/multiselect-option.component';
-export { NotificationsDirective } from './lib/directives/content-projection/notifications/notifications.directive';
 export { NotificationComponent } from './lib/components/notification/notification.component';
 export { SectionComponent } from './lib/components/section/section.component';
 export { SelectComponent } from './lib/components/form/select/select/select.component';

@@ -86,7 +86,6 @@ import { TextInputComponent } from './components/form/text-input/text-input.comp
 import { TextAreaComponent } from './components/form/text-area/text-area.component';
 import { TooltipDirective } from './directives/tooltip/tooltip.directive';
 
-import { NotificationsDirective } from './directives/content-projection/notifications/notifications.directive';
 import { FooterComponent } from './components/footer/footer.component';
 import { LanguageBadgeGroupComponent } from './components/language-badge-group/language-badge-group.component';
 import { LanguageBadgeComponent } from './components/language-badge-group/language-badge/language-badge.component';
@@ -174,7 +173,6 @@ import { SelectIconsComponent } from './components/form/select/common/select-ico
     MultiselectChipListComponent,
     MultiselectOptionComponent,
     NotificationComponent,
-    NotificationsDirective,
     RadioButtonComponent,
     RadioButtonGroupComponent,
     SectionComponent,
@@ -266,7 +264,6 @@ import { SelectIconsComponent } from './components/form/select/common/select-ico
     MultiselectComponent,
     MultiselectOptionComponent,
     NotificationComponent,
-    NotificationsDirective,
     // RadioButtonGroupComponent,
     SectionComponent,
     SelectComponent,

@@ -39,7 +39,7 @@ const SelectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectComponent)
   },
   template: html`
     <fudis-section [title]="'Select showcase'" [titleLevel]="1" [width]="'md'">
-      <ng-template fudisNotifications type="section">
+      <ng-template fudisHeader type="section">
         <fudis-body-text
           >Following Select components share all same Form Control. When you change value in one,
           all of them are updated.</fudis-body-text
@@ -232,7 +232,7 @@ const MultiselectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectCompo
   },
   template: html`
     <fudis-section [title]="'Multiselect showcase'" [titleLevel]="1" [width]="'md'">
-      <ng-template fudisNotifications type="section">
+      <ng-template fudisHeader type="section">
         <fudis-body-text
           >Following Multiselect components share all same Form Control</fudis-body-text
         >

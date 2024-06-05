@@ -18,10 +18,10 @@ import { LabelComponent } from '../label/label.component';
 import { ButtonComponent } from '../../button/button.component';
 import { IconComponent } from '../../icon/icon.component';
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
-import { NotificationsDirective } from '../../../directives/content-projection/notifications/notifications.directive';
 import { BodyTextComponent } from '../../typography/body-text/body-text.component';
 import { getElement } from '../../../utilities/tests/utilities';
 import { FudisInputSize } from '../../../types/forms';
+import { HeaderDirective } from '../../../directives/content-projection/header/header.directive';
 
 @Component({
   selector: 'fudis-mock-fieldset-component',
@@ -36,7 +36,7 @@ import { FudisInputSize } from '../../../types/forms';
     <ng-template fudisActions [type]="'fieldset'">
       <p class="test-actions-content">This is actions content</p>
     </ng-template>
-    <ng-template fudisNotifications [type]="'fieldset'">
+    <ng-template fudisHeader [type]="'fieldset'">
       <p class="test-notifications-content">This is notifications content</p>
     </ng-template>
     <ng-template fudisContent [type]="'fieldset'">
@@ -77,7 +77,7 @@ describe('FieldSetComponent', () => {
         LabelComponent,
         MockFieldSetComponent,
         NotificationComponent,
-        NotificationsDirective,
+        HeaderDirective,
         TextInputComponent,
         ValidatorErrorMessageComponent,
       ],
@@ -188,13 +188,13 @@ describe('FieldSetComponent', () => {
     });
 
     it('should have fieldset notifications content', () => {
-      const notificationsContentDiv = getElement(
+      const headerContentDiv = getElement(
         fixtureMock,
         '.fudis-fieldset__legend__notifications',
       );
       const notificationsContent = getElement(fixtureMock, '.test-notifications-content');
 
-      expect(notificationsContentDiv).toBeTruthy();
+      expect(headerContentDiv).toBeTruthy();
       expect(notificationsContent.textContent).toEqual('This is notifications content');
     });
 

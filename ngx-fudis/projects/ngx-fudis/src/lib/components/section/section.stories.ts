@@ -54,7 +54,7 @@ const ExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent) => (
       <fudis-button [label]="'Some action'"></fudis-button>
       <fudis-button [label]="'Another action'"></fudis-button>
     </ng-template>
-    <ng-template fudisNotifications [type]="'section'">
+    <ng-template fudisHeader [type]="'section'">
       <fudis-notification
         ><fudis-body-text>This is notification</fudis-body-text></fudis-notification
       >

@@ -14,10 +14,10 @@ import { GridDirective } from '../../directives/grid/grid/grid.directive';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisBreakpointService } from '../../services/breakpoint/breakpoint.service';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
-import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { TooltipDirective } from '../../directives/tooltip/tooltip.directive';
 import { FudisTooltipPosition } from '../../types/miscellaneous';
+import { HeaderDirective } from '../../directives/content-projection/header/header.directive';
 import {
   FudisHeadingLevel,
   FudisHeadingSize,
@@ -40,7 +40,7 @@ import { getElement, sortClasses } from '../../utilities/tests/utilities';
     <ng-template fudisActions type="section">
       <fudis-button [label]="'Some action'"></fudis-button>
     </ng-template>
-    <ng-template fudisNotifications type="section">
+    <ng-template fudisHeader type="section">
       <fudis-notification
         ><fudis-body-text>This is notification</fudis-body-text></fudis-notification
       >
@@ -76,7 +76,7 @@ describe('SectionComponent', () => {
         IconComponent,
         MockFudisSectionComponent,
         NotificationComponent,
-        NotificationsDirective,
+        HeaderDirective,
         SectionComponent,
         TooltipDirective,
       ],

@@ -11,7 +11,6 @@ import {
 } from '@angular/core';
 import { FudisIdService } from '../../services/id/id.service';
 import { FudisHeadingSize, FudisHeadingLevel } from '../../types/typography';
-import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisGridWidth, FudisGridAlign } from '../../types/grid';
 
@@ -22,6 +21,7 @@ import { FudisFormErrorSummarySection } from '../../types/forms';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
 import { FormComponent } from '../form/form/form.component';
 import { BehaviorSubject } from 'rxjs';
+import { HeaderDirective } from '../../directives/content-projection/header/header.directive';
 
 @Component({
   selector: 'fudis-section',
@@ -41,7 +41,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   /**
    * Content projection for notifications inside Section
    */
-  @ContentChild(NotificationsDirective) protected _notifications: NotificationsDirective | null;
+  @ContentChild(HeaderDirective) protected _headerContent: HeaderDirective | null;
 
   /**
    * Content projection for Section content
