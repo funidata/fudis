@@ -1,6 +1,6 @@
 import test, { expect } from "@playwright/test";
 
-test.only("Dropdown with Clear Button and dropdown keyboard interactions", async ({ page }) => {
+test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ page }) => {
   await page.goto("/iframe.html?args=&id=components-form-select--select-showcase&viewMode=story");
   await expect(page).toHaveScreenshot("A-1-init.png", {
     fullPage: true,
@@ -99,7 +99,7 @@ test.only("Dropdown with Clear Button and dropdown keyboard interactions", async
   });
 });
 
-test("Dropdowns and Autocompletes", async ({ page }) => {
+test.only("Dropdowns and Autocompletes", async ({ page }) => {
   await page.goto("/iframe.html?args=&id=components-form-select--select-showcase&viewMode=story");
 
   /**
@@ -146,21 +146,24 @@ test("Dropdowns and Autocompletes", async ({ page }) => {
   await expect(page).toHaveScreenshot("C-2-autocomplete-dropdown-in-typed.png", {
     fullPage: true,
   });
-  await page.keyboard.press("Tab");
-  await page.keyboard.press("Tab");
 
   /**
    * Autocomplete dropdown without clear button
    */
+  await page.getByTestId("fudis-select-4").focus();
+  await expect(page.getByTestId("fudis-select-4-dropdown")).toBeVisible();
   await expect(page.getByTestId("fudis-select-3-dropdown")).not.toBeVisible();
   await expect(page).toHaveScreenshot("D-1-autocomplete-dropdown-2-focused.png", {
     fullPage: true,
   });
   await page.getByTestId("fudis-select-4").fill("golden");
+  await page.getByTestId("fudis-heading-1").hover();
+  await expect(page.getByTestId("fudis-select-4-dropdown")).toBeVisible();
   await expect(page).toHaveScreenshot("D-2-autocomplete-dropdown-2-golden-typed.png", {
     fullPage: true,
   });
   await page.keyboard.press("Enter");
+  await expect(page.getByTestId("fudis-select-4-dropdown")).not.toBeVisible();
   await expect(page).toHaveScreenshot("D-3-autocomplete-dropdown-2-golden-enter-1.png", {
     fullPage: true,
   });
