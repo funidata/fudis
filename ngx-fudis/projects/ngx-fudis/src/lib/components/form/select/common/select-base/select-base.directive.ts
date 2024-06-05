@@ -71,7 +71,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   /**
    * Reference to autocomplete element, used to focus to it
    */
-  @ViewChild('autocompleteRef') protected _autocompleteRef: SelectAutocompleteComponent;
+  @ViewChild('autocompleteRef') public autocompleteRef: SelectAutocompleteComponent;
 
   /**
    * Reference to autocomplete element, used to focus to it
@@ -424,9 +424,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
 
   protected _updateInputValueTexts(value: string): void {
     if (this.variant !== 'dropdown') {
-      this._autocompleteRef.preventSpaceKeypress = true;
+      this.autocompleteRef.preventSpaceKeypress = true;
 
-      this._autocompleteRef.updateInputValue(value);
+      this.autocompleteRef.updateInputValue(value);
 
       // TODO: check if below is needed, if yes, change it observable.
 
@@ -480,7 +480,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   protected _dropdownFocus(event: FocusEvent): void {
     const focusFromInputOrClearButton =
       event.relatedTarget === this._inputRef?.nativeElement ||
-      event.relatedTarget === this._autocompleteRef?.inputRef.nativeElement ||
+      event.relatedTarget === this.autocompleteRef?.inputRef.nativeElement ||
       this._selectIconsRef.nativeElement.contains(event.relatedTarget as HTMLElement);
 
     if (focusFromInputOrClearButton) {
@@ -492,7 +492,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
 
   protected _focusToSelectInput(condition: boolean = true) {
     if (this.variant !== 'dropdown' && condition) {
-      this._autocompleteRef.inputRef.nativeElement.focus();
+      this.autocompleteRef.inputRef.nativeElement.focus();
     } else if (condition) {
       this._inputRef.nativeElement.focus();
     }
@@ -585,7 +585,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     this._mouseUpOnInput =
       targetElement &&
       (!!this._inputRef?.nativeElement.contains(targetElement) ||
-        !!this._autocompleteRef?.inputRef?.nativeElement.contains(targetElement));
+        !!this.autocompleteRef?.inputRef?.nativeElement.contains(targetElement));
 
     if (this._dropdownOpen && !this._selectRef.nativeElement.contains(targetElement)) {
       this.closeDropdown(false, true);

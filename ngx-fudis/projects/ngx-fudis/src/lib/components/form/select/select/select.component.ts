@@ -126,10 +126,10 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
     if (this.variant === 'dropdown') {
       this._dropdownSelectionLabelText = currentLabel || '';
     } else {
-      if (this._autocompleteRef) {
-        this._autocompleteRef.updateInputValue(currentLabel || '');
-      } else {
-        this._autocompleteSelectionLabelValue = currentLabel || '';
+      this._autocompleteSelectionLabelValue = currentLabel || '';
+
+      if (this.autocompleteRef) {
+        this.autocompleteRef.updateInputValue(currentLabel || '');
       }
     }
     this._changeDetectorRef.detectChanges();

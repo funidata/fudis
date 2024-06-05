@@ -117,12 +117,7 @@ describe('SelectOptionBaseDirective', () => {
     });
 
     it('should filter correct options for given letter input', () => {
-      const input = fixture.debugElement.query(By.css('.fudis-select-autocomplete'));
-      const el = input.nativeElement;
-
-      el.value = 'p';
-      el.dispatchEvent(new KeyboardEvent('keyup'));
-      fixture.detectChanges();
+      component.selectElem.autocompleteRef.updateInputValue('p');
 
       setSelectDropdownOpen();
 

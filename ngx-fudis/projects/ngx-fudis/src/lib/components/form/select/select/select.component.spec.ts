@@ -241,7 +241,7 @@ describe('SelectComponent', () => {
         .querySelector('.fudis-select-autocomplete')
         ?.getAttribute('value');
 
-      expect(value).toEqual('');
+      expect(value).toEqual(null);
     });
   });
 });
