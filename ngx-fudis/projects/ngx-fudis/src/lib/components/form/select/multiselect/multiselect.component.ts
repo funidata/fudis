@@ -34,7 +34,6 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
     @Inject(DOCUMENT) _document: Document,
-    private _cdr: ChangeDetectorRef,
     _translationService: FudisTranslationService,
     _idService: FudisIdService,
     _focusService: FudisFocusService,
@@ -187,7 +186,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
     if (valuesInSync && this.control.value) {
       this._sortedSelectedOptions = sortValues(this._registeredOptions);
       this._dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
-      this._cdr.detectChanges();
+      this._changeDetectorRef.detectChanges();
     } else {
       this._sortedSelectedOptions = [];
       this._dropdownSelectionLabelText = null;
