@@ -6,6 +6,7 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
     fullPage: true,
   });
   await page.getByTestId("fudis-select-1").focus();
+  await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
   await expect(page).toHaveScreenshot("A-2-focus-input.png", {
     fullPage: true,
   });
