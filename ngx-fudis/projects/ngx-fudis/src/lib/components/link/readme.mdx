@@ -6,11 +6,8 @@ import * as LinkStories from "./link.stories.ts";
 
 # Link
 
-Link Component is an HTML anchor element that uses [Link Directive](/docs/directives-link--documentation).
-
-## Example
-
-<Canvas of={LinkStories.Example}></Canvas>
+Link Component is an HTML anchor element which uses [Link Directive](/docs/directives-link--documentation). 
+Link Directive can also be used as is and is recommended when using e.g. [UI-Router](https://ui-router.github.io/ng2/).
 
 ## Usage Guidelines
 
@@ -21,6 +18,10 @@ Or if using [Angular Router](https://angular.io/api/router) the required propert
 Link URL is set as the link title by default. By adding `title` property the visible title can be modified.
 
 Link color can be adjusted between `primary-dark` (default), `gray-dark` and `white`. Use `gray-dark` and `white` with caution.
+
+## Example
+
+<Canvas of={LinkStories.Example}></Canvas>
 
 ### Accessibility
 
