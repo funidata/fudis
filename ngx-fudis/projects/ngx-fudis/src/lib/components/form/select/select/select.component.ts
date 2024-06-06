@@ -50,11 +50,6 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
   @Output() override selectionUpdate: EventEmitter<FudisSelectOption<object> | null> =
     new EventEmitter<FudisSelectOption<object> | null>();
 
-  /**
-   * To pass selection label value for autocomplete
-   */
-  protected _autocompleteSelectionLabelValue: string | null;
-
   ngOnInit(): void {
     this._setParentId('select');
 
@@ -113,7 +108,7 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
     if (this.variant === 'dropdown') {
       this._dropdownSelectionLabelText = currentLabel || '';
     } else {
-      this._autocompleteSelectionLabelValue = currentLabel || '';
+      this._dropdownSelectionLabelText = currentLabel || '';
 
       if (this.autocompleteRef) {
         this.autocompleteRef.updateInputValue(currentLabel || '');

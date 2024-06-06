@@ -7,7 +7,7 @@ import { FudisValidators } from '../../../../utilities/form/validators';
 import { MultiselectComponent } from './multiselect.component';
 import readme from './multiselect.mdx';
 import { groupedMockData, defaultOptions, TestAnimalSound } from '../common/mock_data';
-import { selectCommonExclude } from '../../../../utilities/storybook';
+import { selectStoryControlExclude } from '../../../../utilities/storybook';
 
 export default {
   title: 'Components/Form/Select/Multiselect',
@@ -22,7 +22,7 @@ export default {
       page: readme,
     },
     controls: {
-      exclude: selectCommonExclude,
+      exclude: selectStoryControlExclude,
     },
   },
   argTypes: {
@@ -47,17 +47,18 @@ const commonProps: Partial<MultiselectComponent> = {
   size: 'lg',
   disabled: false,
   placeholder: 'Choose a pet',
-  helpText: 'All pets are equally important, but for sake of this example please pick atleast two',
+  helpText: 'All pets are equally important, but for sake of this Dropdown please pick atleast two',
   showSelectionChips: true,
+  selectionClearButton: true,
 };
 
-const ExampleTemplate: StoryFn<MultiselectComponent> = (args: MultiselectComponent) => ({
+const DropdownTemplate: StoryFn<MultiselectComponent> = (args: MultiselectComponent) => ({
   props: {
     ...args,
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
     control: new FormControl<TestAnimalSound[] | null>(
-      [defaultOptions[2], defaultOptions[0]],
+      null,
       FudisValidators.minLength(2, 'Pick at least two pets'),
     ),
     groupedMockData,
@@ -67,6 +68,7 @@ const ExampleTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCompone
       [size]="size"
       [placeholder]="placeholder"
       [control]="control"
+      [variant]="'dropdown'"
       [label]="label"
       [helpText]="helpText"
       [disabled]="disabled"
@@ -89,18 +91,20 @@ const ExampleTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCompone
   `,
 });
 
-export const Example = ExampleTemplate.bind({});
-Example.args = {
+export const Dropdown = DropdownTemplate.bind({});
+Dropdown.args = {
   ...commonProps,
 };
 
-const PreSelectedTemplate: StoryFn<MultiselectComponent> = (args: MultiselectComponent) => ({
+const AutocompleteDropdownTemplate: StoryFn<MultiselectComponent> = (
+  args: MultiselectComponent,
+) => ({
   props: {
     ...args,
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
     control: new FormControl<TestAnimalSound[] | null>(
-      [defaultOptions[2], defaultOptions[0]],
+      null,
       FudisValidators.minLength(2, 'Pick at least two pets'),
     ),
     groupedMockData,
@@ -110,6 +114,7 @@ const PreSelectedTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCom
       [size]="size"
       [placeholder]="placeholder"
       [control]="control"
+      [variant]="'autocompleteDropdown'"
       [label]="label"
       [helpText]="helpText"
       [disabled]="disabled"
@@ -121,7 +126,6 @@ const PreSelectedTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCom
           *ngFor="let option of defaultOptions"
           [data]="option"
         ></fudis-multiselect-option>
-
         <fudis-multiselect-group *ngFor="let group of groupedMockData" [label]="group.country">
           <fudis-multiselect-option
             *ngFor="let groupedOption of group.options"
@@ -130,45 +134,21 @@ const PreSelectedTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCom
         </fudis-multiselect-group>
       </ng-template>
     </fudis-multiselect>
-    <!--
-    <fudis-body-text *ngIf="!control.value || control.value.length === 0"
-      >Control value is null or an empty array
-    </fudis-body-text>
-
-    <ng-container *ngIf="control.value && control.value.length > 0">
-      <fudis-section [title]="'Selected options'" [titleLevel]="2">
-        <ng-template fudisContent type="section">
-          <ng-container *ngFor="let option of control.value; let i = index">
-            <fudis-heading [level]="3" [size]="'md'">Option {{i + 1}} </fudis-heading>
-            <fudis-dl [variant]="'compact'">
-              <fudis-dl-item *ngFor="let row of option | keyvalue">
-                <fudis-dt [textContent]="row.key"></fudis-dt>
-                <fudis-dd [textContent]="row.value"></fudis-dd>
-              </fudis-dl-item>
-            </fudis-dl>
-          </ng-container>
-        </ng-template>
-      </fudis-section>
-    </ng-container>
-    -->
   `,
 });
 
-export const PreSelected = PreSelectedTemplate.bind({});
-PreSelected.args = {
+export const AutocompleteDropdown = AutocompleteDropdownTemplate.bind({});
+AutocompleteDropdown.args = {
   ...commonProps,
 };
 
-const DisabledTemplate: StoryFn<MultiselectComponent> = (args: MultiselectComponent) => ({
+const AutocompleteTypeTemplate: StoryFn<MultiselectComponent> = (args: MultiselectComponent) => ({
   props: {
     ...args,
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
     control: new FormControl<TestAnimalSound[] | null>(
-      {
-        value: [defaultOptions[1], defaultOptions[0]],
-        disabled: true,
-      },
+      null,
       FudisValidators.minLength(2, 'Pick at least two pets'),
     ),
     groupedMockData,
@@ -178,6 +158,7 @@ const DisabledTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCompon
       [size]="size"
       [placeholder]="placeholder"
       [control]="control"
+      [variant]="'autocompleteType'"
       [label]="label"
       [helpText]="helpText"
       [disabled]="disabled"
@@ -200,7 +181,7 @@ const DisabledTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCompon
   `,
 });
 
-export const Disabled = DisabledTemplate.bind({});
-Disabled.args = {
+export const AutocompleteType = AutocompleteTypeTemplate.bind({});
+AutocompleteType.args = {
   ...commonProps,
 };

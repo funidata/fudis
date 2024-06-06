@@ -434,10 +434,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
       this.autocompleteRef.preventSpaceKeypress = true;
 
       this.autocompleteRef.updateInputValue(value);
-
-      // TODO: check if below is needed, if yes, change it observable.
-
-      //this._autocompleteFilterText.set('');
     } else {
       this._dropdownSelectionLabelText = value;
     }

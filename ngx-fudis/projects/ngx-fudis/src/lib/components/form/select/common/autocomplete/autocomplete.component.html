@@ -1,10 +1,11 @@
-<input
+<!--eslint-disable-next-line @angular-eslint/template/no-autofocus-->
+<input [attr.autofocus]="true"
   #inputRef
   type="text"
   aria-required="true"
   class="fudis-form-input fudis-select-autocomplete"
   role="combobox"
-  [attr.value]="!multiselect && selectedLabel ? selectedLabel : null"
+  [attr.value]="selectedLabel || null"
   [attr.aria-controls]="id + '-dropdown'"
   aria-haspopup="listbox"
   [formControl]="_autocompleteControl"

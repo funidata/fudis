@@ -7,7 +7,8 @@ import { SelectComponent } from './select/select.component';
 import readme from './select-index.mdx';
 import { groupedMockData, defaultOptions } from './common/mock_data';
 import { FudisSelectOption } from '../../../types/forms';
-import { excludeAllRegex, selectCommonExclude } from '../../../utilities/storybook';
+import { excludeAllRegex, selectStoryControlExclude } from '../../../utilities/storybook';
+import { FudisValidators } from '../../../utilities/form/validators';
 
 export default {
   title: 'Components/Form/Select',
@@ -22,35 +23,44 @@ export default {
       page: readme,
     },
     controls: {
-      exclude: selectCommonExclude,
+      exclude: selectStoryControlExclude,
     },
   },
 } as Meta;
 
 const html = String.raw;
 
+const commonControl = new FormControl<FudisSelectOption<object> | null>(defaultOptions[2], [
+  FudisValidators.required('You must choose a pet!'),
+]);
+
 const SelectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
   props: {
     ...args,
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<FudisSelectOption<object> | null>(defaultOptions[2]),
+    control: commonControl,
+    onClick: () => {
+      if (!commonControl.disabled) {
+        commonControl.disable();
+      } else {
+        commonControl.enable();
+      }
+    },
     groupedMockData,
   },
   template: html`
-    <fudis-section
-      [title]="'Select showcase'"
-      [titleLevel]="1"
-      [width]="'md'"
-      [marginBottom]="'xxl'"
-    >
-      <ng-template fudisNotifications type="section">
+    <fudis-form [title]="'Select showcase'" [titleLevel]="1" [width]="'md'" [marginBottom]="'xxl'">
+      <ng-template fudisHeader type="form">
         <fudis-body-text
           >Following Select components share all same Form Control. When you change value in one,
           all of them are updated.</fudis-body-text
         >
       </ng-template>
-      <ng-template fudisContent type="section">
+      <ng-template fudisActions type="form">
+        <fudis-button (handleClick)="onClick()" [label]="'Toggle Disabled State'"></fudis-button>
+      </ng-template>
+      <ng-template fudisContent type="form">
         <fudis-grid [columns]="{lg: 2}" [marginTop]="'sm'">
           <fudis-grid-item>
             <fudis-heading [level]="2" [size]="'md'"
@@ -230,7 +240,7 @@ const SelectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectComponent)
               </fudis-dl-item>
             </fudis-dl> </fudis-grid-item></fudis-grid
       ></ng-template>
-    </fudis-section>
+    </fudis-form>
   `,
 });
 
@@ -242,26 +252,38 @@ SelectShowcase.parameters = {
   },
 };
 
+const commonMultiselectControl = new FormControl<FudisSelectOption<object>[] | null>(
+  [defaultOptions[4], defaultOptions[1]],
+  [FudisValidators.minLength(2, 'Pick at least two pets')],
+);
+
 const MultiselectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
   props: {
     ...args,
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<FudisSelectOption<object>[] | null>([
-      defaultOptions[4],
-      defaultOptions[1],
-    ]),
-    //control: new FormControl<FudisSelectOption<object>[] | null>(null),
+    control: commonMultiselectControl,
+    onClick: () => {
+      if (!commonMultiselectControl.disabled) {
+        commonMultiselectControl.disable();
+      } else {
+        commonMultiselectControl.enable();
+      }
+    },
     groupedMockData,
   },
   template: html`
-    <fudis-section [title]="'Multiselect showcase'" [titleLevel]="1" [width]="'md'">
-      <ng-template fudisNotifications type="section">
+    <fudis-form [title]="'Multiselect showcase'" [titleLevel]="1" [width]="'md'">
+      <ng-template fudisHeader type="form">
         <fudis-body-text
-          >Following Multiselect components share all same Form Control</fudis-body-text
+          >Following Multiselect components share all same Form Control. When you change value in
+          one, all of them are updated.</fudis-body-text
         >
       </ng-template>
-      <ng-template fudisContent type="section">
+      <ng-template fudisActions type="form">
+        <fudis-button (handleClick)="onClick()" [label]="'Toggle Disabled State'"></fudis-button>
+      </ng-template>
+      <ng-template fudisContent type="form">
         <fudis-grid [columns]="{lg: 2}" [marginTop]="'sm'">
           <fudis-grid-item>
             <fudis-heading [level]="2" [size]="'md'"
@@ -462,7 +484,7 @@ const MultiselectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectCompo
                         [textContent]="option.label"
                       ></fudis-dd> </fudis-dl-item></fudis-dl></fudis-dd></fudis-dl-item></fudis-dl></fudis-grid-item></fudis-grid
       ></ng-template>
-    </fudis-section>
+    </fudis-form>
   `,
 });
 
