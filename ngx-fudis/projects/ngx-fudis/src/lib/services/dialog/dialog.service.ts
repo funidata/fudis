@@ -75,6 +75,7 @@ export class FudisDialogService {
       enterAnimationDuration: 0,
       exitAnimationDuration: 0,
       panelClass: 'fudis-dialog-panel',
+      backdropClass: 'fudis-dialog-backdrop',
     };
     return { ...overridableOptions, ...userConfig, ...forcedOptions };
   }
