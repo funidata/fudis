@@ -75,7 +75,7 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
 
   /**
    * Add badge to the section title
-  */
+   */
   @Input() badge: FudisBadgeVariant | null;
 
   /**

@@ -122,12 +122,7 @@ const NestedExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent
         Actions is not rendered there.</fudis-body-text
       >
 
-      <fudis-section
-        [title]="'Nested Section'"
-        [marginTop]="'sm'"
-        [titleSize]="'sm'"
-        [level]="3"
-      >
+      <fudis-section [title]="'Nested Section'" [marginTop]="'sm'" [titleSize]="'sm'" [level]="3">
         <ng-template fudisActions [type]="'section'">
           <fudis-button [label]="'Nested Action button'" />
         </ng-template>
