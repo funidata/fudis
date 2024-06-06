@@ -36,7 +36,7 @@ $typography: mat.define-typography-config(
   // fudis-heading-s
   $body-1:
     mat.define-typography-level(
-      cacl(1.125rem / var(--fudis-rem-multiplier)),
+      calc(1.125rem / var(--fudis-rem-multiplier)),
       calc(1.125rem / var(--fudis-rem-multiplier)),
       500
     ),
