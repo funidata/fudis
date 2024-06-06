@@ -155,11 +155,12 @@ test("Dropdown and autocompletes", async ({ page }) => {
     fullPage: true,
   });
   await page.getByTestId("fudis-multiselect-4").fill("golden");
-  await page.getByTestId("fudis-heading-1").hover();
+
   await expect(page.getByTestId("fudis-multiselect-4-dropdown")).toBeVisible();
   await expect(page).toHaveScreenshot("D-2-autocomplete-dropdown-2-golden-typed.png", {
     fullPage: true,
   });
+  await page.getByTestId("fudis-multiselect-4").focus();
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("fudis-multiselect-4-dropdown")).not.toBeVisible();
   await expect(page).toHaveScreenshot("D-3-autocomplete-dropdown-2-golden-enter-1.png", {
