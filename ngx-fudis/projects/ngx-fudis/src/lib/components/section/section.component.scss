@@ -8,6 +8,9 @@
     &__heading {
       display: flex;
       align-items: center;
+      &__badge {
+        margin-left: spacing.$spacing-xs;
+      }
 
       &__tooltip {
         margin-left: spacing.$spacing-xs;
