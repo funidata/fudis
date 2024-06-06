@@ -37,8 +37,8 @@
       />
     </div>
     <div class="fudis-multiselect-option__label__text"
-      >{{ data.label }}
-      <span *ngIf="data.disabled" class="fudis-multiselect-option__label__text__disabled">
+      >{{ data.label
+      }}<span *ngIf="data.disabled" class="fudis-multiselect-option__label__text__disabled">
         ({{ _parentMultiselect.translationOptionDisabledText | async }})</span
       >
     </div>

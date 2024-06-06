@@ -562,6 +562,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   private _handleEscapePress(event: KeyboardEvent) {
     if (this._dropdownOpen) {
       event.preventDefault();
+
       this.closeDropdown(true, true);
     }
   }
@@ -573,7 +574,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   @HostListener('document:mouseup', ['$event.target'])
   private _handleWindowClick(targetElement: HTMLElement) {
     if (this._dropdownOpen && !this._selectRef.nativeElement.contains(targetElement)) {
-      this.closeDropdown(false, true);
+      this.closeDropdown(false);
     }
   }
 
@@ -593,9 +594,5 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
       targetElement &&
       (!!this._inputRef?.nativeElement.contains(targetElement) ||
         !!this.autocompleteRef?.inputRef?.nativeElement.contains(targetElement));
-
-    if (this._dropdownOpen && !this._selectRef.nativeElement.contains(targetElement)) {
-      this.closeDropdown(false, true);
-    }
   }
 }

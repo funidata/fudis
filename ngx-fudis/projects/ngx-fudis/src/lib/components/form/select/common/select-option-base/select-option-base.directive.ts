@@ -119,7 +119,7 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
 
     this._parent.componentFocused(event).then((value) => {
       if (!value) {
-        this._parent.closeDropdown(false, true);
+        this._parent.closeDropdown(false);
       }
     });
   }

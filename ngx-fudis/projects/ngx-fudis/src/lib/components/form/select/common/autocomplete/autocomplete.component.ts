@@ -269,8 +269,10 @@ export class SelectAutocompleteComponent implements OnInit {
       } else if (key === 'ArrowDown') {
         if (this._focused) {
           event.preventDefault();
-          this.triggerDropdownOpen.emit();
-          this.triggerFocusToFirstOption.emit();
+          if (inputValue.length >= this.typeThreshold) {
+            this.triggerDropdownOpen.emit();
+            this.triggerFocusToFirstOption.emit();
+          }
         }
         /**
          * Close
