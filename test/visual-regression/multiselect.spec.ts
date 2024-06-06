@@ -80,7 +80,10 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await page.keyboard.press("Tab");
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).not.toBeVisible();
 
-  await page.getByTestId("fudis-button-1").click();
+
+
+
+  await page.getByTestId("fudis-button-2").click();
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).not.toBeVisible();
@@ -97,7 +100,7 @@ test("Dropdown and autocompletes", async ({ page }) => {
   /**
    * Multiselect Dropdown without Clear button
    */
-  await page.getByTestId("fudis-button-1").click();
+  await page.getByTestId("fudis-button-2").click();
   await page.getByTestId("fudis-multiselect-2").focus();
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).not.toBeVisible();
   await expect(page.getByTestId("fudis-multiselect-2-dropdown")).toBeVisible();
