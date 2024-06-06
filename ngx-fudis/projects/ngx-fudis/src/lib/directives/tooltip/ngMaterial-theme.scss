@@ -1,6 +1,15 @@
-@use "../../foundations/spacing/tokens.scss" as spacing;
+/* stylelint-disable selector-class-pattern */
+/* stylelint-disable property-disallowed-list */
 
-/* stylelint-disable-next-line selector-class-pattern */
+@use "../../foundations/spacing/tokens.scss" as spacing;
+@use "../../foundations/colors/tokens.scss" as colors;
+
 mat-tooltip-component .mat-tooltip-handset {
   margin: spacing.$spacing-xs;
+}
+
+mat-tooltip-component {
+  .mat-mdc-tooltip .mdc-tooltip__surface {
+    background-color: colors.$color-gray-dark;
+  }
 }
