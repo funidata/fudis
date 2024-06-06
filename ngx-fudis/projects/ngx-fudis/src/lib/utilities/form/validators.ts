@@ -72,9 +72,10 @@ function maxLength(length: number, message: FudisValidatorMessage): FudisValidat
  */
 function minLength(length: number, message: FudisValidatorMessage): FudisValidatorFn {
   return (control: AbstractControl) => {
-    if (!Validators.minLength(length)(control) || length < 1) {
+    if ((!Validators.minLength(length)(control) || length < 1) && !Validators.required(control)) {
       return null;
     }
+
     return {
       minlength: {
         message,
