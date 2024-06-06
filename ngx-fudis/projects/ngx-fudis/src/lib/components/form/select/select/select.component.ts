@@ -10,7 +10,6 @@ import {
   Optional,
   Output,
   ViewEncapsulation,
-  effect,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { areObjectsDeepEquals } from '../../../../utilities/areObjectsDeepEquals';
@@ -21,7 +20,6 @@ import { SelectBaseDirective } from '../common/select-base/select-base.directive
 import { FudisSelectOption } from '../../../../types/forms';
 import { FormComponent } from '../../form/form.component';
 import { DOCUMENT } from '@angular/common';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-select',
@@ -39,12 +37,6 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
     _changeDetectorRef: ChangeDetectorRef,
   ) {
     super(_document, _focusService, _translationService, _idService, _changeDetectorRef);
-
-    effect(() => {
-      this.translationOptionDisabledText.next(
-        _translationService.getTranslations()().SELECT.DISABLED,
-      );
-    });
   }
 
   /*
@@ -57,11 +49,6 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
    */
   @Output() override selectionUpdate: EventEmitter<FudisSelectOption<object> | null> =
     new EventEmitter<FudisSelectOption<object> | null>();
-
-  /**
-   * Internal translated text for disabled select option, used in Select Option
-   */
-  public translationOptionDisabledText = new BehaviorSubject<string>('string');
 
   /**
    * To pass selection label value for autocomplete

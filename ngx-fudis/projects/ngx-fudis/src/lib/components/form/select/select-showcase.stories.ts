@@ -438,7 +438,29 @@ const MultiselectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectCompo
                     *ngFor="let groupedOption of group.options"
                     [data]="groupedOption"
                   ></fudis-multiselect-option>
-                </fudis-multiselect-group> </ng-template></fudis-multiselect></fudis-grid-item></fudis-grid
+                </fudis-multiselect-group> </ng-template></fudis-multiselect
+          ></fudis-grid-item>
+          <fudis-grid-item [columns]="'stretch'">
+            <fudis-heading [level]="3" [size]="'md'">Current control value</fudis-heading>
+            <ng-container *ngIf="!control.value">
+              <fudis-body-text [size]="'lg-regular'"
+                >Control value: null.</fudis-body-text
+              ></ng-container
+            >
+            <fudis-dl *ngIf="control.value">
+              <fudis-dl-item *ngFor="let option of control.value; let index = index">
+                <fudis-dt [textContent]="'Selected option ' + index"></fudis-dt>
+                <fudis-dd>
+                  <fudis-dl [variant]="'compact'">
+                    <fudis-dl-item>
+                      <fudis-dt [textContent]="'Value'"></fudis-dt>
+                      <fudis-dd [textContent]="option.value"></fudis-dd>
+                    </fudis-dl-item>
+                    <fudis-dl-item>
+                      <fudis-dt [textContent]="'Label'"></fudis-dt>
+                      <fudis-dd
+                        [textContent]="option.label"
+                      ></fudis-dd> </fudis-dl-item></fudis-dl></fudis-dd></fudis-dl-item></fudis-dl></fudis-grid-item></fudis-grid
       ></ng-template>
     </fudis-section>
   `,

@@ -28,7 +28,7 @@
     @include typography.body-text-md-regular;
 
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 0;
     padding: spacing.$spacing-xs spacing.$spacing-xs spacing.$spacing-xs 0;
 
@@ -40,11 +40,18 @@
       position: absolute;
       align-items: center;
       justify-content: center;
-      margin: spacing.$spacing-xs;
+      margin-left: spacing.$spacing-xs;
       border-radius: 0;
       cursor: pointer;
       width: spacing.$spacing-sm;
       height: spacing.$spacing-sm;
+
+      &--disabled {
+        @include borders.border("1px", "dashed", "gray-middle");
+        @include colorMixins.bg-color("gray-extra-light");
+
+        cursor: default;
+      }
 
       &__icon {
         transform: scale(0.85);
@@ -67,6 +74,10 @@
     &__text {
       position: relative;
       margin-left: spacing.$spacing-lg;
+
+      &__disabled {
+        display: block;
+      }
     }
   }
 

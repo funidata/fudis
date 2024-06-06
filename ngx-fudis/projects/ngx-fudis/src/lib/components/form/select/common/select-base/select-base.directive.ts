@@ -52,6 +52,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
 
       this._translationNoResultsFound.next(translations.SELECT.AUTOCOMPLETE.NO_RESULTS);
 
+      this.translationOptionDisabledText.next(translations.SELECT.DISABLED);
+
       // TODO: after a11y audit, check if these can be removed
       this._translationOpenAriaLabel.next(translations.SELECT.OPEN_DROPDOWN);
       this._translationCloseAriaLabel.next(translations.SELECT.CLOSE_DROPDOWN);
@@ -171,6 +173,11 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    * Signal to Select & MultiselectOption for listening autocomplete filter text changes
    */
   protected _autocompleteFilterText: WritableSignal<string> = signal<string>('');
+
+  /**
+   * Internal translated text for disabled select option, used in Select Option
+   */
+  public translationOptionDisabledText = new BehaviorSubject<string>('string');
 
   /**
    *  Lazy loading check for expanding content, unless component control gets values from application, then set to true automatically, so that comparing available options match given control value.

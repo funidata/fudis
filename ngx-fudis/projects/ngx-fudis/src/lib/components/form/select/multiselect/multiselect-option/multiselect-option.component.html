@@ -12,7 +12,10 @@
     [class.fudis-multiselect-option__label--focus]="_focused"
     [class.fudis-multiselect-option__label--checked]="checked"
   >
-    <div class="fudis-multiselect-option__label__checkbox">
+    <div
+      class="fudis-multiselect-option__label__checkbox"
+      [class.fudis-multiselect-option__label__checkbox--disabled]="data.disabled"
+    >
       <input
         #optionInputRef
         [class.fudis-select-option__focusable]="_optionVisible"
@@ -33,6 +36,11 @@
         [icon]="'check'"
       />
     </div>
-    <div class="fudis-multiselect-option__label__text">{{ data.label }}</div>
+    <div class="fudis-multiselect-option__label__text"
+      >{{ data.label }}
+      <span *ngIf="data.disabled" class="fudis-multiselect-option__label__text__disabled">
+        ({{ _parentMultiselect.translationOptionDisabledText | async }})</span
+      >
+    </div>
   </label>
 </div>
