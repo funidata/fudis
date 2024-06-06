@@ -301,6 +301,8 @@ export const textInputControlsExclude: RegExp = excludeRegex([
 export const tooltipExclude: RegExp = excludeRegex([
   'handleClick',
   'handleBlur',
+  'handleDestroy',
+  'handleFocus',
   'buttonEl',
   'label',
   'labelHidden',
