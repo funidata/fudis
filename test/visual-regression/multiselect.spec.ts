@@ -80,14 +80,25 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await page.keyboard.press("Tab");
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).not.toBeVisible();
 
+  await page.getByTestId("fudis-button-1").click();
 
+  await expect(page).toHaveScreenshot("A-12-disabled-selected.png", {
+    fullPage: true,
+  });
 
+  await page.getByTestId("fudis-button-1").click();
 
   await page.getByTestId("fudis-button-2").click();
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).not.toBeVisible();
-  await expect(page).toHaveScreenshot("A-12-clear-click.png", {
+  await expect(page).toHaveScreenshot("A-13-clear-click.png", {
+    fullPage: true,
+  });
+
+  await page.getByTestId("fudis-button-1").click();
+
+  await expect(page).toHaveScreenshot("A-14-disabled-cleared.png", {
     fullPage: true,
   });
 });
