@@ -113,7 +113,7 @@ const NestedDescriptionListsTemplate: StoryFn<DescriptionListComponent> = (
     quoteTwo: "Archimedes didn't know about continental drift!",
   },
   template: html`
-    <fudis-heading [level]="2" [size]="'md'"
+    <fudis-heading [level]="2" [variant]="'md'"
       >Nested Description Lists with Indiana Jones Movies</fudis-heading
     >
     <fudis-dl [marginTop]="'sm'" [disableGrid]="disableGrid">
