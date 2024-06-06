@@ -1,6 +1,6 @@
 import test, { expect } from "@playwright/test";
 
-test.only("Dropdown with Clear Button and dropdown keyboard interactions", async ({ page }) => {
+test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ page }) => {
   await page.goto("/iframe.html?args=&id=components-form-select--select-showcase&viewMode=story");
   await expect(page).toHaveScreenshot("A-1-init.png", {
     fullPage: true,
