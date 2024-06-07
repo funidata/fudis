@@ -35,7 +35,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
       />
 
       <fudis-form
-        [titleLevel]="2"
+        [level]="2"
         [title]="'Form with Text Input'"
         [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
@@ -60,7 +60,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
         </ng-template>
       </fudis-form>
       <fudis-form
-        [titleLevel]="2"
+        [level]="2"
         [title]="'Form with Text Area'"
         [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
@@ -85,7 +85,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
         </ng-template>
       </fudis-form>
       <fudis-form
-        [titleLevel]="2"
+        [level]="2"
         [title]="'Form with Checkbox Group'"
         [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
@@ -119,7 +119,7 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
         </ng-template>
       </fudis-form>
       <!-- <fudis-form
-        [titleLevel]="2"
+        [level]="2"
         [title]="'Form with Select and Multiselect'"
         [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
@@ -229,7 +229,7 @@ class ExampleWithMultipleFormsComponent {
       [marginTop]="'xl'"
       [badge]="badge"
       [badgeText]="badgeText"
-      [titleLevel]="titleLevel"
+      [level]="level"
       [title]="title"
       [titleSize]="titleSize"
       [helpText]="helpText"
@@ -395,7 +395,7 @@ class FormContentExampleComponent implements OnInit {
   ) {}
 
   @Input() title: string;
-  @Input() titleLevel: FudisHeadingLevel;
+  @Input() level: FudisHeadingLevel;
   @Input() titleSize: FudisHeadingSize;
   @Input() helpText: string;
   @Input() badge: FudisBadgeVariant;
@@ -542,7 +542,7 @@ export default {
         type: 'select',
       },
     },
-    titleLevel: {
+    level: {
       options: [1, 2, 3, 4, 5, 6],
       control: {
         type: 'select',
@@ -563,7 +563,7 @@ export const Example: StoryFn<FormComponent> = (args: FormComponent) => ({
   props: args,
   template: html` <example-form-content
     [title]="title"
-    [titleLevel]="titleLevel"
+    [level]="level"
     [titleSize]="titleSize"
     [helpText]="helpText"
     [badge]="badge"
@@ -576,7 +576,7 @@ export const Example: StoryFn<FormComponent> = (args: FormComponent) => ({
 
 Example.args = {
   title: 'Example Form Heading',
-  titleLevel: 1,
+  level: 1,
   titleSize: 'xl',
   helpText: 'This is an additional help text to give user more information about the form',
   badge: 'primary',
