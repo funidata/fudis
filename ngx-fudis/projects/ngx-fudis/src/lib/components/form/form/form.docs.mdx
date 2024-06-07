@@ -60,7 +60,7 @@ The complete list of allowed properties can be found from Properties table at th
 ### Heading
 
 Fudis Form is not valid without a heading.
-**Mandatory properties** are `title` (title text content) and `titleLevel` (the semantic heading level), additionally it is possible to change the visual size of the heading with `titleSize`, which otherwise defaults to `xl`.
+**Mandatory properties** are `title` (title text content) and `level` (the semantic heading level), additionally it is possible to change the visual size of the heading with `titleSize`, which otherwise defaults to `xl`.
 See possible heading levels and sizes from [Heading Documentation](/docs/components-typography-heading--documentation).
 
 ### Badge
@@ -88,7 +88,7 @@ This is a simple example on how to use Form Component.
 
 <fudis-form
   [title]="'Example form heading'"
-  [titleLevel]="2"
+  [level]="2"
   [helpText]="'Here is some more information about this form'"
   [errorSummaryHelpText]="'There are errors in this form.'"
 >
