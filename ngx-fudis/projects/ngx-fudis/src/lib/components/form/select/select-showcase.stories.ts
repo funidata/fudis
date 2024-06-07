@@ -48,7 +48,7 @@ const SelectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectComponent)
       <ng-template fudisContent type="section">
         <fudis-grid [columns]="{lg: 2}" [marginTop]="'sm'">
           <fudis-grid-item>
-            <fudis-heading [level]="2" [size]="'md'"
+            <fudis-heading [level]="2" [variant]="'md'"
               >Single-select Dropdown with Clear Button</fudis-heading
             >
             <fudis-select
@@ -74,7 +74,7 @@ const SelectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectComponent)
                 </fudis-select-group> </ng-template></fudis-select
           ></fudis-grid-item>
           <fudis-grid-item
-            ><fudis-heading [level]="2" [size]="'md'"
+            ><fudis-heading [level]="2" [variant]="'md'"
               >Single-select Dropdown without Clear button</fudis-heading
             >
             <fudis-select
@@ -101,7 +101,7 @@ const SelectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectComponent)
           ></fudis-grid-item>
 
           <fudis-grid-item
-            ><fudis-heading [level]="2" [size]="'md'"
+            ><fudis-heading [level]="2" [variant]="'md'"
               >Single-select Autocomplete Dropdown with Clear button</fudis-heading
             >
             <fudis-select
@@ -128,7 +128,7 @@ const SelectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectComponent)
           ></fudis-grid-item>
 
           <fudis-grid-item
-            ><fudis-heading [level]="2" [size]="'md'"
+            ><fudis-heading [level]="2" [variant]="'md'"
               >Single-select Autocomplete Dropdown without Clear button</fudis-heading
             >
             <fudis-select
@@ -154,7 +154,7 @@ const SelectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectComponent)
                 </fudis-select-group> </ng-template></fudis-select
           ></fudis-grid-item>
           <fudis-grid-item
-            ><fudis-heading [level]="2" [size]="'md'"
+            ><fudis-heading [level]="2" [variant]="'md'"
               >Single-select Autocomplete Type with Clear button</fudis-heading
             >
             <fudis-select
@@ -181,7 +181,7 @@ const SelectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectComponent)
           ></fudis-grid-item>
 
           <fudis-grid-item
-            ><fudis-heading [level]="2" [size]="'md'"
+            ><fudis-heading [level]="2" [variant]="'md'"
               >Single-select Autocomplete Type without Clear button</fudis-heading
             >
             <fudis-select
@@ -240,7 +240,7 @@ const MultiselectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectCompo
       <ng-template fudisContent type="section">
         <fudis-grid [columns]="{lg: 2}" [marginTop]="'sm'">
           <fudis-grid-item>
-            <fudis-heading [level]="2" [size]="'md'"
+            <fudis-heading [level]="2" [variant]="'md'"
               >Multiselect Dropdown with Clear Button</fudis-heading
             >
             <fudis-multiselect
@@ -269,7 +269,7 @@ const MultiselectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectCompo
                 </fudis-multiselect-group> </ng-template></fudis-multiselect
           ></fudis-grid-item>
           <fudis-grid-item
-            ><fudis-heading [level]="2" [size]="'md'"
+            ><fudis-heading [level]="2" [variant]="'md'"
               >Multiselect Dropdown without Clear button</fudis-heading
             >
             <fudis-multiselect
@@ -299,7 +299,7 @@ const MultiselectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectCompo
           ></fudis-grid-item>
 
           <fudis-grid-item
-            ><fudis-heading [level]="2" [size]="'md'"
+            ><fudis-heading [level]="2" [variant]="'md'"
               >Multiselect Autocomplete Dropdown with Clear button</fudis-heading
             >
             <fudis-multiselect
@@ -329,7 +329,7 @@ const MultiselectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectCompo
           ></fudis-grid-item>
 
           <fudis-grid-item
-            ><fudis-heading [level]="2" [size]="'md'"
+            ><fudis-heading [level]="2" [variant]="'md'"
               >Multiselect Autocomplete Dropdown without Clear button</fudis-heading
             >
             <fudis-multiselect
@@ -358,7 +358,7 @@ const MultiselectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectCompo
                 </fudis-multiselect-group> </ng-template></fudis-multiselect
           ></fudis-grid-item>
           <fudis-grid-item
-            ><fudis-heading [level]="2" [size]="'md'"
+            ><fudis-heading [level]="2" [variant]="'md'"
               >Multiselect Autocomplete Type with Clear button</fudis-heading
             >
             <fudis-multiselect
@@ -388,7 +388,7 @@ const MultiselectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectCompo
           ></fudis-grid-item>
 
           <fudis-grid-item
-            ><fudis-heading [level]="2" [size]="'md'"
+            ><fudis-heading [level]="2" [variant]="'md'"
               >Multiselect Autocomplete Type without Clear button</fudis-heading
             >
             <fudis-multiselect

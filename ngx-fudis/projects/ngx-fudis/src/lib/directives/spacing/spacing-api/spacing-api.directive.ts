@@ -1,6 +1,6 @@
 import { Directive, Input } from '@angular/core';
 import { FudisSpacingResponsive } from '../../../types/spacing';
-import { FudisSpacing } from '../../../types/miscellaneous';
+import { FudisSpacing } from '../../../types/spacing';
 
 @Directive({
   selector: '[fudisApiSpacing]',

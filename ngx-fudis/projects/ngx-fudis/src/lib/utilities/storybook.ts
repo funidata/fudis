@@ -60,14 +60,14 @@ export const buttonIconOnlyExclude: RegExp = excludeRegex([...buttonCommonExclud
 export const checkboxGroupExclude: RegExp = excludeRegex([
   'groupBlurredOut',
   'setGroupBlurredOut',
-  'titleSize',
+  'titleVariant',
   'triggerEmit',
 ]);
 
 export const checkboxGroupControlsExclude: RegExp = excludeRegex([
   'groupBlurredOut',
   'setGroupBlurredOut',
-  'titleSize',
+  'titleVariant',
   'id',
   'formGroup',
   'triggerEmit',

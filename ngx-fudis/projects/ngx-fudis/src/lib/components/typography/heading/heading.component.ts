@@ -6,9 +6,11 @@ import {
   OnChanges,
   ElementRef,
 } from '@angular/core';
-import { FudisHeadingLevel, FudisHeadingSize } from '../../../types/typography';
+import { FudisHeadingLevel, FudisHeadingVariant } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
-import { FudisComponentChanges, FudisSpacing, FudisTextAlign } from '../../../types/miscellaneous';
+import { FudisComponentChanges } from '../../../types/miscellaneous';
+import { FudisTextAlign } from '../../../types/typography';
+import { FudisSpacing } from '../../../types/spacing';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -34,9 +36,9 @@ export class HeadingComponent implements OnInit, OnChanges {
   @Input({ required: true }) level: FudisHeadingLevel;
 
   /**
-   * Heading size
+   * Heading variant
    */
-  @Input() size: FudisHeadingSize;
+  @Input() variant: FudisHeadingVariant;
 
   /**
    * Margin bottom for heading
@@ -66,17 +68,18 @@ export class HeadingComponent implements OnInit, OnChanges {
   /**
    * Get default marginBottom size
    */
-  private _getMarginBottom(size: FudisHeadingSize): FudisSpacing {
-    if (size === 'xxl' || size === 'xl') {
+  private _getMarginBottom(variant: FudisHeadingVariant): FudisSpacing {
+    if (variant === 'xxl' || variant === 'xl') {
       return 'sm';
     }
+
     return 'xs';
   }
 
   /**
-   * Get corresponding default size for a heading level
+   * Get corresponding default variant for a heading level
    */
-  private _getSize(): FudisHeadingSize {
+  private _getVariant(): FudisHeadingVariant {
     switch (this.level) {
       case 1:
         return 'xxl';
@@ -99,13 +102,13 @@ export class HeadingComponent implements OnInit, OnChanges {
    * Set CSS classes for heading
    */
   private _setClasses(): void {
-    const calcSize = this.size || this._getSize();
+    const calcVariant = this.variant || this._getVariant();
 
-    const calcMarginBottom = this.marginBottom || this._getMarginBottom(calcSize);
+    const calcMarginBottom = this.marginBottom || this._getMarginBottom(calcVariant);
 
     const newClasses = [
       `fudis-heading`,
-      `fudis-heading__size__${calcSize}`,
+      `fudis-heading__variant__${calcVariant}`,
       `fudis-mb-${calcMarginBottom}`,
       `fudis-heading__align__${this.align}`,
     ];
@@ -122,7 +125,7 @@ export class HeadingComponent implements OnInit, OnChanges {
   ngOnChanges(changes: FudisComponentChanges<HeadingComponent>): void {
     if (
       changes.align?.currentValue !== changes.align?.previousValue ||
-      changes.size?.currentValue !== changes.size?.previousValue ||
+      changes.variant?.currentValue !== changes.variant?.previousValue ||
       changes.marginBottom?.currentValue !== changes.marginBottom?.previousValue ||
       changes.level?.currentValue !== changes.level?.previousValue
     ) {
