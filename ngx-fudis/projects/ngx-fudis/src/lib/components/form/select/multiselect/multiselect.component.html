@@ -11,7 +11,7 @@
   <div #selectRef>
     <div class="fudis-select__input-wrapper">
       <div
-        *ngIf="variant === 'dropdown'"
+        *ngIf="variant === 'dropdown' || control.disabled"
         #inputRef
         tabindex="0"
         class="fudis-form-input fudis-select__input fudis-select__input__dropdown"
@@ -41,7 +41,7 @@
         }}</span>
       </div>
       <fudis-select-autocomplete
-        *ngIf="variant !== 'dropdown'"
+        *ngIf="variant !== 'dropdown' && control.enabled"
         #autocompleteRef
         [id]="id"
         [control]="control"
@@ -51,6 +51,7 @@
         [required]="_required"
         [invalidState]="invalidState"
         [multiselect]="true"
+        [selectedLabel]="_dropdownSelectionLabelText"
         [typeThreshold]="variant === 'autocompleteType' ? 3 : 0"
         [visibleOptions]="_visibleOptions"
         [selectionClearButton]="selectionClearButton"
@@ -95,7 +96,7 @@
         class="fudis-select-dropdown__no-results"
         [class.fudis-select-dropdown__no-results--visible]="_visibleOptions.length === 0"
         [size]="'md-light'"
-        >{{ _translationNoResultsFound }}</fudis-body-text
+        >{{ _translationNoResultsFound | async }}</fudis-body-text
       >
     </fudis-select-dropdown>
   </div>
@@ -108,7 +109,7 @@
     [for]="id"
     [control]="control"
   />
-  <ng-container *ngIf="showSelectionChips && _sortedSelectedOptions.length > 0">
+  <ng-container *ngIf="showSelectionChips && _sortedSelectedOptions.length > 0 && control.enabled">
     <span [attr.id]="id + '-remove-items'" class="fudis-visually-hidden">{{
       _translationRemoveItem | async
     }}</span>

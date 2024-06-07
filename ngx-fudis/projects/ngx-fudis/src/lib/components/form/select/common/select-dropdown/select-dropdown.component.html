@@ -6,6 +6,8 @@
   [attr.id]="parentId + '-dropdown'"
   [attr.aria-labelledby]="parentId + '-label'"
   [attr.aria-multiselectable]="multiselect ? true : null"
+  (focus)="_dropdownFocus($event)"
+  (blur)="_dropdownBlur($event)"
   role="listbox"
 >
   <ng-content></ng-content>

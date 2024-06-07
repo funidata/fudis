@@ -3,7 +3,7 @@
   class="fudis-select-icons__icon"
   [class.fudis-select-icons__icon--disabled]="disabled"
   [icon]="'chevron'"
-  [rotate]="dropdownOpen ? 'cw-90' : 'ccw-90'"
+  [rotate]="dropdownOpen ? 'ccw-90' : 'cw-90'"
 />
 <fudis-icon
   *ngIf="
@@ -18,12 +18,14 @@
 <ng-container *ngIf="clearButton">
   <ng-container *ngIf="_translationClearFilterText | async as clearText">
     <fudis-button
-      *ngIf="
-        (parentVariant === 'dropdown' && _controlValue) ||
-        (parentVariant === 'autocompleteDropdown' && (filterText || _controlValue)) ||
-        (parentVariant === 'autocompleteType' && (filterText || _controlValue))
-      "
       [class.fudis-select-icons__icon--disabled]="disabled"
+      [class.fudis-select-icons__icon--hidden]="
+        !(
+          (parentVariant === 'dropdown' && _controlValue) ||
+          (parentVariant === 'autocompleteDropdown' && (filterText || _controlValue)) ||
+          (parentVariant === 'autocompleteType' && (filterText || _controlValue))
+        )
+      "
       (click)="_clearButtonClick($event)"
       (handleDestroy)="handleClearButtonDestroy.emit()"
       (handleFocus)="_handleClearButtonFocus($event)"

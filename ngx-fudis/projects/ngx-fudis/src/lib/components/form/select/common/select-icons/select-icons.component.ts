@@ -1,12 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-  effect,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, effect } from '@angular/core';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisSelectVariant } from '../../../../../types/forms';
 import { FormControl } from '@angular/forms';
@@ -19,10 +11,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./select-icons.component.scss'],
 })
 export class SelectIconsComponent implements OnChanges {
-  constructor(
-    protected _translationService: FudisTranslationService,
-    private _changeDetectionRef: ChangeDetectorRef,
-  ) {
+  constructor(protected _translationService: FudisTranslationService) {
     effect(() => {
       this._translationClearFilterText.next(
         _translationService.getTranslations()().SELECT.AUTOCOMPLETE.CLEAR,
@@ -60,7 +49,6 @@ export class SelectIconsComponent implements OnChanges {
 
       this.parentControl.valueChanges.subscribe((value) => {
         this._controlValue = !!value;
-        this._changeDetectionRef.detectChanges();
       });
     }
   }
