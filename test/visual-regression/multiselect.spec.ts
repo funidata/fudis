@@ -249,7 +249,7 @@ test("Dropdown and autocompletes", async ({ page }) => {
   await expect(page).toHaveScreenshot("E-4-autocomplete-type-cats-selected.png", {
     fullPage: true,
   });
-  
+
   /**
    * Autocomplete type without clear button
    */

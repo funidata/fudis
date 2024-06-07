@@ -175,7 +175,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   protected _autocompleteFilterText: WritableSignal<string> = signal<string>('');
 
   /**
-   * Internal translated text for disabled select option, used in Select Option
+   * Internal translated text for disabled select option, used in Select and Multiselect Option
    */
   public translationOptionDisabledText = new BehaviorSubject<string>('string');
 
@@ -538,7 +538,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
           clearInterval(focusCheckInterval);
           resolve(false);
 
-          // Encrease counter, and try again. This is needed usually with click events as between previous element blur and next element focus click event is "somewhere else"
+          // Increase counter, and try again. This is needed usually with click events as between previous element blur and next element focus click event is "somewhere else"
         } else if (counter <= 100) {
           counter = counter + 50;
         } else {
@@ -551,7 +551,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   }
 
   /**
-   * When pressing keyboard Esc, focus to FudisSelect input and close dropdown
+   * When pressing keyboard Esc, focus to Select input and close dropdown
    * @param event
    */
   @HostListener('window:keydown.escape', ['$event'])
@@ -564,7 +564,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   }
 
   /**
-   * When user clicks, set status is click inside or outside
+   * When user clicks, set status whether click is inside or outside the Select element
    * @param targetElement
    */
   @HostListener('document:mouseup', ['$event.target'])
