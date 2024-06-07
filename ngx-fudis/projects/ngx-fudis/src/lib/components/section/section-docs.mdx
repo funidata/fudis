@@ -15,7 +15,8 @@ Section has two main areas: header and content. Inside header, addition to headi
 
 ### Header
 
-Each Section should be identified, therefore `title` is mandatory property which can be modified with `titleVariant` and `titleLevel` properties. As in [Heading Component](/docs/components-typography-heading--documentation), size is visual and level is semantic adjustment.
+Each Section should be identified, therefore `title` is mandatory property which can be modified with `titleVariant` and `level` properties. As in [Heading Component](/docs/components-typography-heading--documentation), size is visual and level is semantic adjustment.
+
 Heading can also include `tooltip` with all the [Tooltip](/docs/directives-tooltip--documentation) Inputs available.
 
 #### Notifications and Actions
@@ -48,7 +49,7 @@ Avoiding too complex page structure is recommended, but if you have a need to ne
 
 #### Heading Levels
 
-Just as with any HTML content, proper heading level order is important for the accessibility. If you are nesting Sections, make sure that `titleLevel` of nested Section is lower than its parent's.
+Just as with any HTML content, proper heading level order is important for the accessibility. If you are nesting Sections, make sure that `level` of nested Section is lower than its parent's.
 
 #### Actions
 
@@ -59,7 +60,7 @@ If you have Section inside Section, and the nested one has Actions-content but p
 <fudis-section
   [title]="'Parent Section'"
   [titleVariant]="'lg'"
-  [titleLevel]="2"
+  [level]="2"
   >
   // Empty Actions template, so that nested Actions will not be rendered to the parent!
   <ng-template fudisActions [type]="'section'"></ng-template>
@@ -67,7 +68,7 @@ If you have Section inside Section, and the nested one has Actions-content but p
     <fudis-section
       [title]="'Nested Section'"
       [titleVariant]="'md'"
-      [titleLevel]="3" >
+      [level]="3" >
       <ng-template fudisActions [type]="'section'">
         <fudis-button [label]="'Nested Action button'"/>
       </ng-template>
@@ -100,7 +101,7 @@ When using Section inside [Form](/docs/components-form-form--documentation) with
 
 - Section Component uses native `<section>` element
 - Section and its title is linked to its content by aria-describedby
-- Section title must be provided `titleLevel` property
+- Section title must be provided `level` property
 
 ## Related components
 

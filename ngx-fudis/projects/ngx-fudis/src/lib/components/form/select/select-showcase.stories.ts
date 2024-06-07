@@ -38,7 +38,7 @@ const SelectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectComponent)
     groupedMockData,
   },
   template: html`
-    <fudis-section [title]="'Select showcase'" [titleLevel]="1" [width]="'md'">
+    <fudis-section [title]="'Select showcase'" [level]="1" [width]="'md'">
       <ng-template fudisNotifications type="section">
         <fudis-body-text
           >Following Select components share all same Form Control. When you change value in one,
@@ -231,7 +231,7 @@ const MultiselectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectCompo
     groupedMockData,
   },
   template: html`
-    <fudis-section [title]="'Multiselect showcase'" [titleLevel]="1" [width]="'md'">
+    <fudis-section [title]="'Multiselect showcase'" [level]="1" [width]="'md'">
       <ng-template fudisNotifications type="section">
         <fudis-body-text
           >Following Multiselect components share all same Form Control</fudis-body-text

@@ -40,7 +40,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
       />
 
       <fudis-form
-        [titleLevel]="2"
+        [level]="2"
         [title]="'Form with Text Input'"
         [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
@@ -65,7 +65,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
         </ng-template>
       </fudis-form>
       <fudis-form
-        [titleLevel]="2"
+        [level]="2"
         [title]="'Form with Text Area'"
         [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
@@ -90,7 +90,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
         </ng-template>
       </fudis-form>
       <fudis-form
-        [titleLevel]="2"
+        [level]="2"
         [title]="'Form with Checkbox Group'"
         [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
@@ -124,7 +124,7 @@ import { fudisSpacingArray } from '../../../types/spacing';
         </ng-template>
       </fudis-form>
       <!-- <fudis-form
-        [titleLevel]="2"
+        [level]="2"
         [title]="'Form with Select and Multiselect'"
         [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
@@ -234,7 +234,7 @@ class ExampleWithMultipleFormsComponent {
       [marginTop]="'xl'"
       [badge]="badge"
       [badgeText]="badgeText"
-      [titleLevel]="titleLevel"
+      [level]="level"
       [title]="title"
       [titleVariant]="titleVariant"
       [helpText]="helpText"
@@ -400,8 +400,8 @@ class FormContentExampleComponent implements OnInit {
   ) {}
 
   @Input() title: string;
-  @Input() titleLevel: FudisHeadingLevel;
   @Input() titleVariant: FudisHeadingVariant;
+  @Input() level: FudisHeadingLevel;
   @Input() helpText: string;
   @Input() badge: FudisBadgeVariant;
   @Input() badgeText: string;
@@ -547,7 +547,7 @@ export default {
         type: 'select',
       },
     },
-    titleLevel: {
+    level: {
       options: fudisHeadingLevelArray,
       control: {
         type: 'select',
@@ -568,8 +568,8 @@ export const Example: StoryFn<FormComponent> = (args: FormComponent) => ({
   props: args,
   template: html` <example-form-content
     [title]="title"
-    [titleLevel]="titleLevel"
     [titleVariant]="titleVariant"
+    [level]="level"
     [helpText]="helpText"
     [badge]="badge"
     [badgeText]="badgeText"
@@ -581,8 +581,8 @@ export const Example: StoryFn<FormComponent> = (args: FormComponent) => ({
 
 Example.args = {
   title: 'Example Form Heading',
-  titleLevel: 1,
   titleVariant: 'xl',
+  level: 1,
   helpText: 'This is an additional help text to give user more information about the form',
   badge: 'primary',
   badgeText: 'Example',

@@ -23,7 +23,18 @@ export default {
     },
   },
   argTypes: {
-    titleLevel: {
+    badge: {
+      options: ['accent', 'danger', 'primary', 'secondary', 'success'],
+      control: {
+        type: 'select',
+      },
+    },
+    badgeText: {
+      control: {
+        type: 'text',
+      },
+    },
+    level: {
       options: fudisHeadingLevelArray,
       control: { type: 'select' },
     },
@@ -41,7 +52,9 @@ const ExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent) => (
   template: html`<fudis-section
     [title]="title"
     [titleVariant]="titleVariant"
-    [titleLevel]="titleLevel"
+    [level]="level"
+    [badge]="badge"
+    [badgeText]="badgeText"
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
@@ -73,11 +86,13 @@ const ExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent) => (
 export const Example = ExampleTemplate.bind({});
 Example.args = {
   title: 'This is title of section',
-  titleLevel: 2,
   titleVariant: 'xl',
+  level: 2,
   tooltip: 'More info about this section',
   tooltipToggle: false,
   tooltipPosition: 'below',
+  badge: 'primary',
+  badgeText: 'Example',
   align: 'start',
   marginTop: 'none',
   marginBottom: 'none',
@@ -95,7 +110,7 @@ const NestedExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent
   template: html`<fudis-section
     [title]="'Parent Section'"
     [titleVariant]="'lg'"
-    [titleLevel]="2"
+    [level]="2"
     [width]="'md'"
   >
     // Empty Actions template, so that nested Actions will not be rendered to the parent!
@@ -111,7 +126,7 @@ const NestedExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent
         [title]="'Nested Section'"
         [marginTop]="'sm'"
         [titleVariant]="'sm'"
-        [titleLevel]="3"
+        [level]="3"
       >
         <ng-template fudisActions [type]="'section'">
           <fudis-button [label]="'Nested Action button'" />

@@ -15,9 +15,17 @@
   <div class="fudis-section__header" [id]="_headingId">
     <div class="fudis-section__header__container">
       <div class="fudis-section__header__heading">
-        <fudis-heading [marginBottom]="'none'" [level]="titleLevel" [variant]="titleVariant">{{
-          title
-        }}</fudis-heading>
+        <fudis-heading [marginBottom]="'none'" [level]="level" [variant]="titleVariant"
+          >{{ title
+          }}<ng-container *ngIf="badge && badgeText">
+            <fudis-badge
+              class="fudis-section__header__heading__badge"
+              [variant]="badge"
+              [content]="badgeText"
+            >
+            </fudis-badge>
+          </ng-container>
+        </fudis-heading>
         <ng-container *ngIf="tooltip">
           <fudis-button
             class="fudis-section__header__heading__tooltip"

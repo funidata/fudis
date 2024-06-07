@@ -65,7 +65,7 @@ class DialogLaucherComponent {
       <fudis-dialog-content>
         <fudis-form
           [title]="'Dialog with fudis-form'"
-          [titleLevel]="2"
+          [level]="2"
           [errorSummaryLinkType]="'onClick'"
           [errorSummaryHelpText]="'You need to fill up the information.'"
         >
