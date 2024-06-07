@@ -37,7 +37,7 @@ import { LinkDirective } from '../../../directives/link/link.directive';
   selector: 'fudis-mock-form-component',
   template: ` <fudis-form
     #formRef
-    [titleLevel]="1"
+    [level]="1"
     [title]="'Example Form with Error Summary'"
     [id]="'unique-form-example-1'"
     [errorSummaryLinkType]="errorSummaryLinkType"

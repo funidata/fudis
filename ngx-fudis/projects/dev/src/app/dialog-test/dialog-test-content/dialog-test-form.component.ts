@@ -23,7 +23,7 @@ type MyForm = {
           [errorSummaryLinkType]="'onClick'"
           [title]="'Dialog with fudis-form'"
           [errorSummaryHelpText]="'You did not fill all the required information'"
-          [titleLevel]="2"
+          [level]="2"
         >
           <ng-template fudisContent [type]="'form'">
             <fudis-fieldset [label]="'We need some information'" [helpText]="_greetingFromOpener">

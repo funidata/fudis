@@ -23,7 +23,18 @@ export default {
     },
   },
   argTypes: {
-    titleLevel: {
+    badge: {
+      options: ['accent', 'danger', 'primary', 'secondary', 'success'],
+      control: {
+        type: 'select',
+      },
+    },
+    badgeText: {
+      control: {
+        type: 'text',
+      },
+    },
+    level: {
       options: fudisHeadingLevelArray,
       control: { type: 'select' },
     },
@@ -41,7 +52,9 @@ const ExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent) => (
   template: html`<fudis-section
     [title]="title"
     [titleSize]="titleSize"
-    [titleLevel]="titleLevel"
+    [level]="level"
+    [badge]="badge"
+    [badgeText]="badgeText"
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
@@ -73,11 +86,13 @@ const ExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent) => (
 export const Example = ExampleTemplate.bind({});
 Example.args = {
   title: 'This is title of section',
-  titleLevel: 2,
+  level: 2,
   titleSize: 'xl',
   tooltip: 'More info about this section',
   tooltipToggle: false,
   tooltipPosition: 'below',
+  badge: 'primary',
+  badgeText: 'Example',
   align: 'start',
   marginTop: 'none',
   marginBottom: 'none',
@@ -95,7 +110,7 @@ const NestedExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent
   template: html`<fudis-section
     [title]="'Parent Section'"
     [titleSize]="'lg'"
-    [titleLevel]="2"
+    [level]="2"
     [width]="'md'"
   >
     // Empty Actions template, so that nested Actions will not be rendered to the parent!
@@ -107,12 +122,7 @@ const NestedExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent
         Actions is not rendered there.</fudis-body-text
       >
 
-      <fudis-section
-        [title]="'Nested Section'"
-        [marginTop]="'sm'"
-        [titleSize]="'sm'"
-        [titleLevel]="3"
-      >
+      <fudis-section [title]="'Nested Section'" [marginTop]="'sm'" [titleSize]="'sm'" [level]="3">
         <ng-template fudisActions [type]="'section'">
           <fudis-button [label]="'Nested Action button'" />
         </ng-template>

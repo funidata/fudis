@@ -16,7 +16,7 @@ import { ContentDirective } from '../../directives/content-projection/content/co
 import { FudisGridWidth, FudisGridAlign } from '../../types/grid';
 
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
-import { FudisComponentChanges, FudisSpacing } from '../../types/miscellaneous';
+import { FudisBadgeVariant, FudisComponentChanges, FudisSpacing } from '../../types/miscellaneous';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisFormErrorSummarySection } from '../../types/forms';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
@@ -66,12 +66,22 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   /**
    * Heading level for the section title
    */
-  @Input() titleLevel: FudisHeadingLevel = 2;
+  @Input() level: FudisHeadingLevel = 2;
 
   /**
    * Heading size for the section title
    */
   @Input() titleSize: FudisHeadingSize = 'lg';
+
+  /**
+   * Add badge to the section title
+   */
+  @Input() badge: FudisBadgeVariant | null;
+
+  /**
+   * Badge text
+   */
+  @Input() badgeText: string | null;
 
   /**
    * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.
