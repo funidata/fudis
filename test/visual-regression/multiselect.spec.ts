@@ -7,6 +7,10 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await expect(page).toHaveScreenshot("A-1-init.png", {
     fullPage: true,
   });
+
+  /**
+   * Dropdown with clear button
+   */
   await page.getByTestId("fudis-multiselect-1").focus();
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
   await expect(page).toHaveScreenshot("A-2-focus-input.png", {
@@ -59,7 +63,7 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await page.getByTestId("fudis-heading-1").click();
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).not.toBeVisible();
 
-  await expect(page).toHaveScreenshot("A-10-mouse-select.png", {
+  await expect(page).toHaveScreenshot("A-10-select-two-more.png", {
     fullPage: true,
   });
 
@@ -74,6 +78,9 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
     fullPage: true,
   });
 
+  /**
+   * Disabled when multiselect has selected options
+   */
   await page.keyboard.press("ArrowDown");
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
   await page.keyboard.press("ArrowUp");
@@ -86,8 +93,10 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
     fullPage: true,
   });
 
+  /**
+   * Disabled after clearing options
+   */
   await page.getByTestId("fudis-button-1").click();
-
   await page.getByTestId("fudis-button-2").click();
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
   await page.keyboard.press("Escape");
@@ -109,7 +118,7 @@ test("Dropdown and autocompletes", async ({ page }) => {
   );
 
   /**
-   * Multiselect Dropdown without Clear button
+   * Dropdown without Clear button
    */
   await page.getByTestId("fudis-button-2").click();
   await page.getByTestId("fudis-multiselect-2").focus();
@@ -240,8 +249,9 @@ test("Dropdown and autocompletes", async ({ page }) => {
   await expect(page).toHaveScreenshot("E-4-autocomplete-type-cats-selected.png", {
     fullPage: true,
   });
+  
   /**
-   * Last one
+   * Autocomplete type without clear button
    */
   await page.getByTestId("fudis-multiselect-6").focus();
   await expect(page.getByTestId("fudis-multiselect-5-dropdown")).not.toBeVisible();
