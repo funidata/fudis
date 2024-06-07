@@ -7,8 +7,7 @@ import {
   Optional,
   Host,
 } from '@angular/core';
-import { FudisBodyText } from '../../../types/typography';
-import { FudisTextAlign } from '../../../types/miscellaneous';
+import { FudisBodyText, FudisTextAlign } from '../../../types/typography';
 import { DialogComponent } from '../../dialog/dialog.component';
 
 @Component({

@@ -39,7 +39,7 @@ import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
         [rowGap]="'sm'"
         [classes]="['storybook__wrapper-border']"
       >
-        <fudis-heading [level]="3" [size]="'md'"
+        <fudis-heading [level]="3" [variant]="'md'"
           >Listen to Service Columns but not AlignItemsX</fudis-heading
         >
         <fudis-body-text class="storybook__item"
@@ -54,7 +54,7 @@ import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
         >
       </fudis-grid>
       <fudis-grid [columns]="2" [classes]="['storybook__wrapper-border']">
-        <fudis-heading [level]="3" [size]="'md'"
+        <fudis-heading [level]="3" [variant]="'md'"
           >Listen to Service's AlignItemsX but not Columns</fudis-heading
         >
         <fudis-body-text class="storybook__item"
@@ -69,7 +69,7 @@ import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
       </fudis-grid>
 
       <fudis-grid [serviceDefaults]="false" [classes]="['storybook__wrapper-border']">
-        <fudis-heading [level]="3" [size]="'md'">Service Defaults are turned of</fudis-heading>
+        <fudis-heading [level]="3" [variant]="'md'">Service Defaults are turned of</fudis-heading>
         <fudis-body-text class="storybook__item"
           >This Grid has no set alignItemsX value, and it is ignoring defaults from
           Service!</fudis-body-text

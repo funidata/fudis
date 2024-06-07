@@ -18,10 +18,15 @@ import { FudisTranslationService } from '../../../services/translation/translati
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import docs from './form.docs.mdx';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
-import { FudisHeadingLevel, FudisHeadingSize } from '../../../types/typography';
+import {
+  FudisHeadingLevel,
+  FudisHeadingVariant,
+  fudisHeadingLevelArray,
+} from '../../../types/typography';
 import { formExclude } from '../../../utilities/storybook';
 import { defaultOptions } from '../select/common/mock_data';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
+import { fudisSpacingArray } from '../../../types/spacing';
 
 @Component({
   selector: 'example-with-multiple-forms',
@@ -231,7 +236,7 @@ class ExampleWithMultipleFormsComponent {
       [badgeText]="badgeText"
       [level]="level"
       [title]="title"
-      [titleSize]="titleSize"
+      [titleVariant]="titleVariant"
       [helpText]="helpText"
       [errorSummaryLinkType]="errorSummaryLinkType"
       [errorSummaryHelpText]="errorSummaryHelpText"
@@ -395,8 +400,8 @@ class FormContentExampleComponent implements OnInit {
   ) {}
 
   @Input() title: string;
+  @Input() titleVariant: FudisHeadingVariant;
   @Input() level: FudisHeadingLevel;
-  @Input() titleSize: FudisHeadingSize;
   @Input() helpText: string;
   @Input() badge: FudisBadgeVariant;
   @Input() badgeText: string;
@@ -536,14 +541,14 @@ export default {
         type: 'text',
       },
     },
-    titleSize: {
-      options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+    titleVariant: {
+      options: fudisSpacingArray,
       control: {
         type: 'select',
       },
     },
     level: {
-      options: [1, 2, 3, 4, 5, 6],
+      options: fudisHeadingLevelArray,
       control: {
         type: 'select',
       },
@@ -563,8 +568,8 @@ export const Example: StoryFn<FormComponent> = (args: FormComponent) => ({
   props: args,
   template: html` <example-form-content
     [title]="title"
+    [titleVariant]="titleVariant"
     [level]="level"
-    [titleSize]="titleSize"
     [helpText]="helpText"
     [badge]="badge"
     [badgeText]="badgeText"
@@ -576,8 +581,8 @@ export const Example: StoryFn<FormComponent> = (args: FormComponent) => ({
 
 Example.args = {
   title: 'Example Form Heading',
+  titleVariant: 'xl',
   level: 1,
-  titleSize: 'xl',
   helpText: 'This is an additional help text to give user more information about the form',
   badge: 'primary',
   badgeText: 'Example',
