@@ -2,17 +2,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { HeadingComponent } from './heading.component';
 import {
-  FudisHeadingSize,
+  FudisHeadingVariant,
   FudisHeadingLevel,
   fudisHeadingLevelArray,
-  fudisHeadingSizeArray,
+  fudisHeadingVariantArray,
 } from '../../../types/typography';
-import {
-  FudisTextAlign,
-  FudisSpacing,
-  fudisSpacingArray,
-  fudisTextAlignArray,
-} from '../../../types/miscellaneous';
+import { FudisSpacing, fudisSpacingArray } from '../../../types/spacing';
+import { FudisTextAlign, fudisTextAlignArray } from '../../../types/typography';
 
 describe('HeadingComponent', () => {
   let component: HeadingComponent;
@@ -46,25 +42,25 @@ describe('HeadingComponent', () => {
   }
 
   function headingCheck(
-    size: FudisHeadingSize,
+    variant: FudisHeadingVariant,
     align: FudisTextAlign,
     marginBottom: FudisSpacing,
     level: FudisHeadingLevel,
   ): void {
-    const sizeBefore = component.size;
+    const variantBefore = component.variant;
     const marginBefore = component.marginBottom;
     const levelBefore = component.level;
     const alignBefore = component.align;
 
-    component.size = size;
+    component.variant = variant;
     component.marginBottom = marginBottom;
     component.level = level;
     component.align = align;
 
     component.ngOnChanges({
-      size: {
-        previousValue: sizeBefore,
-        currentValue: size,
+      variant: {
+        previousValue: variantBefore,
+        currentValue: variant,
         firstChange: false,
         isFirstChange: () => {
           return false;
@@ -99,7 +95,7 @@ describe('HeadingComponent', () => {
     fixture.detectChanges();
 
     assertHeadingHasClasses(
-      `fudis-heading fudis-heading__align__${align} fudis-heading__size__${size} fudis-mb-${marginBottom}`,
+      `fudis-heading fudis-heading__align__${align} fudis-heading__variant__${variant} fudis-mb-${marginBottom}`,
       level,
     );
   }
@@ -109,19 +105,19 @@ describe('HeadingComponent', () => {
   });
 
   describe('CSS classes', () => {
-    it('should have respective size, margin bottom and level values according to given Inputs', () => {
+    it('should have respective variant, margin bottom and level values according to given Inputs', () => {
       fudisHeadingLevelArray.forEach((level) => {
-        fudisHeadingSizeArray.forEach((size) => {
+        fudisHeadingVariantArray.forEach((variant) => {
           fudisTextAlignArray.forEach((alignment) => {
             fudisSpacingArray.forEach((spacing) => {
-              headingCheck(size, alignment, spacing, level);
+              headingCheck(variant, alignment, spacing, level);
             });
           });
         });
       });
     });
 
-    it('should have respective default size and margin bottom defined by the level', () => {
+    it('should have respective default variant and margin bottom defined by the level', () => {
       fudisHeadingLevelArray.forEach((level) => {
         const levelBefore = component.level;
 
@@ -140,32 +136,32 @@ describe('HeadingComponent', () => {
 
         fixture.detectChanges();
 
-        let sizeClass = '';
+        let variantClass = '';
 
         let marginBottom = '';
 
         if (level == 1) {
-          sizeClass = 'xxl';
+          variantClass = 'xxl';
         } else if (level == 2) {
-          sizeClass = 'xl';
+          variantClass = 'xl';
         } else if (level == 3) {
-          sizeClass = 'lg';
+          variantClass = 'lg';
         } else if (level == 4) {
-          sizeClass = 'md';
+          variantClass = 'md';
         } else if (level == 5) {
-          sizeClass = 'sm';
+          variantClass = 'sm';
         } else if (level == 6) {
-          sizeClass = 'xs';
+          variantClass = 'xs';
         }
 
-        if (sizeClass === 'xxl' || sizeClass === 'xl') {
+        if (variantClass === 'xxl' || variantClass === 'xl') {
           marginBottom = 'sm';
         } else {
           marginBottom = 'xs';
         }
 
         assertHeadingHasClasses(
-          `fudis-heading fudis-heading__align__left fudis-heading__size__${sizeClass} fudis-mb-${marginBottom}`,
+          `fudis-heading fudis-heading__align__left fudis-heading__variant__${variantClass} fudis-mb-${marginBottom}`,
           level,
         );
       });

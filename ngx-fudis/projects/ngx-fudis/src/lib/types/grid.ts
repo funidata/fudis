@@ -1,5 +1,5 @@
 import { FudisBreakpointKey, FudisBreakpointValueResponsive } from './breakpoints';
-import { FudisSpacing } from './miscellaneous';
+import { FudisSpacing } from './spacing';
 
 /**
  * -------------------------------------------

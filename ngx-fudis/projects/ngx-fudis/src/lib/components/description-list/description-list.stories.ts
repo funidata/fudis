@@ -65,7 +65,7 @@ const DescriptionListTemplate: StoryFn<DescriptionListComponent> = (
   args: DescriptionListComponent,
 ) => ({
   props: args,
-  template: html` <fudis-heading [level]="2" [size]="'md'"
+  template: html` <fudis-heading [level]="2" [variant]="'md'"
       >{{variant==='regular' ? 'Regular' : 'Compact'}} Description List</fudis-heading
     >
     <fudis-dl [marginTop]="'sm'" [variant]="variant" [columns]="2" [disableGrid]="disableGrid">
@@ -113,7 +113,7 @@ const NestedDescriptionListsTemplate: StoryFn<DescriptionListComponent> = (
     quoteTwo: "Archimedes didn't know about continental drift!",
   },
   template: html`
-    <fudis-heading [level]="2" [size]="'md'"
+    <fudis-heading [level]="2" [variant]="'md'"
       >Nested Description Lists with Indiana Jones Movies</fudis-heading
     >
     <fudis-dl [marginTop]="'sm'" [disableGrid]="disableGrid">
@@ -229,7 +229,7 @@ const DescriptionListInsideGridTemplate: StoryFn<DescriptionListComponent> = (
 ) => ({
   props: args,
   template: html`<fudis-grid [columns]="{sm: 1, md: 2}" [rowGap]="'xs'">
-    <fudis-heading [level]="2" [size]="'md'"
+    <fudis-heading [level]="2" [variant]="'md'"
       >Description List as Grid's Child Component</fudis-heading
     >
     <fudis-dl [disableGrid]="disableGrid" [variant]="variant">
@@ -260,7 +260,7 @@ const NestedSubComponentsTemplate: StoryFn<DescriptionListComponent> = (
   args: DescriptionListComponent,
 ) => ({
   props: args,
-  template: html`<fudis-heading [level]="2" [size]="'md'"
+  template: html`<fudis-heading [level]="2" [variant]="'md'"
       >Description List With Sub Components</fudis-heading
     >
     <fudis-description-list
@@ -303,8 +303,9 @@ const WithLanguageBadgesTemplate: StoryFn<DescriptionListComponent> = (
   args: DescriptionListComponent,
 ) => ({
   props: args,
-  template: html`
-    <fudis-heading [level]="2" [size]="'md'">Description List With Language Badges</fudis-heading>
+  template: html`<fudis-heading [level]="2" [variant]="'md'"
+      >Description List With Language Badges</fudis-heading
+    >
     <fudis-description-list
       [marginTop]="'sm'"
       [disableGrid]="disableGrid"
@@ -338,8 +339,7 @@ const WithLanguageBadgesTemplate: StoryFn<DescriptionListComponent> = (
         <fudis-dd [lang]="'en'" [textContent]="'Return of the Jedi'"></fudis-dd>
       </fudis-description-list-item>
     </fudis-description-list>
-    <example-language-service-change-component />
-  `,
+    <example-language-service-change-component /> `,
 });
 
 export const WithLanguageBadges = WithLanguageBadgesTemplate.bind({});
@@ -373,7 +373,7 @@ const ItemWithMultipleDdElementsTemplate: StoryFn<DescriptionListComponent> = (
 ) => ({
   props: { ...args, data: multipleDDData },
   template: html`
-    <fudis-heading [level]="2" [size]="'md'"
+    <fudis-heading [level]="2" [variant]="'md'"
       >Description List Item With Multiple Details</fudis-heading
     >
     <fudis-description-list
@@ -411,7 +411,7 @@ const SingleListItemTemplate: StoryFn<DescriptionListComponent> = (
 ) => ({
   props: args,
   template: html`
-    <fudis-heading [level]="2" [size]="'md'">Description List with Single Item</fudis-heading>
+    <fudis-heading [level]="2" [variant]="'md'">Description List with Single Item</fudis-heading>
     <fudis-description-list
       [marginTop]="'sm'"
       [variant]="'regular'"

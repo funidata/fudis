@@ -16,7 +16,7 @@ import { FudisGridService } from '../../../services/grid/grid.service';
 import { FudisBreakpointService } from '../../../services/breakpoint/breakpoint.service';
 import { GridApiDirective } from '../grid-api/grid-api.directive';
 import { GridDirective } from './grid.directive';
-import { FudisSpacing } from '../../../types/miscellaneous';
+import { FudisSpacing } from '../../../types/spacing';
 
 @Component({
   selector: 'fudis-mock-grid-directive',
