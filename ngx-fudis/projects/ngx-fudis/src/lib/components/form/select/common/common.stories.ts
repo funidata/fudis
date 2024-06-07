@@ -34,7 +34,6 @@ export default {
     helpText: {
       control: { type: 'text' },
     },
-    autocomplete: { options: ['type', 'dropdown'], control: { type: 'radio' } },
   },
 } as Meta;
 
@@ -49,12 +48,12 @@ const commonArgs: Partial<SelectComponent> = {
   selectionClearButton: true,
 };
 
-const SelectAutocompleteTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
+const SelectAutocompleteDropdownTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
   props: {
     ...args,
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<FudisSelectOption<object> | null>(defaultOptions[2]),
+    control: new FormControl<FudisSelectOption<object> | null>(null),
   },
   template: html`
     <fudis-select
@@ -78,12 +77,12 @@ const SelectAutocompleteTemplate: StoryFn<SelectComponent> = (args: SelectCompon
   `,
 });
 
-export const SelectAutocomplete = SelectAutocompleteTemplate.bind({});
-SelectAutocomplete.args = {
+export const SelectAutocompleteDropdown = SelectAutocompleteDropdownTemplate.bind({});
+SelectAutocompleteDropdown.args = {
   ...commonArgs,
 };
 
-const MultiselectAutocompleteTemplate: StoryFn<MultiselectComponent> = (
+const MultiselectAutocompleteDropdownTemplate: StoryFn<MultiselectComponent> = (
   args: MultiselectComponent,
 ) => ({
   props: {
@@ -96,12 +95,13 @@ const MultiselectAutocompleteTemplate: StoryFn<MultiselectComponent> = (
   template: html`
     <fudis-multiselect
       [size]="size"
-      [variant]="autocompleteType"
+      [variant]="'autocompleteDropdown'"
       [placeholder]="placeholder"
       [control]="control"
       [label]="label"
       [helpText]="helpText"
       [disabled]="disabled"
+      [selectionClearButton]="selectionClearButton"
       (selectionUpdate)="selectionUpdate($event)"
     >
       <ng-template fudisContent type="select-options">
@@ -114,12 +114,14 @@ const MultiselectAutocompleteTemplate: StoryFn<MultiselectComponent> = (
   `,
 });
 
-export const MultiselectAutocomplete = MultiselectAutocompleteTemplate.bind({});
-MultiselectAutocomplete.args = {
+export const MultiselectAutocompleteDropdown = MultiselectAutocompleteDropdownTemplate.bind({});
+MultiselectAutocompleteDropdown.args = {
   ...(commonArgs as Partial<MultiselectComponent>),
 };
 
-const SelectWithGroupedOptionsTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
+const SelectDropdownWithGroupedOptionsTemplate: StoryFn<SelectComponent> = (
+  args: SelectComponent,
+) => ({
   props: {
     ...args,
     selectionUpdate: action('selectionUpdate'),
@@ -129,11 +131,13 @@ const SelectWithGroupedOptionsTemplate: StoryFn<SelectComponent> = (args: Select
   template: html`
     <fudis-select
       [size]="size"
+      [variant]="'dropdown'"
       [placeholder]="placeholder"
       [control]="control"
       [label]="label"
       [helpText]="helpText"
       [disabled]="disabled"
+      [selectionClearButton]="selectionClearButton"
       (selectionUpdate)="selectionUpdate($event)"
     >
       <ng-template fudisContent type="select-options">
@@ -148,12 +152,12 @@ const SelectWithGroupedOptionsTemplate: StoryFn<SelectComponent> = (args: Select
   `,
 });
 
-export const SelectWithGroupedOptions = SelectWithGroupedOptionsTemplate.bind({});
-SelectWithGroupedOptions.args = {
+export const SelectDropdownWithGroupedOptions = SelectDropdownWithGroupedOptionsTemplate.bind({});
+SelectDropdownWithGroupedOptions.args = {
   ...(commonArgs as Partial<SelectComponent>),
 };
 
-const MultiselectWithGroupedOptionsTemplate: StoryFn<MultiselectComponent> = (
+const MultiselectDropdownWithGroupedOptionsTemplate: StoryFn<MultiselectComponent> = (
   args: MultiselectComponent,
 ) => ({
   props: {
@@ -164,13 +168,15 @@ const MultiselectWithGroupedOptionsTemplate: StoryFn<MultiselectComponent> = (
   },
   template: html`
     <fudis-multiselect
-      (selectionUpdate)="selectionUpdate($event)"
       [size]="size"
+      [variant]="'dropdown'"
       [placeholder]="placeholder"
       [control]="control"
       [label]="label"
       [helpText]="helpText"
       [disabled]="disabled"
+      [selectionClearButton]="selectionClearButton"
+      (selectionUpdate)="selectionUpdate($event)"
     >
       <ng-template fudisContent type="select-options">
         <fudis-multiselect-group *ngFor="let group of groupedMockData" [label]="group.country">
@@ -184,7 +190,8 @@ const MultiselectWithGroupedOptionsTemplate: StoryFn<MultiselectComponent> = (
   `,
 });
 
-export const MultiselectWithGroupedOptions = MultiselectWithGroupedOptionsTemplate.bind({});
-MultiselectWithGroupedOptions.args = {
+export const MultiselectDropdownWithGroupedOptions =
+  MultiselectDropdownWithGroupedOptionsTemplate.bind({});
+MultiselectDropdownWithGroupedOptions.args = {
   ...(commonArgs as Partial<MultiselectComponent>),
 };

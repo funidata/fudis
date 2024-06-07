@@ -30,10 +30,6 @@ export default {
       options: ['sm', 'md', 'lg'],
       control: { type: 'radio' },
     },
-    showSelectionChips: {
-      options: [true, false],
-      control: { type: 'radio' },
-    },
     helpText: {
       control: { type: 'text' },
     },
@@ -74,6 +70,7 @@ const DropdownTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCompon
       [disabled]="disabled"
       (selectionUpdate)="selectionUpdate($event)"
       [showSelectionChips]="showSelectionChips"
+      [selectionClearButton]="selectionClearButton"
     >
       <ng-template fudisContent type="select-options">
         <fudis-multiselect-option
@@ -120,6 +117,7 @@ const AutocompleteDropdownTemplate: StoryFn<MultiselectComponent> = (
       [disabled]="disabled"
       (selectionUpdate)="selectionUpdate($event)"
       [showSelectionChips]="showSelectionChips"
+      [selectionClearButton]="selectionClearButton"
     >
       <ng-template fudisContent type="select-options">
         <fudis-multiselect-option
@@ -164,6 +162,7 @@ const AutocompleteTypeTemplate: StoryFn<MultiselectComponent> = (args: Multisele
       [disabled]="disabled"
       (selectionUpdate)="selectionUpdate($event)"
       [showSelectionChips]="showSelectionChips"
+      [selectionClearButton]="selectionClearButton"
     >
       <ng-template fudisContent type="select-options">
         <fudis-multiselect-option

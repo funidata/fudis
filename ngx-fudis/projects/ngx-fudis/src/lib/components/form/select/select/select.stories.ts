@@ -56,7 +56,7 @@ const DropdownTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
     ...args,
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<TestAnimalSound | TestAnimalScience | null>(defaultOptions[2]),
+    control: new FormControl<TestAnimalSound | TestAnimalScience | null>(null),
     groupedMockData,
   },
   template: html`
@@ -67,6 +67,8 @@ const DropdownTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
       [label]="label"
       [disabled]="disabled"
       [helpText]="helpText"
+      [selectionClearButton]="selectionClearButton"
+      [variant]="'dropdown'"
       (selectionUpdate)="selectionUpdate($event)"
     >
       <ng-template fudisContent type="select-options">
@@ -95,7 +97,7 @@ const AutocompleteDropdownTemplate: StoryFn<SelectComponent> = (args: SelectComp
     ...args,
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<TestAnimalSound | TestAnimalScience | null>(defaultOptions[2]),
+    control: new FormControl<TestAnimalSound | TestAnimalScience | null>(null),
     groupedMockData,
   },
   template: html`
@@ -107,6 +109,8 @@ const AutocompleteDropdownTemplate: StoryFn<SelectComponent> = (args: SelectComp
       [label]="label"
       [disabled]="disabled"
       [helpText]="helpText"
+      [selectionClearButton]="selectionClearButton"
+      [variant]="'autocompleteDropdown'"
       (selectionUpdate)="selectionUpdate($event)"
     >
       <ng-template fudisContent type="select-options">
@@ -135,7 +139,7 @@ const AutocompleteTypeTemplate: StoryFn<SelectComponent> = (args: SelectComponen
     ...args,
     defaultOptions,
     selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<TestAnimalSound | TestAnimalScience | null>(defaultOptions[2]),
+    control: new FormControl<TestAnimalSound | TestAnimalScience | null>(null),
     groupedMockData,
   },
   template: html`
@@ -147,6 +151,8 @@ const AutocompleteTypeTemplate: StoryFn<SelectComponent> = (args: SelectComponen
       [label]="label"
       [disabled]="disabled"
       [helpText]="helpText"
+      [selectionClearButton]="selectionClearButton"
+      [variant]="'autocompleteType'"
       (selectionUpdate)="selectionUpdate($event)"
     >
       <ng-template fudisContent type="select-options">
