@@ -5,6 +5,10 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await expect(page).toHaveScreenshot("A-1-init.png", {
     fullPage: true,
   });
+
+  /**
+   * Dropdown with clear button
+   */
   await page.getByTestId("fudis-select-1").focus();
   await expect(page.getByTestId("fudis-select-1-dropdown")).toBeVisible();
   await expect(page).toHaveScreenshot("A-2-focus-input.png", {
@@ -32,7 +36,7 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
     fullPage: true,
   });
   await page.getByTestId("fudis-select-1-group-1-option-3").hover();
-  await expect(page).toHaveScreenshot("A-6-hover-gecko.png", {
+  await expect(page).toHaveScreenshot("A-6-hover-cat.png", {
     fullPage: true,
   });
   await page.getByTestId("fudis-heading-1").hover();
@@ -88,6 +92,10 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await expect(page).toHaveScreenshot("A-13-click-select-hyena.png", {
     fullPage: true,
   });
+
+  /**
+   * Disabled with selection
+   */
   await page.getByTestId("fudis-button-1").focus();
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
   await page.getByTestId("fudis-button-1").click();
@@ -107,6 +115,10 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await expect(page).toHaveScreenshot("A-16-enter-clear.png", {
     fullPage: true,
   });
+
+  /**
+   * Disabled after clearing selection
+   */
   await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(6);
   await page.getByTestId("fudis-button-1").click();
   await expect(page).toHaveScreenshot("A-17-disabled-clear.png", {
@@ -118,7 +130,7 @@ test("Dropdowns and Autocompletes", async ({ page }) => {
   await page.goto("/iframe.html?args=&id=components-form-select--select-showcase&viewMode=story");
 
   /**
-   * Single-select Dropdown without Clear button
+   * Dropdown without clear button
    */
   await page.getByTestId("fudis-button-2").click();
 
@@ -148,7 +160,6 @@ test("Dropdowns and Autocompletes", async ({ page }) => {
   /**
    * Autocomplete dropdown with clear button
    */
-
   await expect(page.getByTestId("fudis-select-3-dropdown")).toBeVisible();
   await page.keyboard.press("Backspace");
   await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(6);
@@ -243,7 +254,7 @@ test("Dropdowns and Autocompletes", async ({ page }) => {
   await page.keyboard.press("Backspace");
 
   /**
-   * Last one
+   * Autocomplete type without clear button
    */
   await page.getByTestId("fudis-select-6").focus();
   await expect(page.getByTestId("fudis-select-5-dropdown")).not.toBeVisible();
