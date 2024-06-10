@@ -20,7 +20,6 @@ type MyForm = {
     <fudis-dialog [size]="'sm'">
       <fudis-dialog-content>
         <fudis-form
-          [errorSummaryLinkType]="'onClick'"
           [title]="'Dialog with fudis-form'"
           [errorSummaryHelpText]="'You did not fill all the required information'"
           [level]="2"

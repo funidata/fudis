@@ -13,31 +13,13 @@
             </ng-container>
             <ul class="fudis-error-summary__error-list">
               <li class="fudis-error-summary__error-list__item" *ngFor="let error of errors">
-                <ng-container *ngIf="linkType === 'router'">
-                  <fudis-link
-                    [link]="'.'"
-                    [fragmentId]="error.id"
-                    [title]="error.message"
-                    [color]="'primary-dark'"
-                  ></fudis-link>
-                </ng-container>
-                <ng-container *ngIf="linkType === 'href'">
-                  <fudis-link
-                    [size]="'md'"
-                    [href]="'#' + error.id"
-                    [title]="error.message"
-                    [color]="'primary-dark'"
-                  ></fudis-link>
-                </ng-container>
-                <ng-container *ngIf="linkType === 'onClick'">
-                  <fudis-link
-                    (handleClick)="handleErrorClick($event, error.id)"
-                    [size]="'md'"
-                    [href]="'#'"
-                    [title]="error.message"
-                    [color]="'primary-dark'"
-                  ></fudis-link>
-                </ng-container>
+                <fudis-link
+                  (handleClick)="handleErrorClick($event, error.id)"
+                  [size]="'md'"
+                  [href]="'#'"
+                  [title]="error.message"
+                  [color]="'primary-dark'"
+                />
               </li>
             </ul>
           </div>

@@ -30,7 +30,6 @@ import { TextInputComponent } from '../text-input/text-input.component';
 import { SpacingDirective } from '../../../directives/spacing/spacing.directive';
 import { SectionComponent } from '../../section/section.component';
 import { ExpandableComponent } from '../../expandable/expandable.component';
-import { FudisFormErrorSummaryLink } from '../../../types/forms';
 import { LinkDirective } from '../../../directives/link/link.directive';
 
 @Component({
@@ -40,7 +39,6 @@ import { LinkDirective } from '../../../directives/link/link.directive';
     [level]="1"
     [title]="'Example Form with Error Summary'"
     [id]="'unique-form-example-1'"
-    [errorSummaryLinkType]="errorSummaryLinkType"
     [errorSummaryHelpText]="'There were errors you need to fix'"
     [errorSummaryVisible]="errorSummaryVisible"
   >
@@ -83,8 +81,6 @@ class MockFormComponent {
   constructor(public errorSummaryService: FudisErrorSummaryService) {}
 
   @ViewChild('formRef') formRef: FormComponent;
-
-  errorSummaryLinkType: FudisFormErrorSummaryLink;
 
   errorSummaryVisible: boolean = false;
 
@@ -156,7 +152,6 @@ describe('ErrorSummaryComponent', () => {
 
     wrapperFixture = TestBed.createComponent(MockFormComponent);
     wrapperComponent = wrapperFixture.componentInstance;
-    wrapperComponent.errorSummaryLinkType = 'router';
     wrapperComponent.errorSummaryService.setUpdateStrategy('reloadOnly');
     wrapperFixture.autoDetectChanges();
     wrapperComponent.reloadErrors();
@@ -170,35 +165,6 @@ describe('ErrorSummaryComponent', () => {
       expect(renderedHelpText.textContent).toBe(
         'Attention:\u00A0There were errors you need to fix',
       );
-    });
-
-    it('should have Fudis Link attributes correctly with router link', () => {
-      const linkElementFragment = wrapperFixture.nativeElement
-        .querySelector('ul li fudis-link a')
-        .getAttribute('ng-reflect-fragment');
-
-      const linkElementHref = wrapperFixture.nativeElement
-        .querySelector('ul li fudis-link a')
-        .getAttribute('href');
-
-      expect(linkElementFragment).toEqual('fudis-text-input-1');
-      expect(linkElementHref).toEqual('/#fudis-text-input-1');
-    });
-
-    it('should have Fudis Link attributes correctly with href link', () => {
-      wrapperComponent.errorSummaryLinkType = 'href';
-      wrapperFixture.detectChanges();
-
-      const linkElementFragment = wrapperFixture.nativeElement
-        .querySelector('ul li fudis-link a')
-        .getAttribute('ng-reflect-fragment');
-
-      const linkElementHref = wrapperFixture.nativeElement
-        .querySelector('ul li fudis-link a')
-        .getAttribute('href');
-
-      expect(linkElementFragment).toEqual(null);
-      expect(linkElementHref).toEqual('#fudis-text-input-1');
     });
 
     it('should remove errors dynamically without reload', () => {

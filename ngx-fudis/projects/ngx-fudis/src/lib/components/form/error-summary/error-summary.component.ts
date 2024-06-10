@@ -13,7 +13,6 @@ import {
   FudisFormErrorSummaryObject,
   FudisFormErrorSummaryList,
   FudisFormErrorSummarySection,
-  FudisFormErrorSummaryLink,
 } from '../../../types/forms';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -70,11 +69,6 @@ export class ErrorSummaryComponent implements AfterViewInit {
    * Id of parent Form component
    */
   @Input({ required: true }) formId: string;
-
-  /**
-   * Type of the clickable error link
-   */
-  @Input() linkType: FudisFormErrorSummaryLink = 'router';
 
   /**
    * Additional text for screen readers added before help text. E.g. "Attention". Comparable for "alert" icon included in Error Summary.
