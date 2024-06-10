@@ -17,7 +17,6 @@ import { ActionsDirective } from '../../../directives/content-projection/actions
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
-import { FudisFormErrorSummaryLink } from '../../../types/forms';
 import { DialogComponent } from '../../dialog/dialog.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
@@ -96,11 +95,6 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
    * Set Error Summary visibility manually. Usually set true on form submit with Button binded with 'fudisFormSubmit' directive.
    */
   @Input() errorSummaryVisible: boolean = false;
-
-  /**
-   * Type of the clickable error link in Error Summary. If your App uses Angular Router, use default value 'router'. Otherwise use 'onClick'.
-   */
-  @Input() errorSummaryLinkType: FudisFormErrorSummaryLink = 'router';
 
   /**
    * HTML FormElement

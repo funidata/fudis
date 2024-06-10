@@ -38,7 +38,6 @@ import { LinkComponent } from '../../link/link.component';
     [helpText]="'Some help for the form'"
     [badge]="badge"
     [badgeText]="badgeText"
-    [errorSummaryLinkType]="'href'"
     [errorSummaryHelpText]="'There were errors you need to fix'"
     [errorSummaryVisible]="errorSummaryVisible"
   >

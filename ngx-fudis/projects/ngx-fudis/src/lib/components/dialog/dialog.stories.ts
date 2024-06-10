@@ -66,7 +66,6 @@ class DialogLaucherComponent {
         <fudis-form
           [title]="'Dialog with fudis-form'"
           [level]="2"
-          [errorSummaryLinkType]="'onClick'"
           [errorSummaryHelpText]="'You need to fill up the information.'"
         >
           <ng-template fudisContent [type]="'form'">

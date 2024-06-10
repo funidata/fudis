@@ -7,7 +7,6 @@ import { BehaviorSubject } from 'rxjs';
 import {
   FudisSelectOption,
   FudisRadioButtonOption,
-  FudisFormErrorSummaryLink,
   FudisCheckboxGroupFormGroup,
   // FudisDateRangeItem,
 } from '../../../types/forms';
@@ -42,7 +41,6 @@ import { fudisSpacingArray } from '../../../types/spacing';
       <fudis-form
         [level]="2"
         [title]="'Form with Text Input'"
-        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -67,7 +65,6 @@ import { fudisSpacingArray } from '../../../types/spacing';
       <fudis-form
         [level]="2"
         [title]="'Form with Text Area'"
-        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -92,7 +89,6 @@ import { fudisSpacingArray } from '../../../types/spacing';
       <fudis-form
         [level]="2"
         [title]="'Form with Checkbox Group'"
-        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -126,7 +122,6 @@ import { fudisSpacingArray } from '../../../types/spacing';
       <!-- <fudis-form
         [level]="2"
         [title]="'Form with Select and Multiselect'"
-        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -238,7 +233,6 @@ class ExampleWithMultipleFormsComponent {
       [title]="title"
       [titleVariant]="titleVariant"
       [helpText]="helpText"
-      [errorSummaryLinkType]="errorSummaryLinkType"
       [errorSummaryHelpText]="errorSummaryHelpText"
       [errorSummaryVisible]="errorSummaryVisible"
     >
@@ -406,7 +400,6 @@ class FormContentExampleComponent implements OnInit {
   @Input() badge: FudisBadgeVariant;
   @Input() badgeText: string;
   @Input() errorSummaryHelpText: string;
-  @Input() errorSummaryLinkType: FudisFormErrorSummaryLink;
   @Input() errorSummaryVisible: boolean;
 
   releaseDate: number = new Date(1991, 4, 1).getTime();
@@ -553,12 +546,6 @@ export default {
         type: 'select',
       },
     },
-    errorSummaryLinkType: {
-      options: ['href', 'router', 'onClick'],
-      control: {
-        type: 'select',
-      },
-    },
   },
 } as Meta;
 
@@ -574,7 +561,6 @@ export const Example: StoryFn<FormComponent> = (args: FormComponent) => ({
     [badge]="badge"
     [badgeText]="badgeText"
     [errorSummaryHelpText]="errorSummaryHelpText"
-    [errorSummaryLinkType]="errorSummaryLinkType"
     [errorSummaryVisible]="errorSummaryVisible"
   />`,
 });
@@ -588,7 +574,6 @@ Example.args = {
   badgeText: 'Example',
   errorSummaryHelpText:
     'There are errors in this form. Please address these before trying to submit again.',
-  errorSummaryLinkType: 'onClick',
   errorSummaryVisible: false,
 };
 
