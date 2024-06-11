@@ -1,18 +1,14 @@
 <ng-container *transloco="let t">
   <div class="root-style">
     <fudis-grid [columns]="1" [marginTop]="'md'" [align]="'center'">
-      <fudis-section [title]="'Opiskeluoikeudet'" [titleLevel]="2">
-        <ng-template fudisNotifications [type]="'section'">
-          <fudis-heading [level]="3" [size]="'lg'">Tutkintokoulutus</fudis-heading>
-        </ng-template>
-      <ng-template fudisActions [type]="'section'">
-        <fudis-button [label]="'Muodosta Opiskelutodistus'" [variant]="'secondary'"></fudis-button>
-      </ng-template>
+      <fudis-heading [level]="1">Opiskeluoikeudentila</fudis-heading>
+      <fudis-button fudisGridItem [alignSelfX]="'end'" [variant]="'secondary'" [label]="'Muodosta opiskeluoikeutodistus'"></fudis-button>
+      <fudis-section [title]="'Tutkintokoulutus'" [level]="2">
       <ng-template fudisContent [type]="'section'">
         <fudis-expandable [title]="'Arkkitehtuurin koulutus'" [level]="3">
         <ng-template fudisContent [type]="'expandable'">
-          <fudis-grid [columns]="{ md: 'inputMd inputLg'}" [alignItemsY]="'start'">
-            <fudis-section fudisGridItem [title]="'Perustiedot'" [titleLevel]="4" [titleSize]="'md'">
+          <fudis-grid [columns]="{ lg: 2}" [alignItemsY]="'start'">
+            <fudis-section fudisGridItem [title]="'Perustiedot'" [level]="4" [titleVariant]="'md'">
               <ng-template fudisContent [type]="'section'">
               <fudis-dl>
                   <fudis-dl-item>
@@ -53,7 +49,7 @@
               </ng-template>
             </fudis-section>
             <fudis-grid-item>
-              <fudis-section [title]="'Opiskeluoikeudentila'" [titleLevel]="4" [titleSize]="'md'">
+              <fudis-section [title]="'Opiskeluoikeudentila'" [level]="4" [titleVariant]="'md'">
                 <ng-template fudisContent [type]="'section'">
                   <fudis-body-text>Passiivinen</fudis-body-text>
                   <fudis-expandable [variant]="'lite'" [level]="5" [title]="'Näytä kaikki opiskeluoikeuden tilat'">
@@ -63,7 +59,7 @@
                   </fudis-expandable>
                 </ng-template>
               </fudis-section>
-              <fudis-section [title]="'Opintojen eteneminen'" [titleLevel]="4" [titleSize]="'md'">
+              <fudis-section [title]="'Opintojen eteneminen'" [level]="4" [titleVariant]="'md'">
                 <ng-template fudisContent [type]="'section'">
                   <fudis-dl>
                     <fudis-dl-item>
@@ -73,11 +69,11 @@
                   </fudis-dl>
                 </ng-template>
               </fudis-section>
-              <fudis-section [marginTop]="'lg'" [title]="'Läsnäolo'" [titleLevel]="4" [titleSize]="'md'">
+              <fudis-section [marginTop]="'lg'" [title]="'Läsnäolo'" [level]="4" [titleVariant]="'md'">
                 <ng-template fudisContent [type]="'section'">
-                  <fudis-section [title]="'2024 - 2025'" [titleLevel]="5" [titleSize]="'sm'">
+                  <fudis-section [title]="'2024 - 2025'" [level]="5" [titleVariant]="'sm'">
                     <ng-template fudisContent [type]="'section'">
-                      <fudis-section [title]="'Syksy'" [titleLevel]="6" [titleSize]="'xs'">
+                      <fudis-section [title]="'Syksy'" [level]="6" [titleVariant]="'xs'">
                         <ng-template fudisContent [type]="'section'">
                           <fudis-dl [variant]="'compact'">
                               <fudis-dl-item>
@@ -91,7 +87,7 @@
                           </fudis-dl>
                         </ng-template>
                     </fudis-section>
-                    <fudis-section [title]="'Kevät'" [titleLevel]="6" [titleSize]="'xs'">
+                    <fudis-section [title]="'Kevät'" [level]="6" [titleVariant]="'xs'">
                       <ng-template fudisContent [type]="'section'">
                         <fudis-dl [variant]="'compact'">
                             <fudis-dl-item>
