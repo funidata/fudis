@@ -83,6 +83,11 @@ export interface FudisTranslationConfig {
     // Label for close button
     CLOSE: string;
   };
+  DROPDOWNMENU: {
+    ITEM: {
+      DISABLED: string;
+    };
+  };
   INPUT_WITH_LANGUAGE_OPTIONS: {
     // Label for language selection dropdown
     LANGUAGE: string;
