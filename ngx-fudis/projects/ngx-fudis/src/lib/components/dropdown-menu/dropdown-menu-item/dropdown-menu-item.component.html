@@ -1,54 +1,19 @@
 <button
-  *ngIf="!_parentComponent.multiselect"
   #dropdownItem
   class="fudis-dropdown-menu-item fudis-dropdown-menu-item__focusable"
   [attr.role]="'menuitem'"
   [attr.id]="_id"
   [attr.aria-disabled]="disabled"
+  [class.fudis-dropdown-menu-item--disabled]="disabled"
   (keydown)="_handleKeyDown($event)"
   (blur)="_handleButtonBlur($event)"
   (click)="_closeDropdown($event)"
 >
   {{ label }}
-</button>
-
-<div
-  *ngIf="_parentComponent.multiselect"
-  class="fudis-dropdown-menu-item__checkbox"
-  [attr.id]="_id"
-  [class.fudis-dropdown-menu-item__checkbox--active]="checked"
->
-  <label
-    [attr.for]="_id + '-checkbox-input'"
-    class="fudis-dropdown-menu-item__checkbox__label"
-    [class.fudis-dropdown-menu-item__checkbox__label--active]="checked"
+  <span
+    *ngIf="disabled"
+    class="fudis-dropdown-menu-item__label fudis-dropdown-menu-item__label__disabled-text"
   >
-    <div class="fudis-dropdown-menu-item__checkbox__box">
-      <input
-        [attr.id]="_id + '-checkbox-input'"
-        type="checkbox"
-        class="fudis-dropdown-menu-item__checkbox__input fudis-dropdown-menu-item__focusable"
-        [attr.role]="'option'"
-        [attr.aria-checked]="checked"
-        (blur)="handleBlur.emit($event)"
-        (click)="handleChecked.emit()"
-      />
-      <svg
-        *ngIf="checked"
-        width="100%"
-        height="100%"
-        preserveAspectRatio="xMidYMin"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 22 22"
-        id="check-small"
-        aria-hidden="true"
-      >
-        <path
-          class="a"
-          d="M9.0171,16.5A1.5,1.5,0,0,1,7.9,16.0012l-4.0171-4.48a1.5,1.5,0,0,1,2.2334-2.003L8.8706,12.59l5.9-8.4487A1.5,1.5,0,1,1,17.23,5.8591l-6.9824,10a1.4978,1.4978,0,0,1-1.1392.6387C9.0776,16.4992,9.0474,16.5,9.0171,16.5Z"
-        />
-      </svg>
-    </div>
-    <div class="fudis-dropdown-menu-item__checkbox__label__text">{{ label }}</div>
-  </label>
-</div>
+    ({{ translationItemDisabledText | async }})</span
+  >
+</button>
