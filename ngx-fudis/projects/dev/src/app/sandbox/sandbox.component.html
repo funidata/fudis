@@ -1,14 +1,5 @@
 <ng-container *transloco="let t">
   <div class="root-style">
-    <fudis-grid [columns]="4" [marginTop]="'lg'">
-      <fudis-grid-item [columns]="'3 / 4'" [alignSelfX]="'end'" [alignSelfY]="'end'">
-        <fudis-body-text>1 rem = {{ visibleRemValue }}px</fudis-body-text>
-        <fudis-body-text>Font size is {{ fontSize }}</fudis-body-text>
-      </fudis-grid-item>
-      <fudis-grid-item [columns]="'4 / -1'" [alignSelfX]="'end'">
-        <fudis-button [label]="'Change rem base'" (handleClick)="changeRemBase()"></fudis-button>
-      </fudis-grid-item>
-    </fudis-grid>
     <fudis-grid [columns]="1" [marginTop]="'xl'">
       <fudis-heading [level]="1">Welcome to Fudis sandbox </fudis-heading>
 
@@ -76,7 +67,7 @@
         <ng-template fudisContent type="expandable">
           <fudis-grid [columns]="1" [rowGap]="'xxl'">
             <fudis-grid [columns]="2">
-              <fudis-heading [level]="3" [size]="'xl'">Grid stuff!</fudis-heading>
+              <fudis-heading [level]="3" [variant]="'xl'">Grid stuff!</fudis-heading>
               <fudis-button
                 [label]="'Update Grid Service defaults'"
                 (handleClick)="updateGridServiceDefaults()"
@@ -129,16 +120,5 @@
         </ng-template>
       </fudis-expandable>
     </fudis-grid>
-
-    <fudis-footer>
-      <ng-template fudisFooterContentRight>
-        <fudis-link [href]="'example.com'" [title]="'Tietosuojaseloste'" />
-        <fudis-link [href]="'example.com'" [title]="'Saavutettavuusseloste'" />
-        <fudis-link [href]="'example.com'" [title]="'Järjestelmätiedot'" />
-      </ng-template>
-      <ng-template fudisFooterContentLeft>
-        <fudis-link [href]="'example.com'" [title]="'Promo link'" />
-      </ng-template>
-    </fudis-footer>
   </div>
 </ng-container>
