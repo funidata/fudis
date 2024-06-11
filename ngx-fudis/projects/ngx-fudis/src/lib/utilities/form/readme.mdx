@@ -42,8 +42,12 @@ FudisValidators.email('Input must be an email address.')
 
 For minLength and maxLength, include `FudisValidators.minLength()` and `FudisValidators.maxLength()` in the form control validator with preferred input length as number and a message parameter as a string or as an observable string. When maxLength validation is used, [Text Input](/docs/components-form-text-input--documentation) and [Text Area](/docs/components-form-text-area--documentation) components disable user from inputing more than allowed length of characters and will have additional maxLength indicator.
 
+Setting minLength does not make the control required. By setting `valueRequired` property to `true`, validator won't accept empty or falsy value.
+
 ```
 FudisValidators.maxLength(20, 'Too long input text.')
+FudisValidators.minLength(10, 'You should write a little bit more.', true)
+
 ```
 
 ---

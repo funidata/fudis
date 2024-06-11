@@ -7,7 +7,7 @@
   box-sizing: border-box;
   margin-top: 0;
 
-  &__size {
+  &__variant {
     &__xxs {
       @include typography.heading-xxs;
     }

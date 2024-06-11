@@ -1,16 +1,9 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-  effect,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, effect } from '@angular/core';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
 import { FudisSelectVariant } from '../../../../../types/forms';
 import { FormControl } from '@angular/forms';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-select-icons',
@@ -18,13 +11,11 @@ import { FudisComponentChanges } from '../../../../../types/miscellaneous';
   styleUrls: ['./select-icons.component.scss'],
 })
 export class SelectIconsComponent implements OnChanges {
-  constructor(
-    protected _translationService: FudisTranslationService,
-    private _changeDetectionRef: ChangeDetectorRef,
-  ) {
+  constructor(protected _translationService: FudisTranslationService) {
     effect(() => {
-      this._translationClearFilterText =
-        _translationService.getTranslations()().SELECT.AUTOCOMPLETE.CLEAR;
+      this._translationClearFilterText.next(
+        _translationService.getTranslations()().SELECT.AUTOCOMPLETE.CLEAR,
+      );
     });
   }
 
@@ -58,7 +49,6 @@ export class SelectIconsComponent implements OnChanges {
 
       this.parentControl.valueChanges.subscribe((value) => {
         this._controlValue = !!value;
-        this._changeDetectionRef.detectChanges();
       });
     }
   }
@@ -66,7 +56,7 @@ export class SelectIconsComponent implements OnChanges {
   /**
    * Translated aria-label for autocomplete close icon button which clears the input
    */
-  protected _translationClearFilterText: string;
+  protected _translationClearFilterText = new BehaviorSubject<string>('');
 
   protected _chevronVisible: boolean;
 

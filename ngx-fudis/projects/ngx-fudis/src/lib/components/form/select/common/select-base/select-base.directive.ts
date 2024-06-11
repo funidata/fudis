@@ -9,7 +9,6 @@ import {
   Inject,
   Input,
   OnChanges,
-  OnDestroy,
   Output,
   Signal,
   ViewChild,
@@ -31,13 +30,14 @@ import { FudisComponentChanges } from '../../../../../types/miscellaneous';
 import { SelectComponent } from '../../select/select.component';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
 import { hasRequiredValidator } from '../../../../../utilities/form/getValidators';
-import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 import { DOCUMENT } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BehaviorSubject } from 'rxjs';
 
 @Directive({
   selector: '[fudisSelectBase]',
 })
-export class SelectBaseDirective extends InputBaseDirective implements OnDestroy, OnChanges {
+export class SelectBaseDirective extends InputBaseDirective implements OnChanges {
   constructor(
     @Inject(DOCUMENT) protected _document: Document,
     protected _focusService: FudisFocusService,
@@ -50,9 +50,13 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
     effect(() => {
       const translations = _translationService.getTranslations()();
 
-      this._translationOpenAriaLabel = translations.SELECT.OPEN_DROPDOWN;
-      this._translationCloseAriaLabel = translations.SELECT.CLOSE_DROPDOWN;
-      this._translationNoResultsFound = translations.SELECT.AUTOCOMPLETE.NO_RESULTS;
+      this._translationNoResultsFound.next(translations.SELECT.AUTOCOMPLETE.NO_RESULTS);
+
+      this.translationOptionDisabledText.next(translations.SELECT.DISABLED);
+
+      // TODO: after a11y audit, check if these can be removed
+      this._translationOpenAriaLabel.next(translations.SELECT.OPEN_DROPDOWN);
+      this._translationCloseAriaLabel.next(translations.SELECT.CLOSE_DROPDOWN);
     });
   }
 
@@ -69,7 +73,12 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
   /**
    * Reference to autocomplete element, used to focus to it
    */
-  @ViewChild('autocompleteRef') protected _autocompleteRef: SelectAutocompleteComponent;
+  @ViewChild('autocompleteRef') public autocompleteRef: SelectAutocompleteComponent;
+
+  /**
+   * Reference to autocomplete element, used to focus to it
+   */
+  @ViewChild('selectIconsRef') protected _selectIconsRef: ElementRef<HTMLDivElement>;
 
   /**
    * To lazy load options on first open
@@ -148,22 +157,27 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
   /**
    * Internal translated text for icon-only button aria-label when opening dropdown
    */
-  protected _translationOpenAriaLabel: string;
+  protected _translationOpenAriaLabel = new BehaviorSubject<string>('');
 
   /**
    * Internal translated text for icon-only button aria-label when closing dropdown
    */
-  protected _translationCloseAriaLabel: string;
+  protected _translationCloseAriaLabel = new BehaviorSubject<string>('');
 
   /**
    * Internal translated label for situations where no results with current filters were found
    */
-  protected _translationNoResultsFound: string;
+  protected _translationNoResultsFound = new BehaviorSubject<string>('');
 
   /**
    * Signal to Select & MultiselectOption for listening autocomplete filter text changes
    */
   protected _autocompleteFilterText: WritableSignal<string> = signal<string>('');
+
+  /**
+   * Internal translated text for disabled select option, used in Select and Multiselect Option
+   */
+  public translationOptionDisabledText = new BehaviorSubject<string>('string');
 
   /**
    *  Lazy loading check for expanding content, unless component control gets values from application, then set to true automatically, so that comparing available options match given control value.
@@ -186,27 +200,35 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
   protected _preventDropdownReopen: boolean | undefined = false;
 
   /**
-   * Used to handle exceptions when mouse click event fires before / after focus event
+   * Currently focused option
    */
-  protected _preventClick: boolean = false;
+  private _focusedOption: string | null = null;
 
-  protected _focusedOption: string | null = null;
+  /**
+   * If clear button is focused
+   */
+  private _clearButtonFocused: boolean = false;
 
-  protected _clearButtonFocused: boolean = false;
+  /**
+   * If click event happens either in input field or in the options
+   */
+  private _mouseDownTargetInsideComponent: boolean;
 
-  protected _clickTargetInside: boolean = false;
+  /**
+   * Used to prevent event triggering before mouseUp happens
+   */
+  private _mouseDown: boolean = false;
 
-  protected _mouseDownTargetInsideComponent: boolean;
+  /**
+   * If click event's target is Select's input field
+   */
+  private _mouseUpOnInput: boolean = false;
 
   protected _clearButtonClick(): void {
     if (!this.disabled && !this.control.disabled) {
       this._setControlNull();
 
-      if (this.variant !== 'dropdown') {
-        this._autocompleteRef.inputRef.nativeElement.focus();
-      } else {
-        this._inputRef.nativeElement.focus();
-      }
+      this._focusToSelectInput();
     }
   }
 
@@ -226,7 +248,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
         this._updateSelectionFromControlValue();
       }
 
-      this.control.valueChanges.pipe(takeUntil(this._destroyed)).subscribe(() => {
+      this.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
         if (!this._controlValueChangedInternally) {
           this._updateSelectionFromControlValue();
         }
@@ -252,12 +274,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
     this._dropdownOpen = false;
 
     this._preventDropdownReopen = preventDropdownReopen;
-
-    if (this.variant !== 'dropdown' && focusToInput) {
-      this._autocompleteRef.inputRef.nativeElement.focus();
-    } else if (focusToInput) {
-      this._inputRef.nativeElement.focus();
-    }
+    this._focusToSelectInput(focusToInput);
   }
 
   /**
@@ -280,12 +297,10 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
       this.variant === 'autocompleteDropdown' ||
       (this.variant === 'autocompleteType' && this._autocompleteFilterText() !== '');
 
-    if (!this._preventDropdownReopen && !this._dropdownOpen && openDropdown) {
+    if (!this._preventDropdownReopen && openDropdown && !this._mouseDown) {
       this.openDropdown();
-
-      this._preventClick = true;
-      this._preventDropdownReopen = false;
     }
+    this._preventDropdownReopen = false;
   }
 
   /**
@@ -308,22 +323,11 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
    */
   protected _clickInput(): void {
     this._preventDropdownReopen = true;
-    if (
-      this._inputFocused &&
-      !this._preventClick &&
-      (this.variant !== 'autocompleteType' ||
-        (this.variant === 'autocompleteType' && this._autocompleteFilterText().length >= 3))
-    ) {
+
+    if (this._inputFocused || this._mouseUpOnInput) {
       this._toggleDropdown();
     }
-
-    this._preventClick = false;
-
-    if (this.variant === 'dropdown') {
-      this._inputRef.nativeElement.focus();
-    } else {
-      this._autocompleteRef.inputRef.nativeElement.focus();
-    }
+    this._focusToSelectInput();
   }
 
   /**
@@ -392,10 +396,18 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
     }
   }
 
-  protected _setClearButtonStateToNull(): void {
+  /**
+   * Set Clear button's focus state to false
+   */
+  protected _setClearButtonFocusFalse(): void {
     this._clearButtonFocused = false;
   }
 
+  /**
+   * Set focus state of Clear Button and determine if Dropdown should be closed when this function is called
+   * @param event FocusEvent
+   * @param state
+   */
   protected _setClearButtonFocusState(event: FocusEvent, state: boolean): void {
     this._clearButtonFocused = state;
 
@@ -419,14 +431,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
 
   protected _updateInputValueTexts(value: string): void {
     if (this.variant !== 'dropdown') {
-      this._autocompleteRef.preventSpaceKeypress = true;
+      this.autocompleteRef.preventSpaceKeypress = true;
 
-      (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).setAttribute(
-        'value',
-        value,
-      );
-      (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value = value;
-      this._autocompleteFilterText.set('');
+      this.autocompleteRef.updateInputValue(value);
     } else {
       this._dropdownSelectionLabelText = value;
     }
@@ -462,6 +469,35 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
         this._focusTryCounter += 1;
         this._focusToFirstOption();
       }, 100);
+    }
+  }
+
+  protected _dropdownBlur(event: FocusEvent): void {
+    this.componentFocused(event).then((value) => {
+      if (!value) {
+        this.closeDropdown(false);
+      }
+    });
+  }
+
+  protected _dropdownFocus(event: FocusEvent): void {
+    const focusFromInputOrClearButton =
+      event.relatedTarget === this._inputRef?.nativeElement ||
+      event.relatedTarget === this.autocompleteRef?.inputRef.nativeElement ||
+      this._selectIconsRef.nativeElement.contains(event.relatedTarget as HTMLElement);
+
+    if (focusFromInputOrClearButton) {
+      this._focusToFirstOption();
+    } else {
+      this._focusToSelectInput();
+    }
+  }
+
+  protected _focusToSelectInput(condition: boolean = true) {
+    if (this.variant !== 'dropdown' && condition) {
+      this.autocompleteRef.inputRef.nativeElement.focus();
+    } else if (condition) {
+      this._inputRef.nativeElement.focus();
     }
   }
 
@@ -502,7 +538,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
           clearInterval(focusCheckInterval);
           resolve(false);
 
-          // Encrease counter, and try again. This is needed usually with click events as between previous element blur and next element focus click event is "somewhere else"
+          // Increase counter, and try again. This is needed usually with click events as between previous element blur and next element focus click event is "somewhere else"
         } else if (counter <= 100) {
           counter = counter + 50;
         } else {
@@ -515,31 +551,44 @@ export class SelectBaseDirective extends InputBaseDirective implements OnDestroy
   }
 
   /**
-   * When pressing keyboard Esc, focus to FudisSelect input and close dropdown
+   * When pressing keyboard Esc, focus to Select input and close dropdown
    * @param event
    */
   @HostListener('window:keydown.escape', ['$event'])
   private _handleEscapePress(event: KeyboardEvent) {
     if (this._dropdownOpen) {
       event.preventDefault();
+
       this.closeDropdown(true, true);
     }
   }
 
   /**
-   * When user clicks, set status is click inside or outside
+   * When user clicks, set status whether click is inside or outside the Select element
    * @param targetElement
    */
-  @HostListener('document:click', ['$event.target'])
+  @HostListener('document:mouseup', ['$event.target'])
   private _handleWindowClick(targetElement: HTMLElement) {
     if (this._dropdownOpen && !this._selectRef.nativeElement.contains(targetElement)) {
-      this.closeDropdown(false, true);
+      this.closeDropdown(false);
     }
   }
 
   @HostListener('mousedown', ['$event.target'])
   private _handleMouseDown(targetElement: HTMLElement) {
+    this._mouseDown = true;
+
     this._mouseDownTargetInsideComponent =
       targetElement && !!this._selectRef.nativeElement.contains(targetElement);
+  }
+
+  @HostListener('mouseup', ['$event.target'])
+  private _handleMouseUp(targetElement: HTMLElement) {
+    this._mouseDown = false;
+    this._mouseDownTargetInsideComponent = false;
+    this._mouseUpOnInput =
+      targetElement &&
+      (!!this._inputRef?.nativeElement.contains(targetElement) ||
+        !!this.autocompleteRef?.inputRef?.nativeElement.contains(targetElement));
   }
 }

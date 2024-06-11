@@ -1,6 +1,6 @@
 <section
   [attr.id]="_id"
-  [attr.aria-label]="_translations && _translations.LANGUAGE_BADGE.ARIA_LABEL.TRANSLATIONS"
+  [attr.aria-label]="_groupAriaLabel | async"
   class="fudis-language-badge-group"
 >
   <ng-container *ngFor="let _language of _languageLabels | async; let index = index">

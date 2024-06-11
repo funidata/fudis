@@ -20,9 +20,9 @@ import { TooltipDirective } from '../../directives/tooltip/tooltip.directive';
 import { FudisTooltipPosition } from '../../types/miscellaneous';
 import {
   FudisHeadingLevel,
-  FudisHeadingSize,
+  FudisHeadingVariant,
   fudisHeadingLevelArray,
-  fudisHeadingSizeArray,
+  fudisHeadingVariantArray,
 } from '../../types/typography';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
 
@@ -30,8 +30,8 @@ import { getElement, sortClasses } from '../../utilities/tests/utilities';
   selector: 'mock-fudis-section',
   template: `<fudis-section
     [title]="title"
-    [titleSize]="titleSize"
-    [titleLevel]="titleLevel"
+    [titleVariant]="titleVariant"
+    [level]="level"
     [classes]="classes"
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
@@ -52,8 +52,8 @@ import { getElement, sortClasses } from '../../utilities/tests/utilities';
 })
 class MockFudisSectionComponent {
   title: string = 'This is section title';
-  titleSize: FudisHeadingSize = 'lg';
-  titleLevel: FudisHeadingLevel = 2;
+  titleVariant: FudisHeadingVariant = 'lg';
+  level: FudisHeadingLevel = 2;
   classes: string[];
   tooltip: string = 'This is tooltip in section';
   tooltipToggle: boolean = false;
@@ -99,17 +99,17 @@ describe('SectionComponent', () => {
     return sectionEl;
   }
 
-  function sectionTitleSizeCheck(size: FudisHeadingSize): void {
-    mockComponent.titleSize = size;
+  function sectionTitleVariantCheck(variant: FudisHeadingVariant): void {
+    mockComponent.titleVariant = variant;
     mockFixture.detectChanges();
 
     const sectionHeadingEl = getElement(mockFixture, '.fudis-heading') as HTMLHeadingElement;
 
-    expect(sectionHeadingEl.className).toContain(`fudis-heading__size__${size}`);
+    expect(sectionHeadingEl.className).toContain(`fudis-heading__variant__${variant}`);
   }
 
   function sectionTitleLevelCheck(level: FudisHeadingLevel): void {
-    mockComponent.titleLevel = level;
+    mockComponent.level = level;
     mockFixture.detectChanges();
 
     const headingElement = mockFixture.nativeElement.querySelector('fudis-heading');
@@ -160,9 +160,9 @@ describe('SectionComponent', () => {
       expect(headingElement?.textContent).toEqual('This is section title');
     });
 
-    it('should return correct title size', () => {
-      fudisHeadingSizeArray.forEach((size) => {
-        sectionTitleSizeCheck(size);
+    it('should return correct title variant', () => {
+      fudisHeadingVariantArray.forEach((variant) => {
+        sectionTitleVariantCheck(variant);
       });
     });
 

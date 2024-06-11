@@ -60,14 +60,14 @@ export const buttonIconOnlyExclude: RegExp = excludeRegex([...buttonCommonExclud
 export const checkboxGroupExclude: RegExp = excludeRegex([
   'groupBlurredOut',
   'setGroupBlurredOut',
-  'titleSize',
+  'titleVariant',
   'triggerEmit',
 ]);
 
 export const checkboxGroupControlsExclude: RegExp = excludeRegex([
   'groupBlurredOut',
   'setGroupBlurredOut',
-  'titleSize',
+  'titleVariant',
   'id',
   'formGroup',
   'triggerEmit',
@@ -226,10 +226,28 @@ export const sectionExclude: RegExp = excludeRegex(['classes', 'errorSummaryBrea
 /**
  * Select and Multiselect
  */
-export const selectCommonExclude: RegExp = excludeRegex([
+
+export const selectArgsTableExclude: RegExp = excludeRegex([
+  'componentFocused',
+  'translationOptionDisabledText',
+  'setFocusedOption',
+  'autocompleteRef',
+  'focusSelector',
+  'handleSelectionChange',
+  'getAutocompleteFilterText',
+  'closeDropdown',
+  'openDropdown',
+  'setOptionVisibility',
+  'focusToInput',
+  'onBlur',
+  'getSelectedOptions',
+  'handleCheckedSort',
+  'handleMultiSelectionChange',
+]);
+
+export const selectStoryControlExclude: RegExp = excludeRegex([
   'control',
   'autocomplete',
-  //'selectionClearButton',
   'ariaLabel',
   'disableGuidance',
   'id',
@@ -239,8 +257,6 @@ export const selectCommonExclude: RegExp = excludeRegex([
   'tooltipPosition',
   'tooltipToggle',
   'classes',
-  '_controlValueChangedInternally',
-  '_dropdownSelectionLabelText',
   'focusSelector',
   'selectionUpdate',
   'handleBlur',
@@ -260,23 +276,12 @@ export const selectCommonExclude: RegExp = excludeRegex([
   'optionInputRef',
   'checked',
   'close',
-]);
-
-export const selectAndMultiselectExclude: RegExp = excludeRegex([
-  'translationOptionDisabledText',
-  '_controlValueChangedInternally',
-  '_dropdownSelectionLabelText',
-  'focusSelector',
-  'handleSelectionChange',
-  'closeDropdown',
-  'getAutocompleteFilterText',
-  'openDropdown',
-  'setOptionVisibility',
-  'focusToInput',
-  'onBlur',
-  'getSelectedOptions',
-  'handleCheckedSort',
-  'handleMultiSelectionChange',
+  'errorSummaryReloadOnInit',
+  'handleKeyUp',
+  'componentFocused',
+  'setFocusedOption',
+  'autocompleteRef',
+  'variant',
 ]);
 
 /**
@@ -301,6 +306,8 @@ export const textInputControlsExclude: RegExp = excludeRegex([
 export const tooltipExclude: RegExp = excludeRegex([
   'handleClick',
   'handleBlur',
+  'handleDestroy',
+  'handleFocus',
   'buttonEl',
   'label',
   'labelHidden',

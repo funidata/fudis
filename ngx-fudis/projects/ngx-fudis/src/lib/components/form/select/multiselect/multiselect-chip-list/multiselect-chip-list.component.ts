@@ -28,6 +28,18 @@ export class MultiselectChipListComponent {
   @Output() handleClick = new EventEmitter<FudisSelectOption<object>>();
 
   /**
+   * If focus is in some of the chip buttons
+   */
+  protected _focused: boolean = false;
+
+  /**
+   * Focus setter
+   */
+  protected _setFocus(value: boolean): void {
+    this._focused = value;
+  }
+
+  /**
    * Focuses to the sibling and emits clicked index
    * @param index clicked index
    */

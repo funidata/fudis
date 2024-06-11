@@ -5,7 +5,7 @@ import { importProvidersFrom } from '@angular/core';
 import { action } from '@storybook/addon-actions';
 import readme from './select-option.mdx';
 import { SelectOptionComponent } from './select-option.component';
-import { selectCommonExclude } from '../../../../../utilities/storybook';
+import { selectStoryControlExclude } from '../../../../../utilities/storybook';
 
 export default {
   title: 'Components/Form/Select/Select and Multiselect Option',
@@ -20,7 +20,7 @@ export default {
       page: readme,
     },
     controls: {
-      exclude: selectCommonExclude,
+      exclude: selectStoryControlExclude,
     },
   },
 } as Meta;

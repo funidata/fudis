@@ -20,10 +20,9 @@ import { excludeAllRegex } from '../../../utilities/storybook';
   template: ` <fudis-form
     [align]="'center'"
     [marginTop]="'xl'"
-    [titleLevel]="1"
+    [level]="1"
     [title]="'Example Form with Error Summary'"
     [id]="id"
-    [errorSummaryLinkType]="'onClick'"
     [errorSummaryHelpText]="
       'Toggle live remove button to see errors disappear when input value is corrected'
     "

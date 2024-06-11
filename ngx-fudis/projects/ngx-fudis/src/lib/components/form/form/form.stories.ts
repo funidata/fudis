@@ -7,7 +7,6 @@ import { BehaviorSubject } from 'rxjs';
 import {
   FudisSelectOption,
   FudisRadioButtonOption,
-  FudisFormErrorSummaryLink,
   FudisCheckboxGroupFormGroup,
   // FudisDateRangeItem,
 } from '../../../types/forms';
@@ -18,10 +17,15 @@ import { FudisTranslationService } from '../../../services/translation/translati
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import docs from './form.docs.mdx';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
-import { FudisHeadingLevel, FudisHeadingSize } from '../../../types/typography';
+import {
+  FudisHeadingLevel,
+  FudisHeadingVariant,
+  fudisHeadingLevelArray,
+} from '../../../types/typography';
 import { formExclude } from '../../../utilities/storybook';
 import { defaultOptions } from '../select/common/mock_data';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
+import { fudisSpacingArray } from '../../../types/spacing';
 
 @Component({
   selector: 'example-with-multiple-forms',
@@ -35,9 +39,8 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
       />
 
       <fudis-form
-        [titleLevel]="2"
+        [level]="2"
         [title]="'Form with Text Input'"
-        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -60,9 +63,8 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
         </ng-template>
       </fudis-form>
       <fudis-form
-        [titleLevel]="2"
+        [level]="2"
         [title]="'Form with Text Area'"
-        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -85,9 +87,8 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
         </ng-template>
       </fudis-form>
       <fudis-form
-        [titleLevel]="2"
+        [level]="2"
         [title]="'Form with Checkbox Group'"
-        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -119,9 +120,8 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
         </ng-template>
       </fudis-form>
       <!-- <fudis-form
-        [titleLevel]="2"
+        [level]="2"
         [title]="'Form with Select and Multiselect'"
-        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -229,11 +229,10 @@ class ExampleWithMultipleFormsComponent {
       [marginTop]="'xl'"
       [badge]="badge"
       [badgeText]="badgeText"
-      [titleLevel]="titleLevel"
+      [level]="level"
       [title]="title"
-      [titleSize]="titleSize"
+      [titleVariant]="titleVariant"
       [helpText]="helpText"
-      [errorSummaryLinkType]="errorSummaryLinkType"
       [errorSummaryHelpText]="errorSummaryHelpText"
       [errorSummaryVisible]="errorSummaryVisible"
     >
@@ -395,13 +394,12 @@ class FormContentExampleComponent implements OnInit {
   ) {}
 
   @Input() title: string;
-  @Input() titleLevel: FudisHeadingLevel;
-  @Input() titleSize: FudisHeadingSize;
+  @Input() titleVariant: FudisHeadingVariant;
+  @Input() level: FudisHeadingLevel;
   @Input() helpText: string;
   @Input() badge: FudisBadgeVariant;
   @Input() badgeText: string;
   @Input() errorSummaryHelpText: string;
-  @Input() errorSummaryLinkType: FudisFormErrorSummaryLink;
   @Input() errorSummaryVisible: boolean;
 
   releaseDate: number = new Date(1991, 4, 1).getTime();
@@ -536,20 +534,14 @@ export default {
         type: 'text',
       },
     },
-    titleSize: {
-      options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+    titleVariant: {
+      options: fudisSpacingArray,
       control: {
         type: 'select',
       },
     },
-    titleLevel: {
-      options: [1, 2, 3, 4, 5, 6],
-      control: {
-        type: 'select',
-      },
-    },
-    errorSummaryLinkType: {
-      options: ['href', 'router', 'onClick'],
+    level: {
+      options: fudisHeadingLevelArray,
       control: {
         type: 'select',
       },
@@ -563,27 +555,25 @@ export const Example: StoryFn<FormComponent> = (args: FormComponent) => ({
   props: args,
   template: html` <example-form-content
     [title]="title"
-    [titleLevel]="titleLevel"
-    [titleSize]="titleSize"
+    [titleVariant]="titleVariant"
+    [level]="level"
     [helpText]="helpText"
     [badge]="badge"
     [badgeText]="badgeText"
     [errorSummaryHelpText]="errorSummaryHelpText"
-    [errorSummaryLinkType]="errorSummaryLinkType"
     [errorSummaryVisible]="errorSummaryVisible"
   />`,
 });
 
 Example.args = {
   title: 'Example Form Heading',
-  titleLevel: 1,
-  titleSize: 'xl',
+  titleVariant: 'xl',
+  level: 1,
   helpText: 'This is an additional help text to give user more information about the form',
   badge: 'primary',
   badgeText: 'Example',
   errorSummaryHelpText:
     'There are errors in this form. Please address these before trying to submit again.',
-  errorSummaryLinkType: 'onClick',
   errorSummaryVisible: false,
 };
 

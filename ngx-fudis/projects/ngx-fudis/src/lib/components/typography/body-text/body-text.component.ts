@@ -7,9 +7,8 @@ import {
   Optional,
   Host,
 } from '@angular/core';
-import { FudisBodyText } from '../../../types/typography';
-import { FudisTextAlign } from '../../../types/miscellaneous';
-import { NotificationComponent } from '../../notification/notification.component';
+import { FudisBodyText, FudisTextAlign } from '../../../types/typography';
+import { DialogComponent } from '../../dialog/dialog.component';
 
 @Component({
   selector: 'fudis-body-text',
@@ -19,9 +18,9 @@ import { NotificationComponent } from '../../notification/notification.component
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BodyTextComponent {
-  constructor(@Host() @Optional() private _parentNotification: NotificationComponent) {
-    if (_parentNotification) {
-      this.size = 'lg-regular';
+  constructor(@Host() @Optional() private _parentDialog: DialogComponent) {
+    if (_parentDialog) {
+      this.size = 'md-light';
     }
   }
 

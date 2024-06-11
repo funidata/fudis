@@ -15,15 +15,15 @@
 >
   <div [id]="id + '_header'" class="fudis-form__header">
     <div class="fudis-form__header__main">
-      <ng-container *ngIf="title && titleLevel">
+      <ng-container *ngIf="title && level">
         <div class="fudis-form__header__title">
           <ng-container *ngIf="_dialogParent">
             <fudis-heading
               class="fudis-form__header__title__dialog"
               fudisDialogTitle
               [marginBottom]="'xs'"
-              [size]="titleSize"
-              [level]="titleLevel"
+              [variant]="titleVariant"
+              [level]="level"
               >{{ title
               }}<ng-container *ngIf="badge && badgeText">
                 <fudis-badge
@@ -35,7 +35,7 @@
             </fudis-heading>
           </ng-container>
           <ng-container *ngIf="!_dialogParent">
-            <fudis-heading [marginBottom]="'xs'" [size]="titleSize" [level]="titleLevel"
+            <fudis-heading [marginBottom]="'xs'" [variant]="titleVariant" [level]="level"
               >{{ title
               }}<ng-container *ngIf="badge && badgeText">
                 <fudis-badge
@@ -59,7 +59,6 @@
       <ng-container *ngIf="_formElement !== undefined && errorSummaryVisible">
         <fudis-error-summary
           [formId]="id"
-          [linkType]="errorSummaryLinkType"
           [parentComponent]="_formElement"
           [helpText]="errorSummaryHelpText"
         />

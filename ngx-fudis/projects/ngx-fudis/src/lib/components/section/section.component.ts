@@ -10,13 +10,14 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FudisIdService } from '../../services/id/id.service';
-import { FudisHeadingSize, FudisHeadingLevel } from '../../types/typography';
+import { FudisHeadingVariant, FudisHeadingLevel } from '../../types/typography';
 import { NotificationsDirective } from '../../directives/content-projection/notifications/notifications.directive';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { FudisGridWidth, FudisGridAlign } from '../../types/grid';
 
 import { TooltipApiDirective } from '../../directives/tooltip/tooltip-api.directive';
-import { FudisComponentChanges, FudisSpacing } from '../../types/miscellaneous';
+import { FudisComponentChanges, FudisBadgeVariant } from '../../types/miscellaneous';
+import { FudisSpacing } from '../../types/spacing';
 import { FudisInternalErrorSummaryService } from '../../services/form/error-summary/internal-error-summary.service';
 import { FudisFormErrorSummarySection } from '../../types/forms';
 import { ActionsDirective } from '../../directives/content-projection/actions/actions.directive';
@@ -66,12 +67,22 @@ export class SectionComponent extends TooltipApiDirective implements OnInit, OnC
   /**
    * Heading level for the section title
    */
-  @Input() titleLevel: FudisHeadingLevel = 2;
+  @Input() level: FudisHeadingLevel = 2;
 
   /**
    * Heading size for the section title
    */
-  @Input() titleSize: FudisHeadingSize = 'lg';
+  @Input() titleVariant: FudisHeadingVariant = 'lg';
+
+  /**
+   * Add badge to the section title
+   */
+  @Input() badge: FudisBadgeVariant | null;
+
+  /**
+   * Badge text
+   */
+  @Input() badgeText: string | null;
 
   /**
    * Maximum width of Grid. When viewport gets narrower, grid automatically adjusts to lower sizes.

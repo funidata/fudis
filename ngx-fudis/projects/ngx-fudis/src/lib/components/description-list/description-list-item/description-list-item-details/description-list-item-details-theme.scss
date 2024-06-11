@@ -4,16 +4,6 @@
 
 @use "../../../../foundations/spacing/tokens.scss" as spacing;
 
-.fudis-dl-item-details {
-  &__regular {
-    &__content {
-      & fudis-button {
-        margin-top: spacing.$spacing-xs;
-      }
-    }
-  }
-}
-
 .fudis-dl-item-details-host {
   &:not(&--fi, &--sv, &--en) {
     &:has(~ .fudis-dl-item-details-host) {

@@ -1,7 +1,6 @@
 import { Component, Inject, Input, TemplateRef } from '@angular/core';
 import { StoryFn, Meta, moduleMetadata } from '@storybook/angular';
 import { FormControl, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentType } from '@angular/cdk/portal';
 import { FudisDialogService } from '../../services/dialog/dialog.service';
 import docs from './dialog.docs.mdx';
@@ -16,14 +15,57 @@ type TestForm = {
 };
 
 @Component({
+  selector: 'fudis-dialog-laucher',
+  template: ` <fudis-button
+      (handleClick)="openDialogComponent()"
+      [label]="'Open dialog with form'"
+    ></fudis-button>
+
+    <ng-container *ngIf="this._chosenPowerAnimal">
+      <fudis-body-text
+        >Great choise, your power animal is {{ this._chosenPowerAnimal }}.</fudis-body-text
+      >
+    </ng-container>`,
+})
+class DialogLaucherComponent {
+  constructor(private _dialogService: FudisDialogService) {}
+
+  @Input() size: FudisDialogSize = 'md';
+
+  protected _chosenPowerAnimal: string | null;
+
+  exampleDialogFormGroup = new FormGroup<TestForm>({
+    powerAnimal: new FormControl(
+      null,
+      FudisValidators.required('You need to choose your power animal'),
+    ),
+  });
+
+  openDialogComponent() {
+    this._dialogService
+      .open(DialogWithFormComponent, {
+        data: {
+          greeting: 'This is greeting sent from the component, which opened up this dialog!',
+          size: this.size,
+        },
+      })
+      .afterClosed()
+      .subscribe((result: string) => {
+        if (result) {
+          this._chosenPowerAnimal = result;
+        }
+      });
+  }
+}
+
+@Component({
   selector: 'fudis-dialog-with-form',
   template: `
-    <fudis-dialog [size]="size">
+    <fudis-dialog [size]="_size">
       <fudis-dialog-content>
         <fudis-form
           [title]="'Dialog with fudis-form'"
-          [titleLevel]="2"
-          [errorSummaryLinkType]="'onClick'"
+          [level]="2"
           [errorSummaryHelpText]="'You need to fill up the information.'"
         >
           <ng-template fudisContent [type]="'form'">
@@ -41,7 +83,7 @@ type TestForm = {
               </ng-template>
             </fudis-fieldset>
           </ng-template>
-          <ng-template fudisActions type="form">
+          <ng-template fudisActions [type]="'form'">
             <fudis-button
               fudisFormSubmit
               [formValid]="exampleDialogFormGroup.valid"
@@ -55,17 +97,18 @@ type TestForm = {
     </fudis-dialog>
   `,
 })
-class DialogExampleWithFormComponent {
+class DialogWithFormComponent {
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: { greeting: string },
+    @Inject(MAT_DIALOG_DATA) private data: { greeting: string; size: FudisDialogSize },
     private _dialogService: FudisDialogService,
   ) {
     this._greetingFromOpeningComponent = this.data.greeting;
+    this._size = this.data.size;
   }
 
-  protected _greetingFromOpeningComponent: string;
+  protected _size: FudisDialogSize;
 
-  @Input() size: FudisDialogSize = 'md';
+  protected _greetingFromOpeningComponent: string;
 
   exampleDialogFormGroup = new FormGroup<TestForm>({
     powerAnimal: new FormControl(
@@ -85,24 +128,13 @@ class DialogExampleWithFormComponent {
 }
 
 @Component({
-  selector: 'fudis-dialog-example-laucher',
+  selector: 'fudis-dialog-with-grid',
   template: `
-    <fudis-grid [columns]="'1fr 1fr'" [width]="'xs'" [align]="'start'">
-      <fudis-button
-        (handleClick)="openDialogComponent()"
-        [label]="'Open dialog with form'"
-      ></fudis-button>
-      <fudis-button
-        (handleClick)="openDialogTemplate(dialogWithGrid)"
-        [label]="'Open dialog with grid'"
-      ></fudis-button>
-    </fudis-grid>
+    <fudis-button
+      (handleClick)="openDialogTemplate(dialogWithGrid)"
+      [label]="'Open dialog with grid'"
+    ></fudis-button>
 
-    <ng-container *ngIf="this._chosenPowerAnimal">
-      <fudis-body-text
-        >Great choise, your power animal is {{ this._chosenPowerAnimal }}.</fudis-body-text
-      >
-    </ng-container>
     <ng-template #dialogWithGrid>
       <fudis-dialog [size]="size">
         <fudis-heading fudisDialogTitle [level]="2"
@@ -110,7 +142,7 @@ class DialogExampleWithFormComponent {
         >
         <fudis-dialog-content>
           <fudis-grid [marginTop]="'md'" [marginBottom]="'md'">
-            <fudis-heading [level]="3" [size]="'sm'">
+            <fudis-heading [level]="3" [variant]="'sm'">
               I am fudis-heading inside the grid taking the whole width
             </fudis-heading>
             <fudis-body-text>
@@ -193,34 +225,10 @@ class DialogExampleWithFormComponent {
     </ng-template>
   `,
 })
-class DialogExampleLauncherComponent {
+class DialogWithGridComponent {
   constructor(private _dialogService: FudisDialogService) {}
 
   @Input() size: FudisDialogSize = 'md';
-
-  protected _chosenPowerAnimal: string | null;
-
-  exampleDialogFormGroup = new FormGroup<TestForm>({
-    powerAnimal: new FormControl(
-      null,
-      FudisValidators.required('You need to choose your power animal'),
-    ),
-  });
-
-  openDialogComponent() {
-    this._dialogService
-      .open(DialogExampleWithFormComponent, {
-        data: {
-          greeting: 'This is greeting sent from the component, which opened up this dialog!',
-        },
-      })
-      .afterClosed()
-      .subscribe((result: string) => {
-        if (result) {
-          this._chosenPowerAnimal = result;
-        }
-      });
-  }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   openDialogTemplate<T = any>(dialogToOpen: ComponentType<T> | TemplateRef<T>) {
@@ -233,9 +241,9 @@ export default {
   component: DialogComponent,
   decorators: [
     moduleMetadata({
-      imports: [ReactiveFormsModule, FormsModule, RouterTestingModule],
+      imports: [ReactiveFormsModule, FormsModule],
       providers: [],
-      declarations: [DialogExampleLauncherComponent, DialogExampleWithFormComponent],
+      declarations: [DialogWithGridComponent, DialogWithFormComponent, DialogLaucherComponent],
     }),
   ],
   parameters: {
@@ -256,12 +264,22 @@ export default {
 
 const html = String.raw;
 
-const Template: StoryFn<DialogComponent> = (args: DialogComponent) => ({
+const TemplateGrid: StoryFn<DialogComponent> = (args: DialogComponent) => ({
   props: args,
-  template: html` <fudis-dialog-example-laucher [size]="size"></fudis-dialog-example-laucher> `,
+  template: html` <fudis-dialog-with-grid [size]="size"></fudis-dialog-with-grid> `,
 });
 
-export const Example = Template.bind({});
-Example.args = {
+const TemplateFrom: StoryFn<DialogComponent> = (args: DialogComponent) => ({
+  props: args,
+  template: html` <fudis-dialog-laucher [size]="size"></fudis-dialog-laucher> `,
+});
+
+export const ExampleWithForm = TemplateFrom.bind({});
+ExampleWithForm.args = {
+  size: 'md',
+};
+
+export const ExampleWithGrid = TemplateGrid.bind({});
+ExampleWithForm.args = {
   size: 'md',
 };

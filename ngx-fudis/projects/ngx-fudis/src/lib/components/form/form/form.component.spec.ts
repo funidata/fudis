@@ -32,13 +32,12 @@ import { LinkComponent } from '../../link/link.component';
   selector: 'fudis-mock-form-component',
   template: `<fudis-form
     [id]="'my-own-id'"
-    [titleLevel]="1"
-    [titleSize]="'md'"
+    [titleVariant]="'md'"
+    [level]="1"
     [title]="'Example Form'"
     [helpText]="'Some help for the form'"
     [badge]="badge"
     [badgeText]="badgeText"
-    [errorSummaryLinkType]="'href'"
     [errorSummaryHelpText]="'There were errors you need to fix'"
     [errorSummaryVisible]="errorSummaryVisible"
   >
@@ -162,7 +161,7 @@ describe('FormComponent', () => {
       expect(headingElement).toBeTruthy();
       expect(headingContent).toBeTruthy();
       expect(headingContent?.textContent).toEqual('Example Form');
-      expect(headingContent?.className).toContain('fudis-heading__size__md');
+      expect(headingContent?.className).toContain('fudis-heading__variant__md');
     });
 
     it('should have badge and badgeText if given', () => {

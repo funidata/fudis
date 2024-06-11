@@ -7,13 +7,13 @@ import {
   Signal,
   ViewChild,
   ViewEncapsulation,
-  effect,
+  OnInit,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FudisSelectOption } from '../../../../../types/forms';
 
 import { FudisTranslationConfig } from '../../../../../types/miscellaneous';
-import { FudisTranslationService } from '../../../../../services/translation/translation.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-select-autocomplete',
@@ -21,11 +21,12 @@ import { FudisTranslationService } from '../../../../../services/translation/tra
   styleUrls: ['./autocomplete.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class SelectAutocompleteComponent {
-  constructor(protected _translationService: FudisTranslationService) {
-    effect(() => {
-      this._translationClearFilterText =
-        _translationService.getTranslations()().SELECT.AUTOCOMPLETE.CLEAR;
+export class SelectAutocompleteComponent implements OnInit {
+  constructor() {
+    this._autocompleteControl = new FormControl<string | null>('');
+
+    this._autocompleteControl.valueChanges.pipe(takeUntilDestroyed()).subscribe((newValue) => {
+      this._checkValueAndEmit(newValue);
     });
   }
 
@@ -153,15 +154,34 @@ export class SelectAutocompleteComponent {
    */
   protected _translations: Signal<FudisTranslationConfig>;
 
-  /**
-   * Translated aria-label for autocomplete close icon button which clears the input
-   */
-  protected _translationClearFilterText: string;
+  protected _autocompleteControl: FormControl<string | null>;
 
   /**
    * Prevent dropdown reopen on focus
    */
   private _preventDropdownReOpen: boolean = false;
+
+  private _keyDownFromInput: boolean = false;
+
+  /**
+   * Check if new value is longer than threshold and emit
+   * @param newValue Value to update
+   */
+  private _checkValueAndEmit(newValue: string | null): void {
+    if (newValue && newValue.length >= this.typeThreshold) {
+      this.triggerFilterTextUpdate.emit(newValue);
+    } else {
+      this.triggerFilterTextUpdate.emit('');
+    }
+
+    if (
+      this.dropdownOpen &&
+      ((!newValue && this.typeThreshold !== 0) ||
+        (newValue && newValue?.length < this.typeThreshold))
+    ) {
+      this.triggerDropdownClose.emit();
+    }
+  }
 
   /**
    * Blur event function for input form field blur
@@ -181,9 +201,7 @@ export class SelectAutocompleteComponent {
     this.triggerFocus.emit(event);
     const inputValue = (event.target as HTMLInputElement).value;
 
-    if (inputValue.length >= this.typeThreshold) {
-      this.triggerFilterTextUpdate.emit(inputValue);
-    }
+    this._checkValueAndEmit(inputValue);
   }
 
   /**
@@ -191,17 +209,29 @@ export class SelectAutocompleteComponent {
    * @param event click event
    */
   protected _inputClick(event: Event): void {
-    this.triggerInputClick.emit(event);
+    const inputValue = (event.target as HTMLInputElement).value;
+
+    if (inputValue.length >= this.typeThreshold) {
+      this.triggerInputClick.emit(event);
+    }
   }
 
   /**
-   * Keypress handler to prevent selection exception case with space key press
+   * Keypress handler to prevent selection exception case with space key press. Can happen if user press Space on selection or Clear button, which moves focus back to Autocomplete input
    * @param event KeyboardEvent
    */
-  protected _keyPress(event: KeyboardEvent): void {
-    if (this.preventSpaceKeypress && event.key === ' ' && this.control.value) {
-      event.preventDefault();
+  protected _keyDown(event: KeyboardEvent): void {
+    if (event.key === 'ArrowDown') {
+      this._keyDownFromInput = true;
     }
+  }
+
+  /**
+   * Keypress handler to prevent selection exception case with space key press. Can happen if user press Space on selection or Clear button, which moves focus back to Autocomplete input
+   * @param event KeyboardEvent
+   */
+  protected _keyPress(): void {
+    this._keyDownFromInput = true;
   }
 
   /**
@@ -212,47 +242,68 @@ export class SelectAutocompleteComponent {
     const { key } = event;
     const inputValue = (event.target as HTMLInputElement).value;
 
-    if (this.preventSpaceKeypress && key === ' ' && this.control.value) {
-      event.preventDefault();
-    } else if (
-      key !== 'ArrowDown' &&
-      key !== 'ArrowUp' &&
-      key !== 'ArrowLeft' &&
-      key !== 'ArrowRight'
-    ) {
-      if (inputValue.length >= this.typeThreshold) {
-        this.triggerFilterTextUpdate.emit(inputValue);
-      } else {
-        this.triggerFilterTextUpdate.emit('');
+    this.preventSpaceKeypress = false;
+
+    if (this._keyDownFromInput) {
+      this._keyDownFromInput = false;
+
+      /**
+       * Enter key
+       */
+      if (key === 'Enter') {
+        if (this.dropdownOpen && this.visibleOptions?.length === 1 && !!inputValue) {
+          this.triggerSelectOnlyVisibleOption.emit();
+        } else if (!this._preventDropdownReOpen && inputValue.length >= this.typeThreshold) {
+          this.triggerDropdownToggle.emit();
+        }
+        /**
+         * Escape key
+         */
+      } else if (key === 'Escape') {
+        if (this.dropdownOpen) {
+          this.triggerDropdownClose.emit();
+        }
+        /**
+         * ArrowDown key
+         */
+      } else if (key === 'ArrowDown') {
+        if (this._focused) {
+          event.preventDefault();
+          if (inputValue.length >= this.typeThreshold) {
+            this.triggerDropdownOpen.emit();
+            this.triggerFocusToFirstOption.emit();
+          }
+        }
+        /**
+         * Close
+         */
+      } else if (this.dropdownOpen && inputValue.length < this.typeThreshold) {
+        this.triggerDropdownClose.emit();
+
+        /**
+         * Open
+         */
+      } else if (
+        !this.dropdownOpen &&
+        !this._preventDropdownReOpen &&
+        inputValue.length >= this.typeThreshold
+      ) {
+        this.triggerDropdownOpen.emit();
       }
     }
 
-    this.preventSpaceKeypress = false;
-
-    // TODO: check this through
-    if (this.dropdownOpen && this.visibleOptions?.length === 1 && key === 'Enter') {
-      this.triggerSelectOnlyVisibleOption.emit();
-    } else if (!this._preventDropdownReOpen && key === 'Enter') {
-      this.triggerDropdownToggle.emit();
-    } else if (
-      key !== 'ArrowDown' &&
-      this.selectionClearButton &&
-      inputValue.length < this.typeThreshold
-    ) {
-      this.triggerDropdownClose.emit();
-    } else if (
-      !this._preventDropdownReOpen &&
-      !this.dropdownOpen &&
-      key !== 'Escape' &&
-      key !== 'Enter' &&
-      inputValue.length >= this.typeThreshold
-    ) {
-      this.triggerDropdownOpen.emit();
-    } else if (key === 'ArrowDown' && this._focused) {
-      event.preventDefault();
-      this.triggerFocusToFirstOption.emit();
-    }
-
     this._preventDropdownReOpen = false;
+  }
+
+  public updateInputValue(newValue: string): void {
+    this._autocompleteControl.patchValue(newValue);
+  }
+
+  public ngOnInit(): void {
+    if (!this.multiselect && this.control.value) {
+      const label = (this.control.value as FudisSelectOption<object>).label;
+
+      this.updateInputValue(label);
+    }
   }
 }

@@ -23,6 +23,7 @@ import { FudisSelectOption } from '../../../../types/forms';
 import { joinInputValues, sortValues } from '../common/selectUtilities';
 import { FormComponent } from '../../form/form.component';
 import { DOCUMENT } from '@angular/common';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-multiselect',
@@ -33,7 +34,6 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
     @Inject(DOCUMENT) _document: Document,
-    private _cdr: ChangeDetectorRef,
     _translationService: FudisTranslationService,
     _idService: FudisIdService,
     _focusService: FudisFocusService,
@@ -42,8 +42,9 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
     super(_document, _focusService, _translationService, _idService, _changeDetectorRef);
 
     effect(() => {
-      this._translationRemoveItem =
-        _translationService.getTranslations()().SELECT.MULTISELECT.REMOVE_ITEM;
+      this._translationRemoveItem.next(
+        _translationService.getTranslations()().SELECT.MULTISELECT.REMOVE_ITEM,
+      );
     });
   }
 
@@ -66,7 +67,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
   /**
    * Internal translated text to indicate deleting item chip aria-label
    */
-  protected _translationRemoveItem: string;
+  protected _translationRemoveItem = new BehaviorSubject<string>('');
 
   /**
    * When selecting / deselecting options, variable for storing them in the order of their id's (usually the DOM order)
@@ -185,7 +186,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
     if (valuesInSync && this.control.value) {
       this._sortedSelectedOptions = sortValues(this._registeredOptions);
       this._dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
-      this._cdr.detectChanges();
+      this._changeDetectorRef.detectChanges();
     } else {
       this._sortedSelectedOptions = [];
       this._dropdownSelectionLabelText = null;
@@ -211,11 +212,7 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
     this.handleMultiSelectionChange(option, 'remove');
 
     if (!this.control.value) {
-      if (this.variant !== 'dropdown') {
-        this._autocompleteRef.inputRef.nativeElement.focus();
-      } else {
-        this._inputRef.nativeElement.focus();
-      }
+      this._focusToSelectInput();
     }
   }
 }

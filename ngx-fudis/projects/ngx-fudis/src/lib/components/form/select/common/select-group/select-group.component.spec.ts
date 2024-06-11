@@ -18,7 +18,6 @@ import { MultiselectComponent } from '../../multiselect/multiselect.component';
 import { FudisSelectOption } from '../../../../../types/forms';
 import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.component';
 import { ButtonComponent } from '../../../../button/button.component';
-import { By } from '@angular/platform-browser';
 import { MultiselectOptionComponent } from '../../multiselect/multiselect-option/multiselect-option.component';
 import { groupedTestData } from '../mock_data';
 import { SelectIconsComponent } from '../select-icons/select-icons.component';
@@ -108,11 +107,8 @@ describe('SelectGroupComponent', () => {
   }
 
   function updateMultiSelectValue() {
-    const input = fixture.debugElement.query(By.css('.fudis-select-autocomplete'));
-    const el = input.nativeElement;
+    component.multiSelect.autocompleteRef.updateInputValue('g');
 
-    el.value = 'g';
-    el.dispatchEvent(new KeyboardEvent('keyup'));
     fixture.detectChanges();
   }
 

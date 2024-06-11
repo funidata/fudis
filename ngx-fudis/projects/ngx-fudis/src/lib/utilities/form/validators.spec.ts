@@ -82,17 +82,38 @@ describe('Fudis Validators', () => {
     const minLengthValidator = FudisValidators.minLength(
       15,
       'Text should be at least 15 characters long',
+      true,
     );
+
+    const minLengthValidatorNullIgnored = FudisValidators.minLength(
+      15,
+      'Text should be at least 15 characters long',
+      false,
+    );
+
     const minLenghtControl = new FormControl<string | null>(null, minLengthValidator);
+
+    const minLengthNullIgnoredControl = new FormControl<string | null>(
+      null,
+      minLengthValidatorNullIgnored,
+    );
 
     it('should return minlength error if control has minLength validator', () => {
       minLenghtControl.patchValue('Short value');
+
+      minLengthNullIgnoredControl.patchValue('Short value');
 
       expect(minLenghtControl.errors).toEqual({
         minlength: { message: 'Text should be at least 15 characters long', requiredLength: 15 },
       });
 
       expect(minLenghtControl.valid).toEqual(false);
+
+      expect(minLengthNullIgnoredControl.errors).toEqual({
+        minlength: { message: 'Text should be at least 15 characters long', requiredLength: 15 },
+      });
+
+      expect(minLengthNullIgnoredControl.valid).toEqual(false);
     });
 
     it('should not return minlength error if control value is long enough', () => {
@@ -100,13 +121,32 @@ describe('Fudis Validators', () => {
 
       expect(minLenghtControl.errors).toEqual(null);
       expect(minLenghtControl.valid).toEqual(true);
+
+      minLengthNullIgnoredControl.patchValue('This is very long text to test as valid content.');
+
+      expect(minLengthNullIgnoredControl.errors).toEqual(null);
+      expect(minLengthNullIgnoredControl.valid).toEqual(true);
     });
 
-    it('should not return minlength error if control value is empty', () => {
+    it('should not return minlength error if control value is empty or null', () => {
+      minLengthNullIgnoredControl.patchValue('');
+
+      expect(minLengthNullIgnoredControl.errors).toBeNull();
+      expect(minLengthNullIgnoredControl.valid).toEqual(true);
+
+      minLengthNullIgnoredControl.patchValue(null);
+
+      expect(minLengthNullIgnoredControl.errors).toBeNull();
+      expect(minLengthNullIgnoredControl.valid).toEqual(true);
+    });
+
+    it('should return minlength error if control value is empty', () => {
       minLenghtControl.patchValue('');
 
-      expect(minLenghtControl.errors).toEqual(null);
-      expect(minLenghtControl.valid).toEqual(true);
+      expect(minLenghtControl.errors).toEqual({
+        minlength: { message: 'Text should be at least 15 characters long', requiredLength: 15 },
+      });
+      expect(minLenghtControl.valid).toEqual(false);
     });
   });
 

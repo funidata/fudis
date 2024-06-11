@@ -1,7 +1,7 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/blocks";
 import { SelectComponent } from "./select.component";
 import * as Stories from "./select.stories";
-import { selectAndMultiselectExclude } from "../../../../utilities/storybook";
+import { selectArgsTableExclude } from "../../../../utilities/storybook";
 
 <Meta title="Components/Form/Select/Select" />
 
@@ -38,8 +38,8 @@ myControl: new FormControl<null | FudisSelectOption>(defaultOption)
 
 ## Example
 
-<Canvas of={Stories.Example}></Canvas>
+<Canvas of={Stories.Dropdown}></Canvas>
 
 ## Properties
 
-<ArgTypes of={SelectComponent} exclude={selectAndMultiselectExclude} />
+<ArgTypes of={SelectComponent} exclude={selectArgsTableExclude} />

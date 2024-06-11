@@ -6,7 +6,7 @@ import {
   FudisGridAlignItems,
   FudisGridColumns,
 } from '../../../types/grid';
-import { FudisSpacing } from '../../../types/miscellaneous';
+import { FudisSpacing } from '../../../types/spacing';
 
 @Directive({
   selector: '[fudisGridApi]',

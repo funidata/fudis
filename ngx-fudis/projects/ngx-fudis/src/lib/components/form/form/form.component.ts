@@ -10,14 +10,13 @@ import {
   Optional,
   ViewEncapsulation,
 } from '@angular/core';
-import { FudisHeadingSize, FudisHeadingLevel } from '../../../types/typography';
+import { FudisHeadingVariant, FudisHeadingLevel } from '../../../types/typography';
 import { FudisIdService } from '../../../services/id/id.service';
 import { HeaderDirective } from '../../../directives/content-projection/header/header.directive';
 import { ActionsDirective } from '../../../directives/content-projection/actions/actions.directive';
 import { ContentDirective } from '../../../directives/content-projection/content/content.directive';
 import { GridApiDirective } from '../../../directives/grid/grid-api/grid-api.directive';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
-import { FudisFormErrorSummaryLink } from '../../../types/forms';
 import { DialogComponent } from '../../dialog/dialog.component';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 
@@ -70,12 +69,12 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
   /**
    * Heading level for the form title
    */
-  @Input() titleLevel: FudisHeadingLevel;
+  @Input() level: FudisHeadingLevel;
 
   /**
    * Heading size for the form title
    */
-  @Input() titleSize: FudisHeadingSize = 'xl';
+  @Input() titleVariant: FudisHeadingVariant = 'xl';
 
   /**
    * Help text positioned under form title
@@ -96,11 +95,6 @@ export class FormComponent extends GridApiDirective implements OnInit, AfterCont
    * Set Error Summary visibility manually. Usually set true on form submit with Button binded with 'fudisFormSubmit' directive.
    */
   @Input() errorSummaryVisible: boolean = false;
-
-  /**
-   * Type of the clickable error link in Error Summary. If your App uses Angular Router, use default value 'router'. Otherwise use 'onClick'.
-   */
-  @Input() errorSummaryLinkType: FudisFormErrorSummaryLink = 'router';
 
   /**
    * HTML FormElement

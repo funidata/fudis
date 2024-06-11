@@ -10,7 +10,6 @@ import {
   Optional,
   Output,
   ViewEncapsulation,
-  effect,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { areObjectsDeepEquals } from '../../../../utilities/areObjectsDeepEquals';
@@ -38,10 +37,6 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
     _changeDetectorRef: ChangeDetectorRef,
   ) {
     super(_document, _focusService, _translationService, _idService, _changeDetectorRef);
-
-    effect(() => {
-      this.translationOptionDisabledText = _translationService.getTranslations()().SELECT.DISABLED;
-    });
   }
 
   /*
@@ -54,16 +49,6 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
    */
   @Output() override selectionUpdate: EventEmitter<FudisSelectOption<object> | null> =
     new EventEmitter<FudisSelectOption<object> | null>();
-
-  /**
-   * Internal translated text for disabled select option, used in Select Option
-   */
-  public translationOptionDisabledText: string;
-
-  /**
-   * To pass selection label value for autocomplete
-   */
-  protected _autocompleteSelectionLabelValue: string | null;
 
   ngOnInit(): void {
     this._setParentId('select');
@@ -119,32 +104,10 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
    */
   protected override _updateSelectionFromControlValue(): void {
     const currentLabel = this.control.value?.label;
-
-    if (this.variant === 'dropdown') {
-      this._dropdownSelectionLabelText = currentLabel || '';
-    } else {
-      if (this._autocompleteRef) {
-        (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).setAttribute(
-          'value',
-          currentLabel || '',
-        );
-        (this._autocompleteRef.inputRef.nativeElement as HTMLInputElement).value =
-          currentLabel || '';
-      } else {
-        this._autocompleteSelectionLabelValue = currentLabel || '';
-      }
+    this._dropdownSelectionLabelText = currentLabel || '';
+    if (this.variant !== 'dropdown' && this.autocompleteRef) {
+      this.autocompleteRef.updateInputValue(currentLabel || '');
     }
     this._changeDetectorRef.detectChanges();
-
-    // if (this.control.value) {
-    //   if (this.variant !== 'dropdown') {
-    //     this._changeDetectorRef.detectChanges();
-    //   }
-    // } else {
-    //   this._filterTextUpdate('');
-    //   this._autocompleteFilterText.set('');
-    //   this._autocompleteSelectionLabelValue = null;
-    //   this._dropdownSelectionLabelText = '';
-    // }
   }
 }

@@ -68,11 +68,20 @@ function maxLength(length: number, message: FudisValidatorMessage): FudisValidat
 }
 
 /**
+ *
  * Fudis version of Validators.minLength
+ * @param length
+ * @param message
+ * @param valueRequired By default this validator does not require, that control value cannot be empty. If set true, validator returns error, if control value is falsy.
  */
-function minLength(length: number, message: FudisValidatorMessage): FudisValidatorFn {
+function minLength(
+  length: number,
+  message: FudisValidatorMessage,
+  valueRequired: boolean = false,
+): FudisValidatorFn {
   return (control: AbstractControl) => {
-    if (!Validators.minLength(length)(control) || length < 1) {
+    const requiredError = valueRequired && Validators.required(control);
+    if ((!Validators.minLength(length)(control) || length < 1) && !requiredError) {
       return null;
     }
     return {

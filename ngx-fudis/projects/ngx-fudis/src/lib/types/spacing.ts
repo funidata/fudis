@@ -1,6 +1,9 @@
 import { FudisBreakpointKey, FudisBreakpointValueResponsive } from './breakpoints';
-import { FudisSpacing } from './miscellaneous';
 import { convertToRemValue } from '../utilities/rem-converter';
+
+export const fudisSpacingArray = ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
+
+export type FudisSpacing = (typeof fudisSpacingArray)[number];
 
 /**
  * Responsive settings for different breakpoints for spacing
