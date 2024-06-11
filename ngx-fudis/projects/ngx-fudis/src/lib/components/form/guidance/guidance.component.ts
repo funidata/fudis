@@ -4,6 +4,8 @@ import { FudisTranslationService } from '../../../services/translation/translati
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisInternalErrorSummaryService } from '../../../services/form/error-summary/internal-error-summary.service';
 import { FudisFormErrorSummaryItem } from '../../../types/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-guidance',
@@ -19,15 +21,14 @@ export class GuidanceComponent implements OnInit {
     this._id = _idService.getNewId('guidance');
 
     effect(() => {
-      this._maxLengthText = _translationService.getTranslations()().TEXTINPUT.MAX_LENGTH;
+      this._maxLengthText.next(_translationService.getTranslations()().TEXTINPUT.MAX_LENGTH);
     });
 
     /**
      * If there's a function call of errorSummaryService.reloadFormErrors('id-of-this-form'), and this Guidance's parent Form id is that 'id-for-this-form', this effect() check will trigger and set this Guidance's control / group as touched, so possible errors are set as visible.
      */
-    effect(() => {
-      const errors = _errorSummaryService.getErrorsOnReload()();
 
+    _errorSummaryService.allFormErrorsObservable.pipe(takeUntilDestroyed()).subscribe((errors) => {
       if (
         this.formId &&
         errors[this.formId]?.[this.for] &&
@@ -101,7 +102,7 @@ export class GuidanceComponent implements OnInit {
   /**
    * Assistive text of max character count for screen readers. E. g. "5/20 characters used" where "characters used" is "maxLengthText".
    */
-  protected _maxLengthText: string;
+  protected _maxLengthText = new BehaviorSubject<string>('');
 
   /**
    * Number of characters left when screen reader is alerted about input max length

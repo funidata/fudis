@@ -88,10 +88,12 @@ describe('MultiselectChipListComponent', () => {
       const itemToRemove = chipList[2];
       jest.spyOn(component.handleClick, 'emit');
 
+      itemToRemove.dispatchEvent(new FocusEvent('focus'));
+      fixture.detectChanges();
       itemToRemove.dispatchEvent(new MouseEvent('click'));
       fixture.detectChanges();
 
-      expect(component.handleClick.emit).toHaveBeenCalledWith(2);
+      expect(component.handleClick.emit).toHaveBeenCalledWith(multiselectChipListMockData[2]);
     });
   });
 });

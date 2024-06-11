@@ -7,17 +7,20 @@ import { linkExclude } from "../../utilities/storybook";
 
 # Link Directive
 
-It is recommended to use [Link Component](/docs/components-link--documentation), which uses Link Directive under it's hood.
-Link Component's API currently supports href and Angular Router.
-When alternative routing method is required e. g. UIRouter, it is recommended to use `fudisLink` with HTML anchor element. This will apply Link Component's `color` and `size` properties to native HTML anchor element.
-Link Directive doesn't support the use of `externalLink` property.
+Link Directive provides the same look and feel as [Link Component](/docs/components-link--documentation).
+
+## Usage Guidelines
+
+When routing method such as [UI-Router](https://ui-router.github.io/ng2/) is required, use `fudisLink` directive with HTML anchor element.
+This will apply Link Component's `color` and `size` properties to the native HTML anchor element.
+At the moment, Link Directive doesn't support the use of `externalLink` nor `title` properties.
 
 ## Examples
 
 <Canvas of={LinkDirectiveStories.Example}></Canvas>
 
 ```
-    <a fudisLink href="#example" [color]="color" [size]="size">https://www.example.com</a>
+    <a fudisLink [uiSref]="route" [color]="color" [size]="size">https://www.example.com</a>
 ```
 
 ## Properties

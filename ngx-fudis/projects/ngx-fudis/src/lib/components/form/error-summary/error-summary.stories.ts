@@ -20,10 +20,9 @@ import { excludeAllRegex } from '../../../utilities/storybook';
   template: ` <fudis-form
     [align]="'center'"
     [marginTop]="'xl'"
-    [titleLevel]="1"
+    [level]="1"
     [title]="'Example Form with Error Summary'"
     [id]="id"
-    [errorSummaryLinkType]="'onClick'"
     [errorSummaryHelpText]="
       'Toggle live remove button to see errors disappear when input value is corrected'
     "
@@ -45,7 +44,7 @@ import { excludeAllRegex } from '../../../utilities/storybook';
         <ng-template fudisContent [type]="'section'">
           <fudis-fieldset [label]="'Fieldset legend'">
             <ng-template fudisContent type="fieldset">
-              <fudis-grid [columns]="{ xs: 1, md: 2 }">
+              <fudis-grid [columns]="{ xs: 1, sm: 2 }">
                 <fudis-text-input
                   [id]="'unique-input-3'"
                   [control]="formExample.controls['teacher']"
@@ -59,7 +58,7 @@ import { excludeAllRegex } from '../../../utilities/storybook';
                   [helpText]="'So that students can ask for more time on their homework.'"
                 />
               </fudis-grid>
-              <fudis-grid [columns]="{ xs: 1, md: 3 }">
+              <fudis-grid [columns]="{ xs: 1, sm: 2 }">
                 <!-- <fudis-radio-button-group
               [label]="'Course type'"
               [id]="'radio-button-group-1'"
@@ -75,14 +74,14 @@ import { excludeAllRegex } from '../../../utilities/storybook';
                   <fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
                   <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
                 </fudis-checkbox-group>
-                <!-- <fudis-datepicker
-              [label]="'Start date'"
-              [id]="'date-picker-1'"
-              [size]="'md'"
-              [helpText]="'You have to start from somewhere'"
-              [control]="formExample.controls['importantDate']"
-            >
-            </fudis-datepicker> -->
+                <fudis-datepicker
+                  [label]="'Start date'"
+                  [id]="'date-picker-1'"
+                  [size]="'md'"
+                  [helpText]="'You have to start from somewhere'"
+                  [control]="formExample.controls['importantDate']"
+                >
+                </fudis-datepicker>
               </fudis-grid>
             </ng-template>
           </fudis-fieldset>
@@ -118,8 +117,7 @@ class ErrorSummaryExampleComponent {
       FudisValidators.required('Missing email contact.'),
       FudisValidators.email('Input must be an email address.'),
     ]),
-    // Expose after Datepicker is exposed to public API
-    // importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
+    importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
     // courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
   });
 

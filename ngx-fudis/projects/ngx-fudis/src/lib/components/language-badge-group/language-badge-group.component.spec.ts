@@ -35,9 +35,9 @@ describe('LanguageBadgeGroupComponent', () => {
     });
     fixture = TestBed.createComponent(LanguageBadgeGroupComponent);
     component = fixture.componentInstance;
-    component.languages = providedLanguages;
-    component.selectedLanguage = 'en';
-    fixture.detectChanges();
+    component.options = providedLanguages;
+
+    fixture.autoDetectChanges();
   });
 
   it('should create', () => {
@@ -69,10 +69,6 @@ describe('LanguageBadgeGroupComponent', () => {
       fiButton.click();
 
       expect(component.handleBadgeClick.emit).toHaveBeenCalledWith('fi');
-
-      fixture.detectChanges();
-
-      expect(component.selectedLanguage).toEqual('fi');
     });
   });
 });

@@ -8,19 +8,28 @@ import * as NotificationStories from "./notification.stories.ts";
 
 Notifications are often informative contextual notifications that cannot be clicked away. Input property `variant` can have following values:
 
-- Yellow `warning` notification is used in notes.
+- Yellow `warning` notification is used in notes
 - Red `danger` notification describes an error situation
 - Green `success` indicates the possibility or success of some function
-- Blue `info`, on the other hand, is a neutral guideline.
+- Blue `info`, on the other hand, is a neutral guideline
 
 ## Examples
 
 <Canvas of={NotificationStories.AllVariants}></Canvas>
 
-### Notification with Link
+### Content Guidelines
 
-Notification Component's link can be either external link or Angular router link, use `externalLink` or `link` property.
-Given link is shown as default link title which can be modified with `linkTitle` property.
+Notification Component doesn't strict what content is contained.
+
+It is recommended to use [Body Text Components](/docs/components-typography-body-text--documentation). Inside Notification, Body Text size defaults to `lg-regular` but this can be overriden if needed.
+
+If using [Link Component](/docs/components-link--documentation) or [Link Directive](/docs/directives-link--documentation), for proper color contrast color of the links are set to `gray-dark`.
+
+Otherwise Notification does not interfere with the content styling.
+
+Please see code examples for recommended usage patterns.
+
+<Canvas of={NotificationStories.ExampleWithMultipleChildComponents}></Canvas>
 
 <Canvas of={NotificationStories.ExampleWithExternalLink}></Canvas>
 
@@ -34,6 +43,7 @@ Given link is shown as default link title which can be modified with `linkTitle`
 
 - [Icon](/docs/components-icon--documentation)
 - [Link](/docs/components-link--documentation)
+- [BodyText](/docs/components-typography-body-text--documentation)
 
 ## Properties
 

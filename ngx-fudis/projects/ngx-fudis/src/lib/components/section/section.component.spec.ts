@@ -20,9 +20,9 @@ import { TooltipDirective } from '../../directives/tooltip/tooltip.directive';
 import { FudisTooltipPosition } from '../../types/miscellaneous';
 import {
   FudisHeadingLevel,
-  FudisHeadingSize,
+  FudisHeadingVariant,
   fudisHeadingLevelArray,
-  fudisHeadingSizeArray,
+  fudisHeadingVariantArray,
 } from '../../types/typography';
 import { getElement, sortClasses } from '../../utilities/tests/utilities';
 
@@ -30,8 +30,8 @@ import { getElement, sortClasses } from '../../utilities/tests/utilities';
   selector: 'mock-fudis-section',
   template: `<fudis-section
     [title]="title"
-    [titleSize]="titleSize"
-    [titleLevel]="titleLevel"
+    [titleVariant]="titleVariant"
+    [level]="level"
     [classes]="classes"
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
@@ -41,7 +41,9 @@ import { getElement, sortClasses } from '../../utilities/tests/utilities';
       <fudis-button [label]="'Some action'"></fudis-button>
     </ng-template>
     <ng-template fudisNotifications type="section">
-      <fudis-notification>This is notification</fudis-notification>
+      <fudis-notification
+        ><fudis-body-text>This is notification</fudis-body-text></fudis-notification
+      >
     </ng-template>
     <ng-template fudisContent type="section">
       <fudis-body-text>Some text content inside section</fudis-body-text>
@@ -50,8 +52,8 @@ import { getElement, sortClasses } from '../../utilities/tests/utilities';
 })
 class MockFudisSectionComponent {
   title: string = 'This is section title';
-  titleSize: FudisHeadingSize = 'lg';
-  titleLevel: FudisHeadingLevel = 2;
+  titleVariant: FudisHeadingVariant = 'lg';
+  level: FudisHeadingLevel = 2;
   classes: string[];
   tooltip: string = 'This is tooltip in section';
   tooltipToggle: boolean = false;
@@ -89,7 +91,7 @@ describe('SectionComponent', () => {
 
     mockFixture = TestBed.createComponent(MockFudisSectionComponent);
     mockComponent = mockFixture.componentInstance;
-    mockFixture.detectChanges();
+    mockFixture.autoDetectChanges();
   });
 
   function getSectionElement() {
@@ -97,17 +99,17 @@ describe('SectionComponent', () => {
     return sectionEl;
   }
 
-  function sectionTitleSizeCheck(size: FudisHeadingSize): void {
-    mockComponent.titleSize = size;
+  function sectionTitleVariantCheck(variant: FudisHeadingVariant): void {
+    mockComponent.titleVariant = variant;
     mockFixture.detectChanges();
 
     const sectionHeadingEl = getElement(mockFixture, '.fudis-heading') as HTMLHeadingElement;
 
-    expect(sectionHeadingEl.className).toContain(`fudis-heading__size__${size}`);
+    expect(sectionHeadingEl.className).toContain(`fudis-heading__variant__${variant}`);
   }
 
   function sectionTitleLevelCheck(level: FudisHeadingLevel): void {
-    mockComponent.titleLevel = level;
+    mockComponent.level = level;
     mockFixture.detectChanges();
 
     const headingElement = mockFixture.nativeElement.querySelector('fudis-heading');
@@ -130,7 +132,7 @@ describe('SectionComponent', () => {
 
     it('should add custom CSS classes if given', () => {
       mockComponent.classes = ['my-custom-class other-custom-class'];
-      mockFixture.detectChanges();
+      mockFixture.autoDetectChanges();
 
       expect(sortClasses(getSectionElement().className)).toEqual(
         sortClasses(
@@ -158,9 +160,9 @@ describe('SectionComponent', () => {
       expect(headingElement?.textContent).toEqual('This is section title');
     });
 
-    it('should return correct title size', () => {
-      fudisHeadingSizeArray.forEach((size) => {
-        sectionTitleSizeCheck(size);
+    it('should return correct title variant', () => {
+      fudisHeadingVariantArray.forEach((variant) => {
+        sectionTitleVariantCheck(variant);
       });
     });
 

@@ -17,18 +17,20 @@ import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.compon
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 import { SelectBaseDirective } from '../select-base/select-base.directive';
 import { FudisIdService } from '../../../../../services/id/id.service';
-import { getAllElements, getTrimmedTextContent } from '../../../../../utilities/tests/utilities';
+import { getAllElements } from '../../../../../utilities/tests/utilities';
 import { By } from '@angular/platform-browser';
+import { SelectIconsComponent } from '../select-icons/select-icons.component';
+import { ButtonComponent } from '../../../../button/button.component';
 
 @Component({
   selector: 'fudis-mock-select-option-base-directive',
   template: `<fudis-select
     #selectElem
     [label]="'Test Label'"
-    [autocomplete]="true"
+    [variant]="'autocompleteDropdown'"
     [placeholder]="'Test placeholder'"
     [control]="control"
-    [autocompleteClearButton]="false"
+    [selectionClearButton]="false"
     [size]="'md'"
   >
     <ng-template fudisContent type="select-options">
@@ -66,6 +68,8 @@ describe('SelectOptionBaseDirective', () => {
         SelectOptionComponent,
         SelectGroupComponent,
         SelectDropdownComponent,
+        SelectIconsComponent,
+        ButtonComponent,
         MockComponent,
         SelectAutocompleteComponent,
         GuidanceComponent,
@@ -104,7 +108,7 @@ describe('SelectOptionBaseDirective', () => {
       setSelectDropdownOpen();
 
       const options = fixture.debugElement.queryAll(By.css('fudis-select-option'));
-      const textContent = getTrimmedTextContent(options[2].nativeElement);
+      const textContent = options[2].nativeElement.textContent;
 
       expect(options[2].nativeElement.outerHTML).toContain(
         'fudis-select-option__focusable fudis-select-option--selected',
@@ -113,12 +117,7 @@ describe('SelectOptionBaseDirective', () => {
     });
 
     it('should filter correct options for given letter input', () => {
-      const input = fixture.debugElement.query(By.css('.fudis-select-autocomplete__input'));
-      const el = input.nativeElement;
-
-      el.value = 'p';
-      el.dispatchEvent(new KeyboardEvent('keyup'));
-      fixture.detectChanges();
+      component.selectElem.autocompleteRef.updateInputValue('p');
 
       setSelectDropdownOpen();
 
@@ -131,12 +130,10 @@ describe('SelectOptionBaseDirective', () => {
 
       expect(focusableOptions.length).toEqual(2);
 
-      const optionsArray: string[] = [];
+      const optionsArray: (string | null)[] = [];
 
       focusableOptions.forEach((item) => {
-        const cleanedContent = getTrimmedTextContent(item as HTMLElement);
-
-        optionsArray.push(cleanedContent);
+        optionsArray.push(item.textContent);
       });
 
       expect(optionsArray).toEqual(['Capybara', 'Platypus']);

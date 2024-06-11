@@ -1,3 +1,5 @@
+import { SimpleChange } from '@angular/core';
+
 export type FudisBadgeVariant = 'accent' | 'danger' | 'primary' | 'secondary' | 'success';
 
 export type FudisDescriptionListVariant = 'regular' | 'compact';
@@ -42,17 +44,9 @@ export type FudisDialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'initial';
 
 export type FudisExpandableType = 'regular' | 'lite';
 
-export const fudisSpacingArray = ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
-
-export type FudisSpacing = (typeof fudisSpacingArray)[number];
-
 export type FudisNotification = 'warning' | 'danger' | 'success' | 'info';
 
 export type FudisTooltipPosition = 'left' | 'right' | 'above' | 'below';
-
-export const fudisTextAlignArray = ['left', 'right', 'center'] as const;
-
-export type FudisTextAlign = (typeof fudisTextAlignArray)[number];
 
 export type FudisLanguageAbbr = 'fi' | 'sv' | 'en';
 
@@ -153,11 +147,11 @@ export interface FudisTranslationLanguageBadgeAriaLabel {
  * P = property of component. E. g. for Grid columns and rowGap or for Heading level and size.
  * So T[P] translates to e.g. HeadingComponent['level'] --> HeadingComponent.level --> values from 1-6
  */
-type FudisComponentChange<T, P extends keyof T> = {
+interface FudisComponentChange<T, P extends keyof T> extends SimpleChange {
   previousValue: T[P] | undefined;
   currentValue: T[P] | undefined;
   firstChange: boolean;
-};
+}
 
 export type FudisComponentChanges<T> = {
   [P in keyof T]?: FudisComponentChange<T, P>;

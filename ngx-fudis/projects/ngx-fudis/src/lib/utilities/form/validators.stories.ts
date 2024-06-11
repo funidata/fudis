@@ -2,12 +2,9 @@ import { StoryFn, Meta, applicationConfig } from '@storybook/angular';
 import { FormControl, FormGroup } from '@angular/forms';
 import { importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { BehaviorSubject } from 'rxjs';
 import { FudisValidators } from './validators';
-// import { FudisGroupValidators } from './groupValidators';
-import readme from './readme.mdx';
 import { FudisGroupValidators } from './groupValidators';
-// import { FudisCheckboxGroupFormGroup } from '../../types/forms';
+import readme from './readme.mdx';
 
 export default {
   title: 'Utilities/Validators',
@@ -91,7 +88,6 @@ const ValidatorsTemplate: StoryFn = (args) => ({
     // Expose after DateRange is exposed to public API
     // Deleted from the template:
     // <fudis-date-range [startDate]="startDate" [endDate]="endDate" />
-
     // startDate: {
     //   label: 'DatepickerMin Validator',
     //   control: new FormControl<Date | null>(null, [

@@ -2,17 +2,27 @@
 /* stylelint-disable selector-max-class */
 /* stylelint-disable selector-class-pattern */
 /* stylelint-disable scss/selector-no-redundant-nesting-selector */
+/* stylelint-disable property-disallowed-list */
+/* stylelint-disable selector-no-qualifying-type */
 @use "../../../../foundations/colors/mixins.scss" as colorMixins;
 @use "../../../../foundations/colors/tokens.scss" as colors;
 @use "../../../../foundations/borders/mixins.scss" as borders;
 @use "../../../../foundations/spacing/tokens.scss" as spacing;
 @use "../../../../foundations/focus/mixins.scss" as focus;
 
-// TODO: Would be nice to know for what exact elements each style "hack" is used for
+// When navigating calendar pop-up with Tab key, close button appears at the very end. Button does not appear when using mouse.
+.mat-datepicker-close-button {
+  text-transform: uppercase !important;
+  color: colors.$color-white !important;
+
+  &:focus {
+    @include focus.focus-generic;
+  }
+}
 
 .fudis-datepicker {
   &__toggle {
-    /* Target mat-icon-button */
+    // Target datepicker pop-up toggle button (i.e. calendar icon)
     & .mat-mdc-icon-button {
       @include colorMixins.bg-color("transparent");
 
@@ -40,66 +50,65 @@
   }
 
   &__datepicker {
+    // Selected day when not focused
     & .mat-calendar-body-selected {
       @include colorMixins.bg-color("primary");
       @include colorMixins.text-color("white");
       @include borders.border("2px", "solid", "primary");
 
+      // Hover on selected day
       &:hover {
         @include colorMixins.text-color("gray-dark");
         @include colorMixins.bg-color("primary-light");
         @include borders.border("2px", "solid", "primary");
       }
 
+      // If selected day is today, remove unnecessary box-shadow
       &.mat-calendar-body-today {
         box-shadow: none;
       }
     }
 
+    // Target controls on top of the calendar pop-up
     & .mat-calendar-controls {
-      & .mat-mdc-button {
-        @include colorMixins.bg-color("transparent");
-      }
-
+      // Month and year buttons
+      // Forward and backward icon buttons
+      & .mat-mdc-button,
       & .mat-mdc-icon-button {
         @include colorMixins.bg-color("transparent");
       }
+
+      // Make sure month/year button has 0 opacity and not have borders like button
+      & .mat-mdc-button-persistent-ripple.mdc-button__ripple {
+        &::before {
+          opacity: 0 !important;
+        }
+      }
     }
 
+    // Selected day which is also active (i.e. focused)
+    & .mat-calendar-body-cell.mat-calendar-body-active .mat-calendar-body-selected,
     &
       .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
       > .mat-calendar-body-cell-content:not(.mat-calendar-body-comparison-identical) {
-      @include colorMixins.bg-color("primary-light");
-    }
-
-    & .mat-calendar-body-cell.mat-calendar-body-active .mat-calendar-body-selected {
       @include colorMixins.text-color("gray-dark");
       @include colorMixins.bg-color("primary-light");
     }
 
+    // If selected day is not inside allowed date range and is disabled in the calendar pop-up (user is able to insert invalid date through input)
+    & .mat-calendar-body-cell.mat-calendar-body-disabled .mat-calendar-body-selected {
+      @include colorMixins.text-color("gray-dark");
+      @include colorMixins.bg-color("gray-light");
+      @include borders.border("1px", "solid", "gray-dark");
+    }
+
+    // Target individual day buttons and make the focus border round
     & button:focus {
       @include focus.focus-generic;
 
-      /* stylelint-disable-next-line selector-no-qualifying-type */
       &.mat-calendar-body-cell {
         border-radius: spacing.$spacing-xxl;
       }
     }
-
-    & .mat-mdc-button-persistent-ripple.mdc-button__ripple {
-      &::before {
-        opacity: 0 !important;
-      }
-    }
-  }
-}
-
-.mat-datepicker-close-button {
-  text-transform: uppercase !important;
-  /* stylelint-disable-next-line property-disallowed-list */
-  color: colors.$color-white !important;
-
-  &:focus {
-    @include focus.focus-generic;
   }
 }

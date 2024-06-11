@@ -30,6 +30,9 @@ export const excludeEverythingExceptRegex = (array?: string[]): RegExp => {
 
 export const excludeAllRegex: RegExp = /.*/;
 
+/**
+ * Button
+ */
 const buttonCommonExclude: string[] = [
   'dropdownMenuId',
   'dropdownOpen',
@@ -51,23 +54,62 @@ export const buttonControlsExclude: RegExp = excludeRegex([
 
 export const buttonIconOnlyExclude: RegExp = excludeRegex([...buttonCommonExclude, 'handleClick']);
 
+/**
+ * CheckboxGroup and Checkbox
+ */
 export const checkboxGroupExclude: RegExp = excludeRegex([
   'groupBlurredOut',
   'setGroupBlurredOut',
-  'titleSize',
+  'titleVariant',
   'triggerEmit',
 ]);
 
 export const checkboxGroupControlsExclude: RegExp = excludeRegex([
   'groupBlurredOut',
   'setGroupBlurredOut',
-  'titleSize',
+  'titleVariant',
   'id',
   'formGroup',
   'triggerEmit',
   'errorSummaryReloadOnInit',
 ]);
 
+/**
+ * Datepicker and Date-range
+ */
+const datepickerCommonExcludes: string[] = [
+  'control',
+  'ariaLabel',
+  'disableGuidance',
+  'initialFocus',
+  'invalidState',
+  'id',
+  'errorSummaryReloadOnInit',
+  'handleBlur',
+  'handleKeyUp',
+  'parseDateValidator',
+  'endDateError',
+  'startDateError',
+];
+
+export const datepickerControlsExclude: RegExp = excludeRegex([
+  ...datepickerCommonExcludes,
+  'focusToInput',
+  'onBlur',
+]);
+
+export const datepickerExclude: RegExp = excludeRegex(['focusToInput', 'onBlur']);
+
+export const daterangeExclude: RegExp = excludeRegex([
+  'endDate',
+  'startDate',
+  'id',
+  'initialFocus',
+]);
+
+/**
+ * Description List
+ */
 const descriptionListCommonExclude: string[] = [
   'addChildId',
   'align',
@@ -85,6 +127,7 @@ const descriptionListCommonExclude: string[] = [
   'marginTop',
   'removeChildId',
   'rowGap',
+  'tag',
   'width',
 ];
 
@@ -100,38 +143,19 @@ export const descriptionListArgsTypesExclude: RegExp = excludeRegex([
 
 export const descriptionListExclude: RegExp = excludeRegex([...descriptionListCommonExclude]);
 
-export const formExclude: RegExp = excludeRegex([
-  'id',
-  'align',
-  'alignItemsX',
-  'alignItemsY',
-  'classes',
-  'columnGap',
-  'columns',
-  'marginBottom',
-  'marginTop',
-  'rowGap',
-  'width',
-]);
-
-export const formArgTypesExclude: RegExp = excludeRegex(['rowGap', 'columns', 'classes']);
-
-export const linkExclude: RegExp = excludeRegex([
-  'fragmentId',
-  'handleClick',
-  'handleBlur',
-  'handleFocus',
-  'link',
-]);
-
-export const notificationExclude: RegExp = excludeRegex(['link']);
-
+/**
+ * Dialog
+ */
 export const dialogExclude: RegExp = excludeRegex(['closeButtonPositionAbsolute']);
 
-export const headingControlsExclude: RegExp = excludeRegex(['id']);
-
+/**
+ * Error Message and Error Summary
+ */
 export const errorMessageExclude: RegExp = excludeRegex(['handleAddError', 'handleRemoveError']);
 
+/**
+ * Expandable
+ */
 const expandableCommonExclude: string[] = [
   'ref',
   'setClosedStatus',
@@ -149,14 +173,81 @@ export const expandableControlExclude: RegExp = excludeRegex([
   'errorSummaryBreadcrumb',
 ]);
 
+/**
+ * Form
+ */
+export const formExclude: RegExp = excludeRegex([
+  'id',
+  'align',
+  'alignItemsX',
+  'alignItemsY',
+  'classes',
+  'columnGap',
+  'columns',
+  'marginBottom',
+  'marginTop',
+  'rowGap',
+  'width',
+]);
+
+export const formArgTypesExclude: RegExp = excludeRegex(['rowGap', 'columns', 'classes']);
+
+/**
+ * Grid
+ */
 export const gridExampleExclude: RegExp = excludeRegex(['classes', 'serviceDefaults']);
 
+/**
+ * Heading
+ */
+export const headingControlsExclude: RegExp = excludeRegex(['id']);
+
+/**
+ * Link
+ */
+export const linkExclude: RegExp = excludeRegex([
+  'fragmentId',
+  'handleClick',
+  'handleBlur',
+  'handleFocus',
+  'link',
+]);
+
+/**
+ * Notification
+ */
+export const notificationExclude: RegExp = excludeRegex(['link', 'linkTitle', 'externalLink']);
+
+/**
+ * Section
+ */
 export const sectionExclude: RegExp = excludeRegex(['classes', 'errorSummaryBreadcrumb', 'id']);
 
-export const selectCommonExclude: RegExp = excludeRegex([
+/**
+ * Select and Multiselect
+ */
+
+export const selectArgsTableExclude: RegExp = excludeRegex([
+  'componentFocused',
+  'translationOptionDisabledText',
+  'setFocusedOption',
+  'autocompleteRef',
+  'focusSelector',
+  'handleSelectionChange',
+  'getAutocompleteFilterText',
+  'closeDropdown',
+  'openDropdown',
+  'setOptionVisibility',
+  'focusToInput',
+  'onBlur',
+  'getSelectedOptions',
+  'handleCheckedSort',
+  'handleMultiSelectionChange',
+]);
+
+export const selectStoryControlExclude: RegExp = excludeRegex([
   'control',
   'autocomplete',
-  'autocompleteClearButton',
   'ariaLabel',
   'disableGuidance',
   'id',
@@ -166,10 +257,7 @@ export const selectCommonExclude: RegExp = excludeRegex([
   'tooltipPosition',
   'tooltipToggle',
   'classes',
-  'controlValueChangedInternally',
-  'dropdownSelectionLabelText',
   'focusSelector',
-  'noResultsFound',
   'selectionUpdate',
   'handleBlur',
   'getSelectedOptions',
@@ -188,26 +276,17 @@ export const selectCommonExclude: RegExp = excludeRegex([
   'optionInputRef',
   'checked',
   'close',
+  'errorSummaryReloadOnInit',
+  'handleKeyUp',
+  'componentFocused',
+  'setFocusedOption',
+  'autocompleteRef',
+  'variant',
 ]);
 
-export const selectAndMultiselectExclude: RegExp = excludeRegex([
-  'translationOptionDisabledText',
-  'controlValueChangedInternally',
-  'dropdownSelectionLabelText',
-  'focusSelector',
-  'noResultsFound',
-  'handleSelectionChange',
-  'closeDropdown',
-  'getAutocompleteFilterText',
-  'openDropdown',
-  'setOptionVisibility',
-  'focusToInput',
-  'onBlur',
-  'getSelectedOptions',
-  'handleCheckedSort',
-  'handleMultiSelectionChange',
-]);
-
+/**
+ * Text Input
+ */
 export const textInputExclude: RegExp = excludeRegex(['focusToInput', 'onBlur']);
 
 export const textInputControlsExclude: RegExp = excludeRegex([
@@ -221,9 +300,14 @@ export const textInputControlsExclude: RegExp = excludeRegex([
   'initialFocus',
 ]);
 
+/**
+ * Tooltip
+ */
 export const tooltipExclude: RegExp = excludeRegex([
   'handleClick',
   'handleBlur',
+  'handleDestroy',
+  'handleFocus',
   'buttonEl',
   'label',
   'labelHidden',

@@ -1,6 +1,11 @@
 import { MatDatepickerIntl } from '@angular/material/datepicker';
 import { FudisTranslationConfig } from '../../../../types/miscellaneous';
 
+/**
+ * Update locale for Fudis translations in Datepicker
+ * @param value Language Signal string value
+ * @returns locale code
+ */
 export const updateLocale = (value: string): string => {
   switch (value) {
     case 'en':
@@ -41,11 +46,10 @@ export const updateMatDatePickerTranslations = (
 
 /**
  * Parse date input to number array
- * @returns new Date(year, monthIndex, day)
+ * @returns new Date(year, monthIndex, day) or null
  */
-// TODO: Write test
 export const parseDate = (value: string | null | undefined): Date | null => {
-  // Split input value by non number values. E. g. 25/5/1977 or 25.5.1977 --> [25,5,1977]
+  // Split input value by non number values, e.g. 25/5/1977 or 25.5.1977 --> [25,5,1977]
   const numberArray: number[] | null = value
     ? value
         .split(/[^\d+]+/)
@@ -53,14 +57,36 @@ export const parseDate = (value: string | null | undefined): Date | null => {
         .map(Number)
     : null;
 
+  // If day, month and year are provided
   if (numberArray?.length === 3) {
-    return new Date(numberArray[2], numberArray[1] - 1, numberArray[0]);
+    const newDate = new Date(numberArray[2], numberArray[1] - 1, numberArray[0]);
+
+    const dayUnchanged = newDate.getDate() === numberArray[0];
+    const monthUnchanged = newDate.getMonth() + 1 === numberArray[1];
+    const yearUnChanged = newDate.getFullYear() === numberArray[2];
+
+    if (dayUnchanged && monthUnchanged && yearUnChanged) {
+      return newDate;
+    } else {
+      return null;
+    }
   }
   // If no year is provided, assume it is current year
   if (numberArray?.length === 2) {
     const currentYear: number = new Date().getFullYear();
-    return new Date(currentYear, numberArray[1] - 1, numberArray[0]);
+
+    const newDate = new Date(currentYear, numberArray[1] - 1, numberArray[0]);
+
+    const dayUnchanged = newDate.getDate() === numberArray[0];
+    const monthUnchanged = newDate.getMonth() + 1 === numberArray[1];
+
+    if (dayUnchanged && monthUnchanged) {
+      return newDate;
+    } else {
+      return null;
+    }
   }
 
+  // If input value is not parseable to Date object, return null
   return null;
 };

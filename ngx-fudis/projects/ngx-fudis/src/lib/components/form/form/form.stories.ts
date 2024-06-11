@@ -7,7 +7,6 @@ import { BehaviorSubject } from 'rxjs';
 import {
   FudisSelectOption,
   FudisRadioButtonOption,
-  FudisFormErrorSummaryLink,
   FudisCheckboxGroupFormGroup,
   // FudisDateRangeItem,
 } from '../../../types/forms';
@@ -18,10 +17,15 @@ import { FudisTranslationService } from '../../../services/translation/translati
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import docs from './form.docs.mdx';
 import { FudisBadgeVariant } from '../../../types/miscellaneous';
-import { FudisHeadingLevel, FudisHeadingSize } from '../../../types/typography';
+import {
+  FudisHeadingLevel,
+  FudisHeadingVariant,
+  fudisHeadingLevelArray,
+} from '../../../types/typography';
 import { formExclude } from '../../../utilities/storybook';
 import { defaultOptions } from '../select/common/mock_data';
 import { FudisErrorSummaryService } from '../../../services/form/error-summary/error-summary.service';
+import { fudisSpacingArray } from '../../../types/spacing';
 
 @Component({
   selector: 'example-with-multiple-forms',
@@ -35,9 +39,8 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
       />
 
       <fudis-form
-        [titleLevel]="2"
+        [level]="2"
         [title]="'Form with Text Input'"
-        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -60,9 +63,8 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
         </ng-template>
       </fudis-form>
       <fudis-form
-        [titleLevel]="2"
+        [level]="2"
         [title]="'Form with Text Area'"
-        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -85,9 +87,8 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
         </ng-template>
       </fudis-form>
       <fudis-form
-        [titleLevel]="2"
+        [level]="2"
         [title]="'Form with Checkbox Group'"
-        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -119,9 +120,8 @@ import { FudisErrorSummaryService } from '../../../services/form/error-summary/e
         </ng-template>
       </fudis-form>
       <!-- <fudis-form
-        [titleLevel]="2"
+        [level]="2"
         [title]="'Form with Select and Multiselect'"
-        [errorSummaryLinkType]="'onClick'"
         [errorSummaryVisible]="errorSummaryVisible"
         [errorSummaryHelpText]="errorSummaryHelpText"
       >
@@ -229,18 +229,17 @@ class ExampleWithMultipleFormsComponent {
       [marginTop]="'xl'"
       [badge]="badge"
       [badgeText]="badgeText"
-      [titleLevel]="titleLevel"
+      [level]="level"
       [title]="title"
-      [titleSize]="titleSize"
+      [titleVariant]="titleVariant"
       [helpText]="helpText"
-      [errorSummaryLinkType]="errorSummaryLinkType"
       [errorSummaryHelpText]="errorSummaryHelpText"
       [errorSummaryVisible]="errorSummaryVisible"
     >
       <ng-template fudisHeader>
         <fudis-dl [columns]="1" [variant]="'compact'">
           <fudis-dl-item>
-            <fudis-dt [textContent]="'Importatnt person'" />
+            <fudis-dt [textContent]="'Important person'" />
             <fudis-dd [textContent]="'Admiral Thrawn'" />
           </fudis-dl-item>
           <fudis-dl-item>
@@ -255,17 +254,16 @@ class ExampleWithMultipleFormsComponent {
       </ng-template>
       <ng-template fudisActions [type]="'form'">
         <fudis-button [label]="'Previous step'" [icon]="'back'" [variant]="'tertiary'" />
-        <fudis-button
-          fudisFormSubmit
-          [formValid]="formExample.valid"
-          [label]="'Submit'"
-          (handleClick)="submitForm()"
-        />
+        <fudis-button fudisFormSubmit [formValid]="formExample.valid" [label]="'Submit'" />
       </ng-template>
       <ng-template fudisContent [type]="'form'">
         <fudis-section [title]="'Main section'" [errorSummaryBreadcrumb]="true">
           <ng-template fudisNotifications [type]="'section'">
-            <fudis-notification>This is notification for the section</fudis-notification>
+            <fudis-notification
+              ><fudis-body-text
+                >This is notification for the section</fudis-body-text
+              ></fudis-notification
+            >
           </ng-template>
           <ng-template fudisContent [type]="'section'">
             <fudis-expandable
@@ -281,10 +279,7 @@ class ExampleWithMultipleFormsComponent {
                 [id]="fieldsetId"
               >
                 <ng-template fudisNotifications [type]="'fieldset'">
-                  <fudis-notification *ngIf="errorSummaryVisible">
-                    This is notification for a fieldset. TODO: Add notifications to error summary if
-                    needed.
-                  </fudis-notification>
+                  <fudis-notification> This is notification for a fieldset. </fudis-notification>
                 </ng-template>
                 <ng-template fudisContent [type]="'fieldset'">
                   <fudis-grid [columns]="{ lg: 'inputLg inputLg' }"> -->
@@ -331,18 +326,16 @@ class ExampleWithMultipleFormsComponent {
                     <fudis-checkbox [controlName]="'second'" [label]="'Dark Force Rising'" />
                     <fudis-checkbox [controlName]="'third'" [label]="'The Last Command'" />
                   </fudis-checkbox-group>
-                  <!-- <fudis-datepicker
-                          [label]="'Start date'"
-                          [helpText]="'You have to start from somewhere'"
-                          [control]="formExample.controls['importantDate']"
-                        >
-                          <fudis-error-message
-                            *ngIf="
-                              formExample.controls['importantDate'].value?.getTime() !== releaseDate
-                            "
-                            [message]="'Wrong date chosen. 1.5.1991 would be great!'"
-                          />
-                        </fudis-datepicker> -->
+                  <fudis-datepicker
+                    [label]="'Start date'"
+                    [helpText]="'You have to start from somewhere'"
+                    [control]="formExample.controls['importantDate']"
+                  >
+                    <fudis-error-message
+                      *ngIf="formExample.controls['importantDate'].value?.getTime() !== releaseDate"
+                      [message]="'Wrong date chosen. 1.5.1991 would be great!'"
+                    />
+                  </fudis-datepicker>
                   <!-- </fudis-grid>
                 </ng-template>
               </fudis-fieldset> -->
@@ -401,13 +394,12 @@ class FormContentExampleComponent implements OnInit {
   ) {}
 
   @Input() title: string;
-  @Input() titleLevel: FudisHeadingLevel;
-  @Input() titleSize: FudisHeadingSize;
+  @Input() titleVariant: FudisHeadingVariant;
+  @Input() level: FudisHeadingLevel;
   @Input() helpText: string;
   @Input() badge: FudisBadgeVariant;
   @Input() badgeText: string;
   @Input() errorSummaryHelpText: string;
-  @Input() errorSummaryLinkType: FudisFormErrorSummaryLink;
   @Input() errorSummaryVisible: boolean;
 
   releaseDate: number = new Date(1991, 4, 1).getTime();
@@ -458,13 +450,26 @@ class FormContentExampleComponent implements OnInit {
       FudisValidators.email('Input must be an email address.'),
       FudisValidators.minLength(5, 'Email should be at least 5 characters.'),
     ]),
-    // importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
+    importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
     // courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
     // startDate: new FormControl<Date | null>(
     //   null,
     //   FudisValidators.required('Start date is required.'),
     // ),
-    // endDate: new FormControl<Date | null>(null, FudisValidators.required('End date is required.')),
+    // dateRangeStartDate: new FormControl<Date | null>(null, [
+    //   FudisValidators.required('Choose start date'),
+    //   FudisValidators.datepickerMax({
+    //     value: new Date(2023, 5, 20),
+    //     message: 'Start date cannot be later than 20.6.2023',
+    //   }),
+    // ]),
+    // dateRangeEndDate: new FormControl<Date | null>(null, [
+    //   FudisValidators.required('Choose end date'),
+    //   FudisValidators.datepickerMin({
+    //     value: new Date(2023, 5, 19),
+    //     message: 'Start date cannot be earliner than 19.6.2023',
+    //   }),
+    // ]),
   });
 
   languageOptions: FudisSelectOption<object>[] = [
@@ -480,12 +485,12 @@ class FormContentExampleComponent implements OnInit {
 
   // Expose when DateRange is exposed to public API
   // dateRangeStartDate: FudisDateRangeItem = {
-  //   control: this.formExample.controls.startDate,
+  //   control: this.formExample.controls.dateRangeStartDate,
   //   label: 'Start date',
   // };
 
   // dateRangeEndDate: FudisDateRangeItem = {
-  //   control: this.formExample.controls.endDate,
+  //   control: this.formExample.controls.dateRangeEndDate,
   //   label: 'End date',
   // };
 
@@ -493,12 +498,6 @@ class FormContentExampleComponent implements OnInit {
 
   ngOnInit(): void {
     this._focusService.addToIgnoreList('unique-input-3');
-  }
-
-  submitForm(): void {
-    if (this.formExample.valid) {
-      //this.errorSummaryVisible = false;
-    }
   }
 
   handleClosedOutput(value: boolean): void {
@@ -535,20 +534,14 @@ export default {
         type: 'text',
       },
     },
-    titleSize: {
-      options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+    titleVariant: {
+      options: fudisSpacingArray,
       control: {
         type: 'select',
       },
     },
-    titleLevel: {
-      options: [1, 2, 3, 4, 5, 6],
-      control: {
-        type: 'select',
-      },
-    },
-    errorSummaryLinkType: {
-      options: ['href', 'router', 'onClick'],
+    level: {
+      options: fudisHeadingLevelArray,
       control: {
         type: 'select',
       },
@@ -562,27 +555,25 @@ export const Example: StoryFn<FormComponent> = (args: FormComponent) => ({
   props: args,
   template: html` <example-form-content
     [title]="title"
-    [titleLevel]="titleLevel"
-    [titleSize]="titleSize"
+    [titleVariant]="titleVariant"
+    [level]="level"
     [helpText]="helpText"
     [badge]="badge"
     [badgeText]="badgeText"
     [errorSummaryHelpText]="errorSummaryHelpText"
-    [errorSummaryLinkType]="errorSummaryLinkType"
     [errorSummaryVisible]="errorSummaryVisible"
   />`,
 });
 
 Example.args = {
   title: 'Example Form Heading',
-  titleLevel: 1,
-  titleSize: 'xl',
+  titleVariant: 'xl',
+  level: 1,
   helpText: 'This is an additional help text to give user more information about the form',
   badge: 'primary',
   badgeText: 'Example',
   errorSummaryHelpText:
     'There are errors in this form. Please address these before trying to submit again.',
-  errorSummaryLinkType: 'onClick',
   errorSummaryVisible: false,
 };
 

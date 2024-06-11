@@ -15,7 +15,6 @@ import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.comp
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
 import { GuidanceComponent } from '../../../guidance/guidance.component';
 import { LabelComponent } from '../../../label/label.component';
-import { By } from '@angular/platform-browser';
 import { ValidatorErrorMessageComponent } from '../../../error-message/validator-error-message/validator-error-message.component';
 import { FudisValidators } from '../../../../../utilities/form/validators';
 
@@ -83,14 +82,11 @@ describe('AutocompleteComponent', () => {
     return inputElement;
   }
 
-  function getComponentWrapper() {
-    const wrapperElement = getElement(mockFixture, 'fudis-select-autocomplete');
-    return wrapperElement;
-  }
-
   describe('Select Autocomplete default values', () => {
     it('should have respective classes', () => {
-      expect(getComponentWrapper().className).toEqual('fudis-select-autocomplete-host');
+      const inputElement = getElement(mockFixture, 'fudis-select-autocomplete input');
+
+      expect(inputElement.className).toContain('fudis-form-input fudis-select-autocomplete');
     });
 
     it('should have required attribute', () => {
@@ -114,6 +110,7 @@ describe('AutocompleteComponent', () => {
       component.id = 'select-autocomplete-id';
       component.placeholder = 'Test placeholder';
       component.dropdownOpen = false;
+      component.typeThreshold = 0;
       component.control = new FormControl<
         FudisSelectOption<object> | FudisSelectOption<object>[] | null
       >(null);
@@ -137,22 +134,19 @@ describe('AutocompleteComponent', () => {
     it('should trigger dropdown toggle event', () => {
       jest.spyOn(component.triggerDropdownToggle, 'emit');
 
+      getInputElement().dispatchEvent(new KeyboardEvent('keypress', { key: 'Enter' }));
       getInputElement().dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
 
       expect(component.triggerDropdownToggle.emit).toHaveBeenCalled();
     });
 
-    it('should trigger dropdown close event', () => {
-      jest.spyOn(component.triggerDropdownClose, 'emit');
-
-      getInputElement().dispatchEvent(new KeyboardEvent('keyup', { key: 'Escape' }));
-
-      expect(component.triggerDropdownClose.emit).toHaveBeenCalled();
-    });
-
     it('should trigger dropdown open event', () => {
       jest.spyOn(component.triggerDropdownOpen, 'emit');
 
+      getInputElement().dispatchEvent(new FocusEvent('focus'));
+      fixture.detectChanges();
+
+      getInputElement().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
       getInputElement().dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
 
       expect(component.triggerDropdownOpen.emit).toHaveBeenCalled();
@@ -161,22 +155,13 @@ describe('AutocompleteComponent', () => {
     it('should trigger filter text update event', () => {
       jest.spyOn(component.triggerFilterTextUpdate, 'emit');
 
-      const input = fixture.debugElement.query(By.css('.fudis-select-autocomplete__input'));
-      const el = input.nativeElement;
+      component.updateInputValue('');
 
-      el.value = '';
-      el.dispatchEvent(new KeyboardEvent('keyup'));
+      expect(component.triggerFilterTextUpdate.emit).toHaveBeenCalledWith('');
 
-      expect(component.triggerFilterTextUpdate.emit).toHaveBeenCalled();
-    });
+      component.updateInputValue('hey');
 
-    it('should trigger clear filter button click event', () => {
-      jest.spyOn(component.triggerClearFilterButtonClick, 'emit');
-
-      const clearButton = getElement(fixture, 'fudis-button');
-      clearButton.click();
-
-      expect(component.triggerClearFilterButtonClick.emit).toHaveBeenCalled();
+      expect(component.triggerFilterTextUpdate.emit).toHaveBeenCalledWith('hey');
     });
   });
 });

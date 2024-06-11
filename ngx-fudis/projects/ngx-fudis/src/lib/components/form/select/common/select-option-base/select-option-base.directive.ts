@@ -26,8 +26,10 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
     super(_document);
 
     effect(() => {
-      if (this._parent.autocomplete) {
-        this._isOptionVisible(this._parent.getAutocompleteFilterText()());
+      const filterText = this._parent.getAutocompleteFilterText()();
+
+      if (this._parent.variant !== 'dropdown') {
+        this._isOptionVisible(filterText);
       }
     });
   }
@@ -64,6 +66,7 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
    */
   protected _focus(): void {
     this._focused = true;
+    this._parent.setFocusedOption(this._id, 'add');
   }
 
   /**
@@ -77,10 +80,6 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
           ? true
           : !filterText;
 
-      if (this._optionVisible && this._parent.noResultsFound) {
-        this._parent.noResultsFound = false;
-      }
-
       this._updateVisibilityToParents(this._optionVisible);
     }
   }
@@ -89,10 +88,10 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
    * Update option visibility to parent component
    */
   protected _updateVisibilityToParents(visible: boolean): void {
-    this._parent.setOptionVisibility(this.data.value, visible);
+    this._parent.setOptionVisibility(this._id, visible);
 
     if (this._parentGroup) {
-      this._parentGroup.setOptionVisibility(this.data.value, visible);
+      this._parentGroup.setOptionVisibility(this._id, visible);
     }
   }
 
@@ -115,18 +114,14 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
    */
   protected _blur(event: FocusEvent): void {
     this._focused = false;
+    this._parent.setFocusedOption(this._id, 'remove');
     this.handleBlur.emit(event);
 
-    const closeDropdown = this._focusedOutFromComponent(
-      event,
-      this.optionInputRef,
-      this._parent.focusSelector,
-      true,
-    );
-
-    if (closeDropdown) {
-      this._parent.closeDropdown(true, true);
-    }
+    this._parent.componentFocused(event).then((value) => {
+      if (!value) {
+        this._parent.closeDropdown(false);
+      }
+    });
   }
 
   /**

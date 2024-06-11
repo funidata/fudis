@@ -25,7 +25,7 @@ import { AlertGroupComponent } from '../../components/alert/alert-group/alert-gr
     <fudis-dialog [size]="'lg'">
       <fudis-heading fudisDialogTitle [level]="2">Dialog Heading</fudis-heading>
       <fudis-dialog-content>
-        <fudis-heading [level]="3" [size]="'sm'">Content heading</fudis-heading>
+        <fudis-heading [level]="3" [variant]="'sm'">Content heading</fudis-heading>
         <fudis-body-text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis porttitor nunc. Nunc
           vehicula ut massa non facilisis.

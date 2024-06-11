@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SectionComponent } from './section.component';
 import docs from './section-docs.mdx';
 import { excludeAllRegex, sectionExclude } from '../../utilities/storybook';
-import { fudisHeadingLevelArray, fudisHeadingSizeArray } from '../../types/typography';
+import { fudisHeadingLevelArray, fudisHeadingVariantArray } from '../../types/typography';
 
 export default {
   title: 'Components/Section',
@@ -23,12 +23,23 @@ export default {
     },
   },
   argTypes: {
-    titleLevel: {
+    badge: {
+      options: ['accent', 'danger', 'primary', 'secondary', 'success'],
+      control: {
+        type: 'select',
+      },
+    },
+    badgeText: {
+      control: {
+        type: 'text',
+      },
+    },
+    level: {
       options: fudisHeadingLevelArray,
       control: { type: 'select' },
     },
-    titleSize: {
-      options: fudisHeadingSizeArray,
+    titleVariant: {
+      options: fudisHeadingVariantArray,
       control: { type: 'select' },
     },
   },
@@ -40,8 +51,10 @@ const ExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent) => (
   props: args,
   template: html`<fudis-section
     [title]="title"
-    [titleSize]="titleSize"
-    [titleLevel]="titleLevel"
+    [titleVariant]="titleVariant"
+    [level]="level"
+    [badge]="badge"
+    [badgeText]="badgeText"
     [tooltip]="tooltip"
     [tooltipToggle]="tooltipToggle"
     [tooltipPosition]="tooltipPosition"
@@ -55,7 +68,9 @@ const ExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent) => (
       <fudis-button [label]="'Another action'"></fudis-button>
     </ng-template>
     <ng-template fudisNotifications [type]="'section'">
-      <fudis-notification>This is notification</fudis-notification>
+      <fudis-notification
+        ><fudis-body-text>This is notification</fudis-body-text></fudis-notification
+      >
     </ng-template>
     <ng-template fudisContent [type]="'section'">
       <fudis-expandable [title]="'Expandable inside section'" [closed]="false">
@@ -71,11 +86,13 @@ const ExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent) => (
 export const Example = ExampleTemplate.bind({});
 Example.args = {
   title: 'This is title of section',
-  titleLevel: 2,
-  titleSize: 'xl',
+  titleVariant: 'xl',
+  level: 2,
   tooltip: 'More info about this section',
   tooltipToggle: false,
   tooltipPosition: 'below',
+  badge: 'primary',
+  badgeText: 'Example',
   align: 'start',
   marginTop: 'none',
   marginBottom: 'none',
@@ -92,8 +109,8 @@ const NestedExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent
   props: args,
   template: html`<fudis-section
     [title]="'Parent Section'"
-    [titleSize]="'lg'"
-    [titleLevel]="2"
+    [titleVariant]="'lg'"
+    [level]="2"
     [width]="'md'"
   >
     // Empty Actions template, so that nested Actions will not be rendered to the parent!
@@ -108,8 +125,8 @@ const NestedExampleTemplate: StoryFn<SectionComponent> = (args: SectionComponent
       <fudis-section
         [title]="'Nested Section'"
         [marginTop]="'sm'"
-        [titleSize]="'sm'"
-        [titleLevel]="3"
+        [titleVariant]="'sm'"
+        [level]="3"
       >
         <ng-template fudisActions [type]="'section'">
           <fudis-button [label]="'Nested Action button'" />

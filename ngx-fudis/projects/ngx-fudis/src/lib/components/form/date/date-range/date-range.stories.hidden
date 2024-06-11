@@ -5,7 +5,8 @@
 // import { FudisTranslationService } from '../../../../services/translation/translation.service';
 // import { DateRangeComponent } from './date-range.component';
 // import { FudisValidators } from '../../../../utilities/form/validators';
-// import readme from './readme.mdx';
+// import docs from './daterange-docs.mdx';
+// import { daterangeExclude } from '../../../../utilities/storybook';
 
 // @Component({
 //   selector: 'example-language-change-component',
@@ -39,17 +40,12 @@
 //       providers: [importProvidersFrom(BrowserAnimationsModule)],
 //     }),
 //   ],
-//   argTypes: {
-//     startDate: {
-//       control: { type: 'object' },
-//     },
-//     endDate: {
-//       control: { type: 'object' },
-//     },
-//   },
 //   parameters: {
 //     docs: {
-//       page: readme,
+//       page: docs,
+//     },
+//     controls: {
+//       exclude: daterangeExclude,
 //     },
 //   },
 // } as Meta;
@@ -125,4 +121,4 @@
 //   `,
 // });
 
-// export const WithMinAndMaxDates = TemplateWithMinMax.bind({});
+// export const WithMinMaxValidator = TemplateWithMinMax.bind({});

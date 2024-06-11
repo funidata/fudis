@@ -2,7 +2,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatDateFormats, MAT_NATIVE_DATE_FORMATS } from '@angular/material/core';
 import { FudisLanguageAbbr } from './miscellaneous';
 
-export type FudisInputSize = 'sm' | 'md' | 'lg';
+export const fudisInputSizeArray = ['sm', 'md', 'lg'] as const;
+
+export type FudisInputSize = (typeof fudisInputSizeArray)[number];
 
 export type FudisInputType = 'email' | 'number' | 'password' | 'tel' | 'text' | 'url';
 
@@ -31,6 +33,8 @@ export interface FudisRadioButtonOption {
   /** Is option selected */
   checked?: boolean;
 }
+
+export type FudisSelectVariant = 'dropdown' | 'autocompleteDropdown' | 'autocompleteType';
 
 export type FudisSelectOption<T extends object> = T & {
   /** Underlying value of the option */
@@ -150,7 +154,5 @@ export const FUDIS_DATE_FORMATS: MatDateFormats = {
     dateInput: FudisDateInputFormat as Intl.DateTimeFormatOptions,
   },
 };
-
-export type FudisFormErrorSummaryLink = 'router' | 'href' | 'onClick';
 
 export type FudisFormErrorSummaryUpdateStrategy = 'reloadOnly' | 'all' | 'onRemove';

@@ -3,7 +3,7 @@
     [for]="id"
     [id]="id + '-label'"
     [text]="label"
-    [requiredText]="_required ? _requiredText : undefined"
+    [required]="_required"
     [tooltip]="tooltip"
     [tooltipPosition]="tooltipPosition"
     [tooltipToggle]="tooltipToggle"
@@ -22,8 +22,8 @@
     [attr.minLength]="_minLength"
     [attr.maxLength]="_maxLength"
     [attr.required]="_required ? true : null"
-    [attr.aria-disabled]="disabled"
-    [readonly]="disabled"
+    [attr.aria-disabled]="control.disabled || disabled"
+    [readonly]="control.disabled || disabled"
   >
   </textarea>
   <fudis-guidance

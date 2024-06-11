@@ -49,10 +49,4 @@ module.exports = {
       }
     </style>
   `,
-  env: (config) => {
-    return {
-      ...config,
-      STORYBOOK_FUDIS_VERSION: process.env.STORYBOOK_FUDIS_VERSION || "",
-    };
-  },
 };

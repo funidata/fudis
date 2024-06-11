@@ -7,43 +7,41 @@
 
   box-sizing: border-box;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   padding: 0 spacing.$spacing-sm 0 spacing.$spacing-xxs;
   width: 100%;
   min-height: spacing.$spacing-md;
 
-  &__link {
-    margin-left: spacing.$spacing-xxs;
-  }
-
-  &__body-text {
-    white-space: pre-wrap;
+  &__content {
+    display: inline-block;
+    align-self: center;
+    margin: calc(spacing.$spacing-xxs + spacing.$pixel-2) 0;
   }
 
   &__warning {
     @include colors.bg-color("yellow-light");
-    @include borders.border("2px", "solid", "yellow");
+    @include borders.border("1px", "solid", "yellow");
 
     border-left-width: spacing.$spacing-xs;
   }
 
   &__danger {
     @include colors.bg-color("red-light");
-    @include borders.border("2px", "solid", "red");
+    @include borders.border("1px", "solid", "red");
 
     border-left-width: spacing.$spacing-xs;
   }
 
   &__success {
     @include colors.bg-color("green-light");
-    @include borders.border("2px", "solid", "green");
+    @include borders.border("1px", "solid", "green");
 
     border-left-width: spacing.$spacing-xs;
   }
 
   &__info {
     @include colors.bg-color("primary-light");
-    @include borders.border("2px", "solid", "primary-dark");
+    @include borders.border("1px", "solid", "primary-dark");
 
     border-left-width: spacing.$spacing-xs;
   }

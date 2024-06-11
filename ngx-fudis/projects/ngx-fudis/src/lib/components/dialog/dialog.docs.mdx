@@ -131,7 +131,8 @@ Directives written with `kebab-case` are meant to be used as HTML element.
 
 ## Examples
 
-<Canvas of={DialogStories.Example}></Canvas>
+<Canvas of={DialogStories.ExampleWithForm}></Canvas>
+<Canvas of={DialogStories.ExampleWithGrid}></Canvas>
 
 ### Full code example
 
@@ -164,7 +165,7 @@ class SimpleDialogComponent {
 
 ## Fudis Form inside Dialog
 
-When using Form inside Dialog, wrap the Form inside `fudis-dialog-content` and use it normally. Meaning, add all the necessary Error Summary properties, such as `errorSummaryLinkType` and `errorSummaryHelpText`. Also add `title` and `titleLevel`, this title will be the title of the dialog and have initial focus when dialog is opened with keyboard.
+When using Form inside Dialog, wrap the Form inside `fudis-dialog-content` and use it normally. Meaning, add all the necessary Error Summary properties, such as `errorSummaryHelpText`. Also add `title` and `level`, this title will be the title of the dialog and have initial focus when dialog is opened with keyboard.
 
 In `fudisContent` template add form components and in `fudisActions` template add action button(s). Unlike normal form, where buttons are positioned on top of the form, **these action buttons will be positioned at the bottom** after the form content, in order to follow dialog look and feel.
 
@@ -180,8 +181,7 @@ In `fudisContent` template add form components and in `fudisActions` template ad
 				<fudis-dialog-content>
 					<fudis-form>
 						[title]="'Dialog with fudis-form'"
-						[titleLevel]="2"
-						[errorSummaryLinkType]="'href'"
+						[level]="2"
 						[errorSummaryHelpText]="'You need to fill up the information.'">
 						<ng-template fudisContent [type]="'form'">
 							<fudis-fieldset [label]="'Question about your power animal'">

@@ -10,7 +10,9 @@
   &__disabled-grid {
     @include utilities.box-reset;
 
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     break-inside: avoid-column;
     margin-bottom: spacing.$spacing-md;
   }

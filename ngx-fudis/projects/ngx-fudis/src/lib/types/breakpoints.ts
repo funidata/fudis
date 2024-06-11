@@ -1,4 +1,4 @@
-import { FudisSpacing } from './miscellaneous';
+import { FudisSpacing } from './spacing';
 
 type FudisBreakpointsMinWidths = {
   [key in FudisBreakpointKey]: FudisBreakpointBoundary;

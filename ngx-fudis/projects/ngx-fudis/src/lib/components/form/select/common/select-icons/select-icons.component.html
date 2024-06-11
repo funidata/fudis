@@ -1,0 +1,41 @@
+<fudis-icon
+  *ngIf="parentVariant !== 'autocompleteType' && (!clearButton || (!_controlValue && !filterText))"
+  class="fudis-select-icons__icon"
+  [class.fudis-select-icons__icon--disabled]="disabled"
+  [icon]="'chevron'"
+  [rotate]="dropdownOpen ? 'ccw-90' : 'cw-90'"
+/>
+<fudis-icon
+  *ngIf="
+    (parentVariant === 'autocompleteType' && !filterText && !_controlValue) ||
+    (parentVariant === 'autocompleteType' && !clearButton)
+  "
+  class="fudis-select-icons__icon"
+  [class.fudis-select-icons__icon--disabled]="disabled"
+  [icon]="'search'"
+/>
+
+<ng-container *ngIf="clearButton">
+  <ng-container *ngIf="_translationClearFilterText | async as clearText">
+    <fudis-button
+      [class.fudis-select-icons__icon--disabled]="disabled"
+      [class.fudis-select-icons__icon--hidden]="
+        !(
+          (parentVariant === 'dropdown' && _controlValue) ||
+          (parentVariant === 'autocompleteDropdown' && (filterText || _controlValue)) ||
+          (parentVariant === 'autocompleteType' && (filterText || _controlValue))
+        )
+      "
+      (click)="_clearButtonClick($event)"
+      (handleDestroy)="handleClearButtonDestroy.emit()"
+      (handleFocus)="_handleClearButtonFocus($event)"
+      (handleBlur)="_handleClearButtonBlur($event)"
+      [size]="'icon-only'"
+      [variant]="'tertiary'"
+      [icon]="'close'"
+      [label]="clearText"
+      [labelHidden]="true"
+      [disabled]="disabled"
+    />
+  </ng-container>
+</ng-container>

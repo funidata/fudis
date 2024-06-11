@@ -18,15 +18,13 @@
   (blur)="_blur($event)"
   (click)="!data.disabled && _clickOption($event)"
 >
-  <span class="fudis-select-option__label">
-    {{ data.label }}
-  </span>
+  <span class="fudis-select-option__label">{{ data.label }}</span>
   <fudis-icon
     *ngIf="!data.disabled && _parentSelect.control.value?.value === data.value"
     [icon]="_parent.size === 'xs' ? 'check-small' : 'check'"
     [color]="'primary'"
   />
-  <span *ngIf="data.disabled" class="fudis-select-option__label fudis-select-option__disabled-text"
-    >({{ _parentSelect.translationOptionDisabledText }})</span
+  <span *ngIf="data.disabled" class="fudis-select-option__label fudis-select-option__disabled-text">
+    ({{ _parentSelect.translationOptionDisabledText | async }})</span
   >
 </div>
