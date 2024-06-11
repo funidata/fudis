@@ -27,7 +27,7 @@ export class DropdownMenuComponent
 {
   constructor(
     private _idService: FudisIdService,
-    @Host() @Optional() private _button: ButtonComponent,
+    @Host() @Optional() private _parentButton: ButtonComponent,
   ) {
     super();
   }
@@ -58,10 +58,10 @@ export class DropdownMenuComponent
       this._idService.addNewParentId('dropdown-menu', this.id);
     } else {
       this.id = this._idService.getNewParentId('dropdown-menu');
-      // TODO: Enable when Dropdown Menu is re-enabled
-      // if (this._button) {
-      //   this._button.dropdownMenuId = this.id;
-      // }
+
+      if (this._parentButton) {
+        this._parentButton.dropdownMenuId = this.id;
+      }
     }
   }
 

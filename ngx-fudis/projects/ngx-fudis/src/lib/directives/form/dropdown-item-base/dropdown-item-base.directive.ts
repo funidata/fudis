@@ -50,7 +50,7 @@ export class DropdownItemBaseDirective {
       const focusElement = this._document.querySelector(':focus');
 
       const siblingElements = element.nativeElement
-        .closest('.fudis-select-dropdown')
+        .closest('.fudis-select-dropdown, .fudis-dropdown-menu')
         .querySelectorAll(cssClassSelector);
 
       const siblingElementsCount = siblingElements.length - 1;
