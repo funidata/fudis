@@ -13,6 +13,7 @@
     "xyc.vscode-mdx-preview",
     "nhoizey.gremlins",
     "deque-systems.vscode-axe-linter",
-    "tobermory.es6-string-html"
+    "tobermory.es6-string-html",
+    "angular.ng-template"
   ]
 }
