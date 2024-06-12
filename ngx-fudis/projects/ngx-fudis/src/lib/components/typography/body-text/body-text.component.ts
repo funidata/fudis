@@ -20,7 +20,7 @@ import { DialogComponent } from '../../dialog/dialog.component';
 export class BodyTextComponent {
   constructor(@Host() @Optional() private _parentDialog: DialogComponent) {
     if (_parentDialog) {
-      this.size = 'md-light';
+      this.variant = 'md-light';
     }
   }
 
@@ -30,9 +30,9 @@ export class BodyTextComponent {
   @HostBinding('class') private _classes = 'fudis-body-text-host';
 
   /**
-   * Font size for the paragraph
+   * Font variant for the paragraph
    */
-  @Input() size: FudisBodyText = 'md-regular';
+  @Input() variant: FudisBodyText = 'md-regular';
 
   /**
    * Option to change text color if background is not compatible with default dark text

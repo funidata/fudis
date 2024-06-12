@@ -29,7 +29,7 @@ import { FudisGridAlign, FudisGridProperties } from '../../../types/grid';
           fudisGridItem
           [columns]="'stretch'"
           [alignSelfX]="'center'"
-          [size]="'lg-regular'"
+          [variant]="'lg-regular'"
           >Current Grid Service values: <code>{{ _currentServiceConfigs }}</code>
         </fudis-body-text>
       </fudis-grid>
@@ -158,7 +158,7 @@ const columnsToString = (columns: string | number | object): string => {
 
 const ExampleTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
   props: { ...args, transformedColumns: columnsToString(args.columns) },
-  template: html`<fudis-body-text style="margin: 1rem 0;" [size]="'lg-regular'" [align]="'center'"
+  template: html`<fudis-body-text style="margin: 1rem 0;" [variant]="'lg-regular'" [align]="'center'"
       >Current value of <code>columns</code> is:
       <code>{{transformedColumns}}</code></fudis-body-text
     >

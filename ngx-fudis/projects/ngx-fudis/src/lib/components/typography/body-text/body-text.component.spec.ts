@@ -26,16 +26,16 @@ describe('BodyTextComponent', () => {
 
   //TODO: Write test for host class
   describe('CSS classes', () => {
-    it('should change CSS classes according to the given body-text size', () => {
-      fudisBodyTextArray.forEach((size) => {
-        component.size = size;
+    it('should change CSS classes according to the given body-text variant', () => {
+      fudisBodyTextArray.forEach((variant) => {
+        component.variant = variant;
         fixture.detectChanges();
 
         const element = getElement(fixture, '.fudis-body-text');
 
         expect(sortClasses(element.className)).toEqual(
           sortClasses(
-            `fudis-body-text fudis-body-text__default fudis-body-text__left fudis-body-text__${size}`,
+            `fudis-body-text fudis-body-text__default fudis-body-text__left fudis-body-text__${variant}`,
           ),
         );
       });

@@ -225,7 +225,7 @@ const SelectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectComponent)
           <fudis-grid-item [columns]="'stretch'">
             <fudis-heading [level]="3" [variant]="'md'">Current control value</fudis-heading>
             <ng-container *ngIf="!control.value">
-              <fudis-body-text [size]="'lg-regular'"
+              <fudis-body-text [variant]="'lg-regular'"
                 >Control value: null.</fudis-body-text
               ></ng-container
             >
@@ -465,7 +465,7 @@ const MultiselectShowcaseTemplate: StoryFn<SelectComponent> = (args: SelectCompo
           <fudis-grid-item [columns]="'stretch'">
             <fudis-heading [level]="3" [variant]="'md'">Current control value</fudis-heading>
             <ng-container *ngIf="!control.value">
-              <fudis-body-text [size]="'lg-regular'"
+              <fudis-body-text [variant]="'lg-regular'"
                 >Control value: null.</fudis-body-text
               ></ng-container
             >
