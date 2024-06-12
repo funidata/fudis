@@ -15,10 +15,8 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import {
   getMaxFromValidator,
-  getMaxLengthFromValidator,
   getMinFromValidator,
   getMinLengthFromValidator,
-  hasRequiredValidator,
 } from '../../../utilities/form/getValidators';
 import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { FormComponent } from '../form/form.component';
@@ -45,7 +43,7 @@ export class TextInputComponent
   /**
    * FormControl for text-input
    */
-  @Input({ required: true }) control: FormControl<string | null | number>;
+  @Input({ required: true }) override control: FormControl<string | null | number>;
 
   /**
    * Available sizes for the input. Recommended size for number input is 'sm'.
@@ -91,11 +89,13 @@ export class TextInputComponent
 
     this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
   }
-
+/* TODO: move these checks under _applyControlUpdateCheck in InputBase directive */
   ngOnChanges(changes: FudisComponentChanges<TextInputComponent>): void {
+    
     if (changes.control?.currentValue !== changes.control?.previousValue) {
-      this._required = hasRequiredValidator(this.control);
-      this._maxLength = getMaxLengthFromValidator(this.control);
+      this._initialCheck();    
+      this._applyControlUpdateCheck();
+      // this._maxLength = getMaxLengthFromValidator(this.control);
     }
 
     if (changes.type?.currentValue === 'number') {

@@ -98,7 +98,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   /**
    * Formcontrol. For SelectBase set on purpose to type 'any' and spesified in SelectComponent and MultiselectComponent.
    */
-  @Input() control: FormControl;
+  @Input() override control: FormControl;
 
   /**
    * Placeholder text for the dropdown input when no selection has been made

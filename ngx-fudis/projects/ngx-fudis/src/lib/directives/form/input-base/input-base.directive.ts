@@ -13,6 +13,7 @@ import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisIdComponent } from '../../../types/id';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FormControl } from '@angular/forms';
+import { hasRequiredValidator } from '../../../utilities/form/getValidators';
 
 @Directive({
   selector: '[fudisInputBase]',
@@ -29,6 +30,11 @@ export class InputBaseDirective extends TooltipApiDirective {
    * Template reference for input. Used in e. g. initialFocus
    */
   @ViewChild('inputRef') protected _inputRef: ElementRef<HTMLInputElement>;
+
+  /**
+   * FormControl for the input
+   */
+    @Input({ required: true }) control: FormControl;
 
   /**
    * Label for the input.
@@ -144,5 +150,19 @@ export class InputBaseDirective extends TooltipApiDirective {
     } else {
       this.id = this._idService.getNewId(componentType);
     }
+  }
+
+  protected _initialCheck(): void {
+    this._required = hasRequiredValidator(this.control);
+
+  }
+
+  protected _applyControlUpdateCheck(): void {
+    const originalUpdateValueAndValidity = this.control.updateValueAndValidity;
+    this.control.updateValueAndValidity = () => {
+      originalUpdateValueAndValidity.apply(this.control);
+      this._initialCheck();     
+      // this._maxLength = getMaxLengthFromValidator(this.control);
+    };
   }
 }

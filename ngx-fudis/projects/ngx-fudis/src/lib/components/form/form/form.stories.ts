@@ -10,7 +10,7 @@ import {
   FudisCheckboxGroupFormGroup,
   // FudisDateRangeItem,
 } from '../../../types/forms';
-import { FudisValidators } from '../../../utilities/form/validators';
+import { FudisValidatorFn, FudisValidators } from '../../../utilities/form/validators';
 import { FudisGroupValidators } from '../../../utilities/form/groupValidators';
 import { FormComponent } from './form.component';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
@@ -359,6 +359,8 @@ class ExampleWithMultipleFormsComponent {
                           [label]="'Contact email'"
                           [helpText]="'So that students can ask for more time on their homework.'"
                         />
+                        <fudis-button [label]="'Test update value & validity'" (handleClick)="handleUpdate()"></fudis-button>
+                        <fudis-button [label]="'Remove validator'" (handleClick)="handleRemove()"></fudis-button>
                       </fudis-grid>
                     </ng-template>
                   </fudis-fieldset>
@@ -391,7 +393,74 @@ class FormContentExampleComponent implements OnInit {
   constructor(
     private _translationService: FudisTranslationService,
     private _focusService: FudisFocusService,
-  ) {}
+  ) {
+    this._requiredValidatorInstance = FudisValidators.required("Missing teacher's name who is responsible for this course.")
+    this.formExample = new FormGroup({
+      // Expose when InputWithLanguageOptions is exposed to public API
+      // name: new FormGroup(
+      //   {
+      //     finnish: new FormControl(null),
+      //     swedish: new FormControl(null),
+      //     english: new FormControl(null),
+      //   },
+      //   [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Course name is missing.'))],
+      // ),
+      // description: new FormGroup({
+      //   finnish: new FormControl(null, [
+      //     FudisValidators.required('Missing description in Finnish.'),
+      //     FudisValidators.minLength(10, 'Description should at least 10 characters.'),
+      //   ]),
+      //   swedish: new FormControl(null, [
+      //     FudisValidators.required('Missing description in Swedish.'),
+      //     FudisValidators.minLength(10, 'Description should at least 10 characters.'),
+      //   ]),
+      //   english: new FormControl(null, [
+      //     FudisValidators.required('Missing description in English.'),
+      //     FudisValidators.minLength(10, 'Description should at least 10 characters.'),
+      //   ]),
+      // }),
+      courseBooks: new FormGroup(
+        {
+          first: new FormControl(null),
+          second: new FormControl(null),
+          third: new FormControl(null),
+        },
+        [
+          FudisGroupValidators.min({ value: 1, message: new BehaviorSubject('No book selected.') }),
+          FudisGroupValidators.max({ value: 2, message: new BehaviorSubject('Too many selected.') }),
+        ],
+      ),
+      teacher: new FormControl(
+        null,
+        this._requiredValidatorInstance,
+      ),
+      email: new FormControl(null, [
+        FudisValidators.required('Missing email contact.'),
+        FudisValidators.email('Input must be an email address.'),
+        FudisValidators.minLength(5, 'Email should be at least 5 characters.'),
+      ]),
+      importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
+      // courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
+      // startDate: new FormControl<Date | null>(
+      //   null,
+      //   FudisValidators.required('Start date is required.'),
+      // ),
+      // dateRangeStartDate: new FormControl<Date | null>(null, [
+      //   FudisValidators.required('Choose start date'),
+      //   FudisValidators.datepickerMax({
+      //     value: new Date(2023, 5, 20),
+      //     message: 'Start date cannot be later than 20.6.2023',
+      //   }),
+      // ]),
+      // dateRangeEndDate: new FormControl<Date | null>(null, [
+      //   FudisValidators.required('Choose end date'),
+      //   FudisValidators.datepickerMin({
+      //     value: new Date(2023, 5, 19),
+      //     message: 'Start date cannot be earliner than 19.6.2023',
+      //   }),
+      // ]),
+    });
+  }
 
   @Input() title: string;
   @Input() titleVariant: FudisHeadingVariant;
@@ -406,71 +475,7 @@ class FormContentExampleComponent implements OnInit {
   firstLoad: boolean = true;
   fieldsetId = 'first-fieldset-id';
 
-  formExample = new FormGroup({
-    // Expose when InputWithLanguageOptions is exposed to public API
-    // name: new FormGroup(
-    //   {
-    //     finnish: new FormControl(null),
-    //     swedish: new FormControl(null),
-    //     english: new FormControl(null),
-    //   },
-    //   [FudisGroupValidators.atLeastOneRequired(new BehaviorSubject('Course name is missing.'))],
-    // ),
-    // description: new FormGroup({
-    //   finnish: new FormControl(null, [
-    //     FudisValidators.required('Missing description in Finnish.'),
-    //     FudisValidators.minLength(10, 'Description should at least 10 characters.'),
-    //   ]),
-    //   swedish: new FormControl(null, [
-    //     FudisValidators.required('Missing description in Swedish.'),
-    //     FudisValidators.minLength(10, 'Description should at least 10 characters.'),
-    //   ]),
-    //   english: new FormControl(null, [
-    //     FudisValidators.required('Missing description in English.'),
-    //     FudisValidators.minLength(10, 'Description should at least 10 characters.'),
-    //   ]),
-    // }),
-    courseBooks: new FormGroup(
-      {
-        first: new FormControl(null),
-        second: new FormControl(null),
-        third: new FormControl(null),
-      },
-      [
-        FudisGroupValidators.min({ value: 1, message: new BehaviorSubject('No book selected.') }),
-        FudisGroupValidators.max({ value: 2, message: new BehaviorSubject('Too many selected.') }),
-      ],
-    ),
-    teacher: new FormControl(
-      null,
-      FudisValidators.required("Missing teacher's name who is responsible for this course."),
-    ),
-    email: new FormControl(null, [
-      FudisValidators.required('Missing email contact.'),
-      FudisValidators.email('Input must be an email address.'),
-      FudisValidators.minLength(5, 'Email should be at least 5 characters.'),
-    ]),
-    importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
-    // courseType: new FormControl(null, FudisValidators.required('Course type must be selected.')),
-    // startDate: new FormControl<Date | null>(
-    //   null,
-    //   FudisValidators.required('Start date is required.'),
-    // ),
-    // dateRangeStartDate: new FormControl<Date | null>(null, [
-    //   FudisValidators.required('Choose start date'),
-    //   FudisValidators.datepickerMax({
-    //     value: new Date(2023, 5, 20),
-    //     message: 'Start date cannot be later than 20.6.2023',
-    //   }),
-    // ]),
-    // dateRangeEndDate: new FormControl<Date | null>(null, [
-    //   FudisValidators.required('Choose end date'),
-    //   FudisValidators.datepickerMin({
-    //     value: new Date(2023, 5, 19),
-    //     message: 'Start date cannot be earliner than 19.6.2023',
-    //   }),
-    // ]),
-  });
+  formExample: FormGroup;
 
   languageOptions: FudisSelectOption<object>[] = [
     { value: 'finnish', label: 'FI' },
@@ -496,6 +501,11 @@ class FormContentExampleComponent implements OnInit {
 
   private _closed: boolean = true;
 
+    /**
+   * Instance of required validator
+   */
+    private _requiredValidatorInstance: FudisValidatorFn | null;
+
   ngOnInit(): void {
     this._focusService.addToIgnoreList('unique-input-3');
   }
@@ -503,6 +513,22 @@ class FormContentExampleComponent implements OnInit {
   handleClosedOutput(value: boolean): void {
     this._closed = value;
   }
+
+  handleUpdate(): void {
+    this._requiredValidatorInstance = FudisValidators.required("Missing teacher's name who is responsible for this course.");
+    this.formExample.controls['teacher'].addValidators(this._requiredValidatorInstance);
+    this.formExample.controls['teacher'].updateValueAndValidity();
+  }
+
+  handleRemove(): void {
+    if(this._requiredValidatorInstance) {
+      this.formExample.controls['teacher'].removeValidators(this._requiredValidatorInstance);
+      this.formExample.controls['teacher'].updateValueAndValidity();
+      this._requiredValidatorInstance = null;
+    }
+  }
+
+  /* TODO: Lisää tähän funktio validaattorin lisäykseen ja poistoon */
 }
 
 export default {

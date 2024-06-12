@@ -43,7 +43,7 @@ export class TextAreaComponent
   /**
    * FormControl for text-area
    */
-  @Input({ required: true }) control: FormControl<string | null | number>;
+  @Input({ required: true }) override control: FormControl<string | null | number>;
 
   /**
    * Text Area size
