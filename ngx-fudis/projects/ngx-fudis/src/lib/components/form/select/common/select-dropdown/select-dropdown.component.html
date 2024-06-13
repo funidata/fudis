@@ -11,7 +11,7 @@
   role="listbox"
 >
   <ng-content></ng-content>
-  <ng-container *ngIf="selectVariant !== 'dropdown' && open">
+  <ng-container *ngIf="selectVariant !== 'dropdown' && open && filterText">
     <fudis-body-text
       *ngIf="autocompleteHelpText !== false"
       [class.fudis-select-dropdown__help-text--hidden]="!results"
@@ -32,7 +32,7 @@
       >{{ _translationNoResultsFound | async }}</fudis-body-text
     >
     <span
-      *ngIf="autocompleteHelpText !== false && _displayStatus && results"
+      *ngIf="autocompleteHelpText !== false && _displayStatus && results && filterText"
       class="fudis-visually-hidden"
       role="alert"
     >

@@ -37,12 +37,15 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
    */
   @Input() autocompleteHelpText: string | false;
 
-  protected _displayStatus: boolean = false;
-
   /**
    * Current filter text from Autocomplete parents
    */
   @Input() filterText: string;
+
+  /**
+   * Boolean which toggles status updates for screen readers about changed option results
+   */
+  protected _displayStatus: boolean = false;
 
   ngOnChanges(changes: FudisComponentChanges<SelectDropdownComponent>): void {
     const newFilterText = changes.filterText?.currentValue;
@@ -53,15 +56,13 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
       newFilterText !== changes.filterText?.previousValue ||
       newResults !== changes.results?.previousValue
     ) {
-      const delay =
-        changes.results?.isFirstChange || changes.filterText?.isFirstChange ? 2000 : 500;
       this._displayStatus = false;
 
       setTimeout(() => {
         if (newFilterText === this.filterText || newResults === 0) {
           this._displayStatus = true;
         }
-      }, delay);
+      }, 500);
     }
   }
 
