@@ -238,6 +238,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
 
   private _optionLoadInterval: null | NodeJS.Timeout = null;
 
+  private _clickFromIcon: boolean = false;
+
   protected _clearButtonClick(): void {
     if (!this.disabled && !this.control.disabled) {
       this._setControlNull();
@@ -342,7 +344,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
 
     if (!this._preventDropdownReopen && openDropdown && !this._mouseDown && !this._dropdownOpen) {
       this.openDropdown();
-    } else {
+    } else if (this._clickFromIcon) {
       this.closeDropdown();
     }
     this._preventDropdownReopen = false;
@@ -633,17 +635,17 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     this._mouseDown = false;
     this._mouseDownTargetInsideComponent = false;
 
-    const iconClick =
+    this._clickFromIcon =
       this._selectRef.nativeElement.contains(targetElement) &&
-      targetElement.closest('.fudis-select-icons__container');
+      !!targetElement.closest('.fudis-select-icons__container');
 
     this._mouseUpOnInput =
       targetElement &&
       (!!this._inputRef?.nativeElement.contains(targetElement) ||
         !!this.autocompleteRef?.inputRef?.nativeElement.contains(targetElement) ||
-        !!iconClick);
+        this._clickFromIcon);
 
-    if (iconClick) {
+    if (this._clickFromIcon) {
       this._focusToSelectInput();
     }
   }

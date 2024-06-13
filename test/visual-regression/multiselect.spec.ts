@@ -43,6 +43,7 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await expect(page).toHaveScreenshot("A-7-hover-wallaby.png", {
     fullPage: true,
   });
+  await page.getByTestId("fudis-heading-1").hover();
 
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("fudis-multiselect-1-dropdown")).toBeVisible();
@@ -112,7 +113,7 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   });
 });
 
-test("Dropdown and autocompletes", async ({ page }) => {
+test.only("Dropdown and autocompletes", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=&id=components-form-select--multiselect-showcase&viewMode=story",
   );
@@ -149,7 +150,9 @@ test("Dropdown and autocompletes", async ({ page }) => {
   await expect(page.getByTestId("fudis-multiselect-2-dropdown")).not.toBeVisible();
 
   await page.keyboard.press("KeyI");
+  await expect(page.getByText("Showing 31 results")).toBeVisible();
   await page.keyboard.press("KeyN");
+  await expect(page.getByText("Showing 14 results")).toBeVisible();
   await expect(page).toHaveScreenshot("C-1-autocomplete-dropdown-in-typed.png", {
     fullPage: true,
   });
@@ -232,7 +235,9 @@ test("Dropdown and autocompletes", async ({ page }) => {
   await page.keyboard.press("KeyN");
   await expect(page.getByTestId("fudis-multiselect-5-dropdown")).toBeVisible();
   await page.keyboard.press("Enter");
+  await page.getByTestId("fudis-multiselect-5").focus();
   await page.getByTestId("fudis-multiselect-5").fill("cat");
+  await expect(page.getByTestId("fudis-multiselect-5-dropdown")).toBeVisible();
   await expect(page).toHaveScreenshot("E-3-autocomplete-type-cat-typed.png", {
     fullPage: true,
   });
@@ -246,6 +251,9 @@ test("Dropdown and autocompletes", async ({ page }) => {
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("Space");
+  await expect(page.getByTestId("fudis-multiselect-5-group-7-option-2")).toHaveClass(
+    "fudis-multiselect-option fudis-multiselect-option--visible fudis-multiselect-option--focused fudis-multiselect-option--checked",
+  );
   await expect(page).toHaveScreenshot("E-4-autocomplete-type-cats-selected.png", {
     fullPage: true,
   });
