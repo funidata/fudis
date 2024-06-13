@@ -154,6 +154,9 @@ export class SelectAutocompleteComponent implements OnInit {
    */
   protected _translations: Signal<FudisTranslationConfig>;
 
+  /**
+   * Internal FormControl to manage typed filter text
+   */
   protected _autocompleteControl: FormControl<string | null>;
 
   /**
@@ -161,6 +164,9 @@ export class SelectAutocompleteComponent implements OnInit {
    */
   private _preventDropdownReOpen: boolean = false;
 
+  /**
+   * To check if keydown event originated from input element and not e. g. clear button
+   */
   private _keyDownFromInput: boolean = false;
 
   /**
@@ -295,6 +301,10 @@ export class SelectAutocompleteComponent implements OnInit {
     this._preventDropdownReOpen = false;
   }
 
+  /**
+   * To update Autocomplete's internal control value
+   * @param newValue
+   */
   public updateInputValue(newValue: string): void {
     this._autocompleteControl.patchValue(newValue);
   }
