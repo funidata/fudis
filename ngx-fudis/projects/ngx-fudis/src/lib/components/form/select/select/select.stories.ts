@@ -48,6 +48,7 @@ const commonArgs: Partial<SelectComponent> = {
   disabled: false,
   placeholder: 'Choose a pet',
   helpText: 'All pets are equally important, but for sake of this example please pick one.',
+  autocompleteHelpText: 'Hello from Dropdown Help Text!',
   selectionClearButton: true,
 };
 
@@ -69,6 +70,7 @@ const DropdownTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
       [helpText]="helpText"
       [selectionClearButton]="selectionClearButton"
       [variant]="'dropdown'"
+      [autocompleteHelpText]="autocompleteHelpText"
       (selectionUpdate)="selectionUpdate($event)"
     >
       <ng-template fudisContent type="select-options">
@@ -111,6 +113,7 @@ const AutocompleteDropdownTemplate: StoryFn<SelectComponent> = (args: SelectComp
       [helpText]="helpText"
       [selectionClearButton]="selectionClearButton"
       [variant]="'autocompleteDropdown'"
+      [autocompleteHelpText]="autocompleteHelpText"
       (selectionUpdate)="selectionUpdate($event)"
     >
       <ng-template fudisContent type="select-options">
@@ -153,6 +156,7 @@ const AutocompleteTypeTemplate: StoryFn<SelectComponent> = (args: SelectComponen
       [helpText]="helpText"
       [selectionClearButton]="selectionClearButton"
       [variant]="'autocompleteType'"
+      [autocompleteHelpText]="autocompleteHelpText"
       (selectionUpdate)="selectionUpdate($event)"
     >
       <ng-template fudisContent type="select-options">

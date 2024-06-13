@@ -50,8 +50,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     effect(() => {
       const translations = _translationService.getTranslations()();
 
-      this._translationNoResultsFound.next(translations.SELECT.AUTOCOMPLETE.NO_RESULTS);
-
       this.translationOptionDisabledText.next(translations.SELECT.DISABLED);
 
       // TODO: after a11y audit, check if these can be removed
@@ -120,10 +118,25 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   @Input() selectionClearButton: boolean = true;
 
   /**
+   * With Autocomplete variants optional helper text displayed as first item in opened dropdown list
+   */
+  @Input() autocompleteHelpText: string;
+
+  /**
    * Value output event on selection change
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Output() selectionUpdate: EventEmitter<any | null> = new EventEmitter<any | null>();
+
+  /**
+   * Output for number of visible options after filtering results
+   */
+  @Output() visibleOptionsUpdate: EventEmitter<number> = new EventEmitter<number>();
+
+  /**
+   * Output for number of visible options after filtering results
+   */
+  @Output() filterTextUpdate: EventEmitter<string | null> = new EventEmitter<string | null>();
 
   /**
    * Selected option or options label for non-autocomplete dropdowns
@@ -165,11 +178,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   protected _translationCloseAriaLabel = new BehaviorSubject<string>('');
 
   /**
-   * Internal translated label for situations where no results with current filters were found
-   */
-  protected _translationNoResultsFound = new BehaviorSubject<string>('');
-
-  /**
    * Signal to Select & MultiselectOption for listening autocomplete filter text changes
    */
   protected _autocompleteFilterText: WritableSignal<string> = signal<string>('');
@@ -188,6 +196,10 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    * Used when filtering autocomplete results to check if 'No results found' text is visible
    */
   protected _visibleOptions: string[] = [];
+
+  private _visibleOptionsTemp: string[] = [];
+
+  private _latestVisibleOption: string;
 
   /**
    * Status of input focus
@@ -223,6 +235,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    * If click event's target is Select's input field
    */
   private _mouseUpOnInput: boolean = false;
+
+  private _optionLoadInterval: null | NodeJS.Timeout = null;
 
   protected _clearButtonClick(): void {
     if (!this.disabled && !this.control.disabled) {
@@ -283,7 +297,36 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    * @param visible is this option visible or not
    */
   public setOptionVisibility(value: string, visible: boolean) {
-    this._visibleOptions = setVisibleOptionsList(this._visibleOptions, value, visible);
+    this._latestVisibleOption = value;
+
+    this._visibleOptionsTemp = setVisibleOptionsList(this._visibleOptionsTemp, value, visible);
+
+    if (!this._optionLoadInterval) {
+      this.optionsLoadDelay().then((resolve) => {
+        if (resolve) {
+          this._visibleOptions = this._visibleOptionsTemp;
+          this.visibleOptionsUpdate.emit(this._visibleOptions.length);
+        }
+      });
+    }
+  }
+
+  private optionsLoadDelay(): Promise<boolean> {
+    let tempLatestOptions: string;
+
+    return new Promise((resolve) => {
+      this._optionLoadInterval = setInterval(() => {
+        if (tempLatestOptions === this._latestVisibleOption) {
+          if (this._optionLoadInterval) {
+            clearInterval(this._optionLoadInterval);
+            this._optionLoadInterval = null;
+          }
+          resolve(true);
+        } else {
+          tempLatestOptions = this._latestVisibleOption;
+        }
+      }, 50);
+    });
   }
 
   /**
@@ -426,6 +469,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   protected _filterTextUpdate(text: string): void {
     if (this._autocompleteFilterText() !== text) {
       this._autocompleteFilterText.set(text);
+      this.filterTextUpdate.emit(text);
     }
   }
 

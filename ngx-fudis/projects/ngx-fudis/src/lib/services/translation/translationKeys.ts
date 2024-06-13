@@ -46,7 +46,7 @@ export const en: FudisTranslationConfig = {
       REMOVE_ITEM: 'Remove search filters',
     },
     AUTOCOMPLETE: {
-      CLEAR: 'Clear filter',
+      CLEAR: 'Clear selection',
       NO_RESULTS: 'No results found',
     },
   },

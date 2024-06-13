@@ -1,3 +1,6 @@
+/*
+* Global style files
+*/
 @use "@angular/material" as mat;
 @use "./fudis-theme.scss" as theme;
 @use "../components/form/date/datepicker/ngMaterial-theme.scss" as datePicker;
@@ -8,6 +11,7 @@
 @use "../foundations/spacing/classes.scss" as spacingClasses;
 @use "../components/link/link.component.scss" as link;
 @use "../components/button/button-theme.scss" as button;
+@use "../components/form/select/common/select-dropdown/select-dropdown-theme.scss" as selectDropdown;
 @use "../components/description-list/description-list-item/description-list-item-details/description-list-item-details-theme.scss"
   as dd;
 

@@ -46,6 +46,7 @@ const commonProps: Partial<MultiselectComponent> = {
   helpText: 'All pets are equally important, but for sake of this Dropdown please pick atleast two',
   showSelectionChips: true,
   selectionClearButton: true,
+  autocompleteHelpText: 'Hello from Dropdown Help Text!',
 };
 
 const DropdownTemplate: StoryFn<MultiselectComponent> = (args: MultiselectComponent) => ({
@@ -71,6 +72,7 @@ const DropdownTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCompon
       (selectionUpdate)="selectionUpdate($event)"
       [showSelectionChips]="showSelectionChips"
       [selectionClearButton]="selectionClearButton"
+      [autocompleteHelpText]="autocompleteHelpText"
     >
       <ng-template fudisContent type="select-options">
         <fudis-multiselect-option
@@ -118,6 +120,7 @@ const AutocompleteDropdownTemplate: StoryFn<MultiselectComponent> = (
       (selectionUpdate)="selectionUpdate($event)"
       [showSelectionChips]="showSelectionChips"
       [selectionClearButton]="selectionClearButton"
+      [autocompleteHelpText]="autocompleteHelpText"
     >
       <ng-template fudisContent type="select-options">
         <fudis-multiselect-option
@@ -163,6 +166,7 @@ const AutocompleteTypeTemplate: StoryFn<MultiselectComponent> = (args: Multisele
       (selectionUpdate)="selectionUpdate($event)"
       [showSelectionChips]="showSelectionChips"
       [selectionClearButton]="selectionClearButton"
+      [autocompleteHelpText]="autocompleteHelpText"
     >
       <ng-template fudisContent type="select-options">
         <fudis-multiselect-option

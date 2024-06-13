@@ -1,0 +1,19 @@
+@use "../../../../../foundations/spacing/tokens.scss" as spacing;
+
+.fudis-select-dropdown {
+  &__help-text {
+    &.fudis-body-text-host {
+      padding: spacing.$spacing-xs;
+    }
+
+    &--first {
+      order: -1;
+    }
+
+    &--hidden.fudis-body-text-host {
+      display: none;
+      visibility: hidden;
+      padding: none;
+    }
+  }
+}
