@@ -113,7 +113,7 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   });
 });
 
-test.only("Dropdown and autocompletes", async ({ page }) => {
+test("Dropdown and autocompletes", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=&id=components-form-select--multiselect-showcase&viewMode=story",
   );
