@@ -118,9 +118,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   @Input() selectionClearButton: boolean = true;
 
   /**
-   * With Autocomplete variants optional helper text displayed as first item in opened dropdown list
+   * For Autocomplete variants optional helper text displayed as first item in opened dropdown list. By default uses internal Fudis translation, which can be disabled by setting this property to boolean 'false'
    */
-  @Input() autocompleteHelpText: string;
+  @Input() autocompleteHelpText: string | false;
 
   /**
    * Value output event on selection change

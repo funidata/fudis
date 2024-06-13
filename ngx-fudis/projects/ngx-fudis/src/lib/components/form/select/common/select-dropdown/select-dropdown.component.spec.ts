@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectDropdownComponent } from './select-dropdown.component';
 import { Component, ViewChild } from '@angular/core';
 import { getElement } from '../../../../../utilities/tests/utilities';
+import { BodyTextComponent } from '../../../../typography/body-text/body-text.component';
 
 @Component({
   selector: 'fudis-mock-with-parent',
@@ -34,7 +35,7 @@ describe('SelectDropdownComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SelectDropdownComponent, MockWithParentComponent],
+      declarations: [SelectDropdownComponent, MockWithParentComponent, BodyTextComponent],
     });
     fixture = TestBed.createComponent(SelectDropdownComponent);
     component = fixture.componentInstance;

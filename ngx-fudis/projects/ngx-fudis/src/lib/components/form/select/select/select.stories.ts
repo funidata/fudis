@@ -70,7 +70,6 @@ const DropdownTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
       [helpText]="helpText"
       [selectionClearButton]="selectionClearButton"
       [variant]="'dropdown'"
-      [autocompleteHelpText]="autocompleteHelpText"
       (selectionUpdate)="selectionUpdate($event)"
     >
       <ng-template fudisContent type="select-options">
@@ -113,7 +112,6 @@ const AutocompleteDropdownTemplate: StoryFn<SelectComponent> = (args: SelectComp
       [helpText]="helpText"
       [selectionClearButton]="selectionClearButton"
       [variant]="'autocompleteDropdown'"
-      [autocompleteHelpText]="autocompleteHelpText"
       (selectionUpdate)="selectionUpdate($event)"
     >
       <ng-template fudisContent type="select-options">

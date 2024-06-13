@@ -14,9 +14,11 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
   constructor(private _translationService: FudisTranslationService) {
     super();
     effect(() => {
-      const translations = _translationService.getTranslations()();
+      const translations = _translationService.getTranslations()().SELECT.AUTOCOMPLETE;
 
-      this._translationNoResultsFound.next(translations.SELECT.AUTOCOMPLETE.NO_RESULTS);
+      this._translationNoResultsFound.next(translations.NO_RESULTS);
+      this._translationResults.next(translations.RESULTS);
+      this._translationShowing.next(translations.SHOWING);
     });
   }
 
@@ -26,14 +28,16 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
   @Input({ required: true }) selectVariant: FudisSelectVariant;
 
   /**
-   * Boolean if there are no results
+   * Number of results
    */
-  @Input() noResults: boolean;
+  @Input() results: number;
 
   /**
    * With Autocomplete variants optional helper text displayed as first item in Dropdown
    */
-  @Input() autocompleteHelpText: string;
+  @Input() autocompleteHelpText: string | false;
+
+  protected _displayStatus: boolean = false;
 
   /**
    * Current filter text from Autocomplete parents
@@ -41,8 +45,23 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
   @Input() filterText: string;
 
   ngOnChanges(changes: FudisComponentChanges<SelectDropdownComponent>): void {
-    if (changes.filterText?.currentValue !== changes.filterText?.previousValue) {
-      console.log(this.filterText);
+    const newFilterText = changes.filterText?.currentValue;
+
+    const newResults = changes.results?.currentValue;
+
+    if (
+      newFilterText !== changes.filterText?.previousValue ||
+      newResults !== changes.results?.previousValue
+    ) {
+      const delay =
+        changes.results?.isFirstChange || changes.filterText?.isFirstChange ? 2000 : 500;
+      this._displayStatus = false;
+
+      setTimeout(() => {
+        if (newFilterText === this.filterText || newResults === 0) {
+          this._displayStatus = true;
+        }
+      }, delay);
     }
   }
 
@@ -50,4 +69,14 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
    * Internal translated label for situations where no results with current filters were found
    */
   protected _translationNoResultsFound = new BehaviorSubject<string>('');
+
+  /**
+   * Internal translated label for number of visible results
+   */
+  protected _translationResults = new BehaviorSubject<string>('');
+
+  /**
+   * Internal translated label for number of visible results
+   */
+  protected _translationShowing = new BehaviorSubject<string>('');
 }

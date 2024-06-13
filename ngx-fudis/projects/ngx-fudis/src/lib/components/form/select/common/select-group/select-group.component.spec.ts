@@ -164,7 +164,9 @@ describe('SelectGroupComponent', () => {
       ];
 
       allGroups.forEach((group, index) => {
-        const options = (group as HTMLDivElement).querySelectorAll('.fudis-select-option__label');
+        const options = (group as HTMLDivElement).querySelectorAll(
+          '.fudis-select-option__label__main',
+        );
 
         const singleGroupLabels: (string | null)[] = [];
 
@@ -187,7 +189,7 @@ describe('SelectGroupComponent', () => {
 
       const visibleOptions = getAllElements(
         fixture,
-        '.fudis-select-group .fudis-multiselect-option--visible .fudis-multiselect-option__label__text',
+        '.fudis-select-group .fudis-multiselect-option--visible .fudis-multiselect-option__label__text__main',
       );
 
       expect(visibleOptions.length).toEqual(2);

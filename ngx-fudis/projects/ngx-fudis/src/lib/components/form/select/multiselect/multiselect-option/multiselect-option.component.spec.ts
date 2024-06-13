@@ -94,7 +94,7 @@ describe('MultiselectOptionComponent', () => {
 
       const selectedOption = getElement(fixtureMock, '.fudis-multiselect-option--checked');
       const selectedOptionLabel = selectedOption.querySelector(
-        '.fudis-multiselect-option__label__text',
+        '.fudis-multiselect-option__label__text__main',
       )?.textContent;
 
       expect(selectedOption).toBeTruthy();

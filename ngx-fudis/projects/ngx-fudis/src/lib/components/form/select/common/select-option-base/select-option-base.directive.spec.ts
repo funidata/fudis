@@ -125,7 +125,7 @@ describe('SelectOptionBaseDirective', () => {
 
       const focusableOptions = getAllElements(
         fixture,
-        '.fudis-select-option__focusable .fudis-select-option__label',
+        '.fudis-select-option__focusable .fudis-select-option__label__main',
       );
 
       expect(focusableOptions.length).toEqual(2);

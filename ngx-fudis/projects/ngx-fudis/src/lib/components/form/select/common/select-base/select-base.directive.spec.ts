@@ -157,7 +157,7 @@ describe('SelectBaseDirective', () => {
 
       const checkedOption = getAllElements(
         fixture,
-        '.fudis-multiselect-option__label--checked .fudis-multiselect-option__label__text',
+        '.fudis-multiselect-option__label--checked .fudis-multiselect-option__label__text__main',
       );
 
       const selectedOptionLabelArray: (string | null)[] = [];

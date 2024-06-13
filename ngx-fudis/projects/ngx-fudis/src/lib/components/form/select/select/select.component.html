@@ -86,7 +86,7 @@
       #dropdownRef
       [open]="_dropdownOpen"
       [selectVariant]="variant"
-      [noResults]="!!_visibleOptions.length"
+      [results]="_visibleOptions.length"
       [autocompleteHelpText]="autocompleteHelpText"
       [filterText]="_autocompleteFilterText()"
       [size]="size"
