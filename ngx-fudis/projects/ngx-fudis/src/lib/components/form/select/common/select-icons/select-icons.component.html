@@ -1,7 +1,8 @@
 <div class="fudis-select-icons__container">
   <fudis-icon
     *ngIf="
-      parentVariant !== 'autocompleteType' && (!clearButton || (!_controlValue && !filterText))
+      parentVariant !== 'autocompleteType' &&
+      (!clearButton || ((_controlValue | async) === false && !filterText))
     "
     class="fudis-select-icons__icon"
     [class.fudis-select-icons__icon--disabled]="disabled"
@@ -10,7 +11,7 @@
   />
   <fudis-icon
     *ngIf="
-      (parentVariant === 'autocompleteType' && !filterText && !_controlValue) ||
+      (parentVariant === 'autocompleteType' && !filterText && (_controlValue | async) === false) ||
       (parentVariant === 'autocompleteType' && !clearButton)
     "
     class="fudis-select-icons__icon"
@@ -25,9 +26,9 @@
       [class.fudis-select-icons__icon--disabled]="disabled"
       [class.fudis-select-icons__icon--hidden]="
         !(
-          (parentVariant === 'dropdown' && _controlValue) ||
-          (parentVariant === 'autocompleteDropdown' && (filterText || _controlValue)) ||
-          (parentVariant === 'autocompleteType' && (filterText || _controlValue))
+          (parentVariant === 'dropdown' && (_controlValue | async)) ||
+          (parentVariant === 'autocompleteDropdown' && (filterText || (_controlValue | async))) ||
+          (parentVariant === 'autocompleteType' && (filterText || (_controlValue | async)))
         )
       "
       (handleClick)="_clearButtonClick($event)"
