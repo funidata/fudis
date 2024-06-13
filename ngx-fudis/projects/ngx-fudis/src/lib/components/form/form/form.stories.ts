@@ -239,16 +239,16 @@ class ExampleWithMultipleFormsComponent {
       <ng-template fudisHeader>
         <fudis-dl [columns]="1" [variant]="'compact'">
           <fudis-dl-item>
-            <fudis-dt [textContent]="'Important person'" />
-            <fudis-dd [textContent]="'Admiral Thrawn'" />
+            <fudis-dt [contentText]="'Important person'" />
+            <fudis-dd [contentText]="'Admiral Thrawn'" />
           </fudis-dl-item>
           <fudis-dl-item>
-            <fudis-dt [textContent]="'Key'" />
-            <fudis-dd [textContent]="'THX-1138'" />
+            <fudis-dt [contentText]="'Key'" />
+            <fudis-dd [contentText]="'THX-1138'" />
           </fudis-dl-item>
           <fudis-dl-item>
-            <fudis-dt [textContent]="'Another important person'" />
-            <fudis-dd [textContent]="'Mara Jase'" />
+            <fudis-dt [contentText]="'Another important person'" />
+            <fudis-dd [contentText]="'Mara Jase'" />
           </fudis-dl-item>
         </fudis-dl>
       </ng-template>
