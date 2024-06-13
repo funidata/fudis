@@ -2,7 +2,6 @@ import {
   Component,
   Input,
   HostBinding,
-  ViewEncapsulation,
   ChangeDetectionStrategy,
   Optional,
   Host,
@@ -14,7 +13,6 @@ import { DialogComponent } from '../../dialog/dialog.component';
   selector: 'fudis-body-text',
   templateUrl: './body-text.component.html',
   styleUrls: ['./body-text.component.scss'],
-  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BodyTextComponent {

@@ -1,0 +1,17 @@
+@use "../../../foundations/spacing/tokens.scss" as spacing;
+
+fudis-body-text {
+  /* stylelint-disable-next-line selector-no-qualifying-type */
+  &.fudis-body-text-host {
+    display: block;
+  }
+
+  + fudis-body-text {
+    margin-top: spacing.$spacing-xs;
+  }
+
+  /* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
+  & fudis-link {
+    display: inline-block;
+  }
+}

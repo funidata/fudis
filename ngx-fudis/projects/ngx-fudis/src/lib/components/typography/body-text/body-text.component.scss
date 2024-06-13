@@ -2,10 +2,6 @@
 @use "../../../foundations/colors/mixins.scss" as colorMixins;
 @use "../../../foundations/utilities/mixins.scss" as utilities;
 
-.fudis-body-text-host {
-  display: block;
-}
-
 .fudis-body-text {
   @include utilities.box-reset;
 
@@ -47,10 +43,5 @@
 
   &__center {
     text-align: center;
-  }
-
-  /* stylelint-disable-next-line scss/selector-no-redundant-nesting-selector */
-  & fudis-link {
-    display: inline-block;
   }
 }
