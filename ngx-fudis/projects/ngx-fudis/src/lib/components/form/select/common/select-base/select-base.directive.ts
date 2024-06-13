@@ -340,8 +340,10 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
       this.variant === 'autocompleteDropdown' ||
       (this.variant === 'autocompleteType' && this._autocompleteFilterText() !== '');
 
-    if (!this._preventDropdownReopen && openDropdown && !this._mouseDown) {
+    if (!this._preventDropdownReopen && openDropdown && !this._mouseDown && !this._dropdownOpen) {
       this.openDropdown();
+    } else {
+      this.closeDropdown();
     }
     this._preventDropdownReopen = false;
   }
@@ -630,9 +632,19 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   private _handleMouseUp(targetElement: HTMLElement) {
     this._mouseDown = false;
     this._mouseDownTargetInsideComponent = false;
+
+    const iconClick =
+      this._selectRef.nativeElement.contains(targetElement) &&
+      targetElement.closest('.fudis-select-icons__container');
+
     this._mouseUpOnInput =
       targetElement &&
       (!!this._inputRef?.nativeElement.contains(targetElement) ||
-        !!this.autocompleteRef?.inputRef?.nativeElement.contains(targetElement));
+        !!this.autocompleteRef?.inputRef?.nativeElement.contains(targetElement) ||
+        !!iconClick);
+
+    if (iconClick) {
+      this._focusToSelectInput();
+    }
   }
 }
