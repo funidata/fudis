@@ -1,7 +1,6 @@
 <input
   #inputRef
   type="text"
-  aria-required="true"
   class="fudis-select-autocomplete fudis-form-input"
   role="combobox"
   [attr.value]="selectedLabel || null"
@@ -18,10 +17,11 @@
   autocomplete="off"
   [attr.aria-autocomplete]="'list'"
   [attr.aria-expanded]="dropdownOpen"
-  [attr.aria-disabled]="disabled ? true : null"
+  [attr.aria-disabled]="disabled || null"
   [attr.placeholder]="placeholder"
-  [attr.required]="required ? true : null"
+  [attr.required]="required || null"
+  [attr.aria-required]="required || null"
   [attr.aria-labelledby]="id + '-label'"
   [attr.aria-describedby]="id + '_guidance'"
-  [attr.aria-invalid]="invalidState ? true : null"
+  [attr.aria-invalid]="invalidState || null"
 />

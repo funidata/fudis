@@ -6,12 +6,13 @@ import {
   Output,
   Signal,
   ViewChild,
-  OnInit,
   ChangeDetectionStrategy,
+  OnChanges,
+  OnInit,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { FudisTranslationConfig } from '../../../../../types/miscellaneous';
+import { FudisComponentChanges, FudisTranslationConfig } from '../../../../../types/miscellaneous';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -20,7 +21,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrls: ['./autocomplete.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectAutocompleteComponent implements OnInit {
+export class SelectAutocompleteComponent implements OnChanges, OnInit {
   constructor() {
     this._autocompleteControl = new FormControl<string | null>('');
 
@@ -35,19 +36,19 @@ export class SelectAutocompleteComponent implements OnInit {
   @ViewChild('inputRef') public inputRef: ElementRef<HTMLInputElement>;
 
   /**
-   * Set input fields required attribute
-   */
-  @Input({ required: true }) required: boolean;
-
-  /**
    * Id for autocomplete input form field
    */
   @Input({ required: true }) id: string;
 
   /**
+   * Set input fields required attribute
+   */
+  @Input() required: boolean;
+
+  /**
    * If parent's dropdown is open or not
    */
-  @Input({ required: true }) dropdownOpen: boolean = false;
+  @Input() dropdownOpen: boolean = false;
 
   /**
    * For single select label when control has value on init
@@ -245,7 +246,7 @@ export class SelectAutocompleteComponent implements OnInit {
 
     this.preventSpaceKeypress = false;
 
-    if (this._keyDownFromInput) {
+    if (this._keyDownFromInput && this._focused) {
       this._keyDownFromInput = false;
 
       /**
@@ -268,13 +269,12 @@ export class SelectAutocompleteComponent implements OnInit {
          * ArrowDown key
          */
       } else if (key === 'ArrowDown') {
-        if (this._focused) {
-          event.preventDefault();
-          if (inputValue.length >= this.typeThreshold) {
-            this.triggerDropdownOpen.emit();
-            this.triggerFocusToFirstOption.emit();
-          }
+        event.preventDefault();
+        if (inputValue.length >= this.typeThreshold) {
+          this.triggerDropdownOpen.emit();
+          this.triggerFocusToFirstOption.emit();
         }
+
         /**
          * Close
          */
@@ -304,9 +304,19 @@ export class SelectAutocompleteComponent implements OnInit {
     this._autocompleteControl.patchValue(newValue);
   }
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     if (!this.multiselect && this.selectedLabel) {
       this.updateInputValue(this.selectedLabel);
+    }
+  }
+
+  ngOnChanges(changes: FudisComponentChanges<SelectAutocompleteComponent>): void {
+    if (changes.disabled?.currentValue !== changes.disabled?.previousValue) {
+      if (this.disabled && this.selectedLabel) {
+        this.updateInputValue(this.selectedLabel);
+      } else if (!changes.disabled?.firstChange) {
+        this.updateInputValue('');
+      }
     }
   }
 }
