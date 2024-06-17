@@ -61,7 +61,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   /**
    * Reference to child DropdownComponent listing all options
    */
-  @ViewChild('dropdownRef') private _dropdownRef: SelectDropdownComponent;
+  @ViewChild('dropdownRef') protected _dropdownRef: SelectDropdownComponent;
 
   /**
    * Reference to child DropdownComponent listing all options
@@ -240,6 +240,8 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
 
   private _clickFromIcon: boolean = false;
 
+  private _keyDown: string | null = null;
+
   protected _clearButtonClick(): void {
     if (!this.disabled && !this.control.disabled) {
       this._setControlNull();
@@ -377,34 +379,42 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     this._focusToSelectInput();
   }
 
+  protected _dropdownKeyDown(event: KeyboardEvent): void {
+    this._keyDown = event.key;
+  }
+
   /**
    * Handle keypress for dropdown select
    * @param event KeyboardEvent
    * @param focusSelector CSS selector to focus to on ArrowDown event
    */
-  protected _dropdownKeypress(event: KeyboardEvent): void {
+  protected _dropdownKeyUp(event: KeyboardEvent): void {
     const { key } = event;
 
-    switch (key) {
-      case ' ':
-      case 'Enter':
-        event.preventDefault();
-        this._toggleDropdown();
-        break;
-      case 'ArrowDown':
-        event.preventDefault();
-        if (!this._dropdownOpen) {
+    if (key === this._keyDown) {
+      switch (key) {
+        case ' ':
+        case 'Enter':
+          event.preventDefault();
           this._toggleDropdown();
-        }
-        if (this._inputFocused) {
-          this._focusToFirstOption();
-        }
-        break;
-      case 'Tab':
-        break;
-      default:
-        event.preventDefault();
+          break;
+        case 'ArrowDown':
+          event.preventDefault();
+          if (!this._dropdownOpen) {
+            this._toggleDropdown();
+          }
+          if (this._inputFocused) {
+            this._focusToFirstOption();
+          }
+          break;
+        case 'Tab':
+          break;
+        default:
+          event.preventDefault();
+      }
     }
+
+    this._keyDown = null;
   }
 
   /**
@@ -491,8 +501,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    * To focus on first option when dropdown opens
    * @param cssfocusSelector CSS class to focus to
    */
-
-  // TODO: check if this could be achieved more elegantly
   protected _focusToFirstOption(clickFirstOption?: boolean): void {
     const firstOption: HTMLInputElement | null =
       this._dropdownRef?.dropdownElement.nativeElement.querySelector(this.focusSelector);
@@ -512,7 +520,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
           }
         }, 0);
       }
-    } else if (this._focusTryCounter < 100) {
+    } else if (this._focusTryCounter < 20) {
       setTimeout(() => {
         this._focusTryCounter += 1;
         this._focusToFirstOption();

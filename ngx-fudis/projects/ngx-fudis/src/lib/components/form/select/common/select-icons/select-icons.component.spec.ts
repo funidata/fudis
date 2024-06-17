@@ -7,8 +7,6 @@ import { FudisSelectOption, FudisSelectVariant } from '../../../../../types/form
 import { FormControl } from '@angular/forms';
 import { getElement } from '../../../../../utilities/tests/utilities';
 
-// TODO write tests
-
 describe('SelectIconsComponent', () => {
   let component: SelectIconsComponent;
   let fixture: ComponentFixture<SelectIconsComponent>;

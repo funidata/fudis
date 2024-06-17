@@ -1,45 +1,10 @@
 import { FudisSelectOption } from '../../../../types/forms';
 
-// TODO: write unit tests and internal documentation
-
 /**
- * Arranges selected options in an order they are present in the DOM
- * @param value list of options to be sorted and patched
- * @param sort used if there more than one option selected
+ * Function to loop array of options and join their labels to a single string
+ * @param values array of selected Options
+ * @returns
  */
-export const sortValues = (value: FudisSelectOption<object>[]): FudisSelectOption<object>[] => {
-  let valueToSort: FudisSelectOption<object>[] = value;
-
-  valueToSort = value.sort((a: FudisSelectOption<object>, b: FudisSelectOption<object>) => {
-    if (
-      a['fudisGeneratedHtmlId']?.includes('-group-') &&
-      !b['fudisGeneratedHtmlId']?.includes('-group-')
-    ) {
-      return 1;
-    }
-
-    if (
-      !a['fudisGeneratedHtmlId']?.includes('-group-') &&
-      b['fudisGeneratedHtmlId']?.includes('-group-')
-    ) {
-      return -1;
-    }
-
-    if (a['fudisGeneratedHtmlId'] && b['fudisGeneratedHtmlId']) {
-      if (a['fudisGeneratedHtmlId'] < b['fudisGeneratedHtmlId']) {
-        return -1;
-      }
-      if (a['fudisGeneratedHtmlId'] > b['fudisGeneratedHtmlId']) {
-        return 1;
-      }
-    }
-
-    return 0;
-  });
-
-  return valueToSort;
-};
-
 export const joinInputValues = (values: FudisSelectOption<object>[]): string => {
   const label: string[] = [];
   values.forEach((item: FudisSelectOption<object>) => {
@@ -53,6 +18,13 @@ export const joinInputValues = (values: FudisSelectOption<object>[]): string => 
   return joinedValues;
 };
 
+/**
+ * Add or remove a value from current list and returned updated one
+ * @param currentList
+ * @param valueToUpdate
+ * @param visible
+ * @returns updated List
+ */
 export const setVisibleOptionsList = (
   currentList: string[],
   valueToUpdate: string,
