@@ -201,6 +201,7 @@ describe('SelectBaseDirective', () => {
       fixture.detectChanges();
 
       dropdownInput.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+      dropdownInput.dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
       fixture.detectChanges();
 
       const options = fixture.debugElement.queryAll(By.css('.fudis-multiselect-option__label'));
