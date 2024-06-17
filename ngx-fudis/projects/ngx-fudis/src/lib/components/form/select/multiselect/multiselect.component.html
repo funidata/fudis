@@ -11,7 +11,7 @@
   <div #selectRef>
     <div class="fudis-select__input-wrapper">
       <div
-        *ngIf="variant === 'dropdown' || control.disabled"
+        *ngIf="variant === 'dropdown'"
         #inputRef
         tabindex="0"
         class="fudis-form-input fudis-select__input fudis-select__input__dropdown"
@@ -41,7 +41,7 @@
         }}</span>
       </div>
       <fudis-select-autocomplete
-        *ngIf="variant !== 'dropdown' && control.enabled"
+        *ngIf="variant !== 'dropdown'"
         #autocompleteRef
         [id]="id"
         [placeholder]="placeholder"

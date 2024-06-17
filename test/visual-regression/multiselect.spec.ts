@@ -39,8 +39,8 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await expect(page).toHaveScreenshot("A-6-focus-dolphin.png", {
     fullPage: true,
   });
-  await page.getByTestId("fudis-multiselect-1-group-9-option-5").hover();
-  await expect(page).toHaveScreenshot("A-7-hover-wallaby.png", {
+  await page.getByTestId("fudis-multiselect-1-group-10-option-1").hover();
+  await expect(page).toHaveScreenshot("A-7-hover-alligator.png", {
     fullPage: true,
   });
   await page.getByTestId("fudis-heading-1").hover();
@@ -250,6 +250,7 @@ test("Dropdown and autocompletes", async ({ page }) => {
   await page.keyboard.press("Space");
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
+  await expect(page.getByTestId("fudis-multiselect-5-group-7-option-2")).toBeInViewport();
   await page.keyboard.press("Space");
   await expect(page.getByTestId("fudis-multiselect-5-group-7-option-2")).toHaveClass(
     "fudis-multiselect-option fudis-multiselect-option--visible fudis-multiselect-option--focused fudis-multiselect-option--checked",
