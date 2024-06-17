@@ -168,9 +168,9 @@ test("Dropdowns and Autocompletes", async ({ page }) => {
     fullPage: true,
   });
   await page.keyboard.press("KeyI");
-  await expect(page.getByText("Showing 31 results")).toBeVisible();
+  await expect(page.getByText("Showing 47 results")).toBeVisible();
   await page.keyboard.press("KeyN");
-  await expect(page.getByText("Showing 14 results")).toBeVisible();
+  await expect(page.getByText("Showing 18 results")).toBeVisible();
   await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(6);
   await expect(page).toHaveScreenshot("C-2-autocomplete-dropdown-in-typed.png", {
     fullPage: true,
@@ -270,12 +270,24 @@ test("Dropdowns and Autocompletes", async ({ page }) => {
   await page.keyboard.press("E");
   await page.keyboard.press("N");
   await page.keyboard.press("D");
+  await expect(
+    page.getByTestId("fudis-select-6-dropdown").getByText("No results found"),
+  ).not.toBeVisible();
+  await page.keyboard.press("Space");
+  await expect(
+    page.getByTestId("fudis-select-6-dropdown").getByText("No results found"),
+  ).toBeVisible();
   await expect(page.getByTestId("fudis-select-6-dropdown")).toBeVisible();
   await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(6);
   await expect(page).toHaveScreenshot("F-1-autocomplete-type-end.png", {
     fullPage: true,
   });
   await page.keyboard.press("Backspace");
+  await page.keyboard.press("Backspace");
+  await expect(
+    page.getByTestId("fudis-select-6-dropdown").getByText("No results found"),
+  ).not.toBeVisible();
+  await expect(page.getByTestId("fudis-select-6-dropdown")).not.toBeVisible();
   await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(6);
   await expect(page).toHaveScreenshot("F-2-autocomplete-type-end-2.png", {
     fullPage: true,

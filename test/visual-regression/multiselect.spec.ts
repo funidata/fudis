@@ -150,9 +150,9 @@ test("Dropdown and autocompletes", async ({ page }) => {
   await expect(page.getByTestId("fudis-multiselect-2-dropdown")).not.toBeVisible();
 
   await page.keyboard.press("KeyI");
-  await expect(page.getByText("Showing 31 results")).toBeVisible();
+  await expect(page.getByText("Showing 47 results")).toBeVisible();
   await page.keyboard.press("KeyN");
-  await expect(page.getByText("Showing 14 results")).toBeVisible();
+  await expect(page.getByText("Showing 18 results")).toBeVisible();
   await expect(page).toHaveScreenshot("C-1-autocomplete-dropdown-in-typed.png", {
     fullPage: true,
   });
@@ -282,12 +282,19 @@ test("Dropdown and autocompletes", async ({ page }) => {
 
   await expect(
     page.getByTestId("fudis-multiselect-6-dropdown").getByText("No results found"),
+  ).not.toBeVisible();
+
+  await page.keyboard.press("Space");
+
+  await expect(
+    page.getByTestId("fudis-multiselect-6-dropdown").getByText("No results found"),
   ).toBeVisible();
 
   await expect(page).toHaveScreenshot("F-1-autocomplete-type-end.png", {
     fullPage: true,
   });
 
+  await page.keyboard.press("Backspace");
   await page.keyboard.press("Backspace");
   await expect(page.getByTestId("fudis-multiselect-6-dropdown")).not.toBeVisible();
 });

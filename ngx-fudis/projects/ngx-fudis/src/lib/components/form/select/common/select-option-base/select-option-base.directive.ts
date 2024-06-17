@@ -75,10 +75,17 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
    */
   protected _isOptionVisible(filterText: string): void {
     if (this.data) {
-      this._optionVisible =
+      const labelMatch =
         filterText && this.data.label.toLowerCase().includes(filterText.toLowerCase())
           ? true
           : !filterText;
+
+      const subLabelMatch =
+        filterText && this.data.subLabel?.toLowerCase().includes(filterText.toLowerCase())
+          ? true
+          : !filterText;
+
+      this._optionVisible = labelMatch || subLabelMatch;
 
       this._updateVisibilityToParents(this._optionVisible);
     }
