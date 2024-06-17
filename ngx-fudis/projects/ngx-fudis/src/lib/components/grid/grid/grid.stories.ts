@@ -177,9 +177,10 @@ const ExampleTemplate: StoryFn<GridComponent> = (args: GridComponent) => ({
       [columnGap]="columnGap"
       [rowGap]="rowGap"
     >
-      <fudis-body-text class="storybook__item"
-        >Grid child element which has more content than most of the child elements</fudis-body-text
-      >
+      <div class="storybook__item">
+        <fudis-body-text>First Grid child's first Body Text inside it</fudis-body-text>
+        <fudis-body-text>First Grid child's second Body Text inside it</fudis-body-text>
+      </div>
       <fudis-body-text class="storybook__item">Grid child element</fudis-body-text>
       <fudis-body-text class="storybook__item">Grid child element</fudis-body-text>
       <fudis-body-text class="storybook__item"
