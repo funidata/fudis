@@ -6,11 +6,10 @@ import {
   Output,
   Signal,
   ViewChild,
-  ViewEncapsulation,
   OnInit,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FudisSelectOption } from '../../../../../types/forms';
 
 import { FudisTranslationConfig } from '../../../../../types/miscellaneous';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -19,7 +18,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   selector: 'fudis-select-autocomplete',
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectAutocompleteComponent implements OnInit {
   constructor() {
@@ -34,13 +33,6 @@ export class SelectAutocompleteComponent implements OnInit {
    * Template reference for input. Used in e. g. initialFocus
    */
   @ViewChild('inputRef') public inputRef: ElementRef<HTMLInputElement>;
-
-  /**
-   * Form control used mostly to define HTML attributes and CSS styles
-   */
-  @Input({ required: true }) control: FormControl<
-    FudisSelectOption<object> | FudisSelectOption<object>[] | null
-  >;
 
   /**
    * Set input fields required attribute
@@ -92,7 +84,10 @@ export class SelectAutocompleteComponent implements OnInit {
    */
   @Input({ required: true }) typeThreshold: 0 | 3;
 
-  @Input() visibleOptions: string[];
+  /**
+   * List of visible options
+   */
+  @Input() visibleOptions: string[] = [];
 
   /**
    * Output event for input field blur
@@ -310,10 +305,8 @@ export class SelectAutocompleteComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    if (!this.multiselect && this.control.value) {
-      const label = (this.control.value as FudisSelectOption<object>).label;
-
-      this.updateInputValue(label);
+    if (!this.multiselect && this.selectedLabel) {
+      this.updateInputValue(this.selectedLabel);
     }
   }
 }

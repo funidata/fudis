@@ -186,7 +186,7 @@ test("Dropdowns and Autocompletes", async ({ page }) => {
     fullPage: true,
   });
   await page.getByTestId("fudis-select-4").fill("golden");
-  await expect(page.getByText("Showing 3 results")).toBeVisible();
+  await expect(page.getByTestId("fudis-body-text-9").getByText("Showing 3 results")).toBeVisible();
   await page.getByTestId("fudis-heading-1").hover();
   await expect(page.getByTestId("fudis-select-4-dropdown")).toBeVisible();
   await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(6);

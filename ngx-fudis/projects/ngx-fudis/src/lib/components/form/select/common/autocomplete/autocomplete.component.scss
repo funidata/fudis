@@ -6,7 +6,6 @@
 
 .fudis-select-autocomplete {
   @include typography.text-field-input;
-  @include borders.border("1px", "solid", "gray-dark");
   @include borders.border-radius("2px");
 
   box-sizing: border-box;
@@ -22,6 +21,10 @@
 
   &::placeholder {
     @include colorMixins.text-color("gray-middle");
+  }
+
+  &:not([aria-invalid="true"]) {
+    @include borders.border("1px", "solid", "gray-dark");
   }
 
   &:focus,

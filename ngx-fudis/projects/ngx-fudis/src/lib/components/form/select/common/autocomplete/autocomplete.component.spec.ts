@@ -1,75 +1,29 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectAutocompleteComponent } from './autocomplete.component';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { ButtonComponent } from '../../../../button/button.component';
-import { IconComponent } from '../../../../icon/icon.component';
-import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
+import { ReactiveFormsModule } from '@angular/forms';
 import { getElement } from '../../../../../utilities/tests/utilities';
-import { FudisSelectOption } from '../../../../../types/forms';
+
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
-import { Component, ViewChild } from '@angular/core';
-import { SelectComponent } from '../../select/select.component';
-import { SelectOptionComponent } from '../../select/select-option/select-option.component';
-import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
-import { GuidanceComponent } from '../../../guidance/guidance.component';
-import { LabelComponent } from '../../../label/label.component';
-import { ValidatorErrorMessageComponent } from '../../../error-message/validator-error-message/validator-error-message.component';
-import { FudisValidators } from '../../../../../utilities/form/validators';
-
-@Component({
-  selector: 'fudis-mock-select-autocomplete',
-  template: ` <fudis-select-autocomplete
-    #autoSelect
-    [placeholder]="placeholder"
-    [control]="control"
-    [id]="id"
-    [required]="true"
-    [dropdownOpen]="dropdownOpen"
-  />`,
-})
-class MockSelecAutocompleteComponent {
-  @ViewChild('autoSelect') autoSelect: SelectAutocompleteComponent;
-
-  id: string = 'select-id';
-  placeholder: string = 'Test placeholder';
-  dropdownOpen: boolean = false;
-  control: FormControl = new FormControl<
-    FudisSelectOption<object> | FudisSelectOption<object>[] | null
-  >(null, FudisValidators.required('This is required input'));
-}
 
 describe('AutocompleteComponent', () => {
   let component: SelectAutocompleteComponent;
   let fixture: ComponentFixture<SelectAutocompleteComponent>;
-  let mockComponent: MockSelecAutocompleteComponent;
-  let mockFixture: ComponentFixture<MockSelecAutocompleteComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        ContentDirective,
-        SelectComponent,
-        SelectDropdownComponent,
-        SelectAutocompleteComponent,
-        SelectOptionComponent,
-        LabelComponent,
-        ButtonComponent,
-        GuidanceComponent,
-        IconComponent,
-        ValidatorErrorMessageComponent,
-        MockSelecAutocompleteComponent,
-      ],
+      declarations: [SelectAutocompleteComponent],
       providers: [FudisFocusService, FudisIdService, FudisTranslationService],
       imports: [ReactiveFormsModule],
     });
     fixture = TestBed.createComponent(SelectAutocompleteComponent);
     component = fixture.componentInstance;
+    component.id = 'select-id';
+    component.placeholder = 'Test placeholder';
+    component.dropdownOpen = false;
 
-    mockFixture = TestBed.createComponent(MockSelecAutocompleteComponent);
-    mockComponent = mockFixture.componentInstance;
-    mockFixture.detectChanges();
+    fixture.detectChanges();
   });
 
   function getInputElement() {
@@ -77,31 +31,30 @@ describe('AutocompleteComponent', () => {
     return inputElement;
   }
 
-  function getMockInputElement() {
-    const inputElement = getElement(mockFixture, 'input');
-    return inputElement;
-  }
-
   describe('Select Autocomplete default values', () => {
     it('should have respective classes', () => {
-      const inputElement = getElement(mockFixture, 'fudis-select-autocomplete input');
-
-      expect(inputElement.className).toContain('fudis-form-input fudis-select-autocomplete');
+      fixture.whenStable().then(() => {
+        expect(getInputElement().className).toContain('fudis-form-input fudis-select-autocomplete');
+      });
     });
 
     it('should have required attribute', () => {
-      expect(getMockInputElement().getAttribute('required')).toEqual('true');
+      fixture.whenStable().then(() => {
+        expect(getInputElement().getAttribute('required')).toEqual('true');
+      });
     });
 
     it('should have given id', () => {
-      expect(getMockInputElement().getAttribute('id')).toEqual('select-id');
+      fixture.whenStable().then(() => {
+        expect(getInputElement().getAttribute('id')).toEqual('select-id');
+      });
     });
 
     it('should have dropdown open', () => {
-      mockComponent.dropdownOpen = true;
-      mockFixture.detectChanges();
-
-      expect(getMockInputElement().getAttribute('aria-expanded')).toEqual('true');
+      component.dropdownOpen = true;
+      fixture.whenStable().then(() => {
+        expect(getInputElement().getAttribute('aria-expanded')).toEqual('true');
+      });
     });
   });
 
@@ -111,9 +64,6 @@ describe('AutocompleteComponent', () => {
       component.placeholder = 'Test placeholder';
       component.dropdownOpen = false;
       component.typeThreshold = 0;
-      component.control = new FormControl<
-        FudisSelectOption<object> | FudisSelectOption<object>[] | null
-      >(null);
       fixture.detectChanges();
     });
 
