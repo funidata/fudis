@@ -181,6 +181,7 @@ test("Dropdown and autocompletes", async ({ page }) => {
   await page.keyboard.press("Space");
   await page.keyboard.press("KeyE");
   await page.keyboard.press("KeyA");
+  await expect(page.getByText("Showing 1 results")).toBeVisible();
   await expect(page.getByTestId("fudis-multiselect-4-dropdown")).toBeVisible();
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("fudis-multiselect-4-dropdown")).toBeVisible();
@@ -233,10 +234,12 @@ test("Dropdown and autocompletes", async ({ page }) => {
   await page.keyboard.press("KeyI");
   await page.keyboard.press("KeyO");
   await page.keyboard.press("KeyN");
+  await expect(page.getByText("Showing 1 results")).toBeVisible();
   await expect(page.getByTestId("fudis-multiselect-5-dropdown")).toBeVisible();
   await page.keyboard.press("Enter");
   await page.getByTestId("fudis-multiselect-5").focus();
   await page.getByTestId("fudis-multiselect-5").fill("cat");
+  await expect(page.getByText("Showing 4 results")).toBeVisible();
   await expect(page.getByTestId("fudis-multiselect-5-dropdown")).toBeVisible();
   await expect(page).toHaveScreenshot("E-3-autocomplete-type-cat-typed.png", {
     fullPage: true,

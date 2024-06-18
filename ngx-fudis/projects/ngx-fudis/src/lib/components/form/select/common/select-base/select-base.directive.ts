@@ -224,24 +224,31 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   /**
    * If click event happens either in input field or in the options
    */
-  private _mouseDownTargetInsideComponent: boolean;
-
-  /**
-   * Used to prevent event triggering before mouseUp happens
-   */
-  private _mouseDown: boolean = false;
+  private _mouseDownInsideComponent: boolean;
 
   /**
    * If click event's target is Select's input field
    */
   private _mouseUpOnInput: boolean = false;
 
+  /**
+   * Used to not update visible options to HTML template before some delay has passed in case new options are still loading
+   */
   private _optionLoadInterval: null | NodeJS.Timeout = null;
 
+  /**
+   * If click event originated from Icon used inside input field
+   */
   private _clickFromIcon: boolean = false;
 
+  /**
+   * Keyboard button pressed down
+   */
   private _keyDown: string | null = null;
 
+  /**
+   * When Clear button is clicked
+   */
   protected _clearButtonClick(): void {
     if (!this.disabled && !this.control.disabled) {
       this._setControlNull();
@@ -250,6 +257,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     }
   }
 
+  /**
+   * Set control value to null
+   */
   protected _setControlNull(): void {
     this._controlValueChangedInternally = true;
     this.control.patchValue(null);
@@ -260,6 +270,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
 
   ngOnChanges(changes: FudisComponentChanges<SelectComponent | MultiselectComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
+      // TODO: refactor this after dynamic validator update ticket is done
       this._required = hasRequiredValidator(this.control);
 
       if (changes.control?.currentValue?.value) {
@@ -292,7 +303,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     this._dropdownOpen = false;
 
     this._preventDropdownReopen = preventDropdownReopen;
-    this._focusToSelectInput(focusToInput);
+    if (focusToInput) {
+      this._focusToSelectInput();
+    }
   }
 
   /**
@@ -306,7 +319,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     this._visibleOptionsTemp = setVisibleOptionsList(this._visibleOptionsTemp, value, visible);
 
     if (!this._optionLoadInterval) {
-      this.optionsLoadDelay().then((resolve) => {
+      this._optionsLoadDelay().then((resolve) => {
         if (resolve) {
           this._visibleOptions = this._visibleOptionsTemp;
           this.visibleOptionsUpdate.emit(this._visibleOptions.length);
@@ -315,7 +328,11 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     }
   }
 
-  private optionsLoadDelay(): Promise<boolean> {
+  /**
+   * Resolve a promise after delay if there hasn't been new options
+   * @returns boolean
+   */
+  private _optionsLoadDelay(): Promise<boolean> {
     let tempLatestOptions: string;
 
     return new Promise((resolve) => {
@@ -344,7 +361,12 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
       this.variant === 'autocompleteDropdown' ||
       (this.variant === 'autocompleteType' && this._autocompleteFilterText() !== '');
 
-    if (!this._preventDropdownReopen && openDropdown && !this._mouseDown && !this._dropdownOpen) {
+    if (
+      !this._preventDropdownReopen &&
+      openDropdown &&
+      !this._mouseDownInsideComponent &&
+      !this._dropdownOpen
+    ) {
       this.openDropdown();
     } else if (this._clickFromIcon) {
       this.closeDropdown();
@@ -379,8 +401,16 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     this._focusToSelectInput();
   }
 
-  protected _dropdownKeyDown(event: KeyboardEvent): void {
+  /**
+   * Register pressed key inside input field. Used to check that both key down and key up originated from same source.
+   */
+  protected _inputKeyDown(event: KeyboardEvent): void {
     this._keyDown = event.key;
+
+    // Prevent scrolling
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+    }
   }
 
   /**
@@ -388,7 +418,7 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    * @param event KeyboardEvent
    * @param focusSelector CSS selector to focus to on ArrowDown event
    */
-  protected _dropdownKeyUp(event: KeyboardEvent): void {
+  protected _inputKeyUp(event: KeyboardEvent): void {
     const { key } = event;
 
     if (key === this._keyDown) {
@@ -487,6 +517,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     }
   }
 
+  /**
+   * Manually set typed text in input fields
+   */
   protected _updateInputValueTexts(value: string): void {
     if (this.variant !== 'dropdown') {
       this.autocompleteRef.preventSpaceKeypress = true;
@@ -528,6 +561,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     }
   }
 
+  /**
+   * When blurring away from Dropdown, check if this Select has focus
+   */
   protected _dropdownBlur(event: FocusEvent): void {
     this.componentFocused(event).then((value) => {
       if (!value) {
@@ -536,6 +572,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     });
   }
 
+  /**
+   * Browser focus logic differs. E. g. Firefox tries to focus to Dropdown menu wrapper. This function determines that if it should focus to first option or back to input field.
+   */
   protected _dropdownFocus(event: FocusEvent): void {
     const focusFromInputOrClearButton =
       event.relatedTarget === this._inputRef?.nativeElement ||
@@ -549,10 +588,13 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     }
   }
 
-  protected _focusToSelectInput(condition: boolean = true) {
-    if (this.variant !== 'dropdown' && condition) {
+  /**
+   * Focus to input field
+   */
+  protected _focusToSelectInput() {
+    if (this.variant !== 'dropdown') {
       this.autocompleteRef.inputRef.nativeElement.focus();
-    } else if (condition) {
+    } else {
       this._inputRef.nativeElement.focus();
     }
   }
@@ -573,6 +615,11 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
     }
   }
 
+  /**
+   * Promise which determines, if some of the components used in this Select has focus or not.
+   * @param event FocusEvent
+   * @returns
+   */
   public componentFocused(event: FocusEvent): Promise<boolean> {
     return new Promise((resolve) => {
       let counter = 0;
@@ -585,9 +632,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
           !!this._selectRef.nativeElement.contains(nextTarget);
 
         // If focus has moved another element inside Select
-        if (focused || this._mouseDownTargetInsideComponent) {
+        if (focused || this._mouseDownInsideComponent) {
           clearInterval(focusCheckInterval);
-          this._mouseDownTargetInsideComponent = false;
+          this._mouseDownInsideComponent = false;
           resolve(true);
           // If focus target is null
         } else if (!nextTarget) {
@@ -625,24 +672,19 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    */
   @HostListener('document:mouseup', ['$event.target'])
   private _handleWindowClick(targetElement: HTMLElement) {
+    this._mouseDownInsideComponent = false;
     if (this._dropdownOpen && !this._selectRef.nativeElement.contains(targetElement)) {
       this.closeDropdown(false);
     }
   }
 
   @HostListener('mousedown', ['$event.target'])
-  private _handleMouseDown(targetElement: HTMLElement) {
-    this._mouseDown = true;
-
-    this._mouseDownTargetInsideComponent =
-      targetElement && !!this._selectRef.nativeElement.contains(targetElement);
+  private _handleMouseDown() {
+    this._mouseDownInsideComponent = true;
   }
 
   @HostListener('mouseup', ['$event.target'])
   private _handleMouseUp(targetElement: HTMLElement) {
-    this._mouseDown = false;
-    this._mouseDownTargetInsideComponent = false;
-
     this._clickFromIcon =
       this._selectRef.nativeElement.contains(targetElement) &&
       !!targetElement.closest('.fudis-select-icons__container');
