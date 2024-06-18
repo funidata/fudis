@@ -13,25 +13,23 @@ import { FudisInputSize } from '../../../types/forms';
   selector: '[fudisDropdownBase]',
 })
 export class DropdownBaseDirective {
-  @ViewChild('dropdownElement') dropdownElement: ElementRef<HTMLElement>;
-
   /**
-   * Binding public variable for querying variant type
+   * Template reference for the dropdown div element
    */
-  @HostBinding('class') classes = 'fudis-dropdown-menu-host';
+  @ViewChild('dropdownElement') public dropdownElement: ElementRef<HTMLElement>;
 
   /**
-   * Assign dropdown as single-select or multiselect (with checkboxes)
+   * Binding host CSS class to component wrapper
+   */
+  @HostBinding('class') hostClass = 'fudis-dropdown-menu-host';
+
+  /**
+   * Assign Select dropdown as single-select or multiselect (with checkboxes)
    */
   @Input() multiselect: boolean = false;
 
   /**
-   * Set dropdown size (should follow the given input element size)
-   */
-  @Input() size: FudisInputSize | 'xs' = 'lg';
-
-  /**
-   * Set dropdown open
+   * Set dropdown open status
    */
   @Input() open: boolean = false;
 
@@ -39,6 +37,31 @@ export class DropdownBaseDirective {
    * Id of parent component
    */
   @Input() parentId: string;
+
+  /**
+   * Set dropdown size (should follow the given input element size)
+   */
+  @Input() size: FudisInputSize | 'xs' = 'lg';
+
+  /**
+   * Calculate Dropdown Menu's max width
+   */
+  @Input() maxWidth: string = 'initial';
+
+  /**
+   * HTML role, menu is for Dropdown Menu Component, listbox is for Select and Multiselect Components
+   */
+  @Input() role: 'menu' | 'listbox' = 'listbox';
+
+  /**
+   * Dropdown-menu is aligned to open left side of the button by default but can be aligned to open right side if necessary
+   */
+  @Input() align: 'left' | 'right' | 'center' = 'left';
+
+  /**
+   * CSS classes, needed to separate Dropdown Menu and Select Dropdown classes
+   */
+  @Input() classes: string[] = [];
 
   /**
    * Output emitter for focus event
@@ -56,11 +79,6 @@ export class DropdownBaseDirective {
   public id: string;
 
   /**
-   * Determine dropdown max-width
-   */
-  protected _maxWidth: string = 'initial';
-
-  /**
    * When dropdown is focused, happens e. g. with Firefox
    */
   protected _dropdownFocus(event: FocusEvent): void {
@@ -72,12 +90,5 @@ export class DropdownBaseDirective {
    */
   protected _dropdownBlur(event: FocusEvent): void {
     this.handleBlur.emit(event);
-  }
-
-  /**
-   * Get defined dropdown css max-width attribute
-   */
-  get maxWidth(): string {
-    return this._maxWidth;
   }
 }
