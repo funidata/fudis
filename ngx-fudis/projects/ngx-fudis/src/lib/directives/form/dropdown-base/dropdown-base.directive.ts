@@ -39,14 +39,9 @@ export class DropdownBaseDirective {
   @Input() parentId: string;
 
   /**
-   * Set dropdown size (should follow the given input element size)
+   * Set dropdown size
    */
   @Input() size: FudisInputSize | 'xs' = 'lg';
-
-  /**
-   * CSS classes, needed to separate Dropdown Menu and Select Dropdown classes
-   */
-  @Input() classes: string[] = [];
 
   /**
    * Output emitter for focus event

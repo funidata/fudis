@@ -68,35 +68,4 @@ export class DropdownItemBaseDirective {
       elementToFocus.focus();
     }
   }
-
-  /**
-   * Function which tries to check if UI focus has moved away from the list of dropdown items
-   */
-  // eslint-disable-next-line class-methods-use-this
-  protected _focusedOutFromComponent(
-    event: FocusEvent,
-    element: ElementRef,
-    selector: string,
-  ): boolean {
-    if (!event.relatedTarget) {
-      setTimeout(() => {
-        if (!document.activeElement?.classList.contains(selector)) {
-          return false;
-        }
-        const menuButton = element.nativeElement
-          .closest('fudis-button')
-          ?.querySelector('.fudis-button');
-
-        if (
-          !(event.relatedTarget as HTMLElement)?.classList?.contains(selector) &&
-          (event.relatedTarget as HTMLElement) !== menuButton
-        ) {
-          return true;
-        }
-        return false;
-      }, 100);
-    }
-
-    return false;
-  }
 }

@@ -50,18 +50,20 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective impleme
   @ViewChild('dropdownItem') dropdownItem: ElementRef<HTMLButtonElement>;
 
   /**
-   * Dropdown menu item data
+   * Dropdown Menu iItem data
    */
   @Input({ required: true }) data: FudisDropdownMenuItem<object>;
 
-  @Output() selectionUpdate = new EventEmitter<FudisDropdownMenuItem<object> | null>();
+  /**
+   * Item selection ouput event
+   */
+  @Output() selectionUpdate: EventEmitter<FudisDropdownMenuItem<object> | null> =
+    new EventEmitter<FudisDropdownMenuItem<object> | null>();
 
   /**
    * Internal translated text for disabled dropdown menu item
    */
   public translationItemDisabledText = new BehaviorSubject<string>('');
-
-  private _optionFocused: boolean;
 
   ngOnInit(): void {
     this._id = this._idService.getNewChildId('dropdown-menu', this._parentDropdownMenu.id);
@@ -97,7 +99,6 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective impleme
    */
   protected _handleMenuItemBlur(event: FocusEvent): void {
     this._parentDropdownMenu.setFocusedOption(this._id, 'remove', event);
-    this._optionFocused = false;
   }
 
   /**
@@ -105,7 +106,6 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective impleme
    */
   protected _handleMenuItemFocus(): void {
     this._parentDropdownMenu.setFocusedOption(this._id, 'add');
-    this._optionFocused = true;
   }
 
   /**
