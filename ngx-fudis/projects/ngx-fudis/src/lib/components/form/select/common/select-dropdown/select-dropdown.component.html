@@ -1,6 +1,6 @@
 <div
   #dropdownElement
-  class="fudis-select-dropdown fudis-input-size__{{ size }}"
+  [class]="classes"
   [class.fudis-select-dropdown--open]="open"
   [class.fudis-select-dropdown__multiselect]="multiselect"
   [attr.id]="parentId + '-dropdown'"
@@ -8,7 +8,8 @@
   [attr.aria-multiselectable]="multiselect ? true : null"
   (focus)="_dropdownFocus($event)"
   (blur)="_dropdownBlur($event)"
-  role="listbox"
+  [attr.role]="role"
+  [style.max-width]="maxWidth"
 >
   <ng-content></ng-content>
 </div>
