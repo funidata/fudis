@@ -75,6 +75,11 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
   protected _sortedSelectedOptions: FudisSelectOption<object>[] = [];
 
   /**
+   * CSS class list for Multiselect
+   */
+  protected _classList = new BehaviorSubject<string[]>([]);
+
+  /**
    * Signal for dropdown options to listen when either Application updates its control value or user clicks (removes) selection chip
    */
   private _selectedOptionsSignal: WritableSignal<FudisSelectOption<object>[]> = signal<
@@ -88,6 +93,8 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
    */
   ngOnInit(): void {
     this._setParentId('multiselect');
+
+    this._classList.next(this._getClasses());
 
     this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
   }
@@ -214,5 +221,14 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
     if (!this.control.value) {
       this._focusToSelectInput();
     }
+  }
+
+  /**
+   * Get CSS classes associated with Multiselect
+   */
+  private _getClasses(): string[] {
+    const cssClasses = ['fudis-select-dropdown', `fudis-input-size__${this.size}`];
+
+    return cssClasses;
   }
 }
