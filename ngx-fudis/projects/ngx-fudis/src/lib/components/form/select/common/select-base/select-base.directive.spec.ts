@@ -14,7 +14,7 @@ import { FudisTranslationService } from '../../../../../services/translation/tra
 import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
 import { SelectOptionComponent } from '../../select/select-option/select-option.component';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
-import { FudisSelectOption } from '../../../../../types/forms';
+import { FudisInputSize, FudisSelectOption, FudisSelectVariant } from '../../../../../types/forms';
 import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.component';
 import { ButtonComponent } from '../../../../button/button.component';
 import { MultiselectOptionComponent } from '../../multiselect/multiselect-option/multiselect-option.component';
@@ -29,11 +29,12 @@ import { SelectIconsComponent } from '../select-icons/select-icons.component';
   selector: 'fudis-mock-select',
   template: `<fudis-multiselect
       #multiSelect
-      [variant]="'dropdown'"
+      [variant]="variant"
+      [selectionClearButton]="clearButton"
       [label]="'MultiSelect Label'"
       [placeholder]="'Test placeholder'"
       [control]="control"
-      [size]="'md'"
+      [size]="size"
     >
       <ng-template fudisContent type="select-options">
         <fudis-multiselect-group *ngFor="let group of groupedData" [label]="group.country">
@@ -48,7 +49,9 @@ import { SelectIconsComponent } from '../select-icons/select-icons.component';
       #multiSelectAuto
       [variant]="'autocompleteDropdown'"
       [label]="'MultiAutoSelect Label'"
+      [autocompleteHelpText]="'This is autocomplete help text'"
       [placeholder]="'Test placeholder for autocomplete'"
+      (visibleOptionsUpdate)="handleVisibleOptionsUpdate($event)"
       [control]="control"
       [size]="'md'"
       [selectionClearButton]="clearButton"
@@ -67,6 +70,12 @@ class MockSelectComponent {
   groupedData = groupedTestData;
   control: FormControl = new FormControl<FudisSelectOption<object>[] | null>(null);
   clearButton: boolean = true;
+  size = 'md';
+  variant: FudisSelectVariant = 'dropdown';
+
+  handleVisibleOptionsUpdate(value: number) {
+    console.log(value);
+  }
 
   @ViewChild('multiSelect') multiSelect: MultiselectComponent;
   @ViewChild('multiSelectAuto') multiSelectAuto: MultiselectComponent;
@@ -139,15 +148,89 @@ describe('SelectBaseDirective', () => {
     component.control.patchValue([groupedTestData[0].options[0], groupedTestData[1].options[1]]);
   }
 
-  describe('Multiselect default values', () => {
-    it('should have size', () => {
-      expect(component.multiSelect.size).toEqual('md');
+  describe('Basic inputs', () => {
+    describe('variant', () => {
+      it('should be dropdown', () => {
+        const dropdownElement = getElement(
+          fixture,
+          '#fudis-multiselect-1.fudis-select__input__dropdown',
+        );
+
+        const autocompleteElement = getElement(
+          fixture,
+          '#fudis-multiselect-1.fudis-select-autocomplete',
+        );
+
+        expect(dropdownElement).toBeTruthy();
+        expect(autocompleteElement).toBeNull();
+      });
+      it('should be autocomplete', () => {
+        const variants: FudisSelectVariant[] = ['autocompleteDropdown', 'autocompleteType'];
+
+        variants.forEach((variant) => {
+          component.variant = variant;
+          fixture.detectChanges();
+          const dropdownElement = getElement(
+            fixture,
+            '#fudis-multiselect-1.fudis-select__input__dropdown',
+          );
+
+          const autocompleteElement = getElement(
+            fixture,
+            '#fudis-multiselect-1.fudis-select-autocomplete',
+          );
+
+          expect(dropdownElement).toBeNull();
+          expect(autocompleteElement).toBeTruthy();
+        });
+      });
     });
 
-    // TODO: Fix this test
-    // it('should have CSS host class', () => {
-    //   expect(component.multiSelect.classes).toEqual('fudis-select-host');
-    // });
+    it('should have size', () => {
+      const sizes: (FudisInputSize | 'xs')[] = ['xs', 'md', 'lg'];
+
+      sizes.forEach((size) => {
+        component.size = size;
+        fixture.detectChanges();
+
+        const element = getElement(fixture, `.fudis-input-size__${size} #fudis-multiselect-1`);
+
+        expect(element).toBeTruthy();
+      });
+    });
+
+    it('selectionClearButton', () => {
+      const buttonsFirst = getAllElements(fixture, 'fudis-button .fudis-icon__close');
+
+      expect(buttonsFirst.length).toEqual(0);
+
+      patchControlValue();
+      fixture.detectChanges();
+
+      const buttonsSecond = getAllElements(fixture, 'fudis-button .fudis-icon__close');
+
+      expect(buttonsSecond.length).toEqual(2);
+
+      component.clearButton = false;
+      fixture.detectChanges();
+
+      const buttonsThird = getAllElements(fixture, 'fudis-button .fudis-icon__close');
+
+      expect(buttonsThird.length).toEqual(0);
+    });
+
+    it('autocompleteHelpText', () => {
+      component.multiSelectAuto.openDropdown();
+
+      fixture.detectChanges();
+
+      const dropdownElementAttribute = getElement(
+        fixture,
+        '#fudis-multiselect-2-main-wrapper fudis-select-dropdown',
+      ).getAttribute('ng-reflect-autocomplete-help-text');
+
+      expect(dropdownElementAttribute).toEqual('This is autocomplete help text');
+    });
 
     it('should show sorted selected options as form input value for both input sharing the same control', () => {
       patchControlValue();
@@ -191,6 +274,53 @@ describe('SelectBaseDirective', () => {
 
       setMultiSelectDropdownClosed();
       expect(findMultiSelectDropdownElement(0)).toBeFalsy();
+    });
+  });
+
+  describe('Outputs', () => {
+    it.only('should emit selectionUpdate', () => {
+      jest.spyOn(component.multiSelect.selectionUpdate, 'emit');
+
+      component.multiSelect.openDropdown();
+      fixture.detectChanges();
+
+      getElement(
+        fixture,
+        '#fudis-multiselect-1-main-wrapper .fudis-select-option__focusable',
+      ).click();
+
+      fixture.detectChanges();
+
+      expect(component.multiSelect.selectionUpdate.emit).toHaveBeenCalledWith([
+        {
+          label: 'Golden jackal',
+          subLabel: 'Canis aureus',
+          value: '4257d865-872c-4ea6-80e6-8bd04ce56ad7',
+        },
+      ]);
+
+      getElement(
+        fixture,
+        '#fudis-multiselect-1-main-wrapper .fudis-select-option__focusable',
+      ).click();
+
+      expect(component.multiSelect.selectionUpdate.emit).toHaveBeenCalledWith(null);
+    });
+
+    it('should emit filterTextUpdate', () => {
+      jest.spyOn(component.multiSelectAuto.filterTextUpdate, 'emit');
+      const inputElement = getElement(
+        fixture,
+        '#fudis-multiselect-2-main-wrapper .fudis-select-autocomplete',
+      ) as HTMLInputElement;
+
+      inputElement.value = 'hello';
+
+      inputElement.dispatchEvent(new KeyboardEvent('keyup'));
+
+      fixture.detectChanges();
+
+      expect(component.multiSelectAuto.filterTextUpdate.emit).toHaveBeenCalledWith('hello');
     });
   });
 
