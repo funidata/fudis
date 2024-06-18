@@ -10,6 +10,7 @@
     [attr.aria-expanded]="!asMenuButton ? null : dropdownOpen"
     [attr.aria-controls]="asMenuButton && dropdownMenuId ? dropdownMenuId : null"
     (click)="!disabled && buttonClick($event)"
+    (keydown)="_handleMenuButtonKeyDown($event)"
     [ngClass]="_classList"
     fudisTooltip
     [tooltip]="tooltip"
@@ -42,6 +43,7 @@
     [attr.aria-expanded]="!asMenuButton ? null : dropdownOpen"
     [attr.aria-controls]="asMenuButton && dropdownMenuId ? dropdownMenuId : null"
     (click)="!disabled && buttonClick($event)"
+    (keydown)="_handleMenuButtonKeyDown($event)"
     [ngClass]="_classList"
   >
     <ng-container *ngIf="icon">

@@ -190,19 +190,27 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
   }
 
   /**
-   * Close when Button is used as Menu Button
+   * Close dropdown when Button is used as Menu Button
    */
   public closeMenu(): void {
     this.dropdownOpen = false;
-
     this.buttonEl.nativeElement.focus();
   }
 
   /**
-   * Handler for blurring out and closing Menu Button dropdown
+   * Handle Escape key down for Menu Button
+   */
+  protected _handleMenuButtonKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      this.closeMenu();
+    }
+  }
+
+  /**
+   * Handler for blurring out and closing Menu Button's dropdown
    */
   protected _handleButtonBlur(event: FocusEvent): void {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const targetIsDropdownMenuButton = (event.relatedTarget as HTMLElement)?.classList?.contains(
       'fudis-dropdown-menu-item',
     );
@@ -214,6 +222,9 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
     this.handleBlur.emit(event);
   }
 
+  /**
+   * Handle button focus
+   */
   protected _handleButtonFocus(event: FocusEvent): void {
     this.handleFocus.emit(event);
   }
