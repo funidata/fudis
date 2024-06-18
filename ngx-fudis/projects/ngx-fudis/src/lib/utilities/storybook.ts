@@ -281,7 +281,8 @@ export const selectStoryControlExclude: RegExp = excludeRegex([
   'componentFocused',
   'setFocusedOption',
   'autocompleteRef',
-  'variant',
+  'filterTextUpdate',
+  'visibleOptionsUpdate',
 ]);
 
 /**

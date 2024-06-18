@@ -47,9 +47,10 @@ const commonProps: Partial<MultiselectComponent> = {
   showSelectionChips: true,
   selectionClearButton: true,
   autocompleteHelpText: 'Hello from Dropdown Help Text!',
+  variant: 'dropdown',
 };
 
-const DropdownTemplate: StoryFn<MultiselectComponent> = (args: MultiselectComponent) => ({
+const ExampleTemplate: StoryFn<MultiselectComponent> = (args: MultiselectComponent) => ({
   props: {
     ...args,
     defaultOptions,
@@ -69,6 +70,7 @@ const DropdownTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCompon
       [label]="label"
       [helpText]="helpText"
       [disabled]="disabled"
+      [variant]="variant"
       (selectionUpdate)="selectionUpdate($event)"
       [showSelectionChips]="showSelectionChips"
       [selectionClearButton]="selectionClearButton"
@@ -90,101 +92,7 @@ const DropdownTemplate: StoryFn<MultiselectComponent> = (args: MultiselectCompon
   `,
 });
 
-export const Dropdown = DropdownTemplate.bind({});
-Dropdown.args = {
-  ...commonProps,
-};
-
-const AutocompleteDropdownTemplate: StoryFn<MultiselectComponent> = (
-  args: MultiselectComponent,
-) => ({
-  props: {
-    ...args,
-    defaultOptions,
-    selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<TestAnimalSound[] | null>(
-      null,
-      FudisValidators.minLength(2, 'Pick at least two pets'),
-    ),
-    groupedMockData,
-  },
-  template: html`
-    <fudis-multiselect
-      [size]="size"
-      [placeholder]="placeholder"
-      [control]="control"
-      [variant]="'autocompleteDropdown'"
-      [label]="label"
-      [helpText]="helpText"
-      [disabled]="disabled"
-      (selectionUpdate)="selectionUpdate($event)"
-      [showSelectionChips]="showSelectionChips"
-      [selectionClearButton]="selectionClearButton"
-      [autocompleteHelpText]="autocompleteHelpText"
-    >
-      <ng-template fudisContent type="select-options">
-        <fudis-multiselect-option
-          *ngFor="let option of defaultOptions"
-          [data]="option"
-        ></fudis-multiselect-option>
-        <fudis-multiselect-group *ngFor="let group of groupedMockData" [label]="group.country">
-          <fudis-multiselect-option
-            *ngFor="let groupedOption of group.options"
-            [data]="groupedOption"
-          ></fudis-multiselect-option>
-        </fudis-multiselect-group>
-      </ng-template>
-    </fudis-multiselect>
-  `,
-});
-
-export const AutocompleteDropdown = AutocompleteDropdownTemplate.bind({});
-AutocompleteDropdown.args = {
-  ...commonProps,
-};
-
-const AutocompleteTypeTemplate: StoryFn<MultiselectComponent> = (args: MultiselectComponent) => ({
-  props: {
-    ...args,
-    defaultOptions,
-    selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<TestAnimalSound[] | null>(
-      null,
-      FudisValidators.minLength(2, 'Pick at least two pets'),
-    ),
-    groupedMockData,
-  },
-  template: html`
-    <fudis-multiselect
-      [size]="size"
-      [placeholder]="placeholder"
-      [control]="control"
-      [variant]="'autocompleteType'"
-      [label]="label"
-      [helpText]="helpText"
-      [disabled]="disabled"
-      (selectionUpdate)="selectionUpdate($event)"
-      [showSelectionChips]="showSelectionChips"
-      [selectionClearButton]="selectionClearButton"
-      [autocompleteHelpText]="autocompleteHelpText"
-    >
-      <ng-template fudisContent type="select-options">
-        <fudis-multiselect-option
-          *ngFor="let option of defaultOptions"
-          [data]="option"
-        ></fudis-multiselect-option>
-        <fudis-multiselect-group *ngFor="let group of groupedMockData" [label]="group.country">
-          <fudis-multiselect-option
-            *ngFor="let groupedOption of group.options"
-            [data]="groupedOption"
-          ></fudis-multiselect-option>
-        </fudis-multiselect-group>
-      </ng-template>
-    </fudis-multiselect>
-  `,
-});
-
-export const AutocompleteType = AutocompleteTypeTemplate.bind({});
-AutocompleteType.args = {
+export const Example = ExampleTemplate.bind({});
+Example.args = {
   ...commonProps,
 };

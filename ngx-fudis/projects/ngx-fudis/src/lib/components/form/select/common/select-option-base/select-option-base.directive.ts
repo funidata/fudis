@@ -30,6 +30,8 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
 
       if (this._parent.variant !== 'dropdown') {
         this._isOptionVisible(filterText);
+      } else {
+        this._isOptionVisible('');
       }
     });
   }

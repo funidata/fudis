@@ -75,6 +75,7 @@ test("Dropdown with Clear Button and dropdown keyboard interactions", async ({ p
   await page.keyboard.press("ArrowUp");
   await page.keyboard.press("Enter");
   await expect(page.getByTestId("fudis-select-1-dropdown")).not.toBeVisible();
+  await expect(page.getByTestId("fudis-select-2").getByText("Dolphin, common")).toBeVisible();
   await expect(page).toHaveScreenshot("A-12-enter-select-dolphin.png", {
     fullPage: true,
   });
@@ -168,7 +169,8 @@ test("Dropdowns and Autocompletes", async ({ page }) => {
     fullPage: true,
   });
   await page.keyboard.press("KeyI");
-  await expect(page.getByText("Showing 47 results")).toBeVisible();
+
+  await expect(page.getByTestId("fudis-body-text-7").getByText("Showing 47 results")).toBeVisible();
   await page.keyboard.press("KeyN");
   await expect(page.getByText("Showing 18 results")).toBeVisible();
   await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(6);

@@ -4,7 +4,6 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
-  HostBinding,
   HostListener,
   Inject,
   Input,
@@ -84,11 +83,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   @ContentChild(ContentDirective) protected _content: ContentDirective;
 
   /**
-   * Binding CSS class for component wrapper
-   */
-  @HostBinding('class') protected _classes = 'fudis-select-host';
-
-  /**
    * Set dropdown size (should follow the given input element size)
    */
   @Input() size: FudisInputSize | 'xs' = 'lg';
@@ -160,6 +154,9 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    */
   public focusSelector: string = '.fudis-select-option__focusable';
 
+  /**
+   * Focus try counter
+   */
   private _focusTryCounter: number = 0;
 
   /**
@@ -197,8 +194,14 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    */
   protected _visibleOptions: string[] = [];
 
+  /**
+   * Array to store visible options while options are loading.
+   */
   private _visibleOptionsTemp: string[] = [];
 
+  /**
+   * Store latest option loaded
+   */
   private _latestVisibleOption: string;
 
   /**
@@ -284,6 +287,14 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
 
         this._controlValueChangedInternally = false;
       });
+    }
+
+    if (
+      changes.variant?.currentValue !== changes.variant?.previousValue &&
+      changes.variant?.currentValue === 'dropdown' &&
+      !changes.variant.firstChange
+    ) {
+      this._filterTextUpdate('');
     }
   }
 
