@@ -13,7 +13,7 @@ import { TooltipApiDirective } from '../../tooltip/tooltip-api.directive';
 import { FudisIdComponent } from '../../../types/id';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FormControl } from '@angular/forms';
-import { hasRequiredValidator } from '../../../utilities/form/getValidators';
+import { getMaxLengthFromValidator, hasRequiredValidator } from '../../../utilities/form/getValidators';
 
 @Directive({
   selector: '[fudisInputBase]',
@@ -103,6 +103,8 @@ export class InputBaseDirective extends TooltipApiDirective {
    */
   protected _required: boolean = false;
 
+  protected _maxLength: number | undefined = undefined;
+
   protected _destroyRef = inject(DestroyRef);
 
   /**
@@ -154,7 +156,7 @@ export class InputBaseDirective extends TooltipApiDirective {
 
   protected _initialCheck(): void {
     this._required = hasRequiredValidator(this.control);
-
+    this._maxLength = getMaxLengthFromValidator(this.control);
   }
 
   protected _applyControlUpdateCheck(): void {
@@ -162,7 +164,6 @@ export class InputBaseDirective extends TooltipApiDirective {
     this.control.updateValueAndValidity = () => {
       originalUpdateValueAndValidity.apply(this.control);
       this._initialCheck();     
-      // this._maxLength = getMaxLengthFromValidator(this.control);
     };
   }
 }

@@ -58,7 +58,7 @@ export class TextInputComponent
   /**
    * Max length for HTML attribute and for character indicator in guidance
    */
-  protected _maxLength: number | undefined = undefined;
+  protected override _maxLength: number | undefined = undefined;
 
   /**
    * Min length for HTML attribute
@@ -95,7 +95,6 @@ export class TextInputComponent
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       this._initialCheck();    
       this._applyControlUpdateCheck();
-      // this._maxLength = getMaxLengthFromValidator(this.control);
     }
 
     if (changes.type?.currentValue === 'number') {

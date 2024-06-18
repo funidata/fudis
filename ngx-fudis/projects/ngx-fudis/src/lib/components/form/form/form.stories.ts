@@ -359,8 +359,6 @@ class ExampleWithMultipleFormsComponent {
                           [label]="'Contact email'"
                           [helpText]="'So that students can ask for more time on their homework.'"
                         />
-                        <fudis-button [label]="'Test update value & validity'" (handleClick)="handleUpdate()"></fudis-button>
-                        <fudis-button [label]="'Remove validator'" (handleClick)="handleRemove()"></fudis-button>
                       </fudis-grid>
                     </ng-template>
                   </fudis-fieldset>
@@ -394,7 +392,6 @@ class FormContentExampleComponent implements OnInit {
     private _translationService: FudisTranslationService,
     private _focusService: FudisFocusService,
   ) {
-    this._requiredValidatorInstance = FudisValidators.required("Missing teacher's name who is responsible for this course.")
     this.formExample = new FormGroup({
       // Expose when InputWithLanguageOptions is exposed to public API
       // name: new FormGroup(
@@ -432,7 +429,7 @@ class FormContentExampleComponent implements OnInit {
       ),
       teacher: new FormControl(
         null,
-        this._requiredValidatorInstance,
+        FudisValidators.required("Missing teacher's name who is responsible for this course.")
       ),
       email: new FormControl(null, [
         FudisValidators.required('Missing email contact.'),
@@ -501,10 +498,120 @@ class FormContentExampleComponent implements OnInit {
 
   private _closed: boolean = true;
 
+  ngOnInit(): void {
+    this._focusService.addToIgnoreList('unique-input-3');
+  }
+
+  handleClosedOutput(value: boolean): void {
+    this._closed = value;
+  }
+
+  /* TODO: Lisää tähän funktio validaattorin lisäykseen ja poistoon */
+}
+@Component({
+  selector: 'example-dynamic-validator',
+  template: `
+    <fudis-form
+      [marginTop]="'xl'"
+      [badge]="badge"
+      [badgeText]="badgeText"
+      [level]="level"
+      [title]="title"
+      [titleVariant]="titleVariant"
+      [helpText]="helpText"
+      [errorSummaryHelpText]="errorSummaryHelpText"
+      [errorSummaryVisible]="errorSummaryVisible"
+    >
+      <ng-template fudisActions [type]="'form'">
+        <fudis-button fudisFormSubmit [formValid]="formExample.valid" [label]="'Submit'" />
+      </ng-template>
+      <ng-template fudisContent [type]="'form'">
+        <fudis-section [title]="'Main section'" [errorSummaryBreadcrumb]="true">
+          <ng-template fudisContent [type]="'section'">
+            <fudis-fieldset
+              [label]="'Tearcher info'"
+              [tooltip]="'Quite many fields are required.'"
+              [id]="fieldsetId"
+            >
+              <ng-template fudisContent [type]="'fieldset'">
+                <fudis-grid [columns]="{ lg: 'inputLg inputLg' }">
+                  <ng-container *ngFor="let control of formExample.controls | keyvalue; let index = index">
+                    <fudis-text-input
+                      [initialFocus]="true"
+                      [id]="'unique-input-{{index}}'"
+                      [control]="$any(formExample).controls[control.key]"
+                      [label]="control.key + ' Validator'"
+                      [helpText]="'Someone has to be responsible for this.'"
+                    >
+                    </fudis-text-input>
+                    <fudis-grid-item>
+                      <fudis-button [label]="'Test update value & validity'" (handleClick)="handleUpdate(control.key)"></fudis-button>
+                      <fudis-button [label]="'Remove validator'" (handleClick)="handleRemove(control.key)"></fudis-button>
+                    </fudis-grid-item>
+                  </ng-container>
+                </fudis-grid>
+              </ng-template>
+            </fudis-fieldset>
+          </ng-template>
+        </fudis-section>
+      </ng-template>
+    </fudis-form>
+  `,
+})
+class DynamicValidatorExampleComponent implements OnInit {
+  constructor(
+    private _translationService: FudisTranslationService,
+    private _focusService: FudisFocusService,
+  ) {
+    this._requiredValidatorInstance = FudisValidators.required("Missing required name who is responsible for this course.")
+    this._maxLengthValidatorInstance = FudisValidators.maxLength(this.maxLength, "Email should not be more than 20 characters.")
+    this.formExample = new FormGroup({
+      // courseBooks: new FormGroup(
+      //   {
+      //     first: new FormControl(null),
+      //     second: new FormControl(null),
+      //     third: new FormControl(null),
+      //   },
+      //   [
+      //     FudisGroupValidators.min({ value: 1, message: new BehaviorSubject('No book selected.') }),
+      //     FudisGroupValidators.max({ value: 2, message: new BehaviorSubject('Too many selected.') }),
+      //   ],
+      // ),
+      required: new FormControl(
+        null,
+        this._requiredValidatorInstance,
+      ),
+      email: new FormControl(null, [
+        this._maxLengthValidatorInstance,
+      ]),
+      // importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
+    });
+  }
+
+  @Input() title: string;
+  @Input() titleVariant: FudisHeadingVariant;
+  @Input() level: FudisHeadingLevel;
+  @Input() helpText: string;
+  @Input() badge: FudisBadgeVariant;
+  @Input() badgeText: string;
+  @Input() errorSummaryHelpText: string;
+  @Input() errorSummaryVisible: boolean;
+
+  releaseDate: number = new Date(1991, 4, 1).getTime();
+  firstLoad: boolean = true;
+  fieldsetId = 'first-fieldset-id';
+
+  formExample: FormGroup;
+
+  maxLength = 20;
+
+  private _closed: boolean = true;
+
     /**
    * Instance of required validator
    */
     private _requiredValidatorInstance: FudisValidatorFn | null;
+    private _maxLengthValidatorInstance: FudisValidatorFn | null;
 
   ngOnInit(): void {
     this._focusService.addToIgnoreList('unique-input-3');
@@ -514,21 +621,31 @@ class FormContentExampleComponent implements OnInit {
     this._closed = value;
   }
 
-  handleUpdate(): void {
-    this._requiredValidatorInstance = FudisValidators.required("Missing teacher's name who is responsible for this course.");
-    this.formExample.controls['teacher'].addValidators(this._requiredValidatorInstance);
-    this.formExample.controls['teacher'].updateValueAndValidity();
-  }
-
-  handleRemove(): void {
-    if(this._requiredValidatorInstance) {
-      this.formExample.controls['teacher'].removeValidators(this._requiredValidatorInstance);
-      this.formExample.controls['teacher'].updateValueAndValidity();
-      this._requiredValidatorInstance = null;
+  handleUpdate(controlKey: string): void {
+    if(controlKey === 'required') {
+      this._requiredValidatorInstance = FudisValidators.required('Missing required name who is responsible for this course.');
+      this.formExample.controls['required'].addValidators(this._requiredValidatorInstance);
+      this.formExample.controls['required'].updateValueAndValidity();
+    }
+    if(controlKey === 'email') {
+      this._maxLengthValidatorInstance = FudisValidators.maxLength(this.maxLength, 'Email should not be more than 20 characters.');
+      this.formExample.controls['email'].addValidators(this._maxLengthValidatorInstance);
+      this.formExample.controls['email'].updateValueAndValidity();
     }
   }
 
-  /* TODO: Lisää tähän funktio validaattorin lisäykseen ja poistoon */
+  handleRemove(controlKey: string): void {
+    if(this._requiredValidatorInstance && controlKey === 'required') {
+      this.formExample.controls['required'].removeValidators(this._requiredValidatorInstance);
+      this.formExample.controls['required'].updateValueAndValidity();
+      this._requiredValidatorInstance = null;
+    }
+    if(this._maxLengthValidatorInstance && controlKey === 'email') {
+      this.formExample.controls['email'].removeValidators(this._maxLengthValidatorInstance);
+      this.formExample.controls['email'].updateValueAndValidity();
+      this._maxLengthValidatorInstance = null;
+    }
+  }
 }
 
 export default {
@@ -536,7 +653,7 @@ export default {
   component: FormComponent,
   decorators: [
     moduleMetadata({
-      declarations: [FormContentExampleComponent, ExampleWithMultipleFormsComponent],
+      declarations: [FormContentExampleComponent, ExampleWithMultipleFormsComponent, DynamicValidatorExampleComponent],
       imports: [ReactiveFormsModule, RouterModule],
     }),
     applicationConfig({
@@ -604,6 +721,38 @@ Example.args = {
 };
 
 Example.parameters = {
+  controls: {
+    exclude: formExclude,
+  },
+};
+
+export const DynamicExample: StoryFn<FormComponent> = (args: FormComponent) => ({
+  props: args,
+  template: html` <example-dynamic-validator
+    [title]="title"
+    [titleVariant]="titleVariant"
+    [level]="level"
+    [helpText]="helpText"
+    [badge]="badge"
+    [badgeText]="badgeText"
+    [errorSummaryHelpText]="errorSummaryHelpText"
+    [errorSummaryVisible]="errorSummaryVisible"
+  />`,
+});
+
+DynamicExample.args = {
+  title: 'Example Form Heading',
+  titleVariant: 'xl',
+  level: 1,
+  helpText: 'This is an additional help text to give user more information about the form',
+  badge: 'primary',
+  badgeText: 'Example',
+  errorSummaryHelpText:
+    'There are errors in this form. Please address these before trying to submit again.',
+  errorSummaryVisible: false,
+};
+
+DynamicExample.parameters = {
   controls: {
     exclude: formExclude,
   },
