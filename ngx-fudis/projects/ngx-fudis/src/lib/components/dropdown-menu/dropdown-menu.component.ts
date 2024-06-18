@@ -2,7 +2,6 @@ import {
   AfterContentInit,
   ChangeDetectionStrategy,
   Component,
-  ContentChild,
   ElementRef,
   Host,
   HostListener,
@@ -17,7 +16,6 @@ import {
 import { FudisIdService } from '../../services/id/id.service';
 import { DropdownBaseDirective } from '../../directives/form/dropdown-base/dropdown-base.directive';
 import { ButtonComponent } from '../button/button.component';
-import { ContentDirective } from '../../directives/content-projection/content/content.directive';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
@@ -41,11 +39,6 @@ export class DropdownMenuComponent
   }
 
   /**
-   * Template reference for Dropdown Menu's content
-   */
-  @ContentChild(ContentDirective) protected _content: ContentDirective;
-
-  /**
    * Template reference for the Dropdown Menu wrapper element
    */
   @ViewChild('dropdownMenuElement') dropdownMenuElement: ElementRef<HTMLElement>;
@@ -54,6 +47,8 @@ export class DropdownMenuComponent
    * Dropdown-menu is aligned to open left side of the button by default but can be aligned to open right side if necessary
    */
   @Input() align: 'left' | 'right' | 'center' = 'left';
+
+  protected _dropdownOpen: boolean = true;
 
   private _focusedOption: string | null = null;
 
@@ -108,6 +103,11 @@ export class DropdownMenuComponent
         }
       }, 50);
     });
+  }
+
+  public closeDropdownMenu(): void {
+    this._parentButton.closeMenu();
+    this._dropdownOpen = false;
   }
 
   @HostListener('mousedown', ['$event.target'])

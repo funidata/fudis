@@ -17,8 +17,7 @@ export class ContentDirective {
     | 'form'
     | 'fieldset'
     | 'section'
-    | 'select-options'
-    | 'dropdown-menu-items';
+    | 'select-options';
 }
 
 /**

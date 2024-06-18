@@ -123,10 +123,8 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective impleme
 
       this._executeAction(selectedOption);
 
-      this._parentDropdownMenu.open = false;
+      this._parentDropdownMenu.closeDropdownMenu();
     }
-
-    return;
   }
 
   /**

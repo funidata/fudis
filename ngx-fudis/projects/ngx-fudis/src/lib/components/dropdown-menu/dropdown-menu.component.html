@@ -3,9 +3,8 @@
   class="fudis-dropdown-menu fudis-dropdown-menu__{{ align }} fudis-dropdown-menu__{{ size }}"
   [attr.id]="id"
   [attr.role]="'menu'"
+  [attr.aria-expanded]="_dropdownOpen"
   [style.max-width]="_maxWidth"
 >
-  <ng-container *ngIf="_content?.type === 'dropdown-menu-items'">
-    <ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>
-  </ng-container>
+  <ng-content select="fudis-dropdown-menu-item"></ng-content>
 </div>
