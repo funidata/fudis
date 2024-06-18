@@ -4,10 +4,16 @@ import { importProvidersFrom } from '@angular/core';
 import { DropdownMenuComponent } from './dropdown-menu.component';
 import docs from './dropdown-menu-docs.mdx';
 import { dropdownMenuExclude } from '../../utilities/storybook';
+import { defaultMenuItems, groupedMockData } from '../form/select/common/mock_data';
 
 export default {
   title: 'Components/Dropdown Menu',
   component: DropdownMenuComponent,
+  decorators: [
+    applicationConfig({
+      providers: [importProvidersFrom(BrowserAnimationsModule)],
+    }),
+  ],
   parameters: {
     docs: {
       page: docs,
@@ -16,21 +22,15 @@ export default {
       exclude: dropdownMenuExclude,
     },
   },
-  decorators: [
-    applicationConfig({
-      providers: [importProvidersFrom(BrowserAnimationsModule)],
-    }),
-  ],
-  argTypes: {},
 } as Meta;
 
 const html = String.raw;
 
 const Template: StoryFn = (args) => ({
-  props: args,
+  props: { ...args, groupedMockData, defaultMenuItems },
   template: html` <fudis-grid [columns]="2">
     <fudis-grid-item>
-      <fudis-heading [level]="4">Align dropdown to right</fudis-heading>
+      <fudis-heading [level]="4">Align to right, size 'md'</fudis-heading>
       <fudis-button
         [label]="'Menu'"
         [labelHidden]="true"
@@ -39,24 +39,16 @@ const Template: StoryFn = (args) => ({
         [icon]="'three-dots'"
         [asMenuButton]="true"
       >
-        <fudis-dropdown-menu [align]="right">
-          <fudis-dropdown-menu-item [label]="'Item 1'"></fudis-dropdown-menu-item>
-          <fudis-dropdown-menu-item
-            [label]="'Item 22'"
-            [disabled]="true"
-          ></fudis-dropdown-menu-item>
-          <fudis-dropdown-menu-item [label]="'Item 23'"></fudis-dropdown-menu-item>
-          <fudis-dropdown-menu-item
-            [label]="'Item 45 with very long text so no one really bothers to even read it'"
-          ></fudis-dropdown-menu-item>
-          <fudis-dropdown-menu-item [label]="'Item 100'"></fudis-dropdown-menu-item>
-          <fudis-dropdown-menu-item [label]="'Item 2200250'"></fudis-dropdown-menu-item>
-          <fudis-dropdown-menu-item [label]="'Item 878787878571'"></fudis-dropdown-menu-item>
+        <fudis-dropdown-menu [align]="'right'" [size]="'md'">
+          <ng-template fudisContent [type]="'dropdown-menu-items'">
+            <fudis-dropdown-menu-item *ngFor="let item of defaultMenuItems" [menuItemData]="item">
+            </fudis-dropdown-menu-item>
+          </ng-template>
         </fudis-dropdown-menu>
       </fudis-button>
     </fudis-grid-item>
     <fudis-grid-item>
-      <fudis-heading [level]="4">Align dropdown to left (default)</fudis-heading>
+      <fudis-heading [level]="4">Align to left (default), size 'lg'</fudis-heading>
       <fudis-button
         [label]="'Menu'"
         [labelHidden]="true"
@@ -66,18 +58,10 @@ const Template: StoryFn = (args) => ({
         [asMenuButton]="true"
       >
         <fudis-dropdown-menu>
-          <fudis-dropdown-menu-item [label]="'Item 1'"></fudis-dropdown-menu-item>
-          <fudis-dropdown-menu-item
-            [label]="'Item 22'"
-            [disabled]="true"
-          ></fudis-dropdown-menu-item>
-          <fudis-dropdown-menu-item [label]="'Item 23'"></fudis-dropdown-menu-item>
-          <fudis-dropdown-menu-item
-            [label]="'Item 45 with very long text so no one really bothers to even read it'"
-          ></fudis-dropdown-menu-item>
-          <fudis-dropdown-menu-item [label]="'Item 100'"></fudis-dropdown-menu-item>
-          <fudis-dropdown-menu-item [label]="'Item 2200250'"></fudis-dropdown-menu-item>
-          <fudis-dropdown-menu-item [label]="'Item 878787878571'"></fudis-dropdown-menu-item>
+          <ng-template fudisContent [type]="'dropdown-menu-items'">
+            <fudis-dropdown-menu-item *ngFor="let item of defaultMenuItems" [menuItemData]="item">
+            </fudis-dropdown-menu-item>
+          </ng-template>
         </fudis-dropdown-menu>
       </fudis-button>
     </fudis-grid-item>

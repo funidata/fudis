@@ -2,16 +2,15 @@
   #dropdownItem
   class="fudis-dropdown-menu-item fudis-dropdown-menu-item__focusable"
   [attr.role]="'menuitem'"
-  [attr.id]="_id"
-  [attr.aria-disabled]="disabled"
-  [class.fudis-dropdown-menu-item--disabled]="disabled"
+  [attr.aria-disabled]="menuItemData.disabled"
+  [class.fudis-dropdown-menu-item--disabled]="menuItemData.disabled"
   (keydown)="_handleKeyDown($event)"
-  (blur)="_handleButtonBlur($event)"
-  (click)="_closeDropdown($event)"
+  (blur)="_handleMenuItemBlur($event)"
+  (click)="!menuItemData.disabled && _clickOption($event)"
 >
-  {{ label }}
+  {{ menuItemData.label }}
   <span
-    *ngIf="disabled"
+    *ngIf="menuItemData.disabled"
     class="fudis-dropdown-menu-item__label fudis-dropdown-menu-item__label__disabled-text"
   >
     ({{ translationItemDisabledText | async }})</span

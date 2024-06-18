@@ -1,11 +1,13 @@
-<div
-  [attr.id]="id"
-  class="fudis-dropdown-menu fudis-dropdown-menu__{{ align }} fudis-dropdown-menu__{{ size }}"
-  #dropdownElement
-  [class.fudis-dropdown-menu__multiselect]="multiselect"
-  [attr.aria-multiselectable]="multiselect ? true : null"
-  [attr.role]="multiselect ? 'listbox' : 'menu'"
-  [style.max-width]="_maxWidth"
+<fudis-select-dropdown-menu
+  *ngIf="_classList | async as classes"
+  #dropdownMenuElement
+  [parentId]="id"
+  [open]="dropdownOpen"
+  [role]="'menu'"
+  [maxWidth]="maxWidth"
+  [classes]="classes"
 >
-  <ng-content></ng-content>
-</div>
+  <ng-container *ngIf="_content?.type === 'dropdown-menu-items'">
+    <ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>
+  </ng-container>
+</fudis-select-dropdown-menu>
