@@ -1,13 +1,11 @@
-<fudis-select-dropdown-menu
-  *ngIf="_classList | async as classes"
+<div
   #dropdownMenuElement
-  [parentId]="id"
-  [open]="dropdownOpen"
-  [role]="'menu'"
-  [maxWidth]="maxWidth"
-  [classes]="classes"
+  class="fudis-dropdown-menu fudis-dropdown-menu__{{ align }} fudis-dropdown-menu__{{ size }}"
+  [attr.id]="id"
+  [attr.role]="'menu'"
+  [style.max-width]="_maxWidth"
 >
   <ng-container *ngIf="_content?.type === 'dropdown-menu-items'">
     <ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>
   </ng-container>
-</fudis-select-dropdown-menu>
+</div>

@@ -10,6 +10,7 @@ import {
   effect,
   Output,
   EventEmitter,
+  Input,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { DropdownMenuComponent } from '../dropdown-menu.component';
@@ -17,9 +18,8 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { ButtonComponent } from '../../button/button.component';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { BehaviorSubject } from 'rxjs';
-import { SelectOptionBaseDirective } from '../../form/select/common/select-option-base/select-option-base.directive';
-import { SelectGroupComponent } from '../../form/select/common/select-group/select-group.component';
-import { FudisDropdownMenuItem } from '../../../types/forms';
+import { FudisDropdownMenuItem } from '../../../types/miscellaneous';
+import { DropdownItemBaseDirective } from '../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
 
 @Component({
   selector: 'fudis-dropdown-menu-item',
@@ -27,18 +27,15 @@ import { FudisDropdownMenuItem } from '../../../types/forms';
   styleUrls: ['./dropdown-menu-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DropdownMenuItemComponent extends SelectOptionBaseDirective implements OnInit {
+export class DropdownMenuItemComponent extends DropdownItemBaseDirective implements OnInit {
   constructor(
     private _idService: FudisIdService,
     private _translationService: FudisTranslationService,
     @Host() protected _parentDropdownMenu: DropdownMenuComponent,
     @Inject(DOCUMENT) _document: Document,
     @Host() @Optional() protected _parentButton: ButtonComponent,
-    @Host() @Optional() _parentGroup: SelectGroupComponent,
   ) {
-    super(_document, _parentGroup);
-
-    // this._dropdownMenuParent = _parentDropdownMenu;
+    super(_document);
 
     effect(() => {
       const translations = _translationService.getTranslations()();
@@ -52,12 +49,19 @@ export class DropdownMenuItemComponent extends SelectOptionBaseDirective impleme
    */
   @ViewChild('dropdownItem') dropdownItem: ElementRef<HTMLButtonElement>;
 
+  /**
+   * Dropdown menu item data
+   */
+  @Input({ required: true }) data: FudisDropdownMenuItem<object>;
+
   @Output() selectionUpdate = new EventEmitter<FudisDropdownMenuItem<object> | null>();
 
   /**
    * Internal translated text for disabled dropdown menu item
    */
   public translationItemDisabledText = new BehaviorSubject<string>('');
+
+  private _optionFocused: boolean;
 
   ngOnInit(): void {
     this._id = this._idService.getNewChildId('dropdown-menu', this._parentDropdownMenu.id);
@@ -76,7 +80,7 @@ export class DropdownMenuItemComponent extends SelectOptionBaseDirective impleme
    */
   protected _handleKeyDown(event: KeyboardEvent) {
     if (event.key === 'Enter' || event.key === ' ') {
-      if (this.menuItemData.disabled) {
+      if (this.data.disabled) {
         event.preventDefault();
         return;
       } else {
@@ -92,33 +96,25 @@ export class DropdownMenuItemComponent extends SelectOptionBaseDirective impleme
    * Handle blur event
    */
   protected _handleMenuItemBlur(event: FocusEvent): void {
+    this._parentDropdownMenu.setFocusedOption(this._id, 'remove', event);
+    this._optionFocused = false;
+  }
 
-    // if (!document.activeElement?.classList.contains('fudis-dropdown-menu-item__focusable')) {
-    //   console.log(document.activeElement);
-    //   this._parentDropdownMenu.open = false;
-    //   this.handleBlur.emit(event);
-    // } else {
-    //   this._parentDropdownMenu.open = true;
-    // }
-
-    const closeDropdown = this._focusedOutFromComponent(
-      event,
-      this.dropdownItem,
-      'fudis-dropdown-menu-item__focusable',
-    );
-
-    if (closeDropdown) {
-      this._parentDropdownMenu.open = false;
-    }
+  /**
+   * Handle focus
+   */
+  protected _handleMenuItemFocus(): void {
+    this._parentDropdownMenu.setFocusedOption(this._id, 'add');
+    this._optionFocused = true;
   }
 
   /**
    * Click handler for Dropdown Menu Item click
    */
-  protected override _clickOption(event: Event): void {
-    if (!this.menuItemData.disabled) {
+  protected _clickOption(event: Event): void {
+    if (!this.data.disabled) {
       const selectedOption: FudisDropdownMenuItem<object> = {
-        ...this.menuItemData,
+        ...this.data,
         fudisGeneratedHtmlId: this._id,
       };
 

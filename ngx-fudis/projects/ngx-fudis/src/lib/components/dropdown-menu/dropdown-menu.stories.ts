@@ -41,7 +41,7 @@ const Template: StoryFn = (args) => ({
       >
         <fudis-dropdown-menu [align]="'right'" [size]="'md'">
           <ng-template fudisContent [type]="'dropdown-menu-items'">
-            <fudis-dropdown-menu-item *ngFor="let item of defaultMenuItems" [menuItemData]="item">
+            <fudis-dropdown-menu-item *ngFor="let item of defaultMenuItems" [data]="item">
             </fudis-dropdown-menu-item>
           </ng-template>
         </fudis-dropdown-menu>
@@ -59,7 +59,7 @@ const Template: StoryFn = (args) => ({
       >
         <fudis-dropdown-menu>
           <ng-template fudisContent [type]="'dropdown-menu-items'">
-            <fudis-dropdown-menu-item *ngFor="let item of defaultMenuItems" [menuItemData]="item">
+            <fudis-dropdown-menu-item *ngFor="let item of defaultMenuItems" [data]="item">
             </fudis-dropdown-menu-item>
           </ng-template>
         </fudis-dropdown-menu>

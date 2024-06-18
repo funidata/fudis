@@ -1,4 +1,5 @@
-import { FudisDropdownMenuItem, FudisSelectOption } from '../../../../types/forms';
+import { FudisSelectOption } from '../../../../types/forms';
+import { FudisDropdownMenuItem } from '../../../../types/miscellaneous';
 
 function writeConsole(item: string): void {
   console.log(item);
@@ -34,9 +35,17 @@ export const defaultOptions: FudisSelectOption<TestAnimalSound>[] = [
 ];
 
 export const defaultMenuItems: FudisDropdownMenuItem<TestMenuItemActions>[] = [
-  { label: 'Click here to console.log "hey"', disabled: false, callback: () => writeConsole('hey') },
+  {
+    label: 'Click here to console.log "hey"',
+    disabled: false,
+    callback: () => writeConsole('hey'),
+  },
   { label: 'Click here to console.log "ho"', disabled: true, callback: () => console.log('ho') },
-  { label: 'Click here to console.log "lets"', disabled: false, callback: () => console.log('lets') },
+  {
+    label: 'Click here to console.log "lets"',
+    disabled: false,
+    callback: () => console.log('lets'),
+  },
   { label: 'Click here to console.log "go"', disabled: false, callback: () => console.log('go') },
 ];
 

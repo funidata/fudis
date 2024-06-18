@@ -81,12 +81,12 @@
       </div>
     </div>
     <fudis-select-dropdown
-      *ngIf="_optionsLoadedOnce && (_classList | async) as classes"
+      *ngIf="_optionsLoadedOnce"
       #dropdownRef
       [open]="_dropdownOpen"
       [multiselect]="true"
       [parentId]="id"
-      [classes]="classes"
+      [size]="size"
     >
       <ng-container *ngIf="_content?.type === 'select-options'">
         <ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>

@@ -3,9 +3,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
+  ElementRef,
   Host,
   HostListener,
-  OnChanges,
+  Inject,
+  Input,
   OnInit,
   Optional,
   ViewChild,
@@ -16,9 +18,7 @@ import { FudisIdService } from '../../services/id/id.service';
 import { DropdownBaseDirective } from '../../directives/form/dropdown-base/dropdown-base.directive';
 import { ButtonComponent } from '../button/button.component';
 import { ContentDirective } from '../../directives/content-projection/content/content.directive';
-import { SelectDropdownComponent } from '../form/select/common/select-dropdown/select-dropdown.component';
-import { BehaviorSubject } from 'rxjs';
-import { FudisComponentChanges } from '../../types/miscellaneous';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'fudis-dropdown-menu',
@@ -29,10 +29,12 @@ import { FudisComponentChanges } from '../../types/miscellaneous';
 })
 export class DropdownMenuComponent
   extends DropdownBaseDirective
-  implements OnInit, OnChanges, AfterContentInit
+  implements OnInit, AfterContentInit
 {
+  private _mouseDownTargetInsideComponent: boolean;
   constructor(
     private _idService: FudisIdService,
+    @Inject(DOCUMENT) private _document: Document,
     @Host() @Optional() private _parentButton: ButtonComponent,
   ) {
     super();
@@ -46,19 +48,72 @@ export class DropdownMenuComponent
   /**
    * Template reference for the Dropdown Menu wrapper element
    */
-  @ViewChild(SelectDropdownComponent) dropdownMenuElement: SelectDropdownComponent;
+  @ViewChild('dropdownMenuElement') dropdownMenuElement: ElementRef<HTMLElement>;
 
   /**
-   * Getter for dropdown open status
+   * Dropdown-menu is aligned to open left side of the button by default but can be aligned to open right side if necessary
    */
-  get dropdownOpen() {
-    return this._parentButton.dropdownOpen;
+  @Input() align: 'left' | 'right' | 'center' = 'left';
+
+  private _focusedOption: string | null = null;
+
+  /**
+   * Add or remove currently focused option. Called from DropdownMenuItem.
+   */
+  public setFocusedOption(id: string, type: 'add' | 'remove', event?: FocusEvent): void {
+    if (type === 'add') {
+      this._focusedOption = id;
+    } else if (event) {
+      this._focusedOption = null;
+      this._componentFocused(event).then((value) => {
+        if (!value) {
+          this._parentButton.closeMenu();
+        }
+      });
+    }
   }
 
   /**
-   * CSS classlist for Dropdown Menu
+   * Check if focus is inside the Dropdown Menu component
+   * @param event focus event
+   * @returns boolean
    */
-  protected _classList = new BehaviorSubject<string[]>([]);
+  private _componentFocused(event: FocusEvent): Promise<boolean> {
+    return new Promise((resolve) => {
+      let counter = 0;
+
+      const nextTarget = event?.relatedTarget as HTMLElement;
+
+      const focusCheckInterval = setInterval(() => {
+        const focused =
+          !!this.dropdownMenuElement.nativeElement.contains(this._document.activeElement) ||
+          !!this.dropdownMenuElement.nativeElement.contains(nextTarget);
+
+        // If focus has moved to another element inside Dropdown Menu
+        if (focused) {
+          clearInterval(focusCheckInterval);
+          resolve(true);
+          // If focus target is null
+        } else if (!nextTarget) {
+          clearInterval(focusCheckInterval);
+          resolve(false);
+
+          // Increase counter, and try again. This is needed usually with click events as between previous element blur and next element focus click event is "somewhere else"
+        } else if (counter <= 100) {
+          counter = counter + 50;
+        } else {
+          // Else resolve boolean check after two tries, if any relevant element is focused
+          clearInterval(focusCheckInterval);
+          resolve(!!this._focusedOption);
+        }
+      }, 50);
+    });
+  }
+
+  @HostListener('mousedown', ['$event.target'])
+  private _handleMouseDown() {
+    this._mouseDownTargetInsideComponent = true;
+  }
 
   /**
    * Host Listener for dropdown's width, it needs to be wider than its Button parent
@@ -66,17 +121,16 @@ export class DropdownMenuComponent
   @HostListener('window:click', ['$event'])
   private _getMaxWidth(): void {
     const elementInViewWidth =
-      this.dropdownMenuElement?.dropdownElement?.nativeElement?.getBoundingClientRect()?.width;
+      this.dropdownMenuElement?.nativeElement?.getBoundingClientRect()?.width;
 
-    const elementInViewX =
-      this.dropdownMenuElement?.dropdownElement?.nativeElement?.getBoundingClientRect()?.x;
+    const elementInViewX = this.dropdownMenuElement?.nativeElement?.getBoundingClientRect()?.x;
 
     if (elementInViewX && elementInViewWidth && elementInViewWidth !== 0 && this.align === 'left') {
-      this.maxWidth = `${elementInViewWidth + elementInViewX}px`;
+      this._maxWidth = `${elementInViewWidth + elementInViewX}px`;
     } else if (window?.innerWidth && elementInViewX) {
-      this.maxWidth = `${window.innerWidth - elementInViewX}px`;
+      this._maxWidth = `${window.innerWidth - elementInViewX}px`;
     } else {
-      this.maxWidth = 'initial';
+      this._maxWidth = 'initial';
     }
   }
 
@@ -88,7 +142,7 @@ export class DropdownMenuComponent
     if (event.key === 'ArrowDown') {
       event.preventDefault();
 
-      const firstChildElement = this.dropdownMenuElement.dropdownElement.nativeElement.children[0];
+      const firstChildElement = this.dropdownMenuElement.nativeElement.children[0];
 
       // If focus is on the menu button, only then listen keydown and focus on the first child
       if (
@@ -107,43 +161,10 @@ export class DropdownMenuComponent
   }
 
   ngOnInit(): void {
-    this._classList.next(this._getClasses());
-
-    if (this.parentId) {
-      this.id = this.parentId + '-dropdown';
-      this._idService.addNewParentId('dropdown-menu', this.id);
-    } else {
-      this.id = this._idService.getNewParentId('dropdown-menu');
-
-      if (this._parentButton) {
-        this._parentButton.dropdownMenuId = this.id;
-      }
-    }
-  }
-
-  ngOnChanges(changes: FudisComponentChanges<DropdownMenuComponent>): void {
-    if (
-      changes.align?.currentValue !== changes.align?.previousValue ||
-      changes.size?.currentValue !== changes.size?.previousValue
-    ) {
-      this._classList.next(this._getClasses());
-    }
+    this.id = this._idService.getNewParentId('dropdown-menu');
   }
 
   ngAfterContentInit(): void {
     this._getMaxWidth();
-  }
-
-  /**
-   * Get CSS classes with correct align and size suffixes
-   */
-  private _getClasses(): string[] {
-    const cssClasses = [
-      'fudis-dropdown-menu',
-      `fudis-dropdown-menu__${this.align}`,
-      `fudis-dropdown-menu__${this.size}`,
-    ];
-
-    return cssClasses;
   }
 }

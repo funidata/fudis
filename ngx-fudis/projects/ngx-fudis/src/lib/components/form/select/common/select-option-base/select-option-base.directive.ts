@@ -12,9 +12,8 @@ import { DOCUMENT } from '@angular/common';
 import { DropdownItemBaseDirective } from '../../../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { SelectComponent } from '../../select/select.component';
 import { SelectGroupComponent } from '../select-group/select-group.component';
-import { FudisDropdownMenuItem, FudisSelectOption } from '../../../../../types/forms';
+import { FudisSelectOption } from '../../../../../types/forms';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
-// import { DropdownMenuComponent } from '../../../../dropdown-menu/dropdown-menu.component';
 
 @Directive({
   selector: '[fudisSelectOptionBase]',
@@ -27,12 +26,10 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
     super(_document);
 
     effect(() => {
-      if (this._parent) {
-        const filterText = this._parent.getAutocompleteFilterText()();
+      const filterText = this._parent.getAutocompleteFilterText()();
 
-        if (this._parent.variant !== 'dropdown') {
-          this._isOptionVisible(filterText);
-        }
+      if (this._parent.variant !== 'dropdown') {
+        this._isOptionVisible(filterText);
       }
     });
   }
@@ -47,12 +44,7 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
   /**
    * Select option data
    */
-  @Input() data: FudisSelectOption<object>;
-
-  /**
-   * Dropdown menu item data
-   */
-  @Input() menuItemData: FudisDropdownMenuItem<object>;
+  @Input({ required: true }) data: FudisSelectOption<object>;
 
   /**
    * State of option visibility
@@ -68,11 +60,6 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
    * Common parent and its properties for both Select and Multiselect
    */
   protected _parent: SelectComponent | MultiselectComponent;
-
-  /**
-   * Parent and its properties for Dropdown Menu
-   */
-  // protected _dropdownMenuParent: DropdownMenuComponent;
 
   /**
    * User focus handler

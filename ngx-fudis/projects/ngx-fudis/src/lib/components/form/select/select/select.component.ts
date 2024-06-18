@@ -20,7 +20,6 @@ import { SelectBaseDirective } from '../common/select-base/select-base.directive
 import { FudisSelectOption } from '../../../../types/forms';
 import { FormComponent } from '../../form/form.component';
 import { DOCUMENT } from '@angular/common';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'fudis-select',
@@ -51,15 +50,8 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
   @Output() override selectionUpdate: EventEmitter<FudisSelectOption<object> | null> =
     new EventEmitter<FudisSelectOption<object> | null>();
 
-  /**
-   * CSS class list for Select
-   */
-  protected _classList = new BehaviorSubject<string[]>([]);
-
   ngOnInit(): void {
     this._setParentId('select');
-
-    this._classList.next(this._getClasses());
 
     this._reloadErrorSummaryOnInit(this._parentForm?.errorSummaryVisible, this.control);
   }
@@ -117,14 +109,5 @@ export class SelectComponent extends SelectBaseDirective implements OnInit, Afte
       this.autocompleteRef.updateInputValue(currentLabel || '');
     }
     this._changeDetectorRef.detectChanges();
-  }
-
-  /**
-   * Get CSS classes associated with Select
-   */
-  private _getClasses(): string[] {
-    const cssClasses = ['fudis-select-dropdown', `fudis-input-size__${this.size}`];
-
-    return cssClasses;
   }
 }

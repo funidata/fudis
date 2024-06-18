@@ -82,11 +82,11 @@
       </div>
     </div>
     <fudis-select-dropdown
-      *ngIf="_optionsLoadedOnce && !disabled && !control.disabled && (_classList | async) as classes"
+      *ngIf="_optionsLoadedOnce && !disabled && !control.disabled"
       #dropdownRef
       [open]="_dropdownOpen"
       [parentId]="id"
-      [classes]="classes"
+      [size]="size"
       (handleBlur)="_dropdownBlur($event)"
       (handleFocus)="_dropdownFocus($event)"
     >
