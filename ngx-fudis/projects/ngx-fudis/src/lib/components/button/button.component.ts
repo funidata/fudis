@@ -203,6 +203,7 @@ export class ButtonComponent extends TooltipApiDirective implements OnChanges, O
   protected _handleMenuButtonKeyDown(event: KeyboardEvent) {
     if (event.key === 'Escape') {
       event.preventDefault();
+      event.stopPropagation();
       this.closeMenu();
     }
   }

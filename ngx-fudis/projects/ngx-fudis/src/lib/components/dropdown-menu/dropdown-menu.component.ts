@@ -135,10 +135,10 @@ export class DropdownMenuComponent
   }
 
   /**
-   * Host Listener for keydown events, especially Arrow Down and Escape from Menu Button
+   * Host Listener for keydown events, especially Arrow Down and Escape from Dropdown Menu
    */
   @HostListener('window:keydown', ['$event'])
-  private _handleDropdownMenuButtonKeyDown(event: KeyboardEvent) {
+  private _handleDropdownMenuKeyDown(event: KeyboardEvent) {
     if (event.key === 'ArrowDown') {
       event.preventDefault();
 
@@ -156,6 +156,7 @@ export class DropdownMenuComponent
 
     if (event.key === 'Escape') {
       event.preventDefault();
+      event.stopPropagation();
       this._parentButton.closeMenu();
     }
   }
