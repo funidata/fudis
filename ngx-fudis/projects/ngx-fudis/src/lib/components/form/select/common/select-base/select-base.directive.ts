@@ -23,7 +23,7 @@ import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
 import { InputBaseDirective } from '../../../../../directives/form/input-base/input-base.directive';
 import { FudisInputSize, FudisSelectVariant } from '../../../../../types/forms';
-import { setVisibleOptionsList } from '../selectUtilities';
+import { setVisibleOptionsList } from '../utilities/selectUtilities';
 import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 import { SelectAutocompleteComponent } from '../autocomplete/autocomplete.component';
 import { FudisComponentChanges } from '../../../../../types/miscellaneous';

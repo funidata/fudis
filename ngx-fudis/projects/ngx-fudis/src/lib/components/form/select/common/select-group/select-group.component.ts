@@ -1,7 +1,7 @@
 import { Component, Host, Input, Optional } from '@angular/core';
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { SelectComponent } from '../../select/select.component';
-import { setVisibleOptionsList } from '../selectUtilities';
+import { setVisibleOptionsList } from '../utilities/selectUtilities';
 import { MultiselectComponent } from '../../multiselect/multiselect.component';
 
 @Component({

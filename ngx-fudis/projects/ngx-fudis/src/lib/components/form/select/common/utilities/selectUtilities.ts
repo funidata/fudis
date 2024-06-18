@@ -1,4 +1,4 @@
-import { FudisSelectOption } from '../../../../types/forms';
+import { FudisSelectOption } from '../../../../../types/forms';
 
 /**
  * Function to loop array of options and join their labels to a single string
@@ -30,7 +30,7 @@ export const setVisibleOptionsList = (
   valueToUpdate: string,
   visible: boolean,
 ): string[] => {
-  const listToReturn = currentList;
+  const listToReturn = [...currentList];
 
   const valueExists = listToReturn.includes(valueToUpdate);
 

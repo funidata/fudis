@@ -20,7 +20,7 @@ import { FudisFocusService } from '../../../../services/focus/focus.service';
 import { FudisIdService } from '../../../../services/id/id.service';
 import { SelectBaseDirective } from '../common/select-base/select-base.directive';
 import { FudisSelectOption } from '../../../../types/forms';
-import { joinInputValues } from '../common/selectUtilities';
+import { joinInputValues } from '../common/utilities/selectUtilities';
 import { FormComponent } from '../../form/form.component';
 import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
@@ -189,7 +189,9 @@ export class MultiselectComponent extends SelectBaseDirective implements OnInit,
       this._sortedSelectedOptions = this._registeredOptions.sort(
         this._sortSelectedOptions(dropdown),
       );
+
       this._dropdownSelectionLabelText = joinInputValues(this._sortedSelectedOptions);
+
       this._changeDetectorRef.detectChanges();
     } else {
       this._sortedSelectedOptions = [];
