@@ -40,6 +40,19 @@ export interface FudisAlertElement extends FudisAlert {
   initialFocus: boolean;
 }
 
+export type FudisDropdownMenuItem<T extends object> = T & {
+  /** Visible label for the menu item */
+  label: string;
+  /** Is item disabled */
+  disabled?: boolean;
+  /** Action to execute when item is clicked */
+  callback?: () => void;
+  /** Fudis generates an id for each menu item. This is used in internal logic. */
+  fudisGeneratedHtmlId?: string;
+  /** To store additional data */
+  [key: string]: unknown;
+};
+
 export type FudisDialogSize = 'sm' | 'md' | 'lg' | 'xl' | 'initial';
 
 export type FudisExpandableType = 'regular' | 'lite';
