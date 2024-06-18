@@ -151,7 +151,9 @@ export const dialogExclude: RegExp = excludeRegex(['closeButtonPositionAbsolute'
  * Dropdown Menu
  */
 export const dropdownMenuExclude: RegExp = excludeRegex([
+  'hostClass',
   'classes',
+  'role',
   'id',
   'multiselect',
   'open',
@@ -161,7 +163,9 @@ export const dropdownMenuExclude: RegExp = excludeRegex([
   'handleFocus',
   'getMaxWidth',
   'dropdownElement',
+  'dropdownMenuElement',
   'align',
+  'maxWidth',
 ]);
 
 /**

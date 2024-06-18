@@ -1,8 +1,17 @@
-import { FudisSelectOption } from '../../../../types/forms';
+import { FudisDropdownMenuItem, FudisSelectOption } from '../../../../types/forms';
+
+function writeConsole(item: string): void {
+  console.log(item);
+}
 
 interface MockSelectOptionGroupData {
   country: string;
   options: FudisSelectOption<TestAnimalScience>[];
+}
+
+interface MockDropdownMenuGroupData {
+  country: string;
+  items: FudisDropdownMenuItem<TestMenuItemActions>[];
 }
 
 export type TestAnimalSound = {
@@ -24,6 +33,13 @@ export const defaultOptions: FudisSelectOption<TestAnimalSound>[] = [
   { value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko', sound: 'Gec-koooo!' },
 ];
 
+export const defaultMenuItems: FudisDropdownMenuItem<TestMenuItemActions>[] = [
+  { label: 'Click here to console.log "hey"', disabled: false, callback: () => writeConsole('hey') },
+  { label: 'Click here to console.log "ho"', disabled: true, callback: () => console.log('ho') },
+  { label: 'Click here to console.log "lets"', disabled: false, callback: () => console.log('lets') },
+  { label: 'Click here to console.log "go"', disabled: false, callback: () => console.log('go') },
+];
+
 export const multiselectChipListMockData: FudisSelectOption<object>[] = [
   { value: 'hereford', label: 'Hereford' },
   { value: 'texas-longhorn', label: 'Texas Longhorn' },
@@ -35,6 +51,12 @@ export type TestAnimalScience = {
   value: string;
   label: string;
   scienceName: string;
+};
+
+export type TestMenuItemActions = {
+  label: string;
+  disabled: boolean;
+  callback: () => void;
 };
 
 type CountryData = {
@@ -944,6 +966,39 @@ export const smallGroupedMockData: MockSelectOptionGroupData[] = [
         value: 'e2fa6f0a-632a-485f-8ccf-b984311fe3b4',
         label: 'Mountain lion',
         scienceName: 'Felis concolor',
+      },
+    ],
+  },
+];
+
+export const smallDropdownMenuGroupedMockData: MockDropdownMenuGroupData[] = [
+  {
+    country: 'Netherlands',
+    items: [
+      {
+        label: 'Golden jackal',
+        disabled: false,
+        callback: () => writeConsole('Chosen Golden jackal action'),
+      },
+      {
+        label: 'Mountain lion',
+        disabled: false,
+        callback: () => writeConsole('Chosen Mountain lion action'),
+      },
+    ],
+  },
+  {
+    country: 'Brazil',
+    items: [
+      {
+        label: 'Small Indian mongoose',
+        disabled: true,
+        callback: () => writeConsole('Chosen Small Indian mongoose action'),
+      },
+      {
+        label: 'Falcon, prairie',
+        disabled: false,
+        callback: () => writeConsole('Chosen Falcon, prairie action'),
       },
     ],
   },
