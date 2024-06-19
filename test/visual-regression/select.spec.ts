@@ -172,7 +172,7 @@ test("Dropdowns and Autocompletes", async ({ page }) => {
 
   await expect(page.getByTestId("fudis-body-text-7").getByText("Showing 47 results")).toBeVisible();
   await page.keyboard.press("KeyN");
-  await expect(page.getByText("Showing 18 results")).toBeVisible();
+  await expect(page.getByTestId("fudis-body-text-7").getByText("Showing 18 results")).toBeVisible();
   await expect(page.getByText("You must choose a pet!").locator("visible=true")).toHaveCount(6);
   await expect(page).toHaveScreenshot("C-2-autocomplete-dropdown-in-typed.png", {
     fullPage: true,
