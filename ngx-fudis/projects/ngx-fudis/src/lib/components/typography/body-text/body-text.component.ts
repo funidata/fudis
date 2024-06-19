@@ -33,11 +33,6 @@ export class BodyTextComponent {
   @Input() variant: FudisBodyText = 'md-regular';
 
   /**
-   * Option to change text color if background is not compatible with default dark text
-   */
-  @Input() color: 'default' | 'white' = 'default';
-
-  /**
    * Text alignment
    */
   @Input() align: FudisTextAlign = 'left';

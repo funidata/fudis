@@ -4,14 +4,7 @@
 
 .fudis-body-text {
   @include utilities.box-reset;
-
-  &__default {
-    @include colorMixins.text-color("gray-dark");
-  }
-
-  &__white {
-    @include colorMixins.text-color("white");
-  }
+  @include colorMixins.text-color("gray-dark");
 
   &__sm-regular {
     @include typography.body-text-sm-regular;

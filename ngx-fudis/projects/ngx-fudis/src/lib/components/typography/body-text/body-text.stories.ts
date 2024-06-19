@@ -18,10 +18,6 @@ export default {
     align: {
       options: ['left', 'right', 'center'],
     },
-    color: {
-      options: ['default', 'white'],
-      control: { type: 'radio' },
-    },
   },
 } as Meta;
 
@@ -31,12 +27,8 @@ const Template: StoryFn = (args) => ({
   props: args,
   template: html` <fudis-grid [width]="'md'" [align]="'start'">
     <div>
-      <fudis-body-text [variant]="variant" [color]="color" [align]="align"
-        >{{content}}</fudis-body-text
-      >
-      <fudis-body-text [variant]="variant" [color]="color" [align]="align"
-        >{{content}}</fudis-body-text
-      >
+      <fudis-body-text [variant]="variant" [align]="align">{{content}}</fudis-body-text>
+      <fudis-body-text [variant]="variant" [align]="align">{{content}}</fudis-body-text>
     </div>
   </fudis-grid>`,
 });
@@ -45,7 +37,6 @@ export const Example = Template.bind({});
 Example.args = {
   variant: 'lg-regular',
   align: 'left',
-  color: 'default',
   content:
     'Mutiny Pirate Round execution dock spanker broadside schooner aye reef sails quarter yo-ho-ho.',
 };
