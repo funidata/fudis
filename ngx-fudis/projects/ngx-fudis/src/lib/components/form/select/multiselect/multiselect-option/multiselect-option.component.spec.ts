@@ -46,8 +46,8 @@ class MultiselectMockComponent {
 }
 
 describe('MultiselectOptionComponent', () => {
-  let componentMock: MultiselectMockComponent;
-  let fixtureMock: ComponentFixture<MultiselectMockComponent>;
+  let component: MultiselectMockComponent;
+  let fixture: ComponentFixture<MultiselectMockComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -71,28 +71,28 @@ describe('MultiselectOptionComponent', () => {
       imports: [ReactiveFormsModule],
     }).compileComponents();
 
-    fixtureMock = TestBed.createComponent(MultiselectMockComponent);
-    componentMock = fixtureMock.componentInstance;
-    fixtureMock.detectChanges();
+    fixture = TestBed.createComponent(MultiselectMockComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   function setMultiSelectDropdownOpen() {
-    componentMock.selectEl.openDropdown();
-    fixtureMock.detectChanges();
+    component.selectEl.openDropdown();
+    fixture.detectChanges();
   }
 
   it('should create', () => {
-    expect(componentMock).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   describe('Options reflect on parent control value', () => {
     it('should have respective HTML attributes after parent control value changes', () => {
-      componentMock.control.patchValue([defaultOptions[2]]);
-      fixtureMock.detectChanges();
+      component.control.patchValue([defaultOptions[2]]);
+      fixture.detectChanges();
 
       setMultiSelectDropdownOpen();
 
-      const selectedOption = getElement(fixtureMock, '.fudis-multiselect-option--checked');
+      const selectedOption = getElement(fixture, '.fudis-multiselect-option--checked');
       const selectedOptionLabel = selectedOption.querySelector(
         '.fudis-multiselect-option__label__text__main',
       )?.textContent;
@@ -101,38 +101,50 @@ describe('MultiselectOptionComponent', () => {
       expect(selectedOptionLabel).toEqual('Platypus');
     });
 
-    it('should add value to control with already existing values when another option is selected', () => {
-      componentMock.control.patchValue([defaultOptions[4], defaultOptions[0]]);
+    it('should add value to control with already existing values when another option is selected and emit selection', () => {
+      jest.spyOn(component.selectEl.selectionUpdate, 'emit');
 
-      fixtureMock.detectChanges();
+      component.control.patchValue([defaultOptions[4], defaultOptions[0]]);
+
+      fixture.detectChanges();
 
       setMultiSelectDropdownOpen();
 
-      const options = fixtureMock.debugElement.queryAll(By.css('fudis-multiselect-option'));
+      const options = fixture.debugElement.queryAll(By.css('fudis-multiselect-option'));
       options[2].nativeElement.querySelector('input').click();
-      fixtureMock.detectChanges();
+      fixture.detectChanges();
 
-      const controlValueArray = componentMock.selectEl.control.value;
+      const controlValueArray = component.selectEl.control.value;
 
       expect(controlValueArray).toMatchObject([
         { label: 'Screaming hairy armadillo' },
         { label: 'Dog' },
         { label: 'Platypus' },
       ]);
+
+      expect(component.selectEl.selectionUpdate.emit).toHaveBeenCalledWith([
+        {
+          label: 'Screaming hairy armadillo',
+          sound: "Rollin' rollin' rollin'!",
+          value: 'value-5-armadillo',
+        },
+        { label: 'Dog', sound: 'Wuf!', value: 'value-1-dog' },
+        { label: 'Platypus', sound: 'Plat plat!', value: 'value-3-platypys' },
+      ]);
     });
 
-    it('should remove value from control when already selected option is clicked', () => {
+    it('should remove value from control when already selected option is clicked and set as null, if no selected options are left', () => {
       setMultiSelectDropdownOpen();
 
-      const options = fixtureMock.debugElement.queryAll(By.css('fudis-multiselect-option'));
+      const options = fixture.debugElement.queryAll(By.css('fudis-multiselect-option'));
 
       // Select multiple options
       options[0].nativeElement.querySelector('input').click();
       options[1].nativeElement.querySelector('input').click();
       options[4].nativeElement.querySelector('input').click();
-      fixtureMock.detectChanges();
+      fixture.detectChanges();
 
-      const controlValueArray = componentMock.selectEl.control.value;
+      const controlValueArray = component.selectEl.control.value;
 
       expect(controlValueArray).toMatchObject([
         { label: 'Dog' },
@@ -142,11 +154,18 @@ describe('MultiselectOptionComponent', () => {
 
       // Remove one of the already selected options
       options[4].nativeElement.querySelector('input').click();
-      fixtureMock.detectChanges();
+      fixture.detectChanges();
 
-      const updatedControlValueArray = componentMock.selectEl.control.value;
+      const updatedControlValueArray = component.selectEl.control.value;
 
       expect(updatedControlValueArray).toMatchObject([{ label: 'Dog' }, { label: 'Capybara' }]);
+
+      options[1].nativeElement.querySelector('input').click();
+      fixture.detectChanges();
+      options[0].nativeElement.querySelector('input').click();
+      fixture.detectChanges();
+
+      expect(component.selectEl.control.value).toEqual(null);
     });
   });
 
@@ -154,11 +173,11 @@ describe('MultiselectOptionComponent', () => {
     it('should have respective attributes if selected', () => {
       setMultiSelectDropdownOpen();
 
-      const options = fixtureMock.debugElement.queryAll(By.css('.fudis-multiselect-option'));
+      const options = fixture.debugElement.queryAll(By.css('.fudis-multiselect-option'));
       const optionToSelect = options[1].nativeElement.querySelector('input');
 
       optionToSelect.click();
-      fixtureMock.detectChanges();
+      fixture.detectChanges();
 
       const optionAriaAttribute = !!optionToSelect.getAttribute('aria-selected');
 
@@ -172,7 +191,7 @@ describe('MultiselectOptionComponent', () => {
     it('should have focusable CSS class', () => {
       setMultiSelectDropdownOpen();
 
-      const options = fixtureMock.debugElement.queryAll(By.css('.fudis-multiselect-option'));
+      const options = fixture.debugElement.queryAll(By.css('.fudis-multiselect-option'));
       const expectedInputClasses =
         'fudis-multiselect-option__label__checkbox__input fudis-select-option__focusable';
       const inputClassArray: string[] = [];
@@ -188,7 +207,7 @@ describe('MultiselectOptionComponent', () => {
     it('should have disabled CSS class if option is disabled', () => {
       setMultiSelectDropdownOpen();
 
-      const options = fixtureMock.nativeElement.querySelectorAll('.fudis-multiselect-option');
+      const options = fixture.nativeElement.querySelectorAll('.fudis-multiselect-option');
       const expectedDisabledOptionClasses =
         'fudis-multiselect-option fudis-multiselect-option--visible fudis-multiselect-option--disabled';
       const disabledOption = options[3];
