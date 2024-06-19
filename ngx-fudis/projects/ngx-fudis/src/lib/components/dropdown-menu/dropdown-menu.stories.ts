@@ -35,7 +35,7 @@ const Template: StoryFn = (args) => ({
     <fudis-grid-item>
       <fudis-heading [level]="4">Align to right, size 'md'</fudis-heading>
       <fudis-button
-        [label]="'Menu'"
+        [label]="'Console.log options menu'"
         [labelHidden]="true"
         [size]="'small'"
         [variant]="'secondary'"
@@ -51,7 +51,7 @@ const Template: StoryFn = (args) => ({
     <fudis-grid-item>
       <fudis-heading [level]="4">Align to left (default), size 'lg'</fudis-heading>
       <fudis-button
-        [label]="'Menu'"
+        [label]="'Grouped animals menu'"
         [labelHidden]="true"
         [size]="'small'"
         [variant]="'secondary'"
@@ -59,11 +59,11 @@ const Template: StoryFn = (args) => ({
         [asMenuButton]="true"
       >
         <fudis-dropdown-menu>
-          <fudis-dropdown-menu-group *ngFor="let group of smallDropdownMenuGroupedMockData" [label]="group.country">
-            <fudis-dropdown-menu-item
-              *ngFor="let groupedItem of group.items"
-              [data]="groupedItem"
-            >
+          <fudis-dropdown-menu-group
+            *ngFor="let group of smallDropdownMenuGroupedMockData"
+            [label]="group.country"
+          >
+            <fudis-dropdown-menu-item *ngFor="let groupedItem of group.items" [data]="groupedItem">
             </fudis-dropdown-menu-item>
           </fudis-dropdown-menu-group>
         </fudis-dropdown-menu>

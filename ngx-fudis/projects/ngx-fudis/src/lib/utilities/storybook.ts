@@ -170,7 +170,6 @@ export const dropdownMenuItemExclude: RegExp = excludeRegex([
   'dropdownItem',
 ]);
 
-
 export const dropdownMenuControlsExclude: RegExp = excludeRegex([
   'hostClass',
   'role',

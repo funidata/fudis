@@ -14,8 +14,6 @@ export class DropdownMenuGroupComponent {
   ) {
     if (_parentDropdownMenu) {
       this.id = this._idService.getNewGroupId('dropdown-menu', this._parentDropdownMenu.id);
-      console.log('id', this.id);
-      console.log('parent id', this._parentDropdownMenu.id);
     }
   }
 

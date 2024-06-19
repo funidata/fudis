@@ -125,7 +125,7 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
   }
 
   /**
-   * Boilerplate function to be overriden by SelectOption's, MultiselectOption's and DropdownMenuItem's own implementations
+   * Boilerplate function to be overriden by SelectOption's and MultiselectOption's own implementations
    */
   // eslint-disable-next-line
   protected _clickOption(event: Event): void {}
