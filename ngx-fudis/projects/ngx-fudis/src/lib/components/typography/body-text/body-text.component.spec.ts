@@ -34,9 +34,7 @@ describe('BodyTextComponent', () => {
         const element = getElement(fixture, '.fudis-body-text');
 
         expect(sortClasses(element.className)).toEqual(
-          sortClasses(
-            `fudis-body-text fudis-body-text__left fudis-body-text__${variant}`,
-          ),
+          sortClasses(`fudis-body-text fudis-body-text__left fudis-body-text__${variant}`),
         );
       });
     });
@@ -46,27 +44,21 @@ describe('BodyTextComponent', () => {
       const element = getElement(fixture, '.fudis-body-text');
 
       expect(sortClasses(element.className)).toEqual(
-        sortClasses(
-          'fudis-body-text fudis-body-text__left fudis-body-text__md-regular',
-        ),
+        sortClasses('fudis-body-text fudis-body-text__left fudis-body-text__md-regular'),
       );
 
       component.align = 'center';
       fixture.detectChanges();
 
       expect(sortClasses(element.className)).toEqual(
-        sortClasses(
-          'fudis-body-text fudis-body-text__center fudis-body-text__md-regular',
-        ),
+        sortClasses('fudis-body-text fudis-body-text__center fudis-body-text__md-regular'),
       );
 
       component.align = 'right';
       fixture.detectChanges();
 
       expect(sortClasses(element.className)).toEqual(
-        sortClasses(
-          'fudis-body-text fudis-body-text__right fudis-body-text__md-regular',
-        ),
+        sortClasses('fudis-body-text fudis-body-text__right fudis-body-text__md-regular'),
       );
     });
   });
