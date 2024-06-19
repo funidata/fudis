@@ -1,10 +1,6 @@
 import { FudisSelectOption } from '../../../../types/forms';
 import { FudisDropdownMenuItem } from '../../../../types/miscellaneous';
 
-function writeConsole(item: string): void {
-  console.log(item);
-}
-
 interface MockSelectOptionGroupData {
   country: string;
   options: FudisSelectOption<TestAnimalScience>[];
@@ -38,7 +34,7 @@ export const defaultMenuItems: FudisDropdownMenuItem<TestMenuItemActions>[] = [
   {
     label: 'Click here to console.log "hey"',
     disabled: false,
-    callback: () => writeConsole('hey'),
+    callback: () => console.log('hey'),
   },
   { label: 'Click here to console.log "ho"', disabled: true, callback: () => console.log('ho') },
   {
@@ -64,7 +60,7 @@ export type TestAnimalScience = {
 
 export type TestMenuItemActions = {
   label: string;
-  disabled: boolean;
+  disabled?: boolean;
   callback: () => void;
 };
 
@@ -987,12 +983,12 @@ export const smallDropdownMenuGroupedMockData: MockDropdownMenuGroupData[] = [
       {
         label: 'Golden jackal',
         disabled: false,
-        callback: () => writeConsole('Chosen Golden jackal action'),
+        callback: () => console.log('Golden jackal chosen'),
       },
       {
         label: 'Mountain lion',
         disabled: false,
-        callback: () => writeConsole('Chosen Mountain lion action'),
+        callback: () => console.log('Mountain lion chosen'),
       },
     ],
   },
@@ -1002,12 +998,25 @@ export const smallDropdownMenuGroupedMockData: MockDropdownMenuGroupData[] = [
       {
         label: 'Small Indian mongoose',
         disabled: true,
-        callback: () => writeConsole('Chosen Small Indian mongoose action'),
+        callback: () => console.log('Small Indian mongoose chosen'),
       },
       {
         label: 'Falcon, prairie',
         disabled: false,
-        callback: () => writeConsole('Chosen Falcon, prairie action'),
+        callback: () => console.log('Falcon, prairie chosen'),
+      },
+    ],
+  },
+  {
+    country: 'China',
+    items: [
+      {
+        label: 'Salmon pink bird eater tarantula',
+        callback: () => console.log('Salmon pink bird eater tarantula chosen'),
+      },
+      {
+        label: 'Crane, sandhill',
+        callback: () => console.log('Crane, sandhill chosen'),
       },
     ],
   },

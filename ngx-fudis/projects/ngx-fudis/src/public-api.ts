@@ -42,6 +42,7 @@ export { FudisGridService } from './lib/services/grid/grid.service';
 export { FudisGroupValidators } from './lib/utilities/form/groupValidators';
 export { FudisTranslationService } from './lib/services/translation/translation.service';
 export { FudisValidators } from './lib/utilities/form/validators';
+export { DropdownMenuGroupComponent } from './lib/components/dropdown-menu/dropdown-menu-group/dropdown-menu-group.component';
 export { DropdownMenuComponent } from './lib/components/dropdown-menu/dropdown-menu.component';
 export { DropdownMenuItemComponent } from './lib/components/dropdown-menu/dropdown-menu-item/dropdown-menu-item.component';
 export { ErrorMessageComponent } from './lib/components/form/error-message/error-message/error-message.component';

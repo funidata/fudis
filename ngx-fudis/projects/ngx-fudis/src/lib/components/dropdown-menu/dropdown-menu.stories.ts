@@ -4,7 +4,10 @@ import { importProvidersFrom } from '@angular/core';
 import { DropdownMenuComponent } from './dropdown-menu.component';
 import docs from './dropdown-menu-docs.mdx';
 import { dropdownMenuControlsExclude } from '../../utilities/storybook';
-import { defaultMenuItems, groupedMockData } from '../form/select/common/mock_data';
+import {
+  defaultMenuItems,
+  smallDropdownMenuGroupedMockData,
+} from '../form/select/common/mock_data';
 
 export default {
   title: 'Components/Dropdown Menu',
@@ -27,7 +30,7 @@ export default {
 const html = String.raw;
 
 const Template: StoryFn = (args) => ({
-  props: { ...args, groupedMockData, defaultMenuItems },
+  props: { ...args, smallDropdownMenuGroupedMockData, defaultMenuItems },
   template: html` <fudis-grid [columns]="2">
     <fudis-grid-item>
       <fudis-heading [level]="4">Align to right, size 'md'</fudis-heading>
@@ -56,8 +59,13 @@ const Template: StoryFn = (args) => ({
         [asMenuButton]="true"
       >
         <fudis-dropdown-menu>
-          <fudis-dropdown-menu-item *ngFor="let item of defaultMenuItems" [data]="item">
-          </fudis-dropdown-menu-item>
+          <fudis-dropdown-menu-group *ngFor="let group of smallDropdownMenuGroupedMockData" [label]="group.country">
+            <fudis-dropdown-menu-item
+              *ngFor="let groupedItem of group.items"
+              [data]="groupedItem"
+            >
+            </fudis-dropdown-menu-item>
+          </fudis-dropdown-menu-group>
         </fudis-dropdown-menu>
       </fudis-button>
     </fudis-grid-item>
