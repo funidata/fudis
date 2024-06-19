@@ -54,8 +54,14 @@ export class DropdownMenuComponent
    */
   @Input() override size: FudisInputSize = 'lg';
 
+  /**
+   * Dropdown open status
+   */
   protected _dropdownOpen: boolean = true;
 
+  /**
+   * Currently focused option
+   */
   private _focusedOption: string | null = null;
 
   /**
@@ -168,7 +174,7 @@ export class DropdownMenuComponent
   }
 
   ngOnInit(): void {
-    this.id = this._idService.getNewParentId('dropdown-menu');
+    this.id = this._idService.getNewGrandParentId('dropdown-menu');
   }
 
   ngAfterContentInit(): void {

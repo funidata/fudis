@@ -1,5 +1,4 @@
 import {
-  OnInit,
   Component,
   ElementRef,
   Host,
@@ -15,11 +14,11 @@ import {
 import { DOCUMENT } from '@angular/common';
 import { DropdownMenuComponent } from '../dropdown-menu.component';
 import { FudisIdService } from '../../../services/id/id.service';
-import { ButtonComponent } from '../../button/button.component';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { BehaviorSubject } from 'rxjs';
 import { FudisDropdownMenuItem } from '../../../types/miscellaneous';
 import { DropdownItemBaseDirective } from '../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
+import { DropdownMenuGroupComponent } from '../dropdown-menu-group/dropdown-menu-group.component';
 
 @Component({
   selector: 'fudis-dropdown-menu-item',
@@ -27,15 +26,21 @@ import { DropdownItemBaseDirective } from '../../../directives/form/dropdown-ite
   styleUrls: ['./dropdown-menu-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DropdownMenuItemComponent extends DropdownItemBaseDirective implements OnInit {
+export class DropdownMenuItemComponent extends DropdownItemBaseDirective {
   constructor(
     private _idService: FudisIdService,
     private _translationService: FudisTranslationService,
-    @Host() protected _parentDropdownMenu: DropdownMenuComponent,
     @Inject(DOCUMENT) _document: Document,
-    @Host() @Optional() protected _parentButton: ButtonComponent,
+    @Host() protected _parentDropdownMenu: DropdownMenuComponent,
+    @Host() @Optional() protected _parentGroup: DropdownMenuGroupComponent,
   ) {
     super(_document);
+
+    this._id = this._idService.getNewSelectOptionId(
+      'dropdown-menu',
+      this._parentDropdownMenu.id,
+      this._parentGroup?.id,
+    );
 
     effect(() => {
       const translations = _translationService.getTranslations()();
@@ -64,18 +69,6 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective impleme
    * Internal translated text for disabled dropdown menu item
    */
   public translationItemDisabledText = new BehaviorSubject<string>('');
-
-  ngOnInit(): void {
-    this._id = this._idService.getNewChildId('dropdown-menu', this._parentDropdownMenu.id);
-
-    //  this._id = this._idService.getNewSelectOptionId(
-    //   'dropdown-menu',
-    //   this._parentDropdownMenu.id,
-    //   this._parentGroup?.id,
-    // );
-
-    // console.log(this._id);
-  }
 
   /**
    * Handle key down event

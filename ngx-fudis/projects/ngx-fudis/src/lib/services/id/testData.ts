@@ -26,12 +26,12 @@ export const testDataBefore: FudisIdData = {
   parents: {
     breadcrumbs: {},
     'checkbox-group': {},
-    'dropdown-menu': {},
     'language-badge-group': {},
     'radio-button-group': {},
   },
   grandParents: {
     'description-list': {},
+    'dropdown-menu': {},
     select: {},
     multiselect: {},
   },
@@ -128,12 +128,12 @@ export const testComponentDataAfter: FudisIdData = {
   parents: {
     breadcrumbs: {},
     'checkbox-group': {},
-    'dropdown-menu': {},
     'language-badge-group': {},
     'radio-button-group': {},
   },
   grandParents: {
     'description-list': {},
+    'dropdown-menu': {},
     select: {},
     multiselect: {},
   },
@@ -209,29 +209,6 @@ export const testParentDataAfter: FudisIdData = {
         'fudis-checkbox-group-3-item-5',
       ],
     },
-    'dropdown-menu': {
-      'fudis-dropdown-menu-1': [
-        'fudis-dropdown-menu-1-item-1',
-        'fudis-dropdown-menu-1-item-2',
-        'dropdown-menu-1-custom-child-id',
-        'fudis-dropdown-menu-1-item-4',
-        'fudis-dropdown-menu-1-item-5',
-      ],
-      'dropdown-menu-some-custom-id': [
-        'dropdown-menu-some-custom-id-item-1',
-        'dropdown-menu-some-custom-id-item-2',
-        'dropdown-menu-2-custom-child-id',
-        'dropdown-menu-some-custom-id-item-4',
-        'dropdown-menu-some-custom-id-item-5',
-      ],
-      'fudis-dropdown-menu-3': [
-        'fudis-dropdown-menu-3-item-1',
-        'fudis-dropdown-menu-3-item-2',
-        'dropdown-menu-3-custom-child-id',
-        'fudis-dropdown-menu-3-item-4',
-        'fudis-dropdown-menu-3-item-5',
-      ],
-    },
     'language-badge-group': {
       'fudis-language-badge-group-1': [
         'fudis-language-badge-group-1-item-1',
@@ -281,6 +258,7 @@ export const testParentDataAfter: FudisIdData = {
   },
   grandParents: {
     'description-list': {},
+    'dropdown-menu': {},
     select: {},
     multiselect: {},
   },
@@ -312,7 +290,6 @@ export const testGrandParentDataAfter: FudisIdData = {
   parents: {
     breadcrumbs: {},
     'checkbox-group': {},
-    'dropdown-menu': {},
     'language-badge-group': {},
     'radio-button-group': {},
   },
@@ -544,6 +521,184 @@ export const testGrandParentDataAfter: FudisIdData = {
         },
       },
     },
+    'dropdown-menu': {
+      'fudis-dropdown-menu-1': {
+        id: 'fudis-dropdown-menu-1',
+        groups: {
+          'fudis-dropdown-menu-1-group-1': [
+            'fudis-dropdown-menu-1-group-1-option-1',
+            'fudis-dropdown-menu-1-group-1-option-2',
+            'fudis-dropdown-menu-1-group-1-option-3',
+          ],
+          'fudis-dropdown-menu-1-group-2': [
+            'fudis-dropdown-menu-1-group-2-option-1',
+            'fudis-dropdown-menu-1-group-2-option-2',
+            'fudis-dropdown-menu-1-group-2-option-3',
+          ],
+          'dropdown-menu-1-custom-child-id': [
+            'dropdown-menu-1-custom-child-id-option-1',
+            'dropdown-menu-1-custom-child-id-option-2',
+            'dropdown-menu-1-custom-child-id-option-3',
+          ],
+          'fudis-dropdown-menu-1-group-4': [
+            'fudis-dropdown-menu-1-group-4-option-1',
+            'fudis-dropdown-menu-1-group-4-option-2',
+            'fudis-dropdown-menu-1-group-4-option-3',
+          ],
+          'fudis-dropdown-menu-1-group-5': [
+            'fudis-dropdown-menu-1-group-5-option-1',
+            'fudis-dropdown-menu-1-group-5-option-2',
+            'fudis-dropdown-menu-1-group-5-option-3',
+          ],
+        },
+        nonGroupedOptions: [
+          'fudis-dropdown-menu-1-option-1',
+          'fudis-dropdown-menu-1-option-2',
+          'fudis-dropdown-menu-1-option-3',
+        ],
+      },
+      'fudis-dropdown-menu-2': {
+        id: 'fudis-dropdown-menu-2',
+        groups: {
+          'fudis-dropdown-menu-2-group-1': [
+            'fudis-dropdown-menu-2-group-1-option-1',
+            'fudis-dropdown-menu-2-group-1-option-2',
+            'fudis-dropdown-menu-2-group-1-option-3',
+          ],
+          'fudis-dropdown-menu-2-group-2': [
+            'fudis-dropdown-menu-2-group-2-option-1',
+            'fudis-dropdown-menu-2-group-2-option-2',
+            'fudis-dropdown-menu-2-group-2-option-3',
+          ],
+          'dropdown-menu-2-custom-child-id': [
+            'dropdown-menu-2-custom-child-id-option-1',
+            'dropdown-menu-2-custom-child-id-option-2',
+            'dropdown-menu-2-custom-child-id-option-3',
+          ],
+          'fudis-dropdown-menu-2-group-4': [
+            'fudis-dropdown-menu-2-group-4-option-1',
+            'fudis-dropdown-menu-2-group-4-option-2',
+            'fudis-dropdown-menu-2-group-4-option-3',
+          ],
+          'fudis-dropdown-menu-2-group-5': [
+            'fudis-dropdown-menu-2-group-5-option-1',
+            'fudis-dropdown-menu-2-group-5-option-2',
+            'fudis-dropdown-menu-2-group-5-option-3',
+          ],
+        },
+        nonGroupedOptions: [
+          'fudis-dropdown-menu-2-option-1',
+          'fudis-dropdown-menu-2-option-2',
+          'fudis-dropdown-menu-2-option-3',
+        ],
+      },
+      'custom-id-for-dropdown-menu': {
+        id: 'custom-id-for-dropdown-menu',
+        groups: {
+          'custom-id-for-dropdown-menu-group-1': [
+            'custom-id-for-dropdown-menu-group-1-option-1',
+            'custom-id-for-dropdown-menu-group-1-option-2',
+            'custom-id-for-dropdown-menu-group-1-option-3',
+          ],
+          'custom-id-for-dropdown-menu-group-2': [
+            'custom-id-for-dropdown-menu-group-2-option-1',
+            'custom-id-for-dropdown-menu-group-2-option-2',
+            'custom-id-for-dropdown-menu-group-2-option-3',
+          ],
+          'fudis-dropdown-menu-3-custom-child-id': [
+            'fudis-dropdown-menu-3-custom-child-id-option-1',
+            'fudis-dropdown-menu-3-custom-child-id-option-2',
+            'fudis-dropdown-menu-3-custom-child-id-option-3',
+          ],
+          'custom-id-for-dropdown-menu-group-4': [
+            'custom-id-for-dropdown-menu-group-4-option-1',
+            'custom-id-for-dropdown-menu-group-4-option-2',
+            'custom-id-for-dropdown-menu-group-4-option-3',
+          ],
+          'custom-id-for-dropdown-menu-group-5': [
+            'custom-id-for-dropdown-menu-group-5-option-1',
+            'custom-id-for-dropdown-menu-group-5-option-2',
+            'custom-id-for-dropdown-menu-group-5-option-3',
+          ],
+        },
+        nonGroupedOptions: [
+          'custom-id-for-dropdown-menu-option-1',
+          'custom-id-for-dropdown-menu-option-2',
+          'custom-id-for-dropdown-menu-option-3',
+        ],
+      },
+      'fudis-dropdown-menu-4': {
+        id: 'fudis-dropdown-menu-4',
+        groups: {
+          'fudis-dropdown-menu-4-group-1': [
+            'fudis-dropdown-menu-4-group-1-option-1',
+            'fudis-dropdown-menu-4-group-1-option-2',
+            'fudis-dropdown-menu-4-group-1-option-3',
+          ],
+          'fudis-dropdown-menu-4-group-2': [
+            'fudis-dropdown-menu-4-group-2-option-1',
+            'fudis-dropdown-menu-4-group-2-option-2',
+            'fudis-dropdown-menu-4-group-2-option-3',
+          ],
+          'dropdown-menu-4-custom-child-id': [
+            'dropdown-menu-4-custom-child-id-option-1',
+            'dropdown-menu-4-custom-child-id-option-2',
+            'dropdown-menu-4-custom-child-id-option-3',
+          ],
+          'fudis-dropdown-menu-4-group-4': [
+            'fudis-dropdown-menu-4-group-4-option-1',
+            'fudis-dropdown-menu-4-group-4-option-2',
+            'fudis-dropdown-menu-4-group-4-option-3',
+          ],
+          'fudis-dropdown-menu-4-group-5': [
+            'fudis-dropdown-menu-4-group-5-option-1',
+            'fudis-dropdown-menu-4-group-5-option-2',
+            'fudis-dropdown-menu-4-group-5-option-3',
+          ],
+        },
+        nonGroupedOptions: [
+          'fudis-dropdown-menu-4-option-1',
+          'fudis-dropdown-menu-4-option-2',
+          'fudis-dropdown-menu-4-option-3',
+        ],
+      },
+      'fudis-dropdown-menu-5': {
+        id: 'fudis-dropdown-menu-5',
+        groups: {
+          'fudis-dropdown-menu-5-group-1': [
+            'fudis-dropdown-menu-5-group-1-option-1',
+            'fudis-dropdown-menu-5-group-1-option-2',
+            'fudis-dropdown-menu-5-group-1-option-3',
+          ],
+          'fudis-dropdown-menu-5-group-2': [
+            'fudis-dropdown-menu-5-group-2-option-1',
+            'fudis-dropdown-menu-5-group-2-option-2',
+            'fudis-dropdown-menu-5-group-2-option-3',
+          ],
+          'dropdown-menu-5-custom-child-id': [
+            'dropdown-menu-5-custom-child-id-option-1',
+            'dropdown-menu-5-custom-child-id-option-2',
+            'dropdown-menu-5-custom-child-id-option-3',
+          ],
+          'fudis-dropdown-menu-5-group-4': [
+            'fudis-dropdown-menu-5-group-4-option-1',
+            'fudis-dropdown-menu-5-group-4-option-2',
+            'fudis-dropdown-menu-5-group-4-option-3',
+          ],
+          'fudis-dropdown-menu-5-group-5': [
+            'fudis-dropdown-menu-5-group-5-option-1',
+            'fudis-dropdown-menu-5-group-5-option-2',
+            'fudis-dropdown-menu-5-group-5-option-3',
+          ],
+        },
+        nonGroupedOptions: [
+          'fudis-dropdown-menu-5-option-1',
+          'fudis-dropdown-menu-5-option-2',
+          'fudis-dropdown-menu-5-option-3',
+        ],
+      },
+    },
+
     select: {
       'fudis-select-1': {
         id: 'fudis-select-1',
