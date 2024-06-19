@@ -17,6 +17,7 @@ import { FudisIdService } from '../../services/id/id.service';
 import { DropdownBaseDirective } from '../../directives/form/dropdown-base/dropdown-base.directive';
 import { ButtonComponent } from '../button/button.component';
 import { DOCUMENT } from '@angular/common';
+import { FudisInputSize } from '../../types/forms';
 
 @Component({
   selector: 'fudis-dropdown-menu',
@@ -44,9 +45,14 @@ export class DropdownMenuComponent
   @ViewChild('dropdownMenuElement') dropdownMenuElement: ElementRef<HTMLElement>;
 
   /**
-   * Dropdown-menu is aligned to open left side of the button by default but can be aligned to open right side if necessary
+   * Align Dropdown Menu opening position
    */
   @Input() align: 'left' | 'right' | 'center' = 'left';
+
+  /**
+   * Dropdown Menu size
+   */
+  @Input() override size: FudisInputSize = 'lg';
 
   protected _dropdownOpen: boolean = true;
 

@@ -50,7 +50,7 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective impleme
   @ViewChild('dropdownItem') dropdownItem: ElementRef<HTMLButtonElement>;
 
   /**
-   * Dropdown Menu iItem data
+   * Dropdown Menu Item data
    */
   @Input({ required: true }) data: FudisDropdownMenuItem<object>;
 

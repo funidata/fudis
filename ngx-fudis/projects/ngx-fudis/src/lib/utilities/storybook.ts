@@ -148,11 +148,31 @@ export const descriptionListExclude: RegExp = excludeRegex([...descriptionListCo
 export const dialogExclude: RegExp = excludeRegex(['closeButtonPositionAbsolute']);
 
 /**
- * Dropdown Menu
+ * Dropdown Menu and Dropdown Menu Item
  */
 export const dropdownMenuExclude: RegExp = excludeRegex([
+  'multiselect',
+  'open',
+  'parentId',
+  'dropdownElement',
+  'dropdownMenuElement',
+  'closeDropdownMenu',
+  'setFocusedOption',
+]);
+
+export const dropdownMenuItemExclude: RegExp = excludeRegex([
+  'translationItemDisabledText',
+  'checked',
+  'close',
+  'handleChecked',
+  'handleBlur',
+  'handleClick',
+  'dropdownItem',
+]);
+
+
+export const dropdownMenuControlsExclude: RegExp = excludeRegex([
   'hostClass',
-  'classes',
   'role',
   'id',
   'multiselect',
@@ -161,11 +181,11 @@ export const dropdownMenuExclude: RegExp = excludeRegex([
   'size',
   'handleBlur',
   'handleFocus',
-  'getMaxWidth',
   'dropdownElement',
   'dropdownMenuElement',
+  'closeDropdownMenu',
+  'setFocusedOption',
   'align',
-  'maxWidth',
 ]);
 
 /**
