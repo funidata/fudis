@@ -273,7 +273,6 @@ export const selectStoryControlExclude: RegExp = excludeRegex([
   'handleSelectionChange',
   'handleChecked',
   'handleClick',
-  'optionInputRef',
   'checked',
   'close',
   'errorSummaryReloadOnInit',

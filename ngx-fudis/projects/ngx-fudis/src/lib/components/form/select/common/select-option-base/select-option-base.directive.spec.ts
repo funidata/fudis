@@ -38,15 +38,22 @@ import { ButtonComponent } from '../../../../button/button.component';
         *ngFor="let option of testOptions"
         [data]="option"
         (handleBlur)="handleOptionBlur($event)"
-      ></fudis-select-option>
+      />
+      <fudis-select-option #selectOption [data]="optionWithSubLabel" />
     </ng-template>
   </fudis-select>`,
 })
 class MockComponent {
   testOptions: FudisSelectOption<object>[] = defaultOptions;
+  optionWithSubLabel: FudisSelectOption<object> = {
+    value: 'test-1-abc',
+    label: 'Dragon',
+    subLabel: 'Roaaar!',
+  };
   control: FormControl<FudisSelectOption<object> | null> = new FormControl(null);
 
   @ViewChild('selectElem') selectElem: SelectComponent;
+  @ViewChild('selectOption') selectOption: SelectOptionComponent;
 
   eventReceived: FocusEvent;
 
@@ -96,6 +103,21 @@ describe('SelectOptionBaseDirective', () => {
     fixture.detectChanges();
   }
 
+  function focusableOptions(): (string | null)[] {
+    const focusableOptions = getAllElements(
+      fixture,
+      '.fudis-select-option__focusable .fudis-select-option__label__main',
+    );
+
+    const optionsArray: (string | null)[] = [];
+
+    focusableOptions.forEach((item) => {
+      optionsArray.push(item.textContent);
+    });
+
+    return optionsArray;
+  }
+
   describe('Component creation', () => {
     it('should create mock component', () => {
       expect(component).toBeTruthy();
@@ -116,27 +138,30 @@ describe('SelectOptionBaseDirective', () => {
       expect(textContent).toEqual('Platypus');
     });
 
-    it('should filter correct options for given letter input', () => {
-      component.selectElem.autocompleteRef.updateInputValue('p');
-
+    it('should filter correct options for given letter input', async () => {
       setSelectDropdownOpen();
 
       fixture.detectChanges();
 
-      const focusableOptions = getAllElements(
-        fixture,
-        '.fudis-select-option__focusable .fudis-select-option__label__main',
-      );
+      expect(component.selectOption.visible).toEqual(true);
 
-      expect(focusableOptions.length).toEqual(2);
+      expect(focusableOptions().length).toEqual(7);
 
-      const optionsArray: (string | null)[] = [];
+      component.selectElem.autocompleteRef.updateInputValue('p');
 
-      focusableOptions.forEach((item) => {
-        optionsArray.push(item.textContent);
-      });
+      fixture.detectChanges();
 
-      expect(optionsArray).toEqual(['Capybara', 'Platypus']);
+      expect(component.selectOption.visible).toEqual(false);
+
+      expect(focusableOptions()).toEqual(['Capybara', 'Platypus']);
+
+      component.selectElem.autocompleteRef.updateInputValue('roa');
+
+      fixture.detectChanges();
+
+      expect(component.selectOption.visible).toEqual(true);
+
+      expect(focusableOptions()).toEqual(['Dragon']);
     });
 
     it('should trigger blur event when focused elsewhere', () => {
