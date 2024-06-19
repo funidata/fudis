@@ -81,7 +81,7 @@ export class SelectIconsComponent implements OnChanges {
 
   ngOnChanges(changes: FudisComponentChanges<SelectIconsComponent>): void {
     if (changes.parentControl?.currentValue !== changes.parentControl?.previousValue) {
-      this._controlValue.next(!!changes.parentControl?.currentValue);
+      this._controlValue.next(!!changes.parentControl?.currentValue?.value);
 
       this.parentControl.valueChanges.subscribe((value) => {
         this._controlValue.next(!!value);
