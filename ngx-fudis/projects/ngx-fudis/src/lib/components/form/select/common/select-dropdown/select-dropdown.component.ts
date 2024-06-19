@@ -47,6 +47,21 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
    */
   protected _displayStatus: boolean = false;
 
+  /**
+   * Internal translated label for situations where no results with current filters were found
+   */
+  protected _translationNoResultsFound = new BehaviorSubject<string>('');
+
+  /**
+   * Internal translated label for number of visible results
+   */
+  protected _translationResults = new BehaviorSubject<string>('');
+
+  /**
+   * Internal translated label for number of visible results
+   */
+  protected _translationShowing = new BehaviorSubject<string>('');
+
   ngOnChanges(changes: FudisComponentChanges<SelectDropdownComponent>): void {
     const newFilterText = changes.filterText?.currentValue;
 
@@ -65,19 +80,4 @@ export class SelectDropdownComponent extends DropdownBaseDirective implements On
       }, 500);
     }
   }
-
-  /**
-   * Internal translated label for situations where no results with current filters were found
-   */
-  protected _translationNoResultsFound = new BehaviorSubject<string>('');
-
-  /**
-   * Internal translated label for number of visible results
-   */
-  protected _translationResults = new BehaviorSubject<string>('');
-
-  /**
-   * Internal translated label for number of visible results
-   */
-  protected _translationShowing = new BehaviorSubject<string>('');
 }

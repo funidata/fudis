@@ -51,7 +51,6 @@ import { SelectIconsComponent } from '../select-icons/select-icons.component';
       [label]="'MultiAutoSelect Label'"
       [autocompleteHelpText]="'This is autocomplete help text'"
       [placeholder]="'Test placeholder for autocomplete'"
-      (visibleOptionsUpdate)="handleVisibleOptionsUpdate($event)"
       [control]="control"
       [size]="'md'"
       [selectionClearButton]="clearButton"
@@ -72,10 +71,6 @@ class MockSelectComponent {
   clearButton: boolean = true;
   size = 'md';
   variant: FudisSelectVariant = 'dropdown';
-
-  handleVisibleOptionsUpdate(value: number) {
-    console.log(value);
-  }
 
   @ViewChild('multiSelect') multiSelect: MultiselectComponent;
   @ViewChild('multiSelectAuto') multiSelectAuto: MultiselectComponent;

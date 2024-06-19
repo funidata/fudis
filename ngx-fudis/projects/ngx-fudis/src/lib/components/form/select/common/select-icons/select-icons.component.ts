@@ -79,16 +79,6 @@ export class SelectIconsComponent implements OnChanges {
    */
   @Output() handleClearButtonDestroy: EventEmitter<void> = new EventEmitter<void>();
 
-  ngOnChanges(changes: FudisComponentChanges<SelectIconsComponent>): void {
-    if (changes.parentControl?.currentValue !== changes.parentControl?.previousValue) {
-      this._controlValue.next(!!changes.parentControl?.currentValue?.value);
-
-      this.parentControl.valueChanges.subscribe((value) => {
-        this._controlValue.next(!!value);
-      });
-    }
-  }
-
   /**
    * Observable for status if parent control has value
    */
@@ -118,5 +108,15 @@ export class SelectIconsComponent implements OnChanges {
    */
   protected _handleClearButtonBlur(event: FocusEvent): void {
     this.handleClearButtonBlur.emit(event);
+  }
+
+  ngOnChanges(changes: FudisComponentChanges<SelectIconsComponent>): void {
+    if (changes.parentControl?.currentValue !== changes.parentControl?.previousValue) {
+      this._controlValue.next(!!changes.parentControl?.currentValue?.value);
+
+      this.parentControl.valueChanges.subscribe((value) => {
+        this._controlValue.next(!!value);
+      });
+    }
   }
 }

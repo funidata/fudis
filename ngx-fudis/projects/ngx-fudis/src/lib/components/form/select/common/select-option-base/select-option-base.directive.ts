@@ -64,6 +64,13 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
   protected _parent: SelectComponent | MultiselectComponent;
 
   /**
+   * Get visibility status of this option
+   */
+  public get visible(): boolean {
+    return this._optionVisible;
+  }
+
+  /**
    * User focus handler
    */
   protected _focus(): void {
@@ -138,11 +145,4 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
    */
   // eslint-disable-next-line
   protected _clickOption(event: Event): void {}
-
-  /**
-   * Get visibility status of this option
-   */
-  public get visible(): boolean {
-    return this._optionVisible;
-  }
 }

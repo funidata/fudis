@@ -23,8 +23,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class SelectAutocompleteComponent implements OnChanges, OnInit {
   constructor() {
-    this._autocompleteControl = new FormControl<string | null>('');
-
     this._autocompleteControl.valueChanges.pipe(takeUntilDestroyed()).subscribe((newValue) => {
       this._checkValueAndEmit(newValue);
     });
@@ -153,7 +151,7 @@ export class SelectAutocompleteComponent implements OnChanges, OnInit {
   /**
    * Internal FormControl to manage typed filter text
    */
-  protected _autocompleteControl: FormControl<string | null>;
+  protected _autocompleteControl: FormControl<string | null> = new FormControl<string | null>('');
 
   /**
    * Prevent dropdown reopen on focus
@@ -164,6 +162,30 @@ export class SelectAutocompleteComponent implements OnChanges, OnInit {
    * To check if keydown event originated from input element and not e. g. clear button
    */
   private _keyDownFromInput: boolean = false;
+
+  ngOnInit(): void {
+    if (!this.multiselect && this.selectedLabel) {
+      this.updateInputValue(this.selectedLabel);
+    }
+  }
+
+  ngOnChanges(changes: FudisComponentChanges<SelectAutocompleteComponent>): void {
+    if (changes.disabled?.currentValue !== changes.disabled?.previousValue) {
+      if (this.disabled && this.selectedLabel) {
+        this.updateInputValue(this.selectedLabel);
+      } else if (!changes.disabled?.firstChange) {
+        this.updateInputValue('');
+      }
+    }
+  }
+
+  /**
+   * To update Autocomplete's internal control value
+   * @param newValue
+   */
+  public updateInputValue(newValue: string): void {
+    this._autocompleteControl.patchValue(newValue);
+  }
 
   /**
    * Check if new value is longer than threshold and emit
@@ -294,29 +316,5 @@ export class SelectAutocompleteComponent implements OnChanges, OnInit {
     }
 
     this._preventDropdownReOpen = false;
-  }
-
-  /**
-   * To update Autocomplete's internal control value
-   * @param newValue
-   */
-  public updateInputValue(newValue: string): void {
-    this._autocompleteControl.patchValue(newValue);
-  }
-
-  ngOnInit(): void {
-    if (!this.multiselect && this.selectedLabel) {
-      this.updateInputValue(this.selectedLabel);
-    }
-  }
-
-  ngOnChanges(changes: FudisComponentChanges<SelectAutocompleteComponent>): void {
-    if (changes.disabled?.currentValue !== changes.disabled?.previousValue) {
-      if (this.disabled && this.selectedLabel) {
-        this.updateInputValue(this.selectedLabel);
-      } else if (!changes.disabled?.firstChange) {
-        this.updateInputValue('');
-      }
-    }
   }
 }

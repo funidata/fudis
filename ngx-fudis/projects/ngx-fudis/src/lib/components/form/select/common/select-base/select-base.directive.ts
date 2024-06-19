@@ -58,19 +58,14 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   }
 
   /**
-   * Reference to child DropdownComponent listing all options
-   */
-  @ViewChild('dropdownRef') protected _dropdownRef: SelectDropdownComponent;
-
-  /**
-   * Reference to child DropdownComponent listing all options
-   */
-  @ViewChild('selectRef') private _selectRef: ElementRef<HTMLDivElement>;
-
-  /**
    * Reference to autocomplete element, used to focus to it
    */
   @ViewChild('autocompleteRef') public autocompleteRef: SelectAutocompleteComponent;
+
+  /**
+   * Reference to child DropdownComponent listing all options
+   */
+  @ViewChild('dropdownRef') protected _dropdownRef: SelectDropdownComponent;
 
   /**
    * Reference to autocomplete element, used to focus to it
@@ -81,6 +76,11 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    * To lazy load options on first open
    */
   @ContentChild(ContentDirective) protected _content: ContentDirective;
+
+  /**
+   * Reference to child DropdownComponent listing all options
+   */
+  @ViewChild('selectRef') private _selectRef: ElementRef<HTMLDivElement>;
 
   /**
    * Set dropdown size (should follow the given input element size)
@@ -133,31 +133,24 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   @Output() filterTextUpdate: EventEmitter<string | null> = new EventEmitter<string | null>();
 
   /**
-   * Selected option or options label for non-autocomplete dropdowns
-   */
-  protected _dropdownSelectionLabelText: string | null = null;
-
-  /**
-   * Getter for visible value in input field
-   */
-  get dropdownSelectionLabelText(): string | null {
-    return this._dropdownSelectionLabelText;
-  }
-
-  /**
-   * Used in control.valueChanges subscription to not run update functions unless valueChange comes from application
-   */
-  protected _controlValueChangedInternally: boolean = false;
-
-  /**
    * CSS selector for querying focus states
    */
   public focusSelector: string = '.fudis-select-option__focusable';
 
   /**
-   * Focus try counter
+   * Internal translated text for disabled select option, used in Select and Multiselect Option
    */
-  private _focusTryCounter: number = 0;
+  public translationOptionDisabledText = new BehaviorSubject<string>('string');
+
+  /**
+   * Selected option or options label for non-autocomplete dropdowns
+   */
+  protected _dropdownSelectionLabelText: string | null = null;
+
+  /**
+   * Used in control.valueChanges subscription to not run update functions unless valueChange comes from application
+   */
+  protected _controlValueChangedInternally: boolean = false;
 
   /**
    * For setting dropdown open / closed
@@ -180,11 +173,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   protected _autocompleteFilterText: WritableSignal<string> = signal<string>('');
 
   /**
-   * Internal translated text for disabled select option, used in Select and Multiselect Option
-   */
-  public translationOptionDisabledText = new BehaviorSubject<string>('string');
-
-  /**
    *  Lazy loading check for expanding content, unless component control gets values from application, then set to true automatically, so that comparing available options match given control value.
    */
   protected _optionsLoadedOnce: boolean = false;
@@ -195,16 +183,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   protected _visibleOptions: string[] = [];
 
   /**
-   * Array to store visible options while options are loading.
-   */
-  private _visibleOptionsTemp: string[] = [];
-
-  /**
-   * Store latest option loaded
-   */
-  private _latestVisibleOption: string;
-
-  /**
    * Status of input focus
    */
   protected _inputFocused: boolean = false;
@@ -213,6 +191,21 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    * Used to handle exceptions when mouse click event fires before / after focus event or user has clicked autocomplete clear button
    */
   protected _preventDropdownReopen: boolean | undefined = false;
+
+  /**
+   * Focus try counter
+   */
+  private _focusTryCounter: number = 0;
+
+  /**
+   * Array to store visible options while options are loading.
+   */
+  private _visibleOptionsTemp: string[] = [];
+
+  /**
+   * Store latest option loaded
+   */
+  private _latestVisibleOption: string;
 
   /**
    * Currently focused option
@@ -249,28 +242,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    */
   private _keyDown: string | null = null;
 
-  /**
-   * When Clear button is clicked
-   */
-  protected _clearButtonClick(): void {
-    if (!this.disabled && !this.control.disabled) {
-      this._setControlNull();
-
-      this._focusToSelectInput();
-    }
-  }
-
-  /**
-   * Set control value to null
-   */
-  protected _setControlNull(): void {
-    this._controlValueChangedInternally = true;
-    this.control.patchValue(null);
-    this.selectionUpdate.emit(null);
-
-    this._updateInputValueTexts('');
-  }
-
   ngOnChanges(changes: FudisComponentChanges<SelectComponent | MultiselectComponent>): void {
     if (changes.control?.currentValue !== changes.control?.previousValue) {
       // TODO: refactor this after dynamic validator update ticket is done
@@ -303,6 +274,16 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    */
   public getAutocompleteFilterText(): Signal<string> {
     return this._autocompleteFilterText.asReadonly();
+  }
+
+  /**
+   * Open dropdown
+   */
+  public openDropdown(): void {
+    if (!this.disabled && !this.control.disabled) {
+      this._optionsLoadedOnce = true;
+      this._dropdownOpen = true;
+    }
   }
 
   /**
@@ -340,25 +321,74 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   }
 
   /**
-   * Resolve a promise after delay if there hasn't been new options
-   * @returns boolean
+   * Add or remove currently focused option. Called from SelectOptionBase.
    */
-  private _optionsLoadDelay(): Promise<boolean> {
-    let tempLatestOptions: string;
+  public setFocusedOption(id: string, type: 'add' | 'remove'): void {
+    if (type === 'add') {
+      this._focusedOption = id;
+    } else {
+      this._focusedOption = null;
+    }
+  }
 
+  /**
+   * Promise which determines, if some of the components used in this Select has focus or not.
+   * @param event FocusEvent
+   * @returns
+   */
+  public componentFocused(event: FocusEvent): Promise<boolean> {
     return new Promise((resolve) => {
-      this._optionLoadInterval = setInterval(() => {
-        if (tempLatestOptions === this._latestVisibleOption) {
-          if (this._optionLoadInterval) {
-            clearInterval(this._optionLoadInterval);
-            this._optionLoadInterval = null;
-          }
+      let counter = 0;
+
+      const nextTarget = event?.relatedTarget as HTMLElement;
+
+      const focusCheckInterval = setInterval(() => {
+        const focused =
+          !!this._selectRef.nativeElement.contains(this._document.activeElement) ||
+          !!this._selectRef.nativeElement.contains(nextTarget);
+
+        // If focus has moved another element inside Select
+        if (focused || this._mouseDownInsideComponent) {
+          clearInterval(focusCheckInterval);
+          this._mouseDownInsideComponent = false;
           resolve(true);
+          // If focus target is null
+        } else if (!nextTarget) {
+          clearInterval(focusCheckInterval);
+          resolve(false);
+
+          // Increase counter, and try again. This is needed usually with click events as between previous element blur and next element focus click event is "somewhere else"
+        } else if (counter <= 100) {
+          counter = counter + 50;
         } else {
-          tempLatestOptions = this._latestVisibleOption;
+          // Else resolve boolean check after two tries, if any relevant element is focused
+          clearInterval(focusCheckInterval);
+          resolve(!!this._focusedOption || this._inputFocused || this._clearButtonFocused);
         }
       }, 50);
     });
+  }
+
+  /**
+   * When Clear button is clicked
+   */
+  protected _clearButtonClick(): void {
+    if (!this.disabled && !this.control.disabled) {
+      this._setControlNull();
+
+      this._focusToSelectInput();
+    }
+  }
+
+  /**
+   * Set control value to null
+   */
+  protected _setControlNull(): void {
+    this._controlValueChangedInternally = true;
+    this.control.patchValue(null);
+    this.selectionUpdate.emit(null);
+
+    this._updateInputValueTexts('');
   }
 
   /**
@@ -485,13 +515,25 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
   }
 
   /**
-   * Open dropdown
+   * Resolve a promise after delay if there hasn't been new options
+   * @returns boolean
    */
-  public openDropdown(): void {
-    if (!this.disabled && !this.control.disabled) {
-      this._optionsLoadedOnce = true;
-      this._dropdownOpen = true;
-    }
+  private _optionsLoadDelay(): Promise<boolean> {
+    let tempLatestOptions: string;
+
+    return new Promise((resolve) => {
+      this._optionLoadInterval = setInterval(() => {
+        if (tempLatestOptions === this._latestVisibleOption) {
+          if (this._optionLoadInterval) {
+            clearInterval(this._optionLoadInterval);
+            this._optionLoadInterval = null;
+          }
+          resolve(true);
+        } else {
+          tempLatestOptions = this._latestVisibleOption;
+        }
+      }, 50);
+    });
   }
 
   /**
@@ -614,55 +656,6 @@ export class SelectBaseDirective extends InputBaseDirective implements OnChanges
    * Function declaration overridden and implemented by Select and Multiselect
    */
   protected _updateSelectionFromControlValue(): void {}
-
-  /**
-   * Add or remove currently focused option. Called from SelectOptionBase.
-   */
-  public setFocusedOption(id: string, type: 'add' | 'remove'): void {
-    if (type === 'add') {
-      this._focusedOption = id;
-    } else {
-      this._focusedOption = null;
-    }
-  }
-
-  /**
-   * Promise which determines, if some of the components used in this Select has focus or not.
-   * @param event FocusEvent
-   * @returns
-   */
-  public componentFocused(event: FocusEvent): Promise<boolean> {
-    return new Promise((resolve) => {
-      let counter = 0;
-
-      const nextTarget = event?.relatedTarget as HTMLElement;
-
-      const focusCheckInterval = setInterval(() => {
-        const focused =
-          !!this._selectRef.nativeElement.contains(this._document.activeElement) ||
-          !!this._selectRef.nativeElement.contains(nextTarget);
-
-        // If focus has moved another element inside Select
-        if (focused || this._mouseDownInsideComponent) {
-          clearInterval(focusCheckInterval);
-          this._mouseDownInsideComponent = false;
-          resolve(true);
-          // If focus target is null
-        } else if (!nextTarget) {
-          clearInterval(focusCheckInterval);
-          resolve(false);
-
-          // Increase counter, and try again. This is needed usually with click events as between previous element blur and next element focus click event is "somewhere else"
-        } else if (counter <= 100) {
-          counter = counter + 50;
-        } else {
-          // Else resolve boolean check after two tries, if any relevant element is focused
-          clearInterval(focusCheckInterval);
-          resolve(!!this._focusedOption || this._inputFocused || this._clearButtonFocused);
-        }
-      }, 50);
-    });
-  }
 
   /**
    * When pressing keyboard Esc, focus to Select input and close dropdown
