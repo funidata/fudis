@@ -240,7 +240,6 @@ export const selectArgsTableExclude: RegExp = excludeRegex([
   'setOptionVisibility',
   'focusToInput',
   'onBlur',
-  'getSelectedOptions',
   'handleCheckedSort',
   'handleMultiSelectionChange',
 ]);
@@ -260,7 +259,6 @@ export const selectStoryControlExclude: RegExp = excludeRegex([
   'focusSelector',
   'selectionUpdate',
   'handleBlur',
-  'getSelectedOptions',
   'handleCheckedSort',
   'handleMultiSelectionChange',
   'closeDropdown',
