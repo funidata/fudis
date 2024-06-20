@@ -216,6 +216,7 @@ export const linkExclude: RegExp = excludeRegex([
   'handleBlur',
   'handleFocus',
   'link',
+  'id',
 ]);
 
 /**

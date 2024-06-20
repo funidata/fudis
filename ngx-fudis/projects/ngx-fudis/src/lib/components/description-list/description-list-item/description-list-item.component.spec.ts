@@ -23,28 +23,28 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   template: `
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid">
       <fudis-dl-item>
-        <fudis-dt [textContent]="'First DT'">First DT</fudis-dt>
-        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
+        <fudis-dt [contentText]="'First DT'">First DT</fudis-dt>
+        <fudis-dd [contentText]="'This is my DD'"></fudis-dd>
       </fudis-dl-item>
       <fudis-dl-item>
-        <fudis-dt [textContent]="'Second DT'"></fudis-dt>
-        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
+        <fudis-dt [contentText]="'Second DT'"></fudis-dt>
+        <fudis-dd [contentText]="'This is my DD'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
 
     <fudis-dl [variant]="variant" [disableGrid]="disableGrid" [tag]="'p'">
       <fudis-dl-item>
-        <fudis-dt [textContent]="'Single DT'"></fudis-dt>
-        <fudis-dd [textContent]="'This is my DD'"></fudis-dd>
+        <fudis-dt [contentText]="'Single DT'"></fudis-dt>
+        <fudis-dd [contentText]="'This is my DD'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
 
     <fudis-dl>
       <fudis-dl-item #langDlItem>
-        <fudis-dt [textContent]="'Single DT'"></fudis-dt>
-        <fudis-dd *ngIf="firstLang" [lang]="'en'" [textContent]="'First English DD'"></fudis-dd>
-        <fudis-dd *ngIf="secondLang" [lang]="'en'" [textContent]="'Another English DD'"></fudis-dd>
-        <fudis-dd *ngIf="thirdLang" [lang]="'fi'" [textContent]="'Finnish DD'"></fudis-dd>
+        <fudis-dt [contentText]="'Single DT'"></fudis-dt>
+        <fudis-dd *ngIf="firstLang" [lang]="'en'" [contentText]="'First English DD'"></fudis-dd>
+        <fudis-dd *ngIf="secondLang" [lang]="'en'" [contentText]="'Another English DD'"></fudis-dd>
+        <fudis-dd *ngIf="thirdLang" [lang]="'fi'" [contentText]="'Finnish DD'"></fudis-dd>
       </fudis-dl-item>
     </fudis-dl>
   `,
