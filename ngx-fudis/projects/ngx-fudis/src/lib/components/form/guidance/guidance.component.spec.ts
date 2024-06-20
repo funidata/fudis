@@ -128,7 +128,7 @@ describe('GuidanceComponent', () => {
     it('should show maxLength indicator', () => {
       const lengthIndicator = getElement(
         fixture,
-        '.fudis-guidance__character-limit-indicator.fudis-guidance__character-limit-indicator',
+        '.fudis-guidance__character-limit-indicator.fudis-guidance__character-limit-indicator__md',
       );
 
       expect(lengthIndicator.innerHTML).toContain('0/20');
