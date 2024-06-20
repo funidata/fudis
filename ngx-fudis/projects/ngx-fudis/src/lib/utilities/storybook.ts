@@ -177,14 +177,12 @@ export const dropdownMenuControlsExclude: RegExp = excludeRegex([
   'multiselect',
   'open',
   'parentId',
-  'size',
   'handleBlur',
   'handleFocus',
   'dropdownElement',
   'dropdownMenuElement',
   'closeDropdownMenu',
   'setFocusedOption',
-  'align',
 ]);
 
 /**

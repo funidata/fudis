@@ -7,8 +7,6 @@ import {
   Inject,
   ChangeDetectionStrategy,
   effect,
-  Output,
-  EventEmitter,
   Input,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
@@ -16,7 +14,6 @@ import { DropdownMenuComponent } from '../dropdown-menu.component';
 import { FudisIdService } from '../../../services/id/id.service';
 import { FudisTranslationService } from '../../../services/translation/translation.service';
 import { BehaviorSubject } from 'rxjs';
-import { FudisDropdownMenuItem } from '../../../types/miscellaneous';
 import { DropdownItemBaseDirective } from '../../../directives/form/dropdown-item-base/dropdown-item-base.directive';
 import { DropdownMenuGroupComponent } from '../dropdown-menu-group/dropdown-menu-group.component';
 
@@ -45,7 +42,7 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective {
     effect(() => {
       const translations = _translationService.getTranslations()();
 
-      this.translationItemDisabledText.next(translations.DROPDOWNMENU.ITEM.DISABLED);
+      this._translationItemDisabledText.next(translations.DROPDOWNMENU.ITEM.DISABLED);
     });
   }
 
@@ -55,27 +52,26 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective {
   @ViewChild('dropdownItem') dropdownItem: ElementRef<HTMLButtonElement>;
 
   /**
-   * Dropdown Menu Item data
+   * Visible label for Menu Item
    */
-  @Input({ required: true }) data: FudisDropdownMenuItem<object>;
+  @Input({ required: true }) label: string;
 
   /**
-   * Item selection ouput event
+   * If Menu Item is disabled
    */
-  @Output() selectionUpdate: EventEmitter<FudisDropdownMenuItem<object> | null> =
-    new EventEmitter<FudisDropdownMenuItem<object> | null>();
+  @Input() disabled: boolean = false;
 
   /**
    * Internal translated text for disabled dropdown menu item
    */
-  public translationItemDisabledText = new BehaviorSubject<string>('');
+  protected _translationItemDisabledText = new BehaviorSubject<string>('');
 
   /**
    * Handle key down event
    */
   protected _handleKeyDown(event: KeyboardEvent) {
     if (event.key === 'Enter' || event.key === ' ') {
-      if (this.data.disabled) {
+      if (this.disabled) {
         event.preventDefault();
         return;
       } else {
@@ -105,27 +101,10 @@ export class DropdownMenuItemComponent extends DropdownItemBaseDirective {
    * Click handler for Dropdown Menu Item click
    */
   protected _clickOption(event: Event): void {
-    if (!this.data.disabled) {
-      const selectedOption: FudisDropdownMenuItem<object> = {
-        ...this.data,
-        fudisGeneratedHtmlId: this._id,
-      };
-
-      this.selectionUpdate.emit(selectedOption);
+    if (!this.disabled) {
       this.handleClick.emit(event);
 
-      this._executeAction(selectedOption);
-
       this._parentDropdownMenu.closeDropdownMenu();
-    }
-  }
-
-  /**
-   * Execute Dropdown Menu Item's object's callback function
-   */
-  private _executeAction(option: FudisDropdownMenuItem<object>): void {
-    if (option) {
-      option.callback?.();
     }
   }
 }

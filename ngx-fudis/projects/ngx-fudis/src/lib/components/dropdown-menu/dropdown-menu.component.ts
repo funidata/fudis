@@ -8,7 +8,6 @@ import {
   Inject,
   Input,
   OnInit,
-  Optional,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -34,7 +33,7 @@ export class DropdownMenuComponent
   constructor(
     private _idService: FudisIdService,
     @Inject(DOCUMENT) private _document: Document,
-    @Host() @Optional() private _parentButton: ButtonComponent,
+    @Host() private _parentButton: ButtonComponent,
   ) {
     super();
   }
@@ -42,7 +41,7 @@ export class DropdownMenuComponent
   /**
    * Template reference for the Dropdown Menu wrapper element
    */
-  @ViewChild('dropdownMenuElement') dropdownMenuElement: ElementRef<HTMLElement>;
+  @ViewChild('dropdownMenuElement') private _dropdownMenuElement: ElementRef<HTMLElement>;
 
   /**
    * Align Dropdown Menu opening position
@@ -52,12 +51,12 @@ export class DropdownMenuComponent
   /**
    * Dropdown Menu size
    */
-  @Input() override size: FudisInputSize = 'lg';
+  @Input() size: FudisInputSize = 'lg';
 
   /**
-   * Dropdown open status
+   * Determine dropdown max-width
    */
-  protected _dropdownOpen: boolean = true;
+  protected _maxWidth: string = 'initial';
 
   /**
    * Currently focused option
@@ -74,7 +73,7 @@ export class DropdownMenuComponent
       this._focusedOption = null;
       this._componentFocused(event).then((value) => {
         if (!value) {
-          this._parentButton.closeMenu();
+          this._parentButton.closeMenu(false);
         }
       });
     }
@@ -93,8 +92,8 @@ export class DropdownMenuComponent
 
       const focusCheckInterval = setInterval(() => {
         const focused =
-          !!this.dropdownMenuElement.nativeElement.contains(this._document.activeElement) ||
-          !!this.dropdownMenuElement.nativeElement.contains(nextTarget);
+          !!this._dropdownMenuElement.nativeElement.contains(this._document.activeElement) ||
+          !!this._dropdownMenuElement.nativeElement.contains(nextTarget);
 
         // If focus has moved to another element inside Dropdown Menu
         if (focused) {
@@ -111,6 +110,7 @@ export class DropdownMenuComponent
         } else {
           // Else resolve boolean check after two tries, if any relevant element is focused
           clearInterval(focusCheckInterval);
+
           resolve(!!this._focusedOption);
         }
       }, 50);
@@ -119,7 +119,6 @@ export class DropdownMenuComponent
 
   public closeDropdownMenu(): void {
     this._parentButton.closeMenu();
-    this._dropdownOpen = false;
   }
 
   @HostListener('mousedown', ['$event.target'])
@@ -133,9 +132,9 @@ export class DropdownMenuComponent
   @HostListener('window:click', ['$event'])
   private _getMaxWidth(): void {
     const elementInViewWidth =
-      this.dropdownMenuElement?.nativeElement?.getBoundingClientRect()?.width;
+      this._dropdownMenuElement?.nativeElement?.getBoundingClientRect()?.width;
 
-    const elementInViewX = this.dropdownMenuElement?.nativeElement?.getBoundingClientRect()?.x;
+    const elementInViewX = this._dropdownMenuElement?.nativeElement?.getBoundingClientRect()?.x;
 
     if (elementInViewX && elementInViewWidth && elementInViewWidth !== 0 && this.align === 'left') {
       this._maxWidth = `${elementInViewWidth + elementInViewX}px`;
@@ -151,25 +150,27 @@ export class DropdownMenuComponent
    */
   @HostListener('window:keydown', ['$event'])
   private _handleDropdownMenuKeyDown(event: KeyboardEvent) {
-    if (event.key === 'ArrowDown') {
-      event.preventDefault();
+    if (this._parentButton.dropdownOpen.value) {
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
 
-      const firstChildElement = this.dropdownMenuElement.nativeElement.children[0];
+        const firstChildElement = this._dropdownMenuElement.nativeElement.children[0];
 
-      // If focus is on the menu button, only then listen keydown and focus on the first child
-      if (
-        firstChildElement.closest('fudis-button')?.querySelector('.fudis-button') ===
-        document.activeElement
-      ) {
-        const firstChildButtonElement = firstChildElement.querySelector('button');
-        firstChildButtonElement?.focus();
+        // If focus is on the menu button, only then listen keydown and focus on the first child
+        if (
+          firstChildElement.closest('fudis-button')?.querySelector('.fudis-button') ===
+          document.activeElement
+        ) {
+          const firstChildButtonElement = firstChildElement.querySelector('button');
+          firstChildButtonElement?.focus();
+        }
       }
-    }
 
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      event.stopPropagation();
-      this._parentButton.closeMenu();
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        event.stopPropagation();
+        this._parentButton.closeMenu();
+      }
     }
   }
 
@@ -179,5 +180,12 @@ export class DropdownMenuComponent
 
   ngAfterContentInit(): void {
     this._getMaxWidth();
+  }
+
+  /**
+   * Get defined dropdown css max-width attribute
+   */
+  get maxWidth(): string {
+    return this._maxWidth;
   }
 }

@@ -1,18 +1,18 @@
 <ng-container *ngIf="tooltip">
   <button
     #buttonElement
+    fudisTooltip
+    [class]="_classList | async"
     [type]="type"
     (blur)="_handleButtonBlur($event)"
     (focus)="_handleButtonFocus($event)"
+    (click)="!disabled && buttonClick($event)"
+    (keydown)="_handleMenuButtonKeyDown($event)"
     [attr.aria-disabled]="disabled"
-    [attr.aria-label]="_ariaLabel"
+    [attr.aria-label]="_ariaLabel | async"
     [attr.id]="_id"
     [attr.aria-expanded]="!asMenuButton ? null : dropdownOpen"
     [attr.aria-controls]="asMenuButton && dropdownMenuId ? dropdownMenuId : null"
-    (click)="!disabled && buttonClick($event)"
-    (keydown)="_handleMenuButtonKeyDown($event)"
-    [ngClass]="_classList"
-    fudisTooltip
     [tooltip]="tooltip"
     [tooltipPosition]="tooltipPosition"
     [tooltipToggle]="tooltipToggle"
@@ -20,8 +20,9 @@
     <ng-container *ngIf="icon">
       <div class="fudis-button__icon">
         <fudis-icon
+          *ngIf="_iconColor | async as iconColor"
           class="fudis-button__icon__component"
-          [color]="_iconColor"
+          [color]="iconColor"
           [icon]="icon"
           [rotate]="iconRotate"
         ></fudis-icon>
@@ -34,23 +35,24 @@
 <ng-container *ngIf="!tooltip">
   <button
     #buttonElement
+    [class]="_classList | async"
     [type]="type"
+    (click)="!disabled && buttonClick($event)"
     (blur)="_handleButtonBlur($event)"
     (focus)="_handleButtonFocus($event)"
+    (keydown)="_handleMenuButtonKeyDown($event)"
     [attr.aria-disabled]="disabled"
-    [attr.aria-label]="_ariaLabel"
+    [attr.aria-label]="_ariaLabel | async"
     [attr.id]="_id"
     [attr.aria-expanded]="!asMenuButton ? null : dropdownOpen"
     [attr.aria-controls]="asMenuButton && dropdownMenuId ? dropdownMenuId : null"
-    (click)="!disabled && buttonClick($event)"
-    (keydown)="_handleMenuButtonKeyDown($event)"
-    [ngClass]="_classList"
   >
     <ng-container *ngIf="icon">
       <div class="fudis-button__icon">
         <fudis-icon
+          *ngIf="_iconColor | async as iconColor"
           class="fudis-button__icon__component"
-          [color]="_iconColor"
+          [color]="iconColor"
           [icon]="icon"
           [rotate]="iconRotate"
         ></fudis-icon>
@@ -59,6 +61,6 @@
   >
 </ng-container>
 
-<ng-container *ngIf="asMenuButton && dropdownOpen">
+<ng-container *ngIf="asMenuButton && (dropdownOpen | async)">
   <ng-content></ng-content>
 </ng-container>

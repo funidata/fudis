@@ -544,10 +544,10 @@ export const testGrandParentDataAfter: FudisIdData = {
             'fudis-dropdown-menu-1-group-2-option-2',
             'fudis-dropdown-menu-1-group-2-option-3',
           ],
-          'dropdown-menu-1-custom-child-id': [
-            'dropdown-menu-1-custom-child-id-option-1',
-            'dropdown-menu-1-custom-child-id-option-2',
-            'dropdown-menu-1-custom-child-id-option-3',
+          'fudis-dropdown-menu-1-custom-child-id': [
+            'fudis-dropdown-menu-1-custom-child-id-option-1',
+            'fudis-dropdown-menu-1-custom-child-id-option-2',
+            'fudis-dropdown-menu-1-custom-child-id-option-3',
           ],
           'fudis-dropdown-menu-1-group-4': [
             'fudis-dropdown-menu-1-group-4-option-1',
@@ -579,10 +579,10 @@ export const testGrandParentDataAfter: FudisIdData = {
             'fudis-dropdown-menu-2-group-2-option-2',
             'fudis-dropdown-menu-2-group-2-option-3',
           ],
-          'dropdown-menu-2-custom-child-id': [
-            'dropdown-menu-2-custom-child-id-option-1',
-            'dropdown-menu-2-custom-child-id-option-2',
-            'dropdown-menu-2-custom-child-id-option-3',
+          'fudis-dropdown-menu-2-custom-child-id': [
+            'fudis-dropdown-menu-2-custom-child-id-option-1',
+            'fudis-dropdown-menu-2-custom-child-id-option-2',
+            'fudis-dropdown-menu-2-custom-child-id-option-3',
           ],
           'fudis-dropdown-menu-2-group-4': [
             'fudis-dropdown-menu-2-group-4-option-1',
@@ -649,10 +649,10 @@ export const testGrandParentDataAfter: FudisIdData = {
             'fudis-dropdown-menu-4-group-2-option-2',
             'fudis-dropdown-menu-4-group-2-option-3',
           ],
-          'dropdown-menu-4-custom-child-id': [
-            'dropdown-menu-4-custom-child-id-option-1',
-            'dropdown-menu-4-custom-child-id-option-2',
-            'dropdown-menu-4-custom-child-id-option-3',
+          'fudis-dropdown-menu-4-custom-child-id': [
+            'fudis-dropdown-menu-4-custom-child-id-option-1',
+            'fudis-dropdown-menu-4-custom-child-id-option-2',
+            'fudis-dropdown-menu-4-custom-child-id-option-3',
           ],
           'fudis-dropdown-menu-4-group-4': [
             'fudis-dropdown-menu-4-group-4-option-1',
@@ -684,10 +684,10 @@ export const testGrandParentDataAfter: FudisIdData = {
             'fudis-dropdown-menu-5-group-2-option-2',
             'fudis-dropdown-menu-5-group-2-option-3',
           ],
-          'dropdown-menu-5-custom-child-id': [
-            'dropdown-menu-5-custom-child-id-option-1',
-            'dropdown-menu-5-custom-child-id-option-2',
-            'dropdown-menu-5-custom-child-id-option-3',
+          'fudis-dropdown-menu-5-custom-child-id': [
+            'fudis-dropdown-menu-5-custom-child-id-option-1',
+            'fudis-dropdown-menu-5-custom-child-id-option-2',
+            'fudis-dropdown-menu-5-custom-child-id-option-3',
           ],
           'fudis-dropdown-menu-5-group-4': [
             'fudis-dropdown-menu-5-group-4-option-1',

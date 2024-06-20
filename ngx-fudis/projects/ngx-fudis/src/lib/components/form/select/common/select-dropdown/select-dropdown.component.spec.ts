@@ -43,7 +43,7 @@ describe('SelectDropdownComponent', () => {
     });
 
     it('should have CSS host class', () => {
-      expect(component.classes).toEqual('fudis-dropdown-menu-host');
+      expect(component.hostClass).toEqual('fudis-dropdown-menu-host');
     });
 
     it('should not show help text with dropdown', () => {

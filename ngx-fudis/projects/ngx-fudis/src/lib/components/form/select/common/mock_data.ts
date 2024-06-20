@@ -1,5 +1,4 @@
 import { FudisSelectOption } from '../../../../types/forms';
-import { FudisDropdownMenuItem } from '../../../../types/miscellaneous';
 
 interface MockSelectOptionGroupData {
   country: string;
@@ -8,7 +7,7 @@ interface MockSelectOptionGroupData {
 
 interface MockDropdownMenuGroupData {
   country: string;
-  items: FudisDropdownMenuItem<TestMenuItemActions>[];
+  items: TestMenuItemActions[];
 }
 
 export type TestAnimalSound = {
@@ -31,19 +30,17 @@ export const defaultOptions: FudisSelectOption<TestAnimalSound>[] = [
   { value: 'value-6-gecko', label: 'Southern Titiwangsa Bent-Toed Gecko', sound: 'Gec-koooo!' },
 ];
 
-export const defaultMenuItems: FudisDropdownMenuItem<TestMenuItemActions>[] = [
+export const defaultMenuItems: TestMenuItemActions[] = [
   {
-    label: 'Click here to console.log "hey"',
+    label: 'First item',
     disabled: false,
-    callback: () => console.log('hey'),
   },
-  { label: 'Click here to console.log "ho"', disabled: true, callback: () => console.log('ho') },
+  { label: 'Second item', disabled: true },
   {
-    label: 'Click here to console.log "lets"',
+    label: 'Third item with really long label to push it to the limit!',
     disabled: false,
-    callback: () => console.log('lets'),
   },
-  { label: 'Click here to console.log "go"', disabled: false, callback: () => console.log('go') },
+  { label: 'Fourth item', disabled: false },
 ];
 
 export const multiselectChipListMockData: FudisSelectOption<object>[] = [
@@ -63,7 +60,6 @@ export type TestAnimalScience = {
 export type TestMenuItemActions = {
   label: string;
   disabled?: boolean;
-  callback: () => void;
 };
 
 type CountryData = {
@@ -986,12 +982,10 @@ export const smallDropdownMenuGroupedMockData: MockDropdownMenuGroupData[] = [
       {
         label: 'Golden jackal',
         disabled: false,
-        callback: () => console.log('Golden jackal chosen'),
       },
       {
         label: 'Mountain lion',
         disabled: false,
-        callback: () => console.log('Mountain lion chosen'),
       },
     ],
   },
@@ -1001,12 +995,10 @@ export const smallDropdownMenuGroupedMockData: MockDropdownMenuGroupData[] = [
       {
         label: 'Small Indian mongoose',
         disabled: true,
-        callback: () => console.log('Small Indian mongoose chosen'),
       },
       {
         label: 'Falcon, prairie',
         disabled: false,
-        callback: () => console.log('Falcon, prairie chosen'),
       },
     ],
   },
@@ -1015,11 +1007,9 @@ export const smallDropdownMenuGroupedMockData: MockDropdownMenuGroupData[] = [
     items: [
       {
         label: 'Salmon pink bird eater tarantula',
-        callback: () => console.log('Salmon pink bird eater tarantula chosen'),
       },
       {
         label: 'Crane, sandhill',
-        callback: () => console.log('Crane, sandhill chosen'),
       },
     ],
   },

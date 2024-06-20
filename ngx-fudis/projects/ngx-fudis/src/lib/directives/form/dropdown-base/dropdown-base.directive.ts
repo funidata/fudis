@@ -1,13 +1,4 @@
-import {
-  Directive,
-  ElementRef,
-  EventEmitter,
-  HostBinding,
-  Input,
-  Output,
-  ViewChild,
-} from '@angular/core';
-import { FudisInputSize } from '../../../types/forms';
+import { Directive, ElementRef, EventEmitter, HostBinding, Output, ViewChild } from '@angular/core';
 
 @Directive({
   selector: '[fudisDropdownBase]',
@@ -22,26 +13,6 @@ export class DropdownBaseDirective {
    * Binding host CSS class to component wrapper
    */
   @HostBinding('class') public hostClass = 'fudis-dropdown-menu-host';
-
-  /**
-   * Assign Select dropdown as single-select or multiselect (with checkboxes)
-   */
-  @Input() multiselect: boolean = false;
-
-  /**
-   * Set dropdown open status
-   */
-  @Input() open: boolean = false;
-
-  /**
-   * Id of parent component
-   */
-  @Input() parentId: string;
-
-  /**
-   * Set dropdown size
-   */
-  @Input() size: FudisInputSize | 'xs' = 'lg';
 
   /**
    * Output emitter for focus event
@@ -59,11 +30,6 @@ export class DropdownBaseDirective {
   public id: string;
 
   /**
-   * Determine dropdown max-width
-   */
-  protected _maxWidth: string = 'initial';
-
-  /**
    * When dropdown is focused, happens e. g. with Firefox
    */
   protected _dropdownFocus(event: FocusEvent): void {
@@ -75,12 +41,5 @@ export class DropdownBaseDirective {
    */
   protected _dropdownBlur(event: FocusEvent): void {
     this.handleBlur.emit(event);
-  }
-
-  /**
-   * Get defined dropdown css max-width attribute
-   */
-  get maxWidth(): string {
-    return this._maxWidth;
   }
 }

@@ -3,18 +3,18 @@
   class="fudis-dropdown-menu-item fudis-dropdown-menu-item__focusable"
   [attr.id]="_id"
   [attr.role]="'menuitem'"
-  [attr.aria-disabled]="data.disabled"
-  [class.fudis-dropdown-menu-item--disabled]="data.disabled"
+  [attr.aria-disabled]="disabled || null"
+  [class.fudis-dropdown-menu-item--disabled]="disabled || null"
   (keydown)="_handleKeyDown($event)"
   (blur)="_handleMenuItemBlur($event)"
   (focus)="_handleMenuItemFocus()"
-  (click)="!data.disabled && _clickOption($event)"
+  (click)="!disabled && _clickOption($event)"
 >
-  {{ data.label }}
+  {{ label }}
   <span
-    *ngIf="data.disabled"
+    *ngIf="disabled || null"
     class="fudis-dropdown-menu-item__label fudis-dropdown-menu-item__label__disabled-text"
   >
-    ({{ translationItemDisabledText | async }})</span
+    ({{ _translationItemDisabledText | async }})</span
   >
 </button>
