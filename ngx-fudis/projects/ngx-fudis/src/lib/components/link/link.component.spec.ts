@@ -7,7 +7,6 @@ import { IconComponent } from '../icon/icon.component';
 import { LinkComponent } from './link.component';
 import { LinkDirective } from '../../directives/link/link.directive';
 import { getElement } from '../../utilities/tests/utilities';
-import { FudisLinkColor } from '../../types/miscellaneous';
 
 describe('LinkComponent', () => {
   let component: LinkComponent;
@@ -29,15 +28,6 @@ describe('LinkComponent', () => {
     fixture.detectChanges();
   });
 
-  function linkColorCheck(color: FudisLinkColor): void {
-    component.color = color;
-    fixture.detectChanges();
-
-    const linkEl = getElement(fixture, 'a');
-
-    expect(linkEl.className).toContain(`fudis-link__color__${color}`);
-  }
-
   function linkSizeCheck(size: 'inherit' | 'md' | 'lg'): void {
     component.size = size;
     fixture.detectChanges();
@@ -53,16 +43,8 @@ describe('LinkComponent', () => {
       const linkElement = getElement(fixture, 'a');
       const linkClasses = linkElement.className;
 
-      expect(linkClasses).toContain(
-        'fudis-link fudis-link__color__primary-dark fudis-link__router fudis-link__size__inherit',
-      );
+      expect(linkClasses).toContain('fudis-link fudis-link__router fudis-link__size__inherit');
       expect(wrapperElement).toBeTruthy();
-    });
-
-    it('should have respective CSS class for color', () => {
-      linkColorCheck('gray-dark');
-      linkColorCheck('primary-dark');
-      linkColorCheck('white');
     });
 
     it('should have respective CSS class for size', () => {
@@ -100,7 +82,7 @@ describe('LinkComponent', () => {
       const externalLinkClasses = externalLinkElement.className;
 
       expect(externalLinkClasses).toContain(
-        'fudis-link fudis-link__color__primary-dark fudis-link__external fudis-link__size__inherit',
+        'fudis-link fudis-link__external fudis-link__size__inherit',
       );
     });
 

@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { FudisBodyText, FudisTextAlign } from '../../../types/typography';
 import { DialogComponent } from '../../dialog/dialog.component';
+import { FudisIdService } from '../../../services/id/id.service';
 
 @Component({
   selector: 'fudis-body-text',
@@ -16,7 +17,12 @@ import { DialogComponent } from '../../dialog/dialog.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BodyTextComponent {
-  constructor(@Host() @Optional() private _parentDialog: DialogComponent) {
+  constructor(
+    @Host() @Optional() private _parentDialog: DialogComponent,
+    private _idService: FudisIdService,
+  ) {
+    this._id = _idService.getNewId('body-text');
+
     if (_parentDialog) {
       this.variant = 'md-light';
     }
@@ -36,6 +42,11 @@ export class BodyTextComponent {
    * Text alignment
    */
   @Input() align: FudisTextAlign = 'left';
+
+  /**
+   * Id generated from Id Service
+   */
+  protected _id: string;
 
   // TODO: Enable Input spacing for marginBottom
 }

@@ -46,7 +46,7 @@ export class DescriptionListItemTermComponent {
   /**
    * Visible text content for term
    */
-  @Input() textContent: string;
+  @Input() contentText: string;
 
   /**
    * Available languages of sibling dt elements fetched from the parent dl-item element

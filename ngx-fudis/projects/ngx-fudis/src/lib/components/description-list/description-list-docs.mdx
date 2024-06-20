@@ -29,12 +29,12 @@ Description List is built using child components as follows:
 
 ### Text Content
 
-Term and Details content is passed through `textContent` Input property.
+Term and Details content is passed through `contentText` Input property.
 
 <Source
   code={`
-<fudis-dt [textContent]="'This is Term element text'" />
-<fudis-dd [textContent]="'Here is the Details element text'" />`}
+<fudis-dt [contentText]="'This is Term element text'" />
+<fudis-dd [contentText]="'Here is the Details element text'" />`}
 />
 
 **Note!** Although with Details element it also works, that content is just passed between `<fudis-dd>` tags, it is primarily used for nesting additional content e. g. another list or a button.
@@ -47,10 +47,10 @@ Details element has also `subHeading` Input for adding optional sub-heading betw
   code={`
 <fudis-dl>
   <fudis-dl-item>
-  <fudis-dt [textContent]="'I am the main Term text content'" />
-  <fudis-dd [subHeading]="'I am Details Sub heading'" [textContent]="'I am first Details element'" />
-  <fudis-dd [textContent]="'I am second Details element'" />
-  <fudis-dd [textContent]="'I am third Details element'" />
+  <fudis-dt [contentText]="'I am the main Term text content'" />
+  <fudis-dd [subHeading]="'I am Details Sub heading'" [contentText]="'I am first Details element'" />
+  <fudis-dd [contentText]="'I am second Details element'" />
+  <fudis-dd [contentText]="'I am third Details element'" />
 </fudis-dl-item>
 </fudis-dl>`}
 />
@@ -63,8 +63,8 @@ By default Description List Component, as its name suggests, renders a `<dl>` ta
   code={`
 <fudis-dl [tag]="'p'">
   <fudis-dl-item>
-    <fudis-dt [textContent]="'Single Item Key'"/>
-    <fudis-dd [textContent]="'And value for that'"/>
+    <fudis-dt [contentText]="'Single Item Key'"/>
+    <fudis-dd [contentText]="'And value for that'"/>
   </fudis-dl-item>
 </fudis-dl>`}
 />
@@ -113,10 +113,10 @@ Set in your `fudis-dd` element `lang` attribute to tell which translation it rep
   code={`
 <fudis-dl>
   <fudis-dl-item>
-    <fudis-dt [textContent]="'Example Languages'" />
-    <fudis-dd [lang]="'en'" [textContent]="'This is in English'" />
-    <fudis-dd [lang]="'fi'" [textContent]="'Tämä on suomeksi'" />
-    <fudis-dd [lang]="'sv'" [textContent]="'Den här är på Svenska'" />
+    <fudis-dt [contentText]="'Example Languages'" />
+    <fudis-dd [lang]="'en'" [contentText]="'This is in English'" />
+    <fudis-dd [lang]="'fi'" [contentText]="'Tämä on suomeksi'" />
+    <fudis-dd [lang]="'sv'" [contentText]="'Den här är på Svenska'" />
   </fudis-dl-item>
 </fudis-dl>`}
 />

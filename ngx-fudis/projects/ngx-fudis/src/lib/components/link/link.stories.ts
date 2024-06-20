@@ -15,12 +15,6 @@ export default {
     },
   },
   argTypes: {
-    color: {
-      options: ['primary-dark', 'gray-dark', 'white'],
-      control: {
-        type: 'radio',
-      },
-    },
     initialFocus: {
       table: { disable: true },
     },
@@ -33,25 +27,27 @@ const Template: StoryFn<LinkComponent> = (args: LinkComponent) => ({
 
 export const Example = Template.bind({});
 Example.args = {
-  href: 'https://www.example.com',
-  color: 'primary-dark',
-  initialFocus: false,
   size: 'inherit',
+  title: '',
+  href: 'https://www.example.com',
+  externalLink: '',
+  initialFocus: false,
 };
 
 export const ExampleWithExternalLink = Template.bind({});
 ExampleWithExternalLink.args = {
-  externalLink: 'https://www.example.com',
-  color: 'primary-dark',
-  initialFocus: false,
   size: 'inherit',
+  title: '',
+  href: '',
+  externalLink: 'https://www.example.com',
+  initialFocus: false,
 };
 
 export const ExampleWithLinkWithTitle = Template.bind({});
 ExampleWithLinkWithTitle.args = {
-  externalLink: 'https://www.example.com',
-  title: 'Visible title for the link',
-  color: 'primary-dark',
-  initialFocus: false,
   size: 'inherit',
+  title: 'Visible title for the link',
+  href: '',
+  externalLink: 'https://www.example.com',
+  initialFocus: false,
 };
