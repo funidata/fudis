@@ -126,7 +126,10 @@ describe('GuidanceComponent', () => {
     });
 
     it('should show maxLength indicator', () => {
-      const lengthIndicator = getElement(fixture, '.fudis-guidance__character-limit-indicator');
+      const lengthIndicator = getElement(
+        fixture,
+        '.fudis-guidance__character-limit-indicator.fudis-guidance__character-limit-indicator',
+      );
 
       expect(lengthIndicator.innerHTML).toContain('0/20');
 
@@ -196,7 +199,10 @@ describe('GuidanceComponent', () => {
         );
         fixture.detectChanges();
 
-        const lengthIndicator = getElement(fixture, '.fudis-guidance__character-limit-indicator');
+        const lengthIndicator = getElement(
+          fixture,
+          '.fudis-guidance__character-limit-indicator.fudis-guidance__character-limit-indicator__md',
+        );
         expect(lengthIndicator.innerHTML).toContain('64/20');
       });
 

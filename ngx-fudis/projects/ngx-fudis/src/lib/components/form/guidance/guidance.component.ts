@@ -110,6 +110,11 @@ export class GuidanceComponent implements OnInit {
   protected _maxLengthAlertThreshold: number;
 
   /**
+   * The width of the character-limit-indicator, determined by how many digits are in the maxLength input value
+   */
+  protected _maxLengthWidth: 'sm' | 'md' | 'lg';
+
+  /**
    * Id from IdService
    */
   protected _id: string;
@@ -121,6 +126,7 @@ export class GuidanceComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.maxLength) {
+      this._maxLengthWidth = this.maxLength > 100 ? 'lg' : this.maxLength > 10 ? 'md' : 'sm';
       this._maxLengthAlertThreshold = this.maxLength - 5;
     }
   }
