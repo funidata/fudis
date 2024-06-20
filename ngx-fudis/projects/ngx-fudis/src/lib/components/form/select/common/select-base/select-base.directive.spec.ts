@@ -182,7 +182,7 @@ describe('SelectBaseDirective', () => {
     });
 
     it('should have size', () => {
-      const sizes: (FudisInputSize | 'xs')[] = ['xs', 'md', 'lg'];
+      const sizes: (FudisInputSize | 'xs')[] = ['xs', 'sm', 'md', 'lg'];
 
       sizes.forEach((size) => {
         component.size = size;
@@ -273,7 +273,7 @@ describe('SelectBaseDirective', () => {
   });
 
   describe('Outputs', () => {
-    it.only('should emit selectionUpdate', () => {
+    it('should emit selectionUpdate', () => {
       jest.spyOn(component.multiSelect.selectionUpdate, 'emit');
 
       component.multiSelect.openDropdown();
@@ -304,16 +304,8 @@ describe('SelectBaseDirective', () => {
 
     it('should emit filterTextUpdate', () => {
       jest.spyOn(component.multiSelectAuto.filterTextUpdate, 'emit');
-      const inputElement = getElement(
-        fixture,
-        '#fudis-multiselect-2-main-wrapper .fudis-select-autocomplete',
-      ) as HTMLInputElement;
 
-      inputElement.value = 'hello';
-
-      inputElement.dispatchEvent(new KeyboardEvent('keyup'));
-
-      fixture.detectChanges();
+      component.multiSelectAuto.autocompleteRef.updateInputValue('hello');
 
       expect(component.multiSelectAuto.filterTextUpdate.emit).toHaveBeenCalledWith('hello');
     });
