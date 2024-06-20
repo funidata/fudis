@@ -48,10 +48,12 @@ const commonArgs: Partial<SelectComponent> = {
   disabled: false,
   placeholder: 'Choose a pet',
   helpText: 'All pets are equally important, but for sake of this example please pick one.',
+  autocompleteHelpText: 'Hello from Dropdown Help Text!',
   selectionClearButton: true,
+  variant: 'dropdown',
 };
 
-const DropdownTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
+const ExampleTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
   props: {
     ...args,
     defaultOptions,
@@ -68,7 +70,7 @@ const DropdownTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
       [disabled]="disabled"
       [helpText]="helpText"
       [selectionClearButton]="selectionClearButton"
-      [variant]="'dropdown'"
+      [variant]="variant"
       (selectionUpdate)="selectionUpdate($event)"
     >
       <ng-template fudisContent type="select-options">
@@ -87,91 +89,7 @@ const DropdownTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
   `,
 });
 
-export const Dropdown = DropdownTemplate.bind({});
-Dropdown.args = {
-  ...commonArgs,
-};
-
-const AutocompleteDropdownTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
-  props: {
-    ...args,
-    defaultOptions,
-    selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<TestAnimalSound | TestAnimalScience | null>(null),
-    groupedMockData,
-  },
-  template: html`
-    <fudis-select
-      [size]="size"
-      [placeholder]="placeholder"
-      [control]="control"
-      [variant]="'autocompleteDropdown'"
-      [label]="label"
-      [disabled]="disabled"
-      [helpText]="helpText"
-      [selectionClearButton]="selectionClearButton"
-      [variant]="'autocompleteDropdown'"
-      (selectionUpdate)="selectionUpdate($event)"
-    >
-      <ng-template fudisContent type="select-options">
-        <fudis-select-option
-          *ngFor="let option of defaultOptions"
-          [data]="option"
-        ></fudis-select-option>
-        <fudis-select-group *ngFor="let group of groupedMockData" [label]="group.country">
-          <fudis-select-option
-            *ngFor="let groupedOption of group.options"
-            [data]="groupedOption"
-          ></fudis-select-option>
-        </fudis-select-group>
-      </ng-template>
-    </fudis-select>
-  `,
-});
-
-export const AutocompleteDropdown = AutocompleteDropdownTemplate.bind({});
-AutocompleteDropdown.args = {
-  ...commonArgs,
-};
-
-const AutocompleteTypeTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
-  props: {
-    ...args,
-    defaultOptions,
-    selectionUpdate: action('selectionUpdate'),
-    control: new FormControl<TestAnimalSound | TestAnimalScience | null>(null),
-    groupedMockData,
-  },
-  template: html`
-    <fudis-select
-      [size]="size"
-      [placeholder]="placeholder"
-      [control]="control"
-      [variant]="'autocompleteType'"
-      [label]="label"
-      [disabled]="disabled"
-      [helpText]="helpText"
-      [selectionClearButton]="selectionClearButton"
-      [variant]="'autocompleteType'"
-      (selectionUpdate)="selectionUpdate($event)"
-    >
-      <ng-template fudisContent type="select-options">
-        <fudis-select-option
-          *ngFor="let option of defaultOptions"
-          [data]="option"
-        ></fudis-select-option>
-        <fudis-select-group *ngFor="let group of groupedMockData" [label]="group.country">
-          <fudis-select-option
-            *ngFor="let groupedOption of group.options"
-            [data]="groupedOption"
-          ></fudis-select-option>
-        </fudis-select-group>
-      </ng-template>
-    </fudis-select>
-  `,
-});
-
-export const AutocompleteType = AutocompleteTypeTemplate.bind({});
-AutocompleteType.args = {
+export const Example = ExampleTemplate.bind({});
+Example.args = {
   ...commonArgs,
 };

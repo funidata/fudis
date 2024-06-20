@@ -3,12 +3,14 @@
 @use "../../../../../foundations/focus/mixins.scss" as focus;
 @use "../../../../../foundations/spacing/tokens.scss" as spacing;
 @use "../../../../../foundations/typography/mixins.scss" as typography;
+@use "../../../../../foundations/typography/tokens.scss" as typographyTokens;
 @use "../../../../../foundations/utilities/mixins.scss" as utilities;
 
 .fudis-select-option {
   @include utilities.box-reset;
-  @include typography.body-text-md-light;
+  @include typography.body-text-md-regular;
   @include colorMixins.bg-color("transparent");
+  @include colorMixins.text-color("gray-dark");
   @include borders.border-none;
 
   display: flex;
@@ -30,7 +32,6 @@
 
   &:hover {
     @include colorMixins.bg-color("primary-light");
-    @include colorMixins.text-color("gray-dark");
   }
 
   &:focus-visible,
@@ -70,5 +71,16 @@
     margin: spacing.$spacing-xs 0;
     /* stylelint-disable-next-line property-disallowed-list */
     line-height: spacing.$spacing-sm;
+
+    &__main {
+      display: block;
+    }
+
+    &__sub {
+      @include typography.body-text-sm-regular;
+
+      display: block;
+      margin-top: spacing.$spacing-xxs;
+    }
   }
 }

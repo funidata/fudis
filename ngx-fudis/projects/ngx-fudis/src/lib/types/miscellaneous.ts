@@ -106,6 +106,8 @@ export interface FudisTranslationConfig {
       // Clear filter button label for screen readers
       CLEAR: string;
       NO_RESULTS: string;
+      SHOWING: string;
+      RESULTS: string;
     };
   };
   IMAGE: {
