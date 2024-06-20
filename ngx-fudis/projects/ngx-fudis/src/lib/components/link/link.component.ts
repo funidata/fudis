@@ -2,17 +2,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Host,
   Input,
   OnChanges,
-  Optional,
   Output,
   effect,
 } from '@angular/core';
 import { FudisTranslationService } from '../../services/translation/translation.service';
 import { FudisComponentChanges } from '../../types/miscellaneous';
 import { LinkApiDirective } from '../../directives/link/link-api/link-api.directive';
-import { NotificationComponent } from '../notification/notification.component';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -22,15 +19,8 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinkComponent extends LinkApiDirective implements OnChanges {
-  constructor(
-    @Host() @Optional() private _parentNotification: NotificationComponent,
-    private _translationService: FudisTranslationService,
-  ) {
+  constructor(private _translationService: FudisTranslationService) {
     super();
-
-    if (_parentNotification) {
-      this.color = 'gray-dark';
-    }
 
     effect(() => {
       this._externalLinkAriaLabel.next(
