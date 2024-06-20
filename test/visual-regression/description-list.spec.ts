@@ -66,23 +66,9 @@ test("nested description list compact and grid enabled", async ({ page }) => {
   await expect(page).toHaveScreenshot({ fullPage: true });
 });
 
-test("nested description list regular and grid enabled", async ({ page }) => {
-  await page.goto(
-    "/iframe.html?args=variant:regular&id=components-description-list--nested-description-lists&viewMode=story",
-  );
-  await expect(page).toHaveScreenshot({ fullPage: true });
-});
-
 test("nested description list compact and grid disabled", async ({ page }) => {
   await page.goto(
     "/iframe.html?args=disableGrid:!true&id=components-description-list--nested-description-lists&viewMode=story",
-  );
-  await expect(page).toHaveScreenshot({ fullPage: true });
-});
-
-test("nested description list regular and grid disabled", async ({ page }) => {
-  await page.goto(
-    "/iframe.html?args=variant:regular;disableGrid:!true&id=components-description-list--nested-description-lists&viewMode=story",
   );
   await expect(page).toHaveScreenshot({ fullPage: true });
 });

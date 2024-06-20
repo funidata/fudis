@@ -141,6 +141,11 @@ export const descriptionListArgsTypesExclude: RegExp = excludeRegex([
   'serviceDefaults',
 ]);
 
+export const nestedDescriptionListExclude: RegExp = excludeRegex([
+  ...descriptionListCommonExclude,
+  'variant',
+]);
+
 export const descriptionListExclude: RegExp = excludeRegex([...descriptionListCommonExclude]);
 
 /**
