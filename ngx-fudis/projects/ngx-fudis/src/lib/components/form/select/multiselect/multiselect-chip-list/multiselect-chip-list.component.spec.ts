@@ -95,5 +95,27 @@ describe('MultiselectChipListComponent', () => {
 
       expect(component.handleClick.emit).toHaveBeenCalledWith(multiselectChipListMockData[2]);
     });
+
+    it('should not emit click event if chip is not first focused', () => {
+      const itemToRemove = chipList[1];
+      jest.spyOn(component.handleClick, 'emit');
+
+      itemToRemove.dispatchEvent(new MouseEvent('click'));
+      fixture.detectChanges();
+
+      expect(component.handleClick.emit).not.toHaveBeenCalled();
+
+      itemToRemove.dispatchEvent(new FocusEvent('focus'));
+      itemToRemove.dispatchEvent(new FocusEvent('blur'));
+      itemToRemove.dispatchEvent(new MouseEvent('click'));
+      fixture.detectChanges();
+
+      expect(component.handleClick.emit).not.toHaveBeenCalled();
+
+      itemToRemove.dispatchEvent(new FocusEvent('focus'));
+      itemToRemove.dispatchEvent(new MouseEvent('click'));
+      fixture.detectChanges();
+      expect(component.handleClick.emit).toHaveBeenCalledWith(multiselectChipListMockData[1]);
+    });
   });
 });

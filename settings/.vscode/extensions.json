@@ -4,6 +4,7 @@
     "rvest.vs-code-prettier-eslint"
   ],
   "recommendations": [
+    "angular.ng-template",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "stylelint.vscode-stylelint",

@@ -17,6 +17,7 @@ export class FudisIdService {
     components: {
       alert: [],
       autocomplete: [],
+      'body-text': [],
       button: [],
       'autocomplete-multi-select': [],
       datepicker: [],

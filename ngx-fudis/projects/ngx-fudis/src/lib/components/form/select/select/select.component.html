@@ -1,4 +1,4 @@
-<div class="fudis-select fudis-input-size__{{ size }}">
+<div class="fudis-select fudis-input-size__{{ size }}" [id]="id + '-main-wrapper'">
   <fudis-label
     [text]="label"
     [id]="id + '-label'"
@@ -23,7 +23,8 @@
         (click)="_clickInput()"
         (focus)="_inputFocus()"
         (blur)="_inputBlur($event)"
-        (keydown)="_dropdownKeypress($event)"
+        (keydown)="_inputKeyDown($event)"
+        (keyup)="_inputKeyUp($event)"
         [attr.aria-autocomplete]="'none'"
         [attr.aria-expanded]="_dropdownOpen"
         [attr.aria-disabled]="disabled || control.disabled"
@@ -46,14 +47,13 @@
         #autocompleteRef
         [id]="id"
         [placeholder]="placeholder"
-        [control]="control"
-        [disabled]="disabled"
+        [disabled]="control.disabled || disabled"
         [dropdownOpen]="_dropdownOpen"
         [required]="_required"
         [typeThreshold]="variant === 'autocompleteType' ? 3 : 0"
         [selectedLabel]="_dropdownSelectionLabelText"
         [visibleOptions]="_visibleOptions"
-        [invalidState]="invalidState"
+        [invalidState]="(control.touched && control.invalid) || (control.touched && invalidState)"
         [selectionClearButton]="selectionClearButton"
         (triggerInputClick)="_clickInput()"
         (triggerFocusToFirstOption)="_focusToFirstOption()"
@@ -85,6 +85,11 @@
       *ngIf="_optionsLoadedOnce && !disabled && !control.disabled"
       #dropdownRef
       [open]="_dropdownOpen"
+      [selectVariant]="variant"
+      [results]="_visibleOptions.length"
+      [autocompleteHelpText]="autocompleteHelpText"
+      [filterText]="_autocompleteFilterText()"
+      [size]="size"
       [parentId]="id"
       [size]="size"
       (handleBlur)="_dropdownBlur($event)"
@@ -93,13 +98,6 @@
       <ng-container *ngIf="_content?.type === 'select-options'">
         <ng-container *ngTemplateOutlet="_content!.templateRef"></ng-container>
       </ng-container>
-      <fudis-body-text
-        *ngIf="variant !== 'dropdown'"
-        class="fudis-select-dropdown__no-results"
-        [class.fudis-select-dropdown__no-results--visible]="_visibleOptions.length === 0"
-        [size]="'md-light'"
-        >{{ _translationNoResultsFound | async }}</fudis-body-text
-      >
     </fudis-select-dropdown>
   </div>
   <fudis-guidance

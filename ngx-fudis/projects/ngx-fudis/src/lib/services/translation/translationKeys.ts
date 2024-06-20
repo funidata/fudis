@@ -51,8 +51,10 @@ export const en: FudisTranslationConfig = {
       REMOVE_ITEM: 'Remove search filters',
     },
     AUTOCOMPLETE: {
-      CLEAR: 'Clear filter',
+      CLEAR: 'Clear selection',
       NO_RESULTS: 'No results found',
+      SHOWING: 'Showing',
+      RESULTS: 'results',
     },
   },
   IMAGE: {
@@ -130,6 +132,8 @@ export const fi: FudisTranslationConfig = {
     AUTOCOMPLETE: {
       CLEAR: 'Tyhjennä valinta',
       NO_RESULTS: 'Haku ei palauttanut yhtään tulosta',
+      SHOWING: 'Näytetään',
+      RESULTS: 'tulosta',
     },
   },
   IMAGE: {
@@ -204,6 +208,8 @@ export const sv: FudisTranslationConfig = {
     AUTOCOMPLETE: {
       CLEAR: 'Radera val',
       NO_RESULTS: 'Inga sökresultat',
+      SHOWING: 'Visas',
+      RESULTS: 'resultat',
     },
   },
   IMAGE: {

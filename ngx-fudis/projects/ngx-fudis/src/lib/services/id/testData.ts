@@ -4,6 +4,7 @@ export const testDataBefore: FudisIdData = {
   components: {
     alert: [],
     autocomplete: [],
+    'body-text': [],
     button: [],
     'autocomplete-multi-select': [],
     datepicker: [],
@@ -45,6 +46,12 @@ export const testComponentDataAfter: FudisIdData = {
       'fudis-autocomplete-2',
       'custom-id-for-autocomplete',
       'fudis-autocomplete-4',
+    ],
+    'body-text': [
+      'fudis-body-text-1',
+      'fudis-body-text-2',
+      'custom-id-for-body-text',
+      'fudis-body-text-4',
     ],
     button: ['fudis-button-1', 'fudis-button-2', 'custom-id-for-button', 'fudis-button-4'],
     'autocomplete-multi-select': [
@@ -143,6 +150,7 @@ export const testParentDataAfter: FudisIdData = {
   components: {
     alert: [],
     autocomplete: [],
+    'body-text': [],
     button: [],
     'autocomplete-multi-select': [],
     datepicker: [],
@@ -268,6 +276,7 @@ export const testGrandParentDataAfter: FudisIdData = {
   components: {
     alert: [],
     autocomplete: [],
+    'body-text': [],
     button: [],
     'autocomplete-multi-select': [],
     datepicker: [],

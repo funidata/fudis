@@ -1,75 +1,31 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectAutocompleteComponent } from './autocomplete.component';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { ButtonComponent } from '../../../../button/button.component';
-import { IconComponent } from '../../../../icon/icon.component';
-import { ContentDirective } from '../../../../../directives/content-projection/content/content.directive';
+import { ReactiveFormsModule } from '@angular/forms';
 import { getElement } from '../../../../../utilities/tests/utilities';
-import { FudisSelectOption } from '../../../../../types/forms';
+
 import { FudisIdService } from '../../../../../services/id/id.service';
 import { FudisTranslationService } from '../../../../../services/translation/translation.service';
-import { Component, ViewChild } from '@angular/core';
-import { SelectComponent } from '../../select/select.component';
-import { SelectOptionComponent } from '../../select/select-option/select-option.component';
-import { SelectDropdownComponent } from '../select-dropdown/select-dropdown.component';
 import { FudisFocusService } from '../../../../../services/focus/focus.service';
-import { GuidanceComponent } from '../../../guidance/guidance.component';
-import { LabelComponent } from '../../../label/label.component';
-import { ValidatorErrorMessageComponent } from '../../../error-message/validator-error-message/validator-error-message.component';
-import { FudisValidators } from '../../../../../utilities/form/validators';
-
-@Component({
-  selector: 'fudis-mock-select-autocomplete',
-  template: ` <fudis-select-autocomplete
-    #autoSelect
-    [placeholder]="placeholder"
-    [control]="control"
-    [id]="id"
-    [required]="true"
-    [dropdownOpen]="dropdownOpen"
-  />`,
-})
-class MockSelecAutocompleteComponent {
-  @ViewChild('autoSelect') autoSelect: SelectAutocompleteComponent;
-
-  id: string = 'select-id';
-  placeholder: string = 'Test placeholder';
-  dropdownOpen: boolean = false;
-  control: FormControl = new FormControl<
-    FudisSelectOption<object> | FudisSelectOption<object>[] | null
-  >(null, FudisValidators.required('This is required input'));
-}
 
 describe('AutocompleteComponent', () => {
   let component: SelectAutocompleteComponent;
   let fixture: ComponentFixture<SelectAutocompleteComponent>;
-  let mockComponent: MockSelecAutocompleteComponent;
-  let mockFixture: ComponentFixture<MockSelecAutocompleteComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        ContentDirective,
-        SelectComponent,
-        SelectDropdownComponent,
-        SelectAutocompleteComponent,
-        SelectOptionComponent,
-        LabelComponent,
-        ButtonComponent,
-        GuidanceComponent,
-        IconComponent,
-        ValidatorErrorMessageComponent,
-        MockSelecAutocompleteComponent,
-      ],
+      declarations: [SelectAutocompleteComponent],
       providers: [FudisFocusService, FudisIdService, FudisTranslationService],
       imports: [ReactiveFormsModule],
     });
     fixture = TestBed.createComponent(SelectAutocompleteComponent);
     component = fixture.componentInstance;
 
-    mockFixture = TestBed.createComponent(MockSelecAutocompleteComponent);
-    mockComponent = mockFixture.componentInstance;
-    mockFixture.detectChanges();
+    fixture.componentRef.setInput('id', 'select-id');
+    fixture.componentRef.setInput('placeholder', 'Test placeholder');
+    fixture.componentRef.setInput('dropdownOpen', false);
+    fixture.componentRef.setInput('required', false);
+    fixture.componentRef.setInput('selectedLabel', 'Platypus');
+    fixture.detectChanges();
   });
 
   function getInputElement() {
@@ -77,31 +33,88 @@ describe('AutocompleteComponent', () => {
     return inputElement;
   }
 
-  function getMockInputElement() {
-    const inputElement = getElement(mockFixture, 'input');
-    return inputElement;
-  }
-
-  describe('Select Autocomplete default values', () => {
+  describe('Select Autocomplete basic prop values', () => {
     it('should have respective classes', () => {
-      const inputElement = getElement(mockFixture, 'fudis-select-autocomplete input');
+      expect(getInputElement().className).toContain('fudis-select-autocomplete fudis-form-input');
+    });
 
-      expect(inputElement.className).toContain('fudis-form-input fudis-select-autocomplete');
+    it('should not have required attribute', () => {
+      expect(getInputElement().getAttribute('required')).toBeNull();
+      expect(getInputElement().getAttribute('aria-required')).toBeNull();
     });
 
     it('should have required attribute', () => {
-      expect(getMockInputElement().getAttribute('required')).toEqual('true');
+      fixture.componentRef.setInput('required', true);
+
+      fixture.detectChanges();
+
+      expect(getInputElement().getAttribute('required')).toEqual('true');
+      expect(getInputElement().getAttribute('aria-required')).toEqual('true');
+    });
+
+    it('should not have disabled attribute', () => {
+      expect(getInputElement().getAttribute('disabled')).toBeNull();
+      expect(getInputElement().getAttribute('aria-disabled')).toBeNull();
+    });
+
+    it('should have aria-disabled but not disabled attribute', () => {
+      fixture.componentRef.setInput('disabled', true);
+
+      fixture.detectChanges();
+
+      expect(getInputElement().getAttribute('disabled')).toBeNull();
+      expect(getInputElement().getAttribute('aria-disabled')).toEqual('true');
+    });
+
+    it('should not have value', () => {
+      fixture.componentRef.setInput('selectedLabel', null);
+      fixture.detectChanges();
+      expect(getInputElement().getAttribute('value')).toBeNull();
+    });
+
+    it('should have value', () => {
+      expect(getInputElement().getAttribute('value')).toEqual('Platypus');
+    });
+
+    it('should not have invalid state', () => {
+      expect(getInputElement().getAttribute('aria-invalid')).toBeNull();
+    });
+
+    it('should have invalid state', () => {
+      fixture.componentRef.setInput('invalidState', true);
+      fixture.detectChanges();
+      expect(getInputElement().getAttribute('aria-invalid')).toEqual('true');
+    });
+
+    it('should have aria-controls', () => {
+      expect(getInputElement().getAttribute('aria-controls')).toEqual('select-id-dropdown');
+    });
+
+    it('should have aria-labelledby', () => {
+      expect(getInputElement().getAttribute('aria-labelledby')).toEqual('select-id-label');
+    });
+
+    it('should have aria-describedby', () => {
+      expect(getInputElement().getAttribute('aria-describedby')).toEqual('select-id_guidance');
     });
 
     it('should have given id', () => {
-      expect(getMockInputElement().getAttribute('id')).toEqual('select-id');
+      expect(getInputElement().getAttribute('id')).toEqual('select-id');
+    });
+
+    it('should have given placeholder', () => {
+      expect(getInputElement().getAttribute('placeholder')).toEqual('Test placeholder');
+    });
+
+    it('should have dropdown closed', () => {
+      expect(getInputElement().getAttribute('aria-expanded')).toEqual('false');
     });
 
     it('should have dropdown open', () => {
-      mockComponent.dropdownOpen = true;
-      mockFixture.detectChanges();
+      fixture.componentRef.setInput('dropdownOpen', true);
+      fixture.detectChanges();
 
-      expect(getMockInputElement().getAttribute('aria-expanded')).toEqual('true');
+      expect(getInputElement().getAttribute('aria-expanded')).toEqual('true');
     });
   });
 
@@ -109,19 +122,9 @@ describe('AutocompleteComponent', () => {
     beforeEach(() => {
       component.id = 'select-autocomplete-id';
       component.placeholder = 'Test placeholder';
-      component.dropdownOpen = false;
+      component.dropdownOpen = true;
       component.typeThreshold = 0;
-      component.control = new FormControl<
-        FudisSelectOption<object> | FudisSelectOption<object>[] | null
-      >(null);
       fixture.detectChanges();
-    });
-
-    it('should trigger focus event', () => {
-      jest.spyOn(component.triggerFocus, 'emit');
-      getInputElement().dispatchEvent(new FocusEvent('focus'));
-
-      expect(component.triggerFocus.emit).toHaveBeenCalled();
     });
 
     it('should trigger blur event', () => {
@@ -131,25 +134,41 @@ describe('AutocompleteComponent', () => {
       expect(component.triggerBlur.emit).toHaveBeenCalled();
     });
 
-    it('should trigger dropdown toggle event', () => {
-      jest.spyOn(component.triggerDropdownToggle, 'emit');
+    it('should trigger input click event', () => {
+      jest.spyOn(component.triggerInputClick, 'emit');
+      getInputElement().dispatchEvent(new FocusEvent('click'));
 
-      getInputElement().dispatchEvent(new KeyboardEvent('keypress', { key: 'Enter' }));
-      getInputElement().dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
-
-      expect(component.triggerDropdownToggle.emit).toHaveBeenCalled();
+      expect(component.triggerInputClick.emit).toHaveBeenCalled();
     });
 
-    it('should trigger dropdown open event', () => {
-      jest.spyOn(component.triggerDropdownOpen, 'emit');
+    it('should not trigger input click event when value is lower than threshold', () => {
+      jest.spyOn(component.triggerInputClick, 'emit');
 
-      getInputElement().dispatchEvent(new FocusEvent('focus'));
+      component.updateInputValue('no');
+
+      fixture.componentRef.setInput('typeThreshold', 3);
+      fixture.componentRef.setInput('selectedLabel', null);
+
       fixture.detectChanges();
 
-      getInputElement().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
-      getInputElement().dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+      getInputElement().dispatchEvent(new FocusEvent('click'));
 
-      expect(component.triggerDropdownOpen.emit).toHaveBeenCalled();
+      expect(component.triggerInputClick.emit).not.toHaveBeenCalled();
+    });
+
+    it('should trigger input click event when threshold', () => {
+      jest.spyOn(component.triggerInputClick, 'emit');
+
+      component.updateInputValue('yes');
+
+      fixture.componentRef.setInput('typeThreshold', 3);
+      fixture.componentRef.setInput('selectedLabel', null);
+
+      fixture.detectChanges();
+
+      getInputElement().dispatchEvent(new FocusEvent('click'));
+
+      expect(component.triggerInputClick.emit).toHaveBeenCalled();
     });
 
     it('should trigger filter text update event', () => {
@@ -162,6 +181,114 @@ describe('AutocompleteComponent', () => {
       component.updateInputValue('hey');
 
       expect(component.triggerFilterTextUpdate.emit).toHaveBeenCalledWith('hey');
+    });
+
+    describe('focus events', () => {
+      beforeEach(() => {
+        fixture.componentRef.setInput('dropdownOpen', true);
+      });
+
+      it('should trigger focus event', () => {
+        jest.spyOn(component.triggerFocus, 'emit');
+        getInputElement().dispatchEvent(new FocusEvent('focus'));
+
+        expect(component.triggerFocus.emit).toHaveBeenCalled();
+      });
+
+      it('should emit trigger text updates and dropdown close emit correctly', () => {
+        component.inputRef.nativeElement.value = 'hey';
+        fixture.detectChanges();
+        jest.spyOn(component.triggerFilterTextUpdate, 'emit');
+        jest.spyOn(component.triggerDropdownClose, 'emit');
+        getInputElement().dispatchEvent(new FocusEvent('focus'));
+
+        expect(component.triggerFilterTextUpdate.emit).toHaveBeenCalledWith('hey');
+        expect(component.triggerDropdownClose.emit).not.toHaveBeenCalledWith();
+
+        fixture.componentRef.setInput('typeThreshold', 3);
+        component.inputRef.nativeElement.value = 'no';
+        fixture.detectChanges();
+
+        getInputElement().dispatchEvent(new FocusEvent('focus'));
+
+        expect(component.triggerFilterTextUpdate.emit).toHaveBeenCalledWith('');
+        expect(component.triggerDropdownClose.emit).toHaveBeenCalledWith();
+      });
+    });
+
+    describe('keyboard events', () => {
+      beforeEach(() => {
+        component.visibleOptions = ['first', 'second'];
+        component.typeThreshold = 3;
+        component.inputRef.nativeElement.value = 'no';
+        getInputElement().dispatchEvent(new FocusEvent('focus'));
+
+        jest.spyOn(component.triggerDropdownToggle, 'emit');
+        jest.spyOn(component.triggerDropdownOpen, 'emit');
+        jest.spyOn(component.triggerDropdownClose, 'emit');
+        jest.spyOn(component.triggerSelectOnlyVisibleOption, 'emit');
+        jest.spyOn(component.triggerFocusToFirstOption, 'emit');
+      });
+
+      it('should not trigger dropdown toggle event with Enter', () => {
+        getInputElement().dispatchEvent(new KeyboardEvent('keypress', { key: 'Enter' }));
+        getInputElement().dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
+        expect(component.triggerDropdownToggle.emit).not.toHaveBeenCalled();
+      });
+
+      it('should trigger dropdown toggle event with Enter', () => {
+        component.inputRef.nativeElement.value = 'yes';
+        getInputElement().dispatchEvent(new KeyboardEvent('keypress', { key: 'Enter' }));
+        getInputElement().dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
+
+        expect(component.triggerDropdownToggle.emit).toHaveBeenCalled();
+        expect(component.triggerFocusToFirstOption.emit).not.toHaveBeenCalled();
+      });
+
+      it('should not trigger dropdown open event with ArrowDown', () => {
+        getInputElement().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+        getInputElement().dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+
+        expect(component.triggerDropdownOpen.emit).not.toHaveBeenCalled();
+        expect(component.triggerFocusToFirstOption.emit).not.toHaveBeenCalled();
+      });
+
+      it('should trigger dropdown open event with ArrowDown', () => {
+        component.inputRef.nativeElement.value = 'yes';
+
+        getInputElement().dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+        getInputElement().dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
+
+        expect(component.triggerDropdownOpen.emit).toHaveBeenCalled();
+        expect(component.triggerFocusToFirstOption.emit).toHaveBeenCalled();
+      });
+
+      it('should emit triggerSelectOnlyVisibleOption', () => {
+        component.visibleOptions = ['too', 'many'];
+        component.dropdownOpen = true;
+        component.inputRef.nativeElement.value = 'yes';
+        fixture.detectChanges();
+
+        getInputElement().dispatchEvent(new KeyboardEvent('keypress', { key: 'Enter' }));
+        getInputElement().dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
+
+        expect(component.triggerSelectOnlyVisibleOption.emit).not.toHaveBeenCalled();
+
+        component.visibleOptions = ['only'];
+
+        getInputElement().dispatchEvent(new KeyboardEvent('keypress', { key: 'Enter' }));
+        getInputElement().dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
+        expect(component.triggerSelectOnlyVisibleOption.emit).toHaveBeenCalled();
+      });
+
+      it('should emit triggerClose on Escape', () => {
+        component.dropdownOpen = true;
+
+        getInputElement().dispatchEvent(new KeyboardEvent('keypress', { key: 'Escape' }));
+        getInputElement().dispatchEvent(new KeyboardEvent('keyup', { key: 'Escape' }));
+
+        expect(component.triggerDropdownClose.emit).toHaveBeenCalled();
+      });
     });
   });
 });

@@ -42,6 +42,8 @@ export type FudisSelectOption<T extends object> = T & {
   value: any;
   /** Value that is shown in the UI */
   label: string;
+  /** Secondary, optional label for the option */
+  subLabel?: string;
   /** Is option disabled in the dropdown */
   disabled?: boolean;
   /** Fudis generates an id for each SelectOption. This is used in internal logic. */
