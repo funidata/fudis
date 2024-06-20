@@ -10,6 +10,8 @@
 
   display: flex;
   flex-wrap: wrap;
+  gap: spacing.$spacing-xxs;
+  padding-top: spacing.$spacing-xxs;
 
   &__button {
     @include colorMixins.bg-color("gray-dark");
@@ -19,13 +21,8 @@
     @include utilities.box-reset;
 
     display: block;
-    margin-top: spacing.$spacing-xxs;
     cursor: pointer;
     padding: 0 spacing.$spacing-xs 0 0;
-
-    &:not(:last-of-type) {
-      margin-right: spacing.$spacing-xxs;
-    }
 
     &:focus {
       @include focus.focus-generic;

@@ -97,11 +97,16 @@ By default `selectionClearButton` is set to boolean `true`. Whenever user has ma
 
 When `selectionClearButton` is set to `false`, the clear button is not visible.
 
+### Autocomplete Help Text
+
+By default autocomplete variants, when user has typed anything, display a help text "Showing X results". This can be disabled by setting `autocompleteHelpText` property to boolean `false`. Or by overriding it with your own string help text.
+
 ### Example Usage
 
 ```
 <fudis-select
   [variant]="autocompleteDropdown"
+  [autocompleteHelpText]="'Hello from autocompleteHelpText'"
   [selectionClearButton]="false"
   ...
 >
@@ -111,11 +116,11 @@ When `selectionClearButton` is set to `false`, the clear button is not visible.
 
 ### Example Select with Autocomplete Dropdown
 
-<Canvas of={Stories.SelectAutocompleteDropdown}></Canvas>
+<Canvas of={Stories.SelectAutocomplete}></Canvas>
 
 ### Example Multiselect with Autocomplete Dropdown
 
-<Canvas of={Stories.MultiselectAutocompleteDropdown}></Canvas>
+<Canvas of={Stories.MultiselectAutocomplete}></Canvas>
 
 ## Adding Options
 
