@@ -3,10 +3,10 @@ import {
   Component,
   Input,
   OnInit,
-  OnChanges,
   Optional,
   Host,
   ChangeDetectorRef,
+  effect, OnChanges,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputBaseDirective } from '../../../directives/form/input-base/input-base.directive';
@@ -15,12 +15,15 @@ import { FudisIdService } from '../../../services/id/id.service';
 import { FudisFocusService } from '../../../services/focus/focus.service';
 import {
   getMaxFromValidator,
+  getMaxLengthFromValidator,
   getMinFromValidator,
   getMinLengthFromValidator,
+  hasRequiredValidator,
 } from '../../../utilities/form/getValidators';
-import { FudisComponentChanges } from '../../../types/miscellaneous';
+// import { FudisComponentChanges } from '../../../types/miscellaneous';
 import { FormComponent } from '../form/form.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FudisComponentChanges } from '../../../types/miscellaneous';
 
 @Component({
   selector: 'fudis-text-input',
@@ -29,7 +32,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class TextInputComponent
   extends InputBaseDirective
-  implements OnInit, OnChanges, AfterViewInit
+  implements OnInit, AfterViewInit, OnChanges
 {
   constructor(
     @Host() @Optional() protected _parentForm: FormComponent | null,
@@ -38,6 +41,27 @@ export class TextInputComponent
     _idService: FudisIdService,
   ) {
     super(_idService, _changeDetectorRef);
+    effect(() => {
+      this._updateValueAndValidityTrigger.pipe(takeUntilDestroyed()).subscribe(() => {
+        if(this.control){
+           this._required = hasRequiredValidator(this.control);
+        
+        if(this.type === 'number'){
+              this._minNumber = getMinFromValidator(this.control);
+              this._maxNumber = getMaxFromValidator(this.control);
+              this._maxLength = null;
+              this._minLength = null;
+        
+        } else {
+              this._maxLength = getMaxLengthFromValidator(this.control);
+              this._minLength = getMinLengthFromValidator(this.control);
+              this._minNumber = null;
+              this._maxNumber = null;
+        }
+              
+      }
+      })
+    })
   }
 
   /**
@@ -58,25 +82,26 @@ export class TextInputComponent
   /**
    * Max length for HTML attribute and for character indicator in guidance
    */
-  protected override _maxLength: number | undefined = undefined;
+  protected override _maxLength: number | null = null;
 
   /**
    * Min length for HTML attribute
    */
-  protected _minLength: number | undefined = undefined;
+  protected _minLength: number | null = null;
 
   /**
    * Max number for number input HTML attribute
    */
-  protected _maxNumber: number | undefined = undefined;  /* mahdollisesti joku observable inputBaseen ja kaikki muut subscripbaa */
+  protected _maxNumber: number | null = null;  /* mahdollisesti joku observable inputBaseen ja kaikki muut subscripbaa */
 
   /**
    * Min number for number input HTML attribute
    */
-  protected _minNumber: number | undefined = undefined;  /* mahdollisesti joku observable inputBaseen ja kaikki muut subscripbaa */
+  protected _minNumber: number | null = null;  /* mahdollisesti joku observable inputBaseen ja kaikki muut subscripbaa */
 
   ngOnInit(): void {
     this._setInputId('text-input');
+    this._updateValueAndValidityTrigger.next();
 
     /**
      * TODO: write test
@@ -91,17 +116,12 @@ export class TextInputComponent
   }
 /* TODO: move these checks under _applyControlUpdateCheck in InputBase directive */
   ngOnChanges(changes: FudisComponentChanges<TextInputComponent>): void {
-    
-    if (changes.control?.currentValue !== changes.control?.previousValue) {
-      this._initialCheck();    
+    if (changes.control?.currentValue !== changes.control?.previousValue) {   
       this._applyControlUpdateCheck();
     }
 
-    if (changes.type?.currentValue === 'number') {
-      this._minNumber = getMinFromValidator(this.control);
-      this._maxNumber = getMaxFromValidator(this.control);
-    } else if (changes.type?.currentValue !== changes.type?.previousValue) {
-      this._minLength = getMinLengthFromValidator(this.control);
+    if (changes.type?.currentValue !== changes.type?.previousValue) {
+      this._updateValueAndValidityTrigger.next()
     }
   }
 

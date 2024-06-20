@@ -53,12 +53,12 @@ export class TextAreaComponent
   /**
    * Min length for HTML attribute
    */
-  protected _minLength: number | undefined = undefined;
+  protected _minLength: number | null = null;
 
   /**
    * Max length for HTML attribute and for character indicator in guidance
    */
-  protected override _maxLength: number | undefined = undefined;
+  protected override _maxLength: number | null = null;
 
   ngOnInit(): void {
     this._setInputId('text-area');

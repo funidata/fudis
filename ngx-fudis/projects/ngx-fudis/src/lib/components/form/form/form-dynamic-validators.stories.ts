@@ -62,10 +62,10 @@ import { fudisSpacingArray } from '../../../types/spacing';
                   <fudis-button [label]="'Remove validator for email,min and max'" (handleClick)="handleRemoveEmailValidator()"></fudis-button>
                 </fudis-grid-item>
                 <fudis-text-input
-                  [initialFocus]="true"
                   [control]="formExample.controls['number']"
                   [label]="'Number input'"
-                >
+                  [type]="'number'"
+                  [size]="'sm'">
                 </fudis-text-input>
                 <fudis-grid-item>
                   <fudis-button [variant]="'secondary'" [label]="'Test update value & validity for number input'" (handleClick)="handleUpdateNumberInput()"></fudis-button>
@@ -90,17 +90,6 @@ class DynamicValidatorExampleComponent implements OnInit {
     this._minNumberValidatorInstance = FudisValidators.min(this.minNumber, 'Number is too small');
     this._maxNumberValidatorInstance = FudisValidators.max(this.maxNumber, `Given number is not inside the allowed range ${this.minNumber} - ${this.maxNumber}.` )
     this.formExample = new FormGroup({
-      // courseBooks: new FormGroup(
-      //   {
-      //     first: new FormControl(null),
-      //     second: new FormControl(null),
-      //     third: new FormControl(null),
-      //   },
-      //   [
-      //     FudisGroupValidators.min({ value: 1, message: new BehaviorSubject('No book selected.') }),
-      //     FudisGroupValidators.max({ value: 2, message: new BehaviorSubject('Too many selected.') }),
-      //   ],
-      // ),
       required: new FormControl(
         null,
         this._requiredValidatorInstance,
@@ -109,7 +98,10 @@ class DynamicValidatorExampleComponent implements OnInit {
         this._maxLengthValidatorInstance,
         this._emailValidatorInstance,
       ]),
-      // importantDate: new FormControl(null, FudisValidators.required('Start date is missing.')),
+      number: new FormControl(null, [
+        this._maxNumberValidatorInstance,
+        this._minNumberValidatorInstance,
+      ])
     });
   }
 
@@ -163,7 +155,7 @@ class DynamicValidatorExampleComponent implements OnInit {
   }
 
   handleUpdateEmailValidator(): void {
-    if(!this._maxLengthValidatorInstance || !this._emailValidatorInstance) {
+    if(!this._maxLengthValidatorInstance && !this._emailValidatorInstance && !this._minLengthValidatorInstance) {
       this._maxLengthValidatorInstance = FudisValidators.maxLength(this.maxLength, 'Email should not be more than 20 characters.');
       this._minLengthValidatorInstance = FudisValidators.minLength(this.minLength, `Too short email. Minimum length is ${this.minLength} and maximum length is ${this.maxLength}.`,)
       this._emailValidatorInstance = FudisValidators.email('Input must be an email address.');
@@ -176,7 +168,7 @@ class DynamicValidatorExampleComponent implements OnInit {
   }
 
   handleUpdateNumberValidator(): void {
-    if(!this._maxNumberValidatorInstance) {
+    if(!this._maxNumberValidatorInstance && !this._minNumberValidatorInstance) {
       this._maxNumberValidatorInstance = FudisValidators.max(this.maxNumber, `Given number is not inside the allowed range ${this.minNumber} - ${this.maxNumber}.` )
       this._minNumberValidatorInstance = FudisValidators.min(this.minNumber, 'Number is too small'),
 
@@ -195,12 +187,14 @@ class DynamicValidatorExampleComponent implements OnInit {
   }
 
   handleRemoveEmailValidator(): void {
-    if(this._maxLengthValidatorInstance || this._emailValidatorInstance || this._minLengthValidatorInstance) {
+    if(this._maxLengthValidatorInstance && this._emailValidatorInstance && this._minLengthValidatorInstance) {
       this.formExample.controls['email'].removeValidators(this._maxLengthValidatorInstance);
       this.formExample.controls['email'].removeValidators(this._minLengthValidatorInstance);
       this.formExample.controls['email'].removeValidators(this._emailValidatorInstance);
       this.formExample.controls['email'].updateValueAndValidity();
       this._maxLengthValidatorInstance = null;
+      this._minLengthValidatorInstance = null;
+      this._emailValidatorInstance = null;
     }
   }
 
@@ -209,7 +203,8 @@ class DynamicValidatorExampleComponent implements OnInit {
       this.formExample.controls['number'].removeValidators(this._maxNumberValidatorInstance);
       this.formExample.controls['number'].removeValidators(this._minNumberValidatorInstance);
       this.formExample.controls['number'].updateValueAndValidity();
-      this._maxLengthValidatorInstance = null;
+      this._maxNumberValidatorInstance = null;
+      this._minNumberValidatorInstance = null;
     }
   }
 }
