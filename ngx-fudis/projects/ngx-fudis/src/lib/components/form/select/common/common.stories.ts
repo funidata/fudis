@@ -46,9 +46,11 @@ const commonArgs: Partial<SelectComponent> = {
   placeholder: 'Choose a pet',
   helpText: 'All pets are equally important, but for sake of this example please pick one.',
   selectionClearButton: true,
+  variant: 'autocompleteDropdown',
+  autocompleteHelpText: 'Hello from autocompleteHelpText!',
 };
 
-const SelectAutocompleteDropdownTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
+const SelectAutocompleteTemplate: StoryFn<SelectComponent> = (args: SelectComponent) => ({
   props: {
     ...args,
     defaultOptions,
@@ -58,8 +60,9 @@ const SelectAutocompleteDropdownTemplate: StoryFn<SelectComponent> = (args: Sele
   template: html`
     <fudis-select
       [size]="size"
-      [variant]="'autocompleteDropdown'"
+      [variant]="variant"
       [placeholder]="placeholder"
+      [autocompleteHelpText]="autocompleteHelpText"
       [control]="control"
       [label]="label"
       [helpText]="helpText"
@@ -77,12 +80,12 @@ const SelectAutocompleteDropdownTemplate: StoryFn<SelectComponent> = (args: Sele
   `,
 });
 
-export const SelectAutocompleteDropdown = SelectAutocompleteDropdownTemplate.bind({});
-SelectAutocompleteDropdown.args = {
+export const SelectAutocomplete = SelectAutocompleteTemplate.bind({});
+SelectAutocomplete.args = {
   ...commonArgs,
 };
 
-const MultiselectAutocompleteDropdownTemplate: StoryFn<MultiselectComponent> = (
+const MultiselectAutocompleteTemplate: StoryFn<MultiselectComponent> = (
   args: MultiselectComponent,
 ) => ({
   props: {
@@ -95,8 +98,9 @@ const MultiselectAutocompleteDropdownTemplate: StoryFn<MultiselectComponent> = (
   template: html`
     <fudis-multiselect
       [size]="size"
-      [variant]="'autocompleteDropdown'"
+      [variant]="variant"
       [placeholder]="placeholder"
+      [autocompleteHelpText]="autocompleteHelpText"
       [control]="control"
       [label]="label"
       [helpText]="helpText"
@@ -114,8 +118,8 @@ const MultiselectAutocompleteDropdownTemplate: StoryFn<MultiselectComponent> = (
   `,
 });
 
-export const MultiselectAutocompleteDropdown = MultiselectAutocompleteDropdownTemplate.bind({});
-MultiselectAutocompleteDropdown.args = {
+export const MultiselectAutocomplete = MultiselectAutocompleteTemplate.bind({});
+MultiselectAutocomplete.args = {
   ...(commonArgs as Partial<MultiselectComponent>),
 };
 
@@ -131,8 +135,9 @@ const SelectDropdownWithGroupedOptionsTemplate: StoryFn<SelectComponent> = (
   template: html`
     <fudis-select
       [size]="size"
-      [variant]="'dropdown'"
+      [variant]="variant"
       [placeholder]="placeholder"
+      [autocompleteHelpText]="autocompleteHelpText"
       [control]="control"
       [label]="label"
       [helpText]="helpText"
@@ -169,7 +174,8 @@ const MultiselectDropdownWithGroupedOptionsTemplate: StoryFn<MultiselectComponen
   template: html`
     <fudis-multiselect
       [size]="size"
-      [variant]="'dropdown'"
+      [variant]="variant"
+      [autocompleteHelpText]="autocompleteHelpText"
       [placeholder]="placeholder"
       [control]="control"
       [label]="label"

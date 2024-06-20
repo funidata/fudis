@@ -52,8 +52,8 @@ class MultiselectMockComponent {
 // TODO: add test for disabled states
 
 describe('MultiselectComponent', () => {
-  let componentMock: MultiselectMockComponent;
-  let fixtureMock: ComponentFixture<MultiselectMockComponent>;
+  let component: MultiselectMockComponent;
+  let fixture: ComponentFixture<MultiselectMockComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -91,33 +91,33 @@ describe('MultiselectComponent', () => {
       defaultOptions[2],
     ]);
 
-    componentMock.control = control;
+    component.control = control;
 
-    fixtureMock.detectChanges();
+    fixture.detectChanges();
   }
 
   function initWithControlNull() {
     const control = new FormControl<FudisSelectOption<TestAnimalSound>[] | null>(null);
-    componentMock.control = control;
+    component.control = control;
 
-    fixtureMock.detectChanges();
+    fixture.detectChanges();
   }
 
   describe('Input', () => {
     beforeEach(() => {
-      fixtureMock = TestBed.createComponent(MultiselectMockComponent);
-      componentMock = fixtureMock.componentInstance;
+      fixture = TestBed.createComponent(MultiselectMockComponent);
+      component = fixture.componentInstance;
     });
 
     it('should create', () => {
       initWithControlNull();
-      expect(componentMock).toBeTruthy();
+      expect(component).toBeTruthy();
     });
 
     it('should have respective CSS classes according to given size Input', () => {
       initWithControlNull();
       const expectedValue = 'fudis-select fudis-input-size__md';
-      const classes = getElement(fixtureMock, '.fudis-select').className;
+      const classes = getElement(fixture, '.fudis-select').className;
       const componentClasses = classes.split(' ').sort();
 
       expect(componentClasses).toEqual(expectedValue.split(' ').sort());
@@ -125,7 +125,7 @@ describe('MultiselectComponent', () => {
 
     it('should have help text paragraph if helpText Input is given', () => {
       initWithControlNull();
-      const helpText = getElement(fixtureMock, '.fudis-guidance .fudis-guidance__help-text');
+      const helpText = getElement(fixture, '.fudis-guidance .fudis-guidance__help-text');
 
       expect(helpText).toBeTruthy();
       expect(helpText.outerHTML).toContain('Multiselect help text');
@@ -133,9 +133,9 @@ describe('MultiselectComponent', () => {
 
     it('should have placeholder text present when control value is null on init', () => {
       initWithControlNull();
-      const placeholder = getElement(fixtureMock, '.fudis-select__input__placeholder');
+      const placeholder = getElement(fixture, '.fudis-select__input__placeholder');
 
-      const labelText = getElement(fixtureMock, '.fudis-select__input__label');
+      const labelText = getElement(fixture, '.fudis-select__input__label');
 
       expect(labelText).toBeFalsy();
       expect(placeholder.outerHTML).toContain('Multiselect placeholder');
@@ -146,15 +146,15 @@ describe('MultiselectComponent', () => {
 
       const expectedValue = 'Dog, Platypus';
 
-      const labelText = getElement(fixtureMock, '.fudis-select__input__label');
-      const placeholderItems = getAllElements(fixtureMock, '.fudis-select__input__label');
+      const labelText = getElement(fixture, '.fudis-select__input__label');
+      const placeholderItems = getAllElements(fixture, '.fudis-select__input__label');
       const placeholerItemsArray: (string | null)[] = [];
 
       placeholderItems.forEach((item) => {
         placeholerItemsArray.push(item.textContent);
       });
 
-      const placeholder = getElement(fixtureMock, '.fudis-select__input__placeholder');
+      const placeholder = getElement(fixture, '.fudis-select__input__placeholder');
 
       expect(labelText.textContent).toEqual(expectedValue);
       expect(placeholder).toBeFalsy();
@@ -162,12 +162,12 @@ describe('MultiselectComponent', () => {
 
     it('should have placehorder text present when control value is updated to null', () => {
       initWithControlValue();
-      componentMock.control.patchValue(null);
-      fixtureMock.detectChanges();
+      component.control.patchValue(null);
+      fixture.detectChanges();
 
-      const placeholder = getElement(fixtureMock, '.fudis-select__input__placeholder');
+      const placeholder = getElement(fixture, '.fudis-select__input__placeholder');
 
-      const labelText = getElement(fixtureMock, '.fudis-select__input__label');
+      const labelText = getElement(fixture, '.fudis-select__input__label');
 
       expect(placeholder.outerHTML).toContain('Multiselect placeholder');
       expect(labelText).toBeFalsy();
@@ -176,34 +176,34 @@ describe('MultiselectComponent', () => {
 
   describe('Multiselection change', () => {
     beforeEach(() => {
-      fixtureMock = TestBed.createComponent(MultiselectMockComponent);
-      componentMock = fixtureMock.componentInstance;
+      fixture = TestBed.createComponent(MultiselectMockComponent);
+      component = fixture.componentInstance;
     });
 
     it('should update component and control state when handleMultiSelectionChange is called with type "add" and control value is null', () => {
       initWithControlNull();
 
-      componentMock.multiselectEl.openDropdown();
+      component.multiselectEl.openDropdown();
 
-      componentMock.multiselectEl.handleMultiSelectionChange(defaultOptions[5], 'add');
-      fixtureMock.detectChanges();
+      component.multiselectEl.handleMultiSelectionChange(defaultOptions[5], 'add');
+      fixture.detectChanges();
 
-      const value = getElement(fixtureMock, '.fudis-select__input__label').textContent;
+      const value = getElement(fixture, '.fudis-select__input__label').textContent;
 
       expect(value).toEqual('Southern Titiwangsa Bent-Toed Gecko');
-      expect(componentMock.control.value).toEqual([defaultOptions[5]]);
+      expect(component.control.value).toEqual([defaultOptions[5]]);
     });
 
     it('should update component state when handleMultiSelectionChange is called with "add"', () => {
       initWithControlValue();
 
-      componentMock.multiselectEl.handleMultiSelectionChange(defaultOptions[5], 'add');
-      fixtureMock.detectChanges();
+      component.multiselectEl.handleMultiSelectionChange(defaultOptions[5], 'add');
+      fixture.detectChanges();
 
-      const value = getElement(fixtureMock, '.fudis-select__input__label').textContent;
+      const value = getElement(fixture, '.fudis-select__input__label').textContent;
 
       expect(value).toEqual('Dog, Platypus, Southern Titiwangsa Bent-Toed Gecko');
-      expect(componentMock.control.value).toEqual([
+      expect(component.control.value).toEqual([
         defaultOptions[0],
         defaultOptions[2],
         defaultOptions[5],
@@ -212,38 +212,38 @@ describe('MultiselectComponent', () => {
 
     it('should update component state when handleMultiSelectionChange is called with "remove"', () => {
       initWithControlValue();
-      componentMock.multiselectEl.handleMultiSelectionChange(defaultOptions[0], 'remove');
-      fixtureMock.detectChanges();
+      component.multiselectEl.handleMultiSelectionChange(defaultOptions[0], 'remove');
+      fixture.detectChanges();
 
-      const value = getElement(fixtureMock, '.fudis-select__input__label').textContent;
+      const value = getElement(fixture, '.fudis-select__input__label').textContent;
 
       expect(value).toEqual('Platypus');
-      expect(componentMock.control.value).toEqual([defaultOptions[2]]);
+      expect(component.control.value).toEqual([defaultOptions[2]]);
     });
   });
 
   describe('Chip list', () => {
     beforeEach(() => {
-      fixtureMock = TestBed.createComponent(MultiselectMockComponent);
-      componentMock = fixtureMock.componentInstance;
+      fixture = TestBed.createComponent(MultiselectMockComponent);
+      component = fixture.componentInstance;
     });
 
     it('should be visible by default', () => {
       initWithControlNull();
-      componentMock.control.patchValue([defaultOptions[0], defaultOptions[2]]);
-      fixtureMock.detectChanges();
+      component.control.patchValue([defaultOptions[0], defaultOptions[2]]);
+      fixture.detectChanges();
 
-      const chipList = getElement(fixtureMock, '.fudis-multiselect-chip-list');
+      const chipList = getElement(fixture, '.fudis-multiselect-chip-list');
 
       expect(chipList).toBeTruthy();
     });
 
     it('should not be visible if showSelectionChips is set to false', () => {
       initWithControlValue();
-      componentMock.multiselectEl.showSelectionChips = false;
-      fixtureMock.detectChanges();
+      component.multiselectEl.showSelectionChips = false;
+      fixture.detectChanges();
 
-      const chipList = getElement(fixtureMock, '.fudis-multiselect-chip-list');
+      const chipList = getElement(fixture, '.fudis-multiselect-chip-list');
 
       expect(chipList).toBeFalsy();
     });
@@ -251,12 +251,31 @@ describe('MultiselectComponent', () => {
     it('should have correct length of buttons', () => {
       initWithControlNull();
 
-      componentMock.control.patchValue([defaultOptions[2], defaultOptions[4], defaultOptions[0]]);
-      fixtureMock.detectChanges();
+      component.control.patchValue([defaultOptions[2], defaultOptions[4], defaultOptions[0]]);
+      fixture.detectChanges();
 
-      const chipListButtons = getAllElements(fixtureMock, '.fudis-multiselect-chip-list__button');
+      const chipListButtons = getAllElements(fixture, '.fudis-multiselect-chip-list__button');
 
       expect(chipListButtons).toHaveLength(3);
+    });
+
+    it('should update control value when clicking', () => {
+      initWithControlNull();
+
+      component.control.patchValue([defaultOptions[1], defaultOptions[4]]);
+      fixture.detectChanges();
+
+      const chipListButtons = getAllElements(fixture, '.fudis-multiselect-chip-list__button');
+
+      // Should not trigger update if component isn't first focused. In real UI clicking the item will also trigger focus, but programmatically click() do not trigger focus
+      (chipListButtons[1] as HTMLButtonElement).click();
+
+      expect(component.control.value).toEqual([defaultOptions[1], defaultOptions[4]]);
+
+      (chipListButtons[1] as HTMLButtonElement).focus();
+      (chipListButtons[1] as HTMLButtonElement).click();
+
+      expect(component.control.value).toEqual([defaultOptions[1]]);
     });
   });
 });

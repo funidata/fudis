@@ -76,6 +76,7 @@ export class IconComponent implements OnChanges {
       `fudis-icon__color__${this.color}`,
       `fudis-icon__rotate__${this.rotate}`,
       `fudis-icon__${this._iconSize}`,
+      `fudis-icon__${this.icon}`,
     ];
 
     return cssClasses;

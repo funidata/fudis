@@ -3,6 +3,7 @@
 @use "../../../../../foundations/focus/mixins.scss" as focus;
 @use "../../../../../foundations/spacing/tokens.scss" as spacing;
 @use "../../../../../foundations/typography/mixins.scss" as typography;
+@use "../../../../../foundations/typography/tokens.scss" as typographyTokens;
 @use "../../../../../foundations/utilities/mixins.scss" as utilities;
 
 .fudis-multiselect-option {
@@ -74,6 +75,18 @@
     &__text {
       position: relative;
       margin-left: spacing.$spacing-lg;
+
+      &__main {
+        display: block;
+      }
+
+      &__sub {
+        @include typography.body-text-sm-regular;
+
+        display: block;
+        margin-top: spacing.$pixel-2;
+        margin-bottom: spacing.$pixel-2;
+      }
 
       &__disabled {
         display: block;
