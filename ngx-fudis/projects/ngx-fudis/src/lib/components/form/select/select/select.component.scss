@@ -4,11 +4,6 @@
 @use "../../../../foundations/colors/mixins.scss" as colorMixins;
 @use "../../../../foundations/focus/mixins.scss" as focus;
 
-.fudis-select-host {
-  display: block;
-  position: relative;
-}
-
 .fudis-select {
   position: relative;
   width: 100%;
@@ -22,25 +17,6 @@
       right: spacing.$spacing-xxs;
       transform: translateY(-50%);
     }
-
-    // &__icon {
-    //   &.fudis-icon-host,
-    //   &.fudis-button-host {
-    //     position: absolute;
-    //     top: 50%;
-    //     right: spacing.$spacing-xxs;
-    //     transform: translateY(-50%);
-    //   }
-
-    //   &.fudis-icon-host,
-    //   &.fudis-button-host svg {
-    //     pointer-events: none;
-    //   }
-
-    //   &--hidden.fudis-button-host {
-    //     display: none;
-    //   }
-    // }
   }
 
   &__input {

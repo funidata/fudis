@@ -6,25 +6,23 @@ import {
   Output,
   Signal,
   ViewChild,
-  ViewEncapsulation,
+  ChangeDetectionStrategy,
+  OnChanges,
   OnInit,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FudisSelectOption } from '../../../../../types/forms';
 
-import { FudisTranslationConfig } from '../../../../../types/miscellaneous';
+import { FudisComponentChanges, FudisTranslationConfig } from '../../../../../types/miscellaneous';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fudis-select-autocomplete',
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectAutocompleteComponent implements OnInit {
+export class SelectAutocompleteComponent implements OnChanges, OnInit {
   constructor() {
-    this._autocompleteControl = new FormControl<string | null>('');
-
     this._autocompleteControl.valueChanges.pipe(takeUntilDestroyed()).subscribe((newValue) => {
       this._checkValueAndEmit(newValue);
     });
@@ -36,26 +34,19 @@ export class SelectAutocompleteComponent implements OnInit {
   @ViewChild('inputRef') public inputRef: ElementRef<HTMLInputElement>;
 
   /**
-   * Form control used mostly to define HTML attributes and CSS styles
-   */
-  @Input({ required: true }) control: FormControl<
-    FudisSelectOption<object> | FudisSelectOption<object>[] | null
-  >;
-
-  /**
-   * Set input fields required attribute
-   */
-  @Input({ required: true }) required: boolean;
-
-  /**
    * Id for autocomplete input form field
    */
   @Input({ required: true }) id: string;
 
   /**
+   * Set input fields required attribute
+   */
+  @Input() required: boolean;
+
+  /**
    * If parent's dropdown is open or not
    */
-  @Input({ required: true }) dropdownOpen: boolean = false;
+  @Input() dropdownOpen: boolean = false;
 
   /**
    * For single select label when control has value on init
@@ -92,7 +83,10 @@ export class SelectAutocompleteComponent implements OnInit {
    */
   @Input({ required: true }) typeThreshold: 0 | 3;
 
-  @Input() visibleOptions: string[];
+  /**
+   * List of visible options
+   */
+  @Input() visibleOptions: string[] = [];
 
   /**
    * Output event for input field blur
@@ -154,14 +148,44 @@ export class SelectAutocompleteComponent implements OnInit {
    */
   protected _translations: Signal<FudisTranslationConfig>;
 
-  protected _autocompleteControl: FormControl<string | null>;
+  /**
+   * Internal FormControl to manage typed filter text
+   */
+  protected _autocompleteControl: FormControl<string | null> = new FormControl<string | null>('');
 
   /**
    * Prevent dropdown reopen on focus
    */
   private _preventDropdownReOpen: boolean = false;
 
+  /**
+   * To check if keydown event originated from input element and not e. g. clear button
+   */
   private _keyDownFromInput: boolean = false;
+
+  ngOnInit(): void {
+    if (!this.multiselect && this.selectedLabel) {
+      this.updateInputValue(this.selectedLabel);
+    }
+  }
+
+  ngOnChanges(changes: FudisComponentChanges<SelectAutocompleteComponent>): void {
+    if (changes.disabled?.currentValue !== changes.disabled?.previousValue) {
+      if (this.disabled && this.selectedLabel) {
+        this.updateInputValue(this.selectedLabel);
+      } else if (!changes.disabled?.firstChange) {
+        this.updateInputValue('');
+      }
+    }
+  }
+
+  /**
+   * To update Autocomplete's internal control value
+   * @param newValue
+   */
+  public updateInputValue(newValue: string): void {
+    this._autocompleteControl.patchValue(newValue);
+  }
 
   /**
    * Check if new value is longer than threshold and emit
@@ -244,7 +268,7 @@ export class SelectAutocompleteComponent implements OnInit {
 
     this.preventSpaceKeypress = false;
 
-    if (this._keyDownFromInput) {
+    if (this._keyDownFromInput && this._focused) {
       this._keyDownFromInput = false;
 
       /**
@@ -267,13 +291,12 @@ export class SelectAutocompleteComponent implements OnInit {
          * ArrowDown key
          */
       } else if (key === 'ArrowDown') {
-        if (this._focused) {
-          event.preventDefault();
-          if (inputValue.length >= this.typeThreshold) {
-            this.triggerDropdownOpen.emit();
-            this.triggerFocusToFirstOption.emit();
-          }
+        event.preventDefault();
+        if (inputValue.length >= this.typeThreshold) {
+          this.triggerDropdownOpen.emit();
+          this.triggerFocusToFirstOption.emit();
         }
+
         /**
          * Close
          */
@@ -293,17 +316,5 @@ export class SelectAutocompleteComponent implements OnInit {
     }
 
     this._preventDropdownReOpen = false;
-  }
-
-  public updateInputValue(newValue: string): void {
-    this._autocompleteControl.patchValue(newValue);
-  }
-
-  public ngOnInit(): void {
-    if (!this.multiselect && this.control.value) {
-      const label = (this.control.value as FudisSelectOption<object>).label;
-
-      this.updateInputValue(label);
-    }
   }
 }

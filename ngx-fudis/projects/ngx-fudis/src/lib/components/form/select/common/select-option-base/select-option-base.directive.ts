@@ -30,6 +30,8 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
 
       if (this._parent.variant !== 'dropdown') {
         this._isOptionVisible(filterText);
+      } else {
+        this._isOptionVisible('');
       }
     });
   }
@@ -37,7 +39,7 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
   /**
    * Reference of input or option element
    */
-  @ViewChild('optionInputRef') public optionInputRef: ElementRef<
+  @ViewChild('optionInputRef') protected _optionInputRef: ElementRef<
     HTMLOptionElement | HTMLInputElement
   >;
 
@@ -62,6 +64,13 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
   protected _parent: SelectComponent | MultiselectComponent;
 
   /**
+   * Get visibility status of this option
+   */
+  public get visible(): boolean {
+    return this._optionVisible;
+  }
+
+  /**
    * User focus handler
    */
   protected _focus(): void {
@@ -75,10 +84,17 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
    */
   protected _isOptionVisible(filterText: string): void {
     if (this.data) {
-      this._optionVisible =
+      const labelMatch =
         filterText && this.data.label.toLowerCase().includes(filterText.toLowerCase())
           ? true
           : !filterText;
+
+      const subLabelMatch =
+        filterText && this.data.subLabel?.toLowerCase().includes(filterText.toLowerCase())
+          ? true
+          : !filterText;
+
+      this._optionVisible = labelMatch || subLabelMatch;
 
       this._updateVisibilityToParents(this._optionVisible);
     }
@@ -104,7 +120,7 @@ export class SelectOptionBaseDirective extends DropdownItemBaseDirective {
       event.preventDefault();
       this._clickOption(event);
     } else if (event.key !== ' ') {
-      this._baseHandleKeyDown(event, this.optionInputRef, this._parent.focusSelector);
+      this._baseHandleKeyDown(event, this._optionInputRef, this._parent.focusSelector);
     }
   }
 
