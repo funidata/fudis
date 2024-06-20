@@ -13,10 +13,11 @@ export default {
   argTypes: {
     variant: {
       options: ['lg-regular', 'md-regular', 'sm-regular', 'lg-light', 'md-light'],
-      control: { type: 'select' },
+      control: { type: 'radio' },
     },
     align: {
       options: ['left', 'right', 'center'],
+      control: { type: 'radio' },
     },
   },
 } as Meta;

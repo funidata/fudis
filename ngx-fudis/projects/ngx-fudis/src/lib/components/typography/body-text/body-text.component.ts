@@ -34,7 +34,7 @@ export class BodyTextComponent {
   @HostBinding('class') private _classes = 'fudis-body-text-host';
 
   /**
-   * Font variant for the paragraph
+   * Variant for the paragraph
    */
   @Input() variant: FudisBodyText = 'md-regular';
 
